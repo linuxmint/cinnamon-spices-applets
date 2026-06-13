@@ -2,6 +2,18 @@
 
 ## Version History
 
+### v1.0.0 - 2026-06-07
+- **Removed Travel Mode:**
+  - Removed zone detection (Dark Room, Indoor, Outdoor) and adaptive lux bound expansion features
+  - Simplified codebase by eliminating Travel Mode settings, state tracking, and zone classification logic
+  - Manual Override Cooldown (`manual-debounce-window`) is now the only cooldown mechanism
+- **Fixed Manual Override Cooldown:**
+  - Cooldown duration now correctly uses the `manual-debounce-window` setting (default 5s, configurable up to 120s) instead of a hardcoded constant
+  - Setting title clarified to "Manual Override Cooldown" with improved description
+- **Fixed Screen Lock Blocking:**
+  - Added `Meta.IdleMonitor` check to detect when the user is idle (OS idle-dimming)
+  - Brightness changes detected during idle periods (>3 seconds) are no longer treated as manual overrides — the OS idle-dimmer can now lower brightness without triggering the manual override cooldown, allowing screen lock to proceed normally
+
 ### v0.9.0 - 2026-05-30
 - **Initial Release:**
   - Automatic brightness control based on ambient light sensor (ALS) readings

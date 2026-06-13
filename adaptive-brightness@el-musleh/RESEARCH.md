@@ -8,7 +8,7 @@ This document describes the research sources, algorithms, and methodologies used
 
 ### Ambient Light Lux Ranges
 
-The applet's default lux bounds and zone thresholds are based on multiple research sources:
+The applet's default lux bounds are based on multiple research sources:
 
 | Source | Indoor Median | Indoor Range | Outdoor Median | Outdoor Range |
 |--------|--------------|--------------|----------------|---------------|
@@ -56,11 +56,17 @@ The applet offers three mathematical curves for mapping lux to brightness:
    n = (lux - min_lux) / (max_lux - min_lux)
    ```
 
-2. Apply logarithmic curve:
+2. Apply Weber-Fechner logarithmic curve:
    ```
-   normalized = log(n × luxRange + 1) / log(luxRange + 1)
+   k = luxRange / min_lux
+   normalized = log(n × k + 1) / log(k + 1)
    ```
-   where `luxRange = max_lux - min_lux`
+   where `luxRange = max_lux - min_lux` and `min_lux > 0`. When `min_lux = 0`, falls back to `normalized = log(n × luxRange + 1) / log(luxRange + 1)`.
+
+   Equivalently, this can be written as:
+   ```
+   normalized = log(lux / min_lux) / log(max_lux / min_lux)
+   ```
 
 3. Scale to brightness range:
    ```
@@ -69,15 +75,24 @@ The applet offers three mathematical curves for mapping lux to brightness:
 
 **Rationale**:
 - Matches human eye perception (Weber-Fechner law)
-- More sensitive to changes in dim light
+- Properly respects `min_lux` as the perceptual reference point, preventing overly bright screens at low lux when `min_lux` is calibrated above 0
 - Natural-feeling brightness adjustments
 - Best for varied lighting conditions
 
 **Example** (min-lux=1, max-lux=700, min-brightness=5%, max-brightness=100%):
 - `lux = 1` → at floor → **5%**
-- `lux = 50` → `n = 49/699 ≈ 0.070`, `norm = log(0.070×699+1)/log(700) = log(50)/log(700) ≈ 0.72` → **73%**
-- `lux = 200` → `n = 199/699 ≈ 0.285`, `norm = log(0.285×699+1)/log(700) = log(200)/log(700) ≈ 0.85` → **86%**
-- `lux = 350` → `n = 349/699 ≈ 0.499`, `norm = log(0.499×699+1)/log(700) = log(350)/log(700) ≈ 0.93` → **93%**
+- `lux = 10` → `n = 9/699 ≈ 0.013`, `k = 699`, `norm = log(0.013×699+1)/log(700) = log(10)/log(700) ≈ 0.36` → **39%**
+- `lux = 50` → `n = 49/699 ≈ 0.070`, `norm = log(0.070×699+1)/log(700) = log(50)/log(700) ≈ 0.60` → **62%**
+- `lux = 200` → `n = 199/699 ≈ 0.285`, `norm = log(0.285×699+1)/log(700) = log(200)/log(700) ≈ 0.81` → **82%**
+- `lux = 500` → `n = 499/699 ≈ 0.713`, `norm = log(0.713×699+1)/log(700) = log(500)/log(700) ≈ 0.95` → **95%**
+- `lux = 700` → at ceiling → **100%**
+
+**Example with min-lux=10** (max-lux=700, min-brightness=10%, max-brightness=100%):
+- `lux = 10` → at floor → **10%**
+- `lux = 50` → `n = 40/690 ≈ 0.058`, `k = 69`, `norm = log(0.058×69+1)/log(70) = log(5)/log(70) ≈ 0.38` → **44%**
+- `lux = 100` → `n = 90/690 ≈ 0.130`, `norm = log(0.130×69+1)/log(70) = log(10)/log(70) ≈ 0.54` → **59%**
+- `lux = 200` → `n = 190/690 ≈ 0.275`, `norm = log(0.275×69+1)/log(70) = log(20)/log(70) ≈ 0.71` → **74%**
+- `lux = 500` → `n = 490/690 ≈ 0.710`, `norm = log(0.710×69+1)/log(70) = log(50)/log(70) ≈ 0.88` → **89%**
 - `lux = 700` → at ceiling → **100%**
 
 ### 2. Linear
@@ -140,56 +155,31 @@ The applet offers three mathematical curves for mapping lux to brightness:
 
 ---
 
-## Zone Detection Algorithm
+### Comparison
 
-### Overview
+**Side-by-side lux-to-brightness mapping** (`min-lux=10`, `max-lux=700`, `min-brightness=10%`, `max-brightness=100%`):
 
-When Travel Mode is enabled, the applet detects the current environment zone and dynamically adjusts the effective lux range for better brightness granularity.
+| Lux | Linear | Logarithmic | Sigmoidal |
+|-----|--------|-------------|-----------|
+| 10 | 10% | 10% | 10% |
+| 50 | 16% | 44% | ~10% |
+| 100 | 24% | 59% | ~16% |
+| 200 | 39% | 74% | ~55% |
+| 500 | 78% | 89% | ~90% |
+| 700 | 100% | 100% | 100% |
 
-### Zone Classification
+**Formulas** (normalized position `n = (lux - min_lux) / (max_lux - min_lux)`):
 
-| Zone | Median Lux | Typical Environment | Effective Range |
-|------|-----------|---------------------|-----------------|
-| DARK_ROOM | ≤30 lux | Night, dark room, cinema | clamped to user min/max: 0 – max(50, p95) |
-| INDOOR | 30-800 lux | Office, home, classroom | clamped to user min/max: min(5, p5) – max(800, p95) |
-| OUTDOOR | >800 lux | Near window, sunlight, open areas | clamped to user min/max: min(200, p5) – max(max_lux, p95) |
+| Curve | Formula | Behavior |
+|-------|---------|----------|
+| Linear | `brightness = n` | Uniform step size across the entire range |
+| Logarithmic | `log(n × k + 1) / log(k + 1)` where `k = luxRange / min_lux` | Larger steps at low lux, smaller steps at high lux (perceptual) |
+| Sigmoidal | `1 / (1 + exp(-10 × (n - 0.5)))` | Flat at extremes, steep in the middle |
 
-### Algorithm Steps
-
-1. **Rolling Window**:
-   - Maintain last 30 lux samples
-   - New samples added, oldest removed (FIFO)
-
-2. **Median Calculation**:
-   - Compute median of rolling window
-   - Median is robust against outliers and noise
-
-3. **Zone Classification**:
-   - If median ≤30 lux → DARK_ROOM
-   - If median ≥800 lux → OUTDOOR
-   - Otherwise → INDOOR
-
-4. **Hysteresis**:
-   - Require 5 consecutive samples in a new zone before switching
-   - Prevents rapid zone switching due to temporary lighting changes
-   - Zone counter increments when candidate zone matches
-   - Zone resets when staying in current zone
-
-5. **Effective Range Calculation**:
-   - Compute 5th percentile (p5) and 95th percentile (p95) of rolling window
-   - Zone-specific effective range:
-     - DARK_ROOM: min=0, max=max(50, p95)
-     - INDOOR: min=min(5, p5), max=max(800, p95)
-     - OUTDOOR: min=min(200, p5), max=max(max_lux, p95)
-
-### Example
-
-User moves from office (200 lux) to outdoors (1200 lux):
-1. Rolling window accumulates higher lux values
-2. Median crosses 800 lux threshold
-3. After 5 consecutive samples >800 lux, zone switches to OUTDOOR
-4. Effective range expands to cover outdoor lux range
-5. Brightness mapping tightens to outdoor range for better granularity
+**Why the numbers differ:**
+- **Linear** treats every lux unit equally. At 50 lux you're only 6% above your floor, so brightness stays low (16%).
+- **Logarithmic** treats lux *relative to the floor*. At 50 lux you've gone 5× above your 10-lux floor, so brightness jumps to 44% — matching how your eye actually perceives the change.
+- **Sigmoidal** stays flat until you cross the midpoint (~350 lux), then rapidly climbs. It resists changing brightness in the dark but snaps quickly once you reach indoor levels.
 
 ---
 
@@ -245,7 +235,7 @@ The applet uses a 10-second calibration process for both dark and bright environ
 | Setting | Value | Rationale |
 |---------|-------|-----------|
 | min-lux | 1 lux | Captures true darkness; calibrate for your environment |
-| max-lux | 700 lux | Practical laptop ALS ceiling; Travel Mode auto-expands if needed |
+| max-lux | 700 lux | Practical laptop ALS ceiling; calibrate in your brightest environment |
 | min-brightness | 5% | Low floor for dark environments; raise if too dim |
 | max-brightness | 100% | Full brightness for bright environments |
 | response-curve | logarithmic | Matches human eye perception; was bug-fixed from linear |

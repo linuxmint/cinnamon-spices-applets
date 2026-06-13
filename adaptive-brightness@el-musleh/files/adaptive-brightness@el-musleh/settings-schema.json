@@ -5,7 +5,7 @@
   },
   "min-brightness": {
     "type": "spinbutton",
-    "default": 5,
+    "default": 10,
     "min": 1,
     "max": 100,
     "step": 1,
@@ -39,7 +39,7 @@
   },
   "label-display-mode": {
     "type": "combobox",
-    "default": "brightness_lux",
+    "default": "brightness",
     "title": "Panel Label Content",
     "description": "Choose what the panel label shows while auto mode is running.",
     "tooltip": "Only available when 'Show live status' is selected in Panel Display Mode.",
@@ -82,13 +82,13 @@
   },
   "min-lux": {
     "type": "spinbutton",
-    "default": 1,
+    "default": 10,
     "min": 0,
     "max": 5000,
     "step": 10,
     "title": "Dark Reference Lux",
-    "description": "Reference ambient light level at or below which minimum brightness is applied.",
-    "tooltip": "Used as the lux range floor for all response curves. Calibrate automatically or set manually."
+    "description": "Ambient light level at or below which minimum brightness (0% of range) is applied.",
+    "tooltip": "Used as the lux range floor. At this lux or lower, brightness = Minimum Brightness."
   },
   "calibrate-max-lux": {
     "type": "button",
@@ -103,8 +103,14 @@
     "max": 100000,
     "step": 100,
     "title": "Bright Reference Lux",
-    "description": "Reference ambient light level at or above which maximum brightness is applied.",
-    "tooltip": "Used as the lux range ceiling for all response curves. Calibrate automatically or set manually."
+    "description": "Ambient light level at or above which maximum brightness (100% of range) is applied.",
+    "tooltip": "Used as the lux range ceiling. At this lux or higher, brightness = Maximum Brightness."
+  },
+  "preview-curve-mapping": {
+    "type": "button",
+    "description": "Preview Curve Mapping",
+    "tooltip": "Show a live table of lux values needed to reach 0%, 20%, 40%, 60%, 80%, and 100% brightness under each curve mode (using current min/max lux settings).",
+    "callback": "_show_curve_preview"
   },
   "sensor-path": {
     "type": "entry",
@@ -128,11 +134,11 @@
     "type": "scale",
     "default": 0.7,
     "min": 0.0,
-    "max": 1.0,
+    "max": 0.95,
     "step": 0.05,
     "title": "Smoothing Factor",
-    "description": "Brightness transition smoothness: 0=instant, 1=very smooth",
-    "tooltip": "Controls how quickly brightness follows sensor changes. Higher values reduce flickering but slow response."
+    "description": "Sensor response speed: 0=instant react, 0.95=slowest react (most noise-resistant)",
+    "tooltip": "Controls how quickly screen brightness follows sensor changes. Higher = slower to react = fewer flickers from sensor noise. Lower = faster reaction to real light changes. Maximum is 0.95 — a value of 1.0 would freeze brightness permanently and is not allowed."
   },
   "lux-change-threshold": {
     "type": "spinbutton",
@@ -145,32 +151,67 @@
     "description": "Minimum lux change required before recalculating brightness. Suppresses sensor noise-driven fluctuation.",
     "tooltip": "When the ambient lux reading changes by less than this value, brightness is not recalculated. Set to 0 to react to every sensor reading. Increase (e.g. 5-10) if brightness flickers in stable lighting conditions."
   },
+  "min-brightness-delta": {
+    "type": "spinbutton",
+    "default": 2,
+    "min": 1,
+    "max": 10,
+    "step": 1,
+    "units": "%",
+    "title": "Minimum Brightness Change",
+    "description": "Minimum brightness percentage change required before applying a new value. Prevents tiny, barely-noticeable adjustments.",
+    "tooltip": "Brightness changes smaller than this value will be silently ignored. Increase to 3-5% for less frequent, more noticeable changes. Decrease to 1% for fine-grained control."
+  },
+  "manual-debounce-window": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 5,
+    "max": 120,
+    "step": 5,
+    "units": "s",
+    "title": "Manual Override Cooldown",
+    "description": "Seconds to wait before resuming adaptive brightness after a manual brightness change.",
+    "tooltip": "After you manually change brightness, the applet waits this long before taking over again. Prevents fighting with external brightness daemons and OS idle-dimming."
+  },
   "calibration-separator": {
     "type": "separator"
   },
-  "travel-header": {
+  "schedule-header": {
     "type": "header",
-    "description": "Travel Mode"
+    "description": "Scheduled Off Period"
   },
-  "adaptive-calibration-enabled": {
+  "schedule-enabled": {
     "type": "switch",
     "default": false,
-    "title": "Travel Mode",
-    "description": "Enable when traveling or frequently changing environments. Automatically adjusts lux bounds when readings consistently exceed current range. Recommended for mobile users, not stationary office setups.",
-    "tooltip": "When enabled, min-lux and max-lux are silently adjusted if readings consistently fall outside the configured range. Disable to prevent temporary lighting conditions from permanently affecting your calibration."
+    "title": "Enable Scheduled Off Period",
+    "description": "Automatically disable the applet during a daily recurring time window.",
+    "tooltip": "When enabled, the applet will turn itself off between the start and end times, as if you clicked the panel icon."
   },
-  "adaptive-calibration-threshold": {
-    "type": "spinbutton",
-    "default": 15,
-    "min": 1,
-    "max": 60,
-    "step": 1,
-    "title": "Travel Mode Threshold",
-    "description": "Consecutive out-of-range samples required before updating min-lux or max-lux.",
-    "tooltip": "Higher values make Travel Mode more stable but slower to respond to environmental changes. Lower values adapt faster but may trigger on temporary lighting fluctuations.",
-    "dependency": "adaptive-calibration-enabled=true"
+  "schedule-off-start": {
+    "type": "timechooser",
+    "default": {
+      "h": 22,
+      "m": 0,
+      "s": 0
+    },
+    "title": "Off Period Start",
+    "description": "Time of day to automatically disable the applet.",
+    "tooltip": "The applet will turn off at this time every day.",
+    "dependency": "schedule-enabled=true"
   },
-  "travel-separator": {
+  "schedule-off-end": {
+    "type": "timechooser",
+    "default": {
+      "h": 6,
+      "m": 0,
+      "s": 0
+    },
+    "title": "Off Period End",
+    "description": "Time of day to automatically re-enable the applet.",
+    "tooltip": "The applet will turn back on at this time every day. Supports crossing midnight (e.g., 22:00 to 06:00).",
+    "dependency": "schedule-enabled=true"
+  },
+  "schedule-separator": {
     "type": "separator"
   },
   "logs-header": {

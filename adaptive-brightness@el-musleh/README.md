@@ -9,9 +9,8 @@ Automatically adjusts your laptop's screen brightness based on ambient light sen
 - **Multiple Response Curves** - Choose between Logarithmic (natural eye response), Linear, or Sigmoidal mapping
 - **Icon-Only Mode** - Hide the percentage text for a cleaner panel appearance
 - **Smooth Transitions** - Configurable smoothing factor for buttery-smooth brightness changes
-- **Smart Travel Mode** - Detects your environment zone (Dark Room, Indoor, Outdoor) and dynamically adjusts brightness mapping for optimal results. Automatically expands lux bounds when readings exceed the configured range
 - **Logging Toggle** - Enable or disable file logging for advanced troubleshooting
-- **Multi-Section Settings** - Organized settings panel with Calibration, Travel Mode, and Logs sections
+- **Multi-Section Settings** - Organized settings panel with Calibration and Logs sections
 
 ## Requirements
 
@@ -60,12 +59,9 @@ Right-click the applet and select **Configure** to access settings:
 - **Dark Reference Lux / Bright Reference Lux** - The low and high ambient-light reference points used by auto mode
 - **Sensor Path** - Manually specify sensor location if auto-detection fails
 - **Sensor Polling** - Adjust how often the sensor is read (default: 1000ms)
-- **Smoothing Factor** - Control transition smoothness (0=instant, 1=very smooth)
+- **Smoothing Factor** - Control sensor response speed: 0=instant react, 0.95=slowest react (most noise-resistant)
 - **Lux Stability Threshold** - Minimum lux change required before recalculating brightness
 - Follow the on-screen instructions for best results
-
-### Travel Mode
-- **Travel Mode** - Enable zone-aware dynamic brightness. Detects Dark Room, Indoor, and Outdoor environments and tightens the effective lux range for better granularity. Also auto-expands lux bounds when readings exceed the configured range
 
 ### Logs
 - **Log Level** - Enable logging and choose verbosity (Debug, Info, Error, or Off)
@@ -104,10 +100,21 @@ sudo chmod 440 /etc/sudoers.d/brightnessctl-applet
   - **Logarithmic** (default) - Matches human eye perception, more sensitive to changes in dim light. Best for varied lighting conditions and natural-feeling brightness adjustments.
   - **Linear** - Direct 1:1 proportion between lux and brightness. Use for predictable control in consistent environments where you want simple, direct mapping.
   - **Sigmoidal** - Smooth S-curve with sharp transition zone. Ideal for environments with distinct lighting states (e.g., switching between indoor and outdoor) where you want gradual changes at extremes with rapid adjustment in the middle.
-- **Travel Mode**: When enabled, the applet detects your current environment zone and shows it in the tooltip:
-  - **Dark Room** (≤30 lux) - Night, dark room, cinema
-  - **Indoor** (30–800 lux) - Office, home, classroom
-  - **Outdoor** (>800 lux) - Near window, sunlight, open areas
+
+  **Comparison** (with `min-lux=10`, `max-lux=700`, `min-brightness=10%`, `max-brightness=100%`):
+
+  | Ambient Lux | Linear | Logarithmic | Sigmoidal |
+  |-------------|--------|-------------|-----------|
+  | 10 (dark room) | 10% | 10% | 10% |
+  | 50 (dim) | 16% | **44%** | ~10% |
+  | 100 (moderate) | 24% | **59%** | ~16% |
+  | 200 (bright indoor) | 39% | **74%** | ~55% |
+  | 500 (near window) | 78% | 89% | ~90% |
+  | 700 (max) | 100% | 100% | 100% |
+
+  - **Choose Logarithmic** if you want the screen to feel naturally responsive in dim light (mornings/evenings) without becoming blinding.
+  - **Choose Linear** if you prefer strict, predictable proportionality and find logarithmic too aggressive.
+  - **Choose Sigmoidal** if you move between clearly distinct environments (e.g., dark room → bright office) and want sharp transitions between them.
 
 ## Development Scripts
 
@@ -139,7 +146,6 @@ For detailed information about the research sources, algorithms, and methodologi
 
 - Illuminance research sources (PMC study, EN 12464 standards, Engineering Toolbox)
 - Response curve algorithms (Logarithmic, Linear, Sigmoidal)
-- Zone detection algorithm (rolling window, median classification, hysteresis)
 - Calibration methodology (10-second high-speed sampling, median filtering, 95th percentile)
 - Default values justification and verification
 

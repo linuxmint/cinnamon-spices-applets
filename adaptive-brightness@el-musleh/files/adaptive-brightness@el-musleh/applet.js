@@ -17,17 +17,22 @@ const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const GObject = imports.gi.GObject;
 const Settings = imports.ui.settings;
 const Main = imports.ui.main;
+const ModalDialog = imports.ui.modalDialog;
+const St = imports.gi.St;
+const Meta = imports.gi.Meta;
 
 // Constraints and defaults
 const POLL_INTERVAL = { MIN: 100, DEFAULT: 1000, MAX: 60000 };
-const BRIGHTNESS = { MIN: 1, MAX: 100, DEFAULT_MIN: 5, DEFAULT_MAX: 100 };
+const BRIGHTNESS = { MIN: 1, MAX: 100, DEFAULT_MIN: 10, DEFAULT_MAX: 100 };
 const BRIGHTNESS_AUTO = { MIN_APPLY_DELTA: 2 };
-const SMOOTHING = { MIN: 0, MAX: 1, DEFAULT: 0.7 };
+const MIN_BRIGHTNESS_DELTA = { DEFAULT: 2, MIN: 1, MAX: 10 };
+const SMOOTHING = { MIN: 0, MAX: 0.95, DEFAULT: 0.7 };
 const LUX = {
     DEFAULT_MAX: 700,
-    DEFAULT_MIN: 1,
+    DEFAULT_MIN: 10,
     MIN_MAX: 100,
     MIN_MIN: 0,
     MAX_MIN: 5000,
@@ -41,6 +46,7 @@ const LUX = {
 };
 // Minimum lux change required before recomputing brightness (noise dead-band).
 const LUX_CHANGE_THRESHOLD = { DEFAULT: 3, MIN: 0, MAX: 50 };
+const MANUAL_DEBOUNCE_WINDOW = { DEFAULT: 5, MIN: 5, MAX: 120 };
 const CALIBRATION_EXPECTED_SAMPLES = 50;
 
 // Mathematical constants for response curves
@@ -59,52 +65,52 @@ const CALIBRATION_POLL_INTERVAL_MS = 200;
 const TIMER_INTERVAL_1_SECOND_MS = 1000;
 const TIMER_INTERVAL_10_SECONDS_MS = 10000;
 const SENSOR_REDISCOVERY_POLLS = 30;
-const TRAVEL_MODE_HEADROOM = 1.10;
-const MANUAL_OVERRIDE_COOLDOWN_US = 5 * 1000000; // 5 seconds in microseconds
+const RAW_LUX_WINDOW_SIZE = 9;
 
-// Zone detection constants
-const ZONE_MIN_SAMPLES_RATIO = 0.5;
-const INITIAL_HYSTERESIS_COUNT = 1;
-const ZONE_PERCENTILE_LOW = 5;
-const ZONE_PERCENTILE_HIGH = 95;
-const ZONE_DARK_ROOM_MAX_LUX = 50;
-const ZONE_INDOOR_MIN_LUX = 5;
-const ZONE_INDOOR_MAX_LUX = 800;
-const ZONE_OUTDOOR_MIN_LUX = 200;
+// Idle detection threshold: if user has been idle this long, brightness changes are
+// treated as OS idle-dimming (not manual override) to avoid blocking screen lock.
+const IDLE_THRESHOLD_US = 3 * 1000000; // 3 seconds in microseconds
 
 const CAL_PHASE = { NONE: "none", DARK: "dark", BRIGHT: "bright" };
 const LABEL_DISPLAY_MODES = ["brightness", "lux", "brightness_lux"];
 
 // Strategy map for lux-to-brightness response curves.
-// Each function receives (normalizedLux, luxRange) and returns normalized brightness in [0,1].
-// Note: linear and sigmoidal ignore luxRange; logarithmic requires it.
+// Each function receives (normalizedLux, luxRange, effMin) and returns normalized brightness in [0,1].
+// Note: linear and sigmoidal ignore luxRange/effMin; logarithmic uses effMin when available.
 const RESPONSE_CURVES = {
     linear: (n) => n,
     sigmoidal: (n) => 1 / (1 + Math.exp(SIGMOIDAL_STEEPNESS * (n - SIGMOIDAL_CENTER))),
-    logarithmic: (n, luxRange) => Math.log(n * luxRange + LOG_OFFSET) / Math.log(luxRange + LOG_OFFSET),
+    logarithmic: (n, luxRange, effMin) => {
+        if (effMin > 0) {
+            const k = luxRange / effMin;
+            return Math.log(n * k + LOG_OFFSET) / Math.log(k + LOG_OFFSET);
+        }
+        return Math.log(n * luxRange + LOG_OFFSET) / Math.log(luxRange + LOG_OFFSET);
+    },
 };
 
-// Zone definitions for Travel Mode environment detection.
-// Each zone has a lux threshold range and an effective lux sub-range for dynamic brightness.
-const ZONE = {
-    DARK_ROOM: "DARK_ROOM",
-    INDOOR: "INDOOR",
-    OUTDOOR: "OUTDOOR",
-};
-const ZONE_THRESHOLDS = {
-    DARK_ROOM: { max: 30 },
-    INDOOR: { min: 30, max: 800 },
-    OUTDOOR: { min: 800 },
-};
-const ZONE_HYSTERESIS = 5;
-const ZONE_WINDOW_SIZE = 30;
+
+/**
+ * Modal dialog that displays a live-computed lux-to-brightness mapping table
+ * for all three response curves, using the applet's current settings.
+ */
+let CurvePreviewDialog = GObject.registerClass(
+    class CurvePreviewDialog extends ModalDialog.ModalDialog {
+        _init(titleText, bodyText) {
+            super._init({ styleClass: "curve-preview-dialog" });
+            let title = new St.Label({ text: titleText, style_class: "curve-preview-title" });
+            let body = new St.Label({ text: bodyText, style_class: "curve-preview-body" });
+            this.contentLayout.add_child(title);
+            this.contentLayout.add_child(body);
+            this.setButtons([{ label: "Close", action: () => this.close() }]);
+        }
+    });
 
 /**
  * Main applet class that reads an ambient light sensor and adjusts screen brightness.
  *
  * Features:
  * - Multiple response curves (linear, sigmoidal, logarithmic)
- * - Travel Mode with zone-aware environment detection
  * - Manual calibration (dark/bright) with high-speed sampling
  * - Comprehensive logging for diagnostics
  */
@@ -126,7 +132,10 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
 
             // Runtime state
             this._isRunning = false;        // re-entrancy guard for the poll loop
+            this._loopStartTime = 0;        // monotonic time when current loop started (detect stale guard)
+            this._screenShieldId = null;    // signal connection id for screen-shield unlock
             this._loopId = null;           // Mainloop source id for scheduled polling
+            this._scheduleTimerId = null;    // Mainloop source id for schedule off-period timer
             this._enabled = true;          // user toggle state
             this._sensorAvailable = false; // whether a usable sensor was found
             this._sensorPath = null;       // the chosen sensor path object
@@ -142,16 +151,12 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
             this._brightnessctlDirectFailed = false; // Set to true when direct spawn fails so we fallback to sudo
             this._brightnessFailureNotified = false; // One-time user notify on persistent apply failure
             this._sensorRetryCounter = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationAboveCount = INITIAL_COUNTER_VALUE; // Consecutive samples above max-lux
-            this._adaptiveCalibrationBelowCount = INITIAL_COUNTER_VALUE; // Consecutive samples below min-lux
-            this._adaptiveCalibrationPeakLux = INITIAL_COUNTER_VALUE;    // Rolling peak lux during above-range window
-            this._adaptiveCalibrationMinLux = Infinity;  // Rolling minimum lux during below-range window
+            this._scheduleCausedDisable = false; // True when schedule turned applet off
+            this._rawLuxWindow = [];           // Rolling window for median-filtering raw lux
+            this._luxEMA = null;               // Exponential moving average of filtered lux
             this._manualOverrideEndTime = 0;              // Monotonic time (us) until manual override cooldown expires
-            // Zone detection state for enhanced Travel Mode
-            this._luxWindow = [];              // Rolling window of recent lux samples
-            this._currentZone = ZONE.INDOOR;   // Current detected environment zone
-            this._zoneCounter = INITIAL_COUNTER_VALUE;             // Consecutive samples in candidate zone
-            this._candidateZone = null;        // Zone being evaluated for transition
+            this._lastAdoptedManualBrightness = UNINITIALIZED_VALUE; // Last brightness adopted as manual override
+            this._lastAdoptedManualTime = 0;                        // When it was adopted (monotonic us)
             this._calibration = {
                 phase: CAL_PHASE.NONE,
                 timerId: null,
@@ -176,11 +181,14 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
             this.sensor_path = "";
             this.show_label = "live_status";
             // NOTE: label_display_mode default must match settings-schema.json and gschema.xml
-            this.label_display_mode = "brightness_lux";
+            this.label_display_mode = "brightness";
             this.response_curve = "logarithmic";
-            this.adaptive_calibration_enabled = false;
-            this.adaptive_calibration_threshold = 15; // Note: this is the default, clamped in _clamp_settings
             this.lux_change_threshold = LUX_CHANGE_THRESHOLD.DEFAULT;
+            this.min_brightness_delta = MIN_BRIGHTNESS_DELTA.DEFAULT;
+            this.manual_debounce_window = MANUAL_DEBOUNCE_WINDOW.DEFAULT;
+            this.schedule_enabled = false;
+            this.schedule_off_start = { h: 22, m: 0, s: 0 };
+            this.schedule_off_end = { h: 6, m: 0, s: 0 };
             this.log_level = "off";
 
             // Initialise file logger before settings so early errors are captured.
@@ -217,7 +225,33 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
         if (currentBrightness === null || this._previousBrightness < 0) {
             return false;
         }
-        return Math.abs(currentBrightness - this._previousBrightness) >= BRIGHTNESS_AUTO.MIN_APPLY_DELTA;
+        const delta = Math.abs(currentBrightness - this._previousBrightness);
+        if (delta < this.min_brightness_delta) {
+            return false;
+        }
+        // Check if user is idle — brightness changes during idle are likely OS idle-dimming,
+        // not manual user intervention. Treating them as manual overrides would fight the
+        // OS and prevent screen lock from engaging.
+        try {
+            const idleTime = Meta.IdleMonitor.get_core_monitor().get_idletime();
+            if (idleTime > IDLE_THRESHOLD_US) {
+                this._logger.debug("Ignoring brightness change during idle (idleTime=" + (idleTime / 1000000).toFixed(1) + "s) — treating as OS idle-dimming.");
+                return false;
+            }
+        } catch (e) {
+            // IdleMonitor may be unavailable; fall through to normal detection.
+        }
+        // Debounce repeated adoption of the same brightness — prevents bouncing
+        // when an external brightness daemon keeps resetting the screen.
+        const now = GLib.get_monotonic_time();
+        const windowSec = Math.min(this.manual_debounce_window || MANUAL_DEBOUNCE_WINDOW.DEFAULT, MANUAL_DEBOUNCE_WINDOW.MAX);
+        if (this._lastAdoptedManualBrightness >= 0 &&
+            Math.abs(currentBrightness - this._lastAdoptedManualBrightness) < this.min_brightness_delta &&
+            (now - this._lastAdoptedManualTime) < windowSec * 1000000) {
+            this._logger.debug("Manual override debounced (brightness=" + currentBrightness + "%), treating as external interference.");
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -229,15 +263,19 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
     _adopt_manual_brightness(currentBrightness, lux) {
         // Preserve the adaptive smoothing buffer (_brightness) so that when
         // the cooldown expires the transition back to adaptive is smooth.
+        const now = GLib.get_monotonic_time();
+        const cooldownSec = Math.min(this.manual_debounce_window || MANUAL_DEBOUNCE_WINDOW.DEFAULT, MANUAL_DEBOUNCE_WINDOW.MAX);
         this._previousBrightness = currentBrightness;
         this._lastLux = lux;
-        this._manualOverrideEndTime = GLib.get_monotonic_time() + MANUAL_OVERRIDE_COOLDOWN_US;
+        this._manualOverrideEndTime = now + cooldownSec * 1000000;
+        this._lastAdoptedManualBrightness = currentBrightness;
+        this._lastAdoptedManualTime = now;
         if (this.show_label !== "hide_actor") {
             this.set_applet_icon_name("display-brightness-symbolic");
         }
         this._update_label(currentBrightness, lux);
         this._update_live_tooltip(lux, currentBrightness);
-        this._logger.debug("Manual brightness override adopted: " + currentBrightness + "%. Cooldown until " + this._manualOverrideEndTime + ".");
+        this._logger.debug("Manual brightness override adopted: " + currentBrightness + "%. Cooldown=" + cooldownSec + "s.");
     }
 
     /**
@@ -300,12 +338,15 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
             this.settings.bind("min-lux", "min_lux", this._on_min_lux_changed.bind(this));
             this.settings.bind("show-label", "show_label", this._on_show_label_changed.bind(this));
             this.settings.bind("label-display-mode", "label_display_mode", this._on_show_label_changed.bind(this));
-            this.settings.bind("adaptive-calibration-enabled", "adaptive_calibration_enabled", this._on_adaptive_calibration_changed.bind(this));
-            this.settings.bind("adaptive-calibration-threshold", "adaptive_calibration_threshold", validator);
             this.settings.bind("response-curve", "response_curve", validator);
-            this.settings.bind("lux-change-threshold", "lux_change_threshold", validator);
+            this.settings.bind("lux-change-threshold", "lux_change_threshold", this._on_lux_threshold_changed.bind(this));
+            this.settings.bind("min-brightness-delta", "min_brightness_delta", validator);
             this.settings.bind("sensor-path", "sensor_path", this._on_sensor_path_changed.bind(this));
             this.settings.bind("log-level", "log_level", this._on_log_level_changed.bind(this));
+            this.settings.bind("manual-debounce-window", "manual_debounce_window", validator);
+            this.settings.bind("schedule-enabled", "schedule_enabled", this._on_schedule_changed.bind(this));
+            this.settings.bind("schedule-off-start", "schedule_off_start", this._on_schedule_changed.bind(this));
+            this.settings.bind("schedule-off-end", "schedule_off_end", this._on_schedule_changed.bind(this));
 
             // Initial validation applies defaults and may trigger an immediate
             // brightness computation if a recent lux exists.
@@ -316,27 +357,32 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
     }
 
     /**
+     * Callback for the lux-change-threshold setting change.
+     * Resets the dead-band anchor so the next poll recalculates with the new threshold.
+     */
+    _on_lux_threshold_changed() {
+        try {
+            this._lastAppliedLux = UNINITIALIZED_VALUE;
+            this._validate_settings();
+            this._logger.info("Lux change threshold changed — dead-band anchor reset.");
+        } catch (e) {
+            this._logger.error("lux-threshold callback: " + (e && e.message ? e.message : e));
+        }
+    }
+
+    /**
      * Callback for the sensor-path setting change.
-     * Resets sensor availability, adaptive calibration counters, zone state,
-     * and the dead-band so the next poll re-evaluates everything.
+     * Resets sensor availability and the dead-band so the next poll re-evaluates everything.
      */
     _on_sensor_path_changed() {
         try {
             this._sensorAvailable = false;
             this._sensorPath = null;
             this._locate_sensor();
-            this._adaptiveCalibrationAboveCount = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationBelowCount = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationPeakLux = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationMinLux = Infinity;
-            this._luxWindow = [];
-            this._currentZone = ZONE.INDOOR;
-            this._zoneCounter = INITIAL_COUNTER_VALUE;
-            this._candidateZone = null;
             this._errorCount = INITIAL_COUNTER_VALUE;
             this._lastAppliedLux = UNINITIALIZED_VALUE;  // Reset dead-band so first poll always applies
             this._update_tooltip();
-            this._logger.info("Sensor path changed — resetting error counter, zone state, and dead-band.");
+            this._logger.info("Sensor path changed — resetting error counter and dead-band.");
         } catch (e) {
             this._logger.error("sensor-path binding callback: " + (e && e.message ? e.message : e));
         }
@@ -349,8 +395,19 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
         try {
             this._locate_sensor();
             this._update_tooltip();
+            // Force a poll when the screen is unlocked so we don't wait for the
+            // next scheduled tick after a lock/suspend that froze the JS runtime.
+            if (Main.screenShield && !this._screenShieldId) {
+                this._screenShieldId = Main.screenShield.connect('active-changed', (shield, active) => {
+                    if (!active && this._enabled) {
+                        this._logger.info("Screen unlocked — forcing adaptive poll.");
+                        this._do_loop();
+                    }
+                });
+            }
             this._schedule_next_loop();
             this._logger.info("Polling started (interval=" + this.poll_interval + "ms).");
+            this._apply_schedule();
         } catch (e) {
             this._logger.error("_start failed: " + (e && e.message ? e.message : e));
         }
@@ -386,37 +443,204 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
      */
     _on_log_level_changed() {
         try {
+            this._logger.info("Log level changed to: " + this.log_level);
             if (this.log_level === "off") {
                 this._logger.setEnabled(false);
             } else {
                 this._logger.setEnabled(true);
                 this._logger.setLevel(this.log_level);
             }
-            this._logger.info("Log level changed to: " + this.log_level);
         } catch (e) {
             this._logger.error("Log level callback: " + (e && e.message ? e.message : e));
         }
     }
 
+
     /**
-     * Callback when the adaptive-calibration-enabled (Travel Mode) setting changes.
-     * Clears the rolling lux window and zone state so a fresh classification
-     * begins when Travel Mode is turned back on.
+     * Parse schedule time settings from JSON strings if needed.
+     * Cinnamon's gsettings may return JSON strings for timechooser values.
      */
-    _on_adaptive_calibration_changed() {
+    _parse_schedule_time() {
         try {
-            this._luxWindow = [];
-            this._currentZone = ZONE.INDOOR;
-            this._zoneCounter = INITIAL_COUNTER_VALUE;
-            this._candidateZone = null;
-            this._adaptiveCalibrationAboveCount = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationBelowCount = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationPeakLux = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationMinLux = Infinity;
-            this._logger.info("Travel Mode " + (this.adaptive_calibration_enabled ? "enabled" : "disabled") + " — zone state reset.");
-            this._validate_settings();
+            if (typeof this.schedule_off_start === 'string') {
+                this.schedule_off_start = JSON.parse(this.schedule_off_start);
+            }
+            if (typeof this.schedule_off_end === 'string') {
+                this.schedule_off_end = JSON.parse(this.schedule_off_end);
+            }
         } catch (e) {
-            this._logger.error("Travel Mode toggle callback: " + (e && e.message ? e.message : e));
+            this._logger.error("Schedule time parse failed: " + (e && e.message ? e.message : e));
+        }
+    }
+
+    /**
+     * Callback when any schedule setting changes.
+     * Re-evaluates whether we are currently in the off-period and reschedules
+     * the next transition boundary.
+     */
+    _on_schedule_changed() {
+        try {
+            this._parse_schedule_time();
+            this._apply_schedule();
+            this._logger.info("Schedule settings changed — re-evaluating off period.");
+        } catch (e) {
+            this._logger.error("Schedule changed callback: " + (e && e.message ? e.message : e));
+        }
+    }
+
+    /**
+     * Determine whether the current time falls inside the configured off-period.
+     * Supports ranges that cross midnight (e.g., 22:00 to 06:00).
+     *
+     * @param {Date} now - Current local time.
+     * @returns {boolean} True if now is within the off-period.
+     */
+    _is_in_off_period(now) {
+        const start = this.schedule_off_start;
+        const end = this.schedule_off_end;
+        if (!start || !end) return false;
+        const startSec = (start.h * 3600) + (start.m * 60) + (start.s || 0);
+        const endSec = (end.h * 3600) + (end.m * 60) + (end.s || 0);
+        const nowSec = (now.getHours() * 3600) + (now.getMinutes() * 60) + now.getSeconds();
+        if (startSec <= endSec) {
+            return nowSec >= startSec && nowSec < endSec;
+        } else {
+            return nowSec >= startSec || nowSec < endSec;
+        }
+    }
+
+    /**
+     * Apply the schedule: disable the applet if currently in the off-period,
+     * re-enable it if outside, and schedule the next boundary check.
+     */
+    _apply_schedule() {
+        try {
+            if (!this.schedule_enabled) {
+                if (this._scheduleTimerId) {
+                    Mainloop.source_remove(this._scheduleTimerId);
+                    this._scheduleTimerId = null;
+                }
+                // Restore applet only if schedule was the one that turned it off
+                if (!this._enabled && this._scheduleCausedDisable) {
+                    this._set_enabled(true, "schedule disabled");
+                    this._scheduleCausedDisable = false;
+                }
+                return;
+            }
+            const start = this.schedule_off_start;
+            const end = this.schedule_off_end;
+            if (!start || !end) return;
+            const startSec = (start.h * 3600) + (start.m * 60) + (start.s || 0);
+            const endSec = (end.h * 3600) + (end.m * 60) + (end.s || 0);
+            // If start == end the window is zero-length — treat as no schedule
+            if (startSec === endSec) {
+                this._logger.info("Schedule: start == end, treating as disabled.");
+                return;
+            }
+            const now = new Date();
+            const inOff = this._is_in_off_period(now);
+            if (inOff && this._enabled) {
+                this._set_enabled(false, "schedule");
+                this._scheduleCausedDisable = true;
+            } else if (!inOff && !this._enabled && this._scheduleCausedDisable) {
+                this._scheduleCausedDisable = false;
+                this._set_enabled(true, "schedule");
+            }
+            this._schedule_next_transition();
+        } catch (e) {
+            this._logger.error("Apply schedule: " + (e && e.message ? e.message : e));
+        }
+    }
+
+    /**
+     * Schedule a one-shot timer for the next schedule boundary (start or end).
+     * After the timer fires, _apply_schedule is called to toggle state and
+     * reschedule the following boundary.
+     */
+    _schedule_next_transition() {
+        try {
+            if (!this.schedule_enabled) return;
+            if (this._scheduleTimerId) {
+                Mainloop.source_remove(this._scheduleTimerId);
+                this._scheduleTimerId = null;
+            }
+            const now = new Date();
+            const start = this.schedule_off_start;
+            const end = this.schedule_off_end;
+            const startSec = (start.h * 3600) + (start.m * 60) + (start.s || 0);
+            const endSec = (end.h * 3600) + (end.m * 60) + (end.s || 0);
+            const nowSec = (now.getHours() * 3600) + (now.getMinutes() * 60) + now.getSeconds();
+            let nextBoundarySec;
+            let inOff;
+            if (startSec <= endSec) {
+                inOff = nowSec >= startSec && nowSec < endSec;
+                nextBoundarySec = inOff ? endSec : startSec;
+            } else {
+                inOff = nowSec >= startSec || nowSec < endSec;
+                nextBoundarySec = inOff ? endSec : startSec;
+            }
+            let diffSec = nextBoundarySec - nowSec;
+            if (diffSec <= 0) diffSec += 24 * 3600;
+            this._scheduleTimerId = Mainloop.timeout_add_seconds(diffSec, () => {
+                this._scheduleTimerId = null;
+                this._apply_schedule();
+                return false;
+            });
+            const boundaryLabel = inOff ? "end" : "start";
+            this._logger.info("Next schedule " + boundaryLabel + " in " + diffSec + "s.");
+        } catch (e) {
+            this._logger.error("Schedule next transition: " + (e && e.message ? e.message : e));
+        }
+    }
+
+    /**
+     * Set the applet enabled or disabled, updating icon, label, tooltip, and
+     * starting or stopping the poll loop. Used by both user clicks and the
+     * schedule timer.
+     *
+     * @param {boolean} enable - Desired enabled state.
+     * @param {string} [reason] - Optional reason for the change (logged).
+     */
+    _set_enabled(enable, reason) {
+        try {
+            this._enabled = enable;
+            this._lastAdoptedManualBrightness = UNINITIALIZED_VALUE;
+            this._lastAdoptedManualTime = 0;
+            if (this._enabled) {
+                this._lastAppliedLux = UNINITIALIZED_VALUE;
+                this._rawLuxWindow = [];
+                this._luxEMA = null;
+            }
+            if (this.show_label !== "hide_actor") {
+                if (this._enabled) {
+                    this.set_applet_icon_name("display-brightness-symbolic");
+                } else {
+                    this.set_applet_icon_name("weather-clear-night-symbolic");
+                }
+            }
+            this._update_label();
+            this._update_tooltip();
+            const reasonText = reason ? " (" + reason + ")" : "";
+            this._logger.info("Applet " + (this._enabled ? "enabled" : "disabled") + reasonText + ".");
+
+            if (this._enabled) {
+                this._errorCount = INITIAL_COUNTER_VALUE;
+                this._sensorRetryCounter = INITIAL_COUNTER_VALUE;
+                this._locate_sensor();
+                this._update_tooltip();
+                if (!this._isRunning) {
+                    try {
+                        this._do_loop();
+                    } catch (e) {
+                        this._logger.error("Immediate loop on enable failed: " + (e && e.message ? e.message : e));
+                        this._schedule_next_loop();
+                    }
+                } else {
+                    this._schedule_next_loop();
+                }
+            }
+        } catch (e) {
+            this._logger.error("_set_enabled: " + (e && e.message ? e.message : e));
         }
     }
 
@@ -437,6 +661,86 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
     }
 
     /**
+     * Show a modal dialog with a live-computed lux-to-brightness mapping table
+     * for all three response curves, using current min/max lux and brightness settings.
+     * (settings button callback)
+     */
+    _show_curve_preview() {
+        try {
+            const minB = this.min_brightness;
+            const maxB = this.max_brightness;
+            const minLux = this.min_lux;
+            const maxLux = this.max_lux;
+            const luxRange = maxLux - minLux;
+            const bRange = maxB - minB;
+
+            if (bRange <= 0 || luxRange <= 0) {
+                new CurvePreviewDialog(
+                    "Curve Mapping Preview — Invalid Range",
+                    "Check that Maximum Brightness > Minimum Brightness\nand Maximum Lux > Minimum Lux."
+                ).open();
+                return;
+            }
+
+            const targets = [0, 20, 40, 60, 80, 100];
+            const curves = ["linear", "logarithmic", "sigmoidal"];
+            const labels = { linear: "Linear", logarithmic: "Logarithmic", sigmoidal: "Sigmoidal" };
+            const active = this.response_curve;
+
+            // Compute lux for each (targetBrightness, curve)
+            const rows = targets.map(tgt => {
+                const cells = curves.map(curve => {
+                    // Boundary: brightness at/below min maps to minLux; at/above max maps to maxLux
+                    if (tgt <= minB) return "≤" + String(minLux);
+                    if (tgt >= maxB) return "≥" + String(maxLux);
+                    const norm = (tgt - minB) / bRange;
+                    let lux;
+                    if (curve === "linear") {
+                        lux = minLux + norm * luxRange;
+                    } else if (curve === "logarithmic") {
+                        if (minLux <= 0) return " — ";
+                        lux = minLux * Math.exp(norm * Math.log(maxLux / minLux));
+                    } else {
+                        // sigmoidal
+                        if (norm <= 0.01 || norm >= 0.99) return " — ";
+                        let n = SIGMOIDAL_CENTER - Math.log(1 / norm - 1) / Math.abs(SIGMOIDAL_STEEPNESS);
+                        n = Math.max(0, Math.min(1, n));
+                        lux = minLux + n * luxRange;
+                    }
+                    lux = Math.round(lux);
+                    if (lux < 0) return "< 0";
+                    if (lux > maxLux) return maxLux + " (capped)";
+                    return String(lux);
+                });
+                return { tgt, cells };
+            });
+
+            // Build monospace table text
+            const maxTgt = 5;   // "80%"
+            const colW = 7;     // e.g. "700 cap"
+            const pad = (s, w) => String(s).padStart(w);
+            let body = pad("Target", maxTgt) + "  " +
+                curves.map(c => {
+                    const label = labels[c] + (c === active ? " *" : "");
+                    return pad(label, colW + 2);
+                }).join("  ") + "\n";
+            body += "─".repeat(maxTgt + 2 + curves.length * (colW + 4)) + "\n";
+            for (const row of rows) {
+                body += pad(row.tgt + "%", maxTgt) + "  " +
+                    row.cells.map(c => pad(c, colW + 2)).join("  ") + "\n";
+            }
+            body += "\n* = currently selected curve (" + labels[active] + ")\n";
+            body += "Lower lux = darker environment needed to reach that brightness.";
+
+            const title = "Curve Mapping Preview (min=" + minLux + " lux, max=" + maxLux + " lux, " + minB + "%→" + maxB + "%)";
+            new CurvePreviewDialog(title, body).open();
+        } catch (e) {
+            this._logger.error("_show_curve_preview failed: " + (e && e.message ? e.message : e));
+            Main.notify("Adaptive Brightness", "Failed to build curve preview. Check the log for details.");
+        }
+    }
+
+    /**
      * Check whether a value is a valid non-negative finite lux reading.
      *
      * @param {*} lux - Value to validate.
@@ -444,7 +748,7 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
      */
     _has_valid_lux(lux) {
         try {
-            return lux !== null && lux !== undefined && isFinite(lux) && lux >= 0;
+            return lux !== null && lux !== undefined && Number.isFinite(lux) && lux >= 0;
         } catch (e) {
             return false;
         }
@@ -466,7 +770,6 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
 
     /**
      * Update the live tooltip with current lux and brightness values.
-     * Includes the current zone name when Travel Mode is active.
      *
      * @param {number|null} lux       - Current lux reading.
      * @param {number|null} brightness - Current brightness percentage.
@@ -474,13 +777,10 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
     _update_live_tooltip(lux, brightness) {
         try {
             const luxText = this._has_valid_lux(lux) ? this._format_lux(lux) : "unknown";
-            const brightnessText = brightness !== null && brightness !== undefined && isFinite(brightness)
+            const brightnessText = brightness !== null && brightness !== undefined && Number.isFinite(brightness)
                 ? Math.round(brightness) + "%"
                 : "calculating";
             let tooltip = "Light: " + luxText + " | Brightness: " + brightnessText;
-            if (this.adaptive_calibration_enabled && this._luxWindow.length >= Math.floor(ZONE_WINDOW_SIZE * ZONE_MIN_SAMPLES_RATIO)) {
-                tooltip += " [" + this._format_zone(this._currentZone) + "]";
-            }
             this.set_applet_tooltip(tooltip);
         } catch (e) {
             this._logger.error("_update_live_tooltip: " + (e && e.message ? e.message : e));
@@ -592,7 +892,7 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
         try {
             if (!values || values.length === 0) return 0;
             const sorted = values.slice().sort(function (a, b) { return a - b; });
-            const index = Math.ceil((percentile / 100) * sorted.length) - 1;
+            const index = Math.floor((percentile / 100) * (sorted.length - 1));
             return sorted[Math.max(0, Math.min(index, sorted.length - 1))];
         } catch (e) {
             this._logger.error("_percentile failed: " + (e && e.message ? e.message : e));
@@ -673,6 +973,14 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
         try {
             this.settings.setValue(key, value);
             this[propertyName] = value;
+            // Reset median filter and dead-band so the new bounds take effect immediately.
+            // NOTE: do NOT manually assign this._brightness here — settings.setValue() fires
+            // the binding callback synchronously (_validate_settings → _apply_settings_effects)
+            // which already recomputes and applies brightness. A second assignment here would
+            // overwrite that result and bypass the manual-override guard.
+            this._rawLuxWindow = [];
+            this._luxEMA = null;
+            this._lastAppliedLux = UNINITIALIZED_VALUE;
             // setValue already triggers the binding callback (validator), so
             // _validate_settings runs automatically. Avoid double-validation.
         } catch (e) {
@@ -697,14 +1005,14 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
                 lux = this._readNumber(this._sensorPath.input);
             } else {
                 const raw = this._readNumber(this._sensorPath.raw);
-                const scale = this._readNumber(this._sensorPath.scale);
+                const scale = this._sensorPath.scale ? this._readNumber(this._sensorPath.scale) : 1;
                 const offset = this._sensorPath.offset ? this._readNumber(this._sensorPath.offset) : 0;
                 if (raw !== null && scale !== null && offset !== null) {
                     lux = (raw + offset) * scale;
                 }
             }
 
-            if (lux === null || !isFinite(lux) || lux < 0) return;
+            if (lux === null || !Number.isFinite(lux) || lux < 0) return;
 
             // Collect samples
             if (this._calibration.phase === CAL_PHASE.DARK) {
@@ -1062,20 +1370,21 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
         const self = this;
         const checkPath = function (rawPath, scalePath, offsetPath, inputPath) {
             try {
-                const raw = Gio.file_new_for_path(rawPath);
-                const scale = Gio.file_new_for_path(scalePath);
-                const input = inputPath ? Gio.file_new_for_path(inputPath) : null;
+                const raw = Gio.File.new_for_path(rawPath);
+                const scale = scalePath ? Gio.File.new_for_path(scalePath) : null;
+                const input = inputPath ? Gio.File.new_for_path(inputPath) : null;
 
-                if (raw.query_exists(null) && scale.query_exists(null)) {
-                    const offset = offsetPath ? Gio.file_new_for_path(offsetPath) : null;
+                if (raw.query_exists(null)) {
+                    const scaleExists = scale && scale.query_exists(null);
+                    const offset = offsetPath ? Gio.File.new_for_path(offsetPath) : null;
                     self._sensorPath = {
                         raw: rawPath,
-                        scale: scalePath,
+                        scale: scaleExists ? scalePath : null,
                         offset: offset && offset.query_exists(null) ? offsetPath : null,
                         input: null
                     };
                     self._sensorAvailable = true;
-                    self._logger.info("Found sensor (raw+scale) at: " + rawPath);
+                    self._logger.info("Found sensor (raw" + (scaleExists ? "+scale" : ", default scale=1") + ") at: " + rawPath);
                     return true;
                 }
                 if (input && input.query_exists(null)) {
@@ -1112,7 +1421,7 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
         // Dynamically discover all available iio devices
         const IIO_BASE = "/sys/bus/iio/devices/";
         try {
-            const dir = Gio.file_new_for_path(IIO_BASE);
+            const dir = Gio.File.new_for_path(IIO_BASE);
             if (dir.query_exists(null)) {
                 const enumerator = dir.enumerate_children("standard::name", 0, null);
                 let fileInfo;
@@ -1204,13 +1513,13 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
         const rawSensorPath = this.sensor_path;
         const rawShowLabel = this.show_label;
         const rawLabelDisplayMode = this.label_display_mode;
-        const rawAdaptiveCalibrationEnabled = this.adaptive_calibration_enabled;
-        const rawAdaptiveCalibrationThreshold = this.adaptive_calibration_threshold;
         const rawLuxChangeThreshold = this.lux_change_threshold;
+        const rawMinBrightnessDelta = this.min_brightness_delta;
         const rawResponseCurve = this.response_curve;
         const rawLogLevel = this.log_level;
-        this.min_brightness = Math.max(BRIGHTNESS.MIN, Math.min(BRIGHTNESS.MAX, parseInt(this.min_brightness) || BRIGHTNESS.DEFAULT_MIN));
-        this.max_brightness = Math.min(BRIGHTNESS.MAX, Math.max(this.min_brightness + 1, Math.min(BRIGHTNESS.MAX, parseInt(this.max_brightness) || BRIGHTNESS.DEFAULT_MAX)));
+        const rawManualDebounceWindow = this.manual_debounce_window;
+        this.min_brightness = Math.max(BRIGHTNESS.MIN, Math.min(BRIGHTNESS.MAX, parseInt(this.min_brightness, 10) || BRIGHTNESS.DEFAULT_MIN));
+        this.max_brightness = Math.min(BRIGHTNESS.MAX, Math.max(this.min_brightness + 1, Math.min(BRIGHTNESS.MAX, parseInt(this.max_brightness, 10) || BRIGHTNESS.DEFAULT_MAX)));
         const parsedSmoothing = parseFloat(this.smoothing_factor);
         this.smoothing_factor = Math.max(SMOOTHING.MIN, Math.min(SMOOTHING.MAX, Number.isFinite(parsedSmoothing) ? parsedSmoothing : SMOOTHING.DEFAULT));
         const parsedMaxLux = parseInt(this.max_lux, 10);
@@ -1220,11 +1529,10 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
         const minGap = Math.max(LUX.MIN_GAP, Math.round(this.max_lux * LUX.GAP_ENFORCEMENT_RATIO));
         if (this._calibration.phase === CAL_PHASE.NONE && this.min_lux >= this.max_lux - minGap) {
             const correctedMinLux = Math.max(0, this.max_lux - minGap);
-            this._logger.info("Settings clamped: min-lux " + this.min_lux + " -> " + correctedMinLux + " (gap enforcement: max_lux=" + this.max_lux + ", minGap=" + minGap + ", persisted).");
+            this._logger.info("Settings clamped: min-lux " + this.min_lux + " -> " + correctedMinLux + " (gap enforcement: max_lux=" + this.max_lux + ", minGap=" + minGap + ").");
             this.min_lux = correctedMinLux;
-            this.settings.setValue("min-lux", this.min_lux);
         }
-        let interval = parseInt(this.poll_interval) || POLL_INTERVAL.DEFAULT;
+        let interval = parseInt(this.poll_interval, 10) || POLL_INTERVAL.DEFAULT;
         if (!this._calibration.mutex) {
             this.poll_interval = Math.max(POLL_INTERVAL.MIN, Math.min(POLL_INTERVAL.MAX, interval));
         }
@@ -1233,13 +1541,17 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
             this.show_label = "live_status";
         }
         if (!LABEL_DISPLAY_MODES.includes(this.label_display_mode)) {
-            this.label_display_mode = "brightness_lux";
+            this.label_display_mode = "brightness";
         }
-        this.adaptive_calibration_enabled = rawAdaptiveCalibrationEnabled !== false;
-        this.adaptive_calibration_threshold = Math.max(1, Math.min(60, parseInt(this.adaptive_calibration_threshold) || 15));
-        const parsedLuxThreshold = parseInt(this.lux_change_threshold);
+        const parsedLuxThreshold = parseInt(this.lux_change_threshold, 10);
         this.lux_change_threshold = Math.max(LUX_CHANGE_THRESHOLD.MIN, Math.min(LUX_CHANGE_THRESHOLD.MAX,
             Number.isFinite(parsedLuxThreshold) ? parsedLuxThreshold : LUX_CHANGE_THRESHOLD.DEFAULT));
+        const parsedMinBrightnessDelta = parseInt(this.min_brightness_delta, 10);
+        this.min_brightness_delta = Math.max(MIN_BRIGHTNESS_DELTA.MIN, Math.min(MIN_BRIGHTNESS_DELTA.MAX,
+            Number.isFinite(parsedMinBrightnessDelta) ? parsedMinBrightnessDelta : MIN_BRIGHTNESS_DELTA.DEFAULT));
+        const parsedDebounce = parseInt(this.manual_debounce_window, 10);
+        this.manual_debounce_window = Math.max(MANUAL_DEBOUNCE_WINDOW.MIN, Math.min(MANUAL_DEBOUNCE_WINDOW.MAX,
+            Number.isFinite(parsedDebounce) ? parsedDebounce : MANUAL_DEBOUNCE_WINDOW.DEFAULT));
 
         const validResponseCurves = Object.keys(RESPONSE_CURVES);
         if (!validResponseCurves.includes(this.response_curve)) {
@@ -1249,6 +1561,9 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
         if (!validLogLevels.includes(this.log_level)) {
             this.log_level = "off";
         }
+
+        // Parse schedule time settings if they arrive as JSON strings from gsettings
+        this._parse_schedule_time();
 
         const persistIfChanged = (key, rawValue, normalizedValue) => {
             if (rawValue !== normalizedValue) {
@@ -1266,11 +1581,11 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
         persistIfChanged("sensor-path", rawSensorPath, this.sensor_path);
         persistIfChanged("show-label", rawShowLabel, this.show_label);
         persistIfChanged("label-display-mode", rawLabelDisplayMode, this.label_display_mode);
-        persistIfChanged("adaptive-calibration-enabled", rawAdaptiveCalibrationEnabled, this.adaptive_calibration_enabled);
-        persistIfChanged("adaptive-calibration-threshold", rawAdaptiveCalibrationThreshold, this.adaptive_calibration_threshold);
         persistIfChanged("lux-change-threshold", rawLuxChangeThreshold, this.lux_change_threshold);
+        persistIfChanged("min-brightness-delta", rawMinBrightnessDelta, this.min_brightness_delta);
         persistIfChanged("response-curve", rawResponseCurve, this.response_curve);
         persistIfChanged("log-level", rawLogLevel, this.log_level);
+        persistIfChanged("manual-debounce-window", rawManualDebounceWindow, this.manual_debounce_window);
     }
 
     /**
@@ -1283,7 +1598,7 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
         // change so that curve, lux bounds, and brightness limits take effect
         // immediately.  Reset the dead-band so the next poll does not skip.
         try {
-            if (isFinite(this._lastLux) && this._lastLux >= 0) {
+            if (Number.isFinite(this._lastLux) && this._lastLux >= 0) {
                 const target = this._luxToBrightness(this._lastLux);
                 this._brightness = target;
                 if (Math.abs(target - this._previousBrightness) >= 1) {
@@ -1340,45 +1655,9 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
      */
     on_applet_clicked() {
         try {
-            this._enabled = !this._enabled;
-            this._adaptiveCalibrationAboveCount = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationBelowCount = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationMinLux = Infinity;
-            this._luxWindow = [];
-            this._currentZone = ZONE.INDOOR;
-            this._zoneCounter = INITIAL_COUNTER_VALUE;
-            this._candidateZone = null;
-            if (this._enabled) {
-                this._lastAppliedLux = UNINITIALIZED_VALUE;
-            }
-            if (this.show_label !== "hide_actor") {
-                if (this._enabled) {
-                    this.set_applet_icon_name("display-brightness-symbolic");
-                } else {
-                    this.set_applet_icon_name("weather-clear-night-symbolic");
-                }
-            }
-            this._update_label();
-            this._update_tooltip();
-            this._logger.info("Applet " + (this._enabled ? "enabled" : "disabled") + " by user click.");
-
-            if (this._enabled) {
-                this._errorCount = INITIAL_COUNTER_VALUE;
-                this._sensorRetryCounter = INITIAL_COUNTER_VALUE;
-                this._locate_sensor();
-                this._update_tooltip();
-                if (!this._isRunning) {
-                    try {
-                        this._do_loop();
-                    } catch (e) {
-                        this._logger.error("Immediate loop on enable failed: " + (e && e.message ? e.message : e));
-                        this._schedule_next_loop();
-                    }
-                } else {
-                    // Ensure the scheduler matches the configured interval
-                    this._schedule_next_loop();
-                }
-            }
+            // Manual click always overrides schedule control.
+            this._scheduleCausedDisable = false;
+            this._set_enabled(!this._enabled, "user click");
         } catch (e) {
             this._logger.error("Click: " + (e && e.message ? e.message : e));
         }
@@ -1399,7 +1678,7 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
                 return null;
             }
             const num = parseFloat(result[1].toString().trim());
-            if (!isFinite(num) || num < 0) {
+            if (!Number.isFinite(num) || num < 0) {
                 this._logger.debug("_readNumber: invalid value (" + num + ") from: " + path);
                 return null;
             }
@@ -1417,27 +1696,30 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
      */
     _find_backlight_path() {
         if (this._backlightPath !== undefined) return this._backlightPath;
+        let enumerator;
         try {
-            const base = Gio.file_new_for_path("/sys/class/backlight");
+            const base = Gio.File.new_for_path("/sys/class/backlight");
             if (!base.query_exists(null)) return null;
-            const enumerator = base.enumerate_children("standard::name", 0, null);
+            enumerator = base.enumerate_children("standard::name", 0, null);
             let info;
             while ((info = enumerator.next_file(null)) !== null) {
                 const candidate = "/sys/class/backlight/" + info.get_name();
-                const brightnessFile = Gio.file_new_for_path(candidate + "/brightness");
-                const maxFile = Gio.file_new_for_path(candidate + "/max_brightness");
+                const brightnessFile = Gio.File.new_for_path(candidate + "/brightness");
+                const maxFile = Gio.File.new_for_path(candidate + "/max_brightness");
                 if (brightnessFile.query_exists(null) && maxFile.query_exists(null)) {
                     this._backlightPath = candidate;
                     this._logger.info("Found backlight device: " + candidate);
-                    enumerator.close(null);
                     return this._backlightPath;
                 }
             }
-            enumerator.close(null);
             this._backlightPath = null;
             this._logger.info("No backlight device found in /sys/class/backlight.");
         } catch (e) {
             this._logger.debug("_find_backlight_path: " + (e && e.message ? e.message : e));
+        } finally {
+            if (enumerator) {
+                try { enumerator.close(null); } catch (_) { }
+            }
         }
         return null;
     }
@@ -1510,24 +1792,19 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
     /**
      * Convert a lux reading to a brightness percentage.
      * Supports logarithmic, linear, and sigmoidal curves.
-     * When Travel Mode is ON, uses zone-aware effective lux range for finer
-     * granularity within the detected environment.
      *
      * @param {number} lux - Ambient light reading.
      * @returns {number} Brightness percentage in [BRIGHTNESS.MIN, BRIGHTNESS.MAX].
      */
     _luxToBrightness(lux) {
         try {
-            if (!isFinite(lux) || lux < 0 || !isFinite(this.max_lux) || this.max_lux <= 0) {
+            if (!Number.isFinite(lux) || lux < 0 || !Number.isFinite(this.max_lux) || this.max_lux <= 0) {
                 return this.min_brightness;
             }
 
-            // Determine effective lux range: zone-aware when Travel Mode is ON,
-            // otherwise use global min/max lux settings.
-            const effectiveRange = this._get_zone_effective_range();
-            const effMin = effectiveRange.min;
-            const effMax = effectiveRange.max;
-            this._logger.debug("Effective range: min=" + effMin + " max=" + effMax);
+            const effMin = this.min_lux;
+            const effMax = this.max_lux;
+            this._logger.debug("Lux range: min=" + effMin + " max=" + effMax);
 
             if (lux <= effMin) return this.min_brightness;
             if (lux >= effMax) return this.max_brightness;
@@ -1536,7 +1813,7 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
             if (luxRange <= 0) return this.min_brightness;
             const linearNorm = (lux - effMin) / luxRange;
             const curveFn = RESPONSE_CURVES[this.response_curve] || RESPONSE_CURVES.logarithmic;
-            let normalized = curveFn(linearNorm, luxRange);
+            let normalized = curveFn(linearNorm, luxRange, effMin);
 
             normalized = Math.max(0, Math.min(1, normalized));
             const brightness = Math.round(
@@ -1550,242 +1827,82 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
     }
 
     /**
-     * Update min/max lux automatically after consecutive out-of-range samples.
-     * Uses a rolling peak for max-lux updates to avoid basing calibration on a
-     * single potentially noisy sample.
+     * Calculate curve steepness at current lux position.
+     * Higher values = steeper curve = more aggressive brightness response.
+     * For log curve: steepness ≈ 1/(normalizedLux * luxRange + 1)
      *
      * @param {number} lux - Current lux reading.
+     * @returns {number} Steepness factor 0-1, where 1 = very steep (low lux).
      */
-    _adaptive_calibration_sample(lux) {
-        if (!this.adaptive_calibration_enabled) {
-            this._adaptiveCalibrationAboveCount = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationBelowCount = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationPeakLux = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationMinLux = Infinity;
-            return;
-        }
-
-        // Use the bound value directly — it has already been clamped by _clamp_settings.
-        // Apply an additional safety clamp in case settings are corrupted.
-        const threshold = Math.max(1, Math.min(60, this.adaptive_calibration_threshold));
-
-        if (lux > this.max_lux) {
-            this._adaptiveCalibrationAboveCount++;
-            this._adaptiveCalibrationBelowCount = INITIAL_COUNTER_VALUE;
-            // Track the highest lux seen in this consecutive above-range window
-            if (lux > this._adaptiveCalibrationPeakLux) {
-                this._adaptiveCalibrationPeakLux = lux;
-            }
-            this._logger.debug(
-                "Travel Mode above-range: lux=" + lux.toFixed(1) +
-                " max_lux=" + this.max_lux +
-                " count=" + this._adaptiveCalibrationAboveCount +
-                "/" + threshold +
-                " peak=" + this._adaptiveCalibrationPeakLux.toFixed(1)
-            );
-            if (this._adaptiveCalibrationAboveCount >= threshold) {
-                // Use the rolling peak for a more robust max-lux estimate
-                const newMaxLux = Math.round(this._adaptiveCalibrationPeakLux * TRAVEL_MODE_HEADROOM);
-                if (newMaxLux !== this.max_lux) {
-                    this._logger.info(
-                        "Travel Mode: max-lux " + this.max_lux + " -> " + newMaxLux +
-                        " (peak over " + threshold + " consecutive above-range samples)."
-                    );
-                    this.max_lux = newMaxLux;
-                    this.settings.setValue("max-lux", newMaxLux);
-                    this._validate_settings();
-                }
-                this._adaptiveCalibrationAboveCount = INITIAL_COUNTER_VALUE;
-                this._adaptiveCalibrationPeakLux = INITIAL_COUNTER_VALUE;
-            }
-            return;
-        }
-
-        if (lux < this.min_lux) {
-            this._adaptiveCalibrationBelowCount++;
-            this._adaptiveCalibrationAboveCount = INITIAL_COUNTER_VALUE;
-            this._adaptiveCalibrationPeakLux = INITIAL_COUNTER_VALUE;
-            // Track the lowest lux seen in this consecutive below-range window
-            if (lux < this._adaptiveCalibrationMinLux) {
-                this._adaptiveCalibrationMinLux = lux;
-            }
-            this._logger.debug(
-                "Travel Mode below-range: lux=" + lux.toFixed(1) +
-                " min_lux=" + this.min_lux +
-                " count=" + this._adaptiveCalibrationBelowCount +
-                "/" + threshold +
-                " minRolling=" + this._adaptiveCalibrationMinLux.toFixed(1)
-            );
-            if (this._adaptiveCalibrationBelowCount >= threshold) {
-                const newMinLux = Math.round(this._adaptiveCalibrationMinLux * TRAVEL_MODE_HEADROOM);
-                if (newMinLux !== this.min_lux) {
-                    this._logger.info(
-                        "Travel Mode: min-lux " + this.min_lux + " -> " + newMinLux +
-                        " after " + threshold + " consecutive below-range samples" +
-                        " (rolling min=" + this._adaptiveCalibrationMinLux.toFixed(1) + ")."
-                    );
-                    this.min_lux = newMinLux;
-                    this.settings.setValue("min-lux", newMinLux);
-                    this._validate_settings();
-                }
-                this._adaptiveCalibrationBelowCount = INITIAL_COUNTER_VALUE;
-                this._adaptiveCalibrationMinLux = Infinity;
-            }
-            return;
-        }
-
-        // In-range: reset all counters
-        this._adaptiveCalibrationAboveCount = INITIAL_COUNTER_VALUE;
-        this._adaptiveCalibrationBelowCount = INITIAL_COUNTER_VALUE;
-        this._adaptiveCalibrationPeakLux = INITIAL_COUNTER_VALUE;
-        this._adaptiveCalibrationMinLux = Infinity;
-        this._logger.debug("Travel Mode: in-range, resetting all adaptive counters.");
-    }
-
-    /**
-     * Classify a lux value into an environment zone.
-     *
-     * @param {number} lux - Lux reading.
-     * @returns {string} Zone constant (DARK_ROOM, INDOOR, or OUTDOOR).
-     */
-    _classify_zone(lux) {
+    _getCurveSteepness(lux) {
         try {
-            if (lux <= ZONE_THRESHOLDS.DARK_ROOM.max) return ZONE.DARK_ROOM;
-            if (lux >= ZONE_THRESHOLDS.OUTDOOR.min) return ZONE.OUTDOOR;
-            return ZONE.INDOOR;
+            const effMin = this.min_lux;
+            const effMax = this.max_lux;
+
+            if (lux <= effMin || lux >= effMax) return 0;
+
+            const luxRange = effMax - effMin;
+            if (luxRange <= 0) return 0;
+
+            const normalizedPos = (lux - effMin) / luxRange;
+
+            // Curve is log(n*k + 1) / log(k + 1), n in [0,1], k = luxRange/effMin (or luxRange when effMin<=0).
+            // Derivative w.r.t. n: k / ((n*k + 1) * log(k + 1)).
+            // Max at n=0: k / log(k + 1). Normalize to get 0-1 steepness.
+            if (this.response_curve === "logarithmic") {
+                const k = effMin > 0 ? luxRange / effMin : luxRange;
+                const logDenom = Math.log(k + LOG_OFFSET);
+                if (logDenom <= 0) return 0;
+                const rawDerivative = k / ((normalizedPos * k + LOG_OFFSET) * logDenom);
+                const maxDerivative = k / logDenom; // At normalizedPos = 0
+                return Math.min(1, rawDerivative / maxDerivative);
+            }
+
+            // Sigmoidal: derivative is |k * f(n) * (1 - f(n))| where k = SIGMOIDAL_STEEPNESS.
+            // Peak at the center (n = SIGMOIDAL_CENTER). Normalize against that peak.
+            if (this.response_curve === "sigmoidal") {
+                const fn = 1 / (1 + Math.exp(SIGMOIDAL_STEEPNESS * (normalizedPos - SIGMOIDAL_CENTER)));
+                const rawDerivative = Math.abs(SIGMOIDAL_STEEPNESS) * fn * (1 - fn);
+                const fnCenter = 1 / (1 + Math.exp(SIGMOIDAL_STEEPNESS * (SIGMOIDAL_CENTER - SIGMOIDAL_CENTER)));
+                const maxDerivative = Math.abs(SIGMOIDAL_STEEPNESS) * fnCenter * (1 - fnCenter);
+                return maxDerivative > 0 ? Math.min(1, rawDerivative / maxDerivative) : 0;
+            }
+
+            // Linear: constant slope, no steep region
+            return 0;
         } catch (e) {
-            this._logger.error("_classify_zone failed: " + (e && e.message ? e.message : e));
-            return ZONE.INDOOR;
+            this._logger.debug("_getCurveSteepness failed: " + (e && e.message ? e.message : e));
+            return 0;
         }
     }
 
     /**
-     * Update the rolling lux window and detect zone transitions.
-     * Only active when Travel Mode (adaptive calibration) is enabled.
+     * Get adaptive smoothing factor based on curve steepness.
+     * When curve is steep (low lux on log curve), increase smoothing to prevent
+     * jarring brightness jumps from small lux fluctuations.
      *
      * @param {number} lux - Current lux reading.
-     * @returns {string} Current zone constant.
+     * @returns {number} Effective smoothing factor (0-0.95).
      */
-    _update_zone_detection(lux) {
-        if (!this.adaptive_calibration_enabled) {
-            return this._currentZone;
-        }
-
-        // Maintain rolling window
-        this._luxWindow.push(lux);
-        if (this._luxWindow.length > ZONE_WINDOW_SIZE) {
-            this._luxWindow.shift();
-        }
-
-        // Need at least half the window before classifying
-        const minSamples = Math.floor(ZONE_WINDOW_SIZE * ZONE_MIN_SAMPLES_RATIO);
-        if (this._luxWindow.length < minSamples) {
-            this._logger.debug("Zone detection: window too small (" + this._luxWindow.length + " / " + minSamples + " samples).");
-            return this._currentZone;
-        }
-
-        // Compute rolling median for zone classification
-        const median = this._median(this._luxWindow);
-        const detectedZone = this._classify_zone(median);
-
-        // Hysteresis: require consecutive samples in the new zone before switching
-        if (detectedZone !== this._currentZone) {
-            if (detectedZone === this._candidateZone) {
-                this._zoneCounter++;
-                if (this._zoneCounter >= ZONE_HYSTERESIS) {
-                    const prevZone = this._currentZone;
-                    this._currentZone = detectedZone;
-                    this._candidateZone = null;
-                    this._zoneCounter = INITIAL_COUNTER_VALUE;
-                    this._logger.info(
-                        "Travel Mode zone transition: " + prevZone + " -> " + this._currentZone +
-                        " (median=" + median.toFixed(1) + " lux, window=" + this._luxWindow.length + ")"
-                    );
-                }
-            } else {
-                this._candidateZone = detectedZone;
-                this._zoneCounter = INITIAL_HYSTERESIS_COUNT;
-                this._logger.debug("Zone candidate: " + detectedZone + " (median=" + median.toFixed(1) + " lux).");
-            }
-        } else {
-            this._candidateZone = null;
-            this._zoneCounter = INITIAL_COUNTER_VALUE;
-        }
-
-        return this._currentZone;
-    }
-
-    /**
-     * Clamp a zone-derived lux range to the user's configured min/max bounds.
-     *
-     * @param {number} rawMin - Proposed effective minimum lux.
-     * @param {number} rawMax - Proposed effective maximum lux.
-     * @returns {{min: number, max: number}} Clamped effective range.
-     */
-    _clamp_zone_effective_range(rawMin, rawMax) {
-        const minGap = Math.max(LUX.MIN_GAP, Math.round(this.max_lux * LUX.GAP_ENFORCEMENT_RATIO));
-        let min = Math.max(this.min_lux, rawMin);
-        let max = Math.min(this.max_lux, rawMax);
-        if (max - min < minGap) {
-            max = Math.min(this.max_lux, min + minGap);
-            min = Math.max(this.min_lux, max - minGap);
-        }
-        return { min, max };
-    }
-
-    /**
-     * Compute the effective lux range for the current zone.
-     * Uses percentile-based bounds from the rolling lux window to dynamically
-     * tighten the brightness mapping to the actual ambient range.
-     *
-     * @returns {{min: number, max: number}} Effective min and max lux.
-     */
-    _get_zone_effective_range() {
-        if (!this.adaptive_calibration_enabled || this._luxWindow.length < Math.floor(ZONE_WINDOW_SIZE * ZONE_MIN_SAMPLES_RATIO)) {
-            return { min: this.min_lux, max: this.max_lux };
-        }
-
-        const p5 = this._percentile(this._luxWindow, ZONE_PERCENTILE_LOW);
-        const p95 = this._percentile(this._luxWindow, ZONE_PERCENTILE_HIGH);
-
-        switch (this._currentZone) {
-            case ZONE.DARK_ROOM:
-                return this._clamp_zone_effective_range(
-                    0,
-                    Math.max(ZONE_DARK_ROOM_MAX_LUX, p95)
-                );
-            case ZONE.INDOOR:
-                return this._clamp_zone_effective_range(
-                    Math.min(ZONE_INDOOR_MIN_LUX, p5),
-                    Math.max(ZONE_INDOOR_MAX_LUX, p95)
-                );
-            case ZONE.OUTDOOR:
-                return this._clamp_zone_effective_range(
-                    Math.min(ZONE_OUTDOOR_MIN_LUX, p5),
-                    Math.max(this.max_lux, p95)
-                );
-            default:
-                return { min: this.min_lux, max: this.max_lux };
-        }
-    }
-
-    /**
-     * Format a zone constant for display in tooltip/label.
-     *
-     * @param {string} zone - Zone constant.
-     * @returns {string} Human-readable zone name.
-     */
-    _format_zone(zone) {
+    _getAdaptiveSmoothing(lux) {
         try {
-            switch (zone) {
-                case ZONE.DARK_ROOM: return "Dark Room";
-                case ZONE.INDOOR: return "Indoor";
-                case ZONE.OUTDOOR: return "Outdoor";
-                default: return "";
-            }
+            const baseSmoothing = Math.max(SMOOTHING.MIN, Math.min(SMOOTHING.MAX, this.smoothing_factor));
+            const steepness = this._getCurveSteepness(lux);
+
+            // When steepness > 0.5 (steep part of curve), add up to +0.20 smoothing
+            // This makes low-lux transitions much more gradual
+            const extraSmoothing = steepness > 0.5 ? (steepness - 0.5) * 0.4 : 0;
+            const effectiveSmoothing = Math.min(0.95, baseSmoothing + extraSmoothing);
+
+            this._logger.debug("Adaptive smoothing: base=" + baseSmoothing.toFixed(2) +
+                " steepness=" + steepness.toFixed(2) +
+                " extra=" + extraSmoothing.toFixed(2) +
+                " effective=" + effectiveSmoothing.toFixed(2));
+
+            return effectiveSmoothing;
         } catch (e) {
-            this._logger.error("_format_zone failed: " + (e && e.message ? e.message : e));
-            return "";
+            this._logger.debug("_getAdaptiveSmoothing failed: " + (e && e.message ? e.message : e));
+            return Math.max(SMOOTHING.MIN, Math.min(SMOOTHING.MAX, this.smoothing_factor));
         }
     }
 
@@ -1826,15 +1943,29 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
      */
     _do_loop() {
         if (this._isRunning) {
-            // Already running — skip this invocation but still reschedule
-            // so we don't lose the loop. _isRunning will be cleared by the
-            // in-flight call's finally block.
-            if (!this._loopId) {
-                this._schedule_next_loop();
+            // If the previous loop invocation was interrupted by a system suspend
+            // or screen lock, the finally block never ran and _isRunning stayed true.
+            // Detect this stale guard by checking how long it has been "running".
+            // Threshold must exceed poll interval to avoid false positives with long intervals.
+            const STALE_LOOP_THRESHOLD_US = Math.max(5 * 1000000, (this.poll_interval || 1000) * 2 * 1000);
+            const now = GLib.get_monotonic_time();
+            // _loopStartTime === 0 means the loop hasn't recorded a start time yet —
+            // treat as genuinely running (conservative). Only trigger stale recovery
+            // if a valid start time exists AND the elapsed time exceeds the threshold.
+            if (this._loopStartTime === 0 || (now - this._loopStartTime) < STALE_LOOP_THRESHOLD_US) {
+                // Genuinely still running — skip this invocation but still reschedule
+                // so we don't lose the loop. _isRunning will be cleared by the
+                // in-flight call's finally block.
+                if (!this._loopId) {
+                    this._schedule_next_loop();
+                }
+                return;
             }
-            return;
+            this._logger.info("Stale loop guard detected, recovering from suspend/lock.");
+            this._isRunning = false;
         }
         this._isRunning = true;
+        this._loopStartTime = GLib.get_monotonic_time();
 
         try {
             // Skip if calibration is running (high-frequency polling takes over).
@@ -1867,39 +1998,56 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
                 lux = this._readNumber(this._sensorPath.input);
             } else {
                 const raw = this._readNumber(this._sensorPath.raw);
-                const scale = this._readNumber(this._sensorPath.scale);
+                const scale = this._sensorPath.scale ? this._readNumber(this._sensorPath.scale) : 1;
                 const offset = this._sensorPath.offset ? this._readNumber(this._sensorPath.offset) : 0;
                 if (raw !== null && scale !== null && offset !== null) {
                     lux = (raw + offset) * scale;
                 }
             }
 
-            if (lux === null || !isFinite(lux) || lux < 0) {
+            if (lux === null || !Number.isFinite(lux) || lux < 0) {
                 this._logger.debug("_do_loop skipped: invalid lux reading.");
                 return;
             }
 
-            // Always run adaptive calibration and zone detection regardless of the dead-band.
-            this._adaptive_calibration_sample(lux);
-            this._update_zone_detection(lux);
+            // Median-filter raw lux to suppress noise before curve mapping.
+            // Adaptive calibration and zone detection still use the raw reading.
+            this._rawLuxWindow.push(lux);
+            if (this._rawLuxWindow.length > RAW_LUX_WINDOW_SIZE) {
+                this._rawLuxWindow.shift();
+            }
+            const filteredLux = this._rawLuxWindow.length >= RAW_LUX_WINDOW_SIZE
+                ? this._median(this._rawLuxWindow)
+                : lux;
+
+            // Additional exponential smoothing on the median-filtered lux.
+            // This shares the same smoothing_factor knob as brightness smoothing,
+            // giving users a single control for overall responsiveness.
+            if (this._luxEMA === null) {
+                this._luxEMA = filteredLux;
+            } else {
+                const emaFactor = Math.max(SMOOTHING.MIN, Math.min(SMOOTHING.MAX, this.smoothing_factor));
+                this._luxEMA = this._luxEMA * emaFactor + filteredLux * (1 - emaFactor);
+            }
+            const smoothedLux = this._luxEMA;
 
             const currentBrightness = this._read_current_brightness();
 
             // 1. Detect a fresh manual brightness override and start the cooldown.
             if (this._is_manual_brightness_override(currentBrightness)) {
-                this._adopt_manual_brightness(currentBrightness, lux);
+                this._adopt_manual_brightness(currentBrightness, smoothedLux);
                 return;
             }
 
             // 2. During the cooldown window, respect the manual value and skip adaptive computation.
             const now = GLib.get_monotonic_time();
             if (now < this._manualOverrideEndTime) {
-                this._lastLux = lux;
+                this._lastLux = smoothedLux;
                 const displayBrightness = currentBrightness !== null
                     ? currentBrightness
                     : (this._brightness !== null ? Math.round(this._brightness) : undefined);
-                this._update_label(displayBrightness, lux);
-                this._update_live_tooltip(lux, displayBrightness);
+                this._update_label(displayBrightness, smoothedLux);
+                this._update_live_tooltip(smoothedLux, displayBrightness);
                 this._logger.debug("Manual override cooldown active, skipping adaptive.");
                 return;
             }
@@ -1908,41 +2056,72 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
             if (this._manualOverrideEndTime > 0) {
                 this._manualOverrideEndTime = 0;
                 this._lastAppliedLux = UNINITIALIZED_VALUE;
+                this._rawLuxWindow = []; // Reset median filter for fresh start
+                this._luxEMA = null;     // Reset lux EMA for fresh start
                 this._logger.debug("Manual override cooldown expired, resuming adaptive.");
             }
 
             // 4. Lux dead-band: skip brightness recomputation when sensor noise causes
             // tiny lux fluctuations that would otherwise drift the smoothing buffer.
             // Always compute on the very first poll (_lastAppliedLux === -1).
-            const luxDelta = Math.abs(lux - this._lastAppliedLux);
+            const luxDelta = Math.abs(smoothedLux - this._lastAppliedLux);
             const deadBand = Math.max(0, this.lux_change_threshold);
+            let targetBrightness = this._luxToBrightness(smoothedLux);
             if (this._lastAppliedLux >= 0 && deadBand > 0 && luxDelta < deadBand) {
-                this._lastLux = lux;
-                const displayBrightness = currentBrightness !== null
-                    ? currentBrightness
-                    : (this._brightness !== null ? Math.round(this._brightness) : undefined);
+                // If the smoothed brightness hasn't converged to the target yet,
+                // bypass the dead-band so exponential smoothing can continue.
+                const currentSmoothed = this._brightness !== null ? Math.round(this._brightness) : null;
+                const converged = currentSmoothed !== null &&
+                    Math.abs(currentSmoothed - targetBrightness) < this.min_brightness_delta;
+                if (converged) {
+                    this._lastLux = smoothedLux;
+                    const displayBrightness = this._brightness !== null ? Math.round(this._brightness) : undefined;
+                    this._logger.debug(
+                        "Dead-band skip: lux=" + smoothedLux.toFixed(1) +
+                        " lastApplied=" + this._lastAppliedLux.toFixed(1) +
+                        " delta=" + luxDelta.toFixed(1) +
+                        " threshold=" + deadBand
+                    );
+                    this._update_label(displayBrightness, smoothedLux);
+                    this._update_live_tooltip(smoothedLux, displayBrightness);
+                    return;
+                }
                 this._logger.debug(
-                    "Dead-band skip: lux=" + lux.toFixed(1) +
-                    " lastApplied=" + this._lastAppliedLux.toFixed(1) +
+                    "Dead-band bypass: lux=" + smoothedLux.toFixed(1) +
                     " delta=" + luxDelta.toFixed(1) +
-                    " threshold=" + deadBand
+                    " smoothed=" + currentSmoothed +
+                    " target=" + targetBrightness +
+                    " (not converged)"
                 );
-                this._update_label(displayBrightness, lux);
-                this._update_live_tooltip(lux, displayBrightness);
-                return;
+                // Continue to brightness calculation - bypass only means we don't skip
             }
-            this._lastAppliedLux = lux;
-
-            let targetBrightness = this._luxToBrightness(lux);
+            // Update the dead-band anchor every time we compute brightness.
+            // Previously the anchor was left unchanged on bypass, which caused
+            // infinite bypass loops when the target kept oscillating due to
+            // sensor noise near a steep curve boundary.
+            this._lastAppliedLux = smoothedLux;
 
             // Exponential smoothing: smoothing_factor is smoothness (0=instant, 1=frozen).
             // responsiveness = (1 - factor) is the fraction moved toward target each poll.
+            // Use adaptive smoothing that increases when curve is steep (low lux on log curve).
             if (this._brightness === null) {
                 this._brightness = targetBrightness;
+            } else if ((targetBrightness === this.min_brightness && this._brightness <= this.min_brightness + 2) ||
+                (targetBrightness === this.max_brightness && this._brightness >= this.max_brightness - 2)) {
+                // Snap-to-extremes: jump directly to floor/ceiling only when already near boundary.
+                // This prevents jarring instant jumps from small fluctuations while still ensuring
+                // we reach the true min/max when approaching boundaries.
+                this._brightness = targetBrightness;
             } else {
-                const smoothness = Math.max(SMOOTHING.MIN, Math.min(SMOOTHING.MAX, this.smoothing_factor));
+                const smoothness = this._getAdaptiveSmoothing(smoothedLux);
                 const responsiveness = 1 - smoothness;
-                this._brightness = this._brightness + (targetBrightness - this._brightness) * responsiveness;
+                if (responsiveness <= 0) {
+                    // Defence-in-depth: a responsiveness of 0 would freeze brightness forever.
+                    // Snap directly to target to avoid silent failure.
+                    this._brightness = targetBrightness;
+                } else {
+                    this._brightness = this._brightness + (targetBrightness - this._brightness) * responsiveness;
+                }
             }
 
             const finalBrightness = Math.max(BRIGHTNESS.MIN, Math.min(BRIGHTNESS.MAX, Math.round(this._brightness)));
@@ -1951,7 +2130,7 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
                 ? Math.abs(finalBrightness - this._previousBrightness)
                 : Infinity;
 
-            if (this._previousBrightness < 0 || targetDelta >= BRIGHTNESS_AUTO.MIN_APPLY_DELTA) {
+            if (this._previousBrightness < 0 || targetDelta >= this.min_brightness_delta) {
                 this._apply_brightness(finalBrightness);
                 this._previousBrightness = finalBrightness;
             }
@@ -1959,16 +2138,15 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
             if (this.show_label !== "hide_actor") {
                 this.set_applet_icon_name("display-brightness-symbolic");
             }
-            this._lastLux = lux;
-            this._update_label(finalBrightness, lux);
-            this._update_live_tooltip(lux, finalBrightness);
+            this._lastLux = smoothedLux;
+            this._update_label(finalBrightness, smoothedLux);
+            this._update_live_tooltip(smoothedLux, finalBrightness);
             this._errorCount = 0;
             this._logger.debug(
-                "Poll: lux=" + lux.toFixed(1) +
+                "Poll: lux=" + smoothedLux.toFixed(1) +
                 " target=" + targetBrightness +
                 "% smoothed=" + (this._brightness !== null ? this._brightness.toFixed(2) : "null") +
-                "% applied=" + finalBrightness + "%" +
-                (this.adaptive_calibration_enabled ? " zone=" + this._currentZone : "")
+                "% applied=" + finalBrightness + "%"
             );
 
         } catch (e) {
@@ -1987,6 +2165,7 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
             }
         } finally {
             this._isRunning = false;
+            this._loopStartTime = 0;
             if (this._enabled) {
                 this._schedule_next_loop();
             } else {
@@ -2036,6 +2215,10 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
             try {
                 p.wait_finish(res);
                 this._brightnessFailureNotified = false;
+                if (!useSudo && this._brightnessctlDirectFailed) {
+                    this._brightnessctlDirectFailed = false;
+                    this._logger.info("Direct brightnessctl succeeded, removing sudo fallback.");
+                }
                 this._logger.debug(
                     (useSudo ? "sudo " : "") + cmd + " set " + brightness + "% succeeded."
                 );
@@ -2072,6 +2255,16 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
     on_applet_removed_from_panel() {
         try {
             this._logger.info("Applet removed from panel, starting cleanup...");
+            // Clean up screen-shield signal
+            try {
+                if (this._screenShieldId && Main.screenShield) {
+                    Main.screenShield.disconnect(this._screenShieldId);
+                    this._screenShieldId = null;
+                }
+            } catch (e) {
+                this._logger.error("Cleanup screen-shield: " + (e && e.message ? e.message : e));
+            }
+
             // Clean up main loop timer
             try {
                 if (this._loopId) {
@@ -2080,6 +2273,16 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
                 }
             } catch (e) {
                 this._logger.error("Cleanup main loop: " + (e && e.message ? e.message : e));
+            }
+
+            // Clean up schedule timer
+            try {
+                if (this._scheduleTimerId) {
+                    Mainloop.source_remove(this._scheduleTimerId);
+                    this._scheduleTimerId = null;
+                }
+            } catch (e) {
+                this._logger.error("Cleanup schedule timer: " + (e && e.message ? e.message : e));
             }
 
             // Clean up calibration timers and restore state
@@ -2102,27 +2305,21 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
                     this.poll_interval = restored;
                     this._calibration.originalPollInterval = null;
                 }
-                // Ensure calibration state is fully reset regardless of interruption
+                // Ensure calibration state is fully reset regardless of interruption.
+                // Safe to clear mutex here because GJS is single-threaded; any
+                // in-flight calibration operations would have completed or failed.
                 this._calibration.mutex = false;
                 this._calibration.phase = CAL_PHASE.NONE;
             } catch (e) {
                 this._logger.error("Cleanup calibration: " + (e && e.message ? e.message : e));
             }
 
-            // Invalidate backlight cache and reset adaptive calibration counters.
+            // Invalidate backlight cache.
             try {
                 this._backlightPath = null;
-                this._adaptiveCalibrationAboveCount = INITIAL_COUNTER_VALUE;
-                this._adaptiveCalibrationBelowCount = INITIAL_COUNTER_VALUE;
-                this._adaptiveCalibrationPeakLux = INITIAL_COUNTER_VALUE;
-                this._adaptiveCalibrationMinLux = Infinity;
-                this._luxWindow = [];
-                this._currentZone = ZONE.INDOOR;
-                this._zoneCounter = INITIAL_COUNTER_VALUE;
-                this._candidateZone = null;
                 this._lastAppliedLux = UNINITIALIZED_VALUE;
             } catch (e) {
-                this._logger.error("Cleanup adaptive calibration: " + (e && e.message ? e.message : e));
+                this._logger.error("Cleanup backlight cache: " + (e && e.message ? e.message : e));
             }
 
             // Finalize settings
@@ -2143,6 +2340,7 @@ class AdaptiveBrightnessApplet extends Applet.TextIconApplet {
 
 const LOG_LEVELS = { debug: 0, info: 1, error: 2 };
 const MAX_BYTES = 200 * 1024; // 200 KB rotation threshold
+const _textEncoder = new TextEncoder();
 
 var ABLogger = class ABLogger {
     /**
@@ -2196,7 +2394,7 @@ var ABLogger = class ABLogger {
     clearLog() {
         try {
             this._ensureDir();
-            const file = Gio.file_new_for_path(this._logPath);
+            const file = Gio.File.new_for_path(this._logPath);
             file.replace_contents(
                 new Uint8Array(0),
                 null, false,
@@ -2218,7 +2416,7 @@ var ABLogger = class ABLogger {
     ensureLogFile() {
         try {
             this._ensureDir();
-            const file = Gio.file_new_for_path(this._logPath);
+            const file = Gio.File.new_for_path(this._logPath);
             if (!file.query_exists(null)) {
                 file.replace_contents(
                     new Uint8Array(0),
@@ -2238,10 +2436,10 @@ var ABLogger = class ABLogger {
             this._ensureDir();
             this._rotateIfNeeded();
             const line = "[" + this._timestamp() + "] [" + levelLabel + "] " + msg + "\n";
-            const file = Gio.file_new_for_path(this._logPath);
+            const file = Gio.File.new_for_path(this._logPath);
             const stream = file.append_to(Gio.FileCreateFlags.NONE, null);
             try {
-                stream.write(new TextEncoder().encode(line), null);
+                stream.write(_textEncoder.encode(line), null);
             } finally {
                 stream.close(null);
             }
@@ -2251,7 +2449,7 @@ var ABLogger = class ABLogger {
     }
 
     _ensureDir() {
-        const dir = Gio.file_new_for_path(this._logDir);
+        const dir = Gio.File.new_for_path(this._logDir);
         if (!dir.query_exists(null)) {
             dir.make_directory_with_parents(null);
         }
@@ -2259,11 +2457,11 @@ var ABLogger = class ABLogger {
 
     _rotateIfNeeded() {
         try {
-            const file = Gio.file_new_for_path(this._logPath);
+            const file = Gio.File.new_for_path(this._logPath);
             if (!file.query_exists(null)) return;
             const info = file.query_info("standard::size", Gio.FileQueryInfoFlags.NONE, null);
             if (info.get_size() < MAX_BYTES) return;
-            const backup = Gio.file_new_for_path(this._logPath + ".1");
+            const backup = Gio.File.new_for_path(this._logPath + ".1");
             file.move(backup, Gio.FileCopyFlags.OVERWRITE, null, null);
         } catch (_) {
             // Intentional swallow — rotation failure must never crash the applet.
