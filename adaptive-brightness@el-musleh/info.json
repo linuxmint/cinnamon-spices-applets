@@ -1,0 +1,5 @@
+{
+  "name": "Adaptive Brightness",
+  "description": "Automatically adjusts screen brightness based on ambient light sensor",
+  "author": "el-musleh"
+}
