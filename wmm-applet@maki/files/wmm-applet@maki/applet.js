@@ -21,7 +21,7 @@ const Gtk = imports.gi.Gtk;
 const Gettext = imports.gettext;
 // Nota: No forzamos bindtextdomain/textdomain, confiamos en la herencia automática de Cinnamon.
 // Si fuera necesario forzarlo, las rutas correctas serían las comentadas abajo.
-Gettext.bindtextdomain('wmm-applet@maki', GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain('wmm-applet@maki', GLib.get_user_data_dir() + '/locale');
 // Gettext.bindtextdomain('cinnamon', '/usr/share/locale');
 // Gettext.textdomain('wmm-applet@maki');
 
@@ -221,12 +221,15 @@ class WMMApplet extends Applet.IconApplet {
      * Sincroniza el Applet con el estado real almacenado en JSON.
      */
     _refreshSettingsFromDisk() {
+        // Declarar variables reutilizables una sola vez
+        let s, content;
+
         try {
             if (!this.masterItem || !this.slider) return;
 
             // 1. Cargar Settings Globales
-            if (GLib.file_test(this.settingsPath, GLib.FileTest.EXISTS)) {
-                let [s, content] = GLib.file_get_contents(this.settingsPath);
+            try {
+                [s, content] = GLib.file_get_contents(this.settingsPath);
                 if (s) {
                     let config = JSON.parse(content.toString()).global;
                     this._currentMaxInterval = config.slideshow_max_interval || 60;
@@ -246,9 +249,17 @@ class WMMApplet extends Applet.IconApplet {
 
                     let isSpanned = config.spanned_enabled || false;
                     this.spannedSwitch.setToggleState(isSpanned);
+                    // Modo Debug
+                    this._debug_mode = config.debug_mode || false;
+                    if (this.settingsMenuItem) {
+                        this.settingsMenuItem.label.set_text(
+                            "WMM " + _("Settings") + (this._debug_mode ? " (Debug)" : "")
+                        );
+                    }
                 }
+            } catch (e) {
+                // settings.json no existe o no se puede leer
             }
-
             // 2. Cargar Favoritos Dinámicos
             this._refreshBookmarks();
 
@@ -262,9 +273,13 @@ class WMMApplet extends Applet.IconApplet {
         this.favItems.forEach(item => item.destroy());
         this.favItems = [];
 
-        if (!GLib.file_test(this.bookmarksPath, GLib.FileTest.EXISTS)) return;
+        let s, content;
+        try {
+            [s, content] = GLib.file_get_contents(this.bookmarksPath);
+        } catch (e) {
+            return;
+        }
 
-        let [s, content] = GLib.file_get_contents(this.bookmarksPath);
         if (s) {
             let bookmarks;
             try {
@@ -338,8 +353,8 @@ class WMMApplet extends Applet.IconApplet {
 
             // ScrollView con tamaño fijo y sin expandir
             let scrollView = new St.ScrollView({
-                hscrollbar_policy: Gtk.PolicyType.AUTOMATIC,
-                vscrollbar_policy: Gtk.PolicyType.AUTOMATIC,
+                hscrollbar_policy: St.PolicyType.AUTOMATIC,
+                vscrollbar_policy: St.PolicyType.AUTOMATIC,
                 style: 'border: none; background-color: transparent; padding: 0; margin: 0;'
             });
             scrollView.set_size(200, Math.min(keys.length * 38, 125));
@@ -350,6 +365,7 @@ class WMMApplet extends Applet.IconApplet {
             this.favItems.push(scrollItem);
         }
     }
+
     _confirmDeleteBookmark(name) {
         let args = [
             '--question',
@@ -380,6 +396,7 @@ class WMMApplet extends Applet.IconApplet {
             global.logError("WMM: Error al lanzar zenity: " + e.message);
         }
     }
+
     /**
      * BLOQUE 5: COMUNICACIÓN (JS -> MOTOR)
      */
@@ -446,7 +463,7 @@ class WMMApplet extends Applet.IconApplet {
             let pidPath = GLib.get_user_cache_dir() + "/wmm/pid_main.pid";
             let file = Gio.File.new_for_path(pidPath);
 
-            if (file.query_exists(null)) {
+            try {
                 let [success, content] = file.load_contents(null);
                 if (success) {
                     let pid = content.toString().trim();
@@ -455,6 +472,8 @@ class WMMApplet extends Applet.IconApplet {
                     Util.spawnCommandLine("rm " + pidPath);
                     global.logError(" [WMM] Applet eliminado. Proceso " + pid + " finalizado y rastro borrado.");
                 }
+            } catch (e) {
+                // El archivo PID no existe o no se puede leer
             }
         } catch (e) {
             global.logError("WMM Removal Error: " + e.message);
