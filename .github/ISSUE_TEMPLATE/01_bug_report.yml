@@ -55,6 +55,7 @@ body:
     - azan@fahri.nurul.id
     - backgroundroll@Sokawaii25 @Sokawaii25
     - bash-sensors@pkkk
+    - battery-view@ccarnivore @ccarnivore
     - batterymonitor@pdcurtis @pdcurtis
     - batterypower@joka42 @joka42
     - better-backgrounds@simonmicro @fredcw
@@ -133,6 +134,7 @@ body:
     - gpaste-reloaded@feuerfuchs.eu @feuerfuchs
     - gpumonitor@axel358 @axel358
     - gputemperature@silentage.com
+    - GraphicalSystemMonitor@batzkass @batzkass
     - graphicsCenter@scollins @collinss
     - hamster@projecthamster.wordpress.com
     - healthyeyes@ipolozov @GingerGigiCat
@@ -160,8 +162,10 @@ body:
     - mediacontrols@rbfraphael @rbfraphael
     - mem-monitor-text@datanom.net @icarter09
     - menu@csknet.org
+    - menueleven@djb @DJB
     - MessagingMenuV3@blub
     - mic-level@zamszowy @zamszowy
+    - mint-screenshot@khumnath @khumnath
     - Mint-Unsplash-Background@omidmaldar @omidmaldar
     - MonitorInputSource@klangman @klangman
     - moonphase@techi-freki @Techi-Freki
@@ -188,6 +192,7 @@ body:
     - octopussy@centurix @centurix
     - officeCenter@scollins @collinss
     - onekoToggle@kusch3l @kusch3l
+    - orloj@faragofr @faragofr
     - pa-equalizer@jschug.com
     - panel-tweaks@anaximeno @anaximeno
     - paneldo@beatlink
@@ -200,6 +205,7 @@ body:
     - placesCenter@scollins @collinss
     - pomodoro@gregfreeman.org @gfreeau
     - power-profiles@rcalixte @rcalixte
+    - powerman@dr.drummie @drdrummie
     - printers@linux-man @linux-man
     - ProcessMemoryMonitor@claudiux @claudiux
     - profile-switcher@pixunil @pixunil
@@ -279,6 +285,7 @@ body:
     - updates-notifier@zamszowy @zamszowy
     - uptime@vatanuki.kun
     - vboxlauncher@mockturtl @mockturtl
+    - vertical-speedmeter@2u841r @2u841r
     - vnstat@linuxmint.com @pdcurtis
     - VPN-Sentinel@claudiux @claudiux
     - vpnLookOut@claudiux @claudiux
@@ -288,6 +295,7 @@ body:
     - weather@mockturtl
     - web-developer-menu@infiniteshroom
     - website-notifier@cardsurf @cardsurf
+    - window-closer@stefan-schmidbauer @Stefan-Schmidbauer
     - window-list@sangorys @sangorys
     - window-list@zeripath.sdf-eu.org @zeripath
     - windowlist@cobinja.de @Cobinja
@@ -297,6 +305,7 @@ body:
     - workspace-name@willurd @willurd
     - xampp-panel@backids99
     - xsession@claudiux @claudiux
+    - yasm@sniemetz @sniemetz
   id: applet
   type: dropdown
   validations:
