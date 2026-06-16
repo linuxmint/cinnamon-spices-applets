@@ -1,5 +1,5 @@
 /* ============================================================
-   global-settings@brahim — Control Center
+   sound@brahim — Premium Sound Applet
    ============================================================ */
 
 /*
@@ -33,7 +33,7 @@
     min-width:          0 !important;
 }
 
-/* Tooltip */
+/* Tooltip - only for volume slider */
 .tooltip-label {
     border-radius: 6px;
     padding: 4px 9px;
@@ -49,7 +49,7 @@
 /* ── Win11 Dark shell: 0.30 translucent ── */
 .gs-shell,
 .gs-menu .gs-shell {
-    width: 460px;
+    width: 320px;
     border-radius: 4px;
     padding: 12px;
     background-color: rgba(26, 26, 26, 0.4) !important;
@@ -57,34 +57,97 @@
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important;
 }
 
-/* Dark theme child elements — visible but translucent */
-.gs-menu .gs-tile                { background-color: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; }
-.gs-menu .gs-tile:hover          { background-color: rgba(80,80,80,0.65) !important; }
-.gs-menu .gs-tile-on             { background-color: rgba(0,120,212,0.88) !important; }
-.gs-menu .gs-np-card             { background-color: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; }
-.gs-menu .gs-np-art              { background-color: rgba(80,80,80,0.50) !important; }
-.gs-menu .gs-media-btn           { background-color: rgba(245,255,255,0.50) !important; }
-.gs-menu .gs-media-btn:hover     { background-color: rgba(100,100,100,0.70) !important; }
-.gs-menu .gs-slider-card         { background-color: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; }
-.gs-menu .gs-sys-btn             { background-color: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; }
-.gs-menu .gs-sys-btn:hover       { background-color: rgba(80,80,80,0.65) !important; }
-.gs-menu .gs-sys-btn:active      { background-color: rgba(0,120,212,0.88) !important; }
-.gs-menu .gs-edit-btn            { background-color: rgba(20,20,20,0.5) !important; border-radius: 8px; }
-.gs-menu .gs-edit-btn:hover      { background-color: rgba(80,80,80,0.65) !important; }
+/* Dark theme child elements */
+.gs-menu .gs-np-card {
+    background-color: rgba(20, 20, 20, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.gs-menu .gs-slider-card {
+    background-color: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+}
+
+.gs-menu .gs-slider-label {
+    color: rgba(255, 255, 255, 0.60);
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.gs-menu .gs-slider-icon {
+    color: rgba(255, 255, 255, 0.60);
+}
+
+.gs-menu .gs-np-time {
+    color: rgba(255, 255, 255, 0.80) !important;
+    font-size: 9px;
+    min-width: 28px;
+}
+
+/* Volume icon button */
+.gs-menu .gs-vol-icon-btn {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 50% !important;
+    padding: 2px !important;
+}
+
+.gs-menu .gs-vol-icon-btn StIcon {
+    color: rgba(255, 255, 255, 0.70);
+}
+
+.gs-menu .gs-vol-icon-btn:hover StIcon {
+    color: rgba(255, 255, 255, 0.95);
+}
 
 /* ── Win11 Light shell: 0.30 translucent ── */
 .gs-menu .gs-theme-win11-light.gs-shell,
-.gs-theme-win11-light.gs-shell  { background-color: rgba(245,255,255,0.10) !important; border-color: border: 1px solid rgba(255, 255, 255, 0.4) !important;    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important; }
-.gs-menu .gs-theme-win11-light .gs-tile       { background-color: rgba(245,255,255,0.4) !important; border-radius: 8px;     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important; }
-.gs-menu .gs-theme-win11-light .gs-tile:hover { background-color: rgba(245,255,255,0.7) !important; }
-.gs-menu .gs-theme-win11-light .gs-tile-on    { background-color: rgba(0,103,184,0.88) !important; }
-.gs-menu .gs-theme-win11-light .gs-np-card    { background-color: rgba(245,255,255,0.4) !important; border-radius: 8px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important; }
-.gs-menu .gs-theme-win11-light .gs-media-btn  { background-color: rgba(200,200,200,0.50) !important; }
-.gs-menu .gs-theme-win11-light .gs-slider-card { background-color: rgba(245,255,255,0.4) !important; border-radius: 8px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important; }
-.gs-menu .gs-theme-win11-light .gs-sys-btn    { background-color: rgba(245,255,255,0.4) !important; border-radius: 8px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important;  }
-.gs-menu .gs-theme-win11-light .gs-sys-btn:hover  { background-color: rgba(245,255,255,0.72) !important; }
-.gs-menu .gs-theme-win11-light .gs-sys-btn:active { background-color: rgba(0,103,184,0.85) !important; }
-.gs-menu .gs-theme-win11-light .gs-edit-btn   { background-color: rgba(220,220,220,0.50) !important; border-radius: 8px; }
+.gs-theme-win11-light.gs-shell {
+    background-color: rgba(245, 245, 245, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important;
+    border-radius: 4px;
+}
+
+.gs-menu .gs-theme-win11-light .gs-np-card {
+    background-color: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.gs-menu .gs-theme-win11-light .gs-slider-card {
+    background-color: rgba(255, 255, 255, 0.65) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    border-radius: 8px;
+}
+
+.gs-menu .gs-theme-win11-light .gs-slider-label {
+    color: rgba(0, 0, 0, 0.60);
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.gs-menu .gs-theme-win11-light .gs-slider-icon {
+    color: rgba(0, 0, 0, 0.60);
+}
+
+.gs-menu .gs-theme-win11-light .gs-np-time {
+    color: rgba(255, 255, 255, 0.80) !important;
+    font-size: 9px;
+    min-width: 28px;
+}
+
+.gs-menu .gs-theme-win11-light .gs-vol-icon-btn StIcon {
+    color: rgba(0, 0, 0, 0.60);
+}
+
+.gs-menu .gs-theme-win11-light .gs-vol-icon-btn:hover StIcon {
+    color: rgba(0, 0, 0, 0.85);
+}
 
 /* ── Desktop theme: fully transparent shell, no backgrounds ──
    All styling comes from your cinnamon.css snippet.           */
@@ -94,317 +157,165 @@
     border-color: transparent !important;
     box-shadow: none !important;
 }
-.gs-menu .gs-theme-desktop .gs-tile,
+
 .gs-menu .gs-theme-desktop .gs-np-card,
-.gs-menu .gs-theme-desktop .gs-media-btn,
-.gs-menu .gs-theme-desktop .gs-slider-card,
-.gs-menu .gs-theme-desktop .gs-sys-btn,
-.gs-menu .gs-theme-desktop .gs-edit-btn { background-color: transparent !important; }
-
-.gs-tile {
-    border-radius: 8px;
-    padding: 8px 6px;
-    min-width: 110px;
-    background-color: rgba(55, 55, 55, 0.80) !important;
-    border: 1px solid rgba(255, 255, 255, 0.10);
-}
-.gs-tile:hover {
-    background-color: rgba(75, 75, 75, 0.90) !important;
-}
-.gs-tile-on {
-    background-color: rgba(0, 120, 212, 0.90) !important;
-    border-color: rgba(0, 120, 212, 0.95);
+.gs-menu .gs-theme-desktop .gs-slider-card {
+    background-color: transparent !important;
+    border-color: transparent !important;
 }
 
-.gs-tile-icon  { icon-size: 16px; color: rgba(245,255,255,0.90); }
-.gs-tile-label { font-size: 10px; font-weight: bold; color: rgba(245,255,255,0.90); }
-.gs-tile-sub   { font-size: 8.5px; color: rgba(245,255,255,0.40); }
-.gs-tile-on .gs-tile-icon,
-.gs-tile-on .gs-tile-label { color: white; }
-.gs-tile-on .gs-tile-sub   { color: rgba(245,255,255,0.85); }
-
-.gs-tile-sm            { min-width: 70px; padding: 6px 4px; border-radius: 8px; }
-.gs-tile-sm .gs-tile-icon  { icon-size: 14px; }
-.gs-tile-sm .gs-tile-label { font-size: 9px; }
-
-/* Now Playing */
-.gs-np-card {
-    background-color: rgba(55, 55, 55, 0.80) !important;
-    border-radius: 8px;
-    padding: 8px;
-    border: 1px solid rgba(245,255,255,0.10);
+.gs-menu .gs-theme-desktop .gs-slider-label {
+    color: rgba(255, 255, 255, 0.70);
 }
-.gs-np-art {
-    width: 44px; height: 44px;
-    border-radius: 8px;
-    background-color: rgba(80, 80, 80, 0.80) !important;
-}
-.gs-np-label  { font-size: 8px; font-weight: bold; color: rgba(245,255,255,0.50); }
-.gs-np-title  { font-size: 10px; font-weight: bold; color: rgba(245,255,255,0.90); }
-.gs-np-artist { font-size: 8.5px; color: rgba(245,255,255,0.40); }
 
-/* Media buttons */
-.gs-media-btn {
-    border-radius: 50%;
-    width: 30px; height: 30px;
-    background-color: rgba(245,255,255, 0.80) !important;
-    border: 1px solid rgba(245,255,255,0.12);
+.gs-menu .gs-theme-desktop .gs-slider-icon {
+    color: rgba(255, 255, 255, 0.70);
 }
-.gs-media-btn:hover    { background-color: rgba(100,100,100,0.90) !important; }
-.gs-media-btn-play     { width: 36px; height: 36px; }
-.gs-media-btn StIcon,
-.gs-media-btn-play StIcon { color: rgba(245,255,255,0.90); }
 
-/* Slider cards */
+.gs-menu .gs-theme-desktop .gs-np-time {
+    color: rgba(255, 255, 255, 0.80) !important;
+}
+
+.gs-menu .gs-theme-desktop .gs-vol-icon-btn StIcon {
+    color: rgba(255, 255, 255, 0.70);
+}
+
+/* Slider cards - shared styles */
 .gs-slider-card {
-    background-color: rgba(55, 55, 55, 0.80) !important;
-    border-radius: 8px;
     padding: 10px 14px;
-    border: 1px solid rgba(245,255,255,0.10);
-}
-.gs-slider-label { font-size: 10px; font-weight: bold; color: rgba(245,255,255,0.40); }
-.gs-slider-icon  { color: rgba(245,255,255,0.50); }
-
-/* Separator */
-.gs-sep {
-    height: 1px;
-    background-color: rgba(245,255,255,0.10);
-    margin: 6px 0;
+    spacing: 6px;
 }
 
-/* System buttons */
-.gs-sys-btn {
-    border-radius: 8px;
-    width: 44px; height: 44px;
-    background-color: rgba(55, 55, 55, 0.80) !important;
-    border: 1px solid rgba(245,255,255,0.10);
-}
-.gs-sys-btn:hover  { background-color: rgba(75,75,75,0.90) !important; }
-.gs-sys-btn:active { background-color: rgba(0,120,212,0.90) !important; }
-.gs-sys-btn StIcon        { color: rgba(245,255,255,0.90); icon-size: 18px; }
-.gs-sys-btn:active StIcon { color: white; }
-
-/* Settings button */
-.gs-edit-btn {
-    border-radius: 8px;
-    padding: 5px 16px;
-    background-color: rgba(55, 55, 55, 0.80) !important;
-    border: 1px solid rgba(245,255,255,0.12);
-    color: rgba(245,255,255,0.40);
+.gs-slider-label {
     font-size: 10px;
+    font-weight: bold;
 }
-.gs-edit-btn:hover { background-color: rgba(75,75,75,0.90) !important; color: white; }
+
+/* Now Playing card - shared styles */
+.gs-np-card {
+    padding: 0;
+    spacing: 0;
+    border-radius: 12px;
+}
+
+.gs-np-card .gs-np-art-canvas {
+    min-height: 200px;
+}
+
+/* Volume icon button - shared */
+.gs-vol-icon-btn {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 50% !important;
+    padding: 2px !important;
+}
+
+.gs-vol-icon-btn StIcon {
+    icon-size: 18px;
+}
 
 /* ═══════════════════════════════════════════════════
-   WINDOWS 11 LIGHT
-   Shell: exactly 0.30 transparent — always, regardless
-   of what cinnamon.css does underneath.
-   !important on background ensures cinnamon.css cannot
-   override it even via .popup-menu-content inheritance.
+   MEDIA CONTROL BUTTONS - ALWAYS WHITE
+   These stay white regardless of light/dark theme
    ═══════════════════════════════════════════════════ */
-.gs-theme-win11-light.gs-shell {
-    background-color: rgba(240, 240, 240, 0.10) !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important;
-    border-radius: 4px;
-}
 
-.gs-theme-win11-light .gs-tile {
-    background-color: rgba(255, 255, 255, 0.55) !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    border-radius: 8px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important;
-}
-.gs-theme-win11-light .gs-tile:hover {
-    background-color: rgba(255, 255, 255, 0.75) !important;
-}
-.gs-theme-win11-light .gs-tile-on {
-    background-color: rgba(0, 103, 184, 0.88) !important;
-    border-color: rgba(0, 103, 184, 0.95);
-}
-.gs-theme-win11-light .gs-tile-on .gs-tile-icon,
-.gs-theme-win11-light .gs-tile-on .gs-tile-label { color: white; }
-.gs-theme-win11-light .gs-tile-on .gs-tile-sub   { color: rgba(245,255,255,0.85); }
-.gs-theme-win11-light .gs-tile-icon,
-.gs-theme-win11-light .gs-tile-label { color: rgba(0,0,0,0.85); }
-.gs-theme-win11-light .gs-tile-sub   { color: rgba(0,0,0,0.55); }
-
-.gs-theme-win11-light .gs-np-card {
-    background-color: rgba(255, 255, 255, 0.55) !important;
-    border-radius: 8px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important; 
-}
-.gs-theme-win11-light .gs-np-title  { color: rgba(0,0,0,0.85); }
-.gs-theme-win11-light .gs-np-label  { color: rgba(0,0,0,0.6); }
-.gs-theme-win11-light .gs-np-artist { color: rgba(0,0,0,0.60); }
-.gs-theme-win11-light .gs-media-btn {
-    background-color: rgba(200, 200, 200, 0.60) !important;
-    border-color: rgba(0,0,0,0.10);
-}
-.gs-theme-win11-light .gs-media-btn:hover {
-    background-color: rgba(180,180,180,0.80) !important;
-}
-.gs-theme-win11-light .gs-media-btn StIcon,
-.gs-theme-win11-light .gs-media-btn-play StIcon { color: rgba(245,255,255,0.80); }
-
-.gs-theme-win11-light .gs-slider-card {
-    background-color: rgba(255, 255, 255, 0.55) !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    border-radius: 8px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important;
-}
-.gs-theme-win11-light .gs-slider-label { color: rgba(0,0,0,0.60); }
-.gs-theme-win11-light .gs-slider-icon  { color: rgba(0,0,0,0.6); }
-
-.gs-theme-win11-light .gs-sep { background-color: rgba(0,0,0,0.10); }
-
-.gs-theme-win11-light .gs-sys-btn {
-    background-color: rgba(255, 255, 255, 0.55) !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    border-radius: 8px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important; 
-}
-.gs-theme-win11-light .gs-sys-btn:hover  { background-color: rgba(245,255,255,0.80) !important; }
-.gs-theme-win11-light .gs-sys-btn:active { background-color: rgba(0,103,184,0.85) !important; }
-.gs-theme-win11-light .gs-sys-btn StIcon        { color: rgba(0,0,0,0.80); }
-.gs-theme-win11-light .gs-sys-btn:active StIcon { color: white; }
-
-.gs-theme-win11-light .gs-edit-btn {
-    background-color: rgba(220, 220, 220, 0.60) !important;
-    border: 1px solid rgba(0,0,0,0.10);
-    color: rgba(0,0,0,0.60);
-    border-radius: 8px;
-}
-.gs-theme-win11-light .gs-edit-btn:hover {
-    background-color: rgba(200,200,200,0.80) !important;
-    color: black;
-}
-
-
-
-/* Media flat buttons — prev/next: NO background, NO border */
+/* Prev / Next — transparent, white icons */
 .gs-media-flat {
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
+    min-width: 40px;
+    min-height: 40px;
     background-color: transparent !important;
     border: none !important;
 }
+
 .gs-media-flat:hover {
-    background-color: rgba(245,255,255,0.15) !important;
-}
-.gs-media-flat StIcon {
-    color: rgba(245,255,255,0.88);
+    background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
-/* Play button — filled circle */
+.gs-media-flat:active {
+    background-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+.gs-media-flat StIcon {
+    color: rgba(255, 255, 255, 0.90) !important;
+    icon-size: 16px;
+}
+
+/* Play — semi-transparent white circle, white icon */
 .gs-media-play-circle {
     border-radius: 50%;
-    width: 46px;
-    height: 46px;
-    background-color: rgba(245,255,255,0.22) !important;
+    min-width: 56px;
+    min-height: 56px;
+    background-color: rgba(255, 255, 255, 0.20) !important;
     border: none !important;
+    padding: 0;
+    margin: 0 12px;
 }
+
 .gs-media-play-circle:hover {
-    background-color: rgba(245,255,255,0.35) !important;
+    background-color: rgba(255, 255, 255, 0.35) !important;
 }
+
 .gs-media-play-circle:active {
-    background-color: rgba(245,255,255,0.50) !important;
+    background-color: rgba(255, 255, 255, 0.50) !important;
 }
+
 .gs-media-play-circle StIcon {
-    color: white;
+    color: white !important;
+    icon-size: 28px;
 }
 
-/* Time labels in progress row */
-.gs-np-time {
-    font-size: 9px;
-    color: rgba(245,255,255,0.50);
-    min-width: 30px;
+/* When play button uses accent color (from album art) */
+.gs-media-play-circle-accent {
+    border-radius: 50%;
+    min-width: 56px;
+    min-height: 56px;
+    border: none !important;
+    padding: 0;
+    margin: 0 12px;
 }
 
-/* NP art canvas — ensure it fills height */
-.gs-np-art-canvas {
-    min-height: 180px;
+.gs-media-play-circle-accent StIcon {
+    color: white !important;
+    icon-size: 28px;
 }
 
-/* Light theme media controls */
-.gs-theme-win11-light .gs-media-flat StIcon        { color: rgba(245,255,255,0.80); }
-.gs-theme-win11-light .gs-media-flat:hover         { background-color: rgba(245,255,255,0.08) !important; }
-.gs-theme-win11-light .gs-media-play-circle        { background-color: rgba(245,255,255,0.12) !important; }
-.gs-theme-win11-light .gs-media-play-circle StIcon { color: rgba(245,255,255,0.88); }
-.gs-theme-win11-light .gs-np-time                  { color: rgba(245,255,255,0.4); }
-
-/* ══════════════════════════════════════════════════════
-   NOW PLAYING CARD — premium redesign (clean version)
-   ══════════════════════════════════════════════════════ */
-
-/* Card: no own background — art canvas fills it entirely */
-.gs-np-card,
-.gs-menu .gs-np-card {
-    background-color: transparent !important;
-    border:           none !important;
-    border-radius:    10px;
-    padding:          0 !important;
+/* Light theme - media buttons still white */
+.gs-theme-win11-light .gs-media-flat StIcon {
+    color: rgba(255, 255, 255, 0.90) !important;
 }
 
-/* Art canvas: fills height automatically via expand:true */
-/* border-radius clipping done in Cairo */
-
-/* Progress bar time labels */
-.gs-np-time {
-    font-size:  9px;
-    color:      rgba(245,255,255,0.55);
-    min-width:  28px;
+.gs-theme-win11-light .gs-media-play-circle {
+    background-color: rgba(255, 255, 255, 0.20) !important;
 }
 
-/* Prev / Next — transparent, no border */
-.gs-media-flat {
-    border-radius:    50%;
-    width:  38px;
-    height: 38px;
-    background-color: transparent !important;
-    border:           none !important;
+.gs-theme-win11-light .gs-media-play-circle:hover {
+    background-color: rgba(255, 255, 255, 0.35) !important;
 }
-.gs-media-flat:hover  { background-color: rgba(245,255,255,0.15) !important; }
-.gs-media-flat:active { background-color: rgba(245,255,255,0.28) !important; }
-.gs-media-flat StIcon { color: rgba(245,255,255,0.90); icon-size: 16px; }
 
-/* Play — filled white circle, centred */
-.gs-media-play-circle {
-    border-radius:    50%;
-    width:  50px;
-    height: 50px;
-    background-color: rgba(245,255,255,0.90) !important;
-    border:           none !important;
+.gs-theme-win11-light .gs-media-play-circle StIcon {
+    color: white !important;
 }
-.gs-media-play-circle:hover  { background-color: rgba(245,255,255,1.0) !important; }
-.gs-media-play-circle:active { background-color: rgba(245,255,255,0.70) !important; }
-.gs-media-play-circle StIcon { color: rgba(0,0,0,0.85); icon-size: 22px; }
 
-/* Large tile height */
-.gs-tile { min-height: 52px; }
+/* Desktop theme - media buttons still white */
+.gs-theme-desktop .gs-media-flat StIcon {
+    color: rgba(255, 255, 255, 0.90) !important;
+}
 
-/* Small tiles */
-.gs-tile-sm { min-height: 42px; padding: 5px 4px; border-radius: 8px; }
-.gs-tile-sm .gs-tile-icon  { icon-size: 13px; }
-.gs-tile-sm .gs-tile-label { font-size: 8.5px; }
-.gs-tile-sm .gs-tile-sub   { font-size: 7.5px; }
+.gs-theme-desktop .gs-media-play-circle {
+    background-color: rgba(255, 255, 255, 0.20) !important;
+}
 
+.gs-theme-desktop .gs-media-play-circle:hover {
+    background-color: rgba(255, 255, 255, 0.35) !important;
+}
 
-/* ── FIX: Win11 Dark Now Playing card background ── */
-.gs-theme-win11-dark .gs-np-card,
-.gs-menu .gs-theme-win11-dark.gs-shell .gs-np-card {
-    background-color: rgba(20,20,20, 0.6) !important;
-    border: 1px solid rgba(255, 255, 255, 0.10) !important;
-    border-radius: 8px;
+.gs-theme-desktop .gs-media-play-circle StIcon {
+    color: white !important;
 }
 
 /* ── macOS pill slider overrides ── */
 /* The DrawingArea IS the pill — no extra bg needed on the card */
-.gs-slider-card {
-    padding: 10px 14px;
-}
-/* Remove old thin-track CSS that might conflict */
 .gs-slider-card .slider {
     height: auto;
     background-color: transparent;

@@ -9,24 +9,14 @@
       "type": "page",
       "title": "Appearance",
       "sections": [
-        "theme-section",
-        "gtk-section",
-        "tooltip-section"
+        "theme-section"
       ]
     },
     "theme-section": {
       "type": "section",
-      "title": "Control Center Theme",
+      "title": "Sound Applet Theme",
       "keys": [
         "color-theme"
-      ]
-    },
-    "gtk-section": {
-      "type": "section",
-      "title": "Dark / Light Mode GTK Themes",
-      "keys": [
-        "custom-light-gtk",
-        "custom-dark-gtk"
       ]
     },
     "panel-page": {
@@ -44,18 +34,11 @@
         "custom-icon",
         "panel-label"
       ]
-    },
-    "tooltip-section": {
-      "type": "section",
-      "title": "Tooltips",
-      "keys": [
-        "show-tooltips"
-      ]
     }
   },
   "color-theme": {
     "type": "combobox",
-    "default": "desktop",
+    "default": "win11-dark",
     "description": "Theme",
     "tooltip": "Light and Dark use Windows 11 Fluent glass style. Desktop theme uses your cinnamon.css (add the CSS snippet to it).",
     "options": {
@@ -64,41 +47,23 @@
       "Desktop theme (cinnamon.css)": "desktop"
     }
   },
-  "custom-light-gtk": {
-    "type": "entry",
-    "default": "Mint-Y-Aqua",
-    "description": "Light GTK theme name",
-    "tooltip": "GTK theme to apply when switching to Light Mode (must be installed)"
-  },
-  "custom-dark-gtk": {
-    "type": "entry",
-    "default": "Mint-Y-Dark-Aqua",
-    "description": "Dark GTK theme name",
-    "tooltip": "GTK theme to apply when switching to Dark Mode (must be installed)"
-  },
   "use-custom-icon": {
     "type": "switch",
     "default": false,
     "description": "Use custom panel icon",
-    "tooltip": "Replace the default symbolic icon"
+    "tooltip": "Replace the default audio-speakers-symbolic icon"
   },
   "custom-icon": {
     "dependency": "use-custom-icon",
     "type": "iconfilechooser",
     "default": "",
     "description": "Panel icon",
-    "tooltip": "Custom icon for the panel button"
+    "tooltip": "Custom icon for the panel button (use symbolic icons for best results)"
   },
   "panel-label": {
     "type": "entry",
     "default": "",
     "description": "Panel label text",
     "tooltip": "Text next to the icon. Leave empty to hide."
-  },
-  "show-tooltips": {
-    "type": "switch",
-    "default": true,
-    "description": "Show tooltips on hover",
-    "tooltip": "Show or hide hover tooltips on all buttons and tiles"
   }
 }
