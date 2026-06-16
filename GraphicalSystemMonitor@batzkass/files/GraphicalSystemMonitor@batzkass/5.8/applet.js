@@ -242,7 +242,7 @@ class TheApplet extends Applet.Applet {
     ********************/
     on_applet_clicked() {
         if (this.cfg_onclick_program)
-            Util.spawn_async([this.cfg_onclick_program]);
+            Util.spawn_async(this.cfg_onclick_program.split(" "));
     }
 
     on_applet_removed_from_panel() {
