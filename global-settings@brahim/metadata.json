@@ -1,6 +1,10 @@
 {
-    "uuid": "global-settings@brahim",
-    "name": "Global Settings",
-    "description": "Control Center Applet",
-    "icon": "preferences-system"
+  "uuid": "global-settings@brahim",
+  "name": "Global Settings",
+  "description": "macOS Tahoe / Windows 11 style Control Center — Wi-Fi, Bluetooth, Sound, Brightness, Dark Mode, Media controls, System buttons.",
+  "version": "1.0.0",
+  "cinnamon-version": ["5.0", "5.2", "5.4", "5.6", "5.8", "6.0", "6.2", "6.4"],
+  "max-instances": "1",
+  "icon": "preferences-system",
+  "author": "Brahim Salem"
 }
