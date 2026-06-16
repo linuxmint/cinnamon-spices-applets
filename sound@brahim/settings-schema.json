@@ -1,0 +1,69 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "appearance-page",
+      "panel-page"
+    ],
+    "appearance-page": {
+      "type": "page",
+      "title": "Appearance",
+      "sections": [
+        "theme-section"
+      ]
+    },
+    "theme-section": {
+      "type": "section",
+      "title": "Sound Applet Theme",
+      "keys": [
+        "color-theme"
+      ]
+    },
+    "panel-page": {
+      "type": "page",
+      "title": "Panel",
+      "sections": [
+        "panel-section"
+      ]
+    },
+    "panel-section": {
+      "type": "section",
+      "title": "Panel Button",
+      "keys": [
+        "use-custom-icon",
+        "custom-icon",
+        "panel-label"
+      ]
+    }
+  },
+  "color-theme": {
+    "type": "combobox",
+    "default": "win11-dark",
+    "description": "Theme",
+    "tooltip": "Light and Dark use Windows 11 Fluent glass style. Desktop theme uses your cinnamon.css (add the CSS snippet to it).",
+    "options": {
+      "Light (Windows 11)": "win11-light",
+      "Dark (Windows 11)": "win11-dark",
+      "Desktop theme (cinnamon.css)": "desktop"
+    }
+  },
+  "use-custom-icon": {
+    "type": "switch",
+    "default": false,
+    "description": "Use custom panel icon",
+    "tooltip": "Replace the default audio-speakers-symbolic icon"
+  },
+  "custom-icon": {
+    "dependency": "use-custom-icon",
+    "type": "iconfilechooser",
+    "default": "",
+    "description": "Panel icon",
+    "tooltip": "Custom icon for the panel button (use symbolic icons for best results)"
+  },
+  "panel-label": {
+    "type": "entry",
+    "default": "",
+    "description": "Panel label text",
+    "tooltip": "Text next to the icon. Leave empty to hide."
+  }
+}
