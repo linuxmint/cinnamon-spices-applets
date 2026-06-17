@@ -1310,6 +1310,7 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
     this.settings.bind("volume-magnetic-on", "magnetic25On");
     this.settings.bind("volume-step", "volume_step");
     this.settings.bind("volume-at-startup", "volume_at_startup");
+    this.settings.bind("waiting-time", "waiting_time");
     this.settings.bind("volume-percentage", "percentage");
 
     this.settings.bind("show-title-and-version", "show_version");
@@ -3604,60 +3605,65 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
     //log("start_mpv_radio: " + _id);
     if (_id.length === 0) return;
 
-    this.last_radio_listened_to = _id;
+    let wt = setTimeout( () => {
+      clearTimeout(wt);
+      this.last_radio_listened_to = _id;
 
-    let recentRadios = this.recentRadios; // this.settings.getValue("recentRadios");
+      let recentRadios = this.recentRadios; // this.settings.getValue("recentRadios");
 
-    let index_of_id = recentRadios.indexOf(_id);
+      let index_of_id = recentRadios.indexOf(_id);
 
-    while (index_of_id >= 0) {
-      recentRadios.splice(index_of_id, 1); // Removes _id from the list of recent radios.
-      index_of_id = recentRadios.indexOf(_id);
-    }
+      while (index_of_id >= 0) {
+        recentRadios.splice(index_of_id, 1); // Removes _id from the list of recent radios.
+        index_of_id = recentRadios.indexOf(_id);
+      }
 
-    recentRadios.unshift(_id);
+      recentRadios.unshift(_id);
 
-    while (recentRadios.length > 12) recentRadios.pop();
+      while (recentRadios.length > 12) recentRadios.pop();
 
-    this.recentRadios = recentRadios; // this.settings.setValue("recentRadios", recentRadios);
+      this.recentRadios = recentRadios; // this.settings.setValue("recentRadios", recentRadios);
 
-    this.radioId = _id;
+      this.radioId = _id;
 
-    this.icon_or_favicon(_id);
+      this.icon_or_favicon(_id);
 
-    this.progress = 10/REFRESH_INTERVAL;
-    this.interval = setInterval(() => { this.on_progress_change(); }, 100);  // 100 ms.
+      this.progress = 10/REFRESH_INTERVAL;
+      this.interval = setInterval(() => { this.on_progress_change(); }, 100);  // 100 ms.
 
-    this.appletRunning = true;
+      this.appletRunning = true;
 
-    timeout_add_seconds(1, () => {
-      this.monitor_mpv_title();
-      //~ return this.titleMonitor == null
-      return this.appletRunning;
-    });
-    timeout_add_seconds(1, () => { this.monitor_r30stop(); return this.r30stopMonitor == null });
-    timeout_add_seconds(1, () => { this.monitor_r30next(); return this.r30nextMonitor == null });
-    timeout_add_seconds(1, () => { this.monitor_r30previous(); return this.r30previousMonitor == null });
+      timeout_add_seconds(1, () => {
+        this.monitor_mpv_title();
+        //~ return this.titleMonitor == null
+        return this.appletRunning;
+      });
+      timeout_add_seconds(1, () => { this.monitor_r30stop(); return this.r30stopMonitor == null });
+      timeout_add_seconds(1, () => { this.monitor_r30next(); return this.r30nextMonitor == null });
+      timeout_add_seconds(1, () => { this.monitor_r30previous(); return this.r30previousMonitor == null });
 
-    this.set_MPV_ALIAS();
-    spawnCommandLine("%s %s".format(this.MPV_ALIAS, _id));
-    this.mpvStatus = "PLAY";
+      this.set_MPV_ALIAS();
+      spawnCommandLine("%s %s".format(this.MPV_ALIAS, _id));
+      this.mpvStatus = "PLAY";
 
-    this._connect_signals();
+      this._connect_signals();
 
-    if (this.settings.getValue("notif-station-change") === true) {
-      this.radio_notify(_("Playing %s%s").format(this.get_radio_name(_id), this.codecAndBitrate));
-    }
+      if (this.settings.getValue("notif-station-change") === true) {
+        this.radio_notify(_("Playing %s%s").format(this.get_radio_name(_id), this.codecAndBitrate));
+      }
 
-    this.set_radio_tooltip_to_default_one();
+      this.set_radio_tooltip_to_default_one();
 
 
-    this._increase_click_number(_id);
+      this._increase_click_number(_id);
 
-    _id = null;
-    recentRadios = null;
+      _id = null;
+      recentRadios = null;
 
-    //~ this.appletRunning = true;
+      //~ this.appletRunning = true;
+      },
+      this.waiting_time
+    );
   }
 
   stop_mpv_radio(notify_user=true) {
@@ -5728,7 +5734,7 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
           this.settingsWindow = window;
           app.connect("windows-changed", () => { this.settingsWindow = undefined; });
         }
-      }, 1000);
+      }, 2000);
     }
     // Returns the pid:
     return pid;
