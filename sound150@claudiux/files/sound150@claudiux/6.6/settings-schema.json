@@ -197,6 +197,7 @@
       "title": "OSD",
       "keys": [
         "showMediaKeysOSD",
+        "showOSDonFullscreen",
         "showOSDonStartup",
         "showVolumeValue",
         "showPercent",
@@ -740,6 +741,12 @@
     "type": "switch",
     "default": true,
     "description": "Whether or not to show the media keys OSD"
+  },
+  "showOSDonFullscreen": {
+    "type": "switch",
+    "default": false,
+    "description": "Show the OSD even when your app is in full-screen mode",
+    "dependency": "showMediaKeysOSD"
   },
   "showOSDonStartup": {
     "type": "switch",

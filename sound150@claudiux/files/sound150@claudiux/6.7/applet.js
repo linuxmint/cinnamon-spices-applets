@@ -355,6 +355,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
 
         this.settings.bind("muteSoundOnClosing", "muteSoundOnClosing");
         this.settings.bind("startupVolume", "startupVolume");
+        this.settings.bind("showOSDonFullscreen", "showOSDonFullscreen");
         this.settings.bind("showOSDonStartup", "showOSDonStartup");
         this.settings.bind("showPercent", "showPercent", () => {
             this.PERCENT_CHAR = (this.showPercent) ? _("%") : "";
@@ -777,6 +778,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
     }
 
     is_fullscreen() {
+        if (this.showOSDonFullscreen) return false;
         return global.display.get_monitor_in_fullscreen(this.panel.monitorIndex);
     }
 
