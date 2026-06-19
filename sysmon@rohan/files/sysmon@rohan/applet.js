@@ -133,13 +133,17 @@ MyApplet.prototype = {
   },
 
   _update_display: function() {
-    this.cpuLabel.visible = this.displayCpu;
-    this.memLabel.visible = this.displayRam;
+   this.cpuLabel.visible = this.displayCpu;
+   this.memLabel.visible = this.displayRam;
+   this.memIcon.visible = this.displayRamIcon;
+   this.cpuIcon.visible = this.displayCpuIcon;
   },
 
   _bind_settings: function() {
     this.settings.bindProperty(Settings.BindingDirection.IN, "displayCpu", "displayCpu", this._update_display.bind(this), null);
     this.settings.bindProperty(Settings.BindingDirection.IN, "displayRam", "displayRam", this._update_display.bind(this), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, "displayRamIcon", "displayRamIcon", this._update_display.bind(this), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, "displayCpuIcon", "displayCpuIcon", this._update_display.bind(this), null);
     this.settings.bindProperty(Settings.BindingDirection.IN, "updateInterval", "updateInterval", null, null);
     this.settings.bindProperty(Settings.BindingDirection.IN, "toggleRam", "toggleRam", null, null);
   },
