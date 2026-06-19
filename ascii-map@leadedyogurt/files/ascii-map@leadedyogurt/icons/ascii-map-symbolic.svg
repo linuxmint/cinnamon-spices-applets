@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="57.867138mm"
+   height="58.510765mm"
+   viewBox="0 0 57.867138 58.510765"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient902">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop900" />
+    </linearGradient>
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-51.839238,-83.742651)">
+    <text
+       xml:space="preserve"
+       style="font-size:78.1143px;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       x="57.422531"
+       y="146.59232"
+       id="text6956"
+       transform="scale(1.0359925,0.96525796)"><tspan
+         id="tspan6954"
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-dasharray:none;stroke-opacity:1"
+         x="57.422531"
+         y="146.59232">á</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:0;stroke-width:6.00001;stroke-linecap:round;stroke-dasharray:none;paint-order:fill markers stroke"
+       id="rect1174"
+       width="57.867138"
+       height="58.510754"
+       x="51.839237"
+       y="83.742653" />
+  </g>
+</svg>
