@@ -29,5 +29,11 @@
     , "default": true
     , "description": "Show notification when launching SSH connection"
     , "tooltip": "Display a notification message when SSH terminal is launched"
+    },
+    "openMenuKey":
+    { "type": "keybinding"
+    , "default": ""
+    , "description": "Keyboard shortcut to open the SSH menu"
+    , "tooltip": "Set a global keyboard shortcut to open the SSH launcher menu"
     }
 }
