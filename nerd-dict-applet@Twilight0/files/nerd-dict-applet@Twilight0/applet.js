@@ -115,6 +115,8 @@ MyApplet.prototype = {
             this.settings.bind("freeCommand", "_freeCommand", this.settings_changed);
             this.settings.bind("env", "_env", this.settings_changed);
 
+            this._lastModelRoot = this._modelRoot;
+
             // Set up UI
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -155,7 +157,10 @@ MyApplet.prototype = {
     },
 
     settings_changed: function () {
-        this._updateSchemaOptions();
+        if (this._modelRoot !== this._lastModelRoot) {
+            this._lastModelRoot = this._modelRoot;
+            this._updateSchemaOptions();
+        }
         this._updateUI();
     },
 
