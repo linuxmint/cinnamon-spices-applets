@@ -1882,15 +1882,17 @@ var MemDataProvider = class MemDataProvider {
                 1 - memInfo["MemUsed"] / memInfo["MemTotal"]
             ]
         } else { // System Monitor: https://github.com/JTourteau/gnome-system-monitor/blob/main/extension.js
-            let memAvailable = 1 * memInfo["MemAvailable"];
-            let memUsed = 1 * this.memTotal - memAvailable;
+            let memFree = 1 * memInfo["MemFree"];
             let memBuffers = 1 * memInfo["Buffers"];
             let memCached = 1 * memInfo["Cached"];
+            // Used = application memory only (excludes buffers/cache) so the four
+            // segments partition MemTotal exactly and Free never goes negative.
+            let memUsed = 1 * this.memTotal - memFree - memBuffers - memCached;
             this.currentReadings = [
                 memUsed / this.memTotal,
                 memCached / this.memTotal,
                 memBuffers / this.memTotal,
-                1.0 - ((memUsed + memBuffers + memCached) / this.memTotal)
+                memFree / this.memTotal
             ]
         }
     }
