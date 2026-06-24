@@ -1,3 +1,7 @@
+### v3.13.0~20260624
+  * For each radio station, users can set the number of seconds during which the sound is muted to skip ads when they start listening to that station.
+  * Fixes [#8799](https://github.com/linuxmint/cinnamon-spices-applets/issues/8799).
+
 ### v3.12.0~20260616
   * Added option: Waiting time before a new radio turns on.
   * Fixes [#8799](https://github.com/linuxmint/cinnamon-spices-applets/issues/8799).
