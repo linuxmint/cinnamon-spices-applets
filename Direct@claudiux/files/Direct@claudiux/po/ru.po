@@ -1,27 +1,25 @@
-# Direct
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# DIRECT
+# This file is put in the public domain.
 # claudiux, 2025
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Direct@claudiux\n"
+"Project-Id-Version: Direct@claudiux 1.6.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-29 12:10+0200\n"
-"PO-Revision-Date: 2026-06-18 01:54+0200\n"
-"Last-Translator: claudiux\n"
-"Language-Team: \n"
-"Language: fr\n"
+"PO-Revision-Date: 2026-06-10 00:00+0000\n"
+"Last-Translator: Grom-TS\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:190
 msgid "(Right click to open folder)"
-msgstr "(Clic droit pour ouvrir son dossier)"
+msgstr "(Щёлкните правой кнопкой, чтобы открыть папку)"
 
 #. metadata.json->name
 #. applet.js:323
@@ -30,194 +28,193 @@ msgstr "Direct"
 
 #. applet.js:631
 msgid "Search Home Folder"
-msgstr "Rechercher dans mon dossier personnel"
+msgstr "Поиск в домашней папке"
 
 #. applet.js:638 applet.js:678 applet.js:709 applet.js:740 applet.js:771
 #. applet.js:815
 msgid "Configure"
-msgstr "Configurer"
+msgstr "Настроить"
 
 #. applet.js:661
 msgid "SYSTEM"
-msgstr "SYSTÈME"
+msgstr "СИСТЕМА"
 
 #. applet.js:671
 msgid "Search File System"
-msgstr "Rechercher dans le système de fichiers"
+msgstr "Поиск в файловой системе"
 
 #. applet.js:701
 msgid "FAVORITES"
-msgstr "FAVORIS"
+msgstr "ИЗБРАННОЕ"
 
 #. applet.js:732
 msgid "APPLICATIONS"
-msgstr "APPLICATIONS"
+msgstr "ПРИЛОЖЕНИЯ"
 
 #. applet.js:763
 msgid "RECENT DOCUMENTS"
-msgstr "DOCUMENTS RÉCENTS"
+msgstr "НЕДАВНИЕ ДОКУМЕНТЫ"
 
 #. applet.js:785
 msgid "Clear"
-msgstr "Effacer"
+msgstr "Очистить"
 
 #. applet.js:792
 msgid "Recent"
-msgstr "Récents"
+msgstr "Недавние"
 
 #. applet.js:807
 msgid "CUSTOM"
-msgstr "PERSONNALISÉ"
+msgstr "ПОЛЬЗОВАТЕЛЬСКИЕ"
 
 #. applet.js:869
 msgid "Computer"
-msgstr "Ordinateur"
+msgstr "Компьютер"
 
 #. applet.js:875
 msgid "File System"
-msgstr "Système de fichiers"
+msgstr "Файловая система"
 
 #. applet.js:892
 msgid "Network"
-msgstr "Réseau"
+msgstr "Сеть"
 
 #. applet.js:908
 msgid "Logout"
-msgstr "Se déconnecter"
+msgstr "Выйти"
 
 #. applet.js:915
 msgid "Quit"
-msgstr "Quitter"
+msgstr "Выход"
 
 #. applet.js:1224
 msgid "Trash"
-msgstr "Corbeille"
+msgstr "Корзина"
 
 #. search.py:43
 msgid "Open..."
-msgstr "Ouvrir..."
+msgstr "Открыть..."
 
 #. search.py:48
 msgid "Open Containing Folder..."
-msgstr "Ouvrir le dossier contenant..."
+msgstr "Открыть папку с файлом..."
 
 #. search.py:85
 msgid "Search"
-msgstr "Rechercher"
+msgstr "Поиск"
 
 #. search.py:106
 msgid "Start in"
-msgstr "À partir de"
+msgstr "Начать в"
 
 #. search.py:107
 msgid "Select a folder"
-msgstr "Choisir un dossier"
+msgstr "Выбрать папку"
 
 #. search.py:113
 msgid "Follow symlinks"
-msgstr "Suivre les liens symboliques"
+msgstr "Следовать символическим ссылкам"
 
 #. search.py:117
 msgid "Search hidden"
-msgstr "Rechercher également les fichiers cachés"
+msgstr "Искать скрытые файлы"
 
 #. search.py:121
 msgid "Use regular expressions"
-msgstr "Utiliser des expressions régulières"
+msgstr "Использовать регулярные выражения"
 
 #. search.py:125
 msgid "Stop"
-msgstr "Arrêter"
+msgstr "Остановить"
 
 #. search.py:140
 msgid "File"
-msgstr "Fichier"
+msgstr "Файл"
 
 #. settings-schema.json->favoriteSortingMethod->options
 #. search.py:156
 msgid "Path"
-msgstr "Chemin"
+msgstr "Путь"
 
 #. search.py:184
 msgid "Searching..."
-msgstr "Recherche en cours..."
+msgstr "Поиск..."
 
 #. search.py:198 search.py:199
 msgid "Search Stopped"
-msgstr "Recherche interrompue"
+msgstr "Поиск остановлен"
 
 #. search.py:215
 msgid "Searching: "
-msgstr "Recherche : "
+msgstr "Поиск: "
 
 #. search.py:220
 msgid "Error: insufficient permissions to read folder "
-msgstr "Erreur : permissions insuffisantes pour lire le dossier "
+msgstr "Ошибка: недостаточно прав для чтения папки "
 
 #. search.py:252
 msgid "Search Completed"
-msgstr "Recherche terminée"
+msgstr "Поиск завершён"
 
 #. search.py:259
 msgid "Skipping"
-msgstr "Ignoré"
+msgstr "Пропуск"
 
 #. search.py:259
 msgid " - directory already searched"
-msgstr " - dossier déjà parcouru"
+msgstr " — каталог уже обработан"
 
 #. metadata.json->description
 msgid ""
 "Provides direct and easy access to your Directories, Favorites, Recent "
 "documents and System locations"
 msgstr ""
-"Permet d'accéder directement et facilement à vos répertoires, favoris, "
-"documents récents et emplacements système"
+"Обеспечивает прямой и удобный доступ к вашим каталогам, избранному, недавним "
+"документам и системным расположениям"
 
 #. metadata.json->comments
 msgid ""
 "The Direct@claudiux applet is a fork from the placesCenter@scollins applet, "
 "with improvements."
 msgstr ""
-"L'applet Direct@claudiux est une dérivation de l'applet "
-"placesCenter@scollins, avec des améliorations et des ajouts."
+"Апплет Direct@claudiux является форком апплета placesCenter@scollins с улучшениями."
 
 #. settings-schema.json->generalPage->title
 msgid "General"
-msgstr "Général"
+msgstr "Общие"
 
 #. settings-schema.json->userPage->title
 msgid "User"
-msgstr "Utilisateur"
+msgstr "Пользователь"
 
 #. settings-schema.json->systemPage->title
 msgid "System"
-msgstr "Système"
+msgstr "Система"
 
 #. settings-schema.json->favoritesPage->title
 msgid "Favorites"
-msgstr "Favoris"
+msgstr "Избранное"
 
 #. settings-schema.json->recentPage->title
 #. settings-schema.json->recentSection->title
 msgid "Recent documents"
-msgstr "Documents récents"
+msgstr "Недавние документы"
 
 #. settings-schema.json->customPage->title
 msgid "Custom"
-msgstr "Personnalisé"
+msgstr "Пользовательские"
 
 #. settings-schema.json->panel->title
 msgid "Panel settings"
-msgstr "Paramètres du tableau de bord"
+msgstr "Настройки панели"
 
 #. settings-schema.json->menu->title
 msgid "Menu settings"
-msgstr "Paramètres du menu"
+msgstr "Настройки меню"
 
 #. settings-schema.json->userSection->title
 msgid "User section"
-msgstr "Section Utilisateur"
+msgstr "Раздел пользователя"
 
 #. settings-schema.json->userSectionCustomPlaces->title
 #. settings-schema.json->systemSectionCustomPlaces->title
@@ -225,45 +222,43 @@ msgstr "Section Utilisateur"
 #. settings-schema.json->listSystemCustomPlaces->description
 #. settings-schema.json->listCustomDocuments->description
 msgid "Custom places"
-msgstr "Emplacements personnels"
+msgstr "Пользовательские места"
 
 #. settings-schema.json->systemSection->title
 msgid "System section"
-msgstr "Section Système"
+msgstr "Системный раздел"
 
 #. settings-schema.json->favoritesSection->title
 msgid "Favorite documents"
-msgstr "Documents Favoris"
+msgstr "Избранные документы"
 
 #. settings-schema.json->favoriteAppsSection->title
 msgid "Favorite apps"
-msgstr "Applications Favorites"
+msgstr "Избранные приложения"
 
 #. settings-schema.json->customSection->title
 msgid "Custom documents"
-msgstr "Documents personnalisés"
+msgstr "Пользовательские документы"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
-msgstr "Icône sur le tableau de bord"
+msgstr "Значок панели"
 
 #. settings-schema.json->panelIcon->tooltip
 msgid "Accepts icon name or direct path (supports symbolic icons)"
-msgstr ""
-"Accepte le nom d'une icône ou le chemin complet vers celle-ci (l'icône peut "
-"être symbolique)"
+msgstr "Принимает имя значка или прямой путь (поддерживаются символические значки)"
 
 #. settings-schema.json->panelText->description
 msgid "Panel text"
-msgstr "Texte sur le tableau de bord"
+msgstr "Текст панели"
 
 #. settings-schema.json->openHoveringOver->description
 msgid "Open the menu by hovering over the icon"
-msgstr "Ouvrir le menu en survolant l'icône"
+msgstr "Открывать меню при наведении на значок"
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
-msgstr "Raccourci-clavier pour afficher le menu"
+msgstr "Горячая клавиша открытия меню"
 
 #. settings-schema.json->iconSize->units
 #. settings-schema.json->textSize->units
@@ -272,19 +267,19 @@ msgstr "px"
 
 #. settings-schema.json->iconSize->description
 msgid "Menu icon size"
-msgstr "Taille des icônes dans le menu"
+msgstr "Размер значков меню"
 
 #. settings-schema.json->textSize->description
 msgid "Text width"
-msgstr "Largeur du texte"
+msgstr "Ширина текста"
 
 #. settings-schema.json->textSize->tooltip
 msgid "0 means: automatic"
-msgstr "0 signifie : automatique"
+msgstr "0 означает: автоматически"
 
 #. settings-schema.json->displayOrderLabel->description
 msgid "Move these sections to rearrange the menu:"
-msgstr "Déplacer ces sections pour réorganiser le menu :"
+msgstr "Перемещайте эти разделы для изменения порядка меню:"
 
 #. settings-schema.json->displayOrder->columns->title
 #. settings-schema.json->listUserCustomPlaces->columns->title
@@ -293,36 +288,36 @@ msgstr "Déplacer ces sections pour réorganiser le menu :"
 #. settings-schema.json->favApps->columns->title
 #. settings-schema.json->listCustomDocuments->columns->title
 msgid "Name"
-msgstr "Nom"
+msgstr "Имя"
 
 #. settings-schema.json->displayOrder->description
 #. settings-schema.json->favoriteCustomList->description
 msgid "Display order in the menu"
-msgstr "Ordre d'affichage dans le menu"
+msgstr "Порядок отображения в меню"
 
 #. settings-schema.json->displayOrderApply->description
 msgid "Apply"
-msgstr "Appliquer"
+msgstr "Применить"
 
 #. settings-schema.json->noIconOnPanel->description
 msgid "No icon on panel"
-msgstr "Pas d'icône sur le panneau"
+msgstr "Без значка на панели"
 
 #. settings-schema.json->middleClickPath->description
 msgid "Open on middle click"
-msgstr "Ouvrir d'un clic central (clic molette)"
+msgstr "Открывать по нажатию средней кнопки мыши"
 
 #. settings-schema.json->middleClickPath->tooltip
 msgid "Leave blank to disable"
-msgstr "Laisser vide pour l'ignorer"
+msgstr "Оставьте пустым, чтобы отключить"
 
 #. settings-schema.json->dontDisplayTooltip->description
 msgid "Do not display the tooltip"
-msgstr "Ne pas afficher d'infobulle"
+msgstr "Не показывать всплывающую подсказку"
 
 #. settings-schema.json->showUserSection->description
 msgid "Show User section"
-msgstr "Afficher la Section Utilisateur"
+msgstr "Показывать раздел пользователя"
 
 #. settings-schema.json->showUserSettingsAccessIcon->description
 #. settings-schema.json->showSystemSettingsAccessIcon->description
@@ -330,11 +325,11 @@ msgstr "Afficher la Section Utilisateur"
 #. settings-schema.json->showRecentSettingsAccessIcon->description
 #. settings-schema.json->showCustomSettingsAccessIcon->description
 msgid "Show the settings access icon"
-msgstr "Afficher l'icône d'accès aux paramètres"
+msgstr "Показывать значок доступа к настройкам"
 
 #. settings-schema.json->showDesktop->description
 msgid "Show desktop"
-msgstr "Montrer le Bureau"
+msgstr "Показывать рабочий стол"
 
 #. settings-schema.json->listUserCustomPlaces->columns->title
 #. settings-schema.json->listSystemCustomPlaces->columns->title
@@ -346,69 +341,69 @@ msgstr "URI"
 #. settings-schema.json->listSystemCustomPlaces->columns->title
 #. settings-schema.json->listCustomDocuments->columns->title
 msgid "Icon Name"
-msgstr "Nom de l'icône"
+msgstr "Имя значка"
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
-msgstr "Montrer la Corbeille"
+msgstr "Показывать корзину"
 
 #. settings-schema.json->showTrash->options
 msgid "Never"
-msgstr "Jamais"
+msgstr "Никогда"
 
 #. settings-schema.json->showTrash->options
 msgid "Always"
-msgstr "Toujours"
+msgstr "Всегда"
 
 #. settings-schema.json->showTrash->options
 msgid "When not empty"
-msgstr "Quand elle n'est pas vide"
+msgstr "Когда не пусто"
 
 #. settings-schema.json->showSystemSection->description
 msgid "Show System section"
-msgstr "Afficher la Section Système"
+msgstr "Показывать системный раздел"
 
 #. settings-schema.json->showComputer->description
 msgid "Show computer"
-msgstr "Montrer l'Ordinateur"
+msgstr "Показывать компьютер"
 
 #. settings-schema.json->showRoot->description
 msgid "Show file system"
-msgstr "Montrer le Système de fichiers"
+msgstr "Показывать файловую систему"
 
 #. settings-schema.json->showVolumes->description
 msgid "Show volumes"
-msgstr "Montrer les Disques"
+msgstr "Показывать тома"
 
 #. settings-schema.json->onlyShowMounted->description
 msgid "Only show mounted drives"
-msgstr "Montrer seulement les disques montés"
+msgstr "Показывать только подключённые диски"
 
 #. settings-schema.json->showNetwork->description
 msgid "Show network"
-msgstr "Montrer le Réseau"
+msgstr "Показывать сеть"
 
 #. settings-schema.json->showSession->description
 msgid "Show Logout and Quit"
-msgstr "Afficher les options Se déconnecter et Quitter"
+msgstr "Показывать выход из системы и завершение работы"
 
 #. settings-schema.json->showFavorites->description
 msgid "Show favorite documents"
-msgstr "Afficher les Documents Favoris"
+msgstr "Показывать избранные документы"
 
 #. settings-schema.json->favoriteSortingMethod->options
 #. settings-schema.json->sortingMethod->options
 msgid "Added time"
-msgstr "Date d'ajout"
+msgstr "Время добавления"
 
 #. settings-schema.json->favoriteSortingMethod->options
 msgid "Custom Sort"
-msgstr "Tri personnalisé"
+msgstr "Пользовательская сортировка"
 
 #. settings-schema.json->favoriteSortingMethod->description
 #. settings-schema.json->sortingMethod->description
 msgid "Sorting method"
-msgstr "Méthode de tri"
+msgstr "Способ сортировки"
 
 #. settings-schema.json->favoriteLabel->description
 msgid ""
@@ -417,19 +412,19 @@ msgid ""
 "The URI must not be changed.\n"
 "Favorite documents can only be managed by nemo."
 msgstr ""
-"Voici vos documents favoris affichés dans le menu lorsqu'ils sont cochés.\n"
-"Le nom peut être modifié ici, mais reste inchangé dans le menu.\n"
-"L'URI ne doit pas être modifié.\n"
-"Les documents favoris ne peuvent être gérés que par nemo."
+"Ниже отображаются избранные документы в меню при включении.\n"
+"Имя можно изменить здесь, но в меню оно не изменится.\n"
+"URI изменять нельзя.\n"
+"Избранные документы могут управляться только Nemo."
 
 #. settings-schema.json->favoriteCustomList->columns->title
 #. settings-schema.json->favApps->columns->title
 msgid "Menu"
-msgstr "Menu"
+msgstr "Меню"
 
 #. settings-schema.json->favoriteCustomList->columns->title
 msgid "⚠️ Name"
-msgstr "⚠️ Nom"
+msgstr "⚠️ Имя"
 
 #. settings-schema.json->favoriteCustomList->columns->title
 msgid "⚠️ URI"
@@ -437,7 +432,7 @@ msgstr "⚠️ URI"
 
 #. settings-schema.json->favoritePopulateButton->description
 msgid "Add all your Favorite Documents"
-msgstr "Ajouter tous vos documents favoris"
+msgstr "Добавить все избранные документы"
 
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
@@ -457,7 +452,7 @@ msgstr "15"
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
 msgid "20"
-msgstr "30"
+msgstr "20"
 
 #. settings-schema.json->favoriteSizeLimit->options
 #. settings-schema.json->recentSizeLimit->options
@@ -471,25 +466,25 @@ msgstr "30"
 
 #. settings-schema.json->favoriteSizeLimit->options
 msgid "All Favorite Documents"
-msgstr "Tous les documents favoris"
+msgstr "Все избранные документы"
 
 #. settings-schema.json->favoriteSizeLimit->description
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
-msgstr "Nombre de documents à afficher"
+msgstr "Количество отображаемых элементов"
 
 #. settings-schema.json->favoriteShowUri->description
 #. settings-schema.json->recentShowUri->description
 msgid "Show complete path in tooltips"
-msgstr "Afficher le chemin complet dans les infobulles"
+msgstr "Показывать полный путь во всплывающих подсказках"
 
 #. settings-schema.json->favoriteIconIsStar->description
 msgid "Replace icons with stars"
-msgstr "Remplacer les icônes par des étoiles"
+msgstr "Заменить значки звёздами"
 
 #. settings-schema.json->showFavoriteApps->description
 msgid "Show favorite apps"
-msgstr "Afficher les Applications Favorites"
+msgstr "Показывать избранные приложения"
 
 #. settings-schema.json->favAppsLabel->description
 msgid ""
@@ -497,50 +492,49 @@ msgid ""
 "The Name can be changed.\n"
 "The Launcher must not be changed."
 msgstr ""
-"Voici les Applications Favorites affichées dans le menu lorsqu'elles sont "
-"cochées.\n"
-"Le Nom peut être modifié.\n"
-"Le Lanceur ne doit pas être modifié."
+"Ниже отображаются избранные приложения в меню при включении.\n"
+"Имя можно изменить.\n"
+"Запускатель изменять нельзя."
 
 #. settings-schema.json->favApps->description
 msgid "Favorite apps shown"
-msgstr "Applications Favorites affichées"
+msgstr "Отображаемые избранные приложения"
 
 #. settings-schema.json->favApps->columns->title
 msgid "⚠️ Launcher"
-msgstr "⚠️ Lanceur"
+msgstr "⚠️ Запускатель"
 
 #. settings-schema.json->favAppsPopulateButton->description
 msgid "Add all your Favorite Apps"
-msgstr "Ajouter toutes vos Applications Favorites"
+msgstr "Добавить все избранные приложения"
 
 #. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
-msgstr "Afficher les Documents Récents"
+msgstr "Показывать недавние документы"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Access time"
-msgstr "Date d'accès"
+msgstr "Время доступа"
 
 #. settings-schema.json->sortingMethod->options
 msgid "Modification time"
-msgstr "Date de modification"
+msgstr "Время изменения"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "All Recent Documents"
-msgstr "Tous les documents récents"
+msgstr "Все недавние документы"
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
-msgstr "Confidentialité"
+msgstr "Конфиденциальность"
 
 #. settings-schema.json->btnIconBrowser->description
 msgid "Icon browser"
-msgstr "Navigateur d'icônes"
+msgstr "Браузер значков"
 
 #. settings-schema.json->showCustomDocuments->description
 msgid "Show Custom documents"
-msgstr "Afficher les Documents personnalisés"
+msgstr "Показывать пользовательские документы"
 
 #. settings-schema.json->labelCustomDocuments->description
 msgid ""
@@ -549,7 +543,7 @@ msgid ""
 "To separate them into categories, you can add a line without a URI, but with "
 "a name as the category title (no icon is necessary)."
 msgstr ""
-"URI : entrez ici le lien vers votre document personnalisé ou nom-d-"
-"application.desktop (comme dans /usr/share/applications/).\n"
-"Pour les séparer en catégories, vous pouvez ajouter une ligne sans URI, mais "
-"avec un nom comme titre de catégorie (aucune icône n'est nécessaire)."
+"URI: введите ссылку на пользовательский документ или файл application-name.desktop "
+"(как в /usr/share/applications/).\n"
+"Чтобы разделить их на категории, можно добавить строку без URI, но с именем категории "
+"(значок не требуется)."

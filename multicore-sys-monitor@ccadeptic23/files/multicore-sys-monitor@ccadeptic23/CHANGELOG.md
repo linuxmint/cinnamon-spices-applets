@@ -1,3 +1,7 @@
+### v3.16.6~20260623
+  * Fixes negative "Free" percentage when the Memory calculation method is "Gnome System Monitor".
+  * New: ZRAM information block in the tooltip (shown only when /dev/zram0 exists).
+
 ### v3.16.5~20260609
   * Fixes #8760: Network width always increases to 160 pixels.
   * Fixes [#8760](https://github.com/linuxmint/cinnamon-spices-applets/issues/8760)

@@ -239,7 +239,8 @@
       "title": "Start-up",
       "keys": [
         "switch-on-last-station-at-start-up",
-        "volume-at-startup"
+        "volume-at-startup",
+        "waiting-time"
       ]
     },
     "sectionBehaviorVolumeStep": {
@@ -574,6 +575,13 @@
       {
         "id": "codec",
         "title": "Codec",
+        "type": "string",
+        "default": "",
+        "align": 0.5
+      },
+      {
+        "id": "muteseconds",
+        "title": "Seconds\nWhile\nMuted",
         "type": "string",
         "default": "",
         "align": 0.5
@@ -964,6 +972,23 @@
     "step": 10,
     "description": "Width (in pixels)",
     "tooltip": "Limited by the width of the screen.\nWill only be valid from the next time this window is opened."
+  },
+  "waiting-time": {
+    "type": "combobox",
+    "default": 0,
+    "description": "Waiting time before a new radio turns on",
+    "options": {
+      "none": 0,
+      "300 ms": 300,
+      "500 ms": 500,
+      "800 ms": 800,
+      "1 s": 1000,
+      "1.5 s": 1500,
+      "2 s": 2000,
+      "3 s": 3000,
+      "4 s": 4000,
+      "5 s": 5000
+    }
   },
   "switch-on-last-station-at-start-up": {
     "type": "switch",

@@ -1,3 +1,10 @@
+### v16.4.2~20260617
+  * Whether or not to display the OSD in full-screen mode.
+  * Fixes [#8803](https://github.com/linuxmint/cinnamon-spices-applets/issues/8803)
+
+### v16.4.1~20260612
+  * Do not display the OSD interface when an application is in full-screen mode.
+
 ### v16.4.0~20260529
   * Ready for Linux Mint 23.
 
