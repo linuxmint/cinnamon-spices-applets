@@ -262,6 +262,7 @@
         "Mem_enabledBufferCacheSharedTooltip",
         "Swap_enabled",
         "Swap_enabledTooltip",
+        "Swap_enabledZramTooltip",
         "Mem_method",
         "Mem_squared",
         "Mem_width",
@@ -1167,6 +1168,12 @@
     "type": "switch",
     "default": true,
     "description": "Enable Swap Tooltip"
+  },
+  "Swap_enabledZramTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable ZRAM Tooltip (only shown if /dev/zram0 exists)",
+    "dependency": "Swap_enabledTooltip"
   },
   "Mem_labelOn": {
     "type": "switch",

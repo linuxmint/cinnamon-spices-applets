@@ -580,6 +580,13 @@
         "align": 0.5
       },
       {
+        "id": "muteseconds",
+        "title": "Seconds\nWhile\nMuted",
+        "type": "string",
+        "default": "",
+        "align": 0.5
+      },
+      {
         "id": "url",
         "title": "Streaming URL (empty for a category)",
         "type": "string",

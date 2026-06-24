@@ -329,6 +329,7 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Mem_enabledBufferCacheSharedTooltip", "Mem_enabledBufferCacheSharedTooltip");
         this.settings.bind("Swap_enabled", "Swap_enabled");
         this.settings.bind("Swap_enabledTooltip", "Swap_enabledTooltip");
+        this.settings.bind("Swap_enabledZramTooltip", "Swap_enabledZramTooltip");
         this.settings.bind("Mem_chartType", "Mem_chartType");
         this.settings.bind("Mem_squared", "Mem_squared");
         this.settings.bind("Mem_method", "Mem_method");
@@ -536,6 +537,7 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         this.memoryProvider = new MemDataProvider(this);
         this.multiCpuProvider = new MultiCpuDataProvider(this);
         this.swapProvider = new SwapDataProvider(this);
+        this.zramProvider = new ZramDataProvider(this);
         this.buffcachesharedProvider = new BufferCacheSharedDataProvider(this);
         this.lastDataNet = {};
         this.networkProvider = new NetDataProvider(this);
@@ -762,6 +764,7 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         const rate = 1 * this.refreshRate;
         this.mainLoopId = timeout_add(rate, () => {
             this.get_mem_info();
+            this.get_zram_info();
             this.get_cpu_info();
             this.get_net_info();
             this.get_disk_info();
@@ -1280,6 +1283,32 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         });
     }
 
+    get_zram_info() {
+        if (!this.isRunning) return;
+        if (!this.Swap_enabledTooltip || !this.Swap_enabledZramTooltip) return;
+        // Same data as `zramctl /dev/zram0 --output-all`, read straight from sysfs.
+        // If /dev/zram0 doesn't exist the first read rejects -> provider hidden.
+        Promise.all([
+            readFileAsync("/sys/block/zram0/mm_stat"),
+            readFileAsync("/sys/block/zram0/comp_algorithm"),
+            readFileAsync("/proc/swaps")
+        ]).then(([mm, algo, swaps]) => {
+            const f = mm.trim().split(/\s+/).map((x) => 1 * x);
+            const orig = f[0], compr = f[1], total = f[2];
+            const m = algo.match(/\[([^\]]+)\]/);
+            const algorithm = m ? m[1] : algo.trim();
+            const isSwap = swaps.split("\n").some((l) => l.trim().split(/\s+/)[0] === "/dev/zram0");
+            this.zramProvider.setData({
+                orig,
+                compr,
+                total,
+                ratio: total > 0 ? orig / total : 0,
+                algorithm,
+                mountpoint: isSwap ? "[SWAP]" : "-"
+            });
+        }).catch(() => this.zramProvider.setData(null));
+    }
+
     get_cpu_info() {
         if (!this.isRunning) return;
         if (!this.CPU_enabled && !this.CPU_enabledTooltip) return;
@@ -1731,6 +1760,7 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
             "multiCpuProvider",
             "memoryProvider",
             "swapProvider",
+            "zramProvider",
             "buffcachesharedProvider",
             "networkProvider",
             "diskProvider",
@@ -1882,15 +1912,17 @@ var MemDataProvider = class MemDataProvider {
                 1 - memInfo["MemUsed"] / memInfo["MemTotal"]
             ]
         } else { // System Monitor: https://github.com/JTourteau/gnome-system-monitor/blob/main/extension.js
-            let memAvailable = 1 * memInfo["MemAvailable"];
-            let memUsed = 1 * this.memTotal - memAvailable;
+            let memFree = 1 * memInfo["MemFree"];
             let memBuffers = 1 * memInfo["Buffers"];
             let memCached = 1 * memInfo["Cached"];
+            // Used = application memory only (excludes buffers/cache) so the four
+            // segments partition MemTotal exactly and Free never goes negative.
+            let memUsed = 1 * this.memTotal - memFree - memBuffers - memCached;
             this.currentReadings = [
                 memUsed / this.memTotal,
                 memCached / this.memTotal,
                 memBuffers / this.memTotal,
-                1.0 - ((memUsed + memBuffers + memCached) / this.memTotal)
+                memFree / this.memTotal
             ]
         }
     }
@@ -2066,6 +2098,73 @@ var SwapDataProvider = class SwapDataProvider {
 
     get isEnabledTooltip() {
         return this.applet.Swap_enabledTooltip;
+    }
+
+    get isRunning() {
+        return this.applet.isRunning;
+    }
+}
+
+var ZramDataProvider = class ZramDataProvider {
+    constructor(applet) {
+        this.applet = applet;
+        this.name = _("ZRAM");
+        this.available = false;
+        this.data = null;
+    }
+
+    getColorList() {
+        return [];
+    }
+
+    getData() {
+        return [];
+    }
+
+    setData(data) {
+        if (data == null) {
+            this.available = false;
+            this.data = null;
+        } else {
+            this.data = data;
+            this.available = true;
+        }
+    }
+
+    getTooltipString() {
+        if (!this.isEnabledTooltip || !this.isEnabledZramTooltip) return "";
+        if (!this.isRunning) return "";
+        if (!this.available || this.data == null) return "";
+
+        let trans = _("ZRAM");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
+
+        // Plain string rows (algorithm, mountpoint).
+        const strRow = (label, value) =>
+            label.padStart(spaces, " ") + ":\t" + ("" + value).padStart(8, " ") + " " + "".padStart(6, " ") + "\n";
+        // Byte rows (data, compressed, total) formatted like the other sections.
+        const bytesRow = (label, bytes) => {
+            let [value, unit] = formatBytesValueUnit(Math.round(bytes), 2, false);
+            value = formatNumber(parseFloat(value).toFixed(2), 2);
+            return label.padStart(spaces, " ") + ":\t" + value.padStart(8, " ") + " " + unit.padStart(6, " ") + "\n";
+        };
+
+        toolTipString += strRow(_("Algorithm"), this.data.algorithm);
+        toolTipString += bytesRow(_("Data"), this.data.orig);
+        toolTipString += bytesRow(_("Compressed"), this.data.compr);
+        toolTipString += bytesRow(_("Total"), this.data.total);
+        toolTipString += strRow(_("Ratio"), formatNumber(parseFloat(this.data.ratio.toFixed(2)), 2));
+        toolTipString += strRow(_("Mountpoint"), this.data.mountpoint);
+        return toolTipString;
+    }
+
+    get isEnabledTooltip() {
+        return this.applet.Swap_enabledTooltip;
+    }
+
+    get isEnabledZramTooltip() {
+        return this.applet.Swap_enabledZramTooltip;
     }
 
     get isRunning() {
