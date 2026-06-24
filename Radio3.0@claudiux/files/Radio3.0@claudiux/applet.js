@@ -1947,6 +1947,7 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
           "name": ""+station.name,
           "bitrate": ""+station.bitrate,
           "codec": ""+station.codec,
+          "muteseconds": (station.muteseconds == undefined || station.muteseconds.length === 0 || station.muteseconds === "0") ? "" : ""+station.muteseconds,
           "uuid": station.uuid,
           "homepage": station.homepage,
           "tags": station.tags,
@@ -2468,6 +2469,7 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
           "name": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].name != undefined) ? this.radiosHash[""+station_url].name : ""+r.name,
           "inc": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].inc != undefined) ? this.radiosHash[""+station_url].inc : true,
           "codec": r.codec,
+          "muteseconds": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].muteseconds != undefined && this.radiosHash[""+station_url].muteseconds.length != 0 && this.radiosHash[""+station_url].muteseconds != "0") ? ""+this.radiosHash[""+station_url].muteseconds : "",
           "bitrate": r.bitrate,
           "homepage": r.homepage,
           "uuid": r.stationuuid,
@@ -2491,6 +2493,7 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
           "name": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].name != undefined) ? this.radiosHash[""+station_url].name : ""+r.name,
           "inc": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].inc != undefined) ? this.radiosHash[""+station_url].inc : true,
           "codec": (!r.codec) ? "" : ""+r.codec,
+          "muteseconds": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].muteseconds != undefined && this.radiosHash[""+station_url].muteseconds.length != 0 && this.radiosHash[""+station_url].muteseconds != "0") ? ""+this.radiosHash[""+station_url].muteseconds : "",
           "bitrate": (!r.bitrate) ? "" : ""+r.bitrate,
           "homepage": (!r.homepage) ? "" : ""+r.homepage,
           "uuid": (!r.stationuuid) ? "" : ""+r.stationuuid,
@@ -2526,6 +2529,7 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
           "name": (this.radiosHash[""+old_url] != undefined && this.radiosHash[""+old_url].name != undefined) ? this.radiosHash[""+old_url].name : ""+r.name,
           "inc": (this.radiosHash[""+old_url] != undefined && this.radiosHash[""+old_url].inc != undefined) ? this.radiosHash[""+old_url].inc : true,
           "codec": (!r.codec) ? "" : ""+r.codec,
+          "muteseconds": (this.radiosHash[""+old_url] != undefined && this.radiosHash[""+old_url].muteseconds != undefined && this.radiosHash[""+old_url].muteseconds.length != 0 && this.radiosHash[""+old_url].muteseconds != "0") ? ""+this.radiosHash[""+old_url].muteseconds : "",
           "bitrate": (!r.bitrate) ? "" : ""+r.bitrate,
           "homepage": (!r.homepage) ? "" : ""+r.homepage,
           "uuid": (!r.stationuuid) ? "" : ""+r.stationuuid,
@@ -2542,6 +2546,7 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
             "name": (this.radiosHash[""+r.url] != undefined && this.radiosHash[""+r.url].name != undefined) ? this.radiosHash[""+r.url].name : ""+r.name,
             "inc": (this.radiosHash[""+r.url] != undefined && this.radiosHash[""+r.url].inc != undefined) ? this.radiosHash[""+r.url].inc : true,
             "codec": (!r.codec) ? "" : ""+r.codec,
+            "muteseconds": (this.radiosHash[""+r.url] != undefined && this.radiosHash[""+r.url].muteseconds != undefined && this.radiosHash[""+r.url].muteseconds.length != 0 && this.radiosHash[""+r.url].muteseconds != "0") ? ""+this.radiosHash[""+r.url].muteseconds : "",
             "bitrate": (!r.bitrate) ? "" : ""+r.bitrate,
             "homepage": (!r.homepage) ? "" : ""+r.homepage,
             "uuid": (!r.stationuuid) ? "" : ""+r.stationuuid,
@@ -3667,6 +3672,10 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
   }
 
   stop_mpv_radio(notify_user=true) {
+    if (this.muteId) {
+      clearTimeout(this.muteId);
+      this.muteId = null;
+    }
     let pid = this.get_mpv_pid();
 
     if (!this.radioId || this.radioId.length === 0 || pid == null) return;
@@ -4139,6 +4148,36 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
       }
     }
 
+    let _id = this.last_radio_listened_to;
+    if (this.radiosHash[_id].muteseconds && this.radiosHash[_id].muteseconds.length > 0 && this.radiosHash[_id].muteseconds != "0") {
+      let muteseconds = parseInt(this.radiosHash[_id].muteseconds);
+      if (!isNaN(muteseconds) && this.context_menu_item_slider) {
+        let old_value = this.context_menu_item_slider.slider._value;
+        this.context_menu_item_slider.slider._value = 1 / 100;
+        try { this.context_menu_item_slider.slider._slider.queue_repaint() } catch(e) {};
+        this.context_menu_item_slider.slider.emit('value-changed', 1 / 100);
+        this.volume = 1;
+        let unmute_func = () => {
+          this.volume = old_value * 100;
+          this.context_menu_item_slider.slider._value = old_value;
+          try { this.context_menu_item_slider.slider._slider.queue_repaint() } catch(e) {};
+          this.context_menu_item_slider.slider.emit('value-changed', old_value);
+          if (this.muteId != null) clearTimeout(this.muteId);
+          this.muteId = null;
+        };
+        this.radio_notify(this.radiosHash[_id].name, _("Temporary Mute"), [
+          _("Turn the sound back on"),
+          "callback",
+          () => unmute_func()
+        ]);
+        this.muteId = setTimeout(() => {
+            unmute_func();
+          },
+          1000 * muteseconds
+        );
+      }
+    }
+
     this.page_label = undefined;
     this.settingsWindow = undefined;
     this.volume_near_icon();
@@ -4519,6 +4558,8 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
             (""+rh.codec != "undefined") && (""+rh.codec.length > 0)
           ) ? ""+rh.codec : (station.codec) ? station.codec : "";
 
+          new_station["muteseconds"] = (station.muteseconds) ? station.muteseconds : "";
+
           new_station["bitrate"] = ( (rh.bitrate != null) &&
             (""+rh.bitrate != "undefined") && (""+rh.bitrate.length > 0)
           ) ? ""+rh.bitrate : (station.bitrate) ? station.bitrate : "";
@@ -4541,6 +4582,7 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
           new_station["play"] = false;
           new_station["name"] = station.name;
           new_station["codec"] = (station.codec && (station.codec.length > 0)) ? station.codec : "";
+          new_station["muteseconds"] = "";
           new_station["bitrate"] = (station.bitrate && (station.bitrate.length > 0)) ? station.bitrate : "";
           new_station["url"] = ""+id;
           new_station["uuid"] = "";
@@ -6257,6 +6299,7 @@ var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends Text
           "name": ""+_import.name,
           "bitrate": ""+_import.bitrate,
           "codec": ""+_import.codec,
+          "muteseconds": "",
           "url": ""+ _import.url,
           "uuid": ""+_import.uuid,
           "homepage": ""+_import.homepage,
