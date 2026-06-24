@@ -6,10 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2026-06-24 18:54+0200\n"
-"PO-Revision-Date: 2026-06-16 16:42+0200\n"
+"PO-Revision-Date: 2026-06-24 13:24-0400\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #. applet.js:308
 msgid "unassigned"
@@ -37,159 +36,87 @@ msgstr "Puede añadir más usando el botón [+]."
 
 #. applet.js:413
 msgid "For a category, fill in only its name; leave the other fields empty."
-msgstr ""
-"Para una categoría, solo complete su nombre; deje los otros campos vacíos."
+msgstr "Para una categoría, solo complete su nombre; deje los otros campos vacíos."
 
 #. applet.js:414
 msgid "For a radio station, enter only its name and its streaming URL."
-msgstr ""
-"Para una estación de radio, solo ingrese su nombre y URL de transmisión."
+msgstr "Para una estación de radio, solo ingrese su nombre y URL de transmisión."
 
 #. applet.js:415
-msgid ""
-"You can order the rows by dragging and dropping or by using the buttons and "
-"tools below the list."
-msgstr ""
-"Puede ordenar las filas arrastrando y soltando o utilizando los botones y "
-"herramientas que se encuentran debajo de la lista."
+msgid "You can order the rows by dragging and dropping or by using the buttons and tools below the list."
+msgstr "Puede ordenar las filas arrastrando y soltando o utilizando los botones y herramientas que se encuentran debajo de la lista."
 
 #. applet.js:416
-msgid ""
-"The buttons on the right below the list allow you to navigate page by page "
-"or category by category."
-msgstr ""
-"Los botones de la derecha debajo de la lista, le permiten navegar página por "
-"página o categoría por categoría."
+msgid "The buttons on the right below the list allow you to navigate page by page or category by category."
+msgstr "Los botones de la derecha debajo de la lista, le permiten navegar página por página o categoría por categoría."
 
 #. applet.js:417
-msgid ""
-"To search for one of your stations, click on the list and start writing its "
-"name."
-msgstr ""
-"Para buscar una de tus estaciones, haga clic en la lista y escriba el nombre."
+msgid "To search for one of your stations, click on the list and start writing its name."
+msgstr "Para buscar una de tus estaciones, haga clic en la lista y escriba el nombre."
 
 #. applet.js:418
-msgid ""
-"To easily add stations to your list, use the following 2 tabs: Search and "
-"Import."
-msgstr ""
-"Para agregar estaciones a su lista, use las siguientes 2 pestañas: Buscar e "
-"Importar."
+msgid "To easily add stations to your list, use the following 2 tabs: Search and Import."
+msgstr "Para agregar estaciones a su lista, use las siguientes 2 pestañas: Buscar e Importar."
 
 #. applet.js:419
 msgid "Check its 'Menu' box to display a station or category in the menu."
-msgstr ""
-"Marque la casilla 'Menú' para mostrar una estación o categoría en el menú."
+msgstr "Marque la casilla 'Menú' para mostrar una estación o categoría en el menú."
 
 #. applet.js:420
-msgid ""
-"Check its '♪/➟' box to listen to the station or move it to another category "
-"using the tools below the list."
-msgstr ""
-"Marque la casilla '♪/➟' para escuchar la estación o muévala a otra categoría "
-"usando las herramientas debajo de la lista."
+msgid "Check its '♪/➟' box to listen to the station or move it to another category using the tools below the list."
+msgstr "Marque la casilla '♪/➟' para escuchar la estación o muévala a otra categoría usando las herramientas debajo de la lista."
 
 #. applet.js:422
 msgid "You can have your list of stations checked by internet databases."
-msgstr ""
-"Puede hacer que su lista de estaciones sea revisada por bases de datos de "
-"Internet."
+msgstr "Puede hacer que su lista de estaciones sea revisada por bases de datos de Internet."
 
 #. applet.js:423
-msgid ""
-"Any station recognized by one of these databases will receive a Universal "
-"Unique Identifier (UUID) provided by this database."
-msgstr ""
-"Cualquier estación reconocida por una de estas bases de datos recibirá un "
-"Identificador único universal (UUID) proporcionado por esta base de datos."
+msgid "Any station recognized by one of these databases will receive a Universal Unique Identifier (UUID) provided by this database."
+msgstr "Cualquier estación reconocida por una de estas bases de datos recibirá un Identificador único universal (UUID) proporcionado por esta base de datos."
 
 #. applet.js:424
-msgid ""
-"So, if a streaming URL was changed, a next check would update it and you can "
-"continue to listen to the affected station."
-msgstr ""
-"Entonces, si alguna URL cambiara, la siguiente verificación la actualizará y "
-"podrá continuar escuchando la estación afectada."
+msgid "So, if a streaming URL was changed, a next check would update it and you can continue to listen to the affected station."
+msgstr "Entonces, si alguna URL cambiara, la siguiente verificación la actualizará y podrá continuar escuchando la estación afectada."
 
 #. applet.js:426
-msgid ""
-"Here you can search for other stations in a free radio database accessible "
-"via the Internet."
-msgstr ""
-"Aquí puede buscar otras estaciones en una base de datos de radio gratuita "
-"accesible a través de Internet."
+msgid "Here you can search for other stations in a free radio database accessible via the Internet."
+msgstr "Aquí puede buscar otras estaciones en una base de datos de radio gratuita accesible a través de Internet."
 
 #. applet.js:427
-msgid ""
-"Fill in at least a few fields of the form below then click on the "
-"'Search ...' button."
-msgstr ""
-"Complete al menos algunos campos del siguiente formulario y haga clic en el "
-"botón \"Buscar...\"."
+msgid "Fill in at least a few fields of the form below then click on the 'Search ...' button."
+msgstr "Complete al menos algunos campos del siguiente formulario y haga clic en el botón \"Buscar...\"."
 
 #. applet.js:428
-msgid ""
-"Each time this button is clicked, a new results page is displayed in the "
-"second part of this page, where you can test certain stations and include "
-"them in the menu."
-msgstr ""
-"Cada vez que se pulsa este botón, se muestra una nueva página de resultados "
-"en la segunda parte de esta página, donde se pueden probar determinadas "
-"estaciones e incluirlas en el menú."
+msgid "Each time this button is clicked, a new results page is displayed in the second part of this page, where you can test certain stations and include them in the menu."
+msgstr "Cada vez que se pulsa este botón, se muestra una nueva página de resultados en la segunda parte de esta página, donde se pueden probar determinadas estaciones e incluirlas en el menú."
 
 #. applet.js:429
-msgid ""
-"A station already in your menu will only appear in search results if its "
-"streaming URL has changed."
-msgstr ""
-"Una estación que ya esté en su menú sólo aparecerá en los resultados de la "
-"búsqueda si su URL de transmisión ha cambiado."
+msgid "A station already in your menu will only appear in search results if its streaming URL has changed."
+msgstr "Una estación que ya esté en su menú sólo aparecerá en los resultados de la búsqueda si su URL de transmisión ha cambiado."
 
 #. applet.js:430
-msgid ""
-"When no new page appears, it means that all results matching your search "
-"criteria have been displayed."
-msgstr ""
-"Si no aparece ninguna página nueva, significa que se han mostrado todos los "
-"resultados que coinciden con sus criterios de búsqueda."
+msgid "When no new page appears, it means that all results matching your search criteria have been displayed."
+msgstr "Si no aparece ninguna página nueva, significa que se han mostrado todos los resultados que coinciden con sus criterios de búsqueda."
 
 #. applet.js:432
-msgid ""
-"You can import a file containing the name and streaming URL of at least one "
-"radio station."
-msgstr ""
-"Puede importar un archivo que contenga el nombre y la URL de al menos una "
-"estación de radio."
+msgid "You can import a file containing the name and streaming URL of at least one radio station."
+msgstr "Puede importar un archivo que contenga el nombre y la URL de al menos una estación de radio."
 
 #. applet.js:433
-msgid ""
-"These radio stations are displayed in the list below. You can test them by "
-"checking their ♪ box."
-msgstr ""
-"Estas estaciones de radio se muestran en la lista a continuación. Puede "
-"probarlos marcando la casilla ♪."
+msgid "These radio stations are displayed in the list below. You can test them by checking their ♪ box."
+msgstr "Estas estaciones de radio se muestran en la lista a continuación. Puede probarlos marcando la casilla ♪."
 
 #. applet.js:434
 msgid "Then manage this list with the buttons at the bottom of this tab."
-msgstr ""
-"A continuación, gestione esta lista con los botones de la parte inferior de "
-"esta pestaña."
+msgstr "A continuación, gestione esta lista con los botones de la parte inferior de esta pestaña."
 
 #. applet.js:436
-msgid ""
-"In the Shoutcast directory, click the download button to the left of the "
-"station name."
-msgstr ""
-"En el directorio de Shoutcast, haz clic en el botón de descarga situado a la "
-"izquierda del nombre de la estación."
+msgid "In the Shoutcast directory, click the download button to the left of the station name."
+msgstr "En el directorio de Shoutcast, haz clic en el botón de descarga situado a la izquierda del nombre de la estación."
 
 #. applet.js:437
-msgid ""
-"Select the open format (.XSPF) and save the file giving it the same name as "
-"the station."
-msgstr ""
-"Seleccione el formato abierto (.XSPF) y guarde el archivo dándole el mismo "
-"nombre que la estación."
+msgid "Select the open format (.XSPF) and save the file giving it the same name as the station."
+msgstr "Seleccione el formato abierto (.XSPF) y guarde el archivo dándole el mismo nombre que la estación."
 
 #. applet.js:438
 msgid "This file can then be imported here."
@@ -387,11 +314,11 @@ msgstr "Se ha alcanzado el límite establecido."
 
 #. applet.js:4168
 msgid "Temporary Mute"
-msgstr ""
+msgstr "Silenciamiento temporal"
 
 #. applet.js:4169
 msgid "Turn the sound back on"
-msgstr ""
+msgstr "Volver a activar el sonido"
 
 #. applet.js:4278
 msgid "Please Log Out then Log In"
@@ -459,21 +386,17 @@ msgstr "Activar la extensión OSD150"
 
 #. applet.js:4998
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
-msgstr ""
-"Para obtener un OSD horizontal, es necesario activar la extensión OSD150."
+msgstr "Para obtener un OSD horizontal, es necesario activar la extensión OSD150."
 
 #. applet.js:5015
 msgid "Download the OSD150 extension"
 msgstr "Descargar la extensión OSD150"
 
 #. applet.js:5016
-msgid ""
-"To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
+msgid "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
-msgstr ""
-"Para obtener un OSD horizontal, necesita descargar la extensión OSD150.\n"
-"Haga clic en el botón Descargar y, a continuación, busque OSD150 y "
-"seleccione el botón ⬇."
+msgstr "Para obtener un OSD horizontal, necesita descargar la extensión OSD150.\n"
+"Haga clic en el botón Descargar y, a continuación, busque OSD150 y seleccione el botón ⬇."
 
 #. applet.js:5149
 #, javascript-format
@@ -568,11 +491,8 @@ msgid "You need the 'Album Art 3.0' desklet"
 msgstr "Necesitas el desklet Album Art 3.0"
 
 #. applet.js:5452
-msgid ""
-"You can install it by clicking on the first button and then searching for "
-"Album."
-msgstr ""
-"Puedes instalarlo haciendo clic en el primer botón y luego buscando Álbum."
+msgid "You can install it by clicking on the first button and then searching for Album."
+msgstr "Puedes instalarlo haciendo clic en el primer botón y luego buscando Álbum."
 
 #. applet.js:5453 applet.js:5471
 msgid "Desklets"
@@ -583,12 +503,8 @@ msgid "You need to activate the 'Album Art 3.0' desklet"
 msgstr "Necesitas activar el desklet 'Album Art 3.0'"
 
 #. applet.js:5470
-msgid ""
-"You can activate it by clicking on the first button, then searching for "
-"Album and adding it with button [+]."
-msgstr ""
-"Puedes activarlo haciendo clic en el primer botón, luego buscando Álbum y "
-"agregándolo con el botón [+]."
+msgid "You can activate it by clicking on the first button, then searching for Album and adding it with button [+]."
+msgstr "Puedes activarlo haciendo clic en el primer botón, luego buscando Álbum y agregándolo con el botón [+]."
 
 #. applet.js:5614
 msgid "Close without stopping recording"
@@ -652,12 +568,8 @@ msgid "All dependencies are installed"
 msgstr "Todas las dependencias están instaladas"
 
 #. lib/checkDependencies.js:448
-msgid ""
-"You appear to be missing some of the programs required for this applet to "
-"have all its features."
-msgstr ""
-"Parece que te faltan algunos de los programas necesarios para que este "
-"applet tenga todas sus funciones."
+msgid "You appear to be missing some of the programs required for this applet to have all its features."
+msgstr "Parece que te faltan algunos de los programas necesarios para que este applet tenga todas sus funciones."
 
 #. lib/checkDependencies.js:449
 msgid "Please execute, in the just opened terminal, the commands:"
@@ -1019,15 +931,11 @@ msgstr "Días no laborables"
 
 #. settings-schema.json->show-help-in-tabs->description
 msgid "Show help labels in each tab of this Settings window"
-msgstr ""
-"Mostrar etiquetas de ayuda en cada pestaña de esta ventana de Configuración"
+msgstr "Mostrar etiquetas de ayuda en cada pestaña de esta ventana de Configuración"
 
 #. settings-schema.json->show-help-in-tabs->tooltip
-msgid ""
-"You can uncheck this option when you are familiar with all of these settings."
-msgstr ""
-"Puede desmarcar esta opción cuando esté familiarizado con todos estos "
-"ajustes."
+msgid "You can uncheck this option when you are familiar with all of these settings."
+msgstr "Puede desmarcar esta opción cuando esté familiarizado con todos estos ajustes."
 
 #. settings-schema.json->stations-help->description
 #. settings-schema.json->button-update-help->description
@@ -1056,11 +964,9 @@ msgstr "Estación o categoría"
 #. settings-schema.json->radios->columns->title
 #. settings-schema.json->import-list->columns->title
 #. settings-schema.json->search-list->columns->title
-msgid ""
-"Bitrate\n"
+msgid "Bitrate\n"
 "(kbps)"
-msgstr ""
-"Tasa de bits\n"
+msgstr "Tasa de bits\n"
 "(kbps)"
 
 #. settings-schema.json->radios->columns->title
@@ -1071,11 +977,12 @@ msgid "Codec"
 msgstr "Códec"
 
 #. settings-schema.json->radios->columns->title
-msgid ""
-"Seconds\n"
+msgid "Seconds\n"
 "While\n"
 "Muted"
-msgstr ""
+msgstr "Segundos\n"
+"Mientras está\n"
+"Silenciado"
 
 #. settings-schema.json->radios->columns->title
 msgid "Streaming URL (empty for a category)"
@@ -1129,8 +1036,7 @@ msgstr "Mostrar todas las estaciones y categorías en el menú"
 
 #. settings-schema.json->button-hide-all->description
 msgid "Hide all stations and categories (so the menu becomes empty)"
-msgstr ""
-"Ocultar todas las estaciones y categorías (para que el menú quede vacío)"
+msgstr "Ocultar todas las estaciones y categorías (para que el menú quede vacío)"
 
 #. settings-schema.json->button-save->description
 msgid "Save this list of stations"
@@ -1146,8 +1052,7 @@ msgstr "Abrir la carpeta que contiene estas listas"
 
 #. settings-schema.json->button-update->description
 msgid "Update my station list with the Radio Database data"
-msgstr ""
-"Actualizar mi lista de emisoras con los datos de la base de datos de radio"
+msgstr "Actualizar mi lista de emisoras con los datos de la base de datos de radio"
 
 #. settings-schema.json->blacklist->columns->title
 msgid "Blacklisted URL"
@@ -1214,11 +1119,9 @@ msgid "Station"
 msgstr "Estación"
 
 #. settings-schema.json->search-list->columns->title
-msgid ""
-"Country\n"
+msgid "Country\n"
 "Code"
-msgstr ""
-"País\n"
+msgstr "País\n"
 "Código"
 
 #. settings-schema.json->search-list->columns->title
@@ -1235,28 +1138,22 @@ msgid "Vertical maximization"
 msgstr "Maximización vertical"
 
 #. settings-schema.json->maximize-vertically->tooltip
-msgid ""
-"When this option is checked, this Settings Window will be maximized "
-"vertically the next time it is opened."
-msgstr ""
-"Si esta opción está activada, la ventana de configuración se maximizará "
-"verticalmente la próxima vez que se abra."
+msgid "When this option is checked, this Settings Window will be maximized vertically the next time it is opened."
+msgstr "Si esta opción está activada, la ventana de configuración se maximizará verticalmente la próxima vez que se abra."
 
 #. settings-schema.json->window-width->description
 msgid "Width (in pixels)"
 msgstr "Ancho (en píxeles)"
 
 #. settings-schema.json->window-width->tooltip
-msgid ""
-"Limited by the width of the screen.\n"
+msgid "Limited by the width of the screen.\n"
 "Will only be valid from the next time this window is opened."
-msgstr ""
-"Limitado por el ancho de la pantalla.\n"
+msgstr "Limitado por el ancho de la pantalla.\n"
 "Solo será válido desde la próxima vez que se abra esta ventana."
 
 #. settings-schema.json->waiting-time->description
 msgid "Waiting time before a new radio turns on"
-msgstr "Tiempo de espera antes de que se active una nueva radio."
+msgstr "Tiempo de espera antes de que se active una nueva radio"
 
 #. settings-schema.json->waiting-time->options
 msgid "none"
@@ -1303,19 +1200,12 @@ msgid "Turn on the radio when Cinnamon starts up"
 msgstr "Encender la radio cuando Cinnamon inicie"
 
 #. settings-schema.json->switch-on-last-station-at-start-up->tooltip
-msgid ""
-"The selected radio will be the last you listened to, even if you stopped "
-"it.\n"
+msgid "The selected radio will be the last you listened to, even if you stopped it.\n"
 "\n"
-"VPN users: By checking this, the radio broadcast could use your VPN link in "
-"the event that this one is active before the start of this applet."
-msgstr ""
-"La radio seleccionada será la última que hayas escuchado, aunque la hayas "
-"parado.\n"
+"VPN users: By checking this, the radio broadcast could use your VPN link in the event that this one is active before the start of this applet."
+msgstr "La radio seleccionada será la última que hayas escuchado, aunque la hayas parado.\n"
 "\n"
-"Usuarios de VPN: Marcando esta opción, la emisión de radio podría utilizar "
-"su enlace VPN en el caso de que éste esté activo antes del inicio de este "
-"applet."
+"Usuarios de VPN: Marcando esta opción, la emisión de radio podría utilizar su enlace VPN en el caso de que éste esté activo antes del inicio de este applet."
 
 #. settings-schema.json->volume-at-startup->description
 msgid "Volume level starting a new radio (%)"
@@ -1415,20 +1305,14 @@ msgid "100"
 msgstr "100"
 
 #. settings-schema.json->volume-at-startup->tooltip
-msgid ""
-"If set, then this will change the volume level starting a new radio, in "
-"percentage of the general volume level.\n"
+msgid "If set, then this will change the volume level starting a new radio, in percentage of the general volume level.\n"
 "Default is (Undefined): The volume level remains unchanged.\n"
 "\n"
-"Please note that you can change the volume level scrolling on this applet "
-"icon, or using the slider in the context menu."
-msgstr ""
-"Si se establece, esto cambiará el nivel de volumen al iniciar una nueva "
-"radio, en porcentaje del nivel de volumen general.\n"
+"Please note that you can change the volume level scrolling on this applet icon, or using the slider in the context menu."
+msgstr "Si se establece, esto cambiará el nivel de volumen al iniciar una nueva radio, en porcentaje del nivel de volumen general.\n"
 "Por defecto es (Indefinido): El nivel de volumen se mantiene sin cambios.\n"
 "\n"
-"Tenga en cuenta que puede cambiar el nivel de volumen desplazándose por el "
-"icono de este applet, o utilizando el deslizador del menú contextual."
+"Tenga en cuenta que puede cambiar el nivel de volumen desplazándose por el icono de este applet, o utilizando el deslizador del menú contextual."
 
 #. settings-schema.json->volume-step->description
 msgid "Volume step scrolling on icon"
@@ -1459,9 +1343,7 @@ msgid "±5%"
 msgstr "±5%"
 
 #. settings-schema.json->volume-step->tooltip
-msgid ""
-"By how much increase or decrease the volume using the mouse scroll wheel on "
-"the icon."
+msgid "By how much increase or decrease the volume using the mouse scroll wheel on the icon."
 msgstr "Aumentar o disminuir el volumen con la rueda del ratón sobre el icono."
 
 #. settings-schema.json->volume-magnetic-on->description
@@ -1474,8 +1356,7 @@ msgstr "Mostrar OSD al cambiar el volumen"
 
 #. settings-schema.json->volume-show-osd->tooltip
 msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
-msgstr ""
-"¿Debe mostrarse la OSD (visualización en pantalla) al cambiar el volumen?"
+msgstr "¿Debe mostrarse la OSD (visualización en pantalla) al cambiar el volumen?"
 
 #. settings-schema.json->volume-show-osd-starting-radio->description
 msgid "Show volume OSD when changing radio station"
@@ -1551,15 +1432,10 @@ msgid "Display the Station list beside the Category list"
 msgstr "Mostrar la lista de estaciones junto a la lista de categorías"
 
 #. settings-schema.json->show-by-category->tooltip
-msgid ""
-"Checked: Hover (without clicking) over a Category to display its list of "
-"Stations; then select your station.\n"
+msgid "Checked: Hover (without clicking) over a Category to display its list of Stations; then select your station.\n"
 "Unchecked: Single list containing each category followed by its stations."
-msgstr ""
-"Marcada: Pase el ratón (sin hacer clic) por encima de una Categoría para "
-"mostrar su lista de Estaciones; a continuación, seleccione su estación.\n"
-"Sin marcar: Lista única que contiene cada categoría seguida de sus "
-"estaciones."
+msgstr "Marcada: Pase el ratón (sin hacer clic) por encima de una Categoría para mostrar su lista de Estaciones; a continuación, seleccione su estación.\n"
+"Sin marcar: Lista única que contiene cada categoría seguida de sus estaciones."
 
 #. settings-schema.json->fixHeightCat->description
 msgid "Fix the height of these lists"
@@ -1578,11 +1454,8 @@ msgid "Show system items in the menu"
 msgstr "Mostrar elementos del sistema en el menú"
 
 #. settings-schema.json->show-system-items->tooltip
-msgid ""
-"Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
-msgstr ""
-"¿Desea mostrar los elementos 'Configurar...' y 'Configuración de sonido' en "
-"el menú?"
+msgid "Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
+msgstr "¿Desea mostrar los elementos 'Configurar...' y 'Configuración de sonido' en el menú?"
 
 #. settings-schema.json->show-reload->description
 msgid "Show the 'Reload this applet' item in the contextual menu"
@@ -1626,15 +1499,11 @@ msgstr "Estación anterior escuchada recientemente"
 
 #. settings-schema.json->show-help-in-tooltip->description
 msgid "Show help for mouse actions in the tooltip"
-msgstr ""
-"Mostrar ayuda para las acciones del mouse en la información sobre "
-"herramientas"
+msgstr "Mostrar ayuda para las acciones del mouse en la información sobre herramientas"
 
 #. settings-schema.json->show-help-in-tooltip->tooltip
 msgid "You can uncheck this option when you are familiar with all mouse roles."
-msgstr ""
-"Puede desmarcar esta opción cuando esté familiarizado con todos los roles "
-"del mouse."
+msgstr "Puede desmarcar esta opción cuando esté familiarizado con todos los roles del mouse."
 
 #. settings-schema.json->notif-station-change->description
 msgid "Change of radio"
@@ -1645,11 +1514,8 @@ msgid "Change of song or program"
 msgstr "Cambio de canción o de programa"
 
 #. settings-schema.json->notif-song-change->tooltip
-msgid ""
-"Please note that some radios do not notify you of a song or program change."
-msgstr ""
-"Tenga en cuenta que algunas radios no le notifican un cambio de canción o de "
-"programa."
+msgid "Please note that some radios do not notify you of a song or program change."
+msgstr "Tenga en cuenta que algunas radios no le notifican un cambio de canción o de programa."
 
 #. settings-schema.json->notif-song-duration->units
 msgid "seconds"
@@ -1661,16 +1527,11 @@ msgstr "Duración de una notificación de cambio de canción o programa"
 
 #. settings-schema.json->notif-buttons-allowed->description
 msgid "Show in notifications the buttons to start and stop recordings"
-msgstr ""
-"Mostrar en notificaciones los botones para iniciar y detener grabaciones"
+msgstr "Mostrar en notificaciones los botones para iniciar y detener grabaciones"
 
 #. settings-schema.json->notif-buttons-allowed->tooltip
-msgid ""
-"Please note that this will have no effect if you do not wish to be notified "
-"of a song or program change."
-msgstr ""
-"Tenga en cuenta que esto no tendrá ningún efecto si no desea que se le "
-"notifique un cambio de canción o programa."
+msgid "Please note that this will have no effect if you do not wish to be notified of a song or program change."
+msgstr "Tenga en cuenta que esto no tendrá ningún efecto si no desea que se le notifique un cambio de canción o programa."
 
 #. settings-schema.json->show-codec->description
 msgid "Show codec"
@@ -1681,13 +1542,10 @@ msgid "Show bit rate"
 msgstr "Mostrar tasa de bits"
 
 #. settings-schema.json->show-bitrate->tooltip
-msgid ""
-"Unit: kbps (kilobit per second).\n"
+msgid "Unit: kbps (kilobit per second).\n"
 "The higher this bit rate, the better the sound quality of the stream."
-msgstr ""
-"Unidad: kbps (kilobit por segundo).\n"
-"Cuanto mayor sea esta tasa de bits, mejor será la calidad de sonido de la "
-"transmisión."
+msgstr "Unidad: kbps (kilobit por segundo).\n"
+"Cuanto mayor sea esta tasa de bits, mejor será la calidad de sonido de la transmisión."
 
 #. settings-schema.json->color-on->description
 msgid "Color of the symbolic icon while the radio is on"
@@ -1703,9 +1561,7 @@ msgstr "Mostrar el logotipo de la emisora de radio escuchada"
 
 #. settings-schema.json->show-favicon->tooltip
 msgid "Replace this applet icon with the radio station logo, if it exists."
-msgstr ""
-"Sustituya este icono de applet por el logotipo de la emisora de radio, si "
-"existe."
+msgstr "Sustituya este icono de applet por el logotipo de la emisora de radio, si existe."
 
 #. settings-schema.json->network-quality->description
 msgid "Network Quality"
@@ -1720,26 +1576,12 @@ msgid "Low"
 msgstr "Baja"
 
 #. settings-schema.json->network-quality->tooltip
-msgid ""
-"High Quality: The recordings you make while listening to the radio will "
-"double the bit rate usually required to just listen to the radio. Thus, the "
-"recordings will not be disturbed by extraneous sounds or by a change in the "
-"volume of the radio.\n"
+msgid "High Quality: The recordings you make while listening to the radio will double the bit rate usually required to just listen to the radio. Thus, the recordings will not be disturbed by extraneous sounds or by a change in the volume of the radio.\n"
 "\n"
-"Low Quality: These recordings come directly from the sound card, which "
-"relieves the network but risks polluting them with extraneous sounds (system "
-"sounds for example). The volume of the radio will be set to 100% in order to "
-"obtain the best possible quality."
-msgstr ""
-"Alta calidad: Las grabaciones que realices mientras escuchas la radio "
-"duplicarán la tasa de bits que normalmente se requiere para escuchar sólo la "
-"radio. Así, las grabaciones no se verán alteradas por sonidos extraños o por "
-"un cambio en el volumen de la radio.\n"
+"Low Quality: These recordings come directly from the sound card, which relieves the network but risks polluting them with extraneous sounds (system sounds for example). The volume of the radio will be set to 100% in order to obtain the best possible quality."
+msgstr "Alta calidad: Las grabaciones que realices mientras escuchas la radio duplicarán la tasa de bits que normalmente se requiere para escuchar sólo la radio. Así, las grabaciones no se verán alteradas por sonidos extraños o por un cambio en el volumen de la radio.\n"
 "\n"
-"Baja calidad: Estas grabaciones proceden directamente de la tarjeta de "
-"sonido, lo que alivia la red pero corre el riesgo de contaminarlas con "
-"sonidos extraños (sonidos del sistema, por ejemplo). El volumen de la radio "
-"se ajustará al 100% para obtener la mejor calidad posible."
+"Baja calidad: Estas grabaciones proceden directamente de la tarjeta de sonido, lo que alivia la red pero corre el riesgo de contaminarlas con sonidos extraños (sonidos del sistema, por ejemplo). El volumen de la radio se ajustará al 100% para obtener la mejor calidad posible."
 
 #. settings-schema.json->image-resolution->description
 msgid "Quality of downloaded Album Art"
@@ -1766,45 +1608,33 @@ msgid "Fastest"
 msgstr "Más rápida"
 
 #. settings-schema.json->image-resolution->tooltip
-msgid ""
-"Default: High Quality. Choose a value corresponding to your Network Quality."
-msgstr ""
-"Por defecto: Alta Calidad. Elija un valor correspondiente a la calidad de su "
-"red."
+msgid "Default: High Quality. Choose a value corresponding to your Network Quality."
+msgstr "Por defecto: Alta Calidad. Elija un valor correspondiente a la calidad de su red."
 
 #. settings-schema.json->network-monitoring->description
 msgid "Monitor the network"
 msgstr "Monitorizar la red"
 
 #. settings-schema.json->network-monitoring->tooltip
-msgid ""
-"Whether or not to restart the radio when the network becomes active again "
-"after an interruption.\n"
+msgid "Whether or not to restart the radio when the network becomes active again after an interruption.\n"
 "\n"
 "VPN users: By checking this, the radio broadcast may use your VPN link."
-msgstr ""
-"Reiniciar o no la radio cuando la red vuelve a estar activa después de una "
-"interrupción.\n"
+msgstr "Reiniciar o no la radio cuando la red vuelve a estar activa después de una interrupción.\n"
 "\n"
-"Usuarios de VPN: Al marcar esta opción, la emisión de radio puede utilizar "
-"su enlace VPN."
+"Usuarios de VPN: Al marcar esta opción, la emisión de radio puede utilizar su enlace VPN."
 
 #. settings-schema.json->http-proxy->description
 msgid "HTTP Proxy"
 msgstr "Proxy HTTP"
 
 #. settings-schema.json->http-proxy->tooltip
-msgid ""
-"Format: http://[user:pass@]URL[:port]\n"
+msgid "Format: http://[user:pass@]URL[:port]\n"
 "Default: empty.\n"
-"If empty, the environment variables http_proxy and ALL_PROXY will be used if "
-"present.\n"
+"If empty, the environment variables http_proxy and ALL_PROXY will be used if present.\n"
 "If set, this proxy will not be used for https requests."
-msgstr ""
-"Formato: http://[usuario:pass@]URL[:puerto]\n"
+msgstr "Formato: http://[usuario:pass@]URL[:puerto]\n"
 "Por defecto: vacío.\n"
-"Si está vacío, se utilizarán las variables de entorno http_proxy y ALL_PROXY "
-"si están presentes.\n"
+"Si está vacío, se utilizarán las variables de entorno http_proxy y ALL_PROXY si están presentes.\n"
 "Si se establece, este proxy no se utilizará para las solicitudes https."
 
 #. settings-schema.json->apply-http-proxy->description
@@ -1828,41 +1658,29 @@ msgid "No cache"
 msgstr "Sin caché"
 
 #. settings-schema.json->cache-no-cache->tooltip
-msgid ""
-"Checking this option limits memory usage, but no longer allows the user to "
-"rewind the cache (using the sound150@claudiux applet)."
-msgstr ""
-"La activación de esta opción limita el uso de memoria, pero ya no permite al "
-"usuario rebobinar la caché (utilizando el applet sound150@claudiux)."
+msgid "Checking this option limits memory usage, but no longer allows the user to rewind the cache (using the sound150@claudiux applet)."
+msgstr "La activación de esta opción limita el uso de memoria, pero ya no permite al usuario rebobinar la caché (utilizando el applet sound150@claudiux)."
 
 #. settings-schema.json->cache-minutes->description
-msgid ""
-"Minutes to cache\n"
+msgid "Minutes to cache\n"
 "0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
-msgstr ""
-"Minutos de caché\n"
-"0 significa sin límite (por defecto). 1 hora = 60 minutos. 24 horas = 1440 "
-"minutos."
+msgstr "Minutos de caché\n"
+"0 significa sin límite (por defecto). 1 hora = 60 minutos. 24 horas = 1440 minutos."
 
 #. settings-schema.json->cache-on-disk->description
-msgid ""
-"Cache on disk\n"
+msgid "Cache on disk\n"
 "(Write packet data to a temporary file, instead of keeping them in memory.)"
-msgstr ""
-"Caché en disco\n"
-"(Escribe los datos de los paquetes en un archivo temporal, en lugar de "
-"mantenerlos en memoria)."
+msgstr "Caché en disco\n"
+"(Escribe los datos de los paquetes en un archivo temporal, en lugar de mantenerlos en memoria)."
 
 #. settings-schema.json->cache-stream-size->description
 msgid "Stream cache size"
 msgstr "Tamaño de caché de transmisión"
 
 #. settings-schema.json->cache-stream-size->tooltip
-msgid ""
-"The amount of stream cache. Default: 10 MiB.\n"
+msgid "The amount of stream cache. Default: 10 MiB.\n"
 "Beware, setting this to a large value can reduce performance."
-msgstr ""
-"La cantidad de caché de transmisión. Por defecto: 10 MiB.\n"
+msgstr "La cantidad de caché de transmisión. Por defecto: 10 MiB.\n"
 "Cuidado, un valor alto puede reducir el rendimiento."
 
 #. settings-schema.json->cache-stream-size->options
@@ -1966,12 +1784,8 @@ msgstr "WAV"
 
 #. settings-schema.json->recording-format->tooltip
 #. settings-schema.json->recording-ends-auto->tooltip
-msgid ""
-"Please note that this choice will have no effect on any current recording, "
-"but on subsequent ones."
-msgstr ""
-"Tenga en cuenta que esta elección no tendrá efecto en ninguna grabación "
-"actual, pero sí en las posteriores."
+msgid "Please note that this choice will have no effect on any current recording, but on subsequent ones."
+msgstr "Tenga en cuenta que esta elección no tendrá efecto en ninguna grabación actual, pero sí en las posteriores."
 
 #. settings-schema.json->recording-ends-auto->description
 msgid "Way to stop recording"
@@ -1990,11 +1804,8 @@ msgid "Space remaining on disk when opening this window:"
 msgstr "Espacio restante en el disco al abrir esta ventana:"
 
 #. settings-schema.json->limits-hd-size-prefixes->description
-msgid ""
-"Disk space unit as defined in Nemo's display preferences (File size prefixes)"
-msgstr ""
-"Unidad de espacio en disco definida en las preferencias de visualización de "
-"Nemo (prefijos de tamaño de archivo)"
+msgid "Disk space unit as defined in Nemo's display preferences (File size prefixes)"
+msgstr "Unidad de espacio en disco definida en las preferencias de visualización de Nemo (prefijos de tamaño de archivo)"
 
 #. settings-schema.json->limits-hd-size-prefixes->options
 msgid "GB (decimal)"
@@ -2034,12 +1845,8 @@ msgid "Ignore Youtube features"
 msgstr "Ignorar las funciones de YouTube"
 
 #. settings-schema.json->ignoreYT->tooltip
-msgid ""
-"Ignoring Youtube features reduces CPU load. But loading album art becomes "
-"impossible."
-msgstr ""
-"Ignorar las funciones de YouTube reduce la carga de la CPU. Pero cargar la "
-"carátula del álbum se vuelve imposible."
+msgid "Ignoring Youtube features reduces CPU load. But loading album art becomes impossible."
+msgstr "Ignorar las funciones de YouTube reduce la carga de la CPU. Pero cargar la carátula del álbum se vuelve imposible."
 
 #. settings-schema.json->yt-cookies-from->description
 msgid "Use cookies from"
@@ -2086,14 +1893,8 @@ msgid "Vivaldi"
 msgstr "Vivaldi"
 
 #. settings-schema.json->yt-cookies-from->tooltip
-msgid ""
-"Cookies are used by YouTube to determine which videos you may watch. For "
-"Chromium, you can select the method (in parentheses) you chose to save "
-"cookies."
-msgstr ""
-"Las cookies son utilizadas por YouTube para determinar qué vídeos puedes "
-"ver. En el caso de Chromium, puede seleccionar el método (entre paréntesis) "
-"que eligió para guardar las cookies."
+msgid "Cookies are used by YouTube to determine which videos you may watch. For Chromium, you can select the method (in parentheses) you chose to save cookies."
+msgstr "Las cookies son utilizadas por YouTube para determinar qué vídeos puedes ver. En el caso de Chromium, puede seleccionar el método (entre paréntesis) que eligió para guardar las cookies."
 
 #. settings-schema.json->show-yt-progress->description
 msgid "Display, under the icon, the progress of downloads from YT."
@@ -2172,12 +1973,8 @@ msgid "Keep video (slower)"
 msgstr "Mantener vídeo (más lento)"
 
 #. settings-schema.json->recordings-keep-video->tooltip
-msgid ""
-"Whether or not to keep the intermediate video file on disk after post-"
-"processing"
-msgstr ""
-"Conservar o no el archivo de vídeo intermedio en disco tras el "
-"postprocesamiento"
+msgid "Whether or not to keep the intermediate video file on disk after post-processing"
+msgstr "Conservar o no el archivo de vídeo intermedio en disco tras el postprocesamiento"
 
 #. settings-schema.json->recordings-subdirectory->description
 msgid "Record in subdirectory"
@@ -2221,8 +2018,7 @@ msgstr "Programar esta grabación"
 
 #. settings-schema.json->sched-alert-no-space->description
 msgid "You are running out of disk space. See in the Recording tab."
-msgstr ""
-"Se está quedando sin espacio en el disco. Ver en la pestaña de grabación."
+msgstr "Se está quedando sin espacio en el disco. Ver en la pestaña de grabación."
 
 #. settings-schema.json->sched-recordings->columns->title
 msgid "Remove?"
@@ -3414,8 +3210,7 @@ msgstr "aleatorio"
 
 #. settings-schema.json->search-order->tooltip
 msgid "OPTIONAL. Name of the attribute the result list will be sorted by."
-msgstr ""
-"OPCIONAL. Nombre del atributo por el que se ordenará la lista de resultados."
+msgstr "OPCIONAL. Nombre del atributo por el que se ordenará la lista de resultados."
 
 #. settings-schema.json->search-limit->description
 msgid "Limit"
@@ -3529,3 +3324,4 @@ msgstr "Última emisora de radio escuchada"
 #. settings-schema.json->alarm-clock-tink-on->description
 msgid "Activate tink to ensure speakers are awake"
 msgstr "Activar el timbre para asegurarse de que los altavoces están activos"
+
