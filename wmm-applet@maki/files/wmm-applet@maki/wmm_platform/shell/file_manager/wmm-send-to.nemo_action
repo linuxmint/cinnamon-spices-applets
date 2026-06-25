@@ -1,0 +1,13 @@
+[Nemo Action]
+Name=WMM: Send to Monitor
+Name[es]=WMM: Enviar al monitor
+Name[ca]=WMM: Envia a la pantalla
+Comment=Assign the selected image to a specific monitor
+Comment[es]=Asignar la imagen seleccionada a un monitor específico
+Comment[ca]=Assigna la imatge seleccionada a una pantalla específica
+Exec=sh -c '$HOME/.local/share/nemo/actions/wmm-send-to-monitor.sh "$@"' sh %F
+Icon-Name=video-display
+Selection=single
+Extensions=jpg;jpeg;png;bmp;webp;gif
+Quote=double
+EscapeSpaces=true

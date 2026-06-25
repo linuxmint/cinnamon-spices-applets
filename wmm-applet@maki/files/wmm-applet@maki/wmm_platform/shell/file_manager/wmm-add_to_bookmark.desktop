@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Service
+MimeType=image/*;
+Actions=AddToWMM;
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+Encoding=UTF-8
+
+[Desktop Action AddToWMM]
+Name=WMM: Add to favorites
+Name[es]=WMM: Añadir a favoritos
+Icon=user-bookmarks
+Exec=$HOME/.local/share/kio/servicemenus/wmm-add_to_bookmarks.sh %f

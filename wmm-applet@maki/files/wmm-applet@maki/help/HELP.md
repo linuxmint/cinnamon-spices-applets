@@ -317,6 +317,44 @@ This option forces a complete scan of all configured image sources. WMM traverse
 
 Upon completion, you will receive a notification summarizing the changes (number of new and deleted images). Useful after manually adding or removing images from WMM's folders.
 
+# Keyboard shortcuts
+
+You can to force wallpaper rotation without using the mouse, you can set up a custom keyboard shortcut on your desktop. WMM includes a small script ready for this purpose.
+
+## On Cinnamon
+
+1.  Open **System Settings → Keyboard → Keyboard shortcuts**.
+2.  Click **Add custom shortcut**.
+3.  Name it **"WMM - Change Wallpaper"**.
+4.  In the **Command** field, enter:
+
+    `bash -c "bash $HOME/.local/share/cinnamon/applets/wmm-applet@maki/wmm_platform/shell/cinnamon/wmm-next.sh"`
+
+5.  Assign your preferred key combination (for example, `Ctrl+Alt+N`).
+6.  Click **Accept** and test the shortcut.
+
+## On GNOME
+
+1.  Open **Settings → Keyboard → Custom shortcuts**.
+2.  Click **"+"** to add a new one.
+3.  Name it **"WMM - Change Wallpaper"**.
+4.  In the **Command** field, enter:
+
+    `bash -c "bash $HOME/.local/share/gnome-shell/extensions/wmm@maki/wmm_platform/shell/gnome/wmm-next.sh"`
+
+5.  Assign your preferred key combination (for example, `Ctrl+Alt+N`).
+6.  Close the window and test the shortcut.
+
+**Note:** The `wmm-next.sh` script is installed automatically with WMM and should have the correct execution permissions. If the shortcut does not work, make sure the script is executable:
+
+    **On Gnome**
+
+    `chmod +x ~/.local/share/gnome-shell/extensions/wmm@maki/wmm_platform/shell/gnome/wmm-next.sh   # for GNOME`
+
+    **On Cinnamon**
+
+    `chmod +x ~/.local/share/cinnamon/applets/wmm-applet@maki/wmm_platform/shell/cinnamon/wmm-next.sh # for Cinnamon`
+
 # Help
 
 Opens the WMM help window, where you will find detailed information about all program features. The window has a navigation index on the left and formatted content on the right.

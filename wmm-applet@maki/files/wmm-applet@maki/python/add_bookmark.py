@@ -26,7 +26,6 @@ DEPENDENCIAS:
 # ==========================================================
 import os
 import sys
-import subprocess
 
 # ==========================================================
 # IMPORTS DE TERCEROS (GTK)
@@ -39,6 +38,7 @@ from gi.repository import Gtk, Gio
 # IMPORTS DE MÓDULOS DEL PROYECTO
 # ==========================================================
 from config_handler import ConfigHandler
+from wmm_platform.core import PlatformManager
 from debug_logger import log_event
 from i18n import _
 
@@ -55,7 +55,8 @@ class AddBookmarkDialog(Gtk.ApplicationWindow):
         super().__init__(application=app, title=_("Add Favorite Preset"))
         self.set_icon_name("bookmark-new")  # Icono de añadir favorito
         self.app = app
-        self.handler = ConfigHandler()
+        platform = PlatformManager()
+        self.handler = ConfigHandler(cache_base_dir=platform.cache_dir)
         try:
             # Capturamos la sesión activa de monitores EN ESTE PRECISO INSTANTE.
             # Esto garantiza que el favorito refleje exactamente lo que el usuario ve.
@@ -174,12 +175,12 @@ class AddBookmarkDialog(Gtk.ApplicationWindow):
 
         if success:
             # Notificar al motor para que el panel refresque la lista de presets
+            # El motor detecta el cambio en commands.json vía Gio.FileMonitor
             try:
                 self.handler.save_json("commands", {"action": "bookmark_added", "name": name})
-                subprocess.run(["pkill", "-USR1", "-f", "main.py"])
             except Exception as e:
-                log_event(f"No se pudo notificar al motor: {e}", origin="ADD_BOOK", level="WARN", reason="SIGNAL")
-            log_event(f"Preset guardado correctamente: {name}", origin="ADD_BOOK", level="INFO", reason="SIGNAL")
+                log_event(f"No se pudo notificar al motor: {e}", origin="ADD_BOOK", level="WARN", reason="COMMAND")
+            log_event(f"Preset guardado correctamente: {name}", origin="ADD_BOOK", level="INFO", reason="COMMAND")
             self.destroy()
         else:
             # Gestionar los errores conocidos

@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "Plasma/Wallpaper",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "makimanson@gmail.com",
+                "Name": "makimanson"
+            }
+        ],
+        "Category": "",
+        "Description": "Wallpaper Multi-Monitor manager",
+        "Icon": "preferences-desktop-wallpaper",
+        "Id": "org.maki.wmm",
+        "License": "GPL-3.0",
+        "Name": "WMM Wallpaper Manager"
+    },
+    "X-KDE-ParentApp": "org.kde.plasmashell"
+}

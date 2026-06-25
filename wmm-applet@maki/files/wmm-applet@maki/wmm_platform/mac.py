@@ -6,30 +6,43 @@ import os
 import subprocess
 import fcntl
 
-system_domain = None
-CACHE_DIR = None
+def normalize_platform(raw_platform):
+    """Normaliza el valor de sys.platform al nombre canónico del SO."""
+    return raw_platform
 
-def get_cache_dir(app_name="wmm"):
-    # TODO: Usar ~/Library/Caches cuando se implemente macOS
-    # return os.path.join(os.path.expanduser("~/Library/Caches"), app_name)
-    return None
+def detect_desktop():
+    """Detecta el escritorio actual (esqueleto)."""
+    return 'generic'
+
+def get_system_paths():
+    """
+    Devuelve las rutas base del sistema para macOS.
+    TODO: Implementar usando ~/Library/Application Support, ~/Library/Caches, etc.
+    Por ahora, devuelve None para usar fallbacks genéricos.
+    """
+    return {
+        'data_base': None,
+        'cache_base': None,
+        'locale_dir': None,
+        'cache_dir': None,
+    }
+
+def get_install_path(data_base, app_domain):
+    """Devuelve la ruta de instalación (esqueleto)."""
+    if data_base:
+        return os.path.join(data_base, app_domain)
+    return app_domain
 
 def lock_file(f):
     """
     Bloquea el archivo para escritura exclusiva usando fcntl.flock.
     Disponible en macOS por ser un sistema Unix.
-
-    Args:
-        f: Objeto de archivo abierto.
     """
     fcntl.flock(f, fcntl.LOCK_EX)
 
 def unlock_file(f):
     """
     Desbloquea el archivo previamente bloqueado con lock_file.
-
-    Args:
-        f: Objeto de archivo abierto.
     """
     fcntl.flock(f, fcntl.LOCK_UN)
 
@@ -38,21 +51,6 @@ def open_file(path):
     Abre un archivo o directorio con la aplicación predeterminada en macOS.
     """
     subprocess.run(['open', path], check=False)
-
-def setup_translations():
-    """
-    Configura el sistema de traducciones para macOS.
-    """
-    # TODO: Implementar según la estructura de macOS
-    pass
-
-def _(text):
-    """
-    Función de traducción para macOS.
-    Por ahora, devuelve el texto original.
-    """
-    # TODO: Implementar gettext para macOS
-    return text
 
 def send_notification(title, message, level="info"):
     """
@@ -64,22 +62,15 @@ def send_notification(title, message, level="info"):
 def _force_desktop_settings(config_handler):
     """
     Fuerza los ajustes del sistema necesarios para que WMM funcione
-    correctamente en macOS:
-      - Modo de aspecto  = 'spanned'  (no deformar el lienzo)
-      - Slideshow        = desactivado (evitar interferencias)
-      - Tipo de fondo    = 'solid'    (evitar mezclas de color)
-
-    En macOS, estos ajustes se controlan mediante comandos 'defaults'
-    o mediante la API de Cocoa (NSWorkspace). Se debe verificar cada
-    ajuste y notificar al usuario si alguno no se aplicó.
-
+    correctamente en macOS.
     TODO: Implementar usando subprocess.run con defaults o PyObjC.
     """
     pass
 
-def ensure_shell_actions(applet_root):
+def ensure_shell_actions(applet_root, data_base):
     """
-    Instala las acciones de shell necesarias para macOS (p. ej., servicios del Finder).
+    Instala las acciones de shell necesarias para macOS
+    (p. ej., servicios del Finder).
     TODO: Implementar cuando se añada soporte para macOS.
     """
     pass

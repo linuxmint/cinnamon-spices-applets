@@ -317,6 +317,44 @@ Aquesta opció força un escaneig complet de totes les fonts d'imatge configurad
 
 En finalitzar, rebràs una notificació amb el resum dels canvis (nombre d'imatges noves i eliminades). És útil després d'afegir o treure imatges manualment de les carpetes de WMM.
 
+# Dreceres de teclat
+
+Pots forçar un canvi de fons sense fer servir el ratolí configurant una drecera de teclat personalitzada al teu escriptori. WMM inclou un petit script preparat per a això.
+
+## En Cinnamon
+
+1.  Obre **Configuració del sistema → Teclat → Dreceres de teclat**.
+2.  Fes clic a **Afegeix una drecera personalitzada**.
+3.  Posa-li el nom **"WMM - Canviar fons de pantalla"**.
+4.  Al camp **Comanda**, escriu:
+
+    `bash -c "bash $HOME/.local/share/cinnamon/applets/wmm-applet@maki/wmm_platform/shell/cinnamon/wmm-next.sh"`
+
+5.  Assigna la combinació de tecles que prefereixis (per exemple, Ctrl+Alt+N).
+6.  Prem Accepta i prova la drecera.
+
+## En GNOME
+
+1.  Obre Configuració → Teclat → Dreceres personalitzades.
+2.  Fes clic a "+" per afegir-ne una de nova.
+3.  Posa-li el nom "WMM - Canviar fons de pantalla".
+4.  Al camp Comanda, escriu:
+
+    `bash -c "bash $HOME/.local/share/gnome-shell/extensions/wmm@maki/wmm_platform/shell/gnome/wmm-next.sh"`
+
+5.  Assigna la combinació de tecles que prefereixis (per exemple, Ctrl+Alt+N).
+6.  Tanca la finestra i prova la drecera.
+
+Nota: El script wmm-next.sh s'instal·la automàticament amb WMM i hauria de tenir els permisos d'execució correctes. Si la drecera no funciona, assegura't que el script sigui executable:
+
+    **Per a GNOME**
+
+    `chmod +x ~/.local/share/gnome-shell/extensions/wmm@maki/wmm_platform/shell/gnome/wmm-next.sh`
+
+    **Per a Cinnamon**
+
+    `chmod +x ~/.local/share/cinnamon/applets/wmm-applet@maki/wmm_platform/shell/cinnamon/wmm-next.sh`
+
 # Ajuda
 
 Obre la finestra d'ajuda de WMM, on trobaràs informació detallada sobre totes les funcionalitats del programa. La finestra compta amb un índex de navegació a l'esquerra i el contingut formatejat a la dreta.

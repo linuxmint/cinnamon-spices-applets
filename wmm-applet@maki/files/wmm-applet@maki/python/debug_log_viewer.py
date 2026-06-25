@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-WMM Applet - Cinnamon Edition
+WMM
 ----------------------------
 debug_log_viewer.py – Visor independiente del log de depuración.
 
@@ -34,10 +34,10 @@ FILTER_ORIGINS = [
     "PANEL",
     "CONFIG",
     "BACKEND",
-    "NEMO_SEND",
-    "NEMO_ADD",
+    "SHELL_SEND",
+    "SHELL_ADD",
     "ADD_BOOK",
-    "CINNAMON",
+    "DESKTOP",
     "UNKNOW"
 ]
 
@@ -52,7 +52,6 @@ FILTER_LEVELS = [
 FILTER_REASONS = [
     "All",
     "GENERIC",
-    "SIGNAL",
     "COMMAND",
     "NOTIFY",
     "VAULT",

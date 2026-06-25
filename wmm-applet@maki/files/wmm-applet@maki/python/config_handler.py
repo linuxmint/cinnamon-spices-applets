@@ -37,8 +37,8 @@ from gi.repository import GLib
 # ==========================================================
 from image_engine import ImageEngine
 from wmm_platform.core import PlatformManager
-from debug_logger import log_event
-from i18n import _
+from debug_logger import log_event, set_cache_dir
+from i18n import _, N_, set_app_domain, set_locale_dir
 
 class ConfigHandler:
     ...
@@ -50,25 +50,23 @@ class ConfigHandler:
 
     # Modos de ajuste disponibles para la interfaz
     ASPECT_MODES = {
-        # "none": "No image",
-        # "centered": "Centered",
-        "fit": "Scaled",
-        "zoom": "Zoom",
-        "stretched": "Stretched"
+        "fit": N_("Scaled"),
+        "zoom": N_("Zoom"),
+        "stretched": N_("Stretched")
     }
     COLOR_MODES = {
-        "solid_color": "Solid color",
-        "gradient_h": "Gradient H",
-        "gradient_v": "Gradient V"
+        "solid_color": N_("Solid color"),
+        "gradient_h": N_("Gradient H"),
+        "gradient_v": N_("Gradient V")
     }
     IMAGE_EFFECT = {
-        "none" : "None",
-        "sepia": "Sepia",
-        "bw": "Black and White"
+        "none": N_("None"),
+        "sepia": N_("Sepia"),
+        "bw": N_("Black and White")
     }
     BACK_EFFECT = {
-        "blur": "Blur effect",
-        "color": "Color"
+        "blur": N_("Blur effect"),
+        "color": N_("Color")
     }
     # ------------------------------------------------------------
     # Claves internas para motivos de ejecución (estables, no traducibles)
@@ -98,6 +96,7 @@ class ConfigHandler:
     CMD_LOAD_BOOKMARK   = "load_bookmark"
     CMD_DELETE_BOOKMARK = "delete_bookmark"
     CMD_BOOKMARK_ADDED  = "bookmark_added"
+    CMD_SINGLE_FAVORITE_ADDED = "single_favorite_added"
     CMD_FORCE_ROTATION  = "force_rotation"
     CMD_SYNC_LIBRARY    = "sync_library"
     CMD_OPEN_PANEL      = "open_panel"
@@ -134,7 +133,7 @@ class ConfigHandler:
             self.cache_dir = cache_base_dir
         else:
             self.cache_dir = os.path.join(self.applet_root, "cache")
-
+        log_event(f"[DIAG] ConfigHandler: cache_base_dir={cache_base_dir!r}, cache_dir={self.cache_dir!r}", origin="CONFIG", level="DEBUG", reason="SETTINGS")
         # Rutas derivadas de la caché
         self.master_canvas = os.path.join(self.cache_dir, "wallpaper_master.jpg")
         self.thumbnails_dir = os.path.join(self.cache_dir, "thumbnails")
@@ -145,7 +144,6 @@ class ConfigHandler:
         # El debug_logger usa la misma ruta de caché que ConfigHandler.
         # Así, los logs se guardan siempre en el directorio correcto
         # independientemente del SO.
-        from debug_logger import set_cache_dir
         set_cache_dir(self.cache_dir)
 
         # ==========================================================
@@ -182,6 +180,13 @@ class ConfigHandler:
         # Garantiza que todos los directorios y archivos JSON existan.
         # Si es la primera ejecución, los crea con valores por defecto.
         self.ensure_structure()
+        # Configurar el dominio de traducción para que todos los componentes lo usen
+        try:
+            platform = PlatformManager()
+            set_app_domain(platform.app_domain)
+            set_locale_dir(platform.locale_dir)
+        except Exception:
+            pass
 
     def ensure_structure(self):
         """
@@ -395,6 +400,44 @@ class ConfigHandler:
         geo = self.load_json("geometry")
         monitors = geo.get("monitors", {})
         return monitors.get(m_hash, {})
+
+
+    def get_monitor_display_name(self, m_hash):
+        """
+        Devuelve una etiqueta legible para el monitor con el hash dado,
+        combinando fabricante, modelo y pulgadas según la calidad de los datos.
+        """
+        geo = self.load_json("geometry")
+        monitors = geo.get("monitors", {})
+        info = monitors.get(m_hash, {})
+        if not info:
+            return _("Generic Monitor")
+
+        connector = info.get("connector", "")
+        mfg_code = info.get("manufacturer", "")
+        inches = info.get("inches", 0)
+
+        # Mapear código de fabricante a nombre legible
+        mfg_map = self.get_mfg_map()
+        mfg_name = mfg_map.get(mfg_code, mfg_code) if mfg_code else ""
+
+        # Construir la etiqueta según la riqueza de los datos
+        if mfg_name and mfg_name.lower() in connector.lower():
+            # El modelo ya contiene el fabricante (ej. "MSI MAG271CQR")
+            label = f"{connector}"
+        elif mfg_name and connector:
+            # Fabricante y modelo por separado (ej. "SAM" y "LC49G95T")
+            label = f"{mfg_name} {connector}"
+        elif connector:
+            # Solo tenemos conector/modelo
+            label = f"{connector}"
+        else:
+            label = _("Generic Monitor")
+
+        if inches > 0:
+            label += f' ({inches}")'
+
+        return label
 
     def refresh_history_metadata(self):
         """
@@ -825,7 +868,7 @@ class ConfigHandler:
         sources_data = self.load_json("sources").get("sources", [])
         return self._is_covered_by_any_recursive_source(container, sources_data)
 
-    def sync_library(self, on_progress=None, on_folder=None):
+    def sync_library(self, on_progress=None, on_folder=None, on_complete=None):
         """
         Sincroniza la biblioteca física basándose en sources.json.
         Implementa discriminación por carpeta y poda de árbol recursiva.
@@ -836,8 +879,7 @@ class ConfigHandler:
         extensions = self.img_extensions
         # Mapa de carpetas que el motor DEBE tener en cuenta
         active_folders_mtime = {}
-        if active_folders_mtime:
-            log_event(f"active_folders_mtime keys = {list(active_folders_mtime.keys())}", origin="CONFIG", level="DEBUG", reason="LIBRARY")
+
         # --- 2. MAPEO DE REALIDAD FÍSICA Y PODA LÓGICA ---
         for source in sources_data:
             if source.get("type") != "physical" or not os.path.exists(source.get("path", "")):
@@ -908,7 +950,12 @@ class ConfigHandler:
                 entry = scan_index.get(f)
                 is_inactive = isinstance(entry, list) and len(entry) > 1 and entry[1] is False
                 if is_inactive:
-                    inactive_folders.append(f)
+                    # Si la carpeta inactiva ya no está cubierta por ninguna fuente,
+                    # tratarla como eliminada para limpiar su caché y thumbnails
+                    if not self._is_covered_by_any_recursive_source(f, sources_data):
+                        deleted_folders.append(f)
+                    else:
+                        inactive_folders.append(f)
                 else:
                     deleted_folders.append(f)
             elif (
@@ -922,13 +969,13 @@ class ConfigHandler:
         self.maintenance_flat_list()
         self.refresh_history_metadata()
 
-        # Logs condicionados
-        if deleted_folders:
-            log_event(f"Carpetas eliminadas: {deleted_folders}", origin="CONFIG", level="DEBUG", reason="LIBRARY")
-        if inactive_folders:
-            log_event(f"Carpetas desactivadas: {inactive_folders}", origin="CONFIG", level="DEBUG", reason="LIBRARY")
-        if active_folders_mtime:
-            log_event(f"active_folders_mtime keys = {list(active_folders_mtime.keys())}", origin="CONFIG", level="DEBUG", reason="LIBRARY")
+        # Resumen de carpetas activas, desactivadas y eliminadas
+        active_count = len(active_folders_mtime)
+        inactive_count = len(inactive_folders)
+        deleted_count = len(deleted_folders)
+        if active_count > 0 or inactive_count > 0 or deleted_count > 0:
+            log_event(f"Carpetas: {active_count} activas, {inactive_count} desactivadas, {deleted_count} eliminadas",
+                      origin="CONFIG", level="DEBUG", reason="LIBRARY")
 
         # SALIDA RÁPIDA: Si nada ha cambiado
         if not folders_to_rescan and not deleted_folders:
@@ -943,6 +990,7 @@ class ConfigHandler:
         # --- MODO ASÍNCRONO (si se solicita desde la UI) ---
         if on_progress and on_folder:
             self._async_state = {
+                'on_complete': on_complete,
                 'folders_to_rescan': folders_to_rescan,
                 'deleted_folders': deleted_folders,
                 'full_cache': full_cache,
@@ -1109,6 +1157,8 @@ class ConfigHandler:
 
                 # Limpiar estado temporal
                 del self._async_state
+                if state.get('on_complete'):
+                    state['on_complete']()
                 log_event(f"Escaneo asíncrono completado: {len(folders)} carpetas procesadas", origin="CONFIG", level="INFO", reason="LIBRARY")
 
         except Exception as e:
@@ -1167,15 +1217,6 @@ class ConfigHandler:
         if len(sources_list) < original_count:
             data["sources"] = sources_list
             self.save_json("sources", data)
-
-            # Limpiar el índice de la carpeta eliminada y sus subcarpetas
-            index = self.load_json("index")
-            prefix = path if path.endswith(os.sep) else path + os.sep
-            keys_to_remove = [key for key in index if key == path or key.startswith(prefix)]
-            for key in keys_to_remove:
-                del index[key]
-            self.save_json("index", index)
-
             log_event(f"Fuente eliminada: {path}", origin="CONFIG", level="INFO", reason="LIBRARY")
             self.sync_library()
             return True

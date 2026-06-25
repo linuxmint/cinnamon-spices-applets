@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-WMM Applet - Cinnamon Edition
+WMM
 ----------------------------
 help_viewer.py – Visor de ayuda integrado con índice de navegación.
 

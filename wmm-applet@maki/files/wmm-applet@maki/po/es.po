@@ -7,34 +7,35 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2026-06-09 11:20+0200\n"
-"PO-Revision-Date: 2026-06-10 23:17+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-18 18:25+0200\n"
+"PO-Revision-Date: 2026-06-18 18:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: es_ES\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: python/config_handler.py:1448
+#: python/config_handler.py:1510
 msgid "New"
 msgstr "Nuevas"
 
-#: python/config_handler.py:1455
+#: python/config_handler.py:1517
 msgid "Removed"
 msgstr "Eliminadas"
 
-#: python/config_handler.py:1461
+#: python/config_handler.py:1523
 msgid "Total library"
 msgstr "Total biblioteca"
 
-#: python/config_handler.py:1488
+#: python/config_handler.py:1550
 msgid "Action"
 msgstr "Acción"
 
-#: python/help_viewer.py:33 applet.js:195
+#: python/help_viewer.py:33 wmm_platform/shell/cinnamon/applet.js:195
+#: wmm_platform/shell/gnome/extension.js:192
 msgid "Help"
 msgstr "Ayuda"
 
@@ -62,6 +63,10 @@ msgstr "Nivel"
 msgid "Reason"
 msgstr "Razón"
 
+#: python/debug_log_viewer.py:132
+msgid "Search"
+msgstr "Buscar"
+
 #: python/debug_log_viewer.py:135
 msgid "Filter by text"
 msgstr "Filtrar por texto"
@@ -86,482 +91,636 @@ msgstr "¿Borrar el registro de depuración?"
 msgid "All log entries will be permanently deleted."
 msgstr "Todas las entradas del registro se eliminarán permanentemente."
 
-#: python/nemo_add_bookmark.py:61
+#: python/nemo_add_bookmark.py:63
 msgid "Error adding to favorites"
 msgstr "Error al añadir favorito"
 
-#: python/nemo_add_bookmark.py:62
+#: python/nemo_add_bookmark.py:64
 msgid "Could not process image:"
 msgstr "No se pudo procesar la imagen:"
 
-#: python/nemo_add_bookmark.py:74
+#: python/nemo_add_bookmark.py:75 python/panel/thumbnails_section.py:327
+msgid "Add to favorites"
+msgstr "Añadir a favoritos"
+
+#: python/nemo_add_bookmark.py:76
 msgid "Image is already in favorites."
 msgstr "La imagen ya está en favoritos."
 
-#: python/main.py:250
+#: python/main.py:271
 msgid "Favorite deleted"
 msgstr "Favorito eliminado"
 
-#: python/main.py:251
+#: python/main.py:272
 msgid "Preset"
 msgstr "Preset"
 
-#: python/main.py:251
+#: python/main.py:272
 msgid "deleted successfully."
 msgstr "eliminado correctamente."
 
-#: python/main.py:276
+#: python/main.py:297
 msgid "Changes detected"
 msgstr "Cambios detectados"
 
-#: python/main.py:278
+#: python/main.py:299
 msgid "No changes"
 msgstr "Sin cambios"
 
-#: python/main.py:285
+#: python/main.py:306
 msgid "Synchronization"
 msgstr "Sincronización"
 
-#: python/main.py:321
+#: python/main.py:339 python/main.py:350
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: python/main.py:342 python/main.py:353
 msgid "Favorite added"
 msgstr "Favorito añadido"
 
-#: python/main.py:322
+#: python/main.py:343 python/main.py:354
 msgid "added successfully."
 msgstr "añadida correctamente."
 
-#: python/main.py:480
+#: python/main.py:513
 msgid "Cycle aborted: not enough images available to complete selection."
 msgstr ""
 "Ciclo interrumpido: no hay suficientes imágenes disponibles para completar "
 "la selección."
 
-#: python/main.py:483
+#: python/main.py:516
 msgid "No images available"
 msgstr "No hay imágenes disponibles"
 
-#: python/main.py:484
+#: python/main.py:517
 msgid "Check status of Image Sources in Control Panel."
 msgstr "Compruebe el estado de las fuentes de imagen en el Panel de control."
 
-#: python/main.py:515
+#: python/main.py:548
 #, python-brace-format
 msgid "Image: '{image}' from preset: '{preset}' not found."
 msgstr "Imagen: '{image}' del Preset: '{preset}' no encontrada."
 
-#: python/main.py:518
+#: python/main.py:551
 msgid "PRESET image not found"
-msgstr "No se encontraron imágenes"
+msgstr "Imagen del Preset no encontrada"
 
-#: python/main.py:519
+#: python/main.py:552
 msgid "Assigning a random one"
 msgstr "Asignando una aleatoria"
 
-#: python/add_bookmark.py:55
-msgid "Add Favorite Preset"
-msgstr "Añadir Preset Favorito"
+#: python/panel/favorites_section.py:84
+msgid "Slideshow only among favorite images"
+msgstr "Rotación solo entre imágenes de favoritos"
 
-#: python/add_bookmark.py:103
-msgid "Error loading data. Please restart panel"
-msgstr "Error al cargar los datos. Reinicie el panel"
+#: python/panel/favorites_section.py:99 python/panel/options_section.py:461
+msgid "Presets"
+msgstr "Presets"
 
-#: python/add_bookmark.py:118
-msgid "Preset name:"
-msgstr "Nombre del Preset:"
+#: python/panel/favorites_section.py:108 python/panel/favorites_section.py:146
+msgid "Name"
+msgstr "Nombre"
 
-#: python/add_bookmark.py:187 python/panel.py:777
+#: python/panel/favorites_section.py:124 python/panel/sources_section.py:317
+msgid "Delete selected preset/image"
+msgstr "Eliminar preset/imagen seleccionada"
+
+#: python/panel/favorites_section.py:136 python/panel/options_section.py:464
+#: wmm_platform/shell/cinnamon/applet.js:95
+#: wmm_platform/shell/gnome/extension.js:103
+msgid "Favorites"
+msgstr "Favoritos"
+
+#: python/panel/favorites_section.py:161
+msgid "Delete selected image from favorites"
+msgstr "Eliminar imagen seleccionada de favoritos"
+
+#: python/panel/favorites_section.py:212 python/panel/favorites_section.py:327
+msgid "empty"
+msgstr "vacío"
+
+#: python/panel/favorites_section.py:254 python/add_bookmark.py:189
 msgid "A Preset with that name already exists!"
 msgstr "¡Ya existe un Preset con ese nombre!"
 
-#: python/add_bookmark.py:189
-msgid "Error saving"
-msgstr "Error al guardar"
+#: python/panel/favorites_section.py:277
+msgid "Delete preset"
+msgstr "Eliminar preset"
 
-#: python/panel.py:255
+#: python/panel/favorites_section.py:279
+msgid "Load on screens"
+msgstr "Cargar en monitores"
+
+#: python/panel/favorites_section.py:286
+msgid "Delete image"
+msgstr "Eliminar imagen"
+
+#: python/panel/favorites_section.py:396 python/panel/favorites_section.py:398
+#: wmm_platform/shell/cinnamon/applet.js:373
+#: wmm_platform/shell/gnome/extension.js:304
+msgid "Delete"
+msgstr "Eliminar"
+
+#: python/panel/favorites_section.py:398
+msgid "images"
+msgstr "imágenes"
+
+#: python/panel/monitors_section.py:146
+#: wmm_platform/shell/cinnamon/applet.js:142
+#: wmm_platform/shell/cinnamon/applet.js:181
+#: wmm_platform/shell/cinnamon/applet.js:243
+#: wmm_platform/shell/gnome/extension.js:173
+#: wmm_platform/shell/gnome/extension.js:175
+#: wmm_platform/shell/gnome/extension.js:220
+msgid "Displays"
+msgstr "Monitores"
+
+#: python/panel/monitors_section.py:152
+msgid "Side Left"
+msgstr "Lado izquierdo"
+
+#: python/panel/monitors_section.py:156
+msgid "Center"
+msgstr "Centrar"
+
+#: python/panel/monitors_section.py:160
+msgid "Side Right"
+msgstr "Lado derecho"
+
+#: python/panel/monitors_section.py:227
+msgid "Enable/disable screen editing mode"
+msgstr "Activar/desactivar modo edición de monitores"
+
+#: python/panel/monitors_section.py:234
+msgid "Enable"
+msgstr "Activar"
+
+#: python/panel/monitors_section.py:234 python/panel/monitors_section.py:238
+msgid "Editing Mode"
+msgstr "Modo Edición"
+
+#: python/panel/monitors_section.py:238
+#: wmm_platform/shell/cinnamon/applet.js:173
+#: wmm_platform/shell/cinnamon/applet.js:213
+#: wmm_platform/shell/gnome/extension.js:129
+#: wmm_platform/shell/gnome/extension.js:206
+msgid "Enabled"
+msgstr "Activado"
+
+#: python/panel/monitors_section.py:251
+msgid "Span image across all active screens"
+msgstr "Distribuir la imagen en todos los monitores activos"
+
+#: python/panel/monitors_section.py:257 python/panel/options_section.py:183
+msgid "Picture aspect"
+msgstr "Relación de aspecto de la imagen"
+
+#: python/panel/monitors_section.py:257
+msgid "for current composition"
+msgstr "para la composición actual"
+
+#: python/panel/monitors_section.py:271 python/panel/options_section.py:177
+msgid "Spanned"
+msgstr "Distribuido"
+
+#: python/panel/monitors_section.py:276
+msgid "Aspect ratio:"
+msgstr "Rel. aspecto:"
+
+#: python/panel/monitors_section.py:281
+msgid "Effects"
+msgstr "Efectos"
+
+#: python/panel/monitors_section.py:304
+msgid "Refresh real display status"
+msgstr "Actualizar estado real de los monitores"
+
+#: python/panel/monitors_section.py:492 python/panel/monitors_section.py:541
+#: python/panel/monitors_section.py:791
+msgid "Display"
+msgstr "Monitor"
+
+#: python/panel/monitors_section.py:497
+msgid "Primary monitor"
+msgstr "Monitor principal"
+
+#: python/panel/monitors_section.py:504
+msgid "Enable/disable image"
+msgstr "Activar/Desactivar imagen"
+
+#: python/panel/monitors_section.py:791
+msgid "editing"
+msgstr "editando"
+
+#: python/panel/options_section.py:127
+msgid "Options"
+msgstr "Opciones"
+
+#: python/panel/options_section.py:136
 msgid "Restart engine and panel"
 msgstr "Reiniciar el motor y el panel"
 
-#: python/panel.py:261
+#: python/panel/options_section.py:142
 msgid "Open Debug Log Viewer"
 msgstr "Abrir el visor de registros de depuración"
 
-#: python/panel.py:267
+#: python/panel/options_section.py:148
 msgid "Open Help"
 msgstr "Abrir ayuda"
 
-#: python/panel.py:275
+#: python/panel/options_section.py:164
 msgid ""
 "If enabled, the wallpaper is changed at startup; if disabled, the last "
 "wallpaper is kept."
 msgstr ""
-"Si se activa, se cambia el fondo de pantalla al iniciar; si se desactiva, se "
-"mantiene el último fondo de pantalla."
+"Si se activa, se cambia el fondo de pantalla al iniciar; si se desactiva, "
+"se mantiene el último fondo de pantalla."
 
-#: python/panel.py:278
+#: python/panel/options_section.py:168
 msgid "Change wallpaper on startup"
 msgstr "Cambiar fondo al inicio"
 
-#: python/panel.py:283
+#: python/panel/options_section.py:174
 msgid "Span image across all active screens (Only if more than one)"
 msgstr ""
 "Distribuir la imagen en todos los monitores activos (Solo si hay más de uno)"
 
-#: python/panel.py:306
+#: python/panel/options_section.py:199
 msgid "Image Effect:"
 msgstr "Efecto de Imagen:"
 
-#: python/panel.py:316
+#: python/panel/options_section.py:210
 msgid "Background Effect:"
 msgstr "Efecto de Fondo:"
 
-#: python/panel.py:326
-msgid "Gradient H"
-msgstr "Degradado H"
+#: python/panel/options_section.py:216 python/panel/options_section.py:227
+msgid "Background color"
+msgstr "Color de fondo"
 
-#: python/panel.py:326
-msgid "Gradient V"
-msgstr "Degradado V"
-
-#: python/panel.py:338
+#: python/panel/options_section.py:232
 msgid "Horizontal gradient start color"
 msgstr "Color de inicio del degradado horizontal"
 
-#: python/panel.py:341
+#: python/panel/options_section.py:235
 msgid "Horizontal gradient end color"
 msgstr "Color final del degradado horizontal"
 
-#: python/panel.py:345
+#: python/panel/options_section.py:239
 msgid "Vertical gradient start color"
 msgstr "Color de inicio del degradado vertical"
 
-#: python/panel.py:348
+#: python/panel/options_section.py:242
 msgid "Vertical gradient end color"
 msgstr "Color final del degradado vertical"
 
-#: python/panel.py:360
+#: python/panel/options_section.py:254
 msgid "Enable/Disable Timer"
 msgstr "Activa/Desactiva Presentacion de Diapositivas"
 
-#: python/panel.py:368
-msgid "Max. Frequency"
-msgstr "Max. Intervalo"
+#: python/panel/options_section.py:257
+#: wmm_platform/shell/cinnamon/applet.js:120
+#: wmm_platform/shell/gnome/extension.js:123
+msgid "Slideshow"
+msgstr "Presentación Diapositivas"
 
-#: python/panel.py:377
+#: python/panel/options_section.py:264
+msgid "Max. Frequency"
+msgstr "Frecuencia máxima"
+
+#: python/panel/options_section.py:264 python/panel/options_section.py:277
+#: wmm_platform/shell/cinnamon/applet.js:163
+#: wmm_platform/shell/cinnamon/applet.js:248
+#: wmm_platform/shell/gnome/extension.js:146
+#: wmm_platform/shell/gnome/extension.js:154
+#: wmm_platform/shell/gnome/extension.js:161
+#: wmm_platform/shell/gnome/extension.js:223
+msgid "minutes"
+msgstr "minutos"
+
+#: python/panel/options_section.py:277
 msgid "Slideshow every"
 msgstr "Rotación cada"
 
-#: python/panel.py:386
+#: python/panel/options_section.py:290
 msgid "Sync: All Screens change at once"
 msgstr "Síncrono: Todos los monitores cambian a la vez"
 
-#: python/panel.py:386
+#: python/panel/options_section.py:290
 msgid "Async: Change by turns"
 msgstr "Asíncrono: Cambian por turnos"
 
-#: python/panel.py:390
+#: python/panel/options_section.py:295
 msgid "Slideshow mode:"
 msgstr "Modo de rotación:"
 
-#: python/panel.py:590
+#: python/panel/options_section.py:460
 msgid "Synchronized"
 msgstr "Sincronizado"
 
-#: python/panel.py:591 python/panel.py:643
-msgid "Presets"
-msgstr "Presets"
-
-#: python/panel.py:591
+#: python/panel/options_section.py:461
 msgid "All"
 msgstr "Todos"
 
-#: python/panel.py:593
+#: python/panel/options_section.py:463
 msgid "Asynchronous"
 msgstr "Asincróno"
 
-#: python/panel.py:594
+#: python/panel/options_section.py:464
 msgid "Single"
 msgstr "Individual"
 
-#: python/panel.py:630
-msgid "Slideshow only among favorite images"
-msgstr "Rotación solo entre imágenes de favoritos"
-
-#: python/panel.py:668
-msgid "Delete selected preset/image"
-msgstr "Eliminar preset/imagen seleccionada"
-
-#: python/panel.py:703
-msgid "Delete selected image from favorites"
-msgstr "Eliminar imagen seleccionada de favoritos"
-
-#: python/panel.py:800
-msgid "Delete preset"
-msgstr "Eliminar preset"
-
-#: python/panel.py:802
-msgid "Load on screens"
-msgstr "Cargar en monitores"
-
-#: python/panel.py:810
-msgid "Delete image"
-msgstr "Eliminar imagen"
-
-#: python/panel.py:911
-msgid "Editing"
-msgstr "Editando"
-
-#: python/panel.py:994
-msgid "images"
-msgstr "imágenes"
-
-#: python/panel.py:1098
-msgid "Image Sources"
-msgstr "Fuentes de Imágenes"
-
-#: python/panel.py:1107
+#: python/panel/sources_section.py:78
 msgid "Source"
 msgstr "Fuente"
 
-#: python/panel.py:1118
+#: python/panel/sources_section.py:90
 msgid "Recursive"
 msgstr "Recursivo"
 
-#: python/panel.py:1130
+#: python/panel/sources_section.py:102
 msgid "Resync Image Sources"
 msgstr "Resincronizar Fuentes de Imágenes"
 
-#: python/panel.py:1147
+#: python/panel/sources_section.py:112
 msgid "Add Image Source"
 msgstr "Añadir Fuente de Imágen"
 
-#: python/panel.py:1150
-msgid "Delete Image Source"
+#: python/panel/sources_section.py:115 python/panel/sources_section.py:327
+msgid "Delete image source"
 msgstr "Eliminar Fuente de Imágen"
 
-#: python/panel.py:1313 python/panel.py:1468 python/panel.py:1474
-msgid "Scanning"
-msgstr "Escaneando"
-
-#: python/panel.py:1313
-msgid "folders"
-msgstr "carpetas"
-
-#: python/panel.py:1332
-msgid "Activate subfolders"
-msgstr "Activar subcarpetas"
-
-#: python/panel.py:1336
-msgid "Deactivate subfolders"
-msgstr "Desactivar subcarpetas"
-
-#: python/panel.py:1342
+#: python/panel/sources_section.py:333 python/panel/sources_section.py:401
 msgid "Deactivate folder"
 msgstr "Desactivar carpeta"
 
-#: python/panel.py:1342
+#: python/panel/sources_section.py:336 python/panel/sources_section.py:401
 msgid "Activate folder"
 msgstr "Activar carpeta"
 
-#: python/panel.py:1348
+#: python/panel/sources_section.py:374 python/panel/sources_section.py:517
+#: python/panel/sources_section.py:521
+msgid "Scanning"
+msgstr "Escaneando"
+
+#: python/panel/sources_section.py:374
+msgid "folders"
+msgstr "carpetas"
+
+#: python/panel/sources_section.py:391
+msgid "Activate subfolders"
+msgstr "Activar subcarpetas"
+
+#: python/panel/sources_section.py:395
+msgid "Deactivate subfolders"
+msgstr "Desactivar subcarpetas"
+
+#: python/panel/sources_section.py:407
 msgid "Delete cache"
 msgstr "Eliminar caché"
 
-#: python/panel.py:1372
+#: python/panel/sources_section.py:434
 msgid "Delete cache of this folder?"
 msgstr "¿Eliminar caché de esta carpeta?"
 
-#: python/panel.py:1375
+#: python/panel/sources_section.py:437
 msgid "Will be removed from your library"
 msgstr "Se eliminarán de la biblioteca"
 
-#: python/panel.py:1377 python/panel.py:1500
+#: python/panel/sources_section.py:439 python/panel/sources_section.py:555
 msgid "Images will no longer be available"
 msgstr "Las imágenes dejarán de estar disponibles"
 
-#: python/panel.py:1386
+#: python/panel/sources_section.py:446
 msgid "Cache deleted"
 msgstr "Caché eliminada"
 
-#: python/panel.py:1387
+#: python/panel/sources_section.py:447
 msgid "thumbnails have been removed from cache"
 msgstr "miniaturas se han eliminado de la caché"
 
-#: python/panel.py:1392
+#: python/panel/sources_section.py:452
 msgid "No cache"
 msgstr "Sin caché"
 
-#: python/panel.py:1393
+#: python/panel/sources_section.py:453
 msgid "No thumbnails found in cache for this folder."
 msgstr "No se encontraron miniaturas en la caché de esta carpeta."
 
-#: python/panel.py:1423
+#: python/panel/sources_section.py:469
 msgid "Resynchronizing library"
 msgstr "Resincronizando biblioteca"
 
-#: python/panel.py:1426
+#: python/panel/sources_section.py:470
 msgid "Scanning sources"
 msgstr "Escaneando fuentes"
 
-#: python/panel.py:1438
+#: python/panel/sources_section.py:487
 msgid "Select Image Folder"
 msgstr "Seleccionar Carpeta de Imágenes"
 
-#: python/panel.py:1443
+#: python/panel/sources_section.py:491 python/add_bookmark.py:140
+#: python/nemo_send_to_monitor.py:99
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: python/panel/sources_section.py:492
 msgid "Add Source"
 msgstr "Añadir Fuente"
 
-#: python/panel.py:1453
+#: python/panel/sources_section.py:502
 msgid "Include subfolders (Recursive)"
 msgstr "Incluir subdirectorios (Recursivo)"
 
-#: python/panel.py:1496
+#: python/panel/sources_section.py:551
 msgid "Delete image source?"
 msgstr "¿Eliminar fuente de imágenes?"
 
-#: python/panel.py:1499
+#: python/panel/sources_section.py:554
 msgid "will be removed from your library"
 msgstr "se eliminarán de la biblioteca"
 
-#: python/panel.py:1518 applet.js:142 applet.js:181 applet.js:240
-msgid "Displays"
-msgstr "Monitores"
-
-#: python/panel.py:1606
-msgid "Enable/disable screen editing mode"
-msgstr "Activar/desactivar modo edición de monitores"
-
-#: python/panel.py:1613 python/panel.py:1617
-msgid "Editing Mode"
-msgstr "Modo Edición"
-
-#: python/panel.py:1630
-msgid "Span image across all active screens"
-msgstr "Distribuir la imagen en todos los monitores activos"
-
-#: python/panel.py:1636
-msgid "for current composition"
-msgstr "para la composición actual"
-
-#: python/panel.py:1655
-msgid "Aspect ratio:"
-msgstr "Rel. aspecto:"
-
-#: python/panel.py:1675
-msgid "Create/update preset on accept"
-msgstr "Crear/actualizar preset al aceptar"
-
-#: python/panel.py:1680
-msgid "Save composition as preset"
-msgstr "Guardar composición como preset"
-
-#: python/panel.py:1686
-msgid "Refresh real display status"
-msgstr "Actualizar estado real de los monitores"
-
-#: python/panel.py:1918
-msgid "Enable/disable image"
-msgstr "Activar/Desactivar imagen"
-
-#: python/panel.py:2243
-msgid "editing"
-msgstr "editando"
-
-#: python/panel.py:2360
+#: python/panel/thumbnails_section.py:123
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: python/panel.py:2367
+#: python/panel/thumbnails_section.py:132
 msgid "Vertical"
 msgstr "Vertical"
 
-#: python/panel.py:2373
+#: python/panel/thumbnails_section.py:141
 msgid "Reload thumbnails"
 msgstr "Recargar miniaturas"
 
-#: python/panel.py:2402 python/panel.py:2453
+#: python/panel/thumbnails_section.py:185
+#: python/panel/thumbnails_section.py:247
 msgid "No images found."
 msgstr "No se encontraron imágenes."
 
-#: python/panel.py:2407
+#: python/panel/thumbnails_section.py:190
 msgid "Generating thumbnails"
 msgstr "Generando miniaturas"
 
-#: python/panel.py:2423
+#: python/panel/thumbnails_section.py:209
 msgid "Processing"
 msgstr "Procesando"
 
-#: python/nemo_send_to_monitor.py:68
+#: python/panel/thumbnails_section.py:324
+msgid "Remove from favorites"
+msgstr "Eliminar de favoritos"
+
+#: python/add_bookmark.py:56
+msgid "Add Favorite Preset"
+msgstr "Añadir Preset Favorito"
+
+#: python/add_bookmark.py:105
+msgid "Error loading data. Please restart panel"
+msgstr "Error al cargar los datos. Reinicie el panel"
+
+#: python/add_bookmark.py:120
+msgid "Preset name:"
+msgstr "Nombre del Preset:"
+
+#: python/add_bookmark.py:146 python/nemo_send_to_monitor.py:100
+msgid "OK"
+msgstr "Aceptar"
+
+#: python/add_bookmark.py:164
+msgid "The name cannot be empty."
+msgstr "El nombre no puede estar vacío."
+
+#: python/add_bookmark.py:191
+msgid "Error saving"
+msgstr "Error al guardar"
+
+#: python/panel.py:55
+msgid "Control Center"
+msgstr "Panel de control"
+
+#: python/panel.py:152
+msgid "Create/update preset on accept"
+msgstr "Crear/actualizar preset al aceptar"
+
+#: python/panel.py:156
+msgid "Save composition as preset"
+msgstr "Guardar composición como preset"
+
+#: python/panel.py:490
+msgid "Editing"
+msgstr "Editando"
+
+#: python/nemo_send_to_monitor.py:69
 msgid "Send to Monitor"
 msgstr "Enviar a monitor"
 
-#: python/nemo_send_to_monitor.py:85
+#: python/nemo_send_to_monitor.py:87
 msgid "Select a monitor:"
 msgstr "Seleccione un monitor:"
 
-#: python/nemo_send_to_monitor.py:197
+#: python/nemo_send_to_monitor.py:200
 msgid "No monitors"
 msgstr "Sin monitores"
 
-#: python/nemo_send_to_monitor.py:198
+#: python/nemo_send_to_monitor.py:201
 msgid "No active monitors found"
 msgstr "No se encontraron monitores activos"
 
-#: python/nemo_send_to_monitor.py:238
+#: python/nemo_send_to_monitor.py:240
 msgid "Image sent to monitor"
 msgstr "Imagen enviada al monitor"
 
-#: python/nemo_send_to_monitor.py:239
+#: python/nemo_send_to_monitor.py:241
+#, python-brace-format
 msgid "Image '{name}' assigned to monitor {monitor}."
 msgstr "Imagen '{name}' asignada al monitor {monitor}."
 
-#: wmm_platform/cinnamon.py:158
-msgid "Configuration issue"
-msgstr "Problema de configuración"
-
-#: wmm_platform/cinnamon.py:159
-msgid ""
-"For WMM to function correctly, please check the following settings in "
-"'System Settings > Backgrounds':"
-msgstr ""
-"Para que WMM funcione correctamente, compruebe la siguiente configuración en "
-"Configuración del sistema > Fondos de Pantalla:"
-
-#: applet.js:48
+#: wmm_platform/shell/cinnamon/applet.js:48
+#: wmm_platform/shell/gnome/extension.js:53
 msgid "Wallpaper Multi-Monitor Manager"
 msgstr "Administrador de fondos de pantalla para múltiples monitores"
 
-#: applet.js:99
+#: wmm_platform/shell/cinnamon/applet.js:49
+#: wmm_platform/shell/gnome/extension.js:54
+msgid "Click action"
+msgstr "Clic"
+
+#: wmm_platform/shell/cinnamon/applet.js:49
+#: wmm_platform/shell/gnome/extension.js:54
+#: wmm_platform/shell/gnome/extension.js:90
+msgid "Next Background"
+msgstr "Siguiente fondo"
+
+#: wmm_platform/shell/cinnamon/applet.js:50
+#: wmm_platform/shell/gnome/extension.js:55
+msgid "Secondary Click"
+msgstr "Clic secundario"
+
+#: wmm_platform/shell/cinnamon/applet.js:50
+#: wmm_platform/shell/gnome/extension.js:55
+msgid "Context Menu"
+msgstr "Menú contextual"
+
+#: wmm_platform/shell/cinnamon/applet.js:85
+#: wmm_platform/shell/cinnamon/applet.js:256
+#: wmm_platform/shell/gnome/extension.js:97
+msgid "Settings"
+msgstr "Ajustes"
+
+#: wmm_platform/shell/cinnamon/applet.js:99
+#: wmm_platform/shell/gnome/extension.js:106
 msgid "Favorites Only"
 msgstr "Sólo Favoritos"
 
-#: applet.js:111
+#: wmm_platform/shell/cinnamon/applet.js:111
+#: wmm_platform/shell/gnome/extension.js:115
 msgid "Add Preset Favorite"
 msgstr "Añadir Preset a favorito"
 
-#: applet.js:142 applet.js:181 applet.js:240
-msgid "ASYNC (One)"
-msgstr "Asíncrono (uno)"
+#: wmm_platform/shell/cinnamon/applet.js:125
+#: wmm_platform/shell/cinnamon/applet.js:173
+#: wmm_platform/shell/cinnamon/applet.js:213
+#: wmm_platform/shell/gnome/extension.js:127
+#: wmm_platform/shell/gnome/extension.js:129
+#: wmm_platform/shell/gnome/extension.js:206
+msgid "Disabled"
+msgstr "Desactivada"
 
-#: applet.js:146
+#: wmm_platform/shell/cinnamon/applet.js:142
+#: wmm_platform/shell/cinnamon/applet.js:181
+#: wmm_platform/shell/cinnamon/applet.js:243
+#: wmm_platform/shell/gnome/extension.js:173
+#: wmm_platform/shell/gnome/extension.js:175
+#: wmm_platform/shell/gnome/extension.js:220
+msgid "ASYNC (One)"
+msgstr "ASYNC (una)"
+
+#: wmm_platform/shell/cinnamon/applet.js:146
+#: wmm_platform/shell/gnome/extension.js:181
 msgid "Spanned Mode"
 msgstr "Modo Distribuido"
 
-#: applet.js:181 applet.js:240
+#: wmm_platform/shell/cinnamon/applet.js:181
+#: wmm_platform/shell/cinnamon/applet.js:243
+#: wmm_platform/shell/gnome/extension.js:175
+#: wmm_platform/shell/gnome/extension.js:220
 msgid "SYNC (All)"
-msgstr "Síncrono (Todos)"
+msgstr "SYNC (Todos)"
 
-#: applet.js:188
+#: wmm_platform/shell/cinnamon/applet.js:188
+#: wmm_platform/shell/gnome/extension.js:188
 msgid "Sync Library"
 msgstr "Sincronizar biblioteca"
 
-#: applet.js:274
+#: wmm_platform/shell/cinnamon/applet.js:289
 msgid "Error loading favorites"
 msgstr "Error al cargar favoritos"
 
-#: applet.js:282
+#: wmm_platform/shell/cinnamon/applet.js:297
+#: wmm_platform/shell/gnome/extension.js:242
 msgid "No saved favorites"
 msgstr "Favorito no guardado"
 
-#: applet.js:356
+#: wmm_platform/shell/cinnamon/applet.js:372
+#: wmm_platform/shell/gnome/extension.js:304
 msgid "Delete favorite"
 msgstr "Eliminar Favorito"

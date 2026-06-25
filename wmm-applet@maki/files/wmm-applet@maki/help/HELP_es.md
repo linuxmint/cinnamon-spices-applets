@@ -317,6 +317,44 @@ Esta opción fuerza un escaneo completo de todas las fuentes de imagen configura
 
 Al finalizar, recibirás una notificación con el resumen de los cambios (número de imágenes nuevas y eliminadas). Es útil después de añadir o quitar imágenes manualmente de las carpetas de WMM.
 
+# Atajos de teclado
+
+Puedes forzar un cambio de fondo sin usar el ratón configurando un atajo de teclado personalizado en tu escritorio. WMM incluye un pequeño script preparado para ello.
+
+## En Cinnamon
+
+1.  Abre **Configuración del sistema → Teclado → Atajos de teclado**.
+2.  Haz clic en **Añadir atajo personalizado**.
+3.  Ponle el nombre **"WMM - Cambiar fondo de pantalla"**.
+4.  En el campo **Comando**, escribe:
+
+    `bash -c "bash $HOME/.local/share/cinnamon/applets/wmm-applet@maki/wmm_platform/shell/cinnamon/wmm-next.sh"`
+
+5.  Asigna la combinación de teclas que prefieras (por ejemplo, `Ctrl+Alt+N`).
+6.  Pulsa **Aceptar** y prueba el atajo.
+
+## En GNOME
+
+1.  Abre **Configuración → Teclado → Atajos personalizados**.
+2.  Haz clic en **"+"** para añadir uno nuevo.
+3.  Ponle el nombre **"WMM - Cambiar fondo de pantalla"**.
+4.  En el campo **Comando**, escribe:
+
+    `bash -c "bash $HOME/.local/share/gnome-shell/extensions/wmm@maki/wmm_platform/shell/gnome/wmm-next.sh"`
+
+5.  Asigna la combinación de teclas que prefieras (por ejemplo, `Ctrl+Alt+N`).
+6.  Cierra la ventana y prueba el atajo.
+
+**Nota:** El script `wmm-next.sh` se instala automáticamente con WMM y debería tener los permisos de ejecución correctos. Si el atajo no funciona, asegúrate de que el script sea ejecutable:
+
+    **En Gnome**
+
+    `chmod +x ~/.local/share/gnome-shell/extensions/wmm@maki/wmm_platform/shell/gnome/wmm-next.sh   # para GNOME`
+
+    **En Cinnamon**
+
+    `chmod +x ~/.local/share/cinnamon/applets/wmm-applet@maki/wmm_platform/shell/cinnamon/wmm-next.sh # para Cinnamon`
+
 # Ayuda
 
 Abre la ventana de ayuda de WMM, donde encontrarás información detallada sobre todas las funcionalidades del programa. La ventana cuenta con un índice de navegación a la izquierda y el contenido formateado a la derecha.

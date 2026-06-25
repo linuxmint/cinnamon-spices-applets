@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-WMM Applet - Cinnamon Edition
+WMM
 ----------------------------
 sources_section.py – Sección de fuentes de imagen del panel de control.
 
@@ -22,7 +22,7 @@ class SourcesSection:
     Sección de fuentes de imagen del panel de control.
     """
 
-    def __init__(self, handler, backend, ie, left_col):
+    def __init__(self, handler, backend, ie, left_col, scan_progress=None, btn_spacer=None):
         """
         Args:
             handler: Instancia de ConfigHandler.
@@ -33,12 +33,18 @@ class SourcesSection:
         self.handler = handler
         self.backend = backend
         self.ie = ie
+        self.scan_progress = scan_progress
+        self.btn_spacer = btn_spacer
         self._busy_counter = 0
         self._sources_need_refresh = False
 
         # Construir la interfaz
         self.widget = self._build()
         left_col.pack_start(self.widget, True, True, 0)
+
+    def set_callbacks(self, callbacks):
+        """Asigna los callbacks después de que la instancia exista."""
+        self._callbacks = callbacks or {}
 
     # ==========================================================
     # CONSTRUCCIÓN DE LA INTERFAZ
@@ -98,13 +104,6 @@ class SourcesSection:
         btn_box.pack_start(self.refresh_btn, False, False, 0)
 
         self.center_stack = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        self.scan_progress = Gtk.ProgressBar()
-        self.scan_progress.set_no_show_all(True)
-        self.scan_progress.hide()
-        self.scan_progress.set_margin_start(15)
-        self.scan_progress.set_margin_end(15)
-        self.scan_progress.set_valign(Gtk.Align.CENTER)
-        self.btn_spacer = Gtk.Box()
         self.center_stack.pack_start(self.scan_progress, True, True, 0)
         self.center_stack.pack_start(self.btn_spacer, True, True, 0)
         btn_box.pack_start(self.center_stack, True, True, 0)
@@ -113,7 +112,7 @@ class SourcesSection:
         self.add_btn.set_tooltip_text(_("Add Image Source"))
         self.add_btn.connect("clicked", self.on_add_source_clicked)
         self.del_btn = Gtk.Button.new_from_icon_name("user-trash", Gtk.IconSize.BUTTON)
-        self.del_btn.set_tooltip_text(_("Delete Image Source"))
+        self.del_btn.set_tooltip_text(_("Delete image source"))
         self.del_btn.connect("clicked", self._on_delete_button_clicked)
 
         btn_box.pack_end(self.del_btn, False, False, 0)
@@ -130,6 +129,24 @@ class SourcesSection:
         # Guardar posición actual del scroll
         vadj = self.scrolled_sources.get_vadjustment()
         saved_value = vadj.get_value()
+
+        # Guardar las rutas expandidas para restaurarlas después de la recarga
+        expanded_paths = []
+        def save_expanded_paths(model, parent_iter=None):
+            if parent_iter is None:
+                parent_iter = model.get_iter_first()
+            while parent_iter:
+                if model.iter_has_child(parent_iter):
+                    tree_path = model.get_path(parent_iter)
+                    if self.sources_tree.row_expanded(tree_path):
+                        expanded_paths.append(tree_path.to_string())
+                    # Recursivo para subniveles expandidos
+                    child_iter = model.iter_children(parent_iter)
+                    while child_iter:
+                        save_expanded_paths(model, child_iter)
+                        child_iter = model.iter_next(child_iter)
+                parent_iter = model.iter_next(parent_iter)
+        save_expanded_paths(self.sources_model)
 
         self.sources_model.clear()
         sources_data = self.backend.load_json("sources").get("sources", [])
@@ -170,11 +187,22 @@ class SourcesSection:
 
         log_event("Vista de fuentes reconstruida", origin="PANEL", level="INFO", reason="LIBRARY")
 
+        self.sources_tree.set_model(None)
+        self.sources_tree.set_model(self.sources_model)
+
         # Restaurar posición del scroll
         def restore_scroll():
             vadj.set_value(saved_value)
             return False
         GLib.idle_add(restore_scroll)
+
+        # Restaurar las rutas expandidas tras la recarga
+        def restore_expanded_paths():
+            for path_str in expanded_paths:
+                path = Gtk.TreePath.new_from_string(path_str)
+                self.sources_tree.expand_row(path, open_all=False)
+            return False
+        GLib.idle_add(restore_expanded_paths)
 
     def _auto_expand_sources(self):
         model = self.sources_model
@@ -346,12 +374,10 @@ class SourcesSection:
             self.scan_progress.set_text(_("Scanning") + " " + str(current) + "/" + str(total) + " " + _("folders") + "...")
         if current >= total:
             self._decrement_busy()
-            self._set_progress_active(False)
+            self._callbacks['set_progress_active'](False)
             if self._sources_need_refresh:
                 self.load_sources_into_treeview()
                 self._sources_need_refresh = False
-            # Nota: _load_thumbnails se llamará desde el panel principal
-            # mediante una señal o callback que definiremos más adelante.
 
     def show_context_menu(self, path, iter, event):
         is_active = self.sources_model.get_value(iter, 3)
@@ -394,6 +420,10 @@ class SourcesSection:
         parent_source = self._get_parent_source(path)
         if parent_source:
             self._auto_update_recursive(parent_source.get("path"))
+        # Refrescar la sección de miniaturas para reflejar los cambios
+        load_thumbnails = self._callbacks.get('load_thumbnails')
+        if load_thumbnails:
+            load_thumbnails()
 
     def on_purge_cache_clicked(self, widget, folder_path):
         dialog = Gtk.MessageDialog(
@@ -431,33 +461,25 @@ class SourcesSection:
             self.load_sources_into_treeview()
             self._auto_update_recursive(parent_path)
 
-    def _set_progress_active(self, active, text=None):
-        if active:
-            self.btn_spacer.hide()
-            self.scan_progress.show()
-            self.scan_progress.set_fraction(0.0)
-            if text:
-                self.scan_progress.set_show_text(True)
-                self.scan_progress.set_text(text)
-        else:
-            self.scan_progress.hide()
-            self.btn_spacer.show()
-            self.scan_progress.set_fraction(0.0)
-            self.scan_progress.set_show_text(False)
-
     # ==========================================================
     # BOTONES DE ACCIÓN
     # ==========================================================
     def on_refresh_sources_clicked(self, widget):
-        # Nota: el cambio de cursor y las iteraciones pendientes se gestionarán
-        # desde el panel principal si es necesario.
-        self._set_progress_active(True, _("Resynchronizing library") + "...")
-        self._set_progress_active(True, _("Scanning sources") + "...")
+        log_event("Refresco manual de fuentes solicitado", origin="PANEL", level="INFO", reason="LIBRARY")
+        self._callbacks['set_progress_active'](True, _("Resynchronizing library") + "...")
+        self._callbacks['set_progress_active'](True, _("Scanning sources") + "...")
         self._sources_need_refresh = True
         self._increment_busy()
+        # Preparar callback para generar miniaturas al terminar
+        load_thumbnails = self._callbacks.get('load_thumbnails')
+        def on_complete():
+            if load_thumbnails:
+                GLib.idle_add(load_thumbnails)
+
         self.handler.sync_library(
             on_progress=self._on_sync_progress,
-            on_folder=self._on_sync_folder_start
+            on_folder=self._on_sync_folder_start,
+            on_complete=on_complete
         )
 
     def on_add_source_clicked(self, widget):
@@ -492,15 +514,23 @@ class SourcesSection:
                 name = os.path.basename(path)
                 recursive = check_rec.get_active()
                 dialog.destroy()
-                self._set_progress_active(True, _("Scanning") + ": " + name + "...")
+                self._callbacks['set_progress_active'](True, _("Scanning") + ": " + name + "...")
                 success = self.handler.add_source(name, path, recursive)
                 if success:
                     self._sources_need_refresh = True
-                    self._set_progress_active(True, _("Scanning") + ": " + name + "...")
+                    self._callbacks['set_progress_active'](True, _("Scanning") + ": " + name + "...")
                     self._increment_busy()
+                    self._sources_need_refresh = True
+                    # Preparar callback para generar miniaturas al terminar
+                    load_thumbnails = self._callbacks.get('load_thumbnails')
+                    def on_complete():
+                        if load_thumbnails:
+                            GLib.idle_add(load_thumbnails)
+
                     self.handler.sync_library(
                         on_progress=self._on_sync_progress,
-                        on_folder=self._on_sync_folder_start
+                        on_folder=self._on_sync_folder_start,
+                        on_complete=on_complete
                     )
                 else:
                     self._set_progress_active(False)
@@ -528,4 +558,8 @@ class SourcesSection:
             if response == Gtk.ResponseType.YES:
                 if self.handler.remove_source(source_path):
                     self.load_sources_into_treeview()
+                    # Refrescar la sección de miniaturas para reflejar los cambios
+                    load_thumbnails = self._callbacks.get('load_thumbnails')
+                    if load_thumbnails:
+                        load_thumbnails()
             dialog.destroy()

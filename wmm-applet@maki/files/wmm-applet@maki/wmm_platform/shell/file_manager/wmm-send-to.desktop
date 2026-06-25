@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Service
+MimeType=image/*;
+Actions=SendToWMM;
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+Encoding=UTF-8
+
+[Desktop Action SendToWMM]
+Name=WMM: Send to monitor
+Name[es]=WMM: Enviat a monitor
+Icon=user-bookmarks
+Exec=$HOME/.local/share/kio/servicemenus/wmm-send-to-monitor.sh %f

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-WMM Applet - Cinnamon Edition
+WMM
 ----------------------------
 thumbnails_section.py – Sección de miniaturas del panel de control.
 
@@ -169,7 +169,7 @@ class ThumbnailsSection:
         if self._thumbnails_loading:
             return
         self._thumbnails_loading = True
-
+        log_event("Generación de miniaturas iniciada", origin="PANEL", level="INFO", reason="LIBRARY")
         # Limpiar el flowbox actual
         for child in self.thumbnails_flowbox.get_children():
             self.thumbnails_flowbox.remove(child)
@@ -249,6 +249,8 @@ class ThumbnailsSection:
 
         self.thumbnails_flowbox.show_all()
         self._thumbnails_loading = False
+        log_event(f"Generación de miniaturas completada: {len(self._progress_h_list)}H / {len(self._progress_v_list)}V",
+                  origin="PANEL", level="INFO", reason="LIBRARY")
         self._set_progress_active(False)
         log_event("Thumbnails cargados", origin="PANEL", level="INFO", reason="LIBRARY")
 

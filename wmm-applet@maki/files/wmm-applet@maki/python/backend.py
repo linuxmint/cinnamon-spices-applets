@@ -10,14 +10,12 @@ backend.py – Backend de lógica de datos para el panel de control.
   2. Backend usa ConfigHandler para leer/escribir JSON.
   3. Backend notifica al motor (main.py) mediante commands.json + SIGUSR1.
 """
-
-import subprocess
 from debug_logger import log_event
 
 class WMMBackend:
     """
     Capa intermedia entre la interfaz gráfica (panel.py) y la persistencia (config_handler.py).
-    No depende de GTK. Solo usa ConfigHandler y subprocess.
+    No depende de GTK. Solo usa ConfigHandler
     """
 
     def __init__(self, config_handler):
@@ -134,16 +132,17 @@ class WMMBackend:
 
     def notify_engine(self, action):
         """
-        Escribe un comando en commands.json y envía la señal SIGUSR1 al motor.
+        Escribe un comando en commands.json.
+        El motor será notificado automáticamente por Gio.FileMonitor.
+
         action: diccionario con la orden (ej. {"action": "force_rotation"}).
         """
         try:
             self.ch.save_json("commands", action)
-            subprocess.run(["pkill", "-USR1", "-f", "main.py"])
-            log_event(f"Notificación enviada al motor: {action.get('action', 'unknown')}", origin="BACKEND", level="DEBUG", reason="SIGNAL")
+            log_event(f"Comando enviado al motor: {action.get('action', 'unknown')}", origin="BACKEND", level="DEBUG", reason="COMMAND")
 
         except Exception as e:
-            log_event(f"No se pudo notificar al motor: {e}", origin="BACKEND", level="ERROR", reason="SIGNAL")
+            log_event(f"No se pudo escribir el comando: {e}", origin="BACKEND", level="ERROR", reason="COMMAND")
 
     # --- MODO EDICIÓN ---
 

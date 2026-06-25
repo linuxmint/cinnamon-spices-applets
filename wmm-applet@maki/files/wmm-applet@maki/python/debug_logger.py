@@ -89,7 +89,7 @@ def log_event(message, origin="UNKNOW", level="INFO", reason="GENERIC"):
     Args:
         message (str): Mensaje descriptivo del evento.
         origin (str):  Componente que genera el evento (ej. 'MOTOR', 'PANEL',
-                       'NEMO'). Útil para filtrar en el visor.
+                       'SHELL'). Útil para filtrar en el visor.
         level (str):   Nivel del evento. Debe ser uno de: DEBUG, INFO, WARN,
                        ERROR. Por defecto: INFO.
 

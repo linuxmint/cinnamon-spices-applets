@@ -1,0 +1,13 @@
+[Nemo Action]
+Name=WMM: Add to favorites
+Name[es]=WMM: Añadir a favoritos
+Name[ca]=WMM: Afegeix a preferits
+Comment=Add selected image to WMM favorites
+Comment[es]=Añadir la imagen seleccionada a favoritos de WMM
+Comment[ca]=Afegeix la imatge seleccionada als preferits de WMM
+Exec=sh -c '$HOME/.local/share/nemo/actions/wmm-add_to_bookmarks.sh "$@"' sh %F
+Icon-Name=video-display
+Selection=any
+Extensions=jpg;jpeg;png;bmp;webp;gif
+Quote=double
+EscapeSpaces=true

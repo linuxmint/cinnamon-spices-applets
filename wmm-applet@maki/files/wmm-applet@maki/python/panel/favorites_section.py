@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-WMM Applet - Cinnamon Edition
+WMM
 ----------------------------
 favorites_section.py – Sección de Favoritos del panel de control.
 
@@ -209,7 +209,7 @@ class FavoritesSection:
                     img_path = entry.get("path", "") or ""
                 else:
                     img_path = entry or ""
-                display_name = os.path.basename(img_path) if img_path else "(" + _("Empty") + ")"
+                display_name = os.path.basename(img_path) if img_path else "(" + _("empty") + ")"
                 self.presets_model.append(parent_iter, [display_name, img_path, False])
 
     def _load_bookmarks_single(self):
@@ -324,7 +324,7 @@ class FavoritesSection:
             self.backend.save_json("bookmarks", bookmarks)
             self.handler.sync_bookmarks_flat_list()
             self.handler.refresh_history_metadata()
-            model.set_value(iter, 0, "(" + _("Empty") + ")")
+            model.set_value(iter, 0, "(" + _("empty") + ")")
             model.set_value(iter, 1, "")
 
     def _on_preset_row_activated(self, treeview, path, column):

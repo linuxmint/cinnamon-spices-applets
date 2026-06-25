@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-WMM Applet - Cinnamon Edition
+WMM
 ----------------------------
 options_section.py – Sección de Opciones del panel de control.
 
@@ -267,7 +267,7 @@ class OptionsSection:
         self.max_interval_spin = Gtk.SpinButton.new_with_range(1, 999, 1)
         self.max_interval_spin.set_value(60)
         self.max_interval_spin.connect("value-changed", self._on_max_interval_changed)
-        self.max_interval_spin.connect("activate", lambda w: self.set_focus(None))
+        self.max_interval_spin.connect("activate", lambda w: self._parent_window.set_focus(None))
         hbox_max.pack_start(self.max_interval_spin, False, False, 0)
         vbox.pack_start(hbox_max, False, False, 0)
 
@@ -280,7 +280,7 @@ class OptionsSection:
         self.rotation_spin = Gtk.SpinButton.new_with_range(1, 99, 1)
         self.rotation_spin.set_value(15)
         self.rotation_spin.connect("value-changed", self._on_rotation_changed)
-        self.rotation_spin.connect("activate", lambda w: self.set_focus(None))
+        self.rotation_spin.connect("activate", lambda w: self._parent_window.set_focus(None))
         hbox_rot.pack_start(self.rotation_spin, False, False, 0)
         vbox.pack_start(hbox_rot, False, False, 0)
 

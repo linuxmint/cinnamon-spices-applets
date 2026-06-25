@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-WMM Applet - Cinnamon Edition
+WMM
 ----------------------------
 monitors_section.py – Sección de Monitores del panel de control.
 
@@ -479,17 +479,8 @@ class MonitorsSection:
                 self._monitor_switches[m_hash][0].set_active(is_active)
             else:
                 hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-                info = self.handler.get_monitor_info(m_hash)
-                if info:
-                    mfg_map = self.handler.get_mfg_map()
-                    manufacturer_code = info.get("manufacturer", "")
-                    connector = info.get("connector", "?")
-                    manufacturer_name = mfg_map.get(manufacturer_code, manufacturer_code)
-                    display_name = f"{connector}:{manufacturer_name}" if manufacturer_name and manufacturer_name != connector else connector
-                    inches = info.get("inches", 0)
-                    label_text = f"{display_name} ({inches}\")" if inches > 0 else display_name
-                else:
-                    label_text = _("Display") + " " + m_hash[:6]
+                label_text = self.handler.get_monitor_display_name(m_hash)
+                info = self.handler.get_monitor_info(m_hash)  # aún necesario para detectar el primario
 
                 if info and info.get("primary", False):
                     label = Gtk.Label()

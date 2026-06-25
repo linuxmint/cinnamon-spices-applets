@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-WMM Applet - Cinnamon Edition
+WMM
 ----------------------------
 main.py – Motor principal de WMM.
 
@@ -16,7 +16,6 @@ import sys
 import time
 import random
 import json
-import signal
 import atexit
 import subprocess
 
@@ -31,7 +30,8 @@ sys.path.insert(0, _PROJECT_ROOT)
 # ==========================================================
 import gi
 gi.require_version('Gdk', '3.0')
-from gi.repository import Gdk, GLib
+gi.require_version('Gio', '2.0')  # <--- AÑADIDO para Gio.FileMonitor
+from gi.repository import Gdk, GLib, Gio  # <--- Añadido Gio
 
 # ==========================================================
 # IMPORTS DE MÓDULOS DEL PROYECTO
@@ -40,45 +40,101 @@ from wmm_platform.core import PlatformManager
 from config_handler import ConfigHandler
 from image_engine import ImageEngine
 from debug_logger import log_event
-from i18n import _, set_system_domain
+from i18n import _, set_app_domain, set_locale_dir
 
 
 class WMMDaemon:
     def __init__(self):
+        # ----------------------------------------------------------
+        # 1. INICIALIZAR LA PLATAFORMA
+        # ----------------------------------------------------------
         self.platform = PlatformManager()
-        # Configurar el dominio del sistema para traducciones
-        if hasattr(self.platform, 'system_domain'):
-            set_system_domain(self.platform.system_domain)
-        # Obtener la ruta de caché del sistema operativo
-        cache_base = None
-        if hasattr(self.platform, 'get_cache_dir') and self.platform.get_cache_dir:
-            cache_base = self.platform.get_cache_dir()
-        self.ch = ConfigHandler(cache_base_dir=cache_base)
+
+        # ----------------------------------------------------------
+        # 1b. COMPLETAR EL .INI SI ES NECESARIO (antes de ConfigHandler)
+        # ----------------------------------------------------------
+        self._complete_ini_if_needed()
+
+        # ----------------------------------------------------------
+        # 2. CONFIGURAR EL SISTEMA DE TRADUCCIONES
+        # ----------------------------------------------------------
+        set_app_domain(self.platform.app_domain)
+        set_locale_dir(self.platform.locale_dir)
+
+        # ----------------------------------------------------------
+        # 3. INICIALIZAR EL GESTOR DE CONFIGURACIÓN
+        # ----------------------------------------------------------
+        # ConfigHandler recibe la ruta de caché directamente desde PlatformManager
+        self.ch = ConfigHandler(cache_base_dir=self.platform.cache_dir)
+
+        # ----------------------------------------------------------
+        # 4. INICIALIZAR EL RESTO DE COMPONENTES
+        # ----------------------------------------------------------
         self.ie = ImageEngine(self.ch, None)  # None temporal hasta migrar MonitorManager
         self.loop = GLib.MainLoop()
         self.timer_id = None
         self.rotation_queue = []
         self.last_rotated_hash = None
         self.display = Gdk.Display.get_default()
-
+        self._busy = False
+        self._status_path = os.path.join(self.ch.cache_dir, "engine_status.json")
         # 1. Gestión del archivo PID
         self._manage_pid_file()
 
         # 2. Registro de limpieza al salir (DENTRO del __init__)
         atexit.register(self._cleanup_on_exit)
 
-        # 3. Registro de señales del sistema
-        signal.signal(signal.SIGUSR1, self._handle_sigusr1)
+        # 3. Monitor de archivos para comunicación multiplataforma
+        self._setup_command_monitor()
 
         if self.display:
             self.display.connect("monitor-added", self.on_hardware_change)
             self.display.connect("monitor-removed", self.on_hardware_change)
 
+    def _setup_command_monitor(self):
+        """
+        Configura el Gio.FileMonitor sobre data/commands.json para escuchar
+        comandos del applet, panel o scripts de integración.
+        Sustituye al sistema de señales SIGUSR1 para ser 100% agnóstico.
+        """
+        commands_file = Gio.File.new_for_path(self.ch.files["commands"])
+        self._command_monitor = commands_file.monitor_file(Gio.FileMonitorFlags.NONE, None)
+        self._command_monitor.connect("changed", self._on_commands_file_changed)
+        log_event("Monitor de commands.json iniciado. Esperando acciones...", origin="ENGINE", level="INFO", reason="COMMAND")
+
+    def _on_commands_file_changed(self, monitor, file, other_file, event_type):
+        """
+        Callback asíncrono cuando el applet/panel escribe en commands.json.
+        Filtra lecturas prematuras y evita bucles de eco (cuando el motor vacía el buzón).
+        """
+        try:
+            # Micro-pausa para asegurar que el flush del disco terminó
+            time.sleep(0.02)
+            action_data = self.ch.load_json("commands")
+
+            # Refuerzo anti-eco: si no hay acción, no hacemos nada
+            if not action_data or "action" not in action_data:
+                return
+
+            order = action_data["action"]
+            log_event(f"Comando recibido vía monitor: {order}", origin="ENGINE", level="DEBUG", reason="COMMAND")
+
+            # Limpiamos el buzón (esto disparará otro evento, pero la condición de arriba lo parará)
+            self.ch.save_json("commands", {})
+
+            # --- DISPATCH DE LA ORDEN ---
+            self._dispatch_command(order, action_data)
+
+        except Exception as e:
+            import traceback
+            error_msg = f"Excepción leyendo commands.json (posible escritura a medias): {e}\n{traceback.format_exc()}"
+            log_event(error_msg, origin="ENGINE", level="ERROR", reason="COMMAND")
+
     def _do_cycle_and_notify(self, reason, target_hashes, target_bookmark, temp_settings, event_dict):
         """
         Ejecuta el ciclo de rotación y, al terminar, notifica al panel.
         """
-        log_event(f"Ejecutando ciclo: {reason}", origin="ENGINE", level="DEBUG", reason="SIGNAL")
+        log_event(f"Ejecutando ciclo: {reason}", origin="ENGINE", level="DEBUG", reason="COMMAND")
         self.execute_full_cycle(
             reason=reason,
             target_hashes=target_hashes,
@@ -88,52 +144,32 @@ class WMMDaemon:
         self._notify_panel(event_dict)
         return False  # Para GLib.idle_add
 
+    def _set_busy_state(self, busy):
+        self._busy = busy
+        try:
+            with open(self._status_path, "w") as f:
+                json.dump({"busy": busy}, f)
+        except Exception:
+            pass
+
     def _notify_panel(self, event_dict):
         """
         Envía un evento al panel de control, si está abierto.
+        El panel será notificado automáticamente por Gio.FileMonitor.
 
         Args:
             event_dict (dict): Diccionario con la acción y parámetros.
                                Ej: {"action": "wallpaper_changed"}
         """
-        pid_path = os.path.join(self.ch.cache_dir, "pid_panel.pid")
-
-        # 1. Verificar si el panel está vivo
-        if not os.path.exists(pid_path):
-            return  # Panel no está abierto, nada que hacer
-
-        try:
-            with open(pid_path, "r") as f:
-                content = f.read().strip()
-                if not content:
-                    return
-                panel_pid = int(content)
-
-            # 2. Comprobar que el proceso sigue corriendo
-            os.kill(panel_pid, 0)
-        except (OSError, ValueError, FileNotFoundError):
-            # El proceso no existe o el archivo es inválido
-            try:
-                os.remove(pid_path)
-            except:
-                pass
-            return
-
-        # 3. Escribir el evento en el buzón del panel
+        # Ya no necesitamos comprobar si el panel está vivo,
+        # si el archivo se modifica y el panel no está, simplemente no pasa nada.
         command_path = os.path.join(self.ch.data_dir, "command_panel.json")
         try:
             with open(command_path, "w", encoding="utf-8") as f:
                 json.dump(event_dict, f)
-            log_event(f"Evento '{event_dict.get('action')}' enviado al panel (PID {panel_pid})", origin="ENGINE", level="DEBUG", reason="SIGNAL")
+            log_event(f"Evento '{event_dict.get('action')}' enviado al panel", origin="ENGINE", level="DEBUG", reason="COMMAND")
         except Exception as e:
             log_event(f"Error al escribir command_panel.json: {e}", origin="ENGINE", level="ERROR", reason="COMMAND")
-            return
-
-        # 4. Enviar la señal al panel
-        try:
-            os.kill(panel_pid, signal.SIGUSR1)
-        except Exception as e:
-            log_event(f"Error al enviar SIGUSR1 al panel: {e}", origin="ENGINE", level="ERROR", reason="SIGNAL")
 
     def _cleanup_on_exit(self):
         """Borra el rastro del motor al cerrarse."""
@@ -172,171 +208,156 @@ class WMMDaemon:
         atexit.register(lambda: os.remove(pid_path) if os.path.exists(pid_path) else None)
         print(f" [SISTEMA] PID {os.getpid()} registrado en {pid_path}")
 
-    def _handle_sigusr1(self, signum, frame):
+    def _dispatch_command(self, order, action_data):
         """
-        Manejador de la señal USR1 enviada por el Applet.
-        Sincroniza el estado del motor leyendo commands.json.
-        ---
-        MODIFICACIONES:
-        1. Se añade un pequeño sleep para evitar lectura de archivo vacío.
-        2. Se añade soporte para 'timer_force_off' solicitado por favoritos.
-        3. Se envuelve todo en try-except para evitar que una excepción
-           silenciosa mate el motor (registrando el error en el log).
-        4. Eliminada la apertura de terminal para CMD_OPEN_PANEL;
-           ahora el panel se lanza siempre con subprocess.Popen.
+        Ejecuta la acción correspondiente basada en el comando recibido.
+        (Antiguo _handle_sigusr1, extraído para separar la recepción de la ejecución)
         """
-        try:
-            # Espera de seguridad para asegurar que el disco terminó de escribir
-            time.sleep(0.02)
+        # --- 1. ACTUALIZACIÓN DE SETTINGS ---
+        if order == ConfigHandler.CMD_UPDATE_TIMER:
+            settings = self.ch.load_json("settings")
+            g = settings["global"]
 
-            action_data = self.ch.load_json("commands")
+            # Sincronización de variables desde el Applet
+            g["slideshow_enabled"] = action_data.get("enabled", g["slideshow_enabled"])
+            g["slideshow_interval"] = int(action_data.get("interval", g["slideshow_interval"]))
+            g["slideshow_mode"] = action_data.get("mode", g["slideshow_mode"])
+            g["slideshow_bookmark"] = action_data.get("slideshow_bookmark", g["slideshow_bookmark"])
+            g["spanned_enabled"] = action_data.get("spanned_enabled", g.get("spanned_enabled", False))
 
-            if action_data and "action" in action_data:
-                order = action_data["action"]
-                log_event(f"Señal recibida: {order}", origin="ENGINE", level="DEBUG", reason="SIGNAL")
+            self.ch.save_json("settings", settings)
+            GLib.idle_add(self._notify_panel, {"action": "settings_updated"})
+            # Gestión del Temporizador
+            GLib.idle_add(self.manage_timer, "start")
 
-                # Limpieza del buzón para evitar ejecuciones duplicadas
-                self.ch.save_json("commands", {})
+            log_event(
+                f"Settings actualizados: enabled={g['slideshow_enabled']}, "
+                f"interval={g['slideshow_interval']}, mode={g['slideshow_mode']}, "
+                f"bookmark={g['slideshow_bookmark']}, spanned={g['spanned_enabled']}",
+                origin="ENGINE", level="INFO", reason="SETTINGS"
+            )
 
-                # --- 1. ACTUALIZACIÓN DE SETTINGS ---
-                if order == ConfigHandler.CMD_UPDATE_TIMER:
-                    settings = self.ch.load_json("settings")
-                    g = settings["global"]
+        # --- 2. CARGA DE FAVORITO ESPECÍFICO ---
+        elif order == ConfigHandler.CMD_LOAD_BOOKMARK:
+            name = action_data.get("name")
 
-                    # Sincronización de variables desde el Applet
-                    g["slideshow_enabled"] = action_data.get("enabled", g["slideshow_enabled"])
-                    g["slideshow_interval"] = int(action_data.get("interval", g["slideshow_interval"]))
-                    g["slideshow_mode"] = action_data.get("mode", g["slideshow_mode"])
-                    g["slideshow_bookmark"] = action_data.get("slideshow_bookmark", g["slideshow_bookmark"])
-                    g["spanned_enabled"] = action_data.get("spanned_enabled", g.get("spanned_enabled", False))
+            # Soporte para apagar el timer si el favorito es una carga manual
+            if action_data.get("timer_force_off"):
+                settings = self.ch.load_json("settings")
+                settings["global"]["slideshow_enabled"] = False
+                self.ch.save_json("settings", settings)
+                GLib.idle_add(self.manage_timer, "stop")
+                log_event("Temporizador detenido por carga manual de favorito", origin="ENGINE", level="INFO", reason="TIMER")
 
-                    self.ch.save_json("settings", settings)
-                    GLib.idle_add(self._notify_panel, {"action": "settings_updated"})
-                    # Gestión del Temporizador
-                    GLib.idle_add(self.manage_timer, "start")
+            log_event(f"Cargando favorito: {name}", origin="ENGINE", level="INFO", reason="BOOKMARK")
+            GLib.idle_add(
+                self._do_cycle_and_notify,
+                ConfigHandler.REASON_BOOKMARK,
+                None,
+                name,
+                None,
+                {"action": "wallpaper_changed"}
+            )
 
-                    log_event(
-                        f"Settings actualizados: enabled={g['slideshow_enabled']}, "
-                        f"interval={g['slideshow_interval']}, mode={g['slideshow_mode']}, "
-                        f"bookmark={g['slideshow_bookmark']}, spanned={g['spanned_enabled']}",
-                        origin="ENGINE", level="INFO", reason="SETTINGS"
-                    )
-
-                # --- 2. CARGA DE FAVORITO ESPECÍFICO ---
-                elif order == ConfigHandler.CMD_LOAD_BOOKMARK:
-                    name = action_data.get("name")
-
-                    # Soporte para apagar el timer si el favorito es una carga manual
-                    if action_data.get("timer_force_off"):
-                        settings = self.ch.load_json("settings")
-                        settings["global"]["slideshow_enabled"] = False
-                        self.ch.save_json("settings", settings)
-                        GLib.idle_add(self.manage_timer, "stop")
-                        log_event("Temporizador detenido por carga manual de favorito", origin="ENGINE", level="INFO", reason="TIMER")
-
-                    log_event(f"Cargando favorito: {name}", origin="ENGINE", level="INFO", reason="BOOKMARK")
-                    GLib.idle_add(
-                        self._do_cycle_and_notify,
-                        ConfigHandler.REASON_BOOKMARK,
-                        None,
-                        name,
-                        None,
-                        {"action": "wallpaper_changed"}
-                    )
-                # --- 2.1 ELIMINACION DE FAVORITO ESPECÍFICO ---
-                elif order == ConfigHandler.CMD_DELETE_BOOKMARK:
-                    name = action_data.get("name")
-                    if name:
-                        log_event(f"Eliminando favorito: {name}", origin="ENGINE", level="INFO", reason="BOOKMARK")
-                        if self.ch.delete_bookmark(name):
-                            log_event(f"Favorito '{name}' eliminado correctamente", origin="ENGINE", level="INFO", reason="BOOKMARK")
-                            self._notify_panel({"action": "bookmarks_updated"})
-                            self.ch._send_notification(
-                                reason=_("Favorite deleted"),
-                                detail_msg=_("Preset") + " '" + name + "'\n" + _("deleted successfully."),
-                                level="info"
-                            )
-                        else:
-                            log_event(f"No se pudo eliminar el favorito '{name}'", origin="ENGINE", level="ERROR", reason="BOOKMARK")
-
-                # --- 3. ACCIONES MANUALES ---
-                elif order == ConfigHandler.CMD_FORCE_ROTATION:
-                    log_event("Rotación manual solicitada (Click en Applet)", origin="ENGINE", level="INFO", reason="LIBRARY")
-                    GLib.idle_add(
-                        self._do_cycle_and_notify,
-                        ConfigHandler.REASON_MANUAL,
-                        None,
-                        None,
-                        None,
-                        {"action": "wallpaper_changed"}
-                    )
-
-                # --- 4. MANTENIMIENTO ---
-                elif order == ConfigHandler.CMD_SYNC_LIBRARY:
-                    log_event("Sincronizando biblioteca de imágenes...", origin="ENGINE", level="INFO", reason="LIBRARY")
-                    result = self.ch.sync_library()
-                    if result and len(result) == 4:
-                        total_h, total_v, has_changes, detail_msg = result
-                        if has_changes:
-                            reason = _("Changes detected")
-                        else:
-                            reason = _("No changes")
-                        log_event(f"Sincronización completada: {total_h}H / {total_v}V, cambios={has_changes}",
-                                  origin="ENGINE", level="INFO", reason="LIBRARY")
-                        body = f"{reason}\n{_('Total library') + ': {}H | {}V'.format(total_h, total_v)}"
-                        if detail_msg:
-                            body = f"{detail_msg}\n{body}"
-                        self.ch._send_notification(
-                            reason="WMM: " + _("Synchronization"),
-                            detail_msg=body,
-                            level="info"
-                        )
-
-                # --- 5. ABRIR PANEL DE CONTROL ---
-                elif order == ConfigHandler.CMD_OPEN_PANEL:
-                    log_event("Abriendo panel de control", origin="ENGINE", level="INFO", reason="COMMAND")
-                    panel_path = os.path.join(os.path.dirname(__file__), "panel.py")
-                    try:
-                        subprocess.Popen(
-                            ["python3", panel_path],
-                            start_new_session=True
-                        )
-                        log_event("Panel lanzado correctamente", origin="ENGINE", level="DEBUG", reason="COMMAND")
-                    except Exception as e:
-                        log_event(f"No se pudo abrir el panel: {e}", origin="ENGINE", level="ERROR", reason="COMMAND")
-
-                # --- 6. APLICAR SELECCIÓN MANUAL ---
-                elif order == ConfigHandler.CMD_APPLY_SELECTION:
-                    log_event("Aplicando selección manual desde el panel", origin="ENGINE", level="INFO", reason="COMMAND")
-                    temp_settings = action_data.get("temp_settings", None)
-                    GLib.idle_add(
-                        self._do_cycle_and_notify,
-                        ConfigHandler.REASON_SELECTION,
-                        None,
-                        None,
-                        temp_settings,
-                        {"action": "wallpaper_changed"}
-                    )
-
-                # --- 7. Añadir PRESET desde add_bookmark.py ---
-                elif order == ConfigHandler.CMD_BOOKMARK_ADDED:
-                    item_name = action_data.get("name", _("Unknown"))
-                    log_event(f"Nuevo preset añadido: {item_name}", origin="ENGINE", level="INFO", reason="BOOKMARK")
+        # --- 2.1 ELIMINACION DE FAVORITO ESPECÍFICO ---
+        elif order == ConfigHandler.CMD_DELETE_BOOKMARK:
+            name = action_data.get("name")
+            if name:
+                log_event(f"Eliminando favorito: {name}", origin="ENGINE", level="INFO", reason="BOOKMARK")
+                if self.ch.delete_bookmark(name):
+                    log_event(f"Favorito '{name}' eliminado correctamente", origin="ENGINE", level="INFO", reason="BOOKMARK")
+                    self._notify_panel({"action": "bookmarks_updated"})
                     self.ch._send_notification(
-                        reason=_("Favorite added"),
-                        detail_msg=item_name + "'\n" + _("added successfully."),
+                        reason=_("Favorite deleted"),
+                        detail_msg=_("Preset") + " '" + name + "'\n" + _("deleted successfully."),
                         level="info"
                     )
-                    self._notify_panel({"action": "bookmarks_updated"})
-            else:
-                log_event("Señal recibida pero el archivo de comandos está vacío", origin="ENGINE", level="DEBUG", reason="COMMAND")
+                else:
+                    log_event(f"No se pudo eliminar el favorito '{name}'", origin="ENGINE", level="ERROR", reason="BOOKMARK")
 
-        except Exception as e:
-            # Captura de cualquier excepción en el manejador de señales
-            # para evitar que el motor muera silenciosamente.
-            import traceback
-            error_msg = f"Excepción en _handle_sigusr1: {e}\n{traceback.format_exc()}"
-            log_event(error_msg, origin="ENGINE", level="ERROR", reason="SIGNAL")
+        # --- 3. ACCIONES MANUALES ---
+        elif order == ConfigHandler.CMD_FORCE_ROTATION:
+            log_event("Rotación manual solicitada (Click en Applet)", origin="ENGINE", level="INFO", reason="LIBRARY")
+            GLib.idle_add(
+                self._do_cycle_and_notify,
+                ConfigHandler.REASON_MANUAL,
+                None,
+                None,
+                None,
+                {"action": "wallpaper_changed"}
+            )
+
+        # --- 4. MANTENIMIENTO ---
+        elif order == ConfigHandler.CMD_SYNC_LIBRARY:
+            log_event("Sincronizando biblioteca de imágenes...", origin="ENGINE", level="INFO", reason="LIBRARY")
+            result = self.ch.sync_library()
+            if result and len(result) == 4:
+                total_h, total_v, has_changes, detail_msg = result
+                if has_changes:
+                    reason = _("Changes detected")
+                else:
+                    reason = _("No changes")
+                log_event(f"Sincronización completada: {total_h}H / {total_v}V, cambios={has_changes}",
+                          origin="ENGINE", level="INFO", reason="LIBRARY")
+                body = f"{reason}\n{_('Total library') + ': {}H | {}V'.format(total_h, total_v)}"
+                if detail_msg:
+                    body = f"{detail_msg}\n{body}"
+                self.ch._send_notification(
+                    reason="WMM: " + _("Synchronization"),
+                    detail_msg=body,
+                    level="info"
+                )
+
+        # --- 5. ABRIR PANEL DE CONTROL ---
+        elif order == ConfigHandler.CMD_OPEN_PANEL:
+            log_event("Abriendo panel de control", origin="ENGINE", level="INFO", reason="COMMAND")
+            panel_path = os.path.join(os.path.dirname(__file__), "panel.py")
+            try:
+                subprocess.Popen(
+                    ["python3", panel_path],
+                    start_new_session=True
+                )
+                log_event("Panel lanzado correctamente", origin="ENGINE", level="DEBUG", reason="COMMAND")
+            except Exception as e:
+                log_event(f"No se pudo abrir el panel: {e}", origin="ENGINE", level="ERROR", reason="COMMAND")
+
+        # --- 6. APLICAR SELECCIÓN MANUAL ---
+        elif order == ConfigHandler.CMD_APPLY_SELECTION:
+            log_event("Aplicando selección manual desde el panel", origin="ENGINE", level="INFO", reason="COMMAND")
+            temp_settings = action_data.get("temp_settings", None)
+            GLib.idle_add(
+                self._do_cycle_and_notify,
+                ConfigHandler.REASON_SELECTION,
+                None,
+                None,
+                temp_settings,
+                {"action": "wallpaper_changed"}
+            )
+
+        # --- 7. Añadir PRESET desde add_bookmark.py ---
+        elif order == ConfigHandler.CMD_BOOKMARK_ADDED:
+            item_name = action_data.get("name", _("Unknown"))
+            log_event(f"Nuevo preset añadido: {item_name}", origin="ENGINE", level="INFO", reason="BOOKMARK")
+            self.ch._send_notification(
+                reason=_("Favorite added"),
+                detail_msg=item_name + "'\n" + _("added successfully."),
+                level="info"
+            )
+            self._notify_panel({"action": "bookmarks_updated"})
+
+        # --- 7b. Añadir IMAGEN SUELTA desde shell_add_bookmark.py ---
+        elif order == ConfigHandler.CMD_SINGLE_FAVORITE_ADDED:
+            item_name = action_data.get("name", _("Unknown"))
+            log_event(f"Nueva imagen favorita añadida: {item_name}", origin="ENGINE", level="INFO", reason="BOOKMARK")
+            self.ch._send_notification(
+                reason=_("Favorite added"),
+                detail_msg=item_name + "'\n" + _("added successfully."),
+                level="info"
+            )
+            self._notify_panel({"action": "bookmarks_updated"})
+
+        else:
+            log_event(f"Orden desconocida recibida: {order}", origin="ENGINE", level="WARN", reason="COMMAND")
 
     def _timer_callback(self):
         """
@@ -387,6 +408,11 @@ class WMMDaemon:
         friendly_reason = ConfigHandler.EXECUTION_REASONS.get(reason, reason)
         log_event(f"Iniciando ciclo: {friendly_reason}", origin="ENGINE", level="INFO", reason="LIBRARY")
 
+        if self._busy:
+            log_event("Ciclo ignorado: motor ocupado", origin="ENGINE", level="DEBUG", reason="COMMAND")
+            return
+        self._set_busy_state(True)
+
         # 1. Estabilización de eventos GDK (Crítico para evitar desajustes)
         context = GLib.MainContext.default()
         while context.pending():
@@ -401,6 +427,7 @@ class WMMDaemon:
         if reason == ConfigHandler.REASON_SELECTION:
             log_event("Modo selección manual: aplicando vault sin rotar", origin="ENGINE", level="DEBUG", reason="VAULT")
             self._handle_selection_mode(temp_settings, monitors_map_real, active_hashes)
+            self._set_busy_state(False)
             return
 
         # --- GESTIÓN DE GEOMETRÍA ---
@@ -416,7 +443,7 @@ class WMMDaemon:
         monitors_map = geo_snapshot.get("monitors", {})
 
         # 3. Sincronización con el Vault (Estado persistente)
-        _, vault = self.ch.sync_vault(active_hashes)
+        _discard, vault = self.ch.sync_vault(active_hashes)
         active_session = vault.get("active_session", {})
 
         # 4. Carga de parámetros de usuario
@@ -493,6 +520,7 @@ class WMMDaemon:
             # Forzamos el inicio del timer para que reintente en el próximo intervalo
             if self.timer_id is None:
                 self.manage_timer(action="start")
+        self._set_busy_state(False)
 
     def _get_smart_favorite(self, m_hash, mode, target_orient, forced_bookmark=None, fname=None, exclude_paths=None):
         """
@@ -981,6 +1009,15 @@ class WMMDaemon:
         # ----------------------------------------------------------
         self.ch._cleanup_blur_thumbnails()
         log_event("ENGINE iniciado", origin="ENGINE", level="INFO", reason="NOTIFY")
+        log_event(f"[DIAG] Engine: platform.cache_dir={self.platform.cache_dir!r}, platform.locale_dir={self.platform.locale_dir!r}", origin="ENGINE", level="DEBUG", reason="SETTINGS")
+        # Configuración post-instalación si el .ini está incompleto
+        required_keys = ['platform', 'desktop', 'app_domain', 'data_base', 'cache_base', 'cache_dir', 'locale_dir', 'applet_dir']
+        config = self.platform._ensure_platform_config()
+
+        if not all(config.get(key) for key in required_keys):
+            log_event("Archivo settings_core.ini incompleto. Iniciando post-instalación para completarlo.",
+                      origin="ENGINE", level="INFO", reason="SETTINGS")
+            self._post_install_setup()
 
         try:
             result = self.ch.sync_library()
@@ -993,7 +1030,7 @@ class WMMDaemon:
             log_event(f"Error en escaneo inicial: {e}", origin="ENGINE", level="ERROR", reason="LIBRARY")
 
         # Asegurar que las acciones del shell están instaladas
-        self.platform.ensure_shell_actions(self.ch.applet_root)
+        self.platform.ensure_shell_actions(self.ch.applet_root, self.platform.data_base)
         # Asegurar que las traducciones están compiladas
         self._ensure_translations()
 
@@ -1033,7 +1070,56 @@ class WMMDaemon:
         Delega en la capa de plataforma, que sabe cómo hacerlo en cada SO.
         """
         if hasattr(self.platform, 'compile_translations'):
-            self.platform.compile_translations(self.ch.applet_root)
+            log_event(f"[DIAG] _ensure_translations: locale_dir={self.platform.locale_dir!r}", origin="ENGINE", level="DEBUG", reason="SETTINGS")
+            self.platform.compile_translations(
+                self.ch.applet_root,
+                self.platform.locale_dir,
+                self.platform.app_domain
+            )
+
+    def _complete_ini_if_needed(self):
+        """
+        Completa el .ini con las claves derivadas si está incompleto.
+        Se ejecuta antes de crear ConfigHandler para que las rutas sean correctas.
+        """
+        required_keys = ['platform', 'desktop', 'app_domain', 'data_base', 'cache_base', 'cache_dir', 'locale_dir', 'applet_dir']
+        config = self.platform._ensure_platform_config()
+        if not all(config.get(key) for key in required_keys):
+            updated = False
+            if not config.get('cache_dir'):
+                config['cache_dir'] = os.path.join(config['cache_base'], 'wmm')
+                updated = True
+            if not config.get('locale_dir'):
+                config['locale_dir'] = os.path.join(config['data_base'], 'locale')
+                updated = True
+            if not config.get('applet_dir'):
+                applet_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                config['applet_dir'] = applet_root
+                updated = True
+            if updated:
+                self.platform.save_ini(config)
+                log_event("Archivo settings_core.ini completado con claves derivadas", origin="ENGINE", level="INFO", reason="SETTINGS")
+                # Actualizar los atributos de la plataforma con los nuevos valores
+                self.platform.cache_dir = config['cache_dir']
+                self.platform.locale_dir = config['locale_dir']
+                self.platform.applet_dir = config['applet_dir']
+
+    def _post_install_setup(self):
+        """
+        Ejecuta tareas de configuración inicial tras completar el .ini por primera vez.
+        Se encarga de instalar las acciones de shell (Nemo, Nautilus, etc.)
+        y de compilar las traducciones.
+        """
+        log_event("Primer arranque detectado. Ejecutando configuración post-instalación...", origin="ENGINE", level="INFO", reason="SETTINGS")
+
+        # 1. Instalar scripts de shell (Nemo, Nautilus, etc.)
+        if hasattr(self.platform, 'ensure_shell_actions'):
+            self.platform.ensure_shell_actions(self.ch.applet_root, self.platform.data_base)
+            log_event("Scripts de shell instalados correctamente", origin="ENGINE", level="INFO", reason="SETTINGS")
+
+        # 2. Compilar traducciones
+        self._ensure_translations()
+        log_event("Configuración post-instalación completada", origin="ENGINE", level="INFO", reason="SETTINGS")
 
 if __name__ == "__main__":
     daemon = WMMDaemon()
