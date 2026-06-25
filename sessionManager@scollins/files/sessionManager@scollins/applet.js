@@ -4,6 +4,7 @@ const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 
 const Applet = imports.ui.applet;
+const GnomeSession = imports.misc.gnomeSession;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 
@@ -14,6 +15,7 @@ const Lang = imports.lang;
 
 let button_path, menu_item_icon_size, use_symbolic_icons;
 let has_console_kit, has_upower, has_systemd, display_manager;
+let session_manager;
 let UUID;
 
 function _(str) {
@@ -26,13 +28,11 @@ function _(str) {
 
 let CommandDispatcher = {
     shutDown: function() {
-        if ( has_systemd ) Util.spawnCommandLine("systemctl poweroff");
-        else if ( has_console_kit ) Util.spawnCommandLine("dbus-send --system --print-reply --system --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop");
+        session_manager.ShutdownRemote();
     },
 
     restart: function() {
-        if ( has_systemd ) Util.spawnCommandLine("systemctl reboot");
-        else if ( has_console_kit ) Util.spawnCommandLine("dbus-send --system --print-reply --system --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart");
+        session_manager.ShutdownRemote();
     },
 
     hibernate: function() {
@@ -50,7 +50,7 @@ let CommandDispatcher = {
     },
 
     logOff: function() {
-        Util.spawnCommandLine("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1");
+        session_manager.LogoutRemote(0);
     },
 
     uSwitch: function() {
@@ -156,6 +156,8 @@ class MyApplet extends Applet.TextIconApplet {
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, this.orientation);
             this.menuManager.addMenu(this.menu);
+
+            session_manager = new GnomeSession.SessionManager();
 
             this.checkSession();
 
