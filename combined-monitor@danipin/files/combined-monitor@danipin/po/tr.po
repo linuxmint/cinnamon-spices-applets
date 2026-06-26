@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Combined Monitor Applet 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-15 21:36+0100\n"
+"POT-Creation-Date: 2026-05-14 22:09+0300\n"
 "PO-Revision-Date: 2025-12-15 21:55+0100\n"
 "Last-Translator: Automated Translator <example@example.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -13,70 +13,119 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 # applet.js strings
+#: ../combined-monitor@danipin/applet.js:155
 msgid "Slot 1 (Standard)"
 msgstr "Slot 1 (Standart)"
 
+#: ../combined-monitor@danipin/applet.js:157
 msgid "Slot 2 (Empty)"
 msgstr "Slot 2 (Boş)"
 
+#: ../combined-monitor@danipin/applet.js:159
 msgid "Slot 3 (Empty)"
 msgstr "Slot 3 (Boş)"
 
+#: ../combined-monitor@danipin/applet.js:329
 msgid "Separator"
 msgstr "Ayırıcı"
 
+#: ../combined-monitor@danipin/applet.js:350
+msgid "Space"
+msgstr "Boşluk"
+
+#: ../combined-monitor@danipin/applet.js:352
 msgid "No Separator"
 msgstr "Ayırıcı Yok"
 
+#: ../combined-monitor@danipin/applet.js:362
 msgid "Symbols"
 msgstr "Semboller"
 
+#: ../combined-monitor@danipin/applet.js:434
 msgid "CPU"
 msgstr "CPU"
 
+#: ../combined-monitor@danipin/applet.js:438
+#: ../combined-monitor@danipin/applet.js:448
+#: ../combined-monitor@danipin/applet.js:458
+#: ../combined-monitor@danipin/applet.js:468
 msgid "Icon-White"
 msgstr "Simge-Beyaz"
 
+#: ../combined-monitor@danipin/applet.js:439
+#: ../combined-monitor@danipin/applet.js:449
+#: ../combined-monitor@danipin/applet.js:459
+#: ../combined-monitor@danipin/applet.js:469
 msgid "Icon-Dark"
 msgstr "Simge-Koyu"
 
+#: ../combined-monitor@danipin/applet.js:440
+#: ../combined-monitor@danipin/applet.js:450
+#: ../combined-monitor@danipin/applet.js:460
+#: ../combined-monitor@danipin/applet.js:470
 msgid "No Symbol (Text Label)"
 msgstr "Sembol Yok (Metin Etiketi)"
 
+#: ../combined-monitor@danipin/applet.js:444
 msgid "TEMP"
 msgstr "SICAKLIK"
 
+#: ../combined-monitor@danipin/applet.js:454
 msgid "RAM"
 msgstr "RAM"
 
+#: ../combined-monitor@danipin/applet.js:464
 msgid "SWAP"
 msgstr "SWAP"
 
+#: ../combined-monitor@danipin/applet.js:476
 msgid "Profile Management"
 msgstr "Profil Yönetimi"
 
+#: ../combined-monitor@danipin/applet.js:489
 msgid "Activate (Load)"
 msgstr "Aktif Et (Yükle)"
 
+#: ../combined-monitor@danipin/applet.js:495
 msgid "Save Current Settings"
 msgstr "Mevcut Ayarları Kaydet"
 
+#: ../combined-monitor@danipin/applet.js:514
 msgid "System Monitor"
 msgstr "Sistem Monitörü"
 
+#: ../combined-monitor@danipin/applet.js:525
 msgid "Restart Cinnamon"
 msgstr "Cinnamon'ı Yeniden Başlat"
+
+#: ../combined-monitor@danipin/applet.js:860
+msgid "Slot is empty - Ready to save"
+msgstr "Slot boş - Kaydetmeye hazır"
+
+#: ../combined-monitor@danipin/applet.js:1325
+#: ../combined-monitor@danipin/applet.js:1423
+msgid "N/A"
+msgstr "Y/U"
+
+# settings-schema.json strings
+msgid "Decimal places for temperature"
+msgstr "Sıcaklık için ondalık basamaklar"
+
+msgid ""
+"Number of decimal places to display for temperature. Set to 0 for whole "
+"numbers."
+msgstr ""
+"Sıcaklık için görüntülenecek ondalık basamak sayısı. Tam sayılar için 0 "
+"olarak ayarlayın."
+
+msgid "decimal places"
+msgstr "ondalık basamaklar"
 
 msgid "Profile Saved: %s"
 msgstr "Profil Kaydedildi: %s"
 
 msgid "Active: %s"
 msgstr "Aktif: %s"
-
-msgid "N/A"
-msgstr "Y/U"
-
-# settings-schema.json strings (Descriptions, Tooltips, Options)
 
 # Page Titles
 msgid "CPU Temperature"
@@ -101,6 +150,8 @@ msgstr "Eşikler"
 msgid "Colors"
 msgstr "Renkler"
 
+# #-#-#-#-#  tr.po (Combined Monitor Applet 1.0)  #-#-#-#-#
+# Section Titles
 msgid "Thresholds (in °C)"
 msgstr "Eşikler (°C cinsinden)"
 
@@ -126,8 +177,14 @@ msgstr "CPU için özel sembol/simge. Metin etiketi için boş bırakın."
 msgid "Show percentage sign (%) for CPU"
 msgstr "CPU için yüzde işareti (%) göster"
 
-msgid "If disabled, only the value (e.g., '45') is displayed without the percentage sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in the 'General' tab acts as a master switch."
-msgstr "Devre dışı bırakılırsa, yalnızca değer (örneğin, '45'), yüzde işareti olmadan (örneğin, '45%') görüntülenir. 'Genel' sekmesindeki 'Yüzde işareti (%) göster (Ana Anahtar)' seçeneği ana anahtar görevi görür."
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed without the percentage "
+"sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in "
+"the 'General' tab acts as a master switch."
+msgstr ""
+"Devre dışı bırakılırsa, yalnızca değer (örneğin, '45'), yüzde işareti "
+"olmadan (örneğin, '45%') görüntülenir. 'Genel' sekmesindeki 'Yüzde işareti "
+"(%) göster (Ana Anahtar)' seçeneği ana anahtar görevi görür."
 
 msgid "Threshold LOW"
 msgstr "Eşik DÜŞÜK"
@@ -169,14 +226,26 @@ msgstr "YÜKSEK eşiğin üzerinde kullanılır"
 msgid "Show Temperature"
 msgstr "Sıcaklığı Göster"
 
-msgid "Enables the display of CPU temperature. **Important:** On many systems, installing the 'lm-sensors' package and running 'sudo sensors-detect' is necessary for this function to work correctly. Please refer to the instructions in the README.md."
-msgstr "CPU sıcaklığının görüntülenmesini sağlar. **Önemli:** Birçok sistemde, bu işlevin doğru çalışması için 'lm-sensors' paketinin kurulması ve 'sudo sensors-detect' komutunun çalıştırılması gereklidir. Lütfen README.md'deki talimatlara bakın."
+msgid ""
+"Enables the display of CPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Please refer to the "
+"instructions in the README.md."
+msgstr ""
+"CPU sıcaklığının görüntülenmesini sağlar. **Önemli:** Birçok sistemde, bu "
+"işlevin doğru çalışması için 'lm-sensors' paketinin kurulması ve 'sudo "
+"sensors-detect' komutunun çalıştırılması gereklidir. Lütfen README.md'deki "
+"talimatlara bakın."
 
 msgid "Show °C symbol"
 msgstr "°C sembolünü göster"
 
-msgid "Controls whether the Celsius symbol (°C or °F) should be displayed after the value."
-msgstr "Değerden sonra Celsius sembolünün (°C veya °F) görüntülenip görüntülenmeyeceğini kontrol eder."
+msgid ""
+"Controls whether the Celsius symbol (°C or °F) should be displayed after the "
+"value."
+msgstr ""
+"Değerden sonra Celsius sembolünün (°C veya °F) görüntülenip "
+"görüntülenmeyeceğini kontrol eder."
 
 msgid "Text for Temperature"
 msgstr "Sıcaklık için Metin"
@@ -193,17 +262,22 @@ msgstr "Celsius (°C)"
 msgid "Fahrenheit (°F)"
 msgstr "Fahrenheit (°F)"
 
-msgid "Choose whether the temperature should be displayed in Celsius or Fahrenheit. Threshold values must be adjusted accordingly."
-msgstr "Sıcaklığın Celsius veya Fahrenheit olarak görüntülenip görüntülenmeyeceğini seçin. Eşik değerleri buna göre ayarlanmalıdır."
+msgid ""
+"Choose whether the temperature should be displayed in Celsius or Fahrenheit. "
+"Threshold values must be adjusted accordingly."
+msgstr ""
+"Sıcaklığın Celsius veya Fahrenheit olarak görüntülenip görüntülenmeyeceğini "
+"seçin. Eşik değerleri buna göre ayarlanmalıdır."
 
 msgid "The LOW color is used below this value (applies to °C and °F)"
-msgstr "DÜŞÜK renk bu değerin altında kullanılır (°C ve °F için geçerlidir)"
+msgstr "DÜŞÜK renk bu değerin altında kullanılır (°C ve °F für geçerlidir)"
 
 msgid "The MED color is used between LOW and MED (applies to °C and °F)"
-msgstr "ORTA renk DÜŞÜK ve ORTA arasında kullanılır (°C ve °F için geçerlidir)"
+msgstr "ORTA renk DÜŞÜK ve ORTA arasında kullanılır (°C ve °F für geçerlidir)"
 
 msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
-msgstr "YÜKSEK renk ORTA ve YÜKSEK arasında kullanılır (°C ve °F için geçerlidir)"
+msgstr ""
+"YÜKSEK renk ORTA ve YÜKSEK arasında kullanılır (°C ve °F für geçerlidir)"
 
 msgid "Enable color change for TEMP"
 msgstr "SICAKLIK için renk değişimini etkinleştir"
@@ -231,7 +305,7 @@ msgid "Custom symbol/icon for RAM. Leave empty for text label."
 msgstr "RAM için özel sembol/simge. Metin etiketi için boş bırakın."
 
 msgid "Show percentage sign (%) for RAM"
-msgstr "RAM için yüzde işareti (%) göster"
+msgstr "RAM für yüzde işareti (%) göster"
 
 msgid "Display Mode"
 msgstr "Görüntüleme Modu"
@@ -245,8 +319,12 @@ msgstr "Kullanılan Bellek (MB/GB)"
 msgid "Free Memory (MB/GB)"
 msgstr "Boş Bellek (MB/GB)"
 
-msgid "Choose whether percentage usage or used/free memory in MB/GB should be displayed."
-msgstr "Yüzde kullanımının mı yoksa kullanılan/boş belleğin (MB/GB) mi görüntüleneceğini seçin."
+msgid ""
+"Choose whether percentage usage or used/free memory in MB/GB should be "
+"displayed."
+msgstr ""
+"Yüzde kullanımının mı yoksa kullanılan/boş belleğin (MB/GB) mi "
+"görüntüleneceğini seçin."
 
 msgid "Enable color change for RAM"
 msgstr "RAM için renk değişimini etkinleştir"
@@ -268,19 +346,28 @@ msgid "If active, it only shows SWAP when usage is greater than 0%."
 msgstr "Aktifse, SWAP'ı yalnızca kullanım %0'dan büyük olduğunda gösterir."
 
 msgid "Show percentage sign (%) for SWAP"
-msgstr "SWAP için yüzde işareti (%) göster"
+msgstr "SWAP für yüzde işareti (%) göster"
 
 msgid "Enable color change for SWAP"
-msgstr "SWAP için renk değişimini etkinleştir"
+msgstr "SWAP für renk değişimini etkinleştir"
 
-msgid "If the value is less than or equal to the LOW threshold, the LOW color is used."
+msgid ""
+"If the value is less than or equal to the LOW threshold, the LOW color is "
+"used."
 msgstr "Değer DÜŞÜK eşiğe küçük veya eşitse, DÜŞÜK renk kullanılır."
 
-msgid "If the value is greater than LOW and less than or equal to the MED threshold, the MED color is used."
-msgstr "Değer DÜŞÜK'ten büyük ve ORTA eşiğe küçük veya eşitse, ORTA renk kullanılır."
+msgid ""
+"If the value is greater than LOW and less than or equal to the MED "
+"threshold, the MED color is used."
+msgstr ""
+"Değer DÜŞÜK'ten büyük ve ORTA eşiğe küçük veya eşitse, ORTA renk kullanılır."
 
-msgid "If the value is greater than MED and less than or equal to the HIGH threshold, the HIGH color is used."
-msgstr "Değer ORTA'dan büyük ve YÜKSEK eşiğe küçük veya eşitse, YÜKSEK renk kullanılır."
+msgid ""
+"If the value is greater than MED and less than or equal to the HIGH "
+"threshold, the HIGH color is used."
+msgstr ""
+"Değer ORTA'dan büyük ve YÜKSEK eşiğe küçük veya eşitse, YÜKSEK renk "
+"kullanılır."
 
 # Order
 msgid "CPU Position"
@@ -298,8 +385,12 @@ msgstr "Konum 3"
 msgid "Position 4 (Right)"
 msgstr "Konum 4 (Sağ)"
 
-msgid "Defines the display position of CPU. The position is automatically swapped with the metric at the same position."
-msgstr "CPU'nun görüntüleme konumunu tanımlar. Konum, aynı konumdaki metrikle otomatik olarak değiştirilir."
+msgid ""
+"Defines the display position of CPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"CPU'nun görüntüleme konumunu tanımlar. Konum, aynı konumdaki metrikle "
+"otomatik olarak değiştirilir."
 
 msgid "TEMP Position"
 msgstr "SICAKLIK Konumu"
@@ -326,15 +417,25 @@ msgstr "Ayırıcı Rengi"
 msgid "Show percentage sign (%) (Master Switch)"
 msgstr "Yüzde işareti (%) göster (Ana Anahtar)"
 
-msgid "If disabled, only the value (e.g., '45') is displayed for all percentage displays without the percentage sign (e.g., '45%'). Individual switches for CPU/RAM/SWAP must also be active."
-msgstr "Devre dışı bırakılırsa, yalnızca değer (örneğin, '45'), yüzde işareti olmadan (örneğin, '45%') görüntülenir. CPU/RAM/SWAP için bireysel anahtarlar da aktif olmalıdır."
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed for all percentage "
+"displays without the percentage sign (e.g., '45%'). Individual switches for "
+"CPU/RAM/SWAP must also be active."
+msgstr ""
+"Devre dışı bırakılırsa, yalnızca değer (örneğin, '45'), yüzde işareti "
+"olmadan (örneğin, '45%') görüntülenir. CPU/RAM/SWAP için bireysel anahtarlar "
+"da aktif olmalıdır."
 
 # Profiles
 msgid "Profile Message Duration (Seconds)"
 msgstr "Profil Mesajı Süresi (Saniye)"
 
-msgid "How long should the message ('Profile saved', 'Profile active') be displayed in the panel."
-msgstr "('Profil kaydedildi', 'Profil aktif') mesajı panelde ne kadar süreyle gösterilmelidir."
+msgid ""
+"How long should the message ('Profile saved', 'Profile active') be displayed "
+"in the panel."
+msgstr ""
+"('Profil kaydedildi', 'Profil aktif') mesajı panelde ne kadar süreyle "
+"gösterilmelidir."
 
 msgid "Profile 1 Name"
 msgstr "Profil 1 Adı"
@@ -361,7 +462,85 @@ msgid "Profile 3 Name"
 msgstr "Profil 3 Adı"
 
 msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
-msgstr "Açılır menüde Profil 3 için 'Aktif Et' veya 'Kaydet'e tıklayın."
+msgstr "Açılır menüde Profil 3 für 'Aktif Et' veya 'Kaydet'e tıklayın."
 
 msgid "Saved data for Profile 3 (internal)"
 msgstr "Profil 3 için kaydedilen veriler (dahili)"
+
+# metadata.json strings
+msgid "Combined Monitor"
+msgstr "Birleşik Monitör"
+
+msgid ""
+"A compact and comprehensive system monitor for Cinnamon. Displays CPU, RAM, "
+"and SWAP usage in a single panel element. Configure colors, thresholds, "
+"separators, and the order of metrics. Supports displaying text, theme icons, "
+"or custom symbols for perfect integration into your panel."
+msgstr ""
+"Cinnamon için kompakt ve kapsamlı bir sistem monitörü. CPU, RAM ve SWAP "
+"kullanımını tek bir panel öğesinde görüntüler. Renkleri, eşikleri, "
+"ayırıcıları ve metriklerin sırasını yapılandırın. Panelinizle mükemmel "
+"entegrasyon için metin, tema simgeleri veya özel sembollerin "
+"görüntülenmesini destekler."
+
+# Page Titles
+msgid "GPU Temperature"
+msgstr "GPU Sıcaklığı"
+
+# GPU
+msgid "Show GPU Temperature"
+msgstr "GPU Sıcaklığını Göster"
+
+msgid ""
+"Enables the display of GPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Integrated GPUs (iGPUs) may "
+"report their temperature as part of the CPU temperature."
+msgstr ""
+"GPU sıcaklığının görüntülenmesini sağlar. **Önemli:** Birçok sistemde, bu "
+"işlevin doğru çalışması için 'lm-sensors' paketinin kurulması ve 'sudo "
+"sensors-detect' komutunun çalıştırılması gereklidir. Entegre GPU'lar "
+"(iGPU'lar) sıcaklıklarını CPU sıcaklığının bir parçası olarak rapor edebilir."
+
+msgid "Text for GPU"
+msgstr "GPU için Metin"
+
+msgid "Custom symbol/icon for GPU. Metin etiketi için boş bırakın."
+msgstr "GPU için özel sembol/simge. Metin etiketi için boş bırakın."
+
+msgid "Decimal places for GPU temperature"
+msgstr "GPU sıcaklığı için ondalık basamaklar"
+
+msgid ""
+"Number of decimal places to display for GPU temperature. Tam sayılar için 0 "
+"olarak ayarlayın."
+msgstr ""
+"GPU sıcaklığı için görüntülenecek ondalık basamak sayısı. Tam sayılar için 0 "
+"olarak ayarlayın."
+
+msgid "The LOW color is used below this value (geçerlidir °C ve °F)"
+msgstr "DÜŞÜK renk bu değerin altında kullanılır (°C ve °F için geçerlidir)"
+
+msgid "The MED color is used between LOW and MED (geçerlidir °C ve °F)"
+msgstr "ORTA renk DÜŞÜK ve ORTA arasında kullanılır (°C ve °F için geçerlidir)"
+
+msgid "The HIGH color is used between MED and HIGH (geçerlidir °C ve °F)"
+msgstr ""
+"YÜKSEK renk ORTA ve YÜKSEK arasında kullanılır (°C ve °F için geçerlidir)"
+
+msgid "Enable color change for GPU"
+msgstr "GPU için renk değişimini etkinleştir"
+
+# Order
+msgid "GPU Position"
+msgstr "GPU Konumu"
+
+msgid "Position 5"
+msgstr "Konum 5"
+
+msgid ""
+"Defines the display position of GPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"GPU'nun görüntüleme konumunu tanımlar. Konum, aynı konumdaki metrikle "
+"otomatik olarak değiştirilir."
