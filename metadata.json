@@ -1,10 +1,10 @@
 {
-  "uuid": "sound@brahim",
-  "name": "Sound",
-  "description": "Premium Sound Applet with Now Playing card, album art, media controls, and volume slider with amplification support.",
+  "uuid": "global-settings@brahim",
+  "name": "Global Settings",
+  "description": "macOS Tahoe style Control Center — Wi-Fi, Bluetooth, Sound, Brightness, Dark Mode, Media controls, System buttons.",
   "version": "1.0.0",
   "cinnamon-version": ["5.0", "5.2", "5.4", "5.6", "5.8", "6.0", "6.2", "6.4"],
   "max-instances": "1",
-  "icon": "audio-speakers",
+  "icon": "preferences-system",
   "author": "Brahim Salem"
 }

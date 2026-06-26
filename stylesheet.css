@@ -1,16 +1,8 @@
 /* ============================================================
-   sound@brahim — Premium Sound Applet
+   global-settings@brahim — Control Center
    ============================================================ */
 
-/*
-   Strip ONLY the Cinnamon popup chrome nodes by name.
-   DO NOT use .gs-menu * — that nukes all child backgrounds.
-   The nodes that carry the unwanted background are:
-     .popup-menu-content  ← main culprit from cinnamon.css
-     .popup-menu-section
-     .popup-menu-inner-box
-   We target them explicitly, scoped to .gs-menu.
-*/
+/* ── Force all popup chrome backgrounds transparent ── */
 .gs-menu.popup-menu,
 .gs-menu .popup-menu-content,
 .gs-menu .popup-menu-section,
@@ -33,7 +25,17 @@
     min-width:          0 !important;
 }
 
-/* Tooltip - only for volume slider */
+/* Extra catch‑all for any other container that might sneak in */
+.gs-menu.popup-menu,
+.gs-menu .popup-menu-content,
+.gs-menu .popup-menu-inner-box,
+.gs-menu .popup-menu-box,
+.gs-menu .popup-menu-item {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Tooltip */
 .tooltip-label {
     border-radius: 6px;
     padding: 4px 9px;
@@ -42,280 +44,451 @@
     font-size: 11px;
 }
 
-/* ═══════════════════════════════════════════════════
-   WINDOWS 11 DARK (default)
-   Shell: 0.30 transparent, self-contained background
-   ═══════════════════════════════════════════════════ */
-/* ── Win11 Dark shell: 0.30 translucent ── */
+/* ── Shell: structural sizing only — NO background/border/shadow here.
+   Each theme below owns its background exclusively via a single
+   theme-scoped rule, so exactly one background is ever painted. This
+   selector intentionally never sets background-color, border, or
+   box-shadow, to guarantee it can never visually combine with (or be
+   fought over by) a theme-specific rule on the same element. ── */
 .gs-shell,
 .gs-menu .gs-shell {
-    width: 320px;
-    border-radius: 4px;
+    width: 460px;
     padding: 12px;
-    background-color: rgba(26, 26, 26, 0.4) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important;
 }
 
-/* Dark theme child elements */
-.gs-menu .gs-np-card {
-    background-color: rgba(20, 20, 20, 0.75) !important;
-    border: 1px solid rgba(255, 255, 255, 0.10) !important;
-    border-radius: 12px;
-    overflow: hidden;
-}
+/* macOS Dark theme child elements — explicitly scoped so they can
+   never simultaneously match alongside .gs-theme-macos-light (same
+   specificity would otherwise create an unpredictable tie). */
+.gs-menu .gs-theme-macos-dark .gs-tile                { background-color: rgba(0,0,0,0.55) !important; border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; }
+.gs-menu .gs-theme-macos-dark .gs-tile:hover          { background-color: rgba(80,80,80,0.65) !important; }
+.gs-menu .gs-theme-macos-dark .gs-tile-on             { background-color: rgba(0,120,212,0.88) !important; }
+.gs-menu .gs-theme-macos-dark .gs-tile-on:hover       { background-color: rgba(80,80,80,0.65) !important; }
+.gs-menu .gs-theme-macos-dark .gs-circle-tile          { background-color: rgba(0,0,0,0.55) !important; border: 1px solid rgba(255,255,255,0.14); }
+.gs-menu .gs-theme-macos-dark .gs-circle-tile:hover    { background-color: rgba(80,80,80,0.65) !important; }
+.gs-menu .gs-theme-macos-dark .gs-circle-tile-on       { background-color: rgba(0,120,212,0.88) !important; }
+.gs-menu .gs-theme-macos-dark .gs-circle-tile-on:hover { background-color: rgba(80,80,80,0.65) !important; }
+.gs-menu .gs-theme-macos-dark .gs-np-card             { border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; }
+.gs-menu .gs-theme-macos-dark .gs-np-art              { background-color: rgba(80,80,80,0.50) !important; }
+.gs-menu .gs-theme-macos-dark .gs-media-btn           { background-color: rgba(245,255,255,0.50) !important; }
+.gs-menu .gs-theme-macos-dark .gs-media-btn:hover     { background-color: rgba(100,100,100,0.70) !important; }
+.gs-menu .gs-theme-macos-dark .gs-slider-card         { background-color: rgba(0,0,0,0.55) !important; border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; }
+.gs-menu .gs-theme-macos-dark .gs-sys-btn             { background-color: rgba(0,0,0,0.55) !important; border: 1px solid rgba(255,255,255,0.14); border-radius: 28px; }
+.gs-menu .gs-theme-macos-dark .gs-sys-btn:hover       { background-color: rgba(80,80,80,0.65) !important; }
+.gs-menu .gs-theme-macos-dark .gs-sys-btn:active      { background-color: rgba(0,120,212,0.88) !important; }
+.gs-menu .gs-theme-macos-dark .gs-edit-btn            { background-color: rgba(20,20,20,0.5) !important; border-radius: 18px; }
+.gs-menu .gs-theme-macos-dark .gs-edit-btn:hover      { background-color: rgba(80,80,80,0.65) !important; }
 
-.gs-menu .gs-slider-card {
-    background-color: rgba(0, 0, 0, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 8px;
-}
+/* Desktop theme: same shapes (border/radius) as Dark for a consistent
+   silhouette before cinnamon.css adds its own colors, but no inherited
+   background color of its own — that's set to transparent explicitly
+   further below. */
+.gs-menu .gs-theme-desktop .gs-tile          { border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; }
+.gs-menu .gs-theme-desktop .gs-circle-tile   { border: 1px solid rgba(255,255,255,0.14); }
+.gs-menu .gs-theme-desktop .gs-np-card       { border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; }
+.gs-menu .gs-theme-desktop .gs-slider-card   { border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; }
+.gs-menu .gs-theme-desktop .gs-sys-btn       { border: 1px solid rgba(255,255,255,0.14); border-radius: 28px; }
+.gs-menu .gs-theme-desktop .gs-edit-btn      { border-radius: 18px; }
 
-.gs-menu .gs-slider-label {
-    color: rgba(255, 255, 255, 0.60);
-    font-size: 10px;
-    font-weight: bold;
-}
+/* (macOS Dark shell background/border/shadow/radius is defined once,
+   below, under "macOS DARK" — see .gs-theme-macos-dark.gs-shell) */
 
-.gs-menu .gs-slider-icon {
-    color: rgba(255, 255, 255, 0.60);
-}
-
-.gs-menu .gs-np-time {
-    color: rgba(255, 255, 255, 0.80) !important;
-    font-size: 9px;
-    min-width: 28px;
-}
-
-/* Volume icon button */
-.gs-menu .gs-vol-icon-btn {
-    background: transparent !important;
-    border: none !important;
-    border-radius: 50% !important;
-    padding: 2px !important;
-}
-
-.gs-menu .gs-vol-icon-btn StIcon {
-    color: rgba(255, 255, 255, 0.70);
-}
-
-.gs-menu .gs-vol-icon-btn:hover StIcon {
-    color: rgba(255, 255, 255, 0.95);
-}
-
-/* ── Win11 Light shell: 0.30 translucent ── */
-.gs-menu .gs-theme-win11-light.gs-shell,
-.gs-theme-win11-light.gs-shell {
-    background-color: rgba(245, 245, 245, 0.15) !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 255, 255, 0.3) inset !important;
-    border-radius: 4px;
-}
-
-.gs-menu .gs-theme-win11-light .gs-np-card {
-    background-color: rgba(255, 255, 255, 0.75) !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.gs-menu .gs-theme-win11-light .gs-slider-card {
-    background-color: rgba(255, 255, 255, 0.65) !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    border-radius: 8px;
-}
-
-.gs-menu .gs-theme-win11-light .gs-slider-label {
-    color: rgba(0, 0, 0, 0.60);
-    font-size: 10px;
-    font-weight: bold;
-}
-
-.gs-menu .gs-theme-win11-light .gs-slider-icon {
-    color: rgba(0, 0, 0, 0.60);
-}
-
-.gs-menu .gs-theme-win11-light .gs-np-time {
-    color: rgba(255, 255, 255, 0.80) !important;
-    font-size: 9px;
-    min-width: 28px;
-}
-
-.gs-menu .gs-theme-win11-light .gs-vol-icon-btn StIcon {
-    color: rgba(0, 0, 0, 0.60);
-}
-
-.gs-menu .gs-theme-win11-light .gs-vol-icon-btn:hover StIcon {
-    color: rgba(0, 0, 0, 0.85);
-}
-
-/* ── Desktop theme: fully transparent shell, no backgrounds ──
-   All styling comes from your cinnamon.css snippet.           */
+/* ── Desktop theme shell — fully transparent, no background of its
+   own. Tiles/cards underneath are also transparent so that styling
+   comes entirely from your cinnamon.css snippet. Per-theme-scoped for
+   the same reason as above: exactly one shell background rule can
+   ever match at a time. cinnamon.css cannot reach this element's
+   background regardless, since GNOME/Cinnamon theme stylesheets only
+   ever target standard St/GTK widget classes (button, popup-menu,
+   etc.) — they have no selector for "gs-shell", a class defined and
+   used only inside this applet's own stylesheet. ── */
 .gs-menu .gs-theme-desktop.gs-shell,
 .gs-theme-desktop.gs-shell {
     background-color: transparent !important;
     border-color: transparent !important;
     box-shadow: none !important;
+    border-radius: 26px;
 }
-
+.gs-menu .gs-theme-desktop .gs-tile,
+.gs-menu .gs-theme-desktop .gs-circle-tile,
 .gs-menu .gs-theme-desktop .gs-np-card,
-.gs-menu .gs-theme-desktop .gs-slider-card {
-    background-color: transparent !important;
-    border-color: transparent !important;
+.gs-menu .gs-theme-desktop .gs-media-btn,
+.gs-menu .gs-theme-desktop .gs-slider-card,
+.gs-menu .gs-theme-desktop .gs-sys-btn,
+.gs-menu .gs-theme-desktop .gs-edit-btn { background-color: transparent !important; }
+.gs-menu .gs-theme-desktop .gs-np-art { background-color: rgba(80, 80, 80, 0.80) !important; }
+
+/* ── Desktop (Chameleonic) theme: active-tile hover + contrast fixes ──
+   Active tiles get their background from an inline accent color (so they
+   can "chameleon" to match media artwork). These rules ensure hover
+   background and white text even when inline style is applied. */
+.gs-theme-desktop .gs-tile-on:hover,
+.gs-menu .gs-theme-desktop .gs-tile-on:hover,
+.gs-theme-desktop .gs-circle-tile-on:hover,
+.gs-menu .gs-theme-desktop .gs-circle-tile-on:hover {
+    background-color: rgba(75, 75, 75, 0.90) !important;
+}
+.gs-theme-desktop .gs-tile-on .gs-tile-icon,
+.gs-theme-desktop .gs-tile-on .gs-tile-label,
+.gs-menu .gs-theme-desktop .gs-tile-on .gs-tile-icon,
+.gs-menu .gs-theme-desktop .gs-tile-on .gs-tile-label,
+.gs-theme-desktop .gs-tile-on:hover .gs-tile-icon,
+.gs-theme-desktop .gs-tile-on:hover .gs-tile-label,
+.gs-menu .gs-theme-desktop .gs-tile-on:hover .gs-tile-icon,
+.gs-menu .gs-theme-desktop .gs-tile-on:hover .gs-tile-label,
+.gs-theme-desktop .gs-circle-tile-on .gs-tile-icon,
+.gs-theme-desktop .gs-circle-tile-on .gs-tile-label,
+.gs-menu .gs-theme-desktop .gs-circle-tile-on .gs-tile-icon,
+.gs-menu .gs-theme-desktop .gs-circle-tile-on .gs-tile-label,
+.gs-theme-desktop .gs-circle-tile-on:hover .gs-tile-icon,
+.gs-theme-desktop .gs-circle-tile-on:hover .gs-tile-label,
+.gs-menu .gs-theme-desktop .gs-circle-tile-on:hover .gs-tile-icon,
+.gs-menu .gs-theme-desktop .gs-circle-tile-on:hover .gs-tile-label {
+    color: white !important;
+}
+.gs-theme-desktop .gs-tile-on .gs-tile-sub,
+.gs-menu .gs-theme-desktop .gs-tile-on .gs-tile-sub,
+.gs-theme-desktop .gs-tile-on:hover .gs-tile-sub,
+.gs-menu .gs-theme-desktop .gs-tile-on:hover .gs-tile-sub,
+.gs-theme-desktop .gs-circle-tile-on .gs-tile-sub,
+.gs-menu .gs-theme-desktop .gs-circle-tile-on .gs-tile-sub,
+.gs-theme-desktop .gs-circle-tile-on:hover .gs-tile-sub,
+.gs-menu .gs-theme-desktop .gs-circle-tile-on:hover .gs-tile-sub {
+    color: rgba(245, 250, 250, 0.85) !important;
 }
 
-.gs-menu .gs-theme-desktop .gs-slider-label {
-    color: rgba(255, 255, 255, 0.70);
+/* Structural defaults shared by every theme — colors are intentionally
+   NOT set here; each theme (.gs-theme-macos-dark / .gs-theme-macos-light
+   / .gs-theme-desktop) supplies its own background-color exclusively,
+   so there is exactly one color-bearing rule per theme instead of
+   several overlapping ones at different specificities. */
+.gs-tile {
+    border-radius: 18px;
+    padding: 8px 6px;
+    min-width: 110px;
+    max-width: 126px;
 }
 
-.gs-menu .gs-theme-desktop .gs-slider-icon {
-    color: rgba(255, 255, 255, 0.70);
-}
+.gs-tile-icon  { icon-size: 16px; color: rgba(245,255,255,0.90); }
+.gs-tile-label { font-size: 10px; font-weight: bold; color: rgba(245,255,255,0.90); }
+.gs-tile-sub   { font-size: 8.5px; color: rgba(245,255,255,0.40); }
+.gs-tile-on .gs-tile-icon,
+.gs-tile-on .gs-tile-label { color: white; }
+.gs-tile-on .gs-tile-sub   { color: rgba(245,255,255,0.85); }
 
-.gs-menu .gs-theme-desktop .gs-np-time {
-    color: rgba(255, 255, 255, 0.80) !important;
-}
-
-.gs-menu .gs-theme-desktop .gs-vol-icon-btn StIcon {
-    color: rgba(255, 255, 255, 0.70);
-}
-
-/* Slider cards - shared styles */
-.gs-slider-card {
-    padding: 10px 14px;
-    spacing: 6px;
-}
-
-.gs-slider-label {
-    font-size: 10px;
-    font-weight: bold;
-}
-
-/* Now Playing card - shared styles */
-.gs-np-card {
+/* Circular tiles (Hotspot, Focus, Display, Dark Mode, Night Light, Blank) —
+   fully standalone class, deliberately NOT sharing .gs-tile so no other
+   rule anywhere can ever override its box shape. */
+.gs-circle-tile {
+    width: 58px; height: 58px;
+    min-width: 58px; min-height: 58px;
+    max-width: 58px; max-height: 58px;
     padding: 0;
-    spacing: 0;
+    border-radius: 29px;
+}
+.gs-circle-tile .gs-tile-icon  { icon-size: 14px; }
+.gs-circle-tile .gs-tile-label { font-size: 6.5px; text-align: center; }
+.gs-circle-tile .gs-tile-sub   { font-size: 5.5px; text-align: center; }
+.gs-circle-tile-on .gs-tile-icon,
+.gs-circle-tile-on .gs-tile-label { color: white; }
+.gs-circle-tile-on .gs-tile-sub   { color: rgba(245,255,255,0.85); }
+
+/* Now Playing */
+.gs-np-card {
+    border-radius: 18px;
+    padding: 8px;
+}
+.gs-np-art {
+    width: 44px; height: 44px;
     border-radius: 12px;
 }
+.gs-np-label  { font-size: 8px; font-weight: bold; color: rgba(245,255,255,0.50); }
+.gs-np-title  { font-size: 10px; font-weight: bold; color: rgba(245,255,255,0.90); }
+.gs-np-artist { font-size: 8.5px; color: rgba(245,255,255,0.40); }
 
-.gs-np-card .gs-np-art-canvas {
-    min-height: 200px;
+/* Media buttons */
+.gs-media-btn {
+    border-radius: 50%;
+    width: 30px; height: 30px;
+}
+.gs-media-btn-play     { width: 36px; height: 36px; }
+.gs-media-btn StIcon,
+.gs-media-btn-play StIcon { color: rgba(245,255,255,0.90); }
+
+/* Slider cards — same idea as .gs-tile: always carries its own safe,
+   theme-independent background/border (here, the dark-skin look) so it
+   is never one frame away from falling back to bare Cinnamon/GTK widget
+   chrome if a theme class hasn't landed yet (e.g. during a settings
+   reset). The macOS-light/dark/desktop rules further below still win
+   over this whenever their class is actually present, since they're
+   more specific AND !important. */
+.gs-slider-card {
+    border-radius: 18px;
+    padding: 10px 14px;
+    background-color: rgba(0, 0, 0, 0.55) !important;
+    border: 1px solid rgba(245, 250, 250, 0.14) !important;
+}
+.gs-slider-label { font-size: 10px; font-weight: bold; color: rgba(245,255,255,0.40); }
+.gs-slider-icon  { color: rgba(245,255,255,0.50); }
+
+/* Separator */
+.gs-sep {
+    height: 1px;
+    background-color: rgba(245,255,255,0.10);
+    margin: 2px 0;
 }
 
-/* Volume icon button - shared */
-.gs-vol-icon-btn {
-    background: transparent !important;
-    border: none !important;
-    border-radius: 50% !important;
-    padding: 2px !important;
+/* System buttons */
+.gs-sys-btn {
+    border-radius: 28px;
+    width: 56px; height: 56px;
+    min-width: 56px; min-height: 56px;
+    max-width: 56px; max-height: 56px;
 }
+.gs-sys-btn StIcon        { color: rgba(245,255,255,0.90); icon-size: 22px; }
+.gs-sys-btn:active StIcon { color: white; }
 
-.gs-vol-icon-btn StIcon {
-    icon-size: 18px;
+/* Settings button */
+.gs-edit-btn {
+    border-radius: 8px;
+    padding: 5px 16px;
+    color: rgba(245,255,255,0.40);
+    font-size: 10px;
 }
+.gs-edit-btn:hover { color: white; }
 
 /* ═══════════════════════════════════════════════════
-   MEDIA CONTROL BUTTONS - ALWAYS WHITE
-   These stay white regardless of light/dark theme
+   macOS LIGHT
+   Shell: exactly 0.30 transparent — always, regardless
+   of what cinnamon.css does underneath.
+   !important on background ensures cinnamon.css cannot
+   override it even via .popup-menu-content inheritance.
    ═══════════════════════════════════════════════════ */
+.gs-menu .gs-theme-macos-light.gs-shell,
+.gs-theme-macos-light.gs-shell {
+    background-color: rgba(245, 250, 250, 0.10) !important;
+    border: 1px solid rgba(245, 250, 250, 0.4) !important;
+    border-radius: 26px;
+}
+.gs-menu .gs-theme-macos-dark.gs-shell,
+.gs-theme-macos-dark.gs-shell {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.3) inset !important;
+    border-radius: 26px;
+}
+/* ── Light theme tile backgrounds ── */
+.gs-theme-macos-light .gs-tile {
+    background-color: rgba(245, 250, 250, 0.55) !important;
+    border: 1px solid rgba(245, 250, 250, 0.4) !important;
+    border-radius: 18px;
+}
+.gs-theme-macos-light .gs-tile:hover {
+    background-color: rgba(245, 250, 250, 0.75) !important;
+}
+.gs-theme-macos-light .gs-tile-on {
+    background-color: rgba(0, 103, 184, 0.88) !important;
+    border-color: rgba(0, 103, 184, 0.95);
+}
+.gs-theme-macos-light .gs-tile-on:hover {
+    background-color: rgba(25, 120, 200, 0.90) !important;
+}
 
-/* Prev / Next — transparent, white icons */
-.gs-media-flat {
-    border-radius: 50%;
-    min-width: 40px;
-    min-height: 40px;
+/* ── Light theme CIRCLE tile backgrounds ── */
+.gs-theme-macos-light .gs-circle-tile {
+    background-color: rgba(245, 250, 250, 0.55) !important;
+    border: 1px solid rgba(245, 250, 250, 0.4) !important;
+}
+.gs-theme-macos-light .gs-circle-tile:hover {
+    background-color: rgba(245, 250, 250, 0.75) !important;
+}
+.gs-theme-macos-light .gs-circle-tile-on {
+    background-color: rgba(0, 103, 184, 0.88) !important;
+    border-color: rgba(0, 103, 184, 0.95) !important;
+}
+.gs-theme-macos-light .gs-circle-tile-on:hover {
+    background-color: rgba(25, 120, 200, 0.90) !important;
+}
+
+/* ── Light theme TEXT colours ──
+   Non‑active tiles get dark text.
+   Active tiles get WHITE text (and keep it white on hover).
+   The active rules are placed AFTER the non‑active rules
+   and use !important, so they win. */
+
+/* 1. Non‑active tiles → dark text */
+.gs-theme-macos-light .gs-tile .gs-tile-icon,
+.gs-theme-macos-light .gs-tile .gs-tile-label,
+.gs-theme-macos-light .gs-circle-tile .gs-tile-icon,
+.gs-theme-macos-light .gs-circle-tile .gs-tile-label {
+    color: rgba(0, 0, 0, 0.85);
+}
+.gs-theme-macos-light .gs-tile .gs-tile-sub,
+.gs-theme-macos-light .gs-circle-tile .gs-tile-sub {
+    color: rgba(0, 0, 0, 0.55);
+}
+
+/* 2. Active tiles → WHITE text (and remain white on hover) */
+.gs-theme-macos-light .gs-tile-on .gs-tile-icon,
+.gs-theme-macos-light .gs-tile-on .gs-tile-label,
+.gs-theme-macos-light .gs-tile-on:hover .gs-tile-icon,
+.gs-theme-macos-light .gs-tile-on:hover .gs-tile-label,
+.gs-theme-macos-light .gs-circle-tile-on .gs-tile-icon,
+.gs-theme-macos-light .gs-circle-tile-on .gs-tile-label,
+.gs-theme-macos-light .gs-circle-tile-on:hover .gs-tile-icon,
+.gs-theme-macos-light .gs-circle-tile-on:hover .gs-tile-label {
+    color: white !important;
+}
+.gs-theme-macos-light .gs-tile-on .gs-tile-sub,
+.gs-theme-macos-light .gs-tile-on:hover .gs-tile-sub,
+.gs-theme-macos-light .gs-circle-tile-on .gs-tile-sub,
+.gs-theme-macos-light .gs-circle-tile-on:hover .gs-tile-sub {
+    color: rgba(245, 255, 255, 0.85) !important;
+}
+
+/* ── Light theme other elements ── */
+.gs-theme-macos-light .gs-np-card {
+    border-radius: 18px;
+}
+.gs-theme-macos-light .gs-np-art {
+    background-color: rgba(200, 200, 200, 0.60) !important;
+}
+.gs-theme-macos-light .gs-np-title  { color: rgba(0,0,0,0.85); }
+.gs-theme-macos-light .gs-np-label  { color: rgba(0,0,0,0.6); }
+.gs-theme-macos-light .gs-np-artist { color: rgba(0,0,0,0.60); }
+.gs-theme-macos-light .gs-media-btn {
+    background-color: rgba(200, 200, 200, 0.60) !important;
+    border-color: rgba(0,0,0,0.10);
+}
+.gs-theme-macos-light .gs-media-btn:hover {
+    background-color: rgba(180,180,180,0.80) !important;
+}
+.gs-theme-macos-light .gs-media-btn StIcon,
+.gs-theme-macos-light .gs-media-btn-play StIcon { color: rgba(245,255,255,0.80); }
+
+.gs-theme-macos-light .gs-slider-card {
+    background-color: rgba(245, 250, 250, 0.55) !important;
+    border: 1px solid rgba(245, 250, 250, 0.4) !important;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(245, 250, 250, 0.3) inset !important;
+}
+.gs-theme-macos-light .gs-slider-label { color: black !important; }
+.gs-theme-macos-light .gs-slider-icon  { color: black !important; }
+
+.gs-theme-macos-light .gs-sep { background-color: rgba(0,0,0,0.10); }
+
+.gs-theme-macos-light .gs-sys-btn {
+    background-color: rgba(245, 250, 250, 0.55) !important;
+    border: 1px solid rgba(245, 250, 250, 0.4) !important;
+    border-radius: 28px;
+}
+.gs-theme-macos-light .gs-sys-btn:hover  { background-color: rgba(245,255,255,0.80) !important; }
+.gs-theme-macos-light .gs-sys-btn:active { background-color: rgba(0,103,184,0.85) !important; }
+.gs-theme-macos-light .gs-sys-btn StIcon        { color: rgba(0,0,0,0.80); }
+.gs-theme-macos-light .gs-sys-btn:active StIcon { color: white; }
+
+.gs-theme-macos-light .gs-edit-btn {
+    background-color: rgba(220, 220, 220, 0.60) !important;
+    border: 1px solid rgba(0,0,0,0.10);
+    color: rgba(0,0,0,0.60);
+    border-radius: 8px;
+}
+.gs-theme-macos-light .gs-edit-btn:hover {
+    background-color: rgba(200,200,200,0.80) !important;
+    color: black;
+}
+
+/* Media flat / play-circle styling lives in one place only — see
+   below, right before the "Time labels" section — to avoid two
+   competing rule blocks with the same selector. */
+
+/* Time labels in progress row */
+.gs-np-time {
+    font-size: 9px;
+    color: rgba(245,255,255,0.50);
+    min-width: 30px;
+}
+
+/* NP art canvas — ensure it fills height */
+.gs-np-art-canvas {
+    min-height: 180px;
+}
+
+/* Light theme media controls */
+.gs-theme-macos-light .gs-media-flat StIcon        { color: rgba(245,255,255,0.80); }
+.gs-theme-macos-light .gs-media-flat:hover         { background-color: rgba(245,255,255,0.08) !important; }
+.gs-theme-macos-light .gs-media-play-circle        { background-color: rgba(245,255,255,0.12) !important; }
+.gs-theme-macos-light .gs-media-play-circle StIcon { color: rgba(245,255,255,0.88); }
+.gs-theme-macos-light .gs-np-time                  { color: rgba(245,255,255,0.4); }
+
+/* ══════════════════════════════════════════════════════
+   NOW PLAYING CARD — background colour note
+
+   .gs-np-card never gets its background from CSS in practice: JS
+   (_paintCardFromAccent / _applyAccent in applet.js) always sets an
+   inline background-color the moment any track info is available —
+   either the macOS Tahoe accent cycle (no album art) or the
+   dominant colour extracted from real album art. Inline style always
+   wins over stylesheet rules in St, so a CSS background-color here
+   would only ever be visible for a single frame, if at all.
+
+   To avoid the confusion that caused several past styling bugs, the
+   per-theme blocks above (macOS Dark / macOS Light / Desktop) no
+   longer declare a background-color for .gs-np-card at all — this is
+   the ONE place it's set, and it's intentionally transparent so the
+   Cairo-drawn art canvas underneath provides 100% of the visible
+   colour. ══════════════════════════════════════════════════════ */
+
+/* Card: no own background — art canvas fills it entirely */
+.gs-np-card,
+.gs-menu .gs-np-card {
     background-color: transparent !important;
-    border: none !important;
+    border:           none !important;
+    border-radius:    18px;
+    padding:          0 !important;
 }
 
-.gs-media-flat:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
+/* Art canvas: fills height automatically via expand:true */
+/* border-radius clipping done in Cairo */
+
+/* Progress bar time labels */
+.gs-np-time {
+    font-size:  9px;
+    color:      rgba(245,255,255,0.55);
+    min-width:  28px;
 }
 
-.gs-media-flat:active {
-    background-color: rgba(255, 255, 255, 0.28) !important;
+/* Prev / Next — transparent, no border */
+.gs-media-flat {
+    border-radius:    50%;
+    width:  38px;
+    height: 38px;
+    background-color: transparent !important;
+    border:           none !important;
 }
+.gs-media-flat:hover  { background-color: rgba(245,255,255,0.15) !important; }
+.gs-media-flat:active { background-color: rgba(245,255,255,0.28) !important; }
+.gs-media-flat StIcon { color: rgba(245,255,255,0.90); icon-size: 16px; }
 
-.gs-media-flat StIcon {
-    color: rgba(255, 255, 255, 0.90) !important;
-    icon-size: 16px;
-}
-
-/* Play — semi-transparent white circle, white icon */
+/* Play — filled white circle, centred */
 .gs-media-play-circle {
-    border-radius: 50%;
-    min-width: 56px;
-    min-height: 56px;
-    background-color: rgba(255, 255, 255, 0.20) !important;
-    border: none !important;
-    padding: 0;
-    margin: 0 12px;
+    border-radius:    50%;
+    width:  50px;
+    height: 50px;
+    background-color: rgba(245,255,255,0.90) !important;
+    border:           none !important;
 }
+.gs-media-play-circle:hover  { background-color: rgba(245,255,255,1.0) !important; }
+.gs-media-play-circle:active { background-color: rgba(245,255,255,0.70) !important; }
+.gs-media-play-circle StIcon { color: white; icon-size: 22px; }
 
-.gs-media-play-circle:hover {
-    background-color: rgba(255, 255, 255, 0.35) !important;
-}
+/* Large tile height */
+.gs-tile { min-height: 52px; }
 
-.gs-media-play-circle:active {
-    background-color: rgba(255, 255, 255, 0.50) !important;
-}
+/* .gs-np-card has no per-theme background colour — see the
+   "NOW PLAYING CARD" comment further below for why (its colour is
+   always driven inline from JS, never from CSS). */
 
-.gs-media-play-circle StIcon {
-    color: white !important;
-    icon-size: 28px;
-}
-
-/* When play button uses accent color (from album art) */
-.gs-media-play-circle-accent {
-    border-radius: 50%;
-    min-width: 56px;
-    min-height: 56px;
-    border: none !important;
-    padding: 0;
-    margin: 0 12px;
-}
-
-.gs-media-play-circle-accent StIcon {
-    color: white !important;
-    icon-size: 28px;
-}
-
-/* Light theme - media buttons still white */
-.gs-theme-win11-light .gs-media-flat StIcon {
-    color: rgba(255, 255, 255, 0.90) !important;
-}
-
-.gs-theme-win11-light .gs-media-play-circle {
-    background-color: rgba(255, 255, 255, 0.20) !important;
-}
-
-.gs-theme-win11-light .gs-media-play-circle:hover {
-    background-color: rgba(255, 255, 255, 0.35) !important;
-}
-
-.gs-theme-win11-light .gs-media-play-circle StIcon {
-    color: white !important;
-}
-
-/* Desktop theme - media buttons still white */
-.gs-theme-desktop .gs-media-flat StIcon {
-    color: rgba(255, 255, 255, 0.90) !important;
-}
-
-.gs-theme-desktop .gs-media-play-circle {
-    background-color: rgba(255, 255, 255, 0.20) !important;
-}
-
-.gs-theme-desktop .gs-media-play-circle:hover {
-    background-color: rgba(255, 255, 255, 0.35) !important;
-}
-
-.gs-theme-desktop .gs-media-play-circle StIcon {
-    color: white !important;
-}
-
-/* ── macOS pill slider overrides ── */
-/* The DrawingArea IS the pill — no extra bg needed on the card */
+/* ── macOS pill slider: the inner Cairo slider draws its own pill, so
+   the StSlider/StDrawingArea shouldn't paint a second background. ── */
 .gs-slider-card .slider {
     height: auto;
     background-color: transparent;
