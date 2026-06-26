@@ -1911,17 +1911,22 @@ var MemDataProvider = class MemDataProvider {
                 memInfo["Buffers"] / memInfo["MemTotal"],
                 1 - memInfo["MemUsed"] / memInfo["MemTotal"]
             ]
-        } else { // System Monitor: https://github.com/JTourteau/gnome-system-monitor/blob/main/extension.js
-            let memFree = 1 * memInfo["MemFree"];
+        } else { // System Monitor: used = MemTotal - MemAvailable
+                 // https://github.com/JTourteau/gnome-system-monitor/blob/main/extension.js
+            let memAvailable = 1 * memInfo["MemAvailable"];
             let memBuffers = 1 * memInfo["Buffers"];
-            let memCached = 1 * memInfo["Cached"];
-            // Used = application memory only (excludes buffers/cache) so the four
-            // segments partition MemTotal exactly and Free never goes negative.
-            let memUsed = 1 * this.memTotal - memFree - memBuffers - memCached;
+            // "Used" must match Gnome System Monitor: MemTotal - MemAvailable.
+            let memUsed = this.memTotal - memAvailable;
+            // Split the remainder (= MemAvailable) into free / buffers / cached so the pie
+            // segments sum to MemTotal exactly and "Free" never goes negative.
+            let memFree = Math.min(1 * memInfo["MemFree"], memAvailable);
+            let reclaimable = memAvailable - memFree;            // >= 0
+            let memBuffersSeg = Math.min(memBuffers, reclaimable);
+            let memCachedSeg = reclaimable - memBuffersSeg;      // >= 0
             this.currentReadings = [
                 memUsed / this.memTotal,
-                memCached / this.memTotal,
-                memBuffers / this.memTotal,
+                memCachedSeg / this.memTotal,
+                memBuffersSeg / this.memTotal,
                 memFree / this.memTotal
             ]
         }
