@@ -1,0 +1,62 @@
+{
+    "auth_cookie": {
+        "type": "entry",
+        "default": "",
+        "description": "Authentication cookie value"
+    },
+    "workspace_id": {
+        "type": "entry",
+        "default": "",
+        "description": "Workspace ID (wrk_... from URL)"
+    },
+    "update_interval": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 5,
+        "max": 3600,
+        "step": 5,
+        "description": "Update interval in seconds"
+    },
+    "show_notifications": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Notify on limit reset (0%)"
+    },
+    "font_section": {
+        "type": "section",
+        "description": "Font"
+    },
+    "font_size": {
+        "type": "spinbutton",
+        "default": 11,
+        "min": 8,
+        "max": 32,
+        "step": 1,
+        "description": "Font size (px)"
+    },
+    "monospace": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Use monospace font"
+    },
+    "font_family": {
+        "type": "combobox",
+        "default": "sans-serif",
+        "description": "Font family",
+        "dependency": "!monospace",
+        "options": {
+            "monospace": "Monospace",
+            "sans-serif": "Sans-serif",
+            "serif": "Serif",
+            "Arial": "Arial",
+            "Courier New": "Courier New",
+            "DejaVu Sans Mono": "DejaVu Sans Mono"
+        }
+    },
+    "font_color": {
+        "type": "colorchooser",
+        "default": "",
+        "description": "Font color",
+        "tooltip": "Leave empty to use theme default"
+    }
+}
