@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# GOOGLE DRIVE
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# pbojan, 2021
 #
 #, fuzzy
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: googledrive@pbojan 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"POT-Creation-Date: 2026-04-07 20:44+0200\n"
 "PO-Revision-Date: 2025-06-16 00:59+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -26,7 +26,8 @@ msgid ""
 "A simple applet to be able to sync Google Drive folders and files with just "
 "a few clicks."
 msgstr ""
-"一個簡單的小程式，只需點選幾下，即可同步 Google Drive 雲端硬碟中的資料夾與檔案。"
+"一個簡單的小程式，只需點選幾下，即可同步 Google Drive 雲端硬碟中的資料夾與檔"
+"案。"
 
 #. settings-schema.json->pageConfiguration->title
 msgid "Configuration"
@@ -40,13 +41,17 @@ msgstr "說明"
 msgid "Google Drive Options"
 msgstr "Google Drive 雲端硬碟選項"
 
+#. settings-schema.json->sectionRcloneConfig->title
+msgid "rclone Remote"
+msgstr ""
+
 #. settings-schema.json->sectionWhitelist->title
 msgid "Whitelisted Folders"
 msgstr "允許同步的資料夾"
 
-#. settings-schema.json->sectionNote->title
-msgid "Important Message"
-msgstr "重要訊息"
+#. settings-schema.json->sectionRcloneDocs->title
+msgid "rclone Setup"
+msgstr ""
 
 #. settings-schema.json->sectionHelp->title
 msgid "About/Help"
@@ -65,8 +70,26 @@ msgid ""
 "Location to an empty folder where it will sync the Google Drive data to e.g. "
 "~/Documents/Drive."
 msgstr ""
-"請選擇一個空的資料夾，用來同步 Google Drive 雲端硬碟資料，"
-"例如：~/Documents/Drive"
+"請選擇一個空的資料夾，用來同步 Google Drive 雲端硬碟資料，例如：~/Documents/"
+"Drive"
+
+#. settings-schema.json->remote->description
+msgid "rclone Remote Name"
+msgstr ""
+
+#. settings-schema.json->remote->tooltip
+msgid ""
+"The name of your rclone Google Drive remote, without the trailing colon (e."
+"g. gdrive). Run 'rclone listremotes' in a terminal to see your configured "
+"remotes."
+msgstr ""
+
+#. settings-schema.json->remoteHelp->description
+msgid ""
+"Enter the rclone remote name configured for Google Drive (run 'rclone "
+"listremotes' in a terminal to see your remotes, without the trailing colon e."
+"g. gdrive)."
+msgstr ""
 
 #. settings-schema.json->whitelistHelp->description
 msgid ""
@@ -74,9 +97,9 @@ msgid ""
 "on the list above. Please enter the names exactly as they are named in your "
 "Drive! It is also possible to add subfolders e.g. Documents/Work/Projects."
 msgstr ""
-"注意：若只想同步特定資料夾，請務必將其加入上方清單中。"
-"請務必輸入與 Google 雲端硬碟中完全相同的資料夾名稱！"
-"也可以加入子資料夾，例如：Documents/Work/Projects"
+"注意：若只想同步特定資料夾，請務必將其加入上方清單中。請務必輸入與 Google 雲"
+"端硬碟中完全相同的資料夾名稱！也可以加入子資料夾，例如：Documents/Work/"
+"Projects"
 
 #. settings-schema.json->whitelist->columns->title
 msgid "Folder Name"
@@ -87,21 +110,26 @@ msgid "Whitelist Folders"
 msgstr "允許同步的資料夾"
 
 #. settings-schema.json->whitelist->tooltip
+#, fuzzy
 msgid ""
-"Whitelist folders that will be sycned from Google Drive e.g. Documents, "
+"Whitelist folders that will be synced from Google Drive e.g. Documents, "
 "Photos"
-msgstr ""
-"允許從 Google Drive 雲端硬碟同步的資料夾，例如 Documents、Photos"
+msgstr "允許從 Google Drive 雲端硬碟同步的資料夾，例如 Documents、Photos"
 
-#. settings-schema.json->note->description
+#. settings-schema.json->rcloneDocs->description
 msgid ""
-"Note: This is a new release of this Applet, so your feedback and ideas are "
-"very important to make this applet better in the future. Please consider "
-"reporting any issues, bugs, instabilities, or ideas for general improvements "
-"on the links below! Thank you!"
+"To configure rclone with Google Drive, click the button below to open the "
+"official rclone Google Drive documentation."
 msgstr ""
-"注意：這是這個小程式的新版本，您的意見回饋與建議對未來改進非常重要。"
-"歡迎透過下方連結回報問題、錯誤、不穩定狀況或任何改進建議！感謝您的協助！"
+
+#. settings-schema.json->rcloneDocsButton->description
+#, fuzzy
+msgid "Open rclone Google Drive Docs"
+msgstr "Google Drive 雲端硬碟選項"
+
+#. settings-schema.json->rcloneDocsButton->tooltip
+msgid "Opens the rclone Google Drive setup documentation in a browser."
+msgstr ""
 
 #. settings-schema.json->website->description
 msgid ""
@@ -123,8 +151,8 @@ msgid ""
 "official Cinnamon Spices website for this applet. You can also leave "
 "feedback in the comment section below."
 msgstr ""
-"若需更多資訊，請點選下方按鈕前往 Cinnamon Spices 官方網站，也歡迎於下方留言區提供回饋。"
-
+"若需更多資訊，請點選下方按鈕前往 Cinnamon Spices 官方網站，也歡迎於下方留言區"
+"提供回饋。"
 
 #. settings-schema.json->helpAboutButton->description
 msgid "Visit Cinnamon Spices website"
@@ -140,8 +168,8 @@ msgid ""
 "clicking the button below. Please make sure that the issue doesn't already "
 "exists"
 msgstr ""
-"如果您發現這個小程式有任何問題，請點選下方按鈕於 GitHub 回報，"
-"並請在回報前先確認該問題尚未被回報過。"
+"如果您發現這個小程式有任何問題，請點選下方按鈕於 GitHub 回報，並請在回報前先"
+"確認該問題尚未被回報過。"
 
 #. settings-schema.json->helpSubmitIssue->description
 msgid "Submit an Issue"
@@ -150,5 +178,4 @@ msgstr "回報問題"
 #. settings-schema.json->helpSubmitIssue->tooltip
 msgid ""
 "Opens GitHub project page where you can submit a new issue for this applet."
-msgstr ""
-"開啟 GitHub 專案頁面，您可以在這邊回報問題。"
+msgstr "開啟 GitHub 專案頁面，您可以在這邊回報問題。"
