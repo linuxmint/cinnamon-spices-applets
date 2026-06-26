@@ -32,7 +32,7 @@
         "min": 8,
         "max": 32,
         "step": 1,
-        "description": "Font size (px)"
+        "description": "Font size (pt)"
     },
     "monospace": {
         "type": "checkbox",

@@ -93,15 +93,15 @@ Gio.Subprocess(argv) — curl https://opencode.ai/workspace/.../go
 | `settings-schema.json` | Схема настроек |
 | `metadata.json` | Метаданные апплета |
 | `icon.png` | Иконка на панели |
-| `stats.png` | Скриншот stats popup |
-| `settings.png` | Скриншот настроек |
+| `screenshot.png` | Скриншот апплета |
+| `info.json` | Метаданные автора |
 
 ## Технологии
 
 - **Язык:** GJS (GNOME JavaScript, ES6)
 - **UI:** St (Cinnamon toolkit), Clutter, Pango
 - **Ассемблер:** `imports.ui.applet`, `GLib`, `Gio`
-- **Парсинг:** curl + sed + awk
+- **Парсинг:** curl + Gio.Subprocess + JS regex
 
 ## Лицензия
 
@@ -115,6 +115,10 @@ GPL-3.0 © clrblind 2026
 - Shell-команды заменены на `Util.spawn` и `Gio.Subprocess` с argv (без shell-injection)
 - `GLib.get_home_dir()` → `GLib.get_user_data_dir()` (XDG-compat)
 - Исправлен UUID каталога иконки на `@clrblind`
+- Удалено запрещённое поле `icon` из `metadata.json`
+- Добавлен `info.json` с автором
+- Исправлена утечка таймера в `on_settings_changed` (`_timer = null`)
+- `font_size` описание: `px` → `pt` (соответствует коду)
 
 ---
 

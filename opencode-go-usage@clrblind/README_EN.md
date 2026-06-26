@@ -93,15 +93,15 @@ Notification fires **only** on transition >0 → 0. While limit stays at 0 — s
 | `settings-schema.json` | Settings schema |
 | `metadata.json` | Applet metadata |
 | `icon.png` | Panel icon |
-| `stats.png` | Stats popup screenshot |
-| `settings.png` | Settings screenshot |
+| `screenshot.png` | Applet screenshot |
+| `info.json` | Author metadata |
 
 ## Tech Stack
 
 - **Language:** GJS (GNOME JavaScript, ES6)
 - **UI:** St (Cinnamon toolkit), Clutter, Pango
 - **Assembly:** `imports.ui.applet`, `GLib`, `Gio`
-- **Parsing:** curl + sed + awk
+- **Parsing:** curl + Gio.Subprocess + JS regex
 
 ## License
 
@@ -115,6 +115,10 @@ GPL-3.0 © clrblind 2026
 - Shell commands replaced with `Util.spawn` and `Gio.Subprocess` argv (no shell injection)
 - `GLib.get_home_dir()` → `GLib.get_user_data_dir()` (XDG-compliant)
 - Fixed icon directory UUID to `@clrblind`
+- Removed forbidden `icon` field from `metadata.json`
+- Added `info.json` with author
+- Fixed timer leak in `on_settings_changed` (`_timer = null`)
+- `font_size` description: `px` → `pt` (matches code)
 
 ---
 

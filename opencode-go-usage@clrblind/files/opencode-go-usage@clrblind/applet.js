@@ -213,6 +213,7 @@ class OpenCodeApplet extends Applet.IconApplet {
   on_settings_changed() {
     if (this._timer) {
       GLib.source_remove(this._timer);
+      this._timer = null;
     }
     this._startTimer();
     this._update();
