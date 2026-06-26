@@ -2141,13 +2141,13 @@ var ZramDataProvider = class ZramDataProvider {
         if (!this.isRunning) return "";
         if (!this.available || this.data == null) return "";
 
-        let trans = _("ZRAM");
+        // Fold algorithm + ratio into the section title, e.g. "ZRAM zstd (2.66x)".
+        let trans = _("ZRAM") + " " + this.data.algorithm;
+        if (this.data.ratio > 0)
+            trans += " (" + formatNumber(parseFloat(this.data.ratio.toFixed(2)), 2) + "x)";
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
 
-        // Plain string rows (algorithm, mountpoint).
-        const strRow = (label, value) =>
-            label.padStart(spaces, " ") + ":\t" + ("" + value).padStart(8, " ") + " " + "".padStart(6, " ") + "\n";
         // Byte rows (data, compressed, total) formatted like the other sections.
         const bytesRow = (label, bytes) => {
             let [value, unit] = formatBytesValueUnit(Math.round(bytes), 2, false);
@@ -2155,12 +2155,9 @@ var ZramDataProvider = class ZramDataProvider {
             return label.padStart(spaces, " ") + ":\t" + value.padStart(8, " ") + " " + unit.padStart(6, " ") + "\n";
         };
 
-        toolTipString += strRow(_("Algorithm"), this.data.algorithm);
         toolTipString += bytesRow(_("Data"), this.data.orig);
         toolTipString += bytesRow(_("Compressed"), this.data.compr);
         toolTipString += bytesRow(_("Total"), this.data.total);
-        toolTipString += strRow(_("Ratio"), formatNumber(parseFloat(this.data.ratio.toFixed(2)), 2));
-        toolTipString += strRow(_("Mountpoint"), this.data.mountpoint);
         return toolTipString;
     }
 

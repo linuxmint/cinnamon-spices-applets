@@ -1,3 +1,6 @@
+### v3.16.8~20260627
+  * Tooltip: more compact ZRAM block (algorithm and ratio moved into the title).
+
 ### v3.16.7~20260626
   * Fixes the "Gnome System Monitor" memory calculation method under-reporting used RAM (regression from v3.16.6). "Used" now matches Gnome System Monitor / Task Manager (MemTotal - MemAvailable), while "Free" still never goes negative.
   * Fixes [#8821](https://github.com/linuxmint/cinnamon-spices-applets/issues/8821)
