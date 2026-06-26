@@ -2,10 +2,11 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 const Util = imports.misc.util;
 const Settings = imports.ui.settings;
 
-const APPLET_DIR = GLib.get_home_dir() + "/.local/share/cinnamon/applets/opencode-go-usage@cinnamon.org";
+const APPLET_DIR = GLib.get_user_data_dir() + "/cinnamon/applets/opencode-go-usage@clrblind";
 const CURL_TIMEOUT = 10;
 const DEFAULT_INTERVAL = 30;
 const MIN_INTERVAL = 5;
@@ -45,9 +46,7 @@ class OpenCodeApplet extends Applet.IconApplet {
 
     this._applet_context_menu.addAction("Refresh", () => this._update());
     this._applet_context_menu.addAction("Test Notification", () => {
-      GLib.spawn_command_line_async(
-        `notify-send -a "Opencode" -i "${APPLET_DIR}/icon.png" "Test" "Notification works"`
-      );
+      Util.spawn(["notify-send", "-a", "Opencode", "-i", APPLET_DIR + "/icon.png", "Test", "Notification works"]);
     });
 
     this._applyFontStyle();
@@ -63,9 +62,7 @@ class OpenCodeApplet extends Applet.IconApplet {
     if (!this.show_notifications) return;
     if (this._notified[name]) return;
     this._notified[name] = true;
-    GLib.spawn_command_line_async(
-      `notify-send -a "Opencode" -i "${APPLET_DIR}/icon.png" "Limit Reset" '${name} usage reset to 0%'`
-    );
+    Util.spawn(["notify-send", "-a", "Opencode", "-i", APPLET_DIR + "/icon.png", "Limit Reset", name + " usage reset to 0%"]);
   }
 
   _applyFontStyle() {
@@ -124,11 +121,39 @@ class OpenCodeApplet extends Applet.IconApplet {
       return;
     }
 
-    const cmd = `curl -s --max-time ${CURL_TIMEOUT} --cookie "auth=${this.cookie}" "https://opencode.ai/workspace/${this.workspace_id}/go" | tr -d '\n' | sed -E 's/(<div[^>]+data-slot="usage-item")/\\n\\1/g' | sed -n -E 's/.*usage-label">([^<]+).*usage-value"><!--\\$-->([0-9]+).*Resets in<!--\\/--> <!--\\$-->([^<]+).*/\\1|\\2|\\3/p' | awk -F'|' '{printf "%-15s | %3s%% | Resets in: %s\\n", $1, $2, $3}'`;
+    const argv = [
+      "curl", "-s", "--max-time", String(CURL_TIMEOUT),
+      "--cookie", `auth=${this.cookie}`,
+      `https://opencode.ai/workspace/${this.workspace_id}/go`
+    ];
 
-    Util.spawnCommandLineAsyncIO(cmd, (stdout, stderr, exitCode) => {
+    let subprocess = new Gio.Subprocess({
+      argv: argv,
+      flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+    });
+
+    try {
+      subprocess.init(null);
+    } catch (e) {
+      this._setPopupText(["Curl not found"]);
+      this.set_applet_tooltip(e.message);
+      return;
+    }
+
+    subprocess.communicate_utf8_async(null, null, (obj, res) => {
+      let success, stdout, stderr;
+      try {
+        [success, stdout, stderr] = obj.communicate_utf8_finish(res);
+      } catch (e) {
+        this._setPopupText(["Fetch error"]);
+        this.set_applet_tooltip(e.message || "");
+        return;
+      }
+
+      let exitCode = success ? subprocess.get_exit_status() : -1;
+
       if (exitCode === 0 && stdout && stdout.length > 0) {
-        const lines = stdout.trim().split('\n');
+        const lines = this._parseOutput(stdout);
         this._setPopupText(lines);
         this._checkResets(lines);
         this.set_applet_tooltip("OpenCode GO Usage");
@@ -140,6 +165,22 @@ class OpenCodeApplet extends Applet.IconApplet {
         this.set_applet_tooltip(stderr || "");
       }
     });
+  }
+
+  _parseOutput(html) {
+    const lines = [];
+    html = html.replace(/\n/g, "");
+    const items = html.split(/<div[^>]+data-slot="usage-item"/);
+    for (const item of items) {
+      const m = item.match(/usage-label">([^<]+).*?usage-value"><!--\$-->([0-9]+).*?Resets in<!--\/--> <!--\$-->([^<]+)/);
+      if (m) {
+        const label = m[1].trim();
+        const pct = m[2];
+        const reset = m[3].trim();
+        lines.push(label.padEnd(15) + " | " + pct.padStart(3) + "% | Resets in: " + reset);
+      }
+    }
+    return lines.length > 0 ? lines : [];
   }
 
   on_applet_clicked(event) {

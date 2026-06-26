@@ -10,7 +10,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/linuxmint-Cinnamon-87cf3e?logo=linuxmint">
-  <img src="https://img.shields.io/badge/version-1.0-blue">
+  <img src="https://img.shields.io/badge/version-1.1-blue">
   <img src="https://img.shields.io/badge/license-GPL--3.0-green">
   <img src="https://img.shields.io/badge/GJS-ES6-yellow">
 </p>
@@ -64,22 +64,22 @@ cp applet.js metadata.json settings-schema.json icon.png \
 ## Как это работает
 
 ```
-curl --cookie "auth=..." https://opencode.ai/workspace/.../go
+Gio.Subprocess(argv) — curl https://opencode.ai/workspace/.../go
          │
          ▼
-   sed pipeline — парсинг HTML → Rolling Usage | 34% | Resets in: 2h
-         │                      Weekly Usage  | 100% | Resets in: 1d
-         ▼                      Monthly Usage | 63%  | Resets in: 3d
+   _parseOutput — JS парсинг HTML → Rolling Usage | 34% | Resets in: 2h
+         │                         Weekly Usage  | 100% | Resets in: 1d
+         ▼                         Monthly Usage | 63%  | Resets in: 3d
    PopupMenu — 3 строки в popup
    _checkResets — уведомление при >0 → 0
 ```
 
 ### Парсинг
 
-1. `tr -d '\n'` — HTML в одну строку
+1. `replace(/\n/g, "")` — HTML в одну строку
 2. split по `data-slot="usage-item"`
 3. regex — извлечение label / процент / время сброса
-4. `awk` — выравнивание колонок
+4. `padEnd`/`padStart` — выравнивание колонок
 
 ### Анти-флуд уведомлений
 
@@ -106,6 +106,15 @@ curl --cookie "auth=..." https://opencode.ai/workspace/.../go
 ## Лицензия
 
 GPL-3.0 © clrblind 2026
+
+## Changelog
+
+### 1.1
+
+- Парсинг HTML перенесён из shell pipeline (sed/awk) в JS
+- Shell-команды заменены на `Util.spawn` и `Gio.Subprocess` с argv (без shell-injection)
+- `GLib.get_home_dir()` → `GLib.get_user_data_dir()` (XDG-compat)
+- Исправлен UUID каталога иконки на `@clrblind`
 
 ---
 

@@ -10,7 +10,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/linuxmint-Cinnamon-87cf3e?logo=linuxmint">
-  <img src="https://img.shields.io/badge/version-1.0-blue">
+  <img src="https://img.shields.io/badge/version-1.1-blue">
   <img src="https://img.shields.io/badge/license-GPL--3.0-green">
   <img src="https://img.shields.io/badge/GJS-ES6-yellow">
 </p>
@@ -64,22 +64,22 @@ Add to panel: right-click the panel → `Add to panel` → `OpenCode GO Usage`.
 ## How It Works
 
 ```
-curl --cookie "auth=..." https://opencode.ai/workspace/.../go
+Gio.Subprocess(argv) — curl https://opencode.ai/workspace/.../go
          │
          ▼
-   sed pipeline — parse HTML → Rolling Usage | 34% | Resets in: 2h
-         │                      Weekly Usage  | 100% | Resets in: 1d
-         ▼                      Monthly Usage | 63%  | Resets in: 3d
+   _parseOutput — JS parse HTML → Rolling Usage | 34% | Resets in: 2h
+         │                         Weekly Usage  | 100% | Resets in: 1d
+         ▼                         Monthly Usage | 63%  | Resets in: 3d
    PopupMenu — 3 lines in popup
    _checkResets — notify on >0 → 0
 ```
 
 ### Parsing
 
-1. `tr -d '\n'` — flatten HTML to single line
+1. `replace(/\n/g, "")` — flatten HTML to single line
 2. Split by `data-slot="usage-item"`
 3. regex — extract label / percentage / reset time
-4. `awk` — column alignment
+4. `padEnd`/`padStart` — column alignment
 
 ### Notification Anti-Flood
 
@@ -106,6 +106,15 @@ Notification fires **only** on transition >0 → 0. While limit stays at 0 — s
 ## License
 
 GPL-3.0 © clrblind 2026
+
+## Changelog
+
+### 1.1
+
+- HTML parsing moved from shell pipeline (sed/awk) to JS
+- Shell commands replaced with `Util.spawn` and `Gio.Subprocess` argv (no shell injection)
+- `GLib.get_home_dir()` → `GLib.get_user_data_dir()` (XDG-compliant)
+- Fixed icon directory UUID to `@clrblind`
 
 ---
 
