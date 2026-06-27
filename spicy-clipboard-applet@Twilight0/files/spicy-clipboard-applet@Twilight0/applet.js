@@ -322,7 +322,21 @@ MyApplet.prototype = {
                         this._onImageItemClicked(hash);
                     });
 
-                    new Tooltips.Tooltip(menuItem.actor, _("Image File: ") + imagePath);
+                    menuItem.actor.connect('button-press-event', (actor, event) => {
+                        let button = event.get_button();
+                        if (button === 3) { // Right click
+                            this._deleteHistoryItem(itemText);
+                            return true;
+                        }
+                        return false;
+                    });
+
+                    new Tooltips.Tooltip(menuItem.actor, _("Image File: ") + imagePath + "\n\n" + _("Right-click to delete from history"));
+                    
+                    if (hash === this._lastImageHash) {
+                        menuItem.label.set_style("font-weight: bold;");
+                    }
+                    
                     historySection.addMenuItem(menuItem);
 
                     // --- AUDITOR FIX: Async validation of file existence ---
@@ -349,7 +363,24 @@ MyApplet.prototype = {
                         this._onItemClicked(itemText);
                     });
 
-                    new Tooltips.Tooltip(menuItem.actor, itemText);
+                    menuItem.actor.connect('button-press-event', (actor, event) => {
+                        let button = event.get_button();
+                        if (button === 2) { // Middle click
+                            this._editHistoryItem(itemText);
+                            return true;
+                        } else if (button === 3) { // Right click
+                            this._deleteHistoryItem(itemText);
+                            return true;
+                        }
+                        return false;
+                    });
+
+                    new Tooltips.Tooltip(menuItem.actor, itemText + "\n\n" + _("Middle-click to edit | Right-click to delete"));
+                    
+                    if (itemText === this._lastText) {
+                        menuItem.label.set_style("font-weight: bold;");
+                    }
+                    
                     historySection.addMenuItem(menuItem);
                 }
             }
@@ -529,6 +560,79 @@ MyApplet.prototype = {
                 global.logError("Failed to delete cache files: " + e);
             }
         });
+    },
+
+    _editHistoryItem: function (oldText) {
+        let editCmd = [
+            "zenity",
+            "--entry",
+            "--title=" + _("Edit Clipboard Item"),
+            "--text=" + _("Modify the clipboard entry:"),
+            "--entry-text=" + oldText,
+            "--width=500"
+        ];
+        
+        try {
+            let launcher = new Gio.SubprocessLauncher({
+                flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE
+            });
+            let proc = launcher.spawnv(editCmd);
+            let stdoutStream = new Gio.DataInputStream({
+                base_stream: proc.get_stdout_pipe(),
+                close_base_stream: true
+            });
+            
+            stdoutStream.read_line_async(GLib.PRIORITY_LOW, null, (stream, result) => {
+                try {
+                    let [line] = stream.read_line_finish_utf8(result);
+                    if (line !== null) {
+                        let editedText = line.trim();
+                        if (editedText !== "" && editedText !== oldText) {
+                            let index = this._history.indexOf(oldText);
+                            if (index !== -1) {
+                                this._history[index] = editedText;
+                                this._saveHistory();
+                                this._buildMenu();
+                                if (this._lastText === oldText) {
+                                    this._lastText = editedText;
+                                    this._clipboard.set_text(St.ClipboardType.CLIPBOARD, editedText);
+                                }
+                            }
+                        }
+                    }
+                } catch (err) {
+                    global.logError("Failed to read edited text: " + err);
+                }
+            });
+        } catch (e) {
+            global.logError("Failed to edit clipboard item: " + e);
+        }
+    },
+
+    _deleteHistoryItem: function (itemText) {
+        this._history = this._history.filter(item => item !== itemText);
+        this._saveHistory();
+        this._buildMenu();
+
+        if (itemText === this._lastText) {
+            this._lastText = "";
+        }
+        if (itemText.startsWith("[Image]:")) {
+            let hash = itemText.substring(8);
+            if (hash === this._lastImageHash) {
+                this._lastImageHash = "";
+            }
+            let cacheDir = GLib.get_user_config_dir() + "/cinnamon/spices/" + UUID + "/cache";
+            let imagePath = cacheDir + "/" + hash + ".png";
+            let imageFile = Gio.File.new_for_path(imagePath);
+            imageFile.delete_async(GLib.PRIORITY_DEFAULT, null, (f, res) => {
+                try {
+                    f.delete_finish(res);
+                } catch (e) {
+                    // Ignore deletion errors
+                }
+            });
+        }
     },
 
     on_applet_removed_from_panel: function () {
