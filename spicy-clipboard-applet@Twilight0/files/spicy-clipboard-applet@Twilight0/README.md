@@ -18,5 +18,16 @@ The following settings can be configured via the Cinnamon applet settings dialog
 *   **Notification on Copy**: Show a notification banner when a new item is captured.
 
 ## Requirements
+*   `yad` (required for history list management and item editing).
 *   `xclip` (required for image processing and clipboard query compatibility under X11).
 *   `xdotool` or `dotool` (optional, for the "Auto-Paste on click" function).
+
+## Planned Feature Updates
+*   **Search & Filter Bar**: A search entry at the top of the list to filter items dynamically as you type.
+*   **Pinned Items**: Ability to star/pin favorite items to keep them at the top and exempt them from history limits.
+*   **Item Editing**: Direct inline editing of text entries in the history list (activated via middle-click).
+
+## Planned Bug Fixes
+*   **Middle/Right-Click Activation Bug**: Intercept the `button-release-event` for middle (button 2) and right (button 3) clicks to prevent default menu item activation from triggering on mouse-up (which currently causes deleted/edited items to re-activate and move back to the top of the list).
+
+
