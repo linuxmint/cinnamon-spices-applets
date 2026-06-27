@@ -1,3 +1,9 @@
+### v3.16.9~20260627
+  * Tooltip: Memory and Swap amounts are now always shown; the "Show amounts in Bytes" setting selects the unit base instead of hiding them (ON = SI units MB/GB, OFF = IEC binary units MiB/GiB). Fixes the Swap section disappearing when the setting was off, and adds the used percentage to the Memory header to match Swap.
+  * Tooltip: the Buffers/Cache/Shared and ZRAM amounts now follow the same unit toggle, so the whole tooltip uses one consistent unit base (OFF = IEC, matching `free -h`).
+  * Tooltip: the ZRAM title now shows the total RAM used (e.g. "ZRAM 577 MiB (zstd, 3.87x)") and the block lists Disksize (capacity), Data and Compressed.
+  * Tooltip: new "Show Memory/Swap byte amounts" switch (default on). Turn it off for a percentages-only Memory/Swap tooltip; the SI/IEC unit setting applies only when amounts are shown.
+
 ### v3.16.8~20260627
   * Tooltip: more compact ZRAM block (algorithm and ratio moved into the title).
 
