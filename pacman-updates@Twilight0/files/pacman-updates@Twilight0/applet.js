@@ -51,6 +51,43 @@ MyApplet.prototype = {
             this.menu = new Applet.AppletPopupMenu(this, orientation);
             this.menuManager.addMenu(this.menu);
 
+            // Setup Pacman Lock Monitor
+            this._dbLckFile = Gio.File.new_for_path("/var/lib/pacman/db.lck");
+            this._dbLckExists = this._dbLckFile.query_exists(null);
+            this._pacmanMonitor = null;
+            this._pacmanMonitorId = 0;
+            this._lckTimeoutId = null;
+
+            this._pacmanDir = Gio.File.new_for_path("/var/lib/pacman");
+            try {
+                this._pacmanMonitor = this._pacmanDir.monitor_directory(Gio.FileMonitorFlags.NONE, null);
+                this._pacmanMonitorId = this._pacmanMonitor.connect("changed", (monitor, file, other_file, event_type) => {
+                    let basename = file.get_basename();
+                    if (basename === "db.lck") {
+                        let isLocked = this._dbLckFile.query_exists(null);
+                        if (isLocked !== this._dbLckExists) {
+                            this._dbLckExists = isLocked;
+                            this._updateUI();
+                            if (!isLocked) {
+                                // Wait 1 second after lock release to check updates
+                                if (this._lckTimeoutId) {
+                                    Mainloop.source_remove(this._lckTimeoutId);
+                                }
+                                this._lckTimeoutId = Mainloop.timeout_add(1000, () => {
+                                    this._lckTimeoutId = null;
+                                    if (this._pacmanMonitor) {
+                                        this._checkUpdates();
+                                    }
+                                    return false;
+                                });
+                            }
+                        }
+                    }
+                });
+            } catch (err) {
+                global.logError("Failed to set up pacman directory monitor: " + err);
+            }
+
             this._updateUI();
 
             let hasRepo = this._hasCheckupdates;
@@ -108,7 +145,11 @@ MyApplet.prototype = {
             return;
         }
 
-        if (this._isChecking) {
+        if (this._dbLckExists) {
+            iconName = "changes-prevent-symbolic";
+            tooltip = _("Pacman database is locked (updates are active)");
+            labelText = _("Busy");
+        } else if (this._isChecking) {
             iconName = "view-refresh-symbolic";
             tooltip = _("Checking for updates...");
             labelText = "";
@@ -132,6 +173,7 @@ MyApplet.prototype = {
         let hasAur = this._checkAur && this._aurHelper && (GLib.find_program_in_path(this._aurHelper) !== null);
         
         if (!hasRepo && !hasAur) return;
+        if (this._dbLckExists) return;
         if (this._isChecking) return;
 
         this._isChecking = true;
@@ -324,7 +366,9 @@ MyApplet.prototype = {
 
         // Header Title
         let headerText = _("Pacman Package Updates");
-        if (this._updates.length > 0) {
+        if (this._dbLckExists) {
+            headerText = _("Database locked (updates active)");
+        } else if (this._updates.length > 0) {
             headerText += " (" + this._updates.length + ")";
         } else if (this._isChecking) {
             headerText = _("Checking for updates...");
@@ -335,7 +379,10 @@ MyApplet.prototype = {
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         // Update list
-        if (this._isChecking) {
+        if (this._dbLckExists) {
+            let activeItem = new PopupMenu.PopupMenuItem(_("Pacman is currently installing/updating..."), { reactive: false });
+            this.menu.addMenuItem(activeItem);
+        } else if (this._isChecking) {
             let loadingItem = new PopupMenu.PopupMenuItem(_("Syncing package list..."), { reactive: false });
             this.menu.addMenuItem(loadingItem);
         } else if (this._updates.length === 0) {
@@ -372,14 +419,14 @@ MyApplet.prototype = {
 
         let refreshItem = new PopupMenu.PopupIconMenuItem(_("Check for Updates"), "view-refresh-symbolic", St.IconType.SYMBOLIC);
         refreshItem.connect('activate', () => this._checkUpdates());
-        if (this._isChecking) {
+        if (this._isChecking || this._dbLckExists) {
             refreshItem.setSensitive(false);
         }
         this.menu.addMenuItem(refreshItem);
 
         let applyItem = new PopupMenu.PopupIconMenuItem(_("Apply Updates (Terminal)"), "system-run-symbolic", St.IconType.SYMBOLIC);
         applyItem.connect('activate', () => this._applyUpdates());
-        if (this._updates.length === 0 || this._isChecking) {
+        if (this._updates.length === 0 || this._isChecking || this._dbLckExists) {
             applyItem.setSensitive(false);
         }
         this.menu.addMenuItem(applyItem);
@@ -411,6 +458,18 @@ MyApplet.prototype = {
         if (this._checkTimeoutId) {
             Mainloop.source_remove(this._checkTimeoutId);
             this._checkTimeoutId = null;
+        }
+        if (this._lckTimeoutId) {
+            Mainloop.source_remove(this._lckTimeoutId);
+            this._lckTimeoutId = null;
+        }
+        if (this._pacmanMonitor) {
+            if (this._pacmanMonitorId) {
+                this._pacmanMonitor.disconnect(this._pacmanMonitorId);
+                this._pacmanMonitorId = 0;
+            }
+            this._pacmanMonitor.cancel();
+            this._pacmanMonitor = null;
         }
     }
 };
