@@ -64,6 +64,9 @@ MyApplet.prototype = {
             this.settings.bind("pasteTool", "_pasteTool", this.settings_changed);
             this.settings.bind("notifyOnCopy", "_notifyOnCopy", this.settings_changed);
             this.settings.bind("menuMaxHeight", "_menuMaxHeight", this.settings_changed);
+            this.settings.bind("leftClickAction", "_leftClickAction", this.settings_changed);
+            this.settings.bind("middleClickAction", "_middleClickAction", this.settings_changed);
+            this.settings.bind("rightClickAction", "_rightClickAction", this.settings_changed);
 
             // Set up UI Menu
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -284,6 +287,18 @@ MyApplet.prototype = {
     _buildMenu: function () {
         this.menu.removeAll();
 
+        let getActionLabel = (actionName) => {
+            if (actionName === "select") return _("Select (Copy/Paste)");
+            if (actionName === "edit") return _("Edit Item");
+            if (actionName === "delete") return _("Delete Item");
+            return _("None");
+        };
+        let getTooltipSuffix = () => {
+            return "\n\n" + _("Left-Click: ") + getActionLabel(this._leftClickAction) +
+                   "\n" + _("Middle-Click: ") + getActionLabel(this._middleClickAction) +
+                   "\n" + _("Right-Click: ") + getActionLabel(this._rightClickAction);
+        };
+
         // Header Title
         let headerText = _("Clipboard History");
         if (this._history.length > 0) {
@@ -318,20 +333,42 @@ MyApplet.prototype = {
                         global.logError("Failed to set thumbnail icon: " + err);
                     }
 
-                    menuItem.connect('activate', () => {
-                        this._onImageItemClicked(hash);
-                    });
-
-                    menuItem.actor.connect('button-press-event', (actor, event) => {
-                        let button = event.get_button();
-                        if (button === 3) { // Right click
+                    let handleImageAction = (action) => {
+                        if (action === "select") {
+                            this._onImageItemClicked(hash);
+                            return true;
+                        } else if (action === "edit") {
+                            let infoCmd = [
+                                "yad",
+                                "--info",
+                                "--title=" + _("Edit Clipboard Item"),
+                                "--text=" + _("Image entries cannot be edited."),
+                                "--width=300"
+                            ];
+                            Util.spawn(infoCmd);
+                            return true;
+                        } else if (action === "delete") {
                             this._deleteHistoryItem(itemText);
                             return true;
                         }
                         return false;
+                    };
+
+                    menuItem.connect('activate', () => {
+                        handleImageAction(this._leftClickAction);
                     });
 
-                    new Tooltips.Tooltip(menuItem.actor, _("Image File: ") + imagePath + "\n\n" + _("Right-click to delete from history"));
+                    menuItem.actor.connect('button-press-event', (actor, event) => {
+                        let button = event.get_button();
+                        if (button === 2) {
+                            return handleImageAction(this._middleClickAction);
+                        } else if (button === 3) {
+                            return handleImageAction(this._rightClickAction);
+                        }
+                        return false;
+                    });
+
+                    new Tooltips.Tooltip(menuItem.actor, _("Image File: ") + imagePath + getTooltipSuffix());
                     
                     if (hash === this._lastImageHash) {
                         menuItem.label.set_style("font-weight: bold;");
@@ -359,23 +396,35 @@ MyApplet.prototype = {
                     let formatted = this._formatLabel(itemText);
                     let menuItem = new PopupMenu.PopupMenuItem(formatted);
                     
-                    menuItem.connect('activate', () => {
-                        this._onItemClicked(itemText);
-                    });
-
-                    menuItem.actor.connect('button-press-event', (actor, event) => {
-                        let button = event.get_button();
-                        if (button === 2) { // Middle click
+                    let handleTextAction = (action) => {
+                        if (action === "select") {
+                            this._onItemClicked(itemText);
+                            return true;
+                        } else if (action === "edit") {
                             this._editHistoryItem(itemText);
                             return true;
-                        } else if (button === 3) { // Right click
+                        } else if (action === "delete") {
                             this._deleteHistoryItem(itemText);
                             return true;
                         }
                         return false;
+                    };
+
+                    menuItem.connect('activate', () => {
+                        handleTextAction(this._leftClickAction);
                     });
 
-                    new Tooltips.Tooltip(menuItem.actor, itemText + "\n\n" + _("Middle-click to edit | Right-click to delete"));
+                    menuItem.actor.connect('button-press-event', (actor, event) => {
+                        let button = event.get_button();
+                        if (button === 2) {
+                            return handleTextAction(this._middleClickAction);
+                        } else if (button === 3) {
+                            return handleTextAction(this._rightClickAction);
+                        }
+                        return false;
+                    });
+
+                    new Tooltips.Tooltip(menuItem.actor, itemText + getTooltipSuffix());
                     
                     if (itemText === this._lastText) {
                         menuItem.label.set_style("font-weight: bold;");
@@ -563,8 +612,16 @@ MyApplet.prototype = {
     },
 
     _editHistoryItem: function (oldText) {
+        let index = this._history.indexOf(oldText);
+        if (index !== -1) {
+            this._editHistoryItemAtIndex(index);
+        }
+    },
+
+    _editHistoryItemAtIndex: function (idx) {
+        let oldText = this._history[idx];
         let editCmd = [
-            "zenity",
+            "yad",
             "--entry",
             "--title=" + _("Edit Clipboard Item"),
             "--text=" + _("Modify the clipboard entry:"),
@@ -588,15 +645,12 @@ MyApplet.prototype = {
                     if (line !== null) {
                         let editedText = line.trim();
                         if (editedText !== "" && editedText !== oldText) {
-                            let index = this._history.indexOf(oldText);
-                            if (index !== -1) {
-                                this._history[index] = editedText;
-                                this._saveHistory();
-                                this._buildMenu();
-                                if (this._lastText === oldText) {
-                                    this._lastText = editedText;
-                                    this._clipboard.set_text(St.ClipboardType.CLIPBOARD, editedText);
-                                }
+                            this._history[idx] = editedText;
+                            this._saveHistory();
+                            this._buildMenu();
+                            if (this._lastText === oldText) {
+                                this._lastText = editedText;
+                                this._clipboard.set_text(St.ClipboardType.CLIPBOARD, editedText);
                             }
                         }
                     }
@@ -606,6 +660,95 @@ MyApplet.prototype = {
             });
         } catch (e) {
             global.logError("Failed to edit clipboard item: " + e);
+        }
+    },
+
+    launchHistoryManager: function () {
+        if (this._history.length === 0) {
+            let infoCmd = [
+                "yad",
+                "--info",
+                "--title=" + _("Manage Clipboard History"),
+                "--text=" + _("Clipboard history is empty."),
+                "--width=300"
+            ];
+            Util.spawn(infoCmd);
+            return;
+        }
+
+        let listCmd = [
+            "yad",
+            "--list",
+            "--title=" + _("Manage Clipboard History"),
+            "--text=" + _("Select an item to edit:"),
+            "--column=Index",
+            "--column=Content",
+            "--column=@fore@",
+            "--column=@font@",
+            "--hide-column=1",
+            "--print-column=1",
+            "--width=600",
+            "--height=400"
+        ];
+
+        for (let i = 0; i < this._history.length; i++) {
+            let item = this._history[i];
+            let isActive = false;
+            if (item.startsWith("[Image]:")) {
+                let hash = item.substring(8);
+                isActive = (hash === this._lastImageHash);
+            } else {
+                isActive = (item === this._lastText);
+            }
+
+            let label = item.startsWith("[Image]:") ? _("[Image] (") + item.substring(8, 14) + ")" : item;
+            if (label.length > 80) {
+                label = label.substring(0, 77) + "...";
+            }
+            
+            listCmd.push(i.toString());
+            listCmd.push(label);
+            listCmd.push(isActive ? "#3584e4" : "");
+            listCmd.push(isActive ? "bold" : "");
+        }
+
+        try {
+            let launcher = new Gio.SubprocessLauncher({
+                flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE
+            });
+            let proc = launcher.spawnv(listCmd);
+            let stdoutStream = new Gio.DataInputStream({
+                base_stream: proc.get_stdout_pipe(),
+                close_base_stream: true
+            });
+            
+            stdoutStream.read_line_async(GLib.PRIORITY_LOW, null, (stream, result) => {
+                try {
+                    let [line] = stream.read_line_finish_utf8(result);
+                    if (line !== null) {
+                        let idx = parseInt(line.trim(), 10);
+                        if (!isNaN(idx) && idx >= 0 && idx < this._history.length) {
+                            let oldText = this._history[idx];
+                            if (oldText.startsWith("[Image]:")) {
+                                let infoCmd = [
+                                    "yad",
+                                    "--info",
+                                    "--title=" + _("Edit Clipboard Item"),
+                                    "--text=" + _("Image entries cannot be edited."),
+                                    "--width=300"
+                                ];
+                                Util.spawn(infoCmd);
+                            } else {
+                                this._editHistoryItemAtIndex(idx);
+                            }
+                        }
+                    }
+                } catch (err) {
+                    global.logError("Failed to read selection: " + err);
+                }
+            });
+        } catch (e) {
+            global.logError("Failed to launch history manager: " + e);
         }
     },
 

@@ -45,5 +45,55 @@
     "units": "pixels",
     "description": "Menu Max Height",
     "tooltip": "The maximum height (in pixels) of the clipboard history dropdown list before it starts scrolling."
+  },
+  "mouse-section": {
+    "type": "section",
+    "description": "Mouse Clicks Configuration"
+  },
+  "leftClickAction": {
+    "type": "combobox",
+    "default": "select",
+    "options": {
+      "Select (Copy/Paste)": "select",
+      "Edit Item": "edit",
+      "Delete Item": "delete",
+      "None": "none"
+    },
+    "description": "Left-Click Action",
+    "tooltip": "Action performed when left-clicking a history item."
+  },
+  "middleClickAction": {
+    "type": "combobox",
+    "default": "edit",
+    "options": {
+      "Select (Copy/Paste)": "select",
+      "Edit Item": "edit",
+      "Delete Item": "delete",
+      "None": "none"
+    },
+    "description": "Middle-Click Action",
+    "tooltip": "Action performed when middle-clicking a history item."
+  },
+  "rightClickAction": {
+    "type": "combobox",
+    "default": "delete",
+    "options": {
+      "Select (Copy/Paste)": "select",
+      "Edit Item": "edit",
+      "Delete Item": "delete",
+      "None": "none"
+    },
+    "description": "Right-Click Action",
+    "tooltip": "Action performed when right-clicking a history item."
+  },
+  "history-manager-section": {
+    "type": "section",
+    "description": "History Manager"
+  },
+  "editHistoryButton": {
+    "type": "button",
+    "description": "Edit History Items (YAD)",
+    "tooltip": "Click to launch a dialog allowing you to view and edit any text item in the history.",
+    "callback": "launchHistoryManager"
   }
 }
