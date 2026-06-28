@@ -1,0 +1,12 @@
+{
+  "uuid": "pacman-updates@Twilight0",
+  "name": "Pacman Update Checker",
+  "description": "Checks for updates on Arch-based distributions using pacman and the checkupdates userspace utility. Features real-time db.lck monitoring to auto-busy and immediately auto-refresh after updates finish.",
+  "cinnamon-version": [
+    "3.0",
+    "4.0",
+    "5.0",
+    "6.0",
+    "7.0"
+  ]
+}
