@@ -53,7 +53,7 @@ MyApplet.prototype = {
 
             // Setup Pacman Lock Monitor
             this._dbLckFile = Gio.File.new_for_path("/var/lib/pacman/db.lck");
-            this._dbLckExists = this._dbLckFile.query_exists(null);
+            this._dbLckExists = false;
             this._pacmanMonitor = null;
             this._pacmanMonitorId = 0;
             this._lckTimeoutId = null;
@@ -64,43 +64,73 @@ MyApplet.prototype = {
                 this._pacmanMonitorId = this._pacmanMonitor.connect("changed", (monitor, file, other_file, event_type) => {
                     let basename = file.get_basename();
                     if (basename === "db.lck") {
-                        let isLocked = this._dbLckFile.query_exists(null);
-                        if (isLocked !== this._dbLckExists) {
-                            this._dbLckExists = isLocked;
-                            this._updateUI();
-                            if (!isLocked) {
-                                // Wait 1 second after lock release to check updates
-                                if (this._lckTimeoutId) {
-                                    Mainloop.source_remove(this._lckTimeoutId);
+                        this._dbLckFile.query_info_async(
+                            "standard::type",
+                            Gio.FileQueryInfoFlags.NONE,
+                            GLib.PRIORITY_DEFAULT,
+                            null,
+                            (fileObj, res) => {
+                                let isLocked = false;
+                                try {
+                                    fileObj.query_info_finish(res);
+                                    isLocked = true;
+                                } catch (e) {
+                                    isLocked = false;
                                 }
-                                this._lckTimeoutId = Mainloop.timeout_add(1000, () => {
-                                    this._lckTimeoutId = null;
-                                    if (this._pacmanMonitor) {
-                                        this._checkUpdates();
+                                
+                                if (isLocked !== this._dbLckExists) {
+                                    this._dbLckExists = isLocked;
+                                    this._updateUI();
+                                    if (!isLocked) {
+                                        // Wait 1 second after lock release to check updates
+                                        if (this._lckTimeoutId) {
+                                            Mainloop.source_remove(this._lckTimeoutId);
+                                        }
+                                        this._lckTimeoutId = Mainloop.timeout_add(1000, () => {
+                                            this._lckTimeoutId = null;
+                                            if (this._pacmanMonitor) {
+                                                this._checkUpdates();
+                                            }
+                                            return false;
+                                        });
                                     }
-                                    return false;
-                                });
+                                }
                             }
-                        }
+                        );
                     }
                 });
             } catch (err) {
                 global.logError("Failed to set up pacman directory monitor: " + err);
             }
 
-            this._updateUI();
+            // Perform initial async check for existing lock, then initialize UI and checks
+            this._dbLckFile.query_info_async(
+                "standard::type",
+                Gio.FileQueryInfoFlags.NONE,
+                GLib.PRIORITY_DEFAULT,
+                null,
+                (fileObj, res) => {
+                    try {
+                        fileObj.query_info_finish(res);
+                        this._dbLckExists = true;
+                    } catch (e) {
+                        this._dbLckExists = false;
+                    }
+                    this._updateUI();
 
-            let hasRepo = this._hasCheckupdates;
-            let hasAur = this._checkAur && this._aurHelper && (GLib.find_program_in_path(this._aurHelper) !== null);
+                    let hasRepo = this._hasCheckupdates;
+                    let hasAur = this._checkAur && this._aurHelper && (GLib.find_program_in_path(this._aurHelper) !== null);
 
-            if (hasRepo || hasAur) {
-                // Initial check
-                this._checkUpdates();
-                // Schedule periodic check
-                this._scheduleCheck();
-            } else {
-                global.logError("pacman-updates error: No update tools found. Please install 'pacman-contrib', 'yay', or 'paru'.");
-            }
+                    if (hasRepo || hasAur) {
+                        // Initial check
+                        this._checkUpdates();
+                        // Schedule periodic check
+                        this._scheduleCheck();
+                    } else {
+                        global.logError("pacman-updates error: No update tools found. Please install 'pacman-contrib', 'yay', or 'paru'.");
+                    }
+                }
+            );
         } catch (e) {
             global.logError(e);
         }
