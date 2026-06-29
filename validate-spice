@@ -77,6 +77,8 @@ def validate_xlet(uuid):
             for field in ['author']:
                 if field not in info:
                     raise CheckError("[%s] Missing field '%s' in info.json" % (uuid, field))
+                elif any(char.isspace() for char in info[field]):
+                    raise CheckError(f"Invalid whitespace in {field} '{info[field]}'")
 
         # check metadata.json
         with open("files/%s/metadata.json" % uuid) as file:

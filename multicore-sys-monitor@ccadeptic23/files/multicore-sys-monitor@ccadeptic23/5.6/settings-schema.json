@@ -268,6 +268,7 @@
         "Mem_width",
         "Mem_chartType",
         "Mem_startAt12Oclock",
+        "Mem_showAmountsInTooltip",
         "Mem_showBytesInTooltip",
         "Mem_value_display",
         "Mem_valueCorner",
@@ -1255,10 +1256,16 @@
     "description": "Origin at 12 o'clock",
     "dependency": "Mem_chartType=pie"
   },
+  "Mem_showAmountsInTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Show Memory/Swap byte amounts (Total, Used, Available) in the tooltip"
+  },
   "Mem_showBytesInTooltip": {
     "type": "switch",
     "default": true,
-    "description": "Show the amounts (in Bytes) of Total, Used and Available memory in the tooltip"
+    "description": "Tooltip Memory/Swap amounts: ON = SI units (kB, MB, GB); OFF = IEC binary units (KiB, MiB, GiB)",
+    "dependency": "Mem_showAmountsInTooltip"
   },
   "Mem_value_display": {
     "type": "combobox",
