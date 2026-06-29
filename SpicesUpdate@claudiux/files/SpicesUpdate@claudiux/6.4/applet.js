@@ -1154,12 +1154,12 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
   } // End of on_btn_cs_extensions_pressed
 
   on_btn_cs_themes_pressed() {
-    spawnCommandLineAsync("%s themes -t %s -s %s".format(CS_PATH, TAB, SORT));
+    spawnCommandLineAsync("%s themes -t 2 -s 4".format(CS_PATH));
   } // End of on_btn_cs_themes_pressed
 
   on_btn_cs_actions_pressed() {
     spawnCommandLineAsync("%s actions -t %s -s %s".format(CS_PATH, TAB, SORT));
-  } // End of on_btn_cs_themes_pressed
+  } // End of on_btn_cs_actions_pressed
 
   on_tooltip_max_width_screen_percentage_changed() {
     let _screen;
@@ -2345,6 +2345,7 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
     let char_new = "☄"; // "\u2604";
     let ts;
     for (let t of TYPES) {
+      var tab = ""+TAB;
       ts = _(capitalize(t.toString()));
       if (this.nb_in_menu[t] - this.new_Spices[t].length > 0)
         ts += "   %s %s".format(
@@ -2357,7 +2358,9 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
         ts = "⏺  " + ts;
       else
         ts = "    " + ts;
-      this.menu.addCommandlineAction(ts, "%s %s -t %s -s %s".format(CS_PATH, t.toString(), TAB, SORT));
+      if (t === "themes")
+        tab = "2";
+      this.menu.addCommandlineAction(ts, "%s %s -t %s -s %s".format(CS_PATH, t.toString(), tab, SORT));
     }
     // button Forget
     if (this.nb_to_watch > 0) {

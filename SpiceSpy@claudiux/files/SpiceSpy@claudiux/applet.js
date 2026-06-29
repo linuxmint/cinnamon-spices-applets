@@ -311,7 +311,10 @@ var TitleSeparatorMenuItem = class TitleSeparatorMenuItem extends PopupMenu.Popu
       icon_box.add_actor(icon);
       this.addActor(icon_box);
       new Tooltips.Tooltip(icon_box, _("Reload icons"));
-      icon_box.connect("button-press-event", () => { Util.spawnCommandLineAsync(`/usr/bin/env bash -c 'cinnamon-settings ${type} -t 1 -s 4'`) });
+      if (type !== "themes")
+        icon_box.connect("button-press-event", () => { Util.spawnCommandLineAsync(`/usr/bin/env bash -c 'cinnamon-settings ${type} -t 1 -s 4'`) });
+      else // for themes only:
+        icon_box.connect("button-press-event", () => { Util.spawnCommandLineAsync(`/usr/bin/env bash -c 'cinnamon-settings ${type} -t 2 -s 4'`) });
     }
     let label_box = new St.BoxLayout({ style: 'spacing: .25em;', reactive: true, track_hover: true, can_focus: true });
     this.label = new St.Label({ text: title, style_class: "popup-subtitle-menu-item" });
