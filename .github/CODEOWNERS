@@ -145,6 +145,7 @@ octopussy@centurix/**                              @centurix
 officeCenter@scollins/**                           @collinss
 onekoToggle@kusch3l/**                             @kusch3l
 orloj@faragofr/**                                  @faragofr
+pacman-updates@Twilight0/**                        @Twilight0
 panel-tweaks@anaximeno/**                          @anaximeno
 password-generator@spencerlommel.com/**            @SpencerLommel
 pin-unpin-panel@anaximeno/**                       @anaximeno
@@ -181,6 +182,7 @@ sleepTimer@JDatPNW/**                              @JDatPNW
 smallcalc_applet@lerc.sds/**                       @lerc
 sound150@claudiux/**                               @claudiux
 spices-notifier@germanfr/**                        @germanfr
+spicy-clipboard-applet@Twilight0/**                @Twilight0
 sshconnect@foobar-beer/**                          @foobar-beer
 sshlauncher@sumo/**                                @sumo
 ssm@Severga/**                                     @Severga
@@ -226,6 +228,7 @@ workspace-grid@hernejj/**                          @hernejj
 workspace-name@willurd/**                          @willurd
 xsession@claudiux/**                               @claudiux
 yasm@sniemetz/**                                   @sniemetz
+zen-pomodoro@vtestah/**                            @vtestah
 
 # The following xlets have no author assigned to them.
 # CommandRunner@appdevsw
