@@ -745,6 +745,17 @@ var GraphPieChart = class GraphPieChart {
     } else {
       // Bar chart
       let vbarWidth = 0.6 * (_width - 6);
+      let _x = 1 + 0.25 * width;
+      if (this.applet.Swap_enabled) {
+        if (this.applet.Mem_swapWidth == 0) {
+          vbarWidth = 0.9 * (_width - 6);
+          _x = 6;
+        }
+        else if (this.applet.Mem_swapWidth != 100) {
+          vbarWidth = 1 * (_width * (1 - this.applet.Mem_swapWidth / 100) - 6);
+          _x = 1 + (this.applet.Mem_swapWidth / 100) * width;
+        }
+      }
       let r=1, g=1, b=1, a=1;
       var old_height = 0;
       var vbarHeight;
@@ -757,7 +768,7 @@ var GraphPieChart = class GraphPieChart {
         if (i==0) plus = 1;
         this.drawRoundedRectangle(
           areaContext,
-          1 + 0.25 * width, // x
+          _x, // x
           height - (plus + old_height + vbarHeight), // y
           vbarWidth, // width
           vbarHeight, // height
