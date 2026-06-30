@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2024-11-16 13:02+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:132
+msgid "OctoPussy: OctoPrint manager."
+msgstr "OctoPussy: OctoPrint manager."
+
+#. applet.js:205
+msgid "Settings"
+msgstr "Asetukset"
+
+#. applet.js:278 applet.js:351
+msgid "Time lapsed: "
+msgstr "Kulunut aika: "
+
+#. applet.js:282 applet.js:352
+msgid "Estimated: "
+msgstr "Arvio: "
+
+#. applet.js:292 applet.js:353
+msgid "Total time: "
+msgstr "Kokonaisaika: "
+
+#. applet.js:355
+msgid "Pause current print"
+msgstr "Pysäytä tulostus"
+
+#. applet.js:356
+msgid "Continue current print"
+msgstr "Jatka tulostusta"
+
+#. applet.js:358
+msgid "Change filament"
+msgstr "Vaihda hehkulanka"
+
+#. applet.js:359
+msgid "Camera monitor"
+msgstr "Kameravalvonta"
+
+#. applet.js:360
+msgid "Open OctoPrint web"
+msgstr "Avaa OctoPrint"
+
+#. applet.js:362
+msgid "Restart OctoPrint"
+msgstr "Käynnistys OctoPrint"
+
+#. applet.js:363
+msgid "Shutdown OctoPrint"
+msgstr "Sammuta OctoPrint"
+
+#. applet.js:364
+msgid "Configure..."
+msgstr "Asetukset..."
+
+#. applet.js:400
+msgid "Restart"
+msgstr ""
+
+#. applet.js:404 applet.js:430
+msgid "Cancel"
+msgstr ""
+
+#. applet.js:426
+#, fuzzy
+msgid "Shutdown"
+msgstr "Sammuta OctoPrint"
+
+#. applet.js:474
+msgid "Please confirm your action!"
+msgstr ""
+
+#. metadata.json->description
+msgid "An applet to manage OctoPrint."
+msgstr "OctoPrint 3d-tulostimen hallinta ja työn valvonta."
+
+#. metadata.json->name
+msgid "OctoPrint manager"
+msgstr "OctoPrint manager"
+
+#. settings-schema.json->octoprintUrl->description
+#. settings-schema.json->octoprintUrl->tooltip
+msgid "OctoPrint API Address"
+msgstr "OctoPrint API osoite"
+
+#. settings-schema.json->octoprintApiKey->description
+msgid "OctoPrint API Key. Get an API key from the OctoPrint site settings."
+msgstr "OctoPrint APIAVAIN. Hanki avain OctoPrint-sivuston asetuksista."
+
+#. settings-schema.json->octoprintInterval->units
+msgid "seconds"
+msgstr "sekuntia"
+
+#. settings-schema.json->octoprintInterval->description
+msgid "Refresh Interval:"
+msgstr "Virkistystaajuus:"
+
+#. settings-schema.json->octoprintInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"Suurenna tai pienennä spinner-arvoa ja muuta tietojen päivitysväliä. Pitkä "
+"päivitysväli mikäli sinulla on hidas tietokone"
+
+#. settings-schema.json->octoprintVideoCommand->description
+msgid "Video command to use when showing the webcam. Defaults to vlc."
+msgstr "Komentoa käytetään kameran näyttämiseen. Oletus on vlc."

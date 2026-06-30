@@ -1,0 +1,98 @@
+# SUSPEND COMPUTER
+# This file is put in the public domain.
+# janax, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: suspend@janax 2.0.4\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-29 20:37-0400\n"
+"PO-Revision-Date: 2025-09-17 00:45+0000\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:48
+msgid "Suspend"
+msgstr "睡眠"
+
+#. metadata.json->description
+msgid "Immediately suspends the computer"
+msgstr "立即讓電腦進入睡眠狀態"
+
+#. metadata.json->name
+msgid "Suspend computer"
+msgstr "電腦睡眠"
+
+#. settings-schema.json->suspend-header->description
+msgid "Suspend computer settings"
+msgstr "電腦睡眠設定"
+
+#. settings-schema.json->suspend-on-double-click->description
+msgid "Double-click to suspend"
+msgstr "點兩下即可進入睡眠"
+
+#. settings-schema.json->suspend-on-double-click->tooltip
+msgid ""
+"When enabled, a double-click will suspend the computer, otherwise the "
+"computer will suspend on a single click."
+msgstr ""
+"啟用後，點兩下會讓電腦進入睡眠狀態；"
+"否則，點一下就會讓電腦進入睡眠狀態。"
+
+#. settings-schema.json->count-down->description
+msgid "Use a count down before suspending"
+msgstr "進入睡眠狀態前倒數計時"
+
+#. settings-schema.json->count-down->tooltip
+msgid ""
+"When enabled, a count down will occurs before suspending the computer.\n"
+"Clicking again during the count down will cancel the suspend."
+msgstr ""
+"啟用後，電腦進入睡眠狀態前會先進行倒數計時。\n"
+"倒數期間再次點選即可取消睡眠。"
+
+#. settings-schema.json->count-down-duration->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->count-down-duration->description
+msgid "Count down duration"
+msgstr "倒數計時秒數"
+
+#. settings-schema.json->ctrl-override-countdown->description
+msgid "Ctrl+Click to override the count down and suspend immediately"
+msgstr "使用 Ctrl + 點選以略過倒數計時並立即進入睡眠"
+
+#. settings-schema.json->ctrl-override-countdown->tooltip
+msgid ""
+"When enabled, using Ctrl+Click will suspend the computer immediately, "
+"without starting a count down or waiting for an existing count down to "
+"finish."
+msgstr ""
+"啟用後，使用 Ctrl + 點選會立即讓電腦進入睡眠狀態，"
+"不會啟動倒數計時，也不會等待現有的倒數結束。"
+
+#. settings-schema.json->fullcolor-icon->description
+msgid "Use a full color icon"
+msgstr "使用全彩圖示"
+
+#. settings-schema.json->fullcolor-icon->tooltip
+msgid ""
+"When enabled, a full color panel icon will be used, otherwise a symbolic "
+"icon will be used."
+msgstr ""
+"啟用後會使用全彩的面板圖示，"
+"否則會改用符號圖示。"
+
+#. settings-schema.json->system-suspend-header->description
+msgid "System suspend settings"
+msgstr "系統睡眠設定"
+
+#. settings-schema.json->config-power->description
+msgid "Open Power Management Settings"
+msgstr "開啟電源管理設定"

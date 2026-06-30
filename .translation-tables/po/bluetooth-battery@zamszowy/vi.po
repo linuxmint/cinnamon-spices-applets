@@ -1,0 +1,208 @@
+# BLUETOOTH BATTERY
+# This file is put in the public domain.
+# zamszowy, 2022
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: bluetooth-battery@zamszowy 1.4.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 21:28+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:84
+msgid "Show devices battery levels"
+msgstr "Hiển thị mức pin của thiết bị"
+
+#. settings-schema.json->notification-warn-demo->description
+#. settings-schema.json->notification-crit-demo->description
+#. applet.js:161 applet.js:166
+msgid "Test notification"
+msgstr "Thông báo thử nghiệm"
+
+#. applet.js:161 applet.js:166 applet.js:257 applet.js:267
+msgid "Battery dropped below %d%"
+msgstr "Pin đã giảm xuống dưới %d%"
+
+#. metadata.json->name
+msgid "Bluetooth battery"
+msgstr "Pin Bluetooth"
+
+#. metadata.json->description
+msgid "Shows battery levels of different devices"
+msgstr "Hiển thị mức pin của các thiết bị khác nhau"
+
+#. settings-schema.json->page1->title
+msgid "Settings"
+msgstr "Cài đặt"
+
+#. settings-schema.json->page2->title
+msgid "Notifications"
+msgstr "Thông báo"
+
+#. settings-schema.json->page3->title
+msgid "Blacklist"
+msgstr "Danh sách chặn"
+
+#. settings-schema.json->section0->title
+msgid "Enable battery monitoring for:"
+msgstr "Bật giám sát pin cho:"
+
+#. settings-schema.json->section1->title
+msgid "Icon/Text:"
+msgstr "Biểu tượng/Văn bản:"
+
+#. settings-schema.json->section2->title
+msgid "Device to display"
+msgstr "Thiết bị để hiển thị"
+
+#. settings-schema.json->section3->title
+msgid ""
+"Disable monitoring for selected devices. You can use model or serial of the "
+"device.\n"
+"Comment starts with '#'"
+msgstr ""
+"Tắt giám sát cho các thiết bị đã chọn. Bạn có thể dùng model hoặc số seri của "
+"thiết bị.\n"
+"Bình luận bắt đầu với '#'"
+
+#. settings-schema.json->section4->title
+msgid "Warning notifications"
+msgstr "Thông báo cảnh báo"
+
+#. settings-schema.json->section5->title
+msgid "Critical notifications"
+msgstr "Thông báo nghiêm trọng"
+
+#. settings-schema.json->section6->title
+msgid ""
+"Ignore small changes of battery levels - if device reports small battery "
+"changes back and forth, this setting would help"
+msgstr ""
+"Bỏ qua các thay đổi nhỏ của mức pin - nếu thiết bị báo thay đổi pin nhỏ liên tục, thiết lập này sẽ hữu ích"
+
+#. settings-schema.json->section7->title
+msgid "Showing of configured applet icon/text"
+msgstr "Hiển thị biểu tượng/văn bản applet đã cấu hình"
+
+#. settings-schema.json->enable-keyboards->description
+msgid "Keyboards"
+msgstr "Bàn phím"
+
+#. settings-schema.json->enable-mice->description
+msgid "Mice"
+msgstr "Chuột"
+
+#. settings-schema.json->enable-headphones->description
+msgid "Headphones"
+msgstr "Tai nghe"
+
+#. settings-schema.json->enable-others->description
+msgid "Other devices"
+msgstr "Thiết bị khác"
+
+#. settings-schema.json->applet-icon->description
+msgid "Display"
+msgstr "Hiển thị"
+
+#. settings-schema.json->applet-icon->options
+msgid "Icon and Text"
+msgstr "Biểu tượng và Văn bản"
+
+#. settings-schema.json->applet-icon->options
+msgid "Icon"
+msgstr "Biểu tượng"
+
+#. settings-schema.json->applet-icon->options
+msgid "Text"
+msgstr "Văn bản"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr "Kiểu biểu tượng"
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr "tối"
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr "sáng"
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr "biểu tượng"
+
+#. settings-schema.json->blacklist->tooltip
+msgid "tooltip"
+msgstr "chú giải"
+
+#. settings-schema.json->blacklist-apply->description
+msgid "Apply"
+msgstr "Áp dụng"
+
+#. settings-schema.json->blacklist-apply->tooltip
+msgid "Apply changes"
+msgstr "Áp dụng thay đổi"
+
+#. settings-schema.json->override-enable->description
+msgid ""
+"Manually select main device to display (instead of the one with lowest "
+"battery)"
+msgstr ""
+"Tự chọn thiết bị chính để hiển thị (thay vì thiết bị có mức pin thấp nhất)"
+
+#. settings-schema.json->override-entry->description
+msgid "Selected device:"
+msgstr "Thiết bị đã chọn:"
+
+#. settings-schema.json->override-select->description
+msgid "Select device to display"
+msgstr "Chọn thiết bị để hiển thị"
+
+#. settings-schema.json->notification-warn-enable->description
+msgid "Enable notification for battery warning level"
+msgstr "Bật thông báo cho mức cảnh báo pin"
+
+#. settings-schema.json->notification-warn-level->description
+#. settings-schema.json->notification-crit-level->description
+msgid "Notify when battery below [%]"
+msgstr "Thông báo khi pin dưới [%]"
+
+#. settings-schema.json->notification-crit-enable->description
+msgid "Enable notification for battery critical level"
+msgstr "Bật thông báo cho mức pin nghiêm trọng"
+
+#. settings-schema.json->notification-applet-icon->description
+msgid "Show icon/text only if:"
+msgstr "Chỉ hiển thị biểu tượng/văn bản nếu:"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "show always"
+msgstr "luôn hiển thị"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "battery below warning level"
+msgstr "pin dưới mức cảnh báo"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "battery below critical level"
+msgstr "pin dưới mức nghiêm trọng"
+
+#. settings-schema.json->notification-filter->description
+msgid ""
+"Notify again only if battery increased above configured level by at least: "
+msgstr ""
+"Chỉ thông báo lại nếu pin tăng vượt mức đã cấu hình ít nhất: "
+
+#. settings-schema.json->notification-filter->units
+msgid "%"
+msgstr "%"

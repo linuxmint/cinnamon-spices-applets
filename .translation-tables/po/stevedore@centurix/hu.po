@@ -1,0 +1,266 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: stevedore@centurix 0.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-28 09:36+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:84
+msgid "Create a container from an image"
+msgstr "Hozzon létre egy tárolót egy képből"
+
+#: applet.js:94
+msgid "Mount location:"
+msgstr "Csatolás helye:"
+
+#: applet.js:116
+msgid "Destination location:"
+msgstr "Cél helye:"
+
+#: applet.js:138
+msgid "Working directory:"
+msgstr "Munkakönyvtár:"
+
+#: applet.js:160
+msgid "Memory:"
+msgstr "Memória:"
+
+#: applet.js:182
+msgid "Swap size:"
+msgstr "Cserehely mérete:"
+
+#: applet.js:204
+msgid "Entry point:"
+msgstr "Belépési pont:"
+
+#: applet.js:226
+msgid "Extra parameters:"
+msgstr "Extra paraméterek:"
+
+#: applet.js:248
+msgid "Start"
+msgstr "Indulás"
+
+#: applet.js:263 applet.js:342
+msgid "Cancel"
+msgstr "Mégse"
+
+#: applet.js:312
+msgid "Search for a Docker image:"
+msgstr "Docker-kép keresése:"
+
+#: applet.js:397
+msgid "Select"
+msgstr "Kiválasztás"
+
+#: applet.js:424
+msgid "Searching..."
+msgstr "Keresés..."
+
+#: applet.js:468
+msgid "Stevedore: Docker controller"
+msgstr "Stevedore: Docker vezérlő"
+
+#: applet.js:481
+msgid "Stevedor: Cannot locate Docker, is it installed?"
+msgstr "Stevedor: Nem található a Docker, telepítve van?"
+
+#: applet.js:482
+msgid "Cannot locate Docker, is it installed?"
+msgstr "Nem található a Docker, telepítve van?"
+
+#: applet.js:485 applet.js:497
+msgid "Get Docker"
+msgstr "Szerezd meg a Dockert"
+
+#: applet.js:493 applet.js:494
+msgid ""
+"Stevedor: Docker is out of date, please install version 17.03.0-ce or higher."
+msgstr ""
+"Stevedor: A Docker elavult, kérjük, telepítse a 17.03.0-ce vagy újabb "
+"verziót."
+
+#: applet.js:513
+msgid "Create a new image"
+msgstr "Hozzon létre egy új képet"
+
+#: applet.js:516
+msgid "Images"
+msgstr "Képek"
+
+#: applet.js:522
+msgid "No Images Installed"
+msgstr "Nincsenek telepítve képek"
+
+#: applet.js:532
+msgid "Start a new container from this image"
+msgstr "Indítson el egy új tárolót erről a képről"
+
+#: applet.js:539
+msgid "Image Home Page"
+msgstr "Kép kezdőlap"
+
+#: applet.js:546
+msgid "Remove this image"
+msgstr "Távolítsa el ezt a képet"
+
+#: applet.js:555
+msgid "Containers"
+msgstr "Tárolók"
+
+#: applet.js:560
+msgid "No Containers Created"
+msgstr "Nincsenek tárolók létrehozva"
+
+#: applet.js:568 applet.js:571
+msgid "Running"
+msgstr "Folyamatban"
+
+#: applet.js:568 applet.js:571
+msgid "Stopped"
+msgstr "Leállítva"
+
+#: applet.js:578
+msgid "Memory: "
+msgstr "Memória:"
+
+#: applet.js:584
+msgid "Entry point: "
+msgstr "Belépési pont:"
+
+#: applet.js:592
+msgid "Mount: "
+msgstr "Csatolás:"
+
+#: applet.js:603
+msgid "IP Address: "
+msgstr "IP cím:"
+
+#: applet.js:615
+msgid "Open a terminal"
+msgstr "Terminál megnyitása"
+
+#: applet.js:627
+msgid "Show TTY Session"
+msgstr "TTY Session megjelenítése"
+
+#: applet.js:640
+msgid "Open a browser"
+msgstr "Nyisson meg egy böngészőt"
+
+#: applet.js:651
+msgid "Delete this container"
+msgstr "Törölje ezt a tárolót"
+
+#: applet.js:660
+msgid "Docker Version"
+msgstr "Docker verzió"
+
+#: applet.js:661
+msgid "Docker Version: "
+msgstr "Docker verzió: "
+
+#: applet.js:662
+msgid "API Version: "
+msgstr "APi verzió: "
+
+#: applet.js:663
+msgid "Go Version: "
+msgstr "Go verzió: "
+
+#: applet.js:664
+msgid "Git Commit: "
+msgstr "Git hozzájárulás: "
+
+#: applet.js:665
+msgid "Build Date: "
+msgstr "Építési dátum: "
+
+#: applet.js:666
+msgid "OS/Arch: "
+msgstr "OS/Arch: "
+
+#: applet.js:670
+msgid "Refresh this menu"
+msgstr "Frissítse ezt a menüt"
+
+#: applet.js:681
+msgid "Installing image"
+msgstr "Kép telepítése"
+
+#: applet.js:681 applet.js:797 applet.js:828
+msgid "please wait..."
+msgstr "kérlek várj..."
+
+#: applet.js:691 applet.js:716
+msgid "Image"
+msgstr "Kép"
+
+#: applet.js:691
+msgid "installed, ready to run."
+msgstr "telepítve, használatra kész."
+
+#: applet.js:716
+msgid "removed."
+msgstr "eltávolítva."
+
+#: applet.js:780
+msgid "Starting container"
+msgstr "Tároló indítása"
+
+#: applet.js:782
+msgid "Container up"
+msgstr "Tároló fent"
+
+#: applet.js:784
+msgid "Stopping container"
+msgstr "Tároló leállítása"
+
+#: applet.js:786
+msgid "Container down"
+msgstr "Tároló lent"
+
+#: applet.js:797
+msgid "Creating container from"
+msgstr "Tároló készítése ebből:"
+
+#: applet.js:800
+msgid "Image created."
+msgstr "Kép létrehozva."
+
+#: applet.js:828
+msgid "Removing container"
+msgstr "Tároló eltávolítása"
+
+#: applet.js:831
+msgid "Container removed"
+msgstr "Tároló eltávolítva"
+
+#: applet.js:838
+msgid "Copied to the clipboard"
+msgstr "A vágólapra másolva"
+
+#: terminal_reader.js:60
+msgid "Command not found."
+msgstr "A parancs nem található."
+
+#. metadata.json->description
+msgid "Docker controlling applet."
+msgstr "Docker vezérlő kisalkalmazás."
+
+#. metadata.json->name
+msgid "Stevedor - Docker controller"
+msgstr "Stevedor - Docker vezérlő"

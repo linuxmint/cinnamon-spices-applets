@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-12 00:22+0300\n"
+"PO-Revision-Date: 2024-07-10 00:02+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#: applet.js:26
+msgid "Shadowsocks Switch"
+msgstr "Interruptor de Shadowsocks"
+
+#: applet.js:38
+msgid "Enable Shadowsocks"
+msgstr "Activar Shadowsocks"
+
+#: applet.js:66
+msgid "Toggle Shadowsocks proxy"
+msgstr "Activar/desactivar proxy Shadowsocks"
+
+#: applet.js:102
+msgid "Cannot read Shadowsocks config."
+msgstr "No s'ha pogut llegir la configuració de Shadowsocks."
+
+#: applet.js:110
+msgid "Shadowsocks config is missing local port."
+msgstr "La configuració de Shadowsocks no té un port local assignat."
+
+#: applet.js:138
+msgid "Connection established."
+msgstr "Connexió establerta."
+
+#: applet.js:189
+msgid "Disconnected."
+msgstr "Desconnectat."
+
+#. metadata.json->description
+msgid "Quickly toggle Shadowsocks proxy from the system tray"
+msgstr "Activeu o desactiveu ràpidament el proxy de Shadowsocks des de la barra del sistema"
+
+#. settings-schema.json->section1->description
+msgid "General"
+msgstr "General"
+
+#. settings-schema.json->config->description
+msgid "Shadowsocks configuration"
+msgstr "Configuració de Shadowsocks"

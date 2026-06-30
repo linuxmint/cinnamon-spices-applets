@@ -1,0 +1,77 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: shutdown-timer@webum.by 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-05-13 23:53+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:71 applet.js:200
+msgid "Shutdown-timer"
+msgstr "關機定時器"
+
+#: applet.js:77 applet.js:204 applet.js:293
+msgid "Minutes"
+msgstr "分鐘"
+
+#: applet.js:98
+msgid "Timer"
+msgstr "計時器"
+
+#: applet.js:128
+msgid "Show time on panel"
+msgstr "在面板上顯示時間"
+
+#: applet.js:290
+msgid "Minutes to <click action>"
+msgstr "距離 <點選動作> 還有幾分鐘"
+
+#. metadata.json->name
+msgid "Shutdown timer"
+msgstr "Shutdown timer"
+
+#. metadata.json->description
+msgid "Applet to help you shutdown, restart and suspend your system with timer"
+msgstr "協助您透過計時器來關機、重新啟動或暫停系統的小程式"
+
+#. settings-schema.json->shutdown->description
+msgid "Shutdown event on menu"
+msgstr "選單中的關機事件"
+
+#. settings-schema.json->restart->description
+msgid "Restart event on menu"
+msgstr "選單中的重新啟動事件"
+
+#. settings-schema.json->log-out->description
+msgid "Log out event on menu"
+msgstr "選單中的登出事件"
+
+#. settings-schema.json->hibernate->description
+msgid "Hibernate event on menu"
+msgstr "選單中的休眠事件"
+
+#. settings-schema.json->suspend->description
+msgid "Suspend event on menu"
+msgstr "選單中的暫停事件"
+
+#. settings-schema.json->lock-screen->description
+msgid "Lock screen event on menu"
+msgstr "選單中的鎖定螢幕事件"
+
+#. settings-schema.json->restart-cinnamon->description
+msgid "Restart Cinnamon event on menu"
+msgstr "選單中的重新啟動 Cinnamon 事件"
+
+#. settings-schema.json->show-time-on-panel->description
+msgid "Show timer in panel"
+msgstr "在面板上顯示計時器"

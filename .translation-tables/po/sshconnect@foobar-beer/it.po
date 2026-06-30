@@ -1,0 +1,152 @@
+# SSH CONNECT
+# This file is put in the public domain.
+# foobar-beer, 2019
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sshconnect@foobar-beer 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:58
+msgid "Reload Config"
+msgstr "Ricarica Configurazione"
+
+#. applet.js:96
+msgid "Connection opened for "
+msgstr "Connessione aperta su "
+
+#. metadata.json->name
+msgid "SSH Connect"
+msgstr "Connessione SSH"
+
+#. metadata.json->description
+msgid ""
+"Open SSH shell based on applet configuration table with optional "
+"configuration of console profile and flags per each connection."
+msgstr ""
+"Apre la shell SSH in base alla tabella di configurazione dell'applet con "
+"configurazione facoltativa del profilo della console e dei flag per ogni "
+"connessione."
+
+#. settings-schema.json->page-connections-list->title
+msgid "SSH Connections"
+msgstr "Connessioni SSH"
+
+#. settings-schema.json->page-terminal-settings->title
+#. settings-schema.json->section-terminal-app->title
+msgid "Terminal Application"
+msgstr "Applicazione Terminale"
+
+#. settings-schema.json->section-connections-list->title
+msgid "SSH Connections List"
+msgstr "Elenco Connessioni SSH"
+
+#. settings-schema.json->section-setup-title-flag->title
+msgid "Terminal Title"
+msgstr "Titolo Terminale"
+
+#. settings-schema.json->section-setup-profile-flag->title
+#. settings-schema.json->connections->columns->title
+msgid "Terminal Profile"
+msgstr "Profilo Terminale"
+
+#. settings-schema.json->connections->description
+msgid "Connections List"
+msgstr "Elenco Connessioni"
+
+#. settings-schema.json->connections->columns->title
+msgid "Connection Name"
+msgstr "Nome Connessione"
+
+#. settings-schema.json->connections->columns->title
+msgid "Group Name"
+msgstr "Nome Gruppo"
+
+#. settings-schema.json->connections->columns->title
+msgid "Host"
+msgstr "Host"
+
+#. settings-schema.json->connections->columns->title
+msgid "SSH Flags"
+msgstr "Flag SSH"
+
+#. settings-schema.json->terminal-exec->description
+msgid "Set terminal application executable"
+msgstr "Imposta l'eseguibile dell'applicazione terminale"
+
+#. settings-schema.json->terminal-exec->tooltip
+msgid ""
+"Configure the command that will be used for launching the SSH connection."
+msgstr ""
+"Configura il comando che verrà utilizzato per avviare la connessione SSH."
+
+#. settings-schema.json->exec-flag->description
+msgid "Set terminal application execution flag"
+msgstr "Imposta il flag di esecuzione dell'applicazione terminale"
+
+#. settings-schema.json->exec-flag->tooltip
+msgid ""
+"Configure the application execution option flag used for passing through the "
+"command that should be executed."
+msgstr ""
+"Configura il flag dell'opzione di esecuzione dell'applicazione utilizzato "
+"per passare il comando che deve essere eseguito."
+
+#. settings-schema.json->customize-title->description
+msgid "Customize teminal window title"
+msgstr "Personalizza il titolo della finestra del terminale"
+
+#. settings-schema.json->customize-title->tooltip
+msgid ""
+"Set this switch to configure the execution option flag for setting window "
+"title."
+msgstr ""
+"Imposta questo interruttore per configurare il flag dell'opzione di "
+"esecuzione per l'impostazione del titolo della finestra."
+
+#. settings-schema.json->title-flag->description
+msgid "Set terminal application title flag"
+msgstr "Imposta il flag del titolo dell'applicazione terminale"
+
+#. settings-schema.json->title-flag->tooltip
+msgid ""
+"Configure the application execution option flag used for setting window "
+"title."
+msgstr ""
+"Configura il flag dell'opzione di esecuzione dell'applicazione utilizzato "
+"per impostare il titolo della finestra."
+
+#. settings-schema.json->customize-profile->description
+msgid "Customize teminal window profile"
+msgstr "Personalizza il profilo della finestra del terminale"
+
+#. settings-schema.json->customize-profile->tooltip
+msgid ""
+"Set this switch to configure the execution option flag for setting terminal "
+"window profile."
+msgstr ""
+"Imposta questa opzione per configurare il flag dell'opzione di esecuzione "
+"per l'impostazione del profilo della finestra del terminale."
+
+#. settings-schema.json->profile-flag->description
+msgid "Set Terminal application profile flag"
+msgstr "Imposta il flag del profilo dell'applicazione Terminale"
+
+#. settings-schema.json->profile-flag->tooltip
+msgid ""
+"Configure the application execution option flag used for setting window "
+"profile"
+msgstr ""
+"Configura il flag di opzione di esecuzione dell'applicazione utilizzato per "
+"impostare il profilo della finestra"

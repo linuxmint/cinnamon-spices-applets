@@ -1,0 +1,225 @@
+# ENVYCONTROL GUI
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: envycontrol@zamszowy 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-30 22:00+0200\n"
+"PO-Revision-Date: 2025-09-06 16:13+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:40
+msgid "missing dependencies"
+msgstr "缺少相依套件"
+
+#. applet.js:70
+#, javascript-format
+msgid "Switch to %s"
+msgstr "切換至 %s"
+
+#. applet.js:72
+#, javascript-format
+msgid "Switched to %s (pending reboot)"
+msgstr "已切換至 %s（等待重新啟動）"
+
+#. applet.js:74
+#, javascript-format
+msgid "Switch back to %s"
+msgstr "切換回 %s"
+
+#. applet.js:100
+#, javascript-format
+msgid "Changing mode to %s"
+msgstr "正在將模式切換為 %s"
+
+#. applet.js:102
+#, javascript-format
+msgid "Switching to %s mode in progress..."
+msgstr "正在切換至 %s 模式..."
+
+#. applet.js:106
+#, javascript-format
+msgid "Switched to %s mode"
+msgstr "已切換至 %s 模式"
+
+#. applet.js:135
+msgid "Configuring..."
+msgstr "正在設定..."
+
+#. applet.js:146
+msgid "Hybrid settings"
+msgstr "混合模式設定"
+
+#. applet.js:149
+msgid "  Create cache"
+msgstr "  建立快取"
+
+#. applet.js:151
+msgid "successfully created cache"
+msgstr "已成功建立快取"
+
+#. applet.js:155
+msgid "  Delete cache"
+msgstr "  刪除快取"
+
+#. applet.js:157
+msgid "successfully deleted cache"
+msgstr "已成功刪除快取"
+
+#. applet.js:161
+msgid "  Show cache"
+msgstr "  顯示快取"
+
+#. applet.js:169
+msgid "Show last switch log"
+msgstr "顯示最近一次的切換記錄"
+
+#. applet.js:179
+#, javascript-format
+msgid "Current mode: %s"
+msgstr "目前模式：%s"
+
+#. applet.js:179
+#, javascript-format
+msgid "(pending switch to %s)"
+msgstr "（等待切換至 %s）"
+
+#. metadata.json->name
+msgid "EnvyControl GUI"
+msgstr "EnvyControl GUI"
+
+#. metadata.json->description
+msgid "Switches between between GPU modes on Nvidia Optimus systems."
+msgstr "在 Nvidia Optimus 系統上切換 GPU 模式。"
+
+#. settings-schema.json->section1->description
+msgid "Nvidia Settings"
+msgstr "Nvidia 設定"
+
+#. settings-schema.json->enable-coolbits->description
+msgid "Enable coolbits"
+msgstr "啟用 coolbits"
+
+#. settings-schema.json->enable-coolbits->tooltip
+msgid "Allows overclocking (not recommended)"
+msgstr "允許超頻（不建議使用）"
+
+#. settings-schema.json->coolbits->description
+msgid "Coolbits"
+msgstr "Coolbits"
+
+#. settings-schema.json->enable-forcecompositionpipeline->description
+msgid "Enable ForceCompositionPipeline"
+msgstr "啟用 ForceCompositionPipeline"
+
+#. settings-schema.json->enable-forcecompositionpipeline->tooltip
+msgid "Enable if facing screen tearing"
+msgstr "如果遇到畫面撕裂問題，請啟用此選項"
+
+#. settings-schema.json->override-dm->description
+msgid "Manually specify your Display Manager"
+msgstr "手動指定顯示管理員"
+
+#. settings-schema.json->dm->description
+msgid "Display manager"
+msgstr "顯示管理員"
+
+#. settings-schema.json->dm->options
+msgid "gdm"
+msgstr "gdm"
+
+#. settings-schema.json->dm->options
+msgid "gdm3"
+msgstr "gdm3"
+
+#. settings-schema.json->dm->options
+msgid "sddm"
+msgstr "sddm"
+
+#. settings-schema.json->dm->options
+msgid "lightdm"
+msgstr "lightdm"
+
+#. settings-schema.json->use-nvidia-current->description
+msgid "Use nvidia-current instead of nvidia for kernel modules"
+msgstr "使用 nvidia-current 而非 nvidia 作為核心模組"
+
+#. settings-schema.json->use-nvidia-current->tooltip
+msgid ""
+"If nvidia kernel module is named nvidia-current on Debian, use this flag to "
+"make EnvyControl use the correct module name"
+msgstr ""
+"若在 Debian 上，nvidia 核心模組的名稱是 nvidia-current，請使用此選項讓 "
+"EnvyControl 使用正確的模組名稱"
+
+#. settings-schema.json->section2->description
+msgid "Hybrid Settings"
+msgstr "混合模式設定"
+
+#. settings-schema.json->enable-rtd3->description
+msgid "Setup PCI-Express Runtime D3 (RTD3) Power Management"
+msgstr "設定 PCI-Express Runtime D3 (RTD3) 電源管理"
+
+#. settings-schema.json->enable-rtd3->tooltip
+msgid "RTD3 allows the dGPU to be dynamically turned off when not in use"
+msgstr "RTD3 允許在未使用時動態關閉獨立顯示卡"
+
+#. settings-schema.json->rtd3->description
+msgid "RTD3"
+msgstr "RTD3"
+
+#. settings-schema.json->rtd3->options
+msgid "0"
+msgstr "0"
+
+#. settings-schema.json->rtd3->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->rtd3->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->rtd3->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->rtd3->tooltip
+msgid ""
+"0 - disabled\n"
+"1 - coarse-grained\n"
+"2 - fine-grained\n"
+"3 - fine-grained for Ampere and later"
+msgstr ""
+"0 - 停用\n"
+"1 - 粗粒度\n"
+"2 - 細粒度\n"
+"3 - 細粒度（適用於 Ampere 及更新的架構）"
+
+#. settings-schema.json->section3->description
+msgid "Theme"
+msgstr "主題"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr "圖示樣式"
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr "深色"
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr "淺色"
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr "符號"

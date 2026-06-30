@@ -1,0 +1,246 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hideable-applets@cardsurf 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-08 10:25+0100\n"
+"PO-Revision-Date: 2025-08-21 23:33+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. metadata.json->description
+msgid "Hides applets to tray"
+msgstr "將小程式隱藏到系統工具列"
+
+#. metadata.json->name
+msgid "Hideable applets"
+msgstr "可隱藏的小程式"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "設定"
+
+#. settings-schema.json->action_type->description
+msgid "Action"
+msgstr "動作"
+
+#. settings-schema.json->action_type->options
+msgid "Open or close popup"
+msgstr "開啟或關閉彈出視窗"
+
+#. settings-schema.json->action_type->options
+msgid "Toggle visibility applets"
+msgstr "切換小程式顯示狀態"
+
+#. settings-schema.json->action_type->tooltip
+msgid "An action to perform on trigger"
+msgstr "觸發時要執行的動作"
+
+#. settings-schema.json->action_trigger_type->description
+msgid "Trigger"
+msgstr "觸發條件"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "Left mouse click"
+msgstr "滑鼠左鍵點選"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "Mouse hover"
+msgstr "滑鼠游標停留"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "None"
+msgstr "無"
+
+#. settings-schema.json->action_trigger_type->tooltip
+msgid "An event that triggers the action"
+msgstr "觸發動作的事件"
+
+#. settings-schema.json->side_type->description
+msgid "Applets location"
+msgstr "小程式位置"
+
+#. settings-schema.json->side_type->options
+msgid "Top"
+msgstr "頂端"
+
+#. settings-schema.json->side_type->options
+msgid "Right"
+msgstr "右側"
+
+#. settings-schema.json->side_type->options
+msgid "Bottom"
+msgstr "底端"
+
+#. settings-schema.json->side_type->options
+msgid "Left"
+msgstr "左側"
+
+#. settings-schema.json->side_type->tooltip
+msgid "A location of applets for which to toggle visibility"
+msgstr "要切換顯示狀態的小程式所在位置"
+
+#. settings-schema.json->restore_hidden_string->description
+msgid "Restore as hidden"
+msgstr "還原為隱藏"
+
+#. settings-schema.json->restore_hidden_string->tooltip
+msgid ""
+"A comma-separated list of applet UUIDs.\n"
+"An applet from this list will be hidden if the applet is configured as hidden and the applet shows up."
+msgstr ""
+"以逗號分隔的小程式 UUID 清單。\n"
+"清單中若有小程式設為隱藏，當它再次出現時會自動隱藏。"
+
+#. settings-schema.json->save_every->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->save_every->description
+msgid "Save every"
+msgstr "儲存間隔"
+
+#. settings-schema.json->save_every->tooltip
+msgid "How often to save last used values"
+msgstr "儲存上次使用設定的頻率"
+
+#. settings-schema.json->tray_start->description
+msgid "Popup"
+msgstr "彈出視窗"
+
+#. settings-schema.json->applet_popup_columns->description
+msgid "Columns"
+msgstr "欄數"
+
+#. settings-schema.json->applet_popup_columns->tooltip
+msgid "A number of columns in the applet popup"
+msgstr "小程式彈出視窗中的欄數"
+
+#. settings-schema.json->applet_popup_icons_size->units
+msgid "pixels"
+msgstr "像素"
+
+#. settings-schema.json->applet_popup_icons_size->description
+msgid "Icon size"
+msgstr "圖示大小"
+
+#. settings-schema.json->applet_popup_icons_size->tooltip
+msgid "A size of an icon in the applet popup"
+msgstr "小程式彈出視窗中的圖示大小"
+
+#. settings-schema.json->applet_popup_icons_css->description
+msgid "Icon CSS"
+msgstr "圖示 CSS 樣式"
+
+#. settings-schema.json->applet_popup_icons_css->tooltip
+msgid "A CSS style applied to the icons in the applet popup"
+msgstr "套用至小程式彈出視窗圖示的 CSS 樣式"
+
+#. settings-schema.json->applet_popup_table_css->description
+msgid "Table CSS"
+msgstr "表格 CSS 樣式"
+
+#. settings-schema.json->applet_popup_table_css->tooltip
+msgid "A CSS style applied to a table in the applet popup"
+msgstr "套用至小程式彈出視窗表格的 CSS 樣式"
+
+#. settings-schema.json->applet_popup_close_leave->description
+msgid "Auto close"
+msgstr "自動關閉"
+
+#. settings-schema.json->applet_popup_close_leave->tooltip
+msgid "Close the applet popup when a mouse leaves the user interface"
+msgstr "滑鼠離開使用者介面時，自動關閉彈出視窗"
+
+#. settings-schema.json->match_panel_icons_size->description
+msgid "Match panel size"
+msgstr "比照面板大小"
+
+#. settings-schema.json->match_panel_icons_size->tooltip
+msgid "Match a size of an icon in the applet popup to a size of the panel"
+msgstr "使彈出視窗中的圖示大小與面板大小一致"
+
+#. settings-schema.json->show_icon_tooltips->description
+msgid "Show tooltips"
+msgstr "顯示工具提示"
+
+#. settings-schema.json->show_icon_tooltips->tooltip
+msgid "Show icon tooltips in the applet popup"
+msgstr "在小程式彈出視窗中顯示圖示的工具提示"
+
+#. settings-schema.json->show_grayscale_icons->description
+msgid "Show grayscale icons"
+msgstr "顯示灰階圖示"
+
+#. settings-schema.json->show_grayscale_icons->tooltip
+msgid "Show icons of hidden applets in grayscale"
+msgstr "將隱藏的小程式圖示以灰階顯示"
+
+#. settings-schema.json->grayscale_brightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->grayscale_brightness->description
+msgid "Grayscale brightness"
+msgstr "灰階亮度"
+
+#. settings-schema.json->grayscale_brightness->tooltip
+msgid "A brightness level of grayscale icons"
+msgstr "灰階圖示的亮度"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "圖形介面"
+
+#. settings-schema.json->gui_sort_type->description
+msgid "Sort"
+msgstr "排序"
+
+#. settings-schema.json->gui_sort_type->options
+msgid "Alphabetically"
+msgstr "依字母排序"
+
+#. settings-schema.json->gui_sort_type->options
+msgid "Panel position"
+msgstr "依面板位置排序"
+
+#. settings-schema.json->gui_sort_type->tooltip
+msgid "An order of items in the user interface"
+msgstr "使用者介面中的項目順序"
+
+#. settings-schema.json->gui_icon_type->description
+msgid "Panel icon"
+msgstr "面板圖示"
+
+#. settings-schema.json->gui_icon_type->options
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Filepath"
+msgstr "檔案路徑"
+
+#. settings-schema.json->gui_icon_type->options
+msgid "Symbolic"
+msgstr "符號"
+
+#. settings-schema.json->gui_icon_type->tooltip
+msgid "A type of an icon displayed on the panel"
+msgstr "面板上顯示的圖示類型"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "A path to an icon displayed on a panel"
+msgstr "面板上顯示圖示的檔案路徑"
+
+#. settings-schema.json->gui_icon_symbolic_name->description
+msgid "Symbolic name"
+msgstr "符號名稱"
+
+#. settings-schema.json->gui_icon_symbolic_name->tooltip
+msgid "A name of a symbolic icon displayed on a panel"
+msgstr "面板上顯示的符號圖示名稱"

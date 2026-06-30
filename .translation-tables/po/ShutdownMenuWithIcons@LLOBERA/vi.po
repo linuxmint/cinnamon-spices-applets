@@ -1,0 +1,196 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ShutdownMenuWithIcons@LLOBERA 2.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-08 15:58-0500\n"
+"PO-Revision-Date: 2025-10-12 15:36+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#: applet.js:42
+msgid "Shutdown Menu With Icons"
+msgstr "Trình đơn tắt máy có biểu tượng"
+
+#: applet.js:143
+msgid "Quit"
+msgstr "Thoát"
+
+#: applet.js:146
+msgid "Suspend"
+msgstr "Tạm dừng"
+
+#: applet.js:149
+msgid "Hibernate"
+msgstr "Ngủ đông"
+
+#: applet.js:152
+msgid "Hybrid sleep"
+msgstr "Ngủ lai"
+
+#: applet.js:155
+msgid "Restart"
+msgstr "Khởi động lại"
+
+#. settings-schema.json->switch_users_label->description
+#: applet.js:160
+msgid "Switch users"
+msgstr "Chuyển người dùng"
+
+#. settings-schema.json->log_out_label->description
+#: applet.js:163
+msgid "Log out"
+msgstr "Đăng xuất"
+
+#: applet.js:166
+msgid "Screen Lock"
+msgstr "Khóa màn hình"
+
+#: applet.js:185
+msgid "Settings"
+msgstr "Cài đặt"
+
+#: applet.js:190
+msgid "Help"
+msgstr "Trợ giúp"
+
+#: applet.js:195
+msgid "About"
+msgstr "Giới thiệu"
+
+#. metadata.json->description
+msgid ""
+"An applet to help you shutdown, restart and suspend your system with single "
+"click"
+msgstr "Applet giúp bạn tắt máy, khởi động lại và tạm dừng hệ thống chỉ với một cú nhấp"
+
+#. settings-schema.json->quit_label->description
+msgid "Quit: shut down and power-off the system"
+msgstr "Thoát: tắt và ngắt nguồn hệ thống"
+
+#. settings-schema.json->quit->description
+msgid "Add quit to the menu"
+msgstr "Thêm mục thoát vào trình đơn"
+
+#. settings-schema.json->quit_icon->description
+msgid "The quit icon "
+msgstr "Biểu tượng của mục thoát"
+
+#. settings-schema.json->quit_cmd->description
+msgid "The quit command "
+msgstr "Lệnh thoát"
+
+#. settings-schema.json->suspend_label->description
+msgid "Suspend: suspend the system"
+msgstr "Tạm dừng: đưa hệ thống vào trạng thái ngủ tạm"
+
+#. settings-schema.json->suspend->description
+msgid "Add suspend to the menu"
+msgstr "Thêm mục tạm dừng vào trình đơn"
+
+#. settings-schema.json->suspend_icon->description
+msgid "The suspend icon "
+msgstr "Biểu tượng của mục tạm dừng"
+
+#. settings-schema.json->suspend_cmd->description
+msgid "The suspend command "
+msgstr "Lệnh tạm dừng"
+
+#. settings-schema.json->hibernate_label->description
+msgid "Hibernate: hibernate the system"
+msgstr "Ngủ đông: đưa hệ thống vào trạng thái ngủ đông"
+
+#. settings-schema.json->hibernate->description
+msgid "Add hibernate to the menu"
+msgstr "Thêm mục ngủ đông vào trình đơn"
+
+#. settings-schema.json->hibernate_icon->description
+msgid "The hibernate icon "
+msgstr "Biểu tượng của mục ngủ đông"
+
+#. settings-schema.json->hibernate_cmd->description
+msgid "The hibernate command "
+msgstr "Lệnh ngủ đông"
+
+#. settings-schema.json->hybrid_sleep_label->description
+msgid "Hybrid sleep: hibernate and suspend the system"
+msgstr "Ngủ lai: kết hợp giữa ngủ đông và tạm dừng hệ thống"
+
+#. settings-schema.json->hybrid_sleep->description
+msgid "Add hybrid sleep to the menu"
+msgstr "Thêm mục ngủ lai vào trình đơn"
+
+#. settings-schema.json->hybrid_sleep_icon->description
+msgid "The hybrid sleep icon "
+msgstr "Biểu tượng của mục ngủ lai"
+
+#. settings-schema.json->hybrid_sleep_cmd->description
+msgid "The hybrid sleep command "
+msgstr "Lệnh ngủ lai"
+
+#. settings-schema.json->restart_label->description
+msgid "Restart: shut down and reboot the system"
+msgstr "Khởi động lại: tắt rồi khởi động lại hệ thống"
+
+#. settings-schema.json->restart->description
+msgid "Add restart to the menu"
+msgstr "Thêm mục khởi động lại vào trình đơn"
+
+#. settings-schema.json->restart_icon->description
+msgid "The restart icon "
+msgstr "Biểu tượng của mục khởi động lại"
+
+#. settings-schema.json->restart_cmd->description
+msgid "The restart command "
+msgstr "Lệnh khởi động lại"
+
+#. settings-schema.json->switch_users->description
+msgid "Add switch users to the menu"
+msgstr "Thêm mục chuyển người dùng vào trình đơn"
+
+#. settings-schema.json->switch_users_icon->description
+msgid "The switch users icon"
+msgstr "Biểu tượng của mục chuyển người dùng"
+
+#. settings-schema.json->switch_users_cmd->description
+msgid "The switch users command"
+msgstr "Lệnh chuyển người dùng"
+
+#. settings-schema.json->log_out->description
+msgid "Add log out to the menu"
+msgstr "Thêm mục đăng xuất vào trình đơn"
+
+#. settings-schema.json->log_out_icon->description
+msgid "The log out icon "
+msgstr "Biểu tượng của mục đăng xuất"
+
+#. settings-schema.json->log_out_cmd->description
+msgid "The log out command "
+msgstr "Lệnh đăng xuất"
+
+#. settings-schema.json->screen_lock_label->description
+msgid "Screen lock: lock the screen"
+msgstr "Khóa màn hình: khóa thiết bị của bạn"
+
+#. settings-schema.json->screen_lock->description
+msgid "Add screen lock to the menu"
+msgstr "Thêm mục khóa màn hình vào trình đơn"
+
+#. settings-schema.json->screen_lock_icon->description
+msgid "The screen lock icon "
+msgstr "Biểu tượng của mục khóa màn hình"
+
+#. settings-schema.json->screen_lock_cmd->description
+msgid "The screen lock command "
+msgstr "Lệnh khóa màn hình"

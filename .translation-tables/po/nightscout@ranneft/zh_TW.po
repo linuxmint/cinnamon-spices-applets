@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nightscout@ranneft 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-05-18 23:18+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->description
+msgid "Fetches API from your Nightscout site and showing BG"
+msgstr "從 Nightscout 網站取得 API 並顯示血糖值"
+
+#. metadata.json->name
+msgid "Nightscout"
+msgstr "Nightscout"
+
+#. settings-schema.json->head->description
+msgid "General Settings for the Nighscout Applet"
+msgstr "Nightscout 小程式的一般設定"
+
+#. settings-schema.json->refreshInterval->units
+#. settings-schema.json->showMissingInterval->units
+msgid "minutes"
+msgstr "分鐘"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh Interval for your Nightscout applet:"
+msgstr "Nightscout 小程式的更新頻率："
+
+#. settings-schema.json->refreshInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine."
+msgstr "請調整此數值以變更資料更新頻率 － 若您的電腦速度較慢，建議設定較長的間隔時間"
+
+#. settings-schema.json->head1->description
+msgid "Nightscout host"
+msgstr "Nightscout 主機"
+
+#. settings-schema.json->host->description
+msgid "Nighscout host (including http(s))"
+msgstr "Nightscout 主機位址（含 http(s)）"
+
+#. settings-schema.json->host->tooltip
+msgid "A host where your CGM information gonna be queried"
+msgstr "查詢連續血糖監測（CGM）資訊的主機位址"
+
+#. settings-schema.json->head2->description
+msgid "Various settings"
+msgstr "其他設定"
+
+#. settings-schema.json->showMissing->description
+msgid "Show missing readings"
+msgstr "顯示遺失的數值"
+
+#. settings-schema.json->showMissing->tooltip
+msgid "Add information about missing readings in the text"
+msgstr "在資訊中加入遺失數值的相關提示"
+
+#. settings-schema.json->showMissingInterval->description
+msgid "When start to show missing readings alert"
+msgstr "何時開始顯示遺失數值警示"
+
+#. settings-schema.json->showMissingInterval->tooltip
+msgid ""
+"Time which is taken to decide when to show alert of missing readings. Will "
+"apply only if above checkbox is enabled"
+msgstr "設定顯示遺失數值警示的時間門檻，僅在上方選項啟用時生效"
+
+#. settings-schema.json->showiob->description
+msgid "Show IoB"
+msgstr "顯示 IoB 數值"
+
+#. settings-schema.json->showiob->tooltip
+msgid "Enable/disable IoB (insulin on board) in the text"
+msgstr "在資訊中顯示或隱藏 IoB（體內作用中的胰島素量）"
+
+#. settings-schema.json->usemmol->description
+msgid "Use mmol/l"
+msgstr "使用 mmol/l 單位"
+
+#. settings-schema.json->usemmol->tooltip
+msgid "Use mmol/l instead of mg/dl"
+msgstr "使用 mmol/l 單位顯示，而非 mg/dl"
+

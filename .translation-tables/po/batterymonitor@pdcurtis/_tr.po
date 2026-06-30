@@ -1,0 +1,30 @@
+# BATTERY APPLET WITH MONITORING AND SHUTDOWN (BAMS)
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# TURBOKAN_TR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.2.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"PO-Revision-Date: 2026-03-01 10:51+0300\n"
+"Last-Translator: TURBOKAN_TR \n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.8\n"
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Light"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Dark"
+msgstr ""

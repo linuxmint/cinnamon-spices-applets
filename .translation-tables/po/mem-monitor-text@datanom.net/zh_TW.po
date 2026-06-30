@@ -1,0 +1,37 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 22:25+0800\n"
+"PO-Revision-Date: 2025-04-30 23:50+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:33
+msgid "Open System Monitor"
+msgstr "開啟系統監控工具"
+
+#: applet.js:72
+msgid "Click to open Gnome system monitor"
+msgstr "點選以開啟 Gnome 系統監控工具"
+
+#. mem-monitor-text@datanom.net->metadata.json->description
+msgid "A simple applet that displays the memory usage."
+msgstr "一個可以顯示記憶體使用量的簡單小程式。"
+
+#. mem-monitor-text@datanom.net->metadata.json->name
+msgid "Simple Memory Monitor"
+msgstr "Simple Memory Monitor"
+
+#. mem-monitor-text@datanom.net->settings-schema.json->mem-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "輸入要顯示於面板上的自訂文字。"
