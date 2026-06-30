@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-06-30 17:25+0200\n"
-"PO-Revision-Date: 2026-06-07 10:38-0400\n"
+"PO-Revision-Date: 2026-06-30 12:19-0400\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -358,20 +358,19 @@ msgstr "Compartido"
 
 #. 5.6/applet.js:2136 5.6/applet.js:2177
 msgid "ZRAM"
-msgstr ""
+msgstr "ZRAM"
 
 #. 5.6/applet.js:2184
-#, fuzzy
 msgid "Disk size"
-msgstr "Disco"
+msgstr "Tamaño del disco"
 
 #. 5.6/applet.js:2185
 msgid "Data"
-msgstr ""
+msgstr "Datos"
 
 #. 5.6/applet.js:2186
 msgid "Compressed"
-msgstr ""
+msgstr "Comprimido"
 
 #. 5.6/applet.js:2242
 msgid "CPUs"
@@ -1184,6 +1183,8 @@ msgstr "Activar información sobre herramientas de la Swap"
 #. 5.6->settings-schema.json->Swap_enabledZramTooltip->description
 msgid "Enable ZRAM Tooltip (only shown if /dev/zram0 exists)"
 msgstr ""
+"Activar la información sobre herramientas de ZRAM (solo se muestra si "
+"existe /dev/zram0)"
 
 #. 5.6->settings-schema.json->Mem_chartType->description
 msgid "Chart Type"
@@ -1214,17 +1215,19 @@ msgid "Origin at 12 o'clock"
 msgstr "Origen a las 12 horas"
 
 #. 5.6->settings-schema.json->Mem_showAmountsInTooltip->description
-#, fuzzy
 msgid "Show Memory/Swap byte amounts (Total, Used, Available) in the tooltip"
 msgstr ""
-"Mostrar las cantidades (en bytes) de memoria total, utilizada y disponible "
-"en la información sobre herramientas"
+"Mostrar las cantidades de memoria y espacio de intercambio en bytes (total, "
+"utilizada, disponible) en la información sobre herramientas"
 
 #. 5.6->settings-schema.json->Mem_showBytesInTooltip->description
 msgid ""
 "Tooltip Memory/Swap amounts: ON = SI units (kB, MB, GB); OFF = IEC binary "
 "units (KiB, MiB, GiB)"
 msgstr ""
+"Información sobre las cantidades de memoria y memoria virtual: ACTIVADO = "
+"unidades del Sistema Internacional (kB, MB, GB); DESACTIVADO = unidades "
+"binarias de la IEC (KiB, MiB, GiB)"
 
 #. 5.6->settings-schema.json->Mem_value_display->description
 msgid "Display memory usage percentage"
@@ -1300,9 +1303,8 @@ msgid "25%, left side"
 msgstr "25%, lado izquierdo"
 
 #. 5.6->settings-schema.json->Mem_swapWidth->options
-#, fuzzy
 msgid "50%, left side"
-msgstr "25%, lado izquierdo"
+msgstr "50%, lado izquierdo"
 
 #. 5.6->settings-schema.json->Mem_swapWidth->tooltip
 msgid ""
