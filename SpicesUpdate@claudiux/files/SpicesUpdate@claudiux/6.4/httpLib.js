@@ -34,7 +34,7 @@ function logError(error) {
 /// Code from the Weather applet (weather@mockturtl). Many thanks to @Gr3q!
 const { Message, Session, SessionAsync } = imports.gi.Soup;
 const { PRIORITY_DEFAULT } = imports.gi.GLib;
-//~ const soupLib_ByteArray = imports.byteArray;
+const soupLib_ByteArray = imports.byteArray;
 const {to_string} = _require("to-string");
 function AddParamsToURI(url, params) {
     let result = url;
@@ -82,8 +82,8 @@ var Soup3 = class Soup3 {
                     resolve({
                         reason_phrase: (_a = message.get_reason_phrase()) !== null && _a !== void 0 ? _a : "",
                         status_code: message.get_status(),
-                        //~ response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
-                        response_body : res != null ? to_string(res) : null,
+                        response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
+                        //~ response_body : res != null ? to_string(res) : null,
                         response_headers: headers
                     });
                 });

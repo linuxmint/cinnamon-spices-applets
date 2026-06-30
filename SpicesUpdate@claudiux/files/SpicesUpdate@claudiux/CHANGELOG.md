@@ -1,3 +1,7 @@
+### v7.12.0~20260629
+  * From now on, when you click the “Themes” icon, the settings window will open correctly.
+  * Fixes an issue in httpLib.js.
+
 ### v7.11.2~20260603
   * Ready for Linux Mint 23.
 
