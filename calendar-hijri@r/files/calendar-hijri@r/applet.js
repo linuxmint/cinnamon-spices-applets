@@ -291,9 +291,6 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
 
         this._day.set_text(dayFormatted);
         this._date.set_text(dateFormattedShort);
-        this.set_applet_tooltip(dateFormattedTooltip);
-
-        // Hijri date
         if (this.show_hijri_date) {
             let selected = this._calendar.getSelectedDate();
             let lang = this._getHijriLang();
@@ -304,9 +301,11 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
                 const arabicDigits = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
                 hijriText = hijriText.replace(/\d/g, (d) => arabicDigits[parseInt(d)]);
             }
+            this.set_applet_tooltip(dateFormattedTooltip + " — " + hijriText);
             this._hijri_date.set_text(hijriText);
             this._hijri_date.show();
         } else {
+            this.set_applet_tooltip(dateFormattedTooltip);
             this._hijri_date.hide();
         }
 
