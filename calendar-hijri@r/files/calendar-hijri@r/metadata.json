@@ -1,0 +1,7 @@
+{
+ "uuid": "calendar-hijri@r",
+ "name": "Calendar with Hijri",
+ "description": "Calendar applet with optional Islamic (Hijri) date display",
+ "icon": "gnome-calendar",
+ "max-instances": -1
+}
