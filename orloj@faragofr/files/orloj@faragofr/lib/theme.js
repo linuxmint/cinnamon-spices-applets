@@ -19,3 +19,22 @@ var parseColor = function(str, fallback) {
     if (parts.length < 3) return fallback;
     return [parts[0]/255, parts[1]/255, parts[2]/255, parts.length >= 4 ? parts[3] : 1.0];
 };
+
+var lerp = function(a, b, t) {
+    return [a[0] + (b[0] - a[0]) * t,
+            a[1] + (b[1] - a[1]) * t,
+            a[2] + (b[2] - a[2]) * t,
+            a[3] + (b[3] - a[3]) * t];
+};
+
+// Recompute the palette from the two user-facing base colors. The
+// intermediate tones are background→foreground blends, so any custom pair
+// stays internally consistent. The blend ratios are tuned to reproduce the
+// bundled default palette above when the default colors are supplied.
+var setBaseColors = function(bg, fg) {
+    BACKGROUND = bg;
+    FOREGROUND = fg;
+    SURFACE = lerp(bg, fg, 0.06); // panel/day arc: a subtle lift of background
+    FAINT   = lerp(bg, fg, 0.20); // hairlines and minor ticks
+    DIM     = lerp(bg, fg, 0.70); // dimmed foreground for minor labels
+};
