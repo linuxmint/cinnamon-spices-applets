@@ -292,9 +292,9 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
         this._day.set_text(dayFormatted);
         this._date.set_text(dateFormattedShort);
         if (this.show_hijri_date) {
-            let selected = this._calendar.getSelectedDate();
+            let today = new Date();
             let lang = this._getHijriLang();
-            let hijri = Hijri.fromGregorian(selected.getFullYear(), selected.getMonth(), selected.getDate());
+            let hijri = Hijri.fromGregorian(today.getFullYear(), today.getMonth(), today.getDate());
             let monthName = Hijri.getMonthName(hijri.month, lang);
             let hijriText = `${hijri.day} ${monthName} ${hijri.year} AH`;
             if (lang === 'ar') {
