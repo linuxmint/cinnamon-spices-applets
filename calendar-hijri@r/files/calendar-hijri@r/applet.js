@@ -253,13 +253,7 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
     }
 
     _getHijriLang() {
-        let langs = GLib.get_language_names();
-        for (let l of langs) {
-            if (l.startsWith('ru')) return 'ru';
-            if (l.startsWith('ar')) return 'ar';
-            if (l.startsWith('en')) return 'en';
-        }
-        return 'en';
+        return Hijri.getDefaultLang();
     }
 
     _updateClockAndDate() {

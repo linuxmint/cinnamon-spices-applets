@@ -11,6 +11,9 @@ const Gettext_gtk30 = imports.gettext.domain('gtk30');
 const Cinnamon = imports.gi.Cinnamon;
 const Settings = imports.ui.settings;
 const Mainloop = imports.mainloop;
+const Tooltips = imports.ui.tooltips;
+const _HijriMod = require('./hijri');
+const Hijri = _HijriMod.Hijri;
 
 const MSECS_IN_DAY = 24 * 60 * 60 * 1000;
 const WEEKDATE_HEADER_WIDTH_DIGITS = 3;
@@ -157,6 +160,7 @@ class Calendar {
         this._set_date_idle_id = 0;
 
         this.settings.bindWithObject(this, "show-week-numbers", "show_week_numbers", this._onSettingsChange);
+        this.settings.bindWithObject(this, "show-hijri-date", "show_hijri_date", this._onSettingsChange);
         this.desktop_settings = new Gio.Settings({ schema_id: DESKTOP_SCHEMA });
         this.desktop_settings.connect("changed::" + FIRST_WEEKDAY_KEY, Lang.bind(this, this._onSettingsChange));
 
@@ -437,6 +441,12 @@ class Calendar {
                     label: iter.getDate().toString(),
                 }
             );
+
+            if (this.show_hijri_date) {
+                let hijri = Hijri.fromGregorian(iter.getFullYear(), iter.getMonth(), iter.getDate());
+                let txt = Hijri.getMonthName(hijri.month, Hijri.getDefaultLang()) + " " + hijri.day + ", " + hijri.year + " AH";
+                new Tooltips.Tooltip(button, txt);
+            }
 
             group.add_actor(button);
 

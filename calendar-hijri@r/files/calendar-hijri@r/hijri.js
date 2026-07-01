@@ -1,9 +1,27 @@
+const GLib = imports.gi.GLib;
+
 // Tabular Islamic (Kuwaiti) calendar algorithm
 // Gregorian to Hijri date conversion
 
 var Hijri = class Hijri {
     static fromGregorian(year, month, day) {
         return this._jdToHijri(this._gregToJd(year, month + 1, day));
+    }
+
+    static getDefaultLang() {
+        let langs = GLib.get_language_names();
+        for (let l of langs) {
+            if (l.startsWith('ar')) return 'ar';
+            if (l.startsWith('ru')) return 'ru';
+            if (l.startsWith('de')) return 'de';
+            if (l.startsWith('fr')) return 'fr';
+            if (l.startsWith('es')) return 'es';
+            if (l.startsWith('tr')) return 'tr';
+            if (l.startsWith('id')) return 'id';
+            if (l.startsWith('fa')) return 'fa';
+            if (l.startsWith('ur')) return 'ur';
+        }
+        return 'en';
     }
 
     static _gregToJd(gy, gm, gd) {
