@@ -394,6 +394,16 @@ class XAppStatusIcon {
     on_properties_changed(proxy, changed_props, invalidated_props) {
         let prop_names = changed_props.deep_unpack();
 
+        /* matchName() falls back through Name -> TooltipText -> IconName, so
+         * its result can change as these arrive asynchronously (many
+         * Electron/Qt apps register with a blank Name, then fill it in a
+         * moment later). Re-run registerApp() whenever any of them change so
+         * a freshly-resolved identity still gets the auto-hide-new-icons
+         * treatment instead of silently appearing under its new name. */
+        if ('Name' in prop_names || 'IconName' in prop_names || 'TooltipText' in prop_names) {
+            this.applet.registerApp(this);
+        }
+
         if ('IconName' in prop_names) {
             this.setIconName(proxy.icon_name);
         }
@@ -408,6 +418,8 @@ class XAppStatusIcon {
         }
         if ('Name' in prop_names) {
             this.applet.sortIcons();
+        }
+        if ('Name' in prop_names || 'IconName' in prop_names || 'TooltipText' in prop_names) {
             this.applet.updateCollapsedState();
         }
         if ('PrimaryMenuIsOpen' in prop_names) {
