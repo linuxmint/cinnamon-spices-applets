@@ -9,14 +9,17 @@ const GLib = imports.gi.GLib;
 const AppletManager = imports.ui.appletManager;
 const Clutter = imports.gi.Clutter;
 const Gio = imports.gi.Gio;
+const Gtk = imports.gi.Gtk;
 const Gettext = imports.gettext;
 
 let APPLET_PATH = null;
 let AlarmService = null;
 let Time = null;
 let TimeAgo = null;
+let AlarmText = null;
 let EntryKeys = null;
 let Hotkeys = null;
+let Icon = null;
 
 function _spawnWithExitCallback(argv, onExit) {
   const pid = Util.spawn(argv);
@@ -107,11 +110,34 @@ QuickAlarmApplet.prototype = {
   _updatePanelIconSize() {
     try {
       if (!this._applet_icon) return;
-      const base = this.getPanelIconSize(St.IconType.SYMBOLIC);
+      const type = this._iconIsSymbolic ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR;
+      const base = this.getPanelIconSize(type);
       this._applet_icon.set_icon_size(Math.round(base * 1.3));
     } catch (e) {
       // ignore
     }
+  },
+
+  _updateIcon() {
+    const resolved = Icon.resolveIcon(this._useCustomIcon, this._customIcon, {
+      isAbsolutePath: (p) => GLib.path_is_absolute(p),
+      themeLookupIcon: (n) => Gtk.IconTheme.get_default().lookup_icon(n, 16, 0),
+    });
+    try {
+      const methods = {
+        symbolic_name: "set_applet_icon_symbolic_name",
+        name: "set_applet_icon_name",
+        symbolic_path: "set_applet_icon_symbolic_path",
+        path: "set_applet_icon_path",
+      };
+      this[methods[resolved.method]](resolved.value);
+      this._iconIsSymbolic = resolved.method.indexOf("symbolic") !== -1;
+    } catch (e) {
+      global.logWarning("quick-alarm: could not load icon: " + e);
+      this.set_applet_icon_symbolic_name("alarm-symbolic");
+      this._iconIsSymbolic = true;
+    }
+    this._updatePanelIconSize();
   },
 
   _applyPanelIconStyle() {
@@ -209,26 +235,33 @@ QuickAlarmApplet.prototype = {
     this._soundMode = "chime";
     this._ringSeconds = 10;
     this._fullscreenNotification = true;
+    this._showCountdown = false;
     this._openShortcut = "";
     this._openHotkeyName = `${metadata.uuid}-open-${instanceId}`;
     this._activeSoundTimers = new Set();
     this._activeAudioPids = new Set();
     this._blinkTimerId = 0;
     this._ringEndTimerId = 0;
+    this._countdownTimerId = 0;
     this._isRinging = false;
     this._ringToken = 0;
     this._panelState = "idle";
     this._fullscreenOverlay = null;
+    this._useCustomIcon = false;
+    this._customIcon = "alarm-symbolic";
+    this._iconIsSymbolic = true;
 
     this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
     this.settings.bind("soundMode", "_soundMode");
     this.settings.bind("ringSeconds", "_ringSeconds");
     this.settings.bind("fullscreenNotification", "_fullscreenNotification");
+    this.settings.bind("showCountdown", "_showCountdown", () => this._render());
     this.settings.bind("openShortcut", "_openShortcut", () => this._registerOpenHotkey());
+    this.settings.bind("useCustomIcon", "_useCustomIcon", () => this._updateIcon());
+    this.settings.bind("customIcon", "_customIcon", () => this._updateIcon());
 
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
-    this.set_applet_icon_symbolic_name("alarm-symbolic");
-    this._updatePanelIconSize();
+    this._updateIcon();
     this.set_applet_label("");
     this.set_applet_tooltip(this._("Quick Alarm"));
     this._applyPanelIconStyle();
@@ -242,8 +275,8 @@ QuickAlarmApplet.prototype = {
     this.menuManager.addMenu(this.menu);
     this.menu.actor.add_style_class_name("qa-menu");
 
-    this._interfaceSettings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.interface" });
-    this._interfaceSettings.connect("changed::gtk-theme", () => this._applyThemeClass());
+    this._cinnamonThemeSettings = new Gio.Settings({ schema_id: "org.cinnamon.theme" });
+    this._cinnamonThemeSettings.connect("changed::name", () => this._applyThemeClass());
     this._applyThemeClass();
 
     const gearIcon = new St.Icon({
@@ -368,7 +401,7 @@ QuickAlarmApplet.prototype = {
   },
 
   _applyThemeClass() {
-    const theme = this._interfaceSettings.get_string("gtk-theme") || "";
+    const theme = this._cinnamonThemeSettings.get_string("name") || "";
     const isDark = /dark/i.test(theme);
     if (!this.menu || !this.menu.actor) return;
     this.menu.actor.remove_style_class_name("qa-theme-light");
@@ -401,6 +434,8 @@ QuickAlarmApplet.prototype = {
     }
     if (this._ringEndTimerId) GLib.source_remove(this._ringEndTimerId);
     this._ringEndTimerId = 0;
+    if (this._countdownTimerId) GLib.source_remove(this._countdownTimerId);
+    this._countdownTimerId = 0;
     this._stopBlinking();
     this.settings.finalize();
   },
@@ -414,7 +449,7 @@ QuickAlarmApplet.prototype = {
         return;
       }
 
-      const label = parsed.label || `Alarm ${Time.formatTime(parsed.due, parsed.showSeconds)}`;
+      const label = AlarmText.getStoredLabel(parsed.label);
       this._service.add(parsed.due, label, parsed.showSeconds);
       this._setEntryText("");
       this._errorLabel.text = "";
@@ -438,7 +473,7 @@ QuickAlarmApplet.prototype = {
       this._showFullscreenOverlay(alarm);
     } else {
       const title = this._("Alarm");
-      const body = alarm.label || `Alarm ${Time.formatTime(alarm.due, alarm.showSeconds)}`;
+      const body = AlarmText.getAlarmNotificationBody(alarm);
 
       const notification = new MessageTray.Notification(this._notificationSource, title, body);
       notification.setTransient(false);
@@ -656,6 +691,43 @@ QuickAlarmApplet.prototype = {
     }
   },
 
+  _stopCountdown() {
+    if (this._countdownTimerId) {
+      GLib.source_remove(this._countdownTimerId);
+      this._countdownTimerId = 0;
+    }
+    this.set_applet_label("");
+  },
+
+  _updateCountdownLabel(alarm) {
+    try {
+      const text = Time.formatCountdown(alarm.due, Date.now());
+      this.set_applet_label(text || "");
+    } catch (e) {
+      // ignore
+    }
+  },
+
+  _startCountdown(alarm) {
+    this._stopCountdown();
+    this._updateCountdownLabel(alarm);
+    this._countdownTimerId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+      if (!this._showCountdown) {
+        this._countdownTimerId = 0;
+        this.set_applet_label("");
+        return GLib.SOURCE_REMOVE;
+      }
+      const alarms = this._service ? this._service.list() : [];
+      if (alarms.length === 0) {
+        this._countdownTimerId = 0;
+        this.set_applet_label("");
+        return GLib.SOURCE_REMOVE;
+      }
+      this._updateCountdownLabel(alarms[0]);
+      return GLib.SOURCE_CONTINUE;
+    });
+  },
+
   _render() {
     this._listSection.removeAll();
     const alarms = this._service.list();
@@ -663,14 +735,18 @@ QuickAlarmApplet.prototype = {
     if (alarms.length === 0) {
       const emptyItem = new PopupMenu.PopupMenuItem(this._("No alarms queued"), { reactive: false });
       this._listSection.addMenuItem(emptyItem);
-      this.set_applet_label("");
+      this._stopCountdown();
       this.set_applet_tooltip(this._("Quick Alarm"));
       this._refreshPanelState();
       return;
     }
 
     const next = alarms[0];
-    this.set_applet_label("");
+    if (this._showCountdown) {
+      this._startCountdown(next);
+    } else {
+      this._stopCountdown();
+    }
     this.set_applet_tooltip(`${Time.formatTime(next.due, next.showSeconds)} ${next.label || ""}`.trim());
     this._refreshPanelState();
 
@@ -716,7 +792,9 @@ function main(metadata, orientation, panelHeight, instanceId) {
   AlarmService = imports.services.alarmService.AlarmService;
   Time = imports.lib.time;
   TimeAgo = imports.lib.timeAgo;
+  AlarmText = imports.lib.alarmText;
   EntryKeys = imports.lib.entryKeys;
   Hotkeys = imports.lib.hotkeys;
+  Icon = imports.lib.icon;
   return new QuickAlarmApplet(metadata, orientation, panelHeight, instanceId);
 }

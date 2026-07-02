@@ -1,0 +1,28 @@
+{
+    "latitude": {
+        "type": "entry",
+        "default": "50.0875",
+        "description": "Latitude (decimal degrees, north positive)",
+        "tooltip": "Your geographic latitude in decimal degrees, e.g. 50.0875 for Prague"
+    },
+    "longitude": {
+        "type": "entry",
+        "default": "14.4214",
+        "description": "Longitude (decimal degrees, east positive)",
+        "tooltip": "Your geographic longitude in decimal degrees, e.g. 14.4214 for Prague"
+    },
+    "refresh-seconds": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 1,
+        "max": 600,
+        "step": 1,
+        "units": "seconds",
+        "description": "Refresh interval"
+    },
+    "accent-color": {
+        "type": "colorchooser",
+        "default": "rgb(245,158,11)",
+        "description": "Accent color"
+    }
+}

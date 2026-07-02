@@ -9,47 +9,47 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-05 18:11-0400\n"
-"PO-Revision-Date: 2023-12-27 16:48+0100\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-05-04 18:28+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: js/compass.js:14
 msgid "North"
-msgstr ""
+msgstr "Nord"
 
 #: js/compass.js:15
 msgid "North East"
-msgstr ""
+msgstr "Nordøst"
 
 #: js/compass.js:16
 msgid "East"
-msgstr ""
+msgstr "Øst"
 
 #: js/compass.js:17
 msgid "South East"
-msgstr ""
+msgstr "Sydøst"
 
 #: js/compass.js:18
 msgid "South"
-msgstr ""
+msgstr "Syd"
 
 #: js/compass.js:19
 msgid "South West"
-msgstr ""
+msgstr "Sydvest"
 
 #: js/compass.js:20
 msgid "West"
-msgstr ""
+msgstr "Vest"
 
 #: js/compass.js:21
 msgid "North West"
-msgstr ""
+msgstr "Nordvest"
 
 #: js/moon.js:32 js/moon.js:40
 msgid "New Moon"
@@ -85,57 +85,51 @@ msgstr "Halvmåne → nymåne"
 
 #: js/ui/currentPhaseUi.js:32
 msgid "illumination"
-msgstr ""
+msgstr "belysning"
 
 #: js/ui/riseSetUi.js:55
 msgid "The moon is always down and will not rise today"
-msgstr ""
+msgstr "Månen er altid nede og kommer ikke op i dag"
 
 #: js/ui/riseSetUi.js:65
 msgid "The moon is always up and will not set today"
-msgstr ""
+msgstr "Månen er altid oppe og går ikke ned i dag"
 
 #: js/ui/riseSetUi.js:76
-#, fuzzy
 msgid "Moonrise"
-msgstr "Månefase"
+msgstr "Måneopgang"
 
 #: js/ui/riseSetUi.js:83
 msgid "Lunar Noon"
-msgstr ""
+msgstr "Månemiddag"
 
 #: js/ui/riseSetUi.js:90
-#, fuzzy
 msgid "Moonset"
-msgstr "Månefase"
+msgstr "Månenedgang"
 
 #: js/ui/elements/noRiseSetElement.js:54
-#, fuzzy
 msgid "Next Moonrise"
-msgstr "Nymåne"
+msgstr "Næste måneopgang"
 
 #: js/ui/elements/noRiseSetElement.js:66
-#, fuzzy
 msgid "Next Moonset"
-msgstr "Nymåne"
+msgstr "Næste månenedgang"
 
 #. metadata.json->name
 msgid "Moon Phase"
 msgstr "Månefase"
 
 #. metadata.json->description
-#, fuzzy
 msgid "A Cinnamon applet that displays up-to-date moon related information."
-msgstr "Viser den aktuelle månefase."
+msgstr "Viser opdaterede oplysninger relateret til månen."
 
 #. settings-schema.json->page-settings->title
 msgid "Settings"
 msgstr "Indstillinger"
 
 #. settings-schema.json->section-geolocation->title
-#, fuzzy
 msgid "Geolocation Settings"
-msgstr "Generelle indstillinger"
+msgstr "Indstillinger for geolokation"
 
 #. settings-schema.json->section-general->title
 msgid "General Settings"
@@ -147,34 +141,31 @@ msgstr "Opdateringsindstillinger"
 
 #. settings-schema.json->enableGeolocation->description
 msgid "Enable geolocation features"
-msgstr ""
+msgstr "Aktivér geolokationsfunktioner"
 
 #. settings-schema.json->latitude->description
 msgid "Latitude"
-msgstr ""
+msgstr "Breddegrad"
 
 #. settings-schema.json->longitude->description
 msgid "Longitude"
-msgstr ""
+msgstr "Længdegrad"
 
 #. settings-schema.json->enablePopup->description
 msgid "Enable popup menu"
-msgstr ""
+msgstr "Aktivér pop op-menu"
 
 #. settings-schema.json->showCurrentPhaseInfo->description
-#, fuzzy
 msgid "Display the current phase information"
-msgstr "Vis månefasen som en streng"
+msgstr "Vis de aktuelle faseoplysninger"
 
 #. settings-schema.json->showRiseSet->description
-#, fuzzy
 msgid "Display the moon rise, transit, and set times"
-msgstr "Vis månefasen som en streng"
+msgstr "Vis tidspunkter for månens opgang, passage og nedgang"
 
 #. settings-schema.json->showPhaseLabel->description
-#, fuzzy
 msgid "Display the applet label"
-msgstr "Vis navnet på månefasen i etiketten"
+msgstr "Vis panelprogrametiketten"
 
 #. settings-schema.json->showNameLabel->description
 msgid "Display the name of the moon phase in the label"

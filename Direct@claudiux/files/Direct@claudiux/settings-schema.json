@@ -605,6 +605,12 @@
     ],
     "columns": [
       {
+        "id": "menu",
+        "title": "Menu",
+        "type": "boolean",
+        "default": true
+      },
+      {
         "id": "uri",
         "title": "URI",
         "type": "string",

@@ -1,3 +1,26 @@
+### v3.13.0~20260624
+  * For each radio station, users can set the number of seconds during which the sound is muted to skip ads when they start listening to that station.
+  * Fixes [#8799](https://github.com/linuxmint/cinnamon-spices-applets/issues/8799).
+
+### v3.12.0~20260616
+  * Added option: Waiting time before a new radio turns on.
+  * Fixes [#8799](https://github.com/linuxmint/cinnamon-spices-applets/issues/8799).
+
+### v3.11.4~20260609
+  * Fixes quoting error in title.
+  * Fixes [#8761](https://github.com/linuxmint/cinnamon-spices-applets/issues/8761).
+
+### v3.11.3~20260523
+  * Ready for Linux Mint 23.
+  * Fixes a bug in menu size.
+  * Fixes [#8687](https://github.com/linuxmint/cinnamon-spices-applets/issues/8687).
+
+### v3.11.2~20260508
+  * Installing dependencies: Use pkgcli when available
+
+### v3.11.1~20260414
+  * Fixes certain dependency issues.
+
 ### v3.11.0~20260221
   * Smooth reading of certain files.
 

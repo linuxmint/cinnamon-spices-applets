@@ -1,0 +1,290 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mint-screenshot@khumnath package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mint-screenshot@khumnath 1.2.0\n"
+"Report-Msgid-Bugs-To: khumnath@gmail.com\n"
+"POT-Creation-Date: 2026-04-23 19:12+0545\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: app.py:49
+msgid "Reset Everything?"
+msgstr ""
+
+#: app.py:51
+msgid "This will clear all annotations and return to the launcher."
+msgstr ""
+
+#: app.py:191
+msgid "Mint Screenshot — Wayland Error"
+msgstr ""
+
+#: canvas.py:461
+msgid "Edit Text:"
+msgstr ""
+
+#: canvas.py:461
+msgid "Enter text to insert:"
+msgstr ""
+
+#: capture.py:53
+msgid "D-Bus is required for Wayland support."
+msgstr ""
+
+#: capture.py:171
+msgid ""
+"Failed to load captured screenshot:\n"
+"{}"
+msgstr ""
+
+#: editor.py:119
+msgid "Custom Timer"
+msgstr ""
+
+#: editor.py:133
+msgid "Enter delay in seconds:"
+msgstr ""
+
+#: editor.py:338 editor.py:795
+msgid "Saving..."
+msgstr ""
+
+#: editor.py:455
+msgid "Pointer"
+msgstr ""
+
+#: editor.py:456
+msgid "Rectangle"
+msgstr ""
+
+#: editor.py:457
+msgid "Ellipse"
+msgstr ""
+
+#: editor.py:458
+msgid "Arrow"
+msgstr ""
+
+#: editor.py:459
+msgid "Draw"
+msgstr ""
+
+#: editor.py:460
+msgid "Highlight"
+msgstr ""
+
+#: editor.py:461
+msgid "Text Tool"
+msgstr ""
+
+#: editor.py:494
+msgid "Blue"
+msgstr ""
+
+#: editor.py:495
+msgid "Red"
+msgstr ""
+
+#: editor.py:496
+msgid "Green"
+msgstr ""
+
+#: editor.py:497
+msgid "Yellow"
+msgstr ""
+
+#: editor.py:498
+msgid "White"
+msgstr ""
+
+#: editor.py:499
+msgid "Black"
+msgstr ""
+
+#: editor.py:529
+msgid "Size"
+msgstr ""
+
+#: editor.py:542
+msgid "Reset All"
+msgstr ""
+
+#: editor.py:543
+msgid "Undo"
+msgstr ""
+
+#: editor.py:544
+msgid "Copy"
+msgstr ""
+
+#: editor.py:545
+msgid "Save"
+msgstr ""
+
+#: editor.py:546
+msgid "Settings"
+msgstr ""
+
+#: editor.py:547 launcher.py:144
+msgid "Close"
+msgstr ""
+
+#: editor.py:573
+msgid "Move Toolbar Top/Bottom"
+msgstr ""
+
+#: editor.py:596
+msgid "Save Format"
+msgstr ""
+
+#: editor.py:609
+msgid "Image Quality"
+msgstr ""
+
+#: editor.py:614
+msgid "Space Saver (Small)"
+msgstr ""
+
+#: editor.py:616
+msgid "Medium"
+msgstr ""
+
+#: editor.py:618
+msgid "Original"
+msgstr ""
+
+#: editor.py:629
+msgid "Save Folder: {}..."
+msgstr ""
+
+#: editor.py:634
+msgid "Show Toolbar Labels"
+msgstr ""
+
+#: editor.py:642
+msgid "About Mint Screenshot"
+msgstr ""
+
+#: editor.py:663
+msgid "Select Default Save Folder"
+msgstr ""
+
+#: editor.py:667
+msgid "Select"
+msgstr ""
+
+#: editor.py:692 launcher.py:79 main.py:159
+msgid "Mint Screenshot"
+msgstr ""
+
+#: editor.py:694
+msgid ""
+"Screenshot & Annotation Tool\n"
+"Capture, annotate, and share with ease."
+msgstr ""
+
+#: editor.py:696
+msgid "Project on GitHub"
+msgstr ""
+
+#: editor.py:718
+msgid "Open External Website?"
+msgstr ""
+
+#: editor.py:721
+msgid "This will exit the current screenshot process. Do you want to continue?"
+msgstr ""
+
+#: editor.py:765
+msgid "Save Screenshot"
+msgstr ""
+
+#: editor.py:795
+msgid "Copying..."
+msgstr ""
+
+#: editor.py:855
+msgid "Copied"
+msgstr ""
+
+#: editor.py:864
+msgid "Screenshot Saved"
+msgstr ""
+
+#: editor.py:865
+msgid "Saved to {}"
+msgstr ""
+
+#: launcher.py:83
+msgid "Wayland Mode — Capture via Desktop Portal"
+msgstr ""
+
+#: launcher.py:83
+msgid "X11 Mode — Instant Pixel Capture"
+msgstr ""
+
+#: launcher.py:92
+msgid "Hint: Pick 'Screen' in the portal to capture overlapping windows."
+msgstr ""
+
+#: launcher.py:105
+msgid "Select Monitor:"
+msgstr ""
+
+#: launcher.py:107
+msgid "All Monitors"
+msgstr ""
+
+#: launcher.py:109
+msgid "Monitor {}"
+msgstr ""
+
+#: launcher.py:115
+msgid "📸  Capture Fullscreen"
+msgstr ""
+
+#: launcher.py:120
+msgid "✂️  Select Area"
+msgstr ""
+
+#: launcher.py:127
+msgid "⏱  Timed Capture"
+msgstr ""
+
+#: launcher.py:134
+msgid "sec"
+msgstr ""
+
+#: main.py:117
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your system's package manager.\n"
+"(Debian/Ubuntu package names shown as reference)"
+msgstr ""
+
+#: main.py:120
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your package manager:\n"
+"  {} {}"
+msgstr ""
+
+#: main.py:126
+msgid "Mint Screenshot \\u2014 Missing Dependencies"
+msgstr ""

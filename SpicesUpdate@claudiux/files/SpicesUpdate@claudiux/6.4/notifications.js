@@ -6,8 +6,16 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Tooltips = imports.ui.tooltips;
-//~ const Tweener = imports.ui.tweener;
 const Clutter = imports.gi.Clutter;
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
 
 const {
     UUID,
@@ -33,7 +41,7 @@ const {
     capitalize,
     log,
     logError
-} = require("./constants");
+} = _require("./constants");
 
 const ICONTHEME = Gtk.IconTheme.get_default();
 
@@ -41,7 +49,7 @@ const ICONTHEME = Gtk.IconTheme.get_default();
  * Class SU_Notification
  */
 
-class SU_Notification extends MessageTray.Notification {
+var SU_Notification = class SU_Notification extends MessageTray.Notification {
 
     constructor (source, title, body, params) {
         super(source, title, body, params);
@@ -111,7 +119,7 @@ class SU_Notification extends MessageTray.Notification {
                                  //~ { opacity: 0,
                                    //~ time: ANIMATION_TIME,
                                    //~ transition: 'easeOutQuad' });
-                this._bannerLabel.ease({ 
+                this._bannerLabel.ease({
                     opacity: 0,
                     duration: 1000,
                     mode: Clutter.AnimationMode.EASE_OUT_QUAD
@@ -140,6 +148,7 @@ class SU_Notification extends MessageTray.Notification {
     }
 }
 
+if (!Extension.getCurrentExtension)
 module.exports = {
     SU_Notification
 }

@@ -1,3 +1,17 @@
+### v5.11.4~20260508
+  * Installing dependencies: Use pkgcli when available.
+
+### v5.11.3~20260426
+  * Adds ability to select the size of the tooltip font.
+  * Fixes [#8599](https://github.com/linuxmint/cinnamon-spices-applets/issues/8599)
+
+### v5.11.2~20260413
+  * Perform asynchronous data reads.
+
+### v5.11.1~20260413
+  * Fixes errors in json formatted data.
+  * Fixes [#8510](https://github.com/linuxmint/cinnamon-spices-applets/issues/8510)
+
 ### v5.11.0~20260322
   * In the Temperature tab of this applet settings:
     * New option: Display the disk temperatures before those of the other sensors.

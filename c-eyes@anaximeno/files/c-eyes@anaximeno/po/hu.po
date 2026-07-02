@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-03-01 21:29-0100\n"
-"PO-Revision-Date: 2026-02-24 09:35+0100\n"
+"PO-Revision-Date: 2026-04-06 11:42+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 4.2/applet.js:56 5.4/applet.js:56
 msgid ""
@@ -429,23 +429,23 @@ msgstr "Szem mód"
 
 #. 6.2->settings-schema.json->pupil-shape->description
 msgid "Pupil Shape"
-msgstr ""
+msgstr "Pupilla alak"
 
 #. 6.2->settings-schema.json->pupil-shape->options
 msgid "Round"
-msgstr ""
+msgstr "Kör"
 
 #. 6.2->settings-schema.json->pupil-shape->options
 msgid "Vertical"
-msgstr ""
+msgstr "Függőleges"
 
 #. 6.2->settings-schema.json->pupil-shape->options
 msgid "Horizontal"
-msgstr ""
+msgstr "Vízszintes"
 
 #. 6.2->settings-schema.json->pupil-shape->options
 msgid "Star"
-msgstr ""
+msgstr "Csillag"
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
@@ -472,9 +472,8 @@ msgid "Manual"
 msgstr "Kézi"
 
 #. 6.2->settings-schema.json->margin->description
-#, fuzzy
 msgid "Width"
-msgstr "Vonalvastagság"
+msgstr "Szélesség"
 
 #. 6.2->settings-schema.json->margin->tooltip
 msgid ""
@@ -482,6 +481,9 @@ msgid ""
 "eye will follow the mouse cursor. Positive values increase the area, while "
 "negative values decrease it."
 msgstr ""
+"Ez a beállítás szabályozza a szem körüli terület szélességét, amelyen belül "
+"a szem követi az egérkurzort. A pozitív értékek növelik, míg a negatív "
+"értékek csökkentik a területet."
 
 #. 6.2->settings-schema.json->padding->tooltip
 msgid ""
@@ -489,6 +491,9 @@ msgid ""
 "follow the mouse cursor. Increasing the padding decreases the radius of the "
 "eye, while decreasing the padding increases the radius of the eye."
 msgstr ""
+"Ez a beállítás szabályozza a szem körüli kitöltést, amelyen belül a szem "
+"követi az egérkurzort. A kitöltés növelése csökkenti a szem sugarát, míg a "
+"csökkentése növeli a szem sugarát."
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
