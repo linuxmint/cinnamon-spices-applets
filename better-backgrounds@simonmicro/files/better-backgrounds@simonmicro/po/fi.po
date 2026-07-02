@@ -1,31 +1,33 @@
-# SOME DESCRIPTIVE TITLE.
+# BETTER BACKGROUNDS
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# simonmicro, 2020
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-28 20:26+0000\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-04-13 04:55+0100\n"
 "PO-Revision-Date: 2023-12-11 14:35+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: fi\n"
 
 #. metadata.json->name
 msgid "Better Backgrounds"
 msgstr "Better Backgrounds"
 
 #. metadata.json->description
+#, fuzzy
 msgid ""
-"Apply new backgrounds from Bing, Himawari 8, Picsum Photos, PlaceKitten.com, "
-"Unsplash.com or even whole websites - specify search tags, triggers and more!"
+"Apply new backgrounds from Bing, Himawari 8, Picsum Photos, or even whole "
+"websites"
 msgstr ""
 "Käytä uusia taustakuvia Bing, Himawari 8, Picsum Photos, PlaceKitten.com, "
 "Unsplash.com tai jopa verkkosivuilta – määritä hakuun tunnisteet, "
@@ -46,8 +48,6 @@ msgstr "Lähde"
 
 #. settings-schema.json->pageResolution->title
 #. settings-schema.json->imageresbing->title
-#. settings-schema.json->imageresunsplash->title
-#. settings-schema.json->imageresplacekitten->title
 #. settings-schema.json->imageresplacecutycapt->title
 #. settings-schema.json->imagerespicsum->title
 #. settings-schema.json->imagereshimawari->title
@@ -70,10 +70,6 @@ msgstr "Kuvatehosteet"
 msgid "Triggers"
 msgstr "Käynnistimet"
 
-#. settings-schema.json->imagetags->title
-msgid "Tags"
-msgstr "Tagit"
-
 #. settings-schema.json->imageapply->title
 msgid "Apply"
 msgstr "Käytä"
@@ -95,15 +91,6 @@ msgid "Bad network? Faulty setup? The applet will notify you. Every time."
 msgstr ""
 "Huono nettiyhteys? Virheellinen asetus? Sovelma ilmoittaa sinulle niistä "
 "joka kerta."
-
-#. settings-schema.json->applet-info-issues->description
-msgid ""
-"You found a bug or want to suggest a missing feature? Just checkout the "
-"source code at https://github.com/simonmicro/better-backgrounds right over "
-"on Github!"
-msgstr ""
-"Löysitkö virheen tai ehdottaa puuttuvaa ominaisuutta? Lähdekoodi https://"
-"github.com/simonmicro/better-backgrounds on nähtävillä Github:ssa!"
 
 #. settings-schema.json->applet-store-location->description
 msgid "Picture save location"
@@ -189,7 +176,8 @@ msgid "None"
 msgstr "Ei mitään"
 
 #. settings-schema.json->image-source->description
-msgid "Image source"
+#, fuzzy
+msgid "Image Source"
 msgstr "Kuva tulee lähteestä"
 
 #. settings-schema.json->image-source->options
@@ -205,16 +193,8 @@ msgid "Himawari 8"
 msgstr "Himawari 8"
 
 #. settings-schema.json->image-source->options
-msgid "Placekitten"
-msgstr "Placekitten"
-
-#. settings-schema.json->image-source->options
 msgid "Picsum Photos"
 msgstr "Picsum Photos"
-
-#. settings-schema.json->image-source->options
-msgid "Unsplash"
-msgstr "Unsplash"
 
 #. settings-schema.json->source-supports-info->description
 msgid ""
@@ -239,16 +219,6 @@ msgid ""
 msgstr ""
 "Tämä ominaisuus käyttää komentoa \"montage\" paketista \"imagemagick\". "
 "Varmista, että tämä paketti tai komento on asennettu."
-
-#. settings-schema.json->source-warn-unsplash->description
-msgid ""
-"This source is known to cause trouble, especially during times of high "
-"demand. Please be patient and try again later if you experience problems. "
-"More information can be found at: https://status.unsplash.com/"
-msgstr ""
-"Tämän lähde ei aina toimi, etenkin suuren kysynnän aikana. Ole kärsivällinen "
-"ja yritä uudelleen. Jos kohtaat jatkuvasti ongelmia, lisätietoja löytyy "
-"osoitteesta: https://status.unsplash.com/"
 
 #. settings-schema.json->image-res-manual->description
 msgid "Use custom resolution"
@@ -278,14 +248,6 @@ msgstr "pikseliä"
 #. settings-schema.json->image-res-height->description
 msgid "Height"
 msgstr "Korkeus"
-
-#. settings-schema.json->image-tag->description
-msgid "Use own search tags"
-msgstr "Käytä omia tunnisteita kuvien hakemiseen"
-
-#. settings-schema.json->image-tag->tooltip
-msgid "Specify own tags to look for..."
-msgstr "Määritä omat tunnisteet eli hakusanat hakuun..."
 
 #. settings-schema.json->image-res-himawari->description
 msgid ""
@@ -320,25 +282,6 @@ msgstr "20x"
 #. settings-schema.json->image-res-unsupported->description
 msgid "Sorry, the selected source does not support resolution modifiers."
 msgstr "Valittu lähde ei valitettavasti tue resoluution muokkaamista."
-
-#. settings-schema.json->image-tag-info->description
-msgid ""
-"Please make sure to choose an available tag, otherwise the background can't "
-"be changed! Make sure to seperate the tags by a ',' and not spaces, also the "
-"tags are understood as AND - not as OR! A valid search term could be 'nature,"
-"water'..."
-msgstr ""
-"Valitse saatavilla oleva nimi tunniste, muuten taustaa ei muutu! Erota "
-"tunnisteet pilkulla, älä välilyönnillä. Tunnisteet ymmärretään myös AND - "
-"mutta ei OR! Hakutermi voisi olla \"nature,water\"..."
-
-#. settings-schema.json->image-tag-data->description
-msgid "Search tags"
-msgstr "Haku tunnisteilla"
-
-#. settings-schema.json->image-tag-data->tooltip
-msgid "Enter your topic filters"
-msgstr "Anna suodattimeen aihe kuten nature space green"
 
 #. settings-schema.json->image-align-info->description
 msgid ""

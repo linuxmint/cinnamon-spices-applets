@@ -1,0 +1,52 @@
+{
+    "inverter_ip": {
+        "type": "entry",
+        "default": "192.168.1.100",
+        "description": "IP address of the Fronius inverter"
+    },
+    "poll_interval": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 5,
+        "max": 300,
+        "step": 5,
+        "units": "seconds",
+        "description": "Poll interval (click applet to sync manually)"
+    },
+    "threshold_green": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 1,
+        "max": 100,
+        "step": 5,
+        "units": "%",
+        "description": "SOC threshold for green (>=)"
+    },
+    "threshold_yellow": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 1,
+        "max": 100,
+        "step": 5,
+        "units": "%",
+        "description": "SOC threshold for yellow (>=), below is red"
+    },
+    "threshold_production": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 0,
+        "max": 1000,
+        "step": 10,
+        "units": "W",
+        "description": "PV production threshold (below is considered inactive)"
+    },
+    "threshold_export": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 0,
+        "max": 1000,
+        "step": 10,
+        "units": "W",
+        "description": "Grid export/import threshold (below is considered neutral)"
+    }
+}

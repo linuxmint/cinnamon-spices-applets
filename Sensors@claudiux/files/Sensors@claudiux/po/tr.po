@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-22 19:51+0100\n"
+"POT-Creation-Date: 2026-04-26 01:27+0200\n"
 "PO-Revision-Date: 2021-01-04 11:39+0300\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
@@ -24,90 +24,90 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Sensörler Monitörü"
 
-#. applet.js:587
+#. applet.js:594
 msgid "Suspended"
 msgstr ""
 
-#. applet.js:929 applet.js:971
+#. applet.js:936 applet.js:978
 msgid "high:"
 msgstr "yüksek:"
 
-#. applet.js:929 applet.js:932 applet.js:971 applet.js:973 applet.js:1014
+#. applet.js:936 applet.js:939 applet.js:978 applet.js:980 applet.js:1021
 msgid "n/a"
 msgstr "d/y"
 
-#. applet.js:932 applet.js:973
+#. applet.js:939 applet.js:980
 msgid "crit:"
 msgstr "kritik:"
 
-#. applet.js:1014 applet.js:1058
+#. applet.js:1021 applet.js:1065
 msgid "min:"
 msgstr "asg:"
 
-#. applet.js:1060
+#. applet.js:1067
 msgid "max:"
 msgstr "azm:"
 
-#. applet.js:1089
+#. applet.js:1096
 msgid "No intrusion detected"
 msgstr "İzinsiz giriş tespit edilmedi"
 
-#. applet.js:1089
+#. applet.js:1096
 msgid "INTRUSION DETECTED!"
 msgstr "GİRİŞ TESPİT EDİLDİ!"
 
-#. applet.js:1109
+#. applet.js:1116
 msgid "Must be configured!"
 msgstr "Yapılandırılmalıdır!"
 
-#. applet.js:1511
+#. applet.js:1518
 msgid "Settings"
 msgstr "Ayarlar"
 
-#. applet.js:1511
+#. applet.js:1518
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1518
+#. applet.js:1525
 msgid "⚙ General"
 msgstr "⚙ Genel"
 
-#. applet.js:1535
+#. applet.js:1542
 #, fuzzy, javascript-format
 msgid "%s Temperature sensors"
 msgstr "Sıcaklık sensörleri"
 
-#. applet.js:1552
+#. applet.js:1559
 #, fuzzy, javascript-format
 msgid "%s Fan sensors"
 msgstr "Fan sensörleri"
 
-#. applet.js:1569
+#. applet.js:1576
 #, fuzzy, javascript-format
 msgid "%s Voltage sensors"
 msgstr "Voltaj sensörleri"
 
-#. applet.js:1586
+#. applet.js:1593
 #, fuzzy, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "İzinsiz giriş sensörleri"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1622
+#. applet.js:1629
 msgid "Run xsensors"
 msgstr "Xsensorleri çalıştır"
 
-#. applet.js:1631
+#. applet.js:1638
 #, fuzzy
 msgid "Suspend Sensors"
 msgstr "Xsensorleri çalıştır"
 
-#. applet.js:1642
+#. applet.js:1649
 msgid "Reload this applet"
 msgstr "Bu uygulamayı yeniden yükleyin"
 
-#. applet.js:1998
+#. applet.js:2005
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "'%s'yi kaldırmak istediğinizden emin misiniz?"
@@ -558,6 +558,10 @@ msgid ""
 msgstr ""
 "Araç ipucunda ana sensörlerin adlarının (panelde görüntülenenler) kalın "
 "italik olarak gösterilip gösterilmeyeceği."
+
+#. settings-schema.json->tooltip_font_size->description
+msgid "Font size (px)"
+msgstr ""
 
 #. settings-schema.json->restart_in_menu->description
 msgid "Show in menu the action: Restart this applet"

@@ -214,6 +214,11 @@ function is_pkcon_present() {
   return GLib.find_program_in_path("pkcon")
 }
 
+function is_pkgcli_present() {
+  //~ return GLib.find_program_in_path("apturl")
+  return GLib.find_program_in_path("pkgcli")
+} // End of is_pkgcli_present
+
 function is_pkexec_present() {
   return GLib.find_program_in_path("pkexec")
 }
@@ -311,6 +316,7 @@ Dependencies.prototype = {
       // apturl is it present?
       let _is_apturl_present = is_apturl_present();
       let _is_pkcon_present = is_pkcon_present();
+      let _is_pkgcli_present = is_pkgcli_present();
       let _is_pkexec_present = is_pkexec_present();
       // Detects the distrib in use and make adapted message and notification:
       let _isFedora = isFedora();
@@ -333,6 +339,12 @@ Dependencies.prototype = {
 
       if (_is_pkcon_present && _is_pkexec_present) {
         GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo VPN-Sentinel message: Some packages needed!; echo List of needed packages: %s; pkexec pkcon -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
+        this.depAreMet = false;
+        return
+      }
+
+      if (_is_pkgcli_present && _is_pkexec_present) {
+        GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo VPN-Sentinel message: Some packages needed!; echo List of needed packages: %s; pkexec pkgcli -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
         this.depAreMet = false;
         return
       }

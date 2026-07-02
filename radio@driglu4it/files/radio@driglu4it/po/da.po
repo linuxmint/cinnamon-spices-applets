@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-20 14:55-0500\n"
-"PO-Revision-Date: 2023-12-25 10:49+0100\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-05-13 17:12+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 #. 3.0/applet.js:99 3.0/applet.js:117 3.0/applet.js:143 3.0/applet.js:153
@@ -85,6 +85,8 @@ msgid ""
 "A radio applet with 1000's of searchable stations, mpris support, youtube-"
 "download function and more"
 msgstr ""
+"En radio med tusinder af søgbare stationer, understøttelse af mpris, "
+"downloadfunktion til YouTube med mere"
 
 #. 3.0->settings-schema.json->page1->title
 #. 3.0->settings-schema.json->tree->description
@@ -252,25 +254,23 @@ msgstr ""
 
 #. 4.6->settings-schema.json->youtube-download-cli->description
 #. 6.4->settings-schema.json->youtube-download-cli->description
-#, fuzzy
 msgid "YouTube Download CLI tool"
-msgstr "Download fra YouTube"
+msgstr "Kommandolinjeværktøj til download fra YouTube"
 
 #. 4.6->settings-schema.json->youtube-download-cli->tooltip
 #. 6.4->settings-schema.json->youtube-download-cli->tooltip
-#, fuzzy
 msgid "The CLI tool used to download songs from YouTube"
-msgstr "Kunne ikke downloade sangen fra YouTube pga. en fejl."
+msgstr "Kommandolinjeværktøjet der bruges til at downloade sangen fra YouTube"
 
 #. 4.6->settings-schema.json->youtube-download-cli->options
 #. 6.4->settings-schema.json->youtube-download-cli->options
 msgid "yt-dlp"
-msgstr ""
+msgstr "yt-dlp"
 
 #. 4.6->settings-schema.json->youtube-download-cli->options
 #. 6.4->settings-schema.json->youtube-download-cli->options
 msgid "youtube-dl"
-msgstr ""
+msgstr "youtube-dl"
 
 #. 4.6->settings-schema.json->music-download-dir-select->description
 #. 6.4->settings-schema.json->music-download-dir-select->description
@@ -279,8 +279,5 @@ msgstr "Downloadmappe"
 
 #. 4.6->settings-schema.json->music-download-dir-select->tooltip
 #. 6.4->settings-schema.json->music-download-dir-select->tooltip
-#, fuzzy
 msgid "Songs downloaded from YouTube will be saved to this directory."
-msgstr ""
-"Sange downloadet fra YouTube vil blive gemt i denne mappe. Funktionen kan "
-"findes i panelprogrammets kontekstmenu"
+msgstr "Sange downloadet fra YouTube vil blive gemt i denne mappe."

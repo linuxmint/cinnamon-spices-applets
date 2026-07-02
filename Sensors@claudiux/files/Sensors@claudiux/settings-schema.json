@@ -108,7 +108,8 @@
       "title": "Tooltip",
       "keys": [
         "bold_values",
-        "bold_italics_main_sensors"
+        "bold_italics_main_sensors",
+        "tooltip_font_size"
       ]
     },
     "section_Report": {
@@ -471,6 +472,14 @@
     "default": false,
     "description": "Show main sensors in bold italics in the tooltip",
     "tooltip": "Whether or not to display the names of the main sensors (those displayed in the panel) in bold italics in the tooltip."
+  },
+  "tooltip_font_size": {
+    "type": "scale",
+    "default": 16,
+    "min": 8,
+    "max": 32,
+    "step": 1,
+    "description": "Font size (px)"
   },
   "restart_in_menu": {
     "type": "switch",

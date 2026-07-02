@@ -1,4 +1,5 @@
 
+const Extension = imports.ui.extension;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
@@ -6,6 +7,15 @@ const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
 const Cairo = imports.cairo;
 const Gettext = imports.gettext;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
 const {
   _sourceIds,
   timeout_add_seconds,
@@ -17,10 +27,10 @@ const {
   source_exists,
   source_remove,
   remove_all_sources
-} = require("./lib/mainloopTools");
+} = _require("./lib/mainloopTools");
 
 const UUID = "Bps@claudiux";
-const CssStylization = require('./lib/cssStylization');
+const CssStylization = _require('./lib/cssStylization');
 
 const DecimalPlaces = {
     AUTO: -1,
@@ -258,13 +268,14 @@ GuiSpeed.prototype = {
     _get_fixed_width_text: function() {
         let text = "";
         if(this.decimal_places == DecimalPlaces.AUTO) {
-            text = (this.is_binary) ? " 999.9 MiB " : " 999.9 MB ";
+            text = (this.is_binary) ? " 1023.9 MiB " : " 999.9 MB ";
         }
         else {
-            text = " 999." + this.repeat_string("9", this.decimal_places);
+            text = (this.is_binary) ? " 1023." : " 999.";
+            text += this.repeat_string("9", this.decimal_places);
             text += (this.is_binary) ? " MiB " : " MB ";
         }
-        return text;
+        return text.padStart(10);
     },
 
     repeat_string: function(str, repetitions) {

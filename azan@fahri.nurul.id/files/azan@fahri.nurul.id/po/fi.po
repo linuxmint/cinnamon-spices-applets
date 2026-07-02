@@ -26,11 +26,11 @@ msgstr "%A %B %e, %Y"
 msgid "Settings"
 msgstr "Asetukset"
 
-#: applet.js:325
+#: applet.js:338
 msgid "It's time for "
 msgstr "Nyt on aika"
 
-#: applet.js:326
+#: applet.js:339
 msgid "Now : "
 msgstr "Nyt : "
 

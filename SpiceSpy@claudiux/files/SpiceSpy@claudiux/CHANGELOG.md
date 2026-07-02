@@ -1,3 +1,16 @@
+### v5.9.0~20260629
+  * From now on, when you click the “Themes” icon, the settings window will open correctly.
+
+### v5.8.3~20260527
+  * Ready for Linux Mint 23.
+
+### v5.8.2~20260427
+  * Further improves the calculation of remaining time during updates.
+  * Eliminates unnecessary calculation time.
+
+### v5.8.1~20260426
+  * Improved calculation of the remaining time when refreshing.
+
 ### v5.8.0~20260401
   * Improved tooltip displaying schedules.
 

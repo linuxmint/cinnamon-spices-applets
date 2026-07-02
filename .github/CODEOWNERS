@@ -15,6 +15,7 @@ CustomPlaces@Nicolas01/**                          @Nicolas01
 Direct@claudiux/**                                 @claudiux
 Exit@claudiux/**                                   @claudiux
 Gears@claudiux/**                                  @claudiux
+GraphicalSystemMonitor@batzkass/**                 @batzkass
 IntelTurboBoost@wsmenezes/**                       @wsmenezes
 InternetTimeApplet@stefan/**                       @stefan12O
 Mint-Unsplash-Background@omidmaldar/**             @omidmaldar
@@ -41,6 +42,7 @@ app-launcher@mchilli/**                            @mchilli
 asl@santiago/**                                    @SamBurgos
 auto-dark-light@gihaume/**                         @guillaume-mueller
 backgroundroll@Sokawaii25/**                       @Sokawaii25
+battery-view@ccarnivore/**                         @ccarnivore
 batterymonitor@pdcurtis/**                         @pdcurtis
 batterypower@joka42/**                             @joka42
 better-backgrounds@simonmicro/**                   @fredcw
@@ -117,7 +119,9 @@ maximus-buttons@hanspr/**                          @hanspr
 maximus-title@hanspr/**                            @hanspr
 mediacontrols@rbfraphael/**                        @rbfraphael
 mem-monitor-text@datanom.net/**                    @icarter09
+menueleven@djb/**                                  @DJB
 mic-level@zamszowy/**                              @zamszowy
+mint-screenshot@khumnath/**                        @khumnath
 moonphase@techi-freki/**                           @Techi-Freki
 mouse-keys-shortcut@GabrielCamara3526/**           @GabrielCamara3526
 multicore-sys-monitor@ccadeptic23/**               @claudiux
@@ -140,12 +144,15 @@ nvidiaprime@pdcurtis/**                            @pdcurtis
 octopussy@centurix/**                              @centurix
 officeCenter@scollins/**                           @collinss
 onekoToggle@kusch3l/**                             @kusch3l
+orloj@faragofr/**                                  @faragofr
+pacman-updates@Twilight0/**                        @Twilight0
 panel-tweaks@anaximeno/**                          @anaximeno
 password-generator@spencerlommel.com/**            @SpencerLommel
 pin-unpin-panel@anaximeno/**                       @anaximeno
 placesCenter@scollins/**                           @collinss
 pomodoro@gregfreeman.org/**                        @gfreeau
 power-profiles@rcalixte/**                         @rcalixte
+powerman@dr.drummie/**                             @drdrummie
 printers@linux-man/**                              @linux-man
 profile-switcher@pixunil/**                        @pixunil
 proxy-mode@yrtimid/**                              @yrtimiD
@@ -175,6 +182,7 @@ sleepTimer@JDatPNW/**                              @JDatPNW
 smallcalc_applet@lerc.sds/**                       @lerc
 sound150@claudiux/**                               @claudiux
 spices-notifier@germanfr/**                        @germanfr
+spicy-clipboard-applet@Twilight0/**                @Twilight0
 sshconnect@foobar-beer/**                          @foobar-beer
 sshlauncher@sumo/**                                @sumo
 ssm@Severga/**                                     @Severga
@@ -203,12 +211,14 @@ tzclock@lhriley/**                                 @lhriley
 uiscaler@joka42/**                                 @joka42
 updates-notifier@zamszowy/**                       @zamszowy
 vboxlauncher@mockturtl/**                          @mockturtl
+vertical-speedmeter@2u841r/**                      @2u841r
 vnstat@linuxmint.com/**                            @pdcurtis
 vpnLookOut@claudiux/**                             @claudiux
 wakapidisplay@babico/**                            @babico
 wakatimedisplay@inventor96/**                      @inventor96
 wallpaper-slideshow@amaan-mohib/**                 @amaan-mohib
 website-notifier@cardsurf/**                       @cardsurf
+window-closer@stefan-schmidbauer/**                @Stefan-Schmidbauer
 window-list@sangorys/**                            @sangorys
 window-list@zeripath.sdf-eu.org/**                 @zeripath
 windowlist@cobinja.de/**                           @Cobinja
@@ -217,6 +227,8 @@ wireguard@nicoulaj.net/**                          @nicoulaj
 workspace-grid@hernejj/**                          @hernejj
 workspace-name@willurd/**                          @willurd
 xsession@claudiux/**                               @claudiux
+yasm@sniemetz/**                                   @sniemetz
+zen-pomodoro@vtestah/**                            @vtestah
 
 # The following xlets have no author assigned to them.
 # CommandRunner@appdevsw

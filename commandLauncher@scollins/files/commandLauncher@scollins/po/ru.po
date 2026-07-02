@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: commandLauncher@scollins 1.4\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2026-06-08 00:00+0000\n"
+"Last-Translator: Grom-TS\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#: applet.js:96 applet.js:149
+msgid "Command Launcher"
+msgstr "Запуск команд"
+
+#: applet.js:96
+msgid "Process started"
+msgstr "Процесс запущен"
+
+#. settings-schema.json->command->description
+#: applet.js:96 applet.js:149
+msgid "Command"
+msgstr "Команда"
+
+#: applet.js:97 applet.js:150
+msgid "Process Id"
+msgstr "ID процесса"
+
+#: applet.js:100
+#, javascript-format
+msgid "Error while trying to run \"%s\""
+msgstr "Ошибка при попытке запустить \"%s\""
+
+#: applet.js:149
+msgid "Process ended"
+msgstr "Процесс завершён"
+
+#. metadata.json->description
+msgid "Lets you to run command-line commands with the click of a button"
+msgstr "Позволяет запускать команды командной строки нажатием кнопки"
+
+#. metadata.json->comments
+msgid ""
+"This is a simple multi-instance applet for Cinnamon which allows the user to "
+"launch commands as though from a command prompt with the click of a button. "
+"Unlike a program launcher, which typically uses a .desktop to launch a "
+"program, Command Launcher uses a direct command-line command. This means you "
+"can use any command you could use from a terminal (eg run a script, launch "
+"program with complicated command-line arguments, etc)."
+msgstr ""
+"Это простой мультиэкземплярный апплет для Cinnamon, который позволяет запускать "
+"команды как из терминала нажатием кнопки. В отличие от стандартного лаунчера "
+"программ, использующего .desktop-файлы, Command Launcher выполняет прямые "
+"команды командной строки. Это означает, что можно использовать любые команды "
+"терминала (например, запуск скриптов, программ с сложными аргументами и т.д.)."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins — автор"
+
+#. settings-schema.json->apearance->description
+msgid "Appearance and behavior"
+msgstr "Внешний вид и поведение"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Иконка панели"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid ""
+"Supports both icon name and icon path.\n"
+"To use a symbolic icon, include '-symbolic' (or '-symbolic.svg') at the end."
+msgstr ""
+"Поддерживаются как имя иконки, так и путь к файлу.\n"
+"Для символической иконки добавьте '-symbolic' (или '-symbolic.svg') в конце."
+
+#. settings-schema.json->tooltipText->description
+msgid "Tooltip"
+msgstr "Подсказка"
+
+#. settings-schema.json->keyLaunch->description
+msgid "Keyboard shortcut"
+msgstr "Горячая клавиша"
+
+#. settings-schema.json->showNotifications->description
+msgid "Show notifications on completion"
+msgstr "Показывать уведомления по завершении"
+
+#. settings-schema.json->commandTitle->description
+msgid "Command settings"
+msgstr "Настройки команды"
+
+#. settings-schema.json->useRoot->description
+msgid "Run as root"
+msgstr "Запуск от root"
+
+#. settings-schema.json->useAltEnv->description
+msgid "Run in alternate directory"
+msgstr "Запуск в другой директории"
+
+#. settings-schema.json->altEnv->description
+msgid "Environment path"
+msgstr "Путь окружения"

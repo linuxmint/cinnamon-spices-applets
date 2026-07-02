@@ -166,6 +166,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.bind("bat_show_detail_label", "bat_show_detail_label", this.settingsChanged);
 
         this.createThemeObject();
+        this._udevClient = new GUdev.Client();
         this.createAppletArea();
         this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
         this.addUpdateLoop(this.frequency);
@@ -376,7 +377,7 @@ GraphicalHWMonitorApplet.prototype = {
     // Queries the system for available block devices which the user may select from
     getAvailableDisks: function() {
         let devices_options = {};
-        let block_devices = new GUdev.Client().query_by_subsystem("block");
+        let block_devices = this._udevClient.query_by_subsystem("block");
 
         for (var n = 0; n < block_devices.length; n++) {
             let options_labels = [];
