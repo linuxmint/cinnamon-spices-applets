@@ -1,5 +1,4 @@
 const Cinnamon = imports.gi.Cinnamon;
-const Lang = imports.lang;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const Clutter = imports.gi.Clutter;
@@ -382,12 +381,12 @@ class XAppStatusIcon {
 
         this._tooltip = new IconTooltip(this, "", applet.orientation);
 
-        this.actor.connect('button-press-event', Lang.bind(this, this.onButtonPressEvent));
-        this.actor.connect('button-release-event', Lang.bind(this, this.onButtonReleaseEvent));
+        this.actor.connect('button-press-event', (...args) => this.onButtonPressEvent(...args));
+        this.actor.connect('button-release-event', (...args) => this.onButtonReleaseEvent(...args));
         this.actor.connect('scroll-event', (...args) => this.onScrollEvent(...args));
-        this.actor.connect('enter-event', Lang.bind(this, this.onEnterEvent));
+        this.actor.connect('enter-event', (...args) => this.onEnterEvent(...args));
 
-        this._proxy_prop_change_id = this.proxy.connect('g-properties-changed', Lang.bind(this, this.on_properties_changed))
+        this._proxy_prop_change_id = this.proxy.connect('g-properties-changed', (...args) => this.on_properties_changed(...args))
 
         this.refresh();
     }
