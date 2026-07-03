@@ -1,6 +1,6 @@
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
-const Gio = imports.gi.Gio; // Manejador de rutas para iconos del sistema
+const Gio = imports.gi.Gio;
 const Mainloop = imports.mainloop;
 const St = imports.gi.St;
 const Gettext = imports.gettext;
@@ -10,24 +10,6 @@ let GTop = null;
 try { GTop = imports.gi.GTop; } catch(e) {}
 
 const UUID = "SystemMonitor@danny";
-
-
-const ICONS_DIR = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + UUID + "/icons";
-
-const ICON_CPU  = ICONS_DIR + "/cpu.svg";
-const ICON_RAM  = ICONS_DIR + "/ram.svg";
-const ICON_SWAP = ICONS_DIR + "/swap.svg";
-const ICON_GPU  = ICONS_DIR + "/gpu.svg";
-const ICON_VRAM = ICONS_DIR + "/vram.svg";
-
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
-function _(str) { return Gettext.dgettext(UUID, str) || str; }
-
-class Tools {
-    formatGB(bytes) {
-        return (bytes / (1024*1024*1024)).toFixed(2) + "GB";
-    }
-}
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -45,6 +27,18 @@ MyApplet.prototype = {
         this.cpuProvider = GTop ? new CpuProvider() : null;
         this.shouldUpdate = true;
 
+        // Corrección de rutas dinámicas usando metadata.path
+        this.iconsDir = metadata.path + "/icons";
+        this.iconCpu  = this.iconsDir + "/cpu.svg";
+        this.iconRam  = this.iconsDir + "/ram.svg";
+        this.iconSwap = this.iconsDir + "/swap.svg";
+        this.iconGpu  = this.iconsDir + "/gpu.svg";
+        this.iconVram = this.iconsDir + "/vram.svg";
+
+        // Corrección de localización respetando XDG_DATA_HOME
+        let localeDir = Gio.File.new_for_path(GLib.get_user_data_dir()).get_child("locale").get_path();
+        Gettext.bindtextdomain(UUID, localeDir);
+
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
 
         this.settings.bindProperty(Settings.BindingDirection.IN, "refresh-interval", "updateFrequency", this._on_settings_changed, null);
@@ -58,36 +52,63 @@ MyApplet.prototype = {
     },
 
     _on_settings_changed: function() {
-
+        // Callback para cambios de configuración si es necesario
     },
 
+    // Corrección: Carga de archivos no bloqueante usando Gio.File
     _read_sys_file: function(path) {
         try {
-            let [success, content] = GLib.file_get_contents(path);
-            if (success && content) return String.fromCharCode.apply(null, content).trim();
+            let file = Gio.File.new_for_path(path);
+            let [success, content] = file.load_contents(null);
+            if (success && content) {
+                return String.fromCharCode.apply(null, content).trim();
+            }
         } catch(e) {}
         return "0";
     },
 
+    // Corrección: Reemplazo de GLib.file_test por Gio para evitar bloqueos en sistemas lentos
     _find_gpu_file: function(fileName) {
         let paths = [
             "/sys/class/drm/card0/device/" + fileName,
             "/sys/class/drm/card1/device/" + fileName
         ];
         for (let fullPath of paths) {
-            if (GLib.file_test(fullPath, GLib.FileTest.EXISTS)) {
-                return fullPath;
-            }
+            try {
+                let file = Gio.File.new_for_path(fullPath);
+                if (file.query_exists(null)) {
+                    return fullPath;
+                }
+            } catch (e) {}
         }
         return null;
     },
 
-    _run_command: function(cmd) {
+    // Corrección: Ejecución asíncrona real mediante vectores (argv) con Gio.Subprocess
+    _run_nvidia_command_async: function(callback) {
         try {
-            let [success, stdout] = GLib.spawn_command_line_sync(cmd);
-            if (success && stdout) return String.fromCharCode.apply(null, stdout).trim();
-        } catch(e) {}
-        return "";
+            let argv = ["nvidia-smi", "--query-gpu=utilization.gpu,memory.used", "--format=csv,noheader,nounits"];
+            let proc = new Gio.Subprocess({
+                argv: argv,
+                flags: Gio.SubprocessFlags.STDOUT_PIPE
+            });
+
+            proc.init(null);
+            proc.communicate_utf8_async(null, null, (obj, res) => {
+                try {
+                    let [success, stdout, stderr] = obj.communicate_utf8_finish(res);
+                    if (success && stdout) {
+                        callback(stdout.trim());
+                    } else {
+                        callback("");
+                    }
+                } catch (e) {
+                    callback("");
+                }
+            });
+        } catch (e) {
+            callback("");
+        }
     },
 
     _update_loop: function() {
@@ -115,18 +136,17 @@ MyApplet.prototype = {
                 }
             }
 
-            // 3. PROCESAR GRÁFICOS
-            let gpuPercent = 0;
-            let vramGB = "0.00GB";
-
+            // 3. PROCESAR GRÁFICOS (AMD / INTEL / NVIDIA)
             if (this.showGpu || this.showVram) {
                 let amdFile = this._find_gpu_file("gpu_busy_percent");
 
                 if (amdFile) {
-                    gpuPercent = parseInt(this._read_sys_file(amdFile) || 0);
+                    let gpuPercent = parseInt(this._read_sys_file(amdFile) || 0);
                     let vramPath = amdFile.replace("gpu_busy_percent", "mem_info_vram_used");
                     let vramUsed = parseInt(this._read_sys_file(vramPath) || 0);
-                    vramGB = this.tools.formatGB(vramUsed);
+                    let vramGB = this.tools.formatGB(vramUsed);
+
+                    this._render_interface(cpu, ramGB, swapGB, gpuPercent, vramGB);
                 }
                 else {
                     let intelActFreqFile = this._find_gpu_file("gt_act_freq_mhz");
@@ -135,96 +155,105 @@ MyApplet.prototype = {
                     if (intelActFreqFile && intelMaxFreqFile) {
                         let actFreq = parseInt(this._read_sys_file(intelActFreqFile) || 0);
                         let maxFreq = parseInt(this._read_sys_file(intelMaxFreqFile) || 1);
-                        gpuPercent = Math.round((actFreq / maxFreq) * 100);
-                        vramGB = "Compartida";
+                        let gpuPercent = Math.round((actFreq / maxFreq) * 100);
+                        let vramGB = "Compartida";
+
+                        this._render_interface(cpu, ramGB, swapGB, gpuPercent, vramGB);
                     }
                     else {
-                        let nvidiaData = this._run_command("nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader,nounits");
-                        if (nvidiaData) {
-                            let parts = nvidiaData.split(",");
-                            if (parts.length >= 2){
-                                gpuPercent = parseInt(parts[0].trim() || 0);
-                                let vramUsedBytes = parseInt(parts[1].trim() || 0) * 1024 * 1024;
-                                vramGB = this.tools.formatGB(vramUsedBytes);
+                        // Flujo Asíncrono para Nvidia: delegamos el renderizado al callback
+                        this._run_nvidia_command_async((nvidiaData) => {
+                            let gpuPercent = 0;
+                            let vramGB = "N/A";
+
+                            if (nvidiaData) {
+                                let parts = nvidiaData.split(",");
+                                if (parts.length >= 2){
+                                    gpuPercent = parseInt(parts[0].trim() || 0);
+                                    let vramUsedBytes = parseInt(parts[1].trim() || 0) * 1024 * 1024;
+                                    vramGB = this.tools.formatGB(vramUsedBytes);
+                                }
                             }
-                        } else {
-                            gpuPercent = 0;
-                            vramGB = "N/A";
-                        }
+                            this._render_interface(cpu, ramGB, swapGB, gpuPercent, vramGB);
+                        });
+                        return; // Salimos temprano; el callback se encargará de dibujar e iterar
                     }
                 }
-            }
-
-            // 4. LIMPIEZA Y CONSTRUCCIÓN DE INTERFAZ CON FORZADO RÍGIDO DE SVG
-            this.actor.destroy_all_children();
-
-            let components = [
-                { show: this.showCpu,  icon: ICON_CPU,  text: `${cpu.toFixed(1)}%` },
-                { show: this.showRam,  icon: ICON_RAM,  text: `${ramGB}` },
-                { show: this.showSwap, icon: ICON_SWAP, text: `${swapGB}` },
-                { show: this.showGpu,  icon: ICON_GPU,  text: `${gpuPercent}%` },
-                { show: this.showVram, icon: ICON_VRAM, text: `${vramGB}` }
-            ];
-
-            let activeComponents = components.filter(c => c.show);
-
-            if (activeComponents.length === 0) {
-                let layoutBin = new St.Bin();
-                let l = new St.Label({ text: "Monitor Apagado" });
-                layoutBin.set_child(l);
-                this.actor.add(layoutBin, { y_align: St.Align.MIDDLE, y_fill: false });
             } else {
-                for (let i = 0; i < activeComponents.length; i++) {
-                    let item = activeComponents[i];
-
-                    // Añadir separador visual " | " entre sensores activos
-                    if (i > 0) {
-                        let sepBin = new St.Bin();
-                        let sepLabel = new St.Label({ text: " | ", style: "color: #555555; margin: 0 6px;" });
-                        sepBin.set_child(sepLabel);
-                        this.actor.add(sepBin, { y_align: St.Align.MIDDLE, y_fill: false });
-                    }
-
-                    // Forzamos un tamaño absoluto pequeño de 16 píxeles para romper la resolución del SVG
-                    let targetSize = 16;
-
-                    // Contenedor St.Bin limitando explícitamente el ancho y el alto
-                    let iconBin = new St.Bin({
-                        y_align: St.Align.MIDDLE,
-                        x_align: St.Align.MIDDLE,
-                        height: targetSize,
-                        width: targetSize
-                    });
-
-                    let gicon = Gio.icon_new_for_string(item.icon);
-
-                    // Icono St.Icon con propiedades de ancho y alto explícitas obligatorias
-                    let icon = new St.Icon({
-                        gicon: gicon,
-                        icon_size: targetSize,
-                        width: targetSize,  // Restringe el ancho del renderizado
-                        height: targetSize, // Restringe el alto del renderizado
-                        icon_type: St.IconType.FULLCOLOR
-                    });
-
-                    iconBin.set_child(icon);
-                    this.actor.add(iconBin, { y_align: St.Align.MIDDLE, y_fill: false });
-
-                    // Contenedor para el texto del sensor
-                    let textBin = new St.Bin();
-                    let label = new St.Label({ text: " " + item.text + " " });
-                    textBin.set_child(label);
-                    this.actor.add(textBin, { y_align: St.Align.MIDDLE, y_fill: false });
-                }
+                // Si no hay GPUs que mostrar, renderizamos inmediatamente
+                this._render_interface(cpu, ramGB, swapGB, 0, "0.00GB");
             }
 
         } catch (err) {
-            global.logError("MONITOR_ERROR: " + err.message);
-            this.actor.destroy_all_children();
-            let errBin = new St.Bin();
-            let errLabel = new St.Label({ text: "Error" });
-            errBin.set_child(errLabel);
-            this.actor.add(errBin, { y_align: St.Align.MIDDLE, y_fill: false });
+            this._handle_error(err);
+        }
+
+        this._queue_next_update();
+    },
+
+    _render_interface: function(cpu, ramGB, swapGB, gpuPercent, vramGB) {
+        this.actor.destroy_all_children();
+
+        let components = [
+            { show: this.showCpu,  icon: this.iconCpu,  text: `${cpu.toFixed(1)}%` },
+            { show: this.showRam,  icon: this.iconRam,  text: `${ramGB}` },
+            { show: this.showSwap, icon: this.iconSwap, text: `${swapGB}` },
+            { show: this.showGpu,  icon: this.iconGpu,  text: `${gpuPercent}%` },
+            { show: this.showVram, icon: this.iconVram, text: `${vramGB}` }
+        ];
+
+        let activeComponents = components.filter(c => c.show);
+
+        if (activeComponents.length === 0) {
+            let layoutBin = new St.Bin();
+            let l = new St.Label({ text: "Monitor Apagado" });
+            layoutBin.set_child(l);
+            this.actor.add(layoutBin, { y_align: St.Align.MIDDLE, y_fill: false });
+        } else {
+            for (let i = 0; i < activeComponents.length; i++) {
+                let item = activeComponents[i];
+
+                if (i > 0) {
+                    let sepBin = new St.Bin();
+                    let sepLabel = new St.Label({ text: " | ", style: "color: #555555; margin: 0 6px;" });
+                    sepBin.set_child(sepLabel);
+                    this.actor.add(sepBin, { y_align: St.Align.MIDDLE, y_fill: false });
+                }
+
+                let targetSize = 16;
+
+                let iconBin = new St.Bin({
+                    y_align: St.Align.MIDDLE,
+                    x_align: St.Align.MIDDLE,
+                    height: targetSize,
+                    width: targetSize
+                });
+
+                let gicon = Gio.icon_new_for_string(item.icon);
+
+                let icon = new St.Icon({
+                    gicon: gicon,
+                    icon_size: targetSize,
+                    width: targetSize,
+                    height: targetSize,
+                    icon_type: St.IconType.FULLCOLOR
+                });
+
+                iconBin.set_child(icon);
+                this.actor.add(iconBin, { y_align: St.Align.MIDDLE, y_fill: false });
+
+                let textBin = new St.Bin();
+                let label = new St.Label({ text: " " + item.text + " " });
+                textBin.set_child(label);
+                this.actor.add(textBin, { y_align: St.Align.MIDDLE, y_fill: false });
+            }
+        }
+    },
+
+    _queue_next_update: function() {
+        if (this.loopId) {
+            Mainloop.source_remove(this.loopId);
+            this.loopId = null;
         }
 
         if (this.shouldUpdate) {
@@ -235,11 +264,33 @@ MyApplet.prototype = {
         }
     },
 
+    _handle_error: function(err) {
+        global.logError("MONITOR_ERROR: " + err.message);
+        this.actor.destroy_all_children();
+        let errBin = new St.Bin();
+        let errLabel = new St.Label({ text: "Error" });
+        errBin.set_child(errLabel);
+        this.actor.add(errBin, { y_align: St.Align.MIDDLE, y_fill: false });
+    },
+
     on_applet_removed_from_panel: function() {
         this.shouldUpdate = false;
-        if (this.loopId) Mainloop.source_remove(this.loopId);
+        if (this.loopId) {
+            Mainloop.source_remove(this.loopId);
+            this.loopId = null;
+        }
     }
 };
+
+function _(str) {
+    return Gettext.dgettext(UUID, str) || str;
+}
+
+class Tools {
+    formatGB(bytes) {
+        return (bytes / (1024*1024*1024)).toFixed(2) + "GB";
+    }
+}
 
 class CpuProvider {
     constructor() {

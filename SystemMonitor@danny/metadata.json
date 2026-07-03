@@ -2,7 +2,7 @@
     "uuid": "SystemMonitor@danny",
     "name": "Monitor de sistema",
     "description": "Un monitor de sistema que muestra CPU, SWAP, RAM, GPU y VRAM",
-    "version": "1.6.Beta",
+    "version": "1.6",
     "cinnamon-version": ["3.8", "4.0", "4.2", "4.4", "4.6", "5.0", "6.0"]
 }
 
