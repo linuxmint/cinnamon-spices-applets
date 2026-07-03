@@ -27,7 +27,7 @@ MyApplet.prototype = {
         this.cpuProvider = GTop ? new CpuProvider() : null;
         this.shouldUpdate = true;
 
-        // Corrección de rutas dinámicas usando metadata.path
+
         this.iconsDir = metadata.path + "/icons";
         this.iconCpu  = this.iconsDir + "/cpu.svg";
         this.iconRam  = this.iconsDir + "/ram.svg";
@@ -35,7 +35,7 @@ MyApplet.prototype = {
         this.iconGpu  = this.iconsDir + "/gpu.svg";
         this.iconVram = this.iconsDir + "/vram.svg";
 
-        // Corrección de localización respetando XDG_DATA_HOME
+
         let localeDir = Gio.File.new_for_path(GLib.get_user_data_dir()).get_child("locale").get_path();
         Gettext.bindtextdomain(UUID, localeDir);
 
@@ -52,10 +52,10 @@ MyApplet.prototype = {
     },
 
     _on_settings_changed: function() {
-        // Callback para cambios de configuración si es necesario
+
     },
 
-    // Corrección: Carga de archivos no bloqueante usando Gio.File
+
     _read_sys_file: function(path) {
         try {
             let file = Gio.File.new_for_path(path);
@@ -67,7 +67,7 @@ MyApplet.prototype = {
         return "0";
     },
 
-    // Corrección: Reemplazo de GLib.file_test por Gio para evitar bloqueos en sistemas lentos
+
     _find_gpu_file: function(fileName) {
         let paths = [
             "/sys/class/drm/card0/device/" + fileName,
@@ -84,7 +84,7 @@ MyApplet.prototype = {
         return null;
     },
 
-    // Corrección: Ejecución asíncrona real mediante vectores (argv) con Gio.Subprocess
+
     _run_nvidia_command_async: function(callback) {
         try {
             let argv = ["nvidia-smi", "--query-gpu=utilization.gpu,memory.used", "--format=csv,noheader,nounits"];
@@ -180,7 +180,7 @@ MyApplet.prototype = {
                     }
                 }
             } else {
-                // Si no hay GPUs que mostrar, renderizamos inmediatamente
+
                 this._render_interface(cpu, ramGB, swapGB, 0, "0.00GB");
             }
 
