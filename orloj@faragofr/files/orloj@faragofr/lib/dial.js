@@ -25,6 +25,11 @@ const PLANET_GLYPHS = {
 };
 const PLANET_ORDER = ["Mercury", "Venus", "Mars", "Jupiter", "Saturn"];
 
+// The dial is designed against this logical size. At runtime the Cairo
+// context is scaled by (actual size / REFERENCE_SIZE), so geometry, fonts,
+// line widths and marker radii all scale uniformly from a single knob.
+const REFERENCE_SIZE = 320;
+
 // Concentric ring radii as fractions of R, the inscribed dial radius.
 // `layout(w, h)` resolves these to pixels for both drawing and hit-testing.
 function layout(width, height) {
@@ -285,10 +290,14 @@ function drawHands(cr, cx, cy, ro, ri, s) {
 // --- Top-level entry -------------------------------------------------------
 
 var draw = function(cr, width, height, s) {
-    var L = layout(width, height);
+    // Draw in the fixed reference coordinate system; the transform scales
+    // everything (including text and stroke widths) to the actual size.
+    var f = Math.min(width, height) / REFERENCE_SIZE;
+    if (f !== 1) cr.scale(f, f);
+    var L = layout(REFERENCE_SIZE, REFERENCE_SIZE);
 
     setColor(cr, Theme.BACKGROUND);
-    cr.rectangle(0, 0, width, height);
+    cr.rectangle(0, 0, REFERENCE_SIZE, REFERENCE_SIZE);
     cr.fill();
 
     setColor(cr, Theme.SURFACE);
@@ -312,7 +321,11 @@ var draw = function(cr, width, height, s) {
 // or null if nothing identifiable is there.
 var hitTest = function(width, height, s, x, y) {
     if (!s) return null;
-    var L = layout(width, height);
+    // Map the pointer back into the reference coordinate system the dial is
+    // drawn in, so hit radii stay consistent at any dial size.
+    var f = Math.min(width, height) / REFERENCE_SIZE;
+    var L = layout(REFERENCE_SIZE, REFERENCE_SIZE);
+    x /= f; y /= f;
     var dx = x - L.cx, dy = y - L.cy;
     var r = Math.sqrt(dx * dx + dy * dy);
     var angle = ((Math.atan2(dx, -dy) * 180 / Math.PI) % 360 + 360) % 360;

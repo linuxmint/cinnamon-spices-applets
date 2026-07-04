@@ -45,6 +45,9 @@ Right-click the applet and choose *Configure*:
 | Latitude / Longitude | Observer position in decimal degrees |
 | Refresh interval | How often positions are recomputed (default 30s) |
 | Accent color | Color of the time hand and sun glyph |
+| Foreground color | Text, hands and glyphs; intermediate tones are derived from it |
+| Background color | Dial background; intermediate tones are derived from it |
+| Dial size | Diameter of the dial in the popup; larger values improve readability |
 
 Defaults to Prague (50.09°N, 14.42°E).
 
