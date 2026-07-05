@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-07-01 22:35+0200\n"
-"PO-Revision-Date: 2026-05-12 10:31+0200\n"
+"PO-Revision-Date: 2026-07-05 10:31+0200\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -59,20 +59,22 @@ msgstr "Couleur d'accentuation"
 
 #. settings-schema.json->foreground-color->description
 msgid "Foreground color (text, hands, glyphs)"
-msgstr ""
+msgstr "Couleur de premier plan (texte, aiguilles, glyphes)"
 
 #. settings-schema.json->background-color->description
 msgid "Background color"
-msgstr ""
+msgstr "Couleur d'arrière-plan"
 
 #. settings-schema.json->dial-size->units
 msgid "pixels"
-msgstr ""
+msgstr "pixels"
 
 #. settings-schema.json->dial-size->description
 msgid "Dial size"
-msgstr ""
+msgstr "Taille du cadran"
 
 #. settings-schema.json->dial-size->tooltip
 msgid "Diameter of the dial in the popup; larger values improve readability"
 msgstr ""
+"Diamètre du cadran dans la fenêtre contextuelle; "
+"des valeurs plus élevées améliorent la lisibilité."
