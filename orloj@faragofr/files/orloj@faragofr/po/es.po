@@ -56,20 +56,22 @@ msgstr "Color de contraste"
 
 #. settings-schema.json->foreground-color->description
 msgid "Foreground color (text, hands, glyphs)"
-msgstr ""
+msgstr "Color de primer plano (texto, manecillas, símbolos)"
 
 #. settings-schema.json->background-color->description
 msgid "Background color"
-msgstr ""
+msgstr "Color de fondo"
 
 #. settings-schema.json->dial-size->units
 msgid "pixels"
-msgstr ""
+msgstr "pixeles"
 
 #. settings-schema.json->dial-size->description
 msgid "Dial size"
-msgstr ""
+msgstr "Tamaño de la esfera"
 
 #. settings-schema.json->dial-size->tooltip
 msgid "Diameter of the dial in the popup; larger values improve readability"
 msgstr ""
+"Diámetro de la esfera en la ventana emergente; los valores más grandes "
+"mejoran la legibilidad"
