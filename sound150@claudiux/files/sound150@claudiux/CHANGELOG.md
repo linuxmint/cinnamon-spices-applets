@@ -1,3 +1,6 @@
+### v16.4.3~20260705
+  * Fixes some warnings when a player is first added.
+
 ### v16.4.2~20260617
   * Whether or not to display the OSD in full-screen mode.
   * Fixes [#8803](https://github.com/linuxmint/cinnamon-spices-applets/issues/8803)
