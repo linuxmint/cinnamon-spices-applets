@@ -201,7 +201,10 @@ class OrlojApplet extends Applet.TextApplet {
         if (!this._state) return false;
         const [sx, sy] = event.get_coords();
         const [ax, ay] = actor.get_transformed_position();
-        const [w, h] = actor.get_surface_size();
+        // Use the logical allocation, not get_surface_size(): the surface is
+        // sized in device pixels (× the HiDPI resource scale), whereas the
+        // pointer coords above are logical. hitTest must see the same space.
+        const [w, h] = actor.get_size();
         const label = Dial.hitTest(w, h, this._state, sx - ax, sy - ay);
         if (label === this._lastHoverLabel) return false;
         this._lastHoverLabel = label;
