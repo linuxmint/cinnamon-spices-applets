@@ -1,3 +1,7 @@
+### v3.17.0~20260630
+  * Memory: The “Swap” graph can now take up 50% of the space.
+  * Fixes [#8822](https://github.com/linuxmint/cinnamon-spices-applets/issues/8822)
+
 ### v3.16.9~20260627
   * Tooltip: Memory and Swap amounts are now always shown; the "Show amounts in Bytes" setting selects the unit base instead of hiding them (ON = SI units MB/GB, OFF = IEC binary units MiB/GiB). Fixes the Swap section disappearing when the setting was off, and adds the used percentage to the Memory header to match Swap.
   * Tooltip: the Buffers/Cache/Shared and ZRAM amounts now follow the same unit toggle, so the whole tooltip uses one consistent unit base (OFF = IEC, matching `free -h`).

@@ -2181,7 +2181,7 @@ var ZramDataProvider = class ZramDataProvider {
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
 
-        toolTipString += bytesRow(_("Disksize"), this.data.disksize);
+        toolTipString += bytesRow(_("Disk size"), this.data.disksize);
         toolTipString += bytesRow(_("Data"), this.data.orig);
         toolTipString += bytesRow(_("Compressed"), this.data.compr);
         return toolTipString;

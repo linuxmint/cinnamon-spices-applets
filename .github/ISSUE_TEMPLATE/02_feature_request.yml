@@ -162,6 +162,7 @@ body:
     - onekoToggle@kusch3l @kusch3l
     - orloj@faragofr @faragofr
     - pa-equalizer@jschug.com
+    - pacman-updates@Twilight0 @Twilight0
     - panel-tweaks@anaximeno @anaximeno
     - paneldo@beatlink
     - PanelTranslator@klangman @klangman
@@ -220,6 +221,7 @@ body:
     - spices-notifier@germanfr @germanfr
     - SpiceSpy@claudiux @claudiux
     - SpicesUpdate@claudiux @claudiux
+    - spicy-clipboard-applet@Twilight0 @Twilight0
     - sshconnect@foobar-beer @foobar-beer
     - sshlauncher@sumo @sumo
     - ssm@Severga @Severga
@@ -274,6 +276,7 @@ body:
     - xampp-panel@backids99
     - xsession@claudiux @claudiux
     - yasm@sniemetz @sniemetz
+    - zen-pomodoro@vtestah @vtestah
   id: applet
   type: dropdown
   validations:
