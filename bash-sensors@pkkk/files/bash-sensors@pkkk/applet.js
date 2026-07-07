@@ -48,7 +48,7 @@ MyApplet.prototype = {
 
             if (this.startupScript && this.startupScript.trim()) {
                 this.wait_for_startup_cmd = true;
-                Util.spawnCommandLineAsyncIO('', Lang.bind(this, this.update_started), { argv:  [this.shell, '-c', this.startupScript] });
+                Util.spawnCommandLineAsyncIO('', this.update_started.bind(this), { argv:  [this.shell, '-c', this.startupScript] });
             }
             this.autoupdate();
 
@@ -74,7 +74,7 @@ MyApplet.prototype = {
             if (!this.wait_for_clicked_cmd) {
                 this.wait_for_clicked_cmd = true;
             let cmd = (this.menuScript && this.menuScript.trim()) ? this.menuScript : this.script1;
-                Util.spawnCommandLineAsyncIO('', Lang.bind(this, this.update_clicked), { argv:  [this.shell, '-c', cmd] });
+                Util.spawnCommandLineAsyncIO('', this.update_clicked.bind(this), { argv:  [this.shell, '-c', cmd] });
             } else {
                 this.menuLabel.set_text(_("Error: Still waiting for command to finish!"));
             }
@@ -166,7 +166,7 @@ MyApplet.prototype = {
             if (!this.wait_for_tooltip_cmd) {
                 this.wait_for_tooltip_cmd = true;
             let cmd = (this.tooltipScript && this.tooltipScript.trim()) ? this.tooltipScript : this.script1;
-                Util.spawnCommandLineAsyncIO('', Lang.bind(this, this.update_tooltip), { argv:  [this.shell, '-c', cmd] });
+                Util.spawnCommandLineAsyncIO('', this.update_tooltip.bind(this), { argv:  [this.shell, '-c', cmd] });
             }
         } else {
             this.set_applet_tooltip(this.tooltipScript.trim());
@@ -174,18 +174,18 @@ MyApplet.prototype = {
 
         if (this.script1 && this.script1.trim() && !this.wait_for_label_cmd[0]) {
             this.wait_for_label_cmd[0] = true;
-            Util.spawnCommandLineAsyncIO('', Lang.bind(this, this.update_cmd1), { argv:  [this.shell, '-c', this.script1] });
+            Util.spawnCommandLineAsyncIO('', this.update_cmd1.bind(this), { argv:  [this.shell, '-c', this.script1] });
             }
         if (this.script2 && this.script2.trim() && this.enableScript2 && !this.wait_for_label_cmd[1]) {
             this.wait_for_label_cmd[1] = true;
-            Util.spawnCommandLineAsyncIO('', Lang.bind(this, this.update_cmd2), { argv:  [this.shell, '-c', this.script2] });
+            Util.spawnCommandLineAsyncIO('', this.update_cmd2.bind(this), { argv:  [this.shell, '-c', this.script2] });
         }
 
         if (this.iconScript && this.iconScript.trim()) {
             if (this.dynamicIcon) {
                 if (!this.wait_for_icon_cmd) {
                     this.wait_for_icon_cmd = true;
-                    Util.spawnCommandLineAsyncIO('', Lang.bind(this, this.update_icon), { argv:  [this.shell, '-c', this.iconScript] });
+                    Util.spawnCommandLineAsyncIO('', this.update_icon.bind(this), { argv:  [this.shell, '-c', this.iconScript] });
                 }
             } else {
                 this.set_applet_icon_path(this.iconScript);
