@@ -204,7 +204,7 @@ const OVERAMPLIFICATION_KEY = "allow-amplified-volume";
 const VOLUME_SOUND_ENABLED_KEY = "volume-sound-enabled";
 const VOLUME_SOUND_FILE_KEY = "volume-sound-file";
 
-class Sound150Applet extends Applet.TextIconApplet {
+var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         super(orientation, panel_height, instanceId);
 
@@ -651,6 +651,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._output = null;
         this._outputMutedId = null;
         this._outputIcon = "audio-volume-muted-symbolic";
+        this._playerIcon = [null, false];
 
         this._channelMap = null;
 
@@ -2110,29 +2111,30 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         if (!this.allowChangeArt) return;
 
-        if (player && (player === true || player._playerStatus == 'Playing')) {
-            // Something is playing
-            if (this.showalbum) {
-                if (path) {
-                    this.setIcon(path, "player-path");
-                } else {
-                    if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
-                        this.setIcon("media-optical-cd-audio-with-mic-disabled", "player-name");
-                    else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state))
-                        this.setIcon("media-optical-cd-audio-with-mic-enabled", "player-name");
-                    else
-                        this.setIcon("media-optical-cd-audio", "player-name");
-                }
-            } else {
-                if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
-                    this.setIcon("audio-x-generic-with-mic-disabled", "player-name");
-                else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state))
-                    this.setIcon("audio-x-generic-with-mic-enabled", "player-name");
-                else
-                    this.setIcon("audio-x-generic", "player-name");
-            }
+        if (player && (player === true || player._playerStatus == 'Playing') && this.showalbum && path) {
+            this.setIcon(path, "player-path");
+            //~ // Something is playing
+            //~ if (this.showalbum) {
+                //~ if (path) {
+                    //~ this.setIcon(path, "player-path");
+                //~ } else {
+                    //~ if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
+                        //~ this.setIcon("media-optical-cd-audio-with-mic-disabled", "player-name");
+                    //~ else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state))
+                        //~ this.setIcon("media-optical-cd-audio-with-mic-enabled", "player-name");
+                    //~ else
+                        //~ this.setIcon("media-optical-cd-audio", "player-name");
+                //~ }
+            //~ } else {
+                //~ if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
+                    //~ this.setIcon("audio-x-generic-with-mic-disabled", "player-name");
+                //~ else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state))
+                    //~ this.setIcon("audio-x-generic-with-mic-enabled", "player-name");
+                //~ else
+                    //~ this.setIcon("audio-x-generic", "player-name");
+            //~ }
         } else {
-            // Nothing is playing - clear player icon and show volume icon
+            //~ // Nothing is playing - clear player icon and show volume icon
             this._playerIcon = [null, false];
             this.setIcon(this._outputIcon);
         }
