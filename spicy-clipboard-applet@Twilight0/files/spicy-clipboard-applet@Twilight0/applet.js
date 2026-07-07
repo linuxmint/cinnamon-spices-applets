@@ -622,42 +622,63 @@ MyApplet.prototype = {
         let oldText = this._history[idx];
         let editCmd = [
             "yad",
-            "--entry",
+            "--text-info",
+            "--editable",
             "--title=" + _("Edit Clipboard Item"),
-            "--text=" + _("Modify the clipboard entry:"),
-            "--entry-text=" + oldText,
-            "--width=500"
+            "--width=500",
+            "--height=400"
         ];
         
         try {
             let launcher = new Gio.SubprocessLauncher({
-                flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE
+                flags: Gio.SubprocessFlags.STDIN_PIPE | Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE
             });
             let proc = launcher.spawnv(editCmd);
+            
+            // Write the text to stdin
+            let stdin = proc.get_stdin_pipe();
+            stdin.write_all_async(oldText + "\n", GLib.PRIORITY_DEFAULT, null, (stream, result) => {
+                try {
+                    stream.write_all_finish(result);
+                    stream.close_async(GLib.PRIORITY_DEFAULT, null, null);
+                } catch (err) {
+                    global.logError("Failed to write to yad stdin: " + err);
+                }
+            });
+            
+            // Read ALL edited text from stdout until EOF
             let stdoutStream = new Gio.DataInputStream({
                 base_stream: proc.get_stdout_pipe(),
                 close_base_stream: true
             });
+            let outputLines = [];
             
-            stdoutStream.read_line_async(GLib.PRIORITY_LOW, null, (stream, result) => {
-                try {
-                    let [line] = stream.read_line_finish_utf8(result);
-                    if (line !== null) {
-                        let editedText = line.trim();
-                        if (editedText !== "" && editedText !== oldText) {
-                            this._history[idx] = editedText;
-                            this._saveHistory();
-                            this._buildMenu();
-                            if (this._lastText === oldText) {
-                                this._lastText = editedText;
-                                this._clipboard.set_text(St.ClipboardType.CLIPBOARD, editedText);
+            let readNextLine = () => {
+                stdoutStream.read_line_async(GLib.PRIORITY_LOW, null, (stream, result) => {
+                    try {
+                        let [line, length, terminator] = stream.read_line_finish(result);
+                        if (line !== null) {
+                            outputLines.push(line);
+                            readNextLine(); // Read next line
+                        } else {
+                            // EOF — process all collected lines
+                            let editedText = outputLines.join("\n").trim();
+                            if (editedText !== "" && editedText !== oldText) {
+                                this._history[idx] = editedText;
+                                this._saveHistory();
+                                this._buildMenu();
+                                if (this._lastText === oldText) {
+                                    this._lastText = editedText;
+                                    this._clipboard.set_text(St.ClipboardType.CLIPBOARD, editedText);
+                                }
                             }
                         }
+                    } catch (err) {
+                        global.logError("Failed to read edited text: " + err);
                     }
-                } catch (err) {
-                    global.logError("Failed to read edited text: " + err);
-                }
-            });
+                });
+            };
+            readNextLine();
         } catch (e) {
             global.logError("Failed to edit clipboard item: " + e);
         }
