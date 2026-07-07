@@ -89,6 +89,7 @@ class HDDLEDapplet extends Applet.TextIconApplet {
                 let writes = parseInt(parts[7]);
                 total_r += reads;
                 total_w += writes;
+                devname_prefix = parts[2].trim(); // Ignore partitions
                 devices.push({ name: parts[2].trim(), reads: reads, writes: writes });
             }
         }
@@ -138,10 +139,10 @@ class HDDLEDapplet extends Applet.TextIconApplet {
         nameLabel.set_style(`width: ${COL_WIDTH_NAME}px;` + (bold ? " font-weight: bold;" : ""));
 
         let readsLabel = new St.Label({ text: String(reads) });
-        readsLabel.set_style(`width: ${COL_WIDTH_NUM}px; text-align: right;` + (bold ? " font-weight: bold;" : ""));
+        readsLabel.set_style(`color: #00ff00; width: ${COL_WIDTH_NUM}px; text-align: right;` + (bold ? " font-weight: bold;" : ""));
 
         let writesLabel = new St.Label({ text: String(writes) });
-        writesLabel.set_style(`width: ${COL_WIDTH_NUM}px; text-align: right;` + (bold ? " font-weight: bold;" : ""));
+        writesLabel.set_style(`color: #ff0000; width: ${COL_WIDTH_NUM}px; text-align: right;` + (bold ? " font-weight: bold;" : ""));
 
         item.addActor(nameLabel);
         item.addActor(readsLabel);

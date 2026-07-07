@@ -22,5 +22,5 @@ msgid "HDD activity LED indicator"
 msgstr ""
 
 #. metadata.json->description
-msgid "Emulates HDD/SDD activity LED indicator, for computers without one"
+msgid "Emulates HDD/SSD activity LED indicator, for computers without one"
 msgstr ""
