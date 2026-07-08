@@ -1,0 +1,8 @@
+{
+    "uuid": "systemmonitor@dannt",
+    "name": "System Monitor",
+    "description": "Muestra CPU, RAM, SWAP, GPU y VRAM en el panel",
+    "author": "danny",
+    "url": "https://github.com/RyioTheRock/applet-monitor-de-sistema",
+    "version": "2.0-beta"
+}
