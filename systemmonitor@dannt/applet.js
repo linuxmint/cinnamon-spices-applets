@@ -548,6 +548,9 @@ SystemMonitor.prototype = {
             checkDone();
         })
     },
+    on_applet_clicked: function(event){
+        GLib.spawn_command_line_async("gnome-system-monitor");
+    },
     on_applet_removed_from_panel: function() {
         if (this.loopId) {
             Mainloop.source_remove(this.loopId);
