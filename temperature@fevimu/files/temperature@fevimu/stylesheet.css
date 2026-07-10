@@ -1,3 +1,9 @@
 .temp-monospace {
-    font-family: monospace;
+    font-family: 'monospace';
+    text-align: center;
+    font-size: 100%;
+    vertical-align: middle;
+    background: transparent;
+    margin: 1px;
+    padding: 2px;
 }

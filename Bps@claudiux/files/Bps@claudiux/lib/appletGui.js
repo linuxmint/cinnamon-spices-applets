@@ -1,4 +1,5 @@
 
+const Extension = imports.ui.extension;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
@@ -6,6 +7,15 @@ const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
 const Cairo = imports.cairo;
 const Gettext = imports.gettext;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
 const {
   _sourceIds,
   timeout_add_seconds,
@@ -17,10 +27,10 @@ const {
   source_exists,
   source_remove,
   remove_all_sources
-} = require("./lib/mainloopTools");
+} = _require("./lib/mainloopTools");
 
 const UUID = "Bps@claudiux";
-const CssStylization = require('./lib/cssStylization');
+const CssStylization = _require('./lib/cssStylization');
 
 const DecimalPlaces = {
     AUTO: -1,
@@ -170,7 +180,7 @@ GuiSpeed.prototype = {
 
     _set_icon: function(iconlabel, icon_path) {
         let icon_file = this._load_icon_file(icon_path);
-           iconlabel.set_gicon(icon_file);
+        iconlabel.set_gicon(icon_file);
     },
 
     _load_icon_file: function(icon_path) {
@@ -195,7 +205,8 @@ GuiSpeed.prototype = {
     set_text_style: function(css_style) {
         css_style = this.add_font_size(css_style);
         for(let iconlabel of [this.iconlabel_received, this.iconlabel_sent]){
-            iconlabel.set_label_style(css_style);
+            if (iconlabel)
+                iconlabel.set_label_style(css_style);
         }
 
         this._resize_gui_elements_to_match_text(css_style);
@@ -231,7 +242,8 @@ GuiSpeed.prototype = {
     _set_icons_height_to_font_size: function(css_style) {
         let font_size = this.css_styler.get_numeric_value_or_null(css_style, "font-size");
         for(let iconlabel of [this.iconlabel_received, this.iconlabel_sent]){
-            iconlabel.set_icon_size(font_size);
+            if (iconlabel)
+                iconlabel.set_icon_size(font_size);
         }
     },
 
@@ -248,20 +260,22 @@ GuiSpeed.prototype = {
     _set_labels_fixed_width: function() {
         let fixed_width_text = this._get_fixed_width_text();
         for(let iconlabel of [this.iconlabel_received, this.iconlabel_sent]){
-            iconlabel.set_label_fixed_width(fixed_width_text);
+            if (iconlabel)
+                iconlabel.set_label_fixed_width(fixed_width_text);
         }
     },
 
     _get_fixed_width_text: function() {
         let text = "";
         if(this.decimal_places == DecimalPlaces.AUTO) {
-            text = (this.is_binary) ? " 999.9 MiB " : " 999.9 MB ";
+            text = (this.is_binary) ? " 1023.9 MiB " : " 999.9 MB ";
         }
         else {
-            text = " 999." + this.repeat_string("9", this.decimal_places);
+            text = (this.is_binary) ? " 1023." : " 999.";
+            text += this.repeat_string("9", this.decimal_places);
             text += (this.is_binary) ? " MiB " : " MB ";
         }
-        return text;
+        return text.padStart(10);
     },
 
     repeat_string: function(str, repetitions) {
@@ -272,18 +286,21 @@ GuiSpeed.prototype = {
 
     _set_labels_styled_width: function(width) {
         for(let iconlabel of [this.iconlabel_received, this.iconlabel_sent]){
-            iconlabel.set_label_width(width);
+            if (iconlabel)
+                iconlabel.set_label_width(width);
         }
     },
 
     set_received_text: function(text) {
         let label = this.iconlabel_received.label;
-        label.set_text(text);
+        if (label)
+            label.set_text(text);
     },
 
     set_sent_text: function(text) {
         let label = this.iconlabel_sent.label;
-        label.set_text(text);
+        if (label)
+            label.set_text(text);
     },
 
     set_decimal_places: function(decimal_places) {

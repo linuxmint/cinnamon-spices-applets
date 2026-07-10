@@ -2,6 +2,7 @@
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
+const Signals = imports.signals;
 const UUID = "sound150@claudiux";
 const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
@@ -119,6 +120,8 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
             iconName = "banshee";
         } else if (name === "Spotify") {
             iconName = "spotify";
+        } else if (name === "Strawberry") {
+            iconName = "strawberry";
         } else if (name === "VBox") {
             name = "Virtualbox";
             iconName = "virtualbox";
@@ -144,6 +147,7 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
         }
     }
 }
+Signals.addSignalMethods(StreamMenuSection.prototype);
 
 class Player extends PopupMenu.PopupMenuSection {
     constructor(applet, busname, owner) {
@@ -277,6 +281,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this.trackInfo = new St.BoxLayout({
             style_class: "sound-player-overlay",
             //~ style: "min-height: 6em;", // replaces "height: auto;" REMOVED: DEPRECATED!
+            style: "height: 6em;",
             important: true,
             vertical: true
         });
@@ -291,7 +296,19 @@ class Player extends PopupMenu.PopupMenuSection {
         });
         this.artistLabel.clutterText.line_wrap = true;
         this.artistLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-        this.artistLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+        switch (this._applet.shortenArtistTitle) {
+            case "NONE":
+                this.artistLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+                break;
+            case "START":
+                this.artistLabel.clutterText.ellipsize = Pango.EllipsizeMode.START;
+                break;
+            case "MIDDLE":
+                this.artistLabel.clutterText.ellipsize = Pango.EllipsizeMode.MIDDLE;
+                break;
+            case "END":
+                this.artistLabel.clutterText.ellipsize = Pango.EllipsizeMode.END;
+        }
         artistInfo.add_actor(artistIcon);
         artistInfo.add_actor(this.artistLabel);
         let titleInfo = new St.BoxLayout();
@@ -306,7 +323,19 @@ class Player extends PopupMenu.PopupMenuSection {
 
         this.titleLabel.clutterText.line_wrap = true;
         this.titleLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-        this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+        switch (this._applet.shortenArtistTitle) {
+            case "NONE":
+                this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+                break;
+            case "START":
+                this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.START;
+                break;
+            case "MIDDLE":
+                this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.MIDDLE;
+                break;
+            case "END":
+                this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.END;
+        }
         titleInfo.add_actor(titleIcon);
         titleInfo.add_actor(this.titleLabel);
         //~ titleInfo.add_actor(this.display_cover_button.getActor());
@@ -316,7 +345,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this.coverBox.add_actor(this.trackInfo);
 
         // If the actor is on stage, we set the layout manager
-        //~ // else we're waiting about 500 ms to retry.
+        // else we're waiting about 500 ms to retry.
         if (this.actor && this.coverBox && this.actor.get_stage() != null) {
             this.coverBox.set_layout_manager(COVERBOX_LAYOUT_MANAGER);
         } else {
@@ -614,12 +643,14 @@ class Player extends PopupMenu.PopupMenuSection {
                         //~ log("json_title: "+json_title, true);
                         //~ log("json_artist: "+json_artist, true);
                         if (json_title) {
-                            this._title = capitalize_each_word(json_title);
+                            //~ this._title = capitalize_each_word(json_title);
+                            this._title = json_title.capitalize();
                         } else {
                             this._title = _("Unknown Title");
                         }
                         if (json_artist) {
-                            this._artist = capitalize_each_word(json_artist);
+                            //~ this._artist = capitalize_each_word(json_artist);
+                            this._artist = json_artist.capitalize();
                             this.artistLabel.set_text(this._artist);
                         } else {
                             this._artist = _("Unknown Artist");
@@ -644,11 +675,59 @@ class Player extends PopupMenu.PopupMenuSection {
 
         if (old_title != this._title) {
             del_song_arts();
-            Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            if (this._applet.runAsync)
+                Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            else
+                Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
         }
 
         this.titleLabel.set_text(this._title);
         this._seeker.setTrack(trackid, trackLength, old_title != this._title);
+        
+        if (metadata["xesam:url"]) {
+            //~ global.log("xesam:url = " + metadata["xesam:url"].unpack());
+            let dontDisplayArtSites = this._applet.sitesNotDisplayingAlbumArt;
+            for (let site of dontDisplayArtSites) {
+                if (metadata["xesam:url"].unpack().toLowerCase().includes(site) ||
+                    (metadata["mpris:artUrl"] && metadata["mpris:artUrl"].unpack().toLowerCase().includes(site))) {
+                    if (this._applet.iconsWhenNotDisplayingAlbumArt[site].length > 0) {
+                        let siteIcon = this._applet.iconsWhenNotDisplayingAlbumArt[site];
+                        this._trackCoverFile = `file://${siteIcon}`;
+                        this._applet._icon_path = `${siteIcon}`;
+                        this._applet.setAppletIcon(true, true);
+                        return;
+                    } else {
+                        switch (site) {
+                            case "youtube": 
+                                this._trackCoverFile = `file://${APPLET_DIR}/6.4/icons/youtube.png`;
+                                this._applet._icon_path = `${APPLET_DIR}/6.4/icons/youtube.png`;
+                                this._applet.setAppletIcon(true, true);
+                                return;
+                            case "spotify": 
+                                this._trackCoverFile = `file://${APPLET_DIR}/6.4/icons/spotify.png`;
+                                this._applet._icon_path = `${APPLET_DIR}/6.4/icons/spotify.png`;
+                                this._applet.setAppletIcon(true, true);
+                                return;
+                            case "strawberry": 
+                                this._trackCoverFile = `file://${APPLET_DIR}/6.4/icons/strawberry.png`;
+                                this._applet._icon_path = `${APPLET_DIR}/6.4/icons/strawberry.png`;
+                                this._applet.setAppletIcon(true, true);
+                                return;
+                            default:
+                                this._applet._icon_path = null;
+                                this._trackCoverFile = null;
+                                this._applet.setAppletIcon(null, null);
+                                return;
+                        }
+                        //~ this._applet._icon_path = null;
+                        //~ this._trackCoverFile = null;
+                        //~ this._applet.setAppletIcon(null, null);
+                        //~ return;
+                    }
+                    
+                }
+            }
+        }
 
         let change = false;
         if (metadata["mpris:artUrl"]) {
@@ -658,7 +737,10 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._trackCoverFile = artUrl;
                     change = true;
                 }
-                Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+                if (this._applet.runAsync)
+                    Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+                else
+                    Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             }
         } else if (metadata["xesam:url"]) {
             if (this._oldTitle != this._title) {
@@ -692,7 +774,10 @@ class Player extends PopupMenu.PopupMenuSection {
                 });
             }
         } else {
-            Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            if (this._applet.runAsync)
+                Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            else
+                Util.spawnCommandLine("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             if (this._trackCoverFile != false) {
                 this._trackCoverFile = false;
                 change = true;
@@ -814,7 +899,9 @@ class Player extends PopupMenu.PopupMenuSection {
     }
 
     _showCover(cover_path) {
+        let rnd;
         if (!cover_path || !GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
+            del_song_arts();
             this.cover = new St.Icon({
                 style_class: "sound-player-generic-coverart",
                 important: true,
@@ -825,38 +912,45 @@ class Player extends PopupMenu.PopupMenuSection {
             });
             cover_path = null;
         } else {
-
             let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
             let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
             if ((dir_children.next_file(null)) == null) { // dir does not contain any file.
-                Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
-                    cover_path,
-                    ALBUMART_PICS_DIR,
-                    randomIntegerInInterval(0, superRND).toString()
-                ));
+                if (GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
+                    rnd = randomIntegerInInterval(0, superRND).toString();
+                    if (this._applet.runAsync)
+                        Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                    else
+                        Util.spawnCommandLine(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                } else {
+                    cover_path = null;
+                }
             } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-                del_song_arts();
-                Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
-                    cover_path,
-                    ALBUMART_PICS_DIR,
-                    randomIntegerInInterval(0, superRND).toString()
-                ));
+                //del_song_arts();
+                if (GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
+                    rnd = randomIntegerInInterval(0, superRND).toString();
+                    if (this._applet.runAsync)
+                        Util.spawnCommandLineAsync(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                    else
+                        Util.spawnCommandLine(`cp -a "${cover_path}" ${ALBUMART_PICS_DIR}/R3SongArt${rnd}`);
+                } else {
+                    cover_path = null;
+                }
             }
             dir_children.close(null);
 
             this._cover_path = cover_path;
             this._applet._icon_path = cover_path; // Added
             this._applet.setAppletIcon(this._applet.player, cover_path); // Added
-            this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(
-                cover_path,
-                Math.trunc(300 * this._applet.real_ui_scale),
-                Math.trunc(300 * this._applet.real_ui_scale),
-                (cache, handle, actor) => {
-                    this._on_cover_loaded(cache, handle, actor)
-                }
-            );
+            if (cover_path != null)
+                this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(
+                    cover_path,
+                    Math.trunc(300 * this._applet.real_ui_scale),
+                    Math.trunc(300 * this._applet.real_ui_scale),
+                    (cache, handle, actor) => {
+                        this._on_cover_loaded(cache, handle, actor)
+                    }
+                );
             this._applet.setIcon();
-
 
             //~ log("this._cover_path: "+this._cover_path, true);
             try {
@@ -907,13 +1001,11 @@ class Player extends PopupMenu.PopupMenuSection {
             return;
         }
 
-        try {
-            if (this.coverBox != null && this.cover != null) {
-                let coverBoxChildren = this.coverBox.get_children();
-                if (coverBoxChildren.length > 0 && coverBoxChildren.indexOf(this.cover) > -1)
-                    this.coverBox.remove_child(this.cover);
-            }
-        } catch (e) {}
+        if (this.coverBox != null && this.cover != null) {
+            let coverBoxChildren = this.coverBox.get_children();
+            if (coverBoxChildren.length > 0 && coverBoxChildren.indexOf(this.cover) > -1)
+                try { this.coverBox.remove_child(this.cover) } catch(e) {}
+        }
 
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).
@@ -926,7 +1018,7 @@ class Player extends PopupMenu.PopupMenuSection {
                     mb = 100;
                     break;
                 case 1.0:
-                    mb = 110;
+                    mb = 120;
                     break;
                 case 1.25:
                     mb = 140;
@@ -941,8 +1033,6 @@ class Player extends PopupMenu.PopupMenuSection {
                     mb = 220;
             }
         }
-        //~ let mb = (this._applet.viewFullAlbumArt) ? 110 : 55;
-        //~ mb = Math.round(mb * this._applet.real_ui_scale);
         actor.set_margin_bottom(mb);
 
         actor.set_margin_left(Math.max(0, Math.round(300 * this._applet.real_ui_scale - actor.width)));
@@ -954,10 +1044,20 @@ class Player extends PopupMenu.PopupMenuSection {
                 if (this.cover && !this._applet.dontShowAnyImageInMenu) {
                     this.coverBox.add_actor(this.cover);
                     //~ this.coverBox.set_reactive = true;
+                    //~ this.coverBox.connect("enter-event", (event) => { global.log("xdg-open "+this._cover_path); Util.spawnCommandLineAsync("xdg-open "+this._cover_path) });
+                    //~ this._playerBox.set_reactive = true;
+                    //~ this._playerBox.connect("activate", (event) => { Util.spawnCommandLineAsync("xdg-open " + this._cover_path) });
+                    //~ this.coverBox.actor.set_reactive = true;
+                    //~ this.coverBox.actor.connect("button-press-event", (event) => { global.log("xdg-open "+this._cover_path); Util.spawnCommandLineAsync("xdg-open "+this._cover_path) });
+                    //~ this.coverBox.connect("click-event", (event) => Util.spawnCommandLineAsync("xdg-open "+this._cover_path));
                     //~ this.coverBox.connect("button-press-event", (event) => Util.spawnCommandLineAsync("xdg-open "+this._cover_path));
-                    this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
+                    try {
+                        this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
+                    } catch(e) {}
                 } else {
-                    this.coverBox.set_child_below_sibling(this.trackInfo, null);
+                    try {
+                        this.coverBox.set_child_below_sibling(this.trackInfo, null);
+                    } catch(e) {}
                 }
             }
         } catch (e) {}
@@ -975,10 +1075,10 @@ class Player extends PopupMenu.PopupMenuSection {
         //~ if (this._seeker)
         //~ this._seeker.destroy();
         if (this._prop && this._propChangedId)
-            this._prop.disconnectSignal(this._propChangedId);
+            try { this._prop.disconnectSignal(this._propChangedId) } catch(e) {};
 
         if (this._seeker)
-            this._seeker.destroy();
+            try { this._seeker.destroy() } catch(e) {};
 
         //FIXME!!! Error when a media is playing:
         try {
@@ -988,6 +1088,7 @@ class Player extends PopupMenu.PopupMenuSection {
         }
     }
 }
+Signals.addSignalMethods(Player.prototype);
 
 class Seeker extends Slider.Slider {
     constructor(mediaServerPlayer, props, playerName) {
@@ -1423,7 +1524,7 @@ class Seeker extends Slider.Slider {
             this._seekChangedId = null;
         }
 
-        //~ this.disconnectAll(); //??? Seems cause of bugs.
+        this.disconnectAll(); //??? Seems cause of bugs.
 
         this.posLabel = null;
         this.durLabel = null;
@@ -1432,6 +1533,7 @@ class Seeker extends Slider.Slider {
         this._prop = null;
     }
 }
+Signals.addSignalMethods(Seeker.prototype);
 
 
 
@@ -1469,6 +1571,7 @@ class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
         this._app.activate_full(-1, _time);
     }
 }
+Signals.addSignalMethods(MediaPlayerLauncher.prototype);
 
 module.exports = {
     StreamMenuSection,

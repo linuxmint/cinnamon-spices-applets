@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: sshlauncher@sumo 0.1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2023-12-24 12:01+0100\n"
+"POT-Creation-Date: 2025-11-25 18:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,4 +91,12 @@ msgstr ""
 msgid ""
 "Usually it should end with -e so it will execute the supplied ssh command, "
 "check your chosen terminal's manual."
+msgstr ""
+
+#. settings-schema.json->showConnectionNotification->description
+msgid "Show notification when launching SSH connection"
+msgstr ""
+
+#. settings-schema.json->showConnectionNotification->tooltip
+msgid "Display a notification message when SSH terminal is launched"
 msgstr ""

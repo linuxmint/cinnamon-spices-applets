@@ -215,6 +215,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         { key: 'enable-emoji-search',       value: 'enableEmojiSearch',     cb: null },
         { key: 'web-search-option',         value: 'webSearchOption',       cb: null },
+        { key: 'web-search-custom-url',     value: 'webSearchCustomURL',    cb: null },
         { key: 'web-suggestions',           value: 'webSuggestionsOption',  cb: null },
         { key: 'enable-home-folder-search', value: 'searchHomeFolder',      cb: null },
         { key: 'enable-web-history-search', value: 'enableWebHistorySearch', cb: null },
@@ -1209,7 +1210,7 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.settings.webSearchOption != 0 && !PREFIX_USED) {//0==none
             const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
                             'search.png', 'duckgo_icon.png', 'ask.png', 'ecosia.png', 'search.png',
-                            'startpage.png', 'brave.png', 'qwant.png'][this.settings.webSearchOption - 1];
+                            'startpage.png', 'brave.png', 'qwant.png', 'search.png'][this.settings.webSearchOption - 1];
             const url = [   'https://google.com/search?q=',
                             'https://www.bing.com/search?q=',
                             'https://www.baidu.com/s?wd=',
@@ -1221,7 +1222,8 @@ class CinnamenuApplet extends TextIconApplet {
                             'https://search.aol.co.uk/aol/search?q=',
                             'https://www.startpage.com/sp/search?query=',
                             'https://search.brave.com/search?q=',
-                            'https://www.qwant.com/?q='][this.settings.webSearchOption - 1];
+                            'https://www.qwant.com/?q=',
+                            this.settings.webSearchCustomURL][this.settings.webSearchOption - 1];
 
             const gicon = new Gio.FileIcon(
                                 {file: Gio.file_new_for_path(__meta.path + '/../icons/' + iconName)});

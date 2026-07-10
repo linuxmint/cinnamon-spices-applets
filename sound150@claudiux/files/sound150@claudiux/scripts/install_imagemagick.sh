@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
-### Installs playerctl with password dialog:
-pkexec pkcon -y install imagemagick
+### Installs imagemagick with password dialog:
+[ -x /usr/bin/pkcon ] && {
+    pkexec pkcon -y install imagemagick
+} || {
+    [ -x /usr/bin/pkgcli ] && pkexec pkgcli -y install imagemagick
+}
 ### Pause 1 second:
 sleep 1
 ### Restarts the sound150 applet:

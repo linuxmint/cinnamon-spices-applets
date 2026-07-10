@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-29 10:49+0200\n"
+"POT-Creation-Date: 2025-12-01 10:57+0100\n"
 "PO-Revision-Date: 2025-09-16 02:23+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -20,36 +20,52 @@ msgstr ""
 msgid "missing dependencies"
 msgstr "缺少相依套件"
 
-#. applet.js:229
+#. applet.js:230
+msgid "View error details"
+msgstr ""
+
+#. applet.js:244
 msgid "Check for new updates"
 msgstr "檢查更新"
 
-#. applet.js:243
+#. applet.js:258
 #, javascript-format
 msgid "View %s updates"
 msgstr "檢視 %s 個更新"
 
-#. applet.js:243
+#. applet.js:258
 msgid "No updates to view"
 msgstr "沒有可檢視的更新"
 
-#. applet.js:258
+#. applet.js:273
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "升級 %s 個套件"
 
-#. applet.js:258
+#. applet.js:273
 msgid "No packages to upgrade"
 msgstr "沒有要升級的套件"
 
-#. applet.js:283
+#. applet.js:299
+msgid "Error checking for updates"
+msgstr ""
+
+#. applet.js:307
 #, javascript-format
 msgid "%s updates available"
 msgstr "有 %s 個可用的更新"
 
-#. applet.js:284
+#. applet.js:308
 msgid "No updates available"
 msgstr "沒有可用的更新"
+
+#. error-window.js:16
+msgid "Error"
+msgstr "錯誤"
+
+#. error-window.js:39
+msgid "Error log file not found."
+msgstr ""
 
 #. info-window.js:66 info-window.js:85
 msgid "No details available."

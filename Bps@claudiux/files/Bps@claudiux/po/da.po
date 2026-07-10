@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-28 17:40+0100\n"
-"PO-Revision-Date: 2022-10-26 18:50+0200\n"
+"PO-Revision-Date: 2025-11-29 17:27+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
@@ -17,89 +17,83 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:77
 msgid "Does not work on vertical panel!"
-msgstr ""
+msgstr "Virker ikke med lodrette paneler!"
 
 #. applet.js:244 applet.js:304 applet.js:318
 msgid "   B"
-msgstr ""
+msgstr "   B"
 
 #. applet.js:247 applet.js:293
 msgid " TiB"
-msgstr ""
+msgstr " TiB"
 
 #. applet.js:249 applet.js:296
 msgid " GiB"
-msgstr ""
+msgstr " GiB"
 
 #. applet.js:251 applet.js:299
 msgid " MiB"
-msgstr ""
+msgstr " MiB"
 
 #. applet.js:253 applet.js:302
 msgid " kiB"
-msgstr ""
+msgstr " kiB"
 
 #. applet.js:256 applet.js:307
 msgid " TB"
-msgstr ""
+msgstr " TB"
 
 #. applet.js:258 applet.js:310
-#, fuzzy
 msgid " GB"
-msgstr "Grafisk brugergrænseflade"
+msgstr " GB"
 
 #. applet.js:260 applet.js:313
-#, fuzzy
 msgid " MB"
-msgstr "MB"
+msgstr " MB"
 
 #. applet.js:262 applet.js:316
 msgid " kB"
-msgstr ""
+msgstr " kB"
 
 #. applet.js:265 applet.js:335 applet.js:349
 msgid "   b"
-msgstr ""
+msgstr "   b"
 
 #. applet.js:269 applet.js:324
 msgid " Tib"
-msgstr ""
+msgstr " Tib"
 
 #. applet.js:271 applet.js:327
 msgid " Gib"
-msgstr ""
+msgstr " Gib"
 
 #. applet.js:273 applet.js:330
 msgid " Mib"
-msgstr ""
+msgstr " Mib"
 
 #. applet.js:275 applet.js:333
 msgid " kib"
-msgstr ""
+msgstr " kib"
 
 #. applet.js:278 applet.js:338
-#, fuzzy
 msgid " Tb"
-msgstr "b"
+msgstr " Tb"
 
 #. applet.js:280 applet.js:341
-#, fuzzy
 msgid " Gb"
-msgstr "b"
+msgstr " Gb"
 
 #. applet.js:282 applet.js:344
-#, fuzzy
 msgid " Mb"
-msgstr "b"
+msgstr " Mb"
 
 #. applet.js:284 applet.js:347
-#, fuzzy
 msgid " kb"
-msgstr "b"
+msgstr " kb"
 
 #. metadata.json->description
 msgid "Instant Network Speed is a simple network monitor"
@@ -131,22 +125,23 @@ msgstr "Dataenhed vist i panelet"
 
 #. settings-schema.json->is_binary->description
 msgid "Decimal or binary"
-msgstr ""
+msgstr "Decimal eller binær"
 
 #. settings-schema.json->is_binary->options
-#, fuzzy
 msgid "Decimal"
-msgstr "Decimaler"
+msgstr "Decimal"
 
 #. settings-schema.json->is_binary->options
 msgid "Binary"
-msgstr ""
+msgstr "Binær"
 
 #. settings-schema.json->is_binary->tooltip
 msgid ""
 "Decimal: k, M, G, T\n"
 "Binary: ki, Mi, Gi, Ti"
 msgstr ""
+"Decimal: k, M, G, T\n"
+"Binær: ki, Mi, Gi, Ti"
 
 #. settings-schema.json->gui_start->description
 msgid "Gui"
@@ -165,48 +160,45 @@ msgid "Upload first"
 msgstr "Upload først"
 
 #. settings-schema.json->gui_value_order->tooltip
-#, fuzzy
 msgid "An order of values shown in the panel"
-msgstr "Værdier vist i panelet"
+msgstr "En rækkefølge af værdier vist i panelet"
 
 #. settings-schema.json->minimum_start->description
-#, fuzzy
 msgid "Minimum displayed value"
-msgstr "Mindste viste værdi for upload"
+msgstr "Mindste viste værdi"
 
 #. settings-schema.json->display_minimum_quantity->description
-#, fuzzy
 msgid "Value"
-msgstr "Rækkefølge"
+msgstr "Værdi"
 
 #. settings-schema.json->display_minimum_quantity->tooltip
 msgid "Value between 0 and 999 (decimal) or 1023 (binary)."
-msgstr ""
+msgstr "Værdi mellem 0 og 999 (decimal) eller 1023 (binær)."
 
 #. settings-schema.json->display_minimum_unit_multiple->description
 msgid "Multiple"
-msgstr ""
+msgstr "Multiplikator"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "k"
-msgstr ""
+msgstr "k"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "M"
-msgstr ""
+msgstr "M"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "G"
-msgstr ""
+msgstr "G"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #. settings-schema.json->display_minimum_button->description
 msgid "Apply"
-msgstr ""
+msgstr "Anvend"

@@ -1,3 +1,25 @@
+### v7.12.0~20260629
+  * From now on, when you click the “Themes” icon, the settings window will open correctly.
+  * Fixes an issue in httpLib.js.
+
+### v7.11.2~20260603
+  * Ready for Linux Mint 23.
+
+### v7.11.1~20251217
+  * Animation improvements.
+
+### v7.11.0~20251217
+  * Uses better animation method.
+
+### v7.10.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v7.9.7~20251121
+  * Updates to-string() function.
+
+### v7.9.6~20251121
+  * Improves file monitoring.
+
 ### v7.9.5~20251031
   * Avoids 'destroy' errors.
 

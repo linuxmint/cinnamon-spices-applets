@@ -1,6 +1,7 @@
 
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const GioUnix = imports.gi.GioUnix;
 const Lang = imports.lang;
 
 const Compatibility = require('./lib/compatibility');

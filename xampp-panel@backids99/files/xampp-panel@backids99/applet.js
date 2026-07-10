@@ -22,7 +22,7 @@ var CommandConstants = {
 	COMMAND_RESTART_XAMPP: "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp restart",
 	COMMAND_PHP_CONFIG_EDIT: "xed admin:///opt/lampp/etc/php.ini",
 	COMMAND_HOSTS_EDIT: "xed admin:///etc/hosts",
-	COMMAND_HTTPD_VHOSTS_CONF_EDIT: "xed admin:///opt/lampp/etc/extra.httpd-vhosts.conf",
+	COMMAND_HTTPD_VHOSTS_CONF_EDIT: "xed admin:///opt/lampp/etc/extra/httpd-vhosts.conf",
 	COMMAND_HTTPD_CONF_EDIT: "xed admin:///opt/lampp/etc/httpd.conf",
 	COMMAND_LAUNCH_PHPMYADMIN: "xdg-open http://localhost/phpmyadmin/",
 	COMMAND_LAUNCH_WEBDIR: "xdg-open http://localhost/",
@@ -88,7 +88,7 @@ MyApplet.prototype = {
 						Util.spawnCommandLine(CommandConstants.COMMAND_HOSTS_EDIT);
 		});
 
-		this.menu.addAction(_("Edit extra.httpd-vhosts.conf"), function(event) {
+		this.menu.addAction(_("Edit extra/httpd-vhosts.conf"), function(event) {
 						Util.spawnCommandLine(CommandConstants.COMMAND_HTTPD_VHOSTS_CONF_EDIT);
 		});
 

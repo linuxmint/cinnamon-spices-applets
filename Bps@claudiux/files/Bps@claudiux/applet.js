@@ -6,13 +6,24 @@ const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const Util = imports.misc.util;
-const { to_string } = require("./lib/to-string");
+
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
+const { to_string } = _require("./lib/to-string");
 const {
   timeout_add_seconds,
   remove_all_sources
-} = require("./lib/mainloopTools");
+} = _require("./lib/mainloopTools");
 
-const UUID = 'Bps@claudiux';
+const UUID = "Bps@claudiux";
+const APPLET_NAME = _("Bps: Instant Network Speed");
 const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = `${HOME_DIR}/.local/share/cinnamon/applets/${UUID}`;
 const ICONS_DIR = `${APPLET_DIR}/icons`;
@@ -22,7 +33,7 @@ const ICON_FORBIDDEN = `${ICONS_DIR}/forbidden-symbolic.svg`;
 const SCRIPTS_DIR = `${APPLET_DIR}/scripts`;
 const DATA_SCRIPT = `${SCRIPTS_DIR}/get-network-data.sh`;
 
-const AppletGui = require('./lib/appletGui');
+const AppletGui = require("./lib/appletGui");
 
 const _KI = Math.pow(2, 10);
 const _MI = Math.pow(2, 20);
@@ -54,21 +65,20 @@ function _(str) {
     return Gettext.dgettext(UUID, str);
 }
 
-class Bps extends Applet.Applet {
+var Bps = class Bps extends Applet.Applet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
         this.orientation = orientation;
         this.instanceId = instance_id;
         this.applet_version = metadata.version;
-        this.applet_name = metadata.name;
 
         this.setAllowedLayout(Applet.AllowedLayout.HORIZONTAL);
 
         if (this.is_vertical) {
-            this.set_applet_tooltip(_(this.applet_name) + "\n<b>" + _("Does not work on vertical panel!") + "</b>", true);
+            this.set_applet_tooltip(APPLET_NAME + "\n<b>" + _("Does not work on vertical panel!") + "</b>", true);
             this.is_running = false;
         } else {
-            this.set_applet_tooltip(_(this.applet_name));
+            this.set_applet_tooltip(APPLET_NAME);
             this.is_running = true;
         }
 
@@ -171,11 +181,13 @@ class Bps extends Applet.Applet {
                         already_treated.push(d[0]);
                         let rx, tx;
                         if (isNaN(d[1])) {
+                            if (this.network_data[d[0]] == undefined) continue;
                             rx = this.network_data[d[0]]["rx"];
                         } else {
                             rx = parseInt(d[1])
                         }
                         if (isNaN(d[2])) {
+                            if (this.network_data[d[0]] == undefined) continue;
                             tx = this.network_data[d[0]]["tx"];
                         } else {
                             tx = parseInt(d[2]);
@@ -253,7 +265,7 @@ class Bps extends Applet.Applet {
                         unit = _(" kb");
                 }
             }
-            return value + unit;
+            return value.padStart(5) + unit;
         }
 
         if (this.unit_type === 0) { // bytes
@@ -330,8 +342,8 @@ class Bps extends Applet.Applet {
         } else {
             // Returns 1 decimal, even if this is 0.
             if (v.includes("."))
-                return v;
-            return v+".0"
+                return v.padStart(5);
+            return (v+".0").padStart(5)
         }
     } // End of formatted_string
 

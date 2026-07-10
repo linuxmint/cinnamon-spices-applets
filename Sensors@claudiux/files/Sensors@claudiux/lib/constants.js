@@ -32,12 +32,11 @@ const versionCompare = (left, right) => {
   return 0;
 };
 
-var xs_path = "/usr/bin/xlet-settings";
-
-if (versionCompare(GLib.getenv('CINNAMON_VERSION').toString(), "4.2") < 0)
-  xs_path = SCRIPTS_DIR + "/xs.py";
-
-const XS_PATH = xs_path;
+//~ var xs_path = "/usr/bin/xlet-settings";
+//~ if (versionCompare(GLib.getenv('CINNAMON_VERSION').toString(), "4.2") < 0)
+  //~ xs_path = SCRIPTS_DIR + "/xs.py";
+//~ const XS_PATH = xs_path;
+const XS_PATH = "/usr/bin/xlet-settings";
 
 /**
  * DEBUG:

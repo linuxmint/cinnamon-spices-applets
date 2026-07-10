@@ -1,3 +1,4 @@
+import { LocationProvider } from "../../config";
 import { HttpLib } from "../../lib/httpLib";
 import { ErrorHandler } from "../../lib/services/error_handler";
 import { Logger } from "../../lib/services/logger";
@@ -10,6 +11,7 @@ import type { GeoIP } from "./base";
  * https://docs.fedoraproject.org/en-US/infra/sysadmin_guide/geoip-city-wsgi/
  */
 export class GeoIPFedora implements GeoIP {
+	public readonly provider = LocationProvider.FedoraGeoIP;
 	private readonly query = "https://geoip.fedoraproject.org/city";
 
 	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
@@ -29,7 +31,7 @@ export class GeoIPFedora implements GeoIP {
 				type: "hard",
 				detail: "bad api response",
 				message: _("Location Service couldn't find your location, please see the logs in Looking Glass"),
-				service: "geoip.fedoreproject"
+				service: "geoip.fedoraproject"
 			})
 			return null;
 		}

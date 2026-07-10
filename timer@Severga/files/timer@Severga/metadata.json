@@ -2,6 +2,7 @@
 	"uuid": "timer@Severga",
 	"name": "Timer",
 	"description": "A timer applet",
+	"version": 1.0,
 	"hide-configuration": false,
 	"max-instances": -1
 }

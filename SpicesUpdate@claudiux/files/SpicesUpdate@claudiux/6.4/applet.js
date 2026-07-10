@@ -6,6 +6,16 @@ const { IconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
 const { AppletSettings } = imports.ui.settings;
 //WindowTracker:
 const windowTracker = imports.gi.Cinnamon.WindowTracker.get_default();
+//Extension:
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
 //St:
 const {
   Icon,
@@ -19,7 +29,7 @@ const {
   TextDirection,
 } = imports.gi.St;
 //Clutter:
-const { Image, Actor, Color, RotateAxis } = imports.gi.Clutter;
+const { Image, Actor, Color, RotateAxis, AnimationMode } = imports.gi.Clutter;
 //GdkPixbuf:
 const { Pixbuf } = imports.gi.GdkPixbuf;
 //Cogl:
@@ -82,13 +92,12 @@ const {
   source_exists,
   source_remove,
   remove_all_sources,
-} = require("mainloopTools");
+} = _require("mainloopTools");
 
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
-const Extension = imports.ui.extension;
 const Tooltips = imports.ui.tooltips;
-const Tweener = imports.ui.tweener;
+//~ const Tweener = imports.ui.tweener;
 const Json = imports.gi.Json;
 imports.gi.versions.Soup = "3.0";
 const Soup = imports.gi.Soup;
@@ -97,9 +106,9 @@ const Cinnamon = imports.gi.Cinnamon;
 const Pango = imports.gi.Pango;
 const Clutter = imports.gi.Clutter;
 
-const { to_string } = require("to-string");
+const { to_string } = _require("to-string");
 
-const { HttpLib, Jobs } = require("httpLib");
+const { HttpLib, Jobs } = _require("httpLib");
 // constants:
 const {
   UUID,
@@ -132,13 +141,13 @@ const {
   log,
   logDebug,
   logError,
-} = require("./constants");
+} = _require("./constants");
 
 // Waiting times for downloads:
 //~ var WAITING = {}
 //~ for (let t of TYPES) WAITING[t] = 30000; // 30 seconds
 
-const { versionCompare } = require("./utils");
+const { versionCompare } = _require("./utils");
 
 const ICONTHEME = Gtk.IconTheme.get_default();
 ICONTHEME.prepend_search_path(ICONS_DIR);
@@ -176,7 +185,7 @@ function SU_setup_logging(quiet = false, verbose = false) {
   }
 }
 
-const SpicesUpdate_Notification = require("./notifications");
+const SpicesUpdate_Notification = _require("./notifications");
 
 let SU_Notification = SpicesUpdate_Notification.SU_Notification;
 
@@ -226,7 +235,7 @@ function get_current_timestamp() {
 /**
  * Class SpicesUpdate
  */
-class SpicesUpdate extends IconApplet {
+var SpicesUpdate = class SpicesUpdate extends IconApplet {
   constructor(metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
     this.instanceId = "" + instance_id;
@@ -763,10 +772,10 @@ class SpicesUpdate extends IconApplet {
     let iconSize = this.getPanelIconSize(IconType.SYMBOLIC);
 
     if (this.actor.get_stage() != null && this.badge != null) {
-      this.actor.remove_child(this.badge);
-      this.badge = null;
+      try { this.actor.remove_child(this.badge); } catch(e) {}
     }
 
+    this.badge = null;
     this.badge = new BoxLayout({
       style_class: "grouped-window-list-badge",
       important: true,
@@ -1145,12 +1154,12 @@ class SpicesUpdate extends IconApplet {
   } // End of on_btn_cs_extensions_pressed
 
   on_btn_cs_themes_pressed() {
-    spawnCommandLineAsync("%s themes -t %s -s %s".format(CS_PATH, TAB, SORT));
+    spawnCommandLineAsync("%s themes -t 2 -s 4".format(CS_PATH));
   } // End of on_btn_cs_themes_pressed
 
   on_btn_cs_actions_pressed() {
     spawnCommandLineAsync("%s actions -t %s -s %s".format(CS_PATH, TAB, SORT));
-  } // End of on_btn_cs_themes_pressed
+  } // End of on_btn_cs_actions_pressed
 
   on_tooltip_max_width_screen_percentage_changed() {
     let _screen;
@@ -1670,7 +1679,11 @@ class SpicesUpdate extends IconApplet {
 
   _get_last_edited_from_cache(type, uuid) {
     var cacheParser = new Json.Parser();
-    cacheParser.load_from_data(this.cache[type], -1);
+    try {
+      cacheParser.load_from_data(this.cache[type], -1);
+    } catch(e) {
+      return null;
+    }
     var ok = false;
     var lastEdited = null;
     try {
@@ -2282,7 +2295,7 @@ class SpicesUpdate extends IconApplet {
 
     this.closeSettingsWindow();
 
-    let pid = spawnCommandLine(`cinnamon-settings applets ${UUID} -i ${this.instance_id} -t ${tab}`);
+    let pid = spawnCommandLine(`xlet-settings applet ${UUID} -i ${this.instance_id} -t ${tab}`);
 
     if (maximize_vertically) {
       var app = null;
@@ -2332,6 +2345,7 @@ class SpicesUpdate extends IconApplet {
     let char_new = "☄"; // "\u2604";
     let ts;
     for (let t of TYPES) {
+      var tab = ""+TAB;
       ts = _(capitalize(t.toString()));
       if (this.nb_in_menu[t] - this.new_Spices[t].length > 0)
         ts += "   %s %s".format(
@@ -2344,7 +2358,9 @@ class SpicesUpdate extends IconApplet {
         ts = "⏺  " + ts;
       else
         ts = "    " + ts;
-      this.menu.addCommandlineAction(ts, "%s %s -t %s -s %s".format(CS_PATH, t.toString(), TAB, SORT));
+      if (t === "themes")
+        tab = "2";
+      this.menu.addCommandlineAction(ts, "%s %s -t %s -s %s".format(CS_PATH, t.toString(), tab, SORT));
     }
     // button Forget
     if (this.nb_to_watch > 0) {
@@ -2674,7 +2690,12 @@ class SpicesUpdate extends IconApplet {
     var monitor, Id;
     for (let tuple of this.monitors) {
       [monitor, Id] = tuple;
-      monitor.disconnect(Id);
+      try {
+        monitor.disconnect(Id);
+      } catch(e) {
+      } finally {
+        monitor = null;
+      }
     }
     this.monitors = [];
     this.alreadyMonitored = [];
@@ -2735,10 +2756,13 @@ class SpicesUpdate extends IconApplet {
         }
       }
     }
-    Tweener.addTween(this.actor, {
+    //~ Tweener.addTween(this.actor, {
+    this.actor.ease({
       opacity: 255,
-      transition: "easeOutQuad", //"linear",
-      time: 1,
+      //~ transition: "easeOutQuad", //"linear",
+      mode: AnimationMode.EASE_OUT_QUAD,
+      //~ time: 1,
+      duration: 1000,
       onComplete: null,
     });
   } // End of set_icon_color
@@ -2864,11 +2888,14 @@ class SpicesUpdate extends IconApplet {
       this.interval != null &&
       this.actor.get_stage() != null
     ) {
-      Tweener.addTween(this.actor, {
+      //~ Tweener.addTween(this.actor, {
+      this.actor.ease({
         opacity: 255,
-        transition: "easeOutQuad", //"linear",
+        //~ transition: "easeOutQuad", //"linear",
+        mode: AnimationMode.EASE_OUT_QUAD,
         delay: 0,
-        time: 1,
+        //~ time: 1,
+        duration: 1000,
         rounded: true,
         onComplete: () => {
           if (this.interval != null && _sourceIds.indexOf(this.interval) > -1) {
@@ -2898,7 +2925,8 @@ class SpicesUpdate extends IconApplet {
     this.set_applet_icon_symbolic_name("spices-update");
     this.set_icon_color();
     this.do_rotation = false;
-    Tweener.removeTweens(this.actor);
+    //~ Tweener.removeTweens(this.actor);
+    this.actor.remove_all_transitions();
   }
 
   // This is the loop run at general_frequency rate to call updateUI() to update the display in the applet and tooltip
@@ -3235,7 +3263,8 @@ class SpicesUpdate extends IconApplet {
     //~ }
     //~ }
 
-    if (Tweener.getTweenCount(this.actor) > 0) Tweener.removeTweens(this.actor);
+    //~ if (Tweener.getTweenCount(this.actor) > 0) Tweener.removeTweens(this.actor);
+    this.actor.remove_all_transitions();
 
     remove_all_sources();
   } // End of on_applet_removed_from_panel

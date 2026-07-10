@@ -88,6 +88,11 @@
     "description": "Only show windows on the same monitor",
     "tooltip": "If enabled, this applet instance only manages windows\nthat are displayed on the same monitor"
   },
+  "show_progress-indicator": {
+    "type": "switch",
+    "default": "true",
+    "description": "Show a progress indicator"
+  },
   "section3": {
     "type": "section",
     "description" : "Preview menu"

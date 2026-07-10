@@ -1,3 +1,21 @@
+### v5.3.1~20260528
+  * Ready for Linux Mint 23 with some improvements.
+
+### v5.3.0~20260510
+  * Ready for Linux Mint 23.
+
+### v5.2.0~20251212
+  * Use xlet-settings instead of cinnamon-settings to configure applet.
+
+### v5.1.4~20251121
+  * Updates to-string() function.
+
+### v5.1.3~20251121
+  * Minor improvements.
+
+### v5.1.2~20251101
+  * Increase stability.
+
 ### v5.1.1~20251031
   * Avoids paint() errors.
 

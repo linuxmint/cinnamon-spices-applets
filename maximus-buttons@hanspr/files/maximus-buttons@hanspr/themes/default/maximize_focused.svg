@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 0.96 0.96"
+   version="1.1"
+   id="svg11"
+   sodipodi:docname="maximize_focused.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+  <sodipodi:namedview
+     id="namedview13"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="32.041667"
+     inkscape:cx="11.984395"
+     inkscape:cy="12.031209"
+     inkscape:window-width="1920"
+     inkscape:window-height="1014"
+     inkscape:window-x="0"
+     inkscape:window-y="34"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg11" />
+  <title
+     id="title2">plus-circle</title>
+  <desc
+     id="desc4">Created with Sketch Beta.</desc>
+  <defs
+     id="defs6" />
+  <g
+     id="Page-1"
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd"
+     sketch:type="MSPage"
+     transform="matrix(0.02125,0,0,0.02125,0.14,0.14)"
+     style="fill:#225500">
+    <g
+       id="Icon-Set-Filled"
+       sketch:type="MSLayerGroup"
+       transform="translate(-466,-1089)"
+       fill="#000000"
+       style="fill:#225500">
+      <path
+         d="m 488,1106 h -5 v 5 c 0,0.55 -0.447,1 -1,1 -0.553,0 -1,-0.45 -1,-1 v -5 h -5 c -0.553,0 -1,-0.45 -1,-1 0,-0.55 0.447,-1 1,-1 h 5 v -5 c 0,-0.55 0.447,-1 1,-1 0.553,0 1,0.45 1,1 v 5 h 5 c 0.553,0 1,0.45 1,1 0,0.55 -0.447,1 -1,1 z m -6,-17 c -8.837,0 -16,7.16 -16,16 0,8.84 7.163,16 16,16 8.837,0 16,-7.16 16,-16 0,-8.84 -7.163,-16 -16,-16 z"
+         id="plus-circle"
+         sketch:type="MSShapeGroup"
+         style="fill:#225500" />
+    </g>
+  </g>
+  <metadata
+     id="metadata173">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>plus-circle</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

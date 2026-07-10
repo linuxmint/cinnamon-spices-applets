@@ -1,3 +1,58 @@
+### v3.13.0~20260624
+  * For each radio station, users can set the number of seconds during which the sound is muted to skip ads when they start listening to that station.
+  * Fixes [#8799](https://github.com/linuxmint/cinnamon-spices-applets/issues/8799).
+
+### v3.12.0~20260616
+  * Added option: Waiting time before a new radio turns on.
+  * Fixes [#8799](https://github.com/linuxmint/cinnamon-spices-applets/issues/8799).
+
+### v3.11.4~20260609
+  * Fixes quoting error in title.
+  * Fixes [#8761](https://github.com/linuxmint/cinnamon-spices-applets/issues/8761).
+
+### v3.11.3~20260523
+  * Ready for Linux Mint 23.
+  * Fixes a bug in menu size.
+  * Fixes [#8687](https://github.com/linuxmint/cinnamon-spices-applets/issues/8687).
+
+### v3.11.2~20260508
+  * Installing dependencies: Use pkgcli when available
+
+### v3.11.1~20260414
+  * Fixes certain dependency issues.
+
+### v3.11.0~20260221
+  * Smooth reading of certain files.
+
+### v3.10.2~20260112
+  * Repairs the "Configure..." menu for Cinnamon 6.6.
+  * Adds the ability to set the width of the configuration window. See the Behavior tab.
+
+### v3.10.1~20260105
+  * Repairs notifications.
+  * Add option "Fastest" for "Quality of downloaded Album Art".
+
+### v3.10.0~20251211
+  * Working well with Cinnamon 6.6.
+
+### v3.9.5~20251129
+  * Better file monitoring.
+
+### v3.9.4~20251124
+  * Minor bugfix (menu).
+
+### v3.9.3~20251121
+  * Updates to-string() function.
+
+### v3.9.2~20251121
+  * Improves file monitoring.
+
+### v3.9.1~20251106
+  * Improves stability.
+
+### v3.9.0~20251102
+  * Improves stability.
+
 ### v3.8.4~20251031
   * Avoids paint() errors.
 

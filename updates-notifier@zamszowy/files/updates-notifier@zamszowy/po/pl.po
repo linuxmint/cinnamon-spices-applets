@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-29 10:49+0200\n"
+"POT-Creation-Date: 2025-12-01 10:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,36 +22,52 @@ msgstr ""
 msgid "missing dependencies"
 msgstr "brakujące zależności"
 
-#. applet.js:229
+#. applet.js:230
+msgid "View error details"
+msgstr ""
+
+#. applet.js:244
 msgid "Check for new updates"
 msgstr "Sprawdź nowe aktualizacje"
 
-#. applet.js:243
+#. applet.js:258
 #, javascript-format
 msgid "View %s updates"
 msgstr "Zobacz %s aktualizacji"
 
-#. applet.js:243
+#. applet.js:258
 msgid "No updates to view"
 msgstr "Brak aktualizacji do wyświetlenia"
 
-#. applet.js:258
+#. applet.js:273
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "Zaktualizuj %s pakietów"
 
-#. applet.js:258
+#. applet.js:273
 msgid "No packages to upgrade"
 msgstr "Brak pakietów do zaktualizowania"
 
-#. applet.js:283
+#. applet.js:299
+msgid "Error checking for updates"
+msgstr ""
+
+#. applet.js:307
 #, javascript-format
 msgid "%s updates available"
 msgstr "%s dostępnych aktualizacji"
 
-#. applet.js:284
+#. applet.js:308
 msgid "No updates available"
 msgstr "Brak dostępnych aktualizacji"
+
+#. error-window.js:16
+msgid "Error"
+msgstr "Błąd"
+
+#. error-window.js:39
+msgid "Error log file not found."
+msgstr ""
 
 #. info-window.js:66 info-window.js:85
 msgid "No details available."
