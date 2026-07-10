@@ -46,11 +46,21 @@ AzanApplet.prototype = {
             // option settings, values are bound in _bindSettings
             // using _opt prefix to make them easy to identify
             this._opt_calculationMethod = null;
+            this._opt_juristic = null;
             this._opt_latitude = null;
             this._opt_longitude = null;
             this._opt_timezone = null;
-            this._opt_juristic = null;
+            this._opt_primaryReminder = null;
             this._opt_extraReminder = null;
+            this._opt_adjImsak = null;
+            this._opt_adjFajr = null;
+            this._opt_adjSunrise = null;
+            this._opt_adjDhuhr = null;
+            this._opt_adjAsr = null;
+            this._opt_adjSunset = null;
+            this._opt_adjMaghrib = null;
+            this._opt_adjIsha = null;
+            this._opt_adjMidnight = null;
 
             this._settingsProvider = new Settings.AppletSettings(this, metadata.uuid, instanceId);
             this._bindSettings();
@@ -76,7 +86,7 @@ AzanApplet.prototype = {
 
             //var car = {type:"Fiat", model:"500", color:"white"};
 
-            this._dayNames = new Array("Ahad", "Ithnin", "Thulatha", "Arbaa", "Khams", "Jumuah", "Sabt");
+            this._dayNames = new Array("Ahad", "Ithnin", "Thulatha", "Arbaa", "Khamis", "Jumuah", "Sabt");
             this._monthNames = new Array("Muharram", "Safar", "Rabi'ul Awwal", "Rabi'ul Akhir",
                 "Jumadal Ula", "Jumadal Akhira", "Rajab", "Sha'ban",
                 "Ramadan", "Shawwal", "Dhul Qa'ada", "Dhul Hijja");
@@ -146,10 +156,9 @@ AzanApplet.prototype = {
 
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-            this.menu.addAction(_("Settings"), Lang.bind(this, function() {
-                let command = "cinnamon-settings applets %s".format(this._metadata.uuid);
-                Util.trySpawnCommandLine(command);
-            }));
+            this.menu.addAction(_("Azan Settings"), () => {
+                Util.spawnCommandLine("xlet-settings applet " + this._metadata.uuid);
+            });
 
             // this.menu.addSettingsAction(_("Power Settings"), 'power');
 
@@ -174,6 +183,15 @@ AzanApplet.prototype = {
             Settings.BindingDirection.IN,
             "calculation_method",
             "_opt_calculationMethod",
+            function() {
+                this._updateLabel();
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "juristic",
+            "_opt_juristic",
             function() {
                 this._updateLabel();
             }
@@ -217,8 +235,8 @@ AzanApplet.prototype = {
 		
         this._settingsProvider.bindProperty(
             Settings.BindingDirection.IN,
-            "juristic",
-            "_opt_juristic",
+            "primary_reminder",
+            "_opt_primaryReminder",
             function() {
                 this._updateLabel();
             }
@@ -228,6 +246,87 @@ AzanApplet.prototype = {
             Settings.BindingDirection.IN,
             "extra_reminder",
             "_opt_extraReminder",
+            function() {
+                this._updateLabel();
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "adj_imsak",
+            "_opt_adjImsak",
+            function() {
+                this._updateLabel();
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "adj_fajr",
+            "_opt_adjFajr",
+            function() {
+                this._updateLabel();
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "adj_sunrise",
+            "_opt_adjSunrise",
+            function() {
+                this._updateLabel();
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "adj_dhuhr",
+            "_opt_adjDhuhr",
+            function() {
+                this._updateLabel();
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "adj_asr",
+            "_opt_adjAsr",
+            function() {
+                this._updateLabel();
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "adj_sunset",
+            "_opt_adjSunset",
+            function() {
+                this._updateLabel();
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "adj_maghrib",
+            "_opt_adjMaghrib",
+            function() {
+                this._updateLabel();
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "adj_isha",
+            "_opt_adjIsha",
+            function() {
+                this._updateLabel();
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "adj_midnight",
+            "_opt_adjMidnight",
             function() {
                 this._updateLabel();
             }
@@ -263,6 +362,18 @@ AzanApplet.prototype = {
         // Adjust Juristic Setting
         this._prayTimes.adjust({asr: this._opt_juristic});
 
+        this._prayTimes.tune({
+                imsak: this._opt_adjImsak,
+                fajr: this._opt_adjFajr,
+                sunrise: this._opt_adjSunrise,
+                dhuhr: this._opt_adjDhuhr,
+                asr: this._opt_adjAsr,
+                sunset: this._opt_adjSunset,
+                maghrib: this._opt_adjMaghrib,
+                isha: this._opt_adjIsha,
+                midnight: this._opt_adjMidnight
+        });
+
         let currentDate = new Date();
 
         let currentSeconds = this._calculateSecondsFromDate(currentDate);
@@ -270,6 +381,7 @@ AzanApplet.prototype = {
         let timesStr = this._prayTimes.getTimes(currentDate, myLocation, myTimezone, 'auto', this._opt_timeFormat);
         let timesFloat = this._prayTimes.getTimes(currentDate, myLocation, myTimezone, 'auto', 'Float');
 
+        let remindAtPrayer = this._opt_primaryReminder;
         let extraReminderTime = this._opt_extraReminder;
 
         let nearestPrayerId;
@@ -335,7 +447,9 @@ AzanApplet.prototype = {
 
         // this.set_applet_label(this._timeNames[nearestPrayerId] + ' ' + timesStr[nearestPrayerId]);
         if (isTimeForPraying) {
-            Main.notify(_("It's time for " + this._timeNames[nearestPrayerId]));
+            if (remindAtPrayer) {
+                Main.notify(_("It's time for " + this._timeNames[nearestPrayerId]));
+            }
             this.set_applet_label(_("Now : " + this._timeNames[nearestPrayerId]));
         } else {
             this.set_applet_label(this._timeNames[nearestPrayerId] + ' -' + this._formatRemainingTimeFromMinutes(minDiffMinutes));
