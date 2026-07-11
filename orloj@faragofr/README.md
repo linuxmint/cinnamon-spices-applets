@@ -25,6 +25,11 @@ Arrows indicate rise (↑) or set (↓). A `+Nd` suffix appears for events
 more than a day away. Either body's entry can be hidden in the settings;
 the layout collapses accordingly.
 
+Optionally (off by default), a schematic moon disk showing the current
+phase can be added to the left of the times, with the illumination
+percentage and the phase angle (Sun→Moon elongation: 0° new, 90° first
+quarter, 180° full, 270° last quarter) beneath it.
+
 By default the clock behaves as it always has: the dial center shows local
 sidereal time and all civil times use the system time zone. Unchecking
 *Use Local Sidereal Time* in the settings switches the dial center to civil
@@ -64,6 +69,7 @@ Right-click the applet and choose *Configure*:
 | Time zone | Manual time zone selection, shown when automatic is off |
 | Show the sun's / moon's next rise/set | Toggle each body's entry (whichever of rise or set comes soonest) in the panel label |
 | Always show both sunset and sunrise / moonset and moonrise | Per body: show rise and set stacked in two lines instead of only the soonest event (default off) |
+| Show moon phase | Schematic moon disk with illumination % and phase angle (default off) |
 | Refresh interval | How often positions are recomputed (default 30s) |
 | Accent color | Color of the time hand and sun glyph |
 | Foreground color | Text, hands and glyphs; intermediate tones are derived from it |

@@ -66,6 +66,12 @@
         "description": "Always show both moonset and moonrise",
         "tooltip": "Show the moon's rise and set stacked in two lines instead of only the soonest event."
     },
+    "show-moon-phase": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Show moon phase in the panel",
+        "tooltip": "Schematic moon disk with percent illumination and phase angle (0° new, 90° first quarter, 180° full, 270° last quarter), left of the rise/set times."
+    },
     "refresh-seconds": {
         "type": "spinbutton",
         "default": 30,

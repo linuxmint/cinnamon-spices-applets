@@ -38,6 +38,27 @@ class OrlojApplet extends Applet.TextApplet {
         this._bodyBox.add_actor(this._moonLabel);
         this.actor.insert_child_below(this._bodyBox, this._layoutBin);
 
+        // Moon-phase widget: schematic disk with "illum% phase°" beneath,
+        // shown left of the rise/set columns (toggled by show-moon-phase).
+        this._moonBox = new St.BoxLayout({
+            vertical: true,
+            y_align: Clutter.ActorAlign.CENTER,
+            style: "padding-right: 5px;"
+        });
+        this._moonPhaseArea = new St.DrawingArea({
+            width: 22, height: 22,
+            x_align: Clutter.ActorAlign.CENTER
+        });
+        this._moonPhaseArea.connect("repaint", this._onMoonPhaseRepaint.bind(this));
+        this._moonPhaseLabel = new St.Label({
+            style: "font-size: 8px;",
+            x_align: Clutter.ActorAlign.CENTER
+        });
+        this._moonBox.add_actor(this._moonPhaseArea);
+        this._moonBox.add_actor(this._moonPhaseLabel);
+        this._moonBox.hide();
+        this.actor.insert_child_below(this._moonBox, this._bodyBox);
+
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
@@ -90,6 +111,7 @@ class OrlojApplet extends Applet.TextApplet {
         this._settings.bind("show-both-sun",   "showBothSun",    () => this._refresh());
         this._settings.bind("show-moonrise",   "showMoonrise",   () => this._refresh());
         this._settings.bind("show-both-moon",  "showBothMoon",   () => this._refresh());
+        this._settings.bind("show-moon-phase", "showMoonPhase",  () => this._refresh());
         this._settings.bind("refresh-seconds", "refreshSeconds", () => this._scheduleRefresh());
         this._settings.bind("accent-color",    "accentColor",    () => this._refresh());
         this._settings.bind("foreground-color","foregroundColor",() => this._applyColors());
@@ -297,6 +319,7 @@ class OrlojApplet extends Applet.TextApplet {
             this._moonLabel.hide();
             this.set_applet_label("set lat/lon");
             this._state = null;
+            this._moonBox.hide();
             this._drawingArea.queue_repaint();
             return;
         }
@@ -438,6 +461,16 @@ class OrlojApplet extends Applet.TextApplet {
             altitudes:         altitudes
         };
 
+        if (this.showMoonPhase) {
+            const illum = (1 - Math.cos(moonPh * Math.PI / 180)) / 2;
+            this._moonPhaseLabel.set_text(
+                `${Math.round(illum * 100)}% ${Math.round(moonPh)}°`);
+            this._moonBox.show();
+            this._moonPhaseArea.queue_repaint();
+        } else {
+            this._moonBox.hide();
+        }
+
         this._drawingArea.queue_repaint();
     }
 
@@ -468,6 +501,18 @@ class OrlojApplet extends Applet.TextApplet {
         this._tooltip.preventShow = true;
         this._tooltip.hide();
         return Clutter.EVENT_PROPAGATE;
+    }
+
+    _onMoonPhaseRepaint(area) {
+        if (!this._state) return;
+        const cr = area.get_context();
+        try {
+            const [w, h] = area.get_surface_size();
+            Dial.drawMoonGlyph(cr, w / 2, h / 2,
+                Math.min(w, h) / 2 - 1.5, this._state.moonPhaseAngle);
+        } finally {
+            cr.$dispose();
+        }
     }
 
     _onRepaint(area) {
