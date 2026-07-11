@@ -127,7 +127,7 @@ var equationOfTime = function(jd) {
 // Returns { rise: Date, set: Date } or null fields if the sun doesn't
 // rise/set on that day at that latitude.
 // Note: uses UTC date, which can differ from the observer's local date (for
-// several hours a day at western longitudes). The nextSunEvent scanner
+// several hours a day at western longitudes). The nextSunEvents scanner
 // compensates by starting from the previous UTC day and filtering with > now.
 var sunriseSunset = function(date, lat, lon) {
     var d0 = new Date(Date.UTC(date.getUTCFullYear(),
@@ -291,30 +291,34 @@ var moonAltitude = function(date, lat, lonObs) {
     return apparentAltitude(jd, moonLongitude(jd), moonLatitude(jd), lat, lonObs);
 };
 
-// Next sunrise or sunset after `now` for the observer at lat/lon.
-// Returns { type: "rise" | "set", time: Date } or null if no event in 7 days.
+// Next sunrise and next sunset after `now` for the observer at lat/lon.
+// Returns { rise: Date | null, set: Date | null }; a field is null if that
+// event doesn't occur within 7 days (polar day/night).
 // The scan starts at the previous UTC day: sunriseSunset() tables events by
 // UTC date, so west of Greenwich the remainder of the observer's local day
 // (e.g. tonight's sunset once UTC has passed midnight) lives in the previous
 // UTC day's entry; the > now filter discards events already past.
-var nextSunEvent = function(now, lat, lon) {
-    for (var dayOffset = -1; dayOffset < 7; dayOffset++) {
+var nextSunEvents = function(now, lat, lon) {
+    var rise = null, set = null;
+    for (var dayOffset = -1; dayOffset < 8 && (!rise || !set); dayOffset++) {
         var d = new Date(now.getTime() + dayOffset * 86400000);
         var ss = sunriseSunset(d, lat, lon);
-        if (ss.rise && ss.rise > now) return { type: "rise", time: ss.rise };
-        if (ss.set  && ss.set  > now) return { type: "set",  time: ss.set  };
+        if (!rise && ss.rise && ss.rise > now) rise = ss.rise;
+        if (!set  && ss.set  && ss.set  > now) set  = ss.set;
     }
-    return null;
+    return { rise: rise, set: set };
 };
 
-// Next moonrise or moonset after `now`. Bisects the moon's altitude crossing
-// of the horizon (-0.566° accounts for the moon's apparent radius + refraction).
-// Returns { type: "rise" | "set", time: Date } or null if no event in 25h.
-var nextMoonEvent = function(now, lat, lonObs) {
+// Next moonrise and next moonset after `now`. Bisects the moon's altitude
+// crossings of the horizon (-0.566° accounts for the moon's apparent radius
+// + refraction). Returns { rise: Date | null, set: Date | null }; a field is
+// null if that event doesn't occur within 30h (circumpolar moon).
+var nextMoonEvents = function(now, lat, lonObs) {
     var horizon = -0.566;
     var stepMs  = 10 * 60 * 1000;
+    var rise = null, set = null;
     var prevAlt = moonAltitude(now, lat, lonObs);
-    for (var i = 1; i <= 150; i++) {
+    for (var i = 1; i <= 180 && (!rise || !set); i++) {
         var t   = new Date(now.getTime() + i * stepMs);
         var alt = moonAltitude(t, lat, lonObs);
         if ((prevAlt - horizon) * (alt - horizon) < 0) {
@@ -331,11 +335,12 @@ var nextMoonEvent = function(now, lat, lonObs) {
                 }
             }
             var crossing = new Date((lo.getTime() + hi.getTime()) / 2);
-            return { type: alt > prevAlt ? "rise" : "set", time: crossing };
+            if (alt > prevAlt) { if (!rise) rise = crossing; }
+            else               { if (!set)  set  = crossing; }
         }
         prevAlt = alt;
     }
-    return null;
+    return { rise: rise, set: set };
 };
 
 

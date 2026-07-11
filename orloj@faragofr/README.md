@@ -11,15 +11,19 @@ opt in to automatic location, which queries [ip-api.com](https://ip-api.com)
 ## Panel
 
 The panel label shows one entry each for the sun and the moon: the body's
-next horizon event, i.e. whichever of its rise or set comes soonest. In
-this example the sun's next event is a set and the moon's is a rise:
+next horizon event, i.e. whichever of its rise or set comes soonest. Each
+body can instead be switched (*Always show both…* in the settings) to
+showing its rise and its set together, stacked in two lines — rises on
+top, sets below:
 
 ```
-☀↓21:18 ☾↑15:42
+☀↑05:56 ☾↑02:31
+☀↓20:31 ☾↓18:28
 ```
 
 Arrows indicate rise (↑) or set (↓). A `+Nd` suffix appears for events
-more than a day away. Either body's entry can be hidden in the settings.
+more than a day away. Either body's entry can be hidden in the settings;
+the layout collapses accordingly.
 
 By default the clock behaves as it always has: the dial center shows local
 sidereal time and all civil times use the system time zone. Unchecking
@@ -59,6 +63,7 @@ Right-click the applet and choose *Configure*:
 | Automatic time zone | Use the system time zone for all displayed times (default on) |
 | Time zone | Manual time zone selection, shown when automatic is off |
 | Show the sun's / moon's next rise/set | Toggle each body's entry (whichever of rise or set comes soonest) in the panel label |
+| Always show both sunset and sunrise / moonset and moonrise | Per body: show rise and set stacked in two lines instead of only the soonest event (default off) |
 | Refresh interval | How often positions are recomputed (default 30s) |
 | Accent color | Color of the time hand and sun glyph |
 | Foreground color | Text, hands and glyphs; intermediate tones are derived from it |

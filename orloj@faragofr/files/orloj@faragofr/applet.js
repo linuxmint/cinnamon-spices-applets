@@ -22,6 +22,22 @@ class OrlojApplet extends Applet.TextApplet {
         this.set_applet_label("--:--");
         this.set_applet_tooltip("Orloj");
 
+        // Per-body label columns: keeping each body in its own left-aligned
+        // label keeps the ☀/☾ glyphs vertically aligned in two-line mode
+        // even when entry widths differ (e.g. a "+1d" suffix on one line).
+        // TextApplet wraps its built-in label in this._layoutBin — that Bin,
+        // not the label, is the child of this.actor, so insert relative to
+        // it. The built-in label is kept for startup and fallback text.
+        this._bodyBox = new St.BoxLayout({
+            style: "spacing: 6px;",
+            y_align: Clutter.ActorAlign.CENTER
+        });
+        this._sunLabel  = new St.Label({ style_class: "applet-label" });
+        this._moonLabel = new St.Label({ style_class: "applet-label" });
+        this._bodyBox.add_actor(this._sunLabel);
+        this._bodyBox.add_actor(this._moonLabel);
+        this.actor.insert_child_below(this._bodyBox, this._layoutBin);
+
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
@@ -44,8 +60,8 @@ class OrlojApplet extends Applet.TextApplet {
         this._lastHoverLabel = null;
 
         this._state = null;
-        this._cachedSunEvent = null;
-        this._cachedMoonEvent = null;
+        this._cachedSunEvents = null;
+        this._cachedMoonEvents = null;
         this._httpSession = null;
         this._geoipCoords = null;
         this._geoipFetchedAt = 0;
@@ -71,7 +87,9 @@ class OrlojApplet extends Applet.TextApplet {
         this._settings.bind("use-auto-timezone", "useAutoTz",    () => this._refresh());
         this._settings.bind("timezone",        "manualTz",       () => this._refresh());
         this._settings.bind("show-sunrise",    "showSunrise",    () => this._refresh());
+        this._settings.bind("show-both-sun",   "showBothSun",    () => this._refresh());
         this._settings.bind("show-moonrise",   "showMoonrise",   () => this._refresh());
+        this._settings.bind("show-both-moon",  "showBothMoon",   () => this._refresh());
         this._settings.bind("refresh-seconds", "refreshSeconds", () => this._scheduleRefresh());
         this._settings.bind("accent-color",    "accentColor",    () => this._refresh());
         this._settings.bind("foreground-color","foregroundColor",() => this._applyColors());
@@ -130,8 +148,8 @@ class OrlojApplet extends Applet.TextApplet {
     }
 
     _invalidateEvents() {
-        this._cachedSunEvent = null;
-        this._cachedMoonEvent = null;
+        this._cachedSunEvents = null;
+        this._cachedMoonEvents = null;
         this._refresh();
     }
 
@@ -275,49 +293,74 @@ class OrlojApplet extends Applet.TextApplet {
         }
         this.set_applet_tooltip("Orloj" + locNote);
         if (!isFinite(lat) || !isFinite(lon)) {
+            this._sunLabel.hide();
+            this._moonLabel.hide();
             this.set_applet_label("set lat/lon");
             this._state = null;
             this._drawingArea.queue_repaint();
             return;
         }
 
-        // Cache rise/set until the predicted event passes, then re-scan.
-        if (!this._cachedSunEvent || now >= this._cachedSunEvent.retryAfter) {
-            const ev = Astronomy.nextSunEvent(now, lat, lon);
-            const retryAfter = ev ? ev.time : new Date(+now + 86400000);
-            this._cachedSunEvent = { event: ev, retryAfter: retryAfter };
-        }
-        if (!this._cachedMoonEvent || now >= this._cachedMoonEvent.retryAfter) {
-            const ev = Astronomy.nextMoonEvent(now, lat, lon);
-            const retryAfter = ev ? ev.time : new Date(+now + 86400000);
-            this._cachedMoonEvent = { event: ev, retryAfter: retryAfter };
-        }
-        const sunEv  = this._cachedSunEvent.event;
-        const moonEv = this._cachedMoonEvent.event;
+        // Cache rise/set until the earliest predicted event passes, then
+        // re-scan.
+        const cacheEvents = (cached, scan) => {
+            if (cached && now < cached.retryAfter) return cached;
+            const ev = scan();
+            const times = [ev.rise, ev.set].filter((t) => t);
+            const retryAfter = times.length
+                ? new Date(Math.min.apply(null, times))
+                : new Date(+now + 86400000);
+            return { events: ev, retryAfter: retryAfter };
+        };
+        this._cachedSunEvents  = cacheEvents(this._cachedSunEvents,
+            () => Astronomy.nextSunEvents(now, lat, lon));
+        this._cachedMoonEvents = cacheEvents(this._cachedMoonEvents,
+            () => Astronomy.nextMoonEvents(now, lat, lon));
+        const sunEv  = this._cachedSunEvents.events;
+        const moonEv = this._cachedMoonEvents.events;
 
         // All displayed times are rendered in this zone (system or manual).
         const tz = this._displayTimeZone();
         const toTz = (date) => GLib.DateTime.new_from_unix_utc(
             Math.floor(date.getTime() / 1000)).to_timezone(tz);
 
-        const fmtEv  = (ev) => {
-            if (!ev) return ">1d";
-            const arrow = ev.type === "rise" ? "↑" : "↓";
-            const days = Math.floor((ev.time - now) / 86400000);
-            if (days >= 7) return `${arrow}>1w`;
-            const dt = toTz(ev.time);
+        const fmtTime = (time) => {
+            if (!time) return "--";
+            const days = Math.floor((time - now) / 86400000);
+            if (days >= 7) return ">1w";
+            const dt = toTz(time);
             const hh = String(dt.get_hour()).padStart(2, "0");
             const mm = String(dt.get_minute()).padStart(2, "0");
             const suffix = days >= 1 ? `+${days}d` : "";
-            return `${arrow}${hh}:${mm}${suffix}`;
+            return `${hh}:${mm}${suffix}`;
         };
-        // Each body's panel entry can be toggled off in settings; keep a
-        // small glyph pair when everything is hidden so the applet stays
-        // clickable.
-        const parts = [];
-        if (this.showSunrise)  parts.push(`☀${fmtEv(sunEv)}`);
-        if (this.showMoonrise) parts.push(`☾${fmtEv(moonEv)}`);
-        this.set_applet_label(parts.length ? parts.join(" ") : "☀☾");
+        // Per body: by default a single entry with the next event (rise or
+        // set, whichever comes soonest — the original behavior); with
+        // "Always show both" on, the body's rise and set are stacked in two
+        // lines, rise on top, set below. Each body renders in its own
+        // column label so the glyphs stay vertically aligned. The built-in
+        // applet label only carries a small glyph pair when everything is
+        // hidden, keeping the applet clickable.
+        const nextOf = (ev) => {
+            if (ev.rise && (!ev.set || ev.rise < ev.set))
+                return { arrow: "↑", time: ev.rise };
+            if (ev.set) return { arrow: "↓", time: ev.set };
+            return null;
+        };
+        const bodyText = (glyph, show, both, ev) => {
+            if (!show) return "";
+            if (both)
+                return `${glyph}↑${fmtTime(ev.rise)}\n${glyph}↓${fmtTime(ev.set)}`;
+            const nx = nextOf(ev);
+            return nx ? `${glyph}${nx.arrow}${fmtTime(nx.time)}` : `${glyph}>1d`;
+        };
+        const sunText  = bodyText("☀", this.showSunrise,  this.showBothSun,  sunEv);
+        const moonText = bodyText("☾", this.showMoonrise, this.showBothMoon, moonEv);
+        this._sunLabel.set_text(sunText);
+        this._sunLabel.visible = !!sunText;
+        this._moonLabel.set_text(moonText);
+        this._moonLabel.visible = !!moonText;
+        this.set_applet_label(sunText || moonText ? "" : "☀☾");
 
         const jd      = Astronomy.julianDay(now);
         const sunLon  = Astronomy.sunLongitude(jd);
