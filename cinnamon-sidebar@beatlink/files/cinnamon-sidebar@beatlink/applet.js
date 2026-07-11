@@ -1,5 +1,4 @@
 const Applet = imports.ui.applet;
-const Lang = imports.lang;
 const Main = imports.ui.main;
 const Settings = imports.ui.settings;
 const PopupMenu = imports.ui.popupMenu;
@@ -107,18 +106,18 @@ MyApplet.prototype = {
 
         this.settings = new Settings.AppletSettings(this, UUID, instance_id);
         this.settings.bindProperty(Settings.BindingDirection.IN, "dock-side", "dockSide",
-            Lang.bind(this, this._onDockGeometryChanged), null);
+            () => this._onDockGeometryChanged(), null);
         this.settings.bindProperty(Settings.BindingDirection.IN, "dock-width-mode", "dockWidthMode",
-            Lang.bind(this, this._onDockGeometryChanged), null);
+            () => this._onDockGeometryChanged(), null);
         this.settings.bindProperty(Settings.BindingDirection.IN, "dock-width-fraction", "dockWidthFraction",
-            Lang.bind(this, this._onDockGeometryChanged), null);
+            () => this._onDockGeometryChanged(), null);
         this.settings.bindProperty(Settings.BindingDirection.IN, "dock-width-pixels", "dockWidthPixels",
-            Lang.bind(this, this._onDockGeometryChanged), null);
+            () => this._onDockGeometryChanged(), null);
 
         this.settings.bindProperty(Settings.BindingDirection.IN, "dock-hotkey", "dockHotkey",
-            Lang.bind(this, this._updateKeybindings), null);
+            () => this._updateKeybindings(), null);
         this.settings.bindProperty(Settings.BindingDirection.IN, "undock-hotkey", "undockHotkey",
-            Lang.bind(this, this._updateKeybindings), null);
+            () => this._updateKeybindings(), null);
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -196,7 +195,7 @@ MyApplet.prototype = {
 
     ListWindows: function() {
         let dockedWin = this._dock ? this._dock.win : null;
-        let out = this._listWindows().map(Lang.bind(this, function(win) {
+        let out = this._listWindows().map((win) => {
             return {
                 title: win.get_title() || "",
                 wm_class: win.get_wm_class() || "",
@@ -205,7 +204,7 @@ MyApplet.prototype = {
                 monitor: win.get_monitor(),
                 docked: win === dockedWin
             };
-        }));
+        });
         return JSON.stringify({ dock_side: this.dockSide, windows: out });
     },
 
@@ -226,9 +225,9 @@ MyApplet.prototype = {
     _updateKeybindings: function() {
         this._removeKeybindings();
         Main.keybindingManager.addHotKey("sidebar-dock", this.dockHotkey,
-            Lang.bind(this, this._dockFocused));
+            () => this._dockFocused());
         Main.keybindingManager.addHotKey("sidebar-undock", this.undockHotkey,
-            Lang.bind(this, this._undock));
+            () => this._undock());
     },
 
     _removeKeybindings: function() {
@@ -267,10 +266,10 @@ MyApplet.prototype = {
 
             let isDocked = this._dock && this._dock.win === win;
             let item = new PopupMenu.PopupMenuItem((isDocked ? "✓ " : "") + title);
-            item.connect("activate", Lang.bind(this, function() {
+            item.connect("activate", () => {
                 if (isDocked) this._undock();
                 else this._dockWindow(win);
-            }));
+            });
             this.menu.addMenuItem(item);
         }
 
@@ -283,9 +282,9 @@ MyApplet.prototype = {
 
     _listWindows: function() {
         let ws = global.workspace_manager.get_active_workspace();
-        return ws.list_windows().filter(Lang.bind(this, function(w) {
+        return ws.list_windows().filter((w) => {
             return this._isDockable(w);
-        }));
+        });
     },
 
     _isDockable: function(w) {
@@ -338,9 +337,9 @@ MyApplet.prototype = {
         dbg("DOCK '" + win.get_title() + "' side=" + (side === Meta.Side.LEFT ? "L" : "R") +
             " slot x=" + dockX + " y=" + work.y + " w=" + dockWidth + " h=" + work.height);
 
-        this._withGuard(Lang.bind(this, function() {
+        this._withGuard(() => {
             this._moveResize(win, dockX, work.y, dockWidth, work.height);
-        }));
+        });
         win.activate(global.get_current_time());
 
         // The window may refuse to shrink below its minimum width (many apps have
@@ -368,9 +367,9 @@ MyApplet.prototype = {
         // If the window didn't land exactly on the edge (min-width overshoot),
         // nudge it there now.
         if (r.x !== dock.x || r.y !== dock.y) {
-            this._withGuard(Lang.bind(this, function() {
+            this._withGuard(() => {
                 this._moveResize(dock.win, dock.x, dock.y, dock.width, dock.height);
-            }));
+            });
         }
         dbg("slot synced to real size: x=" + dock.x + " y=" + dock.y +
             " w=" + dock.width + " h=" + dock.height);
@@ -384,12 +383,12 @@ MyApplet.prototype = {
 
         if (this._isValid(dock.win)) {
             let s = dock.saved;
-            this._withGuard(Lang.bind(this, function() {
+            this._withGuard(() => {
                 // Clear any always-on-top state (an earlier build set it, and the
                 // flag persists on the window until explicitly cleared).
                 if (dock.win.is_above && dock.win.is_above()) dock.win.unmake_above();
                 this._moveResize(dock.win, s.x, s.y, s.width, s.height);
-            }));
+            });
         }
     },
 
@@ -399,11 +398,11 @@ MyApplet.prototype = {
         this._attachAll();
         if (this._globalSignals.length === 0) {
             this._globalSignals.push([global.display,
-                global.display.connect("window-created", Lang.bind(this, this._onWindowCreated))]);
+                global.display.connect("window-created", (display, win) => this._onWindowCreated(display, win))]);
             this._globalSignals.push([global.display,
-                global.display.connect("grab-op-begin", Lang.bind(this, this._onGrabOpBegin))]);
+                global.display.connect("grab-op-begin", (display, win, op) => this._onGrabOpBegin(display, win, op))]);
             this._globalSignals.push([global.display,
-                global.display.connect("grab-op-end", Lang.bind(this, this._onGrabOpEnd))]);
+                global.display.connect("grab-op-end", (display, win, op) => this._onGrabOpEnd(display, win, op))]);
         }
     },
 
@@ -426,16 +425,16 @@ MyApplet.prototype = {
     _attachWindow: function(win) {
         if (this._winSignals.has(win)) return;
         let ids = [];
-        ids.push(win.connect("position-changed", Lang.bind(this, function() { this._onWindowChanged(win); })));
-        ids.push(win.connect("size-changed", Lang.bind(this, function() { this._onWindowChanged(win); })));
+        ids.push(win.connect("position-changed", () => { this._onWindowChanged(win); }));
+        ids.push(win.connect("size-changed", () => { this._onWindowChanged(win); }));
         // Maximize (incl. tile-to-full) has its own toggle handler.
-        ids.push(win.connect("notify::maximized-horizontally", Lang.bind(this, function() { this._onMaximize(win); })));
-        ids.push(win.connect("unmanaged", Lang.bind(this, function() {
+        ids.push(win.connect("notify::maximized-horizontally", () => { this._onMaximize(win); }));
+        ids.push(win.connect("unmanaged", () => {
             this._filled.delete(win);
             this._lastNormalRect.delete(win);
             this._detachWindow(win);
             if (this._dock && this._dock.win === win) { this._dock = null; this._stopMonitoring(); }
-        })));
+        }));
         this._winSignals.set(win, ids);
     },
 
@@ -447,14 +446,14 @@ MyApplet.prototype = {
     },
 
     _onWindowCreated: function(display, win) {
-        GLib.idle_add(GLib.PRIORITY_DEFAULT, Lang.bind(this, function() {
+        GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
             if (!this._dock) return GLib.SOURCE_REMOVE;
             if (this._isDockable(win)) {
                 this._attachWindow(win);
                 this._enforceWindow(win);
             }
             return GLib.SOURCE_REMOVE;
-        }));
+        });
     },
 
     _onWindowChanged: function(win) {
@@ -468,7 +467,7 @@ MyApplet.prototype = {
         // The docked window is locked to its slot: revert its moves immediately.
         if (this._dock && win === this._dock.win) {
             if (this._grabbing) return; // wait for grab-op-end
-            this._withGuard(Lang.bind(this, this._repinDocked));
+            this._withGuard(() => this._repinDocked());
             return;
         }
 
@@ -488,7 +487,7 @@ MyApplet.prototype = {
         if (this._selfUnmax) return;                     // our own unmaximize echo
         if (this._enforcing) return;                     // our own geometry change
         if (this._dock && win === this._dock.win) {      // docked window: just lock
-            if (!this._grabbing) this._withGuard(Lang.bind(this, this._repinDocked));
+            if (!this._grabbing) this._withGuard(() => this._repinDocked());
             return;
         }
         if (!win.maximized_horizontally) return;         // only act on maximize (true)
@@ -501,9 +500,9 @@ MyApplet.prototype = {
             this._selfUnmaximize(win);
             if (pre) {
                 dbg("maximize toggle: RESTORE '" + win.get_title() + "' -> " + rectStr(pre));
-                this._withGuard(Lang.bind(this, function() {
+                this._withGuard(() => {
                     this._moveResize(win, pre.x, pre.y, pre.width, pre.height);
-                }));
+                });
             }
             return;
         }
@@ -515,13 +514,13 @@ MyApplet.prototype = {
         this._filled.set(win, pre);
         dbg("maximize toggle: FILL '" + win.get_title() + "' (pre-max=" + rectStr(pre) + ")");
         this._selfUnmaximize(win);
-        GLib.idle_add(GLib.PRIORITY_DEFAULT, Lang.bind(this, function() {
+        GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
             if (this._isValid(win) && this._filled.has(win) &&
                 this._dock && win !== this._dock.win) {
-                this._withGuard(Lang.bind(this, function() { this._fillBand(win); }));
+                this._withGuard(() => { this._fillBand(win); });
             }
             return GLib.SOURCE_REMOVE;
-        }));
+        });
     },
 
     _selfUnmaximize: function(win) {
@@ -541,47 +540,47 @@ MyApplet.prototype = {
     _onGrabOpEnd: function(display, win, op) {
         this._grabbing = false;
         if (!this._dock) return;
-        GLib.idle_add(GLib.PRIORITY_DEFAULT, Lang.bind(this, function() {
+        GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
             this._enforceAll();
             return GLib.SOURCE_REMOVE;
-        }));
+        });
     },
 
     _queueEnforce: function() {
         if (this._grabbing) return; // defer to grab-op-end
         if (this._enforceIdle) return;
         this._enforceIdle = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 60,
-            Lang.bind(this, function() {
+            () => {
                 this._enforceIdle = 0;
                 this._enforceAll();
                 return GLib.SOURCE_REMOVE;
-            }));
+            });
     },
 
     _enforceAll: function() {
         if (!this._dock) return;
-        this._withGuard(Lang.bind(this, function() {
+        this._withGuard(() => {
             this._repinDocked();
             for (let win of this._listWindows()) {
                 if (this._dock && win === this._dock.win) continue;
                 this._pushOutOfBand(win);
             }
-        }));
+        });
     },
 
     _enforceOthers: function() {
         if (!this._dock) return;
-        this._withGuard(Lang.bind(this, function() {
+        this._withGuard(() => {
             for (let win of this._listWindows()) {
                 if (this._dock && win === this._dock.win) continue;
                 this._pushOutOfBand(win);
             }
-        }));
+        });
     },
 
     _enforceWindow: function(win) {
         if (!this._isValid(win) || (this._dock && win === this._dock.win)) return;
-        this._withGuard(Lang.bind(this, function() { this._pushOutOfBand(win); }));
+        this._withGuard(() => { this._pushOutOfBand(win); });
     },
 
     // Lock the docked window to its FIXED slot.

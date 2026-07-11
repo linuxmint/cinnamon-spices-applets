@@ -1,10 +1,9 @@
-# Sidebar Dock
+# Cinnamon Sidebar
 
 Dock a single window to the left or right edge of a monitor at a configurable
 width. Other windows are kept out of the reserved area, so a docked window
 behaves like a real sidebar: the rest of the screen stays usable and nothing
 covers the dock.
-
 
 ## Features
 
@@ -53,14 +52,14 @@ loaded in a panel.
 
 ### Methods
 
-| Method | Argument | Returns | Description |
-| --- | --- | --- | --- |
-| `DockFocused` | — | `b` ok | Docks the currently focused window. Same as the dock shortcut. |
-| `Undock` | — | `b` ok | Undocks the docked window, restoring its pre-dock geometry. Returns `false` if nothing was docked. |
-| `DockByTitle` | `s` substring | `b` ok | Docks the first dockable window whose title contains `substring` (case-insensitive). |
-| `DockByApp` | `s` wmClass | `b` ok | Docks the first window whose `WM_CLASS` or class instance contains `wmClass` (case-insensitive). |
-| `DockById` | `u` xid | `b` ok | Docks the window with the exact X11 window id `xid` (decimal). |
-| `ListWindows` | — | `s` json | Returns a JSON string describing every dockable window on the active workspace and which one is docked. |
+| Method        | Argument      | Returns  | Description                                                                                             |
+| ------------- | ------------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| `DockFocused` | —             | `b` ok   | Docks the currently focused window. Same as the dock shortcut.                                          |
+| `Undock`      | —             | `b` ok   | Undocks the docked window, restoring its pre-dock geometry. Returns`false` if nothing was docked.       |
+| `DockByTitle` | `s` substring | `b` ok   | Docks the first dockable window whose title contains`substring` (case-insensitive).                     |
+| `DockByApp`   | `s` wmClass   | `b` ok   | Docks the first window whose`WM_CLASS` or class instance contains `wmClass` (case-insensitive).         |
+| `DockById`    | `u` xid       | `b` ok   | Docks the window with the exact X11 window id`xid` (decimal).                                           |
+| `ListWindows` | —             | `s` json | Returns a JSON string describing every dockable window on the active workspace and which one is docked. |
 
 Each `Dock*`/`Undock` method returns a boolean: `true` when it found a matching
 window and acted, `false` otherwise.
