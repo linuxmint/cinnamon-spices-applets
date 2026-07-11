@@ -17,6 +17,12 @@ The panel label shows the next sun and moon rise/set events:
 Arrows indicate rise (↑) or set (↓). A `+Nd` suffix appears for events
 more than a day away.
 
+By default the clock behaves as it always has: the dial center shows local
+sidereal time and all civil times use the system time zone. Unchecking
+*Use Local Sidereal Time* in the settings switches the dial center to civil
+time and reveals the time zone options — automatic (system) or a manually
+selected zone — which then apply to all displayed times (panel and dial).
+
 ## Dial
 
 Clicking the panel label opens a 320px popup dial with concentric rings:
@@ -31,7 +37,8 @@ Clicking the panel label opens a 320px popup dial with concentric rings:
   below the horizon are dimmed.
 - **Time hand** — accent-colored hand on the hour ring showing current
   civil time.
-- **Center** — local sidereal time (LST) readout.
+- **Center** — local sidereal time (LST) readout by default; switchable in
+  the settings to civil time with the time zone abbreviation.
 
 Hover over any body for a tooltip showing its zodiac position, altitude,
 and (for the Moon) illumination percentage.
@@ -43,6 +50,9 @@ Right-click the applet and choose *Configure*:
 | Setting | Description |
 |---------|-------------|
 | Latitude / Longitude | Observer position in decimal degrees |
+| Use Local Sidereal Time | Dial center shows LST (default on, the original behavior); unchecking reveals the time zone options |
+| Automatic time zone | Use the system time zone for all displayed times (default on) |
+| Time zone | Manual time zone selection, shown when automatic is off |
 | Refresh interval | How often positions are recomputed (default 30s) |
 | Accent color | Color of the time hand and sun glyph |
 | Foreground color | Text, hands and glyphs; intermediate tones are derived from it |

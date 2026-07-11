@@ -5,6 +5,7 @@ const Tooltips   = imports.ui.tooltips;
 const Mainloop   = imports.mainloop;
 const St         = imports.gi.St;
 const GLib       = imports.gi.GLib;
+const Gio        = imports.gi.Gio;
 const Clutter    = imports.gi.Clutter;
 let Astronomy, Dial, Theme;
 
@@ -59,6 +60,9 @@ class OrlojApplet extends Applet.TextApplet {
         this._settings = new Settings.AppletSettings(this, this._uuid, instanceId);
         this._settings.bind("latitude",        "latitude",       () => this._invalidateEvents());
         this._settings.bind("longitude",       "longitude",      () => this._invalidateEvents());
+        this._settings.bind("use-lst",         "useLst",         () => this._onLstToggled());
+        this._settings.bind("use-auto-timezone", "useAutoTz",    () => this._refresh());
+        this._settings.bind("timezone",        "manualTz",       () => this._refresh());
         this._settings.bind("refresh-seconds", "refreshSeconds", () => this._scheduleRefresh());
         this._settings.bind("accent-color",    "accentColor",    () => this._refresh());
         this._settings.bind("foreground-color","foregroundColor",() => this._applyColors());
@@ -69,12 +73,89 @@ class OrlojApplet extends Applet.TextApplet {
         this._applySize();
         this._refresh();
         this._scheduleRefresh();
+        this._populateTimezones();
+    }
+
+    // Fill the time zone combobox from the system tz database. The schema
+    // ships with only UTC: listing all ~600 zone names there would drag
+    // every one of them into the translation template, and the system list
+    // stays current with tzdata updates. Same pattern as hwmonitor@sylfurd
+    // and qredshift@quintao. Async read, per spices guidance. zone1970.tab
+    // is the current name of the table; zone.tab is the pre-2017 one kept
+    // as a fallback for older tzdata installations.
+    _populateTimezones(pathIndex) {
+        const paths = ["/usr/share/zoneinfo/zone1970.tab",
+                       "/usr/share/zoneinfo/zone.tab"];
+        const idx = pathIndex || 0;
+        if (idx >= paths.length) {
+            global.logWarning(
+                "Orloj: could not read the time zone database, "
+                + "the time zone list stays minimal");
+            return;
+        }
+        const file = Gio.File.new_for_path(paths[idx]);
+        file.load_contents_async(null, (f, res) => {
+            try {
+                const [ok, bytes] = f.load_contents_finish(res);
+                if (!ok) throw new Error("read failed");
+                const zones = [];
+                const lines = imports.byteArray.toString(bytes).split("\n");
+                for (const line of lines) {
+                    if (!line || line[0] === "#") continue;
+                    const cols = line.split("\t");
+                    if (cols.length >= 3 && cols[2]) zones.push(cols[2]);
+                }
+                if (!zones.length) throw new Error("no zones parsed");
+                zones.push("UTC");
+                // Keep the configured zone selectable even if it is an
+                // alias that the table doesn't list.
+                if (this.manualTz) zones.push(this.manualTz);
+                zones.sort();
+                const options = {};
+                for (const z of zones) options[z] = z;
+                this._settings.setOptions("timezone", options);
+            } catch (e) {
+                this._populateTimezones(idx + 1);
+            }
+        });
     }
 
     _invalidateEvents() {
         this._cachedSunEvent = null;
         this._cachedMoonEvent = null;
         this._refresh();
+    }
+
+    _onLstToggled() {
+        // LST mode always uses the system zone, so re-arm the automatic
+        // time zone when it is switched on. This also keeps the settings
+        // dialog consistent: the "Time zone" combobox is shown on
+        // !use-auto-timezone alone (the schema dependency field cannot
+        // express "!use-lst AND !use-auto-timezone"), so without this it
+        // would linger, ineffective, after re-checking "Use LST".
+        if (this.useLst && !this.useAutoTz)
+            this._settings.setValue("use-auto-timezone", true);
+        this._refresh();
+    }
+
+    // The GLib.TimeZone all displayed times are rendered in: the system zone,
+    // or the manually configured one. While "Use Local Sidereal Time" is on
+    // (the original behavior), the zone selection is overridden and the
+    // system zone is used everywhere.
+    _displayTimeZone() {
+        if (!this.useLst && !this.useAutoTz && this.manualTz) {
+            // new_identifier (GLib >= 2.68) returns null for unknown names;
+            // the older constructor silently falls back to UTC.
+            if (GLib.TimeZone.new_identifier) {
+                const tz = GLib.TimeZone.new_identifier(this.manualTz);
+                if (tz) return tz;
+                global.logWarning(
+                    `Orloj: unknown time zone "${this.manualTz}", using system zone`);
+            } else {
+                return GLib.TimeZone.new(this.manualTz);
+            }
+        }
+        return GLib.TimeZone.new_local();
     }
 
     _applyColors() {
@@ -128,13 +209,20 @@ class OrlojApplet extends Applet.TextApplet {
         }
         const sunEv  = this._cachedSunEvent.event;
         const moonEv = this._cachedMoonEvent.event;
+
+        // All displayed times are rendered in this zone (system or manual).
+        const tz = this._displayTimeZone();
+        const toTz = (date) => GLib.DateTime.new_from_unix_utc(
+            Math.floor(date.getTime() / 1000)).to_timezone(tz);
+
         const fmtEv  = (ev) => {
             if (!ev) return ">1d";
             const arrow = ev.type === "rise" ? "↑" : "↓";
             const days = Math.floor((ev.time - now) / 86400000);
             if (days >= 7) return `${arrow}>1w`;
-            const hh = String(ev.time.getHours()).padStart(2, "0");
-            const mm = String(ev.time.getMinutes()).padStart(2, "0");
+            const dt = toTz(ev.time);
+            const hh = String(dt.get_hour()).padStart(2, "0");
+            const mm = String(dt.get_minute()).padStart(2, "0");
             const suffix = days >= 1 ? `+${days}d` : "";
             return `${arrow}${hh}:${mm}${suffix}`;
         };
@@ -154,16 +242,34 @@ class OrlojApplet extends Applet.TextApplet {
         for (const name of ["Mercury", "Venus", "Mars", "Jupiter", "Saturn"])
             planetRAs[name] = Astronomy.eclipticToEquatorial(planets[name], 0, jd).ra;
 
-        const civilHour = now.getHours() + now.getMinutes() / 60
-                        + now.getSeconds() / 3600;
+        const nowTz = toTz(now);
+        const civilHour = nowTz.get_hour() + nowTz.get_minute() / 60
+                        + nowTz.get_second() / 3600;
 
         const ss = Astronomy.sunriseSunset(now, lat, lon);
         // Clock hour → dial degrees: noon = 0°, 15°/hr clockwise.
         const dialFromCivil = (date) => {
             if (!date) return null;
-            const h = date.getHours() + date.getMinutes() / 60;
+            const dt = toTz(date);
+            const h = dt.get_hour() + dt.get_minute() / 60;
             return (h - 12) * 15;
         };
+
+        // Dial center readout: local sidereal time by default (the original
+        // behavior), or civil time in the display zone when "Use Local
+        // Sidereal Time" is off.
+        let centerText, centerSub;
+        if (this.useLst) {
+            const lstHours = lstDeg / 15;
+            const lh = Math.floor(lstHours);
+            const lm = Math.floor((lstHours - lh) * 60);
+            centerText = String(lh).padStart(2, "0") + ":"
+                       + String(lm).padStart(2, "0");
+            centerSub = "LST";
+        } else {
+            centerText = nowTz.format("%H:%M");
+            centerSub = nowTz.get_timezone_abbreviation();
+        }
 
         const altitudes = {
             Sun:     Astronomy.apparentAltitude(jd, sunLon,           0, lat, lon),
@@ -187,6 +293,10 @@ class OrlojApplet extends Applet.TextApplet {
             zodiacBoundaryRAs: this._zodiacBoundaryRAs,
             zodiacMidRAs:      this._zodiacMidRAs,
             timeHandAngle:     (civilHour - 12) * 15, // civil time
+            civilText:         nowTz.format("%H:%M"),
+            tzAbbrev:          nowTz.get_timezone_abbreviation(),
+            centerText:        centerText,
+            centerSub:         centerSub,
             sunriseDialAngle:  dialFromCivil(ss && ss.rise),
             sunsetDialAngle:   dialFromCivil(ss && ss.set),
             lstDeg:            lstDeg,

@@ -11,6 +11,29 @@
         "description": "Longitude (decimal degrees, east positive)",
         "tooltip": "Your geographic longitude in decimal degrees, e.g. 14.4214 for Prague"
     },
+    "use-lst": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Use Local Sidereal Time instead of civil time",
+        "tooltip": "Show local sidereal time in the dial center (the original behavior). When unchecked, the dial center shows civil time and the time zone options below apply to all displayed times."
+    },
+    "use-auto-timezone": {
+        "type": "checkbox",
+        "default": true,
+        "dependency": "!use-lst",
+        "description": "Automatic time zone (system)",
+        "tooltip": "Use the system time zone for all displayed times. Uncheck to pick a time zone manually."
+    },
+    "timezone": {
+        "type": "combobox",
+        "default": "UTC",
+        "dependency": "!use-auto-timezone",
+        "description": "Time zone",
+        "tooltip": "All times shown by the applet (panel and dial) use this time zone. The list is filled from the system time zone database at startup.",
+        "options": {
+            "UTC": "UTC"
+        }
+    },
     "refresh-seconds": {
         "type": "spinbutton",
         "default": 30,
