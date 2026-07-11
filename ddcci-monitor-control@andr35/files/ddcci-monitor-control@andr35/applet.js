@@ -169,6 +169,8 @@ MyApplet.prototype = {
     _get_current_brightness: function () {
         return new Promise(Lang.bind(this, function (resolve, reject) {
 
+            this.menutItemBrightnessSlider.actor.reactive = false;
+
             // this._spawn_cmd(['ddcutil', 'capabilities', '|', 'grep', 'Brightness'])
             this._spawn_cmd(['ddcutil', 'getvcp', '10'])
                 .then(Lang.bind(this, function (res) {
@@ -216,7 +218,9 @@ MyApplet.prototype = {
 
     _get_current_contrast: function () {
         return new Promise(Lang.bind(this, function (resolve, reject) {
-            
+
+            this.menutItemContrastSlider.actor.reactive = false;
+
             // this._spawn_cmd(['ddcutil', 'capabilities', '|', 'grep', 'Contrast'])
             this._spawn_cmd(['ddcutil', 'getvcp', '12'])
                 .then(Lang.bind(this, function (res) {
