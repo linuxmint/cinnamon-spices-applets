@@ -10,14 +10,16 @@ opt in to automatic location, which queries [ip-api.com](https://ip-api.com)
 
 ## Panel
 
-The panel label shows the next sun and moon rise/set events:
+The panel label shows one entry each for the sun and the moon: the body's
+next horizon event, i.e. whichever of its rise or set comes soonest. In
+this example the sun's next event is a set and the moon's is a rise:
 
 ```
 ☀↓21:18 ☾↑15:42
 ```
 
 Arrows indicate rise (↑) or set (↓). A `+Nd` suffix appears for events
-more than a day away.
+more than a day away. Either body's entry can be hidden in the settings.
 
 By default the clock behaves as it always has: the dial center shows local
 sidereal time and all civil times use the system time zone. Unchecking
@@ -56,6 +58,7 @@ Right-click the applet and choose *Configure*:
 | Use Local Sidereal Time | Dial center shows LST (default on, the original behavior); unchecking reveals the time zone options |
 | Automatic time zone | Use the system time zone for all displayed times (default on) |
 | Time zone | Manual time zone selection, shown when automatic is off |
+| Show the sun's / moon's next rise/set | Toggle each body's entry (whichever of rise or set comes soonest) in the panel label |
 | Refresh interval | How often positions are recomputed (default 30s) |
 | Accent color | Color of the time hand and sun glyph |
 | Foreground color | Text, hands and glyphs; intermediate tones are derived from it |

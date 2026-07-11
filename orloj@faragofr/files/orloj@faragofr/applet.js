@@ -70,6 +70,8 @@ class OrlojApplet extends Applet.TextApplet {
         this._settings.bind("use-lst",         "useLst",         () => this._onLstToggled());
         this._settings.bind("use-auto-timezone", "useAutoTz",    () => this._refresh());
         this._settings.bind("timezone",        "manualTz",       () => this._refresh());
+        this._settings.bind("show-sunrise",    "showSunrise",    () => this._refresh());
+        this._settings.bind("show-moonrise",   "showMoonrise",   () => this._refresh());
         this._settings.bind("refresh-seconds", "refreshSeconds", () => this._scheduleRefresh());
         this._settings.bind("accent-color",    "accentColor",    () => this._refresh());
         this._settings.bind("foreground-color","foregroundColor",() => this._applyColors());
@@ -309,7 +311,13 @@ class OrlojApplet extends Applet.TextApplet {
             const suffix = days >= 1 ? `+${days}d` : "";
             return `${arrow}${hh}:${mm}${suffix}`;
         };
-        this.set_applet_label(`☀${fmtEv(sunEv)} ☾${fmtEv(moonEv)}`);
+        // Each body's panel entry can be toggled off in settings; keep a
+        // small glyph pair when everything is hidden so the applet stays
+        // clickable.
+        const parts = [];
+        if (this.showSunrise)  parts.push(`☀${fmtEv(sunEv)}`);
+        if (this.showMoonrise) parts.push(`☾${fmtEv(moonEv)}`);
+        this.set_applet_label(parts.length ? parts.join(" ") : "☀☾");
 
         const jd      = Astronomy.julianDay(now);
         const sunLon  = Astronomy.sunLongitude(jd);
