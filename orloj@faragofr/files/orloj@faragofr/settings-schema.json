@@ -1,13 +1,21 @@
 {
+    "use-geoip": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Automatic location (GeoIP)",
+        "tooltip": "Determine location from your IP address (city-level accuracy, uses ip-api.com over HTTP). Falls back to the manual coordinates below when offline."
+    },
     "latitude": {
         "type": "entry",
         "default": "50.0875",
+        "dependency": "!use-geoip",
         "description": "Latitude (decimal degrees, north positive)",
         "tooltip": "Your geographic latitude in decimal degrees, e.g. 50.0875 for Prague"
     },
     "longitude": {
         "type": "entry",
         "default": "14.4214",
+        "dependency": "!use-geoip",
         "description": "Longitude (decimal degrees, east positive)",
         "tooltip": "Your geographic longitude in decimal degrees, e.g. 14.4214 for Prague"
     },

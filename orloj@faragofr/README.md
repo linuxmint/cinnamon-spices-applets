@@ -2,7 +2,9 @@
 
 A panel applet for the Cinnamon desktop inspired by the Prague astronomical
 clock, with modern minimal aesthetics. All positions are computed locally
-from your configured latitude and longitude — no network calls.
+from your configured latitude and longitude — no network calls, unless you
+opt in to automatic location, which queries [ip-api.com](https://ip-api.com)
+(city-level GeoIP, plain HTTP, at most once per hour).
 
 ![Screenshot](screenshot.png)
 
@@ -49,7 +51,8 @@ Right-click the applet and choose *Configure*:
 
 | Setting | Description |
 |---------|-------------|
-| Latitude / Longitude | Observer position in decimal degrees |
+| Automatic location (GeoIP) | Determine coordinates from your IP address (default off); hover the panel label to see the detected city |
+| Latitude / Longitude | Observer position in decimal degrees, used when GeoIP is off or unavailable |
 | Use Local Sidereal Time | Dial center shows LST (default on, the original behavior); unchecking reveals the time zone options |
 | Automatic time zone | Use the system time zone for all displayed times (default on) |
 | Time zone | Manual time zone selection, shown when automatic is off |

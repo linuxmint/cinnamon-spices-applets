@@ -10,6 +10,8 @@ const Clutter    = imports.gi.Clutter;
 let Astronomy, Dial, Theme;
 
 const DIAL_SIZE = 320;
+const GEOIP_URL = "http://ip-api.com/json/?fields=status,message,city,lat,lon";
+const GEOIP_REFRESH_MS = 60 * 60 * 1000; // re-check hourly (laptops move)
 
 class OrlojApplet extends Applet.TextApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
@@ -44,6 +46,10 @@ class OrlojApplet extends Applet.TextApplet {
         this._state = null;
         this._cachedSunEvent = null;
         this._cachedMoonEvent = null;
+        this._httpSession = null;
+        this._geoipCoords = null;
+        this._geoipFetchedAt = 0;
+        this._geoipInFlight = false;
 
         // Zodiac boundary/midpoint RAs: fixed geometry (depends only on
         // obliquity, which drifts ~0.013°/century), computed once at startup.
@@ -58,6 +64,7 @@ class OrlojApplet extends Applet.TextApplet {
         }
 
         this._settings = new Settings.AppletSettings(this, this._uuid, instanceId);
+        this._settings.bind("use-geoip",       "useGeoip",       () => this._onGeoipToggled());
         this._settings.bind("latitude",        "latitude",       () => this._invalidateEvents());
         this._settings.bind("longitude",       "longitude",      () => this._invalidateEvents());
         this._settings.bind("use-lst",         "useLst",         () => this._onLstToggled());
@@ -138,6 +145,70 @@ class OrlojApplet extends Applet.TextApplet {
         this._refresh();
     }
 
+    _onGeoipToggled() {
+        this._geoipFetchedAt = 0; // force an immediate re-fetch
+        this._invalidateEvents();
+    }
+
+    // Lazily import libsoup 3 the first time GeoIP is used, so the applet
+    // still loads on systems without the Soup 3 typelib (GeoIP then falls
+    // back to the manual coordinates, with a logged warning).
+    _soup() {
+        if (this._soupChecked) return this._Soup;
+        this._soupChecked = true;
+        try {
+            imports.gi.versions.Soup = "3.0";
+            this._Soup = imports.gi.Soup;
+        } catch (e) {
+            this._Soup = null;
+            global.logWarning(
+                "Orloj: libsoup 3 unavailable, GeoIP falls back to manual coordinates: "
+                + e.message);
+        }
+        return this._Soup;
+    }
+
+    _fetchGeoip() {
+        if (this._geoipInFlight) return;
+        const Soup = this._soup();
+        if (!Soup) {
+            this._geoipFetchedAt = Date.now(); // retry no sooner than the next interval
+            return;
+        }
+        this._geoipInFlight = true;
+        if (!this._httpSession)
+            this._httpSession = new Soup.Session({
+                user_agent: "orloj-cinnamon-applet",
+                timeout: 10
+            });
+        const msg = Soup.Message.new("GET", GEOIP_URL);
+        this._httpSession.send_and_read_async(
+            msg, GLib.PRIORITY_DEFAULT, null, (session, result) => {
+                this._geoipInFlight = false;
+                this._geoipFetchedAt = Date.now();
+                try {
+                    const bytes = session.send_and_read_finish(result);
+                    if (msg.get_status() !== Soup.Status.OK)
+                        throw new Error("HTTP " + msg.get_status());
+                    const data = JSON.parse(
+                        imports.byteArray.toString(bytes.get_data()));
+                    if (data.status !== "success"
+                        || !isFinite(data.lat) || !isFinite(data.lon))
+                        throw new Error(data.message || "bad response");
+                    const moved = !this._geoipCoords
+                        || this._geoipCoords.lat !== data.lat
+                        || this._geoipCoords.lon !== data.lon;
+                    this._geoipCoords =
+                        { lat: data.lat, lon: data.lon, city: data.city || "?" };
+                    if (moved) this._invalidateEvents();
+                } catch (e) {
+                    global.logWarning(
+                        "Orloj: GeoIP lookup failed, using manual coordinates: "
+                        + e.message);
+                }
+            });
+    }
+
     // The GLib.TimeZone all displayed times are rendered in: the system zone,
     // or the manually configured one. While "Use Local Sidereal Time" is on
     // (the original behavior), the zone selection is overridden and the
@@ -187,8 +258,20 @@ class OrlojApplet extends Applet.TextApplet {
     _refresh() {
         const now = new Date();
 
-        const lat = parseFloat(this.latitude);
-        const lon = parseFloat(this.longitude);
+        let lat = parseFloat(this.latitude);
+        let lon = parseFloat(this.longitude);
+        let locNote = "";
+        if (this.useGeoip) {
+            if (!this._geoipInFlight
+                && Date.now() - this._geoipFetchedAt > GEOIP_REFRESH_MS)
+                this._fetchGeoip();
+            if (this._geoipCoords) {
+                lat = this._geoipCoords.lat;
+                lon = this._geoipCoords.lon;
+                locNote = ` — ${this._geoipCoords.city} (GeoIP)`;
+            }
+        }
+        this.set_applet_tooltip("Orloj" + locNote);
         if (!isFinite(lat) || !isFinite(lon)) {
             this.set_applet_label("set lat/lon");
             this._state = null;
@@ -361,6 +444,10 @@ class OrlojApplet extends Applet.TextApplet {
         if (this._timer) {
             Mainloop.source_remove(this._timer);
             this._timer = null;
+        }
+        if (this._httpSession) {
+            this._httpSession.abort();
+            this._httpSession = null;
         }
         if (this._tooltip) this._tooltip.destroy();
         if (this._settings) this._settings.finalize();
