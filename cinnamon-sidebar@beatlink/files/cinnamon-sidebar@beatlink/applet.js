@@ -56,6 +56,13 @@ function rectStr(r) {
     return "x=" + r.x + " y=" + r.y + " w=" + r.width + " h=" + r.height +
            " right=" + (r.x + r.width);
 }
+// Best-effort read of Muffin's live tile-mode for a window (for tracing only).
+function tileStr(win) {
+    try {
+        let tm = win.tile_mode;
+        return (tm === undefined || tm === null) ? "?" : String(tm);
+    } catch (e) { return "?"; }
+}
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -103,6 +110,10 @@ MyApplet.prototype = {
         // True while WE call unmaximize(), so the maximize handler ignores the
         // resulting state change (it isn't a user action).
         this._selfUnmax = false;
+
+        // Windows whose fill was deferred until the current grab ends (drag-to-
+        // tile fires mid-grab; unmaximizing then leaves Muffin's tile hint).
+        this._pendingFill = null;
 
         this.settings = new Settings.AppletSettings(this, UUID, instance_id);
         this.settings.bindProperty(Settings.BindingDirection.IN, "dock-side", "dockSide",
@@ -416,6 +427,7 @@ MyApplet.prototype = {
         this._grabbing = false;
         this._filled.clear();
         this._lastNormalRect.clear();
+        this._pendingFill = null;
     },
 
     _attachAll: function() {
@@ -432,6 +444,7 @@ MyApplet.prototype = {
         ids.push(win.connect("unmanaged", () => {
             this._filled.delete(win);
             this._lastNormalRect.delete(win);
+            if (this._pendingFill) this._pendingFill.delete(win);
             this._detachWindow(win);
             if (this._dock && this._dock.win === win) { this._dock = null; this._stopMonitoring(); }
         }));
@@ -484,6 +497,11 @@ MyApplet.prototype = {
     //   not yet filled  -> maximize means "fill the band" (remember pre-max size)
     //   already filled   -> maximize again means "restore the pre-max size"
     _onMaximize: function(win) {
+        dbg("onMaximize '" + (win.get_title ? win.get_title() : "?") + "' hmax=" +
+            win.maximized_horizontally + " vmax=" + win.maximized_vertically +
+            " tile=" + tileStr(win) + " grab=" + this._grabbing +
+            " selfUnmax=" + this._selfUnmax + " enforcing=" + this._enforcing +
+            " filled=" + this._filled.has(win));
         if (this._selfUnmax) return;                     // our own unmaximize echo
         if (this._enforcing) return;                     // our own geometry change
         if (this._dock && win === this._dock.win) {      // docked window: just lock
@@ -498,29 +516,82 @@ MyApplet.prototype = {
             let pre = this._filled.get(win);
             this._filled.delete(win);
             this._selfUnmaximize(win);
+            this._hideTilePreview();
             if (pre) {
                 dbg("maximize toggle: RESTORE '" + win.get_title() + "' -> " + rectStr(pre));
                 this._withGuard(() => {
                     this._moveResize(win, pre.x, pre.y, pre.width, pre.height);
                 });
             }
+            this._hideTilePreview();
             return;
         }
 
-        // First maximize => fill the band. Use the pre-maximize rect we captured
-        // continuously (unmaximize() is async and unreadable in time). Fall back
-        // to the current rect only if we somehow never saw a normal one.
+        // First maximize => fill the band.
+        this._fillFromMaximize(win);
+    },
+
+    // Turn a maximized (non-docked) window into a band-filling window: remember
+    // its pre-maximize size, unmaximize, then expand to fill the band. Safe to
+    // call during enforcement (unlike _onMaximize, which bails while enforcing),
+    // so it also handles windows that were ALREADY maximized at dock time.
+    _fillFromMaximize: function(win) {
+        if (this._filled.has(win)) return;
+        // Use the pre-maximize rect we captured continuously (unmaximize() is
+        // async and unreadable in time). Fall back to the current rect only if
+        // we somehow never saw a normal one.
         let pre = this._lastNormalRect.get(win) || this._captureRect(win);
         this._filled.set(win, pre);
         dbg("maximize toggle: FILL '" + win.get_title() + "' (pre-max=" + rectStr(pre) + ")");
+
+        // Drag-to-edge tiling (e.g. drop at the top of the screen) fires this
+        // WHILE the pointer grab is still active. If we unmaximize now, Muffin
+        // re-asserts its tile state at grab-end and the tile hint/preview lingers
+        // even though our geometry is correct. Wait for the grab to finish, then
+        // unmaximize + fill so Muffin has no tile op left to re-apply.
+        if (this._grabbing) {
+            this._pendingFill = this._pendingFill || new Set();
+            this._pendingFill.add(win);
+            return;
+        }
+        this._applyFill(win);
+    },
+
+    // Actually clear the maximized/tiled state and expand into the band. Assumes
+    // the pre-maximize rect is already stored in _filled.
+    _applyFill: function(win) {
+        if (!this._isValid(win) || !this._filled.has(win)) return;
+        dbg("applyFill '" + (win.get_title ? win.get_title() : "?") + "' tile(before)=" +
+            tileStr(win) + " maxed=" + (win.get_maximized ? win.get_maximized() : "?"));
         this._selfUnmaximize(win);
+        this._hideTilePreview();
         GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
             if (this._isValid(win) && this._filled.has(win) &&
                 this._dock && win !== this._dock.win) {
+                dbg("applyFill(idle) '" + (win.get_title ? win.get_title() : "?") +
+                    "' tile(after-unmax)=" + tileStr(win));
                 this._withGuard(() => { this._fillBand(win); });
+                // The WM's blue tile-preview overlay is a separate St actor driven
+                // by muffin's show/hide-tile-preview signals. When we hijack a
+                // drag-tiled window the "hide" can be missed, so hide it ourselves.
+                this._hideTilePreview();
             }
             return GLib.SOURCE_REMOVE;
         });
+    },
+
+    // Dismiss Cinnamon's blue tile-preview overlay if it's still showing. Guarded:
+    // the internals (Main.wm._tilePreview) are private and may vary by version.
+    _hideTilePreview: function() {
+        try {
+            let wm = Main.wm;
+            if (wm && wm._tilePreview && typeof wm._tilePreview.hide === "function") {
+                wm._tilePreview.hide();
+                dbg("tile-preview hidden");
+            }
+        } catch (e) {
+            dbg("hideTilePreview failed: " + e);
+        }
     },
 
     _selfUnmaximize: function(win) {
@@ -535,13 +606,29 @@ MyApplet.prototype = {
 
     _onGrabOpBegin: function(display, win, op) {
         this._grabbing = true;
+        dbg("grab-begin op=" + op + " win='" + (win && win.get_title ? win.get_title() : "?") +
+            "' tile=" + (win ? tileStr(win) : "-"));
     },
 
     _onGrabOpEnd: function(display, win, op) {
         this._grabbing = false;
+        dbg("grab-end op=" + op + " win='" + (win && win.get_title ? win.get_title() : "?") +
+            "' tile=" + (win ? tileStr(win) : "-") +
+            " pending=" + (this._pendingFill ? this._pendingFill.size : 0));
         if (!this._dock) return;
+        // Flush any fills deferred because they arrived mid-grab (drag-to-tile).
+        // Do this before enforceAll so the window's tile state is cleared first.
+        if (this._pendingFill && this._pendingFill.size) {
+            let pending = this._pendingFill;
+            this._pendingFill = null;
+            for (let w of pending) this._applyFill(w);
+        }
         GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
             this._enforceAll();
+            // A drag that we intercepted (FILL or RESTORE) may leave the WM's
+            // tile-preview overlay showing; Muffin can also re-show it as the grab
+            // settles. Clear it once more after the dust settles.
+            this._hideTilePreview();
             return GLib.SOURCE_REMOVE;
         });
     },
@@ -621,12 +708,13 @@ MyApplet.prototype = {
         if (band.availWidth < 50) return;
 
         // A window that's maximized when we enforce (e.g. it was already maximized
-        // at dock time) is handed to the maximize toggle so it fills the band and
-        // gets a remembered pre-maximize size. Genuine user maximizes come through
-        // _onMaximize directly.
+        // at dock time) is made to fill the band and gets a remembered pre-maximize
+        // size. We call _fillFromMaximize directly rather than _onMaximize because
+        // enforcement runs under the _enforcing guard, which _onMaximize bails on.
+        // Genuine (interactive) user maximizes come through _onMaximize.
         if (win.maximized_horizontally ||
             (win.get_maximized && (win.get_maximized() & Meta.MaximizeFlags.HORIZONTAL))) {
-            if (!this._filled.has(win)) this._onMaximize(win);
+            if (!this._filled.has(win)) this._fillFromMaximize(win);
             return;
         }
         // Ordinary move/resize: only keep it from covering the dock.
