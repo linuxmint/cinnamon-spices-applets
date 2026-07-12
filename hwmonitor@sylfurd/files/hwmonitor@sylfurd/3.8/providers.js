@@ -113,22 +113,7 @@ class NetDataProvider {
         this.max_speed = max_speed * 1024 * 1024 / 8;
 
         this.gtop = new GTop.glibtop_netload();
-        try {
-            // Get network devices from gtop
-            let nl = new GTop.glibtop_netlist();
-            this.devices = GTop.glibtop.get_netlist(nl);
-        }
-        catch(e) {
-            // Get network devices from filesystem : /sys/class/net
-            this.devices = [];
-            let d = Gio.File.new_for_path("/sys/class/net");
-            let en = d.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
-            let info;
-            while ((info = en.next_file(null)))
-                this.devices.push(info.get_name())
-        }
-        // Don't measure loopback interface
-        this.devices = this.devices.filter(v => v !== "lo"); 
+        this.devices = this.getDevices();
         try {
             //Workaround, because string match() function throws an error for some reason if called after GTop.glibtop.get_netlist(). After the error is thrown, everything works fine.
             //If the match() would not be called here, the error would be thrown somewhere in Cinnamon applet init code and applet init would fail.
@@ -146,8 +131,9 @@ class NetDataProvider {
     getData() {
         try {
             let [down, up] = this.getNetLoad();
-            let down_delta = (down - this.down_last) / this.frequency;
-            let up_delta = (up - this.up_last) / this.frequency;
+            // Counters can drop when a device disappears, don't report negative rates
+            let down_delta = Math.max(0, (down - this.down_last) / this.frequency);
+            let up_delta = Math.max(0, (up - this.up_last) / this.frequency);
             this.down_last = down;
             this.up_last = up;
             let format = new Tools();
@@ -172,10 +158,34 @@ class NetDataProvider {
         }
     }
 
+    getDevices() {
+        let devices;
+        try {
+            // Get network devices from gtop
+            let nl = new GTop.glibtop_netlist();
+            devices = GTop.glibtop.get_netlist(nl);
+        }
+        catch(e) {
+            // Get network devices from filesystem : /sys/class/net
+            devices = [];
+            let d = Gio.File.new_for_path("/sys/class/net");
+            let en = d.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
+            let info;
+            while ((info = en.next_file(null)))
+                devices.push(info.get_name())
+        }
+        // Don't measure loopback interface
+        return devices.filter(v => v !== "lo");
+    }
+
     getNetLoad() {
         try {
             let down = 0;
             let up = 0;
+            // Refresh the device list on every poll so interfaces that no longer
+            // exist (e.g. docker veth devices) are not queried anymore, which
+            // would make glibtop flood the log with warnings
+            this.devices = this.getDevices();
             for (let i = 0; i < this.devices.length; ++i)
             {
                 GTop.glibtop.get_netload(this.gtop, this.devices[i]);
