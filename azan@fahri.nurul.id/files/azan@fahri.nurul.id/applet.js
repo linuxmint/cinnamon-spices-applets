@@ -157,7 +157,7 @@ AzanApplet.prototype = {
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
             this.menu.addAction(_("Azan Settings"), () => {
-                Util.spawnCommandLine("xlet-settings applet " + this._metadata.uuid);
+                Util.trySpawn(["xlet-settings", "applet", this._metadata.uuid])
             });
 
             // this.menu.addSettingsAction(_("Power Settings"), 'power');
