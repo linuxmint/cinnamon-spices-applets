@@ -22,20 +22,43 @@ class OrlojApplet extends Applet.TextApplet {
         this.set_applet_label("--:--");
         this.set_applet_tooltip("Orloj");
 
-        // Per-body label columns: keeping each body in its own left-aligned
-        // label keeps the ☀/☾ glyphs vertically aligned in two-line mode
-        // even when entry widths differ (e.g. a "+1d" suffix on one line).
-        // TextApplet wraps its built-in label in this._layoutBin — that Bin,
-        // not the label, is the child of this.actor, so insert relative to
-        // it. The built-in label is kept for startup and fallback text.
+        // Per-body panel label: the sun and moon each get a column, side by
+        // side. TextApplet wraps its built-in label in this._layoutBin — that
+        // Bin, not the label, is the child of this.actor, so insert relative
+        // to it. The built-in label is kept for startup and fallback text.
         this._bodyBox = new St.BoxLayout({
             style: "spacing: 6px;",
             y_align: Clutter.ActorAlign.CENTER
         });
-        this._sunLabel  = new St.Label({ style_class: "applet-label" });
-        this._moonLabel = new St.Label({ style_class: "applet-label" });
-        this._bodyBox.add_actor(this._sunLabel);
-        this._bodyBox.add_actor(this._moonLabel);
+        // Each body is a vertical column of two single-line labels (rise on
+        // top, set below). One label per line — rather than one two-line
+        // label — guarantees the ☀/☾ glyphs stay left-aligned when the rise
+        // and set entries differ in width (e.g. a "+1d" suffix on one line);
+        // a multi-line label center-justifies its lines instead.
+        const makeLine = () => new St.Label({
+            style_class: "applet-label",
+            x_align: Clutter.ActorAlign.START
+        });
+        this._sunTop  = makeLine();
+        this._sunBot  = makeLine();
+        this._moonTop = makeLine();
+        this._moonBot = makeLine();
+        // Center each column vertically within the row so that when one body
+        // shows a single line and the other shows both (rise + set), the
+        // single line sits centered against the two, rather than pinned to
+        // the top row.
+        const sunCol  = new St.BoxLayout({
+            vertical: true, y_align: Clutter.ActorAlign.CENTER, y_expand: false
+        });
+        sunCol.add_actor(this._sunTop);
+        sunCol.add_actor(this._sunBot);
+        const moonCol = new St.BoxLayout({
+            vertical: true, y_align: Clutter.ActorAlign.CENTER, y_expand: false
+        });
+        moonCol.add_actor(this._moonTop);
+        moonCol.add_actor(this._moonBot);
+        this._bodyBox.add_actor(sunCol);
+        this._bodyBox.add_actor(moonCol);
         this.actor.insert_child_below(this._bodyBox, this._layoutBin);
 
         // Moon-phase widget: schematic disk with "illum% phase°" beneath,
@@ -315,8 +338,8 @@ class OrlojApplet extends Applet.TextApplet {
         }
         this.set_applet_tooltip("Orloj" + locNote);
         if (!isFinite(lat) || !isFinite(lon)) {
-            this._sunLabel.hide();
-            this._moonLabel.hide();
+            this._sunTop.hide();  this._sunBot.hide();
+            this._moonTop.hide(); this._moonBot.hide();
             this.set_applet_label("set lat/lon");
             this._state = null;
             this._moonBox.hide();
@@ -359,31 +382,35 @@ class OrlojApplet extends Applet.TextApplet {
         };
         // Per body: by default a single entry with the next event (rise or
         // set, whichever comes soonest — the original behavior); with
-        // "Always show both" on, the body's rise and set are stacked in two
-        // lines, rise on top, set below. Each body renders in its own
-        // column label so the glyphs stay vertically aligned. The built-in
-        // applet label only carries a small glyph pair when everything is
-        // hidden, keeping the applet clickable.
+        // "Always show both" on, the body's rise and set fill the column's
+        // two rows, rise on top, set below. The built-in applet label only
+        // carries a small glyph pair when everything is hidden, keeping the
+        // applet clickable.
         const nextOf = (ev) => {
             if (ev.rise && (!ev.set || ev.rise < ev.set))
                 return { arrow: "↑", time: ev.rise };
             if (ev.set) return { arrow: "↓", time: ev.set };
             return null;
         };
-        const bodyText = (glyph, show, both, ev) => {
-            if (!show) return "";
-            if (both)
-                return `${glyph}↑${fmtTime(ev.rise)}\n${glyph}↓${fmtTime(ev.set)}`;
-            const nx = nextOf(ev);
-            return nx ? `${glyph}${nx.arrow}${fmtTime(nx.time)}` : `${glyph}>1d`;
+        const fillColumn = (top, bot, glyph, show, both, ev) => {
+            if (!show) { top.hide(); bot.hide(); return false; }
+            if (both) {
+                top.set_text(`${glyph}↑${fmtTime(ev.rise)}`); top.show();
+                bot.set_text(`${glyph}↓${fmtTime(ev.set)}`);  bot.show();
+            } else {
+                const nx = nextOf(ev);
+                top.set_text(nx ? `${glyph}${nx.arrow}${fmtTime(nx.time)}`
+                                : `${glyph}>1d`);
+                top.show();
+                bot.hide();
+            }
+            return true;
         };
-        const sunText  = bodyText("☀", this.showSunrise,  this.showBothSun,  sunEv);
-        const moonText = bodyText("☾", this.showMoonrise, this.showBothMoon, moonEv);
-        this._sunLabel.set_text(sunText);
-        this._sunLabel.visible = !!sunText;
-        this._moonLabel.set_text(moonText);
-        this._moonLabel.visible = !!moonText;
-        this.set_applet_label(sunText || moonText ? "" : "☀☾");
+        const sunShown  = fillColumn(this._sunTop, this._sunBot,
+            "☀", this.showSunrise, this.showBothSun, sunEv);
+        const moonShown = fillColumn(this._moonTop, this._moonBot,
+            "☾", this.showMoonrise, this.showBothMoon, moonEv);
+        this.set_applet_label(sunShown || moonShown ? "" : "☀☾");
 
         const jd      = Astronomy.julianDay(now);
         const sunLon  = Astronomy.sunLongitude(jd);
