@@ -168,11 +168,11 @@ class NetDataProvider {
         catch(e) {
             // Get network devices from filesystem : /sys/class/net
             devices = [];
-            let d = Gio.File.new_for_path("/sys/class/net");
-            let en = d.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
-            let info;
-            while ((info = en.next_file(null)))
-                devices.push(info.get_name())
+            let dir = GLib.Dir.open("/sys/class/net", 0);
+            let name;
+            while ((name = dir.read_name()) !== null)
+                devices.push(name);
+            dir.close();
         }
         // Don't measure loopback interface
         return devices.filter(v => v !== "lo");
