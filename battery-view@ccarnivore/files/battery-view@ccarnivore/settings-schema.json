@@ -48,5 +48,173 @@
         "step": 10,
         "units": "W",
         "description": "Grid export/import threshold (below is considered neutral)"
+    },
+
+    "head_alert": {
+        "type": "header",
+        "description": "Charge alert"
+    },
+    "alert_enabled": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Alert when the battery reaches a charge level",
+        "tooltip": "Only triggers while the battery is charging, never while discharging."
+    },
+    "alert_soc": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "Alert at SOC (>=)",
+        "dependency": "alert_enabled"
+    },
+    "alert_rearm_drop": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "units": "%",
+        "description": "Re-arm after SOC drops this far below the alert level",
+        "tooltip": "Prevents repeated alerts when the inverter keeps topping up a full battery.",
+        "dependency": "alert_enabled"
+    },
+    "alert_mode": {
+        "type": "combobox",
+        "default": "both",
+        "description": "Alert type",
+        "options": {
+            "Notification only": "notification",
+            "Fullscreen dialog only": "dialog",
+            "Notification and fullscreen dialog": "both"
+        },
+        "dependency": "alert_enabled"
+    },
+
+    "head_rest": {
+        "type": "header",
+        "description": "REST triggers (smart plug)"
+    },
+    "rest_enabled": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Call REST endpoints on charge/discharge state changes",
+        "tooltip": "Endpoint 1 is called once when the battery starts charging, endpoint 2 once when the battery is low and discharging."
+    },
+    "rest_confirm_polls": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "units": "polls",
+        "description": "Confirm condition for this many polls before calling",
+        "tooltip": "Debounces fluctuating solar power so the plug does not toggle on every passing cloud.",
+        "dependency": "rest_enabled"
+    },
+    "rest_charge_watts": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 0,
+        "max": 5000,
+        "step": 50,
+        "units": "W",
+        "description": "Minimum charge power that counts as surplus",
+        "dependency": "rest_enabled"
+    },
+    "rest_off_soc": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "SOC below which discharging triggers endpoint 2 (<)",
+        "dependency": "rest_enabled"
+    },
+
+    "head_rest_on": {
+        "type": "header",
+        "description": "Endpoint 1: battery charging (surplus)"
+    },
+    "rest_on_url": {
+        "type": "entry",
+        "default": "",
+        "description": "URL",
+        "tooltip": "Example (Shelly): http://192.168.1.50/relay/0?turn=on",
+        "dependency": "rest_enabled"
+    },
+    "rest_on_method": {
+        "type": "combobox",
+        "default": "GET",
+        "description": "Method",
+        "options": {
+            "GET": "GET",
+            "POST": "POST"
+        },
+        "dependency": "rest_enabled"
+    },
+    "rest_on_body": {
+        "type": "entry",
+        "default": "",
+        "description": "Request body (POST only)",
+        "dependency": "rest_enabled"
+    },
+    "rest_on_content_type": {
+        "type": "entry",
+        "default": "application/json",
+        "description": "Content type (POST only)",
+        "dependency": "rest_enabled"
+    },
+    "rest_on_test": {
+        "type": "button",
+        "description": "Test endpoint 1 now",
+        "callback": "onTestRestOn"
+    },
+
+    "head_rest_off": {
+        "type": "header",
+        "description": "Endpoint 2: low battery, discharging"
+    },
+    "rest_off_url": {
+        "type": "entry",
+        "default": "",
+        "description": "URL",
+        "tooltip": "Example (Shelly): http://192.168.1.50/relay/0?turn=off",
+        "dependency": "rest_enabled"
+    },
+    "rest_off_method": {
+        "type": "combobox",
+        "default": "GET",
+        "description": "Method",
+        "options": {
+            "GET": "GET",
+            "POST": "POST"
+        },
+        "dependency": "rest_enabled"
+    },
+    "rest_off_body": {
+        "type": "entry",
+        "default": "",
+        "description": "Request body (POST only)",
+        "dependency": "rest_enabled"
+    },
+    "rest_off_content_type": {
+        "type": "entry",
+        "default": "application/json",
+        "description": "Content type (POST only)",
+        "dependency": "rest_enabled"
+    },
+    "rest_off_test": {
+        "type": "button",
+        "description": "Test endpoint 2 now",
+        "callback": "onTestRestOff"
+    },
+
+    "rest_last_action": {
+        "type": "generic",
+        "default": ""
     }
 }

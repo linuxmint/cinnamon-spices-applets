@@ -1,0 +1,8 @@
+{
+    "uuid": "hdd-led@tucsonst",
+    "name": "Drive activity LED indicator",
+    "description": "Emulates HDD/SSD activity LED indicator, for computers without one",
+    "author": "tucsonst",
+    "website": "",
+    "version": "1.2.0"
+}

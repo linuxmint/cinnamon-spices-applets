@@ -1,0 +1,18 @@
+
+.channel-label {
+   font-size: 1em;
+}
+
+.title-label {
+   text-align: center;
+   font-size: 14px;
+   padding-left: 1em;
+}
+
+.radio-label {
+   text-align: center;
+   font-size: 0.9em;
+   padding-top: 1em;
+   font-weight: bold;
+
+}
