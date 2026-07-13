@@ -13,7 +13,7 @@ function _(str) {
     return Gettext.dgettext(UUID, str);
 }
 
-const extPath = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + UUID;
+const extPath = GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
 
 var currentChannelsList = [];
 
