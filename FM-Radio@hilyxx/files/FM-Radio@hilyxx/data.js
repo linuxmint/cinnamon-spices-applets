@@ -4,7 +4,7 @@ const GLib = imports.gi.GLib;
 const Channels = imports.channels;
 
 const UUID = "FM-Radio@hilyxx";
-const extPath = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + UUID;
+const extPath = GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
 
 const FILE_NAME = "prefs.json";
 const DIR_NAME = ".fm-radio";
