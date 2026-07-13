@@ -1,0 +1,11 @@
+{
+    "uuid": "FM-Radio@hilyxx",
+    "name": "FM Radio",
+    "description": "A stupidly simple radio player for Cinnamon",
+    "max-instances": 1,
+    "multiversion": true,
+    "cinnamon-version": [
+        "6.4",
+        "6.6"
+    ]
+}
