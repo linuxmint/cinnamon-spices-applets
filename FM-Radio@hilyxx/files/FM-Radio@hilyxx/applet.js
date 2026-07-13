@@ -125,7 +125,7 @@ class SomaFMApplet extends Applet.IconApplet {
 
         this.menu.addMenuItem(this.volumeMenuItem);
 
-        let controlMenuItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        let controlMenuItem = new PopupMenu.PopupBaseMenuItem({ reactive: true, hover: false, activate: false });
         this.controlBox = Radio.ControlButtons(this.player, this);
 
         let centerBox = new St.BoxLayout({ 
@@ -139,7 +139,7 @@ class SomaFMApplet extends Applet.IconApplet {
         controlMenuItem.addActor(centerBox, { expand: true });
         this.menu.addMenuItem(controlMenuItem);
 
-        this.statusMenuItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        this.statusMenuItem = new PopupMenu.PopupBaseMenuItem({ reactive: true, hover: false, activate: false });
         this.box = new St.BoxLayout({ 
             x_expand: true, 
             width: 210, 
