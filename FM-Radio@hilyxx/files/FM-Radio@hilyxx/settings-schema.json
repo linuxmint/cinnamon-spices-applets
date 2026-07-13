@@ -1,0 +1,100 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "page_stations",
+            "tips"
+        ],
+        "page_stations": {
+            "type": "page",
+            "title": "Radios",
+            "sections": [
+                "section_search",
+                "section_list"
+            ]
+        },
+        "tips":{
+            "type":"page",
+            "title":"Tips",
+            "sections":[
+                "tips-section"
+            ]
+        },
+        "section_search": {
+            "type": "section",
+            "title": "Radio station search (Radio-Browser API)",
+            "keys": [
+                "search_keyword",
+                "search_button",
+                "search_results",
+                "clear_button"
+            ]
+        },
+        "section_list": {
+            "type": "section",
+            "title": "Station management",
+            "keys": [
+                "custom_stations"
+            ]
+        },
+        "tips-section":{
+            "type":"section",
+            "title":"Tips",
+            "keys":[
+                "info1"
+            ]
+        }
+    },
+    "search_keyword": {
+        "type": "entry",
+        "default": "",
+        "description": "Radio station name to search for"
+    },
+    "search_button": {
+        "type": "button",
+        "description": "Launch search",
+        "tooltip": "Search for the station on the internet",
+        "callback": "_onSearchClicked"
+    },
+    "search_results": {
+        "type": "textview",
+        "description": "Search results (Copy the URL and add it to your list below):",
+        "default": "Results will be displayed here..."
+    },
+    "clear_button": {
+        "type": "button",
+        "description": "Clear results",
+        "tooltip": "Clear the text area",
+        "callback": "_onClearClicked"
+    },
+    "custom_stations": {
+        "type": "list",
+        "description": "Custom radio stations",
+        "columns": [
+            {"id": "name", "title": "Station name", "type": "string"},
+            {"id": "link", "title": "Stream URL", "type": "string"},
+            {"id": "pic", "title": "Image path (e.g., /home/user/logo.png)", "type": "string"}
+        ],
+        "default": [
+            {
+                "name": "Cinemix HD", 
+                "link": "https://kathy.torontocast.com:1825/stream", 
+                "pic": "/images/cinemix.png"
+            },
+            {
+                "name": "Radio BOB", 
+                "link": "https://regiocast.streamabc.net/regc-boblivenational-mp3-192-4076554", 
+                "pic": "/images/BOB.png"
+            },
+            {
+                "name": "Darksynth", 
+                "link": "https://stream.nightride.fm/darksynth.mp3", 
+                "pic": "/images/darkSynth.jpg"
+            }
+        ]
+    },
+    "info1":{
+        "type":"label",
+        "description":"\nTo create a custom image for a radio station:\n• Create an image of any format (png, jpeg, or svg) with a square 'cover' style size (e.g., 300x300).\n• Station images are stored by default in the applet's image folder, and the path is /images/yourcover.png. For images located in another folder, apply the same process and adapt the path accordingly.\n• The easiest way is to copy the desired image and paste it into the provided field; this will directly paste the image path.\n"
+    }
+}
