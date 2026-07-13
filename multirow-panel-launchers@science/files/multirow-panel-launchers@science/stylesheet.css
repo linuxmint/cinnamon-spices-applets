@@ -1,0 +1,3 @@
+/* Hover/active feedback is applied via inline styles in applet.js
+ * (_connectHoverFeedback) because launcher actors use important:true
+ * which gives theme CSS priority over applet stylesheets. */
