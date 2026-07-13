@@ -11,9 +11,13 @@ const DIR_NAME = ".fm-radio";
 
 function readFile(filepath) {
     let file = Gio.file_new_for_path(filepath);
-    let [success, contents] = file.load_contents(null);
-    if (success) {
-        return imports.byteArray.toString(contents);
+    try {
+        let [success, contents] = file.load_contents(null);
+        if (success) {
+            return imports.byteArray.toString(contents);
+        }
+    } catch (e) {
+        global.logError("FM Radio: Error reading file: " + e);
     }
     return null;
 }
@@ -59,26 +63,37 @@ function create(dir_path) {
     let dir = Gio.file_new_for_path(dir_path);
     let file_path = dir_path + "/" + FILE_NAME;
 
-    if (!dir.query_exists(null)) {
-        try {
-            dir.make_directory(null);
-        } catch (e) {
+    // If it already exists, catch the EXISTS error and ignore it.
+    try {
+        dir.make_directory(null);
+    } catch (e) {
+        if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
             global.logError("FM Radio: Failed to create directory! " + e);
             return;
         }
     }
 
     let file = Gio.file_new_for_path(file_path);
-    if (!file.query_exists(null)) {
-        const defaultJson = JSON.stringify(
-            { lastChannel: 0, lastVol: 1 },
-            null,
-            4,
-        );
-        try {
-            GLib.file_set_contents(file_path, defaultJson);
-        } catch (e) {
-            global.logError("FM Radio: Failed to create default prefs file! " + e);
+    
+    // If it throws NOT_FOUND, create the default file.
+    try {
+        let stream = file.read(null);
+        stream.close(null); // File exists, close the stream safely
+    } catch (e) {
+        if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+            const defaultJson = JSON.stringify(
+                { lastChannel: 0, lastVol: 1 },
+                null,
+                4,
+            );
+            try {
+                GLib.file_set_contents(file_path, defaultJson);
+            } catch (err) {
+                global.logError("FM Radio: Failed to create default prefs file! " + err);
+            }
+        } else {
+            // Log other unexpected errors (e.g., permission denied)
+            global.logError("FM Radio: Error accessing prefs file! " + e);
         }
     }
 }
