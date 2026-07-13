@@ -2,6 +2,7 @@
     "uuid": "FM-Radio@hilyxx",
     "name": "FM Radio",
     "description": "A stupidly simple radio player for Cinnamon",
+    "version": "1.01",
     "max-instances": 1,
     "multiversion": true,
     "cinnamon-version": [
