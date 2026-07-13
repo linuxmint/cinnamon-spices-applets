@@ -1,3 +1,8 @@
+### v3.3.0~20260711
+* User can set its own location (latitude and longitude).
+* This location can be calculated using geolocation by IP.
+* Ready for Linux Mint 23.
+
 ### v3.2.2~20260415
 * Toggle on/off this applet middle-clicking on its icon.
 
