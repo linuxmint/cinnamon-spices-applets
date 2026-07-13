@@ -13,14 +13,12 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Cinnamon = imports.gi.Cinnamon;
 const CMenu = imports.gi.CMenu;
-const Lang = imports.lang;
 const Gio = imports.gi.Gio;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const GLib = imports.gi.GLib;
 const Tooltips = imports.ui.tooltips;
 const DND = imports.ui.dnd;
-const Tweener = imports.ui.tweener;
 const Util = imports.misc.util;
 const Settings = imports.ui.settings;
 const Signals = imports.signals;
@@ -31,7 +29,7 @@ const Helpers = require('./helpers');
 
 const UUID = 'multirow-panel-launchers@science';
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + '/locale');
 
 // Prefer this applet's translations; fall back to Cinnamon's domain for
 // strings the stock applet already translates (Launch, Add, Remove, ...).
@@ -73,32 +71,32 @@ class PanelAppLauncherMenu extends Applet.AppletPopupMenu {
         if (this._actions.length > 0) {
             for (let i = 0; i < this._actions.length; i++) {
                 let actionName = this._actions[i];
-                this.addAction(appinfo.get_action_name(actionName), Lang.bind(this, this._launchAction, actionName));
+                this.addAction(appinfo.get_action_name(actionName), (event) => this._launchAction(event, actionName));
             }
 
             this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         }
 
         let item = new PopupMenu.PopupIconMenuItem(_("Launch"), "media-playback-start", St.IconType.SYMBOLIC);
-        this._signals.connect(item, 'activate', Lang.bind(this, this._onLaunchActivate));
+        this._signals.connect(item, 'activate', this._onLaunchActivate.bind(this));
         this.addMenuItem(item);
 
         if (Main.gpu_offload_supported) {
             let item = new PopupMenu.PopupIconMenuItem(_("Run with dedicated GPU"), "cpu", St.IconType.SYMBOLIC);
-            this._signals.connect(item, 'activate', Lang.bind(this, this._onLaunchOffloadedActivate));
+            this._signals.connect(item, 'activate', this._onLaunchOffloadedActivate.bind(this));
             this.addMenuItem(item);
         }
 
         item = new PopupMenu.PopupIconMenuItem(_("Add"), "list-add", St.IconType.SYMBOLIC);
-        this._signals.connect(item, 'activate', Lang.bind(this, this._onAddActivate));
+        this._signals.connect(item, 'activate', this._onAddActivate.bind(this));
         this.addMenuItem(item);
 
         item = new PopupMenu.PopupIconMenuItem(_("Edit"), "document-properties", St.IconType.SYMBOLIC);
-        this._signals.connect(item, 'activate', Lang.bind(this, this._onEditActivate));
+        this._signals.connect(item, 'activate', this._onEditActivate.bind(this));
         this.addMenuItem(item);
 
         item = new PopupMenu.PopupIconMenuItem(_("Remove"), "window-close", St.IconType.SYMBOLIC);
-        this._signals.connect(item, 'activate', Lang.bind(this, this._onRemoveActivate));
+        this._signals.connect(item, 'activate', this._onRemoveActivate.bind(this));
         this.addMenuItem(item);
 
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -107,11 +105,11 @@ class PanelAppLauncherMenu extends Applet.AppletPopupMenu {
         this.addMenuItem(subMenu);
 
         item = new PopupMenu.PopupIconMenuItem(_("About..."), "dialog-question", St.IconType.SYMBOLIC);
-        this._signals.connect(item, 'activate', Lang.bind(this._launcher.launchersBox, this._launcher.launchersBox.openAbout));
+        this._signals.connect(item, 'activate', () => this._launcher.launchersBox.openAbout());
         subMenu.menu.addMenuItem(item);
 
         item = new PopupMenu.PopupIconMenuItem(_("Configure..."), "system-run", St.IconType.SYMBOLIC);
-        this._signals.connect(item, 'activate', Lang.bind(this._launcher.launchersBox, this._launcher.launchersBox.configureApplet));
+        this._signals.connect(item, 'activate', () => this._launcher.launchersBox.configureApplet());
         subMenu.menu.addMenuItem(item);
 
         this.remove_item = new PopupMenu.PopupIconMenuItem(_("Remove '%s'").format(_("Multi-Row Panel Launchers")), "edit-delete", St.IconType.SYMBOLIC);
@@ -166,8 +164,8 @@ class PanelAppLauncher extends DND.LauncherDraggable {
         this.actor.set_easing_duration(100);
 
         this.actor._delegate = this;
-        this._signals.connect(this.actor, 'button-release-event', Lang.bind(this, this._onButtonRelease));
-        this._signals.connect(this.actor, 'button-press-event', Lang.bind(this, this._onButtonPress));
+        this._signals.connect(this.actor, 'button-release-event', this._onButtonRelease.bind(this));
+        this._signals.connect(this.actor, 'button-press-event', this._onButtonPress.bind(this));
 
         this._iconBox = new St.Bin({ style_class: 'icon-box',
                                      important: true });
@@ -179,9 +177,9 @@ class PanelAppLauncher extends DND.LauncherDraggable {
         this._iconBox.set_child(this.icon);
 
         this._signals.connect(this._iconBox, 'style-changed',
-                              Lang.bind(this, this._updateIconSize));
+                              this._updateIconSize.bind(this));
         this._signals.connect(this._iconBox, 'notify::allocation',
-                              Lang.bind(this, this._updateIconSize));
+                              this._updateIconSize.bind(this));
 
         this._menuManager = new PopupMenu.PopupMenuManager(this);
         this._menu = new PanelAppLauncherMenu(this, orientation);
@@ -195,12 +193,12 @@ class PanelAppLauncher extends DND.LauncherDraggable {
         this._dragging = false;
         this._draggable = DND.makeDraggable(this.actor);
 
-        this._signals.connect(this._draggable, 'drag-begin', Lang.bind(this, this._onDragBegin));
-        this._signals.connect(this._draggable, 'drag-end', Lang.bind(this, this._onDragEnd));
+        this._signals.connect(this._draggable, 'drag-begin', this._onDragBegin.bind(this));
+        this._signals.connect(this._draggable, 'drag-end', this._onDragEnd.bind(this));
 
         this._updateInhibit();
-        this._signals.connect(this.launchersBox, 'launcher-draggable-setting-changed', Lang.bind(this, this._updateInhibit));
-        this._signals.connect(global.settings, 'changed::' + PANEL_EDIT_MODE_KEY, Lang.bind(this, this._updateInhibit));
+        this._signals.connect(this.launchersBox, 'launcher-draggable-setting-changed', this._updateInhibit.bind(this));
+        this._signals.connect(global.settings, 'changed::' + PANEL_EDIT_MODE_KEY, this._updateInhibit.bind(this));
     }
 
     _onDragBegin() {
@@ -246,25 +244,21 @@ class PanelAppLauncher extends DND.LauncherDraggable {
     _animateIcon(step) {
         if (step >= 3) return;
         this.icon.set_pivot_point(0.5, 0.5);
-        Tweener.addTween(this.icon,
-                         { scale_x: 0.7,
-                           scale_y: 0.7,
-                           time: 0.2,
-                           transition: 'easeOutQuad',
-                           onComplete() {
-                               Tweener.addTween(this.icon,
-                                                { scale_x: 1.0,
-                                                  scale_y: 1.0,
-                                                  time: 0.2,
-                                                  transition: 'easeOutQuad',
-                                                  onComplete() {
-                                                      this._animateIcon(step + 1);
-                                                  },
-                                                  onCompleteScope: this
-                                                });
-                           },
-                           onCompleteScope: this
-                         });
+        this.icon.ease({
+            scale_x: 0.7,
+            scale_y: 0.7,
+            duration: 200,
+            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+            onComplete: () => {
+                this.icon.ease({
+                    scale_x: 1.0,
+                    scale_y: 1.0,
+                    duration: 200,
+                    mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+                    onComplete: () => this._animateIcon(step + 1),
+                });
+            },
+        });
     }
 
     launch(offload=false) {
@@ -1363,10 +1357,15 @@ class CinnamonPanelLaunchersApplet extends Applet.Applet {
         }
         if (delete_file) {
             let appid = launcher.getId();
-            let file = Gio.file_new_for_path(CUSTOM_LAUNCHERS_PATH + appid);
-            if (file.query_exists(null)) file.delete(null);
-            let old_file = Gio.file_new_for_path(OLD_CUSTOM_LAUNCHERS_PATH + appid);
-            if (old_file.query_exists(null)) old_file.delete(null);
+            for (let dir of [CUSTOM_LAUNCHERS_PATH, OLD_CUSTOM_LAUNCHERS_PATH]) {
+                let file = Gio.file_new_for_path(dir + appid);
+                try {
+                    file.delete(null);
+                } catch (e) {
+                    if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
+                        global.logError(`${UUID}: failed to delete launcher file ${dir + appid}: ${e}`);
+                }
+            }
         }
 
         this.sync_settings_proxy_to_settings();
