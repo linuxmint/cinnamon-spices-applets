@@ -149,6 +149,7 @@ class SomaFMApplet extends Applet.IconApplet {
         this.statusLabel = new St.Label({
             x_align: Clutter.ActorAlign.CENTER,
             x_expand: true,
+            y_expand: true,
             style_class: 'title-label',
         });
         this.statusLabel.clutter_text.line_wrap = true;
@@ -167,7 +168,10 @@ class SomaFMApplet extends Applet.IconApplet {
         this.channelLabel.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
 
         let picPath = this.player.getChannel().getPic();
-        let iconPath = (picPath && picPath.startsWith("/home/")) ? picPath : (this.extPath + (picPath.startsWith("/") ? "" : "/") + picPath);
+        if (!picPath || picPath.trim() === "") {
+            picPath = "/images/default-cover.png";
+        }
+        let iconPath = (picPath.startsWith("/home/")) ? picPath : (this.extPath + (picPath.startsWith("/") ? "" : "/") + picPath);
 
         this.channelIcon = new St.Icon({
             gicon: Gio.icon_new_for_string(iconPath),
@@ -226,7 +230,11 @@ class SomaFMApplet extends Applet.IconApplet {
                 
                 if (this.channelIcon) {
                     let picPath = currentChannel.getPic();
-                    let iconPath = (picPath && picPath.startsWith("/home/")) ? picPath : (this.extPath + (picPath.startsWith("/") ? "" : "/") + picPath);
+                    // If no image is specified, use the default image instead
+                    if (!picPath || picPath.trim() === "") {
+                        picPath = "/images/default-cover.png";
+                    }
+                    let iconPath = (picPath.startsWith("/home/")) ? picPath : (this.extPath + (picPath.startsWith("/") ? "" : "/") + picPath);
                     let newIcon = Gio.icon_new_for_string(iconPath);
                     this.channelIcon.set_gicon(newIcon);
                 }

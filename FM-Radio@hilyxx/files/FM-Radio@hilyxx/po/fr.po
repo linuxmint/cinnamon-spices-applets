@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FM-Radio@hilyxx 1.0\n"
+"Project-Id-Version: FM-Radio@hilyxx 1.02\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-07-13 07:47+0200\n"
+"POT-Creation-Date: 2026-07-14 17:35+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -27,15 +27,15 @@ msgstr "FM Radio"
 msgid "Reload applet"
 msgstr "Recharger l'applet"
 
-#. applet.js:192
+#. applet.js:196
 msgid "All stations"
 msgstr "Toutes les stations"
 
-#. applet.js:237
+#. applet.js:245
 msgid "Waiting..."
 msgstr "En attente..."
 
-#. channels.js:43
+#. channels.js:49
 msgid "Error"
 msgstr "Erreur"
 
@@ -128,7 +128,7 @@ msgstr ""
 "taille carrée de style 'cover' (e.g. 300x300).\n"
 "• Les images des stations sont stockées par défaut dans le dossier image de "
 "l'applet et le chemin est /images/yourcover.png. Pour des images situées "
-"dans un autre dossier, appliquez le même procédé et adapter le chemin en "
+"dans un autre dossier, appliquez le même procédé et adaptez le chemin en "
 "conséquence.\n"
 "• Le plus simple, copiez l'image souhaitée et collez la dans le champ prévu, "
 "cela collera directement le chemin de l'image.\n"
