@@ -18,10 +18,16 @@ const extPath = GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
 var currentChannelsList = [];
 
 function getIconForPath(picPath) {
-    if (picPath && picPath.startsWith("/home/")) {
-        return Gio.icon_new_for_string(picPath);
+    let path = picPath;
+    // If no image is specified, use the default image instead
+    if (!path || path.trim() === "") {
+        path = "/images/default-cover.png";
     }
-    return Gio.icon_new_for_string(extPath + (picPath.startsWith("/") ? "" : "/") + picPath);
+    
+    if (path.startsWith("/home/")) {
+        return Gio.icon_new_for_string(path);
+    }
+    return Gio.icon_new_for_string(extPath + (path.startsWith("/") ? "" : "/") + path);
 }
 
 // Function called by the applet to inject the list from settings
