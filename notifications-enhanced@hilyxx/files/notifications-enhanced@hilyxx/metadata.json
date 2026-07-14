@@ -3,7 +3,7 @@
     "name": "Notifications-Enhanced",
     "description": "A notification applet but with more options",
     "website": "https://github.com/linuxmint/cinnamon-spices-applets",
-    "version": "1.23",
+    "version": "1.24",
     "author": "hilyxx",
     "role": "notifications"
 }
