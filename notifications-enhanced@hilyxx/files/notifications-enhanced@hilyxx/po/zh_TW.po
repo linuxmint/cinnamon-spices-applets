@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-05 12:43+0200\n"
+"POT-Creation-Date: 2026-07-14 23:36+0200\n"
 "PO-Revision-Date: 2025-08-06 23:47+08:00\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -29,52 +29,52 @@ msgstr ""
 "偵測到衝突：notifications@cinnamon.org 目前為啟用狀態。\n"
 "請移除該小程式並重新啟動 Cinnamon，再使用 Notifications-Enhanced 小程式。"
 
-#. applet.js:120
+#. applet.js:136
 msgid "Do not disturb"
 msgstr "請勿打擾"
 
-#. applet.js:126
+#. applet.js:142
 msgid "No notifications"
 msgstr "沒有任何通知"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:134
+#. applet.js:150
 msgid "Clear notifications"
 msgstr "清除通知"
 
-#. applet.js:157
+#. applet.js:173
 msgid "Enable notifications"
 msgstr "啟用通知"
 
-#. applet.js:168
+#. applet.js:184
 msgid "Notification Settings"
 msgstr "通知設定"
 
-#. applet.js:257 applet.js:431
+#. applet.js:275 applet.js:479
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d 則通知"
 
-#. applet.js:287
+#. applet.js:311
 msgid "Notifications"
 msgstr "通知"
 
-#. applet.js:300
+#. applet.js:324
 msgid "Notifications disabled"
 msgstr "通知已停用"
 
-#. applet.js:447
+#. applet.js:495
 msgid "just now"
 msgstr "剛剛"
 
-#. applet.js:450
+#. applet.js:498
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d 秒前"
 
-#. applet.js:454
+#. applet.js:502
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"

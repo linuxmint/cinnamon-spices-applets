@@ -66,9 +66,9 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this._setKeybinding();
 
         this.notif_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.notifications" });
-        this.notif_settings.connect('changed::display-notifications', Lang.bind(this, function() {
+        this.notif_settings.connect('changed::display-notifications', () => {
         this.set_icon_status(this.notif_settings.get_boolean("display-notifications"));
-        }));        
+        });        
 
         // Layout
         this._orientation = orientation;
@@ -84,6 +84,8 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         // States
         this._blinking = false;
         this._blink_toggle = false;
+        this._normal_blinking = false;
+        this._normal_blink_toggle = false;
     }
 
     _setKeybinding() {
@@ -96,6 +98,15 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         Main.keybindingManager.removeHotKey("notification-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("notification-clear-" + this.instance_id);
         Main.keybindingManager.removeHotKey("notification-mute-" + this.instance_id);
+
+        if (this._blinkTimeout) {
+            Mainloop.source_remove(this._blinkTimeout);
+            this._blinkTimeout = null;
+        }
+        if (this._normalBlinkTimeout) {
+            Mainloop.source_remove(this._normalBlinkTimeout);
+            this._normalBlinkTimeout = null;
+        }
 
         // Only used in cinnamon 6.6 and later
         if (MessageTray.extensionsHandlingNotifications !== undefined) {
@@ -160,9 +171,9 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
 
         // Setup the notification switch
         this.notificationsSwitch = new PopupMenu.PopupSwitchMenuItem(_("Enable notifications"), this._toggleNotifications);
-        this.notif_settings.connect('changed::display-notifications', Lang.bind(this, function() {
+        this.notif_settings.connect('changed::display-notifications', () => {
         this.notificationsSwitch.setToggleState(this.notif_settings.get_boolean("display-notifications"));
-        }));
+        });
         this.notificationsSwitch.connect('toggled', Lang.bind(this, function() {
         this.notif_settings.set_boolean("display-notifications", this.notificationsSwitch.state);
         }));
@@ -195,6 +206,8 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         // Alternative tray icons.
         this._crit_icon = new St.Icon({icon_name: 'critical-notif', icon_type: St.IconType.SYMBOLIC, reactive: true, track_hover: true, style_class: 'system-status-icon' });
         this._alt_crit_icon = new St.Icon({icon_name: 'alt-critical-notif', icon_type: St.IconType.SYMBOLIC, reactive: true, track_hover: true, style_class: 'system-status-icon' });
+        this._new_icon = new St.Icon({icon_name: 'new-notif', icon_type: St.IconType.SYMBOLIC, reactive: true, track_hover: true, style_class: 'system-status-icon' });
+        this._alt_new_icon = new St.Icon({icon_name: 'alt-new-notif', icon_type: St.IconType.SYMBOLIC, reactive: true, track_hover: true, style_class: 'system-status-icon' });
 
         this._on_panel_edit_mode_changed();
 
@@ -271,14 +284,19 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
                 switch (max_urgency) {
                     case Urgency.LOW:
                         this._blinking = false;
+                        this._normal_blinking = false;
                         this.set_applet_icon_symbolic_name("low-notif");
                         break;
                     case Urgency.NORMAL:
                     case Urgency.HIGH:
                         this._blinking = false;
-                        this.set_applet_icon_symbolic_name("new-notif");
+                        if (!this._normal_blinking) {
+                            this._normal_blinking = true;
+                            this.normal_blink();
+                        }
                         break;
                     case Urgency.CRITICAL:
+                        this._normal_blinking = false;
                         if (!this._blinking) {
                             this._blinking = true;
                             this.critical_blink();
@@ -287,6 +305,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
                 }
             } else {    // There are no notifications.
                this._blinking = false;
+               this._normal_blinking = false;
                this.set_applet_label('');
                this.set_applet_icon_symbolic_name("empty-notification");
                this.set_applet_tooltip(_("Notifications"));
@@ -371,6 +390,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
     on_applet_added_to_panel() {
         this.on_orientation_changed(this._orientation);
 
+
         // Only used in cinnamon 6.6 and later
         if (MessageTray.extensionsHandlingNotifications !== undefined) {
             MessageTray.extensionsHandlingNotifications++;
@@ -420,16 +440,34 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         }
     }
 
-    critical_blink () {
-        if (!this._blinking)
+    critical_blink() {
+        if (!this._blinking) {
+            if (this._blinkTimeout) {
+                Mainloop.source_remove(this._blinkTimeout);
+                this._blinkTimeout = null;
+            }
             return;
+        }
+        
         if (this._blink_toggle) {
             this._applet_icon_box.child = this._crit_icon;
         } else {
             this._applet_icon_box.child = this._alt_crit_icon;
         }
-        this._blink_toggle = !this._blink_toggle;
-        Mainloop.timeout_add_seconds(1, Lang.bind(this, this.critical_blink));
+        this._blink_toggle = !this._blink_toggle;        
+        this._blinkTimeout = Mainloop.timeout_add_seconds(1, () => this.critical_blink());
+    }
+
+    normal_blink () {
+        if (!this._normal_blinking)
+            return;
+        if (this._normal_blink_toggle) {
+            this._applet_icon_box.child = this._new_icon;
+        } else {
+            this._applet_icon_box.child = this._alt_new_icon;
+        }
+        this._normal_blink_toggle = !this._normal_blink_toggle;
+        this._normalBlinkTimeout = Mainloop.timeout_add_seconds(1, () => this.normal_blink());
     }
 }
 
