@@ -11,6 +11,9 @@ from typing import Any
 from . import __version__
 
 
+MAX_RESPONSE_BYTES = 1_000_000
+
+
 class RpcError(RuntimeError):
     """Sanitized app-server failure with a machine-readable JSON-RPC code."""
 
@@ -26,6 +29,7 @@ class AppServerClient:
         self._next_id = 1
         self._responses: dict[int, dict[str, Any]] = {}
         self._notifications: dict[str, Any] = {}
+        self._reader_finished = False
         self._condition = threading.Condition()
         self._reader = threading.Thread(target=self._read_responses, daemon=True)
         self._reader.start()
@@ -59,6 +63,8 @@ class AppServerClient:
         deadline = time.monotonic() + self.timeout_seconds
         with self._condition:
             while request_id not in self._responses:
+                if self._reader_finished:
+                    raise RuntimeError("Codex app-server stopped")
                 remaining = deadline - time.monotonic()
                 if remaining <= 0:
                     raise TimeoutError("Codex request timed out")
@@ -97,20 +103,40 @@ class AppServerClient:
             flush()
 
     def _read_responses(self):
-        for raw_line in self.process.stdout:
-            try:
-                message = json.loads(raw_line)
-            except (json.JSONDecodeError, TypeError):
-                continue
-            request_id = message.get("id")
-            method = message.get("method")
-            if isinstance(method, str):
+        try:
+            while True:
+                raw_line = self.process.stdout.readline(MAX_RESPONSE_BYTES + 1)
+                if not raw_line:
+                    break
+                oversized = len(raw_line.encode("utf-8")) > MAX_RESPONSE_BYTES
+                while not raw_line.endswith("\n"):
+                    remainder = self.process.stdout.readline(MAX_RESPONSE_BYTES + 1)
+                    if not remainder:
+                        break
+                    oversized = True
+                    if remainder.endswith("\n"):
+                        break
+                if oversized:
+                    continue
+                try:
+                    message = json.loads(raw_line)
+                except (json.JSONDecodeError, TypeError):
+                    continue
+                if not isinstance(message, dict):
+                    continue
+                request_id = message.get("id")
+                method = message.get("method")
+                if isinstance(method, str):
+                    with self._condition:
+                        self._notifications[method] = message.get("params")
+                        self._condition.notify_all()
+                    continue
+                if not isinstance(request_id, int):
+                    continue
                 with self._condition:
-                    self._notifications[method] = message.get("params")
+                    self._responses[request_id] = message
                     self._condition.notify_all()
-                continue
-            if not isinstance(request_id, int):
-                continue
+        finally:
             with self._condition:
-                self._responses[request_id] = message
+                self._reader_finished = True
                 self._condition.notify_all()

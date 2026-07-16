@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -18,6 +19,7 @@ from . import __version__
 
 _CHECK_INTERVAL_SECONDS = 12 * 3600
 _MAX_RESPONSE_BYTES = 1_000_000
+MAX_CACHE_BYTES = 64 * 1024
 _RELEASE_URL = "https://api.github.com/repos/openai/codex/releases/latest"
 _USER_AGENT = f"Codex-Monitor-Cinnamon/{__version__}"
 _VERSION_RE = re.compile(
@@ -206,9 +208,7 @@ class UpdateManager:
 
     def _read_fresh_codex_cache(self):
         try:
-            raw = json.loads(
-                (self.codex_home / "version.json").read_text(encoding="utf-8")
-            )
+            raw = self._read_bounded_json(self.codex_home / "version.json")
             latest = _display_version(raw.get("latest_version"))
             checked_at = self._parse_timestamp(raw.get("last_checked_at"))
         except (OSError, TypeError, ValueError, json.JSONDecodeError):
@@ -219,7 +219,7 @@ class UpdateManager:
 
     def _read_monitor_cache(self):
         try:
-            raw = json.loads(self._state_path.read_text(encoding="utf-8"))
+            raw = self._read_bounded_json(self._state_path)
             latest = _display_version(raw.get("latestVersion"))
             checked_at = raw.get("checkedAt")
         except (OSError, TypeError, ValueError, json.JSONDecodeError):
@@ -228,11 +228,23 @@ class UpdateManager:
             latest is None
             or isinstance(checked_at, bool)
             or not isinstance(checked_at, (int, float))
+            or not math.isfinite(checked_at)
             or checked_at < 0
             or checked_at > self.clock() + 300
         ):
             return {}
         return {"latestVersion": latest, "checkedAt": int(checked_at)}
+
+    @staticmethod
+    def _read_bounded_json(path):
+        with path.open("rb") as handle:
+            payload = handle.read(MAX_CACHE_BYTES + 1)
+        if len(payload) > MAX_CACHE_BYTES:
+            raise ValueError("cache is too large")
+        value = json.loads(payload.decode("utf-8"))
+        if not isinstance(value, dict):
+            raise ValueError("cache is invalid")
+        return value
 
     def _is_monitor_cache_fresh(self):
         checked_at = self._state.get("checkedAt")

@@ -20,6 +20,8 @@ _SOURCE_LABELS = {
     "unknown": "Unknown",
 }
 _ATTENTION_FLAGS = {"waitingOnApproval", "waitingOnUserInput"}
+MAX_SESSION_ROWS = 50
+MAX_UNIX_SECONDS = 8_640_000_000_000
 
 
 def _bounded_text(value, *, maximum=160):
@@ -42,7 +44,13 @@ def _canonical_uuid(value):
 
 
 def _timestamp(value):
-    return value if isinstance(value, int) and not isinstance(value, bool) else None
+    return (
+        value
+        if isinstance(value, int)
+        and not isinstance(value, bool)
+        and 0 <= value <= MAX_UNIX_SECONDS
+        else None
+    )
 
 
 def _source_label(value):
@@ -53,6 +61,19 @@ def _source_label(value):
     if isinstance(value, dict) and "subAgent" in value:
         return "Sub-agent"
     return "Unknown"
+
+
+def normalize_active_turn_start(response, *, now):
+    """Return a safe start timestamp only for the latest in-progress turn."""
+
+    data = response.get("data") if isinstance(response, dict) else None
+    if not isinstance(data, list) or not data or not isinstance(data[0], dict):
+        return None
+    turn = data[0]
+    started_at = _timestamp(turn.get("startedAt"))
+    if turn.get("status") != "inProgress" or started_at is None:
+        return None
+    return started_at if started_at <= int(now) + 300 else None
 
 
 def _normalize_row(raw):
@@ -84,11 +105,16 @@ def _normalize_row(raw):
         "id": thread_id,
         "title": title or "Untitled session",
         "cwd": cwd,
-        "project": os.path.basename(cwd.rstrip(os.sep)) if cwd else "Unknown project",
+        "project": (
+            _bounded_text(os.path.basename(cwd.rstrip(os.sep))) or "Unknown project"
+            if cwd
+            else "Unknown project"
+        ),
         "sourceLabel": _source_label(raw.get("source")),
         "status": status,
         "statusLabel": _STATUS_LABELS.get(status, "Unavailable"),
         "attention": attention,
+        "activeSince": None,
         "createdAt": _timestamp(raw.get("createdAt")),
         "updatedAt": _timestamp(raw.get("updatedAt")),
     }
@@ -102,7 +128,7 @@ def normalize_session_list(response, *, limit=12):
         return {"active": [], "recent": []}
     bounded_limit = max(1, min(50, int(limit)))
     rows = []
-    for raw in data:
+    for raw in data[:MAX_SESSION_ROWS]:
         row = _normalize_row(raw)
         if row is not None:
             rows.append(row)

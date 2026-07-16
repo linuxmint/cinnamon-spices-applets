@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 import os
+from pathlib import Path
+import signal
 import subprocess
 import time
 
@@ -15,8 +17,13 @@ class _ControlChannelUnavailable(RuntimeError):
     pass
 
 
+class RemoteDaemonStuckError(RuntimeError):
+    code = "REMOTE_DAEMON_STUCK"
+
+
 class RemoteControl:
     STATUS_RETRY_SECONDS = 60
+    MAX_UNIX_SECONDS = 8_640_000_000_000
 
     def __init__(
         self,
@@ -41,6 +48,9 @@ class RemoteControl:
         self._last_status = None
         self._status_channel_retry_at = 0.0
         self._status_cli_retry_at = 0.0
+        self.pidfd_open = getattr(os, "pidfd_open", None)
+        self.pidfd_send_signal = getattr(signal, "pidfd_send_signal", None)
+        self.fd_close = os.close
 
     def status(self):
         if self.client_factory is None:
@@ -77,6 +87,39 @@ class RemoteControl:
         self._last_status = {"status": "disabled"}
         return dict(self._last_status)
 
+    def repair(self):
+        (
+            app_pid,
+            updater_pid,
+            updater_start_ticks,
+            updater_arguments,
+            updater_executable,
+        ) = self._validated_stuck_daemon()
+        if self.pidfd_open is None or self.pidfd_send_signal is None:
+            raise RuntimeError("Codex Remote repair is unavailable")
+        try:
+            pidfd = self.pidfd_open(updater_pid, 0)
+        except OSError:
+            raise RuntimeError("Codex Remote repair could not validate the updater") from None
+        try:
+            self._revalidate_stuck_daemon(
+                app_pid,
+                updater_pid,
+                updater_start_ticks,
+                updater_arguments,
+                updater_executable,
+            )
+            self.pidfd_send_signal(pidfd, signal.SIGTERM, None, 0)
+        except OSError:
+            raise RuntimeError("Codex Remote repair could not stop the updater") from None
+        finally:
+            self.fd_close(pidfd)
+
+        if not self._wait_for_processes_to_exit(app_pid, updater_pid):
+            raise RuntimeError("Codex Remote repair timed out")
+        self._run_daemon_bootstrap()
+        return self.start()
+
     def pair_start(self):
         try:
             value = self._channel_request(
@@ -101,12 +144,11 @@ class RemoteControl:
             value.get("manualPairingCode"), maximum=256, optional=True
         )
         environment_id = self._bounded_string(value.get("environmentId"))
-        expires_at = value.get("expiresAt")
+        expires_at = self._timestamp(value.get("expiresAt"))
         if (
             pairing_code is None
             or environment_id is None
-            or not isinstance(expires_at, int)
-            or isinstance(expires_at, bool)
+            or expires_at is None
         ):
             raise RuntimeError("Codex remote-control response was invalid")
         return {
@@ -209,6 +251,10 @@ class RemoteControl:
         except OSError:
             raise RuntimeError("Codex remote-control command failed") from None
         if completed.returncode != 0:
+            if action == "start" and self._is_stuck_daemon_error(completed.stderr):
+                raise RemoteDaemonStuckError(
+                    "Codex Remote background service is stuck"
+                )
             raise RuntimeError("Codex remote-control command failed")
         try:
             value = json.loads(completed.stdout)
@@ -217,6 +263,161 @@ class RemoteControl:
         if not isinstance(value, dict):
             raise RuntimeError("Codex remote-control response was invalid")
         return value
+
+    def _run_daemon_bootstrap(self):
+        command = [
+            self.executable,
+            "app-server",
+            "daemon",
+            "bootstrap",
+            "--remote-control",
+        ]
+        try:
+            completed = self.runner(
+                command,
+                shell=False,
+                check=False,
+                capture_output=True,
+                text=True,
+                timeout=90,
+                env=self.environment,
+            )
+        except subprocess.TimeoutExpired:
+            raise TimeoutError("Codex Remote repair timed out") from None
+        except OSError:
+            raise RuntimeError("Codex Remote repair failed") from None
+        if completed.returncode != 0:
+            raise RuntimeError("Codex Remote repair failed")
+
+    def _validated_stuck_daemon(self):
+        codex_home = Path(
+            (self.environment or {}).get("CODEX_HOME") or Path.home() / ".codex"
+        ).expanduser()
+        daemon_dir = codex_home / "app-server-daemon"
+        app_pid = self._read_pid_record(daemon_dir / "app-server.pid")
+        updater_pid = self._read_pid_record(
+            daemon_dir / "app-server-updater.pid"
+        )
+        app = self._read_process(app_pid)
+        updater = self._read_process(updater_pid)
+        if app["state"] != "Z" or app["ppid"] != updater_pid or app["arguments"]:
+            raise RuntimeError("Codex Remote repair found no safe repair target")
+        if updater["state"] == "Z" or updater["ppid"] <= 0:
+            raise RuntimeError("Codex Remote repair found no safe repair target")
+        if updater["arguments"][1:] != [
+            "app-server",
+            "daemon",
+            "pid-update-loop",
+        ]:
+            raise RuntimeError("Codex Remote repair found no safe repair target")
+        executable = Path(updater["arguments"][0]).resolve()
+        releases = (codex_home / "packages" / "standalone" / "releases").resolve()
+        try:
+            executable.relative_to(releases)
+        except ValueError:
+            raise RuntimeError("Codex Remote repair found no safe repair target") from None
+        if not executable.is_file() or not os.access(executable, os.X_OK):
+            raise RuntimeError("Codex Remote repair found no safe repair target")
+        if updater["executable"] != executable:
+            raise RuntimeError("Codex Remote repair found no safe repair target")
+        return (
+            app_pid,
+            updater_pid,
+            updater["start_ticks"],
+            updater["arguments"],
+            executable,
+        )
+
+    def _revalidate_stuck_daemon(
+        self,
+        app_pid,
+        updater_pid,
+        updater_start_ticks,
+        updater_arguments,
+        updater_executable,
+    ):
+        app = self._read_process(app_pid)
+        updater = self._read_process(updater_pid)
+        if (
+            app["state"] != "Z"
+            or app["ppid"] != updater_pid
+            or updater["state"] == "Z"
+            or updater["start_ticks"] != updater_start_ticks
+            or updater["arguments"] != updater_arguments
+            or updater["executable"] != updater_executable
+        ):
+            raise RuntimeError("Codex Remote repair target changed")
+
+    def _read_pid_record(self, path):
+        try:
+            with path.open("r", encoding="utf-8") as handle:
+                contents = handle.read(4097)
+            if len(contents) > 4096:
+                raise ValueError
+            value = json.loads(contents)
+            pid = value.get("pid") if isinstance(value, dict) else None
+            started = value.get("processStartTime") if isinstance(value, dict) else None
+            if (
+                not isinstance(pid, int)
+                or isinstance(pid, bool)
+                or not 1 < pid < 2**31
+                or not isinstance(started, str)
+                or not 0 < len(started) <= 128
+            ):
+                raise ValueError
+            return pid
+        except (OSError, UnicodeError, ValueError, json.JSONDecodeError):
+            raise RuntimeError("Codex Remote repair state is unavailable") from None
+
+    def _read_process(self, pid):
+        process_dir = Path(self.proc_root) / str(pid)
+        try:
+            if process_dir.stat(follow_symlinks=False).st_uid != os.geteuid():
+                raise ValueError
+            with process_dir.joinpath("stat").open("r", encoding="utf-8") as handle:
+                raw_stat = handle.read(4097)
+            with process_dir.joinpath("cmdline").open("rb") as handle:
+                raw_arguments = handle.read(65_537)
+            if len(raw_stat) > 4096 or len(raw_arguments) > 65_536:
+                raise ValueError
+            close_paren = raw_stat.rfind(")")
+            fields = raw_stat[close_paren + 2 :].split()
+            if close_paren < 0 or len(fields) < 20:
+                raise ValueError
+            arguments = [
+                os.fsdecode(argument)
+                for argument in raw_arguments.split(b"\0")
+                if argument
+            ]
+            executable = (
+                process_dir.joinpath("exe").resolve(strict=True)
+                if arguments
+                else None
+            )
+            return {
+                "state": fields[0],
+                "ppid": int(fields[1]),
+                "start_ticks": int(fields[19]),
+                "arguments": arguments,
+                "executable": executable,
+            }
+        except (OSError, UnicodeError, ValueError):
+            raise RuntimeError("Codex Remote repair target is unavailable") from None
+
+    def _wait_for_processes_to_exit(self, app_pid, updater_pid):
+        app_path = Path(self.proc_root) / str(app_pid)
+        updater_path = Path(self.proc_root) / str(updater_pid)
+        for _attempt in range(60):
+            if not app_path.exists() and not updater_path.exists():
+                return True
+            time.sleep(0.05)
+        return False
+
+    @staticmethod
+    def _is_stuck_daemon_error(stderr):
+        return isinstance(stderr, str) and (
+            "app server did not become ready on" in stderr[:4096]
+        )
 
     def _daemon_is_running(self):
         try:
@@ -286,6 +487,7 @@ class RemoteControl:
             "environmentId": cls._bounded_string(
                 value.get("environmentId"), optional=True
             ),
+            "environmentLabel": cls._display_string(value.get("environmentId")),
         }
 
     @classmethod
@@ -295,9 +497,7 @@ class RemoteControl:
         client_id = cls._bounded_string(value.get("clientId"))
         if client_id is None:
             return None
-        last_seen_at = value.get("lastSeenAt")
-        if not isinstance(last_seen_at, int) or isinstance(last_seen_at, bool):
-            last_seen_at = None
+        last_seen_at = cls._timestamp(value.get("lastSeenAt"), optional=True)
         return {
             "clientId": client_id,
             "displayName": cls._display_string(value.get("displayName")),
@@ -325,6 +525,18 @@ class RemoteControl:
         if not normalized or len(normalized) > maximum:
             return None
         return normalized
+
+    @classmethod
+    def _timestamp(cls, value, *, optional=False):
+        if value is None and optional:
+            return None
+        if (
+            not isinstance(value, int)
+            or isinstance(value, bool)
+            or not 0 <= value <= cls.MAX_UNIX_SECONDS
+        ):
+            return None
+        return value
 
     @classmethod
     def _require_identifier(cls, value, name):

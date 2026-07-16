@@ -3,11 +3,16 @@
 from __future__ import annotations
 
 import math
+from itertools import islice
 from typing import Any
 
 
 FIVE_HOUR_MINUTES = 300
 WEEKLY_MINUTES = 10_080
+MAX_RATE_LIMIT_BUCKETS = 50
+MAX_RESET_CREDIT_CANDIDATES = 100
+MAX_RESET_CREDITS = 50
+MAX_UNIX_SECONDS = 8_640_000_000_000
 
 
 def _normalize_window(
@@ -23,7 +28,7 @@ def _normalize_window(
         or duration <= 0
     ):
         return None
-    reset_time = _integer(window.get("resetsAt"), optional=True)
+    reset_time = _timestamp(window.get("resetsAt"), optional=True)
     return {
         "limitId": _bounded_string(limit_id),
         "limitName": _bounded_string(limit_name),
@@ -43,6 +48,13 @@ def _integer(value: Any, *, optional: bool = False) -> int | None:
     return int(value)
 
 
+def _timestamp(value: Any, *, optional: bool = False) -> int | None:
+    normalized = _integer(value, optional=optional)
+    if normalized is None or not 0 <= normalized <= MAX_UNIX_SECONDS:
+        return None
+    return normalized
+
+
 def _bounded_string(value: Any, *, maximum: int = 256) -> str | None:
     if not isinstance(value, str) or not value or len(value) > maximum:
         return None
@@ -53,13 +65,16 @@ def _normalize_reset_credits(value: Any) -> dict[str, Any]:
     if not isinstance(value, dict):
         return {"availableCount": 0, "credits": []}
 
+    raw_credits = value.get("credits")
+    if not isinstance(raw_credits, list):
+        raw_credits = []
     credits = []
-    for raw in value.get("credits") or []:
+    for raw in islice(raw_credits, MAX_RESET_CREDIT_CANDIDATES):
         if not isinstance(raw, dict):
             continue
         credit_id = _bounded_string(raw.get("id"))
-        granted_at = _integer(raw.get("grantedAt"))
-        expires_at = _integer(raw.get("expiresAt"), optional=True)
+        granted_at = _timestamp(raw.get("grantedAt"))
+        expires_at = _timestamp(raw.get("expiresAt"), optional=True)
         if credit_id is None or granted_at is None:
             continue
         credits.append(
@@ -77,8 +92,8 @@ def _normalize_reset_credits(value: Any) -> dict[str, Any]:
         )
     available_count = _integer(value.get("availableCount"))
     return {
-        "availableCount": max(0, available_count or 0),
-        "credits": credits[:50],
+        "availableCount": min(MAX_RESET_CREDITS, max(0, available_count or 0)),
+        "credits": credits[:MAX_RESET_CREDITS],
     }
 
 
@@ -91,6 +106,19 @@ def normalize_snapshot(payload: dict[str, Any], *, captured_at: int) -> dict[str
     if isinstance(buckets_by_id, dict):
         base_limit_id = base.get("limitId")
 
+        preferred = []
+        for key in ("codex", base_limit_id):
+            bucket = buckets_by_id.get(key) if isinstance(key, str) else None
+            if isinstance(bucket, dict) and bucket not in preferred:
+                preferred.append(bucket)
+        candidates = preferred[:]
+        for bucket in buckets_by_id.values():
+            if bucket in preferred:
+                continue
+            candidates.append(bucket)
+            if len(candidates) >= MAX_RATE_LIMIT_BUCKETS:
+                break
+
         def bucket_priority(bucket):
             limit_id = bucket.get("limitId") if isinstance(bucket, dict) else None
             if limit_id == "codex":
@@ -99,7 +127,7 @@ def normalize_snapshot(payload: dict[str, Any], *, captured_at: int) -> dict[str
                 return 1
             return 2
 
-        buckets = sorted(buckets_by_id.values(), key=bucket_priority)
+        buckets = sorted(candidates, key=bucket_priority)
     else:
         buckets = [base]
     if not buckets:

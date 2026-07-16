@@ -5,7 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: codex-monitor@breixopd 1.1.1\n"
+"Project-Id-Version: codex-monitor@breixopd 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-07-15 01:19+0200\n"
@@ -74,6 +74,13 @@ msgid ""
 "active Remote sessions."
 msgstr ""
 
+#. applet.js:590
+msgid ""
+"Repair Codex Remote? This stops only a verified stale Codex background "
+"updater, then starts a fresh managed Remote service. Active terminal Codex "
+"sessions are not stopped."
+msgstr ""
+
 #. applet.js:585
 msgid "this device"
 msgstr ""
@@ -87,8 +94,10 @@ msgstr ""
 msgid "Update Codex?"
 msgstr ""
 
-#. applet.js:607
-msgid "Existing Codex and Remote sessions will keep running."
+#. applet.js:620
+msgid ""
+"Active terminal sessions keep running. Remote Control may reconnect after "
+"the update."
 msgstr ""
 
 #. applet.js:630
@@ -97,6 +106,10 @@ msgstr ""
 
 #. applet.js:633 applet.js:635
 msgid "Remote Control action failed"
+msgstr ""
+
+#. applet.js:650
+msgid "Codex Remote background service is stuck"
 msgstr ""
 
 #. model.js:33
@@ -209,14 +222,14 @@ msgstr ""
 msgid "%s: %s%% used · reset time unavailable"
 msgstr ""
 
-#. model.js:315
+#. model.js:316
 #, javascript-format
 msgid "Banked resets: %s"
 msgstr ""
 
-#. model.js:318
+#. model.js:314
 #, javascript-format
-msgid "Nearest banked reset expiry: %s"
+msgid "Banked resets: %s · nearest expiry in %s"
 msgstr ""
 
 #. model.js:322
@@ -550,6 +563,11 @@ msgstr ""
 msgid "Waiting for you"
 msgstr ""
 
+#. model.js:564
+#, javascript-format
+msgid "%s for %s"
+msgstr ""
+
 #. ui.js:849
 #, javascript-format
 msgid "updated %s ago"
@@ -625,6 +643,10 @@ msgid "Refresh devices"
 msgstr ""
 
 #. ui.js:922
+msgid "Repair Remote…"
+msgstr ""
+
+#. ui.js:930
 msgid "Start"
 msgstr ""
 

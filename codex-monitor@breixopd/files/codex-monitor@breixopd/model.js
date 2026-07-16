@@ -309,14 +309,15 @@ function tooltipText(snapshot, now, remoteStatus, translate = text => text) {
     .map(credit => Number(credit.expiresAt))
     .filter(expiresAt => Number.isFinite(expiresAt) && expiresAt >= now)
     .sort((left, right) => left - right);
+  const resetLine = expiringCredits.length > 0
+    ? _format(_('Banked resets: %s · nearest expiry in %s'), resetCount,
+      formatDuration(expiringCredits[0] - now, translate))
+    : _format(_('Banked resets: %s'), resetCount);
   const lines = [
     lineForWindow(_('5-hour'), windows.fiveHour),
     lineForWindow(_('Weekly'), windows.weekly),
-    _format(_('Banked resets: %s'), resetCount),
+    resetLine,
   ];
-  if (expiringCredits.length > 0)
-    lines.push(_format(_('Nearest banked reset expiry: %s'),
-      formatDuration(expiringCredits[0] - now, translate)));
   if (remoteStatus) {
     const statusLabels = {
       disabled: _('disabled'),
@@ -537,6 +538,33 @@ function sessionView(sessions, selectedFilter = 'all', limit = 12) {
   };
 }
 
+function sessionStatusText(session, now, translate = text => text) {
+  const _ = translate;
+  const value = session && typeof session === 'object' ? session : {};
+  const statusLabels = {
+    active: _('Active'),
+    idle: _('Idle'),
+    notLoaded: _('Ready to resume'),
+    systemError: _('System error'),
+    unavailable: _('Unavailable'),
+  };
+  const attention = Array.isArray(value.attention) ? value.attention : [];
+  let status = statusLabels[value.status] || _('Unavailable');
+  if (attention.includes('waitingOnApproval'))
+    status = _('Waiting for approval');
+  else if (attention.includes('waitingOnUserInput'))
+    status = _('Waiting for you');
+
+  const current = Number(now);
+  const activeSince = Number(value.activeSince);
+  if (value.status !== 'active' || value.activeSince == null ||
+      !Number.isFinite(current) || !Number.isFinite(activeSince) ||
+      activeSince < 0 || activeSince > current)
+    return status;
+  return _format(_('%s for %s'), status,
+    formatDuration(current - activeSince, translate));
+}
+
 function isUsableRemoteStatus(remoteStatus) {
   const status = remoteStatus && remoteStatus.status;
   return status === 'connecting' || status === 'connected' || status === 'running';
@@ -600,6 +628,7 @@ const CodexModel = {
   graphAxes,
   nearestGraphValues,
   sessionView,
+  sessionStatusText,
   isUsableRemoteStatus,
   normalizeUpdateState,
 };

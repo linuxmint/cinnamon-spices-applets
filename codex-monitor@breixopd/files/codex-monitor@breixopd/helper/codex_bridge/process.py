@@ -80,9 +80,20 @@ def control_socket_path(
 
 
 def serve(router, *, input_stream, output_stream):
-    for raw_line in input_stream:
+    while True:
+        raw_line = input_stream.readline(MAX_REQUEST_BYTES + 1)
+        if not raw_line:
+            break
+        oversized = len(raw_line.encode("utf-8")) > MAX_REQUEST_BYTES
+        while not raw_line.endswith("\n"):
+            remainder = input_stream.readline(MAX_REQUEST_BYTES + 1)
+            if not remainder:
+                break
+            oversized = oversized or len(remainder.encode("utf-8")) > 0
+            if remainder.endswith("\n"):
+                break
         try:
-            if len(raw_line.encode("utf-8")) > MAX_REQUEST_BYTES:
+            if oversized:
                 raise ValueError("request too large")
             request = json.loads(raw_line)
             if not isinstance(request, dict):

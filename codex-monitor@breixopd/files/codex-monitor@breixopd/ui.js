@@ -121,6 +121,7 @@ var Dashboard = class Dashboard {
     this._remoteClientsLoaded = false;
     this._remoteClientsLoading = false;
     this._remoteError = '';
+    this._remoteRepairAvailable = false;
     this._sessions = { active: [], recent: [] };
     this._sessionsError = false;
     this._sessionFilter = 'all';
@@ -555,6 +556,7 @@ var Dashboard = class Dashboard {
   setRemoteStatus(status) {
     this._remoteStatus = status;
     this._remoteError = '';
+    this._remoteRepairAvailable = false;
     this._renderRemote();
   }
 
@@ -588,6 +590,7 @@ var Dashboard = class Dashboard {
       this._remoteClientsLoaded = true;
     }
     this._remoteError = '';
+    this._remoteRepairAvailable = false;
     this._renderRemote();
   }
 
@@ -596,8 +599,9 @@ var Dashboard = class Dashboard {
     this._renderRemote();
   }
 
-  showRemoteError(message) {
+  showRemoteError(message, repairable = false) {
     this._remoteError = message || this._('Remote Control is unavailable');
+    this._remoteRepairAvailable = Boolean(repairable);
     this._renderRemote();
   }
 
@@ -833,21 +837,11 @@ var Dashboard = class Dashboard {
     title.clutter_text.set_ellipsize(Pango.EllipsizeMode.END);
     title.clutter_text.set_single_line_mode(true);
     const attention = session.attention || [];
-    const statusLabels = {
-      active: this._('Active'),
-      idle: this._('Idle'),
-      notLoaded: this._('Ready to resume'),
-      systemError: this._('System error'),
-      unavailable: this._('Unavailable'),
-    };
-    let status = statusLabels[session.status] || this._('Unavailable');
-    if (attention.includes('waitingOnApproval'))
-      status = this._('Waiting for approval');
-    else if (attention.includes('waitingOnUserInput'))
-      status = this._('Waiting for you');
+    const now = Math.floor(Date.now() / 1000);
+    const status = this._model.sessionStatusText(session, now, this._);
     const updated = session.updatedAt
       ? _format(this._('updated %s ago'), this._model.formatDuration(
-        Math.floor(Date.now() / 1000) - Number(session.updatedAt), this._))
+        now - Number(session.updatedAt), this._))
       : this._('update time unavailable');
     const sourceLabels = {
       'CLI': this._('CLI'),
@@ -898,9 +892,9 @@ var Dashboard = class Dashboard {
     const identityParts = [];
     if (identity.serverName)
       identityParts.push(identity.serverName);
-    if (identity.environmentId)
+    if (identity.environmentLabel)
       identityParts.push(_format(
-        this._('environment %s'), identity.environmentId
+        this._('environment %s'), identity.environmentLabel
       ));
     if (status === 'running' && identityParts.length === 0)
       identityParts.push(this._('Connection state unavailable; Remote is still running'));
@@ -915,6 +909,13 @@ var Dashboard = class Dashboard {
       ));
     } else if (status === 'connecting' || status === 'running') {
       this._remoteButtons.add_child(_button(this._('Stop'), this._callbacks.onRemoteStop));
+      this._remoteButtons.add_child(_button(
+        this._('Refresh'), this._callbacks.onRemoteRefresh
+      ));
+    } else if (this._remoteRepairAvailable) {
+      this._remoteButtons.add_child(_button(
+        this._('Repair Remote…'), this._callbacks.onRemoteRepair
+      ));
       this._remoteButtons.add_child(_button(
         this._('Refresh'), this._callbacks.onRemoteRefresh
       ));

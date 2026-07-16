@@ -154,6 +154,7 @@ class CodexMonitorApplet extends Applet.Applet {
         onOpenCodex: this._openCodex.bind(this),
         onOpenSession: this._openSession.bind(this),
         onRemoteStart: this._confirmRemoteStart.bind(this),
+        onRemoteRepair: this._confirmRemoteRepair.bind(this),
         onRemoteStop: this._confirmRemoteStop.bind(this),
         onRemotePair: () => this._remoteAction('remote_pair_start'),
         onRemoteRefresh: this._refreshRemoteState.bind(this),
@@ -287,9 +288,12 @@ class CodexMonitorApplet extends Applet.Applet {
       this._updateRefreshing = false;
       if (error)
         return;
+      const previousStatus = this._updateState && this._updateState.status;
       this._updateState = Model.normalizeUpdateState(value);
       this._dashboard.setUpdateState(this._updateState);
       const status = this._updateState.status;
+      if (previousStatus === 'updating' && status === 'updated')
+        this._readRemoteStatus();
       const active = status === 'checking' || status === 'updating';
       this._setUpdatePolling(active);
       const now = Math.floor(Date.now() / 1000);
@@ -515,8 +519,7 @@ class CodexMonitorApplet extends Applet.Applet {
     const tooltip = Model.tooltipText(
       this._snapshot, now, this._remoteStatus, this._
     );
-    this.set_applet_tooltip(tooltip +
-      (state.indicatorText ? `\n${state.indicatorText}` : ''));
+    this.set_applet_tooltip(tooltip);
     this._dashboard.update(this._snapshot, this._remoteStatus, state);
   }
 
@@ -581,6 +584,15 @@ class CodexMonitorApplet extends Applet.Applet {
     }).open();
   }
 
+  _confirmRemoteRepair() {
+    const message = this._(
+      'Repair Codex Remote? This stops only a verified stale Codex background updater, then starts a fresh managed Remote service. Active terminal Codex sessions are not stopped.'
+    );
+    new ModalDialog.ConfirmDialog(message, () => {
+      this._remoteAction('remote_repair', { confirmed: true });
+    }).open();
+  }
+
   _confirmRemoteRevoke(client) {
     const name = client.displayName || client.deviceModel || this._('this device');
     const message = _format(
@@ -604,7 +616,7 @@ class CodexMonitorApplet extends Applet.Applet {
       return;
     const message = `${this._('Update Codex?')}\n\n` +
       `${state.installedVersion} → ${state.latestVersion}\n` +
-      this._('Existing Codex and Remote sessions will keep running.');
+      this._('Active terminal sessions keep running. Remote Control may reconnect after the update.');
     new ModalDialog.ConfirmDialog(message, () => {
       this._startUpdate();
     }).open();
@@ -630,9 +642,14 @@ class CodexMonitorApplet extends Applet.Applet {
     this._dashboard.showActionMessage(this._('Updating Remote Control…'));
     this._request(action, params, (error, result) => {
       if (error) {
-        this._dashboard.showActionMessage(this._('Remote Control action failed'));
+        const stuck = action === 'remote_start' &&
+          error.code === 'REMOTE_DAEMON_STUCK';
+        const message = stuck
+          ? this._('Codex Remote background service is stuck')
+          : this._('Remote Control action failed');
+        this._dashboard.showActionMessage(message);
         this._remoteStatus = { status: 'errored' };
-        this._dashboard.showRemoteError(this._('Remote Control action failed'));
+        this._dashboard.showRemoteError(message, stuck);
       } else if (action === 'remote_pair_start') {
         this._pairing = { ...result, claimed: false };
         this._pairingRetryAt = 0;

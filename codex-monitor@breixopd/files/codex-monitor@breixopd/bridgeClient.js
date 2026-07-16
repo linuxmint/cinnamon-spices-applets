@@ -62,7 +62,8 @@ var BridgeClient = class BridgeClient {
     }
     this._sequence += 1;
     const id = `cinnamon-${Date.now()}-${this._sequence}`;
-    const timeoutId = Mainloop.timeout_add_seconds(30, () => {
+    const timeoutSeconds = action === 'remote_repair' ? 120 : 30;
+    const timeoutId = Mainloop.timeout_add_seconds(timeoutSeconds, () => {
       const pending = this._pending.get(id);
       if (pending) {
         this._pending.delete(id);
@@ -265,8 +266,15 @@ var BridgeClient = class BridgeClient {
     this._pending.delete(response.id);
     if (response.ok)
       pending.callback(null, response.data);
-    else
-      pending.callback(new Error(response.error && response.error.message || 'Codex request failed'));
+    else {
+      const error = new Error(
+        response.error && response.error.message || 'Codex request failed'
+      );
+      if (response.error && typeof response.error.code === 'string' &&
+          /^[A-Z_]{1,64}$/.test(response.error.code))
+        error.code = response.error.code;
+      pending.callback(error);
+    }
   }
 
   _failPending(message) {

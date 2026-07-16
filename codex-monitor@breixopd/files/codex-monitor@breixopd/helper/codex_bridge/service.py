@@ -7,7 +7,12 @@ from datetime import date
 import time
 
 from .models import normalize_snapshot
-from .sessions import normalize_session_list
+from .rpc import RpcError
+from .sessions import normalize_active_turn_start, normalize_session_list
+
+
+MAX_DAILY_USAGE_BUCKETS = 366
+MAX_SAFE_INTEGER = 9_007_199_254_740_991
 
 
 class CodexService:
@@ -28,6 +33,7 @@ class CodexService:
         self.updates = updates
         self.clock = clock
         self._notification_probe_complete = False
+        self._turn_timing_supported = None
 
     def snapshot(self):
         captured_at = int(self.clock())
@@ -71,7 +77,30 @@ class CodexService:
             "thread/list",
             {"limit": limit, "sortKey": "updated_at", "sortDirection": "desc"},
         )
-        return normalize_session_list(response, limit=limit)
+        sessions = normalize_session_list(response, limit=limit)
+        if self._turn_timing_supported is False:
+            return sessions
+        now = int(self.clock())
+        for row in sessions["active"]:
+            try:
+                turns = self.client.request(
+                    "thread/turns/list",
+                    {
+                        "threadId": row["id"],
+                        "limit": 1,
+                        "sortDirection": "desc",
+                        "itemsView": "notLoaded",
+                    },
+                )
+            except RpcError as error:
+                if error.code == -32601:
+                    self._turn_timing_supported = False
+                break
+            except (OSError, RuntimeError, TimeoutError):
+                break
+            self._turn_timing_supported = True
+            row["activeSince"] = normalize_active_turn_start(turns, now=now)
+        return sessions
 
     def open_codex(self):
         return self._require_launcher().open_codex()
@@ -87,6 +116,9 @@ class CodexService:
 
     def remote_stop(self):
         return self._require_remote().stop()
+
+    def remote_repair(self):
+        return self._require_remote().repair()
 
     def remote_pair_start(self):
         return self._require_remote().pair_start()
@@ -187,8 +219,11 @@ class CodexService:
     def _normalize_token_usage(value):
         if not isinstance(value, dict):
             return None
+        raw_buckets = value.get("dailyUsageBuckets")
+        if not isinstance(raw_buckets, list):
+            raw_buckets = []
         buckets = []
-        for raw in value.get("dailyUsageBuckets") or []:
+        for raw in raw_buckets[:MAX_DAILY_USAGE_BUCKETS]:
             if not isinstance(raw, dict):
                 continue
             start_date = raw.get("startDate")
@@ -201,7 +236,7 @@ class CodexService:
                 continue
             try:
                 normalized_date = date.fromisoformat(start_date).isoformat()
-                normalized_tokens = max(0, int(tokens))
+                normalized_tokens = min(MAX_SAFE_INTEGER, max(0, int(tokens)))
             except (OverflowError, TypeError, ValueError):
                 continue
             buckets.append(
