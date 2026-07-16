@@ -12,4 +12,4 @@ The dashboard adapts to the available display work area, keeping the full view o
 - Python 3.10 or newer
 - The Codex CLI available as `codex`
 
-All usage history stays local. The applet talks to the official local Codex app server and its user-owned Unix control socket; it does not read authentication files or expose a TCP network port.
+All usage history stays local. The applet talks to the official local Codex app server and its user-owned Unix control socket. Active-session detection is limited to bounded metadata from matching same-user Codex processes and never reads session contents or command lines. The applet does not read authentication files or expose a TCP network port.

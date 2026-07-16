@@ -8,7 +8,11 @@ import time
 
 from .models import normalize_snapshot
 from .rpc import RpcError
-from .sessions import normalize_active_turn_start, normalize_session_list
+from .sessions import (
+    normalize_active_turn_start,
+    normalize_session_list,
+    promote_live_sessions,
+)
 
 
 MAX_DAILY_USAGE_BUCKETS = 366
@@ -25,6 +29,7 @@ class CodexService:
         launcher=None,
         updates=None,
         clock=time.time,
+        live_threads=None,
     ):
         self.client = client
         self.history = history
@@ -32,6 +37,7 @@ class CodexService:
         self.launcher = launcher
         self.updates = updates
         self.clock = clock
+        self._live_threads = live_threads
         self._notification_probe_complete = False
         self._turn_timing_supported = None
 
@@ -78,9 +84,15 @@ class CodexService:
             {"limit": limit, "sortKey": "updated_at", "sortDirection": "desc"},
         )
         sessions = normalize_session_list(response, limit=limit)
+        now = int(self.clock())
+        if self._live_threads is not None:
+            try:
+                live_threads = self._live_threads()
+            except (OSError, RuntimeError, ValueError):
+                live_threads = {}
+            sessions = promote_live_sessions(sessions, live_threads, now=now)
         if self._turn_timing_supported is False:
             return sessions
-        now = int(self.clock())
         for row in sessions["active"]:
             try:
                 turns = self.client.request(
@@ -99,7 +111,9 @@ class CodexService:
             except (OSError, RuntimeError, TimeoutError):
                 break
             self._turn_timing_supported = True
-            row["activeSince"] = normalize_active_turn_start(turns, now=now)
+            exact_start = normalize_active_turn_start(turns, now=now)
+            if exact_start is not None:
+                row["activeSince"] = exact_start
         return sessions
 
     def open_codex(self):

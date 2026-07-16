@@ -10,6 +10,7 @@ import sys
 from pathlib import Path
 from types import SimpleNamespace
 
+from codex_bridge.active_processes import discover_live_threads
 from codex_bridge.history import QuotaHistory
 from codex_bridge.launcher import TerminalLauncher
 from codex_bridge.process import control_socket_path, serve, spawn_app_server
@@ -34,6 +35,7 @@ def create_runtime(
     remote_runner=None,
     terminal_popen=None,
     update_manager_factory=None,
+    live_thread_discovery=None,
 ):
     spawn = spawn or spawn_app_server
     client_factory = client_factory or (lambda process: AppServerClient(process=process))
@@ -82,6 +84,7 @@ def create_runtime(
         launcher_kwargs["popen"] = terminal_popen
     launcher = TerminalLauncher(options.codex, **launcher_kwargs)
     update_manager_factory = update_manager_factory or UpdateManager
+    live_thread_discovery = live_thread_discovery or discover_live_threads
     updates = update_manager_factory(
         options.codex,
         options.codex_home,
@@ -93,6 +96,10 @@ def create_runtime(
         remote=remote,
         launcher=launcher,
         updates=updates,
+        live_threads=lambda: live_thread_discovery(
+            options.codex,
+            codex_home=options.codex_home,
+        ),
     )
     return SimpleNamespace(
         client=client,

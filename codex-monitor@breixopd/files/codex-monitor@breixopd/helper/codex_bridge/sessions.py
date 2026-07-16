@@ -139,3 +139,37 @@ def normalize_session_list(response, *, limit=12):
         "active": [row for row in rows if row["status"] == "active"],
         "recent": [row for row in rows if row["status"] != "active"],
     }
+
+
+def promote_live_sessions(sessions, live_threads, *, now):
+    """Promote process-backed rows while keeping all timestamps UI-safe."""
+
+    if not isinstance(sessions, dict) or not isinstance(live_threads, dict):
+        return sessions
+    validated = {}
+    for index, (thread_id, started_at) in enumerate(live_threads.items()):
+        if index >= MAX_SESSION_ROWS:
+            break
+        canonical_id = _canonical_uuid(thread_id)
+        if canonical_id is None:
+            continue
+        safe_start = _timestamp(started_at)
+        validated[canonical_id] = (
+            safe_start if safe_start is not None and safe_start <= int(now) + 5 else None
+        )
+
+    rows = []
+    for raw_row in [*sessions.get("active", []), *sessions.get("recent", [])]:
+        if not isinstance(raw_row, dict):
+            continue
+        row = dict(raw_row)
+        if row.get("id") in validated:
+            row["status"] = "active"
+            row["statusLabel"] = "Active"
+            row["activeSince"] = validated[row["id"]]
+        rows.append(row)
+    rows.sort(key=lambda row: row.get("updatedAt") or 0, reverse=True)
+    return {
+        "active": [row for row in rows if row.get("status") == "active"],
+        "recent": [row for row in rows if row.get("status") != "active"],
+    }
