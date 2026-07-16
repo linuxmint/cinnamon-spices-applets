@@ -14,6 +14,7 @@ CustomApplicationsMenu@LLOBERA/**                  @Nicolas01
 CustomPlaces@Nicolas01/**                          @Nicolas01
 Direct@claudiux/**                                 @claudiux
 Exit@claudiux/**                                   @claudiux
+FM-Radio@hilyxx/**                                 @hilyxx
 Gears@claudiux/**                                  @claudiux
 GraphicalSystemMonitor@batzkass/**                 @batzkass
 IntelTurboBoost@wsmenezes/**                       @wsmenezes
@@ -58,6 +59,7 @@ calc-js@ptandler/**                                @ptandler
 calendar@ccprog/**                                 @ccprog
 calendar@simonwiles.net/**                         @simonwiles
 cheaty@centurix/**                                 @centurix
+cinnamon-sidebar@beatlink/**                       @beatlink
 cinnamon-timer@jake1164/**                         @jake1164
 cinnamonvantage@garlayntoji/**                     @Garlayntoji
 classic-menu@fredcw/**                             @fredcw
@@ -102,9 +104,11 @@ googledrive@pbojan/**                              @pbojan
 gpaste-reloaded@feuerfuchs.eu/**                   @feuerfuchs
 gpumonitor@axel358/**                              @axel358
 graphicsCenter@scollins/**                         @collinss
+hdd-led@tucsonst/**                                @tucsonst
 healthyeyes@ipolozov/**                            @GingerGigiCat
 hideable-applets@cardsurf/**                       @cardsurf
 hijri@mubashirzamir/**                             @mubashirzamir
+hwmonitor@sylfurd/**                               @UditDewan
 internet-indicator@sangorys/**                     @sangorys
 ioDisk@ctrlesc/**                                  @somboku
 ipindicator@matus.benko@gmail.com/**               @PrimaMateria
@@ -125,6 +129,7 @@ mint-screenshot@khumnath/**                        @khumnath
 moonphase@techi-freki/**                           @Techi-Freki
 mouse-keys-shortcut@GabrielCamara3526/**           @GabrielCamara3526
 multicore-sys-monitor@ccadeptic23/**               @claudiux
+multirow-panel-launchers@science/**                @science
 mybookmarks@markbokil.com/**                       @Centurix
 mylauncher@markbokil.com/**                        @Centurix
 nepali-date@bishalacharya/**                       @everestbis
@@ -248,7 +253,6 @@ zen-pomodoro@vtestah/**                            @vtestah
 # force-quit@cinnamon.org
 # gputemperature@silentage.com
 # hamster@projecthamster.wordpress.com
-# hwmonitor@sylfurd
 # ifstat@tagadan
 # localip@mrieracrespi
 # location-detection@heimdall

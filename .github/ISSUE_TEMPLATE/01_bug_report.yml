@@ -79,6 +79,7 @@ body:
     - CinnaMame@claudiux @claudiux
     - Cinnamenu@json @fredcw
     - cinnamon-multi-line-taskbar-applet
+    - cinnamon-sidebar@beatlink @beatlink
     - cinnamon-timer@jake1164 @jake1164
     - cinnamonvantage@garlayntoji @Garlayntoji
     - CinnVIIStarkMenu@NikoKrause @fredcw
@@ -123,6 +124,7 @@ body:
     - expressvpn@Hukuta @Hukuta
     - feeds@jonbrettdev.wordpress.com @philipp-meier
     - fish@kriegcc @kriegcc
+    - FM-Radio@hilyxx @hilyxx
     - force-quit@cinnamon.org
     - fw_fanctrl@juleskreuer.eu @not-a-feature
     - gamemode@axel358 @axel358
@@ -137,10 +139,11 @@ body:
     - GraphicalSystemMonitor@batzkass @batzkass
     - graphicsCenter@scollins @collinss
     - hamster@projecthamster.wordpress.com
+    - hdd-led@tucsonst @tucsonst
     - healthyeyes@ipolozov @GingerGigiCat
     - hideable-applets@cardsurf @cardsurf
     - hijri@mubashirzamir @mubashirzamir
-    - hwmonitor@sylfurd
+    - hwmonitor@sylfurd @UditDewan
     - ifstat@tagadan
     - IntelTurboBoost@wsmenezes @wsmenezes
     - internet-indicator@sangorys @sangorys
@@ -171,6 +174,7 @@ body:
     - moonphase@techi-freki @Techi-Freki
     - mouse-keys-shortcut@GabrielCamara3526 @GabrielCamara3526
     - multicore-sys-monitor@ccadeptic23 @claudiux
+    - multirow-panel-launchers@science @science
     - MuteToggler@jebeaudet.com @jebeaudet
     - mybookmarks@markbokil.com @Centurix
     - mylauncher@markbokil.com @Centurix
