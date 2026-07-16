@@ -70,19 +70,25 @@
 }
 
 .codex-monitor-dashboard {
-  spacing: 16px;
+  spacing: 12px;
 }
 
 .popup-menu-item.codex-monitor-menu-item {
+  padding-top: 0;
+  padding-bottom: 0;
   padding-left: 0;
   padding-right: 0;
   margin-left: 0;
   margin-right: 0;
 }
 
+.popup-menu-item.codex-monitor-menu-item:insensitive {
+  color: inherit;
+}
+
 .codex-monitor-scroll {
   max-height: 752px;
-  padding: 16px 0 8px;
+  padding: 8px 0;
 }
 
 .codex-monitor-scroll StScrollBar {
@@ -91,10 +97,28 @@
 
 .codex-monitor-header,
 .codex-monitor-section-heading,
-.codex-monitor-footer,
-.codex-monitor-version-row,
 .codex-monitor-action-row,
 .codex-monitor-range-row {
+  spacing: 8px;
+}
+
+.codex-monitor-footer {
+  spacing: 12px;
+  padding: 10px 2px 0;
+  border-top: 1px solid rgba(128, 128, 128, 0.24);
+}
+
+.codex-monitor-footer-summary {
+  color: inherit;
+  opacity: 184;
+  font-size: 0.86em;
+}
+
+.codex-monitor-footer-actions {
+  spacing: 8px;
+}
+
+.codex-monitor-compact .codex-monitor-footer {
   spacing: 8px;
 }
 
@@ -128,6 +152,15 @@
   width: 160px;
   margin-right: 8px;
   text-align: right;
+}
+
+.codex-monitor-compact .codex-monitor-header {
+  spacing: 4px;
+}
+
+.codex-monitor-compact .codex-monitor-header .codex-monitor-status {
+  margin-right: 0;
+  text-align: left;
 }
 
 .codex-monitor-card-row {

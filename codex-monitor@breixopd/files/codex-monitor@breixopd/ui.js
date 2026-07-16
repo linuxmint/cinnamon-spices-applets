@@ -133,6 +133,7 @@ var Dashboard = class Dashboard {
     this._sessionFilter = 'all';
     this._sessionFilterButtons = {};
     this._updateState = null;
+    this._footerUsageMessage = null;
     this._settings = {};
     this._compact = false;
     this._indicators = [];
@@ -416,32 +417,37 @@ var Dashboard = class Dashboard {
   }
 
   _buildFooter() {
-    this._versionRow = new St.BoxLayout({
-      style_class: 'codex-monitor-version-row',
-    });
-    this._versionLabel = new St.Label({
-      text: '',
-      style_class: 'codex-monitor-secondary',
+    this._footer = new St.BoxLayout({ style_class: 'codex-monitor-footer' });
+    this._footerSummary = new St.Label({
+      text: this._('No data yet'),
+      style_class: 'codex-monitor-footer-summary',
       x_expand: true,
+      y_align: Clutter.ActorAlign.CENTER,
     });
-    _enableWrapping(this._versionLabel);
+    _enableWrapping(this._footerSummary);
+    this._footerActions = new St.BoxLayout({
+      style_class: 'codex-monitor-footer-actions',
+      y_align: Clutter.ActorAlign.CENTER,
+    });
     this._updateButton = _button(this._('Update Codex…'), this._callbacks.onUpdate);
     this._updateButton.visible = false;
-    this._versionRow.add_child(this._versionLabel);
-    this._versionRow.add_child(this._updateButton);
-    this._versionRow.visible = false;
-    this.actor.add_child(this._versionRow);
-
-    this._footer = new St.BoxLayout({ style_class: 'codex-monitor-footer' });
-    this._updated = new St.Label({
-      text: this._('No data yet'),
-      style_class: 'codex-monitor-secondary',
-      x_expand: true,
-    });
-    _enableWrapping(this._updated);
-    this._footer.add_child(this._updated);
-    this._footer.add_child(_button(this._('Refresh'), this._callbacks.onRefresh));
+    this._refreshButton = _button(this._('Refresh'), this._callbacks.onRefresh);
+    this._footerActions.add_child(this._updateButton);
+    this._footerActions.add_child(this._refreshButton);
+    this._footer.add_child(this._footerSummary);
+    this._footer.add_child(this._footerActions);
     this.actor.add_child(this._footer);
+  }
+
+  _renderFooter() {
+    const now = Math.floor(Date.now() / 1000);
+    this._footerSummary.set_text(this._model.dashboardFooterText(
+      this._updateState,
+      this._snapshot && this._snapshot.capturedAt,
+      this._footerUsageMessage,
+      now,
+      this._
+    ));
   }
 
   _layoutSessionFilters() {
@@ -478,8 +484,14 @@ var Dashboard = class Dashboard {
     this._remoteHeading.set_vertical(this._compact);
     this._remoteClientsHeadingRow.set_vertical(this._compact);
     this._remoteButtons.set_vertical(this._compact);
-    this._versionRow.set_vertical(this._compact);
     this._footer.set_vertical(this._compact);
+    this._footerActions.set_vertical(false);
+    this._updateButton.x_expand = this._compact;
+    this._refreshButton.x_expand = this._compact;
+    this._updateButton.set_x_align(this._compact
+      ? Clutter.ActorAlign.FILL : Clutter.ActorAlign.CENTER);
+    this._refreshButton.set_x_align(this._compact
+      ? Clutter.ActorAlign.FILL : Clutter.ActorAlign.CENTER);
     this._layoutSessionFilters();
     this.setIndicators(this._indicators);
     if (this._snapshot)
@@ -490,37 +502,18 @@ var Dashboard = class Dashboard {
   setUpdateState(value) {
     const state = this._model.normalizeUpdateState(value);
     this._updateState = state;
-    this._versionRow.visible = Boolean(state.installedVersion || state.message);
     this._updateButton.visible = state.updateAvailable;
     this._updateButton.set_label(this._('Update Codex…'));
     if (state.status === 'checking') {
-      this._versionLabel.set_text(state.installedVersion
-        ? _format(this._('Codex %s · Checking for updates…'), state.installedVersion)
-        : this._('Checking for Codex updates…'));
       this._updateButton.visible = false;
     } else if (state.status === 'updating') {
-      this._versionLabel.set_text(this._('Updating Codex…'));
       this._updateButton.visible = false;
     } else if (state.status === 'updated') {
-      this._versionLabel.set_text(
-        _format(this._('Updated to Codex %s. New Codex launches use this version.'),
-          state.installedVersion)
-      );
       this._updateButton.visible = false;
     } else if (state.status === 'failed') {
-      this._versionLabel.set_text(state.installedVersion
-        ? _format(this._('Automatic update failed; Codex %s is still installed. Use the official Codex installation instructions to update manually.'),
-          state.installedVersion)
-        : this._('Automatic Codex update failed. Use the official Codex installation instructions to update manually.'));
       this._updateButton.set_label(this._('Retry'));
-    } else if (state.updateAvailable) {
-      this._versionLabel.set_text(
-        _format(this._('Codex %s → %s'), state.installedVersion, state.latestVersion)
-      );
-    } else {
-      this._versionLabel.set_text(state.installedVersion
-        ? _format(this._('Codex %s'), state.installedVersion) : '');
     }
+    this._renderFooter();
   }
 
   showUpdateError() {
@@ -566,8 +559,8 @@ var Dashboard = class Dashboard {
     const plan = snapshot.planType || snapshot.account && snapshot.account.planType || this._('Unknown plan');
     this._status.set_text(_format(this._('%s · Live ●'), plan));
     this.setIndicators(panelState && panelState.indicators);
-    this._updated.set_text(_format(this._('Updated %s ago'),
-      this._model.formatDuration(now - snapshot.capturedAt, this._)));
+    this._footerUsageMessage = null;
+    this._renderFooter();
     if (snapshotChanged) {
       this._fiveHourCard.update(snapshot.windows.fiveHour, this._model, now);
       this._weeklyCard.update(snapshot.windows.weekly, this._model, now);
@@ -580,7 +573,8 @@ var Dashboard = class Dashboard {
 
   showError(message) {
     this._status.set_text(this._('Stale · retrying'));
-    this._updated.set_text(message || this._('Unable to refresh Codex'));
+    this._footerUsageMessage = message || this._('Unable to refresh Codex');
+    this._renderFooter();
   }
 
   setRemoteStatus(status) {
@@ -647,7 +641,8 @@ var Dashboard = class Dashboard {
   }
 
   showActionMessage(message) {
-    this._updated.set_text(message);
+    this._footerUsageMessage = message;
+    this._renderFooter();
   }
 
   _renderGraph() {

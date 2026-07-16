@@ -651,7 +651,7 @@ function normalizeUpdateState(value) {
   const installed = _semanticVersion(raw.installedVersion);
   const latest = _semanticVersion(raw.latestVersion);
   const statuses = new Set(['idle', 'checking', 'updating', 'updated', 'failed']);
-  const checkedAt = Number(raw.checkedAt);
+  const checkedAt = raw.checkedAt == null ? Number.NaN : Number(raw.checkedAt);
   return {
     installedVersion: installed ? installed.display : null,
     latestVersion: latest ? latest.display : null,
@@ -662,6 +662,61 @@ function normalizeUpdateState(value) {
     status: statuses.has(raw.status) ? raw.status : 'idle',
     message: null,
   };
+}
+
+function dashboardFooterText(updateState, capturedAt, usageMessage, now,
+  translate = text => text) {
+  const _ = translate;
+  const state = normalizeUpdateState(updateState);
+  const current = Number.isFinite(Number(now)) ? Math.floor(Number(now)) : 0;
+  let updateText = '';
+  if (state.status === 'checking') {
+    updateText = state.installedVersion
+      ? _format(_('Codex %s · Checking for updates…'), state.installedVersion)
+      : _('Checking for Codex updates…');
+  } else if (state.status === 'updating') {
+    updateText = _('Updating Codex…');
+  } else if (state.status === 'updated') {
+    updateText = _format(
+      _('Updated to Codex %s. New Codex launches use this version.'),
+      state.installedVersion
+    );
+  } else if (state.status === 'failed') {
+    updateText = state.installedVersion
+      ? _format(_('Automatic update failed; Codex %s is still installed. Use the official Codex installation instructions to update manually.'),
+        state.installedVersion)
+      : _('Automatic Codex update failed. Use the official Codex installation instructions to update manually.');
+  } else if (state.updateAvailable) {
+    updateText = _format(_('Codex %s → %s'),
+      state.installedVersion, state.latestVersion);
+  } else if (state.installedVersion && state.checkedAt != null) {
+    const elapsed = Math.max(0, current - state.checkedAt);
+    updateText = elapsed === 0
+      ? _format(_('Codex %s · Updates checked now'), state.installedVersion)
+      : _format(_('Codex %s · Updates checked %s ago'),
+        state.installedVersion, formatDuration(elapsed, translate));
+  } else if (state.installedVersion) {
+    updateText = _format(_('Codex %s'), state.installedVersion);
+  } else if (state.checkedAt != null) {
+    const elapsed = Math.max(0, current - state.checkedAt);
+    updateText = elapsed === 0
+      ? _('Updates checked now')
+      : _format(_('Updates checked %s ago'), formatDuration(elapsed, translate));
+  }
+
+  let usageText = '';
+  if (typeof usageMessage === 'string' && usageMessage.length > 0) {
+    usageText = usageMessage;
+  } else if (capturedAt != null && Number.isFinite(Number(capturedAt)) &&
+      Number(capturedAt) >= 0) {
+    const elapsed = Math.max(0, current - Number(capturedAt));
+    usageText = elapsed === 0
+      ? _('Usage refreshed now')
+      : _format(_('Usage refreshed %s ago'), formatDuration(elapsed, translate));
+  } else {
+    usageText = _('No data yet');
+  }
+  return [updateText, usageText].filter(Boolean).join(' · ');
 }
 
 const CodexModel = {
@@ -686,6 +741,7 @@ const CodexModel = {
   sessionStatusText,
   isUsableRemoteStatus,
   normalizeUpdateState,
+  dashboardFooterText,
 };
 
 if (typeof module !== 'undefined' && module.exports)

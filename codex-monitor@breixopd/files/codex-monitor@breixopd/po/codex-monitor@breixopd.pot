@@ -5,7 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: codex-monitor@breixopd 1.2.2\n"
+"Project-Id-Version: codex-monitor@breixopd 1.2.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-07-16 19:09+0200\n"
@@ -425,6 +425,34 @@ msgstr ""
 #. ui.js:500
 #, javascript-format
 msgid "Codex %s"
+msgstr ""
+
+#. model.js:695
+#, javascript-format
+msgid "Codex %s · Updates checked now"
+msgstr ""
+
+#. model.js:696
+#, javascript-format
+msgid "Codex %s · Updates checked %s ago"
+msgstr ""
+
+#. model.js:703
+msgid "Updates checked now"
+msgstr ""
+
+#. model.js:704
+#, javascript-format
+msgid "Updates checked %s ago"
+msgstr ""
+
+#. model.js:714
+msgid "Usage refreshed now"
+msgstr ""
+
+#. model.js:715
+#, javascript-format
+msgid "Usage refreshed %s ago"
 msgstr ""
 
 #. ui.js:538
