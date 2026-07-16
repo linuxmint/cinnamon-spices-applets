@@ -17,6 +17,7 @@ from .sessions import (
 
 MAX_DAILY_USAGE_BUCKETS = 366
 MAX_SAFE_INTEGER = 9_007_199_254_740_991
+MAX_HISTORY_DISPLAY_DAYS = 30
 
 
 class CodexService:
@@ -67,7 +68,10 @@ class CodexService:
         }
         if self.history is not None:
             self.history.append(snapshot, now=captured_at)
-            snapshot["history"] = self.history.load(now=captured_at)
+            snapshot["history"] = self.history.load_for_display(
+                now=captured_at,
+                days=MAX_HISTORY_DISPLAY_DAYS,
+            )
         else:
             snapshot["history"] = []
         return snapshot

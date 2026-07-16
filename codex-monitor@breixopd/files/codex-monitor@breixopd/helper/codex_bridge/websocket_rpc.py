@@ -11,7 +11,9 @@ from pathlib import Path
 import socket
 import stat
 import struct
+import time
 from typing import Any
+from collections import OrderedDict
 
 from . import __version__
 from .rpc import RpcError
@@ -19,7 +21,10 @@ from .rpc import RpcError
 
 MAX_HANDSHAKE_BYTES = 16_384
 MAX_MESSAGE_BYTES = 1_000_000
+MAX_PENDING_NOTIFICATIONS = 128
+MAX_UNEXPECTED_RESPONSES = 256
 _WEBSOCKET_GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
+_MISSING = object()
 
 
 class UnixSocketAppServerClient:
@@ -35,7 +40,8 @@ class UnixSocketAppServerClient:
         self._socket = None
         self._buffer = bytearray()
         self._next_id = 1
-        self._notifications: dict[str, Any] = {}
+        self._notifications: OrderedDict[str, Any] = OrderedDict()
+        self._operation_deadline = None
 
     def initialize(self):
         self._connect()
@@ -64,41 +70,91 @@ class UnixSocketAppServerClient:
         message: dict[str, Any] = {"id": request_id, "method": method}
         if params is not None:
             message["params"] = params
-        self._send_json(message)
-
-        while True:
-            response = self._receive_json()
-            notification_method = response.get("method")
-            if isinstance(notification_method, str):
-                self._notifications[notification_method] = response.get("params")
-                continue
-            if response.get("id") != request_id:
-                continue
-            if "error" in response:
-                error = response.get("error") or {}
-                code = error.get("code", "unknown")
-                raise RpcError(code)
-            return response.get("result")
+        previous_timeout = self._socket.gettimeout()
+        previous_deadline = self._operation_deadline
+        deadline = time.monotonic() + self.timeout_seconds
+        self._operation_deadline = deadline
+        unexpected = 0
+        try:
+            self._set_deadline_timeout(deadline)
+            self._send_json(message)
+            while True:
+                response = self._receive_before_deadline(deadline)
+                notification_method = response.get("method")
+                if isinstance(notification_method, str):
+                    self._retain_notification(
+                        notification_method, response.get("params")
+                    )
+                    unexpected += 1
+                elif response.get("id") != request_id:
+                    unexpected += 1
+                else:
+                    if "error" in response:
+                        error = response.get("error") or {}
+                        code = error.get("code", "unknown")
+                        raise RpcError(code)
+                    return response.get("result")
+                if unexpected > MAX_UNEXPECTED_RESPONSES:
+                    raise RuntimeError(
+                        "Codex control channel sent too many unexpected responses"
+                    )
+        finally:
+            self._operation_deadline = previous_deadline
+            if self._socket is not None:
+                self._socket.settimeout(previous_timeout)
 
     def wait_for_notification(self, method, *, timeout_seconds):
-        value = self._notifications.pop(method, None)
-        if value is not None or timeout_seconds <= 0:
-            return value
+        value = self._notifications.pop(method, _MISSING)
+        if value is not _MISSING or timeout_seconds <= 0:
+            return None if value is _MISSING else value
         previous_timeout = self._socket.gettimeout() if self._socket else None
         if self._socket is None:
             return None
-        self._socket.settimeout(max(0.01, float(timeout_seconds)))
+        previous_deadline = self._operation_deadline
+        deadline = time.monotonic() + max(0.01, float(timeout_seconds))
+        self._operation_deadline = deadline
+        unexpected = 0
         try:
-            while method not in self._notifications:
-                response = self._receive_json()
+            while True:
+                response = self._receive_before_deadline(deadline)
                 notification_method = response.get("method")
                 if isinstance(notification_method, str):
-                    self._notifications[notification_method] = response.get("params")
+                    if notification_method == method:
+                        return response.get("params")
+                    self._retain_notification(
+                        notification_method, response.get("params")
+                    )
+                unexpected += 1
+                if unexpected > MAX_UNEXPECTED_RESPONSES:
+                    raise RuntimeError(
+                        "Codex control channel sent too many unexpected responses"
+                    )
         except TimeoutError:
             return None
         finally:
+            self._operation_deadline = previous_deadline
             self._socket.settimeout(previous_timeout)
-        return self._notifications.pop(method, None)
+
+    def _retain_notification(self, method, value):
+        self._notifications.pop(method, None)
+        while len(self._notifications) >= MAX_PENDING_NOTIFICATIONS:
+            self._notifications.popitem(last=False)
+        self._notifications[method] = value
+
+    def _receive_before_deadline(self, deadline):
+        self._set_deadline_timeout(deadline)
+        response = self._receive_json()
+        if time.monotonic() >= deadline:
+            raise TimeoutError("Codex control channel timed out")
+        return response
+
+    def _set_deadline_timeout(self, deadline):
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise TimeoutError("Codex control channel timed out")
+        if self._socket is None:
+            raise RuntimeError("Codex control channel is unavailable")
+        self._socket.settimeout(max(0.001, remaining))
 
     def close(self):
         connection = self._socket
@@ -272,6 +328,8 @@ class UnixSocketAppServerClient:
         connection = connection or self._socket
         if connection is None:
             raise RuntimeError("Codex control channel is unavailable")
+        if connection is self._socket and self._operation_deadline is not None:
+            self._set_deadline_timeout(self._operation_deadline)
         try:
             connection.sendall(value)
         except socket.timeout:
@@ -300,6 +358,8 @@ class UnixSocketAppServerClient:
         connection = self._socket
         if connection is None:
             raise RuntimeError("Codex control channel is unavailable")
+        if self._operation_deadline is not None:
+            self._set_deadline_timeout(self._operation_deadline)
         try:
             value = connection.recv(maximum)
         except socket.timeout:

@@ -36,6 +36,12 @@ function _button(label, callback, styleClass = 'codex-monitor-button') {
   return button;
 }
 
+function _enableWrapping(label) {
+  label.clutter_text.set_line_wrap(true);
+  label.clutter_text.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+  label.clutter_text.set_ellipsize(Pango.EllipsizeMode.NONE);
+}
+
 function _validatedQrSvg(value) {
   if (typeof value !== 'string' || value.length === 0 || value.length > 256 * 1024)
     return null;
@@ -94,13 +100,13 @@ class QuotaCard {
       return;
     }
     const percentage = Math.max(0, Math.min(100, Number(window.usedPercent)));
-    this._percent.set_text(_format(_('%s%% used'), Math.round(percentage)));
+    this._percent.set_text(_format(this._('%s%% used'), Math.round(percentage)));
     if (window.resetsAt == null) {
       this._reset.set_text(this._('Reset time unavailable'));
       return;
     }
     const countdown = model.formatDuration(Number(window.resetsAt) - now, this._);
-    this._reset.set_text(_format(_('Resets in %s'), countdown));
+    this._reset.set_text(_format(this._('Resets in %s'), countdown));
   }
 }
 
@@ -130,6 +136,7 @@ var Dashboard = class Dashboard {
     this._settings = {};
     this._compact = false;
     this._indicators = [];
+    this._indicatorSignature = null;
 
     this.actor = new St.BoxLayout({
       vertical: true,
@@ -178,14 +185,23 @@ var Dashboard = class Dashboard {
   setIndicators(indicators) {
     if (!this._indicatorList)
       return;
-    _clear(this._indicatorList);
     const visibleIndicators = Array.isArray(indicators) ? indicators : [];
+    const signature = `${this._compact}:` + visibleIndicators.map(indicator => [
+      indicator.symbol,
+      indicator.kind,
+      indicator.severity,
+      indicator.text,
+    ].join(':')).join('|');
+    if (signature === this._indicatorSignature)
+      return;
+    _clear(this._indicatorList);
+    this._indicatorSignature = signature;
     this._indicators = visibleIndicators;
     const statusItems = visibleIndicators.length > 0 ? visibleIndicators : [{
       kind: 'current',
       severity: 'info',
       symbol: '✓',
-      text: 'Usage data current',
+      text: this._('Usage data current'),
     }];
     const indicatorsPerRow = this._compact ? 1 : 2;
     for (let index = 0; index < statusItems.length; index += indicatorsPerRow) {
@@ -195,7 +211,7 @@ var Dashboard = class Dashboard {
       for (const indicator of statusItems.slice(index, index + indicatorsPerRow)) {
         const indicatorGap = indicator.kind === 'remote' ? '  ' : ' ';
         const chip = new St.Label({
-          text: `${indicator.symbol}${indicatorGap}${this._(indicator.text)}`,
+          text: `${indicator.symbol}${indicatorGap}${indicator.text}`,
           x_expand: true,
           x_align: Clutter.ActorAlign.FILL,
           y_align: Clutter.ActorAlign.CENTER,
@@ -252,6 +268,7 @@ var Dashboard = class Dashboard {
     section.add_child(this._graphHeading);
     this._graphActor = this._graph.createQuotaGraph({
       legendStyleClass: 'codex-monitor-graph-legend',
+      accessibleName: this._('Usage trend graph'),
     });
     section.add_child(this._graphActor);
 
@@ -351,6 +368,7 @@ var Dashboard = class Dashboard {
       text: '',
       style_class: 'codex-monitor-secondary',
     });
+    _enableWrapping(this._remoteIdentity);
     this._remoteSection.add_child(this._remoteHeading);
     this._remoteSection.add_child(this._remoteIdentity);
     this._remoteSection.add_child(this._remoteButtons);
@@ -372,6 +390,7 @@ var Dashboard = class Dashboard {
       text: '',
       style_class: 'codex-monitor-secondary',
     });
+    _enableWrapping(this._pairingState);
     this._remoteSection.add_child(this._pairingQr);
     this._remoteSection.add_child(this._pairingManualLabel);
     this._remoteSection.add_child(this._pairingQrFallback);
@@ -405,6 +424,7 @@ var Dashboard = class Dashboard {
       style_class: 'codex-monitor-secondary',
       x_expand: true,
     });
+    _enableWrapping(this._versionLabel);
     this._updateButton = _button(this._('Update Codex…'), this._callbacks.onUpdate);
     this._updateButton.visible = false;
     this._versionRow.add_child(this._versionLabel);
@@ -418,6 +438,7 @@ var Dashboard = class Dashboard {
       style_class: 'codex-monitor-secondary',
       x_expand: true,
     });
+    _enableWrapping(this._updated);
     this._footer.add_child(this._updated);
     this._footer.add_child(_button(this._('Refresh'), this._callbacks.onRefresh));
     this.actor.add_child(this._footer);
@@ -517,12 +538,16 @@ var Dashboard = class Dashboard {
   }
 
   setSettings(settings) {
+    const graphSettingsChanged =
+      this._settings.graphMode !== settings.graphMode ||
+      Number(this._settings.graphRangeHours) !== Number(settings.graphRangeHours);
     this._settings = settings;
     for (const [mode, button] of Object.entries(this._modeButtons))
       this._setChecked(button, mode === settings.graphMode);
     for (const [hours, button] of Object.entries(this._rangeButtons))
       this._setChecked(button, Number(hours) === Number(settings.graphRangeHours));
-    this._renderGraph();
+    if (graphSettingsChanged)
+      this._renderGraph();
   }
 
   _setChecked(button, checked) {
@@ -533,19 +558,24 @@ var Dashboard = class Dashboard {
   }
 
   update(snapshot, remoteStatus, panelState) {
+    const snapshotChanged = snapshot !== this._snapshot;
+    const remoteChanged = Boolean(remoteStatus) && remoteStatus !== this._remoteStatus;
     this._snapshot = snapshot;
     this._remoteStatus = remoteStatus || this._remoteStatus;
     const now = Math.floor(Date.now() / 1000);
     const plan = snapshot.planType || snapshot.account && snapshot.account.planType || this._('Unknown plan');
     this._status.set_text(_format(this._('%s · Live ●'), plan));
-    this._fiveHourCard.update(snapshot.windows.fiveHour, this._model, now);
-    this._weeklyCard.update(snapshot.windows.weekly, this._model, now);
     this.setIndicators(panelState && panelState.indicators);
     this._updated.set_text(_format(this._('Updated %s ago'),
       this._model.formatDuration(now - snapshot.capturedAt, this._)));
-    this._renderGraph();
-    this._renderResetBank();
-    this._renderRemote();
+    if (snapshotChanged) {
+      this._fiveHourCard.update(snapshot.windows.fiveHour, this._model, now);
+      this._weeklyCard.update(snapshot.windows.weekly, this._model, now);
+      this._renderGraph();
+      this._renderResetBank();
+    }
+    if (remoteChanged)
+      this._renderRemote();
   }
 
   showError(message) {
@@ -723,11 +753,13 @@ var Dashboard = class Dashboard {
       resetKey: this._('R = reset'),
       emptyText: this._('No history in this range'),
       collectingText: this._('Collecting more history…'),
+      uncollectedText: this._('No local history'),
       hoverFormatter,
       defaultDetail: legend.length > 0
         ? `${coverage ? `${coverage} · ` : ''}` +
           this._('Hover for timestamp and exact values')
         : this._('No samples yet'),
+      accessibleName: this._('Usage trend graph'),
     });
   }
 
@@ -887,7 +919,9 @@ var Dashboard = class Dashboard {
       connected: this._('Connected'),
       errored: this._('Error'),
     };
-    this._remoteLabel.set_text(labels[status] || this._('Unknown'));
+    this._remoteLabel.set_text(this._remoteStatus && this._remoteStatus.stale &&
+      status !== 'errored'
+      ? this._('Status delayed') : labels[status] || this._('Unknown'));
     const identity = this._remoteStatus || {};
     const identityParts = [];
     if (identity.serverName)
@@ -898,6 +932,12 @@ var Dashboard = class Dashboard {
       ));
     if (status === 'running' && identityParts.length === 0)
       identityParts.push(this._('Connection state unavailable; Remote is still running'));
+    if (identity.stale && identity.lastSuccessAt != null) {
+      identityParts.push(_format(this._('Last confirmed %s ago'),
+        this._model.formatDuration(
+          Math.floor(Date.now() / 1000) - Number(identity.lastSuccessAt), this._
+        )));
+    }
     this._remoteIdentity.set_text(this._remoteError || identityParts.join(' · '));
     this._remoteIdentity.visible = Boolean(this._remoteIdentity.get_text());
     _clear(this._remoteButtons);

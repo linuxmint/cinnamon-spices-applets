@@ -34,7 +34,10 @@ class CodexMonitorApplet extends Applet.Applet {
     this._metadata = metadata;
     this._orientation = orientation;
     this._snapshot = null;
+    this._renderedSnapshot = null;
+    this._panelIndicatorSignature = null;
     this._remoteStatus = null;
+    this._remotePollState = null;
     this._sessions = { active: [], recent: [] };
     this._refreshing = false;
     this._refreshTimer = 0;
@@ -44,6 +47,8 @@ class CodexMonitorApplet extends Applet.Applet {
     this._pairingRetryAt = 0;
     this._pairingRetryAttempt = 0;
     this._clientsLoading = false;
+    this._clientsRequestGeneration = 0;
+    this._clientsEnvironmentId = null;
     this._updateState = null;
     this._updateRefreshing = false;
     this._updateTimer = 0;
@@ -207,7 +212,7 @@ class CodexMonitorApplet extends Applet.Applet {
     return {
       warningThreshold: this.warningThreshold,
       criticalThreshold: this.criticalThreshold,
-      staleSeconds: 300,
+      staleSeconds: Model.staleThresholdSeconds(this.refreshInterval),
       resetExpiryWarningHours: this.resetExpiryWarningHours,
       showResetBadge: this.showResetBadge,
       showRemoteBadge: this.showRemoteBadge,
@@ -231,6 +236,8 @@ class CodexMonitorApplet extends Applet.Applet {
     this._pairingRetryAt = 0;
     this._pairingRetryAttempt = 0;
     this._clientsLoading = false;
+    this._clientsRequestGeneration += 1;
+    this._clientsEnvironmentId = null;
     this._updateRefreshing = false;
     if (previousBridge)
       previousBridge.stop();
@@ -351,6 +358,11 @@ class CodexMonitorApplet extends Applet.Applet {
     this._remoteRefreshing = true;
     this._request('remote_status', {}, (error, status) => {
       this._remoteRefreshing = false;
+      const now = Math.floor(Date.now() / 1000);
+      this._remotePollState = Model.nextRemotePollState(
+        this._remotePollState, status, Boolean(error), now
+      );
+      this._remoteStatus = this._remotePollState.value;
       if (error) {
         if (Model.isUsableRemoteStatus(this._remoteStatus)) {
           this._dashboard.setRemoteStatus(this._remoteStatus);
@@ -358,16 +370,15 @@ class CodexMonitorApplet extends Applet.Applet {
           this._render();
           return;
         }
-        this._remoteStatus = { status: 'errored' };
         this._dashboard.showRemoteError(this._('Remote Control status unavailable'));
-        this._setRemotePolling(false);
+        this._setRemotePolling(true);
         this._render();
         return;
       }
-      this._remoteStatus = status;
-      this._dashboard.setRemoteStatus(status);
-      if (loadClients && status.status === 'connected' && status.environmentId)
-        this._loadRemoteClients(status.environmentId);
+      this._dashboard.setRemoteStatus(this._remoteStatus);
+      if (loadClients && this._remoteStatus.status === 'connected' &&
+          this._remoteStatus.environmentId)
+        this._loadRemoteClients(this._remoteStatus.environmentId);
       this._setRemotePolling(this._shouldPollRemote());
       this._render();
     });
@@ -378,7 +389,7 @@ class CodexMonitorApplet extends Applet.Applet {
     const pairingActive = this._pairing && !this._pairing.claimed &&
       Number(this._pairing.expiresAt) > Math.floor(Date.now() / 1000);
     return status === 'connecting' || status === 'running' ||
-      status === 'connected' || Boolean(pairingActive);
+      status === 'connected' || status === 'errored' || Boolean(pairingActive);
   }
 
   _setRemotePolling(active) {
@@ -447,11 +458,17 @@ class CodexMonitorApplet extends Applet.Applet {
   }
 
   _loadRemoteClients(environmentId) {
-    if (this._clientsLoading)
+    if (!environmentId || this._clientsLoading &&
+        environmentId === this._clientsEnvironmentId)
       return;
+    const generation = ++this._clientsRequestGeneration;
+    this._clientsEnvironmentId = environmentId;
     this._clientsLoading = true;
     this._dashboard.setRemoteClientsLoading(true);
     this._request('remote_clients', { environmentId }, (error, clients) => {
+      if (generation !== this._clientsRequestGeneration ||
+          environmentId !== this._clientsEnvironmentId)
+        return;
       this._clientsLoading = false;
       if (error) {
         this._dashboard.setRemoteClients({ available: false });
@@ -490,27 +507,39 @@ class CodexMonitorApplet extends Applet.Applet {
     const state = Model.panelState(
       this._snapshot, settings, now, this._remoteStatus, this._
     );
+    const snapshotChanged = this._snapshot !== this._renderedSnapshot;
     this.actor.set_accessible_name(
       `${this._('Codex usage monitor')} · ${state.label}` +
       (state.indicatorText ? ` · ${state.indicatorText}` : '')
     );
     const vertical = this._orientation === St.Side.LEFT ||
       this._orientation === St.Side.RIGHT;
-    for (const child of this._indicatorBox.get_children())
-      child.destroy();
-    for (const indicator of state.indicators) {
-      this._indicatorBox.add_child(new St.Label({
-        text: indicator.panelSymbol || indicator.symbol,
-        style_class: 'codex-indicator ' +
-          `codex-indicator-${indicator.kind} ` +
-          `codex-indicator-${indicator.severity}`,
-        accessible_name: indicator.text,
-        y_align: Clutter.ActorAlign.CENTER,
-      }));
+    const indicatorSignature = state.indicators.map(indicator => [
+      indicator.panelSymbol || indicator.symbol,
+      indicator.kind,
+      indicator.severity,
+      indicator.text,
+    ].join(':')).join('|');
+    if (indicatorSignature !== this._panelIndicatorSignature) {
+      for (const child of this._indicatorBox.get_children())
+        child.destroy();
+      for (const indicator of state.indicators) {
+        this._indicatorBox.add_child(new St.Label({
+          text: indicator.panelSymbol || indicator.symbol,
+          style_class: 'codex-indicator ' +
+            `codex-indicator-${indicator.kind} ` +
+            `codex-indicator-${indicator.severity}`,
+          accessible_name: indicator.text,
+          y_align: Clutter.ActorAlign.CENTER,
+        }));
+      }
+      this._panelIndicatorSignature = indicatorSignature;
     }
     this._indicatorBox.visible = !vertical && state.indicators.length > 0;
-    Graph.updatePanelBar(this._fiveHourBar, this._snapshot.windows.fiveHour);
-    Graph.updatePanelBar(this._weeklyBar, this._snapshot.windows.weekly);
+    if (snapshotChanged) {
+      Graph.updatePanelBar(this._fiveHourBar, this._snapshot.windows.fiveHour);
+      Graph.updatePanelBar(this._weeklyBar, this._snapshot.windows.weekly);
+    }
     for (const style of ['normal', 'warning', 'critical', 'stale'])
       this._panelBox.remove_style_class_name(`codex-monitor-${style}`);
     this._panelBox.add_style_class_name(`codex-monitor-${state.level}`);
@@ -521,6 +550,7 @@ class CodexMonitorApplet extends Applet.Applet {
     );
     this.set_applet_tooltip(tooltip);
     this._dashboard.update(this._snapshot, this._remoteStatus, state);
+    this._renderedSnapshot = this._snapshot;
   }
 
   _confirmConsumeReset(credit) {
@@ -649,6 +679,11 @@ class CodexMonitorApplet extends Applet.Applet {
           : this._('Remote Control action failed');
         this._dashboard.showActionMessage(message);
         this._remoteStatus = { status: 'errored' };
+        this._remotePollState = {
+          value: this._remoteStatus,
+          failureCount: 3,
+          lastSuccessAt: null,
+        };
         this._dashboard.showRemoteError(message, stuck);
       } else if (action === 'remote_pair_start') {
         this._pairing = { ...result, claimed: false };
@@ -656,6 +691,9 @@ class CodexMonitorApplet extends Applet.Applet {
         this._pairingRetryAttempt = 0;
         this._dashboard.setPairing(this._pairing);
       } else if (action === 'remote_stop') {
+        this._clientsRequestGeneration += 1;
+        this._clientsEnvironmentId = null;
+        this._clientsLoading = false;
         this._pairing = null;
         this._dashboard.setPairing(null);
         this._dashboard.setRemoteClients({ clients: [] });
@@ -666,6 +704,13 @@ class CodexMonitorApplet extends Applet.Applet {
           this._loadRemoteClients(environmentId);
       } else {
         this._remoteStatus = result;
+      }
+      if (!error && this._remoteStatus) {
+        this._remotePollState = Model.nextRemotePollState(
+          this._remotePollState, this._remoteStatus, false,
+          Math.floor(Date.now() / 1000)
+        );
+        this._remoteStatus = this._remotePollState.value;
       }
       if (!error)
         this._readRemoteStatus();

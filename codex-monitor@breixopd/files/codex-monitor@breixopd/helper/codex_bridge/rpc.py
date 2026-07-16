@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import OrderedDict
 import json
 import subprocess
 import threading
@@ -12,6 +13,7 @@ from . import __version__
 
 
 MAX_RESPONSE_BYTES = 1_000_000
+MAX_PENDING_MESSAGES = 128
 
 
 class RpcError(RuntimeError):
@@ -27,8 +29,8 @@ class AppServerClient:
         self.process = process
         self.timeout_seconds = timeout_seconds
         self._next_id = 1
-        self._responses: dict[int, dict[str, Any]] = {}
-        self._notifications: dict[str, Any] = {}
+        self._responses: OrderedDict[int, dict[str, Any]] = OrderedDict()
+        self._notifications: OrderedDict[str, Any] = OrderedDict()
         self._reader_finished = False
         self._condition = threading.Condition()
         self._reader = threading.Thread(target=self._read_responses, daemon=True)
@@ -128,15 +130,24 @@ class AppServerClient:
                 method = message.get("method")
                 if isinstance(method, str):
                     with self._condition:
-                        self._notifications[method] = message.get("params")
+                        self._retain_bounded(
+                            self._notifications, method, message.get("params")
+                        )
                         self._condition.notify_all()
                     continue
                 if not isinstance(request_id, int):
                     continue
                 with self._condition:
-                    self._responses[request_id] = message
+                    self._retain_bounded(self._responses, request_id, message)
                     self._condition.notify_all()
         finally:
             with self._condition:
                 self._reader_finished = True
                 self._condition.notify_all()
+
+    @staticmethod
+    def _retain_bounded(messages, key, value):
+        messages.pop(key, None)
+        while len(messages) >= MAX_PENDING_MESSAGES:
+            messages.popitem(last=False)
+        messages[key] = value

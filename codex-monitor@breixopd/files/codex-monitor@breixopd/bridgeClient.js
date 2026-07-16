@@ -5,6 +5,8 @@ const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop;
 const ByteArray = imports.byteArray;
 
+const MAX_BRIDGE_RESPONSE_CHARACTERS = 4 * 1024 * 1024;
+
 var BridgeClient = class BridgeClient {
   constructor(options) {
     this._options = options;
@@ -253,6 +255,12 @@ var BridgeClient = class BridgeClient {
   }
 
   _handleLine(line) {
+    if (typeof line !== 'string' ||
+        line.length > MAX_BRIDGE_RESPONSE_CHARACTERS) {
+      this._failPending('Codex bridge response was too large');
+      this.stop();
+      return;
+    }
     let response;
     try {
       response = JSON.parse(line);

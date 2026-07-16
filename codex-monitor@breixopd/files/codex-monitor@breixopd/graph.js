@@ -16,6 +16,25 @@ function _themeColor(area, property, fallback) {
   }
 }
 
+function _setHoverTimestamp(view, timestamp) {
+  if (!view._hoverFormatter)
+    return;
+  const value = Math.max(view._area._minimum,
+    Math.min(view._area._maximum, Number(timestamp)));
+  view._area._hoverTimestamp = value;
+  const detail = view._hoverFormatter(value);
+  view._hover.set_text(detail);
+  view._area.set_accessible_name(detail);
+  view._area.queue_repaint();
+}
+
+function _clearHover(view) {
+  view._area._hoverTimestamp = null;
+  view._hover.set_text(view._defaultDetail || '');
+  view._area.set_accessible_name(view._defaultDetail || '');
+  view._area.queue_repaint();
+}
+
 var createPanelBar = function(styleClass) {
   const area = new St.DrawingArea({
     style_class: `codex-monitor-panel-bar ${styleClass}`,
@@ -74,8 +93,10 @@ var createQuotaGraph = function(options = {}) {
   view._area = new St.DrawingArea({
     style_class: 'codex-monitor-graph',
     reactive: true,
+    can_focus: true,
     track_hover: true,
     x_expand: true,
+    accessible_name: options.accessibleName || 'Usage trend graph',
   });
   view._area._series = [];
   view._area._resetMarkers = [];
@@ -83,6 +104,7 @@ var createQuotaGraph = function(options = {}) {
   view._area._minimum = 0;
   view._area._maximum = 1;
   view._area._collectionStart = null;
+  view._area._uncollectedText = '';
   view._area._hoverTimestamp = null;
   view._area.connect('repaint', _drawQuotaGraph);
   view._area.connect('motion-event', (_actor, event) => {
@@ -96,16 +118,31 @@ var createQuotaGraph = function(options = {}) {
     const ratio = Math.max(0, Math.min(1, transformed[1] / Math.max(1, width)));
     const timestamp = view._area._minimum +
       ratio * (view._area._maximum - view._area._minimum);
-    view._area._hoverTimestamp = timestamp;
-    view._area.queue_repaint();
-    view._hover.set_text(view._hoverFormatter(timestamp));
+    _setHoverTimestamp(view, timestamp);
     return Clutter.EVENT_PROPAGATE;
   });
   view._area.connect('leave-event', () => {
-    view._area._hoverTimestamp = null;
-    view._area.queue_repaint();
-    view._hover.set_text(view._defaultDetail || '');
+    _clearHover(view);
     return Clutter.EVENT_PROPAGATE;
+  });
+  view._area.connect('key-press-event', (_actor, event) => {
+    const key = event.get_key_symbol();
+    const span = Math.max(1, view._area._maximum - view._area._minimum);
+    const current = Number.isFinite(view._area._hoverTimestamp)
+      ? view._area._hoverTimestamp : view._area._maximum;
+    if (key === Clutter.KEY_Left)
+      _setHoverTimestamp(view, current - span / 40);
+    else if (key === Clutter.KEY_Right)
+      _setHoverTimestamp(view, current + span / 40);
+    else if (key === Clutter.KEY_Home)
+      _setHoverTimestamp(view, view._area._minimum);
+    else if (key === Clutter.KEY_End)
+      _setHoverTimestamp(view, view._area._maximum);
+    else if (key === Clutter.KEY_Escape)
+      _clearHover(view);
+    else
+      return Clutter.EVENT_PROPAGATE;
+    return Clutter.EVENT_STOP;
   });
   plotRow.add_child(view._leftAxis);
   plotRow.add_child(view._area);
@@ -163,6 +200,7 @@ var updateQuotaGraph = function(view, payload) {
   const series = data.series || [];
   const axes = data.axes || { x: data.axis || [], left: null, right: null };
   const axis = axes.x || [];
+  view._area._hoverTimestamp = null;
   view._area._series = series;
   view._area._resetMarkers = data.resetMarkers || [];
   view._area._axes = axes;
@@ -173,9 +211,11 @@ var updateQuotaGraph = function(view, payload) {
   view._area._collectionStart = axes.domain &&
     Number.isFinite(Number(axes.domain.collectionStart))
     ? Number(axes.domain.collectionStart) : null;
+  view._area._uncollectedText = data.uncollectedText || '';
   view._hoverFormatter = data.hoverFormatter || null;
   view._defaultDetail = data.defaultDetail || '';
   view._hover.set_text(view._defaultDetail);
+  view._area.set_accessible_name(data.accessibleName || view._defaultDetail);
 
   const xLabels = view._xAxis.get_children();
   xLabels.forEach((label, index) => label.set_text(axis[index] ? axis[index].label : '—'));
@@ -317,7 +357,7 @@ function _drawActivityBars(context, series, xFor, yFor, plotWidth, bottom, color
 }
 
 function _drawUncollectedHistory(context, startX, padding, width, height,
-    foreground, hasHistory) {
+    foreground, hasHistory, label) {
   const boundary = Math.max(padding, Math.min(width - padding, startX));
   const shadedWidth = boundary - padding;
   if (shadedWidth <= 0)
@@ -344,11 +384,11 @@ function _drawUncollectedHistory(context, startX, padding, width, height,
     context.stroke();
     context.setDash([], 0);
   }
-  if (shadedWidth >= 90) {
+  if (shadedWidth >= 90 && label) {
     context.setSourceRGBA(..._rgba(foreground, 0.48));
     context.setFontSize(10);
     context.moveTo(padding + 8, padding + 14);
-    context.showText('No local history');
+    context.showText(label);
   }
 }
 
@@ -382,7 +422,7 @@ function _drawQuotaGraph(area) {
     ? area._collectionStart : maximum;
   _drawUncollectedHistory(
     context, xFor(collectionStart), padding, width, height, foreground,
-    timestamps.length > 0
+    timestamps.length > 0, area._uncollectedText
   );
   if (timestamps.length === 0) {
     context.$dispose();

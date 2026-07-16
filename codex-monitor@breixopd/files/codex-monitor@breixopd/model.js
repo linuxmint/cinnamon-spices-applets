@@ -51,6 +51,52 @@ function formatDuration(seconds, translate = text => text) {
   return _format(_('%sm'), minutes);
 }
 
+function staleThresholdSeconds(refreshInterval) {
+  const interval = Number(refreshInterval);
+  const safeInterval = Number.isFinite(interval) && interval > 0 ? interval : 60;
+  return Math.max(300, Math.floor(safeInterval * 2));
+}
+
+function nextRemotePollState(previousState, incomingStatus, failed, now) {
+  const previous = previousState && typeof previousState === 'object'
+    ? previousState : { value: null, failureCount: 0, lastSuccessAt: null };
+  const timestamp = Number.isFinite(Number(now)) ? Math.floor(Number(now)) : 0;
+  const validIncoming = incomingStatus && typeof incomingStatus === 'object' &&
+    typeof incomingStatus.status === 'string';
+  if (!failed && validIncoming) {
+    return {
+      value: {
+        ...incomingStatus,
+        stale: false,
+        lastSuccessAt: timestamp,
+      },
+      failureCount: 0,
+      lastSuccessAt: timestamp,
+    };
+  }
+
+  const failureCount = Number(previous.failureCount || 0) + 1;
+  const lastSuccessAt = Number.isFinite(Number(previous.lastSuccessAt))
+    ? Number(previous.lastSuccessAt) : null;
+  const age = lastSuccessAt == null ? Infinity : Math.max(0, timestamp - lastSuccessAt);
+  if (failureCount < 3 && age <= 15 && isUsableRemoteStatus(previous.value)) {
+    return {
+      value: {
+        ...previous.value,
+        stale: true,
+        lastSuccessAt,
+      },
+      failureCount,
+      lastSuccessAt,
+    };
+  }
+  return {
+    value: { status: 'errored', stale: true, lastSuccessAt },
+    failureCount,
+    lastSuccessAt,
+  };
+}
+
 function panelState(snapshot, settings, now, remoteStatus, translate = text => text) {
   const _ = translate;
   const windows = snapshot.windows || {};
@@ -130,7 +176,12 @@ function panelState(snapshot, settings, now, remoteStatus, translate = text => t
         severity: 'critical', symbol: '!', text: _('Remote Control error'),
       },
     };
-    const remoteIndicator = remoteIndicators[remoteStatus.status] ||
+    const remoteIndicator = remoteStatus.stale && remoteStatus.status !== 'errored'
+      ? {
+        severity: 'warning', symbol: '◐',
+        text: _('Remote Control status delayed'),
+      }
+      : remoteIndicators[remoteStatus.status] ||
       { severity: 'critical', symbol: '!', text: _('Remote Control status unknown') };
     indicators.push({ kind: 'remote', ...remoteIndicator });
   }
@@ -326,8 +377,10 @@ function tooltipText(snapshot, now, remoteStatus, translate = text => text) {
       connected: _('connected'),
       errored: _('errored'),
     };
-    lines.push(_format(_('Remote: %s'),
-      statusLabels[remoteStatus.status] || _('unknown')));
+    lines.push(_format(_('Remote: %s'), remoteStatus.stale &&
+      remoteStatus.status !== 'errored'
+      ? _('status delayed')
+      : statusLabels[remoteStatus.status] || _('unknown')));
   }
   lines.push(_format(_('Updated: %s ago'), capturedAge));
   return lines.join('\n');
@@ -614,6 +667,8 @@ function normalizeUpdateState(value) {
 const CodexModel = {
   responsiveLayout,
   formatDuration,
+  staleThresholdSeconds,
+  nextRemotePollState,
   formatPercent,
   panelState,
   quotaSeries,
