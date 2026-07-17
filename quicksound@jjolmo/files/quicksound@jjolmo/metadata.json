@@ -1,0 +1,6 @@
+{
+  "uuid": "quicksound@jjolmo",
+  "name": "Quick Sound",
+  "description": "A Cinnamon applet to control sound and music, with simple device switching",
+  "author": "jjolmo, forked from sound applet by Cinnamon team"
+}
