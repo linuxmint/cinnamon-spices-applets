@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FM-Radio@hilyxx 1.02\n"
+"Project-Id-Version: FM-Radio@hilyxx 1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-07-14 17:35+0200\n"
+"POT-Creation-Date: 2026-07-17 10:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,31 +19,31 @@ msgstr ""
 "X-Generator: Poedit 3.9\n"
 
 #. metadata.json->name
-#. applet.js:51
+#. applet.js:53 applet.js:304
 msgid "FM Radio"
 msgstr "Radio FM"
 
-#. applet.js:60
+#. applet.js:62
 msgid "Reload applet"
 msgstr "Recargar applet"
 
-#. applet.js:196
+#. applet.js:209
 msgid "All stations"
 msgstr "Todas las emisoras"
 
-#. applet.js:245
+#. applet.js:283
 msgid "Waiting..."
 msgstr "Esperando..."
 
-#. channels.js:49
+#. channels.js:51
 msgid "Error"
 msgstr "Error"
 
-#. search.js:18
+#. search.js:19
 msgid "Please enter a radio station name to search for."
 msgstr "Introduzca el nombre de la emisora de radio que desea buscar."
 
-#. search.js:37
+#. search.js:38
 msgid "No stations found for this keyword."
 msgstr "No se han encontrado emisoras para esta palabra clave."
 
