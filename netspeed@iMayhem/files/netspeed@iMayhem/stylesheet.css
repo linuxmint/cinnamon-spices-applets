@@ -1,0 +1,169 @@
+/* Custom Styles for Netspeed Applet Popup */
+
+.netspeed-popup {
+    background-color: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    width: 450px;
+    height: 200px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.netspeed-title {
+    color: #ffffff;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.netspeed-section-title {
+    color: #aaaaaa;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+.netspeed-label-mono {
+    color: #eeeeee;
+    font-family: "Ubuntu Mono", "Monospace", monospace;
+    font-size: 0.95em;
+    white-space: pre;
+}
+
+.netspeed-button-small {
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #666666;
+}
+
+.netspeed-button-small:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.netspeed-scroll {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.netspeed-scroll st-scrollbar {
+    padding: 0px;
+    width: 8px;
+}
+
+.netspeed-scroll st-scrollbar-trough {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.netspeed-scroll st-scrollbar-vhandle {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.netspeed-scroll st-scrollbar-vhandle:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Modal Styles */
+.netspeed-modal {
+    background-color: #000000;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+}
+
+.netspeed-modal-title {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.netspeed-modal-toolbar {
+    margin-bottom: 20px;
+}
+
+.netspeed-modal-search {
+    background-color: #111111;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #ffffff;
+}
+
+.netspeed-modal-filter-btn {
+    padding: 8px 16px;
+    margin-left: 6px;
+    border-radius: 6px;
+    background-color: #222222;
+    color: #888888;
+}
+
+.netspeed-modal-filter-btn:hover {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.netspeed-modal-scroll {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+}
+
+.netspeed-modal-row {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.netspeed-modal-row:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.netspeed-modal-row-name {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #4a90e2;
+}
+
+.netspeed-modal-row-peer {
+    color: #777777;
+    font-size: 0.9em;
+    margin-top: 2px;
+}
+
+.netspeed-modal-stat-rx {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.netspeed-modal-stat-tx {
+    color: #ffaa00;
+    font-weight: bold;
+}
+
+.netspeed-modal-row-date {
+    font-size: 0.8em;
+    color: #444444;
+    margin-top: 6px;
+}
+
+.netspeed-down {
+    color: #00ff00;
+}
+
+.netspeed-up {
+    color: #ffaa00;
+}
+
+.netspeed-footer {
+    color: #777777;
+    font-size: 0.8em;
+    text-align: center;
+    margin-top: 12px;
+    font-style: italic;
+}

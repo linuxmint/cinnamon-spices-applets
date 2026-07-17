@@ -187,3 +187,73 @@ msgstr ""
 #. settings-schema.json->applySettings->description
 msgid "Save / Apply Settings"
 msgstr ""
+# . applet.js
+msgid "Language"
+msgstr ""
+
+# . applet.js
+msgid "No history available"
+msgstr ""
+
+# . applet.js
+msgid "Open Usage Log"
+msgstr ""
+
+# . applet.js
+msgid "System Default"
+msgstr ""
+
+# . applet.js
+msgid "Top Apps"
+msgstr ""
+
+# . applet.js
+msgid "Usage History"
+msgstr ""
+
+# . settings-schema.json
+msgid "Enable Per-App Network Monitoring (Tooltip)"
+msgstr ""
+
+# . applet.js
+msgid "Apps"
+msgstr ""
+
+msgid "Real-time Speed"
+msgstr ""
+
+msgid "Session Usage"
+msgstr ""
+
+msgid "Daily Usage"
+msgstr ""
+
+msgid "Top Applications"
+msgstr ""
+
+msgid "Network Logger"
+msgstr ""
+
+msgid "Logger"
+msgstr ""
+
+msgid "No active connections"
+msgstr ""
+
+msgid "Interface"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "High Network Usage Detected"
+msgstr ""
+
+msgid "Application '%s' is consuming %s MB/s"
+msgstr ""
+
+msgid "Enable High-Usage App Notifications"
+msgstr ""
+
+msgid "High-Usage Threshold"
+msgstr ""
