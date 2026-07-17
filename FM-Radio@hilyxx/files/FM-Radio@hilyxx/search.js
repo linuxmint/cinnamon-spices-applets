@@ -1,3 +1,4 @@
+// === IMPORTS & CONSTANTS ===
 const Soup = imports.gi.Soup;
 const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
@@ -19,7 +20,7 @@ function findStations(keyword, callback) {
         return;
     }
 
-    global.log("Radio FM : API Search for -> " + keyword);
+    global.log("FM Radio : API Search for -> " + keyword);
     let encodedQuery = encodeURIComponent(keyword.trim());
     let url = "https://de1.api.radio-browser.info/json/stations/byname/" + encodedQuery;
 
@@ -46,11 +47,11 @@ function findStations(keyword, callback) {
                 if (callback) callback(formattedText);
 
             } catch (e) {
-                global.logError("Radio FM : Erreur de lecture JSON : " + e);
+                global.logError("FM Radio: Error Reading JSON : " + e);
                 if (callback) callback("Error reading API data.");
             }
         } else {
-            global.logError("Radio FM : API Error (" + status + ")");
+            global.logError("FM Radio : API Error (" + status + ")");
             if (callback) callback("Unable to connect to the API.");
         }
     };

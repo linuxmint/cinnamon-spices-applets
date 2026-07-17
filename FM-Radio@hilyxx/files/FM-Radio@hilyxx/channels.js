@@ -1,3 +1,4 @@
+// === IMPORTS & CONSTANTS ===
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
@@ -15,6 +16,7 @@ function _(str) {
 
 const extPath = GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
 
+// === CHANNEL SUBMENU: UI SETUP ===
 var currentChannelsList = [];
 
 function getIconForPath(picPath) {

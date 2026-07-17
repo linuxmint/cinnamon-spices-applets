@@ -1,3 +1,4 @@
+// === IMPORTS & CONSTANTS ===
 imports.gi.versions.Gst = "1.0";
 const Gst = imports.gi.Gst;
 const St = imports.gi.St;
@@ -8,6 +9,7 @@ const Channels = imports.channels;
 const DEFAULT_VOLUME = 1;
 const CLIENT_NAME = "fm-radio";
 
+// === CONTROL BUTTONS ===
 function createControlButtons(player, pr) {
     let box = new St.BoxLayout({
         vertical: false,
@@ -72,6 +74,7 @@ function createControlButtons(player, pr) {
     return box;
 }
 
+// === GSTREAMER STREAM ===
 const RadioPlayer = class RadioPlayer {
     constructor(channel) {
         Gst.init(null);
@@ -154,13 +157,39 @@ const RadioPlayer = class RadioPlayer {
         return this.tag;
     }
 
+    getTitle() {
+        return this.title || "";
+    }
+
+    getArtist() {
+        return this.artist || "";
+    }
+
     _onMessageReceived(msg) {
         switch (msg.type) {
             case Gst.MessageType.TAG: {
                 let tagList = msg.parse_tag();
-                let tmp = tagList.get_string("title");
-                this.tag = tmp[1];
-                if (this.onTagChanged != null) this.onTagChanged();
+    
+                let titleData = tagList.get_string("title");
+                let artistData = tagList.get_string("artist");
+
+                let title = titleData[0] ? titleData[1] : "";
+                let artist = artistData[0] ? artistData[1] : "";
+
+                if (!artist && title.includes("-")) {
+                    let parts = title.split("-");
+                    artist = parts[0].trim();
+                    title = parts.slice(1).join("-").trim();
+                }
+
+                if (title || artist) {
+                    this.title = title;
+                    this.artist = artist;
+                    
+                    this.tag = artist ? `${artist} - ${title}` : title;
+
+                    if (this.onTagChanged != null) this.onTagChanged();
+                }
                 break;
             }
 

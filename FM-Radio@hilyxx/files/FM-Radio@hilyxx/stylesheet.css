@@ -3,16 +3,25 @@
    font-size: 1em;
 }
 
+.artist-label {
+   text-align: center;
+   font-size: 1.03em;
+   padding-left: 1em;
+   padding-bottom: 0.6em;
+
+}
+
 .title-label {
    text-align: center;
-   font-size: 14px;
+   font-size: 1.08em;
    padding-left: 1em;
 }
 
 .radio-label {
    text-align: center;
-   font-size: 0.9em;
+   font-size: 1.015em;
    padding-top: 1em;
    font-weight: bold;
+   color: #5ea3ff;
 
 }

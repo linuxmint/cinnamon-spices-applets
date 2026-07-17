@@ -1,3 +1,4 @@
+// === IMPORTS & CONSTANTS ===
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 
@@ -9,6 +10,7 @@ const extPath = GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
 const FILE_NAME = "prefs.json";
 const DIR_NAME = ".fm-radio";
 
+// === DATA IMPORT ===
 function readFile(filepath) {
     let file = Gio.file_new_for_path(filepath);
     try {

@@ -1,3 +1,4 @@
+// === IMPORTS & CONSTANTS ===
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
@@ -27,7 +28,8 @@ const Channels = imports.channels;
 const Data = imports.data;
 const Search = imports.search;
 
-class SomaFMApplet extends Applet.IconApplet {
+// === CORE UI CONTROLLER ===
+class FMRadioApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
@@ -141,10 +143,21 @@ class SomaFMApplet extends Applet.IconApplet {
 
         this.statusMenuItem = new PopupMenu.PopupBaseMenuItem({ reactive: true, hover: false, activate: false });
         this.box = new St.BoxLayout({ 
-            x_expand: true, 
+            x_expand: true,
+            y_expand: true,
             width: 210, 
             vertical: true 
         });
+
+        this.artistLabel = new St.Label({
+            x_align: Clutter.ActorAlign.CENTER,
+            x_expand: true,
+            y_expand: true,
+            style_class: 'artist-label',
+        });
+        this.artistLabel.clutter_text.line_wrap = true;
+        this.artistLabel.clutter_text.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        this.artistLabel.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
 
         this.statusLabel = new St.Label({
             x_align: Clutter.ActorAlign.CENTER,
@@ -179,7 +192,7 @@ class SomaFMApplet extends Applet.IconApplet {
             x_align: Clutter.ActorAlign.CENTER, 
             style: 'margin-top: 10px; margin-bottom: 5px; padding-left: 20px;', 
         });
-
+        this.box.add_child(this.artistLabel);
         this.box.add_child(this.statusLabel);
         this.box.add_child(this.channelLabel); 
         this.box.add_child(this.channelIcon);
@@ -199,14 +212,35 @@ class SomaFMApplet extends Applet.IconApplet {
         this._loadChannels();
 
         this.player.setOnTagChanged(() => {
-            let currentTag = this.player.getTag();
-            if (currentTag && currentTag.trim() !== "") {
-                this.statusLabel.set_text(currentTag);
+            GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+                let title = this.player.getTitle();
+                let artist = this.player.getArtist();
                 
-                // Force recalculation of text layout allocation to prevent truncation
-                this.statusLabel.queue_relayout();
+                // Artist update
+                if (artist && artist.trim() !== "") {
+                    this.artistLabel.set_text(artist);
+                } else {
+                    this.artistLabel.set_text("");
+                }
+                
+                // Title update
+                if (title && title.trim() !== "") {
+                    this.statusLabel.set_text(title);
+                } else {
+                    let currentTag = this.player.getTag();
+                    this.statusLabel.set_text(currentTag ? currentTag : "");
+                }
+                
+                this.artistLabel.clutter_text.queue_relayout();
+                this.statusLabel.clutter_text.queue_relayout();
+                
+                this.box.queue_relayout();
                 this.statusMenuItem.actor.queue_relayout();
-            }
+
+                this._updateTooltip();
+                
+                return GLib.SOURCE_REMOVE; 
+            });
         });
     }
 
@@ -241,8 +275,42 @@ class SomaFMApplet extends Applet.IconApplet {
             }
         }
 
+        if (this.artistLabel) {
+            this.artistLabel.set_text("");
+        }
+
         if (this.statusLabel) {
             this.statusLabel.set_text(_("Waiting..."));
+        }
+
+        this._updateTooltip();
+    }
+
+    _updateTooltip() {
+        if (this.player && this.player.isPlaying()) {
+            let stationName = this.player.getChannel() ? this.player.getChannel().getName() : "";
+            
+            let artist = (this.player.getArtist && this.player.getArtist() !== "") ? this.player.getArtist() : "";
+            let title = (this.player.getTitle && this.player.getTitle() !== "") ? this.player.getTitle() : this.player.getTag();
+            
+            let tooltipText = stationName;
+            if (artist || title) {
+                let separator = (artist && title) ? " - " : "";
+                tooltipText += "\n" + artist + separator + (title ? title : "");
+            }
+            
+            this.set_applet_tooltip(tooltipText);
+        } else {
+            this.set_applet_tooltip(_("FM Radio"));
+        }
+
+        if (this._applet_tooltip && this._applet_tooltip._tooltip) {
+            let tooltipLabel = this._applet_tooltip._tooltip;
+            
+            tooltipLabel.clutter_text.line_wrap = true;
+            tooltipLabel.clutter_text.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+            
+            tooltipLabel.style = "max-width: 250px; text-align: center;";
         }
     }
 
@@ -263,10 +331,25 @@ class SomaFMApplet extends Applet.IconApplet {
                 isPlaying ? "media-playback-stop-symbolic" : "media-playback-start-symbolic"
             );
         }
+
+        this._updateTooltip();
     }
 
     on_applet_clicked(event) {
         this.menu.toggle();
+    }
+
+    // START/STOP (Middle click)
+    on_applet_middle_clicked(event) {
+        if (this.player) {
+            if (this.player.isPlaying()) {
+                this.player.stop();
+                this.setPlayingState(false);
+            } else {
+                this.player.play();
+                this.setPlayingState(true);
+            }
+        }
     }
 
     on_applet_removed_from_panel() {
@@ -277,5 +360,5 @@ class SomaFMApplet extends Applet.IconApplet {
 }
 
 function main(metadata, orientation, panel_height, instance_id) {
-    return new SomaFMApplet(metadata, orientation, panel_height, instance_id);
+    return new FMRadioApplet(metadata, orientation, panel_height, instance_id);
 }

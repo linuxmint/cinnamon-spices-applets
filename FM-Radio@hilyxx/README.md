@@ -1,6 +1,6 @@
 FM-Radio applet
 -------------------
-This applet is a fork of the Gnome Shell extension 'SomaFM internet radio' by TheWeirdDev. 
+This applet is a fork of the Gnome Shell extension 'SomaFM internet radio' by TheWeirdDev.<br/>
 Its goal is straightforward: enjoy internet radio stations completely hassle-free.
 
 #### Features
