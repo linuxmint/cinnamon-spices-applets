@@ -1,0 +1,11 @@
+{
+  "section1": {
+    "type": "section",
+    "description": "MySQL shortcuts"
+  },
+  "mySQLActions": {
+    "type": "switch",
+    "default": false,
+    "description": "Display MySQL controls"
+  }
+}
