@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- Monochrome symbolic icon: photo landscape with sun -->
+  <g fill="currentColor">
+    <!-- Image frame -->
+    <rect x="4" y="8" width="40" height="32" rx="3" ry="3"
+          fill="none" stroke="currentColor" stroke-width="3"/>
+    <!-- Sun circle -->
+    <circle cx="15" cy="19" r="5" fill="currentColor"/>
+    <!-- Mountain / landscape polygon -->
+    <polygon points="4,40 18,22 28,32 35,24 44,40" fill="currentColor"/>
+  </g>
+</svg>
