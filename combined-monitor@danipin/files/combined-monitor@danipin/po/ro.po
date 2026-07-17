@@ -1,0 +1,514 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: combined-monitor@danipin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-14 22:09+0300\n"
+"PO-Revision-Date: 2026-05-14 22:45+0300\n"
+"Last-Translator: \n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2);\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "Slot 1 (Standard)"
+
+msgid "Slot 2 (Empty)"
+msgstr "Slot 2 (Gol)"
+
+msgid "Slot 3 (Empty)"
+msgstr "Slot 3 (Gol)"
+
+msgid "Separator"
+msgstr "Separator"
+
+msgid "Space"
+msgstr "Spațiu"
+
+msgid "No Separator"
+msgstr "Fără separator"
+
+msgid "Symbols"
+msgstr "Simboluri"
+
+msgid "Icon-White"
+msgstr "Pictogramă-Albă"
+
+msgid "Icon-Dark"
+msgstr "Pictogramă-Întunecată"
+
+msgid "No Symbol (Text Label)"
+msgstr "Fără simbol (Etichetă text)"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "TEMP"
+msgstr "TEMP"
+
+msgid "RAM"
+msgstr "RAM"
+
+msgid "SWAP"
+msgstr "SWAP"
+
+msgid "Profile Management"
+msgstr "Management profiluri"
+
+msgid "Activate (Load)"
+msgstr "Activează (Încarcă)"
+
+msgid "Save Current Settings"
+msgstr "Salvează setările actuale"
+
+msgid "System Monitor"
+msgstr "Monitor sistem"
+
+msgid "Restart Cinnamon"
+msgstr "Repornire Cinnamon"
+
+msgid "Slot is empty - Ready to save"
+msgstr "Slotul este gol - Gata pentru salvare"
+
+msgid "N/A"
+msgstr "N/D"
+
+# settings-schema.json strings
+msgid "Decimal places for temperature"
+msgstr "Zecimale pentru temperatură"
+
+msgid ""
+"Number of decimal places to display for temperature. Set to 0 for whole "
+"numbers."
+msgstr ""
+"Numărul de zecimale de afișat pentru temperatură. Setați la 0 pentru numere "
+"întregi."
+
+msgid "decimal places"
+msgstr "zecimale"
+
+msgid "Profile Saved: %s"
+msgstr "Profil salvat: %s"
+
+msgid "Active: %s"
+msgstr "Activ: %s"
+
+# Page Titles
+msgid "CPU Temperature"
+msgstr "Temperatură CPU"
+
+msgid "Profiles"
+msgstr "Profiluri"
+
+msgid "General"
+msgstr "General"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "Ordinea metricilor"
+
+msgid "Display"
+msgstr "Afișaj"
+
+msgid "Thresholds"
+msgstr "Praguri"
+
+msgid "Colors"
+msgstr "Culori"
+
+msgid "Thresholds (in °C)"
+msgstr "Praguri (în °C)"
+
+msgid "Settings"
+msgstr "Setări"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "Profiluri (Sloturile 1 - 3)"
+
+msgid "Global"
+msgstr "Global"
+
+# CPU
+msgid "Show CPU"
+msgstr "Afișare CPU"
+
+msgid "Text for CPU"
+msgstr "Text pentru CPU"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr ""
+"Simbol/pictogramă personalizată pentru CPU. Lăsați gol pentru etichetă text."
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "Afișare semn procent (%) pentru CPU"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed without the percentage "
+"sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in "
+"the 'General' tab acts as a master switch."
+msgstr ""
+"Dacă este dezactivat, se afișează doar valoarea (ex. '45') fără semnul "
+"procentual (ex. '45%'). Opțiunea 'Afișare semn procent (%) (Comutator "
+"principal)' din fila 'General' acționează ca un comutator principal."
+
+msgid "Threshold LOW"
+msgstr "Prag minim"
+
+msgid "The LOW color is used below this value"
+msgstr "Culoarea MINIM este utilizată sub această valoare"
+
+msgid "Threshold MED"
+msgstr "Prag MEDIU"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "Culoarea MEDIE este utilizată între MINIM și MEDIU"
+
+msgid "Threshold HIGH"
+msgstr "Prag maxim"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "Culoarea MAXIM este utilizată între MEDIU și MAXIM"
+
+msgid "Enable color change for CPU"
+msgstr "Activare schimbare culoare pentru CPU"
+
+msgid "Color LOW"
+msgstr "Culoare MINIM"
+
+msgid "Color MED"
+msgstr "Culoare MEDIE"
+
+msgid "Color HIGH"
+msgstr "Culoare MAXIM"
+
+msgid "Color CRITICAL"
+msgstr "Culoare CRITICĂ"
+
+msgid "Used above the HIGH threshold"
+msgstr "Utilizat peste pragul MAXIM"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "Afișare temperatură"
+
+msgid ""
+"Enables the display of CPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Please refer to the "
+"instructions in the README.md."
+msgstr ""
+"Activează afișarea temperaturii CPU. **Important:** Pe multe sisteme, "
+"instalarea pachetului 'lm-sensors' și rularea 'sudo sensors-detect' este "
+"necesară pentru ca această funcție să funcționeze corect. Vă rugăm să "
+"consultați instrucțiunile din README.md."
+
+msgid "Show °C symbol"
+msgstr "Afișare simbol °C"
+
+msgid ""
+"Controls whether the Celsius symbol (°C or °F) should be displayed after the "
+"value."
+msgstr ""
+"Controlează dacă simbolul Celsius (°C sau °F) ar trebui afișat după valoare."
+
+msgid "Text for Temperature"
+msgstr "Text pentru temperatură"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr ""
+"Simbol/pictogramă personalizată pentru temperatură. Lăsați gol pentru "
+"etichetă text."
+
+msgid "Unit of Measurement"
+msgstr "Unitate de măsură"
+
+msgid "Celsius (°C)"
+msgstr "Celsius (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "Fahrenheit (°F)"
+
+msgid ""
+"Choose whether the temperature should be displayed in Celsius or Fahrenheit. "
+"Threshold values must be adjusted accordingly."
+msgstr ""
+"Alegeți dacă temperatura trebuie afișată în Celsius sau Fahrenheit. Valorile "
+"pragurilor trebuie ajustate în consecință."
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr ""
+"Culoarea MINIM este utilizată sub această valoare (se aplică pentru °C și °F)"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr ""
+"Culoarea MEDIE este utilizată între MINIM și MEDIU (se aplică pentru °C și "
+"°F)"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr ""
+"Culoarea MAXIM este utilizată între MEDIU și MAXIM (se aplică pentru °C și "
+"°F)"
+
+msgid "Enable color change for TEMP"
+msgstr "Activare schimbare culoare pentru TEMP"
+
+msgid "Color LOW (Green)"
+msgstr "Culoare MINIM (Verde)"
+
+msgid "Color MED (Orange)"
+msgstr "Culoare MEDIE (Portocaliu)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "Culoare MAXIM (Roșu-Portocaliu)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "Culoare CRITICĂ (Roșu)"
+
+# RAM
+msgid "Show RAM"
+msgstr "Afișare RAM"
+
+msgid "Text for RAM"
+msgstr "Text pentru RAM"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr ""
+"Simbol/pictogramă personalizată pentru RAM. Lăsați gol pentru etichetă text."
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "Afișare semn procent (%) pentru RAM"
+
+msgid "Display Mode"
+msgstr "Mod afișare"
+
+msgid "Percentage Usage (%)"
+msgstr "Utilizare procentuală (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "Memorie utilizată (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "Memorie liberă (MB/GB)"
+
+msgid ""
+"Choose whether percentage usage or used/free memory in MB/GB should be "
+"displayed."
+msgstr ""
+"Alegeți dacă se afișează utilizarea procentuală sau memoria utilizată/liberă "
+"în MB/GB."
+
+msgid "Enable color change for RAM"
+msgstr "Activare schimbare culoare pentru RAM"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "Afișare SWAP"
+
+msgid "Text for SWAP"
+msgstr "Text pentru SWAP"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr ""
+"Simbol/pictogramă personalizată pentru SWAP. Lăsați gol pentru etichetă text."
+
+msgid "Only show SWAP when used"
+msgstr "Afișare SWAP doar când este utilizat"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr ""
+"Dacă este activ, afișează SWAP doar când utilizarea este mai mare de 0%."
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "Afișare semn procent (%) pentru SWAP"
+
+msgid "Enable color change for SWAP"
+msgstr "Activare schimbare culoare pentru SWAP"
+
+msgid ""
+"If the value is less than or equal to the LOW threshold, the LOW color is "
+"used."
+msgstr ""
+"Dacă valoarea este mai mică sau egală cu pragul MINIM, se utilizează "
+"culoarea MINIM."
+
+msgid ""
+"If the value is greater than LOW and less than or equal to the MED "
+"threshold, the MED color is used."
+msgstr ""
+"Dacă valoarea este mai mare decât MINIM și mai mică sau egală cu pragul "
+"MEDIU, se utilizează culoarea MEDIE."
+
+msgid ""
+"If the value is greater than MED and less than or equal to the HIGH "
+"threshold, the HIGH color is used."
+msgstr ""
+"Dacă valoarea este mai mare decât MEDIU și mai mică sau egală cu pragul "
+"MAXIM, se utilizează culoarea MAXIM."
+
+# Order
+msgid "CPU Position"
+msgstr "Poziție CPU"
+
+msgid "Position 1 (Left)"
+msgstr "Poziția 1 (Stânga)"
+
+msgid "Position 2"
+msgstr "Poziția 2"
+
+msgid "Position 3"
+msgstr "Poziția 3"
+
+msgid "Position 4 (Right)"
+msgstr "Poziția 4 (Dreapta)"
+
+msgid ""
+"Defines the display position of CPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"Definește poziția de afișare a CPU. Poziția este schimbată automat cu "
+"metrica de la aceeași poziție."
+
+msgid "TEMP Position"
+msgstr "Poziție TEMP"
+
+msgid "RAM Position"
+msgstr "Poziție RAM"
+
+msgid "SWAP Position"
+msgstr "Poziție SWAP"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "Interval actualizare (ms)"
+
+msgid "Show separator between metrics"
+msgstr "Afișare separator între metrici"
+
+msgid "Separator Text"
+msgstr "Text separator"
+
+msgid "Separator Color"
+msgstr "Culoare separator"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "Afișare semn procent (%) (Comutator principal)"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed for all percentage "
+"displays without the percentage sign (e.g., '45%'). Individual switches for "
+"CPU/RAM/SWAP must also be active."
+msgstr ""
+"Dacă este dezactivat, se afișează doar valoarea (ex. '45') pentru toate "
+"afișajele procentuale fără semnul procentual (ex. '45%'). Întrerupătoarele "
+"individuale pentru CPU/RAM/SWAP trebuie de asemenea să fie active."
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "Durata mesajului de profil (secunde)"
+
+msgid ""
+"How long should the message ('Profile saved', 'Profile active') be displayed "
+"in the panel."
+msgstr ""
+"Cât timp ar trebui să fie afișat mesajul ('Profil salvat', 'Profil activ') "
+"în panou."
+
+msgid "Profile 1 Name"
+msgstr "Nume Profil 1"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "Introduceți un nume de profil personalizat în câmpul de text!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr ""
+"Faceți clic pe 'Activează' sau 'Salvează' pentru Profilul 1 în meniul pop-up."
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "Date salvate pentru Profilul 1 (intern)"
+
+msgid "Profile 2 Name"
+msgstr "Nume Profil 2"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr ""
+"Faceți clic pe 'Activează' sau 'Salvează' pentru Profilul 2 în meniul pop-up."
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "Date salvate pentru Profilul 2 (intern)"
+
+msgid "Profile 3 Name"
+msgstr "Nume Profil 3"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr ""
+"Faceți clic pe 'Activează' sau 'Salvează' pentru Profilul 3 în meniul pop-up."
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "Date salvate pentru Profilul 3 (intern)"
+
+# metadata.json strings
+msgid "Combined Monitor"
+msgstr "Monitor Combinat"
+
+msgid ""
+"A compact and comprehensive system monitor for Cinnamon. Displays CPU, RAM, "
+"and SWAP usage in a single panel element. Configure colors, thresholds, "
+"separators, and the order of metrics. Supports displaying text, theme icons, "
+"or custom symbols for perfect integration into your panel."
+msgstr ""
+"Un monitor de sistem compact și cuprinzător pentru Cinnamon. Afișează "
+"utilizarea CPU, RAM și SWAP într-un singur element de panou. Configurați "
+"culorile, pragurile, separatoarele și ordinea metricilor. Suportă afișarea "
+"textului, a pictogramelor tematice sau a simbolurilor personalizate pentru o "
+"integrare perfectă în panoul dvs."
+
+# Page Titles
+msgid "GPU Temperature"
+msgstr "Temperatură GPU"
+
+# GPU
+msgid "Show GPU Temperature"
+msgstr "Afișare temperatură GPU"
+
+msgid ""
+"Enables the display of GPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Integrated GPUs (iGPUs) may "
+"report their temperature as part of the CPU temperature."
+msgstr ""
+"Activează afișarea temperaturii GPU. **Important:** Pe multe sisteme, "
+"instalarea pachetului 'lm-sensors' și rularea 'sudo sensors-detect' este "
+"necesară pentru ca această funcție să funcționeze corect. GPU-urile "
+"integrate (iGPU-urile) pot raporta temperatura lor ca parte a temperaturii "
+"CPU."
+
+msgid "Text for GPU"
+msgstr "Text pentru GPU"
+
+msgid "Custom symbol/icon for GPU. Lăsați gol pentru etichetă text."
+msgstr ""
+"Simbol/pictogramă personalizată pentru GPU. Lăsați gol pentru etichetă text."
+
+msgid "Decimal places for GPU temperature"
+msgstr "Zecimale pentru temperatura GPU"
+
+msgid "Enable color change for GPU"
+msgstr "Activare schimbare culoare pentru GPU"
+
+# Order
+msgid "GPU Position"
+msgstr "Poziție GPU"
+
+msgid "Position 5"
+msgstr "Poziția 5"
+
+msgid ""
+"Defines the display position of GPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"Definește poziția de afișare a GPU. Poziția este schimbată automat cu "
+"metrica de la aceeași poziție."
