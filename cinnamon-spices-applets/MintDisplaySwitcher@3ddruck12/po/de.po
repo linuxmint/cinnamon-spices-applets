@@ -1,0 +1,94 @@
+# German translation for MintDisplaySwitcher
+# Copyright (C) 2026 3ddruck12
+# This file is distributed under the same license as the MintDisplaySwitcher package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MintDisplaySwitcher@3ddruck12\n"
+"Report-Msgid-Bugs-To: https://github.com/3ddruck12/MintDisplaySwitcher/issues\n"
+"POT-Creation-Date: 2026-05-31\n"
+"PO-Revision-Date: 2026-05-31\n"
+"Last-Translator: 3ddruck12\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Project"
+msgstr "Projizieren"
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid "Laptop only"
+msgstr "Nur Laptop-Bildschirm"
+
+msgid "External only"
+msgstr "Nur externer Bildschirm"
+
+msgid "Mirror"
+msgstr "Spiegeln"
+
+msgid "Extend"
+msgstr "Erweitern"
+
+msgid "Display Switcher — %s"
+msgstr "Display Switcher — %s"
+
+msgid "Mode \"%s\" is not available right now"
+msgstr "Modus \"%s\" ist gerade nicht verfügbar"
+
+msgid "%s activated"
+msgstr "%s aktiviert"
+
+msgid "Wayland: please use Display Settings to switch modes"
+msgstr "Wayland: Bitte Anzeigeeinstellungen verwenden"
+
+msgid "The shortcut %s is already used by the system. To use it here, go to System Settings → Keyboard → Shortcuts → Hardware → \"Toggle displays\" and remove %s there."
+msgstr "Das Tastenkürzel %s wird bereits vom System verwendet. Um es hier zu nutzen, gehe zu Systemeinstellungen → Tastatur → Tastenkürzel → Hardware → „Anzeigen wechseln" und entferne %s dort."
+
+msgid "Back to display modes"
+msgstr "Zurück zu Display-Modi"
+
+msgid "Auto-apply on connect"
+msgstr "Letzten Modus beim Anstecken anwenden"
+
+msgid "Revert to laptop-only on disconnect"
+msgstr "Beim Trennen auf Nur-Laptop umschalten"
+
+msgid "Extend position"
+msgstr "Position beim Erweitern"
+
+msgid "External right of laptop"
+msgstr "Extern rechts vom Laptop"
+
+msgid "External left of laptop"
+msgstr "Extern links vom Laptop"
+
+msgid "External above laptop"
+msgstr "Extern über dem Laptop"
+
+msgid "External below laptop"
+msgstr "Extern unter dem Laptop"
+
+msgid "Shortcuts"
+msgstr "Tastenkürzel"
+
+msgid "Open menu"
+msgstr "Menü öffnen"
+
+msgid "not set"
+msgstr "nicht gesetzt"
+
+msgid "Change shortcuts…"
+msgstr "Tastenkürzel ändern…"
+
+msgid "External output: %s"
+msgstr "Externer Anschluss: %s"
+
+msgid "Set preferred external output (e.g. HDMI-1) via the Change shortcuts dialog"
+msgstr "Bevorzugten externen Anschluss (z. B. HDMI-1) im Dialog „Tastenkürzel ändern" setzen"
+
+msgid "Configure display…"
+msgstr "Anzeige konfigurieren…"
