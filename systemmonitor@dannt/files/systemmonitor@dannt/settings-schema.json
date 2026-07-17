@@ -1,0 +1,217 @@
+{
+    "layout":{
+        "type": "layout",
+        "pages": [
+            "General_page",
+            "Cpu_usage",
+            "Gpu_usage",
+            "Ram_page",
+            "SWAP_page",
+            "INFO_page"
+        ],
+        "General_page":{
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "general_settings"
+            ]
+        },
+        "Cpu_usage": {
+            "type": "page",
+            "title": "Configuracion de CPU",
+            "sections": [
+                "cpu_usage"
+            ]
+        },
+        "Gpu_usage": {
+            "type": "page",
+            "title": "Configuracion de GPU",
+            "sections": [
+                "gpu_usage"
+            ]
+        },
+        "Ram_page":{
+            "type": "page",
+            "title": "Configuracion de RAM",
+            "sections": [
+                "ram_setings"
+            ]
+        },
+        "SWAP_page":{
+            "type": "page",
+            "title": "Configuracion de SWAP",
+            "sections":[
+                "swap_setings"
+            ]
+        },
+        "INFO_page": {
+            "type": "page",
+            "title": "info",
+            "sections": [
+                "info_page"
+            ]
+        },
+        "general_settings": {
+            "type": "section",
+            "title": "Configuracion general",
+            "keys": [
+                "refresh-interval"
+            ]
+        },
+        "cpu_usage": {
+            "type": "section",
+            "title":"Configuracion de CPU",
+            "keys": [
+                "show-cpu",
+                "cpu-size",
+                "cpu-color"
+            ]
+        },
+        "gpu_usage": {
+            "type": "section",
+            "title":"Configuracion de GPU",
+            "keys": [
+                "show-gpu",
+                "gpu-color",
+                "gpu-size",
+                "show-vram",
+                "vram-color",
+                "vram-size"
+            ]
+        },
+        "ram_setings":{
+            "type": "section",
+            "title": "Configuracion de RAM",
+            "keys":[
+                "show-ram",
+                "ram-font-size",
+                "ram-color"
+            ]
+        },
+        "swap_setings": {
+            "type": "section",
+            "title": "Configuracion de SWAP",
+            "keys":[
+                "show-swap",
+                "swap-font-size",
+                "swap-color"
+            ]
+        },
+        "info_page": {
+            "type": "section",
+            "title": "Informacion del applet",
+            "keys": [
+                "applet-info"
+            ]
+        }
+    },
+    "refresh-interval": {
+        "type": "spinbutton",
+        "default": 500,
+        "min": 50,
+        "max": 10000,
+        "step": 50,
+        "units": "ms",
+        "description": "Intervalo de actualizacion"
+    },
+    "applet-info": {
+        "type": "label",
+        "description": "Este applet esta aun en formato beta 2.0-beta, la compatibilidad para mostrar el uso de GPU intel e Nvidia(no funcional con Nvidia) aun es inconcluso e incompleto si quiere ver el codigo fuente valla a mi github \n\nhttps://github.com/RyioTheRock/applet-monitor-de-sistema"
+    },
+    "show-cpu": {
+        "type": "switch",
+        "default": true,
+        "description": "Mostrar uso del CPU"
+    },
+    "cpu-color": {
+        "type": "colorchooser",
+        "default": "#ffffff",
+        "description": "Cambiar color del texto de CPU"
+    },
+    "cpu-size": {
+        "type": "spinbutton",
+        "default": 15,
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "units": "px",
+        "description": "Cambiar tamaño del texto de CPU"
+    },
+    "show-gpu": {
+        "type": "switch",
+        "default": true,
+        "description": "Mostrar uso del GPU"
+    },
+    "gpu-color": {
+        "type": "colorchooser",
+        "default": "#ffffff",
+        "description": "Cambiar color del texto de GPU"
+    },
+    "gpu-size": {
+        "type": "spinbutton",
+        "default": 15,
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "units": "px",
+        "description": "Cambiar tamaño del texto de GPU"
+    },
+    "show-vram": {
+        "type": "switch",
+        "default": true,
+        "description": "Mostrar uso de la VRAM"
+    },
+    "vram-color": {
+        "type": "colorchooser",
+        "default": "#ffffff",
+        "description": "Cambiar color del texto de VRAM"
+    },
+    "vram-size": {
+        "type": "spinbutton",
+        "default": 15,
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "units": "px",
+        "description": "Cambiar tamaño del texto de VRAM"
+    },
+    "show-ram": {
+        "type": "switch",
+        "default": true, 
+        "description": "Mostrar uso de la RAM"
+    },
+    "show-swap":{
+        "type": "switch",
+        "default": true,
+        "description": "Mostrar uso de SWAP"
+    },
+    "ram-color": {
+        "type": "colorchooser",
+        "default": "#ffffff",
+        "description": "Cambiar color del texto de RAM"
+    },
+    "ram-font-size": {
+        "type": "spinbutton",
+        "default": 15,
+        "min": 5,
+        "max":40,
+        "step": 1,
+        "units": "px",
+        "description": "cambiar tamaño del fuente de RAM"
+    },
+    "swap-color":{
+        "type":"colorchooser",
+        "default": "#ffffff",
+        "description": "Cambiar color del texto de SWAP"
+    },
+    "swap-font-size":{
+        "type":"spinbutton",
+        "default": 15,
+        "max": 40,
+        "min": 5,
+        "step": 1,
+        "units": "px",
+        "description": "cambiar tamaño de SWAP"
+
+    }
+}
