@@ -8,8 +8,6 @@
 // Supported range: 1318..1500 AH (1900-04-30 .. 2077-11-16 CE).
 // Index 0 corresponds to 1 Muharram 1318 AH.
 
-const GLib = imports.gi.GLib;
-
 const MONTH_STARTS = [
     15140, 15169, 15199, 15228, 15258, 15287, 15317, 15347, 15377, 15406, 15436, 15465,
     15494, 15524, 15553, 15582, 15612, 15641, 15671, 15701, 15731, 15760, 15790, 15820,
@@ -306,8 +304,8 @@ var UmmAlQura = class UmmAlQura {
         return (MONTH_NAMES[lang] || MONTH_NAMES.en)[month - 1] || '';
     }
 
-    static getDefaultLang() {
-        let langs = GLib.get_language_names();
+    static getDefaultLang(langs) {
+        if (!langs || !langs.length) return 'en';
         for (let l of langs) {
             if (l.startsWith('ar')) return 'ar';
             if (l.startsWith('ru')) return 'ru';
@@ -325,3 +323,8 @@ var UmmAlQura = class UmmAlQura {
 
 // Keep the old name working for the applet.
 var Hijri = UmmAlQura;
+
+// CommonJS / browser export (ignored by Cinnamon's GJS require).
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { UmmAlQura, Hijri };
+}

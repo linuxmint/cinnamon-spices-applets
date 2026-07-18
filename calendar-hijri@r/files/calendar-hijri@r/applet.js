@@ -14,7 +14,12 @@ const CinnamonDesktop = imports.gi.CinnamonDesktop;
 const Main = imports.ui.main;
 const Separator = imports.ui.separator;
 const _HijriMod = require('./hijri');
-const Hijri = _HijriMod.Hijri;
+// Adapter: bind the system locale source (GLib) to the core library so the
+// applet needs no runtime-specific fork of the conversion code.
+const Hijri = Object.create(_HijriMod.UmmAlQura);
+Hijri.getDefaultLang = function () {
+    return _HijriMod.UmmAlQura.getDefaultLang(GLib.get_language_names());
+};
 
 const DAY_FORMAT = CinnamonDesktop.WallClock.lctime_format("cinnamon", "%A");
 const DATE_FORMAT_SHORT = CinnamonDesktop.WallClock.lctime_format("cinnamon", _("%B %-e, %Y"));
