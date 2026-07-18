@@ -41,13 +41,19 @@ month-start table:
   observation or an internet connection
 - Example: 1 Muharram 1446 AH = July 7, 2024 CE
 
+The conversion core is maintained as a standalone library, reused here
+unchanged (only a small GLib adapter is inlined in `applet.js`):
+
+- Library: **hijri** — <https://codeberg.org/sporteka/hijri>
+- Install from npm/Codeberg: `npm install git+https://codeberg.org/sporteka/hijri.git`
+
 ## Files
 
 | File | Description |
 |------|-------------|
-| `applet.js` | Main applet logic |
+| `applet.js` | Main applet logic (includes the GLib adapter for `hijri.js`) |
 | `calendar.js` | Calendar widget (original) |
 | `eventView.js` | Events management (original) |
-| `hijri.js` | Umm al-Qura conversion (RJD month-start table) |
+| `hijri.js` | Umm al-Qura conversion (RJD month-start table) — from the [`hijri`](https://codeberg.org/sporteka/hijri) library |
 | `settings-schema.json` | Settings definitions |
 | `metadata.json` | Applet metadata |
