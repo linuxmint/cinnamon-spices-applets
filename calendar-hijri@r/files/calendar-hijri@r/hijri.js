@@ -1,10 +1,9 @@
 // Umm al-Qura calendar — Reduced Julian Day (RJD) month-start lookup table.
 //
-// The official lunar calendar of Saudi Arabia (KACST / Umm al-Qura). This
+// The civil lunar calendar of Saudi Arabia (KACST / Umm al-Qura). This
 // implementation stores, for every Hijri month, the RJD (Reduced Julian Day =
 // JDN - 2400000) of its first day, and resolves a Gregorian date by a binary
-// search over that table. Results are identical to the .NET UmAlQuraCalendar
-// lookup table.
+// search over that table.
 //
 // Supported range: 1318..1500 AH (1900-04-30 .. 2077-11-16 CE).
 // Index 0 corresponds to 1 Muharram 1318 AH.
@@ -267,9 +266,8 @@ var UmmAlQura = class UmmAlQura {
         let hy = years + 1;
         let monthH = monthsTotal - years * 12 + 1;
         let dayH = rjd - MONTH_STARTS[idx] + 1;
-        // Clamp to the last supported day (mirrors the .NET table range:
-        // 1500-12-30 AH / 2077-11-16 CE). Dates past the table end report
-        // the final valid month and day.
+        // Clamp to the last supported day (1500-12-30 AH / 2077-11-16 CE).
+        // Dates past the table end report the final valid month and day.
         let maxIdx = MONTH_STARTS.length - 1;
         if (idx >= maxIdx) {
             let lastDay = 30;
