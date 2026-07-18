@@ -1,0 +1,95 @@
+{
+    "cpu-label": {
+        "type": "entry",
+        "default": "CPU:",
+        "description": "CPU label",
+        "tooltip": "Text shown before the CPU usage percentage."
+    },
+    "temp-label": {
+        "type": "entry",
+        "default": "Temp:",
+        "description": "Temperature label",
+        "tooltip": "Text shown before the temperature value. Leave it empty to show only the value."
+    },
+    "update-interval": {
+        "type": "spinbutton",
+        "default": 2000,
+        "min": 1000,
+        "max": 30000,
+        "step": 100,
+        "units": "milliseconds",
+        "description": "Update interval"
+    },
+    "use-fahrenheit": {
+        "type": "switch",
+        "default": false,
+        "description": "Show temperature in Fahrenheit"
+    },
+    "show-decimals": {
+        "type": "switch",
+        "default": false,
+        "description": "Show temperature decimals"
+    },
+    "show-unit-letter": {
+        "type": "switch",
+        "default": true,
+        "description": "Show C/F unit letter"
+    },
+    "single-line-layout": {
+        "type": "switch",
+        "default": false,
+        "description": "Use the single-line layout",
+        "tooltip": "Show CPU usage and temperature on one line instead of two lines."
+    },
+    "separator": {
+        "type": "entry",
+        "default": " ",
+        "description": "Single-line separator",
+        "tooltip": "Text between CPU usage and temperature in single-line layout.",
+        "dependency": "single-line-layout"
+    },
+    "text-align": {
+        "type": "combobox",
+        "default": "left",
+        "description": "Text alignment",
+        "options": {
+            "Left": "left",
+            "Center": "center",
+            "Right": "right"
+        }
+    },
+    "font-size": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 50,
+        "max": 200,
+        "step": 5,
+        "units": "%",
+        "description": "Font size"
+    },
+    "change-color": {
+        "type": "switch",
+        "default": true,
+        "description": "Change color when the temperature becomes High or Critical",
+        "tooltip": "The applet background turns orange at the high threshold and red at the critical threshold."
+    },
+    "only-colors": {
+        "type": "switch",
+        "default": false,
+        "dependency": "change-color",
+        "description": "Only use colors to alert me",
+        "tooltip": "Do not add High/Critical text to the panel label."
+    },
+    "high-color": {
+        "type": "colorchooser",
+        "default": "DarkOrange",
+        "description": "High temperature color",
+        "dependency": "change-color"
+    },
+    "critical-color": {
+        "type": "colorchooser",
+        "default": "FireBrick",
+        "description": "Critical temperature color",
+        "dependency": "change-color"
+    }
+}
