@@ -1,0 +1,999 @@
+# Turkish translation for crypto-tracker@danipin
+# Copyright (C) 2025
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin 1.1.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 22:08+0200\n"
+"PO-Revision-Date: 2025-01-24 22:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. Row 2: Total Value
+#: applet.js:442 applet.js:445 applet.js:789 portfolio.js:699 utils.js:106
+msgid "Loading..."
+msgstr "Yükleniyor..."
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Price Alarm: %s"
+msgstr "Fiyat Alarmı: "
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Target %s reached! Price: %s"
+msgstr " ulaşıldı! Fiyat: "
+
+#: applet.js:742 alarm.js:336
+msgid "risen"
+msgstr "yükseldi"
+
+#: applet.js:742 alarm.js:336
+msgid "fallen"
+msgstr "düştü"
+
+#: applet.js:743 alarm.js:337
+#, fuzzy, javascript-format
+msgid "Volatility Alarm: %s"
+msgstr "Volatilite Alarmı: "
+
+#: applet.js:743 alarm.js:337
+#, javascript-format
+msgid "%s has %s by %s%%"
+msgstr ""
+
+#: applet.js:857
+msgid "Colors reset to default values."
+msgstr "Renkler varsayılan değerlere sıfırlandı."
+
+#: applet.js:917
+msgid "List updated! Please reopen settings."
+msgstr "Liste güncellendi! Lütfen ayarları yeniden açın."
+
+#: applet.js:1468
+msgid "NEW ALL TIME HIGH 🚀"
+msgstr "YENİ TÜM ZAMANLARIN EN YÜKSEĞİ 🚀"
+
+#: applet.js:1977
+msgid "API Limit Reached"
+msgstr "API Limitine Ulaşıldı"
+
+#: applet.js:1977
+#, fuzzy, javascript-format
+msgid "You have used 100% of your monthly limit (10k)."
+msgstr "Aylık limitinizin (10k) %100'ünü kullandınız."
+
+#: applet.js:1984
+msgid "Power Saving Enabled"
+msgstr "Güç Tasarrufu Etkin"
+
+#: applet.js:1984
+msgid "Interval set to 5 min to avoid API ban."
+msgstr "API yasağını önlemek için aralık 5 dakikaya ayarlandı."
+
+#: applet.js:1987
+msgid "API Limit Warning"
+msgstr "API Limiti Uyarısı"
+
+#: applet.js:1987
+#, fuzzy, javascript-format
+msgid "You have reached 90% of your limit."
+msgstr "Limitinizin %90'ına ulaştınız."
+
+#: applet.js:1990
+msgid "API Limit Info"
+msgstr "API Limit Bilgisi"
+
+#: applet.js:1990
+#, fuzzy, javascript-format
+msgid "You have reached 80% of your limit."
+msgstr "Limitinizin %80'ine ulaştınız."
+
+#. Set base texts
+#: footer.js:94
+msgid "API: Active"
+msgstr "API: Aktif"
+
+#: footer.js:94
+msgid "Basic Mode"
+msgstr "Temel Mod"
+
+#: footer.js:98
+msgid "Source: CoinGecko"
+msgstr "Kaynak: CoinGecko"
+
+#: footer.js:101
+msgid "Get Free API Key"
+msgstr "Ücretsiz API Anahtarı Al"
+
+#: footer.js:111
+#, fuzzy, javascript-format
+msgid "Month: %s"
+msgstr "Ay: "
+
+#: footer.js:112
+#, javascript-format
+msgid "Ø: %s"
+msgstr ""
+
+#: footer.js:115
+#, fuzzy, javascript-format
+msgid "Alarms: %s"
+msgstr "Alarmlar: "
+
+#: header.js:117 header.js:275
+msgid "Portfolio Tracker"
+msgstr "Portföy Takibi"
+
+#: header.js:119 header.js:276
+msgid "Alarm Management"
+msgstr "Alarm Yönetimi"
+
+#: header.js:121 header.js:278
+msgid "API Usage & Stats"
+msgstr "API Kullanımı ve İstatistikler"
+
+#: header.js:123
+msgid "Support Development"
+msgstr "Geliştirmeyi Destekle"
+
+# Strings from JS files
+#. IMPORTANT: For the drawing loop we need the pure text without markup!
+#: header.js:128 header.js:274 header.js:641
+msgid "Market Dashboard"
+msgstr "Piyasa Panosu"
+
+#: header.js:130 header.js:642
+msgid "24H Price Change [%]"
+msgstr "24S Fiyat Değişimi [%]"
+
+#: header.js:280
+msgid "Support"
+msgstr "Destek"
+
+#: header.js:284
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: alarm.js:242
+msgid "Alarm Archive Full"
+msgstr "Alarm Arşivi Dolu"
+
+#: alarm.js:242
+#, fuzzy, javascript-format
+msgid "Oldest alarm for %s was deleted."
+msgstr " için en eski alarm "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Background Alarm: %s"
+msgstr "Arka Plan Alarmı: "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Target price %s reached! Current: %s"
+msgstr " ulaşıldı! Güncel: "
+
+#: alarm.js:469
+msgid "Alarm Settings"
+msgstr "Alarm Ayarları"
+
+#: alarm.js:573
+#, fuzzy, javascript-format
+msgid "Target Price (%s):"
+msgstr "Hedef Fiyat ("
+
+#: alarm.js:574
+msgid "Change (%):"
+msgstr "Değişim (%):"
+
+#: alarm.js:577
+msgid "Press ENTER to save."
+msgstr "Kaydetmek için ENTER'a basın."
+
+#: alarm.js:643 alarm.js:652
+msgid "Search alarms..."
+msgstr "Alarmları ara..."
+
+#: alarm.js:739 portfolio.js:1262
+msgid "No matches."
+msgstr "Eşleşme yok."
+
+#: alarm.js:739
+msgid "No alarms here yet."
+msgstr "Henüz burada alarm yok."
+
+#: alarm.js:856
+#, fuzzy, javascript-format
+msgid "Target: %s"
+msgstr "Hedef:"
+
+#: alarm.js:857
+#, fuzzy, javascript-format
+msgid "Vol: %s%%"
+msgstr "24s Hacim:"
+
+#: alarm.js:860
+#, fuzzy, javascript-format
+msgid "Current: %s"
+msgstr "Güncel: "
+
+#: alarm.js:865
+#, fuzzy, javascript-format
+msgid "Created: %s"
+msgstr "Oluşturuldu: "
+
+#. Price Input
+#: alarm.js:1023
+msgid "Target:"
+msgstr "Hedef:"
+
+#. Vol Input
+#: alarm.js:1044
+msgid "Vol %:"
+msgstr "Hacim %:"
+
+#: alarm.js:1058
+msgid "ENTER to save"
+msgstr "Kaydetmek için ENTER"
+
+#. Sort options
+#: alarm.js:1102 portfolio.js:1008
+msgid "Date"
+msgstr "Tarih"
+
+#: alarm.js:1103
+msgid "Name"
+msgstr "İsim"
+
+#: alarm.js:1166 alarm.js:1218
+msgid "Delete all"
+msgstr "Hepsini sil"
+
+#: alarm.js:1174 alarm.js:1182 alarm.js:1190 alarm.js:1213 portfolio.js:1212
+#: portfolio.js:1219
+msgid "Sure?"
+msgstr "Emin misiniz?"
+
+#: alarm.js:1230
+#, fuzzy, javascript-format
+msgid "Alarms %s of %s"
+msgstr "Alarmlar "
+
+#: donate.js:35
+msgid ""
+"If you like this applet, you can support\n"
+"its development with a donation."
+msgstr ""
+"Bu uygulamayı beğendiyseniz, geliştirilmesini\n"
+"bir bağışla destekleyebilirsiniz."
+
+#: donate.js:181
+msgid "Address:"
+msgstr "Adres:"
+
+#: donate.js:212
+msgid "Copied"
+msgstr "Kopyalandı"
+
+#: donate.js:212
+#, fuzzy, javascript-format
+msgid "%s address copied."
+msgstr " adresi kopyalandı."
+
+#: search.js:33
+msgid "Search..."
+msgstr "Ara..."
+
+#: search.js:172
+msgid "No results..."
+msgstr "Sonuç yok..."
+
+#: portfolio.js:316
+msgid "Converting..."
+msgstr "Dönüştürülüyor..."
+
+#: portfolio.js:365
+msgid "Error"
+msgstr "Hata"
+
+#: portfolio.js:365
+msgid "Currency conversion failed."
+msgstr "Para birimi dönüştürme başarısız."
+
+#: portfolio.js:603
+msgid "Total Balance"
+msgstr "Toplam Bakiye"
+
+#. FIX: expand: false for label, insert spacer instead
+#: portfolio.js:720
+msgid "Select Currency"
+msgstr "Para Birimi Seç"
+
+#: portfolio.js:790 portfolio.js:798
+msgid "Filter portfolio..."
+msgstr "Portföyü filtrele..."
+
+#: portfolio.js:1006
+msgid "Amount"
+msgstr "Miktar"
+
+#: portfolio.js:1007
+msgid "Buy Price"
+msgstr "Alış Fiyatı"
+
+#. Add TX Button
+#: portfolio.js:1199
+msgid "+ Transaction"
+msgstr "+ İşlem"
+
+#. Delete Coin Button
+#: portfolio.js:1208 portfolio.js:1224
+msgid "Remove Position"
+msgstr "Pozisyonu Kaldır"
+
+#: portfolio.js:1262
+msgid "No positions here yet."
+msgstr "Henüz burada pozisyon yok."
+
+#: portfolio.js:1288
+msgid "Add Coin"
+msgstr "Coin Ekle"
+
+#: portfolio.js:1305 portfolio.js:1311
+msgid "Search (e.g. Bitcoin)..."
+msgstr "Ara (örn. Bitcoin)..."
+
+#: portfolio.js:1398
+msgid "No results"
+msgstr "Sonuç yok"
+
+#: seasonal.js:80
+msgid "HAPPY HALLOWEEN !"
+msgstr "MUTLU CADILAR BAYRAMI !"
+
+#: seasonal.js:378
+msgid "MERRY CHRISTMAS 🎄"
+msgstr "MUTLU NOELLER 🎄"
+
+#. Straighten up
+#: seasonal.js:486
+msgid "HAPPY BITCOIN PIZZA DAY 🍕"
+msgstr "MUTLU BITCOIN PIZZA GÜNÜ 🍕"
+
+#: charts.js:181
+msgid "?"
+msgstr ""
+
+#: charts.js:228
+msgid "Rank:"
+msgstr "Sıra:"
+
+#: charts.js:228
+msgid "M.Cap:"
+msgstr "Piyasa Değeri:"
+
+#: charts.js:229
+msgid "24h High:"
+msgstr "24s Yüksek:"
+
+#: charts.js:229
+msgid "24h Vol:"
+msgstr "24s Hacim:"
+
+#: charts.js:230
+msgid "24h Low:"
+msgstr "24s Düşük:"
+
+#: charts.js:230
+msgid "ATH:"
+msgstr "ATH:"
+
+#: utils.js:348
+msgid " (Rate Limit)"
+msgstr " (Hız Sınırı)"
+
+#: utils.js:349
+msgid " (API Key invalid)"
+msgstr " (API Anahtarı geçersiz)"
+
+#: utils.js:350
+msgid " (Network)"
+msgstr " (Ağ)"
+
+#: utils.js:352
+msgid "Crypto-Tracker Error"
+msgstr "Crypto-Tracker Hatası"
+
+#: utils.js:352
+#, fuzzy, javascript-format
+msgid "An error was intercepted%s. See log."
+msgstr "Bir hata yakalandı"
+
+#: api.js:67
+msgid "API successfully activated."
+msgstr "API başarıyla etkinleştirildi."
+
+#: api.js:73
+msgid "No internet connection"
+msgstr "İnternet bağlantısı yok"
+
+#: api.js:75
+msgid "Key invalid"
+msgstr "Anahtar geçersiz"
+
+#: api.js:77
+msgid "Key blocked"
+msgstr "Anahtar engellendi"
+
+#: api.js:79
+msgid "Limit reached"
+msgstr "Limite ulaşıldı"
+
+#: api.js:81
+msgid "Server error"
+msgstr "Sunucu hatası"
+
+#: api.js:85
+#, fuzzy, javascript-format
+msgid "API Error: %s"
+msgstr "API Hatası: "
+
+#: api.js:90
+msgid "System error"
+msgstr "Sistem hatası"
+
+#: api.js:131
+msgid "System Diagnosis"
+msgstr "Sistem Tanısı"
+
+#: api.js:143
+msgid "API Connection: Active & Valid"
+msgstr "API Bağlantısı: Aktif ve Geçerli"
+
+#: api.js:145
+msgid "Not configured"
+msgstr "Yapılandırılmadı"
+
+#: api.js:146
+#, fuzzy, javascript-format
+msgid "API Status: %s"
+msgstr "API Durumu: "
+
+#: api.js:154
+#, fuzzy, javascript-format
+msgid "Quota critical: %s%% used"
+msgstr "Kota kritik: "
+
+#: api.js:156
+#, fuzzy, javascript-format
+msgid "Quota high: %s%% used"
+msgstr "Kota yüksek: "
+
+#: api.js:158
+#, fuzzy, javascript-format
+msgid "Quota: %s%% (In the green)"
+msgstr "(Yeşil alanda)"
+
+#: api.js:165
+#, fuzzy, javascript-format
+msgid "Period: %s days left in month."
+msgstr " gün kaldı (bu ay)."
+
+#: api.js:171
+#, fuzzy, javascript-format
+msgid "Tip: Interval (%ss) is aggressive for Free Tier."
+msgstr "s) Ücretsiz Katman için agresif."
+
+#: api.js:178
+msgid "Note: Error log exists."
+msgstr "Not: Hata günlüğü mevcut."
+
+#: api.js:180
+msgid "System: No crashes logged."
+msgstr "Sistem: Çökme kaydedilmedi."
+
+#: api.js:202 api.js:397
+msgid "Free API (Basic)"
+msgstr "Ücretsiz API (Temel)"
+
+#: api.js:203 api.js:210
+msgid "Today:"
+msgstr "Bugün:"
+
+#: api.js:204 api.js:211
+msgid "Month:"
+msgstr "Ay:"
+
+#: api.js:205 api.js:212
+msgid "Ø per Day:"
+msgstr "Günlük Ø:"
+
+#: api.js:209 api.js:398
+msgid "Key API (Pro)"
+msgstr "Anahtar API (Pro)"
+
+#: api.js:224
+msgid "Distribution (Key Calls)"
+msgstr "Dağılım (Anahtar Çağrıları)"
+
+#: api.js:239
+msgid "Charts"
+msgstr "Grafikler"
+
+#. Blue
+#: api.js:240
+msgid "Details"
+msgstr "Detaylar"
+
+#. Purple
+#: api.js:241
+msgid "Search"
+msgstr "Arama"
+
+#. Yellow
+#: api.js:242
+msgid "Portfolio"
+msgstr "Portföy"
+
+#. Cyan
+#: api.js:243
+msgid "Alarms"
+msgstr "Alarmlar"
+
+#. Red/Pink
+#: api.js:244
+msgid "Updates"
+msgstr "Güncellemeler"
+
+#: api.js:294
+msgid "History (Last 14 Days)"
+msgstr "Geçmiş (Son 14 Gün)"
+
+#: api.js:417
+#, fuzzy, javascript-format
+msgid "Error Log (%s KB)"
+msgstr "Hata Günlüğü ("
+
+#: api.js:420
+msgid "The system prevented and logged crashes."
+msgstr "Sistem çökmeleri önledi ve kaydetti."
+
+#: api.js:426
+msgid "Delete"
+msgstr "Sil"
+
+#: api.js:439
+msgid "Dismiss"
+msgstr "Kapat"
+
+#, fuzzy
+#~ msgid "Ø:"
+#~ msgstr "Ø: "
+
+#~ msgid " was deleted."
+#~ msgstr " silindi."
+
+#~ msgid "Target price "
+#~ msgstr "Hedef fiyat "
+
+#, fuzzy
+#~ msgid " has "
+#~ msgstr " "
+
+#~ msgid " by "
+#~ msgstr " oranında "
+
+#~ msgid " of "
+#~ msgstr " / "
+
+#~ msgid ". See log."
+#~ msgstr ". Günlüğe bakın."
+
+#~ msgid "% used"
+#~ msgstr "% kullanıldı"
+
+#~ msgid "Quota: "
+#~ msgstr "Kota: "
+
+#~ msgid "Period: "
+#~ msgstr "Dönem: "
+
+#~ msgid "Tip: Interval ("
+#~ msgstr "İpucu: Aralık ("
+
+#~ msgid " KB)"
+#~ msgstr " KB)"
+
+#~ msgid "Crypto Tracker"
+#~ msgstr "Kripto Takipçisi"
+
+#~ msgid ""
+#~ "A comprehensive cryptocurrency dashboard providing real-time market data, "
+#~ "portfolio management, interactive charts, and advanced alerting "
+#~ "capabilities, enhanced with seasonal visual elements."
+#~ msgstr ""
+#~ "Gerçek zamanlı piyasa verileri, portföy yönetimi, etkileşimli grafikler "
+#~ "ve gelişmiş uyarı özellikleri sunan, mevsimsel görsel öğelerle "
+#~ "geliştirilmiş kapsamlı bir kripto para birimi panosu."
+
+#~ msgid "Metric 1 (Primary)"
+#~ msgstr "Metrik 1 (Birincil)"
+
+#~ msgid "Metric 2"
+#~ msgstr "Metrik 2"
+
+#~ msgid "Metric 3"
+#~ msgstr "Metrik 3"
+
+#~ msgid "General"
+#~ msgstr "Genel"
+
+#~ msgid "DevTools (Debug)"
+#~ msgstr "Geliştirici Araçları (Hata Ayıklama)"
+
+#~ msgid "Developer Options"
+#~ msgstr "Geliştirici Seçenekleri"
+
+#~ msgid "Applet Settings"
+#~ msgstr "Uygulama Ayarları"
+
+#~ msgid "CoinGecko API Configuration"
+#~ msgstr "CoinGecko API Yapılandırması"
+
+#~ msgid "Display and Activation"
+#~ msgstr "Görüntüleme ve Etkinleştirme"
+
+#~ msgid "Data Source (API)"
+#~ msgstr "Veri Kaynağı (API)"
+
+#~ msgid "Color Settings"
+#~ msgstr "Renk Ayarları"
+
+#~ msgid "Changes will activate on the next API update interval."
+#~ msgstr ""
+#~ "Değişiklikler bir sonraki API güncelleme aralığında etkinleşecektir."
+
+#~ msgid "CoinGecko API Key (Demo or Pro)"
+#~ msgstr "CoinGecko API Anahtarı (Demo veya Pro)"
+
+#~ msgid "Unlocks higher limits and more stable data queries."
+#~ msgstr ""
+#~ "Daha yüksek limitlerin ve daha kararlı veri sorgularının kilidini açar."
+
+#~ msgid ""
+#~ "CALL TRACKING OVERVIEW:\n"
+#~ "\n"
+#~ "• BASIC CALLS: Run via public servers (approx. 5-15 calls/min). \n"
+#~ "  Used for: Standard price queries (saves key quota).\n"
+#~ "\n"
+#~ "• KEY CALLS: Run via your Demo Key quota.\n"
+#~ "  Used for: Charts, coin details & more stable queries.\n"
+#~ "\n"
+#~ "LIMITS (DEMO KEY):\n"
+#~ "• Total: 10,000 calls per month\n"
+#~ "• Speed: Max. 30 requests per minute\n"
+#~ "\n"
+#~ "The tracking in the footer shows you in real-time how many requests have "
+#~ "been used so you can keep an eye on your monthly 10k limit."
+#~ msgstr ""
+#~ "ÇAĞRI TAKİBİ GENEL BAKIŞ:\n"
+#~ "\n"
+#~ "• TEMEL ÇAĞRILAR: Genel sunucular üzerinden çalışır (yaklaşık 5-15 çağrı/"
+#~ "dak). \n"
+#~ "  Kullanım: Standart fiyat sorguları (anahtar kotasından tasarruf "
+#~ "sağlar).\n"
+#~ "\n"
+#~ "• ANAHTAR ÇAĞRILARI: Demo Anahtar kotanız üzerinden çalışır.\n"
+#~ "  Kullanım: Grafikler, coin detayları ve daha kararlı sorgular.\n"
+#~ "\n"
+#~ "LİMİTLER (DEMO ANAHTAR):\n"
+#~ "• Toplam: Ayda 10.000 çağrı\n"
+#~ "• Hız: Dakikada maks. 30 istek\n"
+#~ "\n"
+#~ "Alt bilgideki takip, aylık 10k limitinizi takip edebilmeniz için gerçek "
+#~ "zamanlı olarak kaç isteğin kullanıldığını gösterir."
+
+#~ msgid "Show Active Alarms"
+#~ msgstr "Aktif Alarmları Göster"
+
+#~ msgid "Shows the count of active alarms in the footer."
+#~ msgstr "Alt bilgide aktif alarm sayısını gösterir."
+
+#~ msgid "Show Monthly Statistics"
+#~ msgstr "Aylık İstatistikleri Göster"
+
+#~ msgid "Shows total API key calls this month."
+#~ msgstr "Bu ayki toplam API anahtarı çağrılarını gösterir."
+
+#~ msgid "Show Daily Average"
+#~ msgstr "Günlük Ortalamayı Göster"
+
+#~ msgid "Shows the calculated average per day."
+#~ msgstr "Günlük hesaplanan ortalamayı gösterir."
+
+#~ msgid "Candle Charts as Default"
+#~ msgstr "Varsayılan Olarak Mum Grafikleri"
+
+#~ msgid "Shows charts as candlesticks by default where possible."
+#~ msgstr ""
+#~ "Mümkün olduğunda grafikleri varsayılan olarak mum çubuğu şeklinde "
+#~ "gösterir."
+
+#~ msgid "Chart: Bullish Candle Color (Up)"
+#~ msgstr "Grafik: Boğa Mum Rengi (Yukarı)"
+
+#~ msgid "Color for rising candles."
+#~ msgstr "Yükselen mumlar için renk."
+
+#~ msgid "Chart: Bearish Candle Color (Down)"
+#~ msgstr "Grafik: Ayı Mum Rengi (Aşağı)"
+
+#~ msgid "Color for falling candles."
+#~ msgstr "Düşen mumlar için renk."
+
+#~ msgid "Price Alarm"
+#~ msgstr "Fiyat Alarmı"
+
+#~ msgid "Notification when this price is reached."
+#~ msgstr "Bu fiyata ulaşıldığında bildirim."
+
+#~ msgid "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+#~ msgstr "Hedef fiyatı girin örn. 5 veya 2598. 0 alarmı devre dışı bırakır."
+
+#~ msgid "Percent Alarm"
+#~ msgstr "Yüzde Alarmı"
+
+#~ msgid "Alarm on percentage change (24h)."
+#~ msgstr "Yüzde değişiminde alarm (24s)."
+
+#~ msgid "Enter a percentage value e.g. 5. 0 disables the alarm."
+#~ msgstr "Bir yüzde değeri girin örn. 5. 0 alarmı devre dışı bırakır."
+
+#~ msgid "Compact Mode"
+#~ msgstr "Kompakt Mod"
+
+#~ msgid "Space-saving display in panel (BTC $85.5K)."
+#~ msgstr "Panelde yer tasarrufu sağlayan görünüm (BTC $85.5K)."
+
+#~ msgid "Enable Seasonal Theme"
+#~ msgstr "Mevsimsel Temayı Etkinleştir"
+
+#~ msgid ""
+#~ "Automatically activates festive designs (e.g. Christmas) at certain times."
+#~ msgstr ""
+#~ "Belirli zamanlarda otomatik olarak şenlikli tasarımları (örn. Noel) "
+#~ "etkinleştirir."
+
+#~ msgid "Show Decimals"
+#~ msgstr "Ondalıkları Göster"
+
+#~ msgid "Toggles the display of cent amounts on or off."
+#~ msgstr "Kuruş miktarlarının görüntülenmesini açar veya kapatır."
+
+#~ msgid "Show Trend Arrows"
+#~ msgstr "Trend Oklarını Göster"
+
+#~ msgid "Shows or hides trend arrows for price changes."
+#~ msgstr "Fiyat değişiklikleri için trend oklarını gösterir veya gizler."
+
+#~ msgid "Icon Opacity"
+#~ msgstr "Simge Opaklığı"
+
+#~ msgid "Controls the visibility of crypto icons."
+#~ msgstr "Kripto simgelerinin görünürlüğünü kontrol eder."
+
+#~ msgid "Update Interval"
+#~ msgstr "Güncelleme Aralığı"
+
+#~ msgid "How often prices are fetched from CoinGecko."
+#~ msgstr "Fiyatların CoinGecko'dan ne sıklıkla alınacağı."
+
+#~ msgid "Reset Colors"
+#~ msgstr "Renkleri Sıfırla"
+
+#~ msgid "Resets all custom colors (charts & metrics) to default values."
+#~ msgstr ""
+#~ "Tüm özel renkleri (grafikler ve metrikler) varsayılan değerlere sıfırlar."
+
+#~ msgid "Update Top Coins List"
+#~ msgstr "En İyi Coin Listesini Güncelle"
+
+#~ msgid ""
+#~ "Loads the current top 50 coins from CoinGecko and updates the selection "
+#~ "lists (requires settings restart)."
+#~ msgstr ""
+#~ "CoinGecko'dan güncel en iyi 50 coini yükler ve seçim listelerini "
+#~ "günceller (ayarların yeniden başlatılmasını gerektirir)."
+
+#~ msgid "Force ATH Rocket"
+#~ msgstr "ATH Roketini Zorla"
+
+#~ msgid "Always show the rocket animation (for testing purposes)."
+#~ msgstr "Roket animasyonunu her zaman göster (test amaçlı)."
+
+#~ msgid "Force Seasonal Theme"
+#~ msgstr "Mevsimsel Temayı Zorla"
+
+#~ msgid "Override the date-based theme selection."
+#~ msgstr "Tarih tabanlı tema seçimini geçersiz kıl."
+
+#~ msgid "Debug Frames (Layout)"
+#~ msgstr "Hata Ayıklama Çerçeveleri (Düzen)"
+
+#~ msgid "Draws colorful frames around menu elements for layout inspection."
+#~ msgstr ""
+#~ "Düzen incelemesi için menü öğelerinin etrafına renkli çerçeveler çizer."
+
+#~ msgid "Show Error Notifications"
+#~ msgstr "Hata Bildirimlerini Göster"
+
+#~ msgid "Sends a desktop notification when an internal error is caught."
+#~ msgstr "Dahili bir hata yakalandığında masaüstü bildirimi gönderir."
+
+#~ msgid "Test Crash (Safe)"
+#~ msgstr "Test Çökmesi (Güvenli)"
+
+#~ msgid "Provokes an error to test logging and notifications."
+#~ msgstr ""
+#~ "Günlük kaydını ve bildirimleri test etmek için bir hataya neden olur."
+
+#~ msgid "Show Icon"
+#~ msgstr "Simgeyi Göster"
+
+#~ msgid "Shows the crypto icon next to the price."
+#~ msgstr "Fiyatın yanında kripto simgesini gösterir."
+
+#~ msgid "Toggles the display of decimal places on/off."
+#~ msgstr "Ondalık basamakların görüntülenmesini açar/kapatır."
+
+#~ msgid "Number of Decimals"
+#~ msgstr "Ondalık Sayısı"
+
+#~ msgid "Number of decimal places (2-8)."
+#~ msgstr "Ondalık basamak sayısı (2-8)."
+
+#~ msgid "Color the Arrow Only"
+#~ msgstr "Sadece Oku Renklendir"
+
+#~ msgid "If active, the price text remains white."
+#~ msgstr "Etkinse, fiyat metni beyaz kalır."
+
+#~ msgid "Show Currency Symbol (e.g. $ or €)"
+#~ msgstr "Para Birimi Sembolünü Göster (örn. $ veya €)"
+
+#~ msgid "Replaces the currency code with the symbol."
+#~ msgstr "Para birimi kodunu sembolle değiştirir."
+
+#~ msgid "Enabled"
+#~ msgstr "Etkin"
+
+#~ msgid "Toggles the display of this metric on/off."
+#~ msgstr "Bu metriğin görüntülenmesini açar/kapatır."
+
+#~ msgid "Currency ID (CoinGecko)"
+#~ msgstr "Para Birimi Kimliği (CoinGecko)"
+
+#~ msgid "Select the cryptocurrency from the top list."
+#~ msgstr "En iyi listeden kripto para birimini seçin."
+
+#~ msgid "Custom Currency ID"
+#~ msgstr "Özel Para Birimi Kimliği"
+
+#~ msgid "CoinGecko ID (e.g. 'litecoin')"
+#~ msgstr "CoinGecko Kimliği (örn. 'litecoin')"
+
+#~ msgid "Comparison Currency"
+#~ msgstr "Karşılaştırma Para Birimi"
+
+#~ msgid "Select the currency for the price comparison."
+#~ msgstr "Fiyat karşılaştırması için para birimini seçin."
+
+#~ msgid "Display Symbol"
+#~ msgstr "Görüntüleme Sembolü"
+
+#~ msgid "The symbol displayed on the panel (e.g. BTC)."
+#~ msgstr "Panelde görüntülenen sembol (örn. BTC)."
+
+#~ msgid "Color for Rising Price (▲)"
+#~ msgstr "Yükselen Fiyat Rengi (▲)"
+
+#~ msgid "Select the color for positive price movement."
+#~ msgstr "Pozitif fiyat hareketi için rengi seçin."
+
+#~ msgid "Color for Falling Price (▼)"
+#~ msgstr "Düşen Fiyat Rengi (▼)"
+
+#~ msgid "Select the color for negative price movement."
+#~ msgstr "Negatif fiyat hareketi için rengi seçin."
+
+#~ msgid "15 Seconds (Minimum)"
+#~ msgstr "15 Saniye (Minimum)"
+
+#~ msgid "30 Seconds"
+#~ msgstr "30 Saniye"
+
+#~ msgid "60 Seconds (1 Minute)"
+#~ msgstr "60 Saniye (1 Dakika)"
+
+#~ msgid "120 Seconds (2 Minutes)"
+#~ msgstr "120 Saniye (2 Dakika)"
+
+#~ msgid "300 Seconds (5 Minutes)"
+#~ msgstr "300 Saniye (5 Dakika)"
+
+#~ msgid "Automatic (Date based)"
+#~ msgstr "Automatic (Date based)"
+
+#~ msgid "New Year"
+#~ msgstr "New Year"
+
+#~ msgid "Christmas (General)"
+#~ msgstr "Christmas (General)"
+
+#~ msgid "Christmas (Eve & Day)"
+#~ msgstr "Christmas (Eve & Day)"
+
+#~ msgid "Halloween"
+#~ msgstr "Halloween"
+
+#~ msgid "Valentine's Day"
+#~ msgstr "Valentine's Day"
+
+#~ msgid "Bitcoin Pizza Day"
+#~ msgstr "Bitcoin Pizza Day"
+
+#~ msgid "Easter"
+#~ msgstr "Easter"
+
+#~ msgid "Custom ID"
+#~ msgstr "Özel Kimlik"
+
+#~ msgid "US Dollar (USD)"
+#~ msgstr "ABD Doları (USD)"
+
+#~ msgid "Euro (EUR)"
+#~ msgstr "Euro (EUR)"
+
+#~ msgid "Canadian Dollar (CAD)"
+#~ msgstr "Kanada Doları (CAD)"
+
+#~ msgid "British Pound (GBP)"
+#~ msgstr "İngiliz Sterlini (GBP)"
+
+#~ msgid "Japanese Yen (JPY)"
+#~ msgstr "Japon Yeni (JPY)"
+
+#~ msgid "Swiss Franc (CHF)"
+#~ msgstr "İsviçre Frangı (CHF)"
+
+#~ msgid "Australian Dollar (AUD)"
+#~ msgstr "Avustralya Doları (AUD)"
+
+#~ msgid "Happy New Year"
+#~ msgstr "Mutlu Yıllar"
+
+#~ msgid " Loading..."
+#~ msgstr " Yükleniyor..."
+
+#~ msgid "Target "
+#~ msgstr "Hedef "
+
+#~ msgid "Search Coin"
+#~ msgstr "Coin Ara"
+
+#~ msgid "Loading market data..."
+#~ msgstr "Piyasa verileri yükleniyor..."
+
+#~ msgid "Power Saving Disabled"
+#~ msgstr "Güç Tasarrufu Devre Dışı"
+
+#~ msgid "New month: Interval reset to 120s."
+#~ msgstr "Yeni ay: Aralık 120 saniyeye sıfırlandı."
