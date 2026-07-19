@@ -167,12 +167,21 @@ class NetDataProvider {
         }
         catch(e) {
             // Get network devices from filesystem : /sys/class/net
+            // (Gio instead of GLib.Dir, which is not introspectable on older GJS.
+            // Never throw here: this runs in the constructor at session startup,
+            // and the device list is refreshed on every poll anyway.)
             devices = [];
-            let dir = GLib.Dir.open("/sys/class/net", 0);
-            let name;
-            while ((name = dir.read_name()) !== null)
-                devices.push(name);
-            dir.close();
+            try {
+                let enumerator = Gio.File.new_for_path("/sys/class/net")
+                    .enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
+                let info;
+                while ((info = enumerator.next_file(null)) !== null)
+                    devices.push(info.get_name());
+                enumerator.close(null);
+            }
+            catch (e2) {
+                global.logError("Exception listing network devices: " + e2.message);
+            }
         }
         // Don't measure loopback interface
         return devices.filter(v => v !== "lo");
