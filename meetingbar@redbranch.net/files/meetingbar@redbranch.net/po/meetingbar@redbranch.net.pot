@@ -1,0 +1,220 @@
+# MEETING BAR
+# This file is put in the public domain.
+# jonnymccullagh, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: meetingbar@redbranch.net 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-21 19:09+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#. applet.js:60
+msgid "Loading calendars..."
+msgstr ""
+
+#. metadata.json->name
+#. applet.js:126
+msgid "Meeting Bar"
+msgstr ""
+
+#. applet.js:126
+msgid "Refreshing calendars..."
+msgstr ""
+
+#. applet.js:135 applet.js:145
+msgid "No calendars configured"
+msgstr ""
+
+#. applet.js:170 applet.js:328
+msgid "Loaded successfully"
+msgstr ""
+
+#. applet.js:175
+msgid "Failed to fetch"
+msgstr ""
+
+#. applet.js:183 applet.js:192
+msgid "Error"
+msgstr ""
+
+#. applet.js:223
+#, javascript-format
+msgid "Refreshed %d calendar:"
+msgid_plural "Refreshed %d calendars:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. applet.js:228
+#, javascript-format
+msgid "✓ %d successful, ✗ %d failed"
+msgstr ""
+
+#. applet.js:233
+#, javascript-format
+msgid "Found %d event today"
+msgid_plural "Found %d events today"
+msgstr[0] ""
+msgstr[1] ""
+
+#. applet.js:249
+msgid "Meeting Bar Refresh Complete"
+msgstr ""
+
+#. applet.js:258
+msgid "local file"
+msgstr ""
+
+#. applet.js:328
+msgid "event"
+msgid_plural "events"
+msgstr[0] ""
+msgstr[1] ""
+
+#. applet.js:338
+msgid "Parse error"
+msgstr ""
+
+#. applet.js:485
+msgid "No upcoming meetings today"
+msgstr ""
+
+#. applet.js:497 applet.js:640
+msgid "No events today"
+msgstr ""
+
+#. applet.js:511 applet.js:654
+msgid "Today's Agenda"
+msgstr ""
+
+#. applet.js:522 applet.js:670
+msgid "Tomorrow's Agenda"
+msgstr ""
+
+#. applet.js:550 applet.js:702
+msgid "CANCELLED"
+msgstr ""
+
+#. applet.js:552 applet.js:704
+msgid "TENTATIVE"
+msgstr ""
+
+#. applet.js:594 applet.js:612
+msgid "now"
+msgstr ""
+
+#. applet.js:614
+#, javascript-format
+msgid "in %dm"
+msgstr ""
+
+#. applet.js:619
+#, javascript-format
+msgid "in %dh"
+msgstr ""
+
+#. applet.js:621
+#, javascript-format
+msgid "in %dh %dm"
+msgstr ""
+
+#. metadata.json->description
+msgid "Display the next meeting from your calendar in the menu bar."
+msgstr ""
+
+#. settings-schema.json->ical-urls->description
+msgid "iCal Calendar URLs"
+msgstr ""
+
+#. settings-schema.json->ical-urls->tooltip
+msgid "Enter one iCal (.ics) URL per line. You can add multiple calendars."
+msgstr ""
+
+#. settings-schema.json->refresh-rate->description
+msgid "Refresh Rate"
+msgstr ""
+
+#. settings-schema.json->refresh-rate->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->refresh-rate->tooltip
+msgid "How often to fetch calendar updates"
+msgstr ""
+
+#. settings-schema.json->padding->description
+msgid "Padding"
+msgstr ""
+
+#. settings-schema.json->padding->units
+msgid "pixels"
+msgstr ""
+
+#. settings-schema.json->padding->tooltip
+msgid "Padding around the text on all sides"
+msgstr ""
+
+#. settings-schema.json->max-text-length->description
+msgid "Max Text Length"
+msgstr ""
+
+#. settings-schema.json->max-text-length->units
+msgid "characters"
+msgstr ""
+
+#. settings-schema.json->max-text-length->tooltip
+msgid "Maximum event title length (truncated with ...)"
+msgstr ""
+
+#. settings-schema.json->show-tomorrow-events->description
+msgid "Show Tomorrow's Events"
+msgstr ""
+
+#. settings-schema.json->show-tomorrow-events->tooltip
+msgid "Include events from tomorrow in addition to today's events"
+msgstr ""
+
+#. settings-schema.json->refresh-calendars->description
+msgid "Refresh Calendars Now"
+msgstr ""
+
+#. settings-schema.json->refresh-calendars->tooltip
+msgid "Immediately refresh all calendars and show status"
+msgstr ""
+
+#. settings-schema.json->menu-colors-header->description
+msgid "Menu Event Colors"
+msgstr ""
+
+#. settings-schema.json->past-event-color->description
+msgid "Past Event Color"
+msgstr ""
+
+#. settings-schema.json->past-event-color->tooltip
+msgid "Color for events that have already happened"
+msgstr ""
+
+#. settings-schema.json->current-event-color->description
+msgid "Current Event Color"
+msgstr ""
+
+#. settings-schema.json->current-event-color->tooltip
+msgid "Color for the event happening now"
+msgstr ""
+
+#. settings-schema.json->future-event-color->description
+msgid "Future Event Color"
+msgstr ""
+
+#. settings-schema.json->future-event-color->tooltip
+msgid "Color for upcoming events"
+msgstr ""

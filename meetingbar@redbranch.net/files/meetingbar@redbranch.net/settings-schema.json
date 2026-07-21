@@ -1,0 +1,73 @@
+{
+    "ical-urls": {
+        "default": "",
+        "type": "textview",
+        "description": "iCal Calendar URLs",
+        "tooltip": "Enter one iCal (.ics) URL per line. You can add multiple calendars.",
+        "height": 100
+    },
+    "refresh-rate": {
+        "default": 5,
+        "type": "spinbutton",
+        "min": 1,
+        "max": 60,
+        "description": "Refresh Rate",
+        "units": "minutes",
+        "step": 1,
+        "tooltip": "How often to fetch calendar updates"
+    },
+    "padding": {
+        "default": 5,
+        "type": "spinbutton",
+        "min": 0,
+        "max": 20,
+        "description": "Padding",
+        "units": "pixels",
+        "step": 1,
+        "tooltip": "Padding around the text on all sides"
+    },
+    "max-text-length": {
+        "default": 50,
+        "type": "spinbutton",
+        "min": 10,
+        "max": 200,
+        "description": "Max Text Length",
+        "units": "characters",
+        "step": 5,
+        "tooltip": "Maximum event title length (truncated with ...)"
+    },
+    "show-tomorrow-events": {
+        "default": false,
+        "type": "checkbox",
+        "description": "Show Tomorrow's Events",
+        "tooltip": "Include events from tomorrow in addition to today's events"
+    },
+    "refresh-calendars": {
+        "type": "button",
+        "description": "Refresh Calendars Now",
+        "tooltip": "Immediately refresh all calendars and show status",
+        "callback": "on_refresh_button_clicked"
+    },
+    "menu-colors-header": {
+        "type": "header",
+        "description": "Menu Event Colors"
+    },
+    "past-event-color": {
+        "default": "#888888",
+        "type": "colorchooser",
+        "description": "Past Event Color",
+        "tooltip": "Color for events that have already happened"
+    },
+    "current-event-color": {
+        "default": "#FFFFFF",
+        "type": "colorchooser",
+        "description": "Current Event Color",
+        "tooltip": "Color for the event happening now"
+    },
+    "future-event-color": {
+        "default": "#FFFFFF",
+        "type": "colorchooser",
+        "description": "Future Event Color",
+        "tooltip": "Color for upcoming events"
+    }
+}

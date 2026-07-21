@@ -1,0 +1,7 @@
+{
+  "uuid": "meetingbar@redbranch.net",
+  "name": "Meeting Bar",
+  "description": "Display the next meeting from your calendar in the menu bar.",
+  "version": "1.0",
+  "icon": "preferences-system"
+}
