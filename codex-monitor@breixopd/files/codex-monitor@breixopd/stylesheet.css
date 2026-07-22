@@ -1,0 +1,399 @@
+.codex-monitor-panel {
+  spacing: 7px;
+}
+
+.codex-monitor-panel-usage {
+  spacing: 1px;
+}
+
+.codex-monitor-panel-usage-row {
+  spacing: 5px;
+}
+
+.codex-monitor-panel-window-label {
+  width: 19px;
+  font-size: 0.76em;
+  font-weight: 600;
+  text-align: right;
+}
+
+.codex-monitor-panel-bar {
+  width: 44px;
+  height: 5px;
+}
+
+.codex-monitor-five-hour-bar {
+  -usage-bar-color: #5aa9e6;
+}
+
+.codex-monitor-weekly-bar {
+  -usage-bar-color: #79c98c;
+}
+
+.codex-monitor-panel-indicators {
+  spacing: 4px;
+}
+
+.codex-indicator {
+  font-size: 0.88em;
+  font-weight: 600;
+  padding: 0 3px;
+}
+
+.codex-indicator-warning {
+  color: #e8a641;
+}
+
+.codex-indicator-critical {
+  color: #e05a62;
+}
+
+.codex-indicator-success {
+  color: #79c98c;
+}
+
+.codex-indicator-info {
+  color: inherit;
+  opacity: 184;
+}
+
+.codex-monitor-warning .codex-monitor-panel-bar {
+  -usage-bar-color: #e8a641;
+}
+
+.codex-monitor-critical .codex-monitor-panel-bar {
+  -usage-bar-color: #e05a62;
+}
+
+.codex-monitor-stale {
+  opacity: 150;
+}
+
+.codex-monitor-dashboard {
+  spacing: 12px;
+}
+
+.popup-menu-item.codex-monitor-menu-item {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.popup-menu-item.codex-monitor-menu-item:insensitive {
+  color: inherit;
+}
+
+.codex-monitor-scroll {
+  max-height: 752px;
+  padding: 8px 0;
+}
+
+.codex-monitor-scroll StScrollBar {
+  margin-left: 12px;
+}
+
+.codex-monitor-header,
+.codex-monitor-section-heading,
+.codex-monitor-action-row,
+.codex-monitor-range-row {
+  spacing: 8px;
+}
+
+.codex-monitor-footer {
+  spacing: 12px;
+  padding: 10px 2px 0;
+  border-top: 1px solid rgba(128, 128, 128, 0.24);
+}
+
+.codex-monitor-footer-summary {
+  color: inherit;
+  opacity: 184;
+  font-size: 0.86em;
+}
+
+.codex-monitor-footer-actions {
+  spacing: 8px;
+}
+
+.codex-monitor-compact .codex-monitor-footer {
+  spacing: 8px;
+}
+
+.codex-monitor-indicator-section,
+.codex-monitor-indicator-list,
+.codex-monitor-indicator-row {
+  spacing: 6px;
+}
+
+.codex-monitor-indicator-chip {
+  min-height: 18px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  background-color: rgba(128, 128, 128, 0.1);
+  font-size: 0.82em;
+}
+
+.codex-monitor-title {
+  font-size: 1.35em;
+  font-weight: 700;
+}
+
+.codex-monitor-status,
+.codex-monitor-secondary {
+  color: inherit;
+  opacity: 184;
+  font-size: 0.9em;
+}
+
+.codex-monitor-header .codex-monitor-status {
+  width: 160px;
+  margin-right: 8px;
+  text-align: right;
+}
+
+.codex-monitor-compact .codex-monitor-header {
+  spacing: 4px;
+}
+
+.codex-monitor-compact .codex-monitor-header .codex-monitor-status {
+  margin-right: 0;
+  text-align: left;
+}
+
+.codex-monitor-card-row {
+  spacing: 10px;
+}
+
+.codex-monitor-quota-card,
+.codex-monitor-section {
+  spacing: 7px;
+  padding: 11px;
+  border-radius: 8px;
+  background-color: rgba(128, 128, 128, 0.12);
+  border: 1px solid rgba(128, 128, 128, 0.22);
+}
+
+.codex-monitor-card-kicker {
+  font-size: 0.78em;
+  font-weight: 700;
+  color: inherit;
+  opacity: 184;
+}
+
+.codex-monitor-percent {
+  font-size: 1.35em;
+  font-weight: 700;
+}
+
+.codex-monitor-section-title,
+.codex-monitor-row-title {
+  font-weight: 600;
+}
+
+.codex-monitor-session-group-title {
+  color: inherit;
+  opacity: 176;
+  font-size: 0.76em;
+  font-weight: 700;
+  padding-top: 3px;
+}
+
+.codex-monitor-device-state {
+  color: inherit;
+  opacity: 184;
+  font-size: 0.76em;
+  font-weight: 700;
+}
+
+.codex-monitor-device-warning {
+  color: #e8a641;
+}
+
+.codex-monitor-session-filters {
+  spacing: 5px;
+}
+
+.codex-monitor-session-filter {
+  padding: 4px 7px;
+  border-radius: 4px;
+  background-color: rgba(128, 128, 128, 0.1);
+  color: inherit;
+}
+
+.codex-monitor-session-filter:hover,
+.codex-monitor-session-filter:focus {
+  background-color: rgba(90, 169, 230, 0.18);
+}
+
+.codex-monitor-session-filter:checked {
+  background-color: rgba(90, 169, 230, 0.32);
+  color: inherit;
+  font-weight: 700;
+}
+
+.codex-monitor-session-list,
+.codex-monitor-session-project-group {
+  spacing: 4px;
+}
+
+.codex-monitor-session-project {
+  color: inherit;
+  opacity: 190;
+  font-size: 0.78em;
+  font-weight: 700;
+  padding-top: 4px;
+}
+
+.codex-monitor-session-row {
+  padding: 6px 7px;
+  border-radius: 5px;
+  background-color: rgba(128, 128, 128, 0.06);
+  text-align: left;
+}
+
+.codex-monitor-session-row:hover,
+.codex-monitor-session-row:focus {
+  background-color: rgba(90, 169, 230, 0.18);
+}
+
+.codex-monitor-session-attention {
+  border-left: 3px solid #f0b64d;
+}
+
+.codex-monitor-session-content,
+.codex-monitor-sessions > StBoxLayout {
+  spacing: 3px;
+}
+
+.codex-monitor-graph {
+  height: 165px;
+  -graph-five-hour-color: #5aa9e6;
+  -graph-weekly-color: #79c98c;
+  -graph-activity-color: #d7a85c;
+}
+
+.codex-monitor-graph-view,
+.codex-monitor-graph-legend {
+  spacing: 5px;
+}
+
+.codex-monitor-graph-legend {
+  spacing: 12px;
+}
+
+.codex-monitor-graph-plot-row {
+  spacing: 6px;
+}
+
+.codex-monitor-graph-y-axis {
+  width: 34px;
+  height: 165px;
+}
+
+.codex-monitor-graph-axis-label,
+.codex-monitor-graph-legend-item,
+.codex-monitor-graph-detail,
+.codex-monitor-graph-empty {
+  color: inherit;
+  opacity: 184;
+  font-size: 0.78em;
+}
+
+.codex-monitor-graph-y-axis .codex-monitor-graph-axis-label {
+  text-align: right;
+}
+
+.codex-monitor-graph-y-axis-right .codex-monitor-graph-axis-label {
+  text-align: left;
+}
+
+.codex-monitor-graph-x-axis {
+  margin-left: 40px;
+}
+
+.codex-monitor-graph-dual-axis .codex-monitor-graph-x-axis {
+  margin-right: 40px;
+}
+
+.codex-monitor-graph-legend-item {
+  padding-left: 7px;
+}
+
+.codex-monitor-graph-color-0 {
+  border-left: 3px solid #5aa9e6;
+}
+
+.codex-monitor-graph-color-1 {
+  border-left: 3px solid #79c98c;
+}
+
+.codex-monitor-graph-color-2 {
+  border-left: 3px solid #d7a85c;
+}
+
+.codex-monitor-graph-reset-key {
+  border-left: 3px dashed rgba(128, 128, 128, 0.7);
+}
+
+.codex-monitor-graph-detail {
+  padding: 5px 7px;
+  border-radius: 4px;
+  background-color: rgba(128, 128, 128, 0.14);
+}
+
+.codex-monitor-graph-empty {
+  text-align: center;
+  font-style: italic;
+}
+
+.codex-monitor-button,
+.codex-monitor-tab,
+.codex-monitor-range {
+  padding: 5px 9px;
+  border-radius: 5px;
+  background-color: rgba(128, 128, 128, 0.12);
+}
+
+.codex-monitor-button:hover,
+.codex-monitor-button:focus,
+.codex-monitor-tab:hover,
+.codex-monitor-tab:focus,
+.codex-monitor-range:hover,
+.codex-monitor-range:focus,
+.codex-monitor-tab:checked,
+.codex-monitor-range:checked {
+  background-color: rgba(90, 169, 230, 0.28);
+}
+
+.codex-monitor-reset-row {
+  spacing: 10px;
+  padding: 4px 0;
+}
+
+.codex-monitor-pairing-code {
+  font-family: monospace;
+  font-size: 1.05em;
+  font-weight: 700;
+  padding: 7px;
+  border-radius: 5px;
+  background-color: rgba(90, 169, 230, 0.14);
+  text-align: center;
+}
+
+.codex-monitor-qr {
+  width: 196px;
+  height: 196px;
+  margin: 5px 0;
+}
+
+.codex-monitor-qr-icon {
+  icon-size: 196px;
+}
+
+.codex-monitor-remote-client-row {
+  spacing: 10px;
+  padding: 5px 0;
+}

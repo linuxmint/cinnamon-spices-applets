@@ -1,0 +1,126 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["appearance", "data"],
+    "appearance": {
+      "type": "page",
+      "title": "Appearance",
+      "sections": ["panel-section", "graph-section", "threshold-section"]
+    },
+    "data": {
+      "type": "page",
+      "title": "Data",
+      "sections": ["refresh-section", "codex-section"]
+    },
+    "panel-section": {
+      "type": "section",
+      "title": "Panel preview",
+      "keys": ["show-reset-badge", "show-remote-badge"]
+    },
+    "graph-section": {
+      "type": "section",
+      "title": "Dashboard graph",
+      "keys": ["graph-mode", "graph-range-hours"]
+    },
+    "threshold-section": {
+      "type": "section",
+      "title": "Visual thresholds",
+      "keys": ["warning-threshold", "critical-threshold", "reset-expiry-warning-hours"]
+    },
+    "refresh-section": {
+      "type": "section",
+      "title": "Refresh and history",
+      "keys": ["refresh-interval", "history-days"]
+    },
+    "codex-section": {
+      "type": "section",
+      "title": "Codex installation",
+      "keys": ["codex-binary", "codex-home"]
+    }
+  },
+  "show-reset-badge": {
+    "type": "switch",
+    "default": true,
+    "description": "Show available banked resets in the panel"
+  },
+  "show-remote-badge": {
+    "type": "switch",
+    "default": true,
+    "description": "Show Remote Control status when enabled"
+  },
+  "graph-mode": {
+    "type": "combobox",
+    "default": "quota",
+    "description": "Default graph mode",
+    "options": {
+      "Quota history": "quota",
+      "Token activity": "activity",
+      "Both": "both"
+    }
+  },
+  "graph-range-hours": {
+    "type": "combobox",
+    "default": 168,
+    "description": "Default graph range",
+    "options": {
+      "24 hours": 24,
+      "7 days": 168,
+      "30 days": 720
+    }
+  },
+  "warning-threshold": {
+    "type": "scale",
+    "default": 70,
+    "min": 1,
+    "max": 99,
+    "step": 1,
+    "units": "% used",
+    "description": "Warning threshold"
+  },
+  "critical-threshold": {
+    "type": "scale",
+    "default": 90,
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "units": "% used",
+    "description": "Critical threshold"
+  },
+  "reset-expiry-warning-hours": {
+    "type": "spinbutton",
+    "default": 72,
+    "min": 1,
+    "max": 720,
+    "step": 1,
+    "units": "hours",
+    "description": "Warn visually before a banked reset expires"
+  },
+  "refresh-interval": {
+    "type": "spinbutton",
+    "default": 60,
+    "min": 30,
+    "max": 900,
+    "step": 30,
+    "units": "seconds",
+    "description": "Refresh interval"
+  },
+  "history-days": {
+    "type": "spinbutton",
+    "default": 30,
+    "min": 7,
+    "max": 90,
+    "step": 1,
+    "units": "days",
+    "description": "Quota history retention"
+  },
+  "codex-binary": {
+    "type": "entry",
+    "default": "codex",
+    "description": "Codex executable name or absolute path"
+  },
+  "codex-home": {
+    "type": "entry",
+    "default": "",
+    "description": "Custom CODEX_HOME (leave empty for the default)"
+  }
+}
