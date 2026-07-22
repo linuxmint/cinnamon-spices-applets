@@ -1,0 +1,134 @@
+# FM RADIO
+# This file is put in the public domain.
+# hilyxx, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FM-Radio@hilyxx 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-17 10:49+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. metadata.json->name
+#. applet.js:53 applet.js:304
+msgid "FM Radio"
+msgstr "FM Radio"
+
+#. applet.js:62
+msgid "Reload applet"
+msgstr "Recharger l'applet"
+
+#. applet.js:209
+msgid "All stations"
+msgstr "Toutes les stations"
+
+#. applet.js:283
+msgid "Waiting..."
+msgstr "En attente..."
+
+#. channels.js:51
+msgid "Error"
+msgstr "Erreur"
+
+#. search.js:19
+msgid "Please enter a radio station name to search for."
+msgstr "Veuillez entrer un nom de radio à chercher."
+
+#. search.js:38
+msgid "No stations found for this keyword."
+msgstr "Aucune station trouvée pour ce mot-clé."
+
+#. metadata.json->description
+msgid "A stupidly simple radio player for Cinnamon"
+msgstr "Un lecteur radio stupidement simple pour Cinnamon"
+
+#. settings-schema.json->page_stations->title
+msgid "Radios"
+msgstr "Radios"
+
+#. settings-schema.json->tips->title
+#. settings-schema.json->tips-section->title
+msgid "Tips"
+msgstr "Astuces"
+
+#. settings-schema.json->section_search->title
+msgid "Radio station search (Radio-Browser API)"
+msgstr "Recherche de stations (API Radio-Browser)"
+
+#. settings-schema.json->section_list->title
+msgid "Station management"
+msgstr "Gestion des stations"
+
+#. settings-schema.json->search_keyword->description
+msgid "Radio station name to search for"
+msgstr "Nom de la radio à chercher"
+
+#. settings-schema.json->search_button->description
+msgid "Launch search"
+msgstr "Lancer la recherche"
+
+#. settings-schema.json->search_button->tooltip
+msgid "Search for the station on the internet"
+msgstr "Cherche la station sur internet"
+
+#. settings-schema.json->search_results->description
+msgid "Search results (Copy the URL and add it to your list below):"
+msgstr ""
+"Résultats de la recherche (Copiez l'URL et ajoutez-la à votre liste ci-"
+"dessous) :"
+
+#. settings-schema.json->clear_button->description
+msgid "Clear results"
+msgstr "Effacer les résultats"
+
+#. settings-schema.json->clear_button->tooltip
+msgid "Clear the text area"
+msgstr "Vide la zone de texte"
+
+#. settings-schema.json->custom_stations->description
+msgid "Custom radio stations"
+msgstr "Stations de radio personnalisées"
+
+#. settings-schema.json->custom_stations->columns->title
+msgid "Station name"
+msgstr "Nom de la station"
+
+#. settings-schema.json->custom_stations->columns->title
+msgid "Stream URL"
+msgstr "URL du flux"
+
+#. settings-schema.json->custom_stations->columns->title
+msgid "Image path (e.g., /home/user/logo.png)"
+msgstr "Chemin de l'image (ex: /home/user/logo.png)"
+
+#. settings-schema.json->info1->description
+msgid ""
+"\n"
+"To create a custom image for a radio station:\n"
+"• Create an image of any format (png, jpeg, or svg) with a square 'cover' "
+"style size (e.g., 300x300).\n"
+"• Station images are stored by default in the applet's image folder, and the "
+"path is /images/yourcover.png. For images located in another folder, apply "
+"the same process and adapt the path accordingly.\n"
+"• The easiest way is to copy the desired image and paste it into the "
+"provided field; this will directly paste the image path.\n"
+msgstr ""
+"\n"
+"Pour créer une image personnalisée pour une station de radio:\n"
+"• Créez une image de n'importe quel format (png, jpeg ou svg) avec une "
+"taille carrée de style 'cover' (e.g. 300x300).\n"
+"• Les images des stations sont stockées par défaut dans le dossier image de "
+"l'applet et le chemin est /images/yourcover.png. Pour des images situées "
+"dans un autre dossier, appliquez le même procédé et adaptez le chemin en "
+"conséquence.\n"
+"• Le plus simple, copiez l'image souhaitée et collez la dans le champ prévu, "
+"cela collera directement le chemin de l'image.\n"

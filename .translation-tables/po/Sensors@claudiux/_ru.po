@@ -1,0 +1,81 @@
+# SENSORS MONITOR
+# This file is put in the public domain.
+# claudiux, 2020
+#
+msgid ""
+msgstr ""
+
+#. applet.js:594
+msgid "Suspended"
+msgstr ""
+
+#. applet.js:1518
+msgid "Settings"
+msgstr ""
+
+#. settings-schema.json->section_Display->title
+#. settings-schema.json->section_tempOptions->title
+#. settings-schema.json->section_fanOptions->title
+#. settings-schema.json->section_voltOptions->title
+#. settings-schema.json->section_intrusionOptions->title
+msgid "Options"
+msgstr ""
+
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr ""
+
+#. settings-schema.json->section_dependencies->title
+msgid "Dependencies"
+msgstr ""
+
+#. settings-schema.json->section_tempDisplay->title
+#. settings-schema.json->section_fanDisplay->title
+#. settings-schema.json->section_voltDisplay->title
+#. settings-schema.json->section_intrusionDisplay->title
+#. settings-schema.json->section_customDisplay->title
+msgid "Display"
+msgstr ""
+
+#. settings-schema.json->window_width->description
+msgid "Width"
+msgstr ""
+
+#. settings-schema.json->window_height->description
+msgid "Height"
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr ""
+
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr ""
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr ""
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Formula"
+msgstr ""
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Type"
+msgstr ""
+
+#. settings-schema.json->custom_sensors->columns->title
+msgid "Name"
+msgstr ""

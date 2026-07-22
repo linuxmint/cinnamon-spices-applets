@@ -1,0 +1,44 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+
+#. applet.js:417
+msgid ""
+"Check in progress.\n"
+"Time remaining:"
+msgstr ""
+
+#. applet.js:420
+msgid "Ends around:"
+msgstr ""
+
+#. applet.js:437
+msgid "Time remaining until the next check:"
+msgstr ""
+
+#. applet.js:439 applet.js:741
+msgid "Next check at:"
+msgstr ""
+
+#. applet.js:444
+msgid "Getting Started. Please wait..."
+msgstr ""
+
+#. applet.js:1009
+msgid "Refreshing in progress - Click to stop"
+msgstr ""
+
+#. settings-schema.json->update-interruptible->description
+msgid "The update can be interrupted by the user"
+msgstr ""
+
+#. settings-schema.json->sort-by->options
+msgid "Number of issues"
+msgstr ""
+
+#. settings-schema.json->colorWhileRefreshing->description
+msgid "Icon color while refreshing"
+msgstr ""

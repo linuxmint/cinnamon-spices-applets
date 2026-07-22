@@ -1,0 +1,530 @@
+# Rules:
+#  1. The following strings should only be replaced with 3-character equivalent strings. They can be translations or comprehensible abbreviations of the original words in the target language; otherwise, they should remain unaltered.
+#    - GPU
+#    - Fan
+#    - mem
+#  2. The string "Hi!" is meant to be displayed in a very small container (up to 4 lines with a maximum of 4 characters per line). It should be translated into a friendly, playful, and non-offensive phrase in the target language, respecting this size limit. Regional slang or expressions that could be perceived as insulting must be avoided. If no suitable translation can be created within these constraints, preserve the original "Hi!".
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-monitor@kalin91 v1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-02 22:56-0600\n"
+"PO-Revision-Date: 2026-02-03 00:00+0000\n"
+"Last-Translator: Carlos Alberto Morales Ortega <carlos.mor.ort@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <AI generated>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:43
+msgid "nvidia-smi not found"
+msgstr "未找到 nvidia-smi"
+
+#: applet.js:44
+msgid ""
+"nvidia-smi not found in PATH.\n"
+"Please ensure NVIDIA drivers are installed."
+msgstr ""
+"在 PATH 中未找到 nvidia-smi。\n"
+"请确认已安装 NVIDIA 驱动程序。"
+
+#: applet.js:49
+msgid "Displays NVIDIA GPU monitor"
+msgstr "显示 NVIDIA GPU 监视器"
+
+#: applet.js:54
+msgid "Error initializing applet"
+msgstr "初始化 Applet 出错"
+
+#: applet.js:55
+msgid "Init Error"
+msgstr "初始化错误"
+
+#: applet.js:80
+msgid "Open Monitor Graph"
+msgstr "打开监视图表"
+
+#: applet.js:84
+msgid "Settings"
+msgstr "设置"
+
+#. settings-schema.json->Applet->title
+#: applet.js:89
+msgid "Applet Settings"
+msgstr "Applet 设置"
+
+#. settings-schema.json->Monitor->title
+#: applet.js:92
+msgid "Monitor Settings"
+msgstr "监视器设置"
+
+#: applet.js:95
+msgid "Reset All Settings"
+msgstr "重置所有设置"
+
+#: applet.js:97
+#, javascript-format
+msgid "Are you sure you want to reset all settings of '%s' to default?"
+msgstr "您确定要将 '%s' 的所有设置重置为默认值吗？"
+
+#: applet.js:108 applet.js:109
+msgid "Error resetting settings"
+msgstr "重置设置时出错"
+
+#: applet.js:118
+msgid "Error building menu: "
+msgstr "构建菜单出错："
+
+#: applet.js:171
+msgid "Launching"
+msgstr "正在启动"
+
+#: applet.js:183
+msgid "Sending"
+msgstr "正在发送"
+
+#: applet.js:183
+msgid "history points"
+msgstr "数据点"
+
+#: applet.js:194
+msgid "subprocess exited with error"
+msgstr "子进程退出，发生错误"
+
+#: applet.js:196
+msgid "Monitor subprocess exited"
+msgstr "监视器子进程已退出"
+
+#: applet.js:202
+msgid "Error starting monitor"
+msgstr "启动监视器出错"
+
+#: applet.js:203
+msgid "Could not start monitor script"
+msgstr "无法启动监视器脚本"
+
+#: applet.js:213
+msgid "Error closing monitor"
+msgstr "关闭监视器出错"
+
+#: applet.js:241
+msgid "Error sending to monitor"
+msgstr "发送至监视器出错"
+
+#: applet.js:254 applet.js:509
+msgid "Error"
+msgstr "错误"
+
+#: applet.js:271
+msgid "Initializing..."
+msgstr "正在初始化..."
+
+#: applet.js:281
+msgid "Mem"
+msgstr "显存"
+
+#: applet.js:290 applet.js:681
+msgid "GPU"
+msgstr "GPU"
+
+#: applet.js:299 applet.js:689
+msgid "Fan"
+msgstr "风扇"
+
+#: applet.js:510
+msgid "Failed to run nvidia-smi.\n"
+msgstr "运行 nvidia-smi 失败。\n"
+
+#: applet.js:510 applet.js:511
+msgid "Unknown"
+msgstr "未知"
+
+#: applet.js:511
+msgid "Failed to run nvidia-smi"
+msgstr "运行 nvidia-smi 失败"
+
+#: applet.js:515
+msgid "An unexpected error occurred while running nvidia-smi.\n"
+msgstr "运行 nvidia-smi 时发生未知错误。\n"
+
+#: applet.js:516
+msgid "Err"
+msgstr "错误"
+
+#: applet.js:673
+msgid "MEM"
+msgstr "显存"
+
+#: applet.js:689
+msgid "FAN"
+msgstr "风扇"
+
+#: applet.js:706
+msgid "Hi!"
+msgstr "嗨!"
+
+#: applet.js:739
+msgid "Error terminating monitor subprocess"
+msgstr "终止监视器子进程出错"
+
+#: applet.js:753
+msgid "Menu toggled on click."
+msgstr "点击切换菜单。"
+
+#. metadata.json->name
+#: ui/monitor_window.glade:7
+msgid "NVIDIA Monitor"
+msgstr "NVIDIA 监视器"
+
+#. metadata.json->description
+msgid ""
+"Monitors GPU temperature, memory, utilization, and fan speed using nvidia-smi"
+msgstr "使用 nvidia-smi 监控 GPU 温度、显存、利用率和风扇速度"
+
+#. settings-schema.json->section_general->title
+msgid "General Settings"
+msgstr "常规设置"
+
+#. settings-schema.json->section_temp->title
+msgid "Temperature"
+msgstr "温度"
+
+#. settings-schema.json->section_memory->title
+msgid "Memory Usage"
+msgstr "显存使用"
+
+#. settings-schema.json->section_gpu->title
+msgid "GPU Utilization"
+msgstr "GPU 利用率"
+
+#. settings-schema.json->section_fan->title
+msgid "Fan Speed"
+msgstr "风扇速度"
+
+#. settings-schema.json->top_note->title
+msgid "Note"
+msgstr "注意"
+
+#. settings-schema.json->metric_colors_section->title
+msgid "Metric Colors"
+msgstr "指标颜色"
+
+#. settings-schema.json->layout_colors_section->title
+msgid "Layout Colors"
+msgstr "布局颜色"
+
+#. settings-schema.json->y_axis_section->title
+msgid "Y-Axis Settings"
+msgstr "Y 轴设置"
+
+#. settings-schema.json->x_axis_section->title
+msgid "X-Axis Settings"
+msgstr "X 轴设置"
+
+#. settings-schema.json->monitor-note->description
+msgid ""
+"Changes to monitor settings will take effect after restarting the monitor."
+msgstr "对监视器设置的更改将在重启监视器后生效。"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "1 Line (50%)"
+msgstr "1 条线 (50%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "2 Lines (33%, 66%)"
+msgstr "2 条线 (33%, 66%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "3 Lines (25%, 50%, 75%)"
+msgstr "3 条线 (25%, 50%, 75%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "4 Lines (20%, 40%, 60%, 80%)"
+msgstr "4 条线 (20%, 40%, 60%, 80%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "5 Lines (16%, 33%, 50%, 66%, 83%)"
+msgstr "5 条线 (16%, 33%, 50%, 66%, 83%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "9 Lines (Every 10%)"
+msgstr "9 条线 (每 10%)"
+
+#. settings-schema.json->y-axis-steps->description
+msgid "Y-Axis Guides"
+msgstr "Y 轴参考线"
+
+#. settings-schema.json->y-axis-steps->tooltip
+msgid "Number of guide lines for the Y-Axis."
+msgstr "Y 轴参考线的数量。"
+
+#. settings-schema.json->y-axis-temp-unit->options
+#. settings-schema.json->temp-unit->options
+msgid "Celsius (°C)"
+msgstr "摄氏度 (°C)"
+
+#. settings-schema.json->y-axis-temp-unit->options
+#. settings-schema.json->temp-unit->options
+msgid "Fahrenheit (°F)"
+msgstr "华氏度 (°F)"
+
+#. settings-schema.json->y-axis-temp-unit->description
+msgid "Y-Axis Temperature Unit"
+msgstr "Y 轴温度单位"
+
+#. settings-schema.json->y-axis-temp-unit->tooltip
+msgid "Unit for the temperature axis in the monitor."
+msgstr "监视器中温度轴的单位。"
+
+#. settings-schema.json->x-axis-steps->description
+msgid "X-Axis Guides"
+msgstr "X 轴参考线"
+
+#. settings-schema.json->x-axis-steps->tooltip
+msgid "Number of vertical guide lines for the X-Axis."
+msgstr "X 轴垂直参考线的数量。"
+
+#. settings-schema.json->x-axis-unit->options
+msgid "Seconds"
+msgstr "秒"
+
+#. settings-schema.json->x-axis-unit->options
+msgid "Minutes"
+msgstr "分钟"
+
+#. settings-schema.json->x-axis-unit->options
+msgid "Hours"
+msgstr "小时"
+
+#. settings-schema.json->x-axis-unit->description
+msgid "X-Axis Unit"
+msgstr "X 轴单位"
+
+#. settings-schema.json->x-axis-unit->tooltip
+msgid "Unit of time for the X-Axis."
+msgstr "X 轴的时间单位。"
+
+#. settings-schema.json->x-axis-length-sec->units
+#. settings-schema.json->refresh-interval->units
+msgid "s"
+msgstr "秒"
+
+#. settings-schema.json->x-axis-length-sec->description
+msgid "X-Axis Length (Seconds)"
+msgstr "X 轴长度 (秒)"
+
+#. settings-schema.json->x-axis-length-sec->tooltip
+#. settings-schema.json->x-axis-length-min->tooltip
+#. settings-schema.json->x-axis-length-hour->tooltip
+msgid "Total duration shown on the graph."
+msgstr "图表中显示的总时长。"
+
+#. settings-schema.json->x-axis-length-min->units
+msgid "m"
+msgstr "分"
+
+#. settings-schema.json->x-axis-length-min->description
+msgid "X-Axis Length (Minutes)"
+msgstr "X 轴长度 (分钟)"
+
+#. settings-schema.json->x-axis-length-hour->units
+msgid "h"
+msgstr "小时"
+
+#. settings-schema.json->x-axis-length-hour->description
+msgid "X-Axis Length (Hours)"
+msgstr "X 轴长度 (小时)"
+
+#. settings-schema.json->temp-color->description
+msgid "Temperature Color"
+msgstr "温度颜色"
+
+#. settings-schema.json->temp-color->tooltip
+msgid "Color used for temperature in the graph."
+msgstr "图表中温度线条的颜色。"
+
+#. settings-schema.json->mem_color->description
+msgid "Memory Usage Color"
+msgstr "显存使用颜色"
+
+#. settings-schema.json->mem_color->tooltip
+msgid "Color used for memory usage in the graph."
+msgstr "图表中显存使用线条的颜色。"
+
+#. settings-schema.json->gpu_color->description
+msgid "GPU Utilization Color"
+msgstr "GPU 利用率颜色"
+
+#. settings-schema.json->gpu_color->tooltip
+msgid "Color used for GPU utilization in the graph."
+msgstr "图表中 GPU 利用率线条的颜色。"
+
+#. settings-schema.json->fan_color->description
+msgid "Fan Speed Color"
+msgstr "风扇速度颜色"
+
+#. settings-schema.json->fan_color->tooltip
+msgid "Color used for fan speed in the graph."
+msgstr "图表中风扇速度线条的颜色。"
+
+#. settings-schema.json->background_color->description
+msgid "Background Color"
+msgstr "背景颜色"
+
+#. settings-schema.json->background_color->tooltip
+msgid "Background color of the graph."
+msgstr "图表的背景颜色。"
+
+#. settings-schema.json->temp-axis-color->description
+msgid "Temperature Axis Color"
+msgstr "温度轴颜色"
+
+#. settings-schema.json->temp-axis-color->tooltip
+msgid "Color for the temperature axis labels."
+msgstr "温度轴标签的颜色。"
+
+#. settings-schema.json->percent-axis-color->description
+msgid "Percentage Axis Color"
+msgstr "百分比轴颜色"
+
+#. settings-schema.json->percent-axis-color->tooltip
+msgid "Color for the percentage axis labels."
+msgstr "百分比轴标签的颜色。"
+
+#. settings-schema.json->x-axis-color->description
+msgid "X-Axis Color"
+msgstr "X 轴颜色"
+
+#. settings-schema.json->x-axis-color->tooltip
+msgid "Color for the X-axis labels (Time)."
+msgstr "X 轴标签（时间）的颜色。"
+
+#. settings-schema.json->guidelines-color->description
+msgid "Guidelines Color"
+msgstr "参考线颜色"
+
+#. settings-schema.json->guidelines-color->tooltip
+msgid "Color for the grid/guide lines."
+msgstr "网格线和参考线的颜色。"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh Interval"
+msgstr "刷新间隔"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid "How often to update the GPU stats (in seconds)."
+msgstr "更新 GPU 状态的频率（秒）。"
+
+#. settings-schema.json->border-color->description
+msgid "Applet Border Color"
+msgstr "Applet 边框颜色"
+
+#. settings-schema.json->border-color->tooltip
+msgid "Color of the applet border. Set alpha to 0 for no border."
+msgstr "Applet 边框颜色。将 Alpha 值设为 0 则不显示边框。"
+
+#. settings-schema.json->encoding->options
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#. settings-schema.json->encoding->options
+msgid "macintosh"
+msgstr "macintosh"
+
+#. settings-schema.json->encoding->options
+msgid "ASCII"
+msgstr "ASCII"
+
+#. settings-schema.json->encoding->description
+msgid "nvidia-smi Output Encoding"
+msgstr "nvidia-smi 输出编码"
+
+#. settings-schema.json->encoding->tooltip
+msgid "Select the character encoding used by nvidia-smi output."
+msgstr "选择 nvidia-smi 输出所使用的字符编码。"
+
+#. settings-schema.json->show-temp->description
+msgid "Show Temperature"
+msgstr "显示温度"
+
+#. settings-schema.json->show-temp->tooltip
+msgid "Show GPU temperature in the panel."
+msgstr "在面板中显示 GPU 温度。"
+
+#. settings-schema.json->temp-unit->description
+msgid "Temperature Unit"
+msgstr "温度单位"
+
+#. settings-schema.json->temp-unit->tooltip
+msgid "Choose the unit for displaying GPU temperature."
+msgstr "选择显示 GPU 温度的单位。"
+
+#. settings-schema.json->show-memory->description
+msgid "Show Memory Usage"
+msgstr "显示显存使用"
+
+#. settings-schema.json->show-memory->tooltip
+msgid "Show GPU memory usage in the panel."
+msgstr "在面板中显示 GPU 显存使用情况。"
+
+#. settings-schema.json->memory-display-mode->options
+msgid "Text (Used / Total)"
+msgstr "文本 (已用 / 总量)"
+
+#. settings-schema.json->memory-display-mode->options
+#. settings-schema.json->gpu-display-mode->options
+#. settings-schema.json->fan-display-mode->options
+msgid "Pie Chart"
+msgstr "饼图"
+
+#. settings-schema.json->memory-display-mode->description
+msgid "Memory Display Mode"
+msgstr "显存显示模式"
+
+#. settings-schema.json->memory-display-mode->tooltip
+msgid "Choose how to display memory usage: as text or as a pie chart."
+msgstr "选择显存使用的显示方式：文本或饼图。"
+
+#. settings-schema.json->show-gpu-util->description
+msgid "Show GPU Utilization"
+msgstr "显示 GPU 利用率"
+
+#. settings-schema.json->show-gpu-util->tooltip
+msgid "Show GPU utilization percentage in the panel."
+msgstr "在面板中显示 GPU 利用率百分比。"
+
+#. settings-schema.json->gpu-display-mode->options
+#. settings-schema.json->fan-display-mode->options
+msgid "Text (Percent)"
+msgstr "文本 (百分比)"
+
+#. settings-schema.json->gpu-display-mode->description
+msgid "GPU Display Mode"
+msgstr "GPU 显示模式"
+
+#. settings-schema.json->gpu-display-mode->tooltip
+msgid "Choose how to display GPU utilization: as text or as a pie chart."
+msgstr "选择 GPU 利用率的显示方式：文本或饼图。"
+
+#. settings-schema.json->show-fan-speed->description
+msgid "Show Fan Speed"
+msgstr "显示风扇速度"
+
+#. settings-schema.json->show-fan-speed->tooltip
+msgid "Show GPU fan speed percentage in the panel."
+msgstr "在面板中显示 GPU 风扇速度百分比。"
+
+#. settings-schema.json->fan-display-mode->description
+msgid "Fan Display Mode"
+msgstr "风扇显示模式"
+
+#. settings-schema.json->fan-display-mode->tooltip
+msgid "Choose how to display fan speed: as text or as a pie chart."
+msgstr "选择风扇速度的显示方式：文本或饼图。"

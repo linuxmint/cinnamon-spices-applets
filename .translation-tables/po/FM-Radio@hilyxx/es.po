@@ -1,0 +1,133 @@
+# FM RADIO
+# This file is put in the public domain.
+# hilyxx, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FM-Radio@hilyxx 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-17 10:49+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#. metadata.json->name
+#. applet.js:53 applet.js:304
+msgid "FM Radio"
+msgstr "Radio FM"
+
+#. applet.js:62
+msgid "Reload applet"
+msgstr "Recargar applet"
+
+#. applet.js:209
+msgid "All stations"
+msgstr "Todas las emisoras"
+
+#. applet.js:283
+msgid "Waiting..."
+msgstr "Esperando..."
+
+#. channels.js:51
+msgid "Error"
+msgstr "Error"
+
+#. search.js:19
+msgid "Please enter a radio station name to search for."
+msgstr "Introduzca el nombre de la emisora de radio que desea buscar."
+
+#. search.js:38
+msgid "No stations found for this keyword."
+msgstr "No se han encontrado emisoras para esta palabra clave."
+
+#. metadata.json->description
+msgid "A stupidly simple radio player for Cinnamon"
+msgstr "Un reproductor de radio ridículamente sencillo para Cinnamon"
+
+#. settings-schema.json->page_stations->title
+msgid "Radios"
+msgstr "Radios"
+
+#. settings-schema.json->tips->title
+#. settings-schema.json->tips-section->title
+msgid "Tips"
+msgstr "Consejos"
+
+#. settings-schema.json->section_search->title
+msgid "Radio station search (Radio-Browser API)"
+msgstr "Búsqueda de emisoras de radio (API de Radio-Browser)"
+
+#. settings-schema.json->section_list->title
+msgid "Station management"
+msgstr "Gestión de las emisoras"
+
+#. settings-schema.json->search_keyword->description
+msgid "Radio station name to search for"
+msgstr "Nombre de la emisora de radio que se desea buscar"
+
+#. settings-schema.json->search_button->description
+msgid "Launch search"
+msgstr "Iniciar búsqueda"
+
+#. settings-schema.json->search_button->tooltip
+msgid "Search for the station on the internet"
+msgstr "Buscar la emisora en Internet"
+
+#. settings-schema.json->search_results->description
+msgid "Search results (Copy the URL and add it to your list below):"
+msgstr ""
+"Resultados de la búsqueda (copie la URL y agréguela a su lista más abajo):"
+
+#. settings-schema.json->clear_button->description
+msgid "Clear results"
+msgstr "Borrar los resultados"
+
+#. settings-schema.json->clear_button->tooltip
+msgid "Clear the text area"
+msgstr "Borrar el área de texto"
+
+#. settings-schema.json->custom_stations->description
+msgid "Custom radio stations"
+msgstr "Emisoras de radio personalizadas"
+
+#. settings-schema.json->custom_stations->columns->title
+msgid "Station name"
+msgstr "Nombre de la emisora"
+
+#. settings-schema.json->custom_stations->columns->title
+msgid "Stream URL"
+msgstr "URL de la transmisión"
+
+#. settings-schema.json->custom_stations->columns->title
+msgid "Image path (e.g., /home/user/logo.png)"
+msgstr "Ruta de la imagen (p. ej., /home/user/logo.png)"
+
+#. settings-schema.json->info1->description
+msgid ""
+"\n"
+"To create a custom image for a radio station:\n"
+"• Create an image of any format (png, jpeg, or svg) with a square 'cover' "
+"style size (e.g., 300x300).\n"
+"• Station images are stored by default in the applet's image folder, and the "
+"path is /images/yourcover.png. For images located in another folder, apply "
+"the same process and adapt the path accordingly.\n"
+"• The easiest way is to copy the desired image and paste it into the "
+"provided field; this will directly paste the image path.\n"
+msgstr ""
+"\n"
+"Para crear una imagen personalizada para una emisora de radio:\n"
+"• Crea una imagen en cualquier formato (png, jpeg o svg) con un tamaño "
+"cuadrado tipo 'portada' (por ejemplo, 300x300).\n"
+"• Las imágenes de las emisoras se guardan por defecto en la carpeta de "
+"imágenes del applet, y la ruta es /images/yourcover.png. Para las imágenes "
+"que se encuentren en otra carpeta, sigue el mismo proceso y adapta la ruta "
+"en consecuencia.\n"
+"• La forma más sencilla es copiar la imagen deseada y pegarla en el campo "
+"correspondiente; así se pegará directamente la ruta de la imagen.\n"

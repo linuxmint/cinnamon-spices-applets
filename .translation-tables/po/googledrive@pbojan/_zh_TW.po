@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->pageConfiguration->title
+msgid "Configuration"
+msgstr ""
+
+#. settings-schema.json->pageHelp->title
+msgid "Help"
+msgstr ""
+
+#. settings-schema.json->sectionWhitelist->title
+msgid "Whitelisted Folders"
+msgstr ""
+
+#. settings-schema.json->sectionNote->title
+msgid "Important Message"
+msgstr ""
+
+#. settings-schema.json->location->description
+msgid "Drive Sync Location"
+msgstr ""
+
+#. settings-schema.json->whitelist->columns->title
+msgid "Folder Name"
+msgstr ""
+
+#. settings-schema.json->whitelist->description
+msgid "Whitelist Folders"
+msgstr ""
+
+#. settings-schema.json->note->description
+msgid ""
+"Note: This is a new release of this Applet, so your feedback and ideas are "
+"very important to make this applet better in the future. Please consider "
+"reporting any issues, bugs, instabilities, or ideas for general improvements "
+"on the links below! Thank you!"
+msgstr ""
+
+#. settings-schema.json->website->description
+msgid ""
+"To learn more about the applet please click the button below to visit the "
+"official repository for this applet."
+msgstr ""
+
+#. settings-schema.json->helpSubmitIssue->description
+msgid "Submit an Issue"
+msgstr ""

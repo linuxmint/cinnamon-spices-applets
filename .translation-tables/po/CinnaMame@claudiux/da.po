@@ -1,0 +1,126 @@
+# CINNAMAME
+# This file is put in the public domain.
+# claudiux, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: CinnaMame@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-06-27 18:56+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:36
+msgid ""
+"Once you've downloaded your roms from your library,\n"
+"you need to copy them to the local folder named here\n"
+"‘Local Mame Roms’.\n"
+"\n"
+"Then go to the ‘Games to show’ tab."
+msgstr ""
+"Når du har hentet dine ROM'er fra dit bibliotek,\n"
+"skal du kopiere dem til den lokale mappe, der hedder\n"
+"“Lokale Mame-ROM'er”.\n"
+"\n"
+"Gå derefter til fanen “Spil der skal vises”."
+
+#. applet.js:37
+msgid ""
+"Do not use [+]; use the 'Refresh Games' button instead.\n"
+"Disable games you don't want in the menu.\n"
+"Removing a line do not remove the game from the menu.\n"
+"You can change Titles but not Ids.\n"
+"You can change order to change that of the menu."
+msgstr ""
+"Brug ikke [+]; brug i stedet knappen “Genopfrisk spil”.\n"
+"Deaktivér de spil, du ikke ønsker at have med i menuen.\n"
+"Hvis du sletter en linje, fjernes spillet ikke fra menuen.\n"
+"Du kan ændre titlerne, men ikke ID'erne.\n"
+"Du kan ændre rækkefølgen for at ændre menuen."
+
+#. applet.js:78
+msgid "Install mame"
+msgstr "Installér mame"
+
+#. metadata.json->description
+#. metadata.json->name
+msgid "CinnaMame"
+msgstr "CinnaMame"
+
+#. settings-schema.json->pageRoms->title
+msgid "Roms"
+msgstr "ROM'er"
+
+#. settings-schema.json->pageGames->title
+msgid "Games to show"
+msgstr "Spil der skal vises"
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr "Generelt"
+
+#. settings-schema.json->sectionLink->title
+msgid "Rom Library"
+msgstr "ROM-bibliotek"
+
+#. settings-schema.json->sectionTips->title
+#. settings-schema.json->sectionGamesTips->title
+msgid "Tips"
+msgstr "Tips"
+
+#. settings-schema.json->sectionMameRoms->title
+#. settings-schema.json->sectionGamesToShow->title
+msgid "Local Mame Roms"
+msgstr "Lokale Mame-ROM'er"
+
+#. settings-schema.json->sectionIcon->title
+msgid "Icon"
+msgstr "Ikon"
+
+#. settings-schema.json->linkURL->description
+msgid "URL of your Rom Library"
+msgstr "URL til dit ROM-bibliotek"
+
+#. settings-schema.json->linkButton->description
+msgid "Open your Rom Library"
+msgstr "Åbn dit ROM-bibliotek"
+
+#. settings-schema.json->linkReset->description
+msgid "Reset Rom Library URL to default"
+msgstr "Nulstil URL'en til ROM-biblioteket"
+
+#. settings-schema.json->mameRomsButton->description
+msgid "Open Local Mame Roms"
+msgstr "Åbn lokale Mame-ROM'er"
+
+#. settings-schema.json->refreshGamesButton->description
+msgid "Refresh Games"
+msgstr "Genopfrisk spil"
+
+#. settings-schema.json->gamesToShow->columns->title
+msgid "Enabled"
+msgstr "Aktiveret"
+
+#. settings-schema.json->gamesToShow->columns->title
+msgid ""
+"Id\n"
+"Do not change!"
+msgstr ""
+"ID\n"
+"Ændr ikke!"
+
+#. settings-schema.json->gamesToShow->columns->title
+msgid "Title"
+msgstr "Titel"
+
+#. settings-schema.json->useSymbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "Anvend symbolsk ikon"

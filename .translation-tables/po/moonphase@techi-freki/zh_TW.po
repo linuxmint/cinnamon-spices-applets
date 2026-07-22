@@ -1,0 +1,197 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: moonphase@techi-freki 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-05-05 18:11-0400\n"
+"PO-Revision-Date: 2025-08-01 02:43+08:00\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: js/compass.js:14
+msgid "North"
+msgstr "北"
+
+#: js/compass.js:15
+msgid "North East"
+msgstr "東北"
+
+#: js/compass.js:16
+msgid "East"
+msgstr "東"
+
+#: js/compass.js:17
+msgid "South East"
+msgstr "東南"
+
+#: js/compass.js:18
+msgid "South"
+msgstr "南"
+
+#: js/compass.js:19
+msgid "South West"
+msgstr "西南"
+
+#: js/compass.js:20
+msgid "West"
+msgstr "西"
+
+#: js/compass.js:21
+msgid "North West"
+msgstr "西北"
+
+#: js/moon.js:32 js/moon.js:40
+msgid "New Moon"
+msgstr "新月"
+
+#: js/moon.js:33
+msgid "Waxing Crescent"
+msgstr "眉月"
+
+#: js/moon.js:34
+msgid "First Quarter"
+msgstr "上弦月"
+
+#: js/moon.js:35
+msgid "Waxing Gibbous"
+msgstr "盈凸月"
+
+#: js/moon.js:36
+msgid "Full Moon"
+msgstr "滿月"
+
+#: js/moon.js:37
+msgid "Waning Gibbous"
+msgstr "虧凸月"
+
+#: js/moon.js:38
+msgid "Last Quarter"
+msgstr "下弦月"
+
+#: js/moon.js:39
+msgid "Waning Crescent"
+msgstr "殘月"
+
+#: js/ui/currentPhaseUi.js:32
+msgid "illumination"
+msgstr "光照度"
+
+#: js/ui/riseSetUi.js:55
+msgid "The moon is always down and will not rise today"
+msgstr "月亮今日皆位於地平線下，不會升起"
+
+#: js/ui/riseSetUi.js:65
+msgid "The moon is always up and will not set today"
+msgstr "月亮今日皆位於地平線上，不會落下"
+
+#: js/ui/riseSetUi.js:76
+msgid "Moonrise"
+msgstr "月出"
+
+#: js/ui/riseSetUi.js:83
+msgid "Lunar Noon"
+msgstr "月正中天"
+
+#: js/ui/riseSetUi.js:90
+msgid "Moonset"
+msgstr "月落"
+
+#: js/ui/elements/noRiseSetElement.js:54
+msgid "Next Moonrise"
+msgstr "下次月出"
+
+#: js/ui/elements/noRiseSetElement.js:66
+msgid "Next Moonset"
+msgstr "下次月落"
+
+#. metadata.json->name
+msgid "Moon Phase"
+msgstr "月相"
+
+#. metadata.json->description
+msgid "A Cinnamon applet that displays up-to-date moon related information."
+msgstr "顯示即時月亮相關資訊的 Cinnamon 小程式。"
+
+#. settings-schema.json->page-settings->title
+msgid "Settings"
+msgstr "設定"
+
+#. settings-schema.json->section-geolocation->title
+msgid "Geolocation Settings"
+msgstr "地理位置設定"
+
+#. settings-schema.json->section-general->title
+msgid "General Settings"
+msgstr "一般設定"
+
+#. settings-schema.json->section-update->title
+msgid "Update Settings"
+msgstr "更新設定"
+
+#. settings-schema.json->enableGeolocation->description
+msgid "Enable geolocation features"
+msgstr "啟用地理位置功能"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "緯度"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "經度"
+
+#. settings-schema.json->enablePopup->description
+msgid "Enable popup menu"
+msgstr "啟用快顯功能表"
+
+#. settings-schema.json->showCurrentPhaseInfo->description
+msgid "Display the current phase information"
+msgstr "顯示目前月相資訊"
+
+#. settings-schema.json->showRiseSet->description
+msgid "Display the moon rise, transit, and set times"
+msgstr "顯示月亮升起、中天與落下時間"
+
+#. settings-schema.json->showPhaseLabel->description
+msgid "Display the applet label"
+msgstr "顯示小程式標籤"
+
+#. settings-schema.json->showNameLabel->description
+msgid "Display the name of the moon phase in the label"
+msgstr "在標籤中顯示月相名稱"
+
+#. settings-schema.json->showPercentageLabel->description
+msgid "Display the percentage of the moon phase in the label"
+msgstr "在標籤中顯示月相百分比"
+
+#. settings-schema.json->showTooltip->description
+msgid "Display a tooltip on hover"
+msgstr "滑鼠游標停留時顯示工具提示"
+
+#. settings-schema.json->showPhaseTooltip->description
+msgid "Display the name of the moon phase in the tooltip"
+msgstr "在工具提示中顯示月相名稱"
+
+#. settings-schema.json->showPercentageTooltip->description
+msgid "Display percentage of the moon phase in the tooltip"
+msgstr "在工具提示中顯示月相百分比"
+
+#. settings-schema.json->useAltIcons->description
+msgid "Light theme"
+msgstr "淺色主題"
+
+#. settings-schema.json->updateInterval->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->updateInterval->description
+msgid "Update interval"
+msgstr "更新間隔"

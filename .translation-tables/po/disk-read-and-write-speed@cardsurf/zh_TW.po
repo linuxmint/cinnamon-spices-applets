@@ -1,0 +1,437 @@
+# DISK READ AND WRITE SPEED
+# This file is put in the public domain.
+# cardsurf, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: disk-read-and-write-speed@cardsurf 1.1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-28 14:32+0200\n"
+"PO-Revision-Date: 2025-08-28 00:41+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. applet.js:981
+msgid " TiB"
+msgstr " TiB"
+
+#. applet.js:984
+msgid " GiB"
+msgstr " GiB"
+
+#. applet.js:987
+msgid " MiB"
+msgstr " MiB"
+
+#. applet.js:990
+msgid " kiB"
+msgstr " kiB"
+
+#. applet.js:992
+msgid "   B"
+msgstr "   B"
+
+#. applet.js:995
+msgid " TB"
+msgstr " TB"
+
+#. applet.js:998
+msgid " GB"
+msgstr " GB"
+
+#. applet.js:1001
+msgid " MB"
+msgstr " MB"
+
+#. applet.js:1004
+msgid " kB"
+msgstr " kB"
+
+#. applet.js:1006
+msgid "  B"
+msgstr "  B"
+
+#. applet.js:1016
+msgid " Tib"
+msgstr " Tib"
+
+#. applet.js:1019
+msgid " Gib"
+msgstr " Gib"
+
+#. applet.js:1022
+msgid " Mib"
+msgstr " Mib"
+
+#. applet.js:1025
+msgid " kib"
+msgstr " kib"
+
+#. applet.js:1027
+msgid "   b"
+msgstr "   b"
+
+#. applet.js:1030
+msgid " Tb"
+msgstr " Tb"
+
+#. applet.js:1033
+msgid " Gb"
+msgstr " Gb"
+
+#. applet.js:1036
+msgid " Mb"
+msgstr " Mb"
+
+#. applet.js:1039
+msgid " kb"
+msgstr " kb"
+
+#. applet.js:1041
+msgid "  b"
+msgstr "  b"
+
+#. metadata.json->description
+msgid "Shows usage of a disk"
+msgstr "顯示磁碟使用狀況"
+
+#. metadata.json->name
+msgid "Disk read and write speed"
+msgstr "磁碟讀寫速度"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "組態設定"
+
+#. settings-schema.json->display_mode->description
+msgid "Show"
+msgstr "顯示"
+
+#. settings-schema.json->display_mode->options
+msgid "Average speed per second"
+msgstr "每秒平均速度"
+
+#. settings-schema.json->display_mode->options
+msgid "Amount of data transferred"
+msgstr "資料傳輸量"
+
+#. settings-schema.json->display_mode->tooltip
+msgid "Values shown in the panel"
+msgstr "面板上顯示的數值"
+
+#. settings-schema.json->unit_type->description
+msgid "Unit"
+msgstr "單位"
+
+#. settings-schema.json->unit_type->options
+msgid "Bytes"
+msgstr "位元組"
+
+#. settings-schema.json->unit_type->options
+msgid "Bits"
+msgstr "位元"
+
+#. settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr "面板上顯示的基本資料單位"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr "十進位或二進位"
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr "十進位"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr "二進位"
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+"十進位：k、M、G、T\n"
+"二進位：ki、Mi、Gi、Ti"
+
+#. settings-schema.json->update_every->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->update_every->description
+msgid "Calculate every"
+msgstr "計算間隔"
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to calculate disk read and write speed"
+msgstr "計算磁碟讀寫速度的頻率"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "圖形介面"
+
+#. settings-schema.json->gui_speed_type->description
+msgid "Type"
+msgstr "類型"
+
+#. settings-schema.json->gui_speed_type->options
+msgid "Compact"
+msgstr "精簡"
+
+#. settings-schema.json->gui_speed_type->options
+msgid "Large"
+msgstr "大型"
+
+#. settings-schema.json->gui_speed_type->tooltip
+msgid "Applet Gui"
+msgstr "小程式圖形介面"
+
+#. settings-schema.json->gui_decimal_places->description
+#. settings-schema.json->hover_popup_decimal_places->description
+msgid "Decimal places"
+msgstr "小數位數"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "Auto"
+msgstr "自動"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "0 "
+msgstr "0"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "1 "
+msgstr "1"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "2 "
+msgstr "2"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "3 "
+msgstr "3"
+
+#. settings-schema.json->gui_decimal_places->tooltip
+msgid "Decimal places of disk read and write speed shown in the panel"
+msgstr "面板上顯示的磁碟讀寫速度小數位數"
+
+#. settings-schema.json->gui_text_css->description
+msgid "Text CSS"
+msgstr "文字 CSS 樣式"
+
+#. settings-schema.json->gui_text_css->tooltip
+msgid "A CSS style applied to the text in the panel"
+msgstr "套用於面板文字的 CSS 樣式"
+
+#. settings-schema.json->gui_read_icon_filename->description
+msgid "Read icon"
+msgstr "讀取圖示"
+
+#. settings-schema.json->gui_read_icon_filename->tooltip
+msgid "An icon displayed next to disk read speed in the panel"
+msgstr "顯示於面板磁碟讀取速度旁的圖示"
+
+#. settings-schema.json->gui_written_icon_filename->description
+msgid "Write icon"
+msgstr "寫入圖示"
+
+#. settings-schema.json->gui_written_icon_filename->tooltip
+msgid "An icon displayed next to disk write speed in the panel"
+msgstr "顯示於面板磁碟寫入速度旁的圖示"
+
+#. settings-schema.json->hover_popup_headers_css->description
+msgid "Popup headers CSS"
+msgstr "彈出標題 CSS 樣式"
+
+#. settings-schema.json->hover_popup_headers_css->tooltip
+msgid "A CSS style applied to headers in the hover popup"
+msgstr "套用於滑鼠停留彈出視窗標題的 CSS 樣式"
+
+#. settings-schema.json->hover_popup_rows_css->description
+msgid "Popup rows CSS"
+msgstr "彈出列 CSS 樣式"
+
+#. settings-schema.json->hover_popup_rows_css->tooltip
+msgid "A CSS style applied to rows in the hover popup"
+msgstr "套用於滑鼠停留彈出視窗列的 CSS 樣式"
+
+#. settings-schema.json->total_data_start->description
+msgid "Total data"
+msgstr "總資料量"
+
+#. settings-schema.json->show_hover->description
+msgid "Show total read and write on hover"
+msgstr "滑鼠停留時顯示總讀取與寫入量"
+
+#. settings-schema.json->show_hover->tooltip
+msgid "Show the hover popup with total amount of data read and written"
+msgstr "顯示滑鼠停留彈出視窗，並顯示總讀取與寫入資料量"
+
+#. settings-schema.json->show_total_bytes_read->description
+msgid "Show total bytes read"
+msgstr "顯示總讀取位元組數"
+
+#. settings-schema.json->show_total_bytes_read->tooltip
+msgid "Show the column with the total amount of bytes read in the hover popup"
+msgstr "於滑鼠停留彈出視窗中顯示總讀取位元組數欄位"
+
+#. settings-schema.json->show_total_bytes_written->description
+msgid "Show total bytes written"
+msgstr "顯示總寫入位元組數"
+
+#. settings-schema.json->show_total_bytes_written->tooltip
+msgid ""
+"Show the column with the total amount of bytes written in the hover popup"
+msgstr ""
+"於滑鼠停留彈出視窗中顯示總寫入位元組數欄位"
+
+#. settings-schema.json->total_bytes_read_column_name->description
+msgid "Total bytes read column name"
+msgstr "總讀取位元組數欄位名稱"
+
+#. settings-schema.json->total_bytes_read_column_name->tooltip
+msgid ""
+"A name of the column with the total amount of bytes read in the hover popup"
+msgstr ""
+"滑鼠停留彈出視窗中總讀取位元組數欄位的名稱"
+
+#. settings-schema.json->total_bytes_written_column_name->description
+msgid "Total bytes written column name"
+msgstr "總寫入位元組數欄位名稱"
+
+#. settings-schema.json->total_bytes_written_column_name->tooltip
+msgid ""
+"A name of the column with the total amount of bytes written in the hover "
+"popup"
+msgstr ""
+"滑鼠停留彈出視窗中總寫入位元組數欄位的名稱"
+
+#. settings-schema.json->devices_regex_string->description
+msgid "Disks"
+msgstr "磁碟"
+
+#. settings-schema.json->devices_regex_string->tooltip
+msgid "A regular expression that matches disk names to show in the hover popup"
+msgstr "用以比對磁碟名稱的正規表示式，符合的磁碟將顯示於滑鼠停留彈出視窗。"
+
+#. settings-schema.json->device_aliases_string->description
+msgid "Aliases"
+msgstr "別名"
+
+#. settings-schema.json->device_aliases_string->tooltip
+msgid ""
+"A comma separated list of \"disk:alias\" pairs that replace disk names in "
+"the hover popup"
+msgstr ""
+"以逗號分隔的「磁碟:別名」配對清單，用以取代滑鼠停留彈出視窗中的磁碟名稱"
+
+#. settings-schema.json->column_names_string->description
+msgid "Headers"
+msgstr "欄位標題"
+
+#. settings-schema.json->column_names_string->tooltip
+msgid "A comma separated list of column headers to show in the hover popup"
+msgstr "以逗號分隔的欄位標題清單，將顯示於滑鼠停留彈出視窗中"
+
+#. settings-schema.json->column_indexes_string->description
+msgid "Columns"
+msgstr "欄位"
+
+#. settings-schema.json->column_indexes_string->tooltip
+msgid "A comma separated list of column indexes to show in the hover popup"
+msgstr "以逗號分隔的欄位索引清單，將顯示於滑鼠停留彈出視窗中"
+
+#. settings-schema.json->column_spaces->description
+msgid "Spaces"
+msgstr "間距"
+
+#. settings-schema.json->column_spaces->tooltip
+msgid "A number of spaces between columns in the hover popup"
+msgstr "滑鼠停留彈出視窗中各欄位之間的間距"
+
+#. settings-schema.json->column_type_sort->description
+msgid "Column sort"
+msgstr "欄位排序"
+
+#. settings-schema.json->column_type_sort->options
+msgid "Bytes read"
+msgstr "讀取位元組"
+
+#. settings-schema.json->column_type_sort->options
+msgid "Bytes written"
+msgstr "寫入位元組"
+
+#. settings-schema.json->column_type_sort->options
+msgid "Other"
+msgstr "其他"
+
+#. settings-schema.json->column_type_sort->tooltip
+msgid "A column used to sort rows in the hover popup"
+msgstr "用於排序滑鼠停留彈出視窗中資料列的欄位"
+
+#. settings-schema.json->column_index_sort->description
+msgid "Sort column index"
+msgstr "排序欄位索引"
+
+#. settings-schema.json->column_index_sort->tooltip
+msgid "An index of a column that is used to sort rows in the hover popup"
+msgstr "用於排序滑鼠停留彈出視窗中資料列的欄位索引"
+
+#. settings-schema.json->column_sort_order->description
+msgid "Order"
+msgstr "排序"
+
+#. settings-schema.json->column_sort_order->options
+msgid "Ascending"
+msgstr "遞增"
+
+#. settings-schema.json->column_sort_order->options
+msgid "Descending"
+msgstr "遞減"
+
+#. settings-schema.json->column_sort_order->tooltip
+msgid "An order used to sort rows in the hover popup"
+msgstr "用於排序滑鼠停留彈出視窗中資料列的順序"
+
+#. settings-schema.json->hover_popup_decimal_places->tooltip
+msgid ""
+"Decimal places of total amount of data read and written shown in the hover "
+"popup"
+msgstr ""
+"滑鼠停留彈出視窗中顯示的總讀取與寫入資料量的小數位數"
+
+#. settings-schema.json->processes_start->description
+msgid "Processes"
+msgstr "處理程序"
+
+#. settings-schema.json->launch_terminal->description
+msgid "List input and output information per process"
+msgstr "列出每個處理程序的輸入與輸出資訊"
+
+#. settings-schema.json->launch_terminal->tooltip
+msgid ""
+"Open a terminal with a list of input and output informations per process on "
+"a left mouse click. The next click closes the terminal."
+msgstr ""
+"滑鼠左鍵點選開啟終端機，顯示每個處理程序的輸入與輸出資訊清單。再次點選則"
+"關閉終端機。"
+
+#. settings-schema.json->terminal_command->description
+msgid "Command"
+msgstr "指令"
+
+#. settings-schema.json->terminal_command->tooltip
+msgid "A command used to show input and output information per process"
+msgstr "用於顯示每個處理程序輸入與輸出資訊的指令"

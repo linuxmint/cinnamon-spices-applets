@@ -1,0 +1,51 @@
+# Swedish translation for radio@driglu4it
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2019, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: radio@driglu4it\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-20 14:55-0500\n"
+"PO-Revision-Date: 2021-08-16 14:39+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. metadata.json->description
+msgid ""
+"A radio applet with 1000's of searchable stations, mpris support, youtube-"
+"download function and more"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->description
+#. 6.4->settings-schema.json->youtube-download-cli->description
+msgid "YouTube Download CLI tool"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->tooltip
+#. 6.4->settings-schema.json->youtube-download-cli->tooltip
+msgid "The CLI tool used to download songs from YouTube"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->options
+#. 6.4->settings-schema.json->youtube-download-cli->options
+msgid "yt-dlp"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->options
+#. 6.4->settings-schema.json->youtube-download-cli->options
+msgid "youtube-dl"
+msgstr ""
+
+#. 4.6->settings-schema.json->music-download-dir-select->tooltip
+#. 6.4->settings-schema.json->music-download-dir-select->tooltip
+msgid "Songs downloaded from YouTube will be saved to this directory."
+msgstr ""

@@ -1,0 +1,219 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-26 05:29-0500\n"
+"PO-Revision-Date: 2024-07-05 11:21+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:22
+msgid "trying to fetch IP information"
+msgstr "cercando di recuperare informazioni sull'IP"
+
+#. metadata.json->name
+msgid "IP Indicator"
+msgstr "Indicatore IP"
+
+#. metadata.json->description
+msgid ""
+"Applet shows different icon for different public IP addresses. Useful when "
+"often using VPN."
+msgstr ""
+"L'applet mostra un'icona diversa per i diversi indirizzi IP pubblici. Utile "
+"quando si utilizza spesso la VPN."
+
+#. settings-schema.json->appearance->options
+msgid "Icon"
+msgstr "Icona"
+
+#. settings-schema.json->appearance->options
+msgid "IP"
+msgstr "IP"
+
+#. settings-schema.json->appearance->options
+msgid "Icon and IP"
+msgstr "Icona e IP"
+
+#. settings-schema.json->appearance->description
+msgid "Appearance"
+msgstr "Aspetto"
+
+#. settings-schema.json->update_interval_ifconfig->units
+msgid "seconds"
+msgstr "secondi"
+
+#. settings-schema.json->update_interval_ifconfig->description
+msgid "Interface check interval:"
+msgstr "Intervallo di controllo dell'interfaccia:"
+
+#. settings-schema.json->update_interval_ifconfig->tooltip
+msgid ""
+"Interval in which applet will check if there was change in network "
+"interfaces. Can be frequent."
+msgstr ""
+"Intervallo in cui l'applet controllerà se sono state apportate modifiche "
+"alle interfacce di rete. Può essere frequente."
+
+#. settings-schema.json->update_interval_service->units
+msgid "minutes"
+msgstr "minuti"
+
+#. settings-schema.json->update_interval_service->description
+msgid "IP Service interval:"
+msgstr "Intervallo del servizio IP:"
+
+#. settings-schema.json->update_interval_service->tooltip
+msgid ""
+"Interval in which applet will fire get request to one of IP Services. Don't "
+"make it too frequent to not overload the servers."
+msgstr ""
+"Intervallo in cui verrà attivata l'applet per ottenere la richiesta a uno "
+"dei servizi IP. Non renderlo troppo frequente per non sovraccaricare i "
+"server."
+
+#. settings-schema.json->debug_level->description
+msgid "Debug level:"
+msgstr "Livello debug:"
+
+#. settings-schema.json->debug_level->tooltip
+msgid ""
+"For debugging purposes. Higher level means more detailed logs in ~/.cinnamon/"
+"glass.log"
+msgstr ""
+"A scopo di debug. Un livello più alto significa log più dettagliati in ~/."
+"cinnamon/glass.log"
+
+#. settings-schema.json->head0->description
+msgid ""
+"To match ISP names, use isp value from the service http://ip-api.com/json"
+msgstr ""
+"Per abbinare i nomi degli ISP, utilizzare il valore isp dal servizio http://"
+"ip-api.com/json"
+
+#. settings-schema.json->head1->description
+msgid "Home ISP"
+msgstr "ISP di Casa"
+
+#. settings-schema.json->home_isp->description
+msgid "Home ISP:"
+msgstr "ISP di Casa:"
+
+#. settings-schema.json->home_isp->tooltip
+msgid ""
+"Fill out your home ISP. If the ISP from IP service will match with this "
+"value, home icon will be used instead of country flag."
+msgstr ""
+"Compila il tuo ISP di casa. Se l'ISP del servizio IP corrisponde a questo "
+"valore, verrà utilizzata l'icona home al posto della bandiera del paese."
+
+#. settings-schema.json->home_isp_icon-name->description
+msgid "The icon to used for home ISP:"
+msgstr "L'icona da utilizzare per l'ISP di casa:"
+
+#. settings-schema.json->home_isp_icon-name->tooltip
+#. settings-schema.json->other1_isp_icon-name->tooltip
+#. settings-schema.json->other2_isp_icon-name->tooltip
+#. settings-schema.json->other3_isp_icon-name->tooltip
+#. settings-schema.json->other4_isp_icon-name->tooltip
+#. settings-schema.json->other5_isp_icon-name->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr ""
+"Seleziona un file icona, oppure puoi digitare un nome icona nella casella di "
+"inserimento"
+
+#. settings-schema.json->home_isp_nickname->description
+#. settings-schema.json->other1_isp_nickname->description
+#. settings-schema.json->other2_isp_nickname->description
+#. settings-schema.json->other3_isp_nickname->description
+#. settings-schema.json->other4_isp_nickname->description
+#. settings-schema.json->other5_isp_nickname->description
+msgid "Nickname:"
+msgstr "Soprannome:"
+
+#. settings-schema.json->home_isp_nickname->tooltip
+#. settings-schema.json->other1_isp_nickname->tooltip
+#. settings-schema.json->other2_isp_nickname->tooltip
+#. settings-schema.json->other3_isp_nickname->tooltip
+#. settings-schema.json->other4_isp_nickname->tooltip
+#. settings-schema.json->other5_isp_nickname->tooltip
+msgid "Text to show in tooltip when this ISP is active"
+msgstr "Testo da mostrare nella descrizione comando quando questo ISP è attivo"
+
+#. settings-schema.json->head2->description
+msgid "Other ISP 1"
+msgstr "Altro ISP 1"
+
+#. settings-schema.json->other1_isp->description
+msgid "Other ISP 1:"
+msgstr "Altro ISP 1:"
+
+#. settings-schema.json->other1_isp->tooltip
+msgid ""
+"Fill out your other ISP. If the ISP from IP service will match with this "
+"value, home icon will be used instead of country flag."
+msgstr ""
+"Compila il tuo altro ISP. Se l'ISP del servizio IP corrisponde a questo "
+"valore, verrà utilizzata l'icona home al posto della bandiera del paese."
+
+#. settings-schema.json->other1_isp_icon-name->description
+#. settings-schema.json->other2_isp_icon-name->description
+#. settings-schema.json->other3_isp_icon-name->description
+#. settings-schema.json->other4_isp_icon-name->description
+#. settings-schema.json->other5_isp_icon-name->description
+msgid "The icon to use for other ISP:"
+msgstr "L'icona da utilizzare per altri ISP:"
+
+#. settings-schema.json->head3->description
+msgid "Other ISP 2"
+msgstr "Altro ISP 2"
+
+#. settings-schema.json->other2_isp->description
+msgid "Other ISP 2:"
+msgstr "Altro ISP 2"
+
+#. settings-schema.json->other2_isp->tooltip
+#. settings-schema.json->other3_isp->tooltip
+#. settings-schema.json->other4_isp->tooltip
+#. settings-schema.json->other5_isp->tooltip
+msgid ""
+"Fill out your oher ISP. If the ISP from IP service will match with this "
+"value, home icon will be used instead of country flag."
+msgstr ""
+"Compila il tuo altro ISP. Se l'ISP del servizio IP corrisponde a questo "
+"valore, verrà utilizzata l'icona home al posto della bandiera del paese."
+
+#. settings-schema.json->head4->description
+msgid "Other ISP 3"
+msgstr "Altro ISP 3"
+
+#. settings-schema.json->other3_isp->description
+msgid "Other ISP 3:"
+msgstr "Altro ISP 3:"
+
+#. settings-schema.json->head5->description
+msgid "Other ISP 4"
+msgstr "Altro ISP 4"
+
+#. settings-schema.json->other4_isp->description
+msgid "Other ISP 4:"
+msgstr "Altro ISP 4:"
+
+#. settings-schema.json->head6->description
+msgid "Other ISP 5"
+msgstr "Altro ISP 5"
+
+#. settings-schema.json->other5_isp->description
+msgid "Other ISP 5:"
+msgstr "Altro ISP 5:"

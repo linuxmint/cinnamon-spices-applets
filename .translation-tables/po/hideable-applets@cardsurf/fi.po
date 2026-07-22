@@ -1,0 +1,250 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hideable-applets@cardsurf 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-08 10:25+0100\n"
+"PO-Revision-Date: 2024-11-13 23:35+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. metadata.json->description
+msgid "Hides applets to tray"
+msgstr "Piilottaa paneelin sovelmat omaan lokeroon"
+
+#. metadata.json->name
+msgid "Hideable applets"
+msgstr "Hideable applets"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Asetukset"
+
+#. settings-schema.json->action_type->description
+msgid "Action"
+msgstr "Toiminta"
+
+#. settings-schema.json->action_type->options
+msgid "Open or close popup"
+msgstr "Avaa tai sulje laatikko"
+
+#. settings-schema.json->action_type->options
+msgid "Toggle visibility applets"
+msgstr "Vaihda näkyvät sovelmat"
+
+#. settings-schema.json->action_type->tooltip
+msgid "An action to perform on trigger"
+msgstr "Toiminta jonka liipaisin suoritetaan"
+
+#. settings-schema.json->action_trigger_type->description
+msgid "Trigger"
+msgstr "Liipaisin"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "Left mouse click"
+msgstr "Hiiren vasen painallus"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "Mouse hover"
+msgstr "Hiirellä osoittaminen"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "None"
+msgstr "Ei mitään"
+
+#. settings-schema.json->action_trigger_type->tooltip
+msgid "An event that triggers the action"
+msgstr "Tapahtuma joka laukaisee toiminnan"
+
+#. settings-schema.json->side_type->description
+msgid "Applets location"
+msgstr "Sovelmien sijainti"
+
+#. settings-schema.json->side_type->options
+msgid "Top"
+msgstr "Ylhäällä"
+
+#. settings-schema.json->side_type->options
+msgid "Right"
+msgstr "Oikealla"
+
+#. settings-schema.json->side_type->options
+msgid "Bottom"
+msgstr "Alhaalla"
+
+#. settings-schema.json->side_type->options
+msgid "Left"
+msgstr "Vasemmalla"
+
+#. settings-schema.json->side_type->tooltip
+msgid "A location of applets for which to toggle visibility"
+msgstr "Sovelmien sijainti joiden näkyvyyttä voi vaihtaa"
+
+#. settings-schema.json->restore_hidden_string->description
+msgid "Restore as hidden"
+msgstr "Palauta piilotetuksi"
+
+#. settings-schema.json->restore_hidden_string->tooltip
+msgid ""
+"A comma-separated list of applet UUIDs.\n"
+"An applet from this list will be hidden if the applet is configured as "
+"hidden and the applet shows up."
+msgstr ""
+"Pilkuilla eroteltu luettelo sovelmien UUID-tunnuksista, eli nimistä.\n"
+"Nämä luettelon sovelmat piilotetaan. Jos sovelma on määrätty piilotetuksi se "
+"tulee näkyviin."
+
+#. settings-schema.json->save_every->units
+msgid "seconds"
+msgstr "sekuntia"
+
+#. settings-schema.json->save_every->description
+msgid "Save every"
+msgstr "Tallenna jokainen"
+
+#. settings-schema.json->save_every->tooltip
+msgid "How often to save last used values"
+msgstr "Kuinka usein käytetyt arvot tallennetaan"
+
+#. settings-schema.json->tray_start->description
+msgid "Popup"
+msgstr "Ponnahdusikkuna"
+
+#. settings-schema.json->applet_popup_columns->description
+msgid "Columns"
+msgstr "Sarakkeet"
+
+#. settings-schema.json->applet_popup_columns->tooltip
+msgid "A number of columns in the applet popup"
+msgstr "Sovelman ikkunassa olevien sarakkeiden määrä"
+
+#. settings-schema.json->applet_popup_icons_size->units
+msgid "pixels"
+msgstr "pikseliä"
+
+#. settings-schema.json->applet_popup_icons_size->description
+msgid "Icon size"
+msgstr "Kuvakkeen koko"
+
+#. settings-schema.json->applet_popup_icons_size->tooltip
+msgid "A size of an icon in the applet popup"
+msgstr "Sovelman ikkunassa olevien kuvakkeiden koko"
+
+#. settings-schema.json->applet_popup_icons_css->description
+msgid "Icon CSS"
+msgstr "Kuvake CSS"
+
+#. settings-schema.json->applet_popup_icons_css->tooltip
+msgid "A CSS style applied to the icons in the applet popup"
+msgstr "CSS-tyyli sovelman kuvakkeissa"
+
+#. settings-schema.json->applet_popup_table_css->description
+msgid "Table CSS"
+msgstr "Taulukko CSS"
+
+#. settings-schema.json->applet_popup_table_css->tooltip
+msgid "A CSS style applied to a table in the applet popup"
+msgstr "CSS-tyyli sovelman taulukoissa"
+
+#. settings-schema.json->applet_popup_close_leave->description
+msgid "Auto close"
+msgstr "Autom. sulkeminen"
+
+#. settings-schema.json->applet_popup_close_leave->tooltip
+msgid "Close the applet popup when a mouse leaves the user interface"
+msgstr "Sulkee sovelman ikkunan kun hiiri poistuu käyttöliittymästä"
+
+#. settings-schema.json->match_panel_icons_size->description
+msgid "Match panel size"
+msgstr "Sovita paneelin kokoon"
+
+#. settings-schema.json->match_panel_icons_size->tooltip
+msgid "Match a size of an icon in the applet popup to a size of the panel"
+msgstr "Sovittaa sovelman ponnahdusikkunan kuvakkeen koon paneelin kokoon"
+
+#. settings-schema.json->show_icon_tooltips->description
+msgid "Show tooltips"
+msgstr "Näytä työkaluvihjeet"
+
+#. settings-schema.json->show_icon_tooltips->tooltip
+msgid "Show icon tooltips in the applet popup"
+msgstr "Näyttää kuvakkeen työkaluvihjeet sovelman ikkunassa"
+
+#. settings-schema.json->show_grayscale_icons->description
+msgid "Show grayscale icons"
+msgstr "Näytä kuvakkeita harmaasävyllä"
+
+#. settings-schema.json->show_grayscale_icons->tooltip
+msgid "Show icons of hidden applets in grayscale"
+msgstr "Näyttää piilotettujen sovelmien kuvakkeet harmaasävyllä"
+
+#. settings-schema.json->grayscale_brightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->grayscale_brightness->description
+msgid "Grayscale brightness"
+msgstr "Harmaasävyn kirkkaus"
+
+#. settings-schema.json->grayscale_brightness->tooltip
+msgid "A brightness level of grayscale icons"
+msgstr "Kirkkaustaso harmaasävyisille kuvakkeille"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Pääte"
+
+#. settings-schema.json->gui_sort_type->description
+msgid "Sort"
+msgstr "Järjestä"
+
+#. settings-schema.json->gui_sort_type->options
+msgid "Alphabetically"
+msgstr "Aakkosjärjestys"
+
+#. settings-schema.json->gui_sort_type->options
+msgid "Panel position"
+msgstr "Paneelipaikat"
+
+#. settings-schema.json->gui_sort_type->tooltip
+msgid "An order of items in the user interface"
+msgstr "Kohteiden järjestys käyttöliittymässä"
+
+#. settings-schema.json->gui_icon_type->description
+msgid "Panel icon"
+msgstr "Paneelin kuvake"
+
+#. settings-schema.json->gui_icon_type->options
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Filepath"
+msgstr "Tiedostopolku"
+
+#. settings-schema.json->gui_icon_type->options
+msgid "Symbolic"
+msgstr "Symbolinen"
+
+#. settings-schema.json->gui_icon_type->tooltip
+msgid "A type of an icon displayed on the panel"
+msgstr "Paneelissa näkyvä kuvake"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "A path to an icon displayed on a panel"
+msgstr "Polku paneelin kuvakkeeseen"
+
+#. settings-schema.json->gui_icon_symbolic_name->description
+msgid "Symbolic name"
+msgstr "Symbolic kuvakkeen nimi"
+
+#. settings-schema.json->gui_icon_symbolic_name->tooltip
+msgid "A name of a symbolic icon displayed on a panel"
+msgstr "Paneelissa näkyvän symbolisen kuvakkeen nimi"

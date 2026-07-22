@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: MonitorInputSource@klangman 1.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-12 22:04-0400\n"
+"PO-Revision-Date: 2024-07-14 01:55+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:51
+msgid "Ctrl+"
+msgstr "Ctrl+"
+
+#: applet.js:54
+msgid "Shift+"
+msgstr "Shift+"
+
+#: applet.js:58
+msgid "Left Click"
+msgstr "Clic esquerre"
+
+#: applet.js:60
+msgid "Middle Click"
+msgstr "Clic del mig"
+
+#: applet.js:62
+msgid "Right Click"
+msgstr "Clic dret"
+
+#: applet.js:64
+msgid "Back Click"
+msgstr "Clic de retrocés"
+
+#: applet.js:66
+msgid "Forward Click"
+msgstr "Clic d'avançament"
+
+#: applet.js:158 applet.js:390 applet.js:392
+msgid "Monitor input sources"
+msgstr "Fonts d'entrada del monitor"
+
+#: applet.js:170 applet.js:217 applet.js:480
+msgid "Detecting monitors..."
+msgstr "Detectant monitors..."
+
+#: applet.js:176
+msgid "Options"
+msgstr "Opcions"
+
+#: applet.js:178
+msgid "Clear monitor cache"
+msgstr "Esborrar la cau del monitor"
+
+#: applet.js:184
+msgid "Clear quick actions"
+msgstr "Esborrar les accions ràpides"
+
+#: applet.js:197
+msgid "Help"
+msgstr "Ajuda"
+
+#: applet.js:339
+msgid "Required \"ddcutil\" not found"
+msgstr "No s'ha trobat el paquet necessari \"ddcutil\""
+
+#: applet.js:343
+msgid "Error, \"ddcutil\" exit code "
+msgstr "Error, codi de sortida de \"ddcutil\" "
+
+#: applet.js:347
+msgid "No capable monitors detected"
+msgstr "No s'han detectat monitors compatibles"
+
+#: applet.js:386
+msgid "for"
+msgstr "per"
+
+#: applet.js:473
+msgid "Refresh"
+msgstr "Actualitzar"
+
+#. metadata.json->name
+msgid "Monitor Input Source"
+msgstr "Font d'entrada del monitor"
+
+#. metadata.json->description
+msgid ""
+"Change your monitors video input source directly from the cinnamon panel"
+msgstr ""
+"Canvieu la font d'entrada de vídeo del vostre monitor des del tauler de "
+"Cinnamon"

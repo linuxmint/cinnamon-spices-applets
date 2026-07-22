@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-04-27 13:15+0200\n"
+"PO-Revision-Date: 2023-05-25 21:21-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: applet.js:87
+msgid "version"
+msgstr "versión"
+
+#: applet.js:87
+msgid "Author:"
+msgstr "Autor:"
+
+#: applet.js:87
+msgid "Email:"
+msgstr "Email:"
+
+#: applet.js:87
+msgid "Repository:"
+msgstr "Repositorio:"
+
+#: applet.js:157
+msgid "Cheaty: Easy access cheatsheets"
+msgstr "Cheaty: Ayuda-memorias de fácil acceso"
+
+#: applet.js:307
+msgid "Configure..."
+msgstr "Configurar..."
+
+#: applet.js:321
+msgid "Code copied to the clipboard"
+msgstr "Código copiado en el portapapeles"
+
+#. metadata.json->description
+msgid "An applet to provide quick access to a variety of cheat sheets."
+msgstr "Un applet para acceder rápidamente a diversas ayuda-memorias."
+
+#. metadata.json->name
+msgid "Cheaty - Cheatsheet keeper"
+msgstr "Cheaty - Archivero de ayuda-memorias"
+
+#. settings-schema.json->cheatsheetFolder->description
+msgid "cheatsheetFolder"
+msgstr "carpeta de ayuda-memorias"
+
+#. settings-schema.json->keyOpen->description
+msgid "Show Cheaty popup menu"
+msgstr "Mostrar menú emergente Cheaty"
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the Cheaty popup menu."
+msgstr ""
+"Establece la combinación de teclas para mostrar el menú emergente de Cheaty."
+
+#. settings-schema.json->cheatsheets->description
+msgid "Cheat sheet selector"
+msgstr "Selector de ayuda-memorias"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Enabled"
+msgstr "Habilitado"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Name"
+msgstr "Nombre"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Description"
+msgstr "Descripción"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Author"
+msgstr "Autor"

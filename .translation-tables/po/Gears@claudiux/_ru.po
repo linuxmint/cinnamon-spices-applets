@@ -1,0 +1,26 @@
+# GEARS
+# This file is put in the public domain.
+# claudiux, 2016
+#
+msgid ""
+msgstr ""
+
+#. applet.js:71
+msgid "Refresh"
+msgstr ""
+
+#. settings-schema.json->sectionOptions->title
+msgid "Options"
+msgstr ""
+
+#. settings-schema.json->sectionLogging->title
+msgid "Logging"
+msgstr ""
+
+#. settings-schema.json->loopEvery->options
+msgid "Never"
+msgstr ""
+
+#. settings-schema.json->typeOfLogging->options
+msgid "None"
+msgstr ""

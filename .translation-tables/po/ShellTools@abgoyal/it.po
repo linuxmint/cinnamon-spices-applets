@@ -1,0 +1,31 @@
+# SHELLTOOLS
+# This file is put in the public domain.
+# jaszhix, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ShellTools@abgoyal 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:45
+msgid "Shell Tools"
+msgstr "Strumenti Shell"
+
+#. metadata.json->name
+msgid "ShellTools"
+msgstr "ShellTools"
+
+#. metadata.json->description
+msgid "Provides an easy way to run shell commands"
+msgstr "Fornisce un modo semplice per eseguire comandi shell"

@@ -1,0 +1,241 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-02 12:12+0300\n"
+"PO-Revision-Date: 2024-04-21 20:24+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:32 applet.js:58
+msgid "Required GTop package missing!"
+msgstr "Vereiste GTop-pakket ontbreekt!"
+
+#: applet.js:56
+msgid "Error!"
+msgstr "Fout!"
+
+#: applet.js:61
+msgid "Reset Peak Temperature"
+msgstr "Reset Piektemperatuur"
+
+#: applet.js:64
+msgid "Clear Cache"
+msgstr "Cache wissen"
+
+#: applet.js:161
+msgid "CPUs"
+msgstr "CPUs"
+
+#: applet.js:161
+msgid "°C max; "
+msgstr "°C max; "
+
+#: applet.js:161
+msgid "°C peak"
+msgstr "°C piek"
+
+#: applet.js:164
+msgid "Memory"
+msgstr "Geheugen"
+
+#: applet.js:164
+msgid "GB"
+msgstr "GB"
+
+#: applet.js:164
+msgid "GB swap"
+msgstr "GB swap"
+
+#: applet.js:167
+msgid "Network"
+msgstr "Netwerk"
+
+#: applet.js:321
+msgid "Core "
+msgstr "Kern "
+
+#: applet.js:366
+msgid "Used:   "
+msgstr "Gebruikt:   "
+
+#: applet.js:367
+msgid "Cache:  "
+msgstr "Cache:  "
+
+#: applet.js:368
+msgid "Buffer: "
+msgstr "Buffer: "
+
+#: applet.js:372
+msgid "Swap:   "
+msgstr "Swap:   "
+
+#: applet.js:442
+msgid "Up:      "
+msgstr "Up:      "
+
+#: applet.js:442 applet.js:443
+msgid "B/s"
+msgstr "B/s"
+
+#: applet.js:443
+msgid "Down:    "
+msgstr "Down:    "
+
+#: applet.js:444
+msgid "Data:    "
+msgstr "Gegevens:    "
+
+#: applet.js:444
+msgid "B"
+msgstr "B"
+
+#: applet.js:448
+msgid "no interfaces to show"
+msgstr "geen interfaces om weer te geven"
+
+#: applet.js:453
+msgid "k"
+msgstr "k"
+
+#: applet.js:453
+msgid "M"
+msgstr "M"
+
+#: applet.js:453
+msgid "G"
+msgstr "G"
+
+#: applet.js:453
+msgid "T"
+msgstr "T"
+
+#. metadata.json->name
+msgid "Simplified System Monitor"
+msgstr "Vereenvoudigde Systeemmonitor"
+
+#. metadata.json->description
+msgid "Applet to show system load and state"
+msgstr "Applet om systeem-belasting en -status weer te geven"
+
+#. settings-schema.json->common_label->description
+msgid "Common"
+msgstr "Algemeen"
+
+#. settings-schema.json->refresh->description
+msgid "Sections info refresh rate (seconds)"
+msgstr "Secties informatie vernieuwingsinterval (seconden)"
+
+#. settings-schema.json->refresh->tooltip
+msgid "CPUs, memory, network info refresh rate"
+msgstr "Vernieuwingsinterval voor CPU's, geheugen, netwerkinformatie"
+
+#. settings-schema.json->cpu_label->description
+msgid "CPUs and memory sections"
+msgstr "Secties CPU's en geheugen"
+
+#. settings-schema.json->size->description
+msgid "CPUs and memory panel sections widths (px)"
+msgstr "Breedtes van paneelsecties CPU's en geheugen (px)"
+
+#. settings-schema.json->size->tooltip
+msgid "CPUs and memory panel sections widths"
+msgstr "Breedtes van paneelsecties CPU's en geheugen (px)"
+
+#. settings-schema.json->temp_refresh->description
+msgid "CPUs temperature refresh rate (seconds)"
+msgstr "Vernieuwingsinterval voor CPU-temperatuur (seconden)"
+
+#. settings-schema.json->temp_refresh->tooltip
+msgid "CPUs temperature refresh rate"
+msgstr "Vernieuwingsinterval voor CPU-temperatuur"
+
+#. settings-schema.json->cold_temp->description
+msgid "CPU cold temperature (°C)"
+msgstr "Koude CPU-temperatuur (°C)"
+
+#. settings-schema.json->cold_temp->tooltip
+msgid ""
+"CPUs' temperature below which they are regarded as cold (for color "
+"representation in the panel)"
+msgstr ""
+"CPU's waarvan de temperatuur lager is dan deze waarde worden beschouwd als "
+"koud (voor kleurweergave in het paneel)"
+
+#. settings-schema.json->color_cold->description
+msgid "Color for CPU cold temperature"
+msgstr "Kleur voor koude CPU-temperatuur"
+
+#. settings-schema.json->hot_temp->description
+msgid "CPU hot temperature (°C)"
+msgstr "Hete CPU-temperatuur (°C)"
+
+#. settings-schema.json->hot_temp->tooltip
+msgid ""
+"CPUs' temperature above which they are regarded as hot (for color "
+"representation in the panel)"
+msgstr ""
+"CPU's waarvan de temperatuur hoger is dan deze waarde worden beschouwd als "
+"heet (voor kleurweergave in het paneel)"
+
+#. settings-schema.json->color_hot->description
+msgid "Color for CPU hot temperature"
+msgstr "Kleur voor hete CPU-temperatuur"
+
+#. settings-schema.json->sensors_cmd->description
+msgid "Command to start 'sensors'"
+msgstr "Commando om 'sensors' te starten"
+
+#. settings-schema.json->sensors_cmd->tooltip
+msgid ""
+"Command to start 'sensors'. Use 'which sensors' command to find it. Install "
+"'lmsensors' package, if not found"
+msgstr ""
+"Commando om 'sensors' te starten. Gebruik het commando 'which sensors' om "
+"het te vinden. Installeer het pakket 'lmsensors' als het niet wordt gevonden"
+
+#. settings-schema.json->net_label->description
+msgid "Network section"
+msgstr "Sectie netwerk"
+
+#. settings-schema.json->net_size->description
+msgid "Network panel section width (px)"
+msgstr "Breedte van netwerk paneelsectie (px)"
+
+#. settings-schema.json->net_size->tooltip
+msgid "Network panel section width"
+msgstr "Breedte van netwerk paneelsectie"
+
+#. settings-schema.json->net_style->description
+msgid "Network panel section style"
+msgstr "Stijl van netwerk paneelsectie"
+
+#. settings-schema.json->net_style->tooltip
+msgid ""
+"Network panel section HTML style (e.g.: text-align: left; margin-left: 5px; "
+"font-size: 8pt;)"
+msgstr ""
+"HTML-stijl van netwerk paneelsectie (bijv.: text-align: left; margin-left: "
+"5px; font-size: 8pt;)"
+
+#. settings-schema.json->net_black_list->description
+msgid "Network interfaces blacklist"
+msgstr "Blacklist van netwerkinterfaces"
+
+#. settings-schema.json->net_black_list->tooltip
+msgid ""
+"Semicolon-separated network interfaces list not to consider for counting "
+"traffic"
+msgstr ""
+"Lijst, gescheiden door puntkomma's, van netwerkinterfaces om geen rekening "
+"mee te houden bij het tellen van verkeer"

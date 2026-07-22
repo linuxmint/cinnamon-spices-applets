@@ -1,0 +1,110 @@
+# FANCTRL
+# This file is put in the public domain.
+# not-a-feature, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fw_fanctrl@juleskreuer.eu 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-09-06 03:36+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "FanCTRL"
+msgstr "FanCTRL"
+
+#. metadata.json->description
+msgid "Applet to control the framework fan-speed strategy using fw_fanctrl."
+msgstr "使用 fw_fanctrl 控制 Framework 風扇速度策略的小程式。"
+
+#. settings-schema.json->header->description
+msgid ""
+"Framework FanCTRL - Fan Strategy Control Applet for Cinnamon \n"
+"\n"
+"List of valid strategies:"
+msgstr ""
+"Framework FanCTRL - Cinnamon 風扇策略控制小程式\n"
+"\n"
+"有效策略清單："
+
+#. settings-schema.json->sleep-label->description
+msgid "Sleep"
+msgstr "睡眠"
+
+#. settings-schema.json->sleep->description
+#. settings-schema.json->lazyest->description
+#. settings-schema.json->lazy->description
+#. settings-schema.json->medium->description
+#. settings-schema.json->agile->description
+#. settings-schema.json->very-agile->description
+#. settings-schema.json->deaf->description
+#. settings-schema.json->aeolus->description
+msgid "Visible"
+msgstr "顯示"
+
+#. settings-schema.json->sleep-icon->description
+msgid "Icon for 'Sleep'"
+msgstr "「睡眠」圖示"
+
+#. settings-schema.json->lazyest-label->description
+msgid "Laziest"
+msgstr "最保守"
+
+#. settings-schema.json->lazyest-icon->description
+msgid "Icon for 'Laziest'"
+msgstr "「最保守」圖示"
+
+#. settings-schema.json->lazy-label->description
+msgid "Lazy"
+msgstr "保守"
+
+#. settings-schema.json->lazy-icon->description
+msgid "Icon for 'Lazy'"
+msgstr "「保守」圖示"
+
+#. settings-schema.json->medium-label->description
+msgid "Medium"
+msgstr "中等"
+
+#. settings-schema.json->medium-icon->description
+msgid "Icon for 'Medium'"
+msgstr "「中等」圖示"
+
+#. settings-schema.json->agile-label->description
+msgid "Agile"
+msgstr "積極"
+
+#. settings-schema.json->agile-icon->description
+msgid "Icon for 'Agile'"
+msgstr "「積極」圖示"
+
+#. settings-schema.json->very-agile-label->description
+msgid "Very Agile"
+msgstr "非常積極"
+
+#. settings-schema.json->very-agile-icon->description
+msgid "Icon for 'Very Agile'"
+msgstr "「非常積極」圖示"
+
+#. settings-schema.json->deaf-label->description
+msgid "Deaf"
+msgstr "強力"
+
+#. settings-schema.json->deaf-icon->description
+msgid "Icon for 'Deaf'"
+msgstr "「強力」圖示"
+
+#. settings-schema.json->aeolus-label->description
+msgid "Aeolus"
+msgstr "風神"
+
+#. settings-schema.json->aeolus-icon->description
+msgid "Icon for 'Aeolus'"
+msgstr "「風神」圖示"

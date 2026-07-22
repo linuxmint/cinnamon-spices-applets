@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Marcelo Aof, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 10:59+0800\n"
+"PO-Revision-Date: 2021-11-06 15:52-0300\n"
+"Last-Translator: Marcelo Aof\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: applet.js:37
+msgid "Open System Monitor"
+msgstr "Abrir o Monitor do sistema"
+
+#. cpu-monitor-text@gnemonix->metadata.json->description
+msgid "A simple applet that displays the cpu usage."
+msgstr "Um applet simples que exibe o uso da CPU."
+
+#. cpu-monitor-text@gnemonix->metadata.json->name
+msgid "Simple CPU Monitor"
+msgstr "Monitor simples de CPU"
+
+#. cpu-monitor-text@gnemonix->settings-schema.json->update-
+#. interval->description
+msgid "Update Interval:"
+msgstr "Intervalo de atualização:"
+
+#. cpu-monitor-text@gnemonix->settings-schema.json->update-interval->tooltip
+msgid "Enter the interval in milliseconds between updates."
+msgstr "Insira o intervalo entre as atualizações, em milissegundos."
+
+#. cpu-monitor-text@gnemonix->settings-schema.json->update-interval->units
+msgid "milliseconds"
+msgstr "milissegundos"
+
+#. cpu-monitor-text@gnemonix->settings-schema.json->max-
+#. percentage->description
+msgid "Max Percentage:"
+msgstr "Porcentagem máxima:"
+
+#. cpu-monitor-text@gnemonix->settings-schema.json->max-percentage->tooltip
+msgid ""
+"Change the max percentage.\n"
+"\n"
+"If not 100% than typically a multiple corresponding to the number of cores.\n"
+"\n"
+"Example: 4 cores (100 x 4) = 400%"
+msgstr ""
+"Mude a porcentagem máxima.\n"
+"\n"
+"Considere multiplicar 100% por um múltiplo correspondente ao número de "
+"núcleos.\n"
+"\n"
+"Exemplo: 4 núcleos (100 x 4) = 400%"
+
+#. cpu-monitor-text@gnemonix->settings-schema.json->cpu-label->description
+msgid "Text:"
+msgstr "Texto:"
+
+#. cpu-monitor-text@gnemonix->settings-schema.json->cpu-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "Insira um texto personalizado para ser exibido no painel."
