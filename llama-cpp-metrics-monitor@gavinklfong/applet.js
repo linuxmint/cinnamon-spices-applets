@@ -2,6 +2,7 @@ const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
 const Soup = imports.gi.Soup;
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const Settings = imports.ui.settings;
 
 class Utils {
@@ -18,10 +19,56 @@ class Utils {
         return bytes / (1024 * 1024 * 1024);
     }
 
-    static getSystemRamUsage() {
+    static async load_contents_async_promise(file) {
+        return new Promise((resolve, reject) => {
+            file.load_contents_async(null, (f, result) => {
+                try {
+                    const [success, contents] = f.load_contents_finish(result);
+                    resolve([success, contents]);
+                } catch (e) {
+                    // Check if the error code matches Gio.IOErrorEnum.NOT_FOUND
+                    if (e.matches && e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                        resolve([false, null]);
+                    } else {
+                        reject(e);
+                    }
+                }
+            });
+        });
+    }
+
+    static async enumerate_children_async_promise(file, attributes) {
+        return new Promise((resolve, reject) => {
+            file.enumerate_children_async(attributes, Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (f, result) => {
+                try {
+                    const enumerator = f.enumerate_children_finish(result);
+                    resolve(enumerator);
+                } catch (e) {
+                    reject(e);
+                }
+            });
+        });
+    }
+
+    static async next_file_async_promise(enumerator) {
+        return new Promise((resolve, reject) => {
+            // Request 1 file, priority, cancellable, callback
+            enumerator.next_files_async(1, GLib.PRIORITY_DEFAULT, null, (e, result) => {
+                try {
+                    const files = e.next_files_finish(result);
+                    // Returns an array of GFileInfo objects (or empty array at EOF)
+                    resolve(files.length > 0 ? files[0] : null);
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    static async getSystemRamUsage() {
         try {
             let meminfoFile = Gio.File.new_for_path("/proc/meminfo");
-            let [success, data] = meminfoFile.load_contents(null);
+            let [success, data] = await this.load_contents_async_promise(meminfoFile);
             if (!success) return { used: 0, total: 0 };
 
             let content = data.toString();
@@ -48,10 +95,10 @@ class Utils {
         }
     }
 
-    static getAverageCpuLoad(lastTotal, lastIdle) {
+    static async getAverageCpuLoad(lastTotal, lastIdle) {
         try {
             let file = Gio.File.new_for_path("/proc/stat");
-            let [success, contents] = file.load_contents(null);
+            let [success, contents] = await this.load_contents_async_promise(file);
             if (!success) return { load: 0, total: 0, idle: 0 };
 
             let lines = contents.toString().split("\n");
@@ -91,20 +138,18 @@ class Utils {
         }
     }
 
-    static getCpuHwmonPath() {
+    static async getCpuHwmonPath() {
         try {
             let baseDir = Gio.File.new_for_path("/sys/class/hwmon");
-            let enumerator = baseDir.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
+            let enumerator = await this.enumerate_children_async_promise(baseDir, "standard::name");
             let info;
 
-            while ((info = enumerator.next_file(null)) !== null) {
+            while ((info = await this.next_file_async_promise(enumerator)) !== null) {
                 let folderName = info.get_name();
                 let currentPath = `/sys/class/hwmon/${folderName}`;
                 
                 let nameFile = Gio.File.new_for_path(`${currentPath}/name`);
-                if (!nameFile.query_exists(null)) continue;
-
-                let [ok, contents] = nameFile.load_contents(null);
+                let [ok, contents] = await this.load_contents_async_promise(nameFile);
                 if (!ok) continue;
 
                 let driverName = contents.toString().trim();
@@ -118,27 +163,26 @@ class Utils {
         return null;
     }
 
-    static getGpuHwmonPaths(includeDedicated) {
+    static async getGpuHwmonPaths(includeDedicated) {
         let paths = [];
         try {
             let baseDir = Gio.File.new_for_path("/sys/class/hwmon");
-            let enumerator = baseDir.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
+            let enumerator = await this.enumerate_children_async_promise(baseDir, "standard::name");
             let info;
 
-            while ((info = enumerator.next_file(null)) !== null) {
+            while ((info = await this.next_file_async_promise(enumerator)) !== null) {
                 let folderName = info.get_name();
                 let currentPath = `/sys/class/hwmon/${folderName}`;
                 
                 let nameFile = Gio.File.new_for_path(`${currentPath}/name`);
-                if (!nameFile.query_exists(null)) continue;
-
-                let [ok, contents] = nameFile.load_contents(null);
+                let [ok, contents] = await this.load_contents_async_promise(nameFile);
                 if (!ok) continue;
 
                 let driverName = contents.toString().trim();
                 if (driverName === "amdgpu" || driverName === "nouveau" || driverName === "nvidia") {
                     let powerCapFile = Gio.File.new_for_path(`${currentPath}/power1_cap`);
-                    if (powerCapFile.query_exists(null) === includeDedicated) {
+                    let [ok, contents] = await this.load_contents_async_promise(powerCapFile);
+                    if (ok === includeDedicated) {
                         paths.push(currentPath);
                     }
                 }
@@ -149,7 +193,7 @@ class Utils {
         return paths;
     }
 
-    static getGpuDataFromPath(path) {
+    static async getGpuDataFromPath(path) {
         try {
             let dir = Gio.File.new_for_path(path);
             let data = {
@@ -160,12 +204,12 @@ class Utils {
                 components: []
             };
 
-            data.name = this.readGpuName(dir);
-            let gpuMetrics = this.readGpuMetrics(dir);
+            data.name = await this.readGpuName(dir);
+            let gpuMetrics = await this.readGpuMetrics(dir);
             data.gpuUsage = gpuMetrics.gpuUsage;
             data.gpuVramUsed = gpuMetrics.gpuVramUsed;
             data.gpuVramTotal = gpuMetrics.gpuVramTotal;
-            data.components = this.readComponentTemperatures(dir);
+            data.components = await this.readComponentTemperatures(dir);
 
             return data;
         } catch (e) {
@@ -174,50 +218,41 @@ class Utils {
         }
     }
 
-    static readGpuName(dir) {
+    static async readGpuName(dir) {
         let name = "Unknown GPU";
         let nameFile = dir.get_child("name");
-        if (nameFile.query_exists(null)) {
-            let [ok, contents] = nameFile.load_contents(null);
-            if (ok) return contents.toString().trim();
-        }
+        let [ok, contents] = await this.load_contents_async_promise(nameFile);
+        if (ok) return contents.toString().trim();
         return "Unknown GPU";
     }
 
-    static readGpuMetrics(dir) {
+    static async readGpuMetrics(dir) {
         let gpuUsage = 0;
         let gpuVramUsed = 0;
         let gpuVramTotal = 0;
         let deviceDir = dir.get_child("device");
-        if (deviceDir.query_exists(null)) {
-            let usageFile = deviceDir.get_child("gpu_busy_percent");
-            if (usageFile.query_exists(null)) {
-                let [ok, contents] = usageFile.load_contents(null);
-                if (ok) gpuUsage = parseFloat(contents.toString().trim());
-            }
+        
+        let usageFile = deviceDir.get_child("gpu_busy_percent");
+        let [ok, contents] = await this.load_contents_async_promise(usageFile);
+        if (ok) gpuUsage = parseFloat(contents.toString().trim());
 
-            let vramUsedFile = deviceDir.get_child("mem_info_vram_used");
-            if (vramUsedFile.query_exists(null)) {
-                let [ok, contents] = vramUsedFile.load_contents(null);
-                if (ok) gpuVramUsed = parseFloat(contents.toString().trim());
-            }
+        let vramUsedFile = deviceDir.get_child("mem_info_vram_used");
+        let [okV, contentsV] = await this.load_contents_async_promise(vramUsedFile);
+        if (okV) gpuVramUsed = parseFloat(contentsV.toString().trim());
 
-            let vramTotalFile = deviceDir.get_child("mem_info_vram_total");
-            if (vramTotalFile.query_exists(null)) {
-                let [ok, contents] = vramTotalFile.load_contents(null);
-                if (ok) gpuVramTotal = parseFloat(contents.toString().trim());
-            }
-        }
+        let vramTotalFile = deviceDir.get_child("mem_info_vram_total");
+        let [okT, contentsT] = await this.load_contents_async_promise(vramTotalFile);
+        if (okT) gpuVramTotal = parseFloat(contentsT.toString().trim());
 
         return {gpuUsage, gpuVramUsed, gpuVramTotal};
     }
 
-    static readComponentTemperatures(dir) {
-        let enumerator = dir.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
+    static async readComponentTemperatures(dir) {
+        let enumerator = await this.enumerate_children_async_promise(dir, "standard::name");
         let info;
         let components = [];
 
-        while ((info = enumerator.next_file(null)) !== null) {
+        while ((info = await this.next_file_async_promise(enumerator)) !== null) {
             let name = info.get_name();
             let match = name.match(/temp(\d+)_input/);
             if (match) {
@@ -225,15 +260,13 @@ class Utils {
                 let inputFile = dir.get_child(`temp${index}_input`);
                 let labelFile = dir.get_child(`temp${index}_label`);
 
-                let [inOk, inData] = inputFile.load_contents(null);
+                let [inOk, inData] = await this.load_contents_async_promise(inputFile);
                 if (inOk) {
                     let temp = parseFloat(inData.toString().trim()) / 1000.0;
                     let componentName = `Temp ${index}`;
 
-                    if (labelFile.query_exists(null)) {
-                        let [lOk, lData] = labelFile.load_contents(null);
-                        if (lOk) componentName = lData.toString().trim();
-                    }
+                    let [lOk, lData] = await this.load_contents_async_promise(labelFile);
+                    if (lOk) componentName = lData.toString().trim();
 
                     components.push({
                         componentName: componentName,
@@ -246,10 +279,10 @@ class Utils {
         return components;
     }
 
-    static getGpuData(hwmonPaths) {
+    static async getGpuData(hwmonPaths) {
         let gpuDataList = [];
         for (let path of hwmonPaths) {
-            let data = this.getGpuDataFromPath(path);
+            let data = await this.getGpuDataFromPath(path);
             if (data) {
                 gpuDataList.push(data);
             }
@@ -265,7 +298,7 @@ class Utils {
         return this.getGpuHwmonPaths(false);
     }
 
-    static getCpuData(hwmonPath, lastTotal, lastIdle) {
+    static async getCpuData(hwmonPath, lastTotal, lastIdle) {
         try {
             let dir = Gio.File.new_for_path(hwmonPath);
             let data = {
@@ -277,15 +310,15 @@ class Utils {
                 idle: 0
             };
 
-            let cpuStats = this.getAverageCpuLoad(lastTotal, lastIdle);
+            let cpuStats = await this.getAverageCpuLoad(lastTotal, lastIdle);
             data.usage = cpuStats.load;
             data.total = cpuStats.total;
             data.idle = cpuStats.idle;
 
-            let ramUsage = this.getSystemRamUsage();
+            let ramUsage = await this.getSystemRamUsage();
             data.ramUsed = ramUsage.used;
             data.ramTotal = ramUsage.total;
-            data.components = this.readComponentTemperatures(dir);
+            data.components = await this.readComponentTemperatures(dir);
 
             return data;
         } catch (e) {
@@ -357,9 +390,9 @@ class UIHelper {
 
         let cpuTemp = (cpuData && cpuData.components && cpuData.components.length > 0) ? Math.max(...cpuData.components.map(c => c.componentTemp)) : 0;
         let cpuLoad = cpuData ? cpuData.usage : 0;
-        let ramUsed = Utils.convertToGB(cpuData.ramUsed);
-        let ramTotal = Utils.convertToGB(cpuData.ramTotal);
-        let ramPerc = cpuData.ramTotal > 0 ? (cpuData.ramUsed / cpuData.ramTotal * 100).toFixed(0) : 0;
+        let ramUsed = cpuData ? Utils.convertToGB(cpuData.ramUsed) : 0;
+        let ramTotal = cpuData ? Utils.convertToGB(cpuData.ramTotal) : 0;
+        let ramPerc = (cpuData && cpuData.ramTotal > 0) ? (cpuData.ramUsed / cpuData.ramTotal * 100).toFixed(0) : 0;
 
         tooltip += `\n💻 [SYSTEM]\n`;
         tooltip += `  ▪ CPU: 🌡️ ${cpuTemp.toFixed(0)}°C | ⚡ Load: ${cpuLoad.toFixed(0)}%\n`;
@@ -395,10 +428,10 @@ class UIHelper {
         this._llamaLoopId = null;
         this._hwLoopId = null;
         
-        this._dedicatedGpuHwmonPaths = Utils.getAllDedicatedGpuHwmonPaths();
-        this._integratedGpuHwmonPaths = Utils.getAllIntegratedGpuHwmonPaths();
-        this._cpuHwmonPath = Utils.getCpuHwmonPath();
-        
+        this._dedicatedGpuHwmonPaths = [];
+        this._integratedGpuHwmonPaths = [];
+        this._cpuHwmonPath = null;
+
         // Generation (TG) Tracking Anchors
         this._lastPredTokens = 0;
         this._lastPredTime = 0;
@@ -412,10 +445,9 @@ class UIHelper {
         // Hardware Tracking Anchors
         this._lastDedicatedGpuData = [];
         this._lastIntegratedGpuData = [];
-
         this._lastCpuTotal = 0;
         this._lastCpuIdle = 0;
-        this._lastCpuData = {};
+        this._lastCpuData = { usage: 0, ramUsed: 0, ramTotal: 0, components: [] };
 
         this._startPolling();
     }
@@ -433,7 +465,6 @@ class UIHelper {
         }
         this._startPolling();
     }
-
 
     on_applet_removed_from_panel() {
         if (this._llamaLoopId) {
@@ -455,10 +486,20 @@ class UIHelper {
             this._pollHardware();
             return true;
         });
+        this._initHardwarePaths();
     }
 
-    _pollMetrics() {
-        let msg = Soup.Message.new("GET", this._metricsUrl);
+    async _initHardwarePaths() {
+        try {
+            this._dedicatedGpuHwmonPaths = await Utils.getAllDedicatedGpuHwmonPaths();
+            this._integratedGpuHwmonPaths = await Utils.getAllIntegratedGpuHwmonPaths();
+            this._cpuHwmonPath = await Utils.getCpuHwmonPath();
+        } catch (e) {
+            global.logError("Error initializing hardware paths: " + e.message);
+        }
+    }
+
+    _pollMetrics() {        let msg = Soup.Message.new("GET", this._metricsUrl);
 
         this._httpSession.send_and_read_async(msg, global.PRIORITY_DEFAULT, null, (session, result) => {
             try {
@@ -525,11 +566,15 @@ class UIHelper {
         return { currentPromptRate, currentGenRate };
     }
 
-    _pollHardware() {
-        this._lastDedicatedGpuData = Utils.getGpuData(this._dedicatedGpuHwmonPaths);
-        this._lastIntegratedGpuData = Utils.getGpuData(this._integratedGpuHwmonPaths);
+    async _pollHardware() {
+        if (!this._cpuHwmonPath) {
+            return;
+        }
 
-        let cpuData = Utils.getCpuData(this._cpuHwmonPath, this._lastCpuTotal, this._lastCpuIdle);
+        this._lastDedicatedGpuData = await Utils.getGpuData(this._dedicatedGpuHwmonPaths);
+        this._lastIntegratedGpuData = await Utils.getGpuData(this._integratedGpuHwmonPaths);
+
+        let cpuData = await Utils.getCpuData(this._cpuHwmonPath, this._lastCpuTotal, this._lastCpuIdle);
         if (cpuData) {
             this._lastCpuTotal = cpuData.total;
             this._lastCpuIdle = cpuData.idle;
