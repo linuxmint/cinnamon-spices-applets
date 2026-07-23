@@ -16,6 +16,8 @@ class TailscaleManager extends Applet.TextIconApplet {
         this._exitNodeName = "";
         this._exitNodes = [];
         this._loopId = 0;
+        this._acceptRoutes = null;
+        this._acceptRoutesError = "";
 
         this.set_applet_icon_symbolic_name("network-vpn");
         this._applet_icon.style = "color: grey;";
@@ -64,6 +66,23 @@ class TailscaleManager extends Applet.TextIconApplet {
             GLib.spawn_command_line_async("tailscale down");
         });
         this._applet_context_menu.addMenuItem(this._downItem);
+
+        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+        this._acceptRoutesSwitch = new PopupMenu.PopupSwitchMenuItem("Accept Routes", false);
+        this._acceptRoutesSwitch.connect('activate', () => {
+            let newState = this._acceptRoutesSwitch.state;
+            this._acceptRoutes = newState;
+            this._acceptRoutesError = "";
+            this._updateAcceptRoutesUI();
+            GLib.spawn_command_line_async(
+                'tailscale set --accept-routes=' + (newState ? 'true' : 'false'));
+        });
+        this._applet_context_menu.addMenuItem(this._acceptRoutesSwitch);
+
+        this._acceptRoutesErrorItem = new PopupMenu.PopupMenuItem("", { reactive: false });
+        this._acceptRoutesErrorItem.actor.hide();
+        this._applet_context_menu.addMenuItem(this._acceptRoutesErrorItem);
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -164,6 +183,8 @@ class TailscaleManager extends Applet.TextIconApplet {
             this._exitNodeName = "";
         }
 
+        this._detectAcceptRoutes();
+
         this._updateUI();
 
         if (this._tailscaleState === "Running" &&
@@ -205,6 +226,42 @@ class TailscaleManager extends Applet.TextIconApplet {
         this._populateExitNodeSubMenu();
     }
 
+    _detectAcceptRoutes() {
+        try {
+            let [res, stdout, stderr, status] = GLib.spawn_command_line_sync(
+                'tailscale debug prefs');
+            if (status !== 0) {
+                this._acceptRoutes = null;
+                this._acceptRoutesError = "Cannot detect accept-routes: unexpected output";
+                this._updateAcceptRoutesUI();
+                return;
+            }
+            let data = JSON.parse(stdout.toString());
+            if (typeof data.RouteAll === 'boolean') {
+                this._acceptRoutes = data.RouteAll;
+                this._acceptRoutesError = "";
+            } else {
+                this._acceptRoutes = null;
+                this._acceptRoutesError = "Cannot detect accept-routes: unexpected output";
+            }
+        } catch (e) {
+            this._acceptRoutes = null;
+            this._acceptRoutesError = "Cannot detect accept-routes: unexpected output";
+        }
+        this._updateAcceptRoutesUI();
+    }
+
+    _updateAcceptRoutesUI() {
+        if (this._acceptRoutes !== null) {
+            this._acceptRoutesSwitch.setToggleState(this._acceptRoutes);
+            this._acceptRoutesErrorItem.actor.hide();
+        } else {
+            this._acceptRoutesSwitch.setToggleState(false);
+            this._acceptRoutesErrorItem.label.text = this._acceptRoutesError;
+            this._acceptRoutesErrorItem.actor.show();
+        }
+    }
+
     _updateUI() {
         if (this._tailscaleState === "Running") {
             this.set_applet_icon_symbolic_name("network-vpn");
@@ -233,6 +290,7 @@ class TailscaleManager extends Applet.TextIconApplet {
             this._upItem.actor.show();
             this._downItem.actor.hide();
         }
+        this._updateAcceptRoutesUI();
         this._populateExitNodeSubMenu();
     }
 

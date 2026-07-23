@@ -13,6 +13,7 @@ A Cinnamon applet that monitors and manages your Tailscale connection. Displays 
   - Blue lock icon: Tailscale is connected and routing through an exit node.
 - **Right-click context menu**:
   - *Tailscale Up* / *Tailscale Down*: toggle the Tailscale daemon.
+  - *Accept Routes* toggle: enable or disable accepting routes advertised by other Tailscale nodes.
   - *Exit Node* sub-menu: select any available exit node or choose *None* to clear.
   - *Refresh Exit Nodes*: re-fetch the exit node list.
   - *Configure*: open the applet settings panel.
@@ -21,13 +22,17 @@ A Cinnamon applet that monitors and manages your Tailscale connection. Displays 
 ## Requirements
 
 - [Tailscale](https://tailscale.com) installed and configured (`tailscale` must be in `PATH`).
-- Set the Tailscale operator to your user (e.g., `sudo tailscale set --operator $USER`).
+- Set the Tailscale operator to your user (e.g. `sudo tailscale set --operator $USER`).
 
 ## Settings
 
 | Setting | Type | Default | Description |
 |---|---|---|---|
 | `update-interval` | spinbutton | 5 seconds | How often to poll Tailscale status (1–60 s). |
+
+## Notes
+
+- **Accept Routes detection**: The *Accept Routes* toggle uses `tailscale debug prefs` to detect the current state of the `--accept-routes` setting. This is an unstable debug command according to `tailscale debug --help`. If the command fails or returns unexpected output, the toggle will show a "Cannot detect accept-routes" message. The applet continues to function normally in this state, and toggling will still run `tailscale set --accept-routes` regardless of detection success. There's an open issue on the Tailscale GitHub repository regarding exposing the accept-routes setting in a stable way: [tailscale issue #15654](https://github.com/tailscale/tailscale/issues/15654).
 
 ## Disclaimer
 
