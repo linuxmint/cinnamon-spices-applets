@@ -243,8 +243,8 @@ class PomodoroApplet extends Applet.TextIconApplet {
         // authentication has already happened. Never used to trigger or
         // shortcut unlocking — purely a courtesy "welcome back" cue.
         this._breakLockActive = false;
-        this._screensaverProxy = null;
-        this._screensaverSignalId = 0;
+        this._welcomeBackIdleWatchId = 0;
+        this._welcomeBackActiveWatchId = 0;
         this._opt_focusStartCommand = null;
         this._opt_breakStartCommand = null;
         this._opt_goalCommand = null;
@@ -2668,7 +2668,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
             try { GLib.source_remove(this._breakLockTimeoutId); } catch (e) {}
             this._breakLockTimeoutId = 0;
         }
-        this._disarmScreensaverWatch();
+        this._disarmWelcomeBackWatch();
         this._teardownZenSpotlight();
         if (this._zenTopStrip) {
             try { Main.layoutManager.removeChrome(this._zenTopStrip); } catch (e) {}

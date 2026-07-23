@@ -13,7 +13,6 @@ const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
-const ScreenSaver = imports.misc.screenSaver;
 const ByteArray = imports.byteArray;
 const Gettext = imports.gettext;
 const ModalDialog = imports.ui.modalDialog;
@@ -2611,7 +2610,7 @@ function install(proto) {
             // playing (a video/call/presentation) — don't interrupt that.
             if (this._currentState === lockState && !this._anyMonitorFullscreen()) {
                 this._breakLockActive = true;
-                this._armScreensaverWatch();
+                this._armWelcomeBackWatch();
                 this._lockScreen();
             }
             return GLib.SOURCE_REMOVE;
@@ -2625,57 +2624,51 @@ function install(proto) {
         }
     };
 
-    // Watch for the screen actually being unlocked — i.e. only after real
-    // authentication has already succeeded — so we can offer a calm "welcome
-    // back" cue. This never unlocks or bypasses anything; it purely reacts to
-    // cinnamon-screensaver's own ActiveChanged(false) signal, which it emits
-    // once the correct password has been entered. Safe to call repeatedly.
-    proto._armScreensaverWatch = function() {
-        if (this._screensaverProxy) {
+    // Offer a calm "welcome back" cue once the user returns from a break we
+    // locked for. Rather than watching the screensaver (an internal Cinnamon
+    // module third-party applets must not import), this rides the same
+    // Meta.IdleMonitor the auto-pause / soft-landing features already use.
+    //
+    // Arming is two-stage to avoid a spurious immediate fire: at lock time the
+    // user is still active (idletime ~ 0), so we first wait for a genuine idle
+    // period — they've actually stepped away — and only then arm a one-shot
+    // user-active watch that fires when they come back. Safe to call repeatedly.
+    proto._armWelcomeBackWatch = function() {
+        this._disarmWelcomeBackWatch();
+        this._initIdleMonitor();
+        if (!this._idleMonitor) {
+            // No idle monitor available — the courtesy cue simply won't fire;
+            // nothing else depends on this watch existing.
             return;
         }
-        try {
-            this._screensaverProxy = new ScreenSaver.ScreenSaverProxy();
-            this._screensaverSignalId = this._screensaverProxy.connectSignal(
-                'ActiveChanged',
-                (proxy, sender, [isActive]) => {
-                    if (!isActive) {
-                        this._onScreensaverDeactivated();
-                    }
+        this._welcomeBackIdleWatchId = this._idleMonitor.add_idle_watch(15 * 1000, () => {
+            // Genuine idle reached; stop listening for idle and arm the return.
+            if (this._welcomeBackIdleWatchId) {
+                try { this._idleMonitor.remove_watch(this._welcomeBackIdleWatchId); } catch (e) {}
+                this._welcomeBackIdleWatchId = 0;
+            }
+            this._welcomeBackActiveWatchId = this._idleMonitor.add_user_active_watch(() => {
+                // Fires once on the next activity, then muffin auto-removes it.
+                this._welcomeBackActiveWatchId = 0;
+                if (this._breakLockActive) {
+                    this._breakLockActive = false;
+                    Main.notify(_("Welcome back"), _("Break's over, whenever you're ready."));
                 }
-            );
-        } catch (e) {
-            // No cinnamon-screensaver on the bus (different locker, or it
-            // isn't running) — the courtesy cue simply won't fire; nothing
-            // else depends on this subscription existing.
-            this._screensaverProxy = null;
-            this._screensaverSignalId = 0;
-        }
+            });
+        });
     };
 
-    proto._disarmScreensaverWatch = function() {
-        if (this._screensaverProxy) {
-            try {
-                if (this._screensaverSignalId) {
-                    this._screensaverProxy.disconnectSignal(this._screensaverSignalId);
-                }
-            } catch (e) {}
-            this._screensaverProxy = null;
-            this._screensaverSignalId = 0;
+    proto._disarmWelcomeBackWatch = function() {
+        if (this._idleMonitor) {
+            if (this._welcomeBackIdleWatchId) {
+                try { this._idleMonitor.remove_watch(this._welcomeBackIdleWatchId); } catch (e) {}
+            }
+            if (this._welcomeBackActiveWatchId) {
+                try { this._idleMonitor.remove_watch(this._welcomeBackActiveWatchId); } catch (e) {}
+            }
         }
-        this._breakLockActive = false;
-    };
-
-    // Fires once real authentication has already happened (this signal only
-    // exists because the screensaver just deactivated). Only acts if WE were
-    // the ones who locked for a break — never for a lock/unlock the user
-    // triggers on their own, unrelated to Zen Pomodoro.
-    proto._onScreensaverDeactivated = function() {
-        if (!this._breakLockActive) {
-            return;
-        }
-        this._breakLockActive = false;
-        Main.notify(_("Welcome back"), _("Break's over, whenever you're ready."));
+        this._welcomeBackIdleWatchId = 0;
+        this._welcomeBackActiveWatchId = 0;
     };
 
     proto._anyMonitorFullscreen = function() {
