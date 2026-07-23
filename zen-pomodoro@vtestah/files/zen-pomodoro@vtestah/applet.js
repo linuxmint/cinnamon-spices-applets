@@ -243,7 +243,8 @@ class PomodoroApplet extends Applet.TextIconApplet {
         // authentication has already happened. Never used to trigger or
         // shortcut unlocking — purely a courtesy "welcome back" cue.
         this._breakLockActive = false;
-        this._screensaverSubId = 0;
+        this._screensaverProxy = null;
+        this._screensaverSignalId = 0;
         this._opt_focusStartCommand = null;
         this._opt_breakStartCommand = null;
         this._opt_goalCommand = null;

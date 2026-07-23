@@ -13,6 +13,7 @@ const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
+const ScreenSaver = imports.misc.screenSaver;
 const ByteArray = imports.byteArray;
 const Gettext = imports.gettext;
 const ModalDialog = imports.ui.modalDialog;
@@ -2630,25 +2631,16 @@ function install(proto) {
     // cinnamon-screensaver's own ActiveChanged(false) signal, which it emits
     // once the correct password has been entered. Safe to call repeatedly.
     proto._armScreensaverWatch = function() {
-        if (this._screensaverSubId) {
+        if (this._screensaverProxy) {
             return;
         }
         try {
-            this._screensaverSubId = Gio.DBus.session.signal_subscribe(
-                'org.cinnamon.ScreenSaver',
-                'org.cinnamon.ScreenSaver',
+            this._screensaverProxy = new ScreenSaver.ScreenSaverProxy();
+            this._screensaverSignalId = this._screensaverProxy.connectSignal(
                 'ActiveChanged',
-                '/org/cinnamon/ScreenSaver',
-                null,
-                Gio.DBusSignalFlags.NONE,
-                (connection, sender, path, iface, signal, params) => {
-                    try {
-                        let [isActive] = params.deep_unpack();
-                        if (!isActive) {
-                            this._onScreensaverDeactivated();
-                        }
-                    } catch (e) {
-                        global.logError("Zen Pomodoro: screensaver signal handling failed: " + e.message);
+                (proxy, sender, [isActive]) => {
+                    if (!isActive) {
+                        this._onScreensaverDeactivated();
                     }
                 }
             );
@@ -2656,14 +2648,20 @@ function install(proto) {
             // No cinnamon-screensaver on the bus (different locker, or it
             // isn't running) — the courtesy cue simply won't fire; nothing
             // else depends on this subscription existing.
-            this._screensaverSubId = 0;
+            this._screensaverProxy = null;
+            this._screensaverSignalId = 0;
         }
     };
 
     proto._disarmScreensaverWatch = function() {
-        if (this._screensaverSubId) {
-            try { Gio.DBus.session.signal_unsubscribe(this._screensaverSubId); } catch (e) {}
-            this._screensaverSubId = 0;
+        if (this._screensaverProxy) {
+            try {
+                if (this._screensaverSignalId) {
+                    this._screensaverProxy.disconnectSignal(this._screensaverSignalId);
+                }
+            } catch (e) {}
+            this._screensaverProxy = null;
+            this._screensaverSignalId = 0;
         }
         this._breakLockActive = false;
     };
