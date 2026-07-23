@@ -23,10 +23,7 @@ const {
     POMODORO_FOCUS_FRAME_WARNING_STYLE,
     POMODORO_BREAK_OVER_FRAME_STYLE,
     POMODORO_OVERRUN_FRAME_STYLE,
-    POMODORO_FOCUS_FRAME_PULSE_INTERVAL_MS,
     POMODORO_FOCUS_FRAME_TRANSITION,
-    POMODORO_FOCUS_FRAME_PULSE_STYLES,
-    POMODORO_BREAK_FRAME_PULSE_STYLES,
     POMODORO_FOCUS_FRAME_STYLE,
     POMODORO_PANEL_FOCUS_CUE_STYLE,
     POMODORO_PANEL_BREAK_CUE_STYLE,
@@ -59,50 +56,6 @@ const {
 } = C;
 
 function install(proto) {
-    proto._getPulseStyle = function(styles, ticks) {
-        if (!styles || styles.length === 0) {
-            return POMODORO_FOCUS_FRAME_STYLE;
-        }
-
-        let pulseIndex = Math.floor(GLib.get_monotonic_time() / (POMODORO_FOCUS_FRAME_PULSE_INTERVAL_MS * 1000)) % styles.length;
-        return styles[pulseIndex];
-    };
-
-    proto._isFocusFramePulseActive = function(ticks) {
-        if (this._opt_reduceMotion) {
-            return false;
-        }
-        if (true) {
-            return false;
-        }
-
-        let remainingRatio = this._getTimerRemainingRatio(ticks);
-        if (remainingRatio === null) {
-            return false;
-        }
-
-        if (this._currentState === 'pomodoro') {
-            return ticks <= 60 || remainingRatio <= 0.05;
-        }
-
-        if (this._currentState === 'short-break' || this._currentState === 'long-break') {
-            return ticks <= 60 || remainingRatio <= 0.20;
-        }
-
-        return false;
-    };
-
-    proto._startFocusFramePulse = function() {
-        if (this._focusFramePulseSourceId !== null) {
-            return;
-        }
-
-        this._focusFramePulseSourceId = Mainloop.timeout_add(POMODORO_FOCUS_FRAME_PULSE_INTERVAL_MS, () => {
-            this._updateFocusFrame(this._focusFrameLastTicks);
-            return true;
-        });
-    };
-
     proto._stopFocusFramePulse = function() {
         if (this._focusFramePulseSourceId === null) {
             return;
@@ -131,10 +84,7 @@ function install(proto) {
 
         if (this._currentState === 'pomodoro') {
             if (ticks <= 60 || remainingRatio <= 0.05) {
-                if (true) {
-                    return POMODORO_FOCUS_FRAME_WARNING_STYLE;
-                }
-                return this._getPulseStyle(POMODORO_FOCUS_FRAME_PULSE_STYLES, ticks);
+                return POMODORO_FOCUS_FRAME_WARNING_STYLE;
             }
 
             if (remainingRatio <= 0.20) {
@@ -154,10 +104,7 @@ function install(proto) {
 
         if (this._currentState === 'short-break' || this._currentState === 'long-break') {
             if (ticks <= 60 || remainingRatio <= 0.20) {
-                if (true) {
-                    return POMODORO_BREAK_OVER_FRAME_STYLE;
-                }
-                return this._getPulseStyle(POMODORO_BREAK_FRAME_PULSE_STYLES, ticks);
+                return POMODORO_BREAK_OVER_FRAME_STYLE;
             }
         }
 
@@ -235,6 +182,7 @@ function install(proto) {
 
     proto._rebuildFocusFrames = function() {
         this._destroyFocusFrameActors();
+        this._focusFrameGeomSig = null;   // new frames must be repositioned
 
         if (!Main.uiGroup) {
             return;
@@ -290,6 +238,14 @@ function install(proto) {
             this._rebuildFocusFrames();
             return;
         }
+
+        // Frame geometry only changes when the monitors do; skip the per-tick
+        // reposition (set_position/size + raise_top) when nothing has moved.
+        let geomSig = monitors.map((m) => m.x + "," + m.y + "," + m.width + "," + m.height).join("|");
+        if (geomSig === this._focusFrameGeomSig) {
+            return;
+        }
+        this._focusFrameGeomSig = geomSig;
 
         for (let i = 0; i < this._focusFrames.length; i++) {
             let frame = this._focusFrames[i];
@@ -366,6 +322,10 @@ function install(proto) {
 
         this._focusFrameLastTicks = ticks;
 
+        // The task chip / HUD has its own toggle (focus_show_task_chip) and must
+        // update regardless of frame style — even when the frame is "off".
+        this._updateFocusHud(ticks);
+
         let fstyle = this._opt_frameStyle || 'glow';
         if (fstyle === 'off') {
             this._stopFocusFramePulse();
@@ -376,13 +336,7 @@ function install(proto) {
             return;
         }
 
-        if (this._isFocusFramePulseActive(ticks)) {
-            this._startFocusFramePulse();
-        } else {
-            this._stopFocusFramePulse();
-        }
-
-        this._updateFocusHud(ticks);
+        this._stopFocusFramePulse();
 
         if (fstyle === 'glow' || fstyle === 'corners') {
             // Glow frame: soft inward vignette + perimeter progress (Cairo).
@@ -592,7 +546,7 @@ function install(proto) {
         if (this._focusTaskChip && this._focusTaskChipLabel) {
             this._focusTaskChipLabel.set_text(`\u25CF  ${_("Preview")}`);
             this._focusTaskChip.set_style(POMODORO_FOCUS_TASK_CHIP_STYLE);
-            let primary = Main.layoutManager ? Main.layoutManager.primaryMonitor : null;
+            let primary = Main.layoutManager ? (Main.layoutManager.focusMonitor || Main.layoutManager.primaryMonitor) : null;
             if (primary) {
                 let [, natW] = this._focusTaskChip.get_preferred_width(-1);
                 let [, natH] = this._focusTaskChip.get_preferred_height(natW);
@@ -708,6 +662,10 @@ function install(proto) {
             depth = Math.max(POMODORO_FOCUS_GLOW_DEPTH_MIN, Math.min(POMODORO_FOCUS_GLOW_DEPTH_MAX, depth));
             let baseAlpha = (typeof this._opt_glowIntensity === 'number' && this._opt_glowIntensity > 0)
                 ? this._opt_glowIntensity / 100 : POMODORO_FOCUS_GLOW_MAX_ALPHA;
+            // Scale the perimeter trace (track / ticks / progress) by glow
+            // intensity too, so lowering it dims the whole frame, not just the
+            // soft wash (1.0 at the default intensity — no change there).
+            let traceScale = baseAlpha / POMODORO_FOCUS_GLOW_MAX_ALPHA;
             let pw = POMODORO_FOCUS_GLOW_PROGRESS_WIDTH;
             let maxA = baseAlpha * (1 + (this._glowBreathBoost || 0));
             let cornersOnly = (this._opt_frameStyle === 'corners');
@@ -753,7 +711,7 @@ function install(proto) {
 
             // Faint full ∩ track.
             cr.setLineWidth(pw);
-            cr.setSourceRGBA(r, g, b, POMODORO_FOCUS_GLOW_TRACK_ALPHA);
+            cr.setSourceRGBA(r, g, b, POMODORO_FOCUS_GLOW_TRACK_ALPHA * traceScale);
             cr.moveTo(x0, y1);
             cr.lineTo(x0, y0);
             cr.lineTo(x1, y0);
@@ -762,7 +720,7 @@ function install(proto) {
 
             // Milestone marks: one per pomodoro boundary during focus
             // (k / segments), or quarters during a break.
-            cr.setSourceRGBA(r, g, b, POMODORO_FOCUS_GLOW_TICK_ALPHA);
+            cr.setSourceRGBA(r, g, b, POMODORO_FOCUS_GLOW_TICK_ALPHA * traceScale);
             let tickFracs = [];
             if (this._glowSegments > 1) {
                 for (let k = 1; k < this._glowSegments; k++) {
@@ -784,7 +742,7 @@ function install(proto) {
                 let sideLen = y1 - y0, topLen = x1 - x0;
                 let rem = (2 * sideLen + topLen) * frac;
 
-                cr.setSourceRGBA(r, g, b, POMODORO_FOCUS_GLOW_PROGRESS_ALPHA);
+                cr.setSourceRGBA(r, g, b, POMODORO_FOCUS_GLOW_PROGRESS_ALPHA * traceScale);
                 cr.setLineWidth(pw);
                 cr.moveTo(x0, y1);
 
@@ -828,7 +786,7 @@ function install(proto) {
                     ? POMODORO_FOCUS_TASK_CHIP_PAUSED_STYLE
                     : POMODORO_FOCUS_TASK_CHIP_STYLE);
 
-                let primary = Main.layoutManager ? Main.layoutManager.primaryMonitor : null;
+                let primary = Main.layoutManager ? (Main.layoutManager.focusMonitor || Main.layoutManager.primaryMonitor) : null;
                 if (primary) {
                     let [, natW] = this._focusTaskChip.get_preferred_width(-1);
                     let [, natH] = this._focusTaskChip.get_preferred_height(natW);
@@ -914,7 +872,7 @@ function install(proto) {
             : _("Focus");
         this._focusRitualLabel.set_text(text);
 
-        let primary = Main.layoutManager ? Main.layoutManager.primaryMonitor : null;
+        let primary = Main.layoutManager ? (Main.layoutManager.focusMonitor || Main.layoutManager.primaryMonitor) : null;
         if (primary) {
             let [, natW] = this._focusRitualLabel.get_preferred_width(-1);
             let [, natH] = this._focusRitualLabel.get_preferred_height(natW);

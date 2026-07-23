@@ -54,6 +54,9 @@ msgstr "PAUZE GEPAUZEERD"
 msgid "BREAK OVER"
 msgstr "PAUZE VOORBIJ"
 
+msgid "FOCUS OVER"
+msgstr "FOCUS VOLTOOID"
+
 #: applet.js:1023 applet.js:1083 menu.js:214 menu.js:738
 msgid "Ready to focus"
 msgstr "Klaar om te focussen"
@@ -61,6 +64,9 @@ msgstr "Klaar om te focussen"
 #: applet.js:1041
 msgid "Short break running"
 msgstr "Korte pauze wordt uitgevoerd"
+
+msgid "Focus finished — Break ready"
+msgstr "Focus voltooid — Pauze gereed"
 
 #: applet.js:1044
 msgid "Short break paused"
@@ -296,13 +302,17 @@ msgstr "Klaar"
 
 #: features.js:204
 #, javascript-format
-msgid "%d focus blocks today — great work!"
-msgstr "%d focusblokken vandaag — goed bezig!"
+msgid "%d focus block today — great work!"
+msgid_plural "%d focus blocks today — great work!"
+msgstr[0] "%d focusblokken vandaag — goed bezig!"
+msgstr[1] "%d focusblokken vandaag — goed bezig!"
 
 #: features.js:206
 #, javascript-format
 msgid "🔥 %d-day streak"
-msgstr "🔥 reeks van %d dagen"
+msgid_plural "🔥 %d-day streak"
+msgstr[0] "🔥 reeks van %d dagen"
+msgstr[1] "🔥 reeks van %d dagen"
 
 #: features.js:208
 msgid "Daily goal reached 🍅"
@@ -701,8 +711,10 @@ msgstr "Dagdoel behaald — %d vandaag gedaan. Mooi."
 
 #: features.js:1492
 #, javascript-format
-msgid "%d interruptions this week — what keeps pulling you away?"
-msgstr "%d onderbrekingen deze week — wat leidt je steeds af?"
+msgid "%d interruption this week — what keeps pulling you away?"
+msgid_plural "%d interruptions this week — what keeps pulling you away?"
+msgstr[0] "%d onderbrekingen deze week — wat leidt je steeds af?"
+msgstr[1] "%d onderbrekingen deze week — wat leidt je steeds af?"
 
 #: features.js:1495 features.js:1815
 #, javascript-format
@@ -716,8 +728,10 @@ msgstr "Meeste focus ging naar “%s”."
 
 #: features.js:1500
 #, javascript-format
-msgid "%d pomodoros this week. Keep it going."
-msgstr "%d pomodoro's deze week. Ga zo door."
+msgid "%d pomodoro this week. Keep it going."
+msgid_plural "%d pomodoros this week. Keep it going."
+msgstr[0] "%d pomodoro's deze week. Ga zo door."
+msgstr[1] "%d pomodoro's deze week. Ga zo door."
 
 #: features.js:1501
 msgid "Start a focus session — your insights will appear here."
@@ -1750,17 +1764,21 @@ msgstr ""
 "Toon pop-updialogen aan het eind van elke fase (uit houdt het rustig — "
 "alleen schermsignalen)."
 
-#. settings-schema.json->auto_start_next->description
-msgid "Automatically start the next phase"
-msgstr "De volgende fase automatisch starten"
+#. settings-schema.json->auto_start_break->description
+msgid "Automatically start breaks"
+msgstr "Pauzes automatisch starten"
 
-#. settings-schema.json->auto_start_next->tooltip
-msgid ""
-"When a phase ends, start the next one (focus or break) automatically instead"
-" of waiting."
-msgstr ""
-"Wanneer een fase eindigt, automatisch de volgende (focus of pauze) starten "
-"in plaats van te wachten."
+#. settings-schema.json->auto_start_break->tooltip
+msgid "When a focus phase ends, start the break automatically."
+msgstr "Wanneer een focusfase eindigt, start de pauze automatisch."
+
+#. settings-schema.json->auto_start_pomodoro->description
+msgid "Automatically start focus after a break"
+msgstr "Focus automatisch starten na een pauze"
+
+#. settings-schema.json->auto_start_pomodoro->tooltip
+msgid "When a break ends, start the next focus phase automatically."
+msgstr "Wanneer een pauze eindigt, start de volgende focusfase automatisch."
 
 #. settings-schema.json->panel_icon_style->description
 msgid "Panel icon"
@@ -2087,13 +2105,14 @@ msgid "Disable focus animations (fades, pulsing, breathing)."
 msgstr "Schakel focusanimaties uit (fades, pulseren, ademhaling)."
 
 #. settings-schema.json->menu_font_scale->description
-msgid "Menu font scale (%)"
-msgstr "Lettergrootte menu (%)"
+msgid "Font scale (%)"
+msgstr "Tekengrootte (%)"
 
 #. settings-schema.json->menu_font_scale->tooltip
-msgid "Make the applet menu's text larger or smaller (100% = default size)."
+msgid ""
+"Scale the text in the menu, dialogs and statistics (100% = default size)."
 msgstr ""
-"Maak de tekst van het appletmenu groter of kleiner (100% = "
+"Schaalt de tekst in het menu, dialoogvensters en statistieken (100% = "
 "standaardgrootte)."
 
 #. settings-schema.json->preview_appearance_button->description
@@ -2917,3 +2936,151 @@ msgid ""
 msgstr ""
 "Kies je eigen herhalende omgevingsgeluid. Laat leeg voor de ingebouwde "
 "zachte bruine ruis."
+
+msgid ""
+"Focus spotlight is on — every other window is dimmed so the one you're "
+"working in stands out. Slide your pointer to the top of the screen to see "
+"the time left and a way out."
+msgstr ""
+"De focus-spotlight staat aan — alle andere vensters worden gedimd zodat het "
+"venster waarin je werkt opvalt. Beweeg de aanwijzer naar de bovenrand van "
+"het scherm om de resterende tijd en een uitweg te zien."
+
+msgid ""
+"Focus spotlight is armed. When your next focus session starts, every window "
+"except the one you're working in dims, so your task stands out. Slide your "
+"pointer to the top of the screen to see the time left and a way out."
+msgstr ""
+"De focus-spotlight staat gereed. Wanneer je volgende focussessie begint, "
+"worden alle vensters behalve het venster waarin je werkt gedimd zodat je "
+"taak opvalt. Beweeg de aanwijzer naar de bovenrand van het scherm om de "
+"resterende tijd en een uitweg te zien."
+
+msgid "Play the ticking sound"
+msgstr "Tikgeluid afspelen"
+
+msgid "Ticking sound file"
+msgstr "Tikgeluidbestand"
+
+msgid "Volume"
+msgstr "Volume"
+
+msgid "Play a sound when a break starts"
+msgstr "Geluid afspelen bij begin van een pauze"
+
+msgid "Break sound file"
+msgstr "Pauzegeluidbestand"
+
+msgid "Play a warning before focus ends"
+msgstr "Waarschuwing afspelen voordat focus eindigt"
+
+msgid "Warning lead time (seconds)"
+msgstr "Voorlooptijd waarschuwing (seconden)"
+
+msgid "Warning sound file"
+msgstr "Waarschuwingsgeluidbestand"
+
+msgid "Play a sound when focus starts"
+msgstr "Geluid afspelen bij begin van focus"
+
+msgid "Start sound file"
+msgstr "Startgeluidbestand"
+
+msgid "Chime interval (seconds)"
+msgstr "Belinterval (seconden)"
+
+msgid "Last 7 days"
+msgstr "Laatste 7 dagen"
+
+msgid "Last 7 days: %d 🍅 · %s · best weekday %s"
+msgstr "Laatste 7 dagen: %d 🍅 · %s · beste weekdag %s"
+
+msgid "Last 30 days: %d 🍅 · %s · best day ever %d 🍅"
+msgstr "Laatste 30 dagen: %d 🍅 · %s · recorddag %d 🍅"
+
+msgid ""
+"Play a calming background soundscape while you focus (white/pink/brown "
+"noise, rain, sea, …). Choose the sound in Settings."
+msgstr ""
+"Rustgevend achtergrondgeluid tijdens het focussen (witte/roze/bruine ruis, "
+"regen, zee, …). Kies het geluid in Instellingen."
+
+msgid "Ready to focus — middle-click to start"
+msgstr "Klaar om te focussen — middelklik om te starten"
+
+msgid "Ready to focus — click to start"
+msgstr "Klaar om te focussen — klik om te starten"
+
+msgid "Setup applied ✓"
+msgstr "Instelling toegepast ✓"
+
+msgid "You can undo it anytime in Settings → “Undo last setup”."
+msgstr ""
+"Je kunt het altijd ongedaan maken in Instellingen → ‘Laatste installatie "
+"ongedaan maken’."
+
+msgid "You can pick up to %d — deselect one first"
+msgstr "Je kunt er maximaal %d kiezen — deselecteer er eerst een"
+
+msgid "Display and controls"
+msgstr "Weergave en bediening"
+
+msgid "Distraction blocking"
+msgstr "Afleidingen blokkeren"
+
+msgid "Scroll to pause · middle-click to skip"
+msgstr "Scrollen om te pauzeren · middelklik om over te slaan"
+
+msgid "Middle-click to skip"
+msgstr "Middelklik om over te slaan"
+
+msgid ""
+"When on, the sites below are blocked right now and stay blocked until you "
+"turn this off. Run \"Set up passwordless blocking\" once so toggling doesn't"
+" ask for a password. Note: a browser using secure DNS (DoH) can bypass "
+"/etc/hosts blocking — disable the browser's secure DNS for it to take "
+"effect."
+msgstr ""
+"Indien aan, worden de onderstaande sites nu meteen geblokkeerd en blijven "
+"geblokkeerd totdat je dit uitzet. Voer eenmalig „Wachtwoordloos blokkeren "
+"instellen“ uit zodat omschakelen niet om een wachtwoord vraagt. Let op: een "
+"browser met beveiligde DNS (DoH) kan de /etc/hosts-blokkering omzeilen — "
+"schakel de beveiligde DNS in de browser uit zodat het werkt."
+
+msgid ""
+"Manage blocked sites. A browser using secure DNS (DoH) can bypass this."
+msgstr ""
+"Geblokkeerde sites beheren. Een browser met beveiligde DNS (DoH) kan dit "
+"omzeilen."
+
+msgid ""
+"Distraction blocking is ready — add sites in Settings → Advanced. Browsers "
+"using secure DNS (DoH) may bypass it."
+msgstr ""
+"Afleidingsblokkering is klaar — voeg sites toe in Instellingen → "
+"Geavanceerd. Browsers met beveiligde DNS (DoH) kunnen het omzeilen."
+
+msgid "Authorization for toggling blocking"
+msgstr "Autorisatie voor het omschakelen van blokkering"
+
+msgid "Never ask (passwordless)"
+msgstr "Nooit vragen (zonder wachtwoord)"
+
+msgid "Ask once per login session (safer)"
+msgstr "Eén keer per sessie vragen (veiliger)"
+
+msgid ""
+"How the one-time setup configures the pkexec policy: never ask "
+"(passwordless, convenient), or ask once per login session (safer — a stray "
+"process can't then toggle blocking silently). Re-run \"Set up passwordless "
+"blocking\" after changing this."
+msgstr ""
+"Hoe de eenmalige installatie het pkexec-beleid instelt: nooit vragen (zonder"
+" wachtwoord, handig) of eenmaal per sessie vragen (veiliger — een vreemd "
+"proces kan blokkering dan niet stil omschakelen). Voer „Wachtwoordloos "
+"blokkeren instellen“ opnieuw uit na wijziging."
+
+msgid ""
+"Blocking set up — you'll be asked for your password once per login session."
+msgstr ""
+"Blokkering ingesteld — je wachtwoord wordt eenmaal per sessie gevraagd."

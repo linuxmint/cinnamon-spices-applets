@@ -22,13 +22,14 @@ const CinnamonEntry = imports.ui.cinnamonEntry;
 const UUID = "zen-pomodoro@vtestah";
 function _(str) { return Gettext.dgettext(UUID, str); }
 
-let C, SoundModule, DialogsModule, RecommendModule, FlowModule;
+let C, SoundModule, DialogsModule, RecommendModule, FlowModule, DateMath;
 if (typeof require !== 'undefined') {
     C = require('./constants');
     SoundModule = require('./sound');
     DialogsModule = require('./dialogs');
     RecommendModule = require('./recommend');
     FlowModule = require('./flow');
+    DateMath = require('./datemath');
 } else {
     const AppletDir = imports.ui.appletManager.applets[UUID];
     C = AppletDir.constants;
@@ -36,6 +37,7 @@ if (typeof require !== 'undefined') {
     DialogsModule = AppletDir.dialogs;
     RecommendModule = AppletDir.recommend;
     FlowModule = AppletDir.flow;
+    DateMath = AppletDir.datemath;
 }
 const {
     POMODORO_STATE_FILE,
@@ -88,7 +90,7 @@ const {
 
 function install(proto) {
     proto._todayStr = function(d = new Date()) {
-        return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`;
+        return DateMath.dayKey(d);
     };
 
     proto._loadDailyStatsAsync = function(onDone) {
@@ -160,14 +162,16 @@ function install(proto) {
     };
 
     proto._daysBetween = function(a, b) {
-        let da = new Date(a + "T00:00:00");
-        let db = new Date(b + "T00:00:00");
-        return Math.round((db - da) / 86400000);
+        return DateMath.daysBetween(a, b);
+    };
+
+    // Calendar date N days before today, at local midnight (see datemath.js).
+    proto._dateDaysAgo = function(n) {
+        return DateMath.dateDaysAgo(new Date(), n);
     };
 
     proto._recordPomodoroCompleted = function() {
         let today = this._todayStr();
-        let yesterday = this._todayStr(new Date(Date.now() - 86400000));
         let s = this._dailyStatsData || { date: "", count: 0, streak: 0, lastGoalMetDate: "", history: {}, total: 0, totalMinutes: 0, totalInterruptions: 0, hours: new Array(24).fill(0) };
         if (!s.history) { s.history = {}; }
         if (typeof s.total !== "number") { s.total = 0; }
@@ -188,22 +192,22 @@ function install(proto) {
         s.total += 1;
         s.totalMinutes += dur;
         // Keep the per-day history bounded (~18 weeks).
-        let cutoff = this._todayStr(new Date(Date.now() - 126 * 86400000));
+        let cutoff = this._todayStr(this._dateDaysAgo(126));
         for (let k in s.history) {
             if (k < cutoff) { delete s.history[k]; }
         }
         let goal = this._opt_dailyGoal || 0;
         if (goal > 0 && s.count === goal) {
-            if (s.lastGoalMetDate === yesterday) {
+            if (s.lastGoalMetDate && this._daysBetween(s.lastGoalMetDate, today) === 1) {
                 s.streak = (s.streak || 0) + 1;
             } else if (s.lastGoalMetDate !== today) {
                 s.streak = 1;
             }
             s.lastGoalMetDate = today;
             // Celebrate locally (everyone), not only via Pushover.
-            let body = _("%d focus blocks today — great work!").format(goal);
+            let body = Gettext.dngettext(UUID, "%d focus block today — great work!", "%d focus blocks today — great work!", goal).format(goal);
             if ((s.streak || 0) > 1) {
-                body += "  " + _("\ud83d\udd25 %d-day streak").format(s.streak);
+                body += "  " + Gettext.dngettext(UUID, "\ud83d\udd25 %d-day streak", "\ud83d\udd25 %d-day streak", s.streak).format(s.streak);
             }
             Main.notify(_("Daily goal reached \ud83c\udf45"), body);
             this._sendPushover(this._opt_pushoverMsgGoal);
@@ -240,13 +244,13 @@ function install(proto) {
         let today = this._todayStr();
         let weekC = 0, weekM = 0, monthC = 0, monthM = 0, weekI = 0;
         for (let i = 0; i < 30; i++) {
-            let cl = cellOf(this._todayStr(new Date(Date.now() - i * 86400000)));
+            let cl = cellOf(this._todayStr(this._dateDaysAgo(i)));
             monthC += cl.c; monthM += cl.m;
             if (i < 7) { weekC += cl.c; weekM += cl.m; weekI += (cl.i || 0); }
         }
         let lastWeek = 0;
         for (let i = 7; i < 14; i++) {
-            lastWeek += cellOf(this._todayStr(new Date(Date.now() - i * 86400000))).c;
+            lastWeek += cellOf(this._todayStr(this._dateDaysAgo(i))).c;
         }
         let total = (this._dailyStatsData && this._dailyStatsData.total) || 0;
         let totalMinutes = (this._dailyStatsData && this._dailyStatsData.totalMinutes) || 0;
@@ -256,7 +260,7 @@ function install(proto) {
         let cur = 0;
         let startI = (todayCell.c > 0) ? 0 : 1;
         for (let i = startI; i < 400; i++) {
-            if (cellOf(this._todayStr(new Date(Date.now() - i * 86400000))).c >= 1) { cur++; } else { break; }
+            if (cellOf(this._todayStr(this._dateDaysAgo(i))).c >= 1) { cur++; } else { break; }
         }
         let longest = 0, run = 0, prev = null;
         let activeDates = Object.keys(h).filter((k) => h[k].c >= 1).sort();
@@ -265,6 +269,12 @@ function install(proto) {
             if (run > longest) { longest = run; }
             prev = d;
         }
+        // Keep a single, consistent 🔥 number: when a daily goal is set the streak
+        // follows the goal streak (same value the menu and the goal celebration
+        // use, and unbounded); otherwise it's the run of consecutive days with any
+        // focus (bounded by the ~18-week history retention).
+        let hasGoal = (this._opt_dailyGoal || 0) > 0;
+        let goalStreak = (this._dailyStatsData && this._dailyStatsData.streak) || 0;
         return {
             today: todayCell.c,
             todayMin: todayCell.m,
@@ -278,7 +288,7 @@ function install(proto) {
             interruptionsToday: (todayCell.i || 0),
             interruptionsWeek: weekI,
             interruptionsTotal: (this._dailyStatsData && this._dailyStatsData.totalInterruptions) || 0,
-            streak: cur,
+            streak: hasGoal ? goalStreak : cur,
             longestStreak: longest,
             bestDay: best,
             hours: (this._dailyStatsData && Array.isArray(this._dailyStatsData.hours) && this._dailyStatsData.hours.length === 24) ? this._dailyStatsData.hours : new Array(24).fill(0)
@@ -481,6 +491,7 @@ function install(proto) {
     proto._ensureReorderDialog = function() {
         if (!this._reorderDialog) {
             this._reorderDialog = new DialogsModule.PomodoroReorderDialog();
+            this._scaleDialogOnOpen(this._reorderDialog);
         }
         return this._reorderDialog;
     };
@@ -569,7 +580,14 @@ function install(proto) {
         }
         if (remaining <= 0) { return null; }
         let brk = this._opt_shortBreakTimeMinutes || 5;
-        let mins = focusMins + Math.max(0, remaining - 1) * brk;
+        let longBrk = this._opt_longBreakTimeMinutes || 15;
+        let perSet = this._opt_pomodoriNumber || 4;
+        // Gaps between the remaining blocks: roughly every perSet-th gap is a long
+        // break, the rest are short — so the estimate doesn't run early.
+        let gaps = Math.max(0, remaining - 1);
+        let longBreaks = Math.floor(remaining / perSet);
+        let shortBreaks = Math.max(0, gaps - longBreaks);
+        let mins = focusMins + shortBreaks * brk + longBreaks * longBrk;
         let end = new Date(Date.now() + mins * 60000);
         let hh = end.getHours().toString().padStart(2, '0');
         let mm = end.getMinutes().toString().padStart(2, '0');
@@ -712,6 +730,7 @@ function install(proto) {
 
     proto._showAddTaskDialog = function(existing) {
         let dialog = new ModalDialog.ModalDialog({ destroyOnClose: true });
+        this._scaleDialog(dialog);
         let content = new Dialog.MessageDialogContent({
             title: existing ? _("Edit task") : _("New task"),
             description: _("What do you want to work on?")
@@ -835,6 +854,7 @@ function install(proto) {
     // managed straight from the menu's Preset submenu.
     proto._showPresetDialog = function(existing, index) {
         let dialog = new ModalDialog.ModalDialog({ destroyOnClose: true });
+        this._scaleDialog(dialog);
         let content = new Dialog.MessageDialogContent({
             title: existing ? _("Edit preset") : _("New preset"),
             description: _("Name it and set its rhythm.")
@@ -922,6 +942,7 @@ function install(proto) {
     // is available without re-running the onboarding wizard.
     proto._showAboutTechnique = function() {
         let dialog = new ModalDialog.ModalDialog({ destroyOnClose: true });
+        this._scaleDialog(dialog);
         let scroll = new St.ScrollView({ style: 'max-height: 460px;' });
         scroll.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
         let box = new St.BoxLayout({ vertical: true, style: 'spacing: 9px; width: 540px; padding: 8px 16px;' });
@@ -942,6 +963,7 @@ function install(proto) {
     // A tiny one-message modal used by the onboarding undo flow.
     proto._onboardingNotice = function(heading, body) {
         let dialog = new ModalDialog.ModalDialog({ destroyOnClose: true });
+        this._scaleDialog(dialog);
         let box = new St.BoxLayout({ vertical: true, style: 'spacing: 8px; width: 460px; padding: 8px 16px;' });
         box.add(new St.Label({ text: heading, style: 'font-size: 1.2em; font-weight: bold;' }));
         let p = new St.Label({ text: body });
@@ -972,6 +994,7 @@ function install(proto) {
 
     proto._showOnboardingWizard = function() {
         let dialog = new ModalDialog.ModalDialog({ destroyOnClose: true });
+        this._scaleDialog(dialog);
         let sp = this._settingsProvider;
         let answers = {};
         let st = { step: 0 };
@@ -1035,15 +1058,18 @@ function install(proto) {
             let select = (i) => {
                 let o = opts[i];
                 if (!o) { return; }
+                let capped = false;
                 if (multi) {
                     let arr = answers[key];
                     let idx = arr.indexOf(o.value);
                     if (idx !== -1) { arr.splice(idx, 1); }
                     else if (arr.length < cap) { arr.push(o.value); }
+                    else { capped = true; }   // already at the limit — say why, don't silently ignore
                 } else {
                     answers[key] = o.value;
                 }
                 repaint();
+                if (capped && hint) { hint.set_text(_("You can pick up to %d — deselect one first").format(cap)); }
                 if (btns[i]) { btns[i].b.grab_key_focus(); }
             };
             opts.forEach((o, i) => {
@@ -1114,6 +1140,7 @@ function install(proto) {
             Object.keys(settings).forEach((k) => { try { sp.setValue(k, settings[k]); } catch (e) {} });
             try { sp.setValue('onboarding_done', true); } catch (e) {}
             dialog.close();
+            this._onboardingNotice(_("Setup applied \u2713"), _("You can undo it anytime in Settings \u2192 \u201cUndo last setup\u201d."));
             if (thenStart) { try { this._startTimerFromMenu(); } catch (e) {} }
         };
 
@@ -1489,7 +1516,7 @@ function install(proto) {
             return _("Daily goal reached — %d done today. Nice.").format(st.today || 0);
         }
         if ((st.interruptionsWeek || 0) >= 5) {
-            return _("%d interruptions this week — what keeps pulling you away?").format(st.interruptionsWeek);
+            return Gettext.dngettext(UUID, "%d interruption this week — what keeps pulling you away?", "%d interruptions this week — what keeps pulling you away?", st.interruptionsWeek).format(st.interruptionsWeek);
         }
         let peak = this._peakFocusHour(st.hours);
         if (peak) { return _("Most focused around %s — good time for deep work.").format(peak.label); }
@@ -1497,7 +1524,7 @@ function install(proto) {
         if (tasks.length && (tasks[0].done || 0) > 0) {
             return _("Most focus went to \u201c%s\u201d.").format(tasks[0].title);
         }
-        if ((st.week || 0) > 0) { return _("%d pomodoros this week. Keep it going.").format(st.week); }
+        if ((st.week || 0) > 0) { return Gettext.dngettext(UUID, "%d pomodoro this week. Keep it going.", "%d pomodoros this week. Keep it going.", st.week).format(st.week); }
         return _("Start a focus session — your insights will appear here.");
     };
 
@@ -1674,6 +1701,30 @@ function install(proto) {
         }
     };
 
+    // Apply the user's "Menu font scale" to a modal dialog's content, so the
+    // readable surfaces (dashboard, onboarding, dialogs) honour the same scale
+    // as the dropdown menu. font-size cascades to the added children.
+    proto._scaleDialog = function(dialog) {
+        let scale = this._opt_menuFontScale || 100;
+        if (dialog && dialog.contentLayout && typeof dialog.contentLayout.set_style === "function") {
+            dialog.contentLayout.set_style("font-size: " + scale + "%;");
+        }
+    };
+
+    // Wrap a reused dialog's open() so it re-applies the current font scale every
+    // time it shows. Used for the class dialogs created once at startup, since
+    // their content persists between opens.
+    proto._scaleDialogOnOpen = function(dialog) {
+        if (!dialog || dialog.__scaleOnOpen || typeof dialog.open !== "function") { return; }
+        dialog.__scaleOnOpen = true;
+        let orig = dialog.open;
+        let self = this;
+        dialog.open = function() {
+            try { self._scaleDialog(dialog); } catch (e) {}
+            return orig.apply(this, arguments);
+        };
+    };
+
     proto._showStatsDashboard = function() {
         let st = this._computeStats();
         let accent = [0.93, 0.42, 0.31];
@@ -1684,7 +1735,7 @@ function install(proto) {
         let cellOf = (d) => h[d] || { c: 0, m: 0 };
         let bars = [];
         for (let i = 13; i >= 0; i--) {
-            let bd = new Date(Date.now() - i * 86400000);
+            let bd = this._dateDaysAgo(i);
             let cell = cellOf(this._todayStr(bd));
             bars.push({ min: cell.m, count: cell.c, today: (i === 0), dateLabel: this._dashDateLabel(bd) });
         }
@@ -1701,7 +1752,7 @@ function install(proto) {
                 let daysBack = (11 - col) * 7 + (dow0 - row);
                 let m = { value: 0, future: daysBack < 0, label: "" };
                 if (daysBack >= 0) {
-                    let dd = new Date(now0.getTime() - daysBack * 86400000);
+                    let dd = this._dateDaysAgo(daysBack);
                     let ds = this._todayStr(dd);
                     m.value = (h[ds] && h[ds].c) || 0;
                     m.label = dowShort[dd.getDay()] + " " + this._dashDateLabel(dd);
@@ -1716,6 +1767,7 @@ function install(proto) {
         this._dashPeakHour = peak ? peak.hour : null;
 
         let dialog = new ModalDialog.ModalDialog({ destroyOnClose: true });
+        this._scaleDialog(dialog);
         let root = new St.BoxLayout({ vertical: true, style: 'spacing: 9px; width: 680px; padding: 8px 16px;' });
 
         // Floating hover tooltip shared by all charts (sits above the dialog).
@@ -1758,7 +1810,7 @@ function install(proto) {
         let goal = this._opt_dailyGoal || 0;
         let todaySub = (goal > 0) ? _("%d / %d goal").format(st.today || 0, goal) : this._dashFmtMin(st.todayMin || 0);
         cards.add(this._dashStatCard(_("Today"), (st.today || 0) + " \ud83c\udf45", todaySub, accent));
-        cards.add(this._dashStatCard(_("This week"), (st.week || 0) + " \ud83c\udf45", this._dashFmtMin(st.weekMin || 0) + (trend ? ("   " + trend) : ""), accent));
+        cards.add(this._dashStatCard(_("Last 7 days"), (st.week || 0) + " \ud83c\udf45", this._dashFmtMin(st.weekMin || 0) + (trend ? ("   " + trend) : ""), accent));
         cards.add(this._dashStatCard(_("Streak"), (st.streak || 0) + " \ud83d\udd25", _("best %d").format(st.longestStreak || 0), green));
         cards.add(this._dashStatCard(_("All time"), (st.total || 0) + " \ud83c\udf45", this._dashFmtMin(st.totalMinutes || 0), accent));
         root.add(cards);
@@ -1769,11 +1821,11 @@ function install(proto) {
             let bestDow = 0;
             for (let i = 1; i < 7; i++) { if (dowSum[i] > dowSum[bestDow]) { bestDow = i; } }
             let dowNames = [_("Sun"), _("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat")];
-            let review = new St.Label({ text: _("This week: %d \ud83c\udf45 \u00b7 %s \u00b7 best day %s").format(st.week || 0, this._dashFmtMin(st.weekMin || 0), dowNames[bestDow]) });
+            let review = new St.Label({ text: _("Last 7 days: %d \ud83c\udf45 \u00b7 %s \u00b7 best weekday %s").format(st.week || 0, this._dashFmtMin(st.weekMin || 0), dowNames[bestDow]) });
             review.clutter_text.line_wrap = true;
             root.add(review);
 
-            let monthReview = new St.Label({ text: _("This month: %d \ud83c\udf45 \u00b7 %s \u00b7 best day %d \ud83c\udf45").format(st.month || 0, this._dashFmtMin(st.monthMin || 0), st.bestDay || 0) });
+            let monthReview = new St.Label({ text: _("Last 30 days: %d \ud83c\udf45 \u00b7 %s \u00b7 best day ever %d \ud83c\udf45").format(st.month || 0, this._dashFmtMin(st.monthMin || 0), st.bestDay || 0) });
             monthReview.clutter_text.line_wrap = true;
             root.add(monthReview);
         }
@@ -1961,6 +2013,23 @@ function install(proto) {
         this._activeWatchId = 0;
     };
 
+    proto._initIdleMonitor = function() {
+        if (this._idleMonitor) {
+            return;
+        }
+        try {
+            if (typeof global !== 'undefined' && global.core_idle_monitor) {
+                this._idleMonitor = global.core_idle_monitor;
+            } else if (imports.gi.Cinnamon && imports.gi.Cinnamon.IdleMonitor) {
+                this._idleMonitor = imports.gi.Cinnamon.IdleMonitor.get_core();
+            } else if (imports.gi.Meta && imports.gi.Meta.IdleMonitor) {
+                this._idleMonitor = imports.gi.Meta.IdleMonitor.get_core();
+            }
+        } catch (e) {
+            this._idleMonitor = null;
+        }
+    };
+
     proto._updateIdleWatch = function() {
         this._clearIdleWatches();
 
@@ -1968,31 +2037,29 @@ function install(proto) {
             return;
         }
 
-        try {
-            if (!this._idleMonitor) {
-                this._idleMonitor = Meta.IdleMonitor.get_core();
-            }
-        } catch (e) {
-            this._idleMonitor = null;
-        }
+        this._initIdleMonitor();
         if (!this._idleMonitor) {
             return;
         }
 
         let minutes = this._opt_autoPauseIdleMinutes || 5;
         this._idleWatchId = this._idleMonitor.add_idle_watch(minutes * 60 * 1000, () => {
-            if (this._currentState !== 'pomodoro') {
-                return;
-            }
-            this._pauseTimerFromMenu();
-            if (this._opt_autoResumeOnActivity && this._idleMonitor) {
-                this._activeWatchId = this._idleMonitor.add_user_active_watch(() => {
-                    this._activeWatchId = 0;
-                    if (this._isPausedState()) {
-                        this._startTimerFromMenu();
-                    }
-                });
-            }
+            try {
+                if (this._currentState !== 'pomodoro') {
+                    return;
+                }
+                this._pauseTimerFromMenu();
+                if (this._opt_autoResumeOnActivity && this._idleMonitor) {
+                    this._activeWatchId = this._idleMonitor.add_user_active_watch(() => {
+                        try {
+                            this._activeWatchId = 0;
+                            if (this._isPausedState()) {
+                                this._startTimerFromMenu();
+                            }
+                        } catch (e) {}
+                    });
+                }
+            } catch (e) {}
         });
     };
 
@@ -2009,14 +2076,10 @@ function install(proto) {
     // the idle monitor is unavailable, so a missing monitor never silently
     // holds a finished pomodoro forever.
     proto._flowProbeIdleMs = function() {
-        try {
-            if (!this._idleMonitor) {
-                this._idleMonitor = Meta.IdleMonitor.get_core();
-            }
-            if (this._idleMonitor) {
-                return this._idleMonitor.get_idletime();
-            }
-        } catch (e) {}
+        this._initIdleMonitor();
+        if (this._idleMonitor) {
+            try { return this._idleMonitor.get_idletime(); } catch (e) {}
+        }
         return 0;
     };
 
@@ -2040,13 +2103,7 @@ function install(proto) {
             return false; // one-shot
         });
 
-        try {
-            if (!this._idleMonitor) {
-                this._idleMonitor = Meta.IdleMonitor.get_core();
-            }
-        } catch (e) {
-            this._idleMonitor = null;
-        }
+        this._initIdleMonitor();
         if (this._idleMonitor) {
             let thresholdMs = FlowModule.flowPauseThresholdMs(20);
             this._flowPauseWatchId = this._idleMonitor.add_idle_watch(thresholdMs, () => {
@@ -2101,6 +2158,11 @@ function install(proto) {
             graceCapMs: FlowModule.flowGraceCapMs(10)
         });
 
+        // Fallback: If we can't monitor idle time, "wait" mode will hang indefinitely.
+        if (decision === 'wait' && !this._idleMonitor) {
+            decision = 'break-now';
+        }
+
         if (decision === 'break-now') {
             this._flowGraceStartMs = null;
             this._disarmSoftLanding();
@@ -2154,14 +2216,21 @@ function install(proto) {
     // Open the end-of-pomodoro break prompt. Extracted from the queue handler so
     // soft landing can defer it; mirrors the classic behaviour exactly.
     proto._openPomodoroFinishedPrompt = function() {
-        if (this._currentState !== 'pomodoro-stop') {
-            this._setCurrentState('pomodoro-stop');
+        if (this._currentState !== 'focus-over') {
+            this._setFocusOverState();
         }
         if (this._opt_showDialogMessages) {
             this._playStartSound();
             this._pomodoroFinishedDialog.setExtend(this._opt_flowExtend ? (this._opt_flowExtendMinutes || 5) : 0);
             this._pomodoroFinishedDialog.setTip(this._restTip(false));
             this._pomodoroFinishedDialog.open();
+        } else if (!this._opt_autoStartBreak) {
+            // Dialogs are off and the next phase won't auto-start: without a
+            // cue here the panel would just sit at 00:00 indistinguishable from
+            // idle, with no hint that a break is waiting on a manual start.
+            this._playBreakSound();
+            this._playCompletionFlourish(_("Focus finished"));
+            Main.notify(_("Focus finished"), _("Break ready — open the menu to start it."));
         }
     };
 
@@ -2188,6 +2257,8 @@ function install(proto) {
     // switch or stop the loop live.
     proto._onAmbientChoiceChanged = function() {
         if (this._ambientEnabled()) { this._ambientLastChoice = this._opt_focusAmbientChoice; }
+        // A different sound was picked — stop any running preview of the old one.
+        this._stopAmbientPreview();
         this._updateAmbientSound();
         if (typeof this._updateMenuRuntime === 'function') { this._updateMenuRuntime(); }
     };
@@ -2260,11 +2331,26 @@ function install(proto) {
             Main.notify(_("Choose an ambient sound first (it's set to Off)."));
             return;
         }
-        if (this._ambientPreview) { this._ambientPreview.stop(); }
+        this._stopAmbientPreview();
         this._ambientPreview = new SoundModule.AmbientLoop(this._ambientPath());
-        let vol = Math.max(0, Math.min(1, (this._opt_focusAmbientVolume || 40) / 100));
-        // ~6 s preview with a soft fade-out (gapless), not a hard 2 s cut.
-        this._ambientPreview.previewFor(vol, 6000, 600);
+        this._ambientPreview.play({ loop: true, volume: this._ambientPreviewVolume() });
+        // Safety net: never let a forgotten preview loop forever (e.g. the
+        // settings window was closed without pressing Stop).
+        this._ambientPreviewTimeout = Mainloop.timeout_add(45000, () => {
+            this._ambientPreviewTimeout = 0;
+            this._stopAmbientPreview();
+            return false;
+        });
+    };
+
+    proto._ambientPreviewVolume = function() {
+        return Math.max(0, Math.min(1, (this._opt_focusAmbientVolume || 40) / 100));
+    };
+
+    // Stop the looping settings preview and cancel its safety timer.
+    proto._stopAmbientPreview = function() {
+        if (this._ambientPreviewTimeout) { try { Mainloop.source_remove(this._ambientPreviewTimeout); } catch (e) {} this._ambientPreviewTimeout = 0; }
+        if (this._ambientPreview) { try { this._ambientPreview.stop(); } catch (e) {} this._ambientPreview = null; }
     };
 
     // Live volume: replay the ambient loop at the new level while focusing.
@@ -2278,6 +2364,10 @@ function install(proto) {
         this._ambientVolTimeout = Mainloop.timeout_add(220, () => {
             this._ambientVolTimeout = 0;
             try {
+                // Live volume for the looping settings preview while you listen.
+                if (this._ambientPreview) {
+                    this._ambientPreview.play({ loop: true, volume: this._ambientPreviewVolume() });
+                }
                 if (this._ambientEnabled() && this._currentState === 'pomodoro' &&
                     this._ambientSound && this._ambientSound.isPlaying()) {
                     let snd = this._ensureAmbientSound();
@@ -2519,6 +2609,8 @@ function install(proto) {
             // Lock only if still in the same break and nothing full-screen is
             // playing (a video/call/presentation) — don't interrupt that.
             if (this._currentState === lockState && !this._anyMonitorFullscreen()) {
+                this._breakLockActive = true;
+                this._armScreensaverWatch();
                 this._lockScreen();
             }
             return GLib.SOURCE_REMOVE;
@@ -2530,6 +2622,62 @@ function install(proto) {
             try { GLib.source_remove(this._breakLockTimeoutId); } catch (e) {}
             this._breakLockTimeoutId = 0;
         }
+    };
+
+    // Watch for the screen actually being unlocked — i.e. only after real
+    // authentication has already succeeded — so we can offer a calm "welcome
+    // back" cue. This never unlocks or bypasses anything; it purely reacts to
+    // cinnamon-screensaver's own ActiveChanged(false) signal, which it emits
+    // once the correct password has been entered. Safe to call repeatedly.
+    proto._armScreensaverWatch = function() {
+        if (this._screensaverSubId) {
+            return;
+        }
+        try {
+            this._screensaverSubId = Gio.DBus.session.signal_subscribe(
+                'org.cinnamon.ScreenSaver',
+                'org.cinnamon.ScreenSaver',
+                'ActiveChanged',
+                '/org/cinnamon/ScreenSaver',
+                null,
+                Gio.DBusSignalFlags.NONE,
+                (connection, sender, path, iface, signal, params) => {
+                    try {
+                        let [isActive] = params.deep_unpack();
+                        if (!isActive) {
+                            this._onScreensaverDeactivated();
+                        }
+                    } catch (e) {
+                        global.logError("Zen Pomodoro: screensaver signal handling failed: " + e.message);
+                    }
+                }
+            );
+        } catch (e) {
+            // No cinnamon-screensaver on the bus (different locker, or it
+            // isn't running) — the courtesy cue simply won't fire; nothing
+            // else depends on this subscription existing.
+            this._screensaverSubId = 0;
+        }
+    };
+
+    proto._disarmScreensaverWatch = function() {
+        if (this._screensaverSubId) {
+            try { Gio.DBus.session.signal_unsubscribe(this._screensaverSubId); } catch (e) {}
+            this._screensaverSubId = 0;
+        }
+        this._breakLockActive = false;
+    };
+
+    // Fires once real authentication has already happened (this signal only
+    // exists because the screensaver just deactivated). Only acts if WE were
+    // the ones who locked for a break — never for a lock/unlock the user
+    // triggers on their own, unrelated to Zen Pomodoro.
+    proto._onScreensaverDeactivated = function() {
+        if (!this._breakLockActive) {
+            return;
+        }
+        this._breakLockActive = false;
+        Main.notify(_("Welcome back"), _("Break's over, whenever you're ready."));
     };
 
     proto._anyMonitorFullscreen = function() {
@@ -2544,22 +2692,35 @@ function install(proto) {
 
     proto._lockScreen = function() {
         // Try the Cinnamon locker first, then a generic logind fallback so the
-        // option works beyond cinnamon-screensaver.
+        // option works beyond cinnamon-screensaver. Wait for each to actually
+        // succeed (exit 0) before giving up — a locker that's installed but fails
+        // (e.g. the screensaver isn't running) shouldn't silently skip the fallback.
         let tries = [
             ['cinnamon-screensaver-command', '--lock'],
             ['loginctl', 'lock-session']
         ];
-        for (let i = 0; i < tries.length; i++) {
-            try {
-                Gio.Subprocess.new(tries[i], Gio.SubprocessFlags.STDOUT_SILENCE | Gio.SubprocessFlags.STDERR_SILENCE);
+        let tryNext = (i) => {
+            if (i >= tries.length) {
+                try { Main.notify(_("Couldn't lock the screen"), _("No screen locker was available.")); } catch (e) {}
                 return;
-            } catch (e) {
-                global.logError("Zen Pomodoro: lock via " + tries[i][0] + " failed: " + e.message);
             }
-        }
-        try {
-            Main.notify(_("Couldn't lock the screen"), _("No screen locker was available."));
-        } catch (e) {}
+            let proc;
+            try {
+                proc = Gio.Subprocess.new(tries[i], Gio.SubprocessFlags.STDOUT_SILENCE | Gio.SubprocessFlags.STDERR_SILENCE);
+            } catch (e) {
+                global.logError("Zen Pomodoro: lock via " + tries[i][0] + " failed to start: " + e.message);
+                tryNext(i + 1);
+                return;
+            }
+            proc.wait_check_async(null, (p, res) => {
+                let ok = false;
+                try { ok = p.wait_check_finish(res); } catch (e) {
+                    global.logError("Zen Pomodoro: lock via " + tries[i][0] + " did not succeed: " + e.message);
+                }
+                if (!ok) { tryNext(i + 1); }
+            });
+        };
+        tryNext(0);
     };
 
     // Optional push notification (Pushover) on key events, opt-in. Uses the
@@ -2584,7 +2745,10 @@ function install(proto) {
         if (curTimer) {
             mins = String(Math.max(0, Math.ceil(curTimer.getTicksRemaining() / 60)));
         }
-        message = message.replace(/\{task\}/g, task).replace(/\{minutes\}/g, mins);
+        // html=1 is set below, so HTML-escape the interpolated task name (a user
+        // value) so stray markup can't break the rendered notification.
+        let esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        message = message.replace(/\{task\}/g, esc(task)).replace(/\{minutes\}/g, mins);
         try {
             if (!this._pushoverSession) {
                 this._pushoverSession = new Soup.Session();
@@ -2666,15 +2830,9 @@ function install(proto) {
         let domains = [];
         let list = this._opt_blockDomains || [];
         for (let row of list) {
-            let d = (row && row.domain ? String(row.domain) : '').trim().toLowerCase();
-            if (!d) { continue; }
-            // Accept pasted URLs: reduce to a bare hostname (e.g.
-            // "https://ya.ru/path" -> "ya.ru"). The helper validates again.
-            d = d.replace(/^[a-z][a-z0-9+.\-]*:\/\//, '');
-            d = d.split('/')[0].split('?')[0];
-            if (d.indexOf('@') >= 0) { d = d.split('@').pop(); }
-            d = d.split(':')[0];
-            d = d.replace(/^www\./, '');
+            // Accept pasted URLs; reduce to a bare hostname. See
+            // RecommendModule.normalizeBlockDomain (pure + unit-tested).
+            let d = RecommendModule.normalizeBlockDomain(row && row.domain);
             if (d) { domains.push(d); }
         }
         return domains;
@@ -2733,6 +2891,28 @@ function install(proto) {
             hostsDomains: hostsDomains,
             listCount: this._collectBlockDomains().length
         };
+    };
+
+    // Pull the domains from the marked /etc/hosts section into the configured
+    // list, so the list reflects what is actually blocked right now (a block
+    // left from a previous session, or a hand-edit of the section). Safe at
+    // startup: it matches the list to the section, so the reconcile that follows
+    // is a no-op and never prompts.
+    proto._syncBlockListFromHosts = function() {
+        let st;
+        try { st = this._blockingStatus(); } catch (e) { return; }
+        if (!st || !st.sectionActive) { return; }
+        let hostsDomains = (st.hostsDomains || []).slice();
+        if (hostsDomains.length === 0) { return; }
+        let current = this._collectBlockDomains();
+        if (current.slice().sort().join(",") === hostsDomains.slice().sort().join(",")) { return; }
+        let newList = hostsDomains.map((d) => ({ domain: d }));
+        try {
+            this._settingsProvider.setValue("block_domains", newList);
+            global.log("Zen Pomodoro: imported " + hostsDomains.length + " blocked domain(s) from /etc/hosts");
+        } catch (e) {
+            global.logError("Zen Pomodoro: failed to import block list from /etc/hosts: " + e.message);
+        }
     };
 
     // The helper to run a block/unblock with: the installed passwordless one
@@ -2836,8 +3016,11 @@ function install(proto) {
     };
 
     proto._setupPasswordlessBlocking = function() {
-        this._runHostsHelper(['pkexec', this._setupScriptPath(), 'install', 'yes', this._bundledHelperPath()],
-            _("Passwordless blocking enabled (no prompt)."));
+        let mode = (this._opt_blockingAuthMode === 'keep') ? 'keep' : 'yes';
+        let okMsg = (mode === 'keep')
+            ? _("Blocking set up — you'll be asked for your password once per login session.")
+            : _("Passwordless blocking enabled (no prompt).");
+        this._runHostsHelper(['pkexec', this._setupScriptPath(), 'install', mode, this._bundledHelperPath()], okMsg);
     };
 
     proto._removePasswordlessBlocking = function() {
@@ -2863,8 +3046,8 @@ function install(proto) {
         try { this._settingsProvider.setValue("zen_intro_shown", true); } catch (e) {}
         let isFocus = (this._currentState === 'pomodoro' || this._currentState === 'pomodoro-paused');
         let body = isFocus
-            ? _("Focus spotlight is on — every other window is dimmed so the one you're working in stands out. Click the on-screen pill (or switch Zen off) to exit.")
-            : _("Focus spotlight is armed. When your next focus session starts, every window except the one you're working in dims, so your task stands out. Click the on-screen pill to exit.");
+            ? _("Focus spotlight is on — every other window is dimmed so the one you're working in stands out. Slide your pointer to the top of the screen to see the time left and a way out.")
+            : _("Focus spotlight is armed. When your next focus session starts, every window except the one you're working in dims, so your task stands out. Slide your pointer to the top of the screen to see the time left and a way out.");
         try { Main.notify(_("Zen mode"), body); } catch (e) {}
     };
 
@@ -2883,10 +3066,11 @@ function install(proto) {
                 this._updateFocusFrame();
             });
         }
+        this._startZenPointerWatch();
         this._applyZenDim();
-        this._zenHud.show();
-        if (typeof this._zenHud.raise_top === 'function') { this._zenHud.raise_top(); }
-        this._refreshZenLabels();
+        if (this._zenTopStrip) { this._zenTopStrip.show(); }
+        this._positionZenHud();
+        this._revealZenHud();
     };
 
     // Focus spotlight: darken every other window so the one you're working in
@@ -2917,6 +3101,15 @@ function install(proto) {
         if (fx._zenTweenId) {
             try { Mainloop.source_remove(fx._zenTweenId); } catch (e) {}
             fx._zenTweenId = 0;
+        }
+        // Reduce motion: jump straight to the target brightness, no fade.
+        if (this._opt_reduceMotion) {
+            fx._zenB = target;
+            try { fx.set_brightness(target); } catch (e) {}
+            if (removeAtEnd && Math.abs(target) < 0.001) {
+                try { actor.remove_effect_by_name("zen-spotlight"); } catch (e) {}
+            }
+            return;
         }
         let start = (typeof fx._zenB === 'number') ? fx._zenB : 0;
         let steps = 9;
@@ -2964,10 +3157,39 @@ function install(proto) {
             let wt = mw.get_window_type();
             if (wt === Meta.WindowType.DOCK) { return false; }
             if (wt === Meta.WindowType.DESKTOP) { return Boolean(this._opt_zenDimDesktop); }
+            // Light up a whole *other* monitor the pointer moves to, but keep the
+            // spotlight (only the focused window lit) on the monitor that holds it.
+            if (typeof this._zenPointerMonitor === 'number' && this._zenPointerMonitor >= 0 && mw.get_monitor) {
+                let focusMon = (focus && focus.get_monitor) ? focus.get_monitor() : -1;
+                if (this._zenPointerMonitor !== focusMon && mw.get_monitor() === this._zenPointerMonitor) { return false; }
+            }
             return true;
         } catch (e) {
             try { return !(mw.is_skip_taskbar && mw.is_skip_taskbar()); } catch (e2) { return true; }
         }
+    };
+
+    // The spotlight keeps the monitor under the pointer fully lit. Poll the
+    // pointer's monitor and re-apply the dim whenever it changes, so moving to
+    // another screen brightens it right away.
+    proto._startZenPointerWatch = function() {
+        try { this._zenPointerMonitor = global.display.get_current_monitor(); } catch (e) { this._zenPointerMonitor = -1; }
+        // Single monitor: the pointer can't move to another screen, so there's
+        // nothing to follow — skip the 200ms poll entirely.
+        try { if (global.display.get_n_monitors() <= 1) { return; } } catch (e) {}
+        if (this._zenPointerPollId) { return; }
+        this._zenPointerPollId = Mainloop.timeout_add(200, () => {
+            let isFocus = (this._currentState === 'pomodoro' || this._currentState === 'pomodoro-paused' || this._currentState === 'pomodoro-overrun');
+            if (!(this._zenActive && this._opt_zenModeEnabled && isFocus)) { this._zenPointerPollId = 0; return false; }
+            let m = -1;
+            try { m = global.display.get_current_monitor(); } catch (e) {}
+            if (m !== this._zenPointerMonitor) { this._zenPointerMonitor = m; this._applyZenDim(); }
+            return true;
+        });
+    };
+
+    proto._stopZenPointerWatch = function() {
+        if (this._zenPointerPollId) { try { Mainloop.source_remove(this._zenPointerPollId); } catch (e) {} this._zenPointerPollId = 0; }
     };
 
     // Re-apply live when the dim settings change (only while the spotlight is up).
@@ -2997,57 +3219,124 @@ function install(proto) {
             try { global.display.disconnect(this._zenFocusSignal); } catch (e) {}
             this._zenFocusSignal = 0;
         }
+        this._stopZenPointerWatch();
+        if (this._zenHudHideId) { try { Mainloop.source_remove(this._zenHudHideId); } catch (e) {} this._zenHudHideId = 0; }
+        if (this._zenHudTweenId) { try { Mainloop.source_remove(this._zenHudTweenId); } catch (e) {} this._zenHudTweenId = 0; }
+        try { global.display.set_cursor(Meta.Cursor.DEFAULT); } catch (e) {}
         this._clearZenDim();
-        if (this._zenHud) {
-            try { this._zenHud.hide(); } catch (e) {}
-        }
+        if (this._zenHud) { try { this._zenHud.hide(); } catch (e) {} }
+        if (this._zenTopStrip) { try { this._zenTopStrip.hide(); } catch (e) {} }
     };
 
+    // Hidden by default so nothing sits over your work. Slide the pointer to the
+    // top edge and a small pill fades in with the time left and a way out. Both
+    // the pill and the edge trigger are registered as tracked chrome, so pointer
+    // events actually land on them (added straight to uiGroup, clicks fall through).
     proto._ensureZenHud = function() {
         if (this._zenHud) { return; }
-        this._zenHud = new St.BoxLayout({
+        this._zenHud = new St.Button({
             reactive: true,
+            can_focus: true,
             track_hover: true,
-            style: "background-color: rgba(8,8,8,0.82); border-radius: 14px; padding: 6px 16px; spacing: 12px;"
+            label: "--:--",
+            style: "background-color: rgba(8,8,8,0.85); border-radius: 12px; padding: 6px 16px; color: rgba(255,255,255,0.96); font-size: 1.0em; font-weight: bold;"
         });
-        this._zenTimeLabel = new St.Label({
-            y_align: Clutter.ActorAlign.CENTER,
-            style: "color: rgba(255,255,255,0.96); font-size: 1.25em; font-weight: bold;"
-        });
-        let exit = new St.Label({
-            text: "\u2715  " + _("Exit focus"),
-            y_align: Clutter.ActorAlign.CENTER,
-            style: "color: rgba(235,175,75,0.95);"
-        });
-        this._zenHud.add_actor(this._zenTimeLabel);
-        this._zenHud.add_actor(exit);
-        this._zenHud.connect('button-press-event', () => {
+        this._zenHud.connect('clicked', () => {
             this._zenActive = false;
             this._updateZenOverlay();
             this._updateMenuRuntime();
-            return Clutter.EVENT_STOP;
         });
-        Main.uiGroup.add_actor(this._zenHud);
+        this._zenHud.connect('enter-event', () => { try { global.display.set_cursor(Meta.Cursor.POINTING_HAND); } catch (e) {} this._revealZenHud(); return Clutter.EVENT_PROPAGATE; });
+        this._zenHud.connect('leave-event', () => { try { global.display.set_cursor(Meta.Cursor.DEFAULT); } catch (e) {} this._armZenHudHide(); return Clutter.EVENT_PROPAGATE; });
+        Main.layoutManager.addChrome(this._zenHud, { visibleInFullscreen: true, affectsInputRegion: true, affectsStruts: false });
+        this._zenHud.opacity = 0;
+        this._zenHud.hide();
+
+        this._zenTopStrip = new St.Widget({ reactive: true });
+        this._zenTopStrip.connect('enter-event', () => { this._revealZenHud(); return Clutter.EVENT_PROPAGATE; });
+        Main.layoutManager.addChrome(this._zenTopStrip, { visibleInFullscreen: true, affectsInputRegion: true, affectsStruts: false });
+    };
+
+    // Fade the pill in with the current time and (re)start the idle hide timer.
+    // A Mainloop-stepped tween — the actor .ease() resolves instantly in this
+    // context, but a manual step animates reliably (same approach as the dim
+    // fade). Honors the reduce-motion option.
+    proto._zenHudTween = function(toOpacity, toTransY, durationMs, onDone) {
+        if (!this._zenHud) { if (onDone) { onDone(); } return; }
+        if (this._zenHudTweenId) { try { Mainloop.source_remove(this._zenHudTweenId); } catch (e) {} this._zenHudTweenId = 0; }
+        if (this._opt_reduceMotion || !durationMs || durationMs <= 0) {
+            try { this._zenHud.opacity = toOpacity; this._zenHud.translation_y = toTransY; } catch (e) {}
+            if (onDone) { onDone(); }
+            return;
+        }
+        let startOp = this._zenHud.opacity;
+        let startTy = this._zenHud.translation_y || 0;
+        let steps = Math.max(1, Math.round(durationMs / 16));
+        let i = 0;
+        this._zenHudTweenId = Mainloop.timeout_add(16, () => {
+            i++;
+            let t = i / steps; if (t > 1) { t = 1; }
+            let eased = 1 - (1 - t) * (1 - t);
+            try {
+                this._zenHud.opacity = Math.round(startOp + (toOpacity - startOp) * eased);
+                this._zenHud.translation_y = startTy + (toTransY - startTy) * eased;
+            } catch (e) {}
+            if (i >= steps) {
+                this._zenHudTweenId = 0;
+                try { this._zenHud.opacity = toOpacity; this._zenHud.translation_y = toTransY; } catch (e) {}
+                if (onDone) { onDone(); }
+                return false;
+            }
+            return true;
+        });
+    };
+
+    // Slide the pill down from the top edge with a fade as it appears.
+    proto._revealZenHud = function() {
+        if (!this._zenHud) { return; }
+        if (this._zenHudHideId) { try { Mainloop.source_remove(this._zenHudHideId); } catch (e) {} this._zenHudHideId = 0; }
+        let wasHidden = (!this._zenHud.visible || this._zenHud.opacity < 30);
+        this._zenHud.show();
+        this._refreshZenLabels();
+        if (wasHidden) { this._zenHud.opacity = 0; this._zenHud.translation_y = -12; }
+        if (typeof this._zenHud.raise_top === 'function') { this._zenHud.raise_top(); }
+        this._zenHudTween(255, 0, wasHidden ? 220 : 120);
+        this._armZenHudHide();
+    };
+
+    // Tuck the pill away again a few seconds after the pointer leaves it.
+    proto._armZenHudHide = function() {
+        if (this._zenHudHideId) { try { Mainloop.source_remove(this._zenHudHideId); } catch (e) {} this._zenHudHideId = 0; }
+        this._zenHudHideId = Mainloop.timeout_add(2600, () => {
+            this._zenHudHideId = 0;
+            if (this._zenHud) {
+                this._zenHudTween(0, -8, 320, () => { try { this._zenHud.hide(); this._zenHud.translation_y = 0; } catch (e) {} });
+            }
+            return false;
+        });
     };
 
     proto._positionZenHud = function() {
         if (!this._zenHud) { return; }
-        let mon = Main.layoutManager ? Main.layoutManager.primaryMonitor : null;
+        let mon = Main.layoutManager ? (Main.layoutManager.focusMonitor || Main.layoutManager.primaryMonitor) : null;
         if (!mon) { return; }
-        let natW = 200;
-        try { natW = this._zenHud.get_preferred_width(-1)[1] || 200; } catch (e) {}
-        this._zenHud.set_position(mon.x + Math.round((mon.width - natW) / 2), mon.y + 12);
+        let w = 0;
+        try { w = this._zenHud.get_preferred_width(-1)[1] || 0; } catch (e) {}
+        this._zenHud.set_position(mon.x + Math.round((mon.width - w) / 2), mon.y + 12);
+        if (this._zenTopStrip) {
+            this._zenTopStrip.set_position(mon.x, mon.y);
+            this._zenTopStrip.set_size(mon.width, 6);
+            if (typeof this._zenTopStrip.raise_top === 'function') { this._zenTopStrip.raise_top(); }
+        }
+        if (typeof this._zenHud.raise_top === 'function') { this._zenHud.raise_top(); }
     };
 
     proto._refreshZenLabels = function() {
-        if (!this._zenHud || !this._zenHud.visible) {
-            return;
-        }
+        if (!this._zenHud || !this._zenHud.visible) { return; }
         let timer = this._timerQueue ? this._timerQueue.getCurrentTimer() : null;
         let ticks = timer ? timer.getTicksRemaining() : 0;
-        if (this._zenTimeLabel) {
-            this._zenTimeLabel.set_text(this._getFormattedTimeLeft(ticks) || "--:--");
-        }
+        let t = this._getFormattedTimeLeft(ticks) || "--:--";
+        try { this._zenHud.set_label(t + "    \u2715 " + _("Exit focus")); } catch (e) {}
         this._positionZenHud();
     };
 
@@ -3086,7 +3375,7 @@ function install(proto) {
             Main.uiGroup.add_actor(this._breathOverlay);
         }
 
-        let primary = Main.layoutManager ? Main.layoutManager.primaryMonitor : null;
+        let primary = Main.layoutManager ? (Main.layoutManager.focusMonitor || Main.layoutManager.primaryMonitor) : null;
         if (primary) {
             this._breathOverlay.set_position(primary.x, primary.y + Math.round(primary.height * 0.32));
             this._breathOverlay.set_size(primary.width, Math.round(primary.height * 0.36));
@@ -3097,7 +3386,10 @@ function install(proto) {
         }
         this._breathStartMs = GLib.get_monotonic_time() / 1000;
         this._tickBreathing();
-        this._breathSourceId = Mainloop.timeout_add(60, () => {
+        // The circle is static under reduce-motion, so a slow tick keeps the phase
+        // label current with far fewer wakeups; otherwise animate smoothly.
+        let breathMs = this._opt_reduceMotion ? 250 : 60;
+        this._breathSourceId = Mainloop.timeout_add(breathMs, () => {
             this._tickBreathing();
             return true;
         });
@@ -3152,62 +3444,6 @@ function install(proto) {
         }
     };
 
-    proto._focusUntilFromMenu = function() {
-        if (this._timerQueue.isRunning() || this._isPausedState()) {
-            Main.notify(_("Stop the timer before changing Pomodoro preset"));
-            return;
-        }
-
-        let dialog = new ModalDialog.ModalDialog({ destroyOnClose: true });
-        let content = new Dialog.MessageDialogContent({
-            title: _("Focus until"),
-            description: _("Enter a time (HH:MM)")
-        });
-        let entry = new St.Entry({ style_class: 'run-dialog-entry', can_focus: true });
-        CinnamonEntry.addContextMenu(entry);
-        content.add_child(entry);
-        dialog.contentLayout.add(content);
-        dialog.setInitialKeyFocus(entry.clutter_text);
-
-        let confirm = () => {
-            let txt = entry.clutter_text.get_text().trim();
-            dialog.close();
-            let m = txt.match(/^(\d{1,2}):(\d{2})$/);
-            if (!m) {
-                return;
-            }
-            let h = parseInt(m[1], 10), min = parseInt(m[2], 10);
-            if (h > 23 || min > 59) {
-                return;
-            }
-            let now = new Date();
-            let target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, min, 0, 0);
-            if (target.getTime() <= now.getTime()) {
-                target = new Date(target.getTime() + 86400000);
-            }
-            let secs = Math.round((target.getTime() - now.getTime()) / 1000);
-            if (secs < 60) {
-                return;
-            }
-            this._startFocusForDuration(secs);
-        };
-
-        entry.clutter_text.connect('key-press-event', (_actor, event) => {
-            let symbol = event.get_key_symbol();
-            if (symbol === Clutter.KEY_Return || symbol === Clutter.KEY_KP_Enter) {
-                confirm();
-                return true;
-            }
-            return false;
-        });
-
-        dialog.setButtons([
-            { label: _("Cancel"), key: Clutter.KEY_Escape, action: () => dialog.close() },
-            { label: _("Start"), default: true, action: confirm },
-        ]);
-        dialog.open();
-    };
-
     proto._extendFocusFromDialog = function() {
         // At this point the queue points at the short break that follows the
         // just-finished pomodoro; step back to that pomodoro and run it again
@@ -3223,6 +3459,8 @@ function install(proto) {
             return;
         }
         timer.setRemaining(minutes * 60);
+        this._warnArmed = true;            // re-arm the pre-end warning for the extended focus
+        this._pushReminderArmed = true;    // and the pre-end Pushover reminder
         this._timerQueue.preventStart(false);
         this._appletMenu.toggleTimerState(true);
         this._timerQueue.start();
