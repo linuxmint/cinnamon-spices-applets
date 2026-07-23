@@ -1,0 +1,11 @@
+{
+    "uuid": "cpu-usage-temperature@melancholy",
+    "name": "CPU Usage and Temperature",
+    "description": "Shows CPU usage and CPU temperature in the panel.",
+    "version": "1.0.0",
+    "cinnamon-version": [
+        "6.4",
+        "6.6",
+        "6.8"
+    ]
+}
