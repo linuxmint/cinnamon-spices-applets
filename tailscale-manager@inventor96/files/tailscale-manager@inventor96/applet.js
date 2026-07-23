@@ -2,6 +2,7 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 
@@ -141,20 +142,25 @@ class TailscaleManager extends Applet.TextIconApplet {
     }
 
     _refreshStatus() {
-        try {
-            let [res, stdout, stderr, status] = GLib.spawn_command_line_sync(
-                'tailscale status --json');
-            if (status === 0 && stdout && stdout.length > 0) {
-                let data = JSON.parse(stdout.toString());
-                this._processStatus(data);
-            } else {
+        let proc = Gio.Subprocess.new(
+            ['tailscale', 'status', '--json'],
+            Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+        );
+        proc.communicate_utf8_async(null, null, (proc, res) => {
+            try {
+                let [, stdout, stderr] = proc.communicate_utf8_finish(res);
+                if (proc.get_successful() && stdout && stdout.length > 0) {
+                    let data = JSON.parse(stdout);
+                    this._processStatus(data);
+                } else {
+                    this._tailscaleState = "Stopped";
+                    this._updateUI();
+                }
+            } catch (e) {
                 this._tailscaleState = "Stopped";
                 this._updateUI();
             }
-        } catch (e) {
-            this._tailscaleState = "Stopped";
-            this._updateUI();
-        }
+        });
     }
 
     _processStatus(data) {
@@ -183,30 +189,33 @@ class TailscaleManager extends Applet.TextIconApplet {
             this._exitNodeName = "";
         }
 
-        this._detectAcceptRoutes();
+        this._detectAcceptRoutes(() => {
+            this._updateUI();
 
-        this._updateUI();
-
-        if (this._tailscaleState === "Running" &&
-            this._exitNodes.length === 0) {
-            this._refreshExitNodes();
-        }
-
-        if (oldState !== "Running" && this._tailscaleState === "Running") {
-            this._refreshExitNodes();
-        }
+            if ((this._tailscaleState === "Running" &&
+                this._exitNodes.length === 0) ||
+                (oldState !== "Running" &&
+                this._tailscaleState === "Running")) {
+                this._refreshExitNodes();
+            }
+        });
     }
 
     _refreshExitNodes() {
-        try {
-            let [res, stdout, stderr, status] = GLib.spawn_command_line_sync(
-                'tailscale exit-node list');
-            if (status === 0 && stdout && stdout.length > 0) {
-                this._parseExitNodeList(stdout.toString());
+        let proc = Gio.Subprocess.new(
+            ['tailscale', 'exit-node', 'list'],
+            Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+        );
+        proc.communicate_utf8_async(null, null, (proc, res) => {
+            try {
+                let [, stdout, stderr] = proc.communicate_utf8_finish(res);
+                if (proc.get_successful() && stdout && stdout.length > 0) {
+                    this._parseExitNodeList(stdout);
+                }
+            } catch (e) {
+                global.logError(e);
             }
-        } catch (e) {
-            global.logError(e);
-        }
+        });
     }
 
     _parseExitNodeList(output) {
@@ -226,29 +235,34 @@ class TailscaleManager extends Applet.TextIconApplet {
         this._populateExitNodeSubMenu();
     }
 
-    _detectAcceptRoutes() {
-        try {
-            let [res, stdout, stderr, status] = GLib.spawn_command_line_sync(
-                'tailscale debug prefs');
-            if (status !== 0) {
+    _detectAcceptRoutes(callback) {
+        let proc = Gio.Subprocess.new(
+            ['tailscale', 'debug', 'prefs'],
+            Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+        );
+        proc.communicate_utf8_async(null, null, (proc, res) => {
+            try {
+                let [, stdout, stderr] = proc.communicate_utf8_finish(res);
+                if (proc.get_successful()) {
+                    let data = JSON.parse(stdout);
+                    if (typeof data.RouteAll === 'boolean') {
+                        this._acceptRoutes = data.RouteAll;
+                        this._acceptRoutesError = "";
+                    } else {
+                        this._acceptRoutes = null;
+                        this._acceptRoutesError = "Cannot detect accept-routes: unexpected output";
+                    }
+                } else {
+                    this._acceptRoutes = null;
+                    this._acceptRoutesError = "Cannot detect accept-routes: unexpected output";
+                }
+            } catch (e) {
                 this._acceptRoutes = null;
                 this._acceptRoutesError = "Cannot detect accept-routes: unexpected output";
-                this._updateAcceptRoutesUI();
-                return;
             }
-            let data = JSON.parse(stdout.toString());
-            if (typeof data.RouteAll === 'boolean') {
-                this._acceptRoutes = data.RouteAll;
-                this._acceptRoutesError = "";
-            } else {
-                this._acceptRoutes = null;
-                this._acceptRoutesError = "Cannot detect accept-routes: unexpected output";
-            }
-        } catch (e) {
-            this._acceptRoutes = null;
-            this._acceptRoutesError = "Cannot detect accept-routes: unexpected output";
-        }
-        this._updateAcceptRoutesUI();
+            this._updateAcceptRoutesUI();
+            if (callback) callback();
+        });
     }
 
     _updateAcceptRoutesUI() {

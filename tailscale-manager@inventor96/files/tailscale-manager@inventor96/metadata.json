@@ -1,6 +1,7 @@
 {
     "uuid": "tailscale-manager@inventor96",
     "name": "Tailscale Manager",
+    "version": "1.0.0",
     "description": "Unofficial tray tool to monitor and manage your Tailscale connection status and exit nodes. This applet is not affiliated with or endorsed by Tailscale.",
     "max-instances": "1"
 }
