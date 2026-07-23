@@ -1,0 +1,6 @@
+{
+    "uuid": "TSMan@inventor96",
+    "name": "Tailscale Manager",
+    "description": "Unofficial tray tool to monitor and manage your Tailscale connection status and exit nodes. I'm not affiliated with Tailscale, Inc. in any way.",
+    "max-instances": "1"
+}
