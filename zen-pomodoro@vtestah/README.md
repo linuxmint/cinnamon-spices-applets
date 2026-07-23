@@ -3,7 +3,7 @@
 A calm, Zen-style Pomodoro timer for the Cinnamon panel. It gives you gentle
 on-screen cues instead of anxious alarms, so a finished block never jolts you.
 
-![screenshot](screenshot.png)
+![screenshot](https://cinnamon-spices.linuxmint.com/git/applets/zen-pomodoro@vtestah/screenshot.png)
 
 ## Why Zen Pomodoro?
 
@@ -29,21 +29,21 @@ change your mind.
 - **Adaptive onboarding:** a short wizard tailors focus length, sounds, breaks
   and blocking from a few questions, with a review step, keyboard and
   screen-reader navigation, and a one-click "Undo last setup".
-- **Tasks:** a list with pomodoro estimates and per-task progress, templates,
+- **Tasks:** a list with pomodoro estimates and per-task progress,
   and a focus-task picker.
 - **Statistics dashboard:** today, this week, this month, streak and all-time,
   an hourly focus pattern, 14-day bars, a 12-week heatmap, a by-task breakdown,
   milestones, and one-click export to a CSV file.
 
-![statistics dashboard](screenshot-stats.png)
+![statistics dashboard](https://cinnamon-spices.linuxmint.com/git/applets/zen-pomodoro@vtestah/screenshot-stats.png)
 
 - **Goals & flow:** a daily goal and streak, flow-extend, soft landing, idle
-  auto-pause and resume, "Focus until" a set time, and an optional strict-focus
+  auto-pause and resume, and an optional strict-focus
   mode.
 - **Calmer breaks:** gentle rest reminders with "+5 min" and "Skip break" right
   in the notification, an optional breathing guide, an optional lock screen on
   breaks, and auto-pause/resume of music and video (MPRIS) while you step away.
-- **Stay focused:** optional site blocking during focus, Do-Not-Disturb while
+- **Stay focused:** optional site blocking, Do-Not-Disturb while
   focusing, and a global hotkey to jot a distracting thought without leaving
   your flow.
 - **Sounds:** ticking, phase alerts, an interval chime, and ambient soundscapes

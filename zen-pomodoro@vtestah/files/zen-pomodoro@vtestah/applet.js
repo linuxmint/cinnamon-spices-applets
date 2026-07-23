@@ -101,7 +101,11 @@ function _(str) {
 // i.e a setting of 25 in the options can mean 25 seconds if we comment out the '* 60'
 // makes it easy to test all of the timers quickly
 function convertMinutesToSeconds(minutes) {
-    return minutes * 60;
+    // Guard a corrupted/non-numeric setting: setTimerLimit throws on anything
+    // below 1, so clamp to a sane 1-minute floor instead of crashing the timer.
+    let m = Number(minutes);
+    if (!isFinite(m) || m < 1) { m = 1; }
+    return Math.round(m * 60);
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
@@ -145,6 +149,13 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._numPomodoriFinished = 0;
         // Number of finished sets.
         this._numPomodoroSetFinished = 0;
+        // Set when the current pomodoro is skipped, so the next phase doesn't
+        // record it as a completed pomodoro (which would inflate the stats).
+        this._skippedPomodoro = false;
+        // Armed at focus start; the pre-end warning fires once when the remaining
+        // time first crosses the threshold (robust to a skipped/drifted tick).
+        this._warnArmed = false;
+        this._pushReminderArmed = false;   // pre-end Pushover reminder, armed at focus start
         this._setTimerLabel(0);
         this._updatePanelFocusCue();
 
@@ -156,7 +167,8 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._opt_pomodoriNumber = null;
         this._opt_startAutomaticallyOnLoad = null;
         this._opt_showDialogMessages = null;
-        this._opt_autoStartNext = null;
+        this._opt_autoStartBreak = null;
+        this._opt_autoStartPomodoro = null;
         this._opt_panelIconStyle = null;
         this._opt_panelCustomIcon = null;
         this._opt_showTimerInPanel = null;
@@ -225,6 +237,14 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._opt_breakLockEnabled = null;
         this._opt_breakLockLongOnly = null;
         this._breakLockTimeoutId = 0;
+        // Set only while the screen is locked because of one of OUR breaks
+        // (never for a lock the user triggers themselves); cleared the moment
+        // the screensaver reports it deactivated, i.e. after real
+        // authentication has already happened. Never used to trigger or
+        // shortcut unlocking — purely a courtesy "welcome back" cue.
+        this._breakLockActive = false;
+        this._welcomeBackIdleWatchId = 0;
+        this._welcomeBackActiveWatchId = 0;
         this._opt_focusStartCommand = null;
         this._opt_breakStartCommand = null;
         this._opt_goalCommand = null;
@@ -240,8 +260,13 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._opt_pushoverMsgFocus = null;
         this._opt_pushoverSound = null;
         this._opt_pushoverPriority = null;
+        this._opt_pushoverReminder = null;
+        this._opt_pushoverReminderMinutes = null;
+        this._opt_pushoverMsgReminder = null;
+        this._opt_pushoverReminderPhase = null;
         this._opt_blockDomains = null;
         this._opt_enableBlocking = null;
+        this._opt_blockingAuthMode = null;
         this._opt_onboardingDone = null;
         this._dndActive = false;
         this._dndPrevValue = null;
@@ -309,7 +334,14 @@ class PomodoroApplet extends Applet.TextIconApplet {
         // Refresh the runtime when the menu opens, so the blocking row reflects
         // the real /etc/hosts state (read only while the menu is open).
         this._appletMenu.connect('open-state-changed', (m, open) => {
-            if (open) { try { this._updateMenuRuntime(); } catch (e) {} }
+            if (open) {
+                try {
+                    // Appearance bindings can fire before the bound option updates,
+                    // so re-sync the menu font scale to the current setting on open.
+                    this._appletMenu.setFontScale(this._opt_menuFontScale || 100);
+                    this._updateMenuRuntime();
+                } catch (e) {}
+            }
         });
         this._updatePresetIndicator();
         this._createFocusFrame();
@@ -441,8 +473,13 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "pushover_msg_focus", "_opt_pushoverMsgFocus", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "pushover_sound", "_opt_pushoverSound", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "pushover_priority", "_opt_pushoverPriority", emptyCallback);
+        this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "pushover_reminder", "_opt_pushoverReminder", emptyCallback);
+        this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "pushover_reminder_minutes", "_opt_pushoverReminderMinutes", emptyCallback);
+        this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "pushover_msg_reminder", "_opt_pushoverMsgReminder", emptyCallback);
+        this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "pushover_reminder_phase", "_opt_pushoverReminderPhase", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "block_domains", "_opt_blockDomains", this._onBlockDomainsChanged.bind(this));
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "enable_blocking", "_opt_enableBlocking", this._onBlockDomainsChanged.bind(this));
+        this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "blocking_auth_mode", "_opt_blockingAuthMode", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "onboarding_done", "_opt_onboardingDone", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "focus_ambient_volume", "_opt_focusAmbientVolume", this._restartAmbientLive.bind(this));
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "focus_ambient_file", "_opt_focusAmbientFile", this._restartAmbientLive.bind(this));
@@ -451,7 +488,8 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "zen_dim_strength", "_opt_zenDimStrength", () => this._reapplyZenDim());
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "zen_dim_desktop", "_opt_zenDimDesktop", () => this._reapplyZenDim());
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "show_dialog_messages", "_opt_showDialogMessages", emptyCallback);
-        this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "auto_start_next", "_opt_autoStartNext", emptyCallback);
+        this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "auto_start_break", "_opt_autoStartBreak", emptyCallback);
+        this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "auto_start_pomodoro", "_opt_autoStartPomodoro", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "focus_show_task_chip", "_opt_focusShowTaskChip", () => { this._updateFocusFrame(); });
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "focus_start_ritual", "_opt_focusStartRitual", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "require_focus_task", "_opt_requireFocusTask", emptyCallback);
@@ -485,6 +523,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
             "_opt_tickerSoundPath",
             () => {
                 this._loadSoundEffects();
+                if (this._tickerPreview) { this._previewTimerSound(); return; }
                 if (this._onPlayTickedSoundChanged() === false) {
                     this._playTickerSound(true); // idle: short preview of the new file
                 }
@@ -496,6 +535,9 @@ class PomodoroApplet extends Applet.TextIconApplet {
             "timer_sound_volume",
             "_opt_tickerSoundVolume",
             () => {
+                if (this._tickerPreviewLiveVolume()) { return; }
+                // In a real focus session, re-apply to the gapless loop (live, seamless).
+                if (this._opt_playTickerSound && this._currentState === 'pomodoro') { this._playTickerSound(); return; }
                 if (this._onPlayTickedSoundChanged() === false) {
                     this._playTickerSound(true); // If not playing, play a preview
                 }
@@ -552,7 +594,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
         // prompts). Deferred so any session recovery runs first.
         this._blockReconcileTimeoutId = imports.gi.GLib.timeout_add(imports.gi.GLib.PRIORITY_DEFAULT, 3000, () => {
             this._blockReconcileTimeoutId = 0;
-            try { this._syncBlocking(false); this._blockingReady = true; } catch (e) { global.logError("Zen Pomodoro reconcile: " + e); }
+            try { this._syncBlockListFromHosts(); this._syncBlocking(false); this._blockingReady = true; } catch (e) { global.logError("Zen Pomodoro reconcile: " + e); }
             return false;
         });
     }
@@ -671,7 +713,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
 
             if (this._opt_scrollAction === 'focus_length') {
                 // Adjust the focus length — only when idle (no running/paused timer).
-                if (this._currentState === 'pomodoro-stop' || this._currentState === 'break-over') {
+                if (this._currentState === 'pomodoro-stop' || this._currentState === 'break-over' || this._currentState === 'focus-over') {
                     let cur = this._opt_pomodoroTimeMinutes || 25;
                     let next = Math.max(1, Math.min(60, cur + (up ? 5 : -5)));
                     if (next !== cur) {
@@ -705,7 +747,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
             if (event.get_button() !== 2) {
                 return Clutter.EVENT_PROPAGATE; // leave left/right click to default handling
             }
-            if (this._currentState === 'pomodoro-stop' || this._currentState === 'break-over') {
+            if (this._currentState === 'pomodoro-stop' || this._currentState === 'break-over' || this._currentState === 'focus-over') {
                 this._startTimerFromMenu();
             } else {
                 this._appletMenu.emit('skip-timer');
@@ -722,14 +764,9 @@ class PomodoroApplet extends Applet.TextIconApplet {
     
         let timerText = this._getPanelStateLabel();
     
-        if (this._currentState !== 'pomodoro-stop' && this._currentState !== 'break-over' && this._opt_showTimerInPanel) {
+        if (this._currentState !== 'pomodoro-stop' && this._currentState !== 'break-over' && this._currentState !== 'focus-over' && this._opt_showTimerInPanel) {
             let panelTime = (this._opt_showSeconds === false) ? `${Math.max(0, Math.ceil(ticks / 60))}m` : timeLeft;
             timerText += ` ${panelTime}`;
-        }
-
-        let progressPercent = this._getTimerProgressPercent(ticks);
-        if (progressPercent !== null) {
-            timerText += ` ${progressPercent}%`;
         }
 
         if (this._numPomodoroSetFinished > 0) {
@@ -769,6 +806,12 @@ class PomodoroApplet extends Applet.TextIconApplet {
 
     _updateMenuRuntime(ticks = null) {
         if (!this._appletMenu || typeof this._appletMenu.updateRuntimeState !== 'function') {
+            return;
+        }
+        // The menu's runtime state only matters while it's visible; open-state-changed
+        // refreshes it on open, so skip the recompute (incl. _computeStats) when closed.
+        // (The panel label and ring are updated by _setTimerLabel regardless.)
+        if (!this._appletMenu.isOpen) {
             return;
         }
 
@@ -817,6 +860,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
             timerRunning: Boolean(timer && timer.isRunning()),
             timerPaused: this._isPausedState(),
             blockedSitesCount: this._getBlockedSitesCount(),
+            blockingEnabled: Boolean(this._opt_enableBlocking),
             blockingSectionActive: bstat.sectionActive,
             blockingHostsCount: bstat.hostsCount,
             hotkey: this._opt_hotkey || "",
@@ -876,7 +920,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
             } catch (e) {
                 obj = null;
             }
-            onResult(obj);
+            try { onResult(obj); } catch (e) { global.logError("Zen Pomodoro: JSON result handler failed: " + e.message); }
         });
     }
 
@@ -989,7 +1033,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
             labelStyle = dark ? POMODORO_PANEL_FOCUS_LABEL_STYLE : POMODORO_PANEL_FOCUS_LABEL_STYLE_LIGHT;
         } else if (this._currentState === 'short-break' || this._currentState === 'long-break' ||
             this._currentState === 'short-break-paused' || this._currentState === 'long-break-paused' ||
-            this._currentState === 'break-over') {
+            this._currentState === 'break-over' || this._currentState === 'focus-over') {
             actorStyle = dark ? POMODORO_PANEL_BREAK_CUE_STYLE : POMODORO_PANEL_BREAK_CUE_STYLE_LIGHT;
             labelStyle = dark ? POMODORO_PANEL_BREAK_LABEL_STYLE : POMODORO_PANEL_BREAK_LABEL_STYLE_LIGHT;
         }
@@ -1018,6 +1062,8 @@ class PomodoroApplet extends Applet.TextIconApplet {
             return _('PAUSED BREAK');
         case 'break-over':
             return _('BREAK OVER');
+        case 'focus-over':
+            return _('FOCUS OVER');
         case 'pomodoro-stop':
         default:
             return _('Ready to focus');
@@ -1052,6 +1098,9 @@ class PomodoroApplet extends Applet.TextIconApplet {
         case 'break-over':
             message = _("Break ended");
             break;
+        case 'focus-over':
+            message = _("Focus finished — Break ready");
+            break;
         case 'pomodoro': {
             message = _("Pomodori %d, set %d running").format(
                 this._numPomodoriFinished + 1, this._numPomodoroSetFinished + 1
@@ -1066,22 +1115,46 @@ class PomodoroApplet extends Applet.TextIconApplet {
             message = _("Pomodoro paused") + focusTaskExtension + timeLeftExtension;
             break;
         case 'pomodoro-stop':
-            message = _("Ready to focus — scroll or middle-click to start");
+            // Tailor the start hint to the controls that are actually enabled,
+            // so it never promises a gesture the user hasn't turned on.
+            if (this._opt_panelScrollControl && this._opt_scrollAction !== 'focus_length') {
+                message = _("Ready to focus — scroll or middle-click to start");
+            } else if (this._opt_panelScrollControl) {
+                message = _("Ready to focus — middle-click to start");
+            } else if (this._opt_startOnClick) {
+                message = _("Ready to focus — click to start");
+            } else {
+                message = _("Ready to focus");
+            }
             break;
         default:
             message = "";
             break;
         }
     
-        this.set_applet_tooltip(message);
+        let tooltipMsg = message;
+        if (this._opt_panelScrollControl && this._currentState !== 'pomodoro-stop' && this._currentState !== 'break-over' && this._currentState !== 'focus-over') {
+            // Surface the active-session gestures on hover (kept out of the a11y
+            // name below, which stays concise for screen readers).
+            tooltipMsg += "\n" + ((this._opt_scrollAction === 'focus_length')
+                ? _("Middle-click to skip")
+                : _("Scroll to pause · middle-click to skip"));
+        }
+        this.set_applet_tooltip(tooltipMsg);
         // Expose the timer state to assistive technologies (the panel may be
         // icon-only, so the visible label isn't always available to readers).
+        // Throttle to state / whole-minute changes so a screen reader isn't
+        // re-announced every second — the tooltip above keeps live seconds.
         try {
             if (this.actor && typeof this.actor.get_accessible === 'function') {
                 let acc = this.actor.get_accessible();
                 if (acc && typeof acc.set_name === 'function') {
-                    let accMsg = (message && message.trim()) ? message : _("Ready to focus");
-                    acc.set_name("Zen Pomodoro: " + accMsg.replace(/\n/g, " \u00b7 "));
+                    let accKey = this._currentState + "|" + Math.max(0, Math.ceil((ticks || 0) / 60));
+                    if (accKey !== this._lastA11yKey) {
+                        this._lastA11yKey = accKey;
+                        let accMsg = (message && message.trim()) ? message : _("Ready to focus");
+                        acc.set_name("Zen Pomodoro: " + accMsg.replace(/\n/g, " \u00b7 "));
+                    }
                 }
             }
         } catch (e) {}
@@ -1223,13 +1296,9 @@ class PomodoroApplet extends Applet.TextIconApplet {
                 let num = parseInt(p.pomodori) || 0;
                 if (pom > 0 && sb > 0 && lb > 0 && num > 0) {
                     let name = (p.name || "").toString().trim();
-                    out.push({
-                        name: name || `${pom}/${sb}/${lb} x${num}`,
-                        pomodoro: pom,
-                        short_break: sb,
-                        long_break: lb,
-                        pomodori: num
-                    });
+                    // Normalize like _addPreset, so a hand-edited custom_presets
+                    // entry can't carry out-of-range durations.
+                    out.push(this._normPreset(name || `${pom}/${sb}/${lb} x${num}`, pom, sb, lb, num));
                 }
             }
         }
@@ -1287,7 +1356,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
                 this._setTimerLabel(timer.getTicksRemaining());
             }
         }
-        if (newState === 'pomodoro-stop') {
+        if (newState === 'pomodoro-stop' || newState === 'focus-over') {
             this._clearSessionState();
         } else {
             this._persistSessionState(true);
@@ -1311,6 +1380,16 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._setAppletTooltip(0);
         this._updateFocusFrame(0);
         this._sendPushover(this._opt_pushoverMsgResume);
+    }
+
+    _setFocusOverState() {
+        this._currentState = 'focus-over';
+        this._appletMenu.toggleTimerState(false);
+        this._updatePanelFocusCue();
+        this._onAppletIconChanged();
+        this._setTimerLabel(0);
+        this._setAppletTooltip(0);
+        this._updateFocusFrame(0);
     }
 
     _isPausedState(state = this._currentState) {
@@ -1392,7 +1471,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._cancelFocusRitual();
         this._focusRitualLabel.set_text("\u2713  " + text);
 
-        let primary = Main.layoutManager ? Main.layoutManager.primaryMonitor : null;
+        let primary = Main.layoutManager ? (Main.layoutManager.focusMonitor || Main.layoutManager.primaryMonitor) : null;
         if (primary) {
             let [, natW] = this._focusRitualLabel.get_preferred_width(-1);
             let [, natH] = this._focusRitualLabel.get_preferred_height(natW);
@@ -1443,7 +1522,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
     // Short, soft confetti burst on the primary monitor — a non-reactive overlay
     // (never blocks input), animated for ~1.2s, then torn down. No sound.
     _playConfetti() {
-        let primary = Main.layoutManager ? Main.layoutManager.primaryMonitor : null;
+        let primary = Main.layoutManager ? (Main.layoutManager.focusMonitor || Main.layoutManager.primaryMonitor) : null;
         if (!primary) {
             return;
         }
@@ -1553,7 +1632,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
             this._numPomodoroSetFinished++;
             this._appletMenu.updateCounts(this._numPomodoroSetFinished, this._numPomodoriFinished);
     
-            if (this._opt_autoStartNext) {
+            if (this._opt_autoStartPomodoro) {
                 if (this._longBreakdialog.state === ModalDialog.State.OPENED) {
                     this._longBreakdialog.close();
                 }
@@ -1565,6 +1644,8 @@ class PomodoroApplet extends Applet.TextIconApplet {
             } else {
                 this._resetTimerQueueState();
                 this._setBreakOverState('long-break');
+                this._playStartSound();
+                this._playCompletionFlourish(_("Break ended"));
                 Main.notify(_("Break ended"));
             }
         });
@@ -1575,7 +1656,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
     
         timerQueue.connect('timer-queue-before-next-timer', () => {
             let timer = timerQueue.getCurrentTimer();
-            if (!this._opt_autoStartNext && timer === shortBreakTimer) {
+            if (!this._opt_autoStartBreak && timer === shortBreakTimer) {
                 timerQueue.preventStart(true);
                 timerQueue.stop();
                 this._appletMenu.toggleTimerState(false);
@@ -1585,13 +1666,20 @@ class PomodoroApplet extends Applet.TextIconApplet {
                 }
                 this._openPomodoroFinishedPrompt();
             }
-            else if (!this._opt_autoStartNext && timer === pomodoroTimer) {
+            else if (!this._opt_autoStartPomodoro && timer === pomodoroTimer) {
                 timerQueue.preventStart(true);
                 timerQueue.stop();
                 this._setBreakOverState('short-break');
                 if (this._opt_showDialogMessages) {
                     this._playStartSound();
                     this._shortBreakdialog.open();
+                } else {
+                    // Same silent-boundary gap as the focus->break case: without
+                    // this, the panel just shows a static 0:00 with no hint that
+                    // focus is waiting on a manual start.
+                    this._playStartSound();
+                    this._playCompletionFlourish(_("Break finished"));
+                    Main.notify(_("Break finished"), _("Focus ready — open the menu to start it."));
                 }
             }
         });
@@ -1601,12 +1689,19 @@ class PomodoroApplet extends Applet.TextIconApplet {
         pomodoroTimer.connect('timer-tick', (timer) => {
             this._timerTickUpdate(timer);
             let rem = timer.getTicksRemaining();
-            if (rem === this._opt_warnSoundDelay) {
+            // Warn once when the remaining time first crosses the threshold, so a
+            // skipped/drifted tick can't make it miss the exact second.
+            if (this._warnArmed && this._opt_warnSoundDelay > 0 && rem > 0 && rem <= this._opt_warnSoundDelay) {
+                this._warnArmed = false;
                 this._playWarnSound();
             }
-            if (this._opt_intervalChime && this._opt_intervalChimeSeconds > 0 &&
-                rem > 0 && (rem % this._opt_intervalChimeSeconds) === 0) {
-                this._playIntervalChime();
+            // Chime on elapsed interval boundaries — never at the very start, even
+            // when the focus length is an exact multiple of the chime interval.
+            if (this._opt_intervalChime && this._opt_intervalChimeSeconds > 0 && rem > 0) {
+                let elapsed = (timer.getTimerLimit() || 0) - rem;
+                if (elapsed > 0 && (elapsed % this._opt_intervalChimeSeconds) === 0) {
+                    this._playIntervalChime();
+                }
             }
         });
     
@@ -1618,10 +1713,15 @@ class PomodoroApplet extends Applet.TextIconApplet {
     
         pomodoroTimer.connect('timer-started', () => {
             this._glowBreathedForTimer = false;
+            this._skippedPomodoro = false;   // fresh focus block — clear any stale skip flag
+            this._warnArmed = true;          // arm the pre-end warning for this block
+            this._pushReminderArmed = true;  // arm the pre-end Pushover reminder for this block
+            // Show the start toast before _setCurrentState enables Focus DND,
+            // otherwise our own notification gets suppressed by the DND we just set.
+            Main.notify(_("Let's go to work!"));
             this._setCurrentState('pomodoro');
             this._playStartSound();
             this._playFocusStartRitual();
-            Main.notify(_("Let's go to work!"));
             this._runEventCommand('focus');
             this._sendPushover(this._opt_pushoverMsgFocus);
         });
@@ -1635,7 +1735,10 @@ class PomodoroApplet extends Applet.TextIconApplet {
             this._setCurrentState('pomodoro-stop');
             this._stopTickerSound();
             this._stopFocusBlockIfNeeded();
-            this._clearCurrentFocusTask();
+            // Keep the focus task across a natural finish (the set continues to the
+            // break and next pomodoro); only a real stop (time still left) clears it.
+            // Reset / turn-off clear it explicitly elsewhere.
+            if (pomodoroTimer.getTicksRemaining() > 0) { this._clearCurrentFocusTask(); }
         });
 
         // connect the short break timer signals
@@ -1644,12 +1747,13 @@ class PomodoroApplet extends Applet.TextIconApplet {
         
         shortBreakTimer.connect('timer-started', () => {
             this._setCurrentState('short-break');
+            this._pushReminderArmed = true;   // arm the pre-end reminder for this break
             this._playBreakSound();
             this._numPomodoriFinished++;
             this._appletMenu.updateCounts(this._numPomodoroSetFinished, this._numPomodoriFinished);
             this._appletMenu.showPomodoroInProgress(this._opt_pomodoriNumber);
             this._playCompletionFlourish(_("Pomodoro done"));
-            this._recordPomodoroCompleted();
+            if (this._skippedPomodoro) { this._skippedPomodoro = false; } else { this._recordPomodoroCompleted(); }
             this._notifyWithActions(_("Take a short break"), this._restTip(false), [
                 { id: 'extend', label: _("+%d min").format(5), fn: () => this._extendBreak(5) },
                 { id: 'skip', label: _("Skip break"), fn: () => this._appletMenu.emit('skip-timer') }
@@ -1675,9 +1779,10 @@ class PomodoroApplet extends Applet.TextIconApplet {
     
         longBreakTimer.connect('timer-started', () => {
             this._setCurrentState('long-break');
+            this._pushReminderArmed = true;   // arm the pre-end reminder for this break
             this._playBreakSound();
             this._playCompletionFlourish(_("Set complete!"));
-            this._recordPomodoroCompleted();
+            if (this._skippedPomodoro) { this._skippedPomodoro = false; } else { this._recordPomodoroCompleted(); }
             if (this._opt_showDialogMessages) {
                 this._longBreakdialog.open();
             } else {
@@ -1732,12 +1837,39 @@ class PomodoroApplet extends Applet.TextIconApplet {
     }
     
     _timerTickUpdate(timer) {
-        this._setTimerLabel(timer.getTicksRemaining());
+        this._setTimerLabel(timer.getTicksRemaining());   // also refreshes the menu runtime state
         this._setAppletTooltip(timer.getTicksRemaining());
         this._updateFocusFrame(timer.getTicksRemaining());
-        this._updateMenuRuntime(timer.getTicksRemaining());
+        this._maybePushReminder(timer);
         this._persistSessionState();
         this._refreshZenLabels();
+    }
+
+    // Fire the pre-end Pushover reminder once per phase, for the phase(s) the
+    // user chose (focus / breaks / both). Armed at each phase start; runs for
+    // every timer because all ticks route through _timerTickUpdate.
+    _maybePushReminder(timer) {
+        if (!this._pushReminderArmed || !this._opt_pushoverReminder || !(this._opt_pushoverReminderMinutes > 0)) {
+            return;
+        }
+        let threshold = this._opt_pushoverReminderMinutes * 60;
+        let rem = timer.getTicksRemaining();
+        if (!(rem > 0) || rem > threshold) {
+            return;
+        }
+        // Skip when the phase is no longer than the reminder window — it would
+        // fire at the very start, which isn't a useful "ending soon" cue.
+        if (timer.getTimerLimit() <= threshold) {
+            return;
+        }
+        let isBreak = (timer === this._timers.shortBreak || timer === this._timers.longBreak);
+        let mode = this._opt_pushoverReminderPhase || "breaks";
+        let phaseOk = (mode === "both") || (isBreak ? (mode === "breaks") : (mode === "focus"));
+        if (!phaseOk) {
+            return;
+        }
+        this._pushReminderArmed = false;
+        this._sendPushover(this._opt_pushoverMsgReminder);
     }
     
 
@@ -1842,10 +1974,6 @@ class PomodoroApplet extends Applet.TextIconApplet {
             this._toggleZenMode(state);
         });
 
-        menu.connect('focus-until', () => {
-            this._focusUntilFromMenu();
-        });
-
         menu.connect('apply-preset', (m, preset) => {
             if (this._applyDurationPreset(preset.pomodoro, preset.short_break, preset.long_break, preset.pomodori)) {
                 this._saveCurrentTaskPreset(preset);
@@ -1922,9 +2050,14 @@ class PomodoroApplet extends Applet.TextIconApplet {
             if (this._strictFocusBlocks()) { this._strictFocusNotice(); return; }
             this._cancelSoftLanding();
             let timer = this._timerQueue.getCurrentTimer();
+            // Skipping a running focus block must not count it as a completed pomodoro.
+            // Only arm the flag when skip() will actually act (it no-ops unless running),
+            // otherwise a skip while paused poisons the flag and the NEXT completed
+            // pomodoro gets swallowed at the record gate.
+            if (timer === this._timers.pomodoro && timer.isRunning()) { this._skippedPomodoro = true; }
             this._timerQueue.skip();
             if (timer === this._timers.longBreak) {
-                if (!this._opt_autoStartNext) {
+                if (!this._opt_autoStartPomodoro) {
                     this._longBreakdialog.close();
                     this._startNewTimerQueue();
                 }
@@ -1987,22 +2120,6 @@ class PomodoroApplet extends Applet.TextIconApplet {
         let focusRunning = Boolean(cur && cur === this._timers.pomodoro && cur.isRunning());
         this._focusTaskDialog.setTaskList(this._taskList(), this._currentFocusTask, Boolean(this._opt_requireFocusTask), true, focusRunning, this._focusAccentRgb());
         this._focusTaskDialog.open();
-    }
-
-    _startFocusForDuration(secs) {
-        this._timerQueue.preventStart(false);
-        let timer = this._timerQueue.getCurrentTimer();
-        if (timer !== this._timers.pomodoro) {
-            this._resetTimerQueueState();
-            timer = this._timerQueue.getCurrentTimer();
-        }
-        if (timer !== this._timers.pomodoro) {
-            return;
-        }
-        this._setCurrentFocusTask("");
-        timer.setRemaining(secs);
-        this._appletMenu.toggleTimerState(true);
-        this._timerQueue.start();
     }
 
     _startTimerAfterFocusTask(task) {
@@ -2080,14 +2197,16 @@ class PomodoroApplet extends Applet.TextIconApplet {
             return;
         }
         timer.addTime(mins * 60);
+        this._pushReminderArmed = true;   // re-arm so the reminder can fire before the extended break ends
         Main.notify(_("Break extended by %d min").format(mins));
     }
     
     _createLongBreakDialog() {
         this._longBreakdialog = new DialogsModule.PomodoroSetFinishedDialog();
+        this._scaleDialogOnOpen(this._longBreakdialog);
     
         this._longBreakdialog.connect('switch-off-pomodoro', () => {
-            if (!this._timerQueue.isRunning() && !this._opt_autoStartNext) {
+            if (!this._timerQueue.isRunning() && !this._opt_autoStartPomodoro) {
                 this._turnOff();
             } else {
                 this._timerQueue.stop();
@@ -2099,14 +2218,14 @@ class PomodoroApplet extends Applet.TextIconApplet {
     
         this._longBreakdialog.connect('start-new-pomodoro', () => {
             this._timerQueue.skip();
-            if (!this._opt_autoStartNext) {
+            if (!this._opt_autoStartPomodoro) {
                 this._longBreakdialog.close();
                 this._startNewTimerQueue();
             }
         });
     
         this._longBreakdialog.connect('hide-pomodoro-modal', () => {
-            if (!this._timerQueue.isRunning() && !this._opt_autoStartNext) {
+            if (!this._timerQueue.isRunning() && !this._opt_autoStartPomodoro) {
                 this._turnOff();
             }
             this._longBreakdialog.close();
@@ -2115,6 +2234,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
     
     _createShortBreakDialog() {
         this._shortBreakdialog = new DialogsModule.PomodoroShortBreakFinishedDialog();
+        this._scaleDialogOnOpen(this._shortBreakdialog);
     
         this._shortBreakdialog.connect('continue-current-pomodoro', () => {
             this._shortBreakdialog.close();
@@ -2132,6 +2252,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
 
     _createPomodoroFinishedDialog() {
         this._pomodoroFinishedDialog = new DialogsModule.PomodoroFinishedDialog();
+        this._scaleDialogOnOpen(this._pomodoroFinishedDialog);
     
         this._pomodoroFinishedDialog.connect('continue-current-pomodoro', () => {
             this._pomodoroFinishedDialog.close();
@@ -2154,6 +2275,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
 
     _createFocusTaskDialog() {
         this._focusTaskDialog = new DialogsModule.PomodoroFocusTaskDialog();
+        this._scaleDialogOnOpen(this._focusTaskDialog);
 
         this._focusTaskDialog.connect('focus-task-confirmed', (_dialog, task) => {
             if (this._taskSelectOnly) {
@@ -2428,7 +2550,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
 
             let breakish = (this._currentState === 'short-break' || this._currentState === 'long-break' ||
                 this._currentState === 'short-break-paused' || this._currentState === 'long-break-paused' ||
-                this._currentState === 'break-over');
+                this._currentState === 'break-over' || this._currentState === 'focus-over');
             let paused = (this._currentState.indexOf('-paused') !== -1);
             let darkP = this._panelIsDark();
             let r, g, b;
@@ -2493,8 +2615,19 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._setTimerLabel(timer ? timer.getTicksRemaining() : 0);
     }
 
+    on_panel_height_changed() {
+        // Keep the panel progress ring sized to the (live) panel height; without
+        // this it kept its original size until the next Cinnamon restart.
+        if (this._panelProgressArea) {
+            let size = Math.max(16, Math.min(28, this._panelHeight || 22));
+            this._panelProgressArea.set_width(size);
+            this._panelProgressArea.set_height(size);
+            this._panelProgressArea.queue_repaint();
+        }
+    }
+
     on_applet_clicked() {
-        if (this._opt_startOnClick && this._currentState === 'pomodoro-stop') {
+        if (this._opt_startOnClick && (this._currentState === 'pomodoro-stop' || this._currentState === 'break-over' || this._currentState === 'focus-over')) {
             this._startTimerFromMenu();
             return;
         }
@@ -2526,6 +2659,8 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._clearIdleWatches();
         this._disarmSoftLanding();
         this._stopAllSounds();
+        this._stopTimerPreview();
+        this._stopAmbientPreview();
         this._disableDnd();
         this._resumePausedMedia();
         this._stopBreathing();
@@ -2533,7 +2668,13 @@ class PomodoroApplet extends Applet.TextIconApplet {
             try { GLib.source_remove(this._breakLockTimeoutId); } catch (e) {}
             this._breakLockTimeoutId = 0;
         }
+        this._disarmWelcomeBackWatch();
         this._teardownZenSpotlight();
+        if (this._zenTopStrip) {
+            try { Main.layoutManager.removeChrome(this._zenTopStrip); } catch (e) {}
+            try { this._zenTopStrip.destroy(); } catch (e) {}
+            this._zenTopStrip = null;
+        }
         if (this._zenHud) {
             this._zenHud.destroy();
             this._zenHud = null;
@@ -2546,11 +2687,11 @@ class PomodoroApplet extends Applet.TextIconApplet {
             this._breathOverlay.destroy();
             this._breathOverlay = null;
         }
-        this._destroyFocusFrame();
-        this._clearCurrentFocusTask();
-        this._resetTimerQueueState();
-        this._settingsProvider.finalize();
-        this._removeDialogs();
+        try { this._destroyFocusFrame(); } catch (e) {}
+        try { this._clearCurrentFocusTask(); } catch (e) {}
+        try { this._resetTimerQueueState(); } catch (e) {}
+        try { this._settingsProvider.finalize(); } catch (e) {}
+        try { this._removeDialogs(); } catch (e) {}
     }    
 }
 
