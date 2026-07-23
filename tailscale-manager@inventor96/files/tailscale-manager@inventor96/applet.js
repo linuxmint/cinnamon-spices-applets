@@ -1,10 +1,10 @@
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
-const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
+const Util = imports.misc.util;
 
 const UUID = "tailscale-manager@inventor96";
 
@@ -57,14 +57,14 @@ class TailscaleManager extends Applet.TextIconApplet {
         this._upItem = new PopupMenu.PopupIconMenuItem("Tailscale Up",
             "network-vpn", St.IconType.SYMBOLIC);
         this._upItem.connect('activate', () => {
-            GLib.spawn_command_line_async("tailscale up");
+            Util.spawn(["tailscale", "up"]);
         });
         this._applet_context_menu.addMenuItem(this._upItem);
 
         this._downItem = new PopupMenu.PopupIconMenuItem("Tailscale Down",
             "network-offline", St.IconType.SYMBOLIC);
         this._downItem.connect('activate', () => {
-            GLib.spawn_command_line_async("tailscale down");
+            Util.spawn(["tailscale", "down"]);
         });
         this._applet_context_menu.addMenuItem(this._downItem);
 
@@ -76,8 +76,7 @@ class TailscaleManager extends Applet.TextIconApplet {
             this._acceptRoutes = newState;
             this._acceptRoutesError = "";
             this._updateAcceptRoutesUI();
-            GLib.spawn_command_line_async(
-                'tailscale set --accept-routes=' + (newState ? 'true' : 'false'));
+            Util.spawn(["tailscale", "set", "--accept-routes=" + (newState ? 'true' : 'false')]);
         });
         this._applet_context_menu.addMenuItem(this._acceptRoutesSwitch);
 
@@ -112,7 +111,7 @@ class TailscaleManager extends Applet.TextIconApplet {
             noneItem.setShowDot(true);
         }
         noneItem.connect('activate', () => {
-            GLib.spawn_command_line_async('tailscale set --exit-node=""');
+            Util.spawn(["tailscale", "set", "--exit-node="]);
             this._usingExitNode = false;
             this._exitNodeName = "";
             this._updateUI();
@@ -131,8 +130,7 @@ class TailscaleManager extends Applet.TextIconApplet {
                 item.setShowDot(true);
             }
             item.connect('activate', () => {
-                GLib.spawn_command_line_async(
-                    'tailscale set --exit-node="' + label + '"');
+                Util.spawn(["tailscale", "set", "--exit-node=" + label]);
                 this._usingExitNode = true;
                 this._exitNodeName = label;
                 this._updateUI();
