@@ -28,7 +28,7 @@ A Cinnamon applet that monitors and manages your Tailscale connection. Displays 
 
 | Setting | Type | Default | Description |
 |---|---|---|---|
-| `update-interval` | spinbutton | 5 seconds | How often to poll Tailscale status (1–60 s). |
+| `update-interval` | spinbutton | 10 seconds | How often to poll Tailscale status (1–60 s). |
 
 ## Notes
 
