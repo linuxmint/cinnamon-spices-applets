@@ -20,6 +20,15 @@ class TailscaleManager extends Applet.TextIconApplet {
         this._acceptRoutes = null;
         this._acceptRoutesError = "";
 
+        this._prevTooltip = "";
+        this._prevConnected = false;
+        this._prevUsingExitNode = false;
+        this._prevExitNodeName = "";
+        this._prevExitNodesJson = "";
+        this._prevIconColor = "";
+        this._prevAcceptRoutes = null;
+        this._prevAcceptRoutesError = "";
+
         this.set_applet_icon_symbolic_name("network-vpn");
         this._applet_icon.style = "color: grey;";
         this.set_applet_tooltip("Tailscale: Disconnected");
@@ -101,42 +110,6 @@ class TailscaleManager extends Applet.TextIconApplet {
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         this._populateExitNodeSubMenu();
-    }
-
-    _populateExitNodeSubMenu() {
-        this._exitNodeSubMenu.menu.removeAll();
-
-        let noneItem = new PopupMenu.PopupIndicatorMenuItem("None");
-        if (!this._usingExitNode) {
-            noneItem.setShowDot(true);
-        }
-        noneItem.connect('activate', () => {
-            Util.spawn(["tailscale", "set", "--exit-node="]);
-            this._usingExitNode = false;
-            this._exitNodeName = "";
-            this._updateUI();
-        });
-        this._exitNodeSubMenu.menu.addMenuItem(noneItem);
-
-        if (this._exitNodes.length > 0) {
-            this._exitNodeSubMenu.menu.addMenuItem(
-                new PopupMenu.PopupSeparatorMenuItem());
-        }
-
-        for (let node of this._exitNodes) {
-            let label = node.hostname;
-            let item = new PopupMenu.PopupIndicatorMenuItem(label);
-            if (this._usingExitNode && this._exitNodeName === label) {
-                item.setShowDot(true);
-            }
-            item.connect('activate', () => {
-                Util.spawn(["tailscale", "set", "--exit-node=" + label]);
-                this._usingExitNode = true;
-                this._exitNodeName = label;
-                this._updateUI();
-            });
-            this._exitNodeSubMenu.menu.addMenuItem(item);
-        }
     }
 
     _refreshStatus() {
@@ -264,6 +237,13 @@ class TailscaleManager extends Applet.TextIconApplet {
     }
 
     _updateAcceptRoutesUI() {
+        if (this._acceptRoutes === this._prevAcceptRoutes &&
+            this._acceptRoutesError === this._prevAcceptRoutesError) {
+            return;
+        }
+        this._prevAcceptRoutes = this._acceptRoutes;
+        this._prevAcceptRoutesError = this._acceptRoutesError;
+
         if (this._acceptRoutes !== null) {
             this._acceptRoutesSwitch.setToggleState(this._acceptRoutes);
             this._acceptRoutesErrorItem.actor.hide();
@@ -274,34 +254,92 @@ class TailscaleManager extends Applet.TextIconApplet {
         }
     }
 
-    _updateUI() {
-        if (this._tailscaleState === "Running") {
-            this.set_applet_icon_symbolic_name("network-vpn");
-            this._applet_icon.style = "color: #4DC84D;";
-
-            if (this._usingExitNode && this._exitNodeName) {
-                this._applet_icon.style = "color: #3584e4;";
-                this.set_applet_tooltip(
-                    "Tailscale: Connected via " + this._exitNodeName);
-            } else {
-                this._applet_icon.style = "color: #4DC84D;";
-                this.set_applet_tooltip("Tailscale: Connected");
-            }
-            this.hideLabel();
-
-            this._statusItem.label.text = "Status: Connected";
-            this._upItem.actor.hide();
-            this._downItem.actor.show();
-        } else {
-            this.set_applet_icon_symbolic_name("network-vpn");
-            this._applet_icon.style = "color: grey;";
-            this.hideLabel();
-            this.set_applet_tooltip("Tailscale: Disconnected");
-
-            this._statusItem.label.text = "Status: Disconnected";
-            this._upItem.actor.show();
-            this._downItem.actor.hide();
+    _populateExitNodeSubMenu() {
+        let exitNodesJson = JSON.stringify(this._exitNodes);
+        if (exitNodesJson === this._prevExitNodesJson &&
+            this._usingExitNode === this._prevUsingExitNode &&
+            this._exitNodeName === this._prevExitNodeName) {
+            return;
         }
+        this._prevExitNodesJson = exitNodesJson;
+        this._prevUsingExitNode = this._usingExitNode;
+        this._prevExitNodeName = this._exitNodeName;
+
+        this._exitNodeSubMenu.menu.removeAll();
+
+        let noneItem = new PopupMenu.PopupIndicatorMenuItem("None");
+        if (!this._usingExitNode) {
+            noneItem.setShowDot(true);
+        }
+        noneItem.connect('activate', () => {
+            Util.spawn(["tailscale", "set", "--exit-node="]);
+            this._usingExitNode = false;
+            this._exitNodeName = "";
+            this._updateUI();
+        });
+        this._exitNodeSubMenu.menu.addMenuItem(noneItem);
+
+        if (this._exitNodes.length > 0) {
+            this._exitNodeSubMenu.menu.addMenuItem(
+                new PopupMenu.PopupSeparatorMenuItem());
+        }
+
+        for (let node of this._exitNodes) {
+            let label = node.hostname;
+            let item = new PopupMenu.PopupIndicatorMenuItem(label);
+            if (this._usingExitNode && this._exitNodeName === label) {
+                item.setShowDot(true);
+            }
+            item.connect('activate', () => {
+                Util.spawn(["tailscale", "set", "--exit-node=" + label]);
+                this._usingExitNode = true;
+                this._exitNodeName = label;
+                this._updateUI();
+            });
+            this._exitNodeSubMenu.menu.addMenuItem(item);
+        }
+    }
+
+    _updateUI() {
+        let connected = this._tailscaleState === "Running";
+        let tooltip, iconColor;
+
+        if (connected) {
+            if (this._usingExitNode && this._exitNodeName) {
+                iconColor = "#3584e4";
+                tooltip = "Tailscale: Connected via " + this._exitNodeName;
+            } else {
+                iconColor = "#4DC84D";
+                tooltip = "Tailscale: Connected";
+            }
+        } else {
+            iconColor = "grey";
+            tooltip = "Tailscale: Disconnected";
+        }
+
+        if (tooltip !== this._prevTooltip) {
+            this.set_applet_tooltip(tooltip);
+            this._prevTooltip = tooltip;
+        }
+
+        if (iconColor !== this._prevIconColor) {
+            this._applet_icon.style = "color: " + iconColor + ";";
+            this._prevIconColor = iconColor;
+        }
+
+        if (connected !== this._prevConnected) {
+            if (connected) {
+                this._statusItem.label.text = "Status: Connected";
+                this._upItem.actor.hide();
+                this._downItem.actor.show();
+            } else {
+                this._statusItem.label.text = "Status: Disconnected";
+                this._upItem.actor.show();
+                this._downItem.actor.hide();
+            }
+            this._prevConnected = connected;
+        }
+
         this._updateAcceptRoutesUI();
         this._populateExitNodeSubMenu();
     }
