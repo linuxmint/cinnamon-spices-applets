@@ -2,20 +2,39 @@
 
 A panel applet for the Cinnamon desktop inspired by the Prague astronomical
 clock, with modern minimal aesthetics. All positions are computed locally
-from your configured latitude and longitude — no network calls.
+from your configured latitude and longitude — no network calls, unless you
+opt in to automatic location, which queries [ip-api.com](https://ip-api.com)
+(city-level GeoIP, plain HTTP, at most once per hour).
 
 ![Screenshot](screenshot.png)
 
 ## Panel
 
-The panel label shows the next sun and moon rise/set events:
+The panel label shows one entry each for the sun and the moon: the body's
+next horizon event, i.e. whichever of its rise or set comes soonest. Each
+body can instead be switched (*Always show both…* in the settings) to
+showing its rise and its set together, stacked in two lines — rises on
+top, sets below:
 
 ```
-☀↓21:18 ☾↑15:42
+☀↑05:56 ☾↑02:31
+☀↓20:31 ☾↓18:28
 ```
 
 Arrows indicate rise (↑) or set (↓). A `+Nd` suffix appears for events
-more than a day away.
+more than a day away. Either body's entry can be hidden in the settings;
+the layout collapses accordingly.
+
+Optionally (off by default), a schematic moon disk showing the current
+phase can be added to the left of the times, with the illumination
+percentage and the phase angle (Sun→Moon elongation: 0° new, 90° first
+quarter, 180° full, 270° last quarter) beneath it.
+
+By default the clock behaves as it always has: the dial center shows local
+sidereal time and all civil times use the system time zone. Unchecking
+*Use Local Sidereal Time* in the settings switches the dial center to civil
+time and reveals the time zone options — automatic (system) or a manually
+selected zone — which then apply to all displayed times (panel and dial).
 
 ## Dial
 
@@ -31,7 +50,8 @@ Clicking the panel label opens a 320px popup dial with concentric rings:
   below the horizon are dimmed.
 - **Time hand** — accent-colored hand on the hour ring showing current
   civil time.
-- **Center** — local sidereal time (LST) readout.
+- **Center** — local sidereal time (LST) readout by default; switchable in
+  the settings to civil time with the time zone abbreviation.
 
 Hover over any body for a tooltip showing its zodiac position, altitude,
 and (for the Moon) illumination percentage.
@@ -42,7 +62,14 @@ Right-click the applet and choose *Configure*:
 
 | Setting | Description |
 |---------|-------------|
-| Latitude / Longitude | Observer position in decimal degrees |
+| Automatic location (GeoIP) | Determine coordinates from your IP address (default off); hover the panel label to see the detected city |
+| Latitude / Longitude | Observer position in decimal degrees, used when GeoIP is off or unavailable |
+| Use Local Sidereal Time | Dial center shows LST (default on, the original behavior); unchecking reveals the time zone options |
+| Automatic time zone | Use the system time zone for all displayed times (default on) |
+| Time zone | Manual time zone selection, shown when automatic is off |
+| Show the sun's / moon's next rise/set | Toggle each body's entry (whichever of rise or set comes soonest) in the panel label |
+| Always show both sunset and sunrise / moonset and moonrise | Per body: show rise and set stacked in two lines instead of only the soonest event (default off) |
+| Show moon phase | Schematic moon disk with illumination % and phase angle (default off) |
 | Refresh interval | How often positions are recomputed (default 30s) |
 | Accent color | Color of the time hand and sun glyph |
 | Foreground color | Text, hands and glyphs; intermediate tones are derived from it |

@@ -1,15 +1,76 @@
 {
+    "use-geoip": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Automatic location (GeoIP)",
+        "tooltip": "Determine location from your IP address (city-level accuracy, uses ip-api.com over HTTP). Falls back to the manual coordinates below when offline."
+    },
     "latitude": {
         "type": "entry",
         "default": "50.0875",
+        "dependency": "!use-geoip",
         "description": "Latitude (decimal degrees, north positive)",
         "tooltip": "Your geographic latitude in decimal degrees, e.g. 50.0875 for Prague"
     },
     "longitude": {
         "type": "entry",
         "default": "14.4214",
+        "dependency": "!use-geoip",
         "description": "Longitude (decimal degrees, east positive)",
         "tooltip": "Your geographic longitude in decimal degrees, e.g. 14.4214 for Prague"
+    },
+    "use-lst": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Use Local Sidereal Time instead of civil time",
+        "tooltip": "Show local sidereal time in the dial center (the original behavior). When unchecked, the dial center shows civil time and the time zone options below apply to all displayed times."
+    },
+    "use-auto-timezone": {
+        "type": "checkbox",
+        "default": true,
+        "dependency": "!use-lst",
+        "description": "Automatic time zone (system)",
+        "tooltip": "Use the system time zone for all displayed times. Uncheck to pick a time zone manually."
+    },
+    "timezone": {
+        "type": "combobox",
+        "default": "UTC",
+        "dependency": "!use-auto-timezone",
+        "description": "Time zone",
+        "tooltip": "All times shown by the applet (panel and dial) use this time zone. The list is filled from the system time zone database at startup.",
+        "options": {
+            "UTC": "UTC"
+        }
+    },
+    "show-sunrise": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show the sun's next rise/set in the panel"
+    },
+    "show-both-sun": {
+        "type": "checkbox",
+        "default": false,
+        "dependency": "show-sunrise",
+        "description": "Always show both sunset and sunrise",
+        "tooltip": "Show the sun's rise and set stacked in two lines instead of only the soonest event."
+    },
+    "show-moonrise": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show the moon's next rise/set in the panel"
+    },
+    "show-both-moon": {
+        "type": "checkbox",
+        "default": false,
+        "dependency": "show-moonrise",
+        "description": "Always show both moonset and moonrise",
+        "tooltip": "Show the moon's rise and set stacked in two lines instead of only the soonest event."
+    },
+    "show-moon-phase": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Show moon phase in the panel",
+        "tooltip": "Schematic moon disk with percent illumination and phase angle (0° new, 90° first quarter, 180° full, 270° last quarter), left of the rise/set times."
     },
     "refresh-seconds": {
         "type": "spinbutton",

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: orloj@faragofr 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-07-01 22:35+0200\n"
+"POT-Creation-Date: 2026-07-11 17:42-0700\n"
 "PO-Revision-Date: 2026-07-05 10:31+0200\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: none\n"
@@ -24,6 +24,16 @@ msgstr "Orloj"
 #. metadata.json->description
 msgid "Prague-style astronomical clock applet"
 msgstr "Applet d'horloge astronomique de Prague"
+
+#. settings-schema.json->use-geoip->description
+msgid "Automatic location (GeoIP)"
+msgstr ""
+
+#. settings-schema.json->use-geoip->tooltip
+msgid ""
+"Determine location from your IP address (city-level accuracy, uses ip-api."
+"com over HTTP). Falls back to the manual coordinates below when offline."
+msgstr ""
 
 #. settings-schema.json->latitude->description
 msgid "Latitude (decimal degrees, north positive)"
@@ -44,6 +54,79 @@ msgid "Your geographic longitude in decimal degrees, e.g. 14.4214 for Prague"
 msgstr ""
 "Votre longitude géographique en degrés décimaux, par exemple 14.214 pour "
 "Prague"
+
+#. settings-schema.json->use-lst->description
+msgid "Use Local Sidereal Time instead of civil time"
+msgstr ""
+
+#. settings-schema.json->use-lst->tooltip
+msgid ""
+"Show local sidereal time in the dial center (the original behavior). When "
+"unchecked, the dial center shows civil time and the time zone options below "
+"apply to all displayed times."
+msgstr ""
+
+#. settings-schema.json->use-auto-timezone->description
+msgid "Automatic time zone (system)"
+msgstr ""
+
+#. settings-schema.json->use-auto-timezone->tooltip
+msgid ""
+"Use the system time zone for all displayed times. Uncheck to pick a time "
+"zone manually."
+msgstr ""
+
+#. settings-schema.json->timezone->description
+msgid "Time zone"
+msgstr ""
+
+#. settings-schema.json->timezone->tooltip
+msgid ""
+"All times shown by the applet (panel and dial) use this time zone. The list "
+"is filled from the system time zone database at startup."
+msgstr ""
+
+#. settings-schema.json->timezone->options
+msgid "UTC"
+msgstr ""
+
+#. settings-schema.json->show-sunrise->description
+msgid "Show the sun's next rise/set in the panel"
+msgstr ""
+
+#. settings-schema.json->show-both-sun->description
+msgid "Always show both sunset and sunrise"
+msgstr ""
+
+#. settings-schema.json->show-both-sun->tooltip
+msgid ""
+"Show the sun's rise and set stacked in two lines instead of only the soonest "
+"event."
+msgstr ""
+
+#. settings-schema.json->show-moonrise->description
+msgid "Show the moon's next rise/set in the panel"
+msgstr ""
+
+#. settings-schema.json->show-both-moon->description
+msgid "Always show both moonset and moonrise"
+msgstr ""
+
+#. settings-schema.json->show-both-moon->tooltip
+msgid ""
+"Show the moon's rise and set stacked in two lines instead of only the "
+"soonest event."
+msgstr ""
+
+#. settings-schema.json->show-moon-phase->description
+msgid "Show moon phase in the panel"
+msgstr ""
+
+#. settings-schema.json->show-moon-phase->tooltip
+msgid ""
+"Schematic moon disk with percent illumination and phase angle (0° new, 90° "
+"first quarter, 180° full, 270° last quarter), left of the rise/set times."
+msgstr ""
 
 #. settings-schema.json->refresh-seconds->units
 msgid "seconds"
@@ -76,5 +159,5 @@ msgstr "Taille du cadran"
 #. settings-schema.json->dial-size->tooltip
 msgid "Diameter of the dial in the popup; larger values improve readability"
 msgstr ""
-"Diamètre du cadran dans la fenêtre contextuelle; "
-"des valeurs plus élevées améliorent la lisibilité."
+"Diamètre du cadran dans la fenêtre contextuelle; des valeurs plus élevées "
+"améliorent la lisibilité."
