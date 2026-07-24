@@ -1,8 +1,11 @@
 #!/usr/bin/python3
 
 import sys
-from setproctitle import setproctitle
-setproctitle("kdecapplet-dialog")
+try:
+    from setproctitle import setproctitle
+    setproctitle("kdecapplet-dialog")
+except:
+    pass
 
 import gi
 gi.require_version("Gtk", "3.0")
