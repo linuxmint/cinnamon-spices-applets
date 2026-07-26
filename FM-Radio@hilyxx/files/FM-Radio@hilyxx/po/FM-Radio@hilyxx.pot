@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FM-Radio@hilyxx 1.1\n"
+"Project-Id-Version: FM-Radio@hilyxx 1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-07-17 10:49+0200\n"
+"POT-Creation-Date: 2026-07-26 17:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,20 +18,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#. applet.js:53 applet.js:304
+#. applet.js:59 applet.js:331 applet.js:393 applet.js:419 applet.js:445
+#. applet.js:466
 msgid "FM Radio"
 msgstr ""
 
-#. applet.js:62
+#. applet.js:72
 msgid "Reload applet"
 msgstr ""
 
-#. applet.js:209
+#. applet.js:243
 msgid "All stations"
 msgstr ""
 
-#. applet.js:283
+#. applet.js:323
 msgid "Waiting..."
+msgstr ""
+
+#. applet.js:331
+msgid "Please start a radio station first to record it."
+msgstr ""
+
+#. applet.js:366
+msgid "Music"
+msgstr ""
+
+#. applet.js:393
+msgid "Recording started: "
+msgstr ""
+
+#. applet.js:419
+msgid "Error starting recording."
+msgstr ""
+
+#. applet.js:445
+msgid "Recording finished and saved to the /FM-Radio folder."
 msgstr ""
 
 #. channels.js:51
@@ -59,12 +80,24 @@ msgstr ""
 msgid "Tips"
 msgstr ""
 
+#. settings-schema.json->page_settings->title
+msgid "Settings"
+msgstr ""
+
 #. settings-schema.json->section_search->title
 msgid "Radio station search (Radio-Browser API)"
 msgstr ""
 
 #. settings-schema.json->section_list->title
 msgid "Station management"
+msgstr ""
+
+#. settings-schema.json->section_settings->title
+msgid "Recording"
+msgstr ""
+
+#. settings-schema.json->section_shortcuts->title
+msgid "Keyboard Shortcuts"
 msgstr ""
 
 #. settings-schema.json->search_keyword->description
@@ -118,4 +151,35 @@ msgid ""
 "the same process and adapt the path accordingly.\n"
 "• The easiest way is to copy the desired image and paste it into the "
 "provided field; this will directly paste the image path.\n"
+msgstr ""
+
+#. settings-schema.json->info2->description
+msgid ""
+"\n"
+"To record a live stream, simply click on the cover icon.\n"
+"Click it again to stop the recording.\n"
+msgstr ""
+
+#. settings-schema.json->show_recording_notifications->description
+msgid "Show a notification at the start and end of a recording"
+msgstr ""
+
+#. settings-schema.json->recording_folder->description
+msgid "Custom recording folder"
+msgstr ""
+
+#. settings-schema.json->recording_folder->tooltip
+msgid "Leave empty to use the default Music folder."
+msgstr ""
+
+#. settings-schema.json->reset_folder_button->description
+msgid "Reset to default Music folder"
+msgstr ""
+
+#. settings-schema.json->reset_folder_button->tooltip
+msgid "Reset recording location back to default system Music folder"
+msgstr ""
+
+#. settings-schema.json->key_play_pause->description
+msgid "Play / Stop"
 msgstr ""

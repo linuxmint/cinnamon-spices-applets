@@ -3,6 +3,7 @@
         "type": "layout",
         "pages": [
             "page_stations",
+            "page_settings",
             "tips"
         ],
         "page_stations": {
@@ -18,6 +19,14 @@
             "title":"Tips",
             "sections":[
                 "tips-section"
+            ]
+        },
+        "page_settings": {
+            "type": "page",
+            "title": "Settings",
+            "sections": [
+                "section_settings",
+                "section_shortcuts"
             ]
         },
         "section_search": {
@@ -41,7 +50,24 @@
             "type":"section",
             "title":"Tips",
             "keys":[
-                "info1"
+                "info1",
+                "info2"
+            ]
+        },
+        "section_settings": {
+            "type": "section",
+            "title": "Recording",
+            "keys": [
+                "show_recording_notifications",
+                "recording_folder",
+                "reset_folder_button"
+            ]
+        },
+        "section_shortcuts": {
+            "type": "section",
+            "title": "Keyboard Shortcuts",
+            "keys": [
+                "key_play_pause"
             ]
         }
     },
@@ -96,5 +122,32 @@
     "info1":{
         "type":"label",
         "description":"\nTo create a custom image for a radio station:\n• Create an image of any format (png, jpeg, or svg) with a square 'cover' style size (e.g., 300x300).\n• Station images are stored by default in the applet's image folder, and the path is /images/yourcover.png. For images located in another folder, apply the same process and adapt the path accordingly.\n• The easiest way is to copy the desired image and paste it into the provided field; this will directly paste the image path.\n"
+    },
+    "info2":{
+        "type":"label",
+        "description":"\nTo record a live stream, simply click on the cover icon.\nClick it again to stop the recording.\n"
+    },
+    "show_recording_notifications": {
+        "type": "switch",
+        "default": true,
+        "description": "Show a notification at the start and end of a recording"
+    },
+    "recording_folder": {
+        "type": "filechooser",
+        "select-dir": true,
+        "default": "",
+        "description": "Custom recording folder",
+        "tooltip": "Leave empty to use the default Music folder."
+    },
+    "reset_folder_button": {
+        "type": "button",
+        "description": "Reset to default Music folder",
+        "tooltip": "Reset recording location back to default system Music folder",
+        "callback": "_onResetFolderClicked"
+    },
+    "key_play_pause": {
+        "type": "keybinding",
+        "description": "Play / Stop",
+        "default": "<Primary><Alt>p"
     }
 }

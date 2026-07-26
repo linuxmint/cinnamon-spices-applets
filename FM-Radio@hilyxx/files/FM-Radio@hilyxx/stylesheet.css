@@ -22,6 +22,19 @@
    font-size: 1.015em;
    padding-top: 1em;
    font-weight: bold;
-   color: #5ea3ff;
+   color: #898989;
 
+}
+
+.channel-icon {
+   margin-top: 10px;
+   margin-bottom: 5px;
+   margin-left: 20px;
+   border: 2px solid transparent;
+   padding: 2px;
+}
+
+.channel-icon-recording {
+   border-color: #ff4444;
+   border-radius: 4px;
 }

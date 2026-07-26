@@ -7,3 +7,5 @@ Its goal is straightforward: enjoy internet radio stations completely hassle-fre
 
 * Search for your favorite radio station using the search feature.
 * Add a custom cover to your radio station.
+* Record your favorite music. Click on the cover and let's go!.
+* Multimedia key support
