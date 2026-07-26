@@ -370,8 +370,12 @@ class FMRadioApplet extends Applet.IconApplet {
         
         // Create the directory if it does not exist
         let dir = Gio.file_new_for_path(recordDir);
-        if (!dir.query_exists(null)) {
+        try {
             dir.make_directory_with_parents(null);
+        } catch (e) {
+            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                global.logError("FM Radio: Error creating recording directory - " + e);
+            }
         }
 
         let currentChannel = this.player.getChannel();
