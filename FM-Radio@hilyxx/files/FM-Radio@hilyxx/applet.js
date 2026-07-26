@@ -9,6 +9,7 @@ const Clutter = imports.gi.Clutter;
 const Slider = imports.ui.slider;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
+const Main = imports.ui.main;
 
 const UUID = "FM-Radio@hilyxx";
 Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
@@ -27,6 +28,7 @@ const Radio = RadioModule.Radio;
 const Channels = imports.channels;
 const Data = imports.data;
 const Search = imports.search;
+const Mpris = imports.mpris;
 
 // === CORE UI CONTROLLER ===
 class FMRadioApplet extends Applet.IconApplet {
@@ -38,8 +40,12 @@ class FMRadioApplet extends Applet.IconApplet {
 
         this.settings = new Settings.AppletSettings(this, this.uuid, instance_id);
         this.settings.bind("custom_stations", "custom_stations", this._onSettingsChanged, this);
+        this.settings.bind("key_play_pause", "key_play_pause", this._bindKeyBindings, this);
+        this.settings.bind("show_recording_notifications", "show_recording_notifications");
+        this.settings.bind("recording_folder", "recording_folder");
         this.settings.bind("search_keyword", "search_keyword");
         this.settings.bind("search_results", "search_results");
+
 
         this._onClearClicked();
 
@@ -51,6 +57,10 @@ class FMRadioApplet extends Applet.IconApplet {
 
         this.set_applet_icon_symbolic_path(this.extPath + "/icon/radio-off-symbolic.svg");
         this.set_applet_tooltip(_("FM Radio"));
+        
+        this.isRecording = false;
+        this.recordProcess = null;
+        this.blinkTimerId = null;
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -76,6 +86,9 @@ class FMRadioApplet extends Applet.IconApplet {
         });
         
         this._applet_context_menu.addMenuItem(reloadMenuItem);
+
+        this._bindKeyBindings();
+        this._startHijackTimer();
     }
 
     _onSettingsChanged() {
@@ -95,7 +108,21 @@ class FMRadioApplet extends Applet.IconApplet {
     _onClearClicked() {
         this.search_results = "";      
         this.search_keyword = "";
-   }
+    }
+
+    _onResetFolderClicked() {
+        this.recording_folder = "";
+    }
+
+    _bindKeyBindings() {
+        Main.keybindingManager.removeHotKey("fm-play-" + this.instance_id);
+
+        if (this.key_play_pause) {
+            Main.keybindingManager.addHotKey("fm-play-" + this.instance_id, this.key_play_pause, () => {
+                this.on_applet_middle_clicked();
+            });
+        }
+    }
 
     _buildMenu() {
         this.volumeMenuItem = new PopupMenu.PopupSliderMenuItem(Data.getLastVol());
@@ -190,8 +217,15 @@ class FMRadioApplet extends Applet.IconApplet {
             gicon: Gio.icon_new_for_string(iconPath),
             icon_size: 48, 
             x_align: Clutter.ActorAlign.CENTER, 
-            style: 'margin-top: 10px; margin-bottom: 5px; padding-left: 20px;', 
+            style_class: 'channel-icon',
+            reactive: true 
         });
+
+        this.channelIcon.connect('button-press-event', () => {
+            this._toggleRecording();
+        });
+
+
         this.box.add_child(this.artistLabel);
         this.box.add_child(this.statusLabel);
         this.box.add_child(this.channelLabel); 
@@ -238,6 +272,8 @@ class FMRadioApplet extends Applet.IconApplet {
                 this.statusMenuItem.actor.queue_relayout();
 
                 this._updateTooltip();
+
+                if (this.mprisServer) this.mprisServer.updateStatus();
                 
                 return GLib.SOURCE_REMOVE; 
             });
@@ -254,6 +290,10 @@ class FMRadioApplet extends Applet.IconApplet {
     }
 
     channelChanged() {
+        if (this.isRecording) {
+            this._stopRecording();
+        }
+
         this.setPlayingState(this.player.isPlaying());
         Data.save(this.player.getChannel(), Data.getLastVol());
 
@@ -286,6 +326,132 @@ class FMRadioApplet extends Applet.IconApplet {
         this._updateTooltip();
     }
 
+    _toggleRecording() {
+        if (!this.player || !this.player.isPlaying()) {
+            Main.notify(_("FM Radio"), _("Please start a radio station first to record it."));
+            return;
+        }
+
+        if (this.isRecording) {
+            this._stopRecording();
+        } else {
+            this._startRecording();
+        }
+    }
+
+    _startRecording() {
+        let recordDir = "";
+
+        // If a custom folder is set in the settings
+        if (this.recording_folder && this.recording_folder.trim() !== "") {
+            let rawFolder = this.recording_folder.trim();
+            let customPath = null;
+
+            if (rawFolder.startsWith("file://")) { 
+                let gfile = Gio.File.new_for_uri(rawFolder);
+                customPath = gfile.get_path();
+            } else {
+                customPath = rawFolder;
+            }
+
+            if (customPath) {
+                recordDir = customPath + "/FM-Radio";
+            }
+        }
+
+        // If no valid custom folder is set, fall back to the XDG Music folder
+        if (!recordDir) {
+            let musicDir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_MUSIC);
+            if (!musicDir) {
+                musicDir = GLib.get_home_dir() + "/" + _("Music"); 
+            }
+            recordDir = musicDir + "/FM-Radio";
+        }
+        
+        // Create the directory if it does not exist
+        let dir = Gio.file_new_for_path(recordDir);
+        try {
+            dir.make_directory_with_parents(null);
+        } catch (e) {
+            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                global.logError("FM Radio: Error creating recording directory - " + e);
+            }
+        }
+
+        let currentChannel = this.player.getChannel();
+        let channelName = currentChannel.getName().replace(/[^a-zA-Z0-9]/g, "_");
+        let streamUrl = currentChannel.getLink();
+        
+        let timestamp = GLib.DateTime.new_now_local().format("%Y-%m-%d_%H-%M-%S");
+        let filename = `${recordDir}/${channelName}_${timestamp}.mp3`; 
+
+        try {
+            this.recordProcess = Gio.Subprocess.new(
+                ['curl', '-s', '-L', '-o', filename, streamUrl],
+                Gio.SubprocessFlags.NONE
+            ); 
+            
+            this.isRecording = true;
+
+            if (this.show_recording_notifications) {
+                Main.notify(_("FM Radio"), _("Recording started: ") + currentChannel.getName());
+            }
+
+            this.channelIcon.add_style_class_name('channel-icon-recording');
+
+            if (this._applet_icon) {
+                this._applet_icon.style = "color: #ff4444;"; 
+            }
+            
+            let showRecordIcon = true;
+            
+            // Blinks the main panel icon
+            this.blinkTimerId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 800, () => {
+                if (showRecordIcon) {
+                    this.set_applet_icon_symbolic_name('media-record'); 
+                } else {
+                    this.set_applet_icon_symbolic_path(this.extPath + "/icon/radio-symbolic.svg");
+                }
+                showRecordIcon = !showRecordIcon;
+                return GLib.SOURCE_CONTINUE;
+            });
+            
+            this.set_applet_icon_symbolic_name('media-record');
+
+        } catch (e) {
+            global.logError("FM Radio: Error while recording - " + e);
+            Main.notify(_("FM Radio"), _("Error starting recording."));
+        }
+    }
+
+    _stopRecording() {
+        if (this.recordProcess) {
+            this.recordProcess.force_exit();
+            this.recordProcess = null;
+        }
+        
+        if (this.blinkTimerId) {
+            GLib.source_remove(this.blinkTimerId);
+            this.blinkTimerId = null;
+        }
+
+        if (this._applet_icon) {
+            this._applet_icon.style = ""; // Remove red color
+        }
+
+        this.isRecording = false; // Important: set back to false before updating the state
+        
+        if (this.player) {
+            this.setPlayingState(this.player.isPlaying());
+        }
+
+        if (this.show_recording_notifications) {
+            Main.notify(_("FM Radio"), _("Recording finished and saved to the /FM-Radio folder."));
+        }
+        
+        this.channelIcon.remove_style_class_name('channel-icon-recording');
+    }
+
     _updateTooltip() {
         if (this.player && this.player.isPlaying()) {
             let stationName = this.player.getChannel() ? this.player.getChannel().getName() : "";
@@ -315,8 +481,14 @@ class FMRadioApplet extends Applet.IconApplet {
     }
 
     setPlayingState(isPlaying) {
-        let iconFile = isPlaying ? "/icon/radio-symbolic.svg" : "/icon/radio-off-symbolic.svg";
-        this.set_applet_icon_symbolic_path(this.extPath + iconFile);
+        if (!isPlaying && this.isRecording) {
+            this._stopRecording();
+        }
+
+        if (!this.isRecording) {
+            let iconFile = isPlaying ? "/icon/radio-symbolic.svg" : "/icon/radio-off-symbolic.svg";
+            this.set_applet_icon_symbolic_path(this.extPath + iconFile);
+        }
 
         if (this.statusMenuItem) {
             if (isPlaying) {
@@ -333,6 +505,18 @@ class FMRadioApplet extends Applet.IconApplet {
         }
 
         this._updateTooltip();
+
+        if (isPlaying) {
+            if (!this.mprisServer) {
+                this.mprisServer = new Mpris.MprisServer(this);
+            }
+            this.mprisServer.updateStatus();
+        } else {
+            if (this.mprisServer) {
+                this.mprisServer.destroy();
+                this.mprisServer = null;
+            }
+        }
     }
 
     on_applet_clicked(event) {
@@ -352,10 +536,126 @@ class FMRadioApplet extends Applet.IconApplet {
         }
     }
 
+// === MONKEY-PATCHING (watchdog) ===
+    _startHijackTimer() {
+        if (this._hijackTimerId) return;
+        
+        this._hijackTimerId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+            this._hijackSoundApplet();
+            return GLib.SOURCE_CONTINUE; 
+        });
+        
+        this._hijackSoundApplet();
+    }
+
+    _hijackSoundApplet() {
+        if (!this._hackedSoundApplets) {
+            this._hackedSoundApplets = [];
+        }
+        
+        if (!Main.panelManager) return;
+        
+        let panels = (typeof Main.panelManager.getPanels === 'function') 
+            ? Main.panelManager.getPanels() 
+            : Main.panelManager.panels;
+            
+        if (!panels) return;
+        
+        for (let i = 0; i < panels.length; i++) {
+            let panel = panels[i];
+            if (!panel) continue; 
+            
+            let boxes = [panel._leftBox, panel._centerBox, panel._rightBox];
+            for (let j = 0; j < boxes.length; j++) {
+                let box = boxes[j];
+                if (!box) continue;
+                
+                let children = box.get_children();
+                for (let k = 0; k < children.length; k++) {
+                    let actor = children[k];
+                    if (!actor || !actor._applet) continue;
+                    
+                    let soundApplet = actor._applet;
+                    let uuid = soundApplet._uuid || (soundApplet.metadata ? soundApplet.metadata.uuid : "");
+                    
+                    if (uuid === "sound@cinnamon.org" || uuid === "sound150@claudiux") {
+                        
+                        if (!soundApplet._original_addPlayer_fmradio && typeof soundApplet._addPlayer === 'function') {
+                            
+                            soundApplet._original_addPlayer_fmradio = soundApplet._addPlayer;
+                            
+                            soundApplet._addPlayer = function(arg1, arg2) {
+                                let targetBusName = "";
+                                
+                                // Cinnamon <= 6.6 or sound150 (arg1 is a string)
+                                if (typeof arg1 === 'string') {
+                                    targetBusName = arg1;
+                                } 
+                                // Cinnamon >= 6.7 (arg1 is an mprisPlayer object)
+                                else if (arg1 && typeof arg1.getBusName === 'function') {
+                                    targetBusName = arg1.getBusName();
+                                }
+
+                                if (targetBusName === "org.mpris.MediaPlayer2.fmradio") {
+                                    return;
+                                }
+                                
+                                this._original_addPlayer_fmradio(arg1, arg2);
+                            };
+                            
+                            if (!this._hackedSoundApplets.includes(soundApplet)) {
+                                this._hackedSoundApplets.push(soundApplet);
+                            }
+                            
+                            // Force cleanup if the Sound applet had time to display before us
+                            if (soundApplet._players) {
+                                for (let owner in soundApplet._players) {
+                                    if (soundApplet._players[owner] && soundApplet._players[owner]._busName === "org.mpris.MediaPlayer2.fmradio") {
+                                        soundApplet._removePlayer("org.mpris.MediaPlayer2.fmradio", owner);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    _releaseSoundApplet() {
+        if (this._hackedSoundApplets) {
+            for (let i = 0; i < this._hackedSoundApplets.length; i++) {
+                let soundApplet = this._hackedSoundApplets[i];
+                if (soundApplet && soundApplet._original_addPlayer_fmradio) {
+                    soundApplet._addPlayer = soundApplet._original_addPlayer_fmradio;
+                    delete soundApplet._original_addPlayer_fmradio;
+                }
+            }
+            this._hackedSoundApplets = [];
+        }
+    }
+
     on_applet_removed_from_panel() {
         if (this.player) {
             this.player.stop();
         }
+
+        if (this.isRecording) {
+            this._stopRecording();
+        }
+
+        if (this.mprisServer) {
+            this.mprisServer.destroy();
+        }
+
+        // stop watchdog
+        if (this._hijackTimerId) {
+            GLib.source_remove(this._hijackTimerId);
+            this._hijackTimerId = null;
+        }
+
+        this._releaseSoundApplet();
+        Main.keybindingManager.removeHotKey("fm-play-" + this.instance_id);
     }
 }
 
