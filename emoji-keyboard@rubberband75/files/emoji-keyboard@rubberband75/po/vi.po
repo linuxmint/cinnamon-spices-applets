@@ -1,0 +1,187 @@
+# EMOJI KEYBOARD
+# This file is put in the public domain.
+# rubberband75, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: emoji-keyboard@rubberband75 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-27 15:25-0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. applet.js:46
+msgid "Recent"
+msgstr "Gần đây"
+
+#. applet.js:47
+msgid "Smileys & Emotions"
+msgstr "Mặt cười & Cảm xúc"
+
+#. applet.js:48
+msgid "People"
+msgstr "Con người"
+
+#. applet.js:49
+msgid "Animals & Nature"
+msgstr "Động vật & Thiên nhiên"
+
+#. applet.js:50
+msgid "Food & Drink"
+msgstr "Đồ ăn & Thức uống"
+
+#. applet.js:51
+msgid "Travel & Places"
+msgstr "Du lịch & Địa điểm"
+
+#. applet.js:52
+msgid "Activities & Events"
+msgstr "Hoạt động & Sự kiện"
+
+#. applet.js:53
+msgid "Objects"
+msgstr "Đồ vật"
+
+#. applet.js:54
+msgid "Symbols"
+msgstr "Ký hiệu"
+
+#. applet.js:55
+msgid "Flags"
+msgstr "Cờ"
+
+#. metadata.json->name
+#. applet.js:142
+msgid "Emoji Keyboard"
+msgstr "Bàn phím Emoji"
+
+#. applet.js:167
+msgid "Search emoji"
+msgstr "Tìm emoji"
+
+#. applet.js:206
+msgid "Loading emoji…"
+msgstr "Đang tải emoji…"
+
+#. applet.js:415
+msgid "Unable to load the emoji catalog"
+msgstr "Không thể tải danh mục emoji"
+
+#. applet.js:492
+#, javascript-format
+msgid "%d search result"
+msgid_plural "%d search results"
+msgstr[0] "%d kết quả tìm kiếm"
+
+#. applet.js:519
+msgid "Your recently used emoji will appear here"
+msgstr "Emoji bạn dùng gần đây sẽ hiện ở đây"
+
+#. applet.js:520
+msgid "No emoji found"
+msgstr "Không tìm thấy emoji nào"
+
+#. metadata.json->description
+msgid "Search, copy, and insert emoji from a native Cinnamon panel popup."
+msgstr ""
+"Tìm kiếm, sao chép và chèn emoji từ cửa sổ bật lên gốc của bảng điều khiển "
+"Cinnamon."
+
+#. settings-schema.json->copy-to-clipboard->description
+msgid "Copy emoji to clipboard"
+msgstr "Sao chép emoji vào bảng nhớ tạm"
+
+#. settings-schema.json->copy-to-clipboard->tooltip
+msgid ""
+"When enabled, the selected emoji stays on the clipboard after it is "
+"inserted. When disabled, the clipboard is restored to its previous contents "
+"after insertion."
+msgstr ""
+"Khi bật, emoji đã chọn vẫn ở trên bảng nhớ tạm sau khi được chèn. Khi tắt, "
+"nội dung trước đó của bảng nhớ tạm sẽ được khôi phục ngay sau khi chèn."
+
+#. settings-schema.json->category-icon-size->description
+msgid "Category icon size"
+msgstr "Kích thước biểu tượng danh mục"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Colored Icon Size"
+msgstr "Khớp với kích thước biểu tượng màu của bảng điều khiển"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Symbolic Icon Size"
+msgstr "Khớp với kích thước biểu tượng tượng trưng của bảng điều khiển"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "16px"
+msgstr "16px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "22px"
+msgstr "22px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "24px"
+msgstr "24px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "32px"
+msgstr "32px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "48px"
+msgstr "48px"
+
+#. settings-schema.json->emoji-size->description
+msgid "Emoji size"
+msgstr "Kích thước emoji"
+
+#. settings-schema.json->default-skin-tone->description
+msgid "Default skin tone"
+msgstr "Tông màu da mặc định"
+
+#. settings-schema.json->default-skin-tone->tooltip
+msgid ""
+"Emoji that support skin tones show this tone by default. Emoji without skin "
+"tone variants are unaffected."
+msgstr ""
+"Các emoji hỗ trợ tông màu da sẽ hiển thị tông màu này theo mặc định. Các "
+"emoji không có biến thể tông màu da sẽ không bị ảnh hưởng."
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍"
+msgstr "👍"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏻"
+msgstr "👍🏻"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏼"
+msgstr "👍🏼"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏽"
+msgstr "👍🏽"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏾"
+msgstr "👍🏾"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏿"
+msgstr "👍🏿"

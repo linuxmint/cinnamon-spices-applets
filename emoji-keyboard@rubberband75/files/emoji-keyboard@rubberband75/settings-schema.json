@@ -1,0 +1,54 @@
+{
+    "recent-emoji": {
+        "type": "generic",
+        "default": []
+    },
+    "copy-to-clipboard": {
+        "type": "switch",
+        "default": true,
+        "description": "Copy emoji to clipboard",
+        "tooltip": "When enabled, the selected emoji stays on the clipboard after it is inserted. When disabled, the clipboard is restored to its previous contents after insertion."
+    },
+    "category-icon-size": {
+        "type": "combobox",
+        "default": "match-colored",
+        "description": "Category icon size",
+        "options": {
+            "Match Panel Colored Icon Size": "match-colored",
+            "Match Panel Symbolic Icon Size": "match-symbolic",
+            "16px": "16",
+            "22px": "22",
+            "24px": "24",
+            "32px": "32",
+            "48px": "48"
+        }
+    },
+    "emoji-size": {
+        "type": "combobox",
+        "default": "match-colored",
+        "description": "Emoji size",
+        "options": {
+            "Match Panel Colored Icon Size": "match-colored",
+            "Match Panel Symbolic Icon Size": "match-symbolic",
+            "16px": "16",
+            "22px": "22",
+            "24px": "24",
+            "32px": "32",
+            "48px": "48"
+        }
+    },
+    "default-skin-tone": {
+        "type": "combobox",
+        "default": "",
+        "description": "Default skin tone",
+        "tooltip": "Emoji that support skin tones show this tone by default. Emoji without skin tone variants are unaffected.",
+        "options": {
+            "👍": "",
+            "👍🏻": "light skin tone",
+            "👍🏼": "medium light skin tone",
+            "👍🏽": "medium skin tone",
+            "👍🏾": "medium dark skin tone",
+            "👍🏿": "dark skin tone"
+        }
+    }
+}
