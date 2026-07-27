@@ -32,7 +32,7 @@ const GRID_LEFT_PADDING = 4;
 const POPUP_HORIZONTAL_PADDING = 5;
 const SCROLLBAR_ALLOWANCE = 20;
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(text) {
     return Gettext.dgettext(UUID, text);
