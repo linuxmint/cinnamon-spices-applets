@@ -153,6 +153,35 @@ msgstr ""
 msgid "Weekly"
 msgstr ""
 
+#, javascript-format
+msgid "Active %s"
+msgstr ""
+
+#, javascript-format
+msgid "Agent %s"
+msgstr ""
+
+#, javascript-format
+msgid "Created %s ago"
+msgstr ""
+
+msgid "Created now"
+msgstr ""
+
+#, javascript-format
+msgid "ID %s"
+msgstr ""
+
+#, javascript-format
+msgid "Role %s"
+msgstr ""
+
+msgid "Temporary"
+msgstr ""
+
+msgid "Updated now"
+msgstr ""
+
 #. model.js:90
 #, javascript-format
 msgid "%s quota critical: %s%% used"
@@ -504,10 +533,6 @@ msgstr ""
 msgid "No history in this range"
 msgstr ""
 
-#. ui.js:721
-msgid "Collecting more history…"
-msgstr ""
-
 #. ui.js:725
 msgid "Hover for timestamp and exact values"
 msgstr ""
@@ -772,7 +797,7 @@ msgid "Device details unavailable"
 msgstr ""
 
 #. ui.js:1049
-msgid "Revoke…"
+msgid "Revoke"
 msgstr ""
 
 #. model.js:182
@@ -917,4 +942,113 @@ msgstr ""
 
 #. settings-schema.json->codex-home->description
 msgid "Custom CODEX_HOME (leave empty for the default)"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:1105
+#, javascript-format
+msgid "%s ago"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:152
+#, javascript-format
+msgid "%s observed · more samples needed"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:195
+#, javascript-format
+msgid "%s pp/hour average · %s observed · %s"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:130
+msgid "A forecast appears after enough of this reset window is observed"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:1096
+msgid "ACTIVE"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:1096
+msgid "AGE"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:190
+#, javascript-format
+msgid "About %s%% by reset"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:844
+#, javascript-format
+msgid "Activity · %s tokens selected · %s lifetime"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:840
+#, javascript-format
+msgid "Activity · %s tokens selected · lifetime unavailable"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:1111
+#, javascript-format
+msgid "Branch %s"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:145
+msgid "Codex did not report a usable reset window"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:126
+#: files/codex-monitor@breixopd/ui.js:149
+msgid "Collecting usage history…"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:144
+msgid "Forecast unavailable"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:160
+msgid "High confidence"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:167
+#, javascript-format
+msgid "Holding near %s%%"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:186
+#, javascript-format
+msgid "Limit around %s"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:158
+msgid "Low confidence"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:159
+msgid "Medium confidence"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:170
+#, javascript-format
+msgid "No increase across %s observed · %s"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:913
+#, javascript-format
+msgid "Observed %s pace"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:345
+#: files/codex-monitor@breixopd/ui.js:914
+msgid "Observed pace"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:340
+msgid "Quota outlook"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:1094
+msgid "SOURCE"
+msgstr ""
+
+#: files/codex-monitor@breixopd/ui.js:1103
+msgid "UPDATED"
 msgstr ""

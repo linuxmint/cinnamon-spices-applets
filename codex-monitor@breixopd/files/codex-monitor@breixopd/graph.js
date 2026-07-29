@@ -2,6 +2,7 @@
 
 const Cairo = imports.cairo;
 const Clutter = imports.gi.Clutter;
+const Pango = imports.gi.Pango;
 const St = imports.gi.St;
 
 function _rgba(color, alpha) {
@@ -228,12 +229,16 @@ var updateQuotaGraph = function(view, payload) {
     view.remove_style_class_name('codex-monitor-graph-dual-axis');
   for (const child of view._legend.get_children())
     child.destroy();
+  view._legend.set_vertical(data.mode === 'both');
   for (const item of data.legend || []) {
     const label = new St.Label({
       text: item.text,
       style_class: `codex-monitor-graph-legend-item codex-monitor-graph-color-${item.colorIndex}`,
       x_expand: true,
     });
+    label.clutter_text.set_line_wrap(true);
+    label.clutter_text.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+    label.clutter_text.set_ellipsize(Pango.EllipsizeMode.NONE);
     view._legend.add_child(label);
   }
   if ((data.resetMarkers || []).length > 0) {
@@ -243,11 +248,8 @@ var updateQuotaGraph = function(view, payload) {
     }));
   }
 
-  const counts = series.map(item => item.points.length);
-  const total = counts.reduce((sum, count) => sum + count, 0);
-  view._empty.set_text(total === 0
-    ? data.emptyText || ''
-    : counts.every(count => count <= 1) ? data.collectingText || '' : '');
+  const total = series.reduce((sum, item) => sum + item.points.length, 0);
+  view._empty.set_text(total === 0 ? data.emptyText || '' : '');
   view._empty.visible = Boolean(view._empty.get_text());
   view._area.queue_repaint();
 };

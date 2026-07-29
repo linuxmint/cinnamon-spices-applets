@@ -100,6 +100,13 @@ def _normalize_row(raw):
     cwd = raw.get("cwd")
     if not isinstance(cwd, str) or not os.path.isabs(cwd) or len(cwd) > 4096:
         cwd = None
+    git_info = raw.get("gitInfo")
+    branch = (
+        _bounded_text(git_info.get("branch"))
+        if isinstance(git_info, dict)
+        else None
+    )
+    parent_thread_id = _canonical_uuid(raw.get("parentThreadId"))
 
     return {
         "id": thread_id,
@@ -110,6 +117,13 @@ def _normalize_row(raw):
             if cwd
             else "Unknown project"
         ),
+        "branch": branch,
+        "cliVersion": _bounded_text(raw.get("cliVersion"), maximum=32),
+        "modelProvider": _bounded_text(raw.get("modelProvider"), maximum=64),
+        "ephemeral": raw.get("ephemeral") is True,
+        "isSubAgent": parent_thread_id is not None,
+        "agentNickname": _bounded_text(raw.get("agentNickname"), maximum=80),
+        "agentRole": _bounded_text(raw.get("agentRole"), maximum=80),
         "sourceLabel": _source_label(raw.get("source")),
         "status": status,
         "statusLabel": _STATUS_LABELS.get(status, "Unavailable"),

@@ -237,6 +237,23 @@ class CodexService:
     def _normalize_token_usage(value):
         if not isinstance(value, dict):
             return None
+        summary = {}
+        raw_summary = value.get("summary")
+        lifetime_tokens = (
+            raw_summary.get("lifetimeTokens")
+            if isinstance(raw_summary, dict)
+            else None
+        )
+        if (
+            not isinstance(lifetime_tokens, bool)
+            and isinstance(lifetime_tokens, (int, float))
+        ):
+            try:
+                summary["lifetimeTokens"] = min(
+                    MAX_SAFE_INTEGER, max(0, int(lifetime_tokens))
+                )
+            except (OverflowError, TypeError, ValueError):
+                pass
         raw_buckets = value.get("dailyUsageBuckets")
         if not isinstance(raw_buckets, list):
             raw_buckets = []
@@ -261,6 +278,6 @@ class CodexService:
                 {"startDate": normalized_date, "tokens": normalized_tokens}
             )
         return {
-            "summary": {},
+            "summary": summary,
             "dailyUsageBuckets": buckets,
         }

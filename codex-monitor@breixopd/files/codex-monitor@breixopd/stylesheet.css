@@ -167,6 +167,29 @@
   spacing: 10px;
 }
 
+.codex-monitor-forecast-row {
+  spacing: 8px;
+}
+
+.codex-monitor-forecast-card {
+  spacing: 4px;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: rgba(128, 128, 128, 0.08);
+}
+
+.codex-monitor-forecast-outlook {
+  font-weight: 600;
+}
+
+.codex-monitor-forecast-risk .codex-monitor-forecast-outlook {
+  color: #e8a641;
+}
+
+.codex-monitor-compact .codex-monitor-forecast-row {
+  spacing: 7px;
+}
+
 .codex-monitor-quota-card,
 .codex-monitor-section {
   spacing: 7px;
@@ -248,7 +271,7 @@
 }
 
 .codex-monitor-session-row {
-  padding: 6px 7px;
+  padding: 8px;
   border-radius: 5px;
   background-color: rgba(128, 128, 128, 0.06);
   text-align: left;
@@ -265,7 +288,37 @@
 
 .codex-monitor-session-content,
 .codex-monitor-sessions > StBoxLayout {
-  spacing: 3px;
+  spacing: 6px;
+}
+
+.codex-monitor-session-card-header {
+  spacing: 8px;
+}
+
+.codex-monitor-session-status {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: rgba(128, 128, 128, 0.12);
+  color: inherit;
+  opacity: 200;
+  font-size: 0.78em;
+  font-weight: 600;
+}
+
+.codex-monitor-session-status-attention {
+  color: #e8a641;
+}
+
+.codex-monitor-session-meta {
+  color: inherit;
+  opacity: 210;
+  font-size: 0.82em;
+}
+
+.codex-monitor-session-timing {
+  color: inherit;
+  opacity: 176;
+  font-size: 0.78em;
 }
 
 .codex-monitor-graph {
@@ -396,4 +449,9 @@
 .codex-monitor-remote-client-row {
   spacing: 10px;
   padding: 5px 0;
+}
+
+.codex-monitor-remote-status,
+.codex-monitor-remote-revoke {
+  margin-right: 2px;
 }

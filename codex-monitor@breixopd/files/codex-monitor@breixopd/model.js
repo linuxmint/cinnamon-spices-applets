@@ -402,6 +402,131 @@ function activitySeries(tokenUsage) {
   });
 }
 
+function activityTotals(tokenUsage, cutoff, now) {
+  const start = Number(cutoff);
+  const end = Number(now);
+  const buckets = tokenUsage && Array.isArray(tokenUsage.dailyUsageBuckets)
+    ? tokenUsage.dailyUsageBuckets
+    : [];
+  let selectedTokens = 0;
+  let bucketCount = 0;
+  for (const bucket of buckets) {
+    const timestamp = Date.parse(`${bucket.startDate}T00:00:00Z`) / 1000;
+    const tokens = Number(bucket.tokens);
+    if (!Number.isFinite(timestamp) || !Number.isFinite(tokens) || tokens < 0 ||
+        timestamp < start || timestamp > end)
+      continue;
+    selectedTokens += tokens;
+    bucketCount += 1;
+  }
+  const rawLifetime = tokenUsage && tokenUsage.summary
+    ? Number(tokenUsage.summary.lifetimeTokens)
+    : Number.NaN;
+  return {
+    selectedTokens,
+    lifetimeTokens: Number.isFinite(rawLifetime) && rawLifetime >= 0
+      ? rawLifetime : null,
+    bucketCount,
+  };
+}
+
+function quotaForecast(history, windowName, window, now) {
+  const currentTime = Number(now);
+  const usedPercent = window && Number(window.usedPercent);
+  const durationMinutes = window && Number(window.windowDurationMins);
+  const resetsAt = window && Number(window.resetsAt);
+  if (!Number.isFinite(currentTime) || !Number.isFinite(usedPercent) ||
+      !Number.isFinite(durationMinutes) || durationMinutes <= 0 ||
+      !Number.isFinite(resetsAt) || resetsAt <= currentTime) {
+    return { state: 'unavailable' };
+  }
+
+  const valueKey = windowName === 'fiveHour'
+    ? 'fiveHourUsedPercent' : windowName === 'weekly'
+      ? 'weeklyUsedPercent' : null;
+  const resetKey = windowName === 'fiveHour'
+    ? 'fiveHourResetsAt' : windowName === 'weekly'
+      ? 'weeklyResetsAt' : null;
+  if (!valueKey || !resetKey)
+    return { state: 'unavailable' };
+
+  const durationSeconds = durationMinutes * 60;
+  const cycleStart = resetsAt - durationSeconds;
+  const pointsByTime = new Map();
+  for (const row of Array.isArray(history) ? history : []) {
+    const timestamp = Number(row && row.capturedAt);
+    const value = Number(row && row[valueKey]);
+    const rowReset = Number(row && row[resetKey]);
+    if (!Number.isFinite(timestamp) || !Number.isFinite(value) ||
+        !Number.isFinite(rowReset) || Math.abs(rowReset - resetsAt) > 300 ||
+        timestamp < cycleStart || timestamp > currentTime ||
+        value < 0 || value > 100)
+      continue;
+    pointsByTime.set(timestamp, { timestamp, value });
+  }
+  pointsByTime.set(currentTime, {
+    timestamp: currentTime,
+    value: Math.max(0, Math.min(100, usedPercent)),
+  });
+  const points = Array.from(pointsByTime.values())
+    .sort((left, right) => left.timestamp - right.timestamp);
+  const first = points.find(point => point.value <= usedPercent + 0.5);
+  const observedSeconds = first ? currentTime - first.timestamp : 0;
+  const minimumObservation = Math.min(
+    6 * 3600, Math.max(20 * 60, durationSeconds * 0.03)
+  );
+  if (!first || points.length < 2 || observedSeconds < minimumObservation) {
+    return {
+      state: 'insufficient',
+      usedPercent,
+      resetsAt,
+      observedSeconds: Math.max(0, observedSeconds),
+      sampleCount: points.length,
+    };
+  }
+
+  const growth = Math.max(0, usedPercent - first.value);
+  const averagePerHour = growth / (observedSeconds / 3600);
+  const remainingSeconds = Math.max(0, resetsAt - currentTime);
+  if (averagePerHour < 0.01) {
+    return {
+      state: 'steady',
+      usedPercent,
+      resetsAt,
+      observedSeconds,
+      sampleCount: points.length,
+      averagePerHour: 0,
+      projectedAt: null,
+      projectedUsedPercent: usedPercent,
+      confidence: points.length >= 3 ? 'medium' : 'low',
+    };
+  }
+
+  const projectedAt = currentTime +
+    Math.max(0, 100 - usedPercent) / averagePerHour * 3600;
+  const projectedUsedPercent = Math.min(
+    100, usedPercent + averagePerHour * remainingSeconds / 3600
+  );
+  let confidence = 'low';
+  if (points.length >= 4 && observedSeconds >= durationSeconds * 0.25 &&
+      growth >= 10) {
+    confidence = 'high';
+  } else if (points.length >= 3 && growth >= 3) {
+    confidence = 'medium';
+  }
+  return {
+    state: projectedAt <= resetsAt + 1 ? 'limit' : 'within',
+    usedPercent,
+    resetsAt,
+    observedSeconds,
+    sampleCount: points.length,
+    averagePerHour,
+    projectedAt,
+    projectedUsedPercent,
+    confidence,
+  };
+}
+
 function formatTokenCount(value) {
   const tokens = Math.max(0, Number(value) || 0);
   const compact = (amount, suffix) =>
@@ -618,6 +743,37 @@ function sessionStatusText(session, now, translate = text => text) {
     formatDuration(current - activeSince, translate));
 }
 
+function sessionMetrics(session, now) {
+  const value = session && typeof session === 'object' ? session : {};
+  const current = Number(now);
+  const safeText = (candidate, maximum) =>
+    typeof candidate === 'string' && candidate.length > 0 &&
+    candidate.length <= maximum && !/[\r\n]/.test(candidate)
+      ? candidate : null;
+  const elapsed = timestamp => {
+    const parsed = Number(timestamp);
+    return Number.isFinite(current) && Number.isFinite(parsed) &&
+      parsed >= 0 && parsed <= current ? current - parsed : null;
+  };
+  const sourceLabel = safeText(value.sourceLabel, 64) || 'Unknown';
+  const id = safeText(value.id, 36);
+  return {
+    ageSeconds: elapsed(value.createdAt),
+    updatedSeconds: elapsed(value.updatedAt),
+    activeSeconds: value.status === 'active' ? elapsed(value.activeSince) : null,
+    sourceLabel,
+    branch: safeText(value.branch, 160),
+    cliVersion: safeText(value.cliVersion, 32),
+    modelProvider: safeText(value.modelProvider, 64),
+    ephemeral: value.ephemeral === true,
+    isSubAgent: value.isSubAgent === true,
+    agentNickname: safeText(value.agentNickname, 80),
+    agentRole: safeText(value.agentRole, 80),
+    shortId: id && /^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(id)
+      ? id.slice(0, 8) : null,
+  };
+}
+
 function isUsableRemoteStatus(remoteStatus) {
   const status = remoteStatus && remoteStatus.status;
   return status === 'connecting' || status === 'connected' || status === 'running';
@@ -731,6 +887,8 @@ const CodexModel = {
   downsampleQuota,
   tooltipText,
   activitySeries,
+  activityTotals,
+  quotaForecast,
   formatTokenCount,
   graphSummary,
   graphAxis,
@@ -739,6 +897,7 @@ const CodexModel = {
   nearestGraphValues,
   sessionView,
   sessionStatusText,
+  sessionMetrics,
   isUsableRemoteStatus,
   normalizeUpdateState,
   dashboardFooterText,

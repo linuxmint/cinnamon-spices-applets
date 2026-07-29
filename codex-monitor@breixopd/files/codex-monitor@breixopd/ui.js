@@ -30,7 +30,7 @@ function _button(label, callback, styleClass = 'codex-monitor-button') {
     reactive: true,
     can_focus: true,
     track_hover: true,
-    x_align: Clutter.ActorAlign.CENTER,
+    x_align: St.Align.MIDDLE,
   });
   button.connect('clicked', callback);
   return button;
@@ -40,6 +40,13 @@ function _enableWrapping(label) {
   label.clutter_text.set_line_wrap(true);
   label.clutter_text.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
   label.clutter_text.set_ellipsize(Pango.EllipsizeMode.NONE);
+}
+
+function _protectNaturalWidth(actor) {
+  actor.set_width(-1);
+  const natural = actor.get_preferred_width(-1)[1];
+  if (Number.isFinite(natural) && natural > 0)
+    actor.set_width(Math.ceil(natural));
 }
 
 function _validatedQrSvg(value) {
@@ -110,6 +117,94 @@ class QuotaCard {
   }
 }
 
+class ForecastCard {
+  constructor(title, translate) {
+    this._ = translate;
+    this.actor = new St.BoxLayout({
+      vertical: true,
+      style_class: 'codex-monitor-forecast-card',
+      x_expand: true,
+    });
+    this._title = new St.Label({
+      text: title,
+      style_class: 'codex-monitor-card-kicker',
+    });
+    this._outlook = new St.Label({
+      text: this._('Collecting usage history…'),
+      style_class: 'codex-monitor-forecast-outlook',
+    });
+    this._detail = new St.Label({
+      text: this._('A forecast appears after enough of this reset window is observed'),
+      style_class: 'codex-monitor-secondary',
+    });
+    _enableWrapping(this._outlook);
+    _enableWrapping(this._detail);
+    this.actor.add_child(this._title);
+    this.actor.add_child(this._outlook);
+    this.actor.add_child(this._detail);
+  }
+
+  update(forecast, model) {
+    this.actor.remove_style_class_name('codex-monitor-forecast-risk');
+    const state = forecast && forecast.state || 'unavailable';
+    if (state === 'unavailable') {
+      this._outlook.set_text(this._('Forecast unavailable'));
+      this._detail.set_text(this._('Codex did not report a usable reset window'));
+      return;
+    }
+    if (state === 'insufficient') {
+      this._outlook.set_text(this._('Collecting usage history…'));
+      const observed = model.formatDuration(forecast.observedSeconds || 0, this._);
+      this._detail.set_text(_format(
+        this._('%s observed · more samples needed'), observed
+      ));
+      return;
+    }
+
+    const confidenceLabels = {
+      low: this._('Low confidence'),
+      medium: this._('Medium confidence'),
+      high: this._('High confidence'),
+    };
+    const confidence = confidenceLabels[forecast.confidence] ||
+      confidenceLabels.low;
+    const observed = model.formatDuration(forecast.observedSeconds, this._);
+    if (state === 'steady') {
+      this._outlook.set_text(_format(
+        this._('Holding near %s%%'), Math.round(forecast.projectedUsedPercent)
+      ));
+      this._detail.set_text(_format(
+        this._('No increase across %s observed · %s'), observed, confidence
+      ));
+      return;
+    }
+
+    const pace = forecast.averagePerHour >= 10
+      ? Math.round(forecast.averagePerHour)
+      : Number(forecast.averagePerHour).toFixed(1).replace(/\.0$/, '');
+    if (state === 'limit') {
+      const limitTime = new Date(forecast.projectedAt * 1000).toLocaleString(
+        undefined, {
+          weekday: 'short',
+          hour: '2-digit',
+          minute: '2-digit',
+        }
+      );
+      this._outlook.set_text(_format(this._('Limit around %s'), limitTime));
+      this.actor.add_style_class_name('codex-monitor-forecast-risk');
+    } else {
+      this._outlook.set_text(_format(
+        this._('About %s%% by reset'),
+        Math.round(forecast.projectedUsedPercent)
+      ));
+    }
+    this._detail.set_text(_format(
+      this._('%s pp/hour average · %s observed · %s'),
+      pace, observed, confidence
+    ));
+  }
+}
+
 var Dashboard = class Dashboard {
   constructor(options) {
     this._ = options.translate;
@@ -145,6 +240,7 @@ var Dashboard = class Dashboard {
     });
     this._buildHeader();
     this._buildQuotaCards();
+    this._buildForecast();
     this._buildGraph();
     this._buildSessions();
     this._buildResetBank();
@@ -237,6 +333,36 @@ var Dashboard = class Dashboard {
     this._quotaRow.add_child(this._fiveHourCard.actor);
     this._quotaRow.add_child(this._weeklyCard.actor);
     this.actor.add_child(this._quotaRow);
+  }
+
+  _buildForecast() {
+    this._forecastSection = new St.BoxLayout({
+      vertical: true,
+      style_class: 'codex-monitor-section codex-monitor-forecast-section',
+    });
+    this._forecastHeading = new St.BoxLayout({
+      style_class: 'codex-monitor-section-heading',
+    });
+    this._forecastHeading.add_child(new St.Label({
+      text: this._('Quota outlook'),
+      style_class: 'codex-monitor-section-title',
+      x_expand: true,
+    }));
+    this._forecastContext = new St.Label({
+      text: this._('Observed pace'),
+      style_class: 'codex-monitor-secondary',
+    });
+    this._forecastHeading.add_child(this._forecastContext);
+    this._forecastSection.add_child(this._forecastHeading);
+    this._forecastRow = new St.BoxLayout({
+      style_class: 'codex-monitor-forecast-row',
+    });
+    this._fiveHourForecast = new ForecastCard(this._('5-HOUR'), this._);
+    this._weeklyForecast = new ForecastCard(this._('WEEKLY'), this._);
+    this._forecastRow.add_child(this._fiveHourForecast.actor);
+    this._forecastRow.add_child(this._weeklyForecast.actor);
+    this._forecastSection.add_child(this._forecastRow);
+    this.actor.add_child(this._forecastSection);
   }
 
   _buildGraph() {
@@ -361,8 +487,10 @@ var Dashboard = class Dashboard {
     }));
     this._remoteLabel = new St.Label({
       text: this._('Disabled'),
-      style_class: 'codex-monitor-status',
+      style_class: 'codex-monitor-status codex-monitor-remote-status',
     });
+    this._remoteLabel.clutter_text.set_single_line_mode(true);
+    this._remoteLabel.clutter_text.set_ellipsize(Pango.EllipsizeMode.NONE);
     this._remoteHeading.add_child(this._remoteLabel);
     this._remoteButtons = new St.BoxLayout({ style_class: 'codex-monitor-action-row' });
     this._remoteIdentity = new St.Label({
@@ -375,7 +503,7 @@ var Dashboard = class Dashboard {
     this._remoteSection.add_child(this._remoteButtons);
     this._pairingQr = new St.Bin({
       style_class: 'codex-monitor-qr',
-      x_align: Clutter.ActorAlign.CENTER,
+      x_align: St.Align.MIDDLE,
       x_expand: false,
     });
     this._pairingQr.visible = false;
@@ -479,6 +607,8 @@ var Dashboard = class Dashboard {
       this.actor.remove_style_class_name('codex-monitor-compact');
     this._header.set_vertical(this._compact);
     this._quotaRow.set_vertical(this._compact);
+    this._forecastHeading.set_vertical(this._compact);
+    this._forecastRow.set_vertical(this._compact);
     this._graphHeading.set_vertical(this._compact);
     this._sessionHeadingRow.set_vertical(this._compact);
     this._remoteHeading.set_vertical(this._compact);
@@ -488,14 +618,15 @@ var Dashboard = class Dashboard {
     this._footerActions.set_vertical(false);
     this._updateButton.x_expand = this._compact;
     this._refreshButton.x_expand = this._compact;
-    this._updateButton.set_x_align(this._compact
-      ? Clutter.ActorAlign.FILL : Clutter.ActorAlign.CENTER);
-    this._refreshButton.set_x_align(this._compact
-      ? Clutter.ActorAlign.FILL : Clutter.ActorAlign.CENTER);
+    this._updateButton.x_fill = this._compact;
+    this._refreshButton.x_fill = this._compact;
+    this._updateButton.set_x_align(St.Align.MIDDLE);
+    this._refreshButton.set_x_align(St.Align.MIDDLE);
     this._layoutSessionFilters();
     this.setIndicators(this._indicators);
     if (this._snapshot)
       this._renderResetBank();
+    this._renderSessions();
     this._renderRemote();
   }
 
@@ -564,6 +695,7 @@ var Dashboard = class Dashboard {
     if (snapshotChanged) {
       this._fiveHourCard.update(snapshot.windows.fiveHour, this._model, now);
       this._weeklyCard.update(snapshot.windows.weekly, this._model, now);
+      this._renderForecast();
       this._renderGraph();
       this._renderResetBank();
     }
@@ -693,6 +825,9 @@ var Dashboard = class Dashboard {
     }
     const summaries = series.map(item => this._model.graphSummary(item));
     const axes = this._model.graphAxes(series, cutoff, now, rangeHours, mode);
+    const activityTotals = this._model.activityTotals(
+      this._snapshot.tokenUsage, cutoff, now
+    );
     const valueText = point => {
       if (!point)
         return '—';
@@ -703,6 +838,24 @@ var Dashboard = class Dashboard {
     const legend = summaries.map((summary, index) => {
       if (!summary.current)
         return null;
+      if (summary.kind === 'activity') {
+        const selected = this._model.formatTokenCount(
+          activityTotals.selectedTokens
+        );
+        return {
+          colorIndex: series[index].colorIndex,
+          text: activityTotals.lifetimeTokens == null
+            ? _format(
+              this._('Activity · %s tokens selected · lifetime unavailable'),
+              selected
+            )
+            : _format(
+              this._('Activity · %s tokens selected · %s lifetime'),
+              selected,
+              this._model.formatTokenCount(activityTotals.lifetimeTokens)
+            ),
+        };
+      }
       const points = series[index].points || [];
       const first = points[0];
       const delta = summary.kind === 'quota' && first && points.length > 1
@@ -747,7 +900,6 @@ var Dashboard = class Dashboard {
       legend,
       resetKey: this._('R = reset'),
       emptyText: this._('No history in this range'),
-      collectingText: this._('Collecting more history…'),
       uncollectedText: this._('No local history'),
       hoverFormatter,
       defaultDetail: legend.length > 0
@@ -756,6 +908,30 @@ var Dashboard = class Dashboard {
         : this._('No samples yet'),
       accessibleName: this._('Usage trend graph'),
     });
+  }
+
+  _renderForecast() {
+    if (!this._snapshot)
+      return;
+    const capturedAt = Number(this._snapshot.capturedAt) ||
+      Math.floor(Date.now() / 1000);
+    const plan = this._snapshot.planType ||
+      this._snapshot.account && this._snapshot.account.planType;
+    this._forecastContext.set_text(plan
+      ? _format(this._('Observed %s pace'), plan)
+      : this._('Observed pace'));
+    this._fiveHourForecast.update(this._model.quotaForecast(
+      this._snapshot.history,
+      'fiveHour',
+      this._snapshot.windows && this._snapshot.windows.fiveHour,
+      capturedAt
+    ), this._model);
+    this._weeklyForecast.update(this._model.quotaForecast(
+      this._snapshot.history,
+      'weekly',
+      this._snapshot.windows && this._snapshot.windows.weekly,
+      capturedAt
+    ), this._model);
   }
 
   _renderResetBank() {
@@ -851,6 +1027,7 @@ var Dashboard = class Dashboard {
       vertical: true,
       style_class: 'codex-monitor-session-content',
       x_expand: true,
+      x_align: Clutter.ActorAlign.FILL,
     });
     const sessionTitle = !session.title || session.title === 'Untitled session'
       ? this._('Untitled session') : session.title;
@@ -860,16 +1037,18 @@ var Dashboard = class Dashboard {
       text: sessionTitle,
       style_class: 'codex-monitor-row-title',
       x_expand: true,
+      x_align: Clutter.ActorAlign.START,
     });
+    title.clutter_text.set_line_wrap(true);
+    title.clutter_text.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
     title.clutter_text.set_ellipsize(Pango.EllipsizeMode.END);
-    title.clutter_text.set_single_line_mode(true);
+    title.clutter_text.set_single_line_mode(false);
     const attention = session.attention || [];
     const now = Math.floor(Date.now() / 1000);
-    const status = this._model.sessionStatusText(session, now, this._);
-    const updated = session.updatedAt
-      ? _format(this._('updated %s ago'), this._model.formatDuration(
-        now - Number(session.updatedAt), this._))
-      : this._('update time unavailable');
+    const status = this._model.sessionStatusText(
+      { ...session, activeSince: null }, now, this._
+    );
+    const metrics = this._model.sessionMetrics(session, now);
     const sourceLabels = {
       'CLI': this._('CLI'),
       'VS Code': this._('VS Code'),
@@ -879,16 +1058,83 @@ var Dashboard = class Dashboard {
       'Sub-agent': this._('Sub-agent'),
       'Unknown': this._('Unknown source'),
     };
-    const source = sourceLabels[session.sourceLabel] || this._('Unknown source');
-    const meta = new St.Label({
-      text: `${source} · ${status} · ${updated}`,
-      style_class: 'codex-monitor-secondary',
+    const source = sourceLabels[metrics.sourceLabel] || this._('Unknown source');
+    const header = new St.BoxLayout({
+      vertical: this._compact,
+      style_class: 'codex-monitor-session-card-header',
       x_expand: true,
+      x_align: Clutter.ActorAlign.FILL,
     });
-    meta.clutter_text.set_ellipsize(Pango.EllipsizeMode.END);
-    meta.clutter_text.set_single_line_mode(true);
-    content.add_child(title);
-    content.add_child(meta);
+    const statusLabel = new St.Label({
+      text: status,
+      style_class: attention.length > 0
+        ? 'codex-monitor-session-status codex-monitor-session-status-attention'
+        : 'codex-monitor-session-status',
+      x_align: this._compact
+        ? Clutter.ActorAlign.START : Clutter.ActorAlign.END,
+    });
+    header.add_child(title);
+    header.add_child(statusLabel);
+    content.add_child(header);
+
+    const providerLabels = { openai: 'OpenAI' };
+    const identityParts = [source];
+    if (metrics.cliVersion)
+      identityParts.push(_format(this._('Codex %s'), metrics.cliVersion));
+    if (metrics.modelProvider)
+      identityParts.push(providerLabels[metrics.modelProvider.toLowerCase()] ||
+        metrics.modelProvider);
+    if (metrics.branch)
+      identityParts.push(_format(this._('Branch %s'), metrics.branch));
+    if (metrics.ephemeral)
+      identityParts.push(this._('Temporary'));
+    if (metrics.isSubAgent && metrics.sourceLabel !== 'Sub-agent')
+      identityParts.push(this._('Sub-agent'));
+    if (metrics.agentRole)
+      identityParts.push(_format(this._('Role %s'), metrics.agentRole));
+    if (metrics.agentNickname)
+      identityParts.push(_format(this._('Agent %s'), metrics.agentNickname));
+    if (metrics.shortId)
+      identityParts.push(_format(this._('ID %s'), metrics.shortId));
+
+    const timingParts = [];
+    if (metrics.activeSeconds != null) {
+      timingParts.push(_format(
+        this._('Active %s'),
+        this._model.formatDuration(metrics.activeSeconds, this._)
+      ));
+    }
+    if (metrics.ageSeconds != null) {
+      timingParts.push(metrics.ageSeconds < 60
+        ? this._('Created now')
+        : _format(
+          this._('Created %s ago'),
+          this._model.formatDuration(metrics.ageSeconds, this._)
+        ));
+    }
+    if (metrics.updatedSeconds != null) {
+      timingParts.push(metrics.updatedSeconds < 60
+        ? this._('Updated now')
+        : _format(
+          this._('Updated %s ago'),
+          this._model.formatDuration(metrics.updatedSeconds, this._)
+        ));
+    }
+
+    const addDetailLine = (parts, styleClass) => {
+      if (parts.length === 0)
+        return;
+      const detail = new St.Label({
+        text: parts.join(' · '),
+        style_class: styleClass,
+        x_expand: true,
+        x_align: Clutter.ActorAlign.START,
+      });
+      _enableWrapping(detail);
+      content.add_child(detail);
+    };
+    addDetailLine(identityParts, 'codex-monitor-session-meta');
+    addDetailLine(timingParts, 'codex-monitor-session-timing');
     const row = new St.Button({
       child: content,
       style_class: attention.length > 0
@@ -898,8 +1144,11 @@ var Dashboard = class Dashboard {
       can_focus: true,
       track_hover: true,
       x_expand: true,
+      x_fill: true,
+      x_align: St.Align.START,
       accessible_name: `${sessionProject} · ` +
-        `${sessionTitle} · ${status}`,
+        `${sessionTitle} · ${status} · ${identityParts.join(' · ')}` +
+        `${timingParts.length > 0 ? ` · ${timingParts.join(' · ')}` : ''}`,
     });
     row.connect('clicked', () => this._callbacks.onOpenSession(session));
     return row;
@@ -917,6 +1166,7 @@ var Dashboard = class Dashboard {
     this._remoteLabel.set_text(this._remoteStatus && this._remoteStatus.stale &&
       status !== 'errored'
       ? this._('Status delayed') : labels[status] || this._('Unknown'));
+    _protectNaturalWidth(this._remoteLabel);
     const identity = this._remoteStatus || {};
     const identityParts = [];
     if (identity.serverName)
@@ -1012,6 +1262,7 @@ var Dashboard = class Dashboard {
         clientsState = this._('Not checked');
     }
     this._remoteClientsState.set_text(clientsState);
+    _protectNaturalWidth(this._remoteClientsState);
     this._remoteClientsState.visible = Boolean(clientsState);
     if (status === 'running') {
       this._remoteClientList.add_child(new St.Label({
@@ -1066,7 +1317,12 @@ var Dashboard = class Dashboard {
     });
     const details = new St.BoxLayout({ vertical: true, x_expand: true });
     const name = client.displayName || client.deviceModel || this._('Paired device');
-    details.add_child(new St.Label({ text: name, style_class: 'codex-monitor-row-title' }));
+    const nameLabel = new St.Label({
+      text: name,
+      style_class: 'codex-monitor-row-title',
+    });
+    _enableWrapping(nameLabel);
+    details.add_child(nameLabel);
     const parts = [client.deviceType, client.platform, client.osVersion]
       .filter(Boolean);
     if (client.appVersion)
@@ -1075,16 +1331,23 @@ var Dashboard = class Dashboard {
       parts.push(_format(this._('seen %s ago'), this._model.formatDuration(
         Math.floor(Date.now() / 1000) - Number(client.lastSeenAt), this._)));
     }
-    details.add_child(new St.Label({
+    const detailLabel = new St.Label({
       text: parts.join(' · ') || this._('Device details unavailable'),
       style_class: 'codex-monitor-secondary',
-    }));
+    });
+    _enableWrapping(detailLabel);
+    details.add_child(detailLabel);
     row.add_child(details);
     if (manageable) {
-      row.add_child(_button(
-        this._('Revoke…'),
-        () => this._callbacks.onRemoteRevoke(client)
-      ));
+      const revoke = _button(
+        this._('Revoke'),
+        () => this._callbacks.onRemoteRevoke(client),
+        'codex-monitor-button codex-monitor-remote-revoke'
+      );
+      revoke.x_expand = this._compact;
+      revoke.x_fill = this._compact;
+      revoke.set_x_align(St.Align.MIDDLE);
+      row.add_child(revoke);
     }
     return row;
   }
