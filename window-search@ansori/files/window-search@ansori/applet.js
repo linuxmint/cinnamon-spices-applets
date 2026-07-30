@@ -355,8 +355,8 @@ class WindowSearchApplet extends Applet.Applet {
         });
     }
 
-    _showScriptResults(scriptQuery) {
-        let scripts = this._getScriptFiles();
+    async _showScriptResults(scriptQuery) {
+        let scripts = await this._getScriptFiles();
         let matches = scripts.filter(s => s.name.toLowerCase().includes(scriptQuery));
         matches = matches.slice(0, this.max_results);
 
@@ -408,7 +408,7 @@ class WindowSearchApplet extends Applet.Applet {
         });
     }
 
-    _getScriptFiles() {
+    async _getScriptFiles() {
         let scripts = [];
         if (!this.script_paths) return scripts;
 
@@ -417,9 +417,10 @@ class WindowSearchApplet extends Applet.Applet {
         
         for (let p of pathArray) {
             let resolvedPath = p;
-            if (p.startsWith('~/')) {
+            let prefixHome = "~";
+            if (p.startsWith(prefixHome.concat("/"))) {
                 resolvedPath = GLib.build_filenamev([homeDir, p.slice(2)]);
-            } else if (p === '~') {
+            } else if (p === prefixHome) {
                 resolvedPath = homeDir;
             }
             
@@ -428,16 +429,26 @@ class WindowSearchApplet extends Applet.Applet {
                 let name;
                 while ((name = dir.read_name()) !== null) {
                     let fullPath = GLib.build_filenamev([resolvedPath, name]);
-                    
                     let file = Gio.File.new_for_path(fullPath);
-                    let info = null;
                     
-                    try {
-                        info = file.query_info('standard::type', Gio.FileQueryInfoFlags.NONE, null);
-                    } catch (e) {
-                        // Abaikan jika gagal query info file individual
-                        continue;
-                    }
+                    // Bungkus fungsi async Gio dengan Promise agar await berfungsi dengan benar di CJS
+                    let info = await new Promise((resolve) => {
+                        file.query_info_async(
+                            'standard::type',
+                            Gio.FileQueryInfoFlags.NONE,
+                            GLib.PRIORITY_DEFAULT,
+                            null,
+                            (source_obj, res) => {
+                                try {
+                                    // Wajib menggunakan _finish untuk mengambil hasil dari _async
+                                    let resultInfo = source_obj.query_info_finish(res);
+                                    resolve(resultInfo);
+                                } catch (e) {
+                                    resolve(null); // Jika gagal (misal file dihapus saat dibaca), kembalikan null
+                                }
+                            }
+                        );
+                    });
                     
                     if (info && info.get_file_type() === Gio.FileType.REGULAR) {
                         scripts.push({
