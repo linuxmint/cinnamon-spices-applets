@@ -14,27 +14,8 @@ More than just a window switcher, this applet acts as a spotlight-like productiv
 *   ⚙️ **Highly Customizable:** Configure max results, script paths, search prefixes, and your preferred terminal emulator via the Cinnamon Applet Settings GUI.
 
 ## Preview
-![Preview](preview.png)
+![Preview](screenshot.png)
 
-## 📦 Installation
-
-We provide an installation script to make the process quick and seamless.
-
-1. Clone this repository or download the ZIP file and extract it.
-2. Open your terminal and navigate to the downloaded folder.
-3. Make the installation script executable (if it isn't already):
-   ```bash
-   chmod +x install.sh
-   ```
-4. Run the installation script:
-   ```bash
-   ./install.sh
-   ```
-5. Restart Cinnamon to load the new applet:
-   * Press `Alt + F2`
-   * Type `r` and press `Enter`.
-6. Open the **Applets** application from your Cinnamon menu.
-7. Go to the **Manage** tab, search for "Window Search", select it, and click the **+** (Add) button at the bottom to place it on your panel.
 
 ## 🛠️ Configuration
 
