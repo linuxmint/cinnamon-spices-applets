@@ -26,7 +26,7 @@ class WindowSearchApplet extends Applet.Applet {
         this.custom_icon = "folder";
         this.custom_placeholder = "Search app / calc / run script...";
         this.script_prefix = "sh";
-        this.script_paths = "~/scripts";
+        this.script_paths = GLib.build_filenamev([GLib.get_home_dir(), 'scripts']);
         this.terminal_app = "x-terminal-emulator -e";
 
         try {
@@ -424,13 +424,22 @@ class WindowSearchApplet extends Applet.Applet {
             }
             
             try {
-                // Menggunakan GLib.Dir untuk membaca direktori dengan aman dan instan
                 let dir = GLib.Dir.open(resolvedPath, 0);
                 let name;
                 while ((name = dir.read_name()) !== null) {
                     let fullPath = GLib.build_filenamev([resolvedPath, name]);
-                    // Cek apakah itu file reguler (bukan folder)
-                    if (GLib.file_test(fullPath, GLib.FileTest.IS_REGULAR)) {
+                    
+                    let file = Gio.File.new_for_path(fullPath);
+                    let info = null;
+                    
+                    try {
+                        info = file.query_info('standard::type', Gio.FileQueryInfoFlags.NONE, null);
+                    } catch (e) {
+                        // Abaikan jika gagal query info file individual
+                        continue;
+                    }
+                    
+                    if (info && info.get_file_type() === Gio.FileType.REGULAR) {
                         scripts.push({
                             name: name,
                             path: fullPath
@@ -438,7 +447,7 @@ class WindowSearchApplet extends Applet.Applet {
                     }
                 }
             } catch(e) {
-                // Abaikan jika path folder tidak ditemukan atau belum dibuat
+                // Abaikan jika path folder tidak ditemukan atau gagal dibuka
             }
         }
         return scripts;
