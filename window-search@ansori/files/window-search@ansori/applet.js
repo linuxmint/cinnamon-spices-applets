@@ -32,13 +32,11 @@ class WindowSearchApplet extends Applet.Applet {
         try {
             this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
             
-            // Pengaturan yang TIDAK BOLEH mencuri kursor saat diketik di Settings
             this.settings.bindProperty(Settings.BindingDirection.IN, "max_results", "max_results", this._onSettingUpdated, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "script_prefix", "script_prefix", this._onSettingUpdated, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "script_paths", "script_paths", this._onSettingUpdated, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "terminal_app", "terminal_app", this._onSettingUpdated, null);
             
-            // Pengaturan shortcut & UI
             this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding", "keybinding", this._onKeybindingChanged, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "use_custom_icon", "use_custom_icon", this._onIconChanged, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "icon_preset", "icon_preset", this._onIconChanged, null);
@@ -50,9 +48,6 @@ class WindowSearchApplet extends Applet.Applet {
 
         let initialIcon = this.use_custom_icon ? this.custom_icon : this.icon_preset;
 
-        // ==========================================
-        // LAYOUT: BOX & ICON
-        // ==========================================
         this.mainBox = new St.BoxLayout({ vertical: false });
 
         this.appletIcon = new St.Icon({
@@ -73,10 +68,7 @@ class WindowSearchApplet extends Applet.Applet {
 
         this.mainBox.add_child(this.appletIcon);
         this.mainBox.add_child(this.searchEntry);
-
         this.actor.add_child(this.mainBox); 
-
-        // ==========================================
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -104,10 +96,7 @@ class WindowSearchApplet extends Applet.Applet {
         this._onKeybindingChanged();
     }
 
-    // Dummy function agar nilai variabel ter-update tanpa mengganggu kursor
-    _onSettingUpdated() {
-        // Lakukan tidak ada apa-apa. Cinnamon akan meng-update variabelnya di belakang layar.
-    }
+    _onSettingUpdated() {}
 
     _onIconChanged() {
         let iconToUse = this.use_custom_icon ? this.custom_icon : this.icon_preset;
@@ -403,44 +392,67 @@ class WindowSearchApplet extends Applet.Applet {
         if (!this.script_paths) return scripts;
 
         let pathArray = this.script_paths.split(',').map(p => p.trim()).filter(p => p.length > 0);
+        let homeDir = GLib.get_home_dir();
         
         for (let p of pathArray) {
-            if (p.startsWith('~')) {
-                p = GLib.get_home_dir() + p.slice(1);
+            let resolvedPath = p;
+            if (p.startsWith('~/')) {
+                resolvedPath = GLib.build_filenamev([homeDir, p.slice(2)]);
+            } else if (p === '~') {
+                resolvedPath = homeDir;
             }
             
-            let dir = Gio.File.new_for_path(p);
             try {
-                let enumerator = dir.enumerate_children('standard::name,standard::type', Gio.FileQueryInfoFlags.NONE, null);
-                let info;
-                while ((info = enumerator.next_file(null)) !== null) {
-                    if (info.get_file_type() === Gio.FileType.REGULAR) {
+                // Menggunakan GLib.Dir untuk membaca direktori dengan aman dan instan
+                let dir = GLib.Dir.open(resolvedPath, 0);
+                let name;
+                while ((name = dir.read_name()) !== null) {
+                    let fullPath = GLib.build_filenamev([resolvedPath, name]);
+                    // Cek apakah itu file reguler (bukan folder)
+                    if (GLib.file_test(fullPath, GLib.FileTest.IS_REGULAR)) {
                         scripts.push({
-                            name: info.get_name(),
-                            path: p + '/' + info.get_name()
+                            name: name,
+                            path: fullPath
                         });
                     }
                 }
-            } catch(e) {}
+            } catch(e) {
+                // Abaikan jika path folder tidak ditemukan atau belum dibuat
+            }
         }
         return scripts;
     }
 
     _runScript(path) {
         try {
-            let execCmd = `"${path}"`; 
+            let interpreter = null;
             let ext = path.split('.').pop().toLowerCase();
 
             if (ext === 'py') {
-                execCmd = `python3 "${path}"`;
+                interpreter = 'python3';
             } else if (ext === 'sh') {
-                execCmd = `bash "${path}"`;
+                interpreter = 'bash';
             } else if (ext === 'js') {
-                execCmd = `node "${path}"`;
+                interpreter = 'node';
             }
 
-            let cmd = `${this.terminal_app} ${execCmd}`;
-            GLib.spawn_command_line_async(cmd);
+            // Perbaikan: Menggunakan argument vector (array) untuk menghindari shell injection
+            let terminalCmds = this.terminal_app.split(' ').map(c => c.trim()).filter(c => c.length > 0);
+            let argv = [];
+            
+            if (terminalCmds.length > 0) {
+                argv = argv.concat(terminalCmds);
+            } else {
+                argv.push('x-terminal-emulator', '-e');
+            }
+
+            if (interpreter) {
+                argv.push(interpreter, path);
+            } else {
+                argv.push(path);
+            }
+
+            Util.spawn(argv);
         } catch(e) {
             global.logError(e);
             Main.notify("WindowSearch Error", "Failed to run script: " + path);
@@ -449,7 +461,8 @@ class WindowSearchApplet extends Applet.Applet {
     }
 
     _openSettings() {
-        Util.spawnCommandLine(`cinnamon-settings applets ${this.metadata.uuid} ${this.instance_id}`);
+        // Perbaikan: Menggunakan argument vector untuk membuka pengaturan applet
+        Util.spawn(['cinnamon-settings', 'applets', this.metadata.uuid, this.instance_id.toString()]);
         this.menu.close();
     }
 
