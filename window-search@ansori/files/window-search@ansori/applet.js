@@ -108,16 +108,7 @@ class WindowSearchApplet extends Applet.Applet {
     }
 
     _openAndFocus() {
-        if (!this.menu.isOpen) {
-            this.isUpdatingMenu = true;
-            this._showEmptyMessage();
-            this.menu.open(true); 
-            this.isUpdatingMenu = false;
-        }
-        Mainloop.timeout_add(50, () => {
-            global.stage.set_key_focus(this.searchEntry);
-            return false;
-        });
+        this._searchWindows();
     }
 
     _onKeybindingChanged() {
@@ -127,7 +118,11 @@ class WindowSearchApplet extends Applet.Applet {
         if (this.keybinding) {
             this.keybindingId = this.metadata.uuid + "_" + this.instance_id;
             Main.keybindingManager.addHotKey(this.keybindingId, this.keybinding, () => {
-                this._openAndFocus();
+                if (!this.menu.isOpen) {
+                    this._openAndFocus();
+                } else {
+                    this.menu.close();
+                }
             });
         }
     }
@@ -139,11 +134,77 @@ class WindowSearchApplet extends Applet.Applet {
         this.settings.finalize();
     }
 
-    _showEmptyMessage() {
+    _searchWindows() {
+        let queryRaw = this.searchEntry.get_text();
+        let query = queryRaw.toLowerCase().trim();
+        
+        this.isUpdatingMenu = true; 
+
+        if (!this.menu.isOpen) {
+            this.menu.open(true);
+        }
+
         this.menu.removeAll();
         this.windowItems = [];
-        let emptyItem = new PopupMenu.PopupMenuItem("Type to search app/window...", { reactive: false });
-        this.menu.addMenuItem(emptyItem);
+        this.selectedIndex = -1;
+
+        let windows = [];
+        let n_workspaces = global.workspace_manager.get_n_workspaces();
+        for (let i = 0; i < n_workspaces; i++) {
+            let ws = global.workspace_manager.get_workspace_by_index(i);
+            windows.push(...ws.list_windows());
+        }
+
+        let windowMatches = windows.filter(w => {
+            if (w.is_skip_taskbar() || w.get_window_type() === Meta.WindowType.DESKTOP) return false;
+            let title = w.get_title() ? w.get_title().toLowerCase() : "";
+            let appClass = w.get_wm_class() ? w.get_wm_class().toLowerCase() : "";
+            return title.includes(query) || appClass.includes(query);
+        });
+
+        windowMatches = windowMatches.slice(0, this.max_results);
+
+        if (windowMatches.length > 0) {
+            let tracker = Cinnamon.WindowTracker.get_default();
+
+            windowMatches.forEach((item) => {
+                let menuItem = new PopupMenu.PopupBaseMenuItem();
+                let icon;
+                let labelText = "";
+                let labelStyle = "margin-left: 10px;";
+
+                let app = tracker.get_window_app(item);
+                icon = app ? app.create_icon_texture(22) : new St.Icon({
+                    icon_name: 'application-default-icon',
+                    icon_size: 22,
+                    icon_type: St.IconType.SYMBOLIC
+                });
+                
+                labelText = `[Opened] ${item.get_title() || "Unknown"}`;
+                labelStyle += " font-weight: bold;";
+                
+                menuItem.connect('activate', () => this._activateWindow(item));
+                menuItem.window = item;
+
+                menuItem.addActor(icon);
+                menuItem.addActor(new St.Label({ text: labelText, style: labelStyle }));
+                
+                this.windowItems.push(menuItem);
+                this.menu.addMenuItem(menuItem);
+            });
+
+            this._setSelectedIndex(0);
+        } else {
+            let notFoundItem = new PopupMenu.PopupMenuItem("Type to search app/window...", { reactive: false });
+            this.menu.addMenuItem(notFoundItem);
+        }
+
+        this.isUpdatingMenu = false; 
+
+        Mainloop.timeout_add(50, () => {
+            global.stage.set_key_focus(this.searchEntry);
+            return false;
+        });
     }
 
     _onSearchChange() {
@@ -159,46 +220,6 @@ class WindowSearchApplet extends Applet.Applet {
         this.menu.removeAll();
         this.windowItems = [];
         this.selectedIndex = -1;
-
-        if (query === "") {
-            this._showEmptyMessage();
-            this.isUpdatingMenu = false;
-            global.stage.set_key_focus(this.searchEntry);
-            return;
-        }
-
-        if (query === "config" || query === "setting" || query === "settings") {
-            let menuItem = new PopupMenu.PopupBaseMenuItem();
-            let icon = new St.Icon({
-                icon_name: 'preferences-system',
-                icon_size: 22,
-                icon_type: St.IconType.SYMBOLIC
-            });
-            
-            let label = new St.Label({ 
-                text: "Open Applet Settings", 
-                style: 'margin-left: 10px; font-weight: bold; color: #73d0ff;' 
-            });
-
-            menuItem.addActor(icon);
-            menuItem.addActor(label);
-            menuItem.connect('activate', () => this._openSettings());
-            
-            menuItem.isAction = true;
-            menuItem.actionFunc = () => this._openSettings();
-            
-            this.windowItems.push(menuItem);
-            this.menu.addMenuItem(menuItem);
-            
-            this._setSelectedIndex(0);
-            this.isUpdatingMenu = false; 
-
-            Mainloop.timeout_add(10, () => {
-                global.stage.set_key_focus(this.searchEntry);
-                return false;
-            });
-            return; 
-        }
 
         let isScriptMode = (query === this.script_prefix) || query.startsWith(this.script_prefix + " ");
         if (isScriptMode) {
