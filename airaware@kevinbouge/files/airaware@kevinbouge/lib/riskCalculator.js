@@ -316,10 +316,10 @@ var calculatePollenScore = function(input) {
 };
 
 /**
- * Calculate regulated pollution from pollutant-specific European AQI values.
+ * Calculate regulated pollution from selected pollutant-specific AQI values.
  *
- * Falls back to raw-concentration scoring only when no pollutant AQI values are
- * available.
+ * Falls back to raw-concentration scoring only when no selected pollutant AQI
+ * values are available.
  *
  * @param {Object} input - Object with pollutantAqi and rawPollutants.
  * @returns {Object} Regulated pollution score details.
@@ -327,6 +327,9 @@ var calculatePollenScore = function(input) {
 var calculateRegulatedPollutionScore = function(input) {
     const aqiValues = _copyValues(_pollutantAqiSource(input), RAW_REGULATED_FIELDS);
     const availableAqi = _availableFields(aqiValues, RAW_REGULATED_FIELDS);
+    const aqiSource = input && typeof input.pollutantAqiSource === 'string'
+        ? input.pollutantAqiSource
+        : 'aqi';
 
     if (availableAqi.length > 0) {
         let dominantPollutant = null;
@@ -351,7 +354,7 @@ var calculateRegulatedPollutionScore = function(input) {
             dominant: dominantPollutant,
             availablePollutants: availableAqi,
             pollutantAqiValues: aqiValues,
-            source: 'european-aqi',
+            source: aqiSource,
             completeness: availableAqi.length / RAW_REGULATED_FIELDS.length,
         };
     }

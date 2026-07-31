@@ -13,7 +13,7 @@ AirAware reports environmental conditions only. It does not predict symptoms, di
 - Open-Meteo Air Quality provider isolated in `lib/openMeteoProvider.js`
 - Open-Meteo Weather Forecast provider isolated in `lib/openMeteoWeatherProvider.js`
 - Current conditions from Open-Meteo `current` fields with `timezone=auto`
-- Pollutant-specific European AQI scoring
+- Location-aware pollutant-specific AQI scoring
 - Six pollen types: alder, birch, grass, mugwort, olive, and ragweed
 - Weather-based Mold potential using humidity, leaf wetness, precipitation, temperature, dew point, and wind
 - Atmospheric irritant context from carbon monoxide, aerosol optical depth, dust, and optional wildfire-related PM10 where available
@@ -77,7 +77,7 @@ The AirAware score is an environmental burden index. It combines:
 - 10% atmospheric irritants
 - 15% Mold potential
 
-Pollen burden uses the highest available pollen burden instead of averaging unrelated pollen types. Regulated pollution uses the highest available pollutant-specific European AQI among PM2.5, PM10, NO₂, O₃, and SO₂. Atmospheric irritants include CO, aerosol optical depth, dust, and optional wildfire-related PM10. Mold potential is inferred from humidity, leaf wetness, precipitation, temperature, dew point, and wind. Missing components are omitted and the remaining weights are renormalized. The score is not medical advice.
+Pollen burden uses the highest available pollen burden instead of averaging unrelated pollen types. Regulated pollution uses the highest available pollutant-specific AQI among PM2.5, PM10, NO₂, O₃, and SO₂. AirAware uses US AQI for coordinates in the United States and European AQI elsewhere when available; if selected AQI values are unavailable, it falls back to raw-concentration burden scoring. Atmospheric irritants include CO, aerosol optical depth, dust, and optional wildfire-related PM10. Mold potential is inferred from humidity, leaf wetness, precipitation, temperature, dew point, and wind. Missing components are omitted and the remaining weights are renormalized. The score is not medical advice.
 
 ## Privacy
 
@@ -129,7 +129,7 @@ Place-name attribution: OpenStreetMap contributors.
 - Wildfire-related PM10 may not be available in every region or model.
 - Visibility can be reduced by humidity, cloud, fog, dust, or aerosols and is not a direct pollution measurement.
 - Carbon monoxide, aerosol, and PM10 levels can originate from multiple sources.
-- European AQI values should not be described as medical advice.
+- AQI values should not be described as medical advice.
 - AirAware does not account for personal sensitivity, medication, indoor exposure, masks, activity level, or clinical history.
 
 ## Roadmap

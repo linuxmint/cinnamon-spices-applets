@@ -31,6 +31,14 @@ const POLLUTANT_AQI_SOURCES = Object.freeze({
     ozone: 'european_aqi_ozone',
     sulfurDioxide: 'european_aqi_sulphur_dioxide',
 });
+const EUROPEAN_POLLUTANT_AQI_SOURCES = POLLUTANT_AQI_SOURCES;
+const US_POLLUTANT_AQI_SOURCES = Object.freeze({
+    pm25: 'us_aqi_pm2_5',
+    pm10: 'us_aqi_pm10',
+    nitrogenDioxide: 'us_aqi_nitrogen_dioxide',
+    ozone: 'us_aqi_ozone',
+    sulfurDioxide: 'us_aqi_sulphur_dioxide',
+});
 
 const POLLEN_SOURCES = Object.freeze({
     alder: 'alder_pollen',
@@ -62,12 +70,21 @@ const SOURCE_VARIABLES = Object.freeze([
     'european_aqi_nitrogen_dioxide',
     'european_aqi_ozone',
     'european_aqi_sulphur_dioxide',
+    'us_aqi',
+    'us_aqi_pm2_5',
+    'us_aqi_pm10',
+    'us_aqi_nitrogen_dioxide',
+    'us_aqi_ozone',
+    'us_aqi_sulphur_dioxide',
     'alder_pollen',
     'birch_pollen',
     'grass_pollen',
     'mugwort_pollen',
     'olive_pollen',
     'ragweed_pollen',
+    'pm10_wildfires',
+]);
+const OPTIONAL_SOURCE_VARIABLES = Object.freeze([
     'pm10_wildfires',
 ]);
 
@@ -129,6 +146,69 @@ function _encodeQuery(params) {
     }
 
     return pairs.join('&');
+}
+
+function _sourceVariables(includeOptionalVariables) {
+    if (includeOptionalVariables !== false)
+        return SOURCE_VARIABLES;
+
+    return SOURCE_VARIABLES.filter(variable =>
+        OPTIONAL_SOURCE_VARIABLES.indexOf(variable) === -1
+    );
+}
+
+function _shouldRetryWithoutOptionalVariables(error, statusCode) {
+    if (statusCode === 400)
+        return true;
+
+    if (!error || typeof error.message !== 'string')
+        return false;
+
+    return OPTIONAL_SOURCE_VARIABLES.some(variable =>
+        error.message.indexOf(variable) !== -1
+    );
+}
+
+function _selectedAqiSourceFromCoordinates(latitude, longitude) {
+    if (!_isFiniteNumber(latitude) || !_isFiniteNumber(longitude))
+        return 'european-aqi';
+
+    const isLikelyContiguousUnitedStates =
+        latitude >= 24 &&
+        latitude <= 50 &&
+        longitude >= -125 &&
+        longitude <= -66;
+    const isLikelyAlaska =
+        latitude >= 51 &&
+        latitude <= 72 &&
+        longitude >= -170 &&
+        longitude <= -130;
+    const isLikelyHawaii =
+        latitude >= 18 &&
+        latitude <= 23 &&
+        longitude >= -161 &&
+        longitude <= -154;
+
+    if (isLikelyContiguousUnitedStates || isLikelyAlaska || isLikelyHawaii)
+        return 'us-aqi';
+
+    return 'european-aqi';
+}
+
+function _aqiSourceMetadata(sourceId) {
+    return sourceId === 'us-aqi'
+        ? {
+            id: 'us-aqi',
+            label: 'US AQI',
+            overallSource: 'us_aqi',
+            sources: US_POLLUTANT_AQI_SOURCES,
+        }
+        : {
+            id: 'european-aqi',
+            label: 'EU AQI',
+            overallSource: 'european_aqi',
+            sources: EUROPEAN_POLLUTANT_AQI_SOURCES,
+        };
 }
 
 function _sourceValue(source, sourceName) {
@@ -203,29 +283,40 @@ function _hourlyUnits(payload) {
     return _isObject(payload.hourly_units) ? payload.hourly_units : {};
 }
 
-function _canonicalFromSource(source) {
+function _canonicalFromSource(source, aqiSourceId) {
     const raw = _valuesFromSource(source, RAW_POLLUTANT_SOURCES);
-    const aqi = _valuesFromSource(source, POLLUTANT_AQI_SOURCES);
+    const aqiMetadata = _aqiSourceMetadata(aqiSourceId);
+    const aqi = _valuesFromSource(source, aqiMetadata.sources);
+    const europeanAqi = _valuesFromSource(source, EUROPEAN_POLLUTANT_AQI_SOURCES);
+    const usAqi = _valuesFromSource(source, US_POLLUTANT_AQI_SOURCES);
     const pollen = _valuesFromSource(source, POLLEN_SOURCES);
     const context = _valuesFromSource(source, CONTEXT_SOURCES);
     const overallEuropeanAqi = _sourceValue(source, 'european_aqi');
+    const overallUsAqi = _sourceValue(source, 'us_aqi');
+    const selectedOverallAqi = _sourceValue(source, aqiMetadata.overallSource);
     const readings = _displayReadingsFromSections(raw.values, pollen.values, context.values);
     const missingFields = raw.missingFields
         .concat(aqi.missingFields)
         .concat(pollen.missingFields)
         .concat(context.missingFields)
-        .concat(overallEuropeanAqi === null ? ['overallEuropeanAqi'] : []);
+        .concat(selectedOverallAqi === null ? ['overallAqi'] : []);
     const missingSourceVariables = raw.missingSourceVariables
         .concat(aqi.missingSourceVariables)
         .concat(pollen.missingSourceVariables)
         .concat(context.missingSourceVariables)
-        .concat(overallEuropeanAqi === null ? ['european_aqi'] : []);
+        .concat(selectedOverallAqi === null ? [aqiMetadata.overallSource] : []);
 
     return {
         readings,
         rawPollutants: raw.values,
         pollutantAqi: aqi.values,
+        europeanPollutantAqi: europeanAqi.values,
+        usPollutantAqi: usAqi.values,
+        pollutantAqiSource: aqiMetadata.id,
+        pollutantAqiLabel: aqiMetadata.label,
+        overallAqi: selectedOverallAqi,
         overallEuropeanAqi,
+        overallUsAqi,
         pollen: pollen.values,
         context: context.values,
         missingFields,
@@ -297,9 +388,12 @@ function _seriesFromHourly(hourly, sourceMap) {
     return series;
 }
 
-function _canonicalFromHourlyIndexes(hourly, indexes) {
+function _canonicalFromHourlyIndexes(hourly, indexes, aqiSourceId) {
     const raw = _valuesFromHourlyIndexes(hourly, indexes, RAW_POLLUTANT_SOURCES);
-    const aqi = _valuesFromHourlyIndexes(hourly, indexes, POLLUTANT_AQI_SOURCES);
+    const aqiMetadata = _aqiSourceMetadata(aqiSourceId);
+    const aqi = _valuesFromHourlyIndexes(hourly, indexes, aqiMetadata.sources);
+    const europeanAqi = _valuesFromHourlyIndexes(hourly, indexes, EUROPEAN_POLLUTANT_AQI_SOURCES);
+    const usAqi = _valuesFromHourlyIndexes(hourly, indexes, US_POLLUTANT_AQI_SOURCES);
     const pollen = _valuesFromHourlyIndexes(hourly, indexes, POLLEN_SOURCES);
     const context = _valuesFromHourlyIndexes(hourly, indexes, CONTEXT_SOURCES);
     const readings = _displayReadingsFromSections(raw.values, pollen.values, context.values);
@@ -312,6 +406,10 @@ function _canonicalFromHourlyIndexes(hourly, indexes) {
         readings,
         rawPollutants: raw.values,
         pollutantAqi: aqi.values,
+        europeanPollutantAqi: europeanAqi.values,
+        usPollutantAqi: usAqi.values,
+        pollutantAqiSource: aqiMetadata.id,
+        pollutantAqiLabel: aqiMetadata.label,
         pollen: pollen.values,
         context: context.values,
         sourceValues: {},
@@ -324,7 +422,7 @@ function _canonicalFromHourlyIndexes(hourly, indexes) {
     };
 }
 
-function _parseCurrent(payload) {
+function _parseCurrent(payload, aqiSourceId) {
     if (!_isObject(payload.current)) {
         return {
             time: null,
@@ -336,7 +434,7 @@ function _parseCurrent(payload) {
         };
     }
 
-    const parsed = _canonicalFromSource(payload.current);
+    const parsed = _canonicalFromSource(payload.current, aqiSourceId);
 
     return {
         timestamp: typeof payload.current.time === 'string' ? payload.current.time : null,
@@ -345,7 +443,13 @@ function _parseCurrent(payload) {
         sourceValues: parsed.sourceValues,
         rawPollutants: parsed.rawPollutants,
         pollutantAqi: parsed.pollutantAqi,
+        europeanPollutantAqi: parsed.europeanPollutantAqi,
+        usPollutantAqi: parsed.usPollutantAqi,
+        pollutantAqiSource: parsed.pollutantAqiSource,
+        pollutantAqiLabel: parsed.pollutantAqiLabel,
+        overallAqi: parsed.overallAqi,
         overallEuropeanAqi: parsed.overallEuropeanAqi,
+        overallUsAqi: parsed.overallUsAqi,
         pollen: parsed.pollen,
         context: parsed.context,
         missingFields: parsed.missingFields,
@@ -403,11 +507,11 @@ function _hasAnyReading(readings) {
     return false;
 }
 
-function _parseForecast(payload, forecastDays) {
+function _parseForecast(payload, forecastDays, aqiSourceId) {
     const dayGroups = _groupHourlyIndexesByDate(payload.hourly);
 
     return dayGroups.slice(0, forecastDays).map(day => {
-        const parsed = _canonicalFromHourlyIndexes(payload.hourly, day.indexes);
+        const parsed = _canonicalFromHourlyIndexes(payload.hourly, day.indexes, aqiSourceId);
 
         return {
             date: day.date,
@@ -415,6 +519,10 @@ function _parseForecast(payload, forecastDays) {
             sourceValues: parsed.sourceValues,
             rawPollutants: parsed.rawPollutants,
             pollutantAqi: parsed.pollutantAqi,
+            europeanPollutantAqi: parsed.europeanPollutantAqi,
+            usPollutantAqi: parsed.usPollutantAqi,
+            pollutantAqiSource: parsed.pollutantAqiSource,
+            pollutantAqiLabel: parsed.pollutantAqiLabel,
             pollen: parsed.pollen,
             context: parsed.context,
             missingFields: parsed.missingFields,
@@ -450,11 +558,12 @@ var buildRequestUrl = function(coordinates, options = {}) {
         ? options.timezone
         : 'auto';
 
+    const variables = _sourceVariables(options.includeOptionalVariables);
     const query = _encodeQuery({
         latitude,
         longitude,
-        current: SOURCE_VARIABLES.join(','),
-        hourly: SOURCE_VARIABLES.join(','),
+        current: variables.join(','),
+        hourly: variables.join(','),
         forecast_days: forecastDays,
         timezone,
     });
@@ -499,12 +608,16 @@ var parseOpenMeteoResponse = function(payload, options = {}) {
         throw new Error('Invalid Open-Meteo response: missing current and hourly data');
 
     const forecastDays = _normalizeForecastDays(options.forecastDays);
-    const current = _parseCurrent(payload);
+    const selectedAqiSource = _selectedAqiSourceFromCoordinates(
+        payload.latitude,
+        payload.longitude
+    );
+    const current = _parseCurrent(payload, selectedAqiSource);
 
     if (!_hasAnyReading(current.readings))
         throw new Error('Invalid Open-Meteo response: no usable current readings');
 
-    const forecast = _parseForecast(payload, forecastDays);
+    const forecast = _parseForecast(payload, forecastDays, selectedAqiSource);
     const isForecastPartial = forecast.some(day => day.isPartial);
     const hourly = _isObject(payload.hourly)
         ? {
@@ -512,7 +625,12 @@ var parseOpenMeteoResponse = function(payload, options = {}) {
                 ? payload.hourly.time.filter(time => typeof time === 'string' && time !== '')
                 : [],
             rawPollutants: _seriesFromHourly(payload.hourly, RAW_POLLUTANT_SOURCES),
-            pollutantAqi: _seriesFromHourly(payload.hourly, POLLUTANT_AQI_SOURCES),
+            pollutantAqi: _seriesFromHourly(
+                payload.hourly,
+                _aqiSourceMetadata(selectedAqiSource).sources
+            ),
+            europeanPollutantAqi: _seriesFromHourly(payload.hourly, EUROPEAN_POLLUTANT_AQI_SOURCES),
+            usPollutantAqi: _seriesFromHourly(payload.hourly, US_POLLUTANT_AQI_SOURCES),
             pollen: _seriesFromHourly(payload.hourly, POLLEN_SOURCES),
             context: _seriesFromHourly(payload.hourly, CONTEXT_SOURCES),
         }
@@ -520,6 +638,8 @@ var parseOpenMeteoResponse = function(payload, options = {}) {
             timestamps: [],
             rawPollutants: {},
             pollutantAqi: {},
+            europeanPollutantAqi: {},
+            usPollutantAqi: {},
             pollen: {},
             context: {},
         };
@@ -548,6 +668,8 @@ var parseOpenMeteoResponse = function(payload, options = {}) {
         longitude: metadata.longitude,
         timezone: metadata.timezone,
         utcOffsetSeconds: metadata.utcOffsetSeconds,
+        pollutantAqiSource: selectedAqiSource,
+        pollutantAqiLabel: _aqiSourceMetadata(selectedAqiSource).label,
         current,
         hourly,
         forecast,
@@ -587,6 +709,7 @@ var fetchForecastAsync = function(coordinates, options = {}, callback = null) {
     let url = null;
     let attempt = 0;
     let completed = false;
+    let usingOptionalVariables = true;
 
     function finish(error, data) {
         if (completed)
@@ -610,6 +733,21 @@ var fetchForecastAsync = function(coordinates, options = {}, callback = null) {
 
     function send() {
         const message = Soup.Message.new('GET', url);
+
+        function retryWithoutOptionalVariables(error = null, statusCode = null) {
+            if (!usingOptionalVariables ||
+                options.includeOptionalVariables === false ||
+                !_shouldRetryWithoutOptionalVariables(error, statusCode))
+                return false;
+
+            usingOptionalVariables = false;
+            attempt = 0;
+            url = buildRequestUrl(coordinates, Object.assign({}, options, {
+                includeOptionalVariables: false,
+            }));
+            send();
+            return true;
+        }
 
         session.send_and_read_async(
             message,
@@ -636,6 +774,9 @@ var fetchForecastAsync = function(coordinates, options = {}, callback = null) {
                 }
 
                 if (statusCode < 200 || statusCode >= 300) {
+                    if (retryWithoutOptionalVariables(null, statusCode))
+                        return;
+
                     if (attempt === 0 && _isTransientHttpStatus(statusCode)) {
                         attempt++;
                         send();
@@ -649,6 +790,9 @@ var fetchForecastAsync = function(coordinates, options = {}, callback = null) {
                 try {
                     finish(null, parseOpenMeteoJson(text, options));
                 } catch (error) {
+                    if (retryWithoutOptionalVariables(error, statusCode))
+                        return;
+
                     finish(error, null);
                 }
             }

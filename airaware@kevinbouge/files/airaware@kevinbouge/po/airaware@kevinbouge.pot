@@ -222,10 +222,16 @@ msgstr ""
 msgid "Ragweed"
 msgstr ""
 
-msgid "AQI {value}"
+msgid "{label} {value}"
 msgstr ""
 
-msgid "{raw} - {aqi}"
+msgid "AQI"
+msgstr ""
+
+msgid "US AQI"
+msgstr ""
+
+msgid "EU AQI"
 msgstr ""
 
 msgid "{score}%"

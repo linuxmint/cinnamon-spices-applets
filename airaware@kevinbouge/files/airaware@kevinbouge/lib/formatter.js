@@ -1,11 +1,10 @@
 /* exported setTranslator, resetTranslator, formatCategory, formatPanelLabel,
  * formatScore, formatReading, formatPollen, formatPollutant, formatTimestamp,
  * isStale, formatStaleStatus, formatFieldLabel, formatAerosolOpticalDepth,
- * formatSulfurDioxide, formatCarbonMonoxide, formatEuropeanAqi,
- * formatPollutantWithAqi, formatWeatherUnavailable, formatMoldPotential,
- * formatPercentage, formatTemperature, formatDewPoint, formatWindSpeed,
- * formatWindDirection, formatWindGusts, formatVisibility,
- * formatPollenTypeLabel */
+ * formatSulfurDioxide, formatCarbonMonoxide, formatAqi,
+ * formatWeatherUnavailable, formatMoldPotential, formatPercentage,
+ * formatTemperature, formatDewPoint, formatWindSpeed, formatWindDirection,
+ * formatWindGusts, formatVisibility, formatPollenTypeLabel */
 
 const GLib = imports.gi.GLib;
 
@@ -209,40 +208,23 @@ var formatPollutant = function(value) {
 };
 
 /**
- * Format a pollutant-specific European AQI value.
+ * Format a pollutant-specific AQI value with its selected source label.
  *
- * @param {number} value - European AQI value.
+ * @param {number} value - AQI value.
+ * @param {string} sourceLabel - Display label for the selected AQI source.
  * @returns {string} Formatted AQI value or unavailable text.
  */
-var formatEuropeanAqi = function(value) {
+var formatAqi = function(value, sourceLabel = 'AQI') {
     if (!_isFiniteNumber(value))
         return _translate('Unavailable');
 
-    return _replace(_translate('AQI {value}'), {
+    const label = typeof sourceLabel === 'string' && sourceLabel !== ''
+        ? sourceLabel
+        : 'AQI';
+
+    return _replace(_translate('{label} {value}'), {
+        label: _translate(label),
         value: Math.round(Math.max(0, Math.min(100, value))),
-    });
-};
-
-/**
- * Format raw concentration and pollutant-specific AQI compactly.
- *
- * @param {number} value - Raw pollutant concentration.
- * @param {number} aqi - Pollutant-specific European AQI.
- * @returns {string} Combined pollutant display string.
- */
-var formatPollutantWithAqi = function(value, aqi) {
-    const raw = formatPollutant(value);
-    const aqiText = formatEuropeanAqi(aqi);
-
-    if (!_isFiniteNumber(value))
-        return aqiText;
-
-    if (!_isFiniteNumber(aqi))
-        return raw;
-
-    return _replace(_translate('{raw} - {aqi}'), {
-        raw,
-        aqi: aqiText,
     });
 };
 

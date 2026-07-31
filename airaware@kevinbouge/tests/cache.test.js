@@ -3,6 +3,8 @@
 
 imports.searchPath.unshift('lib');
 
+const ByteArray = imports.byteArray;
+const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 
 const Cache = imports.cache;
@@ -65,6 +67,28 @@ function writeResponse(cache, response) {
     return runAsync(done => cache.writeResponseAsync(response, done));
 }
 
+function writeRawJsonFile(path, text) {
+    return runAsync(done => {
+        const bytes = new GLib.Bytes(ByteArray.fromString(text));
+
+        Gio.File.new_for_path(path).replace_contents_bytes_async(
+            bytes,
+            null,
+            false,
+            Gio.FileCreateFlags.REPLACE_DESTINATION,
+            null,
+            (source, result) => {
+                try {
+                    source.replace_contents_finish(result);
+                    done(null, true);
+                } catch (error) {
+                    done(error, null);
+                }
+            }
+        );
+    });
+}
+
 function tempCacheDirectory(name) {
     return GLib.build_filenamev([
         GLib.get_tmp_dir(),
@@ -124,6 +148,13 @@ function providerResponse() {
         ozone: 14,
         sulfurDioxide: 15,
     };
+    const usPollutantAqi = {
+        pm25: 21,
+        pm10: 22,
+        nitrogenDioxide: 23,
+        ozone: 24,
+        sulfurDioxide: 25,
+    };
     const pollen = {
         alder: 1,
         birch: 2,
@@ -145,6 +176,10 @@ function providerResponse() {
             readings,
             rawPollutants,
             pollutantAqi,
+            europeanPollutantAqi: pollutantAqi,
+            usPollutantAqi,
+            pollutantAqiSource: 'european-aqi',
+            pollutantAqiLabel: 'EU AQI',
             pollen,
             context,
             moldPotential: {
@@ -166,6 +201,10 @@ function providerResponse() {
                 readings,
                 rawPollutants,
                 pollutantAqi,
+                europeanPollutantAqi: pollutantAqi,
+                usPollutantAqi,
+                pollutantAqiSource: 'european-aqi',
+                pollutantAqiLabel: 'EU AQI',
                 pollen,
                 context,
                 moldPotential: null,
@@ -264,6 +303,10 @@ function testResponseRoundTrip() {
             'sulfur dioxide should round trip');
         assertEqual(envelope.data.weatherFetchedAt, 1785446000000,
             'weather timestamp should round trip independently');
+        assertEqual(envelope.data.current.usPollutantAqi.ozone, 24,
+            'US pollutant AQI should round trip');
+        assertEqual(envelope.data.current.pollutantAqiSource, 'european-aqi',
+            'selected AQI source should round trip');
     } finally {
         removeDirectory(directory);
     }
@@ -398,8 +441,8 @@ function testResponseWithoutReadingsIsInvalid() {
     }
 }
 
-function testWrongResponseCacheVersionReturnsNull() {
-    const directory = tempCacheDirectory('wrong-response-version');
+function testPreviousResponseCacheVersionMigrates() {
+    const directory = tempCacheDirectory('previous-response-version');
 
     try {
         const cache = Cache.createCache({
@@ -410,7 +453,7 @@ function testWrongResponseCacheVersionReturnsNull() {
             'response.json',
         ]);
 
-        GLib.file_set_contents(
+        writeRawJsonFile(
             filePath,
             JSON.stringify({
                 version: 1,
@@ -418,9 +461,89 @@ function testWrongResponseCacheVersionReturnsNull() {
                 data: providerResponse(),
             })
         );
+        const envelope = readResponse(cache);
 
-        assertEqual(readResponse(cache), null,
-            'wrong response cache versions should not load');
+        assertNotNull(envelope,
+            'previous response cache versions should migrate when data is usable');
+        assertEqual(envelope.version, 5,
+            'migrated response cache should expose the current schema version');
+        assertEqual(envelope.migratedFromVersion, 1,
+            'migrated response cache should expose the source schema version');
+        assertEqual(envelope.data.current.readings.pm10, 5,
+            'migrated response cache should preserve readings');
+        assertEqual(envelope.data.current.europeanPollutantAqi.pm10, 12,
+            'migrated response cache should preserve European AQI values');
+        assertEqual(envelope.data.current.usPollutantAqi.pm10, 22,
+            'migrated response cache should preserve US AQI values when present');
+    } finally {
+        removeDirectory(directory);
+    }
+}
+
+function testPreviousFlatResponseCacheVersionMigrates() {
+    const directory = tempCacheDirectory('previous-flat-response-version');
+
+    try {
+        const cache = Cache.createCache({
+            baseDirectory: directory,
+        });
+        const filePath = GLib.build_filenamev([
+            directory,
+            'response.json',
+        ]);
+
+        writeRawJsonFile(
+            filePath,
+            JSON.stringify({
+                version: 1,
+                savedAt: 1785445000000,
+                data: {
+                    provider: 'open-meteo',
+                    fetchedAt: 1785445000000,
+                    current: {
+                        readings: {
+                            treePollen: 4,
+                            grassPollen: 3,
+                            weedPollen: 2,
+                            pm25: 6,
+                            pm10: 8,
+                            nitrogenDioxide: 10,
+                            ozone: 12,
+                            dust: 1,
+                        },
+                    },
+                    forecast: [
+                        {
+                            date: '2026-07-30',
+                            readings: {
+                                grassPollen: 3,
+                                pm10: 8,
+                            },
+                        },
+                    ],
+                },
+            })
+        );
+        const envelope = readResponse(cache);
+
+        assertNotNull(envelope,
+            'previous flat response cache should migrate when it has usable readings');
+        assertEqual(envelope.data.current.rawPollutants.pm10, 8,
+            'migrated flat response should populate raw pollutant fields');
+        assertEqual(envelope.data.current.pollutantAqi.pm10, null,
+            'missing AQI values should migrate as null');
+        assertEqual(envelope.data.current.europeanPollutantAqi.pm10, null,
+            'missing European AQI values should migrate as null');
+        assertEqual(envelope.data.current.usPollutantAqi.pm10, null,
+            'missing US AQI values should migrate as null');
+        assertEqual(envelope.data.current.pollutantAqiSource, 'european-aqi',
+            'flat migrated response should default to European AQI source');
+        assertEqual(envelope.data.current.pollen.grass, 3,
+            'migrated flat response should preserve grass pollen when available');
+        assertEqual(envelope.data.current.context.dust, 1,
+            'migrated flat response should populate context fields');
+        assertEqual(envelope.data.weather, null,
+            'missing weather data should migrate as null');
     } finally {
         removeDirectory(directory);
     }
@@ -518,7 +641,7 @@ function testInvalidCoordinateCacheFileReturnsNull() {
             'coordinates.json',
         ]);
 
-        GLib.file_set_contents(
+        writeRawJsonFile(
             filePath,
             '{"version":1,"savedAt":1,"data":{"latitude":"bad"}}',
         );
@@ -542,7 +665,7 @@ function testMalformedResponseCacheFileReturnsNull() {
             'response.json',
         ]);
 
-        GLib.file_set_contents(
+        writeRawJsonFile(
             filePath,
             '{"version":1,"savedAt":1,"data":',
         );
@@ -566,7 +689,7 @@ function testWrongEnvelopeVersionReturnsNull() {
             'response.json',
         ]);
 
-        GLib.file_set_contents(
+        writeRawJsonFile(
             filePath,
             JSON.stringify({
                 version: 999,
@@ -594,7 +717,8 @@ function main() {
         testResponseWithoutCanonicalFieldsIsInvalid,
         testResponseWithoutStructuredCurrentFieldsIsInvalid,
         testResponseWithMalformedStructuredCurrentValueIsInvalid,
-        testWrongResponseCacheVersionReturnsNull,
+        testPreviousResponseCacheVersionMigrates,
+        testPreviousFlatResponseCacheVersionMigrates,
         testInvalidCoordinateCacheFileReturnsNull,
         testMalformedResponseCacheFileReturnsNull,
         testWrongEnvelopeVersionReturnsNull,

@@ -988,11 +988,11 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this._addPollenRows(pollen);
 
         this._addSectionTitle(_('Regulated pollution'));
-        this._addPollutantAqiRow(_('PM2.5'), rawPollutants.pm25, pollutantAqi.pm25);
-        this._addPollutantAqiRow(_('PM10'), rawPollutants.pm10, pollutantAqi.pm10);
-        this._addPollutantAqiRow(_('NO₂'), rawPollutants.nitrogenDioxide, pollutantAqi.nitrogenDioxide);
-        this._addPollutantAqiRow(_('O₃'), rawPollutants.ozone, pollutantAqi.ozone);
-        this._addPollutantAqiRow(_('SO₂'), rawPollutants.sulfurDioxide, pollutantAqi.sulfurDioxide);
+        this._addPollutantAqiRow(_('PM2.5'), rawPollutants.pm25, pollutantAqi.pm25, current.pollutantAqiLabel);
+        this._addPollutantAqiRow(_('PM10'), rawPollutants.pm10, pollutantAqi.pm10, current.pollutantAqiLabel);
+        this._addPollutantAqiRow(_('NO₂'), rawPollutants.nitrogenDioxide, pollutantAqi.nitrogenDioxide, current.pollutantAqiLabel);
+        this._addPollutantAqiRow(_('O₃'), rawPollutants.ozone, pollutantAqi.ozone, current.pollutantAqiLabel);
+        this._addPollutantAqiRow(_('SO₂'), rawPollutants.sulfurDioxide, pollutantAqi.sulfurDioxide, current.pollutantAqiLabel);
 
         this._addSectionTitle(_('Atmospheric irritants'));
         this._addInfoRow(_('CO'), Formatter.formatCarbonMonoxide(rawPollutants.carbonMonoxide));
@@ -1210,7 +1210,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this.menu.addMenuItem(item);
     }
 
-    _addPollutantAqiRow(label, rawValue, aqiValue) {
+    _addPollutantAqiRow(label, rawValue, aqiValue, aqiSourceLabel) {
         const item = new PopupMenu.PopupBaseMenuItem({
             reactive: false,
         });
@@ -1226,7 +1226,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
             style_class: 'airaware-pollutant-value',
         });
         const aqiActor = new St.Label({
-            text: Formatter.formatEuropeanAqi(aqiValue),
+            text: Formatter.formatAqi(aqiValue, aqiSourceLabel),
             style_class: 'airaware-aqi-value',
         });
 

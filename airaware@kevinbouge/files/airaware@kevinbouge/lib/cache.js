@@ -5,7 +5,7 @@ const ByteArray = imports.byteArray;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 
-const RESPONSE_CACHE_VERSION = 4;
+const RESPONSE_CACHE_VERSION = 5;
 const STABLE_CACHE_VERSION = 1;
 const DEFAULT_NAMESPACE = 'airaware';
 const COORDINATES_FILE = 'coordinates.json';
@@ -101,11 +101,137 @@ function _hasNullableNumericFields(values, fields) {
     return true;
 }
 
+function _nullableNumber(value) {
+    return _isFiniteNumber(value) ? value : null;
+}
+
+function _canonicalNullableFields(source, fields, fallback = {}) {
+    let values = {};
+
+    for (const field of fields) {
+        const sourceValue = _isObject(source) &&
+            Object.prototype.hasOwnProperty.call(source, field)
+            ? source[field]
+            : fallback[field];
+
+        values[field] = _nullableNumber(sourceValue);
+    }
+
+    return values;
+}
+
+function _canonicalReadings(readings) {
+    return _canonicalNullableFields(readings, REQUIRED_READING_FIELDS);
+}
+
+function _migrateEnvironmentalPoint(point) {
+    if (!_isObject(point) || !_isObject(point.readings))
+        return point;
+
+    const readings = _canonicalReadings(point.readings);
+    const rawPollutants = _canonicalNullableFields(
+        point.rawPollutants,
+        RAW_POLLUTANT_FIELDS,
+        {
+            pm25: readings.pm25,
+            pm10: readings.pm10,
+            nitrogenDioxide: readings.nitrogenDioxide,
+            ozone: readings.ozone,
+            sulfurDioxide: readings.sulfurDioxide,
+            carbonMonoxide: readings.carbonMonoxide,
+        }
+    );
+    const pollutantAqi = _canonicalNullableFields(
+        point.pollutantAqi,
+        POLLUTANT_AQI_FIELDS
+    );
+    const europeanPollutantAqi = _canonicalNullableFields(
+        point.europeanPollutantAqi,
+        POLLUTANT_AQI_FIELDS,
+        pollutantAqi
+    );
+    const usPollutantAqi = _canonicalNullableFields(
+        point.usPollutantAqi,
+        POLLUTANT_AQI_FIELDS
+    );
+    const pollen = _canonicalNullableFields(
+        point.pollen,
+        POLLEN_FIELDS,
+        {
+            grass: readings.grassPollen,
+        }
+    );
+    const context = _canonicalNullableFields(
+        point.context,
+        CONTEXT_FIELDS,
+        {
+            aerosolOpticalDepth: readings.aerosolOpticalDepth,
+            dust: readings.dust,
+            wildfirePm10: readings.wildfirePm10,
+        }
+    );
+    let migrated = {};
+
+    for (const key in point)
+        migrated[key] = point[key];
+
+    migrated.readings = readings;
+    migrated.rawPollutants = rawPollutants;
+    migrated.pollutantAqi = pollutantAqi;
+    migrated.europeanPollutantAqi = europeanPollutantAqi;
+    migrated.usPollutantAqi = usPollutantAqi;
+    migrated.pollutantAqiSource = typeof migrated.pollutantAqiSource === 'string'
+        ? migrated.pollutantAqiSource
+        : 'european-aqi';
+    migrated.pollutantAqiLabel = typeof migrated.pollutantAqiLabel === 'string'
+        ? migrated.pollutantAqiLabel
+        : 'EU AQI';
+    migrated.pollen = pollen;
+    migrated.context = context;
+
+    if (!Object.prototype.hasOwnProperty.call(migrated, 'moldPotential'))
+        migrated.moldPotential = null;
+
+    return migrated;
+}
+
+function _migrateProviderResponse(response) {
+    if (!_isObject(response))
+        return response;
+
+    let migrated = {};
+
+    for (const key in response)
+        migrated[key] = response[key];
+
+    migrated.current = _migrateEnvironmentalPoint(response.current);
+    migrated.forecast = Array.isArray(response.forecast)
+        ? response.forecast.map(_migrateEnvironmentalPoint)
+        : [];
+    migrated.weather = _isValidWeatherResponse(response.weather || null)
+        ? response.weather || null
+        : null;
+    migrated.airQualityFetchedAt = _isFiniteNumber(response.airQualityFetchedAt)
+        ? response.airQualityFetchedAt
+        : response.fetchedAt;
+    migrated.weatherFetchedAt = _isFiniteNumber(response.weatherFetchedAt)
+        ? response.weatherFetchedAt
+        : migrated.weather && _isFiniteNumber(migrated.weather.fetchedAt)
+            ? migrated.weather.fetchedAt
+            : null;
+
+    return migrated;
+}
+
 function _isValidEnvironmentalPoint(point) {
     return _isObject(point) &&
         _hasCanonicalReadingFields(point.readings) &&
         _hasNullableNumericFields(point.rawPollutants, RAW_POLLUTANT_FIELDS) &&
         _hasNullableNumericFields(point.pollutantAqi, POLLUTANT_AQI_FIELDS) &&
+        _hasNullableNumericFields(point.europeanPollutantAqi, POLLUTANT_AQI_FIELDS) &&
+        _hasNullableNumericFields(point.usPollutantAqi, POLLUTANT_AQI_FIELDS) &&
+        typeof point.pollutantAqiSource === 'string' &&
+        typeof point.pollutantAqiLabel === 'string' &&
         _hasNullableNumericFields(point.pollen, POLLEN_FIELDS) &&
         _hasNullableNumericFields(point.context, CONTEXT_FIELDS);
 }
@@ -271,19 +397,48 @@ function _readEnvelopeAsync(path, validator, callback) {
     return _readVersionedEnvelopeAsync(path, validator, STABLE_CACHE_VERSION, callback);
 }
 
-function _readVersionedEnvelopeAsync(path, validator, targetVersion, callback) {
+function _readVersionedEnvelopeAsync(path, validator, targetVersion, callback, migrator = null) {
     return _readJsonFileAsync(path, (error, envelope) => {
-        if (error || !_isObject(envelope) || envelope.version !== targetVersion) {
+        if (error || !_isObject(envelope)) {
             callback(null, null);
             return;
         }
 
-        if (!_isFiniteNumber(envelope.savedAt) || !validator(envelope.data)) {
+        if (!_isFiniteNumber(envelope.savedAt)) {
             callback(null, null);
             return;
         }
 
-        callback(null, envelope);
+        if (envelope.version === targetVersion) {
+            if (!validator(envelope.data)) {
+                callback(null, null);
+                return;
+            }
+
+            callback(null, envelope);
+            return;
+        }
+
+        if (typeof migrator !== 'function' ||
+            !_isFiniteNumber(envelope.version) ||
+            envelope.version >= targetVersion) {
+            callback(null, null);
+            return;
+        }
+
+        const migratedData = migrator(envelope.data);
+
+        if (!validator(migratedData)) {
+            callback(null, null);
+            return;
+        }
+
+        callback(null, {
+            version: targetVersion,
+            savedAt: envelope.savedAt,
+            data: migratedData,
+            migratedFromVersion: envelope.version,
+        });
     });
 }
 
@@ -456,7 +611,8 @@ var createCache = function(options = {}) {
                 responsePath,
                 isValidProviderResponse,
                 RESPONSE_CACHE_VERSION,
-                callback
+                callback,
+                _migrateProviderResponse
             );
         },
 

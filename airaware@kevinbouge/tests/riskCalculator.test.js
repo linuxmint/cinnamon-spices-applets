@@ -120,8 +120,9 @@ function testAllUnavailablePollenIsUnavailable() {
         'pollen result should be unavailable with no pollen data');
 }
 
-function testRegulatedPollutionUsesMaximumEuropeanAqi() {
+function testRegulatedPollutionUsesMaximumSelectedAqi() {
     const result = RiskCalculator.calculateRegulatedPollutionScore({
+        pollutantAqiSource: 'us-aqi',
         pollutantAqi: {
             pm25: 18,
             pm10: 21,
@@ -139,10 +140,10 @@ function testRegulatedPollutionUsesMaximumEuropeanAqi() {
     });
 
     assertEqual(result.score, 68,
-        'maximum pollutant-specific European AQI should determine pollution score');
+        'maximum selected pollutant-specific AQI should determine pollution score');
     assertEqual(result.dominantPollutant, 'ozone',
         'dominant pollutant should be returned');
-    assertEqual(result.source, 'european-aqi',
+    assertEqual(result.source, 'us-aqi',
         'AQI scoring source should be exposed');
 }
 
@@ -205,7 +206,7 @@ function testNoInvalidAqiRawMixing() {
 
     assertEqual(result.score, 22,
         'available AQI should not be mixed with unrelated raw concentration values');
-    assertEqual(result.source, 'european-aqi',
+    assertEqual(result.source, 'aqi',
         'partial AQI data should still use AQI source only');
 }
 
@@ -352,7 +353,7 @@ function main() {
         testSixPollenTypesUseHighestBurden,
         testUnavailablePollenTypesAreIgnored,
         testAllUnavailablePollenIsUnavailable,
-        testRegulatedPollutionUsesMaximumEuropeanAqi,
+        testRegulatedPollutionUsesMaximumSelectedAqi,
         testRegulatedPollutionIgnoresMissingAqi,
         testRegulatedPollutionFallsBackToRawConcentration,
         testNoInvalidAqiRawMixing,

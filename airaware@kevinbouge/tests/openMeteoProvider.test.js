@@ -56,12 +56,14 @@ function createMockSession(results) {
     return {
         timeout: 0,
         attempts: 0,
+        urls: [],
 
         send_and_read_async(message, priority, cancellable, callback) {
             const index = this.attempts;
             const result = results[index] || results[results.length - 1];
 
             this.attempts++;
+            this.urls.push(message.get_uri().to_string());
             message.get_status = () => result.status || 200;
             GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
                 callback(this, {
@@ -119,6 +121,12 @@ function normalPayload() {
             european_aqi_nitrogen_dioxide: 12,
             european_aqi_ozone: 42,
             european_aqi_sulphur_dioxide: 8,
+            us_aqi: 55,
+            us_aqi_pm2_5: 32,
+            us_aqi_pm10: 18,
+            us_aqi_nitrogen_dioxide: 9,
+            us_aqi_ozone: 55,
+            us_aqi_sulphur_dioxide: 6,
             alder_pollen: 4,
             birch_pollen: 28,
             olive_pollen: 8,
@@ -149,6 +157,12 @@ function normalPayload() {
             european_aqi_nitrogen_dioxide: [8, 12, 10, 15, 9],
             european_aqi_ozone: [20, 42, 28, 38, 22],
             european_aqi_sulphur_dioxide: [4, 8, 10, 13, 6],
+            us_aqi: [24, 55, 38, 50, 30],
+            us_aqi_pm2_5: [18, 32, 36, 40, 22],
+            us_aqi_pm10: [10, 18, 25, 30, 20],
+            us_aqi_nitrogen_dioxide: [6, 9, 8, 11, 7],
+            us_aqi_ozone: [24, 55, 38, 50, 30],
+            us_aqi_sulphur_dioxide: [3, 6, 8, 10, 4],
             alder_pollen: [1, 4, 3, 2, 1],
             birch_pollen: [20, 28, 18, 14, 10],
             olive_pollen: [5, 8, 6, 5, 3],
@@ -188,8 +202,24 @@ function testBuildRequestUrl() {
         'request URL should use provider-local timezone');
     assertTrue(url.indexOf('european_aqi_pm2_5') !== -1,
         'request URL should include pollutant-specific European AQI');
+    assertTrue(url.indexOf('us_aqi_pm2_5') !== -1,
+        'request URL should include pollutant-specific US AQI');
     assertTrue(url.indexOf('pm10_wildfires') !== -1,
         'request URL should include optional wildfire PM10');
+}
+
+function testBuildRequestUrlCanExcludeOptionalVariables() {
+    const url = OpenMeteoProvider.buildRequestUrl({
+        latitude: 50.08,
+        longitude: 14.44,
+    }, {
+        includeOptionalVariables: false,
+    });
+
+    assertTrue(url.indexOf('pm10_wildfires') === -1,
+        'request URL should omit optional wildfire PM10 when disabled');
+    assertTrue(url.indexOf('pm2_5') !== -1,
+        'request URL should keep required pollutant fields when optional variables are disabled');
 }
 
 function testBuildRequestUrlNormalizesForecastDays() {
@@ -246,15 +276,29 @@ function testNormalApiResponse() {
     assertEqual(result.current.rawPollutants.sulfurDioxide, 12,
         'raw pollutant structure should include sulfur dioxide');
     assertEqual(result.current.pollutantAqi.ozone, 42,
-        'pollutant-specific European AQI should be parsed');
+        'European coordinates should select European pollutant-specific AQI');
+    assertEqual(result.current.europeanPollutantAqi.ozone, 42,
+        'European pollutant-specific AQI should be preserved');
+    assertEqual(result.current.usPollutantAqi.ozone, 55,
+        'US pollutant-specific AQI should be preserved');
+    assertEqual(result.current.pollutantAqiSource, 'european-aqi',
+        'European coordinates should expose European AQI source');
+    assertEqual(result.current.pollutantAqiLabel, 'EU AQI',
+        'European coordinates should expose compact EU AQI label');
     assertEqual(result.current.overallEuropeanAqi, 42,
         'overall European AQI should be parsed for display/diagnostics');
+    assertEqual(result.current.overallUsAqi, 55,
+        'overall US AQI should be parsed for display/diagnostics');
+    assertEqual(result.current.overallAqi, 42,
+        'selected overall AQI should follow the selected source');
     assertEqual(result.current.context.wildfirePm10, 1.2,
         'optional wildfire PM10 should be parsed when present');
     assertEqual(result.hourly.timestamps.length, 5,
         'hourly timestamps should be preserved');
     assertEqual(result.hourly.pollutantAqi.pm10[3], 28,
-        'hourly pollutant AQI arrays should be preserved');
+        'hourly selected pollutant AQI arrays should be preserved');
+    assertEqual(result.hourly.usPollutantAqi.pm10[3], 30,
+        'hourly US pollutant AQI arrays should be preserved');
     assertEqual(result.forecast.length, 3,
         'forecast should contain requested number of days');
     assertEqual(result.forecast[1].readings.grassPollen, 45,
@@ -267,6 +311,50 @@ function testNormalApiResponse() {
         'daily forecast should use max hourly pollutant AQI value for the day');
     assertEqual(result.isPartial, false,
         'complete response should not be partial');
+}
+
+function testUsCoordinatesSelectUsAqi() {
+    const payload = normalPayload();
+
+    payload.latitude = 39.76;
+    payload.longitude = -104.99;
+
+    const result = OpenMeteoProvider.parseOpenMeteoResponse(payload, {
+        forecastDays: 2,
+    });
+
+    assertEqual(result.pollutantAqiSource, 'us-aqi',
+        'US coordinates should select US AQI');
+    assertEqual(result.current.pollutantAqiSource, 'us-aqi',
+        'current result should expose US AQI source');
+    assertEqual(result.current.pollutantAqiLabel, 'US AQI',
+        'current result should expose US AQI label');
+    assertEqual(result.current.pollutantAqi.ozone, 55,
+        'current selected pollutant AQI should use US AQI values');
+    assertEqual(result.current.europeanPollutantAqi.ozone, 42,
+        'European AQI values should remain available for diagnostics');
+    assertEqual(result.current.overallAqi, 55,
+        'selected overall AQI should use US AQI for US coordinates');
+    assertEqual(result.forecast[1].pollutantAqi.pm25, 40,
+        'forecast selected pollutant AQI should use max hourly US AQI values');
+    assertEqual(result.forecast[1].pollutantAqiSource, 'us-aqi',
+        'forecast result should expose US AQI source');
+}
+
+function testMexicoCoordinatesDoNotSelectUsAqi() {
+    const payload = normalPayload();
+
+    payload.latitude = 19.43;
+    payload.longitude = -99.13;
+
+    const result = OpenMeteoProvider.parseOpenMeteoResponse(payload, {
+        forecastDays: 1,
+    });
+
+    assertEqual(result.pollutantAqiSource, 'european-aqi',
+        'Mexico coordinates should not automatically select US AQI');
+    assertEqual(result.current.pollutantAqi.ozone, 42,
+        'Mexico fallback should use European AQI when no local AQI is selected');
 }
 
 function testMissingPollen() {
@@ -560,6 +648,57 @@ function testFetchRetriesTransientHttpStatusOnce() {
         throw callbackError;
 }
 
+function testFetchRetriesWithoutOptionalVariables() {
+    const loop = new GLib.MainLoop(null, false);
+    const session = createMockSession([
+        {
+            status: 400,
+            bytes: bytesFromJson({
+                error: true,
+                reason: 'Variable pm10_wildfires is not valid',
+            }),
+        },
+        {
+            status: 200,
+            bytes: bytesFromJson(normalPayload()),
+        },
+    ]);
+    let callbackCalled = false;
+    let callbackError = null;
+
+    OpenMeteoProvider.fetchForecastAsync({
+        latitude: 50.08,
+        longitude: 14.44,
+    }, {
+        session,
+    }, (error, data) => {
+        callbackCalled = true;
+
+        try {
+            assertEqual(error, null,
+                'optional-variable rejection should retry without optional variables');
+            assertEqual(data.provider, 'open-meteo',
+                'optional-variable fallback should parse successful response');
+            assertEqual(session.attempts, 2,
+                'optional-variable rejection should issue one fallback request');
+            assertTrue(session.urls[0].indexOf('pm10_wildfires') !== -1,
+                'initial request should include optional wildfire PM10');
+            assertTrue(session.urls[1].indexOf('pm10_wildfires') === -1,
+                'fallback request should omit optional wildfire PM10');
+        } catch (error) {
+            callbackError = error;
+        }
+
+        loop.quit();
+    });
+
+    if (!callbackCalled)
+        runLoopWithTimeout(loop, 'optional-variable fallback test timed out');
+
+    if (callbackError)
+        throw callbackError;
+}
+
 function testFetchDoesNotRetryClientHttpStatus() {
     const loop = new GLib.MainLoop(null, false);
     const session = createMockSession([
@@ -584,8 +723,10 @@ function testFetchDoesNotRetryClientHttpStatus() {
                 'HTTP 400 should be returned as provider error');
             assertEqual(data, null,
                 'HTTP 400 should not return data');
-            assertEqual(session.attempts, 1,
-                'HTTP 400 should not be retried');
+            assertEqual(session.attempts, 2,
+                'HTTP 400 should be retried once without optional variables before failing');
+            assertTrue(session.urls[1].indexOf('pm10_wildfires') === -1,
+                'HTTP 400 fallback should omit optional wildfire PM10');
         } catch (error) {
             callbackError = error;
         }
@@ -603,8 +744,11 @@ function testFetchDoesNotRetryClientHttpStatus() {
 function main() {
     const tests = [
         testBuildRequestUrl,
+        testBuildRequestUrlCanExcludeOptionalVariables,
         testBuildRequestUrlNormalizesForecastDays,
         testNormalApiResponse,
+        testUsCoordinatesSelectUsAqi,
+        testMexicoCoordinatesDoNotSelectUsAqi,
         testMissingPollen,
         testMissingAtmosphericIrritantsRemainPartial,
         testMalformedAtmosphericValuesNormalizeToNull,
@@ -615,6 +759,7 @@ function main() {
         testFetchRetriesTransportFailureOnce,
         testFetchCancelCompletesCallback,
         testFetchRetriesTransientHttpStatusOnce,
+        testFetchRetriesWithoutOptionalVariables,
         testFetchDoesNotRetryClientHttpStatus,
     ];
 

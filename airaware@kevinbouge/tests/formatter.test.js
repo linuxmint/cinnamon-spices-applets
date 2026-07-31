@@ -72,12 +72,12 @@ function testReadingFormatting() {
         'aerosol optical depth should use two decimal places');
     assertEqual(Formatter.formatCarbonMonoxide(156.7), '157 µg/m³',
         'carbon monoxide should use whole-number pollutant formatting');
-    assertEqual(Formatter.formatPollutantWithAqi(18.4, 38), '18.4 µg/m³ - AQI 38',
-        'pollutant plus AQI should format compactly');
-    assertEqual(Formatter.formatPollutantWithAqi(null, 38), 'AQI 38',
-        'AQI should display when raw pollutant is missing');
-    assertEqual(Formatter.formatEuropeanAqi(140), 'AQI 100',
+    assertEqual(Formatter.formatAqi(140), 'AQI 100',
         'AQI display should clamp to the AirAware score range');
+    assertEqual(Formatter.formatAqi(42, 'US AQI'), 'US AQI 42',
+        'AQI display should include the selected source label');
+    assertEqual(Formatter.formatAqi(42, 'EU AQI'), 'EU AQI 42',
+        'AQI display should support compact EU AQI label');
     assertEqual(Formatter.formatReading(null, 'µg/m³'), 'Unavailable',
         'missing value should be unavailable');
     assertEqual(Formatter.formatReading(-2, 'µg/m³'), '0 µg/m³',
