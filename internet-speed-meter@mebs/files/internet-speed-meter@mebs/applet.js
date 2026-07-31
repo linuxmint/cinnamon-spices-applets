@@ -1,7 +1,7 @@
 const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
-const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 
 const UUID = "internet-speed-meter@mebs";
 
@@ -18,6 +18,8 @@ class InternetSpeedMeter extends Applet.TextApplet {
         this._lastTime = 0;
         this._loopId = 0;
         this._initialized = false;
+        this._sampling = false;
+        this._detecting = false;
         this._lastLabel = "";
         this._appliedStyle = null;
 
@@ -39,29 +41,37 @@ class InternetSpeedMeter extends Applet.TextApplet {
             this._iface = this._defaultInterface;
             return;
         }
-        try {
-            let [, content] = GLib.file_get_contents("/proc/net/route");
-            if (!content) return;
-            let lines = imports.byteArray.toString(content).split("\n");
-            for (let i = 1; i < lines.length; i++) {
-                let parts = lines[i].trim().split(/\s+/);
-                if (parts.length >= 2 && parts[1] === "00000000") {
-                    this._iface = parts[0];
-                    return;
+        if (this._detecting) return;
+        this._detecting = true;
+        let file = Gio.File.new_for_path("/proc/net/route");
+        file.load_contents_async(null, (source, res) => {
+            this._detecting = false;
+            try {
+                let [, content] = source.load_contents_finish(res);
+                let lines = imports.byteArray.toString(content).split("\n");
+                for (let i = 1; i < lines.length; i++) {
+                    let parts = lines[i].trim().split(/\s+/);
+                    if (parts.length >= 2 && parts[1] === "00000000") {
+                        this._iface = parts[0];
+                        return;
+                    }
                 }
+            } catch (e) {
+                global.logError("SpeedMeter: failed to detect interface: " + e);
             }
-        } catch (e) {
-            global.logError("SpeedMeter: failed to detect interface: " + e);
-        }
+        });
     }
 
-    _readBytes(path) {
-        try {
-            let [, content] = GLib.file_get_contents(path);
-            return Number(imports.byteArray.toString(content).trim());
-        } catch (e) {
-            return -1;
-        }
+    _readBytesAsync(path, callback) {
+        let file = Gio.File.new_for_path(path);
+        file.load_contents_async(null, (source, res) => {
+            try {
+                let [, content] = source.load_contents_finish(res);
+                callback(Number(imports.byteArray.toString(content).trim()));
+            } catch (e) {
+                callback(-1);
+            }
+        });
     }
 
     _formatSpeed(bytesPerSec) {
@@ -89,17 +99,29 @@ class InternetSpeedMeter extends Applet.TextApplet {
             }
         }
 
-        let now = Date.now();
-        let rxNow = this._readBytes("/sys/class/net/" + this._iface + "/statistics/rx_bytes");
-        let txNow = this._readBytes("/sys/class/net/" + this._iface + "/statistics/tx_bytes");
+        if (this._sampling) return true;
+        this._sampling = true;
 
+        let now = Date.now();
+        let base = "/sys/class/net/" + this._iface + "/statistics/";
+        this._readBytesAsync(base + "rx_bytes", (rx) => {
+            this._readBytesAsync(base + "tx_bytes", (tx) => {
+                this._sampling = false;
+                this._processSample(now, rx, tx);
+            });
+        });
+
+        return true;
+    }
+
+    _processSample(now, rxNow, txNow) {
         if (rxNow < 0 || txNow < 0) {
             this._setLabel("iface down");
             this._rxPrev = 0;
             this._txPrev = 0;
             this._lastTime = 0;
             this._initialized = false;
-            return true;
+            return;
         }
 
         if (this._initialized && this._lastTime > 0) {
@@ -122,8 +144,6 @@ class InternetSpeedMeter extends Applet.TextApplet {
         this._txPrev = txNow;
         this._lastTime = now;
         this._initialized = true;
-
-        return true;
     }
 
     _setLabel(text) {
@@ -172,6 +192,8 @@ class InternetSpeedMeter extends Applet.TextApplet {
         this._downSpeed = 0;
         this._upSpeed = 0;
         this._lastLabel = "";
+        this._sampling = false;
+        this._detecting = false;
         this._stop();
         this._start();
     }
