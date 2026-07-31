@@ -1,0 +1,63 @@
+.airaware-menu {
+    min-width: 320px;
+    max-width: 420px;
+}
+
+.airaware-title {
+    font-weight: bold;
+    font-size: 1.08em;
+}
+
+.airaware-subtitle {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.9em;
+    max-width: 380px;
+}
+
+.airaware-row {
+    spacing: 16px;
+}
+
+.airaware-row-label {
+    min-width: 150px;
+}
+
+.airaware-row-value {
+    font-weight: bold;
+    max-width: 220px;
+}
+
+.airaware-score-summary {
+    spacing: 2px;
+    padding-top: 2px;
+    padding-bottom: 6px;
+}
+
+.airaware-score-top-row {
+    spacing: 16px;
+}
+
+.airaware-score-value {
+    font-weight: bold;
+    font-size: 1.55em;
+}
+
+.airaware-score-category {
+    font-weight: bold;
+}
+
+.airaware-score-place {
+    min-width: 150px;
+    max-width: 210px;
+    font-size: 1.05em;
+    font-weight: bold;
+    text-align: right;
+}
+
+.airaware-muted {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.airaware-legend {
+    max-width: 380px;
+}

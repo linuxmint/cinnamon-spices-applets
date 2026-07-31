@@ -1,0 +1,265 @@
+# AirAware Cinnamon applet translation template.
+# Copyright (C) 2026 Kevin
+# This file is distributed under the same license as AirAware.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AirAware 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-30 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "AirAware"
+msgstr ""
+
+msgid "Panel applet showing environmental allergy burden from pollen and air pollution."
+msgstr ""
+
+msgid "AirAware: loading environmental conditions"
+msgstr ""
+
+msgid "Loading"
+msgstr ""
+
+msgid "Unavailable"
+msgstr ""
+
+msgid "{category}"
+msgstr ""
+
+msgid "{category} (stale data)"
+msgstr ""
+
+msgid "Environmental allergy burden is now {category}."
+msgstr ""
+
+msgid "Test notification: environmental allergy burden is {category}."
+msgstr ""
+
+msgid "Environmental pollen and air pollution burden"
+msgstr ""
+
+msgid "Waiting for environmental data"
+msgstr ""
+
+msgid "Unable to refresh environmental data; showing cached data."
+msgstr ""
+
+msgid "Unable to refresh environmental data."
+msgstr ""
+
+msgid "Current environmental allergy risk"
+msgstr ""
+
+msgid "Resolving location"
+msgstr ""
+
+msgid "Place name unavailable"
+msgstr ""
+
+msgid "Score"
+msgstr ""
+
+msgid "Tree pollen"
+msgstr ""
+
+msgid "Grass pollen"
+msgstr ""
+
+msgid "Weed pollen"
+msgstr ""
+
+msgid "PM2.5"
+msgstr ""
+
+msgid "PM10"
+msgstr ""
+
+msgid "NO₂"
+msgstr ""
+
+msgid "O₃"
+msgstr ""
+
+msgid "Dust"
+msgstr ""
+
+msgid "Last update"
+msgstr ""
+
+msgid "Stale data"
+msgstr ""
+
+msgid "Forecast"
+msgstr ""
+
+msgid "Forecast unavailable"
+msgstr ""
+
+msgid "Only {days} forecast days are currently available from the data source."
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Tomorrow"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "{category} ({score})"
+msgstr ""
+
+msgid "{category} ({score}, partial)"
+msgstr ""
+
+msgid "Legend"
+msgstr ""
+
+msgid "Score blends highest pollen burden (60%), particulates (30%), and gases plus dust (10%). Environmental conditions only; not a medical symptom prediction."
+msgstr ""
+
+msgid "Refresh now"
+msgstr ""
+
+msgid "Refreshing..."
+msgstr ""
+
+msgid "Low"
+msgstr ""
+
+msgid "Moderate"
+msgstr ""
+
+msgid "High"
+msgstr ""
+
+msgid "Very High"
+msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+msgid "{score}/100"
+msgstr ""
+
+msgid "{value} {unit}"
+msgstr ""
+
+msgid "grains/m³"
+msgstr ""
+
+msgid "µg/m³"
+msgstr ""
+
+msgid "No recent data"
+msgstr ""
+
+msgid "Updated just now"
+msgstr ""
+
+msgid "Updated 1 min ago"
+msgstr ""
+
+msgid "Updated {minutes} min ago"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "Refresh"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Panel"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "Send test notification"
+msgstr ""
+
+msgid "Sends one sample High notification. It does not change the current risk."
+msgstr ""
+
+msgid "Refresh interval"
+msgstr ""
+
+msgid "30 minutes"
+msgstr ""
+
+msgid "60 minutes"
+msgstr ""
+
+msgid "120 minutes"
+msgstr ""
+
+msgid "240 minutes"
+msgstr ""
+
+msgid "360 minutes"
+msgstr ""
+
+msgid "Show label in panel"
+msgstr ""
+
+msgid "Location source"
+msgstr ""
+
+msgid "Automatic"
+msgstr ""
+
+msgid "Manual coordinates"
+msgstr ""
+
+msgid "Open coordinate map"
+msgstr ""
+
+msgid "Opens OpenStreetMap in your browser so you can choose a location and copy its coordinates."
+msgstr ""
+
+msgid "Manual latitude"
+msgstr ""
+
+msgid "Used when Location source is Manual coordinates, and as a fallback if automatic location fails."
+msgstr ""
+
+msgid "Manual longitude"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "High only"
+msgstr ""
+
+msgid "High + Very High"
+msgstr ""

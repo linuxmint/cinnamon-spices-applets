@@ -1,0 +1,8 @@
+{
+    "uuid": "airaware@kevinbouge",
+    "name": "AirAware",
+    "description": "Panel applet showing environmental allergy burden from pollen and air pollution.",
+    "version": "0.1.0",
+    "max-instances": -1,
+    "author": "Kevin Bouge"
+}

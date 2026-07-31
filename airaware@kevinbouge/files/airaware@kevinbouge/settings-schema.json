@@ -1,0 +1,91 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["general"],
+        "general": {
+            "type": "page",
+            "title": "General",
+            "sections": ["refresh", "location", "panel", "alerts"]
+        },
+        "refresh": {
+            "type": "section",
+            "title": "Refresh",
+            "keys": ["refresh-interval"]
+        },
+        "location": {
+            "type": "section",
+            "title": "Location",
+            "keys": ["location-mode", "open-coordinate-map", "manual-latitude", "manual-longitude"]
+        },
+        "panel": {
+            "type": "section",
+            "title": "Panel",
+            "keys": ["show-panel-text"]
+        },
+        "alerts": {
+            "type": "section",
+            "title": "Notifications",
+            "keys": ["notification-level", "test-notification"]
+        }
+    },
+    "refresh-interval": {
+        "type": "combobox",
+        "default": 60,
+        "description": "Refresh interval",
+        "options": {
+            "30 minutes": 30,
+            "60 minutes": 60,
+            "120 minutes": 120,
+            "240 minutes": 240,
+            "360 minutes": 360
+        }
+    },
+    "show-panel-text": {
+        "type": "switch",
+        "default": true,
+        "description": "Show label in panel"
+    },
+    "location-mode": {
+        "type": "combobox",
+        "default": "automatic",
+        "description": "Location source",
+        "options": {
+            "Automatic": "automatic",
+            "Manual coordinates": "manual"
+        }
+    },
+    "open-coordinate-map": {
+        "type": "button",
+        "description": "Open coordinate map",
+        "callback": "on_open_coordinate_map_pressed",
+        "tooltip": "Opens OpenStreetMap in your browser so you can choose a location and copy its coordinates."
+    },
+    "manual-latitude": {
+        "type": "entry",
+        "default": "",
+        "description": "Manual latitude",
+        "tooltip": "Used when Location source is Manual coordinates, and as a fallback if automatic location fails."
+    },
+    "manual-longitude": {
+        "type": "entry",
+        "default": "",
+        "description": "Manual longitude",
+        "tooltip": "Used when Location source is Manual coordinates, and as a fallback if automatic location fails."
+    },
+    "notification-level": {
+        "type": "combobox",
+        "default": "disabled",
+        "description": "Notifications",
+        "options": {
+            "Disabled": "disabled",
+            "High only": "high",
+            "High + Very High": "high-very-high"
+        }
+    },
+    "test-notification": {
+        "type": "button",
+        "description": "Send test notification",
+        "callback": "on_test_notification_pressed",
+        "tooltip": "Sends one sample High notification. It does not change the current risk."
+    }
+}
