@@ -5,7 +5,7 @@
         "general": {
             "type": "page",
             "title": "General",
-            "sections": ["refresh", "location", "panel", "alerts"]
+            "sections": ["refresh", "location", "vegetation", "panel", "alerts"]
         },
         "refresh": {
             "type": "section",
@@ -16,6 +16,11 @@
             "type": "section",
             "title": "Location",
             "keys": ["location-mode", "open-coordinate-map", "manual-latitude", "manual-longitude"]
+        },
+        "vegetation": {
+            "type": "section",
+            "title": "Nearby vegetation",
+            "keys": ["enable-vegetation-context", "show-vegetation-in-popup", "vegetation-radius"]
         },
         "panel": {
             "type": "section",
@@ -71,6 +76,26 @@
         "default": "",
         "description": "Manual longitude",
         "tooltip": "Used when Location source is Manual coordinates, and as a fallback if automatic location fails."
+    },
+    "enable-vegetation-context": {
+        "type": "switch",
+        "default": true,
+        "description": "Enable nearby vegetation context"
+    },
+    "show-vegetation-in-popup": {
+        "type": "switch",
+        "default": false,
+        "description": "Show vegetation details in popup"
+    },
+    "vegetation-radius": {
+        "type": "combobox",
+        "default": 2000,
+        "description": "Vegetation search radius",
+        "options": {
+            "1 km": 1000,
+            "2 km": 2000,
+            "5 km": 5000
+        }
     },
     "notification-level": {
         "type": "combobox",

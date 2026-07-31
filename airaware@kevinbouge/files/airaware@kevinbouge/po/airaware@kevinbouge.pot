@@ -129,6 +129,15 @@ msgstr ""
 msgid "Last update"
 msgstr ""
 
+msgid "Nearby vegetation"
+msgstr ""
+
+msgid "No nearby vegetation features were found in OpenStreetMap."
+msgstr ""
+
+msgid "Showing cached OpenStreetMap vegetation context."
+msgstr ""
+
 msgid "Stale data"
 msgstr ""
 
@@ -222,6 +231,39 @@ msgstr ""
 msgid "Ragweed"
 msgstr ""
 
+msgid "Woodland"
+msgstr ""
+
+msgid "Grassland"
+msgstr ""
+
+msgid "Orchard"
+msgstr ""
+
+msgid "Scrub"
+msgstr ""
+
+msgid "Parkland"
+msgstr ""
+
+msgid "Farmland"
+msgstr ""
+
+msgid "Mapped birch trees"
+msgstr ""
+
+msgid "Mapped alder trees"
+msgstr ""
+
+msgid "Mapped olive trees"
+msgstr ""
+
+msgid "Mapped vegetation"
+msgstr ""
+
+msgid "Mapped allergenic trees"
+msgstr ""
+
 msgid "{label} {value}"
 msgstr ""
 
@@ -238,6 +280,12 @@ msgid "{score}%"
 msgstr ""
 
 msgid "{value}%"
+msgstr ""
+
+msgid "{distance} m"
+msgstr ""
+
+msgid "{distance} km"
 msgstr ""
 
 msgid "{degrees}° {direction}"
@@ -364,6 +412,24 @@ msgid "Used when Location source is Manual coordinates, and as a fallback if aut
 msgstr ""
 
 msgid "Manual longitude"
+msgstr ""
+
+msgid "Enable nearby vegetation context"
+msgstr ""
+
+msgid "Show vegetation details in popup"
+msgstr ""
+
+msgid "Vegetation search radius"
+msgstr ""
+
+msgid "1 km"
+msgstr ""
+
+msgid "2 km"
+msgstr ""
+
+msgid "5 km"
 msgstr ""
 
 msgid "Disabled"

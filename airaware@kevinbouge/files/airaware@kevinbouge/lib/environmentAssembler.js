@@ -165,6 +165,9 @@ var combineEnvironmentalData = function(options = {}) {
     const airQualityData = options.airQualityData || null;
     const weatherData = options.weatherData || null;
     const cachedData = options.cachedData || null;
+    const vegetationData = options.vegetationData || null;
+    const cachedVegetationData = options.cachedVegetationData || null;
+    const vegetationIsStale = options.vegetationIsStale === true;
     const sourceAirQuality = airQualityData || cachedData;
 
     if (!sourceAirQuality)
@@ -179,6 +182,12 @@ var combineEnvironmentalData = function(options = {}) {
     combined.usedCachedAirQuality = usedCachedAirQuality;
     combined.usedCachedWeather = usedCachedWeather;
     combined.weather = sourceWeather;
+    combined.vegetation = vegetationData || cachedVegetationData || null;
+    combined.vegetationStatus = vegetationData
+        ? 'fresh'
+        : cachedVegetationData
+            ? vegetationIsStale ? 'stale' : 'cached'
+            : 'unavailable';
     combined.airQualityFetchedAt = _isFiniteNumber(sourceAirQuality.airQualityFetchedAt)
         ? sourceAirQuality.airQualityFetchedAt
         : sourceAirQuality.fetchedAt;

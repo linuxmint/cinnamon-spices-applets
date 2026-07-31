@@ -43,6 +43,7 @@ let LocationService = null;
 let NotificationPolicy = null;
 let OpenMeteoProvider = null;
 let OpenMeteoWeatherProvider = null;
+let OpenStreetMapVegetationProvider = null;
 let ReverseGeocoder = null;
 let RiskCalculator = null;
 
@@ -108,6 +109,7 @@ function _loadLocalModules(metadata) {
     NotificationPolicy = imports.notificationPolicy;
     OpenMeteoProvider = imports.openMeteoProvider;
     OpenMeteoWeatherProvider = imports.openMeteoWeatherProvider;
+    OpenStreetMapVegetationProvider = imports.openStreetMapVegetationProvider;
     ReverseGeocoder = imports.reverseGeocoder;
     RiskCalculator = imports.riskCalculator;
 
@@ -133,6 +135,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this._activeLocationRequest = null;
         this._activeProviderRequest = null;
         this._activeWeatherRequest = null;
+        this._activeVegetationRequest = null;
         this._activeReverseGeocodeRequest = null;
         this._activeReverseGeocodeKey = null;
         this._refreshGeneration = 0;
@@ -152,6 +155,9 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this.showPanelText = true;
         this.notificationLevel = 'disabled';
         this.forecastLength = 3;
+        this.enableVegetationContext = true;
+        this.showVegetationInPopup = false;
+        this.vegetationRadiusMeters = 2000;
         this.locationMode = 'automatic';
         this.manualLatitude = '';
         this.manualLongitude = '';
@@ -185,6 +191,12 @@ class AirAwareApplet extends Applet.TextIconApplet {
             () => this._onSettingsChanged());
         this.settings.bind('notification-level', 'notificationLevel',
             () => this._onSettingsChanged());
+        this.settings.bind('enable-vegetation-context', 'enableVegetationContext',
+            () => this._onSettingsChanged());
+        this.settings.bind('show-vegetation-in-popup', 'showVegetationInPopup',
+            () => this._onSettingsChanged());
+        this.settings.bind('vegetation-radius', 'vegetationRadiusMeters',
+            () => this._onSettingsChanged());
         this.settings.bind('location-mode', 'locationMode',
             () => this._onSettingsChanged());
         this.settings.bind('manual-latitude', 'manualLatitude',
@@ -196,6 +208,9 @@ class AirAwareApplet extends Applet.TextIconApplet {
             this.refreshIntervalMinutes
         );
         this.locationMode = this._normalizeLocationMode(this.locationMode);
+        this.vegetationRadiusMeters = this._normalizeVegetationRadius(
+            this.vegetationRadiusMeters
+        );
         this._locationSettingsSignature = this._getLocationSettingsSignature();
 
         this._setLoadingState();
@@ -254,6 +269,9 @@ class AirAwareApplet extends Applet.TextIconApplet {
         );
         this.forecastLength = 3;
         this.locationMode = this._normalizeLocationMode(this.locationMode);
+        this.vegetationRadiusMeters = this._normalizeVegetationRadius(
+            this.vegetationRadiusMeters
+        );
 
         const locationSettingsSignature = this._getLocationSettingsSignature();
         const locationSettingsChanged = this._locationSettingsSignature !== null &&
@@ -280,6 +298,16 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
     _normalizeLocationMode(value) {
         return value === 'manual' ? 'manual' : 'automatic';
+    }
+
+    _normalizeVegetationRadius(value) {
+        const allowed = [1000, 2000, 5000];
+        const numericValue = Number(value);
+
+        if (allowed.indexOf(numericValue) !== -1)
+            return numericValue;
+
+        return 2000;
     }
 
     _getLocationSettingsSignature() {
@@ -406,6 +434,11 @@ class AirAwareApplet extends Applet.TextIconApplet {
             this._activeWeatherRequest = null;
         }
 
+        if (this._activeVegetationRequest) {
+            this._activeVegetationRequest.cancel();
+            this._activeVegetationRequest = null;
+        }
+
         if (this._activeReverseGeocodeRequest) {
             this._activeReverseGeocodeRequest.cancel();
             this._activeReverseGeocodeRequest = null;
@@ -463,7 +496,11 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
             this._lastLocationResult = manualLocationResult;
             this._ensureLocationDisplayName(manualLocationResult);
-            this._fetchProviderData(this._lastLocationResult, refreshGeneration);
+            this._fetchProviderData(
+                this._lastLocationResult,
+                refreshGeneration,
+                forceLocationRefresh
+            );
             return;
         }
 
@@ -487,7 +524,11 @@ class AirAwareApplet extends Applet.TextIconApplet {
                 if (manualFallback !== null) {
                     this._lastLocationResult = manualFallback;
                     this._ensureLocationDisplayName(manualFallback);
-                    this._fetchProviderData(manualFallback, refreshGeneration);
+                    this._fetchProviderData(
+                        manualFallback,
+                        refreshGeneration,
+                        forceLocationRefresh
+                    );
                     return;
                 }
 
@@ -497,7 +538,11 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
             this._lastLocationResult = locationResult;
             this._ensureLocationDisplayName(locationResult);
-            this._fetchProviderData(locationResult, refreshGeneration);
+            this._fetchProviderData(
+                locationResult,
+                refreshGeneration,
+                forceLocationRefresh
+            );
         };
 
         locationRequest = forceLocationRefresh
@@ -507,8 +552,10 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this._activeLocationRequest = locationCompleted ? null : locationRequest;
     }
 
-    _fetchProviderData(locationResult, refreshGeneration) {
+    _fetchProviderData(locationResult, refreshGeneration, forceAllSources = false) {
         const requestDays = this.forecastLength + 1;
+        const vegetationCacheKey = this._vegetationCacheKeyForLocation(locationResult);
+
         this._cache.readResponseAsync((cacheError, cachedEnvelope) => {
             if (this._destroyed || refreshGeneration !== this._refreshGeneration)
                 return;
@@ -517,103 +564,225 @@ class AirAwareApplet extends Applet.TextIconApplet {
                 this._logError(cacheError);
 
             const cachedData = cachedEnvelope ? cachedEnvelope.data : null;
-            let airQualityResult = {
-                completed: false,
-                error: null,
-                data: null,
-            };
-            let weatherResult = {
-                completed: false,
-                error: null,
-                data: null,
-            };
-            let providerRequest = null;
-            let providerCompleted = false;
-            let weatherRequest = null;
-            let weatherCompleted = false;
-            const maybeComplete = () => {
-                if (!airQualityResult.completed || !weatherResult.completed)
-                    return;
-
+            this._readVegetationCache(vegetationCacheKey, (vegetationEnvelope) => {
                 if (this._destroyed || refreshGeneration !== this._refreshGeneration)
                     return;
 
-                const combinedData = EnvironmentAssembler.combineEnvironmentalData({
-                    airQualityData: airQualityResult.error ? null : airQualityResult.data,
-                    weatherData: weatherResult.error ? null : weatherResult.data,
+                this._startProviderRequests({
+                    locationResult,
+                    refreshGeneration,
+                    requestDays,
                     cachedData,
+                    vegetationEnvelope,
+                    vegetationCacheKey,
+                    forceAllSources,
                 });
-
-                if (!combinedData) {
-                    this._useCachedResponse(
-                        airQualityResult.error ||
-                        weatherResult.error ||
-                        new Error('Data unavailable')
-                    );
-                    return;
-                }
-
-                if (airQualityResult.error)
-                    this._logError(airQualityResult.error);
-
-                if (weatherResult.error)
-                    this._logError(weatherResult.error);
-
-                this._cache.writeResponseAsync(combinedData);
-                this._applyProviderData(
-                    combinedData,
-                    combinedData.usedCachedAirQuality === true ||
-                        combinedData.usedCachedWeather === true,
-                    airQualityResult.error || weatherResult.error
-                );
-            };
-            const providerCallback = (error, data) => {
-                providerCompleted = true;
-
-                if (this._activeProviderRequest === providerRequest)
-                    this._activeProviderRequest = null;
-
-                airQualityResult = {
-                    completed: true,
-                    error: error || null,
-                    data: error ? null : data,
-                };
-                maybeComplete();
-            };
-            const weatherCallback = (error, data) => {
-                weatherCompleted = true;
-
-                if (this._activeWeatherRequest === weatherRequest)
-                    this._activeWeatherRequest = null;
-
-                weatherResult = {
-                    completed: true,
-                    error: error || null,
-                    data: error ? null : data,
-                };
-                maybeComplete();
-            };
-
-            providerRequest = OpenMeteoProvider.fetchForecastAsync(
-                locationResult.coordinates,
-                {
-                    forecastDays: requestDays,
-                    timeoutSeconds: 15,
-                },
-                providerCallback
-            );
-            weatherRequest = OpenMeteoWeatherProvider.fetchForecastAsync(
-                locationResult.coordinates,
-                {
-                    forecastDays: requestDays,
-                    timeoutSeconds: 15,
-                },
-                weatherCallback
-            );
-
-            this._activeProviderRequest = providerCompleted ? null : providerRequest;
-            this._activeWeatherRequest = weatherCompleted ? null : weatherRequest;
+            });
         });
+    }
+
+    _readVegetationCache(cacheKey, callback) {
+        if (!this.enableVegetationContext || cacheKey === null) {
+            callback(null);
+            return;
+        }
+
+        this._cache.readVegetationAsync(cacheKey, (error, envelope) => {
+            if (error)
+                this._logError(error);
+
+            callback(envelope || null);
+        });
+    }
+
+    _vegetationCacheKeyForLocation(locationResult) {
+        if (!this.enableVegetationContext || !locationResult || !locationResult.coordinates)
+            return null;
+
+        try {
+            return OpenStreetMapVegetationProvider.vegetationCacheKey(
+                locationResult.coordinates,
+                this.vegetationRadiusMeters
+            );
+        } catch (error) {
+            this._logError(error);
+            return null;
+        }
+    }
+
+    _startProviderRequests(options) {
+        const locationResult = options.locationResult;
+        const refreshGeneration = options.refreshGeneration;
+        const requestDays = options.requestDays;
+        const cachedData = options.cachedData;
+        const vegetationEnvelope = options.vegetationEnvelope;
+        const cachedVegetationData = vegetationEnvelope ? vegetationEnvelope.data : null;
+        const cachedVegetationFresh = OpenStreetMapVegetationProvider.isVegetationCacheFresh(
+            vegetationEnvelope
+        );
+        const shouldFetchVegetation = this.enableVegetationContext &&
+            options.vegetationCacheKey !== null &&
+            (options.forceAllSources || !cachedVegetationData || !cachedVegetationFresh);
+        let airQualityResult = {
+            completed: false,
+            error: null,
+            data: null,
+        };
+        let weatherResult = {
+            completed: false,
+            error: null,
+            data: null,
+        };
+        let vegetationResult = {
+            completed: !shouldFetchVegetation,
+            error: null,
+            data: shouldFetchVegetation ? null : cachedVegetationData,
+            stale: !shouldFetchVegetation && cachedVegetationData !== null && !cachedVegetationFresh,
+            fromCache: !shouldFetchVegetation && cachedVegetationData !== null,
+        };
+        let providerRequest = null;
+        let providerCompleted = false;
+        let weatherRequest = null;
+        let weatherCompleted = false;
+        let vegetationRequest = null;
+        let vegetationCompleted = !shouldFetchVegetation;
+        const maybeComplete = () => {
+            if (!airQualityResult.completed ||
+                !weatherResult.completed ||
+                !vegetationResult.completed)
+                return;
+
+            if (this._destroyed || refreshGeneration !== this._refreshGeneration)
+                return;
+
+            const freshVegetationData = vegetationResult.error || vegetationResult.fromCache
+                ? null
+                : vegetationResult.data;
+            const fallbackVegetationData = vegetationResult.fromCache || vegetationResult.error
+                ? cachedVegetationData
+                : null;
+            const combinedData = EnvironmentAssembler.combineEnvironmentalData({
+                airQualityData: airQualityResult.error ? null : airQualityResult.data,
+                weatherData: weatherResult.error ? null : weatherResult.data,
+                cachedData,
+                vegetationData: freshVegetationData,
+                cachedVegetationData: fallbackVegetationData,
+                vegetationIsStale: vegetationResult.error ||
+                    vegetationResult.stale === true ||
+                    (cachedVegetationData !== null && !cachedVegetationFresh),
+            });
+
+            if (!combinedData) {
+                this._useCachedResponse(
+                    airQualityResult.error ||
+                    weatherResult.error ||
+                    new Error('Data unavailable')
+                );
+                return;
+            }
+
+            if (airQualityResult.error)
+                this._logError(airQualityResult.error);
+
+            if (weatherResult.error)
+                this._logError(weatherResult.error);
+
+            if (vegetationResult.error)
+                this._logError(vegetationResult.error);
+
+            this._cache.writeResponseAsync(combinedData);
+            this._applyProviderData(
+                combinedData,
+                combinedData.usedCachedAirQuality === true ||
+                    combinedData.usedCachedWeather === true,
+                airQualityResult.error || weatherResult.error
+            );
+        };
+        const providerCallback = (error, data) => {
+            providerCompleted = true;
+
+            if (this._activeProviderRequest === providerRequest)
+                this._activeProviderRequest = null;
+
+            airQualityResult = {
+                completed: true,
+                error: error || null,
+                data: error ? null : data,
+            };
+            maybeComplete();
+        };
+        const weatherCallback = (error, data) => {
+            weatherCompleted = true;
+
+            if (this._activeWeatherRequest === weatherRequest)
+                this._activeWeatherRequest = null;
+
+            weatherResult = {
+                completed: true,
+                error: error || null,
+                data: error ? null : data,
+            };
+            maybeComplete();
+        };
+        const vegetationCallback = (error, data) => {
+            vegetationCompleted = true;
+
+            if (this._activeVegetationRequest === vegetationRequest)
+                this._activeVegetationRequest = null;
+
+            vegetationResult = {
+                completed: true,
+                error: error || null,
+                data: error ? cachedVegetationData : data,
+                stale: error ? cachedVegetationData !== null : false,
+                fromCache: error && cachedVegetationData !== null,
+            };
+
+            if (!error && data) {
+                this._cache.writeVegetationAsync(data, (cacheWriteError, result) => {
+                    if (cacheWriteError)
+                        this._logError(cacheWriteError);
+                    else if (result && result.ok === false)
+                        this._logError(new Error(result.error || 'Vegetation cache write failed'));
+                });
+            }
+
+            maybeComplete();
+        };
+
+        providerRequest = OpenMeteoProvider.fetchForecastAsync(
+            locationResult.coordinates,
+            {
+                forecastDays: requestDays,
+                timeoutSeconds: 15,
+            },
+            providerCallback
+        );
+        weatherRequest = OpenMeteoWeatherProvider.fetchForecastAsync(
+            locationResult.coordinates,
+            {
+                forecastDays: requestDays,
+                timeoutSeconds: 15,
+            },
+            weatherCallback
+        );
+
+        if (shouldFetchVegetation) {
+            vegetationRequest = OpenStreetMapVegetationProvider.fetchVegetationAsync(
+                locationResult.coordinates,
+                {
+                    radiusMeters: this.vegetationRadiusMeters,
+                    timeoutSeconds: 20,
+                },
+                vegetationCallback
+            );
+        }
+
+        this._activeProviderRequest = providerCompleted ? null : providerRequest;
+        this._activeWeatherRequest = weatherCompleted ? null : weatherRequest;
+        this._activeVegetationRequest = vegetationCompleted ? null : vegetationRequest;
+
+        maybeComplete();
     }
 
     _coordinateKey(coordinates) {
@@ -1011,6 +1180,8 @@ class AirAwareApplet extends Applet.TextIconApplet {
             Formatter.formatMoldPotential(current.moldPotential)
         );
 
+        this._addVegetationSection();
+
         this._addInfoRow(_('Last update'), Formatter.formatTimestamp(this._providerData.fetchedAt));
 
         if (this._lastError)
@@ -1034,6 +1205,75 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
         if (!added)
             this._addTextBlock(_('Pollen data unavailable'), 'airaware-muted');
+    }
+
+    _addVegetationSection() {
+        if (!this.enableVegetationContext ||
+            !this.showVegetationInPopup ||
+            !this._providerData ||
+            !this._providerData.vegetation)
+            return;
+
+        const vegetation = this._providerData.vegetation;
+        const categoryOrder = [
+            'grassland',
+            'parkland',
+            'woodland',
+            'orchard',
+            'scrub',
+            'farmland',
+        ];
+        const taxonOrder = ['birch', 'alder', 'olive'];
+        let rows = [];
+
+        for (const categoryId of categoryOrder) {
+            const category = vegetation.categories
+                ? vegetation.categories[categoryId]
+                : null;
+
+            if (!category || category.present !== true ||
+                !_isFiniteNumber(category.nearestMeters))
+                continue;
+
+            rows.push({
+                label: Formatter.formatVegetationCategoryLabel(categoryId),
+                value: Formatter.formatDistanceMeters(category.nearestMeters),
+                distance: category.nearestMeters,
+            });
+        }
+
+        rows.sort((left, right) => left.distance - right.distance);
+
+        for (const taxonId of taxonOrder) {
+            const taxon = vegetation.mappedTaxa
+                ? vegetation.mappedTaxa[taxonId]
+                : null;
+
+            if (!taxon || !_isFiniteNumber(taxon.featureCount) || taxon.featureCount <= 0)
+                continue;
+
+            rows.push({
+                label: Formatter.formatMappedTaxonLabel(taxonId),
+                value: `${Math.round(taxon.featureCount)}`,
+                distance: null,
+            });
+        }
+
+        this._addSectionTitle(_('Nearby vegetation'));
+
+        if (rows.length === 0) {
+            this._addTextBlock(
+                _('No nearby vegetation features were found in OpenStreetMap.'),
+                'airaware-muted'
+            );
+        } else {
+            for (const row of rows)
+                this._addInfoRow(row.label, row.value);
+        }
+
+        if (this._providerData.vegetationStatus === 'stale')
+            this._addTextBlock(_('Showing cached OpenStreetMap vegetation context.'), 'airaware-muted');
+
     }
 
     _formatLocationLabel() {

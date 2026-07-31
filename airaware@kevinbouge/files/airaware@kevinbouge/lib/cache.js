@@ -1,16 +1,18 @@
 /* exported getDefaultCacheDirectory, createCache, isValidCoordinates,
- * isValidPlace, isValidProviderResponse */
+ * isValidPlace, isValidProviderResponse, isValidVegetationResponse */
 
 const ByteArray = imports.byteArray;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 
 const RESPONSE_CACHE_VERSION = 5;
+const VEGETATION_CACHE_VERSION = 1;
 const STABLE_CACHE_VERSION = 1;
 const DEFAULT_NAMESPACE = 'airaware';
 const COORDINATES_FILE = 'coordinates.json';
 const PLACE_FILE = 'place.json';
 const RESPONSE_FILE = 'response.json';
+const VEGETATION_FILE = 'vegetation.json';
 const REQUIRED_READING_FIELDS = Object.freeze([
     'treePollen',
     'grassPollen',
@@ -52,6 +54,19 @@ const CONTEXT_FIELDS = Object.freeze([
     'aerosolOpticalDepth',
     'dust',
     'wildfirePm10',
+]);
+const VEGETATION_CATEGORY_FIELDS = Object.freeze([
+    'woodland',
+    'grassland',
+    'orchard',
+    'scrub',
+    'parkland',
+    'farmland',
+]);
+const VEGETATION_TAXON_FIELDS = Object.freeze([
+    'birch',
+    'alder',
+    'olive',
 ]);
 
 function _isObject(value) {
@@ -306,6 +321,36 @@ function _isValidMoldPotential(moldPotential) {
         moldPotential.score <= 100;
 }
 
+function _isValidVegetationCategory(category) {
+    return _isObject(category) &&
+        typeof category.present === 'boolean' &&
+        _isFiniteNumber(category.featureCount) &&
+        category.featureCount >= 0 &&
+        (category.nearestMeters === null ||
+            (_isFiniteNumber(category.nearestMeters) && category.nearestMeters >= 0));
+}
+
+function _isValidVegetationTaxon(taxon) {
+    return _isObject(taxon) &&
+        _isFiniteNumber(taxon.featureCount) &&
+        taxon.featureCount >= 0 &&
+        (taxon.nearestMeters === null ||
+            (_isFiniteNumber(taxon.nearestMeters) && taxon.nearestMeters >= 0));
+}
+
+function _hasVegetationFields(values, fields, validator) {
+    if (!_isObject(values))
+        return false;
+
+    for (const field of fields) {
+        if (!Object.prototype.hasOwnProperty.call(values, field) ||
+            !validator(values[field]))
+            return false;
+    }
+
+    return true;
+}
+
 function _nowMs() {
     return GLib.get_real_time() / 1000;
 }
@@ -547,6 +592,34 @@ var isValidProviderResponse = function(response) {
 };
 
 /**
+ * Validate normalized OpenStreetMap vegetation context before caching.
+ *
+ * @param {Object} response - Normalized vegetation response.
+ * @returns {boolean} True when response can be cached.
+ */
+var isValidVegetationResponse = function(response) {
+    return _isObject(response) &&
+        response.provider === 'openstreetmap' &&
+        typeof response.fetchedAt === 'string' &&
+        isValidCoordinates(response.coordinates) &&
+        _isFiniteNumber(response.radiusMeters) &&
+        response.radiusMeters > 0 &&
+        typeof response.cacheKey === 'string' &&
+        response.cacheKey.length > 0 &&
+        _hasVegetationFields(
+            response.categories,
+            VEGETATION_CATEGORY_FIELDS,
+            _isValidVegetationCategory
+        ) &&
+        _hasVegetationFields(
+            response.mappedTaxa,
+            VEGETATION_TAXON_FIELDS,
+            _isValidVegetationTaxon
+        ) &&
+        typeof response.completeness === 'string';
+};
+
+/**
  * Create a cache facade rooted in a specific directory.
  *
  * @param {Object} options - Optional baseDirectory override.
@@ -557,6 +630,7 @@ var createCache = function(options = {}) {
     const coordinatesPath = _cachePath(baseDirectory, COORDINATES_FILE);
     const placePath = _cachePath(baseDirectory, PLACE_FILE);
     const responsePath = _cachePath(baseDirectory, RESPONSE_FILE);
+    const vegetationPath = _cachePath(baseDirectory, VEGETATION_FILE);
 
     _ensureDirectory(baseDirectory);
 
@@ -628,6 +702,44 @@ var createCache = function(options = {}) {
                 response,
                 isValidProviderResponse,
                 RESPONSE_CACHE_VERSION,
+                callback
+            );
+        },
+
+        /**
+         * Read cached vegetation context for a specific coarse location key.
+         *
+         * @param {string} cacheKey - Vegetation cache key.
+         * @returns {Object|null} Cache envelope or null.
+         */
+        readVegetationAsync(cacheKey, callback) {
+            return _readVersionedEnvelopeAsync(
+                vegetationPath,
+                isValidVegetationResponse,
+                VEGETATION_CACHE_VERSION,
+                (error, envelope) => {
+                    if (error || !envelope || envelope.data.cacheKey !== cacheKey) {
+                        callback(null, null);
+                        return;
+                    }
+
+                    callback(null, envelope);
+                }
+            );
+        },
+
+        /**
+         * Save normalized vegetation context without replacing valid cache with bad data.
+         *
+         * @param {Object} response - Normalized vegetation response.
+         * @returns {Object} Result object with ok boolean.
+         */
+        writeVegetationAsync(response, callback = null) {
+            return _writeVersionedEnvelopeAsync(
+                vegetationPath,
+                response,
+                isValidVegetationResponse,
+                VEGETATION_CACHE_VERSION,
                 callback
             );
         },

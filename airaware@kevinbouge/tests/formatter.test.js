@@ -134,6 +134,19 @@ function testWeatherFormatting() {
         'visibility should convert meters to kilometers');
 }
 
+function testVegetationFormatting() {
+    assertEqual(Formatter.formatDistanceMeters(120), '120 m',
+        'short vegetation distances should use meters');
+    assertEqual(Formatter.formatDistanceMeters(1100), '1.1 km',
+        'long vegetation distances should use kilometers');
+    assertEqual(Formatter.formatVegetationCategoryLabel('grassland'), 'Grassland',
+        'vegetation category labels should format');
+    assertEqual(Formatter.formatMappedTaxonLabel('birch'), 'Mapped birch trees',
+        'mapped taxon labels should describe mapped OSM data');
+    assertEqual(Formatter.formatMappedTaxonLabel('unknown'), 'Mapped allergenic trees',
+        'unknown mapped taxon labels should use generic mapped wording');
+}
+
 function testTimestampFormatting() {
     const expected = GLib.DateTime.new_from_unix_local(0).format('%Y-%m-%d %H:%M');
 
@@ -196,6 +209,7 @@ function main() {
         testScoreFormatting,
         testMoldPotentialFormatting,
         testWeatherFormatting,
+        testVegetationFormatting,
         testTimestampFormatting,
         testStaleFormatting,
         testFieldLabels,

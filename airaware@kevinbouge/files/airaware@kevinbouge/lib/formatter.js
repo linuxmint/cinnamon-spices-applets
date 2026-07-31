@@ -4,7 +4,8 @@
  * formatSulfurDioxide, formatCarbonMonoxide, formatAqi,
  * formatWeatherUnavailable, formatMoldPotential, formatPercentage,
  * formatTemperature, formatDewPoint, formatWindSpeed, formatWindDirection,
- * formatWindGusts, formatVisibility, formatPollenTypeLabel */
+ * formatWindGusts, formatVisibility, formatPollenTypeLabel,
+ * formatDistanceMeters, formatVegetationCategoryLabel, formatMappedTaxonLabel */
 
 const GLib = imports.gi.GLib;
 
@@ -50,6 +51,21 @@ const POLLEN_TYPE_LABELS = Object.freeze({
     mugwort: 'Mugwort',
     olive: 'Olive',
     ragweed: 'Ragweed',
+});
+
+const VEGETATION_CATEGORY_LABELS = Object.freeze({
+    woodland: 'Woodland',
+    grassland: 'Grassland',
+    orchard: 'Orchard',
+    scrub: 'Scrub',
+    parkland: 'Parkland',
+    farmland: 'Farmland',
+});
+
+const MAPPED_TAXON_LABELS = Object.freeze({
+    birch: 'Mapped birch trees',
+    alder: 'Mapped alder trees',
+    olive: 'Mapped olive trees',
 });
 
 let _translate = function(text) {
@@ -385,6 +401,57 @@ var formatPollenTypeLabel = function(fieldName) {
         return _translate(POLLEN_TYPE_LABELS[fieldName]);
 
     return formatFieldLabel(fieldName);
+};
+
+/**
+ * Format a compact distance label for nearby mapped features.
+ *
+ * @param {number} meters - Distance in meters.
+ * @returns {string} Translated distance or unavailable text.
+ */
+var formatDistanceMeters = function(meters) {
+    if (!_isFiniteNumber(meters))
+        return _translate('Unavailable');
+
+    const distance = Math.max(0, Math.round(meters));
+
+    if (distance < 1000) {
+        return _replace(_translate('{distance} m'), {
+            distance,
+        });
+    }
+
+    const kilometers = _roundToPrecision(distance / 1000, 1).toFixed(1);
+
+    return _replace(_translate('{distance} km'), {
+        distance: kilometers,
+    });
+};
+
+/**
+ * Format a nearby vegetation category label.
+ *
+ * @param {string} categoryId - Canonical vegetation category.
+ * @returns {string} Translated category label.
+ */
+var formatVegetationCategoryLabel = function(categoryId) {
+    if (Object.prototype.hasOwnProperty.call(VEGETATION_CATEGORY_LABELS, categoryId))
+        return _translate(VEGETATION_CATEGORY_LABELS[categoryId]);
+
+    return _translate('Mapped vegetation');
+};
+
+/**
+ * Format a mapped allergenic taxon label.
+ *
+ * @param {string} taxonId - Canonical taxon id.
+ * @returns {string} Translated taxon label.
+ */
+var formatMappedTaxonLabel = function(taxonId) {
+    if (Object.prototype.hasOwnProperty.call(MAPPED_TAXON_LABELS, taxonId))
+        return _translate(MAPPED_TAXON_LABELS[taxonId]);
+
+    return _translate('Mapped allergenic trees');
 };
 
 /**

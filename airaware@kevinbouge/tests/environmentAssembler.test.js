@@ -106,6 +106,33 @@ function weatherResponse(overrides = {}) {
     };
 }
 
+function vegetationResponse() {
+    return {
+        provider: 'openstreetmap',
+        fetchedAt: '2026-07-31T21:00:00Z',
+        coordinates: {
+            latitude: 50.08,
+            longitude: 14.44,
+        },
+        radiusMeters: 2000,
+        cacheKey: '50.08,14.44,2000',
+        categories: {
+            woodland: {
+                present: true,
+                featureCount: 1,
+                nearestMeters: 800,
+            },
+        },
+        mappedTaxa: {
+            birch: {
+                featureCount: 2,
+                nearestMeters: 250,
+            },
+        },
+        completeness: 'unknown',
+    };
+}
+
 function testWeatherFailureKeepsFreshAirQualityData() {
     const freshAirQuality = airQualityResponse({
         currentReadings: readings({
@@ -245,6 +272,54 @@ function testNoDataReturnsNull() {
     }), null, 'weather alone cannot replace missing air-quality readings');
 }
 
+function testVegetationAttachesWithoutChangingRisk() {
+    const base = EnvironmentAssembler.combineEnvironmentalData({
+        airQualityData: airQualityResponse(),
+        weatherData: weatherResponse(),
+        cachedData: null,
+    });
+    const withVegetation = EnvironmentAssembler.combineEnvironmentalData({
+        airQualityData: airQualityResponse(),
+        weatherData: weatherResponse(),
+        cachedData: null,
+        vegetationData: vegetationResponse(),
+    });
+    const baseRisk = RiskCalculator.calculateRisk(
+        base.current,
+        base.current.moldPotential
+    );
+    const vegetationRisk = RiskCalculator.calculateRisk(
+        withVegetation.current,
+        withVegetation.current.moldPotential
+    );
+
+    assertNotNull(withVegetation.vegetation,
+        'vegetation data should be attached to the combined response');
+    assertEqual(withVegetation.vegetationStatus, 'fresh',
+        'fresh vegetation status should be exposed');
+    assertEqual(vegetationRisk.score, baseRisk.score,
+        'vegetation context should not affect the environmental risk score');
+}
+
+function testStaleVegetationFallbackIsIndependent() {
+    const combined = EnvironmentAssembler.combineEnvironmentalData({
+        airQualityData: airQualityResponse(),
+        weatherData: weatherResponse(),
+        cachedData: null,
+        cachedVegetationData: vegetationResponse(),
+        vegetationIsStale: true,
+    });
+
+    assertNotNull(combined.vegetation,
+        'cached vegetation should remain available after provider failure');
+    assertEqual(combined.vegetationStatus, 'stale',
+        'stale vegetation status should be independent of main data freshness');
+    assertEqual(combined.usedCachedAirQuality, false,
+        'vegetation fallback should not mark air quality cached');
+    assertEqual(combined.usedCachedWeather, false,
+        'vegetation fallback should not mark weather cached');
+}
+
 function main() {
     const tests = [
         testWeatherFailureKeepsFreshAirQualityData,
@@ -253,6 +328,8 @@ function main() {
         testPartialSuccessRecalculatesRiskWithMold,
         testForecastMoldUsesMatchingDayHours,
         testNoDataReturnsNull,
+        testVegetationAttachesWithoutChangingRisk,
+        testStaleVegetationFallbackIsIndependent,
     ];
 
     for (const test of tests)

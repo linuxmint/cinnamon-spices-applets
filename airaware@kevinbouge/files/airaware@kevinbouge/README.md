@@ -17,10 +17,11 @@ AirAware reports environmental conditions only. It does not predict symptoms, di
 - Six pollen types: alder, birch, grass, mugwort, olive, and ragweed
 - Weather-based Mold potential using humidity, leaf wetness, precipitation, temperature, dew point, and wind
 - Atmospheric irritant context from carbon monoxide, aerosol optical depth, dust, and optional wildfire-related PM10 where available
+- Optional nearby vegetation context from OpenStreetMap mapped vegetation and land-use data, with popup details hidden by default
 - Panel icon with risk-colored line work and an optional Low, Moderate, High, or Very High label
 - Short panel tooltip showing the current risk label and score
-- Popup with current score, location, pollen, PM2.5, PM10, NO₂, O₃, SO₂, carbon monoxide, aerosol optical depth, dust, Mold potential, last update time, and compact forecast
-- Cache fallback for coordinates, place name, and last successful data response
+- Popup with current score, location, pollen, PM2.5, PM10, NO₂, O₃, SO₂, carbon monoxide, aerosol optical depth, dust, Mold potential, nearby vegetation context, last update time, and compact forecast
+- Cache fallback for coordinates, place name, nearby vegetation context, and last successful data response
 - Stale data indicator when current data cannot be refreshed
 - Configurable refresh interval, panel label, and notifications
 - Test notification button for local verification
@@ -43,11 +44,12 @@ Install AirAware from Cinnamon System Settings after it is available in Cinnamon
 - `lib/locationService.js`: one-shot approximate GeoClue2 lookup with 6-hour coordinate cache behavior.
 - `lib/openMeteoProvider.js`: Open-Meteo Air Quality URL construction, Soup async fetch, response validation, and canonical provider mapping.
 - `lib/openMeteoWeatherProvider.js`: Open-Meteo Weather Forecast URL construction, Soup async fetch, response validation, and normalized hourly weather mapping.
+- `lib/openStreetMapVegetationProvider.js`: Overpass query construction, Soup async fetch, and normalized nearby vegetation context.
 - `lib/moldPotentialCalculator.js`: weather-based Mold potential scoring.
-- `lib/environmentAssembler.js`: combines independently refreshed air-quality, weather, cache, and mold data.
+- `lib/environmentAssembler.js`: combines independently refreshed air-quality, weather, vegetation, cache, and mold data.
 - `lib/reverseGeocoder.js`: Nominatim reverse-geocoding URL construction, Soup async fetch, and place-name parsing.
 - `lib/riskCalculator.js`: environmental burden scoring and risk category calculation.
-- `lib/cache.js`: coordinate, place-name, and response cache envelopes with validation.
+- `lib/cache.js`: coordinate, place-name, vegetation, and response cache envelopes with validation.
 - `lib/formatter.js`: translated display formatting for categories, readings, timestamps, and stale status.
 - `lib/notificationPolicy.js`: transition-based notification decisions.
 - `lib/constants.js`: shared risk weights and thresholds.
@@ -79,6 +81,8 @@ The AirAware score is an environmental burden index. It combines:
 
 Pollen burden uses the highest available pollen burden instead of averaging unrelated pollen types. Regulated pollution uses the highest available pollutant-specific AQI among PM2.5, PM10, NO₂, O₃, and SO₂. AirAware uses US AQI for coordinates in the United States and European AQI elsewhere when available; if selected AQI values are unavailable, it falls back to raw-concentration burden scoring. Atmospheric irritants include CO, aerosol optical depth, dust, and optional wildfire-related PM10. Mold potential is inferred from humidity, leaf wetness, precipitation, temperature, dew point, and wind. Missing components are omitted and the remaining weights are renormalized. The score is not medical advice.
 
+Nearby vegetation context is displayed separately and does not modify the AirAware score.
+
 ## Privacy
 
 AirAware does not use analytics and does not store personal information.
@@ -95,6 +99,14 @@ The same coordinates are sent to the Open-Meteo Air Quality API and the
 Open-Meteo Weather Forecast API.
 Latitude and longitude are also sent to OpenStreetMap Nominatim to retrieve a
 human-readable place name for the popup. Place names are cached locally.
+
+When nearby vegetation context is enabled, latitude and longitude are sent to
+the configured OpenStreetMap Overpass API. The query requests mapped vegetation
+and land-use features near the coordinates, including broad vegetation
+categories and explicitly mapped birch, alder, or olive taxonomy where
+available. Results are cached locally. OpenStreetMap coverage may be incomplete,
+and the absence of mapped features must not be interpreted as evidence that
+vegetation is absent.
 
 ## Data Source
 
@@ -117,6 +129,13 @@ https://nominatim.openstreetmap.org/
 
 Place-name attribution: OpenStreetMap contributors.
 
+AirAware uses the OpenStreetMap Overpass API for optional nearby vegetation
+context:
+
+https://overpass-api.de/
+
+Vegetation and land-use data: OpenStreetMap contributors.
+
 ## Limitations
 
 - Pollen variables are primarily available in Europe during pollen season.
@@ -131,6 +150,9 @@ Place-name attribution: OpenStreetMap contributors.
 - Carbon monoxide, aerosol, and PM10 levels can originate from multiple sources.
 - AQI values should not be described as medical advice.
 - AirAware does not account for personal sensitivity, medication, indoor exposure, masks, activity level, or clinical history.
+- Nearby vegetation context depends on OpenStreetMap mapping coverage and Overpass availability.
+- OpenStreetMap vegetation coverage varies by region. Missing mapped features do not mean that the vegetation is absent.
+- Mapped birch, alder, and olive entries require explicit taxonomy tags in OpenStreetMap and do not imply current flowering or pollen production.
 
 ## Roadmap
 

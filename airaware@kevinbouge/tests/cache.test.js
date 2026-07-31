@@ -67,6 +67,14 @@ function writeResponse(cache, response) {
     return runAsync(done => cache.writeResponseAsync(response, done));
 }
 
+function readVegetation(cache, cacheKey) {
+    return runAsync(done => cache.readVegetationAsync(cacheKey, done));
+}
+
+function writeVegetation(cache, response) {
+    return runAsync(done => cache.writeVegetationAsync(response, done));
+}
+
 function writeRawJsonFile(path, text) {
     return runAsync(done => {
         const bytes = new GLib.Bytes(ByteArray.fromString(text));
@@ -230,6 +238,68 @@ function providerResponse() {
     };
 }
 
+function vegetationResponse(overrides = {}) {
+    const cacheKey = overrides.cacheKey || '50.08,14.44,2000';
+
+    return {
+        provider: 'openstreetmap',
+        fetchedAt: '2026-07-31T21:00:00Z',
+        coordinates: {
+            latitude: 50.0755,
+            longitude: 14.4378,
+        },
+        radiusMeters: 2000,
+        cacheKey,
+        categories: {
+            woodland: {
+                present: true,
+                featureCount: 4,
+                nearestMeters: 850,
+            },
+            grassland: {
+                present: true,
+                featureCount: 9,
+                nearestMeters: 120,
+            },
+            orchard: {
+                present: false,
+                featureCount: 0,
+                nearestMeters: null,
+            },
+            scrub: {
+                present: false,
+                featureCount: 0,
+                nearestMeters: null,
+            },
+            parkland: {
+                present: true,
+                featureCount: 2,
+                nearestMeters: 300,
+            },
+            farmland: {
+                present: true,
+                featureCount: 3,
+                nearestMeters: 1100,
+            },
+        },
+        mappedTaxa: {
+            birch: {
+                featureCount: 5,
+                nearestMeters: 250,
+            },
+            alder: {
+                featureCount: 1,
+                nearestMeters: 900,
+            },
+            olive: {
+                featureCount: 0,
+                nearestMeters: null,
+            },
+        },
+        completeness: 'unknown',
+    };
+}
+
 function testCoordinateRoundTrip() {
     const directory = tempCacheDirectory('coordinates');
 
@@ -336,6 +406,69 @@ function testPlaceRoundTrip() {
             'place name should round trip');
         assertEqual(envelope.version, 1,
             'place cache schema should remain stable');
+    } finally {
+        removeDirectory(directory);
+    }
+}
+
+function testVegetationRoundTrip() {
+    const directory = tempCacheDirectory('vegetation');
+
+    try {
+        const cache = Cache.createCache({
+            baseDirectory: directory,
+        });
+        const result = writeVegetation(cache, vegetationResponse());
+        const envelope = readVegetation(cache, '50.08,14.44,2000');
+
+        assertEqual(result.ok, true, 'valid vegetation write should succeed');
+        assertNotNull(envelope, 'vegetation should read back');
+        assertEqual(envelope.version, 1,
+            'vegetation cache schema should be versioned');
+        assertEqual(envelope.data.categories.grassland.nearestMeters, 120,
+            'vegetation category nearest distance should round trip');
+        assertEqual(envelope.data.mappedTaxa.birch.featureCount, 5,
+            'mapped taxon count should round trip');
+    } finally {
+        removeDirectory(directory);
+    }
+}
+
+function testVegetationKeyMismatchReturnsNull() {
+    const directory = tempCacheDirectory('vegetation-key-mismatch');
+
+    try {
+        const cache = Cache.createCache({
+            baseDirectory: directory,
+        });
+
+        writeVegetation(cache, vegetationResponse());
+
+        assertEqual(readVegetation(cache, '50.09,14.44,2000'), null,
+            'vegetation cache should not load for a different coarse location');
+    } finally {
+        removeDirectory(directory);
+    }
+}
+
+function testInvalidVegetationDoesNotReplaceCache() {
+    const directory = tempCacheDirectory('invalid-vegetation');
+
+    try {
+        const cache = Cache.createCache({
+            baseDirectory: directory,
+        });
+        const invalid = vegetationResponse();
+
+        invalid.categories.woodland.nearestMeters = 'bad';
+
+        writeVegetation(cache, vegetationResponse());
+        const result = writeVegetation(cache, invalid);
+        const envelope = readVegetation(cache, '50.08,14.44,2000');
+
+        assertEqual(result.ok, false, 'invalid vegetation write should fail');
+        assertEqual(envelope.data.categories.woodland.nearestMeters, 850,
+            'previous valid vegetation cache should remain unchanged');
     } finally {
         removeDirectory(directory);
     }
@@ -711,6 +844,9 @@ function main() {
         testInvalidCoordinatesDoNotReplaceCache,
         testResponseRoundTrip,
         testPlaceRoundTrip,
+        testVegetationRoundTrip,
+        testVegetationKeyMismatchReturnsNull,
+        testInvalidVegetationDoesNotReplaceCache,
         testInvalidPlaceDoesNotReplaceCache,
         testInvalidResponseDoesNotReplaceCache,
         testResponseWithoutReadingsIsInvalid,
