@@ -5,7 +5,7 @@ const ByteArray = imports.byteArray;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 
-const RESPONSE_CACHE_VERSION = 3;
+const RESPONSE_CACHE_VERSION = 4;
 const STABLE_CACHE_VERSION = 1;
 const DEFAULT_NAMESPACE = 'airaware';
 const COORDINATES_FILE = 'coordinates.json';
@@ -23,6 +23,35 @@ const REQUIRED_READING_FIELDS = Object.freeze([
     'dust',
     'aerosolOpticalDepth',
     'carbonMonoxide',
+    'wildfirePm10',
+]);
+const RAW_POLLUTANT_FIELDS = Object.freeze([
+    'pm25',
+    'pm10',
+    'nitrogenDioxide',
+    'ozone',
+    'sulfurDioxide',
+    'carbonMonoxide',
+]);
+const POLLUTANT_AQI_FIELDS = Object.freeze([
+    'pm25',
+    'pm10',
+    'nitrogenDioxide',
+    'ozone',
+    'sulfurDioxide',
+]);
+const POLLEN_FIELDS = Object.freeze([
+    'alder',
+    'birch',
+    'grass',
+    'mugwort',
+    'olive',
+    'ragweed',
+]);
+const CONTEXT_FIELDS = Object.freeze([
+    'aerosolOpticalDepth',
+    'dust',
+    'wildfirePm10',
 ]);
 
 function _isObject(value) {
@@ -57,39 +86,34 @@ function _hasCanonicalReadingFields(readings) {
     return true;
 }
 
-function _hasLegacyReadingFields(readings) {
-    if (!_isObject(readings))
+function _hasNullableNumericFields(values, fields) {
+    if (!_isObject(values))
         return false;
 
-    for (const field of REQUIRED_READING_FIELDS) {
-        if (field === 'aerosolOpticalDepth' ||
-            field === 'carbonMonoxide' ||
-            field === 'sulfurDioxide')
-            continue;
+    for (const field of fields) {
+        if (!Object.prototype.hasOwnProperty.call(values, field))
+            return false;
 
-        if (!Object.prototype.hasOwnProperty.call(readings, field))
+        if (values[field] !== null && !_isFiniteNumber(values[field]))
             return false;
     }
 
     return true;
 }
 
-function _normalizeReadings(readings) {
-    let normalized = {};
-
-    for (const field of REQUIRED_READING_FIELDS) {
-        normalized[field] = Object.prototype.hasOwnProperty.call(readings, field)
-            ? readings[field]
-            : null;
-    }
-
-    return normalized;
+function _isValidEnvironmentalPoint(point) {
+    return _isObject(point) &&
+        _hasCanonicalReadingFields(point.readings) &&
+        _hasNullableNumericFields(point.rawPollutants, RAW_POLLUTANT_FIELDS) &&
+        _hasNullableNumericFields(point.pollutantAqi, POLLUTANT_AQI_FIELDS) &&
+        _hasNullableNumericFields(point.pollen, POLLEN_FIELDS) &&
+        _hasNullableNumericFields(point.context, CONTEXT_FIELDS);
 }
 
 function _isValidForecastDay(day) {
     return _isObject(day) &&
         typeof day.date === 'string' &&
-        _hasCanonicalReadingFields(day.readings) &&
+        _isValidEnvironmentalPoint(day) &&
         _isValidMoldPotential(day.moldPotential || null);
 }
 
@@ -117,14 +141,25 @@ function _isValidWeatherResponse(weather) {
 
     if (!_isObject(weather) ||
         typeof weather.provider !== 'string' ||
-        !Array.isArray(weather.hourly) ||
         !_isFiniteNumber(weather.fetchedAt))
         return false;
 
-    for (const hour of weather.hourly) {
+    const records = Array.isArray(weather.hourlyRecords)
+        ? weather.hourlyRecords
+        : Array.isArray(weather.hourly)
+            ? weather.hourly
+            : [];
+
+    for (const hour of records) {
         if (!_isValidWeatherHour(hour))
             return false;
     }
+
+    if (!Array.isArray(weather.hourly) && !_isObject(weather.hourly))
+        return false;
+
+    if (weather.daily !== undefined && weather.daily !== null && !_isObject(weather.daily))
+        return false;
 
     return true;
 }
@@ -145,56 +180,6 @@ function _isValidMoldPotential(moldPotential) {
         moldPotential.score <= 100;
 }
 
-function _migrateForecastDay(day) {
-    let migrated = {};
-
-    for (const key in day)
-        migrated[key] = day[key];
-
-    migrated.readings = _normalizeReadings(day.readings);
-
-    if (!Object.prototype.hasOwnProperty.call(migrated, 'moldPotential'))
-        migrated.moldPotential = null;
-
-    return migrated;
-}
-
-function _migrateProviderResponse(response) {
-    if (!_isObject(response) ||
-        !_isObject(response.current) ||
-        !_hasLegacyReadingFields(response.current.readings) ||
-        !Array.isArray(response.forecast))
-        return response;
-
-    let migrated = {};
-
-    for (const key in response)
-        migrated[key] = response[key];
-
-    migrated.current = {};
-
-    for (const key in response.current)
-        migrated.current[key] = response.current[key];
-
-    migrated.current.readings = _normalizeReadings(response.current.readings);
-
-    if (!Object.prototype.hasOwnProperty.call(migrated.current, 'moldPotential'))
-        migrated.current.moldPotential = null;
-
-    migrated.forecast = response.forecast.map(_migrateForecastDay);
-    migrated.airQualityFetchedAt = _isFiniteNumber(response.airQualityFetchedAt)
-        ? response.airQualityFetchedAt
-        : response.fetchedAt;
-    migrated.weatherFetchedAt = _isFiniteNumber(response.weatherFetchedAt)
-        ? response.weatherFetchedAt
-        : null;
-
-    if (!Object.prototype.hasOwnProperty.call(migrated, 'weather'))
-        migrated.weather = null;
-
-    return migrated;
-}
-
 function _nowMs() {
     return GLib.get_real_time() / 1000;
 }
@@ -213,53 +198,59 @@ function _ensureDirectory(path) {
     }
 }
 
-function _readJsonFile(path) {
+function _readJsonFileAsync(path, callback) {
     const file = Gio.File.new_for_path(path);
-    let stream = null;
+    const cancellable = Gio.Cancellable.new();
 
-    try {
-        stream = file.read(null);
-    } catch (error) {
-        if (error.matches &&
-            error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
-            return null;
+    file.load_contents_async(cancellable, (source, result) => {
+        try {
+            const [, contents] = source.load_contents_finish(result);
+            callback(null, JSON.parse(ByteArray.toString(contents)));
+        } catch (error) {
+            if (error.matches &&
+                error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                callback(null, null);
+                return;
+            }
 
-        throw error;
-    }
-
-    const chunks = [];
-
-    try {
-        while (true) {
-            const bytes = stream.read_bytes(4096, null);
-
-            if (bytes.get_size() === 0)
-                break;
-
-            chunks.push(ByteArray.toString(bytes.toArray()));
+            callback(error, null);
         }
-    } finally {
-        stream.close(null);
-    }
+    });
 
-    return JSON.parse(chunks.join(''));
+    return {
+        cancel() {
+            cancellable.cancel();
+        },
+    };
 }
 
-function _writeJsonFile(path, value) {
+function _writeJsonFileAsync(path, value, callback) {
     const file = Gio.File.new_for_path(path);
     const contents = `${JSON.stringify(value, null, 2)}\n`;
-    const stream = file.replace(
+    const cancellable = Gio.Cancellable.new();
+    const bytes = new GLib.Bytes(ByteArray.fromString(contents));
+
+    file.replace_contents_bytes_async(
+        bytes,
         null,
         false,
         Gio.FileCreateFlags.REPLACE_DESTINATION,
-        null
+        cancellable,
+        (source, result) => {
+            try {
+                source.replace_contents_finish(result);
+                callback(null);
+            } catch (error) {
+                callback(error);
+            }
+        }
     );
 
-    try {
-        stream.write_all(contents, null);
-    } finally {
-        stream.close(null);
-    }
+    return {
+        cancel() {
+            cancellable.cancel();
+        },
+    };
 }
 
 function _failure(message) {
@@ -276,55 +267,49 @@ function _success(value) {
     };
 }
 
-function _readEnvelope(path, validator) {
-    return _readEnvelopeWithMigration(path, validator, null, STABLE_CACHE_VERSION);
+function _readEnvelopeAsync(path, validator, callback) {
+    return _readVersionedEnvelopeAsync(path, validator, STABLE_CACHE_VERSION, callback);
 }
 
-function _readEnvelopeWithMigration(path, validator, migrator, targetVersion = RESPONSE_CACHE_VERSION) {
-    let envelope = null;
+function _readVersionedEnvelopeAsync(path, validator, targetVersion, callback) {
+    return _readJsonFileAsync(path, (error, envelope) => {
+        if (error || !_isObject(envelope) || envelope.version !== targetVersion) {
+            callback(null, null);
+            return;
+        }
 
-    try {
-        envelope = _readJsonFile(path);
-    } catch (error) {
-        return null;
-    }
+        if (!_isFiniteNumber(envelope.savedAt) || !validator(envelope.data)) {
+            callback(null, null);
+            return;
+        }
 
-    if (!_isObject(envelope) || envelope.version !== targetVersion) {
-        if (!_isObject(envelope) ||
-            (envelope.version !== 1 && envelope.version !== 2) ||
-            typeof migrator !== 'function')
-            return null;
-    }
+        callback(null, envelope);
+    });
+}
 
-    if (!_isFiniteNumber(envelope.savedAt))
-        return null;
+function _writeEnvelopeAsync(path, data, validator, callback) {
+    return _writeVersionedEnvelopeAsync(path, data, validator, STABLE_CACHE_VERSION, callback);
+}
 
-    if (envelope.version !== targetVersion && typeof migrator === 'function') {
-        const migratedData = migrator(envelope.data);
+function _writeVersionedEnvelopeAsync(path, data, validator, version, callback) {
+    const done = typeof callback === 'function'
+        ? callback
+        : function() {
+        };
 
-        if (!validator(migratedData))
-            return null;
+    if (!validator(data)) {
+        const result = _failure('Invalid cache data');
+
+        GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+            done(null, result);
+            return GLib.SOURCE_REMOVE;
+        });
 
         return {
-            version: targetVersion,
-            savedAt: envelope.savedAt,
-            data: migratedData,
+            cancel() {
+            },
         };
     }
-
-    if (!validator(envelope.data))
-        return null;
-
-    return envelope;
-}
-
-function _writeEnvelope(path, data, validator) {
-    return _writeVersionedEnvelope(path, data, validator, STABLE_CACHE_VERSION);
-}
-
-function _writeVersionedEnvelope(path, data, validator, version) {
-    if (!validator(data))
-        return _failure('Invalid cache data');
 
     const envelope = {
         version,
@@ -332,13 +317,14 @@ function _writeVersionedEnvelope(path, data, validator, version) {
         data,
     };
 
-    try {
-        _writeJsonFile(path, envelope);
-    } catch (error) {
-        return _failure(error.message);
-    }
+    return _writeJsonFileAsync(path, envelope, error => {
+        if (error) {
+            done(null, _failure(error.message));
+            return;
+        }
 
-    return _success(envelope);
+        done(null, _success(envelope));
+    });
 }
 
 /**
@@ -393,7 +379,7 @@ var isValidProviderResponse = function(response) {
     return _isObject(response) &&
         typeof response.provider === 'string' &&
         _isObject(response.current) &&
-        _hasCanonicalReadingFields(response.current.readings) &&
+        _isValidEnvironmentalPoint(response.current) &&
         _hasAnyReading(response.current.readings) &&
         _isValidMoldPotential(response.current.moldPotential || null) &&
         _isValidForecast(response.forecast) &&
@@ -427,8 +413,8 @@ var createCache = function(options = {}) {
          *
          * @returns {Object|null} Cache envelope or null.
          */
-        readCoordinates() {
-            return _readEnvelope(coordinatesPath, isValidCoordinates);
+        readCoordinatesAsync(callback) {
+            return _readEnvelopeAsync(coordinatesPath, isValidCoordinates, callback);
         },
 
         /**
@@ -437,8 +423,8 @@ var createCache = function(options = {}) {
          * @param {Object} coordinates - Coordinates object.
          * @returns {Object} Result object with ok boolean.
          */
-        writeCoordinates(coordinates) {
-            return _writeEnvelope(coordinatesPath, coordinates, isValidCoordinates);
+        writeCoordinatesAsync(coordinates, callback = null) {
+            return _writeEnvelopeAsync(coordinatesPath, coordinates, isValidCoordinates, callback);
         },
 
         /**
@@ -446,8 +432,8 @@ var createCache = function(options = {}) {
          *
          * @returns {Object|null} Cache envelope or null.
          */
-        readPlace() {
-            return _readEnvelope(placePath, isValidPlace);
+        readPlaceAsync(callback) {
+            return _readEnvelopeAsync(placePath, isValidPlace, callback);
         },
 
         /**
@@ -456,8 +442,8 @@ var createCache = function(options = {}) {
          * @param {Object} place - Place-name object.
          * @returns {Object} Result object with ok boolean.
          */
-        writePlace(place) {
-            return _writeEnvelope(placePath, place, isValidPlace);
+        writePlaceAsync(place, callback = null) {
+            return _writeEnvelopeAsync(placePath, place, isValidPlace, callback);
         },
 
         /**
@@ -465,12 +451,12 @@ var createCache = function(options = {}) {
          *
          * @returns {Object|null} Cache envelope or null.
          */
-        readResponse() {
-            return _readEnvelopeWithMigration(
+        readResponseAsync(callback) {
+            return _readVersionedEnvelopeAsync(
                 responsePath,
                 isValidProviderResponse,
-                _migrateProviderResponse,
-                RESPONSE_CACHE_VERSION
+                RESPONSE_CACHE_VERSION,
+                callback
             );
         },
 
@@ -480,12 +466,13 @@ var createCache = function(options = {}) {
          * @param {Object} response - Canonical provider response.
          * @returns {Object} Result object with ok boolean.
          */
-        writeResponse(response) {
-            return _writeVersionedEnvelope(
+        writeResponseAsync(response, callback = null) {
+            return _writeVersionedEnvelopeAsync(
                 responsePath,
                 response,
                 isValidProviderResponse,
-                RESPONSE_CACHE_VERSION
+                RESPONSE_CACHE_VERSION,
+                callback
             );
         },
     };

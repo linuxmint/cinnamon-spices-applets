@@ -20,368 +20,305 @@ function assertNear(actual, expected, tolerance, message) {
         throw new Error(`${message}: expected ${expected}, got ${actual}`);
 }
 
-function completeMold(score = 15) {
+function mold(score = 15) {
     return {
         score,
         isAvailable: true,
-        dataCompleteness: 1,
-        missingComponents: [],
+        completeness: 1,
     };
 }
 
-function testLowRisk() {
-    const result = RiskCalculator.calculateRisk({
-        treePollen: 0,
-        grassPollen: 1,
-        weedPollen: 2,
-        pm25: 3,
-        pm10: 5,
-        nitrogenDioxide: 10,
-        ozone: 20,
-        sulfurDioxide: 0,
-        dust: 2,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 100,
-    }, completeMold(15));
+function current(overrides = {}) {
+    const result = {
+        pollen: {
+            alder: 0,
+            birch: 0,
+            grass: 0,
+            mugwort: 0,
+            olive: 0,
+            ragweed: 0,
+        },
+        rawPollutants: {
+            pm25: 4,
+            pm10: 8,
+            nitrogenDioxide: 5,
+            ozone: 20,
+            sulfurDioxide: 2,
+            carbonMonoxide: 120,
+        },
+        pollutantAqi: {
+            pm25: 10,
+            pm10: 12,
+            nitrogenDioxide: 8,
+            ozone: 16,
+            sulfurDioxide: 3,
+        },
+        context: {
+            aerosolOpticalDepth: 0,
+            dust: 0,
+            wildfirePm10: null,
+        },
+    };
 
-    assertEqual(result.category.id, 'low', 'low readings should classify as low');
-    assertEqual(result.isPartial, false, 'complete readings should not be partial');
+    for (const key in overrides)
+        result[key] = overrides[key];
+
+    return result;
 }
 
-function testHighestPollenDominates() {
-    const result = RiskCalculator.calculateRisk({
-        treePollen: 0,
-        grassPollen: 100,
-        weedPollen: 0,
-        pm25: 0,
-        pm10: 0,
-        nitrogenDioxide: 0,
-        ozone: 0,
-        sulfurDioxide: 0,
-        dust: 0,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 0,
+function testSixPollenTypesUseHighestBurden() {
+    const result = RiskCalculator.calculatePollenScore({
+        pollen: {
+            alder: 0,
+            birch: 250,
+            grass: 0,
+            mugwort: 0,
+            olive: 0,
+            ragweed: 0,
+        },
     });
 
-    assertEqual(
-        result.components.pollen.dominant.field,
-        'grassPollen',
-        'highest pollen category should dominate pollen burden'
-    );
-    assertEqual(result.components.pollen.dominant.category.id, 'very-high',
-        'grass threshold should classify as very high');
+    assertEqual(result.score, 95,
+        'highest pollen type should determine pollen score');
+    assertEqual(result.dominantType, 'birch',
+        'dominant pollen type should be returned');
+    assertEqual(result.availableTypes.length, 6,
+        'available pollen types should be reported');
 }
 
-function testPollenTypesAreNotAveraged() {
-    const result = RiskCalculator.calculateRisk({
-        treePollen: 200,
-        grassPollen: 0,
-        weedPollen: 0,
-        pm25: 0,
-        pm10: 0,
-        nitrogenDioxide: 0,
-        ozone: 0,
-        sulfurDioxide: 0,
-        dust: 0,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 0,
+function testUnavailablePollenTypesAreIgnored() {
+    const result = RiskCalculator.calculatePollenScore({
+        pollen: {
+            alder: null,
+            birch: null,
+            grass: 60,
+            mugwort: null,
+            olive: null,
+            ragweed: null,
+        },
     });
 
-    assertEqual(result.components.pollen.dominant.field, 'treePollen',
-        'single very high pollen source should dominate pollen burden');
-    assertEqual(result.components.pollen.score, 95,
-        'pollen group should use dominant category score, not average pollen types');
-    assertEqual(result.score, 62,
-        'combined score should renormalize when mold is unavailable');
-    assertEqual(result.category.id, 'high',
-        'single very high pollen burden should remain visible in combined category');
+    assertEqual(result.dominantType, 'grass',
+        'available pollen should be used when other pollen types are missing');
+    assertEqual(result.score, 72,
+        'available high pollen should not be diluted by missing values');
 }
 
-function testExactWeighting() {
-    const result = RiskCalculator.calculateRisk({
-        treePollen: 30,
-        grassPollen: 0,
-        weedPollen: 0,
-        pm25: 25,
-        pm10: 0,
-        nitrogenDioxide: 0,
-        ozone: 180,
-        sulfurDioxide: 0,
-        dust: 0,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 0,
-    }, completeMold(95));
-
-    assertEqual(result.components.pollen.score, 45,
-        'moderate pollen should contribute representative score 45');
-    assertEqual(result.components.particulates.score, 72,
-        'high particulates should contribute representative score 72');
-    assertEqual(result.components.irritants.score, 33,
-        'irritants should combine independently normalized variables');
-    assertEqual(result.score, 58,
-        'combined score should apply 50/25/10/15 weights');
-    assertEqual(result.category.id, 'high',
-        'weighted score should classify from final combined score');
-}
-
-function testVeryHighCombinedRisk() {
-    const result = RiskCalculator.calculateRisk({
-        treePollen: 200,
-        grassPollen: 5,
-        weedPollen: 5,
-        pm25: 30,
-        pm10: 10,
-        nitrogenDioxide: 20,
-        ozone: 70,
-        sulfurDioxide: 400,
-        dust: 10,
-        aerosolOpticalDepth: 0.8,
-        carbonMonoxide: 5000,
-    }, completeMold(95));
-
-    assertEqual(result.category.id, 'very-high',
-        'weighted burden should classify as very high');
-}
-
-function testMissingPollenStillCalculates() {
-    const result = RiskCalculator.calculateRisk({
-        pm25: 55,
-        pm10: 80,
-        nitrogenDioxide: 10,
-        ozone: 10,
-        sulfurDioxide: 0,
-        dust: 10,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 100,
+function testAllUnavailablePollenIsUnavailable() {
+    const result = RiskCalculator.calculatePollenScore({
+        pollen: {
+            alder: null,
+            birch: null,
+            grass: null,
+            mugwort: null,
+            olive: null,
+            ragweed: null,
+        },
     });
 
-    assertTrue(result.isPartial, 'missing pollen should mark response partial');
-    assertEqual(result.missingGroups.indexOf('pollen') >= 0, true,
-        'pollen group should be marked missing');
-    assertEqual(result.category.id, 'high',
-        'available pollutant groups should still produce a usable category');
+    assertEqual(result.score, null,
+        'pollen result should be unavailable with no pollen data');
 }
 
-function testMalformedValuesAreMissing() {
-    const result = RiskCalculator.calculateRisk({
-        treePollen: 'bad',
-        grassPollen: null,
-        weedPollen: undefined,
-        pm25: NaN,
-        pm10: 15,
-        nitrogenDioxide: Infinity,
-        ozone: 0,
-        sulfurDioxide: 'bad',
-        dust: -4,
-        aerosolOpticalDepth: 'bad',
-        carbonMonoxide: null,
+function testRegulatedPollutionUsesMaximumEuropeanAqi() {
+    const result = RiskCalculator.calculateRegulatedPollutionScore({
+        pollutantAqi: {
+            pm25: 18,
+            pm10: 21,
+            nitrogenDioxide: 12,
+            ozone: 68,
+            sulfurDioxide: 8,
+        },
+        rawPollutants: {
+            pm25: 999,
+            pm10: 999,
+            nitrogenDioxide: 999,
+            ozone: 999,
+            sulfurDioxide: 999,
+        },
     });
 
-    assertTrue(result.isPartial, 'malformed readings should mark response partial');
-    assertEqual(result.components.particulates.dominant.field, 'pm10',
-        'valid particulate value should still be used');
+    assertEqual(result.score, 68,
+        'maximum pollutant-specific European AQI should determine pollution score');
+    assertEqual(result.dominantPollutant, 'ozone',
+        'dominant pollutant should be returned');
+    assertEqual(result.source, 'european-aqi',
+        'AQI scoring source should be exposed');
 }
 
-function testNoUsableReadingsReturnsLowPartialRisk() {
-    const result = RiskCalculator.calculateRisk({});
+function testRegulatedPollutionIgnoresMissingAqi() {
+    const result = RiskCalculator.calculateRegulatedPollutionScore({
+        pollutantAqi: {
+            pm25: null,
+            pm10: null,
+            nitrogenDioxide: 41,
+            ozone: null,
+            sulfurDioxide: null,
+        },
+    });
 
-    assertEqual(result.score, 0,
-        'missing all groups should return zero score');
-    assertEqual(result.category.id, 'low',
-        'missing all groups should classify as low environmental burden');
-    assertEqual(result.isPartial, true,
-        'missing all groups should be marked partial');
-    assertEqual(result.missingGroups.length, 4,
-        'all top-level groups should be reported missing');
+    assertEqual(result.score, 41,
+        'single available pollutant AQI should be used');
+    assertEqual(result.dominantPollutant, 'nitrogenDioxide',
+        'single available AQI should be dominant');
 }
 
-function testMoldReceivesConfiguredWeight() {
-    const result = RiskCalculator.calculateRisk({
-        treePollen: 0,
-        grassPollen: 0,
-        weedPollen: 0,
-        pm25: 0,
-        pm10: 0,
-        nitrogenDioxide: 0,
-        ozone: 0,
-        sulfurDioxide: 0,
-        dust: 0,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 0,
-    }, completeMold(95));
+function testRegulatedPollutionFallsBackToRawConcentration() {
+    const result = RiskCalculator.calculateRegulatedPollutionScore({
+        pollutantAqi: {
+            pm25: null,
+            pm10: null,
+            nitrogenDioxide: null,
+            ozone: null,
+            sulfurDioxide: null,
+        },
+        rawPollutants: {
+            pm25: 30,
+            pm10: 10,
+            nitrogenDioxide: 10,
+            ozone: 10,
+            sulfurDioxide: 0,
+        },
+    });
 
-    assertNear(result.effectiveWeights.mold, 0.15, 0.001,
-        'mold should receive 15% weight when available');
-    assertEqual(result.moldScore, 95,
-        'mold score should be exposed');
+    assertEqual(result.source, 'raw-concentration-fallback',
+        'missing pollutant AQIs should use raw-concentration fallback');
+    assertEqual(result.dominantPollutant, 'pm25',
+        'fallback should expose dominant raw pollutant');
+    assertTrue(result.completeness < 1,
+        'fallback should reduce completeness');
 }
 
-function testTopLevelWeightsTotalOne() {
-    const result = RiskCalculator.calculateRisk({
-        treePollen: 0,
-        grassPollen: 0,
-        weedPollen: 0,
-        pm25: 0,
-        pm10: 0,
-        nitrogenDioxide: 0,
-        ozone: 0,
-        sulfurDioxide: 0,
-        dust: 0,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 0,
-    }, completeMold(15));
+function testNoInvalidAqiRawMixing() {
+    const result = RiskCalculator.calculateRegulatedPollutionScore({
+        pollutantAqi: {
+            pm25: 22,
+            pm10: null,
+            nitrogenDioxide: null,
+            ozone: null,
+            sulfurDioxide: null,
+        },
+        rawPollutants: {
+            ozone: 999,
+        },
+    });
+
+    assertEqual(result.score, 22,
+        'available AQI should not be mixed with unrelated raw concentration values');
+    assertEqual(result.source, 'european-aqi',
+        'partial AQI data should still use AQI source only');
+}
+
+function testAtmosphericContextContributions() {
+    const low = RiskCalculator.calculateAtmosphericIrritantsScore({
+        rawPollutants: {
+            carbonMonoxide: 0,
+        },
+        context: {
+            aerosolOpticalDepth: 0,
+            dust: 0,
+            wildfirePm10: 0,
+        },
+    });
+    const high = RiskCalculator.calculateAtmosphericIrritantsScore({
+        rawPollutants: {
+            carbonMonoxide: 4000,
+        },
+        context: {
+            aerosolOpticalDepth: 0.6,
+            dust: 100,
+            wildfirePm10: 50,
+        },
+    });
+
+    assertTrue(high.score > low.score,
+        'context values should contribute to atmospheric irritants');
+    assertNear(high.effectiveWeights.carbonMonoxide, 0.35, 0.001,
+        'carbon monoxide should use configured context weight');
+    assertEqual(high.wildfirePm10Available, true,
+        'wildfire-related PM10 availability should be exposed');
+}
+
+function testAtmosphericContextRenormalizesMissingFields() {
+    const result = RiskCalculator.calculateAtmosphericIrritantsScore({
+        rawPollutants: {
+            carbonMonoxide: 4000,
+        },
+        context: {
+            aerosolOpticalDepth: null,
+            dust: null,
+            wildfirePm10: null,
+        },
+    });
+
+    assertEqual(result.score, 95,
+        'single available context field should not be diluted by missing values');
+    assertNear(result.effectiveWeights.carbonMonoxide, 1, 0.001,
+        'available context field should be renormalized');
+    assertEqual(result.wildfirePm10Available, false,
+        'missing wildfire PM10 should not be treated as available');
+}
+
+function testTopLevelWeights() {
+    const result = RiskCalculator.calculateRisk(current(), mold(15));
     const total = result.effectiveWeights.pollen +
-        result.effectiveWeights.particulates +
-        result.effectiveWeights.irritants +
+        result.effectiveWeights.regulatedPollution +
+        result.effectiveWeights.atmosphericIrritants +
         result.effectiveWeights.mold;
 
     assertNear(total, 1, 0.001,
-        'effective top-level weights should total 100%');
+        'effective top-level weights should sum to 100%');
+    assertNear(result.effectiveWeights.pollen, 0.5, 0.001,
+        'pollen should receive 50%');
+    assertNear(result.effectiveWeights.regulatedPollution, 0.25, 0.001,
+        'regulated pollution should receive 25%');
+    assertNear(result.effectiveWeights.atmosphericIrritants, 0.1, 0.001,
+        'atmospheric irritants should receive 10%');
+    assertNear(result.effectiveWeights.mold, 0.15, 0.001,
+        'mold should receive 15%');
 }
 
-function testWeightsRenormalizeWhenMoldUnavailable() {
+function testUnavailableComponentsRenormalize() {
     const result = RiskCalculator.calculateRisk({
-        treePollen: 0,
-        grassPollen: 0,
-        weedPollen: 0,
-        pm25: 0,
-        pm10: 0,
-        nitrogenDioxide: 0,
-        ozone: 0,
-        sulfurDioxide: 0,
-        dust: 0,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 0,
-    });
+        pollen: {
+            alder: 200,
+        },
+        pollutantAqi: {},
+        rawPollutants: {},
+        context: {},
+    }, null);
 
-    assertEqual(result.moldScore, null,
-        'missing mold should expose null mold score');
-    assertNear(result.effectiveWeights.pollen, 0.5 / 0.85, 0.001,
-        'pollen should be renormalized when mold is unavailable');
-    assertNear(result.effectiveWeights.mold, 0, 0.001,
-        'mold should have zero effective weight when unavailable');
+    assertEqual(result.score, 95,
+        'single available top-level component should not be diluted');
+    assertNear(result.effectiveWeights.pollen, 1, 0.001,
+        'available top-level component should be renormalized');
+    assertTrue(result.missingGroups.indexOf('mold') !== -1,
+        'missing mold should be reported');
 }
 
-function testAtmosphericVariablesAffectIrritantScore() {
-    const low = RiskCalculator.calculateRisk({
-        nitrogenDioxide: 0,
-        ozone: 0,
-        sulfurDioxide: 0,
-        dust: 0,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 0,
-    });
-    const high = RiskCalculator.calculateRisk({
-        nitrogenDioxide: 0,
-        ozone: 0,
-        sulfurDioxide: 350,
-        dust: 0,
-        aerosolOpticalDepth: 0.6,
-        carbonMonoxide: 4000,
-    });
-
-    assertTrue(high.irritantScore > low.irritantScore,
-        'sulfur dioxide, aerosol optical depth, and carbon monoxide should affect irritant score');
-}
-
-function testDustContributesToIrritantScore() {
-    const low = RiskCalculator.calculateRisk({
-        nitrogenDioxide: 0,
-        ozone: 0,
-        sulfurDioxide: 0,
-        dust: 0,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 0,
-    });
-    const high = RiskCalculator.calculateRisk({
-        nitrogenDioxide: 0,
-        ozone: 0,
-        sulfurDioxide: 0,
-        dust: 100,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 0,
-    });
-
-    assertTrue(high.irritantScore > low.irritantScore,
-        'dust should contribute to irritant score');
-    assertNear(high.components.irritants.effectiveWeights.dust, 0.13, 0.001,
-        'dust should use the configured irritant weight when complete');
-}
-
-function testSulfurDioxideContributesToIrritantScore() {
-    const low = RiskCalculator.calculateRisk({
-        nitrogenDioxide: 0,
-        ozone: 0,
-        sulfurDioxide: 0,
-        dust: 0,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 0,
-    });
-    const high = RiskCalculator.calculateRisk({
-        nitrogenDioxide: 0,
-        ozone: 0,
-        sulfurDioxide: 350,
-        dust: 0,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 0,
-    });
-
-    assertTrue(high.irritantScore > low.irritantScore,
-        'sulfur dioxide should contribute to irritant score');
-    assertNear(high.components.irritants.effectiveWeights.sulfurDioxide, 0.18, 0.001,
-        'sulfur dioxide should use the configured irritant weight when complete');
-}
-
-function testMissingIrritantsRenormalize() {
-    const result = RiskCalculator.calculateRisk({
-        nitrogenDioxide: 200,
-        ozone: null,
-        sulfurDioxide: null,
-        dust: null,
-        aerosolOpticalDepth: null,
-        carbonMonoxide: null,
-    });
-
-    assertEqual(result.irritantScore, 95,
-        'single valid irritant should not be diluted by missing values');
-    assertNear(result.components.irritants.effectiveWeights.nitrogenDioxide, 1, 0.001,
-        'available irritant weight should be renormalized internally');
-}
-
-function testMissingIrritantsAreNotZero() {
-    const missing = RiskCalculator.calculateRisk({
-        nitrogenDioxide: 200,
-    });
-    const zero = RiskCalculator.calculateRisk({
-        nitrogenDioxide: 200,
-        ozone: 0,
-        sulfurDioxide: 0,
-        dust: 0,
-        aerosolOpticalDepth: 0,
-        carbonMonoxide: 0,
-    });
-
-    assertTrue(missing.irritantScore > zero.irritantScore,
-        'missing irritants should be omitted, not treated as zero');
-}
-
-function testFinalScoreIsClamped() {
-    const result = RiskCalculator.calculateRisk({
-        treePollen: 9999,
-        grassPollen: 9999,
-        weedPollen: 9999,
-        pm25: 9999,
-        pm10: 9999,
-        nitrogenDioxide: 9999,
-        ozone: 9999,
-        sulfurDioxide: 9999,
-        dust: 9999,
-        aerosolOpticalDepth: 9999,
-        carbonMonoxide: 9999,
-    }, completeMold(9999));
+function testDominantComponentAndClamping() {
+    const result = RiskCalculator.calculateRisk(current({
+        pollen: {
+            alder: 0,
+            birch: 0,
+            grass: 0,
+            mugwort: 0,
+            olive: 0,
+            ragweed: 0,
+        },
+        pollutantAqi: {
+            pm25: 120,
+            pm10: 20,
+            nitrogenDioxide: 20,
+            ozone: 20,
+            sulfurDioxide: 20,
+        },
+    }), mold(10));
 
     assertTrue(result.score >= 0 && result.score <= 100,
-        'final score should remain within 0 to 100');
+        'overall score should remain within 0 to 100');
+    assertEqual(result.dominantComponent.name, 'regulatedPollution',
+        'dominant top-level component should be exposed');
 }
 
 function testClassifyValueThresholdBoundaries() {
@@ -412,23 +349,18 @@ function testClassifyValueThresholdBoundaries() {
 
 function main() {
     const tests = [
-        testLowRisk,
-        testHighestPollenDominates,
-        testPollenTypesAreNotAveraged,
-        testExactWeighting,
-        testVeryHighCombinedRisk,
-        testMissingPollenStillCalculates,
-        testMalformedValuesAreMissing,
-        testNoUsableReadingsReturnsLowPartialRisk,
-        testMoldReceivesConfiguredWeight,
-        testTopLevelWeightsTotalOne,
-        testWeightsRenormalizeWhenMoldUnavailable,
-        testAtmosphericVariablesAffectIrritantScore,
-        testDustContributesToIrritantScore,
-        testSulfurDioxideContributesToIrritantScore,
-        testMissingIrritantsRenormalize,
-        testMissingIrritantsAreNotZero,
-        testFinalScoreIsClamped,
+        testSixPollenTypesUseHighestBurden,
+        testUnavailablePollenTypesAreIgnored,
+        testAllUnavailablePollenIsUnavailable,
+        testRegulatedPollutionUsesMaximumEuropeanAqi,
+        testRegulatedPollutionIgnoresMissingAqi,
+        testRegulatedPollutionFallsBackToRawConcentration,
+        testNoInvalidAqiRawMixing,
+        testAtmosphericContextContributions,
+        testAtmosphericContextRenormalizesMissingFields,
+        testTopLevelWeights,
+        testUnavailableComponentsRenormalize,
+        testDominantComponentAndClamping,
         testClassifyValueThresholdBoundaries,
     ];
 

@@ -22,6 +22,49 @@ function assertNotNull(value, message) {
         throw new Error(message);
 }
 
+function runAsync(operation) {
+    const loop = new GLib.MainLoop(null, false);
+    let error = null;
+    let value = null;
+
+    operation((operationError, operationValue) => {
+        error = operationError;
+        value = operationValue;
+        loop.quit();
+    });
+
+    loop.run();
+
+    if (error)
+        throw error;
+
+    return value;
+}
+
+function readCoordinates(cache) {
+    return runAsync(done => cache.readCoordinatesAsync(done));
+}
+
+function writeCoordinates(cache, coordinates) {
+    return runAsync(done => cache.writeCoordinatesAsync(coordinates, done));
+}
+
+function readPlace(cache) {
+    return runAsync(done => cache.readPlaceAsync(done));
+}
+
+function writePlace(cache, place) {
+    return runAsync(done => cache.writePlaceAsync(place, done));
+}
+
+function readResponse(cache) {
+    return runAsync(done => cache.readResponseAsync(done));
+}
+
+function writeResponse(cache, response) {
+    return runAsync(done => cache.writeResponseAsync(response, done));
+}
+
 function tempCacheDirectory(name) {
     return GLib.build_filenamev([
         GLib.get_tmp_dir(),
@@ -52,23 +95,58 @@ function removeDirectory(path) {
 }
 
 function providerResponse() {
+    const readings = {
+        treePollen: 1,
+        grassPollen: 2,
+        weedPollen: 3,
+        pm25: 4,
+        pm10: 5,
+        nitrogenDioxide: 6,
+        ozone: 7,
+        sulfurDioxide: 9,
+        dust: 8,
+        aerosolOpticalDepth: 0.12,
+        carbonMonoxide: 150,
+        wildfirePm10: 1.2,
+    };
+    const rawPollutants = {
+        pm25: 4,
+        pm10: 5,
+        nitrogenDioxide: 6,
+        ozone: 7,
+        sulfurDioxide: 9,
+        carbonMonoxide: 150,
+    };
+    const pollutantAqi = {
+        pm25: 11,
+        pm10: 12,
+        nitrogenDioxide: 13,
+        ozone: 14,
+        sulfurDioxide: 15,
+    };
+    const pollen = {
+        alder: 1,
+        birch: 2,
+        grass: 2,
+        mugwort: 3,
+        olive: 1,
+        ragweed: 2,
+    };
+    const context = {
+        aerosolOpticalDepth: 0.12,
+        dust: 8,
+        wildfirePm10: 1.2,
+    };
+
     return {
         provider: 'open-meteo',
         fetchedAt: 1785445000000,
         current: {
-            readings: {
-                treePollen: 1,
-                grassPollen: 2,
-                weedPollen: 3,
-                pm25: 4,
-                pm10: 5,
-                nitrogenDioxide: 6,
-                ozone: 7,
-                sulfurDioxide: 9,
-                dust: 8,
-                aerosolOpticalDepth: 0.12,
-                carbonMonoxide: 150,
-            },
+            readings,
+            rawPollutants,
+            pollutantAqi,
+            pollen,
+            context,
             moldPotential: {
                 score: 45,
                 category: {
@@ -85,19 +163,11 @@ function providerResponse() {
         forecast: [
             {
                 date: '2026-07-30',
-                readings: {
-                    treePollen: 1,
-                    grassPollen: 2,
-                    weedPollen: 3,
-                    pm25: 4,
-                    pm10: 5,
-                    nitrogenDioxide: 6,
-                    ozone: 7,
-                    sulfurDioxide: 9,
-                    dust: 8,
-                    aerosolOpticalDepth: 0.12,
-                    carbonMonoxide: 150,
-                },
+                readings,
+                rawPollutants,
+                pollutantAqi,
+                pollen,
+                context,
                 moldPotential: null,
             },
         ],
@@ -121,49 +191,6 @@ function providerResponse() {
     };
 }
 
-function legacyProviderResponse() {
-    return {
-        provider: 'open-meteo',
-        fetchedAt: 1785445000000,
-        current: {
-            readings: {
-                treePollen: 1,
-                grassPollen: 2,
-                weedPollen: 3,
-                pm25: 4,
-                pm10: 5,
-                nitrogenDioxide: 6,
-                ozone: 7,
-                dust: 8,
-            },
-        },
-        forecast: [
-            {
-                date: '2026-07-30',
-                readings: {
-                    treePollen: 1,
-                    grassPollen: 2,
-                    weedPollen: 3,
-                    pm25: 4,
-                    pm10: 5,
-                    nitrogenDioxide: 6,
-                    ozone: 7,
-                    dust: 8,
-                },
-            },
-        ],
-    };
-}
-
-function previousProviderResponse() {
-    const response = providerResponse();
-
-    delete response.current.readings.sulfurDioxide;
-    delete response.forecast[0].readings.sulfurDioxide;
-
-    return response;
-}
-
 function testCoordinateRoundTrip() {
     const directory = tempCacheDirectory('coordinates');
 
@@ -171,11 +198,11 @@ function testCoordinateRoundTrip() {
         const cache = Cache.createCache({
             baseDirectory: directory,
         });
-        const result = cache.writeCoordinates({
+        const result = writeCoordinates(cache, {
             latitude: 50.08,
             longitude: 14.44,
         });
-        const envelope = cache.readCoordinates();
+        const envelope = readCoordinates(cache);
 
         assertEqual(result.ok, true, 'valid coordinate write should succeed');
         assertNotNull(envelope, 'coordinates should read back');
@@ -198,16 +225,16 @@ function testInvalidCoordinatesDoNotReplaceCache() {
             baseDirectory: directory,
         });
 
-        cache.writeCoordinates({
+        writeCoordinates(cache, {
             latitude: 50.08,
             longitude: 14.44,
         });
 
-        const result = cache.writeCoordinates({
+        const result = writeCoordinates(cache, {
             latitude: 200,
             longitude: 14.44,
         });
-        const envelope = cache.readCoordinates();
+        const envelope = readCoordinates(cache);
 
         assertEqual(result.ok, false, 'invalid coordinate write should fail');
         assertEqual(envelope.data.latitude, 50.08,
@@ -224,8 +251,8 @@ function testResponseRoundTrip() {
         const cache = Cache.createCache({
             baseDirectory: directory,
         });
-        const result = cache.writeResponse(providerResponse());
-        const envelope = cache.readResponse();
+        const result = writeResponse(cache, providerResponse());
+        const envelope = readResponse(cache);
 
         assertEqual(result.ok, true, 'valid response write should succeed');
         assertNotNull(envelope, 'response should read back');
@@ -249,7 +276,7 @@ function testPlaceRoundTrip() {
         const cache = Cache.createCache({
             baseDirectory: directory,
         });
-        const result = cache.writePlace({
+        const result = writePlace(cache, {
             provider: 'nominatim',
             name: 'Prague, Czechia',
             coordinates: {
@@ -258,7 +285,7 @@ function testPlaceRoundTrip() {
             },
             fetchedAt: 1785445000000,
         });
-        const envelope = cache.readPlace();
+        const envelope = readPlace(cache);
 
         assertEqual(result.ok, true, 'valid place write should succeed');
         assertNotNull(envelope, 'place should read back');
@@ -278,7 +305,7 @@ function testInvalidPlaceDoesNotReplaceCache() {
         const cache = Cache.createCache({
             baseDirectory: directory,
         });
-        cache.writePlace({
+        writePlace(cache, {
             provider: 'nominatim',
             name: 'Prague, Czechia',
             coordinates: {
@@ -288,7 +315,7 @@ function testInvalidPlaceDoesNotReplaceCache() {
             fetchedAt: 1785445000000,
         });
 
-        const result = cache.writePlace({
+        const result = writePlace(cache, {
             provider: 'nominatim',
             name: '',
             coordinates: {
@@ -297,7 +324,7 @@ function testInvalidPlaceDoesNotReplaceCache() {
             },
             fetchedAt: 1785445000000,
         });
-        const envelope = cache.readPlace();
+        const envelope = readPlace(cache);
 
         assertEqual(result.ok, false, 'invalid place write should fail');
         assertEqual(envelope.data.name, 'Prague, Czechia',
@@ -314,13 +341,13 @@ function testInvalidResponseDoesNotReplaceCache() {
         const cache = Cache.createCache({
             baseDirectory: directory,
         });
-        cache.writeResponse(providerResponse());
+        writeResponse(cache, providerResponse());
 
-        const result = cache.writeResponse({
+        const result = writeResponse(cache, {
             provider: 'open-meteo',
             current: null,
         });
-        const envelope = cache.readResponse();
+        const envelope = readResponse(cache);
 
         assertEqual(result.ok, false, 'invalid response write should fail');
         assertEqual(envelope.data.current.readings.pm25, 4,
@@ -337,9 +364,9 @@ function testResponseWithoutReadingsIsInvalid() {
         const cache = Cache.createCache({
             baseDirectory: directory,
         });
-        cache.writeResponse(providerResponse());
+        writeResponse(cache, providerResponse());
 
-        const result = cache.writeResponse({
+        const result = writeResponse(cache, {
             provider: 'open-meteo',
             fetchedAt: 1785445000000,
             current: {
@@ -355,11 +382,12 @@ function testResponseWithoutReadingsIsInvalid() {
                     dust: null,
                     aerosolOpticalDepth: null,
                     carbonMonoxide: null,
+                    wildfirePm10: null,
                 },
             },
             forecast: [],
         });
-        const envelope = cache.readResponse();
+        const envelope = readResponse(cache);
 
         assertEqual(result.ok, false,
             'response without any numeric readings should fail');
@@ -370,8 +398,8 @@ function testResponseWithoutReadingsIsInvalid() {
     }
 }
 
-function testPreviousResponseCacheMigrates() {
-    const directory = tempCacheDirectory('legacy-response');
+function testWrongResponseCacheVersionReturnsNull() {
+    const directory = tempCacheDirectory('wrong-response-version');
 
     try {
         const cache = Cache.createCache({
@@ -387,66 +415,12 @@ function testPreviousResponseCacheMigrates() {
             JSON.stringify({
                 version: 1,
                 savedAt: 1785445000000,
-                data: legacyProviderResponse(),
+                data: providerResponse(),
             })
         );
 
-        const envelope = cache.readResponse();
-
-        assertNotNull(envelope,
-            'previous schema response should still load');
-        assertEqual(envelope.version, 3,
-            'previous schema response should be returned as current schema');
-        assertEqual(envelope.data.current.readings.aerosolOpticalDepth, null,
-            'missing legacy aerosol optical depth should migrate to null');
-        assertEqual(envelope.data.current.readings.carbonMonoxide, null,
-            'missing legacy carbon monoxide should migrate to null');
-        assertEqual(envelope.data.current.readings.sulfurDioxide, null,
-            'missing legacy sulfur dioxide should migrate to null');
-        assertEqual(envelope.data.current.moldPotential, null,
-            'legacy current mold potential should be null');
-        assertEqual(envelope.data.weather, null,
-            'legacy weather response should be null');
-        assertEqual(envelope.data.airQualityFetchedAt, 1785445000000,
-            'legacy air-quality timestamp should migrate from fetchedAt');
-    } finally {
-        removeDirectory(directory);
-    }
-}
-
-function testPreviousWeatherResponseCacheMigrates() {
-    const directory = tempCacheDirectory('previous-weather-response');
-
-    try {
-        const cache = Cache.createCache({
-            baseDirectory: directory,
-        });
-        const filePath = GLib.build_filenamev([
-            directory,
-            'response.json',
-        ]);
-
-        GLib.file_set_contents(
-            filePath,
-            JSON.stringify({
-                version: 2,
-                savedAt: 1785445000000,
-                data: previousProviderResponse(),
-            })
-        );
-
-        const envelope = cache.readResponse();
-
-        assertNotNull(envelope,
-            'previous weather schema response should still load');
-        assertEqual(envelope.version, 3,
-            'previous weather schema response should be returned as current schema');
-        assertEqual(envelope.data.current.readings.sulfurDioxide, null,
-            'missing previous sulfur dioxide should migrate to null');
-        assertEqual(envelope.data.forecast[0].readings.sulfurDioxide, null,
-            'missing previous forecast sulfur dioxide should migrate to null');
-        assertEqual(envelope.data.current.readings.carbonMonoxide, 150,
-            'existing previous atmospheric values should be preserved');
+        assertEqual(readResponse(cache), null,
+            'wrong response cache versions should not load');
     } finally {
         removeDirectory(directory);
     }
@@ -459,9 +433,9 @@ function testResponseWithoutCanonicalFieldsIsInvalid() {
         const cache = Cache.createCache({
             baseDirectory: directory,
         });
-        cache.writeResponse(providerResponse());
+        writeResponse(cache, providerResponse());
 
-        const result = cache.writeResponse({
+        const result = writeResponse(cache, {
             provider: 'open-meteo',
             fetchedAt: 1785445000000,
             current: {
@@ -471,12 +445,62 @@ function testResponseWithoutCanonicalFieldsIsInvalid() {
             },
             forecast: [],
         });
-        const envelope = cache.readResponse();
+        const envelope = readResponse(cache);
 
         assertEqual(result.ok, false,
             'response missing canonical fields should fail');
         assertEqual(envelope.data.current.readings.pm10, 5,
             'previous canonical response should remain cached');
+    } finally {
+        removeDirectory(directory);
+    }
+}
+
+function testResponseWithoutStructuredCurrentFieldsIsInvalid() {
+    const directory = tempCacheDirectory('missing-current-structured-fields');
+
+    try {
+        const cache = Cache.createCache({
+            baseDirectory: directory,
+        });
+        const valid = providerResponse();
+        const invalid = providerResponse();
+
+        delete invalid.current.pollutantAqi;
+        writeResponse(cache, valid);
+
+        const result = writeResponse(cache, invalid);
+        const envelope = readResponse(cache);
+
+        assertEqual(result.ok, false,
+            'response missing structured current fields should fail');
+        assertEqual(envelope.data.current.pollutantAqi.pm25, 11,
+            'previous structured current data should remain cached');
+    } finally {
+        removeDirectory(directory);
+    }
+}
+
+function testResponseWithMalformedStructuredCurrentValueIsInvalid() {
+    const directory = tempCacheDirectory('bad-current-structured-value');
+
+    try {
+        const cache = Cache.createCache({
+            baseDirectory: directory,
+        });
+        const valid = providerResponse();
+        const invalid = providerResponse();
+
+        invalid.current.pollen.grass = 'bad';
+        writeResponse(cache, valid);
+
+        const result = writeResponse(cache, invalid);
+        const envelope = readResponse(cache);
+
+        assertEqual(result.ok, false,
+            'response with malformed structured current values should fail');
+        assertEqual(envelope.data.current.pollen.grass, 2,
+            'previous structured current values should remain cached');
     } finally {
         removeDirectory(directory);
     }
@@ -499,7 +523,7 @@ function testInvalidCoordinateCacheFileReturnsNull() {
             '{"version":1,"savedAt":1,"data":{"latitude":"bad"}}',
         );
 
-        assertEqual(cache.readCoordinates(), null,
+        assertEqual(readCoordinates(cache), null,
             'invalid cache contents should read as null');
     } finally {
         removeDirectory(directory);
@@ -523,7 +547,7 @@ function testMalformedResponseCacheFileReturnsNull() {
             '{"version":1,"savedAt":1,"data":',
         );
 
-        assertEqual(cache.readResponse(), null,
+        assertEqual(readResponse(cache), null,
             'malformed response cache should read as null');
     } finally {
         removeDirectory(directory);
@@ -551,7 +575,7 @@ function testWrongEnvelopeVersionReturnsNull() {
             })
         );
 
-        assertEqual(cache.readResponse(), null,
+        assertEqual(readResponse(cache), null,
             'wrong cache envelope version should read as null');
     } finally {
         removeDirectory(directory);
@@ -568,8 +592,9 @@ function main() {
         testInvalidResponseDoesNotReplaceCache,
         testResponseWithoutReadingsIsInvalid,
         testResponseWithoutCanonicalFieldsIsInvalid,
-        testPreviousResponseCacheMigrates,
-        testPreviousWeatherResponseCacheMigrates,
+        testResponseWithoutStructuredCurrentFieldsIsInvalid,
+        testResponseWithMalformedStructuredCurrentValueIsInvalid,
+        testWrongResponseCacheVersionReturnsNull,
         testInvalidCoordinateCacheFileReturnsNull,
         testMalformedResponseCacheFileReturnsNull,
         testWrongEnvelopeVersionReturnsNull,

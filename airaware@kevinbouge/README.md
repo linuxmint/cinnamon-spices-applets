@@ -1,6 +1,6 @@
 # AirAware
 
-AirAware is a Cinnamon panel applet that shows the current environmental allergy burden from pollen, air pollution, and weather-based mold potential. It displays a compact panel indicator and a native Cinnamon popup with current conditions, a short forecast, and a plain-language score legend.
+AirAware is a Cinnamon panel applet that shows the current environmental allergy burden from pollen, air pollution, and weather-based mold potential. It displays a compact panel indicator and a native Cinnamon popup with current conditions and a short forecast.
 
 AirAware reports environmental conditions only. It does not predict symptoms, diagnose allergies, or provide medical advice.
 
@@ -12,17 +12,19 @@ AirAware reports environmental conditions only. It does not predict symptoms, di
 - OpenStreetMap button in settings to help choose coordinates
 - Reverse-geocoded place name in the popup when available
 - Open-Meteo Air Quality and Weather Forecast data with no API key required
-- Weather-based Mold potential from temperature, humidity, precipitation, and wind
-- Aerosol optical depth and carbon monoxide included in the environmental-risk score
-- Sulfur dioxide (SO₂) included in the environmental-risk score
-- Current readings for tree pollen, grass pollen, weed pollen, PM2.5, PM10, NO₂, O₃, SO₂, carbon monoxide, aerosol optical depth, dust, and Mold potential
+- Current conditions from Open-Meteo `current` fields with `timezone=auto`
+- Pollutant-specific European AQI scoring for regulated air pollution
+- Six pollen types: alder, birch, grass, mugwort, olive, and ragweed
+- Weather-based Mold potential using humidity, leaf wetness, precipitation, temperature, dew point, and wind
+- Atmospheric irritant context from carbon monoxide, aerosol optical depth, dust, and optional wildfire-related PM10 where available
+- Current readings for pollen, PM2.5, PM10, NO₂, O₃, SO₂, carbon monoxide, aerosol optical depth, dust, and Mold potential
 - Forecast for today, tomorrow, and the next listed day
 - Cache fallback for coordinates, place names, and the last successful environmental data response
 - Stale data indicator when current data cannot be refreshed
 - Configurable refresh interval, panel label, and notifications
 - Support for horizontal panels, vertical panels, and multiple applet instances
 
-The panel tooltip shows only the current risk label, for example `Moderate`. When cached data is stale, the tooltip adds a stale-data note.
+The panel tooltip shows the current risk label and score, for example `Moderate (52%)`. When cached data is stale, the tooltip adds a stale-data note.
 
 ## Installation
 
@@ -49,7 +51,7 @@ AirAware provides these Cinnamon settings:
 - Location source: automatic or manual coordinates
 - Manual latitude and longitude
 - Show or hide the panel label
-- Notifications: disabled, High only, or High + Very High
+- Notifications: disabled, High + Very High, or Very High only
 - Send test notification button for verifying the Cinnamon notification path
 
 Notifications are transition-based. AirAware does not repeatedly notify for the same unchanged risk category.
@@ -74,7 +76,7 @@ AirAware also uses the Open-Meteo Weather Forecast API for weather variables use
 
 https://open-meteo.com/en/docs
 
-Open-Meteo provides air quality and pollen forecast data without requiring an API key for normal public API usage. Pollen availability can vary by region and season.
+Open-Meteo provides air quality, pollen, AQI, and weather forecast data without requiring an API key for normal public API usage. Availability varies by variable, region, model domain, and season. Pollen data is primarily available in Europe during pollen season.
 
 Data source attribution: Open-Meteo.com.
 
@@ -89,11 +91,11 @@ Place-name attribution: OpenStreetMap contributors.
 The AirAware score is an environmental burden index. It combines:
 
 - 50% pollen burden
-- 25% particulate pollution
-- 10% gases and atmospheric irritants
+- 25% regulated air pollution
+- 10% atmospheric irritants
 - 15% Mold potential
 
-Pollen burden uses the highest pollen category instead of averaging tree, grass, and weed pollen. Particulate pollution uses PM2.5 and PM10. Gases and atmospheric irritants use NO₂, O₃, SO₂, dust, carbon monoxide, and aerosol optical depth. Mold potential is inferred from weather conditions; it is not a measured mold-spore concentration. The score is not a medical, regulatory, or AQI claim.
+Pollen burden uses the highest available pollen burden instead of averaging unrelated pollen types. Regulated pollution uses the highest available pollutant-specific European AQI among PM2.5, PM10, NO₂, O₃, and SO₂. Atmospheric irritants include CO, aerosol optical depth, dust, and optional wildfire-related PM10. Mold potential is inferred from humidity, leaf wetness, precipitation, temperature, dew point, and wind. Missing components are omitted and the remaining weights are renormalized. The score is not medical advice.
 
 Panel icon line colors follow the current score category:
 
@@ -106,12 +108,15 @@ Panel icon line colors follow the current score category:
 ## Limitations
 
 - Pollen variables are primarily available in Europe during pollen season.
-- Forecast quality depends on the upstream air quality model and region.
-- Forecasts are environmental estimates, not sensor readings from the user's exact location.
-- Mold potential is inferred from temperature, humidity, precipitation, and wind.
+- Forecast quality depends on the upstream air quality and weather models and region.
+- Forecasts are model estimates, not exact local sensor readings.
+- Mold potential is inferred from temperature, humidity, leaf wetness, precipitation, dew point, and wind.
 - Mold potential is not a measured mold-spore concentration.
 - Aerosol optical depth describes particles through the atmospheric column and may not exactly represent surface exposure.
-- Carbon monoxide and aerosol levels can originate from multiple sources.
+- Wildfire-related PM10 may not be available in every region or model.
+- Visibility can be reduced by humidity, cloud, fog, dust, or aerosols and is not a direct pollution measurement.
+- Carbon monoxide, aerosol, and PM10 levels can originate from multiple sources.
+- European AQI values should not be described as medical advice.
 - AirAware does not account for personal sensitivity, medication, indoor exposure, masks, activity level, or clinical history.
 - Place names depend on OpenStreetMap Nominatim availability and may occasionally be approximate.
 

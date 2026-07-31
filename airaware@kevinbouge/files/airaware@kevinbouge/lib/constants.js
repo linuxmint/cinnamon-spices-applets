@@ -1,6 +1,6 @@
 /* exported RISK_LEVELS, RISK_WEIGHTS, POLLEN_THRESHOLDS,
- * POLLUTANT_THRESHOLDS, IRRITANT_WEIGHTS, MOLD_WEIGHTS,
- * MOLD_NORMALIZATION */
+ * POLLUTANT_THRESHOLDS, ATMOSPHERIC_CONTEXT_THRESHOLDS,
+ * ATMOSPHERIC_CONTEXT_WEIGHTS, MOLD_WEIGHTS, MOLD_NORMALIZATION */
 
 /*
  * AirAware shared constants.
@@ -43,20 +43,19 @@ var RISK_WEIGHTS = Object.freeze({
     mold: 0.15,
 });
 
-var IRRITANT_WEIGHTS = Object.freeze({
-    nitrogenDioxide: 0.22,
-    ozone: 0.22,
-    sulfurDioxide: 0.18,
-    dust: 0.13,
-    aerosolOpticalDepth: 0.125,
-    carbonMonoxide: 0.125,
+var ATMOSPHERIC_CONTEXT_WEIGHTS = Object.freeze({
+    carbonMonoxide: 0.35,
+    aerosolOpticalDepth: 0.3,
+    dust: 0.2,
+    wildfirePm10: 0.15,
 });
 
 var MOLD_WEIGHTS = Object.freeze({
-    relativeHumidity: 0.4,
-    precipitation: 0.25,
-    temperature: 0.2,
-    wind: 0.15,
+    relativeHumidity: 0.3,
+    leafWetness: 0.25,
+    precipitation: 0.2,
+    temperature: 0.15,
+    wind: 0.1,
 });
 
 /*
@@ -64,6 +63,36 @@ var MOLD_WEIGHTS = Object.freeze({
  * normalize tree, grass, and weed pollen into these canonical readings.
  */
 var POLLEN_THRESHOLDS = Object.freeze({
+    alder: Object.freeze({
+        moderate: 30,
+        high: 100,
+        veryHigh: 200,
+    }),
+    birch: Object.freeze({
+        moderate: 30,
+        high: 100,
+        veryHigh: 200,
+    }),
+    grass: Object.freeze({
+        moderate: 20,
+        high: 50,
+        veryHigh: 100,
+    }),
+    olive: Object.freeze({
+        moderate: 30,
+        high: 100,
+        veryHigh: 200,
+    }),
+    mugwort: Object.freeze({
+        moderate: 20,
+        high: 50,
+        veryHigh: 100,
+    }),
+    ragweed: Object.freeze({
+        moderate: 20,
+        high: 50,
+        veryHigh: 100,
+    }),
     treePollen: Object.freeze({
         moderate: 30,
         high: 100,
@@ -125,6 +154,17 @@ var POLLUTANT_THRESHOLDS = Object.freeze({
         moderate: 400,
         high: 1000,
         veryHigh: 4000,
+    }),
+});
+
+var ATMOSPHERIC_CONTEXT_THRESHOLDS = Object.freeze({
+    carbonMonoxide: POLLUTANT_THRESHOLDS.carbonMonoxide,
+    aerosolOpticalDepth: POLLUTANT_THRESHOLDS.aerosolOpticalDepth,
+    dust: POLLUTANT_THRESHOLDS.dust,
+    wildfirePm10: Object.freeze({
+        moderate: 10,
+        high: 25,
+        veryHigh: 50,
     }),
 });
 

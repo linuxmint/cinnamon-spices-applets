@@ -15,36 +15,61 @@ const DEFAULT_TIMEOUT_SECONDS = 15;
 const DEFAULT_FORECAST_DAYS = 4;
 const MAX_FORECAST_DAYS = 7;
 
+const RAW_POLLUTANT_SOURCES = Object.freeze({
+    pm25: 'pm2_5',
+    pm10: 'pm10',
+    nitrogenDioxide: 'nitrogen_dioxide',
+    ozone: 'ozone',
+    sulfurDioxide: 'sulphur_dioxide',
+    carbonMonoxide: 'carbon_monoxide',
+});
+
+const POLLUTANT_AQI_SOURCES = Object.freeze({
+    pm25: 'european_aqi_pm2_5',
+    pm10: 'european_aqi_pm10',
+    nitrogenDioxide: 'european_aqi_nitrogen_dioxide',
+    ozone: 'european_aqi_ozone',
+    sulfurDioxide: 'european_aqi_sulphur_dioxide',
+});
+
+const POLLEN_SOURCES = Object.freeze({
+    alder: 'alder_pollen',
+    birch: 'birch_pollen',
+    grass: 'grass_pollen',
+    mugwort: 'mugwort_pollen',
+    olive: 'olive_pollen',
+    ragweed: 'ragweed_pollen',
+});
+
+const CONTEXT_SOURCES = Object.freeze({
+    aerosolOpticalDepth: 'aerosol_optical_depth',
+    dust: 'dust',
+    wildfirePm10: 'pm10_wildfires',
+});
+
 const SOURCE_VARIABLES = Object.freeze([
     'pm10',
     'pm2_5',
     'nitrogen_dioxide',
     'ozone',
     'sulphur_dioxide',
-    'dust',
-    'aerosol_optical_depth',
     'carbon_monoxide',
+    'aerosol_optical_depth',
+    'dust',
+    'european_aqi',
+    'european_aqi_pm2_5',
+    'european_aqi_pm10',
+    'european_aqi_nitrogen_dioxide',
+    'european_aqi_ozone',
+    'european_aqi_sulphur_dioxide',
     'alder_pollen',
     'birch_pollen',
-    'olive_pollen',
     'grass_pollen',
     'mugwort_pollen',
+    'olive_pollen',
     'ragweed_pollen',
+    'pm10_wildfires',
 ]);
-
-const CANONICAL_SOURCES = Object.freeze({
-    treePollen: Object.freeze(['alder_pollen', 'birch_pollen', 'olive_pollen']),
-    grassPollen: Object.freeze(['grass_pollen']),
-    weedPollen: Object.freeze(['mugwort_pollen', 'ragweed_pollen']),
-    pm25: Object.freeze(['pm2_5']),
-    pm10: Object.freeze(['pm10']),
-    nitrogenDioxide: Object.freeze(['nitrogen_dioxide']),
-    ozone: Object.freeze(['ozone']),
-    sulfurDioxide: Object.freeze(['sulphur_dioxide']),
-    dust: Object.freeze(['dust']),
-    aerosolOpticalDepth: Object.freeze(['aerosol_optical_depth']),
-    carbonMonoxide: Object.freeze(['carbon_monoxide']),
-});
 
 const CANONICAL_FIELDS = Object.freeze([
     'treePollen',
@@ -58,6 +83,7 @@ const CANONICAL_FIELDS = Object.freeze([
     'dust',
     'aerosolOpticalDepth',
     'carbonMonoxide',
+    'wildfirePm10',
 ]);
 
 function _isObject(value) {
@@ -112,43 +138,96 @@ function _sourceValue(source, sourceName) {
     return _sanitizeNumber(source[sourceName]);
 }
 
-function _canonicalFromSource(source) {
-    let readings = {};
-    let sourceValues = {};
+function _valuesFromSource(source, sourceMap) {
+    let values = {};
     let missingFields = [];
     let missingSourceVariables = [];
 
-    for (const field of CANONICAL_FIELDS) {
-        let best = null;
-        let valuesForField = {};
+    for (const field in sourceMap) {
+        const sourceName = sourceMap[field];
+        const value = _sourceValue(source, sourceName);
 
-        for (const sourceName of CANONICAL_SOURCES[field]) {
-            const value = _sourceValue(source, sourceName);
+        values[field] = value;
 
-            if (value === null) {
-                missingSourceVariables.push(sourceName);
-                continue;
-            }
-
-            valuesForField[sourceName] = value;
-
-            if (best === null || value > best)
-                best = value;
-        }
-
-        if (best === null) {
-            readings[field] = null;
+        if (value === null) {
             missingFields.push(field);
-        } else {
-            readings[field] = best;
+            missingSourceVariables.push(sourceName);
         }
-
-        sourceValues[field] = valuesForField;
     }
 
     return {
+        values,
+        missingFields,
+        missingSourceVariables,
+    };
+}
+
+function _maxValues(values, fields) {
+    let best = null;
+
+    for (const field of fields) {
+        const value = values[field];
+
+        if (value === null)
+            continue;
+
+        if (best === null || value > best)
+            best = value;
+    }
+
+    return best;
+}
+
+function _displayReadingsFromSections(rawPollutants, pollen, context) {
+    return {
+        treePollen: _maxValues(pollen, ['alder', 'birch', 'olive']),
+        grassPollen: pollen.grass,
+        weedPollen: _maxValues(pollen, ['mugwort', 'ragweed']),
+        pm25: rawPollutants.pm25,
+        pm10: rawPollutants.pm10,
+        nitrogenDioxide: rawPollutants.nitrogenDioxide,
+        ozone: rawPollutants.ozone,
+        sulfurDioxide: rawPollutants.sulfurDioxide,
+        dust: context.dust,
+        aerosolOpticalDepth: context.aerosolOpticalDepth,
+        carbonMonoxide: rawPollutants.carbonMonoxide,
+        wildfirePm10: context.wildfirePm10,
+    };
+}
+
+function _currentUnits(payload) {
+    return _isObject(payload.current_units) ? payload.current_units : {};
+}
+
+function _hourlyUnits(payload) {
+    return _isObject(payload.hourly_units) ? payload.hourly_units : {};
+}
+
+function _canonicalFromSource(source) {
+    const raw = _valuesFromSource(source, RAW_POLLUTANT_SOURCES);
+    const aqi = _valuesFromSource(source, POLLUTANT_AQI_SOURCES);
+    const pollen = _valuesFromSource(source, POLLEN_SOURCES);
+    const context = _valuesFromSource(source, CONTEXT_SOURCES);
+    const overallEuropeanAqi = _sourceValue(source, 'european_aqi');
+    const readings = _displayReadingsFromSections(raw.values, pollen.values, context.values);
+    const missingFields = raw.missingFields
+        .concat(aqi.missingFields)
+        .concat(pollen.missingFields)
+        .concat(context.missingFields)
+        .concat(overallEuropeanAqi === null ? ['overallEuropeanAqi'] : []);
+    const missingSourceVariables = raw.missingSourceVariables
+        .concat(aqi.missingSourceVariables)
+        .concat(pollen.missingSourceVariables)
+        .concat(context.missingSourceVariables)
+        .concat(overallEuropeanAqi === null ? ['european_aqi'] : []);
+
+    return {
         readings,
-        sourceValues,
+        rawPollutants: raw.values,
+        pollutantAqi: aqi.values,
+        overallEuropeanAqi,
+        pollen: pollen.values,
+        context: context.values,
         missingFields,
         missingSourceVariables,
         isPartial: missingFields.length > 0,
@@ -169,55 +248,78 @@ function _sourceValueAt(hourly, sourceName, index) {
     return _sanitizeNumber(hourly[sourceName][index]);
 }
 
-function _canonicalFromHourlyIndexes(hourly, indexes) {
-    let readings = {};
-    let sourceValues = {};
+function _valuesFromHourlyIndexes(hourly, indexes, sourceMap) {
+    let values = {};
     let missingFields = [];
     let missingSourceVariables = [];
 
-    for (const field of CANONICAL_FIELDS) {
+    for (const field in sourceMap) {
         let best = null;
-        let valuesForField = {};
+        const sourceName = sourceMap[field];
 
-        for (const sourceName of CANONICAL_SOURCES[field]) {
-            let sourceBest = null;
+        for (const index of indexes) {
+            const value = _sourceValueAt(hourly, sourceName, index);
 
-            for (const index of indexes) {
-                const value = _sourceValueAt(hourly, sourceName, index);
-
-                if (value === null)
-                    continue;
-
-                if (sourceBest === null || value > sourceBest)
-                    sourceBest = value;
-            }
-
-            if (sourceBest === null) {
-                missingSourceVariables.push(sourceName);
+            if (value === null)
                 continue;
-            }
 
-            valuesForField[sourceName] = sourceBest;
-
-            if (best === null || sourceBest > best)
-                best = sourceBest;
+            if (best === null || value > best)
+                best = value;
         }
+
+        values[field] = best;
 
         if (best === null) {
-            readings[field] = null;
             missingFields.push(field);
-        } else {
-            readings[field] = best;
+            missingSourceVariables.push(sourceName);
         }
-
-        sourceValues[field] = valuesForField;
     }
 
     return {
-        readings,
-        sourceValues,
+        values,
         missingFields,
         missingSourceVariables,
+    };
+}
+
+function _seriesFromHourly(hourly, sourceMap) {
+    let series = {};
+
+    for (const field in sourceMap) {
+        const sourceName = sourceMap[field];
+        const sourceValues = _isObject(hourly) && Array.isArray(hourly[sourceName])
+            ? hourly[sourceName]
+            : [];
+
+        series[field] = sourceValues.map(_sanitizeNumber);
+    }
+
+    return series;
+}
+
+function _canonicalFromHourlyIndexes(hourly, indexes) {
+    const raw = _valuesFromHourlyIndexes(hourly, indexes, RAW_POLLUTANT_SOURCES);
+    const aqi = _valuesFromHourlyIndexes(hourly, indexes, POLLUTANT_AQI_SOURCES);
+    const pollen = _valuesFromHourlyIndexes(hourly, indexes, POLLEN_SOURCES);
+    const context = _valuesFromHourlyIndexes(hourly, indexes, CONTEXT_SOURCES);
+    const readings = _displayReadingsFromSections(raw.values, pollen.values, context.values);
+    const missingFields = raw.missingFields
+        .concat(aqi.missingFields)
+        .concat(pollen.missingFields)
+        .concat(context.missingFields);
+
+    return {
+        readings,
+        rawPollutants: raw.values,
+        pollutantAqi: aqi.values,
+        pollen: pollen.values,
+        context: context.values,
+        sourceValues: {},
+        missingFields,
+        missingSourceVariables: raw.missingSourceVariables
+            .concat(aqi.missingSourceVariables)
+            .concat(pollen.missingSourceVariables)
+            .concat(context.missingSourceVariables),
         isPartial: missingFields.length > 0,
     };
 }
@@ -237,9 +339,15 @@ function _parseCurrent(payload) {
     const parsed = _canonicalFromSource(payload.current);
 
     return {
+        timestamp: typeof payload.current.time === 'string' ? payload.current.time : null,
         time: typeof payload.current.time === 'string' ? payload.current.time : null,
         readings: parsed.readings,
         sourceValues: parsed.sourceValues,
+        rawPollutants: parsed.rawPollutants,
+        pollutantAqi: parsed.pollutantAqi,
+        overallEuropeanAqi: parsed.overallEuropeanAqi,
+        pollen: parsed.pollen,
+        context: parsed.context,
         missingFields: parsed.missingFields,
         missingSourceVariables: parsed.missingSourceVariables,
         isPartial: parsed.isPartial,
@@ -305,6 +413,10 @@ function _parseForecast(payload, forecastDays) {
             date: day.date,
             readings: parsed.readings,
             sourceValues: parsed.sourceValues,
+            rawPollutants: parsed.rawPollutants,
+            pollutantAqi: parsed.pollutantAqi,
+            pollen: parsed.pollen,
+            context: parsed.context,
             missingFields: parsed.missingFields,
             missingSourceVariables: parsed.missingSourceVariables,
             isPartial: parsed.isPartial,
@@ -394,17 +506,52 @@ var parseOpenMeteoResponse = function(payload, options = {}) {
 
     const forecast = _parseForecast(payload, forecastDays);
     const isForecastPartial = forecast.some(day => day.isPartial);
-
-    return {
-        provider: PROVIDER_ID,
+    const hourly = _isObject(payload.hourly)
+        ? {
+            timestamps: Array.isArray(payload.hourly.time)
+                ? payload.hourly.time.filter(time => typeof time === 'string' && time !== '')
+                : [],
+            rawPollutants: _seriesFromHourly(payload.hourly, RAW_POLLUTANT_SOURCES),
+            pollutantAqi: _seriesFromHourly(payload.hourly, POLLUTANT_AQI_SOURCES),
+            pollen: _seriesFromHourly(payload.hourly, POLLEN_SOURCES),
+            context: _seriesFromHourly(payload.hourly, CONTEXT_SOURCES),
+        }
+        : {
+            timestamps: [],
+            rawPollutants: {},
+            pollutantAqi: {},
+            pollen: {},
+            context: {},
+        };
+    const metadata = {
         latitude: _coordinateOrNull(payload.latitude, -90, 90),
         longitude: _coordinateOrNull(payload.longitude, -180, 180),
         timezone: typeof payload.timezone === 'string' ? payload.timezone : null,
+        timezoneAbbreviation: typeof payload.timezone_abbreviation === 'string'
+            ? payload.timezone_abbreviation
+            : null,
         utcOffsetSeconds: _isFiniteNumber(payload.utc_offset_seconds)
             ? payload.utc_offset_seconds
             : 0,
+        generationTimeMs: _isFiniteNumber(payload.generationtime_ms)
+            ? payload.generationtime_ms
+            : null,
+        units: {
+            current: _currentUnits(payload),
+            hourly: _hourlyUnits(payload),
+        },
+    };
+
+    return {
+        provider: PROVIDER_ID,
+        latitude: metadata.latitude,
+        longitude: metadata.longitude,
+        timezone: metadata.timezone,
+        utcOffsetSeconds: metadata.utcOffsetSeconds,
         current,
+        hourly,
         forecast,
+        metadata,
         isPartial: current.isPartial || isForecastPartial || forecast.length === 0,
         fetchedAt: GLib.get_real_time() / 1000,
     };

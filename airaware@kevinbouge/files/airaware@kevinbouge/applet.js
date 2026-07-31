@@ -224,16 +224,6 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
         this._launchUri(uri);
     }
-    destroy() {
-        this._destroy();
-
-        if (this.menu)
-            this.menu.destroy();
-
-        this.actor._delegate = null;
-        this.emit('destroy');
-    }
-
     _destroy() {
         if (this._destroyed)
             return;
@@ -248,6 +238,11 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
         if (this.settings)
             this.settings.finalize();
+
+        if (this.menu) {
+            this.menu.destroy();
+            this.menu = null;
+        }
     }
 
     _onSettingsChanged() {
@@ -308,28 +303,13 @@ class AirAwareApplet extends Applet.TextIconApplet {
         if (coordinates === null)
             return null;
 
-        this._cache.writeCoordinates(coordinates);
+        this._cache.writeCoordinatesAsync(coordinates);
 
         return {
             coordinates,
             updatedAt: _nowMs(),
             source,
             isStale: false,
-            error: null,
-        };
-    }
-
-    _cachedLocationResult() {
-        const envelope = this._cache.readCoordinates();
-
-        if (!envelope)
-            return null;
-
-        return {
-            coordinates: envelope.data,
-            updatedAt: envelope.savedAt,
-            source: 'cache',
-            isStale: true,
             error: null,
         };
     }
@@ -529,103 +509,111 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
     _fetchProviderData(locationResult, refreshGeneration) {
         const requestDays = this.forecastLength + 1;
-        const cachedEnvelope = this._cache.readResponse();
-        const cachedData = cachedEnvelope ? cachedEnvelope.data : null;
-        let airQualityResult = {
-            completed: false,
-            error: null,
-            data: null,
-        };
-        let weatherResult = {
-            completed: false,
-            error: null,
-            data: null,
-        };
-        let providerRequest = null;
-        let providerCompleted = false;
-        let weatherRequest = null;
-        let weatherCompleted = false;
-        const maybeComplete = () => {
-            if (!airQualityResult.completed || !weatherResult.completed)
-                return;
-
+        this._cache.readResponseAsync((cacheError, cachedEnvelope) => {
             if (this._destroyed || refreshGeneration !== this._refreshGeneration)
                 return;
 
-            const combinedData = EnvironmentAssembler.combineEnvironmentalData({
-                airQualityData: airQualityResult.error ? null : airQualityResult.data,
-                weatherData: weatherResult.error ? null : weatherResult.data,
-                cachedData,
-            });
+            if (cacheError)
+                this._logError(cacheError);
 
-            if (!combinedData) {
-                this._useCachedResponse(
-                    airQualityResult.error ||
-                    weatherResult.error ||
-                    new Error('Data unavailable')
+            const cachedData = cachedEnvelope ? cachedEnvelope.data : null;
+            let airQualityResult = {
+                completed: false,
+                error: null,
+                data: null,
+            };
+            let weatherResult = {
+                completed: false,
+                error: null,
+                data: null,
+            };
+            let providerRequest = null;
+            let providerCompleted = false;
+            let weatherRequest = null;
+            let weatherCompleted = false;
+            const maybeComplete = () => {
+                if (!airQualityResult.completed || !weatherResult.completed)
+                    return;
+
+                if (this._destroyed || refreshGeneration !== this._refreshGeneration)
+                    return;
+
+                const combinedData = EnvironmentAssembler.combineEnvironmentalData({
+                    airQualityData: airQualityResult.error ? null : airQualityResult.data,
+                    weatherData: weatherResult.error ? null : weatherResult.data,
+                    cachedData,
+                });
+
+                if (!combinedData) {
+                    this._useCachedResponse(
+                        airQualityResult.error ||
+                        weatherResult.error ||
+                        new Error('Data unavailable')
+                    );
+                    return;
+                }
+
+                if (airQualityResult.error)
+                    this._logError(airQualityResult.error);
+
+                if (weatherResult.error)
+                    this._logError(weatherResult.error);
+
+                this._cache.writeResponseAsync(combinedData);
+                this._applyProviderData(
+                    combinedData,
+                    combinedData.usedCachedAirQuality === true ||
+                        combinedData.usedCachedWeather === true,
+                    airQualityResult.error || weatherResult.error
                 );
-                return;
-            }
+            };
+            const providerCallback = (error, data) => {
+                providerCompleted = true;
 
-            if (airQualityResult.error)
-                this._logError(airQualityResult.error);
+                if (this._activeProviderRequest === providerRequest)
+                    this._activeProviderRequest = null;
 
-            if (weatherResult.error)
-                this._logError(weatherResult.error);
+                airQualityResult = {
+                    completed: true,
+                    error: error || null,
+                    data: error ? null : data,
+                };
+                maybeComplete();
+            };
+            const weatherCallback = (error, data) => {
+                weatherCompleted = true;
 
-            this._cache.writeResponse(combinedData);
-            this._applyProviderData(
-                combinedData,
-                airQualityResult.error !== null && cachedData !== null,
-                airQualityResult.error || weatherResult.error
+                if (this._activeWeatherRequest === weatherRequest)
+                    this._activeWeatherRequest = null;
+
+                weatherResult = {
+                    completed: true,
+                    error: error || null,
+                    data: error ? null : data,
+                };
+                maybeComplete();
+            };
+
+            providerRequest = OpenMeteoProvider.fetchForecastAsync(
+                locationResult.coordinates,
+                {
+                    forecastDays: requestDays,
+                    timeoutSeconds: 15,
+                },
+                providerCallback
             );
-        };
-        const providerCallback = (error, data) => {
-            providerCompleted = true;
+            weatherRequest = OpenMeteoWeatherProvider.fetchForecastAsync(
+                locationResult.coordinates,
+                {
+                    forecastDays: requestDays,
+                    timeoutSeconds: 15,
+                },
+                weatherCallback
+            );
 
-            if (this._activeProviderRequest === providerRequest)
-                this._activeProviderRequest = null;
-
-            airQualityResult = {
-                completed: true,
-                error: error || null,
-                data: error ? null : data,
-            };
-            maybeComplete();
-        };
-        const weatherCallback = (error, data) => {
-            weatherCompleted = true;
-
-            if (this._activeWeatherRequest === weatherRequest)
-                this._activeWeatherRequest = null;
-
-            weatherResult = {
-                completed: true,
-                error: error || null,
-                data: error ? null : data,
-            };
-            maybeComplete();
-        };
-
-        providerRequest = OpenMeteoProvider.fetchForecastAsync(
-            locationResult.coordinates,
-            {
-                forecastDays: requestDays,
-                timeoutSeconds: 15,
-            },
-            providerCallback
-        );
-        weatherRequest = OpenMeteoWeatherProvider.fetchForecastAsync(
-            locationResult.coordinates,
-            {
-                forecastDays: requestDays,
-                timeoutSeconds: 15,
-            },
-            weatherCallback
-        );
-
-        this._activeProviderRequest = providerCompleted ? null : providerRequest;
-        this._activeWeatherRequest = weatherCompleted ? null : weatherRequest;
+            this._activeProviderRequest = providerCompleted ? null : providerRequest;
+            this._activeWeatherRequest = weatherCompleted ? null : weatherRequest;
+        });
     }
 
     _coordinateKey(coordinates) {
@@ -661,19 +649,41 @@ class AirAwareApplet extends Applet.TextIconApplet {
             return;
 
         const coordinates = locationResult.coordinates;
-        const cachedPlace = this._cache.readPlace();
-
-        if (cachedPlace && this._isCachedPlaceForCoordinates(cachedPlace.data, coordinates)) {
-            this._locationDisplayName = cachedPlace.data.name;
-            this._locationDisplayStatus = 'ready';
-
-            if (this._cachedPlaceIsFresh(cachedPlace))
-                return;
-        }
-
         const key = this._coordinateKey(coordinates);
 
-        if (key === null || this._activeReverseGeocodeKey === key)
+        if (key === null)
+            return;
+
+        this._cache.readPlaceAsync((cacheError, cachedPlace) => {
+            if (this._destroyed)
+                return;
+
+            const currentLocationKey = this._lastLocationResult
+                ? this._coordinateKey(this._lastLocationResult.coordinates)
+                : null;
+
+            if (currentLocationKey !== key)
+                return;
+
+            if (cacheError)
+                this._logError(cacheError);
+
+            if (cachedPlace && this._isCachedPlaceForCoordinates(cachedPlace.data, coordinates)) {
+                this._locationDisplayName = cachedPlace.data.name;
+                this._locationDisplayStatus = 'ready';
+
+                if (this._cachedPlaceIsFresh(cachedPlace)) {
+                    this._rebuildMenu();
+                    return;
+                }
+            }
+
+            this._startReverseGeocode(coordinates, key);
+        });
+    }
+
+    _startReverseGeocode(coordinates, key) {
+        if (this._activeReverseGeocodeKey === key)
             return;
 
         if (this._activeReverseGeocodeRequest)
@@ -724,7 +734,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
                     fetchedAt: place.fetchedAt,
                 };
 
-                this._cache.writePlace(cachePlace);
+                this._cache.writePlaceAsync(cachePlace);
                 this._locationDisplayName = place.name;
                 this._locationDisplayStatus = 'ready';
                 this._rebuildMenu();
@@ -732,20 +742,26 @@ class AirAwareApplet extends Applet.TextIconApplet {
         );
     }
 
-    _useCachedResponse(error) {
-        const envelope = this._cache.readResponse();
+    _useCachedResponse(error, refreshGeneration = this._refreshGeneration) {
+        this._cache.readResponseAsync((cacheError, envelope) => {
+            if (this._destroyed || refreshGeneration !== this._refreshGeneration)
+                return;
 
-        if (!envelope) {
-            this._providerData = null;
-            this._currentRisk = null;
-            this._usingStaleData = false;
-            this._isRefreshing = false;
-            this._setError(error);
-            this._updatePanel(_('Unavailable'));
-            return;
-        }
+            if (cacheError)
+                this._logError(cacheError);
 
-        this._applyProviderData(envelope.data, true, error);
+            if (!envelope) {
+                this._providerData = null;
+                this._currentRisk = null;
+                this._usingStaleData = false;
+                this._isRefreshing = false;
+                this._setError(error);
+                this._updatePanel(_('Unavailable'));
+                return;
+            }
+
+            this._applyProviderData(envelope.data, true, error);
+        });
     }
 
     _applyProviderData(data, usingStaleData, error = null) {
@@ -765,7 +781,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
             this._logError(error);
 
         this._currentRisk = RiskCalculator.calculateRisk(
-            data.current.readings,
+            data.current,
             data.current.moldPotential
         );
 
@@ -827,11 +843,12 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
         this.set_applet_label(panelLabel);
         const tooltipTemplate = this._usingStaleData
-            ? _('{category} (stale data)')
-            : _('{category}');
+            ? _('{category} ({score}, stale data)')
+            : _('{category} ({score})');
 
         this.set_applet_tooltip(_replace(tooltipTemplate, {
             category,
+            score: Formatter.formatScore(this._currentRisk.score),
         }));
     }
 
@@ -921,8 +938,6 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         this._addForecastSection();
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        this._addLegendSection();
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         this._addRefreshAction();
     }
 
@@ -959,36 +974,66 @@ class AirAwareApplet extends Applet.TextIconApplet {
     }
 
     _addCurrentSection() {
-        const current = this._providerData.current.readings;
+        const current = this._providerData.current;
+        const rawPollutants = current.rawPollutants || {};
+        const pollutantAqi = current.pollutantAqi || {};
+        const pollen = current.pollen || {};
+        const context = current.context || {};
         const risk = this._currentRisk;
 
         this._addSectionTitle(_('Current environmental allergy risk'));
         this._addScoreSummary(risk);
-        this._addInfoRow(_('Tree pollen'), Formatter.formatPollen(current.treePollen));
-        this._addInfoRow(_('Grass pollen'), Formatter.formatPollen(current.grassPollen));
-        this._addInfoRow(_('Weed pollen'), Formatter.formatPollen(current.weedPollen));
-        this._addInfoRow(
-            _('Mold potential'),
-            Formatter.formatMoldPotential(this._providerData.current.moldPotential)
-        );
-        this._addInfoRow(_('PM2.5'), Formatter.formatPollutant(current.pm25));
-        this._addInfoRow(_('PM10'), Formatter.formatPollutant(current.pm10));
-        this._addInfoRow(_('NO₂'), Formatter.formatPollutant(current.nitrogenDioxide));
-        this._addInfoRow(_('O₃'), Formatter.formatPollutant(current.ozone));
-        this._addInfoRow(
-            _('SO₂'),
-            Formatter.formatSulfurDioxide(current.sulfurDioxide)
-        );
-        this._addInfoRow(_('CO'), Formatter.formatCarbonMonoxide(current.carbonMonoxide));
-        this._addInfoRow(_('Dust'), Formatter.formatPollutant(current.dust));
+
+        this._addSectionTitle(_('Pollen'));
+        this._addPollenRows(pollen);
+
+        this._addSectionTitle(_('Regulated pollution'));
+        this._addPollutantAqiRow(_('PM2.5'), rawPollutants.pm25, pollutantAqi.pm25);
+        this._addPollutantAqiRow(_('PM10'), rawPollutants.pm10, pollutantAqi.pm10);
+        this._addPollutantAqiRow(_('NO₂'), rawPollutants.nitrogenDioxide, pollutantAqi.nitrogenDioxide);
+        this._addPollutantAqiRow(_('O₃'), rawPollutants.ozone, pollutantAqi.ozone);
+        this._addPollutantAqiRow(_('SO₂'), rawPollutants.sulfurDioxide, pollutantAqi.sulfurDioxide);
+
+        this._addSectionTitle(_('Atmospheric irritants'));
+        this._addInfoRow(_('CO'), Formatter.formatCarbonMonoxide(rawPollutants.carbonMonoxide));
+
+        this._addInfoRow(_('Dust'), Formatter.formatPollutant(context.dust));
+        if (_isFiniteNumber(context.wildfirePm10))
+            this._addInfoRow(_('Wildfire-related PM10'), Formatter.formatPollutant(context.wildfirePm10));
         this._addInfoRow(
             _('Aerosol optical depth'),
-            Formatter.formatAerosolOpticalDepth(current.aerosolOpticalDepth)
+            Formatter.formatAerosolOpticalDepth(context.aerosolOpticalDepth)
         );
+
+        this._addSectionTitle(_('Mold'));
+        this._addInfoRow(
+            _('Mold potential'),
+            Formatter.formatMoldPotential(current.moldPotential)
+        );
+
         this._addInfoRow(_('Last update'), Formatter.formatTimestamp(this._providerData.fetchedAt));
 
         if (this._lastError)
             this._addTextBlock(this._formatVisibleError(), 'airaware-muted');
+    }
+
+    _addPollenRows(pollen) {
+        const fields = ['alder', 'birch', 'grass', 'mugwort', 'olive', 'ragweed'];
+        let added = false;
+
+        for (const field of fields) {
+            if (!_isFiniteNumber(pollen[field]))
+                continue;
+
+            this._addInfoRow(
+                Formatter.formatPollenTypeLabel(field),
+                Formatter.formatPollen(pollen[field])
+            );
+            added = true;
+        }
+
+        if (!added)
+            this._addTextBlock(_('Pollen data unavailable'), 'airaware-muted');
     }
 
     _formatLocationLabel() {
@@ -1037,7 +1082,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
         for (let index = 0; index < days.length; index++) {
             const day = days[index];
-            const risk = RiskCalculator.calculateRisk(day.readings, day.moldPotential);
+            const risk = RiskCalculator.calculateRisk(day, day.moldPotential);
             const label = this._formatForecastDayLabel(day, index);
             const value = this._formatForecastValue(risk);
 
@@ -1046,14 +1091,10 @@ class AirAwareApplet extends Applet.TextIconApplet {
     }
 
     _formatForecastValue(risk) {
-        const replacements = {
+        return _replace(_('{category} ({score})'), {
             category: Formatter.formatCategory(risk.category),
             score: Formatter.formatScore(risk.score),
-        };
-
-        return risk.isPartial
-            ? _replace(_('{category} ({score}, partial)'), replacements)
-            : _replace(_('{category} ({score})'), replacements);
+        });
     }
 
     _formatForecastDayLabel(day, index) {
@@ -1064,14 +1105,6 @@ class AirAwareApplet extends Applet.TextIconApplet {
             return _('Tomorrow');
 
         return _formatWeekdayLabel(day.date);
-    }
-
-    _addLegendSection() {
-        this._addSectionTitle(_('Legend'));
-        this._addTextBlock(
-            _('Score blends highest pollen burden (50%), particulates (25%), gases and atmospheric irritants (10%), and mold potential (15%). Environmental conditions only; not a medical symptom prediction.'),
-            'airaware-muted airaware-legend'
-        );
     }
 
     _addRefreshAction() {
@@ -1173,6 +1206,36 @@ class AirAwareApplet extends Applet.TextIconApplet {
         valueActor.clutter_text.line_wrap = true;
         box.add(labelActor);
         box.add(valueActor);
+        item.addActor(box);
+        this.menu.addMenuItem(item);
+    }
+
+    _addPollutantAqiRow(label, rawValue, aqiValue) {
+        const item = new PopupMenu.PopupBaseMenuItem({
+            reactive: false,
+        });
+        const box = new St.BoxLayout({
+            style_class: 'airaware-pollutant-row',
+        });
+        const labelActor = new St.Label({
+            text: label,
+            style_class: 'airaware-row-label',
+        });
+        const rawActor = new St.Label({
+            text: Formatter.formatPollutant(rawValue),
+            style_class: 'airaware-pollutant-value',
+        });
+        const aqiActor = new St.Label({
+            text: Formatter.formatEuropeanAqi(aqiValue),
+            style_class: 'airaware-aqi-value',
+        });
+
+        labelActor.clutter_text.line_wrap = true;
+        rawActor.clutter_text.line_wrap = true;
+        aqiActor.clutter_text.line_wrap = false;
+        box.add(labelActor);
+        box.add(rawActor);
+        box.add(aqiActor);
         item.addActor(box);
         this.menu.addMenuItem(item);
     }

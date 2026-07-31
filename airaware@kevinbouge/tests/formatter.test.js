@@ -25,7 +25,7 @@ function testTranslatorFormatting() {
     Formatter.setTranslator(text => {
         const translations = {
             Moderate: 'Mittel',
-            '{score}/100': '{score} von 100',
+            '{score}%': '{score}%',
             '{value} {unit}': '{value} {unit}',
             'µg/m³': 'ug/m3',
             Unknown: 'Unbekannt',
@@ -38,7 +38,7 @@ function testTranslatorFormatting() {
 
     assertEqual(Formatter.formatCategory('moderate'), 'Mittel',
         'category label should use configured translator');
-    assertEqual(Formatter.formatScore(44.6), '45 von 100',
+    assertEqual(Formatter.formatScore(44.6), '45%',
         'score template should be translated before replacement');
     assertEqual(Formatter.formatReading(8.25, 'µg/m³', 1), '8.3 ug/m3',
         'reading formatter should translate unit strings');
@@ -72,6 +72,12 @@ function testReadingFormatting() {
         'aerosol optical depth should use two decimal places');
     assertEqual(Formatter.formatCarbonMonoxide(156.7), '157 µg/m³',
         'carbon monoxide should use whole-number pollutant formatting');
+    assertEqual(Formatter.formatPollutantWithAqi(18.4, 38), '18.4 µg/m³ - AQI 38',
+        'pollutant plus AQI should format compactly');
+    assertEqual(Formatter.formatPollutantWithAqi(null, 38), 'AQI 38',
+        'AQI should display when raw pollutant is missing');
+    assertEqual(Formatter.formatEuropeanAqi(140), 'AQI 100',
+        'AQI display should clamp to the AirAware score range');
     assertEqual(Formatter.formatReading(null, 'µg/m³'), 'Unavailable',
         'missing value should be unavailable');
     assertEqual(Formatter.formatReading(-2, 'µg/m³'), '0 µg/m³',
@@ -83,9 +89,9 @@ function testReadingFormatting() {
 }
 
 function testScoreFormatting() {
-    assertEqual(Formatter.formatScore(55.4), '55/100',
+    assertEqual(Formatter.formatScore(55.4), '55%',
         'score should round to whole number');
-    assertEqual(Formatter.formatScore(140), '100/100',
+    assertEqual(Formatter.formatScore(140), '100%',
         'score should clamp to upper bound');
     assertEqual(Formatter.formatScore(NaN), 'Unavailable',
         'invalid score should be unavailable');
@@ -109,6 +115,23 @@ function testMoldPotentialFormatting() {
         'missing mold potential should identify missing weather data');
     assertEqual(Formatter.formatWeatherUnavailable(), 'Weather data unavailable',
         'weather unavailable state should be formatted centrally');
+}
+
+function testWeatherFormatting() {
+    assertEqual(Formatter.formatPercentage(55.2), '55%',
+        'percentage should round to whole percent');
+    assertEqual(Formatter.formatTemperature(-2.4), '-2.4 °C',
+        'temperature should preserve negative values');
+    assertEqual(Formatter.formatDewPoint(-5), '-5.0 °C',
+        'dew point should preserve negative values');
+    assertEqual(Formatter.formatWindSpeed(3.25), '3.3 m/s',
+        'wind speed should use one decimal place');
+    assertEqual(Formatter.formatWindDirection(92), '92° E',
+        'wind direction should include compass sector');
+    assertEqual(Formatter.formatWindGusts(8.8), '8.8 m/s',
+        'wind gusts should use wind speed formatting');
+    assertEqual(Formatter.formatVisibility(12450), '12.5 km',
+        'visibility should convert meters to kilometers');
 }
 
 function testTimestampFormatting() {
@@ -154,6 +177,10 @@ function testFieldLabels() {
         'canonical aerosol optical depth label should format');
     assertEqual(Formatter.formatFieldLabel('carbonMonoxide'), 'CO',
         'canonical carbon monoxide label should format');
+    assertEqual(Formatter.formatFieldLabel('alder'), 'Alder pollen',
+        'canonical alder pollen label should format');
+    assertEqual(Formatter.formatPollenTypeLabel('birch'), 'Birch',
+        'pollen label helper should omit the repeated pollen suffix');
     assertEqual(Formatter.formatFieldLabel('missing'), 'Unknown',
         'unknown field label should be explicit');
 }
@@ -168,6 +195,7 @@ function main() {
         testReadingFormatting,
         testScoreFormatting,
         testMoldPotentialFormatting,
+        testWeatherFormatting,
         testTimestampFormatting,
         testStaleFormatting,
         testFieldLabels,

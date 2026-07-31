@@ -78,8 +78,8 @@
         "description": "Notifications",
         "options": {
             "Disabled": "disabled",
-            "High only": "high",
-            "High + Very High": "high-very-high"
+            "High + Very High": "high-very-high",
+            "Very High only": "very-high"
         }
     },
     "test-notification": {

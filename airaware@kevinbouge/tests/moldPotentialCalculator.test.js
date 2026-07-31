@@ -32,6 +32,38 @@ function hour(relativeHumidity, precipitation, temperature, windSpeed) {
     };
 }
 
+function structuredWeather(overrides = {}) {
+    const result = {
+        current: {
+            relativeHumidity: 80,
+            temperature: 20,
+            dewPoint: 18,
+            precipitation: 0,
+            windSpeed: 3,
+        },
+        hourly: {
+            timestamps: ['2026-07-30T00:00'],
+            relativeHumidity: [80],
+            precipitation: [0],
+            temperature: [20],
+            dewPoint: [18],
+            windSpeed: [3],
+        },
+        daily: {
+            leafWetnessProbabilityMean: 0,
+            precipitationSum: 0,
+            temperatureMean: 20,
+            relativeHumidityMean: 80,
+            windSpeedMean: 3,
+        },
+    };
+
+    for (const key in overrides)
+        result[key] = overrides[key];
+
+    return result;
+}
+
 function repeatedHours(count, values) {
     let hours = [];
 
@@ -83,6 +115,22 @@ function testRecentPrecipitationRaisesScore() {
         'recent precipitation should raise the score');
 }
 
+function testLeafWetnessRaisesScore() {
+    const dryLeaves = MoldPotentialCalculator.calculateMoldPotential(structuredWeather());
+    const wetLeaves = MoldPotentialCalculator.calculateMoldPotential(structuredWeather({
+        daily: {
+            leafWetnessProbabilityMean: 90,
+            precipitationSum: 0,
+            temperatureMean: 20,
+            relativeHumidityMean: 80,
+            windSpeedMean: 3,
+        },
+    }));
+
+    assertTrue(wetLeaves.score > dryLeaves.score,
+        'leaf wetness should raise the mold potential score');
+}
+
 function testSuitableTemperatureRaisesScore() {
     const cold = MoldPotentialCalculator.calculateMoldPotential([
         hour(75, 0, 4, 8),
@@ -110,6 +158,28 @@ function testExtremeTemperaturesReduceScore() {
         'very low temperature should reduce score');
     assertTrue(hot.score < suitable.score,
         'very high temperature should reduce score');
+}
+
+function testStructuredNegativeTemperatureReducesScore() {
+    const cold = MoldPotentialCalculator.calculateMoldPotential(structuredWeather({
+        current: {
+            relativeHumidity: 80,
+            temperature: -4,
+            dewPoint: -5,
+            precipitation: 0,
+            windSpeed: 3,
+        },
+        daily: {
+            leafWetnessProbabilityMean: 0,
+            precipitationSum: 0,
+            temperatureMean: -4,
+            relativeHumidityMean: 80,
+            windSpeedMean: 3,
+        },
+    }));
+
+    assertEqual(cold.components.temperature, 0,
+        'structured negative temperature should not be clamped into a warmer band');
 }
 
 function testLowWindRaisesPersistence() {
@@ -166,6 +236,52 @@ function testMissingOptionalComponentsRenormalizeWeights() {
         'missing wind should have zero effective weight');
 }
 
+function testMissingLeafWetnessRenormalizesWeights() {
+    const result = MoldPotentialCalculator.calculateMoldPotential(structuredWeather({
+        daily: {
+            precipitationSum: 0,
+            temperatureMean: 20,
+            relativeHumidityMean: 80,
+            windSpeedMean: 3,
+        },
+    }));
+
+    assertEqual(result.isAvailable, true,
+        'missing leaf wetness should not make mold unavailable');
+    assertEqual(result.effectiveWeights.leafWetness, 0,
+        'missing leaf wetness should have zero effective weight');
+    assertTrue(result.completeness < 1,
+        'missing leaf wetness should lower completeness');
+}
+
+function testDewPointModifiesConfidence() {
+    const supportive = MoldPotentialCalculator.calculateMoldPotential(structuredWeather({
+        current: {
+            relativeHumidity: 80,
+            temperature: 20,
+            dewPoint: 19,
+            precipitation: 0,
+            windSpeed: 3,
+        },
+    }));
+    const weak = MoldPotentialCalculator.calculateMoldPotential(structuredWeather({
+        current: {
+            relativeHumidity: 80,
+            temperature: 20,
+            dewPoint: 10,
+            precipitation: 0,
+            windSpeed: 3,
+        },
+    }));
+
+    assertEqual(supportive.confidence, 'high',
+        'small dew-point depression should increase confidence');
+    assertEqual(weak.confidence, 'low',
+        'large dew-point depression should lower confidence');
+    assertTrue(supportive.score > weak.score,
+        'dew-point modifier should affect score within a small range');
+}
+
 function testMissingDataIsNotZero() {
     const missingPrecipitation = MoldPotentialCalculator.calculateMoldPotential([
         hour(80, null, 20, 1),
@@ -192,7 +308,7 @@ function testDataCompleteness() {
         hour(80, null, 20, null),
     ]);
 
-    assertNear(result.dataCompleteness, 0.6, 0.001,
+    assertNear(result.dataCompleteness, 0.45, 0.001,
         'data completeness should equal available source weight');
 }
 
@@ -201,13 +317,17 @@ function main() {
         testDryLowHumidityProducesLow,
         testHighHumidityRaisesScore,
         testRecentPrecipitationRaisesScore,
+        testLeafWetnessRaisesScore,
         testSuitableTemperatureRaisesScore,
         testExtremeTemperaturesReduceScore,
+        testStructuredNegativeTemperatureReducesScore,
         testLowWindRaisesPersistence,
         testStrongWindLowersPersistence,
         testMissingHumidityReturnsUnavailable,
         testMissingOptionalComponentsRenormalizeWeights,
+        testMissingLeafWetnessRenormalizesWeights,
         testMissingDataIsNotZero,
+        testDewPointModifiesConfidence,
         testScoreIsClamped,
         testDataCompleteness,
     ];

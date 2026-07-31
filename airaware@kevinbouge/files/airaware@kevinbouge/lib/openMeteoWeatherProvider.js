@@ -15,25 +15,63 @@ const DEFAULT_TIMEOUT_SECONDS = 15;
 const DEFAULT_FORECAST_DAYS = 4;
 const MAX_FORECAST_DAYS = 7;
 
-const SOURCE_VARIABLES = Object.freeze([
-    'temperature_2m',
-    'relative_humidity_2m',
-    'precipitation',
-    'wind_speed_10m',
-]);
-
 const CANONICAL_SOURCES = Object.freeze({
     temperature: 'temperature_2m',
     relativeHumidity: 'relative_humidity_2m',
+    dewPoint: 'dew_point_2m',
     precipitation: 'precipitation',
     windSpeed: 'wind_speed_10m',
+    windDirection: 'wind_direction_10m',
+    windGusts: 'wind_gusts_10m',
+    visibility: 'visibility',
 });
 
 const CANONICAL_FIELDS = Object.freeze([
     'temperature',
     'relativeHumidity',
+    'dewPoint',
     'precipitation',
     'windSpeed',
+    'windDirection',
+    'windGusts',
+    'visibility',
+]);
+
+const SOURCE_VARIABLES = Object.freeze([
+    'temperature_2m',
+    'relative_humidity_2m',
+    'dew_point_2m',
+    'precipitation',
+    'wind_speed_10m',
+    'wind_direction_10m',
+    'wind_gusts_10m',
+    'visibility',
+]);
+
+const DAILY_SOURCES = Object.freeze({
+    leafWetnessProbabilityMean: 'leaf_wetness_probability_mean',
+    temperatureMean: 'temperature_2m_mean',
+    temperatureMax: 'temperature_2m_max',
+    temperatureMin: 'temperature_2m_min',
+    relativeHumidityMean: 'relative_humidity_2m_mean',
+    relativeHumidityMax: 'relative_humidity_2m_max',
+    precipitationSum: 'precipitation_sum',
+    windSpeedMean: 'wind_speed_10m_mean',
+    windSpeedMax: 'wind_speed_10m_max',
+    windGustsMax: 'wind_gusts_10m_max',
+});
+
+const DAILY_VARIABLES = Object.freeze([
+    'leaf_wetness_probability_mean',
+    'temperature_2m_mean',
+    'temperature_2m_max',
+    'temperature_2m_min',
+    'relative_humidity_2m_mean',
+    'relative_humidity_2m_max',
+    'precipitation_sum',
+    'wind_speed_10m_mean',
+    'wind_speed_10m_max',
+    'wind_gusts_10m_max',
 ]);
 
 function _isObject(value) {
@@ -44,11 +82,19 @@ function _isFiniteNumber(value) {
     return typeof value === 'number' && Number.isFinite(value);
 }
 
-function _sanitizeNumber(value) {
+function _shouldClampNonNegative(field) {
+    return field !== 'temperature' &&
+        field !== 'temperatureMean' &&
+        field !== 'temperatureMax' &&
+        field !== 'temperatureMin' &&
+        field !== 'dewPoint';
+}
+
+function _sanitizeWeatherValue(value, field) {
     if (!_isFiniteNumber(value))
         return null;
 
-    return Math.max(0, value);
+    return _shouldClampNonNegative(field) ? Math.max(0, value) : value;
 }
 
 function _normalizeForecastDays(value) {
@@ -91,31 +137,114 @@ function _coordinateOrNull(value, min, max) {
     return value;
 }
 
-function _sourceValueAt(hourly, sourceName, index) {
+function _sourceValueAt(hourly, sourceName, index, field) {
     if (!_isObject(hourly) || !Array.isArray(hourly[sourceName]))
         return null;
 
-    return _sanitizeNumber(hourly[sourceName][index]);
+    return _sanitizeWeatherValue(hourly[sourceName][index], field);
+}
+
+function _sourceValue(source, sourceName, field) {
+    if (!_isObject(source) || !Object.prototype.hasOwnProperty.call(source, sourceName))
+        return null;
+
+    return _sanitizeWeatherValue(source[sourceName], field);
 }
 
 function _unitsFromPayload(payload) {
     const hourlyUnits = _isObject(payload.hourly_units)
         ? payload.hourly_units
         : {};
+    const currentUnits = _isObject(payload.current_units)
+        ? payload.current_units
+        : {};
+    const dailyUnits = _isObject(payload.daily_units)
+        ? payload.daily_units
+        : {};
 
     return {
-        temperature: typeof hourlyUnits.temperature_2m === 'string'
-            ? hourlyUnits.temperature_2m
-            : '°C',
-        relativeHumidity: typeof hourlyUnits.relative_humidity_2m === 'string'
-            ? hourlyUnits.relative_humidity_2m
+        current: currentUnits,
+        hourly: hourlyUnits,
+        daily: dailyUnits,
+        temperature: typeof hourlyUnits.temperature_2m === 'string' ? hourlyUnits.temperature_2m : '°C',
+        relativeHumidity: typeof hourlyUnits.relative_humidity_2m === 'string' ? hourlyUnits.relative_humidity_2m : '%',
+        dewPoint: typeof hourlyUnits.dew_point_2m === 'string' ? hourlyUnits.dew_point_2m : '°C',
+        precipitation: typeof hourlyUnits.precipitation === 'string' ? hourlyUnits.precipitation : 'mm',
+        windSpeed: typeof hourlyUnits.wind_speed_10m === 'string' ? hourlyUnits.wind_speed_10m : 'm/s',
+        windDirection: typeof hourlyUnits.wind_direction_10m === 'string' ? hourlyUnits.wind_direction_10m : '°',
+        windGusts: typeof hourlyUnits.wind_gusts_10m === 'string' ? hourlyUnits.wind_gusts_10m : 'm/s',
+        visibility: typeof hourlyUnits.visibility === 'string' ? hourlyUnits.visibility : 'm',
+        leafWetnessProbabilityMean: typeof dailyUnits.leaf_wetness_probability_mean === 'string'
+            ? dailyUnits.leaf_wetness_probability_mean
             : '%',
-        precipitation: typeof hourlyUnits.precipitation === 'string'
-            ? hourlyUnits.precipitation
-            : 'mm',
-        windSpeed: typeof hourlyUnits.wind_speed_10m === 'string'
-            ? hourlyUnits.wind_speed_10m
-            : 'm/s',
+    };
+}
+
+function _valuesFromSource(source, sourceMap) {
+    let values = {};
+    let missingFields = [];
+
+    for (const field in sourceMap) {
+        const value = _sourceValue(source, sourceMap[field], field);
+
+        values[field] = value;
+
+        if (value === null)
+            missingFields.push(field);
+    }
+
+    return {
+        values,
+        missingFields,
+    };
+}
+
+function _seriesFromHourly(hourly) {
+    let series = {};
+
+    for (const field of CANONICAL_FIELDS) {
+        const sourceName = CANONICAL_SOURCES[field];
+        const sourceValues = _isObject(hourly) && Array.isArray(hourly[sourceName])
+            ? hourly[sourceName]
+            : [];
+
+        series[field] = sourceValues.map(value => _sanitizeWeatherValue(value, field));
+    }
+
+    return series;
+}
+
+function _seriesFromDaily(daily) {
+    let series = {};
+
+    for (const field in DAILY_SOURCES) {
+        const sourceName = DAILY_SOURCES[field];
+        const sourceValues = _isObject(daily) && Array.isArray(daily[sourceName])
+            ? daily[sourceName]
+            : [];
+
+        series[field] = sourceValues.map(value => _sanitizeWeatherValue(value, field));
+    }
+
+    return series;
+}
+
+function _parseCurrent(payload) {
+    const current = _isObject(payload.current) ? payload.current : {};
+    const parsed = _valuesFromSource(current, CANONICAL_SOURCES);
+
+    return {
+        timestamp: typeof current.time === 'string' ? current.time : null,
+        temperature: parsed.values.temperature,
+        relativeHumidity: parsed.values.relativeHumidity,
+        dewPoint: parsed.values.dewPoint,
+        precipitation: parsed.values.precipitation,
+        windSpeed: parsed.values.windSpeed,
+        windDirection: parsed.values.windDirection,
+        windGusts: parsed.values.windGusts,
+        visibility: parsed.values.visibility,
+        missingFields: parsed.missingFields,
+        isPartial: parsed.missingFields.length > 0,
     };
 }
 
@@ -125,8 +254,9 @@ function _parseHourly(payload) {
     if (!_isObject(hourly) || !Array.isArray(hourly.time))
         throw new Error('Invalid Open-Meteo Weather response: missing hourly time');
 
-    let hours = [];
+    let records = [];
     let missingFields = [];
+    let timestamps = [];
 
     for (let index = 0; index < hourly.time.length; index++) {
         const time = hourly.time[index];
@@ -134,10 +264,11 @@ function _parseHourly(payload) {
         if (typeof time !== 'string' || time === '')
             continue;
 
+        timestamps.push(time);
         let values = {};
 
         for (const field of CANONICAL_FIELDS) {
-            const value = _sourceValueAt(hourly, CANONICAL_SOURCES[field], index);
+            const value = _sourceValueAt(hourly, CANONICAL_SOURCES[field], index, field);
 
             if (value === null)
                 missingFields.push(field);
@@ -145,17 +276,49 @@ function _parseHourly(payload) {
             values[field] = value;
         }
 
-        hours.push({
+        records.push({
             time,
             values,
         });
     }
 
-    if (hours.length === 0)
+    if (records.length === 0)
         throw new Error('Invalid Open-Meteo Weather response: no usable hourly values');
 
     return {
-        hours,
+        timestamps,
+        records,
+        series: _seriesFromHourly(hourly),
+        missingFields,
+        isPartial: missingFields.length > 0,
+    };
+}
+
+function _parseDaily(payload) {
+    const daily = _isObject(payload.daily) ? payload.daily : {};
+    const dates = Array.isArray(daily.time)
+        ? daily.time.filter(date => typeof date === 'string' && date !== '')
+        : [];
+    const series = _seriesFromDaily(daily);
+    let missingFields = [];
+
+    for (const field in DAILY_SOURCES) {
+        if (!Array.isArray(daily[DAILY_SOURCES[field]]))
+            missingFields.push(field);
+    }
+
+    return {
+        dates,
+        leafWetnessProbabilityMean: series.leafWetnessProbabilityMean || [],
+        temperatureMean: series.temperatureMean || [],
+        temperatureMax: series.temperatureMax || [],
+        temperatureMin: series.temperatureMin || [],
+        relativeHumidityMean: series.relativeHumidityMean || [],
+        relativeHumidityMax: series.relativeHumidityMax || [],
+        precipitationSum: series.precipitationSum || [],
+        windSpeedMean: series.windSpeedMean || [],
+        windSpeedMax: series.windSpeedMax || [],
+        windGustsMax: series.windGustsMax || [],
         missingFields,
         isPartial: missingFields.length > 0,
     };
@@ -190,7 +353,9 @@ var buildRequestUrl = function(coordinates, options = {}) {
     const query = _encodeQuery({
         latitude,
         longitude,
+        current: SOURCE_VARIABLES.join(','),
         hourly: SOURCE_VARIABLES.join(','),
+        daily: DAILY_VARIABLES.join(','),
         forecast_days: forecastDays,
         timezone,
     });
@@ -231,20 +396,50 @@ var parseOpenMeteoResponse = function(payload, options = {}) {
     if (payload.error === true)
         throw new Error(`Open-Meteo Weather error: ${payload.reason || 'unknown error'}`);
 
+    const current = _parseCurrent(payload);
     const parsed = _parseHourly(payload);
-
-    return {
-        provider: PROVIDER_ID,
+    const daily = _parseDaily(payload);
+    const metadata = {
         latitude: _coordinateOrNull(payload.latitude, -90, 90),
         longitude: _coordinateOrNull(payload.longitude, -180, 180),
         timezone: typeof payload.timezone === 'string' ? payload.timezone : null,
+        timezoneAbbreviation: typeof payload.timezone_abbreviation === 'string'
+            ? payload.timezone_abbreviation
+            : null,
         utcOffsetSeconds: _isFiniteNumber(payload.utc_offset_seconds)
             ? payload.utc_offset_seconds
             : 0,
+        generationTimeMs: _isFiniteNumber(payload.generationtime_ms)
+            ? payload.generationtime_ms
+            : null,
+    };
+
+    return {
+        provider: PROVIDER_ID,
+        latitude: metadata.latitude,
+        longitude: metadata.longitude,
+        timezone: metadata.timezone,
+        utcOffsetSeconds: metadata.utcOffsetSeconds,
         units: _unitsFromPayload(payload),
-        hourly: parsed.hours,
+        current,
+        hourly: {
+            timestamps: parsed.timestamps,
+            temperature: parsed.series.temperature,
+            relativeHumidity: parsed.series.relativeHumidity,
+            dewPoint: parsed.series.dewPoint,
+            precipitation: parsed.series.precipitation,
+            windSpeed: parsed.series.windSpeed,
+            windDirection: parsed.series.windDirection,
+            windGusts: parsed.series.windGusts,
+            visibility: parsed.series.visibility,
+            missingFields: parsed.missingFields,
+            isPartial: parsed.isPartial,
+        },
+        hourlyRecords: parsed.records,
+        daily,
+        metadata,
         missingFields: parsed.missingFields,
-        isPartial: parsed.isPartial,
+        isPartial: current.isPartial || parsed.isPartial || daily.isPartial,
         fetchedAt: GLib.get_real_time() / 1000,
     };
 };

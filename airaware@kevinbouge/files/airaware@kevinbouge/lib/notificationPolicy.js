@@ -1,8 +1,8 @@
 /* exported shouldNotifyRiskChange */
 
 const DISABLED = 'disabled';
-const HIGH_ONLY = 'high';
 const HIGH_AND_VERY_HIGH = 'high-very-high';
+const VERY_HIGH_ONLY = 'very-high';
 
 function _categoryId(category) {
     if (typeof category === 'string')
@@ -38,8 +38,8 @@ var shouldNotifyRiskChange = function(previousCategory, currentCategory, notific
     if (previousId === currentId)
         return false;
 
-    if (notificationLevel === HIGH_ONLY)
-        return currentId === 'high';
+    if (notificationLevel === VERY_HIGH_ONLY)
+        return currentId === 'very-high';
 
     if (notificationLevel === HIGH_AND_VERY_HIGH)
         return currentId === 'high' || currentId === 'very-high';

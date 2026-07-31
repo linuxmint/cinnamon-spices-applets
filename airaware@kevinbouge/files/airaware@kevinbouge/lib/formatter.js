@@ -1,14 +1,20 @@
 /* exported setTranslator, resetTranslator, formatCategory, formatPanelLabel,
  * formatScore, formatReading, formatPollen, formatPollutant, formatTimestamp,
  * isStale, formatStaleStatus, formatFieldLabel, formatAerosolOpticalDepth,
- * formatSulfurDioxide, formatCarbonMonoxide, formatWeatherUnavailable,
- * formatMoldPotential */
+ * formatSulfurDioxide, formatCarbonMonoxide, formatEuropeanAqi,
+ * formatPollutantWithAqi, formatWeatherUnavailable, formatMoldPotential,
+ * formatPercentage, formatTemperature, formatDewPoint, formatWindSpeed,
+ * formatWindDirection, formatWindGusts, formatVisibility,
+ * formatPollenTypeLabel */
 
 const GLib = imports.gi.GLib;
 
 const DEFAULT_UNIT = '';
 const POLLEN_UNIT = 'grains/m³';
 const POLLUTANT_UNIT = 'µg/m³';
+const TEMPERATURE_UNIT = '°C';
+const WIND_UNIT = 'm/s';
+const VISIBILITY_UNIT = 'km';
 
 const CATEGORY_LABELS = Object.freeze({
     low: 'Low',
@@ -19,7 +25,13 @@ const CATEGORY_LABELS = Object.freeze({
 
 const FIELD_LABELS = Object.freeze({
     treePollen: 'Tree pollen',
+    alder: 'Alder pollen',
+    birch: 'Birch pollen',
     grassPollen: 'Grass pollen',
+    grass: 'Grass pollen',
+    mugwort: 'Mugwort pollen',
+    olive: 'Olive pollen',
+    ragweed: 'Ragweed pollen',
     weedPollen: 'Weed pollen',
     pm25: 'PM2.5',
     pm10: 'PM10',
@@ -29,6 +41,16 @@ const FIELD_LABELS = Object.freeze({
     dust: 'Dust',
     aerosolOpticalDepth: 'Aerosol optical depth',
     carbonMonoxide: 'CO',
+    wildfirePm10: 'Wildfire-related PM10',
+});
+
+const POLLEN_TYPE_LABELS = Object.freeze({
+    alder: 'Alder',
+    birch: 'Birch',
+    grass: 'Grass',
+    mugwort: 'Mugwort',
+    olive: 'Olive',
+    ragweed: 'Ragweed',
 });
 
 let _translate = function(text) {
@@ -65,6 +87,26 @@ function _replace(template, replacements) {
 
 function _nowMs() {
     return GLib.get_real_time() / 1000;
+}
+
+function _formatNumber(value, unit, precision, clampToZero) {
+    if (!_isFiniteNumber(value))
+        return _translate('Unavailable');
+
+    const safePrecision = Math.max(0, Math.min(3, Math.floor(precision)));
+    const numericValue = clampToZero ? Math.max(0, value) : value;
+    const rounded = _roundToPrecision(numericValue, safePrecision);
+    const formattedNumber = safePrecision === 0
+        ? `${Math.round(rounded)}`
+        : rounded.toFixed(safePrecision);
+
+    if (!unit)
+        return formattedNumber;
+
+    return _replace(_translate('{value} {unit}'), {
+        value: formattedNumber,
+        unit: _translate(unit),
+    });
 }
 
 /**
@@ -122,14 +164,14 @@ var formatPanelLabel = function(riskResult, showText) {
  * Format a normalized risk score.
  *
  * @param {number} score - Normalized 0-100 score.
- * @returns {string} Score formatted as n/100 or unavailable text.
+ * @returns {string} Score formatted as a percentage or unavailable text.
  */
 var formatScore = function(score) {
     if (!_isFiniteNumber(score))
         return _translate('Unavailable');
 
     const normalized = Math.max(0, Math.min(100, Math.round(score)));
-    return _replace(_translate('{score}/100'), {
+    return _replace(_translate('{score}%'), {
         score: normalized,
     });
 };
@@ -143,22 +185,7 @@ var formatScore = function(score) {
  * @returns {string} Formatted reading or unavailable text.
  */
 var formatReading = function(value, unit = DEFAULT_UNIT, precision = 0) {
-    if (!_isFiniteNumber(value))
-        return _translate('Unavailable');
-
-    const safePrecision = Math.max(0, Math.min(3, Math.floor(precision)));
-    const rounded = _roundToPrecision(Math.max(0, value), safePrecision);
-    const formattedNumber = safePrecision === 0
-        ? `${Math.round(rounded)}`
-        : rounded.toFixed(safePrecision);
-
-    if (!unit)
-        return formattedNumber;
-
-    return _replace(_translate('{value} {unit}'), {
-        value: formattedNumber,
-        unit: _translate(unit),
-    });
+    return _formatNumber(value, unit, precision, true);
 };
 
 /**
@@ -179,6 +206,44 @@ var formatPollen = function(value) {
  */
 var formatPollutant = function(value) {
     return formatReading(value, POLLUTANT_UNIT, 1);
+};
+
+/**
+ * Format a pollutant-specific European AQI value.
+ *
+ * @param {number} value - European AQI value.
+ * @returns {string} Formatted AQI value or unavailable text.
+ */
+var formatEuropeanAqi = function(value) {
+    if (!_isFiniteNumber(value))
+        return _translate('Unavailable');
+
+    return _replace(_translate('AQI {value}'), {
+        value: Math.round(Math.max(0, Math.min(100, value))),
+    });
+};
+
+/**
+ * Format raw concentration and pollutant-specific AQI compactly.
+ *
+ * @param {number} value - Raw pollutant concentration.
+ * @param {number} aqi - Pollutant-specific European AQI.
+ * @returns {string} Combined pollutant display string.
+ */
+var formatPollutantWithAqi = function(value, aqi) {
+    const raw = formatPollutant(value);
+    const aqiText = formatEuropeanAqi(aqi);
+
+    if (!_isFiniteNumber(value))
+        return aqiText;
+
+    if (!_isFiniteNumber(aqi))
+        return raw;
+
+    return _replace(_translate('{raw} - {aqi}'), {
+        raw,
+        aqi: aqiText,
+    });
 };
 
 /**
@@ -237,6 +302,107 @@ var formatMoldPotential = function(moldPotential) {
     return _replace(_translate('{score}%'), {
         score: normalized,
     });
+};
+
+/**
+ * Format a percentage value.
+ *
+ * @param {number} value - Percentage value.
+ * @returns {string} Formatted percentage or unavailable text.
+ */
+var formatPercentage = function(value) {
+    if (!_isFiniteNumber(value))
+        return _translate('Unavailable');
+
+    return _replace(_translate('{value}%'), {
+        value: Math.round(Math.max(0, Math.min(100, value))),
+    });
+};
+
+/**
+ * Format temperature in degrees Celsius.
+ *
+ * @param {number} value - Temperature value.
+ * @returns {string} Formatted temperature or unavailable text.
+ */
+var formatTemperature = function(value) {
+    return _formatNumber(value, TEMPERATURE_UNIT, 1, false);
+};
+
+/**
+ * Format dew point in degrees Celsius.
+ *
+ * @param {number} value - Dew point value.
+ * @returns {string} Formatted dew point or unavailable text.
+ */
+var formatDewPoint = function(value) {
+    return formatTemperature(value);
+};
+
+/**
+ * Format wind speed in meters per second.
+ *
+ * @param {number} value - Wind speed value.
+ * @returns {string} Formatted wind speed or unavailable text.
+ */
+var formatWindSpeed = function(value) {
+    return formatReading(value, WIND_UNIT, 1);
+};
+
+/**
+ * Format wind gusts in meters per second.
+ *
+ * @param {number} value - Wind gust value.
+ * @returns {string} Formatted wind gust or unavailable text.
+ */
+var formatWindGusts = function(value) {
+    return formatWindSpeed(value);
+};
+
+/**
+ * Format wind direction as degrees plus compass sector.
+ *
+ * @param {number} value - Direction in degrees.
+ * @returns {string} Formatted direction or unavailable text.
+ */
+var formatWindDirection = function(value) {
+    if (!_isFiniteNumber(value))
+        return _translate('Unavailable');
+
+    const normalized = ((value % 360) + 360) % 360;
+    const sectors = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    const sector = sectors[Math.floor((normalized + 22.5) / 45) % sectors.length];
+
+    return _replace(_translate('{degrees}° {direction}'), {
+        degrees: Math.round(normalized),
+        direction: _translate(sector),
+    });
+};
+
+/**
+ * Format visibility in kilometers. Open-Meteo returns meters.
+ *
+ * @param {number} value - Visibility in meters.
+ * @returns {string} Formatted visibility or unavailable text.
+ */
+var formatVisibility = function(value) {
+    if (!_isFiniteNumber(value))
+        return _translate('Unavailable');
+
+    return formatReading(value / 1000, VISIBILITY_UNIT, 1);
+};
+
+/**
+ * Format a pollen type label.
+ *
+ * @param {string} fieldName - Canonical pollen field.
+ * @returns {string} Pollen label.
+ */
+var formatPollenTypeLabel = function(fieldName) {
+    if (Object.prototype.hasOwnProperty.call(POLLEN_TYPE_LABELS, fieldName))
+        return _translate(POLLEN_TYPE_LABELS[fieldName]);
+
+    return formatFieldLabel(fieldName);
 };
 
 /**

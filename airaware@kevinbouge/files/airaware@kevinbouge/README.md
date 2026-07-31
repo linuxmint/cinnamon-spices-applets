@@ -12,12 +12,14 @@ AirAware reports environmental conditions only. It does not predict symptoms, di
 - No API key required
 - Open-Meteo Air Quality provider isolated in `lib/openMeteoProvider.js`
 - Open-Meteo Weather Forecast provider isolated in `lib/openMeteoWeatherProvider.js`
-- Weather-based Mold potential from temperature, humidity, precipitation, and wind
-- Aerosol optical depth and carbon monoxide included in the environmental-risk score
-- Sulfur dioxide (SO₂) included in the environmental-risk score
+- Current conditions from Open-Meteo `current` fields with `timezone=auto`
+- Pollutant-specific European AQI scoring
+- Six pollen types: alder, birch, grass, mugwort, olive, and ragweed
+- Weather-based Mold potential using humidity, leaf wetness, precipitation, temperature, dew point, and wind
+- Atmospheric irritant context from carbon monoxide, aerosol optical depth, dust, and optional wildfire-related PM10 where available
 - Panel icon with risk-colored line work and an optional Low, Moderate, High, or Very High label
-- Short panel tooltip showing only the current risk label
-- Popup with current score, location, tree pollen, grass pollen, weed pollen, PM2.5, PM10, NO₂, O₃, SO₂, carbon monoxide, aerosol optical depth, dust, Mold potential, last update time, forecast, and score legend
+- Short panel tooltip showing the current risk label and score
+- Popup with current score, location, pollen, PM2.5, PM10, NO₂, O₃, SO₂, carbon monoxide, aerosol optical depth, dust, Mold potential, last update time, and compact forecast
 - Cache fallback for coordinates, place name, and last successful data response
 - Stale data indicator when current data cannot be refreshed
 - Configurable refresh interval, panel label, and notifications
@@ -64,23 +66,18 @@ The panel label can be hidden from settings while keeping the icon visible. The 
 - Very High: red
 - Loading or unavailable: gray
 
-The tooltip shows only the current category, for example `Moderate`. If cached data is stale, it adds a stale-data note.
+The tooltip shows the current category and score, for example `Moderate (52%)`. If cached data is stale, it adds a stale-data note.
 
 ## Score
 
 The AirAware score is an environmental burden index. It combines:
 
 - 50% pollen burden
-- 25% particulate pollution
-- 10% gases and atmospheric irritants
+- 25% regulated air pollution
+- 10% atmospheric irritants
 - 15% Mold potential
 
-Pollen burden uses the highest pollen category instead of averaging tree, grass,
-and weed pollen. Particulate pollution uses PM2.5 and PM10. Gases and
-atmospheric irritants use NO₂, O₃, SO₂, dust, carbon monoxide, and aerosol optical
-depth. Mold potential is inferred from weather conditions; it is not a
-measured mold-spore concentration. The score is not a medical, regulatory, or
-AQI claim.
+Pollen burden uses the highest available pollen burden instead of averaging unrelated pollen types. Regulated pollution uses the highest available pollutant-specific European AQI among PM2.5, PM10, NO₂, O₃, and SO₂. Atmospheric irritants include CO, aerosol optical depth, dust, and optional wildfire-related PM10. Mold potential is inferred from humidity, leaf wetness, precipitation, temperature, dew point, and wind. Missing components are omitted and the remaining weights are renormalized. The score is not medical advice.
 
 ## Privacy
 
@@ -110,7 +107,7 @@ used by Mold potential:
 
 https://open-meteo.com/en/docs
 
-Open-Meteo provides air quality and pollen forecast data without requiring an API key for normal public API usage. Pollen availability can vary by region and season; Open-Meteo documents pollen as Europe-only during pollen season with a 4-day forecast.
+Open-Meteo provides air quality, pollen, AQI, and weather forecast data without requiring an API key for normal public API usage. Availability varies by variable, region, model domain, and season. Pollen data is primarily available in Europe during pollen season.
 
 Data source attribution: Open-Meteo.com.
 
@@ -123,13 +120,16 @@ Place-name attribution: OpenStreetMap contributors.
 ## Limitations
 
 - Pollen variables are primarily available in Europe during pollen season.
-- Forecast quality depends on the upstream air quality model and region.
-- Current forecasts are environmental estimates, not sensor readings from the user's exact location.
+- Forecast quality depends on the upstream air quality and weather models and region.
+- Forecasts are model estimates, not exact local sensor readings.
 - The risk score is an environmental burden index specific to AirAware, not a medical, regulatory, or AQI claim.
-- Mold potential is inferred from temperature, humidity, precipitation, and wind.
+- Mold potential is inferred from temperature, humidity, leaf wetness, precipitation, dew point, and wind.
 - Mold potential is not a measured mold-spore concentration.
 - Aerosol optical depth describes particles through the atmospheric column and may not exactly represent surface exposure.
-- Carbon monoxide and aerosol levels can originate from multiple sources.
+- Wildfire-related PM10 may not be available in every region or model.
+- Visibility can be reduced by humidity, cloud, fog, dust, or aerosols and is not a direct pollution measurement.
+- Carbon monoxide, aerosol, and PM10 levels can originate from multiple sources.
+- European AQI values should not be described as medical advice.
 - AirAware does not account for personal sensitivity, medication, indoor exposure, masks, activity level, or clinical history.
 
 ## Roadmap

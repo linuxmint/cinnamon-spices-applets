@@ -91,6 +91,18 @@ function normalPayload() {
         longitude: 14.44,
         utc_offset_seconds: 7200,
         timezone: 'Europe/Prague',
+        timezone_abbreviation: 'CEST',
+        generationtime_ms: 1.23,
+        current_units: {
+            pm10: 'µg/m³',
+            pm2_5: 'µg/m³',
+            european_aqi: 'European AQI',
+        },
+        hourly_units: {
+            pm10: 'µg/m³',
+            pm2_5: 'µg/m³',
+            european_aqi: 'European AQI',
+        },
         current: {
             time: '2026-07-30T12:00',
             pm10: 18,
@@ -101,12 +113,19 @@ function normalPayload() {
             dust: 3,
             aerosol_optical_depth: 0.18,
             carbon_monoxide: 130,
+            european_aqi: 42,
+            european_aqi_pm2_5: 18,
+            european_aqi_pm10: 19,
+            european_aqi_nitrogen_dioxide: 12,
+            european_aqi_ozone: 42,
+            european_aqi_sulphur_dioxide: 8,
             alder_pollen: 4,
             birch_pollen: 28,
             olive_pollen: 8,
             grass_pollen: 34,
             mugwort_pollen: 2,
             ragweed_pollen: 19,
+            pm10_wildfires: 1.2,
         },
         hourly: {
             time: [
@@ -124,12 +143,19 @@ function normalPayload() {
             dust: [1, 3, 2, 8, 3],
             aerosol_optical_depth: [0.1, 0.18, 0.2, 0.25, 0.12],
             carbon_monoxide: [110, 130, 140, 160, 120],
+            european_aqi: [20, 42, 28, 38, 22],
+            european_aqi_pm2_5: [10, 18, 20, 24, 16],
+            european_aqi_pm10: [11, 19, 24, 28, 18],
+            european_aqi_nitrogen_dioxide: [8, 12, 10, 15, 9],
+            european_aqi_ozone: [20, 42, 28, 38, 22],
+            european_aqi_sulphur_dioxide: [4, 8, 10, 13, 6],
             alder_pollen: [1, 4, 3, 2, 1],
             birch_pollen: [20, 28, 18, 14, 10],
             olive_pollen: [5, 8, 6, 5, 3],
             grass_pollen: [24, 34, 40, 45, 28],
             mugwort_pollen: [1, 2, 4, 5, 2],
             ragweed_pollen: [8, 19, 20, 25, 10],
+            pm10_wildfires: [0.5, 1.2, 0.8, 1.7, 0.4],
         },
     };
 }
@@ -158,6 +184,12 @@ function testBuildRequestUrl() {
         'request URL should request hourly forecast values');
     assertTrue(url.indexOf('forecast_days=4') !== -1,
         'request URL should include forecast days');
+    assertTrue(url.indexOf('timezone=auto') !== -1,
+        'request URL should use provider-local timezone');
+    assertTrue(url.indexOf('european_aqi_pm2_5') !== -1,
+        'request URL should include pollutant-specific European AQI');
+    assertTrue(url.indexOf('pm10_wildfires') !== -1,
+        'request URL should include optional wildfire PM10');
 }
 
 function testBuildRequestUrlNormalizesForecastDays() {
@@ -179,8 +211,26 @@ function testNormalApiResponse() {
 
     assertEqual(result.provider, 'open-meteo', 'provider id should be set');
     assertEqual(result.timezone, 'Europe/Prague', 'timezone should be preserved');
+    assertEqual(result.metadata.timezoneAbbreviation, 'CEST',
+        'timezone abbreviation should be preserved');
+    assertEqual(result.metadata.generationTimeMs, 1.23,
+        'generation time should be preserved');
+    assertEqual(result.metadata.units.current.pm10, 'µg/m³',
+        'current unit metadata should be preserved');
+    assertEqual(result.current.timestamp, '2026-07-30T12:00',
+        'current timestamp should use Open-Meteo current object');
     assertEqual(result.current.readings.treePollen, 28,
         'tree pollen should use highest tree source');
+    assertEqual(result.current.pollen.alder, 4,
+        'individual alder pollen should be preserved');
+    assertEqual(result.current.pollen.birch, 28,
+        'individual birch pollen should be preserved');
+    assertEqual(result.current.pollen.olive, 8,
+        'individual olive pollen should be preserved');
+    assertEqual(result.current.pollen.mugwort, 2,
+        'individual mugwort pollen should be preserved');
+    assertEqual(result.current.pollen.ragweed, 19,
+        'individual ragweed pollen should be preserved');
     assertEqual(result.current.readings.grassPollen, 34,
         'grass pollen should map directly');
     assertEqual(result.current.readings.weedPollen, 19,
@@ -193,6 +243,18 @@ function testNormalApiResponse() {
         'carbon monoxide should map directly');
     assertEqual(result.current.readings.sulfurDioxide, 12,
         'sulfur dioxide should map from Open-Meteo sulphur_dioxide');
+    assertEqual(result.current.rawPollutants.sulfurDioxide, 12,
+        'raw pollutant structure should include sulfur dioxide');
+    assertEqual(result.current.pollutantAqi.ozone, 42,
+        'pollutant-specific European AQI should be parsed');
+    assertEqual(result.current.overallEuropeanAqi, 42,
+        'overall European AQI should be parsed for display/diagnostics');
+    assertEqual(result.current.context.wildfirePm10, 1.2,
+        'optional wildfire PM10 should be parsed when present');
+    assertEqual(result.hourly.timestamps.length, 5,
+        'hourly timestamps should be preserved');
+    assertEqual(result.hourly.pollutantAqi.pm10[3], 28,
+        'hourly pollutant AQI arrays should be preserved');
     assertEqual(result.forecast.length, 3,
         'forecast should contain requested number of days');
     assertEqual(result.forecast[1].readings.grassPollen, 45,
@@ -201,6 +263,8 @@ function testNormalApiResponse() {
         'daily forecast should use max hourly carbon monoxide value for the day');
     assertEqual(result.forecast[1].readings.sulfurDioxide, 24,
         'daily forecast should use max hourly sulfur dioxide value for the day');
+    assertEqual(result.forecast[1].pollutantAqi.ozone, 38,
+        'daily forecast should use max hourly pollutant AQI value for the day');
     assertEqual(result.isPartial, false,
         'complete response should not be partial');
 }
@@ -226,12 +290,16 @@ function testMissingPollen() {
 
     assertEqual(result.current.readings.treePollen, null,
         'missing tree pollen should be null');
-    assertTrue(result.current.missingFields.indexOf('treePollen') !== -1,
-        'tree pollen should be listed as missing');
-    assertTrue(result.current.missingFields.indexOf('grassPollen') !== -1,
+    assertTrue(result.current.missingFields.indexOf('alder') !== -1,
+        'alder pollen should be listed as missing');
+    assertTrue(result.current.missingFields.indexOf('birch') !== -1,
+        'birch pollen should be listed as missing');
+    assertTrue(result.current.missingFields.indexOf('grass') !== -1,
         'grass pollen should be listed as missing');
-    assertTrue(result.current.missingFields.indexOf('weedPollen') !== -1,
-        'weed pollen should be listed as missing');
+    assertTrue(result.current.missingFields.indexOf('mugwort') !== -1,
+        'mugwort pollen should be listed as missing');
+    assertTrue(result.current.missingFields.indexOf('ragweed') !== -1,
+        'ragweed pollen should be listed as missing');
     assertEqual(result.current.readings.pm10, 18,
         'pollution values should remain usable when pollen is missing');
     assertEqual(result.isPartial, true,
@@ -243,9 +311,11 @@ function testMissingAtmosphericIrritantsRemainPartial() {
     delete payload.current.aerosol_optical_depth;
     delete payload.current.carbon_monoxide;
     delete payload.current.sulphur_dioxide;
+    delete payload.current.pm10_wildfires;
     delete payload.hourly.aerosol_optical_depth;
     delete payload.hourly.carbon_monoxide;
     delete payload.hourly.sulphur_dioxide;
+    delete payload.hourly.pm10_wildfires;
 
     const result = OpenMeteoProvider.parseOpenMeteoResponse(payload, {
         forecastDays: 2,
@@ -257,6 +327,8 @@ function testMissingAtmosphericIrritantsRemainPartial() {
         'missing carbon monoxide should be null');
     assertEqual(result.current.readings.sulfurDioxide, null,
         'missing sulfur dioxide should be null');
+    assertEqual(result.current.context.wildfirePm10, null,
+        'missing optional wildfire PM10 should be null');
     assertTrue(result.current.missingFields.indexOf('aerosolOpticalDepth') !== -1,
         'missing aerosol optical depth should be tracked');
     assertTrue(result.current.missingFields.indexOf('carbonMonoxide') !== -1,
@@ -274,9 +346,11 @@ function testMalformedAtmosphericValuesNormalizeToNull() {
     payload.current.aerosol_optical_depth = 'bad';
     payload.current.carbon_monoxide = Number.NaN;
     payload.current.sulphur_dioxide = 'bad';
+    payload.current.pm10_wildfires = 'bad';
     payload.hourly.aerosol_optical_depth = ['bad', null, undefined];
     payload.hourly.carbon_monoxide = [Number.NaN, 'bad', null];
     payload.hourly.sulphur_dioxide = [undefined, 'bad', null];
+    payload.hourly.pm10_wildfires = ['bad', null, undefined];
 
     const result = OpenMeteoProvider.parseOpenMeteoResponse(payload, {
         forecastDays: 1,
@@ -288,6 +362,8 @@ function testMalformedAtmosphericValuesNormalizeToNull() {
         'malformed carbon monoxide should be null');
     assertEqual(result.current.readings.sulfurDioxide, null,
         'malformed sulfur dioxide should be null');
+    assertEqual(result.current.context.wildfirePm10, null,
+        'malformed wildfire PM10 should be null');
     assertEqual(result.forecast[0].readings.aerosolOpticalDepth, null,
         'malformed forecast aerosol optical depth should be null');
     assertEqual(result.forecast[0].readings.carbonMonoxide, null,

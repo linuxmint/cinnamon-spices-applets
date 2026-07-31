@@ -36,7 +36,7 @@ msgstr ""
 msgid "{category}"
 msgstr ""
 
-msgid "{category} (stale data)"
+msgid "{category} ({score}, stale data)"
 msgstr ""
 
 msgid "Environmental allergy burden is now {category}."
@@ -60,6 +60,15 @@ msgstr ""
 msgid "Current environmental allergy risk"
 msgstr ""
 
+msgid "Pollen"
+msgstr ""
+
+msgid "Alder pollen"
+msgstr ""
+
+msgid "Birch pollen"
+msgstr ""
+
 msgid "Resolving location"
 msgstr ""
 
@@ -79,6 +88,9 @@ msgid "Weed pollen"
 msgstr ""
 
 msgid "Mold potential"
+msgstr ""
+
+msgid "Regulated pollution"
 msgstr ""
 
 msgid "PM2.5"
@@ -105,6 +117,15 @@ msgstr ""
 msgid "CO"
 msgstr ""
 
+msgid "Atmospheric irritants"
+msgstr ""
+
+msgid "Wildfire-related PM10"
+msgstr ""
+
+msgid "Mold"
+msgstr ""
+
 msgid "Last update"
 msgstr ""
 
@@ -115,6 +136,9 @@ msgid "Forecast"
 msgstr ""
 
 msgid "Forecast unavailable"
+msgstr ""
+
+msgid "Pollen data unavailable"
 msgstr ""
 
 msgid "Only {days} forecast days are currently available from the data source."
@@ -150,15 +174,6 @@ msgstr ""
 msgid "{category} ({score})"
 msgstr ""
 
-msgid "{category} ({score}, partial)"
-msgstr ""
-
-msgid "Legend"
-msgstr ""
-
-msgid "Score blends highest pollen burden (50%), particulates (25%), gases and atmospheric irritants (10%), and mold potential (15%). Environmental conditions only; not a medical symptom prediction."
-msgstr ""
-
 msgid "Refresh now"
 msgstr ""
 
@@ -180,10 +195,70 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-msgid "{score}/100"
+msgid "Mugwort pollen"
+msgstr ""
+
+msgid "Olive pollen"
+msgstr ""
+
+msgid "Ragweed pollen"
+msgstr ""
+
+msgid "Alder"
+msgstr ""
+
+msgid "Birch"
+msgstr ""
+
+msgid "Grass"
+msgstr ""
+
+msgid "Mugwort"
+msgstr ""
+
+msgid "Olive"
+msgstr ""
+
+msgid "Ragweed"
+msgstr ""
+
+msgid "AQI {value}"
+msgstr ""
+
+msgid "{raw} - {aqi}"
 msgstr ""
 
 msgid "{score}%"
+msgstr ""
+
+msgid "{value}%"
+msgstr ""
+
+msgid "{degrees}° {direction}"
+msgstr ""
+
+msgid "N"
+msgstr ""
+
+msgid "NE"
+msgstr ""
+
+msgid "E"
+msgstr ""
+
+msgid "SE"
+msgstr ""
+
+msgid "S"
+msgstr ""
+
+msgid "SW"
+msgstr ""
+
+msgid "W"
+msgstr ""
+
+msgid "NW"
 msgstr ""
 
 msgid "{value} {unit}"
@@ -193,6 +268,18 @@ msgid "grains/m³"
 msgstr ""
 
 msgid "µg/m³"
+msgstr ""
+
+msgid "°C"
+msgstr ""
+
+msgid "m/s"
+msgstr ""
+
+msgid "km"
+msgstr ""
+
+msgid "mm"
 msgstr ""
 
 msgid "No recent data"
@@ -276,8 +363,8 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-msgid "High only"
+msgid "High + Very High"
 msgstr ""
 
-msgid "High + Very High"
+msgid "Very High only"
 msgstr ""

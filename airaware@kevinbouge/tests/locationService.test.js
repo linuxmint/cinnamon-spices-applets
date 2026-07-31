@@ -20,20 +20,34 @@ function assertTrue(condition, message) {
 function makeMemoryCache(envelope = null) {
     return {
         writes: [],
-        readCoordinates() {
-            return envelope;
+        readCoordinatesAsync(callback) {
+            GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+                callback(null, envelope);
+                return GLib.SOURCE_REMOVE;
+            });
         },
-        writeCoordinates(coordinates) {
+        writeCoordinatesAsync(coordinates, callback = null) {
             envelope = {
                 version: 1,
                 savedAt: 1000,
                 data: coordinates,
             };
             this.writes.push(coordinates);
-
-            return {
+            const result = {
                 ok: true,
                 value: envelope,
+            };
+
+            if (typeof callback === 'function') {
+                GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+                    callback(null, result);
+                    return GLib.SOURCE_REMOVE;
+                });
+            }
+
+            return {
+                cancel() {
+                },
             };
         },
     };
@@ -72,35 +86,38 @@ function runAsync(testBody) {
 }
 
 function testFreshCacheAvoidsGeoClue() {
-    const calls = {
-        count: 0,
-    };
-    const cache = makeMemoryCache({
-        version: 1,
-        savedAt: 1000,
-        data: {
-            latitude: 50,
-            longitude: 14,
-        },
-    });
-    const service = LocationService.createLocationService({
-        cache,
-        maxCacheAgeMs: 60000,
-        lookupCoordinatesAsync: asyncLookup({
-            latitude: 1,
-            longitude: 2,
-        }, null, calls),
-    });
+    runAsync(done => {
+        const calls = {
+            count: 0,
+        };
+        const cache = makeMemoryCache({
+            version: 1,
+            savedAt: 1000,
+            data: {
+                latitude: 50,
+                longitude: 14,
+            },
+        });
+        const service = LocationService.createLocationService({
+            cache,
+            maxCacheAgeMs: 60000,
+            lookupCoordinatesAsync: asyncLookup({
+                latitude: 1,
+                longitude: 2,
+            }, null, calls),
+        });
 
-    service.getLocationAsync({
-        nowMs: 2000,
-    }, (error, result) => {
-        assertEqual(error, null, 'fresh cache should not error');
-        assertEqual(result.source, 'cache', 'fresh cache should be used');
-        assertEqual(result.isStale, false, 'fresh cache should not be stale');
-        assertEqual(result.coordinates.latitude, 50,
-            'fresh cache coordinates should be returned');
-        assertEqual(calls.count, 0, 'GeoClue lookup should not be called');
+        service.getLocationAsync({
+            nowMs: 2000,
+        }, (error, result) => {
+            assertEqual(error, null, 'fresh cache should not error');
+            assertEqual(result.source, 'cache', 'fresh cache should be used');
+            assertEqual(result.isStale, false, 'fresh cache should not be stale');
+            assertEqual(result.coordinates.latitude, 50,
+                'fresh cache coordinates should be returned');
+            assertEqual(calls.count, 0, 'GeoClue lookup should not be called');
+            done();
+        });
     });
 }
 
@@ -168,49 +185,55 @@ function testGeoClueFailureFallsBackToStaleCache() {
 }
 
 function testLookupSetupFailureFallsBackToStaleCache() {
-    const cache = makeMemoryCache({
-        version: 1,
-        savedAt: 0,
-        data: {
-            latitude: 50,
-            longitude: 14,
-        },
-    });
-    const service = LocationService.createLocationService({
-        cache,
-        maxCacheAgeMs: 1000,
-        lookupCoordinatesAsync() {
-            throw new Error('GeoClue setup failed');
-        },
-    });
+    runAsync(done => {
+        const cache = makeMemoryCache({
+            version: 1,
+            savedAt: 0,
+            data: {
+                latitude: 50,
+                longitude: 14,
+            },
+        });
+        const service = LocationService.createLocationService({
+            cache,
+            maxCacheAgeMs: 1000,
+            lookupCoordinatesAsync() {
+                throw new Error('GeoClue setup failed');
+            },
+        });
 
-    service.getLocationAsync({
-        nowMs: 5000,
-    }, (error, result) => {
-        assertEqual(error, null,
-            'setup failure should fall back to stale cache');
-        assertEqual(result.source, 'cache',
-            'stale cache should be returned after setup failure');
-        assertEqual(result.isStale, true,
-            'fallback cache should be marked stale');
-        assertTrue(result.error.message.indexOf('GeoClue setup failed') !== -1,
-            'setup failure should be retained for logging');
+        service.getLocationAsync({
+            nowMs: 5000,
+        }, (error, result) => {
+            assertEqual(error, null,
+                'setup failure should fall back to stale cache');
+            assertEqual(result.source, 'cache',
+                'stale cache should be returned after setup failure');
+            assertEqual(result.isStale, true,
+                'fallback cache should be marked stale');
+            assertTrue(result.error.message.indexOf('GeoClue setup failed') !== -1,
+                'setup failure should be retained for logging');
+            done();
+        });
     });
 }
 
 function testLookupSetupFailureWithoutCacheErrors() {
-    const service = LocationService.createLocationService({
-        cache: makeMemoryCache(null),
-        lookupCoordinatesAsync() {
-            throw new Error('GeoClue setup failed');
-        },
-    });
+    runAsync(done => {
+        const service = LocationService.createLocationService({
+            cache: makeMemoryCache(null),
+            lookupCoordinatesAsync() {
+                throw new Error('GeoClue setup failed');
+            },
+        });
 
-    service.getLocationAsync((error, result) => {
-        assertTrue(error.message.indexOf('GeoClue setup failed') !== -1,
-            'setup failure should be surfaced without cache');
-        assertEqual(result, null,
-            'setup failure without cache should not return result');
+        service.getLocationAsync((error, result) => {
+            assertTrue(error.message.indexOf('GeoClue setup failed') !== -1,
+                'setup failure should be surfaced without cache');
+            assertEqual(result, null,
+                'setup failure without cache should not return result');
+            done();
+        });
     });
 }
 

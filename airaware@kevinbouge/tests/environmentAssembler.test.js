@@ -68,6 +68,7 @@ function airQualityResponse(overrides = {}) {
                 }),
             },
         ],
+        weather: overrides.weather || null,
         isPartial: false,
     };
 }
@@ -135,6 +136,40 @@ function testWeatherFailureKeepsFreshAirQualityData() {
         'weather failure should mark combined response partial');
 }
 
+function testWeatherFailureCanUseCachedWeather() {
+    const cached = airQualityResponse({
+        weather: weatherResponse({
+            fetchedAt: 1785441000000,
+        }),
+    });
+    const freshAirQuality = airQualityResponse({
+        fetchedAt: 1785449000000,
+        currentReadings: readings({
+            pm25: 12,
+        }),
+    });
+    const combined = EnvironmentAssembler.combineEnvironmentalData({
+        airQualityData: freshAirQuality,
+        weatherData: null,
+        cachedData: cached,
+    });
+
+    assertNotNull(combined,
+        'fresh air quality and cached weather should combine');
+    assertEqual(combined.current.readings.pm25, 12,
+        'fresh air-quality data should be retained');
+    assertEqual(combined.weatherFetchedAt, 1785441000000,
+        'cached weather timestamp should be preserved independently');
+    assertEqual(combined.current.moldPotential.isAvailable, true,
+        'cached weather should still calculate mold potential');
+    assertEqual(combined.usedCachedWeather, true,
+        'cached weather use should be exposed for stale UI state');
+    assertEqual(combined.usedCachedAirQuality, false,
+        'fresh air quality should not be reported as cached');
+    assertTrue(combined.isPartial,
+        'cached weather fallback should mark the refresh partial');
+}
+
 function testAirQualityFailureUsesCachedDataWithFreshWeather() {
     const cached = airQualityResponse({
         fetchedAt: 1785440000000,
@@ -162,6 +197,10 @@ function testAirQualityFailureUsesCachedDataWithFreshWeather() {
         'fresh weather timestamp should be tracked separately');
     assertEqual(combined.fetchedAt, 1785449000000,
         'combined timestamp should reflect newest valid component');
+    assertEqual(combined.usedCachedAirQuality, true,
+        'cached air-quality use should be exposed for stale UI state');
+    assertEqual(combined.usedCachedWeather, false,
+        'fresh weather should not be reported as cached');
     assertTrue(combined.isPartial,
         'cached air quality with fresh weather is a partial refresh');
 }
@@ -173,7 +212,7 @@ function testPartialSuccessRecalculatesRiskWithMold() {
         cachedData: null,
     });
     const risk = RiskCalculator.calculateRisk(
-        combined.current.readings,
+        combined.current,
         combined.current.moldPotential
     );
 
@@ -209,6 +248,7 @@ function testNoDataReturnsNull() {
 function main() {
     const tests = [
         testWeatherFailureKeepsFreshAirQualityData,
+        testWeatherFailureCanUseCachedWeather,
         testAirQualityFailureUsesCachedDataWithFreshWeather,
         testPartialSuccessRecalculatesRiskWithMold,
         testForecastMoldUsesMatchingDayHours,

@@ -1,16 +1,16 @@
-/* exported calculateRisk, classifyValue, categoryFromScore */
+/* exported calculateRisk, classifyValue, categoryFromScore,
+ * calculatePollenScore, calculateRegulatedPollutionScore,
+ * calculateAtmosphericIrritantsScore */
 
 const Constants = imports.constants;
 
-const POLLEN_FIELDS = ['treePollen', 'grassPollen', 'weedPollen'];
-const PARTICULATE_FIELDS = ['pm25', 'pm10'];
-const IRRITANT_FIELDS = [
-    'nitrogenDioxide',
-    'ozone',
-    'sulfurDioxide',
-    'dust',
-    'aerosolOpticalDepth',
+const POLLEN_FIELDS = ['alder', 'birch', 'grass', 'mugwort', 'olive', 'ragweed'];
+const RAW_REGULATED_FIELDS = ['pm25', 'pm10', 'nitrogenDioxide', 'ozone', 'sulfurDioxide'];
+const ATMOSPHERIC_CONTEXT_FIELDS = [
     'carbonMonoxide',
+    'aerosolOpticalDepth',
+    'dust',
+    'wildfirePm10',
 ];
 
 function _isFiniteNumber(value) {
@@ -22,6 +22,13 @@ function _sanitizeValue(value) {
         return null;
 
     return Math.max(0, value);
+}
+
+function _clampScore(score) {
+    if (!_isFiniteNumber(score))
+        return null;
+
+    return Math.max(0, Math.min(100, Math.round(score)));
 }
 
 function _copyLevel(level) {
@@ -40,95 +47,82 @@ function _scoreForCategory(category) {
 function _emptyEffectiveWeights() {
     return {
         pollen: 0,
-        particulates: 0,
-        irritants: 0,
+        regulatedPollution: 0,
+        atmosphericIrritants: 0,
         mold: 0,
     };
 }
 
-function _fieldCompleteness(readings, fields) {
-    let available = 0;
+function _copyValues(source, fields) {
+    let result = {};
 
-    for (const field of fields) {
-        if (_sanitizeValue(readings[field]) !== null)
-            available++;
-    }
+    for (const field of fields)
+        result[field] = source && Object.prototype.hasOwnProperty.call(source, field)
+            ? _sanitizeValue(source[field])
+            : null;
 
-    return fields.length === 0 ? 0 : available / fields.length;
+    return result;
 }
 
-function _highestClassifiedReading(readings, fields, thresholdMap) {
-    let best = null;
-    let missingFields = [];
+function _availableFields(values, fields) {
+    return fields.filter(field => _sanitizeValue(values[field]) !== null);
+}
+
+function _highestClassified(values, fields, thresholdMap) {
+    let dominant = null;
+    let normalizedValues = {};
 
     for (const field of fields) {
-        const value = _sanitizeValue(readings[field]);
+        const value = _sanitizeValue(values[field]);
 
         if (value === null) {
-            missingFields.push(field);
+            normalizedValues[field] = null;
             continue;
         }
 
         const classified = classifyValue(value, thresholdMap[field]);
-        const candidate = {
-            field,
-            value,
-            category: classified.category,
-            score: classified.score,
-        };
 
-        if (best === null || candidate.score > best.score)
-            best = candidate;
+        normalizedValues[field] = classified.score;
+
+        if (dominant === null || classified.score > dominant.score) {
+            dominant = {
+                field,
+                value,
+                category: classified.category,
+                score: classified.score,
+            };
+        }
     }
 
     return {
-        best,
-        missingFields,
+        dominant,
+        normalizedValues,
     };
 }
 
-function _groupScore(readings, fields, thresholdMap) {
-    const result = _highestClassifiedReading(readings, fields, thresholdMap);
-
-    if (result.best === null) {
-        return {
-            score: null,
-            dominant: null,
-            missingFields: result.missingFields,
-        };
-    }
-
-    return {
-        score: result.best.score,
-        dominant: result.best,
-        missingFields: result.missingFields,
-    };
-}
-
-function _weightedClassifiedScore(readings, fields, thresholdMap, weights) {
+function _weightedClassified(values, fields, thresholdMap, weights) {
     let weightedScore = 0;
     let availableWeight = 0;
-    let missingFields = [];
-    let items = {};
+    let components = {};
+    let effectiveWeights = {};
 
     for (const field of fields) {
-        const value = _sanitizeValue(readings[field]);
+        const value = _sanitizeValue(values[field]);
 
         if (value === null) {
-            missingFields.push(field);
-            items[field] = null;
+            components[field] = null;
+            effectiveWeights[field] = 0;
             continue;
         }
 
         const classified = classifyValue(value, thresholdMap[field]);
         const weight = weights[field] || 0;
 
-        items[field] = {
-            field,
+        components[field] = {
             value,
-            category: classified.category,
             score: classified.score,
-            weight,
+            category: classified.category,
+            configuredWeight: weight,
         };
         weightedScore += classified.score * weight;
         availableWeight += weight;
@@ -137,51 +131,78 @@ function _weightedClassifiedScore(readings, fields, thresholdMap, weights) {
     if (availableWeight === 0) {
         return {
             score: null,
-            items,
-            missingFields,
-            effectiveWeights: {},
-            dataCompleteness: 0,
+            category: null,
+            components,
+            effectiveWeights,
+            completeness: 0,
         };
     }
 
-    let effectiveWeights = {};
-
-    for (const field of fields) {
-        const item = items[field];
-
-        effectiveWeights[field] = item === null
+    for (const field of fields)
+        effectiveWeights[field] = components[field] === null
             ? 0
-            : item.weight / availableWeight;
-    }
+            : (weights[field] || 0) / availableWeight;
+
+    const score = _clampScore(weightedScore / availableWeight);
 
     return {
-        score: Math.round(weightedScore / availableWeight),
-        items,
-        missingFields,
+        score,
+        category: categoryFromScore(score),
+        components,
         effectiveWeights,
-        dataCompleteness: availableWeight,
+        completeness: availableWeight,
     };
+}
+
+function _pollenSource(input) {
+    if (input && input.pollen)
+        return input.pollen;
+
+    return {};
+}
+
+function _rawPollutantSource(input) {
+    if (input && input.rawPollutants)
+        return input.rawPollutants;
+
+    return {};
+}
+
+function _pollutantAqiSource(input) {
+    if (input && input.pollutantAqi)
+        return input.pollutantAqi;
+
+    return {};
+}
+
+function _contextSource(input) {
+    if (input && input.context)
+        return input.context;
+
+    return {};
 }
 
 function _moldScore(moldPotential) {
     if (!moldPotential ||
-        moldPotential.isAvailable !== true ||
+        moldPotential.isAvailable === false ||
         !_isFiniteNumber(moldPotential.score)) {
         return {
             score: null,
+            category: null,
             result: moldPotential || null,
-            missingFields: ['moldPotential'],
-            dataCompleteness: 0,
+            completeness: 0,
         };
     }
 
+    const score = _clampScore(moldPotential.score);
+
     return {
-        score: Math.max(0, Math.min(100, Math.round(moldPotential.score))),
+        score,
+        category: categoryFromScore(score),
         result: moldPotential,
-        missingFields: moldPotential.missingComponents || [],
-        dataCompleteness: _isFiniteNumber(moldPotential.dataCompleteness)
-            ? Math.max(0, Math.min(1, moldPotential.dataCompleteness))
-            : 1,
+        completeness: _isFiniteNumber(moldPotential.completeness)
+            ? Math.max(0, Math.min(1, moldPotential.completeness))
+            : Math.max(0, Math.min(1, moldPotential.dataCompleteness || 1)),
     };
 }
 
@@ -259,74 +280,205 @@ var categoryFromScore = function(score) {
 };
 
 /**
- * Calculate the combined environmental allergy burden.
+ * Calculate pollen burden from six Open-Meteo pollen types.
  *
- * The model weights highest pollen category, highest particulate category,
- * weighted gases/atmospheric irritants, and optional mold potential. Missing
- * groups are excluded from the denominator so partial provider responses remain
- * usable.
- *
- * @param {Object} readings - Canonical readings from the active data provider.
- * @param {Object|null} moldPotential - Optional result from mold calculator.
- * @returns {Object} Score, category, components, effective weights, and partial flag.
+ * @param {Object} input - Object with normalized pollen values.
+ * @returns {Object} Pollen score details.
  */
-var calculateRisk = function(readings, moldPotential = null) {
-    const safeReadings = readings || {};
-    const pollen = _groupScore(
-        safeReadings,
-        POLLEN_FIELDS,
-        Constants.POLLEN_THRESHOLDS
-    );
-    const particulates = _groupScore(
-        safeReadings,
-        PARTICULATE_FIELDS,
+var calculatePollenScore = function(input) {
+    const values = _copyValues(_pollenSource(input), POLLEN_FIELDS);
+    const availableTypes = _availableFields(values, POLLEN_FIELDS);
+    const highest = _highestClassified(values, POLLEN_FIELDS, Constants.POLLEN_THRESHOLDS);
+
+    if (highest.dominant === null) {
+        return {
+            score: null,
+            category: null,
+            dominantType: null,
+            dominant: null,
+            availableTypes,
+            rawValues: values,
+            normalizedValues: highest.normalizedValues,
+            completeness: 0,
+        };
+    }
+
+    return {
+        score: highest.dominant.score,
+        category: highest.dominant.category,
+        dominantType: highest.dominant.field,
+        dominant: highest.dominant,
+        availableTypes,
+        rawValues: values,
+        normalizedValues: highest.normalizedValues,
+        completeness: availableTypes.length / POLLEN_FIELDS.length,
+    };
+};
+
+/**
+ * Calculate regulated pollution from pollutant-specific European AQI values.
+ *
+ * Falls back to raw-concentration scoring only when no pollutant AQI values are
+ * available.
+ *
+ * @param {Object} input - Object with pollutantAqi and rawPollutants.
+ * @returns {Object} Regulated pollution score details.
+ */
+var calculateRegulatedPollutionScore = function(input) {
+    const aqiValues = _copyValues(_pollutantAqiSource(input), RAW_REGULATED_FIELDS);
+    const availableAqi = _availableFields(aqiValues, RAW_REGULATED_FIELDS);
+
+    if (availableAqi.length > 0) {
+        let dominantPollutant = null;
+
+        for (const field of availableAqi) {
+            const score = _clampScore(aqiValues[field]);
+
+            if (dominantPollutant === null || score > dominantPollutant.score) {
+                dominantPollutant = {
+                    field,
+                    value: aqiValues[field],
+                    score,
+                    category: categoryFromScore(score),
+                };
+            }
+        }
+
+        return {
+            score: dominantPollutant.score,
+            category: dominantPollutant.category,
+            dominantPollutant: dominantPollutant.field,
+            dominant: dominantPollutant,
+            availablePollutants: availableAqi,
+            pollutantAqiValues: aqiValues,
+            source: 'european-aqi',
+            completeness: availableAqi.length / RAW_REGULATED_FIELDS.length,
+        };
+    }
+
+    const rawValues = _copyValues(_rawPollutantSource(input), RAW_REGULATED_FIELDS);
+    const availableRaw = _availableFields(rawValues, RAW_REGULATED_FIELDS);
+    const highest = _highestClassified(
+        rawValues,
+        RAW_REGULATED_FIELDS,
         Constants.POLLUTANT_THRESHOLDS
     );
-    const irritants = _weightedClassifiedScore(
-        safeReadings,
-        IRRITANT_FIELDS,
-        Constants.POLLUTANT_THRESHOLDS,
-        Constants.IRRITANT_WEIGHTS
-    );
-    const mold = _moldScore(moldPotential);
 
-    const weightedGroups = [
+    if (highest.dominant === null) {
+        return {
+            score: null,
+            category: null,
+            dominantPollutant: null,
+            dominant: null,
+            availablePollutants: [],
+            pollutantAqiValues: aqiValues,
+            rawValues,
+            normalizedValues: highest.normalizedValues,
+            source: 'unavailable',
+            completeness: 0,
+        };
+    }
+
+    return {
+        score: highest.dominant.score,
+        category: highest.dominant.category,
+        dominantPollutant: highest.dominant.field,
+        dominant: highest.dominant,
+        availablePollutants: availableRaw,
+        pollutantAqiValues: aqiValues,
+        rawValues,
+        normalizedValues: highest.normalizedValues,
+        source: 'raw-concentration-fallback',
+        completeness: (availableRaw.length / RAW_REGULATED_FIELDS.length) * 0.65,
+    };
+};
+
+/**
+ * Calculate low-weight atmospheric context burden.
+ *
+ * @param {Object} input - Object with context and raw pollutant values.
+ * @returns {Object} Atmospheric context score details.
+ */
+var calculateAtmosphericIrritantsScore = function(input) {
+    const context = _contextSource(input);
+    const raw = _rawPollutantSource(input);
+    const values = {
+        carbonMonoxide: _sanitizeValue(raw.carbonMonoxide),
+        aerosolOpticalDepth: _sanitizeValue(context.aerosolOpticalDepth),
+        dust: _sanitizeValue(context.dust),
+        wildfirePm10: _sanitizeValue(context.wildfirePm10),
+    };
+    const result = _weightedClassified(
+        values,
+        ATMOSPHERIC_CONTEXT_FIELDS,
+        Constants.ATMOSPHERIC_CONTEXT_THRESHOLDS,
+        Constants.ATMOSPHERIC_CONTEXT_WEIGHTS
+    );
+
+    result.wildfirePm10Available = values.wildfirePm10 !== null;
+
+    return result;
+};
+
+function _dominantComponent(groups) {
+    let dominant = null;
+
+    for (const group of groups) {
+        if (group.result.score === null)
+            continue;
+
+        if (dominant === null || group.result.score > dominant.score)
+            dominant = {
+                name: group.name,
+                score: group.result.score,
+                category: group.result.category,
+            };
+    }
+
+    return dominant;
+}
+
+/**
+ * Calculate the combined environmental allergy burden.
+ *
+ * @param {Object} input - Current or forecast environmental data.
+ * @param {Object|null} moldPotential - Optional mold-potential result.
+ * @returns {Object} Score, category, components, effective weights, and partial flag.
+ */
+var calculateRisk = function(input, moldPotential = null) {
+    const pollen = calculatePollenScore(input);
+    const regulatedPollution = calculateRegulatedPollutionScore(input);
+    const atmosphericIrritants = calculateAtmosphericIrritantsScore(input);
+    const mold = _moldScore(moldPotential);
+    const groups = [
         {
             name: 'pollen',
             result: pollen,
             weight: Constants.RISK_WEIGHTS.pollen,
-            completeness: _fieldCompleteness(safeReadings, POLLEN_FIELDS),
         },
         {
-            name: 'particulates',
-            result: particulates,
+            name: 'regulatedPollution',
+            result: regulatedPollution,
             weight: Constants.RISK_WEIGHTS.particulates,
-            completeness: _fieldCompleteness(safeReadings, PARTICULATE_FIELDS),
         },
         {
-            name: 'irritants',
-            result: irritants,
+            name: 'atmosphericIrritants',
+            result: atmosphericIrritants,
             weight: Constants.RISK_WEIGHTS.irritants,
-            completeness: irritants.dataCompleteness,
         },
         {
             name: 'mold',
             result: mold,
             weight: Constants.RISK_WEIGHTS.mold,
-            completeness: mold.dataCompleteness,
         },
     ];
-
     let weightedScore = 0;
     let availableWeight = 0;
-    let missingFields = [];
-    let missingGroups = [];
     let completeness = 0;
+    let missingGroups = [];
     let effectiveWeights = _emptyEffectiveWeights();
 
-    for (const group of weightedGroups) {
-        missingFields = missingFields.concat(group.result.missingFields);
-
+    for (const group of groups) {
         if (group.result.score === null) {
             missingGroups.push(group.name);
             continue;
@@ -334,39 +486,43 @@ var calculateRisk = function(readings, moldPotential = null) {
 
         weightedScore += group.result.score * group.weight;
         availableWeight += group.weight;
-        completeness += group.weight * group.completeness;
+        completeness += group.weight * group.result.completeness;
     }
 
     const score = availableWeight > 0
-        ? Math.round(weightedScore / availableWeight)
+        ? _clampScore(weightedScore / availableWeight)
         : 0;
 
     if (availableWeight > 0) {
-        for (const group of weightedGroups) {
+        for (const group of groups)
             effectiveWeights[group.name] = group.result.score === null
                 ? 0
                 : group.weight / availableWeight;
-        }
     }
 
     return {
         score,
         category: categoryFromScore(score),
-        pollenScore: pollen.score,
-        particulateScore: particulates.score,
-        irritantScore: irritants.score,
-        moldScore: mold.score,
-        effectiveWeights,
+        completeness: Math.max(0, Math.min(1, completeness)),
         dataCompleteness: Math.max(0, Math.min(1, completeness)),
         components: {
             pollen,
-            particulates,
-            irritants,
-            gasesAndDust: irritants,
+            regulatedPollution,
+            atmosphericIrritants,
+            particulates: regulatedPollution,
+            irritants: atmosphericIrritants,
+            gasesAndDust: atmosphericIrritants,
             mold,
         },
-        missingFields,
+        effectiveWeights,
+        dominantComponent: _dominantComponent(groups),
+        pollenScore: pollen.score,
+        particulateScore: regulatedPollution.score,
+        irritantScore: atmosphericIrritants.score,
+        moldScore: mold.score,
         missingGroups,
-        isPartial: missingFields.length > 0 || missingGroups.length > 0,
+        missingFields: [],
+        isPartial: missingGroups.length > 0 ||
+            groups.some(group => group.result.completeness < 1),
     };
 };

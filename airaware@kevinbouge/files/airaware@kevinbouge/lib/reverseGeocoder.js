@@ -12,7 +12,7 @@ var PROVIDER_ID = 'nominatim';
 
 const API_BASE_URL = 'https://nominatim.openstreetmap.org/reverse';
 const DEFAULT_TIMEOUT_SECONDS = 10;
-const USER_AGENT = 'AirAware Cinnamon applet/0.1.0';
+const USER_AGENT = 'AirAware/0.1.0 (Cinnamon applet; https://github.com/kevinbouge/cinnamon-spices-applets)';
 
 const PRIMARY_ADDRESS_FIELDS = Object.freeze([
     'city',

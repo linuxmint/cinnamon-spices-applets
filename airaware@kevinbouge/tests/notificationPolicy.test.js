@@ -34,16 +34,16 @@ function testSameCategoryDoesNotNotify() {
     );
 }
 
-function testHighOnlyNotifiesOnlyOnHighTransition() {
+function testVeryHighOnlyNotifiesOnlyOnVeryHighTransition() {
     assertEqual(
-        NotificationPolicy.shouldNotifyRiskChange('moderate', 'high', 'high'),
-        true,
-        'high-only setting should notify when high begins'
+        NotificationPolicy.shouldNotifyRiskChange('moderate', 'high', 'very-high'),
+        false,
+        'very-high-only setting should not notify when high begins'
     );
     assertEqual(
-        NotificationPolicy.shouldNotifyRiskChange('high', 'very-high', 'high'),
-        false,
-        'high-only setting should not notify on very high'
+        NotificationPolicy.shouldNotifyRiskChange('high', 'very-high', 'very-high'),
+        true,
+        'very-high-only setting should notify when very high begins'
     );
 }
 
@@ -70,7 +70,7 @@ function main() {
         testDisabledNeverNotifies,
         testInitialCategoryDoesNotNotify,
         testSameCategoryDoesNotNotify,
-        testHighOnlyNotifiesOnlyOnHighTransition,
+        testVeryHighOnlyNotifiesOnlyOnVeryHighTransition,
         testHighAndVeryHighNotifiesOnBothTransitions,
     ];
 

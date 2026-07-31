@@ -207,10 +207,25 @@ function _deleteClient(managerProxy, clientPath, timeoutMs) {
     }
 }
 
-function _readCachedCoordinates(cache) {
-    return cache && typeof cache.readCoordinates === 'function'
-        ? cache.readCoordinates()
-        : null;
+function _readCachedCoordinatesAsync(cache, callback) {
+    if (cache && typeof cache.readCoordinatesAsync === 'function')
+        return cache.readCoordinatesAsync((error, envelope) => callback(error, envelope));
+
+    GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+        callback(null, null);
+        return GLib.SOURCE_REMOVE;
+    });
+
+    return {
+        cancel() {
+        },
+    };
+}
+
+function _writeCachedCoordinates(cache, coordinates) {
+    if (cache && typeof cache.writeCoordinatesAsync === 'function') {
+        cache.writeCoordinatesAsync(coordinates);
+    }
 }
 
 function _resultFromCache(envelope, isStale, error = null) {
@@ -538,25 +553,19 @@ var createLocationService = function(options = {}) {
             };
         }
 
-        const cached = _readCachedCoordinates(cache);
         const forceRefresh = requestOptions.forceRefresh === true;
         const nowMs = _isFiniteNumber(requestOptions.nowMs)
             ? requestOptions.nowMs
             : _nowMs();
-
-        if (!forceRefresh && !shouldRefreshCachedCoordinates(cached, nowMs, maxCacheAgeMs)) {
-            callback(null, _resultFromCache(cached, false));
-            return {
-                cancel() {
-                },
-            };
-        }
-
         let cancelled = false;
+        let cacheHandle = null;
         let lookupHandle = null;
         const handle = {
             cancel() {
                 cancelled = true;
+
+                if (cacheHandle && typeof cacheHandle.cancel === 'function')
+                    cacheHandle.cancel();
 
                 if (lookupHandle && typeof lookupHandle.cancel === 'function')
                     lookupHandle.cancel();
@@ -565,14 +574,14 @@ var createLocationService = function(options = {}) {
 
         activeHandles.push(handle);
 
-        function complete(error, coordinates) {
+        function completeLookup(cached, error, coordinates) {
             removeHandle(handle);
 
             if (cancelled || destroyed)
                 return;
 
             if (!error && Cache.isValidCoordinates(coordinates)) {
-                cache.writeCoordinates(coordinates);
+                _writeCachedCoordinates(cache, coordinates);
                 callback(null, _resultFromGeoClue(coordinates));
                 return;
             }
@@ -585,14 +594,28 @@ var createLocationService = function(options = {}) {
             callback(error || new Error('No location available'), null);
         }
 
-        try {
-            lookupHandle = lookupCoordinatesAsync({
-                desktopId: options.desktopId || 'airaware',
-                timeoutMs: requestOptions.timeoutMs,
-            }, complete);
-        } catch (error) {
-            complete(error, null);
-        }
+        cacheHandle = _readCachedCoordinatesAsync(cache, (cacheError, cached) => {
+            if (cancelled || destroyed)
+                return;
+
+            if (!forceRefresh &&
+                !shouldRefreshCachedCoordinates(cached, nowMs, maxCacheAgeMs)) {
+                removeHandle(handle);
+                callback(null, _resultFromCache(cached, false));
+                return;
+            }
+
+            try {
+                lookupHandle = lookupCoordinatesAsync({
+                    desktopId: options.desktopId || 'airaware',
+                    timeoutMs: requestOptions.timeoutMs,
+                }, (error, coordinates) => {
+                    completeLookup(cached, error || cacheError, coordinates);
+                });
+            } catch (error) {
+                completeLookup(cached, error || cacheError, null);
+            }
+        });
 
         return handle;
     }
