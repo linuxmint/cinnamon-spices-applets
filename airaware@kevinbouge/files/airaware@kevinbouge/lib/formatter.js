@@ -1,6 +1,8 @@
 /* exported setTranslator, resetTranslator, formatCategory, formatPanelLabel,
  * formatScore, formatReading, formatPollen, formatPollutant, formatTimestamp,
- * isStale, formatStaleStatus, formatFieldLabel */
+ * isStale, formatStaleStatus, formatFieldLabel, formatAerosolOpticalDepth,
+ * formatSulfurDioxide, formatCarbonMonoxide, formatWeatherUnavailable,
+ * formatMoldPotential */
 
 const GLib = imports.gi.GLib;
 
@@ -23,7 +25,10 @@ const FIELD_LABELS = Object.freeze({
     pm10: 'PM10',
     nitrogenDioxide: 'NO₂',
     ozone: 'O₃',
+    sulfurDioxide: 'SO₂',
     dust: 'Dust',
+    aerosolOpticalDepth: 'Aerosol optical depth',
+    carbonMonoxide: 'CO',
 });
 
 let _translate = function(text) {
@@ -174,6 +179,64 @@ var formatPollen = function(value) {
  */
 var formatPollutant = function(value) {
     return formatReading(value, POLLUTANT_UNIT, 1);
+};
+
+/**
+ * Format aerosol optical depth. This value is unitless.
+ *
+ * @param {number} value - Aerosol optical depth.
+ * @returns {string} Formatted value or unavailable text.
+ */
+var formatAerosolOpticalDepth = function(value) {
+    return formatReading(value, DEFAULT_UNIT, 2);
+};
+
+/**
+ * Format sulfur dioxide in µg/m³.
+ *
+ * @param {number} value - Sulfur dioxide reading.
+ * @returns {string} Formatted sulfur dioxide reading.
+ */
+var formatSulfurDioxide = function(value) {
+    return formatPollutant(value);
+};
+
+/**
+ * Format carbon monoxide in µg/m³.
+ *
+ * @param {number} value - Carbon monoxide reading.
+ * @returns {string} Formatted carbon monoxide reading.
+ */
+var formatCarbonMonoxide = function(value) {
+    return formatReading(value, POLLUTANT_UNIT, 0);
+};
+
+/**
+ * Format the specific unavailable state for weather-derived values.
+ *
+ * @returns {string} Translated unavailable-weather label.
+ */
+var formatWeatherUnavailable = function() {
+    return _translate('Weather data unavailable');
+};
+
+/**
+ * Format weather-based mold potential for display.
+ *
+ * @param {Object|null} moldPotential - Result from moldPotentialCalculator.
+ * @returns {string} Score, or unavailable text.
+ */
+var formatMoldPotential = function(moldPotential) {
+    if (!moldPotential ||
+        moldPotential.isAvailable !== true ||
+        !_isFiniteNumber(moldPotential.score))
+        return formatWeatherUnavailable();
+
+    const normalized = Math.max(0, Math.min(100, Math.round(moldPotential.score)));
+
+    return _replace(_translate('{score}%'), {
+        score: normalized,
+    });
 };
 
 /**

@@ -20,7 +20,10 @@ const SOURCE_VARIABLES = Object.freeze([
     'pm2_5',
     'nitrogen_dioxide',
     'ozone',
+    'sulphur_dioxide',
     'dust',
+    'aerosol_optical_depth',
+    'carbon_monoxide',
     'alder_pollen',
     'birch_pollen',
     'olive_pollen',
@@ -37,7 +40,10 @@ const CANONICAL_SOURCES = Object.freeze({
     pm10: Object.freeze(['pm10']),
     nitrogenDioxide: Object.freeze(['nitrogen_dioxide']),
     ozone: Object.freeze(['ozone']),
+    sulfurDioxide: Object.freeze(['sulphur_dioxide']),
     dust: Object.freeze(['dust']),
+    aerosolOpticalDepth: Object.freeze(['aerosol_optical_depth']),
+    carbonMonoxide: Object.freeze(['carbon_monoxide']),
 });
 
 const CANONICAL_FIELDS = Object.freeze([
@@ -48,7 +54,10 @@ const CANONICAL_FIELDS = Object.freeze([
     'pm10',
     'nitrogenDioxide',
     'ozone',
+    'sulfurDioxide',
     'dust',
+    'aerosolOpticalDepth',
+    'carbonMonoxide',
 ]);
 
 function _isObject(value) {

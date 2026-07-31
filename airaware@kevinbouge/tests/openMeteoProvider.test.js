@@ -97,7 +97,10 @@ function normalPayload() {
             pm2_5: 7.5,
             nitrogen_dioxide: 22,
             ozone: 64,
+            sulphur_dioxide: 12,
             dust: 3,
+            aerosol_optical_depth: 0.18,
+            carbon_monoxide: 130,
             alder_pollen: 4,
             birch_pollen: 28,
             olive_pollen: 8,
@@ -117,7 +120,10 @@ function normalPayload() {
             pm2_5: [4, 7.5, 10, 12, 8],
             nitrogen_dioxide: [10, 22, 18, 24, 14],
             ozone: [40, 64, 70, 85, 66],
+            sulphur_dioxide: [5, 12, 18, 24, 8],
             dust: [1, 3, 2, 8, 3],
+            aerosol_optical_depth: [0.1, 0.18, 0.2, 0.25, 0.12],
+            carbon_monoxide: [110, 130, 140, 160, 120],
             alder_pollen: [1, 4, 3, 2, 1],
             birch_pollen: [20, 28, 18, 14, 10],
             olive_pollen: [5, 8, 6, 5, 3],
@@ -142,6 +148,12 @@ function testBuildRequestUrl() {
         'request URL should include latitude');
     assertTrue(url.indexOf('current=') !== -1,
         'request URL should request current values');
+    assertTrue(url.indexOf('aerosol_optical_depth') !== -1,
+        'request URL should include aerosol optical depth');
+    assertTrue(url.indexOf('carbon_monoxide') !== -1,
+        'request URL should include carbon monoxide');
+    assertTrue(url.indexOf('sulphur_dioxide') !== -1,
+        'request URL should include sulfur dioxide');
     assertTrue(url.indexOf('hourly=') !== -1,
         'request URL should request hourly forecast values');
     assertTrue(url.indexOf('forecast_days=4') !== -1,
@@ -175,10 +187,20 @@ function testNormalApiResponse() {
         'weed pollen should use highest weed source');
     assertEqual(result.current.readings.pm25, 7.5,
         'PM2.5 should map from Open-Meteo pm2_5');
+    assertEqual(result.current.readings.aerosolOpticalDepth, 0.18,
+        'aerosol optical depth should map directly');
+    assertEqual(result.current.readings.carbonMonoxide, 130,
+        'carbon monoxide should map directly');
+    assertEqual(result.current.readings.sulfurDioxide, 12,
+        'sulfur dioxide should map from Open-Meteo sulphur_dioxide');
     assertEqual(result.forecast.length, 3,
         'forecast should contain requested number of days');
     assertEqual(result.forecast[1].readings.grassPollen, 45,
         'daily forecast should use max hourly value for the day');
+    assertEqual(result.forecast[1].readings.carbonMonoxide, 160,
+        'daily forecast should use max hourly carbon monoxide value for the day');
+    assertEqual(result.forecast[1].readings.sulfurDioxide, 24,
+        'daily forecast should use max hourly sulfur dioxide value for the day');
     assertEqual(result.isPartial, false,
         'complete response should not be partial');
 }
@@ -214,6 +236,66 @@ function testMissingPollen() {
         'pollution values should remain usable when pollen is missing');
     assertEqual(result.isPartial, true,
         'missing pollen should mark result partial');
+}
+
+function testMissingAtmosphericIrritantsRemainPartial() {
+    const payload = normalPayload();
+    delete payload.current.aerosol_optical_depth;
+    delete payload.current.carbon_monoxide;
+    delete payload.current.sulphur_dioxide;
+    delete payload.hourly.aerosol_optical_depth;
+    delete payload.hourly.carbon_monoxide;
+    delete payload.hourly.sulphur_dioxide;
+
+    const result = OpenMeteoProvider.parseOpenMeteoResponse(payload, {
+        forecastDays: 2,
+    });
+
+    assertEqual(result.current.readings.aerosolOpticalDepth, null,
+        'missing aerosol optical depth should be null');
+    assertEqual(result.current.readings.carbonMonoxide, null,
+        'missing carbon monoxide should be null');
+    assertEqual(result.current.readings.sulfurDioxide, null,
+        'missing sulfur dioxide should be null');
+    assertTrue(result.current.missingFields.indexOf('aerosolOpticalDepth') !== -1,
+        'missing aerosol optical depth should be tracked');
+    assertTrue(result.current.missingFields.indexOf('carbonMonoxide') !== -1,
+        'missing carbon monoxide should be tracked');
+    assertTrue(result.current.missingFields.indexOf('sulfurDioxide') !== -1,
+        'missing sulfur dioxide should be tracked');
+    assertEqual(result.current.readings.pm10, 18,
+        'existing pollutant readings should remain usable');
+    assertEqual(result.isPartial, true,
+        'missing new atmospheric variables should mark result partial');
+}
+
+function testMalformedAtmosphericValuesNormalizeToNull() {
+    const payload = normalPayload();
+    payload.current.aerosol_optical_depth = 'bad';
+    payload.current.carbon_monoxide = Number.NaN;
+    payload.current.sulphur_dioxide = 'bad';
+    payload.hourly.aerosol_optical_depth = ['bad', null, undefined];
+    payload.hourly.carbon_monoxide = [Number.NaN, 'bad', null];
+    payload.hourly.sulphur_dioxide = [undefined, 'bad', null];
+
+    const result = OpenMeteoProvider.parseOpenMeteoResponse(payload, {
+        forecastDays: 1,
+    });
+
+    assertEqual(result.current.readings.aerosolOpticalDepth, null,
+        'malformed aerosol optical depth should be null');
+    assertEqual(result.current.readings.carbonMonoxide, null,
+        'malformed carbon monoxide should be null');
+    assertEqual(result.current.readings.sulfurDioxide, null,
+        'malformed sulfur dioxide should be null');
+    assertEqual(result.forecast[0].readings.aerosolOpticalDepth, null,
+        'malformed forecast aerosol optical depth should be null');
+    assertEqual(result.forecast[0].readings.carbonMonoxide, null,
+        'malformed forecast carbon monoxide should be null');
+    assertEqual(result.forecast[0].readings.sulfurDioxide, null,
+        'malformed forecast sulfur dioxide should be null');
+    assertEqual(result.current.readings.pm25, 7.5,
+        'valid existing readings should remain usable');
 }
 
 function testMalformedResponse() {
@@ -448,6 +530,8 @@ function main() {
         testBuildRequestUrlNormalizesForecastDays,
         testNormalApiResponse,
         testMissingPollen,
+        testMissingAtmosphericIrritantsRemainPartial,
+        testMalformedAtmosphericValuesNormalizeToNull,
         testMalformedResponse,
         testInvalidResponseCoordinatesAreDropped,
         testNoUsableCurrentReadingsThrows,

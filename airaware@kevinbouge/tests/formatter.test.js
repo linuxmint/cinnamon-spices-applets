@@ -66,6 +66,12 @@ function testReadingFormatting() {
         'pollen should round to whole grains');
     assertEqual(Formatter.formatPollutant(8.26), '8.3 µg/m³',
         'pollutant should use one decimal place');
+    assertEqual(Formatter.formatSulfurDioxide(12.34), '12.3 µg/m³',
+        'sulfur dioxide should use pollutant formatting');
+    assertEqual(Formatter.formatAerosolOpticalDepth(0.123), '0.12',
+        'aerosol optical depth should use two decimal places');
+    assertEqual(Formatter.formatCarbonMonoxide(156.7), '157 µg/m³',
+        'carbon monoxide should use whole-number pollutant formatting');
     assertEqual(Formatter.formatReading(null, 'µg/m³'), 'Unavailable',
         'missing value should be unavailable');
     assertEqual(Formatter.formatReading(-2, 'µg/m³'), '0 µg/m³',
@@ -83,6 +89,26 @@ function testScoreFormatting() {
         'score should clamp to upper bound');
     assertEqual(Formatter.formatScore(NaN), 'Unavailable',
         'invalid score should be unavailable');
+}
+
+function testMoldPotentialFormatting() {
+    assertEqual(Formatter.formatMoldPotential({
+        score: 58,
+        category: {
+            id: 'moderate',
+        },
+        isAvailable: true,
+    }), '58%', 'available mold potential should format score as percentage');
+    assertEqual(Formatter.formatMoldPotential({
+        score: null,
+        category: null,
+        isAvailable: false,
+    }), 'Weather data unavailable',
+        'unavailable mold potential should identify missing weather data');
+    assertEqual(Formatter.formatMoldPotential(null), 'Weather data unavailable',
+        'missing mold potential should identify missing weather data');
+    assertEqual(Formatter.formatWeatherUnavailable(), 'Weather data unavailable',
+        'weather unavailable state should be formatted centrally');
 }
 
 function testTimestampFormatting() {
@@ -122,6 +148,12 @@ function testFieldLabels() {
         'canonical nitrogen dioxide label should format');
     assertEqual(Formatter.formatFieldLabel('dust'), 'Dust',
         'canonical dust label should format');
+    assertEqual(Formatter.formatFieldLabel('sulfurDioxide'), 'SO₂',
+        'canonical sulfur dioxide label should format');
+    assertEqual(Formatter.formatFieldLabel('aerosolOpticalDepth'), 'Aerosol optical depth',
+        'canonical aerosol optical depth label should format');
+    assertEqual(Formatter.formatFieldLabel('carbonMonoxide'), 'CO',
+        'canonical carbon monoxide label should format');
     assertEqual(Formatter.formatFieldLabel('missing'), 'Unknown',
         'unknown field label should be explicit');
 }
@@ -135,6 +167,7 @@ function main() {
         testPanelLabelFormatting,
         testReadingFormatting,
         testScoreFormatting,
+        testMoldPotentialFormatting,
         testTimestampFormatting,
         testStaleFormatting,
         testFieldLabels,

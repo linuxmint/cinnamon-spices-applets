@@ -64,6 +64,76 @@ function providerResponse() {
                 pm10: 5,
                 nitrogenDioxide: 6,
                 ozone: 7,
+                sulfurDioxide: 9,
+                dust: 8,
+                aerosolOpticalDepth: 0.12,
+                carbonMonoxide: 150,
+            },
+            moldPotential: {
+                score: 45,
+                category: {
+                    id: 'moderate',
+                },
+                isAvailable: true,
+                dataCompleteness: 1,
+                components: {},
+                effectiveWeights: {},
+                missingComponents: [],
+                explanationKey: 'mold-relativeHumidity',
+            },
+        },
+        forecast: [
+            {
+                date: '2026-07-30',
+                readings: {
+                    treePollen: 1,
+                    grassPollen: 2,
+                    weedPollen: 3,
+                    pm25: 4,
+                    pm10: 5,
+                    nitrogenDioxide: 6,
+                    ozone: 7,
+                    sulfurDioxide: 9,
+                    dust: 8,
+                    aerosolOpticalDepth: 0.12,
+                    carbonMonoxide: 150,
+                },
+                moldPotential: null,
+            },
+        ],
+        weather: {
+            provider: 'open-meteo-weather',
+            fetchedAt: 1785446000000,
+            hourly: [
+                {
+                    time: '2026-07-30T12:00',
+                    values: {
+                        temperature: 20,
+                        relativeHumidity: 75,
+                        precipitation: 0,
+                        windSpeed: 2,
+                    },
+                },
+            ],
+        },
+        airQualityFetchedAt: 1785445000000,
+        weatherFetchedAt: 1785446000000,
+    };
+}
+
+function legacyProviderResponse() {
+    return {
+        provider: 'open-meteo',
+        fetchedAt: 1785445000000,
+        current: {
+            readings: {
+                treePollen: 1,
+                grassPollen: 2,
+                weedPollen: 3,
+                pm25: 4,
+                pm10: 5,
+                nitrogenDioxide: 6,
+                ozone: 7,
                 dust: 8,
             },
         },
@@ -85,6 +155,15 @@ function providerResponse() {
     };
 }
 
+function previousProviderResponse() {
+    const response = providerResponse();
+
+    delete response.current.readings.sulfurDioxide;
+    delete response.forecast[0].readings.sulfurDioxide;
+
+    return response;
+}
+
 function testCoordinateRoundTrip() {
     const directory = tempCacheDirectory('coordinates');
 
@@ -100,6 +179,8 @@ function testCoordinateRoundTrip() {
 
         assertEqual(result.ok, true, 'valid coordinate write should succeed');
         assertNotNull(envelope, 'coordinates should read back');
+        assertEqual(envelope.version, 1,
+            'coordinate cache schema should remain stable');
         assertEqual(envelope.data.latitude, 50.08,
             'latitude should round trip');
         assertEqual(envelope.data.longitude, 14.44,
@@ -152,6 +233,10 @@ function testResponseRoundTrip() {
             'provider id should round trip');
         assertEqual(envelope.data.current.readings.pm10, 5,
             'response readings should round trip');
+        assertEqual(envelope.data.current.readings.sulfurDioxide, 9,
+            'sulfur dioxide should round trip');
+        assertEqual(envelope.data.weatherFetchedAt, 1785446000000,
+            'weather timestamp should round trip independently');
     } finally {
         removeDirectory(directory);
     }
@@ -179,6 +264,8 @@ function testPlaceRoundTrip() {
         assertNotNull(envelope, 'place should read back');
         assertEqual(envelope.data.name, 'Prague, Czechia',
             'place name should round trip');
+        assertEqual(envelope.version, 1,
+            'place cache schema should remain stable');
     } finally {
         removeDirectory(directory);
     }
@@ -264,7 +351,10 @@ function testResponseWithoutReadingsIsInvalid() {
                     pm10: null,
                     nitrogenDioxide: null,
                     ozone: null,
+                    sulfurDioxide: null,
                     dust: null,
+                    aerosolOpticalDepth: null,
+                    carbonMonoxide: null,
                 },
             },
             forecast: [],
@@ -275,6 +365,88 @@ function testResponseWithoutReadingsIsInvalid() {
             'response without any numeric readings should fail');
         assertEqual(envelope.data.current.readings.pm10, 5,
             'previous valid response should remain cached');
+    } finally {
+        removeDirectory(directory);
+    }
+}
+
+function testPreviousResponseCacheMigrates() {
+    const directory = tempCacheDirectory('legacy-response');
+
+    try {
+        const cache = Cache.createCache({
+            baseDirectory: directory,
+        });
+        const filePath = GLib.build_filenamev([
+            directory,
+            'response.json',
+        ]);
+
+        GLib.file_set_contents(
+            filePath,
+            JSON.stringify({
+                version: 1,
+                savedAt: 1785445000000,
+                data: legacyProviderResponse(),
+            })
+        );
+
+        const envelope = cache.readResponse();
+
+        assertNotNull(envelope,
+            'previous schema response should still load');
+        assertEqual(envelope.version, 3,
+            'previous schema response should be returned as current schema');
+        assertEqual(envelope.data.current.readings.aerosolOpticalDepth, null,
+            'missing legacy aerosol optical depth should migrate to null');
+        assertEqual(envelope.data.current.readings.carbonMonoxide, null,
+            'missing legacy carbon monoxide should migrate to null');
+        assertEqual(envelope.data.current.readings.sulfurDioxide, null,
+            'missing legacy sulfur dioxide should migrate to null');
+        assertEqual(envelope.data.current.moldPotential, null,
+            'legacy current mold potential should be null');
+        assertEqual(envelope.data.weather, null,
+            'legacy weather response should be null');
+        assertEqual(envelope.data.airQualityFetchedAt, 1785445000000,
+            'legacy air-quality timestamp should migrate from fetchedAt');
+    } finally {
+        removeDirectory(directory);
+    }
+}
+
+function testPreviousWeatherResponseCacheMigrates() {
+    const directory = tempCacheDirectory('previous-weather-response');
+
+    try {
+        const cache = Cache.createCache({
+            baseDirectory: directory,
+        });
+        const filePath = GLib.build_filenamev([
+            directory,
+            'response.json',
+        ]);
+
+        GLib.file_set_contents(
+            filePath,
+            JSON.stringify({
+                version: 2,
+                savedAt: 1785445000000,
+                data: previousProviderResponse(),
+            })
+        );
+
+        const envelope = cache.readResponse();
+
+        assertNotNull(envelope,
+            'previous weather schema response should still load');
+        assertEqual(envelope.version, 3,
+            'previous weather schema response should be returned as current schema');
+        assertEqual(envelope.data.current.readings.sulfurDioxide, null,
+            'missing previous sulfur dioxide should migrate to null');
+        assertEqual(envelope.data.forecast[0].readings.sulfurDioxide, null,
+            'missing previous forecast sulfur dioxide should migrate to null');
+        assertEqual(envelope.data.current.readings.carbonMonoxide, 150,
+            'existing previous atmospheric values should be preserved');
     } finally {
         removeDirectory(directory);
     }
@@ -396,6 +568,8 @@ function main() {
         testInvalidResponseDoesNotReplaceCache,
         testResponseWithoutReadingsIsInvalid,
         testResponseWithoutCanonicalFieldsIsInvalid,
+        testPreviousResponseCacheMigrates,
+        testPreviousWeatherResponseCacheMigrates,
         testInvalidCoordinateCacheFileReturnsNull,
         testMalformedResponseCacheFileReturnsNull,
         testWrongEnvelopeVersionReturnsNull,

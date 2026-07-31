@@ -1,4 +1,6 @@
-/* exported RISK_LEVELS, RISK_WEIGHTS, POLLEN_THRESHOLDS, POLLUTANT_THRESHOLDS */
+/* exported RISK_LEVELS, RISK_WEIGHTS, POLLEN_THRESHOLDS,
+ * POLLUTANT_THRESHOLDS, IRRITANT_WEIGHTS, MOLD_WEIGHTS,
+ * MOLD_NORMALIZATION */
 
 /*
  * AirAware shared constants.
@@ -35,9 +37,26 @@ var RISK_LEVELS = Object.freeze({
 });
 
 var RISK_WEIGHTS = Object.freeze({
-    pollen: 0.6,
-    particulates: 0.3,
-    gasesAndDust: 0.1,
+    pollen: 0.5,
+    particulates: 0.25,
+    irritants: 0.1,
+    mold: 0.15,
+});
+
+var IRRITANT_WEIGHTS = Object.freeze({
+    nitrogenDioxide: 0.22,
+    ozone: 0.22,
+    sulfurDioxide: 0.18,
+    dust: 0.13,
+    aerosolOpticalDepth: 0.125,
+    carbonMonoxide: 0.125,
+});
+
+var MOLD_WEIGHTS = Object.freeze({
+    relativeHumidity: 0.4,
+    precipitation: 0.25,
+    temperature: 0.2,
+    wind: 0.15,
 });
 
 /*
@@ -87,9 +106,48 @@ var POLLUTANT_THRESHOLDS = Object.freeze({
         high: 120,
         veryHigh: 180,
     }),
+    sulfurDioxide: Object.freeze({
+        moderate: 20,
+        high: 100,
+        veryHigh: 350,
+    }),
     dust: Object.freeze({
         moderate: 20,
         high: 50,
         veryHigh: 100,
+    }),
+    aerosolOpticalDepth: Object.freeze({
+        moderate: 0.1,
+        high: 0.3,
+        veryHigh: 0.6,
+    }),
+    carbonMonoxide: Object.freeze({
+        moderate: 400,
+        high: 1000,
+        veryHigh: 4000,
+    }),
+});
+
+var MOLD_NORMALIZATION = Object.freeze({
+    relativeHumidity: Object.freeze({
+        low: 50,
+        moderate: 65,
+        high: 80,
+    }),
+    precipitation: Object.freeze({
+        trace: 0.1,
+        moderate: 2,
+        high: 10,
+    }),
+    temperature: Object.freeze({
+        minimum: 5,
+        suitableLow: 15,
+        suitableHigh: 30,
+        maximum: 40,
+    }),
+    wind: Object.freeze({
+        calm: 2,
+        moderate: 5,
+        strong: 10,
     }),
 });

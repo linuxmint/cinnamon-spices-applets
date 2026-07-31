@@ -18,7 +18,7 @@ msgstr ""
 msgid "AirAware"
 msgstr ""
 
-msgid "Panel applet showing environmental allergy burden from pollen and air pollution."
+msgid "Panel applet showing environmental allergy burden from pollen, air pollution, and mold potential."
 msgstr ""
 
 msgid "AirAware: loading environmental conditions"
@@ -28,6 +28,9 @@ msgid "Loading"
 msgstr ""
 
 msgid "Unavailable"
+msgstr ""
+
+msgid "Weather data unavailable"
 msgstr ""
 
 msgid "{category}"
@@ -42,7 +45,7 @@ msgstr ""
 msgid "Test notification: environmental allergy burden is {category}."
 msgstr ""
 
-msgid "Environmental pollen and air pollution burden"
+msgid "Environmental pollen, air pollution, and mold potential burden"
 msgstr ""
 
 msgid "Waiting for environmental data"
@@ -75,6 +78,9 @@ msgstr ""
 msgid "Weed pollen"
 msgstr ""
 
+msgid "Mold potential"
+msgstr ""
+
 msgid "PM2.5"
 msgstr ""
 
@@ -87,7 +93,16 @@ msgstr ""
 msgid "O₃"
 msgstr ""
 
+msgid "SO₂"
+msgstr ""
+
 msgid "Dust"
+msgstr ""
+
+msgid "Aerosol optical depth"
+msgstr ""
+
+msgid "CO"
 msgstr ""
 
 msgid "Last update"
@@ -141,7 +156,7 @@ msgstr ""
 msgid "Legend"
 msgstr ""
 
-msgid "Score blends highest pollen burden (60%), particulates (30%), and gases plus dust (10%). Environmental conditions only; not a medical symptom prediction."
+msgid "Score blends highest pollen burden (50%), particulates (25%), gases and atmospheric irritants (10%), and mold potential (15%). Environmental conditions only; not a medical symptom prediction."
 msgstr ""
 
 msgid "Refresh now"
@@ -166,6 +181,9 @@ msgid "Unknown"
 msgstr ""
 
 msgid "{score}/100"
+msgstr ""
+
+msgid "{score}%"
 msgstr ""
 
 msgid "{value} {unit}"

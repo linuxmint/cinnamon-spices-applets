@@ -1,6 +1,6 @@
 # AirAware
 
-AirAware is a Cinnamon panel applet that shows the current environmental allergy burden from pollen and air pollution. It displays a compact panel indicator and a native Cinnamon popup with current conditions, a short forecast, and a plain-language score legend.
+AirAware is a Cinnamon panel applet that shows the current environmental allergy burden from pollen, air pollution, and weather-based mold potential. It displays a compact panel indicator and a native Cinnamon popup with current conditions, a short forecast, and a plain-language score legend.
 
 AirAware reports environmental conditions only. It does not predict symptoms, diagnose allergies, or provide medical advice.
 
@@ -11,8 +11,11 @@ AirAware reports environmental conditions only. It does not predict symptoms, di
 - Manual latitude and longitude fallback when automatic location is unavailable
 - OpenStreetMap button in settings to help choose coordinates
 - Reverse-geocoded place name in the popup when available
-- Open-Meteo Air Quality data with no API key required
-- Current readings for tree pollen, grass pollen, weed pollen, PM2.5, PM10, NO2, O3, and dust
+- Open-Meteo Air Quality and Weather Forecast data with no API key required
+- Weather-based Mold potential from temperature, humidity, precipitation, and wind
+- Aerosol optical depth and carbon monoxide included in the environmental-risk score
+- Sulfur dioxide (SO₂) included in the environmental-risk score
+- Current readings for tree pollen, grass pollen, weed pollen, PM2.5, PM10, NO₂, O₃, SO₂, carbon monoxide, aerosol optical depth, dust, and Mold potential
 - Forecast for today, tomorrow, and the next listed day
 - Cache fallback for coordinates, place names, and the last successful environmental data response
 - Stale data indicator when current data cannot be refreshed
@@ -59,13 +62,17 @@ The applet requests approximate location from GeoClue2 and caches only latitude 
 
 If automatic location is unavailable, manual latitude and longitude can be entered in settings. Manual coordinates are stored only in local Cinnamon settings and the local coordinate cache.
 
-Only latitude and longitude are sent to Open-Meteo for environmental data. Latitude and longitude are also sent to OpenStreetMap Nominatim to retrieve a human-readable place name for the popup. Place names are cached locally.
+Only latitude and longitude are sent to Open-Meteo for environmental data. The same coordinates are sent to the Open-Meteo Air Quality API and the Open-Meteo Weather Forecast API. Latitude and longitude are also sent to OpenStreetMap Nominatim to retrieve a human-readable place name for the popup. Place names are cached locally.
 
 ## Data Sources
 
 AirAware uses the Open-Meteo Air Quality API:
 
 https://open-meteo.com/en/docs/air-quality-api
+
+AirAware also uses the Open-Meteo Weather Forecast API for weather variables used by Mold potential:
+
+https://open-meteo.com/en/docs
 
 Open-Meteo provides air quality and pollen forecast data without requiring an API key for normal public API usage. Pollen availability can vary by region and season.
 
@@ -79,13 +86,14 @@ Place-name attribution: OpenStreetMap contributors.
 
 ## Score
 
-The AirAware score is an environmental burden index. The first version combines:
+The AirAware score is an environmental burden index. It combines:
 
-- 60% pollen burden
-- 30% particulate pollution
-- 10% gases and dust
+- 50% pollen burden
+- 25% particulate pollution
+- 10% gases and atmospheric irritants
+- 15% Mold potential
 
-Pollen burden uses the highest pollen category instead of averaging tree, grass, and weed pollen. The score is not a medical, regulatory, or AQI claim.
+Pollen burden uses the highest pollen category instead of averaging tree, grass, and weed pollen. Particulate pollution uses PM2.5 and PM10. Gases and atmospheric irritants use NO₂, O₃, SO₂, dust, carbon monoxide, and aerosol optical depth. Mold potential is inferred from weather conditions; it is not a measured mold-spore concentration. The score is not a medical, regulatory, or AQI claim.
 
 Panel icon line colors follow the current score category:
 
@@ -100,6 +108,10 @@ Panel icon line colors follow the current score category:
 - Pollen variables are primarily available in Europe during pollen season.
 - Forecast quality depends on the upstream air quality model and region.
 - Forecasts are environmental estimates, not sensor readings from the user's exact location.
+- Mold potential is inferred from temperature, humidity, precipitation, and wind.
+- Mold potential is not a measured mold-spore concentration.
+- Aerosol optical depth describes particles through the atmospheric column and may not exactly represent surface exposure.
+- Carbon monoxide and aerosol levels can originate from multiple sources.
 - AirAware does not account for personal sensitivity, medication, indoor exposure, masks, activity level, or clinical history.
 - Place names depend on OpenStreetMap Nominatim availability and may occasionally be approximate.
 
@@ -107,7 +119,10 @@ Panel icon line colors follow the current score category:
 
 - `applet.js`: Cinnamon panel integration, popup rendering, settings, timers, notifications, and lifecycle cleanup.
 - `lib/locationService.js`: one-shot approximate GeoClue2 lookup with 6-hour coordinate cache behavior.
-- `lib/openMeteoProvider.js`: Open-Meteo URL construction, Soup async fetch, response validation, and provider mapping.
+- `lib/openMeteoProvider.js`: Open-Meteo Air Quality URL construction, Soup async fetch, response validation, and provider mapping.
+- `lib/openMeteoWeatherProvider.js`: Open-Meteo Weather Forecast URL construction, Soup async fetch, response validation, and normalized hourly weather mapping.
+- `lib/moldPotentialCalculator.js`: weather-based Mold potential scoring.
+- `lib/environmentAssembler.js`: combines independently refreshed air-quality, weather, cache, and mold data.
 - `lib/reverseGeocoder.js`: Nominatim reverse-geocoding URL construction, Soup async fetch, and place-name parsing.
 - `lib/riskCalculator.js`: environmental burden scoring and risk category calculation.
 - `lib/cache.js`: coordinate, place-name, and response cache envelopes with validation.
@@ -140,9 +155,6 @@ gjs ../../tests/live-openmeteo-smoke.gjs
 - Manual location search/geocoding
 - Multiple saved locations
 - Hourly forecast
-- Wildfire smoke
-- Mold spores
-- Weather integration
 - Multiple providers
 - Custom weighting
 - Personal allergens
