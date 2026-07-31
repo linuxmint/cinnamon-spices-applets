@@ -7,6 +7,7 @@
         "Memory_page",
         "Network_page",
         "Disk_page",
+        "GPU_page",
         "Battery_page"
       ],
 
@@ -47,6 +48,14 @@
         "sections": [
           "DISK_READ_settings",
           "DISK_WRITE_settings"
+        ]
+      },
+      "GPU_page": {
+        "type": "page",
+        "title": "GPU",
+        "sections": [
+          "GPU_settings",
+          "GPU_MEM_settings"
         ]
       },
       "Battery_page": {
@@ -162,6 +171,28 @@
           "diskwrite_use_custom_label",
           "diskwrite_custom_label",
           "diskwrite_show_detail_label"
+        ]
+      },
+      "GPU_settings": {
+        "type": "section",
+        "title": "GPU utilization settings",
+        "keys": [
+          "gpu_enable_graph",
+          "gpu_size",
+          "gpu_use_custom_label",
+          "gpu_custom_label",
+          "gpu_show_detail_label"
+        ]
+      },
+      "GPU_MEM_settings": {
+        "type": "section",
+        "title": "GPU memory settings",
+        "keys": [
+          "gpumem_enable_graph",
+          "gpumem_size",
+          "gpumem_use_custom_label",
+          "gpumem_custom_label",
+          "gpumem_show_detail_label"
         ]
       },
       "BAT_settings": {
@@ -623,6 +654,80 @@
         "description": "Show details.",
         "tooltip": "Show or hide the DISK (write) usage label.",
         "dependency": "diskwrite_enable_graph"
+    },
+    "gpu_enable_graph": {
+      "type": "checkbox",
+      "default": false,
+      "description": "Show GPU utilization graph",
+      "tooltip": "Show or hide the GPU utilization graph. Requires an NVIDIA GPU with nvidia-smi installed, or an AMD GPU using the amdgpu driver."
+    },
+    "gpu_size": {
+      "type": "spinbutton",
+      "default": 50,
+      "min": 10,
+      "max": 500,
+      "step": 1,
+      "units": "",
+      "description": "Horizontal panel width or vertical panel height",
+      "tooltip": "Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+      "dependency": "gpu_enable_graph"
+    },
+    "gpu_use_custom_label": {
+      "type": "checkbox",
+      "default": false,
+      "description": "Use custom graph label",
+      "tooltip": "Choose your own label for the GPU utilization graph",
+      "dependency": "gpu_enable_graph"
+    },
+    "gpu_custom_label": {
+      "type": "entry",
+      "default": "GPU",
+      "description": "Set the custom label for the GPU utilization graph",
+      "dependency": "gpu_enable_graph"
+    },
+    "gpu_show_detail_label": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show details",
+      "tooltip": "Show or hide the GPU utilization detail label",
+      "dependency": "gpu_enable_graph"
+    },
+    "gpumem_enable_graph": {
+      "type": "checkbox",
+      "default": false,
+      "description": "Show GPU memory graph",
+      "tooltip": "Show or hide the GPU memory graph. Requires an NVIDIA GPU with nvidia-smi installed, or an AMD GPU using the amdgpu driver."
+    },
+    "gpumem_size": {
+      "type": "spinbutton",
+      "default": 50,
+      "min": 10,
+      "max": 500,
+      "step": 1,
+      "units": "",
+      "description": "Horizontal panel width or vertical panel height",
+      "tooltip": "Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+      "dependency": "gpumem_enable_graph"
+    },
+    "gpumem_use_custom_label": {
+      "type": "checkbox",
+      "default": false,
+      "description": "Use custom graph label",
+      "tooltip": "Choose your own label for the GPU memory graph",
+      "dependency": "gpumem_enable_graph"
+    },
+    "gpumem_custom_label": {
+      "type": "entry",
+      "default": "GMEM",
+      "description": "Set the custom label for the GPU memory graph",
+      "dependency": "gpumem_enable_graph"
+    },
+    "gpumem_show_detail_label": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show details",
+      "tooltip": "Show or hide the GPU memory detail label",
+      "dependency": "gpumem_enable_graph"
     },
     "bat_enable_graph": {
       "type": "checkbox",

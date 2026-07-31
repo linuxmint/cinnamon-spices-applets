@@ -234,6 +234,10 @@ class Graph {
             cr.showText(this.theme.diskwrite_custom_label);
         else if (this.theme.bat_use_custom_label && this.provider.type == "BAT")
             cr.showText(this.theme.bat_custom_label);
+        else if (this.theme.gpu_use_custom_label && this.provider.type == "GPU")
+            cr.showText(this.theme.gpu_custom_label);
+        else if (this.theme.gpumem_use_custom_label && this.provider.type == "GPUMEM")
+            cr.showText(this.theme.gpumem_custom_label);
         else
             cr.showText(this.provider.name);
 
@@ -262,6 +266,10 @@ class Graph {
             cr.showText(this.theme.diskwrite_custom_label);
         else if (this.theme.bat_use_custom_label && this.provider.type == "BAT")
             cr.showText(this.theme.bat_custom_label);
+        else if (this.theme.gpu_use_custom_label && this.provider.type == "GPU")
+            cr.showText(this.theme.gpu_custom_label);
+        else if (this.theme.gpumem_use_custom_label && this.provider.type == "GPUMEM")
+            cr.showText(this.theme.gpumem_custom_label);
         else
             cr.showText(this.provider.name);
     }
