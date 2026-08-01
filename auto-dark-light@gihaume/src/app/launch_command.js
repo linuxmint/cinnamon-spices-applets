@@ -1,16 +1,16 @@
 const { GLib } = imports.gi;
 
-import { _, logger } from '../globals.ts';
+import { _, logger } from '../globals.js';
 import * as cmd_launching from '../lib/gnome/command_launching.js';
 
 /**
  * Launches a command with a timeout and logs any error on failure.
- * @param name - The name of the command to display in case of error. If empty, the command itself is used.
- * @param expiry - The delay in seconds before cancelling the command with a SIGTERM, then 10 seconds later with a SIGKILL. `0` means infinity/never.
- * @param command - The shell command to execute.
- * @returns Resolves when the command has been executed or rejects if an error occurs.
+ * @param {string} name - The name of the command to display in case of error. If empty, the command itself is used.
+ * @param {number} expiry - The delay in seconds before cancelling the command with a SIGTERM, then 10 seconds later with a SIGKILL. `0` means infinity/never.
+ * @param {string} command - The shell command to execute.
+ * @returns {Promise<void>} Resolves when the command has been executed or rejects if an error occurs.
  */
-export async function launch_command(name: string, expiry: number, command: string): Promise<void> {
+export async function launch_command(name, expiry, command) {
     try {
         await cmd_launching.launch_command(command, expiry);
     } catch (error) {

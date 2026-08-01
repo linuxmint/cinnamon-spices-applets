@@ -43,16 +43,31 @@ const J0 = 0.0009;
 const J1970 = 2_440_587.5;
 const J2000 = 2_451_545;
 
-/** @returns (seconds) */
-function _to_unix(julian_date: number) {
+/**
+ * @param {number} julian_date
+ * @returns (seconds)
+ */
+function _to_unix(julian_date) {
     return (julian_date - J1970) * SECONDS_PER_DAY;
 }
 
-function _approximate_transit(Ht: number, lw: number, n: number): number {
+/**
+ * @param {number} Ht
+ * @param {number} lw
+ * @param {number} n
+ * @returns {number}
+ */
+function _approximate_transit(Ht, lw, n) {
     return J0 + (Ht + lw) / TWO_PI + n;
 }
 
-function _solar_transit(ds: number, M: number, L: number): number {
+/**
+ * @param {number} ds
+ * @param {number} M
+ * @param {number} L
+ * @returns {number}
+ */
+function _solar_transit(ds, M, L) {
     return J2000 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L);
 }
 
@@ -63,14 +78,12 @@ const J1970_MINUS_J2000 = J1970 - J2000;
 
 /**
  * Calculates the sunrise and sunset times for a given date and location.
- * @param unix_time - seconds (s)
- * @param latitude - degrees (°)
- * @param longitude - degrees (°)
- * @returns Unix time, seconds (s)
+ * @param {number} unix_time - seconds (s)
+ * @param {number} latitude - degrees (°)
+ * @param {number} longitude - degrees (°)
+ * @returns {[sunrise: number, sunset: number]} Unix time, seconds (s)
  */
-export function compute_twilights(
-    unix_time: number, latitude: number, longitude: number
-): [sunrise: number, sunset: number] {
+export function compute_twilights(unix_time, latitude, longitude) {
     const lw = RADIANS_PER_DEGREE * -longitude;
     const phi = RADIANS_PER_DEGREE * latitude;
     const d = unix_time / SECONDS_PER_DAY + J1970_MINUS_J2000; // Julian date

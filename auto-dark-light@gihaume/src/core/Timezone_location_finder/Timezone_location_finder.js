@@ -1,16 +1,17 @@
 const { Gio } = imports.gi;
 
-import type { Location } from '../../types.d.ts';
+/** @typedef {import('../../types.js').Location} Location */
 
 /** A finder of timezone's city coordinates using a local database. */
 export class Timezone_location_finder {
-    _database: Record<string, [number, number]>;
+    /** @type {Record<string, [number, number]>} */
+    _database;
 
     /**
-     * @param path - The absolute path where the `database.json` file is located.
+     * @param {string} path - The absolute path where the `database.json` file is located.
      * @throws {Error} - If the file cannot be loaded or JSON-parsed
      */
-    constructor(path: string) {
+    constructor(path) {
         const file_path = `${path}/database.json`;
         const file = Gio.File.new_for_path(file_path);
         const [ok, file_content] = file.load_contents(null);
@@ -23,10 +24,10 @@ export class Timezone_location_finder {
 
     /**
      * Gets the latitude and longitude of the timezone's city.
-     * @param timezone - The timezone to get the coordinates from.
-     * @returns The system timezone's city coordinates.
+     * @param {string} timezone - The timezone to get the coordinates from.
+     * @returns {Location} The system timezone's city coordinates.
      */
-    find(timezone: string): Location {
+    find(timezone) {
         if (!timezone)
             throw new Error('timezone is required');
         if (!(timezone in this._database))

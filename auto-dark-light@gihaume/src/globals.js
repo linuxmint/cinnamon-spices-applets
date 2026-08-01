@@ -3,7 +3,8 @@ const { GLib } = imports.gi;
 const Main = imports.ui.main;
 const { St } = imports.gi;
 
-export const metadata: imports.ui.applet.AppletMetadata = {
+/** @type {imports.ui.applet.AppletMetadata} */
+export const metadata = {
     uuid: "",
     name: "",
     description: "",
@@ -11,13 +12,18 @@ export const metadata: imports.ui.applet.AppletMetadata = {
     force_loaded: false
 };
 
-export function _(text: string): string {
+/**
+ * @param {string} text
+ * @returns {string}
+ */
+export function _(text) {
     return Gettext.dgettext(metadata.uuid, text);
 }
 
 let translated_applet_name = "";
 
-export function initialize_globals(applet_metadata: imports.ui.applet.AppletMetadata) {
+/** @param {imports.ui.applet.AppletMetadata} applet_metadata */
+export function initialize_globals(applet_metadata) {
     Object.assign(metadata, applet_metadata);
 
     const translations_dir_path = GLib.get_home_dir() + '/.local/share/locale';
@@ -35,15 +41,18 @@ const error_icon = new St.Icon({
 });
 
 export const logger = {
-    info(msg: string) {
+    /** @param {string} msg */
+    info(msg) {
         global.log(translated_applet_name + `${_(":")} ` + msg);
         Main.notify(translated_applet_name, msg);
     },
-    warn(msg: string) {
+    /** @param {string} msg */
+    warn(msg) {
         global.logWarning(translated_applet_name + `${_(":")} ` + msg);
         Main.warningNotify(translated_applet_name, msg, warning_icon);
     },
-    error(msg: string) {
+    /** @param {string} msg */
+    error(msg) {
         global.logError(translated_applet_name + `${_(":")} ` + msg);
         Main.criticalNotify(translated_applet_name, msg, error_icon);
     }

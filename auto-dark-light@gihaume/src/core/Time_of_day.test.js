@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 
-import { Time_of_day } from './Time_of_day.ts';
+import { Time_of_day } from './Time_of_day.js';
 
 const hms = { h: 12, m: 34, s: 56 };
 const time = new Time_of_day(hms);

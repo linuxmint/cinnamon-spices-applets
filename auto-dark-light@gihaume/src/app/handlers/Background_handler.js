@@ -1,12 +1,17 @@
-import { Background_accessor as Background } from '../../lib/cinnamon/Background_accessor.ts';
+import { Background_accessor as Background } from '../../lib/cinnamon/Background_accessor.js';
 
-import type { Applet } from '../ui/Applet.ts';
-import type { Settings } from '../ui/Settings.ts';
+/** @typedef {import('../ui/Applet.js').Applet} Applet */
+/** @typedef {import('../ui/Settings.js').Settings} Settings */
 
 export class Background_handler {
-    private readonly _settings: Settings;
+    /** @private @readonly @type {Settings} */
+    _settings;
 
-    constructor(applet: Applet, settings: Settings) {
+    /**
+     * @param {Applet} applet
+     * @param {Settings} settings
+     */
+    constructor(applet, settings) {
         this._settings = settings;
 
         applet.on_button_detect_background_light =
@@ -19,7 +24,8 @@ export class Background_handler {
             () => this.apply_dark_background();
     }
 
-    detect_light_background(): void {
+    /** @returns {void} */
+    detect_light_background() {
         const is_slideshow = Background.is_slideshow;
         this._settings.light_background_is_slideshow = is_slideshow;
         if (is_slideshow)
@@ -29,7 +35,8 @@ export class Background_handler {
         else
             this._settings.light_background_file = Background.picture_file;
     }
-    detect_dark_background(): void {
+    /** @returns {void} */
+    detect_dark_background() {
         const is_slideshow = Background.is_slideshow;
         this._settings.dark_background_is_slideshow = is_slideshow;
         if (is_slideshow)
@@ -39,7 +46,8 @@ export class Background_handler {
         else
             this._settings.dark_background_file = Background.picture_file;
     }
-    apply_light_background(): void {
+    /** @returns {void} */
+    apply_light_background() {
         const is_slideshow = this._settings.light_background_is_slideshow;
         Background.is_slideshow = is_slideshow;
         if (is_slideshow)
@@ -52,7 +60,8 @@ export class Background_handler {
             Background.picture_file =
                 this._settings.light_background_file;
     }
-    apply_dark_background(): void {
+    /** @returns {void} */
+    apply_dark_background() {
         const is_slideshow = this._settings.dark_background_is_slideshow;
         Background.is_slideshow = is_slideshow;
         if (is_slideshow)

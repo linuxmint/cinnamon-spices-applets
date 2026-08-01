@@ -1,4 +1,4 @@
-import type { Time_of_day } from './core/Time_of_day.ts';
+import type { Time_of_day } from './core/Time_of_day.js';
 
 export type Time_hms = {
     h: number;

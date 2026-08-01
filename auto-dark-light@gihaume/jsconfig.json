@@ -10,7 +10,6 @@
         "moduleDetection": "force",
         "noEmit": true,
         "allowImportingTsExtensions": true,
-        "allowJs": true,
         "checkJs":true,
         "strict": true,
 		"types": [

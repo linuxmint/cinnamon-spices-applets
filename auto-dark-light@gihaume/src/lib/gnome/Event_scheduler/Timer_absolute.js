@@ -1,6 +1,6 @@
 import * as system_time from '../system_time.js';
 
-/** @typedef {import('../../../core/Time_of_day.ts').Time_of_day} Time_of_day */
+/** @typedef {import('../../../core/Time_of_day.js').Time_of_day} Time_of_day */
 
 /** A basic request-based absolute timer to be set for a next occurring time of day. */
 export class Timer_absolute {

@@ -6,7 +6,7 @@ export default vite.defineConfig({
     build: {
         minify: false,
         rolldownOptions: {
-            input: 'src/main.ts',
+            input: 'src/main.js',
             output: {
                 dir: './files/auto-dark-light@gihaume/5.8',
                 entryFileNames: 'applet.js'

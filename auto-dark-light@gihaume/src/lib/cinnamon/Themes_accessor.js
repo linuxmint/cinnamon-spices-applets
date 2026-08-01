@@ -1,37 +1,41 @@
 const { Gio } = imports.gi;
 
-const settings = {
+const settings = /** @type {const} */ ({
     desktop:  Gio.Settings.new('org.cinnamon.desktop.interface'),
     cinnamon: Gio.Settings.new('org.cinnamon.theme')
-} as const;
+});
 
 /** An accessor to the Cinnamon system themes settings. */
 export class Themes_accessor {
-    static get mouse(): string {
+    /** @returns {string} */
+    static get mouse() {
         return settings.desktop.get_string('cursor-theme');
     }
-    static set mouse(value: string) {
+    static set mouse(/** @type {string} */ value) {
         settings.desktop.set_string('cursor-theme', value);
     }
 
-    static get apps(): string {
+    /** @returns {string} */
+    static get apps() {
         return settings.desktop.get_string('gtk-theme');
     }
-    static set apps(value: string) {
+    static set apps(/** @type {string} */ value) {
         settings.desktop.set_string('gtk-theme', value);
     }
 
-    static get icons(): string {
+    /** @returns {string} */
+    static get icons() {
         return settings.desktop.get_string('icon-theme');
     }
-    static set icons(value: string) {
+    static set icons(/** @type {string} */ value) {
         settings.desktop.set_string('icon-theme', value);
     }
 
-    static get desktop(): string {
+    /** @returns {string} */
+    static get desktop() {
         return settings.cinnamon.get_string('name');
     }
-    static set desktop(value: string) {
+    static set desktop(/** @type {string} */ value) {
         settings.cinnamon.set_string('name', value);
     }
 }

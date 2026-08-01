@@ -1,15 +1,18 @@
 const { AppletSettings } = imports.ui.settings;
 
-import type { Settings } from './ui/Settings.ts';
+/** @typedef {import('./ui/Settings.js').Settings} Settings */
 
-export function initialize_applet_settings(
-    uuid: string, instance_id: number
-): Settings {
-    const settings = new AppletSettings(
-        {}, uuid, instance_id
-    ) as unknown as Settings;
+/**
+ * @param {string} uuid
+ * @param {number} instance_id
+ * @returns {Settings}
+ */
+export function initialize_applet_settings(uuid, instance_id) {
+    const settings = /** @type {Settings} */ (/** @type {unknown} */ (
+        new AppletSettings({}, uuid, instance_id)
+    ));
 
-    ([
+    /** @type {const} */ ([
         'is_appearance_dark',
         'appearance_keybinding',
         'is_appearance_auto',
@@ -56,7 +59,7 @@ export function initialize_applet_settings(
         'light_themes_have_been_detected',
         'dark_themes_have_been_detected'
         // Commented entries because: https://github.com/linuxmint/cinnamon/issues/9336
-    ] as const).forEach(key => settings.bindWithObject(settings, key, key));
+    ]).forEach(key => settings.bindWithObject(settings, key, key));
 
     return settings;
 }
