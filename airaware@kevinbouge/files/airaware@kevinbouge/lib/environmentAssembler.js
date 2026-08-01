@@ -1,6 +1,8 @@
-/* exported combineEnvironmentalData */
+/* exported combineEnvironmentalData, providerDataMatchesCoordinates */
 
 const MoldPotentialCalculator = imports.moldPotentialCalculator;
+
+const PROVIDER_COORDINATE_TOLERANCE = 0.25;
 
 function _isFiniteNumber(value) {
     return typeof value === 'number' && Number.isFinite(value);
@@ -19,6 +21,70 @@ function _copyObject(value) {
         copy[key] = _copyObject(value[key]);
 
     return copy;
+}
+
+function _coordinateFromData(data) {
+    if (!data)
+        return null;
+
+    if (_isFiniteNumber(data.latitude) && _isFiniteNumber(data.longitude))
+        return {
+            latitude: data.latitude,
+            longitude: data.longitude,
+        };
+
+    if (data.metadata &&
+        _isFiniteNumber(data.metadata.latitude) &&
+        _isFiniteNumber(data.metadata.longitude))
+        return {
+            latitude: data.metadata.latitude,
+            longitude: data.metadata.longitude,
+        };
+
+    return null;
+}
+
+function _hasUsableCoordinates(coordinates) {
+    return coordinates &&
+        _isFiniteNumber(coordinates.latitude) &&
+        _isFiniteNumber(coordinates.longitude);
+}
+
+/**
+ * Check whether cached provider data is compatible with active coordinates.
+ *
+ * Open-Meteo may return model-grid coordinates instead of the exact requested
+ * coordinates, so this uses a small tolerance rather than exact equality.
+ *
+ * @param {Object|null} data - Cached or fresh provider response.
+ * @param {Object|null} coordinates - Active location coordinates.
+ * @returns {boolean} True when the data can be used for the location.
+ */
+var providerDataMatchesCoordinates = function(data, coordinates) {
+    if (!_hasUsableCoordinates(coordinates))
+        return true;
+
+    const dataCoordinates = _coordinateFromData(data);
+
+    if (dataCoordinates === null)
+        return false;
+
+    return Math.abs(dataCoordinates.latitude - coordinates.latitude) <= PROVIDER_COORDINATE_TOLERANCE &&
+        Math.abs(dataCoordinates.longitude - coordinates.longitude) <= PROVIDER_COORDINATE_TOLERANCE;
+};
+
+function _cachedWeatherForCoordinates(cachedData, coordinates) {
+    if (!cachedData || !cachedData.weather)
+        return null;
+
+    const weatherCoordinates = _coordinateFromData(cachedData.weather);
+
+    if (weatherCoordinates === null)
+        return cachedData.weather;
+
+    return providerDataMatchesCoordinates(cachedData.weather, coordinates)
+        ? cachedData.weather
+        : null;
 }
 
 function _dateFromOpenMeteoTime(timeValue) {
@@ -167,7 +233,11 @@ function _weatherForForecastMold(weatherData, date) {
 var combineEnvironmentalData = function(options = {}) {
     const airQualityData = options.airQualityData || null;
     const weatherData = options.weatherData || null;
-    const cachedData = options.cachedData || null;
+    const requestedCoordinates = options.coordinates || null;
+    const rawCachedData = options.cachedData || null;
+    const cachedData = providerDataMatchesCoordinates(rawCachedData, requestedCoordinates)
+        ? rawCachedData
+        : null;
     const vegetationData = options.vegetationData || null;
     const cachedVegetationData = options.cachedVegetationData || null;
     const vegetationIsStale = options.vegetationIsStale === true;
@@ -178,7 +248,8 @@ var combineEnvironmentalData = function(options = {}) {
 
     const combined = _copyObject(sourceAirQuality);
     const usedCachedAirQuality = airQualityData === null && cachedData !== null;
-    const sourceWeather = weatherData || (cachedData && cachedData.weather) || null;
+    const cachedWeather = _cachedWeatherForCoordinates(cachedData, requestedCoordinates);
+    const sourceWeather = weatherData || cachedWeather;
     const usedCachedWeather = weatherData === null && sourceWeather !== null;
 
     combined.provider = sourceAirQuality.provider || 'open-meteo';
@@ -202,10 +273,6 @@ var combineEnvironmentalData = function(options = {}) {
     combined.fetchedAt = _isFiniteNumber(combined.airQualityFetchedAt)
         ? combined.airQualityFetchedAt
         : sourceAirQuality.fetchedAt;
-
-    if (combined.weatherFetchedAt !== null &&
-        (!_isFiniteNumber(combined.fetchedAt) || combined.weatherFetchedAt > combined.fetchedAt))
-        combined.fetchedAt = combined.weatherFetchedAt;
 
     const currentDate = combined.current && combined.current.timestamp
         ? _dateFromOpenMeteoTime(combined.current.timestamp)

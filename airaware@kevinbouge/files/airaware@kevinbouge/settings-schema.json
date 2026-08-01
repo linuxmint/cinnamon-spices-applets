@@ -1,16 +1,11 @@
 {
     "layout": {
         "type": "layout",
-        "pages": ["general", "popup-page", "profile"],
+        "pages": ["general", "profile"],
         "general": {
             "type": "page",
             "title": "General",
             "sections": ["refresh", "location", "panel", "vegetation", "outdoor", "alerts"]
-        },
-        "popup-page": {
-            "type": "page",
-            "title": "Popup",
-            "sections": ["popup"]
         },
         "profile": {
             "type": "page",
@@ -36,19 +31,6 @@
             "type": "section",
             "title": "Outdoor",
             "keys": ["outdoor-window-duration"]
-        },
-        "popup": {
-            "type": "section",
-            "title": "Popup",
-            "keys": [
-                "show-pollen-in-popup",
-                "show-regulated-pollution-in-popup",
-                "show-atmospheric-irritants-in-popup",
-                "show-mold-in-popup",
-                "show-uv-in-popup",
-                "show-vegetation-in-popup",
-                "show-personalized-risk-in-popup"
-            ]
         },
         "personal-profile": {
             "type": "section",
@@ -106,31 +88,6 @@
         "default": true,
         "description": "Show label"
     },
-    "show-pollen-in-popup": {
-        "type": "switch",
-        "default": true,
-        "description": "Show pollen"
-    },
-    "show-regulated-pollution-in-popup": {
-        "type": "switch",
-        "default": true,
-        "description": "Show regulated pollution"
-    },
-    "show-atmospheric-irritants-in-popup": {
-        "type": "switch",
-        "default": true,
-        "description": "Show atmospheric irritants"
-    },
-    "show-mold-in-popup": {
-        "type": "switch",
-        "default": true,
-        "description": "Show mold"
-    },
-    "show-uv-in-popup": {
-        "type": "switch",
-        "default": false,
-        "description": "Show UV index"
-    },
     "panel-score-mode": {
         "type": "combobox",
         "default": "environmental",
@@ -172,11 +129,6 @@
         "default": true,
         "description": "Enable nearby vegetation context"
     },
-    "show-vegetation-in-popup": {
-        "type": "switch",
-        "default": false,
-        "description": "Show vegetation details"
-    },
     "vegetation-radius": {
         "type": "combobox",
         "default": 2000,
@@ -191,11 +143,6 @@
         "type": "switch",
         "default": false,
         "description": "Enable personalized risk score"
-    },
-    "show-personalized-risk-in-popup": {
-        "type": "switch",
-        "default": true,
-        "description": "Show personalized risk"
     },
     "outdoor-window-duration": {
         "type": "combobox",
@@ -312,5 +259,29 @@
         "description": "Send test notification",
         "callback": "on_test_notification_pressed",
         "tooltip": "Sends one sample High notification. It does not change the current risk."
+    },
+    "popup-pollen-expanded": {
+        "type": "generic",
+        "default": true
+    },
+    "popup-regulated-pollution-expanded": {
+        "type": "generic",
+        "default": true
+    },
+    "popup-atmospheric-irritants-expanded": {
+        "type": "generic",
+        "default": true
+    },
+    "popup-mold-expanded": {
+        "type": "generic",
+        "default": true
+    },
+    "popup-sun-expanded": {
+        "type": "generic",
+        "default": false
+    },
+    "popup-vegetation-expanded": {
+        "type": "generic",
+        "default": false
     }
 }

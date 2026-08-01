@@ -45,11 +45,17 @@ function readings(overrides = {}) {
 function airQualityResponse(overrides = {}) {
     const fetchedAt = overrides.fetchedAt || 1785445000000;
     const currentReadings = overrides.currentReadings || readings();
+    const latitude = Object.prototype.hasOwnProperty.call(overrides, 'latitude')
+        ? overrides.latitude
+        : 50.08;
+    const longitude = Object.prototype.hasOwnProperty.call(overrides, 'longitude')
+        ? overrides.longitude
+        : 14.44;
 
     return {
         provider: 'open-meteo',
-        latitude: 50.08,
-        longitude: 14.44,
+        latitude,
+        longitude,
         fetchedAt,
         current: {
             readings: currentReadings,
@@ -91,8 +97,17 @@ function weatherHour(time, overrides = {}) {
 }
 
 function weatherResponse(overrides = {}) {
+    const latitude = Object.prototype.hasOwnProperty.call(overrides, 'latitude')
+        ? overrides.latitude
+        : 50.08;
+    const longitude = Object.prototype.hasOwnProperty.call(overrides, 'longitude')
+        ? overrides.longitude
+        : 14.44;
+
     return {
         provider: 'open-meteo-weather',
+        latitude,
+        longitude,
         fetchedAt: overrides.fetchedAt || 1785447000000,
         hourly: [
             weatherHour('2026-07-30T00:00'),
@@ -211,6 +226,10 @@ function testAirQualityFailureUsesCachedDataWithFreshWeather() {
         airQualityData: null,
         weatherData: weather,
         cachedData: cached,
+        coordinates: {
+            latitude: 50.08,
+            longitude: 14.44,
+        },
     });
 
     assertNotNull(combined, 'cached air quality and fresh weather should combine');
@@ -222,14 +241,73 @@ function testAirQualityFailureUsesCachedDataWithFreshWeather() {
         'cached air-quality timestamp should be preserved');
     assertEqual(combined.weatherFetchedAt, 1785449000000,
         'fresh weather timestamp should be tracked separately');
-    assertEqual(combined.fetchedAt, 1785449000000,
-        'combined timestamp should reflect newest valid component');
+    assertEqual(combined.fetchedAt, 1785440000000,
+        'combined timestamp should reflect air-quality freshness');
     assertEqual(combined.usedCachedAirQuality, true,
         'cached air-quality use should be exposed for stale UI state');
     assertEqual(combined.usedCachedWeather, false,
         'fresh weather should not be reported as cached');
     assertTrue(combined.isPartial,
         'cached air quality with fresh weather is a partial refresh');
+}
+
+function testCachedAirQualityFromDifferentLocationIsRejected() {
+    const cached = airQualityResponse({
+        latitude: 40.71,
+        longitude: -74.01,
+        currentReadings: readings({
+            pm25: 99,
+        }),
+    });
+    const weather = weatherResponse({
+        fetchedAt: 1785449000000,
+    });
+    const combined = EnvironmentAssembler.combineEnvironmentalData({
+        airQualityData: null,
+        weatherData: weather,
+        cachedData: cached,
+        coordinates: {
+            latitude: 50.08,
+            longitude: 14.44,
+        },
+    });
+
+    assertEqual(combined, null,
+        'cached air-quality data from another location should not be used');
+}
+
+function testCachedWeatherFromDifferentLocationIsRejected() {
+    const cached = airQualityResponse({
+        weather: weatherResponse({
+            latitude: 40.71,
+            longitude: -74.01,
+            fetchedAt: 1785441000000,
+        }),
+    });
+    const freshAirQuality = airQualityResponse({
+        fetchedAt: 1785449000000,
+        currentReadings: readings({
+            pm25: 12,
+        }),
+    });
+    const combined = EnvironmentAssembler.combineEnvironmentalData({
+        airQualityData: freshAirQuality,
+        weatherData: null,
+        cachedData: cached,
+        coordinates: {
+            latitude: 50.08,
+            longitude: 14.44,
+        },
+    });
+
+    assertNotNull(combined,
+        'fresh air quality should still produce a response');
+    assertEqual(combined.weather, null,
+        'cached weather from another location should not be attached');
+    assertEqual(combined.usedCachedWeather, false,
+        'rejected cached weather should not be reported as cached');
+    assertEqual(combined.current.moldPotential.isAvailable, false,
+        'mold should be unavailable when cached weather is rejected');
 }
 
 function testPartialSuccessRecalculatesRiskWithMold() {
@@ -325,6 +403,8 @@ function main() {
         testWeatherFailureKeepsFreshAirQualityData,
         testWeatherFailureCanUseCachedWeather,
         testAirQualityFailureUsesCachedDataWithFreshWeather,
+        testCachedAirQualityFromDifferentLocationIsRejected,
+        testCachedWeatherFromDifferentLocationIsRejected,
         testPartialSuccessRecalculatesRiskWithMold,
         testForecastMoldUsesMatchingDayHours,
         testNoDataReturnsNull,

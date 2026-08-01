@@ -8,6 +8,11 @@
     font-size: 1.08em;
 }
 
+.airaware-submenu-title {
+    font-weight: bold;
+    font-size: 1.08em;
+}
+
 .airaware-subtitle {
     opacity: 0.72;
     font-size: 0.9em;
@@ -24,23 +29,31 @@
 
 .airaware-row-label {
     min-width: 150px;
+    max-width: 150px;
 }
 
 .airaware-row-value {
-    font-weight: bold;
+    max-width: 220px;
+}
+
+.airaware-column-label {
+    min-width: 150px;
+    max-width: 150px;
+}
+
+.airaware-column-value {
+    min-width: 150px;
     max-width: 220px;
 }
 
 .airaware-pollutant-value {
     min-width: 100px;
     max-width: 100px;
-    font-weight: bold;
 }
 
 .airaware-aqi-value {
     min-width: 70px;
     max-width: 70px;
-    font-weight: bold;
 }
 
 .airaware-score-summary {
@@ -63,11 +76,9 @@
 }
 
 .airaware-score-place {
-    min-width: 150px;
     max-width: 210px;
     font-size: 1.05em;
     font-weight: bold;
-    text-align: right;
 }
 
 .airaware-muted {
@@ -78,6 +89,10 @@
     opacity: 0.72;
     max-width: 165px;
     text-align: right;
+}
+
+.airaware-refresh-label {
+    opacity: 0.72;
 }
 
 .airaware-refresh-content {

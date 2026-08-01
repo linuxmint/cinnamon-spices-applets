@@ -237,30 +237,6 @@ function _orderedTimes(airRecords, weatherRecords, currentTime, horizonHours) {
     return times;
 }
 
-function _contributorsFromRisk(risk) {
-    if (!risk || !risk.calculation || !risk.calculation.groups)
-        return [];
-
-    let contributors = [];
-
-    for (const id in risk.calculation.groups) {
-        const group = risk.calculation.groups[id];
-
-        if (!group || !_isFiniteNumber(group.score))
-            continue;
-
-        contributors.push({
-            id,
-            burden: group.score,
-            factorId: group.dominant ? group.dominant.id : null,
-        });
-    }
-
-    contributors.sort((left, right) => right.burden - left.burden);
-
-    return contributors;
-}
-
 function _hourEntry(time, risk, moldPotential) {
     if (!risk || risk.available !== true) {
         return {
@@ -281,7 +257,6 @@ function _hourEntry(time, risk, moldPotential) {
         groupCompleteness: risk.groupCompleteness || 0,
         partial: risk.missingFactorCount > 0 ||
             (risk.availableGroupCount || 0) < (risk.selectedGroupCount || 0),
-        contributors: _contributorsFromRisk(risk),
         moldPotential,
     };
 }
@@ -303,35 +278,6 @@ function _windowCompleteness(hours) {
         total += _isFiniteNumber(hour.groupCompleteness) ? hour.groupCompleteness : 0;
 
     return hours.length > 0 ? total / hours.length : 0;
-}
-
-function _windowContributors(hours) {
-    let totals = {};
-    let counts = {};
-
-    for (const hour of hours) {
-        for (const contributor of hour.contributors || []) {
-            const key = contributor.factorId || contributor.id;
-
-            if (!key)
-                continue;
-
-            totals[key] = (totals[key] || 0) + contributor.burden;
-            counts[key] = (counts[key] || 0) + 1;
-        }
-    }
-
-    let contributors = [];
-
-    for (const factorId in totals)
-        contributors.push({
-            factorId,
-            averageBurden: totals[factorId] / counts[factorId],
-        });
-
-    contributors.sort((left, right) => right.averageBurden - left.averageBurden);
-
-    return contributors.slice(0, 3);
 }
 
 function _bestWindow(hours, durationHours) {
@@ -380,7 +326,6 @@ function _bestWindow(hours, durationHours) {
             displayScore: Math.round(averageScore),
             category: RiskCalculator.categoryFromScore(averageScore),
             completeness,
-            contributors: _windowContributors(candidate),
         };
 
         if (best === null ||

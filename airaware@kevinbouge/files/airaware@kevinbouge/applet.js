@@ -148,6 +148,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this._refreshGeneration = 0;
         this._providerData = null;
         this._currentRisk = null;
+        this._forecastRisks = [];
         this._personalizedRisk = null;
         this._personalizedForecast = null;
         this._locationDisplayName = null;
@@ -157,6 +158,8 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this._usingStaleData = false;
         this._isRefreshing = false;
         this._lastLocationResult = null;
+        this._menuTarget = null;
+        this._isRebuildingMenu = false;
         this._panelIconColorId = null;
         this._panelIconPaths = this._buildPanelIconPaths(metadata.path);
 
@@ -164,19 +167,18 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this.showPanelText = true;
         this.notificationLevel = 'disabled';
         this.forecastLength = 3;
-        this.showPollenInPopup = true;
-        this.showRegulatedPollutionInPopup = true;
-        this.showAtmosphericIrritantsInPopup = true;
-        this.showMoldInPopup = true;
-        this.showUvInPopup = false;
         this.enableVegetationContext = true;
-        this.showVegetationInPopup = false;
         this.vegetationRadiusMeters = 2000;
         this.enablePersonalizedRisk = false;
         this.panelScoreMode = 'environmental';
-        this.showPersonalizedRiskInPopup = true;
         this.outdoorWindowDurationHours = 2;
         this.usePersonalizedNotifications = false;
+        this.popupPollenExpanded = true;
+        this.popupRegulatedPollutionExpanded = true;
+        this.popupAtmosphericIrritantsExpanded = true;
+        this.popupMoldExpanded = true;
+        this.popupSunExpanded = false;
+        this.popupVegetationExpanded = false;
         this.profilePollenAlder = true;
         this.profilePollenBirch = true;
         this.profilePollenGrass = true;
@@ -198,6 +200,8 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this.manualLatitude = '';
         this.manualLongitude = '';
         this._locationSettingsSignature = null;
+        this._personalizedCalculationSignature = null;
+        this._refreshIntervalValue = null;
         this.on_open_coordinate_map_pressed = () => this._openCoordinateMap();
         this.on_test_notification_pressed = () => this._sendTestNotification();
 
@@ -227,29 +231,15 @@ class AirAwareApplet extends Applet.TextIconApplet {
             () => this._onSettingsChanged());
         this.settings.bind('panel-score-mode', 'panelScoreMode',
             () => this._onSettingsChanged());
-        this.settings.bind('show-pollen-in-popup', 'showPollenInPopup',
-            () => this._onSettingsChanged());
-        this.settings.bind('show-regulated-pollution-in-popup', 'showRegulatedPollutionInPopup',
-            () => this._onSettingsChanged());
-        this.settings.bind('show-atmospheric-irritants-in-popup', 'showAtmosphericIrritantsInPopup',
-            () => this._onSettingsChanged());
-        this.settings.bind('show-mold-in-popup', 'showMoldInPopup',
-            () => this._onSettingsChanged());
-        this.settings.bind('show-uv-in-popup', 'showUvInPopup',
-            () => this._onSettingsChanged());
         this.settings.bind('notification-level', 'notificationLevel',
             () => this._onSettingsChanged());
         this.settings.bind('use-personalized-notifications', 'usePersonalizedNotifications',
             () => this._onSettingsChanged());
         this.settings.bind('enable-vegetation-context', 'enableVegetationContext',
             () => this._onSettingsChanged());
-        this.settings.bind('show-vegetation-in-popup', 'showVegetationInPopup',
-            () => this._onSettingsChanged());
         this.settings.bind('vegetation-radius', 'vegetationRadiusMeters',
             () => this._onSettingsChanged());
         this.settings.bind('enable-personalized-risk', 'enablePersonalizedRisk',
-            () => this._onSettingsChanged());
-        this.settings.bind('show-personalized-risk-in-popup', 'showPersonalizedRiskInPopup',
             () => this._onSettingsChanged());
         this.settings.bind('outdoor-window-duration', 'outdoorWindowDurationHours',
             () => this._onSettingsChanged());
@@ -293,6 +283,12 @@ class AirAwareApplet extends Applet.TextIconApplet {
             () => this._onSettingsChanged());
         this.settings.bind('manual-longitude', 'manualLongitude',
             () => this._onSettingsChanged());
+        this.settings.bind('popup-pollen-expanded', 'popupPollenExpanded');
+        this.settings.bind('popup-regulated-pollution-expanded', 'popupRegulatedPollutionExpanded');
+        this.settings.bind('popup-atmospheric-irritants-expanded', 'popupAtmosphericIrritantsExpanded');
+        this.settings.bind('popup-mold-expanded', 'popupMoldExpanded');
+        this.settings.bind('popup-sun-expanded', 'popupSunExpanded');
+        this.settings.bind('popup-vegetation-expanded', 'popupVegetationExpanded');
 
         this.refreshIntervalMinutes = this._normalizeRefreshInterval(
             this.refreshIntervalMinutes
@@ -302,7 +298,12 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this.vegetationRadiusMeters = this._normalizeVegetationRadius(
             this.vegetationRadiusMeters
         );
+        this.outdoorWindowDurationHours = this._normalizeOutdoorWindowDuration(
+            this.outdoorWindowDurationHours
+        );
         this._locationSettingsSignature = this._getLocationSettingsSignature();
+        this._personalizedCalculationSignature = this._getPersonalizedCalculationSignature();
+        this._refreshIntervalValue = this.refreshIntervalMinutes;
 
         this._setLoadingState();
         this._rebuildMenu();
@@ -330,6 +331,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
         this._launchUri(uri);
     }
+
     _destroy() {
         if (this._destroyed)
             return;
@@ -355,6 +357,9 @@ class AirAwareApplet extends Applet.TextIconApplet {
         if (this._destroyed)
             return;
 
+        const previousRefreshInterval = this._refreshIntervalValue;
+        const previousPersonalizedSignature = this._personalizedCalculationSignature;
+
         this.refreshIntervalMinutes = this._normalizeRefreshInterval(
             this.refreshIntervalMinutes
         );
@@ -367,16 +372,28 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this.outdoorWindowDurationHours = this._normalizeOutdoorWindowDuration(
             this.outdoorWindowDurationHours
         );
-        this._recalculatePersonalizedRisk();
 
         const locationSettingsSignature = this._getLocationSettingsSignature();
         const locationSettingsChanged = this._locationSettingsSignature !== null &&
             locationSettingsSignature !== this._locationSettingsSignature;
+        const personalizedCalculationSignature = this._getPersonalizedCalculationSignature();
+        const personalizedCalculationChanged = previousPersonalizedSignature !== null &&
+            personalizedCalculationSignature !== previousPersonalizedSignature;
+        const refreshIntervalChanged = previousRefreshInterval !== null &&
+            previousRefreshInterval !== this.refreshIntervalMinutes;
 
         this._locationSettingsSignature = locationSettingsSignature;
+        this._personalizedCalculationSignature = personalizedCalculationSignature;
+        this._refreshIntervalValue = this.refreshIntervalMinutes;
+
+        if (personalizedCalculationChanged)
+            this._recalculatePersonalizedRisk();
+
         this._updatePanel();
         this._rebuildMenu();
-        this._scheduleRefresh();
+
+        if (refreshIntervalChanged)
+            this._scheduleRefresh();
 
         if (locationSettingsChanged && this._canRefreshForCurrentLocationSettings())
             this._refreshData(false);
@@ -439,6 +456,14 @@ class AirAwareApplet extends Applet.TextIconApplet {
         return PersonalAllergyProfile.profileFromSettings(this);
     }
 
+    _getPersonalizedCalculationSignature() {
+        return [
+            this.enablePersonalizedRisk === true ? '1' : '0',
+            this._normalizeOutdoorWindowDuration(this.outdoorWindowDurationHours),
+            PersonalAllergyProfile.profileFingerprint(this._personalProfileFromSettings()),
+        ].join('|');
+    }
+
     _recalculatePersonalizedRisk() {
         if (!this.enablePersonalizedRisk ||
             !this._providerData ||
@@ -448,14 +473,16 @@ class AirAwareApplet extends Applet.TextIconApplet {
             return;
         }
 
+        const profile = this._personalProfileFromSettings();
+
         this._personalizedRisk = PersonalizedRiskCalculator.calculatePersonalizedRisk(
             this._providerData.current,
             this._providerData.current.moldPotential,
-            this._personalProfileFromSettings()
+            profile
         );
         this._personalizedForecast = PersonalizedForecastCalculator.calculatePersonalizedForecast(
             this._providerData,
-            this._personalProfileFromSettings(),
+            profile,
             {
                 horizonHours: 24,
                 windowDurationHours: this.outdoorWindowDurationHours,
@@ -614,6 +641,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
     _setLoadingState() {
         this._currentRisk = null;
+        this._forecastRisks = [];
         this._updatePanel(_('Loading'));
     }
 
@@ -656,7 +684,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
             const manualLocationResult = this._manualLocationResultFromSettings();
 
             if (manualLocationResult === null) {
-                this._useCachedResponse(new Error('Manual location coordinates are invalid'));
+                this._showUnavailableError(new Error('Manual location coordinates are invalid'));
                 return;
             }
 
@@ -831,6 +859,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
                 airQualityData: airQualityResult.error ? null : airQualityResult.data,
                 weatherData: weatherResult.error ? null : weatherResult.data,
                 cachedData,
+                coordinates: locationResult.coordinates,
                 vegetationData: freshVegetationData,
                 cachedVegetationData: fallbackVegetationData,
                 vegetationIsStale: vegetationResult.error ||
@@ -842,7 +871,9 @@ class AirAwareApplet extends Applet.TextIconApplet {
                 this._useCachedResponse(
                     airQualityResult.error ||
                     weatherResult.error ||
-                    new Error('Data unavailable')
+                    new Error('Data unavailable'),
+                    refreshGeneration,
+                    locationResult.coordinates
                 );
                 return;
             }
@@ -856,7 +887,9 @@ class AirAwareApplet extends Applet.TextIconApplet {
             if (vegetationResult.error)
                 this._logError(vegetationResult.error);
 
-            this._cache.writeResponseAsync(combinedData);
+            if (!airQualityResult.error && !weatherResult.error)
+                this._cache.writeResponseAsync(combinedData);
+
             this._applyProviderData(
                 combinedData,
                 combinedData.usedCachedAirQuality === true ||
@@ -1077,7 +1110,19 @@ class AirAwareApplet extends Applet.TextIconApplet {
         );
     }
 
-    _useCachedResponse(error, refreshGeneration = this._refreshGeneration) {
+    _showUnavailableError(error) {
+        this._providerData = null;
+        this._currentRisk = null;
+        this._forecastRisks = [];
+        this._personalizedRisk = null;
+        this._personalizedForecast = null;
+        this._usingStaleData = false;
+        this._isRefreshing = false;
+        this._setError(error);
+        this._updatePanel(_('Unavailable'));
+    }
+
+    _useCachedResponse(error, refreshGeneration = this._refreshGeneration, coordinates = null) {
         this._cache.readResponseAsync((cacheError, envelope) => {
             if (this._destroyed || refreshGeneration !== this._refreshGeneration)
                 return;
@@ -1085,14 +1130,9 @@ class AirAwareApplet extends Applet.TextIconApplet {
             if (cacheError)
                 this._logError(cacheError);
 
-            if (!envelope) {
-                this._providerData = null;
-                this._currentRisk = null;
-                this._personalizedRisk = null;
-                this._usingStaleData = false;
-                this._isRefreshing = false;
-                this._setError(error);
-                this._updatePanel(_('Unavailable'));
+            if (!envelope ||
+                !EnvironmentAssembler.providerDataMatchesCoordinates(envelope.data, coordinates)) {
+                this._showUnavailableError(error);
                 return;
             }
 
@@ -1120,6 +1160,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
             data.current,
             data.current.moldPotential
         );
+        this._forecastRisks = this._calculateForecastRisks(data);
         this._recalculatePersonalizedRisk();
 
         if (!this._usingStaleData)
@@ -1130,6 +1171,16 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
         if (this._lastLocationResult)
             this._ensureLocationDisplayName(this._lastLocationResult);
+    }
+
+    _calculateForecastRisks(data) {
+        if (!data || !Array.isArray(data.forecast))
+            return [];
+
+        return data.forecast.map(day => RiskCalculator.calculateRisk(
+            day,
+            day.moldPotential
+        ));
     }
 
     _isDataOld(data) {
@@ -1152,8 +1203,11 @@ class AirAwareApplet extends Applet.TextIconApplet {
     }
 
     _formatVisibleError() {
-        if (this._providerData)
+        if (this._providerData && this._lastLocationResult)
             return _('Unable to refresh environmental data; showing cached data.');
+
+        if (this._providerData)
+            return _('Unable to refresh environmental data; showing cached data for the last known location.');
 
         return _('Unable to refresh environmental data.');
     }
@@ -1279,25 +1333,92 @@ class AirAwareApplet extends Applet.TextIconApplet {
     }
 
     _rebuildMenu() {
-        this.menu.removeAll();
+        this._isRebuildingMenu = true;
 
-        this._addHeader();
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        try {
+            this.menu.removeAll();
+            this._menuTarget = null;
 
-        if (!this._providerData || !this._currentRisk) {
-            this._addEmptyState();
+            this._addHeader();
+            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+            if (!this._providerData || !this._currentRisk) {
+                this._addEmptyState();
+                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+                this._addRefreshAction();
+                return;
+            }
+
+            this._addCurrentSection();
+            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            if (this._addBestOutdoorWindowSection())
+                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            this._addForecastSection();
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             this._addRefreshAction();
-            return;
+        } finally {
+            this._isRebuildingMenu = false;
+        }
+    }
+
+    _addMenuItem(item) {
+        const target = this._menuTarget || this.menu;
+
+        target.addMenuItem(item);
+    }
+
+    _useMutedMenuText(item) {
+        if (item && item.actor)
+            item.actor.change_style_pseudo_class('insensitive', true);
+    }
+
+    _addCollapsibleSection(title, settingKey, expandedFallback, buildContents) {
+        const item = new PopupMenu.PopupSubMenuMenuItem(title);
+        const previousTarget = this._menuTarget;
+        const expanded = this._popupSectionExpanded(settingKey, expandedFallback);
+
+        item.actor.add_style_class_name('airaware-submenu-header');
+        this._useMutedMenuText(item);
+
+        if (item.label) {
+            item.label.add_style_class_name('airaware-submenu-title');
         }
 
-        this._addCurrentSection();
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        if (this._addBestOutdoorWindowSection())
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        this._addForecastSection();
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        this._addRefreshAction();
+        this.menu.addMenuItem(item);
+        item.menu.connect('open-state-changed', (menu, open) => {
+            if (!this._isRebuildingMenu)
+                this._persistPopupSectionState(settingKey, open);
+        });
+        this._menuTarget = item.menu;
+
+        try {
+            buildContents();
+        } finally {
+            this._menuTarget = previousTarget;
+        }
+
+        if (expanded)
+            item.menu.open(false);
+    }
+
+    _popupSectionExpanded(settingKey, fallback) {
+        return typeof this[settingKey] === 'boolean'
+            ? this[settingKey]
+            : fallback === true;
+    }
+
+    _persistPopupSectionState(settingKey, expanded) {
+        if (typeof settingKey !== 'string' || settingKey === '')
+            return;
+
+        this[settingKey] = expanded === true;
+
+        if (this.settings)
+            this.settings.setValue(this._popupSectionSettingName(settingKey), this[settingKey]);
+    }
+
+    _popupSectionSettingName(settingKey) {
+        return settingKey.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
     }
 
     _addHeader() {
@@ -1321,7 +1442,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
         box.add(title);
         box.add(subtitle);
         item.addActor(box);
-        this.menu.addMenuItem(item);
+        this._addMenuItem(item);
     }
 
     _addEmptyState() {
@@ -1344,22 +1465,19 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this._addScoreSummary(risk);
         this._addPersonalizedRiskSection();
 
-        if (this.showPollenInPopup) {
-            this._addSectionTitle(_('Pollen'));
+        this._addCollapsibleSection(_('Pollen'), 'popupPollenExpanded', true, () => {
             this._addPollenRows(pollen);
-        }
+        });
 
-        if (this.showRegulatedPollutionInPopup) {
-            this._addSectionTitle(_('Regulated pollution'));
+        this._addCollapsibleSection(_('Regulated pollution'), 'popupRegulatedPollutionExpanded', true, () => {
             this._addPollutantAqiRow(_('PM2.5'), rawPollutants.pm25, pollutantAqi.pm25, current.pollutantAqiLabel);
             this._addPollutantAqiRow(_('PM10'), rawPollutants.pm10, pollutantAqi.pm10, current.pollutantAqiLabel);
             this._addPollutantAqiRow(_('NO₂'), rawPollutants.nitrogenDioxide, pollutantAqi.nitrogenDioxide, current.pollutantAqiLabel);
             this._addPollutantAqiRow(_('O₃'), rawPollutants.ozone, pollutantAqi.ozone, current.pollutantAqiLabel);
             this._addPollutantAqiRow(_('SO₂'), rawPollutants.sulfurDioxide, pollutantAqi.sulfurDioxide, current.pollutantAqiLabel);
-        }
+        });
 
-        if (this.showAtmosphericIrritantsInPopup) {
-            this._addSectionTitle(_('Atmospheric irritants'));
+        this._addCollapsibleSection(_('Atmospheric irritants'), 'popupAtmosphericIrritantsExpanded', true, () => {
             this._addInfoRow(_('CO'), Formatter.formatCarbonMonoxide(rawPollutants.carbonMonoxide));
             this._addInfoRow(_('Dust'), Formatter.formatPollutant(context.dust));
             if (_isFiniteNumber(context.wildfirePm10))
@@ -1368,19 +1486,19 @@ class AirAwareApplet extends Applet.TextIconApplet {
                 _('Aerosol optical depth'),
                 Formatter.formatAerosolOpticalDepth(context.aerosolOpticalDepth)
             );
-        }
+        });
 
-        if (this.showMoldInPopup) {
-            this._addSectionTitle(_('Mold'));
+        this._addCollapsibleSection(_('Mold'), 'popupMoldExpanded', true, () => {
             this._addInfoRow(
                 _('Mold potential'),
                 Formatter.formatMoldPotential(current.moldPotential)
             );
-        }
+        });
 
-        if (this.showUvInPopup && _isFiniteNumber(current.uvIndex)) {
-            this._addSectionTitle(_('Sun'));
-            this._addInfoRow(_('UV index'), Formatter.formatUvIndex(current.uvIndex));
+        if (_isFiniteNumber(current.uvIndex)) {
+            this._addCollapsibleSection(_('Sun'), 'popupSunExpanded', false, () => {
+                this._addInfoRow(_('UV index'), Formatter.formatUvIndex(current.uvIndex));
+            });
         }
 
         this._addVegetationSection();
@@ -1410,7 +1528,6 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
     _addPersonalizedRiskSection() {
         if (!this.enablePersonalizedRisk ||
-            !this.showPersonalizedRiskInPopup ||
             !this._personalizedRisk)
             return;
 
@@ -1445,7 +1562,6 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
     _addVegetationSection() {
         if (!this.enableVegetationContext ||
-            !this.showVegetationInPopup ||
             !this._providerData ||
             !this._providerData.vegetation)
             return;
@@ -1495,20 +1611,20 @@ class AirAwareApplet extends Applet.TextIconApplet {
             });
         }
 
-        this._addSectionTitle(_('Nearby vegetation'));
+        this._addCollapsibleSection(_('Nearby vegetation'), 'popupVegetationExpanded', false, () => {
+            if (rows.length === 0) {
+                this._addTextBlock(
+                    _('No nearby vegetation features were found in OpenStreetMap.'),
+                    'airaware-muted'
+                );
+            } else {
+                for (const row of rows)
+                    this._addInfoRow(row.label, row.value);
+            }
 
-        if (rows.length === 0) {
-            this._addTextBlock(
-                _('No nearby vegetation features were found in OpenStreetMap.'),
-                'airaware-muted'
-            );
-        } else {
-            for (const row of rows)
-                this._addInfoRow(row.label, row.value);
-        }
-
-        if (this._providerData.vegetationStatus === 'stale')
-            this._addTextBlock(_('Showing cached OpenStreetMap vegetation context.'), 'airaware-muted');
+            if (this._providerData.vegetationStatus === 'stale')
+                this._addTextBlock(_('Showing cached OpenStreetMap vegetation context.'), 'airaware-muted');
+        });
 
     }
 
@@ -1579,9 +1695,9 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
         for (let index = 0; index < days.length; index++) {
             const day = days[index];
-            const risk = RiskCalculator.calculateRisk(day, day.moldPotential);
+            const risk = this._forecastRisks[index] || null;
             const label = this._formatForecastDayLabel(day, index);
-            const value = this._formatForecastValue(risk);
+            const value = risk ? this._formatForecastValue(risk) : _('Unavailable');
 
             this._addInfoRow(label, value);
         }
@@ -1616,6 +1732,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
         });
         const label = new St.Label({
             text: this._isRefreshing ? _('Refreshing...') : _('Refresh now'),
+            style_class: 'airaware-refresh-label',
         });
         const ageLabel = this._formatRefreshActionAgeLabel();
 
@@ -1651,11 +1768,18 @@ class AirAwareApplet extends Applet.TextIconApplet {
     }
 
     _formatRefreshActionAgeLabel() {
-        if (!this._providerData || !_isFiniteNumber(this._providerData.fetchedAt))
+        if (!this._providerData)
+            return null;
+
+        const updatedAt = _isFiniteNumber(this._providerData.airQualityFetchedAt)
+            ? this._providerData.airQualityFetchedAt
+            : this._providerData.fetchedAt;
+
+        if (!_isFiniteNumber(updatedAt))
             return null;
 
         return _replace(_('({updated})'), {
-            updated: Formatter.formatUpdateAge(this._providerData.fetchedAt),
+            updated: Formatter.formatUpdateAge(updatedAt),
         });
     }
 
@@ -1668,9 +1792,10 @@ class AirAwareApplet extends Applet.TextIconApplet {
             style_class: 'airaware-title',
         });
 
+        this._useMutedMenuText(item);
         label.clutter_text.line_wrap = true;
         item.addActor(label);
-        this.menu.addMenuItem(item);
+        this._addMenuItem(item);
     }
 
     _addTextBlock(text, styleClass) {
@@ -1682,9 +1807,10 @@ class AirAwareApplet extends Applet.TextIconApplet {
             style_class: styleClass,
         });
 
+        this._useMutedMenuText(item);
         label.clutter_text.line_wrap = true;
         item.addActor(label);
-        this.menu.addMenuItem(item);
+        this._addMenuItem(item);
     }
 
     _addScoreSummary(risk, options = {}) {
@@ -1701,7 +1827,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
         });
         const score = new St.Label({
             text: Formatter.formatScore(risk.score),
-            style_class: 'airaware-score-value',
+            style_class: 'airaware-score-value airaware-column-label',
         });
         const category = new St.Label({
             text: Formatter.formatCategory(risk.category),
@@ -1715,7 +1841,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
         if (showLocation) {
             const location = new St.Label({
                 text: this._formatLocationLabel(),
-                style_class: 'airaware-score-place',
+                style_class: 'airaware-score-place airaware-column-value',
             });
 
             location.clutter_text.line_wrap = true;
@@ -1725,7 +1851,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
         box.add(topRow);
         box.add(category);
         item.addActor(box);
-        this.menu.addMenuItem(item);
+        this._addMenuItem(item);
     }
 
     _addInfoRow(label, value) {
@@ -1737,19 +1863,20 @@ class AirAwareApplet extends Applet.TextIconApplet {
         });
         const labelActor = new St.Label({
             text: label,
-            style_class: 'airaware-row-label',
+            style_class: 'airaware-row-label airaware-column-label',
         });
         const valueActor = new St.Label({
             text: value,
-            style_class: 'airaware-row-value',
+            style_class: 'airaware-row-value airaware-column-value',
         });
 
+        this._useMutedMenuText(item);
         labelActor.clutter_text.line_wrap = true;
         valueActor.clutter_text.line_wrap = true;
         box.add(labelActor);
         box.add(valueActor);
         item.addActor(box);
-        this.menu.addMenuItem(item);
+        this._addMenuItem(item);
     }
 
     _addPollutantAqiRow(label, rawValue, aqiValue, aqiSourceLabel) {
@@ -1761,7 +1888,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
         });
         const labelActor = new St.Label({
             text: label,
-            style_class: 'airaware-row-label',
+            style_class: 'airaware-row-label airaware-column-label',
         });
         const rawActor = new St.Label({
             text: Formatter.formatPollutant(rawValue),
@@ -1772,6 +1899,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
             style_class: 'airaware-aqi-value',
         });
 
+        this._useMutedMenuText(item);
         labelActor.clutter_text.line_wrap = true;
         rawActor.clutter_text.line_wrap = true;
         aqiActor.clutter_text.line_wrap = false;
@@ -1779,7 +1907,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
         box.add(rawActor);
         box.add(aqiActor);
         item.addActor(box);
-        this.menu.addMenuItem(item);
+        this._addMenuItem(item);
     }
 }
 

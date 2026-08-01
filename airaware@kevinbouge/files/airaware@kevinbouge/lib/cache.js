@@ -397,7 +397,7 @@ function _readJsonFileAsync(path, callback) {
 
 function _writeJsonFileAsync(path, value, callback) {
     const file = Gio.File.new_for_path(path);
-    const contents = `${JSON.stringify(value, null, 2)}\n`;
+    const contents = `${JSON.stringify(value)}\n`;
     const cancellable = Gio.Cancellable.new();
     const bytes = new GLib.Bytes(ByteArray.fromString(contents));
 
