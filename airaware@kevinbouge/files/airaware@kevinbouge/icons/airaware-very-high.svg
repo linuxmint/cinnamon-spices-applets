@@ -21,11 +21,11 @@
   <!-- Center respirator -->
   <circle cx="8" cy="9.7" r="2.1"
           fill="#454C55" stroke="#E05252" stroke-width="1"/>
-  <circle cx="8" cy="9.7" r=".35" fill="currentColor"/>
-  <circle cx="7" cy="9.2" r=".28" fill="currentColor"/>
-  <circle cx="9" cy="9.2" r=".28" fill="currentColor"/>
-  <circle cx="7.2" cy="10.3" r=".28" fill="currentColor"/>
-  <circle cx="8.8" cy="10.3" r=".28" fill="currentColor"/>
+  <circle cx="8" cy="9.7" r=".35" fill="#E05252"/>
+  <circle cx="7" cy="9.2" r=".28" fill="#E05252"/>
+  <circle cx="9" cy="9.2" r=".28" fill="#E05252"/>
+  <circle cx="7.2" cy="10.3" r=".28" fill="#E05252"/>
+  <circle cx="8.8" cy="10.3" r=".28" fill="#E05252"/>
 
   <!-- Side filters -->
   <path d="M3.8 8.1 2.1 8.8l.7 3.4 2.3-.8Z"
