@@ -95,6 +95,14 @@
     opacity: 0.72;
 }
 
-.airaware-refresh-content {
+.airaware-action-content {
     spacing: 12px;
+}
+
+.airaware-action-icon-slot {
+    min-width: 16px;
+}
+
+.airaware-action-emoji {
+    font-size: 1em;
 }

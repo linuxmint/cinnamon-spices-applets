@@ -24,20 +24,34 @@ const WEEKDAY_LABELS = [
     'Friday',
     'Saturday',
 ];
+const MONTH_LABELS = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+];
 
 /*
  * TODO roadmap:
  * - manual location search/geocoding
  * - multiple saved locations
- * - hourly forecast
  * - multiple providers
  * - custom weighting
- * - personal allergens
  * - graphs
  */
 
 let _uuid = DEFAULT_UUID;
 let Cache = null;
+let DailySummaryBuilder = null;
+let DailySummaryFormatter = null;
 let EnvironmentAssembler = null;
 let Formatter = null;
 let LocationService = null;
@@ -53,6 +67,31 @@ let RiskCalculator = null;
 
 function _(text) {
     return Gettext.dgettext(_uuid, text);
+}
+
+function _markDateStringsForExtraction() {
+    return [
+        _('Sunday'),
+        _('Monday'),
+        _('Tuesday'),
+        _('Wednesday'),
+        _('Thursday'),
+        _('Friday'),
+        _('Saturday'),
+        _('January'),
+        _('February'),
+        _('March'),
+        _('April'),
+        _('May'),
+        _('June'),
+        _('July'),
+        _('August'),
+        _('September'),
+        _('October'),
+        _('November'),
+        _('December'),
+        _('{weekday}, {day} {month}'),
+    ];
 }
 
 function _replace(template, replacements) {
@@ -107,6 +146,8 @@ function _loadLocalModules(metadata) {
     imports.searchPath.unshift(GLib.build_filenamev([metadata.path, 'lib']));
 
     Cache = imports.cache;
+    DailySummaryBuilder = imports.dailySummaryBuilder;
+    DailySummaryFormatter = imports.dailySummaryFormatter;
     EnvironmentAssembler = imports.environmentAssembler;
     Formatter = imports.formatter;
     LocationService = imports.locationService;
@@ -121,6 +162,7 @@ function _loadLocalModules(metadata) {
     RiskCalculator = imports.riskCalculator;
 
     Formatter.setTranslator(_);
+    DailySummaryFormatter.setTranslator(_);
 }
 
 function _nowMs() {
@@ -173,6 +215,8 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this.panelScoreMode = 'environmental';
         this.outdoorWindowDurationHours = 2;
         this.usePersonalizedNotifications = false;
+        this.dailySummaryScoreMode = 'environmental';
+        this.dailySummaryLocationMode = 'place';
         this.popupPollenExpanded = true;
         this.popupRegulatedPollutionExpanded = true;
         this.popupAtmosphericIrritantsExpanded = true;
@@ -243,6 +287,10 @@ class AirAwareApplet extends Applet.TextIconApplet {
             () => this._onSettingsChanged());
         this.settings.bind('outdoor-window-duration', 'outdoorWindowDurationHours',
             () => this._onSettingsChanged());
+        this.settings.bind('daily-summary-score', 'dailySummaryScoreMode',
+            () => this._onSummarySettingsChanged());
+        this.settings.bind('daily-summary-location', 'dailySummaryLocationMode',
+            () => this._onSummarySettingsChanged());
         this.settings.bind('profile-pollen-alder', 'profilePollenAlder',
             () => this._onSettingsChanged());
         this.settings.bind('profile-pollen-birch', 'profilePollenBirch',
@@ -300,6 +348,12 @@ class AirAwareApplet extends Applet.TextIconApplet {
         );
         this.outdoorWindowDurationHours = this._normalizeOutdoorWindowDuration(
             this.outdoorWindowDurationHours
+        );
+        this.dailySummaryScoreMode = this._normalizeDailySummaryScoreMode(
+            this.dailySummaryScoreMode
+        );
+        this.dailySummaryLocationMode = this._normalizeDailySummaryLocationMode(
+            this.dailySummaryLocationMode
         );
         this._locationSettingsSignature = this._getLocationSettingsSignature();
         this._personalizedCalculationSignature = this._getPersonalizedCalculationSignature();
@@ -399,6 +453,19 @@ class AirAwareApplet extends Applet.TextIconApplet {
             this._refreshData(false);
     }
 
+    _onSummarySettingsChanged() {
+        if (this._destroyed)
+            return;
+
+        this.dailySummaryScoreMode = this._normalizeDailySummaryScoreMode(
+            this.dailySummaryScoreMode
+        );
+        this.dailySummaryLocationMode = this._normalizeDailySummaryLocationMode(
+            this.dailySummaryLocationMode
+        );
+        this._rebuildMenu();
+    }
+
     _normalizeRefreshInterval(value) {
         const allowed = [30, 60, 120, 240, 360];
         const numericValue = Number(value);
@@ -435,6 +502,14 @@ class AirAwareApplet extends Applet.TextIconApplet {
             return numericValue;
 
         return 2;
+    }
+
+    _normalizeDailySummaryScoreMode(value) {
+        return value === 'personalized' ? 'personalized' : 'environmental';
+    }
+
+    _normalizeDailySummaryLocationMode(value) {
+        return value === 'hidden' ? 'hidden' : 'place';
     }
 
     _getLocationSettingsSignature() {
@@ -1345,6 +1420,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
             if (!this._providerData || !this._currentRisk) {
                 this._addEmptyState();
                 this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+                this._addShareSummaryAction();
                 this._addRefreshAction();
                 return;
             }
@@ -1355,6 +1431,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
                 this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             this._addForecastSection();
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            this._addShareSummaryAction();
             this._addRefreshAction();
         } finally {
             this._isRebuildingMenu = false;
@@ -1721,28 +1798,18 @@ class AirAwareApplet extends Applet.TextIconApplet {
     }
 
     _addRefreshAction() {
-        const refreshItem = new PopupMenu.PopupBaseMenuItem();
-        const icon = new St.Icon({
-            icon_name: 'xsi-view-refresh',
-            icon_type: St.IconType.SYMBOLIC,
-            style_class: 'popup-menu-icon',
-        });
-        const content = new St.BoxLayout({
-            style_class: 'airaware-refresh-content',
-        });
-        const label = new St.Label({
-            text: this._isRefreshing ? _('Refreshing...') : _('Refresh now'),
-            style_class: 'airaware-refresh-label',
+        const refreshItem = this._createBottomActionItem({
+            iconName: 'xsi-view-refresh',
+            labelText: this._isRefreshing ? _('Refreshing...') : _('Refresh now'),
+            labelStyleClass: 'airaware-refresh-label',
+            onActivate: () => {
+                this._refreshData(true);
+            },
         });
         const ageLabel = this._formatRefreshActionAgeLabel();
+        const content = refreshItem._airawareContent;
 
-        refreshItem.connect('activate', () => {
-            this._refreshData(true);
-        });
-
-        content.add(label);
-
-        if (ageLabel !== null) {
+        if (ageLabel !== null && content) {
             const spacer = new St.Widget();
             const age = new St.Label({
                 text: ageLabel,
@@ -1757,14 +1824,182 @@ class AirAwareApplet extends Applet.TextIconApplet {
             content.add(age);
         }
 
-        refreshItem.addActor(icon, {
+        this.menu.addMenuItem(refreshItem);
+    }
+
+    _addShareSummaryAction() {
+        const shareItem = this._createBottomActionItem({
+            iconText: '😷',
+            labelText: _('Share daily summary'),
+            labelStyleClass: 'airaware-refresh-label',
+            onActivate: () => {
+                this._shareDailySummary();
+            },
+        });
+
+        this.menu.addMenuItem(shareItem);
+    }
+
+    _createBottomActionItem(options) {
+        const item = new PopupMenu.PopupBaseMenuItem();
+        const iconSlot = new St.Bin({
+            style_class: 'airaware-action-icon-slot',
+        });
+        const content = new St.BoxLayout({
+            style_class: 'airaware-action-content',
+        });
+        const label = new St.Label({
+            text: options.labelText,
+            style_class: options.labelStyleClass || '',
+        });
+
+        if (typeof options.iconText === 'string') {
+            iconSlot.child = new St.Label({
+                text: options.iconText,
+                style_class: 'airaware-action-emoji',
+            });
+        } else {
+            iconSlot.child = new St.Icon({
+                icon_name: options.iconName,
+                icon_type: St.IconType.SYMBOLIC,
+                style_class: 'popup-menu-icon',
+            });
+        }
+
+        item.connect('activate', options.onActivate);
+        content.add(label);
+        item.addActor(iconSlot, {
             span: 0,
         });
-        refreshItem.addActor(content, {
+        item.addActor(content, {
             expand: true,
             span: -1,
         });
-        this.menu.addMenuItem(refreshItem);
+        item._airawareContent = content;
+
+        return item;
+    }
+
+    _shareDailySummary() {
+        const summary = this._buildDailySummaryModel();
+
+        if (!summary || summary.available !== true) {
+            Main.notify(_('AirAware'), _('No environmental data is available to share.'));
+            return;
+        }
+
+        const text = DailySummaryFormatter.formatDailySummary(summary);
+
+        if (typeof text !== 'string' || text.trim() === '') {
+            Main.notify(_('AirAware'), _('No environmental data is available to share.'));
+            return;
+        }
+
+        if (this._copyTextToClipboard(text))
+            Main.notify(_('AirAware'), _('Daily summary copied to clipboard.'));
+        else
+            Main.notify(_('AirAware'), _('Could not copy the daily summary.'));
+    }
+
+    _copyTextToClipboard(text) {
+        try {
+            const clipboard = St.Clipboard.get_default();
+
+            if (!clipboard || typeof clipboard.set_text !== 'function')
+                return false;
+
+            clipboard.set_text(St.ClipboardType.CLIPBOARD, text);
+            return true;
+        } catch (error) {
+            this._logError(error);
+            return false;
+        }
+    }
+
+    _buildDailySummaryModel() {
+        if (!this._providerData || !this._currentRisk)
+            return {
+                available: false,
+                reason: 'no_environmental_data',
+            };
+
+        return DailySummaryBuilder.buildDailySummary({
+            providerData: this._providerData,
+            environmentalRisk: this._currentRisk,
+            personalizedRisk: this._personalizedRisk,
+            personalizedForecast: this._personalizedForecast,
+            panelScoreMode: this.panelScoreMode,
+            summaryScore: this.dailySummaryScoreMode,
+            includeMainFactor: true,
+            includeBestOutdoorWindow: true,
+            includeUvPeak: true,
+            locationName: this.dailySummaryLocationMode === 'hidden'
+                ? null
+                : this._summaryLocationName(),
+            locationHidden: this.dailySummaryLocationMode === 'hidden',
+            stale: this._usingStaleData === true,
+            dateLabel: this._formatDailySummaryDateLabel(
+                this._providerData.current
+                    ? this._providerData.current.timestamp || this._providerData.current.time || null
+                    : null
+            ),
+            generatedAt: this._providerData.current
+                ? this._providerData.current.timestamp || this._providerData.current.time || null
+                : null,
+        });
+    }
+
+    _summaryLocationName() {
+        if (typeof this._locationDisplayName === 'string' &&
+            this._locationDisplayName.trim() !== '')
+            return this._locationDisplayName.trim();
+
+        return null;
+    }
+
+    _formatDailySummaryDateLabel(timeText = null) {
+        const date = this._dateFromProviderTime(timeText) || new Date();
+        const weekday = _(WEEKDAY_LABELS[date.getDay()]);
+        const month = _(MONTH_LABELS[date.getMonth()]);
+
+        return _replace(_('{weekday}, {day} {month}'), {
+            weekday,
+            day: date.getDate(),
+            month,
+        });
+    }
+
+    _dateFromProviderTime(timeText) {
+        if (typeof timeText !== 'string' || timeText.length < 10)
+            return null;
+
+        const dateText = timeText.substring(0, 10);
+        const parts = dateText.split('-');
+
+        if (parts.length !== 3)
+            return null;
+
+        const year = Number(parts[0]);
+        const month = Number(parts[1]);
+        const day = Number(parts[2]);
+
+        if (!Number.isInteger(year) ||
+            !Number.isInteger(month) ||
+            !Number.isInteger(day) ||
+            month < 1 ||
+            month > 12 ||
+            day < 1 ||
+            day > 31)
+            return null;
+
+        const date = new Date(year, month - 1, day);
+
+        if (date.getFullYear() !== year ||
+            date.getMonth() !== month - 1 ||
+            date.getDate() !== day)
+            return null;
+
+        return date;
     }
 
     _formatRefreshActionAgeLabel() {

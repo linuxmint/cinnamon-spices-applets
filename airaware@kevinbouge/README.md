@@ -22,6 +22,7 @@ AirAware reports environmental conditions only. It does not predict symptoms, di
 - Optional nearby vegetation context from OpenStreetMap mapped vegetation and land-use data, with popup details hidden by default
 - Optional Personal Allergy Profile for a separate personalized environmental risk score
 - Best outdoor window based on the next 24 hours of selected Personal Allergy Profile factors
+- Share Daily Summary action that copies a compact 😷 AirAware plain-text summary to the clipboard
 - Forecast for today, tomorrow, and the next listed day
 - Cache fallback for coordinates, place names, nearby vegetation context, and the last successful environmental data response
 - Stale data indicator when current data cannot be refreshed
@@ -64,6 +65,8 @@ AirAware provides these Cinnamon settings:
 - Popup section visibility for pollen, regulated pollution, atmospheric irritants, Mold potential, UV index, personalized risk, and vegetation details
 - Show UV index in popup: disabled by default
 - Preferred outdoor window duration: 1, 2, or 3 hours
+- Daily summary score: Environmental burden or Personalized risk
+- Daily summary location privacy
 - Optional personalized-score notifications, disabled by default
 - Show or hide the panel label
 - Notifications: disabled, High + Very High, or Very High only
@@ -86,6 +89,8 @@ When nearby vegetation context is enabled, latitude and longitude are sent to th
 Personal Allergy Profile selections are stored only in local Cinnamon settings. They are not sent to Open-Meteo, OpenStreetMap, or any other data provider.
 
 Best outdoor-window selection is calculated locally. AirAware does not send Personal Allergy Profile selections, personalized scores, or outdoor-window preferences to any provider.
+
+Daily summaries are generated locally and copied directly to the system clipboard. AirAware does not upload shared summaries, coordinates, or Personal Allergy Profile settings.
 
 ## Data Sources
 
@@ -142,6 +147,14 @@ UV index can optionally be included in the personalized score. UV does not modif
 
 AirAware can identify the lowest-risk outdoor window during the next 24 hours based on the environmental factors selected in the Personal Allergy Profile.
 
+## Share Daily Summary
+
+AirAware can generate a compact, emoji-formatted daily summary suitable for messaging apps and social media.
+
+The summary can include the selected score, main environmental factor, best outdoor window, UV peak, and location. The summary uses the 😷 mask emoji as the AirAware plain-text identifier.
+
+Summaries are generated locally and copied directly to the system clipboard. AirAware does not upload shared summaries.
+
 Panel icon line colors follow the current score category:
 
 - Low: green
@@ -166,6 +179,7 @@ Panel icon line colors follow the current score category:
 - A selected Personal Allergy Profile factor may be unavailable because of region, season, model coverage, or upstream data availability. Missing values are omitted rather than treated as zero.
 - The Personal Allergy Profile uses AirAware's environmental burden weighting across selected factors. It does not model clinical sensitivity or reaction severity.
 - The outdoor-window recommendation is based only on available selected environmental variables. It does not guarantee safe or symptom-free conditions.
+- Shared summaries reflect model-based environmental conditions available when the summary is generated. They do not predict symptoms or guarantee safe conditions.
 - Place names depend on OpenStreetMap Nominatim availability and may occasionally be approximate.
 - Nearby vegetation context depends on OpenStreetMap mapping coverage and Overpass availability.
 - OpenStreetMap vegetation coverage varies by region. Missing mapped features do not mean that the vegetation is absent.
@@ -180,6 +194,8 @@ Panel icon line colors follow the current score category:
 - `lib/openStreetMapVegetationProvider.js`: Overpass query construction, Soup async fetch, and normalized nearby vegetation context.
 - `lib/personalAllergyProfile.js`: local Personal Allergy Profile schema, defaults, and settings normalization.
 - `lib/personalizedRiskCalculator.js`: personalized environmental risk scoring from selected available factors.
+- `lib/dailySummaryBuilder.js`: canonical local model selection for shareable daily summaries.
+- `lib/dailySummaryFormatter.js`: compact plain-text summary formatting and emoji mapping.
 - `lib/moldPotentialCalculator.js`: weather-based Mold potential scoring.
 - `lib/environmentAssembler.js`: combines independently refreshed air-quality, weather, vegetation, cache, and mold data.
 - `lib/reverseGeocoder.js`: Nominatim reverse-geocoding URL construction, Soup async fetch, and place-name parsing.
