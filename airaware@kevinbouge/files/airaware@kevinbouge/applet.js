@@ -183,6 +183,8 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this.profileNitrogenDioxide = true;
         this.profileOzone = true;
         this.profileSulphurDioxide = true;
+        this.profileCarbonMonoxide = true;
+        this.profileAerosolOpticalDepth = true;
         this.profileDust = true;
         this.profileWildfirePm10 = true;
         this.locationMode = 'automatic';
@@ -263,6 +265,10 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this.settings.bind('profile-ozone', 'profileOzone',
             () => this._onSettingsChanged());
         this.settings.bind('profile-sulphur-dioxide', 'profileSulphurDioxide',
+            () => this._onSettingsChanged());
+        this.settings.bind('profile-carbon-monoxide', 'profileCarbonMonoxide',
+            () => this._onSettingsChanged());
+        this.settings.bind('profile-aerosol-optical-depth', 'profileAerosolOpticalDepth',
             () => this._onSettingsChanged());
         this.settings.bind('profile-dust', 'profileDust',
             () => this._onSettingsChanged());

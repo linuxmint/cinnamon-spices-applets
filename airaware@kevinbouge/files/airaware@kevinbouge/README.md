@@ -91,9 +91,9 @@ Nearby vegetation context is displayed separately and does not modify the AirAwa
 
 AirAware can optionally calculate a personalized environmental risk score using only the environmental factors selected in settings.
 
-The profile can include individual pollen types, Mold potential, regulated pollutants, atmospheric dust, and smoke-related particulate context when available. The original AirAware environmental burden score remains available and is not changed by the profile.
+The profile can include individual pollen types, Mold potential, regulated pollutants, carbon monoxide, aerosol optical depth, atmospheric dust, and smoke-related particulate context when available. The original AirAware environmental burden score remains available and is not changed by the profile.
 
-The first implementation uses equal weighting across selected factors with available data. Unavailable selected factors are omitted and the remaining factors are renormalized. Disabled factors are not treated as environmentally absent.
+The personalized score reuses the same burden calculations as the environmental score, but only for selected factors. Selected pollen and regulated-pollution factors use the highest available burden in their group, atmospheric irritants keep their internal weighting, and selected top-level groups are renormalized when data is unavailable. Disabled factors are not treated as environmentally absent.
 
 Profile selections are stored only in local Cinnamon settings and are not sent to environmental data providers.
 
@@ -170,7 +170,7 @@ Vegetation and land-use data: OpenStreetMap contributors.
 - AQI values should not be described as medical advice.
 - AirAware does not account for personal sensitivity, medication, indoor exposure, masks, activity level, or clinical history.
 - A selected Personal Allergy Profile factor may be unavailable because of region, season, model coverage, or upstream data availability. Missing values are omitted rather than treated as zero.
-- The initial Personal Allergy Profile uses equal weighting across selected factors with available data. It does not model clinical sensitivity or reaction severity.
+- The Personal Allergy Profile uses AirAware's environmental burden weighting across selected factors. It does not model clinical sensitivity or reaction severity.
 - Nearby vegetation context depends on OpenStreetMap mapping coverage and Overpass availability.
 - OpenStreetMap vegetation coverage varies by region. Missing mapped features do not mean that the vegetation is absent.
 - Mapped birch, alder, and olive entries require explicit taxonomy tags in OpenStreetMap and do not imply current flowering or pollen production.

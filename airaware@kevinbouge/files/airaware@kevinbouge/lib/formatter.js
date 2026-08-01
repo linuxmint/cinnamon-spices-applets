@@ -125,8 +125,6 @@ function _markTranslatableStringsForExtraction() {
         _('Updated 1 min ago'),
         _('1 selected factor is unavailable'),
         _('Personalized risk unavailable'),
-        _('Personalized risk: {category} ({score})'),
-        _('Personalized risk: {category} ({score}) — cached data'),
         _('Environmental burden: {category} ({score})\nPersonalized risk unavailable'),
         _('Environmental burden: {category} ({score}) — cached data\nPersonalized risk unavailable'),
         _('{category} ({score})'),
@@ -572,11 +570,11 @@ var formatPersonalizedTooltip = function(risk, mode, stale) {
 
     if (mode === 'personalized') {
         return stale
-            ? _replace(_translate('Personalized risk: {category} ({score}) — cached data'), {
+            ? _replace(_translate('{category} ({score}) — cached data'), {
                 category,
                 score,
             })
-            : _replace(_translate('Personalized risk: {category} ({score})'), {
+            : _replace(_translate('{category} ({score})'), {
                 category,
                 score,
             });

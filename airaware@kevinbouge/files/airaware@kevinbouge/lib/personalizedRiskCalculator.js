@@ -1,5 +1,6 @@
 /* exported calculatePersonalizedRisk */
 
+const Constants = imports.constants;
 const Profile = imports.personalAllergyProfile;
 const RiskCalculator = imports.riskCalculator;
 
@@ -52,6 +53,14 @@ const FACTOR_DEFINITIONS = Object.freeze({
         group: 'regulatedPollution',
         field: 'sulfurDioxide',
     }),
+    carbon_monoxide: Object.freeze({
+        group: 'atmosphericContext',
+        field: 'carbonMonoxide',
+    }),
+    aerosol_optical_depth: Object.freeze({
+        group: 'atmosphericContext',
+        field: 'aerosolOpticalDepth',
+    }),
     dust: Object.freeze({
         group: 'atmosphericContext',
         field: 'dust',
@@ -90,7 +99,7 @@ function _unavailableResult(reason, profile, factors = []) {
         factors,
         contributors: [],
         calculation: {
-            method: 'equal_available_factor_weighting',
+            method: 'selected_group_weighting',
             renormalized: false,
         },
     };
@@ -117,11 +126,170 @@ function _factorBurden(factorId, input, moldPotential) {
     return null;
 }
 
+function _highestGroupResult(name, factors) {
+    let dominant = null;
+
+    for (const factor of factors) {
+        if (!factor.available)
+            continue;
+
+        if (dominant === null || factor.burden > dominant.score) {
+            dominant = {
+                id: factor.id,
+                field: factor.field,
+                score: factor.burden,
+                category: factor.category,
+            };
+        }
+    }
+
+    if (dominant === null)
+        return null;
+
+    return {
+        name,
+        score: dominant.score,
+        category: dominant.category,
+        dominant,
+    };
+}
+
+function _regulatedGroupResult(factors) {
+    const aqiFactors = factors.filter(factor =>
+        factor.available &&
+        factor.source !== 'raw-concentration-fallback'
+    );
+
+    if (aqiFactors.length > 0)
+        return _highestGroupResult('regulatedPollution', aqiFactors);
+
+    return _highestGroupResult('regulatedPollution', factors);
+}
+
+function _atmosphericContextGroupResult(factors) {
+    let weightedScore = 0;
+    let availableWeight = 0;
+    let effectiveWeights = {};
+
+    for (const factor of factors) {
+        const weight = Constants.ATMOSPHERIC_CONTEXT_WEIGHTS[factor.field] || 0;
+
+        if (!factor.available || weight <= 0) {
+            effectiveWeights[factor.field] = 0;
+            continue;
+        }
+
+        weightedScore += factor.burden * weight;
+        availableWeight += weight;
+    }
+
+    if (availableWeight <= 0)
+        return null;
+
+    for (const factor of factors) {
+        const weight = Constants.ATMOSPHERIC_CONTEXT_WEIGHTS[factor.field] || 0;
+        effectiveWeights[factor.field] = factor.available && weight > 0
+            ? weight / availableWeight
+            : 0;
+    }
+
+    const score = _clampScore(weightedScore / availableWeight);
+
+    return {
+        name: 'atmosphericContext',
+        score,
+        category: RiskCalculator.categoryFromScore(score),
+        effectiveWeights,
+    };
+}
+
+function _groupResult(name, factors) {
+    if (name === 'pollen')
+        return _highestGroupResult(name, factors);
+
+    if (name === 'regulatedPollution')
+        return _regulatedGroupResult(factors);
+
+    if (name === 'atmosphericContext')
+        return _atmosphericContextGroupResult(factors);
+
+    if (name === 'mold')
+        return _highestGroupResult(name, factors);
+
+    return null;
+}
+
+function _groupWeight(name) {
+    if (name === 'pollen')
+        return Constants.RISK_WEIGHTS.pollen;
+
+    if (name === 'regulatedPollution')
+        return Constants.RISK_WEIGHTS.particulates;
+
+    if (name === 'atmosphericContext')
+        return Constants.RISK_WEIGHTS.irritants;
+
+    if (name === 'mold')
+        return Constants.RISK_WEIGHTS.mold;
+
+    return 0;
+}
+
+function _calculateGroupedScore(factors) {
+    const groupNames = ['pollen', 'regulatedPollution', 'atmosphericContext', 'mold'];
+    let weightedScore = 0;
+    let availableWeight = 0;
+    let configuredSelectedWeight = 0;
+    let groups = {};
+    let effectiveWeights = {};
+
+    for (const name of groupNames) {
+        const selectedFactors = factors.filter(factor => factor.group === name);
+
+        if (selectedFactors.length === 0) {
+            effectiveWeights[name] = 0;
+            continue;
+        }
+
+        const weight = _groupWeight(name);
+        configuredSelectedWeight += weight;
+        const result = _groupResult(name, selectedFactors);
+
+        groups[name] = result;
+
+        if (result === null) {
+            effectiveWeights[name] = 0;
+            continue;
+        }
+
+        weightedScore += result.score * weight;
+        availableWeight += weight;
+    }
+
+    if (availableWeight <= 0)
+        return null;
+
+    for (const name of groupNames)
+        effectiveWeights[name] = groups[name] === null || groups[name] === undefined
+            ? 0
+            : _groupWeight(name) / availableWeight;
+
+    return {
+        score: _clampScore(weightedScore / availableWeight),
+        groups,
+        effectiveWeights,
+        renormalized: availableWeight < configuredSelectedWeight ||
+            configuredSelectedWeight < 1,
+    };
+}
+
 /**
  * Calculate personalized environmental risk from selected profile factors.
  *
- * Disabled and unavailable factors are omitted from the equal-weighted score.
- * Missing data is never treated as zero.
+ * Disabled factors are omitted. Available selected factors are combined with
+ * the same group model as the environmental burden score, then renormalized
+ * when selected groups or provider values are unavailable. Missing data is
+ * never treated as zero.
  *
  * @param {Object} input - Current or forecast environmental data.
  * @param {Object|null} moldPotential - Mold-potential result.
@@ -146,6 +314,7 @@ var calculatePersonalizedRisk = function(input, moldPotential, profileInput) {
         if (!selected)
             continue;
 
+        const definition = FACTOR_DEFINITIONS[factorId];
         const burden = _factorBurden(factorId, input, moldPotential);
         const available = burden !== null &&
             burden.available === true &&
@@ -154,6 +323,8 @@ var calculatePersonalizedRisk = function(input, moldPotential, profileInput) {
             id: factorId,
             selected: true,
             available,
+            group: definition.group,
+            field: definition.field,
             burden: available ? _clampScore(burden.burden) : null,
             value: available ? burden.value : null,
             unit: available ? burden.unit : null,
@@ -172,8 +343,12 @@ var calculatePersonalizedRisk = function(input, moldPotential, profileInput) {
     if (availableFactors.length === 0)
         return _unavailableResult('no_available_factors', profile, factors);
 
-    const total = availableFactors.reduce((sum, factor) => sum + factor.burden, 0);
-    const score = _clampScore(total / availableFactors.length);
+    const calculation = _calculateGroupedScore(factors);
+
+    if (calculation === null)
+        return _unavailableResult('no_available_factors', profile, factors);
+
+    const score = calculation.score;
     const displayScore = Math.round(score);
     const missingFactorCount = factors.length - availableFactors.length;
     const contributors = availableFactors.slice().sort((left, right) => {
@@ -195,8 +370,10 @@ var calculatePersonalizedRisk = function(input, moldPotential, profileInput) {
         factors,
         contributors,
         calculation: {
-            method: 'equal_available_factor_weighting',
-            renormalized: missingFactorCount > 0,
+            method: 'selected_group_weighting',
+            renormalized: missingFactorCount > 0 || calculation.renormalized,
+            effectiveWeights: calculation.effectiveWeights,
+            groups: calculation.groups,
         },
     };
 };

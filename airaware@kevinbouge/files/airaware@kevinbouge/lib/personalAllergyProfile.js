@@ -16,6 +16,8 @@ var FACTOR_IDS = Object.freeze([
     'nitrogen_dioxide',
     'ozone',
     'sulphur_dioxide',
+    'carbon_monoxide',
+    'aerosol_optical_depth',
     'dust',
     'wildfire_pm10',
 ]);
@@ -33,6 +35,8 @@ var DEFAULT_ENABLED_FACTORS = Object.freeze({
     nitrogen_dioxide: true,
     ozone: true,
     sulphur_dioxide: true,
+    carbon_monoxide: true,
+    aerosol_optical_depth: true,
     dust: true,
     wildfire_pm10: true,
 });
@@ -97,6 +101,8 @@ var profileFromSettings = function(settings = {}) {
             nitrogen_dioxide: source.profileNitrogenDioxide !== false,
             ozone: source.profileOzone !== false,
             sulphur_dioxide: source.profileSulphurDioxide !== false,
+            carbon_monoxide: source.profileCarbonMonoxide !== false,
+            aerosol_optical_depth: source.profileAerosolOpticalDepth !== false,
             dust: source.profileDust !== false,
             wildfire_pm10: source.profileWildfirePm10 !== false,
         },

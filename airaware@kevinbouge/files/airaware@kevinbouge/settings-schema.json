@@ -56,6 +56,8 @@
                 "profile-nitrogen-dioxide",
                 "profile-ozone",
                 "profile-sulphur-dioxide",
+                "profile-carbon-monoxide",
+                "profile-aerosol-optical-depth",
                 "profile-dust",
                 "profile-wildfire-pm10"
             ]
@@ -233,6 +235,16 @@
         "type": "switch",
         "default": true,
         "description": "Sulphur dioxide"
+    },
+    "profile-carbon-monoxide": {
+        "type": "switch",
+        "default": true,
+        "description": "Carbon monoxide"
+    },
+    "profile-aerosol-optical-depth": {
+        "type": "switch",
+        "default": true,
+        "description": "Particle haze (aerosol optical depth)"
     },
     "profile-dust": {
         "type": "switch",

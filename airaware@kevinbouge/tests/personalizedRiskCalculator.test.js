@@ -5,6 +5,7 @@ imports.searchPath.unshift('lib');
 
 const Profile = imports.personalAllergyProfile;
 const PersonalizedRiskCalculator = imports.personalizedRiskCalculator;
+const RiskCalculator = imports.riskCalculator;
 
 function assertEqual(actual, expected, message) {
     if (actual !== expected)
@@ -116,14 +117,14 @@ function testOneAvailableSelectedFactor() {
         'personalized category should use AirAware risk categories');
 }
 
-function testMultipleFactorsUseEqualWeighting() {
+function testMultipleFactorsUseSelectedGroupWeighting() {
     const result = calculate(['pollen_grass', 'mold', 'pm2_5']);
 
-    assertNear(result.score, (72 + 50 + 30) / 3, 0.001,
-        'available selected factors should be equally weighted');
-    assertEqual(result.displayScore, 51,
+    assertNear(result.score, ((72 * 0.5) + (50 * 0.15) + (30 * 0.25)) / 0.9, 0.001,
+        'available selected factors should use selected AirAware group weights');
+    assertEqual(result.displayScore, 57,
         'display score should round like the existing formatter convention');
-    assertEqual(result.calculation.method, 'equal_available_factor_weighting',
+    assertEqual(result.calculation.method, 'selected_group_weighting',
         'calculation method should be exposed');
 }
 
@@ -144,10 +145,28 @@ function testUnavailableSelectedFactorIsOmitted() {
         'unavailable selected factor should be omitted');
     assertEqual(result.missingFactorCount, 1,
         'missing selected factor count should be exposed');
-    assertNear(result.score, (72 + 45) / 2, 0.001,
+    assertNear(result.score, ((72 * 0.5) + (45 * 0.15)) / 0.65, 0.001,
         'remaining available factors should be renormalized');
     assertEqual(result.calculation.renormalized, true,
         'renormalization should be exposed');
+}
+
+function testAllFactorsMatchEnvironmentalBurden() {
+    const data = environmentalData();
+    const moldPotential = mold(50);
+    const profile = Profile.normalizeProfile({
+        enabled: true,
+        enabledFactors: Profile.DEFAULT_ENABLED_FACTORS,
+    });
+    const personalized = PersonalizedRiskCalculator.calculatePersonalizedRisk(
+        data,
+        moldPotential,
+        profile
+    );
+    const environmental = RiskCalculator.calculateRisk(data, moldPotential);
+
+    assertEqual(personalized.displayScore, environmental.score,
+        'fully enabled profile should match the environmental burden score');
 }
 
 function testNoSelectedFactors() {
@@ -311,8 +330,9 @@ function main() {
     const tests = [
         testPersonalizationDisabled,
         testOneAvailableSelectedFactor,
-        testMultipleFactorsUseEqualWeighting,
+        testMultipleFactorsUseSelectedGroupWeighting,
         testUnavailableSelectedFactorIsOmitted,
+        testAllFactorsMatchEnvironmentalBurden,
         testNoSelectedFactors,
         testAllSelectedFactorsUnavailable,
         testDisabledHighFactorDoesNotAffectScore,

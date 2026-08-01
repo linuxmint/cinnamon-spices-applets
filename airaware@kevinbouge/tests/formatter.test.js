@@ -161,11 +161,11 @@ function testPersonalizedFormatting() {
     assertEqual(Formatter.formatMissingSelectedFactorCount(3), '3 selected factors are unavailable',
         'multiple missing selected factors should use plural wording');
     assertEqual(Formatter.formatPersonalizedTooltip(result, 'personalized', false),
-        'Personalized risk: High (63%)',
-        'personalized tooltip should identify score type');
+        'High (63%)',
+        'personalized tooltip should stay compact');
     assertEqual(Formatter.formatPersonalizedTooltip(result, 'personalized', true),
-        'Personalized risk: High (63%) — cached data',
-        'stale personalized tooltip should identify cached data');
+        'High (63%) — cached data',
+        'stale personalized tooltip should stay compact');
     assertEqual(Formatter.formatPersonalizedTooltip(result, 'fallback', false),
         'Environmental burden: High (63%)\nPersonalized risk unavailable',
         'fallback tooltip should explain personalized unavailability');
