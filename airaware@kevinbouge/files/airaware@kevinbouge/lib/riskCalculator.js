@@ -1,6 +1,8 @@
 /* exported calculateRisk, classifyValue, categoryFromScore,
  * calculatePollenScore, calculateRegulatedPollutionScore,
- * calculateAtmosphericIrritantsScore */
+ * calculateAtmosphericIrritantsScore, calculatePollenBurden,
+ * calculateRegulatedPollutantBurden, calculateAtmosphericContextBurden,
+ * calculateMoldBurden */
 
 const Constants = imports.constants;
 
@@ -206,6 +208,32 @@ function _moldScore(moldPotential) {
     };
 }
 
+function _unavailableBurden(id, source = 'airaware') {
+    return {
+        id,
+        available: false,
+        burden: null,
+        score: null,
+        category: null,
+        value: null,
+        unit: null,
+        source,
+    };
+}
+
+function _availableBurden(id, value, score, category, unit, source) {
+    return {
+        id,
+        available: true,
+        burden: score,
+        score,
+        category,
+        value,
+        unit,
+        source,
+    };
+}
+
 /**
  * Classify a single environmental reading using configurable threshold bands.
  *
@@ -316,6 +344,35 @@ var calculatePollenScore = function(input) {
 };
 
 /**
+ * Calculate the normalized burden for one pollen type.
+ *
+ * @param {Object} input - Current or forecast environmental data.
+ * @param {string} pollenType - Canonical pollen type.
+ * @returns {Object} Individual factor burden.
+ */
+var calculatePollenBurden = function(input, pollenType) {
+    if (POLLEN_FIELDS.indexOf(pollenType) === -1)
+        return _unavailableBurden(pollenType, 'open-meteo');
+
+    const values = _pollenSource(input);
+    const value = _sanitizeValue(values[pollenType]);
+
+    if (value === null)
+        return _unavailableBurden(pollenType, 'open-meteo');
+
+    const classified = classifyValue(value, Constants.POLLEN_THRESHOLDS[pollenType]);
+
+    return _availableBurden(
+        pollenType,
+        value,
+        classified.score,
+        classified.category,
+        'grains/m³',
+        'open-meteo'
+    );
+};
+
+/**
  * Calculate regulated pollution from selected pollutant-specific AQI values.
  *
  * Falls back to raw-concentration scoring only when no selected pollutant AQI
@@ -397,6 +454,54 @@ var calculateRegulatedPollutionScore = function(input) {
 };
 
 /**
+ * Calculate one regulated pollutant burden using pollutant-specific AQI when
+ * available, otherwise the existing raw-concentration fallback threshold.
+ *
+ * @param {Object} input - Current or forecast environmental data.
+ * @param {string} pollutantType - Canonical pollutant field.
+ * @returns {Object} Individual factor burden.
+ */
+var calculateRegulatedPollutantBurden = function(input, pollutantType) {
+    if (RAW_REGULATED_FIELDS.indexOf(pollutantType) === -1)
+        return _unavailableBurden(pollutantType, 'open-meteo');
+
+    const aqi = _sanitizeValue(_pollutantAqiSource(input)[pollutantType]);
+
+    if (aqi !== null) {
+        const score = _clampScore(aqi);
+
+        return _availableBurden(
+            pollutantType,
+            aqi,
+            score,
+            categoryFromScore(score),
+            input && typeof input.pollutantAqiLabel === 'string'
+                ? input.pollutantAqiLabel
+                : 'AQI',
+            input && typeof input.pollutantAqiSource === 'string'
+                ? input.pollutantAqiSource
+                : 'aqi'
+        );
+    }
+
+    const raw = _sanitizeValue(_rawPollutantSource(input)[pollutantType]);
+
+    if (raw === null)
+        return _unavailableBurden(pollutantType, 'open-meteo');
+
+    const classified = classifyValue(raw, Constants.POLLUTANT_THRESHOLDS[pollutantType]);
+
+    return _availableBurden(
+        pollutantType,
+        raw,
+        classified.score,
+        classified.category,
+        'µg/m³',
+        'raw-concentration-fallback'
+    );
+};
+
+/**
  * Calculate low-weight atmospheric context burden.
  *
  * @param {Object} input - Object with context and raw pollutant values.
@@ -421,6 +526,66 @@ var calculateAtmosphericIrritantsScore = function(input) {
     result.wildfirePm10Available = values.wildfirePm10 !== null;
 
     return result;
+};
+
+/**
+ * Calculate one atmospheric context burden.
+ *
+ * @param {Object} input - Current or forecast environmental data.
+ * @param {string} contextType - Canonical context field.
+ * @returns {Object} Individual factor burden.
+ */
+var calculateAtmosphericContextBurden = function(input, contextType) {
+    if (ATMOSPHERIC_CONTEXT_FIELDS.indexOf(contextType) === -1)
+        return _unavailableBurden(contextType, 'open-meteo');
+
+    const context = _contextSource(input);
+    const raw = _rawPollutantSource(input);
+    const value = contextType === 'carbonMonoxide'
+        ? _sanitizeValue(raw.carbonMonoxide)
+        : _sanitizeValue(context[contextType]);
+
+    if (value === null)
+        return _unavailableBurden(contextType, 'open-meteo');
+
+    const classified = classifyValue(
+        value,
+        Constants.ATMOSPHERIC_CONTEXT_THRESHOLDS[contextType]
+    );
+    const unit = contextType === 'aerosolOpticalDepth'
+        ? ''
+        : 'µg/m³';
+
+    return _availableBurden(
+        contextType,
+        value,
+        classified.score,
+        classified.category,
+        unit,
+        'open-meteo'
+    );
+};
+
+/**
+ * Reuse the calculated mold potential as an individual factor burden.
+ *
+ * @param {Object|null} moldPotential - Mold-potential result.
+ * @returns {Object} Individual factor burden.
+ */
+var calculateMoldBurden = function(moldPotential) {
+    const mold = _moldScore(moldPotential);
+
+    if (mold.score === null)
+        return _unavailableBurden('mold', 'airaware');
+
+    return _availableBurden(
+        'mold',
+        mold.score,
+        mold.score,
+        mold.category,
+        '%',
+        'airaware'
+    );
 };
 
 function _dominantComponent(groups) {

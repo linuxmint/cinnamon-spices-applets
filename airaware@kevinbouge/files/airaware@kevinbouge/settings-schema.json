@@ -1,11 +1,16 @@
 {
     "layout": {
         "type": "layout",
-        "pages": ["general"],
+        "pages": ["general", "profile"],
         "general": {
             "type": "page",
             "title": "General",
-            "sections": ["refresh", "location", "vegetation", "panel", "alerts"]
+            "sections": ["refresh", "location", "panel", "vegetation", "popup", "alerts"]
+        },
+        "profile": {
+            "type": "page",
+            "title": "Personal Allergy Profile",
+            "sections": ["personal-profile"]
         },
         "refresh": {
             "type": "section",
@@ -20,17 +25,50 @@
         "vegetation": {
             "type": "section",
             "title": "Nearby vegetation",
-            "keys": ["enable-vegetation-context", "show-vegetation-in-popup", "vegetation-radius"]
+            "keys": ["enable-vegetation-context", "vegetation-radius"]
+        },
+        "popup": {
+            "type": "section",
+            "title": "Popup",
+            "keys": [
+                "show-pollen-in-popup",
+                "show-regulated-pollution-in-popup",
+                "show-atmospheric-irritants-in-popup",
+                "show-mold-in-popup",
+                "show-vegetation-in-popup",
+                "show-personalized-risk-in-popup"
+            ]
+        },
+        "personal-profile": {
+            "type": "section",
+            "title": "Personal Allergy Profile",
+            "keys": [
+                "enable-personalized-risk",
+                "profile-pollen-alder",
+                "profile-pollen-birch",
+                "profile-pollen-grass",
+                "profile-pollen-mugwort",
+                "profile-pollen-olive",
+                "profile-pollen-ragweed",
+                "profile-mold",
+                "profile-pm25",
+                "profile-pm10",
+                "profile-nitrogen-dioxide",
+                "profile-ozone",
+                "profile-sulphur-dioxide",
+                "profile-dust",
+                "profile-wildfire-pm10"
+            ]
         },
         "panel": {
             "type": "section",
             "title": "Panel",
-            "keys": ["show-panel-text"]
+            "keys": ["show-panel-text", "panel-score-mode"]
         },
         "alerts": {
             "type": "section",
             "title": "Notifications",
-            "keys": ["notification-level", "test-notification"]
+            "keys": ["notification-level", "use-personalized-notifications", "test-notification"]
         }
     },
     "refresh-interval": {
@@ -48,7 +86,36 @@
     "show-panel-text": {
         "type": "switch",
         "default": true,
-        "description": "Show label in panel"
+        "description": "Show label"
+    },
+    "show-pollen-in-popup": {
+        "type": "switch",
+        "default": true,
+        "description": "Show pollen"
+    },
+    "show-regulated-pollution-in-popup": {
+        "type": "switch",
+        "default": true,
+        "description": "Show regulated pollution"
+    },
+    "show-atmospheric-irritants-in-popup": {
+        "type": "switch",
+        "default": true,
+        "description": "Show atmospheric irritants"
+    },
+    "show-mold-in-popup": {
+        "type": "switch",
+        "default": true,
+        "description": "Show mold"
+    },
+    "panel-score-mode": {
+        "type": "combobox",
+        "default": "environmental",
+        "description": "Panel score",
+        "options": {
+            "Environmental burden": "environmental",
+            "Personalized risk": "personalized"
+        }
     },
     "location-mode": {
         "type": "combobox",
@@ -85,7 +152,7 @@
     "show-vegetation-in-popup": {
         "type": "switch",
         "default": false,
-        "description": "Show vegetation details in popup"
+        "description": "Show vegetation details"
     },
     "vegetation-radius": {
         "type": "combobox",
@@ -97,6 +164,86 @@
             "5 km": 5000
         }
     },
+    "enable-personalized-risk": {
+        "type": "switch",
+        "default": false,
+        "description": "Enable personalized risk score"
+    },
+    "show-personalized-risk-in-popup": {
+        "type": "switch",
+        "default": true,
+        "description": "Show personalized risk"
+    },
+    "profile-pollen-alder": {
+        "type": "switch",
+        "default": true,
+        "description": "Alder pollen"
+    },
+    "profile-pollen-birch": {
+        "type": "switch",
+        "default": true,
+        "description": "Birch pollen"
+    },
+    "profile-pollen-grass": {
+        "type": "switch",
+        "default": true,
+        "description": "Grass pollen"
+    },
+    "profile-pollen-mugwort": {
+        "type": "switch",
+        "default": true,
+        "description": "Mugwort pollen"
+    },
+    "profile-pollen-olive": {
+        "type": "switch",
+        "default": true,
+        "description": "Olive pollen"
+    },
+    "profile-pollen-ragweed": {
+        "type": "switch",
+        "default": true,
+        "description": "Ragweed pollen"
+    },
+    "profile-mold": {
+        "type": "switch",
+        "default": true,
+        "description": "Mold potential"
+    },
+    "profile-pm25": {
+        "type": "switch",
+        "default": true,
+        "description": "PM2.5"
+    },
+    "profile-pm10": {
+        "type": "switch",
+        "default": true,
+        "description": "PM10"
+    },
+    "profile-nitrogen-dioxide": {
+        "type": "switch",
+        "default": true,
+        "description": "Nitrogen dioxide"
+    },
+    "profile-ozone": {
+        "type": "switch",
+        "default": true,
+        "description": "Ozone"
+    },
+    "profile-sulphur-dioxide": {
+        "type": "switch",
+        "default": true,
+        "description": "Sulphur dioxide"
+    },
+    "profile-dust": {
+        "type": "switch",
+        "default": true,
+        "description": "Atmospheric dust"
+    },
+    "profile-wildfire-pm10": {
+        "type": "switch",
+        "default": true,
+        "description": "Smoke or wildfire particulate context"
+    },
     "notification-level": {
         "type": "combobox",
         "default": "disabled",
@@ -106,6 +253,11 @@
             "High + Very High": "high-very-high",
             "Very High only": "very-high"
         }
+    },
+    "use-personalized-notifications": {
+        "type": "switch",
+        "default": false,
+        "description": "Use personalized score for risk notifications"
     },
     "test-notification": {
         "type": "button",

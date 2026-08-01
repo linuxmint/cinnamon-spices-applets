@@ -147,6 +147,39 @@ function testVegetationFormatting() {
         'unknown mapped taxon labels should use generic mapped wording');
 }
 
+function testPersonalizedFormatting() {
+    const result = {
+        available: true,
+        score: 63.4,
+        category: {
+            id: 'high',
+        },
+    };
+
+    assertEqual(Formatter.formatMissingSelectedFactorCount(1), '1 selected factor is unavailable',
+        'single missing selected factor should use singular wording');
+    assertEqual(Formatter.formatMissingSelectedFactorCount(3), '3 selected factors are unavailable',
+        'multiple missing selected factors should use plural wording');
+    assertEqual(Formatter.formatPersonalizedTooltip(result, 'personalized', false),
+        'Personalized risk: High (63%)',
+        'personalized tooltip should identify score type');
+    assertEqual(Formatter.formatPersonalizedTooltip(result, 'personalized', true),
+        'Personalized risk: High (63%) — cached data',
+        'stale personalized tooltip should identify cached data');
+    assertEqual(Formatter.formatPersonalizedTooltip(result, 'fallback', false),
+        'Environmental burden: High (63%)\nPersonalized risk unavailable',
+        'fallback tooltip should explain personalized unavailability');
+    assertEqual(Formatter.formatPersonalizedTooltip(result, 'fallback', true),
+        'Environmental burden: High (63%) — cached data\nPersonalized risk unavailable',
+        'stale fallback tooltip should retain cached-data context');
+    assertEqual(Formatter.formatPersonalizedTooltip(result, 'environmental', false),
+        'High (63%)',
+        'environmental tooltip should stay compact');
+    assertEqual(Formatter.formatPersonalizedTooltip(result, 'environmental', true),
+        'High (63%) — cached data',
+        'stale environmental tooltip should stay compact');
+}
+
 function testTimestampFormatting() {
     const expected = GLib.DateTime.new_from_unix_local(0).format('%Y-%m-%d %H:%M');
 
@@ -210,6 +243,7 @@ function main() {
         testMoldPotentialFormatting,
         testWeatherFormatting,
         testVegetationFormatting,
+        testPersonalizedFormatting,
         testTimestampFormatting,
         testStaleFormatting,
         testFieldLabels,

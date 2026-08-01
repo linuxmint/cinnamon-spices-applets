@@ -19,6 +19,7 @@ AirAware reports environmental conditions only. It does not predict symptoms, di
 - Atmospheric irritant context from carbon monoxide, aerosol optical depth, dust, and optional wildfire-related PM10 where available
 - Current readings for pollen, PM2.5, PM10, NO₂, O₃, SO₂, carbon monoxide, aerosol optical depth, dust, and Mold potential
 - Optional nearby vegetation context from OpenStreetMap mapped vegetation and land-use data, with popup details hidden by default
+- Optional Personal Allergy Profile for a separate personalized environmental risk score
 - Forecast for today, tomorrow, and the next listed day
 - Cache fallback for coordinates, place names, nearby vegetation context, and the last successful environmental data response
 - Stale data indicator when current data cannot be refreshed
@@ -54,6 +55,11 @@ AirAware provides these Cinnamon settings:
 - Nearby vegetation context: enabled by default
 - Show or hide nearby vegetation details in the popup
 - Nearby vegetation search radius: 1 km, 2 km, or 5 km
+- Personal Allergy Profile: disabled by default
+- Panel score: Environmental burden or Personalized risk
+- Profile factors for pollen, mold, regulated pollutants, dust, and smoke-related particulate context
+- Popup section visibility for pollen, regulated pollution, atmospheric irritants, and Mold potential
+- Optional personalized-score notifications, disabled by default
 - Show or hide the panel label
 - Notifications: disabled, High + Very High, or Very High only
 - Send test notification button for verifying the Cinnamon notification path
@@ -71,6 +77,8 @@ If automatic location is unavailable, manual latitude and longitude can be enter
 Only latitude and longitude are sent to Open-Meteo for environmental data. The same coordinates are sent to the Open-Meteo Air Quality API and the Open-Meteo Weather Forecast API. Latitude and longitude are also sent to OpenStreetMap Nominatim to retrieve a human-readable place name for the popup. Place names are cached locally.
 
 When nearby vegetation context is enabled, latitude and longitude are sent to the configured OpenStreetMap Overpass API. The Overpass query requests mapped vegetation and land-use features near the coordinates, including broad vegetation categories and explicitly mapped birch, alder, or olive taxonomy where available. Results are cached locally. OpenStreetMap coverage may be incomplete, and the absence of mapped features must not be interpreted as evidence that vegetation is absent.
+
+Personal Allergy Profile selections are stored only in local Cinnamon settings. They are not sent to Open-Meteo, OpenStreetMap, or any other data provider.
 
 ## Data Sources
 
@@ -111,6 +119,18 @@ Pollen burden uses the highest available pollen burden instead of averaging unre
 
 Nearby vegetation context is displayed separately and does not modify the AirAware score.
 
+## Personal Allergy Profile
+
+AirAware can optionally calculate a personalized environmental risk score using only the environmental factors selected in settings.
+
+The profile can include individual pollen types, Mold potential, regulated pollutants, atmospheric dust, and smoke-related particulate context when available. The original AirAware environmental burden score remains available and is not changed by the profile.
+
+The first implementation uses equal weighting across selected factors with available data. Unavailable selected factors are omitted and the remaining factors are renormalized. Disabled factors are not treated as environmentally absent.
+
+Profile selections are stored only in local Cinnamon settings and are not sent to environmental data providers.
+
+The personalized score reflects selected environmental conditions only. It does not predict symptoms, diagnose allergies, or provide medical advice.
+
 Panel icon line colors follow the current score category:
 
 - Low: green
@@ -132,6 +152,8 @@ Panel icon line colors follow the current score category:
 - Carbon monoxide, aerosol, and PM10 levels can originate from multiple sources.
 - AQI values should not be described as medical advice.
 - AirAware does not account for personal sensitivity, medication, indoor exposure, masks, activity level, or clinical history.
+- A selected Personal Allergy Profile factor may be unavailable because of region, season, model coverage, or upstream data availability. Missing values are omitted rather than treated as zero.
+- The initial Personal Allergy Profile uses equal weighting across selected factors with available data. It does not model clinical sensitivity or reaction severity.
 - Place names depend on OpenStreetMap Nominatim availability and may occasionally be approximate.
 - Nearby vegetation context depends on OpenStreetMap mapping coverage and Overpass availability.
 - OpenStreetMap vegetation coverage varies by region. Missing mapped features do not mean that the vegetation is absent.
@@ -144,6 +166,8 @@ Panel icon line colors follow the current score category:
 - `lib/openMeteoProvider.js`: Open-Meteo Air Quality URL construction, Soup async fetch, response validation, and provider mapping.
 - `lib/openMeteoWeatherProvider.js`: Open-Meteo Weather Forecast URL construction, Soup async fetch, response validation, and normalized hourly weather mapping.
 - `lib/openStreetMapVegetationProvider.js`: Overpass query construction, Soup async fetch, and normalized nearby vegetation context.
+- `lib/personalAllergyProfile.js`: local Personal Allergy Profile schema, defaults, and settings normalization.
+- `lib/personalizedRiskCalculator.js`: personalized environmental risk scoring from selected available factors.
 - `lib/moldPotentialCalculator.js`: weather-based Mold potential scoring.
 - `lib/environmentAssembler.js`: combines independently refreshed air-quality, weather, vegetation, cache, and mold data.
 - `lib/reverseGeocoder.js`: Nominatim reverse-geocoding URL construction, Soup async fetch, and place-name parsing.
@@ -180,7 +204,6 @@ gjs ../../tests/live-openmeteo-smoke.gjs
 - Hourly forecast
 - Multiple providers
 - Custom weighting
-- Personal allergens
 - Graphs
 
 ## License

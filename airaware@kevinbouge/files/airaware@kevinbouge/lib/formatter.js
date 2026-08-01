@@ -5,7 +5,8 @@
  * formatWeatherUnavailable, formatMoldPotential, formatPercentage,
  * formatTemperature, formatDewPoint, formatWindSpeed, formatWindDirection,
  * formatWindGusts, formatVisibility, formatPollenTypeLabel,
- * formatDistanceMeters, formatVegetationCategoryLabel, formatMappedTaxonLabel */
+ * formatDistanceMeters, formatVegetationCategoryLabel, formatMappedTaxonLabel,
+ * formatMissingSelectedFactorCount, formatPersonalizedTooltip */
 
 const GLib = imports.gi.GLib;
 
@@ -67,6 +68,92 @@ const MAPPED_TAXON_LABELS = Object.freeze({
     alder: 'Mapped alder trees',
     olive: 'Mapped olive trees',
 });
+
+function _(text) {
+    return text;
+}
+
+function _markTranslatableStringsForExtraction() {
+    return [
+        _('Low'),
+        _('Moderate'),
+        _('High'),
+        _('Very High'),
+        _('Unknown'),
+        _('Unavailable'),
+        _('Weather data unavailable'),
+        _('Tree pollen'),
+        _('Alder pollen'),
+        _('Birch pollen'),
+        _('Grass pollen'),
+        _('Mugwort pollen'),
+        _('Olive pollen'),
+        _('Ragweed pollen'),
+        _('Weed pollen'),
+        _('PM2.5'),
+        _('PM10'),
+        _('NO₂'),
+        _('O₃'),
+        _('SO₂'),
+        _('Dust'),
+        _('Aerosol optical depth'),
+        _('CO'),
+        _('Wildfire-related PM10'),
+        _('Alder'),
+        _('Birch'),
+        _('Grass'),
+        _('Mugwort'),
+        _('Olive'),
+        _('Ragweed'),
+        _('Woodland'),
+        _('Grassland'),
+        _('Orchard'),
+        _('Scrub'),
+        _('Parkland'),
+        _('Farmland'),
+        _('Mapped birch trees'),
+        _('Mapped alder trees'),
+        _('Mapped olive trees'),
+        _('Mapped vegetation'),
+        _('Mapped allergenic trees'),
+        _('AQI'),
+        _('US AQI'),
+        _('EU AQI'),
+        _('No recent data'),
+        _('Stale data'),
+        _('Updated just now'),
+        _('Updated 1 min ago'),
+        _('1 selected factor is unavailable'),
+        _('Personalized risk unavailable'),
+        _('Personalized risk: {category} ({score})'),
+        _('Personalized risk: {category} ({score}) — cached data'),
+        _('Environmental burden: {category} ({score})\nPersonalized risk unavailable'),
+        _('Environmental burden: {category} ({score}) — cached data\nPersonalized risk unavailable'),
+        _('{category} ({score})'),
+        _('{category} ({score}) — cached data'),
+        _('{count} selected factors are unavailable'),
+        _('{degrees}° {direction}'),
+        _('{distance} km'),
+        _('{distance} m'),
+        _('{label} {value}'),
+        _('{score}%'),
+        _('{value} {unit}'),
+        _('{value}%'),
+        _('N'),
+        _('NE'),
+        _('E'),
+        _('SE'),
+        _('S'),
+        _('SW'),
+        _('W'),
+        _('NW'),
+        _('grains/m³'),
+        _('µg/m³'),
+        _('°C'),
+        _('m/s'),
+        _('km'),
+    ];
+}
 
 let _translate = function(text) {
     return text;
@@ -453,6 +540,71 @@ var formatMappedTaxonLabel = function(taxonId) {
 
     return _translate('Mapped allergenic trees');
 };
+
+/**
+ * Format count of selected factors unavailable in provider data.
+ *
+ * @param {number} missingCount - Missing selected factor count.
+ * @returns {string} Translated missing-data label.
+ */
+var formatMissingSelectedFactorCount = function(missingCount) {
+    const missing = _isFiniteNumber(missingCount) ? Math.max(0, Math.round(missingCount)) : 0;
+
+    if (missing === 1)
+        return _translate('1 selected factor is unavailable');
+
+    return _replace(_translate('{count} selected factors are unavailable'), {
+        count: missing,
+    });
+};
+
+/**
+ * Format panel tooltip text for the selected score mode.
+ *
+ * @param {Object} risk - Risk result.
+ * @param {string} mode - environmental, personalized, or fallback.
+ * @param {boolean} stale - Whether data is stale.
+ * @returns {string} Tooltip text.
+ */
+var formatPersonalizedTooltip = function(risk, mode, stale) {
+    const category = formatCategory(risk ? risk.category : null);
+    const score = formatScore(risk ? risk.score : null);
+
+    if (mode === 'personalized') {
+        return stale
+            ? _replace(_translate('Personalized risk: {category} ({score}) — cached data'), {
+                category,
+                score,
+            })
+            : _replace(_translate('Personalized risk: {category} ({score})'), {
+                category,
+                score,
+            });
+    }
+
+    if (mode === 'fallback') {
+        return stale
+            ? _replace(_translate('Environmental burden: {category} ({score}) — cached data\nPersonalized risk unavailable'), {
+                category,
+                score,
+            })
+            : _replace(_translate('Environmental burden: {category} ({score})\nPersonalized risk unavailable'), {
+                category,
+                score,
+            });
+    }
+
+    return stale
+        ? _replace(_translate('{category} ({score}) — cached data'), {
+            category,
+            score,
+        })
+        : _replace(_translate('{category} ({score})'), {
+            category,
+            score,
+        });
+};
+
 
 /**
  * Format a timestamp for display in the popup.
