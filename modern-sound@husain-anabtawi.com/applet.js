@@ -137,7 +137,7 @@ class ModernSoundApplet extends Applet.IconApplet {
     }
 
     openSettings() {
-        Util.spawnCommandLine("cinnamon-settings sound");
+        Util.spawn(["cinnamon-settings", "sound"]);
         this._menu.close();
     }
 
