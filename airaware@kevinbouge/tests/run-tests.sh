@@ -24,6 +24,7 @@ fi
 gjs "${ROOT_DIR}/tests/riskCalculator.test.js"
 gjs "${ROOT_DIR}/tests/personalAllergyProfile.test.js"
 gjs "${ROOT_DIR}/tests/personalizedRiskCalculator.test.js"
+gjs "${ROOT_DIR}/tests/personalizedForecastCalculator.test.js"
 gjs "${ROOT_DIR}/tests/formatter.test.js"
 gjs "${ROOT_DIR}/tests/openMeteoProvider.test.js"
 gjs "${ROOT_DIR}/tests/openMeteoWeatherProvider.test.js"

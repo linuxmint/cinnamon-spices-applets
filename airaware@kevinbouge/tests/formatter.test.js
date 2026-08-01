@@ -132,6 +132,12 @@ function testWeatherFormatting() {
         'wind gusts should use wind speed formatting');
     assertEqual(Formatter.formatVisibility(12450), '12.5 km',
         'visibility should convert meters to kilometers');
+    assertEqual(Formatter.formatUvIndex(7.24), '7.2',
+        'UV index should use one decimal place');
+    assertEqual(Formatter.formatTimeLabel('2026-08-01T19:00'), '19:00',
+        'time labels should use local hour and minute');
+    assertEqual(Formatter.formatTimeRange('2026-08-01T19:00', '2026-08-01T21:00'),
+        '19:00–21:00', 'time ranges should remain compact');
 }
 
 function testVegetationFormatting() {
@@ -210,6 +216,14 @@ function testStaleFormatting() {
         'Updated 2 min ago', 'fresh status should include age');
     assertEqual(Formatter.formatStaleStatus(now - 31 * 60 * 1000, now, 30),
         'Stale data', 'old status should say stale');
+    assertEqual(Formatter.formatUpdateAge('bad', now),
+        'no recent data', 'invalid update age should say no recent data');
+    assertEqual(Formatter.formatUpdateAge(now - 30 * 1000, now),
+        'updated just now', 'sub-minute update age should say updated just now');
+    assertEqual(Formatter.formatUpdateAge(now - 60 * 1000, now),
+        'updated 1 minute ago', 'single-minute update age should use singular wording');
+    assertEqual(Formatter.formatUpdateAge(now - 2 * 60 * 1000, now),
+        'updated 2 minutes ago', 'multi-minute update age should use minutes wording');
 }
 
 function testFieldLabels() {

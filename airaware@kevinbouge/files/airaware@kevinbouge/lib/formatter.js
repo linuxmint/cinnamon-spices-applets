@@ -1,12 +1,13 @@
 /* exported setTranslator, resetTranslator, formatCategory, formatPanelLabel,
  * formatScore, formatReading, formatPollen, formatPollutant, formatTimestamp,
- * isStale, formatStaleStatus, formatFieldLabel, formatAerosolOpticalDepth,
+ * isStale, formatStaleStatus, formatUpdateAge, formatFieldLabel, formatAerosolOpticalDepth,
  * formatSulfurDioxide, formatCarbonMonoxide, formatAqi,
  * formatWeatherUnavailable, formatMoldPotential, formatPercentage,
  * formatTemperature, formatDewPoint, formatWindSpeed, formatWindDirection,
  * formatWindGusts, formatVisibility, formatPollenTypeLabel,
  * formatDistanceMeters, formatVegetationCategoryLabel, formatMappedTaxonLabel,
- * formatMissingSelectedFactorCount, formatPersonalizedTooltip */
+ * formatMissingSelectedFactorCount, formatPersonalizedTooltip,
+ * formatUvIndex, formatTimeLabel, formatTimeRange */
 
 const GLib = imports.gi.GLib;
 
@@ -99,6 +100,7 @@ function _markTranslatableStringsForExtraction() {
         _('Aerosol optical depth'),
         _('CO'),
         _('Wildfire-related PM10'),
+        _('UV index'),
         _('Alder'),
         _('Birch'),
         _('Grass'),
@@ -137,6 +139,8 @@ function _markTranslatableStringsForExtraction() {
         _('{score}%'),
         _('{value} {unit}'),
         _('{value}%'),
+        _('{value} ({change})'),
+        _('{start}–{end} · {category} ({score})'),
         _('N'),
         _('NE'),
         _('E'),
@@ -476,6 +480,16 @@ var formatVisibility = function(value) {
 };
 
 /**
+ * Format a UV index value.
+ *
+ * @param {number} value - UV index.
+ * @returns {string} Formatted UV index or unavailable text.
+ */
+var formatUvIndex = function(value) {
+    return formatReading(value, DEFAULT_UNIT, 1);
+};
+
+/**
  * Format a pollen type label.
  *
  * @param {string} fieldName - Canonical pollen field.
@@ -537,6 +551,30 @@ var formatMappedTaxonLabel = function(taxonId) {
         return _translate(MAPPED_TAXON_LABELS[taxonId]);
 
     return _translate('Mapped allergenic trees');
+};
+
+/**
+ * Format an Open-Meteo local timestamp as HH:MM.
+ *
+ * @param {string} timeText - Local timestamp text.
+ * @returns {string} Compact local time.
+ */
+var formatTimeLabel = function(timeText) {
+    if (typeof timeText !== 'string' || timeText.length < 16)
+        return _translate('Unknown');
+
+    return timeText.substring(11, 16);
+};
+
+/**
+ * Format a compact local time range.
+ *
+ * @param {string} startTime - Start timestamp.
+ * @param {string} endTime - End timestamp.
+ * @returns {string} HH:MM-HH:MM style range.
+ */
+var formatTimeRange = function(startTime, endTime) {
+    return `${formatTimeLabel(startTime)}–${formatTimeLabel(endTime)}`;
 };
 
 /**
@@ -665,6 +703,30 @@ var formatStaleStatus = function(updatedAtMs, nowMs = _nowMs(), maxAgeMinutes = 
         return _translate('Updated 1 min ago');
 
     return _replace(_translate('Updated {minutes} min ago'), {
+        minutes: ageMinutes,
+    });
+};
+
+/**
+ * Format elapsed time since the last successful update.
+ *
+ * @param {number} updatedAtMs - Last update timestamp in milliseconds.
+ * @param {number} nowMs - Current timestamp in milliseconds.
+ * @returns {string} Translated age label.
+ */
+var formatUpdateAge = function(updatedAtMs, nowMs = _nowMs()) {
+    if (!_isFiniteNumber(updatedAtMs))
+        return _translate('no recent data');
+
+    const ageMinutes = Math.max(0, Math.floor((nowMs - updatedAtMs) / 60000));
+
+    if (ageMinutes < 1)
+        return _translate('updated just now');
+
+    if (ageMinutes === 1)
+        return _translate('updated 1 minute ago');
+
+    return _replace(_translate('updated {minutes} minutes ago'), {
         minutes: ageMinutes,
     });
 };

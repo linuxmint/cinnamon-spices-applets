@@ -69,6 +69,10 @@ const FACTOR_DEFINITIONS = Object.freeze({
         group: 'atmosphericContext',
         field: 'wildfirePm10',
     }),
+    uv_index: Object.freeze({
+        group: 'uv',
+        field: 'uvIndex',
+    }),
 });
 
 function _isFiniteNumber(value) {
@@ -122,6 +126,9 @@ function _factorBurden(factorId, input, moldPotential) {
 
     if (definition.group === 'mold')
         return RiskCalculator.calculateMoldBurden(moldPotential);
+
+    if (definition.group === 'uv')
+        return RiskCalculator.calculateUvBurden(input ? input.uvIndex : null);
 
     return null;
 }
@@ -216,27 +223,18 @@ function _groupResult(name, factors) {
     if (name === 'mold')
         return _highestGroupResult(name, factors);
 
+    if (name === 'uv')
+        return _highestGroupResult(name, factors);
+
     return null;
 }
 
 function _groupWeight(name) {
-    if (name === 'pollen')
-        return Constants.RISK_WEIGHTS.pollen;
-
-    if (name === 'regulatedPollution')
-        return Constants.RISK_WEIGHTS.particulates;
-
-    if (name === 'atmosphericContext')
-        return Constants.RISK_WEIGHTS.irritants;
-
-    if (name === 'mold')
-        return Constants.RISK_WEIGHTS.mold;
-
-    return 0;
+    return Constants.PERSONALIZED_RISK_WEIGHTS[name] || 0;
 }
 
 function _calculateGroupedScore(factors) {
-    const groupNames = ['pollen', 'regulatedPollution', 'atmosphericContext', 'mold'];
+    const groupNames = ['pollen', 'regulatedPollution', 'atmosphericContext', 'mold', 'uv'];
     let weightedScore = 0;
     let availableWeight = 0;
     let configuredSelectedWeight = 0;
@@ -278,6 +276,12 @@ function _calculateGroupedScore(factors) {
         score: _clampScore(weightedScore / availableWeight),
         groups,
         effectiveWeights,
+        selectedGroupCount: groupNames.filter(name =>
+            factors.some(factor => factor.group === name)
+        ).length,
+        availableGroupCount: groupNames.filter(name =>
+            groups[name] !== null && groups[name] !== undefined
+        ).length,
         renormalized: availableWeight < configuredSelectedWeight ||
             configuredSelectedWeight < 1,
     };
@@ -367,6 +371,11 @@ var calculatePersonalizedRisk = function(input, moldPotential, profileInput) {
         selectedFactorCount: factors.length,
         availableFactorCount: availableFactors.length,
         missingFactorCount,
+        selectedGroupCount: calculation.selectedGroupCount,
+        availableGroupCount: calculation.availableGroupCount,
+        groupCompleteness: calculation.selectedGroupCount > 0
+            ? calculation.availableGroupCount / calculation.selectedGroupCount
+            : 0,
         factors,
         contributors,
         calculation: {

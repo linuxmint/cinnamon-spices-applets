@@ -1,6 +1,8 @@
-/* exported RISK_LEVELS, RISK_WEIGHTS, POLLEN_THRESHOLDS,
+/* exported RISK_LEVELS, RISK_WEIGHTS, PERSONALIZED_RISK_WEIGHTS,
+ * POLLEN_THRESHOLDS, UV_INDEX_THRESHOLDS,
  * POLLUTANT_THRESHOLDS, ATMOSPHERIC_CONTEXT_THRESHOLDS,
- * ATMOSPHERIC_CONTEXT_WEIGHTS, MOLD_WEIGHTS, MOLD_NORMALIZATION */
+ * ATMOSPHERIC_CONTEXT_WEIGHTS, MOLD_WEIGHTS, MOLD_NORMALIZATION,
+ * OUTDOOR_WINDOW_MIN_GROUP_COMPLETENESS */
 
 /*
  * AirAware shared constants.
@@ -41,6 +43,26 @@ var RISK_WEIGHTS = Object.freeze({
     particulates: 0.25,
     irritants: 0.1,
     mold: 0.15,
+});
+
+var PERSONALIZED_RISK_WEIGHTS = Object.freeze({
+    pollen: RISK_WEIGHTS.pollen,
+    regulatedPollution: RISK_WEIGHTS.particulates,
+    atmosphericContext: RISK_WEIGHTS.irritants,
+    mold: RISK_WEIGHTS.mold,
+    uv: 0.1,
+});
+
+var UV_INDEX_THRESHOLDS = Object.freeze({
+    lowMax: 2,
+    moderateMin: 3,
+    moderateMax: 5,
+    highMin: 6,
+    highMax: 7,
+    veryHighMin: 8,
+    veryHighMax: 10,
+    extremeMin: 11,
+    burdenMax: 12,
 });
 
 var ATMOSPHERIC_CONTEXT_WEIGHTS = Object.freeze({
@@ -191,3 +213,5 @@ var MOLD_NORMALIZATION = Object.freeze({
         strong: 10,
     }),
 });
+
+var OUTDOOR_WINDOW_MIN_GROUP_COMPLETENESS = 0.5;

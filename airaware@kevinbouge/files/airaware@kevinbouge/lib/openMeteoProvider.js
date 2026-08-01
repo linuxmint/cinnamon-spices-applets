@@ -532,6 +532,41 @@ function _parseForecast(payload, forecastDays, aqiSourceId) {
     });
 }
 
+function _parseHourlyRecords(payload, aqiSourceId) {
+    if (!_isObject(payload.hourly) || !Array.isArray(payload.hourly.time))
+        return [];
+
+    let records = [];
+
+    for (let index = 0; index < payload.hourly.time.length; index++) {
+        const time = payload.hourly.time[index];
+
+        if (typeof time !== 'string' || time === '')
+            continue;
+
+        const parsed = _canonicalFromHourlyIndexes(payload.hourly, [index], aqiSourceId);
+
+        records.push({
+            time,
+            timestamp: time,
+            readings: parsed.readings,
+            rawPollutants: parsed.rawPollutants,
+            pollutantAqi: parsed.pollutantAqi,
+            europeanPollutantAqi: parsed.europeanPollutantAqi,
+            usPollutantAqi: parsed.usPollutantAqi,
+            pollutantAqiSource: parsed.pollutantAqiSource,
+            pollutantAqiLabel: parsed.pollutantAqiLabel,
+            pollen: parsed.pollen,
+            context: parsed.context,
+            missingFields: parsed.missingFields,
+            missingSourceVariables: parsed.missingSourceVariables,
+            isPartial: parsed.isPartial,
+        });
+    }
+
+    return records;
+}
+
 function _isTransientHttpStatus(statusCode) {
     return statusCode === 408 || statusCode === 429 || statusCode >= 500;
 }
@@ -618,6 +653,7 @@ var parseOpenMeteoResponse = function(payload, options = {}) {
         throw new Error('Invalid Open-Meteo response: no usable current readings');
 
     const forecast = _parseForecast(payload, forecastDays, selectedAqiSource);
+    const hourlyRecords = _parseHourlyRecords(payload, selectedAqiSource);
     const isForecastPartial = forecast.some(day => day.isPartial);
     const hourly = _isObject(payload.hourly)
         ? {
@@ -672,6 +708,7 @@ var parseOpenMeteoResponse = function(payload, options = {}) {
         pollutantAqiLabel: _aqiSourceMetadata(selectedAqiSource).label,
         current,
         hourly,
+        hourlyRecords,
         forecast,
         metadata,
         isPartial: current.isPartial || isForecastPartial || forecast.length === 0,

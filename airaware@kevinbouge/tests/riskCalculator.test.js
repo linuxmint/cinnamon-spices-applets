@@ -322,6 +322,31 @@ function testDominantComponentAndClamping() {
         'dominant top-level component should be exposed');
 }
 
+function testUvBurden() {
+    const low = RiskCalculator.calculateUvBurden(1);
+    const moderate = RiskCalculator.calculateUvBurden(4);
+    const high = RiskCalculator.calculateUvBurden(6.5);
+    const veryHigh = RiskCalculator.calculateUvBurden(9);
+    const extreme = RiskCalculator.calculateUvBurden(12);
+    const missing = RiskCalculator.calculateUvBurden(null);
+    const negative = RiskCalculator.calculateUvBurden(-1);
+
+    assertTrue(low.score < moderate.score,
+        'UV burden should increase through low and moderate values');
+    assertTrue(moderate.score < high.score,
+        'UV burden should increase through high values');
+    assertTrue(high.score < veryHigh.score,
+        'UV burden should increase through very high values');
+    assertTrue(veryHigh.score < extreme.score,
+        'UV burden should increase through extreme values');
+    assertTrue(extreme.score >= 0 && extreme.score <= 100,
+        'UV burden should stay within 0-100');
+    assertEqual(missing.available, false,
+        'missing UV should be unavailable');
+    assertEqual(negative.available, false,
+        'negative UV should be unavailable');
+}
+
 function testClassifyValueThresholdBoundaries() {
     assertEqual(RiskCalculator.classifyValue(29.9, {
         moderate: 30,
@@ -362,6 +387,7 @@ function main() {
         testTopLevelWeights,
         testUnavailableComponentsRenormalize,
         testDominantComponentAndClamping,
+        testUvBurden,
         testClassifyValueThresholdBoundaries,
     ];
 

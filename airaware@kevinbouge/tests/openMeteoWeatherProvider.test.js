@@ -101,6 +101,7 @@ function normalPayload() {
             wind_direction_10m: '°',
             wind_gusts_10m: 'm/s',
             visibility: 'm',
+            uv_index: '',
         },
         hourly_units: {
             temperature_2m: '°C',
@@ -111,6 +112,7 @@ function normalPayload() {
             wind_direction_10m: '°',
             wind_gusts_10m: 'm/s',
             visibility: 'm',
+            uv_index: '',
         },
         daily_units: {
             leaf_wetness_probability_mean: '%',
@@ -126,6 +128,7 @@ function normalPayload() {
             wind_direction_10m: 220,
             wind_gusts_10m: 8.5,
             visibility: 18000,
+            uv_index: 6.7,
         },
         hourly: {
             time: [
@@ -141,6 +144,7 @@ function normalPayload() {
             wind_direction_10m: [200, 210, 220],
             wind_gusts_10m: [6.5, 7.1, 8.5],
             visibility: [20000, 18000, 17000],
+            uv_index: [0.2, 3.1, 6.7],
         },
         daily: {
             time: ['2026-07-30', '2026-07-31'],
@@ -188,6 +192,8 @@ function testBuildRequestUrl() {
         'request URL should include wind gusts');
     assertTrue(url.indexOf('visibility') !== -1,
         'request URL should include visibility');
+    assertTrue(url.indexOf('uv_index') !== -1,
+        'request URL should include UV index');
     assertTrue(url.indexOf('leaf_wetness_probability_mean') !== -1,
         'request URL should include daily leaf wetness');
     assertTrue(url.indexOf('timezone=auto') !== -1,
@@ -215,6 +221,8 @@ function testNormalApiResponse() {
         'current wind gusts should map from Open-Meteo current field');
     assertEqual(result.current.visibility, 18000,
         'current visibility should map from Open-Meteo current field');
+    assertEqual(result.current.uvIndex, 6.7,
+        'current UV index should map from Open-Meteo current field');
     assertEqual(result.hourlyRecords.length, 3,
         'hourly records should be normalized');
     assertEqual(result.hourly.temperature[1], 19.2,
@@ -233,6 +241,8 @@ function testNormalApiResponse() {
         'wind gusts should map from Open-Meteo field');
     assertEqual(result.hourly.visibility[1], 18000,
         'visibility should map from Open-Meteo field');
+    assertEqual(result.hourly.uvIndex[1], 3.1,
+        'UV index should map from Open-Meteo field');
     assertEqual(result.daily.leafWetnessProbabilityMean[0], 65,
         'daily leaf wetness should be preserved');
     assertEqual(result.daily.precipitationSum[0], 1.5,
@@ -277,7 +287,9 @@ function testMissingFieldsBecomeNull() {
     const payload = normalPayload();
     delete payload.hourly.precipitation;
     payload.hourly.wind_speed_10m = [null, 'bad', undefined];
+    payload.hourly.uv_index = [1.2, -1, 'bad'];
     payload.current.dew_point_2m = 'bad';
+    payload.current.uv_index = -2;
     delete payload.daily.leaf_wetness_probability_mean;
 
     const result = WeatherProvider.parseOpenMeteoResponse(payload);
@@ -288,6 +300,12 @@ function testMissingFieldsBecomeNull() {
         'malformed wind speed should be null');
     assertEqual(result.current.dewPoint, null,
         'malformed current dew point should be null');
+    assertEqual(result.current.uvIndex, null,
+        'negative current UV index should be null');
+    assertEqual(result.hourlyRecords[1].values.uvIndex, null,
+        'negative hourly UV index should be null');
+    assertEqual(result.hourlyRecords[2].values.uvIndex, null,
+        'malformed hourly UV index should be null');
     assertEqual(result.daily.leafWetnessProbabilityMean.length, 0,
         'missing daily leaf wetness should be empty');
     assertTrue(result.missingFields.indexOf('precipitation') !== -1,

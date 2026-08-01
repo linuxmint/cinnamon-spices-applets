@@ -73,3 +73,13 @@
 .airaware-muted {
     opacity: 0.72;
 }
+
+.airaware-refresh-age {
+    opacity: 0.72;
+    max-width: 165px;
+    text-align: right;
+}
+
+.airaware-refresh-content {
+    spacing: 12px;
+}

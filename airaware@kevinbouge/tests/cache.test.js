@@ -598,7 +598,7 @@ function testPreviousResponseCacheVersionMigrates() {
 
         assertNotNull(envelope,
             'previous response cache versions should migrate when data is usable');
-        assertEqual(envelope.version, 5,
+        assertEqual(envelope.version, 6,
             'migrated response cache should expose the current schema version');
         assertEqual(envelope.migratedFromVersion, 1,
             'migrated response cache should expose the source schema version');

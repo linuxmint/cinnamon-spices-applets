@@ -69,6 +69,7 @@ function environmentalData(overrides = {}) {
             dust: 55,
             wildfirePm10: 30,
         },
+        uvIndex: 8,
     };
 
     for (const key in overrides)
@@ -167,6 +168,39 @@ function testAllFactorsMatchEnvironmentalBurden() {
 
     assertEqual(personalized.displayScore, environmental.score,
         'fully enabled profile should match the environmental burden score');
+}
+
+function testUvDisabledDoesNotAffectExistingProfile() {
+    const data = environmentalData({
+        uvIndex: 12,
+    });
+    const result = calculate(['pollen_grass', 'mold'], data, mold(50));
+
+    assertNear(result.score, ((72 * 0.5) + (50 * 0.15)) / 0.65, 0.001,
+        'UV data should not affect personalized score when UV is not selected');
+}
+
+function testUvEnabledAffectsPersonalizedScore() {
+    const data = environmentalData({
+        uvIndex: 12,
+    });
+    const result = calculate(['pollen_grass', 'uv_index'], data, mold(50));
+
+    assertTrue(result.score > 72,
+        'selected high UV should increase a grass-only personalized score');
+    assertEqual(result.availableGroupCount, 2,
+        'UV should be counted as an available selected group');
+}
+
+function testUvUnavailableIsOmitted() {
+    const result = calculate(['pollen_grass', 'uv_index'], environmentalData({
+        uvIndex: null,
+    }));
+
+    assertEqual(result.score, 72,
+        'missing selected UV should be omitted and remaining groups renormalized');
+    assertEqual(result.missingFactorCount, 1,
+        'missing selected UV should be counted as unavailable');
 }
 
 function testNoSelectedFactors() {
@@ -333,6 +367,9 @@ function main() {
         testMultipleFactorsUseSelectedGroupWeighting,
         testUnavailableSelectedFactorIsOmitted,
         testAllFactorsMatchEnvironmentalBurden,
+        testUvDisabledDoesNotAffectExistingProfile,
+        testUvEnabledAffectsPersonalizedScore,
+        testUvUnavailableIsOmitted,
         testNoSelectedFactors,
         testAllSelectedFactorsUnavailable,
         testDisabledHighFactorDoesNotAffectScore,

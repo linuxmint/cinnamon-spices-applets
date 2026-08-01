@@ -71,6 +71,9 @@ function _weatherHourlyRecords(weatherData) {
             windSpeed: Array.isArray(weatherData.hourly.windSpeed)
                 ? weatherData.hourly.windSpeed[index]
                 : null,
+            uvIndex: Array.isArray(weatherData.hourly.uvIndex)
+                ? weatherData.hourly.uvIndex[index]
+                : null,
         },
     }));
 }
@@ -213,6 +216,9 @@ var combineEnvironmentalData = function(options = {}) {
     combined.current.moldPotential = sourceWeather
         ? _calculateMoldPotential(_weatherForCurrentMold(sourceWeather, currentDate))
         : _unavailableMoldPotential();
+    combined.current.uvIndex = sourceWeather && sourceWeather.current
+        ? sourceWeather.current.uvIndex
+        : null;
 
     combined.forecast = combined.forecast.map(day => {
         const copy = _copyObject(day);

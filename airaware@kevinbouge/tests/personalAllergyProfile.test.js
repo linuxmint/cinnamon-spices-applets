@@ -20,8 +20,10 @@ function testDefaultProfile() {
 
     assertEqual(profile.version, 1, 'profile schema version should be current');
     assertEqual(profile.enabled, false, 'personalization should default disabled');
-    assertEqual(profile.selectedFactorIds.length, Profile.FACTOR_IDS.length,
-        'all factors should default selected behind the disabled master switch');
+    assertEqual(profile.enabledFactors.uv_index, false,
+        'UV should default disabled because it is not an allergy trigger');
+    assertEqual(profile.selectedFactorIds.length, Profile.FACTOR_IDS.length - 1,
+        'all non-UV factors should default selected behind the disabled master switch');
 }
 
 function testEnabledSettingsProfile() {
@@ -35,6 +37,29 @@ function testEnabledSettingsProfile() {
         'profile pollen factors should default enabled');
     assertEqual(profile.enabledFactors.wildfire_pm10, true,
         'profile optional context should default enabled');
+    assertEqual(profile.enabledFactors.uv_index, false,
+        'UV should remain opt-in when personalization is enabled');
+}
+
+function testUvEnabledAndFingerprint() {
+    const disabled = Profile.profileFromSettings({
+        enablePersonalizedRisk: true,
+    });
+    const enabled = Profile.profileFromSettings({
+        enablePersonalizedRisk: true,
+        profileUvIndex: true,
+    });
+
+    assertEqual(enabled.enabledFactors.uv_index, true,
+        'UV setting should enable the UV factor');
+    assertTrue(
+        Profile.profileFingerprint(disabled) !== Profile.profileFingerprint(enabled),
+        'profile fingerprint should change when UV selection changes'
+    );
+    assertTrue(
+        Profile.profileFingerprint(enabled).indexOf(':gw=') !== -1,
+        'profile fingerprint should include scoring weight configuration'
+    );
 }
 
 function testOneFactorEnabled() {
@@ -118,6 +143,7 @@ function main() {
     const tests = [
         testDefaultProfile,
         testEnabledSettingsProfile,
+        testUvEnabledAndFingerprint,
         testOneFactorEnabled,
         testNoFactorsEnabled,
         testInvalidValuesAndUnknownIds,

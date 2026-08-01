@@ -24,6 +24,7 @@ const CANONICAL_SOURCES = Object.freeze({
     windDirection: 'wind_direction_10m',
     windGusts: 'wind_gusts_10m',
     visibility: 'visibility',
+    uvIndex: 'uv_index',
 });
 
 const CANONICAL_FIELDS = Object.freeze([
@@ -35,6 +36,7 @@ const CANONICAL_FIELDS = Object.freeze([
     'windDirection',
     'windGusts',
     'visibility',
+    'uvIndex',
 ]);
 
 const SOURCE_VARIABLES = Object.freeze([
@@ -46,6 +48,7 @@ const SOURCE_VARIABLES = Object.freeze([
     'wind_direction_10m',
     'wind_gusts_10m',
     'visibility',
+    'uv_index',
 ]);
 
 const DAILY_SOURCES = Object.freeze({
@@ -92,6 +95,9 @@ function _shouldClampNonNegative(field) {
 
 function _sanitizeWeatherValue(value, field) {
     if (!_isFiniteNumber(value))
+        return null;
+
+    if (field === 'uvIndex' && value < 0)
         return null;
 
     return _shouldClampNonNegative(field) ? Math.max(0, value) : value;
@@ -174,6 +180,7 @@ function _unitsFromPayload(payload) {
         windDirection: typeof hourlyUnits.wind_direction_10m === 'string' ? hourlyUnits.wind_direction_10m : '°',
         windGusts: typeof hourlyUnits.wind_gusts_10m === 'string' ? hourlyUnits.wind_gusts_10m : 'm/s',
         visibility: typeof hourlyUnits.visibility === 'string' ? hourlyUnits.visibility : 'm',
+        uvIndex: typeof hourlyUnits.uv_index === 'string' ? hourlyUnits.uv_index : '',
         leafWetnessProbabilityMean: typeof dailyUnits.leaf_wetness_probability_mean === 'string'
             ? dailyUnits.leaf_wetness_probability_mean
             : '%',
@@ -243,6 +250,7 @@ function _parseCurrent(payload) {
         windDirection: parsed.values.windDirection,
         windGusts: parsed.values.windGusts,
         visibility: parsed.values.visibility,
+        uvIndex: parsed.values.uvIndex,
         missingFields: parsed.missingFields,
         isPartial: parsed.missingFields.length > 0,
     };
@@ -432,6 +440,7 @@ var parseOpenMeteoResponse = function(payload, options = {}) {
             windDirection: parsed.series.windDirection,
             windGusts: parsed.series.windGusts,
             visibility: parsed.series.visibility,
+            uvIndex: parsed.series.uvIndex,
             missingFields: parsed.missingFields,
             isPartial: parsed.isPartial,
         },

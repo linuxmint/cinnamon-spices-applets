@@ -5,7 +5,7 @@ const ByteArray = imports.byteArray;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 
-const RESPONSE_CACHE_VERSION = 5;
+const RESPONSE_CACHE_VERSION = 6;
 const VEGETATION_CACHE_VERSION = 1;
 const STABLE_CACHE_VERSION = 1;
 const DEFAULT_NAMESPACE = 'airaware';
@@ -743,5 +743,6 @@ var createCache = function(options = {}) {
                 callback
             );
         },
+
     };
 };

@@ -1,4 +1,5 @@
 /* exported calculateRisk, classifyValue, categoryFromScore,
+ * calculateUvBurden, getUvCategory,
  * calculatePollenScore, calculateRegulatedPollutionScore,
  * calculateAtmosphericIrritantsScore, calculatePollenBurden,
  * calculateRegulatedPollutantBurden, calculateAtmosphericContextBurden,
@@ -156,6 +157,15 @@ function _weightedClassified(values, fields, thresholdMap, weights) {
     };
 }
 
+function _scale(value, inMin, inMax, outMin, outMax) {
+    if (inMax === inMin)
+        return outMin;
+
+    const ratio = Math.max(0, Math.min(1, (value - inMin) / (inMax - inMin)));
+
+    return outMin + ((outMax - outMin) * ratio);
+}
+
 function _pollenSource(input) {
     if (input && input.pollen)
         return input.pollen;
@@ -305,6 +315,88 @@ var categoryFromScore = function(score) {
         return _copyLevel(Constants.RISK_LEVELS.MODERATE);
 
     return _copyLevel(Constants.RISK_LEVELS.LOW);
+};
+
+/**
+ * Convert a UV index reading to its established public UV category.
+ *
+ * @param {number} uvIndex - UV index value.
+ * @returns {Object|null} Category object or null when unavailable.
+ */
+var getUvCategory = function(uvIndex) {
+    if (!_isFiniteNumber(uvIndex) || uvIndex < 0)
+        return null;
+
+    const value = _sanitizeValue(uvIndex);
+    const thresholds = Constants.UV_INDEX_THRESHOLDS;
+
+    if (value === null)
+        return null;
+
+    if (value >= thresholds.extremeMin) {
+        return {
+            id: 'extreme',
+            label: 'Extreme',
+            minValue: thresholds.extremeMin,
+        };
+    }
+
+    if (value >= thresholds.veryHighMin)
+        return _copyLevel(Constants.RISK_LEVELS.VERY_HIGH);
+
+    if (value >= thresholds.highMin)
+        return _copyLevel(Constants.RISK_LEVELS.HIGH);
+
+    if (value >= thresholds.moderateMin)
+        return _copyLevel(Constants.RISK_LEVELS.MODERATE);
+
+    return _copyLevel(Constants.RISK_LEVELS.LOW);
+};
+
+/**
+ * Normalize UV index to a 0-100 environmental burden.
+ *
+ * This burden is available for the optional personalized score only. It does
+ * not modify AirAware's default environmental burden score.
+ *
+ * @param {number} uvIndex - UV index value.
+ * @returns {Object} Individual UV burden result.
+ */
+var calculateUvBurden = function(uvIndex) {
+    if (!_isFiniteNumber(uvIndex) || uvIndex < 0) {
+        return _unavailableBurden('uvIndex', 'open-meteo-weather');
+    }
+
+    const value = _sanitizeValue(uvIndex);
+    const thresholds = Constants.UV_INDEX_THRESHOLDS;
+
+    if (value === null) {
+        return _unavailableBurden('uvIndex', 'open-meteo-weather');
+    }
+
+    let score = 0;
+
+    if (value <= thresholds.lowMax)
+        score = _scale(value, 0, thresholds.lowMax, 0, 20);
+    else if (value <= thresholds.moderateMax)
+        score = _scale(value, thresholds.moderateMin, thresholds.moderateMax, 30, 50);
+    else if (value <= thresholds.highMax)
+        score = _scale(value, thresholds.highMin, thresholds.highMax, 60, 70);
+    else if (value <= thresholds.veryHighMax)
+        score = _scale(value, thresholds.veryHighMin, thresholds.veryHighMax, 80, 90);
+    else
+        score = _scale(value, thresholds.extremeMin, thresholds.burdenMax, 95, 100);
+
+    const clampedScore = _clampScore(score);
+
+    return _availableBurden(
+        'uvIndex',
+        value,
+        clampedScore,
+        categoryFromScore(clampedScore),
+        '',
+        'open-meteo-weather'
+    );
 };
 
 /**

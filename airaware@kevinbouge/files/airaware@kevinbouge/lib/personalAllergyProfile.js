@@ -1,7 +1,10 @@
 /* exported PROFILE_VERSION, FACTOR_IDS, DEFAULT_ENABLED_FACTORS,
- * normalizeProfile, profileFromSettings */
+ * normalizeProfile, profileFromSettings, profileFingerprint */
 
 var PROFILE_VERSION = 1;
+const Constants = imports.constants;
+
+var PERSONALIZED_SCORING_FINGERPRINT_VERSION = 2;
 
 var FACTOR_IDS = Object.freeze([
     'pollen_alder',
@@ -20,6 +23,7 @@ var FACTOR_IDS = Object.freeze([
     'aerosol_optical_depth',
     'dust',
     'wildfire_pm10',
+    'uv_index',
 ]);
 
 var DEFAULT_ENABLED_FACTORS = Object.freeze({
@@ -39,6 +43,7 @@ var DEFAULT_ENABLED_FACTORS = Object.freeze({
     aerosol_optical_depth: true,
     dust: true,
     wildfire_pm10: true,
+    uv_index: false,
 });
 
 function _isObject(value) {
@@ -105,6 +110,36 @@ var profileFromSettings = function(settings = {}) {
             aerosol_optical_depth: source.profileAerosolOpticalDepth !== false,
             dust: source.profileDust !== false,
             wildfire_pm10: source.profileWildfirePm10 !== false,
+            uv_index: source.profileUvIndex === true,
         },
     });
+};
+
+/**
+ * Build a stable local fingerprint for selected profile factors.
+ *
+ * The fingerprint identifies the local scoring model and selected factor set.
+ * It is not sent to providers and does not include user-identifying data.
+ *
+ * @param {Object} profileInput - Normalized or profile-like settings data.
+ * @returns {string} Stable fingerprint string.
+ */
+var profileFingerprint = function(profileInput = {}) {
+    const profile = normalizeProfile(profileInput);
+    const groupWeights = [
+        `pollen=${Constants.PERSONALIZED_RISK_WEIGHTS.pollen}`,
+        `regulatedPollution=${Constants.PERSONALIZED_RISK_WEIGHTS.regulatedPollution}`,
+        `atmosphericContext=${Constants.PERSONALIZED_RISK_WEIGHTS.atmosphericContext}`,
+        `mold=${Constants.PERSONALIZED_RISK_WEIGHTS.mold}`,
+        `uv=${Constants.PERSONALIZED_RISK_WEIGHTS.uv}`,
+    ].join(',');
+    const contextWeights = [
+        `carbonMonoxide=${Constants.ATMOSPHERIC_CONTEXT_WEIGHTS.carbonMonoxide}`,
+        `aerosolOpticalDepth=${Constants.ATMOSPHERIC_CONTEXT_WEIGHTS.aerosolOpticalDepth}`,
+        `dust=${Constants.ATMOSPHERIC_CONTEXT_WEIGHTS.dust}`,
+        `wildfirePm10=${Constants.ATMOSPHERIC_CONTEXT_WEIGHTS.wildfirePm10}`,
+    ].join(',');
+
+    return `v${PROFILE_VERSION}:s${PERSONALIZED_SCORING_FINGERPRINT_VERSION}:` +
+        `f=${profile.selectedFactorIds.join(',')}:gw=${groupWeights}:cw=${contextWeights}`;
 };

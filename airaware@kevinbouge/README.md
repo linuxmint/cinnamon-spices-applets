@@ -16,10 +16,12 @@ AirAware reports environmental conditions only. It does not predict symptoms, di
 - Location-aware pollutant-specific AQI scoring for regulated air pollution
 - Six pollen types: alder, birch, grass, mugwort, olive, and ragweed
 - Weather-based Mold potential using humidity, leaf wetness, precipitation, temperature, dew point, and wind
+- UV index from Open-Meteo, optionally included in personalized scoring
 - Atmospheric irritant context from carbon monoxide, aerosol optical depth, dust, and optional wildfire-related PM10 where available
-- Current readings for pollen, PM2.5, PM10, NO₂, O₃, SO₂, carbon monoxide, aerosol optical depth, dust, and Mold potential
+- Current readings for pollen, PM2.5, PM10, NO₂, O₃, SO₂, carbon monoxide, aerosol optical depth, dust, UV index, and Mold potential
 - Optional nearby vegetation context from OpenStreetMap mapped vegetation and land-use data, with popup details hidden by default
 - Optional Personal Allergy Profile for a separate personalized environmental risk score
+- Best outdoor window based on the next 24 hours of selected Personal Allergy Profile factors
 - Forecast for today, tomorrow, and the next listed day
 - Cache fallback for coordinates, place names, nearby vegetation context, and the last successful environmental data response
 - Stale data indicator when current data cannot be refreshed
@@ -56,9 +58,12 @@ AirAware provides these Cinnamon settings:
 - Show or hide nearby vegetation details in the popup
 - Nearby vegetation search radius: 1 km, 2 km, or 5 km
 - Personal Allergy Profile: disabled by default
+- UV index Personal Allergy Profile factor: disabled by default
 - Panel score: Environmental burden or Personalized risk
 - Profile factors for pollen, mold, regulated pollutants, dust, and smoke-related particulate context
-- Popup section visibility for pollen, regulated pollution, atmospheric irritants, and Mold potential
+- Popup section visibility for pollen, regulated pollution, atmospheric irritants, Mold potential, UV index, personalized risk, and vegetation details
+- Show UV index in popup: disabled by default
+- Preferred outdoor window duration: 1, 2, or 3 hours
 - Optional personalized-score notifications, disabled by default
 - Show or hide the panel label
 - Notifications: disabled, High + Very High, or Very High only
@@ -80,13 +85,15 @@ When nearby vegetation context is enabled, latitude and longitude are sent to th
 
 Personal Allergy Profile selections are stored only in local Cinnamon settings. They are not sent to Open-Meteo, OpenStreetMap, or any other data provider.
 
+Best outdoor-window selection is calculated locally. AirAware does not send Personal Allergy Profile selections, personalized scores, or outdoor-window preferences to any provider.
+
 ## Data Sources
 
 AirAware uses the Open-Meteo Air Quality API:
 
 https://open-meteo.com/en/docs/air-quality-api
 
-AirAware also uses the Open-Meteo Weather Forecast API for weather variables used by Mold potential:
+AirAware also uses the Open-Meteo Weather Forecast API for weather variables used by Mold potential and UV index:
 
 https://open-meteo.com/en/docs
 
@@ -131,6 +138,10 @@ Profile selections are stored only in local Cinnamon settings and are not sent t
 
 The personalized score reflects selected environmental conditions only. It does not predict symptoms, diagnose allergies, or provide medical advice.
 
+UV index can optionally be included in the personalized score. UV does not modify the original AirAware environmental burden score.
+
+AirAware can identify the lowest-risk outdoor window during the next 24 hours based on the environmental factors selected in the Personal Allergy Profile.
+
 Panel icon line colors follow the current score category:
 
 - Low: green
@@ -154,6 +165,7 @@ Panel icon line colors follow the current score category:
 - AirAware does not account for personal sensitivity, medication, indoor exposure, masks, activity level, or clinical history.
 - A selected Personal Allergy Profile factor may be unavailable because of region, season, model coverage, or upstream data availability. Missing values are omitted rather than treated as zero.
 - The Personal Allergy Profile uses AirAware's environmental burden weighting across selected factors. It does not model clinical sensitivity or reaction severity.
+- The outdoor-window recommendation is based only on available selected environmental variables. It does not guarantee safe or symptom-free conditions.
 - Place names depend on OpenStreetMap Nominatim availability and may occasionally be approximate.
 - Nearby vegetation context depends on OpenStreetMap mapping coverage and Overpass availability.
 - OpenStreetMap vegetation coverage varies by region. Missing mapped features do not mean that the vegetation is absent.
@@ -201,7 +213,6 @@ gjs ../../tests/live-openmeteo-smoke.gjs
 
 - Manual location search/geocoding
 - Multiple saved locations
-- Hourly forecast
 - Multiple providers
 - Custom weighting
 - Graphs

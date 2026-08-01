@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: airaware@kevinbouge 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-08-01 12:07+0200\n"
+"POT-Creation-Date: 2026-08-01 15:25+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,448 +17,469 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:71 applet.js:1499 lib/formatter.js:82
+#. applet.js:73 applet.js:1538 lib/formatter.js:83
 msgid "Unknown"
 msgstr ""
 
-#. applet.js:201 applet.js:1137
+#. applet.js:208 applet.js:1172
 msgid "AirAware: loading environmental conditions"
 msgstr ""
 
-#. applet.js:582 applet.js:1136
+#. applet.js:617 applet.js:1171
 msgid "Loading"
 msgstr ""
 
-#. applet.js:1060 lib/formatter.js:83
+#. applet.js:1095 lib/formatter.js:84
 msgid "Unavailable"
 msgstr ""
 
-#. applet.js:1121
+#. applet.js:1156
 msgid "Unable to refresh environmental data; showing cached data."
 msgstr ""
 
-#. applet.js:1123
+#. applet.js:1158
 msgid "Unable to refresh environmental data."
 msgstr ""
 
-#. applet.js:1223
+#. applet.js:1258
 msgid "Personalized environmental risk is now {category}."
 msgstr ""
 
-#. applet.js:1224
+#. applet.js:1259
 msgid "Environmental allergy burden is now {category}."
 msgstr ""
 
 #. metadata.json->name
-#. applet.js:1230 applet.js:1274
+#. applet.js:1265 applet.js:1311
 msgid "AirAware"
 msgstr ""
 
-#. applet.js:1242
+#. applet.js:1277
 msgid "Test notification: environmental allergy burden is {category}."
 msgstr ""
 
-#. applet.js:1278
+#. applet.js:1315
 msgid "Environmental pollen, air pollution, and mold potential burden"
 msgstr ""
 
-#. applet.js:1293
+#. applet.js:1330
 msgid "Waiting for environmental data"
 msgstr ""
 
 #. settings-schema.json->panel-score-mode->options
-#. applet.js:1306
+#. applet.js:1343
 msgid "Environmental burden"
 msgstr ""
 
-#. applet.js:1311
+#. applet.js:1348
 msgid "Pollen"
 msgstr ""
 
-#. applet.js:1316
+#. applet.js:1353
 msgid "Regulated pollution"
 msgstr ""
 
 #. settings-schema.json->profile-pm25->description
-#. applet.js:1317 lib/formatter.js:93
+#. applet.js:1354 lib/formatter.js:94
 msgid "PM2.5"
 msgstr ""
 
 #. settings-schema.json->profile-pm10->description
-#. applet.js:1318 lib/formatter.js:94
+#. applet.js:1355 lib/formatter.js:95
 msgid "PM10"
 msgstr ""
 
-#. applet.js:1319 lib/formatter.js:95
+#. applet.js:1356 lib/formatter.js:96
 msgid "NO₂"
 msgstr ""
 
-#. applet.js:1320 lib/formatter.js:96
+#. applet.js:1357 lib/formatter.js:97
 msgid "O₃"
 msgstr ""
 
-#. applet.js:1321 lib/formatter.js:97
+#. applet.js:1358 lib/formatter.js:98
 msgid "SO₂"
 msgstr ""
 
-#. applet.js:1325
+#. applet.js:1362
 msgid "Atmospheric irritants"
 msgstr ""
 
-#. applet.js:1326 lib/formatter.js:100
+#. applet.js:1363 lib/formatter.js:101
 msgid "CO"
 msgstr ""
 
-#. applet.js:1328 lib/formatter.js:98
+#. applet.js:1364 lib/formatter.js:99
 msgid "Dust"
 msgstr ""
 
-#. applet.js:1330 lib/formatter.js:101
+#. applet.js:1366 lib/formatter.js:102
 msgid "Wildfire-related PM10"
 msgstr ""
 
-#. applet.js:1332 lib/formatter.js:99
+#. applet.js:1368 lib/formatter.js:100
 msgid "Aerosol optical depth"
 msgstr ""
 
-#. applet.js:1338
+#. applet.js:1374
 msgid "Mold"
 msgstr ""
 
 #. settings-schema.json->profile-mold->description
-#. applet.js:1340
+#. applet.js:1376
 msgid "Mold potential"
 msgstr ""
 
-#. applet.js:1347
-msgid "Last update"
+#. applet.js:1382
+msgid "Sun"
 msgstr ""
 
-#. applet.js:1369
+#. settings-schema.json->profile-uv-index->description
+#. applet.js:1383 lib/formatter.js:103
+msgid "UV index"
+msgstr ""
+
+#. applet.js:1408
 msgid "Pollen data unavailable"
 msgstr ""
 
 #. settings-schema.json->panel-score-mode->options
-#. applet.js:1378
+#. applet.js:1417
 msgid "Personalized risk"
 msgstr ""
 
-#. applet.js:1383
+#. applet.js:1422
 msgid "Select at least one factor in the Personal Allergy Profile."
 msgstr ""
 
-#. applet.js:1387 lib/formatter.js:127
+#. applet.js:1426 lib/formatter.js:129
 msgid "Personalized risk unavailable"
 msgstr ""
 
 #. settings-schema.json->vegetation->title
-#. applet.js:1459
+#. applet.js:1498
 msgid "Nearby vegetation"
 msgstr ""
 
-#. applet.js:1463
+#. applet.js:1502
 msgid "No nearby vegetation features were found in OpenStreetMap."
 msgstr ""
 
-#. applet.js:1472
+#. applet.js:1511
 msgid "Showing cached OpenStreetMap vegetation context."
 msgstr ""
 
-#. applet.js:1483
+#. applet.js:1522
 msgid "Resolving location"
 msgstr ""
 
-#. applet.js:1486
+#. applet.js:1525
 msgid "Place name unavailable"
 msgstr ""
 
-#. applet.js:1507 applet.js:1512
-msgid "Forecast"
+#. applet.js:1550
+msgid "Best outdoor window"
 msgstr ""
 
-#. applet.js:1508
-msgid "Forecast unavailable"
-msgstr ""
-
-#. applet.js:1515
-msgid "Only {days} forecast days are currently available from the data source."
-msgstr ""
-
-#. applet.js:1531 lib/formatter.js:130
+#. applet.js:1553 applet.js:1591 lib/formatter.js:132
 msgid "{category} ({score})"
 msgstr ""
 
-#. applet.js:1539
+#. applet.js:1567 applet.js:1572
+msgid "Forecast"
+msgstr ""
+
+#. applet.js:1568
+msgid "Forecast unavailable"
+msgstr ""
+
+#. applet.js:1575
+msgid "Only {days} forecast days are currently available from the data source."
+msgstr ""
+
+#. applet.js:1599
 msgid "Today"
 msgstr ""
 
-#. applet.js:1542
+#. applet.js:1602
 msgid "Tomorrow"
 msgstr ""
 
-#. applet.js:1549
+#. applet.js:1618
 msgid "Refreshing..."
 msgstr ""
 
-#. applet.js:1550
+#. applet.js:1618
 msgid "Refresh now"
 msgstr ""
 
-#. lib/formatter.js:78
-msgid "Low"
+#. applet.js:1657
+msgid "({updated})"
 msgstr ""
 
 #. lib/formatter.js:79
-msgid "Moderate"
+msgid "Low"
 msgstr ""
 
 #. lib/formatter.js:80
-msgid "High"
+msgid "Moderate"
 msgstr ""
 
 #. lib/formatter.js:81
+msgid "High"
+msgstr ""
+
+#. lib/formatter.js:82
 msgid "Very High"
 msgstr ""
 
-#. lib/formatter.js:84
+#. lib/formatter.js:85
 msgid "Weather data unavailable"
 msgstr ""
 
-#. lib/formatter.js:85
+#. lib/formatter.js:86
 msgid "Tree pollen"
 msgstr ""
 
 #. settings-schema.json->profile-pollen-alder->description
-#. lib/formatter.js:86
+#. lib/formatter.js:87
 msgid "Alder pollen"
 msgstr ""
 
 #. settings-schema.json->profile-pollen-birch->description
-#. lib/formatter.js:87
+#. lib/formatter.js:88
 msgid "Birch pollen"
 msgstr ""
 
 #. settings-schema.json->profile-pollen-grass->description
-#. lib/formatter.js:88
+#. lib/formatter.js:89
 msgid "Grass pollen"
 msgstr ""
 
 #. settings-schema.json->profile-pollen-mugwort->description
-#. lib/formatter.js:89
+#. lib/formatter.js:90
 msgid "Mugwort pollen"
 msgstr ""
 
 #. settings-schema.json->profile-pollen-olive->description
-#. lib/formatter.js:90
+#. lib/formatter.js:91
 msgid "Olive pollen"
 msgstr ""
 
 #. settings-schema.json->profile-pollen-ragweed->description
-#. lib/formatter.js:91
+#. lib/formatter.js:92
 msgid "Ragweed pollen"
 msgstr ""
 
-#. lib/formatter.js:92
+#. lib/formatter.js:93
 msgid "Weed pollen"
 msgstr ""
 
-#. lib/formatter.js:102
+#. lib/formatter.js:104
 msgid "Alder"
 msgstr ""
 
-#. lib/formatter.js:103
+#. lib/formatter.js:105
 msgid "Birch"
 msgstr ""
 
-#. lib/formatter.js:104
+#. lib/formatter.js:106
 msgid "Grass"
 msgstr ""
 
-#. lib/formatter.js:105
+#. lib/formatter.js:107
 msgid "Mugwort"
 msgstr ""
 
-#. lib/formatter.js:106
+#. lib/formatter.js:108
 msgid "Olive"
 msgstr ""
 
-#. lib/formatter.js:107
+#. lib/formatter.js:109
 msgid "Ragweed"
 msgstr ""
 
-#. lib/formatter.js:108
+#. lib/formatter.js:110
 msgid "Woodland"
 msgstr ""
 
-#. lib/formatter.js:109
+#. lib/formatter.js:111
 msgid "Grassland"
 msgstr ""
 
-#. lib/formatter.js:110
+#. lib/formatter.js:112
 msgid "Orchard"
 msgstr ""
 
-#. lib/formatter.js:111
+#. lib/formatter.js:113
 msgid "Scrub"
 msgstr ""
 
-#. lib/formatter.js:112
+#. lib/formatter.js:114
 msgid "Parkland"
 msgstr ""
 
-#. lib/formatter.js:113
+#. lib/formatter.js:115
 msgid "Farmland"
 msgstr ""
 
-#. lib/formatter.js:114
+#. lib/formatter.js:116
 msgid "Mapped birch trees"
 msgstr ""
 
-#. lib/formatter.js:115
+#. lib/formatter.js:117
 msgid "Mapped alder trees"
 msgstr ""
 
-#. lib/formatter.js:116
+#. lib/formatter.js:118
 msgid "Mapped olive trees"
 msgstr ""
 
-#. lib/formatter.js:117
+#. lib/formatter.js:119
 msgid "Mapped vegetation"
 msgstr ""
 
-#. lib/formatter.js:118
+#. lib/formatter.js:120
 msgid "Mapped allergenic trees"
 msgstr ""
 
-#. lib/formatter.js:119
+#. lib/formatter.js:121
 msgid "AQI"
 msgstr ""
 
-#. lib/formatter.js:120
+#. lib/formatter.js:122
 msgid "US AQI"
 msgstr ""
 
-#. lib/formatter.js:121
+#. lib/formatter.js:123
 msgid "EU AQI"
 msgstr ""
 
-#. lib/formatter.js:122
+#. lib/formatter.js:124
 msgid "No recent data"
 msgstr ""
 
-#. lib/formatter.js:123
+#. lib/formatter.js:125
 msgid "Stale data"
 msgstr ""
 
-#. lib/formatter.js:124
+#. lib/formatter.js:126
 msgid "Updated just now"
 msgstr ""
 
-#. lib/formatter.js:125
+#. lib/formatter.js:127
 msgid "Updated 1 min ago"
 msgstr ""
 
-#. lib/formatter.js:126
+#. lib/formatter.js:128
 msgid "1 selected factor is unavailable"
 msgstr ""
 
-#. lib/formatter.js:128
+#. lib/formatter.js:130
 msgid ""
 "Environmental burden: {category} ({score})\n"
 "Personalized risk unavailable"
 msgstr ""
 
-#. lib/formatter.js:129
+#. lib/formatter.js:131
 msgid ""
 "Environmental burden: {category} ({score}) — cached data\n"
 "Personalized risk unavailable"
 msgstr ""
 
-#. lib/formatter.js:131
+#. lib/formatter.js:133
 msgid "{category} ({score}) — cached data"
 msgstr ""
 
-#. lib/formatter.js:132
+#. lib/formatter.js:134
 msgid "{count} selected factors are unavailable"
 msgstr ""
 
-#. lib/formatter.js:133
+#. lib/formatter.js:135
 msgid "{degrees}° {direction}"
 msgstr ""
 
-#. lib/formatter.js:134
+#. lib/formatter.js:136
 msgid "{distance} km"
 msgstr ""
 
-#. lib/formatter.js:135
+#. lib/formatter.js:137
 msgid "{distance} m"
 msgstr ""
 
-#. lib/formatter.js:136
+#. lib/formatter.js:138
 msgid "{label} {value}"
 msgstr ""
 
-#. lib/formatter.js:137
+#. lib/formatter.js:139
 msgid "{score}%"
 msgstr ""
 
-#. lib/formatter.js:138
+#. lib/formatter.js:140
 msgid "{value} {unit}"
 msgstr ""
 
-#. lib/formatter.js:139
+#. lib/formatter.js:141
 msgid "{value}%"
 msgstr ""
 
-#. lib/formatter.js:140
-msgid "N"
-msgstr ""
-
-#. lib/formatter.js:141
-msgid "NE"
-msgstr ""
-
 #. lib/formatter.js:142
-msgid "E"
+msgid "{value} ({change})"
 msgstr ""
 
 #. lib/formatter.js:143
-msgid "SE"
+msgid "{start}–{end} · {category} ({score})"
 msgstr ""
 
 #. lib/formatter.js:144
-msgid "S"
+msgid "N"
 msgstr ""
 
 #. lib/formatter.js:145
-msgid "SW"
+msgid "NE"
 msgstr ""
 
 #. lib/formatter.js:146
-msgid "W"
+msgid "E"
 msgstr ""
 
 #. lib/formatter.js:147
-msgid "NW"
+msgid "SE"
 msgstr ""
 
 #. lib/formatter.js:148
-msgid "grains/m³"
+msgid "S"
 msgstr ""
 
 #. lib/formatter.js:149
-msgid "µg/m³"
+msgid "SW"
 msgstr ""
 
 #. lib/formatter.js:150
-msgid "°C"
+msgid "W"
 msgstr ""
 
 #. lib/formatter.js:151
-msgid "m/s"
+msgid "NW"
 msgstr ""
 
 #. lib/formatter.js:152
+msgid "grains/m³"
+msgstr ""
+
+#. lib/formatter.js:153
+msgid "µg/m³"
+msgstr ""
+
+#. lib/formatter.js:154
+msgid "°C"
+msgstr ""
+
+#. lib/formatter.js:155
+msgid "m/s"
+msgstr ""
+
+#. lib/formatter.js:156
 msgid "km"
 msgstr ""
 
@@ -470,6 +491,11 @@ msgstr ""
 
 #. settings-schema.json->general->title
 msgid "General"
+msgstr ""
+
+#. settings-schema.json->popup-page->title
+#. settings-schema.json->popup->title
+msgid "Popup"
 msgstr ""
 
 #. settings-schema.json->profile->title
@@ -485,8 +511,12 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
-#. settings-schema.json->popup->title
-msgid "Popup"
+#. settings-schema.json->outdoor->title
+msgid "Outdoor"
+msgstr ""
+
+#. settings-schema.json->profile-sun->title
+msgid "Sun exposure"
 msgstr ""
 
 #. settings-schema.json->panel->title
@@ -540,6 +570,10 @@ msgstr ""
 
 #. settings-schema.json->show-mold-in-popup->description
 msgid "Show mold"
+msgstr ""
+
+#. settings-schema.json->show-uv-in-popup->description
+msgid "Show UV index"
 msgstr ""
 
 #. settings-schema.json->panel-score-mode->description
@@ -613,6 +647,22 @@ msgstr ""
 
 #. settings-schema.json->show-personalized-risk-in-popup->description
 msgid "Show personalized risk"
+msgstr ""
+
+#. settings-schema.json->outdoor-window-duration->description
+msgid "Preferred outdoor window duration"
+msgstr ""
+
+#. settings-schema.json->outdoor-window-duration->options
+msgid "1 hour"
+msgstr ""
+
+#. settings-schema.json->outdoor-window-duration->options
+msgid "2 hours"
+msgstr ""
+
+#. settings-schema.json->outdoor-window-duration->options
+msgid "3 hours"
 msgstr ""
 
 #. settings-schema.json->profile-nitrogen-dioxide->description

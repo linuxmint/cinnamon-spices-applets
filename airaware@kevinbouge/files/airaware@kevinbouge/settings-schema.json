@@ -1,16 +1,21 @@
 {
     "layout": {
         "type": "layout",
-        "pages": ["general", "profile"],
+        "pages": ["general", "popup-page", "profile"],
         "general": {
             "type": "page",
             "title": "General",
-            "sections": ["refresh", "location", "panel", "vegetation", "popup", "alerts"]
+            "sections": ["refresh", "location", "panel", "vegetation", "outdoor", "alerts"]
+        },
+        "popup-page": {
+            "type": "page",
+            "title": "Popup",
+            "sections": ["popup"]
         },
         "profile": {
             "type": "page",
             "title": "Personal Allergy Profile",
-            "sections": ["personal-profile"]
+            "sections": ["personal-profile", "profile-sun"]
         },
         "refresh": {
             "type": "section",
@@ -27,6 +32,11 @@
             "title": "Nearby vegetation",
             "keys": ["enable-vegetation-context", "vegetation-radius"]
         },
+        "outdoor": {
+            "type": "section",
+            "title": "Outdoor",
+            "keys": ["outdoor-window-duration"]
+        },
         "popup": {
             "type": "section",
             "title": "Popup",
@@ -35,6 +45,7 @@
                 "show-regulated-pollution-in-popup",
                 "show-atmospheric-irritants-in-popup",
                 "show-mold-in-popup",
+                "show-uv-in-popup",
                 "show-vegetation-in-popup",
                 "show-personalized-risk-in-popup"
             ]
@@ -61,6 +72,11 @@
                 "profile-dust",
                 "profile-wildfire-pm10"
             ]
+        },
+        "profile-sun": {
+            "type": "section",
+            "title": "Sun exposure",
+            "keys": ["profile-uv-index"]
         },
         "panel": {
             "type": "section",
@@ -109,6 +125,11 @@
         "type": "switch",
         "default": true,
         "description": "Show mold"
+    },
+    "show-uv-in-popup": {
+        "type": "switch",
+        "default": false,
+        "description": "Show UV index"
     },
     "panel-score-mode": {
         "type": "combobox",
@@ -175,6 +196,16 @@
         "type": "switch",
         "default": true,
         "description": "Show personalized risk"
+    },
+    "outdoor-window-duration": {
+        "type": "combobox",
+        "default": 2,
+        "description": "Preferred outdoor window duration",
+        "options": {
+            "1 hour": 1,
+            "2 hours": 2,
+            "3 hours": 3
+        }
     },
     "profile-pollen-alder": {
         "type": "switch",
@@ -255,6 +286,11 @@
         "type": "switch",
         "default": true,
         "description": "Smoke or wildfire particulate context"
+    },
+    "profile-uv-index": {
+        "type": "switch",
+        "default": false,
+        "description": "UV index"
     },
     "notification-level": {
         "type": "combobox",
