@@ -14,7 +14,7 @@
 }
 
 .airaware-subtitle {
-    opacity: 0.72;
+    opacity: 0.82;
     font-size: 0.9em;
     max-width: 380px;
 }
@@ -81,18 +81,34 @@
     font-weight: bold;
 }
 
+.airaware-score-risk-low {
+    color: #45BF75;
+}
+
+.airaware-score-risk-moderate {
+    color: #D6B84D;
+}
+
+.airaware-score-risk-high {
+    color: #F28C38;
+}
+
+.airaware-score-risk-very-high {
+    color: #E05252;
+}
+
 .airaware-muted {
-    opacity: 0.72;
+    opacity: 0.82;
 }
 
 .airaware-refresh-age {
-    opacity: 0.72;
+    opacity: 0.82;
     max-width: 165px;
     text-align: right;
 }
 
 .airaware-refresh-label {
-    opacity: 0.72;
+    opacity: 0.82;
 }
 
 .airaware-action-content {

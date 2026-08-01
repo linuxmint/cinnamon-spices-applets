@@ -2079,6 +2079,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
     _addScoreSummary(risk, options = {}) {
         const showLocation = options.showLocation !== false;
+        const categoryStyleClass = this._scoreCategoryStyleClass(risk.category);
         const item = new PopupMenu.PopupBaseMenuItem({
             reactive: false,
         });
@@ -2091,11 +2092,11 @@ class AirAwareApplet extends Applet.TextIconApplet {
         });
         const score = new St.Label({
             text: Formatter.formatScore(risk.score),
-            style_class: 'airaware-score-value airaware-column-label',
+            style_class: `airaware-score-value airaware-column-label ${categoryStyleClass}`,
         });
         const category = new St.Label({
             text: Formatter.formatCategory(risk.category),
-            style_class: 'airaware-score-category',
+            style_class: `airaware-score-category ${categoryStyleClass}`,
         });
 
         score.clutter_text.line_wrap = true;
@@ -2116,6 +2117,14 @@ class AirAwareApplet extends Applet.TextIconApplet {
         box.add(category);
         item.addActor(box);
         this._addMenuItem(item);
+    }
+
+    _scoreCategoryStyleClass(category) {
+        const categoryId = category && typeof category.id === 'string'
+            ? category.id
+            : 'unavailable';
+
+        return `airaware-score-risk-${categoryId}`;
     }
 
     _addInfoRow(label, value) {
