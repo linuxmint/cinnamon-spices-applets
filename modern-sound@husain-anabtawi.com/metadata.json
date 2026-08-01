@@ -1,0 +1,9 @@
+{
+    "uuid": "modern-sound@husain-anabtawi.com",
+    "name": "Modern Sound",
+    "description": "A modern Cinnamon sound applet with volume control",
+    "icon": "cs-sound",
+    "max-instances": 1,
+    "version": "1.0.0",
+    "cinnamon-version": ["6.0"]
+}

@@ -1,0 +1,11 @@
+{
+    "section-panel": {
+        "type": "section",
+        "description": "Panel"
+    },
+    "keyOpen": {
+        "type": "keybinding",
+        "default": "<Shift><Super>s",
+        "description": "Open menu"
+    }
+}
