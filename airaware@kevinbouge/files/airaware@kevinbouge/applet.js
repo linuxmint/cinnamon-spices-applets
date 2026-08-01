@@ -1447,6 +1447,9 @@ class AirAwareApplet extends Applet.TextIconApplet {
         const header = new PopupMenu.PopupBaseMenuItem({
             activate: false,
         });
+        const headerBox = new St.BoxLayout({
+            style_class: 'airaware-submenu-header-box',
+        });
         const titleLabel = new St.Label({
             text: title,
             style_class: 'airaware-submenu-title',
@@ -1477,11 +1480,13 @@ class AirAwareApplet extends Applet.TextIconApplet {
 
         header.actor.add_style_class_name('airaware-submenu-header');
         this._useMutedMenuText(header);
-        header.addActor(titleLabel);
-        header.addActor(arrow, {
+        headerBox.add(titleLabel, {
+            expand: true,
+        });
+        headerBox.add(arrow);
+        header.addActor(headerBox, {
             expand: true,
             span: -1,
-            align: St.Align.END,
         });
         header.actor.connect('button-release-event', () => toggleExpandedState());
         header.actor.connect('key-press-event', (actor, event) => {
@@ -1775,7 +1780,8 @@ class AirAwareApplet extends Applet.TextIconApplet {
             _replace(_('{category} ({score})'), {
                 category: Formatter.formatCategory(window.category),
                 score: Formatter.formatScore(window.averageScore),
-            })
+            }),
+            this._scoreCategoryStyleClass(window.category)
         );
 
         return true;
@@ -1804,8 +1810,9 @@ class AirAwareApplet extends Applet.TextIconApplet {
             const risk = this._forecastRisks[index] || null;
             const label = this._formatForecastDayLabel(day, index);
             const value = risk ? this._formatForecastValue(risk) : _('Unavailable');
+            const valueStyleClass = risk ? this._scoreCategoryStyleClass(risk.category) : '';
 
-            this._addInfoRow(label, value);
+            this._addInfoRow(label, value, valueStyleClass);
         }
     }
 
@@ -2104,12 +2111,16 @@ class AirAwareApplet extends Applet.TextIconApplet {
         topRow.add(score);
 
         if (showLocation) {
+            const spacer = new St.Widget({
+                style_class: 'airaware-column-middle',
+            });
             const location = new St.Label({
                 text: this._formatLocationLabel(),
                 style_class: 'airaware-score-place airaware-column-value',
             });
 
             location.clutter_text.line_wrap = true;
+            topRow.add(spacer);
             topRow.add(location);
         }
 
@@ -2127,7 +2138,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
         return `airaware-score-risk-${categoryId}`;
     }
 
-    _addInfoRow(label, value) {
+    _addInfoRow(label, value, valueStyleClass = '') {
         const item = new PopupMenu.PopupBaseMenuItem({
             reactive: false,
         });
@@ -2138,15 +2149,19 @@ class AirAwareApplet extends Applet.TextIconApplet {
             text: label,
             style_class: 'airaware-row-label airaware-column-label',
         });
+        const spacer = new St.Widget({
+            style_class: 'airaware-column-middle',
+        });
         const valueActor = new St.Label({
             text: value,
-            style_class: 'airaware-row-value airaware-column-value',
+            style_class: `airaware-row-value airaware-column-value ${valueStyleClass}`,
         });
 
         this._useMutedMenuText(item);
         labelActor.clutter_text.line_wrap = true;
         valueActor.clutter_text.line_wrap = true;
         box.add(labelActor);
+        box.add(spacer);
         box.add(valueActor);
         item.addActor(box);
         this._addMenuItem(item);
@@ -2165,11 +2180,11 @@ class AirAwareApplet extends Applet.TextIconApplet {
         });
         const rawActor = new St.Label({
             text: Formatter.formatPollutant(rawValue),
-            style_class: 'airaware-pollutant-value',
+            style_class: 'airaware-pollutant-value airaware-column-value',
         });
         const aqiActor = new St.Label({
             text: Formatter.formatAqi(aqiValue, aqiSourceLabel),
-            style_class: 'airaware-aqi-value',
+            style_class: 'airaware-aqi-value airaware-column-middle',
         });
 
         this._useMutedMenuText(item);
@@ -2177,8 +2192,8 @@ class AirAwareApplet extends Applet.TextIconApplet {
         rawActor.clutter_text.line_wrap = true;
         aqiActor.clutter_text.line_wrap = false;
         box.add(labelActor);
-        box.add(rawActor);
         box.add(aqiActor);
+        box.add(rawActor);
         item.addActor(box);
         this._addMenuItem(item);
     }
