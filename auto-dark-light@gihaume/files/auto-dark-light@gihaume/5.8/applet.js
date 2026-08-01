@@ -1,15 +1,6 @@
-//#region node_modules/.pnpm/mobx@6.15.0/node_modules/mobx/dist/mobx.esm.js
-function die(error) {
-	for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) args[_key - 1] = arguments[_key];
-	throw new Error(typeof error === "number" ? "[MobX] minified error nr: " + error + (args.length ? " " + args.map(String).join(",") : "") + ". Find the full error at: https://github.com/mobxjs/mobx/blob/main/packages/mobx/src/errors.ts" : "[MobX] " + error);
-}
-var mockGlobal = {};
-function getGlobal() {
-	if (typeof globalThis !== "undefined") return globalThis;
-	if (typeof window !== "undefined") return window;
-	if (typeof global !== "undefined") return global;
-	if (typeof self !== "undefined") return self;
-	return mockGlobal;
+//#region node_modules/.pnpm/mobx@7.0.0/node_modules/mobx/dist/mobx.mjs
+function die(error, ...args) {
+	throw new Error(`[MobX] minified error nr: ${error}${args.length ? " " + args.map(String).join(",") : ""}. See mobx.js.org/errors`);
 }
 var assign = Object.assign;
 var getDescriptor = Object.getOwnPropertyDescriptor;
@@ -19,23 +10,8 @@ var EMPTY_ARRAY = [];
 Object.freeze(EMPTY_ARRAY);
 var EMPTY_OBJECT = {};
 Object.freeze(EMPTY_OBJECT);
-var hasProxy = typeof Proxy !== "undefined";
-var plainObjectString = /* @__PURE__ */ Object.toString();
-function assertProxies() {
-	if (!hasProxy) die("Proxy not available");
-}
-/**
-* Makes sure that the provided function is invoked at most once.
-*/
-function once(func) {
-	var invoked = false;
-	return function() {
-		if (invoked) return;
-		invoked = true;
-		return func.apply(this, arguments);
-	};
-}
-var noop = function noop() {};
+var plainObjectString = /*#__PURE__*/ Object.toString();
+var noop = () => {};
 function isFunction(fn) {
 	return typeof fn === "function";
 }
@@ -52,13 +28,13 @@ function isObject(value) {
 }
 function isPlainObject(value) {
 	if (!isObject(value)) return false;
-	var proto = Object.getPrototypeOf(value);
+	const proto = Object.getPrototypeOf(value);
 	if (proto == null) return true;
-	var protoConstructor = Object.hasOwnProperty.call(proto, "constructor") && proto.constructor;
+	const protoConstructor = hasProp(proto, "constructor") && proto.constructor;
 	return typeof protoConstructor === "function" && protoConstructor.toString() === plainObjectString;
 }
 function isGenerator(obj) {
-	var constructor = obj == null ? void 0 : obj.constructor;
+	const constructor = obj == null ? void 0 : obj.constructor;
 	if (!constructor) return false;
 	if ("GeneratorFunction" === constructor.name || "GeneratorFunction" === constructor.displayName) return true;
 	return false;
@@ -80,7 +56,7 @@ function addHiddenFinalProp(object, propName, value) {
 	});
 }
 function createInstanceofPredicate(name, theClass) {
-	var propName = "isMobX" + name;
+	const propName = "isMobX" + name;
 	theClass.prototype[propName] = true;
 	return function(x) {
 		return isObject(x) && x[propName] === true;
@@ -96,7 +72,9 @@ function isES6Map(thing) {
 * Makes sure a Map is an instance of non-inherited native or observable Map.
 */
 function isPlainES6Map(thing) {
-	return Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf(thing))) === null;
+	const mapProto = Object.getPrototypeOf(thing);
+	const objectProto = Object.getPrototypeOf(mapProto);
+	return Object.getPrototypeOf(objectProto) === null;
 }
 /**
 * Yields true for both native and observable Set, even across different windows.
@@ -104,35 +82,23 @@ function isPlainES6Map(thing) {
 function isES6Set(thing) {
 	return thing != null && Object.prototype.toString.call(thing) === "[object Set]";
 }
-var hasGetOwnPropertySymbols = typeof Object.getOwnPropertySymbols !== "undefined";
 /**
 * Returns the following: own enumerable keys and symbols.
 */
 function getPlainObjectKeys(object) {
-	var keys = Object.keys(object);
-	if (!hasGetOwnPropertySymbols) return keys;
-	var symbols = Object.getOwnPropertySymbols(object);
+	const keys = Object.keys(object);
+	const symbols = Object.getOwnPropertySymbols(object);
 	if (!symbols.length) return keys;
-	return [].concat(keys, symbols.filter(function(s) {
-		return objectPrototype.propertyIsEnumerable.call(object, s);
-	}));
+	return [...keys, ...symbols.filter((s) => objectPrototype.propertyIsEnumerable.call(object, s))];
 }
-var ownKeys = typeof Reflect !== "undefined" && Reflect.ownKeys ? Reflect.ownKeys : hasGetOwnPropertySymbols ? function(obj) {
-	return Object.getOwnPropertyNames(obj).concat(Object.getOwnPropertySymbols(obj));
-} : Object.getOwnPropertyNames;
+var ownKeys = Reflect.ownKeys;
 function toPrimitive(value) {
 	return value === null ? null : typeof value === "object" ? "" + value : value;
 }
 function hasProp(target, prop) {
 	return objectPrototype.hasOwnProperty.call(target, prop);
 }
-var getOwnPropertyDescriptors = Object.getOwnPropertyDescriptors || function getOwnPropertyDescriptors(target) {
-	var res = {};
-	ownKeys(target).forEach(function(key) {
-		res[key] = getDescriptor(target, key);
-	});
-	return res;
-};
+var getOwnPropertyDescriptors = Object.getOwnPropertyDescriptors;
 function getFlag(flags, mask) {
 	return !!(flags & mask);
 }
@@ -141,199 +107,73 @@ function setFlag(flags, mask, newValue) {
 	else flags &= ~mask;
 	return flags;
 }
-function _arrayLikeToArray(r, a) {
-	(null == a || a > r.length) && (a = r.length);
-	for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
-	return n;
-}
-function _defineProperties(e, r) {
-	for (var t = 0; t < r.length; t++) {
-		var o = r[t];
-		o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o);
-	}
-}
-function _createClass(e, r, t) {
-	return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e;
-}
-function _createForOfIteratorHelperLoose(r, e) {
-	var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-	if (t) return (t = t.call(r)).next.bind(t);
-	if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) {
-		t && (r = t);
-		var o = 0;
-		return function() {
-			return o >= r.length ? { done: !0 } : {
-				done: !1,
-				value: r[o++]
-			};
-		};
-	}
-	throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _extends() {
-	return _extends = Object.assign ? Object.assign.bind() : function(n) {
-		for (var e = 1; e < arguments.length; e++) {
-			var t = arguments[e];
-			for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
-		}
-		return n;
-	}, _extends.apply(null, arguments);
-}
-function _inheritsLoose(t, o) {
-	t.prototype = Object.create(o.prototype), t.prototype.constructor = t, _setPrototypeOf(t, o);
-}
-function _setPrototypeOf(t, e) {
-	return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function(t, e) {
-		return t.__proto__ = e, t;
-	}, _setPrototypeOf(t, e);
-}
-function _toPrimitive(t, r) {
-	if ("object" != typeof t || !t) return t;
-	var e = t[Symbol.toPrimitive];
-	if (void 0 !== e) {
-		var i = e.call(t, r || "default");
-		if ("object" != typeof i) return i;
-		throw new TypeError("@@toPrimitive must return a primitive value.");
-	}
-	return ("string" === r ? String : Number)(t);
-}
-function _toPropertyKey(t) {
-	var i = _toPrimitive(t, "string");
-	return "symbol" == typeof i ? i : i + "";
-}
-function _unsupportedIterableToArray(r, a) {
-	if (r) {
-		if ("string" == typeof r) return _arrayLikeToArray(r, a);
-		var t = {}.toString.call(r).slice(8, -1);
-		return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
-	}
-}
-var storedAnnotationsSymbol = /* @__PURE__ */ Symbol("mobx-stored-annotations");
-/**
-* Creates a function that acts as
-* - decorator
-* - annotation object
-*/
-function createDecoratorAnnotation(annotation) {
-	function decorator(target, property) {
-		if (is20223Decorator(property)) return annotation.decorate_20223_(target, property);
-		else storeAnnotation(target, property, annotation);
-	}
-	return Object.assign(decorator, annotation);
-}
-/**
-* Stores annotation to prototype,
-* so it can be inspected later by `makeObservable` called from constructor
-*/
-function storeAnnotation(prototype, key, annotation) {
-	if (!hasProp(prototype, storedAnnotationsSymbol)) addHiddenProp(prototype, storedAnnotationsSymbol, _extends({}, prototype[storedAnnotationsSymbol]));
-	assertNotDecorated(prototype, annotation, key);
-	if (!isOverride(annotation)) prototype[storedAnnotationsSymbol][key] = annotation;
-}
-function assertNotDecorated(prototype, annotation, key) {}
-function is20223Decorator(context) {
-	return typeof context == "object" && typeof context["kind"] == "string";
-}
-var $mobx = /* @__PURE__ */ Symbol("mobx administration");
-var Atom = /* @__PURE__ */ function() {
+var $mobx = /*#__PURE__*/ Symbol("mobx administration");
+var Atom = class {
 	/**
 	* Create a new atom. For debugging purposes it is recommended to give it a name.
 	* The onBecomeObserved and onBecomeUnobserved callbacks can be used for resource management.
 	*/
-	function Atom(name_) {
-		if (name_ === void 0) name_ = "Atom";
+	constructor(name_ = "Atom") {
 		this.name_ = void 0;
 		this.flags_ = 0;
 		this.observers_ = /* @__PURE__ */ new Set();
 		this.lastAccessedBy_ = 0;
-		this.lowestObserverState_ = IDerivationState_.NOT_TRACKING_;
+		this.lowestObserverState_ = -1;
 		this.onBOL = void 0;
 		this.onBUOL = void 0;
 		this.name_ = name_;
 	}
-	var _proto = Atom.prototype;
-	_proto.onBO = function onBO() {
-		if (this.onBOL) this.onBOL.forEach(function(listener) {
-			return listener();
-		});
-	};
-	_proto.onBUO = function onBUO() {
-		if (this.onBUOL) this.onBUOL.forEach(function(listener) {
-			return listener();
-		});
-	};
-	_proto.reportObserved = function reportObserved$1() {
+	get isBeingObserved() {
+		return getFlag(this.flags_, 1);
+	}
+	set isBeingObserved(newValue) {
+		this.flags_ = setFlag(this.flags_, 1, newValue);
+	}
+	get isPendingUnobservation() {
+		return getFlag(this.flags_, 2);
+	}
+	set isPendingUnobservation(newValue) {
+		this.flags_ = setFlag(this.flags_, 2, newValue);
+	}
+	get diffValue() {
+		return getFlag(this.flags_, 4) ? 1 : 0;
+	}
+	set diffValue(newValue) {
+		this.flags_ = setFlag(this.flags_, 4, newValue === 1 ? true : false);
+	}
+	onBO() {
+		if (this.onBOL) this.onBOL.forEach((listener) => listener());
+	}
+	onBUO() {
+		if (this.onBUOL) this.onBUOL.forEach((listener) => listener());
+	}
+	/**
+	* Invoke this method to notify mobx that your atom has been used somehow.
+	* Returns true if there is currently a reactive context.
+	*/
+	reportObserved() {
 		return reportObserved(this);
-	};
-	_proto.reportChanged = function reportChanged() {
+	}
+	/**
+	* Invoke this method _after_ this method has changed to signal mobx that all its observers should invalidate.
+	*/
+	reportChanged() {
 		startBatch();
 		propagateChanged(this);
 		endBatch();
-	};
-	_proto.toString = function toString() {
+	}
+	toString() {
 		return this.name_;
-	};
-	return _createClass(Atom, [
-		{
-			key: "isBeingObserved",
-			get: function get() {
-				return getFlag(this.flags_, Atom.isBeingObservedMask_);
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, Atom.isBeingObservedMask_, newValue);
-			}
-		},
-		{
-			key: "isPendingUnobservation",
-			get: function get() {
-				return getFlag(this.flags_, Atom.isPendingUnobservationMask_);
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, Atom.isPendingUnobservationMask_, newValue);
-			}
-		},
-		{
-			key: "diffValue",
-			get: function get() {
-				return getFlag(this.flags_, Atom.diffValueMask_) ? 1 : 0;
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, Atom.diffValueMask_, newValue === 1 ? true : false);
-			}
-		}
-	]);
-}();
-Atom.isBeingObservedMask_ = 1;
-Atom.isPendingUnobservationMask_ = 2;
-Atom.diffValueMask_ = 4;
-var isAtom = /* @__PURE__ */ createInstanceofPredicate("Atom", Atom);
-function createAtom(name, onBecomeObservedHandler, onBecomeUnobservedHandler) {
-	if (onBecomeObservedHandler === void 0) onBecomeObservedHandler = noop;
-	if (onBecomeUnobservedHandler === void 0) onBecomeUnobservedHandler = noop;
-	var atom = new Atom(name);
-	if (onBecomeObservedHandler !== noop) onBecomeObserved(atom, onBecomeObservedHandler);
-	if (onBecomeUnobservedHandler !== noop) onBecomeUnobserved(atom, onBecomeUnobservedHandler);
+	}
+};
+var isAtom = /*#__PURE__*/ createInstanceofPredicate("Atom", Atom);
+function createAtom(name, onBecomeObservedHandler = noop, onBecomeUnobservedHandler = noop) {
+	const atom = new Atom(name);
+	if (onBecomeObservedHandler !== noop) atom.onBOL = /* @__PURE__ */ new Set([onBecomeObservedHandler]);
+	if (onBecomeUnobservedHandler !== noop) atom.onBUOL = /* @__PURE__ */ new Set([onBecomeUnobservedHandler]);
 	return atom;
 }
-function identityComparer(a, b) {
-	return a === b;
-}
-function structuralComparer(a, b) {
-	return deepEqual(a, b);
-}
-function shallowComparer(a, b) {
-	return deepEqual(a, b, 1);
-}
-function defaultComparer(a, b) {
-	if (Object.is) return Object.is(a, b);
-	return a === b ? a !== 0 || 1 / a === 1 / b : a !== a && b !== b;
-}
-var comparer = {
-	identity: identityComparer,
-	structural: structuralComparer,
-	"default": defaultComparer,
-	shallow: shallowComparer
-};
+var compareDefault = Object.is;
 function deepEnhancer(v, _, name) {
 	if (isObservable(v)) return v;
 	if (Array.isArray(v)) return observable.array(v, { name });
@@ -344,47 +184,18 @@ function deepEnhancer(v, _, name) {
 	else return autoAction(name, v);
 	return v;
 }
-function shallowEnhancer(v, _, name) {
-	if (v === void 0 || v === null) return v;
-	if (isObservableObject(v) || isObservableArray(v) || isObservableMap(v) || isObservableSet(v)) return v;
-	if (Array.isArray(v)) return observable.array(v, {
-		name,
-		deep: false
-	});
-	if (isPlainObject(v)) return observable.object(v, void 0, {
-		name,
-		deep: false
-	});
-	if (isES6Map(v)) return observable.map(v, {
-		name,
-		deep: false
-	});
-	if (isES6Set(v)) return observable.set(v, {
-		name,
-		deep: false
-	});
-}
 function referenceEnhancer(newValue) {
 	return newValue;
-}
-function refStructEnhancer(v, oldValue) {
-	if (deepEqual(v, oldValue)) return oldValue;
-	return v;
-}
-var OVERRIDE = "override";
-function isOverride(annotation) {
-	return annotation.annotationType_ === OVERRIDE;
 }
 function createActionAnnotation(name, options) {
 	return {
 		annotationType_: name,
 		options_: options,
-		make_: make_$1,
-		extend_: extend_$1,
-		decorate_20223_: decorate_20223_$1
+		make_: make_$5,
+		extend_: extend_$4
 	};
 }
-function make_$1(adm, key, descriptor, source) {
+function make_$5(adm, key, descriptor, source) {
 	var _this$options_;
 	if ((_this$options_ = this.options_) != null && _this$options_.bound) return this.extend_(adm, key, descriptor, false) === null ? 0 : 1;
 	if (source === adm.target_) return this.extend_(adm, key, descriptor, false) === null ? 0 : 2;
@@ -392,20 +203,20 @@ function make_$1(adm, key, descriptor, source) {
 	defineProperty(source, key, createActionDescriptor(adm, this, key, descriptor, false));
 	return 2;
 }
-function extend_$1(adm, key, descriptor, proxyTrap) {
-	var actionDescriptor = createActionDescriptor(adm, this, key, descriptor);
+function extend_$4(adm, key, descriptor, proxyTrap) {
+	const actionDescriptor = createActionDescriptor(adm, this, key, descriptor);
 	return adm.defineProperty_(key, actionDescriptor, proxyTrap);
 }
-function decorate_20223_$1(mthd, context) {
-	var kind = context.kind, name = context.name, addInitializer = context.addInitializer;
-	var ann = this;
-	var _createAction = function _createAction(m) {
+function decorateAction20223_(annotation, mthd, context) {
+	const { kind, name, addInitializer } = context;
+	const ann = annotation;
+	const _createAction = (m) => {
 		var _ann$options_$name, _ann$options_, _ann$options_$autoAct, _ann$options_2;
 		return createAction((_ann$options_$name = (_ann$options_ = ann.options_) == null ? void 0 : _ann$options_.name) != null ? _ann$options_$name : name.toString(), m, (_ann$options_$autoAct = (_ann$options_2 = ann.options_) == null ? void 0 : _ann$options_2.autoAction) != null ? _ann$options_$autoAct : false);
 	};
 	if (kind == "field") return function(initMthd) {
 		var _ann$options_3;
-		var mthd = initMthd;
+		let mthd = initMthd;
 		if (!isAction(mthd)) mthd = _createAction(mthd);
 		if ((_ann$options_3 = ann.options_) != null && _ann$options_3.bound) {
 			mthd = mthd.bind(this);
@@ -414,27 +225,23 @@ function decorate_20223_$1(mthd, context) {
 		return mthd;
 	};
 	if (kind == "method") {
-		var _this$options_2;
+		var _ann$options_4;
 		if (!isAction(mthd)) mthd = _createAction(mthd);
-		if ((_this$options_2 = this.options_) != null && _this$options_2.bound) addInitializer(function() {
-			var self = this;
-			var bound = self[name].bind(self);
+		if ((_ann$options_4 = ann.options_) != null && _ann$options_4.bound) addInitializer(function() {
+			const self = this;
+			const bound = self[name].bind(self);
 			bound.isMobxAction = true;
 			self[name] = bound;
 		});
 		return mthd;
 	}
-	die("Cannot apply '" + ann.annotationType_ + "' to '" + String(name) + "' (kind: " + kind + "):" + ("\n'" + ann.annotationType_ + "' can only be used on properties with a function value."));
+	die(43, ann.annotationType_, String(name), kind);
 }
-function assertActionDescriptor(adm, _ref, key, _ref2) {
-	_ref.annotationType_;
-	_ref2.value;
-}
-function createActionDescriptor(adm, annotation, key, descriptor, safeDescriptors) {
+function assertActionDescriptor(adm, { annotationType_ }, key, { value }) {}
+function createActionDescriptor(adm, annotation, key, descriptor, safeDescriptors = globalState.safeDescriptors) {
 	var _annotation$options_, _annotation$options_$, _annotation$options_2, _annotation$options_$2, _annotation$options_3, _annotation$options_4, _adm$proxy_2;
-	if (safeDescriptors === void 0) safeDescriptors = globalState.safeDescriptors;
 	assertActionDescriptor(adm, annotation, key, descriptor);
-	var value = descriptor.value;
+	let { value } = descriptor;
 	if ((_annotation$options_ = annotation.options_) != null && _annotation$options_.bound) {
 		var _adm$proxy_;
 		value = value.bind((_adm$proxy_ = adm.proxy_) != null ? _adm$proxy_ : adm.target_);
@@ -450,12 +257,11 @@ function createFlowAnnotation(name, options) {
 	return {
 		annotationType_: name,
 		options_: options,
-		make_: make_$2,
-		extend_: extend_$2,
-		decorate_20223_: decorate_20223_$2
+		make_: make_$4,
+		extend_: extend_$3
 	};
 }
-function make_$2(adm, key, descriptor, source) {
+function make_$4(adm, key, descriptor, source) {
 	var _this$options_;
 	if (source === adm.target_) return this.extend_(adm, key, descriptor, false) === null ? 0 : 2;
 	if ((_this$options_ = this.options_) != null && _this$options_.bound && (!hasProp(adm.target_, key) || !isFlow(adm.target_[key]))) {
@@ -465,31 +271,27 @@ function make_$2(adm, key, descriptor, source) {
 	defineProperty(source, key, createFlowDescriptor(adm, this, key, descriptor, false, false));
 	return 2;
 }
-function extend_$2(adm, key, descriptor, proxyTrap) {
+function extend_$3(adm, key, descriptor, proxyTrap) {
 	var _this$options_2;
-	var flowDescriptor = createFlowDescriptor(adm, this, key, descriptor, (_this$options_2 = this.options_) == null ? void 0 : _this$options_2.bound);
+	const flowDescriptor = createFlowDescriptor(adm, this, key, descriptor, (_this$options_2 = this.options_) == null ? void 0 : _this$options_2.bound);
 	return adm.defineProperty_(key, flowDescriptor, proxyTrap);
 }
-function decorate_20223_$2(mthd, context) {
-	var _this$options_3;
-	var name = context.name, addInitializer = context.addInitializer;
+function decorateFlow20223_(annotation, mthd, context) {
+	var _annotation$options_;
+	const { name, addInitializer } = context;
 	if (!isFlow(mthd)) mthd = flow(mthd);
-	if ((_this$options_3 = this.options_) != null && _this$options_3.bound) addInitializer(function() {
-		var self = this;
-		var bound = self[name].bind(self);
+	if ((_annotation$options_ = annotation.options_) != null && _annotation$options_.bound) addInitializer(function() {
+		const self = this;
+		const bound = self[name].bind(self);
 		bound.isMobXFlow = true;
 		self[name] = bound;
 	});
 	return mthd;
 }
-function assertFlowDescriptor(adm, _ref, key, _ref2) {
-	_ref.annotationType_;
-	_ref2.value;
-}
-function createFlowDescriptor(adm, annotation, key, descriptor, bound, safeDescriptors) {
-	if (safeDescriptors === void 0) safeDescriptors = globalState.safeDescriptors;
+function assertFlowDescriptor(adm, { annotationType_ }, key, { value }) {}
+function createFlowDescriptor(adm, annotation, key, descriptor, bound, safeDescriptors = globalState.safeDescriptors) {
 	assertFlowDescriptor(adm, annotation, key, descriptor);
-	var value = descriptor.value;
+	let { value } = descriptor;
 	if (!isFlow(value)) value = flow(value);
 	if (bound) {
 		var _adm$proxy_;
@@ -508,102 +310,116 @@ function createComputedAnnotation(name, options) {
 		annotationType_: name,
 		options_: options,
 		make_: make_$3,
-		extend_: extend_$3,
-		decorate_20223_: decorate_20223_$3
+		extend_: extend_$2
 	};
 }
 function make_$3(adm, key, descriptor) {
 	return this.extend_(adm, key, descriptor, false) === null ? 0 : 1;
 }
-function extend_$3(adm, key, descriptor, proxyTrap) {
+function extend_$2(adm, key, descriptor, proxyTrap) {
 	assertComputedDescriptor(adm, this, key, descriptor);
-	return adm.defineComputedProperty_(key, _extends({}, this.options_, {
+	return adm.defineComputedProperty_(key, assign({}, this.options_, {
 		get: descriptor.get,
 		set: descriptor.set
 	}), proxyTrap);
 }
-function decorate_20223_$3(get, context) {
-	var ann = this;
-	var key = context.name, addInitializer = context.addInitializer;
-	addInitializer(function() {
-		var adm = asObservableObject(this)[$mobx];
-		var options = _extends({}, ann.options_, {
+function decorateComputed20223_(annotation, get, context) {
+	const ann = annotation;
+	const { name: key, addInitializer } = context;
+	let computedValues;
+	function createComputedValue(target, adm) {
+		const options = assign({}, ann.options_, {
 			get,
-			context: this
+			context: target
 		});
-		options.name || (options.name = "ObservableObject." + key.toString());
-		adm.values_.set(key, new ComputedValue(options));
+		options.name || (options.name = `ObservableObject.${key.toString()}`);
+		return new ComputedValue(options);
+	}
+	addInitializer(function() {
+		var _adm$lazyComputedKeys;
+		const adm = asObservableObject(this)[$mobx];
+		const target = this;
+		const observable = adm.values_.get(key);
+		if (observable instanceof ComputedValue && observable.derivation !== get) adm.values_.delete(key);
+		((_adm$lazyComputedKeys = adm.lazyComputedKeys_) != null ? _adm$lazyComputedKeys : adm.lazyComputedKeys_ = /* @__PURE__ */ new Map()).set(key, () => createComputedValue(target, adm));
 	});
 	return function() {
-		return this[$mobx].getObservablePropValue_(key);
+		const adm = this[$mobx];
+		const observable = adm.values_.get(key);
+		if (observable instanceof ComputedValue && observable.derivation !== get) {
+			var _computedValues;
+			let computed = (_computedValues = computedValues) == null ? void 0 : _computedValues.get(this);
+			if (!computed) {
+				var _computedValues2;
+				computed = createComputedValue(this, adm);
+				((_computedValues2 = computedValues) != null ? _computedValues2 : computedValues = /* @__PURE__ */ new WeakMap()).set(this, computed);
+			}
+			return computed.get();
+		}
+		return adm.getObservablePropValue_(key);
 	};
 }
-function assertComputedDescriptor(adm, _ref, key, _ref2) {
-	_ref.annotationType_;
-	_ref2.get;
-}
+function assertComputedDescriptor(adm, { annotationType_ }, key, { get }) {}
 function createObservableAnnotation(name, options) {
 	return {
 		annotationType_: name,
 		options_: options,
-		make_: make_$4,
-		extend_: extend_$4,
-		decorate_20223_: decorate_20223_$4
+		make_: make_$2,
+		extend_: extend_$1
 	};
 }
-function make_$4(adm, key, descriptor) {
+function make_$2(adm, key, descriptor) {
 	return this.extend_(adm, key, descriptor, false) === null ? 0 : 1;
 }
-function extend_$4(adm, key, descriptor, proxyTrap) {
+function extend_$1(adm, key, descriptor, proxyTrap) {
 	var _this$options_$enhanc, _this$options_;
 	assertObservableDescriptor(adm, this, key, descriptor);
-	return adm.defineObservableProperty_(key, descriptor.value, (_this$options_$enhanc = (_this$options_ = this.options_) == null ? void 0 : _this$options_.enhancer) != null ? _this$options_$enhanc : deepEnhancer, proxyTrap);
+	return adm.defineObservableProperty_(key, descriptor.value, (_this$options_$enhanc = (_this$options_ = this.options_) == null ? void 0 : _this$options_.enhancer_) != null ? _this$options_$enhanc : deepEnhancer, proxyTrap);
 }
-function decorate_20223_$4(desc, context) {
-	var ann = this;
-	var kind = context.kind, name = context.name;
-	var initializedObjects = /* @__PURE__ */ new WeakSet();
-	function initializeObservable(target, value) {
-		var _ann$options_$enhance, _ann$options_;
-		var adm = asObservableObject(target)[$mobx];
-		var observable = new ObservableValue(value, (_ann$options_$enhance = (_ann$options_ = ann.options_) == null ? void 0 : _ann$options_.enhancer) != null ? _ann$options_$enhance : deepEnhancer, "ObservableObject." + name.toString(), false);
-		adm.values_.set(name, observable);
-		initializedObjects.add(target);
+function decorateObservable20223_(annotation, desc, context) {
+	const ann = annotation;
+	const { kind, name } = context;
+	if (kind !== "accessor") return;
+	function registerLazy(target, value) {
+		var _adm$lazyObservableKe;
+		const adm = asObservableObject(target)[$mobx];
+		((_adm$lazyObservableKe = adm.lazyObservableKeys_) != null ? _adm$lazyObservableKe : adm.lazyObservableKeys_ = /* @__PURE__ */ new Map()).set(name, () => {
+			var _ann$options_$enhance, _ann$options_;
+			return new ObservableValue(value, (_ann$options_$enhance = (_ann$options_ = ann.options_) == null ? void 0 : _ann$options_.enhancer_) != null ? _ann$options_$enhance : deepEnhancer, `ObservableObject.${name.toString()}`, false);
+		});
+		return adm;
 	}
-	if (kind == "accessor") return {
-		get: function get() {
-			if (!initializedObjects.has(this)) initializeObservable(this, desc.get.call(this));
-			return this[$mobx].getObservablePropValue_(name);
+	return {
+		get() {
+			var _this$$mobx;
+			return ((_this$$mobx = this[$mobx]) != null ? _this$$mobx : registerLazy(this, desc.get.call(this))).getObservablePropValue_(name);
 		},
-		set: function set(value) {
-			if (!initializedObjects.has(this)) initializeObservable(this, value);
-			return this[$mobx].setObservablePropValue_(name, value);
+		set(value) {
+			var _this$$mobx2;
+			return ((_this$$mobx2 = this[$mobx]) != null ? _this$$mobx2 : registerLazy(this, value)).setObservablePropValue_(name, value);
 		},
-		init: function init(value) {
-			if (!initializedObjects.has(this)) initializeObservable(this, value);
+		init(value) {
+			registerLazy(this, value);
 			return value;
 		}
 	};
 }
-function assertObservableDescriptor(adm, _ref, key, descriptor) {
-	_ref.annotationType_;
-}
+function assertObservableDescriptor(adm, { annotationType_ }, key, descriptor) {}
 var AUTO = "true";
-var autoAnnotation = /* @__PURE__ */ createAutoAnnotation();
+var autoAnnotation = /*#__PURE__*/ createAutoAnnotation();
 function createAutoAnnotation(options) {
 	return {
 		annotationType_: AUTO,
 		options_: options,
-		make_: make_$5,
-		extend_: extend_$5,
-		decorate_20223_: decorate_20223_$5
+		make_: make_$1,
+		extend_
 	};
 }
-function make_$5(adm, key, descriptor, source) {
+function make_$1(adm, key, descriptor, source) {
 	var _this$options_3, _this$options_4;
 	if (descriptor.get) return computed.make_(adm, key, descriptor, source);
 	if (descriptor.set) {
-		var set = isAction(descriptor.set) ? descriptor.set : createAction(key.toString(), descriptor.set);
+		const set = isAction(descriptor.set) ? descriptor.set : createAction(key.toString(), descriptor.set);
 		if (source === adm.target_) return adm.defineProperty_(key, {
 			configurable: globalState.safeDescriptors ? adm.isPlainObject_ : true,
 			set
@@ -618,18 +434,18 @@ function make_$5(adm, key, descriptor, source) {
 		var _this$options_2;
 		if (isGenerator(descriptor.value)) {
 			var _this$options_;
-			return ((_this$options_ = this.options_) != null && _this$options_.autoBind ? flow.bound : flow).make_(adm, key, descriptor, source);
+			return ((_this$options_ = this.options_) != null && _this$options_.autoBind ? flowBound : flow).make_(adm, key, descriptor, source);
 		}
-		return ((_this$options_2 = this.options_) != null && _this$options_2.autoBind ? autoAction.bound : autoAction).make_(adm, key, descriptor, source);
+		return ((_this$options_2 = this.options_) != null && _this$options_2.autoBind ? autoActionBound : autoAction).make_(adm, key, descriptor, source);
 	}
-	var observableAnnotation = ((_this$options_3 = this.options_) == null ? void 0 : _this$options_3.deep) === false ? observable.ref : observable;
+	let observableAnnotation = ((_this$options_3 = this.options_) == null ? void 0 : _this$options_3.deep) === false ? observableRef : observable;
 	if (typeof descriptor.value === "function" && (_this$options_4 = this.options_) != null && _this$options_4.autoBind) {
 		var _adm$proxy_;
 		descriptor.value = descriptor.value.bind((_adm$proxy_ = adm.proxy_) != null ? _adm$proxy_ : adm.target_);
 	}
 	return observableAnnotation.make_(adm, key, descriptor, source);
 }
-function extend_$5(adm, key, descriptor, proxyTrap) {
+function extend_(adm, key, descriptor, proxyTrap) {
 	var _this$options_5, _this$options_6;
 	if (descriptor.get) return computed.extend_(adm, key, descriptor, proxyTrap);
 	if (descriptor.set) return adm.defineProperty_(key, {
@@ -640,30 +456,29 @@ function extend_$5(adm, key, descriptor, proxyTrap) {
 		var _adm$proxy_2;
 		descriptor.value = descriptor.value.bind((_adm$proxy_2 = adm.proxy_) != null ? _adm$proxy_2 : adm.target_);
 	}
-	return (((_this$options_6 = this.options_) == null ? void 0 : _this$options_6.deep) === false ? observable.ref : observable).extend_(adm, key, descriptor, proxyTrap);
+	return (((_this$options_6 = this.options_) == null ? void 0 : _this$options_6.deep) === false ? observableRef : observable).extend_(adm, key, descriptor, proxyTrap);
 }
-function decorate_20223_$5(desc, context) {
-	die("'" + this.annotationType_ + "' cannot be used as a decorator");
+function createDecoratorAnnotation(annotation, decorate) {
+	return assign(function decoratorAnnotation(value, context) {
+		if (context && typeof context.kind === "string") return decorate(annotation, value, context);
+	}, annotation);
 }
 var OBSERVABLE = "observable";
 var OBSERVABLE_REF = "observable.ref";
-var OBSERVABLE_SHALLOW = "observable.shallow";
-var OBSERVABLE_STRUCT = "observable.struct";
 var defaultCreateObservableOptions = {
 	deep: true,
 	name: void 0,
-	defaultDecorator: void 0,
-	proxy: true
+	defaultDecorator: void 0
 };
 Object.freeze(defaultCreateObservableOptions);
 function asCreateObservableOptions(thing) {
 	return thing || defaultCreateObservableOptions;
 }
-var observableAnnotation = /* @__PURE__ */ createObservableAnnotation(OBSERVABLE);
-var observableRefAnnotation = /* @__PURE__ */ createObservableAnnotation(OBSERVABLE_REF, { enhancer: referenceEnhancer });
-var observableShallowAnnotation = /* @__PURE__ */ createObservableAnnotation(OBSERVABLE_SHALLOW, { enhancer: shallowEnhancer });
-var observableStructAnnotation = /* @__PURE__ */ createObservableAnnotation(OBSERVABLE_STRUCT, { enhancer: refStructEnhancer });
-var observableDecoratorAnnotation = /* @__PURE__ */ createDecoratorAnnotation(observableAnnotation);
+var observableAnnotation = /*#__PURE__*/ createObservableAnnotation(OBSERVABLE);
+var observableRefAnnotation = /*#__PURE__*/ createObservableAnnotation(OBSERVABLE_REF, { enhancer_: referenceEnhancer });
+function createObservableDecoratorAnnotation(annotation) {
+	return createDecoratorAnnotation(annotation, decorateObservable20223_);
+}
 function getEnhancerFromOptions(options) {
 	return options.deep === true ? deepEnhancer : options.deep === false ? referenceEnhancer : getEnhancerFromAnnotation(options.defaultDecorator);
 }
@@ -673,18 +488,14 @@ function getAnnotationFromOptions(options) {
 }
 function getEnhancerFromAnnotation(annotation) {
 	var _annotation$options_$, _annotation$options_;
-	return !annotation ? deepEnhancer : (_annotation$options_$ = (_annotation$options_ = annotation.options_) == null ? void 0 : _annotation$options_.enhancer) != null ? _annotation$options_$ : deepEnhancer;
+	return !annotation ? deepEnhancer : (_annotation$options_$ = (_annotation$options_ = annotation.options_) == null ? void 0 : _annotation$options_.enhancer_) != null ? _annotation$options_$ : deepEnhancer;
 }
 /**
 * Turns an object, array or function into a reactive structure.
 * @param v the value which should become observable.
 */
 function createObservable(v, arg2, arg3) {
-	if (is20223Decorator(arg2)) return observableAnnotation.decorate_20223_(v, arg2);
-	if (isStringish(arg2)) {
-		storeAnnotation(v, arg2, observableAnnotation);
-		return;
-	}
+	if (arg2 && typeof arg2.kind === "string") return decorateObservable20223_(observableAnnotation, v, arg2);
 	if (isObservable(v)) return v;
 	if (isPlainObject(v)) return observable.object(v, arg2, arg3);
 	if (Array.isArray(v)) return observable.array(v, arg2);
@@ -693,72 +504,61 @@ function createObservable(v, arg2, arg3) {
 	if (typeof v === "object" && v !== null) return v;
 	return observable.box(v, arg2);
 }
-assign(createObservable, observableDecoratorAnnotation);
-var observable = /* @__PURE__ */ assign(createObservable, {
-	box: function box(value, options) {
-		var o = asCreateObservableOptions(options);
+var observableFactories = {
+	box(value, options) {
+		const o = asCreateObservableOptions(options);
 		return new ObservableValue(value, getEnhancerFromOptions(o), o.name, true, o.equals);
 	},
-	array: function array(initialValues, options) {
-		var o = asCreateObservableOptions(options);
-		return (globalState.useProxies === false || o.proxy === false ? createLegacyArray : createObservableArray)(initialValues, getEnhancerFromOptions(o), o.name);
+	array(initialValues, options) {
+		const o = asCreateObservableOptions(options);
+		return createObservableArray(initialValues, getEnhancerFromOptions(o), o.name);
 	},
-	map: function map(initialValues, options) {
-		var o = asCreateObservableOptions(options);
+	map(initialValues, options) {
+		const o = asCreateObservableOptions(options);
 		return new ObservableMap(initialValues, getEnhancerFromOptions(o), o.name);
 	},
-	set: function set(initialValues, options) {
-		var o = asCreateObservableOptions(options);
+	set(initialValues, options) {
+		const o = asCreateObservableOptions(options);
 		return new ObservableSet(initialValues, getEnhancerFromOptions(o), o.name);
 	},
-	object: function object(props, decorators, options) {
-		return initObservable(function() {
-			return extendObservable(globalState.useProxies === false || (options == null ? void 0 : options.proxy) === false ? asObservableObject({}, options) : asDynamicObservableObject({}, options), props, decorators);
-		});
-	},
-	ref: /* @__PURE__ */ createDecoratorAnnotation(observableRefAnnotation),
-	shallow: /* @__PURE__ */ createDecoratorAnnotation(observableShallowAnnotation),
-	deep: observableDecoratorAnnotation,
-	struct: /* @__PURE__ */ createDecoratorAnnotation(observableStructAnnotation)
-});
+	object(props, annotations, options) {
+		return initObservable(() => extendObservable(asDynamicObservableObject({}, options), props, annotations));
+	}
+};
+var observableRef = /*#__PURE__*/ createObservableDecoratorAnnotation(observableRefAnnotation);
+var observableDeep = /*#__PURE__*/ createObservableDecoratorAnnotation(observableAnnotation);
+var observable = /*#__PURE__*/ assign(createObservable, observableAnnotation, observableFactories);
 var COMPUTED = "computed";
-var COMPUTED_STRUCT = "computed.struct";
-var computedAnnotation = /* @__PURE__ */ createComputedAnnotation(COMPUTED);
-var computedStructAnnotation = /* @__PURE__ */ createComputedAnnotation(COMPUTED_STRUCT, { equals: comparer.structural });
-/**
-* Decorator for class properties: @computed get value() { return expr; }.
-* For legacy purposes also invokable as ES5 observable created: `computed(() => expr)`;
-*/
+function createComputedDecoratorAnnotation(annotation) {
+	return createDecoratorAnnotation(annotation, decorateComputed20223_);
+}
+var computedAnnotation = /*#__PURE__*/ createComputedAnnotation(COMPUTED);
 var computed = function computed(arg1, arg2) {
-	if (is20223Decorator(arg2)) return computedAnnotation.decorate_20223_(arg1, arg2);
-	if (isStringish(arg2)) return storeAnnotation(arg1, arg2, computedAnnotation);
-	if (isPlainObject(arg1)) return createDecoratorAnnotation(createComputedAnnotation(COMPUTED, arg1));
-	var opts = isPlainObject(arg2) ? arg2 : {};
+	if (arg2 && typeof arg2.kind === "string") return decorateComputed20223_(computedAnnotation, arg1, arg2);
+	if (isPlainObject(arg1)) return createComputedDecoratorAnnotation(createComputedAnnotation(COMPUTED, arg1));
+	const opts = isPlainObject(arg2) ? arg2 : {};
 	opts.get = arg1;
 	opts.name || (opts.name = arg1.name || "");
 	return new ComputedValue(opts);
 };
-Object.assign(computed, computedAnnotation);
-computed.struct = /* @__PURE__ */ createDecoratorAnnotation(computedStructAnnotation);
-var _getDescriptor$config, _getDescriptor;
+assign(computed, computedAnnotation);
+var _getDescriptor$config;
+var _getDescriptor;
 var currentActionId = 0;
 var nextActionId = 1;
-var isFunctionNameConfigurable = (_getDescriptor$config = (_getDescriptor = /* @__PURE__ */ getDescriptor(function() {}, "name")) == null ? void 0 : _getDescriptor.configurable) != null ? _getDescriptor$config : false;
+var isFunctionNameConfigurable = (_getDescriptor$config = (_getDescriptor = /*#__PURE__*/ getDescriptor(() => {}, "name")) == null ? void 0 : _getDescriptor.configurable) != null ? _getDescriptor$config : false;
 var tmpNameDescriptor = {
 	value: "action",
 	configurable: true,
 	writable: false,
 	enumerable: false
 };
-function createAction(actionName, fn, autoAction, ref) {
-	if (autoAction === void 0) autoAction = false;
+function createAction(actionName, fn, autoAction = false, ref) {
 	function res() {
 		return executeAction(actionName, autoAction, fn, ref || this, arguments);
 	}
 	res.isMobxAction = true;
-	res.toString = function() {
-		return fn.toString();
-	};
+	res.toString = () => fn.toString();
 	if (isFunctionNameConfigurable) {
 		tmpNameDescriptor.value = actionName;
 		defineProperty(res, "name", tmpNameDescriptor);
@@ -766,7 +566,7 @@ function createAction(actionName, fn, autoAction, ref) {
 	return res;
 }
 function executeAction(actionName, canRunAsDerivation, fn, scope, args) {
-	var runInfo = _startAction(actionName, canRunAsDerivation, scope, args);
+	const runInfo = _startAction(actionName, canRunAsDerivation, scope, args);
 	try {
 		return fn.apply(scope, args);
 	} catch (err) {
@@ -777,22 +577,18 @@ function executeAction(actionName, canRunAsDerivation, fn, scope, args) {
 	}
 }
 function _startAction(actionName, canRunAsDerivation, scope, args) {
-	var notifySpy_ = false;
-	var startTime_ = 0;
-	var prevDerivation_ = globalState.trackingDerivation;
-	var runAsAction = !canRunAsDerivation || !prevDerivation_;
+	const notifySpy_ = false;
+	let startTime_ = 0;
+	const prevDerivation_ = globalState.trackingDerivation;
+	const runAsAction = !canRunAsDerivation || !prevDerivation_;
 	startBatch();
-	var prevAllowStateChanges_ = globalState.allowStateChanges;
-	if (runAsAction) {
-		untrackedStart();
-		prevAllowStateChanges_ = allowStateChangesStart(true);
-	}
-	var prevAllowStateReads_ = allowStateReadsStart(true);
-	var runInfo = {
+	let prevAllowStateChanges_ = globalState.allowStateChanges;
+	if (runAsAction) untrackedStart();
+	const runInfo = {
 		runAsAction_: runAsAction,
 		prevDerivation_,
 		prevAllowStateChanges_,
-		prevAllowStateReads_,
+		prevAllowStateReads_: globalState.allowStateReads,
 		notifySpy_,
 		startTime_,
 		actionId_: nextActionId++,
@@ -805,14 +601,12 @@ function _endAction(runInfo) {
 	if (currentActionId !== runInfo.actionId_) die(30);
 	currentActionId = runInfo.parentActionId_;
 	if (runInfo.error_ !== void 0) globalState.suppressReactionErrors = true;
-	allowStateChangesEnd(runInfo.prevAllowStateChanges_);
-	allowStateReadsEnd(runInfo.prevAllowStateReads_);
 	endBatch();
 	if (runInfo.runAsAction_) untrackedEnd(runInfo.prevDerivation_);
 	globalState.suppressReactionErrors = false;
 }
 function allowStateChanges(allowStateChanges, func) {
-	var prev = allowStateChangesStart(allowStateChanges);
+	const prev = allowStateChangesStart(allowStateChanges);
 	try {
 		return func();
 	} finally {
@@ -820,52 +614,41 @@ function allowStateChanges(allowStateChanges, func) {
 	}
 }
 function allowStateChangesStart(allowStateChanges) {
-	var prev = globalState.allowStateChanges;
+	const prev = globalState.allowStateChanges;
 	globalState.allowStateChanges = allowStateChanges;
 	return prev;
 }
 function allowStateChangesEnd(prev) {
 	globalState.allowStateChanges = prev;
 }
-var ObservableValue = /* @__PURE__ */ function(_Atom) {
-	function ObservableValue(value, enhancer, name_, notifySpy, equals) {
-		var _this;
-		if (name_ === void 0) name_ = "ObservableValue";
-		if (notifySpy === void 0) notifySpy = true;
-		if (equals === void 0) equals = comparer["default"];
-		_this = _Atom.call(this, name_) || this;
-		_this.enhancer = void 0;
-		_this.name_ = void 0;
-		_this.equals = void 0;
-		_this.hasUnreportedChange_ = false;
-		_this.interceptors_ = void 0;
-		_this.changeListeners_ = void 0;
-		_this.value_ = void 0;
-		_this.dehancer = void 0;
-		_this.enhancer = enhancer;
-		_this.name_ = name_;
-		_this.equals = equals;
-		_this.value_ = enhancer(value, void 0, name_);
-		return _this;
+var ObservableValue = class extends Atom {
+	constructor(value, enhancer_, name_ = "ObservableValue", notifySpy = true, equals_ = compareDefault) {
+		super(name_);
+		this.enhancer_ = void 0;
+		this.name_ = void 0;
+		this.equals_ = void 0;
+		this.hasUnreportedChange_ = false;
+		this.interceptors_ = void 0;
+		this.changeListeners_ = void 0;
+		this.value_ = void 0;
+		this.dehancer = void 0;
+		this.enhancer_ = enhancer_;
+		this.name_ = name_;
+		this.equals_ = equals_;
+		this.value_ = enhancer_(value, void 0, name_);
 	}
-	_inheritsLoose(ObservableValue, _Atom);
-	var _proto = ObservableValue.prototype;
-	_proto.dehanceValue = function dehanceValue(value) {
+	dehanceValue(value) {
 		if (this.dehancer !== void 0) return this.dehancer(value);
 		return value;
-	};
-	_proto.set = function set(newValue) {
+	}
+	set(newValue) {
 		this.value_;
 		newValue = this.prepareNewValue_(newValue);
-		if (newValue !== globalState.UNCHANGED) {
-			isSpyEnabled();
-			this.setNewValue_(newValue);
-		}
-	};
-	_proto.prepareNewValue_ = function prepareNewValue_(newValue) {
-		checkIfStateModificationsAreAllowed(this);
+		if (newValue !== globalState.UNCHANGED) this.setNewValue_(newValue);
+	}
+	prepareNewValue_(newValue) {
 		if (hasInterceptors(this)) {
-			var change = interceptChange(this, {
+			const change = interceptChange(this, {
 				object: this,
 				type: UPDATE,
 				newValue
@@ -873,11 +656,11 @@ var ObservableValue = /* @__PURE__ */ function(_Atom) {
 			if (!change) return globalState.UNCHANGED;
 			newValue = change.newValue;
 		}
-		newValue = this.enhancer(newValue, this.value_, this.name_);
-		return this.equals(this.value_, newValue) ? globalState.UNCHANGED : newValue;
-	};
-	_proto.setNewValue_ = function setNewValue_(newValue) {
-		var oldValue = this.value_;
+		newValue = this.enhancer_(newValue, this.value_, this.name_);
+		return this.equals_(this.value_, newValue) ? globalState.UNCHANGED : newValue;
+	}
+	setNewValue_(newValue) {
+		const oldValue = this.value_;
 		this.value_ = newValue;
 		this.reportChanged();
 		if (hasListeners(this)) notifyListeners(this, {
@@ -886,82 +669,46 @@ var ObservableValue = /* @__PURE__ */ function(_Atom) {
 			newValue,
 			oldValue
 		});
-	};
-	_proto.get = function get() {
+	}
+	get() {
 		this.reportObserved();
 		return this.dehanceValue(this.value_);
-	};
-	_proto.intercept_ = function intercept_(handler) {
-		return registerInterceptor(this, handler);
-	};
-	_proto.observe_ = function observe_(listener, fireImmediately) {
-		if (fireImmediately) listener({
-			observableKind: "value",
-			debugObjectName: this.name_,
-			object: this,
-			type: UPDATE,
-			newValue: this.value_,
-			oldValue: void 0
-		});
-		return registerListener(this, listener);
-	};
-	_proto.raw = function raw() {
+	}
+	raw() {
 		return this.value_;
-	};
-	_proto.toJSON = function toJSON() {
+	}
+	toJSON() {
 		return this.get();
-	};
-	_proto.toString = function toString() {
-		return this.name_ + "[" + this.value_ + "]";
-	};
-	_proto.valueOf = function valueOf() {
+	}
+	toString() {
+		return `${this.name_}[${this.value_}]`;
+	}
+	valueOf() {
 		return toPrimitive(this.get());
-	};
-	_proto[Symbol.toPrimitive] = function() {
+	}
+	[Symbol.toPrimitive]() {
 		return this.valueOf();
-	};
-	return ObservableValue;
-}(Atom);
-/**
-* A node in the state dependency root that observes other nodes, and can be observed itself.
-*
-* ComputedValue will remember the result of the computation for the duration of the batch, or
-* while being observed.
-*
-* During this time it will recompute only when one of its direct dependencies changed,
-* but only when it is being accessed with `ComputedValue.get()`.
-*
-* Implementation description:
-* 1. First time it's being accessed it will compute and remember result
-*    give back remembered result until 2. happens
-* 2. First time any deep dependency change, propagate POSSIBLY_STALE to all observers, wait for 3.
-* 3. When it's being accessed, recompute if any shallow dependency changed.
-*    if result changed: propagate STALE to all observers, that were POSSIBLY_STALE from the last step.
-*    go to step 2. either way
-*
-* If at any point it's outside batch and it isn't observed: reset everything and go to 1.
-*/
-var ComputedValue = /* @__PURE__ */ function() {
+	}
+};
+var ComputedValue = class {
 	/**
 	* Create a new computed value based on a function expression.
 	*
 	* The `name` property is for debug purposes only.
 	*
-	* The `equals` property specifies the comparer function to use to determine if a newly produced
-	* value differs from the previous value. Two comparers are provided in the library; `defaultComparer`
-	* compares based on identity comparison (===), and `structuralComparer` deeply compares the structure.
-	* Structural comparison can be convenient if you always produce a new aggregated object and
-	* don't want to notify observers if it is structurally the same.
+	* The `equals` property specifies the comparer function used to determine if a newly produced
+	* value differs from the previous value. Structural comparison can be convenient if you always
+	* produce a new aggregated object and don't want to notify observers if it is structurally the same.
 	* This is useful for working with vectors, mouse coordinates etc.
 	*/
-	function ComputedValue(options) {
-		this.dependenciesState_ = IDerivationState_.NOT_TRACKING_;
+	constructor(options) {
+		this.dependenciesState_ = -1;
 		this.observing_ = [];
 		this.newObserving_ = null;
 		this.observers_ = /* @__PURE__ */ new Set();
 		this.runId_ = 0;
 		this.lastAccessedBy_ = 0;
-		this.lowestObserverState_ = IDerivationState_.UP_TO_DATE_;
+		this.lowestObserverState_ = 0;
 		this.unboundDepsCount_ = 0;
 		this.value_ = new CaughtException(null);
 		this.name_ = void 0;
@@ -969,7 +716,6 @@ var ComputedValue = /* @__PURE__ */ function() {
 		this.flags_ = 0;
 		this.derivation = void 0;
 		this.setter_ = void 0;
-		this.isTracing_ = TraceMode.NONE;
 		this.scope_ = void 0;
 		this.equals_ = void 0;
 		this.requiresReaction_ = void 0;
@@ -980,30 +726,55 @@ var ComputedValue = /* @__PURE__ */ function() {
 		this.derivation = options.get;
 		this.name_ = options.name || "ComputedValue";
 		if (options.set) this.setter_ = createAction("ComputedValue-setter", options.set);
-		this.equals_ = options.equals || (options.compareStructural || options.struct ? comparer.structural : comparer["default"]);
+		this.equals_ = options.equals || compareDefault;
 		this.scope_ = options.context;
 		this.requiresReaction_ = options.requiresReaction;
 		this.keepAlive_ = !!options.keepAlive;
 	}
-	var _proto = ComputedValue.prototype;
-	_proto.onBecomeStale_ = function onBecomeStale_() {
+	onBecomeStale_() {
 		propagateMaybeChanged(this);
-	};
-	_proto.onBO = function onBO() {
-		if (this.onBOL) this.onBOL.forEach(function(listener) {
-			return listener();
-		});
-	};
-	_proto.onBUO = function onBUO() {
-		if (this.onBUOL) this.onBUOL.forEach(function(listener) {
-			return listener();
-		});
-	};
+	}
+	onBO() {
+		if (this.onBOL) this.onBOL.forEach((listener) => listener());
+	}
+	onBUO() {
+		if (this.onBUOL) this.onBUOL.forEach((listener) => listener());
+	}
+	get isComputing() {
+		return getFlag(this.flags_, 1);
+	}
+	set isComputing(newValue) {
+		this.flags_ = setFlag(this.flags_, 1, newValue);
+	}
+	get isRunningSetter() {
+		return getFlag(this.flags_, 2);
+	}
+	set isRunningSetter(newValue) {
+		this.flags_ = setFlag(this.flags_, 2, newValue);
+	}
+	get isBeingObserved() {
+		return getFlag(this.flags_, 4);
+	}
+	set isBeingObserved(newValue) {
+		this.flags_ = setFlag(this.flags_, 4, newValue);
+	}
+	get isPendingUnobservation() {
+		return getFlag(this.flags_, 8);
+	}
+	set isPendingUnobservation(newValue) {
+		this.flags_ = setFlag(this.flags_, 8, newValue);
+	}
+	get diffValue() {
+		return getFlag(this.flags_, 16) ? 1 : 0;
+	}
+	set diffValue(newValue) {
+		this.flags_ = setFlag(this.flags_, 16, newValue === 1 ? true : false);
+	}
 	/**
 	* Returns the current value of this computed value.
 	* Will evaluate its computation first if needed.
 	*/
-	_proto.get = function get() {
+	get() {
 		if (this.isComputing) die(32, this.name_, this.derivation);
 		if (globalState.inBatch === 0 && this.observers_.size === 0 && !this.keepAlive_) {
 			if (shouldCompute(this)) {
@@ -1015,17 +786,17 @@ var ComputedValue = /* @__PURE__ */ function() {
 		} else {
 			reportObserved(this);
 			if (shouldCompute(this)) {
-				var prevTrackingContext = globalState.trackingContext;
+				let prevTrackingContext = globalState.trackingContext;
 				if (this.keepAlive_ && !prevTrackingContext) globalState.trackingContext = this;
 				if (this.trackAndCompute()) propagateChangeConfirmed(this);
 				globalState.trackingContext = prevTrackingContext;
 			}
 		}
-		var result = this.value_;
+		const result = this.value_;
 		if (isCaughtException(result)) throw result.cause;
 		return result;
-	};
-	_proto.set = function set(value) {
+	}
+	set(value) {
 		if (this.setter_) {
 			if (this.isRunningSetter) die(33, this.name_);
 			this.isRunningSetter = true;
@@ -1035,19 +806,18 @@ var ComputedValue = /* @__PURE__ */ function() {
 				this.isRunningSetter = false;
 			}
 		} else die(34, this.name_);
-	};
-	_proto.trackAndCompute = function trackAndCompute() {
-		var oldValue = this.value_;
-		var wasSuspended = this.dependenciesState_ === IDerivationState_.NOT_TRACKING_;
-		var newValue = this.computeValue_(true);
-		var changed = wasSuspended || isCaughtException(oldValue) || isCaughtException(newValue) || !this.equals_(oldValue, newValue);
+	}
+	trackAndCompute() {
+		const oldValue = this.value_;
+		const wasSuspended = this.dependenciesState_ === -1;
+		const newValue = this.computeValue_(true);
+		const changed = wasSuspended || isCaughtException(oldValue) || isCaughtException(newValue) || !this.equals_(oldValue, newValue);
 		if (changed) this.value_ = newValue;
 		return changed;
-	};
-	_proto.computeValue_ = function computeValue_(track) {
+	}
+	computeValue_(track) {
 		this.isComputing = true;
-		var prev = allowStateChangesStart(false);
-		var res;
+		let res;
 		if (track) res = trackDerivedFunction(this, this.derivation, this.scope_);
 		else if (globalState.disableErrorBoundaries === true) res = this.derivation.call(this.scope_);
 		else try {
@@ -1055,118 +825,32 @@ var ComputedValue = /* @__PURE__ */ function() {
 		} catch (e) {
 			res = new CaughtException(e);
 		}
-		allowStateChangesEnd(prev);
 		this.isComputing = false;
 		return res;
-	};
-	_proto.suspend_ = function suspend_() {
+	}
+	suspend_() {
 		if (!this.keepAlive_) {
 			clearObserving(this);
 			this.value_ = void 0;
 		}
-	};
-	_proto.observe_ = function observe_(listener, fireImmediately) {
-		var _this = this;
-		var firstTime = true;
-		var prevValue = void 0;
-		return autorun(function() {
-			var newValue = _this.get();
-			if (!firstTime || fireImmediately) {
-				var prevU = untrackedStart();
-				listener({
-					observableKind: "computed",
-					debugObjectName: _this.name_,
-					type: UPDATE,
-					object: _this,
-					newValue,
-					oldValue: prevValue
-				});
-				untrackedEnd(prevU);
-			}
-			firstTime = false;
-			prevValue = newValue;
-		});
-	};
-	_proto.warnAboutUntrackedRead_ = function warnAboutUntrackedRead_() {};
-	_proto.toString = function toString() {
-		return this.name_ + "[" + this.derivation.toString() + "]";
-	};
-	_proto.valueOf = function valueOf() {
+	}
+	warnAboutUntrackedRead_() {}
+	toString() {
+		return `${this.name_}[${this.derivation.toString()}]`;
+	}
+	valueOf() {
 		return toPrimitive(this.get());
-	};
-	_proto[Symbol.toPrimitive] = function() {
+	}
+	[Symbol.toPrimitive]() {
 		return this.valueOf();
-	};
-	return _createClass(ComputedValue, [
-		{
-			key: "isComputing",
-			get: function get() {
-				return getFlag(this.flags_, ComputedValue.isComputingMask_);
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, ComputedValue.isComputingMask_, newValue);
-			}
-		},
-		{
-			key: "isRunningSetter",
-			get: function get() {
-				return getFlag(this.flags_, ComputedValue.isRunningSetterMask_);
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, ComputedValue.isRunningSetterMask_, newValue);
-			}
-		},
-		{
-			key: "isBeingObserved",
-			get: function get() {
-				return getFlag(this.flags_, ComputedValue.isBeingObservedMask_);
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, ComputedValue.isBeingObservedMask_, newValue);
-			}
-		},
-		{
-			key: "isPendingUnobservation",
-			get: function get() {
-				return getFlag(this.flags_, ComputedValue.isPendingUnobservationMask_);
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, ComputedValue.isPendingUnobservationMask_, newValue);
-			}
-		},
-		{
-			key: "diffValue",
-			get: function get() {
-				return getFlag(this.flags_, ComputedValue.diffValueMask_) ? 1 : 0;
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, ComputedValue.diffValueMask_, newValue === 1 ? true : false);
-			}
-		}
-	]);
-}();
-ComputedValue.isComputingMask_ = 1;
-ComputedValue.isRunningSetterMask_ = 2;
-ComputedValue.isBeingObservedMask_ = 4;
-ComputedValue.isPendingUnobservationMask_ = 8;
-ComputedValue.diffValueMask_ = 16;
-var isComputedValue = /* @__PURE__ */ createInstanceofPredicate("ComputedValue", ComputedValue);
-var IDerivationState_;
-(function(IDerivationState_) {
-	IDerivationState_[IDerivationState_["NOT_TRACKING_"] = -1] = "NOT_TRACKING_";
-	IDerivationState_[IDerivationState_["UP_TO_DATE_"] = 0] = "UP_TO_DATE_";
-	IDerivationState_[IDerivationState_["POSSIBLY_STALE_"] = 1] = "POSSIBLY_STALE_";
-	IDerivationState_[IDerivationState_["STALE_"] = 2] = "STALE_";
-})(IDerivationState_ || (IDerivationState_ = {}));
-var TraceMode;
-(function(TraceMode) {
-	TraceMode[TraceMode["NONE"] = 0] = "NONE";
-	TraceMode[TraceMode["LOG"] = 1] = "LOG";
-	TraceMode[TraceMode["BREAK"] = 2] = "BREAK";
-})(TraceMode || (TraceMode = {}));
-var CaughtException = function CaughtException(cause) {
-	this.cause = void 0;
-	this.cause = cause;
+	}
+};
+var isComputedValue = /*#__PURE__*/ createInstanceofPredicate("ComputedValue", ComputedValue);
+var CaughtException = class {
+	constructor(cause) {
+		this.cause = void 0;
+		this.cause = cause;
+	}
 };
 function isCaughtException(e) {
 	return e instanceof CaughtException;
@@ -1184,54 +868,48 @@ function isCaughtException(e) {
 */
 function shouldCompute(derivation) {
 	switch (derivation.dependenciesState_) {
-		case IDerivationState_.UP_TO_DATE_: return false;
-		case IDerivationState_.NOT_TRACKING_:
-		case IDerivationState_.STALE_: return true;
-		case IDerivationState_.POSSIBLY_STALE_:
-			var prevAllowStateReads = allowStateReadsStart(true);
-			var prevUntracked = untrackedStart();
-			var obs = derivation.observing_, l = obs.length;
-			for (var i = 0; i < l; i++) {
-				var obj = obs[i];
+		case 0: return false;
+		case -1:
+		case 2: return true;
+		case 1: {
+			const prevUntracked = untrackedStart();
+			const obs = derivation.observing_, l = obs.length;
+			for (let i = 0; i < l; i++) {
+				const obj = obs[i];
 				if (isComputedValue(obj)) {
 					if (globalState.disableErrorBoundaries) obj.get();
 					else try {
 						obj.get();
 					} catch (e) {
 						untrackedEnd(prevUntracked);
-						allowStateReadsEnd(prevAllowStateReads);
 						return true;
 					}
-					if (derivation.dependenciesState_ === IDerivationState_.STALE_) {
+					if (derivation.dependenciesState_ === 2) {
 						untrackedEnd(prevUntracked);
-						allowStateReadsEnd(prevAllowStateReads);
 						return true;
 					}
 				}
 			}
 			changeDependenciesStateTo0(derivation);
 			untrackedEnd(prevUntracked);
-			allowStateReadsEnd(prevAllowStateReads);
 			return false;
+		}
 	}
 }
-function checkIfStateModificationsAreAllowed(atom) {}
-function checkIfStateReadsAreAllowed(observable) {}
 /**
 * Executes the provided function `f` and tracks which observables are being accessed.
 * The tracking information is stored on the `derivation` object and the derivation is registered
 * as observer of any of the accessed observables.
 */
 function trackDerivedFunction(derivation, f, context) {
-	var prevAllowStateReads = allowStateReadsStart(true);
 	changeDependenciesStateTo0(derivation);
 	derivation.newObserving_ = new Array(derivation.runId_ === 0 ? 100 : derivation.observing_.length);
 	derivation.unboundDepsCount_ = 0;
 	derivation.runId_ = ++globalState.runId;
-	var prevTracking = globalState.trackingDerivation;
+	const prevTracking = globalState.trackingDerivation;
 	globalState.trackingDerivation = derivation;
 	globalState.inBatch++;
-	var result;
+	let result;
 	if (globalState.disableErrorBoundaries === true) result = f.call(context);
 	else try {
 		result = f.call(context);
@@ -1241,23 +919,20 @@ function trackDerivedFunction(derivation, f, context) {
 	globalState.inBatch--;
 	globalState.trackingDerivation = prevTracking;
 	bindDependencies(derivation);
-	warnAboutDerivationWithoutDependencies(derivation);
-	allowStateReadsEnd(prevAllowStateReads);
 	return result;
 }
-function warnAboutDerivationWithoutDependencies(derivation) {}
 /**
 * diffs newObserving with observing.
 * update observing to be newObserving with unique observables
 * notify observers that become observed/unobserved
 */
 function bindDependencies(derivation) {
-	var prevObserving = derivation.observing_;
-	var observing = derivation.observing_ = derivation.newObserving_;
-	var lowestNewObservingDerivationState = IDerivationState_.UP_TO_DATE_;
-	var i0 = 0, l = derivation.unboundDepsCount_;
-	for (var i = 0; i < l; i++) {
-		var dep = observing[i];
+	const prevObserving = derivation.observing_;
+	const observing = derivation.observing_ = derivation.newObserving_;
+	let lowestNewObservingDerivationState = 0;
+	let i0 = 0, l = derivation.unboundDepsCount_;
+	for (let i = 0; i < l; i++) {
+		const dep = observing[i];
 		if (dep.diffValue === 0) {
 			dep.diffValue = 1;
 			if (i0 !== i) observing[i0] = dep;
@@ -1269,31 +944,31 @@ function bindDependencies(derivation) {
 	derivation.newObserving_ = null;
 	l = prevObserving.length;
 	while (l--) {
-		var _dep = prevObserving[l];
-		if (_dep.diffValue === 0) removeObserver(_dep, derivation);
-		_dep.diffValue = 0;
+		const dep = prevObserving[l];
+		if (dep.diffValue === 0) removeObserver(dep, derivation);
+		dep.diffValue = 0;
 	}
 	while (i0--) {
-		var _dep2 = observing[i0];
-		if (_dep2.diffValue === 1) {
-			_dep2.diffValue = 0;
-			addObserver(_dep2, derivation);
+		const dep = observing[i0];
+		if (dep.diffValue === 1) {
+			dep.diffValue = 0;
+			addObserver(dep, derivation);
 		}
 	}
-	if (lowestNewObservingDerivationState !== IDerivationState_.UP_TO_DATE_) {
+	if (lowestNewObservingDerivationState !== 0) {
 		derivation.dependenciesState_ = lowestNewObservingDerivationState;
 		derivation.onBecomeStale_();
 	}
 }
 function clearObserving(derivation) {
-	var obs = derivation.observing_;
+	const obs = derivation.observing_;
 	derivation.observing_ = [];
-	var i = obs.length;
+	let i = obs.length;
 	while (i--) removeObserver(obs[i], derivation);
-	derivation.dependenciesState_ = IDerivationState_.NOT_TRACKING_;
+	derivation.dependenciesState_ = -1;
 }
 function untracked(action) {
-	var prev = untrackedStart();
+	const prev = untrackedStart();
 	try {
 		return action();
 	} finally {
@@ -1301,139 +976,132 @@ function untracked(action) {
 	}
 }
 function untrackedStart() {
-	var prev = globalState.trackingDerivation;
+	const prev = globalState.trackingDerivation;
 	globalState.trackingDerivation = null;
 	return prev;
 }
 function untrackedEnd(prev) {
 	globalState.trackingDerivation = prev;
 }
-function allowStateReadsStart(allowStateReads) {
-	var prev = globalState.allowStateReads;
-	globalState.allowStateReads = allowStateReads;
-	return prev;
-}
-function allowStateReadsEnd(prev) {
-	globalState.allowStateReads = prev;
-}
 /**
 * needed to keep `lowestObserverState` correct. when changing from (2 or 1) to 0
 *
 */
 function changeDependenciesStateTo0(derivation) {
-	if (derivation.dependenciesState_ === IDerivationState_.UP_TO_DATE_) return;
-	derivation.dependenciesState_ = IDerivationState_.UP_TO_DATE_;
-	var obs = derivation.observing_;
-	var i = obs.length;
-	while (i--) obs[i].lowestObserverState_ = IDerivationState_.UP_TO_DATE_;
+	if (derivation.dependenciesState_ === 0) return;
+	derivation.dependenciesState_ = 0;
+	const obs = derivation.observing_;
+	let i = obs.length;
+	while (i--) obs[i].lowestObserverState_ = 0;
 }
-var MobXGlobals = function MobXGlobals() {
-	/**
-	* MobXGlobals version.
-	* MobX compatiblity with other versions loaded in memory as long as this version matches.
-	* It indicates that the global state still stores similar information
-	*
-	* N.B: this version is unrelated to the package version of MobX, and is only the version of the
-	* internal state storage of MobX, and can be the same across many different package versions
-	*/
-	this.version = 6;
-	/**
-	* globally unique token to signal unchanged
-	*/
-	this.UNCHANGED = {};
-	/**
-	* Currently running derivation
-	*/
-	this.trackingDerivation = null;
-	/**
-	* Currently running reaction. This determines if we currently have a reactive context.
-	* (Tracking derivation is also set for temporal tracking of computed values inside actions,
-	* but trackingReaction can only be set by a form of Reaction)
-	*/
-	this.trackingContext = null;
-	/**
-	* Each time a derivation is tracked, it is assigned a unique run-id
-	*/
-	this.runId = 0;
-	/**
-	* 'guid' for general purpose. Will be persisted amongst resets.
-	*/
-	this.mobxGuid = 0;
-	/**
-	* Are we in a batch block? (and how many of them)
-	*/
-	this.inBatch = 0;
-	/**
-	* Observables that don't have observers anymore, and are about to be
-	* suspended, unless somebody else accesses it in the same batch
-	*
-	* @type {IObservable[]}
-	*/
-	this.pendingUnobservations = [];
-	/**
-	* List of scheduled, not yet executed, reactions.
-	*/
-	this.pendingReactions = [];
-	/**
-	* Are we currently processing reactions?
-	*/
-	this.isRunningReactions = false;
-	/**
-	* Is it allowed to change observables at this point?
-	* In general, MobX doesn't allow that when running computations and React.render.
-	* To ensure that those functions stay pure.
-	*/
-	this.allowStateChanges = false;
-	/**
-	* Is it allowed to read observables at this point?
-	* Used to hold the state needed for `observableRequiresReaction`
-	*/
-	this.allowStateReads = true;
-	/**
-	* If strict mode is enabled, state changes are by default not allowed
-	*/
-	this.enforceActions = true;
-	/**
-	* Spy callbacks
-	*/
-	this.spyListeners = [];
-	/**
-	* Globally attached error handlers that react specifically to errors in reactions
-	*/
-	this.globalReactionErrorHandlers = [];
-	/**
-	* Warn if computed values are accessed outside a reactive context
-	*/
-	this.computedRequiresReaction = false;
-	/**
-	* (Experimental)
-	* Warn if you try to create to derivation / reactive context without accessing any observable.
-	*/
-	this.reactionRequiresObservable = false;
-	/**
-	* (Experimental)
-	* Warn if observables are accessed outside a reactive context
-	*/
-	this.observableRequiresReaction = false;
-	this.disableErrorBoundaries = false;
-	this.suppressReactionErrors = false;
-	this.useProxies = true;
-	this.verifyProxies = false;
-	/**
-	* False forces all object's descriptors to
-	* writable: true
-	* configurable: true
-	*/
-	this.safeDescriptors = true;
+var MOBX_GLOBALS_VERSION = 7;
+var MobXGlobals = class {
+	constructor() {
+		/**
+		* MobXGlobals version.
+		* MobX compatiblity with other versions loaded in memory as long as this version matches.
+		* It indicates that the global state still stores similar information
+		*
+		* N.B: this version is unrelated to the package version of MobX, and is only the version of the
+		* internal state storage of MobX, and can be the same across many different package versions
+		*/
+		this.version = MOBX_GLOBALS_VERSION;
+		/**
+		* globally unique token to signal unchanged
+		*/
+		this.UNCHANGED = {};
+		/**
+		* Currently running derivation
+		*/
+		this.trackingDerivation = null;
+		/**
+		* Currently running reaction. This determines if we currently have a reactive context.
+		* (Tracking derivation is also set for temporal tracking of computed values inside actions,
+		* but trackingReaction can only be set by a form of Reaction)
+		*/
+		this.trackingContext = null;
+		/**
+		* Each time a derivation is tracked, it is assigned a unique run-id
+		*/
+		this.runId = 0;
+		/**
+		* 'guid' for general purpose. Will be persisted amongst resets.
+		*/
+		this.mobxGuid = 0;
+		/**
+		* Are we in a batch block? (and how many of them)
+		*/
+		this.inBatch = 0;
+		/**
+		* Observables that don't have observers anymore, and are about to be
+		* suspended, unless somebody else accesses it in the same batch
+		*
+		* @type {IObservable[]}
+		*/
+		this.pendingUnobservations = [];
+		/**
+		* List of scheduled, not yet executed, reactions.
+		*/
+		this.pendingReactions = [];
+		/**
+		* Are we currently processing reactions?
+		*/
+		this.isRunningReactions = false;
+		/**
+		* Is it allowed to change observables at this point?
+		* In general, MobX doesn't allow that when running computations and React.render.
+		* To ensure that those functions stay pure.
+		*/
+		this.allowStateChanges = false;
+		/**
+		* Is it allowed to read observables at this point?
+		* Used to hold the state needed for `observableRequiresReaction`
+		*/
+		this.allowStateReads = true;
+		/**
+		* If strict mode is enabled, state changes are by default not allowed
+		*/
+		this.enforceActions = true;
+		/**
+		* Spy callbacks
+		*/
+		this.spyListeners = [];
+		/**
+		* Globally attached error handlers that react specifically to errors in reactions
+		*/
+		this.globalReactionErrorHandlers = [];
+		/**
+		* Warn if computed values are accessed outside a reactive context
+		*/
+		this.computedRequiresReaction = false;
+		/**
+		* (Experimental)
+		* Warn if you try to create to derivation / reactive context without accessing any observable.
+		*/
+		this.reactionRequiresObservable = false;
+		/**
+		* (Experimental)
+		* Warn if observables are accessed outside a reactive context
+		*/
+		this.observableRequiresReaction = false;
+		this.disableErrorBoundaries = false;
+		this.suppressReactionErrors = false;
+		/**
+		* False forces all object's descriptors to
+		* writable: true
+		* configurable: true
+		*/
+		this.safeDescriptors = true;
+	}
 };
 var canMergeGlobalState = true;
 var isolateCalled = false;
-var globalState = /* @__PURE__ */ function() {
-	var global = /* @__PURE__ */ getGlobal();
+var globalState = /*#__PURE__*/ function() {
+	let global = globalThis;
 	if (global.__mobxInstanceCount > 0 && !global.__mobxGlobals) canMergeGlobalState = false;
-	if (global.__mobxGlobals && global.__mobxGlobals.version !== new MobXGlobals().version) canMergeGlobalState = false;
+	if (global.__mobxGlobals && global.__mobxGlobals.version !== MOBX_GLOBALS_VERSION) canMergeGlobalState = false;
 	if (!canMergeGlobalState) {
-		setTimeout(function() {
+		setTimeout(() => {
 			if (!isolateCalled) die(35);
 		}, 1);
 		return new MobXGlobals();
@@ -1443,7 +1111,7 @@ var globalState = /* @__PURE__ */ function() {
 		return global.__mobxGlobals;
 	} else {
 		global.__mobxInstanceCount = 1;
-		return global.__mobxGlobals = /* @__PURE__ */ new MobXGlobals();
+		return global.__mobxGlobals = /*#__PURE__*/ new MobXGlobals();
 	}
 }();
 function addObserver(observable, node) {
@@ -1451,7 +1119,7 @@ function addObserver(observable, node) {
 	if (observable.lowestObserverState_ > node.dependenciesState_) observable.lowestObserverState_ = node.dependenciesState_;
 }
 function removeObserver(observable, node) {
-	observable.observers_["delete"](node);
+	observable.observers_.delete(node);
 	if (observable.observers_.size === 0) queueForUnobservation(observable);
 }
 function queueForUnobservation(observable) {
@@ -1471,9 +1139,9 @@ function startBatch() {
 function endBatch() {
 	if (--globalState.inBatch === 0) {
 		runReactions();
-		var list = globalState.pendingUnobservations;
-		for (var i = 0; i < list.length; i++) {
-			var observable = list[i];
+		const list = globalState.pendingUnobservations;
+		for (let i = 0; i < list.length; i++) {
+			const observable = list[i];
 			observable.isPendingUnobservation = false;
 			if (observable.observers_.size === 0) {
 				if (observable.isBeingObserved) {
@@ -1487,8 +1155,7 @@ function endBatch() {
 	}
 }
 function reportObserved(observable) {
-	checkIfStateReadsAreAllowed(observable);
-	var derivation = globalState.trackingDerivation;
+	const derivation = globalState.trackingDerivation;
 	if (derivation !== null) {
 		/**
 		* Simple optimization, give each derivation run an unique id (runId)
@@ -1515,66 +1182,96 @@ function reportObserved(observable) {
 * Also most basic use cases should be ok
 */
 function propagateChanged(observable) {
-	if (observable.lowestObserverState_ === IDerivationState_.STALE_) return;
-	observable.lowestObserverState_ = IDerivationState_.STALE_;
-	observable.observers_.forEach(function(d) {
-		if (d.dependenciesState_ === IDerivationState_.UP_TO_DATE_) d.onBecomeStale_();
-		d.dependenciesState_ = IDerivationState_.STALE_;
+	if (observable.lowestObserverState_ === 2) return;
+	observable.lowestObserverState_ = 2;
+	observable.observers_.forEach((d) => {
+		if (d.dependenciesState_ === 0) d.onBecomeStale_();
+		d.dependenciesState_ = 2;
 	});
 }
 function propagateChangeConfirmed(observable) {
-	if (observable.lowestObserverState_ === IDerivationState_.STALE_) return;
-	observable.lowestObserverState_ = IDerivationState_.STALE_;
-	observable.observers_.forEach(function(d) {
-		if (d.dependenciesState_ === IDerivationState_.POSSIBLY_STALE_) d.dependenciesState_ = IDerivationState_.STALE_;
-		else if (d.dependenciesState_ === IDerivationState_.UP_TO_DATE_) observable.lowestObserverState_ = IDerivationState_.UP_TO_DATE_;
+	if (observable.lowestObserverState_ === 2) return;
+	observable.lowestObserverState_ = 2;
+	observable.observers_.forEach((d) => {
+		if (d.dependenciesState_ === 1) d.dependenciesState_ = 2;
+		else if (d.dependenciesState_ === 0) observable.lowestObserverState_ = 0;
 	});
 }
 function propagateMaybeChanged(observable) {
-	if (observable.lowestObserverState_ !== IDerivationState_.UP_TO_DATE_) return;
-	observable.lowestObserverState_ = IDerivationState_.POSSIBLY_STALE_;
-	observable.observers_.forEach(function(d) {
-		if (d.dependenciesState_ === IDerivationState_.UP_TO_DATE_) {
-			d.dependenciesState_ = IDerivationState_.POSSIBLY_STALE_;
+	if (observable.lowestObserverState_ !== 0) return;
+	observable.lowestObserverState_ = 1;
+	observable.observers_.forEach((d) => {
+		if (d.dependenciesState_ === 0) {
+			d.dependenciesState_ = 1;
 			d.onBecomeStale_();
 		}
 	});
 }
-var Reaction = /* @__PURE__ */ function() {
-	function Reaction(name_, onInvalidate_, errorHandler_, requiresObservable_) {
-		if (name_ === void 0) name_ = "Reaction";
+var Reaction = class {
+	constructor(name_ = "Reaction", onInvalidate_, errorHandler_, requiresObservable_) {
 		this.name_ = void 0;
 		this.onInvalidate_ = void 0;
 		this.errorHandler_ = void 0;
 		this.requiresObservable_ = void 0;
 		this.observing_ = [];
 		this.newObserving_ = [];
-		this.dependenciesState_ = IDerivationState_.NOT_TRACKING_;
+		this.dependenciesState_ = -1;
 		this.runId_ = 0;
 		this.unboundDepsCount_ = 0;
 		this.flags_ = 0;
-		this.isTracing_ = TraceMode.NONE;
 		this.name_ = name_;
 		this.onInvalidate_ = onInvalidate_;
 		this.errorHandler_ = errorHandler_;
 		this.requiresObservable_ = requiresObservable_;
 	}
-	var _proto = Reaction.prototype;
-	_proto.onBecomeStale_ = function onBecomeStale_() {
+	get isDisposed() {
+		return getFlag(this.flags_, 1);
+	}
+	set isDisposed(newValue) {
+		this.flags_ = setFlag(this.flags_, 1, newValue);
+	}
+	get isScheduled() {
+		return getFlag(this.flags_, 2);
+	}
+	set isScheduled(newValue) {
+		this.flags_ = setFlag(this.flags_, 2, newValue);
+	}
+	get isTrackPending() {
+		return getFlag(this.flags_, 4);
+	}
+	set isTrackPending(newValue) {
+		this.flags_ = setFlag(this.flags_, 4, newValue);
+	}
+	get isRunning() {
+		return getFlag(this.flags_, 8);
+	}
+	set isRunning(newValue) {
+		this.flags_ = setFlag(this.flags_, 8, newValue);
+	}
+	get diffValue() {
+		return getFlag(this.flags_, 16) ? 1 : 0;
+	}
+	set diffValue(newValue) {
+		this.flags_ = setFlag(this.flags_, 16, newValue === 1 ? true : false);
+	}
+	onBecomeStale_() {
 		this.schedule_();
-	};
-	_proto.schedule_ = function schedule_() {
+	}
+	schedule_() {
 		if (!this.isScheduled) {
 			this.isScheduled = true;
 			globalState.pendingReactions.push(this);
 			runReactions();
 		}
-	};
-	_proto.runReaction_ = function runReaction_() {
+	}
+	/**
+	* internal, use schedule() if you intend to kick off a reaction
+	*/
+	runReaction_() {
 		if (!this.isDisposed) {
 			startBatch();
 			this.isScheduled = false;
-			var prev = globalState.trackingContext;
+			const prev = globalState.trackingContext;
 			globalState.trackingContext = this;
 			if (shouldCompute(this)) {
 				this.isTrackPending = true;
@@ -1587,36 +1284,32 @@ var Reaction = /* @__PURE__ */ function() {
 			globalState.trackingContext = prev;
 			endBatch();
 		}
-	};
-	_proto.track = function track(fn) {
+	}
+	track(fn) {
 		if (this.isDisposed) return;
 		startBatch();
-		isSpyEnabled();
 		this.isRunning = true;
-		var prevReaction = globalState.trackingContext;
+		const prevReaction = globalState.trackingContext;
 		globalState.trackingContext = this;
-		var result = trackDerivedFunction(this, fn, void 0);
+		const result = trackDerivedFunction(this, fn, void 0);
 		globalState.trackingContext = prevReaction;
 		this.isRunning = false;
 		this.isTrackPending = false;
 		if (this.isDisposed) clearObserving(this);
 		if (isCaughtException(result)) this.reportExceptionInDerivation_(result.cause);
 		endBatch();
-	};
-	_proto.reportExceptionInDerivation_ = function reportExceptionInDerivation_(error) {
-		var _this = this;
+	}
+	reportExceptionInDerivation_(error) {
 		if (this.errorHandler_) {
 			this.errorHandler_(error, this);
 			return;
 		}
 		if (globalState.disableErrorBoundaries) throw error;
-		var message = "[mobx] uncaught error in '" + this + "'";
+		const message = `[mobx] uncaught error in '${this}'`;
 		if (!globalState.suppressReactionErrors) console.error(message, error);
-		globalState.globalReactionErrorHandlers.forEach(function(f) {
-			return f(error, _this);
-		});
-	};
-	_proto.dispose = function dispose() {
+		globalState.globalReactionErrorHandlers.forEach((f) => f(error, this));
+	}
+	dispose() {
 		if (!this.isDisposed) {
 			this.isDisposed = true;
 			if (!this.isRunning) {
@@ -1625,143 +1318,76 @@ var Reaction = /* @__PURE__ */ function() {
 				endBatch();
 			}
 		}
-	};
-	_proto.getDisposer_ = function getDisposer_(abortSignal) {
-		var _this2 = this;
-		var dispose = function dispose() {
-			_this2.dispose();
+	}
+	getDisposer_(abortSignal) {
+		const dispose = () => {
+			this.dispose();
 			abortSignal == null || abortSignal.removeEventListener == null || abortSignal.removeEventListener("abort", dispose);
 		};
 		abortSignal == null || abortSignal.addEventListener == null || abortSignal.addEventListener("abort", dispose);
 		dispose[$mobx] = this;
 		if ("dispose" in Symbol && typeof Symbol.dispose === "symbol") dispose[Symbol.dispose] = dispose;
 		return dispose;
-	};
-	_proto.toString = function toString() {
-		return "Reaction[" + this.name_ + "]";
-	};
-	_proto.trace = function trace$1(enterBreakPoint) {
-		if (enterBreakPoint === void 0) enterBreakPoint = false;
-		trace(this, enterBreakPoint);
-	};
-	return _createClass(Reaction, [
-		{
-			key: "isDisposed",
-			get: function get() {
-				return getFlag(this.flags_, Reaction.isDisposedMask_);
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, Reaction.isDisposedMask_, newValue);
-			}
-		},
-		{
-			key: "isScheduled",
-			get: function get() {
-				return getFlag(this.flags_, Reaction.isScheduledMask_);
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, Reaction.isScheduledMask_, newValue);
-			}
-		},
-		{
-			key: "isTrackPending",
-			get: function get() {
-				return getFlag(this.flags_, Reaction.isTrackPendingMask_);
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, Reaction.isTrackPendingMask_, newValue);
-			}
-		},
-		{
-			key: "isRunning",
-			get: function get() {
-				return getFlag(this.flags_, Reaction.isRunningMask_);
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, Reaction.isRunningMask_, newValue);
-			}
-		},
-		{
-			key: "diffValue",
-			get: function get() {
-				return getFlag(this.flags_, Reaction.diffValueMask_) ? 1 : 0;
-			},
-			set: function set(newValue) {
-				this.flags_ = setFlag(this.flags_, Reaction.diffValueMask_, newValue === 1 ? true : false);
-			}
-		}
-	]);
-}();
-Reaction.isDisposedMask_ = 1;
-Reaction.isScheduledMask_ = 2;
-Reaction.isTrackPendingMask_ = 4;
-Reaction.isRunningMask_ = 8;
-Reaction.diffValueMask_ = 16;
+	}
+	toString() {
+		return `Reaction[${this.name_}]`;
+	}
+};
 /**
 * Magic number alert!
 * Defines within how many times a reaction is allowed to re-trigger itself
 * until it is assumed that this is gonna be a never ending loop...
 */
 var MAX_REACTION_ITERATIONS = 100;
-var reactionScheduler = function reactionScheduler(f) {
-	return f();
-};
+var reactionScheduler = (f) => f();
 function runReactions() {
 	if (globalState.inBatch > 0 || globalState.isRunningReactions) return;
 	reactionScheduler(runReactionsHelper);
 }
 function runReactionsHelper() {
 	globalState.isRunningReactions = true;
-	var allReactions = globalState.pendingReactions;
-	var iterations = 0;
+	const allReactions = globalState.pendingReactions;
+	let iterations = 0;
 	while (allReactions.length > 0) {
 		if (++iterations === MAX_REACTION_ITERATIONS) {
-			console.error("[mobx] cycle in reaction: " + allReactions[0]);
+			console.error(`[mobx] cycle in reaction: ${allReactions[0]}`);
 			allReactions.splice(0);
 		}
-		var remainingReactions = allReactions.splice(0);
-		for (var i = 0, l = remainingReactions.length; i < l; i++) remainingReactions[i].runReaction_();
+		let remainingReactions = allReactions.splice(0);
+		for (let i = 0, l = remainingReactions.length; i < l; i++) remainingReactions[i].runReaction_();
 	}
 	globalState.isRunningReactions = false;
 }
-var isReaction = /* @__PURE__ */ createInstanceofPredicate("Reaction", Reaction);
-function isSpyEnabled() {
-	return false;
-}
-function spy(listener) {
-	console.warn("[mobx.spy] Is a no-op in production builds");
-	return function() {};
-}
+var isReaction = /*#__PURE__*/ createInstanceofPredicate("Reaction", Reaction);
 var ACTION = "action";
-var ACTION_BOUND = "action.bound";
 var AUTOACTION = "autoAction";
 var AUTOACTION_BOUND = "autoAction.bound";
 var DEFAULT_ACTION_NAME = "<unnamed action>";
-var actionAnnotation = /* @__PURE__ */ createActionAnnotation(ACTION);
-var actionBoundAnnotation = /* @__PURE__ */ createActionAnnotation(ACTION_BOUND, { bound: true });
-var autoActionAnnotation = /* @__PURE__ */ createActionAnnotation(AUTOACTION, { autoAction: true });
-var autoActionBoundAnnotation = /* @__PURE__ */ createActionAnnotation(AUTOACTION_BOUND, {
+var actionAnnotation = /*#__PURE__*/ createActionAnnotation(ACTION);
+var autoActionAnnotation = /*#__PURE__*/ createActionAnnotation(AUTOACTION, { autoAction: true });
+var autoActionBoundAnnotation = /*#__PURE__*/ createActionAnnotation(AUTOACTION_BOUND, {
 	autoAction: true,
 	bound: true
 });
+function createActionDecoratorAnnotation(annotation) {
+	return createDecoratorAnnotation(annotation, decorateAction20223_);
+}
 function createActionFactory(autoAction) {
 	return function action(arg1, arg2) {
+		if (arg2 && typeof arg2.kind === "string") return decorateAction20223_(autoAction ? autoActionAnnotation : actionAnnotation, arg1, arg2);
 		if (isFunction(arg1)) return createAction(arg1.name || DEFAULT_ACTION_NAME, arg1, autoAction);
 		if (isFunction(arg2)) return createAction(arg1, arg2, autoAction);
-		if (is20223Decorator(arg2)) return (autoAction ? autoActionAnnotation : actionAnnotation).decorate_20223_(arg1, arg2);
-		if (isStringish(arg2)) return storeAnnotation(arg1, arg2, autoAction ? autoActionAnnotation : actionAnnotation);
-		if (isStringish(arg1)) return createDecoratorAnnotation(createActionAnnotation(autoAction ? AUTOACTION : ACTION, {
+		if (isStringish(arg1)) return createActionDecoratorAnnotation(createActionAnnotation(autoAction ? AUTOACTION : ACTION, {
 			name: arg1,
 			autoAction
 		}));
 	};
 }
-var action = /* @__PURE__ */ createActionFactory(false);
-Object.assign(action, actionAnnotation);
-var autoAction = /* @__PURE__ */ createActionFactory(true);
-Object.assign(autoAction, autoActionAnnotation);
-action.bound = /* @__PURE__ */ createDecoratorAnnotation(actionBoundAnnotation);
-autoAction.bound = /* @__PURE__ */ createDecoratorAnnotation(autoActionBoundAnnotation);
+var action = /*#__PURE__*/ createActionFactory(false);
+assign(action, actionAnnotation);
+var autoAction = /*#__PURE__*/ createActionFactory(true);
+assign(autoAction, autoActionAnnotation);
+var autoActionBound = /*#__PURE__*/ createActionDecoratorAnnotation(autoActionBoundAnnotation);
 function runInAction(fn) {
 	return executeAction(fn.name || DEFAULT_ACTION_NAME, false, fn, this, void 0);
 }
@@ -1774,22 +1400,21 @@ function isAction(thing) {
 * @param view The reactive view
 * @returns disposer function, which can be used to stop the view from being updated in the future.
 */
-function autorun(view, opts) {
-	var _opts$name, _opts, _opts2, _opts3;
-	if (opts === void 0) opts = EMPTY_OBJECT;
-	var name = (_opts$name = (_opts = opts) == null ? void 0 : _opts.name) != null ? _opts$name : "Autorun";
-	var runSync = !opts.scheduler && !opts.delay;
-	var reaction;
+function autorun(view, opts = EMPTY_OBJECT) {
+	var _opts$name, _opts$signal;
+	const name = (_opts$name = opts == null ? void 0 : opts.name) != null ? _opts$name : "Autorun";
+	const runSync = !opts.scheduler && !opts.delay;
+	let reaction;
 	if (runSync) reaction = new Reaction(name, function() {
 		this.track(reactionRunner);
 	}, opts.onError, opts.requiresObservable);
 	else {
-		var scheduler = createSchedulerFromOptions(opts);
-		var isScheduled = false;
-		reaction = new Reaction(name, function() {
+		const scheduler = createSchedulerFromOptions(opts);
+		let isScheduled = false;
+		reaction = new Reaction(name, () => {
 			if (!isScheduled) {
 				isScheduled = true;
-				scheduler(function() {
+				scheduler(() => {
 					isScheduled = false;
 					if (!reaction.isDisposed) reaction.track(reactionRunner);
 				});
@@ -1799,29 +1424,24 @@ function autorun(view, opts) {
 	function reactionRunner() {
 		view(reaction);
 	}
-	if (!((_opts2 = opts) != null && (_opts2 = _opts2.signal) != null && _opts2.aborted)) reaction.schedule_();
-	return reaction.getDisposer_((_opts3 = opts) == null ? void 0 : _opts3.signal);
+	if (!(opts != null && (_opts$signal = opts.signal) != null && _opts$signal.aborted)) reaction.schedule_();
+	return reaction.getDisposer_(opts == null ? void 0 : opts.signal);
 }
-var run = function run(f) {
-	return f();
-};
+var run = (f) => f();
 function createSchedulerFromOptions(opts) {
-	return opts.scheduler ? opts.scheduler : opts.delay ? function(f) {
-		return setTimeout(f, opts.delay);
-	} : run;
+	return opts.scheduler ? opts.scheduler : opts.delay ? (f) => setTimeout(f, opts.delay) : run;
 }
-function reaction(expression, effect, opts) {
-	var _opts$name2, _opts4, _opts5;
-	if (opts === void 0) opts = EMPTY_OBJECT;
-	var name = (_opts$name2 = opts.name) != null ? _opts$name2 : "Reaction";
-	var effectAction = action(name, opts.onError ? wrapErrorHandler(opts.onError, effect) : effect);
-	var runSync = !opts.scheduler && !opts.delay;
-	var scheduler = createSchedulerFromOptions(opts);
-	var firstTime = true;
-	var isScheduled = false;
-	var value;
-	var equals = opts.compareStructural ? comparer.structural : opts.equals || comparer["default"];
-	var r = new Reaction(name, function() {
+function reaction(expression, effect, opts = EMPTY_OBJECT) {
+	var _opts$name2, _opts$signal2;
+	const name = (_opts$name2 = opts.name) != null ? _opts$name2 : "Reaction";
+	const effectAction = action(name, opts.onError ? wrapErrorHandler(opts.onError, effect) : effect);
+	const runSync = !opts.scheduler && !opts.delay;
+	const scheduler = createSchedulerFromOptions(opts);
+	let firstTime = true;
+	let isScheduled = false;
+	let value;
+	const equals = opts.equals || compareDefault;
+	const r = new Reaction(name, () => {
 		if (firstTime || runSync) reactionRunner();
 		else if (!isScheduled) {
 			isScheduled = true;
@@ -1831,12 +1451,10 @@ function reaction(expression, effect, opts) {
 	function reactionRunner() {
 		isScheduled = false;
 		if (r.isDisposed) return;
-		var changed = false;
-		var oldValue = value;
-		r.track(function() {
-			var nextValue = allowStateChanges(false, function() {
-				return expression(r);
-			});
+		let changed = false;
+		const oldValue = value;
+		r.track(() => {
+			const nextValue = allowStateChanges(false, () => expression(r));
 			changed = firstTime || !equals(value, nextValue);
 			value = nextValue;
 		});
@@ -1844,8 +1462,8 @@ function reaction(expression, effect, opts) {
 		else if (!firstTime && changed) effectAction(value, oldValue, r);
 		firstTime = false;
 	}
-	if (!((_opts4 = opts) != null && (_opts4 = _opts4.signal) != null && _opts4.aborted)) r.schedule_();
-	return r.getDisposer_((_opts5 = opts) == null ? void 0 : _opts5.signal);
+	if (!(opts != null && (_opts$signal2 = opts.signal) != null && _opts$signal2.aborted)) r.schedule_();
+	return r.getDisposer_(opts == null ? void 0 : opts.signal);
 }
 function wrapErrorHandler(errorHandler, baseFn) {
 	return function() {
@@ -1856,65 +1474,48 @@ function wrapErrorHandler(errorHandler, baseFn) {
 		}
 	};
 }
-var ON_BECOME_OBSERVED = "onBO";
-var ON_BECOME_UNOBSERVED = "onBUO";
-function onBecomeObserved(thing, arg2, arg3) {
-	return interceptHook(ON_BECOME_OBSERVED, thing, arg2, arg3);
-}
-function onBecomeUnobserved(thing, arg2, arg3) {
-	return interceptHook(ON_BECOME_UNOBSERVED, thing, arg2, arg3);
-}
-function interceptHook(hook, thing, arg2, arg3) {
-	var atom = typeof arg3 === "function" ? getAtom(thing, arg2) : getAtom(thing);
-	var cb = isFunction(arg3) ? arg3 : arg2;
-	var listenersKey = hook + "L";
-	if (atom[listenersKey]) atom[listenersKey].add(cb);
-	else atom[listenersKey] = new Set([cb]);
-	return function() {
-		var hookListeners = atom[listenersKey];
-		if (hookListeners) {
-			hookListeners["delete"](cb);
-			if (hookListeners.size === 0) delete atom[listenersKey];
-		}
-	};
-}
 function extendObservable(target, properties, annotations, options) {
-	var descriptors = getOwnPropertyDescriptors(properties);
-	initObservable(function() {
-		var adm = asObservableObject(target, options)[$mobx];
-		ownKeys(descriptors).forEach(function(key) {
+	const descriptors = getOwnPropertyDescriptors(properties);
+	initObservable(() => {
+		const adm = asObservableObject(target, options)[$mobx];
+		ownKeys(descriptors).forEach((key) => {
 			adm.extend_(key, descriptors[key], !annotations ? true : key in annotations ? annotations[key] : true);
 		});
 	});
 	return target;
 }
-var generatorId = 0;
-function FlowCancellationError() {
-	this.message = "FLOW_CANCELLED";
+var FlowCancellationError = class extends Error {
+	constructor() {
+		super("FLOW_CANCELLED");
+		Object.setPrototypeOf(this, new.target.prototype);
+		this.name = "FlowCancellationError";
+	}
+	toString() {
+		return `Error: ${this.message}`;
+	}
+};
+function createFlowDecoratorAnnotation(annotation) {
+	return createDecoratorAnnotation(annotation, decorateFlow20223_);
 }
-FlowCancellationError.prototype = /* @__PURE__ */ Object.create(Error.prototype);
-var flowAnnotation = /* @__PURE__ */ createFlowAnnotation("flow");
-var flowBoundAnnotation = /* @__PURE__ */ createFlowAnnotation("flow.bound", { bound: true });
-var flow = /* @__PURE__ */ Object.assign(function flow(arg1, arg2) {
-	if (is20223Decorator(arg2)) return flowAnnotation.decorate_20223_(arg1, arg2);
-	if (isStringish(arg2)) return storeAnnotation(arg1, arg2, flowAnnotation);
-	var generator = arg1;
-	var name = generator.name || "<unnamed flow>";
-	var res = function res() {
-		var ctx = this;
-		var args = arguments;
-		var runId = ++generatorId;
-		var gen = action(name + " - runid: " + runId + " - init", generator).apply(ctx, args);
-		var rejector;
-		var pendingPromise = void 0;
-		var promise = new Promise(function(resolve, reject) {
-			var stepId = 0;
+var flowAnnotation = /*#__PURE__*/ createFlowAnnotation("flow");
+var flowBoundAnnotation = /*#__PURE__*/ createFlowAnnotation("flow.bound", { bound: true });
+var flow = /*#__PURE__*/ assign(function flow(arg1, arg2) {
+	if (arg2 && typeof arg2.kind === "string") return decorateFlow20223_(flowAnnotation, arg1, arg2);
+	const generator = arg1;
+	const name = generator.name || "flow";
+	const res = function res() {
+		const ctx = this;
+		const args = arguments;
+		const gen = action(name, generator).apply(ctx, args);
+		let rejector;
+		let pendingPromise = void 0;
+		const promise = new Promise(function(resolve, reject) {
 			rejector = reject;
 			function onFulfilled(res) {
 				pendingPromise = void 0;
-				var ret;
+				let ret;
 				try {
-					ret = action(name + " - runid: " + runId + " - yield " + stepId++, gen.next).call(gen, res);
+					ret = action(name, gen.next).call(gen, res);
 				} catch (e) {
 					return reject(e);
 				}
@@ -1922,9 +1523,9 @@ var flow = /* @__PURE__ */ Object.assign(function flow(arg1, arg2) {
 			}
 			function onRejected(err) {
 				pendingPromise = void 0;
-				var ret;
+				let ret;
 				try {
-					ret = action(name + " - runid: " + runId + " - yield " + stepId++, gen["throw"]).call(gen, err);
+					ret = action(name, gen.throw).call(gen, err);
 				} catch (e) {
 					return reject(e);
 				}
@@ -1941,11 +1542,11 @@ var flow = /* @__PURE__ */ Object.assign(function flow(arg1, arg2) {
 			}
 			onFulfilled(void 0);
 		});
-		promise.cancel = action(name + " - runid: " + runId + " - cancel", function() {
+		promise.cancel = action(name, function() {
 			try {
 				if (pendingPromise) cancelPromise(pendingPromise);
-				var _res = gen["return"](void 0);
-				var yieldedPromise = Promise.resolve(_res.value);
+				const res = gen.return(void 0);
+				const yieldedPromise = Promise.resolve(res.value);
 				yieldedPromise.then(noop, noop);
 				cancelPromise(yieldedPromise);
 				rejector(new FlowCancellationError());
@@ -1958,7 +1559,7 @@ var flow = /* @__PURE__ */ Object.assign(function flow(arg1, arg2) {
 	res.isMobXFlow = true;
 	return res;
 }, flowAnnotation);
-flow.bound = /* @__PURE__ */ createDecoratorAnnotation(flowBoundAnnotation);
+var flowBound = /*#__PURE__*/ createFlowDecoratorAnnotation(flowBoundAnnotation);
 function cancelPromise(promise) {
 	if (isFunction(promise.cancel)) promise.cancel();
 }
@@ -1968,7 +1569,11 @@ function isFlow(fn) {
 function _isObservable(value, property) {
 	if (!value) return false;
 	if (property !== void 0) {
-		if (isObservableObject(value)) return value[$mobx].values_.has(property);
+		if (isObservableObject(value)) {
+			var _adm$lazyComputedKeys, _adm$lazyObservableKe;
+			const adm = value[$mobx];
+			return adm.values_.has(property) || !!((_adm$lazyComputedKeys = adm.lazyComputedKeys_) != null && _adm$lazyComputedKeys.has(property)) || !!((_adm$lazyObservableKe = adm.lazyObservableKeys_) != null && _adm$lazyObservableKe.has(property));
+		}
 		return false;
 	}
 	return isObservableObject(value) || !!value[$mobx] || isAtom(value) || isReaction(value) || isComputedValue(value);
@@ -1976,7 +1581,6 @@ function _isObservable(value, property) {
 function isObservable(value) {
 	return _isObservable(value);
 }
-function trace() {}
 /**
 * During a transaction no views are updated until the end of the transaction.
 * The transaction will be run synchronously nonetheless.
@@ -1984,8 +1588,7 @@ function trace() {}
 * @param action a function that updates some reactive state
 * @returns any value that was returned by the 'action' parameter.
 */
-function transaction(action, thisArg) {
-	if (thisArg === void 0) thisArg = void 0;
+function transaction(action, thisArg = void 0) {
 	startBatch();
 	try {
 		return action.apply(thisArg);
@@ -1997,55 +1600,46 @@ function getAdm(target) {
 	return target[$mobx];
 }
 var objectProxyTraps = {
-	has: function has(target, name) {
+	has(target, name) {
 		return getAdm(target).has_(name);
 	},
-	get: function get(target, name) {
+	get(target, name) {
 		return getAdm(target).get_(name);
 	},
-	set: function set(target, name, value) {
+	set(target, name, value) {
 		var _getAdm$set_;
 		if (!isStringish(name)) return false;
 		return (_getAdm$set_ = getAdm(target).set_(name, value, true)) != null ? _getAdm$set_ : true;
 	},
-	deleteProperty: function deleteProperty(target, name) {
+	deleteProperty(target, name) {
 		var _getAdm$delete_;
 		if (!isStringish(name)) return false;
 		return (_getAdm$delete_ = getAdm(target).delete_(name, true)) != null ? _getAdm$delete_ : true;
 	},
-	defineProperty: function defineProperty(target, name, descriptor) {
+	defineProperty(target, name, descriptor) {
 		var _getAdm$definePropert;
 		return (_getAdm$definePropert = getAdm(target).defineProperty_(name, descriptor)) != null ? _getAdm$definePropert : true;
 	},
-	ownKeys: function ownKeys(target) {
+	ownKeys(target) {
 		return getAdm(target).ownKeys_();
 	},
-	preventExtensions: function preventExtensions(target) {
+	preventExtensions(target) {
 		die(13);
 	}
 };
 function asDynamicObservableObject(target, options) {
 	var _target$$mobx, _target$$mobx$proxy_;
-	assertProxies();
 	target = asObservableObject(target, options);
 	return (_target$$mobx$proxy_ = (_target$$mobx = target[$mobx]).proxy_) != null ? _target$$mobx$proxy_ : _target$$mobx.proxy_ = new Proxy(target, objectProxyTraps);
 }
 function hasInterceptors(interceptable) {
 	return interceptable.interceptors_ !== void 0 && interceptable.interceptors_.length > 0;
 }
-function registerInterceptor(interceptable, handler) {
-	var interceptors = interceptable.interceptors_ || (interceptable.interceptors_ = []);
-	interceptors.push(handler);
-	return once(function() {
-		var idx = interceptors.indexOf(handler);
-		if (idx !== -1) interceptors.splice(idx, 1);
-	});
-}
 function interceptChange(interceptable, change) {
-	var prevU = untrackedStart();
+	const prevU = untrackedStart();
 	try {
-		var interceptors = [].concat(interceptable.interceptors_ || []);
-		for (var i = 0, l = interceptors.length; i < l; i++) {
+		const interceptors = [...interceptable.interceptors_ || []];
+		for (let i = 0, l = interceptors.length; i < l; i++) {
 			change = interceptors[i](change);
 			if (change && !change.type) die(14);
 			if (!change) break;
@@ -2058,68 +1652,71 @@ function interceptChange(interceptable, change) {
 function hasListeners(listenable) {
 	return listenable.changeListeners_ !== void 0 && listenable.changeListeners_.length > 0;
 }
-function registerListener(listenable, handler) {
-	var listeners = listenable.changeListeners_ || (listenable.changeListeners_ = []);
-	listeners.push(handler);
-	return once(function() {
-		var idx = listeners.indexOf(handler);
-		if (idx !== -1) listeners.splice(idx, 1);
-	});
-}
 function notifyListeners(listenable, change) {
-	var prevU = untrackedStart();
-	var listeners = listenable.changeListeners_;
+	const prevU = untrackedStart();
+	let listeners = listenable.changeListeners_;
 	if (!listeners) return;
 	listeners = listeners.slice();
-	for (var i = 0, l = listeners.length; i < l; i++) listeners[i](change);
+	for (let i = 0, l = listeners.length; i < l; i++) listeners[i](change);
 	untrackedEnd(prevU);
 }
-var keysSymbol = /* @__PURE__ */ Symbol("mobx-keys");
+var keysSymbol = /*#__PURE__*/ Symbol("mobx-keys");
 function makeAutoObservable(target, overrides, options) {
 	if (isPlainObject(target)) return extendObservable(target, target, overrides, options);
-	initObservable(function() {
-		var adm = asObservableObject(target, options)[$mobx];
+	initObservable(() => {
+		const adm = asObservableObject(target, options)[$mobx];
 		if (!target[keysSymbol]) {
-			var proto = Object.getPrototypeOf(target);
-			var keys = new Set([].concat(ownKeys(target), ownKeys(proto)));
-			keys["delete"]("constructor");
-			keys["delete"]($mobx);
+			const proto = Object.getPrototypeOf(target);
+			const keys = /* @__PURE__ */ new Set([...ownKeys(target), ...ownKeys(proto)]);
+			keys.delete("constructor");
+			keys.delete($mobx);
 			addHiddenProp(proto, keysSymbol, keys);
 		}
-		target[keysSymbol].forEach(function(key) {
-			return adm.make_(key, !overrides ? true : key in overrides ? overrides[key] : true);
-		});
+		target[keysSymbol].forEach((key) => make_(adm, key, !overrides ? true : key in overrides ? overrides[key] : true));
 	});
 	return target;
+}
+function make_(adm, key, annotation) {
+	if (annotation === true) annotation = adm.defaultAnnotation_;
+	if (annotation === false) return;
+	if (!(key in adm.target_)) die(1, annotation.annotationType_, `${adm.name_}.${key.toString()}`);
+	let source = adm.target_;
+	while (source && source !== objectPrototype) {
+		const descriptor = getDescriptor(source, key);
+		if (descriptor) {
+			const outcome = annotation.make_(adm, key, descriptor, source);
+			if (outcome === 0) return;
+			if (outcome === 1) break;
+		}
+		source = Object.getPrototypeOf(source);
+	}
 }
 var SPLICE = "splice";
 var UPDATE = "update";
 var MAX_SPLICE_SIZE = 1e4;
 var arrayTraps = {
-	get: function get(target, name) {
-		var adm = target[$mobx];
+	get(target, name) {
+		const adm = target[$mobx];
 		if (name === $mobx) return adm;
 		if (name === "length") return adm.getArrayLength_();
 		if (typeof name === "string" && !isNaN(name)) return adm.get_(parseInt(name));
 		if (hasProp(arrayExtensions, name)) return arrayExtensions[name];
 		return target[name];
 	},
-	set: function set(target, name, value) {
-		var adm = target[$mobx];
+	set(target, name, value) {
+		const adm = target[$mobx];
 		if (name === "length") adm.setArrayLength_(value);
 		if (typeof name === "symbol" || isNaN(name)) target[name] = value;
 		else adm.set_(parseInt(name), value);
 		return true;
 	},
-	preventExtensions: function preventExtensions() {
+	preventExtensions() {
 		die(15);
 	}
 };
-var ObservableArrayAdministration = /* @__PURE__ */ function() {
-	function ObservableArrayAdministration(name, enhancer, owned_, legacyMode_) {
-		if (name === void 0) name = "ObservableArray";
+var ObservableArrayAdministration = class {
+	constructor(name = "ObservableArray", enhancer, owned_) {
 		this.owned_ = void 0;
-		this.legacyMode_ = void 0;
 		this.atom_ = void 0;
 		this.values_ = [];
 		this.interceptors_ = void 0;
@@ -2129,62 +1726,37 @@ var ObservableArrayAdministration = /* @__PURE__ */ function() {
 		this.proxy_ = void 0;
 		this.lastKnownLength_ = 0;
 		this.owned_ = owned_;
-		this.legacyMode_ = legacyMode_;
 		this.atom_ = new Atom(name);
-		this.enhancer_ = function(newV, oldV) {
-			return enhancer(newV, oldV, "ObservableArray[..]");
-		};
+		this.enhancer_ = (newV, oldV) => enhancer(newV, oldV, "ObservableArray[..]");
 	}
-	var _proto = ObservableArrayAdministration.prototype;
-	_proto.dehanceValue_ = function dehanceValue_(value) {
+	dehanceValue_(value) {
 		if (this.dehancer !== void 0) return this.dehancer(value);
 		return value;
-	};
-	_proto.dehanceValues_ = function dehanceValues_(values) {
+	}
+	dehanceValues_(values) {
 		if (this.dehancer !== void 0 && values.length > 0) return values.map(this.dehancer);
 		return values;
-	};
-	_proto.intercept_ = function intercept_(handler) {
-		return registerInterceptor(this, handler);
-	};
-	_proto.observe_ = function observe_(listener, fireImmediately) {
-		if (fireImmediately === void 0) fireImmediately = false;
-		if (fireImmediately) listener({
-			observableKind: "array",
-			object: this.proxy_,
-			debugObjectName: this.atom_.name_,
-			type: "splice",
-			index: 0,
-			added: this.values_.slice(),
-			addedCount: this.values_.length,
-			removed: [],
-			removedCount: 0
-		});
-		return registerListener(this, listener);
-	};
-	_proto.getArrayLength_ = function getArrayLength_() {
+	}
+	getArrayLength_() {
 		this.atom_.reportObserved();
 		return this.values_.length;
-	};
-	_proto.setArrayLength_ = function setArrayLength_(newLength) {
-		if (typeof newLength !== "number" || isNaN(newLength) || newLength < 0) die("Out of range: " + newLength);
-		var currentLength = this.values_.length;
+	}
+	setArrayLength_(newLength) {
+		if (typeof newLength !== "number" || isNaN(newLength) || newLength < 0) die(40, newLength);
+		let currentLength = this.values_.length;
 		if (newLength === currentLength) return;
 		else if (newLength > currentLength) {
-			var newItems = new Array(newLength - currentLength);
-			for (var i = 0; i < newLength - currentLength; i++) newItems[i] = void 0;
+			const newItems = Array.from({ length: newLength - currentLength });
 			this.spliceWithArray_(currentLength, 0, newItems);
 		} else this.spliceWithArray_(newLength, currentLength - newLength);
-	};
-	_proto.updateArrayLength_ = function updateArrayLength_(oldLength, delta) {
+	}
+	updateArrayLength_(oldLength, delta) {
 		if (oldLength !== this.lastKnownLength_) die(16);
 		this.lastKnownLength_ += delta;
-		if (this.legacyMode_ && delta > 0) reserveArrayBuffer(oldLength + delta + 1);
-	};
-	_proto.spliceWithArray_ = function spliceWithArray_(index, deleteCount, newItems) {
-		var _this = this;
-		checkIfStateModificationsAreAllowed(this.atom_);
-		var length = this.values_.length;
+	}
+	spliceWithArray_(index, deleteCount, newItems) {
+		this.atom_;
+		const length = this.values_.length;
 		if (index === void 0) index = 0;
 		else if (index > length) index = length;
 		else if (index < 0) index = Math.max(0, length + index);
@@ -2193,7 +1765,7 @@ var ObservableArrayAdministration = /* @__PURE__ */ function() {
 		else deleteCount = Math.max(0, Math.min(deleteCount, length - index));
 		if (newItems === void 0) newItems = EMPTY_ARRAY;
 		if (hasInterceptors(this)) {
-			var change = interceptChange(this, {
+			const change = interceptChange(this, {
 				object: this.proxy_,
 				type: SPLICE,
 				index,
@@ -2204,34 +1776,26 @@ var ObservableArrayAdministration = /* @__PURE__ */ function() {
 			deleteCount = change.removedCount;
 			newItems = change.added;
 		}
-		newItems = newItems.length === 0 ? newItems : newItems.map(function(v) {
-			return _this.enhancer_(v, void 0);
-		});
-		if (this.legacyMode_ || false) {
-			var lengthDelta = newItems.length - deleteCount;
-			this.updateArrayLength_(length, lengthDelta);
-		}
-		var res = this.spliceItemsIntoValues_(index, deleteCount, newItems);
+		newItems = newItems.length === 0 ? newItems : newItems.map((v) => this.enhancer_(v, void 0));
+		const res = this.spliceItemsIntoValues_(index, deleteCount, newItems);
 		if (deleteCount !== 0 || newItems.length !== 0) this.notifyArraySplice_(index, newItems, res);
 		return this.dehanceValues_(res);
-	};
-	_proto.spliceItemsIntoValues_ = function spliceItemsIntoValues_(index, deleteCount, newItems) {
-		if (newItems.length < MAX_SPLICE_SIZE) {
-			var _this$values_;
-			return (_this$values_ = this.values_).splice.apply(_this$values_, [index, deleteCount].concat(newItems));
-		} else {
-			var res = this.values_.slice(index, index + deleteCount);
-			var oldItems = this.values_.slice(index + deleteCount);
+	}
+	spliceItemsIntoValues_(index, deleteCount, newItems) {
+		if (newItems.length < MAX_SPLICE_SIZE) return this.values_.splice(index, deleteCount, ...newItems);
+		else {
+			const res = this.values_.slice(index, index + deleteCount);
+			let oldItems = this.values_.slice(index + deleteCount);
 			this.values_.length += newItems.length - deleteCount;
-			for (var i = 0; i < newItems.length; i++) this.values_[index + i] = newItems[i];
-			for (var _i = 0; _i < oldItems.length; _i++) this.values_[index + newItems.length + _i] = oldItems[_i];
+			for (let i = 0; i < newItems.length; i++) this.values_[index + i] = newItems[i];
+			for (let i = 0; i < oldItems.length; i++) this.values_[index + newItems.length + i] = oldItems[i];
 			return res;
 		}
-	};
-	_proto.notifyArrayChildUpdate_ = function notifyArrayChildUpdate_(index, newValue, oldValue) {
-		var notifySpy = !this.owned_ && isSpyEnabled();
-		var notify = hasListeners(this);
-		var change = notify || notifySpy ? {
+	}
+	notifyArrayChildUpdate_(index, newValue, oldValue) {
+		const notifySpy = false;
+		const notify = hasListeners(this);
+		const change = notify || notifySpy ? {
 			observableKind: "array",
 			object: this.proxy_,
 			type: UPDATE,
@@ -2242,11 +1806,11 @@ var ObservableArrayAdministration = /* @__PURE__ */ function() {
 		} : null;
 		this.atom_.reportChanged();
 		if (notify) notifyListeners(this, change);
-	};
-	_proto.notifyArraySplice_ = function notifyArraySplice_(index, added, removed) {
-		var notifySpy = !this.owned_ && isSpyEnabled();
-		var notify = hasListeners(this);
-		var change = notify || notifySpy ? {
+	}
+	notifyArraySplice_(index, added, removed) {
+		const notifySpy = false;
+		const notify = hasListeners(this);
+		const change = notify || notifySpy ? {
 			observableKind: "array",
 			object: this.proxy_,
 			debugObjectName: this.atom_.name_,
@@ -2259,23 +1823,18 @@ var ObservableArrayAdministration = /* @__PURE__ */ function() {
 		} : null;
 		this.atom_.reportChanged();
 		if (notify) notifyListeners(this, change);
-	};
-	_proto.get_ = function get_(index) {
-		if (this.legacyMode_ && index >= this.values_.length) {
-			console.warn("[mobx] Out of bounds read: " + index);
-			return;
-		}
+	}
+	get_(index) {
 		this.atom_.reportObserved();
 		return this.dehanceValue_(this.values_[index]);
-	};
-	_proto.set_ = function set_(index, newValue) {
-		var values = this.values_;
-		if (this.legacyMode_ && index > values.length) die(17, index, values.length);
+	}
+	set_(index, newValue) {
+		const values = this.values_;
 		if (index < values.length) {
-			checkIfStateModificationsAreAllowed(this.atom_);
-			var oldValue = values[index];
+			this.atom_;
+			const oldValue = values[index];
 			if (hasInterceptors(this)) {
-				var change = interceptChange(this, {
+				const change = interceptChange(this, {
 					type: UPDATE,
 					object: this.proxy_,
 					index,
@@ -2290,41 +1849,35 @@ var ObservableArrayAdministration = /* @__PURE__ */ function() {
 				this.notifyArrayChildUpdate_(index, newValue, oldValue);
 			}
 		} else {
-			var newItems = new Array(index + 1 - values.length);
-			for (var i = 0; i < newItems.length - 1; i++) newItems[i] = void 0;
+			const newItems = Array.from({ length: index + 1 - values.length });
 			newItems[newItems.length - 1] = newValue;
 			this.spliceWithArray_(values.length, 0, newItems);
 		}
-	};
-	return ObservableArrayAdministration;
-}();
-function createObservableArray(initialValues, enhancer, name, owned) {
-	if (name === void 0) name = "ObservableArray";
-	if (owned === void 0) owned = false;
-	assertProxies();
-	return initObservable(function() {
-		var adm = new ObservableArrayAdministration(name, enhancer, owned, false);
+	}
+};
+function createObservableArray(initialValues, enhancer, name = "ObservableArray", owned = false) {
+	return initObservable(() => {
+		const adm = new ObservableArrayAdministration(name, enhancer, owned);
 		addHiddenFinalProp(adm.values_, $mobx, adm);
-		var proxy = new Proxy(adm.values_, arrayTraps);
+		const proxy = new Proxy(adm.values_, arrayTraps);
 		adm.proxy_ = proxy;
 		if (initialValues && initialValues.length) adm.spliceWithArray_(0, 0, initialValues);
 		return proxy;
 	});
 }
 var arrayExtensions = {
-	clear: function clear() {
+	clear() {
 		return this.splice(0);
 	},
-	replace: function replace(newItems) {
-		var adm = this[$mobx];
+	replace(newItems) {
+		const adm = this[$mobx];
 		return adm.spliceWithArray_(0, adm.values_.length, newItems);
 	},
-	toJSON: function toJSON() {
+	toJSON() {
 		return this.slice();
 	},
-	splice: function splice(index, deleteCount) {
-		for (var _len = arguments.length, newItems = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) newItems[_key - 2] = arguments[_key];
-		var adm = this[$mobx];
+	splice(index, deleteCount, ...newItems) {
+		const adm = this[$mobx];
 		switch (arguments.length) {
 			case 0: return [];
 			case 1: return adm.spliceWithArray_(index);
@@ -2332,42 +1885,40 @@ var arrayExtensions = {
 		}
 		return adm.spliceWithArray_(index, deleteCount, newItems);
 	},
-	spliceWithArray: function spliceWithArray(index, deleteCount, newItems) {
+	spliceWithArray(index, deleteCount, newItems) {
 		return this[$mobx].spliceWithArray_(index, deleteCount, newItems);
 	},
-	push: function push() {
-		var adm = this[$mobx];
-		for (var _len2 = arguments.length, items = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) items[_key2] = arguments[_key2];
+	push(...items) {
+		const adm = this[$mobx];
 		adm.spliceWithArray_(adm.values_.length, 0, items);
 		return adm.values_.length;
 	},
-	pop: function pop() {
+	pop() {
 		return this.splice(Math.max(this[$mobx].values_.length - 1, 0), 1)[0];
 	},
-	shift: function shift() {
+	shift() {
 		return this.splice(0, 1)[0];
 	},
-	unshift: function unshift() {
-		var adm = this[$mobx];
-		for (var _len3 = arguments.length, items = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) items[_key3] = arguments[_key3];
+	unshift(...items) {
+		const adm = this[$mobx];
 		adm.spliceWithArray_(0, 0, items);
 		return adm.values_.length;
 	},
-	reverse: function reverse() {
+	reverse() {
 		if (globalState.trackingDerivation) die(37, "reverse");
 		this.replace(this.slice().reverse());
 		return this;
 	},
-	sort: function sort() {
+	sort() {
 		if (globalState.trackingDerivation) die(37, "sort");
-		var copy = this.slice();
+		const copy = this.slice();
 		copy.sort.apply(copy, arguments);
 		this.replace(copy);
 		return this;
 	},
-	remove: function remove(value) {
-		var adm = this[$mobx];
-		var idx = adm.dehanceValues_(adm.values_).indexOf(value);
+	remove(value) {
+		const adm = this[$mobx];
+		const idx = adm.dehanceValues_(adm.values_).indexOf(value);
 		if (idx > -1) {
 			this.splice(idx, 1);
 			return true;
@@ -2411,47 +1962,38 @@ function addArrayExtension(funcName, funcFactory) {
 }
 function simpleFunc(funcName) {
 	return function() {
-		var adm = this[$mobx];
+		const adm = this[$mobx];
 		adm.atom_.reportObserved();
-		var dehancedValues = adm.dehanceValues_(adm.values_);
+		const dehancedValues = adm.dehanceValues_(adm.values_);
 		return dehancedValues[funcName].apply(dehancedValues, arguments);
 	};
 }
 function mapLikeFunc(funcName) {
 	return function(callback, thisArg) {
-		var _this2 = this;
-		var adm = this[$mobx];
+		const adm = this[$mobx];
 		adm.atom_.reportObserved();
-		return adm.dehanceValues_(adm.values_)[funcName](function(element, index) {
-			return callback.call(thisArg, element, index, _this2);
+		return adm.dehanceValues_(adm.values_)[funcName]((element, index) => {
+			return callback.call(thisArg, element, index, this);
 		});
 	};
 }
 function reduceLikeFunc(funcName) {
 	return function() {
-		var _this3 = this;
-		var adm = this[$mobx];
+		const adm = this[$mobx];
 		adm.atom_.reportObserved();
-		var dehancedValues = adm.dehanceValues_(adm.values_);
-		var callback = arguments[0];
-		arguments[0] = function(accumulator, currentValue, index) {
-			return callback(accumulator, currentValue, index, _this3);
+		const dehancedValues = adm.dehanceValues_(adm.values_);
+		const callback = arguments[0];
+		arguments[0] = (accumulator, currentValue, index) => {
+			return callback(accumulator, currentValue, index, this);
 		};
 		return dehancedValues[funcName].apply(dehancedValues, arguments);
 	};
 }
-var isObservableArrayAdministration = /* @__PURE__ */ createInstanceofPredicate("ObservableArrayAdministration", ObservableArrayAdministration);
-function isObservableArray(thing) {
-	return isObject(thing) && isObservableArrayAdministration(thing[$mobx]);
-}
 var ObservableMapMarker = {};
 var ADD = "add";
 var DELETE = "delete";
-var ObservableMap = /* @__PURE__ */ function() {
-	function ObservableMap(initialData, enhancer_, name_) {
-		var _this = this;
-		if (enhancer_ === void 0) enhancer_ = deepEnhancer;
-		if (name_ === void 0) name_ = "ObservableMap";
+var ObservableMap = class {
+	constructor(initialData, enhancer_ = deepEnhancer, name_ = "ObservableMap") {
 		this.enhancer_ = void 0;
 		this.name_ = void 0;
 		this[$mobx] = ObservableMapMarker;
@@ -2463,35 +2005,30 @@ var ObservableMap = /* @__PURE__ */ function() {
 		this.dehancer = void 0;
 		this.enhancer_ = enhancer_;
 		this.name_ = name_;
-		if (!isFunction(Map)) die(18);
-		initObservable(function() {
-			_this.keysAtom_ = createAtom("ObservableMap.keys()");
-			_this.data_ = /* @__PURE__ */ new Map();
-			_this.hasMap_ = /* @__PURE__ */ new Map();
-			if (initialData) _this.merge(initialData);
+		initObservable(() => {
+			this.keysAtom_ = createAtom("ObservableMap.keys()");
+			this.data_ = /* @__PURE__ */ new Map();
+			this.hasMap_ = /* @__PURE__ */ new Map();
+			if (initialData) this.merge(initialData);
 		});
 	}
-	var _proto = ObservableMap.prototype;
-	_proto.has_ = function has_(key) {
+	has_(key) {
 		return this.data_.has(key);
-	};
-	_proto.has = function has(key) {
-		var _this2 = this;
+	}
+	has(key) {
 		if (!globalState.trackingDerivation) return this.has_(key);
-		var entry = this.hasMap_.get(key);
+		let entry = this.hasMap_.get(key);
 		if (!entry) {
-			var newEntry = entry = new ObservableValue(this.has_(key), referenceEnhancer, "ObservableMap.key?", false);
+			const newEntry = entry = new ObservableValue(this.has_(key), referenceEnhancer, "ObservableMap.key?", false);
 			this.hasMap_.set(key, newEntry);
-			onBecomeUnobserved(newEntry, function() {
-				return _this2.hasMap_["delete"](key);
-			});
+			newEntry.onBUOL = /* @__PURE__ */ new Set([() => this.hasMap_.delete(key)]);
 		}
 		return entry.get();
-	};
-	_proto.set = function set(key, value) {
-		var hasKey = this.has_(key);
+	}
+	set(key, value) {
+		const hasKey = this.has_(key);
 		if (hasInterceptors(this)) {
-			var change = interceptChange(this, {
+			const change = interceptChange(this, {
 				type: hasKey ? UPDATE : ADD,
 				object: this,
 				newValue: value,
@@ -2503,10 +2040,9 @@ var ObservableMap = /* @__PURE__ */ function() {
 		if (hasKey) this.updateValue_(key, value);
 		else this.addValue_(key, value);
 		return this;
-	};
-	_proto["delete"] = function _delete(key) {
-		var _this3 = this;
-		checkIfStateModificationsAreAllowed(this.keysAtom_);
+	}
+	delete(key) {
+		this.keysAtom_;
 		if (hasInterceptors(this)) {
 			if (!interceptChange(this, {
 				type: DELETE,
@@ -2515,9 +2051,9 @@ var ObservableMap = /* @__PURE__ */ function() {
 			})) return false;
 		}
 		if (this.has_(key)) {
-			var notifySpy = isSpyEnabled();
-			var notify = hasListeners(this);
-			var _change = notify || notifySpy ? {
+			const notifySpy = false;
+			const notify = hasListeners(this);
+			const change = notify || notifySpy ? {
 				observableKind: "map",
 				debugObjectName: this.name_,
 				type: DELETE,
@@ -2525,25 +2061,25 @@ var ObservableMap = /* @__PURE__ */ function() {
 				oldValue: this.data_.get(key).value_,
 				name: key
 			} : null;
-			transaction(function() {
-				var _this3$hasMap_$get;
-				_this3.keysAtom_.reportChanged();
-				(_this3$hasMap_$get = _this3.hasMap_.get(key)) == null || _this3$hasMap_$get.setNewValue_(false);
-				_this3.data_.get(key).setNewValue_(void 0);
-				_this3.data_["delete"](key);
+			transaction(() => {
+				var _this$hasMap_$get;
+				this.keysAtom_.reportChanged();
+				(_this$hasMap_$get = this.hasMap_.get(key)) == null || _this$hasMap_$get.setNewValue_(false);
+				this.data_.get(key).setNewValue_(void 0);
+				this.data_.delete(key);
 			});
-			if (notify) notifyListeners(this, _change);
+			if (notify) notifyListeners(this, change);
 			return true;
 		}
 		return false;
-	};
-	_proto.updateValue_ = function updateValue_(key, newValue) {
-		var observable = this.data_.get(key);
+	}
+	updateValue_(key, newValue) {
+		const observable = this.data_.get(key);
 		newValue = observable.prepareNewValue_(newValue);
 		if (newValue !== globalState.UNCHANGED) {
-			var notifySpy = isSpyEnabled();
-			var notify = hasListeners(this);
-			var change = notify || notifySpy ? {
+			const notifySpy = false;
+			const notify = hasListeners(this);
+			const change = notify || notifySpy ? {
 				observableKind: "map",
 				debugObjectName: this.name_,
 				type: UPDATE,
@@ -2555,21 +2091,20 @@ var ObservableMap = /* @__PURE__ */ function() {
 			observable.setNewValue_(newValue);
 			if (notify) notifyListeners(this, change);
 		}
-	};
-	_proto.addValue_ = function addValue_(key, newValue) {
-		var _this4 = this;
-		checkIfStateModificationsAreAllowed(this.keysAtom_);
-		transaction(function() {
-			var _this4$hasMap_$get;
-			var observable = new ObservableValue(newValue, _this4.enhancer_, "ObservableMap.key", false);
-			_this4.data_.set(key, observable);
+	}
+	addValue_(key, newValue) {
+		this.keysAtom_;
+		transaction(() => {
+			var _this$hasMap_$get2;
+			const observable = new ObservableValue(newValue, this.enhancer_, "ObservableMap.key", false);
+			this.data_.set(key, observable);
 			newValue = observable.value_;
-			(_this4$hasMap_$get = _this4.hasMap_.get(key)) == null || _this4$hasMap_$get.setNewValue_(true);
-			_this4.keysAtom_.reportChanged();
+			(_this$hasMap_$get2 = this.hasMap_.get(key)) == null || _this$hasMap_$get2.setNewValue_(true);
+			this.keysAtom_.reportChanged();
 		});
-		var notifySpy = isSpyEnabled();
-		var notify = hasListeners(this);
-		var change = notify || notifySpy ? {
+		const notifySpy = false;
+		const notify = hasListeners(this);
+		const change = notify || notifySpy ? {
 			observableKind: "map",
 			debugObjectName: this.name_,
 			type: ADD,
@@ -2578,155 +2113,128 @@ var ObservableMap = /* @__PURE__ */ function() {
 			newValue
 		} : null;
 		if (notify) notifyListeners(this, change);
-	};
-	_proto.get = function get(key) {
+	}
+	get(key) {
 		if (this.has(key)) return this.dehanceValue_(this.data_.get(key).get());
 		return this.dehanceValue_(void 0);
-	};
-	_proto.dehanceValue_ = function dehanceValue_(value) {
+	}
+	getOrInsert(key, value) {
+		if (!this.has(key)) this.set(key, value);
+		return this.get(key);
+	}
+	getOrInsertComputed(key, callback) {
+		if (!this.has(key)) this.set(key, callback(key));
+		return this.get(key);
+	}
+	dehanceValue_(value) {
 		if (this.dehancer !== void 0) return this.dehancer(value);
 		return value;
-	};
-	_proto.keys = function keys() {
+	}
+	keys() {
 		this.keysAtom_.reportObserved();
 		return this.data_.keys();
-	};
-	_proto.values = function values() {
-		var self = this;
-		var keys = this.keys();
-		return makeIterableForMap({ next: function next() {
-			var _keys$next = keys.next(), done = _keys$next.done, value = _keys$next.value;
+	}
+	values() {
+		const self = this;
+		const keys = this.keys();
+		return makeIterableForMap({ next() {
+			const { done, value } = keys.next();
 			return {
 				done,
 				value: done ? void 0 : self.get(value)
 			};
 		} });
-	};
-	_proto.entries = function entries() {
-		var self = this;
-		var keys = this.keys();
-		return makeIterableForMap({ next: function next() {
-			var _keys$next2 = keys.next(), done = _keys$next2.done, value = _keys$next2.value;
+	}
+	entries() {
+		const self = this;
+		const keys = this.keys();
+		return makeIterableForMap({ next() {
+			const { done, value } = keys.next();
 			return {
 				done,
 				value: done ? void 0 : [value, self.get(value)]
 			};
 		} });
-	};
-	_proto[Symbol.iterator] = function() {
+	}
+	[Symbol.iterator]() {
 		return this.entries();
-	};
-	_proto.forEach = function forEach(callback, thisArg) {
-		for (var _iterator = _createForOfIteratorHelperLoose(this), _step; !(_step = _iterator()).done;) {
-			var _step$value = _step.value, key = _step$value[0], value = _step$value[1];
-			callback.call(thisArg, value, key, this);
-		}
-	};
-	_proto.merge = function merge(other) {
-		var _this5 = this;
+	}
+	forEach(callback, thisArg) {
+		for (const [key, value] of this) callback.call(thisArg, value, key, this);
+	}
+	/** Merge another object into this object, returns this. */
+	merge(other) {
 		if (isObservableMap(other)) other = new Map(other);
-		transaction(function() {
-			if (isPlainObject(other)) getPlainObjectKeys(other).forEach(function(key) {
-				return _this5.set(key, other[key]);
-			});
-			else if (Array.isArray(other)) other.forEach(function(_ref) {
-				var key = _ref[0], value = _ref[1];
-				return _this5.set(key, value);
-			});
+		transaction(() => {
+			if (isPlainObject(other)) getPlainObjectKeys(other).forEach((key) => this.set(key, other[key]));
+			else if (Array.isArray(other)) other.forEach(([key, value]) => this.set(key, value));
 			else if (isES6Map(other)) {
 				if (!isPlainES6Map(other)) die(19, other);
-				other.forEach(function(value, key) {
-					return _this5.set(key, value);
-				});
+				other.forEach((value, key) => this.set(key, value));
 			} else if (other !== null && other !== void 0) die(20, other);
 		});
 		return this;
-	};
-	_proto.clear = function clear() {
-		var _this6 = this;
-		transaction(function() {
-			untracked(function() {
-				for (var _iterator2 = _createForOfIteratorHelperLoose(_this6.keys()), _step2; !(_step2 = _iterator2()).done;) {
-					var key = _step2.value;
-					_this6["delete"](key);
-				}
+	}
+	clear() {
+		transaction(() => {
+			untracked(() => {
+				for (const key of this.keys()) this.delete(key);
 			});
 		});
-	};
-	_proto.replace = function replace(values) {
-		var _this7 = this;
-		transaction(function() {
-			var replacementMap = convertToMap(values);
-			var orderedData = /* @__PURE__ */ new Map();
-			var keysReportChangedCalled = false;
-			for (var _iterator3 = _createForOfIteratorHelperLoose(_this7.data_.keys()), _step3; !(_step3 = _iterator3()).done;) {
-				var key = _step3.value;
-				if (!replacementMap.has(key)) if (_this7["delete"](key)) keysReportChangedCalled = true;
-				else {
-					var value = _this7.data_.get(key);
-					orderedData.set(key, value);
-				}
+	}
+	replace(values) {
+		transaction(() => {
+			const replacementMap = convertToMap(values);
+			const orderedData = /* @__PURE__ */ new Map();
+			let keysReportChangedCalled = false;
+			for (const key of this.data_.keys()) if (!replacementMap.has(key)) if (this.delete(key)) keysReportChangedCalled = true;
+			else {
+				const value = this.data_.get(key);
+				orderedData.set(key, value);
 			}
-			for (var _iterator4 = _createForOfIteratorHelperLoose(replacementMap.entries()), _step4; !(_step4 = _iterator4()).done;) {
-				var _step4$value = _step4.value, _key = _step4$value[0], _value = _step4$value[1];
-				var keyExisted = _this7.data_.has(_key);
-				_this7.set(_key, _value);
-				if (_this7.data_.has(_key)) {
-					var _value2 = _this7.data_.get(_key);
-					orderedData.set(_key, _value2);
+			for (const [key, value] of replacementMap.entries()) {
+				const keyExisted = this.data_.has(key);
+				this.set(key, value);
+				if (this.data_.has(key)) {
+					const _value = this.data_.get(key);
+					orderedData.set(key, _value);
 					if (!keyExisted) keysReportChangedCalled = true;
 				}
 			}
-			if (!keysReportChangedCalled) if (_this7.data_.size !== orderedData.size) _this7.keysAtom_.reportChanged();
+			if (!keysReportChangedCalled) if (this.data_.size !== orderedData.size) this.keysAtom_.reportChanged();
 			else {
-				var iter1 = _this7.data_.keys();
-				var iter2 = orderedData.keys();
-				var next1 = iter1.next();
-				var next2 = iter2.next();
+				const iter1 = this.data_.keys();
+				const iter2 = orderedData.keys();
+				let next1 = iter1.next();
+				let next2 = iter2.next();
 				while (!next1.done) {
 					if (next1.value !== next2.value) {
-						_this7.keysAtom_.reportChanged();
+						this.keysAtom_.reportChanged();
 						break;
 					}
 					next1 = iter1.next();
 					next2 = iter2.next();
 				}
 			}
-			_this7.data_ = orderedData;
+			this.data_ = orderedData;
 		});
 		return this;
-	};
-	_proto.toString = function toString() {
+	}
+	get size() {
+		this.keysAtom_.reportObserved();
+		return this.data_.size;
+	}
+	toString() {
 		return "[object ObservableMap]";
-	};
-	_proto.toJSON = function toJSON() {
+	}
+	toJSON() {
 		return Array.from(this);
-	};
-	/**
-	* Observes this object. Triggers for the events 'add', 'update' and 'delete'.
-	* See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/observe
-	* for callback details
-	*/
-	_proto.observe_ = function observe_(listener, fireImmediately) {
-		return registerListener(this, listener);
-	};
-	_proto.intercept_ = function intercept_(handler) {
-		return registerInterceptor(this, handler);
-	};
-	return _createClass(ObservableMap, [{
-		key: "size",
-		get: function get() {
-			this.keysAtom_.reportObserved();
-			return this.data_.size;
-		}
-	}, {
-		key: Symbol.toStringTag,
-		get: function get() {
-			return "Map";
-		}
-	}]);
-}();
-var isObservableMap = /* @__PURE__ */ createInstanceofPredicate("ObservableMap", ObservableMap);
+	}
+	get [Symbol.toStringTag]() {
+		return "Map";
+	}
+};
+var isObservableMap = /*#__PURE__*/ createInstanceofPredicate("ObservableMap", ObservableMap);
 function makeIterableForMap(iterator) {
 	iterator[Symbol.toStringTag] = "MapIterator";
 	return makeIterable(iterator);
@@ -2735,17 +2243,14 @@ function convertToMap(dataStructure) {
 	if (isES6Map(dataStructure) || isObservableMap(dataStructure)) return dataStructure;
 	else if (Array.isArray(dataStructure)) return new Map(dataStructure);
 	else if (isPlainObject(dataStructure)) {
-		var map = /* @__PURE__ */ new Map();
-		for (var key in dataStructure) map.set(key, dataStructure[key]);
+		const map = /* @__PURE__ */ new Map();
+		for (const key in dataStructure) map.set(key, dataStructure[key]);
 		return map;
 	} else return die(21, dataStructure);
 }
 var ObservableSetMarker = {};
-var ObservableSet = /* @__PURE__ */ function() {
-	function ObservableSet(initialData, enhancer, name_) {
-		var _this = this;
-		if (enhancer === void 0) enhancer = deepEnhancer;
-		if (name_ === void 0) name_ = "ObservableSet";
+var ObservableSet = class {
+	constructor(initialData, enhancer = deepEnhancer, name_ = "ObservableSet") {
 		this.name_ = void 0;
 		this[$mobx] = ObservableSetMarker;
 		this.data_ = /* @__PURE__ */ new Set();
@@ -2755,42 +2260,34 @@ var ObservableSet = /* @__PURE__ */ function() {
 		this.dehancer = void 0;
 		this.enhancer_ = void 0;
 		this.name_ = name_;
-		if (!isFunction(Set)) die(22);
-		this.enhancer_ = function(newV, oldV) {
-			return enhancer(newV, oldV, name_);
-		};
-		initObservable(function() {
-			_this.atom_ = createAtom(_this.name_);
-			if (initialData) _this.replace(initialData);
+		this.enhancer_ = (newV, oldV) => enhancer(newV, oldV, name_);
+		initObservable(() => {
+			this.atom_ = createAtom(this.name_);
+			if (initialData) this.replace(initialData);
 		});
 	}
-	var _proto = ObservableSet.prototype;
-	_proto.dehanceValue_ = function dehanceValue_(value) {
+	dehanceValue_(value) {
 		if (this.dehancer !== void 0) return this.dehancer(value);
 		return value;
-	};
-	_proto.clear = function clear() {
-		var _this2 = this;
-		transaction(function() {
-			untracked(function() {
-				for (var _iterator = _createForOfIteratorHelperLoose(_this2.data_.values()), _step; !(_step = _iterator()).done;) {
-					var value = _step.value;
-					_this2["delete"](value);
-				}
+	}
+	clear() {
+		transaction(() => {
+			untracked(() => {
+				for (const value of this.data_.values()) this.delete(value);
 			});
 		});
-	};
-	_proto.forEach = function forEach(callbackFn, thisArg) {
-		for (var _iterator2 = _createForOfIteratorHelperLoose(this), _step2; !(_step2 = _iterator2()).done;) {
-			var value = _step2.value;
-			callbackFn.call(thisArg, value, value, this);
-		}
-	};
-	_proto.add = function add(value) {
-		var _this3 = this;
-		checkIfStateModificationsAreAllowed(this.atom_);
+	}
+	forEach(callbackFn, thisArg) {
+		for (const value of this) callbackFn.call(thisArg, value, value, this);
+	}
+	get size() {
+		this.atom_.reportObserved();
+		return this.data_.size;
+	}
+	add(value) {
+		this.atom_;
 		if (hasInterceptors(this)) {
-			var change = interceptChange(this, {
+			const change = interceptChange(this, {
 				type: ADD,
 				object: this,
 				newValue: value
@@ -2799,25 +2296,24 @@ var ObservableSet = /* @__PURE__ */ function() {
 			value = change.newValue;
 		}
 		if (!this.has(value)) {
-			transaction(function() {
-				_this3.data_.add(_this3.enhancer_(value, void 0));
-				_this3.atom_.reportChanged();
+			transaction(() => {
+				this.data_.add(this.enhancer_(value, void 0));
+				this.atom_.reportChanged();
 			});
-			var notifySpy = false;
-			var notify = hasListeners(this);
-			var _change = notify || notifySpy ? {
+			const notifySpy = false;
+			const notify = hasListeners(this);
+			const change = notify || notifySpy ? {
 				observableKind: "set",
 				debugObjectName: this.name_,
 				type: ADD,
 				object: this,
 				newValue: value
 			} : null;
-			if (notify) notifyListeners(this, _change);
+			if (notify) notifyListeners(this, change);
 		}
 		return this;
-	};
-	_proto["delete"] = function _delete(value) {
-		var _this4 = this;
+	}
+	delete(value) {
 		if (hasInterceptors(this)) {
 			if (!interceptChange(this, {
 				type: DELETE,
@@ -2826,32 +2322,32 @@ var ObservableSet = /* @__PURE__ */ function() {
 			})) return false;
 		}
 		if (this.has(value)) {
-			var notifySpy = false;
-			var notify = hasListeners(this);
-			var _change2 = notify || notifySpy ? {
+			const notifySpy = false;
+			const notify = hasListeners(this);
+			const change = notify || notifySpy ? {
 				observableKind: "set",
 				debugObjectName: this.name_,
 				type: DELETE,
 				object: this,
 				oldValue: value
 			} : null;
-			transaction(function() {
-				_this4.atom_.reportChanged();
-				_this4.data_["delete"](value);
+			transaction(() => {
+				this.atom_.reportChanged();
+				this.data_.delete(value);
 			});
-			if (notify) notifyListeners(this, _change2);
+			if (notify) notifyListeners(this, change);
 			return true;
 		}
 		return false;
-	};
-	_proto.has = function has(value) {
+	}
+	has(value) {
 		this.atom_.reportObserved();
 		return this.data_.has(this.dehanceValue_(value));
-	};
-	_proto.entries = function entries() {
-		var values = this.values();
-		return makeIterableForSet({ next: function next() {
-			var _values$next = values.next(), value = _values$next.value, done = _values$next.done;
+	}
+	entries() {
+		const values = this.values();
+		return makeIterableForSet({ next() {
+			const { value, done } = values.next();
 			return !done ? {
 				value: [value, value],
 				done
@@ -2860,16 +2356,16 @@ var ObservableSet = /* @__PURE__ */ function() {
 				done
 			};
 		} });
-	};
-	_proto.keys = function keys() {
+	}
+	keys() {
 		return this.values();
-	};
-	_proto.values = function values() {
+	}
+	values() {
 		this.atom_.reportObserved();
-		var self = this;
-		var values = this.data_.values();
-		return makeIterableForSet({ next: function next() {
-			var _values$next2 = values.next(), value = _values$next2.value, done = _values$next2.done;
+		const self = this;
+		const values = this.data_.values();
+		return makeIterableForSet({ next() {
+			const { value, done } = values.next();
 			return !done ? {
 				value: self.dehanceValue_(value),
 				done
@@ -2878,89 +2374,67 @@ var ObservableSet = /* @__PURE__ */ function() {
 				done
 			};
 		} });
-	};
-	_proto.intersection = function intersection(otherSet) {
+	}
+	intersection(otherSet) {
 		if (isES6Set(otherSet) && !isObservableSet(otherSet)) return otherSet.intersection(this);
 		else return new Set(this).intersection(otherSet);
-	};
-	_proto.union = function union(otherSet) {
+	}
+	union(otherSet) {
 		if (isES6Set(otherSet) && !isObservableSet(otherSet)) return otherSet.union(this);
 		else return new Set(this).union(otherSet);
-	};
-	_proto.difference = function difference(otherSet) {
+	}
+	difference(otherSet) {
 		return new Set(this).difference(otherSet);
-	};
-	_proto.symmetricDifference = function symmetricDifference(otherSet) {
+	}
+	symmetricDifference(otherSet) {
 		if (isES6Set(otherSet) && !isObservableSet(otherSet)) return otherSet.symmetricDifference(this);
 		else return new Set(this).symmetricDifference(otherSet);
-	};
-	_proto.isSubsetOf = function isSubsetOf(otherSet) {
+	}
+	isSubsetOf(otherSet) {
 		return new Set(this).isSubsetOf(otherSet);
-	};
-	_proto.isSupersetOf = function isSupersetOf(otherSet) {
+	}
+	isSupersetOf(otherSet) {
 		return new Set(this).isSupersetOf(otherSet);
-	};
-	_proto.isDisjointFrom = function isDisjointFrom(otherSet) {
+	}
+	isDisjointFrom(otherSet) {
 		if (isES6Set(otherSet) && !isObservableSet(otherSet)) return otherSet.isDisjointFrom(this);
 		else return new Set(this).isDisjointFrom(otherSet);
-	};
-	_proto.replace = function replace(other) {
-		var _this5 = this;
+	}
+	replace(other) {
 		if (isObservableSet(other)) other = new Set(other);
-		transaction(function() {
+		transaction(() => {
 			if (Array.isArray(other)) {
-				_this5.clear();
-				other.forEach(function(value) {
-					return _this5.add(value);
-				});
+				this.clear();
+				other.forEach((value) => this.add(value));
 			} else if (isES6Set(other)) {
-				_this5.clear();
-				other.forEach(function(value) {
-					return _this5.add(value);
-				});
-			} else if (other !== null && other !== void 0) die("Cannot initialize set from " + other);
+				this.clear();
+				other.forEach((value) => this.add(value));
+			} else if (other !== null && other !== void 0) die(41, other);
 		});
 		return this;
-	};
-	_proto.observe_ = function observe_(listener, fireImmediately) {
-		return registerListener(this, listener);
-	};
-	_proto.intercept_ = function intercept_(handler) {
-		return registerInterceptor(this, handler);
-	};
-	_proto.toJSON = function toJSON() {
+	}
+	toJSON() {
 		return Array.from(this);
-	};
-	_proto.toString = function toString() {
+	}
+	toString() {
 		return "[object ObservableSet]";
-	};
-	_proto[Symbol.iterator] = function() {
+	}
+	[Symbol.iterator]() {
 		return this.values();
-	};
-	return _createClass(ObservableSet, [{
-		key: "size",
-		get: function get() {
-			this.atom_.reportObserved();
-			return this.data_.size;
-		}
-	}, {
-		key: Symbol.toStringTag,
-		get: function get() {
-			return "Set";
-		}
-	}]);
-}();
-var isObservableSet = /* @__PURE__ */ createInstanceofPredicate("ObservableSet", ObservableSet);
+	}
+	get [Symbol.toStringTag]() {
+		return "Set";
+	}
+};
+var isObservableSet = /*#__PURE__*/ createInstanceofPredicate("ObservableSet", ObservableSet);
 function makeIterableForSet(iterator) {
 	iterator[Symbol.toStringTag] = "SetIterator";
 	return makeIterable(iterator);
 }
-var descriptorCache = /* @__PURE__ */ Object.create(null);
+var descriptorCache = /*#__PURE__*/ Object.create(null);
 var REMOVE = "remove";
-var ObservableObjectAdministration = /* @__PURE__ */ function() {
-	function ObservableObjectAdministration(target_, values_, name_, defaultAnnotation_) {
-		if (values_ === void 0) values_ = /* @__PURE__ */ new Map();
-		if (defaultAnnotation_ === void 0) defaultAnnotation_ = autoAnnotation;
+var ObservableObjectAdministration = class {
+	constructor(target_, values_ = /* @__PURE__ */ new Map(), name_, defaultAnnotation_ = autoAnnotation) {
 		this.target_ = void 0;
 		this.values_ = void 0;
 		this.name_ = void 0;
@@ -2972,6 +2446,8 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 		this.isPlainObject_ = void 0;
 		this.appliedAnnotations_ = void 0;
 		this.pendingKeys_ = void 0;
+		this.lazyComputedKeys_ = void 0;
+		this.lazyObservableKeys_ = void 0;
 		this.target_ = target_;
 		this.values_ = values_;
 		this.name_ = name_;
@@ -2979,18 +2455,39 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 		this.keysAtom_ = new Atom("ObservableObject.keys");
 		this.isPlainObject_ = isPlainObject(this.target_);
 	}
-	var _proto = ObservableObjectAdministration.prototype;
-	_proto.getObservablePropValue_ = function getObservablePropValue_(key) {
-		return this.values_.get(key).get();
-	};
-	_proto.setObservablePropValue_ = function setObservablePropValue_(key, newValue) {
-		var observable = this.values_.get(key);
+	getObservablePropValue_(key) {
+		var _ref, _this$values_$get;
+		return ((_ref = (_this$values_$get = this.values_.get(key)) != null ? _this$values_$get : this.materializeLazyComputed_(key)) != null ? _ref : this.materializeLazyObservable_(key)).get();
+	}
+	materializeLazyComputed_(key) {
+		var _this$lazyComputedKey;
+		const factory = (_this$lazyComputedKey = this.lazyComputedKeys_) == null ? void 0 : _this$lazyComputedKey.get(key);
+		if (!factory) return;
+		this.lazyComputedKeys_.delete(key);
+		if (this.lazyComputedKeys_.size === 0) this.lazyComputedKeys_ = void 0;
+		const computed = factory();
+		this.values_.set(key, computed);
+		return computed;
+	}
+	materializeLazyObservable_(key) {
+		var _this$lazyObservableK;
+		const factory = (_this$lazyObservableK = this.lazyObservableKeys_) == null ? void 0 : _this$lazyObservableK.get(key);
+		if (!factory) return;
+		this.lazyObservableKeys_.delete(key);
+		if (this.lazyObservableKeys_.size === 0) this.lazyObservableKeys_ = void 0;
+		const observable = factory();
+		this.values_.set(key, observable);
+		return observable;
+	}
+	setObservablePropValue_(key, newValue) {
+		var _ref2, _this$values_$get2;
+		const observable = (_ref2 = (_this$values_$get2 = this.values_.get(key)) != null ? _this$values_$get2 : this.materializeLazyComputed_(key)) != null ? _ref2 : this.materializeLazyObservable_(key);
 		if (observable instanceof ComputedValue) {
 			observable.set(newValue);
 			return true;
 		}
 		if (hasInterceptors(this)) {
-			var change = interceptChange(this, {
+			const change = interceptChange(this, {
 				type: UPDATE,
 				object: this.proxy_ || this.target_,
 				name: key,
@@ -3001,8 +2498,8 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 		}
 		newValue = observable.prepareNewValue_(newValue);
 		if (newValue !== globalState.UNCHANGED) {
-			var notify = hasListeners(this);
-			var _change = notify || false ? {
+			const notify = hasListeners(this);
+			const change = notify || false ? {
 				type: UPDATE,
 				observableKind: "object",
 				debugObjectName: this.name_,
@@ -3012,16 +2509,22 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 				newValue
 			} : null;
 			observable.setNewValue_(newValue);
-			if (notify) notifyListeners(this, _change);
+			if (notify) notifyListeners(this, change);
 		}
 		return true;
-	};
-	_proto.get_ = function get_(key) {
+	}
+	get_(key) {
 		if (globalState.trackingDerivation && !hasProp(this.target_, key)) this.has_(key);
 		return this.target_[key];
-	};
-	_proto.set_ = function set_(key, value, proxyTrap) {
-		if (proxyTrap === void 0) proxyTrap = false;
+	}
+	/**
+	* @param {PropertyKey} key
+	* @param {any} value
+	* @param {Annotation|boolean} annotation true - use default annotation, false - copy as is
+	* @param {boolean} proxyTrap whether it's called from proxy trap
+	* @returns {boolean|null} true on success, false on failure (proxyTrap + non-configurable), null when cancelled by interceptor
+	*/
+	set_(key, value, proxyTrap = false) {
 		if (hasProp(this.target_, key)) if (this.values_.has(key)) return this.setObservablePropValue_(key, value);
 		else if (proxyTrap) return Reflect.set(this.target_, key, value);
 		else {
@@ -3034,64 +2537,53 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 			writable: true,
 			configurable: true
 		}, this.defaultAnnotation_, proxyTrap);
-	};
-	_proto.has_ = function has_(key) {
+	}
+	has_(key) {
 		if (!globalState.trackingDerivation) return key in this.target_;
 		this.pendingKeys_ || (this.pendingKeys_ = /* @__PURE__ */ new Map());
-		var entry = this.pendingKeys_.get(key);
+		let entry = this.pendingKeys_.get(key);
 		if (!entry) {
 			entry = new ObservableValue(key in this.target_, referenceEnhancer, "ObservableObject.key?", false);
 			this.pendingKeys_.set(key, entry);
 		}
 		return entry.get();
-	};
-	_proto.make_ = function make_(key, annotation) {
-		if (annotation === true) annotation = this.defaultAnnotation_;
-		if (annotation === false) return;
-		assertAnnotable(this, annotation, key);
-		if (!(key in this.target_)) {
-			var _this$target_$storedA;
-			if ((_this$target_$storedA = this.target_[storedAnnotationsSymbol]) != null && _this$target_$storedA[key]) return;
-			else die(1, annotation.annotationType_, this.name_ + "." + key.toString());
-		}
-		var source = this.target_;
-		while (source && source !== objectPrototype) {
-			var descriptor = getDescriptor(source, key);
-			if (descriptor) {
-				var outcome = annotation.make_(this, key, descriptor, source);
-				if (outcome === 0) return;
-				if (outcome === 1) break;
-			}
-			source = Object.getPrototypeOf(source);
-		}
-		recordAnnotationApplied(this, annotation, key);
-	};
-	_proto.extend_ = function extend_(key, descriptor, annotation, proxyTrap) {
-		if (proxyTrap === void 0) proxyTrap = false;
+	}
+	/**
+	* @param {PropertyKey} key
+	* @param {PropertyDescriptor} descriptor
+	* @param {Annotation|boolean} annotation true - use default annotation, false - copy as is
+	* @param {boolean} proxyTrap whether it's called from proxy trap
+	* @returns {boolean|null} true on success, false on failure (proxyTrap + non-configurable), null when cancelled by interceptor
+	*/
+	extend_(key, descriptor, annotation, proxyTrap = false) {
 		if (annotation === true) annotation = this.defaultAnnotation_;
 		if (annotation === false) return this.defineProperty_(key, descriptor, proxyTrap);
-		assertAnnotable(this, annotation, key);
-		var outcome = annotation.extend_(this, key, descriptor, proxyTrap);
-		if (outcome) recordAnnotationApplied(this, annotation, key);
+		const outcome = annotation.extend_(this, key, descriptor, proxyTrap);
+		if (outcome);
 		return outcome;
-	};
-	_proto.defineProperty_ = function defineProperty_(key, descriptor, proxyTrap) {
-		if (proxyTrap === void 0) proxyTrap = false;
-		checkIfStateModificationsAreAllowed(this.keysAtom_);
+	}
+	/**
+	* @param {PropertyKey} key
+	* @param {PropertyDescriptor} descriptor
+	* @param {boolean} proxyTrap whether it's called from proxy trap
+	* @returns {boolean|null} true on success, false on failure (proxyTrap + non-configurable), null when cancelled by interceptor
+	*/
+	defineProperty_(key, descriptor, proxyTrap = false) {
+		this.keysAtom_;
 		try {
 			startBatch();
-			var deleteOutcome = this.delete_(key);
+			const deleteOutcome = this.delete_(key);
 			if (!deleteOutcome) return deleteOutcome;
 			if (hasInterceptors(this)) {
-				var change = interceptChange(this, {
+				const change = interceptChange(this, {
 					object: this.proxy_ || this.target_,
 					name: key,
 					type: ADD,
 					newValue: descriptor.value
 				});
 				if (!change) return null;
-				var newValue = change.newValue;
-				if (descriptor.value !== newValue) descriptor = _extends({}, descriptor, { value: newValue });
+				const { newValue } = change;
+				if (descriptor.value !== newValue) descriptor = assign({}, descriptor, { value: newValue });
 			}
 			if (proxyTrap) {
 				if (!Reflect.defineProperty(this.target_, key, descriptor)) return false;
@@ -3101,16 +2593,15 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 			endBatch();
 		}
 		return true;
-	};
-	_proto.defineObservableProperty_ = function defineObservableProperty_(key, value, enhancer, proxyTrap) {
-		if (proxyTrap === void 0) proxyTrap = false;
-		checkIfStateModificationsAreAllowed(this.keysAtom_);
+	}
+	defineObservableProperty_(key, value, enhancer, proxyTrap = false) {
+		this.keysAtom_;
 		try {
 			startBatch();
-			var deleteOutcome = this.delete_(key);
+			const deleteOutcome = this.delete_(key);
 			if (!deleteOutcome) return deleteOutcome;
 			if (hasInterceptors(this)) {
-				var change = interceptChange(this, {
+				const change = interceptChange(this, {
 					object: this.proxy_ || this.target_,
 					name: key,
 					type: ADD,
@@ -3119,8 +2610,8 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 				if (!change) return null;
 				value = change.newValue;
 			}
-			var cachedDescriptor = getCachedObservablePropDescriptor(key);
-			var descriptor = {
+			const cachedDescriptor = getCachedObservablePropDescriptor(key);
+			const descriptor = {
 				configurable: globalState.safeDescriptors ? this.isPlainObject_ : true,
 				enumerable: true,
 				get: cachedDescriptor.get,
@@ -3129,20 +2620,19 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 			if (proxyTrap) {
 				if (!Reflect.defineProperty(this.target_, key, descriptor)) return false;
 			} else defineProperty(this.target_, key, descriptor);
-			var observable = new ObservableValue(value, enhancer, "ObservableObject.key", false);
+			const observable = new ObservableValue(value, enhancer, "ObservableObject.key", false);
 			this.values_.set(key, observable);
 			this.notifyPropertyAddition_(key, observable.value_);
 		} finally {
 			endBatch();
 		}
 		return true;
-	};
-	_proto.defineComputedProperty_ = function defineComputedProperty_(key, options, proxyTrap) {
-		if (proxyTrap === void 0) proxyTrap = false;
-		checkIfStateModificationsAreAllowed(this.keysAtom_);
+	}
+	defineComputedProperty_(key, options, proxyTrap = false) {
+		this.keysAtom_;
 		try {
 			startBatch();
-			var deleteOutcome = this.delete_(key);
+			const deleteOutcome = this.delete_(key);
 			if (!deleteOutcome) return deleteOutcome;
 			if (hasInterceptors(this)) {
 				if (!interceptChange(this, {
@@ -3154,8 +2644,8 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 			}
 			options.name || (options.name = "ObservableObject.key");
 			options.context = this.proxy_ || this.target_;
-			var cachedDescriptor = getCachedObservablePropDescriptor(key);
-			var descriptor = {
+			const cachedDescriptor = getCachedObservablePropDescriptor(key);
+			const descriptor = {
 				configurable: globalState.safeDescriptors ? this.isPlainObject_ : true,
 				enumerable: false,
 				get: cachedDescriptor.get,
@@ -3170,10 +2660,15 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 			endBatch();
 		}
 		return true;
-	};
-	_proto.delete_ = function delete_(key, proxyTrap) {
-		if (proxyTrap === void 0) proxyTrap = false;
-		checkIfStateModificationsAreAllowed(this.keysAtom_);
+	}
+	/**
+	* @param {PropertyKey} key
+	* @param {PropertyDescriptor} descriptor
+	* @param {boolean} proxyTrap whether it's called from proxy trap
+	* @returns {boolean|null} true on success, false on failure (proxyTrap + non-configurable), null when cancelled by interceptor
+	*/
+	delete_(key, proxyTrap = false) {
+		this.keysAtom_;
 		if (!hasProp(this.target_, key)) return true;
 		if (hasInterceptors(this)) {
 			if (!interceptChange(this, {
@@ -3185,10 +2680,10 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 		try {
 			var _this$pendingKeys_;
 			startBatch();
-			var notify = hasListeners(this);
-			var notifySpy = false;
-			var observable = this.values_.get(key);
-			var value = void 0;
+			const notify = hasListeners(this);
+			const notifySpy = false;
+			const observable = this.values_.get(key);
+			let value = void 0;
 			if (!observable && (notify || notifySpy)) {
 				var _getDescriptor;
 				value = (_getDescriptor = getDescriptor(this.target_, key)) == null ? void 0 : _getDescriptor.value;
@@ -3197,14 +2692,14 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 				if (!Reflect.deleteProperty(this.target_, key)) return false;
 			} else delete this.target_[key];
 			if (observable) {
-				this.values_["delete"](key);
+				this.values_.delete(key);
 				if (observable instanceof ObservableValue) value = observable.value_;
 				propagateChanged(observable);
 			}
 			this.keysAtom_.reportChanged();
 			(_this$pendingKeys_ = this.pendingKeys_) == null || (_this$pendingKeys_ = _this$pendingKeys_.get(key)) == null || _this$pendingKeys_.set(key in this.target_);
 			if (notify || notifySpy) {
-				var _change2 = {
+				const change = {
 					type: REMOVE,
 					observableKind: "object",
 					object: this.proxy_ || this.target_,
@@ -3212,25 +2707,19 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 					oldValue: value,
 					name: key
 				};
-				if (notify) notifyListeners(this, _change2);
+				if (notify) notifyListeners(this, change);
 			}
 		} finally {
 			endBatch();
 		}
 		return true;
-	};
-	_proto.observe_ = function observe_(callback, fireImmediately) {
-		return registerListener(this, callback);
-	};
-	_proto.intercept_ = function intercept_(handler) {
-		return registerInterceptor(this, handler);
-	};
-	_proto.notifyPropertyAddition_ = function notifyPropertyAddition_(key, value) {
+	}
+	notifyPropertyAddition_(key, value) {
 		var _this$pendingKeys_2;
-		var notify = hasListeners(this);
-		var notifySpy = false;
+		const notify = hasListeners(this);
+		const notifySpy = false;
 		if (notify || notifySpy) {
-			var change = notify || notifySpy ? {
+			const change = notify || notifySpy ? {
 				type: ADD,
 				observableKind: "object",
 				debugObjectName: this.name_,
@@ -3242,31 +2731,30 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
 		}
 		(_this$pendingKeys_2 = this.pendingKeys_) == null || (_this$pendingKeys_2 = _this$pendingKeys_2.get(key)) == null || _this$pendingKeys_2.set(true);
 		this.keysAtom_.reportChanged();
-	};
-	_proto.ownKeys_ = function ownKeys_() {
+	}
+	ownKeys_() {
 		this.keysAtom_.reportObserved();
 		return ownKeys(this.target_);
-	};
-	_proto.keys_ = function keys_() {
+	}
+	keys_() {
 		this.keysAtom_.reportObserved();
 		return Object.keys(this.target_);
-	};
-	return ObservableObjectAdministration;
-}();
+	}
+};
 function asObservableObject(target, options) {
 	var _options$name;
 	if (hasProp(target, $mobx)) return target;
-	var name = (_options$name = options == null ? void 0 : options.name) != null ? _options$name : "ObservableObject";
+	const name = (_options$name = options == null ? void 0 : options.name) != null ? _options$name : "ObservableObject";
 	addHiddenProp(target, $mobx, new ObservableObjectAdministration(target, /* @__PURE__ */ new Map(), String(name), getAnnotationFromOptions(options)));
 	return target;
 }
-var isObservableObjectAdministration = /* @__PURE__ */ createInstanceofPredicate("ObservableObjectAdministration", ObservableObjectAdministration);
+var isObservableObjectAdministration = /*#__PURE__*/ createInstanceofPredicate("ObservableObjectAdministration", ObservableObjectAdministration);
 function getCachedObservablePropDescriptor(key) {
 	return descriptorCache[key] || (descriptorCache[key] = {
-		get: function get() {
+		get() {
 			return this[$mobx].getObservablePropValue_(key);
 		},
-		set: function set(value) {
+		set(value) {
 			return this[$mobx].setObservablePropValue_(key, value);
 		}
 	});
@@ -3275,156 +2763,6 @@ function isObservableObject(thing) {
 	if (isObject(thing)) return isObservableObjectAdministration(thing[$mobx]);
 	return false;
 }
-function recordAnnotationApplied(adm, annotation, key) {
-	var _adm$target_$storedAn;
-	(_adm$target_$storedAn = adm.target_[storedAnnotationsSymbol]) == null || delete _adm$target_$storedAn[key];
-}
-function assertAnnotable(adm, annotation, key) {}
-var ENTRY_0 = /* @__PURE__ */ createArrayEntryDescriptor(0);
-var safariPrototypeSetterInheritanceBug = /* @__PURE__ */ function() {
-	var v = false;
-	var p = {};
-	Object.defineProperty(p, "0", { set: function set() {
-		v = true;
-	} });
-	Object.create(p)["0"] = 1;
-	return v === false;
-}();
-/**
-* This array buffer contains two lists of properties, so that all arrays
-* can recycle their property definitions, which significantly improves performance of creating
-* properties on the fly.
-*/
-var OBSERVABLE_ARRAY_BUFFER_SIZE = 0;
-var StubArray = function StubArray() {};
-function inherit(ctor, proto) {
-	if (Object.setPrototypeOf) Object.setPrototypeOf(ctor.prototype, proto);
-	else if (ctor.prototype.__proto__ !== void 0) ctor.prototype.__proto__ = proto;
-	else ctor.prototype = proto;
-}
-inherit(StubArray, Array.prototype);
-var LegacyObservableArray = /* @__PURE__ */ function(_StubArray) {
-	function LegacyObservableArray(initialValues, enhancer, name, owned) {
-		var _this;
-		if (name === void 0) name = "ObservableArray";
-		if (owned === void 0) owned = false;
-		_this = _StubArray.call(this) || this;
-		initObservable(function() {
-			var adm = new ObservableArrayAdministration(name, enhancer, owned, true);
-			adm.proxy_ = _this;
-			addHiddenFinalProp(_this, $mobx, adm);
-			if (initialValues && initialValues.length) _this.spliceWithArray(0, 0, initialValues);
-			if (safariPrototypeSetterInheritanceBug) Object.defineProperty(_this, "0", ENTRY_0);
-		});
-		return _this;
-	}
-	_inheritsLoose(LegacyObservableArray, _StubArray);
-	var _proto = LegacyObservableArray.prototype;
-	_proto.concat = function concat() {
-		this[$mobx].atom_.reportObserved();
-		for (var _len = arguments.length, arrays = new Array(_len), _key = 0; _key < _len; _key++) arrays[_key] = arguments[_key];
-		return Array.prototype.concat.apply(this.slice(), arrays.map(function(a) {
-			return isObservableArray(a) ? a.slice() : a;
-		}));
-	};
-	_proto[Symbol.iterator] = function() {
-		var self = this;
-		var nextIndex = 0;
-		return makeIterable({ next: function next() {
-			return nextIndex < self.length ? {
-				value: self[nextIndex++],
-				done: false
-			} : {
-				done: true,
-				value: void 0
-			};
-		} });
-	};
-	return _createClass(LegacyObservableArray, [{
-		key: "length",
-		get: function get() {
-			return this[$mobx].getArrayLength_();
-		},
-		set: function set(newLength) {
-			this[$mobx].setArrayLength_(newLength);
-		}
-	}, {
-		key: Symbol.toStringTag,
-		get: function get() {
-			return "Array";
-		}
-	}]);
-}(StubArray);
-Object.entries(arrayExtensions).forEach(function(_ref) {
-	var prop = _ref[0], fn = _ref[1];
-	if (prop !== "concat") addHiddenProp(LegacyObservableArray.prototype, prop, fn);
-});
-function createArrayEntryDescriptor(index) {
-	return {
-		enumerable: false,
-		configurable: true,
-		get: function get() {
-			return this[$mobx].get_(index);
-		},
-		set: function set(value) {
-			this[$mobx].set_(index, value);
-		}
-	};
-}
-function createArrayBufferItem(index) {
-	defineProperty(LegacyObservableArray.prototype, "" + index, createArrayEntryDescriptor(index));
-}
-function reserveArrayBuffer(max) {
-	if (max > OBSERVABLE_ARRAY_BUFFER_SIZE) {
-		for (var index = OBSERVABLE_ARRAY_BUFFER_SIZE; index < max + 100; index++) createArrayBufferItem(index);
-		OBSERVABLE_ARRAY_BUFFER_SIZE = max;
-	}
-}
-reserveArrayBuffer(1e3);
-function createLegacyArray(initialValues, enhancer, name) {
-	return new LegacyObservableArray(initialValues, enhancer, name);
-}
-function getAtom(thing, property) {
-	if (typeof thing === "object" && thing !== null) {
-		if (isObservableArray(thing)) {
-			if (property !== void 0) die(23);
-			return thing[$mobx].atom_;
-		}
-		if (isObservableSet(thing)) return thing.atom_;
-		if (isObservableMap(thing)) {
-			if (property === void 0) return thing.keysAtom_;
-			var observable = thing.data_.get(property) || thing.hasMap_.get(property);
-			if (!observable) die(25, property, getDebugName(thing));
-			return observable;
-		}
-		if (isObservableObject(thing)) {
-			if (!property) return die(26);
-			var _observable = thing[$mobx].values_.get(property);
-			if (!_observable) die(27, property, getDebugName(thing));
-			return _observable;
-		}
-		if (isAtom(thing) || isComputedValue(thing) || isReaction(thing)) return thing;
-	} else if (isFunction(thing)) {
-		if (isReaction(thing[$mobx])) return thing[$mobx];
-	}
-	die(28);
-}
-function getAdministration(thing, property) {
-	if (!thing) die(29);
-	if (property !== void 0) return getAdministration(getAtom(thing, property));
-	if (isAtom(thing) || isComputedValue(thing) || isReaction(thing)) return thing;
-	if (isObservableMap(thing) || isObservableSet(thing)) return thing;
-	if (thing[$mobx]) return thing[$mobx];
-	die(24, thing);
-}
-function getDebugName(thing, property) {
-	var named;
-	if (property !== void 0) named = getAtom(thing, property);
-	else if (isAction(thing)) return thing.name;
-	else if (isObservableObject(thing) || isObservableMap(thing) || isObservableSet(thing)) named = getAdministration(thing);
-	else named = getAtom(thing);
-	return named.name_;
-}
 /**
 * Helper function for initializing observable structures, it applies:
 * 1. allowStateChanges so we don't violate enforceActions.
@@ -3432,132 +2770,42 @@ function getDebugName(thing, property) {
 * 3. batch to avoid state version updates
 */
 function initObservable(cb) {
-	var derivation = untrackedStart();
-	var allowStateChanges = allowStateChangesStart(true);
+	const derivation = untrackedStart();
 	startBatch();
 	try {
 		return cb();
 	} finally {
 		endBatch();
-		allowStateChangesEnd(allowStateChanges);
 		untrackedEnd(derivation);
 	}
 }
-var toString = objectPrototype.toString;
-function deepEqual(a, b, depth) {
-	if (depth === void 0) depth = -1;
-	return eq(a, b, depth);
-}
-function eq(a, b, depth, aStack, bStack) {
-	if (a === b) return a !== 0 || 1 / a === 1 / b;
-	if (a == null || b == null) return false;
-	if (a !== a) return b !== b;
-	var type = typeof a;
-	if (type !== "function" && type !== "object" && typeof b != "object") return false;
-	var className = toString.call(a);
-	if (className !== toString.call(b)) return false;
-	switch (className) {
-		case "[object RegExp]":
-		case "[object String]": return "" + a === "" + b;
-		case "[object Number]":
-			if (+a !== +a) return +b !== +b;
-			return +a === 0 ? 1 / +a === 1 / b : +a === +b;
-		case "[object Date]":
-		case "[object Boolean]": return +a === +b;
-		case "[object Symbol]": return typeof Symbol !== "undefined" && Symbol.valueOf.call(a) === Symbol.valueOf.call(b);
-		case "[object Map]":
-		case "[object Set]":
-			if (depth >= 0) depth++;
-			break;
-	}
-	a = unwrap(a);
-	b = unwrap(b);
-	var areArrays = className === "[object Array]";
-	if (!areArrays) {
-		if (typeof a != "object" || typeof b != "object") return false;
-		var aCtor = a.constructor, bCtor = b.constructor;
-		if (aCtor !== bCtor && !(isFunction(aCtor) && aCtor instanceof aCtor && isFunction(bCtor) && bCtor instanceof bCtor) && "constructor" in a && "constructor" in b) return false;
-	}
-	if (depth === 0) return false;
-	else if (depth < 0) depth = -1;
-	aStack = aStack || [];
-	bStack = bStack || [];
-	var length = aStack.length;
-	while (length--) if (aStack[length] === a) return bStack[length] === b;
-	aStack.push(a);
-	bStack.push(b);
-	if (areArrays) {
-		length = a.length;
-		if (length !== b.length) return false;
-		while (length--) if (!eq(a[length], b[length], depth - 1, aStack, bStack)) return false;
-	} else {
-		var keys = Object.keys(a);
-		var _length = keys.length;
-		if (Object.keys(b).length !== _length) return false;
-		for (var i = 0; i < _length; i++) {
-			var key = keys[i];
-			if (!(hasProp(b, key) && eq(a[key], b[key], depth - 1, aStack, bStack))) return false;
-		}
-	}
-	aStack.pop();
-	bStack.pop();
-	return true;
-}
-function unwrap(a) {
-	if (isObservableArray(a)) return a.slice();
-	if (isES6Map(a) || isObservableMap(a)) return Array.from(a.entries());
-	if (isES6Set(a) || isObservableSet(a)) return Array.from(a.entries());
-	return a;
-}
-var _getGlobal$Iterator;
-var maybeIteratorPrototype = ((_getGlobal$Iterator = getGlobal().Iterator) == null ? void 0 : _getGlobal$Iterator.prototype) || {};
+objectPrototype.toString;
+var _globalThis$Iterator;
+var maybeIteratorPrototype = ((_globalThis$Iterator = globalThis.Iterator) == null ? void 0 : _globalThis$Iterator.prototype) || {};
 function makeIterable(iterator) {
 	iterator[Symbol.iterator] = getSelf;
-	return Object.assign(Object.create(maybeIteratorPrototype), iterator);
+	return assign(Object.create(maybeIteratorPrototype), iterator);
 }
 function getSelf() {
 	return this;
 }
-/**
-* (c) Michel Weststrate 2015 - 2020
-* MIT Licensed
-*
-* Welcome to the mobx sources! To get a global overview of how MobX internally works,
-* this is a good place to start:
-* https://medium.com/@mweststrate/becoming-fully-reactive-an-in-depth-explanation-of-mobservable-55995262a254#.xvbh6qd74
-*
-* Source folders:
-* ===============
-*
-* - api/     Most of the public static methods exposed by the module can be found here.
-* - core/    Implementation of the MobX algorithm; atoms, derivations, reactions, dependency trees, optimizations. Cool stuff can be found here.
-* - types/   All the magic that is need to have observable objects, arrays and values is in this folder. Including the modifiers like `asFlat`.
-* - utils/   Utility stuff.
-*
-*/
-[
-	"Symbol",
-	"Map",
-	"Set"
-].forEach(function(m) {
-	if (typeof getGlobal()[m] === "undefined") die("MobX requires global '" + m + "' to be available or polyfilled");
-});
-if (typeof __MOBX_DEVTOOLS_GLOBAL_HOOK__ === "object") __MOBX_DEVTOOLS_GLOBAL_HOOK__.injectMobx({
-	spy,
-	extras: { getDebugName },
-	$mobx
-});
 //#endregion
-//#region src/core/Time_of_day.ts
-var SECONDS_PER_DAY$1 = 1440 * 60;
+//#region src/core/Time_of_day.js
+/** @typedef {import('../types.js').Time_hms} Time_hms */
+var SECONDS_PER_DAY$1 = 86400;
 /** An immutable 24-hour clock time representation. */
 var Time_of_day = class Time_of_day {
+	/** @private @readonly @type {number} */
 	_h;
+	/** @private @readonly @type {number} */
 	_m;
+	/** @private @readonly @type {number} */
 	_s;
+	/** @param {Time_hms} hms */
 	constructor(hms) {
 		({h: this._h, m: this._m, s: this._s} = hms);
 	}
+	/** @param {Date} date */
 	static create_from_js_date(date) {
 		return new Time_of_day({
 			h: date.getHours(),
@@ -3565,7 +2813,7 @@ var Time_of_day = class Time_of_day {
 			s: date.getSeconds()
 		});
 	}
-	/** @param hhmm - `HH:MM` */
+	/** @param {string} hhmm - `HH:MM` */
 	static create_from_hhmm_string(hhmm) {
 		const [h, m] = hhmm.split(":").map(Number);
 		return new Time_of_day({
@@ -3574,15 +2822,19 @@ var Time_of_day = class Time_of_day {
 			s: 0
 		});
 	}
+	/** @returns {number} */
 	get hour() {
 		return this._h;
 	}
+	/** @returns {number} */
 	get minute() {
 		return this._m;
 	}
+	/** @returns {number} */
 	get second() {
 		return this._s;
 	}
+	/** @returns {Time_hms} */
 	get_as_hms() {
 		return {
 			h: this._h,
@@ -3590,30 +2842,39 @@ var Time_of_day = class Time_of_day {
 			s: this._s
 		};
 	}
-	/** @returns `(H)H:MM:SS` */
+	/** @returns {string} `(H)H:MM:SS` */
 	get_as_string_hmmss() {
 		const [mm, ss] = [this._m, this._s].map((value) => String(value).padStart(2, "0"));
 		return `${this._h}:${mm}:${ss}`;
 	}
-	/** @returns `HH:MM` */
+	/** @returns {string} `HH:MM` */
 	get_as_string_hhmm() {
 		const [hh, mm] = [this._h, this._m].map((value) => String(value).padStart(2, "0"));
 		return `${hh}:${mm}`;
 	}
 	/**
-	* @param value - The offset to add.
-	* @returns A new instance with the added time.
+	* @param {number} value - The offset to add.
+	* @returns {Time_of_day} A new instance with the added time.
 	*/
 	add_minutes(value) {
 		const date = new Date(0, 0, 1, this._h, this._m, this._s);
 		date.setMinutes(date.getMinutes() + value);
 		return Time_of_day.create_from_js_date(date);
 	}
-	/** Gets the delay from `this` until the next occurrence of `target`. */
+	/**
+	* Gets the delay from `this` until the next occurrence of `target`.
+	* @param {Time_of_day} target
+	* @returns {number}
+	*/
 	get_seconds_until_next_target(target) {
 		const [target_s, this_s] = [target, this].map((time) => time._seconds_since_midnight);
 		return this_s < target_s ? target_s - this_s : target_s - this_s + SECONDS_PER_DAY$1;
 	}
+	/**
+	* @param {Time_of_day} start
+	* @param {Time_of_day} end
+	* @returns {boolean}
+	*/
 	is_between(start, end) {
 		const [this_s, start_s, end_s] = [
 			this,
@@ -3622,16 +2883,18 @@ var Time_of_day = class Time_of_day {
 		].map((time) => time._seconds_since_midnight);
 		return start_s < end_s ? start_s <= this_s && this_s < end_s : start_s <= this_s || this_s < end_s;
 	}
+	/** @private */
 	get _seconds_since_midnight() {
 		return this._h * 3600 + this._m * 60 + this._s;
 	}
 };
 //#endregion
-//#region src/globals.ts
+//#region src/globals.js
 var Gettext = imports.gettext;
 var { GLib: GLib$6 } = imports.gi;
 var Main = imports.ui.main;
 var { St } = imports.gi;
+/** @type {imports.ui.applet.AppletMetadata} */
 var metadata = {
 	uuid: "",
 	name: "",
@@ -3639,10 +2902,15 @@ var metadata = {
 	path: "",
 	force_loaded: false
 };
+/**
+* @param {string} text
+* @returns {string}
+*/
 function _(text) {
 	return Gettext.dgettext(metadata.uuid, text);
 }
 var translated_applet_name = "";
+/** @param {imports.ui.applet.AppletMetadata} applet_metadata */
 function initialize_globals(applet_metadata) {
 	Object.assign(metadata, applet_metadata);
 	const translations_dir_path = GLib$6.get_home_dir() + "/.local/share/locale";
@@ -3661,27 +2929,37 @@ var error_icon = new St.Icon({
 	icon_size
 });
 var logger = {
+	/** @param {string} msg */
 	info(msg) {
 		global.log(translated_applet_name + `${_(":")} ` + msg);
 		Main.notify(translated_applet_name, msg);
 	},
+	/** @param {string} msg */
 	warn(msg) {
 		global.logWarning(translated_applet_name + `${_(":")} ` + msg);
 		Main.warningNotify(translated_applet_name, msg, warning_icon);
 	},
+	/** @param {string} msg */
 	error(msg) {
 		global.logError(translated_applet_name + `${_(":")} ` + msg);
 		Main.criticalNotify(translated_applet_name, msg, error_icon);
 	}
 };
 //#endregion
-//#region src/lib/cinnamon/Color_scheme_handler.ts
+//#region src/lib/cinnamon/Color_scheme_handler.js
 var { Gio: Gio$6 } = imports.gi;
+/** @typedef {import('../../types.js').Color_scheme} Color_scheme */
+/** @typedef {import('../../types.js').Observer} Observer */
 var settings$2 = Gio$6.Settings.new("org.x.apps.portal");
-/** A listener and accessor to the Cinnamon system color scheme setting. */
+/**
+* A listener and accessor to the Cinnamon system color scheme setting.
+* @implements {Observer}
+*/
 var Color_scheme_handler = class Color_scheme_handler {
-	/** The function to be called when the color scheme has changed */
+	/** The function to be called when the color scheme has changed
+	* @type {((color_scheme: Color_scheme) => void) | null} */
 	callback = null;
+	/** @private @type {number | null} */
 	_signal_id = null;
 	enable() {
 		if (this._signal_id !== null) return;
@@ -3697,6 +2975,7 @@ var Color_scheme_handler = class Color_scheme_handler {
 	dispose() {
 		this.disable();
 	}
+	/** @returns {Color_scheme} */
 	static get value() {
 		return settings$2.get_string("color-scheme");
 	}
@@ -3705,24 +2984,35 @@ var Color_scheme_handler = class Color_scheme_handler {
 	}
 };
 //#endregion
-//#region src/lib/cinnamon/Keybinding_handler.ts
+//#region src/lib/cinnamon/Keybinding_handler.js
 var { keybindingManager } = imports.ui.main;
-/** A responsible handler to set a Cinnamon keybinding. */
+/** @typedef {import('../../types.js').Disposable} Disposable */
+/**
+* A responsible handler to set a Cinnamon keybinding.
+* @implements {Disposable}
+*/
 var Keybinding_handler = class Keybinding_handler {
+	/** @private @readonly @type {string} */
 	_uuid;
+	/** @private @type {number} */
 	static _unicity_count = 0;
-	/** @param unique_namespace - A specific enough id to avoid name collisions with any other system keybinding name, typically the application name. */
+	/** @param {string} unique_namespace - A specific enough id to avoid name collisions with any other system keybinding name, typically the application name. */
 	constructor(unique_namespace) {
 		this._uuid = unique_namespace + Keybinding_handler._unicity_count++;
 	}
-	/** The function to be called when the keybinding has been pressed */
+	/** The function to be called when the keybinding has been pressed
+	* @type {(() => void) | null} */
 	callback = null;
-	/** @param keybinding - In the format accepted by Cinnamon (e.g. '<Super>F1'), which can be multiple ones separated with `::`. */
+	/**
+	* @param {string} keybinding - In the format accepted by Cinnamon (e.g. '<Super>F1'), which can be multiple ones separated with `::`.
+	* @returns {boolean}
+	*/
 	set(keybinding) {
 		return keybindingManager.addHotKey(this._uuid, keybinding, () => {
 			this.callback?.();
 		});
 	}
+	/** @returns {void} */
 	unset() {
 		keybindingManager.removeHotKey(this._uuid);
 	}
@@ -3911,7 +3201,7 @@ function _datetime_to_hms(datetime) {
 }
 //#endregion
 //#region src/lib/gnome/Event_scheduler/Timer_absolute.js
-/** @typedef {import('../../../core/Time_of_day.ts').Time_of_day} Time_of_day */
+/** @typedef {import('../../../core/Time_of_day.js').Time_of_day} Time_of_day */
 /** A basic request-based absolute timer to be set for a next occurring time of day. */
 var Timer_absolute = class {
 	/** @private Unix time in seconds (s) */
@@ -3940,7 +3230,7 @@ var Timer_absolute = class {
 //#region src/lib/gnome/Event_scheduler/Event_scheduler.js
 var { GLib: GLib$5 } = imports.gi;
 /** @typedef {import('../../../types').Disposable} Disposable */
-/** @typedef {import('../../../core/Time_of_day.ts').Time_of_day} Time_of_day */
+/** @typedef {import('../../../core/Time_of_day.js').Time_of_day} Time_of_day */
 /**
 * A single-event scheduler which call a function at a specific next time of day.
 *
@@ -4068,49 +3358,67 @@ var Wall_clock_adjustment_monitor = class {
 	}
 };
 //#endregion
-//#region src/lib/utils.ts
-/** @param duration - In milliseconds (ms) */
+//#region src/lib/utils.js
+/**
+* @param {number} duration - In milliseconds (ms)
+* @returns {Promise<void>}
+*/
 async function sleep(duration) {
 	return new Promise((resolve) => setTimeout(resolve, duration));
 }
 //#endregion
-//#region src/app/handlers/Appearance_handler.ts
+//#region src/app/handlers/Appearance_handler.js
+/** @typedef {import('../../types.js').Twilights} Twilights */
+/** @typedef {import('../../core/Time_of_day.js').Time_of_day} Time_of_day */
 var Appearance_handler = class {
+	/** @private */
 	_time = get_now_as_time_of_day();
 	update_time() {
 		this._time = get_now_as_time_of_day();
 	}
+	/** @type {Twilights} */
 	twilights;
+	/** @returns {boolean} */
 	get auto_is_dark() {
 		return this._time.is_between(this.twilights.sunset, this.twilights.sunrise);
 	}
+	/** @type {boolean} */
 	manual_is_dark;
 	toggle_is_dark() {
 		this.manual_is_dark = !this.manual_is_dark;
 	}
+	/** @type {boolean} */
 	is_auto;
 	toggle_is_auto() {
 		this.is_auto = !this.is_auto;
 	}
+	/** @returns {boolean} */
 	get is_dark() {
 		return this.is_auto ? this.auto_is_dark : this.manual_is_dark;
 	}
+	/** @returns {boolean} */
 	get is_unsynced() {
 		return this.manual_is_dark !== this.auto_is_dark;
 	}
 	sync_is_dark() {
 		this.manual_is_dark = this.auto_is_dark;
 	}
+	/** @returns {Time_of_day} */
 	get next_twilight() {
 		return this.auto_is_dark ? this.twilights.sunrise : this.twilights.sunset;
 	}
+	/**
+	* @param {Required<Pick<Appearance_handler,
+	*     'twilights' | 'manual_is_dark' | 'is_auto'
+	* >>} initial_controls
+	*/
 	constructor(initial_controls) {
 		Object.assign(this, initial_controls);
 		makeAutoObservable(this);
 	}
 };
 //#endregion
-//#region src/lib/cinnamon/Background_accessor.ts
+//#region src/lib/cinnamon/Background_accessor.js
 var { Gio: Gio$4 } = imports.gi;
 var settings$1 = {
 	background: Gio$4.Settings.new("org.cinnamon.desktop.background"),
@@ -4118,13 +3426,15 @@ var settings$1 = {
 };
 /** An accessor to the Cinnamon system background settings. */
 var Background_accessor = class {
+	/** @returns {boolean} */
 	static get is_slideshow() {
 		return settings$1.slideshow.get_boolean("slideshow-enabled");
 	}
 	static set is_slideshow(value) {
 		settings$1.slideshow.set_boolean("slideshow-enabled", value);
 	}
-	/** Irrelevant to get when slideshow is enabled */
+	/** Irrelevant to get when slideshow is enabled
+	* @returns {string} */
 	static get picture_file() {
 		return settings$1.background.get_string("picture-uri");
 	}
@@ -4132,7 +3442,8 @@ var Background_accessor = class {
 	static set picture_file(value) {
 		settings$1.background.set_string("picture-uri", value);
 	}
-	/** Irrelevant to get when slideshow is disabled */
+	/** Irrelevant to get when slideshow is disabled
+	* @returns {string} */
 	static get slideshow_folder() {
 		return settings$1.slideshow.get_string("image-source");
 	}
@@ -4142,9 +3453,16 @@ var Background_accessor = class {
 	}
 };
 //#endregion
-//#region src/app/handlers/Background_handler.ts
+//#region src/app/handlers/Background_handler.js
+/** @typedef {import('../ui/Applet.js').Applet} Applet */
+/** @typedef {import('../ui/Settings.js').Settings} Settings */
 var Background_handler = class {
+	/** @private @readonly @type {Settings} */
 	_settings;
+	/**
+	* @param {Applet} applet
+	* @param {Settings} settings
+	*/
 	constructor(applet, settings) {
 		this._settings = settings;
 		applet.on_button_detect_background_light = () => this.detect_light_background();
@@ -4152,24 +3470,28 @@ var Background_handler = class {
 		applet.on_button_apply_background_light = () => this.apply_light_background();
 		applet.on_button_apply_background_dark = () => this.apply_dark_background();
 	}
+	/** @returns {void} */
 	detect_light_background() {
 		const is_slideshow = Background_accessor.is_slideshow;
 		this._settings.light_background_is_slideshow = is_slideshow;
 		if (is_slideshow) this._settings.light_background_slideshow_folder = Background_accessor.slideshow_folder.replace("directory://", "file://");
 		else this._settings.light_background_file = Background_accessor.picture_file;
 	}
+	/** @returns {void} */
 	detect_dark_background() {
 		const is_slideshow = Background_accessor.is_slideshow;
 		this._settings.dark_background_is_slideshow = is_slideshow;
 		if (is_slideshow) this._settings.dark_background_slideshow_folder = Background_accessor.slideshow_folder.replace("directory://", "file://");
 		else this._settings.dark_background_file = Background_accessor.picture_file;
 	}
+	/** @returns {void} */
 	apply_light_background() {
 		const is_slideshow = this._settings.light_background_is_slideshow;
 		Background_accessor.is_slideshow = is_slideshow;
 		if (is_slideshow) Background_accessor.slideshow_folder = decodeURIComponent(this._settings.light_background_slideshow_folder.replace("file://", "directory://"));
 		else Background_accessor.picture_file = this._settings.light_background_file;
 	}
+	/** @returns {void} */
 	apply_dark_background() {
 		const is_slideshow = this._settings.dark_background_is_slideshow;
 		Background_accessor.is_slideshow = is_slideshow;
@@ -4226,14 +3548,14 @@ async function launch_command$1(command, sigterm_timeout = 0, sigkill_timeout = 
 	}
 }
 //#endregion
-//#region src/app/launch_command.ts
+//#region src/app/launch_command.js
 var { GLib: GLib$2 } = imports.gi;
 /**
 * Launches a command with a timeout and logs any error on failure.
-* @param name - The name of the command to display in case of error. If empty, the command itself is used.
-* @param expiry - The delay in seconds before cancelling the command with a SIGTERM, then 10 seconds later with a SIGKILL. `0` means infinity/never.
-* @param command - The shell command to execute.
-* @returns Resolves when the command has been executed or rejects if an error occurs.
+* @param {string} name - The name of the command to display in case of error. If empty, the command itself is used.
+* @param {number} expiry - The delay in seconds before cancelling the command with a SIGTERM, then 10 seconds later with a SIGKILL. `0` means infinity/never.
+* @param {string} command - The shell command to execute.
+* @returns {Promise<void>} Resolves when the command has been executed or rejects if an error occurs.
 */
 async function launch_command(name, expiry, command) {
 	try {
@@ -4251,20 +3573,35 @@ async function launch_command(name, expiry, command) {
 	}
 }
 //#endregion
-//#region src/app/handlers/Commands_handler.ts
+//#region src/app/handlers/Commands_handler.js
+/** @typedef {import('../ui/Applet.js').Applet} Applet */
+/** @typedef {import('../ui/Settings.js').Settings} Settings */
 var Commands_handler = class {
+	/** @private @readonly @type {Settings} */
 	_settings;
+	/**
+	* @param {Applet} applet
+	* @param {Settings} settings
+	*/
 	constructor(applet, settings) {
 		this._settings = settings;
 		applet.on_button_launch_commands_light = () => this.launch_light_commands();
 		applet.on_button_launch_commands_dark = () => this.launch_dark_commands();
 	}
+	/** @returns {void} */
 	launch_dark_commands() {
 		this._launch_commands(this._settings.dark_commands_list);
 	}
+	/** @returns {void} */
 	launch_light_commands() {
 		this._launch_commands(this._settings.light_commands_list);
 	}
+	/**
+	* @private
+	* @param {Settings['light_commands_list']
+	*     | Settings['dark_commands_list']} commands_list
+	* @returns {void}
+	*/
 	_launch_commands(commands_list) {
 		for (const command of commands_list) {
 			if (!command.active) continue;
@@ -4273,13 +3610,15 @@ var Commands_handler = class {
 	}
 };
 //#endregion
-//#region src/core/Timezone_location_finder/Timezone_location_finder.ts
+//#region src/core/Timezone_location_finder/Timezone_location_finder.js
 var { Gio: Gio$2 } = imports.gi;
+/** @typedef {import('../../types.js').Location} Location */
 /** A finder of timezone's city coordinates using a local database. */
 var Timezone_location_finder = class {
+	/** @type {Record<string, [number, number]>} */
 	_database;
 	/**
-	* @param path - The absolute path where the `database.json` file is located.
+	* @param {string} path - The absolute path where the `database.json` file is located.
 	* @throws {Error} - If the file cannot be loaded or JSON-parsed
 	*/
 	constructor(path) {
@@ -4290,8 +3629,8 @@ var Timezone_location_finder = class {
 	}
 	/**
 	* Gets the latitude and longitude of the timezone's city.
-	* @param timezone - The timezone to get the coordinates from.
-	* @returns The system timezone's city coordinates.
+	* @param {string} timezone - The timezone to get the coordinates from.
+	* @returns {Location} The system timezone's city coordinates.
 	*/
 	find(timezone) {
 		if (!timezone) throw new Error("timezone is required");
@@ -4336,29 +3675,48 @@ var Timezone_change_listener = class {
 	}
 };
 //#endregion
-//#region src/app/handlers/Location_handler.ts
+//#region src/app/handlers/Location_handler.js
 var { GLib: GLib$1 } = imports.gi;
+/** @typedef {import('../../types.js').Disposable} Disposable */
+/** @typedef {import('../../types.js').Location} Location */
+/** @implements {Disposable} */
 var Location_handler = class {
+	/** @private @readonly */
 	_timezone_change_listener = new Timezone_change_listener((new_timezone) => this._timezone = new_timezone);
+	/** @private @type {string} */
 	_timezone = GLib$1.TimeZone.new_local().get_identifier();
+	/** @returns {string} */
 	get timezone() {
 		return this._timezone;
 	}
+	/** @private @readonly */
 	_timezone_location_finder = new Timezone_location_finder(`${metadata.path}/Timezone_location_finder`);
+	/** @returns {Location} */
 	get auto_location() {
 		return this._timezone_location_finder.find(this.timezone);
 	}
-	manual_location;
-	is_location_auto;
+	/** @type {Location} */ manual_location;
+	/** @type {boolean} */ is_location_auto;
+	/** @returns {Location} */
 	get location() {
 		return this.is_location_auto ? this.auto_location : this.manual_location;
 	}
+	/**
+	* @param {Required<Pick<Location_handler,
+	*     'manual_location' | 'is_location_auto'
+	* >>} initial_values
+	*/
 	constructor(initial_values) {
 		Object.assign(this, initial_values);
+		/**
+		* @type {typeof mobx.makeAutoObservable<Location_handler,
+		*     '_timezone_change_listener' | '_timezone_location_finder'
+		* >}
+		*/
 		makeAutoObservable(this, {
 			_timezone_change_listener: false,
 			_timezone_location_finder: false,
-			manual_location: observable.deep
+			manual_location: observableDeep
 		});
 		this._timezone_change_listener.enable();
 	}
@@ -4367,7 +3725,7 @@ var Location_handler = class {
 	}
 };
 //#endregion
-//#region src/lib/cinnamon/Themes_accessor.ts
+//#region src/lib/cinnamon/Themes_accessor.js
 var { Gio } = imports.gi;
 var settings = {
 	desktop: Gio.Settings.new("org.cinnamon.desktop.interface"),
@@ -4375,24 +3733,28 @@ var settings = {
 };
 /** An accessor to the Cinnamon system themes settings. */
 var Themes_accessor = class {
+	/** @returns {string} */
 	static get mouse() {
 		return settings.desktop.get_string("cursor-theme");
 	}
 	static set mouse(value) {
 		settings.desktop.set_string("cursor-theme", value);
 	}
+	/** @returns {string} */
 	static get apps() {
 		return settings.desktop.get_string("gtk-theme");
 	}
 	static set apps(value) {
 		settings.desktop.set_string("gtk-theme", value);
 	}
+	/** @returns {string} */
 	static get icons() {
 		return settings.desktop.get_string("icon-theme");
 	}
 	static set icons(value) {
 		settings.desktop.set_string("icon-theme", value);
 	}
+	/** @returns {string} */
 	static get desktop() {
 		return settings.cinnamon.get_string("name");
 	}
@@ -4401,9 +3763,16 @@ var Themes_accessor = class {
 	}
 };
 //#endregion
-//#region src/app/handlers/Themes_handler.ts
+//#region src/app/handlers/Themes_handler.js
+/** @typedef {import('../ui/Applet.js').Applet} Applet */
+/** @typedef {import('../ui/Settings.js').Settings} Settings */
 var Themes_handler = class {
+	/** @private @readonly @type {Settings} */
 	_settings;
+	/**
+	* @param {Applet} applet
+	* @param {Settings} settings
+	*/
 	constructor(applet, settings) {
 		this._settings = settings;
 		applet.on_button_detect_themes_light = () => this.detect_light_themes();
@@ -4411,6 +3780,7 @@ var Themes_handler = class {
 		applet.on_button_apply_themes_light = () => this.apply_light_themes();
 		applet.on_button_apply_themes_dark = () => this.apply_dark_themes();
 	}
+	/** @returns {void} */
 	detect_light_themes() {
 		this._settings.setValue("light_themes_mouse", Themes_accessor.mouse);
 		this._settings.setValue("light_themes_apps", Themes_accessor.apps);
@@ -4418,6 +3788,7 @@ var Themes_handler = class {
 		this._settings.setValue("light_themes_desktop", Themes_accessor.desktop);
 		this._settings.light_themes_have_been_detected = true;
 	}
+	/** @returns {void} */
 	detect_dark_themes() {
 		this._settings.setValue("dark_themes_mouse", Themes_accessor.mouse);
 		this._settings.setValue("dark_themes_apps", Themes_accessor.apps);
@@ -4425,6 +3796,7 @@ var Themes_handler = class {
 		this._settings.setValue("dark_themes_desktop", Themes_accessor.desktop);
 		this._settings.dark_themes_have_been_detected = true;
 	}
+	/** @returns {void} */
 	apply_light_themes() {
 		Themes_accessor.mouse = this._settings.getValue("light_themes_mouse");
 		Themes_accessor.apps = this._settings.getValue("light_themes_apps");
@@ -4432,6 +3804,7 @@ var Themes_handler = class {
 		Themes_accessor.desktop = this._settings.getValue("light_themes_desktop");
 		Color_scheme_handler.value = "prefer-light";
 	}
+	/** @returns {void} */
 	apply_dark_themes() {
 		Themes_accessor.mouse = this._settings.getValue("dark_themes_mouse");
 		Themes_accessor.apps = this._settings.getValue("dark_themes_apps");
@@ -4441,36 +3814,51 @@ var Themes_handler = class {
 	}
 };
 //#endregion
-//#region src/core/compute_twilights/uSunCalc.ts
+//#region src/core/compute_twilights/uSunCalc.js
 /**
 * A minified and optimized version of the SunCalc library containing only the part needed for the `auto-dark-light` applet.
 */
 var { PI, sin, cos, asin, acos, round } = Math;
 var TWO_PI = 2 * PI;
 var RADIANS_PER_DEGREE = PI / 180;
-var SECONDS_PER_DAY = 3600 * 24;
+var SECONDS_PER_DAY = 86400;
 var J0 = 9e-4;
 var J1970 = 2440587.5;
 var J2000 = 2451545;
-/** @returns (seconds) */
+/**
+* @param {number} julian_date
+* @returns (seconds)
+*/
 function _to_unix(julian_date) {
 	return (julian_date - J1970) * SECONDS_PER_DAY;
 }
+/**
+* @param {number} Ht
+* @param {number} lw
+* @param {number} n
+* @returns {number}
+*/
 function _approximate_transit(Ht, lw, n) {
 	return J0 + (Ht + lw) / TWO_PI + n;
 }
+/**
+* @param {number} ds
+* @param {number} M
+* @param {number} L
+* @returns {number}
+*/
 function _solar_transit(ds, M, L) {
 	return J2000 + ds + .0053 * sin(M) - .0069 * sin(2 * L);
 }
 var SIN_OF_EARTH_OBLIQUITY = sin(RADIANS_PER_DEGREE * 23.4397);
 var EARTH_PERIHELION_PLUS_PI = RADIANS_PER_DEGREE * 102.9372 + PI;
-var J1970_MINUS_J2000 = J1970 - J2000;
+var J1970_MINUS_J2000 = -10957.5;
 /**
 * Calculates the sunrise and sunset times for a given date and location.
-* @param unix_time - seconds (s)
-* @param latitude - degrees (°)
-* @param longitude - degrees (°)
-* @returns Unix time, seconds (s)
+* @param {number} unix_time - seconds (s)
+* @param {number} latitude - degrees (°)
+* @param {number} longitude - degrees (°)
+* @returns {[sunrise: number, sunset: number]} Unix time, seconds (s)
 */
 function compute_twilights$1(unix_time, latitude, longitude) {
 	const lw = RADIANS_PER_DEGREE * -longitude;
@@ -4485,7 +3873,14 @@ function compute_twilights$1(unix_time, latitude, longitude) {
 	return [_to_unix(2 * julian_noon - julian_sunset), _to_unix(julian_sunset)];
 }
 //#endregion
-//#region src/core/compute_twilights/compute_twilights.ts
+//#region src/core/compute_twilights/compute_twilights.js
+/** @typedef {import('../../types.js').Location} Location */
+/** @typedef {import('../../types.js').Twilights} Twilights */
+/**
+* @param {imports.gi.GLib.DateTime} date
+* @param {Location} location
+* @returns {Twilights}
+*/
 function compute_twilights(date, location) {
 	const [sunrise, sunset] = compute_twilights$1(date.to_unix(), location.latitude, location.longitude);
 	return {
@@ -4494,52 +3889,73 @@ function compute_twilights(date, location) {
 	};
 }
 //#endregion
-//#region src/app/handlers/Twilights_handler.ts
+//#region src/app/handlers/Twilights_handler.js
 var { DateTime } = imports.gi.GLib;
+/** @typedef {import('../../types.js').Location} Location */
+/** @typedef {import('../../types.js').Twilights} Twilights */
 var Twilights_handler = class {
-	_date = DateTime.new_now_local();
+	/** @private */ _date = DateTime.new_now_local();
 	update() {
 		this._date = DateTime.new_now_local();
 	}
-	location;
+	/** @type {Location} */ location;
+	/** @private @returns {Twilights} */
 	get _location_twilights() {
 		return compute_twilights(this._date, this.location);
 	}
-	auto_sunrise_offset;
-	auto_sunset_offset;
+	/** @type {number} */ auto_sunrise_offset;
+	/** @type {number} */ auto_sunset_offset;
+	/** @returns {Time_of_day} */
 	get auto_sunrise() {
 		return this._location_twilights.sunrise.add_minutes(this.auto_sunrise_offset);
 	}
+	/** @returns {Time_of_day} */
 	get auto_sunset() {
 		return this._location_twilights.sunset.add_minutes(this.auto_sunset_offset);
 	}
-	manual_sunrise;
-	manual_sunset;
-	is_sunrise_auto;
-	is_sunset_auto;
+	/** @type {Time_of_day} */ manual_sunrise;
+	/** @type {Time_of_day} */ manual_sunset;
+	/** @type {boolean} */ is_sunrise_auto;
+	/** @type {boolean} */ is_sunset_auto;
+	/** @private @returns {Time_of_day} */
 	get _sunrise() {
 		return this.is_sunrise_auto ? this.auto_sunrise : this.manual_sunrise;
 	}
+	/** @private @returns {Time_of_day} */
 	get _sunset() {
 		return this.is_sunset_auto ? this.auto_sunset : this.manual_sunset;
 	}
+	/** @returns {Twilights} */
 	get twilights() {
 		return {
 			sunrise: this._sunrise,
 			sunset: this._sunset
 		};
 	}
+	/**
+	* @param {Required<Pick<Twilights_handler,
+	*     'location' |
+	*     'auto_sunrise_offset' | 'auto_sunset_offset' |
+	*     'manual_sunrise' | 'manual_sunset' |
+	*     'is_sunrise_auto' | 'is_sunset_auto'
+	* >>} initial_values
+	*/
 	constructor(initial_values) {
 		Object.assign(this, initial_values);
 		makeAutoObservable(this);
 	}
 };
 //#endregion
-//#region src/app/app.ts
+//#region src/app/app.js
 var { GLib } = imports.gi;
 var DURATION_TO_AWAIT_BEFORE_UPDATING_DERIVED_SETTING = 2e3;
+/**
+* @param {import('./ui/Applet.ts').Applet} applet
+* @param {import('./ui/Settings.ts').Settings} settings
+* @returns {void}
+*/
 function initialize(applet, settings) {
-	const disposables = [];
+	/** @type {import('../types.ts').Disposable[]} */ const disposables = [];
 	applet.on_applet_removed_from_panel = () => {
 		disposables.forEach((element) => element.dispose());
 		settings.finalize();
@@ -4745,11 +4161,17 @@ function initialize(applet, settings) {
 	sleep_and_lock_handler.enable();
 }
 //#endregion
-//#region src/app/initialize_applet_settings.ts
+//#region src/app/initialize_applet_settings.js
 var { AppletSettings } = imports.ui.settings;
+/** @typedef {import('./ui/Settings.js').Settings} Settings */
+/**
+* @param {string} uuid
+* @param {number} instance_id
+* @returns {Settings}
+*/
 function initialize_applet_settings(uuid, instance_id) {
 	const settings = new AppletSettings({}, uuid, instance_id);
-	[
+	/** @type {const} */ [
 		"is_appearance_dark",
 		"appearance_keybinding",
 		"is_appearance_auto",
@@ -4780,8 +4202,16 @@ function initialize_applet_settings(uuid, instance_id) {
 	return settings;
 }
 //#endregion
-//#region src/main.ts
+//#region src/main.js
 var { IconApplet } = imports.ui.applet;
+/** @typedef {import('./app/ui/Applet.js').Applet} Applet */
+/**
+* @param {imports.ui.applet.AppletMetadata} metadata
+* @param {imports.gi.St.Side} orientation
+* @param {number} panel_height
+* @param {number} instance_id
+* @returns {imports.ui.applet.Applet}
+*/
 function main(metadata, orientation, panel_height, instance_id) {
 	initialize_globals(metadata);
 	const applet = new IconApplet(orientation, panel_height, instance_id);

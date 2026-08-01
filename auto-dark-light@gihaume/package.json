@@ -5,20 +5,26 @@
         "test": "vitest"
     },
     "dependencies": {
-        "mobx": "6.15.0"
+        "mobx": "7.0.0"
     },
     "devDependencies": {
         "@ci-types/cjs": "6.0.2-5",
-        "@types/luxon": "3.7.1",
+        "@types/luxon": "3.7.3",
         "luxon": "3.7.2",
-        "typescript": "6.0.2",
-        "vite": "8.0.3",
-        "vitest": "4.1.2"
+        "typescript": "7.0.2",
+        "vite": "8.2.0",
+        "vitest": "4.1.10"
     },
-    "pnpm": {
-        "onlyBuiltDependencies": [
-            "esbuild"
-        ]
-    },
-    "packageManager": "pnpm@10.33.0"
+    "devEngines": {
+        "packageManager": {
+            "name": "pnpm",
+            "version": "11.18.0",
+            "onFail": "download"
+        },
+        "runtime": {
+            "name": "node",
+            "version": "24.18.1",
+            "onFail": "download"
+        }
+    }
 }

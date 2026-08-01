@@ -9,22 +9,21 @@ import { Time_of_day } from '../../core/Time_of_day.js';
 /** @typedef {import('../../types.js').Twilights} Twilights */
 
 export class Twilights_handler {
-    /** @private */
-    _date = DateTime.new_now_local(); // TODO: could be `null` if timezone is bad or missing?
+    /** @private */ _date = DateTime.new_now_local(); // TODO: could be `null` if timezone is bad or missing?
+
     update() {
         this._date = DateTime.new_now_local(); // TODO: same as above
     }
-    /** @type {Location} */
-    location = /** @type {any} */ (undefined);
+
+    /** @type {Location} */ location;
+
     /** @private @returns {Twilights} */
     get _location_twilights() {
         return compute_twilights(this._date, this.location);
     }
 
-    /** @type {number} */
-    auto_sunrise_offset = /** @type {any} */ (undefined);
-    /** @type {number} */
-    auto_sunset_offset = /** @type {any} */ (undefined);
+    /** @type {number} */ auto_sunrise_offset;
+    /** @type {number} */ auto_sunset_offset;
 
     /** @returns {Time_of_day} */
     get auto_sunrise() {
@@ -32,6 +31,7 @@ export class Twilights_handler {
             this.auto_sunrise_offset
         );
     }
+
     /** @returns {Time_of_day} */
     get auto_sunset() {
         return this._location_twilights.sunset.add_minutes(
@@ -39,15 +39,11 @@ export class Twilights_handler {
         );
     }
 
-    /** @type {Time_of_day} */
-    manual_sunrise = /** @type {any} */ (undefined);
-    /** @type {Time_of_day} */
-    manual_sunset = /** @type {any} */ (undefined);
+    /** @type {Time_of_day} */ manual_sunrise;
+    /** @type {Time_of_day} */ manual_sunset;
 
-    /** @type {boolean} */
-    is_sunrise_auto = /** @type {any} */ (undefined);
-    /** @type {boolean} */
-    is_sunset_auto = /** @type {any} */ (undefined);
+    /** @type {boolean} */ is_sunrise_auto;
+    /** @type {boolean} */ is_sunset_auto;
 
     /** @private @returns {Time_of_day} */
     get _sunrise() {

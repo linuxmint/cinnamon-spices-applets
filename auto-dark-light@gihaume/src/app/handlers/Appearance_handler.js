@@ -8,11 +8,14 @@ import * as system_time from '../../lib/gnome/system_time.js';
 export class Appearance_handler {
     /** @private */
     _time = system_time.get_now_as_time_of_day();
+
     update_time() {
         this._time = system_time.get_now_as_time_of_day();
     }
+
     /** @type {Twilights} */
-    twilights = /** @type {any} */ (undefined);
+    twilights;
+
     /** @returns {boolean} */
     get auto_is_dark() {
         return this._time.is_between(
@@ -21,13 +24,15 @@ export class Appearance_handler {
     }
 
     /** @type {boolean} */
-    manual_is_dark = /** @type {any} */ (undefined);
+    manual_is_dark;
+
     toggle_is_dark() {
         this.manual_is_dark = !this.manual_is_dark;
     }
 
     /** @type {boolean} */
-    is_auto = /** @type {any} */ (undefined);
+    is_auto;
+
     toggle_is_auto() {
         this.is_auto = !this.is_auto;
     }

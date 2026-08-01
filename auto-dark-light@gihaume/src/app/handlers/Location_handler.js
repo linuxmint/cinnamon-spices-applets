@@ -15,8 +15,10 @@ export class Location_handler {
     _timezone_change_listener = new Timezone_change_listener(
         new_timezone => this._timezone = new_timezone
     );
+
     /** @private @type {string} */
     _timezone = GLib.TimeZone.new_local().get_identifier();
+
     /** @returns {string} */
     get timezone() {
         return this._timezone;
@@ -26,16 +28,15 @@ export class Location_handler {
     _timezone_location_finder = new Timezone_location_finder(
         `${metadata.path}/Timezone_location_finder`
     );
+
     /** @returns {Location} */
     get auto_location() {
         return this._timezone_location_finder.find(this.timezone);
     }
 
-    /** @type {Location} */
-    manual_location = /** @type {any} */ (undefined);
+    /** @type {Location} */ manual_location;
 
-    /** @type {boolean} */
-    is_location_auto = /** @type {any} */ (undefined);
+    /** @type {boolean} */ is_location_auto;
 
     /** @returns {Location} */
     get location() {
@@ -51,14 +52,15 @@ export class Location_handler {
      */
     constructor(initial_values) {
         Object.assign(this, initial_values);
-        /** @type {typeof mobx.makeAutoObservable<
-         *     Location_handler,
+        /**
+         * @type {typeof mobx.makeAutoObservable<Location_handler,
          *     '_timezone_change_listener' | '_timezone_location_finder'
-         * >} */
+         * >}
+         */
         (mobx.makeAutoObservable)(this, {
             _timezone_change_listener: false,
             _timezone_location_finder: false,
-            manual_location: mobx.observable.deep,
+            manual_location: mobx.observableDeep, // TODO?: necessary?
         });
         this._timezone_change_listener.enable();
     }

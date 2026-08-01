@@ -1,1 +1,4 @@
-useNodeVersion: 24.14.1
+allowBuilds:
+  esbuild: true
+minimumReleaseAgeExclude:
+  - '@types/luxon@3.7.3'
