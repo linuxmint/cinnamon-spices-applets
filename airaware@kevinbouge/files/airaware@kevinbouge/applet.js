@@ -1,4 +1,5 @@
 const Applet = imports.ui.applet;
+const Clutter = imports.gi.Clutter;
 const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
@@ -201,7 +202,6 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this._isRefreshing = false;
         this._lastLocationResult = null;
         this._menuTarget = null;
-        this._isRebuildingMenu = false;
         this._panelIconColorId = null;
         this._panelIconPaths = this._buildPanelIconPaths(metadata.path);
 
@@ -1408,34 +1408,28 @@ class AirAwareApplet extends Applet.TextIconApplet {
     }
 
     _rebuildMenu() {
-        this._isRebuildingMenu = true;
+        this.menu.removeAll();
+        this._menuTarget = null;
 
-        try {
-            this.menu.removeAll();
-            this._menuTarget = null;
+        this._addHeader();
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-            this._addHeader();
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-
-            if (!this._providerData || !this._currentRisk) {
-                this._addEmptyState();
-                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-                this._addShareSummaryAction();
-                this._addRefreshAction();
-                return;
-            }
-
-            this._addCurrentSection();
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-            if (this._addBestOutdoorWindowSection())
-                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-            this._addForecastSection();
+        if (!this._providerData || !this._currentRisk) {
+            this._addEmptyState();
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             this._addShareSummaryAction();
             this._addRefreshAction();
-        } finally {
-            this._isRebuildingMenu = false;
+            return;
         }
+
+        this._addCurrentSection();
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        if (this._addBestOutdoorWindowSection())
+            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this._addForecastSection();
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this._addShareSummaryAction();
+        this._addRefreshAction();
     }
 
     _addMenuItem(item) {
@@ -1450,32 +1444,67 @@ class AirAwareApplet extends Applet.TextIconApplet {
     }
 
     _addCollapsibleSection(title, settingKey, expandedFallback, buildContents) {
-        const item = new PopupMenu.PopupSubMenuMenuItem(title);
-        const previousTarget = this._menuTarget;
-        const expanded = this._popupSectionExpanded(settingKey, expandedFallback);
-
-        item.actor.add_style_class_name('airaware-submenu-header');
-        this._useMutedMenuText(item);
-
-        if (item.label) {
-            item.label.add_style_class_name('airaware-submenu-title');
-        }
-
-        this.menu.addMenuItem(item);
-        item.menu.connect('open-state-changed', (menu, open) => {
-            if (!this._isRebuildingMenu)
-                this._persistPopupSectionState(settingKey, open);
+        const header = new PopupMenu.PopupBaseMenuItem({
+            activate: false,
         });
-        this._menuTarget = item.menu;
+        const titleLabel = new St.Label({
+            text: title,
+            style_class: 'airaware-submenu-title',
+        });
+        const arrow = new St.Icon({
+            icon_name: 'xsi-pan-end',
+            icon_type: St.IconType.SYMBOLIC,
+            style_class: 'popup-menu-arrow',
+        });
+        const section = new PopupMenu.PopupMenuSection();
+        const previousTarget = this._menuTarget;
+        let expanded = this._popupSectionExpanded(settingKey, expandedFallback);
+
+        const applyExpandedState = () => {
+            arrow.icon_name = expanded ? 'xsi-pan-down' : 'xsi-pan-end';
+
+            if (expanded)
+                section.actor.show();
+            else
+                section.actor.hide();
+        };
+        const toggleExpandedState = () => {
+            expanded = !expanded;
+            applyExpandedState();
+            this._persistPopupSectionState(settingKey, expanded);
+            return true;
+        };
+
+        header.actor.add_style_class_name('airaware-submenu-header');
+        this._useMutedMenuText(header);
+        header.addActor(titleLabel);
+        header.addActor(arrow, {
+            expand: true,
+            span: -1,
+            align: St.Align.END,
+        });
+        header.actor.connect('button-release-event', () => toggleExpandedState());
+        header.actor.connect('key-press-event', (actor, event) => {
+            const symbol = event.get_key_symbol();
+
+            if (symbol === Clutter.KEY_space ||
+                symbol === Clutter.KEY_Return ||
+                symbol === Clutter.KEY_KP_Enter)
+                return toggleExpandedState();
+
+            return false;
+        });
+
+        applyExpandedState();
+        this.menu.addMenuItem(header);
+        this.menu.addMenuItem(section);
+        this._menuTarget = section;
 
         try {
             buildContents();
         } finally {
             this._menuTarget = previousTarget;
         }
-
-        if (expanded)
-            item.menu.open(false);
     }
 
     _popupSectionExpanded(settingKey, fallback) {

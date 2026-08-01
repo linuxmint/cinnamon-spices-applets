@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: airaware@kevinbouge 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-08-01 17:17+0200\n"
+"POT-Creation-Date: 2026-08-01 17:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,87 +17,87 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:74
+#. applet.js:75
 msgid "Sunday"
 msgstr ""
 
-#. applet.js:75
+#. applet.js:76
 msgid "Monday"
 msgstr ""
 
-#. applet.js:76
+#. applet.js:77
 msgid "Tuesday"
 msgstr ""
 
-#. applet.js:77
+#. applet.js:78
 msgid "Wednesday"
 msgstr ""
 
-#. applet.js:78
+#. applet.js:79
 msgid "Thursday"
 msgstr ""
 
-#. applet.js:79
+#. applet.js:80
 msgid "Friday"
 msgstr ""
 
-#. applet.js:80
+#. applet.js:81
 msgid "Saturday"
 msgstr ""
 
-#. applet.js:81
+#. applet.js:82
 msgid "January"
 msgstr ""
 
-#. applet.js:82
+#. applet.js:83
 msgid "February"
 msgstr ""
 
-#. applet.js:83
+#. applet.js:84
 msgid "March"
 msgstr ""
 
-#. applet.js:84
+#. applet.js:85
 msgid "April"
 msgstr ""
 
-#. applet.js:85
+#. applet.js:86
 msgid "May"
 msgstr ""
 
-#. applet.js:86
+#. applet.js:87
 msgid "June"
 msgstr ""
 
-#. applet.js:87
+#. applet.js:88
 msgid "July"
 msgstr ""
 
-#. applet.js:88
+#. applet.js:89
 msgid "August"
 msgstr ""
 
-#. applet.js:89
+#. applet.js:90
 msgid "September"
 msgstr ""
 
-#. applet.js:90
+#. applet.js:91
 msgid "October"
 msgstr ""
 
-#. applet.js:91
+#. applet.js:92
 msgid "November"
 msgstr ""
 
-#. applet.js:92
+#. applet.js:93
 msgid "December"
 msgstr ""
 
-#. applet.js:93 applet.js:1965
+#. applet.js:94 applet.js:1994
 msgid "{weekday}, {day} {month}"
 msgstr ""
 
-#. applet.js:112 applet.js:1731 lib/dailySummaryFormatter.js:44
+#. applet.js:113 applet.js:1760 lib/dailySummaryFormatter.js:44
 #. lib/formatter.js:83
 msgid "Unknown"
 msgstr ""
@@ -110,7 +110,7 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-#. applet.js:1197 applet.js:1777 lib/formatter.js:84
+#. applet.js:1197 applet.js:1806 lib/formatter.js:84
 msgid "Unavailable"
 msgstr ""
 
@@ -137,8 +137,8 @@ msgid "Environmental allergy burden is now {category}."
 msgstr ""
 
 #. metadata.json->name
-#. applet.js:1394 applet.js:1509 applet.js:1887 applet.js:1894 applet.js:1899
-#. applet.js:1901 lib/dailySummaryFormatter.js:12
+#. applet.js:1394 applet.js:1538 applet.js:1916 applet.js:1923 applet.js:1928
+#. applet.js:1930 lib/dailySummaryFormatter.js:12
 msgid "AirAware"
 msgstr ""
 
@@ -146,181 +146,181 @@ msgstr ""
 msgid "Test notification: environmental allergy burden is {category}."
 msgstr ""
 
-#. applet.js:1513
+#. applet.js:1542
 msgid "Environmental pollen, air pollution, and mold potential burden"
 msgstr ""
 
-#. applet.js:1528
+#. applet.js:1557
 msgid "Waiting for environmental data"
 msgstr ""
 
 #. settings-schema.json->panel-score-mode->options
 #. settings-schema.json->daily-summary-score->options
-#. applet.js:1541 lib/dailySummaryFormatter.js:13
+#. applet.js:1570 lib/dailySummaryFormatter.js:13
 msgid "Environmental burden"
 msgstr ""
 
-#. applet.js:1545
+#. applet.js:1574
 msgid "Pollen"
 msgstr ""
 
-#. applet.js:1549 lib/dailySummaryFormatter.js:42
+#. applet.js:1578 lib/dailySummaryFormatter.js:42
 msgid "Regulated pollution"
 msgstr ""
 
 #. settings-schema.json->profile-pm25->description
-#. applet.js:1550 lib/dailySummaryFormatter.js:32 lib/formatter.js:94
+#. applet.js:1579 lib/dailySummaryFormatter.js:32 lib/formatter.js:94
 msgid "PM2.5"
 msgstr ""
 
 #. settings-schema.json->profile-pm10->description
-#. applet.js:1551 lib/dailySummaryFormatter.js:33 lib/formatter.js:95
+#. applet.js:1580 lib/dailySummaryFormatter.js:33 lib/formatter.js:95
 msgid "PM10"
 msgstr ""
 
-#. applet.js:1552 lib/dailySummaryFormatter.js:34 lib/formatter.js:96
+#. applet.js:1581 lib/dailySummaryFormatter.js:34 lib/formatter.js:96
 msgid "NO₂"
 msgstr ""
 
-#. applet.js:1553 lib/dailySummaryFormatter.js:35 lib/formatter.js:97
+#. applet.js:1582 lib/dailySummaryFormatter.js:35 lib/formatter.js:97
 msgid "O₃"
 msgstr ""
 
-#. applet.js:1554 lib/dailySummaryFormatter.js:36 lib/formatter.js:98
+#. applet.js:1583 lib/dailySummaryFormatter.js:36 lib/formatter.js:98
 msgid "SO₂"
 msgstr ""
 
-#. applet.js:1557 lib/dailySummaryFormatter.js:43
+#. applet.js:1586 lib/dailySummaryFormatter.js:43
 msgid "Atmospheric irritants"
 msgstr ""
 
-#. applet.js:1558 lib/dailySummaryFormatter.js:37 lib/formatter.js:101
+#. applet.js:1587 lib/dailySummaryFormatter.js:37 lib/formatter.js:101
 msgid "CO"
 msgstr ""
 
-#. applet.js:1559 lib/dailySummaryFormatter.js:39 lib/formatter.js:99
+#. applet.js:1588 lib/dailySummaryFormatter.js:39 lib/formatter.js:99
 msgid "Dust"
 msgstr ""
 
-#. applet.js:1561 lib/dailySummaryFormatter.js:40 lib/formatter.js:102
+#. applet.js:1590 lib/dailySummaryFormatter.js:40 lib/formatter.js:102
 msgid "Wildfire-related PM10"
 msgstr ""
 
-#. applet.js:1563 lib/formatter.js:100
+#. applet.js:1592 lib/formatter.js:100
 msgid "Aerosol optical depth"
 msgstr ""
 
-#. applet.js:1568
+#. applet.js:1597
 msgid "Mold"
 msgstr ""
 
 #. settings-schema.json->profile-mold->description
-#. applet.js:1570 lib/dailySummaryFormatter.js:31
+#. applet.js:1599 lib/dailySummaryFormatter.js:31
 msgid "Mold potential"
 msgstr ""
 
-#. applet.js:1576
+#. applet.js:1605
 msgid "Sun"
 msgstr ""
 
 #. settings-schema.json->profile-uv-index->description
-#. applet.js:1577 lib/dailySummaryFormatter.js:41 lib/formatter.js:103
+#. applet.js:1606 lib/dailySummaryFormatter.js:41 lib/formatter.js:103
 msgid "UV index"
 msgstr ""
 
-#. applet.js:1603
+#. applet.js:1632
 msgid "Pollen data unavailable"
 msgstr ""
 
 #. settings-schema.json->panel-score-mode->options
 #. settings-schema.json->daily-summary-score->options
-#. applet.js:1611 lib/dailySummaryFormatter.js:14
+#. applet.js:1640 lib/dailySummaryFormatter.js:14
 msgid "Personalized risk"
 msgstr ""
 
-#. applet.js:1616
+#. applet.js:1645
 msgid "Select at least one factor in the Personal Allergy Profile."
 msgstr ""
 
-#. applet.js:1620 lib/formatter.js:129
+#. applet.js:1649 lib/formatter.js:129
 msgid "Personalized risk unavailable"
 msgstr ""
 
 #. settings-schema.json->vegetation->title
-#. applet.js:1691
+#. applet.js:1720
 msgid "Nearby vegetation"
 msgstr ""
 
-#. applet.js:1694
+#. applet.js:1723
 msgid "No nearby vegetation features were found in OpenStreetMap."
 msgstr ""
 
-#. applet.js:1703
+#. applet.js:1732
 msgid "Showing cached OpenStreetMap vegetation context."
 msgstr ""
 
-#. applet.js:1715
+#. applet.js:1744
 msgid "Resolving location"
 msgstr ""
 
-#. applet.js:1718
+#. applet.js:1747
 msgid "Place name unavailable"
 msgstr ""
 
-#. applet.js:1743 lib/dailySummaryFormatter.js:16
+#. applet.js:1772 lib/dailySummaryFormatter.js:16
 msgid "Best outdoor window"
 msgstr ""
 
-#. applet.js:1746 applet.js:1784 lib/dailySummaryFormatter.js:21
+#. applet.js:1775 applet.js:1813 lib/dailySummaryFormatter.js:21
 #. lib/formatter.js:132
 msgid "{category} ({score})"
 msgstr ""
 
-#. applet.js:1760 applet.js:1765
+#. applet.js:1789 applet.js:1794
 msgid "Forecast"
 msgstr ""
 
-#. applet.js:1761
+#. applet.js:1790
 msgid "Forecast unavailable"
 msgstr ""
 
-#. applet.js:1768
+#. applet.js:1797
 msgid "Only {days} forecast days are currently available from the data source."
 msgstr ""
 
-#. applet.js:1792
+#. applet.js:1821
 msgid "Today"
 msgstr ""
 
-#. applet.js:1795
+#. applet.js:1824
 msgid "Tomorrow"
 msgstr ""
 
-#. applet.js:1803
+#. applet.js:1832
 msgid "Refreshing..."
 msgstr ""
 
-#. applet.js:1803
+#. applet.js:1832
 msgid "Refresh now"
 msgstr ""
 
-#. applet.js:1833
+#. applet.js:1862
 msgid "Share daily summary"
 msgstr ""
 
-#. applet.js:1887 applet.js:1894
+#. applet.js:1916 applet.js:1923
 msgid "No environmental data is available to share."
 msgstr ""
 
-#. applet.js:1899
+#. applet.js:1928
 msgid "Daily summary copied to clipboard."
 msgstr ""
 
-#. applet.js:1901
+#. applet.js:1930
 msgid "Could not copy the daily summary."
 msgstr ""
 
-#. applet.js:2016
+#. applet.js:2045
 msgid "({updated})"
 msgstr ""
 
