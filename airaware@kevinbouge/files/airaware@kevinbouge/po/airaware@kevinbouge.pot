@@ -1,0 +1,853 @@
+# AIRAWARE
+# This file is put in the public domain.
+# kevinbouge, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: airaware@kevinbouge 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-02 15:55+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:75
+msgid "Sunday"
+msgstr ""
+
+#. applet.js:76
+msgid "Monday"
+msgstr ""
+
+#. applet.js:77
+msgid "Tuesday"
+msgstr ""
+
+#. applet.js:78
+msgid "Wednesday"
+msgstr ""
+
+#. applet.js:79
+msgid "Thursday"
+msgstr ""
+
+#. applet.js:80
+msgid "Friday"
+msgstr ""
+
+#. applet.js:81
+msgid "Saturday"
+msgstr ""
+
+#. applet.js:82
+msgid "January"
+msgstr ""
+
+#. applet.js:83
+msgid "February"
+msgstr ""
+
+#. applet.js:84
+msgid "March"
+msgstr ""
+
+#. applet.js:85
+msgid "April"
+msgstr ""
+
+#. applet.js:86
+msgid "May"
+msgstr ""
+
+#. applet.js:87
+msgid "June"
+msgstr ""
+
+#. applet.js:88
+msgid "July"
+msgstr ""
+
+#. applet.js:89
+msgid "August"
+msgstr ""
+
+#. applet.js:90
+msgid "September"
+msgstr ""
+
+#. applet.js:91
+msgid "October"
+msgstr ""
+
+#. applet.js:92
+msgid "November"
+msgstr ""
+
+#. applet.js:93
+msgid "December"
+msgstr ""
+
+#. applet.js:94 applet.js:2007
+msgid "{weekday}, {day} {month}"
+msgstr ""
+
+#. applet.js:113 applet.js:1771 lib/dailySummaryFormatter.js:44
+#. lib/formatter.js:83
+msgid "Unknown"
+msgstr ""
+
+#. applet.js:256 applet.js:1307
+msgid "AirAware: loading environmental conditions"
+msgstr ""
+
+#. applet.js:720 applet.js:1306
+msgid "Loading"
+msgstr ""
+
+#. applet.js:1203 applet.js:1818 lib/formatter.js:84
+msgid "Unavailable"
+msgstr ""
+
+#. applet.js:1288
+msgid "Unable to refresh environmental data; showing cached data."
+msgstr ""
+
+#. applet.js:1291
+msgid ""
+"Unable to refresh environmental data; showing cached data for the last known "
+"location."
+msgstr ""
+
+#. applet.js:1293
+msgid "Unable to refresh environmental data."
+msgstr ""
+
+#. applet.js:1393
+msgid "Personalized environmental risk is now {category}."
+msgstr ""
+
+#. applet.js:1394
+msgid "Environmental allergy burden is now {category}."
+msgstr ""
+
+#. metadata.json->name
+#. applet.js:1400 applet.js:1549 applet.js:1929 applet.js:1936 applet.js:1941
+#. applet.js:1943 lib/dailySummaryFormatter.js:12
+msgid "AirAware"
+msgstr ""
+
+#. applet.js:1412
+msgid "Test notification: environmental allergy burden is {category}."
+msgstr ""
+
+#. applet.js:1553
+msgid "Environmental pollen, air pollution, and mold potential burden"
+msgstr ""
+
+#. applet.js:1568
+msgid "Waiting for environmental data"
+msgstr ""
+
+#. settings-schema.json->panel-score-mode->options
+#. settings-schema.json->daily-summary-score->options
+#. applet.js:1581 lib/dailySummaryFormatter.js:13
+msgid "Environmental burden"
+msgstr ""
+
+#. applet.js:1585
+msgid "Pollen"
+msgstr ""
+
+#. applet.js:1589 lib/dailySummaryFormatter.js:42
+msgid "Regulated pollution"
+msgstr ""
+
+#. settings-schema.json->profile-pm25->description
+#. applet.js:1590 lib/dailySummaryFormatter.js:32 lib/formatter.js:94
+msgid "PM2.5"
+msgstr ""
+
+#. settings-schema.json->profile-pm10->description
+#. applet.js:1591 lib/dailySummaryFormatter.js:33 lib/formatter.js:95
+msgid "PM10"
+msgstr ""
+
+#. applet.js:1592 lib/dailySummaryFormatter.js:34 lib/formatter.js:96
+msgid "NO₂"
+msgstr ""
+
+#. applet.js:1593 lib/dailySummaryFormatter.js:35 lib/formatter.js:97
+msgid "O₃"
+msgstr ""
+
+#. applet.js:1594 lib/dailySummaryFormatter.js:36 lib/formatter.js:98
+msgid "SO₂"
+msgstr ""
+
+#. applet.js:1597 lib/dailySummaryFormatter.js:43
+msgid "Atmospheric irritants"
+msgstr ""
+
+#. applet.js:1598 lib/dailySummaryFormatter.js:37 lib/formatter.js:101
+msgid "CO"
+msgstr ""
+
+#. applet.js:1599 lib/dailySummaryFormatter.js:39 lib/formatter.js:99
+msgid "Dust"
+msgstr ""
+
+#. applet.js:1601 lib/dailySummaryFormatter.js:40 lib/formatter.js:102
+msgid "Wildfire-related PM10"
+msgstr ""
+
+#. applet.js:1603 lib/formatter.js:100
+msgid "Aerosol optical depth"
+msgstr ""
+
+#. applet.js:1608
+msgid "Mold"
+msgstr ""
+
+#. settings-schema.json->profile-mold->description
+#. applet.js:1610 lib/dailySummaryFormatter.js:31
+msgid "Mold potential"
+msgstr ""
+
+#. applet.js:1616
+msgid "Sun"
+msgstr ""
+
+#. settings-schema.json->profile-uv-index->description
+#. applet.js:1617 lib/dailySummaryFormatter.js:41 lib/formatter.js:103
+msgid "UV index"
+msgstr ""
+
+#. applet.js:1643
+msgid "Pollen data unavailable for this location or season"
+msgstr ""
+
+#. settings-schema.json->panel-score-mode->options
+#. settings-schema.json->daily-summary-score->options
+#. applet.js:1651 lib/dailySummaryFormatter.js:14
+msgid "Personalized risk"
+msgstr ""
+
+#. applet.js:1656
+msgid "Select at least one factor in the Personal Allergy Profile."
+msgstr ""
+
+#. applet.js:1660 lib/formatter.js:129
+msgid "Personalized risk unavailable"
+msgstr ""
+
+#. settings-schema.json->vegetation->title
+#. applet.js:1731
+msgid "Nearby vegetation"
+msgstr ""
+
+#. applet.js:1734
+msgid "No nearby vegetation features were found in OpenStreetMap."
+msgstr ""
+
+#. applet.js:1743
+msgid "Showing cached OpenStreetMap vegetation context."
+msgstr ""
+
+#. applet.js:1755
+msgid "Resolving location"
+msgstr ""
+
+#. applet.js:1758
+msgid "Place name unavailable"
+msgstr ""
+
+#. applet.js:1783 lib/dailySummaryFormatter.js:16
+msgid "Best outdoor window"
+msgstr ""
+
+#. applet.js:1786 applet.js:1826 lib/dailySummaryFormatter.js:21
+#. lib/formatter.js:132
+msgid "{category} ({score})"
+msgstr ""
+
+#. applet.js:1801 applet.js:1806
+msgid "Forecast"
+msgstr ""
+
+#. applet.js:1802
+msgid "Forecast unavailable"
+msgstr ""
+
+#. applet.js:1809
+msgid "Only {days} forecast days are currently available from the data source."
+msgstr ""
+
+#. applet.js:1834
+msgid "Today"
+msgstr ""
+
+#. applet.js:1837
+msgid "Tomorrow"
+msgstr ""
+
+#. applet.js:1845
+msgid "Refreshing..."
+msgstr ""
+
+#. applet.js:1845
+msgid "Refresh now"
+msgstr ""
+
+#. applet.js:1875
+msgid "Share daily summary"
+msgstr ""
+
+#. applet.js:1929 applet.js:1936
+msgid "No environmental data is available to share."
+msgstr ""
+
+#. applet.js:1941
+msgid "Daily summary copied to clipboard."
+msgstr ""
+
+#. applet.js:1943
+msgid "Could not copy the daily summary."
+msgstr ""
+
+#. applet.js:2058
+msgid "({updated})"
+msgstr ""
+
+#. lib/dailySummaryFormatter.js:15
+msgid "Main factor"
+msgstr ""
+
+#. lib/dailySummaryFormatter.js:17
+msgid "UV peak"
+msgstr ""
+
+#. lib/dailySummaryFormatter.js:18
+msgid "Cached data"
+msgstr ""
+
+#. lib/dailySummaryFormatter.js:19
+msgid "Environmental conditions only — not medical advice."
+msgstr ""
+
+#. lib/dailySummaryFormatter.js:20
+msgid "Data: {providers}"
+msgstr ""
+
+#. lib/dailySummaryFormatter.js:22
+msgid "{category} ({score}) ({change})"
+msgstr ""
+
+#. lib/dailySummaryFormatter.js:23
+msgid "{category} at {time}"
+msgstr ""
+
+#. lib/dailySummaryFormatter.js:24
+msgid "{label} ({change})"
+msgstr ""
+
+#. settings-schema.json->profile-pollen-alder->description
+#. lib/dailySummaryFormatter.js:25 lib/formatter.js:87
+msgid "Alder pollen"
+msgstr ""
+
+#. settings-schema.json->profile-pollen-birch->description
+#. lib/dailySummaryFormatter.js:26 lib/formatter.js:88
+msgid "Birch pollen"
+msgstr ""
+
+#. settings-schema.json->profile-pollen-grass->description
+#. lib/dailySummaryFormatter.js:27 lib/formatter.js:89
+msgid "Grass pollen"
+msgstr ""
+
+#. settings-schema.json->profile-pollen-mugwort->description
+#. lib/dailySummaryFormatter.js:28 lib/formatter.js:90
+msgid "Mugwort pollen"
+msgstr ""
+
+#. settings-schema.json->profile-pollen-olive->description
+#. lib/dailySummaryFormatter.js:29 lib/formatter.js:91
+msgid "Olive pollen"
+msgstr ""
+
+#. settings-schema.json->profile-pollen-ragweed->description
+#. lib/dailySummaryFormatter.js:30 lib/formatter.js:92
+msgid "Ragweed pollen"
+msgstr ""
+
+#. lib/dailySummaryFormatter.js:38
+msgid "Particle haze"
+msgstr ""
+
+#. lib/dailySummaryFormatter.js:45
+msgid "Extreme"
+msgstr ""
+
+#. lib/formatter.js:79
+msgid "Low"
+msgstr ""
+
+#. lib/formatter.js:80
+msgid "Moderate"
+msgstr ""
+
+#. lib/formatter.js:81
+msgid "High"
+msgstr ""
+
+#. lib/formatter.js:82
+msgid "Very High"
+msgstr ""
+
+#. lib/formatter.js:85
+msgid "Weather data unavailable"
+msgstr ""
+
+#. lib/formatter.js:86
+msgid "Tree pollen"
+msgstr ""
+
+#. lib/formatter.js:93
+msgid "Weed pollen"
+msgstr ""
+
+#. lib/formatter.js:104
+msgid "Alder"
+msgstr ""
+
+#. lib/formatter.js:105
+msgid "Birch"
+msgstr ""
+
+#. lib/formatter.js:106
+msgid "Grass"
+msgstr ""
+
+#. lib/formatter.js:107
+msgid "Mugwort"
+msgstr ""
+
+#. lib/formatter.js:108
+msgid "Olive"
+msgstr ""
+
+#. lib/formatter.js:109
+msgid "Ragweed"
+msgstr ""
+
+#. lib/formatter.js:110
+msgid "Woodland"
+msgstr ""
+
+#. lib/formatter.js:111
+msgid "Grassland"
+msgstr ""
+
+#. lib/formatter.js:112
+msgid "Orchard"
+msgstr ""
+
+#. lib/formatter.js:113
+msgid "Scrub"
+msgstr ""
+
+#. lib/formatter.js:114
+msgid "Parkland"
+msgstr ""
+
+#. lib/formatter.js:115
+msgid "Farmland"
+msgstr ""
+
+#. lib/formatter.js:116
+msgid "Mapped birch trees"
+msgstr ""
+
+#. lib/formatter.js:117
+msgid "Mapped alder trees"
+msgstr ""
+
+#. lib/formatter.js:118
+msgid "Mapped olive trees"
+msgstr ""
+
+#. lib/formatter.js:119
+msgid "Mapped vegetation"
+msgstr ""
+
+#. lib/formatter.js:120
+msgid "Mapped allergenic trees"
+msgstr ""
+
+#. lib/formatter.js:121
+msgid "AQI"
+msgstr ""
+
+#. lib/formatter.js:122
+msgid "US AQI"
+msgstr ""
+
+#. lib/formatter.js:123
+msgid "EU AQI"
+msgstr ""
+
+#. lib/formatter.js:124
+msgid "No recent data"
+msgstr ""
+
+#. lib/formatter.js:125
+msgid "Stale data"
+msgstr ""
+
+#. lib/formatter.js:126
+msgid "Updated just now"
+msgstr ""
+
+#. lib/formatter.js:127
+msgid "Updated 1 min ago"
+msgstr ""
+
+#. lib/formatter.js:128
+msgid "1 selected factor is unavailable"
+msgstr ""
+
+#. lib/formatter.js:130
+msgid ""
+"Environmental burden: {category} ({score})\n"
+"Personalized risk unavailable"
+msgstr ""
+
+#. lib/formatter.js:131
+msgid ""
+"Environmental burden: {category} ({score}) — cached data\n"
+"Personalized risk unavailable"
+msgstr ""
+
+#. lib/formatter.js:133
+msgid "{category} ({score}) — cached data"
+msgstr ""
+
+#. lib/formatter.js:134
+msgid "{count} selected factors are unavailable"
+msgstr ""
+
+#. lib/formatter.js:135
+msgid "{degrees}° {direction}"
+msgstr ""
+
+#. lib/formatter.js:136
+msgid "{distance} km"
+msgstr ""
+
+#. lib/formatter.js:137
+msgid "{distance} m"
+msgstr ""
+
+#. lib/formatter.js:138
+msgid "{label} {value}"
+msgstr ""
+
+#. lib/formatter.js:139
+msgid "{score}%"
+msgstr ""
+
+#. lib/formatter.js:140
+msgid "{value} {unit}"
+msgstr ""
+
+#. lib/formatter.js:141
+msgid "{value}%"
+msgstr ""
+
+#. lib/formatter.js:142
+msgid "{value} ({change})"
+msgstr ""
+
+#. lib/formatter.js:143
+msgid "{start}–{end} · {category} ({score})"
+msgstr ""
+
+#. lib/formatter.js:144
+msgid "N"
+msgstr ""
+
+#. lib/formatter.js:145
+msgid "NE"
+msgstr ""
+
+#. lib/formatter.js:146
+msgid "E"
+msgstr ""
+
+#. lib/formatter.js:147
+msgid "SE"
+msgstr ""
+
+#. lib/formatter.js:148
+msgid "S"
+msgstr ""
+
+#. lib/formatter.js:149
+msgid "SW"
+msgstr ""
+
+#. lib/formatter.js:150
+msgid "W"
+msgstr ""
+
+#. lib/formatter.js:151
+msgid "NW"
+msgstr ""
+
+#. lib/formatter.js:152
+msgid "grains/m³"
+msgstr ""
+
+#. lib/formatter.js:153
+msgid "µg/m³"
+msgstr ""
+
+#. lib/formatter.js:154
+msgid "°C"
+msgstr ""
+
+#. lib/formatter.js:155
+msgid "m/s"
+msgstr ""
+
+#. lib/formatter.js:156
+msgid "km"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Panel applet showing environmental allergy burden from pollen, air "
+"pollution, and mold potential."
+msgstr ""
+
+#. settings-schema.json->general->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->profile->title
+#. settings-schema.json->personal-profile->title
+msgid "Personal Allergy Profile"
+msgstr ""
+
+#. settings-schema.json->refresh->title
+msgid "Refresh"
+msgstr ""
+
+#. settings-schema.json->location->title
+msgid "Location"
+msgstr ""
+
+#. settings-schema.json->outdoor->title
+msgid "Outdoor"
+msgstr ""
+
+#. settings-schema.json->daily-summary->title
+msgid "Daily summary"
+msgstr ""
+
+#. settings-schema.json->profile-sun->title
+msgid "Sun exposure"
+msgstr ""
+
+#. settings-schema.json->panel->title
+msgid "Panel"
+msgstr ""
+
+#. settings-schema.json->alerts->title
+#. settings-schema.json->notification-level->description
+msgid "Notifications"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh interval"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->options
+msgid "30 minutes"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->options
+msgid "60 minutes"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->options
+msgid "120 minutes"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->options
+msgid "240 minutes"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->options
+msgid "360 minutes"
+msgstr ""
+
+#. settings-schema.json->show-panel-text->description
+msgid "Show label"
+msgstr ""
+
+#. settings-schema.json->panel-score-mode->description
+msgid "Panel score"
+msgstr ""
+
+#. settings-schema.json->location-mode->description
+msgid "Location source"
+msgstr ""
+
+#. settings-schema.json->location-mode->options
+msgid "Automatic"
+msgstr ""
+
+#. settings-schema.json->location-mode->options
+msgid "Manual coordinates"
+msgstr ""
+
+#. settings-schema.json->open-coordinate-map->description
+msgid "Open coordinate map"
+msgstr ""
+
+#. settings-schema.json->open-coordinate-map->tooltip
+msgid ""
+"Opens OpenStreetMap in your browser so you can choose a location and copy "
+"its coordinates."
+msgstr ""
+
+#. settings-schema.json->manual-latitude->description
+msgid "Manual latitude"
+msgstr ""
+
+#. settings-schema.json->manual-latitude->tooltip
+#. settings-schema.json->manual-longitude->tooltip
+msgid ""
+"Used when Location source is Manual coordinates, and as a fallback if "
+"automatic location fails."
+msgstr ""
+
+#. settings-schema.json->manual-longitude->description
+msgid "Manual longitude"
+msgstr ""
+
+#. settings-schema.json->enable-vegetation-context->description
+msgid "Enable nearby vegetation context"
+msgstr ""
+
+#. settings-schema.json->vegetation-radius->description
+msgid "Vegetation search radius"
+msgstr ""
+
+#. settings-schema.json->vegetation-radius->options
+msgid "1 km"
+msgstr ""
+
+#. settings-schema.json->vegetation-radius->options
+msgid "2 km"
+msgstr ""
+
+#. settings-schema.json->vegetation-radius->options
+msgid "5 km"
+msgstr ""
+
+#. settings-schema.json->enable-personalized-risk->description
+msgid "Enable personalized risk score"
+msgstr ""
+
+#. settings-schema.json->outdoor-window-duration->description
+msgid "Preferred outdoor window duration"
+msgstr ""
+
+#. settings-schema.json->outdoor-window-duration->options
+msgid "1 hour"
+msgstr ""
+
+#. settings-schema.json->outdoor-window-duration->options
+msgid "2 hours"
+msgstr ""
+
+#. settings-schema.json->outdoor-window-duration->options
+msgid "3 hours"
+msgstr ""
+
+#. settings-schema.json->profile-nitrogen-dioxide->description
+msgid "Nitrogen dioxide"
+msgstr ""
+
+#. settings-schema.json->profile-ozone->description
+msgid "Ozone"
+msgstr ""
+
+#. settings-schema.json->profile-sulphur-dioxide->description
+msgid "Sulphur dioxide"
+msgstr ""
+
+#. settings-schema.json->profile-carbon-monoxide->description
+msgid "Carbon monoxide"
+msgstr ""
+
+#. settings-schema.json->profile-aerosol-optical-depth->description
+msgid "Particle haze (aerosol optical depth)"
+msgstr ""
+
+#. settings-schema.json->profile-dust->description
+msgid "Atmospheric dust"
+msgstr ""
+
+#. settings-schema.json->profile-wildfire-pm10->description
+msgid "Smoke or wildfire particulate context"
+msgstr ""
+
+#. settings-schema.json->daily-summary-score->description
+msgid "Daily summary score"
+msgstr ""
+
+#. settings-schema.json->daily-summary-location->description
+msgid "Location in shared summary"
+msgstr ""
+
+#. settings-schema.json->daily-summary-location->options
+msgid "Place name"
+msgstr ""
+
+#. settings-schema.json->daily-summary-location->options
+msgid "Hidden"
+msgstr ""
+
+#. settings-schema.json->notification-level->options
+msgid "Disabled"
+msgstr ""
+
+#. settings-schema.json->notification-level->options
+msgid "High + Very High"
+msgstr ""
+
+#. settings-schema.json->notification-level->options
+msgid "Very High only"
+msgstr ""
+
+#. settings-schema.json->use-personalized-notifications->description
+msgid "Use personalized score for risk notifications"
+msgstr ""
+
+#. settings-schema.json->test-notification->description
+msgid "Send test notification"
+msgstr ""
+
+#. settings-schema.json->test-notification->tooltip
+msgid ""
+"Sends one sample High notification. It does not change the current risk."
+msgstr ""
