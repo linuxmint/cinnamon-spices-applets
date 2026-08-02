@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: auto-dark-light@gihaume 1.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-02 20:25+0100\n"
+"POT-Creation-Date: 2026-08-02 21:29+0200\n"
 "PO-Revision-Date: 2025-04-24 00:59+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -17,83 +17,73 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. 5.8/applet.js:1 5.8/applet.js:3 2.2/applet.js:19
+#. 5.8/src/globals.js:47 5.8/src/globals.js:52 5.8/src/globals.js:57
+#. 5.8/src/app/app.js:291 5.8/src/app/app.js:292
+#. 5.8/src/app/launch_command.js:21 5.8/src/app/launch_command.js:22
+#. 5.8/src/app/launch_command.js:25 5.8/src/app/launch_command.js:26
+#. 5.8/src/app/launch_command.js:29 5.8/src/app/launch_command.js:30
+#. 5.8/src/app/launch_command.js:33 5.8/src/app/launch_command.js:34
+#. 5.8/src/app/launch_command.js:41 5.8/src/app/launch_command.js:42
+#. 5.8/src/app/launch_command.js:48 2.2/applet.js:19
 msgid ":"
 msgstr "："
 
-#. 5.8/applet.js:1
-msgid "the command"
-msgstr "命令"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "has failed"
-msgstr "失敗"
-
-#. 5.8/applet.js:1
-msgid "due to a wrong format"
-msgstr "因格式錯誤"
-
-#. 5.8/applet.js:1
-msgid "Detail"
-msgstr ""
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "due to timeout"
-msgstr "因逾時"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "due to an error"
-msgstr "因格式錯誤"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid ""
-"Missing dependencies 'make' and/or 'g++'. Install them, in e.g. on Debian-"
-"based system with 'sudo apt install make g++', then restart Cinnamon "
-"(Ctrl+Alt+Esc)."
-msgstr ""
-"缺少相依套件 `make` 與 `gcc`。請在 Debian 系統上執行 `sudo apt install build-"
-"essential` 進行安裝，然後重新載入小程式（例如重新啟動 Cinnamon）。"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "Unknown compilation error"
-msgstr "編譯"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "Failed compilation of"
-msgstr "編譯"
-
-#. 5.8/applet.js:1
-msgid "the subprocess"
-msgstr "子程序"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "has written on its error output"
-msgstr "寫入其錯誤輸出"
-
-#. 5.8/applet.js:3
+#. 5.8/src/app/app.js:291
 msgid "Click"
 msgstr ""
 
-#. 5.8/applet.js:3
+#. 5.8/src/app/app.js:291
 #, fuzzy
 msgid "toggle dark/light appearance"
 msgstr "點選：切換深色／淺色模式"
 
-#. 5.8/applet.js:3
+#. 5.8/src/app/app.js:292
 msgid "Middle-click"
 msgstr ""
 
-#. 5.8/applet.js:3
+#. 5.8/src/app/app.js:292
 #, fuzzy
 msgid "toggle automatic switch"
 msgstr "中鍵點選：切換自動切換模式"
+
+#. 5.8/src/app/launch_command.js:18
+msgid "Failed to run command"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:21 5.8/src/app/launch_command.js:25
+#. 5.8/src/app/launch_command.js:29 5.8/src/app/launch_command.js:33
+#. 5.8/src/app/launch_command.js:41
+msgid "Reason"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:21
+#, fuzzy
+msgid "command error"
+msgstr "因格式錯誤"
+
+#. 5.8/src/app/launch_command.js:22 5.8/src/app/launch_command.js:26
+#. 5.8/src/app/launch_command.js:30 5.8/src/app/launch_command.js:34
+#. 5.8/src/app/launch_command.js:42
+msgid "Detail"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:25
+#, fuzzy
+msgid "command timeout"
+msgstr "因逾時"
+
+#. 5.8/src/app/launch_command.js:29
+msgid "command timeout (killed)"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:41
+msgid "Other error"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:48
+#, fuzzy
+msgid "Unknown error type"
+msgstr "編譯"
 
 #. 2.2/applet.js:19
 msgid "Critical error"

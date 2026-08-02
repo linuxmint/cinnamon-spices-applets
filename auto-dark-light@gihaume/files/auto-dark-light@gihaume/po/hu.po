@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: auto-dark-light@gihaume 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-02 20:25+0100\n"
+"POT-Creation-Date: 2026-08-02 21:29+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,83 +18,73 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 
-#. 5.8/applet.js:1 5.8/applet.js:3 2.2/applet.js:19
+#. 5.8/src/globals.js:47 5.8/src/globals.js:52 5.8/src/globals.js:57
+#. 5.8/src/app/app.js:291 5.8/src/app/app.js:292
+#. 5.8/src/app/launch_command.js:21 5.8/src/app/launch_command.js:22
+#. 5.8/src/app/launch_command.js:25 5.8/src/app/launch_command.js:26
+#. 5.8/src/app/launch_command.js:29 5.8/src/app/launch_command.js:30
+#. 5.8/src/app/launch_command.js:33 5.8/src/app/launch_command.js:34
+#. 5.8/src/app/launch_command.js:41 5.8/src/app/launch_command.js:42
+#. 5.8/src/app/launch_command.js:48 2.2/applet.js:19
 msgid ":"
 msgstr ":"
 
-#. 5.8/applet.js:1
-msgid "the command"
-msgstr "a parancs"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "has failed"
-msgstr "sikertelen"
-
-#. 5.8/applet.js:1
-msgid "due to a wrong format"
-msgstr "rossz formátum miatt"
-
-#. 5.8/applet.js:1
-msgid "Detail"
-msgstr "Részlet"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "due to timeout"
-msgstr "idő lejárta miatt"
-
-#. 5.8/applet.js:1
-msgid "due to an error"
-msgstr "egy hiba miatt"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid ""
-"Missing dependencies 'make' and/or 'g++'. Install them, in e.g. on Debian-"
-"based system with 'sudo apt install make g++', then restart Cinnamon "
-"(Ctrl+Alt+Esc)."
-msgstr ""
-"Hiányzó `make` és/vagy `g++` függőségek. Telepítsd őket például Debian-alapú "
-"rendszerre a `sudo apt install make g++` paranccsal, majd indítsd újra az "
-"appletet a Cinnamon újraindításakor."
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "Unknown compilation error"
-msgstr "A következő összeállítása:"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "Failed compilation of"
-msgstr "A következő összeállítása:"
-
-#. 5.8/applet.js:1
-msgid "the subprocess"
-msgstr "az alfolyamat"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "has written on its error output"
-msgstr "írta a hibakimenetére"
-
-#. 5.8/applet.js:3
+#. 5.8/src/app/app.js:291
 msgid "Click"
 msgstr ""
 
-#. 5.8/applet.js:3
+#. 5.8/src/app/app.js:291
 #, fuzzy
 msgid "toggle dark/light appearance"
 msgstr "Kattintás: sötét/világos üzemmód váltása"
 
-#. 5.8/applet.js:3
+#. 5.8/src/app/app.js:292
 msgid "Middle-click"
 msgstr ""
 
-#. 5.8/applet.js:3
+#. 5.8/src/app/app.js:292
 #, fuzzy
 msgid "toggle automatic switch"
 msgstr "Középső kattintás: automatikus kapcsolási mód váltása"
+
+#. 5.8/src/app/launch_command.js:18
+msgid "Failed to run command"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:21 5.8/src/app/launch_command.js:25
+#. 5.8/src/app/launch_command.js:29 5.8/src/app/launch_command.js:33
+#. 5.8/src/app/launch_command.js:41
+msgid "Reason"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:21
+#, fuzzy
+msgid "command error"
+msgstr "egy hiba miatt"
+
+#. 5.8/src/app/launch_command.js:22 5.8/src/app/launch_command.js:26
+#. 5.8/src/app/launch_command.js:30 5.8/src/app/launch_command.js:34
+#. 5.8/src/app/launch_command.js:42
+msgid "Detail"
+msgstr "Részlet"
+
+#. 5.8/src/app/launch_command.js:25
+#, fuzzy
+msgid "command timeout"
+msgstr "idő lejárta miatt"
+
+#. 5.8/src/app/launch_command.js:29
+msgid "command timeout (killed)"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:41
+msgid "Other error"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:48
+#, fuzzy
+msgid "Unknown error type"
+msgstr "A következő összeállítása:"
 
 #. 2.2/applet.js:19
 msgid "Critical error"

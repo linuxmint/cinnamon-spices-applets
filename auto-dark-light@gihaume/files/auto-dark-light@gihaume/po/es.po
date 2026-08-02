@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-11-02 20:25+0100\n"
+"POT-Creation-Date: 2026-08-02 21:29+0200\n"
 "PO-Revision-Date: 2025-05-18 11:23-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,83 +18,73 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#. 5.8/applet.js:1 5.8/applet.js:3 2.2/applet.js:19
+#. 5.8/src/globals.js:47 5.8/src/globals.js:52 5.8/src/globals.js:57
+#. 5.8/src/app/app.js:291 5.8/src/app/app.js:292
+#. 5.8/src/app/launch_command.js:21 5.8/src/app/launch_command.js:22
+#. 5.8/src/app/launch_command.js:25 5.8/src/app/launch_command.js:26
+#. 5.8/src/app/launch_command.js:29 5.8/src/app/launch_command.js:30
+#. 5.8/src/app/launch_command.js:33 5.8/src/app/launch_command.js:34
+#. 5.8/src/app/launch_command.js:41 5.8/src/app/launch_command.js:42
+#. 5.8/src/app/launch_command.js:48 2.2/applet.js:19
 msgid ":"
 msgstr ":"
 
-#. 5.8/applet.js:1
-msgid "the command"
-msgstr "el comando"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "has failed"
-msgstr "ha fallado"
-
-#. 5.8/applet.js:1
-msgid "due to a wrong format"
-msgstr "debido a un formato incorrecto"
-
-#. 5.8/applet.js:1
-msgid "Detail"
-msgstr "Detalle"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "due to timeout"
-msgstr "por expiración del plazo"
-
-#. 5.8/applet.js:1
-msgid "due to an error"
-msgstr "debido a un error"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid ""
-"Missing dependencies 'make' and/or 'g++'. Install them, in e.g. on Debian-"
-"based system with 'sudo apt install make g++', then restart Cinnamon "
-"(Ctrl+Alt+Esc)."
-msgstr ""
-"Faltan las dependencias `make` y/o `g++`. Instálelas, por ejemplo, en un "
-"sistema basado en Debian con `sudo apt install make g++`, y vuelva a cargar "
-"el applet al reiniciar Cinnamon."
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "Unknown compilation error"
-msgstr "Compilación de"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "Failed compilation of"
-msgstr "Compilación de"
-
-#. 5.8/applet.js:1
-msgid "the subprocess"
-msgstr "el subproceso"
-
-#. 5.8/applet.js:1
-#, fuzzy
-msgid "has written on its error output"
-msgstr "escribió en su salida de error"
-
-#. 5.8/applet.js:3
+#. 5.8/src/app/app.js:291
 msgid "Click"
 msgstr ""
 
-#. 5.8/applet.js:3
+#. 5.8/src/app/app.js:291
 #, fuzzy
 msgid "toggle dark/light appearance"
 msgstr "Clic: alternar modo oscuro/claro"
 
-#. 5.8/applet.js:3
+#. 5.8/src/app/app.js:292
 msgid "Middle-click"
 msgstr ""
 
-#. 5.8/applet.js:3
+#. 5.8/src/app/app.js:292
 #, fuzzy
 msgid "toggle automatic switch"
 msgstr "Botón central: cambiar el modo de conmutación automática"
+
+#. 5.8/src/app/launch_command.js:18
+msgid "Failed to run command"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:21 5.8/src/app/launch_command.js:25
+#. 5.8/src/app/launch_command.js:29 5.8/src/app/launch_command.js:33
+#. 5.8/src/app/launch_command.js:41
+msgid "Reason"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:21
+#, fuzzy
+msgid "command error"
+msgstr "debido a un error"
+
+#. 5.8/src/app/launch_command.js:22 5.8/src/app/launch_command.js:26
+#. 5.8/src/app/launch_command.js:30 5.8/src/app/launch_command.js:34
+#. 5.8/src/app/launch_command.js:42
+msgid "Detail"
+msgstr "Detalle"
+
+#. 5.8/src/app/launch_command.js:25
+#, fuzzy
+msgid "command timeout"
+msgstr "por expiración del plazo"
+
+#. 5.8/src/app/launch_command.js:29
+msgid "command timeout (killed)"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:41
+msgid "Other error"
+msgstr ""
+
+#. 5.8/src/app/launch_command.js:48
+#, fuzzy
+msgid "Unknown error type"
+msgstr "Compilación de"
 
 #. 2.2/applet.js:19
 msgid "Critical error"
