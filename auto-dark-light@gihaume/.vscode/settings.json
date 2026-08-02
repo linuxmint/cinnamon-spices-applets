@@ -1,10 +1,7 @@
 {
-    "js/ts.tsdk.path": "node_modules/typescript/lib",
     "js/ts.preferences.quoteStyle": "single", // For imports autocompletion
 
     "python.analysis.extraPaths": [
         "/usr/share/cinnamon/cinnamon-settings/bin"
     ],
-
-    "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 120,
 }

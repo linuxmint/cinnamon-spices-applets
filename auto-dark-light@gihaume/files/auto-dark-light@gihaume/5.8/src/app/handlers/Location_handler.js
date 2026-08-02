@@ -1,6 +1,6 @@
 const { GLib } = imports.gi;
 
-import * as mobx from 'mobx';
+import * as mobx from '../../lib/mobx.js';
 
 import { Timezone_location_finder } from '../../core/Timezone_location_finder/Timezone_location_finder.js';
 import { metadata } from '../../globals.js';
@@ -26,7 +26,7 @@ export class Location_handler {
 
     /** @private @readonly */
     _timezone_location_finder = new Timezone_location_finder(
-        `${metadata.path}/Timezone_location_finder`
+        `${metadata.path}/src/core/Timezone_location_finder`
     );
 
     /** @returns {Location} */

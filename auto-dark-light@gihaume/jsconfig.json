@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-        "target": "es2022",
+        "target": "esnext",
         "lib": [
-            "ES2022",
+            "ESNext",
             "DOM" // For `console` in JS tests
         ],
-        "module": "es2022",
+        "module": "esnext",
         "moduleResolution": "bundler",
         "moduleDetection": "force",
         "noEmit": true,
@@ -13,11 +13,15 @@
         "checkJs":true,
         "strict": true,
 		"types": [
-			"@ci-types/cjs"
+			"@ci-types/cjs",
+            "@girs/gjs",
 		],
     },
     "include": [
-        "src/**/*.ts",
-        "src/**/*.js",
+        "files/**/*.ts",
+        "files/**/*.js",
+    ],
+    "exclude": [
+        "files/**/mobx.js", // Has its own d.ts
     ],
 }

@@ -1,6 +1,6 @@
 const { GLib } = imports.gi;
 
-import * as mobx from 'mobx';
+import * as mobx from '../lib/mobx.js';
 
 import { Time_of_day } from '../core/Time_of_day.js';
 import { _, logger, metadata } from '../globals.js';

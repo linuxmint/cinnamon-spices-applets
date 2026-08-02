@@ -1,6 +1,6 @@
 const { DateTime } = imports.gi.GLib; // Preferred over JS's `Date` to take into account timezone changes during runtime.
 
-import * as mobx from 'mobx';
+import * as mobx from '../../lib/mobx.js';
 
 import { compute_twilights } from '../../core/compute_twilights/compute_twilights.js';
 import { Time_of_day } from '../../core/Time_of_day.js';

@@ -1,4 +1,4 @@
-import * as mobx from 'mobx';
+import * as mobx from '../../lib/mobx.js';
 
 import * as system_time from '../../lib/gnome/system_time.js';
 

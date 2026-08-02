@@ -2,7 +2,6 @@
     "recommendations": [
         "EditorConfig.EditorConfig",
         "fill-labs.dependi",
-        "mike-co.import-sorter",
         "ms-python.python",
         "pkief.material-icon-theme",
         "takumii.markdown-toc-num",
