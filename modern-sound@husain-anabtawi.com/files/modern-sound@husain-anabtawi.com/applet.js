@@ -5,9 +5,9 @@ const Main = imports.ui.main;
 const Util = imports.misc.util;
 const Cvc = imports.gi.Cvc;
 
-const { MasterVolumeItem } = require("./widgets/master-volume-item");
-const { MicVolumeItem } = require("./widgets/mic-volume-item");
-const { OutputDeviceItem } = require("./widgets/output-device-item");
+const { connectIconScrollHandler } = require("./handlers/on-icon-scroll-handler");
+const { MasterVolumeItem, MicVolumeItem } = require("./widgets/stream-volume-item");
+const { InputDeviceItem, OutputDeviceItem } = require("./widgets/device-picker-item");
 const { ApplicationsItem } = require("./widgets/applications-item");
 const { QuickActionsItem } = require("./widgets/quick-actions-item");
 
@@ -43,6 +43,12 @@ class ModernSoundApplet extends Applet.IconApplet {
 
         this._settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         this._settings.bind("keyOpen", "keyOpen", () => this._setKeybinding());
+        this._settings.bind("hideSingleOutputDevice", "hideSingleOutputDevice", () => {
+            this._syncDeviceVisibility();
+        });
+        this._settings.bind("hideSingleInputDevice", "hideSingleInputDevice", () => {
+            this._syncDeviceVisibility();
+        });
 
         this._masterVolume = new MasterVolumeItem(this);
         this._menu.addMenuItem(this._masterVolume);
@@ -50,11 +56,15 @@ class ModernSoundApplet extends Applet.IconApplet {
         this._micVolume = new MicVolumeItem(this);
         this._menu.addMenuItem(this._micVolume);
 
-        addSectionSeparator(this._menu);
-
         this._outputDevice = new OutputDeviceItem(this);
         this._outputDevice.bindControl(this._control);
         this._menu.addMenuItem(this._outputDevice);
+
+        this._inputDevice = new InputDeviceItem(this);
+        this._inputDevice.bindControl(this._control);
+        this._menu.addMenuItem(this._inputDevice);
+
+        addSectionSeparator(this._menu);
 
         this._applications = new ApplicationsItem(this);
         this._applications.bindControl(this._control);
@@ -74,6 +84,7 @@ class ModernSoundApplet extends Applet.IconApplet {
 
         this._control.open();
         this._setKeybinding();
+        connectIconScrollHandler(this);
         this.set_applet_icon_symbolic_name("audio-volume-high-symbolic");
         this.set_applet_tooltip(_("Sound"));
         global.log("[modern-sound] applet initialized");
@@ -94,6 +105,7 @@ class ModernSoundApplet extends Applet.IconApplet {
 
         this._masterVolume.connectStream(this._output);
         this._micVolume.connectStream(this._input);
+        this._inputDevice._syncActiveDevice();
         this._outputDevice._syncActiveDevice();
 
         if (this._output) {
@@ -115,6 +127,14 @@ class ModernSoundApplet extends Applet.IconApplet {
 
         this._syncMuteStates();
         this._updatePanelIcon();
+        this._syncDeviceVisibility();
+    }
+
+    _syncDeviceVisibility() {
+        if (this._outputDevice)
+            this._outputDevice._updateVisibility();
+        if (this._inputDevice)
+            this._inputDevice._updateVisibility();
     }
 
     _syncMuteStates() {
