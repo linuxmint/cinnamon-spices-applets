@@ -247,6 +247,13 @@ var combineEnvironmentalData = function(options = {}) {
         return null;
 
     const combined = _copyObject(sourceAirQuality);
+
+    if (!combined || !combined.current)
+        return null;
+
+    if (!Array.isArray(combined.forecast))
+        combined.forecast = [];
+
     const usedCachedAirQuality = airQualityData === null && cachedData !== null;
     const cachedWeather = _cachedWeatherForCoordinates(cachedData, requestedCoordinates);
     const sourceWeather = weatherData || cachedWeather;

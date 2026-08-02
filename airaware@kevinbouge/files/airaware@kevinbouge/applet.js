@@ -962,8 +962,14 @@ class AirAwareApplet extends Applet.TextIconApplet {
             if (vegetationResult.error)
                 this._logError(vegetationResult.error);
 
-            if (!airQualityResult.error && !weatherResult.error)
-                this._cache.writeResponseAsync(combinedData);
+            if (airQualityResult.data !== null || weatherResult.data !== null) {
+                this._cache.writeResponseAsync(combinedData, (cacheWriteError, result) => {
+                    if (cacheWriteError)
+                        this._logError(cacheWriteError);
+                    else if (result && result.ok === false)
+                        this._logError(new Error(result.error || 'Response cache write failed'));
+                });
+            }
 
             this._applyProviderData(
                 combinedData,
@@ -1634,7 +1640,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
         }
 
         if (!added)
-            this._addTextBlock(_('Pollen data unavailable'), 'airaware-muted');
+            this._addTextBlock(_('Pollen data unavailable for this location or season'), 'airaware-muted');
     }
 
     _addPersonalizedRiskSection() {

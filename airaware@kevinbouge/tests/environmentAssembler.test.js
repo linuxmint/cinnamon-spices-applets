@@ -350,6 +350,44 @@ function testNoDataReturnsNull() {
     }), null, 'weather alone cannot replace missing air-quality readings');
 }
 
+function testMissingCurrentReturnsNull() {
+    const malformed = airQualityResponse();
+
+    delete malformed.current;
+
+    assertEqual(EnvironmentAssembler.combineEnvironmentalData({
+        airQualityData: malformed,
+        weatherData: null,
+        cachedData: null,
+    }), null, 'air-quality data without current readings should not be combined');
+}
+
+function testMissingForecastFallsBackToEmptyForecast() {
+    const partial = airQualityResponse();
+    const combined = EnvironmentAssembler.combineEnvironmentalData({
+        airQualityData: partial,
+        weatherData: null,
+        cachedData: null,
+    });
+
+    delete partial.forecast;
+
+    const withoutForecast = EnvironmentAssembler.combineEnvironmentalData({
+        airQualityData: partial,
+        weatherData: null,
+        cachedData: null,
+    });
+
+    assertNotNull(combined,
+        'control air-quality response should combine');
+    assertNotNull(withoutForecast,
+        'missing forecast should not crash the assembler');
+    assertEqual(withoutForecast.forecast.length, 0,
+        'missing forecast should normalize to an empty forecast');
+    assertEqual(withoutForecast.current.moldPotential.isAvailable, false,
+        'current data should still get unavailable mold metadata');
+}
+
 function testVegetationAttachesWithoutChangingRisk() {
     const base = EnvironmentAssembler.combineEnvironmentalData({
         airQualityData: airQualityResponse(),
@@ -408,6 +446,8 @@ function main() {
         testPartialSuccessRecalculatesRiskWithMold,
         testForecastMoldUsesMatchingDayHours,
         testNoDataReturnsNull,
+        testMissingCurrentReturnsNull,
+        testMissingForecastFallsBackToEmptyForecast,
         testVegetationAttachesWithoutChangingRisk,
         testStaleVegetationFallbackIsIndependent,
     ];

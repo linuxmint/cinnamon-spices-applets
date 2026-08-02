@@ -300,6 +300,19 @@ function vegetationResponse(overrides = {}) {
     };
 }
 
+function unavailableMoldPotential() {
+    return {
+        score: null,
+        category: null,
+        isAvailable: false,
+        dataCompleteness: 0,
+        components: {},
+        effectiveWeights: {},
+        missingComponents: ['relativeHumidity'],
+        explanationKey: 'mold-unavailable-weather',
+    };
+}
+
 function testCoordinateRoundTrip() {
     const directory = tempCacheDirectory('coordinates');
 
@@ -377,6 +390,42 @@ function testResponseRoundTrip() {
             'US pollutant AQI should round trip');
         assertEqual(envelope.data.current.pollutantAqiSource, 'european-aqi',
             'selected AQI source should round trip');
+    } finally {
+        removeDirectory(directory);
+    }
+}
+
+function testPartialResponseWithoutWeatherRoundTrip() {
+    const directory = tempCacheDirectory('partial-response-without-weather');
+
+    try {
+        const cache = Cache.createCache({
+            baseDirectory: directory,
+        });
+        const response = providerResponse();
+
+        response.weather = null;
+        response.weatherFetchedAt = null;
+        response.current.moldPotential = unavailableMoldPotential();
+
+        for (const day of response.forecast)
+            day.moldPotential = unavailableMoldPotential();
+
+        const result = writeResponse(cache, response);
+        const envelope = readResponse(cache);
+
+        assertEqual(result.ok, true,
+            'partial response with fresh air quality and missing weather should be cacheable');
+        assertNotNull(envelope,
+            'partial response should read back from cache');
+        assertEqual(envelope.data.weather, null,
+            'missing weather should round trip as null');
+        assertEqual(envelope.data.weatherFetchedAt, null,
+            'missing weather timestamp should round trip as null');
+        assertEqual(envelope.data.current.moldPotential.isAvailable, false,
+            'unavailable mold metadata should round trip');
+        assertEqual(envelope.data.current.readings.pm25, 4,
+            'fresh air-quality readings should remain cacheable without weather');
     } finally {
         removeDirectory(directory);
     }
@@ -843,6 +892,7 @@ function main() {
         testCoordinateRoundTrip,
         testInvalidCoordinatesDoNotReplaceCache,
         testResponseRoundTrip,
+        testPartialResponseWithoutWeatherRoundTrip,
         testPlaceRoundTrip,
         testVegetationRoundTrip,
         testVegetationKeyMismatchReturnsNull,

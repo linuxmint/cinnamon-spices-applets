@@ -87,6 +87,41 @@ const SOURCE_VARIABLES = Object.freeze([
 const OPTIONAL_SOURCE_VARIABLES = Object.freeze([
     'pm10_wildfires',
 ]);
+const UNITED_STATES_TIMEZONES = Object.freeze([
+    'America/Adak',
+    'America/Anchorage',
+    'America/Boise',
+    'America/Chicago',
+    'America/Denver',
+    'America/Detroit',
+    'America/Indiana/Indianapolis',
+    'America/Indiana/Knox',
+    'America/Indiana/Marengo',
+    'America/Indiana/Petersburg',
+    'America/Indiana/Tell_City',
+    'America/Indiana/Vevay',
+    'America/Indiana/Vincennes',
+    'America/Indiana/Winamac',
+    'America/Juneau',
+    'America/Kentucky/Louisville',
+    'America/Kentucky/Monticello',
+    'America/Los_Angeles',
+    'America/Menominee',
+    'America/Metlakatla',
+    'America/New_York',
+    'America/Nome',
+    'America/North_Dakota/Beulah',
+    'America/North_Dakota/Center',
+    'America/North_Dakota/New_Salem',
+    'America/Phoenix',
+    'America/Puerto_Rico',
+    'America/Sitka',
+    'America/Yakutat',
+    'Pacific/Guam',
+    'Pacific/Honolulu',
+    'Pacific/Pago_Pago',
+    'Pacific/Saipan',
+]);
 
 const CANONICAL_FIELDS = Object.freeze([
     'treePollen',
@@ -169,7 +204,12 @@ function _shouldRetryWithoutOptionalVariables(error, statusCode) {
     );
 }
 
-function _selectedAqiSourceFromCoordinates(latitude, longitude) {
+function _selectedAqiSourceFromCoordinates(latitude, longitude, timezone = null) {
+    if (typeof timezone === 'string' && timezone !== '')
+        return UNITED_STATES_TIMEZONES.indexOf(timezone) !== -1
+            ? 'us-aqi'
+            : 'european-aqi';
+
     if (!_isFiniteNumber(latitude) || !_isFiniteNumber(longitude))
         return 'european-aqi';
 
@@ -645,7 +685,8 @@ var parseOpenMeteoResponse = function(payload, options = {}) {
     const forecastDays = _normalizeForecastDays(options.forecastDays);
     const selectedAqiSource = _selectedAqiSourceFromCoordinates(
         payload.latitude,
-        payload.longitude
+        payload.longitude,
+        payload.timezone
     );
     const current = _parseCurrent(payload, selectedAqiSource);
 

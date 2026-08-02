@@ -15,6 +15,7 @@ AirAware reports environmental conditions only. It does not predict symptoms, di
 - Current conditions from Open-Meteo `current` fields with `timezone=auto`
 - Location-aware pollutant-specific AQI scoring
 - Six pollen types: alder, birch, grass, mugwort, olive, and ragweed
+- Pollen-aware scoring where Open-Meteo pollen data is available; outside pollen-covered regions the score uses available pollution, atmospheric, and Mold potential components
 - Weather-based Mold potential using humidity, leaf wetness, precipitation, temperature, dew point, and wind
 - UV index from Open-Meteo, optionally included in personalized scoring
 - Atmospheric irritant context from carbon monoxide, aerosol optical depth, dust, and optional wildfire-related PM10 where available
@@ -90,7 +91,7 @@ The AirAware score is an environmental burden index. It combines:
 - 10% atmospheric irritants
 - 15% Mold potential
 
-Pollen burden uses the highest available pollen burden instead of averaging unrelated pollen types. Regulated pollution uses the highest available pollutant-specific AQI among PM2.5, PM10, NO₂, O₃, and SO₂. AirAware uses US AQI for coordinates in the United States and European AQI elsewhere when available; if selected AQI values are unavailable, it falls back to raw-concentration burden scoring. Atmospheric irritants include CO, aerosol optical depth, dust, and optional wildfire-related PM10. Mold potential is inferred from humidity, leaf wetness, precipitation, temperature, dew point, and wind. Missing components are omitted and the remaining weights are renormalized. The score is not medical advice.
+Pollen burden uses the highest available pollen burden instead of averaging unrelated pollen types. Regulated pollution uses the highest available pollutant-specific AQI among PM2.5, PM10, NO₂, O₃, and SO₂. AirAware uses US AQI for United States timezones and European AQI elsewhere when available; if selected AQI values are unavailable, it falls back to raw-concentration burden scoring. Atmospheric irritants include CO, aerosol optical depth, dust, and optional wildfire-related PM10. Mold potential is inferred from humidity, leaf wetness, precipitation, temperature, dew point, and wind. Missing components are omitted and the remaining weights are renormalized. The score is not medical advice.
 
 Nearby vegetation context is displayed separately and does not modify the AirAware score.
 
@@ -165,7 +166,7 @@ used by Mold potential and UV index:
 
 https://open-meteo.com/en/docs
 
-Open-Meteo provides air quality, pollen, AQI, and weather forecast data without requiring an API key for normal public API usage. Availability varies by variable, region, model domain, and season. Pollen data is primarily available in Europe during pollen season.
+Open-Meteo provides air quality, pollen, AQI, and weather forecast data without requiring an API key for normal public API usage. Availability varies by variable, region, model domain, and season. Pollen data is primarily available in Europe during pollen season. Outside pollen-covered regions, AirAware omits unavailable pollen values and renormalizes the remaining score components.
 
 Data source attribution: Open-Meteo.com.
 
@@ -184,7 +185,7 @@ Vegetation and land-use data: OpenStreetMap contributors.
 
 ## Limitations
 
-- Pollen variables are primarily available in Europe during pollen season.
+- Pollen variables are primarily available in Europe during pollen season. Outside pollen-covered regions, the AirAware score may be based mostly on pollution, atmospheric irritants, and Mold potential.
 - Forecast quality depends on the upstream air quality and weather models and region.
 - Forecasts are model estimates, not exact local sensor readings.
 - The risk score is an environmental burden index specific to AirAware, not a medical, regulatory, or AQI claim.

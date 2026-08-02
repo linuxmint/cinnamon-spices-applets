@@ -318,6 +318,7 @@ function testUsCoordinatesSelectUsAqi() {
 
     payload.latitude = 39.76;
     payload.longitude = -104.99;
+    payload.timezone = 'America/Denver';
 
     const result = OpenMeteoProvider.parseOpenMeteoResponse(payload, {
         forecastDays: 2,
@@ -346,6 +347,7 @@ function testMexicoCoordinatesDoNotSelectUsAqi() {
 
     payload.latitude = 19.43;
     payload.longitude = -99.13;
+    payload.timezone = 'America/Mexico_City';
 
     const result = OpenMeteoProvider.parseOpenMeteoResponse(payload, {
         forecastDays: 1,
@@ -355,6 +357,25 @@ function testMexicoCoordinatesDoNotSelectUsAqi() {
         'Mexico coordinates should not automatically select US AQI');
     assertEqual(result.current.pollutantAqi.ozone, 42,
         'Mexico fallback should use European AQI when no local AQI is selected');
+}
+
+function testCanadaCoordinatesDoNotSelectUsAqi() {
+    const payload = normalPayload();
+
+    payload.latitude = 43.65;
+    payload.longitude = -79.38;
+    payload.timezone = 'America/Toronto';
+
+    const result = OpenMeteoProvider.parseOpenMeteoResponse(payload, {
+        forecastDays: 1,
+    });
+
+    assertEqual(result.pollutantAqiSource, 'european-aqi',
+        'Canada coordinates should not automatically select US AQI');
+    assertEqual(result.current.pollutantAqiLabel, 'EU AQI',
+        'Canada fallback should expose EU AQI label when no local AQI is selected');
+    assertEqual(result.current.pollutantAqi.ozone, 42,
+        'Canada fallback should use European AQI when no local AQI is selected');
 }
 
 function testMissingPollen() {
@@ -749,6 +770,7 @@ function main() {
         testNormalApiResponse,
         testUsCoordinatesSelectUsAqi,
         testMexicoCoordinatesDoNotSelectUsAqi,
+        testCanadaCoordinatesDoNotSelectUsAqi,
         testMissingPollen,
         testMissingAtmosphericIrritantsRemainPartial,
         testMalformedAtmosphericValuesNormalizeToNull,
