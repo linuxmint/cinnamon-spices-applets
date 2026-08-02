@@ -1,18 +1,18 @@
-const { DateTime } = imports.gi.GLib; // Preferred over JS's `Date` to take into account timezone changes during runtime.
-
-import * as mobx from '../../lib/mobx.js';
+import GLib from 'gi://GLib';
 
 import { compute_twilights } from '../../core/compute_twilights/compute_twilights.js';
 import { Time_of_day } from '../../core/Time_of_day.js';
+import * as mobx from '../../lib/mobx.js';
+
 
 /** @typedef {import('../../types.js').Location} Location */
 /** @typedef {import('../../types.js').Twilights} Twilights */
 
 export class Twilights_handler {
-    /** @private */ _date = DateTime.new_now_local(); // TODO: could be `null` if timezone is bad or missing?
+    /** @private */ _date = GLib.DateTime.new_now_local(); // TODO: could be `null` if timezone is bad or missing?
 
     update() {
-        this._date = DateTime.new_now_local(); // TODO: same as above
+        this._date = GLib.DateTime.new_now_local(); // TODO: same as above
     }
 
     /** @type {Location} */ location;

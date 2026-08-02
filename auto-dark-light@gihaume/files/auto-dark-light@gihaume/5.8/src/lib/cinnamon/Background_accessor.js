@@ -1,4 +1,4 @@
-const { Gio } = imports.gi;
+import Gio from 'gi://Gio';
 
 const settings = /** @type {const} */ ({
     background:  Gio.Settings.new('org.cinnamon.desktop.background'),

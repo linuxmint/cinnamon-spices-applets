@@ -1,11 +1,12 @@
 import * as system_time from '../../lib/gnome/system_time.js';
 import * as uSunCalc from './uSunCalc.js';
 
+/** @typedef {import('gi://GLib').default.DateTime} DateTime */
 /** @typedef {import('../../types.js').Location} Location */
 /** @typedef {import('../../types.js').Twilights} Twilights */
 
 /**
- * @param {imports.gi.GLib.DateTime} date
+ * @param {DateTime} date
  * @param {Location} location
  * @returns {Twilights}
  */

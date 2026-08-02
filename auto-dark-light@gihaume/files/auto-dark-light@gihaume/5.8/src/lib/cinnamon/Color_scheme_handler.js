@@ -1,4 +1,4 @@
-const { Gio } = imports.gi;
+import Gio from 'gi://Gio';
 
 /** @typedef {import('../../types.js').Color_scheme} Color_scheme */
 /** @typedef {import('../../types.js').Observer} Observer */

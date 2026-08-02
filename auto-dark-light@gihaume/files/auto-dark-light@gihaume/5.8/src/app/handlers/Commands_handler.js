@@ -4,8 +4,7 @@ import { launch_command } from '../launch_command.js';
 /** @typedef {import('../ui/Settings.js').Settings} Settings */
 
 export class Commands_handler {
-    /** @private @readonly @type {Settings} */
-    _settings;
+    /** @private @readonly @type {Settings} */ _settings;
 
     /**
      * @param {Applet} applet

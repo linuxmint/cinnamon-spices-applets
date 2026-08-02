@@ -1,4 +1,5 @@
-const { Gio, GLib } = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
 
 export class Error_timed_out_by_sigterm extends Error {};
 export class Error_timed_out_by_sigkill extends Error {};
@@ -36,7 +37,7 @@ export async function launch_command(
         process.communicate_utf8_async(null, null, (source, result) => {
             try {
                 const [_ok, stdout, stderr] =
-                    /** @type {imports.gi.Gio.Subprocess} */ (source)
+                    /** @type {Gio.Subprocess} */ (source)
                         .communicate_utf8_finish(result);
                 resolve([stdout, stderr]);
             } catch (error) {

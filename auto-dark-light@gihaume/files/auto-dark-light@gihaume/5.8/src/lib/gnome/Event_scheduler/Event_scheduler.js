@@ -1,7 +1,6 @@
-const { GLib } = imports.gi;
+import GLib from 'gi://GLib';
 
 import * as system_time from '../system_time.js';
-
 import { Timer_absolute } from './Timer_absolute.js';
 
 /** @typedef {import('../../../types').Disposable} Disposable */

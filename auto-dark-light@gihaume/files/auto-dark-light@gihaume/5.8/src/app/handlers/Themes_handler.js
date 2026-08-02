@@ -5,8 +5,7 @@ import { Themes_accessor as Themes } from '../../lib/cinnamon/Themes_accessor.js
 /** @typedef {import('../ui/Settings.js').Settings} Settings */
 
 export class Themes_handler {
-    /** @private @readonly @type {Settings} */
-    _settings;
+    /** @private @readonly @type {Settings} */ _settings;
 
     /**
      * @param {Applet} applet

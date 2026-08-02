@@ -1,4 +1,4 @@
-const { Gio } = imports.gi;
+import Gio from 'gi://Gio';
 
 const settings = /** @type {const} */ ({
     desktop:  Gio.Settings.new('org.cinnamon.desktop.interface'),

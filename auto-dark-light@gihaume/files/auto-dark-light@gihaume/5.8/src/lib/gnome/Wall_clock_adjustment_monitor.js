@@ -1,4 +1,4 @@
-const { GLib } = imports.gi;
+import GLib from 'gi://GLib';
 
 /** @typedef {import('../../types').Observer} Observer */
 

@@ -1,6 +1,4 @@
-const { GLib } = imports.gi;
-
-import * as mobx from '../lib/mobx.js';
+import GLib from 'gi://GLib';
 
 import { Time_of_day } from '../core/Time_of_day.js';
 import { _, logger, metadata } from '../globals.js';
@@ -9,6 +7,7 @@ import { Keybinding_handler } from '../lib/cinnamon/Keybinding_handler.js';
 import { Sleep_and_lock_handler } from '../lib/cinnamon/Sleep_and_lock_handler/index.js';
 import { Event_scheduler } from '../lib/gnome/Event_scheduler/index.js';
 import { Wall_clock_adjustment_monitor } from '../lib/gnome/Wall_clock_adjustment_monitor.js';
+import * as mobx from '../lib/mobx.js';
 import { sleep } from '../lib/utils.js';
 import { Appearance_handler } from './handlers/Appearance_handler.js';
 import { Background_handler } from './handlers/Background_handler.js';
@@ -17,16 +16,19 @@ import { Location_handler } from './handlers/Location_handler.js';
 import { Themes_handler } from './handlers/Themes_handler.js';
 import { Twilights_handler } from './handlers/Twilights_handler.js';
 
+/** @typedef {import('./ui/Applet.ts').Applet} Applet */
+/** @typedef {import('./ui/Settings.ts').Settings} Settings */
+/** @typedef {import('../types.ts').Disposable} Disposable */
 
 const DURATION_TO_AWAIT_BEFORE_UPDATING_DERIVED_SETTING = 2000; // milliseconds (ms)
 
 /**
- * @param {import('./ui/Applet.ts').Applet} applet
- * @param {import('./ui/Settings.ts').Settings} settings
+ * @param {Applet} applet
+ * @param {Settings} settings
  * @returns {void}
  */
 export function initialize(applet, settings) {
-    /** @type {import('../types.ts').Disposable[]} */ const disposables = [];
+    /** @type {Disposable[]} */ const disposables = [];
     applet.on_applet_removed_from_panel = () => {
         disposables.forEach(element => element.dispose());
         settings.finalize();

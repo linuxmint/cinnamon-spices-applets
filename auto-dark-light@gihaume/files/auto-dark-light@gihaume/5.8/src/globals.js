@@ -1,5 +1,6 @@
+import GLib from 'gi://GLib';
+
 const Gettext = imports.gettext;
-const { GLib } = imports.gi;
 const Main = imports.ui.main;
 const { St } = imports.gi;
 

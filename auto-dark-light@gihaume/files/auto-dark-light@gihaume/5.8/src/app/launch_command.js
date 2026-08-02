@@ -1,4 +1,4 @@
-const { GLib } = imports.gi;
+import GLib from 'gi://GLib';
 
 import { _, logger } from '../globals.js';
 import * as cmd_launching from '../lib/gnome/command_launching.js';

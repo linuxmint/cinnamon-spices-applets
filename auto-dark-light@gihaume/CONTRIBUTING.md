@@ -3,11 +3,9 @@
 <!-- TOC -->
 
 - [1. Dependencies](#1-dependencies)
-  - [1.1. Global](#11-global)
-  - [1.2. Local](#12-local)
-  - [1.3. Optional](#13-optional)
+  - [1.1. Optional](#11-optional)
 - [2. Conventions used](#2-conventions-used)
-  - [2.1. Files organization](#21-files-organization)
+  - [2.1. Source code files organization](#21-source-code-files-organization)
   - [2.2. Style](#22-style)
 - [3. Development workflow](#3-development-workflow)
 - [4. Unit testing](#4-unit-testing)
@@ -18,7 +16,7 @@
   - [6.1. Dependencies versions](#61-dependencies-versions)
   - [6.2. Node.js version](#62-nodejs-version)
 - [7. Documentation](#7-documentation)
-- [8. Linting for Python widgets (experimental)](#8-linting-for-python-widgets-experimental)
+- [8. Linting for Python GTK widgets (experimental)](#8-linting-for-python-gtk-widgets-experimental)
   - [8.1. Installation](#81-installation)
   - [8.2. Setting up in VS Code](#82-setting-up-in-vs-code)
 
@@ -26,55 +24,34 @@
 
 ## 1. Dependencies
 
-### 1.1. Global
-
 - [pnpm](https://pnpm.io/installation#on-posix-systems)
 
-### 1.2. Local
-
-- Install dependencies:
-  ```bash
-  pnpm i # shortcut for `pnpm install`
-  ```
-  - It needs to be done after each `git pull` that changes `pnpm-lock.yaml`.
-  - It creates a `node_modules` folder with symlinks to a global store, so:
-    - The global store can be pruned after the local `node_modules` folder has been deleted:
-      ```bash
-      pnpm store prune
-      ```
-    - Or to have the files installed in this folder instead of the global store, use exclusively:
-      ```bash
-      pnpm i --store-dir=.pnpm-store
-      ```
-
-### 1.3. Optional
+### 1.1. Optional
 
 - [Visual Studio Code](https://code.visualstudio.com)
   - With the extensions in [`.vscode/extensions.json`](./.vscode/extensions.json).
 - `poedit` for translation:
   - On Debian-based systems:
-    ```bash
+    ```shell
     sudo apt install poedit
     ```
 
 ## 2. Conventions used
 
-### 2.1. Files organization
+### 2.1. Source code files organization
 
-- `src`: source files
-  - `app`: application specifics
-    - `handlers`: features handlers
-    - `ui`: user interface bindings
-  - `core`: business logic
-  - `lib`: generic/reusable library
-    - `cinnamon`: Cinnamon desktop environment specifics
-    - `gnome`: GNOME desktop environment specifics
-- `files`: transpiled files to be used by the users
-- `doc`: applet development documentation
+In `files/**/src`:
+- `app`: application specifics
+  - `handlers`: features handlers
+  - `ui`: user interface bindings
+- `core`: business logic
+- `lib`: generic/reusable library
+  - `cinnamon`: Cinnamon desktop environment specifics
+  - `gnome`: GNOME desktop environment specifics
 
-Notes :
-- Nothing in `lib` depends on anything in `app`.
-- Some files in `sys` are not in TypeScript so they are more reusable and directly launchable by GnomeJS in order to test them.
+Hierarchy rule :
+- `core` can not depend on `app`,
+- `lib` can not depend on `app` and `core`.
 
 ### 2.2. Style
 
@@ -102,32 +79,27 @@ Notes :
 ## 3. Development workflow
 
 - Create a symbolic link pointing to this folder and add it in your user applets folder:
-  ```bash
+  ```shell
   ln -s \
       <path_to_this_folder>/files/auto-dark-light@gihaume \
       ~/.local/share/cinnamon/applets/auto-dark-light@gihaume
   ```
   - Alternatively, it can be created via GUI with the handy Cinnamon Spices' Action [`create-desktop-shortcut@anaximeno`](https://cinnamon-spices.linuxmint.com/actions/view/11).
-- Launch the continuous and incremental build of `applet.js` triggered on each source file save:
-  ```bash
-  pnpm dev
-  ```
-  - Modify source files in `src/` as wanted.
-  - Reset Cinnamon with `Ctrl`+`Alt`+`Esc` for loading and testing the applet's new version.
-    - Debug with:
-      - Looking Glass logs (`Alt`+`F2`, type `lg`, `Enter`),
-      - `~/.xsession-errors` logs file.
-  - Press `Ctrl`+`C` (`SIGINT`) to stop the continuous build.
+- Modify source files in `files/**/src` as wanted.
+- Reload the applet or reset Cinnamon with `Ctrl`+`Alt`+`Esc` and test the new version.
+  - Debug with:
+    - Looking Glass logs (`Alt`+`F2`, type `lg`, `Enter`),
+    - `~/.xsession-errors` logs file.
 
 ## 4. Unit testing
 
 ### 4.1. Core logic
 
 - Run all core logic automatic unit tests:
-  ```bash
+  ```shell
   pnpm test
   ```
-  - The VS Code extension [Vitest](vscode:extension/vitest.explorer) can also be used.
+  - The VS Code extension [Vitest](vscode:extension/vitest.explorer) can also be used instead for more convenience.
 
 ### 4.2. System/OS interfacing
 
@@ -137,17 +109,12 @@ Check `test *.js` files in various `tests` folders and run them manually accordi
 
 Before any commit:
 
-- All core logic automatic unit tests must pass.
+- Every core logic automatic unit test must pass.
 - If any system/OS interfacing has been modified, related manual tests must be performed again carefully.
-- It is advisable to build `applet.js` again in a single run with:
-  ```bash
-  pnpm build
-  ```
-  - then E2E test again if it made a diff.
 - The change has to be documented as an incremented version in `CHANGELOG.md` accordingly.
   - The version number has to be modified in `files/metadata.json` accordingly.
 - If some call to gettext `_("…")` has been added or modified, the following command must be run from the root of the cinnamon spices repository to update the `.pot` translation template file:
-  ```bash
+  ```shell
   ./cinnamon-spices-makepot auto-dark-light@gihaume
   ```
 
@@ -155,26 +122,26 @@ Before any commit:
 
 ### 6.1. Dependencies versions
 
-The dependencies versions are defined in `package.json`. They are updated individually using the Dependi extension.
+The dependencies versions are defined in `package.json`. They are carefully updated manually using the Dependi extension.
 
 ### 6.2. Node.js version
 
-The Node.js version is defined in `pnpm-workspace.yaml`. The chosen version is the LTS stated on the [Node.js website](https://nodejs.org).
+The chosen version in `package.json` is the LTS stated on the [Node.js website](https://nodejs.org).
 
 ## 7. Documentation
 
 Check [`doc/README.md`](./doc/README.md).
 
-## 8. Linting for Python widgets (experimental)
+## 8. Linting for Python GTK widgets (experimental)
 
 ### 8.1. Installation
 
 - Create environment:
-  ```sh
+  ```shell
   python -m venv .venv --system-site-packages
   ```
 - Install dependencies:
-  ```sh
+  ```shell
   ./.venv/bin/pip install -r requirements.txt
   ```
 

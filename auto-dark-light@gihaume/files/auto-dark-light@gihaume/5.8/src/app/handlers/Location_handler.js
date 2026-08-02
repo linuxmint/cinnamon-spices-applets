@@ -1,10 +1,9 @@
-const { GLib } = imports.gi;
-
-import * as mobx from '../../lib/mobx.js';
+import GLib from 'gi://GLib';
 
 import { Timezone_location_finder } from '../../core/Timezone_location_finder/Timezone_location_finder.js';
 import { metadata } from '../../globals.js';
 import { Timezone_change_listener } from '../../lib/gnome/Timezone_change_listener.js';
+import * as mobx from '../../lib/mobx.js';
 
 /** @typedef {import('../../types.js').Disposable} Disposable */
 /** @typedef {import('../../types.js').Location} Location */
