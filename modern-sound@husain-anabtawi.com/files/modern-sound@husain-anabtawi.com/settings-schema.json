@@ -7,5 +7,19 @@
         "type": "keybinding",
         "default": "<Shift><Super>s",
         "description": "Open menu"
+    },
+    "section-devices": {
+        "type": "section",
+        "description": "Devices"
+    },
+    "hideSingleOutputDevice": {
+        "type": "switch",
+        "default": false,
+        "description": "Hide output device when only one is available"
+    },
+    "hideSingleInputDevice": {
+        "type": "switch",
+        "default": false,
+        "description": "Hide input device when only one is available"
     }
 }

@@ -72,97 +72,97 @@
     -slider-handle-radius: 0.55em;
 }
 
-/* ── Output device ──────────────────────────────────────────── */
+/* ── Device picker (output / input) ─────────────────────────── */
 
-.modern-sound-output-item {
+.modern-sound-device-item {
     padding: 4px 16px 8px;
 }
 
-.modern-sound-output-item:hover,
-.modern-sound-output-item:focus {
+.modern-sound-device-item:hover,
+.modern-sound-device-item:focus {
     background-color: transparent;
 }
 
-.modern-sound-output-header {
+.modern-sound-device-header {
     spacing: 12px;
     padding: 8px 10px;
     border-radius: 10px;
 }
 
-.modern-sound-output-wrap {
+.modern-sound-device-wrap {
     width: 100%;
 }
 
-.modern-sound-output-labels {
+.modern-sound-device-labels {
     min-width: 0;
     max-width: 210px;
 }
 
-.modern-sound-output-name,
-.modern-sound-output-subtitle {
+.modern-sound-device-name,
+.modern-sound-device-subtitle {
     max-width: 210px;
 }
 
-.modern-sound-output-header:hover {
+.modern-sound-device-header:hover {
     background-color: rgba(138, 180, 248, 0.08);
 }
 
-.modern-sound-output-header-icon {
+.modern-sound-device-header-icon {
     icon-size: 18px;
     color: #e8eaed;
 }
 
-.modern-sound-output-name {
+.modern-sound-device-name {
     font-weight: 600;
     font-size: 0.95em;
     color: #e8eaed;
 }
 
-.modern-sound-output-subtitle {
+.modern-sound-device-subtitle {
     font-size: 0.78em;
     color: #9aa0a6;
 }
 
-.modern-sound-output-chevron {
+.modern-sound-device-chevron {
     icon-size: 14px;
     color: #9aa0a6;
 }
 
-.modern-sound-output-list {
+.modern-sound-device-list {
     padding: 4px 0 0 4px;
 }
 
-.modern-sound-output-row {
+.modern-sound-device-row {
     spacing: 10px;
     padding: 8px 10px;
     border-radius: 8px;
 }
 
-.modern-sound-output-row:hover {
+.modern-sound-device-row:hover {
     background-color: rgba(138, 180, 248, 0.1);
 }
 
-.modern-sound-output-row.active {
+.modern-sound-device-row.active {
     background-color: rgba(138, 180, 248, 0.14);
 }
 
-.modern-sound-output-radio,
-.modern-sound-output-check {
+.modern-sound-device-radio,
+.modern-sound-device-check {
     icon-size: 14px;
     color: #8ab4f8;
 }
 
-.modern-sound-output-row-icon {
+.modern-sound-device-row-icon {
     icon-size: 16px;
     color: #e8eaed;
 }
 
-.modern-sound-output-row-name {
+.modern-sound-device-row-name {
     font-weight: 500;
     color: #e8eaed;
 }
 
-.modern-sound-output-row-subtitle {
+.modern-sound-device-row-subtitle {
     font-size: 0.78em;
     color: #9aa0a6;
 }
