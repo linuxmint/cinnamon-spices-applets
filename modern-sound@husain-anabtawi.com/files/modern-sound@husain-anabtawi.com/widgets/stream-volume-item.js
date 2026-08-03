@@ -4,7 +4,7 @@ const Slider = imports.ui.slider;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 
-const { MUTE_THRESHOLD } = require("./utils/volume-math");
+const { MUTE_THRESHOLD, snapVolumeToNorm, volumePercent } = require("./utils/volume-math");
 const { volumeIconName, micIconName } = require("./utils/volume-icon-resolver");
 
 const LEVEL_SLIDER_WIDTH = 140;
@@ -125,6 +125,14 @@ class StreamVolumeItem extends PopupMenu.PopupBaseMenuItem {
         return this._applet._volumeNorm;
     }
 
+    _streamVolumeMax(norm) {
+        return this._stream.volume_max || norm;
+    }
+
+    _sliderRatio(volume, max) {
+        return Math.min(1, volume / max);
+    }
+
     _setSliderValue(value) {
         this._updating = true;
         this._slider.setValue(value);
@@ -136,10 +144,10 @@ class StreamVolumeItem extends PopupMenu.PopupBaseMenuItem {
             return;
 
         const norm = this._volumeNorm() || 1;
-        const max = this._stream.volume_max || norm;
+        const max = this._streamVolumeMax(norm);
         const volume = this._stream.is_muted ? 0 : this._stream.volume;
-        const ratio = Math.min(1, volume / max);
-        const percent = Math.round((volume / norm) * 100) || 0;
+        const ratio = this._sliderRatio(volume, max);
+        const percent = volumePercent(volume, norm, this._stream.is_muted);
 
         this._setSliderValue(ratio);
         this._percentLabel.text = `${percent}%`;
@@ -152,10 +160,10 @@ class StreamVolumeItem extends PopupMenu.PopupBaseMenuItem {
             return;
 
         const norm = this._volumeNorm() || 1;
-        const max = this._stream.volume_max || norm;
-        const volume = value * max;
+        const max = this._streamVolumeMax(norm);
+        const volume = snapVolumeToNorm(value * max, norm);
         const muted = value < MUTE_THRESHOLD;
-        const percent = Math.round((volume / norm) * 100) || 0;
+        const percent = volumePercent(volume, norm, muted);
 
         this._stream.volume = volume;
         this._stream.push_volume();
@@ -184,6 +192,14 @@ class MasterVolumeItem extends StreamVolumeItem {
 
     _actorStyleClasses() {
         return ["modern-sound-level-item"];
+    }
+
+    _streamVolumeMax(norm) {
+        return this._applet._masterVolumeMax || norm;
+    }
+
+    _sliderRatio(volume, max) {
+        return volume / max;
     }
 
     _updateVolumeDisplay(ratio, muted) {
