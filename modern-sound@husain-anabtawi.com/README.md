@@ -9,7 +9,6 @@ A modern Cinnamon panel sound applet — compact by default, expandable when nee
 3. Search for **Modern Sound** and install
 4. Add it to your panel
 
-After updating, reload Cinnamon: **Alt+F2** → type `r` → Enter
 
 ## Using the applet
 
