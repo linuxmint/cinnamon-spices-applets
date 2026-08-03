@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-06-30 17:25+0200\n"
-"PO-Revision-Date: 2026-05-18 17:22+0200\n"
+"PO-Revision-Date: 2026-08-03 08:48+0200\n"
 "Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
@@ -362,20 +362,19 @@ msgstr "Delt"
 
 #. 5.6/applet.js:2136 5.6/applet.js:2177
 msgid "ZRAM"
-msgstr ""
+msgstr "ZRAM"
 
 #. 5.6/applet.js:2184
-#, fuzzy
 msgid "Disk size"
-msgstr "Diske"
+msgstr "Diskstørrelse"
 
 #. 5.6/applet.js:2185
 msgid "Data"
-msgstr ""
+msgstr "Data"
 
 #. 5.6/applet.js:2186
 msgid "Compressed"
-msgstr ""
+msgstr "Komprimeret"
 
 #. 5.6/applet.js:2242
 msgid "CPUs"
@@ -650,7 +649,7 @@ msgstr "Baggrundsfarve"
 
 #. 5.6->settings-schema.json->quickTooltip->description
 msgid "Show the tooltip immediately"
-msgstr ""
+msgstr "Vis værktøjstippet med det samme"
 
 #. 5.6->settings-schema.json->percentAtEndOfLine->description
 msgid "Place % at the very end of the line"
@@ -1187,7 +1186,7 @@ msgstr "Aktivér swap-værktøjstip"
 
 #. 5.6->settings-schema.json->Swap_enabledZramTooltip->description
 msgid "Enable ZRAM Tooltip (only shown if /dev/zram0 exists)"
-msgstr ""
+msgstr "Aktivér værktøjstip for ZRAM (vises kun, hvis /dev/zram0 findes)"
 
 #. 5.6->settings-schema.json->Mem_chartType->description
 msgid "Chart Type"
@@ -1218,10 +1217,9 @@ msgid "Origin at 12 o'clock"
 msgstr "Start ved klokken 12-position"
 
 #. 5.6->settings-schema.json->Mem_showAmountsInTooltip->description
-#, fuzzy
 msgid "Show Memory/Swap byte amounts (Total, Used, Available) in the tooltip"
 msgstr ""
-"Vis mængden (i byte) af den samlede, anvendte og ledige hukommelse i "
+"Vis mængden (i byte) af hukommelse/swap (Samlet, Anvendt, Tilgængelig) i "
 "værktøjstippet"
 
 #. 5.6->settings-schema.json->Mem_showBytesInTooltip->description
@@ -1229,6 +1227,8 @@ msgid ""
 "Tooltip Memory/Swap amounts: ON = SI units (kB, MB, GB); OFF = IEC binary "
 "units (KiB, MiB, GiB)"
 msgstr ""
+"Hukommelse/swap i værktøjstip: TIL = SI-enheder (kB, MB, GB); FRA = IEC "
+"binære enheder (KiB, MiB, GIB)"
 
 #. 5.6->settings-schema.json->Mem_value_display->description
 msgid "Display memory usage percentage"
@@ -1304,9 +1304,8 @@ msgid "25%, left side"
 msgstr "25 %, venstre side"
 
 #. 5.6->settings-schema.json->Mem_swapWidth->options
-#, fuzzy
 msgid "50%, left side"
-msgstr "25 %, venstre side"
+msgstr "50 %, venstre side"
 
 #. 5.6->settings-schema.json->Mem_swapWidth->tooltip
 msgid ""
@@ -1554,7 +1553,7 @@ msgstr "Ingen belastning"
 #. 5.6->settings-schema.json->Net_total1decimal->description
 #. 5.6->settings-schema.json->Disk_speed1decimal->description
 msgid "Show 1 decimal"
-msgstr ""
+msgstr "Vis 1 decimal"
 
 #. 5.6->settings-schema.json->color0->description
 msgid "Color #0"
