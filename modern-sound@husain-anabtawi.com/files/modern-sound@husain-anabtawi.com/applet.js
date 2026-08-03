@@ -5,7 +5,9 @@ const Main = imports.ui.main;
 const Util = imports.misc.util;
 const Cvc = imports.gi.Cvc;
 
+const { volumePercent } = require("./utils/volume-math");
 const { connectIconScrollHandler } = require("./handlers/on-icon-scroll-handler");
+const { connectOveramplificationHandler } = require("./handlers/on-overamplification-change");
 const { MasterVolumeItem, MicVolumeItem } = require("./widgets/stream-volume-item");
 const { InputDeviceItem, OutputDeviceItem } = require("./widgets/device-picker-item");
 const { ApplicationsItem } = require("./widgets/applications-item");
@@ -53,6 +55,8 @@ class ModernSoundApplet extends Applet.IconApplet {
         this._masterVolume = new MasterVolumeItem(this);
         this._menu.addMenuItem(this._masterVolume);
 
+        connectOveramplificationHandler(this);
+
         this._micVolume = new MicVolumeItem(this);
         this._menu.addMenuItem(this._micVolume);
 
@@ -86,7 +90,7 @@ class ModernSoundApplet extends Applet.IconApplet {
         this._setKeybinding();
         connectIconScrollHandler(this);
         this.set_applet_icon_symbolic_name("audio-volume-high-symbolic");
-        this.set_applet_tooltip(_("Sound"));
+        this._updatePanelIcon();
         global.log("[modern-sound] applet initialized");
     }
 
@@ -164,13 +168,15 @@ class ModernSoundApplet extends Applet.IconApplet {
     _updatePanelIcon() {
         if (!this._output) {
             this.set_applet_icon_symbolic_name("audio-volume-muted-symbolic");
+            this.set_applet_tooltip(`${_("Volume")}: 0%`);
             return;
         }
 
         const norm = this._volumeNorm || 1;
-        const max = this._output.volume_max || norm;
+        const max = this._masterVolumeMax;
         const volume = this._output.is_muted ? 0 : this._output.volume;
         const ratio = volume / max;
+        const percent = volumePercent(this._output.volume, norm, this._output.is_muted);
 
         let icon = "audio-volume-muted-symbolic";
         if (!this._output.is_muted) {
@@ -183,6 +189,7 @@ class ModernSoundApplet extends Applet.IconApplet {
         }
 
         this.set_applet_icon_symbolic_name(icon);
+        this.set_applet_tooltip(`${_("Volume")}: ${percent}%`);
     }
 
     _setKeybinding() {

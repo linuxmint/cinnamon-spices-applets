@@ -2,6 +2,15 @@
 
 Release notes for **Modern Sound**.
 
+## [1.2.0] — 2026-08-03
+
+### Added
+
+- **Overamplification Reflection** — when **Overamplification is enabled** in Sound settings, master volume can go up to 150% (menu slider and panel scroll).
+- **Volume tooltip** — hover the panel icon to see the current level (e.g. `Volume: 78%`).
+
+---
+
 ## [1.1.0] — 2026-08-02
 
 ### Added

@@ -4,7 +4,7 @@ const Clutter = imports.gi.Clutter;
 const { adjustStreamVolume } = require("./utils/volume-math");
 
 function adjustMasterVolume(applet, deltaSteps) {
-    if (!adjustStreamVolume(applet._output, applet._volumeNorm, deltaSteps))
+    if (!adjustStreamVolume(applet._output, applet._volumeNorm, deltaSteps, applet._masterVolumeMax))
         return false;
 
     if (Main.soundManager)
