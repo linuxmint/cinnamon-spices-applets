@@ -366,6 +366,7 @@ var buildRequestUrl = function(coordinates, options = {}) {
         daily: DAILY_VARIABLES.join(','),
         forecast_days: forecastDays,
         timezone,
+        wind_speed_unit: 'ms',
     });
 
     return `${options.baseUrl || API_BASE_URL}?${query}`;

@@ -198,6 +198,8 @@ function testBuildRequestUrl() {
         'request URL should include daily leaf wetness');
     assertTrue(url.indexOf('timezone=auto') !== -1,
         'request URL should use automatic timezone by default');
+    assertTrue(url.indexOf('wind_speed_unit=ms') !== -1,
+        'request URL should request wind speed in m/s');
 }
 
 function testNormalApiResponse() {
