@@ -5,11 +5,11 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
+"Project-Id-Version: notifications-enhanced@hilyxx 1.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-07-14 23:36+0200\n"
-"PO-Revision-Date: 2024-07-14 04:06+0200\n"
+"POT-Creation-Date: 2026-08-04 01:50+0200\n"
+"PO-Revision-Date: 2026-08-04 01:57+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -17,67 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:43
+msgid "Notifications applet conflict"
+msgstr "Conflicte amb la miniaplicació de notificacions"
 
 #. applet.js:44
-#, fuzzy
-msgid "Notifications applet conflict"
-msgstr "Notificacions desactivades"
-
-#. applet.js:45
 msgid ""
 "Conflict detected: notifications@cinnamon.org is active.\n"
 "Remove it and restart Cinnamon before using Notifications-Enhanced applet."
 msgstr ""
+"S'ha detectat un conflicte: «notifications@cinnamon.org» està actiu.\n"
+"Elimina'l i reinicia Cinnamon abans d'utilitzar la miniaplicació "
+"Notifications-Enhanced."
 
-#. applet.js:136
+#. applet.js:164
 msgid "Do not disturb"
 msgstr "No molestar"
 
-#. applet.js:142
+#. applet.js:170
 msgid "No notifications"
 msgstr "No hi ha notificacions"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:150
+#. applet.js:178
 msgid "Clear notifications"
 msgstr "Netejar notificacions"
 
-#. applet.js:173
+#. applet.js:193
 msgid "Enable notifications"
 msgstr "Activar notificacions"
 
-#. applet.js:184
+#. applet.js:204
 msgid "Notification Settings"
 msgstr "Configuració de notificacions"
 
-#. applet.js:275 applet.js:479
+#. applet.js:327 applet.js:558
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d notificació"
 msgstr[1] "%d notificacions"
 
-#. applet.js:311
+#. applet.js:364
 msgid "Notifications"
 msgstr "Notificacions"
 
-#. applet.js:324
+#. applet.js:377
 msgid "Notifications disabled"
 msgstr "Notificacions desactivades"
 
-#. applet.js:495
+#. applet.js:574
 msgid "just now"
 msgstr "ara mateix"
 
-#. applet.js:498
+#. applet.js:577
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "fa %d segon"
 msgstr[1] "fa %d segons"
 
-#. applet.js:502
+#. applet.js:581
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -113,19 +115,21 @@ msgstr "Visualització"
 msgid "Show the number of notifications"
 msgstr "Mostrar el número de notificacions"
 
+#. settings-schema.json->showNewestFirst->description
+msgid "Show newest notifications first"
+msgstr "Mostra primer les notificacions més recents"
+
 #. settings-schema.json->showEmptyTray->description
-#, fuzzy
 msgid "Show notification tray"
-msgstr "Mostrar notificacions"
+msgstr "Mostra la safata de notificacions"
 
 #. settings-schema.json->showEmptyTray->tooltip
-#, fuzzy
 msgid "Check this to always show the notification tray."
-msgstr "Marqueu això per ignorar les notificacions transitòries."
+msgstr "Marca aquesta opció per mostrar sempre la safata de notificacions."
 
 #. settings-schema.json->showDisturbIcon->description
 msgid "Always show 'Do Not Disturb' icon"
-msgstr ""
+msgstr "Mostra sempre la icona de «No molestis»"
 
 #. settings-schema.json->showDisturbIcon->tooltip
 #, fuzzy
@@ -159,9 +163,8 @@ msgid "Set keybinding(s) to clear all notifications."
 msgstr "Assigneu les dreceres del teclat per netejar totes les notificacions."
 
 #. settings-schema.json->keyMute->description
-#, fuzzy
 msgid "Enable or disable notifications"
-msgstr "Activar notificacions"
+msgstr "Activa o desactiva les notificacions"
 
 #. settings-schema.json->keyMute->tooltip
 #, fuzzy

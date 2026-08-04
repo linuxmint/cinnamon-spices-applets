@@ -1,7 +1,5 @@
 const Applet = imports.ui.applet;
-const Lang = imports.lang;
 const Main = imports.ui.main;
-const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const PopupMenu = imports.ui.popupMenu;
@@ -13,11 +11,12 @@ const MessageTray = imports.ui.messageTray;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
 const Util = imports.misc.util;
+const SignalManager = imports.misc.signalManager;
 
 const PANEL_EDIT_MODE_KEY = "panel-edit-mode";
 
 const UUID = "notifications-enhanced@hilyxx";
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -63,38 +62,55 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this.settings.bind("keyMute", "keyMute", this._setKeybinding);
         this.settings.bind("showNotificationCount", "showNotificationCount", this.update_list);
         this.settings.bind("showNotificationSettings", "showNotificationSettings", this._show_settings_action);
+        this.settings.bind("showNewestFirst", "showNewestFirst", this.update_list);
         this._setKeybinding();
 
         this.notif_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.notifications" });
-        this.notif_settings.connect('changed::display-notifications', () => {
-        this.set_icon_status(this.notif_settings.get_boolean("display-notifications"));
-        });        
+        this._iconSignalId = this.notif_settings.connect('changed::display-notifications', () => {
+            this.set_icon_status();
+        });       
 
         // Layout
         this._orientation = orientation;
         this.menuManager = new PopupMenu.PopupMenuManager(this);
+        this.menu = new Applet.AppletPopupMenu(this, orientation);
+        this.menuManager.addMenu(this.menu);
 
         // Lists
         this.notifications = [];    // The list of notifications, in order from oldest to newest.
 
         // Events
-        Main.messageTray.connect('notify-applet-update', Lang.bind(this, this._notification_added));
-        global.settings.connect('changed::' + PANEL_EDIT_MODE_KEY, Lang.bind(this, this._on_panel_edit_mode_changed));
+        this.signals = new SignalManager.SignalManager(null);
+        this.signals.connect(Main.messageTray, 'notify-applet-update', this._notification_added.bind(this));
+        this.signals.connect(global.settings, 'changed::' + PANEL_EDIT_MODE_KEY, this._on_panel_edit_mode_changed.bind(this));
 
         // States
         this._blinking = false;
         this._blink_toggle = false;
         this._normal_blinking = false;
         this._normal_blink_toggle = false;
+
+        this._display();
     }
 
     _setKeybinding() {
-        Main.keybindingManager.addHotKey("notification-open-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
-        Main.keybindingManager.addHotKey("notification-clear-" + this.instance_id, this.keyClear, Lang.bind(this, this._clear_all));
-        Main.keybindingManager.addHotKey("notification-mute-" + this.instance_id, this.keyMute, Lang.bind(this, this.mute_notifications));
+        Main.keybindingManager.addHotKey("notification-open-" + this.instance_id, this.keyOpen, this._openMenu.bind(this));
+        Main.keybindingManager.addHotKey("notification-clear-" + this.instance_id, this.keyClear, this._clear_all.bind(this));
+        Main.keybindingManager.addHotKey("notification-mute-" + this.instance_id, this.keyMute, this.mute_notifications.bind(this));
     }
 
     on_applet_removed_from_panel () {
+        this._is_destroyed = true;
+
+        // Cleanly disconnect Gio.Settings signals
+        if (this._iconSignalId) {
+            this.notif_settings.disconnect(this._iconSignalId);
+        }
+
+        if (this._switchSignalId) {
+            this.notif_settings.disconnect(this._switchSignalId);
+        }
+
         Main.keybindingManager.removeHotKey("notification-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("notification-clear-" + this.instance_id);
         Main.keybindingManager.removeHotKey("notification-mute-" + this.instance_id);
@@ -111,6 +127,18 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         // Only used in cinnamon 6.6 and later
         if (MessageTray.extensionsHandlingNotifications !== undefined) {
             MessageTray.extensionsHandlingNotifications--;
+        }
+
+        this.signals.disconnectAllSignals();
+        this.settings.finalize();
+
+        let icons = [this._crit_icon, this._alt_crit_icon, this._new_icon, this._alt_new_icon];
+        for (let icon of icons) {
+            if (icon) {
+                try {
+                    icon.destroy();
+                } catch (e) {}
+            }
         }
     }
 
@@ -148,43 +176,35 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this.clear_separator = new PopupMenu.PopupSeparatorMenuItem();
 
         this.clear_action = new PopupMenu.PopupMenuItem(_("Clear notifications"));
-        this.clear_action.connect('activate', Lang.bind(this, this._clear_all));
+        this.clear_action.connect('activate', this._clear_all.bind(this));
         this.clear_action.actor.hide();
 
-        if (this._orientation == St.Side.BOTTOM) {
-            this.menu.addMenuItem(this.menu_label);
-            this.menu.addMenuItem(this.notDisturb_label);
-            this.menu.addMenuItem(this.noNotif_label);
-            this.menu.addActor(this._maincontainer);
-            this.menu.addMenuItem(this.clear_separator);
-            this.menu.addMenuItem(this.clear_action);
-        } else {
-            this.menu.addMenuItem(this.clear_action);
-            this.menu.addMenuItem(this.clear_separator);
-            this.menu.addMenuItem(this.notDisturb_label);
-            this.menu.addMenuItem(this.noNotif_label);
-            this.menu.addMenuItem(this.menu_label);
-            this.menu.addActor(this._maincontainer);
-        }
+        this.menu.addMenuItem(this.clear_action);
+        this.menu.addMenuItem(this.clear_separator);
+        this.menu.addMenuItem(this.notDisturb_label);
+        this.menu.addMenuItem(this.noNotif_label);
+        this.menu.addMenuItem(this.menu_label);
+        this.menu.addActor(this._maincontainer);
 
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this.bottom_separator = new PopupMenu.PopupSeparatorMenuItem();
+        this.menu.addMenuItem(this.bottom_separator);
 
         // Setup the notification switch
         this.notificationsSwitch = new PopupMenu.PopupSwitchMenuItem(_("Enable notifications"), this._toggleNotifications);
-        this.notif_settings.connect('changed::display-notifications', () => {
-        this.notificationsSwitch.setToggleState(this.notif_settings.get_boolean("display-notifications"));
+        this._switchSignalId = this.notif_settings.connect('changed::display-notifications', () => {
+            this.notificationsSwitch.setToggleState(this.notif_settings.get_boolean("display-notifications"));
         });
-        this.notificationsSwitch.connect('toggled', Lang.bind(this, function() {
+        this.notificationsSwitch.connect('toggled', () => {
         this.notif_settings.set_boolean("display-notifications", this.notificationsSwitch.state);
-        }));
+        });
         this.notificationsSwitch.setToggleState(this.notif_settings.get_boolean("display-notifications"));
         this.menu.addMenuItem(this.notificationsSwitch);
 
         // Notification Settings menu item
         this.item_action = new PopupMenu.PopupMenuItem(_("Notification Settings"));
-        this.item_action.connect('activate', Lang.bind(this, function() {
+        this.item_action.connect('activate', () => {
             Util.spawnCommandLine("cinnamon-settings notifications");
-        }));
+        });
         this.menu.addMenuItem(this.item_action);
         this._show_settings_action();
 
@@ -196,12 +216,12 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this.scrollview.set_clip_to_allocation(true);
 
         let vscroll = this.scrollview.get_vscroll_bar();
-        vscroll.connect('scroll-start', Lang.bind(this, function() {
+        vscroll.connect('scroll-start', () => {
             this.menu.passEvents = true;
-        }));
-        vscroll.connect('scroll-stop', Lang.bind(this, function() {
+        });
+        vscroll.connect('scroll-stop', () => {
             this.menu.passEvents = false;
-        }));
+        });
 
         // Alternative tray icons.
         this._crit_icon = new St.Icon({icon_name: 'critical-notif', icon_type: St.IconType.SYMBOLIC, reactive: true, track_hover: true, style_class: 'system-status-icon' });
@@ -211,6 +231,36 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
 
         this._on_panel_edit_mode_changed();
 
+    }
+
+    _arrangeDisplay() {
+        // Remove menu actors so we can put them back in a different order
+        this.menu.box.remove_all_children();
+
+        if (this._orientation == St.Side.BOTTOM) {
+            this.menu.addActor(this.menu_label.actor);
+            this.menu.addActor(this.notDisturb_label.actor);
+            this.menu.addActor(this.noNotif_label.actor);
+            this.menu.addActor(this._maincontainer);
+            this.menu.addActor(this.clear_separator.actor);
+            this.menu.addActor(this.clear_action.actor);
+        } else {
+            this.menu.addActor(this.clear_action.actor);
+            this.menu.addActor(this.clear_separator.actor);
+            this.menu.addActor(this.notDisturb_label.actor);
+            this.menu.addActor(this.noNotif_label.actor);
+            this.menu.addActor(this.menu_label.actor);
+            this.menu.addActor(this._maincontainer);
+        }
+
+        this.menu.addActor(this.bottom_separator.actor);
+        
+        this.menu.addActor(this.notificationsSwitch.actor);
+        this.menu.addActor(this.item_action.actor);
+
+        this._show_settings_action();
+        
+        this.update_list();
     }
 
     _notification_added (mtray, notification) { // Notification event handler.
@@ -264,6 +314,8 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
     }
 
     update_list () { // Update interface
+        if (this._is_destroyed) return;
+
         try {
             let count = this.notifications.length;
             if (count > 0) {    // There are notifications.
@@ -274,6 +326,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
                 this.noNotif_label.actor.hide();
                 this.set_applet_tooltip(ngettext("%d notification", "%d notifications", count).format(count));
                 this.set_applet_label(count.toString());
+                this._reorderNotifications();
                 // Find max urgency and derive list icon.
                 let max_urgency = -1;
                 for (let i = 0; i < count; i++) {
@@ -363,6 +416,25 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this.update_list();
     }
 
+    _reorderNotifications() {
+        let orderedNotifications = this.notifications.slice();
+
+        if (this.showNewestFirst) {
+            orderedNotifications.reverse();
+        }
+
+        // Remove all children without destroying them.
+        let children = this._notificationbin.get_children();
+        for (let i = 0; i < children.length; i++) {
+            this._notificationbin.remove_child(children[i]);
+        }
+
+        // Add them back in desired order.
+        for (let i = 0; i < orderedNotifications.length; i++) {
+            this._notificationbin.add_child(orderedNotifications[i].actor);
+        }
+    }
+
     _show_settings_action() {  // Show or hide notification settings menu item
         if (this.showNotificationSettings) {
             this.item_action.actor.show();
@@ -400,12 +472,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
     on_orientation_changed (orientation) {
         this._orientation = orientation;
 
-        if (this.menu) {
-            this.menu.destroy();
-        }
-        this.menu = new Applet.AppletPopupMenu(this, orientation);
-        this.menuManager.addMenu(this.menu);
-        this._display();
+        this._arrangeDisplay();
     }
 
     on_applet_clicked(event) {
@@ -418,7 +485,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
     }
 
     mute_notifications() {
-        this.notificationsSwitch.toggle();
+        this._toggleNotifications();
     }
 
     set_icon_status() {  // Updates the icon state based on notification settings
@@ -441,6 +508,8 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
     }
 
     critical_blink() {
+        if (this._is_destroyed) return;
+
         if (!this._blinking) {
             if (this._blinkTimeout) {
                 Mainloop.source_remove(this._blinkTimeout);
@@ -458,15 +527,24 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this._blinkTimeout = Mainloop.timeout_add_seconds(1, () => this.critical_blink());
     }
 
-    normal_blink () {
-        if (!this._normal_blinking)
+    normal_blink() {
+        if (this._is_destroyed) return;
+
+        if (!this._normal_blinking) {
+            if (this._normalBlinkTimeout) {
+                Mainloop.source_remove(this._normalBlinkTimeout);
+                this._normalBlinkTimeout = null;
+            }
             return;
+        }
+
         if (this._normal_blink_toggle) {
             this._applet_icon_box.child = this._new_icon;
         } else {
             this._applet_icon_box.child = this._alt_new_icon;
         }
         this._normal_blink_toggle = !this._normal_blink_toggle;
+
         this._normalBlinkTimeout = Mainloop.timeout_add_seconds(1, () => this.normal_blink());
     }
 }
