@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
+"Project-Id-Version: notifications-enhanced@hilyxx 1.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-07-14 23:36+0200\n"
-"PO-Revision-Date: 2025-05-18 13:52+0200\n"
+"POT-Creation-Date: 2026-08-04 01:50+0200\n"
+"PO-Revision-Date: 2026-08-04 02:03+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -16,67 +16,70 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.6\n"
 
-#. applet.js:44
+#. applet.js:43
 #, fuzzy
 msgid "Notifications applet conflict"
 msgstr "Ilmoitukset pois"
 
-#. applet.js:45
+#. applet.js:44
 msgid ""
 "Conflict detected: notifications@cinnamon.org is active.\n"
 "Remove it and restart Cinnamon before using Notifications-Enhanced applet."
 msgstr ""
+"Ristiriita havaittu: notifications@cinnamon.org on aktiivinen.\n"
+"Poista se ja käynnistä Cinnamon uudelleen ennen kuin käytät Notifications-"
+"Enhanced-sovelmaa."
 
-#. applet.js:136
+#. applet.js:164
 msgid "Do not disturb"
 msgstr "Älä häiritse"
 
-#. applet.js:142
+#. applet.js:170
 msgid "No notifications"
 msgstr "Ei ilmoituksia"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:150
+#. applet.js:178
 msgid "Clear notifications"
 msgstr "Tyhjennä ilmoitukset"
 
-#. applet.js:173
+#. applet.js:193
 msgid "Enable notifications"
 msgstr "Näytä ilmoitukset"
 
-#. applet.js:184
+#. applet.js:204
 msgid "Notification Settings"
 msgstr "Ilmoitusten asetukset"
 
-#. applet.js:275 applet.js:479
+#. applet.js:327 applet.js:558
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d ilmoitus"
 msgstr[1] "%d ilmoitusta"
 
-#. applet.js:311
+#. applet.js:364
 msgid "Notifications"
 msgstr "Ilmoitukset"
 
-#. applet.js:324
+#. applet.js:377
 msgid "Notifications disabled"
 msgstr "Ilmoitukset pois"
 
-#. applet.js:495
+#. applet.js:574
 msgid "just now"
 msgstr "juuri nyt"
 
-#. applet.js:498
+#. applet.js:577
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d sekunti sitten"
 msgstr[1] "%d sekuntia sitten"
 
-#. applet.js:502
+#. applet.js:581
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -112,10 +115,13 @@ msgstr "Näyttö"
 msgid "Show the number of notifications"
 msgstr "Näytä ilmoitusten määrä"
 
+#. settings-schema.json->showNewestFirst->description
+msgid "Show newest notifications first"
+msgstr "Näytä uusimmat ilmoitukset ensin"
+
 #. settings-schema.json->showEmptyTray->description
-#, fuzzy
 msgid "Show notification tray"
-msgstr "Näytä ilmoitukset"
+msgstr "Näytä ilmoitusalue"
 
 #. settings-schema.json->showEmptyTray->tooltip
 #, fuzzy
@@ -124,7 +130,7 @@ msgstr "Jätä ohimenevät ilmoitukset huomiotta valitsemalla tämä."
 
 #. settings-schema.json->showDisturbIcon->description
 msgid "Always show 'Do Not Disturb' icon"
-msgstr ""
+msgstr "Näytä Älä häiritse -kuvake aina"
 
 #. settings-schema.json->showDisturbIcon->tooltip
 #, fuzzy
