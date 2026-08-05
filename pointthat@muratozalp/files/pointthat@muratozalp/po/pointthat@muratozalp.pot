@@ -1,0 +1,66 @@
+# POINTTHAT (MOUSE BEAM)
+# This file is put in the public domain.
+# ozalpmurat, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pointthat@muratozalp 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-05 09:20+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:30 applet.js:107
+msgid "Mouse Beam: Off"
+msgstr ""
+
+#. applet.js:80
+msgid "Mouse Beam: On"
+msgstr ""
+
+#. metadata.json->name
+msgid "PointThat (Mouse Beam)"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Draws beams around the mouse cursor. Useful while teaching, presenting or "
+"recording your screen."
+msgstr ""
+
+#. settings-schema.json->general->description
+msgid "Beam Effect Settings"
+msgstr ""
+
+#. settings-schema.json->rayColor->description
+msgid "Beam color"
+msgstr ""
+
+#. settings-schema.json->rayCount->description
+msgid "Number of beams"
+msgstr ""
+
+#. settings-schema.json->rayLength->description
+msgid "Beam length"
+msgstr ""
+
+#. settings-schema.json->rayLength->units
+#. settings-schema.json->gap->units
+#. settings-schema.json->lineWidth->units
+msgid "px"
+msgstr ""
+
+#. settings-schema.json->gap->description
+msgid "Center gap"
+msgstr ""
+
+#. settings-schema.json->lineWidth->description
+msgid "Beam thickness"
+msgstr ""
