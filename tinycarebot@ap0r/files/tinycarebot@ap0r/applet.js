@@ -1,6 +1,7 @@
 const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
 const Gio = imports.gi.Gio;
+const Lang = imports.lang;
 
 function MyApplet(metadata, orientation, panelHeight, instanceId) {
     this._init(metadata, orientation, panelHeight, instanceId);
@@ -12,36 +13,49 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panelHeight, instanceId) {
         Applet.TextApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
-        // load messages.json file
-        let messagesFile = Gio.file_new_for_path(metadata.path + "/messages.json");
-        let [success, data] = messagesFile.load_contents(null);
+        // Safe defaults
+        this.messages = ["Loading..."];
+        this.lastIndex = -1;
+        this.currentTypingTimeout = null;
+        this.timer = null;
 
-        if (!success || !data) {
-            this.messages = ["Error loading messages"];
-        } else {
+        let messagesFile = Gio.file_new_for_path(metadata.path + "/messages.json");
+
+        // Async load (classic callback style)
+        messagesFile.load_contents_async(null, Lang.bind(this, function(file, result) {
             try {
-                this.messages = JSON.parse(data.toString());
-                if (!Array.isArray(this.messages) || this.messages.length === 0) {
-                    this.messages = ["No messages found"];
+                let success, data;
+                [success, data] = file.load_contents_finish(result);   // still may fail on very old GJS
+
+                // Safer alternative without destructuring:
+                // let resultArray = file.load_contents_finish(result);
+                // let success = resultArray[0];
+                // let data = resultArray[1];
+
+                if (!success || !data) {
+                    this.messages = ["Error loading messages"];
+                } else {
+                    this.messages = JSON.parse(data.toString());
+
+                    if (!Array.isArray(this.messages) || this.messages.length === 0) {
+                        this.messages = ["No messages found"];
+                    }
                 }
             } catch (e) {
                 this.messages = ["Invalid JSON"];
+                global.logError(e);
             }
-        }
 
-        this.lastIndex = -1;
-        this.currentTypingTimeout = null;
-
-        this.setRandomMessage();
-        this.startTimer();
+            this.setRandomMessage();
+            this.startTimer();
+        }));
     },
 
     startTimer: function() {
-        // 300 sec = 5 min (600 = 10 min)
-        this.timer = Mainloop.timeout_add_seconds(300, () => {
+        this.timer = Mainloop.timeout_add_seconds(300, Lang.bind(this, function() {
             this.setRandomMessage();
-            return true; // loop
-        });
+            return true;
+        }));
     },
 
     stopCurrentTyping: function() {
@@ -54,35 +68,40 @@ MyApplet.prototype = {
     setRandomMessage: function() {
         this.stopCurrentTyping();
 
-        // Pick a new message
+        if (!this.messages || this.messages.length === 0) {
+            this.set_applet_label("…");
+            return;
+        }
+
         let newIndex;
         do {
             newIndex = Math.floor(Math.random() * this.messages.length);
         } while (newIndex === this.lastIndex && this.messages.length > 1);
 
         this.lastIndex = newIndex;
-        const message = this.messages[newIndex] || "";
+        let message = this.messages[newIndex] || "";
 
-        this.set_applet_label(""); // Clear label
-
+        this.set_applet_label("");
         let i = 0;
-        const typeNextChar = () => {
+        let self = this;
+
+        let typeNextChar = function() {
             if (i >= message.length) {
-                this.currentTypingTimeout = null;
-                return;
+                self.currentTypingTimeout = null;
+                return false;
             }
 
-            this.set_applet_label(message.substring(0, i + 1));
+            self.set_applet_label(message.substring(0, i + 1));
             i++;
 
-            let delay = 100; // pause a blink between letters
-            const lastChar = message[i - 1];
-
-            if (" .,!?:;".includes(lastChar)) {
-                delay = 200; // pause a tad more than a blink between words
+            let delay = 100;
+            let lastChar = message[i - 1];
+            if (" .,!?:;".indexOf(lastChar) !== -1) {
+                delay = 200;
             }
 
-            this.currentTypingTimeout = Mainloop.timeout_add(delay, typeNextChar);
+            self.currentTypingTimeout = Mainloop.timeout_add(delay, typeNextChar);
+            return false;
         };
 
         typeNextChar();
