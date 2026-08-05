@@ -1,5 +1,4 @@
 const Applet = imports.ui.applet;
-const Lang = imports.lang;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const GLib = imports.gi.GLib;
@@ -8,7 +7,7 @@ const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
 const UUID = 'pointthat@muratozalp';
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + '/locale');
 
 function _(text) {
     return Gettext.dgettext(UUID, text);
@@ -91,13 +90,13 @@ MyApplet.prototype = {
         
         this._rayCanvas = new St.DrawingArea();
         this._rayCanvas.set_size(size, size);
-        this._rayCanvas.connect('repaint', Lang.bind(this, this.drawRays));
+        this._rayCanvas.connect('repaint', (area) => this.drawRays(area));
         
         this._rayActor.set_child(this._rayCanvas);
         global.stage.add_actor(this._rayActor);
 
         this.updatePosition();
-        this._loopId = Mainloop.timeout_add(16, Lang.bind(this, this.updatePosition));
+        this._loopId = Mainloop.timeout_add(16, () => this.updatePosition());
     },
 
     stopEffect: function() {
