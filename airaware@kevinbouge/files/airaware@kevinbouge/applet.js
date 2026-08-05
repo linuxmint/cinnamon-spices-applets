@@ -4,6 +4,8 @@ const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Pango = imports.gi.Pango;
+imports.gi.versions.Soup = '3.0';
+const Soup = imports.gi.Soup;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
@@ -260,6 +262,8 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this.menu.actor.add_style_class_name('airaware-menu');
         this.menuManager.addMenu(this.menu);
 
+        this._httpSession = new Soup.Session();
+
         this._cache = Cache.createCache({
             baseDirectory: Cache.getDefaultCacheDirectory(metadata.uuid),
         });
@@ -394,6 +398,11 @@ class AirAwareApplet extends Applet.TextIconApplet {
         this._clearRefreshTimer();
         this._clearErrorTimer();
         this._cancelActiveRequests();
+
+        if (this._httpSession) {
+            this._httpSession.abort();
+            this._httpSession = null;
+        }
 
         if (this._locationService)
             this._locationService.destroy();
@@ -1035,6 +1044,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
             {
                 forecastDays: requestDays,
                 timeoutSeconds: 15,
+                session: this._httpSession,
             },
             providerCallback
         );
@@ -1043,6 +1053,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
             {
                 forecastDays: requestDays,
                 timeoutSeconds: 15,
+                session: this._httpSession,
             },
             weatherCallback
         );
@@ -1053,6 +1064,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
                 {
                     radiusMeters: this.vegetationRadiusMeters,
                     timeoutSeconds: 20,
+                    session: this._httpSession,
                 },
                 vegetationCallback
             );
@@ -1147,6 +1159,7 @@ class AirAwareApplet extends Applet.TextIconApplet {
             {
                 language: GLib.getenv('LANG') || null,
                 timeoutSeconds: 10,
+                session: this._httpSession,
             },
             (error, place) => {
                 if (this._activeReverseGeocodeKey === key) {
