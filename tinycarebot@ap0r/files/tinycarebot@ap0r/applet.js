@@ -1,43 +1,34 @@
 const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
 const Gio = imports.gi.Gio;
-const Lang = imports.lang;
 
-function MyApplet(metadata, orientation, panelHeight, instanceId) {
-    this._init(metadata, orientation, panelHeight, instanceId);
-}
+class MyApplet extends Applet.TextApplet {
+    constructor(metadata, orientation, panelHeight, instanceId) {
+        super(orientation, panelHeight, instanceId);
 
-MyApplet.prototype = {
-    __proto__: Applet.TextApplet.prototype,
-
-    _init: function(metadata, orientation, panelHeight, instanceId) {
-        Applet.TextApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
-
-        // Safe defaults
         this.messages = ["Loading..."];
         this.lastIndex = -1;
         this.currentTypingTimeout = null;
-        this.timer = null;
+        this.rotationTimer = null;
 
-        let messagesFile = Gio.file_new_for_path(metadata.path + "/messages.json");
+        this._loadMessages(metadata.path);
+    }
 
-        // Async load (classic callback style)
-        messagesFile.load_contents_async(null, Lang.bind(this, function(file, result) {
+    _loadMessages(path) {
+        const file = Gio.File.new_for_path(`${path}/messages.json`);
+
+        file.load_contents_async(null, (source, result) => {
             try {
-                let success, data;
-                [success, data] = file.load_contents_finish(result);   // still may fail on very old GJS
+                const [success, contents] = source.load_contents_finish(result);
 
-                // Safer alternative without destructuring:
-                // let resultArray = file.load_contents_finish(result);
-                // let success = resultArray[0];
-                // let data = resultArray[1];
-
-                if (!success || !data) {
+                if (!success || !contents) {
                     this.messages = ["Error loading messages"];
                 } else {
-                    this.messages = JSON.parse(data.toString());
+                    const parsed = JSON.parse(contents.toString());
 
-                    if (!Array.isArray(this.messages) || this.messages.length === 0) {
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        this.messages = parsed;
+                    } else {
                         this.messages = ["No messages found"];
                     }
                 }
@@ -46,80 +37,101 @@ MyApplet.prototype = {
                 global.logError(e);
             }
 
-            this.setRandomMessage();
-            this.startTimer();
-        }));
-    },
+            this._showRandomMessage();
+            this._startRotationTimer();
+        });
+    }
 
-    startTimer: function() {
-        this.timer = Mainloop.timeout_add_seconds(300, Lang.bind(this, function() {
-            this.setRandomMessage();
+    _startRotationTimer() {
+        if (this.rotationTimer) {
+            Mainloop.source_remove(this.rotationTimer);
+        }
+
+        this.rotationTimer = Mainloop.timeout_add_seconds(300, () => {
+            this._showRandomMessage();
             return true;
-        }));
-    },
+        });
+    }
 
-    stopCurrentTyping: function() {
+    _stopTypingAnimation() {
         if (this.currentTypingTimeout) {
             Mainloop.source_remove(this.currentTypingTimeout);
             this.currentTypingTimeout = null;
         }
-    },
+    }
 
-    setRandomMessage: function() {
-        this.stopCurrentTyping();
+    _showRandomMessage() {
+        this._stopTypingAnimation();
 
         if (!this.messages || this.messages.length === 0) {
-            this.set_applet_label("…");
+            this.set_applet_label("...");
             return;
         }
 
-        let newIndex;
-        do {
-            newIndex = Math.floor(Math.random() * this.messages.length);
-        } while (newIndex === this.lastIndex && this.messages.length > 1);
+        let index;
 
-        this.lastIndex = newIndex;
-        let message = this.messages[newIndex] || "";
+        do {
+            index = Math.floor(Math.random() * this.messages.length);
+        } while (
+            this.messages.length > 1 &&
+            index === this.lastIndex
+        );
+
+        this.lastIndex = index;
+
+        const message = String(this.messages[index] || "");
 
         this.set_applet_label("");
-        let i = 0;
-        let self = this;
 
-        let typeNextChar = function() {
-            if (i >= message.length) {
-                self.currentTypingTimeout = null;
+        let position = 0;
+
+        const typeNextCharacter = () => {
+            if (position >= message.length) {
+                this.currentTypingTimeout = null;
                 return false;
             }
 
-            self.set_applet_label(message.substring(0, i + 1));
-            i++;
+            this.set_applet_label(
+                message.substring(0, position + 1)
+            );
+
+            const typedChar = message[position];
+            position++;
 
             let delay = 100;
-            let lastChar = message[i - 1];
-            if (" .,!?:;".indexOf(lastChar) !== -1) {
+
+            if (" .,!?:;".includes(typedChar)) {
                 delay = 200;
             }
 
-            self.currentTypingTimeout = Mainloop.timeout_add(delay, typeNextChar);
+            this.currentTypingTimeout =
+                Mainloop.timeout_add(delay, typeNextCharacter);
+
             return false;
         };
 
-        typeNextChar();
-    },
-
-    on_applet_clicked: function() {
-        this.setRandomMessage();
-    },
-
-    on_applet_removed_from_panel: function() {
-        if (this.timer) {
-            Mainloop.source_remove(this.timer);
-            this.timer = null;
-        }
-        this.stopCurrentTyping();
+        typeNextCharacter();
     }
-};
+
+    on_applet_clicked() {
+        this._showRandomMessage();
+    }
+
+    on_applet_removed_from_panel() {
+        if (this.rotationTimer) {
+            Mainloop.source_remove(this.rotationTimer);
+            this.rotationTimer = null;
+        }
+
+        this._stopTypingAnimation();
+    }
+}
 
 function main(metadata, orientation, panelHeight, instanceId) {
-    return new MyApplet(metadata, orientation, panelHeight, instanceId);
+    return new MyApplet(
+        metadata,
+        orientation,
+        panelHeight,
+        instanceId
+    );
 }
