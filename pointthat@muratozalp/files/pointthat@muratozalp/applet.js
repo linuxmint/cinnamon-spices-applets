@@ -24,8 +24,7 @@ MyApplet.prototype = {
         this.metadata = metadata;
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
         
-        // Safe icons
-        this.set_applet_icon_name('input-mouse'); 
+        this.set_applet_icon_path(this.metadata.path + '/icon.png');
         this.set_applet_tooltip(_('Mouse Beam: Off'));
 
         this.isActive = false;
@@ -75,7 +74,7 @@ MyApplet.prototype = {
         if (this.isActive) return;
         this.isActive = true;
         
-        this.set_applet_icon_name('weather-clear'); 
+        this.set_applet_icon_path(this.metadata.path + '/icon-active.png');
         this.set_applet_tooltip(_('Mouse Beam: On'));
 
         let size = (this.gap + this.rayLength + this.lineWidth) * 2;
@@ -102,7 +101,7 @@ MyApplet.prototype = {
     stopEffect: function() {
         if (!this.isActive) return;
         this.isActive = false;
-        this.set_applet_icon_name('input-mouse');
+        this.set_applet_icon_path(this.metadata.path + '/icon.png');
         this.set_applet_tooltip(_('Mouse Beam: Off'));
         
         if (this._loopId) {
