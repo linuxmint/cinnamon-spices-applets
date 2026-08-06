@@ -69,11 +69,20 @@ class StreamVolumeItem extends PopupMenu.PopupSliderMenuItem {
         return "modern-sound-percent-label";
     }
 
+    _sliderExpands() {
+        return false;
+    }
+
     _configureSlider() {
         this._slider.add_style_class_name(this._sliderStyleClass());
         const [width, height] = this._sliderSize();
-        this._slider.width = width;
-        this._slider.height = height;
+        if (this._sliderExpands()) {
+            this._slider.x_expand = true;
+            this._slider.height = height;
+        } else {
+            this._slider.width = width;
+            this._slider.height = height;
+        }
     }
 
     _addVolumeActors() {
@@ -219,6 +228,14 @@ class MasterVolumeItem extends StreamVolumeItem {
 
     _actorStyleClasses() {
         return ["modern-sound-level-item"];
+    }
+
+    _sliderStyleClass() {
+        return "modern-sound-master-volume-slider";
+    }
+
+    _sliderExpands() {
+        return true;
     }
 
     _streamVolumeMax(norm) {
