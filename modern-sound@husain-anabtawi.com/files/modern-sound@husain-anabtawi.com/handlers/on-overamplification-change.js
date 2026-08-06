@@ -26,13 +26,26 @@ function onOveramplificationChange(applet) {
 function connectOveramplificationHandler(applet) {
     applet._allowOveramplification = false;
     applet._soundSettings = new Gio.Settings({ schema_id: CINNAMON_DESKTOP_SOUNDS });
-    applet._soundSettings.connect("changed::" + OVERAMPLIFICATION_KEY, () => {
-        onOveramplificationChange(applet);
-    });
+    applet._soundSettingsChangedId = applet._soundSettings.connect(
+        "changed::" + OVERAMPLIFICATION_KEY,
+        () => onOveramplificationChange(applet)
+    );
     onOveramplificationChange(applet);
+}
+
+function disconnectOveramplificationHandler(applet) {
+    if (!applet._soundSettings)
+        return;
+
+    if (applet._soundSettingsChangedId) {
+        applet._soundSettings.disconnect(applet._soundSettingsChangedId);
+        applet._soundSettingsChangedId = 0;
+    }
+    applet._soundSettings = null;
 }
 
 module.exports = {
     connectOveramplificationHandler,
+    disconnectOveramplificationHandler,
     onOveramplificationChange
 };

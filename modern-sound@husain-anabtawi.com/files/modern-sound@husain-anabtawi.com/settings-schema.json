@@ -8,6 +8,61 @@
         "default": "<Shift><Super>s",
         "description": "Open menu"
     },
+    "middleClickAction": {
+        "type": "combobox",
+        "default": "mute",
+        "options": {
+            "Toggle Mute": "mute",
+            "Toggle Mute output": "out_mute",
+            "Toggle Mute input": "in_mute",
+            "Toggle Play / Pause": "player"
+        },
+        "description": "Middle-click action"
+    },
+    "middleShiftClickAction": {
+        "type": "combobox",
+        "default": "in_mute",
+        "options": {
+            "Toggle Mute": "mute",
+            "Toggle Mute output": "out_mute",
+            "Toggle Mute input": "in_mute",
+            "Toggle Play / Pause": "player"
+        },
+        "description": "Shift + middle-click action"
+    },
+    "tooltipShowVolume": {
+        "type": "switch",
+        "default": true,
+        "description": "Show volume in tooltip"
+    },
+    "scrollStep": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "units": "%",
+        "description": "Volume scroll step"
+    },
+    "invertScrollDirection": {
+        "type": "switch",
+        "default": false,
+        "description": "Invert scroll direction"
+    },
+    "section-sound": {
+        "type": "section",
+        "description": "Sound Change Effects"
+    },
+    "playVolumeChangeSound": {
+        "type": "switch",
+        "default": true,
+        "description": "Play sound when changing output volume"
+    },
+    "showVolumeOsdOnScroll": {
+        "type": "switch",
+        "default": true,
+        "description": "Show volume OSD when scrolling the panel icon"
+    },
     "section-devices": {
         "type": "section",
         "description": "Devices"
