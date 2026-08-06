@@ -18,7 +18,7 @@ This will open the Cinnamon applet settings window for "Shutdown Menu With Icons
 Check the corresponding box to add an item and uncheck it to remove an item.
 Change the icons by replacing the icon name by another one or browse to an icon file.
 Change the commands by replacing the command by another one.
-Changes are immoderately taken into account.
+Changes are immediately taken into account.
 
 To change the order of the menu items or to change the command binded to an item, 
 edit the "applet.js" file and go into the "createMenu" function.

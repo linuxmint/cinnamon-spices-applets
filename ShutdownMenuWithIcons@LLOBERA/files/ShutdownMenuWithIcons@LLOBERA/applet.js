@@ -167,10 +167,10 @@ MyApplet.prototype = {
     },
     
     createMenuItem: function(displayName, iconName, command) {
-        var menuItem = new PopupMenuExtension.PopupImageLeftMenuItem(displayName, iconName, command);
+        let menuItem = new PopupMenuExtension.PopupImageLeftMenuItem(displayName, iconName, command);
         menuItem.connect("activate", function(actor, event) {
-            // As application variable is not accessible here, 
-            // the application variable is passed to the PopupImageLeftMenuItem ctor to be accessible throw the actor argument
+            // As application variable is not accessible here,
+            // the application variable is passed to the PopupImageLeftMenuItem ctor to be accessible through the actor argument
             // which is the menuItem itself
             Util.trySpawnCommandLine(actor.command);
         });
@@ -205,6 +205,6 @@ MyApplet.prototype = {
 };
 
 function main(metadata, orientation, panel_height, instanceId) {
-    var myApplet = new MyApplet(metadata, orientation, panel_height, instanceId);
-    return myApplet;      
+    let myApplet = new MyApplet(metadata, orientation, panel_height, instanceId);
+    return myApplet;
 }
