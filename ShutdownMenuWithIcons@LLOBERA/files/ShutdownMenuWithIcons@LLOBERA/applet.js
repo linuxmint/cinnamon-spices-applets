@@ -188,7 +188,7 @@ MyApplet.prototype = {
         this._applet_context_menu.addMenuItem(this.settings_menu_item);
         
         this.help_menu_item = new Applet.MenuItem(_("Help"), Gtk.STOCK_HELP, function() {
-            Util.spawnCommandLine("xdg-open https://cinnamon-spices.linuxmint.com/applets/view/114");
+            Util.spawn(["xdg-open", "https://cinnamon-spices.linuxmint.com/applets/view/114"]);
         });
         this._applet_context_menu.addMenuItem(this.help_menu_item);
         
