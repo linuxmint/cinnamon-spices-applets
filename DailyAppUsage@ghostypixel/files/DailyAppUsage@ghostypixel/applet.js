@@ -16,7 +16,25 @@ const UUID = "DailyAppUsage@ghostypixel"
 const AppletDir = imports.ui.appletManager.applets[UUID];
 const Helper = AppletDir.helper
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
+
+Gio._promisify(
+    Gio.File.prototype,
+    'load_contents_async',
+    'load_contents_finish'
+);
+
+Gio._promisify(
+    Gio.File.prototype,
+    'query_info_async',
+    'query_info_finish'
+);
+
+Gio._promisify(
+    Gio.File.prototype,
+    'replace_contents_async',
+    'replace_contents_finish'
+);
 
 function _(text) { return Gettext.dgettext(UUID, text); }
 
@@ -35,14 +53,17 @@ class AppUsageMeter extends Applet.TextIconApplet {
         if(!this.settingsMenu.getValue("enable-saving")) this.SetupAppsFromRunningWindows(runningApps)
         else this.SetupAppsWithSaveFile(runningApps)
         
+        this.set_applet_label(_("App Usage"));
+        this.set_applet_tooltip(_("Displays apps and how long they were running."));
+    }
+    
+    InitializationFinished() {
         this.appOpeningSignalId = !this._buildUI()
             ? global.window_manager.connect("map", (wm, actor) => this.OnAppOpeningNoUI(wm, actor))
             : global.window_manager.connect("map", (wm, actor) => this.OnAppOpening(wm, actor))
             
         global.window_manager.connect("destroy", (wm, actor) => this.OnAppClosing(wm, actor))
         
-        this.set_applet_label(_("App Usage"));
-        this.set_applet_tooltip(_("Displays apps and how long they were running."));
         this.SetMainLoop()
     }
 
@@ -50,13 +71,15 @@ class AppUsageMeter extends Applet.TextIconApplet {
         this.apps = AppSection.FromApps(runningApps, this.settingsMenu.getValue("max-char-for-app-label"))
         this.activeApps = new Set(Object.keys(this.apps))
         this.inactiveApps = new Set()
+        
+        this.InitializationFinished()
     }
 
-    SetupAppsWithSaveFile(runningApps) {
-        let saveOutdated = this.IsSaveOutdated()
+    async SetupAppsWithSaveFile(runningApps) {
+        let saveOutdated = await this.IsSaveOutdated()
         if(saveOutdated != null) {
             try {
-                let saveFile = this.LoadState(saveOutdated)
+                let saveFile = await this.LoadState(saveOutdated)
                 let maxLabelChar = this.settingsMenu.getValue("max-char-for-app-label")
                 
                 let appsSectionsNewlyRunning = AppSection.FromApps(runningApps, maxLabelChar)
@@ -98,6 +121,8 @@ class AppUsageMeter extends Applet.TextIconApplet {
             } catch (error) {
                 global.logError(error)
             }
+            
+            this.InitializationFinished()
         }
         else this.SetupAppsFromRunningWindows(runningApps)
     }
@@ -381,7 +406,7 @@ class AppUsageMeter extends Applet.TextIconApplet {
         return apps
     }
     
-    SaveState() {
+    async SaveState() {
         if(Object.keys(this.apps).length < 1) return false;
         const data = {};
 
@@ -402,24 +427,18 @@ class AppUsageMeter extends Applet.TextIconApplet {
 
         const bytes = new TextEncoder().encode(JSON.stringify(data));
         
-        return this.CreateFile(this.savePath, bytes)
+        return await this.CreateFile(this.savePath, bytes)
     }
     
-    LoadState() {
+    async LoadState() {
         try {
             const file = Gio.File.new_for_commandline_arg(this.savePath);
-
-            if(!file.query_exists(null)) return {};
-
-            const [success, contents] = file.load_contents(null);
-
-            if(!success) throw new Error(_("Failed to read save file."));
-
+            const [contents, etag] = await file.load_contents_async(null);
             const json = new TextDecoder().decode(contents);
             return JSON.parse(json);
         }
         catch (err) {
-            global.logError(err);
+            global.logError(_("Failed to read save file. %s").format(err));
             return {};
         }
     }
@@ -429,27 +448,27 @@ class AppUsageMeter extends Applet.TextIconApplet {
      * @returns {Gio.File}  if file is not outdated
      * @returns {null} null if file is outdated
     */
-    IsSaveOutdated() {   
+    async IsSaveOutdated() {   
         let file = Gio.File.new_for_commandline_arg(this.savePath);
         let parent = file.get_parent();
-
-        if(!parent.query_exists(null)) {
-            do { parent.make_directory_with_parents(null); parent = parent.get_parent() }
-            while(!parent.query_exists(null))
-            
-            return null
+        
+        if(parent != null) {
+            try { parent.make_directory_with_parents(null); } 
+            catch (e) {
+                if(!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+                    throw e;
+            }
         }
-        else if(!file.query_exists(null)) return null
-         
+        
         try {
-            let info = file.query_info(
+            let info = await file.query_info_async(
                 "time::modified",
                 Gio.FileQueryInfoFlags.NONE,
-                null
+                0,
+                null,
             );
             let modified = info.get_attribute_uint64("time::modified");
             let date = new Date(modified * 1000);
-            
             
             if(new Date().toISOString().split("T")[0] > new Date(date).toISOString().split("T")[0]) return null
             else return file
@@ -460,25 +479,29 @@ class AppUsageMeter extends Applet.TextIconApplet {
         }
     }
     
-    HandleSettings() {        
-        if(this.settingsMenu.getValue("save-path") == "~/") {
+    HandleSettings() {       
+        let menu = this.settingsMenu;
+        
+        if(menu.getValue("save-path") == menu.getDefaultValue("save-path")) {
             this.savePath = `${GLib.get_user_cache_dir()}/DailyAppUsage/save.json`
-            this.settingsMenu.setValue("save-path", this.savePath)
+            menu.setValue("save-path", this.savePath)
         }
-        else this.savePath = this.settingsMenu.getValue("save-path")
+        else this.savePath = menu.getValue("save-path")
         
-        if(this.settingsMenu.getValue("enable-export-dbus")) this.dBusId = this.TrySetupDBus()
+        global.log(this.savePath, menu.getValue("save-path"))
         
-        this.iconSize = this.settingsMenu.getValue("icon-size")
+        if(menu.getValue("enable-export-dbus")) this.dBusId = this.TrySetupDBus()
         
-        this.settingsMenu.connect("changed::icon-size", () => this.ResetIconSize())
-        this.settingsMenu.connect("changed::apps-visible", () => this.AppsVisibleCountChanged())
-        this.settingsMenu.connect("changed::max-char-for-app-label", () => this.AppLabelCharCountChanged())
-        this.settingsMenu.connect("changed::save-interval", () => this.RestartSaveInterval())
-        this.settingsMenu.connect("changed::save-path", (menu, settingKey, oldValue, newValue) => { this.savePath = newValue });
-        this.settingsMenu.connect("changed::enable-saving", () => this.ToogleEnablingSaving())
-        this.settingsMenu.connect("changed::show-export-buttons", (menu, settingKey, oldValue, newValue)  => this.ResetExportBtns(newValue))
-        this.settingsMenu.connect("changed::enable-export-dbus", () => this.ToogleDBus())
+        this.iconSize = menu.getValue("icon-size")
+        
+        menu.connect("changed::icon-size", () => this.ResetIconSize())
+        menu.connect("changed::apps-visible", () => this.AppsVisibleCountChanged())
+        menu.connect("changed::max-char-for-app-label", () => this.AppLabelCharCountChanged())
+        menu.connect("changed::save-interval", () => this.RestartSaveInterval())
+        menu.connect("changed::save-path", (menu, settingKey, oldValue, newValue) => { this.savePath = newValue });
+        menu.connect("changed::enable-saving", () => this.ToogleEnablingSaving())
+        menu.connect("changed::show-export-buttons", (menu, settingKey, oldValue, newValue)  => this.ResetExportBtns(newValue))
+        menu.connect("changed::enable-export-dbus", () => this.ToogleDBus())
     }
     
     RecalcScrollViewHeight() {
@@ -584,6 +607,7 @@ class AppUsageMeter extends Applet.TextIconApplet {
         this.iconSize = this.settingsMenu.getValue("icon-size")
     }
     
+    // This function will very likely be changed in the future.
     ResetExportBtns(exportOpt) {
         function ClearContainer(children) { for(let child of children) child.destroy(); }
         
@@ -593,15 +617,20 @@ class AppUsageMeter extends Applet.TextIconApplet {
         }
         
         let children = this.exportContainer.get_children()
+        let length = children.length
         
-        switch(exportOpt) {
+        switch(exportOpt) {  
             case "opNone":
                 ContainerSweep(children, this.exportContainer)
             break;
             
             case "opCSV":
-                if(children.length == 2 || children.length == 1) children[children.length - 1].destroy()
-                else this.buildExportButtons(exportOpt, this.exportContainer)
+                if(length == 0) this.buildExportButtons(exportOpt, this.exportContainer)
+                else if(length == 1) {
+                    children[children.length - 1].destroy()
+                    this.buildExportButtons(exportOpt, this.exportContainer)
+                }
+                else if(length == 2) children[children.length - 1].destroy()
             break;
             
             case "opJSON":
@@ -616,10 +645,7 @@ class AppUsageMeter extends Applet.TextIconApplet {
             
             case "opBoth":
                 if(children.length == 1) {
-                    if(children[0].label == "CSV") {
-                        buildExportButtons("opJSON", this.exportContainer)
-                        return
-                    }
+                    if(children[0].label == "CSV") exportOpt = "opJSON"
                     else if(children[0].label == "JSON") ClearContainer(children)
                 }
                     
@@ -628,10 +654,10 @@ class AppUsageMeter extends Applet.TextIconApplet {
         }
     }
     
-    CreateFile(path, data) {
+    async CreateFile(path, data) {
         try {
             const file = Gio.File.new_for_commandline_arg(path);
-            file.replace_contents(
+            await file.replace_contents_async(
                 data,
                 null,
                 false,
@@ -658,8 +684,9 @@ class AppUsageMeter extends Applet.TextIconApplet {
         this.dBusId = this.exportedObject = null
     }
     
-    SaveBtnPressed() {
-        let message = this.SaveState() ? "Saved successfully." : "Saving failed :( \nCheck looking glass for further info."
+    async SaveBtnPressed() {
+        let wasSaved = await this.SaveState();
+        let message = wasSaved ? "Saved successfully." : "Saving failed :( \nCheck looking glass for further info."
         Main.notify("App Usage", _(message))
     }
 }
@@ -856,7 +883,7 @@ class AppSection {
             let theme = Gtk.IconTheme.get_default();
 
             if (icon instanceof Gio.ThemedIcon && theme.has_icon(icon.get_names()[0]) 
-                || icon instanceof Gio.FileIcon && icon.get_file().query_exists(null)) 
+                || icon instanceof Gio.FileIcon) 
                 return new St.Icon({gicon: icon, icon_size: size})
 
             return null;
