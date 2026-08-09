@@ -11,6 +11,7 @@ const Meta = imports.gi.Meta;
 const Cinnamon = imports.gi.Cinnamon;
 const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
+const ScreenSaver = imports.misc.screenSaver;
 
 const menuSource = require("./menuSource");
 const menuBuilder = require("./menuBuilder");
@@ -104,22 +105,8 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
 
     _watchScreensaver() {
         try {
-            this._ssProxy = Gio.DBusProxy.new_for_bus_sync(
-                Gio.BusType.SESSION,
-                Gio.DBusProxyFlags.NONE,
-                null,
-                "org.cinnamon.ScreenSaver",
-                "/org/cinnamon/ScreenSaver",
-                "org.cinnamon.ScreenSaver",
-                null
-            );
-            this._ssSignalId = this._ssProxy.connect("g-signal", (proxy, senderName, signalName, parameters) => {
-                if (signalName !== "ActiveChanged")
-                    return;
-                let active = false;
-                try {
-                    active = parameters.deep_unpack()[0];
-                } catch (err) {}
+            this._ssProxy = new ScreenSaver.ScreenSaverProxy();
+            this._ssSignalId = this._ssProxy.connectSignal("ActiveChanged", (_proxy, _sender, [active]) => {
                 this._detachCurrentMenu(active ? "screensaver-on" : "screensaver-off");
                 if (!active)
                     this._queueRebuild();
@@ -161,7 +148,7 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
 
     _ensureBackend() {
         try {
-            Util.spawnCommandLineAsync("pkill -f /usr/bin/cinnamon-appmenu-bar");
+            Util.spawn(["pkill", "-f", "/usr/bin/cinnamon-appmenu-bar"]);
         } catch (err) {}
 
         try {
@@ -221,7 +208,7 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
         this._unbindWindow();
         this._detachCurrentMenu("applet-removed");
         if (this._ssProxy && this._ssSignalId) {
-            try { this._ssProxy.disconnect(this._ssSignalId); } catch (err) {}
+            try { this._ssProxy.disconnectSignal(this._ssSignalId); } catch (err) {}
             this._ssSignalId = 0;
             this._ssProxy = null;
         }
