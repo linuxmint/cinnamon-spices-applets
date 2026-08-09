@@ -1,8 +1,9 @@
 // @ts-check
 const Applet = imports.ui.applet;
-const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
+const SignalManager = imports.misc.signalManager;
+const Gettext = imports.gettext;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const Gio = imports.gi.Gio;
@@ -10,10 +11,41 @@ const GLib = imports.gi.GLib;
 const Meta = imports.gi.Meta;
 const Cinnamon = imports.gi.Cinnamon;
 const Mainloop = imports.mainloop;
-const Util = imports.misc.util;
+const Extension = imports.ui.extension;
 
-const menuSource = require("./menuSource");
-const menuBuilder = require("./menuBuilder");
+const UUID = "globalmenu@Obsidian-Jackal";
+
+let Me = null;
+if (typeof Extension.getCurrentExtension === "function")
+    Me = Extension.getCurrentExtension();
+if (!Me || !Me.imports) {
+    let path = imports.ui.appletManager.appletMeta[UUID].path;
+    if (imports.searchPath.indexOf(path) < 0)
+        imports.searchPath.unshift(path);
+    Me = { imports: imports };
+}
+
+const menuSource = Me.imports.menuSource;
+const menuBuilder = Me.imports.menuBuilder;
+
+Gettext.bindtextdomain(UUID, GLib.build_filenamev([GLib.get_user_data_dir(), "locale"]));
+
+/**
+ * @param {string} str
+ * @returns {string}
+ */
+function _(str) {
+    let translated = Gettext.dgettext(UUID, str);
+    if (translated !== str)
+        return translated;
+    return Gettext.gettext(str);
+}
+
+// Settings-schema strings for xgettext / cinnamon-xlet-makepot.
+_("Show application name");
+_("Use bold application name");
+_("Maximum application name length");
+_("characters");
 
 const GTK_PROP_SIGNALS = [
     "notify::gtk-unique-bus-name",
@@ -38,21 +70,22 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
         this._currentWindowId = 0;
         this._rebuildTimeout = 0;
         this._focusWait = 0;
-        this._itemsChangedId = 0;
-        this._sectionSignalIds = [];
         this._currentModel = null;
         this._currentDbusProxy = null;
-        this._dbusSignalId = 0;
         this._currentMenuKey = null;
         this._currentActionGroups = {};
         this._modelSig = null;
         this._pendingRebuild = false;
         this._unityPath = null;
         this._unityPathCache = {};
-        this._windowSignalIds = [];
         this._retryTimeout = 0;
         this._retryCount = 0;
         this._rebuilding = false;
+        this._rebuildToken = 0;
+
+        this._signals = new SignalManager.SignalManager(null);
+        this._modelSignals = new SignalManager.SignalManager(null);
+        this._proxySignals = new SignalManager.SignalManager(null);
 
         this.box = new St.BoxLayout({
             style_class: "globalmenu-box",
@@ -84,10 +117,9 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
         this.settings.bind("desaturate-app-name", "boldAppName", this._onSettingsChanged);
         this.settings.bind("max-app-name-length", "maxAppNameLength", this._onSettingsChanged);
 
-        this._ensureBackend();
         this._onSettingsChanged();
 
-        this._focusId = global.display.connect("notify::focus-window", () => {
+        this._signals.connect(global.display, "notify::focus-window", () => {
             this._queueRebuild();
         });
         this._tracker = Cinnamon.WindowTracker.get_default();
@@ -95,15 +127,13 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
         this._focusWait = Mainloop.timeout_add(300, () => {
             this._focusWait = 0;
             this._rebuild();
-            return false;
+            return GLib.SOURCE_REMOVE;
         });
     }
 
     _disconnectDbusProxy() {
-        if (this._currentDbusProxy && this._dbusSignalId) {
-            try { this._currentDbusProxy.disconnect(this._dbusSignalId); } catch (err) {}
-        }
-        this._dbusSignalId = 0;
+        this._proxySignals.disconnectAllSignals();
+        this._currentDbusProxy = null;
     }
 
     _watchDbusProxy(proxy) {
@@ -112,7 +142,7 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
         if (!proxy)
             return;
         try {
-            this._dbusSignalId = proxy.connect("g-signal", (p, sender, signalName, params) => {
+            this._proxySignals.connect(proxy, "g-signal", (p, sender, signalName, params) => {
                 if (signalName === "LayoutUpdated" || signalName === "ItemsPropertiesUpdated")
                     this._queueRebuild();
             });
@@ -129,54 +159,6 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
         this._modelSig = null;
     }
 
-    _ensureBackend() {
-        try {
-            Util.spawn(["pkill", "-f", "/usr/bin/cinnamon-appmenu-bar"]);
-        } catch (err) {}
-
-        try {
-            let xsettings = new Gio.Settings({
-                schema_id: "org.cinnamon.settings-daemon.plugins.xsettings"
-            });
-            let modules = xsettings.get_strv("enabled-gtk-modules");
-            if (modules.indexOf("appmenu-gtk-module") < 0) {
-                modules = modules.concat(["appmenu-gtk-module"]);
-                xsettings.set_strv("enabled-gtk-modules", modules);
-            }
-            let overrides = GLib.Variant.new("a{sv}", {
-                "Gtk/ShellShowsAppMenu": GLib.Variant.new_int32(0),
-                "Gtk/ShellShowsMenubar": GLib.Variant.new_int32(1)
-            });
-            xsettings.set_value("overrides", overrides);
-        } catch (err) {
-            global.logWarning("globalmenu: could not update xsettings: " + err);
-        }
-
-        // Allow appmenu-gtk-module on Wayland sessions (off by default upstream).
-        try {
-            let appmenu = new Gio.Settings({ schema_id: "org.appmenu.gtk-module" });
-            if (appmenu.list_keys().indexOf("run-on-wayland") >= 0)
-                appmenu.set_boolean("run-on-wayland", true);
-        } catch (err) {
-            global.logWarning("globalmenu: could not enable run-on-wayland: " + err);
-        }
-
-        try {
-            Gio.DBus.session.call(
-                "org.freedesktop.DBus",
-                "/org/freedesktop/DBus",
-                "org.freedesktop.DBus",
-                "StartServiceByName",
-                GLib.Variant.new("(su)", ["com.canonical.AppMenu.Registrar", 0]),
-                null,
-                Gio.DBusCallFlags.NONE,
-                -1,
-                null,
-                null
-            );
-        } catch (err) {}
-    }
-
     _onSettingsChanged() {
         this.appLabel.visible = !!this.showAppName;
         this._rebuild();
@@ -188,12 +170,12 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
     }
 
     on_applet_removed_from_panel() {
+        this._rebuildToken++;
         this._unbindWindow();
         this._detachCurrentMenu("applet-removed");
-        if (this._focusId) {
-            global.display.disconnect(this._focusId);
-            this._focusId = 0;
-        }
+        this._signals.disconnectAllSignals();
+        this._modelSignals.disconnectAllSignals();
+        this._proxySignals.disconnectAllSignals();
         if (this._rebuildTimeout) {
             Mainloop.source_remove(this._rebuildTimeout);
             this._rebuildTimeout = 0;
@@ -218,10 +200,10 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
             this._rebuildTimeout = 0;
             if (this._isAnyMenuOpen()) {
                 this._pendingRebuild = true;
-                return false;
+                return GLib.SOURCE_REMOVE;
             }
             this._rebuild();
-            return false;
+            return GLib.SOURCE_REMOVE;
         });
     }
 
@@ -260,16 +242,8 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
     }
 
     _unbindWindow() {
-        // Only detach window signals. Keep the current GTK model / dbusmenu
-        // proxy across rapid alt-tab when the exporter key is unchanged.
-        if (this._currentWindow && this._windowSignalIds.length) {
-            for (let i = 0; i < this._windowSignalIds.length; i++) {
-                try {
-                    this._currentWindow.disconnect(this._windowSignalIds[i]);
-                } catch (err) {}
-            }
-        }
-        this._windowSignalIds = [];
+        if (this._currentWindow)
+            this._signals.disconnect(null, this._currentWindow);
         this._currentWindow = null;
         this._currentWindowId = 0;
         this._unityPath = null;
@@ -280,7 +254,7 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
         }
     }
 
-    _resolveForFocus(focus, probe) {
+    _resolveForFocus(focus, probe, resolved) {
         let menuKey = probe.menuKey;
         if (menuKey && menuKey === this._currentMenuKey &&
             (this._currentModel || this._currentDbusProxy)) {
@@ -294,10 +268,8 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
                 actionGroups: this._currentActionGroups || {}
             };
         }
-
-        let resolved = menuSource.resolveWindowMenu(focus);
         if (this._unityPath && resolved.kind === menuSource.MenuKind.MENUMODEL &&
-            resolved.busName && !resolved.actionGroups["unity"]) {
+            resolved.busName && resolved.actionGroups && !resolved.actionGroups["unity"]) {
             try {
                 resolved.actionGroups["unity"] = Gio.DBusActionGroup.get(
                     Gio.DBus.session, resolved.busName, this._unityPath
@@ -324,7 +296,6 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
             this._currentWindowId = menuSource.guessXid(metaWindow);
         }
 
-        // Resolve _UNITY_OBJECT_PATH (async xprop, cached per XID).
         try {
             let xid = metaWindow.get_xwindow ? metaWindow.get_xwindow() : 0;
             let busName = null;
@@ -355,32 +326,26 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
             }
         } catch (err) {}
 
-        // Wayland (and some X11 apps) publish GTK dbus props after map/focus.
         for (let i = 0; i < GTK_PROP_SIGNALS.length; i++) {
             try {
-                let sid = metaWindow.connect(GTK_PROP_SIGNALS[i], () => {
+                this._signals.connect(metaWindow, GTK_PROP_SIGNALS[i], () => {
                     this._queueRebuild();
-                });
-                this._windowSignalIds.push(sid);
+                }, null, true);
             } catch (err) {}
         }
 
         try {
-            let sid = metaWindow.connect("unmanaged", () => {
+            this._signals.connect(metaWindow, "unmanaged", () => {
                 if (this._currentWindow === metaWindow) {
                     this._unbindWindow();
                     this._detachCurrentMenu("window-unmanaged");
                     this._setAppName("");
                 }
-            });
-            this._windowSignalIds.push(sid);
+            }, null, true);
         } catch (err) {}
     }
 
     _scheduleRetry() {
-        // Only used when no model/proxy yet (exporter not registered). Empty
-        // layouts should fill via items-changed / LayoutUpdated — do not recreate
-        // exporters on a timer.
         if (this._retryCount >= 8)
             return;
         if (this._retryTimeout)
@@ -389,7 +354,7 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
             this._retryTimeout = 0;
             this._retryCount++;
             this._rebuild(true);
-            return false;
+            return GLib.SOURCE_REMOVE;
         });
     }
 
@@ -410,18 +375,8 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
     }
 
     _disconnectModelSignals() {
-        if (this._currentModel && this._itemsChangedId) {
-            try {
-                this._currentModel.disconnect(this._itemsChangedId);
-            } catch (err) {}
-        }
-        this._itemsChangedId = 0;
-        for (let i = 0; i < this._sectionSignalIds.length; i++) {
-            try {
-                this._sectionSignalIds[i].model.disconnect(this._sectionSignalIds[i].id);
-            } catch (err) {}
-        }
-        this._sectionSignalIds = [];
+        this._modelSignals.disconnectAllSignals();
+        this._currentModel = null;
     }
 
     _clearMenus() {
@@ -436,32 +391,29 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
             }
         }
         this._menuEntries = [];
-        // Do not drop model/proxy here — callers re-watch or replace explicitly.
     }
 
     _watchModel(model) {
-        if (model && model === this._currentModel && this._itemsChangedId)
+        if (model && model === this._currentModel && this._modelSignals.isConnected("items-changed", model))
             return;
-        this._disconnectModelSignals();
+        this._modelSignals.disconnectAllSignals();
         this._currentModel = model;
         if (!model)
             return;
 
-        this._itemsChangedId = model.connect("items-changed", () => {
+        this._modelSignals.connect(model, "items-changed", () => {
             this._queueRebuild();
-        });
+        }, null, true);
 
-        // Qt menus often arrive as a root section that fills in later.
         try {
             let n = model.get_n_items();
             for (let i = 0; i < n; i++) {
                 let section = model.get_item_link(i, Gio.MENU_LINK_SECTION);
                 if (!section)
                     continue;
-                let id = section.connect("items-changed", () => {
+                this._modelSignals.connect(section, "items-changed", () => {
                     this._queueRebuild();
-                });
-                this._sectionSignalIds.push({ model: section, id: id });
+                }, null, true);
             }
         } catch (err) {}
     }
@@ -498,8 +450,6 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
 
     _rebuild(isRetry) {
         let focus = global.display.get_focus_window();
-        let title = "";
-        try { title = focus ? (focus.get_title() || "") : ""; } catch (err) {}
 
         if (this._isIgnoredWindow(focus)) {
             if (!this._menuEntries.length)
@@ -513,7 +463,6 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
         if (this._rebuilding)
             return;
 
-        // Never tear down / switch menus while a popup is open.
         if (this._isAnyMenuOpen()) {
             this._pendingRebuild = true;
             return;
@@ -521,6 +470,7 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
 
         this._rebuilding = true;
         this._pendingRebuild = false;
+        let token = ++this._rebuildToken;
 
         try {
             let sameWindow = (this._currentWindow === focus);
@@ -541,11 +491,13 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
             let probe = menuSource.probeWindowMenu(focus);
             let menuKey = probe.menuKey;
 
-            // Same window + same GTK exporter: skip unless the model signature changed.
             if (sameWindow && menuKey && menuKey === this._currentMenuKey && this._currentModel &&
                 probe.kind !== menuSource.MenuKind.DBUSMENU) {
                 let sig = this._modelSignature(this._currentModel);
                 if (sig === this._modelSig) {
+                    this._rebuilding = false;
+                    if (this._pendingRebuild)
+                        this._queueRebuild();
                     return;
                 }
                 this._clearMenus();
@@ -559,78 +511,135 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
                     this._currentActionGroups || {}
                 );
                 this._armMenuCloseHandler();
+                this._rebuilding = false;
+                if (this._pendingRebuild)
+                    this._queueRebuild();
                 return;
             }
 
-            let resolved = this._resolveForFocus(focus, probe);
-            this._currentMenuKey = (resolved.busName || "") + "|" +
-                (resolved.objectPath || resolved.menubarPath || menuKey || "");
-            menuKey = this._currentMenuKey;
-            if (!(this._currentModel && resolved.model === this._currentModel))
-                this._modelSig = null;
-
-            this._clearMenus();
-
-            // Registrar / Qt / Electron: GetLayout path — never walk GMenuModel.
-            if (resolved.kind === menuSource.MenuKind.DBUSMENU) {
-                this.placeholder.set_text("");
-                this._disconnectModelSignals();
-                this._currentModel = null;
-                this._insertActionGroups({});
-                let proxy = resolved._dbusProxy || this._currentDbusProxy;
-                if (!proxy && resolved.busName && resolved.objectPath) {
-                    try {
-                        proxy = menuSource.createDbusMenuProxy(resolved.busName, resolved.objectPath);
-                        resolved._dbusProxy = proxy;
-                    } catch (err) {}
+            let finish = (resolved) => {
+                if (token !== this._rebuildToken) {
+                    this._rebuilding = false;
+                    return;
                 }
-                this._watchDbusProxy(proxy);
-                this._menuEntries = menuBuilder.buildPanelFromDbusmenu(
-                    this.box,
-                    this.menuManager,
-                    this.orientation,
-                    proxy
-                );
-                this._modelSig = "dm:" + this._menuEntries.length;
-                this._armMenuCloseHandler();
-                if (!this._menuEntries.length)
-                    this._scheduleRetry();
+                try {
+                    this._applyResolved(focus, probe, resolved, menuKey, () => {
+                        if (token !== this._rebuildToken)
+                            return;
+                        this._rebuilding = false;
+                        if (this._pendingRebuild)
+                            this._queueRebuild();
+                    });
+                } catch (err) {
+                    global.logError("globalmenu rebuild: " + err);
+                    this._rebuilding = false;
+                    if (this._pendingRebuild)
+                        this._queueRebuild();
+                }
+            };
+
+            if (probe.kind === menuSource.MenuKind.MENUMODEL &&
+                sameWindow && menuKey === this._currentMenuKey && this._currentModel) {
+                finish({
+                    kind: probe.kind,
+                    source: probe.source,
+                    busName: probe.busName,
+                    objectPath: probe.objectPath,
+                    model: this._currentModel,
+                    _dbusProxy: null,
+                    actionGroups: this._currentActionGroups || {}
+                });
                 return;
             }
 
-            if (!resolved.model) {
-                this.placeholder.set_text("");
-                this._disconnectModelSignals();
-                this._disconnectDbusProxy();
-                this._currentModel = null;
-                this._modelSig = null;
-                this._insertActionGroups({});
-                this._scheduleRetry();
-                return;
-            }
-
-            this.placeholder.set_text("");
-            this._disconnectDbusProxy();
-            this._insertActionGroups(resolved.actionGroups);
-            this._watchModel(resolved.model);
-            this._modelSig = this._modelSignature(resolved.model);
-
-            this._menuEntries = menuBuilder.buildPanelMenus(
-                this.box,
-                this.menuManager,
-                this.orientation,
-                resolved.model,
-                resolved.actionGroups || this._currentActionGroups
-            );
-            this._armMenuCloseHandler();
-
+            menuSource.resolveWindowMenuAsync(focus, (resolved) => {
+                finish(resolved);
+            });
         } catch (err) {
             global.logError("globalmenu rebuild: " + err);
-        } finally {
             this._rebuilding = false;
             if (this._pendingRebuild)
                 this._queueRebuild();
         }
+    }
+
+    _applyResolved(focus, probe, rawResolved, menuKey, onDone) {
+        let done = typeof onDone === "function" ? onDone : () => {};
+        let resolved = this._resolveForFocus(focus, probe, rawResolved);
+        this._currentMenuKey = (resolved.busName || "") + "|" +
+            (resolved.objectPath || resolved.menubarPath || menuKey || "");
+        menuKey = this._currentMenuKey;
+        if (!(this._currentModel && resolved.model === this._currentModel))
+            this._modelSig = null;
+
+        this._clearMenus();
+
+        if (resolved.kind === menuSource.MenuKind.DBUSMENU) {
+            this.placeholder.set_text("");
+            this._disconnectModelSignals();
+            this._currentModel = null;
+            this._insertActionGroups({});
+            let proxy = resolved._dbusProxy || this._currentDbusProxy;
+            let afterProxy = (p) => {
+                this._watchDbusProxy(p);
+                menuBuilder.buildPanelFromDbusmenu(
+                    this.box,
+                    this.menuManager,
+                    this.orientation,
+                    p,
+                    (entries) => {
+                        this._menuEntries = entries;
+                        this._modelSig = "dm:" + this._menuEntries.length;
+                        this._armMenuCloseHandler();
+                        if (!this._menuEntries.length)
+                            this._scheduleRetry();
+                        done();
+                    }
+                );
+            };
+            if (proxy) {
+                afterProxy(proxy);
+                return;
+            }
+            if (resolved.busName && resolved.objectPath) {
+                menuSource.createDbusMenuProxyAsync(resolved.busName, resolved.objectPath, (p) => {
+                    resolved._dbusProxy = p;
+                    afterProxy(p);
+                });
+                return;
+            }
+            this._scheduleRetry();
+            done();
+            return;
+        }
+
+        if (!resolved.model) {
+            this.placeholder.set_text("");
+            this._disconnectModelSignals();
+            this._disconnectDbusProxy();
+            this._currentModel = null;
+            this._modelSig = null;
+            this._insertActionGroups({});
+            this._scheduleRetry();
+            done();
+            return;
+        }
+
+        this.placeholder.set_text("");
+        this._disconnectDbusProxy();
+        this._insertActionGroups(resolved.actionGroups);
+        this._watchModel(resolved.model);
+        this._modelSig = this._modelSignature(resolved.model);
+
+        this._menuEntries = menuBuilder.buildPanelMenus(
+            this.box,
+            this.menuManager,
+            this.orientation,
+            resolved.model,
+            resolved.actionGroups || this._currentActionGroups
+        );
+        this._armMenuCloseHandler();
+        done();
     }
 
     _armMenuCloseHandler() {

@@ -55,22 +55,7 @@ const Meta = imports.gi.Meta;
 
 const REGISTRAR_NAME = "com.canonical.AppMenu.Registrar";
 const REGISTRAR_PATH = "/com/canonical/AppMenu/Registrar";
-
-const RegistrarIface = `
-<node>
-  <interface name="com.canonical.AppMenu.Registrar">
-    <method name="GetMenuForWindow">
-      <arg type="u" name="windowId" direction="in"/>
-      <arg type="s" name="service" direction="out"/>
-      <arg type="o" name="menuObjectPath" direction="out"/>
-    </method>
-    <method name="GetMenus">
-      <arg type="a(uso)" name="menus" direction="out"/>
-    </method>
-  </interface>
-</node>`;
-
-const RegistrarProxy = Gio.DBusProxy.makeProxyWrapper(RegistrarIface);
+const REGISTRAR_IFACE = "com.canonical.AppMenu.Registrar";
 
 var MenuKind = {
     NONE: 0,
@@ -78,13 +63,14 @@ var MenuKind = {
     DBUSMENU: 2
 };
 
+/** @type {Object.<number, {service: string, path: string, windowId: number}|null>} */
+let _registrarCache = {};
+
 function getWindowIds(metaWindow) {
     let ids = [];
     if (!metaWindow)
         return ids;
 
-    // Prefer X11 XID first: Qt's QDBusMenuBar registers with QWindow::winId(),
-    // which is the XID on xcb. Mutter's compositor get_id() is a different value.
     try {
         if (metaWindow.get_xwindow) {
             let xid = metaWindow.get_xwindow();
@@ -147,36 +133,8 @@ function readMetaGtkProps(metaWindow) {
     };
 }
 
-function tryRegistrar(windowIds) {
-    if (!windowIds || !windowIds.length)
-        return null;
-
-    try {
-        let proxy = new RegistrarProxy(
-            Gio.DBus.session, REGISTRAR_NAME, REGISTRAR_PATH
-        );
-
-        for (let i = 0; i < windowIds.length; i++) {
-            let id = windowIds[i];
-            try {
-                let [service, path] = proxy.GetMenuForWindowSync(id);
-                if (service && path && path !== "/")
-                    return { service: service, path: path, windowId: id };
-            } catch (err) {}
-        }
-    } catch (err) {}
-
-    return null;
-}
-
-/**
- * Lightweight identity for the focused window's menu exporter.
- * Does not create GMenuModel / dbusmenu proxies (avoids GObject churn).
- * @param {any} metaWindow
- * @returns {MenuProbe}
- */
-function probeWindowMenu(metaWindow) {
-    let out = {
+function _emptyProbe(windowIds) {
+    return {
         menuKey: null,
         kind: MenuKind.NONE,
         source: null,
@@ -187,41 +145,146 @@ function probeWindowMenu(metaWindow) {
         applicationPath: null,
         windowPath: null,
         unityPath: null,
-        windowIds: getWindowIds(metaWindow)
+        windowIds: windowIds || []
     };
+}
+
+function _probeFromGtk(metaProps, windowIds) {
+    let out = _emptyProbe(windowIds);
+    out.kind = MenuKind.MENUMODEL;
+    out.source = "meta";
+    out.busName = metaProps.busName;
+    out.menubarPath = metaProps.menubarPath;
+    out.appMenuPath = metaProps.appMenuPath;
+    out.applicationPath = metaProps.applicationPath;
+    out.windowPath = metaProps.windowPath;
+    out.unityPath = metaProps.unityPath;
+    out.objectPath = metaProps.menubarPath || metaProps.appMenuPath;
+    out.menuKey = (out.busName || "") + "|" + (out.objectPath || "");
+    return out;
+}
+
+function _probeFromRegistrar(reg, windowIds) {
+    let out = _emptyProbe(windowIds);
+    out.kind = MenuKind.DBUSMENU;
+    out.source = "registrar";
+    out.busName = reg.service;
+    out.objectPath = reg.path;
+    out.menuKey = (reg.service || "") + "|" + (reg.path || "");
+    return out;
+}
+
+function _cachedRegistrar(windowIds) {
+    if (!windowIds || !windowIds.length)
+        return undefined;
+    for (let i = 0; i < windowIds.length; i++) {
+        let id = windowIds[i];
+        if (Object.prototype.hasOwnProperty.call(_registrarCache, id))
+            return _registrarCache[id];
+    }
+    return undefined;
+}
+
+/**
+ * Async registrar lookup. Results are cached per window id (including misses).
+ * @param {number[]} windowIds
+ * @param {(reg: {service: string, path: string, windowId: number}|null) => void} callback
+ */
+function tryRegistrarAsync(windowIds, callback) {
+    if (!windowIds || !windowIds.length) {
+        callback(null);
+        return;
+    }
+
+    let cached = _cachedRegistrar(windowIds);
+    if (cached !== undefined) {
+        callback(cached);
+        return;
+    }
+
+    let idx = 0;
+    let tryNext = () => {
+        if (idx >= windowIds.length) {
+            for (let i = 0; i < windowIds.length; i++)
+                _registrarCache[windowIds[i]] = null;
+            callback(null);
+            return;
+        }
+        let id = windowIds[idx++];
+        Gio.DBus.session.call(
+            REGISTRAR_NAME,
+            REGISTRAR_PATH,
+            REGISTRAR_IFACE,
+            "GetMenuForWindow",
+            GLib.Variant.new("(u)", [id]),
+            GLib.VariantType.new("(so)"),
+            Gio.DBusCallFlags.NONE,
+            1000,
+            null,
+            (conn, res) => {
+                try {
+                    let reply = conn.call_finish(res);
+                    let unpacked = reply.deep_unpack();
+                    let service = unpacked[0];
+                    let path = unpacked[1];
+                    if (service && path && path !== "/") {
+                        let reg = { service: service, path: path, windowId: id };
+                        _registrarCache[id] = reg;
+                        callback(reg);
+                        return;
+                    }
+                } catch (err) {}
+                tryNext();
+            }
+        );
+    };
+    tryNext();
+}
+
+/**
+ * Lightweight identity for the focused window's menu exporter.
+ * GTK path is synchronous; registrar uses cache only (call ensureProbeAsync to fill).
+ * @param {any} metaWindow
+ * @returns {MenuProbe}
+ */
+function probeWindowMenu(metaWindow) {
+    let windowIds = getWindowIds(metaWindow);
+    let out = _emptyProbe(windowIds);
     if (!metaWindow)
         return out;
 
     try {
         let metaProps = readMetaGtkProps(metaWindow);
-        if (metaProps && (metaProps.menubarPath || metaProps.appMenuPath)) {
-            out.kind = MenuKind.MENUMODEL;
-            out.source = "meta";
-            out.busName = metaProps.busName;
-            out.menubarPath = metaProps.menubarPath;
-            out.appMenuPath = metaProps.appMenuPath;
-            out.applicationPath = metaProps.applicationPath;
-            out.windowPath = metaProps.windowPath;
-            out.unityPath = metaProps.unityPath;
-            out.objectPath = metaProps.menubarPath || metaProps.appMenuPath;
-            out.menuKey = (out.busName || "") + "|" + (out.objectPath || "");
-            return out;
-        }
+        if (metaProps && (metaProps.menubarPath || metaProps.appMenuPath))
+            return _probeFromGtk(metaProps, windowIds);
     } catch (err) {}
 
     try {
-        let reg = tryRegistrar(out.windowIds);
-        if (reg) {
-            out.kind = MenuKind.DBUSMENU;
-            out.source = "registrar";
-            out.busName = reg.service;
-            out.objectPath = reg.path;
-            out.menuKey = (reg.service || "") + "|" + (reg.path || "");
-            return out;
-        }
+        let cached = _cachedRegistrar(windowIds);
+        if (cached)
+            return _probeFromRegistrar(cached, windowIds);
     } catch (err) {}
 
     return out;
+}
+
+/**
+ * @param {any} metaWindow
+ * @param {(probe: MenuProbe) => void} callback
+ */
+function ensureProbeAsync(metaWindow, callback) {
+    let probe = probeWindowMenu(metaWindow);
+    if (probe.kind !== MenuKind.NONE || !metaWindow) {
+        callback(probe);
+        return;
+    }
+    let windowIds = probe.windowIds;
+    tryRegistrarAsync(windowIds, (reg) => {
+        if (reg)
+            callback(_probeFromRegistrar(reg, windowIds));
+        else
+            callback(_emptyProbe(windowIds));
+    });
 }
 
 function bindMenuModel(result, props) {
@@ -231,8 +294,6 @@ function bindMenuModel(result, props) {
     result.appMenuPath = props.appMenuPath;
     result.applicationPath = props.applicationPath;
     result.windowPath = props.windowPath;
-    // appmenu-gtk-module exports unity actions on _UNITY_OBJECT_PATH, which is
-    // often the same as the menubar path (xed). GtkApplication apps may differ.
     result.unityPath = props.unityPath || props.menubarPath || null;
     result.source = props.source || "unknown";
 
@@ -251,8 +312,6 @@ function bindMenuModel(result, props) {
             Gio.DBus.session, props.busName, result.unityPath
         );
     }
-    // Direct org.gtk.Actions Activate fallback — DBusActionGroup fills async (~250ms)
-    // and silently no-ops activate_action until then (Transmission win.*).
     result.actionGroups._gtk = {
         busName: props.busName,
         appPath: props.applicationPath || null,
@@ -301,49 +360,63 @@ function fetchUnityObjectPath(xid, callback) {
 }
 
 /**
- * Use com.canonical.dbusmenu GetLayout / Event directly.
- * AppmenuGLibTranslator's DBusMenuSectionModel SEGVs under GJS when walked
- * or GC-finalized — do not create Importer/GMenuModel for registrar menus.
  * @param {string} service
  * @param {string} path
- * @returns {any}
+ * @param {(proxy: any|null) => void} callback
  */
-function createDbusMenuProxy(service, path) {
-    return Gio.DBusProxy.new_sync(
-        Gio.DBus.session,
-        Gio.DBusProxyFlags.NONE,
-        null,
-        service,
-        path,
-        "com.canonical.dbusmenu",
-        null
-    );
+function createDbusMenuProxyAsync(service, path, callback) {
+    try {
+        Gio.DBusProxy.new(
+            Gio.DBus.session,
+            Gio.DBusProxyFlags.NONE,
+            null,
+            service,
+            path,
+            "com.canonical.dbusmenu",
+            null,
+            (obj, res) => {
+                try {
+                    callback(Gio.DBusProxy.new_finish(res));
+                } catch (err) {
+                    global.logWarning("globalmenu: dbusmenu proxy failed: " + err);
+                    callback(null);
+                }
+            }
+        );
+    } catch (err) {
+        global.logWarning("globalmenu: dbusmenu proxy failed: " + err);
+        callback(null);
+    }
 }
 
-function aboutToShowDbusMenu(proxyOrService, pathOrId, maybeId) {
-    let proxy = proxyOrService;
-    let id = 0;
-    if (typeof pathOrId === "string") {
-        try {
-            proxy = createDbusMenuProxy(proxyOrService, pathOrId);
-        } catch (err) {
-            return false;
-        }
-        id = maybeId || 0;
-    } else {
-        id = pathOrId || 0;
+/**
+ * @param {any} proxy
+ * @param {number} id
+ * @param {(needsUpdate: boolean) => void} callback
+ */
+function aboutToShowDbusMenuAsync(proxy, id, callback) {
+    if (!proxy) {
+        callback(false);
+        return;
     }
     try {
-        let ret = proxy.call_sync(
+        proxy.call(
             "AboutToShow",
-            new GLib.Variant("(i)", [id]),
+            new GLib.Variant("(i)", [id || 0]),
             Gio.DBusCallFlags.NONE,
             500,
-            null
+            null,
+            (p, res) => {
+                try {
+                    let ret = p.call_finish(res);
+                    callback(!!ret.deep_unpack()[0]);
+                } catch (err) {
+                    callback(false);
+                }
+            }
         );
-        return ret.deep_unpack()[0];
     } catch (err) {
-        return false;
+        callback(false);
     }
 }
 
@@ -371,7 +444,6 @@ function _variantToPlain(v) {
                 }
                 return out;
             }
-            // Fall back
             return v.deep_unpack();
         }
     } catch (err) {}
@@ -379,7 +451,6 @@ function _variantToPlain(v) {
 }
 
 function _unpackDbusNode(nodeVariant) {
-    // Children arrive as type "v" wrapping "(ia{sv}av)". deep_unpack() loses props in GJS.
     let v = nodeVariant;
     if (v instanceof GLib.Variant) {
         if (v.get_type_string() === "v")
@@ -402,48 +473,74 @@ function _unpackDbusNode(nodeVariant) {
  * @param {any} proxy
  * @param {number} parentId
  * @param {number} depth
- * @returns {{rev: number, id: number, props: object, children: any[]}|null}
+ * @param {(layout: {rev: number, id: number, props: object, children: any[]}|null) => void} callback
  */
-function fetchDbusMenuLayout(proxy, parentId, depth) {
-    if (!proxy)
-        return null;
+function fetchDbusMenuLayoutAsync(proxy, parentId, depth, callback) {
+    if (!proxy) {
+        callback(null);
+        return;
+    }
+
+    let afterOpened = () => {
+        aboutToShowDbusMenuAsync(proxy, parentId, () => {
+            try {
+                proxy.call(
+                    "GetLayout",
+                    new GLib.Variant("(iias)", [
+                        parentId,
+                        depth,
+                        ["label", "type", "children-display", "enabled", "visible"]
+                    ]),
+                    Gio.DBusCallFlags.NONE,
+                    2000,
+                    null,
+                    (p, res) => {
+                        try {
+                            let ret = p.call_finish(res);
+                            let rev = ret.get_child_value(0).get_uint32();
+                            let root = _unpackDbusNode(ret.get_child_value(1));
+                            if (!root) {
+                                callback(null);
+                                return;
+                            }
+                            callback({
+                                rev: rev,
+                                id: root[0],
+                                props: root[1] || {},
+                                children: root[2] || []
+                            });
+                        } catch (err) {
+                            global.logWarning("globalmenu GetLayout: " + err);
+                            callback(null);
+                        }
+                    }
+                );
+            } catch (err) {
+                global.logWarning("globalmenu GetLayout: " + err);
+                callback(null);
+            }
+        });
+    };
+
     try {
-        // Some peers only populate after an "opened" event + AboutToShow.
-        try {
-            proxy.call_sync(
-                "Event",
-                new GLib.Variant("(isvu)", [
-                    parentId,
-                    "opened",
-                    GLib.Variant.new_int32(0),
-                    0
-                ]),
-                Gio.DBusCallFlags.NONE,
-                300,
-                null
-            );
-        } catch (err) {}
-        aboutToShowDbusMenu(proxy, parentId);
-        let ret = proxy.call_sync(
-            "GetLayout",
-            new GLib.Variant("(iias)", [
+        proxy.call(
+            "Event",
+            new GLib.Variant("(isvu)", [
                 parentId,
-                depth,
-                ["label", "type", "children-display", "enabled", "visible"]
+                "opened",
+                GLib.Variant.new_int32(0),
+                0
             ]),
             Gio.DBusCallFlags.NONE,
-            2000,
-            null
+            300,
+            null,
+            (_p, res) => {
+                try { _p.call_finish(res); } catch (err) {}
+                afterOpened();
+            }
         );
-        // ret: (u(ia{sv}av))
-        let rev = ret.get_child_value(0).get_uint32();
-        let root = _unpackDbusNode(ret.get_child_value(1));
-        if (!root)
-            return null;
-        return { rev: rev, id: root[0], props: root[1] || {}, children: root[2] || [] };
     } catch (err) {
-        global.logWarning("globalmenu GetLayout: " + err);
-        return null;
+        afterOpened();
     }
 }
 
@@ -469,31 +566,27 @@ function dbusMenuEvent(proxy, id) {
     }
 }
 
-function bindDbusMenu(result, service, path) {
+/**
+ * @param {ResolvedMenu} result
+ * @param {string} service
+ * @param {string} path
+ * @param {(result: ResolvedMenu) => void} callback
+ */
+function bindDbusMenuAsync(result, service, path, callback) {
     result.kind = MenuKind.DBUSMENU;
     result.busName = service;
     result.objectPath = path;
     result.source = "registrar";
     result.model = null;
     result.actionGroups = {};
-
-    try {
-        result._dbusProxy = createDbusMenuProxy(service, path);
-    } catch (err) {
-        global.logWarning("globalmenu: dbusmenu proxy failed: " + err);
-    }
+    createDbusMenuProxyAsync(service, path, (proxy) => {
+        result._dbusProxy = proxy;
+        callback(result);
+    });
 }
 
-/**
- * Resolve menus for a Meta.Window on X11 or Wayland.
- *
- * 1. Meta.Window GTK D-Bus properties (X11 + Wayland gtk-shell)
- * 2. AppMenu registrar (Qt / Electron / classic dbusmenu)
- * @param {any} metaWindow
- * @returns {ResolvedMenu}
- */
-function resolveWindowMenu(metaWindow) {
-    let result = {
+function _emptyResolved(metaWindow) {
+    return {
         kind: MenuKind.NONE,
         busName: null,
         objectPath: null,
@@ -508,33 +601,40 @@ function resolveWindowMenu(metaWindow) {
         windowIds: getWindowIds(metaWindow),
         clientType: getClientType(metaWindow)
     };
+}
 
-    if (!metaWindow)
-        return result;
+/**
+ * Resolve menus for a Meta.Window (async D-Bus for registrar / dbusmenu proxy).
+ * @param {any} metaWindow
+ * @param {(result: ResolvedMenu) => void} callback
+ */
+function resolveWindowMenuAsync(metaWindow, callback) {
+    let result = _emptyResolved(metaWindow);
+    if (!metaWindow) {
+        callback(result);
+        return;
+    }
 
     try {
         let metaProps = readMetaGtkProps(metaWindow);
         if (metaProps && (metaProps.menubarPath || metaProps.appMenuPath)) {
             bindMenuModel(result, metaProps);
-            if (result.model)
-                return result;
+            if (result.model) {
+                callback(result);
+                return;
+            }
         }
     } catch (err) {
         global.logWarning("globalmenu: Meta GTK props failed: " + err);
     }
 
-    try {
-        let reg = tryRegistrar(result.windowIds);
-        if (reg) {
-            bindDbusMenu(result, reg.service, reg.path);
-            if (result.model)
-                return result;
+    tryRegistrarAsync(result.windowIds, (reg) => {
+        if (!reg) {
+            callback(result);
+            return;
         }
-    } catch (err) {
-        global.logWarning("globalmenu: registrar lookup failed: " + err);
-    }
-
-    return result;
+        bindDbusMenuAsync(result, reg.service, reg.path, callback);
+    });
 }
 
 function guessXid(metaWindow) {
@@ -551,19 +651,6 @@ function guessXid(metaWindow) {
     return 0;
 }
 
-module.exports = {
-    MenuKind,
-    getWindowIds,
-    getClientType,
-    readMetaGtkProps,
-    tryRegistrar,
-    probeWindowMenu,
-    fetchUnityObjectPath,
-    createDbusMenuProxy,
-    aboutToShowDbusMenu,
-    fetchDbusMenuLayout,
-    dbusMenuEvent,
-    bindDbusMenu,
-    resolveWindowMenu,
-    guessXid
-};
+function invalidateRegistrarCache() {
+    _registrarCache = {};
+}

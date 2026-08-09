@@ -1,0 +1,48 @@
+# Translation template for globalmenu@Obsidian-Jackal.
+# Copyright (C) 2026 Obsidian Jackal
+# This file is distributed under the same license as the cinnamon-global-menu package.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: globalmenu@Obsidian-Jackal 1.0.2\n"
+"Report-Msgid-Bugs-To: https://gitlab.com/Obsidian_Jackal/cinnamon-global-menu\n"
+"POT-Creation-Date: 2026-08-09 14:20-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: metadata.json
+msgid "Global Application Menu"
+msgstr ""
+
+#: metadata.json
+msgid ""
+"Shows the focused application's menus in the Cinnamon panel (GTK, Qt, and "
+"Electron via AppMenu). Requires separately installed AppMenu backends; see "
+"the project website."
+msgstr ""
+
+#: settings-schema.json->show-app-name
+#: applet.js
+msgid "Show application name"
+msgstr ""
+
+#: settings-schema.json->desaturate-app-name
+#: applet.js
+msgid "Use bold application name"
+msgstr ""
+
+#: settings-schema.json->max-app-name-length
+#: applet.js
+msgid "Maximum application name length"
+msgstr ""
+
+#: settings-schema.json->max-app-name-length
+#: applet.js
+msgid "characters"
+msgstr ""
