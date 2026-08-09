@@ -1343,29 +1343,29 @@ class SFTPModule extends KDECModule {
     }
 
     startBrowsing() {
-    if (this.mounted == true) {
-        let path = this.mountPoint;
+        if (this.mounted == true) {
+            let path = this.mountPoint;
 
-        try {
-            let directories = this.proxy.getDirectoriesSync()[0];
-            let paths = Object.keys(directories);
+            try {
+                let directories = this.proxy.getDirectoriesSync()[0];
+                let paths = Object.keys(directories);
 
-            // If KDE Connect exposes a single storage location, open it
-            // directly. Preserve the existing mount-root behavior when
-            // multiple locations are exposed.
-            if (paths.length === 1) {
-                path = paths[0];
+                // If KDE Connect exposes a single storage location, open it
+                // directly. Preserve the existing mount-root behavior when
+                // multiple locations are exposed.
+                if (paths.length === 1) {
+                    path = paths[0];
+                }
+            } catch (error) {
+                this.info(
+                    "Could not get remote directories, falling back to mount point: " + error,
+                    CommonUtils.LogLevel.DEBUG
+                );
             }
-        } catch (error) {
-            this.info(
-                "Could not get remote directories, falling back to mount point: " + error,
-                CommonUtils.LogLevel.DEBUG
-            );
-        }
 
-        CommonUtils.openURL("file://" + path);
+            CommonUtils.openURL("file://" + path);
+        }
     }
-}
 
     _createMenuItem() {
         // Create Menu Item
