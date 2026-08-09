@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FM-Radio@hilyxx 1.2\n"
+"Project-Id-Version: FM-Radio@hilyxx 1.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-07-26 17:56+0200\n"
+"POT-Creation-Date: 2026-08-09 19:55+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,40 +19,65 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 
 #. metadata.json->name
-#. applet.js:59 applet.js:331 applet.js:397 applet.js:423 applet.js:449
-#. applet.js:470
+#. applet.js:61 applet.js:145 applet.js:148 applet.js:154 applet.js:176
+#. applet.js:178 applet.js:183 applet.js:402 applet.js:468 applet.js:494
+#. applet.js:520 applet.js:541
 msgid "FM Radio"
 msgstr "FM Radio"
 
-#. applet.js:72
+#. applet.js:74
 msgid "Reload applet"
 msgstr "Recharger l'applet"
 
-#. applet.js:243
-msgid "All stations"
-msgstr "Toutes les stations"
-
-#. applet.js:323
-msgid "Waiting..."
-msgstr "En attente..."
-
-#. applet.js:331
-msgid "Please start a radio station first to record it."
-msgstr "Veuillez d'abord lancer une radio pour l'enregistrer."
-
-#. applet.js:366
+#. applet.js:136 applet.js:437
 msgid "Music"
 msgstr "Musique"
 
-#. applet.js:397
+#. applet.js:145
+msgid "Stations successfully saved to:\n"
+msgstr "Stations enregistrées avec succès dans :\n"
+
+#. applet.js:148
+msgid "Error saving backup."
+msgstr "Erreur lors de l’enregistrement de la sauvegarde."
+
+#. applet.js:154
+msgid "Please select a backup file to import first."
+msgstr "Veuillez d’abord sélectionner un fichier de sauvegarde à importer."
+
+#. applet.js:176
+msgid "Stations successfully restored!"
+msgstr "Stations restaurées avec succès !"
+
+#. applet.js:178
+msgid "Invalid JSON file format."
+msgstr "Format de fichier JSON invalide."
+
+#. applet.js:183
+msgid "Error reading the backup file."
+msgstr "Erreur lors de la lecture du fichier de sauvegarde."
+
+#. applet.js:315
+msgid "All stations"
+msgstr "Toutes les stations"
+
+#. applet.js:393
+msgid "Waiting..."
+msgstr "En attente..."
+
+#. applet.js:402
+msgid "Please start a radio station first to record it."
+msgstr "Veuillez d'abord lancer une radio pour l'enregistrer."
+
+#. applet.js:468
 msgid "Recording started: "
 msgstr "Enregistrement démarré : "
 
-#. applet.js:423
+#. applet.js:494
 msgid "Error starting recording."
 msgstr "Erreur lors du démarrage de l'enregistrement."
 
-#. applet.js:449
+#. applet.js:520
 msgid "Recording finished and saved to the /FM-Radio folder."
 msgstr "Enregistrement terminé et sauvegardé dans le dossier /FM-Radio."
 
@@ -64,7 +89,7 @@ msgstr "Erreur"
 msgid "Please enter a radio station name to search for."
 msgstr "Veuillez entrer un nom de radio à chercher."
 
-#. search.js:38
+#. search.js:39
 msgid "No stations found for this keyword."
 msgstr "Aucune station trouvée pour ce mot-clé."
 
@@ -101,6 +126,10 @@ msgstr "Enregistrement"
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
+#. settings-schema.json->section_backup->title
+msgid "Backup and Restore radio stations"
+msgstr "Sauvegarder et restaurer les stations radio"
+
 #. settings-schema.json->search_keyword->description
 msgid "Radio station name to search for"
 msgstr "Nom de la radio à chercher"
@@ -108,10 +137,6 @@ msgstr "Nom de la radio à chercher"
 #. settings-schema.json->search_button->description
 msgid "Launch search"
 msgstr "Lancer la recherche"
-
-#. settings-schema.json->search_button->tooltip
-msgid "Search for the station on the internet"
-msgstr "Cherche la station sur internet"
 
 #. settings-schema.json->search_results->description
 msgid "Search results (Copy the URL and add it to your list below):"
@@ -122,10 +147,6 @@ msgstr ""
 #. settings-schema.json->clear_button->description
 msgid "Clear results"
 msgstr "Effacer les résultats"
-
-#. settings-schema.json->clear_button->tooltip
-msgid "Clear the text area"
-msgstr "Vide la zone de texte"
 
 #. settings-schema.json->custom_stations->description
 msgid "Custom radio stations"
@@ -193,10 +214,18 @@ msgstr "Laissez vide pour utiliser le dossier Musique par défaut."
 msgid "Reset to default Music folder"
 msgstr "Restaurer le dossier Musique par défaut"
 
-#. settings-schema.json->reset_folder_button->tooltip
-msgid "Reset recording location back to default system Music folder"
-msgstr "Revenir au dossier Musique par défaut du système"
-
 #. settings-schema.json->key_play_pause->description
 msgid "Play / Stop"
 msgstr "Lecture / Arrêt"
+
+#. settings-schema.json->export_button->description
+msgid "Export stations"
+msgstr "Exporter les stations"
+
+#. settings-schema.json->import_file->description
+msgid "Select a Backup file (.json) to restore"
+msgstr "Sélectionnez un fichier de sauvegarde (.json) à restaurer"
+
+#. settings-schema.json->import_button->description
+msgid "Restore stations from the selected file"
+msgstr "Restaurer les stations à partir du fichier sélectionné"
