@@ -108,7 +108,7 @@
         "dependency": "enable-saving",
         "default": "~/",
         "description": "Progress Save File",
-        "tooltip": "This file is used to save app time in case you - (the user) were to shutdown and turn on the device later during the same day. \nWhen \"None\" is set, a default path is used \n\nDefault path: \"home/username/.cache/DailyAppUsage/save.bin\""
+        "tooltip": "This file is used to save app time in case you - (the user) were to shutdown and turn on the device later during the same day. \nWhen \"None\" is set, a default path is used \n\nDefault path: \"home/username/.cache/DailyAppUsage/save.json\""
     }, 
 	
 	"save-now-btn": {

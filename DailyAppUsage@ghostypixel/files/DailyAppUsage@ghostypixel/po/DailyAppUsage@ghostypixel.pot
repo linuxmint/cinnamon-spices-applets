@@ -1,0 +1,280 @@
+# DAILY APP USAGE
+# This file is put in the public domain.
+# ghostypixel, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DailyAppUsage@ghostypixel 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-09 06:58+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:56
+msgid "App Usage"
+msgstr ""
+
+#. applet.js:57
+msgid "Displays apps and how long they were running."
+msgstr ""
+
+#. applet.js:223
+msgid "Unknown"
+msgstr ""
+
+#. applet.js:273
+#, javascript-format
+msgid "App closed: %s"
+msgstr ""
+
+#. applet.js:288
+#, javascript-format
+msgid "Failed timer for %s"
+msgstr ""
+
+#. applet.js:315
+msgid "No apps were opened."
+msgstr ""
+
+#. applet.js:441
+#, javascript-format
+msgid "Failed to read save file. %s"
+msgstr ""
+
+#. applet.js:525
+msgid "No Apps Active"
+msgstr ""
+
+#. applet.js:527
+msgid ""
+"\n"
+"\n"
+"Apps:"
+msgstr ""
+
+#. applet.js:538
+msgid ""
+"Settings: { \n"
+"\tGENERAL\n"
+"        \n"
+"\n"
+"\tApp count before UI overflow: %i\n"
+"        \n"
+"\tApp label max characters: %i\n"
+"        \n"
+"\n"
+"\tSAVE FILE\n"
+"        \n"
+"\n"
+"\tEnabled: %d\n"
+"        \n"
+"\tInterval: %i Hours\n"
+"        \n"
+"\tAbsolute path: \"%s\" \n"
+"        \n"
+"}"
+msgstr ""
+
+#. applet.js:596
+#, javascript-format
+msgid "coudnt save json %s"
+msgstr ""
+
+#. applet.js:603
+#, javascript-format
+msgid "coudnt save csv %s"
+msgstr ""
+
+#. applet.js:671
+#, javascript-format
+msgid "Failed to Create/Overwrite file: %s"
+msgstr ""
+
+#. applet.js:911
+msgid "%s | Instances active: %i, Time: %s, Flags: None} \n"
+msgstr ""
+
+#. metadata.json->name
+msgid "Daily App Usage"
+msgstr ""
+
+#. metadata.json->description
+msgid "Measures app usage during the day."
+msgstr ""
+
+#. settings-schema.json->appearance-page->title
+#. settings-schema.json->appearance-section->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->saving-page->title
+#. settings-schema.json->saving-section->title
+msgid "Saving"
+msgstr ""
+
+#. settings-schema.json->export-page->title
+msgid "Export"
+msgstr ""
+
+#. settings-schema.json->monthly-report-section->title
+msgid "Monthly report (Work in progress)"
+msgstr ""
+
+#. settings-schema.json->export-section->title
+msgid "Exporting data"
+msgstr ""
+
+#. settings-schema.json->icon-size->description
+msgid "Section icon size"
+msgstr ""
+
+#. settings-schema.json->icon-size->tooltip
+msgid "Select the size each app icon uses."
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "256"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "512"
+msgstr ""
+
+#. settings-schema.json->apps-visible->description
+msgid "App count before overflowing"
+msgstr ""
+
+#. settings-schema.json->apps-visible->tooltip
+msgid ""
+"Set how many apps should fit within the menu's height before a slider shows "
+"up."
+msgstr ""
+
+#. settings-schema.json->max-char-for-app-label->description
+msgid "Max characters for app label"
+msgstr ""
+
+#. settings-schema.json->max-char-for-app-label->tooltip
+msgid ""
+"How many characters an app selection allows before cutting the word and "
+"adding \"...\" at the end."
+msgstr ""
+
+#. settings-schema.json->enable-saving->description
+msgid "Allow Saving progress"
+msgstr ""
+
+#. settings-schema.json->enable-saving->tooltip
+msgid ""
+"Turning this on allow's the applet to save it's progress during the day."
+msgstr ""
+
+#. settings-schema.json->save-interval->units
+msgid "Hours"
+msgstr ""
+
+#. settings-schema.json->save-interval->description
+msgid "Save interval"
+msgstr ""
+
+#. settings-schema.json->save-interval->tooltip
+msgid "The amount of time in hours between saving."
+msgstr ""
+
+#. settings-schema.json->save-path->description
+msgid "Progress Save File"
+msgstr ""
+
+#. settings-schema.json->save-path->tooltip
+msgid ""
+"This file is used to save app time in case you - (the user) were to shutdown "
+"and turn on the device later during the same day. \n"
+"When \"None\" is set, a default path is used \n"
+"\n"
+"Default path: \"home/username/.cache/DailyAppUsage/save.json\""
+msgstr ""
+
+#. settings-schema.json->save-now-btn->description
+msgid "Save now"
+msgstr ""
+
+#. settings-schema.json->enable-monthly-report->description
+msgid "Allow monthly reports"
+msgstr ""
+
+#. settings-schema.json->enable-monthly-report->tooltip
+msgid ""
+"Turning this will enable monthly reports. This will gather data throughout "
+"the month into a single spreadsheet"
+msgstr ""
+
+#. settings-schema.json->enable-export-dbus->description
+msgid "Enable export DBus"
+msgstr ""
+
+#. settings-schema.json->enable-export-dbus->tooltip
+msgid ""
+"When on runs a dbus interface in the background, allowing other apps to "
+"retrive app data."
+msgstr ""
+
+#. settings-schema.json->show-export-buttons->description
+msgid "Export buttons used"
+msgstr ""
+
+#. settings-schema.json->show-export-buttons->tooltip
+msgid "Select which buttons will be exported"
+msgstr ""
+
+#. settings-schema.json->show-export-buttons->options
+msgid "None"
+msgstr ""
+
+#. settings-schema.json->show-export-buttons->options
+msgid "CSV"
+msgstr ""
+
+#. settings-schema.json->show-export-buttons->options
+msgid "JSON"
+msgstr ""
+
+#. settings-schema.json->show-export-buttons->options
+msgid "Both"
+msgstr ""
+
+#. settings-schema.json->export-path->description
+msgid "Export Directory"
+msgstr ""
+
+#. settings-schema.json->export-path->tooltip
+msgid ""
+"Directory in which export files will be created. files will be named "
+"{datetime}.{extension}"
+msgstr ""
