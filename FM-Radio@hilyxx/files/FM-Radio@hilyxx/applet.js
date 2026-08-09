@@ -10,6 +10,7 @@ const Slider = imports.ui.slider;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
 const Main = imports.ui.main;
+const MessageTray = imports.ui.messageTray;
 
 const UUID = "FM-Radio@hilyxx";
 Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
@@ -43,6 +44,7 @@ class FMRadioApplet extends Applet.IconApplet {
         this.settings.bind("key_play_pause", "key_play_pause", this._bindKeyBindings, this);
         this.settings.bind("show_recording_notifications", "show_recording_notifications");
         this.settings.bind("recording_folder", "recording_folder");
+        this.settings.bind("import_file", "import_file");
         this.settings.bind("search_keyword", "search_keyword");
         this.settings.bind("search_results", "search_results");
 
@@ -114,6 +116,75 @@ class FMRadioApplet extends Applet.IconApplet {
         this.recording_folder = "";
     }
 
+    _showNotification(title, msg) {
+        if (!this._notificationSource) {
+            this._notificationSource = new MessageTray.SystemNotificationSource(title);
+            Main.messageTray.add(this._notificationSource);
+        }
+        
+        let notification = new MessageTray.Notification(this._notificationSource, title, msg);
+        
+        notification.setTransient(false);
+        this._notificationSource.notify(notification);
+    }
+
+    // === BACKUP ===
+    _onExportClicked() {
+        // Set target folder (default Music folder)
+        let musicDir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_MUSIC);
+        if (!musicDir) {
+            musicDir = GLib.get_home_dir() + "/" + _("Music"); 
+        }
+        let backupPath = musicDir + "/FM-Radio-Stations-Backup.json";
+        
+        try {
+            let jsonString = JSON.stringify(this.custom_stations, null, 4);
+            
+            GLib.file_set_contents(backupPath, jsonString);
+            
+            this._showNotification(_("FM Radio"), _("Stations successfully saved to:\n") + backupPath);
+        } catch (e) {
+            global.logError("FM Radio: Error exporting stations - " + e);
+            this._showNotification(_("FM Radio"), _("Error saving backup."));
+        }
+    }
+
+    _onImportClicked() {
+        if (!this.import_file || this.import_file.trim() === "") {
+            this._showNotification(_("FM Radio"), _("Please select a backup file to import first."));
+            return;
+        }
+        
+        let path = this.import_file.replace("file://", "");
+        let file = Gio.file_new_for_path(path);
+        
+        file.load_contents_async(null, (sourceFile, res) => {
+            try {
+                let [success, contents] = sourceFile.load_contents_finish(res);
+                if (success) {
+                    let data = imports.byteArray.toString(contents);
+                    let stations = JSON.parse(data);
+                    
+                    if (Array.isArray(stations)) {
+                        this.settings.setValue("custom_stations", stations);
+                    
+                       this.custom_stations = stations;
+                       this._onSettingsChanged();
+                    
+                       this.settings.setValue("import_file", "");
+                    
+                       this._showNotification(_("FM Radio"), _("Stations successfully restored!"));
+                   } else {
+                       this._showNotification(_("FM Radio"), _("Invalid JSON file format."));
+                   }
+                }
+            } catch (e) {
+                global.logError("FM Radio: Error importing stations - " + e);
+                this._showNotification(_("FM Radio"), _("Error reading the backup file."));
+            }
+        });
+    }
+
     _bindKeyBindings() {
         Main.keybindingManager.removeHotKey("fm-play-" + this.instance_id);
 
@@ -124,6 +195,7 @@ class FMRadioApplet extends Applet.IconApplet {
         }
     }
 
+    // === MENU ===
     _buildMenu() {
         this.volumeMenuItem = new PopupMenu.PopupSliderMenuItem(Data.getLastVol());
         
@@ -160,7 +232,7 @@ class FMRadioApplet extends Applet.IconApplet {
         let centerBox = new St.BoxLayout({ 
             x_expand: true, 
             x_align: Clutter.ActorAlign.CENTER,
-            width: 210,
+            width: 205,
             style: 'padding-left: 20px;',
         });
 
@@ -172,7 +244,7 @@ class FMRadioApplet extends Applet.IconApplet {
         this.box = new St.BoxLayout({ 
             x_expand: true,
             y_expand: true,
-            width: 210, 
+            width: 205, 
             vertical: true 
         });
 
@@ -250,14 +322,12 @@ class FMRadioApplet extends Applet.IconApplet {
                 let title = this.player.getTitle();
                 let artist = this.player.getArtist();
                 
-                // Artist update
                 if (artist && artist.trim() !== "") {
                     this.artistLabel.set_text(artist);
                 } else {
                     this.artistLabel.set_text("");
                 }
                 
-                // Title update
                 if (title && title.trim() !== "") {
                     this.statusLabel.set_text(title);
                 } else {
@@ -326,9 +396,10 @@ class FMRadioApplet extends Applet.IconApplet {
         this._updateTooltip();
     }
 
+    // === RECORDING ===
     _toggleRecording() {
         if (!this.player || !this.player.isPlaying()) {
-            Main.notify(_("FM Radio"), _("Please start a radio station first to record it."));
+            this._showNotification(_("FM Radio"), _("Please start a radio station first to record it."));
             return;
         }
 
@@ -394,7 +465,7 @@ class FMRadioApplet extends Applet.IconApplet {
             this.isRecording = true;
 
             if (this.show_recording_notifications) {
-                Main.notify(_("FM Radio"), _("Recording started: ") + currentChannel.getName());
+                this._showNotification(_("FM Radio"), _("Recording started: ") + currentChannel.getName());
             }
 
             this.channelIcon.add_style_class_name('channel-icon-recording');
@@ -420,7 +491,7 @@ class FMRadioApplet extends Applet.IconApplet {
 
         } catch (e) {
             global.logError("FM Radio: Error while recording - " + e);
-            Main.notify(_("FM Radio"), _("Error starting recording."));
+            this._showNotification(_("FM Radio"), _("Error starting recording."));
         }
     }
 
@@ -446,7 +517,7 @@ class FMRadioApplet extends Applet.IconApplet {
         }
 
         if (this.show_recording_notifications) {
-            Main.notify(_("FM Radio"), _("Recording finished and saved to the /FM-Radio folder."));
+            this._showNotification(_("FM Radio"), _("Recording finished and saved to the /FM-Radio folder."));
         }
         
         this.channelIcon.remove_style_class_name('channel-icon-recording');

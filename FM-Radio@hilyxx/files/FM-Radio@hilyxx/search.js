@@ -23,6 +23,7 @@ function findStations(keyword, callback) {
     global.log("FM Radio : API Search for -> " + keyword);
     let encodedQuery = encodeURIComponent(keyword.trim());
     let url = "https://de1.api.radio-browser.info/json/stations/byname/" + encodedQuery;
+    //let url = "https://all.api.radio-browser.info/json/stations/byname/" + encodedQuery; //Alt API
 
     let message = Soup.Message.new('GET', url);
 
@@ -32,7 +33,7 @@ function findStations(keyword, callback) {
             try {
                 let json = JSON.parse(data);
                 let formattedText = "";
-                let maxResults = Math.min(json.length, 10);
+                let maxResults = Math.min(json.length, 20);
                 
                 if (maxResults === 0) {
                     formattedText = _("No stations found for this keyword.");

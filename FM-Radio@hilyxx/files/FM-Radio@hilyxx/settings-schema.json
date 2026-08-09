@@ -26,6 +26,7 @@
             "title": "Settings",
             "sections": [
                 "section_settings",
+                 "section_backup",
                 "section_shortcuts"
             ]
         },
@@ -69,6 +70,15 @@
             "keys": [
                 "key_play_pause"
             ]
+        },
+        "section_backup": {
+            "type": "section",
+            "title": "Backup and Restore radio stations",
+            "keys": [
+                "export_button",
+                "import_file",
+                "import_button"
+            ]
         }
     },
     "search_keyword": {
@@ -79,7 +89,6 @@
     "search_button": {
         "type": "button",
         "description": "Launch search",
-        "tooltip": "Search for the station on the internet",
         "callback": "_onSearchClicked"
     },
     "search_results": {
@@ -90,7 +99,6 @@
     "clear_button": {
         "type": "button",
         "description": "Clear results",
-        "tooltip": "Clear the text area",
         "callback": "_onClearClicked"
     },
     "custom_stations": {
@@ -142,12 +150,26 @@
     "reset_folder_button": {
         "type": "button",
         "description": "Reset to default Music folder",
-        "tooltip": "Reset recording location back to default system Music folder",
         "callback": "_onResetFolderClicked"
     },
     "key_play_pause": {
         "type": "keybinding",
         "description": "Play / Stop",
         "default": "<Primary><Alt>p"
+    },
+    "export_button": {
+        "type": "button",
+        "description": "Export stations",
+        "callback": "_onExportClicked"
+    },
+    "import_file": {
+        "type": "filechooser",
+        "default": "",
+        "description": "Select a Backup file (.json) to restore"
+    },
+    "import_button": {
+        "type": "button",
+        "description": "Restore stations from the selected file",
+        "callback": "_onImportClicked"
     }
 }

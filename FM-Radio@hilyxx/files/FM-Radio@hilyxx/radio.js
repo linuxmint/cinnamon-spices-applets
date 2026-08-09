@@ -21,7 +21,7 @@ function createControlButtons(player, pr) {
         style_class: "icon",
         icon_name: "media-skip-backward-symbolic",
         reactive: true,
-        icon_size: 25,
+        icon_size: 22,
     });
 
     let icon = new St.Icon({
@@ -30,14 +30,14 @@ function createControlButtons(player, pr) {
             ? "media-playback-stop-symbolic"
             : "media-playback-start-symbolic",
         reactive: true,
-        icon_size: 42,
+        icon_size: 40,
     });
 
     let next = new St.Icon({
         style_class: "icon",
         icon_name: "media-skip-forward-symbolic",
         reactive: true,
-        icon_size: 25,
+        icon_size: 22,
     });
 
     box.add_child(prev);

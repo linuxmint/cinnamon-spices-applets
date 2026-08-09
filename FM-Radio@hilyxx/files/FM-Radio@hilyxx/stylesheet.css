@@ -1,3 +1,6 @@
+.icon {
+   padding: 3px;
+}
 
 .channel-label {
    font-size: 1em;
@@ -5,7 +8,7 @@
 
 .artist-label {
    text-align: center;
-   font-size: 1.03em;
+   font-size: 1.02em;
    padding-left: 1em;
    padding-bottom: 0.6em;
 
@@ -13,13 +16,13 @@
 
 .title-label {
    text-align: center;
-   font-size: 1.08em;
+   font-size: 1.07em;
    padding-left: 1em;
 }
 
 .radio-label {
    text-align: center;
-   font-size: 1.015em;
+   font-size: 0.95em;
    padding-top: 1em;
    font-weight: bold;
    color: #898989;
