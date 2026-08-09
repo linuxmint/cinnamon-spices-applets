@@ -53,8 +53,6 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
         this._retryTimeout = 0;
         this._retryCount = 0;
         this._rebuilding = false;
-        this._ssProxy = null;
-        this._ssSignalId = 0;
 
         this.box = new St.BoxLayout({
             style_class: "globalmenu-box",
@@ -93,40 +91,12 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
             this._queueRebuild();
         });
         this._tracker = Cinnamon.WindowTracker.get_default();
-        this._watchScreensaver();
 
         this._focusWait = Mainloop.timeout_add(300, () => {
             this._focusWait = 0;
             this._rebuild();
             return false;
         });
-    }
-
-    _watchScreensaver() {
-        try {
-            this._ssProxy = Gio.DBusProxy.new_for_bus_sync(
-                Gio.BusType.SESSION,
-                Gio.DBusProxyFlags.NONE,
-                null,
-                "org.cinnamon.ScreenSaver",
-                "/org/cinnamon/ScreenSaver",
-                "org.cinnamon.ScreenSaver",
-                null
-            );
-            this._ssSignalId = this._ssProxy.connect("g-signal", (proxy, senderName, signalName, parameters) => {
-                if (signalName !== "ActiveChanged")
-                    return;
-                let active = false;
-                try {
-                    active = parameters.deep_unpack()[0];
-                } catch (err) {}
-                this._detachCurrentMenu(active ? "screensaver-on" : "screensaver-off");
-                if (!active)
-                    this._queueRebuild();
-            });
-        } catch (err) {
-            global.logWarning("globalmenu: screensaver watch failed: " + err);
-        }
     }
 
     _disconnectDbusProxy() {
@@ -161,7 +131,7 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
 
     _ensureBackend() {
         try {
-            Util.spawnCommandLineAsync("pkill -f /usr/bin/cinnamon-appmenu-bar");
+            Util.spawn(["pkill", "-f", "/usr/bin/cinnamon-appmenu-bar"]);
         } catch (err) {}
 
         try {
@@ -220,11 +190,6 @@ class CinnamonGlobalMenuApplet extends Applet.Applet {
     on_applet_removed_from_panel() {
         this._unbindWindow();
         this._detachCurrentMenu("applet-removed");
-        if (this._ssProxy && this._ssSignalId) {
-            try { this._ssProxy.disconnect(this._ssSignalId); } catch (err) {}
-            this._ssSignalId = 0;
-            this._ssProxy = null;
-        }
         if (this._focusId) {
             global.display.disconnect(this._focusId);
             this._focusId = 0;
