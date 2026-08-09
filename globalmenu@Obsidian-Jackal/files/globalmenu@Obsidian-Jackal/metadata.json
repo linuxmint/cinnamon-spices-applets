@@ -4,8 +4,8 @@
     "description": "Shows the focused application's menus in the Cinnamon panel (GTK, Qt, and Electron via AppMenu). Requires separately installed AppMenu backends; see the project website.",
     "max-instances": 1,
     "multiversion": false,
-    "author": "Obsidian Jackal",
+    "author": "Obsidian Jackal <enkouyami@gmail.com>",
     "website": "https://gitlab.com/Obsidian_Jackal/cinnamon-global-menu",
     "url": "https://gitlab.com/Obsidian_Jackal/cinnamon-global-menu",
-    "version": "1.0.1"
+    "version": "1.0.2"
 }
