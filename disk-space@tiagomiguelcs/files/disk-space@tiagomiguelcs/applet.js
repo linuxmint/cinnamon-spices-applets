@@ -1,8 +1,8 @@
 /*
  * Disk Space Cinnamon Applet
  *
- * Based on the original Workspace Switcher applet for Cinnamon.
- *
+ * A simple Cinnamon panel applet that displays remaining disk space.
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
  * published by the Free Software Foundation.
