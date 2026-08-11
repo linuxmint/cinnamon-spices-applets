@@ -1,0 +1,8 @@
+{
+    "uuid": "vocab@rizanb",
+    "name": "vocab",
+    "description": "Shows a new vocabulary on your panel everytime you boot or click on it",
+    "max-instances": "-1",
+    "version": "1.0.0",
+    "author": "rizanb"
+}
