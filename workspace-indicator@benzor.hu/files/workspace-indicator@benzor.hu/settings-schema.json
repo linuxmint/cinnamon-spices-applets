@@ -1,0 +1,13 @@
+{
+    "enable-expo-click": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Left click opens Expo"
+    },
+
+    "enable-scroll-switch": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Scroll to switch workspaces"
+    }
+}
