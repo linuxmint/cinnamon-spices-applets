@@ -1,0 +1,13 @@
+[Unit]
+Description=Bing Daily Wallpaper Refresh
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 30
+ExecStart=/usr/bin/python3 %h/.local/share/cinnamon/applets/bing-daily@keithdriscoll.nyc/engine/bing_engine.py refresh
+Environment=DISPLAY=:0
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/bus
+StandardOutput=append:%h/.cache/bing-daily/log.txt
+StandardError=append:%h/.cache/bing-daily/log.txt
