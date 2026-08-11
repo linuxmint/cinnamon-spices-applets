@@ -38,7 +38,7 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
             icon_type: St.IconType.SYMBOLIC,
             icon_name: this._fallbackIcon(),
             icon_size: 18,
-            style_class: deviceStyleClass("header-icon")
+            style_class: `popup-menu-icon ${deviceStyleClass("header-icon")}`
         });
 
         this._nameLabel = new St.Label({
@@ -50,7 +50,7 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
 
         this._subtitleLabel = new St.Label({
             text: "",
-            style_class: deviceStyleClass("subtitle"),
+            style_class: `popup-inactive-menu-item ${deviceStyleClass("subtitle")}`,
             y_align: Clutter.ActorAlign.CENTER
         });
         ellipsizeHeaderLabel(this._subtitleLabel);
@@ -72,7 +72,7 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
         });
 
         this._header = new St.BoxLayout({
-            style_class: deviceStyleClass("header"),
+            style_class: `popup-device-menu-item ${deviceStyleClass("header")}`,
             reactive: true,
             track_hover: true,
             can_focus: true,
@@ -172,14 +172,14 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
             icon_type: St.IconType.SYMBOLIC,
             icon_name: "radio-off-symbolic",
             icon_size: 14,
-            style_class: deviceStyleClass("radio")
+            style_class: `popup-menu-icon ${deviceStyleClass("radio")}`
         });
 
         const icon = new St.Icon({
             icon_type: St.IconType.SYMBOLIC,
             icon_name: this._fallbackIcon(),
             icon_size: 16,
-            style_class: deviceStyleClass("row-icon")
+            style_class: `popup-menu-icon ${deviceStyleClass("row-icon")}`
         });
         applyDeviceIcon(icon, device);
 
@@ -190,7 +190,7 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
 
         const subtitle = new St.Label({
             text: device.origin || "",
-            style_class: deviceStyleClass("row-subtitle")
+            style_class: `popup-inactive-menu-item ${deviceStyleClass("row-subtitle")}`
         });
 
         const labels = new St.BoxLayout({ vertical: true, x_expand: true });
@@ -202,12 +202,12 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
             icon_type: St.IconType.SYMBOLIC,
             icon_name: "emblem-ok-symbolic",
             icon_size: 14,
-            style_class: deviceStyleClass("check"),
+            style_class: `popup-menu-icon ${deviceStyleClass("check")}`,
             opacity: 0
         });
 
         const row = new St.BoxLayout({
-            style_class: deviceStyleClass("row"),
+            style_class: `popup-device-menu-item ${deviceStyleClass("row")}`,
             reactive: true,
             track_hover: true,
             can_focus: true,
