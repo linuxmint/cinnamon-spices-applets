@@ -1,0 +1,147 @@
+.calendar-day-button {
+    padding: 5px 10px;
+    min-width: 30px;
+    text-align: center;
+}
+.calendar-day-button:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Der Haupt-Container */
+.calendar-main-box {
+    padding: 10px;
+    min-width: 400px; /* Erzwingt eine Mindestbreite für das gesamte Fenster */
+}
+
+/* Die Header (Mo, Di, Mi...) */
+.calendar-header {
+    font-weight: bold;
+    color: #ccc;
+    padding: 5px;
+    min-width: 45px; /* Verhindert das "..." bei Mo/Do */
+    text-align: center;
+}
+
+/* Die einzelnen Tages-Zellen */
+.day-cell {
+    padding: 2px;
+    border: 1px solid rgba(255,255,255,0.1); /* Dezenter Rahmen */
+    min-width: 50px;
+    min-height: 50px;
+}
+
+/* Der Button im Tag */
+.day-button {
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.day-button:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+/* Spezielle Styles für Feiertage */
+.holiday {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.calendar-nav-box {
+    padding: 5px;
+    background-color: rgba(255,255,255,0.05);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.nav-button {
+    padding: 2px 10px;
+    border: 1px solid #555;
+    border-radius: 3px;
+}
+
+.nav-label-button {
+    font-weight: bold;
+    padding: 0 15px;
+    min-width: 150px;
+}
+
+.day-button {
+    padding: 8px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.day-button:active {
+    background-color: #333;
+}
+
+.today {
+    border: 2px solid #3584e4;
+}
+
+.heute-weekday {
+    font-size: 1.1em;
+    color: #3584e4; /* Cinnamon Blau */
+    font-weight: bold;
+}
+
+.heute-date {
+    font-size: 1.4em;
+    font-weight: 300;
+}
+
+.picker-box {
+    padding: 10px 0;
+    justify-content: space-between; /* Monat links, Jahr rechts */
+}
+
+.nav-group {
+    background: rgba(255,255,255,0.05);
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.nav-label-main {
+    min-width: 100px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.calendar-footer {
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-button {
+    padding: 5px;
+    font-size: 0.9em;
+    color: #aaa;
+}
+.footer-button:hover { color: #fff; }
+
+.day-details-text { font-size: 1.1em; }
+.day-details-text.is-holiday { color: #ff4444; font-weight: bold; }
+.day-details-text.is-sunday { color: #ffaaaa; }
+
+.termin-liste {
+    padding: 10px;
+}
+
+.termin-item {
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.termin-color-indicator {
+    width: 4px;
+    margin-right: 8px;
+    border-radius: 2px;
+}
+
+.termin-time {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.termin-summary {
+    font-weight: bold;
+}
