@@ -15,7 +15,7 @@ const UUID = "focal@zoharsnir";
 const HELPER_SCRIPT = "calendar_helper.py"; // lives next to applet.js, resolved via this.metadata.path
 const POLL_TIMEOUT_SECONDS = 15; // kill the helper subprocess if EDS hasn't answered by then
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(text) {
     return Gettext.dgettext(UUID, text);
