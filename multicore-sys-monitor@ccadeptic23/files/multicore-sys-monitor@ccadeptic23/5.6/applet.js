@@ -190,6 +190,7 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         this.metadata = metadata;
         this.instance_id = instance_id;
 
+        this.procs_blocked = 0;
         this.CPU_loadAverage = 0;
         this.hyperThreadingIsOn = false;
         readFileAsync("/sys/devices/system/cpu/smt/control").then( (status) => {
@@ -298,6 +299,10 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         this.settings.bind("CPU_loadAverageColorCrit", "CPU_loadAverageColorCrit");
         this.settings.bind("CPU_loadAverageCorner", "CPU_loadAverageCorner");
         this.settings.bind("CPU_loadAverageFontFactor", "CPU_loadAverageFontFactor");
+        this.settings.bind("CPU_alertWhenStuckProcess", "CPU_alertWhenStuckProcess");
+        this.settings.bind("CPU_minLoadStuckProcess", "CPU_minLoadStuckProcess");
+        this.settings.bind("CPU_durationStuckProcess", "CPU_durationStuckProcess");
+        this.settings.bind("CPU_bgColorStuckProcess", "CPU_bgColorStuckProcess");
 
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
         this.settings.bind("CPU_mergeAll", "CPU_mergeAll", (value) => {
@@ -1351,8 +1356,10 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
                     let NonIdle = 1 * user + 1 * nice + 1 * system + 1 * irq + 1 * softirq + 1 * steal;
                     let Total = Idle + NonIdle;
                     ret = ret + ` ${Total},${Idle}`;
+                } else if (line.startsWith("procs_blocked")) {
+                    this.procs_blocked = line.split(" ")[1];
                 } else {
-                    break
+                    continue
                 }
             }
             let cpuString = ret.trim();
@@ -1762,19 +1769,49 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
             return;
         }
         var appletTooltipString = "";
-        for (let provider of [
-            "multiCpuProvider",
-            "memoryProvider",
-            "swapProvider",
-            "zramProvider",
-            "buffcachesharedProvider",
-            "networkProvider",
-            "diskProvider",
-            "diskUsageProvider",
-            "batteryProvider"
-        ]) {
+        var providers = [];
+        for (let o of this.displayOrder) {
+            let id = o["id"];
+            switch (id) {
+                case _("CPU"):
+                    providers = providers.concat(["multiCpuProvider"]);
+                    break;
+                case _("MEM"):
+                    providers = providers.concat([  "memoryProvider",
+                                                    "swapProvider",
+                                                    "zramProvider",
+                                                    "buffcachesharedProvider"]);
+                    break;
+                case _("NET"):
+                    providers = providers.concat(["networkProvider"]);
+                    break;
+                case _("DISK"):
+                    providers = providers.concat(["diskProvider"]);
+                    break;
+                case _("DISK USAGE"):
+                    providers = providers.concat(["diskUsageProvider"]);
+                    break;
+                case _("BATTERY"):
+                    providers = providers.concat(["batteryProvider"]);
+            }
+        }
+        for (let provider of providers) {
             appletTooltipString += this[provider].getTooltipString();
         }
+
+        //~ for (let provider of [
+            //~ "multiCpuProvider",
+            //~ "memoryProvider",
+            //~ "swapProvider",
+            //~ "zramProvider",
+            //~ "buffcachesharedProvider",
+            //~ "networkProvider",
+            //~ "diskProvider",
+            //~ "diskUsageProvider",
+            //~ "batteryProvider"
+        //~ ]) {
+            //~ appletTooltipString += this[provider].getTooltipString();
+        //~ }
         if (this.hovered)
             this.set_applet_tooltip(appletTooltipString.trimEnd(), true);
     }
@@ -2206,6 +2243,9 @@ var MultiCpuDataProvider = class MultiCpuDataProvider {
         this.name = _("CPU");
         this.prevData = [];
         this.currentReadings = [];
+        this.alertWhenStuckProcess = this.applet.CPU_alertWhenStuckProcess;
+        this.stuckProcessDetected = false;
+        this.stuckProcessBeginTime = -1;
     }
 
     getColorList() {

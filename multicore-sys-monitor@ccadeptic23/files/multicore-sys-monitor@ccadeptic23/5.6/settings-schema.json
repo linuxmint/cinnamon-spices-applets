@@ -31,7 +31,8 @@
         "sectionCPUColors",
         "sectionCPUColorsByActivity",
         "sectionCPUTemperature",
-        "sectionCPULoadAverage"
+        "sectionCPULoadAverage",
+        "sectionCPUStuckProcess"
       ]
     },
     "pageMem": {
@@ -213,6 +214,16 @@
         "CPU_loadAverageColorCrit",
         "CPU_loadAverageCorner",
         "CPU_loadAverageFontFactor"
+      ]
+    },
+    "sectionCPUStuckProcess": {
+      "type": "section",
+      "title": "Detection of Stuck Process",
+      "keys": [
+        "CPU_alertWhenStuckProcess",
+        "CPU_minLoadStuckProcess",
+        "CPU_durationStuckProcess",
+        "CPU_bgColorStuckProcess"
       ]
     },
     "sectionCPULabel": {
@@ -1063,6 +1074,34 @@
     "step": 1,
     "units": "%",
     "description": "Font size: percentage of the box height"
+  },
+  "CPU_alertWhenStuckProcess": {
+    "type": "switch",
+    "default": false,
+    "description": "Change the background color when at least one process is stuck"
+  },
+  "CPU_minLoadStuckProcess": {
+    "type": "scale",
+    "units": "%",
+    "min": 95,
+    "max": 100,
+    "step": 1,
+    "default": 98,
+    "description": "Consider a process to be stuck when core's load exceeds (%)"
+  },
+  "CPU_durationStuckProcess": {
+    "type": "scale",
+    "units": " minutes",
+    "min": 1,
+    "max": 20,
+    "step": 1,
+    "default": 10,
+    "description": "Consider a process to be stuck after (minutes)"
+  },
+  "CPU_bgColorStuckProcess": {
+    "type": "colorchooser",
+    "default": "rgba(238,0,0,1)",
+    "description": "Background Color when a process is stuck"
   },
   "CPU_tempColor": {
     "type": "colorchooser",

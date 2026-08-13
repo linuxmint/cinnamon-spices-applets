@@ -1,3 +1,11 @@
+### v3.18.1 (soon)
+  * Adds the ability to alert the user when a process is stuck (when a core's load exceeds a specified limit for a specified duration).
+  * Fixes [#8807](https://github.com/linuxmint/cinnamon-spices-applets/issues/8807)
+
+### v3.18.0~20260701
+  * Changing display order also changes tooltip order.
+  * Fixes [#8913](https://github.com/linuxmint/cinnamon-spices-applets/issues/8913)
+
 ### v3.17.0~20260630
   * Memory: The “Swap” graph can now take up 50% of the space.
   * Fixes [#8822](https://github.com/linuxmint/cinnamon-spices-applets/issues/8822)
