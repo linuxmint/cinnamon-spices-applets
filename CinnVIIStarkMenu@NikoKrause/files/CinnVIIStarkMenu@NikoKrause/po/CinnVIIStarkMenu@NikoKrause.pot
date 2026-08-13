@@ -44,6 +44,10 @@ msgstr ""
 msgid "Add to favorites"
 msgstr ""
 
+#: 4.2/applet.js:482 3.2/applet.js:277 2.6/applet.js:278 3.4/applet.js:277
+msgid "Properties"
+msgstr ""
+
 #: 4.2/applet.js:478 3.2/applet.js:272 2.6/applet.js:273 3.4/applet.js:272
 msgid "Uninstall"
 msgstr ""
