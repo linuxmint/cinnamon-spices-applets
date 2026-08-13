@@ -1,0 +1,46 @@
+{
+  "head": {
+    "type": "header",
+    "description": "Panel drawer - pick the tray icons and applets to hide with a right click on the arrow"
+  },
+  "hoveropens": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Expand on hover",
+    "tooltip": "Reveal the hidden icons when the pointer rests on the arrow."
+  },
+  "hovertime": {
+    "type": "spinbutton",
+    "default": 150,
+    "min": 10,
+    "max": 1000,
+    "step": 10,
+    "units": "miliseconds",
+    "dependency": "hoveropens",
+    "description": "Hover delay"
+  },
+  "autocollapsetime": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 30,
+    "step": 0.5,
+    "units": "seconds",
+    "description": "Collapse again after",
+    "tooltip": "0 disables it - the drawer then stays open until you click the arrow again.\nThe countdown only starts once the pointer has left the icons and their menus are closed."
+  },
+  "animationtime": {
+    "type": "spinbutton",
+    "default": 150,
+    "min": 0,
+    "max": 600,
+    "step": 25,
+    "units": "miliseconds",
+    "description": "Slide animation",
+    "tooltip": "How long icons take to slide in and out. 0 makes them appear instantly."
+  },
+  "draweritems": {
+    "type": "generic",
+    "default": []
+  }
+}
