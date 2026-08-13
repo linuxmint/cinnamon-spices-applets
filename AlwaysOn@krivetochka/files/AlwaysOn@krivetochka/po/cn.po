@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AlwaysOn@krivetochka 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-03 19:31-0400\n"
+"POT-Creation-Date: 2026-02-26 13:44+0200\n"
 "PO-Revision-Date: 2025-10-26 16:21+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,31 +17,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 
-#. applet.js:28
+#. applet.js:39
 msgid "Click here to activate AlwaysOn"
 msgstr "单击此处激活AlwaysOn"
 
-#. applet.js:66
+#. applet.js:110
 msgid "AlwaysOn activated"
 msgstr "AlwaysOn激活"
 
-#. applet.js:66
+#. applet.js:110
 msgid "Your computer will now stay active."
 msgstr "您的计算机现在将保持活动状态。"
 
-#. applet.js:74
+#. applet.js:114
 msgid "Deactivate AlwaysOn"
 msgstr "始终停用On"
 
-#. applet.js:85
+#. applet.js:156
 msgid "AlwaysOn deactivated"
 msgstr "AlwaysOn已停用"
 
-#. applet.js:85
+#. applet.js:156
 msgid "Now your computer can go to sleep."
 msgstr "AlwaysOn已停用现在您的计算机可以进入睡眠状态。"
 
-#. applet.js:93
+#. applet.js:160
 msgid "Activate AlwaysOn"
 msgstr "激活AlwaysOn"
 
@@ -58,12 +58,8 @@ msgstr ""
 "更改行为。"
 
 #. settings-schema.json->section-general->description
-msgid "General"
-msgstr "一般"
-
-#. settings-schema.json->change-affected-settings->description
-msgid "Click to select which settings will be affected by this applet"
-msgstr "单击以选择将受此小程序影响的设置"
+msgid "Choose which parameters this applet affects"
+msgstr ""
 
 #. settings-schema.json->idle-dim-battery->description
 msgid "Dim the screen when idle"
@@ -77,9 +73,9 @@ msgstr "空闲时的睡眠模式"
 msgid "Turning off the screen when idle"
 msgstr "空闲时关闭屏幕"
 
-#. settings-schema.json->key-bind->description
-msgid "Select a combination to activate the applet"
-msgstr "选择组合以激活小程序"
+#. settings-schema.json->lid-close-action->description
+msgid "Do nothing when laptop lid is closed"
+msgstr ""
 
 #. settings-schema.json->section-not->description
 msgid "Notifications"
@@ -104,6 +100,10 @@ msgstr "黑白"
 #. settings-schema.json->choose-icon->options
 msgid "Colored"
 msgstr "彩色"
+
+#. settings-schema.json->key-bind->description
+msgid "Select a combination to activate the applet"
+msgstr "选择组合以激活小程序"
 
 #. settings-schema.json->hide-applet->description
 msgid "Hide applet from the panel (works best with notifications enabled)"

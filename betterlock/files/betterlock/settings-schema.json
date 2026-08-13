@@ -1,32 +1,50 @@
 {
-    "show-toast-notifications": {
+    "section1": {
+        "type": "section",
+        "description": "Indicators"
+    },
+    "show-num-lock-indicator": {
+        "type": "switch",
+        "default": true,
+        "description" : "Show num lock indicator"
+    },
+    "show-caps-lock-indicator": {
+        "type": "switch",
+        "default": true,
+        "description" : "Show caps lock indicator"
+    },
+    "show-scr-lock-indicator": {
         "type": "switch",
         "default": false,
-        "description" : "Show toast notifications"
+        "description" : "Show scr lock indicator"
+    },
+    "hide-inactive-indicators": {
+        "type": "switch",
+        "default": false,
+        "description" : "Hide inactive indicators"
+    },
+    "toggle-on-click": {
+        "type": "switch",
+        "default": true,
+        "description" : "Toggle state when clicked"
+    },
+    "section2": {
+        "type": "section",
+        "description": "Notifications"
     },
     "show-osd-notifications": {
         "type": "switch",
         "default": false,
         "description" : "Show OSD notifications"
     },
+    "show-toast-notifications": {
+        "type": "switch",
+        "default": false,
+        "description" : "Show toast notifications"
+    },
     "show-silent-notifications": {
         "type" : "switch",
         "default" : false,
         "description" : "Silence system notification sound"
-    },
-    "show-caps-lock-indicator": {
-        "type": "switch",
-        "default": false,
-        "description" : "Show caps lock indicator"
-    },
-    "show-num-lock-indicator": {
-        "type": "switch",
-        "default": false,
-        "description" : "Show num lock indicator"
-    },
-    "show-scr-lock-indicator": {
-        "type": "switch",
-        "default": false,
-        "description" : "Show scr lock indicator"
     }
 }

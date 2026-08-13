@@ -9,19 +9,19 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-29 21:28+0200\n"
-"PO-Revision-Date: 2023-12-20 15:28+0200\n"
+"PO-Revision-Date: 2026-04-23 12:37+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:84
 msgid "Show devices battery levels"
-msgstr "Näytä laitteiden akun varaustasot"
+msgstr "Näytä akun varaustasot"
 
 #. settings-schema.json->notification-warn-demo->description
 #. settings-schema.json->notification-crit-demo->description
@@ -31,15 +31,15 @@ msgstr "Testi-ilmoitus"
 
 #. applet.js:161 applet.js:166 applet.js:257 applet.js:267
 msgid "Battery dropped below %d%"
-msgstr ""
+msgstr "Akun varaus alle %d%"
 
 #. metadata.json->name
 msgid "Bluetooth battery"
-msgstr "Bluetooth akku"
+msgstr "Bluetooth-akku"
 
 #. metadata.json->description
 msgid "Shows battery levels of different devices"
-msgstr "Näyttää eri laitteiden akun varaustason"
+msgstr "Näyttää akkukäyttöisten laitteiden varaustasot"
 
 #. settings-schema.json->page1->title
 msgid "Settings"
@@ -55,7 +55,7 @@ msgstr "Mustalista"
 
 #. settings-schema.json->section0->title
 msgid "Enable battery monitoring for:"
-msgstr "Käytä akun valvontaa seuraaville:"
+msgstr "Käytä akkuvalvontaa seuraaville:"
 
 #. settings-schema.json->section1->title
 msgid "Icon/Text:"
@@ -129,19 +129,19 @@ msgstr "Teksti"
 
 #. settings-schema.json->icon-style->description
 msgid "Icon style"
-msgstr ""
+msgstr "Kuvaketyyli"
 
 #. settings-schema.json->icon-style->options
 msgid "dark"
-msgstr ""
+msgstr "tumma"
 
 #. settings-schema.json->icon-style->options
 msgid "light"
-msgstr ""
+msgstr "vaalea"
 
 #. settings-schema.json->icon-style->options
 msgid "symbolic"
-msgstr ""
+msgstr "symbolinen"
 
 #. settings-schema.json->blacklist->tooltip
 msgid "tooltip"
@@ -190,7 +190,7 @@ msgstr "Näytä kuvake/teksti vain, jos:"
 
 #. settings-schema.json->notification-applet-icon->options
 msgid "show always"
-msgstr "näytä aina"
+msgstr "näkyvillä aina"
 
 #. settings-schema.json->notification-applet-icon->options
 msgid "battery below warning level"
@@ -203,8 +203,7 @@ msgstr "akku on alle kriittisen tason"
 #. settings-schema.json->notification-filter->description
 msgid ""
 "Notify again only if battery increased above configured level by at least: "
-msgstr ""
-"Ilmoita uudelleen vain, jos varaustaso on noussut määritetylle tasolle: "
+msgstr "Ilmoita uudelleen jos varaustaso on noussut määritetylle tasolle: "
 
 #. settings-schema.json->notification-filter->units
 msgid "%"

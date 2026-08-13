@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 23:34+0100\n"
-"PO-Revision-Date: 2021-04-05 08:14+0200\n"
+"PO-Revision-Date: 2026-05-11 18:28+0200\n"
+"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #. metadata.json->name
 #: applet.js:29
@@ -165,6 +165,10 @@ msgstr "The Voice"
 msgid "Magic TV"
 msgstr "Magic TV"
 
+#: applet.js:223
+msgid "Euronews Bulgaria"
+msgstr "Euronews Bulgaria"
+
 #: applet.js:300
 msgid "Stop"
 msgstr "Leállítás"
@@ -180,5 +184,5 @@ msgid ""
 "rtmpdump and mpv packages."
 msgstr ""
 "A leghíresebb bolgár rádió- és tévécsatornák. Az adók egy része csak "
-"Bulgáriából érhető el. A tévék megtekintéséhez telepítenie kell az "
-"rtmpdump és az mpv csomagokat."
+"Bulgáriából érhető el. A tévék megtekintéséhez telepítenie kell az rtmpdump "
+"és az mpv csomagokat."

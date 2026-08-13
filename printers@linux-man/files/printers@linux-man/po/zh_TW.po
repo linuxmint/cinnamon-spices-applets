@@ -5,9 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: printers@linux-man 2.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2024-10-08 19:45-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-06 23:30+0000\n"
 "PO-Revision-Date: 2025-06-01 03:19+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -18,22 +17,28 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. metadata.json->name
-#. applet.js:59 applet.js:173
+#: applet.js:59 applet.js:178 cups-bsd_warning.py:26
 msgid "Printers"
 msgstr "印表機"
 
-#. applet.js:198
+#: applet.js:203
 msgid "Cancel all jobs"
 msgstr "取消所有列印工作"
 
-#. applet.js:225
+#: applet.js:230
 msgid "at"
 msgstr "於"
 
 #. settings-schema.json->send-to-front->description
-#. applet.js:239
+#: applet.js:244
 msgid "Send to front"
 msgstr "移至最前面"
+
+#: cups-bsd_warning.py:27
+msgid ""
+"Missing dependency.\n"
+"'lpq' command is missing! Please install 'cups-bsd' package (if available)."
+msgstr ""
 
 #. metadata.json->description
 msgid "Manage Jobs and Printers"

@@ -50,10 +50,10 @@ AzanApplet.prototype = {
             this._opt_longitude = null;
             this._opt_timezone = null;
             this._opt_juristic = null;
+            this._opt_extraReminder = null;
 
             this._settingsProvider = new Settings.AppletSettings(this, metadata.uuid, instanceId);
             this._bindSettings();
-
 
             this._dateFormatFull = _("%A %B %e, %Y");
 
@@ -223,6 +223,15 @@ AzanApplet.prototype = {
                 this._updateLabel();
             }
         );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "extra_reminder",
+            "_opt_extraReminder",
+            function() {
+                this._updateLabel();
+            }
+        );
     },
 
     on_applet_clicked: function() {
@@ -261,6 +270,8 @@ AzanApplet.prototype = {
         let timesStr = this._prayTimes.getTimes(currentDate, myLocation, myTimezone, 'auto', this._opt_timeFormat);
         let timesFloat = this._prayTimes.getTimes(currentDate, myLocation, myTimezone, 'auto', 'Float');
 
+        let extraReminderTime = this._opt_extraReminder;
+
         let nearestPrayerId;
         let minDiffMinutes = Number.MAX_VALUE;
         let isTimeForPraying = false;
@@ -279,7 +290,7 @@ AzanApplet.prototype = {
                 let fajrSeconds = this._calculateSecondsFromHour(timesFloat['fajr']);
 
                 if (prayerId === 'fajr' && currentSeconds > ishaSeconds) {
-                    prayerSeconds = fajrSeconds + (24 * 60 *60);
+                    prayerSeconds = fajrSeconds + (24 * 60 * 60);
                 }
 
                 let diffSeconds = prayerSeconds - currentSeconds;
@@ -296,6 +307,9 @@ AzanApplet.prototype = {
                         nearestPrayerId = prayerId;
                     }
 
+                    if (diffMinutes == extraReminderTime && extraReminderTime > 0) {
+                        Main.notify(_(extraReminderTime + " Minutes until " + this._timeNames[nearestPrayerId]));
+                    }
                     // global.logError("prayerId: %s, diffSeconds: %s, diffMinutes: %s, minDiffMinutes: %s, isTimeForPraying: %s, nearestPrayerId: %s".format(
                     //     prayerId, diffSeconds, diffMinutes, minDiffMinutes, isTimeForPraying, nearestPrayerId
                     //     ));
@@ -319,7 +333,6 @@ AzanApplet.prototype = {
 
         // Main.notify(_("It's time for " + this._timeNames[nearestPrayerId]));
 
-
         // this.set_applet_label(this._timeNames[nearestPrayerId] + ' ' + timesStr[nearestPrayerId]);
         if (isTimeForPraying) {
             Main.notify(_("It's time for " + this._timeNames[nearestPrayerId]));
@@ -327,7 +340,7 @@ AzanApplet.prototype = {
         } else {
             this.set_applet_label(this._timeNames[nearestPrayerId] + ' -' + this._formatRemainingTimeFromMinutes(minDiffMinutes));
         }
-
+        
         // this.prayLabel.text = new Date().toString();
     },
 

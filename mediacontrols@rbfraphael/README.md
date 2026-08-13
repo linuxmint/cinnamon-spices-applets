@@ -18,3 +18,19 @@ Inspired by Gnome Shell's [Media Controls by Sakith B.](https://extensions.gnome
 - Inspired by Gnome Shell's [Media Controls by Sakith B.](https://extensions.gnome.org/extension/4470/media-controls/) extension.
 - Used a lot the original [sound@cinnamon.org](https://github.com/linuxmint/cinnamon/tree/master/files/usr/share/cinnamon/applets/sound%40cinnamon.org) applet as reference
 - Created for a personal wanting, with help from Google Gemini and OpenAI ChatGPT
+
+### Changelog
+
+#### 1.1.0
+Special thanks to [@lumapu](https://github.com/lumapu) for his [ideas and contributions](https://github.com/linuxmint/cinnamon-spices-applets/pull/8276).
+- Settings menu added
+- Option to show/hide player icon
+- Option to show/hide track info on panel
+- Option to define which track details to display
+- Options to limit the size of the displayed media details
+- Option to show/hide player selector button
+- Option to enable/disable hover color on buttons
+- Hover color selector
+
+#### 1.0.0
+- First version

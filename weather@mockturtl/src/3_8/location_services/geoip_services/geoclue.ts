@@ -3,6 +3,7 @@ import { Logger } from "../../lib/services/logger";
 import type { LocationData, LocationServiceResult } from "../../types";
 import type { GeoIP } from "./base";
 import { REQUEST_TIMEOUT_SECONDS } from "../../consts";
+import { LocationProvider } from "../../config";
 
 let GeoClueLib: typeof imports.gi.Geoclue | undefined = undefined;
 let GeocodeGlib: typeof imports.gi.GeocodeGlib | undefined = undefined;
@@ -14,6 +15,7 @@ interface ExtendedLocationData extends LocationServiceResult {
 }
 
 export class GeoClue implements GeoIP {
+	public readonly provider = LocationProvider.GeoClue2;
 
 	constructor() {
 		try {
@@ -129,32 +131,32 @@ export class GeoClue implements GeoIP {
 		return new Promise<Partial<LocationData> | null>((resolve) => {
 			Logger.Debug("Requesting location data from GeoCode");
 			const start = DateTime.now();
-				geoCodeRes.resolve_async(cancellable, (obj, res) => {
-					Logger.Debug(`Getting GeoCode location data finished, took ${start.diffNow().negate().as("seconds")} seconds.`);
-					let result: imports.gi.GeocodeGlib.Place | null = null;
-					try {
-						result = geoCodeRes.resolve_finish(res);
-					}
-					catch (e) {
-						Logger.Error("Error while fetching GeoCode data: ", e);
-						resolve(null);
-						return;
-					}
-
-					if (result == null) {
-						Logger.Debug("GeoCode location data not available.");
-						resolve(null);
-						return;
-					}
-
-					Logger.Debug(`GeoCode location data received ${result.town}, ${result.country}`);
-					resolve({
-						city: result.town,
-						country: result.country,
-					})
+			geoCodeRes.resolve_async(cancellable, (obj, res) => {
+				Logger.Debug(`Getting GeoCode location data finished, took ${start.diffNow().negate().as("seconds")} seconds.`);
+				let result: imports.gi.GeocodeGlib.Place | null = null;
+				try {
+					result = geoCodeRes.resolve_finish(res);
+				}
+				catch (e) {
+					Logger.Error("Error while fetching GeoCode data: ", e);
+					resolve(null);
 					return;
-				});
-			}
+				}
+
+				if (result == null) {
+					Logger.Debug("GeoCode location data not available.");
+					resolve(null);
+					return;
+				}
+
+				Logger.Debug(`GeoCode location data received ${result.town}, ${result.country}`);
+				resolve({
+					city: result.town,
+					country: result.country,
+				})
+				return;
+			});
+		}
 		)
 	}
 }

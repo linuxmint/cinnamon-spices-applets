@@ -9,8 +9,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-26 12:36-0500\n"
-"PO-Revision-Date: 2017-08-17 19:31+0200\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-05-03 16:31+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -116,7 +116,7 @@ msgid ""
 "disable mailnag notification plugin, otherwise you will have duplicates."
 msgstr ""
 "Tillader visning af meddelelser om ny mail. Deaktivér Mailnags "
-"\"notification\"-plugin for at undgå dobbeltmeddelelser."
+"“notification”-plugin for at undgå dobbeltmeddelelser."
 
 #. settings-schema.json->launch_client_on_click->description
 msgid "Launch mail client on click"
@@ -150,11 +150,11 @@ msgstr "Gør ingenting"
 
 #. settings-schema.json->max_length->description
 msgid "Max sender / subject display length"
-msgstr ""
+msgstr "Længste visning af afsender/emne"
 
 #. settings-schema.json->max_length->tooltip
 msgid "Sender or subject lines longer than this will be cropped"
-msgstr ""
+msgstr "Afsender- eller emnelinjer længere end dette vil blive beskåret"
 
 #. settings-schema.json->client->description
 msgid "Mail client to launch (or webpage)"
@@ -166,4 +166,4 @@ msgid ""
 "address that starts with 'http'."
 msgstr ""
 "Indtast kommandoen til din mailklient her. Du kan også indtaste en "
-"webadresse, som begynder med \"http\"."
+"webadresse, som begynder med “http”."

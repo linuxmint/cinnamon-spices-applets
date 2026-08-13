@@ -1,0 +1,7 @@
+{
+    "notificationMessage": {
+        "type": "entry",
+        "default": "Your timer is finished",
+        "description": "Notification message"
+    }
+}

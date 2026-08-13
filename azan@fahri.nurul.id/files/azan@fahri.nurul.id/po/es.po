@@ -6,16 +6,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
 "POT-Creation-Date: 2023-12-08 05:01-0500\n"
-"PO-Revision-Date: 2023-12-21 18:16-0300\n"
+"PO-Revision-Date: 2026-04-11 11:07-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.9\n"
 
 #: applet.js:58
 msgid "%A %B %e, %Y"
@@ -25,11 +26,15 @@ msgstr "%A %B %e, %Y"
 msgid "Settings"
 msgstr "Configuración"
 
-#: applet.js:325
+#: applet.js:311
+msgid " Minutes until "
+msgstr " Minutos hasta "
+
+#: applet.js:338
 msgid "It's time for "
 msgstr "Es hora de "
 
-#: applet.js:326
+#: applet.js:339
 msgid "Now : "
 msgstr "Ahora: "
 
@@ -228,3 +233,23 @@ msgstr "Shafi`i, Maliki, Ja`fari, Hanbali"
 #. settings-schema.json->juristic->options
 msgid "Hanafi"
 msgstr "Hanafi"
+
+#. settings-schema.json->reminder->description
+msgid "Reminder Settings"
+msgstr "Configuración de recordatorios"
+
+#. settings-schema.json->extra_reminder->description
+msgid "Extra reminder before prayer time"
+msgstr "Un recordatorio adicional antes de la hora de la oración"
+
+#. settings-schema.json->extra_reminder->options
+msgid "5 minutes"
+msgstr "5 minutos"
+
+#. settings-schema.json->extra_reminder->options
+msgid "10 minutes"
+msgstr "10 minutos"
+
+#. settings-schema.json->extra_reminder->options
+msgid "15 minutes"
+msgstr "15 minutos"

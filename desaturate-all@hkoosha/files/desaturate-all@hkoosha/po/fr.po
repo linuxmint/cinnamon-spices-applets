@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: desaturate-all@hkoosha 1.1.1\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2025-05-17 10:44-0400\n"
-"PO-Revision-Date: 2025-10-13 14:46+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-05-31 21:52-0400\n"
+"PO-Revision-Date: 2026-06-02 08:52+0200\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -17,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#. applet.js:62
+#. applet.js:77
 msgid "Click to disable effect"
 msgstr "Cliquez pour désactiver l'effet"
 
-#. applet.js:64
+#. applet.js:79
 msgid "Click to desaturate the desktop"
 msgstr "Cliquez pour désaturer le bureau"
 
-#. applet.js:72
+#. applet.js:87
 msgid "Will automatically desaturate in"
 msgstr "Se désaturera automatiquement dans"
 
-#. applet.js:74
+#. applet.js:89
 msgid "Will automatically disable in"
 msgstr "Sera automatiquement désactivé dans"
 
-#. applet.js:76
+#. applet.js:91
 msgid "minutes"
 msgstr "minutes"
 
-#. applet.js:79
+#. applet.js:94
 msgid "Will automatically desaturate at"
 msgstr "Se désaturera automatiquement à"
 
-#. applet.js:81
+#. applet.js:96
 msgid "Will automatically disable at"
 msgstr "Sera automatiquement désactivé à"
 
@@ -54,8 +55,10 @@ msgid "Convert your screen to gray-scale."
 msgstr "Convertir votre écran en niveaux de gris."
 
 #. settings-schema.json->saturation->description
-msgid "Color saturation"
-msgstr "Saturation des couleurs"
+msgid "Color saturation when desaturation effect is enabled (percent)"
+msgstr ""
+"Saturation des couleurs lorsque l'effet de désaturation est "
+"activé (pourcentage)"
 
 #. settings-schema.json->keybinding->description
 msgid "Shortcut to toggle desaturation effect"
@@ -89,3 +92,7 @@ msgstr "Rétablir au démarrage l'état de l'effet de dé-saturation"
 msgid "Restore the previously set desaturation state when cinnamon starts"
 msgstr ""
 "Rétablir l'état de dé-saturation précédemment défini lorsque Cinnamon démarre"
+
+#. settings-schema.json->fade-time->description
+msgid "Saturation fade in/out duration (seconds)"
+msgstr "Durée du fondu d'entrée/sortie de la saturation (secondes)"

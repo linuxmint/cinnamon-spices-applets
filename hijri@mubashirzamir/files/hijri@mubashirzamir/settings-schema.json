@@ -1,0 +1,45 @@
+{
+  "language": {
+    "type": "combobox",
+    "default": "en",
+    "description": "Language",
+    "options": {
+      "English": "en",
+      "Arabic": "ar"
+    }
+  },
+  "format": {
+    "type": "combobox",
+    "default": "DD-MM-YYYY",
+    "description": "Date format",
+    "options": {
+      "DD-MM-YYYY": "DD-MM-YYYY",
+      "YYYY-MM-DD": "YYYY-MM-DD",
+      "Month Day, Year": "Month Day, Year"
+    }
+  },
+  "separator": {
+    "type": "combobox",
+    "default": " ",
+    "description": "Date separator",
+    "options": {
+      "Space": " ",
+      "Dash": "-",
+      "Slash": "/",
+      "Dot": "."
+    }
+  },
+  "showMonthName": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Use month name instead of number"
+  },
+  "refreshInterval": {
+    "type": "spinbutton",
+    "default": 3600,
+    "description": "Refresh interval in seconds",
+    "min": 3600,
+    "max": 86400,
+    "step": 3600
+  }
+}

@@ -7,7 +7,8 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Pango
 from xapp.SettingsWidgets import *
 #from SettingsWidgets import SoundFileChooser, Keybinding
-from SettingsWidgets import Keybinding
+# ~ from SettingsWidgets import Keybinding
+from R3SettingsWidgets import Keybinding
 
 VARIABLE_TYPE_MAP = {
     "string"        :   str,
@@ -647,21 +648,21 @@ class List(SettingsWidget):
 
     def go_to_next_page(self, *args):
         rectangle = self.content_widget.get_visible_rect()
-        print("x:", rectangle.x, "y:", rectangle.y, "width:", rectangle.width, "height:", rectangle.height)
+        # ~ print("x:", rectangle.x, "y:", rectangle.y, "width:", rectangle.width, "height:", rectangle.height)
 
         self.content_widget.scroll_to_point(-1, rectangle.y + rectangle.height)
         path = self.content_widget.get_path_at_pos(0, 0)[0].to_string()
-        print("path:", path)
+        # ~ print("path:", path)
 
         self.timed_update_button_sensitivity()
 
     def go_to_previous_page(self, *args):
         rectangle = self.content_widget.get_visible_rect()
-        print("x:", rectangle.x, "y:", rectangle.y, "width:", rectangle.width, "height:", rectangle.height)
+        # ~ print("x:", rectangle.x, "y:", rectangle.y, "width:", rectangle.width, "height:", rectangle.height)
 
         self.content_widget.scroll_to_point(-1, rectangle.y - rectangle.height)
         path = self.content_widget.get_path_at_pos(0, 0)[0].to_string()
-        print("path:", path)
+        # ~ print("path:", path)
 
         self.timed_update_button_sensitivity()
 

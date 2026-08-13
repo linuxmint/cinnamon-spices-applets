@@ -1,5 +1,6 @@
 //!/usr/bin/cjs
 const  GLib = imports.gi.GLib;
+const Extension = imports.ui.extension;
 
 /**
  * _sourceIds
@@ -166,6 +167,7 @@ function remove_all_sources() {
   }
 }
 
+if (!Extension.getCurrentExtension)
 module.exports = {
   _sourceIds,
   timeout_add_seconds,

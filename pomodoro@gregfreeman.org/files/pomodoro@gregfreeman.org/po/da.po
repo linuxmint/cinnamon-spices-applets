@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-25 20:30+1000\n"
-"PO-Revision-Date: 2020-12-21 17:23+0100\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-05-11 17:01+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: applet.js:278
 msgid "Short break running"
@@ -79,7 +79,7 @@ msgstr "Nulstil tællere og timer"
 
 #: applet.js:787
 msgid "Skip To Next Timer"
-msgstr ""
+msgstr "Spring til næste timer"
 
 #: applet.js:794
 msgid "What is this?"
@@ -146,14 +146,12 @@ msgid "Short break finished, ready to continue?"
 msgstr "Den korte pause er slut. Er du klar til at fortsætte?"
 
 #: applet.js:953
-#, fuzzy
 msgid "Start break"
-msgstr "Tag en kort pause"
+msgstr "Hold pause"
 
 #: applet.js:970
-#, fuzzy
 msgid "Pomodoro finished, ready to take a break?"
-msgstr "Pomodoro-sættett er færdig - du fortjener en pause!"
+msgstr "Pomodoro er færdig. Klar til at tage en pause?"
 
 #. metadata.json->description
 msgid "Great tool for boosted productivity!"
@@ -184,18 +182,16 @@ msgid "Options"
 msgstr "Valgmuligheder"
 
 #. settings-schema.json->start_automatically_on_load->description
-#, fuzzy
 msgid "Start the pomodoro timer as soon as the applet loads"
-msgstr "Vis Pomodoro-timeren i statusfeltet"
+msgstr "Start Pomodoro-timeren, så snart panelprogrammet indlæses"
 
 #. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"
 msgstr "Vis dialogmeddelelser"
 
 #. settings-schema.json->auto_start_after_pomodoro_ends->description
-#, fuzzy
 msgid "Auto start after a pomodoro ends"
-msgstr "Start automatisk efter afslutning af en kort pause"
+msgstr "Start automatisk efter en pomodoro slutter"
 
 #. settings-schema.json->auto_start_after_short_break_ends->description
 msgid "Auto start after a short break ends"
@@ -219,7 +215,7 @@ msgstr "Vis Pomodoro-timeren i statusfeltet"
 
 #. settings-schema.json->hotkey->description
 msgid "Set the keybinding to open the applet menu"
-msgstr ""
+msgstr "Indstil tastaturgenvej til åbning af menuen"
 
 #. settings-schema.json->head_sounds->description
 msgid "Sounds"
@@ -274,16 +270,16 @@ msgstr "Startlydfil"
 
 #. settings-schema.json->head_scripts->description
 msgid "Scripts"
-msgstr ""
+msgstr "Programmer"
 
 #. settings-schema.json->enable_scripts->description
 msgid "Enable scripts"
-msgstr ""
+msgstr "Aktivér programmer"
 
 #. settings-schema.json->custom_short_break_script->description
 msgid "Execute this custom script when a short break starts"
-msgstr ""
+msgstr "Kør dette brugerdefinerede program, når en kort pause begynder"
 
 #. settings-schema.json->custom_long_break_script->description
 msgid "Execute this custom script when a long break starts"
-msgstr ""
+msgstr "Kør dette brugerdefinerede program, når en lang pause begynder"

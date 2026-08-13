@@ -7,11 +7,11 @@
 
 import { DateTime } from "luxon";
 import { type Config, ServiceClassMapping } from "./config";
-import type { RefreshOptions} from "./loop";
+import type { RefreshOptions } from "./loop";
 import { WeatherLoop } from "./loop";
 import type { WeatherData, CustomIcons, BuiltinIcons } from "./weather-data";
 import type { AppletError, NiceErrorDetail, Metadata, WeatherProvider, LocationData } from "./types";
-import { RefreshState } from "./types";
+import { ProviderErrorCode, RefreshState } from "./types";
 import { UI } from "./ui";
 import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, InjectValues, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
 import type { HttpError } from "./lib/httpLib";
@@ -87,7 +87,7 @@ export class WeatherApplet extends TextIconApplet {
 
 		void this.loop.Start();
 		// We need a full rebuild and refresh for these
-		this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({rebuild: true}));
+		this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({ rebuild: true }));
 
 		// We need a full rebuild without refresh for these
 		this.config.VerticalOrientationChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
@@ -100,6 +100,15 @@ export class WeatherApplet extends TextIconApplet {
 
 		// We need a full refresh for these
 		this.config.ApiKeyChanged.Subscribe(() => this.loop.Refresh());
+		this.config.OpenWeatherMapOneCallApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.MetofficeForecastApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.MetofficeObservationsApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.PirateWeatherApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.VisualCrossingApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.WeatherbitApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.TomorrowIOApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.AccuWeatherApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.WeatherUndergroundApiKeyChanged.Subscribe(() => this.loop.Refresh())
 		// We change how we process data when this is changed
 		this.config.ShortConditionsChanged.Subscribe(() => this.loop.Refresh());
 		// Some translations come from the API we need a refresh
@@ -108,7 +117,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.LocationChanged.Subscribe(() => this.loop.Refresh());
 
 		// Misc Triggers
-		this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh({immediate: false}));
+		this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh({ immediate: false }));
 
 		// Panel
 		this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
@@ -124,10 +133,12 @@ export class WeatherApplet extends TextIconApplet {
 
 		this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
 		this.config.TempTextOverrideChanged.Subscribe(this.RefreshLabel);
-		this.config.FontChanged.Subscribe(() => this.loop.Refresh({rebuild: true}));
+		this.config.FontChanged.Subscribe(() => this.loop.Refresh({ rebuild: true }));
 		this.config.HotkeyChanged.Subscribe(this.OnKeySettingsUpdated);
 		this.config.SelectedLogPathChanged.Subscribe(this.saveLog);
 		this.config.LocStore.CurrentLocationModified.Subscribe(() => this.loop.Refresh());
+		this.config.GeoClueChanged.Subscribe(() => this.loop.Refresh());
+		this.config.AutoLocProviderChanged.Subscribe(() => this.loop.Refresh());
 
 		keybindingManager.addHotKey(
 			UUID, this.config.keybinding, () => this.on_applet_clicked());
@@ -195,13 +206,20 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 
-			// No key
-			if (this.provider.needsApiKey && this.config.NoApiKey()) {
-				return RefreshState.NoKey;
+			const validConfig = this.provider.ValidConfiguration(this.config, this.config.GetServiceConfig(this.provider.name));
+			switch (validConfig) {
+				case ProviderErrorCode.OK:
+					break;
+				case ProviderErrorCode.NO_KEY:
+					return RefreshState.NoKey;
+				default: {
+					Logger.Error(`Developer error: Unknown Provider configuration error: ${validConfig as number}`);
+					return RefreshState.Error;
+				}
 			}
 
 			this.ui.ShowRefreshIcon();
-			let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config);
+			let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config, this.config.GetServiceConfig(this.provider.name));
 
 			if (weatherInfo == null) {
 				return RefreshState.NoWeather;
@@ -375,17 +393,17 @@ export class WeatherApplet extends TextIconApplet {
 		const vgaInfo = (await SpawnProcess(["lspci"])).Data?.split("\n").filter(x => x.includes("VGA"));
 
 		let body = "```\n";
-		body+= ` * Applet version - ${appletVersion}\n`;
-		body+= ` * Cinnamon version - ${cinnamonVersion}\n`;
-		body+= ` * Distribution - ${distribution}\n`;
-		body+= ` * Graphics hardware - ${vgaInfo.join(", ")}\n`;
-		body+= "```\n\n";
+		body += ` * Applet version - ${appletVersion}\n`;
+		body += ` * Cinnamon version - ${cinnamonVersion}\n`;
+		body += ` * Distribution - ${distribution}\n`;
+		body += ` * Graphics hardware - ${vgaInfo.join(", ")}\n`;
+		body += "```\n\n";
 
-		body+= `**Notify author of applet**\n@Gr3q\n\n`;
+		body += `**Notify author of applet**\n\n\n`;
 
-		body+= "**Issue**\n\n\n\n**Steps to reproduce**\n\n\n\n**Expected behaviour**\n\n\n\n**Other information**\n\n";
+		body += "**Issue**\n\n\n\n**Steps to reproduce**\n\n\n\n**Expected behaviour**\n\n\n\n**Other information**\n\n";
 
-		body+= `<details>
+		body += `<details>
 <summary>Relevant Logs</summary>
 
 \`\`\`
@@ -402,7 +420,7 @@ The contents of the file saved from the applet help page goes here
 		void this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
 	}
 
-	public saveLog = async(): Promise<void> => {
+	public saveLog = async (): Promise<void> => {
 		// Empty string, abort
 		if (!(this.config._selectedLogPath?.length > 0))
 			return;
@@ -411,7 +429,7 @@ The contents of the file saved from the applet help page goes here
 		try {
 			logLines = await Logger.GetAppletLogs();
 		}
-		catch(e) {
+		catch (e) {
 			if (e instanceof Error) {
 				NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
 			}
@@ -422,7 +440,7 @@ The contents of the file saved from the applet help page goes here
 		try {
 			settings = await this.config.GetAppletConfigJson();
 		}
-		catch(e) {
+		catch (e) {
 			if (e instanceof Error) {
 				NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
 			}
@@ -432,7 +450,7 @@ The contents of the file saved from the applet help page goes here
 		const appletLogFile = File.new_for_path(this.config._selectedLogPath);
 		const stream = await OverwriteAndGetIOStream(appletLogFile);
 		if (stream == null) {
-			NotificationService.Instance.Send(_("Error Saving Debug Information"), _("Could not open file {filePath} for writing", {filePath: this.config._selectedLogPath} ));
+			NotificationService.Instance.Send(_("Error Saving Debug Information"), _("Could not open file {filePath} for writing", { filePath: this.config._selectedLogPath }));
 			return;
 		}
 
@@ -444,7 +462,7 @@ The contents of the file saved from the applet help page goes here
 		}
 
 		await CloseStream(stream.get_output_stream());
-		NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", {filePath: this.config._selectedLogPath}));
+		NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", { filePath: this.config._selectedLogPath }));
 	}
 
 	private async SendCommand() {
@@ -522,7 +540,7 @@ The contents of the file saved from the applet help page goes here
 	/** Into right-click context menu */
 	private AddRefreshButton(): void {
 		const itemLabel = _("Refresh")
-		const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.loop.Refresh({rebuild: true}));
+		const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.loop.Refresh({ rebuild: true }));
 		this._applet_context_menu.addMenuItem(refreshMenuItem);
 	}
 
@@ -559,7 +577,7 @@ The contents of the file saved from the applet help page goes here
 	private EnsureProvider(force: boolean = false): void {
 		const currentName = this.provider?.name;
 		if (currentName != this.config._dataService || force)
-			this.provider = ServiceClassMapping[this.config._dataService](this);
+			this.provider = ServiceClassMapping[this.config._dataService]();
 	}
 
 	/** Fills in missing weather info from location Data

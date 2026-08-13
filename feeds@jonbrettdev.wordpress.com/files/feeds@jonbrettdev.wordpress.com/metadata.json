@@ -9,8 +9,9 @@
         "Stephen Collins <scrivera64@gmail.com>", 
         "Kausheel Kumar <kausheelkumar@gmail.com>", 
         "mockturtl <mockturtl@users.noreply.github.com>", 
-        "Jason Jackson <jake1164@hotmail.com>"
+        "Jason Jackson <jake1164@hotmail.com>",
+        "Philipp Meier <philipp@p-meier.dev>"
     ], 
-    "version": 0.29, 
+    "version": 0.30, 
     "uuid": "feeds@jonbrettdev.wordpress.com"
 }

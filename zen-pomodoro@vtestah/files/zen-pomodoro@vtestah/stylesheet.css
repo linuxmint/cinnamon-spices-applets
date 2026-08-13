@@ -1,0 +1,91 @@
+/* Focus Pomodoro — menu styling.
+ *
+ * Flat by design (no pill backgrounds / border-radius). The colours here are the
+ * dark-theme baseline; menu.js re-derives neutral text and accents from the
+ * theme's own foreground colour at runtime (see _applyThemePalette / _accentColor),
+ * so the menu stays legible on light themes (e.g. Mint-X) too. Sizes and weights
+ * carry the visual hierarchy.
+ */
+
+.pomodoro-status {
+    spacing: 4px;
+    padding: 4px 0 5px 0;
+}
+
+/* State badge — flat coloured text, no background. */
+.pomodoro-badge {
+    font-weight: bold;
+    font-size: 0.82em;
+    letter-spacing: 1.5px;
+    padding-bottom: 1px;
+}
+.pomodoro-badge-focus { color: rgb(235, 175, 75); }
+.pomodoro-badge-break { color: rgb(120, 205, 155); }
+.pomodoro-badge-idle  { color: rgba(150, 150, 150, 0.9); }
+
+/* Remaining time. */
+.pomodoro-time {
+    font-size: 2.1em;
+    font-weight: bold;
+    padding: 1px 0 2px 0;
+}
+.pomodoro-time-idle {
+    color: rgba(150, 150, 150, 0.72);
+}
+
+/* Secondary status lines. */
+.pomodoro-progress {
+    padding: 1px 0;
+    color: rgba(150, 150, 150, 0.95);
+}
+.pomodoro-cycle {
+    font-size: 0.9em;
+    padding: 1px 0;
+    color: rgba(150, 150, 150, 0.9);
+}
+.pomodoro-task {
+    padding: 1px 0;
+    color: rgba(150, 150, 150, 0.95);
+}
+.pomodoro-tasks-scroll {
+    max-height: 320px;
+}
+/* The focus-task header keeps its theme-driven colour on hover; a fixed white
+ * here was invisible on light themes, and the row highlight already shows hover. */
+
+/* Info rows (label left, value right). */
+.pomodoro-info-label {
+    color: rgba(150, 150, 150, 0.95);
+    padding: 2px 0;
+}
+.pomodoro-info-value {
+    font-weight: bold;
+    padding: 2px 0;
+}
+
+/* Primary action — flat, accented by colour only. */
+.pomodoro-primary {
+    font-size: 1.1em;
+    font-weight: bold;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.pomodoro-primary-focus { color: rgb(235, 175, 75); }
+.pomodoro-primary-break { color: rgb(120, 205, 155); }
+
+/* Destructive confirmation. */
+.pomodoro-reset-confirm {
+    color: rgb(220, 120, 120);
+    font-weight: bold;
+}
+
+/* Per-task action buttons (complete / delete) in the Task list. */
+.pomodoro-task-btn {
+    padding: 0 5px;
+    /* No fixed colour: the symbolic icon inherits the theme's text colour, so it
+     * adapts to light and dark popups instead of staying a fixed grey. */
+}
+.pomodoro-task-btn:hover {
+    background-color: rgba(150, 150, 150, 0.22);
+    border-radius: 5px;
+}

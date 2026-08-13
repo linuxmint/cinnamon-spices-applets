@@ -1,0 +1,28 @@
+{
+  "metricsUrl": {
+    "type": "entry",
+    "default": "http://localhost:11434/metrics",
+    "description": "Llama.cpp Metrics Endpoint URL",
+    "tooltip": "Enter the full HTTP URL for your llama-server or Ollama metrics endpoint"
+  },
+  "llamaPollIntervalMs": {
+    "type": "spinbutton",
+    "default": 5000,
+    "min": 500,
+    "max": 10000,
+    "step": 500,
+    "units": "milliseconds",
+    "description": "LLM Metrics Polling Interval",
+    "tooltip": "How frequently to refresh LLM metrics from the server"
+  },
+  "hwPollIntervalMs": {
+    "type": "spinbutton",
+    "default": 1000,
+    "min": 500,
+    "max": 10000,
+    "step": 500,
+    "units": "milliseconds",
+    "description": "Hardware Metrics Polling Interval",
+    "tooltip": "How frequently to refresh hardware metrics from the system"
+  }
+}

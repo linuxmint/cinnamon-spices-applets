@@ -1,0 +1,12 @@
+{
+    "uuid": "mint-screenshot@khumnath",
+    "name": "Mint Screenshot",
+    "description": "Screenshot & annotation tool. Timed capture, region selection, and drawing tools.",
+    "version": "1.2.0",
+    "author": "Khumnath CG",
+    "contributors": "Khumnath CG",
+    "website": "https://khumnath.com.np",
+    "url": "https://github.com/khumnath/mint-screenshot",
+    "comments": "Capture, annotate, and share screenshots with ease. Supports timed capture, custom countdown, and Material Design toolbar.",
+    "max-instances": 1
+}

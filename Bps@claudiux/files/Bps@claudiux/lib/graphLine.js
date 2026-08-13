@@ -3,7 +3,7 @@ const PangoCairo = imports.gi.PangoCairo;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 
-class GraphLineChart = {
+var GraphLineChart = class GraphLineChart = {
   constructor(area, width, config={
         thickness: 3,
         autoScale: false,

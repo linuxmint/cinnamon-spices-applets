@@ -2,7 +2,7 @@
   "description": "CinnaMame",
   "uuid": "CinnaMame@claudiux",
   "name": "CinnaMame",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "max-instances": -1,
   "author": "claudiux"
 }

@@ -37,7 +37,6 @@ const ICON_SIZE_LG = 20;
 const ICON_SIZE_SM = 12;
 
 const NOTIFICATION_TITLE = _('Timer');
-const NOTIFICATION_MSG = _('Your timer is finished');
 
 const DIGIT_NAMES = {
     SECOND_TENS: 'SECOND_TENS',
@@ -51,16 +50,16 @@ const DIGIT_NAMES = {
 const CLOCK_INCREMENT = 'INCREMENT';
 const CLOCK_DECREMENT = 'DECREMENT';
 
-const CLOCK_STYLES = {
-    DEFAULT: 'margin: 0 10px 10px 10px;',
-    ACTIVE: 'margin: 10px 10px 20px 10px;',
-    DIGIT_DEFAULT: 'margin: 0 10px 10px 10px;',
-    DIGIT_ACTIVE: 'margin: 10px 10px 20px 10px;',
-    BUTTON: 'width: 20px; padding: 10px 0;'
-}
-
 const CONTROL_BUTTON_STYLE = 'width: 40px; padding: 10px;';
-const FONT_SIZE = '24px';
+const FONT_SIZE_REG = '24px';
+const FONT_SIZE_LARGE = '28px';
+
+const CLOCK_STYLES = {
+    DEFAULT: `font-size: ${FONT_SIZE_REG}; margin: 0 10px 10px 10px;`,
+    ACTIVE: `font-size: ${FONT_SIZE_LARGE}; margin: 10px 10px 20px 10px;`,
+    BUTTON: 'padding: 10px 4px;',
+    COLON: 'margin: 0 4px;'
+}
 
 const APPLET_ICON_NAME = 'alarm';
 const APPLET_ICON_GREEN = '#00d173';

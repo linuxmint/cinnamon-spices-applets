@@ -1,5 +1,4 @@
 const Applet = imports.ui.applet;
-const Lang = imports.lang;
 const Settings = imports.ui.settings;
 const Clutter = imports.gi.Clutter;
 const Main = imports.ui.main;
@@ -8,6 +7,9 @@ const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
 
 const UUID = "desaturate-all@hkoosha";
+
+let topGroup  = global.top_window_group;
+let winGroup  = Main.uiGroup;
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -27,7 +29,8 @@ MyApplet.prototype = {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
         }
 
-        this.effect = new Clutter.DesaturateEffect();
+        if (topGroup) this.topEffect = new Clutter.DesaturateEffect();
+        this.winEffect = new Clutter.DesaturateEffect();
         this.set_applet_icon_symbolic_name("applications-graphics");
 
         this.settings = new Settings.AppletSettings(this, UUID, this.instance_id);
@@ -35,30 +38,40 @@ MyApplet.prototype = {
         this.settings.bind("keybinding", "keybinding", this.on_keybinding_changed);
         this.settings.bind("saturation", "saturation", this.on_saturation_changed);
         this.settings.bind("resume-on-startup", "resumeOnStartup");
+        this.settings.bind("fade-time", "fadeTimeSeconds");
         this.settings.bind("state", "state");
 
-        this.settings.connect( "changed::automatic",         Lang.bind(this, this.on_automatic_changed));
-        this.settings.connect( "changed::start-timechooser", Lang.bind(this, this.on_time_changed));
-        this.settings.connect( "changed::end-timechooser",   Lang.bind(this, this.on_time_changed));
+        this.fadeTime = this.fadeTimeSeconds*1000;
+
+        this.settings.connect( "changed::automatic",         (signal, key, oldValue, value) => this.on_automatic_changed(signal, key, oldValue, value) );
+        this.settings.connect( "changed::start-timechooser", (signal, key, oldValue, value) => this.on_time_changed(signal, key, oldValue, value) );
+        this.settings.connect( "changed::end-timechooser",   (signal, key, oldValue, value) => this.on_time_changed(signal, key, oldValue, value) );
+        this.settings.connect( "changed::fade-time",         (signal, key, oldValue, value) => this.on_fadetime_changed() );
 
         this.desktop_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.interface" });
         this.set_applet_tooltip("time"); // initial value so that the show/hide events will occur
-        this._applet_tooltip._tooltip.connect( "show", Lang.bind(this, this.on_tooltip_shown));
+        this._applet_tooltip._tooltip.connect( "show", () => this.on_tooltip_shown() );
 
         this.on_keybinding_changed();
         this.on_saturation_changed();
         if (!this.settings.getValue("automatic")) {
-            if (this.resumeOnStartup && this.state)
+            if (this.resumeOnStartup && this.state) {
+                if (topGroup) this.topEffect.set_factor(0);
+                this.winEffect.set_factor(0);
+                this.state = false;
                 this._toggleEffect();
+            } else {
+                this.state = false;
+            }
         } else {
+           this.state = false;
            this._toggleEffect_based_on_time("init");
         }
     },
 
     on_tooltip_shown() {
        let ttText;
-       let effectEnabled = Main.uiGroup.has_effects() && Main.uiGroup.get_effects().indexOf(this.effect) > -1;
-       if (effectEnabled) {
+       if (this.state) {
           ttText = _("Click to disable effect");
        } else {
           ttText = _("Click to desaturate the desktop")
@@ -90,13 +103,57 @@ MyApplet.prototype = {
     },
 
     _toggleEffect(enable = null) {
-        let effectEnabled = Main.uiGroup.has_effects() && Main.uiGroup.get_effects().indexOf(this.effect) > -1;
-        if (enable != true && effectEnabled) {
-            Main.uiGroup.remove_effect(this.effect);
+        if ((enable == true && this.state == true) || (enable == false && this.state==false))
+            return;
+        let targetSaturation;
+        if (enable != true && this.state) {
+            targetSaturation = 0;
             this.settings.setValue("state", false);
-        } else if (enable != false && !effectEnabled){
-            Main.uiGroup.add_effect(this.effect);
+        } else if (enable != false && !this.state) {
+            if (!winGroup.has_effects() || winGroup.get_effects().indexOf(this.winEffect) === -1) {
+                winGroup.add_effect(this.winEffect);
+                if (topGroup)  topGroup.add_effect(this.topEffect);
+            }
+            targetSaturation = (100-this.saturation)/100;;
             this.settings.setValue("state", true);
+        }
+        if (targetSaturation != this.winEffect.get_factor()) {
+            this._fadeEffectChange(targetSaturation);
+        }
+    },
+
+    _fadeEffectChange(targetSaturation) {
+        this.fadeFrequency = 100;
+        this.fadeTarget = targetSaturation;
+        if (this.fadeTimeRemaining) {
+            // A fade is already in progress, so we set a new time and target
+            this.fadeTimeRemaining = this.fadeTime - this.fadeTimeRemaining;
+            this.fadeRate = (targetSaturation-this.topEffect.get_factor()) / (this.fadeTimeRemaining/this.fadeFrequency);
+        } else {
+            // Setup a new fade
+            this.fadeTimeRemaining = this.fadeTime;
+            this.fadeRate = (targetSaturation-this.topEffect.get_factor()) / (this.fadeTimeRemaining/this.fadeFrequency);
+            Mainloop.timeout_add( this.fadeFrequency, () => this._fadeHandler() );
+       }
+    },
+
+    _fadeHandler() {
+        this.fadeTimeRemaining -= this.fadeFrequency;
+        if (this.fadeTimeRemaining > 0) {
+            let newSat = this.topEffect.get_factor() + this.fadeRate;
+            this.winEffect.set_factor(newSat);
+            if (topGroup) this.topEffect.set_factor(newSat);
+            Mainloop.timeout_add( this.fadeFrequency, () => this._fadeHandler() );
+        } else {
+            this.fadeTimeRemaining = 0;
+            if (this.fadeTarget == 0) {
+                winGroup.remove_effect(this.winEffect);
+                if (topGroup) topGroup.remove_effect(this.topEffect);
+
+            } else {
+                this.winEffect.set_factor(this.fadeTarget);
+                if (topGroup) this.topEffect.set_factor(this.fadeTarget);
+            }
         }
     },
 
@@ -165,16 +222,22 @@ MyApplet.prototype = {
     },
 
     on_keybinding_changed() {
-        Main.keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this._toggleEffect));
+        Main.keybindingManager.addHotKey(UUID, this.keybinding, () => this._toggleEffect() );
     },
 
     on_saturation_changed() {
         if (!this.satDelay) {
-           this.effect.set_factor((100-this.saturation)/100);
+           let sat = (this.state) ? (100-this.saturation)/100 : 0;
+           this.winEffect.set_factor(sat);
+           if (topGroup) this.topEffect.set_factor(sat);
         } else {
            Mainloop.source_remove(this.satDelay);
         }
         this.satDelay = Mainloop.timeout_add(200, () => this.satDelay = null );
+    },
+
+    on_fadetime_changed() {
+        this.fadeTime = this.fadeTimeSeconds*1000;
     }
 };
 

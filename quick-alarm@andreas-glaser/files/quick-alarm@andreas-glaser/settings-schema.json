@@ -1,0 +1,64 @@
+{
+  "sectionPanel": {
+    "type": "section",
+    "description": "Panel"
+  },
+  "showCountdown": {
+    "type": "switch",
+    "default": false,
+    "description": "Show remaining time beside icon"
+  },
+  "useCustomIcon": {
+    "type": "switch",
+    "default": false,
+    "description": "Use a custom icon"
+  },
+  "customIcon": {
+    "type": "iconfilechooser",
+    "default": "alarm-symbolic",
+    "description": "Panel icon",
+    "default_icon": "alarm-symbolic",
+    "tooltip": "Select an icon file or type a theme icon name",
+    "dependency": "useCustomIcon"
+  },
+  "sectionNotification": {
+    "type": "section",
+    "description": "Notification"
+  },
+  "fullscreenNotification": {
+    "type": "switch",
+    "default": true,
+    "description": "Show fullscreen notification"
+  },
+  "sectionShortcuts": {
+    "type": "section",
+    "description": "Shortcuts"
+  },
+  "openShortcut": {
+    "type": "keybinding",
+    "default": "<Super><Alt>A",
+    "description": "Open Quick Alarm"
+  },
+  "sectionSound": {
+    "type": "section",
+    "description": "Sound"
+  },
+  "soundMode": {
+    "type": "combobox",
+    "default": "chime",
+    "description": "Alarm sound mode",
+    "options": {
+      "Chime once": "chime",
+      "Ring for a duration": "ring"
+    }
+  },
+  "ringSeconds": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 1,
+    "max": 120,
+    "step": 1,
+    "units": "s",
+    "description": "Ring duration (seconds)"
+  }
+}

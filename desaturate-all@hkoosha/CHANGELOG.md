@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.2
+
+* Fixed cases where some menus (ie. Firefox, LibreOffice) were not desaturating
+* Added a smooth fade effect when desaturation is toggled on or off
+* Added an option to configure the fade effect duration (0.4 - 10 sec)
+
 ## 1.1.1
 
 * Added a Tooltip which will show when the next automatic enable/disable action will occur

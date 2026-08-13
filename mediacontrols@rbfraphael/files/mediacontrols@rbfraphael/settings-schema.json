@@ -1,0 +1,66 @@
+{
+    "section_display_options": {
+        "type": "section",
+        "description": "Display Options"
+    },
+
+    "show_player_icon": {
+        "type": "switch",
+        "description": "Show player icon?",
+        "default": true
+    },
+
+    "show_track_info": {
+        "type": "switch",
+        "description": "Show track info?",
+        "default": true
+    },
+
+    "track_info": {
+        "type": "combobox",
+        "default": "song_artist",
+        "options": {
+            "Song Name and Artist": "song_artist",
+            "Song Name Only": "song",
+            "App Name": "app_name"
+        },
+        "description": "Track info to show on the panel",
+        "dependency": "show_track_info"
+    },
+
+    "truncate_track_info": {
+        "type": "switch",
+        "description": "Limit track info length",
+        "default": true
+    },
+    
+    "truncate_length": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 5,
+        "max": 512,
+        "units": "characters",
+        "step": 1,
+        "description": "Character limit",
+        "dependency": "truncate_track_info"
+    },
+
+    "show_player_select_indicator": {
+        "type": "switch",
+        "description": "Show icon to select player?",
+        "default": true
+    },
+
+    "show_hover_color": {
+        "type": "switch",
+        "description": "Show hover color on buttons?",
+        "default": true
+    },
+
+    "hover_bg_color": {
+        "type": "colorchooser",
+        "default": "rgba(33, 157, 222, 1)",
+        "description": "Button hover color",
+        "dependency": "show_hover_color"
+    }
+}

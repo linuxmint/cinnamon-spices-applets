@@ -6,6 +6,7 @@ const Cinnamon = imports.gi.Cinnamon;
 const Util = require("./lib/util");
 
 const {to_string} = require("./lib/to-string");
+const {readFileAsync} = require("./lib/readFileAsync");
 
 const {
   UUID,
@@ -167,11 +168,11 @@ class SensorsReaper {
     const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
     const SENSORS_DATA=`${SENSORS_DIR}/sensors.txt`;
     if (GLib.file_test(SENSORS_DATA, GLib.FileTest.EXISTS)) {
-      let [success, contents] = GLib.file_get_contents(SENSORS_DATA);
-      if (success) {
-        this._sensors_reaped(to_string(contents));
-      }
-      GLib.free(contents);
+      readFileAsync(SENSORS_DATA).then( (contents) => {
+        let _contents = contents.replace(/\,\n\s+\}/g, "}"); // Avoids errors in json formatted data.
+        this._sensors_reaped(_contents);
+        GLib.free(_contents);
+      });
     } else {
         if (this.sensors_command != undefined) {
         let subProcess = Util.spawnCommandLineAsyncIO(this.sensors_command, (stdout, stderr, exitCode) => {

@@ -18,6 +18,7 @@ import traceback
 from pathlib import Path
 
 from gi.repository import Gtk, Gio, XApp
+sys.path.append(os.path.expanduser("~") + "/.local/share/cinnamon/applets/Radio3.0@claudiux/xs")
 import config
 sys.path.append(config.currentPath + "/bin")
 from R3JsonSettingsWidgets import *

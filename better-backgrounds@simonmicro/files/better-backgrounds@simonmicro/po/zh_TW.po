@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# BETTER BACKGROUNDS
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# simonmicro, 2020
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-07 19:16+0000\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-04-13 04:55+0100\n"
 "PO-Revision-Date: 2025-09-04 02:21+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -21,10 +22,10 @@ msgid "Better Backgrounds"
 msgstr "Better Backgrounds"
 
 #. metadata.json->description
+#, fuzzy
 msgid ""
-"Apply new backgrounds from Bing, Himawari 8, Picsum Photos, PlaceKitten.com,"
-" Unsplash.com or even whole websites - specify search tags, triggers and"
-"more!"
+"Apply new backgrounds from Bing, Himawari 8, Picsum Photos, or even whole "
+"websites"
 msgstr ""
 "從 Bing、Himawari 8、Picsum Photos、PlaceKitten.com、Unsplash.com 甚至整個網"
 "站套用全新桌布——可自訂搜尋標籤、觸發條件等多項設定！"
@@ -44,8 +45,6 @@ msgstr "來源"
 
 #. settings-schema.json->pageResolution->title
 #. settings-schema.json->imageresbing->title
-#. settings-schema.json->imageresunsplash->title
-#. settings-schema.json->imageresplacekitten->title
 #. settings-schema.json->imageresplacecutycapt->title
 #. settings-schema.json->imagerespicsum->title
 #. settings-schema.json->imagereshimawari->title
@@ -68,10 +67,6 @@ msgstr "圖片效果"
 msgid "Triggers"
 msgstr "觸發條件"
 
-#. settings-schema.json->imagetags->title
-msgid "Tags"
-msgstr "標籤"
-
 #. settings-schema.json->imageapply->title
 msgid "Apply"
 msgstr "套用"
@@ -92,15 +87,6 @@ msgstr "發生問題時顯示通知"
 msgid "Bad network? Faulty setup? The applet will notify you. Every time."
 msgstr "網路不穩？設定有誤？每次發生問題時，小程式都會發出通知。"
 
-#. settings-schema.json->applet-info-issues->description
-msgid ""
-"You found a bug or want to suggest a missing feature? Just checkout the "
-"source code at https://github.com/simonmicro/better-backgrounds right over "
-"on Github!"
-msgstr ""
-"發現錯誤或想建議新功能嗎？歡迎直接前往 GitHub 上的原始碼頁面："
-"https://github.com/simonmicro/better-backgrounds"
-
 #. settings-schema.json->applet-store-location->description
 msgid "Picture save location"
 msgstr "圖片儲存位置"
@@ -108,8 +94,7 @@ msgstr "圖片儲存位置"
 #. settings-schema.json->applet-store-location->tooltip
 msgid ""
 "When you choose to save the current background, where do you want to put it?"
-msgstr ""
-"選擇儲存目前桌布時，您希望將其存放至何處？"
+msgstr "選擇儲存目前桌布時，您希望將其存放至何處？"
 
 #. settings-schema.json->applet-store-info->description
 msgid ""
@@ -150,8 +135,7 @@ msgstr "經過一段時間後"
 #. settings-schema.json->change-ontime->tooltip
 msgid ""
 "After the specified number of minutes passes, we will change the background"
-msgstr ""
-"經過指定分鐘數後，桌布將會自動更換"
+msgstr "經過指定分鐘數後，桌布將會自動更換"
 
 #. settings-schema.json->change-time->description
 msgid "Change after"
@@ -185,7 +169,8 @@ msgid "None"
 msgstr "無"
 
 #. settings-schema.json->image-source->description
-msgid "Image source"
+#, fuzzy
+msgid "Image Source"
 msgstr "圖片來源"
 
 #. settings-schema.json->image-source->options
@@ -201,30 +186,20 @@ msgid "Himawari 8"
 msgstr "Himawari 8"
 
 #. settings-schema.json->image-source->options
-msgid "Placekitten"
-msgstr "Placekitten"
-
-#. settings-schema.json->image-source->options
 msgid "Picsum Photos"
 msgstr "Picsum Photos"
-
-#. settings-schema.json->image-source->options
-msgid "Unsplash"
-msgstr "Unsplash"
 
 #. settings-schema.json->source-supports-info->description
 msgid ""
 "This source supports displaying additional image autor information. It will "
 "be shown inside the applets tooltip."
-msgstr ""
-"此來源支援顯示額外的圖片作者資訊，會在小程式的工具提示中顯示。"
+msgstr "此來源支援顯示額外的圖片作者資訊，會在小程式的工具提示中顯示。"
 
 #. settings-schema.json->install-warn-cutycapt->description
 msgid ""
 "Please make sure to install the 'cutycapt' package from the package manager "
 "of your choice!"
-msgstr ""
-"請務必透過慣用的套件管理工具安裝 cutycapt 套件！"
+msgstr "請務必透過慣用的套件管理工具安裝 cutycapt 套件！"
 
 #. settings-schema.json->install-warn-imagemagick->description
 msgid ""
@@ -232,15 +207,6 @@ msgid ""
 "Please make sure this package or command is installed."
 msgstr ""
 "此功能會使用 imagemagick 套件中的 montage 指令，請確認已安裝此套件或指令。"
-
-#. settings-schema.json->source-warn-unsplash->description
-msgid ""
-"This source is known to cause trouble, especially during times of high "
-"demand. Please be patient and try again later if you experience problems. "
-"More information can be found at: https://status.unsplash.com/"
-msgstr ""
-"此來源在高流量時段可能會有問題，若遇到問題，請耐心等候並稍後再試。更多資訊請參考："
-"https://status.unsplash.com/"
 
 #. settings-schema.json->image-res-manual->description
 msgid "Use custom resolution"
@@ -254,8 +220,7 @@ msgstr "通常為 1920x1080 或更高解析度"
 msgid ""
 "Please make sure to choose a common resolution, otherwise the background "
 "can't be changed!"
-msgstr ""
-"請務必選擇常見解析度，否則桌布將無法更換！"
+msgstr "請務必選擇常見解析度，否則桌布將無法更換！"
 
 #. settings-schema.json->image-res-width->description
 msgid "Width"
@@ -270,19 +235,11 @@ msgstr "畫素"
 msgid "Height"
 msgstr "高度"
 
-#. settings-schema.json->image-tag->description
-msgid "Use own search tags"
-msgstr "自訂搜尋標籤"
-
-#. settings-schema.json->image-tag->tooltip
-msgid "Specify own tags to look for..."
-msgstr "請輸入自訂搜尋標籤…"
-
 #. settings-schema.json->image-res-himawari->description
 msgid ""
 "Image zoom factor - this factor times the tile size (550 pixels) equals the "
-"image resolution. So e.g. the factor '4x' would result in a 2200x2200 pixels"
-" image. Please note that factor² much tiles will be temporarly downloaded."
+"image resolution. So e.g. the factor '4x' would result in a 2200x2200 pixels "
+"image. Please note that factor² much tiles will be temporarly downloaded."
 msgstr ""
 "圖片縮放倍率——此倍率乘以每塊磚的大小（550 畫素）即為圖片解析度。例如倍率 4x "
 "會產生 2200x2200 畫素圖片。請注意，會暫時下載倍率平方數量的圖磚。"
@@ -311,24 +268,6 @@ msgstr "20x"
 msgid "Sorry, the selected source does not support resolution modifiers."
 msgstr "抱歉，您選擇的來源不支援解析度調整。"
 
-#. settings-schema.json->image-tag-info->description
-msgid ""
-"Please make sure to choose an available tag, otherwise the background can't "
-"be changed! Make sure to seperate the tags by a ',' and not spaces, also the"
-" tags are understood as AND - not as OR! A valid search term could be "
-"'nature,water'..."
-msgstr ""
-"請務必選擇可用標籤，否則桌布將無法更換！標籤請用半形逗號 (,) 分隔而非空格，且"
-"多個標籤會以 AND 條件組合（非 OR）。有效搜尋範例：nature,water……"
-
-#. settings-schema.json->image-tag-data->description
-msgid "Search tags"
-msgstr "搜尋標籤"
-
-#. settings-schema.json->image-tag-data->tooltip
-msgid "Enter your topic filters"
-msgstr "請輸入主題篩選條件"
-
 #. settings-schema.json->image-align-info->description
 msgid ""
 "Note that properties for the image alignment are not modified from the "
@@ -353,5 +292,4 @@ msgstr "立即套用"
 msgid ""
 "The settings are already stored - press this button to force a refresh of "
 "the background now."
-msgstr ""
-"設定已儲存 - 按下此按鈕可立即強制重新整理桌布。"
+msgstr "設定已儲存 - 按下此按鈕可立即強制重新整理桌布。"

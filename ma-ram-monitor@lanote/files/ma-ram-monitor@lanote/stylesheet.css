@@ -1,0 +1,5 @@
+.warning-blink {
+    background-color: rgba(255, 0, 0, 0.5);
+    border-radius: 2px;
+    transition: background-color 0.2s ease-in-out;
+}

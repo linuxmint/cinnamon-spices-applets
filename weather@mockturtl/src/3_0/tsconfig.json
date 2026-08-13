@@ -1,16 +1,23 @@
 {
-    "compilerOptions": {
-        "lib": ["es2017"],
-        "module": "ES6",
-        "target": "es5",
-        "noImplicitAny": true,
-        "removeComments": true,
-        "preserveConstEnums": true,
-        "sourceMap": false,
-        "outDir": "../../files/weather@mockturtl/3.0/"
-    },
-    "include": [
-      "./**/*",
-      "../../../.typescript-declarations/**/*",
+  "compilerOptions": {
+    "lib": [
+      "es2017"
     ],
+    "module": "ES6",
+    "target": "es5",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": false,
+    "outDir": "../../files/weather@mockturtl/3.0/",
+    "types": [
+      "@ci-types/cjs"
+    ],
+    "exactOptionalPropertyTypes": true,
+    "strict": true,
+    "alwaysStrict": false
+  },
+  "include": [
+    "./**/*",
+  ],
 }

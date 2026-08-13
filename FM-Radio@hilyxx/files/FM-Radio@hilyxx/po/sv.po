@@ -1,0 +1,200 @@
+# Swedish translation for FM RADIO
+# This file is put in the public domain.
+# hilyxx, 2016
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FM-Radio@hilyxx 1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-26 17:56+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <eson@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. metadata.json->name
+#. applet.js:59 applet.js:331 applet.js:397 applet.js:423 applet.js:449
+#. applet.js:470
+msgid "FM Radio"
+msgstr "FM Radio"
+
+#. applet.js:72
+msgid "Reload applet"
+msgstr "Uppdatera panelprogrammet"
+
+#. applet.js:243
+msgid "All stations"
+msgstr "Alla radiostationer"
+
+#. applet.js:323
+msgid "Waiting..."
+msgstr "Väntar..."
+
+#. applet.js:331
+msgid "Please start a radio station first to record it."
+msgstr "Starta en radiostation först, för att spela in den."
+
+#. applet.js:366
+msgid "Music"
+msgstr "Musik"
+
+#. applet.js:397
+msgid "Recording started: "
+msgstr "Inspelning startad: "
+
+#. applet.js:423
+msgid "Error starting recording."
+msgstr "Kunde inte starta inspelning."
+
+#. applet.js:449
+msgid "Recording finished and saved to the /FM-Radio folder."
+msgstr "Inspelning slutförd och sparad i mappen /FM-Radio."
+
+#. channels.js:51
+msgid "Error"
+msgstr "Fel"
+
+#. search.js:19
+msgid "Please enter a radio station name to search for."
+msgstr "Ange ett radiostationsnamn att söka efter."
+
+#. search.js:38
+msgid "No stations found for this keyword."
+msgstr "Inga stationer hittades med detta nyckelord."
+
+#. metadata.json->description
+msgid "A stupidly simple radio player for Cinnamon"
+msgstr "En idiotiskt enkel radiospelare för Cinnamon"
+
+#. settings-schema.json->page_stations->title
+msgid "Radios"
+msgstr "Radiokanaler"
+
+#. settings-schema.json->tips->title
+#. settings-schema.json->tips-section->title
+msgid "Tips"
+msgstr "Tips"
+
+#. settings-schema.json->page_settings->title
+msgid "Settings"
+msgstr "Inställningar"
+
+#. settings-schema.json->section_search->title
+msgid "Radio station search (Radio-Browser API)"
+msgstr "Radiostationssök (Radio-Browser API)"
+
+#. settings-schema.json->section_list->title
+msgid "Station management"
+msgstr "Stationshantering"
+
+#. settings-schema.json->section_settings->title
+msgid "Recording"
+msgstr "Inspelning"
+
+#. settings-schema.json->section_shortcuts->title
+msgid "Keyboard Shortcuts"
+msgstr "Snabbtangenter"
+
+#. settings-schema.json->search_keyword->description
+msgid "Radio station name to search for"
+msgstr "Radiostationsnamn att söka efter"
+
+#. settings-schema.json->search_button->description
+msgid "Launch search"
+msgstr "Starta söktjänst"
+
+#. settings-schema.json->search_button->tooltip
+msgid "Search for the station on the internet"
+msgstr "Sök efter stationer på internet"
+
+#. settings-schema.json->search_results->description
+msgid "Search results (Copy the URL and add it to your list below):"
+msgstr "Sökresultat (Kopiera URL och lägg till den i listan nedan):"
+
+#. settings-schema.json->clear_button->description
+msgid "Clear results"
+msgstr "Rensa"
+
+#. settings-schema.json->clear_button->tooltip
+msgid "Clear the text area"
+msgstr "Rensa textfältet"
+
+#. settings-schema.json->custom_stations->description
+msgid "Custom radio stations"
+msgstr "Anpassade radiostationer"
+
+#. settings-schema.json->custom_stations->columns->title
+msgid "Station name"
+msgstr "Stationsnamn"
+
+#. settings-schema.json->custom_stations->columns->title
+msgid "Stream URL"
+msgstr "Strömnings-URL"
+
+#. settings-schema.json->custom_stations->columns->title
+msgid "Image path (e.g., /home/user/logo.png)"
+msgstr "Bildsökväg (t.ex. /home/användare/logo.png"
+
+#. settings-schema.json->info1->description
+msgid ""
+"\n"
+"To create a custom image for a radio station:\n"
+"• Create an image of any format (png, jpeg, or svg) with a square 'cover' "
+"style size (e.g., 300x300).\n"
+"• Station images are stored by default in the applet's image folder, and the "
+"path is /images/yourcover.png. For images located in another folder, apply "
+"the same process and adapt the path accordingly.\n"
+"• The easiest way is to copy the desired image and paste it into the "
+"provided field; this will directly paste the image path.\n"
+msgstr ""
+"\n"
+"För att skapa en anpassad bild för en radiostation:\n"
+"• Skapa en bild i valfritt format (png, jpeg eller svg) med en kvadratisk "
+"\"miniatyrstorlek\" (t.ex. 300x300).\n"
+"• Stationsbilder sparas som standard i panelprogrammets bildmapp, och "
+"sökvägen är /images/dinbild.png. För bilder som ligger i en annan mapp, "
+"använd samma process och anpassa sökvägen därefter.\n"
+"• Det enklaste sättet är att kopiera önskad bild och klistra in den i det "
+"angivna fältet, detta klistrar direkt in bildens sökväg.\n"
+
+#. settings-schema.json->info2->description
+msgid ""
+"\n"
+"To record a live stream, simply click on the cover icon.\n"
+"Click it again to stop the recording.\n"
+msgstr ""
+"\n"
+"Klicka på miniatyrikonen för att spela in en live-ström.\n"
+"Klicka igen för att stoppa inspelningen.\n"
+
+#. settings-schema.json->show_recording_notifications->description
+msgid "Show a notification at the start and end of a recording"
+msgstr "Visa avisering vid start och slut på en inspelning"
+
+#. settings-schema.json->recording_folder->description
+msgid "Custom recording folder"
+msgstr "Anpassad inspelningsmapp"
+
+#. settings-schema.json->recording_folder->tooltip
+msgid "Leave empty to use the default Music folder."
+msgstr "Lämnas tom för att använda standard musikmapp."
+
+#. settings-schema.json->reset_folder_button->description
+msgid "Reset to default Music folder"
+msgstr "Återställ till standard musikmapp"
+
+#. settings-schema.json->reset_folder_button->tooltip
+msgid "Reset recording location back to default system Music folder"
+msgstr "Återställ inspelningsplatsen till standardmappen Musik"
+
+#. settings-schema.json->key_play_pause->description
+msgid "Play / Stop"
+msgstr "Spela/Stoppa"

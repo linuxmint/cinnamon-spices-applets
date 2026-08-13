@@ -6,6 +6,7 @@ This is a completely re-written GPaste applet based on the [gnome shell extensio
 * Support for multiple histories
 * Manually add entries to the history
 * Unlimited instances
+* Option to reverse the history order so that new items appear at the bottom of the menu
 
 
 # Installation

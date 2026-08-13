@@ -17,6 +17,15 @@ const Gettext = imports.gettext;
 const Tooltips = imports.ui.tooltips;
 const appSystem = imports.gi.Cinnamon.AppSystem.get_default();
 const Pango = imports.gi.Pango;
+const Extension = imports.ui.extension;
+function _require(relPath) {
+    if (Extension.getCurrentExtension) {
+        var Me = Extension.getCurrentExtension();
+        return Me.imports[relPath];
+    } else {
+        return require(relPath);
+    }
+}
 
 
 const UUID = "ProcessMemoryMonitor@claudiux";
@@ -43,7 +52,7 @@ const {
     clearTimeout,
     source_remove,
     remove_all_sources
-} = require("./lib/mainloopTools");
+} = _require("./lib/mainloopTools");
 
 Gettext.bindtextdomain(UUID, `${HOME_DIR}/.local/share/locale`);
 
@@ -94,7 +103,7 @@ for (let [item, value] of Object.entries(translations)) {
 }
 
 
-class ProcessMemoryMonitorApplet extends Applet.TextIconApplet {
+var ProcessMemoryMonitorApplet = class ProcessMemoryMonitorApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
         this.lastCurMb = 0;
@@ -528,7 +537,7 @@ class ProcessMemoryMonitorApplet extends Applet.TextIconApplet {
   }
 }
 
-class CinnamonMemMonitor {
+var CinnamonMemMonitor = class CinnamonMemMonitor {
     constructor(pid) {
         try {
             this.pid = pid;

@@ -27,11 +27,11 @@ msgstr "%A %B %e, %Y"
 msgid "Settings"
 msgstr "Cài đặt"
 
-#: applet.js:325
+#: applet.js:338
 msgid "It's time for "
 msgstr "Đã đến lúc "
 
-#: applet.js:326
+#: applet.js:339
 msgid "Now : "
 msgstr "Bây giờ : "
 

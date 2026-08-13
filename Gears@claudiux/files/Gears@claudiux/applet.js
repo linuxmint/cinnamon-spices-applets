@@ -11,6 +11,16 @@ const Util = imports.misc.util;
 const St = imports.gi.St;
 const Gtk = imports.gi.Gtk;
 const { WindowTracker } = imports.gi.Cinnamon;
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
 const {
   timeout_add_seconds,
   setTimeout,
@@ -18,7 +28,7 @@ const {
   source_exists,
   source_remove,
   remove_all_sources
-} = require("./lib/mainloopTools");
+} = _require("./lib/mainloopTools");
 
 const UUID = "Gears@claudiux";
 const HOME_DIR = GLib.get_home_dir();
@@ -35,7 +45,7 @@ function _(str) {
     return Gettext.gettext(str);
 }
 
-class GearsApplet extends Applet.IconApplet {
+var GearsApplet = class GearsApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 

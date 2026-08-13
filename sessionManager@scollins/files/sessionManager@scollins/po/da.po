@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-27 10:12+0200\n"
-"PO-Revision-Date: 2017-10-01 18:48+0200\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-05-20 17:01+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:154
 msgid "Session"
@@ -25,7 +25,7 @@ msgstr "Session"
 
 #. applet.js:240
 msgid "Lock Screen"
-msgstr "Lås skærmen"
+msgstr "Låseskærm"
 
 #. applet.js:246
 msgid "Switch User"
@@ -41,15 +41,15 @@ msgstr "Log af"
 
 #. applet.js:269
 msgid "Suspend"
-msgstr "Sæt i hviletilstand"
+msgstr "Hviletilstand"
 
 #. applet.js:275
 msgid "Sleep"
-msgstr "Sæt i slumretilstand"
+msgstr "Slumretilstand"
 
 #. applet.js:281
 msgid "Hibernate"
-msgstr "Sæt i dvaletilstand"
+msgstr "Dvaletilstand"
 
 #. applet.js:292
 msgid "Restart"
@@ -112,45 +112,40 @@ msgstr "Symbolske ikoner i menuen"
 
 #. settings-schema.json->menuOptions->description
 msgid "Menu Options"
-msgstr ""
+msgstr "Menuindstillinger"
 
 #. settings-schema.json->showLockScreen->description
-#, fuzzy
 msgid "Show Lock Screen option"
-msgstr "Lås skærmen"
+msgstr "Medtag Låseskærm i menuen"
 
 #. settings-schema.json->showSwitchUser->description
-#, fuzzy
 msgid "Show Switch User option"
-msgstr "Skift bruger"
+msgstr "Medtag Skift bruger i menuen"
 
 #. settings-schema.json->showGuestSession->description
-#, fuzzy
 msgid "Show Guest Session option"
-msgstr "Gæstesession"
+msgstr "Medtag Gæstesession i menuen"
 
 #. settings-schema.json->showLogOff->description
 msgid "Show Log Off option"
-msgstr ""
+msgstr "Medtag Log af i menuen"
 
 #. settings-schema.json->showSuspend->description
 msgid "Show Suspend option"
-msgstr ""
+msgstr "Medtag Hviletilstand i menuen"
 
 #. settings-schema.json->showSleep->description
 msgid "Show Sleep option"
-msgstr ""
+msgstr "Medtag Slumretilstand i menuen"
 
 #. settings-schema.json->showHibernate->description
-#, fuzzy
 msgid "Show Hibernate option"
-msgstr "Sæt i dvaletilstand"
+msgstr "Medtag Dvaletilstand i menuen"
 
 #. settings-schema.json->showRestart->description
 msgid "Show Restart option"
-msgstr ""
+msgstr "Medtag Genstart i menuen"
 
 #. settings-schema.json->showShutDown->description
-#, fuzzy
 msgid "Show Shut Down option"
-msgstr "Sluk"
+msgstr "Medtag Sluk i menuen"

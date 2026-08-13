@@ -1,17 +1,20 @@
-import type { ErrorResponse} from "../../lib/httpLib";
+import type { ErrorResponse } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/services/logger";
 import type { WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, ImmediatePrecipitation, AlertData, AlertLevel } from "../../weather-data";
 import { _, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../../utils";
 import { DateTime } from "luxon";
-import { BaseProvider } from "../BaseProvider";
 import type { PirateWeatherIcon, PirateWeatherPayload, PirateWeatherQueryUnits } from "./types/common";
 import { ALERT_LEVEL_ORDER } from "../../consts";
-import type { LocationData, SunTime } from "../../types";
+import { ProviderErrorCode, type LocationData, type SunTime, type WeatherProvider } from "../../types";
 import { Services, type Config } from "../../config";
 import { ErrorHandler } from "../../lib/services/error_handler";
 
-export class PirateWeather extends BaseProvider {
+export interface PirateWeatherOptions {
+	apiKey: string;
+}
+
+export class PirateWeather implements WeatherProvider<Services.PirateWeather, PirateWeatherOptions> {
 
 	//--------------------------------------------------------
 	//  Properties
@@ -24,6 +27,7 @@ export class PirateWeather extends BaseProvider {
 	public readonly needsApiKey = true;
 	public readonly supportHourlyPrecipChance = true;
 	public readonly supportHourlyPrecipVolume = true;
+	public readonly locationType = "coordinates";
 
 	private remainingQuota: number | null = null;
 	public get remainingCalls(): number | null {
@@ -38,11 +42,11 @@ export class PirateWeather extends BaseProvider {
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config, options: PirateWeatherOptions): Promise<WeatherData | null> {
 		const unit = this.GetQueryUnit(config);
 
 		const response = await HttpLib.Instance.LoadJsonAsync<PirateWeatherPayload>({
-			url: `${this.query}${config.ApiKey}/${loc.lat},${loc.lon}`,
+			url: `${this.query}${options.apiKey}/${loc.lat},${loc.lon}`,
 			cancellable,
 			params: {
 				units: this.GetQueryUnit(config),
@@ -57,6 +61,14 @@ export class PirateWeather extends BaseProvider {
 		// this.remainingQuota = Math.max(1000 - parseInt(response.ResponseHeaders["X-Forecast-API-Calls"]), 0);
 		return this.ParseWeather(response.Data, unit);
 	};
+
+	public ValidConfiguration(config: Config, customConfig: PirateWeatherOptions): ProviderErrorCode {
+		if (!customConfig.apiKey) {
+			return ProviderErrorCode.NO_KEY;
+		}
+
+		return ProviderErrorCode.OK;
+	}
 
 
 	private ParseWeather(json: PirateWeatherPayload, unit: PirateWeatherQueryUnits): WeatherData | null {

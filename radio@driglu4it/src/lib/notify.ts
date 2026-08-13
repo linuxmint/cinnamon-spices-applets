@@ -4,7 +4,7 @@ const { Icon, IconType } = imports.gi.St
 const { spawnCommandLine } = imports.misc.util
 const { get_home_dir } = imports.gi.GLib;
 
-import { RADIO_SYMBOLIC_ICON_NAME } from "../consts";
+import { APPLET_SITE, RADIO_SYMBOLIC_ICON_NAME } from "../consts";
 
 const messageSource = new SystemNotificationSource('Radio Applet')
 messageTray.add(messageSource)
@@ -64,22 +64,34 @@ interface NotifcationErrorOptions {
     /** if set to true, it is added a prefix that the user needs to be connted to the internet */
     showInternetInfo?: boolean
     showViewLogBtn?: boolean
+    showInstallationInstructionBtn?: boolean
     additionalBtns?: NotificationBtn[]
 }
 
-export function notifyError(prefix: string, errMessage: string, options?: NotifcationErrorOptions) {
+/**
+ * 
+ * Function to notify the user of an error. It shows a notification with the notifyMessage plus 
+ * some generic informations (e.g. the information to not hesitate to open an issue on github)
+ * and prints the logs. If 
+ * 
+ * @param notifyMessage 
+ * @param log 
+ * @param options 
+ * @returns 
+ */
+export function notifyError(notifyMessage: string, log: string, options?: NotifcationErrorOptions) {
 
-    const { showInternetInfo, showViewLogBtn = true, additionalBtns = [] } = options || {}
+    const { showInternetInfo, showViewLogBtn = true, showInstallationInstructionBtn = true, additionalBtns = [] } = options || {}
 
-    global.logError(errMessage);
+    global.logError(log);
 
-    const notificationSentences: string[] = [prefix]
+    const notificationSentences: string[] = [notifyMessage]
 
     if (showInternetInfo) {
         notificationSentences.push('Make sure you are connected to the internet and try again')
     }
 
-    notificationSentences.push("Don't hesitate to open an issue on github if the problem remains.")
+    notificationSentences.push("\n\nDon't hesitate to open an issue on github if the problem remains.")
 
     if (showViewLogBtn) {
         notificationSentences.push(`\n\nFor more information see the logs`)
@@ -93,6 +105,13 @@ export function notifyError(prefix: string, errMessage: string, options?: Notifc
         buttons.push({
             text: 'View Logs',
             onClick: () => spawnCommandLine(`xdg-open ${get_home_dir()}/.xsession-errors`)
+        })
+    }
+
+    if (showInstallationInstructionBtn) {
+        buttons.push({
+            text: 'View Installation Instruction',
+            onClick: () => spawnCommandLine(`xdg-open ${APPLET_SITE} `)
         })
     }
 

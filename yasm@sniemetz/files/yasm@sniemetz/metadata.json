@@ -1,0 +1,10 @@
+{
+  "uuid": "yasm@sniemetz",
+  "name": "YASM",
+  "description": "Yet Another System Monitor: load, CPU, battery, memory, disk, network, fans & GPU with sparkline history",
+  "version": "1.0.0",
+  "author": "Sven Niemetz",
+  "max-instances": 1,
+  "panel-orientation-support": true,
+  "cinnamon-version": ["6.0", "6.2", "6.4"]
+}

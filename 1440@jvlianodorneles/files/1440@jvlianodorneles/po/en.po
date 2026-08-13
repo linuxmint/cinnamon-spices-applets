@@ -12,11 +12,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 
-#: /home/juliano/.local/share/cinnamon/applets/1440@jvlianodorneles/applet.js:24
+#: applet.js:24
 msgid "Time remaining until the end of the day"
 msgstr "Time remaining until the end of the day"
 
-#: /home/juliano/.local/share/cinnamon/applets/1440@jvlianodorneles/applet.js:53
+#: applet.js:53
 msgid "min"
 msgstr "min"
 

@@ -1,0 +1,13 @@
+{
+    "uuid": "cinnamon-sidebar@beatlink",
+    "name": "Sidebar Dock",
+    "description": "Dock a window to the left or right edge at a configurable width. Other windows are kept out of the reserved area. Maximizing another window fills only the space beside the dock, and the docked window stays locked in place.",
+    "author": "beatlink",
+    "max-instances": "1",
+    "version": "1.0.0",
+    "cinnamon-version": [
+        "6.0",
+        "6.2",
+        "6.4"
+    ]
+}

@@ -2,52 +2,52 @@ import type { Config, WeatherWindSpeedUnits } from "../config";
 import { APPLET_ICON, ELLIPSIS } from "../consts";
 import type { WeatherApplet } from "../main";
 import type { WeatherData } from "../weather-data";
-import { CompassDirection, CompassDirectionText, Label, LocalizedColon, MPStoUserUnits, _ } from "../utils";
+import { CompassDirection, CompassDirectionText, Label, LocalizedColon, MPStoUserUnits, WindSpeedUnitToText, _ } from "../utils";
 const { BoxLayout, IconType, Icon, Align } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 
 export class WindBox {
-    private _caption!: imports.gi.St.Label;
-    private _label!: imports.gi.St.BoxLayout;
-    private app: WeatherApplet;
+	private _caption!: imports.gi.St.Label;
+	private _label!: imports.gi.St.BoxLayout;
+	private app: WeatherApplet;
 
-    private labelText!: imports.gi.St.Label;
+	private labelText!: imports.gi.St.Label;
 	private windDirectionIcon!: imports.gi.St.Icon;
 
-    public constructor(app: WeatherApplet) {
-        this.app = app;
-        this.app.config.DisplayWindAsTextChanged.Subscribe(this.app.AfterRefresh(this.OnDisplayWindAsTextChanged));
-        this.app.config.WindSpeedUnitChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
-    }
+	public constructor(app: WeatherApplet) {
+		this.app = app;
+		this.app.config.DisplayWindAsTextChanged.Subscribe(this.app.AfterRefresh(this.OnDisplayWindAsTextChanged));
+		this.app.config.WindSpeedUnitChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
+	}
 
-    private OnConfigChanged = (config: Config, unit: WeatherWindSpeedUnits, data: WeatherData) => {
-        this.Display(data.wind.speed, data.wind.degree);
-    }
+	private OnConfigChanged = (config: Config, unit: WeatherWindSpeedUnits, data: WeatherData) => {
+		this.Display(data.wind.speed, data.wind.degree);
+	}
 
-    private OnDisplayWindAsTextChanged = (config: Config, displayWindAsText: boolean, data: WeatherData) => {
-        this._label.remove_all_children();
+	private OnDisplayWindAsTextChanged = (config: Config, displayWindAsText: boolean, data: WeatherData) => {
+		this._label.remove_all_children();
 
-        if (!displayWindAsText)
-            this._label.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
+		if (!displayWindAsText)
+			this._label.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
 
-        this._label.add(this.labelText);
+		this._label.add(this.labelText);
 
-        this.Display(data.wind.speed, data.wind.degree);
-    }
+		this.Display(data.wind.speed, data.wind.degree);
+	}
 
-    public Rebuild(config: Config, textColorStyle: string): [ caption: imports.gi.St.Label, label: imports.gi.St.BoxLayout ] {
-        this._caption = Label({
+	public Rebuild(config: Config, textColorStyle: string): [caption: imports.gi.St.Label, label: imports.gi.St.BoxLayout] {
+		this._caption = Label({
 			text: _('Wind') + LocalizedColon(config.currentLocale),
 			style: textColorStyle,
 			x_align: imports.gi.Clutter.ActorAlign.END,
 		});
-        this._label = this.BuildLabel(config);
+		this._label = this.BuildLabel(config);
 
-        return [ this._caption, this._label ];
-    }
+		return [this._caption, this._label];
+	}
 
-    private BuildLabel(config: Config) {
-        const windBox = new BoxLayout({ vertical: false });
+	private BuildLabel(config: Config) {
+		const windBox = new BoxLayout({ vertical: false });
 
 		// We try to make sure that icon doesn't take up more vertical space than text
 		// Also we position it close to the bottom to be perceived vertically centered
@@ -67,9 +67,9 @@ export class WindBox {
 		windBox.add_actor(this.labelText);
 
 		return windBox;
-    }
+	}
 
-    public Display(windSpeed: number | null, windDegree: number | null): void {
+	public Display(windSpeed: number | null, windDegree: number | null): void {
 		if (windSpeed == null || windDegree == null) {
 			this._caption.hide();
 			this._label.hide();
@@ -87,8 +87,9 @@ export class WindBox {
 		}
 
 		// No need to display unit to Beaufort scale
-		if (this.app.config.WindSpeedUnit != "Beaufort") this.labelText.text += " " + _(this.app.config.WindSpeedUnit);
+		const unitText = WindSpeedUnitToText(this.app.config.WindSpeedUnit);
+		if (unitText != null) this.labelText.text += " " + unitText;
 		this._caption.show();
 		this._label.show();
-    }
+	}
 }

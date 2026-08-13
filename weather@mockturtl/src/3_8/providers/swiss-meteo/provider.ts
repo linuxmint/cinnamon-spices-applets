@@ -2,25 +2,24 @@ import { DateTime } from "luxon";
 import { Services } from "../../config";
 import { HttpLib, type ErrorResponse } from "../../lib/httpLib";
 import { ErrorHandler } from "../../lib/services/error_handler";
-import type { LocationData, LocationType } from "../../types";
+import { ProviderErrorCode, type LocationData, type LocationType, type WeatherProvider } from "../../types";
 import { _, CelsiusToKelvin, KPHtoMPS } from "../../utils";
 import type { HourlyForecastData, WeatherData } from "../../weather-data";
-import { BaseProvider } from "../BaseProvider";
 import { SwissMeteoIconToCondition, type SwissMeteoPayload } from "./payload/common";
 import { SwissMeteoDayToForecastData } from "./payload/days";
 import { SwissMeteoWarningToAlertData } from "./payload/alerts";
 
-export class SwissMeteo extends BaseProvider {
-	public override needsApiKey: boolean = false;
-	public override prettyName: string = _("Swiss Météo");
-	public override name: Services = Services.SwissMeteo;
-	public override maxForecastSupport: number = 8;
-	public override maxHourlyForecastSupport: number = 192;
-	public override website: string = "https://www.meteoswiss.admin.ch/#tab=forecast-map";
-	public override remainingCalls: number | null = null;
-	public override supportHourlyPrecipChance: boolean = false;
-	public override supportHourlyPrecipVolume: boolean = true;
-	public override locationType: LocationType = "postcode";
+export class SwissMeteo implements WeatherProvider<Services.SwissMeteo> {
+	public readonly needsApiKey: boolean = false;
+	public readonly prettyName: string = _("Swiss Météo");
+	public readonly name = Services.SwissMeteo;
+	public readonly maxForecastSupport: number = 8;
+	public readonly maxHourlyForecastSupport: number = 192;
+	public readonly website: string = "https://www.meteoswiss.admin.ch/#tab=forecast-map";
+	public readonly remainingCalls: number | null = null;
+	public readonly supportHourlyPrecipChance: boolean = false;
+	public readonly supportHourlyPrecipVolume: boolean = true;
+	public readonly locationType: LocationType = "postcode";
 
 	private readonly baseUrl = "https://app-prod-ws.meteoswiss-app.ch/v2/plzDetail";
 	private readonly timezone = "Europe/Zurich";
@@ -29,7 +28,7 @@ export class SwissMeteo extends BaseProvider {
 	private readonly VALID_MAX_PLZ = 9999;
 
 
-	public override async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		if (!this.ValidPostcode(loc.entryText)) {
 			ErrorHandler.Instance.PostError({
 				type: "hard",
@@ -120,6 +119,10 @@ export class SwissMeteo extends BaseProvider {
 
 		weather.hourlyForecasts = hourlyForecasts;
 		return weather;
+	}
+
+	public ValidConfiguration(): ProviderErrorCode {
+		return ProviderErrorCode.OK;
 	}
 
 	private HandleError = (error: ErrorResponse<unknown>): boolean => {

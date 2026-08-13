@@ -1,0 +1,111 @@
+{
+    "starting-uri": {
+        "type": "filechooser",
+        "default": "~",
+        "description": "Base Directory",
+        "select-dir": true
+    },
+
+    "appearance-section": {
+        "type": "section",
+        "description": "Appearance"
+    },
+    "menu-type": {
+        "type": "combobox",
+        "default": "classic",
+        "options": {
+            "Classic": "classic",
+            "Native": "native"
+        },
+        "description": "Menu type",
+        "tooltip": "Classic uses a GTK-based menu, while Native uses Cinnamon's native popup menu."
+    },
+    "prefer-native-wayland": {
+        "type": "switch",
+        "default": true,
+        "description": "Prefer native menu type on Wayland",
+        "tooltip": "Automatically use the native menu implementation when running under Wayland. The classic GTK-based menu has limitations on Wayland sessions due to restricted window positioning and focus handling in the protocol.",
+        "dependency": "menu-type=classic"
+    },
+    "icon-name": {
+        "type": "iconfilechooser",
+        "default": "xsi-folder-symbolic",
+        "description": "Icon (hover here for info!)",
+        "tooltip": "Must be an icon name (no path), and should be symbolic."
+    },
+    "tooltip": {
+        "type": "entry",
+        "default": "Directory Menu",
+        "description": "Tooltip Text"
+    },
+    "label": {
+        "type": "entry",
+        "default": "",
+        "description": "Panel Text"
+    },
+
+    "visibility-section": {
+        "type": "section",
+        "description": "Visibility"
+    },
+    "show-header": {
+        "type": "switch",
+        "default": true,
+        "description": "Include \"Open Folder\" and \"Open in Terminal\""
+    },
+    "show-hidden": {
+        "type": "switch",
+        "default": false,
+        "description": "Include hidden files"
+    },
+    "limit-characters": {
+        "type": "switch",
+        "default": true,
+        "description": "Limit the Maximum Number of Characters in the Submenus"
+    },
+    "character-limit": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 255,
+        "step": 5,
+        "description": "Character Limit",
+        "tooltip": "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide.",
+        "dependency": "limit-characters"
+    },
+
+    "ordering-section": {
+        "type": "section",
+        "description": "Ordering"
+    },
+    "order-by": {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "Name": 0,
+            "Date modified": 1
+        },
+        "description": "Order by..."
+    },
+    "favorites-first": {
+        "type": "switch",
+        "default": false,
+        "description": "Show favorite items first"
+    },
+    "pinned-first": {
+        "type": "switch",
+        "default": false,
+        "description": "Show pinned items first"
+    },
+
+    "keybindings-section": {
+        "type": "section",
+        "description": "Keybindings"
+    },
+    "show-menu": {
+        "type": "keybinding",
+        "description": "Show menu",
+        "default": "",
+        "tooltip": "Set keybinding(s) to show the menu."
+    }
+}

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:Utf-8 -*-
 
-# Author : Claude CLERC <cc@claudeclerc.fr> <claude.clerc@gmail.com>
+# Author : Claude CLERC <claude.clerc@gmail.com>
 import sys
 import dbus
 bus = dbus.SessionBus()

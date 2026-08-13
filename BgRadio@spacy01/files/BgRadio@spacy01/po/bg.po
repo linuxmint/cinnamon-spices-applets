@@ -166,6 +166,10 @@ msgstr "The Voice"
 msgid "Magic TV"
 msgstr "Magic TV"
 
+#: applet.js:223
+msgid "Euronews Bulgaria"
+msgstr "Euronews България"
+
 #: applet.js:300
 msgid "Stop"
 msgstr "Спри"
