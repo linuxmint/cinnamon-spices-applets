@@ -53,6 +53,11 @@ function attemptRenameKey(obj,oldKey,newKey){
     Object.assign(obj, newObj);
     return newKey;
 }
+//take "hr:mn:sc" or "hr:mn" or "hr" and convert to seconds since midnight
+function strToSeconds(str){
+    const [h=0,m=0,s=0] = str.split(":").map(Number);
+    return (h*60+m)*60+s;
+}
 
 
 
@@ -138,9 +143,9 @@ class EditLayer{
         let rowToSelect = null
 
         const sortedEntries = Object.entries(this.data).sort(([ak,a], [bk,b]) => {
-            const aVal = a.start ?? (a.variants?Object.values(a.variants).sort((la,lb) => la.localeCompare(lb))[0]:"");
-            const bVal = b.start ?? (b.variants?Object.values(b.variants).sort((la,lb) => la.localeCompare(lb))[0]:"");
-            return (aVal+ak).localeCompare(bVal+bk);
+            const aVal = a.start ?? (a.variants?Object.values(a.variants).sort((la,lb) => la.start.localeCompare(lb.start))[0].start:"");
+            const bVal = b.start ?? (b.variants?Object.values(b.variants).sort((la,lb) => la.start.localeCompare(lb.start))[0].start:"");
+            return (strToSeconds(aVal)+ak).localeCompare(strToSeconds(bVal)+bk);
         });
 
         for(const [key,value] of sortedEntries){
