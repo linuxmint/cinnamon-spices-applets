@@ -292,6 +292,21 @@ MyApplet.prototype = {
         actor.opacity = 255;
     },
 
+    /**
+     * Size the sliding actor, whole pixels only.
+     *
+     * panel.js rounds the boundary between the panel boxes but not the width of
+     * the boxes themselves, so a fractional child leaves the whole row off the
+     * screen edge by up to a pixel for as long as the tween runs. Hence the
+     * size is stepped by hand instead of being handed to ease().
+     */
+    _setSize: function(actor, vertical, size) {
+        if (vertical)
+            actor.set_height(size);
+        else
+            actor.set_width(size);
+    },
+
     _slideIn: function(actor) {
         this._resetActor(actor);
         actor.show();
@@ -302,30 +317,27 @@ MyApplet.prototype = {
 
         let vertical = this.is_vertical();
         // Ask what the icon wants to be before pinning it to zero.
-        let natural = (vertical ? actor.get_preferred_height(-1) : actor.get_preferred_width(-1))[1];
+        let natural = Math.round(
+            (vertical ? actor.get_preferred_height(-1) : actor.get_preferred_width(-1))[1]);
         if (natural <= 0)
             return;
 
         actor.set_clip_to_allocation(true);     // no spilling out of the shrunk box
         actor.opacity = 0;
-        let params = {
+        this._setSize(actor, vertical, 0);
+        actor.ease({
             opacity: 255,
             duration: duration,
             mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+            onUpdate: (transition) => {
+                this._setSize(actor, vertical, Math.round(natural * transition.get_progress()));
+            },
             onComplete: () => {
                 actor.set_clip_to_allocation(false);
                 actor.set_width(-1);
                 actor.set_height(-1);
             }
-        };
-        if (vertical) {
-            actor.set_height(0);
-            params.height = natural;
-        } else {
-            actor.set_width(0);
-            params.width = natural;
-        }
-        actor.ease(params);
+        });
     },
 
     _slideOut: function(actor) {
@@ -339,10 +351,15 @@ MyApplet.prototype = {
         actor.remove_all_transitions();
         actor.set_clip_to_allocation(true);
         let vertical = this.is_vertical();
-        let params = {
+        // Whatever it is right now - it may still be sliding in.
+        let natural = Math.round(vertical ? actor.height : actor.width);
+        actor.ease({
             opacity: 0,
             duration: duration,
             mode: Clutter.AnimationMode.EASE_IN_QUAD,
+            onUpdate: (transition) => {
+                this._setSize(actor, vertical, Math.round(natural * (1 - transition.get_progress())));
+            },
             onComplete: () => {
                 let wasBusy = this._busy;
                 this._busy = true;              // hiding is us, not the app
@@ -350,12 +367,7 @@ MyApplet.prototype = {
                 this._busy = wasBusy;
                 this._resetActor(actor);
             }
-        };
-        if (vertical)
-            params.height = 0;
-        else
-            params.width = 0;
-        actor.ease(params);
+        });
     },
 
     _collapse: function() {
