@@ -45,8 +45,8 @@ class LiveWallpaperApplet extends Applet.IconApplet {
 
     on_applet_added_to_panel() {
         // Aggressively kill any leftover processes from previous Cinnamon sessions
-        Util.spawnCommandLine("pkill -f 'mpv.*mpv-wallpaper-socket'");
-        Util.spawnCommandLine("pkill -f 'xwinwrap.*mpv-wallpaper-socket'");
+        Util.spawn(["pkill", "-f", "mpv.*mpv-wallpaper-socket"]);
+        Util.spawn(["pkill", "-f", "xwinwrap.*mpv-wallpaper-socket"]);
 
         if (this.hide_icon) {
             this.actor.hide();
@@ -165,7 +165,13 @@ class LiveWallpaperApplet extends Applet.IconApplet {
                 }
                 if (m3uContent !== "") {
                     let file = Gio.File.new_for_path(m3uPath);
-                    file.replace_contents(m3uContent, null, false, Gio.FileCreateFlags.NONE, null);
+                    file.replace_contents_async(m3uContent, null, false, Gio.FileCreateFlags.NONE, null, (fileObj, res) => {
+                        try {
+                            fileObj.replace_contents_finish(res);
+                        } catch (e) {
+                            global.logError("Live Wallpaper file write error: " + e);
+                        }
+                    });
                     return m3uPath;
                 }
             }
@@ -289,17 +295,17 @@ class LiveWallpaperApplet extends Applet.IconApplet {
             return;
         }
 
-        let execCmd = `bash -c "
+        let bashCmd = `
             while ! xdotool search --class nemo-desktop >/dev/null 2>&1; do sleep 0.1; done;
             while ! pactl info >/dev/null 2>&1; do sleep 0.1; done;
             rm -f /tmp/mpv-wallpaper-socket;
-            ${cmd.replace(/"/g, '\\"')} &
+            eval "$1" &
             while ! xdotool search --class xwinwrap >/dev/null 2>&1; do sleep 0.1; done;
             xdotool search --class xwinwrap windowlower >/dev/null 2>&1;
             wait
-        "`;
+        `;
 
-        Util.spawnCommandLine(execCmd);
+        Util.spawn(["bash", "-c", bashCmd, "--", cmd]);
         this.isPlaying = true;
         this.togglePlayItem.label.set_text("Stop Wallpaper");
 
@@ -337,8 +343,8 @@ class LiveWallpaperApplet extends Applet.IconApplet {
             this.smartPauseLoopId = 0;
         }
 
-        Util.spawnCommandLine("pkill -f 'mpv.*mpv-wallpaper-socket'");
-        Util.spawnCommandLine("pkill -f 'xwinwrap.*mpv-wallpaper-socket'");
+        Util.spawn(["pkill", "-f", "mpv.*mpv-wallpaper-socket"]);
+        Util.spawn(["pkill", "-f", "xwinwrap.*mpv-wallpaper-socket"]);
         this.isPlaying = false;
         this.isSmartPaused = false;
         this.togglePlayItem.label.set_text("Start Wallpaper");
@@ -360,7 +366,7 @@ class LiveWallpaperApplet extends Applet.IconApplet {
         let jsonStr = JSON.stringify({ command: cmdArray });
         let escapedJsonStr = jsonStr.replace(/"/g, '\\"');
 
-        Util.spawnCommandLine(`sh -c "echo '${escapedJsonStr}' | socat - /tmp/mpv-wallpaper-socket"`);
+        Util.spawn(["sh", "-c", `echo '${escapedJsonStr}' | socat - /tmp/mpv-wallpaper-socket`]);
     }
 
     _onSmartPauseTick() {
