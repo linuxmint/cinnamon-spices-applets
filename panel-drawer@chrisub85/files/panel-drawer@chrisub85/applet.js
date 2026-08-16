@@ -12,6 +12,7 @@ const Gettext = imports.gettext;
 
 const UUID = "panel-drawer@chrisub85";
 const XAPP_UUID = "xapp-status@cinnamon.org";
+const SNI_WATCHER = "org.kde.StatusNotifierWatcher";
 
 const Drawer = imports.ui.appletManager.applets[UUID].drawer;
 
@@ -34,7 +35,7 @@ MyApplet.prototype = {
         this.orientation = orientation;
         this._collapsed = false;
         this._hiddenKeys = [];          // what we hid ourselves - only these get shown again
-        this._commCache = {};           // bus name -> process name
+        this._idCache = {};             // bus name -> StatusNotifier Id
         this._watched = [];             // [[object, signalId]]
         this._busy = false;             // we are the one changing visibility right now
         this._hoverTimeoutId = null;
@@ -110,55 +111,69 @@ MyApplet.prototype = {
     },
 
     /**
-     * Process behind a bus name, so SNI icons keep the same key across sessions.
+     * The Id an app registered its StatusNotifier item under, so bridged icons
+     * keep the same key across sessions.
      *
-     * Asked in the background: until the answer lands the icon is keyed by its
-     * tooltip, and _commResolved carries our bookkeeping over to the new key.
+     * Asked in the background - the watcher knows the object path, the app
+     * itself knows the Id. Until both answers land the icon is keyed by its
+     * tooltip, and _rekey carries our bookkeeping over to the new key.
      */
-    _commFor: function(busName) {
-        if (this._commCache[busName] !== undefined)
-            return this._commCache[busName];
+    _idFor: function(busName) {
+        if (this._idCache[busName] !== undefined)
+            return this._idCache[busName];
 
-        this._commCache[busName] = null;        // one lookup per bus name, answer or not
+        this._idCache[busName] = null;          // one lookup per bus name, answer or not
         Gio.DBus.session.call(
-            "org.freedesktop.DBus", "/org/freedesktop/DBus", "org.freedesktop.DBus",
-            "GetConnectionUnixProcessID", new GLib.Variant("(s)", [busName]),
-            new GLib.VariantType("(u)"), Gio.DBusCallFlags.NONE, 500, null,
+            SNI_WATCHER, "/StatusNotifierWatcher", "org.freedesktop.DBus.Properties", "Get",
+            new GLib.Variant("(ss)", [SNI_WATCHER, "RegisteredStatusNotifierItems"]),
+            new GLib.VariantType("(v)"), Gio.DBusCallFlags.NONE, 500, null,
             (bus, result) => {
-                let pid;
+                let entries;
                 try {
-                    pid = bus.call_finish(result).deep_unpack()[0];
+                    entries = bus.call_finish(result).get_child_value(0).get_variant().deep_unpack();
                 }
                 catch (e) {
-                    return;             // app already gone, or the bus refused to tell
+                    return;             // no StatusNotifier host on this session
                 }
-                Gio.File.new_for_path("/proc/" + pid + "/comm").load_contents_async(null,
-                    (file, res) => {
-                        let comm = null;
-                        try {
-                            comm = imports.byteArray.toString(file.load_contents_finish(res)[1]).trim();
-                        }
-                        catch (e) {
-                            return;     // process died between the two calls
-                        }
-                        if (comm)
-                            this._commResolved(busName, comm);
-                    });
+                // Entries read "<bus name><object path>", e.g. ":1.42/StatusNotifierItem".
+                let entry = entries.filter(function(e) {
+                    return e.indexOf(busName + "/") === 0;
+                })[0];
+                if (entry)
+                    this._askId(busName, entry.substring(busName.length));
             });
         return null;
     },
 
-    /** A comm changes the icon's key, so move whatever we track by key onto the new one. */
-    _commResolved: function(busName, comm) {
-        this._commCache[busName] = comm;
+    _askId: function(busName, objectPath) {
+        Gio.DBus.session.call(
+            busName, objectPath, "org.freedesktop.DBus.Properties", "Get",
+            new GLib.Variant("(ss)", ["org.kde.StatusNotifierItem", "Id"]),
+            new GLib.VariantType("(v)"), Gio.DBusCallFlags.NONE, 500, null,
+            (bus, result) => {
+                let id;
+                try {
+                    id = bus.call_finish(result).get_child_value(0).get_variant().deep_unpack();
+                }
+                catch (e) {
+                    return;             // app already gone, or it will not say
+                }
+                if (id) {
+                    this._idCache[busName] = id;
+                    this._rekey(busName);
+                }
+            });
+    },
 
+    /** An Id changes the icon's key, so move whatever we track by key onto the new one. */
+    _rekey: function(busName) {
         let icon = this._trayIcon(busName);
         if (!icon)
             return;
 
         let tooltip = icon.proxy.tooltip_text || "";
-        let oldKey = Drawer.trayKey({ name: busName, comm: null, tooltip: tooltip });
-        let newKey = Drawer.trayKey({ name: busName, comm: comm, tooltip: tooltip });
+        let oldKey = Drawer.trayKey({ name: busName, id: null, tooltip: tooltip });
+        let newKey = Drawer.trayKey({ name: busName, id: this._idCache[busName], tooltip: tooltip });
         if (oldKey !== newKey) {
             let hidden = this._hiddenKeys.indexOf(oldKey);
             if (hidden > -1)
@@ -206,17 +221,15 @@ MyApplet.prototype = {
                 let proxy = icon.proxy;
                 let name = proxy.name || "";
                 let tooltip = proxy.tooltip_text || "";
-                let key = Drawer.trayKey({
+                let describe = {
                     name: name,
-                    comm: name.charAt(0) === ":" ? this._commFor(name) : null,
+                    id: name.charAt(0) === ":" ? this._idFor(name) : null,
                     tooltip: tooltip
-                });
+                };
                 items.push({
                     kind: "tray",
-                    key: key,
-                    // The key is what we recognise the icon by next session, so it is
-                    // also the honest thing to show in the list.
-                    label: key.substring("xapp:".length),
+                    key: Drawer.trayKey(describe),
+                    label: Drawer.trayLabel(describe),
                     icon: proxy.icon_name || null,
                     actor: icon.actor,
                     proxy: proxy,

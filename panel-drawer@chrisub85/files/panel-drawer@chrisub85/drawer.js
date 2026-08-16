@@ -5,10 +5,6 @@ function keyFor(uuid, instanceId) {
     return uuid + ":" + instanceId;
 }
 
-// Bus names of the proxies flatpak'd apps talk through - their /proc comm says
-// nothing about the app behind them.
-const PROXY_COMMS = ["xdg-dbus-proxy", "flatpak-session-helper", "bwrap"];
-
 /** "Microsoft Teams (2)" -> "Microsoft Teams", so a message counter does not change the key. */
 function normalizeTooltip(tooltip) {
     if (!tooltip)
@@ -20,26 +16,67 @@ function normalizeTooltip(tooltip) {
 }
 
 /**
+ * The app behind a StatusNotifier Id.
+ *
+ * The spec asks for a name unique to the application and stable across
+ * sessions, which is exactly what we want. Electron builds it as
+ * "<app>_status_icon_<n>", so the counter comes off.
+ */
+function appName(id) {
+    if (!id)
+        return "";
+    return id.replace(/_status_icon_\d+$/, "").trim();
+}
+
+/** The same, folded to one case so a key never depends on how an app spells itself. */
+function normalizeId(id) {
+    return appName(id).toLowerCase();
+}
+
+/**
  * Stable id of one tray icon, best effort.
  *
  * XApp reports a Name that is usually the app ("blueman", "steam"), but apps
  * coming in over StatusNotifier often report their bus address instead
- * (":1.204"), and that changes every session. Fall back to the process behind
- * the bus name, then to the tooltip.
+ * (":1.204"), and that changes every session. Ask those for the Id they
+ * registered with, and fall back to the tooltip.
  */
 function trayKey(icon) {
     let name = icon.name || "";
     if (name && name.charAt(0) !== ":")
         return "xapp:" + name;
 
-    if (icon.comm && PROXY_COMMS.indexOf(icon.comm) < 0)
-        return "xapp:" + icon.comm;
+    let id = normalizeId(icon.id);
+    if (id)
+        return "xapp:" + id;
 
     let tooltip = normalizeTooltip(icon.tooltip);
     if (tooltip)
         return "xapp:" + tooltip;
 
     return "xapp:" + name;      // unstable, but at least usable in this session
+}
+
+/**
+ * What to call this icon in the menu.
+ *
+ * The key is folded and stripped so it can be matched, which reads poorly
+ * ("openrgb", "microsoft teams"), so show the name the app gave itself: the one
+ * it handed XApp, else the one it registered its StatusNotifier item under.
+ *
+ * Tooltips are deliberately not a source. Half of them are a status rather than
+ * a name ("You have unread messages") and they change while the app runs.
+ */
+function trayLabel(icon) {
+    let name = icon.name || "";
+    if (name && name.charAt(0) !== ":")
+        return name;
+
+    let id = appName(icon.id);
+    if (id)
+        return id;
+
+    return trayKey(icon).substring("xapp:".length);
 }
 
 /**
