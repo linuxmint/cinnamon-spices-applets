@@ -1,0 +1,6 @@
+{
+"uuid": "schedule-countdown@inbob",
+"name": "Schedule Countdown",
+"description": "Countdown to recurring events",
+"icon": "icon.svg"
+}
