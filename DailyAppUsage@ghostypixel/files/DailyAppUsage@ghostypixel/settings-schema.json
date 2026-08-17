@@ -6,7 +6,7 @@
         "appearance-page": {
         	"type" : "page",
             "title": "Appearance",
-            "sections": ["appearance-section"]
+            "sections": ["appearance-section", "app-sort-section"]
         },
         
         "saving-page": {
@@ -24,7 +24,13 @@
         "appearance-section": {
         	"type" : "section",
             "title": "Appearance",
-            "keys": ["icon-size", "apps-visible", "max-char-for-app-label"]
+            "keys": ["apps-visible", "max-char-for-app-label"]
+        },
+		
+		"app-sort-section": {
+        	"type" : "section",
+            "title": "Sorting apps",
+            "keys": ["sort-apps-by", "sort-order"]
         },
         
         "saving-section": {
@@ -45,22 +51,6 @@
             "keys": ["enable-export-dbus", "show-export-buttons", "export-path"]
         }
     },
-	
-	"icon-size": {
-		"type": "combobox",
-		"default": 24,
-		"description": "Section icon size",
-		"tooltip": "Select the size each app icon uses.",
-		"options": {
-			"16": 16,
-			"24": 24,
-			"32": 32,
-			"64": 64,
-			"128": 128,
-			"256": 256,
-			"512": 512
-		}
-	},
 	
 	"apps-visible": {
 		"type": "scale",
@@ -83,6 +73,29 @@
         "description": "Max characters for app label",
         "tooltip": "How many characters an app selection allows before cutting the word and adding \"...\" at the end."
     },
+	
+	"sort-apps-by": {
+		"type": "combobox",
+		"default": "first-added",
+		"description": "Sort by",
+		"tooltip": "Choose by what attribute should apps be sorted in the popup menu",
+		"options": {
+			"First Added": "first-added",
+			"Name": "name",
+			"Time": "time"
+		}
+	},
+	
+	"sort-order": {
+		"type": "combobox",
+		"default": "desc",
+		"description": "Order by",
+		"tooltip": "Sets the sort order, if sorting is set to be by \"Name\" and order is \"Descending\" apps will be sorted alphabetically from A to Z.\nReverse happens when order is \"Ascending\" names are sorted from Z to A.",
+		"options": {
+			"Descending": false,
+			"Ascending": true
+		}
+	},
 	
 	"enable-saving": {
 		"type": "switch",
