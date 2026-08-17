@@ -1,0 +1,6 @@
+{
+    "uuid": "nerd-dict-applet@Twilight0",
+    "name": "Nerd Dictation Applet",
+    "description": "Cinnamon DE panel applet front-end for nerd-dictation. Works on both X11 and Wayland. Requires nerd-dictation, a Vosk speech recognition model, and xdotool (for X11) or dotool (for Wayland).",
+    "cinnamon-version": [ "3.0", "4.0", "5.0", "6.0", "7.0" ]
+}
