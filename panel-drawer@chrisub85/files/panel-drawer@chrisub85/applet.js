@@ -38,9 +38,11 @@ MyApplet.prototype = {
         this._idCache = {};             // bus name -> StatusNotifier Id
         this._watched = [];             // [[object, signalId]]
         this._busy = false;             // we are the one changing visibility right now
+        this._graceActors = [];         // just appeared - not hidden yet, see _refreshWatches
         this._hoverTimeoutId = null;
         this._collapseTimeoutId = null;
         this._startTimeoutId = null;
+        this._restructureId = null;
 
         try {
             Gtk.IconTheme.get_default().append_search_path(metadata.path);
@@ -284,6 +286,8 @@ MyApplet.prototype = {
 
         this._busy = true;
         plan.toHide.forEach((key) => {
+            if (this._graceActors.indexOf(byKey[key].actor) > -1)
+                return;                 // the app behind it just started - leave it in sight
             this._hiddenKeys.push(key);
             this._slideOut(byKey[key].actor);
         });
@@ -385,6 +389,7 @@ MyApplet.prototype = {
 
     _collapse: function() {
         this._collapsed = true;
+        this._graceActors = [];
         this._apply();
         this._cancelAutoCollapse();
         this._updateIcon();
@@ -392,6 +397,7 @@ MyApplet.prototype = {
 
     _expand: function() {
         this._collapsed = false;
+        this._graceActors = [];
         this._apply();
         this._queueAutoCollapse();
         this._updateIcon();
@@ -413,25 +419,45 @@ MyApplet.prototype = {
                 this._watched.push([object, object.connect(signal, handler)]);
         };
 
+        /**
+         * The XApp applet puts a tray icon's actor on the panel before it lists
+         * the icon (addStatusIcon), so looking at the tray from inside the
+         * signal would miss the icon that just arrived. Wait for the current
+         * callback to finish first.
+         */
         let onStructureChanged = () => {
-            if (this._busy)
+            if (this._busy || this._restructureId)
                 return;
-            this._apply();
-            this._refreshWatches();
-            this._rebuildMemberItems();
+            this._restructureId = Mainloop.idle_add(() => {
+                this._restructureId = null;
+                this._apply();
+                this._refreshWatches();
+                this._rebuildMemberItems();
+                if (this._graceActors.length)
+                    this._queueAutoCollapse();
+                return false;
+            });
         };
 
-        ["actor-added", "actor-removed"].forEach((signal) => {
-            watch(this._panelBox(), signal, onStructureChanged);
-        });
+        // An icon showing up while the drawer is shut belongs to an app the user
+        // has just started, so it stays in sight for the auto collapse delay
+        // instead of vanishing under their hands.
+        let onActorAdded = (container, actor) => {
+            if (!this._busy && this._collapsed && this.autocollapsetime &&
+                this._graceActors.indexOf(actor) < 0)
+                this._graceActors.push(actor);
+            onStructureChanged();
+        };
+
+        watch(this._panelBox(), "actor-added", onActorAdded);
+        watch(this._panelBox(), "actor-removed", onStructureChanged);
 
         let xapp = this._xappApplet();
         if (!xapp)
             return;
 
-        ["actor-added", "actor-removed"].forEach((signal) => {
-            watch(xapp.manager_container, signal, onStructureChanged);
-        });
+        watch(xapp.manager_container, "actor-added", onActorAdded);
+        watch(xapp.manager_container, "actor-removed", onStructureChanged);
 
         for (let id in xapp.statusIcons) {
             watch(xapp.statusIcons[id].actor, "notify::visible", () => {
@@ -546,7 +572,7 @@ MyApplet.prototype = {
         let full = Math.round(this.autocollapsetime * 1000);
         this._collapseTimeoutId = Mainloop.timeout_add(delay || full, () => {
             this._collapseTimeoutId = null;
-            if (this._collapsed)
+            if (this._collapsed && !this._graceActors.length)
                 return false;
             if (this._inUse()) {        // pointer on the icons, or one of their menus open
                 this._wasInUse = true;
@@ -665,6 +691,8 @@ MyApplet.prototype = {
         this._cancelAutoCollapse();
         if (this._startTimeoutId)
             Mainloop.source_remove(this._startTimeoutId);
+        if (this._restructureId)
+            Mainloop.source_remove(this._restructureId);
         this._watched.forEach(function(pair) {
             try { pair[0].disconnect(pair[1]); } catch (e) {}
         });
