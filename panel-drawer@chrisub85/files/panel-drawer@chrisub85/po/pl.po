@@ -73,12 +73,12 @@ msgstr "Zwiń ponownie po"
 #. settings-schema.json->autocollapsetime->tooltip
 msgid ""
 "0 disables it - the drawer then stays open until you click the arrow again.\n"
-"The countdown only starts once the pointer has left the icons and their "
+"The countdown only starts once the pointer has left the panel and the icons' "
 "menus are closed."
 msgstr ""
 "0 wyłącza — szuflada zostaje otwarta, dopóki nie klikniesz strzałki "
 "ponownie.\n"
-"Odliczanie rusza dopiero, gdy kursor opuści ikony, a ich menu zostaną "
+"Odliczanie rusza dopiero, gdy kursor opuści panel, a menu ikon zostaną "
 "zamknięte."
 
 #. settings-schema.json->animationtime->description

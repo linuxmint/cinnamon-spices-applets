@@ -75,7 +75,7 @@ msgstr ""
 #. settings-schema.json->autocollapsetime->tooltip
 msgid ""
 "0 disables it - the drawer then stays open until you click the arrow again.\n"
-"The countdown only starts once the pointer has left the icons and their menus are closed."
+"The countdown only starts once the pointer has left the panel and the icons' menus are closed."
 msgstr ""
 
 #. settings-schema.json->animationtime->description

@@ -596,6 +596,11 @@ MyApplet.prototype = {
         if (this.actor.hover || this._pointerOver(this.actor, px, py))
             return true;
 
+        // Collapsing shifts every applet next to us, so anything the pointer aims
+        // at moves out from under it. Wait until the pointer leaves the row.
+        if (this._pointerOver(this._panelBox(), px, py))
+            return true;
+
         let items = this._items();
         let hasTrayMember = items.some((item) => {
             return item.kind === "tray" && this._isMember(item.key);
