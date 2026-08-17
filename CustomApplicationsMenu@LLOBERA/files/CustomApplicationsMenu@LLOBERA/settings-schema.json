@@ -1,0 +1,12 @@
+{
+  "head_applications": {
+      "type": "header",
+      "description": "Applications"
+  },
+  "applications": {
+    "type": "custom",
+    "file": "TextWidget.py",
+    "widget": "TextWidget",
+    "default": "[\n    {\n        \"desktopFile\": \"cinnamon-settings\"\n    },\n    {\n        \"desktopFile\": \"gnome-system-monitor\"\n    },\n    {\n        \"command\": \"S\"\n    },\n    {\n        \"displayName\": \"Internet\",\n        \"iconName\": \"applications-internet\",\n        \"menu\": [\n            {\n                \"desktopFile\": \"firefox\",\n                \"command\": \"firefox\"\n            },\n            {\n                \"desktopFile\": \"firefox\",\n                \"command\": \"firefox -P Profile2 -no-remote\",\n                \"displayName\": \"Firefox Profile2\",\n                \"active\": false\n            }\n        ]\n    }\n]"
+  }
+}
