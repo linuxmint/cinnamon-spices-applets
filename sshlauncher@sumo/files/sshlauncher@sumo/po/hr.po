@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# SSH LAUNCHER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # gogo <trebelnik2@gmail.com>, 201.
@@ -6,50 +6,100 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sshlauncher@sumo\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-08 13:43+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-06 20:34+0100\n"
 "PO-Revision-Date: 2017-05-08 13:46+0200\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: \n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: gogo <trebelnik2@gmail.com>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: hr\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#. sshlauncher@sumo->metadata.json->name
-#: applet.js:30 applet.js:43 applet.js:103
+#. metadata.json->name
+#. applet.js:51 applet.js:67 applet.js:114 applet.js:256 applet.js:271
 msgid "SSH Launcher"
 msgstr "SSH pokretač"
 
-#: applet.js:57
-msgid "Background (-fN)"
-msgstr "Pozadina (-fN)"
+#. applet.js:114
+msgid "No suitable icon found, falling back to custom icon"
+msgstr "Nije pronađena odgovarajuća ikona, koristi se prilagođena ikona"
 
-#: applet.js:60
-msgid "Forward X11 (-X)"
-msgstr "Naprijed X11 (-X)"
-
-#: applet.js:81
-msgid "ERROR. "
-msgstr "GREŠKA."
-
-#: applet.js:84
-msgid "Edit SSH config"
-msgstr "Uredi SSH podešavanje"
-
-#: applet.js:88
+#. applet.js:126
 msgid "Force Update from SSH config"
 msgstr "Prislina nadopuna iz SSH podešavanja"
 
-#: applet.js:103
+#. applet.js:193
+msgid "Background (-fN)"
+msgstr "Pozadina (-fN)"
+
+#. applet.js:196
+msgid "Forward X11 (-X)"
+msgstr "Naprijed X11 (-X)"
+
+#. applet.js:237
+msgid "ERROR. "
+msgstr "GREŠKA."
+
+#. applet.js:240
+msgid "Edit SSH config"
+msgstr "Uredi SSH podešavanje"
+
+#. applet.js:256
+msgid ""
+"Error: I can't open the terminal.\n"
+"You need to set a default terminal first in Preferred Applications!\n"
+"\n"
+"(More help in Right Click->About->More Info)"
+msgstr ""
+"Greška: Ne mogu otvoriti terminal.\n"
+"Morate prvo postaviti zadani terminal u Preferiranim aplikacijama!\n"
+"\n"
+"(Više pomoći u Desni klik->Informacije->Više informacija)"
+
+#. applet.js:271
 msgid "Connection opened to "
 msgstr "Povezivanje uspostavljeno s "
 
-#. sshlauncher@sumo->metadata.json->description
+#. applet.js:271
+msgid " using "
+msgstr " koristeći "
+
+#. metadata.json->description
 msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
 msgstr "Aplet za povezivanje sa SSH računalima podešenim u ~/.ssh/config"
+
+#. settings-schema.json->headAppearance->description
+msgid "Appearance"
+msgstr "Izgled"
+
+#. settings-schema.json->themeIcon->description
+msgid "Use icon from your icon theme"
+msgstr "Koristi ikonu iz teme ikona"
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "Koristi simboličku ikonu"
+
+#. settings-schema.json->headFunc->description
+msgid "Functionality"
+msgstr "Funkcionalnost"
+
+#. settings-schema.json->customCommand->description
+msgid "Use custom command for opening terminal"
+msgstr "Koristi prilagođenu naredbu za otvaranje terminala"
+
+#. settings-schema.json->customCommand->tooltip
+msgid ""
+"Usually it should end with -e so it will execute the supplied ssh command, "
+"check your chosen terminal's manual."
+msgstr ""
+"Obično bi trebalo završavati s -e kako bi se izvršila navedena ssh naredba, "
+"provjerite priručnik odabranog terminala."
 
 #. settings-schema.json->showConnectionNotification->description
 msgid "Show notification when launching SSH connection"
@@ -58,3 +108,11 @@ msgstr "Prikaži obavijest pri pokretanju SSH veze"
 #. settings-schema.json->showConnectionNotification->tooltip
 msgid "Display a notification message when SSH terminal is launched"
 msgstr "Prikaži poruku obavijesti kada se pokrene SSH terminal"
+
+#. settings-schema.json->openMenuKey->description
+msgid "Keyboard shortcut to open the SSH menu"
+msgstr "Tipkovnička prečica za otvaranje SSH izbornika"
+
+#. settings-schema.json->openMenuKey->tooltip
+msgid "Set a global keyboard shortcut to open the SSH launcher menu"
+msgstr "Postavi globalnu tipkovničku prečicu za otvaranje SSH izbornika"
