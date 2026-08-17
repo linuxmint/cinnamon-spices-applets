@@ -142,7 +142,8 @@
             "type": "section",
             "title": "SFTP Action Module",
             "keys": [
-                "module_sftp_description"
+                "module_sftp_description",
+                "module_sftp_selectFirstDirectory"
             ]
         },
         "section_module_sms": {
@@ -447,6 +448,12 @@
     "module_sftp_description": {
         "type": "label",
         "description": "Lets you remotely browse the storage selected on the device"
+    },
+
+    "module_sftp_selectFirstDirectory": {
+        "type": "switch",
+        "description": "Select the first directory automatically",
+        "default": false
     },
 
     "module_sms_description": {

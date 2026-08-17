@@ -1,22 +1,23 @@
-StBin.kdec-popup-button-menu-item-button  {
-    padding: 0 3px;
-    margin: 0;
-    border-radius: 2px;
-    min-height: 0;
-    min-width: 0;
+.notification-icon-button.menu-item-button {
+  padding: 2px 2px !important;
+  spacing: 0px !important;
+  margin: 0px !important;
+  border-radius: 1px;
+  border-width: 1px;
+  min-height: 1em;
 }
 
-
-StIcon.kdec-popup-button-menu-item-button-icon {
-    min-width: 0;
-    min-height: 0;
+.notification-icon-button.menu-item-button .menu-item-button-icon {
+  spacing: 0px;
+  margin: 0px;
+  padding: 0px;
+  icon-size: 1em;
+  min-height: 1em;
+  width: 1.25em;
+  border-width: 0;
 }
 
-StIcon.kdec-popup-button-menu-item-button-icon:disabled {
-    color: #9f9f9f;
-}
-
-CinnamonGenericContainer.kdec-popup-button-menu-item {
-    padding-top: .3em;
-    padding-bottom: .3em;
+.popup-menu-item.menu-icon-button-item {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }

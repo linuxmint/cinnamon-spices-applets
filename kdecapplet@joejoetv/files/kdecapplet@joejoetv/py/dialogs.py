@@ -9,7 +9,7 @@ except:
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib
+from gi.repository import Gtk, GLib, GObject, Gio
 
 from os import path
 import json
@@ -44,6 +44,7 @@ class SendURLDialog(Gtk.Dialog):
         
         self.set_resizable(False)
         self.set_icon_name("kdeconnect")
+        self.set_default_response(Gtk.ResponseType.OK)
         
         cancel_button = Gtk.Button.new_from_icon_name("gtk-cancel", Gtk.IconSize.BUTTON)
         cancel_button.set_always_show_image(True)
@@ -54,6 +55,9 @@ class SendURLDialog(Gtk.Dialog):
         
         self.add_action_widget(cancel_button, Gtk.ResponseType.CANCEL)
         self.add_action_widget(ok_button, Gtk.ResponseType.OK)
+
+        ok_button.set_can_default(True)
+        ok_button.grab_default()
         
         self.set_default_size(500, 100)
         
@@ -63,6 +67,7 @@ class SendURLDialog(Gtk.Dialog):
         self.url_entry = Gtk.Entry()
         self.url_entry.set_placeholder_text(_("URL"))
         self.url_entry.set_input_purpose(Gtk.InputPurpose.URL)
+        self.url_entry.set_activates_default(True)
         
         box = Gtk.VBox()
         box.set_spacing(6)
@@ -100,6 +105,7 @@ class SendSMSDialog(Gtk.Dialog):
         
         self.set_resizable(False)
         self.set_icon_name("kdeconnect")
+        self.set_default_response(Gtk.ResponseType.OK)
         
         cancel_button = Gtk.Button.new_from_icon_name("gtk-cancel", Gtk.IconSize.BUTTON)
         cancel_button.set_always_show_image(True)
@@ -110,6 +116,9 @@ class SendSMSDialog(Gtk.Dialog):
         
         self.add_action_widget(cancel_button, Gtk.ResponseType.CANCEL)
         self.add_action_widget(ok_button, Gtk.ResponseType.OK)
+
+        ok_button.set_can_default(True)
+        ok_button.grab_default()
         
         self.set_default_size(400, 300)
         
@@ -118,6 +127,7 @@ class SendSMSDialog(Gtk.Dialog):
         
         self.pnr_entry = PhoneNumberEntry()
         self.pnr_entry.set_placeholder_text(_("Phone Number"))
+        self.pnr_entry.set_activates_default(True)
         
         msg_label = Gtk.Label(label=_("Message:"))
         msg_label.set_xalign(Gtk.Justification.LEFT)
@@ -163,6 +173,7 @@ class SendTextDialog(Gtk.Dialog):
         
         self.set_resizable(False)
         self.set_icon_name("kdeconnect")
+        self.set_default_response(Gtk.ResponseType.OK)
         
         cancel_button = Gtk.Button.new_from_icon_name("gtk-cancel", Gtk.IconSize.BUTTON)
         cancel_button.set_always_show_image(True)
@@ -173,6 +184,9 @@ class SendTextDialog(Gtk.Dialog):
         
         self.add_action_widget(cancel_button, Gtk.ResponseType.CANCEL)
         self.add_action_widget(ok_button, Gtk.ResponseType.OK)
+
+        ok_button.set_can_default(True)
+        ok_button.grab_default()
         
         self.set_default_size(300, 150)
         
@@ -208,7 +222,99 @@ class SendTextDialog(Gtk.Dialog):
     def get_text(self):
         textbuffer = self.text_textview.get_buffer()
         return textbuffer.get_text(textbuffer.get_start_iter(), textbuffer.get_end_iter(), True)
+
+
+class OpenDirectoryDialog(Gtk.Dialog):
+    class DirListItem(GObject.GObject):
+        path = GObject.Property(type=str)
+        name = GObject.Property(type=str)
+
+        def __init__(self, path: str, name: str):
+            super().__init__()
+            self.path = path
+            self.name = name
+
+    def __init__(self, device_name: str, mount_point: str, directories: list[tuple[str, str]]):
+        super().__init__(title=_("Open remote directory on '{device_name}'").format(device_name=device_name), flags=0)
+
+        self.mount_point = mount_point
+        
+        self.set_resizable(True)
+        self.set_icon_name("kdeconnect")
+        self.set_default_response(Gtk.ResponseType.OK)
+        
+        cancel_button = Gtk.Button.new_from_icon_name("gtk-cancel", Gtk.IconSize.BUTTON)
+        cancel_button.set_always_show_image(True)
+        cancel_button.set_label(_("Cancel"))
+        ok_button = Gtk.Button.new_from_icon_name("folder-open-symbolic", Gtk.IconSize.BUTTON)
+        ok_button.set_always_show_image(True)
+        ok_button.set_label(_("Open"))
+        
+        self.add_action_widget(cancel_button, Gtk.ResponseType.CANCEL)
+        self.add_action_widget(ok_button, Gtk.ResponseType.OK)
+
+        ok_button.set_can_default(True)
+        ok_button.grab_default()
+        
+        self.set_default_size(500, 200)
+        
+        text_label = Gtk.Label(label=_("Directory to open:"))
+        text_label.set_xalign(Gtk.Justification.LEFT)
+        
+        frame = Gtk.Frame()
+
+        self.list_store = Gio.ListStore.new(self.DirListItem)
+
+        for (path, name) in directories:
+            self.list_store.append(self.DirListItem(path, name))
+
+        self.directory_listbox = Gtk.ListBox()
+        self.directory_listbox.set_selection_mode(Gtk.SelectionMode.SINGLE)
+        self.directory_listbox.bind_model(self.list_store, self._create_list_widget)
+        
+        frame.add(self.directory_listbox)
+        
+        box = Gtk.VBox()
+        box.set_spacing(6)
+        box.set_margin_top(6)
+        box.set_margin_bottom(6)
+        box.set_margin_start(6)
+        box.set_margin_end(6)
+        
+        box.pack_start(text_label, False, False, 0)
+        box.pack_end(frame, True, True, 0)
+        
+        content_box = self.get_content_area()
+        content_box.pack_start(box, True, True, 0)
+        
+        self.show_all()
     
+    def _create_list_widget(self, item: DirListItem):
+        hbox = Gtk.HBox()
+        hbox.set_spacing(4)
+
+        icon = Gtk.Image.new_from_icon_name("folder-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
+
+        hbox.pack_start(icon, False, False, 0)
+
+        vbox = Gtk.VBox()
+
+        name_label = Gtk.Label(label=item.name)
+        name_label.set_halign(Gtk.Align.START)
+
+        path_label = Gtk.Label()
+        path_label.set_halign(Gtk.Align.START)
+        path_label.set_markup(f"<span size='smaller'>{item.path.removeprefix(self.mount_point)}</span>")
+
+        vbox.pack_start(name_label, False, False, 0)
+        vbox.pack_end(path_label, False, False, 0)
+
+        hbox.pack_end(vbox, True, True, 0)
+        return hbox
+
+    def get_selected_directory(self) -> str:
+        store_idx = self.directory_listbox.get_selected_row().get_index()
+        return self.list_store[store_idx].path
 
 
 if __name__ == "__main__":
@@ -305,11 +411,37 @@ if __name__ == "__main__":
             else:
                 filechooserdialog.destroy()
                 sys.exit(EC_CANCEL)
+        elif sys.argv[1] == "selectdirectory":
+            if len(sys.argv) < 4:
+                print("Not enough arguments!", file=sys.stderr)
+                sys.exit(EC_ARGERROR)
+            
+            dirs = []
+
+            for i in range(4, len(sys.argv), 2):
+                if i+1 < len(sys.argv):
+                    dirs.append((sys.argv[i], sys.argv[i+1]))
+
+            if len(dirs) == 0:
+                print("Not enough arguments!", file=sys.stderr)
+                sys.exit(EC_ARGERROR)
+
+            dialog = OpenDirectoryDialog(sys.argv[2], sys.argv[3], dirs)
+
+            response = dialog.run()
+
+            if response == Gtk.ResponseType.OK:
+                print(json.dumps(dialog.get_selected_directory()))
+                
+                dialog.destroy()
+                sys.exit(EC_OK)
+            else:
+                dialog.destroy()
+                sys.exit(EC_CANCEL)
+
         else:
             print("Unknown dialog type!", file=sys.stderr)
             sys.exit(EC_ARGERROR)
     else:
         print("Not enough arguments!", file=sys.stderr)
         sys.exit(EC_ARGERROR)
-    
-    
