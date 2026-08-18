@@ -445,6 +445,10 @@ class KDECModule {
     // Display name to display in settings
     static DISPLAY_NAME = "Module";
 
+    // This field is not directly used, but is here, such that the `cinnamon-xlet-makepot` can pick up
+    // the display names to translate. It should always use the same string as DISPLAY_NAME
+    static _DUMMY_TRANSLATED_NAME = _("Module");
+
     // Array of additional settings keys to bind
     static ADDITIONAL_SETTINGS = [];
 
@@ -590,6 +594,7 @@ class BatteryModule extends KDECModule {
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_battery"];
     static MODULE_ID = "battery";
     static DISPLAY_NAME = "Battery Module";
+    static _DUMMY_TRANSLATED_NAME = _("Battery Module");
     static ADDITIONAL_SETTINGS = [];
     static TYPE = ModuleType.INFO;
 
@@ -674,6 +679,7 @@ class DeviceInfoModule extends KDECModule {
     static REQUIRED_KDEC_PLUGINS = [];
     static MODULE_ID = "deviceinfo";
     static DISPLAY_NAME = "Device-Info Module";
+    static _DUMMY_TRANSLATED_NAME = _("Device-Info Module");
     static ADDITIONAL_SETTINGS = [];
     static TYPE = ModuleType.INFO;
 
@@ -741,6 +747,7 @@ class ConnectivityModule extends KDECModule {
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_connectivity_report"];
     static MODULE_ID = "connectivity";
     static DISPLAY_NAME = "Connectivity Module";
+    static _DUMMY_TRANSLATED_NAME = _("Connectivity Module");
     static ADDITIONAL_SETTINGS = ["showNetworkType"];
     static TYPE = ModuleType.INFO;
 
@@ -856,6 +863,7 @@ class FindMyPhoneModule extends KDECModule {
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_findmyphone"];
     static MODULE_ID = "findmyphone";
     static DISPLAY_NAME = "FindMyPhone Module";
+    static _DUMMY_TRANSLATED_NAME = _("FindMyPhone Module");
     static ADDITIONAL_SETTINGS = [];
     static TYPE = ModuleType.ACTION;
 
@@ -895,6 +903,7 @@ class RequestPhotoModule extends KDECModule {
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_photo"];
     static MODULE_ID = "requestphoto";
     static DISPLAY_NAME = "Request Photo Module";
+    static _DUMMY_TRANSLATED_NAME = _("Request Photo Module");
     static ADDITIONAL_SETTINGS = ["saveToDir", "saveDirectory"];
     static TYPE = ModuleType.ACTION;
 
@@ -996,6 +1005,7 @@ class PingModule extends KDECModule {
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_ping"];
     static MODULE_ID = "ping";
     static DISPLAY_NAME = "Ping Module";
+    static _DUMMY_TRANSLATED_NAME = _("Ping Module");
     static ADDITIONAL_SETTINGS = ["useCustomMessage", "customMessage"];
     static TYPE = ModuleType.ACTION;
 
@@ -1048,6 +1058,7 @@ class ShareModule extends KDECModule {
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_share"];
     static MODULE_ID = "share";
     static DISPLAY_NAME = "Share Module";
+    static _DUMMY_TRANSLATED_NAME = _("Share Module");
     static ADDITIONAL_SETTINGS = ["useSubMenu", "enableSendURL", "enableSendText", "enableSendFiles"];
     static TYPE = ModuleType.ACTION;
 
@@ -1229,6 +1240,7 @@ class SFTPModule extends KDECModule {
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_sftp"];
     static MODULE_ID = "sftp";
     static DISPLAY_NAME = "SFTP Module";
+    static _DUMMY_TRANSLATED_NAME = _("SFTP Module");
     static ADDITIONAL_SETTINGS = ["selectFirstDirectory"];
     static TYPE = ModuleType.ACTION;
 
@@ -1448,6 +1460,7 @@ class SMSModule extends KDECModule {
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_sms"];
     static MODULE_ID = "sms";
     static DISPLAY_NAME = "SMS Module";
+    static _DUMMY_TRANSLATED_NAME = _("SMS Module");
     static ADDITIONAL_SETTINGS = ["useSubMenu", "enableSendSMS", "enableLaunchSMSApp"];
     static TYPE = ModuleType.ACTION;
 
