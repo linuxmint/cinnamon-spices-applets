@@ -55,6 +55,14 @@ const applet = (key, visible) => ({ key: key, visible: visible !== false });
     assertEq(p.toShow, [], "collapse twice: nothing shown");
 }
 
+// 6b. somebody showed a member back while the drawer was shut - hide it again.
+// XApp does this to every tray icon on an icon theme or panel size change.
+{
+    let p = Drawer.plan([applet("a:1")], ["a:1"], ["a:1"], true);
+    assertEq(p.toHide, ["a:1"], "collapse: re-hides a member shown behind our back");
+    assertEq(p.toShow, [], "collapse: re-hide shows nothing");
+}
+
 assertEq(Drawer.keyFor("sound@cinnamon.org", 11), "sound@cinnamon.org:11", "keyFor");
 
 // 7. tray icon keys - real cases from a live panel

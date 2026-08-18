@@ -89,6 +89,11 @@ function trayLabel(icon) {
  *
  * Anything hidden by somebody else (its own logic, another applet) is never
  * touched: we only ever show back what we hid ourselves.
+ *
+ * A member that is visible while the drawer is shut goes back in even if it is
+ * already on the hidden list. The XApp applet calls show() on every tray icon
+ * whenever the icon theme or the panel size changes, which puts an icon we hid
+ * back on the panel without ever telling us it dropped off our list.
  */
 function plan(items, keys, hiddenByUs, collapsed) {
     let live = {};
@@ -99,7 +104,7 @@ function plan(items, keys, hiddenByUs, collapsed) {
 
     if (collapsed) {
         items.forEach(function(i) {
-            if (isMember(i.key) && i.visible && hiddenByUs.indexOf(i.key) < 0)
+            if (isMember(i.key) && i.visible)
                 toHide.push(i.key);
         });
     }

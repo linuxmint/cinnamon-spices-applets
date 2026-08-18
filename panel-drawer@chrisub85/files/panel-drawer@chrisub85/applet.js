@@ -288,7 +288,8 @@ MyApplet.prototype = {
         plan.toHide.forEach((key) => {
             if (this._graceActors.indexOf(byKey[key].actor) > -1)
                 return;                 // the app behind it just started - leave it in sight
-            this._hiddenKeys.push(key);
+            if (this._hiddenKeys.indexOf(key) < 0)
+                this._hiddenKeys.push(key);     // it may be a re-hide, and one key means one entry
             this._slideOut(byKey[key].actor);
         });
         plan.toShow.forEach((key) => {
