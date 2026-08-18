@@ -1,0 +1,93 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: panel-drawer@chrisub85\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-13 07:22+0200\n"
+"PO-Revision-Date: 2026-08-13 07:20+0200\n"
+"Last-Translator: chrisub85\n"
+"Language-Team: Polish\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+
+#: applet.js:365
+msgid "Keep in the drawer:"
+msgstr "Trzymaj w szufladzie:"
+
+#: applet.js:577
+msgid "Drawer is empty - right click to pick icons"
+msgstr "Szuflada jest pusta — kliknij prawym przyciskiem, aby wybrać ikony"
+
+#: applet.js:579
+msgid "Show hidden icons"
+msgstr "Pokaż ukryte ikony"
+
+#: applet.js:579
+msgid "Hide icons"
+msgstr "Ukryj ikony"
+
+#. metadata.json->name
+msgid "Panel Drawer"
+msgstr "Szuflada panelu"
+
+#. metadata.json->description
+msgid "Hides tray icons and applets behind an arrow, Windows style"
+msgstr "Ukrywa ikony zasobnika i aplety za strzałką, jak w Windows"
+
+#. settings-schema.json->head->description
+msgid ""
+"Panel drawer - pick the tray icons and applets to hide with a right click on "
+"the arrow"
+msgstr ""
+"Szuflada panelu — ikony zasobnika i aplety do ukrycia wybierasz, klikając "
+"strzałkę prawym przyciskiem"
+
+#. settings-schema.json->hoveropens->description
+msgid "Expand on hover"
+msgstr "Rozwijaj po najechaniu"
+
+#. settings-schema.json->hoveropens->tooltip
+msgid "Reveal the hidden icons when the pointer rests on the arrow."
+msgstr "Pokazuje ukryte ikony, gdy kursor zatrzyma się na strzałce."
+
+#. settings-schema.json->hovertime->units
+#. settings-schema.json->animationtime->units
+msgid "miliseconds"
+msgstr "milisekundy"
+
+#. settings-schema.json->hovertime->description
+msgid "Hover delay"
+msgstr "Opóźnienie najechania"
+
+#. settings-schema.json->autocollapsetime->units
+msgid "seconds"
+msgstr "sekundy"
+
+#. settings-schema.json->autocollapsetime->description
+msgid "Collapse again after"
+msgstr "Zwiń ponownie po"
+
+#. settings-schema.json->autocollapsetime->tooltip
+msgid ""
+"0 disables it - the drawer then stays open until you click the arrow again.\n"
+"The countdown only starts once the pointer has left the panel and the icons' "
+"menus are closed."
+msgstr ""
+"0 wyłącza — szuflada zostaje otwarta, dopóki nie klikniesz strzałki "
+"ponownie.\n"
+"Odliczanie rusza dopiero, gdy kursor opuści panel, a menu ikon zostaną "
+"zamknięte."
+
+#. settings-schema.json->animationtime->description
+msgid "Slide animation"
+msgstr "Animacja wysuwania"
+
+#. settings-schema.json->animationtime->tooltip
+msgid "How long icons take to slide in and out. 0 makes them appear instantly."
+msgstr ""
+"Czas wysuwania i chowania ikon. 0 sprawia, że pojawiają się natychmiast."
+
+
