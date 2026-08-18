@@ -13,7 +13,7 @@ A feature-rich, high-performance Cinnamon Desktop Applet that sets smooth video 
 ### 📽️ Video Demonstration
 Watch the **Live Wallpaper Applet** in action with seamless desktop video rendering, auto-pausing power saver, and system tray controls:
 
-[Live Wallpaper Demo](https://github.com/user-attachments/assets/beae260c-31b1-4ca1-a80c-93fd1bef5868) 
+[Live Wallpaper Demo](https://github.com/user-attachments/assets/8a47c62c-184f-4f1e-b118-0f2079d73d07)
 
 ---
 
