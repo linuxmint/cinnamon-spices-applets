@@ -5,7 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: kdecapplet@joejoetv 2.1.1\n"
+"Project-Id-Version: kdecapplet@joejoetv 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-08-19 00:45+0200\n"
