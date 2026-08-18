@@ -629,6 +629,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         super(orientation, panel_height, instance_id);
 
         this.metadata = metadata;
+        this.instance_id = instance_id;
 
         // Add notification source for applet
         this.notificationSource = new Ui.AppletNotificationSource();
@@ -690,6 +691,13 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         /**
          * Initialize and bind Applet settings
          */
+
+        // Try to migrate old (single-instance) config file _before_ loading it
+        if (Utils.migrateSettings(metadata.uuid, instance_id)) {
+            KDEConnectApplet.LOGGER.info("Succesfully migrated old (single-instance) settings file to instance settings file.");
+        } else {
+            KDEConnectApplet.LOGGER.info("No settings file migration was performed.");
+        }
 
         // Create Settings Provider
         this.settings = new Settings.AppletSettings(this.options, metadata.uuid, instance_id);
@@ -818,7 +826,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 }
             }
     
-            KDEConnectApplet.LOGGER.info(`${this.metadata.name} v${this.metadata.version} loaded!`);
+            KDEConnectApplet.LOGGER.info(`${this.metadata.name} v${this.metadata.version} loaded (instance ${this.instance_id})!`);
             KDEConnectApplet.LOGGER.info("Hello there!");
 
         } catch (error) {

@@ -149,3 +149,49 @@ function addActorAtPos(menuItem, child, params) {
     menuItem._signals.connect(menuItem.actor, 'destroy', menuItem._removeChild.bind(menuItem, child));
     menuItem.actor.insert_child_at_index(child, params.position);
 }
+
+/**
+ * Migrates settings from single-instance to multi-instance (<uuid>.json -> <instance_id>.json) if required
+ * @param {string} uuid UUID of the applet (used in the config file path/name)
+ * @param {string} instanceId Instance ID of the applet (used in the config file name)
+ * @returns {bool} Whether the migration was performed
+ *
+ * @note based on `XletSettingsBase._ensureSettingsFiles` in `ui.settings` module
+ */
+function migrateSettings(uuid, instanceId) {
+    let configPath = [GLib.get_user_config_dir(), "cinnamon", "spices", uuid].join("/");
+    let configDir = Gio.file_new_for_path(configPath);
+
+    let configFile = configDir.get_child(uuid + ".json");
+
+    let oldConfigDir = Gio.file_new_for_path([GLib.get_home_dir(), ".cinnamon", "configs", uuid].join("/"));
+    let oldConfigFile = oldConfigDir.get_child(uuid + ".json");
+
+    let file;
+
+    // We only use the config under the old path if it's the only one for backwards compatibility
+    if (oldConfigFile.query_exists(null) && !configFile.query_exists(null))
+        file = oldConfigFile;
+    else
+        file = configFile;
+
+    if (!file.query_exists(null)) {
+        LOGGER.debug("No old (single-instance) config file exists, no migration required.");
+        return false;
+    }
+
+    let newConfigFile = configDir.get_child(instanceId + ".json");
+
+    if (newConfigFile.query_exists(null)) {
+        LOGGER.debug("Instance config file already exists, not performing migration from old (single instance) config file.");
+        return false;
+    }
+
+    try {
+        LOGGER.info(`Trying to move '${file.get_path()}' to '${newConfigFile.get_path()}'`)
+        return file.move(newConfigFile, Gio.FileCopyFlags.NONE, null, null, null, null);
+    } catch (error) {
+        LOGGER.error("Error while moving old (single-instance) config file", error);
+        return false;
+    }
+}
