@@ -87,7 +87,7 @@ test("redacts every provider credential and location", () => {
 	equal(redacted.openweathermap_onecall_apikey.value, "REDACTED");
 	equal(redacted.qweather_apikey.value, "REDACTED");
 	equal(redacted.caiyun_token.value, "REDACTED");
-	equal(redacted.qweather_api_host.value, "abc.def.qweatherapi.com");
+	equal(redacted.qweather_api_host.value, "REDACTED");
 	equal(redacted.location.value, "REDACTED");
 	equal(redacted.locationList.value[0].lat, "REDACTED");
 });

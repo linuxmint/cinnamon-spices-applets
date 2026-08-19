@@ -17127,7 +17127,7 @@ function IsRecord(value) {
 function RedactAppletConfig(config) {
     const redacted = JSON.parse(JSON.stringify(config));
     for (const [key, setting] of Object.entries(redacted)) {
-        if (/api_?key|apikey|token/i.test(key) && IsRecord(setting) && "value" in setting)
+        if (/api_?(key|host)|apikey|token/i.test(key) && IsRecord(setting) && "value" in setting)
             setting.value = "REDACTED";
     }
     const location = redacted.location;

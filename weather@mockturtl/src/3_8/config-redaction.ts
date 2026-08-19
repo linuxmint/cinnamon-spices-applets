@@ -6,7 +6,7 @@ export function RedactAppletConfig<T extends Record<string, unknown>>(config: T)
 	const redacted = JSON.parse(JSON.stringify(config)) as T;
 
 	for (const [key, setting] of Object.entries(redacted)) {
-		if (/api_?key|apikey|token/i.test(key) && IsRecord(setting) && "value" in setting)
+		if (/api_?(key|host)|apikey|token/i.test(key) && IsRecord(setting) && "value" in setting)
 			setting.value = "REDACTED";
 	}
 
