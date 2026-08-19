@@ -8,7 +8,7 @@ export function QWeatherLocation(location: Pick<LocationData, "lat" | "lon">): s
 }
 
 export function QWeatherAlertPath(location: Pick<LocationData, "lat" | "lon">): string {
-	return `/weatheralert/v1/current/${location.lat}/${location.lon}`;
+	return `/weatheralert/v1/current/${location.lat.toFixed(2)}/${location.lon.toFixed(2)}`;
 }
 
 export function NormalizeQWeatherApiHost(value: string): string | null {

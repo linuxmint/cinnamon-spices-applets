@@ -27,7 +27,7 @@ test("formats QWeather coordinates to the documented precision", () => {
 });
 
 test("builds the QWeather alert path with latitude before longitude", () => {
-	equal(QWeatherAlertPath({ lat: 39.904234, lon: 116.407428 }), "/weatheralert/v1/current/39.904234/116.407428");
+	equal(QWeatherAlertPath({ lat: 39.904234, lon: 116.407428 }), "/weatheralert/v1/current/39.90/116.41");
 });
 
 test("maps QWeather condition icon families", () => {
