@@ -3,7 +3,7 @@ import { QWeatherCondition } from "../src/3_8/providers/qweather/condition";
 import { QWeatherResponseToData } from "../src/3_8/providers/qweather/parser";
 import type { QWeatherCurrentResponse } from "../src/3_8/providers/qweather/payload/current";
 import { deepEqual, equal, ok, test } from "./harness";
-import { beijing, qweatherCurrent, qweatherPayloadSet } from "./fixtures/qweather";
+import { beijing, qweatherCurrent, qweatherMinutely, qweatherPayloadSet } from "./fixtures/qweather";
 
 const identity = (text: string): string => text;
 
@@ -58,6 +58,12 @@ test("maps a complete QWeather response", () => {
 	equal(weather.alerts?.[0].level, "severe");
 	equal(weather.alerts?.[0].description, "未来六小时将出现强降雨。\nhttps://developer.qweather.com/attribution.html\n当前预警数据可能存在延迟或信息过时，以官方数据发布为准。");
 	equal(weather.sunrise?.toISO(), "2026-08-19T05:30:00.000+08:00");
+});
+
+test("maps official QWeather minutely entries at five-minute intervals", () => {
+	const weather = QWeatherResponseToData({ current: qweatherCurrent, minutely: qweatherMinutely }, beijing, identity);
+	ok(weather !== null);
+	deepEqual(weather.immediatePrecipitation, { start: 5, end: 15 });
 });
 
 test("keeps current weather when optional QWeather payloads are absent", () => {

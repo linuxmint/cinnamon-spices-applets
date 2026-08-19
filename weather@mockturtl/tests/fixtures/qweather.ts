@@ -118,7 +118,23 @@ export const qweatherMinutely = {
 	updateTime: "2026-08-19T12:30+08:00",
 	fxLink: "https://www.qweather.com/weather/beijing-101010100.html",
 	summary: "未来两小时有小雨",
-	minutely: ["0", "0.2", "0.1", "0"],
+	minutely: [{
+		fxTime: "2026-08-19T12:35+08:00",
+		precip: "0",
+		type: "rain",
+	}, {
+		fxTime: "2026-08-19T12:40+08:00",
+		precip: "0.2",
+		type: "rain",
+	}, {
+		fxTime: "2026-08-19T12:45+08:00",
+		precip: "0.1",
+		type: "rain",
+	}, {
+		fxTime: "2026-08-19T12:50+08:00",
+		precip: "0",
+		type: "rain",
+	}],
 	refer: { sources: ["QWeather"], license: ["QWeather Developers License"] },
 } satisfies QWeatherMinutelyResponse;
 

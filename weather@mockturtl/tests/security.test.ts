@@ -1,5 +1,5 @@
 import { RedactAppletConfig } from "../src/3_8/config-redaction";
-import { BuildRequestUrls } from "../src/3_8/lib/httpLog";
+import { BuildRequestUrls, RedactUrlValue } from "../src/3_8/lib/httpLog";
 import { FindPrecipitationWindow } from "../src/3_8/lib/precipitation";
 import { CelsiusToKelvin, KPHtoMPS, PascalsToHectopascals } from "../src/3_8/lib/unitConversions";
 import { deepEqual, equal, ok, test } from "./harness";
@@ -32,6 +32,14 @@ test("uses a redacted request URL for logging", () => {
 	ok(urls.logUrl.includes("unit=metric:v2"));
 });
 
+test("replaces a path credential only in the safe base URL", () => {
+	const requestUrl = "https://weather.example/forecast/path-credential/39.9,116.4";
+	const logUrl = RedactUrlValue(requestUrl, "path-credential");
+	const urls = BuildRequestUrls(requestUrl, { units: "metric" }, logUrl, false);
+	equal(urls.requestUrl, "https://weather.example/forecast/path-credential/39.9,116.4?units=metric");
+	equal(urls.logUrl, "https://weather.example/forecast/[REDACTED]/39.9,116.4?units=metric");
+});
+
 test("preserves unencoded request URLs when requested", () => {
 	const urls = BuildRequestUrls(
 		"https://api.open-meteo.com/v1/forecast",
@@ -41,6 +49,28 @@ test("preserves unencoded request URLs when requested", () => {
 	);
 	equal(urls.requestUrl, "https://api.open-meteo.com/v1/forecast?hourly=temperature 2m");
 	equal(urls.logUrl, "https://api.open-meteo.com/v1/forecast?hourly=temperature 2m");
+});
+
+test("redacts credential query values only in log URLs", () => {
+	const credentialNames = ["apiKey", "apikey", "api_key", "api-key", "appid", "key", "token", "access_key", "access-key"];
+	for (const name of credentialNames) {
+		const params = { [name]: "query-credential", units: "metric" };
+		const urls = BuildRequestUrls("https://weather.example/forecast", params, undefined, false);
+		equal(urls.requestUrl, `https://weather.example/forecast?${name}=query-credential&units=metric`);
+		equal(urls.logUrl, `https://weather.example/forecast?${name}=[REDACTED]&units=metric`);
+		equal(params[name], "query-credential");
+	}
+});
+
+test("keeps ordinary query values visible and unchanged in log URLs", () => {
+	const urls = BuildRequestUrls(
+		"https://weather.example/forecast",
+		{ monkey: "visible-value", units: "metric:v2" },
+		undefined,
+		false,
+	);
+	equal(urls.requestUrl, "https://weather.example/forecast?monkey=visible-value&units=metric:v2");
+	equal(urls.logUrl, "https://weather.example/forecast?monkey=visible-value&units=metric:v2");
 });
 
 test("redacts every provider credential and location", () => {

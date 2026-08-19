@@ -9111,19 +9111,25 @@ class LocationStore {
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/httpLog.ts
-function AddParamsToURI(url, params) {
+function RedactUrlValue(url, value) {
+    return value === "" ? url : url.replace(value, "[REDACTED]");
+}
+function IsCredentialParameter(name) {
+    return /^(?:api[_-]?key|appid|key|token|access[_-]key)$/i.test(name);
+}
+function AddParamsToURI(url, params, redactCredentials = false) {
     if (params == null)
         return url;
     let result = url;
     for (const [index, item] of Object.keys(params).entries()) {
         result += index === 0 ? "?" : "&";
-        result += item + "=" + params[item];
+        result += item + "=" + (redactCredentials && IsCredentialParameter(item) ? "[REDACTED]" : params[item]);
     }
     return result;
 }
 function BuildRequestUrls(url, params, logUrl, encode = true) {
     const requestUrl = AddParamsToURI(url, params);
-    const safeLogUrl = AddParamsToURI(logUrl !== null && logUrl !== void 0 ? logUrl : url, params);
+    const safeLogUrl = AddParamsToURI(logUrl !== null && logUrl !== void 0 ? logUrl : url, params, true);
     return {
         requestUrl: encode ? encodeURI(requestUrl) : requestUrl,
         logUrl: encode ? encodeURI(safeLogUrl) : safeLogUrl,
@@ -14789,6 +14795,7 @@ class WeatherUnderground {
 
 
 
+
 class PirateWeather {
     constructor() {
         this.prettyName = _("Pirate Weather");
@@ -14891,8 +14898,10 @@ class PirateWeather {
     ;
     async GetWeather(loc, cancellable, config, options) {
         const unit = this.GetQueryUnit(config);
+        const url = `${this.query}${options.apiKey}/${loc.lat},${loc.lon}`;
         const response = await HttpLib.Instance.LoadJsonAsync({
-            url: `${this.query}${options.apiKey}/${loc.lat},${loc.lon}`,
+            url,
+            logUrl: RedactUrlValue(url, options.apiKey),
             cancellable,
             params: {
                 units: this.GetQueryUnit(config),
@@ -17326,7 +17335,7 @@ function QWeatherResponseToData(payloads, location, translate) {
                 type: "temperature",
             };
         })() }, (minutely ? {
-        immediatePrecipitation: FindPrecipitationWindow(minutely.map(value => { var _a; return (_a = FiniteNumber(value)) !== null && _a !== void 0 ? _a : 0; }), 5),
+        immediatePrecipitation: FindPrecipitationWindow(minutely.map(entry => { var _a; return (_a = FiniteNumber(entry.precip)) !== null && _a !== void 0 ? _a : 0; }), 5),
     } : {})), { alerts });
 }
 

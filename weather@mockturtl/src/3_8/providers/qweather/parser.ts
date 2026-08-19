@@ -136,7 +136,7 @@ export function QWeatherResponseToData(
 			};
 		})(),
 		...(minutely ? {
-			immediatePrecipitation: FindPrecipitationWindow(minutely.map(value => FiniteNumber(value) ?? 0), 5),
+			immediatePrecipitation: FindPrecipitationWindow(minutely.map(entry => FiniteNumber(entry.precip) ?? 0), 5),
 		} : {}),
 		alerts,
 	};
