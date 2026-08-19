@@ -12,9 +12,11 @@ function AddParamsToURI(url: string, params?: Record<string, Primitive>): string
 	return result;
 }
 
-export function BuildRequestUrls(url: string, params?: Record<string, Primitive>, logUrl?: string): { requestUrl: string; logUrl: string } {
+export function BuildRequestUrls(url: string, params?: Record<string, Primitive>, logUrl?: string, encode = true): { requestUrl: string; logUrl: string } {
+	const requestUrl = AddParamsToURI(url, params);
+	const safeLogUrl = AddParamsToURI(logUrl ?? url, params);
 	return {
-		requestUrl: encodeURI(AddParamsToURI(url, params)),
-		logUrl: encodeURI(AddParamsToURI(logUrl ?? url, params)),
+		requestUrl: encode ? encodeURI(requestUrl) : requestUrl,
+		logUrl: encode ? encodeURI(safeLogUrl) : safeLogUrl,
 	};
 }

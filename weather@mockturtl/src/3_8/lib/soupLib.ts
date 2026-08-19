@@ -115,6 +115,7 @@ class Soup3 implements SoupLib {
 			headers,
 			method = "GET",
 			cancellable,
+			noEncode = false,
 			logUrl
 		} = options;
 
@@ -124,7 +125,7 @@ class Soup3 implements SoupLib {
 			return null;
 		}
 
-		const urls = BuildRequestUrls(url, params ?? undefined, logUrl);
+		const urls = BuildRequestUrls(url, params ?? undefined, logUrl, !noEncode);
 		const query = urls.requestUrl;
 		const safeQuery = urls.logUrl;
         Logger.Debug("URL called: " + safeQuery);

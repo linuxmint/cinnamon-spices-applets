@@ -32,6 +32,17 @@ test("uses a redacted request URL for logging", () => {
 	ok(urls.logUrl.includes("unit=metric:v2"));
 });
 
+test("preserves unencoded request URLs when requested", () => {
+	const urls = BuildRequestUrls(
+		"https://api.open-meteo.com/v1/forecast",
+		{ hourly: "temperature 2m" },
+		undefined,
+		false,
+	);
+	equal(urls.requestUrl, "https://api.open-meteo.com/v1/forecast?hourly=temperature 2m");
+	equal(urls.logUrl, "https://api.open-meteo.com/v1/forecast?hourly=temperature 2m");
+});
+
 test("redacts every provider credential and location", () => {
 	const redacted = RedactAppletConfig({
 		apiKey: { value: "legacy" },
