@@ -1,4 +1,4 @@
-import { NormalizeQWeatherApiHost, QWeatherLanguage } from "../src/3_8/providers/qweather/config";
+import { NormalizeQWeatherApiHost, QWeatherLanguage, QWeatherLocation } from "../src/3_8/providers/qweather/config";
 import { QWeatherCondition } from "../src/3_8/providers/qweather/condition";
 import { QWeatherResponseToData } from "../src/3_8/providers/qweather/parser";
 import type { QWeatherCurrentResponse } from "../src/3_8/providers/qweather/payload/current";
@@ -14,11 +14,16 @@ test("normalizes only dedicated QWeather API hosts", () => {
 });
 
 test("selects QWeather language from translation and locale settings", () => {
+	equal(QWeatherLanguage("zh-CN", false), "en");
+	equal(QWeatherLanguage("zh-CN", true), "zh");
 	equal(QWeatherLanguage("zh-TW", true), "zh-hant");
 	equal(QWeatherLanguage("zh-Hans-CN", true), "zh");
 	equal(QWeatherLanguage("fr-CA", true), "fr");
 	equal(QWeatherLanguage(null, true), "en");
-	equal(QWeatherLanguage("zh-CN", false), "en");
+});
+
+test("formats QWeather coordinates to the documented precision", () => {
+	equal(QWeatherLocation({ lat: 39.904234, lon: 116.407428 }), "116.41,39.90");
 });
 
 test("maps QWeather condition icon families", () => {

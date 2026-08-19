@@ -1,5 +1,11 @@
+import type { LocationData } from "../../types";
+
 // eslint-disable-next-line unicorn/better-regex -- Keep the documented QWeather host pattern verbatim.
 const DEDICATED_API_HOST = /^(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+qweatherapi\.com$/;
+
+export function QWeatherLocation(location: Pick<LocationData, "lat" | "lon">): string {
+	return `${location.lon.toFixed(2)},${location.lat.toFixed(2)}`;
+}
 
 export function NormalizeQWeatherApiHost(value: string): string | null {
 	const withoutProtocol = value.replace(/^https?:\/\//i, "");
