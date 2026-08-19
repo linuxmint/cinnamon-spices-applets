@@ -35,6 +35,7 @@ You can also save locations what you entered manually and switch between them in
 | **MET Norway**             | No            | 10                    | 48                     | Depends            | Depends | --                            |
 | **DMI Denmark**            | No            | 10                    | 48                     | No                 | No      | --                            |
 | **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | Yes     | --                            |
+| **QWeather**               | Yes, plus API Host | 7                 | 24                     | China/coverage dependent | Account/coverage dependent | --             |
 | **Met Office UK**          | Yes           | 6                     | 48                     | No                 | No      | --                            |
 | **US National Weather**    | No            | 7                     | 156                    | No                 | Yes     | --                            |
 | **OpenWeatherMap OneCall** | Yes           | 8                     | 48                     | Yes                | Alerts  | --                            |
@@ -48,6 +49,16 @@ You can also save locations what you entered manually and switch between them in
 #### Open-Meteo
 
 [Open-Meteo](https://open-meteo.com/) is an open-source weather API since 2022 that offers free access for non-commercial use. This applets default weather provider from 2024. No API key required. Read more about the service [here](https://open-meteo.com/en/about).
+
+#### QWeather
+
+[QWeather](https://www.qweather.com/) provides weather services worldwide. Create a project and API Key in the [QWeather Console](https://console.qweather.com/), then find your dedicated API Host in the Console settings. See the official [API Host documentation](https://dev.qweather.com/en/docs/configuration/api-host/) and [authentication documentation](https://dev.qweather.com/en/docs/configuration/authentication/) for setup details.
+
+- The applet requires both your dedicated `*.qweatherapi.com` API Host and an API Key. Legacy shared domains such as `api.qweather.com`, `devapi.qweather.com`, and `geoapi.qweather.com` are not accepted.
+
+- QWeather accounts can impose call limits or charges. Choose a refresh interval appropriate for your plan and usage; 15 minutes or longer is a sensible starting point for most desktop use.
+
+- QWeather will further restrict daily request volume for API Key authentication beginning in 2027. Check the QWeather Console and documentation for the limits that apply to your account.
 
 #### OpenWeatherMap
 
