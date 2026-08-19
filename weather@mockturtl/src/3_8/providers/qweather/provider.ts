@@ -5,7 +5,7 @@ import { HttpLib } from "../../lib/httpLib";
 import { ProviderErrorCode, type LocationData, type WeatherProvider } from "../../types";
 import { _ } from "../../utils";
 import type { WeatherData } from "../../weather-data";
-import { NormalizeQWeatherApiHost, QWeatherLanguage, QWeatherLocation } from "./config";
+import { NormalizeQWeatherApiHost, QWeatherAlertPath, QWeatherLanguage, QWeatherLocation } from "./config";
 import { QWeatherResponseToData } from "./parser";
 import type { QWeatherAlertResponse } from "./payload/alert";
 import type { QWeatherCurrentResponse } from "./payload/current";
@@ -47,7 +47,7 @@ export class QWeather implements WeatherProvider<Services.QWeather, QWeatherOpti
 			? this.Load<QWeatherMinutelyResponse>(`${baseUrl}/v7/minutely/5m`, params, cancellable, options, true)
 			: Promise.resolve(null);
 		const alertsPromise = config._showAlerts
-			? this.Load<QWeatherAlertResponse>(`${baseUrl}/v1/warning/${loc.lat}/${loc.lon}`, {
+			? this.Load<QWeatherAlertResponse>(`${baseUrl}${QWeatherAlertPath(loc)}`, {
 				localTime: true,
 				lang: QWeatherLanguage(config.currentLocale, config._translateCondition),
 			}, cancellable, options, true)

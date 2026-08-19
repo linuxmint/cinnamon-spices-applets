@@ -7,6 +7,10 @@ export function QWeatherLocation(location: Pick<LocationData, "lat" | "lon">): s
 	return `${location.lon.toFixed(2)},${location.lat.toFixed(2)}`;
 }
 
+export function QWeatherAlertPath(location: Pick<LocationData, "lat" | "lon">): string {
+	return `/weatheralert/v1/current/${location.lat}/${location.lon}`;
+}
+
 export function NormalizeQWeatherApiHost(value: string): string | null {
 	const withoutProtocol = value.replace(/^https?:\/\//i, "");
 	const host = withoutProtocol.endsWith("/") ? withoutProtocol.slice(0, -1) : withoutProtocol;
