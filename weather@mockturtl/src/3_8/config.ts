@@ -33,6 +33,7 @@ import { MetUk } from "./providers/met_uk/provider";
 import { IpApi } from "./location_services/geoip_services/ipApi";
 import { GeoJS } from "./location_services/geoip_services/geojs.io";
 import { GeoIPLookupIO } from "./location_services/geoip_services/geoiplookup.io";
+import { RedactAppletConfig } from "./config-redaction";
 
 const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -770,20 +771,7 @@ export class Config {
 		}
 
 		const conf = JSON.parse(confString) as SettingsSchemaWithValues;
-		if (conf?.apiKey?.value != null)
-			conf.apiKey.value = "REDACTED";
-
-		for (const item of conf?.locationList?.value ?? []) {
-			item.lat = "REDACTED";
-			item.lon = "REDACTED";
-			item.city = "REDACTED";
-			item.entryText = "REDACTED";
-		}
-
-		if (conf?.location?.value != null)
-			conf.location.value = "REDACTED";
-
-		return conf;
+		return RedactAppletConfig(conf);
 	}
 
 	public Destroy(): void {

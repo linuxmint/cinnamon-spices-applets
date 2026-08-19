@@ -6,7 +6,9 @@
   "scripts": {
     "start": "webpack --config webpack.config.js",
     "watch": "webpack --watch --config webpack.config.js",
-    "lint": "eslint ./src/3_8"
+    "lint": "eslint ./src/3_8",
+    "test": "tsc --project tests/tsconfig.json && node tests/.build/tests/run.js",
+    "typecheck": "tsc --project src/3_8/tsconfig.json --noEmit --skipLibCheck"
   },
   "sideEffects": false,
   "license": "MIT",
