@@ -1,0 +1,512 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: combined-monitor@danipin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-18 21:42+0000\n"
+"PO-Revision-Date: 2024-05-18 21:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: Serbian\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "Слот 1 (Стандардно)"
+
+msgid "Slot 2 (Empty)"
+msgstr "Слот 2 (Празно)"
+
+msgid "Slot 3 (Empty)"
+msgstr "Слот 3 (Празно)"
+
+msgid "Separator"
+msgstr "Разделник"
+
+msgid "Space"
+msgstr "Размак"
+
+msgid "No Separator"
+msgstr "Без разделника"
+
+msgid "Symbols"
+msgstr "Симболи"
+
+msgid "Icon-White"
+msgstr "Икона-Бела"
+
+msgid "Icon-Dark"
+msgstr "Икона-Тамна"
+
+msgid "No Symbol (Text Label)"
+msgstr "Без симбола (Текст)"
+
+msgid "CPU"
+msgstr "Процесор"
+
+msgid "TEMP"
+msgstr "ТЕМП"
+
+msgid "RAM"
+msgstr "РАМ"
+
+msgid "SWAP"
+msgstr "SWAP"
+
+msgid "Profile Management"
+msgstr "Управљање профилима"
+
+msgid "Activate (Load)"
+msgstr "Активирај (Учитај)"
+
+msgid "Save Current Settings"
+msgstr "Сачувај тренутна подешавања"
+
+msgid "System Monitor"
+msgstr "Системски монитор"
+
+msgid "Restart Cinnamon"
+msgstr "Поново покрени Cinnamon"
+
+msgid "Slot is empty - Ready to save"
+msgstr "Слот је празан - спреман за чување"
+
+msgid "N/A"
+msgstr "Н/Д"
+
+# settings-schema.json strings
+msgid "Decimal places for temperature"
+msgstr "Децимална места за температуру"
+
+msgid ""
+"Number of decimal places to display for temperature. Set to 0 for whole "
+"numbers."
+msgstr ""
+"Број децималних места за приказ температуре. Поставите на 0 за целе бројеве."
+
+msgid "decimal places"
+msgstr "децимална места"
+
+msgid "Profile Saved: %s"
+msgstr "Профил сачуван: %s"
+
+msgid "Active: %s"
+msgstr "Активан: %s"
+
+# Page Titles
+msgid "CPU Temperature"
+msgstr "Температура процесора"
+
+msgid "Profiles"
+msgstr "Профили"
+
+msgid "General"
+msgstr "Опште"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "Редослед метрика"
+
+msgid "Display"
+msgstr "Приказ"
+
+msgid "Thresholds"
+msgstr "Прагови"
+
+msgid "Colors"
+msgstr "Боје"
+
+# #-#-#-#-#  sr.po (combined-monitor@danipin)  #-#-#-#-#
+# Section Titles
+msgid "Thresholds (in °C)"
+msgstr "Прагови (у °C)"
+
+msgid "Settings"
+msgstr "Подешавања"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "Профили (Слотови 1 до 3)"
+
+msgid "Global"
+msgstr "Глобално"
+
+# CPU
+msgid "Show CPU"
+msgstr "Прикажи процесор"
+
+msgid "Text for CPU"
+msgstr "Текст за процесор"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "Прилагођени симбол/икона за процесор. Оставите празно за текст."
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "Прикажи знак за проценат (%) за процесор"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed without the percentage "
+"sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in "
+"the 'General' tab acts as a master switch."
+msgstr ""
+"Ако је онемогућено, приказује се само вредност (нпр. '45') без знака "
+"процента (нпр. '45%'). Опција 'Прикажи знак процента (%) (Главни прекидач)' "
+"на картици 'Опште' делује као главни прекидач."
+
+msgid "Threshold LOW"
+msgstr "Низак праг"
+
+msgid "The LOW color is used below this value"
+msgstr "Боја за НИСКО се користи испод ове вредности"
+
+msgid "Threshold MED"
+msgstr "Средњи праг"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "Боја за СРЕДЊЕ се користи између НИСКО и СРЕДЊЕ"
+
+msgid "Threshold HIGH"
+msgstr "Висок праг"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "Боја за ВИСОКО се користи између СРЕДЊЕ и ВИСОКО"
+
+msgid "Enable color change for CPU"
+msgstr "Омогући промену боје за процесор"
+
+msgid "Color LOW"
+msgstr "Боја за НИСКО"
+
+msgid "Color MED"
+msgstr "Боја за СРЕДЊЕ"
+
+msgid "Color HIGH"
+msgstr "Боја за ВИСОКО"
+
+msgid "Color CRITICAL"
+msgstr "Боја за КРИТИЧНО"
+
+msgid "Used above the HIGH threshold"
+msgstr "Користи се изнад ВИСОКОГ прага"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "Прикажи температуру"
+
+msgid ""
+"Enables the display of CPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Please refer to the "
+"instructions in the README.md."
+msgstr ""
+"Омогућава приказ температуре процесора. **Важно:** На многим системима је "
+"неопходно инсталирати пакет 'lm-sensors' и покренути 'sudo sensors-detect' "
+"да би ова функција радила исправно. Погледајте упутства у README.md."
+
+msgid "Show °C symbol"
+msgstr "Прикажи симбол °C"
+
+msgid ""
+"Controls whether the Celsius symbol (°C or °F) should be displayed after the "
+"value."
+msgstr ""
+"Контролише да ли ће се симбол Целзијуса (°C или °F) приказивати након "
+"вредности."
+
+msgid "Text for Temperature"
+msgstr "Текст за температуру"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr "Прилагођени симбол/икона за температуру. Оставите празно за текст."
+
+msgid "Unit of Measurement"
+msgstr "Мерна јединица"
+
+msgid "Celsius (°C)"
+msgstr "Целзијус (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "Фаренхајт (°F)"
+
+msgid ""
+"Choose whether the temperature should be displayed in Celsius or Fahrenheit. "
+"Threshold values must be adjusted accordingly."
+msgstr ""
+"Изаберите да ли ће температура бити приказана у Целзијусима или "
+"Фаренхајтима. Вредности прагова морају бити сходно подешене."
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr "Боја за НИСКО се користи испод ове вредности (важи за °C и °F)"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr "Боја за СРЕДЊЕ се користи између НИСКО и СРЕДЊЕ (важи за °C и °F)"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr "Боја за ВИСОКО се користи између СРЕДЊЕ и ВИСОКО (важи за °C и °F)"
+
+msgid "Enable color change for TEMP"
+msgstr "Омогући промену боје за ТЕМП"
+
+msgid "Color LOW (Green)"
+msgstr "Боја за НИСКО (Зелена)"
+
+msgid "Color MED (Orange)"
+msgstr "Боја за СРЕДЊЕ (Наранџаста)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "Боја за ВИСОКО (Црвено-наранџаста)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "Боја за КРИТИЧНО (Црвена)"
+
+# RAM
+msgid "Show RAM"
+msgstr "Прикажи РАМ"
+
+msgid "Text for RAM"
+msgstr "Текст за РАМ"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "Прилагођени симбол/икона за РАМ. Оставите празно за текст."
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "Прикажи знак за проценат (%) за РАМ"
+
+msgid "Display Mode"
+msgstr "Режим приказа"
+
+msgid "Percentage Usage (%)"
+msgstr "Проценат искоришћености (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "Заузета меморија (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "Слободна меморија (MB/GB)"
+
+msgid ""
+"Choose whether percentage usage or used/free memory in MB/GB should be "
+"displayed."
+msgstr ""
+"Изаберите да ли ће се приказивати проценат искоришћености или заузета/"
+"слободна меморија у MB/GB."
+
+msgid "Enable color change for RAM"
+msgstr "Омогући промену боје за РАМ"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "Прикажи SWAP"
+
+msgid "Text for SWAP"
+msgstr "Текст за SWAP"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr "Прилагођени симбол/икона за SWAP. Оставите празно за текст."
+
+msgid "Only show SWAP when used"
+msgstr "Прикажи SWAP само када се користи"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr "Ако је активно, приказује SWAP само када је искоришћеност већа од 0%."
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "Прикажи знак за проценат (%) за SWAP"
+
+msgid "Enable color change for SWAP"
+msgstr "Омогући промену боје за SWAP"
+
+msgid ""
+"If the value is less than or equal to the LOW threshold, the LOW color is "
+"used."
+msgstr ""
+"Ако је вредност мања или једнака ниском прагу, користи се боја за НИСКО."
+
+msgid ""
+"If the value is greater than LOW and less than or equal to the MED "
+"threshold, the MED color is used."
+msgstr ""
+"Ако је вредност већа од ниског и мања или једнака средњем прагу, користи се "
+"боја за СРЕДЊЕ."
+
+msgid ""
+"If the value is greater than MED and less than or equal to the HIGH "
+"threshold, the HIGH color is used."
+msgstr ""
+"Ако је вредност већа од средњег и мања или једнака високом прагу, користи се "
+"боја за ВИСОКО."
+
+# Order
+msgid "CPU Position"
+msgstr "Позиција процесора"
+
+msgid "Position 1 (Left)"
+msgstr "Позиција 1 (Лево)"
+
+msgid "Position 2"
+msgstr "Позиција 2"
+
+msgid "Position 3"
+msgstr "Позиција 3"
+
+msgid "Position 4 (Right)"
+msgstr "Позиција 4 (Десно)"
+
+msgid ""
+"Defines the display position of CPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"Дефинише позицију приказа процесора. Позиција се аутоматски замењује са "
+"метриком на истој позицији."
+
+msgid "TEMP Position"
+msgstr "Позиција ТЕМП"
+
+msgid "RAM Position"
+msgstr "Позиција РАМ"
+
+msgid "SWAP Position"
+msgstr "Позиција SWAP"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "Интервал ажурирања (ms)"
+
+msgid "Show separator between metrics"
+msgstr "Прикажи разделник између метрика"
+
+msgid "Separator Text"
+msgstr "Текст разделника"
+
+msgid "Separator Color"
+msgstr "Боја разделника"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "Прикажи знак за проценат (%) (Главни прекидач)"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed for all percentage "
+"displays without the percentage sign (e.g., '45%'). Individual switches for "
+"CPU/RAM/SWAP must also be active."
+msgstr ""
+"Ако је онемогућено, за све приказе процената приказује се само вредност "
+"(нпр. '45') без знака процента (нпр. '45%'). Појединачни прекидачи за ЦП/РАМ/"
+"SWAP такође морају бити активни."
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "Трајање поруке профила (Секунде)"
+
+msgid ""
+"How long should the message ('Profile saved', 'Profile active') be displayed "
+"in the panel."
+msgstr ""
+"Колико дуго порука ('Профил сачуван', 'Профил активан') треба да буде "
+"приказана на панелу."
+
+msgid "Profile 1 Name"
+msgstr "Име профила 1"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "Унесите прилагођено име профила у поље за текст!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr "Кликните на 'Активирај' или 'Сачувај' за Профил 1 у искачућем менију."
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "Сачувани подаци за Профил 1 (интерно)"
+
+msgid "Profile 2 Name"
+msgstr "Име профила 2"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr "Кликните на 'Активирај' или 'Сачувај' за Профил 2 у искачућем менију."
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "Сачувани подаци за Профил 2 (интерно)"
+
+msgid "Profile 3 Name"
+msgstr "Име профила 3"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr "Кликните на 'Активирај' или 'Сачувај' за Профил 3 у искачућем менију."
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "Сачувани подаци за Профил 3 (интерно)"
+
+# metadata.json strings
+msgid "Combined Monitor"
+msgstr "Комбиновани монитор"
+
+msgid ""
+"A compact and comprehensive system monitor for Cinnamon. Displays CPU, RAM, "
+"and SWAP usage in a single panel element. Configure colors, thresholds, "
+"separators, and the order of metrics. Supports displaying text, theme icons, "
+"or custom symbols for perfect integration into your panel."
+msgstr ""
+"Компактан и свеобухватан системски монитор за Cinnamon. Приказује "
+"искоришћеност процесора, РАМ-а и SWAP-а у једном елементу панела. "
+"Конфигуришите боје, прагове, разделнике и редослед метрика. Подржава приказ "
+"текста, икона теме или прилагођених симбола за савршену интеграцију у ваш "
+"панел."
+
+# Page Titles
+msgid "GPU Temperature"
+msgstr "Температура ГПУ"
+
+# GPU
+msgid "Show GPU Temperature"
+msgstr "Прикажи температуру ГПУ"
+
+msgid ""
+"Enables the display of GPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Integrated GPUs (iGPUs) may "
+"report their temperature as part of the CPU temperature."
+msgstr ""
+"Омогућава приказ температуре ГПУ. **Важно:** На многим системима је "
+"неопходно инсталирати пакет 'lm-sensors' и покренути 'sudo sensors-detect' "
+"да би ова функција радила исправно. Интегрисани ГПУ (iGPU) могу пријавити "
+"своју температуру као део температуре процесора."
+
+msgid "Text for GPU"
+msgstr "Текст за ГПУ"
+
+msgid "Custom symbol/icon for GPU. Оставите празно за текст."
+msgstr "Прилагођени симбол/икона за ГПУ. Оставите празно за текст."
+
+msgid "Decimal places for GPU temperature"
+msgstr "Децимална места за температуру ГПУ"
+
+msgid ""
+"Number of decimal places to display for GPU temperature. Set to 0 for whole "
+"numbers."
+msgstr ""
+"Број децималних места за приказ температуре ГПУ. Поставите на 0 за целе "
+"бројеве."
+
+msgid "The LOW color is used below this value (важи за °C и °F)"
+msgstr "Боја за НИСКО се користи испод ове вредности (важи за °C и °F)"
+
+msgid "The MED color is used between LOW and MED (важи за °C и °F)"
+msgstr "Боја за СРЕДЊЕ се користи између НИСКО и СРЕДЊЕ (важи за °C и °F)"
+
+msgid "The HIGH color is used between MED and HIGH (важи за °C и °F)"
+msgstr "Боја за ВИСОКО се користи између СРЕДЊЕ и ВИСОКО (важи за °C и °F)"
+
+msgid "Enable color change for GPU"
+msgstr "Омогући промену боје за ГПУ"
+
+# Order
+msgid "GPU Position"
+msgstr "Позиција ГПУ"
+
+msgid "Position 5"
+msgstr "Позиција 5"
+
+msgid ""
+"Defines the display position of GPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"Дефинише позицију приказа ГПУ. Позиција се аутоматски замењује са метриком "
+"на истој позицији."
