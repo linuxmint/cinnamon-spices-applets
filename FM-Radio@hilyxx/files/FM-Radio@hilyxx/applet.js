@@ -13,7 +13,7 @@ const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 
 const UUID = "FM-Radio@hilyxx";
-Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
