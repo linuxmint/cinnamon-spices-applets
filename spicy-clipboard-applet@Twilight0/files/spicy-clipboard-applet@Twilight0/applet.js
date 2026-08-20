@@ -293,7 +293,7 @@ MyApplet.prototype = {
             Main.keybindingManager.addHotKey(
                 this._keybindingId,
                 this.openShortcut,
-                Lang.bind(this, this._onOpenShortcut)
+                () => this._onOpenShortcut()
             );
         }
     },
