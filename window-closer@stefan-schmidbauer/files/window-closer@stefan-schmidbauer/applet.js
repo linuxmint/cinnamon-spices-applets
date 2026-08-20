@@ -7,6 +7,7 @@ const Meta = imports.gi.Meta;
 const Mainloop = imports.mainloop;
 const Pango = imports.gi.Pango;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
 
 const UUID = "window-closer@stefan-schmidbauer";
@@ -49,11 +50,12 @@ const SCROLLBAR_WIDTH = 16;
 
 // Resolution alone is not enough: a 2560x1600 laptop panel packs the same
 // pixels into half the area of a 4K desktop screen, which makes identically
-// sized cards look tiny on it. Dense screens therefore get an extra boost,
-// damped because small screens are also viewed from closer up.
-const REFERENCE_DPI = 96;
-const DPI_DAMPING = 0.6;
-const MAX_DPI_BOOST = 1.6;
+// sized cards look tiny on it. People on such screens usually turn up the
+// desktop text scaling, so that setting is taken as the cue to enlarge the
+// grid as well. It is capped, because beyond that the grid would rather
+// scroll than push cards off screen.
+const INTERFACE_SCHEMA = "org.cinnamon.desktop.interface";
+const MAX_TEXT_SCALE_BOOST = 1.6;
 
 function WindowCloserApplet(metadata, orientation, panelHeight, instanceId) {
     this._init(metadata, orientation, panelHeight, instanceId);
@@ -241,42 +243,18 @@ WindowCloserApplet.prototype = {
         };
     },
 
-    // Physical pixel density of a monitor, or 0 when it cannot be determined.
-    // Gdk knows the millimeter size of a monitor, Muffin does not expose it.
-    _getMonitorDpi: function(monitor) {
+    // How much larger the user asked the desktop to be. St applies ui_scale to
+    // CSS pixels on HiDPI, but not the text scaling factor, and the sizes here
+    // are given in pixels — so it has to be applied by hand.
+    _getTextScaleBoost: function() {
         try {
-            let Gdk = imports.gi.Gdk;
-            let display = Gdk.Display.get_default();
-            if (!display || typeof display.get_n_monitors !== "function") return 0;
-
-            let sizeMatch = null;
-
-            for (let i = 0; i < display.get_n_monitors(); i++) {
-                let gdkMonitor = display.get_monitor(i);
-                let geo = gdkMonitor.get_geometry();
-
-                let scale = 1;
-                try { scale = gdkMonitor.get_scale_factor() || 1; } catch(e) {}
-
-                let width = geo.width * scale;
-                let height = geo.height * scale;
-                if (width !== monitor.width || height !== monitor.height) continue;
-
-                let mmWidth = gdkMonitor.get_width_mm();
-                if (!mmWidth || mmWidth < 20) continue;
-
-                let dpi = width / (mmWidth / 25.4);
-
-                // Prefer the monitor that also sits at the same position; fall
-                // back to the first one that merely matches in size.
-                if (geo.x * scale === monitor.x && geo.y * scale === monitor.y) return dpi;
-                if (sizeMatch === null) sizeMatch = dpi;
-            }
-
-            if (sizeMatch !== null) return sizeMatch;
-        } catch(e) {}
-
-        return 0;
+            let settings = new Gio.Settings({ schema_id: INTERFACE_SCHEMA });
+            let scale = settings.get_double("text-scaling-factor");
+            if (!(scale > 0)) return 1;
+            return Math.max(1, Math.min(MAX_TEXT_SCALE_BOOST, scale));
+        } catch(e) {
+            return 1;
+        }
     },
 
     // Derives the scale factor from the monitor geometry. On HiDPI setups St
@@ -291,16 +269,9 @@ WindowCloserApplet.prototype = {
         let logW = monitor.width / uiScale;
         let logH = monitor.height / uiScale;
 
-        // Logical dpi, because St already scales CSS pixels by ui_scale — on a
-        // HiDPI setup the density is therefore effectively already handled.
-        let dpi = this._getMonitorDpi(monitor) / uiScale;
-        let dpiBoost = 1;
-        if (dpi > 0) {
-            dpiBoost = Math.pow(dpi / REFERENCE_DPI, DPI_DAMPING);
-            dpiBoost = Math.max(1, Math.min(MAX_DPI_BOOST, dpiBoost));
-        }
+        let textBoost = this._getTextScaleBoost();
 
-        let factor = Math.min(logW / BASE_SCREEN_WIDTH, logH / BASE_SCREEN_HEIGHT) * dpiBoost;
+        let factor = Math.min(logW / BASE_SCREEN_WIDTH, logH / BASE_SCREEN_HEIGHT) * textBoost;
         factor = Math.max(MIN_FACTOR, Math.min(MAX_FACTOR, factor));
 
         // Cards shrink at most to SHRINK_RATIO of their ideal size...
@@ -320,8 +291,7 @@ WindowCloserApplet.prototype = {
         }
 
         metrics.uiScale = uiScale;
-        metrics.dpi = dpi;
-        metrics.dpiBoost = dpiBoost;
+        metrics.textBoost = textBoost;
         return metrics;
     },
 

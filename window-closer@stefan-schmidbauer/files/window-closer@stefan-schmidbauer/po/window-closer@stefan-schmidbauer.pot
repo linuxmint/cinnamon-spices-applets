@@ -5,7 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: window-closer@stefan-schmidbauer 1.1.0\n"
+"Project-Id-Version: window-closer@stefan-schmidbauer 1.1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-08-12 20:14+0200\n"
