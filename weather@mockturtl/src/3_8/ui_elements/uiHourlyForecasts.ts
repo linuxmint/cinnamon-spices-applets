@@ -187,7 +187,8 @@ export class UIHourlyForecasts {
 			ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
 		}
 
-		this.AdjustHourlyBoxItemWidth();
+		if (this.hourlyToggled)
+			this.AdjustHourlyBoxItemWidth();
 
 		return !(max <= 0);
 	}
@@ -199,6 +200,11 @@ export class UIHourlyForecasts {
 
 	private originalStyle: string | null | undefined = undefined;
 	public async Show(width: number, animate: boolean = true): Promise<void> {
+		// Clear widths measured for previous data before asking Clutter for
+		// the preferred size of the newly displayed labels.
+		for (const element of this.hourlyContainers)
+			element.set_width(-1);
+
 		// In some cases the preferred height is not calculated
 		// properly for the first time, so we work around by opening and closing it once
 		this.actor.show();
@@ -340,17 +346,16 @@ export class UIHourlyForecasts {
 			const percipVolumeWidth = ui.PrecipVolume.get_preferred_width(-1)[1];
 			const percipChanceWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
 			const temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
-			const precipitationWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
 
-			if (precipitationWidth == null || temperatureWidth == null ||
-                hourWidth == null || iconWidth == null ||
+			if (temperatureWidth == null || hourWidth == null || iconWidth == null ||
 				percipVolumeWidth == null || percipChanceWidth == null)
 				continue;
 
 			if (requiredWidth < hourWidth) requiredWidth = hourWidth;
 			if (requiredWidth < iconWidth) requiredWidth = iconWidth;
 			if (requiredWidth < temperatureWidth) requiredWidth = temperatureWidth;
-			if (requiredWidth < precipitationWidth) requiredWidth = precipitationWidth;
+			if (requiredWidth < percipChanceWidth) requiredWidth = percipChanceWidth;
+			if (requiredWidth < percipVolumeWidth) requiredWidth = percipVolumeWidth;
 		}
 		return requiredWidth;
 	}
