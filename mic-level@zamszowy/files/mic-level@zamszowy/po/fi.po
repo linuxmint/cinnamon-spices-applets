@@ -56,7 +56,7 @@ msgid "For how long to record a sample and report result"
 msgstr "Odotusaika ennen näytteen tallennusta ja raportointia"
 
 #. settings-schema.json->sleep-time->description
-msgid "How long to wait before recoring another sample"
+msgid "How long to wait before recording another sample"
 msgstr "Odotusaika ennen uuden näytteen tallentamista"
 
 #. settings-schema.json->enable-bt-only->description
