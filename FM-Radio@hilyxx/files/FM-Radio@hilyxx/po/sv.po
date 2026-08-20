@@ -6,10 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FM-Radio@hilyxx 1.2\n"
+"Project-Id-Version: FM-Radio@hilyxx 1.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-07-26 17:56+0200\n"
+"POT-Creation-Date: 2026-08-20 16:22+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <eson@svenskasprakfiler.se>\n"
@@ -17,58 +17,96 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
 
 #. metadata.json->name
-#. applet.js:59 applet.js:331 applet.js:397 applet.js:423 applet.js:449
-#. applet.js:470
+#. applet.js:68 applet.js:140 applet.js:172 applet.js:211 applet.js:214
+#. applet.js:220 applet.js:242 applet.js:244 applet.js:249 applet.js:455
+#. applet.js:517 applet.js:543 applet.js:569 applet.js:590
 msgid "FM Radio"
 msgstr "FM Radio"
 
-#. applet.js:72
+#. applet.js:81
 msgid "Reload applet"
 msgstr "Uppdatera panelprogrammet"
 
-#. applet.js:243
-msgid "All stations"
-msgstr "Alla radiostationer"
+#. applet.js:140
+msgid "Please select a station."
+msgstr "Välj en station."
 
-#. applet.js:323
-msgid "Waiting..."
-msgstr "Väntar..."
+#. applet.js:169
+msgid "station added successfully!"
+msgstr "stationen har lagts till!"
 
-#. applet.js:331
-msgid "Please start a radio station first to record it."
-msgstr "Starta en radiostation först, för att spela in den."
+#. applet.js:170
+msgid "stations added successfully!"
+msgstr "stationerna har lagts till!"
 
-#. applet.js:366
+#. applet.js:185
 msgid "Music"
 msgstr "Musik"
 
-#. applet.js:397
+#. applet.js:211
+msgid "Stations successfully saved to:\n"
+msgstr "Stationerna har sparats till:\n"
+
+#. applet.js:214
+msgid "Error saving backup."
+msgstr "Ett fel uppstod när säkerhetskopian skulle sparas."
+
+#. applet.js:220
+msgid "Please select a backup file to import first."
+msgstr "Välj en säkerhetskopia att importera först."
+
+#. applet.js:242
+msgid "Stations successfully restored!"
+msgstr "Stationerna har återställts!"
+
+#. applet.js:244
+msgid "Invalid JSON file format."
+msgstr "Ogiltigt JSON-filformat."
+
+#. applet.js:249
+msgid "Error reading the backup file."
+msgstr "Ett fel uppstod vid läsning av säkerhetskopian."
+
+#. applet.js:373
+msgid "All stations"
+msgstr "Alla radiostationer"
+
+#. applet.js:395 applet.js:446
+msgid "Waiting..."
+msgstr "Väntar..."
+
+#. applet.js:455
+msgid "Please start a radio station first to record it."
+msgstr "Starta en radiostation först, för att spela in den."
+
+#. applet.js:517
 msgid "Recording started: "
 msgstr "Inspelning startad: "
 
-#. applet.js:423
+#. applet.js:543
 msgid "Error starting recording."
 msgstr "Kunde inte starta inspelning."
 
-#. applet.js:449
+#. applet.js:569
 msgid "Recording finished and saved to the /FM-Radio folder."
 msgstr "Inspelning slutförd och sparad i mappen /FM-Radio."
 
-#. channels.js:51
+#. channels.js:39
 msgid "Error"
 msgstr "Fel"
 
+#. settings-schema.json->msg_empty_search->description
 #. search.js:19
 msgid "Please enter a radio station name to search for."
 msgstr "Ange ett radiostationsnamn att söka efter."
 
-#. search.js:38
-msgid "No stations found for this keyword."
-msgstr "Inga stationer hittades med detta nyckelord."
+#. search.js:43
+msgid "Unknown Station"
+msgstr "Okänd station"
 
 #. metadata.json->description
 msgid "A stupidly simple radio player for Cinnamon"
@@ -103,6 +141,10 @@ msgstr "Inspelning"
 msgid "Keyboard Shortcuts"
 msgstr "Snabbtangenter"
 
+#. settings-schema.json->section_backup->title
+msgid "Backup and Restore radio stations"
+msgstr "Säkerhetskopiera och återställ radiostationer"
+
 #. settings-schema.json->search_keyword->description
 msgid "Radio station name to search for"
 msgstr "Radiostationsnamn att söka efter"
@@ -111,21 +153,37 @@ msgstr "Radiostationsnamn att söka efter"
 msgid "Launch search"
 msgstr "Starta söktjänst"
 
-#. settings-schema.json->search_button->tooltip
-msgid "Search for the station on the internet"
-msgstr "Sök efter stationer på internet"
-
-#. settings-schema.json->search_results->description
-msgid "Search results (Copy the URL and add it to your list below):"
-msgstr "Sökresultat (Kopiera URL och lägg till den i listan nedan):"
-
 #. settings-schema.json->clear_button->description
 msgid "Clear results"
-msgstr "Rensa"
+msgstr "Rensa resultat"
 
-#. settings-schema.json->clear_button->tooltip
-msgid "Clear the text area"
-msgstr "Rensa textfältet"
+#. settings-schema.json->msg_no_results->description
+msgid "No stations found for this search."
+msgstr "Inga stationer hittades för denna sökning."
+
+#. settings-schema.json->search_results_list->description
+msgid "Search results"
+msgstr "Sökresultat"
+
+#. settings-schema.json->search_results_list->columns->title
+msgid "➕"
+msgstr "➕"
+
+#. settings-schema.json->search_results_list->columns->title
+msgid "📻 Station"
+msgstr "📻 Station"
+
+#. settings-schema.json->search_results_list->columns->title
+msgid "🎶 Quality"
+msgstr "🎶 Kvalitet"
+
+#. settings-schema.json->search_results_list->columns->title
+msgid "🌐 Stream URL"
+msgstr "🌐 Strömnings-URL"
+
+#. settings-schema.json->add_selected_button->description
+msgid "Add selected stations to my list"
+msgstr "Lägg till markerade stationer i min lista"
 
 #. settings-schema.json->custom_stations->description
 msgid "Custom radio stations"
@@ -147,21 +205,27 @@ msgstr "Bildsökväg (t.ex. /home/användare/logo.png"
 msgid ""
 "\n"
 "To create a custom image for a radio station:\n"
+"\n"
 "• Create an image of any format (png, jpeg, or svg) with a square 'cover' "
 "style size (e.g., 300x300).\n"
+"\n"
 "• Station images are stored by default in the applet's image folder, and the "
 "path is /images/yourcover.png. For images located in another folder, apply "
 "the same process and adapt the path accordingly.\n"
+"\n"
 "• The easiest way is to copy the desired image and paste it into the "
 "provided field; this will directly paste the image path.\n"
 msgstr ""
 "\n"
 "För att skapa en anpassad bild för en radiostation:\n"
+"\n"
 "• Skapa en bild i valfritt format (png, jpeg eller svg) med en kvadratisk "
 "\"miniatyrstorlek\" (t.ex. 300x300).\n"
+"\n"
 "• Stationsbilder sparas som standard i panelprogrammets bildmapp, och "
 "sökvägen är /images/dinbild.png. För bilder som ligger i en annan mapp, "
 "använd samma process och anpassa sökvägen därefter.\n"
+"\n"
 "• Det enklaste sättet är att kopiera önskad bild och klistra in den i det "
 "angivna fältet, detta klistrar direkt in bildens sökväg.\n"
 
@@ -184,17 +248,25 @@ msgid "Custom recording folder"
 msgstr "Anpassad inspelningsmapp"
 
 #. settings-schema.json->recording_folder->tooltip
-msgid "Leave empty to use the default Music folder."
-msgstr "Lämnas tom för att använda standard musikmapp."
+msgid "Select the directory where your audio recordings will be saved."
+msgstr "Välj den mapp där dina ljudinspelningar ska sparas."
 
 #. settings-schema.json->reset_folder_button->description
 msgid "Reset to default Music folder"
 msgstr "Återställ till standard musikmapp"
 
-#. settings-schema.json->reset_folder_button->tooltip
-msgid "Reset recording location back to default system Music folder"
-msgstr "Återställ inspelningsplatsen till standardmappen Musik"
-
 #. settings-schema.json->key_play_pause->description
 msgid "Play / Stop"
 msgstr "Spela/Stoppa"
+
+#. settings-schema.json->export_button->description
+msgid "Export stations"
+msgstr "Exportera stationer"
+
+#. settings-schema.json->import_file->description
+msgid "Select a Backup file (.json) to restore"
+msgstr "Välj en säkerhetskopia (.json) att återställa"
+
+#. settings-schema.json->import_button->description
+msgid "Restore stations from the selected file"
+msgstr "Återställ stationer från den valda filen"

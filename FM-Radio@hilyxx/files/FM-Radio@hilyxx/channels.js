@@ -2,6 +2,7 @@
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
+const Pango = imports.gi.Pango;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 
@@ -18,19 +19,6 @@ const extPath = GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
 
 // === CHANNEL SUBMENU: UI SETUP ===
 var currentChannelsList = [];
-
-function getIconForPath(picPath) {
-    let path = picPath;
-    // If no image is specified, use the default image instead
-    if (!path || path.trim() === "") {
-        path = "/images/default-cover.png";
-    }
-    
-    if (path.startsWith("/home/")) {
-        return Gio.icon_new_for_string(path);
-    }
-    return Gio.icon_new_for_string(extPath + (path.startsWith("/") ? "" : "/") + path);
-}
 
 // Function called by the applet to inject the list from settings
 function setChannels(channelsArray) {
@@ -64,6 +52,15 @@ var Channel = class Channel {
     getLink() { return this.link; }
     getPic() { return this.pic; }
     getNum() { return this.num; }
+
+    getResolvedIcon() {
+        let path = this.pic;
+        if (!path || path.trim() === "") {
+            path = "/images/default-cover.png";
+        }
+        let iconPath = path.startsWith("/home/") ? path : extPath + (path.startsWith("/") ? "" : "/") + path;
+        return Gio.icon_new_for_string(iconPath);
+    }
 };
 
 var ChannelBox = class ChannelBox extends PopupMenu.PopupBaseMenuItem {
@@ -74,11 +71,15 @@ var ChannelBox = class ChannelBox extends PopupMenu.PopupBaseMenuItem {
         this.channel = channel;
         this.popup = popup;
 
-        this.vbox = new St.BoxLayout({ vertical: false });
+        this.vbox = new St.BoxLayout({ 
+            vertical: false,
+            width: 200,
+            x_expand: true 
+        });
         this.addActor(this.vbox);
 
         let icon2 = new St.Icon({
-            gicon: getIconForPath(channel.getPic()),
+            gicon: channel.getResolvedIcon(),
             style: "margin-right:10px",
             icon_size: 32,
         });
@@ -89,7 +90,12 @@ var ChannelBox = class ChannelBox extends PopupMenu.PopupBaseMenuItem {
             y_align: Clutter.ActorAlign.CENTER,
             y_expand: true,
             style_class: 'channel-label',
+            style: 'max-width: 165px;' 
         });
+        
+        label1.clutter_text.line_wrap = true;
+        label1.clutter_text.line_wrap_mode = Pango.WrapMode.WORD;
+        label1.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
 
         this.vbox.add_child(icon2);
         this.vbox.add_child(box2);
