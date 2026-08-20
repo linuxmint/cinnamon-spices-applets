@@ -18577,7 +18577,7 @@ class WindBox {
         this.OnDisplayWindAsTextChanged = (config, displayWindAsText, data) => {
             this._label.remove_all_children();
             if (!displayWindAsText)
-                this._label.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: windBox_Align.MIDDLE, y_align: windBox_Align.MIDDLE, expand: false });
+                this._label.add(this.windDirectionIcon, { x_fill: false, y_fill: false, x_align: windBox_Align.MIDDLE, y_align: windBox_Align.MIDDLE, expand: false });
             this._label.add(this.labelText);
             this.Display(data.wind.speed, data.wind.degree);
         };
@@ -18586,28 +18586,28 @@ class WindBox {
         this.app.config.WindSpeedUnitChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
     }
     Rebuild(config, textColorStyle) {
+        const captionStyle = "min-height: " + Math.ceil(config.CurrentFontSize * 2) + "px;";
         this._caption = Label({
             text: _('Wind') + LocalizedColon(config.currentLocale),
-            style: textColorStyle,
+            style: textColorStyle + "; " + captionStyle,
             x_align: imports.gi.Clutter.ActorAlign.END,
         });
         this._label = this.BuildLabel(config);
         return [this._caption, this._label];
     }
     BuildLabel(config) {
-        const windBox = new windBox_BoxLayout({ vertical: false });
-        const iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
-        const iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
+        const minRowHeight = Math.ceil(config.CurrentFontSize * 2);
+        const windBox = new windBox_BoxLayout({ vertical: false, style: "min-height: " + minRowHeight + "px;" });
         const iconSize = Math.round(config.CurrentFontSize * 0.8);
-        this.labelText = Label({ text: ELLIPSIS, x_expand: true, x_align: windBox_ActorAlign.FILL });
+        this.labelText = Label({ text: ELLIPSIS, x_expand: true, x_align: windBox_ActorAlign.FILL, style: "font-family: 'Noto Sans CJK SC', sans-serif;" });
         this.windDirectionIcon = new windBox_Icon({
             icon_type: windBox_IconType.SYMBOLIC,
             icon_name: APPLET_ICON,
             icon_size: iconSize,
-            style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"
+            style: "padding-right: 5px;"
         });
         if (!config._displayWindAsText)
-            windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: windBox_Align.MIDDLE, y_align: windBox_Align.MIDDLE, expand: false });
+            windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: false, x_align: windBox_Align.MIDDLE, y_align: windBox_Align.MIDDLE, expand: false });
         windBox.add_actor(this.labelText);
         return windBox;
     }
@@ -18761,33 +18761,36 @@ class CurrentWeather {
         return middleColumn;
     }
     BuildRightColumn(textColorStyle, config) {
-        this.temperatureLabel = Label();
-        this.humidityLabel = Label();
-        this.pressureLabel = Label();
-        this.dewPointLabel = Label();
-        this.apiUniqueLabel = Label();
+        const minRowHeight = Math.ceil(config.CurrentFontSize * 2);
+        const captionStyle = "min-height: " + minRowHeight + "px;";
+        const valueStyle = "min-height: " + minRowHeight + "px; font-family: 'Noto Sans CJK SC', sans-serif;";
+        this.temperatureLabel = Label({ style: valueStyle });
+        this.humidityLabel = Label({ style: valueStyle });
+        this.pressureLabel = Label({ style: valueStyle });
+        this.dewPointLabel = Label({ style: valueStyle });
+        this.apiUniqueLabel = Label({ style: valueStyle });
         this.temperatureCaption = Label({
             text: _('Temperature') + LocalizedColon(config.currentLocale),
-            style: textColorStyle,
+            style: textColorStyle + "; " + captionStyle,
             x_align: imports.gi.Clutter.ActorAlign.END,
         });
         this.humidityCaption = Label({
             text: _('Humidity') + LocalizedColon(config.currentLocale),
-            style: textColorStyle,
+            style: textColorStyle + "; " + captionStyle,
             x_align: imports.gi.Clutter.ActorAlign.END,
         });
         this.pressureCaption = Label({
             text: _('Pressure') + LocalizedColon(config.currentLocale),
-            style: textColorStyle,
+            style: textColorStyle + "; " + captionStyle,
             x_align: imports.gi.Clutter.ActorAlign.END,
         });
         this.dewPointCaption = Label({
             text: _("Dew Point") + LocalizedColon(config.currentLocale),
-            style: textColorStyle,
+            style: textColorStyle + "; " + captionStyle,
             x_align: imports.gi.Clutter.ActorAlign.END,
         });
         this.apiUniqueCaption = Label({
-            style: textColorStyle,
+            style: textColorStyle + "; " + captionStyle,
             x_align: imports.gi.Clutter.ActorAlign.END,
         });
         const [windCaption, windLabel] = this.windBox.Rebuild(config, textColorStyle);
