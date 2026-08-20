@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: window-closer@stefan-schmidbauer 1.0.2\n"
-"Report-Msgid-Bugs-To: https://github.com/Stefan-Schmidbauer/cinnamon-window-"
-"closer/issues\n"
-"POT-Creation-Date: 2026-04-10 18:56+0200\n"
+"Project-Id-Version: window-closer@stefan-schmidbauer 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-12 20:12+0200\n"
 "PO-Revision-Date: 2026-04-14 07:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,18 +17,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.9\n"
 
-#: applet.js:37 applet.js:123
+#. metadata.json->name
+#. applet.js:70 applet.js:368
 msgid "Window Closer"
 msgstr "Ablakzáró"
 
-#: applet.js:131
+#. applet.js:377
+msgid "Click a window to close it · Scroll for more · Esc to exit"
+msgstr ""
+"Kattintson egy ablakra a bezárásához · Görgessen továbbiakért · Esc a "
+"kilépéshez"
+
+#. applet.js:378
 msgid "Click a window to close it · Esc to exit"
 msgstr "Kattintson egy ablakra a bezárásához · Esc a kilépéshez"
 
-#: applet.js:198
+#. applet.js:506
 msgid "No windows open"
 msgstr "Nincsenek nyitott ablakok"
 
-#: applet.js:366
+#. applet.js:689
 msgid "All windows closed!"
 msgstr "Minden ablak zárva!"
+
+#. metadata.json->description
+msgid "Click to see all open windows. Click a window to close it."
+msgstr ""
+"Kattintson az összes nyitott ablak megtekintéséhez. Kattintson egy ablakra a "
+"bezárásához."
