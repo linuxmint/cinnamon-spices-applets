@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "EditorConfig.EditorConfig",
+        "fill-labs.dependi",
+        "ms-python.python",
+        "pkief.material-icon-theme",
+        "takumii.markdown-toc-num",
+        "vitest.explorer",
+    ]
+}
