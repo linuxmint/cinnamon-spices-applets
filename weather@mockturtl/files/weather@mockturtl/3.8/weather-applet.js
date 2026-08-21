@@ -14721,21 +14721,21 @@ class AccuWeather {
                     case "Rain":
                         precipitation = {
                             type: "rain",
-                            chance: hour.RainProbability,
+                            chance: hour.RainProbability == null ? undefined : hour.RainProbability,
                             volume: (_c = (_b = hour === null || hour === void 0 ? void 0 : hour.Rain) === null || _b === void 0 ? void 0 : _b.Value) !== null && _c !== void 0 ? _c : undefined
                         };
                         break;
                     case "Snow":
                         precipitation = {
                             type: "snow",
-                            chance: hour.SnowProbability,
+                            chance: hour.SnowProbability == null ? undefined : hour.SnowProbability,
                             volume: (_e = (_d = hour === null || hour === void 0 ? void 0 : hour.Snow) === null || _d === void 0 ? void 0 : _d.Value) !== null && _e !== void 0 ? _e : undefined
                         };
                         break;
                     case "Ice":
                         precipitation = {
                             type: "ice pellets",
-                            chance: hour.IceProbability,
+                            chance: hour.IceProbability == null ? undefined : hour.IceProbability,
                             volume: (_g = (_f = hour === null || hour === void 0 ? void 0 : hour.Ice) === null || _f === void 0 ? void 0 : _f.Value) !== null && _g !== void 0 ? _g : undefined
                         };
                         break;
@@ -15475,6 +15475,8 @@ class WeatherUnderground {
             };
             for (const observations of observationData) {
                 const station = stations.find(v => v.stationId == observations.stationID);
+                if (station == null)
+                    continue;
                 if (result.date == null && observations.obsTimeUtc != null)
                     result.date = DateTime.fromISO(observations.obsTimeUtc).setZone(tz);
                 if (result.location.city == null && observations.neighborhood != null)
@@ -16097,6 +16099,7 @@ class PirateWeather {
         try {
             const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
             const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
+            const hourlyForecasts = [];
             const result = {
                 date: DateTime.fromSeconds(json.currently.time, { zone: json.timezone }),
                 coord: {
@@ -16130,7 +16133,7 @@ class PirateWeather {
                 },
                 uvIndex: (_e = (_c = (_a = json.currently.uvIndex) !== null && _a !== void 0 ? _a : (_b = json.hourly.data[0]) === null || _b === void 0 ? void 0 : _b.uvIndex) !== null && _c !== void 0 ? _c : (_d = json.daily.data[0]) === null || _d === void 0 ? void 0 : _d.uvIndex) !== null && _e !== void 0 ? _e : null,
                 forecasts: [],
-                hourlyForecasts: [],
+                hourlyForecasts,
             };
             for (const day of json.daily.data) {
                 const forecast = {
@@ -16163,7 +16166,7 @@ class PirateWeather {
                         chance: hour.precipProbability * 100
                     }
                 };
-                result.hourlyForecasts.push(forecast);
+                hourlyForecasts.push(forecast);
             }
             if (json.minutely != null) {
                 const immediate = {
@@ -19885,8 +19888,12 @@ class UIForecasts {
         try {
             if (!weather.forecasts)
                 return false;
-            if (this.forecasts.length > weather.forecasts.length)
-                this.Rebuild(this.app.config, this.app.config.textColorStyle, weather.forecasts.length);
+            if (this.forecasts.length > weather.forecasts.length) {
+                const textColorStyle = this.app.config.textColorStyle;
+                if (textColorStyle == null)
+                    return false;
+                this.Rebuild(this.app.config, textColorStyle, weather.forecasts.length);
+            }
             const len = Math.min(this.forecasts.length, weather.forecasts.length);
             for (let i = 0; i < len; i++) {
                 const forecastData = weather.forecasts[i];
@@ -20126,8 +20133,12 @@ class UIHourlyForecasts {
         this.actor.connect("scroll-event", (owner, event) => {
             const adjustment = hScroll.get_adjustment();
             const direction = event.get_scroll_direction();
-            const newVal = adjustment.get_value() +
-                ((direction === ScrollDirection.UP) ? -adjustment.step_increment : (direction === ScrollDirection.DOWN) ? adjustment.step_increment : 0);
+            let scrollDelta = 0;
+            if (direction === ScrollDirection.UP)
+                scrollDelta = -adjustment.step_increment;
+            else if (direction === ScrollDirection.DOWN)
+                scrollDelta = adjustment.step_increment;
+            const newVal = adjustment.get_value() + scrollDelta;
             if (global.settings.get_boolean("desktop-effects-on-menus"))
                 addTween(adjustment, { value: newVal, time: 0.25 });
             else
@@ -20179,7 +20190,10 @@ class UIHourlyForecasts {
         if (!forecasts || !this.hourlyForecasts)
             return true;
         if (this.hourlyForecasts.length > forecasts.length) {
-            this.Rebuild(this.app.config, this.app.config.textColorStyle, forecasts.length);
+            const textColorStyle = this.app.config.textColorStyle;
+            if (textColorStyle == null)
+                return false;
+            this.Rebuild(this.app.config, textColorStyle, forecasts.length);
         }
         this.hourlyForecastDates = [];
         this.hourlyForecastData = [];
@@ -20609,8 +20623,9 @@ class UIBar {
         if (this.app.GetMaxHourlyForecasts() <= 0) {
             this.HideHourlyToggle();
         }
-        this.providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
-        this.providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(this.providerCreditButton));
+        const providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
+        this.providerCreditButton = providerCreditButton;
+        providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(providerCreditButton));
         this.refreshIcon = new uiBar_Icon({
             icon_name: "refresh-symbolic",
             icon_type: uiBar_IconType.SYMBOLIC,
