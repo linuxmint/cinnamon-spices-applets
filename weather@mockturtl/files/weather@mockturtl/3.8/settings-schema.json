@@ -97,6 +97,7 @@
 				"pirateweather_label",
 				"visualcrossing_label",
 				"weatherbit_label",
+				"qweather_label",
 				"tomorrowio_label",
 				"accuweather_label",
 				"weatherunderground_label",
@@ -106,6 +107,8 @@
 				"pirateweather_apikey",
 				"visualcrossing_apikey",
 				"weatherbit_apikey",
+				"qweather_api_host",
+				"qweather_apikey",
 				"tomorrowio_apikey",
 				"accuweather_apikey",
 				"weatherunderground_apikey",
@@ -235,6 +238,7 @@
 			"Pirate Weather (key needed)": "PirateWeather",
 			"Visual Crossing (key needed)": "Visual Crossing",
 			"Weatherbit (key needed)": "Weatherbit",
+			"QWeather (key and API Host needed)": "QWeather",
 			"Tomorrow.io (key needed)": "Tomorrow.io",
 			"AccuWeather (key needed)": "AccuWeather",
 			"Weather Underground (key needed)": "WeatherUnderground"
@@ -300,6 +304,11 @@
 		"description": "Historical and Forecast Weather data service provided by Weatherbit LLC in the USA.. Read more about the service at weatherbit.io.\n\n - At least 1 hour refresh rate is recommended, otherwise you might exceed you daily quota. The Free API subscription is limited to 50 calls per day.\n - Needs an API key\n - Using alerts will increase call usage by 33%\n - Hourly Weather forecast is supported but requires a non-free account.",
 		"dependency": "dataService=Weatherbit"
 	},
+	"qweather_label": {
+		"type": "label",
+		"description": "QWeather provides weather data for China and worldwide locations. A dedicated API Host and API Key from console.qweather.com are required.",
+		"dependency": "dataService=QWeather"
+	},
 	"tomorrowio_label": {
 		"type": "label",
 		"description": "Meteorological data from American weather technology company with headquarters in Boston since 2016. Read more about the service at tomorrow.io.\n\n - Free plan includes 1000 calls per day\n - Needs an API key",
@@ -356,6 +365,20 @@
 		"description": "Weatherbit API Key",
 		"dependency": "dataService=Weatherbit",
 		"tooltip": "Copy this from your account at weatherbit.io and paste it here."
+	},
+	"qweather_api_host": {
+		"type": "entry",
+		"default": "",
+		"description": "QWeather API Host",
+		"dependency": "dataService=QWeather",
+		"tooltip": "Enter only your dedicated *.qweatherapi.com host from the QWeather console."
+	},
+	"qweather_apikey": {
+		"type": "entry",
+		"default": "",
+		"description": "QWeather API Key",
+		"dependency": "dataService=QWeather",
+		"tooltip": "Copy the API Key credential from your QWeather project."
 	},
 	"tomorrowio_apikey": {
 		"type": "entry",
