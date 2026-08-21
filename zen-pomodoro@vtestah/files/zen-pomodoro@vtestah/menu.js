@@ -72,6 +72,17 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
         }
     }
 
+    // Re-sync the menu font scale from the applet's current option. Appearance
+    // bindings can fire before the bound option updates, so the menu re-applies
+    // its scale on open to guarantee it matches the setting.
+    setFontScale(scale) {
+        let s = (typeof scale === "number" && scale > 0) ? scale : 100;
+        if (s !== this._menuFontScale) {
+            this._menuFontScale = s;
+            this._applyMenuActorStyle();
+        }
+    }
+
     _nullWidgetRefs() {
         this._statusItem = null;
         this._stateBadgeLabel = null;
@@ -82,12 +93,8 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
         this._dailyLabel = null;
         this._taskLabel = null;
         this._sitesLabel = null;
-        this._presetSummaryLabel = null;
         this._presetSubmenu = null;
-        this._compactInfoLabel = null;
-        this._chooseTaskItem = null;
         this._zenItem = null;
-        this._focusUntilItem = null;
         this._ambientItem = null;
         this._focusLength = 0;
         this._primaryActionItem = null;
@@ -96,7 +103,6 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
         this._resetTimerItem = null;
         this._resetAllItem = null;
         this._skipTimerItem = null;
-        this._sessionSubmenu = null;
         this._statsSubmenu = null;
         this._statTodayItem = null;
         this._statValueLabel = null;
@@ -431,26 +437,9 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
         }
 
         // Distractions: jot a thought and keep working; review / clear here.
-        this._distractSubmenu = new PopupMenu.PopupSubMenuMenuItem(_("Distractions"));
-        this.addMenuItem(this._distractSubmenu);
-        this._buildDistractEntry();
-        this._populateDistractions();
-        this._distractSubmenu.menu.connect('open-state-changed', (m, isOpen) => {
-            // Don't auto-focus the entry: holding key focus here means a later
-            // click (e.g. delete) blurs it and closes the menu. Just recolour
-            // the placeholder from the entry's theme. Click the field to type.
-            if (isOpen && this._distractEntry && this._distractHint) {
-                GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
-                    if (this._distractEntry && this._distractHint) {
-                        try {
-                            let ec = this._distractEntry.get_theme_node().get_foreground_color();
-                            this._distractHint.set_style("color: rgba(" + ec.red + ", " + ec.green + ", " + ec.blue + ", 0.55);");
-                        } catch (e) {}
-                    }
-                    return GLib.SOURCE_REMOVE;
-                });
-            }
-        });
+        // Idle auto-hides it when empty; the active layout shows it always so a
+        // thought can be jotted mid-focus (see _addDistractSubmenu).
+        this._addDistractSubmenu(false);
 
         // Session setup — preset (focus + breaks + cycle).
         this._presetSubmenu = new PopupMenu.PopupSubMenuMenuItem(_("Preset"));
@@ -461,10 +450,6 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
 
         // Optional modes + toggles, grouped by a separator instead of a header.
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        this._focusUntilItem = new PopupMenu.PopupMenuItem(_("Focus until\u2026"));
-        this._focusUntilItem.connect('activate', () => { this.emit('focus-until'); });
-        this.addMenuItem(this._focusUntilItem);
-
         this._zenItem = new PopupMenu.PopupSwitchMenuItem(_("Zen mode"), false);
         this._zenItem.connect('toggled', (item, state) => this.emit('toggle-zen', state));
         new Tooltips.Tooltip(this._zenItem.actor, _("Focus spotlight: while a focus session runs, every other window dims so the one you're working in stands out. Click the on-screen pill to exit."));
@@ -472,6 +457,7 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
 
         this._ambientItem = new PopupMenu.PopupSwitchMenuItem(_("Ambient sound"), false);
         this._ambientItem.connect('toggled', (item, state) => this.emit('set-ambient', state));
+        new Tooltips.Tooltip(this._ambientItem.actor, _("Play a calming background soundscape while you focus (white/pink/brown noise, rain, sea, …). Choose the sound in Settings."));
         this.addMenuItem(this._ambientItem);
 
         let sitesItem = new PopupMenu.PopupBaseMenuItem();
@@ -481,7 +467,8 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
         this._sitesLabel = new St.Label({ text: _("off"), style_class: "pomodoro-info-value" });
         sitesItem.addActor(this._sitesLabel, { expand: true, align: St.Align.END });
         sitesItem.connect('activate', () => { this.emit('open-blocking-settings'); });
-        new Tooltips.Tooltip(sitesItem.actor, _("Manage blocked sites"));
+        new Tooltips.Tooltip(sitesItem.actor, _("Manage blocked sites. A browser using secure DNS (DoH) can bypass this."));
+        this._sitesItem = sitesItem;
         this.addMenuItem(sitesItem);
 
         // Statistics — one compact clickable row that opens the dashboard.
@@ -502,6 +489,33 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
         this.addMenuItem(quickStart);
     }
 
+    // Distractions submenu — jot a thought without leaving focus; review / clear
+    // here. alwaysVisible keeps it shown even when empty (active layout) so the
+    // first thought is reachable; idle auto-hides it when empty.
+    _addDistractSubmenu(alwaysVisible) {
+        this._distractAlwaysVisible = !!alwaysVisible;
+        this._distractSubmenu = new PopupMenu.PopupSubMenuMenuItem(_("Distractions"));
+        this.addMenuItem(this._distractSubmenu);
+        this._buildDistractEntry();
+        this._populateDistractions();
+        this._distractSubmenu.menu.connect('open-state-changed', (m, isOpen) => {
+            // Don't auto-focus the entry: holding key focus here means a later
+            // click (e.g. delete) blurs it and closes the menu. Just recolour
+            // the placeholder from the entry's theme. Click the field to type.
+            if (isOpen && this._distractEntry && this._distractHint) {
+                GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+                    if (this._distractEntry && this._distractHint) {
+                        try {
+                            let ec = this._distractEntry.get_theme_node().get_foreground_color();
+                            this._distractHint.set_style("color: rgba(" + ec.red + ", " + ec.green + ", " + ec.blue + ", 0.55);");
+                        } catch (e) {}
+                    }
+                    return GLib.SOURCE_REMOVE;
+                });
+            }
+        });
+    }
+
     _buildActiveLayout() {
         this._buildStatusHeader();
 
@@ -509,12 +523,14 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
 
         let sr = this._makeSkipResetItems();
         this.addMenuItem(sr.skipItem);
+        this._addDistractSubmenu(true);
         this._zenItem = new PopupMenu.PopupSwitchMenuItem(_("Zen mode"), false);
         this._zenItem.connect('toggled', (item, state) => this.emit('toggle-zen', state));
         new Tooltips.Tooltip(this._zenItem.actor, _("Focus spotlight: while a focus session runs, every other window dims so the one you're working in stands out. Click the on-screen pill to exit."));
         this.addMenuItem(this._zenItem);
         this._ambientItem = new PopupMenu.PopupSwitchMenuItem(_("Ambient sound"), false);
         this._ambientItem.connect('toggled', (item, state) => this.emit('set-ambient', state));
+        new Tooltips.Tooltip(this._ambientItem.actor, _("Play a calming background soundscape while you focus (white/pink/brown noise, rain, sea, …). Choose the sound in Settings."));
         this.addMenuItem(this._ambientItem);
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         this.addMenuItem(sr.resetItem);
@@ -822,26 +838,15 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
             : (listN > 0 ? _("%d in list").format(listN) : _("off"));
 
         // Idle layout: separate Sites and Preset info rows.
+        if (this._sitesItem && this._sitesItem.actor) {
+            // Mirror the Zen item: hide the whole row when the feature is off.
+            if (runtime.blockingEnabled) { this._sitesItem.actor.show(); } else { this._sitesItem.actor.hide(); }
+        }
         if (this._sitesLabel) {
             this._sitesLabel.set_text(sitesText);
         }
-        if (this._presetSummaryLabel) {
-            this._presetSummaryLabel.set_text(activePreset);
-        }
         if (this._presetSubmenu && this._presetSubmenu.label) {
             this._presetSubmenu.label.set_text(_("Preset") + ": " + activePreset + this._activePresetRhythm(activePreset));
-        }
-
-        // Active layout: single compact "preset · status" row.
-        if (this._compactInfoLabel) {
-            this._compactInfoLabel.set_text(`${activePreset} \u00B7 ${sitesText}`);
-        }
-
-
-
-
-        if (this._chooseTaskItem) {
-            this._chooseTaskItem.setSensitive(state === "pomodoro-stop");
         }
         if (this._zenItem && this._zenItem.actor) {
             if (runtime.zenEnabled) {
@@ -850,10 +855,6 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
                 this._zenItem.actor.hide();
             }
         }
-        if (this._focusUntilItem && this._focusUntilItem.actor) {
-            this._focusUntilItem.actor.show();
-        }
-
         if (this._primaryActionItem) {
             this._primaryActionItem.setSensitive(true);
             if (runtime.timerPaused) {
@@ -960,8 +961,10 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
         }
         this._distractListItems = [];
         let items = this._distractions || [];
-        // Review surface: only show the section when there's something captured.
-        if (this._distractSubmenu.actor) { this._distractSubmenu.actor.visible = (items.length > 0); }
+        // Review surface: only show the section when there's something captured
+        // — unless the active layout asked to keep it shown so a thought can be
+        // jotted mid-focus even before anything is captured.
+        if (this._distractSubmenu.actor) { this._distractSubmenu.actor.visible = (this._distractAlwaysVisible || items.length > 0); }
 
         for (let d of items) {
             let item = new PopupMenu.PopupBaseMenuItem();
@@ -969,17 +972,8 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
             let lab = new St.Label({ text: "• " + d.text, x_expand: true });
             row.add_child(lab);
             let id = d.id;
-            let del = new St.Button({
-                style_class: 'pomodoro-task-btn', can_focus: false,
-                child: new St.Icon({ icon_name: 'edit-delete-symbolic', icon_size: 14 })
-            });
-            new Tooltips.Tooltip(del, _("Delete"));
-            del.connect('button-press-event', () => true);
-            del.connect('button-release-event', (a, ev) => {
-                if (ev.get_button() === 1) {
-                    GLib.idle_add(GLib.PRIORITY_DEFAULT, () => { this.emit('delete-distraction', id); return GLib.SOURCE_REMOVE; });
-                }
-                return true;
+            let del = this._rowActionButton('edit-delete-symbolic', _("Delete"), () => {
+                GLib.idle_add(GLib.PRIORITY_DEFAULT, () => { this.emit('delete-distraction', id); return GLib.SOURCE_REMOVE; });
             });
             row.add_child(del);
             item.addActor(row, { expand: true, span: -1 });
@@ -998,6 +992,26 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
         if (this._distractSubmenu.label) {
             this._distractSubmenu.label.set_text(_("Distractions") + (items.length ? " (" + items.length + ")" : ""));
         }
+    }
+
+    // An icon row-action button (delete/edit/done) that works with pointer,
+    // keyboard (Enter/Space) and screen readers: St.Button emits 'clicked' for
+    // both pointer and key activation once it is focusable, and we give it an
+    // accessible name so it isn't an anonymous icon to assistive tech.
+    _rowActionButton(iconName, label, onClicked) {
+        let btn = new St.Button({
+            style_class: "pomodoro-task-btn", can_focus: true,
+            child: new St.Icon({ icon_name: iconName, icon_size: 14 })
+        });
+        try {
+            if (typeof btn.get_accessible === 'function') {
+                let acc = btn.get_accessible();
+                if (acc && typeof acc.set_name === 'function') { acc.set_name(label); }
+            }
+        } catch (e) {}
+        new Tooltips.Tooltip(btn, label);
+        btn.connect('clicked', () => { onClicked(); return true; });
+        return btn;
     }
 
     setTasks(list, currentId, finishText, templates) {
@@ -1091,26 +1105,15 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
                 rlab.clutter_text.set_ellipsize(Pango.EllipsizeMode.END);
                 row.add_child(rlab);
             }
-            let editBtn = new St.Button({
-                style_class: "pomodoro-task-btn", can_focus: false,
-                child: new St.Icon({ icon_name: "document-edit-symbolic", icon_size: 14 })
-            });
-            editBtn.connect('clicked', () => { this.emit('task-edit', t.id); return true; });
-            new Tooltips.Tooltip(editBtn, _("Edit task"));
+            let editBtn = this._rowActionButton("document-edit-symbolic", _("Edit task"), () => this.emit('task-edit', t.id));
             row.add_child(editBtn);
-            let doneBtn = new St.Button({
-                style_class: "pomodoro-task-btn", can_focus: false,
-                child: new St.Icon({ icon_name: t.completed ? "edit-undo-symbolic" : "object-select-symbolic", icon_size: 14 })
+            let doneBtn = this._rowActionButton(t.completed ? "edit-undo-symbolic" : "object-select-symbolic", t.completed ? _("Reopen task") : _("Mark done"), () => {
+                GLib.idle_add(GLib.PRIORITY_DEFAULT, () => { this.emit('task-complete', t.id); return GLib.SOURCE_REMOVE; });
             });
-            doneBtn.connect('button-release-event', (a, ev) => { if (ev.get_button() === 1) { GLib.idle_add(GLib.PRIORITY_DEFAULT, () => { this.emit('task-complete', t.id); return GLib.SOURCE_REMOVE; }); } return true; });
-            new Tooltips.Tooltip(doneBtn, t.completed ? _("Reopen task") : _("Mark done"));
             row.add_child(doneBtn);
-            let delBtn = new St.Button({
-                style_class: "pomodoro-task-btn", can_focus: false,
-                child: new St.Icon({ icon_name: "edit-delete-symbolic", icon_size: 14 })
+            let delBtn = this._rowActionButton("edit-delete-symbolic", _("Delete task"), () => {
+                GLib.idle_add(GLib.PRIORITY_DEFAULT, () => { this.emit('task-delete', t.id); return GLib.SOURCE_REMOVE; });
             });
-            delBtn.connect('button-release-event', (a, ev) => { if (ev.get_button() === 1) { GLib.idle_add(GLib.PRIORITY_DEFAULT, () => { this.emit('task-delete', t.id); return GLib.SOURCE_REMOVE; }); } return true; });
-            new Tooltips.Tooltip(delBtn, _("Delete task"));
             row.add_child(delBtn);
             item.addActor(row, { expand: true, span: -1 });
             item.connect('activate', () => this.emit('select-task', t.id));
@@ -1190,24 +1193,15 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
                 label.set_style("font-weight: bold; color: " + this._accentColor("rgb(235, 175, 75)") + ";");
             }
             row.add_child(label);
-            let editBtn = new St.Button({
-                style_class: "pomodoro-task-btn", can_focus: false,
-                child: new St.Icon({ icon_name: "document-edit-symbolic", icon_size: 14 })
-            });
-            editBtn.connect('clicked', () => {
+            let editBtn = this._rowActionButton("document-edit-symbolic", _("Edit preset"), () => {
                 this._presetEditPending = true;
                 this.emit('preset-edit', idx);
                 GLib.idle_add(GLib.PRIORITY_DEFAULT, () => { this._presetEditPending = false; return GLib.SOURCE_REMOVE; });
-                return true;
             });
-            new Tooltips.Tooltip(editBtn, _("Edit preset"));
             row.add_child(editBtn);
-            let delBtn = new St.Button({
-                style_class: "pomodoro-task-btn", can_focus: false,
-                child: new St.Icon({ icon_name: "edit-delete-symbolic", icon_size: 14 })
+            let delBtn = this._rowActionButton("edit-delete-symbolic", _("Delete preset"), () => {
+                GLib.idle_add(GLib.PRIORITY_DEFAULT, () => { this.emit('preset-delete', idx); return GLib.SOURCE_REMOVE; });
             });
-            delBtn.connect('button-release-event', (a, ev) => { if (ev.get_button() === 1) { GLib.idle_add(GLib.PRIORITY_DEFAULT, () => { this.emit('preset-delete', idx); return GLib.SOURCE_REMOVE; }); } return true; });
-            new Tooltips.Tooltip(delBtn, _("Delete preset"));
             row.add_child(delBtn);
             item.addActor(row, { expand: true, span: -1 });
             item.connect('activate', () => {
@@ -1222,19 +1216,8 @@ var PomodoroMenu = class extends Applet.AppletPopupMenu {
     _applyCachedPreset() {
         let preset = this._presetState || {};
 
-        if (this._presetSummaryLabel && preset.activePreset) {
-            this._presetSummaryLabel.set_text(preset.activePreset);
-        }
         if (this._presetSubmenu && this._presetSubmenu.label && preset.activePreset) {
             this._presetSubmenu.label.set_text(_("Preset") + ": " + preset.activePreset + this._activePresetRhythm(preset.activePreset));
-        }
-        if (this._compactInfoLabel && preset.activePreset && this._lastRuntimeState) {
-            let rt = this._lastRuntimeState;
-            let listN = (typeof rt.blockedSitesCount === "number") ? rt.blockedSitesCount : 0;
-            let hostsN = (typeof rt.blockingHostsCount === "number") ? rt.blockingHostsCount : 0;
-            let t = (rt.blockingSectionActive && hostsN > 0) ? _("blocking %d").format(hostsN)
-                : (listN > 0 ? _("%d in list").format(listN) : _("off"));
-            this._compactInfoLabel.set_text(`${preset.activePreset} \u00B7 ${t}`);
         }
         let active = preset.activePreset || "";
         for (let entry of (this._presetItems || [])) {

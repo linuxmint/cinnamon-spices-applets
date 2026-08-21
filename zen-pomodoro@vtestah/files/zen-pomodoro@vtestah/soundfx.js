@@ -56,14 +56,37 @@ const {
 } = C;
 
 function install(proto) {
-    proto._playTickerSound = function(previewOnly = false) {
-        if (this._opt_playTickerSound) {
-            this._sounds.tick.play({ loop: true, volume: this._opt_tickerSoundVolume / 100, preview: previewOnly });
+    // Lazily build a gapless AmbientLoop for the real-session ticking sound — the
+    // one-shot SoundEffect loops by restarting, leaving an audible seam each cycle
+    // (noticeable for a rhythmic tick). Falls back to the SoundEffect if needed.
+    proto._ensureTickerLoop = function() {
+        if (!SoundModule || !SoundModule.AmbientLoop) { return null; }
+        if (!this._tickerLoop) {
+            this._tickerLoop = new SoundModule.AmbientLoop(this._opt_tickerSoundPath);
+        } else {
+            this._tickerLoop.setSoundPath(this._opt_tickerSoundPath);
         }
+        return this._tickerLoop;
+    };
+
+    proto._playTickerSound = function(previewOnly = false) {
+        if (!this._opt_playTickerSound) { return; }
+        let vol = Math.max(0, Math.min(1, (this._opt_tickerSoundVolume || 0) / 100));
+        if (previewOnly) {
+            this._sounds.tick.play({ loop: true, volume: vol, preview: true });
+            return;
+        }
+        // Real session: prefer the gapless loop. AmbientLoop.play adjusts volume
+        // live when it's already looping the same clip, so a mid-session volume
+        // change is seamless; a changed file restarts cleanly.
+        let loop = this._ensureTickerLoop();
+        if (loop) { loop.play({ volume: vol }); }
+        else { this._sounds.tick.play({ loop: true, volume: vol }); }
     };
 
     proto._stopTickerSound = function() {
-        this._sounds.tick.stop();
+        if (this._tickerLoop) { try { this._tickerLoop.stop(); } catch (e) {} }
+        if (this._sounds && this._sounds.tick) { this._sounds.tick.stop(); }
     };
 
     proto._playBreakSound = function(previewOnly = false) {
@@ -98,7 +121,38 @@ function install(proto) {
             this._sounds[key].play({ volume: Math.max(0, Math.min(1, (volPct || 100) / 100)), preview: true });
         }
     };
-    proto._previewTimerSound = function() { this._previewSound('tick',  this._opt_tickerSoundVolume); };
+    proto._previewTimerSound = function() {
+        if (!SoundModule.isPlayable || !SoundModule.isPlayable()) { return; }
+        this._stopTimerPreview();
+        this._tickerPreview = new SoundModule.SoundEffect(this._opt_tickerSoundPath);
+        this._tickerPreview.play({ loop: true, volume: this._tickerPreviewVolume() });
+        // Safety net: stop a forgotten preview (e.g. settings closed without Stop).
+        this._tickerPreviewTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 45000, () => {
+            this._tickerPreviewTimeout = 0;
+            this._stopTimerPreview();
+            return false;
+        });
+    };
+    proto._tickerPreviewVolume = function() {
+        return Math.max(0, Math.min(1, (this._opt_tickerSoundVolume || 0) / 100));
+    };
+    proto._stopTimerPreview = function() {
+        if (this._tickerPreviewTimeout) { try { GLib.source_remove(this._tickerPreviewTimeout); } catch (e) {} this._tickerPreviewTimeout = 0; }
+        if (this._tickerVolTimeout) { try { GLib.source_remove(this._tickerVolTimeout); } catch (e) {} this._tickerVolTimeout = 0; }
+        if (this._tickerPreview) { try { this._tickerPreview.stop(); } catch (e) {} this._tickerPreview = null; }
+    };
+    // Live volume for the looping ticker preview. SoundEffect restarts on a new
+    // volume, so debounce to avoid stutter while dragging the slider.
+    proto._tickerPreviewLiveVolume = function() {
+        if (!this._tickerPreview) { return false; }
+        if (this._tickerVolTimeout) { try { GLib.source_remove(this._tickerVolTimeout); } catch (e) {} }
+        this._tickerVolTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 220, () => {
+            this._tickerVolTimeout = 0;
+            if (this._tickerPreview) { this._tickerPreview.play({ loop: true, volume: this._tickerPreviewVolume() }); }
+            return false;
+        });
+        return true;
+    };
     proto._previewBreakSound = function() { this._previewSound('break', this._opt_breakSoundVolume); };
     proto._previewWarnSound  = function() { this._previewSound('warn',  this._opt_warnSoundVolume); };
     proto._previewStartSound = function() { this._previewSound('start', this._opt_startSoundVolume); };
@@ -127,5 +181,6 @@ function install(proto) {
             }
         }
         this._stopAmbientSound();
+        if (this._tickerLoop) { try { this._tickerLoop.stop(); } catch (e) {} }
     };
 }

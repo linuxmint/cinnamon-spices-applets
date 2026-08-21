@@ -95,6 +95,7 @@ function _buildPlayerArgv(player, soundPath, volume) {
 }
 
 function addPathIfRelative(soundPath, basePath) {
+    soundPath = soundPath || "";
     if (soundPath.startsWith('file://')) {
         soundPath = soundPath.substring(7);
     }
@@ -111,6 +112,24 @@ function isPlayable() {
     return _getGst() !== null || _getGSoundContext() !== null || _getPlayer() !== null;
 }
 
+// Whether soundPath is an existing regular file. Uses Gio.File.query_info
+// (attempt-and-handle-error) instead of a synchronous stat, which the Spices
+// best-practices scanner flags as blocking on slow/network filesystems.
+// Returns true only for an existing regular file (symlinks followed), and
+// false on an empty path or any error (including not-found).
+function _isRegularFile(soundPath) {
+    if (!soundPath) {
+        return false;
+    }
+    try {
+        let info = Gio.File.new_for_path(soundPath).query_info(
+            'standard::type', Gio.FileQueryInfoFlags.NONE, null);
+        return info.get_file_type() === Gio.FileType.REGULAR;
+    } catch (e) {
+        return false;
+    }
+}
+
 var SoundEffect = class SoundEffect {
     constructor(soundPath) {
         this._soundPath = "";
@@ -125,7 +144,7 @@ var SoundEffect = class SoundEffect {
 
     setSoundPath(soundPath) {
         soundPath = soundPath || "";
-        let exists = soundPath !== "" && GLib.file_test(soundPath, GLib.FileTest.EXISTS);
+        let exists = _isRegularFile(soundPath);
         if (soundPath !== "" && !exists) {
             global.logError(`Zen Pomodoro: sound file not found: ${soundPath}`);
         }
@@ -182,10 +201,6 @@ var SoundEffect = class SoundEffect {
             });
         }
         return started;
-    }
-
-    playOnce() {
-        return this.play();
     }
 
     _playGSound(ctx, myGen) {
@@ -291,14 +306,12 @@ var AmbientLoop = class AmbientLoop {
         this._loopArmed = false;
         this._dur = -1;
         this._fallback = null;   // SoundEffect, used only without GStreamer
-        this._previewHoldId = 0;
-        this._fadeId = 0;
         this.setSoundPath(soundPath);
     }
 
     setSoundPath(soundPath) {
         soundPath = soundPath || "";
-        let exists = soundPath !== "" && GLib.file_test(soundPath, GLib.FileTest.EXISTS);
+        let exists = _isRegularFile(soundPath);
         if (soundPath !== "" && !exists) {
             global.logError(`Zen Pomodoro: sound file not found: ${soundPath}`);
         }
@@ -363,6 +376,14 @@ var AmbientLoop = class AmbientLoop {
                     let res = pb.query_duration(G.Format.TIME);
                     this._dur = (res && res.length > 1 && res[0]) ? res[1] : -1;
                 } catch (e) { this._dur = -1; }
+                if (this._dur <= 0) {
+                    // Unknown duration: the gapless segment loop would seek to a
+                    // stop position of -1 and thrash. Fall back to the one-shot looper.
+                    this._stopPlaybin();
+                    if (!this._fallback) { this._fallback = new SoundEffect(this._soundPath); }
+                    this._fallback.play({ loop: true, volume: volume });
+                    return;
+                }
                 try {
                     pb.seek(1.0, G.Format.TIME, G.SeekFlags.FLUSH | G.SeekFlags.SEGMENT,
                             G.SeekType.SET, 0, G.SeekType.SET, this._dur);
@@ -370,7 +391,7 @@ var AmbientLoop = class AmbientLoop {
                 try { pb.set_state(G.State.PLAYING); } catch (e) {}
             });
             let hSeg = bus.connect('message::segment-done', () => {
-                if (this._playbin !== pb) { return; }
+                if (this._playbin !== pb || this._dur <= 0) { return; }
                 try {
                     pb.seek(1.0, G.Format.TIME, G.SeekFlags.SEGMENT,
                             G.SeekType.SET, 0, G.SeekType.SET, this._dur);
@@ -412,56 +433,7 @@ var AmbientLoop = class AmbientLoop {
     }
 
     stop() {
-        this._cancelPreviewTimers();
         this._stopPlaybin();
         if (this._fallback) { this._fallback.stop(); }
-    }
-
-    // Play for ~durationMs, then fade out over fadeMs and stop — a smooth
-    // settings preview instead of a hard 2 s cut. Looping fills the window even
-    // for short clips, and the fade avoids ending on an abrupt cut.
-    previewFor(volume, durationMs, fadeMs) {
-        volume = Math.max(0, Math.min(1, (typeof volume === "number") ? volume : 1));
-        durationMs = (typeof durationMs === "number" && durationMs > 0) ? durationMs : 6000;
-        fadeMs = Math.min((typeof fadeMs === "number" && fadeMs > 0) ? fadeMs : 600, durationMs);
-        if (!this.play({ volume: volume })) { return false; }
-        this._cancelPreviewTimers();
-        if (this._playbin) {
-            let holdMs = Math.max(0, durationMs - fadeMs);
-            this._previewHoldId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, holdMs, () => {
-                this._previewHoldId = 0;
-                this._beginFadeOut(volume, fadeMs);
-                return GLib.SOURCE_REMOVE;
-            });
-        } else {
-            // Fallback player can't fade; just stop after the duration.
-            this._previewHoldId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, durationMs, () => {
-                this._previewHoldId = 0;
-                this.stop();
-                return GLib.SOURCE_REMOVE;
-            });
-        }
-        return true;
-    }
-
-    _beginFadeOut(fromVol, fadeMs) {
-        let steps = 10;
-        let stepMs = Math.max(20, Math.round(fadeMs / steps));
-        let i = 0;
-        this._fadeId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, stepMs, () => {
-            i++;
-            if (!this._playbin || i >= steps) {
-                this._fadeId = 0;
-                this.stop();
-                return GLib.SOURCE_REMOVE;
-            }
-            try { this._playbin.set_property('volume', Math.max(0, fromVol * (1 - i / steps))); } catch (e) {}
-            return GLib.SOURCE_CONTINUE;
-        });
-    }
-
-    _cancelPreviewTimers() {
-        if (this._previewHoldId) { try { GLib.source_remove(this._previewHoldId); } catch (e) {} this._previewHoldId = 0; }
-        if (this._fadeId) { try { GLib.source_remove(this._fadeId); } catch (e) {} this._fadeId = 0; }
     }
 };
