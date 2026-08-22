@@ -1,0 +1,291 @@
+# Catalan translations for PACKAGE package.
+# Copyright (C) 2014 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# carlos <c.carrizosa@gmx.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-25 20:30+1000\n"
+"PO-Revision-Date: 2024-07-13 03:43+0200\n"
+"Last-Translator: carlos <c.carrizosa@gmx.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:278
+msgid "Short break running"
+msgstr "Descans curt en marxa"
+
+#: applet.js:281
+msgid "Long break running"
+msgstr "Descans llarg en marxa"
+
+#: applet.js:284
+#, javascript-format
+msgid "Pomodori %d, set %d running"
+msgstr "Repetició %d, cicle %d en marxa"
+
+#: applet.js:289
+msgid "Waiting to start"
+msgstr "Esperant per començar"
+
+# notifications
+#: applet.js:342
+msgid "Pomodoro started"
+msgstr "Inici del pomodoro"
+
+#: applet.js:407
+msgid "Let's go to work!"
+msgstr "A treballar!"
+
+#: applet.js:425
+msgid "Take a short break"
+msgstr "Pren un descans curt"
+
+#: applet.js:448
+msgid "Take a long break"
+msgstr "Pren un descans llarg"
+
+#: applet.js:484
+msgid "Pomodoro ended"
+msgstr "Fi del pomodoro"
+
+#: applet.js:607
+msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
+msgstr "http://en.wikipedia.org/wiki/Pomodoro_Technique"
+
+# applet menu
+#. metadata.json->name
+#: applet.js:753
+msgid "Pomodoro Timer"
+msgstr "Cronòmetre Pomodoro"
+
+#: applet.js:762
+msgid "Completed"
+msgstr "Completats"
+
+#: applet.js:770
+msgid "Reset Timer"
+msgstr "Reiniciar cronometre"
+
+#: applet.js:778
+msgid "Reset Counts and Timer"
+msgstr "Reiniciar comptador i cronòmetre"
+
+#: applet.js:787
+msgid "Skip To Next Timer"
+msgstr "Saltar al següent temporitzador"
+
+#: applet.js:794
+msgid "What is this?"
+msgstr "Què és això?"
+
+#: applet.js:834
+msgid "None"
+msgstr "Cap"
+
+# dialog
+#: applet.js:851
+msgid "Switch Off Pomodoro"
+msgstr "Tancar Pomodoro"
+
+#: applet.js:857
+msgid "Start a new Pomodoro"
+msgstr "Començar un nou Pomodoro"
+
+#: applet.js:863
+msgid "Hide"
+msgstr "Amaga"
+
+#: applet.js:875
+msgid "Pomodoro set finished, you deserve a break!"
+msgstr "Pomodoro finalitzat, et mereixes un descans!"
+
+#: applet.js:884
+msgid "Your break is over, start another pomodoro!"
+msgstr "El descans s'acaba, comença un altre pomodoro!"
+
+#: applet.js:890
+#, javascript-format
+msgid "A new pomodoro begins in %s."
+msgstr "Un nou pomodoro comença en %s."
+
+#: applet.js:902
+#, javascript-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minut"
+msgstr[1] "%d minuts"
+
+#: applet.js:903
+#, javascript-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d segon"
+msgstr[1] "%d segons"
+
+#: applet.js:905
+#, javascript-format
+msgid "%s and %s"
+msgstr "%s i %s"
+
+#: applet.js:920
+msgid "Continue Current Pomodoro"
+msgstr "Continuar el pomodoro actual"
+
+#: applet.js:926 applet.js:959
+msgid "Pause Pomodoro"
+msgstr "Pausar el pomodoro"
+
+#: applet.js:937
+msgid "Short break finished, ready to continue?"
+msgstr "S'ha acabat el descans curt. A punt per continuar?"
+
+#: applet.js:953
+msgid "Start break"
+msgstr "Començar un descans"
+
+#: applet.js:970
+msgid "Pomodoro finished, ready to take a break?"
+msgstr "Pomodoro finalitzat, a punt per descansar?"
+
+#. metadata.json->description
+msgid "Great tool for boosted productivity!"
+msgstr "Bona eina per augmentar la productivitat!"
+
+#. settings-schema.json->head_durations->description
+msgid "Durations (minutes)"
+msgstr "Duracions (minuts)"
+
+#. settings-schema.json->pomodoro_duration->description
+msgid "Pomodoro Duration:"
+msgstr "Duració del pomodoro:"
+
+#. settings-schema.json->short_break_duration->description
+msgid "Short Break Duration:"
+msgstr "Duració del descans curt:"
+
+#. settings-schema.json->long_break_duration->description
+msgid "Long Break Duration:"
+msgstr "Duració del descans llarg:"
+
+#. settings-schema.json->pomodori_number->description
+msgid "Number of pomodori before long break:"
+msgstr "Número de pomodoros abans del descans llarg:"
+
+#. settings-schema.json->head_options->description
+msgid "Options"
+msgstr "Opcions"
+
+#. settings-schema.json->start_automatically_on_load->description
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "Iniciar el temporitzador del pomodoro en carregar la miniaplicació"
+
+#. settings-schema.json->show_dialog_messages->description
+msgid "Show Dialog Messages"
+msgstr "Mostrar finestra de diàleg"
+
+#. settings-schema.json->auto_start_after_pomodoro_ends->description
+msgid "Auto start after a pomodoro ends"
+msgstr "Comença un nou pomodoro automàticament quan n'acabi un altre"
+
+#. settings-schema.json->auto_start_after_short_break_ends->description
+msgid "Auto start after a short break ends"
+msgstr "Comença un nou pomodoro després que finalitzi un descans curt"
+
+#. settings-schema.json->auto_start_after_break_ends->description
+msgid "Auto start a new pomodoro after a break ends"
+msgstr "Comença un nou pomodoro després que finalitzi un descans"
+
+#. settings-schema.json->display_icon->description
+msgid "Display the pomodoro icon in the applet panel"
+msgstr "Mostra la icona pomodoro al tauler de la miniaplicació"
+
+#. settings-schema.json->use_symbolic_icon->description
+msgid "Use a symbolic icon in the applet panel"
+msgstr "Utilitza una icona simbòlica al tauler de la miniaplicació"
+
+#. settings-schema.json->show_timer->description
+msgid "Show the pomodoro timer in the applet panel"
+msgstr "Mostra el temps del pomodoro al tauler de la miniaplicació"
+
+#. settings-schema.json->hotkey->description
+msgid "Set the keybinding to open the applet menu"
+msgstr ""
+"Assigna la drecera del teclat per a obrir el menú de la miniaplicació"
+
+#. settings-schema.json->head_sounds->description
+msgid "Sounds"
+msgstr "Sons"
+
+#. settings-schema.json->sox-info->description
+msgid "Please install 'sox' and restart Cinnamon to use the sound feature!"
+msgstr ""
+"Si us plau, instal·la 'sox' i reinicia Cinnamon per a usar la "
+"funcionalitat de so!"
+
+#. settings-schema.json->timer_sound->description
+msgid "Play Timer Sound"
+msgstr "Reprodueix so pel cronòmetre"
+
+#. settings-schema.json->timer_sound_file->description
+msgid "Timer Sound File"
+msgstr "Fitxer d'àudio pel cronòmetre"
+
+#. settings-schema.json->timer_sound_volume->description
+#. settings-schema.json->break_sound_volume->description
+#. settings-schema.json->warn_sound_volume->description
+#. settings-schema.json->start_sound_volume->description
+msgid "Sound volume:"
+msgstr "Volum del so:"
+
+#. settings-schema.json->break_sound->description
+msgid "Play Break Sound"
+msgstr "Reprodueix so de descans"
+
+#. settings-schema.json->break_sound_file->description
+msgid "Break Sound File"
+msgstr "Fitxer d'àudio pel descans"
+
+#. settings-schema.json->warn_sound->description
+msgid "Play Warn Sound"
+msgstr "Reprodueix so d'avís"
+
+#. settings-schema.json->warn_sound_delay->description
+msgid "Warn Delay (in secs):"
+msgstr "Endarreriment de l'avís (en segons):"
+
+#. settings-schema.json->warn_sound_file->description
+msgid "Warn Sound File"
+msgstr "Fitxer d'àudio per l'avís"
+
+#. settings-schema.json->start_sound->description
+msgid "Play Start Sound"
+msgstr "Reprodueix so d'inici"
+
+#. settings-schema.json->start_sound_file->description
+msgid "Start Sound File"
+msgstr "Fitxer d'àudio per l'avís d'inici"
+
+#. settings-schema.json->head_scripts->description
+msgid "Scripts"
+msgstr "Scripts"
+
+#. settings-schema.json->enable_scripts->description
+msgid "Enable scripts"
+msgstr "Activar scripts"
+
+#. settings-schema.json->custom_short_break_script->description
+msgid "Execute this custom script when a short break starts"
+msgstr "Executa aquest script personalitzat quan comenci un descans curt"
+
+#. settings-schema.json->custom_long_break_script->description
+msgid "Execute this custom script when a long break starts"
+msgstr "Executa aquest script personalitzat quan comenci un descans llarg"

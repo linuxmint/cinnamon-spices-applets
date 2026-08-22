@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-30 02:22-0400\n"
+"PO-Revision-Date: 2024-07-17 01:08+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:61
+msgid "Configure KDE Connect"
+msgstr "Configurar KDE Connect"
+
+#. applet.js:112 applet.js:114
+msgid "No reachable paired devices"
+msgstr "No s'ha pogut accedir a dispositius emparellats"
+
+#. applet.js:123
+msgid "Id:  "
+msgstr "Id:  "
+
+#. applet.js:124
+msgid "    Send Ping to"
+msgstr "    Enviar ping a"
+
+#. applet.js:125
+msgid "    Force to Ring"
+msgstr "    Fer que soni"
+
+#. applet.js:126
+msgid "    Send File to..."
+msgstr "    Enviar fitxer a..."
+
+#. applet.js:131
+msgid "    Send SMS via..."
+msgstr "    Enviar SMS via..."
+
+#. applet.js:134
+msgid "Enter the phone number of your SMS's addressee:"
+msgstr "Introduïu el número de telèfon receptor del vostre SMS:"
+
+#. applet.js:137
+msgid "Enter the text of your SMS:"
+msgstr "Introduïu el text de l'SMS:"
+
+#. applet.js:138
+msgid "...message body..."
+msgstr "...cos del missatge..."
+
+#. applet.js:140
+msgid "Press <"
+msgstr "Polseu <"
+
+#. applet.js:140 applet.js:150
+msgid "Yes"
+msgstr "Si"
+
+#. applet.js:140
+msgid "> if you are ready to send your SMS, or <"
+msgstr "> si esteu preparats per enviar l'SMS, o <"
+
+#. applet.js:140 applet.js:144
+msgid "Cancel"
+msgstr "Cancel·lar"
+
+#. applet.js:140
+msgid "> to avoid sending."
+msgstr "> per a evitar l'enviament."
+
+#. applet.js:159
+msgid "    Mount and Explore"
+msgstr "    Muntar i explorar"
+
+#. applet.js:183
+msgid "    Unmount"
+msgstr "    Desmuntar"
+
+#. applet.js:203
+msgid "Reachable paired devices: "
+msgstr "Dispositius emparellats adreçables: "
+
+#. metadata.json->name
+msgid "KDE Connect Control Center"
+msgstr "Centre de Control de KDE Connect"
+
+#. metadata.json->description
+msgid "Applet to provide access to some KDE Connect functionality"
+msgstr ""
+"Miniaplicació que facilita l'accés a algunes de les funcions de KDE Connect"

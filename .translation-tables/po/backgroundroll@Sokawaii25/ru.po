@@ -1,0 +1,40 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-12-07 22:29+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: blogdron\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+#. metadata.json->name
+msgid "Background Roll"
+msgstr "Случайные Обои Рабочего Стола (Background Roll)"
+
+#. metadata.json->description
+msgid ""
+"Changes the background randomly using the images in ~/Images/backgrounds\n"
+"Middle-click lets you roll back to previous background"
+msgstr ""
+"Меняйте ваши обои рабочего стола в случайном порядке используя изображения "
+"из каталога ~/Images/backgrounds\n"
+"Щелчок средней кнопкой мыши возвращает предыдущий вариант фона"
+
+#. settings-schema.json->Settings->description
+msgid "Notifications"
+msgstr "Уведомления"
+
+#. settings-schema.json->Notifications->description
+msgid "Send a notification when the background is changed"
+msgstr "Показывать уведомление при смене фона рабочего стола"
+
+#. settings-schema.json->Notifications->tooltip
+msgid "Activate to see a notification when the background rolls"
+msgstr "Включите, если хотите видеть уведомление о смене фона рабочего стола"

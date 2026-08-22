@@ -1,0 +1,133 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2017-04-27 12:49+0800\n"
+"PO-Revision-Date: 2025-06-13 23:39+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:58
+msgid "GPU: ??ᴼC"
+msgstr "GPU: ??ᴼC"
+
+#: applet.js:70
+msgid "Current Temperature of your NVidia based GPU"
+msgstr "NVIDIA GPU 目前溫度"
+
+#: applet.js:75
+msgid "Current Temperature of your ATI based GPU"
+msgstr "ATI GPU 目前溫度"
+
+#: applet.js:80
+msgid "No supported GPUs detected."
+msgstr "未偵測到支援的 GPU。"
+
+#: applet.js:133 applet.js:348
+msgid "Temperature"
+msgstr "溫度"
+
+#: applet.js:152 applet.js:441
+msgid "GPU:"
+msgstr "GPU:"
+
+#: applet.js:352
+msgid "Driver"
+msgstr "驅動程式"
+
+#: applet.js:360
+msgid "Video Memory"
+msgstr "圖形記憶體"
+
+#: applet.js:363
+msgid "Total"
+msgstr "總計"
+
+#: applet.js:367
+msgid "Used"
+msgstr "已使用"
+
+#: applet.js:371
+msgid "Interface"
+msgstr "介面"
+
+#: applet.js:375
+msgid "Memory Clock"
+msgstr "記憶體時脈"
+
+#: applet.js:380
+msgid "Cuda Cores"
+msgstr "CUDA 核心"
+
+#: applet.js:384
+msgid "Gpu Clock"
+msgstr "GPU 時脈"
+
+#: applet.js:388
+msgid "PCI Speed"
+msgstr "PCI 速度"
+
+#: applet.js:403
+msgid "Fan "
+msgstr "風扇 "
+
+#: applet.js:411
+msgid "Displays:"
+msgstr "顯示器："
+
+#: applet.js:740
+msgid "No GPU Name"
+msgstr "沒有 GPU 名稱"
+
+#: applet.js:805
+msgid "No Display Name"
+msgstr "沒有顯示器名稱"
+
+#: applet.js:844
+msgid " GPU: ??ᴼC ERROR"
+msgstr " GPU: ??ᴼC 錯誤"
+
+#: applet.js:846
+msgid "We couldn't determine your GPU's temperature."
+msgstr "無法偵測 GPU 的溫度。"
+
+#: applet.js:848
+msgid "If you have a NVIDIA GPU, please try installing"
+msgstr "若您使用 NVIDIA GPU，請安裝"
+
+#: applet.js:849
+msgid "the binary drivers from http://geforce.com/drivers"
+msgstr "來自 http://geforce.com/drivers 的驅動程式"
+
+#: applet.js:850
+msgid "and the nvidia-settings package for your distribution."
+msgstr "以及適用的 nvidia-settings 套件。"
+
+#: applet.js:852
+msgid "If you have an ATI GPU, please install the LM-SENSORS"
+msgstr "若您使用 ATI GPU，請安裝 LM-SENSORS"
+
+#: applet.js:853
+msgid "packages for your distribution."
+msgstr "套件。"
+
+#. gputemperature@silentage.com->metadata.json->name
+msgid "GPU Temperature"
+msgstr "GPU 溫度"
+
+#. gputemperature@silentage.com->metadata.json->description
+msgid ""
+"Shows NVidia/ATI GPU temperature in the panel, and detailed/multi-gpu "
+"information in a popup menu."
+msgstr ""
+"在面板顯示 NVIDIA/ATI GPU 溫度，並於彈出式選單中顯示詳細資訊或多 GPU 資訊。"

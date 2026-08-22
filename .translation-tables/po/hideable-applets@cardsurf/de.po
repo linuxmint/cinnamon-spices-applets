@@ -1,0 +1,266 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: hideable-applets@cardsurf 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-08 10:25+0100\n"
+"PO-Revision-Date: 2024-06-29 16:44+0200\n"
+"Last-Translator: erwn <elmar_wein@web.de>\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. metadata.json->description
+msgid "Hides applets to tray"
+msgstr ""
+"Ein Container in der Aufgabenleiste für ausgeblendete Applets (Mini-"
+"Anwendungen)."
+
+#. metadata.json->name
+msgid "Hideable applets"
+msgstr "Hideable applets"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#. settings-schema.json->action_type->description
+msgid "Action"
+msgstr "Aktion"
+
+#. settings-schema.json->action_type->options
+msgid "Open or close popup"
+msgstr "Container für ausgeblendete Applets (\"Applet-Popup\") aufklappen"
+
+#. settings-schema.json->action_type->options
+msgid "Toggle visibility applets"
+msgstr "Alle sichtbaren Applets in der Aufgabenleiste ein- und ausblenden"
+
+#. settings-schema.json->action_type->tooltip
+msgid "An action to perform on trigger"
+msgstr "Aktion bei Aktivierung des Auslösers (Triggers)"
+
+#. settings-schema.json->action_trigger_type->description
+msgid "Trigger"
+msgstr "Trigger (Auslöser)"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "Left mouse click"
+msgstr "Klick mit linker Maustaste"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "Mouse hover"
+msgstr "Berühren mit dem Mauszeiger"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "None"
+msgstr "Keiner"
+
+#. settings-schema.json->action_trigger_type->tooltip
+msgid "An event that triggers the action"
+msgstr "Ereignis, das als Auslöser / Trigger dient"
+
+#. settings-schema.json->side_type->description
+msgid "Applets location"
+msgstr "Ort des Applet-Containers"
+
+#. settings-schema.json->side_type->options
+msgid "Top"
+msgstr "oben"
+
+#. settings-schema.json->side_type->options
+msgid "Right"
+msgstr "rechts"
+
+#. settings-schema.json->side_type->options
+msgid "Bottom"
+msgstr "unten"
+
+#. settings-schema.json->side_type->options
+msgid "Left"
+msgstr "links"
+
+#. settings-schema.json->side_type->tooltip
+msgid "A location of applets for which to toggle visibility"
+msgstr ""
+"Ein Container / Bereich für Applets, die in der Aufgabenleiste "
+"ausgeblendet werden sollen"
+
+#. settings-schema.json->restore_hidden_string->description
+msgid "Restore as hidden"
+msgstr "Ausblendbare Applets"
+
+#. settings-schema.json->restore_hidden_string->tooltip
+msgid ""
+"A comma-separated list of applet UUIDs.\n"
+"An applet from this list will be hidden if the applet is configured as "
+"hidden and the applet shows up."
+msgstr ""
+"Eine Liste mit eindeutigen, universellen Applet-Identifikatoren, die durch "
+"Kommas zu trennen sind.\n"
+"Ein Applet aus dieser Liste kann ausgeblendet werden, sofern es die "
+"betreffende Eigenschaft aufweist und in der Aufgabenleiste angezeigt wird."
+
+#. settings-schema.json->save_every->units
+msgid "seconds"
+msgstr "Sekunden"
+
+#. settings-schema.json->save_every->description
+msgid "Save every"
+msgstr "Speichere alle ..."
+
+#. settings-schema.json->save_every->tooltip
+msgid "How often to save last used values"
+msgstr "Anzahl der Speicherungen der letzten verwendeten Werte"
+
+#. settings-schema.json->tray_start->description
+msgid "Popup"
+msgstr "Aufklappbarer Container für ausgeblendete Applets"
+
+#. settings-schema.json->applet_popup_columns->description
+msgid "Columns"
+msgstr "Spalten"
+
+#. settings-schema.json->applet_popup_columns->tooltip
+msgid "A number of columns in the applet popup"
+msgstr "Anzahl der Spalten in dem aufklappbaren Applet-Container"
+
+#. settings-schema.json->applet_popup_icons_size->units
+msgid "pixels"
+msgstr "Pixel"
+
+#. settings-schema.json->applet_popup_icons_size->description
+msgid "Icon size"
+msgstr "Symbolgröße"
+
+#. settings-schema.json->applet_popup_icons_size->tooltip
+msgid "A size of an icon in the applet popup"
+msgstr "Größe eines Symbols in dem aufklappbaren Applet-Container"
+
+#. settings-schema.json->applet_popup_icons_css->description
+msgid "Icon CSS"
+msgstr "Symbolstil definiert durch sog. \"Cascading Style Sheets\" (CSS)"
+
+#. settings-schema.json->applet_popup_icons_css->tooltip
+msgid "A CSS style applied to the icons in the applet popup"
+msgstr ""
+"Ein Stil (CSS: Cascading Style Sheet) für Symbole in dem Applet-Container"
+
+#. settings-schema.json->applet_popup_table_css->description
+msgid "Table CSS"
+msgstr "Tabellenstil definiert durch sog. \"Cascading Style Sheets\" (CSS)"
+
+#. settings-schema.json->applet_popup_table_css->tooltip
+msgid "A CSS style applied to a table in the applet popup"
+msgstr ""
+"Ein Stil (CSS: Cascading Style Sheet) für die Tabelle in dem Applet-"
+"Container"
+
+#. settings-schema.json->applet_popup_close_leave->description
+msgid "Auto close"
+msgstr "Automatisches Schließen"
+
+#. settings-schema.json->applet_popup_close_leave->tooltip
+msgid "Close the applet popup when a mouse leaves the user interface"
+msgstr "Den Applet-Container schließen, wenn der Mauszeiger diesen verlässt"
+
+#. settings-schema.json->match_panel_icons_size->description
+msgid "Match panel size"
+msgstr "An die Größe der Aufgabenleiste (Task-Leiste) anpassen"
+
+#. settings-schema.json->match_panel_icons_size->tooltip
+msgid "Match a size of an icon in the applet popup to a size of the panel"
+msgstr ""
+"Größe eines Applet-Symbols im Applet-Container an die Größe der "
+"Aufgabenleiste (Task-Leiste) anpassen. "
+
+#. settings-schema.json->show_icon_tooltips->description
+msgid "Show tooltips"
+msgstr "Zeige Applet-Namen als Kurzinfos (Tool-Tipps)"
+
+#. settings-schema.json->show_icon_tooltips->tooltip
+msgid "Show icon tooltips in the applet popup"
+msgstr "Zeige Kurzinfos zu den Symbolen (Tool-Tipps) im Applet-Container"
+
+#. settings-schema.json->show_grayscale_icons->description
+msgid "Show grayscale icons"
+msgstr "Zeige ausgeblendete Applets in Grautönen"
+
+#. settings-schema.json->show_grayscale_icons->tooltip
+msgid "Show icons of hidden applets in grayscale"
+msgstr "Zeige Symbole der ausgeblendeten Applets in Grautönen"
+
+#. settings-schema.json->grayscale_brightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->grayscale_brightness->description
+msgid "Grayscale brightness"
+msgstr "Helligkeit der Graustufen"
+
+#. settings-schema.json->grayscale_brightness->tooltip
+msgid "A brightness level of grayscale icons"
+msgstr "Helligkeitsstufe für Symbole in Grautönen"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Benutzeroberfläche"
+
+#. settings-schema.json->gui_sort_type->description
+msgid "Sort"
+msgstr "Sortierung"
+
+#. settings-schema.json->gui_sort_type->options
+msgid "Alphabetically"
+msgstr "Alphabetisch"
+
+#. settings-schema.json->gui_sort_type->options
+msgid "Panel position"
+msgstr "Leistenposition"
+
+#. settings-schema.json->gui_sort_type->tooltip
+msgid "An order of items in the user interface"
+msgstr "Anordnung der Symbole im aufklappbaren Applet-Container (Popup)"
+
+#. settings-schema.json->gui_icon_type->description
+msgid "Panel icon"
+msgstr "Anzeige von Hideable applets in der Aufgabenleiste (Task-Leiste)"
+
+#. settings-schema.json->gui_icon_type->options
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Filepath"
+msgstr "Dateipfad"
+
+#. settings-schema.json->gui_icon_type->options
+msgid "Symbolic"
+msgstr "Symbol"
+
+#. settings-schema.json->gui_icon_type->tooltip
+msgid "A type of an icon displayed on the panel"
+msgstr ""
+"Art des Eintrags, der in der Aufgabenleiste (Task-Leiste) angezeigt werden "
+"soll"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "A path to an icon displayed on a panel"
+msgstr ""
+"Pfad zum Speicherort eines Symbols, das zum Anzeigen von Hideable applets "
+"in der Aufgabenleiste (Task-Leiste) verwendet werden soll."
+
+#. settings-schema.json->gui_icon_symbolic_name->description
+msgid "Symbolic name"
+msgstr "Symbolname"
+
+#. settings-schema.json->gui_icon_symbolic_name->tooltip
+msgid "A name of a symbolic icon displayed on a panel"
+msgstr ""
+"Name des Symbols für die Anzeige von Hideable applets in der "
+"Aufgabenleiste (Task-Leiste)"

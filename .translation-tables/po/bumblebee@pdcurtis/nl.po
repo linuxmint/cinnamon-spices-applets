@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2024-04-20 16:39+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:152
+msgid "Bumblebee program not installed"
+msgstr "Bumblebee-programma niet geïnstalleerd"
+
+#. applet.js:152
+msgid ""
+"You appear to be missing some of the required programs for 'bumblebee' to "
+"switch graphics processors using NVIDIA Optimus."
+msgstr ""
+"Het lijkt erop dat u enkele van de vereiste programma's voor 'bumblebee' "
+"mist om van grafische processors te wisselen met behulp van NVIDIA Optimus."
+
+#. applet.js:152
+msgid "Please read the help file."
+msgstr "Lees alstublieft het helpbestand."
+
+#. applet.js:172
+msgid "Waiting for Bumblebee"
+msgstr "Wachten op Bumblebee"
+
+#. applet.js:232
+msgid "Open nVidia Settings Program"
+msgstr "Open nVidia-instellingenprogramma"
+
+#. applet.js:238
+msgid "Open Power Statistics"
+msgstr "Open energiestatistieken"
+
+#. applet.js:244
+msgid "Open System Monitor"
+msgstr "Open systeemmonitor"
+
+#. applet.js:253
+msgid "Housekeeping and System Sub Menu"
+msgstr "Onderhoud en systeemsubmenu"
+
+#. applet.js:256
+msgid "View the Changelog"
+msgstr "Bekijk het wijzigingslogboek"
+
+#. applet.js:262
+msgid "Open the Help file"
+msgstr "Open het helpbestand"
+
+#. applet.js:278
+msgid "Launch programs using the nVidia Graphics Processor"
+msgstr "Start programma's met behulp van de nVidia grafische processor"
+
+#. applet.js:359
+msgid "NVidia based GPU is Off"
+msgstr "NVidia-gebaseerde GPU is uitgeschakeld"
+
+#. applet.js:384
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "NVidia-gebaseerde GPU is ingeschakeld en de kern-temperatuur is"
+
+#. applet.js:392
+msgid "Err"
+msgstr "Fout"
+
+#. applet.js:393
+msgid ""
+"Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
+"drivers installed?"
+msgstr ""
+"Bumblebee is niet correct geconfigureerd - zijn bbswitch, bumblebee en "
+"nvidia-stuurprogramma's geïnstalleerd?"
+
+#. metadata.json->description
+msgid ""
+"Displays Status of Bumblebee and nVidia GPU Temperature with associated "
+"support functions including starting selected programs with optirun or "
+"primusrun"
+msgstr ""
+"Toont de status van Bumblebee en nVidia GPU-temperatuur met bijbehorende "
+"ondersteunende functies, inclusief het starten van geselecteerde programma's "
+"met optirun of primusrun"
+
+#. metadata.json->name
+msgid "Bumblebee Status with NVidia Temperature Display"
+msgstr "Bumblebee-status met nVidia-temperatuur weergave"
+
+#. settings-schema.json->head->description
+msgid "General Settings for the nVidia Monitoring Applet"
+msgstr "Algemene instellingen voor de nVidia-monitoring-applet"
+
+#. settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "seconden"
+
+#. settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Vernieuwingsinterval voor weergave:"
+
+#. settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"Verhoog of verlaag de waarde van deze spinner om het vernieuwingsinterval te "
+"wijzigen - gebruik een langzame vernieuwing als u een langzame machine hebt"
+
+#. settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "Toon GPU-temperatuur evenals het pictogram"
+
+#. settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr ""
+"Beschikbaar in horizontale en verticale panelen. Weergave is in graden "
+"Celsius."
+
+#. settings-schema.json->head2->description
+msgid "Programs settings for Optimus"
+msgstr "Programma-instellingen voor Optimus"
+
+#. settings-schema.json->description1->description
+msgid "Display Name of Program 1 to be run using Optimus technology"
+msgstr "Weergavenaam van Programma 1 om uit te voeren met Optimus-technologie"
+
+#. settings-schema.json->description1->tooltip
+msgid ""
+"Put the name of the program here or null if you do not want it displayed"
+msgstr ""
+"Plaats hier de naam van het programma of null als u niet wilt dat het wordt "
+"weergegeven"
+
+#. settings-schema.json->commandString1->description
+msgid "Command String for Program 1"
+msgstr "Commandotekenreeks voor Programma 1"
+
+#. settings-schema.json->commandString1->tooltip
+#. settings-schema.json->commandString2->tooltip
+#. settings-schema.json->commandString3->tooltip
+#. settings-schema.json->commandString4->tooltip
+#. settings-schema.json->commandString5->tooltip
+msgid ""
+"Put the command string to run the program here starting with optirun or "
+"primusrun"
+msgstr ""
+"Plaats hier de commandotekenreeks om het programma uit te voeren, beginnend "
+"met optirun of primusrun"
+
+#. settings-schema.json->description2->description
+msgid "Display Name of Program 2 to be run using Optimus technology"
+msgstr "Weergavenaam van Programma 2 om uit te voeren met Optimus-technologie"
+
+#. settings-schema.json->description2->tooltip
+#. settings-schema.json->description3->tooltip
+#. settings-schema.json->description4->tooltip
+#. settings-schema.json->description5->tooltip
+msgid ""
+"Put the name of the program here or none if you do not want it displayed"
+msgstr ""
+"Plaats hier de naam van het programma, of niets als u niet wilt dat het "
+"wordt weergegeven"
+
+#. settings-schema.json->commandString2->description
+msgid "Command String for Program 2"
+msgstr "Commandotekenreeks voor Programma 2"
+
+#. settings-schema.json->description3->description
+msgid "Display Name of Program 3 to be run using Optimus technology"
+msgstr "Weergavenaam van Programma 3 om uit te voeren met Optimus-technologie"
+
+#. settings-schema.json->commandString3->description
+msgid "Command String for Program 3"
+msgstr "Commandotekenreeks voor Programma 3"
+
+#. settings-schema.json->description4->description
+msgid "Display Name of Program 4 to be run using Optimus technology"
+msgstr "Weergavenaam van Programma 4 om uit te voeren met Optimus-technologie"
+
+#. settings-schema.json->commandString4->description
+msgid "Command String for Program 4"
+msgstr "Commandotekenreeks voor Programma 4"
+
+#. settings-schema.json->description5->description
+msgid "Display Name of Program 5 to be run using Optimus technology"
+msgstr "Weergavenaam van Programma 5 om uit te voeren met Optimus-technologie"
+
+#. settings-schema.json->commandString5->description
+msgid "Command String for Program 5"
+msgstr "Commandotekenreeks voor Programma 5"

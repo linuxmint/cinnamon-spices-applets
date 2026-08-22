@@ -1,0 +1,458 @@
+# DISK READ AND WRITE SPEED
+# This file is put in the public domain.
+# cardsurf, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: disk-read-and-write-speed@cardsurf 1.1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-28 14:32+0200\n"
+"PO-Revision-Date: 2024-10-02 17:07+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:981
+msgid " TiB"
+msgstr " TiB"
+
+#. applet.js:984
+msgid " GiB"
+msgstr " GiB"
+
+#. applet.js:987
+msgid " MiB"
+msgstr " MiB"
+
+#. applet.js:990
+msgid " kiB"
+msgstr " kiB"
+
+#. applet.js:992
+msgid "   B"
+msgstr "   B"
+
+#. applet.js:995
+msgid " TB"
+msgstr " TB"
+
+#. applet.js:998
+msgid " GB"
+msgstr " GB"
+
+#. applet.js:1001
+msgid " MB"
+msgstr " MB"
+
+#. applet.js:1004
+msgid " kB"
+msgstr " kB"
+
+#. applet.js:1006
+msgid "  B"
+msgstr "  B"
+
+#. applet.js:1016
+msgid " Tib"
+msgstr " Tib"
+
+#. applet.js:1019
+msgid " Gib"
+msgstr " Gib"
+
+#. applet.js:1022
+msgid " Mib"
+msgstr " Mib"
+
+#. applet.js:1025
+msgid " kib"
+msgstr " kib"
+
+#. applet.js:1027
+msgid "   b"
+msgstr "   b"
+
+#. applet.js:1030
+msgid " Tb"
+msgstr " Tb"
+
+#. applet.js:1033
+msgid " Gb"
+msgstr " Gb"
+
+#. applet.js:1036
+msgid " Mb"
+msgstr " Mb"
+
+#. applet.js:1039
+msgid " kb"
+msgstr " kb"
+
+#. applet.js:1041
+msgid "  b"
+msgstr "  b"
+
+#. metadata.json->description
+msgid "Shows usage of a disk"
+msgstr "Lemezhasználatot mutat"
+
+#. metadata.json->name
+msgid "Disk read and write speed"
+msgstr "Lemez olvasási és írási sebessége"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Konfiguráció"
+
+#. settings-schema.json->display_mode->description
+msgid "Show"
+msgstr "Megjelenítés"
+
+#. settings-schema.json->display_mode->options
+msgid "Average speed per second"
+msgstr "Átlagsebesség másodpercenként"
+
+#. settings-schema.json->display_mode->options
+msgid "Amount of data transferred"
+msgstr "Az átvitt adatok mennyisége"
+
+#. settings-schema.json->display_mode->tooltip
+msgid "Values shown in the panel"
+msgstr "A panelen látható értékek"
+
+#. settings-schema.json->unit_type->description
+msgid "Unit"
+msgstr "Egység"
+
+#. settings-schema.json->unit_type->options
+msgid "Bytes"
+msgstr "Bájt"
+
+#. settings-schema.json->unit_type->options
+msgid "Bits"
+msgstr "Bit"
+
+#. settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr "A panelen látható alapadategység"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr "Decimális vagy bináris"
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr "Tizedes"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr "Bináris"
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+"Tizedes: k, M, G, T\n"
+"Bináris: ki, Mi, Gi, Ti"
+
+#. settings-schema.json->update_every->units
+msgid "seconds"
+msgstr "másodperc"
+
+#. settings-schema.json->update_every->description
+msgid "Calculate every"
+msgstr "Számítsa ki az összes"
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to calculate disk read and write speed"
+msgstr "Milyen gyakran kell kiszámítani a lemez olvasási és írási sebességét"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Felhasználói felület"
+
+#. settings-schema.json->gui_speed_type->description
+msgid "Type"
+msgstr "Típus"
+
+#. settings-schema.json->gui_speed_type->options
+msgid "Compact"
+msgstr "Kompakt"
+
+#. settings-schema.json->gui_speed_type->options
+msgid "Large"
+msgstr "Nagy"
+
+#. settings-schema.json->gui_speed_type->tooltip
+msgid "Applet Gui"
+msgstr "Kisalkalmazás felhasználói felület"
+
+#. settings-schema.json->gui_decimal_places->description
+#. settings-schema.json->hover_popup_decimal_places->description
+msgid "Decimal places"
+msgstr "Tizedes jel"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "Auto"
+msgstr "Auto"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "0 "
+msgstr "0 "
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "1 "
+msgstr "1 "
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "2 "
+msgstr "2 "
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "3 "
+msgstr "3 "
+
+#. settings-schema.json->gui_decimal_places->tooltip
+msgid "Decimal places of disk read and write speed shown in the panel"
+msgstr ""
+"A lemez olvasási és írási sebességének tizedesjegyei a panelen láthatók"
+
+#. settings-schema.json->gui_text_css->description
+msgid "Text CSS"
+msgstr "CSS szöveg"
+
+#. settings-schema.json->gui_text_css->tooltip
+msgid "A CSS style applied to the text in the panel"
+msgstr "A panel szövegére alkalmazott CSS-stílus"
+
+#. settings-schema.json->gui_read_icon_filename->description
+msgid "Read icon"
+msgstr "Olvasás ikon"
+
+#. settings-schema.json->gui_read_icon_filename->tooltip
+msgid "An icon displayed next to disk read speed in the panel"
+msgstr "Egy ikon jelenik meg a lemez olvasási sebessége mellett a panelen"
+
+#. settings-schema.json->gui_written_icon_filename->description
+msgid "Write icon"
+msgstr "Írás ikon"
+
+#. settings-schema.json->gui_written_icon_filename->tooltip
+msgid "An icon displayed next to disk write speed in the panel"
+msgstr "Egy ikon jelenik meg a lemez írási sebessége mellett a panelen"
+
+#. settings-schema.json->hover_popup_headers_css->description
+msgid "Popup headers CSS"
+msgstr "Felugró fejlécek CSS"
+
+#. settings-schema.json->hover_popup_headers_css->tooltip
+msgid "A CSS style applied to headers in the hover popup"
+msgstr "A fejlécekre alkalmazott CSS-stílus a lebegtető előugró ablakban"
+
+#. settings-schema.json->hover_popup_rows_css->description
+msgid "Popup rows CSS"
+msgstr "Felugró sorok CSS"
+
+#. settings-schema.json->hover_popup_rows_css->tooltip
+msgid "A CSS style applied to rows in the hover popup"
+msgstr "CSS-stílus alkalmazva a lebegtető előugró ablak soraira"
+
+#. settings-schema.json->total_data_start->description
+msgid "Total data"
+msgstr "Összes adat"
+
+#. settings-schema.json->show_hover->description
+msgid "Show total read and write on hover"
+msgstr "Az összes olvasás és írás megjelenítése az egérmutatóval"
+
+#. settings-schema.json->show_hover->tooltip
+msgid "Show the hover popup with total amount of data read and written"
+msgstr ""
+"Mutassa meg a lebegő előugró ablakot az olvasott és írt adatok teljes "
+"mennyiségével"
+
+#. settings-schema.json->show_total_bytes_read->description
+msgid "Show total bytes read"
+msgstr "Összes olvasott bájt megjelenítése"
+
+#. settings-schema.json->show_total_bytes_read->tooltip
+msgid "Show the column with the total amount of bytes read in the hover popup"
+msgstr ""
+"Mutassa meg az oszlopot a teljes olvasott bájtokkal a lebegtető előugró "
+"ablakban"
+
+#. settings-schema.json->show_total_bytes_written->description
+msgid "Show total bytes written"
+msgstr "Az összes írt bájt megjelenítése"
+
+#. settings-schema.json->show_total_bytes_written->tooltip
+msgid ""
+"Show the column with the total amount of bytes written in the hover popup"
+msgstr ""
+"Mutassa meg azt az oszlopot, amelyben a teljes bájtmennyiség szerepel a "
+"lebegtető előugró ablakban"
+
+#. settings-schema.json->total_bytes_read_column_name->description
+msgid "Total bytes read column name"
+msgstr "Összes bájt beolvasott oszlopnév"
+
+#. settings-schema.json->total_bytes_read_column_name->tooltip
+msgid ""
+"A name of the column with the total amount of bytes read in the hover popup"
+msgstr ""
+"Annak az oszlopnak a neve, amely a lebegtető előugró ablakban beolvasott "
+"bájtok teljes mennyiségét tartalmazza"
+
+#. settings-schema.json->total_bytes_written_column_name->description
+msgid "Total bytes written column name"
+msgstr "Összes bájt írt oszlopnév"
+
+#. settings-schema.json->total_bytes_written_column_name->tooltip
+msgid ""
+"A name of the column with the total amount of bytes written in the hover "
+"popup"
+msgstr ""
+"Az oszlop neve a bájtok teljes mennyiségével a lebegtető előugró ablakban"
+
+#. settings-schema.json->devices_regex_string->description
+msgid "Disks"
+msgstr "Lemezek"
+
+#. settings-schema.json->devices_regex_string->tooltip
+msgid "A regular expression that matches disk names to show in the hover popup"
+msgstr ""
+"Egy reguláris kifejezés, amely megfelel a lemezneveknek, és megjelenik a "
+"lebegtető előugró ablakban"
+
+#. settings-schema.json->device_aliases_string->description
+msgid "Aliases"
+msgstr "Álnevek"
+
+#. settings-schema.json->device_aliases_string->tooltip
+msgid ""
+"A comma separated list of \"disk:alias\" pairs that replace disk names in "
+"the hover popup"
+msgstr ""
+"A „disk:alias” párok vesszővel elválasztott listája, amelyek lecserélik a "
+"lemezneveket a felugró ablakban"
+
+#. settings-schema.json->column_names_string->description
+msgid "Headers"
+msgstr "Fejlécek"
+
+#. settings-schema.json->column_names_string->tooltip
+msgid "A comma separated list of column headers to show in the hover popup"
+msgstr ""
+"Az oszlopfejlécek vesszővel elválasztott listája, amely megjelenik a "
+"lebegtető előugró ablakban"
+
+#. settings-schema.json->column_indexes_string->description
+msgid "Columns"
+msgstr "Oszlopok"
+
+#. settings-schema.json->column_indexes_string->tooltip
+msgid "A comma separated list of column indexes to show in the hover popup"
+msgstr ""
+"Az oszlopindexek vesszővel elválasztott listája a lebegtetés előugró "
+"ablakában"
+
+#. settings-schema.json->column_spaces->description
+msgid "Spaces"
+msgstr "Helyek"
+
+#. settings-schema.json->column_spaces->tooltip
+msgid "A number of spaces between columns in the hover popup"
+msgstr "Számos szóköz az oszlopok között a lebegtető előugró ablakban"
+
+#. settings-schema.json->column_type_sort->description
+msgid "Column sort"
+msgstr "Oszloprendezés"
+
+#. settings-schema.json->column_type_sort->options
+msgid "Bytes read"
+msgstr "Olvasott bájtok"
+
+#. settings-schema.json->column_type_sort->options
+msgid "Bytes written"
+msgstr "Írott bájtok"
+
+#. settings-schema.json->column_type_sort->options
+msgid "Other"
+msgstr "Más"
+
+#. settings-schema.json->column_type_sort->tooltip
+msgid "A column used to sort rows in the hover popup"
+msgstr ""
+"Oszlop, amely a sorok rendezésére szolgál az egérmutató előugró ablakában"
+
+#. settings-schema.json->column_index_sort->description
+msgid "Sort column index"
+msgstr "Oszlopindex rendezése"
+
+#. settings-schema.json->column_index_sort->tooltip
+msgid "An index of a column that is used to sort rows in the hover popup"
+msgstr ""
+"Egy oszlop indexe, amely a sorok rendezésére szolgál a lebegtető előugró "
+"ablakban"
+
+#. settings-schema.json->column_sort_order->description
+msgid "Order"
+msgstr "Sorrend"
+
+#. settings-schema.json->column_sort_order->options
+msgid "Ascending"
+msgstr "Növekvő"
+
+#. settings-schema.json->column_sort_order->options
+msgid "Descending"
+msgstr "Csökkenő"
+
+#. settings-schema.json->column_sort_order->tooltip
+msgid "An order used to sort rows in the hover popup"
+msgstr "A sorok rendezésére szolgáló sorrend a lebegtető előugró ablakban"
+
+#. settings-schema.json->hover_popup_decimal_places->tooltip
+msgid ""
+"Decimal places of total amount of data read and written shown in the hover "
+"popup"
+msgstr ""
+"Az összes olvasott és írt adatmennyiség tizedesjegyei a lebegő előugró "
+"ablakban láthatók"
+
+#. settings-schema.json->processes_start->description
+msgid "Processes"
+msgstr "Folyamatok"
+
+#. settings-schema.json->launch_terminal->description
+msgid "List input and output information per process"
+msgstr "Sorolja fel folyamatonként a bemeneti és kimeneti információkat"
+
+#. settings-schema.json->launch_terminal->tooltip
+msgid ""
+"Open a terminal with a list of input and output informations per process on "
+"a left mouse click. The next click closes the terminal."
+msgstr ""
+"Nyisson meg egy terminált a folyamatonkénti bemeneti és kimeneti információk "
+"listájával egy bal egérgombbal. A következő kattintás bezárja a terminált."
+
+#. settings-schema.json->terminal_command->description
+msgid "Command"
+msgstr "Parancs"
+
+#. settings-schema.json->terminal_command->tooltip
+msgid "A command used to show input and output information per process"
+msgstr ""
+"A bemeneti és kimeneti információk folyamatonkénti megjelenítésére szolgáló "
+"parancs"

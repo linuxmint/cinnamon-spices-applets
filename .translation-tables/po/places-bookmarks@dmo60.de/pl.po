@@ -1,0 +1,62 @@
+# Polish translation for places-bookmarks@dmo60.de.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# xearonet, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2018-03-30 21:24+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+
+#. applet.js:202
+msgid "Computer"
+msgstr "Komputer"
+
+#. applet.js:215
+msgid "File System"
+msgstr "System plików"
+
+#. metadata.json->description
+msgid "Access your places and bookmarks"
+msgstr "Uzyskaj dostęp do swoich miejsc i zakładek"
+
+#. metadata.json->name
+msgid "Places"
+msgstr "Miejsca"
+
+#. settings-schema.json->head->description
+msgid "Settings for places-bookmarks@dmo60.de"
+msgstr "Ustawienia apletu places-bookmarks@dmo60.de"
+
+#. settings-schema.json->pref_applet_label->description
+msgid "Applet label"
+msgstr "Nazwa"
+
+#. settings-schema.json->pref_applet_label->tooltip
+#. settings-schema.json->pref_applet_icon->tooltip
+msgid "Leave blank to remove."
+msgstr "Pozostaw puste aby usunąć"
+
+#. settings-schema.json->pref_applet_icon->description
+msgid "Applet icon"
+msgstr "Ikona"
+
+#. settings-schema.json->pref_icon_size->units
+msgid "pixels"
+msgstr "piksele"
+
+#. settings-schema.json->pref_icon_size->description
+msgid "Menu items icon size"
+msgstr "Rozmiar ikon w menu"

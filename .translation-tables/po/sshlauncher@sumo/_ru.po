@@ -1,0 +1,10 @@
+# SSH LAUNCHER
+# This file is put in the public domain.
+# sumo, 2016
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->headFunc->description
+msgid "Functionality"
+msgstr ""

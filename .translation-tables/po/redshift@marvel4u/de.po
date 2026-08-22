@@ -1,0 +1,150 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-28 05:35-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. settings-schema.json->brightness->description
+#. applet.js:65 applet.js:235 applet.js:340
+msgid "Brightness"
+msgstr "Helligkeit"
+
+#. metadata.json->name
+#. applet.js:84 applet.js:341
+msgid "Redshift"
+msgstr "Rotverschiebung"
+
+#. applet.js:103
+msgid "Transition on night"
+msgstr "Übergang bei Nacht"
+
+#. applet.js:214
+msgid "Redshift day colour"
+msgstr "Rotverschiebung Farbe Tag"
+
+#. applet.js:219
+msgid "Redshift day brightness"
+msgstr "Rotverschiebung Helligkeit Tag"
+
+#. applet.js:224
+msgid "Redshift night colour"
+msgstr "Rotverschiebung Farbe Nacht"
+
+#. applet.js:229
+msgid "Redshift night brightness"
+msgstr "Rotverschiebung Helligkeit Nacht"
+
+#. applet.js:341
+msgid "On"
+msgstr "An"
+
+#. applet.js:345
+msgid "Day colour temperature"
+msgstr "Tages Farbtemperatur"
+
+#. applet.js:346
+msgid "Night colour temperature"
+msgstr "Nacht Farbtemperatur"
+
+#. applet.js:347
+msgid "Day Redshift brightness"
+msgstr "Rotverschiebung Helligkeit Tag"
+
+#. applet.js:348
+msgid "Night Redshift brightness"
+msgstr "Rotverschiebung Helligkeit Nacht"
+
+#. applet.js:350
+#, fuzzy
+msgid "Colour temperature"
+msgstr "Tages Farbtemperatur"
+
+#. applet.js:351
+#, fuzzy
+msgid "Redshift brightness"
+msgstr "Rotverschiebung Helligkeit Tag"
+
+#. metadata.json->description
+msgid ""
+"An app to change the red filter level for late night screen time. Requires "
+"redshift: sudo apt-get install redshift"
+msgstr ""
+"Ein Applet zum schnellen Anpassen des Rotfilters für nächtliche Arbeiten. "
+"Nutzt redshift: sudo apt-get install redshift"
+
+#. settings-schema.json->panel->title
+msgid "Redshift settings"
+msgstr "Redshift Einstellungen"
+
+#. settings-schema.json->brightness-section->title
+msgid "Brightness level"
+msgstr "Helligkeit"
+
+#. settings-schema.json->redshift-section->title
+msgid "Redshift configuration"
+msgstr "Redshift Konfiguration"
+
+#. settings-schema.json->redshift-transition-section->title
+msgid "Transition between day and night configuration"
+msgstr "Übergang zwischen Tag- und Nachtkonfiguration"
+
+#. settings-schema.json->brightness->units
+#. settings-schema.json->redshiftDayBrightness->units
+#. settings-schema.json->redshiftNightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->enabledOnStartup->description
+msgid "Redshift Enabled"
+msgstr "Redshift aktiviert"
+
+#. settings-schema.json->dayColour->units
+#. settings-schema.json->nightColour->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayColour->description
+msgid "Redshift Day colour temperature"
+msgstr "Rotverschiebung Farbtemperatur Tag"
+
+#. settings-schema.json->redshiftDayBrightness->description
+msgid "Redshift Day Brightness"
+msgstr "Rotverschiebung Helligkeit Tag"
+
+#. settings-schema.json->changeOnNight->description
+msgid "Change temperature colour and Redshift brightness between day and night"
+msgstr ""
+"Farbtemperatur und Helligkeit der Rotverschiebung zwischen Tag und Nacht "
+"verändern"
+
+#. settings-schema.json->nightColour->description
+msgid "Redshift Night colour temperature"
+msgstr "Rotverschiebung Farbtemperatur Nacht"
+
+#. settings-schema.json->redshiftNightBrightness->description
+msgid "Redshift Night Brightness"
+msgstr "Rotverschiebung Helligkeit Nacht"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "Breitengrad"
+
+#. settings-schema.json->latitude->tooltip
+#. settings-schema.json->longitude->tooltip
+msgid "If not entered Redshift would use GeoClue2 provider"
+msgstr "Ohne Eintrag wird GeoClue2 als Datenquelle wird benutzt"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "Längengrad"

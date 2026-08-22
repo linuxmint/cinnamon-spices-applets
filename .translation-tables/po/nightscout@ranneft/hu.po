@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nightscout@ranneft 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-28 08:56+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->description
+msgid "Fetches API from your Nightscout site and showing BG"
+msgstr ""
+"Lekéri az API-t a Nightscout webhelyről, és megjeleníti a vércukorszintet"
+
+#. metadata.json->name
+msgid "Nightscout"
+msgstr "Nightscout"
+
+#. settings-schema.json->head->description
+msgid "General Settings for the Nighscout Applet"
+msgstr "A Nighscout kisalkalmazás általános beállításai"
+
+#. settings-schema.json->refreshInterval->units
+#. settings-schema.json->showMissingInterval->units
+msgid "minutes"
+msgstr "perc"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh Interval for your Nightscout applet:"
+msgstr "Frissítési időköz a Nightscout kisalkalmazáshoz:"
+
+#. settings-schema.json->refreshInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine."
+msgstr ""
+"Növelje vagy csökkentse ezt a pörgettyűértéket a frissítési időköz "
+"megváltoztatásához – lassú frissítést használjon, ha lassú a gépe."
+
+#. settings-schema.json->head1->description
+msgid "Nightscout host"
+msgstr "Nightscout házigazda"
+
+#. settings-schema.json->host->description
+msgid "Nighscout host (including http(s))"
+msgstr "Nightscout házigazda (beleértve a https-t is)"
+
+#. settings-schema.json->host->tooltip
+msgid "A host where your CGM information gonna be queried"
+msgstr "Egy gazdagép, ahol lekérdezik a CGM-információit"
+
+#. settings-schema.json->head2->description
+msgid "Various settings"
+msgstr "Különféle beállítások"
+
+#. settings-schema.json->showMissing->description
+msgid "Show missing readings"
+msgstr "Hiányzó értékek megjelenítése"
+
+#. settings-schema.json->showMissing->tooltip
+msgid "Add information about missing readings in the text"
+msgstr "Adjon meg információkat a szövegben a hiányzó értékekről"
+
+#. settings-schema.json->showMissingInterval->description
+msgid "When start to show missing readings alert"
+msgstr "Amikor elkezd megjelenni a hiányzó értékek figyelmeztetése"
+
+#. settings-schema.json->showMissingInterval->tooltip
+msgid ""
+"Time which is taken to decide when to show alert of missing readings. Will "
+"apply only if above checkbox is enabled"
+msgstr ""
+"Idő, amely alatt eldönthető, hogy mikor kell figyelmeztetni a hiányzó "
+"értékekre. Csak akkor érvényes, ha a fenti jelölőnégyzet be van kapcsolva"
+
+#. settings-schema.json->showiob->description
+msgid "Show IoB"
+msgstr "IoB megjelenítése"
+
+#. settings-schema.json->showiob->tooltip
+msgid "Enable/disable IoB (insulin on board) in the text"
+msgstr "Engedélyezze/letiltja az IoB-t (insulin on board) a szövegben"
+
+#. settings-schema.json->usemmol->description
+msgid "Use mmol/l"
+msgstr "mmol/l használata"
+
+#. settings-schema.json->usemmol->tooltip
+msgid "Use mmol/l instead of mg/dl"
+msgstr "mmol/l használata mg/dl helyett"

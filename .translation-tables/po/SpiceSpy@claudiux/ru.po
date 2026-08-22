@@ -1,0 +1,284 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SpiceSpy@claudiux 5.8.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-04-27 17:11+0200\n"
+"PO-Revision-Date: 2026-06-08 00:00+0000\n"
+"Last-Translator: Grom-TS\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:196
+msgid "score"
+msgstr "рейтинг"
+
+#. applet.js:208
+msgid "comments"
+msgstr "комментарии"
+
+#. applet.js:220
+msgid "recent issues"
+msgstr "недавние обращения"
+
+#. applet.js:233
+msgid "translations"
+msgstr "переводы"
+
+#. applet.js:308
+msgid "Reload icons"
+msgstr "Перезагрузить значки"
+
+#. applet.js:314
+msgid "Visit website"
+msgstr "Открыть веб-сайт"
+
+#. applet.js:417
+msgid ""
+"Check in progress.\n"
+"Time remaining:"
+msgstr ""
+"Выполняется проверка.\n"
+"Осталось времени:"
+
+#. applet.js:420
+msgid "Ends around:"
+msgstr "Завершится примерно в:"
+
+#. applet.js:437
+msgid "Time remaining until the next check:"
+msgstr "Время до следующей проверки:"
+
+#. applet.js:439 applet.js:741
+msgid "Next check at:"
+msgstr "Следующая проверка:"
+
+#. applet.js:444
+msgid "Getting Started. Please wait..."
+msgstr "Инициализация. Пожалуйста, подождите..."
+
+#. applet.js:893
+msgid "Spices"
+msgstr "Spices"
+
+#. applet.js:984
+msgid "Mark all as read"
+msgstr "Отметить всё как прочитанное"
+
+#. applet.js:995
+msgid "Refresh"
+msgstr "Обновить"
+
+#. applet.js:1009
+msgid "Refreshing in progress - Click to stop"
+msgstr "Выполняется обновление — нажмите для остановки"
+
+#. applet.js:1023
+msgid "Refreshing in progress"
+msgstr "Выполняется обновление"
+
+#. applet.js:1035
+msgid "Configure..."
+msgstr "Настроить..."
+
+#. metadata.json->name
+msgid "SpiceSpy"
+msgstr "SpiceSpy"
+
+#. metadata.json->description
+msgid ""
+"Notifies you when there's a change to your favorite Spices on the website."
+msgstr ""
+"Уведомляет об изменениях в избранных Spices на веб-сайте."
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr "Общие"
+
+#. settings-schema.json->pageOptions->title
+#. settings-schema.json->section1->title
+msgid "Options"
+msgstr "Параметры"
+
+#. settings-schema.json->section2->title
+msgid "List of authors of the Spices you are interested in"
+msgstr "Список авторов интересующих вас Spices"
+
+#. settings-schema.json->section3->title
+msgid "List of specific Spices you are interested in"
+msgstr "Список интересующих вас Spices"
+
+#. settings-schema.json->update-interval-hours->description
+msgid "Update interval"
+msgstr "Интервал обновления"
+
+#. settings-schema.json->update-interval-hours->units
+msgid "hours"
+msgstr "ч."
+
+#. settings-schema.json->update-interruptible->description
+msgid "The update can be interrupted by the user"
+msgstr "Пользователь может прервать обновление"
+
+#. settings-schema.json->standard-opacity->description
+msgid "Opacity in absence of change"
+msgstr "Непрозрачность при отсутствии изменений"
+
+#. settings-schema.json->color-on-change->description
+msgid "Color on change"
+msgstr "Цвет при изменениях"
+
+#. settings-schema.json->show-icon-in-menu->description
+msgid "Show each Spice icon in the menu"
+msgstr "Показывать значок каждого Spice в меню"
+
+#. settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Размер значков"
+
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr "16"
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr "22"
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr "24"
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->show-translations->description
+msgid "Show number of translations in the menu"
+msgstr "Показывать количество переводов в меню"
+
+#. settings-schema.json->show-commits->description
+msgid "Show available updates in the menu"
+msgstr "Показывать доступные обновления в меню"
+
+#. settings-schema.json->show-issues->description
+msgid "Show number of issues in the menu"
+msgstr "Показывать количество обращений в меню"
+
+#. settings-schema.json->sort-by->description
+msgid "Sort by"
+msgstr "Сортировать по"
+
+#. settings-schema.json->sort-by->options
+msgid "Translated name"
+msgstr "Переведённому названию"
+
+#. settings-schema.json->sort-by->options
+msgid "Original name"
+msgstr "Исходному названию"
+
+#. settings-schema.json->sort-by->options
+#. settings-schema.json->uuid-list->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (bottom-up)"
+msgstr "Рейтинг (по возрастанию)"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (top-down)"
+msgstr "Рейтинг (по убыванию)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (bottom-up)"
+msgstr "Количество комментариев (по возрастанию)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (top-down)"
+msgstr "Количество комментариев (по убыванию)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of issues"
+msgstr "Количество обращений"
+
+#. settings-schema.json->show-uuid->description
+msgid "Show UUID instead of name"
+msgstr "Показывать UUID вместо названия"
+
+#. settings-schema.json->translate-name->description
+msgid "Show translated name if available"
+msgstr "Показывать переведённое название, если доступно"
+
+#. settings-schema.json->display-on-panel->description
+msgid "If there is nothing new"
+msgstr "Если нет новых изменений"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon and label"
+msgstr "Показывать значок и текст"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon only"
+msgstr "Показывать только значок"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Do not show anything"
+msgstr "Ничего не показывать"
+
+#. settings-schema.json->useful-only->description
+msgid "Show only non-zero values in panel"
+msgstr "Показывать на панели только ненулевые значения"
+
+#. settings-schema.json->colorWhileRefreshing->description
+msgid "Icon color while refreshing"
+msgstr "Цвет значка во время обновления"
+
+#. settings-schema.json->author-list->columns->title
+msgid "GitHub user name"
+msgstr "Имя пользователя GitHub"
+
+#. settings-schema.json->button-my-spices->description
+msgid "Add all the Spices I use"
+msgstr "Добавить все используемые мной Spices"
+
+#. settings-schema.json->label-reload->description
+msgid ""
+"There's no need to include Spices maintained by members of the Authors list "
+"in the UUID list.\n"
+"Once your lists are correct, you can reload this applet to speed up the "
+"process.\n"
+"Just don't do it too often."
+msgstr ""
+"Нет необходимости включать в список UUID те Spices, которые поддерживаются "
+"авторами из списка авторов.\n"
+"После того как списки будут настроены правильно, можно перезагрузить этот "
+"апплет для ускорения работы.\n"
+"Только не делайте это слишком часто."
+
+#. settings-schema.json->button-reload->description
+msgid "Reload this applet"
+msgstr "Перезагрузить этот апплет"

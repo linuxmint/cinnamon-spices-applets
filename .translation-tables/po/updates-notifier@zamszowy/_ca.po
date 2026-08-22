@@ -1,0 +1,18 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+msgid ""
+msgstr ""
+
+#. applet.js:230
+msgid "View error details"
+msgstr ""
+
+#. applet.js:299
+msgid "Error checking for updates"
+msgstr ""
+
+#. error-window.js:39
+msgid "Error log file not found."
+msgstr ""

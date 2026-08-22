@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:33
+msgid "Generate Random Password"
+msgstr ""
+
+#: applet.js:42
+msgid "Please enable at least one value in settings."
+msgstr ""
+
+#: applet.js:49
+msgid "Copy"
+msgstr ""
+
+#. metadata.json->description
+msgid "Configurable Password Generator"
+msgstr ""
+
+#. settings-schema.json->password-settings-header->description
+msgid "Password Settings"
+msgstr ""
+
+#. settings-schema.json->password-length->units
+msgid "characters"
+msgstr ""
+
+#. settings-schema.json->password-length->description
+msgid "Password Length"
+msgstr ""
+
+#. settings-schema.json->include-lowercase->description
+msgid "Include Lowercase Letters"
+msgstr ""
+
+#. settings-schema.json->include-uppercase->description
+msgid "Include Uppercase Letters"
+msgstr ""
+
+#. settings-schema.json->include-numbers->description
+msgid "Include Numbers"
+msgstr ""
+
+#. settings-schema.json->include-symbols->description
+msgid "Include Symbols"
+msgstr ""
+
+#. settings-schema.json->copy-settings-header->description
+msgid "Copy Settings"
+msgstr ""
+
+#. settings-schema.json->auto-copy->description
+msgid "Automatically Copy To Clipboard"
+msgstr ""
+
+#. settings-schema.json->auto-copy->tooltip
+msgid ""
+"When clicking the lock icon, instead of opening a window where the password "
+"can be copied it is instead automatically copied to your Clipboard."
+msgstr ""
+
+#. settings-schema.json->play-sound->description
+#. settings-schema.json->sound-file->description
+msgid "Play sound on copy"
+msgstr ""
+
+#. settings-schema.json->play-sound->tooltip
+msgid ""
+"Toggles whether or not a sound is played when the password is copied to the "
+"Clipboard"
+msgstr ""
+
+#. settings-schema.json->sound-file->tooltip
+msgid "Select a sound to play when the password is copied"
+msgstr ""

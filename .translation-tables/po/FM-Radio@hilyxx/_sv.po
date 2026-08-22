@@ -1,0 +1,47 @@
+# Swedish translation for FM RADIO
+# This file is put in the public domain.
+# hilyxx, 2016
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2026.
+#
+msgid ""
+msgstr ""
+
+#. applet.js:145
+msgid "Stations successfully saved to:\n"
+msgstr ""
+
+#. applet.js:148
+msgid "Error saving backup."
+msgstr ""
+
+#. applet.js:154
+msgid "Please select a backup file to import first."
+msgstr ""
+
+#. applet.js:176
+msgid "Stations successfully restored!"
+msgstr ""
+
+#. applet.js:178
+msgid "Invalid JSON file format."
+msgstr ""
+
+#. applet.js:183
+msgid "Error reading the backup file."
+msgstr ""
+
+#. settings-schema.json->section_backup->title
+msgid "Backup and Restore radio stations"
+msgstr ""
+
+#. settings-schema.json->export_button->description
+msgid "Export stations"
+msgstr ""
+
+#. settings-schema.json->import_file->description
+msgid "Select a Backup file (.json) to restore"
+msgstr ""
+
+#. settings-schema.json->import_button->description
+msgid "Restore stations from the selected file"
+msgstr ""

@@ -1,0 +1,224 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: stopwatch@pdcurtis 2.3.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-28 08:01-0400\n"
+"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: 3.8/applet.js:205
+msgid "Name"
+msgstr "Név"
+
+#: 3.8/applet.js:225
+msgid "Start   "
+msgstr "Kezdés   "
+
+#: 3.8/applet.js:233
+msgid "Pause   "
+msgstr "Szünet   "
+
+#: 3.8/applet.js:241
+msgid "Reset   "
+msgstr "Visszaállítás   "
+
+#: 3.8/applet.js:249
+msgid "Continue  "
+msgstr "Folytatás  "
+
+#: 3.8/applet.js:261
+msgid "Continue from Start"
+msgstr "Folytassa a Kezdéstől"
+
+#: 3.8/applet.js:337 3.0/applet.js:205
+msgid "Housekeeping and System Sub Menu"
+msgstr "Karbantartás és rendszer almenü"
+
+#: 3.8/applet.js:340 3.0/applet.js:208
+msgid "View the Changelog"
+msgstr "Változásnaplót megtekitése"
+
+#: 3.8/applet.js:346 3.0/applet.js:214
+msgid "Open the Help file"
+msgstr "Sugó megnyitása"
+
+#: 3.8/applet.js:353 3.0/applet.js:221
+msgid "Open stylesheet.css  (Advanced Function)"
+msgstr "Stylesheet.css megnyitása  (Speciális funkció)"
+
+#: 3.8/applet.js:359 3.0/applet.js:227
+msgid "Open the gnome system monitor (Advanced testing function)"
+msgstr "Gnome rendszerfigyelő megnyitása (Speciális tesztfunkció)"
+
+#: 3.8/applet.js:368 3.0/applet.js:236
+msgid "Configure..."
+msgstr "Beállítások…"
+
+#: 3.8/applet.js:413 3.0/applet.js:282
+msgid "days"
+msgstr "nap"
+
+#: 3.8/applet.js:416 3.0/applet.js:285
+msgid "hours"
+msgstr "óra"
+
+#: 3.8/applet.js:482 3.0/applet.js:340
+msgid "Running for"
+msgstr "Futás időtartama"
+
+#: 3.8/applet.js:482 3.0/applet.js:340
+msgid "Click to Pause"
+msgstr "Kattintson ide a szünethez"
+
+#: 3.8/applet.js:495 3.8/applet.js:497 3.0/applet.js:350 3.0/applet.js:352
+msgid "Paused at"
+msgstr "Szüneteltetve ekkor"
+
+#: 3.8/applet.js:495 3.0/applet.js:350
+msgid "Click to Continue Counting"
+msgstr "Kattintson ide a számlálás folytatásához"
+
+#: 3.8/applet.js:497 3.0/applet.js:352
+msgid "Click to Reset"
+msgstr "Kattintson ide a visszaállításhoz"
+
+#: 3.8/applet.js:508 3.0/applet.js:362
+msgid "Ready - Click to Start"
+msgstr "Kész - Kattintson ide az indításhoz"
+
+#: 3.0/applet.js:159
+msgid "Start"
+msgstr "Indítás"
+
+#: 3.0/applet.js:167
+msgid "Pause"
+msgstr "Szünet"
+
+#: 3.0/applet.js:175
+msgid "Reset counter"
+msgstr "Számláló újraindítása"
+
+#: 3.0/applet.js:182
+msgid "If paused, continue counting from now"
+msgstr "Szünet esetén, folytassa a számlálást mostantól"
+
+#: 3.0/applet.js:193
+msgid "If paused, continue counting from original start time"
+msgstr "Szünet esetén, folytassa a számlálást az eredeti indítástól"
+
+#. metadata.json->description
+msgid ""
+"Allows one to time activities such as the time online with multiple "
+"instances possible"
+msgstr ""
+"Lehetővé teszi az olyan tevékenységek időzítését, mint például az online "
+"idő, akár több példánnyal is"
+
+#. metadata.json->name
+msgid "Stopwatch for Cinnamon"
+msgstr "Stopper a Cinnamonhoz"
+
+#. 3.8->settings-schema.json->head->description
+#. 3.0->settings-schema.json->head->description
+msgid "General Settings for the Stopwatch Applet"
+msgstr "Stopperóra kisalkalmazás általános beállításai"
+
+#. 3.8->settings-schema.json->refreshInterval-spinner->units
+#. 3.0->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "másodperc"
+
+#. 3.8->settings-schema.json->refreshInterval-spinner->description
+#. 3.0->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "A megjelenítés frissítési gyakorisága:"
+
+#. 3.8->settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.0->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have multiple active counters and/or a slow machine"
+msgstr ""
+"Növelje vagy csökkentse ezt a tárcsaértéket a frissítési intervallum "
+"módosításához - használjon lassú frissítést, ha több aktív számlálóval "
+"rendelkezik és/vagy lassú számítógépe van"
+
+#. 3.8->settings-schema.json->counterTitle->description
+#. 3.0->settings-schema.json->counterTitle->description
+msgid "Provide a meaningful title to the counter"
+msgstr "Adjon értelmes címet a számlálónak"
+
+#. 3.8->settings-schema.json->counterTitle->tooltip
+#. 3.0->settings-schema.json->counterTitle->tooltip
+msgid ""
+"This forms the first part of the tooltip and is useful for identification if "
+"you have multiple instances of counters - default is Stopwatch"
+msgstr ""
+"Ez képezi az eszköztipp első részét, és hasznos az azonosításhoz, ha több "
+"számlálója is van - az alapértelmezett a Stopperóra"
+
+#. 3.8->settings-schema.json->modeContinueCounting->description
+#. 3.0->settings-schema.json->modeContinueCounting->description
+msgid "Check box to continue counting on clicking applet when paused"
+msgstr ""
+"Jelölje be a négyzetet, ha szünet esetén folytatni szeretné a számlálást a "
+"kisalkalmazra való kattintáskor"
+
+#. 3.8->settings-schema.json->modeContinueCounting->tooltip
+#. 3.0->settings-schema.json->modeContinueCounting->tooltip
+msgid ""
+"Normal sequence on clicking is 'start -> pause -> reset' this changes to "
+"'start -> pause -> continue -> pause -> continue etc'. In this mode one has "
+"to use the Right Click (Context) Menu to reset the counter"
+msgstr ""
+"A kattintás normál sorrendje „start -> szünet -> visszaállítás”, ez változik "
+"a következőre: „start -> szünet -> folytatás -> szünet -> folytatás stb.”. "
+"Ebben a módban a jobb egérgombbal (Helyi) menüt kell használni a számláló "
+"visszaállításához"
+
+#. 3.8->settings-schema.json->displayFullPanel->description
+msgid "Check box to Display Title in Panel"
+msgstr "Jelölje be a Cím megjelenítése a panelen jelölőnégyzetet"
+
+#. 3.8->settings-schema.json->displayFullPanel->tooltip
+msgid ""
+"This provides a more comprehensive panel display but may use more panel space"
+msgstr ""
+"Ez átfogóbb panelmegjelenítést biztosít, de több panelterületet igényelhet"
+
+#. 3.8->settings-schema.json->enableExperimentalFunctions->description
+msgid "Check box to enable some extra functions - Needs Cinnamon Restart"
+msgstr ""
+"Jelölje be a jelölőnégyzetet néhány extra funkció engedélyezéséhez - "
+"Cinnamon újraindítás szükséges"
+
+#. 3.8->settings-schema.json->enableExperimentalFunctions->tooltip
+msgid "Provides extra functions requested by users"
+msgstr "A felhasználók által kért extra funkciókat biztosítja"
+
+#. 3.8->settings-schema.json->counterStatus->description
+#. 3.0->settings-schema.json->counterStatus->description
+msgid "Should not be changed"
+msgstr "Nem kellene megváltoztatni"
+
+#. 3.8->settings-schema.json->startTime->description
+#. 3.8->settings-schema.json->pausedAt->description
+#. 3.0->settings-schema.json->startTime->description
+#. 3.0->settings-schema.json->pausedAt->description
+msgid "Must not be changed"
+msgstr "Nem szabad megváltoztatni"
+
+#~ msgid "Stopwatch for Cinnamon 1.8+"
+#~ msgstr "Stopperóra Cinnamon-hoz 1.8+"

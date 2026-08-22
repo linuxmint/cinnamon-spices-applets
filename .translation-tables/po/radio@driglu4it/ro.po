@@ -1,0 +1,288 @@
+# RADIO++
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Driglu4it, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-20 14:55-0500\n"
+"PO-Revision-Date: 2021-01-16 15:10+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n==0 || (n!=1 && n%100>=1 && "
+"n%100<=19) ? 1 : 2);\n"
+
+#. metadata.json->name
+#. 3.0/applet.js:99 3.0/applet.js:117 3.0/applet.js:143 3.0/applet.js:153
+msgid "Radio++"
+msgstr "Radio++"
+
+#. 3.0/applet.js:130
+#, javascript-format
+msgid "Playing %s"
+msgstr "Se redă %s"
+
+#. 3.0/applet.js:140
+msgid "Stop"
+msgstr "Stop"
+
+#. 3.0/applet.js:149
+msgid "Stop Radio++"
+msgstr "Oprește Radio++"
+
+#. 3.0/applet.js:183
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr "Instalează pachetul '%s'."
+
+#. 4.6/RadioSearchWidget.py:48 6.4/RadioSearchWidget.py:48
+msgid "Find Radio Station"
+msgstr ""
+
+#. 4.6/RadioSearchWidget.py:53 6.4/RadioSearchWidget.py:53
+msgid "Add to My Stations"
+msgstr ""
+
+#. 4.6/download-dialog-mpris.py:41 6.4/download-dialog-mpris.py:41
+msgid "Download Confirmation Dialog"
+msgstr "Dialog de confirmare a descărcării"
+
+#. 4.6/download-dialog-mpris.py:45 6.4/download-dialog-mpris.py:45
+#, python-format
+msgid ""
+"The radio applet depends on the '%s' plugin. It's a 3rd party plugin for "
+"mpv, which allows controlling the radio player with the sound applet."
+msgstr ""
+"Appletul radio depinde de pluginul '%s'. Este un plugin extern pentru mpv, "
+"care permite controlarea playerului radio cu appletul de sunet."
+
+#. 4.6/download-dialog-mpris.py:46 6.4/download-dialog-mpris.py:46
+msgid "Do you want to proceed the download at your own risk?"
+msgstr "Dorești să continui descărcarea pe propria răspundere?"
+
+#. 4.6/download-dialog-mpris.py:47 6.4/download-dialog-mpris.py:47
+msgid "Cancel download"
+msgstr "Anulează descărcarea"
+
+#. 4.6/download-dialog-mpris.py:48 6.4/download-dialog-mpris.py:48
+msgid "More info"
+msgstr "Mai multe informații"
+
+#. 4.6/download-dialog-mpris.py:49 6.4/download-dialog-mpris.py:49
+msgid "Download plugin at my own risk"
+msgstr "Descarcă plugin pe propria răspundere"
+
+#. metadata.json->description
+msgid ""
+"A radio applet with 1000's of searchable stations, mpris support, youtube-"
+"download function and more"
+msgstr ""
+
+#. 3.0->settings-schema.json->page1->title
+#. 3.0->settings-schema.json->tree->description
+#. 4.6->settings-schema.json->station-list-section->title
+#. 6.4->settings-schema.json->station-list-section->title
+msgid "List of stations"
+msgstr "Listă de posturi"
+
+#. 3.0->settings-schema.json->page2->title
+#. 3.0->settings-schema.json->section2->title
+msgid "Icon"
+msgstr "Pictogramă"
+
+#. 3.0->settings-schema.json->section1->title
+msgid "Radio"
+msgstr "Radio"
+
+#. 3.0->settings-schema.json->section3->title
+msgid "Symbolic Icon Color"
+msgstr "Culoare pictogramă simbolică"
+
+#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
+#. 6.4->settings-schema.json->tree->columns->title
+msgid "Show in list"
+msgstr "Arată în listă"
+
+#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
+#. 6.4->settings-schema.json->tree->columns->title
+msgid "Title"
+msgstr "Titlu"
+
+#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
+#. 6.4->settings-schema.json->tree->columns->title
+msgid "URL"
+msgstr "URL"
+
+#. 3.0->settings-schema.json->streamurl-button->description
+msgid "Open radio stream URL search engine"
+msgstr "Deschide motor de căutare pentru URL-uri de fluxuri radio"
+
+#. 3.0->settings-schema.json->streamurl-button->tooltip
+msgid "Opens a website, which helps you to determine radio stream URLs."
+msgstr ""
+"Deschide un site, care te poate ajuta să găsești URL-uri pentru fluxuri "
+"radio."
+
+#. 3.0->settings-schema.json->radiolist-button->description
+msgid "Show URL-list of radio stations"
+msgstr "Arată lista de URL-uri pentru posturi radio"
+
+#. 3.0->settings-schema.json->radiolist-button->tooltip
+msgid "Opens a website, which lists URLs of radio stations."
+msgstr "Deschide un site care enumeră URL-uri pentru posturi radio"
+
+#. 3.0->settings-schema.json->icon-type->description
+msgid "Type"
+msgstr "Tip"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Symbolic Icon"
+msgstr "Pictogramă simbolică"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Full Color Icon"
+msgstr "Pictogramă cu culoare completă"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Bicolor Icon"
+msgstr "Pictogramă bicoloră"
+
+#. 3.0->settings-schema.json->color-on->description
+msgid "Color of Symbolic Icon when playing a radio"
+msgstr "Culoarea pictogramei simbolice când se redă radio"
+
+#. 4.6->settings-schema.json->search-page->title
+#. 6.4->settings-schema.json->search-page->title
+msgid "Find Station"
+msgstr ""
+
+#. 4.6->settings-schema.json->my-stations-page->title
+#. 6.4->settings-schema.json->my-stations-page->title
+msgid "My Stations"
+msgstr ""
+
+#. 4.6->settings-schema.json->preferences-page->title
+#. 6.4->settings-schema.json->preferences-page->title
+msgid "Preferences"
+msgstr "Preferințe"
+
+#. 4.6->settings-schema.json->find-station-section->title
+#. 6.4->settings-schema.json->find-station-section->title
+#, fuzzy
+msgid "Search Radio station"
+msgstr "Arată lista de URL-uri pentru posturi radio"
+
+#. 4.6->settings-schema.json->appearance-section->title
+#. 6.4->settings-schema.json->appearance-section->title
+msgid "Appearance"
+msgstr "Aspect"
+
+#. 4.6->settings-schema.json->volume-section->title
+#. 6.4->settings-schema.json->volume-section->title
+msgid "Volume"
+msgstr "Volum"
+
+#. 4.6->settings-schema.json->youtube-section->title
+#. 6.4->settings-schema.json->youtube-section->title
+msgid "YouTube Download"
+msgstr ""
+
+#. 4.6->settings-schema.json->icon-type->description
+#. 6.4->settings-schema.json->icon-type->description
+#, fuzzy
+msgid "Icon type"
+msgstr "Tip de pictogramă"
+
+#. 4.6->settings-schema.json->icon-type->options
+#. 6.4->settings-schema.json->icon-type->options
+msgid "Symbolic"
+msgstr "Simbolic"
+
+#. 4.6->settings-schema.json->icon-type->options
+#. 6.4->settings-schema.json->icon-type->options
+msgid "Full Color"
+msgstr "Culoare completă"
+
+#. 4.6->settings-schema.json->icon-type->options
+#. 6.4->settings-schema.json->icon-type->options
+msgid "Bicolor"
+msgstr "Bicolor"
+
+#. 4.6->settings-schema.json->color-on->description
+#. 6.4->settings-schema.json->color-on->description
+#, fuzzy
+msgid "Color of symbolic icon when playing a radio station"
+msgstr "Culoarea pictogramei simbolice când se redă radio"
+
+#. 4.6->settings-schema.json->color-paused->description
+#. 6.4->settings-schema.json->color-paused->description
+#, fuzzy
+msgid "Color of symbolic icon while a radio station is paused"
+msgstr "Culoarea pictogramei simbolice când se redă radio"
+
+#. 4.6->settings-schema.json->channel-on-panel->description
+#. 6.4->settings-schema.json->channel-on-panel->description
+#, fuzzy
+msgid "Show current radio station on the panel"
+msgstr "Arată Canalul Radio pe panou"
+
+#. 4.6->settings-schema.json->keep-volume-between-sessions->description
+#. 6.4->settings-schema.json->keep-volume-between-sessions->description
+msgid "Remember volume after stopping the radio"
+msgstr ""
+
+#. 4.6->settings-schema.json->initial-volume->description
+#. 6.4->settings-schema.json->initial-volume->description
+#, fuzzy
+msgid "Initial volume"
+msgstr "Volum inițial"
+
+#. 4.6->settings-schema.json->initial-volume->tooltip
+#. 6.4->settings-schema.json->initial-volume->tooltip
+msgid ""
+"The initial volume is applied when clicking on a radio stream and no other "
+"radio stream is already running"
+msgstr ""
+"Volumul inițial se aplică atunci când se dă click pe un flux radio și niciun "
+"alt flux radio nu rulează deja"
+
+#. 4.6->settings-schema.json->youtube-download-cli->description
+#. 6.4->settings-schema.json->youtube-download-cli->description
+msgid "YouTube Download CLI tool"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->tooltip
+#. 6.4->settings-schema.json->youtube-download-cli->tooltip
+msgid "The CLI tool used to download songs from YouTube"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->options
+#. 6.4->settings-schema.json->youtube-download-cli->options
+msgid "yt-dlp"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->options
+#. 6.4->settings-schema.json->youtube-download-cli->options
+msgid "youtube-dl"
+msgstr ""
+
+#. 4.6->settings-schema.json->music-download-dir-select->description
+#. 6.4->settings-schema.json->music-download-dir-select->description
+msgid "Download directory"
+msgstr ""
+
+#. 4.6->settings-schema.json->music-download-dir-select->tooltip
+#. 6.4->settings-schema.json->music-download-dir-select->tooltip
+msgid "Songs downloaded from YouTube will be saved to this directory."
+msgstr ""

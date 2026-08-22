@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Marcelo Aof, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2020-05-09 12:25+0200\n"
+"PO-Revision-Date: 2021-10-02 19:48-0300\n"
+"Last-Translator: Marcelo Aof\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: QRLib.js:682
+msgid "Invalid or unsupported mode."
+msgstr "Modo inválido ou não compatível."
+
+#: QRLib.js:686
+msgid "Invalid data format."
+msgstr "Área de transferência vazia ou formato de arquivo inválido."
+
+#: QRLib.js:688
+msgid "Invalid ECC level."
+msgstr "Nível de ECC inválido."
+
+#: QRLib.js:694
+msgid "Too much data."
+msgstr "Muitos dados."
+
+#: QRLib.js:696
+msgid "Invalid version."
+msgstr "Versão inválida."
+
+#: QRLib.js:699
+msgid "Invalid mask."
+msgstr "Máscara inválida."
+
+#: QR.js:80 applet.js:194
+msgid "QR generated"
+msgstr "Um código QR foi gerado"
+
+#: applet.js:63
+msgid "Create QR code from clipboard"
+msgstr "Criar um código QR referente ao conteúdo copiado"
+
+#: applet.js:75
+#, javascript-format
+msgid "Save QR code as SVG in '~/%s'"
+msgstr "Salvar o código QR como SVG em '~/%s'"
+
+#: applet.js:158
+msgid "Scan QR Code"
+msgstr "Escanear o código QR"
+
+#: applet.js:183 applet.js:197
+msgid "No QR code scanned."
+msgstr "Nenhum código QR foi escaneado."
+
+#. metadata.json->name
+msgid "Clipboard QR code applet"
+msgstr "Applet gerador de código QR"
+
+#. metadata.json->description
+msgid "Create QR codes from clipboard content"
+msgstr ""
+"Crie um código QR referente ao conteúdo copiado para a área de transferência"

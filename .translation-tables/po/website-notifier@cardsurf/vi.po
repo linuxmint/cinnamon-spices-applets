@@ -1,0 +1,215 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: website-notifier@cardsurf 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-12 17:25+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->description
+msgid "Shows a notification when a website updates"
+msgstr "Hiển thị thông báo khi một trang web cập nhật"
+
+#. metadata.json->name
+msgid "Website notifier"
+msgstr "Trình thông báo trang web"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Cấu hình"
+
+#. settings-schema.json->update_every->units
+msgid "minutes"
+msgstr "phút"
+
+#. settings-schema.json->update_every->description
+msgid "Refresh every"
+msgstr "Làm mới mỗi"
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to refresh a website. 0 means no refreshing."
+msgstr "Tần suất làm mới một trang web. 0 có nghĩa là không làm mới."
+
+#. settings-schema.json->notification_type->description
+msgid "Notification type"
+msgstr "Loại thông báo"
+
+#. settings-schema.json->notification_type->options
+msgid "System popup"
+msgstr "Popup hệ thống"
+
+#. settings-schema.json->notification_type->options
+msgid "Applet popup"
+msgstr "Popup applet"
+
+#. settings-schema.json->notification_type->tooltip
+msgid "A user interface that shows notficiation text"
+msgstr "Một giao diện người dùng hiển thị văn bản thông báo"
+
+#. settings-schema.json->tooltip_type->description
+msgid "Tooltip text"
+msgstr "Văn bản chú giải công cụ"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Time left next refresh"
+msgstr "Thời gian còn lại đến lần làm mới tiếp theo"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Next refresh time"
+msgstr "Thời gian làm mới tiếp theo"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last refresh time"
+msgstr "Thời gian làm mới cuối"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last notification time"
+msgstr "Thời gian thông báo cuối"
+
+#. settings-schema.json->tooltip_type->options
+msgid "None"
+msgstr "Không có"
+
+#. settings-schema.json->tooltip_type->tooltip
+msgid "Text shown in an applet tooltip"
+msgstr "Văn bản hiển thị trong chú giải công cụ applet"
+
+#. settings-schema.json->primary_button_type->description
+msgid "Primary button"
+msgstr "Nút chính"
+
+#. settings-schema.json->primary_button_type->options
+msgid "Left"
+msgstr "Trái"
+
+#. settings-schema.json->primary_button_type->options
+msgid "Middle"
+msgstr "Giữa"
+
+#. settings-schema.json->primary_button_type->tooltip
+msgid ""
+"A mouse button used to perform main actions.\n"
+"The primary button refreshes a website on demand.\n"
+"The secondary button toggles an applet popup."
+msgstr ""
+"Một nút chuột được sử dụng để thực hiện các hành động chính.\n"
+"Nút chính làm mới trang web theo yêu cầu.\n"
+"Nút phụ bật/tắt popup applet."
+
+#. settings-schema.json->applet_popup_click_type->description
+msgid "On popup clicked"
+msgstr "Khi popup được nhấp"
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup and open browser"
+msgstr "Đóng popup và mở trình duyệt"
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup"
+msgstr "Đóng popup"
+
+#. settings-schema.json->applet_popup_click_type->tooltip
+msgid "An action to perform when an applet popup is clicked"
+msgstr "Một hành động thực hiện khi popup applet được nhấp"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Giao diện"
+
+#. settings-schema.json->max_title_length->units
+#. settings-schema.json->max_message_length->units
+msgid "characters"
+msgstr "ký tự"
+
+#. settings-schema.json->max_title_length->description
+msgid "Title length"
+msgstr "Độ dài tiêu đề"
+
+#. settings-schema.json->max_title_length->tooltip
+msgid "A maximum number of characters in a notification title"
+msgstr "Số ký tự tối đa trong tiêu đề thông báo"
+
+#. settings-schema.json->max_message_length->description
+msgid "Message length"
+msgstr "Độ dài tin nhắn"
+
+#. settings-schema.json->max_message_length->tooltip
+msgid "A maximum number of characters in a notification message"
+msgstr "Số ký tự tối đa trong tin nhắn thông báo"
+
+#. settings-schema.json->applet_popup_width->units
+#. settings-schema.json->applet_popup_height->units
+msgid "pixels"
+msgstr "pixel"
+
+#. settings-schema.json->applet_popup_width->description
+msgid "Popup width"
+msgstr "Chiều rộng popup"
+
+#. settings-schema.json->applet_popup_width->tooltip
+msgid "A width of an applet popup"
+msgstr "Chiều rộng của popup applet"
+
+#. settings-schema.json->applet_popup_height->description
+msgid "Popup height"
+msgstr "Chiều cao popup"
+
+#. settings-schema.json->applet_popup_height->tooltip
+msgid "A height of an applet popup"
+msgstr "Chiều cao của popup applet"
+
+#. settings-schema.json->applet_popup_title_css->description
+msgid "Popup title CSS"
+msgstr "CSS tiêu đề popup"
+
+#. settings-schema.json->applet_popup_title_css->tooltip
+msgid "A CSS style applied to a notification title in an applet popup"
+msgstr "Một kiểu CSS được áp dụng cho tiêu đề thông báo trong popup applet"
+
+#. settings-schema.json->applet_popup_message_css->description
+msgid "Popup message CSS"
+msgstr "CSS tin nhắn popup"
+
+#. settings-schema.json->applet_popup_message_css->tooltip
+msgid "A CSS style applied to a notification message in an applet popup"
+msgstr "Một kiểu CSS được áp dụng cho tin nhắn thông báo trong popup applet"
+
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Icon"
+msgstr "Biểu tượng"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "An icon displayed in a panel"
+msgstr "Một biểu tượng hiển thị trong panel"
+
+#. settings-schema.json->scripts_start->description
+msgid "Scripts"
+msgstr "Scripts"
+
+#. settings-schema.json->script_filepath->description
+msgid "Script"
+msgstr "Script"
+
+#. settings-schema.json->script_filepath->tooltip
+msgid "A path to a script that refeshes a website"
+msgstr "Đường dẫn đến script làm mới trang web"
+
+#. settings-schema.json->script_separator->description
+msgid "Separator "
+msgstr "Dấu phân cách "
+
+#. settings-schema.json->script_separator->tooltip
+msgid "A string that seperates values returned from the script"
+msgstr "Một chuỗi phân tách các giá trị trả về từ script"

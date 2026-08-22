@@ -1,0 +1,152 @@
+# REDSHIFT
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# marvel4u, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-28 05:35-0400\n"
+"PO-Revision-Date: 2022-11-28 18:46+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. settings-schema.json->brightness->description
+#. applet.js:65 applet.js:235 applet.js:340
+msgid "Brightness"
+msgstr "Kirkkaus"
+
+#. metadata.json->name
+#. applet.js:84 applet.js:341
+msgid "Redshift"
+msgstr "Redshift"
+
+#. applet.js:103
+msgid "Transition on night"
+msgstr "Siirtyminen yöllä"
+
+#. applet.js:214
+msgid "Redshift day colour"
+msgstr "Redshift väri päivällä"
+
+#. applet.js:219
+msgid "Redshift day brightness"
+msgstr "Redshift kirkkaus päivällä"
+
+#. applet.js:224
+msgid "Redshift night colour"
+msgstr "Redshift väri yöllä"
+
+#. applet.js:229
+msgid "Redshift night brightness"
+msgstr "Redshift kirkkaus yöllä"
+
+#. applet.js:341
+msgid "On"
+msgstr "On"
+
+#. applet.js:345
+msgid "Day colour temperature"
+msgstr "Värilämpötila päivällä"
+
+#. applet.js:346
+msgid "Night colour temperature"
+msgstr "Värilämpötila yöllä"
+
+#. applet.js:347
+msgid "Day Redshift brightness"
+msgstr "Päivän Redshift kirkkaus"
+
+#. applet.js:348
+msgid "Night Redshift brightness"
+msgstr "Yön Redshift kirkkaus"
+
+#. applet.js:350
+#, fuzzy
+msgid "Colour temperature"
+msgstr "Värilämpötila päivällä"
+
+#. applet.js:351
+#, fuzzy
+msgid "Redshift brightness"
+msgstr "Päivän Redshift kirkkaus"
+
+#. metadata.json->description
+msgid ""
+"An app to change the red filter level for late night screen time. Requires "
+"redshift: sudo apt-get install redshift"
+msgstr ""
+"Sovellus, jolla muutetaan punaisen suodattimen tasoa myöhäisillan "
+"ruutuaikaan. Vaatii ohjelman redshift: sudo apt-get install redshift"
+
+#. settings-schema.json->panel->title
+msgid "Redshift settings"
+msgstr "Redshift asetukset"
+
+#. settings-schema.json->brightness-section->title
+msgid "Brightness level"
+msgstr "Kirkkaustaso"
+
+#. settings-schema.json->redshift-section->title
+msgid "Redshift configuration"
+msgstr "Redshift määritykset"
+
+#. settings-schema.json->redshift-transition-section->title
+msgid "Transition between day and night configuration"
+msgstr "Siirtyminen päivä ja yö määritysten välillä"
+
+#. settings-schema.json->brightness->units
+#. settings-schema.json->redshiftDayBrightness->units
+#. settings-schema.json->redshiftNightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->enabledOnStartup->description
+msgid "Redshift Enabled"
+msgstr "Redshift käytössä"
+
+#. settings-schema.json->dayColour->units
+#. settings-schema.json->nightColour->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayColour->description
+msgid "Redshift Day colour temperature"
+msgstr "Redshift päivän värilämpötila"
+
+#. settings-schema.json->redshiftDayBrightness->description
+msgid "Redshift Day Brightness"
+msgstr "Redshift päivän kirkkaus"
+
+#. settings-schema.json->changeOnNight->description
+msgid "Change temperature colour and Redshift brightness between day and night"
+msgstr "Muuta Redshift värilämpötilaa ja kirkkautta päivän ja yön välillä"
+
+#. settings-schema.json->nightColour->description
+msgid "Redshift Night colour temperature"
+msgstr "Redshift yön värilämpötila"
+
+#. settings-schema.json->redshiftNightBrightness->description
+msgid "Redshift Night Brightness"
+msgstr "Redshift yön kirkkaus"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "Leveysaste"
+
+#. settings-schema.json->latitude->tooltip
+#. settings-schema.json->longitude->tooltip
+msgid "If not entered Redshift would use GeoClue2 provider"
+msgstr "Jos sitä ei anneta, Redshift käyttää GeoClue2-palvelua"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "Pituusaste"

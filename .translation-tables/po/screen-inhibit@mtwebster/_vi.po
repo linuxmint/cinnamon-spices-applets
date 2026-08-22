@@ -1,0 +1,10 @@
+# SCREENSAVER INHIBITOR
+# This file is put in the public domain.
+# mtwebster, 2016
+#
+msgid ""
+msgstr ""
+
+#. applet.js:192
+msgid "Power settings"
+msgstr ""

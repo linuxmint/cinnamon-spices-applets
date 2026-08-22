@@ -1,0 +1,101 @@
+# SUSPEND COMPUTER
+# This file is put in the public domain.
+# janax, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: suspend@janax 2.0.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-29 20:37-0400\n"
+"PO-Revision-Date: 2024-04-21 20:37+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:48
+msgid "Suspend"
+msgstr "Slapen"
+
+#. metadata.json->description
+msgid "Immediately suspends the computer"
+msgstr "Zet de computer onmiddellijk in slaapstand"
+
+#. metadata.json->name
+msgid "Suspend computer"
+msgstr "Doe computer slapen"
+
+#. settings-schema.json->suspend-header->description
+msgid "Suspend computer settings"
+msgstr "Instellingen voor het doen slapen van de computer"
+
+#. settings-schema.json->suspend-on-double-click->description
+msgid "Double-click to suspend"
+msgstr "Dubbelklik om te doen slapen"
+
+#. settings-schema.json->suspend-on-double-click->tooltip
+msgid ""
+"When enabled, a double-click will suspend the computer, otherwise the "
+"computer will suspend on a single click."
+msgstr ""
+"Wanneer ingeschakeld, zal een dubbelklik de computer doen slapen; anders zal "
+"de computer doen slapen bij een enkele klik."
+
+#. settings-schema.json->count-down->description
+msgid "Use a count down before suspending"
+msgstr "Tel af voor het doen slapen"
+
+#. settings-schema.json->count-down->tooltip
+msgid ""
+"When enabled, a count down will occurs before suspending the computer.\n"
+"Clicking again during the count down will cancel the suspend."
+msgstr ""
+"Wanneer ingeschakeld, zal er worden afgeteld voordat de computer in "
+"slaapstand gaat.\n"
+"Een nieuwe klik tijdens het aftellen annuleert het doen slapen."
+
+#. settings-schema.json->count-down-duration->units
+msgid "seconds"
+msgstr "seconden"
+
+#. settings-schema.json->count-down-duration->description
+msgid "Count down duration"
+msgstr "Duur van het aftellen"
+
+#. settings-schema.json->ctrl-override-countdown->description
+msgid "Ctrl+Click to override the count down and suspend immediately"
+msgstr ""
+"Ctrl+klik om het aftellen te negeren en onmiddellijk in slaapstand gaan"
+
+#. settings-schema.json->ctrl-override-countdown->tooltip
+msgid ""
+"When enabled, using Ctrl+Click will suspend the computer immediately, "
+"without starting a count down or waiting for an existing count down to "
+"finish."
+msgstr ""
+"Wanneer ingeschakeld, zal een Ctrl+klik de computer onmiddellijk doen "
+"slapen, zonder te starten met aftellen of te wachten tot een bestaande "
+"aftelling is voltooid."
+
+#. settings-schema.json->fullcolor-icon->description
+msgid "Use a full color icon"
+msgstr "Gebruik een volledig gekleurd pictogram"
+
+#. settings-schema.json->fullcolor-icon->tooltip
+msgid ""
+"When enabled, a full color panel icon will be used, otherwise a symbolic "
+"icon will be used."
+msgstr ""
+"Wanneer ingeschakeld, wordt een volledig gekleurd paneelpictogram gebruikt, "
+"anders wordt een symbolisch pictogram gebruikt."
+
+#. settings-schema.json->system-suspend-header->description
+msgid "System suspend settings"
+msgstr "Instellingen voor doen slapen van systeem"
+
+#. settings-schema.json->config-power->description
+msgid "Open Power Management Settings"
+msgstr "Open instellingen voor energiebeheer"

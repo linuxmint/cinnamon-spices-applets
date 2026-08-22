@@ -1,0 +1,220 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: devutils@fogl 0.1.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2017-04-21 00:29+0800\n"
+"PO-Revision-Date: 2025-10-12 00:16+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+
+#: applet.js:38
+msgid "MySQL Browser"
+msgstr "Trình duyệt MySQL"
+
+#: applet.js:45 applet.js:211
+msgid "Open Project Directory"
+msgstr "Mở thư mục dự án"
+
+#: applet.js:51
+msgid "Nginx Web Server"
+msgstr "Máy chủ Web Nginx"
+
+#: applet.js:52
+msgid "MySQL Server"
+msgstr "Máy chủ MySQL"
+
+#: applet.js:53
+msgid "PostgreSQL Server"
+msgstr "Máy chủ PostgreSQL"
+
+#: applet.js:55
+msgid "Apache Web Server"
+msgstr "Máy chủ Web Apache"
+
+#: applet.js:80
+msgid ""
+"ERROR: Could not execute command...\n"
+"Please check your configurations!\n"
+"\n"
+"Open applet configuration?\n"
+"\n"
+msgstr ""
+"LỖI: Không thể thực thi lệnh...\n"
+"Vui lòng kiểm tra cấu hình!\n"
+"\n"
+"Mở cấu hình applet?\n"
+"\n"
+
+#: applet.js:85
+msgid "Open Applet Settings"
+msgstr "Mở cài đặt Applet"
+
+#: applet.js:92
+msgid "Open Applet Source"
+msgstr "Mở mã nguồn Applet"
+
+#: applet.js:99
+msgid "Cancel"
+msgstr "Hủy"
+
+#. devutils@fogl->metadata.json->name
+#: applet.js:126
+msgid "Development Utils"
+msgstr "Công cụ phát triển"
+
+#: applet.js:133
+msgid "Settings"
+msgstr "Cài đặt"
+
+#: applet.js:138
+msgid "Looking Glass"
+msgstr "Looking Glass"
+
+#: applet.js:173
+msgid "Control "
+msgstr "Điều khiển "
+
+#: applet.js:174
+msgid "  Service is up"
+msgstr "  Dịch vụ đang chạy"
+
+#: applet.js:174
+msgid "  Start service"
+msgstr "  Bắt đầu dịch vụ"
+
+#: applet.js:175
+msgid "  Service is down"
+msgstr "  Dịch vụ đã dừng"
+
+#: applet.js:175
+msgid "  Stop service"
+msgstr "  Dừng dịch vụ"
+
+#: applet.js:221
+msgid "Launch 127.0.0.1"
+msgstr "Khởi chạy 127.0.0.1"
+
+#: applet.js:225
+msgid "Edit default nginx config"
+msgstr "Chỉnh sửa cấu hình Nginx mặc định"
+
+#. devutils@fogl->metadata.json->description
+msgid "Development Utils Applet for Cinnamon"
+msgstr "Applet Công cụ phát triển cho Cinnamon"
+
+#. devutils@fogl->settings-schema.json->head_menu->description
+msgid "Menu Entries"
+msgstr "Mục menu"
+
+#. devutils@fogl->settings-schema.json->mysql_browser->description
+msgid "Show \"MySQL Browser\" Launcher in Menu"
+msgstr "Hiển thị trình khởi chạy \"Trình duyệt MySQL\" trong menu"
+
+#. devutils@fogl->settings-schema.json->open_project_dir->description
+msgid "Specify file browser and path to your project directory"
+msgstr "Chỉ định trình duyệt tệp và đường dẫn đến thư mục dự án của bạn"
+
+#. devutils@fogl->settings-schema.json->open_project_dir->tooltip
+msgid "For example: nemo /home/username/Projects"
+msgstr "Ví dụ: nemo /home/username/Projects"
+
+#. devutils@fogl->settings-schema.json->select_mysql_browser->options
+msgid "HeidiSQL (requires installation of Wine)"
+msgstr "HeidiSQL (cần cài Wine)"
+
+#. devutils@fogl->settings-schema.json->select_mysql_browser->options
+msgid "MySQL Workbench"
+msgstr "MySQL Workbench"
+
+#. devutils@fogl->settings-schema.json->select_mysql_browser->description
+msgid "Select MySQL Browser"
+msgstr "Chọn trình duyệt MySQL"
+
+#. devutils@fogl->settings-schema.json->geany->description
+msgid "Show \"Geany\" Launcher in Menu"
+msgstr "Hiển thị trình khởi chạy \"Geany\" trong menu"
+
+#. devutils@fogl->settings-schema.json->eclipse->description
+msgid "Show \"Eclipse\" Launcher in Menu"
+msgstr "Hiển thị trình khởi chạy \"Eclipse\" trong menu"
+
+#. devutils@fogl->settings-schema.json->gedit->description
+msgid "Show \"Gedit\" Launcher in Menu"
+msgstr "Hiển thị trình khởi chạy \"Gedit\" trong menu"
+
+#. devutils@fogl->settings-schema.json->filezilla->description
+msgid "Show \"Filezilla\" Launcher in Menu"
+msgstr "Hiển thị trình khởi chạy \"Filezilla\" trong menu"
+
+#. devutils@fogl->settings-schema.json->terminal->description
+msgid "Show \"Terminal\" Launcher in Menu"
+msgstr "Hiển thị trình khởi chạy \"Terminal\" trong menu"
+
+#. devutils@fogl->settings-schema.json->path_heidi->description
+msgid "Specify path to HeidiSQL"
+msgstr "Chỉ định đường dẫn tới HeidiSQL"
+
+#. devutils@fogl->settings-schema.json->path_heidi->tooltip
+msgid ""
+"For example \"wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/YOUR "
+"USERNAME/.wine/dosdevices/c:/users/Public/Start\\ Menu/Programs/HeidiSQL/"
+"HeidiSQL.lnk\""
+msgstr ""
+"Ví dụ \"wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/TÊN_NGƯỜI_DÙNG/.wine/dosdevices/c:/users/Public/Start\\ Menu/Programs/HeidiSQL/HeidiSQL.lnk\""
+
+#. devutils@fogl->settings-schema.json->head_services->description
+msgid "Services"
+msgstr "Dịch vụ"
+
+#. devutils@fogl->settings-schema.json->config->description
+msgid "Show \"Configurations\" in Menu"
+msgstr "Hiển thị \"Cấu hình\" trong menu"
+
+#. devutils@fogl->settings-schema.json->services->description
+msgid "Show \"Services\" in Menu"
+msgstr "Hiển thị \"Dịch vụ\" trong menu"
+
+#. devutils@fogl->settings-schema.json->select_terminal->options
+msgid "xterm"
+msgstr "xterm"
+
+#. devutils@fogl->settings-schema.json->select_terminal->options
+msgid "Gnome Terminal"
+msgstr "Gnome Terminal"
+
+#. devutils@fogl->settings-schema.json->select_terminal->description
+msgid "Select Terminal"
+msgstr "Chọn Terminal"
+
+#. devutils@fogl->settings-schema.json->services_type->options
+msgid "Submenu for each Service"
+msgstr "Menu con cho mỗi dịch vụ"
+
+#. devutils@fogl->settings-schema.json->services_type->options
+msgid "Switch Buttons"
+msgstr "Nút chuyển đổi"
+
+#. devutils@fogl->settings-schema.json->services_type->description
+msgid "Select Services Type"
+msgstr "Chọn loại dịch vụ"
+
+#. devutils@fogl->settings-schema.json->head_config->description
+msgid "Configurations"
+msgstr "Cấu hình"
+
+#. devutils@fogl->settings-schema.json->head_mysql_browser->description
+msgid "MySQL Browser Settings"
+msgstr "Cài đặt Trình duyệt MySQL"

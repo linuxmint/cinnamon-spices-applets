@@ -1,0 +1,170 @@
+# MAILNAG
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# hyOzd, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-26 12:36-0500\n"
+"PO-Revision-Date: 2025-02-13 21:12+0100\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:169
+msgid "just now"
+msgstr "ara mateix"
+
+#. applet.js:177
+msgid " minutes ago"
+msgstr " minuts avans"
+
+#. applet.js:185
+msgid " hours ago"
+msgstr " hores enrere"
+
+#. applet.js:192
+msgid "yesterday"
+msgstr "ahir"
+
+#. applet.js:196
+msgid " days ago"
+msgstr " dies enrere"
+
+#. applet.js:200
+msgid " weeks ago"
+msgstr " setmanes enrere"
+
+#. applet.js:285
+msgid "Configure Mailnag"
+msgstr "Configurar Mailnag"
+
+#. applet.js:370
+msgid "Mailnag daemon stopped working!"
+msgstr "El servei de Mailnag ha deixat de funcionar!"
+
+#. applet.js:374
+msgid "Mailnag daemon isn't running! Do you have it installed?"
+msgstr "El servei de Mailnag no està en marxa! El teniu instal·lat?"
+
+#. applet.js:607
+#, javascript-format
+msgid "You have %d new mails!"
+msgstr "Teniu %d correus nous!"
+
+#. applet.js:608 applet.js:653
+msgid "Mark All Read"
+msgstr "Marcar tot com a llegit"
+
+#. applet.js:616
+msgid "You have new mail!"
+msgstr "Teniu correu nou!"
+
+#. applet.js:618
+msgid "Mark Read"
+msgstr "Marcar com a llegit"
+
+#. applet.js:701 applet.js:763
+msgid "No unread mails."
+msgstr "No hi ha correus no llegits."
+
+#. applet.js:739
+msgid "Mailnag daemon is not running!"
+msgstr "El servei de Mailnag no està en marxa!"
+
+#. applet.js:752
+#, javascript-format
+msgid "You have a mail from %s!"
+msgstr "Teniu un correu de %s!"
+
+#. applet.js:758
+#, javascript-format
+msgid "You have %d unread mails!"
+msgstr "Teniu %d correus sense llegir!"
+
+#. applet.js:774
+msgid "Click to see error!"
+msgstr "Cliqueu per a veure l'error!"
+
+#. applet.js:775
+msgid "Error: "
+msgstr "Error: "
+
+#. metadata.json->name
+msgid "Mailnag"
+msgstr "Mailnag"
+
+#. metadata.json->description
+msgid "Mailnag mail notifier applet"
+msgstr "Miniaplicació notificadora de correus Mailnag"
+
+#. settings-schema.json->notifications->description
+msgid "Show notifications"
+msgstr "Mostrar notificacions"
+
+#. settings-schema.json->notifications->tooltip
+msgid ""
+"Enables display of mail arrived notifications by applet. Make sure you "
+"disable mailnag notification plugin, otherwise you will have duplicates."
+msgstr ""
+"Activa l'enviament de notificacions per part de la miniaplicació en rebre "
+"correus. En cas d'activar-ho, desactiveu el plugin de notificacions de "
+"Mailnag o rebreu notificacions duplicades."
+
+#. settings-schema.json->launch_client_on_click->description
+msgid "Launch mail client on click"
+msgstr "Iniciar el client de correu en fer clic"
+
+#. settings-schema.json->launch_client_on_click->tooltip
+msgid "Mail client is launched when clicked on a menu item."
+msgstr "S'iniciarà el client de correu en clicar un element del menú."
+
+#. settings-schema.json->middle_click->description
+msgid "On middle click:"
+msgstr "En fer clic del mig:"
+
+#. settings-schema.json->middle_click->tooltip
+msgid "What to do when middle clicked on applet icon"
+msgstr "Acció a realitzar en fer clic del mig a la icona de la miniaplicació"
+
+#. settings-schema.json->middle_click->options
+msgid "Mark all read"
+msgstr "Marcar tot com a llegit"
+
+#. settings-schema.json->middle_click->options
+msgid "Launch mail client"
+msgstr "Iniciar el client de correu"
+
+#. settings-schema.json->middle_click->options
+msgid "Do nothing"
+msgstr "No fer res"
+
+#. settings-schema.json->max_length->description
+msgid "Max sender / subject display length"
+msgstr "Longitud màxima del remitent i l'assumpte"
+
+#. settings-schema.json->max_length->tooltip
+msgid "Sender or subject lines longer than this will be cropped"
+msgstr ""
+"Si el remitent o l'assumpte excedeixen el número de línies, l'excedent es "
+"retallarà"
+
+#. settings-schema.json->client->description
+msgid "Mail client to launch (or webpage)"
+msgstr "Client de correu a llançar (o lloc web)"
+
+#. settings-schema.json->client->tooltip
+msgid ""
+"Enter the command to launch your mail client here. You can also enter a web "
+"address that starts with 'http'."
+msgstr ""
+"Introduïu l'ordre per a executar el vostre client de correu aquí. També "
+"podeu introduir un lloc web que comenci per 'http'."

@@ -1,0 +1,38 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 22:43+0800\n"
+"PO-Revision-Date: 2025-05-04 02:01+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. pa-equalizer@jschug.com->metadata.json->name
+#: applet.js:127
+msgid "Equalizer"
+msgstr "等化器"
+
+#: applet.js:132
+msgid "Presets"
+msgstr "預設組態"
+
+#: applet.js:135
+msgid "Settings"
+msgstr "設定"
+
+#: applet.js:163
+msgid "Preset: "
+msgstr "預設組態："
+
+#. pa-equalizer@jschug.com->metadata.json->description
+msgid "An applet to control sound equalization"
+msgstr "控制音效等化器的小程式"
