@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.1
+
+* Small code refactor (Optimize startup performance and disk reads)
+* Explicitly set default Music directory for recording folder
+* Redesign station selection with native checkbox list
+
 ## 1.3
 
 * Add radio station backup/restore support

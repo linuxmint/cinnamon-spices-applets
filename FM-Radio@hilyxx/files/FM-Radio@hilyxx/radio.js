@@ -77,27 +77,36 @@ function createControlButtons(player, pr) {
 // === GSTREAMER STREAM ===
 const RadioPlayer = class RadioPlayer {
     constructor(channel) {
+        this.channel = channel;
+        this.playing = false;
+        this.volume = DEFAULT_VOLUME;
+        this.playbin = null;
+        this.sink = null;
+        this.onError = null;
+        this.onTagChanged = null;
+    }
+
+    _initPipeline() {
+        if (this.playbin) return;
+
         Gst.init(null);
         this.playbin = Gst.ElementFactory.make("playbin", "fmradio");
-        this.playbin.set_property("uri", channel.getLink());
+        this.playbin.set_property("uri", this.channel.getLink());
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
 
         this.sink.set_property("client-name", CLIENT_NAME);
         this.playbin.set_property("audio-sink", this.sink);
-        this.channel = channel;
-        this.playing = false;
-        this.setVolume(DEFAULT_VOLUME);
+        this.playbin.volume = this.volume;
 
         let bus = this.playbin.get_bus();
         bus.add_signal_watch();
         bus.connect("message", (bus, msg) => {
             if (msg != null) this._onMessageReceived(msg);
         });
-        this.onError = null;
-        this.onTagChanged = null;
     }
 
     play() {
+        this._initPipeline();
         this.playbin.set_state(Gst.State.PLAYING);
         this.playing = true;
     }
@@ -111,11 +120,15 @@ const RadioPlayer = class RadioPlayer {
     }
 
     setMute(mute) {
-        this.playbin.set_property("mute", mute);
+        if (this.playbin) {
+            this.playbin.set_property("mute", mute);
+        }
     }
 
     stop() {
-        this.playbin.set_state(Gst.State.NULL);
+        if (this.playbin) {
+            this.playbin.set_state(Gst.State.NULL);
+        }
         this.playing = false;
     }
 
@@ -135,9 +148,13 @@ const RadioPlayer = class RadioPlayer {
 
     setChannel(ch) {
         this.channel = ch;
-        this.tag = ""; // Clear the previous title from memory
+        this.tag = "";
+        this.title = "";
+        this.artist = "";
         this.stop();
-        this.playbin.set_property("uri", ch.getLink());
+        if (this.playbin) {
+            this.playbin.set_property("uri", ch.getLink());
+        }
         this.play();
     }
 
@@ -146,7 +163,14 @@ const RadioPlayer = class RadioPlayer {
     }
 
     setVolume(value) {
-        this.playbin.volume = value;
+        this.volume = value;
+        if (this.playbin) {
+            this.playbin.volume = value;
+        }
+    }
+
+    getVolume() {
+        return this.volume;
     }
 
     isPlaying() {
