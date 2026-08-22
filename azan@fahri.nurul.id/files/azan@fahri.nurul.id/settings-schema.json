@@ -1,7 +1,39 @@
 {
-    "head_calculations": {
-        "type": "header",
-        "description": "Calculations"
+    "layout1": {
+        "type": "layout",
+        "pages": ["main", "tweaks"],
+        "main": {
+            "type": "page",
+            "title": "Main",
+            "sections": ["main_calculations", "main_location", "main_reminders"]    
+        },
+        "tweaks": {
+            "type": "page",
+            "title": "Tweaks",
+            "sections": ["tweaks_time_adjust"]
+        },
+        "main_calculations": {
+            "type": "section",
+            "title": "Calculations",
+            "keys": ["calculation_method", "juristic"]
+        },
+        "main_location": {
+            "type": "section",
+            "title": "Your Location",
+            "keys": ["latitude", "longitude", "timezone", "time_format"]
+        },
+        "main_reminders": {
+            "type": "section",
+            "title": "Reminders",
+            "keys": ["primary_reminder", "extra_reminder"]        
+        },
+        "tweaks_time_adjust": {
+            "type": "section",
+            "title": "Time Adjustments",
+            "keys": ["adj_imsak", "adj_fajr", "adj_sunrise", 
+                     "adj_dhuhr", "adj_asr", "adj_sunset", 
+                     "adj_maghrib", "adj_isha", "adj_midnight"]        
+        }
     },
     "calculation_method": {
         "type": "combobox",
@@ -17,12 +49,15 @@
             "Shia Ithna-Ashari, Leva Institute, Qum": "Jafari"
         }
     },
-    "separator": {
-        "type": "separator"
-    },
-    "head_location": {
-        "type": "header",
-        "description": "Your Location"
+    "juristic": {
+        "type": "combobox",
+        "description": "Madhhab (see tooltip)",
+        "default": "Standard",
+        "options": {
+            "Shafi`i, Maliki, Ja`fari or Hanbali": "Standard",
+            "Hanafi": "Hanafi"
+        },
+        "tooltip": "Asr prayer time is earlier in all madhhabs but Hanafi."
     },
     "latitude": {
         "type": "spinbutton",
@@ -30,8 +65,9 @@
         "min": -90.0000,
         "max": 90.0000,
         "step": 0.0001,
-        "units": "",
-        "description": "Latitude"
+        "units": "degrees",
+        "description": "Latitude",
+        "tooltip": "Range is from -90 to 90 degrees. Default is -6.3292 degrees."
     },
     "longitude": {
         "type": "spinbutton",
@@ -39,8 +75,9 @@
         "min": -180.0000,
         "max": 180.0000,
         "step": 0.0001,
-        "units": "",
-        "description": "Longitude"
+        "units": "degrees",
+        "description": "Longitude",
+        "tooltip": "Range is from -180 to 180 degrees. Default is 106.8567 degrees."
     },
     "timezone": {
         "type": "combobox",
@@ -85,26 +122,14 @@
 			"12h": "12h"
 		}
 	},
-    "head_juristic": {
-        "type": "header",
-        "description": "Juristic Settings"
+    "primary_reminder": {
+        "type": "checkbox",
+        "default": "1",
+        "description": "Send a reminder at prayer time"
     },
-    "juristic":{
+    "extra_reminder": {
         "type": "combobox",
-        "description": "Method",
-        "default": "Standard",
-        "options": {
-            "Shafi`i, Maliki, Ja`fari, Hanbali": "Standard",
-            "Hanafi": "Hanafi"
-        }
-    },
-    "reminder": {
-        "type": "header",
-        "description": "Reminder Settings"
-    },
-    "extra_reminder":{
-        "type": "combobox",
-        "description": "Extra reminder before prayer time",
+        "description": "Send a reminder before prayer time",
         "default": "0",
         "options": {
             "Off": "0",
@@ -112,5 +137,95 @@
             "10 minutes": "10",
             "15 minutes": "15"
         }
+    },
+    "adj_imsak": {
+        "type": "spinbutton",
+        "default": 0,
+        "description": "Adjust Imsak time",
+        "units": "minutes",
+        "min": -60,
+        "max": 60,
+        "step": 1,
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
+    },
+    "adj_fajr": {
+        "type": "spinbutton",
+        "default": 0,
+        "description": "Adjust Fajr time",
+        "units": "minutes",
+        "min": -60,
+        "max": 60,
+        "step": 1,
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
+    },
+    "adj_sunrise": {
+        "type": "spinbutton",
+        "default": 0,
+        "description": "Adjust sunrise time",
+        "units": "minutes",
+        "min": -60,
+        "max": 60,
+        "step": 1,
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
+    },
+    "adj_dhuhr": {
+        "type": "spinbutton",
+        "default": 0,
+        "description": "Adjust Dhuhr time",
+        "units": "minutes",
+        "min": -60,
+        "max": 60,
+        "step": 1,
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
+    },
+    "adj_asr": {
+        "type": "spinbutton",
+        "default": 0,
+        "description": "Adjust Asr time",
+        "units": "minutes",
+        "min": -60,
+        "max": 60,
+        "step": 1,
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
+    },
+    "adj_sunset": {
+        "type": "spinbutton",
+        "default": 0,
+        "description": "Adjust sunset time",
+        "units": "minutes",
+        "min": -60,
+        "max": 60,
+        "step": 1,
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
+    },
+    "adj_maghrib": {
+        "type": "spinbutton",
+        "default": 0,
+        "description": "Adjust Maghrib time",
+        "units": "minutes",
+        "min": -60,
+        "max": 60,
+        "step": 1,
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
+    },
+    "adj_isha": {
+        "type": "spinbutton",
+        "default": 0,
+        "description": "Adjust Isha time",
+        "units": "minutes",
+        "min": -60,
+        "max": 60,
+        "step": 1,
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
+    },
+    "adj_midnight": {
+        "type": "spinbutton",
+        "default": 0,
+        "description": "Adjust midnight time",
+        "units": "minutes",
+        "min": -60,
+        "max": 60,
+        "step": 1,
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
     }
 }
