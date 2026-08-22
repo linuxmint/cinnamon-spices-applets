@@ -1,0 +1,187 @@
+# EMOJI KEYBOARD
+# This file is put in the public domain.
+# rubberband75, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: emoji-keyboard@rubberband75 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-27 15:25-0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:46
+msgid "Recent"
+msgstr "Senaste"
+
+#. applet.js:47
+msgid "Smileys & Emotions"
+msgstr "Smilies och känslor"
+
+#. applet.js:48
+msgid "People"
+msgstr "Personer"
+
+#. applet.js:49
+msgid "Animals & Nature"
+msgstr "Djur och natur"
+
+#. applet.js:50
+msgid "Food & Drink"
+msgstr "Mat och dryck"
+
+#. applet.js:51
+msgid "Travel & Places"
+msgstr "Resor och platser"
+
+#. applet.js:52
+msgid "Activities & Events"
+msgstr "Aktiviteter och händelser"
+
+#. applet.js:53
+msgid "Objects"
+msgstr "Objekt"
+
+#. applet.js:54
+msgid "Symbols"
+msgstr "Symboler"
+
+#. applet.js:55
+msgid "Flags"
+msgstr "Flaggor"
+
+#. metadata.json->name
+#. applet.js:142
+msgid "Emoji Keyboard"
+msgstr "Emoji-tangentbord"
+
+#. applet.js:167
+msgid "Search emoji"
+msgstr "Sök efter emoji"
+
+#. applet.js:206
+msgid "Loading emoji…"
+msgstr "Läser in emoji…"
+
+#. applet.js:415
+msgid "Unable to load the emoji catalog"
+msgstr "Emoji-katalogen kunde inte läsas in"
+
+#. applet.js:492
+#, javascript-format
+msgid "%d search result"
+msgid_plural "%d search results"
+msgstr[0] "%d sökresultat"
+msgstr[1] "%d sökresultat"
+
+#. applet.js:519
+msgid "Your recently used emoji will appear here"
+msgstr "Dina senast använda emoji visas här"
+
+#. applet.js:520
+msgid "No emoji found"
+msgstr "Inga emoji hittades"
+
+#. metadata.json->description
+msgid "Search, copy, and insert emoji from a native Cinnamon panel popup."
+msgstr ""
+"Sök, kopiera och infoga emoji från en inbyggd popup i Cinnamon-panelen."
+
+#. settings-schema.json->copy-to-clipboard->description
+msgid "Copy emoji to clipboard"
+msgstr "Kopiera emoji till urklipp"
+
+#. settings-schema.json->copy-to-clipboard->tooltip
+msgid ""
+"When enabled, the selected emoji stays on the clipboard after it is "
+"inserted. When disabled, the clipboard is restored to its previous contents "
+"after insertion."
+msgstr ""
+"När aktiverad stannar den valda emojin kvar i urklipp efter infogning. När "
+"inaktiverad återställs urklippets tidigare innehåll direkt efter infogningen."
+
+#. settings-schema.json->category-icon-size->description
+msgid "Category icon size"
+msgstr "Ikonstorlek för kategori"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Colored Icon Size"
+msgstr "Matcha panelens färgade ikonstorlek"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Symbolic Icon Size"
+msgstr "Matcha panelens symboliska ikonstorlek"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "16px"
+msgstr "16px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "22px"
+msgstr "22px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "24px"
+msgstr "24px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "32px"
+msgstr "32px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "48px"
+msgstr "48px"
+
+#. settings-schema.json->emoji-size->description
+msgid "Emoji size"
+msgstr "Emoji-storlek"
+
+#. settings-schema.json->default-skin-tone->description
+msgid "Default skin tone"
+msgstr "Standardhudton"
+
+#. settings-schema.json->default-skin-tone->tooltip
+msgid ""
+"Emoji that support skin tones show this tone by default. Emoji without skin "
+"tone variants are unaffected."
+msgstr ""
+"Emoji som stöder hudtoner visar denna ton som standard. Emoji utan "
+"hudtonsvarianter påverkas inte."
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍"
+msgstr "👍"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏻"
+msgstr "👍🏻"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏼"
+msgstr "👍🏼"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏽"
+msgstr "👍🏽"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏾"
+msgstr "👍🏾"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏿"
+msgstr "👍🏿"
