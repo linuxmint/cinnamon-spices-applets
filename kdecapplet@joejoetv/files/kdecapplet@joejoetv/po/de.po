@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdecapplet@joejoetv\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-08-22 17:38+0200\n"
+"POT-Creation-Date: 2026-08-22 18:28+0200\n"
 "PO-Revision-Date: 2026-08-22 17:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: Johannes Schöneberger <joejoetv@joejoetv.de>\n"
@@ -19,26 +19,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: 5.8/applet.js:547 4.8/applet.js:574
+#. 5.8/applet.js:547 4.8/applet.js:574
 msgid "No Modules available"
 msgstr "Keine Module verfügbar"
 
-#: 5.8/applet.js:1021 5.8/applet.js:1024 4.8/applet.js:1065 4.8/applet.js:1068
+#. 5.8/applet.js:1021 5.8/applet.js:1024 4.8/applet.js:1065 4.8/applet.js:1068
 msgid "KDE Connect not available, make sure it's installed and running."
 msgstr ""
 "KDE Connect ist nicht verfügbar, stelle sicher, dass es installiert ist und "
 "ausgeführt wird."
 
-#: 5.8/applet.js:1028 5.8/applet.js:1041 5.8/applet.js:1230 4.8/applet.js:1072
-#: 4.8/applet.js:1085 4.8/applet.js:1270
+#. 5.8/applet.js:1028 5.8/applet.js:1041 5.8/applet.js:1230 4.8/applet.js:1072
+#. 4.8/applet.js:1085 4.8/applet.js:1270
 msgid "Reload Applet"
 msgstr "Applet neuladen"
 
-#: 5.8/applet.js:1033 4.8/applet.js:1077
+#. 5.8/applet.js:1033 4.8/applet.js:1077
 msgid "Invalid KDE Connect version returned!"
 msgstr "Ungültige KDE Connect Version erhalten!"
 
-#: 5.8/applet.js:1034 5.8/applet.js:1037 4.8/applet.js:1078 4.8/applet.js:1081
+#. 5.8/applet.js:1034 5.8/applet.js:1037 4.8/applet.js:1078 4.8/applet.js:1081
 msgid ""
 "The KDE Connect DBus service returned an invalid version, please try "
 "reloading the Applet!"
@@ -46,341 +46,341 @@ msgstr ""
 "Der KDE Connect DBus Dienst hat eine ungültige Version zurückgegeben, bitte "
 "versuche, das Applet neu zu laden!"
 
-#: 5.8/applet.js:1075 4.8/applet.js:1120
+#. 5.8/applet.js:1075 4.8/applet.js:1120
 msgid "No connected Devices!"
 msgstr "Keine verbundenen Geräte!"
 
-#: 5.8/applet.js:1075 4.8/applet.js:1120
+#. 5.8/applet.js:1075 4.8/applet.js:1120
 msgid "Add them in the KDE Connect settings"
 msgstr "Füge sie in den KDE Connect Einstellungen hinzu"
 
-#: 5.8/applet.js:1120 4.8/applet.js:1165
+#. 5.8/applet.js:1120 4.8/applet.js:1165
 msgid "Debug Stuff, don't touch!"
 msgstr "Debug Zeug, nicht anfassen!"
 
-#: 5.8/applet.js:1209 4.8/applet.js:1254
+#. 5.8/applet.js:1209 4.8/applet.js:1254
 msgid "KDE Connect Version: {version}"
 msgstr "KDE Connect Version: {version}"
 
-#: 5.8/applet.js:1221 4.8/applet.js:1261
+#. 5.8/applet.js:1221 4.8/applet.js:1261
 msgid "Own ID: {own_id}"
 msgstr "Eigene ID: {own_id}"
 
-#: 5.8/applet.js:1223 4.8/applet.js:1263
+#. 5.8/applet.js:1223 4.8/applet.js:1263
 msgid "own ID"
 msgstr "Eigene ID"
 
-#: 5.8/applet.js:1225 4.8/applet.js:1265
+#. 5.8/applet.js:1225 4.8/applet.js:1265
 msgid "Click to copy own ID"
 msgstr "Klicken, um eigene ID zu kopieren"
 
-#: 5.8/applet.js:1235 4.8/applet.js:1275
+#. 5.8/applet.js:1235 4.8/applet.js:1275
 msgid "Configure KDE Connect"
 msgstr "KDE Connect konfigurieren"
 
-#: 5.8/applet.js:1237 4.8/applet.js:1277
+#. 5.8/applet.js:1237 4.8/applet.js:1277
 msgid "Click to open KDE Connect Configuration"
 msgstr "Klicken, um die KDE Connect Einstellungen zu öffnen"
 
-#: 5.8/applet.js:1283 4.8/applet.js:1321
+#. 5.8/applet.js:1283 4.8/applet.js:1321
 msgid "No available devices"
 msgstr "Keine verfügbaren Geräte"
 
-#: 5.8/applet.js:1285 4.8/applet.js:1323
+#. 5.8/applet.js:1285 4.8/applet.js:1323
 msgid "{deviceCount} available device"
 msgstr "{deviceCount} verfügbares Gerät"
 
-#: 5.8/applet.js:1287 4.8/applet.js:1325
+#. 5.8/applet.js:1287 4.8/applet.js:1325
 msgid "{deviceCount} available devices"
 msgstr "{deviceCount} verfügbare Geräte"
 
-#: 5.8/js/modules.js:450
+#. 5.8/js/modules.js:450
 msgid "Module"
 msgstr "Modul"
 
-#: 5.8/js/modules.js:597
+#. 5.8/js/modules.js:597
 msgid "Battery Module"
 msgstr "Akku Modul"
 
-#: 5.8/js/modules.js:646 4.8/js/modules.js:658
+#. 5.8/js/modules.js:646 4.8/js/modules.js:658
 msgid "Charging"
 msgstr "Ladend"
 
-#: 5.8/js/modules.js:682
+#. 5.8/js/modules.js:682
 msgid "Device-Info Module"
 msgstr "Geräte-Info Modul"
 
-#: 5.8/js/modules.js:731 4.8/js/modules.js:741
+#. 5.8/js/modules.js:731 4.8/js/modules.js:741
 msgid "ID: {id}"
 msgstr "ID: {id}"
 
-#: 5.8/js/modules.js:735 4.8/js/modules.js:745
+#. 5.8/js/modules.js:735 4.8/js/modules.js:745
 msgid "Device ID"
 msgstr "Geräte ID"
 
-#: 5.8/js/modules.js:739 4.8/js/modules.js:749
+#. 5.8/js/modules.js:739 4.8/js/modules.js:749
 msgid "Click to copy ID"
 msgstr "Klicken, um ID zu kopieren"
 
-#: 5.8/js/modules.js:751
+#. 5.8/js/modules.js:751
 msgid "Connectivity Module"
 msgstr "Konnektivität Modul"
 
-#: 5.8/js/modules.js:813 4.8/js/modules.js:822
+#. 5.8/js/modules.js:813 4.8/js/modules.js:822
 msgid "No Signal"
 msgstr "Kein Empfang"
 
-#: 5.8/js/modules.js:816 4.8/js/modules.js:825
+#. 5.8/js/modules.js:816 4.8/js/modules.js:825
 msgid "Low"
 msgstr "Schlecht"
 
-#: 5.8/js/modules.js:819 4.8/js/modules.js:828
+#. 5.8/js/modules.js:819 4.8/js/modules.js:828
 msgid "Ok"
 msgstr "Ok"
 
-#: 5.8/js/modules.js:822 4.8/js/modules.js:831
+#. 5.8/js/modules.js:822 4.8/js/modules.js:831
 msgid "Good"
 msgstr "Gut"
 
-#: 5.8/js/modules.js:825 4.8/js/modules.js:834
+#. 5.8/js/modules.js:825 4.8/js/modules.js:834
 msgid "Excellent"
 msgstr "Exzellent"
 
-#: 5.8/js/modules.js:837 4.8/js/modules.js:846
+#. 5.8/js/modules.js:837 4.8/js/modules.js:846
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: 5.8/js/modules.js:867
+#. 5.8/js/modules.js:867
 msgid "FindMyPhone Module"
 msgstr "FindMyPhone Modul"
 
-#: 5.8/js/modules.js:892 4.8/js/modules.js:900
+#. 5.8/js/modules.js:892 4.8/js/modules.js:900
 msgid "Ring device"
 msgstr "Gerät anklingeln"
 
-#: 5.8/js/modules.js:893 4.8/js/modules.js:901
+#. 5.8/js/modules.js:893 4.8/js/modules.js:901
 msgid "Click to ring the device"
 msgstr "Klicken, um Gerät anzuklingeln"
 
-#: 5.8/js/modules.js:907
+#. 5.8/js/modules.js:907
 msgid "Request Photo Module"
 msgstr "Foto-Anfragen Modul"
 
-#: 5.8/js/modules.js:973 4.8/js/modules.js:980
+#. 5.8/js/modules.js:973 4.8/js/modules.js:980
 msgid "Photo received from '{deviceName}'"
 msgstr "Foto von '{deviceName}' empfangen"
 
-#: 5.8/js/modules.js:973 5.8/js/modules.js:1151 4.8/js/modules.js:980
-#: 4.8/js/modules.js:1156
+#. 5.8/js/modules.js:973 5.8/js/modules.js:1151 4.8/js/modules.js:980
+#. 4.8/js/modules.js:1156
 msgid "Click to open in default application"
 msgstr "Klicken, um in Standardanwendung zu öffnen"
 
-#: 5.8/js/modules.js:982 4.8/js/modules.js:989
+#. 5.8/js/modules.js:982 4.8/js/modules.js:989
 msgid "Request Photo"
 msgstr "Foto anfragen"
 
-#: 5.8/js/modules.js:983 4.8/js/modules.js:990
+#. 5.8/js/modules.js:983 4.8/js/modules.js:990
 msgid "Click to request a photo from the device"
 msgstr "Klicken, um Foto von dem Gerät anzufordern"
 
-#: 5.8/js/modules.js:1009
+#. 5.8/js/modules.js:1009
 msgid "Ping Module"
 msgstr "Ping Modul"
 
-#: 5.8/js/modules.js:1034 4.8/js/modules.js:1040
+#. 5.8/js/modules.js:1034 4.8/js/modules.js:1040
 msgid "Ping!"
 msgstr "Ping!"
 
-#: 5.8/js/modules.js:1041 4.8/js/modules.js:1047
+#. 5.8/js/modules.js:1041 4.8/js/modules.js:1047
 msgid "Sent ping to device '{deviceName}'"
 msgstr "Ping-Nachricht an Gerät '{deviceName}' gesendet"
 
-#: 5.8/js/modules.js:1047 4.8/js/modules.js:1053
+#. 5.8/js/modules.js:1047 4.8/js/modules.js:1053
 msgid "Ping Device"
 msgstr "Ping-Nachricht an Gerät senden"
 
-#: 5.8/js/modules.js:1048 4.8/js/modules.js:1054
+#. 5.8/js/modules.js:1048 4.8/js/modules.js:1054
 msgid "Click to send a ping to the device"
 msgstr "Klicken, um Ping-Nachricht an Gerät zu senden"
 
-#: 5.8/js/modules.js:1062
+#. 5.8/js/modules.js:1062
 msgid "Share Module"
 msgstr "Teilen Modul"
 
-#: 5.8/js/modules.js:1151 4.8/js/modules.js:1156
+#. 5.8/js/modules.js:1151 4.8/js/modules.js:1156
 msgid "Share received from '{deviceName}'"
 msgstr "Freigabe von '{deviceName}' empfangen"
 
-#: 5.8/js/modules.js:1186 4.8/js/modules.js:1191
+#. 5.8/js/modules.js:1186 4.8/js/modules.js:1191
 msgid "Share"
 msgstr "Teilen"
 
-#: 5.8/js/modules.js:1198 4.8/js/modules.js:1204
+#. 5.8/js/modules.js:1198 4.8/js/modules.js:1204
 msgid "Send URL"
 msgstr "Teile URL"
 
-#: 5.8/js/modules.js:1199 4.8/js/modules.js:1205
+#. 5.8/js/modules.js:1199 4.8/js/modules.js:1205
 msgid "Click to send a URL to the device"
 msgstr "Klicken, um eine URL an das Gerät zu senden"
 
-#: 5.8/js/modules.js:1208 4.8/js/modules.js:1214
+#. 5.8/js/modules.js:1208 4.8/js/modules.js:1214
 msgid "Send Text"
 msgstr "Teile Text"
 
-#: 5.8/js/modules.js:1209 5.8/js/modules.js:1553 4.8/js/modules.js:1215
-#: 4.8/js/modules.js:1490
+#. 5.8/js/modules.js:1209 5.8/js/modules.js:1553 4.8/js/modules.js:1215
+#. 4.8/js/modules.js:1490
 msgid "Click to send text to the device"
 msgstr "Klicken, um Text an das Gerät zu senden"
 
-#: 5.8/js/modules.js:1218 4.8/js/modules.js:1224
+#. 5.8/js/modules.js:1218 4.8/js/modules.js:1224
 msgid "Send File(s)"
 msgstr "Teile Datei(en)"
 
-#: 5.8/js/modules.js:1219 4.8/js/modules.js:1225
+#. 5.8/js/modules.js:1219 4.8/js/modules.js:1225
 msgid "Click to send file(s) to the device"
 msgstr "Klicken, um Datei(en) an das Gerät zu senden"
 
-#: 5.8/js/modules.js:1243
+#. 5.8/js/modules.js:1243
 msgid "SFTP Module"
 msgstr "SFTP Modul"
 
-#: 5.8/js/modules.js:1284 4.8/js/modules.js:1281
+#. 5.8/js/modules.js:1284 4.8/js/modules.js:1281
 msgid "Unmount"
 msgstr "Aushängen"
 
-#: 5.8/js/modules.js:1286 4.8/js/modules.js:1283
+#. 5.8/js/modules.js:1286 4.8/js/modules.js:1283
 msgid "Mount"
 msgstr "Einhängen"
 
-#: 5.8/js/modules.js:1292 4.8/js/modules.js:1289
+#. 5.8/js/modules.js:1292 4.8/js/modules.js:1289
 msgid "Click to unmount"
 msgstr "Klicken zum aushängen"
 
-#: 5.8/js/modules.js:1294 4.8/js/modules.js:1291
+#. 5.8/js/modules.js:1294 4.8/js/modules.js:1291
 msgid "Click to mount"
 msgstr "Klicken zum einhängen"
 
-#: 5.8/js/modules.js:1424 4.8/js/modules.js:1364
+#. 5.8/js/modules.js:1424 4.8/js/modules.js:1364
 msgid "Click to browse files"
 msgstr "Klicken, um Dateien zu durchsuchen"
 
-#: 5.8/js/modules.js:1463
+#. 5.8/js/modules.js:1463
 msgid "SMS Module"
 msgstr "SMS Modul"
 
-#: 5.8/js/modules.js:1532 4.8/js/modules.js:1468
+#. 5.8/js/modules.js:1532 4.8/js/modules.js:1468
 msgid "SMS"
 msgstr "SMS"
 
-#: 5.8/js/modules.js:1544 4.8/js/modules.js:1481
+#. 5.8/js/modules.js:1544 4.8/js/modules.js:1481
 msgid "Launch SMS App"
 msgstr "SMS Anwendung starten"
 
-#: 5.8/js/modules.js:1545 4.8/js/modules.js:1482
+#. 5.8/js/modules.js:1545 4.8/js/modules.js:1482
 msgid "Click to open the KDE Connect SMS App"
 msgstr "Klicken, um KDE Connect SMS Anwendung zu starten"
 
-#: 5.8/js/modules.js:1552 4.8/js/modules.js:1489
+#. 5.8/js/modules.js:1552 4.8/js/modules.js:1489
 msgid "Send SMS"
 msgstr "SMS senden"
 
 #. metadata.json->name
-#: 5.8/js/utils.js:24
+#. 5.8/js/utils.js:24
 msgid "KDE Connect Applet"
 msgstr "KDE Connect Applet"
 
-#: 5.8/js/utils.js:126 4.8/js/commonUtils.js:223
+#. 5.8/js/utils.js:126 4.8/js/commonUtils.js:223
 msgid "Copied {typestring} to the clipboard"
 msgstr "{typestring} in die Zwischenablage kopiert"
 
-#: 5.8/settingsWidgets.py:153 4.8/settingsWidgets.py:153
+#. 5.8/settingsWidgets.py:153 4.8/settingsWidgets.py:153
 msgid "Move selected entry up"
 msgstr "Ausgewählten Eintrag nach oben bewegen"
 
-#: 5.8/settingsWidgets.py:160 4.8/settingsWidgets.py:160
+#. 5.8/settingsWidgets.py:160 4.8/settingsWidgets.py:160
 msgid "Move selected entry down"
 msgstr "Ausgewählten Eintrag nach unten bewegen"
 
-#: 5.8/py/dialogs.py:50 4.8/py/dialogs.py:43
+#. 5.8/py/dialogs.py:50 4.8/py/dialogs.py:43
 #, python-brace-format
 msgid "Send URL to '{device_name}'"
 msgstr "Sende URl an '{device_name}'"
 
-#: 5.8/py/dialogs.py:60 5.8/py/dialogs.py:132 5.8/py/dialogs.py:207
-#: 5.8/py/dialogs.py:285 4.8/py/dialogs.py:50 4.8/py/dialogs.py:106
-#: 4.8/py/dialogs.py:169
+#. 5.8/py/dialogs.py:60 5.8/py/dialogs.py:132 5.8/py/dialogs.py:207
+#. 5.8/py/dialogs.py:285 4.8/py/dialogs.py:50 4.8/py/dialogs.py:106
+#. 4.8/py/dialogs.py:169
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: 5.8/py/dialogs.py:65 5.8/py/dialogs.py:137 5.8/py/dialogs.py:212
-#: 4.8/py/dialogs.py:53 4.8/py/dialogs.py:109 4.8/py/dialogs.py:172
+#. 5.8/py/dialogs.py:65 5.8/py/dialogs.py:137 5.8/py/dialogs.py:212
+#. 4.8/py/dialogs.py:53 4.8/py/dialogs.py:109 4.8/py/dialogs.py:172
 msgid "Send"
 msgstr "Senden"
 
-#: 5.8/py/dialogs.py:76 4.8/py/dialogs.py:60
+#. 5.8/py/dialogs.py:76 4.8/py/dialogs.py:60
 #, python-brace-format
 msgid "Enter a URL to send to '{device_name}'"
 msgstr "URL eingeben, um an '{device_name}' zu senden"
 
-#: 5.8/py/dialogs.py:83 4.8/py/dialogs.py:64
+#. 5.8/py/dialogs.py:83 4.8/py/dialogs.py:64
 msgid "URL"
 msgstr "URL"
 
-#: 5.8/py/dialogs.py:122 4.8/py/dialogs.py:99
+#. 5.8/py/dialogs.py:122 4.8/py/dialogs.py:99
 #, python-brace-format
 msgid "Send SMS using '{device_name}'"
 msgstr "SMS via '{device_name}' senden"
 
-#: 5.8/py/dialogs.py:147 4.8/py/dialogs.py:116
+#. 5.8/py/dialogs.py:147 4.8/py/dialogs.py:116
 msgid "Phone Number:"
 msgstr "Telefonnummer:"
 
-#: 5.8/py/dialogs.py:151 4.8/py/dialogs.py:120
+#. 5.8/py/dialogs.py:151 4.8/py/dialogs.py:120
 msgid "Phone Number"
 msgstr "Telefonnummer"
 
-#: 5.8/py/dialogs.py:154 4.8/py/dialogs.py:122
+#. 5.8/py/dialogs.py:154 4.8/py/dialogs.py:122
 msgid "Message:"
 msgstr "Nachricht:"
 
-#: 5.8/py/dialogs.py:197 4.8/py/dialogs.py:162
+#. 5.8/py/dialogs.py:197 4.8/py/dialogs.py:162
 #, python-brace-format
 msgid "Send text to '{device_name}'"
 msgstr "Text an '{device_name}' senden"
 
-#: 5.8/py/dialogs.py:222 4.8/py/dialogs.py:179
+#. 5.8/py/dialogs.py:222 4.8/py/dialogs.py:179
 msgid "Text to send:"
 msgstr "Text zu senden:"
 
-#: 5.8/py/dialogs.py:271
+#. 5.8/py/dialogs.py:271
 #, python-brace-format
 msgid "Open remote directory on '{device_name}'"
 msgstr "Entferntes Verzeichnis auf '{device_name}' öffnen"
 
-#: 5.8/py/dialogs.py:290
+#. 5.8/py/dialogs.py:290
 msgid "Open"
 msgstr "Öffnen"
 
-#: 5.8/py/dialogs.py:300
+#. 5.8/py/dialogs.py:300
 msgid "Directory to open:"
 msgstr "Verzeichnis zu öffnen:"
 
-#: 5.8/py/dialogs.py:375 4.8/py/dialogs.py:225
+#. 5.8/py/dialogs.py:375 4.8/py/dialogs.py:225
 #, python-brace-format
 msgid "Select files to send to '{deviceName}'"
 msgstr "Datei(en) auswählen, um an '{deviceName}' zu senden"
 
-#: 5.8/py/dialogs.py:442 4.8/py/dialogs.py:286
+#. 5.8/py/dialogs.py:442 4.8/py/dialogs.py:286
 #, python-brace-format
 msgid "Select where to save photo received from '{deviceName}'"
 msgstr ""
 "Auswählen, wo angefordertes Foto von '{deviceName}' gespeichert werden soll"
 
-#: 5.8/py/dialogs.py:449 4.8/py/dialogs.py:290
+#. 5.8/py/dialogs.py:449 4.8/py/dialogs.py:290
 msgid "photo.jpg"
 msgstr "foto.jpg"
 
-#: 5.8/py/dialogs.py:452 4.8/py/dialogs.py:293
+#. 5.8/py/dialogs.py:452 4.8/py/dialogs.py:293
 msgid "JPEG Photo"
 msgstr "JPEG Foto"
 
