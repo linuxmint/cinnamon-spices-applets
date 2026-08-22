@@ -660,7 +660,7 @@ msgstr ""
 
 #. 5.8->settings-schema.json->module_sftp_description->description
 #. 4.8->settings-schema.json->module_sftp_description->description
-msgid "Lets you remotely browse the storage selected on the device"
+msgid "Lets you remotely browse the storage of the device"
 msgstr ""
 
 #. 5.8->settings-schema.json->module_sftp_selectFirstDirectory->description

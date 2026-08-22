@@ -446,7 +446,7 @@
 
     "module_sftp_description": {
         "type": "label",
-        "description": "Lets you remotely browse the storage selected on the device"
+        "description": "Lets you remotely browse the storage of the device"
     },
 
     "module_sms_description": {
