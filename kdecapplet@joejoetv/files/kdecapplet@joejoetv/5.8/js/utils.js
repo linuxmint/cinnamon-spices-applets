@@ -132,25 +132,6 @@ function copyAndNotify(notificationSource, text, typestring) {
 }
 
 /**
- * Method emulating the addActor method of PopupMenu.PopupBaseMenuItem available in cinnamon 5.4.1 and up,
- * which added the ability to specify the position and align parameters
- * 
- * @param {PopupMenu.PopupBaseMenuItem} menuItem - The menu item to add the child to
- * @param {Clutter.Actor} child - The child actor to add
- * @param {object} params - Parameters for how to add the actor
- */
-function addActorAtPos(menuItem, child, params) {
-    params = Params.parse(params, { span: 1,
-                                    expand: false,
-                                    align: St.Align.START,
-                                    position: -1 });
-    params.actor = child;
-    menuItem._children.splice(params.position >= 0 ? params.position : Number.MAX_SAFE_INTEGER, 0, params);
-    menuItem._signals.connect(menuItem.actor, 'destroy', menuItem._removeChild.bind(menuItem, child));
-    menuItem.actor.insert_child_at_index(child, params.position);
-}
-
-/**
  * Migrates settings from single-instance to multi-instance (<uuid>.json -> <instance_id>.json) if required
  * @param {string} uuid UUID of the applet (used in the config file path/name)
  * @param {string} instanceId Instance ID of the applet (used in the config file name)
