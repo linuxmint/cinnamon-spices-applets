@@ -162,7 +162,7 @@ class BatteryUniversalProxy {
                     if (this._onStateChanged) {
                         this.proxy.disconnectSignal(this._onStateChanged);
                     }
-                    
+
                 default: // Newer Versions
                     if (this._onRefreshed) {
                         this.proxy.disconnectSignal(this._onRefreshed);
@@ -391,10 +391,10 @@ class SMSUniversalProxy {
                 case 1: // Version 1.4
                     this.proxy.sendSmsSync(phoneNumber, message);
                     return true;
-            
+
                 default: // Newer versions
                     let addressVariant = new GLib.Variant('(s)', [phoneNumber]);
-    
+
                     this.proxy.sendSmsSync([addressVariant], message, []);
                     return true;
             }
@@ -611,11 +611,11 @@ class BatteryModule extends KDECModule {
     _createProxy() {
         try {
             this.proxy = new BatteryUniversalProxy(this.device.getID(), this.compatMode);
-            
+
             this.charge = this.proxy.getCharge();
             this.isCharging = this.proxy.getChargingState();
 
-            this._signals.connect(this.proxy, "refreshed",this._onRefreshed.bind(this));
+            this._signals.connect(this.proxy, "refreshed", this._onRefreshed.bind(this));
         } catch (error) {
             this._logger.error("Error while connecting to the DBus interface, using default values", error);
         }
@@ -624,10 +624,10 @@ class BatteryModule extends KDECModule {
     _getBatteryIconName() {
         if (this.charge >= 0 && this.charge <= 100) {
             let chargeLevel = Math.floor(this.charge / 10) * 10;
-    
+
             if (this.isCharging) {
                 if (chargeLevel == 100) {
-    
+
                     return `battery-level-${chargeLevel.toString()}-charged-symbolic`;
                 } else {
                     return `battery-level-${chargeLevel.toString()}-charging-symbolic`;
@@ -663,7 +663,7 @@ class BatteryModule extends KDECModule {
     }
 
     _createMenuItem() {
-        this.menuItem = new PopupMenu.PopupIconMenuItem(this._getLabelText(), this._getBatteryIconName(), St.IconType.SYMBOLIC, {reactive: false});
+        this.menuItem = new PopupMenu.PopupIconMenuItem(this._getLabelText(), this._getBatteryIconName(), St.IconType.SYMBOLIC, { reactive: false });
     }
 
     _destroyContent() {
@@ -691,10 +691,10 @@ class DeviceInfoModule extends KDECModule {
         // Default values
         this.deviceType = "unknown";
     }
-    
+
     _createProxy() {
         try {
-            this._signals.connect(this.device, "type-changed",this._onTypeChanged.bind(this));
+            this._signals.connect(this.device, "type-changed", this._onTypeChanged.bind(this));
         } catch (error) {
             this._logger.error("Error while connecting 'type-changed' signal", error);
         }
@@ -709,7 +709,7 @@ class DeviceInfoModule extends KDECModule {
     }
 
     _getTypeIconName() {
-        switch(this.device.getType()) {
+        switch (this.device.getType()) {
             case "desktop":
                 return "computer-symbolic";
             case "laptop":
@@ -729,9 +729,9 @@ class DeviceInfoModule extends KDECModule {
     _createMenuItem() {
         // Create Menu Item
         this.menuItem = new PopupMenu.PopupIconMenuItem(_("ID: {id}").replace("{id}", this.device.getID().toString()), this._getTypeIconName(), St.IconType.SYMBOLIC);
-        
+
         // Copy ID, when clicked
-        this.menuItem._signals.connect(this.menuItem, "activate", function(menuItem, keepMenu) {
+        this.menuItem._signals.connect(this.menuItem, "activate", function (menuItem, keepMenu) {
             Utils.copyAndNotify(this.device.getApplet().notificationSource, this.device.getID(), _("Device ID"));
         }, this);
 
@@ -765,7 +765,7 @@ class ConnectivityModule extends KDECModule {
     _createProxy() {
         try {
             this.proxy = new DeviceConnectivityProxy(Gio.DBus.session, Utils.KDECONNECT_DBUS_NAME, `/modules/kdeconnect/devices/${this.device.getID()}/connectivity_report`);
-            
+
             this.signalStrength = this.proxy.cellularNetworkStrength;
             this.networkType = this.proxy.cellularNetworkType;
 
@@ -799,7 +799,7 @@ class ConnectivityModule extends KDECModule {
                 return "network-cellular-signal-good-symbolic";
             case 4:
                 return "network-cellular-signal-excellent-symbolic";
-        
+
             default:
                 return "network-cellular-no-route-symbolic";
         }
@@ -824,7 +824,7 @@ class ConnectivityModule extends KDECModule {
             case 4:
                 signalStrengthText = _("Excellent");
                 break;
-        
+
             default:
                 signalStrengthText = "?";
                 break;
@@ -832,13 +832,13 @@ class ConnectivityModule extends KDECModule {
 
         if (this.options.showNetworkType == true && this.signalStrength > 0) {
             let networkText = ""
-    
+
             if (this.networkType == "Unknown") {
                 networkText = _("Unknown");
             } else {
                 networkText = this.networkType;
             }
-    
+
             return `${signalStrengthText} (${networkText})`;
         } else {
             return signalStrengthText;
@@ -846,7 +846,7 @@ class ConnectivityModule extends KDECModule {
     }
 
     _createMenuItem() {
-        this.menuItem = new PopupMenu.PopupIconMenuItem(this._getLabelText(), this._getConnectivityIconName(), St.IconType.SYMBOLIC, {reactive: false});
+        this.menuItem = new PopupMenu.PopupIconMenuItem(this._getLabelText(), this._getConnectivityIconName(), St.IconType.SYMBOLIC, { reactive: false });
     }
 
     _destroyContent() {
@@ -930,7 +930,7 @@ class RequestPhotoModule extends KDECModule {
 
             // Build filename from date and time
             let cdate = new Date();
-            let filename = "photo_"+cdate.toLocaleDateString().replaceAll(".","-").replaceAll("/","-")+"_"+cdate.toLocaleTimeString().replaceAll(":","-").replaceAll("/","-");
+            let filename = "photo_" + cdate.toLocaleDateString().replaceAll(".", "-").replaceAll("/", "-") + "_" + cdate.toLocaleTimeString().replaceAll(":", "-").replaceAll("/", "-");
             let filepath = Utils.getAvailableFilename(this.options.saveDirectory, filename, "jpg");
 
             if (filepath !== null) {
@@ -958,10 +958,10 @@ class RequestPhotoModule extends KDECModule {
             case Dialogs.DialogStatus.CANCEL:
                 this._logger.debug("Dialog for selecting photo save location was canceled.");
                 break;
-        
+
             default:
                 // Error
-                this._logger.error("Photo request dialog returned error: "+stderr);
+                this._logger.error("Photo request dialog returned error: " + stderr);
                 break;
         }
     }
@@ -970,9 +970,9 @@ class RequestPhotoModule extends KDECModule {
         this._logger.debug(`Received Photo from device: ${fileName}`);
 
         let notificationSource = this.device.getApplet().notificationSource;
-        let notification = new MessageTray.Notification(notificationSource, _("Photo received from '{deviceName}'").replace("{deviceName}", this.device.getName()), fileName+"\n"+_("Click to open in default application"));
+        let notification = new MessageTray.Notification(notificationSource, _("Photo received from '{deviceName}'").replace("{deviceName}", this.device.getName()), fileName + "\n" + _("Click to open in default application"));
         notification.setTransient(true);
-        this._signals.connect(notification, "clicked", function() {
+        this._signals.connect(notification, "clicked", function () {
             Utils.openURL(`file://${fileName}`);
         })
         notificationSource.notify(notification);
@@ -982,7 +982,7 @@ class RequestPhotoModule extends KDECModule {
         this.menuItem = new PopupMenu.PopupIconMenuItem(_("Request Photo"), "camera-photo-symbolic", St.IconType.SYMBOLIC, {});
         this.menuItemTooltip = new Tooltips.Tooltip(this.menuItem.actor, _("Click to request a photo from the device"));
 
-        this.menuItem._signals.connect(this.menuItem, "activate", function() {
+        this.menuItem._signals.connect(this.menuItem, "activate", function () {
             try {
                 Dialogs.openReceivePhotoDialog(this.device.getApplet().metadata, this.device.getName(), this.requestPhotoCallback.bind(this));
             } catch (error) {
@@ -1090,10 +1090,10 @@ class ShareModule extends KDECModule {
             case Dialogs.DialogStatus.CANCEL:
                 this._logger.debug("Dialog for entering URL to send was canceled.");
                 break;
-        
+
             default:
                 // Error
-                this._logger.error("Dialog for entering URL to send returned error: "+stderr);
+                this._logger.error("Dialog for entering URL to send returned error: " + stderr);
                 break;
         }
     }
@@ -1111,10 +1111,10 @@ class ShareModule extends KDECModule {
             case Dialogs.DialogStatus.CANCEL:
                 this._logger.debug("Dialog for entering text to send was canceled.");
                 break;
-        
+
             default:
                 // Error
-                this._logger.error("Error while opening dialog for entering text to send: "+stderr);
+                this._logger.error("Error while opening dialog for entering text to send: " + stderr);
                 break;
         }
     }
@@ -1122,8 +1122,8 @@ class ShareModule extends KDECModule {
     sendFilesCallback(status, filenameArray, stderr) {
         switch (status) {
             case Dialogs.DialogStatus.SUCCESS:
-                filenameArray = filenameArray.map(function(filename) {
-                    return "file://"+filename
+                filenameArray = filenameArray.map(function (filename) {
+                    return "file://" + filename
                 });
 
                 try {
@@ -1136,10 +1136,10 @@ class ShareModule extends KDECModule {
             case Dialogs.DialogStatus.CANCEL:
                 this._logger.debug("Dialog for selecting files to send was canceled.");
                 break;
-        
+
             default:
                 // Error
-                this._logger.error("Error while opening dialog for selecting files to send: "+stderr);
+                this._logger.error("Error while opening dialog for selecting files to send: " + stderr);
                 break;
         }
     }
@@ -1148,9 +1148,9 @@ class ShareModule extends KDECModule {
         this._logger.debug(`Received Share from device: ${url}`);
 
         let notificationSource = this.device.getApplet().notificationSource;
-        let notification = new MessageTray.Notification(notificationSource, _("Share received from '{deviceName}'").replace("{deviceName}", this.device.getName()), url+"\n"+_("Click to open in default application"));
+        let notification = new MessageTray.Notification(notificationSource, _("Share received from '{deviceName}'").replace("{deviceName}", this.device.getName()), url + "\n" + _("Click to open in default application"));
         notification.setTransient(true);
-        this._signals.connect(notification, "clicked", function() {
+        this._signals.connect(notification, "clicked", function () {
             Utils.openURL(url);
         })
         notificationSource.notify(notification);
@@ -1186,9 +1186,9 @@ class ShareModule extends KDECModule {
             this.menuItem = new PopupMenu.PopupSubMenuMenuItem(_("Share"));
 
             // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
-            this.menuIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: "send-to-symbolic", icon_type: St.IconType.SYMBOLIC});
-            
-            this.menuItem.addActor(this.menuIcon, {span: 0, position: 0});
+            this.menuIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: "send-to-symbolic", icon_type: St.IconType.SYMBOLIC });
+
+            this.menuItem.addActor(this.menuIcon, { span: 0, position: 0 });
         } else {
             this.menuItem = new PopupMenu.PopupMenuSection();
         }
@@ -1198,7 +1198,7 @@ class ShareModule extends KDECModule {
             this.sendURLMenuItem = new PopupMenu.PopupIconMenuItem(_("Send URL"), "link-symbolic", St.IconType.SYMBOLIC, {});
             this.sendURLMenuItemTooltip = new Tooltips.Tooltip(this.sendURLMenuItem.actor, _("Click to send a URL to the device"));
 
-            this.sendURLMenuItem._signals.connect(this.sendURLMenuItem, "activate", function() {
+            this.sendURLMenuItem._signals.connect(this.sendURLMenuItem, "activate", function () {
                 Dialogs.openSendURLDialog(this.device.getApplet().metadata, this.device.getName(), this.sendURLCallback.bind(this));
             }, this);
             this._addMenuItem(this.sendURLMenuItem);
@@ -1208,7 +1208,7 @@ class ShareModule extends KDECModule {
             this.sendTextMenuItem = new PopupMenu.PopupIconMenuItem(_("Send Text"), "text-field", St.IconType.SYMBOLIC, {});
             this.sendTextMenuItemTooltip = new Tooltips.Tooltip(this.sendTextMenuItem.actor, _("Click to send text to the device"));
 
-            this.sendTextMenuItem._signals.connect(this.sendTextMenuItem, "activate", function() {
+            this.sendTextMenuItem._signals.connect(this.sendTextMenuItem, "activate", function () {
                 Dialogs.openSendTextDialog(this.device.getApplet().metadata, this.device.getName(), this.sendTextCallback.bind(this));
             }, this);
             this._addMenuItem(this.sendTextMenuItem);
@@ -1218,7 +1218,7 @@ class ShareModule extends KDECModule {
             this.sendFilesMenuItem = new PopupMenu.PopupIconMenuItem(_("Send File(s)"), "emblem-documents-symbolic", St.IconType.SYMBOLIC, {});
             this.sendFilesMenuItemTooltip = new Tooltips.Tooltip(this.sendFilesMenuItem.actor, _("Click to send file(s) to the device"));
 
-            this.sendFilesMenuItem._signals.connect(this.sendFilesMenuItem, "activate", function() {
+            this.sendFilesMenuItem._signals.connect(this.sendFilesMenuItem, "activate", function () {
                 Dialogs.openSendFilesDialog(this.device.getApplet().metadata, this.device.getName(), this.sendFilesCallback.bind(this));
             }, this);
             this._addMenuItem(this.sendFilesMenuItem);
@@ -1265,7 +1265,7 @@ class SFTPModule extends KDECModule {
                 this.mountPoint = this.proxy.mountPointSync()[0];
                 try {
                     let dirs = this.proxy.getDirectoriesSync()[0];
-                    this.directories = Object.entries(dirs).map(([dir,v]) => [dir, v.get_string()[0]]);
+                    this.directories = Object.entries(dirs).map(([dir, v]) => [dir, v.get_string()[0]]);
                 } catch (error) {
                     this._logger.warn("Available directiories could not be fetched! Falling back to mount point.");
                     this.directories = []
@@ -1322,13 +1322,13 @@ class SFTPModule extends KDECModule {
 
         try {
             this.mountPoint = this.proxy.mountPointSync()[0];
-                try {
-                    let dirs = this.proxy.getDirectoriesSync()[0];
-                    this.directories = Object.entries(dirs).map(([dir,v]) => [dir, v.get_string()[0]]);
-                } catch (error) {
-                    this._logger.warn("Available directiories could not be fetched! Falling back to mount point.");
-                    this.directories = []
-                }
+            try {
+                let dirs = this.proxy.getDirectoriesSync()[0];
+                this.directories = Object.entries(dirs).map(([dir, v]) => [dir, v.get_string()[0]]);
+            } catch (error) {
+                this._logger.warn("Available directiories could not be fetched! Falling back to mount point.");
+                this.directories = []
+            }
         } catch (error) {
             this._logger.error("Error while getting mount point", error);
         }
@@ -1372,7 +1372,7 @@ class SFTPModule extends KDECModule {
                 // If there are multiple, either ask the user or open the first one (if selected in settings)
                 default:
                     if (this.options.selectFirstDirectory) {
-                    this._logger.debug(`Opening first directory (${this.directories[0][0]})`);
+                        this._logger.debug(`Opening first directory (${this.directories[0][0]})`);
                         Utils.openURL(`file://${this.directories[0][0]}`);
                         return;
                     }
@@ -1403,10 +1403,10 @@ class SFTPModule extends KDECModule {
             case Dialogs.DialogStatus.CANCEL:
                 this._logger.debug("Dialog for selecting remote directory to open was canceled.");
                 break;
-        
+
             default:
                 // Error
-                this._logger.error("Error while opening dialog for selecting remote directory to open: "+stderr);
+                this._logger.error("Error while opening dialog for selecting remote directory to open: " + stderr);
                 break;
         }
     }
@@ -1507,10 +1507,10 @@ class SMSModule extends KDECModule {
             case Dialogs.DialogStatus.CANCEL:
                 this._logger.debug("Dialog for entering SMS to send was canceled.");
                 break;
-        
+
             default:
                 // Error
-                this._logger.error("SMS dialog reported error: "+stderr);
+                this._logger.error("SMS dialog reported error: " + stderr);
                 break;
         }
     }
@@ -1532,9 +1532,9 @@ class SMSModule extends KDECModule {
             this.menuItem = new PopupMenu.PopupSubMenuMenuItem(_("SMS"));
 
             // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
-            let menuIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: "dialog-messages", icon_type: St.IconType.SYMBOLIC});
-            
-            this.menuItem.addActor(menuIcon, {span: 0, position: 0});
+            let menuIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: "dialog-messages", icon_type: St.IconType.SYMBOLIC });
+
+            this.menuItem.addActor(menuIcon, { span: 0, position: 0 });
         } else {
             this.menuItem = new PopupMenu.PopupMenuSection();
         }
@@ -1552,7 +1552,7 @@ class SMSModule extends KDECModule {
             this.sendSMSMenuItem = new PopupMenu.PopupIconMenuItem(_("Send SMS"), "chat-message-new-symbolic", St.IconType.SYMBOLIC, {});
             this.sendSMSMenuItemTooltip = new Tooltips.Tooltip(this.sendSMSMenuItem.actor, _("Click to send text to the device"));
 
-            this.sendSMSMenuItem._signals.connect(this.sendSMSMenuItem, "activate", function() {
+            this.sendSMSMenuItem._signals.connect(this.sendSMSMenuItem, "activate", function () {
                 Dialogs.openSendSMSDialog(this.device.getApplet().metadata, this.device.getName(), this.sendSMSCallback.bind(this));
             }, this);
             this._addMenuItem(this.sendSMSMenuItem);
