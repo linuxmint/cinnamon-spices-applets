@@ -715,6 +715,7 @@ class DeviceInfoModule extends KDECModule {
             case "laptop":
                 return "laptop-symbolic";
             case "smartphone":
+            case "phone":
                 return "phone-symbolic";
             case "tablet":
                 return "tablet-symbolic";
@@ -838,7 +839,7 @@ class ConnectivityModule extends KDECModule {
                 networkText = this.networkType;
             }
     
-            return signalStrengthText + " (" + networkText + ")";
+            return `${signalStrengthText} (${networkText})`;
         } else {
             return signalStrengthText;
         }
