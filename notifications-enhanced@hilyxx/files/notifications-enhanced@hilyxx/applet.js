@@ -293,6 +293,14 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this._notificationbin.add(notification.actor);
         notification.actor._parent_container = this._notificationbin;
         notification.actor.add_style_class_name('notification-applet-padding');
+        // Cache each notification subtree in an offscreen texture.  While the
+        // menu is open St repaints every notification (including its themed
+        // shadow) on every stage frame: with 8 notifications on a 3000x2000
+        // screen one frame took ~365ms (2.5 fps - video visibly stutters and
+        // the whole desktop lags).  With offscreen redirect the painted
+        // subtree is reused between frames (~2ms/frame measured); the cache is
+        // invalidated automatically when the content changes (timestamps etc).
+        notification.actor.set_offscreen_redirect(imports.gi.Clutter.OffscreenRedirect.ALWAYS);
 
         // Enable middle-click to close notifications.
         notification.actor.connect('button-press-event', (actor, event) => {
