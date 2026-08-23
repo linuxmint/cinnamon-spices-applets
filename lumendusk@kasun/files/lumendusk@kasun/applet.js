@@ -56,46 +56,109 @@ const ENGINE_CANDIDATES = [
 let _appletDir = null;
 let _engineArgv = null;
 
-function findEngineArgv() {
-    // Returns the command to run the engine as an argv array, or null if there
-    // isn't one. An array rather than a path because the bundled copy is run as
-    // `python3 <dir>/engine/run.py`, not as an executable of its own.
+// Attributes for the asynchronous existence checks below. Asking for the
+// standard type is the cheapest way to say "does this exist at all".
+const EXECUTABLE_ATTR = "access::can-execute";
+const EXISTS_ATTR = "standard::type";
+
+function queryFileAsync(path, attribute, done) {
+    // "Does this path exist / can I execute it", without a synchronous stat.
+    //
+    // GLib.file_test is the obvious way to ask and blocks the shell's main
+    // loop to do it. Almost always for microseconds — but the paths below
+    // include ones under the user's home directory, and a home directory on an
+    // unresponsive NFS or SSHFS mount turns that into the whole desktop
+    // hanging, not just this applet.
+    //
+    // done(true) only when the file is there *and* the attribute holds.
+    try {
+        Gio.File.new_for_path(path).query_info_async(
+            attribute, Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null,
+            (file, result) => {
+                try {
+                    let info = file.query_info_finish(result);
+                    done(attribute === EXECUTABLE_ATTR
+                        ? info.get_attribute_boolean(EXECUTABLE_ATTR)
+                        : true);
+                } catch (e) {
+                    // NOT_FOUND is the ordinary answer here, not a failure.
+                    done(false);
+                }
+            });
+    } catch (e) {
+        done(false);
+    }
+}
+
+function findEngineArgv(done) {
+    // Hands `done` the command to run the engine as an argv array, or null if
+    // there isn't one. An array rather than a path because the bundled copy is
+    // run as `python3 <dir>/engine/run.py`, not as an executable of its own.
+    //
+    // Callback rather than a return value because the existence checks are
+    // asynchronous. Every caller is already spawning a subprocess, so none of
+    // them were in a position to use an answer synchronously anyway.
     //
     // Cached once found, re-checked while missing: installing the engine with
     // the applet already sitting in the panel should start working on the next
     // menu open, not require a Cinnamon restart. A path that has resolved can't
     // move without a reinstall, so caching that direction is safe.
-    if (_engineArgv !== null) return _engineArgv;
+    if (_engineArgv !== null) {
+        done(_engineArgv);
+        return;
+    }
 
-    for (let i = 0; i < ENGINE_CANDIDATES.length; i++) {
-        if (GLib.file_test(ENGINE_CANDIDATES[i], GLib.FileTest.IS_EXECUTABLE)) {
-            _engineArgv = [ENGINE_CANDIDATES[i]];
-            return _engineArgv;
+    // The candidates are tried in order and the first hit wins, so this walks
+    // them one at a time rather than asking about all four at once.
+    let i = 0;
+    let nextCandidate = () => {
+        if (i >= ENGINE_CANDIDATES.length) {
+            afterCandidates();
+            return;
         }
-    }
+        let candidate = ENGINE_CANDIDATES[i++];
+        queryFileAsync(candidate, EXECUTABLE_ATTR, (executable) => {
+            if (executable) {
+                _engineArgv = [candidate];
+                done(_engineArgv);
+            } else {
+                nextCandidate();
+            }
+        });
+    };
 
-    let onPath = GLib.find_program_in_path("lumendusk");
-    if (onPath) {
-        _engineArgv = [onPath];
-        return _engineArgv;
-    }
+    let afterCandidates = () => {
+        let onPath = GLib.find_program_in_path("lumendusk");
+        if (onPath) {
+            _engineArgv = [onPath];
+            done(_engineArgv);
+            return;
+        }
 
-    // Last resort: the copy bundled inside the applet directory. Installing
-    // from Cinnamon Spices extracts a zip and runs nothing — no venv, no pip —
-    // so for a Spices user this is the only engine on the machine.
-    //
-    // It goes last so that a real install still wins. Someone with a dev
-    // checkout or a pip install wants their edits to take effect, not a frozen
-    // copy shipped inside the applet.
-    if (_appletDir) {
+        // Last resort: the copy bundled inside the applet directory. Installing
+        // from Cinnamon Spices extracts a zip and runs nothing — no venv, no
+        // pip — so for a Spices user this is the only engine on the machine.
+        //
+        // It goes last so that a real install still wins. Someone with a dev
+        // checkout or a pip install wants their edits to take effect, not a
+        // frozen copy shipped inside the applet.
+        let python = _appletDir ? GLib.find_program_in_path("python3") : null;
+        if (!python) {
+            done(null);
+            return;
+        }
         let bundled = _appletDir + "/engine/run.py";
-        let python = GLib.find_program_in_path("python3");
-        if (python && GLib.file_test(bundled, GLib.FileTest.EXISTS)) {
-            _engineArgv = [python, bundled];
-            return _engineArgv;
-        }
-    }
-    return null;
+        queryFileAsync(bundled, EXISTS_ATTR, (exists) => {
+            if (exists) {
+                _engineArgv = [python, bundled];
+                done(_engineArgv);
+            } else {
+                done(null);
+            }
+        });
+    };
+
+    nextCandidate();
 }
 
 // Settings we mirror into config.toml. Names match the engine's config keys
@@ -362,6 +425,12 @@ LumenduskApplet.prototype = {
     },
 
     _buildMenu: function () {
+        // Which menu gets built depends on whether the engine is there, and
+        // finding that out is asynchronous now, so the build waits on it.
+        findEngineArgv((engine) => this._buildMenuFor(engine));
+    },
+
+    _buildMenuFor: function (engine) {
         this.menu.removeAll();
 
         let title = new PopupMenu.PopupMenuItem("Lumendusk", { reactive: false });
@@ -370,7 +439,7 @@ LumenduskApplet.prototype = {
 
         // Without the engine every menu item below is a no-op, which looks like
         // a broken applet. Say so instead of failing silently.
-        if (!this._engineInstalled()) {
+        if (engine === null) {
             let missing = new PopupMenu.PopupMenuItem(
                 _("Engine not found — run install.sh"), { reactive: false });
             this.menu.addMenuItem(missing);
@@ -614,30 +683,31 @@ LumenduskApplet.prototype = {
         // Runs the engine off the compositor thread and hands stdout back.
         // stdout is null when it couldn't run or exited non-zero; stderr comes
         // along so callers can report why. Never blocks the panel.
-        let base = findEngineArgv();
-        if (base === null) {
-            callback(null, "engine not installed");
-            return;
-        }
-        try {
-            let proc = new Gio.Subprocess({
-                argv: base.concat(argv),
-                flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
-            });
-            proc.init(null);
-            proc.communicate_utf8_async(null, null, (source, result) => {
-                try {
-                    let [, stdout, stderr] = source.communicate_utf8_finish(result);
-                    callback(source.get_successful() ? stdout : null, stderr);
-                } catch (e) {
-                    global.logError("Lumendusk: '" + argv.join(" ") + "' failed: " + e);
-                    callback(null, "" + e);
-                }
-            });
-        } catch (e) {
-            global.logError("Lumendusk: could not run the engine: " + e);
-            callback(null, "" + e);
-        }
+        findEngineArgv((base) => {
+            if (base === null) {
+                callback(null, "engine not installed");
+                return;
+            }
+            try {
+                let proc = new Gio.Subprocess({
+                    argv: base.concat(argv),
+                    flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
+                });
+                proc.init(null);
+                proc.communicate_utf8_async(null, null, (source, result) => {
+                    try {
+                        let [, stdout, stderr] = source.communicate_utf8_finish(result);
+                        callback(source.get_successful() ? stdout : null, stderr);
+                    } catch (e) {
+                        global.logError("Lumendusk: '" + argv.join(" ") + "' failed: " + e);
+                        callback(null, "" + e);
+                    }
+                });
+            } catch (e) {
+                global.logError("Lumendusk: could not run the engine: " + e);
+                callback(null, "" + e);
+            }
+        });
     },
 
     _firstPercent: function (text) {
@@ -646,29 +716,22 @@ LumenduskApplet.prototype = {
         return match ? parseInt(match[1], 10) : null;
     },
 
-    _engineInstalled: function () {
-        return findEngineArgv() !== null;
-    },
-
     _runEngine: function (argv) {
-        // argv is an array, like _runEngineAsync's, and every part of it is
-        // quoted. spawnCommandLine takes a string, so this is the one place a
-        // shell is involved at all — and the arguments it gets today are all
-        // literals. Building the string by concatenation worked for exactly
-        // that reason, which is a bad reason: the next argument to be added
-        // here is as likely as not to be a theme name or a time out of the
-        // settings dialog, and it would arrive unquoted with nothing to
-        // notice.
-        let base = findEngineArgv();
-        if (base === null) {
-            global.logError("Lumendusk: engine not found (looked in " +
-                            ENGINE_CANDIDATES.join(", ") + ", on PATH, and in " +
-                            (_appletDir || "the applet directory") +
-                            "/engine) — run install.sh from the repo.");
-            return;
-        }
-        let quoted = base.concat(argv).map((part) => GLib.shell_quote(String(part)));
-        Util.spawnCommandLine(quoted.join(" "));
+        // Util.spawn takes the argv straight across, so no shell is involved
+        // and there is nothing to quote or mis-quote. The arguments here are
+        // all literals today, which is a bad reason to have been passing a
+        // command string: the next one added is as likely as not to be a theme
+        // name or a time out of the settings dialog.
+        findEngineArgv((base) => {
+            if (base === null) {
+                global.logError("Lumendusk: engine not found (looked in " +
+                                ENGINE_CANDIDATES.join(", ") + ", on PATH, and in " +
+                                (_appletDir || "the applet directory") +
+                                "/engine) — run install.sh from the repo.");
+                return;
+            }
+            Util.spawn(base.concat(argv).map(String));
+        });
     },
 
     _loadConfigAsync: function (done) {
@@ -733,15 +796,17 @@ LumenduskApplet.prototype = {
 
     _openConfig: function () {
         let path = GLib.get_user_config_dir() + "/lumendusk/config.toml";
-        let open = () => Util.spawnCommandLine("xdg-open " + GLib.shell_quote(path));
-        if (GLib.file_test(path, GLib.FileTest.EXISTS)) {
-            open();
-            return;
-        }
-        // First run: the engine writes the default config. Give it a moment
-        // before handing the path to xdg-open, or we open nothing.
-        this._runEngine(["--once"]);
-        Mainloop.timeout_add(700, () => { open(); return GLib.SOURCE_REMOVE; });
+        let open = () => Util.spawn(["xdg-open", path]);
+        queryFileAsync(path, EXISTS_ATTR, (exists) => {
+            if (exists) {
+                open();
+                return;
+            }
+            // First run: the engine writes the default config. Give it a moment
+            // before handing the path to xdg-open, or we open nothing.
+            this._runEngine(["--once"]);
+            Mainloop.timeout_add(700, () => { open(); return GLib.SOURCE_REMOVE; });
+        });
     },
 
     on_applet_clicked: function () {
