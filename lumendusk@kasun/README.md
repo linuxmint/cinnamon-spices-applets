@@ -51,8 +51,10 @@ Lumendusk works out of the box; each of these unlocks one more thing.
 | `brightnessctl` | Laptop-panel brightness without root. |
 | `gammastep` or `xsct` | Night light on setups where Cinnamon's own keys are missing. |
 
-Without any of them you still get theme switching, and brightness falls back to
-`xrandr` software dimming where nothing else is available.
+Without any of them you still get theme switching and night light. Brightness
+needs one of the two backends above: a monitor with neither is left alone and
+told so in the log. Lumendusk will not fake it with gamma dimming, which only
+darkens the picture while the backlight stays where it was.
 
 ## Notes
 

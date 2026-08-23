@@ -409,8 +409,7 @@ def _brightness_command(args: argparse.Namespace) -> int:
             except brightness_mod.BacklightError as exc:
                 brightness_mod.note_unreachable(mon.id, exc)
                 level = f"(read failed: {exc})"
-            tag = "" if mon.real else "  [software dimming]"
-            print(f"  {mon.id:<12} {mon.backend:<12} {level:<8} {mon.label}{tag}")
+            print(f"  {mon.id:<12} {mon.backend:<12} {level:<8} {mon.label}")
         return 0
 
     if action == "get":

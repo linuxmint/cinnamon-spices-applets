@@ -1,10 +1,21 @@
 """Brightness backends. Every backend reads/writes a 0–100 % value.
 
-Three kinds, in order of preference:
+Two kinds, both of them real backlight control:
 
-* :class:`SysfsBacklight` / brightnessctl — internal laptop panel (real backlight).
-* :class:`DdcutilBacklight` — external monitors over DDC/CI (real backlight).
-* :class:`XrandrBacklight` — software gamma dimming; a labelled last resort only.
+* :class:`SysfsBacklight` / brightnessctl — internal laptop panel.
+* :class:`DdcutilBacklight` — external monitors over DDC/CI.
+
+There is deliberately no software-dimming fallback. Lumendusk used to fall back
+to `xrandr --brightness`, which is not brightness at all: it scales the gamma
+ramp, so the backlight stays where it was and every pixel is multiplied down
+instead. On a display that already had a real backend it stacked on top of the
+real backlight, and the two together looked like fog — blacks lifted to grey,
+contrast flattened, dark content simply gone. Worse, the ramp is display state
+rather than ours, so nothing reset it: one dim from a moment when DDC/CI
+happened to be unreachable stayed on the screen after DDC/CI recovered.
+
+If no real backend is available for a monitor, Lumendusk now leaves that monitor
+alone and says so. Doing nothing is the honest answer; faking it is not.
 """
 
 from __future__ import annotations
@@ -139,7 +150,6 @@ class Backlight:
     id: str
     label: str
     backend: str
-    real: bool = True  # False for software (gamma) dimming
 
     def get(self) -> int:  # pragma: no cover - interface
         raise NotImplementedError
@@ -214,30 +224,3 @@ class DdcutilBacklight(Backlight):
         percent = self._clamp(percent)
         _run_ddc(["ddcutil", "--display", self._display, "setvcp", "10", str(percent)],
                  "ddcutil setvcp")
-
-
-class XrandrBacklight(Backlight):
-    """Software gamma dimming — NOT real backlight control. Last resort."""
-
-    backend = "xrandr"
-    real = False
-
-    def __init__(self, output: str):
-        self.id = output
-        self.label = f"{output} (software dimming — xrandr gamma)"
-
-    def get(self) -> int:
-        out = _run(["xrandr", "--verbose"], "xrandr --verbose").stdout
-        # Find the block for this output and read its "Brightness: <float>".
-        in_block = False
-        for line in out.splitlines():
-            if line and not line[0].isspace():
-                in_block = line.startswith(self.id + " ")
-            elif in_block and "Brightness:" in line:
-                return self._clamp(float(line.split(":")[1].strip()) * 100)
-        raise BacklightError(f"no brightness reported for output {self.id}")
-
-    def set(self, percent: int) -> None:
-        percent = self._clamp(percent)
-        _run(["xrandr", "--output", self.id, "--brightness", f"{percent/100:.2f}"],
-             "xrandr --brightness")

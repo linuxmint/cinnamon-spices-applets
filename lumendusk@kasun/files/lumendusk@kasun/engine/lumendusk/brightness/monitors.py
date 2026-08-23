@@ -3,7 +3,10 @@
 Detection order:
   1. Internal panels from ``/sys/class/backlight/*``.
   2. External monitors from ``ddcutil detect``.
-  3. If neither is found, fall back to ``xrandr`` connected outputs (software).
+
+If neither is found there is nothing to control, and that is the answer. There
+used to be an ``xrandr`` gamma fallback here; see backends.py for why fake
+dimming was worse than none.
 """
 
 from __future__ import annotations
@@ -19,7 +22,6 @@ from .backends import (
     BacklightError,
     DdcutilBacklight,
     SysfsBacklight,
-    XrandrBacklight,
     cache_dir,
     ddc_lock,
 )
@@ -77,23 +79,6 @@ def _external_monitors() -> list[Backlight]:
     return mons
 
 
-def _xrandr_monitors() -> list[Backlight]:
-    if not shutil.which("xrandr"):
-        return []
-    try:
-        out = subprocess.run(
-            ["xrandr", "--query"], check=True, capture_output=True, text=True,
-            timeout=10,
-        ).stdout
-    except (subprocess.CalledProcessError, subprocess.TimeoutExpired, OSError):
-        return []
-    mons: list[Backlight] = []
-    for line in out.splitlines():
-        if " connected" in line:
-            mons.append(XrandrBacklight(line.split()[0]))
-    return mons
-
-
 # ---- discovery cache --------------------------------------------------------
 # `ddcutil detect` costs ~0.5 s because it probes every I²C bus, and discovery
 # runs on every brightness operation. That would be a cheap in-memory cache if
@@ -134,8 +119,6 @@ def _to_spec(mon: Backlight) -> dict | None:
                 "model": mon.label.split(" (")[0]}
     if isinstance(mon, SysfsBacklight):
         return {"kind": "sysfs", "name": mon.id, "path": str(mon._path)}
-    if isinstance(mon, XrandrBacklight):
-        return {"kind": "xrandr", "output": mon.id}
     return None
 
 
@@ -146,8 +129,6 @@ def _from_spec(spec: dict) -> Backlight:
     if kind == "sysfs":
         # Re-reads max_brightness, which is a file read, not a probe.
         return SysfsBacklight(spec["name"], Path(spec["path"]))
-    if kind == "xrandr":
-        return XrandrBacklight(spec["output"])
     raise ValueError(f"unknown monitor kind {kind!r}")
 
 
@@ -201,8 +182,6 @@ def list_monitors(refresh: bool = False) -> list[Backlight]:
             return cached
 
     mons = _internal_monitors() + _external_monitors()
-    if not mons:
-        mons = _xrandr_monitors()
     _write_cache(mons)
     return mons
 

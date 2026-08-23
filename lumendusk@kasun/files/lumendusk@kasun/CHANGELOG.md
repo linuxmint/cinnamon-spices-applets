@@ -4,6 +4,33 @@ All notable changes to Lumendusk. Format based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); this project follows
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.2] — 2026-08-23
+
+### Removed
+
+- **The `xrandr` software-dimming backend is gone**, and nothing replaces it.
+  It was never brightness: `xrandr --brightness` scales the gamma ramp, so the
+  backlight stays exactly where it was and every pixel is multiplied down
+  instead. Reported live as "fog" — blacks lifted to grey, contrast flattened,
+  dark content vanishing entirely at low settings.
+
+  Two things made it worse than a merely inaccurate fallback. It **stacked**:
+  the picker offered xrandr outputs alongside the real ddcutil displays, so a
+  monitor could be dimmed twice, once for real and once in gamma, and the log
+  shows exactly that happening — `brightness → 51% on DisplayPort-0, HDMI-A-0`
+  at 16:55 while the same panels went to `48% on ddc1, ddc2` three minutes
+  later. And it **never reset**: the ramp is display state rather than ours, so
+  a dim applied during the few minutes DDC/CI happened to be unreachable stayed
+  burned into the screen long after DDC/CI recovered — including across the
+  daemon exiting.
+
+  A monitor with no real backend is now left alone and said so in the log.
+  Doing nothing is the honest answer. A test asserts no backend ever shells out
+  to `xrandr` again, so this cannot creep back.
+
+  Night light is untouched: it is a colour-temperature ramp by definition, on
+  every platform, and Cinnamon's own keys drive it.
+
 ## [0.3.1] — 2026-08-23
 
 Everything the Cinnamon Spices submission turned up. Submitting is its own
