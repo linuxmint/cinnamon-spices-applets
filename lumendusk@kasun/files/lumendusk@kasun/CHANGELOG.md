@@ -4,6 +4,47 @@ All notable changes to Lumendusk. Format based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); this project follows
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1] — 2026-08-23
+
+Everything the Cinnamon Spices submission turned up. Submitting is its own
+kind of review: an automated scanner reads the applet against the project's
+conventions, and it found things a passing test suite never would.
+
+### Fixed
+
+- **No synchronous file or spawn calls are left in the applet.** Three
+  `GLib.file_test` calls — two picking the engine out of four candidate paths,
+  one checking whether `config.toml` exists yet — were synchronous stats on the
+  shell's main loop, and two of those paths sit under the user's home
+  directory. On a home directory served by an unresponsive NFS or SSHFS mount
+  that stalls the whole desktop, not just this applet. They are now
+  `Gio` `query_info_async`, which makes the engine lookup callback-based; its
+  callers were all about to spawn a subprocess, so none of them could have used
+  a synchronous answer anyway.
+
+  `config.toml` itself was read the same way and is now `load_contents_async`
+  into a cached string, refreshed before each menu redraw.
+
+- **The applet no longer builds a command line for a shell to take apart
+  again.** Two `Util.spawnCommandLine` calls became `Util.spawn` with the argv
+  array they were already assembling. Every argument was shell-quoted, so this
+  fixed no live bug — but quoting is a thing you can forget once, and the
+  arguments being literals today is a poor reason to keep a shell in the path.
+
+- **Timer callbacks return `GLib.SOURCE_REMOVE`** rather than a bare `false`.
+
+- **The applet bundle no longer ships compiled bytecode.** `build-applet.sh`
+  cleared `__pycache__` after copying the engine in, then ran the engine as a
+  smoke test — which wrote it straight back, after the cleanup and before the
+  zip. Every release so far shipped `.pyc` files; they were a third of the
+  bundle. The smoke test now runs with `-B`, the build fails outright if
+  anything compiled survives, and a test pins both.
+
+### Changed
+
+- The screenshot on the Spices page shows sun mode, which is the default and
+  the reason to use this rather than a timer. It showed fixed times.
+
 ## [0.3.0] — 2026-08-23
 
 The release that went looking for trouble. Nothing here was reported by using
@@ -12,7 +53,7 @@ claims to do, and four of them were things that had been quietly wrong for
 weeks: a mode that had never once run, settings that were read but never used,
 and two subsystems that reported success they hadn't earned.
 
-This is the release to submit to Cinnamon Spices.
+Prepared for Cinnamon Spices; 0.3.1 is what was actually submitted.
 
 ### Removed
 
