@@ -417,10 +417,47 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
             this.menu_label.label.set_text(stringify(count));
             this._notificationbin.queue_relayout();
 
+            // Pre-render the menu off-screen after list changes, so the first
+            // click doesn't pay the one-time cairo rasterization of the new
+            // notification (and of the resized menu background).
+            this._scheduleMenuWarmup();
+
         } catch (e) {
             global.logError(e);
         }
      }
+
+    // St rasterizes CSS backgrounds on the CPU during the first paint of a
+    // theme node at a given size.  A freshly added notification (new theme
+    // node) and the menu background (its height changed with the list) make
+    // the first open after a list change take hundreds of ms.  Painting the
+    // menu once while it is practically invisible (opacity 1/255) fills all
+    // those caches outside the click path; opacity 0 would be skipped by
+    // Clutter entirely, hence 1.
+    _scheduleMenuWarmup() {
+        if (this._warmupTimeoutId) {
+            Mainloop.source_remove(this._warmupTimeoutId);
+            this._warmupTimeoutId = 0;
+        }
+        this._warmupTimeoutId = Mainloop.timeout_add(1500, () => {
+            this._warmupTimeoutId = 0;
+            if (this._is_destroyed || this.menu.isOpen || this.menu.actor.visible)
+                return false;
+            let actor = this.menu.actor;
+            let oldOpacity = actor.opacity;
+            actor.opacity = 1;
+            actor.reactive = false;
+            actor.show();
+            Mainloop.timeout_add(100, () => {
+                if (!this.menu.isOpen)
+                    actor.hide();
+                actor.opacity = oldOpacity;
+                actor.reactive = true;
+                return false;
+            });
+            return false;
+        });
+    }
 
      _clear_all() {
         let count = this.notifications.length;
