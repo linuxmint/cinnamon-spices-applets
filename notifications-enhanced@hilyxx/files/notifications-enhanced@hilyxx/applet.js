@@ -301,6 +301,16 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         // subtree is reused between frames (~2ms/frame measured); the cache is
         // invalidated automatically when the content changes (timestamps etc).
         notification.actor.set_offscreen_redirect(imports.gi.Clutter.OffscreenRedirect.ALWAYS);
+        // Give each notification its own theme node: St caches the
+        // CPU-prerendered (cairo) background per theme node PER SIZE, and all
+        // stolen notification actors share one node.  Notifications of
+        // slightly different heights therefore evict each other's cached
+        // background, and every menu open re-rasterizes every background via
+        // cairo (~40ms each, ~400ms per open measured with 8 notifications).
+        // A unique (unstyled) class per actor makes the node - and its paint
+        // cache - private: repeated menu opens drop to ~6ms.
+        this._cacheSlotSeq = (this._cacheSlotSeq || 0) + 1;
+        notification.actor.add_style_class_name('notification-cache-slot-' + this._cacheSlotSeq);
 
         // Enable middle-click to close notifications.
         notification.actor.connect('button-press-event', (actor, event) => {
