@@ -1029,3 +1029,13 @@ msgstr ""
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "從面板移除 temperature@fevimu 小程式"
+
+#. settings-schema.json->no_check_gpu_if_d3cold->description
+msgid "Stop checking GPU temperature if in D3cold state"
+msgstr "如果 GPU 處於 D3cold 狀態，則停止檢查其溫度"
+
+#. settings-schema.json->no_check_gpu_if_d3cold->tooltip
+msgid ""
+"If this option is checked, to avoid waking up GPU card to check its "
+"temperature, don't check it's temperature if it's in powersave mode"
+msgstr "如果勾選此選項，為避免喚醒 GPU 顯示卡來檢查其溫度，當它處於省電模式時不要檢查其溫度。"

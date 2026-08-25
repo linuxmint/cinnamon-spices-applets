@@ -8,6 +8,9 @@ const Util = require("./lib/util");
 const {to_string} = require("./lib/to-string");
 const {readFileAsync} = require("./lib/readFileAsync");
 
+// A default low temperature to return when in d3cold
+const d3cold_temperature = "35";
+
 const {
   UUID,
   HOME_DIR,
@@ -40,11 +43,11 @@ class SensorsReaper {
     this.applet = applet;
     this.refresh_interval = refresh_interval; // seconds
     this.last_attempt_DateTime= undefined;  // the last time we checked sensors
-
+    this.nvidia_cards = {};
     this.sensors_json_data = {};
     this.sensors_program = ""+GLib.find_program_in_path("sensors");
     this.get_sensors_command();
-
+   
     // Support for the Nvidia System Management Interface (nvidia-smi)
     // The Nvidia System Management Interface docs are at
     //   https://developer.nvidia.com/system-management-interface
@@ -129,7 +132,7 @@ class SensorsReaper {
             if (versionCompare(version, "550.107.02") >= 0) {
               this.nvidia_smi_version = version;
               this.nvidia_smi_command =
-                `${this.nvidia_smi_program} --format=csv,noheader --query-gpu=name,pci.bus_id,temperature.gpu`;
+                `${this.nvidia_smi_program} --format=csv,noheader --query-gpu=name,pci.bus_id,temperature.gpu,index`;
             }
             // Test the command because Nvidia doesn't guarantee backwards compatability
             let testProcess = Util.spawnCommandLineAsyncIO(this.nvidia_smi_command,
@@ -142,8 +145,43 @@ class SensorsReaper {
                   this.nvidia_smi_version = undefined;
                 } else {
                   global.log(`Nvidia SMI v${this.nvidia_smi_version} command: ${this.nvidia_smi_command}`);
+                  //global.log(`Searching Nvidia power state`);
+
+                  // Gather all Nvidia cards data
+                  let lines = stdout.split('\n');
+                  lines.forEach((element) => {
+                    if(element.indexOf(",") > -1) {
+                      try {
+                        
+                        const nvidia_information = element.split(', ');
+                        const nvidia_bus_id = nvidia_information[1];
+                        const nvidia_sysfs_path = `/sys/bus/pci/devices/${nvidia_bus_id.replace(/^0{8}/, "0000")}/power_state`;
+                        const nvidia_device_name = nvidia_information[0];
+                        const nvidia_device_id = nvidia_information[3]
+
+                        // Check if everything's correct
+                        if (GLib.file_test(nvidia_sysfs_path, GLib.FileTest.EXISTS)) {
+                          global.log(`Found Nvidia power state on ${nvidia_sysfs_path}, device name ${nvidia_device_name}, bus id ${nvidia_bus_id}`)
+                          
+                          // Add card
+                          this.nvidia_cards[nvidia_device_id] = {
+                            "bus_id": nvidia_bus_id,
+                            "sysfs": Gio.File.new_for_path(nvidia_sysfs_path),
+                            "name": nvidia_device_name
+                          }
+                          global.log(this.nvidia_cards);
+                        }
+                        else {
+                          global.logError(`Could not find power_state handle or information for Nvidia card at ${nvidia_sysfs_path}, is sysfs mounted on /sys?`)
+                        }
+                      }
+                      catch (e) {
+                        global.logError(`Could not parse sysfs path for Nvidia power state: ${e}`)
+                      }
+                    }
+                  });
                 }
-                testProcess.send_signal(9);
+                testProcess.send_signal(9)
               });
             subProcess.send_signal(9);
           }
@@ -189,33 +227,104 @@ class SensorsReaper {
 
   }
 
-  reap_nvidia_smi() {
-    if (this.nvidia_smi_command != undefined) {
-      let subProcess = Util.spawnCommandLineAsyncIO(this.nvidia_smi_command, (stdout, stderr, exitCode) => {
-        if (exitCode === 0) {
-          let results = {};
+  get_nvidia_smi_data(id, results) {
+    return new Promise((resolve, reject) => {
+      let subProcess = Util.spawnCommandLineAsyncIO(
+        `${this.nvidia_smi_command} -i ${id}`,
+        (stdout, stderr, exitCode) => {
+          try {
+            if (exitCode === 0) {
+              let output = stdout
+                .replaceAll(", ", ",")
+                .replaceAll("\r", "")
+                .replaceAll(" %", "");
 
-          let output = stdout.replaceAll(", ", ",").replaceAll("\r", "").replaceAll(" %", "");
-          if (output.endsWith("\n"))
-            output = output.substring(0, output.length - 1)
+              if (output.endsWith("\n"))
+                output = output.substring(0, output.length - 1);
 
-          let lines = output.split("\n");
-          lines.forEach(element => {
-            let values = element.split(",");
-            results[values[1]] = {
-              "Adapter": values[0],
-              "temp1": {
-                "temp1_input": values[2]
-              },
-            };
-          });
-          this._sensors_reaped(JSON.stringify(results));
-        } else {
-          global.logError(`Nvidia SMI call failed with code ${exitCode}: ${stdout}, ${stderr}`);
+              let lines = output.split("\n");
+
+              lines.forEach(element => {
+                let values = element.split(",");
+
+                results[values[1]] = {
+                  "Adapter": values[0],
+                  "temp1": {
+                    "temp1_input": values[2]
+                  }
+                };
+              });
+              resolve(results);
+            } else {
+              const error = new Error(
+                `Nvidia SMI call failed with code ${exitCode}: ${stdout}, ${stderr}`
+              );
+              reject(error);
+            }
+          } catch (e) {
+            reject(e);
+          } finally {
+            subProcess.send_signal(9);
+          }
         }
-        subProcess.send_signal(9);
-      });
-    }
+      );
+    });
+  }
+
+  reap_nvidia_smi(no_check_gpu_if_d3cold=0) {
+    let results = {};
+   
+    if (this.nvidia_smi_command != undefined) {
+
+      if (this.nvidia_cards != null) {
+
+          Promise.all(Object.keys(this.nvidia_cards).map((id) => {
+
+            return new Promise((resolve, reject) => {
+
+              // Don't bother Nvidia card if in d3cold state
+              if(no_check_gpu_if_d3cold == 1) {
+                readFileAsync(this.nvidia_cards[id].sysfs).then((power_state) => {
+                  if (power_state.startsWith("D3cold")) {
+                    results[this.nvidia_cards[id].bus_id] = {
+                      "Adapter": this.nvidia_cards[id].name,
+                      "temp1": {
+                        "temp1_input": d3cold_temperature
+                      }
+                    }
+                    global.log(`Adapter ${this.nvidia_cards[id].name} in D3cold state, returning a default low temperature of ${d3cold_temperature}`)
+                    resolve();
+                  }
+                  else {
+                    //global.log(`${this.nvidia_cards[id].name} is active, retrieve its state`);
+                    this.get_nvidia_smi_data(id, results).then(() => {
+                      resolve();
+                    }).catch((error) => {
+                      reject(`Error ${error} while retrieving data from adapter ${this.nvidia_cards[id].name}`);                      
+                    });
+                  }
+                }).catch((error) => {
+                  reject(`Error ${error} while reading sysfs for adapter ${this.nvidia_cards[id].name}`);
+                })              
+              }
+              else {
+                // Just retrieve data from card
+                this.get_nvidia_smi_data(id, results).then(() => {
+                  resolve();
+                }).catch((error) => {
+                  reject(`Error ${error} while retrieving data from adapter ${this.nvidia_cards[id].name}`);                      
+                });
+              }
+            });
+          })).then(() => {
+            this._sensors_reaped(JSON.stringify(results));
+          }).catch((error) => {
+            global.logError(`ERROR ${error}`);
+          });
+
+        }
+
+      }    
   }
 
   async _sensors_reaped(output) {

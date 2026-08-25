@@ -1,189 +1,190 @@
-# SENSORS MONITOR
-# This file is put in the public domain.
-# claudiux, 2020
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux 5.11.3\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2026-04-26 01:27+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-24 12:45+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#. applet.js:232
+#: applet.js:232
 msgid "Sensors Monitor"
 msgstr ""
 
-#. applet.js:594
+#: applet.js:595
 msgid "Suspended"
 msgstr ""
 
-#. applet.js:936 applet.js:978
+#: applet.js:937 applet.js:979
 msgid "high:"
 msgstr ""
 
-#. applet.js:936 applet.js:939 applet.js:978 applet.js:980 applet.js:1021
+#: applet.js:937 applet.js:940 applet.js:979 applet.js:981 applet.js:1022
 msgid "n/a"
 msgstr ""
 
-#. applet.js:939 applet.js:980
+#: applet.js:940 applet.js:981
 msgid "crit:"
 msgstr ""
 
-#. applet.js:1021 applet.js:1065
+#: applet.js:1022 applet.js:1066
 msgid "min:"
 msgstr ""
 
-#. applet.js:1067
+#: applet.js:1068
 msgid "max:"
 msgstr ""
 
-#. applet.js:1096
+#: applet.js:1097
 msgid "No intrusion detected"
 msgstr ""
 
-#. applet.js:1096
+#: applet.js:1097
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#. applet.js:1116
+#: applet.js:1117
 msgid "Must be configured!"
 msgstr ""
 
-#. applet.js:1518
+#: applet.js:1519
 msgid "Settings"
 msgstr ""
 
-#. applet.js:1518
+#: applet.js:1519
 msgid ":"
 msgstr ""
 
 #. settings-schema.json->page_General->title
-#. applet.js:1525
+#: applet.js:1526
 msgid "⚙ General"
 msgstr ""
 
-#. applet.js:1542
+#: applet.js:1543
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr ""
 
-#. applet.js:1559
+#: applet.js:1560
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr ""
 
-#. applet.js:1576
+#: applet.js:1577
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr ""
 
-#. applet.js:1593
+#: applet.js:1594
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1629
+#: applet.js:1630
 msgid "Run xsensors"
 msgstr ""
 
-#. applet.js:1638
+#: applet.js:1639
 msgid "Suspend Sensors"
 msgstr ""
 
-#. applet.js:1649
+#: applet.js:1650
 msgid "Reload this applet"
 msgstr ""
 
-#. applet.js:2005
+#: applet.js:2006
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
 
-#. lib/checkDependencies.js:371
+#: lib/checkDependencies.js:376
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr ""
 
-#. lib/checkDependencies.js:372
+#: lib/checkDependencies.js:377
 msgid "All dependencies are installed"
 msgstr ""
 
-#. lib/checkDependencies.js:401
+#: lib/checkDependencies.js:407
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 
-#. lib/checkDependencies.js:403
+#: lib/checkDependencies.js:409
 msgid "Please install these packages:"
 msgstr ""
 
-#. lib/checkDependencies.js:407 lib/checkDependencies.js:417
+#: lib/checkDependencies.js:413 lib/checkDependencies.js:423
+#: lib/checkDependencies.js:432
 msgid "Some dependencies are not installed!"
 msgstr ""
 
-#. lib/checkDependencies.js:419
+#: lib/checkDependencies.js:425 lib/checkDependencies.js:434
 msgid "Install these packages now"
 msgstr ""
 
-#. lib/util.js:244
+#: lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr ""
 
-#. scripts/xs.py:206
+#: scripts/xs.py:206
 msgid "Previous instance"
 msgstr ""
 
-#. scripts/xs.py:210
+#: scripts/xs.py:210
 msgid "Next instance"
 msgstr ""
 
-#. scripts/xs.py:219
+#: scripts/xs.py:219
 msgid "More options"
 msgstr ""
 
-#. scripts/xs.py:225
+#: scripts/xs.py:225
 msgid "Import from a file"
 msgstr ""
 
-#. scripts/xs.py:230
+#: scripts/xs.py:230
 msgid "Export to a file"
 msgstr ""
 
-#. scripts/xs.py:235
+#: scripts/xs.py:235
 msgid "Reset to defaults"
 msgstr ""
 
-#. scripts/xs.py:244
+#: scripts/xs.py:244
 #, python-format
 msgid "Reload %s"
 msgstr ""
 
-#. scripts/xs.py:425
+#: scripts/xs.py:425
 #, python-format
 msgid "Settings for %s"
 msgstr ""
 
-#. scripts/xs.py:517
+#: scripts/xs.py:517
 msgid "Select or enter file to export to"
 msgstr ""
 
-#. scripts/xs.py:525 scripts/xs.py:546
+#: scripts/xs.py:525 scripts/xs.py:546
 msgid "JSON files"
 msgstr ""
 
-#. scripts/xs.py:539
+#: scripts/xs.py:539
 msgid "Select a JSON file to import"
 msgstr ""
 
@@ -448,8 +449,7 @@ msgstr ""
 
 #. settings-schema.json->keep_size->tooltip
 msgid ""
-"Checked: The size of this applet remains constant, once all your preferences "
-"have been defined.\n"
+"Checked: The size of this applet remains constant, once all your preferences have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
 
@@ -557,8 +557,8 @@ msgstr ""
 
 #. settings-schema.json->do_not_check_dependencies->tooltip
 msgid ""
-"If you do not want to install certain dependencies (e.g., fonts), check this "
-"box. Be careful with dependencies that are necessary for this applet to "
+"If you do not want to install certain dependencies (e.g., fonts), check this"
+" box. Be careful with dependencies that are necessary for this applet to "
 "function properly."
 msgstr ""
 
@@ -668,6 +668,16 @@ msgid ""
 "limit are recorded in the system journal."
 msgstr ""
 
+#. settings-schema.json->no_check_gpu_if_d3cold->description
+msgid "Stop checking GPU temperature if in D3cold state"
+msgstr ""
+
+#. settings-schema.json->no_check_gpu_if_d3cold->tooltip
+msgid ""
+"If this option is checked, to avoid waking up GPU card to check its "
+"temperature, don't check it's temperature if it's in powersave mode"
+msgstr ""
+
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
 #. settings-schema.json->btn_renew_volt_sensors_list->description
@@ -745,8 +755,7 @@ msgstr ""
 
 #. settings-schema.json->temp_sensors->tooltip
 msgid ""
-"Double-click on a line to change 'Shown name', 'High', 'Critical' or "
-"'Formula'.\n"
+"Double-click on a line to change 'Shown name', 'High', 'Critical' or 'Formula'.\n"
 "To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
 "'High' and 'Critical' (optional) must be valid numbers.\n"
 "'Formula' (optional):\n"
@@ -777,8 +786,7 @@ msgstr ""
 
 #. settings-schema.json->temp_disks->tooltip
 msgid ""
-"Disk name: The name of the disk, as returned by the 'lsblk' command. Please "
-"see help.\n"
+"Disk name: The name of the disk, as returned by the 'lsblk' command. Please see help.\n"
 "High and Critical values: Cf. technical manual of your disk."
 msgstr ""
 
@@ -894,7 +902,8 @@ msgid "Log intrusions"
 msgstr ""
 
 #. settings-schema.json->journalize_intrusion->tooltip
-msgid "When this option is checked, intrusions are recorded in the system log."
+msgid ""
+"When this option is checked, intrusions are recorded in the system log."
 msgstr ""
 
 #. settings-schema.json->intrusion_sensors->tooltip
@@ -946,7 +955,6 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->report->description
-#. scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr ""
 

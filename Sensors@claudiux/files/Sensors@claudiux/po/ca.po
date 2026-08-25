@@ -1055,3 +1055,13 @@ msgstr ""
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Elimineu la miniaplicació temperature@fevimu del panell"
+
+#. settings-schema.json->no_check_gpu_if_d3cold->description
+msgid "Stop checking GPU temperature if in D3cold state"
+msgstr "Deixar de comprovar la temperatura de la GPU si està en estat D3cold"
+
+#. settings-schema.json->no_check_gpu_if_d3cold->tooltip
+msgid ""
+"If this option is checked, to avoid waking up GPU card to check its "
+"temperature, don't check it's temperature if it's in powersave mode"
+msgstr "Si aquesta opció està marcada, per evitar despertar la targeta GPU per comprovar-ne la temperatura, no comproveu la seva temperatura si està en mode d’estalvi d’energia."

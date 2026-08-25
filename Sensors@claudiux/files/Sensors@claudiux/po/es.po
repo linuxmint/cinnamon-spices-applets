@@ -1067,3 +1067,13 @@ msgstr "Abrir la página web de colores HTML"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Retire la applet temperature@fevimu del panel"
+
+#. settings-schema.json->no_check_gpu_if_d3cold->description
+msgid "Stop checking GPU temperature if in D3cold state"
+msgstr "Dejar de comprobar la temperatura de la GPU si está en estado D3cold"
+
+#. settings-schema.json->no_check_gpu_if_d3cold->tooltip
+msgid ""
+"If this option is checked, to avoid waking up GPU card to check its "
+"temperature, don't check it's temperature if it's in powersave mode"
+msgstr "Si se marca esta opción, para evitar despertar la tarjeta GPU para comprobar su temperatura, no compruebe su temperatura si está en modo de ahorro de energía."
