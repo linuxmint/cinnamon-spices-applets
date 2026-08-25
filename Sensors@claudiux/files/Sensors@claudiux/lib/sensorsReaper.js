@@ -181,7 +181,7 @@ class SensorsReaper {
                     }
                   });
                 }
-                testProcess.send_signal(9)
+                testProcess.send_signal(9);
               });
             subProcess.send_signal(9);
           }
