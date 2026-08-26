@@ -68,7 +68,7 @@ class BatteryUniversalProxy {
                     this._onStateChanged = this.proxy.connectSignal("stateChanged", this.onStateChanged.bind(this));
                     break;
 
-                default: // 21.12.3 / Newer Versions
+                default: // Newer Versions
                     this.proxy = new DeviceBatteryProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+deviceID+"/battery");
                     this._onRefreshed = this.proxy.connectSignal("refreshed", this.onRefreshed.bind(this));
                     break;
@@ -80,8 +80,8 @@ class BatteryUniversalProxy {
 
     getCharge() {
         switch (this.compatMode.versionLevel) {
-            case 0:
-            case 1:
+            case 0: // Version 1.3
+            case 1: // Version 1.4
                 let charge = -1;
 
                 try {
@@ -92,15 +92,15 @@ class BatteryUniversalProxy {
 
                 return charge;
 
-            default:
+            default: // Newer Versions
                 return this.proxy.charge;
         }
     }
 
     getChargingState() {
         switch (this.compatMode.versionLevel) {
-            case 0:
-            case 1:
+            case 0: // Version 1.3
+            case 1: // Version 1.4
                 let isCharging = false;
 
                 try {
@@ -111,7 +111,7 @@ class BatteryUniversalProxy {
 
                 return isCharging;
 
-            default:
+            default: // Newer Versions
                 return this.proxy.isCharging;
         }
     }
@@ -147,8 +147,8 @@ class BatteryUniversalProxy {
 
         if (this.proxy) {
             switch (this.compatMode.versionLevel) {
-                case 0:
-                case 1:
+                case 0: // Version 1.3
+                case 1: // Version 1.4
                     if (this._onChargeChanged) {
                         this.proxy.disconnectSignal(this._onChargeChanged);
                     }
@@ -157,7 +157,7 @@ class BatteryUniversalProxy {
                         this.proxy.disconnectSignal(this._onStateChanged);
                     }
                     
-                default:
+                default: // Newer Versions
                     if (this._onRefreshed) {
                         this.proxy.disconnectSignal(this._onRefreshed);
                     }
@@ -337,7 +337,7 @@ class SMSUniversalProxy {
                     this.proxy = new DeviceOldSMSProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+deviceID+"/sms");
                     break;
 
-                default: // 21.12.3 / Newer Versions
+                default: // Newer Versions
                     this.proxy = new DeviceSMSProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+deviceID+"/sms");
                     break;
             }
@@ -348,8 +348,10 @@ class SMSUniversalProxy {
 
     getAppSupported() {
         if (this.compatMode.versionLevel == 0) {
+            // Version 1.3
             return false;
         } else {
+            // Newer Versions
             return true;
         }
     }

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-08-04 01:50+0200\n"
+"POT-Creation-Date: 2026-08-24 14:54+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.6\n"
 
-#. applet.js:43
+#. applet.js:45
 msgid "Notifications applet conflict"
 msgstr "Conflit d'applets de notifications"
 
-#. applet.js:44
+#. applet.js:46
 msgid ""
 "Conflict detected: notifications@cinnamon.org is active.\n"
 "Remove it and restart Cinnamon before using Notifications-Enhanced applet."
@@ -31,54 +31,54 @@ msgstr ""
 "Retirez-le et redémarrez Cinnamon avant d'utiliser l'applet Notifications-"
 "Enhanced."
 
-#. applet.js:164
+#. applet.js:171
 msgid "Do not disturb"
 msgstr "Ne pas déranger"
 
-#. applet.js:170
+#. applet.js:177
 msgid "No notifications"
 msgstr "Aucune notification"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:178
+#. applet.js:185
 msgid "Clear notifications"
 msgstr "Effacer les notifications"
 
-#. applet.js:193
+#. applet.js:200
 msgid "Enable notifications"
 msgstr "Activer les notifications"
 
-#. applet.js:204
+#. applet.js:211
 msgid "Notification Settings"
 msgstr "Paramètres des notifications"
 
-#. applet.js:327 applet.js:558
+#. applet.js:355 applet.js:611
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d notification"
 msgstr[1] "%d notifications"
 
-#. applet.js:364
+#. applet.js:392
 msgid "Notifications"
 msgstr "Notifications"
 
-#. applet.js:377
+#. applet.js:405
 msgid "Notifications disabled"
 msgstr "Notifications désactivées"
 
-#. applet.js:574
+#. applet.js:634
 msgid "just now"
 msgstr "à l'instant"
 
-#. applet.js:577
+#. applet.js:637
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "il y a %d seconde"
 msgstr[1] "il y a %d secondes"
 
-#. applet.js:581
+#. applet.js:641
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
