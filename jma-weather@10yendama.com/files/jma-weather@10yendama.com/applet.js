@@ -9,7 +9,7 @@ const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 
 const UUID = "jma-weather@10yendama.com";
-const VERSION = "3.3.0";
+const VERSION = "3.3.1";
 
 // Local modules must be loaded through the CJS importer.
 // `imports.ui.extension.getCurrentExtension()` is a GNOME Shell pattern and
@@ -297,6 +297,7 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
         this._weather = new WeatherData.WeatherSnapshot();
         this._lastNoticeKeys = new Set();
         this._lastRainNotice = null;
+        this.alertNotification = true;
         this._lastFreshAlerts = [];
         this._alertBaselineSignature = null;
         this._settingsMonitor = null;
@@ -334,7 +335,6 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
             ["current-icon-size", "currentIconSize"],
             ["forecast-icon-size", "forecastIconSize"],
             ["rain-notification", "rainNotification"],
-            ["alert-notification", "alertNotification"],
             ["rain-threshold", "rainThreshold"],
             ["heat-notification", "heatNotification"],
             ["heat-threshold", "heatThreshold"],
