@@ -115,6 +115,11 @@
     "default": true,
     "description": "雨予報を通知"
   },
+  "alert-notification": {
+    "type": "switch",
+    "default": true,
+    "description": "新しい気象警報・注意報を通知"
+  },
   "rain-threshold": {
     "type": "spinbutton",
     "default": 60,

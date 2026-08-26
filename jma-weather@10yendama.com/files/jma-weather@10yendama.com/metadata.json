@@ -2,7 +2,7 @@
   "uuid": "jma-weather@10yendama.com",
   "name": "JMA Weather Japan",
   "description": "Weather applet for Japan using JMA regional forecasts and Open-Meteo current and hourly data.",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "max-instances": 3,
   "cinnamon-version": [
     "6.6"

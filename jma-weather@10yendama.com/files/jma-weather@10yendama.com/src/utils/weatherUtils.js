@@ -20,6 +20,31 @@ var asNumber = function(value) {
     return Number.isFinite(number) ? number : null;
 };
 
+var precipitationProbability = function(value) {
+    const number = asNumber(value);
+    return number !== null && number >= 0 && number <= 100
+        ? number
+        : null;
+};
+
+var shouldShowPrecipitationValue = function(value, enabled = true) {
+    return Boolean(enabled) && precipitationProbability(value) !== null;
+};
+
+var shouldShowPrecipitationIcon = function(value, enabled = true) {
+    const probability = precipitationProbability(value);
+    return Boolean(enabled) && probability !== null && probability > 0;
+};
+
+var formatPrecipitationProbability = function(value, enabled = true) {
+    if (!shouldShowPrecipitationValue(value, enabled))
+        return "";
+
+    const probability = Math.round(precipitationProbability(value));
+    const icon = shouldShowPrecipitationIcon(value, enabled) ? "☔" : "";
+    return `${icon}${probability}%`;
+};
+
 var dateKey = function(value) {
     const date = value instanceof Date ? value : new Date(value);
     if (Number.isNaN(date.getTime()))

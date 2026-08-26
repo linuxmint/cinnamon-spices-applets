@@ -103,13 +103,22 @@ var WeatherSnapshot = class WeatherSnapshot {
         openMeteo = null,
         errors = [],
         providerStates = null,
-        cacheSavedAt = null
+        cacheSavedAt = null,
+        alertData = null,
+        alertState = null,
+        alertError = null,
+        alertCacheSavedAt = null
     ) {
         this.jma = jma;
         this.openMeteo = openMeteo;
         this.errors = Array.isArray(errors) ? errors : [];
         this.providerStates = providerStates || _defaultProviderStates(jma, openMeteo);
         this.cacheSavedAt = cacheSavedAt || null;
+        this.alertData = alertData || null;
+        this.alerts = Array.isArray(alertData?.alerts) ? alertData.alerts : [];
+        this.alertState = alertState || (alertData ? "previous" : "missing");
+        this.alertError = alertError || null;
+        this.alertCacheSavedAt = alertCacheSavedAt || null;
     }
 
     static fromPrevious(previous) {
@@ -121,7 +130,11 @@ var WeatherSnapshot = class WeatherSnapshot {
             previous.openMeteo || null,
             [],
             _defaultProviderStates(previous.jma, previous.openMeteo),
-            previous.cacheSavedAt || null
+            previous.cacheSavedAt || null,
+            previous.alertData || null,
+            previous.alertData ? "previous" : "missing",
+            null,
+            previous.alertCacheSavedAt || null
         );
     }
 
@@ -156,6 +169,27 @@ var WeatherSnapshot = class WeatherSnapshot {
         if (this.providerStates.jma === "fresh" &&
             this.providerStates.openMeteo === "fresh")
             this.cacheSavedAt = null;
+    }
+
+    setAlertResult(result) {
+        this.alertData = result?.data || null;
+        this.alerts = Array.isArray(this.alertData?.alerts)
+            ? this.alertData.alerts
+            : [];
+        this.alertState = result?.state || "missing";
+        this.alertError = result?.error || null;
+        this.alertCacheSavedAt = result?.cacheSavedAt || null;
+    }
+
+    isAlertFresh() {
+        return this.alertState === "fresh";
+    }
+
+    highestAlertLevel() {
+        return this.alerts.reduce(
+            (highest, alert) => Math.max(highest, Number(alert?.level) || 0),
+            0
+        );
     }
 
     providerState(provider) {

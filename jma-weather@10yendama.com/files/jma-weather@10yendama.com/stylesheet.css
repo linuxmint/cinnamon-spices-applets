@@ -40,3 +40,10 @@
     max-width: 520px;
     padding: 4px 2px;
 }
+
+.jma-weather-alert-block {
+    font-weight: bold;
+    min-width: 360px;
+    max-width: 520px;
+    padding: 6px 2px;
+}

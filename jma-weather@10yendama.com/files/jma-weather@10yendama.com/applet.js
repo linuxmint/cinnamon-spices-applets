@@ -9,7 +9,7 @@ const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 
 const UUID = "jma-weather@10yendama.com";
-const VERSION = "3.2.0";
+const VERSION = "3.3.0";
 
 // Local modules must be loaded through the CJS importer.
 // `imports.ui.extension.getCurrentExtension()` is a GNOME Shell pattern and
@@ -23,6 +23,9 @@ let IconServiceModule = null;
 let CacheServiceModule = null;
 let JmaProviderModule = null;
 let OpenMeteoProviderModule = null;
+let JmaAlertProviderModule = null;
+let AlertServiceModule = null;
+let AlertCacheServiceModule = null;
 
 function _prependImportPath(path) {
     if (!imports.searchPath.includes(path))
@@ -52,6 +55,9 @@ function _loadLocalModules(metadata) {
     CacheServiceModule = imports.cacheService;
     JmaProviderModule = imports.jmaProvider;
     OpenMeteoProviderModule = imports.openMeteoProvider;
+    JmaAlertProviderModule = imports.jmaAlertProvider;
+    AlertServiceModule = imports.alertService;
+    AlertCacheServiceModule = imports.alertCacheService;
 }
 
 function formatHour(iso) {
@@ -209,6 +215,7 @@ class WeatherForecastMenuItem extends PopupMenu.PopupBaseMenuItem {
         super({ reactive: false });
 
         this._iconSize = Number(iconSize) || 24;
+        this._rowsSignature = null;
         this._list = new St.BoxLayout({
             vertical: true,
             style_class: "jma-weather-forecast-list"
@@ -218,11 +225,20 @@ class WeatherForecastMenuItem extends PopupMenu.PopupBaseMenuItem {
 
     setRows(rows, iconSize, emptyText) {
         this._iconSize = Number(iconSize) || 24;
+        const rowValues = Array.isArray(rows) ? rows : [];
+        const signature = JSON.stringify([
+            this._iconSize,
+            emptyText,
+            rowValues.map(row => [row?.iconPath || "", row?.text || ""])
+        ]);
+        if (signature === this._rowsSignature)
+            return;
+        this._rowsSignature = signature;
 
         for (const child of this._list.get_children())
             child.destroy();
 
-        if (!Array.isArray(rows) || !rows.length) {
+        if (!rowValues.length) {
             this._list.add_actor(new St.Label({
                 text: emptyText,
                 style_class: "jma-weather-empty-label"
@@ -230,7 +246,7 @@ class WeatherForecastMenuItem extends PopupMenu.PopupBaseMenuItem {
             return;
         }
 
-        for (const row of rows) {
+        for (const row of rowValues) {
             const box = new St.BoxLayout({
                 vertical: false,
                 style_class: "jma-weather-forecast-row"
@@ -281,6 +297,8 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
         this._weather = new WeatherData.WeatherSnapshot();
         this._lastNoticeKeys = new Set();
         this._lastRainNotice = null;
+        this._lastFreshAlerts = [];
+        this._alertBaselineSignature = null;
         this._settingsMonitor = null;
         this._settingsMonitorSignalId = 0;
         this._settingsReloadId = 0;
@@ -316,6 +334,7 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
             ["current-icon-size", "currentIconSize"],
             ["forecast-icon-size", "forecastIconSize"],
             ["rain-notification", "rainNotification"],
+            ["alert-notification", "alertNotification"],
             ["rain-threshold", "rainThreshold"],
             ["heat-notification", "heatNotification"],
             ["heat-threshold", "heatThreshold"],
@@ -354,17 +373,26 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
             this._httpClient,
             WeatherUtils
         );
+        const jmaAlertProvider = new JmaAlertProviderModule.JmaAlertProvider(
+            this._httpClient
+        );
 
         this._weatherService = new WeatherServiceModule.WeatherService(
             jmaProvider,
             openMeteoProvider,
             WeatherData.WeatherSnapshot
         );
+        this._alertService = new AlertServiceModule.AlertService(jmaAlertProvider);
         this._locationService = new LocationServiceModule.LocationService(WeatherUtils);
         this._cacheService = new CacheServiceModule.CacheService({
             uuid: UUID,
             instanceId: this.instance_id ?? this._instanceId,
             maxAgeMs: 24 * 60 * 60 * 1000
+        });
+        this._alertCacheService = new AlertCacheServiceModule.AlertCacheService({
+            uuid: UUID,
+            instanceId: this.instance_id ?? this._instanceId,
+            maxAgeMs: 10 * 60 * 1000
         });
 
         this._buildMenu();
@@ -380,6 +408,11 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
             this._orientation
         );
         this._menuManager.addMenu(this._menu);
+
+        this._alertItem = new WeatherTextMenuItem();
+        this._alertItem.label.add_style_class_name("jma-weather-alert-block");
+        this._menu.addMenuItem(this._alertItem);
+        this._menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         this._currentItem = new WeatherSummaryMenuItem(
             Number(this.currentIconSize) || 44
@@ -530,22 +563,44 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
             longitude: this.longitude
         });
 
-        return { jma: location.jma, openMeteo: location.openMeteo };
+        return {
+            jma: location.jma,
+            openMeteo: location.openMeteo,
+            alert: {
+                officeCode: location.jma.areaCode,
+                municipalityCode: location.location.municipalityCode,
+                areaName: location.displayName
+            }
+        };
     }
 
     _restoreCachedWeather() {
         try {
             const config = this._createProviderConfig();
             const cached = this._cacheService.load(config);
+            const cachedAlerts = this._alertCacheService.load(config.alert);
 
             if (this._cacheService.lastError)
                 global.logError(`[${UUID}] ${this._cacheService.lastError}`);
+            if (this._alertCacheService.lastError)
+                global.logError(`[${UUID}] ${this._alertCacheService.lastError}`);
 
-            if (!cached)
+            if (!cached && !cachedAlerts)
                 return;
 
             this._weather = WeatherData.WeatherSnapshot.fromCache(cached);
-            this._activeConfigSignature = this._cacheService.signature(config);
+            if (cachedAlerts) {
+                this._weather.setAlertResult({
+                    data: cachedAlerts.data,
+                    state: "cache",
+                    error: null,
+                    cacheSavedAt: cachedAlerts.savedAt
+                });
+            }
+            this._activeConfigSignature = [
+                this._cacheService.signature(config),
+                this._alertCacheService.signature(config.alert)
+            ].join("|");
             this._render();
         } catch (error) {
             global.logError(`[${UUID}] cache restore failed: ${error}`);
@@ -571,7 +626,10 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
         let signature;
         try {
             config = this._createProviderConfig();
-            signature = this._cacheService.signature(config);
+            signature = [
+                this._cacheService.signature(config),
+                this._alertCacheService.signature(config.alert)
+            ].join("|");
         } catch (error) {
             this._refreshInFlight = false;
             global.logError(`[${UUID}] location config: ${error}`);
@@ -589,17 +647,50 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
             ? this._weather
             : null;
 
+        const context = {
+            weatherSnapshot: null,
+            alertResult: null,
+            alertHandled: false,
+            pending: 2
+        };
+        const finished = () => {
+            context.pending -= 1;
+            if (context.pending !== 0)
+                return;
+            this._refreshInFlight = false;
+            this._drainQueuedRefresh(generation);
+        };
+        const applyAlertResult = () => {
+            if (!context.weatherSnapshot || !context.alertResult || context.alertHandled)
+                return;
+
+            context.alertHandled = true;
+            context.weatherSnapshot.setAlertResult(context.alertResult);
+            this._weather = context.weatherSnapshot;
+
+            if (context.alertResult.state === "fresh") {
+                this._alertCacheService.save(config.alert, context.alertResult.data);
+                if (this._alertCacheService.lastError)
+                    global.logError(`[${UUID}] ${this._alertCacheService.lastError}`);
+                this._checkAlertNotifications(config.alert);
+            }
+            if (context.alertResult.error)
+                global.logError(`[${UUID}] JMA alerts: ${context.alertResult.error}`);
+            this._render();
+        };
+
         this._weatherService.refresh(
             config,
             previousSnapshot,
             snapshot => {
-                this._refreshInFlight = false;
-
-                if (this._destroyed)
+                if (this._destroyed) {
+                    finished();
                     return;
+                }
 
                 const isLatest = generation === this._refreshGeneration;
                 if (isLatest) {
+                    context.weatherSnapshot = snapshot;
                     this._weather = snapshot;
                     this._activeConfigSignature = signature;
 
@@ -615,9 +706,22 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
 
                     if (snapshot.errors.length)
                         global.logError(`[${UUID}] ${snapshot.errors.join(" | ")}`);
-                }
 
-                this._drainQueuedRefresh(generation);
+                    applyAlertResult();
+                }
+                finished();
+            }
+        );
+
+        this._alertService.refresh(
+            config.alert,
+            previousSnapshot?.alertData || null,
+            result => {
+                if (!this._destroyed && generation === this._refreshGeneration) {
+                    context.alertResult = result;
+                    applyAlertResult();
+                }
+                finished();
             }
         );
     }
@@ -718,10 +822,67 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
             : `⚠ ${label}`;
     }
 
+    _renderAlerts() {
+        const alerts = Array.isArray(this._weather.alerts)
+            ? this._weather.alerts
+            : [];
+        const state = this._weather.alertState;
+
+        if (!this._weather.isAlertFresh()) {
+            if (alerts.length) {
+                const savedAt = formatCacheSavedAt(
+                    this._weather.alertCacheSavedAt ||
+                    this._weather.alertData?.fetchedAt
+                );
+                this._alertItem.setText([
+                    "⚠ 気象庁 防災情報（前回取得・現在状態未確認）",
+                    ...alerts.map(alert => alert.name),
+                    `対象：${alerts[0]?.areaName || this.displayName || "設定地域"}`,
+                    savedAt ? `取得：${savedAt}` : null
+                ].filter(Boolean).join("\n"));
+            } else if (state === "missing" && !this._weather.alertError) {
+                this._alertItem.setText("気象庁 防災情報：取得中…");
+            } else if (state === "cache" || state === "previous") {
+                this._alertItem.setText(
+                    "気象庁 防災情報：前回取得では発表なし（現在状態未確認）"
+                );
+            } else {
+                this._alertItem.setText("気象庁 防災情報：取得できませんでした");
+            }
+            return "";
+        }
+
+        if (!alerts.length) {
+            this._alertItem.setText("気象庁 防災情報：発表なし");
+            return "";
+        }
+
+        const highest = this._weather.highestAlertLevel();
+        const indicator = highest >= 3 ? "🚨" : "⚠";
+        const issuedAt = alerts
+            .map(alert => alert.issuedAt)
+            .filter(Boolean)
+            .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())[0];
+        this._alertItem.setText([
+            highest >= 3
+                ? `${indicator} ${alerts[0].name} 発表中`
+                : `${indicator} 気象庁 防災情報`,
+            ...alerts.map(alert => alert.name),
+            "",
+            `対象：${alerts[0]?.areaName || this.displayName || "設定地域"}`,
+            issuedAt ? `発表：${formatUpdatedAt(issuedAt)}` : null,
+            "出典：気象庁ホームページ"
+        ].filter(line => line !== null).join("\n"));
+        return indicator;
+    }
+
     _render() {
+        const alertIndicator = this._renderAlerts();
         if (!this._weather.hasData()) {
             this._setPanelIcon(this._iconService.iconPath("warning"));
-            this.set_applet_label("天気");
+            this.set_applet_label(
+                `天気${alertIndicator ? ` ${alertIndicator}` : ""}`
+            );
             this.set_applet_tooltip("予報を取得できませんでした");
             this._currentItem.setContent(
                 this._iconService.iconPath("warning"),
@@ -769,13 +930,20 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
                 label = `${displayTemp}°`;
         }
 
-        if (this.panelMode === "full" && panelPop !== null && panelPop !== undefined)
-            label += `${label ? " " : ""}☔${Math.round(panelPop)}%`;
+        const panelPrecipitation = WeatherUtils.formatPrecipitationProbability(
+            panelPop,
+            this.panelMode === "full"
+        );
+        if (panelPrecipitation)
+            label += `${label ? " " : ""}${panelPrecipitation}`;
 
         if (maxTemp !== null &&
             maxTemp !== undefined &&
             Number(maxTemp) >= Number(this.heatThreshold || 35))
             label += `${label ? " " : ""}🔥`;
+
+        if (alertIndicator)
+            label += `${label ? " " : ""}${alertIndicator}`;
 
         this.set_applet_label(label);
 
@@ -830,8 +998,7 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
             .map(row => {
             const temp = row.temp !== null && row.temp !== undefined
                 ? `${Math.round(row.temp)}℃` : "--℃";
-            const pop = row.pop !== null && row.pop !== undefined
-                ? `${Math.round(row.pop)}%` : "--%";
+            const pop = WeatherUtils.formatPrecipitationProbability(row.pop) || "--%";
             const precipitation = row.precipitation !== null &&
                 row.precipitation !== undefined
                 ? `${Math.max(0, row.precipitation).toFixed(1)}mm`
@@ -845,7 +1012,7 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
                 iconPath: this._iconService.iconPath(
                     this._iconService.openMeteoForecastIconName(row)
                 ),
-                text: `${formatHour(row.time)}  ${temp}  ☔${pop}  ` +
+                text: `${formatHour(row.time)}  ${temp}  ${pop}  ` +
                     `${precipitation}  💨${direction ? `${direction} ` : ""}${wind}  ${uv}`
             };
             });
@@ -987,6 +1154,34 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
                 `最大UV指数は${hourly.uvMax.toFixed(1)}です。`
             );
         }
+    }
+
+    _checkAlertNotifications(config) {
+        if (!this._weather.isAlertFresh())
+            return;
+
+        const signature = this._alertCacheService.signature(config);
+        const currentAlerts = this._weather.alerts || [];
+        if (this._alertBaselineSignature !== signature) {
+            this._alertBaselineSignature = signature;
+            this._lastFreshAlerts = currentAlerts.slice();
+            return;
+        }
+
+        const added = JmaAlertProviderModule.newAlerts(
+            this._lastFreshAlerts,
+            currentAlerts
+        );
+        this._lastFreshAlerts = currentAlerts.slice();
+        if (!this.alertNotification || !added.length)
+            return;
+
+        const names = added.map(alert => alert.name).join("、");
+        Main.notify(
+            "JWA Weather",
+            `${names}が発表されました\n` +
+            `${added[0]?.areaName || this.displayName || "設定地域"}`
+        );
     }
 
     _notifyOnce(key, title, body) {

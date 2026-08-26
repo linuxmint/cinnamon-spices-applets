@@ -170,6 +170,7 @@ class SettingsWindow(Gtk.Window):
         self.notebook.append_page(grid, Gtk.Label(label="通知"))
 
         self.rain_notification = Gtk.Switch(active=bool(self.store.get("rain-notification", True)))
+        self.alert_notification = Gtk.Switch(active=bool(self.store.get("alert-notification", True)))
         self.rain_threshold = Gtk.SpinButton.new_with_range(10, 100, 10)
         self.rain_threshold.set_value(float(self.store.get("rain-threshold", 60)))
         self.heat_notification = Gtk.Switch(active=bool(self.store.get("heat-notification", True)))
@@ -179,12 +180,13 @@ class SettingsWindow(Gtk.Window):
         self.uv_threshold = Gtk.SpinButton.new_with_range(3, 11, 1)
         self.uv_threshold.set_value(float(self.store.get("uv-threshold", 8)))
 
-        self._attach(grid, 0, "雨予報を通知", self.rain_notification)
-        self._attach(grid, 1, "雨通知のしきい値（%）", self.rain_threshold)
-        self._attach(grid, 2, "高温を通知", self.heat_notification)
-        self._attach(grid, 3, "高温通知のしきい値（℃）", self.heat_threshold)
-        self._attach(grid, 4, "強い紫外線を通知", self.uv_notification)
-        self._attach(grid, 5, "UV通知のしきい値", self.uv_threshold)
+        self._attach(grid, 0, "気象警報・注意報を通知", self.alert_notification)
+        self._attach(grid, 1, "雨予報を通知", self.rain_notification)
+        self._attach(grid, 2, "雨通知のしきい値（%）", self.rain_threshold)
+        self._attach(grid, 3, "高温を通知", self.heat_notification)
+        self._attach(grid, 4, "高温通知のしきい値（℃）", self.heat_threshold)
+        self._attach(grid, 5, "強い紫外線を通知", self.uv_notification)
+        self._attach(grid, 6, "UV通知のしきい値", self.uv_threshold)
 
     def _build_links_page(self) -> None:
         grid = self._page_grid()
@@ -403,6 +405,7 @@ class SettingsWindow(Gtk.Window):
             self.store.set("forecast-icon-size", int(self.forecast_icon_size.get_value()))
             self.store.set("update-interval", int(self.update_interval.get_value()))
             self.store.set("rain-notification", self.rain_notification.get_active())
+            self.store.set("alert-notification", self.alert_notification.get_active())
             self.store.set("rain-threshold", int(self.rain_threshold.get_value()))
             self.store.set("heat-notification", self.heat_notification.get_active())
             self.store.set("heat-threshold", int(self.heat_threshold.get_value()))

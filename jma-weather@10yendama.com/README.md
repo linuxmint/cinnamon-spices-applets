@@ -7,15 +7,17 @@ JMA Weather Japan is a Cinnamon panel applet for weather forecasts in Japan. It 
 - Current estimated temperature, apparent temperature, wind, precipitation and UV
 - Hourly forecasts including precipitation probability and amount
 - JMA regional and weekly forecasts
+- Current JMA warnings and advisories for the selected municipality
 - Prefecture and municipality selection
-- Configurable panel display and weather notifications
+- Configurable panel display and weather/alert notifications
 - Last-good cache and partial-provider fallback during temporary service failures
 
 Current conditions are estimates provided by Open-Meteo. A high precipitation probability alone does not change the weather icon to rain; the icon follows the provider's weather condition data.
+When precipitation probability is exactly 0%, the value remains visible without an umbrella icon.
 
 ## Data sources
 
-- [Japan Meteorological Agency](https://www.jma.go.jp/) for regional and weekly forecasts
+- [Japan Meteorological Agency](https://www.jma.go.jp/) for regional/weekly forecasts and warnings/advisories
 - [Open-Meteo](https://open-meteo.com/) for estimated current conditions, hourly forecasts and municipality geocoding
 
 ## Configuration
@@ -28,13 +30,14 @@ The external configuration window requires Python 3, PyGObject and GTK 3. These 
 
 No account is required. The applet contains no advertising, analytics or tracking.
 
-Forecast requests send a JMA area code to JMA and coordinates to Open-Meteo. Weather data is cached under the user's XDG cache directory for up to 24 hours. Cinnamon stores applet settings under the user's XDG configuration directory.
+Forecast requests send JMA area codes to JMA and coordinates to Open-Meteo. Weather data is cached under the user's XDG cache directory for up to 24 hours. Alert data uses a separate cache that expires after 10 minutes. Cinnamon stores applet settings under the user's XDG configuration directory.
 
 ## Known limitations
 
 - The interface and JMA forecast text are currently Japanese.
 - The applet targets Cinnamon 6.6.
 - Availability and update times depend on the external data providers.
+- Warning data uses the JSON feed consumed by the current JMA warning webpage. Unlike JMA's published disaster-prevention XML specification, its URL and schema are not guaranteed as a stable public API. Confirm emergency information through official disaster-prevention services.
 
 ## Reporting issues
 
