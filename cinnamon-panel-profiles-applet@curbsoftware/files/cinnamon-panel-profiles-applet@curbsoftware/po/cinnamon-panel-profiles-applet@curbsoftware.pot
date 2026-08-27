@@ -1,0 +1,253 @@
+# PANEL PROFILES
+# This file is put in the public domain.
+# RobertAlexanderH, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: cinnamon-panel-profiles-applet@curbsoftware 1.3.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-25 07:51-0700\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#. applet.js:155 applet.js:489 applet.js:510 applet.js:711
+msgid "Panel Profiles"
+msgstr ""
+
+#. applet.js:495
+msgid "Restoring profile…"
+msgstr ""
+
+#. applet.js:502
+#, javascript-format
+msgid "Profile: %s"
+msgstr ""
+
+#. applet.js:504
+msgid "modified"
+msgstr ""
+
+#. applet.js:539
+msgid "Panel Profiles could not load."
+msgstr ""
+
+#. applet.js:555
+msgid "No profiles saved yet."
+msgstr ""
+
+#. applet.js:556
+msgid "Save your current panel layout to create one."
+msgstr ""
+
+#. applet.js:558 applet.js:585
+msgid "Save current layout…"
+msgstr ""
+
+#. applet.js:560 applet.js:587
+msgid "Restore previous layout"
+msgstr ""
+
+#. applet.js:563 applet.js:590
+msgid "Configure…"
+msgstr ""
+
+#. applet.js:565 applet.js:592
+msgid "Restart Cinnamon"
+msgstr ""
+
+#. applet.js:582
+#, javascript-format
+msgid "Update profile \"%s\""
+msgstr ""
+
+#. applet.js:607
+msgid "No profiles yet."
+msgstr ""
+
+#. applet.js:626
+msgid "Modified"
+msgstr ""
+
+#. applet.js:684
+msgid "Saving…"
+msgstr ""
+
+#. applet.js:686
+msgid "Waiting for displays…"
+msgstr ""
+
+#. applet.js:687
+msgid "Loading…"
+msgstr ""
+
+#. applet.js:712
+msgid "The profile could not be loaded."
+msgstr ""
+
+#. applet.js:724
+#, javascript-format
+msgid "Update \"%s\"?"
+msgstr ""
+
+#. applet.js:725
+msgid ""
+"The saved version of this profile will be replaced by your current "
+"configuration."
+msgstr ""
+
+#. applet.js:726
+msgid "Update"
+msgstr ""
+
+#. dialogs.js:242 dialogs.js:410
+msgid "Cancel"
+msgstr ""
+
+#. dialogs.js:303
+msgid "Save Panel Profile"
+msgstr ""
+
+#. dialogs.js:308
+msgid "Name"
+msgstr ""
+
+#. dialogs.js:318
+msgid "Profile name"
+msgstr ""
+
+#. dialogs.js:332
+msgid "A profile with this name already exists"
+msgstr ""
+
+#. dialogs.js:339
+msgid "Include desklets"
+msgstr ""
+
+#. dialogs.js:341
+msgid "Include desklets in this profile"
+msgstr ""
+
+#. dialogs.js:345
+msgid "Save as:"
+msgstr ""
+
+#. dialogs.js:352
+msgid "New profile"
+msgstr ""
+
+#. dialogs.js:357
+msgid "Replace existing profile"
+msgstr ""
+
+#. dialogs.js:377
+msgid "Existing profile:"
+msgstr ""
+
+#. dialogs.js:404 dialogs.js:598
+msgid "Save"
+msgstr ""
+
+#. dialogs.js:598
+msgid "Overwrite"
+msgstr ""
+
+#. dialogs.js:635
+#, javascript-format
+msgid "Replace \"%s\"?"
+msgstr ""
+
+#. dialogs.js:636
+msgid ""
+"The saved version of this profile will be replaced by your current panel "
+"configuration."
+msgstr ""
+
+#. dialogs.js:640
+msgid "Replace"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Save and restore named panel layouts with optional desklets and safe rollback"
+msgstr ""
+
+#. settings-schema.json->profiles->description
+msgid "Profiles"
+msgstr ""
+
+#. settings-schema.json->profiles-manager->description
+msgid "Manage saved profiles"
+msgstr ""
+
+#. settings-schema.json->profiles-manager->tooltip
+msgid ""
+"Rename, duplicate or delete panel profiles. Each profile can optionally "
+"include desklets."
+msgstr ""
+
+#. settings-schema.json->display-info->description
+msgid "Displays and active profile"
+msgstr ""
+
+#. settings-schema.json->display-info->tooltip
+msgid "Connected displays and what the active profile expects"
+msgstr ""
+
+#. settings-schema.json->restore->description
+msgid "Restore"
+msgstr ""
+
+#. settings-schema.json->stabilization-delay->units
+#. settings-schema.json->wait-timeout->units
+msgid "seconds"
+msgstr ""
+
+#. settings-schema.json->stabilization-delay->description
+msgid "Stabilization delay"
+msgstr ""
+
+#. settings-schema.json->stabilization-delay->tooltip
+msgid ""
+"Pause after displays settle before restoring, so late monitor churn does not "
+"interrupt the restore"
+msgstr ""
+
+#. settings-schema.json->wait-timeout->description
+msgid "Display wait timeout"
+msgstr ""
+
+#. settings-schema.json->wait-timeout->tooltip
+msgid "How long to wait for missing displays before giving up on a restore"
+msgstr ""
+
+#. settings-schema.json->notifications->description
+msgid "Notifications"
+msgstr ""
+
+#. settings-schema.json->notify-success->description
+msgid "Show successful restore notifications"
+msgstr ""
+
+#. settings-schema.json->notify-warnings->description
+msgid "Show warning and error notifications"
+msgstr ""
+
+#. settings-schema.json->advanced->description
+msgid "Advanced"
+msgstr ""
+
+#. settings-schema.json->debug-logging->description
+msgid "Enable debug logging"
+msgstr ""
+
+#. settings-schema.json->debug-logging->tooltip
+msgid "Write detailed entries to ~/.xsession-errors while the applet runs"
+msgstr ""

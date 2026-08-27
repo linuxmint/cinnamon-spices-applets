@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <!-- Two stacked panel bars, the top one shorter, plus a check mark kept
+       clear of the bars in the lower-right so it reads as a check at
+       16-22px instead of a smudge. Integer coords, 1px-scale strokes,
+       standard symbolic recolor fill. -->
+  <g fill="#bebebe">
+    <rect x="1" y="1.5" width="8" height="3" rx="1"/>
+    <rect x="1" y="6.5" width="10" height="3" rx="1"/>
+  </g>
+  <path d="M10.5 10.5 12 12 14.5 8.5"
+        fill="none" stroke="#bebebe" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

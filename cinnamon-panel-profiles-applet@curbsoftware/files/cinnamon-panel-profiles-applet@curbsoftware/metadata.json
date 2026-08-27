@@ -1,0 +1,7 @@
+{
+    "uuid": "cinnamon-panel-profiles-applet@curbsoftware",
+    "name": "Panel Profiles",
+    "version": "1.3.0",
+    "description": "Save and restore named panel layouts with optional desklets and safe rollback",
+    "max-instances": 1
+}

@@ -1,0 +1,81 @@
+{
+  "profiles": {
+    "type": "header",
+    "description": "Profiles"
+  },
+  "profiles-manager": {
+    "type": "custom",
+    "file": "profilesManagerWidget.py",
+    "widget": "ProfilesManagerWidget",
+    "description": "Manage saved profiles",
+    "tooltip": "Rename, duplicate or delete panel profiles. Each profile can optionally include desklets.",
+    "default": ""
+  },
+  "display-info": {
+    "type": "custom",
+    "file": "displayInfoWidget.py",
+    "widget": "DisplayInfoWidget",
+    "description": "Displays and active profile",
+    "tooltip": "Connected displays and what the active profile expects",
+    "default": ""
+  },
+
+  "restore": {
+    "type": "header",
+    "description": "Restore"
+  },
+  "stabilization-delay": {
+    "type": "spinbutton",
+    "default": 2,
+    "min": 0,
+    "max": 10,
+    "step": 1,
+    "units": "seconds",
+    "description": "Stabilization delay",
+    "tooltip": "Pause after displays settle before restoring, so late monitor churn does not interrupt the restore"
+  },
+  "wait-timeout": {
+    "type": "spinbutton",
+    "default": 60,
+    "min": 5,
+    "max": 300,
+    "step": 5,
+    "units": "seconds",
+    "description": "Display wait timeout",
+    "tooltip": "How long to wait for missing displays before giving up on a restore"
+  },
+
+  "notifications": {
+    "type": "header",
+    "description": "Notifications"
+  },
+  "notify-success": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show successful restore notifications"
+  },
+  "notify-warnings": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show warning and error notifications"
+  },
+
+  "advanced": {
+    "type": "header",
+    "description": "Advanced"
+  },
+  "debug-logging": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable debug logging",
+    "tooltip": "Write detailed entries to ~/.xsession-errors while the applet runs"
+  },
+  "keep-rollback-history": {
+    "type": "generic",
+    "default": true
+  },
+  "rollback-history-count": {
+    "type": "generic",
+    "default": 3
+  }
+}

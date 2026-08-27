@@ -1,0 +1,82 @@
+/* Panel Profiles stylesheet.
+ *
+ * Deliberately sparse for now: spacing, padding, and dimming only. Colors
+ * are inherited from the Cinnamon theme so both light and dark themes work
+ * without per-theme overrides. The UI work package will refine these rules;
+ * keep zero hardcoded colors in here.
+ */
+
+/* Small dim tag pinned to the right of a menu row, used for "Modified". */
+.panel-profiles-tag {
+    padding-left: 8px;
+    padding-right: 2px;
+    font-size: 0.9em;
+    opacity: 0.6;
+}
+
+/* Active profile row label in the panel menu. Own class on purpose:
+ * popup-subtitle-menu-item is reserved for section headers and drags
+ * dimming semantics along with its bold weight. */
+.panel-profiles-active-row {
+    font-weight: bold;
+}
+
+/* Scroll container for the save dialog's replace list. */
+.panel-profiles-replace-scroll {
+    max-height: 200px;
+}
+
+/* One selectable existing-profile row in the replace list. */
+.panel-profiles-profile-row {
+    padding: 5px 8px;
+    border-radius: 4px;
+}
+
+.panel-profiles-profile-row:hover {
+    background-color: rgba(128, 128, 128, 0.15);
+}
+
+.panel-profiles-profile-row:outlined {
+    font-weight: bold;
+    background-color: rgba(128, 128, 128, 0.18);
+}
+
+/* --- Dialog styling. Spacing, sizing, and dimming only. Colors stay with
+ * the theme except the neutral greys on the selectable rows, which match
+ * the sibling clock dialog's in-dialog hover treatment so both read the
+ * same. --- */
+
+/* Field captions in the save dialog ("Name", "Save as:", "Existing
+ * profile:"). */
+.panel-profiles-field-label {
+    padding-top: 10px;
+    padding-bottom: 2px;
+    font-size: 0.95em;
+    opacity: 0.75;
+}
+
+/* Name entry in the save dialog. The run-dialog-entry class carries the
+ * theme's native entry look; this hook only sets a floor so the entry
+ * does not collapse on short names. */
+.panel-profiles-entry {
+    min-width: 280px;
+}
+
+/* Inline duplicate-name warning under the save dialog's name entry. */
+.panel-profiles-name-warning {
+    padding-top: 4px;
+    font-size: 0.9em;
+    opacity: 0.85;
+}
+
+/* "New profile" / "Replace existing profile" pair container. */
+.panel-profiles-radio-box {
+    spacing: 4px;
+}
+
+/* The theme spaces the radio glyph only for CinnamonGenericContainer
+ * children (0.2em under Numix); our toggles pack an StBoxLayout, so provide
+ * the same gap ourselves at the same size. */
+.panel-profiles-radio StBoxLayout {
+    spacing: 0.2em;
+}
