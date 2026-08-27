@@ -1,0 +1,137 @@
+# WORKSPACE NAMES
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# willurd, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-26 18:58-0700\n"
+"PO-Revision-Date: 2025-09-10 00:41+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:113
+msgid "Manage workspaces (Expo)"
+msgstr ""
+
+#. applet.js:121 applet.js:316 applet.js:324
+msgid "Add workspace"
+msgstr ""
+
+#. applet.js:126
+msgid "Rename current workspace"
+msgstr ""
+
+#. applet.js:133
+msgid "Remove current workspace"
+msgstr ""
+
+#. applet.js:281 applet.js:339
+#, fuzzy, javascript-format
+msgid "Workspace %d: %s"
+msgstr "工作區名稱"
+
+#. applet.js:338
+msgid "Current workspace"
+msgstr ""
+
+#. renameDialog.js:61
+msgid "Rename workspace"
+msgstr ""
+
+#. renameDialog.js:62
+msgid "Leave the name empty to restore the default name."
+msgstr ""
+
+#. renameDialog.js:83
+msgid "Cancel"
+msgstr ""
+
+#. renameDialog.js:88
+msgid "Rename"
+msgstr ""
+
+#. workspaceActions.js:285
+#, javascript-format
+msgid "Are you sure you want to remove workspace \"%s\"?"
+msgstr ""
+
+#. metadata.json->name
+#, fuzzy
+msgid "Workspace Names"
+msgstr "工作區名稱"
+
+#. metadata.json->description
+msgid ""
+"Show named workspace buttons in the panel and manage workspaces from the "
+"applet menu"
+msgstr ""
+
+#. settings-schema.json->display->description
+msgid "Display"
+msgstr ""
+
+#. settings-schema.json->display-mode->description
+#, fuzzy
+msgid "Workspace button labels"
+msgstr "工作區名稱"
+
+#. settings-schema.json->display-mode->options
+msgid "Name only"
+msgstr ""
+
+#. settings-schema.json->display-mode->options
+msgid "Number only"
+msgstr ""
+
+#. settings-schema.json->display-mode->options
+msgid "Number + Name"
+msgstr ""
+
+#. settings-schema.json->maximum-label-width->units
+msgid "px"
+msgstr ""
+
+#. settings-schema.json->maximum-label-width->description
+msgid "Maximum width of each workspace name"
+msgstr ""
+
+#. settings-schema.json->scroll-behavior->description
+msgid "Scroll wheel behavior"
+msgstr ""
+
+#. settings-schema.json->scroll-behavior->options
+msgid "Disabled"
+msgstr ""
+
+#. settings-schema.json->scroll-behavior->options
+msgid "Switch workspaces"
+msgstr ""
+
+#. settings-schema.json->scroll-behavior->options
+msgid "Switch workspaces in reverse"
+msgstr ""
+
+#. settings-schema.json->management->description
+#, fuzzy
+msgid "Workspace management"
+msgstr "工作區名稱"
+
+#. settings-schema.json->enable-workspace-editing->description
+msgid "Allow adding, removing and renaming workspaces"
+msgstr ""
+
+#. settings-schema.json->show-add-button->description
+msgid "Show an add button after workspace names"
+msgstr ""
+
+#. settings-schema.json->confirm-remove->description
+msgid "Confirm before removing a named workspace"
+msgstr ""
