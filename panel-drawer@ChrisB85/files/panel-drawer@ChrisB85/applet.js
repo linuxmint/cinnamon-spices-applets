@@ -10,7 +10,7 @@ const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 
-const UUID = "panel-drawer@chrisub85";
+const UUID = "panel-drawer@ChrisB85";
 const XAPP_UUID = "xapp-status@cinnamon.org";
 const SNI_WATCHER = "org.kde.StatusNotifierWatcher";
 
