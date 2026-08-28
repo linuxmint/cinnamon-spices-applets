@@ -60,5 +60,9 @@
     "step": 1,
     "units": "s",
     "description": "Ring duration (seconds)"
+  },
+  "savedAlarms": {
+    "type": "generic",
+    "default": []
   }
 }

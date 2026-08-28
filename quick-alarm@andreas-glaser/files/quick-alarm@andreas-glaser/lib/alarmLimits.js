@@ -1,0 +1,2 @@
+var MAX_ALARMS = 1000;
+var MAX_TEXT_LENGTH = 4096;
