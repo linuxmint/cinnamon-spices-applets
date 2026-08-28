@@ -110,6 +110,10 @@ assertEq(Drawer.keyFor("sound@cinnamon.org", 11), "sound@cinnamon.org:11", "keyF
              ":1.99", "trayLabel: nothing to call it but its bus address");
     assertEq(Drawer.appName("Bitwarden_status_icon_1"), "Bitwarden",
              "appName: counter off, case kept");
+    assertEq(Drawer.systrayKey("AnyDesk"), "systray:anydesk",
+             "systrayKey: window class, folded, and never mixed up with an xapp key");
+    assertEq(Drawer.systrayKey(""), "systray:unknown",
+             "systrayKey: no window class, same as Cinnamon calls it");
 }
 
 print("all tests passed");

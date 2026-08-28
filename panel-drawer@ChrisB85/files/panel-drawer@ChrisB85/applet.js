@@ -12,6 +12,7 @@ const Gettext = imports.gettext;
 
 const UUID = "panel-drawer@ChrisB85";
 const XAPP_UUID = "xapp-status@cinnamon.org";
+const SYSTRAY_UUID = "systray@cinnamon.org";
 const SNI_WATCHER = "org.kde.StatusNotifierWatcher";
 
 const Drawer = imports.ui.appletManager.applets[UUID].drawer;
@@ -43,6 +44,7 @@ MyApplet.prototype = {
         this._collapseTimeoutId = null;
         this._startTimeoutId = null;
         this._restructureId = null;
+        this._revealIds = [];           // XEmbed icons waiting for the row to settle
 
         try {
             Gtk.IconTheme.get_default().append_search_path(metadata.path);
@@ -83,20 +85,45 @@ MyApplet.prototype = {
         return this.actor.get_parent();
     },
 
-    /** The XApp status applet object, wherever it sits. */
-    _xappApplet: function() {
-        let found = null;
+    /** Every applet with this UUID, wherever it sits. */
+    _appletsByUuid: function(uuid) {
+        let found = [];
         Main.panelManager.panels.forEach((panel) => {
             if (!panel)
                 return;
             [panel._leftBox, panel._centerBox, panel._rightBox].forEach(function(box) {
                 box.get_children().forEach(function(child) {
-                    if (child._applet && child._applet._uuid === XAPP_UUID)
-                        found = child._applet;
+                    if (child._applet && child._applet._uuid === uuid)
+                        found.push(child._applet);
                 });
             });
         });
         return found;
+    },
+
+    /** The XApp status applet object, wherever it sits. */
+    _xappApplet: function() {
+        return this._appletsByUuid(XAPP_UUID)[0] || null;
+    },
+
+    /**
+     * The icons of the legacy XEmbed tray, as [button, wm_class].
+     *
+     * Apps that never moved to StatusNotifier (AnyDesk, and anything Java or
+     * plain Qt) end up here instead, in the systray applet - a box of St.Bin
+     * wrappers around X windows, one per icon.
+     */
+    _systrayIcons: function() {
+        let icons = [];
+        this._appletsByUuid(SYSTRAY_UUID).forEach(function(systray) {
+            if (!systray.button_box)
+                return;
+            systray.button_box.get_children().forEach(function(button) {
+                if (button.child)
+                    icons.push([button, button.child.wm_class || ""]);
+            });
+        });
+        return icons;
     },
 
     /** The tray icon a bus name belongs to, if it is still on the panel. */
@@ -240,6 +267,21 @@ MyApplet.prototype = {
             }
         }
 
+        // wm_class is what Cinnamon itself keys an XEmbed icon on, and it is all
+        // these icons say about themselves - it doubles as the theme icon name.
+        this._systrayIcons().forEach(function(pair) {
+            let wmClass = pair[1] || "unknown";
+            items.push({
+                kind: "tray",
+                key: Drawer.systrayKey(wmClass),
+                label: wmClass,
+                icon: wmClass.toLowerCase(),
+                actor: pair[0],
+                visible: pair[0].visible,
+                xembed: true
+            });
+        });
+
         return items;
     },
 
@@ -290,11 +332,11 @@ MyApplet.prototype = {
                 return;                 // the app behind it just started - leave it in sight
             if (this._hiddenKeys.indexOf(key) < 0)
                 this._hiddenKeys.push(key);     // it may be a re-hide, and one key means one entry
-            this._slideOut(byKey[key].actor);
+            this._slideOut(byKey[key]);
         });
         plan.toShow.forEach((key) => {
             this._hiddenKeys.splice(this._hiddenKeys.indexOf(key), 1);
-            this._slideIn(byKey[key].actor);
+            this._slideIn(byKey[key]);
         });
         this._busy = false;
     },
@@ -325,11 +367,45 @@ MyApplet.prototype = {
             actor.set_width(size);
     },
 
-    _slideIn: function(actor) {
+    _cancelReveal: function(actor) {
+        if (!actor._pdRevealId)
+            return;
+        Mainloop.source_remove(actor._pdRevealId);
+        this._revealIds.splice(this._revealIds.indexOf(actor._pdRevealId), 1);
+        actor._pdRevealId = null;
+    },
+
+    /**
+     * An XEmbed tray icon is a real X window the app owns, and the panel drags
+     * it along on every frame the row moves - a round trip to the app each time,
+     * which stutters. So it is taken out of the row for the whole animation and
+     * put back once nothing is moving any more.
+     */
+    _slideIn: function(item) {
+        let actor = item.actor;
+        let duration = this.animationtime || 0;
+
+        if (item.xembed) {
+            this._cancelReveal(actor);
+            if (!duration) {
+                this._resetActor(actor);
+                actor.show();
+                return;
+            }
+            actor._pdRevealId = Mainloop.timeout_add(duration, () => {
+                this._revealIds.splice(this._revealIds.indexOf(actor._pdRevealId), 1);
+                actor._pdRevealId = null;
+                this._resetActor(actor);
+                actor.show();
+                return false;
+            });
+            this._revealIds.push(actor._pdRevealId);
+            return;
+        }
+
         this._resetActor(actor);
         actor.show();
 
-        let duration = this.animationtime || 0;
         if (!duration)
             return;
 
@@ -358,13 +434,33 @@ MyApplet.prototype = {
         });
     },
 
-    _slideOut: function(actor) {
+    _slideOut: function(item) {
+        let actor = item.actor;
         let duration = this.animationtime || 0;
+
+        if (item.xembed) {
+            this._cancelReveal(actor);
+            let wasBusy = this._busy;
+            this._busy = true;              // hiding is us, not the app
+            this._resetActor(actor);
+            actor.hide();
+            this._busy = wasBusy;
+            return;
+        }
+
         if (!duration) {
             this._resetActor(actor);
             actor.hide();
             return;
         }
+
+        let done = () => {
+            let wasBusy = this._busy;
+            this._busy = true;              // hiding is us, not the app
+            actor.hide();
+            this._busy = wasBusy;
+            this._resetActor(actor);
+        };
 
         actor.remove_all_transitions();
         actor.set_clip_to_allocation(true);
@@ -378,13 +474,7 @@ MyApplet.prototype = {
             onUpdate: (transition) => {
                 this._setSize(actor, vertical, Math.round(natural * (1 - transition.get_progress())));
             },
-            onComplete: () => {
-                let wasBusy = this._busy;
-                this._busy = true;              // hiding is us, not the app
-                actor.hide();
-                this._busy = wasBusy;
-                this._resetActor(actor);
-            }
+            onComplete: done
         });
     },
 
@@ -452,6 +542,11 @@ MyApplet.prototype = {
 
         watch(this._panelBox(), "actor-added", onActorAdded);
         watch(this._panelBox(), "actor-removed", onStructureChanged);
+
+        this._appletsByUuid(SYSTRAY_UUID).forEach((systray) => {
+            watch(systray.button_box, "actor-added", onActorAdded);
+            watch(systray.button_box, "actor-removed", onStructureChanged);
+        });
 
         let xapp = this._xappApplet();
         if (!xapp)
@@ -694,6 +789,8 @@ MyApplet.prototype = {
             Mainloop.source_remove(this._startTimeoutId);
         if (this._restructureId)
             Mainloop.source_remove(this._restructureId);
+        this._revealIds.forEach(function(id) { Mainloop.source_remove(id); });
+        this._revealIds = [];
         this._watched.forEach(function(pair) {
             try { pair[0].disconnect(pair[1]); } catch (e) {}
         });

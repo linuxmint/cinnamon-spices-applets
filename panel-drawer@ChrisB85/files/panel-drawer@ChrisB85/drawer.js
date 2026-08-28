@@ -58,6 +58,16 @@ function trayKey(icon) {
 }
 
 /**
+ * Stable id of one XEmbed tray icon.
+ *
+ * ponytail: two icons of the same app share a key. Rare, and nothing better is
+ * on offer - an XEmbed icon says nothing about itself but its window class.
+ */
+function systrayKey(wmClass) {
+    return "systray:" + (wmClass || "unknown").toLowerCase();
+}
+
+/**
  * What to call this icon in the menu.
  *
  * The key is folded and stripped so it can be matched, which reads poorly
