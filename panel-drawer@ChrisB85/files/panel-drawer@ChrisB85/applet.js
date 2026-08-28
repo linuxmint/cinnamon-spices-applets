@@ -549,18 +549,21 @@ MyApplet.prototype = {
         });
 
         let xapp = this._xappApplet();
-        if (!xapp)
-            return;
+        if (xapp) {
+            watch(xapp.manager_container, "actor-added", onActorAdded);
+            watch(xapp.manager_container, "actor-removed", onStructureChanged);
+        }
 
-        watch(xapp.manager_container, "actor-added", onActorAdded);
-        watch(xapp.manager_container, "actor-removed", onStructureChanged);
-
-        for (let id in xapp.statusIcons) {
-            watch(xapp.statusIcons[id].actor, "notify::visible", () => {
+        // Anything on the panel may show itself again behind our back, and it
+        // never says so: the XApp applet shows every tray icon when the theme
+        // changes, and the network applet shows itself on every NetworkManager
+        // state change. So watch each actor, not just the tray ones.
+        this._items().forEach((item) => {
+            watch(item.actor, "notify::visible", () => {
                 if (!this._busy)
                     this._apply();
             });
-        }
+        });
     },
 
     // -- context menu ------------------------------------------------------
