@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-04-26 01:27+0200\n"
+"POT-Creation-Date: 2026-08-29 09:24-0400\n"
 "PO-Revision-Date: 2025-05-13 14:30+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -24,103 +24,103 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Sensoren Monitor"
 
-#. applet.js:594
+#. applet.js:599
 msgid "Suspended"
 msgstr "Opgeschort"
 
-#. applet.js:936 applet.js:978
+#. applet.js:941 applet.js:983
 msgid "high:"
 msgstr "hoog:"
 
-#. applet.js:936 applet.js:939 applet.js:978 applet.js:980 applet.js:1021
+#. applet.js:941 applet.js:944 applet.js:983 applet.js:985 applet.js:1026
 msgid "n/a"
 msgstr "n.v.t"
 
-#. applet.js:939 applet.js:980
+#. applet.js:944 applet.js:985
 msgid "crit:"
 msgstr "kritiek:"
 
-#. applet.js:1021 applet.js:1065
+#. applet.js:1026 applet.js:1070
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:1067
+#. applet.js:1072
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:1096
+#. applet.js:1101
 msgid "No intrusion detected"
 msgstr "Geen verstoring gedetecteerd"
 
-#. applet.js:1096
+#. applet.js:1101
 msgid "INTRUSION DETECTED!"
 msgstr "VERSTORING GEDETECTEERD!"
 
-#. applet.js:1116
+#. applet.js:1121
 msgid "Must be configured!"
 msgstr "Moet worden ingesteld!"
 
-#. applet.js:1518
+#. applet.js:1523
 msgid "Settings"
 msgstr "Instellingen"
 
-#. applet.js:1518
+#. applet.js:1523
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1525
+#. applet.js:1530
 msgid "⚙ General"
 msgstr "⚙ Algemeen"
 
-#. applet.js:1542
+#. applet.js:1547
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Temperatuursensoren"
 
-#. applet.js:1559
+#. applet.js:1564
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Ventilatorsensoren"
 
-#. applet.js:1576
+#. applet.js:1581
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Spanningssensoren"
 
-#. applet.js:1593
+#. applet.js:1598
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Inbraaksensoren"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1629
+#. applet.js:1634
 msgid "Run xsensors"
 msgstr "Uitvoeren xsensors"
 
-#. applet.js:1638
+#. applet.js:1643
 msgid "Suspend Sensors"
 msgstr "Opschorten van sensors"
 
-#. applet.js:1649
+#. applet.js:1654
 msgid "Reload this applet"
 msgstr "Herlaad deze hulptoepassing"
 
-#. applet.js:2005
+#. applet.js:2010
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Weet u zeker dat u '%s' wilt verwijderen?"
 
-#. lib/checkDependencies.js:371
+#. lib/checkDependencies.js:376
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "De hulptoepassing %s is volledig functioneel."
 
-#. lib/checkDependencies.js:372
+#. lib/checkDependencies.js:377
 msgid "All dependencies are installed"
 msgstr "Alle afhankelijkheden zijn geïnstalleerd"
 
-#. lib/checkDependencies.js:401
+#. lib/checkDependencies.js:407
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -128,15 +128,16 @@ msgstr ""
 "U lijkt een aantal van de programma's te missen die nodig zijn voor deze "
 "hulptoepassing om alle functies te hebben."
 
-#. lib/checkDependencies.js:403
+#. lib/checkDependencies.js:409
 msgid "Please install these packages:"
 msgstr "Installeer deze pakketten:"
 
-#. lib/checkDependencies.js:407 lib/checkDependencies.js:417
+#. lib/checkDependencies.js:413 lib/checkDependencies.js:423
+#. lib/checkDependencies.js:432
 msgid "Some dependencies are not installed!"
 msgstr "Sommige afhankelijkheden zijn niet geïnstalleerd!"
 
-#. lib/checkDependencies.js:419
+#. lib/checkDependencies.js:425 lib/checkDependencies.js:434
 msgid "Install these packages now"
 msgstr "Installeer deze pakketten nu"
 
@@ -698,6 +699,21 @@ msgstr ""
 "Wanneer deze optie is aangevinkt, worden temperaturen die de hoge of "
 "kritieke limiet overschrijden in het systeemlogboek geregistreerd."
 
+#. settings-schema.json->no_check_gpu_if_d3cold->description
+msgid "Stop checking GPU temperature if in D3cold state"
+msgstr ""
+"Stop met het controleren van de GPU-temperatuur als deze zich in de D3cold-"
+"status bevindt"
+
+#. settings-schema.json->no_check_gpu_if_d3cold->tooltip
+msgid ""
+"If this option is checked, to avoid waking up GPU card to check its "
+"temperature, don't check it's temperature if it's in powersave mode"
+msgstr ""
+"Als deze optie is ingeschakeld, controleer de temperatuur van de GPU niet "
+"wanneer deze zich in de energiebesparingsmodus bevindt, om te voorkomen dat "
+"de GPU-kaart wordt gewekt om de temperatuur te controleren."
+
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
 #. settings-schema.json->btn_renew_volt_sensors_list->description
@@ -1056,13 +1072,3 @@ msgstr ""
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Verwijder van het paneel de temperature@fevimu hulptoepassing"
-
-#. settings-schema.json->no_check_gpu_if_d3cold->description
-msgid "Stop checking GPU temperature if in D3cold state"
-msgstr "Stop met het controleren van de GPU-temperatuur als deze zich in de D3cold-status bevindt"
-
-#. settings-schema.json->no_check_gpu_if_d3cold->tooltip
-msgid ""
-"If this option is checked, to avoid waking up GPU card to check its "
-"temperature, don't check it's temperature if it's in powersave mode"
-msgstr "Als deze optie is ingeschakeld, controleer de temperatuur van de GPU niet wanneer deze zich in de energiebesparingsmodus bevindt, om te voorkomen dat de GPU-kaart wordt gewekt om de temperatuur te controleren."

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 5.4.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-04-26 01:27+0200\n"
+"POT-Creation-Date: 2026-08-29 09:24-0400\n"
 "PO-Revision-Date: 2026-06-12 00:00+0000\n"
 "Last-Translator: Grom-TS\n"
 "Language-Team: Russian\n"
@@ -22,117 +22,120 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Монитор датчиков"
 
-#. applet.js:594
+#. applet.js:599
 msgid "Suspended"
 msgstr "Приостановлено"
 
-#. applet.js:936 applet.js:978
+#. applet.js:941 applet.js:983
 msgid "high:"
 msgstr "высокий:"
 
-#. applet.js:936 applet.js:939 applet.js:978 applet.js:980 applet.js:1021
+#. applet.js:941 applet.js:944 applet.js:983 applet.js:985 applet.js:1026
 msgid "n/a"
 msgstr "н/д"
 
-#. applet.js:939 applet.js:980
+#. applet.js:944 applet.js:985
 msgid "crit:"
 msgstr "критический:"
 
-#. applet.js:1021 applet.js:1065
+#. applet.js:1026 applet.js:1070
 msgid "min:"
 msgstr "мин.:"
 
-#. applet.js:1067
+#. applet.js:1072
 msgid "max:"
 msgstr "макс.:"
 
-#. applet.js:1096
+#. applet.js:1101
 msgid "No intrusion detected"
 msgstr "Вскрытие не обнаружено"
 
-#. applet.js:1096
+#. applet.js:1101
 msgid "INTRUSION DETECTED!"
 msgstr "ОБНАРУЖЕНО ВСКРЫТИЕ!"
 
-#. applet.js:1116
+#. applet.js:1121
 msgid "Must be configured!"
 msgstr "Необходимо настроить!"
 
-#. applet.js:1518
+#. applet.js:1523
 msgid "Settings"
 msgstr "Настройки"
 
-#. applet.js:1518
+#. applet.js:1523
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1525
+#. applet.js:1530
 msgid "⚙ General"
 msgstr "⚙ Общие"
 
-#. applet.js:1542
+#. applet.js:1547
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Датчики температуры"
 
-#. applet.js:1559
+#. applet.js:1564
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Датчики вентиляторов"
 
-#. applet.js:1576
+#. applet.js:1581
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Датчики напряжения"
 
-#. applet.js:1593
+#. applet.js:1598
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Датчики вскрытия"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1629
+#. applet.js:1634
 msgid "Run xsensors"
 msgstr "Запустить xsensors"
 
-#. applet.js:1638
+#. applet.js:1643
 msgid "Suspend Sensors"
 msgstr "Приостановить мониторинг"
 
-#. applet.js:1649
+#. applet.js:1654
 msgid "Reload this applet"
 msgstr "Перезагрузить этот апплет"
 
-#. applet.js:2005
+#. applet.js:2010
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Вы уверены, что хотите удалить «%s»?"
 
-#. lib/checkDependencies.js:371
+#. lib/checkDependencies.js:376
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Апплет %s полностью работоспособен."
 
-#. lib/checkDependencies.js:372
+#. lib/checkDependencies.js:377
 msgid "All dependencies are installed"
 msgstr "Все зависимости установлены"
 
-#. lib/checkDependencies.js:401
+#. lib/checkDependencies.js:407
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
-msgstr "Похоже, что у вас отсутствуют программы, необходимые для работы всех функций этого апплета."
+msgstr ""
+"Похоже, что у вас отсутствуют программы, необходимые для работы всех функций "
+"этого апплета."
 
-#. lib/checkDependencies.js:403
+#. lib/checkDependencies.js:409
 msgid "Please install these packages:"
 msgstr "Пожалуйста, установите следующие пакеты:"
 
-#. lib/checkDependencies.js:407 lib/checkDependencies.js:417
+#. lib/checkDependencies.js:413 lib/checkDependencies.js:423
+#. lib/checkDependencies.js:432
 msgid "Some dependencies are not installed!"
 msgstr "Некоторые зависимости не установлены!"
 
-#. lib/checkDependencies.js:419
+#. lib/checkDependencies.js:425 lib/checkDependencies.js:434
 msgid "Install these packages now"
 msgstr "Установить эти пакеты сейчас"
 
@@ -254,7 +257,8 @@ msgstr "Зависимости"
 
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
-msgstr "На данный момент температуру диска может считывать только пользователь root."
+msgstr ""
+"На данный момент температуру диска может считывать только пользователь root."
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -551,7 +555,8 @@ msgid ""
 "Whether or not to display the names of the main sensors (those displayed in "
 "the panel) in bold italics in the tooltip."
 msgstr ""
-"Выделять ли названия основных датчиков (отображаемых на панели) жирным курсивом в подсказке."
+"Выделять ли названия основных датчиков (отображаемых на панели) жирным "
+"курсивом в подсказке."
 
 #. settings-schema.json->tooltip_font_size->description
 msgid "Font size (px)"
@@ -575,8 +580,9 @@ msgid ""
 "box. Be careful with dependencies that are necessary for this applet to "
 "function properly."
 msgstr ""
-"Если вы не хотите устанавливать некоторые зависимости (например, шрифты), отметьте этот флажок. "
-"Будьте осторожны с зависимостями, необходимыми для корректной работы этого апплета."
+"Если вы не хотите устанавливать некоторые зависимости (например, шрифты), "
+"отметьте этот флажок. Будьте осторожны с зависимостями, необходимыми для "
+"корректной работы этого апплета."
 
 #. settings-schema.json->make_disktemp_readable_by_user->description
 msgid "Make disk temperature user-readable"
@@ -598,8 +604,7 @@ msgstr "Показывать значения выбранных датчико�
 msgid ""
 "Whether or not to display the values of the sensors selected in the list "
 "below."
-msgstr ""
-"Показывать ли значения датчиков, выбранных в списке ниже."
+msgstr "Показывать ли значения датчиков, выбранных в списке ниже."
 
 #. settings-schema.json->show_temp_name->description
 #. settings-schema.json->show_fan_name->description
@@ -690,6 +695,19 @@ msgid ""
 msgstr ""
 "Если этот параметр включен, температуры, превышающие высокий или критический "
 "порог, записываются в системный журнал."
+
+#. settings-schema.json->no_check_gpu_if_d3cold->description
+msgid "Stop checking GPU temperature if in D3cold state"
+msgstr "Не проверять температуру GPU, если он находится в состоянии D3cold"
+
+#. settings-schema.json->no_check_gpu_if_d3cold->tooltip
+msgid ""
+"If this option is checked, to avoid waking up GPU card to check its "
+"temperature, don't check it's temperature if it's in powersave mode"
+msgstr ""
+"Если этот параметр включён, чтобы не выводить видеокарту GPU из спящего "
+"состояния для проверки температуры, не проверяйте её температуру, если она "
+"находится в режиме энергосбережения."
 
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
@@ -789,7 +807,8 @@ msgid ""
 "  You can use the 4 operations (+-*/) and parentheses.\n"
 "  Example: $*1.1+0.5"
 msgstr ""
-"Дважды щелкните по строке, чтобы изменить «Отображаемое имя», «Высокое», «Критическое» или «Формулу».\n"
+"Дважды щелкните по строке, чтобы изменить «Отображаемое имя», «Высокое», "
+"«Критическое» или «Формулу».\n"
 "Чтобы сбросить «Отображаемое имя», скопируйте/вставьте «Имя датчика».\n"
 "«Высокое» и «Критическое» (необязательно) должны быть допустимыми числами.\n"
 "«Формула» (необязательно):\n"
@@ -826,7 +845,8 @@ msgid ""
 "High and Critical values: Cf. technical manual of your disk."
 msgstr ""
 "Имя диска: имя диска, возвращаемое командой 'lsblk'. См. справку.\n"
-"Значения «Высокое» и «Критическое»: см. техническую документацию вашего диска."
+"Значения «Высокое» и «Критическое»: см. техническую документацию вашего "
+"диска."
 
 #. settings-schema.json->chars_fan->tooltip
 msgid "The first emoji in this list is used for fan"
@@ -870,7 +890,8 @@ msgid ""
 "  You can use the 4 operations (+-*/) and parentheses.\n"
 "  Example: $*1.1+0.5"
 msgstr ""
-"Дважды щелкните по строке, чтобы изменить «Отображаемое имя», «Мин.» или «Формулу».\n"
+"Дважды щелкните по строке, чтобы изменить «Отображаемое имя», «Мин.» или "
+"«Формулу».\n"
 "Чтобы сбросить «Отображаемое имя», скопируйте/вставьте «Имя датчика».\n"
 "«Мин.» (необязательно) должен быть допустимым числом.\n"
 "«Формула» (необязательно):\n"
@@ -936,7 +957,8 @@ msgid ""
 "  You can use the 4 operations (+-*/) and parentheses.\n"
 "  Example: $*1.1+0.5"
 msgstr ""
-"Дважды щелкните по строке, чтобы изменить «Отображаемое имя», «Мин.», «Макс.» или «Формулу».\n"
+"Дважды щелкните по строке, чтобы изменить «Отображаемое имя», «Мин.», "
+"«Макс.» или «Формулу».\n"
 "Чтобы сбросить «Отображаемое имя», скопируйте/вставьте «Имя датчика».\n"
 "«Мин.» и «Макс.» (необязательно) должны быть допустимыми числами.\n"
 "«Формула» (необязательно):\n"
@@ -950,8 +972,8 @@ msgid ""
 " Whether or not to display into this applet label the 'Shown name' of the "
 "sensors selected in the list below. Without effect in vertical panels."
 msgstr ""
-"Отображать ли в метке этого апплета «Отображаемое имя» выбранных ниже датчиков. "
-"Без эффекта в вертикальных панелях."
+"Отображать ли в метке этого апплета «Отображаемое имя» выбранных ниже "
+"датчиков. Без эффекта в вертикальных панелях."
 
 #. settings-schema.json->chars_intrusion->tooltip
 msgid "The first emoji in this list is used for intrusion"
@@ -1026,7 +1048,8 @@ msgid ""
 "Add a line by custom sensor to set the type, the name and the path of the "
 "file to monitor (/sys/class/...)."
 msgstr ""
-"Добавьте строку для пользовательского датчика, чтобы указать тип, имя и путь к файлу для мониторинга (/sys/class/...)."
+"Добавьте строку для пользовательского датчика, чтобы указать тип, имя и путь "
+"к файлу для мониторинга (/sys/class/...)."
 
 #. settings-schema.json->report->description
 #. scripts/show_sensor_values.sh:5
@@ -1048,13 +1071,3 @@ msgstr "Открыть веб-страницу HTML Colors"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Удалить с панели апплет temperature@fevimu"
-
-#. settings-schema.json->no_check_gpu_if_d3cold->description
-msgid "Stop checking GPU temperature if in D3cold state"
-msgstr "Не проверять температуру GPU, если он находится в состоянии D3cold"
-
-#. settings-schema.json->no_check_gpu_if_d3cold->tooltip
-msgid ""
-"If this option is checked, to avoid waking up GPU card to check its "
-"temperature, don't check it's temperature if it's in powersave mode"
-msgstr "Если этот параметр включён, чтобы не выводить видеокарту GPU из спящего состояния для проверки температуры, не проверяйте её температуру, если она находится в режиме энергосбережения."
