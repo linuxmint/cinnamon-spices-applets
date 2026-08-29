@@ -5,6 +5,7 @@
 * Small code refactor (Optimize startup performance and disk reads)
 * Explicitly set default Music directory for recording folder
 * Redesign station selection with native checkbox list
+* Add auto-reconnect on network change
 
 ## 1.3
 

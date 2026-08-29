@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FM-Radio@hilyxx 1.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-08-20 16:22+0200\n"
+"POT-Creation-Date: 2026-08-29 18:42+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,8 +20,8 @@ msgstr ""
 
 #. metadata.json->name
 #. applet.js:68 applet.js:140 applet.js:172 applet.js:211 applet.js:214
-#. applet.js:220 applet.js:242 applet.js:244 applet.js:249 applet.js:455
-#. applet.js:517 applet.js:543 applet.js:569 applet.js:590
+#. applet.js:220 applet.js:242 applet.js:244 applet.js:249 applet.js:474
+#. applet.js:536 applet.js:562 applet.js:588 applet.js:609
 msgid "FM Radio"
 msgstr "FM Radio"
 
@@ -73,23 +73,27 @@ msgstr "Erreur lors de la lecture du fichier de sauvegarde."
 msgid "All stations"
 msgstr "Toutes les stations"
 
-#. applet.js:395 applet.js:446
+#. applet.js:386
+msgid "Reconnecting..."
+msgstr "Reconnexion..."
+
+#. applet.js:414 applet.js:465
 msgid "Waiting..."
 msgstr "En attente..."
 
-#. applet.js:455
+#. applet.js:474
 msgid "Please start a radio station first to record it."
 msgstr "Veuillez d'abord lancer une radio pour l'enregistrer."
 
-#. applet.js:517
+#. applet.js:536
 msgid "Recording started: "
 msgstr "Enregistrement démarré : "
 
-#. applet.js:543
+#. applet.js:562
 msgid "Error starting recording."
 msgstr "Erreur lors du démarrage de l'enregistrement."
 
-#. applet.js:569
+#. applet.js:588
 msgid "Recording finished and saved to the /FM-Radio folder."
 msgstr "Enregistrement terminé et sauvegardé dans le dossier /FM-Radio."
 

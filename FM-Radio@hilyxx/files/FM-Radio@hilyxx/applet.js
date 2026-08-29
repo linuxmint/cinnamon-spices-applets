@@ -377,6 +377,25 @@ class FMRadioApplet extends Applet.IconApplet {
 
         this._loadChannels();
 
+        this.player.setOnError(() => {
+            GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+                if (this.artistLabel) {
+                    this.artistLabel.set_text("");
+                }
+                if (this.statusLabel) {
+                    this.statusLabel.set_text(_("Reconnecting..."));
+                }
+                
+                this.artistLabel.clutter_text.queue_relayout();
+                this.statusLabel.clutter_text.queue_relayout();
+                this.box.queue_relayout();
+                
+                this._updateTooltip();
+                
+                return GLib.SOURCE_REMOVE; 
+            });
+        });
+
         this.player.setOnTagChanged(() => {
             GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
                 let title = this.player.getTitle();
@@ -759,7 +778,7 @@ class FMRadioApplet extends Applet.IconApplet {
 
     on_applet_removed_from_panel() {
         if (this.player) {
-            this.player.stop();
+            this.player.destroy();
         }
 
         if (this.isRecording) {
