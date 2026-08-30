@@ -1,0 +1,17 @@
+.button {
+    padding: 0pt;
+    font-size: 16pt;
+    width: 18pt;
+    position: fixed;
+    background-color: transparent;
+}
+.line {
+    height: 1pt;
+    width: 0pt;
+}
+.searchBar {
+    width: 140pt;
+    height: 20pt;
+    font-size: 12pt;
+    font-weight: 50pt;
+}
