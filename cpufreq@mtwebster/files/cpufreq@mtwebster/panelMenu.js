@@ -67,7 +67,7 @@ ButtonBox.prototype = {
         }
     },
 
-    _allocate: function(actor, box, flags) {
+    _allocate: function(actor, box) {
         let children = actor.get_children();
         if (children.length == 0)
             return;
@@ -96,7 +96,7 @@ ButtonBox.prototype = {
             childBox.y2 = availHeight;
         }
 
-        child.allocate(childBox, flags);
+        child.allocate(childBox);
     },
 }
 
