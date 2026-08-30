@@ -113,6 +113,12 @@ NightscoutApplet.prototype = {
       this.on_settings_changed,
       null);
 
+    this.settings.bindProperty(Settings.BindingDirection.IN,
+      "token",
+      "token",
+      this.on_settings_changed,
+      null);
+
     try {
       // Set initial value
       this.set_applet_icon_path(metadata.path + '/icons/nightscout.png')
@@ -198,7 +204,10 @@ NightscoutApplet.prototype = {
   },
 
   requestCurrentBg() {
-    return makeHttpRequest('GET', `${this.host}/api/v1/entries/current`, (resolve, response) => {
+    const url = this.token
+      ? `${this.host}/api/v1/entries/current?token=${this.token}`
+      : `${this.host}/api/v1/entries/current`;
+    return makeHttpRequest('GET', url, (resolve, response) => {
       let current = {};
       log('Requested current state' + response);
       if(response.length > 0) {
@@ -209,7 +218,10 @@ NightscoutApplet.prototype = {
   },
 
   requestDeviceStatus() {
-    return makeHttpRequest('GET', `${this.host}/api/v1/devicestatus?count=1`, (resolve, response) => {
+     const url = this.token
+       ? `${this.host}/api/v1/devicestatus?count=1?token=${this.token}`
+       : `${this.host}/api/v1/devicestatus?count=1`;
+    return makeHttpRequest('GET', url, (resolve, response) => {
       let status = {};
       log('Requested device status' + response);
       if(response.length > 0) {
