@@ -1,0 +1,88 @@
+{
+    "num-cols": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "units": "escritorios",
+        "description": "Columnas:"
+    },
+    "num-rows": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "units": "escritorios",
+        "description": "Filas:"
+    },
+    "scroll-behavior": {
+        "type": "combobox",
+        "description": "Rueda del ratón:",
+        "default": "col",
+        "options": {
+            "Cambiar columna": "col",
+            "Cambiar fila": "row"
+        }
+    },
+    "icon-size": {
+        "type": "scale",
+        "default": 26,
+        "min": 14,
+        "max": 52,
+        "step": 2,
+        "description": "Tamaño de los iconos (px)"
+    },
+    "spacing": {
+        "type": "scale",
+        "default": 3,
+        "min": 0,
+        "max": 16,
+        "step": 1,
+        "description": "Espacio entre iconos (px)"
+    },
+    "pacman-color": {
+        "type": "colorchooser",
+        "default": "rgba(255,217,0,255)",
+        "description": "Color de Pac-Man"
+    },
+    "animate-pacman": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Animar la boca de Pac-Man"
+    },
+    "show-window-count": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Mostrar puntos de ventanas abiertas"
+    },
+    "show-ghosts": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Mostrar fantasmas en escritorios inactivos"
+    },
+    "ghost-color": {
+        "type": "colorchooser",
+        "default": "rgba(89,89,230,191)",
+        "dependency": "show-ghosts",
+        "description": "Color de los fantasmas (si colores clásicos desactivado)"
+    },
+    "ghost-eye-color": {
+        "type": "colorchooser",
+        "default": "rgba(25,25,178,255)",
+        "dependency": "show-ghosts",
+        "description": "Color de las pupilas del fantasma"
+    },
+    "use-classic-colors": {
+        "type": "checkbox",
+        "default": true,
+        "dependency": "show-ghosts",
+        "description": "Colores clásicos por fantasma (Blinky, Pinky, Inky, Clyde)"
+    },
+    "pellet-color": {
+        "type": "colorchooser",
+        "default": "rgba(255,255,255,255)",
+        "description": "Color de los pac-dots"
+    }
+}
