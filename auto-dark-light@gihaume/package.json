@@ -1,0 +1,33 @@
+{
+    "type": "module",
+    "scripts": {
+        "bundle": "rollup -c",
+        "test": "vitest"
+    },
+    "devEngines": {
+        "packageManager": {
+            "name": "pnpm",
+            "version": "11.18.0",
+            "onFail": "download"
+        },
+        "runtime": {
+            "name": "node",
+            "version": "24.18.1",
+            "onFail": "download"
+        }
+    },
+    "dependencies": {
+        "mobx": "7.0.0"
+    },
+    "devDependencies": {
+        "@ci-types/cjs": "6.0.2-5",
+        "@girs/gio-2.0": "4.1.0",
+        "@girs/gjs": "4.1.0",
+        "@girs/glib-2.0": "4.1.0",
+        "@types/luxon": "3.7.3",
+        "luxon": "3.7.2",
+        "rollup": "4.62.4",
+        "rollup-plugin-dts": "6.4.1",
+        "vitest": "4.1.10"
+    }
+}
