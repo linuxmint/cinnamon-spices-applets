@@ -33,7 +33,7 @@ msgstr "Mettre en veille"
 
 #: applet.js:149
 msgid "Hibernate"
-msgstr "Mettre en hybernation"
+msgstr "Mettre en hibernation"
 
 #: applet.js:152
 msgid "Hybrid sleep"
@@ -111,23 +111,23 @@ msgstr "La commande pour mettre en veille "
 
 #. settings-schema.json->hibernate_label->description
 msgid "Hibernate: hibernate the system"
-msgstr "Mettre en hybernation : met le système en hybernation"
+msgstr "Mettre en hibernation : met le système en hibernation"
 
 #. settings-schema.json->hibernate->description
 msgid "Add hibernate to the menu"
-msgstr "Ajouter l'hybernation au menu"
+msgstr "Ajouter l'hibernation au menu"
 
 #. settings-schema.json->hibernate_icon->description
 msgid "The hibernate icon "
-msgstr "L'icône d'hybernation "
+msgstr "L'icône d'hibernation "
 
 #. settings-schema.json->hibernate_cmd->description
 msgid "The hibernate command "
-msgstr "La commande pour mettre en hybernation "
+msgstr "La commande pour mettre en hibernation "
 
 #. settings-schema.json->hybrid_sleep_label->description
 msgid "Hybrid sleep: hibernate and suspend the system"
-msgstr "Mettre en veille hybride : met le système en veille et en hybernation"
+msgstr "Mettre en veille hybride : met le système en veille et en hibernation"
 
 #. settings-schema.json->hybrid_sleep->description
 msgid "Add hybrid sleep to the menu"
