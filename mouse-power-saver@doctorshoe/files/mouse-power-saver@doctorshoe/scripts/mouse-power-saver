@@ -1,0 +1,178 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CONF="/etc/mouse-power-saver.conf"
+RULE_FILE="/etc/udev/rules.d/90-usb-mouse-autosuspend.rules"
+
+if [[ -r "$CONF" ]]; then
+    # shellcheck source=/etc/mouse-power-saver.conf
+    source "$CONF"
+fi
+
+VENDOR="${VENDOR:-}"
+PRODUCT="${PRODUCT:-}"
+DEVICE_NAME="${DEVICE_NAME:-USB mouse}"
+
+VENDOR="${VENDOR,,}"
+PRODUCT="${PRODUCT,,}"
+
+valid_config() {
+    [[ "$VENDOR" =~ ^[0-9a-f]{4}$ ]] && [[ "$PRODUCT" =~ ^[0-9a-f]{4}$ ]]
+}
+
+valid_delay() {
+    case "$1" in
+        10000|20000|30000|60000) return 0 ;;
+        *) return 1 ;;
+    esac
+}
+
+need_config() {
+    if ! valid_config; then
+        echo "Mouse Power Saver ist noch nicht eingerichtet."
+        echo "Bitte zuerst scripts/install.sh ausführen."
+        exit 1
+    fi
+}
+
+need_root() {
+    if [[ "${EUID}" -ne 0 ]]; then
+        echo "Dieses Kommando braucht Root-Rechte." >&2
+        exit 1
+    fi
+}
+
+find_mouse_devices() {
+    need_config
+
+    for d in /sys/bus/usb/devices/*; do
+        [[ -f "$d/idVendor" && -f "$d/idProduct" ]] || continue
+        [[ "$(cat "$d/idVendor")" == "$VENDOR" ]] || continue
+        [[ "$(cat "$d/idProduct")" == "$PRODUCT" ]] || continue
+        [[ -d "$d/power" ]] || continue
+        echo "$d"
+    done
+}
+
+write_rule_on() {
+    local delay_ms="$1"
+
+    cat > "$RULE_FILE" <<EOR
+# Mouse Power Saver by DoctorShoe
+# Device: ${DEVICE_NAME} ${VENDOR}:${PRODUCT}
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="$VENDOR", ATTR{idProduct}=="$PRODUCT", TEST=="power/control", ATTR{power/wakeup}="enabled", ATTR{power/autosuspend_delay_ms}="$delay_ms", ATTR{power/control}="auto"
+ACTION=="change", SUBSYSTEM=="usb", ATTR{idVendor}=="$VENDOR", ATTR{idProduct}=="$PRODUCT", TEST=="power/control", ATTR{power/wakeup}="enabled", ATTR{power/autosuspend_delay_ms}="$delay_ms", ATTR{power/control}="auto"
+EOR
+
+    udevadm control --reload-rules || true
+}
+
+write_rule_off() {
+    cat > "$RULE_FILE" <<EOR
+# Mouse Power Saver by DoctorShoe
+# Device: ${DEVICE_NAME} ${VENDOR}:${PRODUCT}
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="$VENDOR", ATTR{idProduct}=="$PRODUCT", TEST=="power/control", ATTR{power/control}="on"
+ACTION=="change", SUBSYSTEM=="usb", ATTR{idVendor}=="$VENDOR", ATTR{idProduct}=="$PRODUCT", TEST=="power/control", ATTR{power/control}="on"
+EOR
+
+    udevadm control --reload-rules || true
+}
+
+apply_on() {
+    local delay_ms="$1"
+    local found=0
+
+    while read -r d; do
+        found=1
+        [[ -e "$d/power/wakeup" ]] && echo enabled > "$d/power/wakeup" 2>/dev/null || true
+        echo "$delay_ms" > "$d/power/autosuspend_delay_ms"
+        echo auto > "$d/power/control"
+    done < <(find_mouse_devices)
+
+    if [[ "$found" -eq 0 ]]; then
+        echo "Keine passende USB-Maus gefunden: ${VENDOR}:${PRODUCT}"
+        exit 1
+    fi
+}
+
+apply_off() {
+    local found=0
+
+    while read -r d; do
+        found=1
+        echo on > "$d/power/control"
+    done < <(find_mouse_devices)
+
+    if [[ "$found" -eq 0 ]]; then
+        echo "Keine passende USB-Maus gefunden: ${VENDOR}:${PRODUCT}"
+        exit 1
+    fi
+}
+
+status() {
+    if ! valid_config; then
+        echo "Nicht eingerichtet"
+        return 0
+    fi
+
+    local found=0
+
+    while read -r d; do
+        found=1
+
+        local name control delay wakeup path
+        name="$(cat "$d/product" 2>/dev/null || echo "$DEVICE_NAME")"
+        control="$(cat "$d/power/control" 2>/dev/null || echo "?")"
+        delay="$(cat "$d/power/autosuspend_delay_ms" 2>/dev/null || echo "?")"
+        wakeup="$(cat "$d/power/wakeup" 2>/dev/null || echo "?")"
+        path="$(basename "$d")"
+
+        if [[ "$control" == "auto" ]]; then
+            echo "Ein: ${delay} ms | $name | $path | wakeup=$wakeup"
+        else
+            echo "Aus | $name | $path"
+        fi
+    done < <(find_mouse_devices)
+
+    if [[ "$found" -eq 0 ]]; then
+        echo "Keine passende USB-Maus gefunden: ${VENDOR}:${PRODUCT}"
+    fi
+}
+
+case "${1:-}" in
+    status)
+        status
+        ;;
+    on)
+        need_config
+        need_root
+        delay_ms="${2:-60000}"
+
+        if ! valid_delay "$delay_ms"; then
+            echo "Ungültiger Wert: $delay_ms"
+            echo "Erlaubt: 10000, 20000, 30000, 60000"
+            exit 1
+        fi
+
+        write_rule_on "$delay_ms"
+        apply_on "$delay_ms"
+        echo "Maus-Standby aktiviert: ${delay_ms} ms"
+        ;;
+    off)
+        need_config
+        need_root
+        write_rule_off
+        apply_off
+        echo "Maus-Standby deaktiviert."
+        ;;
+    *)
+        echo "Nutzung:"
+        echo "  mouse-power-saver status"
+        echo "  sudo mouse-power-saver on 10000"
+        echo "  sudo mouse-power-saver on 20000"
+        echo "  sudo mouse-power-saver on 30000"
+        echo "  sudo mouse-power-saver on 60000"
+        echo "  sudo mouse-power-saver off"
+        exit 1
+        ;;
+esac
