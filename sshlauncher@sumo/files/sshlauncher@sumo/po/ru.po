@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sshlauncher@sumo 0.1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-11 21:52+0100\n"
+"POT-Creation-Date: 2025-12-06 20:34+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: yankimax <yankidevel@gmail.com>\n"
 "Language-Team: \n"
@@ -18,35 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#. applet.js:51 applet.js:67 applet.js:110 applet.js:246 applet.js:260
+#. applet.js:51 applet.js:67 applet.js:114 applet.js:256 applet.js:271
 msgid "SSH Launcher"
 msgstr "SSH Лаунчер"
 
-#. applet.js:110
+#. applet.js:114
 msgid "No suitable icon found, falling back to custom icon"
 msgstr "Подходящая иконка не найдена, откат к пользовательской иконке"
 
-#. applet.js:116
+#. applet.js:126
 msgid "Force Update from SSH config"
 msgstr "Принудительное обновление из файла SSH конфигурации"
 
-#. applet.js:183
+#. applet.js:193
 msgid "Background (-fN)"
 msgstr "В фоне (-fN)"
 
-#. applet.js:186
+#. applet.js:196
 msgid "Forward X11 (-X)"
 msgstr "Перенаправление X11"
 
-#. applet.js:227
+#. applet.js:237
 msgid "ERROR. "
 msgstr "Ошибка. "
 
-#. applet.js:230
+#. applet.js:240
 msgid "Edit SSH config"
 msgstr "Редактировать SSH конфиг"
 
-#. applet.js:246
+#. applet.js:256
 msgid ""
 "Error: I can't open the terminal.\n"
 "You need to set a default terminal first in Preferred Applications!\n"
@@ -58,11 +58,11 @@ msgstr ""
 "\n"
 "(Дополнительная информация ПКМ->О программе->Дополнительно)"
 
-#. applet.js:260
+#. applet.js:271
 msgid "Connection opened to "
 msgstr "Открыто соединение "
 
-#. applet.js:260
+#. applet.js:271
 msgid " using "
 msgstr " используя "
 
@@ -105,3 +105,11 @@ msgstr "Показывать уведомление при запуске SSH-с
 #. settings-schema.json->showConnectionNotification->tooltip
 msgid "Display a notification message when SSH terminal is launched"
 msgstr "Отображать уведомление при запуске SSH-терминала"
+
+#. settings-schema.json->openMenuKey->description
+msgid "Keyboard shortcut to open the SSH menu"
+msgstr "Горячая клавиша для открытия меню SSH"
+
+#. settings-schema.json->openMenuKey->tooltip
+msgid "Set a global keyboard shortcut to open the SSH launcher menu"
+msgstr "Установить глобальную горячую клавишу для открытия меню SSH"
