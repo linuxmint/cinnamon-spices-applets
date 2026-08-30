@@ -162,6 +162,18 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.bind("diskwrite_use_custom_label", "diskwrite_use_custom_label", this.settingsChanged);
         this.settings.bind("diskwrite_custom_label", "diskwrite_custom_label", this.settingsChanged);
         this.settings.bind("diskwrite_show_detail_label", "diskwrite_show_detail_label", this.settingsChanged);
+        // GPU (utilization) settings
+        this.settings.bind("gpu_enable_graph", "gpu_enable_graph", this.settingsChanged);
+        this.settings.bind("gpu_size", "gpu_size", this.settingsChanged);
+        this.settings.bind("gpu_use_custom_label", "gpu_use_custom_label", this.settingsChanged);
+        this.settings.bind("gpu_custom_label", "gpu_custom_label", this.settingsChanged);
+        this.settings.bind("gpu_show_detail_label", "gpu_show_detail_label", this.settingsChanged);
+        // GPU (memory) settings
+        this.settings.bind("gpumem_enable_graph", "gpumem_enable_graph", this.settingsChanged);
+        this.settings.bind("gpumem_size", "gpumem_size", this.settingsChanged);
+        this.settings.bind("gpumem_use_custom_label", "gpumem_use_custom_label", this.settingsChanged);
+        this.settings.bind("gpumem_custom_label", "gpumem_custom_label", this.settingsChanged);
+        this.settings.bind("gpumem_show_detail_label", "gpumem_show_detail_label", this.settingsChanged);
         // BAT (battery) settings
         this.settings.bind("bat_enable_graph", "bat_enable_graph", this.settingsChanged);
         this.settings.bind("bat_size", "bat_size", this.settingsChanged);
@@ -255,6 +267,30 @@ GraphicalHWMonitorApplet.prototype = {
 
             let diskWriteProvider =  new Providers.DiskDataProvider(this.frequency, this.diskwrite_size, false, this.diskwrite_device_name);
             this.graphs.push(new Graph.Graph(diskWriteProvider, diskWriteGraphArea, this.theme_object, this.diskwrite_show_detail_label));
+        }
+
+        // Add GPU (utilization) Graph
+        if (this.gpu_enable_graph) {
+            let gpuGraphArea = null;
+            if (this.isHorizontal)
+                gpuGraphArea = this.appletArea.addGraph(this.gpu_size, this.panel_height);
+            else
+                gpuGraphArea = this.appletArea.addGraph(this.panel_height, this.gpu_size);
+
+            let gpuProvider = new Providers.GpuUtilDataProvider();
+            this.graphs.push(new Graph.Graph(gpuProvider, gpuGraphArea, this.theme_object, this.gpu_show_detail_label));
+        }
+
+        // Add GPU (memory) Graph
+        if (this.gpumem_enable_graph) {
+            let gpuMemGraphArea = null;
+            if (this.isHorizontal)
+                gpuMemGraphArea = this.appletArea.addGraph(this.gpumem_size, this.panel_height);
+            else
+                gpuMemGraphArea = this.appletArea.addGraph(this.panel_height, this.gpumem_size);
+
+            let gpuMemProvider = new Providers.GpuMemDataProvider();
+            this.graphs.push(new Graph.Graph(gpuMemProvider, gpuMemGraphArea, this.theme_object, this.gpumem_show_detail_label));
         }
 
         // Add BAT Graph
@@ -453,6 +489,10 @@ GraphicalHWMonitorApplet.prototype = {
         this.theme_object.diskwrite_custom_label = this.diskwrite_custom_label;
         this.theme_object.bat_use_custom_label = this.bat_use_custom_label;
         this.theme_object.bat_custom_label = this.bat_custom_label;
+        this.theme_object.gpu_use_custom_label = this.gpu_use_custom_label;
+        this.theme_object.gpu_custom_label = this.gpu_custom_label;
+        this.theme_object.gpumem_use_custom_label = this.gpumem_use_custom_label;
+        this.theme_object.gpumem_custom_label = this.gpumem_custom_label;
     },
 
     restartGHW: function() {
