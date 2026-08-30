@@ -1,0 +1,10 @@
+{
+    "uuid": "menuelevenreloaded@dshep79",
+    "name": "Menu Eleven Reloaded",
+    "description": "A Windows 11-inspired Cinnamon start menu, forked from MenuEleven and Cinnamenu.",
+    "max-instances": 1,
+    "version": "6.0.4-reloaded",
+    "multiversion": true,
+    "website": "https://github.com/ForsetGump1952/Cinnamenu11",
+    "author": "dshep79"
+}
