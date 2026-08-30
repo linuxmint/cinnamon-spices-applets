@@ -1,0 +1,9 @@
+{
+  "uuid": "opencode-go-usage@clrblind",
+  "name": "OpenCode GO Usage",
+  "description": "Track OpenCode GO usage limits. v1.1 (c) clrblind 2026",
+  "url": "https://github.com/clrblind/opencode-go-usage",
+  "version": 2,
+  "cinnamon-version": ["5.6", "6"],
+  "author": "clrblind"
+}
