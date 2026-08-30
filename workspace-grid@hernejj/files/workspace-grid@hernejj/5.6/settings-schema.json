@@ -40,5 +40,10 @@
             "Scroll By Column": "col",
             "Scroll By Row": "row"
         }
+    },
+    "uiColor": {
+        "type": "entry",
+        "default": "#0C75DE",
+        "description": "Choose the UI color by entering a hex color value:"
     }
 }
