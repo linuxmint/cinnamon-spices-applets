@@ -24,7 +24,7 @@
         "appearance-section": {
         	"type" : "section",
             "title": "Appearance",
-            "keys": ["apps-visible", "max-char-for-app-label"]
+            "keys": ["apps-visible", "max-char-for-app-label", "enable-app-icons", "default-icon-name"]
         },
 		
 		"app-sort-section": {
@@ -62,9 +62,9 @@
 		"tooltip": "Set how many apps should fit within the menu's height before a slider shows up.",
         "callback": "AppsVisibleCountChanged"
 	},
-
+	
     "max-char-for-app-label": {
-        "type": "spinbutton",
+		"type": "spinbutton",
         "default": 30,
         "min": 20,
 		"max": 60,
@@ -73,6 +73,20 @@
         "description": "Max characters for app label",
         "tooltip": "How many characters an app selection allows before cutting the word and adding \"...\" at the end."
     },
+	
+	"enable-app-icons": {
+		"type": "switch",
+		"default": false,
+		"description": "Enable Icons",
+		"tooltip": "Enable's displaying icons of apps on far left inside the list."	
+	},
+	
+	"default-icon-name": {
+		"type": "entry",
+        "default": "application-x-executable",
+        "description": "Fallback icon (Work in progress)",
+        "tooltip": "Choose what icon appears whenever none is found."
+	},
 	
 	"sort-apps-by": {
 		"type": "combobox",

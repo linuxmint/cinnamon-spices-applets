@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: DailyAppUsage@ghostypixel 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-08-17 19:11+0200\n"
+"POT-Creation-Date: 2026-08-30 21:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,48 +17,48 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:114
+#. applet.js:215
 msgid "App Usage"
 msgstr ""
 
-#. applet.js:115
+#. applet.js:216
 msgid "Displays apps and how long they were running."
 msgstr ""
 
-#. applet.js:254
+#. applet.js:359
 msgid "Unknown"
 msgstr ""
 
-#. applet.js:279
+#. applet.js:385
 #, javascript-format
 msgid "App opened: %s"
 msgstr ""
 
-#. applet.js:301
+#. applet.js:407
 #, javascript-format
 msgid "App closed: %s"
 msgstr ""
 
-#. applet.js:316 applet.js:334 applet.js:359
+#. applet.js:422
 #, javascript-format
 msgid "Failed timer for %s"
 msgstr ""
 
-#. applet.js:396
+#. applet.js:496
 msgid "No apps were opened."
 msgstr ""
 
-#. applet.js:519
+#. applet.js:611
 #, javascript-format
 msgid "Failed to read save file. %s"
 msgstr ""
 
-#. applet.js:645
+#. applet.js:734
 #, javascript-format
 msgid "coudnt save json %s"
 msgstr ""
 
-#. applet.js:713
+#. applet.js:802
 #, javascript-format
 msgid "Failed to Create/Overwrite file: %s"
 msgstr ""
@@ -115,6 +115,22 @@ msgstr ""
 msgid ""
 "How many characters an app selection allows before cutting the word and "
 "adding \"...\" at the end."
+msgstr ""
+
+#. settings-schema.json->enable-app-icons->description
+msgid "Enable Icons"
+msgstr ""
+
+#. settings-schema.json->enable-app-icons->tooltip
+msgid "Enable's displaying icons of apps on far left inside the list."
+msgstr ""
+
+#. settings-schema.json->default-icon-name->description
+msgid "Fallback icon (Work in progress)"
+msgstr ""
+
+#. settings-schema.json->default-icon-name->tooltip
+msgid "Choose what icon appears whenever none is found."
 msgstr ""
 
 #. settings-schema.json->sort-apps-by->description

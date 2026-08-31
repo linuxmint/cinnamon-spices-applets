@@ -66,5 +66,27 @@ function connectOnce(obj, signal, callback) {
  */
 function MinutesToMs(intMinutes) { return 1000 * 60 * intMinutes }
 
+function dumpActor(actor, depth = 0) {
+    const indent = '  '.repeat(depth);
+
+    console.log(`${indent}${actor.constructor.name}`);
+    console.log(`${indent}name: ${actor.name}`);
+    console.log(`${indent}style_class: ${actor.style_class}`);
+    console.log(`${indent}width: ${actor.width}`);
+    console.log(`${indent}height: ${actor.height}`);
+
+    if (actor.get_children) {
+        for (const child of actor.get_children()) {
+            dumpActor(child, depth + 1);
+        }
+    }
+}
+
 var IsPath = str => str.startsWith("/");
 var SetToStr = set => [...set].join(" | ")
+
+// THIS IS COOL FOR LOOKING WHAT A CLASS CAN DO :) | helped me with challenges regarding icons
+// global.log(Object.getOwnPropertyNames(
+//     Object.getPrototypeOf(icon)
+// ));
+// global.log(icon)

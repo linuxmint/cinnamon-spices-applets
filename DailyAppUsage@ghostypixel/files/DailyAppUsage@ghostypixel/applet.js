@@ -9,12 +9,17 @@ const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
 const Clutter = imports.gi.Clutter;
 const Gtk = imports.gi.Gtk;
-const Meta = imports.gi.Meta;
+// const Meta = imports.gi.Meta;
+const GObject = imports.gi.GObject
+const GdkPixbuf = imports.gi.GdkPixbuf;
+const Cogl = imports.gi.Cogl;
 const Gettext = imports.gettext;
 const UUID = "DailyAppUsage@ghostypixel"
 
 const AppletDir = imports.ui.appletManager.applets[UUID];
-const Helper = AppletDir.helper
+const Misc = AppletDir.misc
+
+const FALLBACK_ICON_NAME = "application-x-executable" // Will be customizable later, incase you got a cooler looking icon to use.
 
 Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
@@ -25,10 +30,11 @@ Gio._promisify(Gio.File.prototype, 'replace_contents_async', 'replace_contents_f
 function _(text) { return Gettext.dgettext(UUID, text); }
 
 class AppData {
-    constructor(name, icon = null, startingTime = 0) {
+    constructor(name, icon = null, startingTime = 0, attr) {
         this.name = name
         this.icon = icon
         this.time = startingTime
+        this.attr = attr
     }
     
     static IsSteamApp(name) { return name.startsWith("steam_app_") }
@@ -43,18 +49,28 @@ class AppData {
     }
     
     static FromApp(app) {
-        return new AppData(AppData.EvalAppForName(app), app.create_icon_texture(24), 0)
+        let iconData = AppData.ExtractIconImg(app.create_icon_texture(24))
+        let attributes = AppData.GenerateAttributes(app)
+        
+        if(iconData[1] != null) attributes["icon-path"] = iconData[1]
+        
+        return new AppData(AppData.EvalAppForName(app), iconData[0], 0, attributes)
     }
     
-    static FromSavedEntry([name, data]) {
-        return new AppData(name, null, data[0])
+    static FromSavedEntry([name, data], icon) {
+        return new AppData(name, icon, data[0], data[1])
     }
     
-    static FromSavedEntries(entries) {
+    static FromSavedEntries(entries, activeApps) {
         let dataDict = {}
         
         Object.entries(entries).forEach(([key, val]) => {
-            dataDict[key] = AppData.FromSavedEntry([key, val])
+            let icon;
+            
+            if(activeApps[key] != null) icon = activeApps[key].icon;
+            else icon = AppData.TryResolveIconFromAttr(val[1])
+            
+            dataDict[key] = AppData.FromSavedEntry([key, val], icon)
         })
         
         return dataDict
@@ -66,10 +82,95 @@ class AppData {
         
         windows.forEach(window => {
             let app = tracker.get_window_app(window);
-            dataDict[app.get_name()] = AppData.FromApp(app)
+            dataDict[AppData.EvalAppForName(app)] = AppData.FromApp(app)
         })
         
         return dataDict
+    }
+    
+    static ClutterImgFromPixBuff(buff) {
+        const content = new Clutter.Image();
+        
+        content.set_data(
+            buff.get_pixels(),
+            buff.get_has_alpha()
+                ? Cogl.PixelFormat.RGBA_8888
+                : Cogl.PixelFormat.RGB_888,
+            buff.get_width(),
+            buff.get_height(),
+            buff.get_rowstride()
+        );
+        
+        return content
+    }
+    
+    // Extracts both Image and path or name if possible
+    static ExtractIconImg(icon) {
+        let pixbuf;
+        let iconPath = null; // or iconName if were nitpicky.
+        
+        if(icon.gicon != null) {        
+            if(icon.gicon.names != null) {
+                const theme = Gtk.IconTheme.get_default();
+                const info = theme.lookup_by_gicon(icon.gicon, 24, 0);
+                iconPath = icon.gicon.get_names()[0]
+                pixbuf = info.load_icon();
+            }
+            else {
+                const file = icon.gicon.get_file();
+                iconPath = file.get_path()
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file(iconPath);
+            }
+        }
+        else if(icon.child != null) return [icon.get_child().get_content(), iconPath] // i think i can later extract a name here!
+        else if(icon["icon-name"] != null) {
+            const theme = Gtk.IconTheme.get_default();
+            iconPath = icon["icon-name"]
+            pixbuf = theme.load_icon(iconPath, 26, 0);
+        }
+        
+        return [AppData.ClutterImgFromPixBuff(pixbuf), iconPath]
+    }
+    
+    static GenerateAttributes(app) {
+        let attr = {}
+        let name = app.get_name()
+        
+        if(this.IsSteamApp(name)) attr["SteamId"] = parseInt(name.match(/\d+$/)[0]); // that gets the id
+            
+        return attr
+    } 
+    
+    static TryResolveIconFromAttr(attributes) {
+        if(attributes == null) return AppData.ImgBuffFromSystemIconName(FALLBACK_ICON_NAME)
+        
+        if(attributes["icon-path"] != null && Misc.IsPath(attributes["icon-path"])) {
+            let pixbuf = GdkPixbuf.Pixbuf.new_from_file(attributes["icon-path"]);
+            return AppData.ClutterImgFromPixBuff(pixbuf)
+        }
+        else if(attributes["icon-path"] != null && !Misc.IsPath(attributes["icon-path"])) {
+            return AppData.ImgBuffFromSystemIconName(attributes["icon-path"])
+        }
+        else if(attributes["SteamId"] != null) {
+            return AppData.ImgBuffFromSystemIconName(`steam_icon_${attributes["SteamId"]}`)
+        }  
+        else return AppData.ImgBuffFromSystemIconName(FALLBACK_ICON_NAME)
+    }
+    
+    static ImgBuffFromSystemIconName(name) {
+        let theme = Gtk.IconTheme.get_default();
+        let info;
+        let pixbuf;
+        try {
+            info = theme.lookup_icon(name, 26, 0);
+            pixbuf = info.load_icon();
+        }
+        catch(err) {
+            // global.logError(`${name}`, err)
+            info = theme.lookup_icon(FALLBACK_ICON_NAME, 26, 0);
+            pixbuf = info.load_icon();
+        }
+        finally { return AppData.ClutterImgFromPixBuff(pixbuf) }
     }
 }
 
@@ -146,7 +247,7 @@ class AppUsageMeter extends Applet.TextIconApplet {
            
             if(saveOutdated != null) {
                 let saveFile = await this.LoadState(saveOutdated)
-                this.apps = AppData.FromSavedEntries(saveFile)
+                this.apps = AppData.FromSavedEntries(saveFile, activeAppsData)
                 
                 Object.keys(activeAppsData).forEach(id => this.activeApps.add(id))
                 Object.keys(this.apps).forEach(key => {
@@ -205,7 +306,7 @@ class AppUsageMeter extends Applet.TextIconApplet {
     AddSaveInterval() {
         // + 1 so it has time to update timers, ill probably increase it
         if(this.settingsMenu.getValue("enable-saving")) {
-            let time = Helper.MinutesToMs(parseInt(this.settingsMenu.getValue("save-interval")) * 60) + 1
+            let time = Misc.MinutesToMs(parseInt(this.settingsMenu.getValue("save-interval")) * 60) + 1
             this.saveInterval = Mainloop.timeout_add(time, () => this.SaveState())
         }
     }
@@ -272,9 +373,11 @@ class AppUsageMeter extends Applet.TextIconApplet {
             try {
                 let newAppData = AppData.FromApp(app)
                 this.apps[newAppData.name] = newAppData
-                this.appSections.push(AppSection.GenerateEmpty()[0].Fill(newAppData, this.settingsMenu.getValue("max-char-for-app-label")))
-                this.scrollViewItemBox.add_child(this.appSections.at(-1).ui.actor)
+                this.appSections.push(AppSection.GenerateEmpty()[0])
+                this.scrollViewItemBox.add_child(this.appSections.at(-1).ui)
                 this.activeApps.add(newAppData.name)
+                
+                if(!this.settingsMenu.getValue("enable-app-icons")) this.appSections.at(-1).icon.hide()
                 
                 this.QueueSort()
                 this.RecalcScrollViewHeight()
@@ -336,7 +439,6 @@ class AppUsageMeter extends Applet.TextIconApplet {
         
         for(let i = 0; i < appTimersUpdated.length; ++i) {
             let section = this.appSections[appTimersUpdated[i][1] - 1]
-            let thisSection = this.appSections[appTimersUpdated[i][1]]
             if(section == null) continue
             
             try {
@@ -346,7 +448,6 @@ class AppUsageMeter extends Applet.TextIconApplet {
             } catch (error) {
                 global.logError(error)
             }
-            
         }
         
         return true;
@@ -362,7 +463,6 @@ class AppUsageMeter extends Applet.TextIconApplet {
         
         for(let i = 0; i < appTimersUpdated.length; ++i) {
             let section = this.appSections[appTimersUpdated[i][1] + 1]
-            let thisSection = this.appSections[appTimersUpdated[i][1]]
             if(section == null) continue
             
             let nextAppSectionTime = AppSection.TimeToInt(section.timeLabel.text)
@@ -384,9 +484,10 @@ class AppUsageMeter extends Applet.TextIconApplet {
         this.FillAppSections()
         
         this.appSections.forEach(section => {
-            this.scrollViewItemBox.add_child(section.ui.actor)
+            this.scrollViewItemBox.add_child(section.ui)
         })
         
+        this.ToogleIcons(this.settingsMenu.getValue("enable-app-icons"))
         return true
     }
     
@@ -415,15 +516,13 @@ class AppUsageMeter extends Applet.TextIconApplet {
         })
         let exportOpt = this.settingsMenu.getValue("show-export-buttons")
         
-        container.x_align = Clutter.ActorAlign.CENTER;
-        
         this.menu.addActor(scrollView)
         scrollView.add_actor(insideScrollView)
         this.menu.addActor(container)
    
         if(exportOpt != "opNone") this.buildExportButtons(exportOpt, container)
         
-        Helper.connectOnce(this.menu, "open-state-changed", () => {
+        Misc.connectOnce(this.menu, "open-state-changed", () => {
             this.RecalcScrollViewHeight()
         })
         
@@ -431,7 +530,7 @@ class AppUsageMeter extends Applet.TextIconApplet {
     }
 
     IsUIEmpty() {
-        return this.activeApps.size + this.inactiveApps.size <=0; 
+        return this.activeApps.size + this.inactiveApps.size <= 0; 
     }
     
     buildExportButtons(option, container) { 
@@ -491,16 +590,10 @@ class AppUsageMeter extends Applet.TextIconApplet {
         const data = {};
 
         for(const [id, appdata] of Object.entries(this.apps)) {            
-            data[id] = [];
-            let attr = {}
-            let attrCount = 0
+            data[id] = [appdata.time];
             
             // optional data that may not be present but is helpful
-            if(appdata.iconPath != null) { attr["icon-path"] = appdata.iconPath; ++attrCount; }
-            // if(appdata.attr != null) attr["section-attr"] = appdata.attr 
-
-            data[id].push(appdata.time);
-            if(attrCount > 0) data[id].push(attr);
+            if(appdata.attr != null && Object.keys(appdata.attr).length > 0) data[id].push(appdata.attr);
         }
 
         const bytes = new TextEncoder().encode(JSON.stringify(data));
@@ -569,10 +662,12 @@ class AppUsageMeter extends Applet.TextIconApplet {
         
         if(menu.getValue("enable-export-dbus")) this.dBusId = this.TrySetupDBus()
         
+        menu.connect("changed::enable-app-icons", ((menu, settingKey, oldValue, newValue) => this.ToogleIcons(newValue)))
         menu.connect("changed::apps-visible", () => this.AppsVisibleCountChanged())
         menu.connect("changed::max-char-for-app-label", () => this.AppLabelCharCountChanged())
+        
         menu.connect("changed::sort-apps-by", (menu, settingKey, oldValue, newValue) => this.SortServiceChanged(newValue, this.sortService.ascendingOrder))
-        menu.connect("changed::sort-order", ((menu, settingKey, oldValue, newValue) => this.SortOrderChanged(newValue)))
+        menu.connect("changed::sort-order", (menu, settingKey, oldValue, newValue) => this.SortOrderChanged(newValue))
         
         menu.connect("changed::enable-saving", () => this.ToogleEnablingSaving())
         menu.connect("changed::save-interval", () => this.RestartSaveInterval())
@@ -591,25 +686,20 @@ class AppUsageMeter extends Applet.TextIconApplet {
         this.scrollView.height = sectionHeight * Math.min(this.appSections.length, this.settingsMenu.getValue("apps-visible"))
     }
 
-    AppsVisibleCountChanged() {
-        this.RecalcScrollViewHeight()
-    }
-
-    AppLabelCharCountChanged() {
-        this.ResetAppLabelCharWidth()
-    }
+    AppsVisibleCountChanged() { this.RecalcScrollViewHeight() }
+    AppLabelCharCountChanged() { this.ResetAppLabelCharWidth() }
 
     ResetAppLabelCharWidth() {
         let maxWidth = this.settingsMenu.getValue("max-char-for-app-label")
 
         Object.entries(this.appToSection).forEach(([appId, sectionIdx]) => {
-            this.appSections[sectionIdx].nameLabel.set_text(Helper.truncate(this.apps[appId].name, maxWidth))
+            this.appSections[sectionIdx].nameLabel.set_text(Misc.truncate(this.apps[appId].name, maxWidth))
         })
     }
 
     ToogleEnablingSaving() {
         if(this.settingsMenu.getValue("enable-saving")) {
-            this.saveInterval = Mainloop.timeout_add(Helper.MinutesToMs(parseInt(this.settingsMenu.getValue("save-interval")) * 60) + 1, () => this.SaveState())
+            this.saveInterval = Mainloop.timeout_add(Misc.MinutesToMs(parseInt(this.settingsMenu.getValue("save-interval")) * 60) + 1, () => this.SaveState())
         }
         else if(this.saveInterval != null) { Mainloop.source_remove(this.saveInterval); this.saveInterval = null}
     }
@@ -621,7 +711,7 @@ class AppUsageMeter extends Applet.TextIconApplet {
             data.rows.push([section.nameLabel.text, section.timeLabel.text])
         })
         
-        return Helper.toCSV(data)
+        return Misc.toCSV(data)
     }
     
     AppsAsJSON() {
@@ -726,9 +816,14 @@ class AppUsageMeter extends Applet.TextIconApplet {
     }
     
     async SaveBtnPressed() {
-        let wasSaved = await this.SaveState();
-        let message = wasSaved ? "Saved successfully." : "Saving failed :( \nCheck looking glass for further info."
-        Main.notify("App Usage", _(message))
+        try{
+            let wasSaved = await this.SaveState();
+            let message = wasSaved ? "Saved successfully." : "Saving failed :( \nCheck looking glass for further info."
+            Main.notify("App Usage", _(message))
+        }
+        catch(err) {
+            global.logError(err)
+        }
     }
     
     FillAppSections() {
@@ -779,77 +874,51 @@ class AppUsageMeter extends Applet.TextIconApplet {
             this.SetMainLoop()
         }
     }
+    
+    ToogleIcons(value) {
+        if(!value) this.appSections.forEach(section => { section.icon.hide() })
+        else this.appSections.forEach(section => { section.icon.show() })
+    
+        this.RecalcScrollViewHeight()
+    }
 }
 
 class AppSection {
-    appDataId // id used to identify what app this appsection represents
-    ui = new PopupMenu.PopupBaseMenuItem({
-        reactive: false,
-        sensitive: false,
-        focusOnHover: false
+    // appDataId // id used to identify what app this appsection represents
+    ui = new St.BoxLayout({
+        style_class: "popup-menu-item",
+        style: "padding-top: 3px; padding-bottom: 3px; padding-left: 8px;", // TODO: clean this style when no icons are allowed
+        y_align: Clutter.ActorAlign.CENTER
     });
+    
     nameLabel = new St.Label({
-        style: "color: white;"
+        style: "color: white;",
+        y_align: Clutter.ActorAlign.CENTER
     })
     timeLabel = new St.Label({
-        style: this.nameLabel.style
+        style: this.nameLabel.style,
+        y_align: Clutter.ActorAlign.CENTER
     })
     
+    icon = new St.Widget({ width: 24,  height: 24 })
+    
     constructor() {
-        this.ui.addActor(this.nameLabel)
-        this.ui.addActor(this.timeLabel)
+        this.ui.add_actor(this.icon)
+        this.ui.add_actor(this.nameLabel)
+        this.ui.add_actor(this.timeLabel)
     }
     
     Fill(appData, maxLabelChar = 30) {
-        this.nameLabel.set_text(Helper.truncate(appData.name, maxLabelChar))
+        this.nameLabel.set_text(Misc.truncate(appData.name, maxLabelChar))
         this.timeLabel.set_text(AppSection.IntToTime(appData.time))
-        // global.log(`"${this.nameLabel.text}"`)
+        this.ReplaceIcon(appData.icon)
         
         return this;
     }
     
     static GenerateEmpty(amount = 1) {
-        let arr = []
-        
-        for(let i = 0; i < amount; i++) {
-            arr.push(new AppSection())
-        }
-        
-        return arr
+        return Array.from({ length: amount }, () => new AppSection());
     }
-    
-    // static GenerateAttributes(app) {
-    //     let attr = {}
-    //     let keyCount = 0
-    //     let name = app.get_name()
-        
-    //     if(this.IsSteamApp(name)) {attr["SteamId"] = parseInt(name.slice(10)); ++keyCount} // that gets the id
-            
-    //     if(keyCount <= 0) return null
-    //     return attr
-    // } 
-    
-    // static GetIconPath(appSection) {
-    //     if(appSection.attr != null && appSection.attr["SteamId"] != null) return "steam_icon_" + appSection.attr["SteamId"]
-        
-    //     if(appSection.UiIcon.gicon == undefined || appSection.UiIcon.gicon == null) {
-                
-    //         if(appSection.UiIcon.child != undefined) {
-    //             let n = appSection.UiIcon.child.get_style_class_name()
-    //             if(n != null) return n
-    //             else return appSection.UiIcon.get_style_class_name()
-    //         }
-    //         else if(appSection.UiIcon.icon_name != undefined) return appSection.UiIcon.get_icon_name()
-                
-    //         global.logError("no gicon, no child")
-    //         global.logError(appSection.UiIcon)
-    //         return null
-    //     }
-              
-    //     if(typeof appSection.UiIcon.gicon.get_file === "function") return appSection.UiIcon.gicon.get_file().get_path()
-    //     else if(appSection.UiIcon.gicon.names != undefined) return appSection.UiIcon.gicon.names[0]
-    //     else throw new Error("nothing captured");
-    // }
        
     static TimeToInt(timeStr) {
         const [hours, minutes, seconds] = timeStr.split(":").map(Number);
@@ -864,30 +933,13 @@ class AppSection {
 
         return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
     }
-    
-    // static TryGetSystemIcon(iconName, size) {
-    //     try {
-    //         let icon = Gio.icon_new_for_string(iconName);
-    //         let theme = Gtk.IconTheme.get_default();
 
-    //         if (icon instanceof Gio.ThemedIcon && theme.lookup_icon(icon.get_names()[0]) 
-    //             || icon instanceof Gio.FileIcon) 
-    //             return new St.Icon({gicon: icon, icon_size: size})
+    GetSectionFullHeight() { return this.ui.get_preferred_height(-1)[1]; }
 
-    //         return null;
-    //     } catch (e) {
-    //         global.logError(e)
-    //         return null;
-    //     }
-    // }
-
-    GetSectionFullHeight() { return this.ui.actor.get_preferred_height(-1)[1]; }
-
-    // ReplaceIcon(stIcon) {
-    //     this.uiIcon.destroy()
-    //     this.uiIcon = stIcon
-    //     this.ui.addActor(this.uiIcon, {position: 0})
-    // }
+    // Gio.icon_new_for_string( // creates a gicon from string, a desktop id or a unique icon name
+    ReplaceIcon(iconContent) {    
+        this.icon.set_content(iconContent);
+    }
     
     SetTimer(int) {
         this.timeLabel.set_text(AppSection.IntToTime(int))
