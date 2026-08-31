@@ -1,5 +1,6 @@
 const ByteArray = imports.byteArray;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 
 const CACHE_SCHEMA_VERSION = 1;
 const DEFAULT_MAX_AGE_MS = 24 * 60 * 60 * 1000;
@@ -25,23 +26,30 @@ function _normaliseConfig(config) {
     };
 }
 
+function _isNotFound(error) {
+    return error && typeof error.matches === "function" &&
+        error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND);
+}
+
 var FileCacheStorage = class FileCacheStorage {
     constructor(path) {
         this.path = path;
     }
 
-    read() {
-        try {
-            if (!GLib.file_test(this.path, GLib.FileTest.EXISTS))
-                return null;
-
-            const [ok, bytes] = GLib.file_get_contents(this.path);
-            if (!ok)
-                return null;
-            return ByteArray.toString(bytes);
-        } catch (error) {
-            throw new Error(`cache read: ${error.message || error}`);
-        }
+    readAsync(callback) {
+        const file = Gio.File.new_for_path(this.path);
+        file.load_contents_async(null, (source, result) => {
+            try {
+                const [ok, bytes] = source.load_contents_finish(result);
+                callback(null, ok ? ByteArray.toString(bytes) : null);
+            } catch (error) {
+                if (_isNotFound(error)) {
+                    callback(null, null);
+                    return;
+                }
+                callback(new Error(`cache read: ${error.message || error}`));
+            }
+        });
     }
 
     write(text) {
@@ -54,13 +62,18 @@ var FileCacheStorage = class FileCacheStorage {
         }
     }
 
-    remove() {
-        try {
-            if (GLib.file_test(this.path, GLib.FileTest.EXISTS))
-                GLib.unlink(this.path);
-        } catch (error) {
-            throw new Error(`cache remove: ${error.message || error}`);
-        }
+    removeAsync(callback) {
+        const file = Gio.File.new_for_path(this.path);
+        file.delete_async(GLib.PRIORITY_DEFAULT, null, (source, result) => {
+            try {
+                source.delete_finish(result);
+                callback(null);
+            } catch (error) {
+                callback(_isNotFound(error)
+                    ? null
+                    : new Error(`cache remove: ${error.message || error}`));
+            }
+        });
     }
 };
 
@@ -116,63 +129,67 @@ var CacheService = class CacheService {
         }
     }
 
-    load(config) {
+    loadAsync(config, callback) {
         this.lastError = null;
 
-        let text;
-        try {
-            text = this._storage.read();
-        } catch (error) {
-            this.lastError = error;
-            return null;
-        }
-
-        if (!text)
-            return null;
-
-        try {
-            const payload = JSON.parse(text);
-            this._validatePayload(payload);
-
-            if (payload.signature !== this.signature(config))
-                return null;
-
-            const savedAtMs = new Date(payload.savedAt).getTime();
-            const ageMs = Math.max(0, this._clock() - savedAtMs);
-            if (ageMs > this._maxAgeMs) {
-                this._removeQuietly();
-                return null;
+        this._storage.readAsync((readError, text) => {
+            if (readError) {
+                this.lastError = readError;
+                callback(null);
+                return;
             }
 
-            const jma = this._cacheableProvider(payload.snapshot.jma);
-            const openMeteo = this._cacheableProvider(payload.snapshot.openMeteo);
-            if (!jma && !openMeteo) {
-                this._removeQuietly();
-                return null;
+            if (!text) {
+                callback(null);
+                return;
             }
 
-            return {
-                jma,
-                openMeteo,
-                savedAt: payload.savedAt,
-                ageMs
-            };
-        } catch (error) {
-            this.lastError = new Error(`cache parse: ${error.message || error}`);
-            this._removeQuietly();
-            return null;
-        }
+            try {
+                const payload = JSON.parse(text);
+                this._validatePayload(payload);
+
+                if (payload.signature !== this.signature(config)) {
+                    callback(null);
+                    return;
+                }
+
+                const savedAtMs = new Date(payload.savedAt).getTime();
+                const ageMs = Math.max(0, this._clock() - savedAtMs);
+                if (ageMs > this._maxAgeMs) {
+                    this._removeQuietly();
+                    callback(null);
+                    return;
+                }
+
+                const jma = this._cacheableProvider(payload.snapshot.jma);
+                const openMeteo = this._cacheableProvider(payload.snapshot.openMeteo);
+                if (!jma && !openMeteo) {
+                    this._removeQuietly();
+                    callback(null);
+                    return;
+                }
+
+                callback({
+                    jma,
+                    openMeteo,
+                    savedAt: payload.savedAt,
+                    ageMs
+                });
+            } catch (error) {
+                this.lastError = new Error(`cache parse: ${error.message || error}`);
+                this._removeQuietly();
+                callback(null);
+            }
+        });
     }
 
-    clear() {
+    clearAsync(callback = () => {}) {
         this.lastError = null;
-        try {
-            this._storage.remove();
-            return true;
-        } catch (error) {
-            this.lastError = error;
-            return false;
-        }
+        this._storage.removeAsync(error => {
+            if (error)
+                this.lastError = error;
+            callback(!error);
+        });
     }
 
     _cacheableProvider(data) {
@@ -203,10 +220,8 @@ var CacheService = class CacheService {
     }
 
     _removeQuietly() {
-        try {
-            this._storage.remove();
-        } catch (_) {
+        this._storage.removeAsync(() => {
             // A broken cache must never prevent the applet from starting.
-        }
+        });
     }
 };

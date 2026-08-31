@@ -6,10 +6,11 @@ const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 
 const UUID = "jma-weather@10yendama.com";
-const VERSION = "3.3.1";
+const VERSION = "3.3.2";
 
 // Local modules must be loaded through the CJS importer.
 // `imports.ui.extension.getCurrentExtension()` is a GNOME Shell pattern and
@@ -149,35 +150,46 @@ function feelsLikeDescription(actual, apparent) {
     return "気温どおりの体感です";
 }
 
-function _fileExists(path) {
-    if (!path)
-        return false;
-
-    try {
-        return Gio.File.new_for_path(path).query_exists(null);
-    } catch (error) {
-        global.logError(`[${UUID}] icon path check failed: ${error}`);
-        return false;
-    }
+function _setFallbackIcon(actor) {
+    actor.set_icon_name("weather-overcast-symbolic");
+    actor.set_icon_type(St.IconType.SYMBOLIC);
 }
 
 function _setSvgIcon(actor, path, size) {
     actor.set_icon_size(Number(size) || 24);
+    _setFallbackIcon(actor);
 
-    try {
-        if (_fileExists(path)) {
-            actor.set_gicon(new Gio.FileIcon({
-                file: Gio.File.new_for_path(path)
-            }));
-            actor.set_icon_type(St.IconType.FULLCOLOR);
-            return;
+    if (!path)
+        return;
+
+    const requestId = (actor._jwaIconRequestId || 0) + 1;
+    actor._jwaIconRequestId = requestId;
+    const file = Gio.File.new_for_path(path);
+
+    file.query_info_async(
+        Gio.FILE_ATTRIBUTE_STANDARD_TYPE,
+        Gio.FileQueryInfoFlags.NONE,
+        GLib.PRIORITY_DEFAULT,
+        null,
+        (source, result) => {
+            if (actor._jwaIconRequestId !== requestId)
+                return;
+
+            try {
+                source.query_info_finish(result);
+                actor.set_gicon(new Gio.FileIcon({ file }));
+                actor.set_icon_type(St.IconType.FULLCOLOR);
+            } catch (error) {
+                if (!error.matches || !error.matches(
+                    Gio.IOErrorEnum,
+                    Gio.IOErrorEnum.NOT_FOUND
+                )) {
+                    global.logError(`[${UUID}] SVG icon load failed: ${error}`);
+                }
+                _setFallbackIcon(actor);
+            }
         }
-    } catch (error) {
-        global.logError(`[${UUID}] SVG icon load failed: ${error}`);
-    }
-
-    actor.set_icon_name("weather-overcast-symbolic");
-    actor.set_icon_type(St.IconType.SYMBOLIC);
+    );
 }
 
 class WeatherSummaryMenuItem extends PopupMenu.PopupBaseMenuItem {
@@ -575,15 +587,37 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
     }
 
     _restoreCachedWeather() {
+        let config;
+        let signature;
         try {
-            const config = this._createProviderConfig();
-            const cached = this._cacheService.load(config);
-            const cachedAlerts = this._alertCacheService.load(config.alert);
+            config = this._createProviderConfig();
+            signature = [
+                this._cacheService.signature(config),
+                this._alertCacheService.signature(config.alert)
+            ].join("|");
+        } catch (error) {
+            global.logError(`[${UUID}] cache restore failed: ${error}`);
+            return;
+        }
 
-            if (this._cacheService.lastError)
-                global.logError(`[${UUID}] ${this._cacheService.lastError}`);
-            if (this._alertCacheService.lastError)
-                global.logError(`[${UUID}] ${this._alertCacheService.lastError}`);
+        // _refreshAll() runs immediately after this method during startup. A
+        // later generation means settings changed before the file read ended.
+        const restoreGeneration = this._refreshGeneration + 1;
+        let cached = null;
+        let cachedAlerts = null;
+        let pending = 2;
+        const finish = () => {
+            pending -= 1;
+            if (pending !== 0 || this._destroyed ||
+                restoreGeneration !== this._refreshGeneration) {
+                return;
+            }
+
+            // Never let a delayed startup cache overwrite newer network data.
+            if (this._activeConfigSignature === signature &&
+                this._weather.hasFreshData()) {
+                return;
+            }
 
             if (!cached && !cachedAlerts)
                 return;
@@ -597,14 +631,22 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
                     cacheSavedAt: cachedAlerts.savedAt
                 });
             }
-            this._activeConfigSignature = [
-                this._cacheService.signature(config),
-                this._alertCacheService.signature(config.alert)
-            ].join("|");
+            this._activeConfigSignature = signature;
             this._render();
-        } catch (error) {
-            global.logError(`[${UUID}] cache restore failed: ${error}`);
-        }
+        };
+
+        this._cacheService.loadAsync(config, result => {
+            if (this._cacheService.lastError)
+                global.logError(`[${UUID}] ${this._cacheService.lastError}`);
+            cached = result;
+            finish();
+        });
+        this._alertCacheService.loadAsync(config.alert, result => {
+            if (this._alertCacheService.lastError)
+                global.logError(`[${UUID}] ${this._alertCacheService.lastError}`);
+            cachedAlerts = result;
+            finish();
+        });
     }
 
     _refreshAll() {
@@ -770,18 +812,16 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
             const instanceId = this.instance_id ?? this._instanceId;
 
             if (instanceId !== null && instanceId !== undefined) {
-                Util.spawnCommandLine(
-                    `cinnamon-settings applets ${UUID} ${instanceId}`
-                );
+                Util.spawn(["cinnamon-settings", "applets", UUID, String(instanceId)]);
                 return;
             }
 
-            Util.spawnCommandLine(`cinnamon-settings applets ${UUID}`);
+            Util.spawn(["cinnamon-settings", "applets", UUID]);
         } catch (error) {
             global.logError(`[${UUID}] settings fallback failed: ${error}`);
 
             try {
-                Util.spawnCommandLine("cinnamon-settings applets");
+                Util.spawn(["cinnamon-settings", "applets"]);
                 Main.notify(
                     "アプレット設定を開きました",
                     "一覧から JMA Weather Japan の設定を選んでください。"
@@ -799,16 +839,35 @@ class JmaWeatherApplet extends Applet.TextIconApplet {
     }
 
     _setPanelIcon(path) {
-        try {
-            if (_fileExists(path)) {
-                this.set_applet_icon_path(path);
-                return;
-            }
-        } catch (error) {
-            global.logError(`[${UUID}] panel SVG icon failed: ${error}`);
-        }
-
+        const requestId = (this._panelIconRequestId || 0) + 1;
+        this._panelIconRequestId = requestId;
         this.set_applet_icon_name("weather-overcast-symbolic");
+
+        if (!path)
+            return;
+
+        const file = Gio.File.new_for_path(path);
+        file.query_info_async(
+            Gio.FILE_ATTRIBUTE_STANDARD_TYPE,
+            Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT,
+            null,
+            (source, result) => {
+                if (this._destroyed || this._panelIconRequestId !== requestId)
+                    return;
+                try {
+                    source.query_info_finish(result);
+                    this.set_applet_icon_path(path);
+                } catch (error) {
+                    if (!error.matches || !error.matches(
+                        Gio.IOErrorEnum,
+                        Gio.IOErrorEnum.NOT_FOUND
+                    )) {
+                        global.logError(`[${UUID}] panel SVG icon failed: ${error}`);
+                    }
+                }
+            }
+        );
     }
 
     _dataStatusLine() {
