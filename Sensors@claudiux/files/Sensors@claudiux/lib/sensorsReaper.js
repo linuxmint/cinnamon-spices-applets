@@ -158,7 +158,7 @@ class SensorsReaper {
                         
                         const nvidia_information = element.split(', ');
                         const nvidia_bus_id = nvidia_information[1];
-                        const nvidia_sysfs_path = `${sysfs_mount_point}/bus/pci/devices/${nvidia_bus_id.replace(/^0{8}/, "0000")}/power_state`;
+                        const nvidia_sysfs_path = `${sysfs_mount_point}/bus/pci/devices/${nvidia_bus_id.replace(/^0{8}/, "0000").toLowerCase()}/power_state`;
                         const nvidia_device_name = nvidia_information[0];
                         const nvidia_device_id = nvidia_information[3]
 
