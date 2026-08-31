@@ -1,0 +1,183 @@
+# EMOJI KEYBOARD
+# This file is put in the public domain.
+# rubberband75, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: emoji-keyboard@rubberband75 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-27 15:25-0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. applet.js:46
+msgid "Recent"
+msgstr "最近使用"
+
+#. applet.js:47
+msgid "Smileys & Emotions"
+msgstr "笑脸与情感"
+
+#. applet.js:48
+msgid "People"
+msgstr "人物"
+
+#. applet.js:49
+msgid "Animals & Nature"
+msgstr "动物与自然"
+
+#. applet.js:50
+msgid "Food & Drink"
+msgstr "食物与饮料"
+
+#. applet.js:51
+msgid "Travel & Places"
+msgstr "旅行与地点"
+
+#. applet.js:52
+msgid "Activities & Events"
+msgstr "活动与事件"
+
+#. applet.js:53
+msgid "Objects"
+msgstr "物品"
+
+#. applet.js:54
+msgid "Symbols"
+msgstr "符号"
+
+#. applet.js:55
+msgid "Flags"
+msgstr "旗帜"
+
+#. metadata.json->name
+#. applet.js:142
+msgid "Emoji Keyboard"
+msgstr "表情符号键盘"
+
+#. applet.js:167
+msgid "Search emoji"
+msgstr "搜索表情符号"
+
+#. applet.js:206
+msgid "Loading emoji…"
+msgstr "正在加载表情符号…"
+
+#. applet.js:415
+msgid "Unable to load the emoji catalog"
+msgstr "无法加载表情符号目录"
+
+#. applet.js:492
+#, javascript-format
+msgid "%d search result"
+msgid_plural "%d search results"
+msgstr[0] "%d 个搜索结果"
+
+#. applet.js:519
+msgid "Your recently used emoji will appear here"
+msgstr "您最近使用的表情符号会显示在这里"
+
+#. applet.js:520
+msgid "No emoji found"
+msgstr "未找到表情符号"
+
+#. metadata.json->description
+msgid "Search, copy, and insert emoji from a native Cinnamon panel popup."
+msgstr "从 Cinnamon 面板原生弹出窗口中搜索、复制并插入表情符号。"
+
+#. settings-schema.json->copy-to-clipboard->description
+msgid "Copy emoji to clipboard"
+msgstr "将表情符号复制到剪贴板"
+
+#. settings-schema.json->copy-to-clipboard->tooltip
+msgid ""
+"When enabled, the selected emoji stays on the clipboard after it is "
+"inserted. When disabled, the clipboard is restored to its previous contents "
+"after insertion."
+msgstr ""
+"启用后，所选表情符号在插入后仍保留在剪贴板中。禁用后，插入完成后会立即恢复剪"
+"贴板之前的内容。"
+
+#. settings-schema.json->category-icon-size->description
+msgid "Category icon size"
+msgstr "类别图标大小"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Colored Icon Size"
+msgstr "匹配面板彩色图标大小"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Symbolic Icon Size"
+msgstr "匹配面板符号图标大小"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "16px"
+msgstr "16px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "22px"
+msgstr "22px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "24px"
+msgstr "24px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "32px"
+msgstr "32px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "48px"
+msgstr "48px"
+
+#. settings-schema.json->emoji-size->description
+msgid "Emoji size"
+msgstr "表情符号大小"
+
+#. settings-schema.json->default-skin-tone->description
+msgid "Default skin tone"
+msgstr "默认肤色"
+
+#. settings-schema.json->default-skin-tone->tooltip
+msgid ""
+"Emoji that support skin tones show this tone by default. Emoji without skin "
+"tone variants are unaffected."
+msgstr "支持肤色的表情符号默认显示此肤色。没有肤色变体的表情符号不受影响。"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍"
+msgstr "👍"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏻"
+msgstr "👍🏻"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏼"
+msgstr "👍🏼"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏽"
+msgstr "👍🏽"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏾"
+msgstr "👍🏾"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏿"
+msgstr "👍🏿"
