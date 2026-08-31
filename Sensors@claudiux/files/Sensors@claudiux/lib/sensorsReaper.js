@@ -11,6 +11,9 @@ const {readFileAsync} = require("./lib/readFileAsync");
 // A default low temperature to return when in d3cold
 const d3cold_temperature = "35";
 
+// Default sysfs mount point
+const sysfs_mount_point = "/sys"
+
 const {
   UUID,
   HOME_DIR,
@@ -155,24 +158,23 @@ class SensorsReaper {
                         
                         const nvidia_information = element.split(', ');
                         const nvidia_bus_id = nvidia_information[1];
-                        const nvidia_sysfs_path = `/sys/bus/pci/devices/${nvidia_bus_id.replace(/^0{8}/, "0000")}/power_state`;
+                        const nvidia_sysfs_path = `${sysfs_mount_point}/bus/pci/devices/${nvidia_bus_id.replace(/^0{8}/, "0000").toLowerCase()}/power_state`;
                         const nvidia_device_name = nvidia_information[0];
                         const nvidia_device_id = nvidia_information[3]
 
-                        // Check if everything's correct
+                        // Add card
+                        this.nvidia_cards[nvidia_device_id] = {
+                          "bus_id": nvidia_bus_id,
+                          "name": nvidia_device_name
+                        }
+
+                        // Check if we can find the power_state interface for the card
                         if (GLib.file_test(nvidia_sysfs_path, GLib.FileTest.EXISTS)) {
                           global.log(`Found Nvidia power state on ${nvidia_sysfs_path}, device name ${nvidia_device_name}, bus id ${nvidia_bus_id}`)
-                          
-                          // Add card
-                          this.nvidia_cards[nvidia_device_id] = {
-                            "bus_id": nvidia_bus_id,
-                            "sysfs": Gio.File.new_for_path(nvidia_sysfs_path),
-                            "name": nvidia_device_name
-                          }
-                          global.log(this.nvidia_cards);
+                          this.nvidia_cards[nvidia_device_id]["sysfs"] = Gio.File.new_for_path(nvidia_sysfs_path)                        
                         }
                         else {
-                          global.logError(`Could not find power_state handle or information for Nvidia card at ${nvidia_sysfs_path}, is sysfs mounted on /sys?`)
+                          global.logError(`Could not find power_state handle or information for Nvidia card at ${nvidia_sysfs_path}, is sysfs mounted on ${sysfs_mount_point}?`)
                         }
                       }
                       catch (e) {
@@ -283,7 +285,8 @@ class SensorsReaper {
             return new Promise((resolve, reject) => {
 
               // Don't bother Nvidia card if in d3cold state
-              if(no_check_gpu_if_d3cold == 1) {
+              // and we can check the power state of the card
+              if(no_check_gpu_if_d3cold == 1 && "sysfs" in this.nvidia_cards[id]) {
                 readFileAsync(this.nvidia_cards[id].sysfs).then((power_state) => {
                   if (power_state.startsWith("D3cold")) {
                     results[this.nvidia_cards[id].bus_id] = {
