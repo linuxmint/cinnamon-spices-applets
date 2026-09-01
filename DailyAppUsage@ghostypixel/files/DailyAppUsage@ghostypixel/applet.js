@@ -19,7 +19,7 @@ const UUID = "DailyAppUsage@ghostypixel"
 const AppletDir = imports.ui.appletManager.applets[UUID];
 const Misc = AppletDir.misc
 
-const FALLBACK_ICON_NAME = "application-x-executable" // Will be customizable later, incase you got a cooler looking icon to use.
+let FALLBACK_ICON_NAME = "application-x-executable" // Will be customizable later, incase you got a cooler looking icon to use.
 
 Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
@@ -174,7 +174,7 @@ class AppData {
     }
 }
 
-class AppUsageMeter extends Applet.TextIconApplet {
+class AppUsageMeter extends Applet.TextApplet {
     // UI ELEMENTS
     menuManager = new PopupMenu.PopupMenuManager(this);
     settingsMenu;
@@ -513,6 +513,7 @@ class AppUsageMeter extends Applet.TextIconApplet {
             vertical: false,
             x_expand: true,
             y_expand: true, 
+            x_align: Clutter.ActorAlign.CENTER
         })
         let exportOpt = this.settingsMenu.getValue("show-export-buttons")
         
@@ -529,9 +530,7 @@ class AppUsageMeter extends Applet.TextIconApplet {
         return [scrollView, insideScrollView, container]
     }
 
-    IsUIEmpty() {
-        return this.activeApps.size + this.inactiveApps.size <= 0; 
-    }
+    IsUIEmpty() { return this.activeApps.size + this.inactiveApps.size <= 0 }
     
     buildExportButtons(option, container) { 
         function buildBtn(title, color, callable) {
@@ -726,17 +725,17 @@ class AppUsageMeter extends Applet.TextIconApplet {
         return JSON.stringify(data)
     }
     
-    ExportBtnPressed(strData, defaultMsg, errorMsg) {
+    ExportBtnPressed(strData, extension, defaultMsg = _("Export Successful"), errorMsg = _("Export Unsuccesful")) {
         let message = defaultMsg
         try {
-            this.CreateFile(this.settingsMenu.getValue("export-path") + `/${new Date().toISOString().replace("T", "-").replace("Z", "").split(".")[0]}.json`, new TextEncoder().encode(strData))
+            this.CreateFile(this.settingsMenu.getValue("export-path") + `/${new Date().toISOString().replace("T", "-").replace("Z", "").split(".")[0]}.${extension}`, new TextEncoder().encode(strData))
         }
         catch(err) { global.logError(_("coudnt save json %s").format(err)); message = errorMsg }
         finally { Main.notify("App Usage", _(message)) }
     }
     
-    JSONBtnClicked() { ExportBtnPressed(this.AppsAsJSON()) }
-    CSVBtnClicked() { this.ExportBtnPressed(this.AppsAsCSV()) }
+    JSONBtnClicked() { this.ExportBtnPressed(this.AppsAsJSON(), "json") }
+    CSVBtnClicked() { this.ExportBtnPressed(this.AppsAsCSV(), "csv") }
     
     // This function will very likely be changed in the future.
     ResetExportBtns(exportOpt) {

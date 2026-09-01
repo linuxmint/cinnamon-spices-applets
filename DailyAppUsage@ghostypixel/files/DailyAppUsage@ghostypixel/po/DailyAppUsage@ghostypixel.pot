@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: DailyAppUsage@ghostypixel 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-08-30 21:01+0200\n"
+"POT-Creation-Date: 2026-09-01 13:23+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -48,17 +48,25 @@ msgstr ""
 msgid "No apps were opened."
 msgstr ""
 
-#. applet.js:611
+#. applet.js:610
 #, javascript-format
 msgid "Failed to read save file. %s"
 msgstr ""
 
-#. applet.js:734
+#. applet.js:728
+msgid "Export Successful"
+msgstr ""
+
+#. applet.js:728
+msgid "Export Unsuccesful"
+msgstr ""
+
+#. applet.js:733
 #, javascript-format
 msgid "coudnt save json %s"
 msgstr ""
 
-#. applet.js:802
+#. applet.js:801
 #, javascript-format
 msgid "Failed to Create/Overwrite file: %s"
 msgstr ""
