@@ -5,10 +5,13 @@ const Tooltips   = imports.ui.tooltips;
 const Mainloop   = imports.mainloop;
 const St         = imports.gi.St;
 const GLib       = imports.gi.GLib;
+const Gio        = imports.gi.Gio;
 const Clutter    = imports.gi.Clutter;
 let Astronomy, Dial, Theme;
 
 const DIAL_SIZE = 320;
+const GEOIP_URL = "http://ip-api.com/json/?fields=status,message,city,lat,lon";
+const GEOIP_REFRESH_MS = 60 * 60 * 1000; // re-check hourly (laptops move)
 
 class OrlojApplet extends Applet.TextApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
@@ -18,6 +21,66 @@ class OrlojApplet extends Applet.TextApplet {
         this._instanceId = instanceId;
         this.set_applet_label("--:--");
         this.set_applet_tooltip("Orloj");
+
+        // Per-body panel label: the sun and moon each get a column, side by
+        // side. TextApplet wraps its built-in label in this._layoutBin — that
+        // Bin, not the label, is the child of this.actor, so insert relative
+        // to it. The built-in label is kept for startup and fallback text.
+        this._bodyBox = new St.BoxLayout({
+            style: "spacing: 6px;",
+            y_align: Clutter.ActorAlign.CENTER
+        });
+        // Each body is a vertical column of two single-line labels (rise on
+        // top, set below). One label per line — rather than one two-line
+        // label — guarantees the ☀/☾ glyphs stay left-aligned when the rise
+        // and set entries differ in width (e.g. a "+1d" suffix on one line);
+        // a multi-line label center-justifies its lines instead.
+        const makeLine = () => new St.Label({
+            style_class: "applet-label",
+            x_align: Clutter.ActorAlign.START
+        });
+        this._sunTop  = makeLine();
+        this._sunBot  = makeLine();
+        this._moonTop = makeLine();
+        this._moonBot = makeLine();
+        // Center each column vertically within the row so that when one body
+        // shows a single line and the other shows both (rise + set), the
+        // single line sits centered against the two, rather than pinned to
+        // the top row.
+        const sunCol  = new St.BoxLayout({
+            vertical: true, y_align: Clutter.ActorAlign.CENTER, y_expand: false
+        });
+        sunCol.add_actor(this._sunTop);
+        sunCol.add_actor(this._sunBot);
+        const moonCol = new St.BoxLayout({
+            vertical: true, y_align: Clutter.ActorAlign.CENTER, y_expand: false
+        });
+        moonCol.add_actor(this._moonTop);
+        moonCol.add_actor(this._moonBot);
+        this._bodyBox.add_actor(sunCol);
+        this._bodyBox.add_actor(moonCol);
+        this.actor.insert_child_below(this._bodyBox, this._layoutBin);
+
+        // Moon-phase widget: schematic disk with "illum% phase°" beneath,
+        // shown left of the rise/set columns (toggled by show-moon-phase).
+        this._moonBox = new St.BoxLayout({
+            vertical: true,
+            y_align: Clutter.ActorAlign.CENTER,
+            style: "padding-right: 5px;"
+        });
+        this._moonPhaseArea = new St.DrawingArea({
+            width: 22, height: 22,
+            x_align: Clutter.ActorAlign.CENTER
+        });
+        this._moonPhaseArea.connect("repaint", this._onMoonPhaseRepaint.bind(this));
+        this._moonPhaseLabel = new St.Label({
+            style: "font-size: 8px;",
+            x_align: Clutter.ActorAlign.CENTER
+        });
+        this._moonBox.add_actor(this._moonPhaseArea);
+        this._moonBox.add_actor(this._moonPhaseLabel);
+        this._moonBox.hide();
+        this.actor.insert_child_below(this._moonBox, this._bodyBox);
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -41,8 +104,12 @@ class OrlojApplet extends Applet.TextApplet {
         this._lastHoverLabel = null;
 
         this._state = null;
-        this._cachedSunEvent = null;
-        this._cachedMoonEvent = null;
+        this._cachedSunEvents = null;
+        this._cachedMoonEvents = null;
+        this._httpSession = null;
+        this._geoipCoords = null;
+        this._geoipFetchedAt = 0;
+        this._geoipInFlight = false;
 
         // Zodiac boundary/midpoint RAs: fixed geometry (depends only on
         // obliquity, which drifts ~0.013°/century), computed once at startup.
@@ -57,8 +124,17 @@ class OrlojApplet extends Applet.TextApplet {
         }
 
         this._settings = new Settings.AppletSettings(this, this._uuid, instanceId);
+        this._settings.bind("use-geoip",       "useGeoip",       () => this._onGeoipToggled());
         this._settings.bind("latitude",        "latitude",       () => this._invalidateEvents());
         this._settings.bind("longitude",       "longitude",      () => this._invalidateEvents());
+        this._settings.bind("use-lst",         "useLst",         () => this._onLstToggled());
+        this._settings.bind("use-auto-timezone", "useAutoTz",    () => this._refresh());
+        this._settings.bind("timezone",        "manualTz",       () => this._refresh());
+        this._settings.bind("show-sunrise",    "showSunrise",    () => this._refresh());
+        this._settings.bind("show-both-sun",   "showBothSun",    () => this._refresh());
+        this._settings.bind("show-moonrise",   "showMoonrise",   () => this._refresh());
+        this._settings.bind("show-both-moon",  "showBothMoon",   () => this._refresh());
+        this._settings.bind("show-moon-phase", "showMoonPhase",  () => this._refresh());
         this._settings.bind("refresh-seconds", "refreshSeconds", () => this._scheduleRefresh());
         this._settings.bind("accent-color",    "accentColor",    () => this._refresh());
         this._settings.bind("foreground-color","foregroundColor",() => this._applyColors());
@@ -69,12 +145,153 @@ class OrlojApplet extends Applet.TextApplet {
         this._applySize();
         this._refresh();
         this._scheduleRefresh();
+        this._populateTimezones();
+    }
+
+    // Fill the time zone combobox from the system tz database. The schema
+    // ships with only UTC: listing all ~600 zone names there would drag
+    // every one of them into the translation template, and the system list
+    // stays current with tzdata updates. Same pattern as hwmonitor@sylfurd
+    // and qredshift@quintao. Async read, per spices guidance. zone1970.tab
+    // is the current name of the table; zone.tab is the pre-2017 one kept
+    // as a fallback for older tzdata installations.
+    _populateTimezones(pathIndex) {
+        const paths = ["/usr/share/zoneinfo/zone1970.tab",
+                       "/usr/share/zoneinfo/zone.tab"];
+        const idx = pathIndex || 0;
+        if (idx >= paths.length) {
+            global.logWarning(
+                "Orloj: could not read the time zone database, "
+                + "the time zone list stays minimal");
+            return;
+        }
+        const file = Gio.File.new_for_path(paths[idx]);
+        file.load_contents_async(null, (f, res) => {
+            try {
+                const [ok, bytes] = f.load_contents_finish(res);
+                if (!ok) throw new Error("read failed");
+                const zones = [];
+                const lines = imports.byteArray.toString(bytes).split("\n");
+                for (const line of lines) {
+                    if (!line || line[0] === "#") continue;
+                    const cols = line.split("\t");
+                    if (cols.length >= 3 && cols[2]) zones.push(cols[2]);
+                }
+                if (!zones.length) throw new Error("no zones parsed");
+                zones.push("UTC");
+                // Keep the configured zone selectable even if it is an
+                // alias that the table doesn't list.
+                if (this.manualTz) zones.push(this.manualTz);
+                zones.sort();
+                const options = {};
+                for (const z of zones) options[z] = z;
+                this._settings.setOptions("timezone", options);
+            } catch (e) {
+                this._populateTimezones(idx + 1);
+            }
+        });
     }
 
     _invalidateEvents() {
-        this._cachedSunEvent = null;
-        this._cachedMoonEvent = null;
+        this._cachedSunEvents = null;
+        this._cachedMoonEvents = null;
         this._refresh();
+    }
+
+    _onLstToggled() {
+        // LST mode always uses the system zone, so re-arm the automatic
+        // time zone when it is switched on. This also keeps the settings
+        // dialog consistent: the "Time zone" combobox is shown on
+        // !use-auto-timezone alone (the schema dependency field cannot
+        // express "!use-lst AND !use-auto-timezone"), so without this it
+        // would linger, ineffective, after re-checking "Use LST".
+        if (this.useLst && !this.useAutoTz)
+            this._settings.setValue("use-auto-timezone", true);
+        this._refresh();
+    }
+
+    _onGeoipToggled() {
+        this._geoipFetchedAt = 0; // force an immediate re-fetch
+        this._invalidateEvents();
+    }
+
+    // Lazily import libsoup 3 the first time GeoIP is used, so the applet
+    // still loads on systems without the Soup 3 typelib (GeoIP then falls
+    // back to the manual coordinates, with a logged warning).
+    _soup() {
+        if (this._soupChecked) return this._Soup;
+        this._soupChecked = true;
+        try {
+            imports.gi.versions.Soup = "3.0";
+            this._Soup = imports.gi.Soup;
+        } catch (e) {
+            this._Soup = null;
+            global.logWarning(
+                "Orloj: libsoup 3 unavailable, GeoIP falls back to manual coordinates: "
+                + e.message);
+        }
+        return this._Soup;
+    }
+
+    _fetchGeoip() {
+        if (this._geoipInFlight) return;
+        const Soup = this._soup();
+        if (!Soup) {
+            this._geoipFetchedAt = Date.now(); // retry no sooner than the next interval
+            return;
+        }
+        this._geoipInFlight = true;
+        if (!this._httpSession)
+            this._httpSession = new Soup.Session({
+                user_agent: "orloj-cinnamon-applet",
+                timeout: 10
+            });
+        const msg = Soup.Message.new("GET", GEOIP_URL);
+        this._httpSession.send_and_read_async(
+            msg, GLib.PRIORITY_DEFAULT, null, (session, result) => {
+                this._geoipInFlight = false;
+                this._geoipFetchedAt = Date.now();
+                try {
+                    const bytes = session.send_and_read_finish(result);
+                    if (msg.get_status() !== Soup.Status.OK)
+                        throw new Error("HTTP " + msg.get_status());
+                    const data = JSON.parse(
+                        imports.byteArray.toString(bytes.get_data()));
+                    if (data.status !== "success"
+                        || !isFinite(data.lat) || !isFinite(data.lon))
+                        throw new Error(data.message || "bad response");
+                    const moved = !this._geoipCoords
+                        || this._geoipCoords.lat !== data.lat
+                        || this._geoipCoords.lon !== data.lon;
+                    this._geoipCoords =
+                        { lat: data.lat, lon: data.lon, city: data.city || "?" };
+                    if (moved) this._invalidateEvents();
+                } catch (e) {
+                    global.logWarning(
+                        "Orloj: GeoIP lookup failed, using manual coordinates: "
+                        + e.message);
+                }
+            });
+    }
+
+    // The GLib.TimeZone all displayed times are rendered in: the system zone,
+    // or the manually configured one. While "Use Local Sidereal Time" is on
+    // (the original behavior), the zone selection is overridden and the
+    // system zone is used everywhere.
+    _displayTimeZone() {
+        if (!this.useLst && !this.useAutoTz && this.manualTz) {
+            // new_identifier (GLib >= 2.68) returns null for unknown names;
+            // the older constructor silently falls back to UTC.
+            if (GLib.TimeZone.new_identifier) {
+                const tz = GLib.TimeZone.new_identifier(this.manualTz);
+                if (tz) return tz;
+                global.logWarning(
+                    `Orloj: unknown time zone "${this.manualTz}", using system zone`);
+            } else {
+                return GLib.TimeZone.new(this.manualTz);
+            }
+        }
+        return GLib.TimeZone.new_local();
     }
 
     _applyColors() {
@@ -106,39 +323,94 @@ class OrlojApplet extends Applet.TextApplet {
     _refresh() {
         const now = new Date();
 
-        const lat = parseFloat(this.latitude);
-        const lon = parseFloat(this.longitude);
+        let lat = parseFloat(this.latitude);
+        let lon = parseFloat(this.longitude);
+        let locNote = "";
+        if (this.useGeoip) {
+            if (!this._geoipInFlight
+                && Date.now() - this._geoipFetchedAt > GEOIP_REFRESH_MS)
+                this._fetchGeoip();
+            if (this._geoipCoords) {
+                lat = this._geoipCoords.lat;
+                lon = this._geoipCoords.lon;
+                locNote = ` — ${this._geoipCoords.city} (GeoIP)`;
+            }
+        }
+        this.set_applet_tooltip("Orloj" + locNote);
         if (!isFinite(lat) || !isFinite(lon)) {
+            this._sunTop.hide();  this._sunBot.hide();
+            this._moonTop.hide(); this._moonBot.hide();
             this.set_applet_label("set lat/lon");
             this._state = null;
+            this._moonBox.hide();
             this._drawingArea.queue_repaint();
             return;
         }
 
-        // Cache rise/set until the predicted event passes, then re-scan.
-        if (!this._cachedSunEvent || now >= this._cachedSunEvent.retryAfter) {
-            const ev = Astronomy.nextSunEvent(now, lat, lon);
-            const retryAfter = ev ? ev.time : new Date(+now + 86400000);
-            this._cachedSunEvent = { event: ev, retryAfter: retryAfter };
-        }
-        if (!this._cachedMoonEvent || now >= this._cachedMoonEvent.retryAfter) {
-            const ev = Astronomy.nextMoonEvent(now, lat, lon);
-            const retryAfter = ev ? ev.time : new Date(+now + 86400000);
-            this._cachedMoonEvent = { event: ev, retryAfter: retryAfter };
-        }
-        const sunEv  = this._cachedSunEvent.event;
-        const moonEv = this._cachedMoonEvent.event;
-        const fmtEv  = (ev) => {
-            if (!ev) return ">1d";
-            const arrow = ev.type === "rise" ? "↑" : "↓";
-            const days = Math.floor((ev.time - now) / 86400000);
-            if (days >= 7) return `${arrow}>1w`;
-            const hh = String(ev.time.getHours()).padStart(2, "0");
-            const mm = String(ev.time.getMinutes()).padStart(2, "0");
-            const suffix = days >= 1 ? `+${days}d` : "";
-            return `${arrow}${hh}:${mm}${suffix}`;
+        // Cache rise/set until the earliest predicted event passes, then
+        // re-scan.
+        const cacheEvents = (cached, scan) => {
+            if (cached && now < cached.retryAfter) return cached;
+            const ev = scan();
+            const times = [ev.rise, ev.set].filter((t) => t);
+            const retryAfter = times.length
+                ? new Date(Math.min.apply(null, times))
+                : new Date(+now + 86400000);
+            return { events: ev, retryAfter: retryAfter };
         };
-        this.set_applet_label(`☀${fmtEv(sunEv)} ☾${fmtEv(moonEv)}`);
+        this._cachedSunEvents  = cacheEvents(this._cachedSunEvents,
+            () => Astronomy.nextSunEvents(now, lat, lon));
+        this._cachedMoonEvents = cacheEvents(this._cachedMoonEvents,
+            () => Astronomy.nextMoonEvents(now, lat, lon));
+        const sunEv  = this._cachedSunEvents.events;
+        const moonEv = this._cachedMoonEvents.events;
+
+        // All displayed times are rendered in this zone (system or manual).
+        const tz = this._displayTimeZone();
+        const toTz = (date) => GLib.DateTime.new_from_unix_utc(
+            Math.floor(date.getTime() / 1000)).to_timezone(tz);
+
+        const fmtTime = (time) => {
+            if (!time) return "--";
+            const days = Math.floor((time - now) / 86400000);
+            if (days >= 7) return ">1w";
+            const dt = toTz(time);
+            const hh = String(dt.get_hour()).padStart(2, "0");
+            const mm = String(dt.get_minute()).padStart(2, "0");
+            const suffix = days >= 1 ? `+${days}d` : "";
+            return `${hh}:${mm}${suffix}`;
+        };
+        // Per body: by default a single entry with the next event (rise or
+        // set, whichever comes soonest — the original behavior); with
+        // "Always show both" on, the body's rise and set fill the column's
+        // two rows, rise on top, set below. The built-in applet label only
+        // carries a small glyph pair when everything is hidden, keeping the
+        // applet clickable.
+        const nextOf = (ev) => {
+            if (ev.rise && (!ev.set || ev.rise < ev.set))
+                return { arrow: "↑", time: ev.rise };
+            if (ev.set) return { arrow: "↓", time: ev.set };
+            return null;
+        };
+        const fillColumn = (top, bot, glyph, show, both, ev) => {
+            if (!show) { top.hide(); bot.hide(); return false; }
+            if (both) {
+                top.set_text(`${glyph}↑${fmtTime(ev.rise)}`); top.show();
+                bot.set_text(`${glyph}↓${fmtTime(ev.set)}`);  bot.show();
+            } else {
+                const nx = nextOf(ev);
+                top.set_text(nx ? `${glyph}${nx.arrow}${fmtTime(nx.time)}`
+                                : `${glyph}>1d`);
+                top.show();
+                bot.hide();
+            }
+            return true;
+        };
+        const sunShown  = fillColumn(this._sunTop, this._sunBot,
+            "☀", this.showSunrise, this.showBothSun, sunEv);
+        const moonShown = fillColumn(this._moonTop, this._moonBot,
+            "☾", this.showMoonrise, this.showBothMoon, moonEv);
+        this.set_applet_label(sunShown || moonShown ? "" : "☀☾");
 
         const jd      = Astronomy.julianDay(now);
         const sunLon  = Astronomy.sunLongitude(jd);
@@ -154,16 +426,34 @@ class OrlojApplet extends Applet.TextApplet {
         for (const name of ["Mercury", "Venus", "Mars", "Jupiter", "Saturn"])
             planetRAs[name] = Astronomy.eclipticToEquatorial(planets[name], 0, jd).ra;
 
-        const civilHour = now.getHours() + now.getMinutes() / 60
-                        + now.getSeconds() / 3600;
+        const nowTz = toTz(now);
+        const civilHour = nowTz.get_hour() + nowTz.get_minute() / 60
+                        + nowTz.get_second() / 3600;
 
         const ss = Astronomy.sunriseSunset(now, lat, lon);
         // Clock hour → dial degrees: noon = 0°, 15°/hr clockwise.
         const dialFromCivil = (date) => {
             if (!date) return null;
-            const h = date.getHours() + date.getMinutes() / 60;
+            const dt = toTz(date);
+            const h = dt.get_hour() + dt.get_minute() / 60;
             return (h - 12) * 15;
         };
+
+        // Dial center readout: local sidereal time by default (the original
+        // behavior), or civil time in the display zone when "Use Local
+        // Sidereal Time" is off.
+        let centerText, centerSub;
+        if (this.useLst) {
+            const lstHours = lstDeg / 15;
+            const lh = Math.floor(lstHours);
+            const lm = Math.floor((lstHours - lh) * 60);
+            centerText = String(lh).padStart(2, "0") + ":"
+                       + String(lm).padStart(2, "0");
+            centerSub = "LST";
+        } else {
+            centerText = nowTz.format("%H:%M");
+            centerSub = nowTz.get_timezone_abbreviation();
+        }
 
         const altitudes = {
             Sun:     Astronomy.apparentAltitude(jd, sunLon,           0, lat, lon),
@@ -187,12 +477,26 @@ class OrlojApplet extends Applet.TextApplet {
             zodiacBoundaryRAs: this._zodiacBoundaryRAs,
             zodiacMidRAs:      this._zodiacMidRAs,
             timeHandAngle:     (civilHour - 12) * 15, // civil time
+            civilText:         nowTz.format("%H:%M"),
+            tzAbbrev:          nowTz.get_timezone_abbreviation(),
+            centerText:        centerText,
+            centerSub:         centerSub,
             sunriseDialAngle:  dialFromCivil(ss && ss.rise),
             sunsetDialAngle:   dialFromCivil(ss && ss.set),
             lstDeg:            lstDeg,
             accent:            Theme.parseColor(this.accentColor, Theme.ACCENT_DEFAULT),
             altitudes:         altitudes
         };
+
+        if (this.showMoonPhase) {
+            const illum = (1 - Math.cos(moonPh * Math.PI / 180)) / 2;
+            this._moonPhaseLabel.set_text(
+                `${Math.round(illum * 100)}% ${Math.round(moonPh)}°`);
+            this._moonBox.show();
+            this._moonPhaseArea.queue_repaint();
+        } else {
+            this._moonBox.hide();
+        }
 
         this._drawingArea.queue_repaint();
     }
@@ -226,6 +530,18 @@ class OrlojApplet extends Applet.TextApplet {
         return Clutter.EVENT_PROPAGATE;
     }
 
+    _onMoonPhaseRepaint(area) {
+        if (!this._state) return;
+        const cr = area.get_context();
+        try {
+            const [w, h] = area.get_surface_size();
+            Dial.drawMoonGlyph(cr, w / 2, h / 2,
+                Math.min(w, h) / 2 - 1.5, this._state.moonPhaseAngle);
+        } finally {
+            cr.$dispose();
+        }
+    }
+
     _onRepaint(area) {
         const cr = area.get_context();
         const [w, h] = area.get_surface_size();
@@ -251,6 +567,10 @@ class OrlojApplet extends Applet.TextApplet {
         if (this._timer) {
             Mainloop.source_remove(this._timer);
             this._timer = null;
+        }
+        if (this._httpSession) {
+            this._httpSession.abort();
+            this._httpSession = null;
         }
         if (this._tooltip) this._tooltip.destroy();
         if (this._settings) this._settings.finalize();

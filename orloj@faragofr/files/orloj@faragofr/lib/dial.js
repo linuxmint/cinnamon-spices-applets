@@ -190,13 +190,10 @@ function drawCenter(cr, cx, cy, ri, s) {
     cr.fill();
     strokeCircle(cr, cx, cy, ri, Theme.FAINT, Theme.HAIRLINE);
 
-    var hours = s.lstDeg / 15;
-    var hh = Math.floor(hours);
-    var mm = Math.floor((hours - hh) * 60);
-    var lst = String(hh).padStart(2, "0") + ":" + String(mm).padStart(2, "0");
-
-    drawText(cr, cx, cy - 4, lst, 11, Theme.FOREGROUND, "center");
-    drawText(cr, cx, cy + 9, "LST",  6, Theme.DIM,        "center");
+    // Local sidereal time by default, or civil time in the applet's display
+    // zone; assembled in applet.js so the whole clock shares one zone.
+    drawText(cr, cx, cy - 4, s.centerText || "--:--", 11, Theme.FOREGROUND, "center");
+    drawText(cr, cx, cy + 9, s.centerSub  || "",       6, Theme.DIM,        "center");
 }
 
 // --- Celestial bodies ------------------------------------------------------
@@ -370,9 +367,9 @@ var hitTest = function(width, height, s, x, y) {
         var handDiff = ((angle - s.timeHandAngle) % 360 + 360) % 360;
         if (handDiff > 180) handDiff = 360 - handDiff;
         if (handDiff < 3) {
-            var hh = String(s.now.getHours()).padStart(2, "0");
-            var mm = String(s.now.getMinutes()).padStart(2, "0");
-            return "Civil time " + hh + ":" + mm;
+            var when = s.civilText || "--:--";
+            var zone = s.tzAbbrev ? " " + s.tzAbbrev : "";
+            return "Civil time " + when + zone;
         }
     }
 
