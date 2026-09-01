@@ -20,7 +20,7 @@ class ApplicationsItem extends PopupMenu.PopupMenuSection {
 
         this._headerLabel = new St.Label({
             text: _("Applications"),
-            style_class: "modern-sound-applications-title"
+            style_class: "popup-inactive-menu-item modern-sound-applications-title"
         });
         if (this._headerLabel.clutter_text)
             this._headerLabel.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;

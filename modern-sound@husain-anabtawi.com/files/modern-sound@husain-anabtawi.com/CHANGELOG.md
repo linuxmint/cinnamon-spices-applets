@@ -2,6 +2,31 @@
 
 Release notes for **Modern Sound**.
 
+## [1.3.0] — 2026-08-06
+
+### Added
+
+- **Middle-click actions** — configure plain and Shift+middle-click (mute output/input, combined mute, play/pause).
+- **100% mark on master slider** when overamplification is enabled in system sound settings.
+- **Sound Change Effects** settings — optional volume change sound (output only; mic stays silent).
+- **Volume OSD on panel scroll** — optional on-screen level indicator (respects Cinnamon media-keys OSD setting).
+- **Panel tooltip option** — show `Volume: N%` or **Sound** only.
+- **Shift + scroll on panel icon** — adjust mic volume; plain scroll adjusts output.
+- **Volume scroll step** — configurable 1–10% for panel scroll and menu sliders.
+- **Invert scroll direction** — optional reversal for panel scroll and menu sliders.
+
+### Changed
+
+- **Theme-native styling** — menu uses Cinnamon shell theme classes (`popup-slider-menu-item`, `popup-device-menu-item`); layout-only custom CSS.
+- Volume sliders refactored to **`PopupSliderMenuItem`** (official sound applet pattern).
+
+### Fixed
+
+- Shared scroll math aligned with Cinnamon (`step × norm / max`) for overamplification-aware scrolling.
+- Overamplification GSettings listener disconnected when the applet is removed from the panel.
+
+---
+
 ## [1.2.0] — 2026-08-03
 
 ### Added
