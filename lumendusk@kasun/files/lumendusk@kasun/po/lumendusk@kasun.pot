@@ -1,0 +1,283 @@
+# Lumendusk translation template.
+# Copyright (C) 2026 Kasun Sampath
+# Distributed under the MIT license, same as Lumendusk itself.
+#
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: lumendusk 0.2.1\n"
+"Report-Msgid-Bugs-To: https://github.com/Kasun24/lumendusk/issues\n"
+"POT-Creation-Date: 2026-08-12 19:38+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:141
+msgid "Lumendusk — auto theme, night light & brightness"
+msgstr ""
+
+#: applet.js:329
+msgid "Engine not found — run install.sh"
+msgstr ""
+
+#: applet.js:336
+#, javascript-format
+msgid "Looked in %s and on PATH"
+msgstr ""
+
+#: applet.js:340
+msgid "Lumendusk — engine not installed"
+msgstr ""
+
+#. settings-schema.json->section_auto->title
+#: applet.js:347
+msgid "Automatic"
+msgstr ""
+
+#. settings-schema.json->section_manual->title
+#: applet.js:351
+msgid "Manual"
+msgstr ""
+
+#. settings-schema.json->theme_day->options
+#. settings-schema.json->theme_night->options
+#: applet.js:364
+msgid "Light"
+msgstr ""
+
+#. settings-schema.json->theme_day->options
+#. settings-schema.json->theme_night->options
+#: applet.js:368
+msgid "Dark"
+msgstr ""
+
+#. settings-schema.json->section_nightlight->title
+#: applet.js:375
+msgid "Night light"
+msgstr ""
+
+#: applet.js:391
+msgid "Brightness (all monitors)"
+msgstr ""
+
+#: applet.js:404
+msgid "Apply day/night now"
+msgstr ""
+
+#: applet.js:409
+msgid "Settings…"
+msgstr ""
+
+#: applet.js:414
+msgid "Open config file"
+msgstr ""
+
+#: applet.js:452
+msgid "Lumendusk — automatic (sunrise and sunset)"
+msgstr ""
+
+#: applet.js:453
+msgid "Lumendusk — automatic (fixed times)"
+msgstr ""
+
+#: applet.js:459
+msgid "Lumendusk — manual (dark)"
+msgstr ""
+
+#: applet.js:460
+msgid "Lumendusk — manual (light)"
+msgstr ""
+
+#: applet.js:500
+msgid "Following sunrise and sunset · night"
+msgstr ""
+
+#: applet.js:501
+msgid "Following sunrise and sunset · day"
+msgstr ""
+
+#: applet.js:504
+msgid "Following fixed times · night"
+msgstr ""
+
+#: applet.js:505
+msgid "Following fixed times · day"
+msgstr ""
+
+#. metadata.json->name
+msgid "Lumendusk"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Automatic dark/light theme, night light, and monitor brightness by time of "
+"day."
+msgstr ""
+
+#. settings-schema.json->general->title
+msgid "Mode"
+msgstr ""
+
+#. settings-schema.json->section_control->title
+msgid "Decide day and night"
+msgstr ""
+
+#. settings-schema.json->screen->title
+msgid "Screen"
+msgstr ""
+
+#. settings-schema.json->section_appearance->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->section_brightness->title
+msgid "Brightness"
+msgstr ""
+
+#. settings-schema.json->control->description
+msgid "Lumendusk should"
+msgstr ""
+
+#. settings-schema.json->control->options
+msgid "Adjust my desktop automatically"
+msgstr ""
+
+#. settings-schema.json->control->options
+msgid "Leave it to me — I'll pick dark or light"
+msgstr ""
+
+#. settings-schema.json->control->tooltip
+msgid "You can switch between these from the panel menu at any time."
+msgstr ""
+
+#. settings-schema.json->mode->description
+msgid "Tell day from night by"
+msgstr ""
+
+#. settings-schema.json->mode->options
+msgid "Fixed times"
+msgstr ""
+
+#. settings-schema.json->mode->options
+msgid "Sunrise and sunset"
+msgstr ""
+
+#. settings-schema.json->mode->tooltip
+msgid ""
+"Sunrise and sunset are worked out offline from the location below, and shift"
+" through the year."
+msgstr ""
+
+#. settings-schema.json->location_help->description
+msgid ""
+"Only used for sunrise and sunset. \"Detect\" reads your system timezone — "
+"accurate to the nearest major city, which is within a minute or two of the "
+"real sunset. Correct it by hand if you want it exact."
+msgstr ""
+
+#. settings-schema.json->latitude->units
+msgid "°N"
+msgstr ""
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr ""
+
+#. settings-schema.json->longitude->units
+msgid "°E"
+msgstr ""
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr ""
+
+#. settings-schema.json->detect_location->description
+msgid "Detect from my timezone"
+msgstr ""
+
+#. settings-schema.json->fixed_help->description
+msgid "24-hour times, e.g. 18:00."
+msgstr ""
+
+#. settings-schema.json->dark_start->description
+msgid "Go dark at"
+msgstr ""
+
+#. settings-schema.json->light_start->description
+msgid "Go light at"
+msgstr ""
+
+#. settings-schema.json->manual_help->description
+msgid ""
+"Pick Light or Dark from the panel menu and it stays that way — nothing "
+"changes it on its own. The night light becomes a switch in that menu too, so"
+" you decide when the screen is warmed. Switch back to Automatic whenever you"
+" like."
+msgstr ""
+
+#. settings-schema.json->appearance_help->description
+msgid ""
+"Prefer dark all day? Set both to Dark — the night light and brightness still"
+" follow the time of day."
+msgstr ""
+
+#. settings-schema.json->theme_day->description
+msgid "Daytime appearance"
+msgstr ""
+
+#. settings-schema.json->theme_night->description
+msgid "Night-time appearance"
+msgstr ""
+
+#. settings-schema.json->nightlight_help->description
+msgid ""
+"How yellow the screen goes when the night light is on. Drag left for a "
+"deeper yellow, right for closer to normal daylight. In Manual mode you "
+"switch the night light on and off from the panel menu; this sets the colour "
+"either way."
+msgstr ""
+
+#. settings-schema.json->nightlight_enabled->description
+msgid "Warm the screen automatically at night"
+msgstr ""
+
+#. settings-schema.json->nightlight_temperature->units
+msgid "K"
+msgstr ""
+
+#. settings-schema.json->nightlight_temperature->description
+msgid "Amount of yellow"
+msgstr ""
+
+#. settings-schema.json->nightlight_temperature->tooltip
+msgid "1000 K is a deep amber; 6500 K is normal daylight (no tint)."
+msgstr ""
+
+#. settings-schema.json->brightness_help->description
+msgid ""
+"These levels are applied at each day/night transition, alongside the theme "
+"and night light. External monitors need ddcutil and DDC/CI; a monitor that "
+"doesn't respond is skipped and the rest still change."
+msgstr ""
+
+#. settings-schema.json->brightness_enabled->description
+msgid "Change brightness with the time of day"
+msgstr ""
+
+#. settings-schema.json->brightness_day->units
+#. settings-schema.json->brightness_night->units
+msgid "%"
+msgstr ""
+
+#. settings-schema.json->brightness_day->description
+msgid "Daytime brightness"
+msgstr ""
+
+#. settings-schema.json->brightness_night->description
+msgid "Night-time brightness"
+msgstr ""
