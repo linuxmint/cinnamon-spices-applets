@@ -15,24 +15,7 @@ var POMODORO_FOCUS_FRAME_BOTTOM_SAFE = "border-bottom: 0px;";
 var POMODORO_FOCUS_FRAME_NORMAL_STYLE = `border: 2px solid rgba(214, 152, 48, 0.72); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: transparent;`;
 var POMODORO_FOCUS_FRAME_WARNING_STYLE = `border: 2px solid rgba(235, 132, 35, 0.86); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: transparent;`;
 var POMODORO_BREAK_OVER_FRAME_STYLE = `border: 2px solid rgba(108, 224, 148, 0.70); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: rgba(96, 214, 139, 0.012);`;
-var POMODORO_FOCUS_FRAME_PULSE_INTERVAL_MS = 250;
 var POMODORO_FOCUS_FRAME_TRANSITION = "transition-duration: 220ms; transition-timing-function: ease-in-out;";
-var POMODORO_FOCUS_FRAME_PULSE_STYLES = [
-    `border: 2px solid rgba(255, 149, 64, 0.68); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: transparent; ${POMODORO_FOCUS_FRAME_TRANSITION}`,
-    `border: 2px solid rgba(255, 159, 68, 0.78); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: rgba(255, 190, 64, 0.010); ${POMODORO_FOCUS_FRAME_TRANSITION}`,
-    `border: 2px solid rgba(255, 176, 82, 0.88); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: rgba(255, 190, 64, 0.018); ${POMODORO_FOCUS_FRAME_TRANSITION}`,
-    `border: 2px solid rgba(255, 194, 96, 0.96); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: rgba(255, 190, 64, 0.026); ${POMODORO_FOCUS_FRAME_TRANSITION}`,
-    `border: 2px solid rgba(255, 176, 82, 0.88); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: rgba(255, 190, 64, 0.018); ${POMODORO_FOCUS_FRAME_TRANSITION}`,
-    `border: 2px solid rgba(255, 159, 68, 0.78); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: rgba(255, 190, 64, 0.010); ${POMODORO_FOCUS_FRAME_TRANSITION}`
-];
-var POMODORO_BREAK_FRAME_PULSE_STYLES = [
-    `border: 2px solid rgba(72, 188, 117, 0.62); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: transparent; ${POMODORO_FOCUS_FRAME_TRANSITION}`,
-    `border: 2px solid rgba(82, 198, 125, 0.72); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: rgba(96, 214, 139, 0.008); ${POMODORO_FOCUS_FRAME_TRANSITION}`,
-    `border: 2px solid rgba(92, 208, 134, 0.84); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: rgba(96, 214, 139, 0.016); ${POMODORO_FOCUS_FRAME_TRANSITION}`,
-    `border: 2px solid rgba(108, 224, 148, 0.94); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: rgba(96, 214, 139, 0.024); ${POMODORO_FOCUS_FRAME_TRANSITION}`,
-    `border: 2px solid rgba(92, 208, 134, 0.84); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: rgba(96, 214, 139, 0.016); ${POMODORO_FOCUS_FRAME_TRANSITION}`,
-    `border: 2px solid rgba(82, 198, 125, 0.72); ${POMODORO_FOCUS_FRAME_BOTTOM_SAFE} background-color: rgba(96, 214, 139, 0.008); ${POMODORO_FOCUS_FRAME_TRANSITION}`
-];
 var POMODORO_FOCUS_FRAME_STYLE = POMODORO_FOCUS_FRAME_NORMAL_STYLE;
 // Flow Soft Landing "overrun": a focus pomodoro has ended but the user is still
 // working, so we hold instead of breaking. A calm, dimmed sage frame — gentler

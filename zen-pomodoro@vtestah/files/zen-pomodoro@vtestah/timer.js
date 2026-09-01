@@ -217,6 +217,10 @@ class Timer {
         return this._currentTickCount;
     }
 
+    getTimerLimit() {
+        return this._timerLimit;
+    }
+
     // Extend (or shorten) a running or paused timer by some ticks, in place,
     // without restarting it. Used by the "+N min" break action.
     addTime(ticks) {
@@ -240,6 +244,8 @@ class Timer {
         }
         this.emit('timer-running');
         this.emit('timer-tick');
+        // Defensive: never leak a previous tick source if _startTimer runs twice.
+        this._clearTickTimeout();
         this._tickTimeout = Mainloop.timeout_add_seconds(1, this._tick.bind(this));
     }
 
@@ -277,3 +283,9 @@ class Timer {
 }
 
 Signals.addSignalMethods(Timer.prototype);
+
+// Node / CommonJS export for the unit tests (tests/js/timer.test.js). In the
+// Cinnamon (GJS) runtime `module` is undefined, so this is a no-op there.
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { Timer: Timer, TimerQueue: TimerQueue };
+}

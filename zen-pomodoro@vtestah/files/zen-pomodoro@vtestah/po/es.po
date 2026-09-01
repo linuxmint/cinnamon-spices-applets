@@ -56,6 +56,9 @@ msgstr "DESCANSO EN PAUSA"
 msgid "BREAK OVER"
 msgstr "FIN DEL DESCANSO"
 
+msgid "FOCUS OVER"
+msgstr "ENFOQUE FINALIZADO"
+
 #: applet.js:1023 applet.js:1083 menu.js:214 menu.js:738
 msgid "Ready to focus"
 msgstr "Listo para enfocar"
@@ -63,6 +66,9 @@ msgstr "Listo para enfocar"
 #: applet.js:1041
 msgid "Short break running"
 msgstr "Descanso corto en marcha"
+
+msgid "Focus finished — Break ready"
+msgstr "Enfoque finalizado — Pausa lista"
 
 #: applet.js:1044
 msgid "Short break paused"
@@ -300,13 +306,17 @@ msgstr "Listo"
 
 #: features.js:204
 #, javascript-format
-msgid "%d focus blocks today — great work!"
-msgstr "%d bloques de enfoque hoy — ¡buen trabajo!"
+msgid "%d focus block today — great work!"
+msgid_plural "%d focus blocks today — great work!"
+msgstr[0] "%d bloques de enfoque hoy — ¡buen trabajo!"
+msgstr[1] "%d bloques de enfoque hoy — ¡buen trabajo!"
 
 #: features.js:206
 #, javascript-format
 msgid "🔥 %d-day streak"
-msgstr "🔥 racha de %d días"
+msgid_plural "🔥 %d-day streak"
+msgstr[0] "🔥 racha de %d días"
+msgstr[1] "🔥 racha de %d días"
 
 #: features.js:208
 msgid "Daily goal reached 🍅"
@@ -707,8 +717,10 @@ msgstr "Meta diaria alcanzada — %d hoy. Bien hecho."
 
 #: features.js:1492
 #, javascript-format
-msgid "%d interruptions this week — what keeps pulling you away?"
-msgstr "%d interrupciones esta semana — ¿qué te sigue distrayendo?"
+msgid "%d interruption this week — what keeps pulling you away?"
+msgid_plural "%d interruptions this week — what keeps pulling you away?"
+msgstr[0] "%d interrupciones esta semana — ¿qué te sigue distrayendo?"
+msgstr[1] "%d interrupciones esta semana — ¿qué te sigue distrayendo?"
 
 #: features.js:1495 features.js:1815
 #, javascript-format
@@ -723,8 +735,10 @@ msgstr "La mayor parte del enfoque fue a «%s»."
 
 #: features.js:1500
 #, javascript-format
-msgid "%d pomodoros this week. Keep it going."
-msgstr "%d pomodoros esta semana. Sigue así."
+msgid "%d pomodoro this week. Keep it going."
+msgid_plural "%d pomodoros this week. Keep it going."
+msgstr[0] "%d pomodoros esta semana. Sigue así."
+msgstr[1] "%d pomodoros esta semana. Sigue así."
 
 #: features.js:1501
 msgid "Start a focus session — your insights will appear here."
@@ -1765,17 +1779,21 @@ msgstr ""
 "Mostrar diálogos emergentes al final de cada fase (desactivado: silencioso, "
 "solo señales en pantalla)."
 
-#. settings-schema.json->auto_start_next->description
-msgid "Automatically start the next phase"
-msgstr "Iniciar automáticamente la siguiente fase"
+#. settings-schema.json->auto_start_break->description
+msgid "Automatically start breaks"
+msgstr "Iniciar pausas automáticamente"
 
-#. settings-schema.json->auto_start_next->tooltip
-msgid ""
-"When a phase ends, start the next one (focus or break) automatically instead"
-" of waiting."
-msgstr ""
-"Cuando una fase termina, iniciar automáticamente la siguiente (enfoque o "
-"descanso) en vez de esperar."
+#. settings-schema.json->auto_start_break->tooltip
+msgid "When a focus phase ends, start the break automatically."
+msgstr "Cuando termina una fase de enfoque, inicia la pausa automáticamente."
+
+#. settings-schema.json->auto_start_pomodoro->description
+msgid "Automatically start focus after a break"
+msgstr "Iniciar enfoque automáticamente después de una pausa"
+
+#. settings-schema.json->auto_start_pomodoro->tooltip
+msgid "When a break ends, start the next focus phase automatically."
+msgstr "Cuando termina una pausa, inicia la siguiente fase de enfoque automáticamente."
 
 #. settings-schema.json->panel_icon_style->description
 msgid "Panel icon"
@@ -2109,13 +2127,14 @@ msgstr ""
 "Desactivar las animaciones de enfoque (aparición, pulso, respiración)."
 
 #. settings-schema.json->menu_font_scale->description
-msgid "Menu font scale (%)"
-msgstr "Escala de fuente del menú (%)"
+msgid "Font scale (%)"
+msgstr "Escala de fuente (%)"
 
 #. settings-schema.json->menu_font_scale->tooltip
-msgid "Make the applet menu's text larger or smaller (100% = default size)."
+msgid ""
+"Scale the text in the menu, dialogs and statistics (100% = default size)."
 msgstr ""
-"Hacer el texto del menú del applet más grande o más pequeño (100% = tamaño "
+"Escala el texto del menú, los diálogos y las estadísticas (100 % = tamaño "
 "predeterminado)."
 
 #. settings-schema.json->preview_appearance_button->description
@@ -2948,3 +2967,150 @@ msgid ""
 msgstr ""
 "Elige tu propio sonido ambiente en bucle. Déjalo vacío para el ruido marrón "
 "integrado."
+
+msgid ""
+"Focus spotlight is on — every other window is dimmed so the one you're "
+"working in stands out. Slide your pointer to the top of the screen to see "
+"the time left and a way out."
+msgstr ""
+"El foco de concentración está activo: las demás ventanas se atenúan para que"
+" destaque aquella en la que trabajas. Lleva el puntero al borde superior de "
+"la pantalla para ver el tiempo restante y una salida."
+
+msgid ""
+"Focus spotlight is armed. When your next focus session starts, every window "
+"except the one you're working in dims, so your task stands out. Slide your "
+"pointer to the top of the screen to see the time left and a way out."
+msgstr ""
+"El foco de concentración está preparado. Cuando empiece tu próxima sesión, "
+"todas las ventanas excepto en la que trabajas se atenúan para que destaque "
+"tu tarea. Lleva el puntero al borde superior de la pantalla para ver el "
+"tiempo restante y una salida."
+
+msgid "Play the ticking sound"
+msgstr "Reproducir el tictac"
+
+msgid "Ticking sound file"
+msgstr "Archivo del sonido de tictac"
+
+msgid "Volume"
+msgstr "Volumen"
+
+msgid "Play a sound when a break starts"
+msgstr "Reproducir un sonido al empezar un descanso"
+
+msgid "Break sound file"
+msgstr "Archivo del sonido de descanso"
+
+msgid "Play a warning before focus ends"
+msgstr "Reproducir un aviso antes de que termine el enfoque"
+
+msgid "Warning lead time (seconds)"
+msgstr "Antelación del aviso (segundos)"
+
+msgid "Warning sound file"
+msgstr "Archivo del sonido de aviso"
+
+msgid "Play a sound when focus starts"
+msgstr "Reproducir un sonido al empezar el enfoque"
+
+msgid "Start sound file"
+msgstr "Archivo del sonido de inicio"
+
+msgid "Chime interval (seconds)"
+msgstr "Intervalo del repique (segundos)"
+
+msgid "Last 7 days"
+msgstr "Últimos 7 días"
+
+msgid "Last 7 days: %d 🍅 · %s · best weekday %s"
+msgstr "Últimos 7 días: %d 🍅 · %s · mejor día de la semana %s"
+
+msgid "Last 30 days: %d 🍅 · %s · best day ever %d 🍅"
+msgstr "Últimos 30 días: %d 🍅 · %s · mejor día histórico %d 🍅"
+
+msgid ""
+"Play a calming background soundscape while you focus (white/pink/brown "
+"noise, rain, sea, …). Choose the sound in Settings."
+msgstr ""
+"Sonido ambiental relajante mientras te concentras (ruido blanco/rosa/marrón,"
+" lluvia, mar, …). Elige el sonido en Ajustes."
+
+msgid "Ready to focus — middle-click to start"
+msgstr "Listo para enfocar — clic central para empezar"
+
+msgid "Ready to focus — click to start"
+msgstr "Listo para enfocar — clic para empezar"
+
+msgid "Setup applied ✓"
+msgstr "Configuración aplicada ✓"
+
+msgid "You can undo it anytime in Settings → “Undo last setup”."
+msgstr ""
+"Puedes deshacerlo cuando quieras en Ajustes → «Deshacer última "
+"configuración»."
+
+msgid "You can pick up to %d — deselect one first"
+msgstr "Puedes elegir hasta %d — deselecciona uno primero"
+
+msgid "Display and controls"
+msgstr "Visualización y controles"
+
+msgid "Distraction blocking"
+msgstr "Bloqueo de distracciones"
+
+msgid "Scroll to pause · middle-click to skip"
+msgstr "Rueda para pausar · clic central para saltar"
+
+msgid "Middle-click to skip"
+msgstr "Clic central para saltar"
+
+msgid ""
+"When on, the sites below are blocked right now and stay blocked until you "
+"turn this off. Run \"Set up passwordless blocking\" once so toggling doesn't"
+" ask for a password. Note: a browser using secure DNS (DoH) can bypass "
+"/etc/hosts blocking — disable the browser's secure DNS for it to take "
+"effect."
+msgstr ""
+"Cuando está activado, los sitios de abajo se bloquean ahora mismo y siguen "
+"bloqueados hasta que lo desactives. Ejecuta «Configurar bloqueo sin "
+"contraseña» una vez para que alternar no pida contraseña. Nota: un navegador"
+" con DNS seguro (DoH) puede eludir el bloqueo de /etc/hosts — desactiva el "
+"DNS seguro del navegador para que surta efecto."
+
+msgid ""
+"Manage blocked sites. A browser using secure DNS (DoH) can bypass this."
+msgstr ""
+"Gestionar sitios bloqueados. Un navegador con DNS seguro (DoH) puede "
+"eludirlo."
+
+msgid ""
+"Distraction blocking is ready — add sites in Settings → Advanced. Browsers "
+"using secure DNS (DoH) may bypass it."
+msgstr ""
+"El bloqueo de distracciones está listo — añade sitios en Ajustes → Avanzado."
+" Los navegadores con DNS seguro (DoH) pueden eludirlo."
+
+msgid "Authorization for toggling blocking"
+msgstr "Autorización para alternar el bloqueo"
+
+msgid "Never ask (passwordless)"
+msgstr "No preguntar nunca (sin contraseña)"
+
+msgid "Ask once per login session (safer)"
+msgstr "Preguntar una vez por sesión (más seguro)"
+
+msgid ""
+"How the one-time setup configures the pkexec policy: never ask "
+"(passwordless, convenient), or ask once per login session (safer — a stray "
+"process can't then toggle blocking silently). Re-run \"Set up passwordless "
+"blocking\" after changing this."
+msgstr ""
+"Cómo configura la instalación única la política de pkexec: no preguntar "
+"nunca (sin contraseña, cómodo) o preguntar una vez por sesión (más seguro — "
+"un proceso ajeno no podrá alternar el bloqueo en silencio). Vuelve a "
+"ejecutar «Configurar bloqueo sin contraseña» tras cambiarlo."
+
+msgid ""
+"Blocking set up — you'll be asked for your password once per login session."
+msgstr "Bloqueo configurado — se te pedirá la contraseña una vez por sesión."
