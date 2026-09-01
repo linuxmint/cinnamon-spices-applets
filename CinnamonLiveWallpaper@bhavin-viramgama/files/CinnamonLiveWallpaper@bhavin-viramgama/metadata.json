@@ -1,0 +1,8 @@
+{
+    "uuid": "CinnamonLiveWallpaper@bhavin-viramgama",
+    "name": "Cinnamon Live Wallpaper",
+    "description": "Sets a video as a live wallpaper using xwinwrap and mpv.",
+    "icon": "icon",
+    "multiversion": false,
+    "version": "1.0"
+}
