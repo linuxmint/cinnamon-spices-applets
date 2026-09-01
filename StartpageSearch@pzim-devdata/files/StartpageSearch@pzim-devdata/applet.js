@@ -36,7 +36,7 @@ SearchApplet.prototype = {
         bin.set_child(this.entry);
         this.menu.addActor(bin);
         this.entry.clutter_text.connect("activate",
-            Lang.bind(this, this._search));
+            () => this._search());
     },
 
     on_applet_clicked: function () {
@@ -53,7 +53,7 @@ SearchApplet.prototype = {
         let q = this.entry.get_text().trim();
         if (!q) return;
         let url = SEARCH_URL + encodeURIComponent(q);
-        Util.spawnCommandLine('xdg-open "' + url + '"');
+        Util.spawn(["xdg-open", url]);
         this.entry.set_text("");
         this.menu.close();
     }
