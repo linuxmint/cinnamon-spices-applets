@@ -59,6 +59,7 @@ MyApplet.prototype = {
 
             // Bind settings
             this.settings = new Settings.AppletSettings(this, metadata.uuid, this.instance_id);
+            this.settings.bind("openShortcut", "openShortcut", this._onShortcutChanged);
             this.settings.bind("historySize", "_historySize", this.settings_changed);
             this.settings.bind("autoPaste", "_autoPaste", this.settings_changed);
             this.settings.bind("pasteTool", "_pasteTool", this.settings_changed);
@@ -67,6 +68,8 @@ MyApplet.prototype = {
             this.settings.bind("leftClickAction", "_leftClickAction", this.settings_changed);
             this.settings.bind("middleClickAction", "_middleClickAction", this.settings_changed);
             this.settings.bind("rightClickAction", "_rightClickAction", this.settings_changed);
+
+            this._onShortcutChanged();
 
             // Set up UI Menu
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -214,38 +217,38 @@ MyApplet.prototype = {
         let historyPath = configDir + "/history.dat";
         let file = Gio.File.new_for_path(historyPath);
         let parent = file.get_parent();
-        
-        parent.make_directory_with_parents_async(GLib.PRIORITY_DEFAULT, null, (parentDir, dir_res) => {
-            try {
-                parentDir.make_directory_with_parents_finish(dir_res);
-            } catch (err) {
-                if (!err.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
-                    global.logError("Failed to create history directory: " + err);
-                    return;
-                }
+
+        // make_directory_with_parents_async is unavailable in this GJS version,
+        // so create the directory synchronously (fast, idempotent).
+        try {
+            parent.make_directory_with_parents(null);
+        } catch (err) {
+            if (!err.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                global.logError("Failed to create history directory: " + err);
+                return;
             }
-            
-            try {
-                let data = JSON.stringify(this._history, null, 2);
-                let bytes = GLib.Bytes.new(data);
-                file.replace_contents_async(
-                    bytes,
-                    null,
-                    false,
-                    Gio.FileCreateFlags.REPLACE_DESTINATION,
-                    null,
-                    (f, replace_res) => {
-                        try {
-                            f.replace_contents_finish(replace_res);
-                        } catch (err) {
-                            global.logError("Failed to save clipboard history contents: " + err);
-                        }
+        }
+
+        try {
+            let data = JSON.stringify(this._history, null, 2);
+            let bytes = GLib.Bytes.new(data);
+            file.replace_contents_async(
+                bytes,
+                null,
+                false,
+                Gio.FileCreateFlags.REPLACE_DESTINATION,
+                null,
+                (f, replace_res) => {
+                    try {
+                        f.replace_contents_finish(replace_res);
+                    } catch (err) {
+                        global.logError("Failed to save clipboard history contents: " + err);
                     }
-                );
-            } catch (e) {
-                global.logError("Failed to serialize history: " + e);
-            }
-        });
+                }
+            );
+        } catch (e) {
+            global.logError("Failed to serialize history: " + e);
+        }
     },
 
     _loadHistory: function () {
@@ -277,6 +280,27 @@ MyApplet.prototype = {
                 this._history = [];
             }
         });
+    },
+
+    _onShortcutChanged: function () {
+        if (this._keybindingId) {
+            Main.keybindingManager.removeHotKey(this._keybindingId);
+            this._keybindingId = null;
+        }
+
+        if (this.openShortcut && this.openShortcut !== "unassigned") {
+            this._keybindingId = UUID + "-" + this.instance_id;
+            Main.keybindingManager.addHotKey(
+                this._keybindingId,
+                this.openShortcut,
+                () => this._onOpenShortcut()
+            );
+        }
+    },
+
+    _onOpenShortcut: function () {
+        this._buildMenu();
+        this.menu.toggle();
     },
 
     on_applet_clicked: function (event) {
@@ -803,6 +827,10 @@ MyApplet.prototype = {
         if (this._monitorTimeout) {
             Mainloop.source_remove(this._monitorTimeout);
             this._monitorTimeout = null;
+        }
+        if (this._keybindingId) {
+            Main.keybindingManager.removeHotKey(this._keybindingId);
+            this._keybindingId = null;
         }
     }
 };
