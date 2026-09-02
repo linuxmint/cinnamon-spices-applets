@@ -1,0 +1,71 @@
+# Kurdish translations for PACKAGE package
+# PACKAGE Display CPU, memory and real-time network speed.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# user <ty18710388929@163.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: system-monitor-cinnamon@MainPoser 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-11 15:06+0800\n"
+"PO-Revision-Date: 2026-02-14 06:17:16+0000\n"
+"Last-Translator: user <ty18710388929@163.com>\n"
+"Language-Team: Kurdish\n"
+"Language: ku\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:34 applet.js:36
+msgid "Loading..."
+msgstr "بارکردن..."
+
+#. metadata.json->name
+msgid "System Monitor Cinnamon"
+msgstr "چاودێری سیستمی Cinnamon"
+
+#. metadata.json->description
+msgid "Display CPU, memory and real-time network speed"
+msgstr "نمایش CPU، یادگە و خێرایی تۆڕی کاتی ڕاستەقینە"
+
+#. settings-schema.json->show_network->description
+msgid "Show network speed"
+msgstr "نمایش خێرایی تۆڕ"
+
+#. settings-schema.json->refresh_interval->units
+msgid "seconds"
+msgstr "چرکە"
+
+#. settings-schema.json->refresh_interval->description
+msgid "Refresh interval"
+msgstr "ماوەی نوێکردنەوە"
+
+#. settings-schema.json->icon_theme->description
+msgid "Icon theme"
+msgstr "تیمی ئایکۆن"
+
+#. settings-schema.json->icon_theme->options
+msgid "Follow system"
+msgstr "شوێن سیستەم بکەو"
+
+#. settings-schema.json->icon_theme->options
+msgid "White"
+msgstr "سپی"
+
+#. settings-schema.json->icon_theme->options
+msgid "Black"
+msgstr "ڕەش"
+
+#. settings-schema.json->runner->description
+msgid "Animation icon"
+msgstr "ئایکۆنی جووڵاو"
+
+#. settings-schema.json->runner->options
+msgid "Cat"
+msgstr "پشیلە"
+
+#. settings-schema.json->runner->options
+msgid "Horse"
+msgstr "ئەسپ"
