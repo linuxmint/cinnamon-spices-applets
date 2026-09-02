@@ -19,7 +19,7 @@ SearchApplet.prototype = {
 
     _init: function (metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-        this.set_applet_icon_path(metadata.path + "/icon.png");
+        this.set_applet_icon_path(metadata.path + "/icon2.svg");
         this.set_applet_tooltip(_("Startpage Search"));
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
