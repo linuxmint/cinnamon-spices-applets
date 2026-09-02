@@ -1,4 +1,5 @@
 const Applet = imports.ui.applet;
+const Cinnamon = imports.gi.Cinnamon;
 const Clutter = imports.gi.Clutter;
 const Main = imports.ui.main;
 const Gio = imports.gi.Gio;
@@ -14,6 +15,8 @@ const UUID = "panel-drawer@ChrisB85";
 const XAPP_UUID = "xapp-status@cinnamon.org";
 const SYSTRAY_UUID = "systray@cinnamon.org";
 const SNI_WATCHER = "org.kde.StatusNotifierWatcher";
+const FLATPAK_SUFFIX = ":flatpak";
+const MENU_ICON_SIZE = 24;     // only ever asks the theme whether it has the icon
 
 const Drawer = imports.ui.appletManager.applets[UUID].drawer;
 
@@ -259,7 +262,9 @@ MyApplet.prototype = {
                     kind: "tray",
                     key: Drawer.trayKey(describe),
                     label: Drawer.trayLabel(describe),
-                    icon: proxy.icon_name || null,
+                    // Some apps park an icon on the panel with nothing drawn in
+                    // it (mintreport publishes " "), so fall back to the app.
+                    icon: (proxy.icon_name || "").trim() || this._appIcon(name),
                     actor: icon.actor,
                     proxy: proxy,
                     visible: icon.actor.visible
@@ -268,14 +273,14 @@ MyApplet.prototype = {
         }
 
         // wm_class is what Cinnamon itself keys an XEmbed icon on, and it is all
-        // these icons say about themselves - it doubles as the theme icon name.
-        this._systrayIcons().forEach(function(pair) {
+        // these icons say about themselves.
+        this._systrayIcons().forEach((pair) => {
             let wmClass = pair[1] || "unknown";
             items.push({
                 kind: "tray",
                 key: Drawer.systrayKey(wmClass),
                 label: wmClass,
-                icon: wmClass.toLowerCase(),
+                icon: this._appIcon(wmClass),
                 actor: pair[0],
                 visible: pair[0].visible,
                 xembed: true
@@ -581,8 +586,54 @@ MyApplet.prototype = {
         });
     },
 
-    /** Tray icons name themselves either by icon theme name or by a temp file path. */
+    /**
+     * The picture for a tray icon that does not hand one over - all we have is
+     * the name it goes by (WM_CLASS for XEmbed, bus name for the rest): the
+     * .desktop icon of the app answering to that name first, a theme icon of
+     * that name second. Flatpak apps register their WM_CLASS with a ":flatpak"
+     * suffix, and an app whose tray window is a separate binary calls itself
+     * "<app>-app" or "<app>-bin" there.
+     */
+    _appIcon: function(wmClass) {
+        let appSystem = Cinnamon.AppSystem.get_default();
+        let theme = Gtk.IconTheme.get_default();
+
+        let names = [wmClass, wmClass.toLowerCase()];
+        let trimmed = names[1].replace(/-(app|bin|desktop)$/, "");
+        if (trimmed && trimmed !== names[1])
+            names.push(trimmed);
+
+        for (let i = 0; i < names.length; i++) {
+            let name = names[i];
+            let app = appSystem.lookup_startup_wmclass(name)
+                   || appSystem.lookup_startup_wmclass(name + FLATPAK_SUFFIX)
+                   || appSystem.lookup_desktop_wmclass(name)
+                   || appSystem.lookup_desktop_wmclass(name + FLATPAK_SUFFIX);
+            let info = app && app.get_app_info();
+            let gicon = info && info.get_icon();
+            if (gicon)
+                return gicon;
+            // lookup_icon() is what St resolves an icon through, and it finds
+            // the legacy pixmap dirs the plain theme folders leave out.
+            if (theme.lookup_icon(name, MENU_ICON_SIZE, 0))
+                return name;
+        }
+
+        // Nothing claims the class - a generic icon still beats an empty slot.
+        return "application-x-executable";
+    },
+
+    /** Tray icons name themselves by GIcon, icon theme name or temp file path. */
     _dressIcon: function(iconActor, name) {
+        if (!name) {
+            iconActor.visible = false;
+            return;
+        }
+        if (typeof name !== "string") {
+            iconActor.gicon = name;
+            return;
+        }
+        name = name.trim();
         if (!name) {
             iconActor.visible = false;
             return;
