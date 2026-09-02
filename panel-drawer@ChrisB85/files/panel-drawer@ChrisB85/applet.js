@@ -381,10 +381,23 @@ MyApplet.prototype = {
     },
 
     /**
-     * An XEmbed tray icon is a real X window the app owns, and the panel drags
-     * it along on every frame the row moves - a round trip to the app each time,
-     * which stutters. So it is taken out of the row for the whole animation and
-     * put back once nothing is moving any more.
+     * An XEmbed tray icon cannot slide, and this is not worth trying again.
+     *
+     * It is a real GtkWindow the app owns. st_bin_allocate() clamps the child
+     * to its slot, and CinnamonGtkEmbed turns each allocation into a
+     * gdk_window_move_resize() plus a gtk_widget_size_allocate() on that
+     * window - so a slot that narrows is a round trip to the app on every
+     * frame, and AnyDesk and OpenRGB both stutter through the whole tween.
+     *
+     * What is free is not enough to build an animation out of. Opacity costs
+     * nothing (CinnamonGtkEmbed is a ClutterClone, so it is only redrawn), and
+     * neither does the row moving past (_cinnamon_embedded_window_allocate
+     * returns early unless the geometry really changed) - but fading the icon
+     * at full size and closing the empty slot afterwards was tried, and it
+     * still reads as a jump. Short of patching st-bin.c there is nothing here.
+     *
+     * So the icon leaves the row before it starts moving and comes back once
+     * nothing is moving any more.
      */
     _slideIn: function(item) {
         let actor = item.actor;
