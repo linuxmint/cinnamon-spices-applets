@@ -1,0 +1,5 @@
+ShutdownMenu-change@yoo
+Modify ShutdownMenuWithIcons@LLOBERA to make it easier to use.
+version: 1.0 (09-02-2026)
+License: GPLv3
+Copyright © 2026 yoo

@@ -1,0 +1,85 @@
+{
+    "panel_label": {
+        "type": "header",
+        "description": "Panel Icon"
+    },
+    "panel_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-shutdown-symbolic",
+        "description" : "Panel Icon"
+    },
+    "icon_size": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 16,
+        "max": 64,
+        "step": 2,
+        "description": "Panel icon size"
+    },
+
+    "quit_label": {
+        "type": "header",
+        "description": "Shutdown"
+    },
+    "quit": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Add quit to the menu"
+    },
+    "quit_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-shutdown",
+        "description" : "The quit icon",
+        "dependency" : "quit"
+    },
+    "quit_cmd": {
+        "type" : "entry",
+        "default" : "cinnamon-session-quit --power-off",
+        "description" : "The quit command",
+        "dependency" : "quit"
+    },
+    
+    "log_out_label": {
+        "type": "header",
+        "description": "Logout"
+    },
+    "log_out": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Add log out to the menu"
+    },
+    "log_out_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-log-out",
+        "description" : "The log out icon",
+        "dependency" : "log_out"
+    },
+    "log_out_cmd": {
+        "type" : "entry",
+        "default" : "cinnamon-session-quit --logout",
+        "description" : "The log out command",
+        "dependency" : "log_out"
+    },
+        
+    "screen_lock_label": {
+        "type": "header",
+        "description": "Screen lock"
+    },
+    "screen_lock": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Add screen lock to the menu"
+    },
+    "screen_lock_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-lock-screen",
+        "description" : "The screen lock icon",
+        "dependency" : "screen_lock"
+    },
+    "screen_lock_cmd": {
+        "type" : "entry",
+        "default" : "cinnamon-screensaver-command --lock",
+        "description" : "The screen lock command",
+        "dependency" : "screen_lock"
+    }
+}
