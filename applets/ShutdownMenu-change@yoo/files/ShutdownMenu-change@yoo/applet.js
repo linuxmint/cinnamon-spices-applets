@@ -1,6 +1,6 @@
 // name： ShutdownMenu-change
 // description： 修改 ShutdownMenuWithIcons@LLOBERA，使其更易于使用。
-// version: 1.0 (09-02-2026)
+// version: 1.1 (09-04-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
@@ -8,11 +8,15 @@ const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
+const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Util = imports.misc.util;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
+const Lang = imports.lang;
+const Main = imports.ui.main;          // 新增：用于 Expo / Scale
+const Cinnamon = imports.gi.Cinnamon;  // 新增：用于获取事件修饰键
 
 const UUID = "ShutdownMenu-change@yoo";
 const AppletUUID = "ShutdownMenu-change@yoo";
@@ -55,6 +59,9 @@ MyApplet.prototype = {
             this.menuManager.addMenu(this.menu);        
 
             this.createMenu();
+
+            // 滚轮事件
+            this.actor.connect('scroll-event', Lang.bind(this, this._on_scroll_event));
         }
         catch (e) {
             global.logError(e);
@@ -98,6 +105,16 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN,
             "screen_lock_cmd", "screen_lock_cmd", this.on_settings_changed, null
         );
+
+        // 新增：滚动切换工作区开关
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "scroll_switch", "scroll_switch", this.on_settings_changed, null
+        );
+
+        // 新增：中键点击动作
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "middle_click_action", "middle_click_action", this.on_settings_changed, null
+        );
     },
     
     createMenu: function() {
@@ -116,9 +133,6 @@ MyApplet.prototype = {
     createMenuItem: function(displayName, iconName, command) {
         var menuItem = new PopupMenuExtension.PopupImageLeftMenuItem(displayName, iconName, command);
         menuItem.connect("activate", function(actor, event) {
-            // As application variable is not accessible here, 
-            // the application variable is passed to the PopupImageLeftMenuItem ctor to be accessible throw the actor argument
-            // which is the menuItem itself
             Util.trySpawnCommandLine(actor.command);
         });
         this.menu.addMenuItem(menuItem);
@@ -127,6 +141,54 @@ MyApplet.prototype = {
     on_applet_clicked: function(event) {
         this.menu.toggle();        
     },
+
+    // ===== 新增：中键点击处理 =====
+    on_applet_middle_clicked: function(event) {
+        let action = this.middle_click_action || "nothing";
+        this.perform_action(action);
+    },
+    
+    perform_action: function(action) {
+        if (action == "show_expo") {
+            if (!Main.expo.animationInProgress)
+                Main.expo.toggle();
+        } else if (action == "show_scale") {
+            if (!Main.overview.animationInProgress)
+                Main.overview.toggle();
+        }
+        // "nothing" 或其他值则不执行任何操作
+    },
+    // ===== 新增结束 =====
+
+    // ===== 滚轮事件处理 =====
+    _on_scroll_event: function(actor, event) {
+        if (!this.scroll_switch) {
+            return true;
+        }
+
+        let direction = event.get_scroll_direction();
+        if (direction == Clutter.ScrollDirection.SMOOTH) {
+            return true;
+        }
+
+        let workspace_manager = global.screen;
+        let current_index = workspace_manager.get_active_workspace_index();
+        let n_workspaces = workspace_manager.n_workspaces;
+
+        if (n_workspaces < 2) {
+            return true;
+        }
+
+        if (direction == Clutter.ScrollDirection.UP) {
+            let target_index = (current_index - 1 + n_workspaces) % n_workspaces;
+            workspace_manager.get_workspace_by_index(target_index).activate(global.get_current_time());
+        } else if (direction == Clutter.ScrollDirection.DOWN) {
+            let target_index = (current_index + 1) % n_workspaces;
+            workspace_manager.get_workspace_by_index(target_index).activate(global.get_current_time());
+        }
+        return true;
+    },
+    // ===== 滚轮事件处理结束 =====
 
     on_settings_changed: function() {
         // 实时更新面板图标

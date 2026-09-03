@@ -1,8 +1,8 @@
 {
     "uuid": "ShutdownMenu-change@yoo",
     "name": "ShutdownMenu-change",
-    "description": "Modify ShutdownMenuWithIcons@LLOBERA to make it easier to use.",
-    "version": 1.0,
+    "description": "A Cinnamon panel applet providing shutdown menu with additional workspace switching and window/workspace selector via mouse interactions.Modify ShutdownMenuWithIcons@LLOBERA to make it easier to use.",
+    "version": 1.1,
     "author": "yoo",
-    "last-edited": 1788354823
+    "last-edited": 1788456202
 }

@@ -22,8 +22,8 @@ msgid "ShutdownMenu-change"
 msgstr "关机菜单（修改版）"
 
 #. metadata.json->description
-msgid "Modify ShutdownMenuWithIcons@LLOBERA to make it easier to use."
-msgstr "修改自 ShutdownMenuWithIcons@LLOBERA，使其更易于使用。"
+msgid "A Cinnamon panel applet providing shutdown menu with additional workspace switching and window/workspace selector via mouse interactions.Modify ShutdownMenuWithIcons@LLOBERA to make it easier to use."
+msgstr "一个 Cinnamon 面板小程序，提供关机菜单，并支持鼠标滚轮切换工作区、中键呼出工作区/窗口选择器。修改自 ShutdownMenuWithIcons@LLOBERA，使其更易于使用。"
 
 #: ../applet.js:66
 msgid "Shutdown Menu"
@@ -50,6 +50,26 @@ msgstr "面板图标"
 #: .settings:icon_size/description
 msgid "Panel icon size"
 msgstr "面板图标大小"
+
+#: settings-schema.json
+msgid "Switch workspace with mouse scroll"
+msgstr "使用鼠标滚轮切换工作区"
+
+#: settings-schema.json
+msgid "Middle click action"
+msgstr "鼠标中键单击动作"
+
+#: settings-schema.json
+msgid "Nothing"
+msgstr "无"
+
+#: settings-schema.json
+msgid "Show workspace selector (Expo)"
+msgstr "显示工作区选择器 (Expo)"
+
+#: settings-schema.json
+msgid "Show window selector (Scale)"
+msgstr "显示窗口选择器 (Scale)"
 
 #: .settings:quit_label/description
 msgid "Shutdown"

@@ -4,6 +4,8 @@
 // version: 1.1 (11-06-2013)
 // License: GPLv3
 // Copyright © 2013 Nicolas LLOBERA
+// This file is sourced from ShutdownMenuWithIcons@LLOBERA and has not been modified
+// 本文件来源于ShutdownMenuWithIcons@LLOBERA，未做修改
 
 const PopupMenu = imports.ui.popupMenu;
 

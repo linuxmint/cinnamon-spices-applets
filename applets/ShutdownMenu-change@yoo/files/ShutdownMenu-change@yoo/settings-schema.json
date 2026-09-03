@@ -16,6 +16,21 @@
         "step": 2,
         "description": "Panel icon size"
     },
+    "scroll_switch": {
+        "type" : "checkbox",
+        "default" : false,
+        "description" : "Switch workspace with mouse scroll"
+    },
+    "middle_click_action": {
+        "type" : "combobox",
+        "default" : "nothing",
+        "description" : "Middle click action",
+        "options" : {
+            "Nothing" : "nothing",
+            "Show workspace selector (Expo)" : "show_expo",
+            "Show window selector (Scale)" : "show_scale"
+        }
+    },
 
     "quit_label": {
         "type": "header",
