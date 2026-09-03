@@ -18,8 +18,8 @@ on the Startpage results page.
 - Automatic browser focus: raises and activates the browser window,
   whether minimized, backgrounded, or freshly started
 - Tooltips on every button
-- Zero dependencies. Pure Cinnamon API (cjs, St toolkit)
-- Translated (gettext): fr, de, es, it, nl, pt
+- Zero dependencies. Pure Cinnamon API
+- Translated: fr, de, es, it, nl, pt
 
 ## Dependencies
 
@@ -36,7 +36,7 @@ cp -r files/StartpageSearch@pzim-devdata/* \
       ~/.local/share/cinnamon/applets/StartpageSearch@pzim-devdata/
 ```
 
-Then right-click the panel -> Applets -> add "Startpage Search".
+Then Applets -> add "Startpage Search".
 
 ## Usage
 
@@ -110,6 +110,5 @@ const SEARCH_URL = "https://www.qwant.com/?q=";
 const SEARCH_URL = "https://searx.example.org/search?q=";
 ```
 
-After editing, reload the applet (right-click -> Reload, or restart
-Cinnamon with Ctrl+Alt+Esc).
+After editing, reload the applet, or restart Cinnamon with Ctrl+Alt+Esc).
 
