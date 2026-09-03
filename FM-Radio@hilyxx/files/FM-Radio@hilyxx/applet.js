@@ -521,6 +521,12 @@ class FMRadioApplet extends Applet.IconApplet {
         let channelName = currentChannel.getName().replace(/[^a-zA-Z0-9]/g, "_");
         let streamUrl = currentChannel.getLink();
         
+        // Prevent crash if the station has no valid URL
+        if (!streamUrl || typeof streamUrl !== "string" || streamUrl.trim() === "") {
+            this._showNotification(_("FM Radio"), _("Cannot record: This station has no valid URL."));
+            return;
+        }
+        
         let timestamp = GLib.DateTime.new_now_local().format("%Y-%m-%d_%H-%M-%S");
         let filename = `${recordDir}/${channelName}_${timestamp}.mp3`; 
 

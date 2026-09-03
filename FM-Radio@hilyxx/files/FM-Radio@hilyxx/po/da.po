@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FM-Radio@hilyxx 1.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-08-29 18:42+0200\n"
+"POT-Creation-Date: 2026-09-03 21:34+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
@@ -21,7 +21,7 @@ msgstr ""
 #. metadata.json->name
 #. applet.js:68 applet.js:140 applet.js:172 applet.js:211 applet.js:214
 #. applet.js:220 applet.js:242 applet.js:244 applet.js:249 applet.js:474
-#. applet.js:536 applet.js:562 applet.js:588 applet.js:609
+#. applet.js:526 applet.js:542 applet.js:568 applet.js:594 applet.js:615
 msgid "FM Radio"
 msgstr "FM-Radio"
 
@@ -85,15 +85,19 @@ msgstr "Venter …"
 msgid "Please start a radio station first to record it."
 msgstr "Start en radiostation for at optage den."
 
-#. applet.js:536
+#. applet.js:526
+msgid "Cannot record: This station has no valid URL."
+msgstr "Kan ikke optage: Denne station har ikke en gyldig URL."
+
+#. applet.js:542
 msgid "Recording started: "
 msgstr "Optagelse begyndte: "
 
-#. applet.js:562
+#. applet.js:568
 msgid "Error starting recording."
 msgstr "Der opstod en fejl ved start af optagelse."
 
-#. applet.js:588
+#. applet.js:594
 msgid "Recording finished and saved to the /FM-Radio folder."
 msgstr "Optagelsen er færdig og gemt i /FM-Radio-mappen."
 
