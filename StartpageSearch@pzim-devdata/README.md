@@ -113,7 +113,3 @@ const SEARCH_URL = "https://searx.example.org/search?q=";
 After editing, reload the applet (right-click -> Reload, or restart
 Cinnamon with Ctrl+Alt+Esc).
 
-## Source code
-
-Latest source in the
-[Cinnamon Spices repository](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/StartpageSearch@pzim-devdata).
