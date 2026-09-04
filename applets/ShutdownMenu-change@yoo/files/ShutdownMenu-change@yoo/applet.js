@@ -15,13 +15,12 @@ const Util = imports.misc.util;
 const Applet = imports.ui.applet;      
 const PopupMenu = imports.ui.popupMenu; 
 const Settings = imports.ui.settings;  
-const Lang = imports.lang;              
 const Main = imports.ui.main;          
 
 const UUID = "ShutdownMenu-change@yoo";
 const AppletUUID = "ShutdownMenu-change@yoo";
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
@@ -49,7 +48,7 @@ MyApplet.prototype = {
 
             this.createMenu();
 
-            this.actor.connect('scroll-event', Lang.bind(this, this._on_scroll_event));
+            this.actor.connect('scroll-event', this._on_scroll_event.bind(this));
         }
         catch (e) {
             global.logError(e);
@@ -117,13 +116,14 @@ MyApplet.prototype = {
 
         if (GLib.path_is_absolute(iconName)) {
             let file = Gio.file_new_for_path(iconName);
-            if (file.query_exists(null)) {
+            try {
+                file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
                 if (iconName.includes('-symbolic')) {
                     this.set_applet_icon_symbolic_path(iconName);
                 } else {
                     this.set_applet_icon_path(iconName);
                 }
-            } else {
+            } catch (e) {
                 this.set_applet_icon_symbolic_name("system-shutdown-symbolic");
             }
         } else {
@@ -142,7 +142,8 @@ MyApplet.prototype = {
 
     _iconThemeHasIcon: function(iconName) {
         let iconTheme = Gtk.IconTheme.get_default();
-        return iconTheme.has_icon(iconName);
+        let iconInfo = iconTheme.lookup_icon(iconName, 24, Gtk.IconLookupFlags.FORCE_SIZE);
+        return iconInfo !== null;
     },
 
     _updateIconSize: function() {
@@ -174,10 +175,11 @@ MyApplet.prototype = {
         if (iconName) {
             if (GLib.path_is_absolute(iconName)) {
                 let file = Gio.file_new_for_path(iconName);
-                if (file.query_exists(null)) {
+                try {
+                    file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
                     iconParam = new Gio.FileIcon({ file: file });
-                } else {
-                    iconParam = "image-missing"; 
+                } catch (e) {
+                    iconParam = "image-missing";
                 }
             } else {
                 iconParam = iconName;
@@ -217,15 +219,9 @@ MyApplet.prototype = {
     },
     
     _toggleDesktopIcons: function() {
-        let cmd = "gsettings get org.nemo.desktop show-desktop-icons";
-        let [success, stdout] = GLib.spawn_command_line_sync(cmd);
-        if (success) {
-            let current = stdout.toString().trim() === "true";
-            let newVal = current ? "false" : "true";
-            GLib.spawn_command_line_async("gsettings set org.nemo.desktop show-desktop-icons " + newVal);
-        } else {
-            GLib.spawn_command_line_async("gsettings set org.nemo.desktop show-desktop-icons true");
-        }
+        let nemoSettings = new Gio.Settings({ schema_id: 'org.nemo.desktop' });
+        let current = nemoSettings.get_boolean('show-desktop-icons');
+        nemoSettings.set_boolean('show-desktop-icons', !current);
     },
 
     _on_scroll_event: function(actor, event) {
