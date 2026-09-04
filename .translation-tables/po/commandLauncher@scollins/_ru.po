@@ -1,0 +1,15 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->command->description
+#: applet.js:96 applet.js:149
+msgid "Command"
+msgstr ""
+
+#. settings-schema.json->tooltipText->description
+msgid "Tooltip"
+msgstr ""

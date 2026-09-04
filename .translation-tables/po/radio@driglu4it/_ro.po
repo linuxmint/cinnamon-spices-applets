@@ -1,0 +1,115 @@
+# RADIO++
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Driglu4it, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-20 14:55-0500\n"
+"PO-Revision-Date: 2021-01-16 15:10+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n==0 || (n!=1 && n%100>=1 && "
+"n%100<=19) ? 1 : 2);\n"
+
+#. 4.6/RadioSearchWidget.py:48 6.4/RadioSearchWidget.py:48
+msgid "Find Radio Station"
+msgstr ""
+
+#. 4.6/RadioSearchWidget.py:53 6.4/RadioSearchWidget.py:53
+msgid "Add to My Stations"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"A radio applet with 1000's of searchable stations, mpris support, youtube-"
+"download function and more"
+msgstr ""
+
+#. 4.6->settings-schema.json->search-page->title
+#. 6.4->settings-schema.json->search-page->title
+msgid "Find Station"
+msgstr ""
+
+#. 4.6->settings-schema.json->my-stations-page->title
+#. 6.4->settings-schema.json->my-stations-page->title
+msgid "My Stations"
+msgstr ""
+
+#. 4.6->settings-schema.json->find-station-section->title
+#. 6.4->settings-schema.json->find-station-section->title
+msgid "Search Radio station"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-section->title
+#. 6.4->settings-schema.json->youtube-section->title
+msgid "YouTube Download"
+msgstr ""
+
+#. 4.6->settings-schema.json->icon-type->description
+#. 6.4->settings-schema.json->icon-type->description
+msgid "Icon type"
+msgstr ""
+
+#. 4.6->settings-schema.json->color-on->description
+#. 6.4->settings-schema.json->color-on->description
+msgid "Color of symbolic icon when playing a radio station"
+msgstr ""
+
+#. 4.6->settings-schema.json->color-paused->description
+#. 6.4->settings-schema.json->color-paused->description
+msgid "Color of symbolic icon while a radio station is paused"
+msgstr ""
+
+#. 4.6->settings-schema.json->channel-on-panel->description
+#. 6.4->settings-schema.json->channel-on-panel->description
+msgid "Show current radio station on the panel"
+msgstr ""
+
+#. 4.6->settings-schema.json->keep-volume-between-sessions->description
+#. 6.4->settings-schema.json->keep-volume-between-sessions->description
+msgid "Remember volume after stopping the radio"
+msgstr ""
+
+#. 4.6->settings-schema.json->initial-volume->description
+#. 6.4->settings-schema.json->initial-volume->description
+msgid "Initial volume"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->description
+#. 6.4->settings-schema.json->youtube-download-cli->description
+msgid "YouTube Download CLI tool"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->tooltip
+#. 6.4->settings-schema.json->youtube-download-cli->tooltip
+msgid "The CLI tool used to download songs from YouTube"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->options
+#. 6.4->settings-schema.json->youtube-download-cli->options
+msgid "yt-dlp"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->options
+#. 6.4->settings-schema.json->youtube-download-cli->options
+msgid "youtube-dl"
+msgstr ""
+
+#. 4.6->settings-schema.json->music-download-dir-select->description
+#. 6.4->settings-schema.json->music-download-dir-select->description
+msgid "Download directory"
+msgstr ""
+
+#. 4.6->settings-schema.json->music-download-dir-select->tooltip
+#. 6.4->settings-schema.json->music-download-dir-select->tooltip
+msgid "Songs downloaded from YouTube will be saved to this directory."
+msgstr ""

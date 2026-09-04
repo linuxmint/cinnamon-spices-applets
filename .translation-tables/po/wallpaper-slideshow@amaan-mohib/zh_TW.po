@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-08 19:11+0530\n"
+"PO-Revision-Date: 2025-09-12 01:13+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#: applet.js:81
+msgid "Wallpaper Slideshow"
+msgstr "桌布幻燈片"
+
+#: applet.js:207
+msgid "The wallpaper path does not exists!"
+msgstr "桌布路徑不存在！"
+
+#. settings-schema.json->head_delay->description
+#: applet.js:220
+msgid "Delay"
+msgstr "延遲"
+
+#: applet.js:238
+msgid "Open wallpapers directory"
+msgstr "開啟桌布資料夾"
+
+#: applet.js:251
+msgid "Next"
+msgstr "下一張"
+
+#: applet.js:260
+msgid "Previous"
+msgstr "上一張"
+
+#. settings-schema.json->head_paused->description
+#: applet.js:273
+msgid "Paused"
+msgstr "已暫停"
+
+#: applet.js:287
+msgid "Preferences"
+msgstr "偏好設定"
+
+#. metadata.json->description
+msgid "Starts a wallpaper slideshow persisting across reboots"
+msgstr "啟動桌布幻燈片播放，重新開機後仍會持續運作"
+
+#. settings-schema.json->head_path->description
+msgid "Wallpaper path"
+msgstr "桌布路徑"
+
+#. settings-schema.json->wallpaper_path->description
+msgid "Specify path of the wallpaper directory"
+msgstr "指定桌布資料夾的路徑"
+
+#. settings-schema.json->wallpaper_path->tooltip
+msgid "For example: /home/username/Pictures/wallpapers"
+msgstr "例如：/home/username/Pictures/wallpapers"
+
+#. settings-schema.json->wallpaper_delay->description
+msgid "Specify the delay to change the wallpaper (in seconds)"
+msgstr "指定更換桌布的延遲時間（以秒為單位）"
+
+#. settings-schema.json->wallpaper_delay->tooltip
+msgid "For example: 86400 for 24hrs"
+msgstr "例如：86400 表示 24 小時"
+
+#. settings-schema.json->head_timer->description
+msgid "Custom interval"
+msgstr "自訂間隔"
+
+#. settings-schema.json->wallpaper_custom_timer->description
+msgid "Specify a custom interval to check for updates"
+msgstr "指定檢查更新的自訂間隔時間"
+
+#. settings-schema.json->wallpaper_custom_timer->tooltip
+msgid "Default: 1hr"
+msgstr "預設：1 小時"
+
+#. settings-schema.json->wallpaper_timer->description
+msgid "Specify the interval (in seconds) to check for updates"
+msgstr "指定檢查更新的間隔時間（以秒為單位）"
+
+#. settings-schema.json->wallpaper_timer->tooltip
+msgid "For example: 3600 for 1hr"
+msgstr "例如：3600 表示 1 小時"
+
+#. settings-schema.json->wallpaper_paused->description
+msgid "Pause the wallpaper slideshow"
+msgstr "暫停桌布幻燈片播放"

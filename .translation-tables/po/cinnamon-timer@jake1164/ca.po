@@ -1,0 +1,305 @@
+# TIMER WITH NOTIFICATIONS
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# axos88, 2017
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-20 11:11-0400\n"
+"PO-Revision-Date: 2024-07-22 01:02+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 3.4/applet.js:218 3.4/applet.js:380 2.6/applet.js:88 2.6/applet.js:303
+#. 6.4/applet.js:209 6.4/applet.js:372
+msgid "Timer"
+msgstr "Temporitzador"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#. 6.4->settings-schema.json->preset_time->columns->title
+#. 3.4/applet.js:224 3.4/applet.js:263 3.4/applet.js:357 2.6/applet.js:220
+#. 2.6/applet.js:301 6.4/applet.js:215 6.4/applet.js:255 6.4/applet.js:349
+msgid "Hours"
+msgstr "Hores"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#. 6.4->settings-schema.json->preset_time->columns->title
+#. 3.4/applet.js:224 3.4/applet.js:264 3.4/applet.js:357 2.6/applet.js:94
+#. 2.6/applet.js:221 2.6/applet.js:301 6.4/applet.js:215 6.4/applet.js:256
+#. 6.4/applet.js:349
+msgid "Minutes"
+msgstr "Minuts"
+
+#. 3.4/applet.js:224 3.4/applet.js:357 2.6/applet.js:301 6.4/applet.js:215
+#. 6.4/applet.js:349
+msgid "and"
+msgstr "i"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#. 6.4->settings-schema.json->preset_time->columns->title
+#. 3.4/applet.js:224 3.4/applet.js:265 3.4/applet.js:357 2.6/applet.js:222
+#. 2.6/applet.js:301 6.4/applet.js:215 6.4/applet.js:257 6.4/applet.js:349
+msgid "Seconds"
+msgstr "Segons"
+
+#. 3.4/applet.js:241 2.6/applet.js:224 6.4/applet.js:233
+msgid "Reset"
+msgstr "Reiniciar"
+
+#. 3.4/applet.js:533 2.6/applet.js:450 6.4/applet.js:500
+msgid "Okay"
+msgstr "Ok"
+
+#. 3.4/applet.js:551 2.6/applet.js:468 6.4/applet.js:518
+msgid "Cinnamon Timer"
+msgstr "Temporitzador de Cinnamon"
+
+#. metadata.json->name
+msgid "Timer with notifications"
+msgstr "Temporitzador amb notificacions"
+
+#. metadata.json->description
+msgid "A timer app with visual and auditory notifications."
+msgstr "Una miniaplicació de temporització amb notificacions auditives."
+
+#. 3.4->settings-schema.json->page1->title
+#. 6.4->settings-schema.json->page1->title
+msgid "General"
+msgstr "General"
+
+#. 3.4->settings-schema.json->page2->title
+#. 6.4->settings-schema.json->page2->title
+msgid "Sounds"
+msgstr "Sons"
+
+#. 3.4->settings-schema.json->page3->title
+#. 3.4->settings-schema.json->section3->title
+#. 3.4->settings-schema.json->preset_time->description
+#. 6.4->settings-schema.json->page3->title
+#. 6.4->settings-schema.json->section3->title
+#. 6.4->settings-schema.json->preset_time->description
+msgid "Preset Times"
+msgstr "Temps predefinits"
+
+#. 3.4->settings-schema.json->page4->title
+#. 3.4->settings-schema.json->section4->title
+#. 3.4->settings-schema.json->slider_intervals->description
+#. 6.4->settings-schema.json->page4->title
+#. 6.4->settings-schema.json->section4->title
+#. 6.4->settings-schema.json->slider_intervals->description
+msgid "Slider Intervals"
+msgstr "Intervals del control lliscant"
+
+#. 3.4->settings-schema.json->section1->title
+#. 6.4->settings-schema.json->section1->title
+msgid "General Settings"
+msgstr "Opcions generals"
+
+#. 3.4->settings-schema.json->section2->title
+#. 6.4->settings-schema.json->section2->title
+msgid "Sound Settings"
+msgstr "Opcions de so"
+
+#. 3.4->settings-schema.json->confirm-prompt-enable->description
+#. 2.6->settings-schema.json->confirm-prompt-enable->description
+#. 6.4->settings-schema.json->confirm-prompt-enable->description
+msgid "Check this to place a prompt on the window when time has elapsed."
+msgstr ""
+"Marqueu això per mostrar un avís a la finestra quan hagi passat el temps."
+
+#. 3.4->settings-schema.json->confirm-prompt-enable->tooltip
+#. 2.6->settings-schema.json->confirm-prompt-enable->tooltip
+#. 6.4->settings-schema.json->confirm-prompt-enable->tooltip
+msgid "Check this to place a prompt on the window when time has elapsed"
+msgstr ""
+"Marqueu això per mostrar un avís a la finestra quan hagi passat el temps"
+
+#. 3.4->settings-schema.json->message-prompt-enable->description
+#. 3.4->settings-schema.json->message-prompt-enable->tooltip
+#. 2.6->settings-schema.json->message-prompt-enable->description
+#. 2.6->settings-schema.json->message-prompt-enable->tooltip
+#. 6.4->settings-schema.json->message-prompt-enable->description
+#. 6.4->settings-schema.json->message-prompt-enable->tooltip
+msgid "Display a notification when time has elapsed"
+msgstr "Mostrar una notificació quan ha passat el temps"
+
+#. 3.4->settings-schema.json->display-message->description
+#. 3.4->settings-schema.json->display-message->tooltip
+#. 6.4->settings-schema.json->display-message->description
+#. 6.4->settings-schema.json->display-message->tooltip
+msgid ""
+"Global message displayed in notification windows unless defined in preset "
+"time."
+msgstr ""
+"Missatge global a mostrar a la finestra de notificacions a menys que estigui "
+"predefinit."
+
+#. 3.4->settings-schema.json->sound-prompt-enable->description
+#. 3.4->settings-schema.json->sound-prompt-enable->tooltip
+#. 2.6->settings-schema.json->sound-prompt-enable->description
+#. 2.6->settings-schema.json->sound-prompt-enable->tooltip
+#. 6.4->settings-schema.json->sound-prompt-enable->description
+#. 6.4->settings-schema.json->sound-prompt-enable->tooltip
+msgid "Play a sound when time is elapsed"
+msgstr "Reprodueix un so quan hagi passat el temps"
+
+#. 3.4->settings-schema.json->sound-file->description
+#. 2.6->settings-schema.json->sound-file->description
+#. 6.4->settings-schema.json->sound-file->description
+msgid "Full path and filename of alert sound file"
+msgstr "Ruta completa al fitxer de so d'alerta"
+
+#. 3.4->settings-schema.json->sound-file->tooltip
+#. 2.6->settings-schema.json->sound-file->tooltip
+#. 6.4->settings-schema.json->sound-file->tooltip
+msgid "Must have Sox installed. Most sound file types supported"
+msgstr ""
+"Cal tenir Sox instal·lat. La majoria de formats de fitxer de so estan "
+"suportats"
+
+#. 3.4->settings-schema.json->sound-volume->description
+#. 3.4->settings-schema.json->sound-volume->tooltip
+#. 6.4->settings-schema.json->sound-volume->description
+#. 6.4->settings-schema.json->sound-volume->tooltip
+msgid "Specify the playback volume"
+msgstr "Volum de la reproducció del so"
+
+#. 3.4->settings-schema.json->display-menu-enable->description
+#. 3.4->settings-schema.json->display-menu-enable->tooltip
+#. 2.6->settings-schema.json->display-menu-enable->description
+#. 2.6->settings-schema.json->display-menu-enable->tooltip
+#. 6.4->settings-schema.json->display-menu-enable->description
+#. 6.4->settings-schema.json->display-menu-enable->tooltip
+msgid "Show the timer menu when time is elapsed"
+msgstr "Mostrar el menú del temporitzador quan el temps hagi passat"
+
+#. 3.4->settings-schema.json->duration-display-enable->description
+#. 3.4->settings-schema.json->duration-display-enable->tooltip
+#. 2.6->settings-schema.json->time_display_enable->description
+#. 2.6->settings-schema.json->time_display_enable->tooltip
+#. 6.4->settings-schema.json->duration-display-enable->description
+#. 6.4->settings-schema.json->duration-display-enable->tooltip
+msgid "Display remaining time in panel"
+msgstr "Mostrar el temps restant al tauler"
+
+#. 3.4->settings-schema.json->alarmtime-display-enable->description
+#. 3.4->settings-schema.json->alarmtime-display-enable->tooltip
+#. 6.4->settings-schema.json->alarmtime-display-enable->description
+#. 6.4->settings-schema.json->alarmtime-display-enable->tooltip
+msgid "Display alarm time in panel"
+msgstr "Mostrar el temps d'alarma al tauler"
+
+#. 3.4->settings-schema.json->alarmtime-format-small->description
+#. 6.4->settings-schema.json->alarmtime-format-small->description
+msgid "Format used to display alarm time in the near future"
+msgstr "Format utilitzat per mostrar el proper temps d'alarma"
+
+#. 3.4->settings-schema.json->alarmtime-format-small->tooltip
+#. 6.4->settings-schema.json->alarmtime-format-small->tooltip
+msgid ""
+"If the alarm time is less than the minutes specified below away,\n"
+"the alarm time can be displayed with more details\n"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
+msgstr ""
+"Si el temps d'alarma és menor que els minuts especificats,\n"
+"l'alarma pot mostrar-se de manera més detallada\n"
+"(consulteu https://docs.gtk.org/glib/method.DateTime.format.html)"
+
+#. 3.4->settings-schema.json->alarmtime-format-large->description
+#. 6.4->settings-schema.json->alarmtime-format-large->description
+msgid "Format used to display alarm time in the not so near future"
+msgstr "Format utilitzat per mostrar el temps d'alarma en un futur distant"
+
+#. 3.4->settings-schema.json->alarmtime-format-large->tooltip
+#. 6.4->settings-schema.json->alarmtime-format-large->tooltip
+msgid ""
+"If the alarm time is more than the minutes specified below away,\n"
+"the alarm time can be displayed with less details\n"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
+msgstr ""
+"Si el temps d'alarma és menor que els minuts especificats,\n"
+"l'alarma pot mostrar-se de manera menys detallada\n"
+"(consulteu https://docs.gtk.org/glib/method.DateTime.format.html)"
+
+#. 3.4->settings-schema.json->alarmtime-format-switchover->units
+#. 6.4->settings-schema.json->alarmtime-format-switchover->units
+msgid "minutes"
+msgstr "minuts"
+
+#. 3.4->settings-schema.json->alarmtime-format-switchover->description
+#. 6.4->settings-schema.json->alarmtime-format-switchover->description
+msgid "Time when switching from small to large time format"
+msgstr "Temps per passar del format de temps petit al gran"
+
+#. 3.4->settings-schema.json->alarmtime-format-switchover->tooltip
+#. 6.4->settings-schema.json->alarmtime-format-switchover->tooltip
+msgid "Switch over time between the two formats specified above"
+msgstr "Canvia el temps entre els dos formats especificats a dalt"
+
+#. 3.4->settings-schema.json->auto-loop-enable->description
+#. 3.4->settings-schema.json->auto-loop-enable->tooltip
+#. 6.4->settings-schema.json->auto-loop-enable->description
+#. 6.4->settings-schema.json->auto-loop-enable->tooltip
+msgid "Restart the timer automatically when time is elapsed"
+msgstr "Reiniciar el temporitzador automàticament quan el temps hagi passat"
+
+#. 3.4->settings-schema.json->alarm_end->description
+#. 3.4->settings-schema.json->alarm_end->tooltip
+#. 3.4->settings-schema.json->alarm_start->description
+#. 3.4->settings-schema.json->alarm_start->tooltip
+#. 2.6->settings-schema.json->alarm_end->description
+#. 2.6->settings-schema.json->alarm_end->tooltip
+#. 2.6->settings-schema.json->alarm_start->description
+#. 2.6->settings-schema.json->alarm_start->tooltip
+#. 6.4->settings-schema.json->alarm_end->description
+#. 6.4->settings-schema.json->alarm_end->tooltip
+#. 6.4->settings-schema.json->alarm_start->description
+#. 6.4->settings-schema.json->alarm_start->tooltip
+msgid "Do not change, the time the alarm is set to expire"
+msgstr "No canviar, el temps en què l'alarma expira"
+
+#. 3.4->settings-schema.json->message->description
+#. 3.4->settings-schema.json->message->tooltip
+#. 6.4->settings-schema.json->message->description
+#. 6.4->settings-schema.json->message->tooltip
+msgid "Do not change, message being displayed when the current timer expires"
+msgstr "No canviar, el missatge es mostrarà quan el temporitzador actual acabi"
+
+#. 3.4->settings-schema.json->slider_intervals->columns->title
+#. 6.4->settings-schema.json->slider_intervals->columns->title
+msgid "Minimum"
+msgstr "Mínim"
+
+#. 3.4->settings-schema.json->slider_intervals->columns->title
+#. 6.4->settings-schema.json->slider_intervals->columns->title
+msgid "Maximum"
+msgstr "Màxim"
+
+#. 3.4->settings-schema.json->slider_intervals->columns->title
+#. 6.4->settings-schema.json->slider_intervals->columns->title
+msgid "Step"
+msgstr "Avanç"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#. 6.4->settings-schema.json->preset_time->columns->title
+msgid "Label"
+msgstr "Etiqueta"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#. 6.4->settings-schema.json->preset_time->columns->title
+msgid "Custom Message (overrides global message)"
+msgstr "Missatge personalitzat (sobreescriu el missatge global)"
+
+#. 2.6->settings-schema.json->display-message->description
+#. 2.6->settings-schema.json->display-message->tooltip
+msgid "Message displayed in notification windows"
+msgstr "Missatge mostrat a les finestres de notificació"

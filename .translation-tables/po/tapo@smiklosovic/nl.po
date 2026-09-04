@@ -1,0 +1,64 @@
+# TAPO CONTROL PANEL
+# This file is put in the public domain.
+# stefanmiklosovic, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tapo@smiklosovic 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-27 12:46-0400\n"
+"PO-Revision-Date: 2024-09-11 12:38+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#. applet.js:85
+msgid "Tapo Control Panel"
+msgstr "Tapo Bedieningspaneel"
+
+#. applet.js:90
+msgid "Reload Applet"
+msgstr "Herlaad applet"
+
+#. applet.js:188
+msgid "All devices"
+msgstr "Alle apparaten"
+
+#. metadata.json->description
+msgid "Control Tapo Appliances"
+msgstr "Bedien Tapo-apparaten"
+
+#. settings-schema.json->device-names->description
+msgid "Device names"
+msgstr "Apparaatnamen"
+
+#. settings-schema.json->device-names->tooltip
+msgid ""
+"Device names, separated by comma. Names have to correspond to names in tapo-"
+"rest settings in devices object in the configuration file."
+msgstr ""
+"Apparaatnamen, gescheiden door komma's. Namen moeten overeenkomen met de "
+"namen in de tapo-rest instellingen in het apparaten object in het "
+"configuratiebestand."
+
+#. settings-schema.json->service-url->description
+#. settings-schema.json->service-url->tooltip
+msgid "URL for tapo-rest service"
+msgstr "URL voor tapo-rest service"
+
+#. settings-schema.json->password->description
+msgid "Password for tapo-rest"
+msgstr "Wachtwoord voor tapo-rest"
+
+#. settings-schema.json->password->tooltip
+msgid "Enter password for tapo-rest service"
+msgstr "Voer het wachtwoord voor de tapo-rest service in"
+
+#. settings-schema.json->perform-login->description
+msgid "Login to tapo-rest"
+msgstr "Inloggen bij tapo-rest"

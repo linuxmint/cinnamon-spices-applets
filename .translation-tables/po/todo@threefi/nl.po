@@ -1,0 +1,45 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-24 19:36+0800\n"
+"PO-Revision-Date: 2024-04-22 09:22+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:77
+msgid "Click to edit the list"
+msgstr "Klik om de lijst te bewerken"
+
+#. todo@threefi->metadata.json->description
+msgid "a simple todo list ticker for cinammon"
+msgstr "een eenvoudige to-do-lijst ticker voor Cinnamon"
+
+#. todo@threefi->metadata.json->name
+msgid "Todo"
+msgstr "Todo"
+
+#. todo@threefi->settings-schema.json->important_color->description
+msgid "The color used to highlight important items"
+msgstr "De kleur die wordt gebruikt om belangrijke items te markeren"
+
+#. todo@threefi->settings-schema.json->list_editor->description
+msgid "The editor that should be used to edit the list"
+msgstr "De editor die gebruikt moet worden om de lijst te bewerken"
+
+#. todo@threefi->settings-schema.json->lead_trail_time->description
+msgid "The time before/after scrolling that long items will be fixed"
+msgstr "De tijd voor/na het scrollen waarin lange items vastgehouden worden"
+
+#. todo@threefi->settings-schema.json->text_width->description
+msgid "The width of text in characters"
+msgstr "De breedte van tekst in karakters"

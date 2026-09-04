@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-22 03:30+0200\n"
+"PO-Revision-Date: 2024-07-19 02:53+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:86 applet.js:170
+msgid "No new mail"
+msgstr "No hi ha correus nous"
+
+#: applet.js:130
+msgid "Something went wrong"
+msgstr "Alguna cosa ha anat malament"
+
+#: applet.js:133
+msgid "INFO: Install python libaries from terminal"
+msgstr "INFO: Instal·leu les llibreries de python des del terminal"
+
+#: applet.js:133
+msgid "How To"
+msgstr "Com fer-ho"
+
+#: applet.js:133
+msgid "guide"
+msgstr "guia"
+
+#: applet.js:133
+msgid "You need pip3:"
+msgstr "Necessiteu pip3:"
+
+#: applet.js:133
+msgid "You need python-feedparser:"
+msgstr "Necessiteu python-feedparser:"
+
+#: applet.js:133
+msgid "You need python keyring and python keyring-alt:"
+msgstr "Necessiteu python keyring i python keyring-alt:"
+
+#: applet.js:133
+msgid "and"
+msgstr "i"
+
+#: applet.js:135
+msgid "INFO: Are you getting this message? You should not!"
+msgstr "INFO: Esteu rebent aquest missatge? No hauria de ser així!"
+
+#: applet.js:135
+msgid "ERROR"
+msgstr "ERROR"
+
+#: applet.js:135
+msgid ""
+"Check internet connection\n"
+"Install the needed python libaries\n"
+"Configure password correctly"
+msgstr ""
+"Reviseu la connexió a Internet\n"
+"Instal·leu les llibreries python necessàries\n"
+"Configureu la contrasenya correctament"
+
+#: applet.js:138
+msgid "ERROR: Error from json parser"
+msgstr "ERROR: Error from json parser"
+
+#: applet.js:161
+msgid "New mail"
+msgstr "Correu nou"
+
+#: applet.js:163
+msgid "New mails"
+msgstr "Correus nous"
+
+#: applet.js:172
+msgid "No new mails"
+msgstr "No hi ha correus nous"
+
+#: applet.js:172
+msgid "Have a nice day"
+msgstr "Que tingueu un bon dia"
+
+#. gmail@lauritsriple->settings-schema.json->settings-username->description
+msgid "Username:"
+msgstr "Nom d'usuari:"
+
+#. gmail@lauritsriple->settings-schema.json->settings-username->tooltip
+msgid "Set your username"
+msgstr "Introduïu el vostre nom d'usuari"
+
+#. gmail@lauritsriple->settings-schema.json->head->description
+msgid ""
+"Store your username and password.\n"
+"Uses the keyring so password is not stored in cleartext.\n"
+"It might take a while (2-10seconds) before the password\n"
+"gets visible removed after you press the button.\n"
+"If your gmail adress is usernam@gmail.com, only put in the username part "
+"here.\n"
+"There are still some issues so you might have to press the button a couple "
+"of time.\n"
+"If the password changes to something else, dont press it again."
+msgstr ""
+"Emmagatzema el vostre usuari i contrasenya.\n"
+"Utilitza keyring de manera que la contrasenya no es guardi en format de "
+"text pla.\n"
+"Pot ser que tardi una estona (2-10segons) abans de la contrasenya\n"
+"S'elimina després de prémer el botó\n"
+"Si la vostra adreça és @gmail.com, només cal introduir el nom d'usuari.\n"
+"Encara hi ha alguns problemes, és possible que necessiteu prémer el botó "
+"múltiples vegades.\n"
+"Si la contrasenya canvia a alguna altra cosa, no el premeu de nou."
+
+#. gmail@lauritsriple->settings-schema.json->settings-password->description
+msgid "Password:"
+msgstr "Contrasenya:"
+
+#. gmail@lauritsriple->settings-schema.json->settings-password->tooltip
+msgid "Set your password"
+msgstr "Introduïu la vostra contrasenya"
+
+#. gmail@lauritsriple->settings-schema.json->demo-button->description
+msgid "Save username and password"
+msgstr "Guarda l'usuari i la contrasenya"
+
+#. gmail@lauritsriple->settings-schema.json->demo-button->tooltip
+msgid "Click to save username and password"
+msgstr "Cliqueu perquè es guardin els vostres credencials"
+
+#. gmail@lauritsriple->metadata.json->description
+msgid "Shows most recent mails, and how many unread messages you have."
+msgstr "Mostra els correus més nous i quants missatges no llegits hi ha."
+
+#. gmail@lauritsriple->metadata.json->name
+msgid "GmailNotifier"
+msgstr "Notificador de Gmail"

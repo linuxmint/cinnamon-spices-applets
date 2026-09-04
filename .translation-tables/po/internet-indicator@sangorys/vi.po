@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: internet-indicator@sangorys 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-12 10:46+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:121
+msgid "Initializing"
+msgstr "Đang khởi tạo"
+
+#: applet.js:244
+msgid "Testing Internet connexion in progress..."
+msgstr "Đang kiểm tra kết nối Internet..."
+
+#: applet.js:294
+msgid "Internet OK"
+msgstr "Internet OK"
+
+#: applet.js:312
+msgid "No Internet"
+msgstr "Không có Internet"
+
+#. metadata.json->name
+msgid "Internet connection Indicator"
+msgstr "Bộ hiển thị kết nối Internet"
+
+#. metadata.json->description
+msgid ""
+"Check your Internet connection (usefull to check if you are connected to "
+"Internet through a wifi hotspot. For instance when you are in a train)"
+msgstr "Kiểm tra kết nối Internet của bạn (hữu ích để biết bạn có kết nối qua điểm phát Wi-Fi hay không, ví dụ khi ở trên tàu)"
+
+#. settings-schema.json->update-interval-when-no-internet->units
+#. settings-schema.json->update-interval-when-internet->units
+msgid "s"
+msgstr "giây"
+
+#. settings-schema.json->update-interval-when-no-internet->description
+msgid "Update interval when no internet connection"
+msgstr "Khoảng thời gian cập nhật khi không có kết nối Internet"
+
+#. settings-schema.json->update-interval-when-internet->description
+msgid "Update interval when internet is detected"
+msgstr "Khoảng thời gian cập nhật khi phát hiện kết nối Internet"

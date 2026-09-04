@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-26 22:50+0200\n"
+"PO-Revision-Date: 2024-04-20 16:47+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:35
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#: applet.js:143
+msgid "%A %B %e, %Y"
+msgstr "%A %B %e, %Y"
+
+#: applet.js:333
+msgid "Edit World Clocks"
+msgstr "Bewerk Wereldklokken"
+
+#: applet.js:335
+msgid "Date and Time Settings"
+msgstr "Datum- en Tijdinstellingen"
+
+#: world_clock_calendar_settings.py:78
+msgid "Display Name"
+msgstr "Weergavenaam"
+
+#: world_clock_calendar_settings.py:90
+msgid "Timezone"
+msgstr "Tijdzone"
+
+#: world_clock_calendar_settings.py:128
+msgid "Time format for World Clocks"
+msgstr "Tijdformaat voor Wereldklokken"
+
+#: world_clock_calendar_settings.py:137
+msgid "Browse valid timezone values by country (online)"
+msgstr "Blader door geldige tijdzone-waarden per land (online)"
+
+#: world_clock_calendar_settings.py:216
+msgid "Coordinated Universal Time"
+msgstr "Gecoördineerde Universele Tijd"
+
+#. metadata.json->name
+msgid "World Clock Calendar"
+msgstr "Wereldklok Kalender"
+
+#. metadata.json->description
+msgid ""
+"Fork of the Cinnamon calendar applet with support for displaying multiple "
+"timezones"
+msgstr ""
+"Afgeleide van de Cinnamon kalender applet met ondersteuning voor het "
+"weergeven van meerdere tijdzones"
+
+#. settings-schema.json->show-week-numbers->description
+msgid "Show week numbers in calendar"
+msgstr "Toon weeknummers in kalender"
+
+#. settings-schema.json->show-week-numbers->tooltip
+msgid "Check this to show week numbers in the calendar."
+msgstr "Vink dit aan om weeknummers in de kalender weer te geven."
+
+#. settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr "Gebruik een aangepast datumformaat"
+
+#. settings-schema.json->use-custom-format->tooltip
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+"Vink dit aan om een aangepast formaat voor de datum in de kalender applet te "
+"definiëren."
+
+#. settings-schema.json->custom-format->description
+msgid "Date format:"
+msgstr "Datumformaat:"
+
+#. settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr "Stel hier uw aangepast formaat in."
+
+#. settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr "Toon informatie over de syntaxis van datumnotatie"
+
+#. settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr ""
+"Klik op deze knop voor meer informatie over de syntaxis voor datumnotaties."
+
+#. settings-schema.json->keybindings->description
+msgid "Keybindings"
+msgstr "Sneltoetsen"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Stel de sneltoets in om het menu te openen"
+
+#. settings-schema.json->header->description
+msgid "World-Clock Settings"
+msgstr "Instellingen voor Wereldklokken"
+
+#. settings-schema.json->worldclock-setup-button->description
+msgid "Configure World-clocks"
+msgstr "Wereldklokken configureren"
+
+#. settings-schema.json->worldclock-setup-button->tooltip
+msgid "Add, remove and configure additional clocks and format."
+msgstr "Voeg toe, verwijder en configureer aanvullende klokken en formaten."

@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-26 05:28-0500\n"
+"PO-Revision-Date: 2024-07-14 04:00+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:21
+msgid "Currently preventing notifications"
+msgstr "Actualment impedint notificacions"
+
+#: applet.js:22
+msgid "Currently allowing notifications"
+msgstr "Actualment permetent notificacions"
+
+#: applet.js:92
+msgid "Notification settings"
+msgstr "Opcions de notificació"
+
+#. metadata.json->name
+msgid "Notification Mute"
+msgstr "Silenciador de notificacions"
+
+#. metadata.json->description
+msgid "Click to mute notifications, click again to unmute"
+msgstr "Cliqueu una vegada per silenciar les notificacions, cliqueu de nou per a reactivar-les"
+
+#. settings-schema.json->head->description
+msgid "Icons"
+msgstr "Icones"
+
+#. settings-schema.json->use-custom-off-icon->description
+msgid "Use a custom icon for when notifications are allowed."
+msgstr "Utilitzar una icona personalitzada quan les notificacions siguin permeses."
+
+#. settings-schema.json->off-icon->description
+msgid "Notifications allowed icon:"
+msgstr "Icona de notificacions permeses:"
+
+#. settings-schema.json->off-icon->tooltip
+#. settings-schema.json->on-icon->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr "Seleccioneu un fitxer d'icona o escriviu-ne el nom"
+
+#. settings-schema.json->use-custom-on-icon->description
+msgid "Use a custom icon for when notifications are muted."
+msgstr "Utilitzar una icona personalitzada quan les notificacions NO siguin permeses."
+
+#. settings-schema.json->on-icon->description
+msgid "Notifications muted icon:"
+msgstr "Icona de notificacions silenciades:"
+
+#. settings-schema.json->head1->description
+msgid "Keybinding"
+msgstr "Drecera del teclat"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding for toggling notification mute"
+msgstr "Assigneu la drecera del teclat per a alternar el silenci de les notificacions"

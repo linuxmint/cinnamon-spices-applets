@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bose@tuuxx 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-06-27 12:11+0300\n"
+"PO-Revision-Date: 2024-07-05 10:51+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->name
+msgid "Bose Quiet Comfort"
+msgstr "Bose Quiet Comfort"
+
+#. metadata.json->description
+msgid ""
+"Get connection details of BOSE Quiet Comfort 35 II, requires: bluez-tools"
+msgstr ""
+"Ottieni i dettagli di connessione di BOSE Quiet Comfort 35 II, richiede: "
+"bluez-tools"
+
+#. settings-schema.json->head->description
+msgid "Settings for bose@tuuxx"
+msgstr "Impostazioni di bose@tuuxx"
+
+#. settings-schema.json->address->description
+msgid "Address of the Bluethooth BOSE device:"
+msgstr "Indirizzo del dispositivo Bluetooth BOSE:"
+
+#. settings-schema.json->address->tooltip
+msgid "Format: xx:xx:xx:xx:xx:xx"
+msgstr "Formato: xx:xx:xx:xx:xx:xx"
+
+#. settings-schema.json->path->description
+msgid "Path of based-connect:"
+msgstr "Percorso di connessione basata:"
+
+#. settings-schema.json->path->tooltip
+msgid "Path to the based-connect tool"
+msgstr "Percorso dello strumento di connessione basata"
+
+#. settings-schema.json->basedconnectLookup->description
+msgid "Get based-connect tool"
+msgstr "Ottieni strumento di connessione basata"
+
+#. settings-schema.json->basedconnectLookup->tooltip
+msgid "Opens git webpage of the based-connect tool"
+msgstr "Apre la pagina Web git dello strumento di connessione basata"

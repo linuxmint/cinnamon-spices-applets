@@ -1,0 +1,23 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:112
+msgid "Mark all as read"
+msgstr ""
+
+#. settings-schema.json->update-interval->description
+msgid "Update interval"
+msgstr ""
+
+#. settings-schema.json->update-interval->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->show-nonzero-only->description
+msgid "Hide panel icon when there are no unread comments"
+msgstr ""

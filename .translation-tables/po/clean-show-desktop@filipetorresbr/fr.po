@@ -1,0 +1,136 @@
+# DESCRIPTION IN FILE LANGUAGE / DESCRIPTION IN ENGLISH
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: <filipekaue@protonmail.com> \n"
+"POT-Creation-Date: 2020-07-25 14:50-0300\n"
+"PO-Revision-Date: 2022-05-14 12:48+0200\n"
+"Last-Translator: roxfr <roxfr@outlook.fr>\n"
+"Language-Team: NAME <name@domain.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:43 icons/backup.js:40
+msgid "Show Desklets"
+msgstr "Afficher les desklets"
+
+#. metadata.json->name
+msgid "Clean Show Desktop"
+msgstr "Nettoyer l'affichage du bureau"
+
+#. metadata.json->description
+msgid ""
+"An Applet to show the Desktop just like in Windows 10, but completely "
+"customizable"
+msgstr ""
+"Une applet pour afficher le bureau comme dans Windows 10, mais entièrement "
+"personnalisable"
+
+#. settings-schema.json->head->description
+msgid "Settings"
+msgstr "Réglages"
+
+#. settings-schema.json->peek-desktop->description
+msgid "Peek at the desktop on hover"
+msgstr "Jetez un coup d'œil au bureau au survol"
+
+#. settings-schema.json->peek-desktop->tooltip
+msgid "Peek at the desktop when hovering the applet"
+msgstr "Jetez un coup d'œil au bureau lorsque vous survolez l'applet"
+
+#. settings-schema.json->peek-blur->description
+msgid "Blur effect"
+msgstr "Effet de flou"
+
+#. settings-schema.json->peek-blur->tooltip
+msgid "Blur windows when peeking at the desktop"
+msgstr "Flouter les fenêtres lorsque vous regardez le bureau"
+
+#. settings-schema.json->peek-delay->units
+msgid "milliseconds"
+msgstr "millisecondes"
+
+#. settings-schema.json->peek-delay->description
+msgid "Hover delay"
+msgstr "Délai au survol"
+
+#. settings-schema.json->peek-delay->tooltip
+msgid "Delay before Peek shows desktop"
+msgstr "Délai avant que Peek n'affiche le bureau"
+
+#. settings-schema.json->peek-opacity->description
+msgid "Window opacity"
+msgstr "Opacité de la fenêtre"
+
+#. settings-schema.json->peek-opacity->tooltip
+msgid "Change the opacity of windows when peeking at the desktop"
+msgstr "Modifier l'opacité des fenêtres lorsque vous regardez le bureau"
+
+#. settings-schema.json->width->units
+#. settings-schema.json->border-width->units
+msgid "pixels"
+msgstr "pixels"
+
+#. settings-schema.json->width->description
+msgid "Applet size"
+msgstr "Taille de l'applet"
+
+#. settings-schema.json->width->tooltip
+msgid "Adjust this to increase or decrease the width of this applet"
+msgstr "Ajuster ceci pour augmenter ou diminuer la largeur de cette applet"
+
+#. settings-schema.json->background->description
+msgid "Fill color"
+msgstr "Couleur de remplissage"
+
+#. settings-schema.json->background->tooltip
+msgid "Select a fill color"
+msgstr "Sélectionner une couleur de remplissage"
+
+#. settings-schema.json->border->description
+msgid "Border color"
+msgstr "Couleur de la bordure"
+
+#. settings-schema.json->border->tooltip
+msgid "Select a border color"
+msgstr "Sélectionner une couleur de bordure"
+
+#. settings-schema.json->on-hover-background->description
+msgid "Fill color on mouse hover"
+msgstr "Couleur de remplissage au survol de la souris"
+
+#. settings-schema.json->on-hover-background->tooltip
+msgid "Change the fill color when mouse hover"
+msgstr "Changer la couleur de remplissage au survol de la souris"
+
+#. settings-schema.json->on-hover-border->description
+msgid "Border color on mouse hover"
+msgstr "Couleur de la bordure au survol de la souris"
+
+#. settings-schema.json->on-hover-border->tooltip
+msgid "Change the Border color when mouse hover"
+msgstr "Changer la couleur de la bordure au survol de la souris"
+
+#. settings-schema.json->border-width->description
+msgid "Border width"
+msgstr "Largeur de la bordure"
+
+#. settings-schema.json->border-width->tooltip
+msgid "Select the border width"
+msgstr "Sélectionner la largeur de la bordure"
+
+#. settings-schema.json->custom-color->description
+msgid "Customize the applet colors"
+msgstr "Personnaliser les couleurs de l'applet"
+
+#. settings-schema.json->custom-color->tooltip
+msgid ""
+"When this option is disabled, the applet will try to find the accent color "
+"color of the theme"
+msgstr ""
+"Lorsque cette option est désactivée, l'applet essaiera de trouver la couleur "
+"d'accentuation du thème"

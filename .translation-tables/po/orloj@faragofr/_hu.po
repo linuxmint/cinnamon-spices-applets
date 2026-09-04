@@ -1,0 +1,26 @@
+# ORLOJ
+# This file is put in the public domain.
+# faragofr, 2016
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->foreground-color->description
+msgid "Foreground color (text, hands, glyphs)"
+msgstr ""
+
+#. settings-schema.json->background-color->description
+msgid "Background color"
+msgstr ""
+
+#. settings-schema.json->dial-size->units
+msgid "pixels"
+msgstr ""
+
+#. settings-schema.json->dial-size->description
+msgid "Dial size"
+msgstr ""
+
+#. settings-schema.json->dial-size->tooltip
+msgid "Diameter of the dial in the popup; larger values improve readability"
+msgstr ""

@@ -1,0 +1,31 @@
+# LOCK KEYS INDICATOR WITH NOTIFICATIONS
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# entelechy, 2016
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->section1->description
+msgid "Indicators"
+msgstr ""
+
+#. settings-schema.json->hide-inactive-indicators->description
+msgid "Hide inactive indicators"
+msgstr ""
+
+#. settings-schema.json->toggle-on-click->description
+msgid "Toggle state when clicked"
+msgstr ""
+
+#. settings-schema.json->section2->description
+msgid "Notifications"
+msgstr ""
+
+#. settings-schema.json->show-osd-notifications->description
+msgid "Show OSD notifications"
+msgstr ""
+
+#. settings-schema.json->show-toast-notifications->description
+msgid "Show toast notifications"
+msgstr ""

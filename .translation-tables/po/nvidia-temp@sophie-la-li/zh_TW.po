@@ -1,0 +1,74 @@
+# NVIDIA GPU TEMPERATURE INDICATOR
+# This file is put in the public domain.
+# sophie-la-li, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-temp@sophie-la-li 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-13 18:46+0200\n"
+"PO-Revision-Date: 2025-04-30 23:55+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:18
+msgid "GPU Temperature"
+msgstr "GPU 溫度"
+
+#. applet.js:34
+msgid "Nvidia GPU Temperature Indicator: Error"
+msgstr "Nvidia GPU 溫度指示器：錯誤"
+
+#. applet.js:34
+msgid "It seems that nvidia-smi is not installed."
+msgstr "看起來尚未安裝 nvidia-smi。"
+
+#. metadata.json->name
+msgid "Nvidia GPU Temperature Indicator"
+msgstr "Nvidia GPU 溫度指示器"
+
+#. metadata.json->description
+msgid "Shows Nvidia GPU Temperature"
+msgstr "顯示 Nvidia GPU 溫度"
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr "毫秒"
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr "更新間隔"
+
+#. settings-schema.json->interval->tooltip
+msgid "How often to update the temperature value."
+msgstr "更新溫度值的頻率。"
+
+#. settings-schema.json->use-fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr "以華氏溫度顯示"
+
+#. settings-schema.json->use-fahrenheit->tooltip
+msgid "Whether or not show the temperature in Fahrenheit instead of Celsius."
+msgstr "是否使用華氏溫度代替攝氏溫度來顯示。"
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "顯示單位"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Whether or not show the unit after the temperature value."
+msgstr "是否在溫度值後方顯示單位。"
+
+#. settings-schema.json->show-unit-letter->description
+msgid "Show unit letter"
+msgstr "顯示單位符號"
+
+#. settings-schema.json->show-unit-letter->tooltip
+msgid "Whether or not show the unit letter (C or F)."
+msgstr "是否顯示溫度單位符號（C 或 F）。"

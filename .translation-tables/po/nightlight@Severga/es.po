@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-10 18:26+0300\n"
+"PO-Revision-Date: 2024-03-11 16:16-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:45
+msgid "Night Light can't work properly: sct package not installed!"
+msgstr ""
+"Luz Nocturna no funciona correctamente: ¡el paquete sct no está instalado!"
+
+#. metadata.json->name
+#: applet.js:46 applet.js:49 applet.js:81
+msgid "Night Light"
+msgstr "Luz Nocturna"
+
+#: applet.js:46
+msgid "error"
+msgstr "error"
+
+#: applet.js:49
+msgid ""
+"Warning: 'sct' command not found! This applet is a frontend for this "
+"command. Please, install 'sct' package and restart Cinnamon or reload the "
+"applet."
+msgstr ""
+"Advertencia: ¡No se ha encontrado el comando 'sct'! Este applet es una "
+"interfaz para este comando. Por favor, instale el paquete 'sct' y "
+"reinicie Cinnamon o recargue el applet."
+
+#: applet.js:57
+msgid "off"
+msgstr "apagado"
+
+#: applet.js:57
+msgid "on"
+msgstr "encendido"
+
+#: applet.js:57
+msgid "auto"
+msgstr "automático"
+
+#. metadata.json->description
+msgid "Screen night light activating applet"
+msgstr "Applet de activación de la luz nocturna de la pantalla"
+
+#. settings-schema.json->common_label->description
+msgid "Common"
+msgstr "General"
+
+#. settings-schema.json->temperature->description
+msgid "Night Light temperature (K)"
+msgstr "Temperatura de la Luz Nocturna (K)"
+
+#. settings-schema.json->temperature->tooltip
+msgid "Night Light screen temperature"
+msgstr "Temperatura de la pantalla de la Luz Nocturna"
+
+#. settings-schema.json->auto_label->description
+msgid "Auto mode schedule"
+msgstr "Horario del modo automático"
+
+#. settings-schema.json->startH->description
+msgid "Start time, hour"
+msgstr "Inicio, hora"
+
+#. settings-schema.json->startH->tooltip
+msgid "Start time (hour)"
+msgstr "Inicio (hora)"
+
+#. settings-schema.json->startM->description
+msgid "Start time, minute"
+msgstr "Inicio, minuto"
+
+#. settings-schema.json->startM->tooltip
+msgid "Start time (minute)"
+msgstr "Inicio (minuto)"
+
+#. settings-schema.json->endH->description
+msgid "End time, hour"
+msgstr "Finalización, hora"
+
+#. settings-schema.json->endH->tooltip
+msgid "End time (hour)"
+msgstr "Finalización (hora)"
+
+#. settings-schema.json->endM->description
+msgid "End time, minute"
+msgstr "Finalización, minuto"
+
+#. settings-schema.json->endM->tooltip
+msgid "End time (minute)"
+msgstr "Finalización (minuto)"
+
+#. settings-schema.json->mode->description
+#. settings-schema.json->mode->tooltip
+msgid "mode"
+msgstr "modo"

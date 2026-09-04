@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-19 11:04+0800\n"
+"PO-Revision-Date: 2024-07-21 02:47+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:32
+msgid ""
+"Are you sure you want to restore all settings to default?\n"
+"\n"
+msgstr ""
+"Esteu segurs que voleu restaurar totes les configuracions als valors per defecte?\n"
+"\n"
+
+#: applet.js:37
+msgid "Yes"
+msgstr "Sí"
+
+#: applet.js:44
+msgid "No"
+msgstr "No"
+
+#: applet.js:65
+msgid "Settings"
+msgstr "Configuració"
+
+#: applet.js:74
+msgid "Troubleshoot"
+msgstr "Resolució de problemes"
+
+#: applet.js:75
+msgid "Restart Cinnamon"
+msgstr "Reiniciar Cinnamon"
+
+#: applet.js:80
+msgid "Reload Theme"
+msgstr "Recarregar tema"
+
+#: applet.js:85
+msgid "Looking Glass"
+msgstr "Looking Glass"
+
+#: applet.js:89
+msgid "Restore all settings to Default"
+msgstr "Restaura totes les configuracions als valors per defecte"
+
+#: applet.js:94
+msgid "Force Quit Application"
+msgstr "Forçar la sortida de l'aplicació"
+
+#: applet.js:101
+msgid "Screenshot"
+msgstr "Captura de pantalla"
+
+#: applet.js:105
+msgid "Terminal"
+msgstr "Terminal"
+
+#: applet.js:113
+msgid "Panel Edit Mode"
+msgstr "Mode d'edició del tauler"
+
+#: applet.js:122
+msgid "Add/Remove Applets"
+msgstr "Afegir/Eliminar miniaplicacions"
+
+#: applet.js:126
+msgid "Start up Applications"
+msgstr "Aplicacions de l'inici"
+
+#: applet.js:130
+msgid "Cinnamon Settings"
+msgstr "Configuració de Cinnamon"
+
+#: applet.js:134
+msgid "System Settings"
+msgstr "Configuració del sistema"
+
+#. bettersettings@bownz->metadata.json->description
+msgid "A Better Cinnamon Settings"
+msgstr "Una millor configuració de Cinnamon"
+
+#. bettersettings@bownz->metadata.json->name
+msgid "Better Cinnamon Settings"
+msgstr "Configuració de Cinnamon millorada"

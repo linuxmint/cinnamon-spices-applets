@@ -1,0 +1,849 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: netusagemonitor@pdcurtis 3.3.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-12 11:20+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+# #: applet.js:62 3.2/applet.js:62 4.0/applet.js:56
+#: applet.js:62 3.2/applet.js:62 4.0/applet.js:56
+msgid "Some Dependencies not Installed"
+msgstr "Một số phụ thuộc chưa được cài đặt"
+
+#: applet.js:62 3.2/applet.js:62 4.0/applet.js:56
+msgid ""
+"You appear to be missing some of the programs or libraries required for this "
+"applet to run.\n"
+"\n"
+"Please read the help file on how to install them."
+msgstr ""
+"Có vẻ bạn đang thiếu một số chương trình hoặc thư viện cần thiết để applet "
+"này chạy.\n"
+"\n"
+"Vui lòng đọc tệp trợ giúp để biết cách cài đặt chúng."
+
+#: applet.js:83
+msgid "Ok"
+msgstr "Đồng ý"
+
+#: applet.js:346 3.2/applet.js:346 4.0/applet.js:348
+msgid "No Interface being Monitored - right click to select"
+msgstr "Không có giao diện nào được giám sát - nhấn chuột phải để chọn"
+
+#: applet.js:476 3.2/applet.js:492 4.0/applet.js:494
+msgid ""
+"NOTE: The last time the network traffic statistics were updated by vnStat is "
+"at the top right"
+msgstr ""
+"LƯU Ý: Lần cuối vnStat cập nhật thống kê lưu lượng mạng nằm ở góc trên bên "
+"phải"
+
+#: applet.js:481 3.2/applet.js:497 4.0/applet.js:499
+msgid ""
+"If no Interface is Active, the last available information has been displayed"
+msgstr ""
+"Nếu không có giao diện nào hoạt động, thông tin cuối cùng có sẵn đã được "
+"hiển thị"
+
+#: applet.js:488 3.2/applet.js:504 4.0/applet.js:506
+msgid ""
+"ERROR: Please make sure vnstat and vnstati are installed and that the vnstat "
+"daemon is running!"
+msgstr ""
+"LỖI: Vui lòng đảm bảo vnstat và vnstati đã được cài đặt và daemon vnstat "
+"đang chạy!"
+
+#: applet.js:501 3.2/applet.js:517 4.0/applet.js:519
+msgid "Cumulative Data Usage Information:"
+msgstr "Thông tin Sử dụng Dữ liệu Tích lũy:"
+
+#: applet.js:528 3.2/applet.js:544 4.0/applet.js:546
+msgid "Current Connection and Interface Information"
+msgstr "Thông tin Kết nối và Giao diện Hiện tại"
+
+#: applet.js:540 3.2/applet.js:556 4.0/applet.js:558
+msgid "No network monitored. Please select one right-clicking the applet."
+msgstr ""
+"Không có mạng nào được giám sát. Vui lòng chọn bằng cách nhấn chuột phải vào "
+"applet."
+
+#: applet.js:547 3.2/applet.js:563 4.0/applet.js:565
+msgid "Note: Alerts not enabled in Settings"
+msgstr "Lưu ý: Cảnh báo chưa được bật trong Cài đặt"
+
+#: applet.js:564 3.2/applet.js:580 4.0/applet.js:582
+msgid "Alert level (Orange):"
+msgstr "Mức cảnh báo (Màu cam):"
+
+#: applet.js:564 3.2/applet.js:580 4.0/applet.js:582
+#, no-javascript-format
+msgid "% of Data Limit of"
+msgstr "% giới hạn dữ liệu của"
+
+#: applet.js:569 applet.js:571 applet.js:577 applet.js:579 applet.js:585
+#: 3.2/applet.js:585 3.2/applet.js:587 3.2/applet.js:593 3.2/applet.js:595
+#: 3.2/applet.js:601 4.0/applet.js:587 4.0/applet.js:589 4.0/applet.js:595
+#: 4.0/applet.js:597 4.0/applet.js:603
+msgid "Cumulative Data Use"
+msgstr "Sử dụng Dữ liệu Tích lũy"
+
+#: applet.js:569 applet.js:577 applet.js:585 3.2/applet.js:585
+#: 3.2/applet.js:593 3.2/applet.js:601 4.0/applet.js:587 4.0/applet.js:595
+#: 4.0/applet.js:603
+msgid "with offset of"
+msgstr "với bù trừ"
+
+#: applet.js:608 3.2/applet.js:624 4.0/applet.js:626
+msgid "Select a network manager interface to be monitored:"
+msgstr "Chọn giao diện của trình quản lý mạng để giám sát:"
+
+#: applet.js:621 3.2/applet.js:637 4.0/applet.js:639
+msgid "(Active)"
+msgstr "(Hoạt động)"
+
+#: applet.js:634 3.2/applet.js:650 4.0/applet.js:652
+msgid "or Select an independent interface to be monitored:"
+msgstr "hoặc chọn giao diện độc lập để giám sát:"
+
+#: applet.js:638 3.2/applet.js:654 4.0/applet.js:656
+msgid "for most USB Mobile Internet Modems)"
+msgstr "dành cho hầu hết modem Internet di động USB)"
+
+#: applet.js:650 3.2/applet.js:666 4.0/applet.js:668
+msgid "for Android Bluetooth PAN Connections)"
+msgstr "dành cho kết nối Android Bluetooth PAN)"
+
+#: applet.js:660 3.2/applet.js:676 4.0/applet.js:678
+msgid "Check for Changes in Devices and Display Options"
+msgstr "Kiểm tra thay đổi trong Thiết bị và Tùy chọn Hiển thị"
+
+#: applet.js:668 3.2/applet.js:684 4.0/applet.js:686
+msgid "Toggle Display from ↓ and ↑ to ⇵"
+msgstr "Chuyển đổi hiển thị từ ↓ và ↑ sang ⇵"
+
+#: applet.js:682 applet.js:692 applet.js:702 3.2/applet.js:698
+#: 3.2/applet.js:708 3.2/applet.js:718 4.0/applet.js:700 4.0/applet.js:710
+#: 4.0/applet.js:720
+msgid "Reset Cumulative Data Usage"
+msgstr "Đặt lại Sử dụng Dữ liệu Tích lũy"
+
+#: applet.js:715 3.2/applet.js:731 4.0/applet.js:733
+msgid "Housekeeping and System Sub Menu"
+msgstr "Quản lý và Menu Phụ Hệ thống"
+
+#: applet.js:718 3.2/applet.js:734 4.0/applet.js:736
+msgid "Open System Monitor"
+msgstr "Mở Trình giám sát Hệ thống"
+
+#: applet.js:724 3.2/applet.js:740 4.0/applet.js:742
+msgid "View the Changelog"
+msgstr "Xem Thay đổi Ghi chú"
+
+#: applet.js:730 3.2/applet.js:746 4.0/applet.js:748
+msgid "View the Help File"
+msgstr "Xem Tệp Trợ giúp"
+
+#: applet.js:739 3.2/applet.js:755 4.0/applet.js:757
+msgid "Open stylesheet.css  (Advanced Function)"
+msgstr "Mở stylesheet.css  (Chức năng Nâng cao)"
+
+#: applet.js:745 3.2/applet.js:761 4.0/applet.js:763
+msgid "Open alertScript  (Advanced Function)"
+msgstr "Mở alertScript  (Chức năng Nâng cao)"
+
+#: applet.js:751 3.2/applet.js:767 4.0/applet.js:769
+msgid "Open suspendScript  (Advanced Function)"
+msgstr "Mở suspendScript  (Chức năng Nâng cao)"
+
+#: applet.js:759 3.2/applet.js:775 4.0/applet.js:777
+msgid "Test alertScript  (Advanced Test Function)"
+msgstr "Kiểm tra alertScript  (Chức năng Kiểm tra Nâng cao)"
+
+#: applet.js:765 3.2/applet.js:781 4.0/applet.js:783
+msgid "Test suspendScript  (Advanced Test Function)"
+msgstr "Kiểm tra suspendScript  (Chức năng Kiểm tra Nâng cao)"
+
+#: applet.js:771 3.2/applet.js:787 4.0/applet.js:789
+msgid "Test Crisis Management Function (Advanced Test Function)"
+msgstr "Kiểm tra Chức năng Quản lý Khủng hoảng (Chức năng Kiểm tra Nâng cao)"
+
+# #: applet.js:841
+#: applet.js:841
+msgid ""
+"THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n"
+"\n"
+" Either set a new limit using right click -> Settings \n"
+"\n"
+"or disconnect using the Network Manager Applet"
+msgstr ""
+"GIỚI HẠN SỬ DỤNG DỮ LIỆU ĐÃ BỊ VƯỢT QUÁ\n"
+"\n"
+" Hoặc đặt giới hạn mới bằng cách nhấn chuột phải -> Cài đặt \n"
+"\n"
+"hoặc ngắt kết nối bằng Network Manager Applet"
+
+#: applet.js:914 3.2/applet.js:928 4.0/applet.js:930
+msgid "Interface:"
+msgstr "Giao diện:"
+
+#: applet.js:914 applet.js:917 3.2/applet.js:928 3.2/applet.js:931
+#: 4.0/applet.js:930 4.0/applet.js:933
+msgid "Downloaded:"
+msgstr "Đã tải về:"
+
+#: applet.js:914 applet.js:917 3.2/applet.js:928 3.2/applet.js:931
+#: 4.0/applet.js:930 4.0/applet.js:933
+msgid "Uploaded:"
+msgstr "Đã tải lên:"
+
+#: 3.2/applet.js:840 4.0/applet.js:842
+msgid ""
+"THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n"
+"\n"
+"All Network connections managed by the Network Manager have been Disabled\n"
+"\n"
+"You will need to use the Network Manager Applet to Re-enable them\n"
+"when the data usage problem has been resolved\n"
+"\n"
+" Some connections using ppp0 may not have been disabled or may need to be "
+"restarted manually"
+msgstr ""
+"GIỚI HẠN SỬ DỤNG DỮ LIỆU ĐÃ BỊ VƯỢT QUÁ\n"
+"\n"
+"Tất cả kết nối mạng do Network Manager quản lý đã bị vô hiệu hóa\n"
+"\n"
+"Bạn sẽ cần sử dụng Network Manager Applet để bật lại khi vấn đề sử dụng dữ "
+"liệu được giải quyết\n"
+"\n"
+" Một số kết nối sử dụng ppp0 có thể chưa bị vô hiệu hóa hoặc cần khởi động "
+"lại thủ công"
+
+#: 3.2/applet.js:857 4.0/applet.js:859
+msgid ""
+"THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n"
+"\n"
+" Either set a new limit using \n"
+"\n"
+"a right click on The Network Data Management Applet -> Settings \n"
+"\n"
+"or disconnect using the Network Manager Applet\n"
+"\n"
+msgstr ""
+"GIỚI HẠN SỬ DỤNG DỮ LIỆU ĐÃ BỊ VƯỢT QUÁ\n"
+"\n"
+" Hoặc đặt giới hạn mới bằng cách\n"
+"\n"
+"nhấn chuột phải vào Network Data Management Applet -> Cài đặt \n"
+"\n"
+"hoặc ngắt kết nối bằng Network Manager Applet\n"
+"\n"
+
+#: 4.0/applet.js:256
+msgid "Network Usage Monitor with Alerts - Stylesheet persistence active"
+msgstr "Trình giám sát Sử dụng Mạng với Cảnh báo - Lưu trữ Stylesheet đang bật"
+
+#. metadata.json->name
+msgid "Network Data Usage Monitor"
+msgstr "Trình giám sát Sử dụng Dữ liệu Mạng"
+
+#. metadata.json->description
+msgid ""
+"A Comprehensive Data Usage Monitor with alerts and cumulative data functions"
+msgstr ""
+"Trình giám sát dữ liệu toàn diện với cảnh báo và chức năng tổng hợp dữ liệu"
+
+#. settings-schema.json->head->description
+#. 3.2->settings-schema.json->section0->title
+#. 4.0->settings-schema.json->section0->title
+msgid "General Settings for the Network Usage Monitor Applet"
+msgstr "Cài đặt Chung cho Applet Giám sát Sử dụng Mạng"
+
+#. settings-schema.json->refreshInterval-spinner->units
+#. 3.2->settings-schema.json->refreshInterval-spinner->units
+#. 4.0->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->refreshInterval-spinner->description
+#. 3.2->settings-schema.json->refreshInterval-spinner->description
+#. 4.0->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Khoảng thời gian làm mới hiển thị:"
+
+#. settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.2->settings-schema.json->refreshInterval-spinner->tooltip
+#. 4.0->settings-schema.json->refreshInterval-spinner->tooltip
+msgid "Increase or decrease this spinner value to change the Refresh Interval"
+msgstr "Tăng hoặc giảm giá trị này để thay đổi khoảng thời gian làm mới"
+
+#. settings-schema.json->decimalsToShow-spinner->units
+#. 3.2->settings-schema.json->decimalsToShow-spinner->units
+#. 4.0->settings-schema.json->decimalsToShow-spinner->units
+msgid "decimal places"
+msgstr "số chữ số thập phân"
+
+#. settings-schema.json->decimalsToShow-spinner->description
+#. 3.2->settings-schema.json->decimalsToShow-spinner->description
+#. 4.0->settings-schema.json->decimalsToShow-spinner->description
+msgid "Display Resolution:"
+msgstr "Độ phân giải hiển thị:"
+
+#. settings-schema.json->decimalsToShow-spinner->tooltip
+#. 3.2->settings-schema.json->decimalsToShow-spinner->tooltip
+#. 4.0->settings-schema.json->decimalsToShow-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to make the change the number of "
+"decimal places displayed"
+msgstr "Tăng hoặc giảm giá trị này để thay đổi số chữ số thập phân hiển thị"
+
+#. settings-schema.json->monitored-interface->description
+#. 3.2->settings-schema.json->monitored-interface->description
+#. 4.0->settings-schema.json->monitored-interface->description
+msgid "Last Interface Monitored - no need to change as set by Applet:"
+msgstr ""
+"Giao diện được giám sát lần cuối - không cần thay đổi, đã được Applet thiết "
+"lập:"
+
+#. settings-schema.json->monitored-interface->tooltip
+#. 3.2->settings-schema.json->monitored-interface->tooltip
+#. 4.0->settings-schema.json->monitored-interface->tooltip
+msgid ""
+"This is normally set by the Applet and should not be changed here except for "
+"experimental or diagnostic use"
+msgstr ""
+"Thông thường được Applet thiết lập và không nên thay đổi ở đây, trừ khi dùng "
+"cho mục đích thử nghiệm hoặc chẩn đoán"
+
+#. settings-schema.json->useDefaultInterface->description
+#. 3.2->settings-schema.json->useDefaultInterface->description
+#. 4.0->settings-schema.json->useDefaultInterface->description
+msgid ""
+"Use the following Interface as default to monitor when no other Interface is "
+"Active at start up :"
+msgstr ""
+"Sử dụng Giao diện sau làm mặc định để giám sát khi không có Giao diện nào "
+"hoạt động lúc khởi động:"
+
+#. settings-schema.json->useDefaultInterface->tooltip
+#. 3.2->settings-schema.json->useDefaultInterface->tooltip
+#. 4.0->settings-schema.json->useDefaultInterface->tooltip
+msgid ""
+"Checking this box allows you to set up to use an interface for connections "
+"which is not always active at start up such as Wifi or Mobile Broadband - "
+"usually wlan0 or ppp0. If not checked the first active interface know to the "
+"Network Monitor will be used or PPP0 if that was the last connection."
+msgstr ""
+"Đánh dấu hộp này cho phép bạn chọn giao diện để kết nối không luôn hoạt động "
+"lúc khởi động như Wifi hoặc Mobile Broadband - thường là wlan0 hoặc ppp0. "
+"Nếu không chọn, giao diện hoạt động đầu tiên được Network Monitor biết sẽ "
+"được sử dụng, hoặc PPP0 nếu đó là kết nối cuối cùng."
+
+#. settings-schema.json->defaultInterface->description
+#. 3.2->settings-schema.json->defaultInterface->description
+#. 4.0->settings-schema.json->defaultInterface->description
+msgid "Default Interface (usually ppp0 or wlan0):"
+msgstr "Giao diện Mặc định (thường là ppp0 hoặc wlan0):"
+
+#. settings-schema.json->defaultInterface->tooltip
+#. 3.2->settings-schema.json->defaultInterface->tooltip
+#. 4.0->settings-schema.json->defaultInterface->tooltip
+msgid ""
+"The Default  interface to use for connections which are not always active at "
+"start up such as Mobile Broadband or Wifi - usually set to ppp0 or wlan0"
+msgstr ""
+"Giao diện Mặc định để sử dụng cho các kết nối không luôn hoạt động lúc khởi "
+"động như Mobile Broadband hoặc Wifi - thường đặt là ppp0 hoặc wlan0"
+
+#. settings-schema.json->compactDisplay->description
+#. 3.2->settings-schema.json->compactDisplay->description
+#. 4.0->settings-schema.json->compactDisplay->description
+msgid "Use a Compact Display with total traffic only"
+msgstr "Sử dụng Hiển thị Gọn chỉ với tổng lưu lượng"
+
+#. settings-schema.json->compactDisplay->tooltip
+#. 3.2->settings-schema.json->compactDisplay->tooltip
+#. 4.0->settings-schema.json->compactDisplay->tooltip
+msgid "This just displays the total of upload and download rate in the applet"
+msgstr "Chỉ hiển thị tổng tốc độ tải lên và tải về trong applet"
+
+#. settings-schema.json->appletWidthSetting->units
+#. 3.2->settings-schema.json->appletWidthSetting->units
+#. 4.0->settings-schema.json->appletWidthSetting->units
+msgid "pixels"
+msgstr "pixel"
+
+#. settings-schema.json->appletWidthSetting->description
+#. 3.2->settings-schema.json->appletWidthSetting->description
+#. 4.0->settings-schema.json->appletWidthSetting->description
+msgid ""
+"Applet Width Adjustment (Only for fine tuning - normally leave alone at 180:"
+msgstr ""
+"Điều chỉnh Chiều rộng Applet (Chỉ để tinh chỉnh - thường để mặc định 180):"
+
+#. settings-schema.json->appletWidthSetting->tooltip
+#. 3.2->settings-schema.json->appletWidthSetting->tooltip
+#. 4.0->settings-schema.json->appletWidthSetting->tooltip
+msgid ""
+"Fine tuning of applet width for changes in theme and decimal places "
+"displayed - needs to be used in conjuction with changes in stylesheet.css. "
+"Value is halved when Compact Display selected"
+msgstr ""
+"Tinh chỉnh chiều rộng applet cho các thay đổi giao diện và số chữ số thập "
+"phân hiển thị - cần kết hợp với thay đổi trong stylesheet.css. Giá trị giảm "
+"một nửa khi chọn Hiển thị Gọn"
+
+#. settings-schema.json->dataUnit->options
+#. 3.2->settings-schema.json->dataUnit->options
+#. 4.0->settings-schema.json->dataUnit->options
+msgid "Mbytes"
+msgstr "Mbyte"
+
+#. settings-schema.json->dataUnit->options
+#. 3.2->settings-schema.json->dataUnit->options
+#. 4.0->settings-schema.json->dataUnit->options
+msgid "Gbytes"
+msgstr "Gbyte"
+
+#. settings-schema.json->dataUnit->description
+#. 3.2->settings-schema.json->dataUnit->description
+#. 4.0->settings-schema.json->dataUnit->description
+msgid "Data Unit used to set Alert Levels and Cumulative Offsets"
+msgstr "Đơn vị Dữ liệu dùng để thiết lập Mức cảnh báo và Bù tích lũy"
+
+#. settings-schema.json->dataUnit->tooltip
+#. 3.2->settings-schema.json->dataUnit->tooltip
+#. 4.0->settings-schema.json->dataUnit->tooltip
+msgid ""
+"These are the units which will be used for setting the alert limit and "
+"cumulative offsets."
+msgstr ""
+"Đây là các đơn vị sẽ được sử dụng để thiết lập giới hạn cảnh báo và bù tích "
+"lũy."
+
+#. settings-schema.json->head1->description
+#. 3.2->settings-schema.json->section1->title
+#. 4.0->settings-schema.json->section1->title
+msgid ""
+"Settings specific to Data Usage and Alert functions for Current Connection"
+msgstr ""
+"Cài đặt riêng cho chức năng Sử dụng Dữ liệu và Cảnh báo của Kết nối Hiện tại"
+
+#. settings-schema.json->useTotalLimit->description
+#. 3.2->settings-schema.json->useTotalLimit->description
+#. 4.0->settings-schema.json->useTotalLimit->description
+msgid "Check this box to use the Alert function"
+msgstr "Đánh dấu để sử dụng chức năng Cảnh báo"
+
+#. settings-schema.json->useTotalLimit->tooltip
+#. 3.2->settings-schema.json->useTotalLimit->tooltip
+#. 4.0->settings-schema.json->useTotalLimit->tooltip
+msgid ""
+"This is useful for mobile broadband or where you may be paying for data on a "
+"Wifi link"
+msgstr ""
+"Điều này hữu ích cho mạng di động hoặc khi bạn trả phí dữ liệu trên kết nối "
+"Wifi"
+
+#. settings-schema.json->totalLimit->units
+#. settings-schema.json->cumulativeOffset1->units
+#. settings-schema.json->cumulativeOffset2->units
+#. settings-schema.json->cumulativeOffset3->units
+#. 3.2->settings-schema.json->totalLimit->units
+#. 3.2->settings-schema.json->cumulativeOffset1->units
+#. 3.2->settings-schema.json->cumulativeOffset2->units
+#. 3.2->settings-schema.json->cumulativeOffset3->units
+#. 4.0->settings-schema.json->totalLimit->units
+#. 4.0->settings-schema.json->cumulativeOffset1->units
+#. 4.0->settings-schema.json->cumulativeOffset2->units
+#. 4.0->settings-schema.json->cumulativeOffset3->units
+msgid "Mbytes or Gbytes as set above"
+msgstr "Mbyte hoặc Gbyte như đã thiết lập ở trên"
+
+#. settings-schema.json->totalLimit->description
+#. 3.2->settings-schema.json->totalLimit->description
+#. 4.0->settings-schema.json->totalLimit->description
+msgid "Data Limit before a Red Warning background is displayed in the Applet"
+msgstr "Giới hạn Dữ liệu trước khi nền cảnh báo đỏ được hiển thị trong Applet"
+
+#. settings-schema.json->totalLimit->tooltip
+#. 3.2->settings-schema.json->totalLimit->tooltip
+#. 4.0->settings-schema.json->totalLimit->tooltip
+msgid ""
+"This is the Total Data which can be uploaded and downloaded before the "
+"background of the applet goes red - by default it goes orange at 80% of this "
+"- reset by disconnection, reboot and/or suspend depending on system"
+msgstr ""
+"Tổng dữ liệu có thể tải lên và tải xuống trước khi nền của applet chuyển "
+"sang đỏ - mặc định sẽ chuyển sang màu cam ở 80% giới hạn này - được đặt lại "
+"khi ngắt kết nối, khởi động lại hoặc tạm ngưng tùy hệ thống."
+
+#. settings-schema.json->alertPercentage->description
+#. 3.2->settings-schema.json->alertPercentage->description
+#. 4.0->settings-schema.json->alertPercentage->description
+msgid "Percentage of Data Limit at which Orange Warning Displayed"
+msgstr "Tỷ lệ phần trăm Giới hạn Dữ liệu hiển thị Cảnh báo màu cam"
+
+#. settings-schema.json->alertPercentage->tooltip
+#. 3.2->settings-schema.json->alertPercentage->tooltip
+#. 4.0->settings-schema.json->alertPercentage->tooltip
+msgid ""
+"Percentage of Data Limit at which Orange Warning Background is displayed - "
+"It is also shown and can be adjusted in the Applet left click menu"
+msgstr ""
+"Tỷ lệ phần trăm Giới hạn Dữ liệu tại đó nền cảnh báo màu cam được hiển thị - "
+"cũng được hiển thị và có thể điều chỉnh trong menu nhấp trái của Applet"
+
+#. settings-schema.json->head2->description
+#. 3.2->settings-schema.json->section2->title
+#. 4.0->settings-schema.json->section2->title
+msgid "Settings specific to Cumulative Data Usage functions"
+msgstr "Cài đặt dành cho chức năng Sử dụng Dữ liệu Tích lũy"
+
+#. settings-schema.json->cumulativeInterface1->description
+#. 3.2->settings-schema.json->cumulativeInterface1->description
+#. 4.0->settings-schema.json->cumulativeInterface1->description
+msgid ""
+"Interface 1 for monitoring Cumulative Data Usage - null will inhibit display"
+msgstr ""
+"Giao diện 1 để giám sát Sử dụng Dữ liệu Tích lũy - để trống để không hiển thị"
+
+#. settings-schema.json->cumulativeInterface1->tooltip
+#. settings-schema.json->cumulativeInterface2->tooltip
+#. settings-schema.json->cumulativeInterface3->tooltip
+#. 3.2->settings-schema.json->cumulativeInterface1->tooltip
+#. 3.2->settings-schema.json->cumulativeInterface2->tooltip
+#. 3.2->settings-schema.json->cumulativeInterface3->tooltip
+#. 4.0->settings-schema.json->cumulativeInterface1->tooltip
+#. 4.0->settings-schema.json->cumulativeInterface2->tooltip
+#. 4.0->settings-schema.json->cumulativeInterface3->tooltip
+msgid ""
+"This is normally set to ppp0 or wlan0 to allow monitoring data usage during "
+"a period by mobile internet or Wifi charged by the Mbyte"
+msgstr ""
+"Thông thường được đặt là ppp0 hoặc wlan0 để giám sát sử dụng dữ liệu trong "
+"một khoảng thời gian qua mạng di động hoặc Wifi tính phí theo Mbyte"
+
+#. settings-schema.json->cumulativeOffset1->description
+#. 3.2->settings-schema.json->cumulativeOffset1->description
+#. 4.0->settings-schema.json->cumulativeOffset1->description
+msgid "Offset applied to Cumulative Data Usage 1"
+msgstr "Bù dữ liệu áp dụng cho Sử dụng Dữ liệu Tích lũy 1"
+
+#. settings-schema.json->cumulativeOffset1->tooltip
+#. settings-schema.json->cumulativeOffset2->tooltip
+#. settings-schema.json->cumulativeOffset3->tooltip
+#. 3.2->settings-schema.json->cumulativeOffset1->tooltip
+#. 3.2->settings-schema.json->cumulativeOffset2->tooltip
+#. 3.2->settings-schema.json->cumulativeOffset3->tooltip
+#. 4.0->settings-schema.json->cumulativeOffset1->tooltip
+#. 4.0->settings-schema.json->cumulativeOffset2->tooltip
+#. 4.0->settings-schema.json->cumulativeOffset3->tooltip
+msgid ""
+"This can be used to offset the data usage to take into account usage on "
+"other machines or correct for other causes"
+msgstr ""
+"Có thể sử dụng để bù trừ dữ liệu, tính đến sử dụng trên các máy khác hoặc "
+"điều chỉnh cho các nguyên nhân khác"
+
+#. settings-schema.json->cumulativeInterface2->description
+#. 3.2->settings-schema.json->cumulativeInterface2->description
+#. 4.0->settings-schema.json->cumulativeInterface2->description
+msgid ""
+"Interface 2 for monitoring Cumulative Data Usage - null will inhibit display"
+msgstr ""
+"Giao diện 2 để giám sát Sử dụng Dữ liệu Tích lũy - để trống để không hiển thị"
+
+#. settings-schema.json->cumulativeOffset2->description
+#. 3.2->settings-schema.json->cumulativeOffset2->description
+#. 4.0->settings-schema.json->cumulativeOffset2->description
+msgid "Offset applied to Cumulative Data Usage 2"
+msgstr "Bù dữ liệu áp dụng cho Sử dụng Dữ liệu Tích lũy 2"
+
+#. settings-schema.json->cumulativeInterface3->description
+#. 3.2->settings-schema.json->cumulativeInterface3->description
+#. 4.0->settings-schema.json->cumulativeInterface3->description
+msgid ""
+"Interface 3 for monitoring Cumulative Data Usage - null will inhibit display"
+msgstr ""
+"Giao diện 3 để giám sát Sử dụng Dữ liệu Tích lũy - để trống để không hiển thị"
+
+#. settings-schema.json->cumulativeOffset3->description
+#. 3.2->settings-schema.json->cumulativeOffset3->description
+#. 4.0->settings-schema.json->cumulativeOffset3->description
+msgid "Offset applied to Cumulative Data Usage 3"
+msgstr "Bù dữ liệu áp dụng cho Sử dụng Dữ liệu Tích lũy 3"
+
+#. settings-schema.json->head3->description
+#. 3.2->settings-schema.json->section3->title
+#. 4.0->settings-schema.json->section3->title
+msgid "Settings specific to Long Term Traffic Statistics"
+msgstr "Cài đặt cho Thống kê Lưu lượng Dài hạn"
+
+#. settings-schema.json->useVnstat->description
+#. 3.2->settings-schema.json->useVnstat->description
+#. 4.0->settings-schema.json->useVnstat->description
+msgid ""
+"Display long term traffic statistics (vnstat and vnstati Must be installed). "
+msgstr ""
+"Hiển thị thống kê lưu lượng dài hạn (vnstat và vnstati phải được cài đặt)."
+
+#. settings-schema.json->useVnstat->tooltip
+#. 3.2->settings-schema.json->useVnstat->tooltip
+#. 4.0->settings-schema.json->useVnstat->tooltip
+msgid ""
+"This requires vnstat and vnstati to be installed prior to being enabled."
+msgstr ""
+"Điều này yêu cầu vnstat và vnstati phải được cài đặt trước khi kích hoạt."
+
+#. settings-schema.json->head4->description
+msgid "Settings for response to exceeding the current data usage limits"
+msgstr "Cài đặt phản ứng khi vượt quá giới hạn sử dụng dữ liệu hiện tại"
+
+#. settings-schema.json->useCrisisManagement->description
+#. 3.2->settings-schema.json->useCrisisManagement->description
+#. 4.0->settings-schema.json->useCrisisManagement->description
+msgid "Take action when the current data usage limit is exceed"
+msgstr "Thực hiện hành động khi vượt quá giới hạn sử dụng dữ liệu hiện tại"
+
+#. settings-schema.json->useCrisisManagement->tooltip
+#. 3.2->settings-schema.json->useCrisisManagement->tooltip
+#. 4.0->settings-schema.json->useCrisisManagement->tooltip
+msgid ""
+"This is useful for mobile broadband or where you may be paying for data on a "
+"Wifi link as it can, for example, suspend the machine after the limit has "
+"been exceeded"
+msgstr ""
+"Điều này hữu ích cho mạng di động hoặc khi bạn trả phí dữ liệu trên Wifi, ví "
+"dụ có thể tạm ngưng máy khi vượt quá giới hạn"
+
+#. settings-schema.json->crisisManagement->options
+#. 3.2->settings-schema.json->crisisManagement->options
+#. 4.0->settings-schema.json->crisisManagement->options
+msgid "Display a notification"
+msgstr "Hiển thị thông báo"
+
+#. settings-schema.json->crisisManagement->options
+#. 3.2->settings-schema.json->crisisManagement->options
+#. 4.0->settings-schema.json->crisisManagement->options
+msgid "Display a high priority notification"
+msgstr "Hiển thị thông báo ưu tiên cao"
+
+#. settings-schema.json->crisisManagement->options
+#. 3.2->settings-schema.json->crisisManagement->options
+#. 4.0->settings-schema.json->crisisManagement->options
+msgid "Put up a full screen 'modal dialog' warning"
+msgstr "Hiển thị cảnh báo 'hộp thoại toàn màn hình'"
+
+#. settings-schema.json->crisisManagement->options
+#. 3.2->settings-schema.json->crisisManagement->options
+#. 4.0->settings-schema.json->crisisManagement->options
+msgid "Run a user configurable Script (alertScript)"
+msgstr "Chạy Script do người dùng cấu hình (alertScript)"
+
+#. settings-schema.json->crisisManagement->options
+#. 3.2->settings-schema.json->crisisManagement->options
+#. 4.0->settings-schema.json->crisisManagement->options
+msgid "Disable All Networking managed by NMClient after opportunity to abort"
+msgstr ""
+"Vô hiệu hóa tất cả mạng do NMClient quản lý sau khoảng thời gian cho phép "
+"hủy bỏ"
+
+#. settings-schema.json->crisisManagement->options
+#. 3.2->settings-schema.json->crisisManagement->options
+#. 4.0->settings-schema.json->crisisManagement->options
+msgid "Suspend Machine after a brief opportunity to abort (via suspendScript)"
+msgstr "Tạm ngưng máy sau khoảng thời gian cho phép hủy bỏ (qua suspendScript)"
+
+#. settings-schema.json->crisisManagement->description
+#. 3.2->settings-schema.json->crisisManagement->description
+#. 4.0->settings-schema.json->crisisManagement->description
+msgid "Action to take when Data Usage Limit exceeded:"
+msgstr "Hành động khi vượt quá Giới hạn Sử dụng Dữ liệu:"
+
+#. settings-schema.json->crisisManagement->tooltip
+#. 3.2->settings-schema.json->crisisManagement->tooltip
+#. 4.0->settings-schema.json->crisisManagement->tooltip
+msgid ""
+"These are a mixture of preset options and scripts which can be changed by "
+"the user (Note: changes in scripts may not survive an update and should be "
+"backed up)"
+msgstr ""
+"Đây là các tùy chọn và script có sẵn, có thể thay đổi bởi người dùng (Lưu ý: "
+"thay đổi trong script có thể bị mất sau cập nhật và nên sao lưu)"
+
+#. settings-schema.json->disconnectDelay->units
+#. 3.2->settings-schema.json->disconnectDelay->units
+#. 4.0->settings-schema.json->disconnectDelay->units
+msgid "Seconds"
+msgstr "Giây"
+
+#. settings-schema.json->disconnectDelay->description
+#. 3.2->settings-schema.json->disconnectDelay->description
+#. 4.0->settings-schema.json->disconnectDelay->description
+msgid "Delay before Disabling Networking managed by NMClient"
+msgstr "Thời gian trễ trước khi vô hiệu hóa mạng do NMClient quản lý"
+
+#. settings-schema.json->disconnectDelay->tooltip
+#. 3.2->settings-schema.json->disconnectDelay->tooltip
+#. 4.0->settings-schema.json->disconnectDelay->tooltip
+msgid ""
+"This is the delay during which you can click the Applet to abort automatic "
+"disconnection of the machine when the Data Usage Limit is exceeded."
+msgstr ""
+"Khoảng thời gian này cho phép bạn nhấp vào Applet để hủy tự động ngắt kết "
+"nối khi vượt quá Giới hạn Sử dụng Dữ liệu."
+
+#. settings-schema.json->useAlertSound->description
+#. 3.2->settings-schema.json->useAlertSound->description
+#. 4.0->settings-schema.json->useAlertSound->description
+msgid "Sound an audible alert when Data Usage Limit Exceeded"
+msgstr "Phát cảnh báo âm thanh khi vượt quá Giới hạn Sử dụng Dữ liệu"
+
+#. settings-schema.json->useAlertSound->tooltip
+#. 3.2->settings-schema.json->useAlertSound->tooltip
+#. 4.0->settings-schema.json->useAlertSound->tooltip
+msgid ""
+"Only for built in alerts - hard code into scripts. Must have Sox installed"
+msgstr "Chỉ cho cảnh báo tích hợp - mã hóa cứng trong script. Phải cài Sox"
+
+#. settings-schema.json->alertSound->description
+msgid "Full path and filename of alert sound file"
+msgstr "Đường dẫn đầy đủ và tên file âm thanh cảnh báo"
+
+#. settings-schema.json->alertSound->tooltip
+msgid "Must have Sox installed. Most sound file types supported"
+msgstr "Phải cài Sox. Hỗ trợ hầu hết các loại file âm thanh"
+
+#. settings-schema.json->displayExtraHousekeeping->description
+#. 3.2->settings-schema.json->displayExtraHousekeeping->description
+#. 4.0->settings-schema.json->displayExtraHousekeeping->description
+msgid "Add development and test functions to Context Menu"
+msgstr "Thêm các chức năng phát triển và thử nghiệm vào Menu Ngữ cảnh"
+
+#. settings-schema.json->displayExtraHousekeeping->tooltip
+#. 3.2->settings-schema.json->displayExtraHousekeeping->tooltip
+#. 4.0->settings-schema.json->displayExtraHousekeeping->tooltip
+msgid ""
+"Very useful for development of scripts and testing without actually "
+"exceeding a limit"
+msgstr ""
+"Rất hữu ích cho phát triển script và thử nghiệm mà không thực sự vượt quá "
+"giới hạn"
+
+#. 3.2->settings-schema.json->page1->title
+#. 4.0->settings-schema.json->page1->title
+msgid "General"
+msgstr "Chung"
+
+#. 3.2->settings-schema.json->page2->title
+#. 4.0->settings-schema.json->page2->title
+msgid "Data Use, Alerts and Responses"
+msgstr "Sử dụng Dữ liệu, Cảnh báo và Phản hồi"
+
+#. 3.2->settings-schema.json->page3->title
+#. 4.0->settings-schema.json->page3->title
+msgid "Cumulative Data"
+msgstr "Dữ liệu Tích lũy"
+
+#. 3.2->settings-schema.json->page4->title
+#. 4.0->settings-schema.json->page4->title
+msgid "Longer Term Statistics"
+msgstr "Thống kê Dài hạn"
+
+#. 3.2->settings-schema.json->section4->title
+#. 4.0->settings-schema.json->section4->title
+msgid "Response to exceeding the current data usage limit"
+msgstr "Phản ứng khi vượt quá giới hạn sử dụng dữ liệu hiện tại"
+
+#. 3.2->settings-schema.json->useExtendedDisplay->description
+#. 4.0->settings-schema.json->useExtendedDisplay->description
+msgid "Enable Extended Display Options"
+msgstr "Bật Tùy chọn Hiển thị Mở rộng"
+
+#. 3.2->settings-schema.json->useExtendedDisplay->tooltip
+#. 4.0->settings-schema.json->useExtendedDisplay->tooltip
+msgid "This is new option version 1.0.2"
+msgstr "Tùy chọn mới phiên bản 1.0.2"
+
+#. 3.2->settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid "Classic - Summary of Data Usage for last Days and Months"
+msgstr "Cổ điển - Tóm tắt sử dụng dữ liệu theo Ngày và Tháng"
+
+#. 3.2->settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid ""
+"Classic Plus - Classic with addition of breakdown by hour for last 24 hours"
+msgstr "Cổ điển Plus - Cổ điển với phân tích theo giờ cho 24 giờ qua"
+
+#. 3.2->settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid "Custom Display - requires enabling below"
+msgstr "Hiển thị Tùy chỉnh - cần bật tùy chọn bên dưới"
+
+#. 3.2->settings-schema.json->extendedDisplay->description
+#. 4.0->settings-schema.json->extendedDisplay->description
+msgid "Type of Display - default 'classic'"
+msgstr "Loại Hiển thị - mặc định 'cổ điển'"
+
+#. 3.2->settings-schema.json->extendedDisplay->tooltip
+#. 4.0->settings-schema.json->extendedDisplay->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional of adding "
+"an hourly breakdown over the last 24 hours and an experimental option of a "
+"user defined string for vnstati when enabled below"
+msgstr ""
+"Tính năng này cung cấp hiển thị Cổ điển (gốc) với tùy chọn thêm phân tích "
+"theo giờ trong 24 giờ qua và tùy chọn thử nghiệm chuỗi do người dùng định "
+"nghĩa cho vnstati khi bật bên dưới"
+
+#. 3.2->settings-schema.json->useVnstatiCommandString->description
+#. 4.0->settings-schema.json->useVnstatiCommandString->description
+msgid "Enable Custom Display Option"
+msgstr "Bật Tùy chọn Hiển thị Tùy chỉnh"
+
+#. 3.2->settings-schema.json->useVnstatiCommandString->tooltip
+#. 4.0->settings-schema.json->useVnstatiCommandString->tooltip
+msgid "Check box"
+msgstr "Đánh dấu vào ô"
+
+#. 3.2->settings-schema.json->vnstatiCommandString->description
+#. 4.0->settings-schema.json->vnstatiCommandString->description
+msgid "Custom options to pass to vnstati - default is '-vs' "
+msgstr "Tùy chọn tùy chỉnh truyền vào vnstati - mặc định là '-vs'"
+
+#. 3.2->settings-schema.json->vnstatiCommandString->tooltip
+#. 4.0->settings-schema.json->vnstatiCommandString->tooltip
+msgid ""
+"The default is the options used for the extended display. Note: this is not "
+"the whole vnstati option string - the interface and output file options are "
+"added to it automatically. Please read the vnstati manual for further "
+"information on options avaiilable"
+msgstr ""
+"Mặc định là các tùy chọn dùng cho hiển thị mở rộng. Lưu ý: đây không phải "
+"toàn bộ chuỗi tùy chọn vnstati - các tùy chọn giao diện và tệp xuất được "
+"thêm tự động. Vui lòng đọc hướng dẫn vnstati để biết thêm thông tin về các "
+"tùy chọn có sẵn"
+
+#. 3.2->settings-schema.json->alertSound->description
+#. 4.0->settings-schema.json->alertSound->description
+msgid "Choose alert sound file"
+msgstr "Chọn file âm thanh cảnh báo"
+
+#. 3.2->settings-schema.json->alertSound->tooltip
+#. 4.0->settings-schema.json->alertSound->tooltip
+msgid "Must have Sox installed. Limited file types supported (.oga and .wav)"
+msgstr "Phải cài Sox. Hỗ trợ hạn chế các loại file (.oga và .wav)"

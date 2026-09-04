@@ -1,0 +1,70 @@
+# CINNAMON MULTI-LINE TASKBAR
+# This file is put in the public domain.
+# posto, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cinnamon-multi-line-taskbar-applet 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:65
+msgid "Close"
+msgstr "Cerrar"
+
+#. applet.js:68
+msgid "Close all"
+msgstr "Cerrar todo"
+
+#. applet.js:71
+msgid "Close others"
+msgstr "Cerrar otros"
+
+#. applet.js:75 applet.js:907
+msgid "Restore"
+msgstr "Restablecer"
+
+#. applet.js:77 applet.js:912
+msgid "Minimize"
+msgstr "Minimizar"
+
+#. applet.js:80 applet.js:141
+msgid "Maximize"
+msgstr "Maximizar"
+
+#. applet.js:83
+msgid "Move to left workspace"
+msgstr "Mover al espacio de trabajo izquierdo"
+
+#. applet.js:86
+msgid "Move to right workspace"
+msgstr "Mover al espacio de trabajo derecho"
+
+#. applet.js:89 applet.js:127
+msgid "Visible on all workspaces"
+msgstr "Visible en todos los espacios de trabajo"
+
+#. applet.js:123
+msgid "Only on this workspace"
+msgstr "Sólo en este espacio de trabajo"
+
+#. applet.js:139
+msgid "Unmaximize"
+msgstr "Desmaximizar"
+
+#. metadata.json->name
+msgid "Cinnamon Multi-Line Taskbar"
+msgstr "Barra de tareas multilínea de Cinnamon"
+
+#. metadata.json->description
+msgid "https://github.com/posto/cinnamon-multi-line-taskbar-applet"
+msgstr "https://github.com/posto/cinnamon-multi-line-taskbar-applet"

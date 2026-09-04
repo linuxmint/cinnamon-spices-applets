@@ -1,0 +1,128 @@
+# Swedish translation for officeCenter@scollins.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: officeCenter@scollins\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2017-05-01 08:20+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:127
+msgid "Clear"
+msgstr "Rensa"
+
+#. applet.js:162
+msgid "Office"
+msgstr "Kontor"
+
+#. applet.js:241
+msgid "LAUNCHERS"
+msgstr "PROGRAM"
+
+#. applet.js:257
+msgid "DOCUMENTS"
+msgstr "DOKUMENT"
+
+#. applet.js:268
+msgid "Open folder"
+msgstr "Öppna mappen"
+
+#. applet.js:294
+msgid "RECENT DOCUMENTS"
+msgstr "TIDIGARE DOKUMENT"
+
+#. metadata.json->name
+msgid "Office Center"
+msgstr "Kontorscentral"
+
+#. metadata.json->description
+msgid "Provides an easy and fast resource for all your office needs"
+msgstr "Erbjuder en enkel och snabb resurs för dina kontorsbehov"
+
+#. metadata.json->comments
+msgid ""
+"Office Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy aceess to all of your office programs and documents. Feel free "
+"to contribute by submitting pull requests, bug reports and feature requests "
+"to my github repo."
+msgstr ""
+"Kontorscentralen är ett funktionsrikt, plattformsöverskridande panelprogram "
+"för Cinnamon som erbjuder enkel åtkomst till dina kontorsprogram och "
+"dokument. Bidra gärna till utvecklingen genom \\\"pull requests\\\", "
+"felrapporter och funktionsönskemål, på min GitHub-plats."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Author"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Allmänna inställningar"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Panelikon"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "Accepterar ikonnamn eller direkt sökväg (stödjer symboliska ikoner)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Paneltext"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shorcut key"
+msgstr "Menysnabbtangent"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon size"
+msgstr "Ikonstorlek"
+
+#. settings-schema.json->documents->description
+msgid "Documents"
+msgstr "Dokument"
+
+#. settings-schema.json->showDocuments->description
+msgid "Show contents of documents folder"
+msgstr "Visa innehållet i dokumentmappen"
+
+#. settings-schema.json->recurseDocuments->description
+msgid "Include subfolders"
+msgstr "Inkludera undermappar"
+
+#. settings-schema.json->altDir->description
+msgid "Use alternate directory"
+msgstr "Använd alternativ mapp"
+
+#. settings-schema.json->docMax->description
+msgid "Limit number of documents shown to"
+msgstr "Begränsa antalet visade dokument till"
+
+#. settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "Tidigare dokument"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Visa tidigare dokument"
+
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Antal att visa"
