@@ -599,7 +599,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
                 this._dbus.ListNamesRemote((names) => {
                     for (let n in names[0]) {
                         let name = names[0][n];
-                        if (name_regex.test(name)) {
+                        if (name_regex.test(name) && !this._ignorePlayerName(name)) {
                             //~ logDebug("name1: " + name);
                             this._dbus.GetNameOwnerRemote(name, (owner) => this._addPlayer(name, owner[0]));
                         }
@@ -609,7 +609,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
                 // watch players
                 this._ownerChangedId = this._dbus.connectSignal("NameOwnerChanged",
                     (proxy, sender, [name, old_owner, new_owner]) => {
-                        if (name_regex.test(name)) {
+                        if (name_regex.test(name) && !this._ignorePlayerName(name)) {
                             //~ logDebug("name2: " + name);
                             if (new_owner && !old_owner) {
                                 //~ logDebug("_addPlayer");
@@ -1235,7 +1235,8 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         });
         Main.keybindingManager.addHotKey("volume-mute-" + this.instance_id, "AudioMute", () => this._toggle_out_mute());
         if (this.playerControl) {
-            Main.keybindingManager.addHotKey("pause-" + this.instance_id, "AudioPlay", () => this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote());
+            Main.keybindingManager.addHotKey("pause-" + this.instance_id, "AudioPlay",
+                () => this._sendPlayerCommand("PlayPause"));
 
             Main.keybindingManager.addHotKey("audio-next-" + this.instance_id, "AudioNext",
                 () => this._sendPlayerCommand("Next"));
@@ -1273,7 +1274,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
 
         if (this.playerControl && this.pause_on_off.length > 2)
             Main.keybindingManager.addHotKey("pause", this.pause_on_off,
-                () => this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote());
+                () => this._sendPlayerCommand("PlayPause"));
         if (this.volume_mute.length > 2)
             Main.keybindingManager.addHotKey("volume-mute", this.volume_mute, () => this._toggle_out_mute()); //(...args) => this._mutedChanged(...args, "_output"));
         if (this.volume_up.length > 2)
@@ -1295,10 +1296,17 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
 
     _sendPlayerCommand(command) {
         let player = this._players[this._activePlayer];
-        if (!player) return;
+        if (!player || !player._mediaServerPlayer) return;
 
-        if (player._name.toLowerCase() !== "mpv") {
-            player._mediaServerPlayer[command + "Remote"]();
+        let remoteCommand = player._mediaServerPlayer[command + "Remote"];
+        if (!remoteCommand) return;
+
+        let sendRemoteCommand = () => {
+            try { remoteCommand.call(player._mediaServerPlayer); } catch(e) { logError(e); }
+        };
+
+        if (player._name.toLowerCase() !== "mpv" || command === "PlayPause") {
+            sendRemoteCommand();
             return;
         }
 
@@ -1309,7 +1317,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             } catch (e) {
                 if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
                     logError(e);
-                player._mediaServerPlayer[command + "Remote"]();
+                sendRemoteCommand();
                 return;
             }
 
@@ -1320,7 +1328,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
                     file.replace_contents_finish(result);
                 } catch (e) {
                     logError(e);
-                    player._mediaServerPlayer[command + "Remote"]();
+                    sendRemoteCommand();
                 }
             });
         });
@@ -1776,9 +1784,9 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
                 volumeChange = true;
             } else if (this.horizontalScroll && player !== null && player._playerStatus !== "Stopped") {
                 if (direction == Clutter.ScrollDirection.LEFT) {
-                    this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote();
+                    this._sendPlayerCommand("Previous");
                 } else if (direction == Clutter.ScrollDirection.RIGHT) {
-                    this._players[this._activePlayer]._mediaServerPlayer.NextRemote();
+                    this._sendPlayerCommand("Next");
                 }
             }
         }
@@ -1881,7 +1889,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
                 else if (this.middleShiftClickAction === "in_mute")
                     this._toggle_in_mute();
                 else if (this.middleShiftClickAction === "player")
-                    this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote();
+                    this._sendPlayerCommand("PlayPause");
             } else {
                 if (this.middleClickAction === "mute") {
                     if (this._input && this._output && this._output.is_muted === this._input.is_muted)
@@ -1891,13 +1899,13 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
                     this._toggle_out_mute();
                 else if (this.middleClickAction === "in_mute")
                     this._toggle_in_mute();
-                else if (this.middleClickAction === "player" && this._players[this._activePlayer])
-                    this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote();
+                else if (this.middleClickAction === "player")
+                    this._sendPlayerCommand("PlayPause");
             }
         } else if (buttonId === 8) { // previous and next track on mouse buttons 4 and 5 (8 and 9 by X11 numbering)
-            this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote();
+            this._sendPlayerCommand("Previous");
         } else if (buttonId === 9) {
-            this._players[this._activePlayer]._mediaServerPlayer.NextRemote();
+            this._sendPlayerCommand("Next");
         } else {
             return Applet.Applet.prototype._onButtonPressEvent.call(this, actor, event);
         }
@@ -2305,8 +2313,12 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             /^org\.mpris\.MediaPlayer2\.vlc-\d+$/.test(busName);
     }
 
+    _ignorePlayerName(busName) {
+        return busName === "org.mpris.MediaPlayer2.playerctld";
+    }
+
     _addPlayer(busName, owner) {
-        if (!this.playerControl) return;
+        if (!this.playerControl || this._ignorePlayerName(busName)) return;
 
         if (this._players[owner]) {
             let prevName = this._players[owner]._busName;

@@ -381,34 +381,17 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._seeker._setPosition(0);
                 }
 
-                if (this._name.toLowerCase() === "mpv" &&
-                    GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                    GLib.file_set_contents(RUNTIME_DIR + "/R30Previous", "");
-                } else
-                    this._mediaServerPlayer.PreviousRemote();
+                this._sendPlayerCommand("Previous");
             });
         this._playButton = new ControlButton("media-playback-start",
             _("Play"),
-            () => this._mediaServerPlayer.PlayPauseRemote());
+            () => this._sendPlayerCommand("PlayPause"));
         this._stopButton = new ControlButton("media-playback-stop",
             _("Stop"),
-            () => {
-                if (this._name.toLowerCase() === "mpv" &&
-                    GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                    GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
-                } else {
-                    this._mediaServerPlayer.StopRemote()
-                }
-            });
+            () => this._sendPlayerCommand("Stop"));
         this._nextButton = new ControlButton("media-skip-forward",
             _("Next"),
-            () => {
-                if (this._name.toLowerCase() === "mpv" &&
-                    GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                    GLib.file_set_contents(RUNTIME_DIR + "/R30Next", "");
-                } else
-                    this._mediaServerPlayer.NextRemote();
-            });
+            () => this._sendPlayerCommand("Next"));
 
         try {
             this.trackInfo.add_actor(trackControls);
@@ -436,6 +419,7 @@ class Player extends PopupMenu.PopupMenuSection {
         // Position slider
         if (this._mediaServerPlayer) {
             this._seeker = new Seeker(
+                this._applet,
                 this._mediaServerPlayer,
                 this._prop,
                 this._name.toLowerCase()
@@ -485,6 +469,45 @@ class Player extends PopupMenu.PopupMenuSection {
         }
     }
 
+    _sendPlayerCommand(command, fallback) {
+        if (!fallback) {
+            if (!this._mediaServerPlayer) return;
+
+            let remoteCommand = this._mediaServerPlayer[command + "Remote"];
+            if (!remoteCommand) return;
+
+            fallback = () => remoteCommand.call(this._mediaServerPlayer);
+        }
+
+        if (this._name.toLowerCase() !== "mpv" || command === "PlayPause") {
+            try { fallback() } catch(e) { global.logError(e); }
+            return;
+        }
+
+        let socket = Gio.File.new_for_path(R30MPVSOCKET);
+        socket.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_TYPE, Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (file, result) => {
+            try {
+                file.query_info_finish(result);
+            } catch (e) {
+                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
+                    global.logError(e);
+                try { fallback() } catch(e) { global.logError(e); }
+                return;
+            }
+
+            let commandFile = Gio.File.new_for_path(RUNTIME_DIR + "/R30" + command);
+            let bytes = new GLib.Bytes(new TextEncoder().encode(""));
+            commandFile.replace_contents_bytes_async(bytes, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, (file, result) => {
+                try {
+                    file.replace_contents_finish(result);
+                } catch (e) {
+                    global.logError(e);
+                    try { fallback() } catch(e) { global.logError(e); }
+                }
+            });
+        });
+    }
+
     _showCanRaise() {
         let btn = new ControlButton("go-up", _("Open Player"), () => {
             if (this._name.toLowerCase() === "spotify") {
@@ -500,11 +523,7 @@ class Player extends PopupMenu.PopupMenuSection {
 
     _showCanQuit() {
         let btn = new ControlButton("window-close", _("Quit Player"), () => {
-            if (this._name.toLowerCase() === "mpv" &&
-                GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
-            } else
-                this._mediaServer.QuitRemote();
+            this._sendPlayerCommand("Stop", () => this._mediaServer.QuitRemote());
             this._applet.menu.close();
         }, true);
         this._playerBox.add_actor(btn.actor);
@@ -1090,10 +1109,11 @@ class Player extends PopupMenu.PopupMenuSection {
 Signals.addSignalMethods(Player.prototype);
 
 class Seeker extends Slider.Slider {
-    constructor(mediaServerPlayer, props, playerName) {
+    constructor(applet, mediaServerPlayer, props, playerName) {
         super(0, true);
 
         this.destroyed = false;
+        this._applet = applet;
 
         this.actor.set_direction(St.TextDirection.LTR); // Do not invert on RTL layout
         //~ this.actor.expand = true;
@@ -1112,6 +1132,7 @@ class Seeker extends Slider.Slider {
         this._timeoutId = null;
         this._timeoutId_timerCallback = null;
         this._timerTicker = 0;
+        this._positionQueryPending = false;
 
         this._mediaServerPlayer = mediaServerPlayer;
         this._prop = props;
@@ -1245,7 +1266,8 @@ class Seeker extends Slider.Slider {
 
     play() {
         if (this.destroyed) return;
-        run_playerctld();
+        if (this._applet._playerctl)
+            run_playerctld();
         this.status = "Playing";
         this._getCanSeek();
     }
@@ -1257,7 +1279,8 @@ class Seeker extends Slider.Slider {
             this._updateTimer();
         else
             this._updateValue();
-        run_playerctld();
+        if (this._applet._playerctl)
+            run_playerctld();
     }
 
     stop() {
@@ -1484,9 +1507,12 @@ class Seeker extends Slider.Slider {
     }
 
     _getPosition() {
-        if (this.destroyed) return;
+        if (this.destroyed || this._positionQueryPending || !this._prop) return;
 
+        this._positionQueryPending = true;
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, "Position", (position, error) => {
+            this._positionQueryPending = false;
+            if (this.destroyed) return;
             //~ logDebug("_getPosition dbus !error: "+!error);
             if (!error && position[0]) {
                 //~ logDebug("_getPosition position: "+position[0].get_int64());
@@ -1520,6 +1546,14 @@ class Seeker extends Slider.Slider {
         if (this._seekChangedId) {
             this._mediaServerPlayer.disconnectSignal(this._seekChangedId);
             this._seekChangedId = null;
+        }
+        if (this._timeoutId) {
+            source_remove(this._timeoutId);
+            this._timeoutId = null;
+        }
+        if (this._timeoutId_timerCallback) {
+            source_remove(this._timeoutId_timerCallback);
+            this._timeoutId_timerCallback = null;
         }
 
         this.disconnectAll(); //??? Seems cause of bugs.
