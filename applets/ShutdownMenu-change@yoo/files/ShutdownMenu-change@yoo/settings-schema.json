@@ -28,8 +28,13 @@
         "options" : {
             "Nothing" : "nothing",
             "Show workspace selector (Expo)" : "show_expo",
-            "Show window selector (Scale)" : "show_scale"
+            "Show window selector (Scale)" : "show_scale",
+            "Toggle desktop icons visibility" : "toggle_desktop_icons"
         }
+    },
+    "dynamic_wallpaper_warning": {
+        "type": "label",
+        "description": "Warning: When using dynamic wallpapers, desktop icon toggling may be visually obscured by the wallpaper."
     },
 
     "quit_label": {
@@ -51,6 +56,12 @@
         "type" : "entry",
         "default" : "cinnamon-session-quit --power-off",
         "description" : "The quit command",
+        "dependency" : "quit"
+    },
+    "show_separator": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show separator",
         "dependency" : "quit"
     },
     

@@ -1,34 +1,29 @@
 // name： ShutdownMenu-change
-// description： 修改 ShutdownMenuWithIcons@LLOBERA，使其更易于使用。
-// version: 1.1 (09-04-2026)
+// description： 这是一个 Cinnamon 面板小工具，提供包含关机选项的菜单，并支持通过鼠标中键交互进行个性化操作。本工具通过重构 ShutdownMenuWithIcons@LLOBERA 的代码而来，使其更易于使用。
+// version: 1.2 (09-04-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
-const Gettext = imports.gettext;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const Gtk = imports.gi.Gtk;
-const Clutter = imports.gi.Clutter;
-const St = imports.gi.St;
-const Util = imports.misc.util;
-const Applet = imports.ui.applet;
-const PopupMenu = imports.ui.popupMenu;
-const Settings = imports.ui.settings;
-const Lang = imports.lang;
-const Main = imports.ui.main;          // 新增：用于 Expo / Scale
-const Cinnamon = imports.gi.Cinnamon;  // 新增：用于获取事件修饰键
+
+const Gettext = imports.gettext;         
+const Gio = imports.gi.Gio;              
+const GLib = imports.gi.GLib;            
+const Gtk = imports.gi.Gtk;              
+const Clutter = imports.gi.Clutter;      
+const St = imports.gi.St;                
+const Util = imports.misc.util;         
+const Applet = imports.ui.applet;      
+const PopupMenu = imports.ui.popupMenu; 
+const Settings = imports.ui.settings;  
+const Lang = imports.lang;              
+const Main = imports.ui.main;          
 
 const UUID = "ShutdownMenu-change@yoo";
 const AppletUUID = "ShutdownMenu-change@yoo";
 
-const AppletDirectory = imports.ui.appletManager.appletMeta[AppletUUID].path;
-imports.searchPath.push(AppletDirectory);
-const PopupMenuExtension = imports.popupImageLeftMenuItem;
-
-Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale")
-
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
-  return Gettext.dgettext(UUID, str);
+    return Gettext.dgettext(UUID, str);
 }
 
 function MyApplet(metadata, orientation, panel_height, instanceId) {
@@ -45,13 +40,7 @@ MyApplet.prototype = {
             this.settings = new Settings.AppletSettings(this, AppletUUID, instanceId);
             this.bindSettings();    
 
-            let iconName = this.panel_icon || "system-shutdown";
-            this.set_applet_icon_symbolic_name(iconName);
-            // 应用用户配置的图标大小
-            let size = parseInt(this.icon_size, 10);
-            if (!isNaN(size) && size > 0) {
-                this._applet_icon.set_icon_size(size);
-            }
+            this._updatePanelIcon();
             this.set_applet_tooltip(_("Shutdown Menu"));
                       
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -60,7 +49,6 @@ MyApplet.prototype = {
 
             this.createMenu();
 
-            // 滚轮事件
             this.actor.connect('scroll-event', Lang.bind(this, this._on_scroll_event));
         }
         catch (e) {
@@ -70,70 +58,139 @@ MyApplet.prototype = {
     
     bindSettings: function() {
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            "panel_icon", "panel_icon", this.on_settings_changed, null
+            "panel_icon", "panel_icon", this._updatePanelIcon, null
         );
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            "icon_size", "icon_size", this.on_settings_changed, null
+            "icon_size", "icon_size", this._updateIconSize, null
         );
 
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            "quit", "quit_enable", this.on_settings_changed, null
+            "quit", "quit_enable", this._rebuildMenu, null
         );
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            "quit_icon", "quit_icon", this.on_settings_changed, null
+            "quit_icon", "quit_icon", this._rebuildMenu, null
         );
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            "quit_cmd", "quit_cmd", this.on_settings_changed, null
+            "quit_cmd", "quit_cmd", this._rebuildMenu, null
+        );
+
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "show_separator", "show_separator", this._rebuildMenu, null
         );
         
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            "log_out", "log_out_enable", this.on_settings_changed, null
+            "log_out", "log_out_enable", this._rebuildMenu, null
         );
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            "log_out_icon", "log_out_icon", this.on_settings_changed, null
+            "log_out_icon", "log_out_icon", this._rebuildMenu, null
         );
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            "log_out_cmd", "log_out_cmd", this.on_settings_changed, null
+            "log_out_cmd", "log_out_cmd", this._rebuildMenu, null
         );
         
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            "screen_lock", "screen_lock_enable", this.on_settings_changed, null
+            "screen_lock", "screen_lock_enable", this._rebuildMenu, null
         );
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            "screen_lock_icon", "screen_lock_icon", this.on_settings_changed, null
+            "screen_lock_icon", "screen_lock_icon", this._rebuildMenu, null
         );
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            "screen_lock_cmd", "screen_lock_cmd", this.on_settings_changed, null
-        );
-
-        // 新增：滚动切换工作区开关
-        this.settings.bindProperty(Settings.BindingDirection.IN,
-            "scroll_switch", "scroll_switch", this.on_settings_changed, null
+            "screen_lock_cmd", "screen_lock_cmd", this._rebuildMenu, null
         );
 
-        // 新增：中键点击动作
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            "middle_click_action", "middle_click_action", this.on_settings_changed, null
+            "scroll_switch", "scroll_switch", null, null
+        );
+
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "middle_click_action", "middle_click_action", null, null
         );
     },
-    
-    createMenu: function() {
-        if (this.quit_enable)
-            this.createMenuItem(_("Quit"), this.quit_icon, this.quit_cmd);
 
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    _updatePanelIcon: function() {
+        let iconName = this.panel_icon || "system-shutdown";
+        if (iconName === '') {
+            this._applet_icon_box.hide();
+            return;
+        }
+        this._applet_icon_box.show();
+
+        if (GLib.path_is_absolute(iconName)) {
+            let file = Gio.file_new_for_path(iconName);
+            if (file.query_exists(null)) {
+                if (iconName.includes('-symbolic')) {
+                    this.set_applet_icon_symbolic_path(iconName);
+                } else {
+                    this.set_applet_icon_path(iconName);
+                }
+            } else {
+                this.set_applet_icon_symbolic_name("system-shutdown-symbolic");
+            }
+        } else {
+            if (this._iconThemeHasIcon(iconName)) {
+                if (iconName.includes('-symbolic')) {
+                    this.set_applet_icon_symbolic_name(iconName);
+                } else {
+                    this.set_applet_icon_name(iconName);
+                }
+            } else {
+                this.set_applet_icon_symbolic_name("system-shutdown-symbolic");
+            }
+        }
+        this._updateIconSize();
+    },
+
+    _iconThemeHasIcon: function(iconName) {
+        let iconTheme = Gtk.IconTheme.get_default();
+        return iconTheme.has_icon(iconName);
+    },
+
+    _updateIconSize: function() {
+        let size = parseInt(this.icon_size, 10);
+        if (!isNaN(size) && size > 0) {
+            this._applet_icon.set_icon_size(size);
+        }
+    },
+
+    createMenu: function() {
+        this.menu.removeAll();
+
+        if (this.quit_enable) {
+            this._createMenuItem(_("Quit"), this.quit_icon, this.quit_cmd);
+            if (this.show_separator) {
+                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            }
+        }
         
         if (this.log_out_enable)
-            this.createMenuItem(_("Log out"), this.log_out_icon, this.log_out_cmd);
+            this._createMenuItem(_("Log out"), this.log_out_icon, this.log_out_cmd);
         
         if (this.screen_lock_enable)
-            this.createMenuItem(_("Screen Lock"), this.screen_lock_icon, this.screen_lock_cmd);
+            this._createMenuItem(_("Screen Lock"), this.screen_lock_icon, this.screen_lock_cmd);
     },
     
-    createMenuItem: function(displayName, iconName, command) {
-        var menuItem = new PopupMenuExtension.PopupImageLeftMenuItem(displayName, iconName, command);
-        menuItem.connect("activate", function(actor, event) {
-            Util.trySpawnCommandLine(actor.command);
+    _createMenuItem: function(displayName, iconName, command) {
+        let iconParam = null;
+        if (iconName) {
+            if (GLib.path_is_absolute(iconName)) {
+                let file = Gio.file_new_for_path(iconName);
+                if (file.query_exists(null)) {
+                    iconParam = new Gio.FileIcon({ file: file });
+                } else {
+                    iconParam = "image-missing"; 
+                }
+            } else {
+                iconParam = iconName;
+            }
+        }
+        if (!iconParam) {
+            iconParam = "image-missing";
+        }
+
+        let menuItem = new PopupMenu.PopupIconMenuItem(displayName, iconParam, St.IconType.FULLCOLOR);
+        menuItem._command = command;
+        menuItem.connect("activate", function() {
+            Util.trySpawnCommandLine(command);
         });
         this.menu.addMenuItem(menuItem);
     },
@@ -142,25 +199,35 @@ MyApplet.prototype = {
         this.menu.toggle();        
     },
 
-    // ===== 新增：中键点击处理 =====
     on_applet_middle_clicked: function(event) {
         let action = this.middle_click_action || "nothing";
-        this.perform_action(action);
+        this._performAction(action);
     },
     
-    perform_action: function(action) {
+    _performAction: function(action) {
         if (action == "show_expo") {
-            if (!Main.expo.animationInProgress)
+            if (Main.expo && !Main.expo.animationInProgress)
                 Main.expo.toggle();
         } else if (action == "show_scale") {
-            if (!Main.overview.animationInProgress)
+            if (Main.overview && !Main.overview.animationInProgress)
                 Main.overview.toggle();
+        } else if (action == "toggle_desktop_icons") {
+            this._toggleDesktopIcons();
         }
-        // "nothing" 或其他值则不执行任何操作
     },
-    // ===== 新增结束 =====
+    
+    _toggleDesktopIcons: function() {
+        let cmd = "gsettings get org.nemo.desktop show-desktop-icons";
+        let [success, stdout] = GLib.spawn_command_line_sync(cmd);
+        if (success) {
+            let current = stdout.toString().trim() === "true";
+            let newVal = current ? "false" : "true";
+            GLib.spawn_command_line_async("gsettings set org.nemo.desktop show-desktop-icons " + newVal);
+        } else {
+            GLib.spawn_command_line_async("gsettings set org.nemo.desktop show-desktop-icons true");
+        }
+    },
 
-    // ===== 滚轮事件处理 =====
     _on_scroll_event: function(actor, event) {
         if (!this.scroll_switch) {
             return true;
@@ -171,9 +238,9 @@ MyApplet.prototype = {
             return true;
         }
 
-        let workspace_manager = global.screen;
-        let current_index = workspace_manager.get_active_workspace_index();
-        let n_workspaces = workspace_manager.n_workspaces;
+        let wsManager = global.workspace_manager;
+        let current_index = wsManager.get_active_workspace_index();
+        let n_workspaces = wsManager.n_workspaces;
 
         if (n_workspaces < 2) {
             return true;
@@ -181,27 +248,16 @@ MyApplet.prototype = {
 
         if (direction == Clutter.ScrollDirection.UP) {
             let target_index = (current_index - 1 + n_workspaces) % n_workspaces;
-            workspace_manager.get_workspace_by_index(target_index).activate(global.get_current_time());
-        } else if (direction == Clutter.ScrollDirection.DOWN) {
+            wsManager.get_workspace_by_index(target_index).activate(global.get_current_time());
+        } 
+        else if (direction == Clutter.ScrollDirection.DOWN) {
             let target_index = (current_index + 1) % n_workspaces;
-            workspace_manager.get_workspace_by_index(target_index).activate(global.get_current_time());
+            wsManager.get_workspace_by_index(target_index).activate(global.get_current_time());
         }
         return true;
     },
-    // ===== 滚轮事件处理结束 =====
 
-    on_settings_changed: function() {
-        // 实时更新面板图标
-        let iconName = this.panel_icon || "system-shutdown";
-        this.set_applet_icon_symbolic_name(iconName);
-        
-        // 实时更新面板图标大小
-        let size = parseInt(this.icon_size, 10);
-        if (!isNaN(size) && size > 0) {
-            this._applet_icon.set_icon_size(size);
-        }
-
-        this.menu.removeAll();
+    _rebuildMenu: function() {
         this.createMenu();
     }
 };
