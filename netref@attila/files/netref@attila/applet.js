@@ -13,7 +13,6 @@ const Gettext = imports.gettext;
 const ByteArray = imports.byteArray;
 const Util = imports.misc.util;
 const UUID = "netref@attila";
-// ponytail: Gtk removed - using St.IconType.SYMBOLIC instead of Gtk.STOCK_EDIT
 
 Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
