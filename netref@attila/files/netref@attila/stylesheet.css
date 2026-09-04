@@ -1,0 +1,55 @@
+.sheet-item {
+	border: solid 1px white;
+	border-radius: .5em;
+}
+
+.sheet-item-win-label {
+	font-size: .75em;
+	font-weight: bold;
+	color: #0078d4;
+	display: block;
+}
+
+.sheet-item-win-cmd {
+	font-size: .9em;
+	font-family: monospace;
+	color: #e0e0e0;
+	background-color: rgba(0, 120, 212, 0.1);
+	padding: 2px 6px;
+	border-radius: 3px;
+	display: block;
+}
+
+.sheet-item-description {
+	font-size: .8em;
+	display: block;
+}
+
+.sheet-item-lin-label {
+	font-size: .75em;
+	font-weight: bold;
+	color: #00bcd4;
+	display: block;
+}
+
+.sheet-item-code {
+	font-size: 1em;
+	font-family: sans-serif;
+	font-weight: bold;
+	display: block;
+}
+
+.sheet-item-code-alternative {
+	font-size: 1em;
+	font-family: sans-serif;
+	font-weight: bold;
+	font-style: italic;
+	display: block;
+}
+
+.cheatsheet {
+}
+
+.cheatsheet .sheeticon {
+	padding-left: .em;
+}
