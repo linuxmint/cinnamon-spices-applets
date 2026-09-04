@@ -1,0 +1,17 @@
+{
+    "keyOpen": {
+        "type": "keybinding",
+        "description": "Open the applet menu",
+        "default": ""
+    },
+    "cheatsheetFolder": {
+        "type": "filechooser",
+        "description": "Cheatsheet folder",
+        "default": "~/.local/share/cinnamon/applets/netref@attila/refdocs",
+        "select-dir": true
+    },
+    "cheatsheets": {
+        "type": "generic",
+        "default": []
+    }
+}
