@@ -46,16 +46,23 @@ class FMRadioApplet extends Applet.IconApplet {
         this.settings.bind("recording_folder", "recording_folder");
         this.settings.bind("import_file", "import_file");
         this.settings.bind("search_keyword", "search_keyword");
-        this.settings.bind("search_results", "search_results");
+        this.settings.bind("search_results_list", "search_results_list");
+        this.settings.bind("search_full_data", "search_full_data");
+        this.settings.bind("search_warning", "search_warning");
 
-
+        if (!this.recording_folder || this.recording_folder.trim() === "") {
+            this.recording_folder = "file://" + this._getDefaultMusicDir();
+        }
+        
         this._onClearClicked();
 
         // Send the station list to channels.js before starting the player
         Channels.setChannels(this.custom_stations);
 
-        this.player = new Radio.RadioPlayer(Data.getLastChannel());
-        this.player.setVolume(Data.getLastVol());
+        let savedPrefs = Data.load();
+        let initialChannel = Channels.getChannel(savedPrefs.lastChannel) ?? Channels.getChannel(0);
+        this.player = new Radio.RadioPlayer(initialChannel);
+        this.player.setVolume(savedPrefs.lastVol ?? 1);
 
         this.set_applet_icon_symbolic_path(this.extPath + "/icon/radio-off-symbolic.svg");
         this.set_applet_tooltip(_("FM Radio"));
@@ -99,21 +106,87 @@ class FMRadioApplet extends Applet.IconApplet {
         this._loadChannels();
     }
 
+    // === SEARCH/ADD STATION(S) ===
     _onSearchClicked() {
         let keyword = this.search_keyword;
+        Search.findStations(keyword, (resultsArray, fullDataArray) => {
+            
+            if (typeof resultsArray === "string") {
+                this.search_warning = "empty";
+                this.search_results_list = [];
+                this.search_full_data = [];
+                return;
+            }
 
-        Search.findStations(keyword, (results) => {
-        this.search_results = results; 
+            if (!resultsArray || resultsArray.length === 0) {
+                this.search_warning = "not_found";
+                this.search_results_list = [];
+                this.search_full_data = [];
+                return;
+            }
+
+            this.search_warning = "none";
+            this.search_results_list = resultsArray;
+            this.search_full_data = fullDataArray || []; 
         });
     }
 
+    _onAddSelectedClicked() {
+        if (!this.search_results_list || this.search_results_list.length === 0) return;
+
+        let toAdd = this.search_results_list.filter(item => item.select === true);
+
+        if (toAdd.length === 0) {
+            this._showNotification(_("FM Radio"), _("Please select a station."));
+            return;
+        }
+
+        let currentList = JSON.parse(JSON.stringify(this.custom_stations || []));
+
+        toAdd.forEach(station => {
+            let originalData = this.search_full_data.find(s => s.url === station.url);
+            
+            let realName = originalData ? originalData.name : station.name;
+
+            currentList.push({
+                name: realName,
+                link: station.url,
+                pic: station.pic || ""
+            });
+        });
+
+        this.settings.setValue("custom_stations", currentList);
+        this.custom_stations = currentList;
+        this._onSettingsChanged();
+
+        let resetList = this.search_results_list.map(item => { 
+            item.select = false; 
+            return item; 
+        });
+        this.settings.setValue("search_results_list", resetList);
+
+        let message = (toAdd.length === 1) 
+            ? _("station added successfully!") 
+            : _("stations added successfully!");
+
+        this._showNotification(_("FM Radio"), toAdd.length + " " + message);
+    }
+
     _onClearClicked() {
-        this.search_results = "";      
-        this.search_keyword = "";
+        if (this.search_keyword !== "") this.search_keyword = "";
+        
+        this.search_warning = "none";
+        this.search_results_list = [];
+        this.search_full_data = [];
+    }
+
+    _getDefaultMusicDir() {
+        let musicDir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_MUSIC);
+        return musicDir ? musicDir : (GLib.get_home_dir() + "/" + _("Music"));
     }
 
     _onResetFolderClicked() {
-        this.recording_folder = "";
+        this.recording_folder = "file://" + this._getDefaultMusicDir();
     }
 
     _showNotification(title, msg) {
@@ -130,18 +203,11 @@ class FMRadioApplet extends Applet.IconApplet {
 
     // === BACKUP ===
     _onExportClicked() {
-        // Set target folder (default Music folder)
-        let musicDir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_MUSIC);
-        if (!musicDir) {
-            musicDir = GLib.get_home_dir() + "/" + _("Music"); 
-        }
-        let backupPath = musicDir + "/FM-Radio-Stations-Backup.json";
+        let backupPath = this._getDefaultMusicDir() + "/FM-Radio-Stations-Backup.json";
         
         try {
             let jsonString = JSON.stringify(this.custom_stations, null, 4);
-            
             GLib.file_set_contents(backupPath, jsonString);
-            
             this._showNotification(_("FM Radio"), _("Stations successfully saved to:\n") + backupPath);
         } catch (e) {
             global.logError("FM Radio: Error exporting stations - " + e);
@@ -197,7 +263,7 @@ class FMRadioApplet extends Applet.IconApplet {
 
     // === MENU ===
     _buildMenu() {
-        this.volumeMenuItem = new PopupMenu.PopupSliderMenuItem(Data.getLastVol());
+        this.volumeMenuItem = new PopupMenu.PopupSliderMenuItem(this.player.getVolume());
         
         let volumeIcon = new St.Icon({ 
             icon_name: 'audio-volume-medium-symbolic',
@@ -216,7 +282,7 @@ class FMRadioApplet extends Applet.IconApplet {
             volumeIcon.set_icon_name(`audio-volume-${state}-symbolic`);
         };
 
-        updateIcon(Data.getLastVol());
+        updateIcon(this.player.getVolume());
         
         this.volumeMenuItem.connect('value-changed', (menuItem, value) => {
             this.player.setVolume(value);
@@ -232,19 +298,18 @@ class FMRadioApplet extends Applet.IconApplet {
         let centerBox = new St.BoxLayout({ 
             x_expand: true, 
             x_align: Clutter.ActorAlign.CENTER,
-            width: 205,
-            style: 'padding-left: 20px;',
+            width: 210,
         });
 
         centerBox.add_child(this.controlBox);
-        controlMenuItem.addActor(centerBox, { expand: true });
+        controlMenuItem.addActor(centerBox, { expand: true, span: -1 });
         this.menu.addMenuItem(controlMenuItem);
 
         this.statusMenuItem = new PopupMenu.PopupBaseMenuItem({ reactive: true, hover: false, activate: false });
         this.box = new St.BoxLayout({ 
             x_expand: true,
             y_expand: true,
-            width: 205, 
+            width: 210, 
             vertical: true 
         });
 
@@ -270,7 +335,6 @@ class FMRadioApplet extends Applet.IconApplet {
 
         this.channelLabel = new St.Label({
             text: this.player.getChannel().getName(),
-            style: 'padding-left: 20px;',
             x_align: Clutter.ActorAlign.CENTER,
             x_expand: true,
             style_class: 'radio-label',
@@ -279,14 +343,8 @@ class FMRadioApplet extends Applet.IconApplet {
         this.channelLabel.clutter_text.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
         this.channelLabel.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
 
-        let picPath = this.player.getChannel().getPic();
-        if (!picPath || picPath.trim() === "") {
-            picPath = "/images/default-cover.png";
-        }
-        let iconPath = (picPath.startsWith("/home/")) ? picPath : (this.extPath + (picPath.startsWith("/") ? "" : "/") + picPath);
-
         this.channelIcon = new St.Icon({
-            gicon: Gio.icon_new_for_string(iconPath),
+            gicon: this.player.getChannel().getResolvedIcon(),
             icon_size: 48, 
             x_align: Clutter.ActorAlign.CENTER, 
             style_class: 'channel-icon',
@@ -302,7 +360,7 @@ class FMRadioApplet extends Applet.IconApplet {
         this.box.add_child(this.statusLabel);
         this.box.add_child(this.channelLabel); 
         this.box.add_child(this.channelIcon);
-        this.statusMenuItem.addActor(this.box, { expand: true });
+        this.statusMenuItem.addActor(this.box, { expand: true, span: -1 });
 
         this.menu.addMenuItem(this.statusMenuItem);
 
@@ -313,9 +371,30 @@ class FMRadioApplet extends Applet.IconApplet {
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         this.channelsMenu = new PopupMenu.PopupSubMenuMenuItem(_("All stations"));
+        this.channelsMenu.actor.width = 210;
+        this.channelsMenu.menu.actor.width = 210;
         this.menu.addMenuItem(this.channelsMenu);
 
         this._loadChannels();
+
+        this.player.setOnError(() => {
+            GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+                if (this.artistLabel) {
+                    this.artistLabel.set_text("");
+                }
+                if (this.statusLabel) {
+                    this.statusLabel.set_text(_("Reconnecting..."));
+                }
+                
+                this.artistLabel.clutter_text.queue_relayout();
+                this.statusLabel.clutter_text.queue_relayout();
+                this.box.queue_relayout();
+                
+                this._updateTooltip();
+                
+                return GLib.SOURCE_REMOVE; 
+            });
+        });
 
         this.player.setOnTagChanged(() => {
             GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
@@ -332,7 +411,7 @@ class FMRadioApplet extends Applet.IconApplet {
                     this.statusLabel.set_text(title);
                 } else {
                     let currentTag = this.player.getTag();
-                    this.statusLabel.set_text(currentTag ? currentTag : "");
+                    this.statusLabel.set_text(currentTag ? currentTag : _("Waiting..."));
                 }
                 
                 this.artistLabel.clutter_text.queue_relayout();
@@ -365,7 +444,7 @@ class FMRadioApplet extends Applet.IconApplet {
         }
 
         this.setPlayingState(this.player.isPlaying());
-        Data.save(this.player.getChannel(), Data.getLastVol());
+        Data.save(this.player.getChannel(), this.player.getVolume());
 
         if (this.channelLabel) {
             let currentChannel = this.player.getChannel();
@@ -373,14 +452,7 @@ class FMRadioApplet extends Applet.IconApplet {
                 this.channelLabel.set_text("" + currentChannel.getName());
                 
                 if (this.channelIcon) {
-                    let picPath = currentChannel.getPic();
-                    // If no image is specified, use the default image instead
-                    if (!picPath || picPath.trim() === "") {
-                        picPath = "/images/default-cover.png";
-                    }
-                    let iconPath = (picPath.startsWith("/home/")) ? picPath : (this.extPath + (picPath.startsWith("/") ? "" : "/") + picPath);
-                    let newIcon = Gio.icon_new_for_string(iconPath);
-                    this.channelIcon.set_gicon(newIcon);
+                    this.channelIcon.set_gicon(currentChannel.getResolvedIcon());
                 }
             }
         }
@@ -430,13 +502,9 @@ class FMRadioApplet extends Applet.IconApplet {
             }
         }
 
-        // If no valid custom folder is set, fall back to the XDG Music folder
+        // If no valid custom folder is set, fall back to the default Music folder
         if (!recordDir) {
-            let musicDir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_MUSIC);
-            if (!musicDir) {
-                musicDir = GLib.get_home_dir() + "/" + _("Music"); 
-            }
-            recordDir = musicDir + "/FM-Radio";
+            recordDir = this._getDefaultMusicDir() + "/FM-Radio";
         }
         
         // Create the directory if it does not exist
@@ -452,6 +520,12 @@ class FMRadioApplet extends Applet.IconApplet {
         let currentChannel = this.player.getChannel();
         let channelName = currentChannel.getName().replace(/[^a-zA-Z0-9]/g, "_");
         let streamUrl = currentChannel.getLink();
+        
+        // Prevent crash if the station has no valid URL
+        if (!streamUrl || typeof streamUrl !== "string" || streamUrl.trim() === "") {
+            this._showNotification(_("FM Radio"), _("Cannot record: This station has no valid URL."));
+            return;
+        }
         
         let timestamp = GLib.DateTime.new_now_local().format("%Y-%m-%d_%H-%M-%S");
         let filename = `${recordDir}/${channelName}_${timestamp}.mp3`; 
@@ -608,6 +682,8 @@ class FMRadioApplet extends Applet.IconApplet {
     }
 
 // === MONKEY-PATCHING (watchdog) ===
+// Hijack Cinnamon's sound applet to prevent it from
+//registering our MPRIS player and avoid duplicate controls
     _startHijackTimer() {
         if (this._hijackTimerId) return;
         
@@ -708,7 +784,7 @@ class FMRadioApplet extends Applet.IconApplet {
 
     on_applet_removed_from_panel() {
         if (this.player) {
-            this.player.stop();
+            this.player.destroy();
         }
 
         if (this.isRecording) {

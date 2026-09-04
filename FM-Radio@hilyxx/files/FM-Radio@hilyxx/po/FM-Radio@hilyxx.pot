@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FM-Radio@hilyxx 1.3\n"
+"Project-Id-Version: FM-Radio@hilyxx 1.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-08-09 19:55+0200\n"
+"POT-Creation-Date: 2026-09-03 21:34+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,78 +18,99 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#. applet.js:61 applet.js:145 applet.js:148 applet.js:154 applet.js:176
-#. applet.js:178 applet.js:183 applet.js:402 applet.js:468 applet.js:494
-#. applet.js:520 applet.js:541
+#. applet.js:68 applet.js:140 applet.js:172 applet.js:211 applet.js:214
+#. applet.js:220 applet.js:242 applet.js:244 applet.js:249 applet.js:474
+#. applet.js:526 applet.js:542 applet.js:568 applet.js:594 applet.js:615
 msgid "FM Radio"
 msgstr ""
 
-#. applet.js:74
+#. applet.js:81
 msgid "Reload applet"
 msgstr ""
 
-#. applet.js:136 applet.js:437
+#. applet.js:140
+msgid "Please select a station."
+msgstr ""
+
+#. applet.js:169
+msgid "station added successfully!"
+msgstr ""
+
+#. applet.js:170
+msgid "stations added successfully!"
+msgstr ""
+
+#. applet.js:185
 msgid "Music"
 msgstr ""
 
-#. applet.js:145
+#. applet.js:211
 msgid "Stations successfully saved to:\n"
 msgstr ""
 
-#. applet.js:148
+#. applet.js:214
 msgid "Error saving backup."
 msgstr ""
 
-#. applet.js:154
+#. applet.js:220
 msgid "Please select a backup file to import first."
 msgstr ""
 
-#. applet.js:176
+#. applet.js:242
 msgid "Stations successfully restored!"
 msgstr ""
 
-#. applet.js:178
+#. applet.js:244
 msgid "Invalid JSON file format."
 msgstr ""
 
-#. applet.js:183
+#. applet.js:249
 msgid "Error reading the backup file."
 msgstr ""
 
-#. applet.js:315
+#. applet.js:373
 msgid "All stations"
 msgstr ""
 
-#. applet.js:393
+#. applet.js:386
+msgid "Reconnecting..."
+msgstr ""
+
+#. applet.js:414 applet.js:465
 msgid "Waiting..."
 msgstr ""
 
-#. applet.js:402
+#. applet.js:474
 msgid "Please start a radio station first to record it."
 msgstr ""
 
-#. applet.js:468
+#. applet.js:526
+msgid "Cannot record: This station has no valid URL."
+msgstr ""
+
+#. applet.js:542
 msgid "Recording started: "
 msgstr ""
 
-#. applet.js:494
+#. applet.js:568
 msgid "Error starting recording."
 msgstr ""
 
-#. applet.js:520
+#. applet.js:594
 msgid "Recording finished and saved to the /FM-Radio folder."
 msgstr ""
 
-#. channels.js:51
+#. channels.js:39
 msgid "Error"
 msgstr ""
 
+#. settings-schema.json->msg_empty_search->description
 #. search.js:19
 msgid "Please enter a radio station name to search for."
 msgstr ""
 
-#. search.js:39
-msgid "No stations found for this keyword."
+#. search.js:43
+msgid "Unknown Station"
 msgstr ""
 
 #. metadata.json->description
@@ -137,12 +158,36 @@ msgstr ""
 msgid "Launch search"
 msgstr ""
 
-#. settings-schema.json->search_results->description
-msgid "Search results (Copy the URL and add it to your list below):"
-msgstr ""
-
 #. settings-schema.json->clear_button->description
 msgid "Clear results"
+msgstr ""
+
+#. settings-schema.json->msg_no_results->description
+msgid "No stations found for this search."
+msgstr ""
+
+#. settings-schema.json->search_results_list->description
+msgid "Search results"
+msgstr ""
+
+#. settings-schema.json->search_results_list->columns->title
+msgid "➕"
+msgstr ""
+
+#. settings-schema.json->search_results_list->columns->title
+msgid "📻 Station"
+msgstr ""
+
+#. settings-schema.json->search_results_list->columns->title
+msgid "🎶 Quality"
+msgstr ""
+
+#. settings-schema.json->search_results_list->columns->title
+msgid "🌐 Stream URL"
+msgstr ""
+
+#. settings-schema.json->add_selected_button->description
+msgid "Add selected stations to my list"
 msgstr ""
 
 #. settings-schema.json->custom_stations->description
@@ -165,11 +210,14 @@ msgstr ""
 msgid ""
 "\n"
 "To create a custom image for a radio station:\n"
+"\n"
 "• Create an image of any format (png, jpeg, or svg) with a square 'cover' "
 "style size (e.g., 300x300).\n"
+"\n"
 "• Station images are stored by default in the applet's image folder, and the "
 "path is /images/yourcover.png. For images located in another folder, apply "
 "the same process and adapt the path accordingly.\n"
+"\n"
 "• The easiest way is to copy the desired image and paste it into the "
 "provided field; this will directly paste the image path.\n"
 msgstr ""
@@ -190,7 +238,7 @@ msgid "Custom recording folder"
 msgstr ""
 
 #. settings-schema.json->recording_folder->tooltip
-msgid "Leave empty to use the default Music folder."
+msgid "Select the directory where your audio recordings will be saved."
 msgstr ""
 
 #. settings-schema.json->reset_folder_button->description
