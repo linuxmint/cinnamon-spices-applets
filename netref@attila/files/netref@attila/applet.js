@@ -2,7 +2,6 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
-const Lang = imports.lang;
 const MessageTray = imports.ui.messageTray;
 const Main = imports.ui.main;
 const Pango = imports.gi.Pango;
@@ -12,12 +11,14 @@ const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const ByteArray = imports.byteArray;
+const Util = imports.misc.util;
 const UUID = "netref@attila";
+// ponytail: Gtk removed - using St.IconType.SYMBOLIC instead of Gtk.STOCK_EDIT
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(str) {
-  return Gettext.dgettext(UUID, str);
+    return Gettext.dgettext(UUID, str);
 }
 
 const APPLET_PATH = global.userdatadir + "/applets/" + UUID;
@@ -45,7 +46,7 @@ SheetMenuItem.prototype = {
             this.actor.add_style_class_name('cheatsheet');
 
             let iconFile = Gio.file_new_for_path(icon);
-            if (iconFile.query_exists(null)) {
+            try {
                 let gicon = new Gio.FileIcon({ file: iconFile });
                 this.icon = new St.Icon({
                     gicon: gicon,
@@ -54,6 +55,8 @@ SheetMenuItem.prototype = {
                     style_class: "sheeticon"
                 });
                 this.addActor(this.icon);
+            } catch (e) {
+                // Icon not found, continue without it
             }
 
             this.label = new St.Label({
@@ -81,10 +84,10 @@ SheetMenuItem.prototype = {
         }
 
         this.menu = new PopupMenu.PopupSubMenu(this.actor, this._triangle);
-        this._signals.connect(this.menu, 'open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
+        this._signals.connect(this.menu, 'open-state-changed', () => this._subMenuOpenStateChanged());
         this._tooltip = new Tooltips.Tooltip(this.actor, sheet.name + " (" + _("version") + " " + sheet.version + ")\n" + sheet.description + "\n" + _("Author:") + " " + sheet.author);
     }
-}
+};
 
 function DescriptionMenuItem() {
     this._init.apply(this, arguments);
@@ -173,18 +176,16 @@ function SearchableListWidget() {
 SearchableListWidget.prototype = {
     _init: function(copyCallback) {
         this._copyCallback = copyCallback;
-        this._allItems = []; // Store all items for filtering
+        this._allItems = [];
         this._buildUI();
     },
 
     _buildUI: function() {
-        // Main container
         this.mainBox = new St.BoxLayout({
             vertical: true,
             style: 'min-width: 380px; max-width: 500px;'
         });
 
-        // Search bar (fixed at top)
         this.searchEntry = new St.Entry({
             name: 'searchEntry',
             hint_text: 'Search commands...',
@@ -193,9 +194,8 @@ SearchableListWidget.prototype = {
             style: 'background-color: #1a1a1a; color: #e0e0e0; border: 1px solid #3c3c3c; border-radius: 4px; padding: 6px 10px; font-size: 12px; margin: 6px;'
         });
 
-        this.searchEntry.clutter_text.connect('text-changed', Lang.bind(this, this._onSearchChanged));
+        this.searchEntry.clutter_text.connect('text-changed', () => this._onSearchChanged());
 
-        // Scrollable container for items
         this.scrollView = new St.ScrollView({
             style: 'max-height: 450px;',
             hscrollbar_policy: St.PolicyType.NEVER,
@@ -219,10 +219,8 @@ SearchableListWidget.prototype = {
     },
 
     _filterItems: function(searchText) {
-        // Remove all items from display
         this.itemsBox.destroy_all_children();
 
-        // Filter and re-add matching items
         for (let i = 0; i < this._allItems.length; i++) {
             let item = this._allItems[i];
             let matches = !searchText ||
@@ -243,7 +241,6 @@ SearchableListWidget.prototype = {
 
         let container = new St.BoxLayout({ vertical: true });
 
-        // Windows label
         let winLabel = new St.Label({
             text: 'Windows:',
             style_class: 'sheet-item-win-label'
@@ -254,7 +251,6 @@ SearchableListWidget.prototype = {
         winLabel.get_clutter_text().ellipsize = Pango.EllipsizeMode.NONE;
         container.add_actor(winLabel);
 
-        // Windows command
         let winCmd = new St.Label({
             text: item.windows || '',
             style_class: 'sheet-item-win-cmd'
@@ -265,7 +261,6 @@ SearchableListWidget.prototype = {
         winCmd.get_clutter_text().ellipsize = Pango.EllipsizeMode.NONE;
         container.add_actor(winCmd);
 
-        // Description
         let descLabel = new St.Label({
             text: item.description,
             style_class: 'sheet-item-description'
@@ -276,7 +271,6 @@ SearchableListWidget.prototype = {
         descLabel.get_clutter_text().ellipsize = Pango.EllipsizeMode.NONE;
         container.add_actor(descLabel);
 
-        // Linux label
         let linLabel = new St.Label({
             text: 'Linux:',
             style_class: 'sheet-item-lin-label'
@@ -287,14 +281,12 @@ SearchableListWidget.prototype = {
         linLabel.get_clutter_text().ellipsize = Pango.EllipsizeMode.NONE;
         container.add_actor(linLabel);
 
-        // Linux command
         let codeLabel = new St.Label({
             text: item.code,
             style_class: 'sheet-item-code'
         });
         container.add_actor(codeLabel);
 
-        // Alternatives
         if (item.alternatives) {
             for (let alt of item.alternatives) {
                 let altLabel = new St.Label({
@@ -307,29 +299,25 @@ SearchableListWidget.prototype = {
 
         menuItem.addActor(container);
 
-        // Store code for copy callback
         menuItem.code = item.code;
-        menuItem.connect('activate', Lang.bind(this, function() {
+        menuItem.connect('activate', () => {
             if (this._copyCallback) {
                 this._copyCallback(item.code);
             }
-        }));
+        });
 
         return menuItem;
     },
 
-    // Add all items at once
     addItems: function(items) {
         this._allItems = items;
-        this._filterItems(''); // Show all initially
+        this._filterItems('');
     },
 
-    // Clear search
     clearSearch: function() {
         this.searchEntry.set_text('');
     },
 
-    // Get the actor for adding to menu
     getActor: function() {
         return this.mainBox;
     }
@@ -355,7 +343,7 @@ NetRef.prototype = {
     _init: function(orientation, panelHeight, instanceId) {
         Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
         this.set_applet_icon_path(ICON);
-        this.set_applet_tooltip(_("NetRef: Windows to Linux Networking Reference"));
+        this.set_applet_tooltip(_("NetRef: Windows to Linux Command Reference"));
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -394,101 +382,128 @@ NetRef.prototype = {
 
         let currentDir = Gio.file_new_for_path(resolveHome(this.cheatsheetFolder));
 
-        let enumerator = currentDir.enumerate_children("standard::*,standard::type", Gio.FileQueryInfoFlags.NONE, null);
-        let file;
-
-        this._sheets = [];
-
-        let current_sheets = [];
-        let tmp_sheets = this.settings.getValue("cheatsheets")
-        tmp_sheets.forEach((sheet) => {
-            current_sheets.push(sheet.name);
-        });
-
-        while ((file = enumerator.next_file(null)) !== null) {
-            if (file.get_file_type() === Gio.FileType.DIRECTORY) {
-                let sheetName = file.get_name();
+        currentDir.enumerate_children_async(
+            "standard::*,standard::type",
+            Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT,
+            null,
+            (source, result) => {
+                let enumerator;
                 try {
-                    let sheet = Gio.file_new_for_path(resolveHome(this.cheatsheetFolder) + '/' + sheetName + '/sheet.json');
-                    if (!sheet.query_exists(null)) {
-                        global.log('No valid sheet.json file found in "' + sheetName + '"');
-                        continue;
-                    }
-
-                    let [ok, data, etag] = sheet.load_contents(null);
-                    if (ok) {
-                        let contents = JSON.parse(ByteArray.toString(data));
-
-                        if (!current_sheets.includes(contents.name)) {
-                            tmp_sheets.push({
-                                "enabled": true,
-                                "name": contents.name,
-                                "description": contents.description,
-                                "author": contents.author
-                            })
-                        } else {
-                            let breaker = false;
-                            tmp_sheets.forEach((sheet) => {
-                                if (sheet.name == contents.name && !sheet.enabled) {
-                                    breaker = true;
-                                }
-                            })
-                            if (breaker) {
-                                continue;
-                            }
-                        }
-
-                        let iconPath = resolveHome(this.cheatsheetFolder) + '/' + sheetName + '/icon.svg';
-
-                        this._sheets[sheetName] = new SheetMenuItem(contents, iconPath);
-                        this._sheets[sheetName]._sections = [];
-
-                        // Collect all items from all sections
-                        let allItems = [];
-                        for (var section in contents.sections) {
-                            for (var item in contents.sections[section]) {
-                                let itemData = contents.sections[section][item];
-                                let alternatives = [];
-                                if (itemData.alternatives) {
-                                    for (var alt in itemData.alternatives) {
-                                        alternatives.push(itemData.alternatives[alt].code);
-                                    }
-                                }
-                                allItems.push({
-                                    name: item,
-                                    windows: itemData.windows || item,
-                                    description: itemData.description,
-                                    code: itemData.code,
-                                    alternatives: alternatives,
-                                    options: itemData.options || [],
-                                    section: section
-                                });
-                            }
-                        }
-
-                        // Create searchable list widget
-                        let searchableList = new SearchableListWidget(Lang.bind(this, function(code) {
-                            this.copyToClipboard({code: code});
-                        }));
-                        searchableList.addItems(allItems);
-
-                        // Add to sheet menu
-                        this._sheets[sheetName].menu.addActor(searchableList.getActor());
-
-                        this.menu.addMenuItem(this._sheets[sheetName]);
-                    }
+                    enumerator = currentDir.enumerate_children_finish(result);
                 } catch (e) {
-                    global.log('Exception: ' + e)
+                    global.log('NetRef: Error enumerating directory: ' + e);
+                    return;
                 }
+
+                this._sheets = [];
+                let current_sheets = [];
+                let tmp_sheets = this.settings.getValue("cheatsheets");
+                tmp_sheets.forEach((sheet) => {
+                    current_sheets.push(sheet.name);
+                });
+
+                let file;
+                let files = [];
+                while ((file = enumerator.next_file(null)) !== null) {
+                    if (file.get_file_type() === Gio.FileType.DIRECTORY) {
+                        files.push(file.get_name());
+                    }
+                }
+
+                this._processFolders(files, current_sheets, tmp_sheets, updateSettings, 0);
             }
+        );
+    },
+
+    _processFolders: function(files, current_sheets, tmp_sheets, updateSettings, index) {
+        if (index >= files.length) {
+            if (updateSettings) {
+                this.settings.setValue("cheatsheets", tmp_sheets);
+            }
+            return;
         }
-        if (updateSettings) {
-            this.settings.setValue("cheatsheets", tmp_sheets);
-        }
+
+        let sheetName = files[index];
+        let sheetPath = resolveHome(this.cheatsheetFolder) + '/' + sheetName + '/sheet.json';
+        let sheet = Gio.file_new_for_path(sheetPath);
+
+        sheet.load_contents_async(null, (file, result) => {
+            try {
+                let [ok, data, etag] = sheet.load_contents_finish(result);
+                if (!ok) {
+                    global.log('NetRef: Failed to load sheet.json in "' + sheetName + '"');
+                    this._processFolders(files, current_sheets, tmp_sheets, updateSettings, index + 1);
+                    return;
+                }
+
+                let contents = JSON.parse(ByteArray.toString(data));
+
+                if (!current_sheets.includes(contents.name)) {
+                    tmp_sheets.push({
+                        "enabled": true,
+                        "name": contents.name,
+                        "description": contents.description,
+                        "author": contents.author
+                    });
+                } else {
+                    let breaker = false;
+                    tmp_sheets.forEach((sheet) => {
+                        if (sheet.name == contents.name && !sheet.enabled) {
+                            breaker = true;
+                        }
+                    });
+                    if (breaker) {
+                        this._processFolders(files, current_sheets, tmp_sheets, updateSettings, index + 1);
+                        return;
+                    }
+                }
+
+                let iconPath = resolveHome(this.cheatsheetFolder) + '/' + sheetName + '/icon.svg';
+
+                this._sheets[sheetName] = new SheetMenuItem(contents, iconPath);
+                this._sheets[sheetName]._sections = [];
+
+                let allItems = [];
+                for (var section in contents.sections) {
+                    for (var item in contents.sections[section]) {
+                        let itemData = contents.sections[section][item];
+                        let alternatives = [];
+                        if (itemData.alternatives) {
+                            for (var alt in itemData.alternatives) {
+                                alternatives.push(itemData.alternatives[alt].code);
+                            }
+                        }
+                        allItems.push({
+                            name: item,
+                            windows: itemData.windows || item,
+                            description: itemData.description,
+                            code: itemData.code,
+                            alternatives: alternatives,
+                            options: itemData.options || [],
+                            section: section
+                        });
+                    }
+                }
+
+                let searchableList = new SearchableListWidget((code) => {
+                    this.copyToClipboard({code: code});
+                });
+                searchableList.addItems(allItems);
+
+                this._sheets[sheetName].menu.addActor(searchableList.getActor());
+                this.menu.addMenuItem(this._sheets[sheetName]);
+
+            } catch (e) {
+                global.log('NetRef: Exception: ' + e);
+            }
+
+            this._processFolders(files, current_sheets, tmp_sheets, updateSettings, index + 1);
+        });
     },
 
     _setKeybinding: function () {
-        Main.keybindingManager.addHotKey("netref-show-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
+        Main.keybindingManager.addHotKey("netref-show-" + this.instance_id, this.keyOpen, () => this._openMenu());
     },
 
     on_applet_removed_from_panel: function () {
@@ -509,7 +524,7 @@ NetRef.prototype = {
     settingsApiCheck: function() {
         const Config = imports.misc.config;
         const SETTINGS_API_MIN_VERSION = 2;
-        const CMD_SETTINGS = "cinnamon-settings applets " + UUID;
+        const CMD_SETTINGS = ["cinnamon-settings", "applets", UUID];
 
         let cinnamonVersion = Config.PACKAGE_VERSION.split('.');
         let majorVersion = parseInt(cinnamonVersion[0]);
@@ -518,9 +533,10 @@ NetRef.prototype = {
             return;
         }
 
-        let mi = new Applet.MenuItem(_("Configure..."), Gtk.STOCK_EDIT, Lang.bind(this, function() {
-            Util.spawnCommandLine(CMD_SETTINGS)
-        }));
+        let mi = new PopupMenu.PopupIconMenuItem(_("Configure..."), "document-edit", St.IconType.SYMBOLIC);
+        mi.connect('activate', () => {
+            Util.spawn(CMD_SETTINGS);
+        });
         this._applet_context_menu.addMenuItem(mi);
     },
 
@@ -538,7 +554,7 @@ NetRef.prototype = {
     on_applet_clicked: function(event) {
         this._openMenu();
     }
-}
+};
 
 function resolveHome(path) {
     let home = GLib.get_home_dir();
