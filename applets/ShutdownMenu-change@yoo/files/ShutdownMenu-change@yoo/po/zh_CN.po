@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-03 10:41+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "ShutdownMenu-change"
+msgstr "关机菜单（修改版）"
+
+#. metadata.json->description
+msgid "This is a Cinnamon panel applet that provides a menu with shutdown options and supports personalized actions via middle-click interaction. It was created by refactoring the code of ShutdownMenuWithIcons@LLOBERA to improve usability."
+msgstr "这是一个 Cinnamon 面板小工具，提供包含关机选项的菜单，并支持通过鼠标中键交互进行个性化操作。本工具通过重构 ShutdownMenuWithIcons@LLOBERA 的代码而来，使其更易于使用。"
+
+#: ../applet.js:66
+msgid "Shutdown Menu"
+msgstr "关机菜单"
+
+#: ../applet.js:84
+msgid "Quit"
+msgstr "关机"
+
+#: ../applet.js:89
+msgid "Log out"
+msgstr "注销"
+
+#: ../applet.js:92
+msgid "Screen Lock"
+msgstr "锁屏"
+
+# ========== settings-schema.json 翻译 ==========
+
+#: .settings:panel_label/description
+msgid "Panel Icon"
+msgstr "面板图标"
+
+#: .settings:icon_size/description
+msgid "Panel icon size"
+msgstr "面板图标大小"
+
+#: settings-schema.json
+msgid "Switch workspace with mouse scroll"
+msgstr "使用鼠标滚轮切换工作区"
+
+#: settings-schema.json
+msgid "Middle click action"
+msgstr "鼠标中键单击动作"
+
+#: settings-schema.json
+msgid "Nothing"
+msgstr "无"
+
+#: settings-schema.json
+msgid "Show workspace selector (Expo)"
+msgstr "显示工作区选择器 (Expo)"
+
+#: settings-schema.json
+msgid "Show window selector (Scale)"
+msgstr "显示窗口选择器 (Scale)"
+
+#: settings-schema.json
+msgid "Toggle desktop icons visibility"
+msgstr "显示/隐藏桌面图标"
+
+#: settings-schema.json
+msgid "Warning: When using dynamic wallpapers, desktop icon toggling may be visually obscured by the wallpaper."
+msgstr "警告：使用动态壁纸时，切换桌面图标显示/隐藏可能会被壁纸遮挡。"
+
+#: .settings:quit_label/description
+msgid "Shutdown"
+msgstr "关机"
+
+#: .settings:quit/description
+msgid "Add quit to the menu"
+msgstr "在菜单中添加关机"
+
+#: .settings:quit_icon/description
+msgid "The quit icon"
+msgstr "关机图标"
+
+#: .settings:quit_cmd/description
+msgid "The quit command"
+msgstr "关机命令"
+
+#: .settings:show_separator/description
+msgid "Show separator"
+msgstr "显示分隔线"
+
+#: .settings:log_out_label/description
+msgid "Logout"
+msgstr "注销"
+
+#: .settings:log_out/description
+msgid "Add log out to the menu"
+msgstr "在菜单中添加注销"
+
+#: .settings:log_out_icon/description
+msgid "The log out icon"
+msgstr "注销图标"
+
+#: .settings:log_out_cmd/description
+msgid "The log out command"
+msgstr "注销命令"
+
+#: .settings:screen_lock_label/description
+msgid "Screen lock"
+msgstr "锁屏"
+
+#: .settings:screen_lock/description
+msgid "Add screen lock to the menu"
+msgstr "在菜单中添加锁屏"
+
+#: .settings:screen_lock_icon/description
+msgid "The screen lock icon"
+msgstr "锁屏图标"
+
+#: .settings:screen_lock_cmd/description
+msgid "The screen lock command"
+msgstr "锁屏命令"

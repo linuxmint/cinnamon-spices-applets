@@ -1,0 +1,8 @@
+{
+    "uuid": "ShutdownMenu-change@yoo",
+    "name": "ShutdownMenu-change",
+    "description": "This is a Cinnamon panel applet that provides a menu with shutdown options and supports personalized actions via middle-click interaction. It was created by refactoring the code of ShutdownMenuWithIcons@LLOBERA to improve usability.",
+    "version": 1.2,
+    "author": "yoo",
+    "last-edited": 1788524924
+}
