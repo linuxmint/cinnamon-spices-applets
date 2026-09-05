@@ -78,6 +78,7 @@ MyApplet.prototype = {
 
             // Setup Clipboard Monitor
             this._clipboard = St.Clipboard.get_default();
+            this._isCheckingImage = false;
             this._monitorTimeout = Mainloop.timeout_add(300, () => this._monitorClipboard());
         } catch (e) {
             global.logError(e);
@@ -117,6 +118,9 @@ MyApplet.prototype = {
     },
 
     _checkImageClipboard: function () {
+        if (this._isCheckingImage) return;
+        this._isCheckingImage = true;
+
         let cmd = [
             "bash",
             "-c",
@@ -149,11 +153,16 @@ MyApplet.prototype = {
                     }
                 } catch (e) {
                     // Ignore stream read errors
+                } finally {
+                    this._isCheckingImage = false;
                 }
             });
             
-            proc.wait_async(null, null);
+            proc.wait_async(null, () => {
+                this._isCheckingImage = false;
+            });
         } catch (e) {
+            this._isCheckingImage = false;
             global.logError("Failed to check image clipboard: " + e);
         }
     },
