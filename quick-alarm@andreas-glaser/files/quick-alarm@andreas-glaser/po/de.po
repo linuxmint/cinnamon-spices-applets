@@ -5,8 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: quick-alarm@andreas-glaser\n"
-"Report-Msgid-Bugs-To: https://github.com/andreas-glaser/quick-alarm-cinnamon/issues\n"
-"POT-Creation-Date: 2026-01-26\n"
+"Report-Msgid-Bugs-To: https://github.com/andreas-glaser/quick-alarm-cinnamon/"
+"issues\n"
+"POT-Creation-Date: 2026-08-28\n"
 "PO-Revision-Date: 2026-01-26\n"
 "Last-Translator: Andreas Glaser\n"
 "Language-Team: German\n"
@@ -17,6 +18,9 @@ msgstr ""
 
 msgid "Quick Alarm"
 msgstr "Quick Alarm"
+
+msgid "Type: in 10m tea  •  11am standup  •  Ctrl+Enter adds another"
+msgstr ""
 
 msgid "Alarm"
 msgstr "Alarm"
@@ -32,6 +36,15 @@ msgstr "Gib eine Zeit ein."
 
 msgid "Could not parse that."
 msgstr "Konnte das nicht verstehen."
+
+msgid "Input is too long."
+msgstr ""
+
+msgid "Duration is too large."
+msgstr ""
+
+msgid "Too many alarms queued."
+msgstr ""
 
 msgid "That time already passed today."
 msgstr "Diese Zeit ist heute bereits vorbei."
@@ -62,3 +75,9 @@ msgstr "vor %d Stunden"
 
 msgid "Missed alarm"
 msgstr "Verpasster Alarm"
+
+msgid "Missed alarms"
+msgstr ""
+
+msgid "%d alarms were missed."
+msgstr ""
