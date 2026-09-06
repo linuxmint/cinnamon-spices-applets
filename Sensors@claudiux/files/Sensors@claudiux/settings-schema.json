@@ -162,7 +162,8 @@
         "show_unit",
         "show_unit_letter",
         "always_show_unit_in_line",
-        "journalize_temp"
+        "journalize_temp",
+        "no_check_gpu_if_d3cold"
       ]
     },
     "section_tempSensors": {
@@ -584,6 +585,12 @@
     "default": false,
     "description": "Log high and critical temperatures",
     "tooltip": "When this option is checked, temperatures exceeding the high or critical limit are recorded in the system journal."
+  },
+  "no_check_gpu_if_d3cold": {
+    "type": "switch",
+    "default": false,
+    "description": "Stop checking GPU temperature if in D3cold state",
+    "tooltip": "If this option is checked, to avoid waking up GPU card to check its temperature, don't check it's temperature if it's in powersave mode"
   },
   "btn_renew_temp_sensors_list": {
     "type": "button",

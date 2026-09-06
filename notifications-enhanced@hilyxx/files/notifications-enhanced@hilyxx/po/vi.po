@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2025-08-05 12:43+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-24 14:54+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,64 +19,65 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:44
+#. applet.js:45
 msgid "Notifications applet conflict"
 msgstr "Xung đột applet thông báo"
 
-#. applet.js:45
+#. applet.js:46
 msgid ""
 "Conflict detected: notifications@cinnamon.org is active.\n"
 "Remove it and restart Cinnamon before using Notifications-Enhanced applet."
 msgstr ""
 "Phát hiện xung đột: notifications@cinnamon.org đang hoạt động.\n"
-"Hãy gỡ bỏ và khởi động lại Cinnamon trước khi sử dụng applet Notifications-Enhanced."
+"Hãy gỡ bỏ và khởi động lại Cinnamon trước khi sử dụng applet Notifications-"
+"Enhanced."
 
-#. applet.js:120
+#. applet.js:171
 msgid "Do not disturb"
 msgstr "Không làm phiền"
 
-#. applet.js:126
+#. applet.js:177
 msgid "No notifications"
 msgstr "Không có thông báo"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:134
+#. applet.js:185
 msgid "Clear notifications"
 msgstr "Xóa thông báo"
 
-#. applet.js:157
+#. applet.js:200
 msgid "Enable notifications"
 msgstr "Bật thông báo"
 
-#. applet.js:168
+#. applet.js:211
 msgid "Notification Settings"
 msgstr "Cài đặt thông báo"
 
-#. applet.js:257 applet.js:431
+#. applet.js:355 applet.js:611
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d thông báo"
 
-#. applet.js:287
+#. applet.js:392
 msgid "Notifications"
 msgstr "Thông báo"
 
-#. applet.js:300
+#. applet.js:405
 msgid "Notifications disabled"
 msgstr "Thông báo bị tắt"
 
-#. applet.js:447
+#. applet.js:634
 msgid "just now"
 msgstr "vừa xong"
 
-#. applet.js:450
+#. applet.js:637
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "cách đây %d giây"
 
-#. applet.js:454
+#. applet.js:641
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -109,6 +111,11 @@ msgstr "Hiển thị"
 msgid "Show the number of notifications"
 msgstr "Hiển thị số lượng thông báo"
 
+#. settings-schema.json->showNewestFirst->description
+#, fuzzy
+msgid "Show newest notifications first"
+msgstr "Hiển thị thông báo"
+
 #. settings-schema.json->showEmptyTray->description
 msgid "Show notification tray"
 msgstr "Hiển thị khay thông báo"
@@ -122,8 +129,12 @@ msgid "Always show 'Do Not Disturb' icon"
 msgstr "Luôn hiển thị biểu tượng 'Không làm phiền'"
 
 #. settings-schema.json->showDisturbIcon->tooltip
-msgid "Check this to show the 'Do Not Disturb icon' on the panel even when the 'Show notification tray' option is disabled."
-msgstr "Chọn để hiển thị biểu tượng 'Không làm phiền' trên panel ngay cả khi tùy chọn 'Hiển thị khay thông báo' bị tắt."
+msgid ""
+"Check this to show the 'Do Not Disturb icon' on the panel even when the "
+"'Show notification tray' option is disabled."
+msgstr ""
+"Chọn để hiển thị biểu tượng 'Không làm phiền' trên panel ngay cả khi tùy "
+"chọn 'Hiển thị khay thông báo' bị tắt."
 
 #. settings-schema.json->showNotificationSettings->description
 msgid "Show notification settings in the menu"

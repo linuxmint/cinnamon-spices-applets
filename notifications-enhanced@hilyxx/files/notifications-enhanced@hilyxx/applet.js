@@ -18,6 +18,8 @@ const PANEL_EDIT_MODE_KEY = "panel-edit-mode";
 const UUID = "notifications-enhanced@hilyxx";
 Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
+const interfaceSettings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.interface'});
+
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
@@ -122,6 +124,11 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         if (this._normalBlinkTimeout) {
             Mainloop.source_remove(this._normalBlinkTimeout);
             this._normalBlinkTimeout = null;
+        }
+
+        if (this._warmupTimeoutId) {
+            Mainloop.source_remove(this._warmupTimeoutId);
+            this._warmupTimeoutId = null;
         }
 
         // Only used in cinnamon 6.6 and later
@@ -277,7 +284,17 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
                 this.notifications.splice(existing_index, 1);
             } else {
                 notification._inNotificationBin = true;
-                global.reparentActor(notification.actor, this._notificationbin);
+               
+                let parent = notification.actor.get_parent();
+                
+                if (parent && parent !== this._notificationbin) {
+                    parent.remove_child(notification.actor);
+                }
+                
+                if (notification.actor.get_parent() !== this._notificationbin) {
+                    this._notificationbin.add_child(notification.actor);
+                }
+                
                 notification._timeLabel.show();
             }
             this.update_list();
@@ -293,13 +310,24 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this._notificationbin.add(notification.actor);
         notification.actor._parent_container = this._notificationbin;
         notification.actor.add_style_class_name('notification-applet-padding');
+        // Cache each notification subtree in an offscreen texture.
+        notification.actor.set_offscreen_redirect(imports.gi.Clutter.OffscreenRedirect.ALWAYS);
+
+        this._cacheSlotSeq = (this._cacheSlotSeq || 0) + 1;
+        notification.actor.add_style_class_name('notification-cache-slot-' + this._cacheSlotSeq);
 
         // Enable middle-click to close notifications.
         notification.actor.connect('button-press-event', (actor, event) => {
             if (event.get_button && event.get_button() === 2) {
-                notification.destroy(NotificationDestroyedReason.DISMISSED);
+                this._notificationbin.remove_actor(notification.actor);
+        
+                 notification.destroy(NotificationDestroyedReason.DISMISSED);
+        
+                 return true;
             }
+            return false;
         });
+
         // Register for destruction.
         notification.connect('scrolling-changed', (notif, scrolling) => { this.menu.passEvents = scrolling });
         notification.connect('destroy', () => {
@@ -399,10 +427,42 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
             this.menu_label.label.set_text(stringify(count));
             this._notificationbin.queue_relayout();
 
+            // Pre-render the menu off-screen after list changes, so the first
+            // click doesn't pay the one-time cairo rasterization of the new
+            // notification (and of the resized menu background).
+            this._scheduleMenuWarmup();
+
         } catch (e) {
             global.logError(e);
         }
      }
+
+    // St rasterizes CSS backgrounds on the CPU during the first paint of a
+    // theme node at a given size.
+    _scheduleMenuWarmup() {
+        if (this._warmupTimeoutId) {
+            Mainloop.source_remove(this._warmupTimeoutId);
+            this._warmupTimeoutId = 0;
+        }
+        this._warmupTimeoutId = Mainloop.timeout_add(1500, () => {
+            this._warmupTimeoutId = 0;
+            if (this._is_destroyed || this.menu.isOpen || this.menu.actor.visible)
+                return false;
+            let actor = this.menu.actor;
+            let oldOpacity = actor.opacity;
+            actor.opacity = 1;
+            actor.reactive = false;
+            actor.show();
+            Mainloop.timeout_add(100, () => {
+                if (!this.menu.isOpen)
+                    actor.hide();
+                actor.opacity = oldOpacity;
+                actor.reactive = true;
+                return false;
+            });
+            return false;
+        });
+    }
 
      _clear_all() {
         let count = this.notifications.length;
@@ -423,15 +483,9 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
             orderedNotifications.reverse();
         }
 
-        // Remove all children without destroying them.
-        let children = this._notificationbin.get_children();
-        for (let i = 0; i < children.length; i++) {
-            this._notificationbin.remove_child(children[i]);
-        }
-
-        // Add them back in desired order.
         for (let i = 0; i < orderedNotifications.length; i++) {
-            this._notificationbin.add_child(orderedNotifications[i].actor);
+            let actor = orderedNotifications[i].actor;
+            this._notificationbin.set_child_at_index(actor, i);
         }
     }
 
@@ -558,16 +612,23 @@ function stringify(count) {
 }
 
 function timeify(orig_time) {
-    let settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.interface'});
-    let use_24h = settings.get_boolean('clock-use-24h');
+    let use_24h = interfaceSettings.get_boolean('clock-use-24h');
     let now = new Date();
     let diff = Math.floor((now.getTime() - orig_time.getTime()) / 1000); // get diff in seconds
-    let str;
-    if (use_24h) {
-        str = orig_time.toLocaleFormat('%x, %T');
-    } else {
-        str = orig_time.toLocaleFormat('%x, %r');
-    }
+    
+    let options = {
+        year: 'numeric', 
+        month: 'numeric', 
+        day: 'numeric',
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit',
+        hour12: !use_24h
+    };
+    
+    let formatter = new Intl.DateTimeFormat('default', options);
+    let str = formatter.format(orig_time);
+
     switch (true) {
         case (diff <= 15): {
             str += " (" + _("just now") + ")";

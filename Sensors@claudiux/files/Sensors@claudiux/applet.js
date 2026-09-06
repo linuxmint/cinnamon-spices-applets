@@ -268,7 +268,9 @@ class SensorsApplet extends Applet.Applet {
       this.strictly_positive_fan ? 1 : 0,
       this.strictly_positive_volt ? 1 : 0
     );
-    this.reaper.reap_nvidia_smi();
+    this.reaper.reap_nvidia_smi(
+      this.no_check_gpu_if_d3cold ? 1 : 0
+    )
 
     // Events:
     this._connectIds = [];
@@ -428,6 +430,7 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("numberOfTempSensors", "numberOfTempSensors");
     this.s.bind("temp_disks", "temp_disks", this._on_temp_disks_modified.bind(this));
     this.s.bind("journalize_temp", "journalize_temp");
+    this.s.bind("no_check_gpu_if_d3cold", "no_check_gpu_if_d3cold");
 
     // Fan tab
     this.s.bind("show_fan", "show_fan", () => { this.populate_fan_sensors_in_settings() });
@@ -589,7 +592,9 @@ class SensorsApplet extends Applet.Applet {
         this.strictly_positive_fan ? 1 : 0,
         this.strictly_positive_volt ? 1 : 0
       );
-      this.reaper.reap_nvidia_smi();
+      this.reaper.reap_nvidia_smi(
+        this.no_check_gpu_if_d3cold ? 1 : 0
+      )
     } else {
       this.set_applet_label(_("Suspended"));
     }
