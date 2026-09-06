@@ -101,16 +101,19 @@ SearchApplet.prototype = {
 
         this.searchItem = new PopupMenu.PopupIconMenuItem(
             "", "system-search-symbolic", St.IconType.SYMBOLIC);
+        this.searchItem.actor.set_x_align(Clutter.ActorAlign.CENTER);
         this.searchItem.connect("activate", () => this._search());
         row.add(this.searchItem.actor, { expand: true, x_fill: true });
 
         this.pasteItem = new PopupMenu.PopupIconMenuItem(
             "", "edit-paste-symbolic", St.IconType.SYMBOLIC);
+        this.pasteItem.actor.set_x_align(Clutter.ActorAlign.CENTER);
         this.pasteItem.connect("activate", () => this._paste());
         row.add(this.pasteItem.actor, { expand: true, x_fill: true });
 
         this.pasteSearchItem = new PopupMenu.PopupIconMenuItem(
             _("Paste & Search"), "edit-paste-symbolic", St.IconType.SYMBOLIC);
+        this.pasteSearchItem.actor.set_x_align(Clutter.ActorAlign.CENTER);
         this.pasteSearchItem.connect("activate", () => this._paste_search());
         row.add(this.pasteSearchItem.actor, { expand: true, x_fill: true });
 
