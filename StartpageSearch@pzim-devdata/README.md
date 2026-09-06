@@ -8,18 +8,23 @@ on the Startpage results page.
 
 ## Features
 
-- Panel applet with a search popup (field on top, buttons below)
+- **Centered translucent search dialog**: instead of a small popup under
+  the panel, a semi-transparent dialog appears in the middle of the screen
+  over a light screen veil (like a run-dialog)
 - **Search**: submits the field content to Startpage (Enter or magnifier button)
 - **Paste clipboard**: fills the field with the clipboard content
 - **Paste & Search**: reads the clipboard and searches it directly
 - **Smart URL detection**: if the clipboard (or the field) contains a web
   address (`https://…`, `http://…`, `www.…`, or a bare domain like
   `example.com`), it is opened directly instead of searching it
+- **Cancel anywhere**: Escape closes the dialog, and clicking anywhere
+  outside the dialog cancels too
 - Automatic browser focus: raises and activates the browser window,
   whether minimized, backgrounded, or freshly started
 - Tooltips on every button
 - Zero dependencies. Pure Cinnamon API
-- Translated: fr, de, es, it, nl, pt
+- Translated: fr, de, es, it, nl, pt (including the applet description
+  shown in System Settings)
 
 ## Dependencies
 
@@ -42,13 +47,19 @@ Then Applets -> add "Startpage Search".
 
 | Action                   | Result                                        |
 |--------------------------|-----------------------------------------------|
-| Left click on icon       | Opens the popup, focuses the field            |
-| Type query + Enter       | Browser opens on Startpage results             |
+| Left click on icon       | Opens the centered dialog, focuses the field  |
+| Type query + Enter       | Browser opens on Startpage results            |
 | Click the magnifier      | Same as Enter                                 |
-| Click the paste icon     | Fills the field with the clipboard             |
-| Click "Paste & Search"   | Searches the clipboard content immediately     |
-| Clipboard contains a URL | The URL opens directly (no search performed)   |
-| Esc                      | Closes the popup                               |
+| Click the paste icon     | Fills the field with the clipboard            |
+| Click "Paste & Search"   | Searches the clipboard content immediately   |
+| Clipboard contains a URL | The URL opens directly (no search performed)  |
+| Esc                      | Cancels and closes the dialog                |
+| Click outside the dialog | Cancels and closes the dialog                |
+| Left click on icon again | Closes the dialog                             |
+
+While the dialog is open, keyboard input and pointer events are captured
+(modal grab), so typing always lands in the search field regardless of
+the window that was focused before.
 
 ## Configuration
 
@@ -58,6 +69,13 @@ No configuration needed. Two behaviors can be tuned at the top of
 - `SEARCH_URL`: the search engine (see below)
 - `DETECT_URLS_IN_ENTRY`: set to `false` to always treat typed text as a
   search query, even if it looks like a URL
+
+Visual tuning (same constant block in `_buildOverlay`):
+
+- `background-color` of `this.overlay`: darkness of the screen veil
+- `background-color`, `border-radius` and `border` of `this.panel`:
+  look of the dialog itself
+- `font-size` and `min-width` on the `St.Entry`: size of the text field
 
 ## Using another search engine
 
@@ -110,5 +128,19 @@ const SEARCH_URL = "https://www.qwant.com/?q=";
 const SEARCH_URL = "https://searx.example.org/search?q=";
 ```
 
-After editing, reload the applet, or restart Cinnamon with Ctrl+Alt+Esc).
+## Translations
 
+`.po` files live in `po/`. To rebuild the binary catalogs after editing:
+
+```bash
+cd po
+for L in fr de es it nl pt; do
+  msgfmt -c -o ~/.local/share/locale/$L/LC_MESSAGES/StartpageSearch@pzim-devdata.mo $L.po && echo "$L OK"
+done
+```
+
+New languages are welcome: copy the `.pot`, translate, open a pull request.
+The `description` field of `metadata.json` is translated through the same
+catalog (keep its `msgid` in sync with the JSON).
+
+After editing, reload the applet, or restart Cinnamon with Ctrl+Alt+Esc.
