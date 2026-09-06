@@ -6,8 +6,19 @@ const Util = imports.misc.util;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const Tooltips = imports.ui.tooltips;
-const Gettext = imports.gettext.domain("StartpageSearch@pzim-devdata");
-const _ = Gettext.gettext;
+const Clutter = imports.gi.Clutter;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "StartpageSearch@pzim-devdata";
+
+// liaison explicite du domaine : indispensable avant toute interrogation
+Gettext.bindtextdomain(UUID, GLib.build_filenamev(
+    [GLib.get_home_dir(), ".local", "share", "locale"]));
+
+// résolution à chaque appel, robuste à l'ordre de chargement de session
+const _ = function (str) {
+    return Gettext.dgettext(UUID, str);
+};
 
 const SEARCH_URL = "https://www.startpage.com/sp/search?query=";
 // si true : taper une URL dans le champ + Entrée ouvre aussi directement le lien
@@ -15,7 +26,7 @@ const DETECT_URLS_IN_ENTRY = true;
 
 // détection d'URL : schéma explicite, www., ou domaine nu avec TLD valide
 const URL_RE =
-    /^((https?:\/\/)[^\s]+|(www\.)[^\s]+|[a-z0-9][a-z0-9-]*(\.[a-z0-9-]+)+\.[a-z]{2,}[^\s]*)$/i;
+    /^(?:https?:\/\/\S+|www\.\S+|(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}(?:[\/?#]\S*)?)$/i;
 
 function SearchApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -31,67 +42,135 @@ SearchApplet.prototype = {
         this._focusDone = true;
         this._known = {};
         this._titles = {};
+        this._modal = false;
 
-        this.menuManager = new PopupMenu.PopupMenuManager(this);
-        this.menu = new Applet.AppletPopupMenu(this, orientation);
-        this.menuManager.addMenu(this.menu);
+        this._buildOverlay();
+    },
 
-        let vbox = new St.BoxLayout({ vertical: true, style: "padding: 10px;" });
+    _buildOverlay: function () {
+        // voile plein écran semi-transparent
+        this.overlay = new St.Widget({
+            reactive: true,
+            style: "background-color: rgba(0, 0, 0, 0.35);"
+        });
+        this.overlay.hide();
 
+        // fenêtre centrée, translucide
+        this.panel = new St.BoxLayout({
+            vertical: true,
+            reactive: true,
+            style: "background-color: rgba(25, 25, 28, 0.85);" +
+                   "border-radius: 14px;" +
+                   "border: 1px solid rgba(255, 255, 255, 0.18);" +
+                   "padding: 6px;"
+        });
+
+        // centrage automatique du panneau dans le voile
+        this.panel.add_constraint(new Clutter.AlignConstraint({
+            source: this.overlay,
+            align_axis: Clutter.AlignAxis.BOTH,
+            factor: 0.5
+        }));
+
+        // champ de saisie en haut de la fenêtre
+        let entryBox = new St.BoxLayout({
+            style: "min-width: 480px; padding: 12px 12px 6px 12px;"
+        });
         this.entry = new St.Entry({
             name: "search-entry",
             hint_text: _("Search terms..."),
             track_hover: true,
             can_focus: true,
-            style: "width: 320px;"
+            style: "min-width: 460px; font-size: 30px;"
         });
         this.entry.clutter_text.connect("activate", () => this._search());
-        vbox.add(this.entry, { expand: true, x_fill: true });
-
-        let hbox = new St.BoxLayout({ vertical: false, style: "padding-top: 8px;" });
-
-        this.searchBtn = new St.Button({
-            reactive: true, track_hover: true, can_focus: true
+        this.entry.clutter_text.connect("key-press-event", (actor, event) => {
+            try {
+                if (event.get_key_symbol() === Clutter.KEY_Escape) {
+                    this._cancel();
+                    return true;
+                }
+            } catch (e) { /* symbole inaccessible : ignorer */ }
+            return false;
         });
-        this.searchBtn.set_child(new St.Icon({
-            icon_name: "system-search-symbolic", icon_size: 20
-        }));
-        this.searchBtn.connect("clicked", () => this._search());
-        hbox.add(this.searchBtn, { expand: true, x_fill: true });
+        entryBox.add(this.entry, { expand: true, x_fill: true });
+        this.panel.add(entryBox);
 
-        this.pasteBtn = new St.Button({
-            reactive: true, track_hover: true, can_focus: true
+        // boutons disposés en rangée horizontale
+        let row = new St.BoxLayout({ vertical: false, style: "padding: 4px 8px 10px 8px;" });
+
+        this.searchItem = new PopupMenu.PopupIconMenuItem(
+            "", "system-search-symbolic", St.IconType.SYMBOLIC);
+        this.searchItem.connect("activate", () => this._search());
+        row.add(this.searchItem.actor, { expand: true, x_fill: true });
+
+        this.pasteItem = new PopupMenu.PopupIconMenuItem(
+            "", "edit-paste-symbolic", St.IconType.SYMBOLIC);
+        this.pasteItem.connect("activate", () => this._paste());
+        row.add(this.pasteItem.actor, { expand: true, x_fill: true });
+
+        this.pasteSearchItem = new PopupMenu.PopupIconMenuItem(
+            _("Paste & Search"), "edit-paste-symbolic", St.IconType.SYMBOLIC);
+        this.pasteSearchItem.connect("activate", () => this._paste_search());
+        row.add(this.pasteSearchItem.actor, { expand: true, x_fill: true });
+
+        this.panel.add(row);
+
+        // bulles d'aide au survol
+        new Tooltips.Tooltip(this.searchItem.actor, _("Search"));
+        new Tooltips.Tooltip(this.pasteItem.actor, _("Paste clipboard"));
+        new Tooltips.Tooltip(this.pasteSearchItem.actor, _("Paste clipboard and search"));
+
+        // clic sur le voile (hors de la fenêtre) : annule
+        this.overlay.connect("button-press-event", (actor, event) => {
+            if (event.get_source() === this.overlay) this._cancel();
+            return false;
         });
-        this.pasteBtn.set_child(new St.Icon({
-            icon_name: "edit-paste-symbolic", icon_size: 20
-        }));
-        this.pasteBtn.connect("clicked", () => this._paste());
-        hbox.add(this.pasteBtn, { expand: true, x_fill: true });
 
-        this.pasteSearchBtn = new St.Button({
-            label: _("Paste & Search"),
-            reactive: true, track_hover: true, can_focus: true
-        });
-        this.pasteSearchBtn.connect("clicked", () => this._paste_search());
-        hbox.add(this.pasteSearchBtn, { expand: true, x_fill: true });
-
-        vbox.add(hbox, { expand: false, x_fill: true });
-
-        this.menu.addActor(vbox);
-
-        new Tooltips.Tooltip(this.searchBtn, _("Search"));
-        new Tooltips.Tooltip(this.pasteBtn, _("Paste clipboard"));
-        new Tooltips.Tooltip(this.pasteSearchBtn, _("Paste clipboard and search"));
+        this.overlay.add_child(this.panel);
+        Main.uiGroup.add_child(this.overlay);
     },
 
     on_applet_clicked: function () {
-        this.menu.toggle();
-        if (this.menu.isOpen) {
-            Mainloop.timeout_add(50, () => {
-                global.stage.set_key_focus(this.entry);
-                return false;
-            });
+        // bascule : referme si déjà ouvert
+        if (this.overlay.visible) {
+            this._cancel();
+            return;
         }
+        this._open();
+    },
+
+    _open: function () {
+        let sw = global.stage.width, sh = global.stage.height;
+        this.overlay.set_size(sw, sh);
+        this.overlay.set_position(0, 0);
+        this.overlay.show();
+
+        // grab clavier + pointeur sur le voile
+        try {
+            Main.pushModal(this.overlay);
+            this._modal = true;
+        } catch (e) {
+            this._modal = false;   // dégradation : voile visuel sans capture
+        }
+
+        Mainloop.timeout_add(50, () => {
+            this.entry.grab_key_focus();
+            return false;
+        });
+    },
+
+    _close: function () {
+        if (this._modal) {
+            try { Main.popModal(this.overlay); } catch (e) { /* déjà libéré */ }
+            this._modal = false;
+        }
+        this.entry.set_text("");
+        this.overlay.hide();
+    },
+
+    _cancel: function () {
+        this._close();
     },
 
     _is_url: function (t) {
@@ -100,7 +179,6 @@ SearchApplet.prototype = {
 
     _normalize: function (t) {
         t = t.trim();
-        // domaine nu ("example.com") : xdg-open exige un schéma explicite
         if (!/^https?:\/\//i.test(t)) t = "http://" + t;
         return t;
     },
@@ -109,7 +187,7 @@ SearchApplet.prototype = {
         St.Clipboard.get_default().get_text(St.ClipboardType.CLIPBOARD, (clip, txt) => {
             if (txt && txt.length) {
                 this.entry.get_clutter_text().set_text(txt.trim());
-                global.stage.set_key_focus(this.entry);
+                this.entry.grab_key_focus();
             }
         });
     },
@@ -135,11 +213,9 @@ SearchApplet.prototype = {
                 this._launch(q);
             }
         }
-        this.entry.set_text("");
-        this.menu.close();
+        this._close();
     },
 
-    // ouvre une URL directe avec la même mécanique de focus
     _launch_open: function (url) {
         this._snapshot();
         Util.spawn(["xdg-open", url]);
