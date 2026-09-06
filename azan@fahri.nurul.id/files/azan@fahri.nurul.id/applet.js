@@ -52,6 +52,10 @@ AzanApplet.prototype = {
             this._opt_timezone = null;
             this._opt_primaryReminder = null;
             this._opt_extraReminder = null;
+            this._opt_listImsak = null;
+            this._opt_listSunrise = null;
+            this._opt_listSunset = null;
+            this._opt_listMidnight = null;
             this._opt_adjImsak = null;
             this._opt_adjFajr = null;
             this._opt_adjSunrise = null;
@@ -104,7 +108,6 @@ AzanApplet.prototype = {
             };
 
             this._prayItems = {};
-
 
             // https://gist.github.com/tesfabpel/2596526
             // this._batteryItem = new PopupMenu.PopupMenuItem('', { reactive: false });
@@ -168,7 +171,7 @@ AzanApplet.prototype = {
 
 
             // global.logError(JSON.stringify(prayMenuItem));
-
+            this._updateNonPrayersVisibility();
             this._updateLabelPeriodic();
 
         } catch (e) {
@@ -248,6 +251,42 @@ AzanApplet.prototype = {
             "_opt_extraReminder",
             function() {
                 this._updateLabel();
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "list_imsak",
+            "_opt_listImsak",
+            function() {
+                this._updateVisibility('imsak', this._opt_listImsak);
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "list_sunrise",
+            "_opt_listSunrise",
+            function() {
+                this._updateVisibility('sunrise', this._opt_listSunrise);
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "list_sunset",
+            "_opt_listSunset",
+            function() {
+                this._updateVisibility('sunset', this._opt_listSunset);
+            }
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "list_midnight",
+            "_opt_listMidnight",
+            function() {
+                this._updateVisibility('midnight', this._opt_listMidnight);
             }
         );
 
@@ -456,6 +495,23 @@ AzanApplet.prototype = {
         }
         
         // this.prayLabel.text = new Date().toString();
+    },
+
+    _updateVisibility: function(prayerId, visibility) {
+        this._prayItems[prayerId].menuItem.actor.visible = Number(visibility);
+    },
+
+    _updateNonPrayersVisibility: function() {
+        this._visibility = {
+            imsak: this._opt_listImsak,
+            sunrise: this._opt_listSunrise,
+            sunset: this._opt_listSunset,
+            midnight: this._opt_listMidnight
+        };
+
+        for (let prayerId in this._visibility) {
+            this._updateVisibility(prayerId, this._visibility[prayerId])
+        }
     },
 
     _calculateSecondsFromDate: function(date) {

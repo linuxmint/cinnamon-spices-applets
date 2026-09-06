@@ -23,7 +23,7 @@ Azan is an Islamic prayer times applet for Cinnamon.
 - 0.2 : Juristic method option added in applet settings.
 - 0.3 : Added a setting to choose between 12h and 24h time formats.
 - 0.4 : Added an option for an extra reminder before a prayer time.
-- 0.5 : Updated settings, added the ability to turn off remniders at prayer times and adjust times, the settings button now work & other minor tweaks.
+- 0.5 : Updated settings, added the ability to turn off remniders at prayer times, adjust times and delist non-prayer times, the settings button now work & other minor tweaks.
 
 ### License
 

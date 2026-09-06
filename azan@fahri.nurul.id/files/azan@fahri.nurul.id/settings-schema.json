@@ -10,7 +10,7 @@
         "tweaks": {
             "type": "page",
             "title": "Tweaks",
-            "sections": ["tweaks_time_adjust"]
+            "sections": ["tweaks_listed_nonprayers", "tweaks_time_adjust"]
         },
         "main_calculations": {
             "type": "section",
@@ -26,6 +26,11 @@
             "type": "section",
             "title": "Reminders",
             "keys": ["primary_reminder", "extra_reminder"]        
+        },
+        "tweaks_listed_nonprayers": {
+            "type": "section",
+            "title": "Listed Non-Prayer Times",
+            "keys": ["list_imsak", "list_sunrise", "list_sunset", "list_midnight"]
         },
         "tweaks_time_adjust": {
             "type": "section",
@@ -51,7 +56,7 @@
     },
     "juristic": {
         "type": "combobox",
-        "description": "Madhhab (see tooltip)",
+        "description": "Madhhab",
         "default": "Standard",
         "options": {
             "Shafi`i, Maliki, Ja`fari or Hanbali": "Standard",
@@ -61,23 +66,23 @@
     },
     "latitude": {
         "type": "spinbutton",
-        "default": -6.3292,
+        "default": 0.0000,
         "min": -90.0000,
         "max": 90.0000,
         "step": 0.0001,
         "units": "degrees",
         "description": "Latitude",
-        "tooltip": "Range is from -90 to 90 degrees. Default is -6.3292 degrees."
+        "tooltip": "Range is from -90 to 90 degrees."
     },
     "longitude": {
         "type": "spinbutton",
-        "default": 106.8567,
+        "default": 0.0000,
         "min": -180.0000,
         "max": 180.0000,
         "step": 0.0001,
         "units": "degrees",
         "description": "Longitude",
-        "tooltip": "Range is from -180 to 180 degrees. Default is 106.8567 degrees."
+        "tooltip": "Range is from -180 to 180 degrees."
     },
     "timezone": {
         "type": "combobox",
@@ -138,6 +143,26 @@
             "15 minutes": "15"
         }
     },
+    "list_imsak": {
+        "type": "checkbox",
+        "default": "1",
+        "description": "Imsak"
+    },
+    "list_sunrise": {
+        "type": "checkbox",
+        "default": "1",
+        "description": "Sunrise"
+    },
+    "list_sunset": {
+        "type": "checkbox",
+        "default": "1",
+        "description": "Sunset"
+    },
+    "list_midnight": {
+        "type": "checkbox",
+        "default": "1",
+        "description": "Midnight"
+    },
     "adj_imsak": {
         "type": "spinbutton",
         "default": 0,
@@ -146,7 +171,8 @@
         "min": -60,
         "max": 60,
         "step": 1,
-        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0.",
+        "dependency": "list_imsak"
     },
     "adj_fajr": {
         "type": "spinbutton",
@@ -166,7 +192,8 @@
         "min": -60,
         "max": 60,
         "step": 1,
-        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0.",
+        "dependency": "list_sunrise"
     },
     "adj_dhuhr": {
         "type": "spinbutton",
@@ -196,7 +223,8 @@
         "min": -60,
         "max": 60,
         "step": 1,
-        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0.",
+        "dependency": "list_sunset"
     },
     "adj_maghrib": {
         "type": "spinbutton",
@@ -226,6 +254,7 @@
         "min": -60,
         "max": 60,
         "step": 1,
-        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0."
+        "tooltip": "Increase or decrease the time up to 60 minutes. Default is 0.",
+        "dependency": "list_midnight"
     }
 }
