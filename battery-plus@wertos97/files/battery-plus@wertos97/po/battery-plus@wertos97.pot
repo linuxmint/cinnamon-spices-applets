@@ -172,3 +172,7 @@ msgstr ""
 msgid "Low level notification threshold"
 msgstr ""
 
+#: settings-schema.json:50
+msgid "Decimal places for power and voltage values"
+msgstr ""
+

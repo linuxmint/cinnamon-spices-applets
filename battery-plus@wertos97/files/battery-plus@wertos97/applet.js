@@ -64,6 +64,8 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
             () => this._redrawGraph());
         this.settings.bind("low_notify", "low_notify");
         this.settings.bind("low_level", "low_level");
+        this.settings.bind("decimals", "decimals",
+            () => this._renderStats());
 
         // Panel buduje bazowa klasa systemowa (ta sama co zegar i ikona
         // baterii): ikona w rozmiarze strefy + wielolinijkowy napis.
@@ -359,34 +361,46 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
         proc.communicate_utf8_async(null, null, (p, res) => {
             try {
                 let [, out] = p.communicate_utf8_finish(res);
-                let rateTxt = null, voltTxt = null, cap = null, cyc = null;
+                let rate = null, volt = null, cap = null, cyc = null;
                 for (let line of out.split("\n")) {
                     let m;
-                    m = line.match(/energy-rate:\s*([\d.,]+\s*\w+)/);
-                    if (m) rateTxt = m[1].trim();
-                    m = line.match(/^\s*voltage:\s*([\d.,]+\s*\w+)/);
-                    if (m) voltTxt = m[1].trim();
+                    m = line.match(/energy-rate:\s*([\d.,]+)/);
+                    if (m) rate = parseFloat(m[1].replace(",", "."));
+                    m = line.match(/^\s*voltage:\s*([\d.,]+)/);
+                    if (m) volt = parseFloat(m[1].replace(",", "."));
                     m = line.match(/capacity:\s*([\d.,]+)/);
                     if (m) cap = parseFloat(m[1].replace(",", "."));
                     m = line.match(/charge-cycles:\s*(\d+)/);
                     if (m) cyc = parseInt(m[1], 10);
                 }
-                this._stats = { rate: rateTxt, voltage: voltTxt, capacity: cap, cycles: cyc };
-                if (this._statRows.rate)
-                    this._statRows.rate.set_text(
-                        (rateTxt !== null) ? rateTxt : "—");
-                if (this._statRows.voltage)
-                    this._statRows.voltage.set_text(
-                        (voltTxt !== null) ? voltTxt : "—");
-                if (this._statRows.health)
-                    this._statRows.health.set_text(
-                        (cap !== null && !isNaN(cap))
-                            ? _("%d%%").format(Math.round(cap)) : "—");
-                if (this._statRows.cycles)
-                    this._statRows.cycles.set_text(
-                        (cyc !== null && !isNaN(cyc)) ? String(cyc) : "—");
+                this._stats = { rate: rate, voltage: volt, capacity: cap, cycles: cyc };
+                this._renderStats();
             } catch (e) { /* ignore */ }
         });
+    }
+
+    _renderStats() {
+        if (!this._statRows.rate)
+            return;
+        let d = 1;
+        try {
+            d = parseInt(this.decimals, 10);
+            if (isNaN(d)) d = 1;
+        } catch (e) { d = 1; }
+        d = Math.max(0, Math.min(3, d));
+        let fmt = v => (v !== null && !isNaN(v) && v > 0)
+            ? v.toLocaleString(undefined,
+                { minimumFractionDigits: d, maximumFractionDigits: d })
+            : null;
+        let r = fmt(this._stats.rate), u = fmt(this._stats.voltage);
+        this._statRows.rate.set_text(r !== null ? r + " W" : "—");
+        this._statRows.voltage.set_text(u !== null ? u + " V" : "—");
+        let cap = this._stats.capacity, cyc = this._stats.cycles;
+        this._statRows.health.set_text(
+            (cap !== null && !isNaN(cap))
+                ? _("%d%%").format(Math.round(cap)) : "—");
+        this._statRows.cycles.set_text(
+            (cyc !== null && !isNaN(cyc)) ? String(cyc) : "—");
     }
 
     // --- power profiles (power-profiles-daemon, like the system applet) ---

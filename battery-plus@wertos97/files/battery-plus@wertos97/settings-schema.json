@@ -43,5 +43,13 @@
         "units": "%",
         "dependency": "low_notify",
         "description": "Low level notification threshold"
+    },
+    "decimals": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 3,
+        "step": 1,
+        "description": "Decimal places for power and voltage values"
     }
 }
