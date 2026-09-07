@@ -44,7 +44,7 @@ BingWallpaperApplet.prototype = {
         try {
             dir.make_directory_with_parents(null);
         } catch (e) {
-            // Ignoramos el error si la carpeta ya existe
+            // Ignoramos si la carpeta ya existe
         }
 
         this.wallpaperPath = `${this.wallpaperDir}/BingWallpaper.jpg`;
@@ -90,14 +90,16 @@ BingWallpaperApplet.prototype = {
                     this.wallpaperPath = `${this.wallpaperDir}/bing_${this.imageData.startdate}.jpg`;
 
                     let gFile = Gio.file_new_for_path(this.wallpaperPath);
-                    try {
-                        gFile.query_info('standard::size', Gio.FileQueryInfoFlags.NONE, null);
-                        log('La imagen ya esta en cache, aplicandola directamente.');
-                        this._setBackground();
-                    } catch (e) {
-                        log('La imagen no esta en cache, descargando...');
-                        this._downloadImage();
-                    }
+                    gFile.query_info_async('standard::size', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (file, res) => {
+                        try {
+                            file.query_info_finish(res);
+                            log('La imagen ya esta en cache, aplicandola directamente.');
+                            this._setBackground();
+                        } catch (e) {
+                            log('La imagen no esta en cache, descargando...');
+                            this._downloadImage();
+                        }
+                    });
                 });
                 this.historyMenu.menu.addMenuItem(menuItem);
             }
@@ -159,27 +161,29 @@ BingWallpaperApplet.prototype = {
             if (now.to_unix() < end_date.to_unix()) {
                 log('metadata up to date');
 
-                try {
-                    let image_file = Gio.file_new_for_path(this.wallpaperPath);
-                    let image_file_info = image_file.query_info('standard::size,time::modified', Gio.FileQueryInfoFlags.NONE, null);
-                    let image_file_size = image_file_info.get_size();
+                let image_file = Gio.file_new_for_path(this.wallpaperPath);
+                image_file.query_info_async('standard::size,time::modified', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (file, res) => {
+                    try {
+                        let image_file_info = file.query_info_finish(res);
+                        let image_file_size = image_file_info.get_size();
 
-                    let modTimeSecs;
-                    if (image_file_info.get_modification_date_time) {
-                        modTimeSecs = image_file_info.get_modification_date_time().to_unix();
-                    } else {
-                        modTimeSecs = image_file_info.get_modification_time().tv_sec;
-                    }
+                        let modTimeSecs;
+                        if (image_file_info.get_modification_date_time) {
+                            modTimeSecs = image_file_info.get_modification_date_time().to_unix();
+                        } else {
+                            modTimeSecs = image_file_info.get_modification_time().tv_sec;
+                        }
 
-                    if ((modTimeSecs > end_date.to_unix()) || !image_file_size) {
+                        if ((modTimeSecs > end_date.to_unix()) || !image_file_size) {
+                            this._downloadImage();
+                        } else {
+                            log("image appears up to date");
+                        }
+                    } catch (e) {
+                        log("No image file found");
                         this._downloadImage();
-                    } else {
-                        log("image appears up to date");
                     }
-                } catch (e) {
-                    log("No image file found");
-                    this._downloadImage();
-                }
+                });
             } else {
                 log('metadata is old, requesting new...');
                 this._downloadMetaData();
