@@ -45,7 +45,12 @@ if (typeof require !== 'undefined') {
 
 const DEFAULT_STYLE = "2";
 const DEFAULT_DIGIT_TYPE = "0";
+const DEFAULT_DIGIT_UNITS = "0";
 const DEFAULT_CPUS = "0";
+const FIXED_FREQ_UNITS = {
+    1: { label: 'MHz', divisor: 1000 },
+    2: { label: 'GHz', divisor: 1000000 }
+};
 // global settings variables;
 
 let refresh_time = 2000;
@@ -55,6 +60,7 @@ let graph_width = '6';
 let lower_border = 20;
 let upper_border = 80;
 let digit_type = DEFAULT_DIGIT_TYPE;
+let digit_units = DEFAULT_DIGIT_UNITS;
 let cpus_to_monitor = DEFAULT_CPUS;
 let text_color = '#FFFF80';
 let low_color = '#00FF00'; // green
@@ -93,7 +99,7 @@ function rd_frm_file(file) {
 function rd_nums_frm_file(file) {
     return parseInts(rd_frm_file(file));
 }
-function num_to_freq_panel(num) {
+function num_to_freq_panel_auto(num) {
     num = Math.round(num);
     let units;
     if (num < 1000) {
@@ -109,6 +115,17 @@ function num_to_freq_panel(num) {
         units = 'THz';
     }
     return formatNumPanel(num) + ' ' + units;
+}
+function num_to_freq_panel_fixed(num) {
+    let unit = FIXED_FREQ_UNITS[digit_units];
+    if (!unit)
+        return num_to_freq_panel(num);
+    return formatNumPanel(Math.round(num) / unit.divisor) + ' ' + unit.label;
+}
+function num_to_freq_panel(num) {
+    if (digit_units > 0)
+        return num_to_freq_panel_fixed(num)
+    return num_to_freq_panel_auto(num)
 }
 function num_to_freq_menu(num) {
     num = Math.round(num);
@@ -491,6 +508,11 @@ MyApplet.prototype = {
             this.rebuild,
             null);
         this.settings.bindProperty(Settings.BindingDirection.IN,
+            "digit-units",
+            "digit_units",
+            this.rebuild,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
             "cpus-to-monitor",
             "cpus",
             this.rebuild,
@@ -551,6 +573,7 @@ MyApplet.prototype = {
         lower_border = this.lower_border;
         upper_border = this.upper_border;
         digit_type = this.digit_type;
+        digit_units = this.digit_units;
         text_color = this.text_color;
         low_color = this.low_color;
         mid_color = this.med_color;

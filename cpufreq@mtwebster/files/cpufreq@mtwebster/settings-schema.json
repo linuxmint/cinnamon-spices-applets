@@ -38,6 +38,19 @@
         "indent": true,
         "tooltip": "Display the clock speed or a percentage of the maximum clock speed."
     },
+    "digit-units": {
+        "type": "combobox",
+        "default": 0,
+        "description": "Clock speed units:",
+        "options": {
+            "Auto": 0,
+            "MHz": 1,
+            "GHz": 2
+        },
+        "indent": true,
+        "dependency": "digit-type=0",
+        "tooltip": "Always show the clock speed in the same units."
+    },
     "graph-width": {
         "type": "scale",
         "default": 4,
