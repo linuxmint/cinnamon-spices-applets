@@ -1,0 +1,47 @@
+{
+    "show_icon": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show battery icon in the panel"
+    },
+    "show_bottom_row": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show the bottom row (remaining time)"
+    },
+    "verbose_time": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Verbose time (e.g. 1 h 48 min instead of 1:48)"
+    },
+    "history_hours": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 1,
+        "max": 168,
+        "step": 1,
+        "units": "h",
+        "description": "How many hours of history to show on the graph",
+        "tooltip": "Sampled every minute; data older than 8 days is removed."
+    },
+    "graph_shade": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Shade charging periods on the graph"
+    },
+    "low_notify": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Low battery notification"
+    },
+    "low_level": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 5,
+        "max": 50,
+        "step": 1,
+        "units": "%",
+        "dependency": "low_notify",
+        "description": "Low level notification threshold"
+    }
+}

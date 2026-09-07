@@ -1,0 +1,7 @@
+{
+    "max-instances": "1",
+    "description": "Battery icon with two-line label (percentage + remaining time) and Android-style charge history graph",
+    "name": "Battery Plus",
+    "version": "1.0",
+    "uuid": "battery-plus@wertos97"
+}

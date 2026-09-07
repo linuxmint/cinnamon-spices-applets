@@ -1,0 +1,174 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the battery-plus package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: battery-plus\n"
+"Report-Msgid-Bugs-To: wertos97\n"
+"POT-Creation-Date: 2026-09-07 13:27+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:40
+msgid "Charging"
+msgstr ""
+
+#: applet.js:41
+msgid "Discharging"
+msgstr ""
+
+#: applet.js:42
+#: applet.js:312
+msgid "Full"
+msgstr ""
+
+#: applet.js:43
+msgid "Empty"
+msgstr ""
+
+#: applet.js:44
+msgid "Pending charge"
+msgstr ""
+
+#: applet.js:45
+msgid "Pending"
+msgstr ""
+
+#: applet.js:46
+msgid "Unknown state"
+msgstr ""
+
+#: applet.js:95
+msgid "State"
+msgstr ""
+
+#: applet.js:95
+msgid "Time"
+msgstr ""
+
+#: applet.js:96
+msgid "Power"
+msgstr ""
+
+#: applet.js:96
+msgid "Voltage"
+msgstr ""
+
+#: applet.js:97
+msgid "Health"
+msgstr ""
+
+#: applet.js:97
+msgid "Charge cycles"
+msgstr ""
+
+#: applet.js:116
+msgid "Power mode"
+msgstr ""
+
+#: applet.js:128
+msgid "Charge history"
+msgstr ""
+
+#: applet.js:148
+msgid "Power settings"
+msgstr ""
+
+#: applet.js:283
+#, javascript-format
+msgid "%d h %d m"
+msgstr ""
+
+#: applet.js:285
+#, javascript-format
+msgid "%d min"
+msgstr ""
+
+#: applet.js:286
+msgid "less than a minute"
+msgstr ""
+
+#: applet.js:300
+msgid "Low battery"
+msgstr ""
+
+#: applet.js:301
+#, javascript-format
+msgid "%d%% remaining"
+msgstr ""
+
+#: applet.js:379
+#, javascript-format
+msgid "%d%%"
+msgstr ""
+
+#: applet.js:425
+msgid "Power saver"
+msgstr ""
+
+#: applet.js:426
+msgid "Balanced"
+msgstr ""
+
+#: applet.js:427
+msgid "Performance"
+msgstr ""
+
+#: applet.js:557
+msgid "Collecting battery data…"
+msgstr ""
+
+#: applet.js:571
+#, javascript-format
+msgid "min %d%% • max %d%% • last %s"
+msgstr ""
+
+#: applet.js:574
+#, javascript-format
+msgid "%d d"
+msgstr ""
+
+#: applet.js:575
+#, javascript-format
+msgid "%d h"
+msgstr ""
+#: settings-schema.json:5
+msgid "Show battery icon in the panel"
+msgstr ""
+
+#: settings-schema.json:10
+msgid "Show the bottom row (remaining time)"
+msgstr ""
+
+#: settings-schema.json:15
+msgid "Verbose time (e.g. 1 h 48 min instead of 1:48)"
+msgstr ""
+
+#: settings-schema.json:24
+msgid "How many hours of history to show on the graph"
+msgstr ""
+
+#: settings-schema.json:24t
+msgid "Sampled every minute; data older than 8 days is removed."
+msgstr ""
+
+#: settings-schema.json:30
+msgid "Shade charging periods on the graph"
+msgstr ""
+
+#: settings-schema.json:35
+msgid "Low battery notification"
+msgstr ""
+
+#: settings-schema.json:45
+msgid "Low level notification threshold"
+msgstr ""
+
