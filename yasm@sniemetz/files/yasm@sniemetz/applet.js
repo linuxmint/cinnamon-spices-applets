@@ -4,6 +4,7 @@ const Mainloop   = imports.mainloop;
 const Settings   = imports.ui.settings;
 const St         = imports.gi.St;
 const Clutter    = imports.gi.Clutter;
+const Gio        = imports.gi.Gio;
 const GLib       = imports.gi.GLib;
 const Util       = imports.misc.util;
 const Pango      = imports.gi.Pango;
@@ -40,13 +41,14 @@ const ProcessMetric = imports.lib.metrics.processes;
 const GpuMetric     = imports.lib.metrics.gpu;
 
 var LaptopTooltip = class LaptopTooltip {
-  constructor(owner, orientation) {
+  constructor(owner, orientation, isLight) {
     this._owner       = owner;
     this._orientation = orientation;
     this._rowWidgets  = [];
 
     this._box = new St.BoxLayout({ vertical: true, reactive: false });
     this._box.add_style_class_name('yasm-tooltip');
+    if (isLight) this._box.add_style_class_name('yasm-light');
     global.stage.add_actor(this._box);
     this._box.hide();
 
@@ -305,6 +307,16 @@ class YasmApplet extends Applet.Applet {
     this._autoScanIfEmpty();
     this._buildSections();
 
+    this._lastIsLight = this._isLightTheme();
+    this._themeSettings = new Gio.Settings({ schema_id: 'org.cinnamon.theme' });
+    this._themeChangeSig = this._themeSettings.connect('changed::name', () => {
+      const isLight = this._isLightTheme();
+      if (isLight !== this._lastIsLight) {
+        this._lastIsLight = isLight;
+        this._rebuildSections();
+      }
+    });
+
     this._manager = new MetricsManager(this, (data, history) => {
       this._updateSections(data, history);
     });
@@ -314,6 +326,21 @@ class YasmApplet extends Applet.Applet {
 
   _getColoredIconSize() {
     return Math.max(16, Math.round((this._panelHeight || 40) * 0.6));
+  }
+
+  _isLightTheme() {
+    try {
+      const [ok, stdout] = GLib.spawn_command_line_sync(
+        'gsettings get org.cinnamon.theme name'
+      );
+      if (!ok || !stdout) return false;
+      const theme = stdout.toString().trim().replace(/^'|'$/g, '').toLowerCase();
+      if (/dark|black|midnight|obsidian|onyx/.test(theme)) return false;
+      if (/light|white|snow|paper|day|clear/.test(theme)) return true;
+      return false;
+    } catch(e) {
+      return false;
+    }
   }
 
 
@@ -401,6 +428,7 @@ class YasmApplet extends Applet.Applet {
     if (this._sections) {
       for (const { tooltip } of Object.values(this._sections))
         try { tooltip.destroy(); } catch(e) {}
+      this._sections = null;
     }
     this.actor.get_children().forEach(c => this.actor.remove_actor(c));
     this._buildSections();
@@ -419,6 +447,9 @@ class YasmApplet extends Applet.Applet {
     const vertical = this._isVertical();
     this.actor.vertical = vertical;
     this.actor.add_style_class_name('yasm-box');
+    const isLight = this._isLightTheme();
+    this.actor.remove_style_class_name('yasm-light');
+    if (isLight) this.actor.add_style_class_name('yasm-light');
 
     for (const { key } of SECTIONS) {
       const sep = new St.Label({ text: this._separator || '  |  ' });
@@ -497,7 +528,7 @@ class YasmApplet extends Applet.Applet {
         tile.add_actor(loadLabel);
       }
 
-      const tooltip = new LaptopTooltip(tile, this._orientation);
+      const tooltip = new LaptopTooltip(tile, this._orientation, isLight);
       tooltip.set_text('…loading…');
 
       if (key === 'uptime') {
@@ -853,6 +884,11 @@ class YasmApplet extends Applet.Applet {
   }
 
   on_applet_removed_from_panel() {
+    if (this._themeChangeSig) {
+      try { this._themeSettings.disconnect(this._themeChangeSig); } catch(e) {}
+      this._themeSettings = null;
+      this._themeChangeSig = null;
+    }
     if (this._earlyTimeout) { Mainloop.source_remove(this._earlyTimeout); this._earlyTimeout = null; }
     if (this._timeout) Mainloop.source_remove(this._timeout);
     if (this._sections) {
