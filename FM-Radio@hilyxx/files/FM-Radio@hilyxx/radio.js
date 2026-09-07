@@ -1,6 +1,8 @@
 // === IMPORTS & CONSTANTS ===
 imports.gi.versions.Gst = "1.0";
 const Gst = imports.gi.Gst;
+const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 
@@ -44,7 +46,6 @@ function createControlButtons(player, pr) {
     box.add_child(icon);
     box.add_child(next);
 
-    // Expose this icon to the applet so it can be updated
     pr.playStopIcon = icon;
 
     next.connect("button-press-event", () => {
@@ -77,27 +78,89 @@ function createControlButtons(player, pr) {
 // === GSTREAMER STREAM ===
 const RadioPlayer = class RadioPlayer {
     constructor(channel) {
+        this.channel = channel;
+        this.playing = false;
+        this.isReconnecting = false;
+        this.volume = DEFAULT_VOLUME;
+        this.playbin = null;
+        this.sink = null;
+        this.onError = null;
+        this.onTagChanged = null;
+        
+        this._retryTimerId = null;
+
+        // System listener to instantly detect Wi-Fi/Network changes
+        this.networkMonitor = Gio.NetworkMonitor.get_default();
+        this.networkMonitorId = this.networkMonitor.connect("network-changed", (monitor, available) => {
+            if (!this.playing) return;
+            
+            if (!available) {
+                this._startReconnectLoop();
+            } else if (this.isReconnecting) {
+                this._forceReconnectTick();
+            }
+        });
+    }
+
+    _clearRetry() {
+        if (this._retryTimerId) {
+            GLib.source_remove(this._retryTimerId);
+            this._retryTimerId = null;
+        }
+        this.isReconnecting = false;
+    }
+
+    // Starts the reconnection loop (every 5 seconds)
+    _startReconnectLoop() {
+        if (!this.playing || this.isReconnecting) return;
+        
+        this.isReconnecting = true;
+        
+        if (this.playbin) {
+            this.playbin.set_state(Gst.State.NULL);
+        }
+        
+        if (this.onError != null) this.onError(); 
+
+        this._retryTimerId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 5000, () => {
+            this._forceReconnectTick();
+            return GLib.SOURCE_CONTINUE;
+        });
+    }
+
+    // Attempts to restart the stream
+    _forceReconnectTick() {
+        if (this.playing && this.networkMonitor.get_network_available()) {
+            if (this.playbin) {
+                this.playbin.set_state(Gst.State.NULL);
+                this.playbin.set_property("uri", this.channel.getLink());
+                this.playbin.set_state(Gst.State.PLAYING);
+            }
+        }
+    }
+
+    _initPipeline() {
+        if (this.playbin) return;
+
         Gst.init(null);
         this.playbin = Gst.ElementFactory.make("playbin", "fmradio");
-        this.playbin.set_property("uri", channel.getLink());
+        this.playbin.set_property("uri", this.channel.getLink());
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
 
         this.sink.set_property("client-name", CLIENT_NAME);
         this.playbin.set_property("audio-sink", this.sink);
-        this.channel = channel;
-        this.playing = false;
-        this.setVolume(DEFAULT_VOLUME);
+        this.playbin.volume = this.volume;
 
         let bus = this.playbin.get_bus();
         bus.add_signal_watch();
         bus.connect("message", (bus, msg) => {
             if (msg != null) this._onMessageReceived(msg);
         });
-        this.onError = null;
-        this.onTagChanged = null;
     }
 
     play() {
+        this._clearRetry();
+        this._initPipeline();
         this.playbin.set_state(Gst.State.PLAYING);
         this.playing = true;
     }
@@ -111,12 +174,25 @@ const RadioPlayer = class RadioPlayer {
     }
 
     setMute(mute) {
-        this.playbin.set_property("mute", mute);
+        if (this.playbin) {
+            this.playbin.set_property("mute", mute);
+        }
     }
 
     stop() {
-        this.playbin.set_state(Gst.State.NULL);
+        this._clearRetry();
+        if (this.playbin) {
+            this.playbin.set_state(Gst.State.NULL);
+        }
         this.playing = false;
+    }
+
+    destroy() {
+        this.stop();
+        if (this.networkMonitorId) {
+            this.networkMonitor.disconnect(this.networkMonitorId);
+            this.networkMonitorId = 0;
+        }
     }
 
     next() {
@@ -135,9 +211,13 @@ const RadioPlayer = class RadioPlayer {
 
     setChannel(ch) {
         this.channel = ch;
-        this.tag = ""; // Clear the previous title from memory
+        this.tag = "";
+        this.title = "";
+        this.artist = "";
         this.stop();
-        this.playbin.set_property("uri", ch.getLink());
+        if (this.playbin) {
+            this.playbin.set_property("uri", ch.getLink());
+        }
         this.play();
     }
 
@@ -146,7 +226,14 @@ const RadioPlayer = class RadioPlayer {
     }
 
     setVolume(value) {
-        this.playbin.volume = value;
+        this.volume = value;
+        if (this.playbin) {
+            this.playbin.volume = value;
+        }
+    }
+
+    getVolume() {
+        return this.volume;
     }
 
     isPlaying() {
@@ -194,13 +281,15 @@ const RadioPlayer = class RadioPlayer {
             }
 
             case Gst.MessageType.STREAM_START:
+                this._clearRetry();
                 if (this.onTagChanged != null) this.onTagChanged();
                 break;
 
             case Gst.MessageType.EOS:
             case Gst.MessageType.ERROR:
-                this.stop();
-                if (this.onError != null) this.onError();
+                if (this.playing) {
+                    this._startReconnectLoop();
+                }
                 break;
             default:
                 break;
