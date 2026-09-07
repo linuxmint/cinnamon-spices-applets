@@ -172,6 +172,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this._owner = owner;
         this._busName = busname;
         this._applet = applet;
+        this._menuOpenStateChangedId = 0;
         players_without_seek_support = this._applet.players_without_seek_support;
 
         // We'll update this later with a proper name
@@ -425,6 +426,19 @@ class Player extends PopupMenu.PopupMenuSection {
                 this._name.toLowerCase()
             );
             this.vertBox.add_actor(this._seeker.getActor());
+            if (this._applet.menu) {
+                this._menuOpenStateChangedId = this._applet.menu.connect("open-state-changed", (menu, open) => {
+                    if (!this._seeker) return;
+
+                    if (open)
+                        this._seeker.startPolling();
+                    else
+                        this._seeker.stopPolling();
+                });
+
+                if (this._applet.menu.isOpen)
+                    this._seeker.startPolling();
+            }
         }
 
 
@@ -1095,6 +1109,11 @@ class Player extends PopupMenu.PopupMenuSection {
         if (this._prop && this._propChangedId)
             try { this._prop.disconnectSignal(this._propChangedId) } catch(e) {};
 
+        if (this._applet && this._applet.menu && this._menuOpenStateChangedId) {
+            try { this._applet.menu.disconnect(this._menuOpenStateChangedId) } catch(e) {};
+            this._menuOpenStateChangedId = 0;
+        }
+
         if (this._seeker)
             try { this._seeker.destroy() } catch(e) {};
 
@@ -1133,6 +1152,7 @@ class Seeker extends Slider.Slider {
         this._timeoutId_timerCallback = null;
         this._timerTicker = 0;
         this._positionQueryPending = false;
+        this._pollingRequested = false;
 
         this._mediaServerPlayer = mediaServerPlayer;
         this._prop = props;
@@ -1143,6 +1163,14 @@ class Seeker extends Slider.Slider {
         this.seekerBox = new St.BoxLayout();
         this.seekerBox.expand = true;
         this.seekerBox.x_align = St.Align.END;
+        this._mappedId = this.seekerBox.connect("notify::mapped", () => {
+            if (this.destroyed) return;
+
+            if (this.seekerBox.mapped && this._pollingRequested)
+                this._getCanSeek();
+            else
+                this._removePositionTimers();
+        });
 
 
 
@@ -1226,8 +1254,6 @@ class Seeker extends Slider.Slider {
             this._wantedSeekValue = 0;
         });
 
-        this._getCanSeek();
-        this._getPosition(); // Added
     }
 
     show_target_time() {
@@ -1257,6 +1283,47 @@ class Seeker extends Slider.Slider {
         return this.seekerBox;
     }
 
+    startPolling() {
+        if (this.destroyed) return;
+
+        this._pollingRequested = true;
+        if (this._canPollPosition())
+            this._getCanSeek();
+    }
+
+    stopPolling() {
+        if (this.destroyed) return;
+
+        this._pollingRequested = false;
+        this._removePositionTimers();
+    }
+
+    _isVisible() {
+        return this.seekerBox != null &&
+            this.seekerBox.visible &&
+            this.seekerBox.mapped &&
+            this.actor != null &&
+            this.actor.visible;
+    }
+
+    _canPollPosition() {
+        return !this.destroyed &&
+            this._pollingRequested &&
+            this._isVisible();
+    }
+
+    _removePositionTimers() {
+        if (this._timeoutId != null) {
+            source_remove(this._timeoutId);
+            this._timeoutId = null;
+        }
+
+        if (this._timeoutId_timerCallback != null) {
+            source_remove(this._timeoutId_timerCallback);
+            this._timeoutId_timerCallback = null;
+        }
+    }
+
     time_for_label(sec) {
         let milliseconds = 1000 * sec;
         var date = new Date(milliseconds);
@@ -1269,16 +1336,21 @@ class Seeker extends Slider.Slider {
         if (this._applet._playerctl)
             run_playerctld();
         this.status = "Playing";
-        this._getCanSeek();
+        if (this._pollingRequested)
+            this._getCanSeek();
     }
 
     pause() {
         if (this.destroyed) return;
         this.status = "Paused";
-        if (this.canSeek)
-            this._updateTimer();
-        else
-            this._updateValue();
+        if (this._canPollPosition()) {
+            if (this.canSeek)
+                this._updateTimer();
+            else
+                this._updateValue();
+        } else {
+            this._removePositionTimers();
+        }
         if (this._applet._playerctl)
             run_playerctld();
     }
@@ -1286,9 +1358,10 @@ class Seeker extends Slider.Slider {
     stop() {
         if (this.destroyed) return;
         this.status = "Stopped";
+        this._removePositionTimers();
         if (this.canSeek)
-            this._updateTimer();
-        else
+            this._currentTime = 0;
+        else if (this._isVisible())
             this._updateValue();
     }
 
@@ -1298,6 +1371,7 @@ class Seeker extends Slider.Slider {
         if (this.actor) this.actor.hide();
         if (this.posLabel) this.posLabel.hide();
         if (this.seekerBox) this.seekerBox.hide();
+        this._removePositionTimers();
     }
 
     showAll() {
@@ -1325,6 +1399,8 @@ class Seeker extends Slider.Slider {
         if (this.status !== "Stopped" && this.durLabel != null) this.durLabel.set_text(this.time_for_label(length));
         this._wantedSeekValue = 0;
         this._updateValue();
+        if (this._pollingRequested)
+            this._getCanSeek();
     }
 
     _updateValue() {
@@ -1364,24 +1440,6 @@ class Seeker extends Slider.Slider {
                 } else if (!this._dragging) {
                     if (this.status === "Playing" && this.posLabel != null) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this.setValue(this._currentTime / this._length);
-                    if (this._timeoutId != null) {
-                        source_remove(this._timeoutId);
-                    }
-                    this._timeoutId = null;
-                    if (this._timeoutId_timerCallback != null) {
-                        source_remove(this._timeoutId_timerCallback);
-                    }
-                    this._timeoutId_timerCallback = null;
-
-                    if (!this.destroyed) {
-                        this._timeoutId = timeout_add_seconds(1, () => {
-                            this._updateValue();
-                            return !this.destroyed
-                        });
-                        this._timeoutId_timerCallback = timeout_add_seconds(1, () => {
-                            return this._timerCallback()
-                        });
-                    }
                     //return (!this.destroyed && this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE; //???
                 }
             } else {
@@ -1395,7 +1453,10 @@ class Seeker extends Slider.Slider {
     }
 
     _timerCallback() {
-        if (this.destroyed) return GLib.SOURCE_REMOVE;
+        if (this.destroyed || !this._canPollPosition()) {
+            this._timeoutId_timerCallback = null;
+            return GLib.SOURCE_REMOVE;
+        }
         if (this.status === "Playing") {
             if (this._timerTicker < 10) {
                 this._currentTime += 1;
@@ -1410,18 +1471,20 @@ class Seeker extends Slider.Slider {
             this._setPosition(0);
             this._timerTicker = 0;
             this._currentTime = 0;
+            this._timeoutId_timerCallback = null;
             return GLib.SOURCE_REMOVE;
         }
-        return (this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE;
+        this._timeoutId_timerCallback = null;
+        return GLib.SOURCE_REMOVE;
     }
 
     _updateTimer() {
         //~ if (this.destroyed) return GLib.SOURCE_REMOVE;
 
-        if (this._timeoutId_timerCallback != null) {
-            source_remove(this._timeoutId_timerCallback);
-        }
-        this._timeoutId_timerCallback = null;
+        this._removePositionTimers();
+
+        if (!this._canPollPosition())
+            return;
 
         if (this.status === "Playing") {
             if (this.canSeek) {
@@ -1446,6 +1509,9 @@ class Seeker extends Slider.Slider {
     }
 
     _getCanSeek() {
+        if (this.destroyed || !this._pollingRequested)
+            return;
+
         // Some players say they "CanSeek" but don't actually give their position over dbus
         if (players_without_seek_support.indexOf(this._playerName) > -1) {
             this._setCanSeek(false);
@@ -1467,14 +1533,17 @@ class Seeker extends Slider.Slider {
         //~ if (this.destroyed) return;
         if (this._length > 0) {
             this.showAll();
-            this._updateValue();
+            if (this._canPollPosition()) {
+                this._updateValue();
+                this._updateTimer();
+            }
         } else {
             this.hideAll();
         }
     }
 
     _setCanSeek(seek) {
-        if (this.destroyed) return;
+        if (this.destroyed || !this._pollingRequested) return;
 
         if (!this._mediaServerPlayer) {
             this._cantSeek();
@@ -1507,12 +1576,12 @@ class Seeker extends Slider.Slider {
     }
 
     _getPosition() {
-        if (this.destroyed || this._positionQueryPending || !this._prop) return;
+        if (!this._canPollPosition() || this._positionQueryPending || !this._prop) return;
 
         this._positionQueryPending = true;
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, "Position", (position, error) => {
             this._positionQueryPending = false;
-            if (this.destroyed) return;
+            if (!this._canPollPosition()) return;
             //~ logDebug("_getPosition dbus !error: "+!error);
             if (!error && position[0]) {
                 //~ logDebug("_getPosition position: "+position[0].get_int64());
@@ -1546,6 +1615,10 @@ class Seeker extends Slider.Slider {
         if (this._seekChangedId) {
             this._mediaServerPlayer.disconnectSignal(this._seekChangedId);
             this._seekChangedId = null;
+        }
+        if (this._mappedId && this.seekerBox) {
+            this.seekerBox.disconnect(this._mappedId);
+            this._mappedId = null;
         }
         if (this._timeoutId) {
             source_remove(this._timeoutId);
