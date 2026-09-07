@@ -1,178 +1,330 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the battery-plus package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# BATTERY PLUS
+# This file is put in the public domain.
+# wertos97, 2016
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: battery-plus\n"
-"Report-Msgid-Bugs-To: wertos97\n"
-"POT-Creation-Date: 2026-09-07 13:27+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: battery-plus@wertos97 1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-09-07 19:19+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:40
+#. applet.js:128
 msgid "Charging"
 msgstr ""
 
-#: applet.js:41
+#. applet.js:129
 msgid "Discharging"
 msgstr ""
 
-#: applet.js:42
-#: applet.js:312
+#. applet.js:130 applet.js:416
 msgid "Full"
 msgstr ""
 
-#: applet.js:43
+#. applet.js:131
 msgid "Empty"
 msgstr ""
 
-#: applet.js:44
+#. applet.js:132
 msgid "Pending charge"
 msgstr ""
 
-#: applet.js:45
+#. applet.js:133
 msgid "Pending"
 msgstr ""
 
-#: applet.js:46
+#. applet.js:134
 msgid "Unknown state"
 msgstr ""
 
-#: applet.js:95
-msgid "State"
-msgstr ""
-
-#: applet.js:95
-msgid "Time"
-msgstr ""
-
-#: applet.js:96
-msgid "Power"
-msgstr ""
-
-#: applet.js:96
-msgid "Voltage"
-msgstr ""
-
-#: applet.js:97
-msgid "Health"
-msgstr ""
-
-#: applet.js:97
-msgid "Charge cycles"
-msgstr ""
-
-#: applet.js:116
+#. applet.js:204
 msgid "Power mode"
 msgstr ""
 
-#: applet.js:128
+#. applet.js:217
 msgid "Charge history"
 msgstr ""
 
-#: applet.js:148
+#. applet.js:239
 msgid "Power settings"
 msgstr ""
 
-#: applet.js:283
+#. applet.js:383
 #, javascript-format
 msgid "%d h %d m"
 msgstr ""
 
-#: applet.js:285
+#. applet.js:385
 #, javascript-format
 msgid "%d min"
 msgstr ""
 
-#: applet.js:286
+#. applet.js:386
 msgid "less than a minute"
 msgstr ""
 
-#: applet.js:300
+#. applet.js:400
 msgid "Low battery"
 msgstr ""
 
-#: applet.js:301
+#. applet.js:401
 #, javascript-format
 msgid "%d%% remaining"
 msgstr ""
 
-#: applet.js:379
+#. applet.js:425
+msgid "State"
+msgstr ""
+
+#. applet.js:426
+msgid "Time"
+msgstr ""
+
+#. applet.js:427 applet.js:543
+msgid "Activity duration"
+msgstr ""
+
+#. applet.js:428
+msgid "Power"
+msgstr ""
+
+#. applet.js:429
+msgid "Voltage"
+msgstr ""
+
+#. applet.js:430
+msgid "Health"
+msgstr ""
+
+#. applet.js:431
+msgid "Charge cycles"
+msgstr ""
+
+#. applet.js:521
+#, javascript-format
+msgid "%d d %d h %d min"
+msgstr ""
+
+#. applet.js:544
+msgid "Charging for"
+msgstr ""
+
+#. applet.js:544
+msgid "Discharging for"
+msgstr ""
+
+#. applet.js:606
 #, javascript-format
 msgid "%d%%"
 msgstr ""
 
-#: applet.js:425
+#. applet.js:650
 msgid "Power saver"
 msgstr ""
 
-#: applet.js:426
+#. applet.js:651
 msgid "Balanced"
 msgstr ""
 
-#: applet.js:427
+#. applet.js:652
 msgid "Performance"
 msgstr ""
 
-#: applet.js:557
+#. applet.js:902
 msgid "Collecting battery data…"
 msgstr ""
 
-#: applet.js:571
+#. applet.js:916
 #, javascript-format
 msgid "min %d%% • max %d%% • last %s"
 msgstr ""
 
-#: applet.js:574
+#. applet.js:919
 #, javascript-format
 msgid "%d d"
 msgstr ""
 
-#: applet.js:575
+#. applet.js:920
 #, javascript-format
 msgid "%d h"
 msgstr ""
-#: settings-schema.json:5
+
+#. metadata.json->description
+msgid ""
+"Detailed battery status, activity duration, power profiles and a themed "
+"charge history graph"
+msgstr ""
+
+#. metadata.json->name
+msgid "Battery Plus"
+msgstr ""
+
+#. settings-schema.json->panel_header->description
+msgid "Panel"
+msgstr ""
+
+#. settings-schema.json->show_icon->description
 msgid "Show battery icon in the panel"
 msgstr ""
 
-#: settings-schema.json:10
+#. settings-schema.json->show_bottom_row->description
 msgid "Show the bottom row (remaining time)"
 msgstr ""
 
-#: settings-schema.json:15
+#. settings-schema.json->verbose_time->description
 msgid "Verbose time (e.g. 1 h 48 min instead of 1:48)"
 msgstr ""
 
-#: settings-schema.json:24
-msgid "How many hours of history to show on the graph"
+#. settings-schema.json->stats_header->description
+msgid "Popup statistics"
 msgstr ""
 
-#: settings-schema.json:24t
-msgid "Sampled every minute; data older than 8 days is removed."
-msgstr ""
-
-#: settings-schema.json:30
-msgid "Shade charging periods on the graph"
-msgstr ""
-
-#: settings-schema.json:35
-msgid "Low battery notification"
-msgstr ""
-
-#: settings-schema.json:45
-msgid "Low level notification threshold"
-msgstr ""
-
-#: settings-schema.json:50
+#. settings-schema.json->decimals->description
 msgid "Decimal places for power and voltage values"
 msgstr ""
 
+#. settings-schema.json->stat_rows->description
+msgid "Visible statistics and their order"
+msgstr ""
+
+#. settings-schema.json->stat_rows->tooltip
+msgid ""
+"Toggle rows in the Visible column. Select a row and use the arrow buttons to "
+"change its position."
+msgstr ""
+
+#. settings-schema.json->stat_rows->columns->title
+msgid "Statistic"
+msgstr ""
+
+#. settings-schema.json->stat_rows->columns->title
+msgid "Visible"
+msgstr ""
+
+#. settings-schema.json->history_header->description
+msgid "History graph"
+msgstr ""
+
+#. settings-schema.json->history_hours->units
+msgid "h"
+msgstr ""
+
+#. settings-schema.json->history_hours->description
+msgid "How many hours of history to show on the graph"
+msgstr ""
+
+#. settings-schema.json->history_hours->tooltip
+msgid "Sampled every minute; data older than 8 days is removed."
+msgstr ""
+
+#. settings-schema.json->graph_shade->description
+msgid "Shade charging periods on the graph"
+msgstr ""
+
+#. settings-schema.json->appearance_header->description
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->theme->description
+msgid "Popup color theme"
+msgstr ""
+
+#. settings-schema.json->theme->options
+msgid "Graphite (dark)"
+msgstr ""
+
+#. settings-schema.json->theme->options
+msgid "Midnight (dark)"
+msgstr ""
+
+#. settings-schema.json->theme->options
+msgid "Forest (dark)"
+msgstr ""
+
+#. settings-schema.json->theme->options
+msgid "Paper (light)"
+msgstr ""
+
+#. settings-schema.json->theme->options
+msgid "Frost (light)"
+msgstr ""
+
+#. settings-schema.json->theme->options
+msgid "Sand (light)"
+msgstr ""
+
+#. settings-schema.json->theme->options
+msgid "Custom"
+msgstr ""
+
+#. settings-schema.json->color_background->description
+msgid "Popup background (Custom theme)"
+msgstr ""
+
+#. settings-schema.json->color_foreground->description
+msgid "Primary text (Custom theme)"
+msgstr ""
+
+#. settings-schema.json->color_muted->description
+msgid "Secondary text (Custom theme)"
+msgstr ""
+
+#. settings-schema.json->color_accent->description
+msgid "Accent (Custom theme)"
+msgstr ""
+
+#. settings-schema.json->color_border->description
+msgid "Borders and separators (Custom theme)"
+msgstr ""
+
+#. settings-schema.json->color_highlight->description
+msgid "Highlighted menu items (Custom theme)"
+msgstr ""
+
+#. settings-schema.json->color_graph_background->description
+msgid "Graph background (Custom theme)"
+msgstr ""
+
+#. settings-schema.json->color_curve->description
+msgid "Curve color (Custom theme)"
+msgstr ""
+
+#. settings-schema.json->color_fill->description
+msgid "Fill color (Custom theme)"
+msgstr ""
+
+#. settings-schema.json->color_shade->description
+msgid "Charging shade color (Custom theme)"
+msgstr ""
+
+#. settings-schema.json->color_grid->description
+msgid "Grid color (Custom theme)"
+msgstr ""
+
+#. settings-schema.json->color_dot->description
+msgid "Dot color (Custom theme)"
+msgstr ""
+
+#. settings-schema.json->notifications_header->description
+msgid "Notifications"
+msgstr ""
+
+#. settings-schema.json->low_notify->description
+msgid "Low battery notification"
+msgstr ""
+
+#. settings-schema.json->low_level->units
+msgid "%"
+msgstr ""
+
+#. settings-schema.json->low_level->description
+msgid "Low level notification threshold"
+msgstr ""
