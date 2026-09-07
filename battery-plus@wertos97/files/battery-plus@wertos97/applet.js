@@ -6,8 +6,6 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Cairo = imports.cairo;
 const Mainloop = imports.mainloop;
-const Lang = imports.lang;
-const Util = imports.misc.util;
 const Interfaces = imports.misc.interfaces;
 const UPowerGlib = imports.gi.UPowerGlib;
 
@@ -55,15 +53,15 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
 
         this.settings = new Settings.AppletSettings(this, UUID, instanceId);
         this.settings.bind("history_hours", "history_hours",
-            Lang.bind(this, this._redrawGraph));
+            () => this._redrawGraph());
         this.settings.bind("show_icon", "show_icon",
-            Lang.bind(this, this._refresh));
+            () => this._refresh());
         this.settings.bind("show_bottom_row", "show_bottom_row",
-            Lang.bind(this, this._refresh));
+            () => this._refresh());
         this.settings.bind("verbose_time", "verbose_time",
-            Lang.bind(this, this._refresh));
+            () => this._refresh());
         this.settings.bind("graph_shade", "graph_shade",
-            Lang.bind(this, this._redrawGraph));
+            () => this._redrawGraph());
         this.settings.bind("low_notify", "low_notify");
         this.settings.bind("low_level", "low_level");
 
@@ -131,7 +129,7 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
         this._graph = new St.DrawingArea({ style_class: "battery-plus-graph" });
         this._graph.set_width(300);
         this._graph.set_height(130);
-        this._graph.connect("repaint", Lang.bind(this, this._drawGraph));
+        this._graph.connect("repaint", () => this._drawGraph());
         let graphFrame = new St.BoxLayout({ style_class: "battery-plus-graph-box" });
         graphFrame.add_actor(this._graph);
         let graphSection = new PopupMenu.PopupMenuSection();
@@ -148,13 +146,13 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
         this.menu.addSettingsAction(_("Power settings"), "power");
 
         this.menu.connect("open-state-changed",
-            Lang.bind(this, function (menu, open) {
+            (menu, open) => {
                 if (open) {
                     this._refreshStats();
                     this._updateProfileDots();
                     this._redrawGraph();
                 }
-            }));
+            });
 
         // --- data ---
         this._devices = [];
@@ -166,6 +164,9 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
         this._stats = { rate: null, voltage: null, capacity: null, cycles: null };
         this._ppd = null;
         this._activeProfile = null;
+        this._history = null;
+        this._historyLoading = false;
+        this._historyWaiters = [];
 
         this._historyDir = GLib.get_user_data_dir() + "/battery-plus";
         this._historyFile = this._historyDir + "/history.csv";
@@ -178,31 +179,31 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
         this._proxy = null;
         Gio.bus_watch_name(Gio.BusType.SESSION,
             "org.cinnamon.SettingsDaemon.Power", 0,
-            Lang.bind(this, function () {
+            () => {
                 Interfaces.getDBusProxyAsync("org.cinnamon.SettingsDaemon.Power",
-                    Lang.bind(this, function (proxy, error) {
+                    (proxy, error) => {
                         if (error) {
-                            global.logError("[" + UUID + "] brak csd-power", error.message);
+                            global.logError("[" + UUID + "] no csd-power", error.message);
                             return;
                         }
                         this._proxy = proxy;
                         this._proxy.connect("g-properties-changed",
-                            Lang.bind(this, this._devicesChanged));
+                            () => this._devicesChanged());
                         this._devicesChanged();
-                    }));
-            }), null);
+                    });
+            }, null);
 
         // label refresh every 30 s, history log every 60 s
         this._refreshTimer = Mainloop.timeout_add_seconds(30,
-            Lang.bind(this, function () {
+            () => {
                 this._devicesChanged();
                 return true;
-            }));
+            });
         this._logTimer = Mainloop.timeout_add_seconds(60,
-            Lang.bind(this, function () {
+            () => {
                 this._logSample();
                 return true;
-            }));
+            });
     }
 
     on_applet_clicked(event) {
@@ -218,13 +219,13 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
     _devicesChanged() {
         if (!this._proxy)
             return;
-        this._proxy.GetDevicesRemote(Lang.bind(this, function (result, error) {
+        this._proxy.GetDevicesRemote((result, error) => {
             if (error)
                 return;
             let devices = result[0];
             this._devices = devices;
             this._refresh();
-        }));
+        });
     }
 
     _findBattery() {
@@ -295,10 +296,14 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
             this._pct <= at && !this._lowNotified) {
             this._lowNotified = true;
             try {
-                Util.spawnCommandLine(
-                    'notify-send -i "battery-caution" "' +
-                    _("Low battery") + '" "' +
-                    _("%d%% remaining").format(this._pct) + '"');
+                let p = Gio.Subprocess.new(
+                    ["notify-send", "-i", "battery-caution",
+                     _("Low battery"),
+                     _("%d%% remaining").format(this._pct)],
+                    Gio.SubprocessFlags.NONE);
+                p.wait_async(null, null, (o, res) => {
+                    try { o.wait_finish(res); } catch (e) {}
+                });
             } catch (e) {}
         }
         if (this._state === UPDeviceState.CHARGING ||
@@ -351,7 +356,7 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
                 Gio.SubprocessFlags.STDOUT_PIPE |
                 Gio.SubprocessFlags.STDERR_SILENCE);
         } catch (e) { return; }
-        proc.communicate_utf8_async(null, null, Lang.bind(this, function (p, res) {
+        proc.communicate_utf8_async(null, null, (p, res) => {
             try {
                 let [, out] = p.communicate_utf8_finish(res);
                 let rateTxt = null, voltTxt = null, cap = null, cyc = null;
@@ -380,15 +385,15 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
                 if (this._statRows.cycles)
                     this._statRows.cycles.set_text(
                         (cyc !== null && !isNaN(cyc)) ? String(cyc) : "—");
-            } catch (e) { /* ignoruj */ }
-        }));
+            } catch (e) { /* ignore */ }
+        });
     }
 
     // --- power profiles (power-profiles-daemon, like the system applet) ---
     _initPowerProfiles() {
         this._profilesBuilt = false;
         this._ppdTries = 0;
-        Mainloop.timeout_add_seconds(2, Lang.bind(this, function () {
+        Mainloop.timeout_add_seconds(2, () => {
             this._ppdTries++;
             try {
                 if (!this._ppd) {
@@ -400,10 +405,10 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
                     this._ppd = new Proxy(Gio.DBus.system,
                         "net.hadess.PowerProfiles", "/net/hadess/PowerProfiles");
                     this._ppd.connect("g-properties-changed",
-                        Lang.bind(this, function () {
+                        () => {
                             try { this._activeProfile = this._ppd.ActiveProfile; } catch (e) {}
                             this._updateProfileDots();
-                        }));
+                        });
                 }
                 if (this._ppd && this._ppd.Profiles && this._ppd.Profiles.length) {
                     this._buildProfiles();
@@ -418,7 +423,7 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
                 return false;
             }
             return true;
-        }));
+        });
     }
 
     _profileName(key) {
@@ -444,11 +449,11 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
             let key = profiles[i].Profile.unpack
                 ? profiles[i].Profile.unpack() : profiles[i].Profile;
             let item = new PopupMenu.PopupMenuItem(this._profileName(key));
-            item.connect("activate", Lang.bind(this, function () {
+            item.connect("activate", () => {
                 try { this._ppd.ActiveProfile = key; } catch (e) {}
                 this._activeProfile = key;
                 this._updateProfileDots();
-            }));
+            });
             this._profileSection.addMenuItem(item);
             this._profileItems.push(item);
         }
@@ -470,43 +475,67 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
         }
     }
 
-    // --- history ---
-    _readHistory() {
-        let rows = [];
+    // --- history (in-memory cache, async file IO only) ---
+    _ensureHistory(cb) {
+        if (this._history !== null) {
+            cb();
+            return;
+        }
+        this._historyWaiters.push(cb);
+        if (this._historyLoading)
+            return;
+        this._historyLoading = true;
         try {
-            let [ok, contents] = GLib.file_get_contents(this._historyFile);
-            if (!ok)
-                return rows;
-            let text = imports.byteArray.toString(contents);
-            for (let line of text.split("\n")) {
-                let p = line.split(",");
-                if (p.length < 3)
-                    continue;
-                let t = parseInt(p[0], 10),
-                    v = parseFloat(p[1]),
-                    s = parseInt(p[2], 10);
-                if (!isNaN(t) && !isNaN(v))
-                    rows.push({ t: t, v: v, s: s });
-            }
-        } catch (e) { /* brak pliku */ }
-        return rows;
+            Gio.File.new_for_path(this._historyFile).load_contents_async(
+                null, (o, res) => {
+                    let rows = [];
+                    try {
+                        let [ok, contents] = o.load_contents_finish(res);
+                        if (ok) {
+                            let text = imports.byteArray.toString(contents);
+                            for (let line of text.split("\n")) {
+                                let p = line.split(",");
+                                if (p.length < 3)
+                                    continue;
+                                let t = parseInt(p[0], 10),
+                                    v = parseFloat(p[1]),
+                                    s = parseInt(p[2], 10);
+                                if (!isNaN(t) && !isNaN(v))
+                                    rows.push({ t: t, v: v, s: s });
+                            }
+                        }
+                    } catch (e) { /* no file yet */ }
+                    this._history = rows;
+                    this._historyLoading = false;
+                    let ws = this._historyWaiters;
+                    this._historyWaiters = [];
+                    for (let w of ws) {
+                        try { w(); } catch (e) {}
+                    }
+                });
+        } catch (e) {
+            this._history = [];
+            this._historyLoading = false;
+        }
     }
 
     _logSample() {
         if (!this._devices.length)
             return;
-        let now = Math.floor(Date.now() / 1000);
-        let cutoff = now - 8 * 24 * 3600;
-        let rows = this._readHistory().filter(r => r.t >= cutoff);
-        rows.push({ t: now, v: this._pct, s: this._state });
-        try {
-            let text = rows.map(r =>
-                r.t + "," + r.v + "," + r.s).join("\n") + "\n";
-            GLib.file_set_contents(this._historyFile, text);
-        } catch (e) {
-            global.logError("[" + UUID + "] zapis historii", String(e));
-        }
-        this._redrawGraph();
+        this._ensureHistory(() => {
+            let now = Math.floor(Date.now() / 1000);
+            let cutoff = now - 8 * 24 * 3600;
+            this._history = this._history.filter(r => r.t >= cutoff);
+            this._history.push({ t: now, v: this._pct, s: this._state });
+            try {
+                let text = this._history.map(r =>
+                    r.t + "," + r.v + "," + r.s).join("\n") + "\n";
+                GLib.file_set_contents(this._historyFile, text);
+            } catch (e) {
+                global.logError("[" + UUID + "] history write", String(e));
+            }
+            this._redrawGraph();
+        });
     }
 
     _redrawGraph() {
@@ -533,7 +562,10 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
         let spanH = 24;
         try { spanH = parseInt(this.history_hours, 10) || 24; } catch (e) {}
         let now = Math.floor(Date.now() / 1000);
-        let rows = this._readHistory().filter(r => r.t >= now - spanH * 3600);
+        if (this._history === null) {
+            this._ensureHistory(() => this._redrawGraph());
+        }
+        let rows = (this._history || []).filter(r => r.t >= now - spanH * 3600);
 
         let x = t => PAD_L + gw * (1 - (now - t) / (spanH * 3600));
         let y = v => PAD_T + gh * (1 - Math.max(0, Math.min(100, v)) / 100);
