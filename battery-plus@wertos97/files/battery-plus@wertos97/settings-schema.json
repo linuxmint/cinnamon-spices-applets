@@ -1,0 +1,195 @@
+{
+    "panel_header": {
+        "type": "header",
+        "description": "Panel"
+    },
+    "show_icon": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show battery icon in the panel"
+    },
+    "show_bottom_row": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show the bottom row (remaining time)"
+    },
+    "verbose_time": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Verbose time (e.g. 1 h 48 min instead of 1:48)"
+    },
+    "stats_header": {
+        "type": "header",
+        "description": "Popup statistics"
+    },
+    "decimals": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 3,
+        "step": 1,
+        "description": "Decimal places for power and voltage values"
+    },
+    "stat_rows": {
+        "type": "list",
+        "description": "Visible statistics and their order",
+        "tooltip": "Toggle rows in the Visible column. Select a row and use the arrow buttons to change its position.",
+        "height": 260,
+        "show-buttons": true,
+        "hidden-buttons": ["+", "-", "edit"],
+        "columns": [
+            {
+                "id": "key",
+                "title": "Statistic",
+                "type": "string",
+                "options": {
+                    "State": "state",
+                    "Remaining time": "time",
+                    "Charging / discharging duration": "duration",
+                    "Power": "rate",
+                    "Voltage": "voltage",
+                    "Battery health": "health",
+                    "Charge cycles": "cycles"
+                }
+            },
+            {"id": "show", "title": "Visible", "type": "boolean"}
+        ],
+        "default": [
+            {"key": "state", "show": true},
+            {"key": "time", "show": true},
+            {"key": "duration", "show": true},
+            {"key": "rate", "show": true},
+            {"key": "voltage", "show": true},
+            {"key": "health", "show": true},
+            {"key": "cycles", "show": true}
+        ]
+    },
+    "history_header": {
+        "type": "header",
+        "description": "History graph"
+    },
+    "history_hours": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 1,
+        "max": 168,
+        "step": 1,
+        "units": "h",
+        "description": "How many hours of history to show on the graph",
+        "tooltip": "Sampled every minute; data older than 8 days is removed."
+    },
+    "graph_shade": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Shade charging periods on the graph"
+    },
+    "appearance_header": {
+        "type": "header",
+        "description": "Appearance"
+    },
+    "theme": {
+        "type": "combobox",
+        "default": "graphite",
+        "description": "Popup color theme",
+        "options": {
+            "Graphite (dark)": "graphite",
+            "Midnight (dark)": "midnight",
+            "Forest (dark)": "forest",
+            "Paper (light)": "paper",
+            "Frost (light)": "frost",
+            "Sand (light)": "sand",
+            "Custom": "user-defined"
+        }
+    },
+    "color_background": {
+        "type": "colorchooser",
+        "default": "#24272e",
+        "dependency": "theme=user-defined",
+        "description": "Popup background (Custom theme)"
+    },
+    "color_foreground": {
+        "type": "colorchooser",
+        "default": "#f4f7fb",
+        "dependency": "theme=user-defined",
+        "description": "Primary text (Custom theme)"
+    },
+    "color_muted": {
+        "type": "colorchooser",
+        "default": "#a9b2c0",
+        "dependency": "theme=user-defined",
+        "description": "Secondary text (Custom theme)"
+    },
+    "color_accent": {
+        "type": "colorchooser",
+        "default": "#8cccff",
+        "dependency": "theme=user-defined",
+        "description": "Accent (Custom theme)"
+    },
+    "color_border": {
+        "type": "colorchooser",
+        "default": "#414957",
+        "dependency": "theme=user-defined",
+        "description": "Borders and separators (Custom theme)"
+    },
+    "color_highlight": {
+        "type": "colorchooser",
+        "default": "#343a46",
+        "dependency": "theme=user-defined",
+        "description": "Highlighted menu items (Custom theme)"
+    },
+    "color_graph_background": {
+        "type": "colorchooser",
+        "default": "#171a20",
+        "dependency": "theme=user-defined",
+        "description": "Graph background (Custom theme)"
+    },
+    "color_curve": {
+        "type": "colorchooser",
+        "default": "#f4f7fb",
+        "dependency": "theme=user-defined",
+        "description": "Curve color (Custom theme)"
+    },
+    "color_fill": {
+        "type": "colorchooser",
+        "default": "#8cccff",
+        "dependency": "theme=user-defined",
+        "description": "Fill color (Custom theme)"
+    },
+    "color_shade": {
+        "type": "colorchooser",
+        "default": "#59d966",
+        "dependency": "theme=user-defined",
+        "description": "Charging shade color (Custom theme)"
+    },
+    "color_grid": {
+        "type": "colorchooser",
+        "default": "#8993a3",
+        "dependency": "theme=user-defined",
+        "description": "Grid color (Custom theme)"
+    },
+    "color_dot": {
+        "type": "colorchooser",
+        "default": "#8cd159",
+        "dependency": "theme=user-defined",
+        "description": "Dot color (Custom theme)"
+    },
+    "notifications_header": {
+        "type": "header",
+        "description": "Notifications"
+    },
+    "low_notify": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Low battery notification"
+    },
+    "low_level": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 5,
+        "max": 50,
+        "step": 1,
+        "units": "%",
+        "dependency": "low_notify",
+        "description": "Low level notification threshold"
+    }
+}
