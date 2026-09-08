@@ -966,7 +966,7 @@ var Player = class Player extends PopupMenu.PopupMenuSection {
             this._cover_path = cover_path;
             this._applet._icon_path = cover_path; // Added
             this._applet.setAppletIcon(this._applet.player, cover_path); // Added
-            if (cover_path != null && GLib.file_test(cover_path, GLib.FileTest.EXISTS) && !this._applet.dontShowAnyImageInMenu)
+            if (cover_path != null && !this._applet.dontShowAnyImageInMenu)
                 this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(
                     cover_path,
                     Math.trunc(300 * this._applet.real_ui_scale),
