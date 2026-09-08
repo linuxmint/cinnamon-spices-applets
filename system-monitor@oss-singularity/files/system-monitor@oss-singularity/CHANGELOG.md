@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.0.1 — 2026-09-08
+
+Maintenance release for the first public Spices candidate.
+
+- Replace synchronous `/proc` and `/sys` metric reads and temperature discovery
+  with cancellable asynchronous Gio operations so refreshes do not block the
+  Cinnamon UI loop.
+- Use Cinnamon's public `Main.restartCinnamon()` API for the menu action and
+  rely directly on the packaged metric icons.
+- Keep the GPU bus entry focused while the pointer merely moves away; release
+  focus only for an actual click outside the field, matching the path controls
+  in the ChatGPT Usage Monitor.
+- Replace the full-desktop Spices screenshot with a focused `336×293` crop that
+  keeps the horizontal panel anchor, popup and exact 8 px breathing edge.
+
 ## 2.0.0 — 2026-09-08
 
 First public OSS Singularity release under the canonical

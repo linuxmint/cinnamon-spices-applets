@@ -4,7 +4,7 @@
   "description": "Live CPU, memory, swap, temperature and optional AMD GPU and VRAM metrics for horizontal or vertical Cinnamon panels.",
   "comments": "Made with love by Claudiu & Codex.\n\nhttps://github.com/oss-singularity/cinnamon-system-monitor",
   "contributors": "OSS Singularity - open-source home of the project,Claudiu Schuster - creator and maintainer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "OSS Singularity",
   "max-instances": 1,
   "cinnamon-version": ["5.8", "6.0", "6.2", "6.4", "6.6"]

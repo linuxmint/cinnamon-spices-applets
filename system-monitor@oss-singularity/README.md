@@ -6,7 +6,7 @@ A compact Cinnamon applet for live CPU, memory, swap, temperature and optional
 AMD GPU/VRAM monitoring. It adapts automatically to horizontal and vertical
 panels.
 
-This is the `2.0.0` public-release payload for the OSS Singularity applet
+This is the `2.0.1` public-release payload for the OSS Singularity applet
 catalog.
 
 ## Features

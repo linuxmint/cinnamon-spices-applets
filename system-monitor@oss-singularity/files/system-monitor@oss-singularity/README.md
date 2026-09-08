@@ -46,6 +46,8 @@ settings.
   is unavailable, and each can also be disabled explicitly in the settings.
 - Warning and critical thresholds, colors and visible metrics are configurable
   through Cinnamon's native applet settings.
+- Metric refreshes and CPU-temperature discovery use cancellable asynchronous
+  Gio operations so the Cinnamon UI loop stays responsive.
 - Hidden system metrics are not polled; hiding both GPU metrics also prevents
   `radeontop` from running.
 - The click menu includes system-monitor launchers and a `Restart Cinnamon`

@@ -6,6 +6,7 @@
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const PopupMenu = imports.ui.popupMenu;
+const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 const ByteArray = imports.byteArray;
@@ -20,7 +21,7 @@ const Metrics = require("./metrics");
 const UUID = "system-monitor@oss-singularity";
 const HWMON_PATH = "/sys/class/hwmon";
 const THERMAL_PATH = "/sys/class/thermal";
-// Keep the 2.0.0 default at the existing 90% visual baseline.
+// Keep the 2.0.1 default at the existing 90% visual baseline.
 const FONT_SIZE_RENDER_SCALE = 0.9;
 
 class AdaptiveSystemMonitorApplet extends Applet.Applet {
@@ -35,10 +36,13 @@ class AdaptiveSystemMonitorApplet extends Applet.Applet {
         this._timeoutId = 0;
         this._destroyed = false;
         this._gpuCancellable = null;
+        this._metricsCancellable = new Gio.Cancellable();
         this._gpuBusy = false;
+        this._metricsBusy = false;
         this._gpuAvailable = this._findRadeontop() !== null;
         this._cpuSample = null;
         this._cpuTempPath = null;
+        this._cpuTempDiscoveryPending = false;
         this._actors = {};
         this._values = {
             cpu: null,
@@ -59,7 +63,7 @@ class AdaptiveSystemMonitorApplet extends Applet.Applet {
         this._bindSettings(instanceId);
         this._buildUi();
         this._buildMenu(orientation);
-        this._cpuTempPath = this._discoverCpuTemperaturePath();
+        this._discoverCpuTemperaturePath();
         this._updateAll();
         this._restartTimer();
     }
@@ -191,7 +195,7 @@ class AdaptiveSystemMonitorApplet extends Applet.Applet {
         actor.style = this._isVertical ? "padding: 1px 0px;" : "";
 
         const iconPath = `${this.metadata.path}/icons/${definition.icon}`;
-        const useIcon = this.useIcons && GLib.file_test(iconPath, GLib.FileTest.EXISTS);
+        const useIcon = this.useIcons;
         let symbol;
 
         if (useIcon) {
@@ -260,7 +264,7 @@ class AdaptiveSystemMonitorApplet extends Applet.Applet {
             "view-refresh-symbolic",
             St.IconType.SYMBOLIC
         );
-        restartItem.connect("activate", () => global.reexec_self());
+        restartItem.connect("activate", () => Main.restartCinnamon());
         this.menu.addMenuItem(restartItem);
     }
 
@@ -361,44 +365,93 @@ class AdaptiveSystemMonitorApplet extends Applet.Applet {
     }
 
     _updateSystemMetrics() {
+        if (this._metricsBusy) return;
+        this._metricsBusy = true;
+
+        let pending = 0;
+        const complete = () => {
+            pending -= 1;
+            if (pending !== 0 || this._destroyed) return;
+
+            this._metricsBusy = false;
+            this._applyValues();
+        };
+        const read = (path, handler) => {
+            pending += 1;
+            this._readTextFileAsync(path, contents => {
+                if (!this._destroyed) handler(contents);
+                complete();
+            });
+        };
+
         if (this.showCpu) {
-            const cpuText = this._readTextFile("/proc/stat");
-            if (cpuText !== null) {
-                const cpu = Metrics.parseCpuStat(cpuText, this._cpuSample);
-                if (cpu) {
-                    this._cpuSample = cpu.sample;
-                    this._values.cpu = cpu.percentage;
+            read("/proc/stat", cpuText => {
+                if (!this.showCpu) {
+                    this._values.cpu = null;
+                    return;
                 }
-            }
+                if (cpuText !== null) {
+                    const cpu = Metrics.parseCpuStat(cpuText, this._cpuSample);
+                    if (cpu) {
+                        this._cpuSample = cpu.sample;
+                        this._values.cpu = cpu.percentage;
+                    }
+                }
+            });
         } else {
             this._values.cpu = null;
         }
 
         if (this.showMemory || this.showSwap) {
-            const memoryText = this._readTextFile("/proc/meminfo");
-            const memory = memoryText === null ? null : Metrics.parseMemInfo(memoryText);
-            if (memory) {
-                this._values.memory = this.showMemory ? memory.memoryPercentage : null;
-                this._values.swap = this.showSwap ? memory.swapPercentage : null;
-                if (this.showMemory) {
-                    this._details.memory = `${this._formatKiB(memory.memoryUsedKiB)} / ${this._formatKiB(memory.memoryTotalKiB)}`;
+            read("/proc/meminfo", memoryText => {
+                if (!this.showMemory && !this.showSwap) {
+                    this._values.memory = null;
+                    this._values.swap = null;
+                    return;
                 }
-                if (this.showSwap) {
-                    this._details.swap = `${this._formatKiB(memory.swapUsedKiB)} / ${this._formatKiB(memory.swapTotalKiB)}`;
+
+                const memory = memoryText === null ? null : Metrics.parseMemInfo(memoryText);
+                if (memory) {
+                    this._values.memory = this.showMemory ? memory.memoryPercentage : null;
+                    this._values.swap = this.showSwap ? memory.swapPercentage : null;
+                    if (this.showMemory) {
+                        this._details.memory = `${this._formatKiB(memory.memoryUsedKiB)} / ${this._formatKiB(memory.memoryTotalKiB)}`;
+                    }
+                    if (this.showSwap) {
+                        this._details.swap = `${this._formatKiB(memory.swapUsedKiB)} / ${this._formatKiB(memory.swapTotalKiB)}`;
+                    }
                 }
-            }
+            });
         } else {
             this._values.memory = null;
             this._values.swap = null;
         }
 
         if (this.showTemperature) {
-            if (!this._cpuTempPath) this._cpuTempPath = this._discoverCpuTemperaturePath();
-            const rawTemperature = this._cpuTempPath ? this._readNumberFile(this._cpuTempPath) : null;
-            this._values.temperature = rawTemperature === null ? null : rawTemperature / 1000;
+            if (!this._cpuTempPath) this._discoverCpuTemperaturePath();
+            if (this._cpuTempPath) {
+                read(this._cpuTempPath, rawTemperature => {
+                    if (!this.showTemperature) {
+                        this._values.temperature = null;
+                        return;
+                    }
+                    if (rawTemperature === null) {
+                        this._cpuTempPath = null;
+                        this._discoverCpuTemperaturePath();
+                        this._values.temperature = null;
+                        return;
+                    }
+                    const value = Number(rawTemperature);
+                    this._values.temperature = Number.isFinite(value) ? value / 1000 : null;
+                });
+            } else {
+                this._values.temperature = null;
+            }
         } else {
             this._values.temperature = null;
         }
+
+        if (pending === 0) this._metricsBusy = false;
     }
 
     _updateGpu() {
@@ -547,68 +600,188 @@ class AdaptiveSystemMonitorApplet extends Applet.Applet {
         return /^[0-9a-fA-F]{2}$/.test(value) ? value : "";
     }
 
-    _readTextFile(path) {
+    _readTextFileAsync(path, callback) {
+        if (this._destroyed) return;
+
+        const file = Gio.File.new_for_path(path);
         try {
-            const [success, contents] = GLib.file_get_contents(path);
-            return success ? ByteArray.toString(contents).trim() : null;
+            file.load_contents_async(this._metricsCancellable, (source, result) => {
+                if (this._destroyed) return;
+
+                try {
+                    const [success, contents] = source.load_contents_finish(result);
+                    callback(success ? ByteArray.toString(contents).trim() : null);
+                } catch {
+                    callback(null);
+                }
+            });
         } catch {
-            return null;
+            callback(null);
         }
     }
 
-    _readNumberFile(path) {
-        const text = this._readTextFile(path);
-        if (text === null) return null;
-        const value = Number(text);
-        return Number.isFinite(value) ? value : null;
+    _enumerateDirectoryAsync(path, callback) {
+        const base = Gio.File.new_for_path(path);
+
+        try {
+            base.enumerate_children_async(
+                "standard::name",
+                Gio.FileQueryInfoFlags.NONE,
+                GLib.PRIORITY_LOW,
+                this._metricsCancellable,
+                (source, result) => {
+                    if (this._destroyed) return;
+
+                    let enumerator;
+                    try {
+                        enumerator = source.enumerate_children_finish(result);
+                    } catch (error) {
+                        callback([], error);
+                        return;
+                    }
+
+                    const entries = [];
+                    const readNext = () => {
+                        if (this._destroyed) {
+                            try {
+                                enumerator.close(null);
+                            } catch {
+                                // The applet is being removed; close is best effort.
+                            }
+                            return;
+                        }
+
+                        enumerator.next_files_async(
+                            32,
+                            GLib.PRIORITY_LOW,
+                            this._metricsCancellable,
+                            (enumeratorSource, nextResult) => {
+                                if (this._destroyed) return;
+
+                                try {
+                                    const batch = enumeratorSource.next_files_finish(nextResult);
+                                    if (batch.length === 0) {
+                                        enumerator.close(null);
+                                        callback(entries, null);
+                                        return;
+                                    }
+                                    entries.push(...batch);
+                                    readNext();
+                                } catch (error) {
+                                    try {
+                                        enumerator.close(null);
+                                    } catch {
+                                        // The enumerator is already failing; close is best effort.
+                                    }
+                                    callback([], error);
+                                }
+                            }
+                        );
+                    };
+
+                    readNext();
+                }
+            );
+        } catch (error) {
+            callback([], error);
+        }
     }
 
     _discoverCpuTemperaturePath() {
-        const candidates = [];
-        const base = Gio.File.new_for_path(HWMON_PATH);
+        if (this._cpuTempDiscoveryPending || this._destroyed) return;
 
-        try {
-            const enumerator = base.enumerate_children(
-                "standard::name",
-                Gio.FileQueryInfoFlags.NONE,
-                null
-            );
-            let info;
+        this._cpuTempDiscoveryPending = true;
+        this._enumerateDirectoryAsync(HWMON_PATH, (entries, error) => {
+            if (this._destroyed) return;
+            if (error) global.logWarning(`${UUID}: could not inspect hwmon: ${error}`);
 
-            while ((info = enumerator.next_file(null))) {
-                const directory = `${HWMON_PATH}/${info.get_name()}`;
-                const chip = (this._readTextFile(`${directory}/name`) || "").toLowerCase();
-
-                for (let index = 1; index <= 16; index++) {
-                    const inputPath = `${directory}/temp${index}_input`;
-                    if (!GLib.file_test(inputPath, GLib.FileTest.EXISTS)) continue;
-
-                    const label = (this._readTextFile(`${directory}/temp${index}_label`) || "").toLowerCase();
-                    let score = 0;
-                    if (["k10temp", "coretemp", "zenpower"].includes(chip)) score += 100;
-                    if (/tctl|tdie|package|cpu/.test(label)) score += 50;
-                    if (/nvme|amdgpu|battery|wifi/.test(chip)) score -= 100;
-                    candidates.push({ path: inputPath, score });
-                }
+            if (error) {
+                this._collectThermalCandidates(0, [], candidates => this._finishCpuTemperatureDiscovery(candidates));
+                return;
             }
-            enumerator.close(null);
-        } catch (error) {
-            global.logWarning(`${UUID}: could not inspect hwmon: ${error}`);
+
+            const candidates = [];
+            this._collectHwmonCandidates(entries, 0, candidates, () => {
+                if (candidates.length > 0) {
+                    this._finishCpuTemperatureDiscovery(candidates);
+                    return;
+                }
+                this._collectThermalCandidates(0, [], found => this._finishCpuTemperatureDiscovery(found));
+            });
+        });
+    }
+
+    _collectHwmonCandidates(entries, entryIndex, candidates, done) {
+        if (this._destroyed) return;
+        if (entryIndex >= entries.length) {
+            done();
+            return;
         }
 
-        if (candidates.length === 0) {
-            for (let index = 0; index < 32; index++) {
-                const directory = `${THERMAL_PATH}/thermal_zone${index}`;
-                const inputPath = `${directory}/temp`;
-                if (!GLib.file_test(inputPath, GLib.FileTest.EXISTS)) continue;
-                const type = (this._readTextFile(`${directory}/type`) || "").toLowerCase();
+        const directory = `${HWMON_PATH}/${entries[entryIndex].get_name()}`;
+        this._readTextFileAsync(`${directory}/name`, chipText => {
+            const chip = (chipText || "").toLowerCase();
+            const inspect = temperatureIndex => {
+                if (temperatureIndex > 16) {
+                    this._collectHwmonCandidates(entries, entryIndex + 1, candidates, done);
+                    return;
+                }
+
+                const inputPath = `${directory}/temp${temperatureIndex}_input`;
+                this._readTextFileAsync(inputPath, inputText => {
+                    if (inputText === null) {
+                        inspect(temperatureIndex + 1);
+                        return;
+                    }
+
+                    this._readTextFileAsync(`${directory}/temp${temperatureIndex}_label`, labelText => {
+                        const label = (labelText || "").toLowerCase();
+                        let score = 0;
+                        if (["k10temp", "coretemp", "zenpower"].includes(chip)) score += 100;
+                        if (/tctl|tdie|package|cpu/.test(label)) score += 50;
+                        if (/nvme|amdgpu|battery|wifi/.test(chip)) score -= 100;
+                        candidates.push({ path: inputPath, score });
+                        inspect(temperatureIndex + 1);
+                    });
+                });
+            };
+
+            inspect(1);
+        });
+    }
+
+    _collectThermalCandidates(index, candidates, done) {
+        if (this._destroyed) return;
+        if (index >= 32) {
+            done(candidates);
+            return;
+        }
+
+        const directory = `${THERMAL_PATH}/thermal_zone${index}`;
+        const inputPath = `${directory}/temp`;
+        this._readTextFileAsync(inputPath, inputText => {
+            if (inputText === null) {
+                this._collectThermalCandidates(index + 1, candidates, done);
+                return;
+            }
+
+            this._readTextFileAsync(`${directory}/type`, typeText => {
+                const type = (typeText || "").toLowerCase();
                 const score = /cpu|pkg|x86/.test(type) ? 50 : 0;
                 candidates.push({ path: inputPath, score });
-            }
-        }
+                this._collectThermalCandidates(index + 1, candidates, done);
+            });
+        });
+    }
 
+    _finishCpuTemperatureDiscovery(candidates) {
         candidates.sort((left, right) => right.score - left.score);
-        return candidates.length > 0 ? candidates[0].path : null;
+        this._cpuTempPath = candidates.length > 0 ? candidates[0].path : null;
+        this._cpuTempDiscoveryPending = false;
+
+        if (this._cpuTempPath && !this._destroyed && !this._metricsBusy) {
+            this._updateSystemMetrics();
+        }
     }
 
     _formatKiB(value) {
@@ -626,6 +799,10 @@ class AdaptiveSystemMonitorApplet extends Applet.Applet {
         if (this._gpuCancellable) {
             this._gpuCancellable.cancel();
             this._gpuCancellable = null;
+        }
+        if (this._metricsCancellable) {
+            this._metricsCancellable.cancel();
+            this._metricsCancellable = null;
         }
         if (this.settings) this.settings.finalize();
     }

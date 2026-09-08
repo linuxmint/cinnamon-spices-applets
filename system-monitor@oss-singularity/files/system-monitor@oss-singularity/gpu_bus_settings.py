@@ -6,7 +6,7 @@ import gettext
 import re
 from pathlib import Path
 
-from gi.repository import Gio, GLib, Gtk, Gdk
+from gi.repository import Gio, GLib, Gtk
 from xapp.SettingsWidgets import SettingsWidget
 
 
@@ -31,6 +31,8 @@ class GpuBusSetting(SettingsWidget):
         self._process = None
         self._timeout = 0
         self._closed = False
+        self._click_gesture = None
+        self._click_handler = 0
 
         row = Gtk.Grid(column_spacing=16)
         label = Gtk.Label(
@@ -42,20 +44,14 @@ class GpuBusSetting(SettingsWidget):
         entry.set_tooltip_text(settings.get_property(self._SETTING_KEY, "tooltip"))
         row.attach(label, 0, 0, 1, 1)
         row.attach(entry, 1, 0, 1, 1)
-        row_event_box = Gtk.EventBox()
-        row_event_box.set_visible_window(False)
-        row_event_box.set_can_focus(True)
-        row_event_box.add(row)
-        self.pack_start(row_event_box, False, False, 0)
-        self._focus_sink = row_event_box
+        self.pack_start(row, False, False, 0)
 
         settings.bind(self._SETTING_KEY, entry, "text", Gio.SettingsBindFlags.DEFAULT)
         entry.connect("focus-in-event", self._focus_changed, True)
         entry.connect("focus-out-event", self._focus_changed, False)
-        entry.add_events(Gdk.EventMask.LEAVE_NOTIFY_MASK)
-        entry.connect("leave-notify-event", self._entry_left)
         self.entry = entry
 
+        self.connect("hierarchy-changed", self._hierarchy_changed)
         self.connect("destroy", self._destroyed)
         self._set_placeholder()
         self._detect_automatic_bus()
@@ -64,13 +60,37 @@ class GpuBusSetting(SettingsWidget):
         self._set_placeholder(focused=focused)
         return False
 
-    def _entry_left(self, _entry, _event):
-        self._move_focus_out()
-        return False
+    def _hierarchy_changed(self, *_args):
+        self._disconnect_click_gesture()
+        window = self.get_toplevel()
+        if self._closed or not isinstance(window, Gtk.Window):
+            return
+        # Capture before child controls consume clicks, including non-focusable
+        # labels and empty areas. Leave the event available to its normal target.
+        self._click_gesture = Gtk.GestureMultiPress.new(window)
+        self._click_gesture.set_button(0)
+        self._click_gesture.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
+        self._click_handler = self._click_gesture.connect("pressed", self._window_pressed)
 
-    def _move_focus_out(self):
-        if not self._closed and self.entry.has_focus():
-            self._focus_sink.grab_focus()
+    def _window_pressed(self, gesture, _count, x, y):
+        window = gesture.get_widget()
+        entry = window.get_focus()
+        if self._closed or entry is not self.entry:
+            return
+        position = entry.translate_coordinates(window, 0, 0)
+        if position is None:
+            return
+        left, top = position
+        if not (left <= x < left + entry.get_allocated_width() and top <= y < top + entry.get_allocated_height()):
+            window.set_focus(None)
+
+    def _disconnect_click_gesture(self):
+        if self._click_gesture is not None:
+            self._click_gesture.disconnect(self._click_handler)
+            self._click_gesture.set_propagation_phase(Gtk.PropagationPhase.NONE)
+            self._click_gesture.reset()
+            self._click_gesture = None
+            self._click_handler = 0
 
     def _set_placeholder(self, focused=None):
         if focused is None:
@@ -131,6 +151,7 @@ class GpuBusSetting(SettingsWidget):
 
     def _destroyed(self, *_args):
         self._closed = True
+        self._disconnect_click_gesture()
         if self._timeout:
             GLib.source_remove(self._timeout)
             self._timeout = 0
