@@ -29,7 +29,6 @@ const { HttpLib } = Me.imports["./lib/httpLib"];
 
 const Interfaces = imports.misc.interfaces;
 const Clutter = imports.gi.Clutter;
-const GdkPixbuf = imports.gi.GdkPixbuf;
 const Slider = imports.ui.slider;
 const Gettext = imports.gettext;
 const Pango = imports.gi.Pango;
@@ -64,20 +63,6 @@ function run_playerctld() {
 
 function kill_playerctld() {
     Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
-}
-
-function getImageAtScale(imageFileName, width, height) {
-  let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(imageFileName, width, height);
-  let image = new Clutter.Image();
-  image.set_data(
-    pixBuf.get_pixels(),
-    pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
-    width, height,
-    pixBuf.get_rowstride()
-  );
-  let actor = new Clutter.Actor({width: width, height: height});
-  actor.set_content(image);
-  return actor;
 }
 
 // Text wrapper
@@ -920,13 +905,17 @@ var Player = class Player extends PopupMenu.PopupMenuSection {
         let rnd, baseName;
         if (!cover_path || !GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
             del_song_arts();
-            this.cover = new St.Icon({
+            this._cover_load_handle = 0;
+            let genericCover = new St.Icon({
                 style_class: "sound-player-generic-coverart",
                 important: true,
                 icon_name: "media-optical",
                 icon_size: Math.trunc(300 * this._applet.real_ui_scale),
                 icon_type: St.IconType.SYMBOLIC
             });
+            if (!this._applet.showMediaOptical)
+                genericCover.hide();
+            this._setCoverActor(genericCover);
             cover_path = null;
             this._cover_path = null;
             this._applet.setAppletTextIcon(this, null);
@@ -977,7 +966,7 @@ var Player = class Player extends PopupMenu.PopupMenuSection {
             this._cover_path = cover_path;
             this._applet._icon_path = cover_path; // Added
             this._applet.setAppletIcon(this._applet.player, cover_path); // Added
-            if (cover_path != null && GLib.file_test(cover_path, GLib.FileTest.EXISTS))
+            if (cover_path != null && GLib.file_test(cover_path, GLib.FileTest.EXISTS) && !this._applet.dontShowAnyImageInMenu)
                 this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(
                     cover_path,
                     Math.trunc(300 * this._applet.real_ui_scale),
@@ -986,54 +975,36 @@ var Player = class Player extends PopupMenu.PopupMenuSection {
                         this._on_cover_loaded(cache, handle, actor)
                     }
                 );
+            else
+                this._setCoverActor(null);
             this._applet.setIcon();
-
-            //~ log("this._cover_path: "+this._cover_path, true);
-            try {
-                let pixbuf = null;
-                if (GLib.file_test(this._cover_path, GLib.FileTest.EXISTS)) {
-                    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
-                        this._cover_path,
-                        Math.trunc(300 * this._applet.real_ui_scale),
-                        Math.trunc(300 * this._applet.real_ui_scale)
-                    );
-                }
-
-                if (pixbuf) {
-                    let image = new Clutter.Image();
-                    image.set_data(
-                        pixbuf.get_pixels(),
-                        pixbuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGB_888,
-                        pixbuf.get_width(),
-                        pixbuf.get_height(),
-                        pixbuf.get_rowstride()
-                    );
-                    this.cover = image.get_texture();
-                }
-                if (this._applet.keepAlbumAspectRatio) {
-                    //TODO: Replace Texture by Image.
-                    this.cover = new Clutter.Texture({
-                        width: Math.trunc(300 * this._applet.real_ui_scale),
-                        keep_aspect_ratio: true,
-                        //filter_quality: 2,
-                        filter_quality: Clutter.Texture.QUALITY_HIGH,
-                        filename: cover_path
-                    });
-                } else {
-                    //TODO: Replace Texture by Image.
-                    this.cover = new Clutter.Texture({
-                        width: Math.trunc(300 * this._applet.real_ui_scale),
-                        height: Math.trunc(300 * this._applet.real_ui_scale),
-                        keep_aspect_ratio: false,
-                        filter_quality: Clutter.Texture.QUALITY_HIGH,
-                        filename: cover_path
-                    });
-                }
-                this.cover.icon_size = Math.trunc(300 * this._applet.real_ui_scale);
-                //~ this.display_cover_button.show();
-            } catch (e) {}
         }
         this._oldTitle = this._title; // Here??? FIXME!!!
+    }
+
+    _setCoverActor(actor) {
+        if (this.coverBox != null && this.cover != null) {
+            let coverBoxChildren = this.coverBox.get_children();
+            if (coverBoxChildren.length > 0 && coverBoxChildren.indexOf(this.cover) > -1)
+                try { this.coverBox.remove_child(this.cover) } catch(e) {}
+        }
+
+        this.cover = actor;
+
+        try {
+            if (this.coverBox) {
+                if (this.cover && !this._applet.dontShowAnyImageInMenu) {
+                    this.coverBox.add_actor(this.cover);
+                    try {
+                        this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
+                    } catch(e) {}
+                } else {
+                    try {
+                        this.coverBox.set_child_below_sibling(this.trackInfo, null);
+                    } catch(e) {}
+                }
+            }
+        } catch (e) {}
     }
 
     _on_cover_loaded(cache, handle, actor) {
@@ -1041,12 +1012,9 @@ var Player = class Player extends PopupMenu.PopupMenuSection {
             // Maybe a cover image load stalled? Make sure our requests match the callback.
             return;
         }
-
-        if (this.coverBox != null && this.cover != null) {
-            let coverBoxChildren = this.coverBox.get_children();
-            if (coverBoxChildren.length > 0 && coverBoxChildren.indexOf(this.cover) > -1)
-                try { this.coverBox.remove_child(this.cover) } catch(e) {}
-        }
+        this._cover_load_handle = 0;
+        if (!actor)
+            return;
 
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).
@@ -1078,22 +1046,7 @@ var Player = class Player extends PopupMenu.PopupMenuSection {
 
         actor.set_margin_left(Math.max(0, Math.round(300 * this._applet.real_ui_scale - actor.width)));
 
-        this.cover = actor;
-
-        try {
-            if (this.coverBox) {
-                if (this.cover && !this._applet.dontShowAnyImageInMenu) {
-                    this.coverBox.add_actor(this.cover);
-                    try {
-                        this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
-                    } catch(e) {}
-                } else {
-                    try {
-                        this.coverBox.set_child_below_sibling(this.trackInfo, null);
-                    } catch(e) {}
-                }
-            }
-        } catch (e) {}
+        this._setCoverActor(actor);
 
         this._applet.setAppletTextIcon(this, this._cover_path);
     }
