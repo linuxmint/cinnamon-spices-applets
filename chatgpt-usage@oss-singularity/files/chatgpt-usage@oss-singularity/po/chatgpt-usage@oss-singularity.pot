@@ -1,0 +1,929 @@
+# ChatGPT Usage Monitor translation template.
+# Copyright (C) 2026 OSS Singularity
+# This file is distributed under the GPL-3.0-or-later license.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ChatGPT Usage Monitor 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/oss-singularity/cinnamon-chatgpt-usage/issues\n"
+"POT-Creation-Date: 2026-09-08 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js
+#, javascript-format
+msgid "    12h %s  ·  Today %s"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "    1h %s  ·  4h %s%s"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "  %s usage"
+msgstr ""
+
+#: applet.js
+msgid "  24h Activity"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "  Resets %s"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "  ·  %s  ·  %s buckets  ·  peak %s"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "  ·  24h %s"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "%"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid ""
+"%s\n"
+"\n"
+"Using reset…"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid ""
+"%s\n"
+"%s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid ""
+"%s\n"
+"%s consumed"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid ""
+"%s\n"
+"%s consumed · estimated"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid ""
+"%s\n"
+"%s consumed · partial bucket"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid ""
+"%s\n"
+"%s consumed · partial bucket · estimated"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid ""
+"%s\n"
+"No observed data"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s %s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s %s limit critical"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s %s limit warning"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s %s–%s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s %s–%s %s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s (%s)"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s 7d limit refreshed"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s Retry the same request from the reset dialog; do not switch accounts until it is resolved."
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s has %s remaining."
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s remaining"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s weekly usage is available again."
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s · %s usage"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s — %s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s%%"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s%s%%"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s%s: %s remaining"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s: %s remaining"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s: choose an executable file, or leave empty for automatic detection."
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s: could not start usage helper: %s"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s: usage refresh failed: %s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sd"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sd ago"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sh"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sh %sm"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sh ago"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sm"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sm ago"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%ss"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%ss ago"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "1 hour"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "2 hours"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "24-hour activity bucket size"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "24h activity bucket size"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "5h critical at or below"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "5h warning at or below"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "7d critical at or below"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "7d warning at or below"
+msgstr ""
+
+#: metadata.json.js
+msgid "A tiny Cinnamon companion keeping ChatGPT Work & Codex usage beautifully in view."
+msgstr ""
+
+#: usage-format.js
+msgid "Activity details unavailable"
+msgstr ""
+
+#: applet.js
+msgid "Analytics"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Applet display"
+msgstr ""
+
+#: applet.js
+msgid "Automatic detection"
+msgstr ""
+
+#: path_settings.py
+msgid "Automatic paths checked. Your manual entries are unchanged."
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "Available reset credits: %s"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Base color of panel percentages, window labels and separators. Warning and critical colors can override percentages below the configured thresholds."
+msgstr ""
+
+#: applet.js
+msgid "Cancel"
+msgstr ""
+
+#: applet.js
+msgid "ChatGPT App"
+msgstr ""
+
+#: metadata.json.js
+msgid "ChatGPT Usage Monitor"
+msgstr ""
+
+#: applet.js
+msgid "ChatGPT Work & Codex usage"
+msgstr ""
+
+#: applet.js
+msgid "ChatGPT app"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "ChatGPT app executable used for bundled-backend fallback"
+msgstr ""
+
+#: applet.js
+msgid "ChatGPT app path (optional)"
+msgstr ""
+
+#: applet.js
+msgid "ChatGPT app path is unavailable. Choose an executable file in settings."
+msgstr ""
+
+#: settings-schema.json.js path_settings.py
+msgid "ChatGPT path (optional)"
+msgstr ""
+
+#: applet.js
+msgid "Check the ChatGPT app path in settings."
+msgstr ""
+
+#: applet.js path_settings.py
+msgid "Checking automatic paths…"
+msgstr ""
+
+#: applet.js
+msgid "Choose an executable ChatGPT app file in settings"
+msgstr ""
+
+#: applet.js
+msgid "Close"
+msgstr ""
+
+#: applet.js
+msgid "Codex CLI"
+msgstr ""
+
+#: chatgpt_usage.py
+#, python-format
+msgid "Codex CLI is not executable: %(path)s"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Codex CLI or ChatGPT App backend was not found"
+msgstr ""
+
+#: applet.js
+msgid "Codex Cloud"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Codex app-server closed its output before replying"
+msgstr ""
+
+#: chatgpt_usage.py
+#, python-format
+msgid "Codex app-server rejected the request: %(detail)s"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Codex app-server response exceeded the size limit"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Codex app-server returned an invalid reset outcome"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Codex app-server returned no reset outcome"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Codex app-server returned no usage data"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Color panel percentages at or below the remaining usage thresholds using the warning and critical colors below. Independent of menu coloring; window labels and separators keep the panel text color."
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Color values by remaining usage"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Colors"
+msgstr ""
+
+#: applet.js path_settings.py
+msgid "Could not check automatic paths. Try Recheck."
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "Could not open %s"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "Could not open %s. %s"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Could not open Codex app-server pipes"
+msgstr ""
+
+#: chatgpt_usage.py
+#, python-format
+msgid "Could not store local history: %(error)s"
+msgstr ""
+
+#: applet.js
+msgid "Credits"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Critical at or below"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Critical color"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Discover local commands without account access"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Do not read or write history"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "Elapsed: %s"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Enable 5h low-limit notifications"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Enable 7d low-limit notifications"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Explicitly consume one earned rate-limit reset credit"
+msgstr ""
+
+#: path_settings.py
+msgid "Find automatic paths again without changing your entries."
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Find automatic paths without executing commands"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Font size"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "General"
+msgstr ""
+
+#: applet.js
+msgid "I confirm retrying this reset."
+msgstr ""
+
+#: applet.js
+msgid "I confirm using one reset credit."
+msgstr ""
+
+#: applet.js
+msgid "Incomplete reset journal write; no request was sent"
+msgstr ""
+
+#: applet.js
+msgid "Install ChatGPT App"
+msgstr ""
+
+#: applet.js
+msgid "Install Codex CLI"
+msgstr ""
+
+#: applet.js
+msgid "Installation guide"
+msgstr ""
+
+#: applet.js
+msgid "Invalid saved reset attempt; reset actions are disabled"
+msgstr ""
+
+#: applet.js
+msgid "Last refresh failed"
+msgstr ""
+
+#: applet.js
+msgid "Leave empty for automatic detection. Codex CLI is preferred."
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Leave empty for automatic detection. Otherwise enter the ChatGPT executable path, such as ~/Applications/ChatGPT/chatgpt, without quotes or arguments. Used to launch the app and find its bundled backend when no Codex CLI is installed. An explicit Codex backend path takes priority."
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Leave empty to find Codex CLI or the ChatGPT app's bundled backend automatically. Set an executable path only to override detection. Example: /home/user/.local/bin/codex"
+msgstr ""
+
+#: applet.js
+msgid "Limit resets"
+msgstr ""
+
+#: applet.js
+msgid "Loading usage limits…"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Low remaining usage"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "Next expiry: %s"
+msgstr ""
+
+#: applet.js
+msgid "No ChatGPT login found"
+msgstr ""
+
+#: applet.js
+msgid "No Codex CLI or ChatGPT App backend was found. Follow OpenAI's official getting-started guide to install one, sign in, and then refresh this applet."
+msgstr ""
+
+#: applet.js
+msgid "No Codex CLI or ChatGPT App backend was found; install one or configure its path in the applet settings"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "No Codex CLI or bundled backend found; check the ChatGPT app path and its resources/codex file"
+msgstr ""
+
+#: applet.js path_settings.py
+msgid "No automatic path found"
+msgstr ""
+
+#: usage-format.js
+msgid "No reset credit available"
+msgstr ""
+
+#: applet.js
+msgid "No usage data available"
+msgstr ""
+
+#: usage-format.js
+msgid "No usage window was eligible for this reset. Usage limits are refreshing."
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Normal color"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Notifications"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Notify when 7d Spark limits reset"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Notify when 7d limits reset"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Notify when any model 7d limit refreshes"
+msgstr ""
+
+#: usage-format.js
+msgid "One reset credit was consumed. Usage limits are refreshing."
+msgstr ""
+
+#: applet.js
+msgid "One reset credit will be consumed."
+msgstr ""
+
+#: applet.js
+msgid "Open the configured ChatGPT app"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Optional opaque reset-credit ID"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Override the local history path"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Panel text"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Panel text color"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Path to the Codex app-server executable"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Read ChatGPT Work and Codex limits through the local Codex app-server."
+msgstr ""
+
+#: applet.js
+msgid "Recent consumption"
+msgstr ""
+
+#: applet.js path_settings.py
+msgid "Recheck"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Refresh interval"
+msgstr ""
+
+#: applet.js
+msgid "Refresh now"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Remaining usage thresholds"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "Remaining: %s"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Request timeout in seconds"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Request timeout must be finite and positive"
+msgstr ""
+
+#: usage-format.js
+msgid "Reset already applied"
+msgstr ""
+
+#: usage-format.js
+msgid "Reset applied"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Reset consume requires a non-empty idempotency key"
+msgstr ""
+
+#: usage-format.js
+msgid "Reset not applied"
+msgstr ""
+
+#: applet.js
+msgid "Reset outcome unknown"
+msgstr ""
+
+#: applet.js
+msgid "Reset recovery is still loading"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "Reset window: %s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid ""
+"Reset window: %s\n"
+"Elapsed: unavailable"
+msgstr ""
+
+#: applet.js
+msgid "Retry same reset"
+msgstr ""
+
+#: applet.js
+msgid "Retry the unresolved reset using its original backend and account"
+msgstr ""
+
+#: applet.js
+msgid "Retry the unresolved reset?"
+msgstr ""
+
+#: applet.js
+msgid "Save and check"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Separator in horizontal panels"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Separators are hidden automatically in vertical panels."
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show 5h / 7d window labels"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show 7d in the panel when 5h is active"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show additional model limits such as Spark in the menu, history, rings, panel and tooltip. Turn off to show only Codex. Notification preferences are configured separately."
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show model-specific limits in the applet"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show model-specific limits in the panel"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show usage icon"
+msgstr ""
+
+#: applet.js
+msgid "Sign in to ChatGPT with the ChatGPT App or Codex CLI, then choose Refresh now."
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Sign in to ChatGPT with the ChatGPT App or Codex CLI, then refresh this applet."
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Stable key for one explicit reset-redemption attempt"
+msgstr ""
+
+#: applet.js
+msgid "The ChatGPT desktop app was not found. OpenAI provides it for supported Linux distributions."
+msgstr ""
+
+#: usage-format.js
+msgid "The displayed count was stale. The available reset count is refreshing."
+msgstr ""
+
+#: applet.js
+msgid "The previous outcome is unknown. Retry the same request using the same account. Its saved key prevents a second redemption for this attempt."
+msgstr ""
+
+#: applet.js
+msgid "The reset request failed."
+msgstr ""
+
+#: usage-format.js
+msgid "This redemption was already completed. Usage limits are refreshing."
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Timed out while consuming a rate-limit reset"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Timed out while reading ChatGPT usage limits"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "Unexpected reset outcome: %s"
+msgstr ""
+
+#: applet.js
+msgid "Updated"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "Updated %s"
+msgstr ""
+
+#: applet.js
+msgid "Updating…"
+msgstr ""
+
+#: usage-format.js
+msgid "Usage"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Usage data"
+msgstr ""
+
+#: usage-format.js
+msgid "Usage helper failed"
+msgstr ""
+
+#: applet.js
+msgid "Usage helper returned invalid data"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "Usage history unavailable: %s"
+msgstr ""
+
+#: applet.js
+msgid "Usage limits"
+msgstr ""
+
+#: chatgpt_usage.py
+msgid "Usage request cancelled"
+msgstr ""
+
+#: applet.js
+msgid "Use one limit reset now?"
+msgstr ""
+
+#: applet.js
+msgid "Use reset now"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Use warning and critical colors in the panel"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Warning at or below"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Warning color"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Weekly limit refreshes"
+msgstr ""
+
+#: applet.js settings-schema.json.js path_settings.py
+msgid "codex-cli path (optional)"
+msgstr ""
+
+#: applet.js
+msgid "expires "
+msgstr ""
+
+#: usage-format.js
+msgid "just now"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "minutes"
+msgstr ""
+
+#: applet.js
+msgid "missing"
+msgstr ""
+
+#: usage-format.js
+msgid "not installed"
+msgstr ""
+
+#: applet.js usage-format.js
+msgid "now"
+msgstr ""
+
+#: applet.js
+msgid "python3 was not found"
+msgstr ""
+
+#: applet.js usage-format.js
+msgid "unavailable"
+msgstr ""
+
+#: usage-format.js
+msgid "unknown"
+msgstr ""
+
+#: usage-format.js
+msgid "version unavailable"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "~%sd%sh"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "~%sh"
+msgstr ""
