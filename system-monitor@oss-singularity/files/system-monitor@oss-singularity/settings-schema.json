@@ -1,0 +1,277 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["general-page", "metrics-page", "thresholds-page"],
+    "general-page": {
+      "type": "page",
+      "title": "General",
+      "sections": ["display-section", "gpu-section"]
+    },
+    "metrics-page": {
+      "type": "page",
+      "title": "Metrics",
+      "sections": ["visible-section"]
+    },
+    "thresholds-page": {
+      "type": "page",
+      "title": "Colors and thresholds",
+      "sections": ["color-section", "threshold-section"]
+    },
+    "display-section": {
+      "type": "section",
+      "title": "Display",
+      "keys": [
+        "refresh-interval",
+        "font-size",
+        "use-icons",
+        "separator",
+        "temperature-unit"
+      ]
+    },
+    "gpu-section": {
+      "type": "section",
+      "title": "AMD GPU",
+      "keys": ["gpu-bus-control"]
+    },
+    "visible-section": {
+      "type": "section",
+      "title": "Visible metrics",
+      "keys": [
+        "show-cpu",
+        "show-memory",
+        "show-swap",
+        "show-temperature",
+        "show-gpu",
+        "show-vram"
+      ]
+    },
+    "color-section": {
+      "type": "section",
+      "title": "Colors",
+      "keys": ["show-colors", "normal-color", "warning-color", "critical-color"]
+    },
+    "threshold-section": {
+      "type": "section",
+      "title": "Warning / critical thresholds",
+      "keys": [
+        "cpu-warning",
+        "cpu-critical",
+        "memory-warning",
+        "memory-critical",
+        "swap-warning",
+        "swap-critical",
+        "temperature-warning",
+        "temperature-critical",
+        "gpu-warning",
+        "gpu-critical",
+        "vram-warning",
+        "vram-critical"
+      ]
+    }
+  },
+  "refresh-interval": {
+    "type": "spinbutton",
+    "default": 2000,
+    "min": 500,
+    "max": 300000,
+    "step": 500,
+    "units": "milliseconds",
+    "description": "Refresh interval"
+  },
+  "font-size": {
+    "type": "spinbutton",
+    "default": 100,
+    "min": 60,
+    "max": 125,
+    "step": 5,
+    "units": "%",
+    "description": "Font size"
+  },
+  "use-icons": {
+    "type": "switch",
+    "default": true,
+    "description": "Use metric icons",
+    "tooltip": "Turn this off to show CPU, RAM, SWP, TMP, GPU and VRM text labels instead."
+  },
+  "separator": {
+    "type": "entry",
+    "default": "|",
+    "description": "Separator in horizontal panels",
+    "tooltip": "Separators are hidden automatically in vertical panels."
+  },
+  "temperature-unit": {
+    "type": "combobox",
+    "default": "celsius",
+    "description": "Temperature unit",
+    "options": { "Celsius": "celsius", "Fahrenheit": "fahrenheit" }
+  },
+  "gpu-bus": {
+    "type": "entry",
+    "default": "",
+    "description": "GPU PCI bus number (optional)",
+    "tooltip": "Leave empty to use radeontop's detected bus. A detected bus appears as a grey placeholder; enter two hexadecimal digits only to override it."
+  },
+  "show-cpu": {
+    "type": "switch",
+    "default": true,
+    "description": "Show CPU usage"
+  },
+  "show-memory": {
+    "type": "switch",
+    "default": true,
+    "description": "Show memory usage"
+  },
+  "show-swap": {
+    "type": "switch",
+    "default": true,
+    "description": "Show swap usage"
+  },
+  "show-temperature": {
+    "type": "switch",
+    "default": true,
+    "description": "Show CPU temperature"
+  },
+  "show-gpu": {
+    "type": "switch",
+    "default": true,
+    "description": "Show AMD GPU usage when available"
+  },
+  "show-vram": {
+    "type": "switch",
+    "default": true,
+    "description": "Show VRAM usage when available"
+  },
+  "show-colors": {
+    "type": "switch",
+    "default": true,
+    "description": "Color values by threshold"
+  },
+  "normal-color": {
+    "type": "colorchooser",
+    "default": "#ffffff",
+    "description": "Normal color"
+  },
+  "warning-color": {
+    "type": "colorchooser",
+    "default": "#f6d32d",
+    "description": "Warning color"
+  },
+  "critical-color": {
+    "type": "colorchooser",
+    "default": "#ed333b",
+    "description": "Critical color"
+  },
+  "cpu-warning": {
+    "type": "spinbutton",
+    "default": 70,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "CPU warning"
+  },
+  "cpu-critical": {
+    "type": "spinbutton",
+    "default": 90,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "CPU critical"
+  },
+  "memory-warning": {
+    "type": "spinbutton",
+    "default": 75,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Memory warning"
+  },
+  "memory-critical": {
+    "type": "spinbutton",
+    "default": 90,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Memory critical"
+  },
+  "swap-warning": {
+    "type": "spinbutton",
+    "default": 50,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Swap warning"
+  },
+  "swap-critical": {
+    "type": "spinbutton",
+    "default": 80,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Swap critical"
+  },
+  "temperature-warning": {
+    "type": "spinbutton",
+    "default": 75,
+    "min": 0,
+    "max": 120,
+    "step": 1,
+    "units": "°C",
+    "description": "Temperature warning"
+  },
+  "temperature-critical": {
+    "type": "spinbutton",
+    "default": 90,
+    "min": 0,
+    "max": 120,
+    "step": 1,
+    "units": "°C",
+    "description": "Temperature critical"
+  },
+  "gpu-warning": {
+    "type": "spinbutton",
+    "default": 75,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "GPU warning"
+  },
+  "gpu-critical": {
+    "type": "spinbutton",
+    "default": 95,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "GPU critical"
+  },
+  "vram-warning": {
+    "type": "spinbutton",
+    "default": 90,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "VRAM warning"
+  },
+  "vram-critical": {
+    "type": "spinbutton",
+    "default": 95,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "VRAM critical"
+  },
+  "gpu-bus-control": {
+    "type": "custom",
+    "file": "gpu_bus_settings.py",
+    "widget": "GpuBusSetting"
+  }
+}
