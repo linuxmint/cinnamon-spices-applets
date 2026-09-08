@@ -7,6 +7,19 @@ const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 
+// Cinnamon Translation Support
+const Gettext = imports.gettext;
+const UUID = "bing-wallpaper@starcross.dev";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(str) {
+    let customTranslation = Gettext.dgettext(UUID, str);
+    if (customTranslation !== str) {
+        return customTranslation;
+    }
+    return Gettext.gettext(str);
+}
+
 const logging = false;
 
 let _httpSession;
@@ -44,20 +57,24 @@ BingWallpaperApplet.prototype = {
         try {
             dir.make_directory_with_parents(null);
         } catch (e) {
-            // Ignoramos si la carpeta ya existe
+            // Ignore if directory already exists
         }
 
         this.wallpaperPath = `${this.wallpaperDir}/BingWallpaper.jpg`;
         this.metaDataPath = `${this.wallpaperDir}/meta.json`;
+        
+        // Manual override flag to stop daily refresh if user picks a history wallpaper
+        this.manualOverride = false; 
 
-        let refreshBg = new PopupMenu.PopupIconMenuItem("Refresh Now", "view-refresh", St.IconType.SYMBOLIC);
+        let refreshBg = new PopupMenu.PopupIconMenuItem(_("Refresh Now"), "view-refresh", St.IconType.SYMBOLIC);
         refreshBg.connect('activate', () => {
+            this.manualOverride = false; // Reset manual override on explicit refresh
             this._downloadMetaData();
         });
         this._applet_context_menu.addMenuItem(refreshBg);
 
-        // Submenú de historial
-        this.historyMenu = new PopupMenu.PopupSubMenuMenuItem("Historial de Fondos (8 dias)");
+        // History Submenu
+        this.historyMenu = new PopupMenu.PopupSubMenuMenuItem(_("Wallpaper History (8 days)"));
         this._applet_context_menu.addMenuItem(this.historyMenu);
 
         // Begin refresh loop
@@ -72,18 +89,12 @@ BingWallpaperApplet.prototype = {
         if (json && json.images) {
             for (let i = 0; i < json.images.length; i++) {
                 let imgData = json.images[i];
-                let labelText = imgData.copyright ? imgData.copyright : "Fondo de Bing";
-                let dateStr = imgData.startdate;
-
-                if (dateStr && dateStr.length === 8) {
-                    let formattedDate = `${dateStr.substring(6,8)}/${dateStr.substring(4,6)}`;
-                    let shortText = labelText.length > 45 ? labelText.substring(0, 45) + "..." : labelText;
-                    labelText = `[${formattedDate}] ${shortText}`;
-                }
+                let labelText = imgData.copyright ? imgData.copyright : _("Bing Wallpaper");
 
                 let menuItem = new PopupMenu.PopupMenuItem(labelText);
                 menuItem.connect('activate', () => {
-                    log(`Usuario selecciono fondo historico: ${imgData.url}`);
+                    log(`User selected historical background: ${imgData.url}`);
+                    this.manualOverride = true; // Pause daily refresh logic
                     this.imageData = imgData;
                     this.set_applet_tooltip(this.imageData.copyright);
 
@@ -93,17 +104,52 @@ BingWallpaperApplet.prototype = {
                     gFile.query_info_async('standard::size', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (file, res) => {
                         try {
                             file.query_info_finish(res);
-                            log('La imagen ya esta en cache, aplicandola directamente.');
+                            log('Image already in cache, applying directly.');
                             this._setBackground();
                         } catch (e) {
-                            log('La imagen no esta en cache, descargando...');
+                            log('Image not in cache, downloading...');
                             this._downloadImage();
                         }
                     });
                 });
                 this.historyMenu.menu.addMenuItem(menuItem);
             }
+            
+            // Clean up old images to prevent disk space bloat
+            this._cleanupOldImages(json);
         }
+    },
+
+    _cleanupOldImages: function(json) {
+        let validDates = new Set();
+        if (json && json.images) {
+            json.images.forEach(img => validDates.add(img.startdate));
+        }
+
+        let dir = Gio.file_new_for_path(this.wallpaperDir);
+        dir.enumerate_children_async('standard::name', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (obj, res) => {
+            try {
+                let enumerator = obj.enumerate_children_finish(res);
+                let info;
+                while ((info = enumerator.next_file(null)) != null) {
+                    let name = info.get_name();
+                    if (name.startsWith("bing_") && name.endsWith(".jpg")) {
+                        let datePart = name.substring(5, 13);
+                        if (!validDates.has(datePart)) {
+                            let fileToDelete = dir.get_child(name);
+                            fileToDelete.delete_async(GLib.PRIORITY_DEFAULT, null, (f, r) => {
+                                try { 
+                                    f.delete_finish(r); 
+                                    log(`Deleted old wallpaper from cache: ${name}`); 
+                                } catch(e) {}
+                            });
+                        }
+                    }
+                }
+            } catch (e) {
+                log(`Cleanup error: ${e.message}`);
+            }
+        });
     },
 
     _refresh: function () {
@@ -159,7 +205,7 @@ BingWallpaperApplet.prototype = {
             const now = GLib.DateTime.new_now_utc();
 
             if (now.to_unix() < end_date.to_unix()) {
-                log('metadata up to date');
+                log('Metadata up to date');
 
                 let image_file = Gio.file_new_for_path(this.wallpaperPath);
                 image_file.query_info_async('standard::size,time::modified', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (file, res) => {
@@ -175,17 +221,21 @@ BingWallpaperApplet.prototype = {
                         }
 
                         if ((modTimeSecs > end_date.to_unix()) || !image_file_size) {
-                            this._downloadImage();
+                            if (!this.manualOverride) {
+                                this._downloadImage();
+                            } else {
+                                log("Auto-update skipped due to manual history selection.");
+                            }
                         } else {
-                            log("image appears up to date");
+                            log("Image appears up to date");
                         }
                     } catch (e) {
                         log("No image file found");
-                        this._downloadImage();
+                        if (!this.manualOverride) this._downloadImage();
                     }
                 });
             } else {
-                log('metadata is old, requesting new...');
+                log('Metadata is old, requesting new...');
                 this._downloadMetaData();
             }
 
@@ -241,7 +291,7 @@ BingWallpaperApplet.prototype = {
     },
 
     _downloadImage: function () {
-        log('downloading new image');
+        log('Downloading new image');
         const url = `${bingHost}${this.imageData.url}`;
         const regex = /_\d+x\d+./gm;
         const urlUHD = url.replace(regex, `_UHD.`);
