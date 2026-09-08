@@ -227,29 +227,35 @@ class ChatGPTLimitsApplet extends Applet.TextIconApplet {
     }
 
     _loadCachedWindows() {
-        try {
-            let path = this._cachePath();
-            if (!path)
+        let path = this._cachePath();
+        if (!path)
+            return;
+        Gio.File.new_for_path(path).load_contents_async(null, (file, result) => {
+            if (this._destroyed)
                 return;
-            let file = Gio.File.new_for_path(path);
-            if (!file.query_exists(null))
-                return;
-            let [ok, contents] = file.load_contents(null);
-            if (!ok)
-                return;
-            let payload = JSON.parse(imports.byteArray.toString(contents));
-            if (Array.isArray(payload.windows) && payload.windows.length) {
-                this._windows = payload.windows
+            try {
+                let [ok, contents] = file.load_contents_finish(result);
+                if (!ok)
+                    return;
+                let payload = JSON.parse(imports.byteArray.toString(contents));
+                if (!Array.isArray(payload.windows) || !payload.windows.length)
+                    return;
+                let windows = payload.windows
                     .filter(window => Number.isFinite(Number(window.durationMinutes)) &&
                         Number.isFinite(Number(window.usedPercent)) &&
                         Number.isFinite(Number(window.resetsAt)))
                     .sort((a, b) => a.durationMinutes - b.durationMinutes)
                     .slice(0, 2);
-                this._updatedAt = Number(payload.updatedAt) || 0;
-                if (this._windows.length)
+                if (!windows.length)
+                    return;
+                if (!this._windows.length) {
+                    this._windows = windows;
+                    this._updatedAt = Number(payload.updatedAt) || 0;
                     this._error = "stale";
-            }
-        } catch (e) {}
+                    this._updateDisplay();
+                }
+            } catch (e) {}
+        });
     }
 
     _saveCachedWindows() {
@@ -261,8 +267,8 @@ class ChatGPTLimitsApplet extends Applet.TextIconApplet {
                 updatedAt: this._updatedAt,
                 windows: this._windows
             });
-            Gio.File.new_for_path(path).replace_contents(payload, null,
-                false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
+            Gio.File.new_for_path(path).replace_contents_async(payload, null,
+                false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, () => {});
         } catch (e) {}
     }
 
