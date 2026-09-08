@@ -23,6 +23,8 @@ class InstallationPaths(SettingsWidget):
         self._process = None
         self._timeout = 0
         self._closed = False
+        self._click_gesture = None
+        self._click_handler = 0
         self.entries = {}
         self.content_widget = Gtk.Grid(column_spacing=16, row_spacing=8)
         self.pack_start(self.content_widget, False, False, 0)
@@ -48,8 +50,41 @@ class InstallationPaths(SettingsWidget):
         self.recheck_button.connect("clicked", self.recheck)
         footer.pack_end(self.recheck_button, False, False, 0)
         self.pack_start(footer, False, False, 0)
+        self.connect("hierarchy-changed", self._hierarchy_changed)
         self.connect("destroy", self._destroyed)
         self.recheck()
+
+    def _hierarchy_changed(self, *_args):
+        self._disconnect_click_gesture()
+        window = self.get_toplevel()
+        if self._closed or not isinstance(window, Gtk.Window):
+            return
+        # Capture before child controls consume clicks, including non-focusable
+        # labels and empty areas. Leave the event available to its normal target.
+        self._click_gesture = Gtk.GestureMultiPress.new(window)
+        self._click_gesture.set_button(0)
+        self._click_gesture.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
+        self._click_handler = self._click_gesture.connect("pressed", self._window_pressed)
+
+    def _window_pressed(self, gesture, _count, x, y):
+        window = gesture.get_widget()
+        entry = window.get_focus()
+        if self._closed or entry not in self.entries.values():
+            return
+        position = entry.translate_coordinates(window, 0, 0)
+        if position is None:
+            return
+        left, top = position
+        if not (left <= x < left + entry.get_allocated_width() and top <= y < top + entry.get_allocated_height()):
+            window.set_focus(None)
+
+    def _disconnect_click_gesture(self):
+        if self._click_gesture is not None:
+            self._click_gesture.disconnect(self._click_handler)
+            self._click_gesture.set_propagation_phase(Gtk.PropagationPhase.NONE)
+            self._click_gesture.reset()
+            self._click_gesture = None
+            self._click_handler = 0
 
     def _focus_changed(self, _entry, _event, key, focused):
         self._set_placeholder(key, focused=focused)
@@ -112,6 +147,7 @@ class InstallationPaths(SettingsWidget):
 
     def _destroyed(self, *_args):
         self._closed = True
+        self._disconnect_click_gesture()
         if self._timeout:
             GLib.source_remove(self._timeout)
             self._timeout = 0
