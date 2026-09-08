@@ -1,3 +1,6 @@
+### v16.5.1~20260908
+  * Avoids synchronous cover image loading.
+
 ### v16.5.0~20260908
   * Improves MPRIS player control responsiveness.
   * Stops hidden seeker position polling.
