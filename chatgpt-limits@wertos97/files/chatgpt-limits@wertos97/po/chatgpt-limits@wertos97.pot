@@ -1,0 +1,372 @@
+# CHATGPT LIMITS
+# This file is put in the public domain.
+# wertos97, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: chatgpt-limits@wertos97 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-09-08 19:00+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:115
+msgid "ChatGPT limits"
+msgstr ""
+
+#. applet.js:144
+msgid "Refresh"
+msgstr ""
+
+#. applet.js:438
+#, javascript-format
+msgid "%d d"
+msgstr ""
+
+#. applet.js:440
+#, javascript-format
+msgid "%d h"
+msgstr ""
+
+#. applet.js:441 applet.js:465
+#, javascript-format
+msgid "%d min"
+msgstr ""
+
+#. applet.js:462
+#, javascript-format
+msgid "%d d %d h"
+msgstr ""
+
+#. applet.js:464
+#, javascript-format
+msgid "%d h %d min"
+msgstr ""
+
+#. applet.js:470
+msgid "Sign in with Codex CLI, then refresh."
+msgstr ""
+
+#. applet.js:471
+msgid "Codex CLI was not found."
+msgstr ""
+
+#. applet.js:472
+msgid "Reading limits timed out."
+msgstr ""
+
+#. applet.js:473
+msgid "No supported usage limits were returned."
+msgstr ""
+
+#. applet.js:474
+msgid "Showing last saved data."
+msgstr ""
+
+#. applet.js:475
+msgid "Could not read ChatGPT limits."
+msgstr ""
+
+#. applet.js:758 applet.js:808
+msgid "Refreshing..."
+msgstr ""
+
+#. applet.js:759
+msgid "Waiting for usage data..."
+msgstr ""
+
+#. applet.js:774
+msgid "ChatGPT usage"
+msgstr ""
+
+#. applet.js:790
+#, javascript-format
+msgid "%d%% left"
+msgstr ""
+
+#. applet.js:791
+#, javascript-format
+msgid "Reset in %s"
+msgstr ""
+
+#. applet.js:793
+#, javascript-format
+msgid "Resets at %s"
+msgstr ""
+
+#. applet.js:797
+#, javascript-format
+msgid "%s: %d%% left, resets in %s (%s)"
+msgstr ""
+
+#. applet.js:811 applet.js:813
+#, javascript-format
+msgid "Updated at %s"
+msgstr ""
+
+#. metadata.json->description
+msgid "Read-only ChatGPT and Codex remaining limits and reset countdowns"
+msgstr ""
+
+#. metadata.json->name
+msgid "ChatGPT Limits"
+msgstr ""
+
+#. settings-schema.json->backend_header->description
+msgid "Backend"
+msgstr ""
+
+#. settings-schema.json->codex_path->description
+msgid "Codex CLI path"
+msgstr ""
+
+#. settings-schema.json->codex_path->tooltip
+msgid ""
+"The applet only runs account/rateLimits/read and never reads credential "
+"files."
+msgstr ""
+
+#. settings-schema.json->refresh_minutes->units
+msgid "min"
+msgstr ""
+
+#. settings-schema.json->refresh_minutes->description
+msgid "Refresh interval"
+msgstr ""
+
+#. settings-schema.json->panel_bars_header->description
+msgid "Panel bars"
+msgstr ""
+
+#. settings-schema.json->panel_show_q5->description
+msgid "Show 5h quota bar"
+msgstr ""
+
+#. settings-schema.json->panel_show_t5->description
+msgid "Show 5h time bar"
+msgstr ""
+
+#. settings-schema.json->panel_show_q7->description
+msgid "Show 7d quota bar"
+msgstr ""
+
+#. settings-schema.json->panel_show_t7->description
+msgid "Show 7d time bar"
+msgstr ""
+
+#. settings-schema.json->panel_bar_order->description
+msgid "Bar order"
+msgstr ""
+
+#. settings-schema.json->panel_bar_order->tooltip
+msgid ""
+"Comma-separated bar order. Tokens: q5 5h quota, t5 5h time, q7 7d quota, t7 "
+"7d time."
+msgstr ""
+
+#. settings-schema.json->panel_appearance_header->description
+msgid "Panel appearance"
+msgstr ""
+
+#. settings-schema.json->bar_width->units
+#. settings-schema.json->bar_gap->units
+#. settings-schema.json->bar_radius->units
+#. settings-schema.json->bar_margin->units
+#. settings-schema.json->bar_vertical_margin->units
+#. settings-schema.json->panel_outer_margin->units
+#. settings-schema.json->popup_width->units
+#. settings-schema.json->popup_bar_height->units
+#. settings-schema.json->popup_card_padding->units
+#. settings-schema.json->popup_card_radius->units
+#. settings-schema.json->popup_card_spacing->units
+msgid "px"
+msgstr ""
+
+#. settings-schema.json->bar_width->description
+msgid "Bar width"
+msgstr ""
+
+#. settings-schema.json->bar_gap->description
+msgid "Gap between bars"
+msgstr ""
+
+#. settings-schema.json->bar_radius->description
+msgid "Bar corner radius"
+msgstr ""
+
+#. settings-schema.json->bar_margin->description
+msgid "Horizontal margin inside the applet"
+msgstr ""
+
+#. settings-schema.json->bar_vertical_margin->description
+msgid "Vertical margin around bars"
+msgstr ""
+
+#. settings-schema.json->panel_outer_margin->description
+msgid "Margin between bars and neighboring applets"
+msgstr ""
+
+#. settings-schema.json->panel_font_family->description
+msgid "Font inside panel bars"
+msgstr ""
+
+#. settings-schema.json->panel_font_size->units
+msgid "pt"
+msgstr ""
+
+#. settings-schema.json->panel_font_size->description
+msgid "Text size inside bars"
+msgstr ""
+
+#. settings-schema.json->panel_bold_text->description
+msgid "Bold text inside panel bars"
+msgstr ""
+
+#. settings-schema.json->text_rotation->description
+msgid "Text direction inside bars"
+msgstr ""
+
+#. settings-schema.json->text_rotation->options
+msgid "Bottom to top"
+msgstr ""
+
+#. settings-schema.json->text_rotation->options
+msgid "Top to bottom"
+msgstr ""
+
+#. settings-schema.json->show_quota_text->description
+msgid "Show percentage inside the quota bar"
+msgstr ""
+
+#. settings-schema.json->show_time_text->description
+msgid "Show countdown inside the time bar"
+msgstr ""
+
+#. settings-schema.json->threshold_header->description
+msgid "Quota thresholds"
+msgstr ""
+
+#. settings-schema.json->critical_threshold->units
+#. settings-schema.json->warning_threshold->units
+msgid "%"
+msgstr ""
+
+#. settings-schema.json->critical_threshold->description
+msgid "Critical color at or below"
+msgstr ""
+
+#. settings-schema.json->warning_threshold->description
+msgid "Warning color at or below"
+msgstr ""
+
+#. settings-schema.json->color_header->description
+msgid "Colors"
+msgstr ""
+
+#. settings-schema.json->theme_preset->description
+msgid "Color theme preset"
+msgstr ""
+
+#. settings-schema.json->theme_preset->tooltip
+msgid ""
+"Preset overrides individual colors below. Use Custom to edit colors manually."
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "Dark Blue"
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "Dark Green"
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "Dark Violet"
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "Light Gray"
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "Light Sand"
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "High Contrast"
+msgstr ""
+
+#. settings-schema.json->color_good->description
+msgid "Healthy remaining quota"
+msgstr ""
+
+#. settings-schema.json->color_warning->description
+msgid "Warning remaining quota"
+msgstr ""
+
+#. settings-schema.json->color_critical->description
+msgid "Critical remaining quota"
+msgstr ""
+
+#. settings-schema.json->color_time->description
+msgid "Cycle time bar"
+msgstr ""
+
+#. settings-schema.json->color_empty->description
+msgid "Unfilled bar area"
+msgstr ""
+
+#. settings-schema.json->color_panel_text->description
+msgid "Text inside panel bars"
+msgstr ""
+
+#. settings-schema.json->popup_header->description
+msgid "Popup"
+msgstr ""
+
+#. settings-schema.json->popup_show_5h->description
+msgid "Show 5h card"
+msgstr ""
+
+#. settings-schema.json->popup_show_7d->description
+msgid "Show 7d card"
+msgstr ""
+
+#. settings-schema.json->popup_width->description
+msgid "Content width"
+msgstr ""
+
+#. settings-schema.json->popup_bar_height->description
+msgid "Progress bar height"
+msgstr ""
+
+#. settings-schema.json->popup_card_padding->description
+msgid "Card padding"
+msgstr ""
+
+#. settings-schema.json->popup_card_radius->description
+msgid "Card corner radius"
+msgstr ""
+
+#. settings-schema.json->popup_card_spacing->description
+msgid "Space between cards"
+msgstr ""
+
+#. settings-schema.json->popup_card_color->description
+msgid "Card background"
+msgstr ""
+
+#. settings-schema.json->popup_track_color->description
+msgid "Progress bar background"
+msgstr ""
+
+#. settings-schema.json->popup_text_color->description
+msgid "Popup text"
+msgstr ""

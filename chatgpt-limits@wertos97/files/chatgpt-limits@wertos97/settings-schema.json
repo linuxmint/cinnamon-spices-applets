@@ -1,0 +1,292 @@
+{
+    "backend_header": {
+        "type": "header",
+        "description": "Backend"
+    },
+    "codex_path": {
+        "type": "entry",
+        "default": "~/.local/bin/codex",
+        "description": "Codex CLI path",
+        "tooltip": "The applet only runs account/rateLimits/read and never reads credential files."
+    },
+    "refresh_minutes": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "units": "min",
+        "description": "Refresh interval"
+    },
+    "panel_bars_header": {
+        "type": "header",
+        "description": "Panel bars"
+    },
+    "panel_show_q5": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show 5h quota bar"
+    },
+    "panel_show_t5": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show 5h time bar"
+    },
+    "panel_show_q7": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Show 7d quota bar"
+    },
+    "panel_show_t7": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Show 7d time bar"
+    },
+    "panel_bar_order": {
+        "type": "entry",
+        "default": "q5,t5,q7,t7",
+        "description": "Bar order",
+        "tooltip": "Comma-separated bar order. Tokens: q5 5h quota, t5 5h time, q7 7d quota, t7 7d time."
+    },
+    "panel_appearance_header": {
+        "type": "header",
+        "description": "Panel appearance"
+    },
+    "bar_width": {
+        "type": "spinbutton",
+        "default": 16,
+        "min": 8,
+        "max": 32,
+        "step": 1,
+        "units": "px",
+        "description": "Bar width"
+    },
+    "bar_gap": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 0,
+        "max": 16,
+        "step": 1,
+        "units": "px",
+        "description": "Gap between bars"
+    },
+    "bar_radius": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "units": "px",
+        "description": "Bar corner radius"
+    },
+    "bar_margin": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "units": "px",
+        "description": "Horizontal margin inside the applet"
+    },
+    "bar_vertical_margin": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "units": "px",
+        "description": "Vertical margin around bars"
+    },
+    "panel_outer_margin": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0,
+        "max": 16,
+        "step": 1,
+        "units": "px",
+        "description": "Margin between bars and neighboring applets"
+    },
+    "panel_font_family": {
+        "type": "fontchooser",
+        "default": "Sans 8",
+        "description": "Font inside panel bars"
+    },
+    "panel_font_size": {
+        "type": "spinbutton",
+        "default": 8,
+        "min": 6,
+        "max": 14,
+        "step": 1,
+        "units": "pt",
+        "description": "Text size inside bars"
+    },
+    "panel_bold_text": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Bold text inside panel bars"
+    },
+    "text_rotation": {
+        "type": "combobox",
+        "default": "left",
+        "description": "Text direction inside bars",
+        "options": {
+            "Bottom to top": "left",
+            "Top to bottom": "right"
+        }
+    },
+    "show_quota_text": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show percentage inside the quota bar"
+    },
+    "show_time_text": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show countdown inside the time bar"
+    },
+    "threshold_header": {
+        "type": "header",
+        "description": "Quota thresholds"
+    },
+    "critical_threshold": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 1,
+        "max": 90,
+        "step": 1,
+        "units": "%",
+        "description": "Critical color at or below"
+    },
+    "warning_threshold": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 1,
+        "max": 99,
+        "step": 1,
+        "units": "%",
+        "description": "Warning color at or below"
+    },
+    "color_header": {
+        "type": "header",
+        "description": "Colors"
+    },
+    "theme_preset": {
+        "type": "combobox",
+        "default": "dark_blue",
+        "description": "Color theme preset",
+        "tooltip": "Preset overrides individual colors below. Use Custom to edit colors manually.",
+        "options": {
+            "Custom": "custom",
+            "Dark Blue": "dark_blue",
+            "Dark Green": "dark_green",
+            "Dark Violet": "dark_violet",
+            "Light Gray": "light_gray",
+            "Light Sand": "light_sand",
+            "High Contrast": "high_contrast"
+        }
+    },
+    "color_good": {
+        "type": "colorchooser",
+        "default": "#236b8f",
+        "description": "Healthy remaining quota"
+    },
+    "color_warning": {
+        "type": "colorchooser",
+        "default": "#996417",
+        "description": "Warning remaining quota"
+    },
+    "color_critical": {
+        "type": "colorchooser",
+        "default": "#9c3036",
+        "description": "Critical remaining quota"
+    },
+    "color_time": {
+        "type": "colorchooser",
+        "default": "#6654a3",
+        "description": "Cycle time bar"
+    },
+    "color_empty": {
+        "type": "colorchooser",
+        "default": "#5e5e5e",
+        "description": "Unfilled bar area"
+    },
+    "color_panel_text": {
+        "type": "colorchooser",
+        "default": "#ffffff",
+        "description": "Text inside panel bars"
+    },
+    "popup_header": {
+        "type": "header",
+        "description": "Popup"
+    },
+    "popup_show_5h": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show 5h card"
+    },
+    "popup_show_7d": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show 7d card"
+    },
+    "popup_width": {
+        "type": "spinbutton",
+        "default": 260,
+        "min": 160,
+        "max": 500,
+        "step": 10,
+        "units": "px",
+        "description": "Content width"
+    },
+    "popup_bar_height": {
+        "type": "spinbutton",
+        "default": 7,
+        "min": 2,
+        "max": 24,
+        "step": 1,
+        "units": "px",
+        "description": "Progress bar height"
+    },
+    "popup_card_padding": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 2,
+        "max": 24,
+        "step": 1,
+        "units": "px",
+        "description": "Card padding"
+    },
+    "popup_card_radius": {
+        "type": "spinbutton",
+        "default": 8,
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "units": "px",
+        "description": "Card corner radius"
+    },
+    "popup_card_spacing": {
+        "type": "spinbutton",
+        "default": 8,
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "units": "px",
+        "description": "Space between cards"
+    },
+    "popup_card_color": {
+        "type": "colorchooser",
+        "default": "#3a3a3a",
+        "description": "Card background"
+    },
+    "popup_track_color": {
+        "type": "colorchooser",
+        "default": "#5e5e5e",
+        "description": "Progress bar background"
+    },
+    "popup_text_color": {
+        "type": "colorchooser",
+        "default": "#f4f7fb",
+        "description": "Popup text"
+    }
+}
