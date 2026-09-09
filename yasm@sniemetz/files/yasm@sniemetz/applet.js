@@ -796,7 +796,8 @@ class YasmApplet extends Applet.Applet {
                 : data.disk.dfDisks;
               if (dfDisks.length > 0) {
                 const diskRates   = data.diskRates || [];
-                const nvmeTemps   = DiskMetric.readNvmeTemps(fileutil);
+                DiskMetric.maybeRefreshNvmeTemps(fileutil);
+                const nvmeTemps   = DiskMetric.getNvmeTemps();
                 const parentRates = diskRates.filter(r => DiskMetric.parentDevice(r.name) === r.name);
                 const totalBps    = parentRates.reduce((sum, r) => sum + r.readBytesPerSec + r.writeBytesPerSec, 0);
                 s.label.set_text(this._buildText('disk', DiskMetric.formatPanel(dfDisks, diskRates)));
