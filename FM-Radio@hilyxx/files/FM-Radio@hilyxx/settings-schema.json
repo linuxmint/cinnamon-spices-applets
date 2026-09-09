@@ -36,8 +36,11 @@
             "keys": [
                 "search_keyword",
                 "search_button",
-                "search_results",
-                "clear_button"
+                "clear_button",
+                "msg_empty_search",
+                "msg_no_results",
+                "search_results_list",
+                "add_selected_button"
             ]
         },
         "section_list": {
@@ -91,18 +94,46 @@
         "description": "Launch search",
         "callback": "_onSearchClicked"
     },
-    "search_results": {
-        "type": "textview",
-        "description": "Search results (Copy the URL and add it to your list below):",
-        "default": "Results will be displayed here..."
-    },
     "clear_button": {
         "type": "button",
         "description": "Clear results",
         "callback": "_onClearClicked"
     },
+    "search_warning": {
+        "type": "generic",
+        "default": "none"
+    },
+    "msg_empty_search": {
+        "type": "label",
+        "description": "Please enter a radio station name to search for.",
+        "dependency": "search_warning=empty"
+    },
+    "msg_no_results": {
+        "type": "label",
+        "description": "No stations found for this search.",
+        "dependency": "search_warning=not_found"
+    },
+    "search_results_list": {
+        "type": "list",
+        "description": "Search results",
+        "height": 230,
+        "show-buttons": false,
+        "columns": [
+            {"id": "select", "title": "➕", "type": "boolean", "default": false, "align": 0.5},
+            {"id": "name", "title": "📻 Station", "type": "string", "expand-width": true},
+            {"id": "quality", "title": "🎶 Quality", "type": "string"},
+            {"id": "url", "title": "🌐 Stream URL", "type": "string", "expand-width": true}
+        ],
+        "default": []
+    },
+    "add_selected_button": {
+        "type": "button",
+        "description": "Add selected stations to my list",
+        "callback": "_onAddSelectedClicked"
+    },
     "custom_stations": {
         "type": "list",
+        "height": 230,
         "description": "Custom radio stations",
         "columns": [
             {"id": "name", "title": "Station name", "type": "string"},
@@ -129,7 +160,7 @@
     },
     "info1":{
         "type":"label",
-        "description":"\nTo create a custom image for a radio station:\n• Create an image of any format (png, jpeg, or svg) with a square 'cover' style size (e.g., 300x300).\n• Station images are stored by default in the applet's image folder, and the path is /images/yourcover.png. For images located in another folder, apply the same process and adapt the path accordingly.\n• The easiest way is to copy the desired image and paste it into the provided field; this will directly paste the image path.\n"
+        "description":"\nTo create a custom image for a radio station:\n\n• Create an image of any format (png, jpeg, or svg) with a square 'cover' style size (e.g., 300x300).\n\n• Station images are stored by default in the applet's image folder, and the path is /images/yourcover.png. For images located in another folder, apply the same process and adapt the path accordingly.\n\n• The easiest way is to copy the desired image and paste it into the provided field; this will directly paste the image path.\n"
     },
     "info2":{
         "type":"label",
@@ -145,7 +176,7 @@
         "select-dir": true,
         "default": "",
         "description": "Custom recording folder",
-        "tooltip": "Leave empty to use the default Music folder."
+        "tooltip": "Select the directory where your audio recordings will be saved."
     },
     "reset_folder_button": {
         "type": "button",
@@ -171,5 +202,9 @@
         "type": "button",
         "description": "Restore stations from the selected file",
         "callback": "_onImportClicked"
+    },
+    "search_full_data": {
+        "type": "generic",
+        "default": []
     }
 }

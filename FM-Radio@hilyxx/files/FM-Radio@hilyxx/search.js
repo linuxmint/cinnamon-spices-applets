@@ -35,17 +35,40 @@ function findStations(keyword, callback) {
                 let formattedText = "";
                 let maxResults = Math.min(json.length, 20);
                 
-                if (maxResults === 0) {
-                    formattedText = _("No stations found for this keyword.");
-                } else {
+                let listResults = [];
+                let fullData = [];
+
+                if (maxResults > 0) {
                     for (let i = 0; i < maxResults; i++) {
-                        formattedText += "Nom : " + json[i].name.trim() + "\n";
-                        formattedText += "URL : " + json[i].url_resolved + "\n";
-                        formattedText += "----------------------------------------\n";
+                        let originalName = json[i].name.trim() || _("Unknown Station");
+                        let originalUrl = json[i].url_resolved;
+                        
+                        let codec = json[i].codec || "";
+                        let bitrate = json[i].bitrate ? json[i].bitrate + " kbps" : "";
+                        let quality = (codec + " " + bitrate).trim();
+
+                        let displayName = originalName;
+                        const MAX_NAME_LENGTH = 65;
+                        if (displayName.length > MAX_NAME_LENGTH) {
+                            displayName = displayName.substring(0, MAX_NAME_LENGTH - 3) + "...";
+                        }
+
+                        fullData.push({
+                            name: originalName,
+                            url: originalUrl
+                        });
+
+                        listResults.push({
+                            "select": false,
+                            "name": displayName,
+                            "quality": quality,
+                            "url": originalUrl,
+                            "pic": ""
+                        });
                     }
                 }
                 
-                if (callback) callback(formattedText);
+                if (callback) callback(listResults, fullData);
 
             } catch (e) {
                 global.logError("FM Radio: Error Reading JSON : " + e);

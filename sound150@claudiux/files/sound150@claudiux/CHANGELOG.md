@@ -1,3 +1,10 @@
+### v16.5.1~20260908
+  * Avoids synchronous cover image loading.
+
+### v16.5.0~20260908
+  * Improves MPRIS player control responsiveness.
+  * Stops hidden seeker position polling.
+
 ### v16.4.3~20260705
   * Fixes some warnings when a player is first added.
 
