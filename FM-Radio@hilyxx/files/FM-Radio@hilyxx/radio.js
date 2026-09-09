@@ -140,15 +140,36 @@ const RadioPlayer = class RadioPlayer {
     }
 
     _initPipeline() {
-        if (this.playbin) return;
+        if (this.playbin && this.sink) return;
 
-        Gst.init(null);
+        Gst.init([]);
+        
         this.playbin = Gst.ElementFactory.make("playbin", "fmradio");
-        this.playbin.set_property("uri", this.channel.getLink());
-        this.sink = Gst.ElementFactory.make("pulsesink", "sink");
+        
+        // If playbin is null, gst-plugins-base is missing
+        if (!this.playbin) {
+            if (this.onFatalError) this.onFatalError();
+            return;
+        }
 
-        this.sink.set_property("client-name", CLIENT_NAME);
-        this.playbin.set_property("audio-sink", this.sink);
+        this.playbin.set_property("uri", this.channel.getLink());
+        
+        this.sink = Gst.ElementFactory.make("pulsesink", "sink");
+        if (this.sink) {
+            this.sink.set_property("client-name", CLIENT_NAME);
+        } else {
+            this.sink = Gst.ElementFactory.make("autoaudiosink", "sink");
+        }
+
+        // If the audio sink is null, gst-plugins-good is missing
+        if (this.sink) {
+            this.playbin.set_property("audio-sink", this.sink);
+        } else {
+            this.playbin = null;
+            if (this.onFatalError) this.onFatalError();
+            return;
+        }
+
         this.playbin.volume = this.volume;
 
         let bus = this.playbin.get_bus();
@@ -161,12 +182,22 @@ const RadioPlayer = class RadioPlayer {
     play() {
         this._clearRetry();
         this._initPipeline();
+
+        if (!this.playbin || !this.sink) {
+            this.playing = false;
+            return;
+        }
+
         this.playbin.set_state(Gst.State.PLAYING);
         this.playing = true;
     }
 
     setOnError(onError) {
         this.onError = onError;
+    }
+
+    setOnFatalError(onFatalError) {
+        this.onFatalError = onFatalError;
     }
 
     setOnTagChanged(onTagChanged) {

@@ -396,6 +396,21 @@ class FMRadioApplet extends Applet.IconApplet {
             });
         });
 
+        this.player.setOnFatalError(() => {
+            GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+                this.setPlayingState(false);
+                
+                let errorMsg = _("Multimedia codecs are missing.\n\nPlease install GStreamer plugins (good, base, bad, ugly) for your distribution to use the radio.");
+                this._showNotification(_("FM Radio Error"), errorMsg);
+                
+                if (this.statusLabel) {
+                    this.statusLabel.set_text(_("Missing Codecs"));
+                }
+                
+                return GLib.SOURCE_REMOVE; 
+            });
+        });
+
         this.player.setOnTagChanged(() => {
             GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
                 let title = this.player.getTitle();
