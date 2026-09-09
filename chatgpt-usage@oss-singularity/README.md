@@ -3,7 +3,7 @@
 An independent OSS Singularity applet showing ChatGPT Work and Codex limits,
 reset times, credits and observed consumption on horizontal or vertical panels.
 
-Targets Cinnamon 6.6, tested on 6.6.9. Requires Python 3.10 or newer and a signed-in Codex CLI or a ChatGPT desktop
+Targets Cinnamon 5.8 or newer (declared series: 5.8, 6.0, 6.2, 6.4 and 6.6); native validation was performed on 6.6.9. Requires Python 3.10 or newer and a signed-in Codex CLI or a ChatGPT desktop
 package containing `resources/codex`. The applet never installs a backend or
 reads its credentials. Both setup and settings offer optional codex-cli and
 ChatGPT-app paths, automatic path hints and Recheck. The CLI is preferred;

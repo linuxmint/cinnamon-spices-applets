@@ -382,6 +382,36 @@ function activityValue(bucket) {
     return Number.isFinite(value) ? Math.max(0, value) : null;
 }
 
+const ACTIVITY_BAR_EMPTY_HEIGHT = 2;
+const ACTIVITY_BAR_MIN_HEIGHT = 8;
+const ACTIVITY_BAR_MAX_HEIGHT = 26;
+
+function activityBarHeight(bar, peakPercent) {
+    if (
+        !bar || !bar.known || !Number.isFinite(bar.consumedPercent) ||
+        bar.consumedPercent <= 0 || !Number.isFinite(peakPercent) ||
+        peakPercent <= 0
+    ) {
+        return ACTIVITY_BAR_EMPTY_HEIGHT;
+    }
+
+    // Estimated values intentionally retain the smallest visible positive bar.
+    // Measured values use the full pixel range so nearby values such as 1% and
+    // 2% remain distinguishable even when the chart peak is 14%.
+    const fraction = bar.estimated
+        ? 0
+        : clamp(bar.consumedPercent / peakPercent, 0, 1);
+    return Math.min(
+        ACTIVITY_BAR_MAX_HEIGHT,
+        Math.max(
+            ACTIVITY_BAR_MIN_HEIGHT,
+            ACTIVITY_BAR_MIN_HEIGHT + Math.round(
+                fraction * (ACTIVITY_BAR_MAX_HEIGHT - ACTIVITY_BAR_MIN_HEIGHT)
+            )
+        )
+    );
+}
+
 function buildSharedActivityValues(windows, shortToWeeklyScale = 0.5) {
     const source = Array.from(windows || []);
     if (source.length === 0) return [];
@@ -756,6 +786,7 @@ module.exports = {
     formatResetCountdownTooltip,
     buildQuotaIndicator,
     buildActivityChart,
+    activityBarHeight,
     formatWholeNumber,
     parseUsageHelperError,
     hasRecentActivity,
