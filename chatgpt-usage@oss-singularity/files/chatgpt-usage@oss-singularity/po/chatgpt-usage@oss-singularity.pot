@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ChatGPT Usage Monitor 1.0.3\n"
+"Project-Id-Version: ChatGPT Usage Monitor 1.0.4\n"
 "Report-Msgid-Bugs-To: https://github.com/oss-singularity/cinnamon-chatgpt-usage/issues\n"
 "POT-Creation-Date: 2026-09-08 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -72,41 +72,6 @@ msgstr ""
 
 #: usage-format.js
 #, javascript-format
-msgid ""
-"%s\n"
-"%s consumed"
-msgstr ""
-
-#: usage-format.js
-#, javascript-format
-msgid ""
-"%s\n"
-"%s consumed · estimated"
-msgstr ""
-
-#: usage-format.js
-#, javascript-format
-msgid ""
-"%s\n"
-"%s consumed · partial bucket"
-msgstr ""
-
-#: usage-format.js
-#, javascript-format
-msgid ""
-"%s\n"
-"%s consumed · partial bucket · estimated"
-msgstr ""
-
-#: usage-format.js
-#, javascript-format
-msgid ""
-"%s\n"
-"No observed data"
-msgstr ""
-
-#: usage-format.js
-#, javascript-format
 msgid "%s %s"
 msgstr ""
 
@@ -147,6 +112,16 @@ msgstr ""
 
 #: usage-format.js
 #, javascript-format
+msgid "%s consumed"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s credits consumed"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
 msgid "%s has %s remaining."
 msgstr ""
 
@@ -163,6 +138,21 @@ msgstr ""
 #: applet.js
 #, javascript-format
 msgid "%s · %s usage"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s · estimated"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s · partial bucket"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s · partial bucket · estimated"
 msgstr ""
 
 #: usage-format.js
@@ -280,6 +270,10 @@ msgstr ""
 
 #: settings-schema.json.js
 msgid "7d warning at or below"
+msgstr ""
+
+#: usage-format.js
+msgid "<1%"
 msgstr ""
 
 #: metadata.json.js
@@ -419,6 +413,10 @@ msgstr ""
 
 #: settings-schema.json.js
 msgid "Colors"
+msgstr ""
+
+#: applet.js
+msgid "Consumed:  "
 msgstr ""
 
 #: applet.js path_settings.py
@@ -576,6 +574,10 @@ msgstr ""
 
 #: applet.js path_settings.py
 msgid "No automatic path found"
+msgstr ""
+
+#: usage-format.js
+msgid "No observed data"
 msgstr ""
 
 #: usage-format.js

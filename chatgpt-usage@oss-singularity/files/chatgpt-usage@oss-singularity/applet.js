@@ -54,6 +54,9 @@ const POPUP_RIGHT_INSET = 17;
 const POPUP_CHART_RIGHT_INSET = 39;
 const POPUP_NESTED_CHART_LEFT_SHIFT = 5;
 const POPUP_NESTED_CHART_RIGHT_BALANCE = 11;
+const ACTIVITY_CHART_BAR_MAX_HEIGHT = 26;
+const CREDIT_CONSUMPTION_BASE_FONT_SIZE = 102;
+const CREDIT_CONSUMPTION_MIN_FONT_SIZE = 54;
 // The non-square arrow glyph shifts inside its actor when Cinnamon rotates it.
 const POPUP_EXPANDED_RIGHT_INSET = 10;
 const QUOTA_RING_SIZE = 52;
@@ -668,7 +671,7 @@ class ChatGptUsageApplet extends Applet.Applet {
         }
 
         const value = new St.Label({
-            text: UsageFormat.formatPercent(summary.remainingPercent),
+            text: UsageFormat.formatPanelPercent(summary.remainingPercent),
             x_align: Clutter.ActorAlign.CENTER,
             y_align: Clutter.ActorAlign.CENTER,
             style: `min-width: 32px; font-size: ${fontSize}%; color: ${this._panelRemainingColor(summary.remainingPercent)};`
@@ -693,7 +696,12 @@ class ChatGptUsageApplet extends Applet.Applet {
                     const duration = UsageFormat.formatDuration(window.durationMinutes);
                     const prefix = showLimitLabels ? `${limit.label || limit.id} ` : "";
                     values.push(
-                        _f("%s%s: %s remaining", prefix, duration, UsageFormat.formatPercent(window.remainingPercent))
+                        _f(
+                            "%s%s: %s remaining",
+                            prefix,
+                            duration,
+                            UsageFormat.formatPercent(window.remainingPercent, this.criticalRemaining)
+                        )
                     );
                 }
             }
@@ -701,7 +709,11 @@ class ChatGptUsageApplet extends Applet.Applet {
         } else if (summaries.length > 0) {
             text = summaries.map(summary => {
                 const duration = UsageFormat.formatDuration(summary.durationMinutes);
-                return _f("%s: %s remaining", duration, UsageFormat.formatPercent(summary.remainingPercent));
+                return _f(
+                    "%s: %s remaining",
+                    duration,
+                    UsageFormat.formatPercent(summary.remainingPercent, this.criticalRemaining)
+                );
             }).join(" • ");
         }
         if (this._lastError) text += `\n${this._lastError}`;
@@ -715,6 +727,13 @@ class ChatGptUsageApplet extends Applet.Applet {
     _menuColor(alpha = 1) {
         const color = this._menuForeground();
         return `rgba(${color.red},${color.green},${color.blue},${alpha})`;
+    }
+
+    _brightenColor(value, amount = 0.26) {
+        const [valid, color] = Clutter.Color.from_string(String(value || ""));
+        if (!valid) return String(value || "");
+        const brighten = channel => Math.round(channel + (255 - channel) * amount);
+        return `rgb(${brighten(color.red)},${brighten(color.green)},${brighten(color.blue)})`;
     }
 
     _panelRemainingColor(remaining) {
@@ -1001,7 +1020,7 @@ class ChatGptUsageApplet extends Applet.Applet {
 
     _addLimitWindowItem(window) {
         const duration = UsageFormat.formatDuration(window.durationMinutes);
-        const remaining = UsageFormat.formatPercent(window.remainingPercent);
+        const remaining = UsageFormat.formatPercent(window.remainingPercent, this.criticalRemaining);
         const reset = UsageFormat.formatTimestamp(
             window.resetsAt,
             this._use24HourClock
@@ -2008,22 +2027,148 @@ class ChatGptUsageApplet extends Applet.Applet {
         return item;
     }
 
-    _emphasizedValueStyle(color, paddingLeft = 0) {
+    _emphasizedValueStyle(
+        color,
+        paddingLeft = 0,
+        fontSize = CREDIT_CONSUMPTION_BASE_FONT_SIZE
+    ) {
         return [
             `padding-left: ${paddingLeft}px`,
-            "font-size: 102%",
+            `font-size: ${fontSize}%`,
             "font-weight: bold",
             `color: ${color}`
         ].join("; ") + ";";
     }
 
+    _fitCreditConsumptionRow(
+        item,
+        row,
+        labelActor,
+        valueLabel,
+        separatorLabel,
+        expiresLabel,
+        expiryDateLabel,
+        suffixColor,
+        suffixLabelColor
+    ) {
+        let fitting = false;
+        let plotActor = null;
+        let plotAllocationId = 0;
+
+        const applyFontSize = fontSize => {
+            expiresLabel.style = this._emphasizedValueStyle(
+                suffixLabelColor || this._menuColor(1),
+                0,
+                fontSize
+            );
+            expiryDateLabel.style = this._emphasizedValueStyle(
+                suffixColor || this._menuColor(1),
+                0,
+                fontSize
+            );
+        };
+        const preferredWidth = actor => actor.get_preferred_width(-1)[1];
+        const findPlot = () => {
+            const entry = (this._activityCharts || []).find(candidate => {
+                if (candidate.nested || !candidate.chart) return false;
+                return candidate.chart.get_children().length > 0;
+            });
+            const candidate = entry ? entry.chart.get_children()[0] : null;
+            if (candidate === plotActor) return;
+            if (plotActor && plotAllocationId) plotActor.disconnect(plotAllocationId);
+            plotActor = candidate;
+            plotAllocationId = plotActor
+                ? plotActor.connect("notify::allocation", fit)
+                : 0;
+        };
+        const availableWidth = () => {
+            findPlot();
+            const rowWidth = row.get_width();
+            if (!(rowWidth > 0)) return 0;
+            if (!plotActor || !(plotActor.get_width() > 0)) {
+                const rowSize = row.get_transformed_size();
+                const scale = rowSize[0] > 0 ? rowSize[0] / rowWidth : 1;
+                return Math.max(0, rowWidth - POPUP_CHART_RIGHT_INSET / scale);
+            }
+            const [rowX] = row.get_transformed_position();
+            const [plotX] = plotActor.get_transformed_position();
+            const [plotWidth] = plotActor.get_transformed_size();
+            const [rowWidthTransformed] = row.get_transformed_size();
+            const scale = rowWidthTransformed > 0
+                ? rowWidthTransformed / rowWidth
+                : 1;
+            const width = (plotX + plotWidth - rowX) / scale;
+            return Number.isFinite(width) ? Math.max(0, Math.min(rowWidth, width)) : rowWidth;
+        };
+        const fit = () => {
+            if (fitting) return;
+            const rowWidth = row.get_width();
+            if (!(rowWidth > 0)) return;
+            fitting = true;
+            try {
+                applyFontSize(CREDIT_CONSUMPTION_BASE_FONT_SIZE);
+                const fixedWidth = preferredWidth(labelActor) +
+                    preferredWidth(valueLabel) + preferredWidth(separatorLabel);
+                const suffixWidth = preferredWidth(expiresLabel) +
+                    preferredWidth(expiryDateLabel);
+                const targetWidth = availableWidth();
+                const availableSuffixWidth = Math.max(0, targetWidth - fixedWidth);
+                const ratio = suffixWidth > 0
+                    ? Math.min(1, availableSuffixWidth / suffixWidth)
+                    : 1;
+                let fontSize = Math.max(
+                    CREDIT_CONSUMPTION_MIN_FONT_SIZE,
+                    Math.floor(CREDIT_CONSUMPTION_BASE_FONT_SIZE * ratio * 10) / 10
+                );
+                applyFontSize(fontSize);
+                while (
+                    fontSize > CREDIT_CONSUMPTION_MIN_FONT_SIZE &&
+                    preferredWidth(row) > targetWidth + 1
+                ) {
+                    fontSize = Math.max(
+                        CREDIT_CONSUMPTION_MIN_FONT_SIZE,
+                        fontSize - 1
+                    );
+                    applyFontSize(fontSize);
+                }
+            } finally {
+                fitting = false;
+            }
+        };
+
+        row.connect("notify::allocation", fit);
+        item.actor.connect("notify::allocation", fit);
+        Mainloop.idle_add(() => {
+            fit();
+            return GLib.SOURCE_REMOVE;
+        });
+    }
+
     _addCreditItems() {
         const credits = this._snapshot ? this._snapshot.credits : null;
+        const history = this._snapshot ? this._snapshot.history : null;
         let balance = credits
-            ? UsageFormat.formatWholeNumber(credits.balance)
+            ? UsageFormat.formatCreditNumber(credits.balance)
             : _("unavailable");
         if (credits && credits.unlimited) balance = "unlimited";
-        this._addCreditItem(_("Credits"), balance, true);
+        const creditConsumption = credits && !credits.unlimited && history
+            ? UsageFormat.formatCreditConsumption(history.creditPeriods)
+            : null;
+        const creditConsumptionColor = creditConsumption ? this.criticalColor : null;
+        this._addCreditItem(
+            _("Credits"),
+            balance,
+            true,
+            creditConsumption,
+            creditConsumptionColor,
+            null,
+            creditConsumption ? _("Consumed:  ") : null,
+            creditConsumptionColor,
+            Boolean(creditConsumption),
+            false,
+            Boolean(creditConsumption),
+            Boolean(creditConsumption)
+        );
         const resetDisplay = UsageFormat.buildResetCreditDisplay(
             credits,
             this._use24HourClock
@@ -2054,7 +2199,13 @@ class ChatGptUsageApplet extends Applet.Applet {
         emphasized = false,
         suffix = null,
         suffixColor = null,
-        action = null
+        action = null,
+        suffixLabel = null,
+        suffixLabelColor = null,
+        suffixEmphasized = false,
+        suffixBreathing = true,
+        suffixFitToChart = false,
+        suffixMarkup = false
     ) {
         const interactive = typeof action === "function";
         const item = new PopupMenu.PopupBaseMenuItem({
@@ -2067,6 +2218,7 @@ class ChatGptUsageApplet extends Applet.Applet {
             });
         }
         const row = new St.BoxLayout({ vertical: false });
+        let fitTargets = null;
         const labelActor = new St.Label({ text: `${label}:` });
         labelActor.style = `color: ${this._menuColor(0.68)};`;
         row.add_child(labelActor);
@@ -2087,20 +2239,41 @@ class ChatGptUsageApplet extends Applet.Applet {
                 "padding-left: 6px",
                 "padding-right: 6px",
                 "font-size: 80%",
+                "font-weight: normal",
                 `color: ${this._menuColor(0.68)}`
             ].join("; ") + ";";
             separatorLabel.translation_y = 2;
             const expiresLabel = new St.Label({
-                text: _("expires "),
-                y_align: Clutter.ActorAlign.CENTER
+                text: suffixLabel || _("expires "),
+                y_align: Clutter.ActorAlign.END
             });
-            expiresLabel.style = `color: ${this._menuColor(0.68)};`;
             const expiryDateLabel = new St.Label({
                 text: suffix,
-                y_align: Clutter.ActorAlign.CENTER
+                y_align: Clutter.ActorAlign.END
             });
-            expiryDateLabel.style = `color: ${suffixColor || this._menuColor(0.68)};`;
-            if (suffixColor === RESET_EXPIRY_CRITICAL_COLOR) {
+            if (suffixEmphasized) {
+                expiresLabel.style = this._emphasizedValueStyle(
+                    suffixLabelColor || this._menuColor(1)
+                );
+                expiryDateLabel.style = this._emphasizedValueStyle(
+                    suffixColor || this._menuColor(1)
+                );
+                expiresLabel.opacity = 255;
+                expiryDateLabel.opacity = 255;
+            } else {
+                expiresLabel.style = `color: ${suffixLabelColor || this._menuColor(0.68)};`;
+                expiryDateLabel.style = `color: ${suffixColor || this._menuColor(0.68)};`;
+            }
+            if (suffixMarkup && expiryDateLabel.clutter_text) {
+                const escapedSuffix = String(suffix)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/\x20{2}•\x20{2}/g,
+                        "&#160;&#160;<span weight=\"normal\">•</span>&#160;&#160;");
+                expiryDateLabel.clutter_text.set_markup(escapedSuffix);
+            }
+            if (suffixBreathing && suffixColor === RESET_EXPIRY_CRITICAL_COLOR) {
                 this._resetExpiryBreathingLabels.push(expiryDateLabel);
                 expiryDateLabel.connect("notify::mapped", () => {
                     if (expiryDateLabel.mapped) this._startResetExpiryBreathing();
@@ -2109,9 +2282,30 @@ class ChatGptUsageApplet extends Applet.Applet {
             row.add_child(separatorLabel);
             row.add_child(expiresLabel);
             row.add_child(expiryDateLabel);
+            if (suffixFitToChart) {
+                fitTargets = {
+                    separatorLabel,
+                    expiresLabel,
+                    expiryDateLabel
+                };
+            }
         }
-        item.addActor(row);
+        row.x_expand = true;
+        item.addActor(row, { expand: true, span: -1 });
         this.menu.addMenuItem(item);
+        if (fitTargets) {
+            this._fitCreditConsumptionRow(
+                item,
+                row,
+                labelActor,
+                valueLabel,
+                fitTargets.separatorLabel,
+                fitTargets.expiresLabel,
+                fitTargets.expiryDateLabel,
+                suffixColor,
+                suffixLabelColor
+            );
+        }
     }
 
     _resetAttemptFile() {
@@ -2417,6 +2611,17 @@ class ChatGptUsageApplet extends Applet.Applet {
         }
     }
 
+    _selectCreditHistoryWindow(windows) {
+        const source = Array.from(windows || []);
+        return source.find(window =>
+            window.id === "codex" && Number(window.durationMinutes) === 10080
+        ) || source.find(window =>
+            window.id === "codex" && Number(window.durationMinutes) === 300
+        ) || source.find(window =>
+            Number(window.durationMinutes) === 10080
+        ) || source[0] || null;
+    }
+
     _addHistoryItems() {
         const history = this._snapshot ? this._snapshot.history : null;
         if (!history || !Array.isArray(history.windows) || history.windows.length === 0) {
@@ -2429,6 +2634,13 @@ class ChatGptUsageApplet extends Applet.Applet {
 
         const visibleWindows = this._filterModelLimits(history.windows);
         if (visibleWindows.length === 0) return;
+        const creditActivityValues = UsageFormat.hasRecentActivity(
+            history.creditActivity24h,
+            "consumed"
+        ) ? history.creditActivity24h : null;
+        const creditGraphWindow = creditActivityValues
+            ? this._selectCreditHistoryWindow(visibleWindows)
+            : null;
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         this._addSectionHeading(_("Recent consumption"));
         const windowsByLimit = new Map();
@@ -2494,13 +2706,21 @@ class ChatGptUsageApplet extends Applet.Applet {
                             ? window.activity24h
                             : index === windows.length - 1
                                 ? sharedActivityValues
-                                : null
+                                : null,
+                        window === creditGraphWindow ? creditActivityValues : null
                     );
                 });
                 continue;
             }
             for (const window of windows) {
-                this._addHistoryWindow(window, history, this.menu, showLimitLabels);
+                this._addHistoryWindow(
+                    window,
+                    history,
+                    this.menu,
+                    showLimitLabels,
+                    window.activity24h,
+                    window === creditGraphWindow ? creditActivityValues : null
+                );
             }
         }
     }
@@ -2529,7 +2749,8 @@ class ChatGptUsageApplet extends Applet.Applet {
         history,
         menu,
         showLimitLabel,
-        activityValues = window.activity24h
+        activityValues = window.activity24h,
+        creditValues = null
     ) {
         const duration = UsageFormat.formatDuration(window.durationMinutes);
         const periods = window.periods || {};
@@ -2565,7 +2786,8 @@ class ChatGptUsageApplet extends Applet.Applet {
                 activityValues,
                 history.activityBucketMinutes,
                 history.activityEndAt || this._snapshot.updatedAt,
-                menu
+                menu,
+                creditValues
             );
         }
     }
@@ -2599,9 +2821,17 @@ class ChatGptUsageApplet extends Applet.Applet {
         }
     }
 
-    _addActivityChart(values, bucketMinutes, endAt, menu = this.menu) {
+    _addActivityChart(values, bucketMinutes, endAt, menu = this.menu, creditValues = null) {
         const model = UsageFormat.buildActivityChart(values);
-        if (model.bars.length === 0) return;
+        const creditModel = Array.isArray(creditValues)
+            ? UsageFormat.buildCreditActivityChart(creditValues)
+            : null;
+        const hasCreditModel = creditModel && creditModel.bars.length > 0;
+        const barCount = Math.max(
+            model.bars.length,
+            hasCreditModel ? creditModel.bars.length : 0
+        );
+        if (barCount === 0) return;
 
         const bucketLabel = UsageFormat.formatDuration(bucketMinutes);
         const peakLabel = model.knownCount > 0
@@ -2646,7 +2876,10 @@ class ChatGptUsageApplet extends Applet.Applet {
             x_expand: true
         });
         plot.style = `border-bottom: 1px solid ${this._menuColor(0.28)}; padding-top: 2px;`;
-        model.bars.forEach((bar, index) => {
+        const creditHighlightColor = this._brightenColor(this.criticalColor);
+        for (let index = 0; index < barCount; index++) {
+            const bar = model.bars[index] || null;
+            const creditBar = hasCreditModel ? creditModel.bars[index] || null : null;
             const slot = new St.Bin({
                 height: 28,
                 reactive: true,
@@ -2658,31 +2891,107 @@ class ChatGptUsageApplet extends Applet.Applet {
                 slot.style = `border-left: 1px solid ${this._menuColor(0.10)};`;
             }
 
-            const height = UsageFormat.activityBarHeight(bar, model.peakPercent);
-            let style = `background-color: ${this._menuColor(0.16)}; border-radius: 2px 2px 0 0;`;
-            if (bar.known && bar.intensity === 0) {
-                style = `background-color: ${this._menuColor(0.38)}; border-radius: 2px 2px 0 0;`;
-            } else if (bar.known) {
-                style = "background-gradient-direction: vertical; background-gradient-start: #8ed891; background-gradient-end: #5dbb73; border-radius: 2px 2px 0 0;";
+            const barWidth = barCount >= 24 ? 8 : 14;
+            const quotaHasVisibleBar = bar && bar.known &&
+                Number.isFinite(bar.consumedPercent) && bar.consumedPercent > 0;
+            const creditHasVisibleBar = creditBar && creditBar.known &&
+                Number.isFinite(creditBar.consumedPercent) && creditBar.consumedPercent > 0;
+            const quotaHeight = quotaHasVisibleBar
+                ? UsageFormat.activityBarHeight(bar, model.peakPercent)
+                : 0;
+            const creditHeight = creditHasVisibleBar
+                ? UsageFormat.activityBarHeight(creditBar, creditModel.peakPercent)
+                : 0;
+            const stackedHeight = quotaHeight + creditHeight;
+            const stackScale = stackedHeight > ACTIVITY_CHART_BAR_MAX_HEIGHT
+                ? ACTIVITY_CHART_BAR_MAX_HEIGHT / stackedHeight
+                : 1;
+            const bars = new St.BoxLayout({
+                vertical: true,
+                y_align: Clutter.ActorAlign.END
+            });
+            const addBar = (entry, peak, isCredit) => {
+                if (!entry) return;
+                if (isCredit && !creditHasVisibleBar) return;
+                if (!isCredit && creditHasVisibleBar && !quotaHasVisibleBar) return;
+                const naturalHeight = UsageFormat.activityBarHeight(entry, peak);
+                const height = hasCreditModel && creditHasVisibleBar
+                    ? Math.max(2, Math.round(naturalHeight * stackScale))
+                    : naturalHeight;
+                let style = `background-color: ${this._menuColor(0.16)}; border-radius: 2px 2px 0 0;`;
+                if (entry.known && entry.intensity === 0) {
+                    const radius = creditHasVisibleBar && quotaHasVisibleBar && !isCredit
+                        ? "0 0 2px 2px"
+                        : "2px 2px 0 0";
+                    style = `background-color: ${this._menuColor(0.38)}; border-radius: ${radius};`;
+                } else if (entry.known && isCredit) {
+                    const radius = quotaHasVisibleBar ? "2px 2px 0 0" : "2px";
+                    style = `background-gradient-direction: vertical; background-gradient-start: ${creditHighlightColor}; background-gradient-end: ${this.criticalColor}; border-radius: ${radius};`;
+                } else if (entry.known) {
+                    const radius = creditHasVisibleBar && quotaHasVisibleBar && !isCredit
+                        ? "0 0 2px 2px"
+                        : "2px 2px 0 0";
+                    style = `background-gradient-direction: vertical; background-gradient-start: #8ed891; background-gradient-end: #5dbb73; border-radius: ${radius};`;
+                }
+                const barActor = new St.Widget({ width: barWidth, height, style });
+                if (entry.partial) barActor.opacity = 155;
+                bars.add_child(barActor);
+            };
+            addBar(
+                creditBar,
+                hasCreditModel ? creditModel.peakPercent : 0,
+                true
+            );
+            addBar(bar, model.peakPercent, false);
+            slot.set_child(bars);
+            const tooltipLines = [];
+            if (bar && bar.known) {
+                tooltipLines.push(UsageFormat.formatActivityBucketTooltipLine(
+                    bar,
+                    index,
+                    barCount,
+                    bucketMinutes,
+                    endAt,
+                    this._use24HourClock
+                ));
             }
-            const barWidth = model.bars.length >= 24 ? 8 : 14;
-            const barActor = new St.Widget({ width: barWidth, height, style });
-            if (bar.partial) barActor.opacity = 155;
-            slot.set_child(barActor);
-            const tooltipText = UsageFormat.formatActivityBucketTooltip(
-                bar,
+            if (creditBar && creditBar.known) {
+                tooltipLines.push(UsageFormat.formatActivityBucketTooltipLine(
+                    creditBar,
+                    index,
+                    barCount,
+                    bucketMinutes,
+                    endAt,
+                    this._use24HourClock,
+                    "credits"
+                ));
+            }
+            const range = UsageFormat.formatActivityBucketRange(
                 index,
-                model.bars.length,
+                barCount,
                 bucketMinutes,
                 endAt,
                 this._use24HourClock
             );
+            const fallbackBar = bar || creditBar;
+            const fallbackKind = bar ? "percent" : "credits";
+            const tooltipText = tooltipLines.length > 0 && range
+                ? [range, ...tooltipLines].join("\n")
+                : UsageFormat.formatActivityBucketTooltip(
+                    fallbackBar,
+                    index,
+                    barCount,
+                    bucketMinutes,
+                    endAt,
+                    this._use24HourClock,
+                    fallbackKind
+                );
             slot.accessible_name = UsageFormat.formatAccessibleTooltip(tooltipText);
             this._activityTooltips.push(
                 this._createPositionedTooltip(slot, tooltipText)
             );
             plot.add_child(slot);
-        });
+        }
         chart.add_child(plot);
 
         const axis = new St.Widget({

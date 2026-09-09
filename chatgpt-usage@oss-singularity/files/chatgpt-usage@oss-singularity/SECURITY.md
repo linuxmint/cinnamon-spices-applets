@@ -41,10 +41,11 @@ safe synthetic reproduction when possible.
   before dispatch. Retrying requires a new confirmation and reuses that same
   request. A recognized result clears the journal; corrupt journal data
   disables redemption. Keep the same account until the attempt is resolved.
-- The normalized snapshot and available credit details stay in memory. History
-  stores only model/window keys, sample times, percentages and window reset
-  timestamps for eight days, capped at 10,000 samples. It never stores full
-  provider responses, prompts, tokens or credit balances.
+- The normalized snapshot and available reset-credit details stay in memory.
+  History stores only model/window keys, sample times, percentages, window
+  reset timestamps and sampled numeric credit balances needed to derive
+  observed credit consumption for eight days, capped at 10,000 samples. It
+  never stores full provider responses, prompts or tokens.
 - History and the unresolved-reset journal live under
   `$XDG_STATE_HOME/cinnamon-chatgpt-usage` (normally `~/.local/state/...`), in
   files created with mode `0600`. Newly created state directories use `0700`.

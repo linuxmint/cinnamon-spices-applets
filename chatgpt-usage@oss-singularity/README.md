@@ -25,11 +25,18 @@ scroll to keep actions reachable. Rings and charts stay aligned with the buttons
 when model-specific limits are hidden. English is the fallback language;
 the bundled gettext template prepares future translations.
 
-Usage history stores eight days of sampled percentages and reset timestamps.
-It reports observed changes, including incomplete periods marked with `~`, and
-cannot reconstruct consumption between samples. Its state is local to this
-desktop profile, not partitioned by account; see the full guide before switching
-accounts. Uninstalling retains settings, history and unresolved reset attempts.
+Usage history stores eight days of sampled percentages, reset timestamps and
+numeric credit balances. It reports observed quota and credit changes,
+including incomplete periods marked with `~`, and cannot reconstruct
+consumption between samples. Credit consumption is shown in the critical
+color beside the balance and as a critical-color series stacked above quota bars
+in the account 7d activity chart. The available credit balance uses one decimal
+place, and consumption values are shown as whole numbers. Remaining percentages
+below the configured critical threshold retain two decimal places (except exact
+zero, shown as `0%`). Its state is
+local to this desktop profile, not partitioned by account; see the full guide
+before switching accounts. Uninstalling retains settings, history and
+unresolved reset attempts.
 
 - [Full guide and screenshots](https://github.com/oss-singularity/cinnamon-chatgpt-usage#readme)
 - [Support and bug reports](https://github.com/oss-singularity/cinnamon-chatgpt-usage/issues)

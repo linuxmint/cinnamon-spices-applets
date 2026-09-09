@@ -111,11 +111,29 @@ function formatElapsedDuration(startSeconds, endSeconds) {
     return minutes === 0 ? _f("%sh", hours) : _f("%sh %sm", hours, minutes);
 }
 
-function formatPercent(value) {
+function formatPercent(value, preciseBelow = null) {
     const number = Number(value);
-    return Number.isFinite(number) ? _f("%s%%", Math.round(clamp(number, 0, 100))) : "--";
+    if (!Number.isFinite(number)) return "--";
+    const bounded = clamp(number, 0, 100);
+    const precisionThreshold = Number(preciseBelow);
+    if (
+        bounded > 0 &&
+        Number.isFinite(precisionThreshold) &&
+        precisionThreshold > 0 &&
+        bounded < precisionThreshold
+    ) {
+        return _f("%s%%", bounded.toFixed(2));
+    }
+    return _f("%s%%", Math.round(bounded));
 }
 
+function formatPanelPercent(value) {
+    const number = Number(value);
+    if (!Number.isFinite(number)) return "--";
+    const bounded = clamp(number, 0, 100);
+    if (bounded > 0 && bounded < 1) return _("<1%");
+    return _f("%s%%", Math.round(bounded));
+}
 function formatConsumedPercent(period) {
     if (!period || !Number.isFinite(Number(period.consumedPercent))) return "--";
     const value = Math.max(0, Number(period.consumedPercent));
@@ -123,6 +141,22 @@ function formatConsumedPercent(period) {
         ? value.toFixed(1)
         : String(Math.round(value));
     return _f("%s%s%%", period.complete === false ? "~" : "", rounded);
+}
+
+function formatConsumedCredits(period) {
+    if (!period || !Number.isFinite(Number(period.consumed))) return "--";
+    const value = Math.max(0, Number(period.consumed));
+    return String(Math.round(value));
+}
+
+function formatCreditConsumption(periods) {
+    const keys = ["24h", "12h", "4h", "1h"];
+    const hasConsumption = keys.some(key => {
+        const value = Number(periods && periods[key] && periods[key].consumed);
+        return Number.isFinite(value) && value > 0;
+    });
+    if (!hasConsumption) return null;
+    return keys.map(key => _f("%s %s", key, formatConsumedCredits(periods[key]))).join("  •  ");
 }
 
 function buildResetCountdown(window, nowSeconds = null) {
@@ -220,11 +254,11 @@ function buildQuotaIndicator(window) {
     };
 }
 
-function buildActivityChart(values) {
+function buildActivityChart(values, valueKey = "consumedPercent") {
     const source = Array.isArray(values) ? values : [];
     const bars = source.map(value => {
         const structured = value !== null && typeof value === "object";
-        const numeric = structured ? Number(value.consumedPercent) : Number(value);
+        const numeric = structured ? Number(value[valueKey]) : Number(value);
         if (value === null || value === undefined || !Number.isFinite(numeric)) {
             return {
                 known: false,
@@ -286,8 +320,11 @@ function buildActivityChart(values) {
     };
 }
 
-function formatActivityBucketTooltip(
-    bar,
+function buildCreditActivityChart(values) {
+    return buildActivityChart(values, "consumed");
+}
+
+function formatActivityBucketRange(
     index,
     bucketCount,
     bucketMinutes,
@@ -299,12 +336,12 @@ function formatActivityBucketTooltip(
     const seconds = Number(bucketMinutes) * 60;
     const endSeconds = Number(endAt);
     if (
-        !bar || !Number.isFinite(count) || count <= 0 ||
+        !Number.isFinite(count) || count <= 0 ||
         !Number.isFinite(position) || position < 0 || position >= count ||
         !Number.isFinite(seconds) || seconds <= 0 ||
         !Number.isFinite(endSeconds) || endSeconds <= 0
     ) {
-        return _("Activity details unavailable");
+        return null;
     }
 
     const bucketStart = endSeconds - ((count - position) * seconds);
@@ -313,20 +350,79 @@ function formatActivityBucketTooltip(
     const end = GLib.DateTime.new_from_unix_local(Math.floor(bucketEnd));
     const timeFormat = use24Hour === false ? "%I:%M %p" : "%H:%M";
     const sameDay = start.format("%F") === end.format("%F");
-    const range = sameDay
+    return sameDay
         ? _f("%s %s–%s", start.format("%a"), start.format(timeFormat), end.format(timeFormat))
         : _f("%s %s–%s %s", start.format("%a"), start.format(timeFormat), end.format("%a"), end.format(timeFormat));
-    if (!bar.known) return _f("%s\nNo observed data", range);
+}
 
-    const consumed = formatConsumedPercent({
-        consumedPercent: bar.consumedPercent,
-        complete: bar.complete && !bar.estimated
-    });
-    const partial = bar.partial && position < count - 1;
-    if (partial && bar.estimated) return _f("%s\n%s consumed · partial bucket · estimated", range, consumed);
-    if (partial) return _f("%s\n%s consumed · partial bucket", range, consumed);
-    if (bar.estimated) return _f("%s\n%s consumed · estimated", range, consumed);
-    return _f("%s\n%s consumed", range, consumed);
+function formatActivityBucketDetails(bar, index, bucketCount, valueKind) {
+    if (!bar) return _("Activity details unavailable");
+    if (!bar.known) return _("No observed data");
+
+    const consumed = valueKind === "credits"
+        ? formatConsumedCredits({
+            consumed: bar.consumedPercent,
+            complete: bar.complete && !bar.estimated
+        })
+        : formatConsumedPercent({
+            consumedPercent: bar.consumedPercent,
+            complete: bar.complete && !bar.estimated
+        });
+    const consumedText = valueKind === "credits"
+        ? _f("%s credits consumed", consumed)
+        : _f("%s consumed", consumed);
+    const partial = bar.partial && Number(index) < Number(bucketCount) - 1;
+    if (partial && bar.estimated) return _f("%s · partial bucket · estimated", consumedText);
+    if (partial) return _f("%s · partial bucket", consumedText);
+    if (bar.estimated) return _f("%s · estimated", consumedText);
+    return consumedText;
+}
+
+function formatActivityBucketTooltip(
+    bar,
+    index,
+    bucketCount,
+    bucketMinutes,
+    endAt,
+    use24Hour,
+    valueKind = "percent"
+) {
+    const range = formatActivityBucketRange(
+        index,
+        bucketCount,
+        bucketMinutes,
+        endAt,
+        use24Hour
+    );
+    if (!bar || !range) return _("Activity details unavailable");
+    return _f(
+        "%s\n%s",
+        range,
+        formatActivityBucketDetails(bar, Number(index), Number(bucketCount), valueKind)
+    );
+}
+
+function formatActivityBucketTooltipLine(
+    bar,
+    index,
+    bucketCount,
+    bucketMinutes,
+    endAt,
+    use24Hour,
+    valueKind = "percent"
+) {
+    if (
+        !bar || !formatActivityBucketRange(
+            index,
+            bucketCount,
+            bucketMinutes,
+            endAt,
+            use24Hour
+        )
+    ) {
+        return _("Activity details unavailable");
+    }
+    return formatActivityBucketDetails(bar, Number(index), Number(bucketCount), valueKind);
 }
 
 function formatAccessibleTooltip(text) {
@@ -337,6 +433,12 @@ function formatWholeNumber(value) {
     if (value === null || value === undefined || value === "") return _("unavailable");
     const numeric = Number(value);
     return Number.isFinite(numeric) ? String(Math.round(numeric)) : String(value);
+}
+
+function formatCreditNumber(value) {
+    if (value === null || value === undefined || value === "") return _("unavailable");
+    const numeric = Number(value);
+    return Number.isFinite(numeric) ? numeric.toFixed(1) : String(value);
 }
 
 function parseUsageHelperError(value) {
@@ -351,11 +453,11 @@ function parseUsageHelperError(value) {
     return { authenticationRequired: false, message };
 }
 
-function hasRecentActivity(activity24h) {
+function hasRecentActivity(activity24h, valueKey = "consumedPercent") {
     if (!Array.isArray(activity24h)) return false;
     return activity24h.some(bucket => {
         const consumed = typeof bucket === "object" && bucket !== null
-            ? Number(bucket.consumedPercent)
+            ? Number(bucket[valueKey])
             : Number(bucket);
         return Number.isFinite(consumed) && consumed > 0;
     });
@@ -574,7 +676,11 @@ function buildUsageNotificationEvents(previousSnapshot, snapshot, options = {}) 
             title: currentZone === "critical"
                 ? _f("%s %s limit critical", label, durationLabel)
                 : _f("%s %s limit warning", label, durationLabel),
-            message: _f("%s has %s remaining.", label, formatPercent(current.window.remainingPercent))
+            message: _f(
+                "%s has %s remaining.",
+                label,
+                formatPercent(current.window.remainingPercent, lowSettings.critical)
+            )
         });
     }
     return events;
@@ -781,13 +887,18 @@ module.exports = {
     formatDuration,
     formatElapsedDuration,
     formatPercent,
+    formatPanelPercent,
     formatConsumedPercent,
+    formatConsumedCredits,
+    formatCreditConsumption,
     buildResetCountdown,
     formatResetCountdownTooltip,
     buildQuotaIndicator,
     buildActivityChart,
+    buildCreditActivityChart,
     activityBarHeight,
     formatWholeNumber,
+    formatCreditNumber,
     parseUsageHelperError,
     hasRecentActivity,
     historyPeriodKeys,
@@ -797,6 +908,8 @@ module.exports = {
     notificationZone,
     buildUsageNotificationEvents,
     formatActivityBucketTooltip,
+    formatActivityBucketRange,
+    formatActivityBucketTooltipLine,
     formatAccessibleTooltip,
     formatTimestamp,
     formatExpiryCountdown,

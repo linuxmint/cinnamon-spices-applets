@@ -4,7 +4,7 @@
   "description": "A tiny Cinnamon companion keeping ChatGPT Work & Codex usage beautifully in view.",
   "comments": "Made with love by Claudiu & Codex.\n\nhttps://github.com/oss-singularity/cinnamon-chatgpt-usage",
   "contributors": "OSS Singularity - open-source home of the project,Claudiu Schuster - creator and maintainer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "OSS Singularity",
   "max-instances": 1,
   "cinnamon-version": ["5.8", "6.0", "6.2", "6.4", "6.6"]

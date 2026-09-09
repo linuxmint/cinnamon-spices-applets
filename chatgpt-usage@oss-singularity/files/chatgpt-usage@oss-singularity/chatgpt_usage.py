@@ -231,6 +231,14 @@ def _history_window_key(limit_id: str, duration: int) -> str:
     return f"{limit_id}:{duration}"
 
 
+def _credit_balance_from_snapshot(snapshot: dict[str, Any]) -> float | None:
+    credits = snapshot.get("credits")
+    if not isinstance(credits, dict) or credits.get("unlimited"):
+        return None
+    balance = _number(credits.get("balance"), -1)
+    return round(balance, 6) if balance >= 0 else None
+
+
 def _sample_from_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
     windows: dict[str, dict[str, Any]] = {}
     for limit in snapshot.get("limits", []):
@@ -244,7 +252,11 @@ def _sample_from_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
                 "usedPercent": min(100.0, max(0.0, used)),
                 "resetsAt": int(_number(window.get("resetsAt"))) or None,
             }
-    return {"timestamp": int(snapshot["updatedAt"]), "windows": windows}
+    sample = {"timestamp": int(snapshot["updatedAt"]), "windows": windows}
+    credit_balance = _credit_balance_from_snapshot(snapshot)
+    if credit_balance is not None:
+        sample["creditBalance"] = credit_balance
+    return sample
 
 
 def _load_history(path: Path) -> list[dict[str, Any]]:
@@ -273,8 +285,12 @@ def _load_history(path: Path) -> list[dict[str, Any]]:
             used = _number(window.get("usedPercent"), -1)
             if 0 <= used <= 100:
                 windows[key] = {"usedPercent": used, "resetsAt": int(_number(window.get("resetsAt"))) or None}
-        if windows:
-            clean.append({"timestamp": timestamp, "windows": windows})
+        clean_sample = {"timestamp": timestamp, "windows": windows}
+        credit_balance = _number(sample.get("creditBalance"), -1)
+        if credit_balance >= 0:
+            clean_sample["creditBalance"] = round(credit_balance, 6)
+        if windows or "creditBalance" in clean_sample:
+            clean.append(clean_sample)
     return clean
 
 
@@ -316,14 +332,38 @@ def _window_points(samples: list[dict[str, Any]], key: str, end_at: int) -> list
     return sorted(points, key=lambda point: point[0])
 
 
+def _credit_points(samples: list[dict[str, Any]], end_at: int) -> list[tuple[int, dict[str, Any]]]:
+    points = []
+    for sample in samples:
+        timestamp = int(_number(sample.get("timestamp")))
+        balance = _number(sample.get("creditBalance"), -1)
+        if timestamp <= 0 or timestamp > end_at or balance < 0:
+            continue
+        points.append((timestamp, {"balance": balance}))
+    return sorted(points, key=lambda point: point[0])
+
+
 def _positive_delta(previous: dict[str, Any], current: dict[str, Any]) -> float:
     previous_reset = previous.get("resetsAt")
     current_reset = current.get("resetsAt")
+    previous_used = _number(previous.get("usedPercent"))
     current_used = _number(current.get("usedPercent"))
     reset_shift = abs(_number(current_reset) - _number(previous_reset))
     if previous_reset and current_reset and reset_shift > RESET_TIMESTAMP_JITTER_SECONDS:
+        # A capped rolling window can move its advertised reset timestamp while
+        # remaining at 100%; that is not a fresh full-window consumption event.
+        if previous_used >= 100 and current_used >= 100:
+            return 0.0
         return max(0.0, current_used)
-    return max(0.0, current_used - _number(previous.get("usedPercent")))
+    return max(0.0, current_used - previous_used)
+
+
+def _positive_credit_delta(previous: dict[str, Any], current: dict[str, Any]) -> float:
+    previous_balance = _number(previous.get("balance"), -1)
+    current_balance = _number(current.get("balance"), -1)
+    if previous_balance < 0 or current_balance < 0:
+        return 0.0
+    return max(0.0, previous_balance - current_balance)
 
 
 def _observed_consumption(
@@ -340,6 +380,23 @@ def _observed_consumption(
             after_start.append(point)
     selected = ([baseline] if baseline else []) + after_start
     consumed = sum(_positive_delta(previous[1], current[1]) for previous, current in zip(selected, selected[1:]))
+    return consumed, baseline is not None, len(selected) >= 2
+
+
+def _observed_credit_consumption(
+    points: list[tuple[int, dict[str, Any]]],
+    start_at: int,
+    end_at: int,
+) -> tuple[float, bool, bool]:
+    baseline = None
+    after_start = []
+    for point in points:
+        if point[0] <= start_at:
+            baseline = point
+        elif point[0] <= end_at:
+            after_start.append(point)
+    selected = ([baseline] if baseline else []) + after_start
+    consumed = sum(_positive_credit_delta(previous[1], current[1]) for previous, current in zip(selected, selected[1:]))
     return consumed, baseline is not None, len(selected) >= 2
 
 
@@ -374,6 +431,32 @@ def build_usage_history(
     )
     history_windows = []
     tracked_since = min((int(_number(sample.get("timestamp"))) for sample in samples), default=now)
+    credit_points = _credit_points(samples, now)
+    credit_periods = {}
+    for period_key, start_at in periods:
+        consumed, complete, _ = _observed_credit_consumption(credit_points, start_at, now)
+        credit_periods[period_key] = {
+            "consumed": round(consumed, 2),
+            "complete": complete,
+        }
+
+    credit_activity = []
+    activity_start = activity_end - ACTIVITY_WINDOW_SECONDS
+    for index in range(bucket_count):
+        bucket_start = activity_start + index * bucket_seconds
+        bucket_end = bucket_start + bucket_seconds
+        consumed, has_baseline, observed = _observed_credit_consumption(
+            credit_points,
+            bucket_start,
+            bucket_end,
+        )
+        credit_activity.append(
+            {
+                "consumed": round(consumed, 2),
+                "complete": has_baseline and bucket_end <= now,
+                "observed": observed,
+            }
+        )
 
     for limit in snapshot.get("limits", []):
         limit_id = str(limit.get("id") or "codex")
@@ -425,6 +508,8 @@ def build_usage_history(
         "trackedSince": tracked_since,
         "activityBucketMinutes": int(bucket_minutes),
         "activityEndAt": activity_end,
+        "creditPeriods": credit_periods,
+        "creditActivity24h": credit_activity,
         "windows": history_windows,
     }
 
@@ -440,7 +525,7 @@ def update_usage_history(
     cutoff = now - HISTORY_RETENTION_SECONDS
     samples = [sample for sample in _load_history(path) if int(_number(sample.get("timestamp"))) >= cutoff]
     current = _sample_from_snapshot(snapshot)
-    if current["windows"]:
+    if current["windows"] or "creditBalance" in current:
         if samples and int(_number(samples[-1].get("timestamp"))) == now:
             samples[-1] = current
         else:
