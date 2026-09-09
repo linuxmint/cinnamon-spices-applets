@@ -20,9 +20,9 @@ from pathlib import Path
 
 from typing import Any
 
-_ = gettext.translation(
-    "chatgpt-usage@oss-singularity", localedir=str(Path.home() / ".local/share/locale"), fallback=True
-).gettext
+_data_home = os.environ.get("XDG_DATA_HOME")
+_locale_dir = Path(_data_home) / "locale" if _data_home else Path.home() / ".local" / "share" / "locale"
+_ = gettext.translation("chatgpt-usage@oss-singularity", localedir=str(_locale_dir), fallback=True).gettext
 
 
 CLIENT_INFO = {

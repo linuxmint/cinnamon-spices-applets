@@ -13,7 +13,10 @@ function _f(text, ...args) {
 }
 
 
-Gettext.bindtextdomain("chatgpt-usage@oss-singularity", GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(
+    "chatgpt-usage@oss-singularity",
+    GLib.build_filenamev([GLib.get_user_data_dir(), "locale"])
+);
 
 function clamp(value, minimum, maximum) {
     return Math.min(maximum, Math.max(minimum, value));

@@ -2,6 +2,7 @@
 
 import gettext
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -9,9 +10,9 @@ from pathlib import Path
 from gi.repository import Gio, GLib, Gtk
 from xapp.SettingsWidgets import SettingsWidget
 
-_ = gettext.translation(
-    "chatgpt-usage@oss-singularity", localedir=str(Path.home() / ".local/share/locale"), fallback=True
-).gettext
+_data_home = os.environ.get("XDG_DATA_HOME")
+_locale_dir = Path(_data_home) / "locale" if _data_home else Path.home() / ".local" / "share" / "locale"
+_ = gettext.translation("chatgpt-usage@oss-singularity", localedir=str(_locale_dir), fallback=True).gettext
 
 
 class InstallationPaths(SettingsWidget):

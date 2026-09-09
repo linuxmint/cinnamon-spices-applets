@@ -3197,6 +3197,9 @@ class ChatGptUsageApplet extends Applet.Applet {
 // Cinnamon loads this entry point by name.
 // eslint-disable-next-line no-unused-vars
 function main(metadata, orientation, panelHeight, instanceId) {
-    Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+    Gettext.bindtextdomain(
+        UUID,
+        GLib.build_filenamev([GLib.get_user_data_dir(), "locale"])
+    );
     return new ChatGptUsageApplet(metadata, orientation, panelHeight, instanceId);
 }

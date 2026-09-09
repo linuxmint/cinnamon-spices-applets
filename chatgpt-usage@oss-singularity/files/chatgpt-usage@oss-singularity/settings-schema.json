@@ -59,8 +59,8 @@
       "title": "Weekly limit refreshes",
       "keys": [
         "notify-all-weekly-resets",
-        "notify-codex-weekly-reset",
-        "notify-spark-weekly-reset"
+        "notify-codex-weekly-reset-control",
+        "notify-spark-weekly-reset-control"
       ]
     },
     "low-notification-section": {
@@ -68,11 +68,11 @@
       "title": "Low remaining usage",
       "keys": [
         "enable-five-hour-low-notifications",
-        "five-hour-warning-remaining",
-        "five-hour-critical-remaining",
+        "five-hour-warning-remaining-control",
+        "five-hour-critical-remaining-control",
         "enable-weekly-low-notifications",
-        "weekly-warning-remaining",
-        "weekly-critical-remaining"
+        "weekly-warning-remaining-control",
+        "weekly-critical-remaining-control"
       ]
     }
   },
@@ -206,13 +206,31 @@
   "notify-codex-weekly-reset": {
     "type": "switch",
     "default": true,
-    "dependency": "!notify-all-weekly-resets",
     "description": "Notify when 7d limits reset"
   },
   "notify-spark-weekly-reset": {
     "type": "switch",
     "default": true,
-    "dependency": "!notify-all-weekly-resets",
+    "description": "Notify when 7d Spark limits reset"
+  },
+  "notify-codex-weekly-reset-control": {
+    "type": "custom",
+    "file": "notification_settings.py",
+    "widget": "NotificationSwitchWidget",
+    "default": "",
+    "setting-key": "notify-codex-weekly-reset",
+    "dependency-key": "notify-all-weekly-resets",
+    "dependency-invert": true,
+    "description": "Notify when 7d limits reset"
+  },
+  "notify-spark-weekly-reset-control": {
+    "type": "custom",
+    "file": "notification_settings.py",
+    "widget": "NotificationSwitchWidget",
+    "default": "",
+    "setting-key": "notify-spark-weekly-reset",
+    "dependency-key": "notify-all-weekly-resets",
+    "dependency-invert": true,
     "description": "Notify when 7d Spark limits reset"
   },
   "enable-five-hour-low-notifications": {
@@ -227,7 +245,6 @@
     "max": 100,
     "step": 1,
     "units": "%",
-    "dependency": "enable-five-hour-low-notifications",
     "description": "5h warning at or below"
   },
   "five-hour-critical-remaining": {
@@ -237,7 +254,32 @@
     "max": 99,
     "step": 1,
     "units": "%",
-    "dependency": "enable-five-hour-low-notifications",
+    "description": "5h critical at or below"
+  },
+  "five-hour-warning-remaining-control": {
+    "type": "custom",
+    "file": "notification_settings.py",
+    "widget": "NotificationThresholdWidget",
+    "default": "",
+    "setting-key": "five-hour-warning-remaining",
+    "dependency-key": "enable-five-hour-low-notifications",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "5h warning at or below"
+  },
+  "five-hour-critical-remaining-control": {
+    "type": "custom",
+    "file": "notification_settings.py",
+    "widget": "NotificationThresholdWidget",
+    "default": "",
+    "setting-key": "five-hour-critical-remaining",
+    "dependency-key": "enable-five-hour-low-notifications",
+    "min": 0,
+    "max": 99,
+    "step": 1,
+    "units": "%",
     "description": "5h critical at or below"
   },
   "enable-weekly-low-notifications": {
@@ -252,7 +294,6 @@
     "max": 100,
     "step": 1,
     "units": "%",
-    "dependency": "enable-weekly-low-notifications",
     "description": "7d warning at or below"
   },
   "weekly-critical-remaining": {
@@ -262,7 +303,32 @@
     "max": 99,
     "step": 1,
     "units": "%",
-    "dependency": "enable-weekly-low-notifications",
+    "description": "7d critical at or below"
+  },
+  "weekly-warning-remaining-control": {
+    "type": "custom",
+    "file": "notification_settings.py",
+    "widget": "NotificationThresholdWidget",
+    "default": "",
+    "setting-key": "weekly-warning-remaining",
+    "dependency-key": "enable-weekly-low-notifications",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "7d warning at or below"
+  },
+  "weekly-critical-remaining-control": {
+    "type": "custom",
+    "file": "notification_settings.py",
+    "widget": "NotificationThresholdWidget",
+    "default": "",
+    "setting-key": "weekly-critical-remaining",
+    "dependency-key": "enable-weekly-low-notifications",
+    "min": 0,
+    "max": 99,
+    "step": 1,
+    "units": "%",
     "description": "7d critical at or below"
   },
   "installation-paths": {
