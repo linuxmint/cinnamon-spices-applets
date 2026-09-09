@@ -181,6 +181,12 @@ const RadioPlayer = class RadioPlayer {
     play() {
         this._clearRetry();
         this._initPipeline();
+
+        if (!this.playbin || !this.sink) {
+            this.playing = false;
+            return;
+        }
+
         this.playbin.set_state(Gst.State.PLAYING);
         this.playing = true;
     }
