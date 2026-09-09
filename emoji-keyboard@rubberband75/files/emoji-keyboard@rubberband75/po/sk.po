@@ -1,0 +1,189 @@
+# EMOJI KEYBOARD
+# This file is put in the public domain.
+# rubberband75, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: emoji-keyboard@rubberband75 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-27 15:25-0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. applet.js:46
+msgid "Recent"
+msgstr "Nedávne"
+
+#. applet.js:47
+msgid "Smileys & Emotions"
+msgstr "Smajlíky a emócie"
+
+#. applet.js:48
+msgid "People"
+msgstr "Ľudia"
+
+#. applet.js:49
+msgid "Animals & Nature"
+msgstr "Zvieratá a príroda"
+
+#. applet.js:50
+msgid "Food & Drink"
+msgstr "Jedlo a nápoje"
+
+#. applet.js:51
+msgid "Travel & Places"
+msgstr "Cestovanie a miesta"
+
+#. applet.js:52
+msgid "Activities & Events"
+msgstr "Aktivity a udalosti"
+
+#. applet.js:53
+msgid "Objects"
+msgstr "Predmety"
+
+#. applet.js:54
+msgid "Symbols"
+msgstr "Symboly"
+
+#. applet.js:55
+msgid "Flags"
+msgstr "Vlajky"
+
+#. metadata.json->name
+#. applet.js:142
+msgid "Emoji Keyboard"
+msgstr "Klávesnica emoji"
+
+#. applet.js:167
+msgid "Search emoji"
+msgstr "Hľadať emoji"
+
+#. applet.js:206
+msgid "Loading emoji…"
+msgstr "Načítavajú sa emoji…"
+
+#. applet.js:415
+msgid "Unable to load the emoji catalog"
+msgstr "Katalóg emoji sa nepodarilo načítať"
+
+#. applet.js:492
+#, javascript-format
+msgid "%d search result"
+msgid_plural "%d search results"
+msgstr[0] "%d výsledok vyhľadávania"
+msgstr[1] "%d výsledky vyhľadávania"
+msgstr[2] "%d výsledkov vyhľadávania"
+
+#. applet.js:519
+msgid "Your recently used emoji will appear here"
+msgstr "Tu sa zobrazia vaše nedávno použité emoji"
+
+#. applet.js:520
+msgid "No emoji found"
+msgstr "Nenašli sa žiadne emoji"
+
+#. metadata.json->description
+msgid "Search, copy, and insert emoji from a native Cinnamon panel popup."
+msgstr ""
+"Vyhľadávajte, kopírujte a vkladajte emoji z natívneho vyskakovacieho okna "
+"panela Cinnamon."
+
+#. settings-schema.json->copy-to-clipboard->description
+msgid "Copy emoji to clipboard"
+msgstr "Kopírovať emoji do schránky"
+
+#. settings-schema.json->copy-to-clipboard->tooltip
+msgid ""
+"When enabled, the selected emoji stays on the clipboard after it is "
+"inserted. When disabled, the clipboard is restored to its previous contents "
+"after insertion."
+msgstr ""
+"Ak je povolené, vybrané emoji zostane po vložení v schránke. Ak je zakázané, "
+"obsah schránky sa po vložení obnoví na predchádzajúci."
+
+#. settings-schema.json->category-icon-size->description
+msgid "Category icon size"
+msgstr "Veľkosť ikony kategórie"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Colored Icon Size"
+msgstr "Prispôsobiť farebnej veľkosti ikon panela"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Symbolic Icon Size"
+msgstr "Prispôsobiť symbolickej veľkosti ikon panela"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "16px"
+msgstr "16px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "22px"
+msgstr "22px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "24px"
+msgstr "24px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "32px"
+msgstr "32px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "48px"
+msgstr "48px"
+
+#. settings-schema.json->emoji-size->description
+msgid "Emoji size"
+msgstr "Veľkosť emoji"
+
+#. settings-schema.json->default-skin-tone->description
+msgid "Default skin tone"
+msgstr "Predvolený tón pleti"
+
+#. settings-schema.json->default-skin-tone->tooltip
+msgid ""
+"Emoji that support skin tones show this tone by default. Emoji without skin "
+"tone variants are unaffected."
+msgstr ""
+"Emoji podporujúce tóny pleti zobrazujú tento tón predvolene. Emoji bez "
+"variantov tónu pleti nie sú ovplyvnené."
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍"
+msgstr "👍"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏻"
+msgstr "👍🏻"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏼"
+msgstr "👍🏼"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏽"
+msgstr "👍🏽"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏾"
+msgstr "👍🏾"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏿"
+msgstr "👍🏿"

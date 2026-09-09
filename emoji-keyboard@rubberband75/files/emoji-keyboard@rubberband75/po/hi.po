@@ -1,0 +1,186 @@
+# EMOJI KEYBOARD
+# This file is put in the public domain.
+# rubberband75, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: emoji-keyboard@rubberband75 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-27 15:25-0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:46
+msgid "Recent"
+msgstr "हाल ही में इस्तेमाल किए गए"
+
+#. applet.js:47
+msgid "Smileys & Emotions"
+msgstr "स्माइली और भाव"
+
+#. applet.js:48
+msgid "People"
+msgstr "लोग"
+
+#. applet.js:49
+msgid "Animals & Nature"
+msgstr "जानवर और प्रकृति"
+
+#. applet.js:50
+msgid "Food & Drink"
+msgstr "खाना और पेय"
+
+#. applet.js:51
+msgid "Travel & Places"
+msgstr "यात्रा और स्थान"
+
+#. applet.js:52
+msgid "Activities & Events"
+msgstr "गतिविधियाँ और आयोजन"
+
+#. applet.js:53
+msgid "Objects"
+msgstr "वस्तुएँ"
+
+#. applet.js:54
+msgid "Symbols"
+msgstr "प्रतीक"
+
+#. applet.js:55
+msgid "Flags"
+msgstr "झंडे"
+
+#. metadata.json->name
+#. applet.js:142
+msgid "Emoji Keyboard"
+msgstr "इमोजी कीबोर्ड"
+
+#. applet.js:167
+msgid "Search emoji"
+msgstr "इमोजी खोजें"
+
+#. applet.js:206
+msgid "Loading emoji…"
+msgstr "इमोजी लोड हो रहे हैं…"
+
+#. applet.js:415
+msgid "Unable to load the emoji catalog"
+msgstr "इमोजी कैटलॉग लोड नहीं किया जा सका"
+
+#. applet.js:492
+#, javascript-format
+msgid "%d search result"
+msgid_plural "%d search results"
+msgstr[0] "%d खोज परिणाम"
+msgstr[1] "%d खोज परिणाम"
+
+#. applet.js:519
+msgid "Your recently used emoji will appear here"
+msgstr "आपके हाल ही में इस्तेमाल किए गए इमोजी यहाँ दिखाई देंगे"
+
+#. applet.js:520
+msgid "No emoji found"
+msgstr "कोई इमोजी नहीं मिला"
+
+#. metadata.json->description
+msgid "Search, copy, and insert emoji from a native Cinnamon panel popup."
+msgstr "Cinnamon पैनल के नेटिव पॉपअप से इमोजी खोजें, कॉपी करें और डालें।"
+
+#. settings-schema.json->copy-to-clipboard->description
+msgid "Copy emoji to clipboard"
+msgstr "इमोजी को क्लिपबोर्ड पर कॉपी करें"
+
+#. settings-schema.json->copy-to-clipboard->tooltip
+msgid ""
+"When enabled, the selected emoji stays on the clipboard after it is "
+"inserted. When disabled, the clipboard is restored to its previous contents "
+"after insertion."
+msgstr ""
+"सक्षम होने पर, चयनित इमोजी सम्मिलित करने के बाद भी क्लिपबोर्ड पर बनी रहती है। अक्षम "
+"होने पर, सम्मिलित करने के तुरंत बाद क्लिपबोर्ड की पिछली सामग्री पुनर्स्थापित हो जाती है।"
+
+#. settings-schema.json->category-icon-size->description
+msgid "Category icon size"
+msgstr "श्रेणी आइकन का आकार"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Colored Icon Size"
+msgstr "पैनल के रंगीन आइकन आकार से मिलाएँ"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Symbolic Icon Size"
+msgstr "पैनल के सांकेतिक आइकन आकार से मिलाएँ"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "16px"
+msgstr "16px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "22px"
+msgstr "22px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "24px"
+msgstr "24px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "32px"
+msgstr "32px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "48px"
+msgstr "48px"
+
+#. settings-schema.json->emoji-size->description
+msgid "Emoji size"
+msgstr "इमोजी का आकार"
+
+#. settings-schema.json->default-skin-tone->description
+msgid "Default skin tone"
+msgstr "डिफ़ॉल्ट त्वचा टोन"
+
+#. settings-schema.json->default-skin-tone->tooltip
+msgid ""
+"Emoji that support skin tones show this tone by default. Emoji without skin "
+"tone variants are unaffected."
+msgstr ""
+"त्वचा टोन का समर्थन करने वाली इमोजी डिफ़ॉल्ट रूप से यह टोन दिखाती हैं। त्वचा टोन प्रकार "
+"के बिना इमोजी प्रभावित नहीं होतीं।"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍"
+msgstr "👍"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏻"
+msgstr "👍🏻"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏼"
+msgstr "👍🏼"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏽"
+msgstr "👍🏽"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏾"
+msgstr "👍🏾"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏿"
+msgstr "👍🏿"

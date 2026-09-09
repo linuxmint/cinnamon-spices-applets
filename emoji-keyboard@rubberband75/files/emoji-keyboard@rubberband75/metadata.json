@@ -1,0 +1,8 @@
+{
+    "uuid": "emoji-keyboard@rubberband75",
+    "name": "Emoji Keyboard",
+    "description": "Search, copy, and insert emoji from a native Cinnamon panel popup.",
+    "author": "rubberband75",
+    "version": "1.1.0",
+    "max-instances": -1
+}

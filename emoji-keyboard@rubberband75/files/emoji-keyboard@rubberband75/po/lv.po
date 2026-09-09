@@ -1,0 +1,191 @@
+# EMOJI KEYBOARD
+# This file is put in the public domain.
+# rubberband75, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: emoji-keyboard@rubberband75 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-27 15:25-0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+
+#. applet.js:46
+msgid "Recent"
+msgstr "Nesenie"
+
+#. applet.js:47
+msgid "Smileys & Emotions"
+msgstr "Smaidiņi un emocijas"
+
+#. applet.js:48
+msgid "People"
+msgstr "Cilvēki"
+
+#. applet.js:49
+msgid "Animals & Nature"
+msgstr "Dzīvnieki un daba"
+
+#. applet.js:50
+msgid "Food & Drink"
+msgstr "Ēdiens un dzēriens"
+
+#. applet.js:51
+msgid "Travel & Places"
+msgstr "Ceļošana un vietas"
+
+#. applet.js:52
+msgid "Activities & Events"
+msgstr "Aktivitātes un pasākumi"
+
+#. applet.js:53
+msgid "Objects"
+msgstr "Priekšmeti"
+
+#. applet.js:54
+msgid "Symbols"
+msgstr "Simboli"
+
+#. applet.js:55
+msgid "Flags"
+msgstr "Karogi"
+
+#. metadata.json->name
+#. applet.js:142
+msgid "Emoji Keyboard"
+msgstr "Emocijzīmju tastatūra"
+
+#. applet.js:167
+msgid "Search emoji"
+msgstr "Meklēt emocijzīmes"
+
+#. applet.js:206
+msgid "Loading emoji…"
+msgstr "Notiek emocijzīmju ielāde…"
+
+#. applet.js:415
+msgid "Unable to load the emoji catalog"
+msgstr "Neizdevās ielādēt emocijzīmju katalogu"
+
+#. applet.js:492
+#, javascript-format
+msgid "%d search result"
+msgid_plural "%d search results"
+msgstr[0] "%d meklēšanas rezultāts"
+msgstr[1] "%d meklēšanas rezultāti"
+msgstr[2] "%d meklēšanas rezultātu"
+
+#. applet.js:519
+msgid "Your recently used emoji will appear here"
+msgstr "Šeit parādīsies jūsu nesen izmantotās emocijzīmes"
+
+#. applet.js:520
+msgid "No emoji found"
+msgstr "Emocijzīmes nav atrastas"
+
+#. metadata.json->description
+msgid "Search, copy, and insert emoji from a native Cinnamon panel popup."
+msgstr ""
+"Meklējiet, kopējiet un ievietojiet emocijzīmes no Cinnamon paneļa vietējā "
+"uznirstošā loga."
+
+#. settings-schema.json->copy-to-clipboard->description
+msgid "Copy emoji to clipboard"
+msgstr "Kopēt emocijzīmi starpliktuvē"
+
+#. settings-schema.json->copy-to-clipboard->tooltip
+msgid ""
+"When enabled, the selected emoji stays on the clipboard after it is "
+"inserted. When disabled, the clipboard is restored to its previous contents "
+"after insertion."
+msgstr ""
+"Ja iespējots, atlasītā emocijzīme pēc ievietošanas paliek starpliktuvē. Ja "
+"atspējots, iepriekšējais starpliktuves saturs tiek atjaunots uzreiz pēc "
+"ievietošanas."
+
+#. settings-schema.json->category-icon-size->description
+msgid "Category icon size"
+msgstr "Kategorijas ikonas izmērs"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Colored Icon Size"
+msgstr "Saskaņot ar paneļa krāsainās ikonas izmēru"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Symbolic Icon Size"
+msgstr "Saskaņot ar paneļa simboliskās ikonas izmēru"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "16px"
+msgstr "16px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "22px"
+msgstr "22px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "24px"
+msgstr "24px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "32px"
+msgstr "32px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "48px"
+msgstr "48px"
+
+#. settings-schema.json->emoji-size->description
+msgid "Emoji size"
+msgstr "Emocijzīmes izmērs"
+
+#. settings-schema.json->default-skin-tone->description
+msgid "Default skin tone"
+msgstr "Noklusējuma ādas tonis"
+
+#. settings-schema.json->default-skin-tone->tooltip
+msgid ""
+"Emoji that support skin tones show this tone by default. Emoji without skin "
+"tone variants are unaffected."
+msgstr ""
+"Emocijzīmes, kas atbalsta ādas toņus, pēc noklusējuma rāda šo toni. "
+"Emocijzīmes bez ādas toņa variantiem netiek ietekmētas."
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍"
+msgstr "👍"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏻"
+msgstr "👍🏻"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏼"
+msgstr "👍🏼"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏽"
+msgstr "👍🏽"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏾"
+msgstr "👍🏾"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏿"
+msgstr "👍🏿"
