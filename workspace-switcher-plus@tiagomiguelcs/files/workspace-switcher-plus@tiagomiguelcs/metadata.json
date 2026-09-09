@@ -1,0 +1,9 @@
+{
+ "uuid": "workspace-switcher-plus@tiagomiguelcs",
+ "name": "Workspace Switcher Plus",
+ "description": "Switch workspaces from the panel with enhanced customization.",
+ "version": "0.1.0",
+ "author": "tiagomiguelcs",
+ "original_author": "Linux Mint Team",
+ "max-instances": -1
+}
