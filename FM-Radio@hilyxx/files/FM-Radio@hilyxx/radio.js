@@ -140,13 +140,13 @@ const RadioPlayer = class RadioPlayer {
     }
 
     _initPipeline() {
-        if (this.playbin) return;
+        if (this.playbin && this.sink) return;
 
         Gst.init([]);
         
         this.playbin = Gst.ElementFactory.make("playbin", "fmradio");
         
-        // If `playbin` is null, `gst-plugins-base` is missing
+        // If playbin is null, gst-plugins-base is missing
         if (!this.playbin) {
             if (this.onFatalError) this.onFatalError();
             return;
@@ -161,10 +161,11 @@ const RadioPlayer = class RadioPlayer {
             this.sink = Gst.ElementFactory.make("autoaudiosink", "sink");
         }
 
-        // If there is no audio output, gst-plugins-good is missing
+        // If the audio sink is null, gst-plugins-good is missing
         if (this.sink) {
             this.playbin.set_property("audio-sink", this.sink);
         } else {
+            this.playbin = null;
             if (this.onFatalError) this.onFatalError();
             return;
         }
