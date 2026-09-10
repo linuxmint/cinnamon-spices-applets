@@ -12,12 +12,9 @@ const Gettext = imports.gettext;
 const UUID = "bing-wallpaper@starcross.dev";
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
+// Simplified translation function per standard pattern
 function _(str) {
-    let customTranslation = Gettext.dgettext(UUID, str);
-    if (customTranslation !== str) {
-        return customTranslation;
-    }
-    return Gettext.gettext(str);
+    return Gettext.dgettext(UUID, str);
 }
 
 const logging = false;
@@ -60,25 +57,52 @@ BingWallpaperApplet.prototype = {
             // Ignore if directory already exists
         }
 
-        this.wallpaperPath = `${this.wallpaperDir}/BingWallpaper.jpg`;
         this.metaDataPath = `${this.wallpaperDir}/meta.json`;
+        this.overrideStatePath = `${this.wallpaperDir}/override.json`;
         
-        // Manual override flag to stop daily refresh if user picks a history wallpaper
-        this.manualOverride = false; 
+        // Load manual override state to persist through restarts
+        this._loadOverrideState();
 
         let refreshBg = new PopupMenu.PopupIconMenuItem(_("Refresh Now"), "view-refresh", St.IconType.SYMBOLIC);
         refreshBg.connect('activate', () => {
-            this.manualOverride = false; // Reset manual override on explicit refresh
+            this._saveOverrideState(false, null); // Reset manual override on explicit refresh
             this._downloadMetaData();
         });
         this._applet_context_menu.addMenuItem(refreshBg);
 
         // History Submenu
-        this.historyMenu = new PopupMenu.PopupSubMenuMenuItem(_("Wallpaper History (8 days)"));
+        this.historyMenu = new PopupMenu.PopupSubMenuMenuItem(_("Recent Images"));
         this._applet_context_menu.addMenuItem(this.historyMenu);
 
         // Begin refresh loop
         this._refresh();
+    },
+
+    _saveOverrideState: function(isOverride, dateStr) {
+        this.manualOverride = isOverride;
+        this.manualOverrideDate = dateStr;
+        let state = { manualOverride: isOverride, date: dateStr };
+        let gFile = Gio.file_new_for_path(this.overrideStatePath);
+        try {
+            gFile.replace_contents(JSON.stringify(state), null, false, Gio.FileCreateFlags.NONE, null);
+        } catch (e) {
+            log(`Error saving override state: ${e.message}`);
+        }
+    },
+
+    _loadOverrideState: function() {
+        let gFile = Gio.file_new_for_path(this.overrideStatePath);
+        try {
+            let [success, contents] = gFile.load_contents(null);
+            if (success) {
+                let state = JSON.parse(ByteArray.toString(contents));
+                this.manualOverride = state.manualOverride;
+                this.manualOverrideDate = state.date;
+            }
+        } catch (e) {
+            this.manualOverride = false;
+            this.manualOverrideDate = null;
+        }
     },
 
     _buildHistoryMenu: function(json) {
@@ -86,15 +110,17 @@ BingWallpaperApplet.prototype = {
 
         this.historyMenu.menu.removeAll();
 
-        if (json && json.images) {
+        if (json && Array.isArray(json.images) && json.images.length > 0) {
             for (let i = 0; i < json.images.length; i++) {
                 let imgData = json.images[i];
+                if (!imgData || !imgData.startdate) continue;
+
                 let labelText = imgData.copyright ? imgData.copyright : _("Bing Wallpaper");
 
                 let menuItem = new PopupMenu.PopupMenuItem(labelText);
                 menuItem.connect('activate', () => {
                     log(`User selected historical background: ${imgData.url}`);
-                    this.manualOverride = true; // Pause daily refresh logic
+                    this._saveOverrideState(true, imgData.startdate);
                     this.imageData = imgData;
                     this.set_applet_tooltip(this.imageData.copyright);
 
@@ -122,8 +148,19 @@ BingWallpaperApplet.prototype = {
 
     _cleanupOldImages: function(json) {
         let validDates = new Set();
-        if (json && json.images) {
-            json.images.forEach(img => validDates.add(img.startdate));
+        if (json && Array.isArray(json.images) && json.images.length > 0) {
+            json.images.forEach(img => {
+                if (img && img.startdate) {
+                    validDates.add(img.startdate);
+                }
+            });
+        } else {
+            return; // Abort cleanup if JSON data is invalid
+        }
+
+        // Prevent deletion of manually selected image if it's older than 8 days
+        if (this.manualOverride && this.manualOverrideDate) {
+            validDates.add(this.manualOverrideDate);
         }
 
         let dir = Gio.file_new_for_path(this.wallpaperDir);
@@ -141,7 +178,9 @@ BingWallpaperApplet.prototype = {
                                 try { 
                                     f.delete_finish(r); 
                                     log(`Deleted old wallpaper from cache: ${name}`); 
-                                } catch(e) {}
+                                } catch(e) {
+                                    log(`Failed to delete old wallpaper ${name}: ${e.message}`);
+                                }
                             });
                         }
                     }
@@ -166,6 +205,7 @@ BingWallpaperApplet.prototype = {
     },
 
     _setTimeout: function (seconds) {
+        /** Cancel current timeout in event of an error and try again shortly */
         this._removeTimeout();
         log(`Setting timeout (${seconds}s)`);
         this._timeout = Mainloop.timeout_add_seconds(seconds, () => this._refresh());
@@ -186,19 +226,34 @@ BingWallpaperApplet.prototype = {
 
             this._buildHistoryMenu(json);
 
-            this.imageData = json.images[0];
-            this.wallpaperPath = `${this.wallpaperDir}/bing_${this.imageData.startdate}.jpg`;
+            if (this.manualOverride && this.manualOverrideDate) {
+                let historicalImg = json.images.find(img => img.startdate === this.manualOverrideDate);
+                if (historicalImg) {
+                    this.imageData = historicalImg;
+                } else {
+                    this.imageData = { startdate: this.manualOverrideDate, url: "", copyright: _("Historical Bing Wallpaper") };
+                }
+            } else {
+                this.imageData = json.images[0];
+            }
 
+            this.wallpaperPath = `${this.wallpaperDir}/bing_${this.imageData.startdate}.jpg`;
             this.set_applet_tooltip(this.imageData.copyright);
             log(`Got image url from local file : ${this.imageData.url}`);
 
+            if (!json.images[0] || !json.images[0].fullstartdate) {
+                this._downloadMetaData();
+                return;
+            }
+
+            const refImage = json.images[0];
             const start_date = GLib.DateTime.new(
                 GLib.TimeZone.new_utc(),
-                this.imageData.fullstartdate.substring(0,4),
-                this.imageData.fullstartdate.substring(4,6),
-                this.imageData.fullstartdate.substring(6,8),
-                this.imageData.fullstartdate.substring(8,10),
-                this.imageData.fullstartdate.substring(10,12),
+                refImage.fullstartdate.substring(0,4),
+                refImage.fullstartdate.substring(4,6),
+                refImage.fullstartdate.substring(6,8),
+                refImage.fullstartdate.substring(8,10),
+                refImage.fullstartdate.substring(10,12),
                 0
             );
             const end_date = start_date.add_days(1);
@@ -209,29 +264,31 @@ BingWallpaperApplet.prototype = {
 
                 let image_file = Gio.file_new_for_path(this.wallpaperPath);
                 image_file.query_info_async('standard::size,time::modified', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (file, res) => {
+                    let image_file_info;
                     try {
-                        let image_file_info = file.query_info_finish(res);
-                        let image_file_size = image_file_info.get_size();
-
-                        let modTimeSecs;
-                        if (image_file_info.get_modification_date_time) {
-                            modTimeSecs = image_file_info.get_modification_date_time().to_unix();
-                        } else {
-                            modTimeSecs = image_file_info.get_modification_time().tv_sec;
-                        }
-
-                        if ((modTimeSecs > end_date.to_unix()) || !image_file_size) {
-                            if (!this.manualOverride) {
-                                this._downloadImage();
-                            } else {
-                                log("Auto-update skipped due to manual history selection.");
-                            }
-                        } else {
-                            log("Image appears up to date");
-                        }
+                        image_file_info = file.query_info_finish(res);
                     } catch (e) {
-                        log("No image file found");
+                        log(`No image file found: ${e.message}`);
                         if (!this.manualOverride) this._downloadImage();
+                        return;
+                    }
+
+                    let image_file_size = image_file_info.get_size();
+                    let modTimeSecs;
+                    if (image_file_info.get_modification_date_time) {
+                        modTimeSecs = image_file_info.get_modification_date_time().to_unix();
+                    } else {
+                        modTimeSecs = image_file_info.get_modification_time().tv_sec;
+                    }
+
+                    if ((modTimeSecs > end_date.to_unix()) || !image_file_size) {
+                        if (!this.manualOverride) {
+                            this._downloadImage();
+                        } else {
+                            log("Auto-update skipped due to manual history selection.");
+                        }
+                    } else {
+                        log("Image appears up to date");
                     }
                 });
             } else {
@@ -292,6 +349,8 @@ BingWallpaperApplet.prototype = {
 
     _downloadImage: function () {
         log('Downloading new image');
+        if (!this.imageData || !this.imageData.url) return;
+
         const url = `${bingHost}${this.imageData.url}`;
         const regex = /_\d+x\d+./gm;
         const urlUHD = url.replace(regex, `_UHD.`);
