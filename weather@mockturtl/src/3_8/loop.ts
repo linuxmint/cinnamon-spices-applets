@@ -48,7 +48,6 @@ export class WeatherLoop {
 
 	private runningRefresh: imports.gi.Gio.Cancellable | null = null;
 
-	private refreshingResolver: (() => void) | null = null;
 	private refreshing: Promise<void> | null = null;
 	public get Refreshing(): Promise<void> {
 		if (this.refreshing == null)
@@ -145,6 +144,7 @@ export class WeatherLoop {
 
 		if (!this.Online) {
 			Logger.Info("No network connection, skipping this cycle.");
+			this.app.ui.ShowRefreshResult(false);
 			return;
 		}
 
@@ -154,13 +154,17 @@ export class WeatherLoop {
 			return;
 		}
 
-		try {
-			this.runningRefresh?.cancel();
-			this.runningRefresh = new imports.gi.Gio.Cancellable();
-			this.refreshing = new Promise<void>((resolve) => {
-				this.refreshingResolver = resolve;
-			});
+		this.runningRefresh?.cancel();
+		const refreshRequest = new imports.gi.Gio.Cancellable();
+		this.runningRefresh = refreshRequest;
 
+		let resolveRefreshing!: () => void;
+		const refreshing = new Promise<void>((resolve) => {
+			resolveRefreshing = () => resolve(undefined);
+		});
+		this.refreshing = refreshing;
+
+		try {
 			this.ValidateLastUpdateTime();
 
 			if (this.pauseRefresh) {
@@ -174,6 +178,7 @@ export class WeatherLoop {
 				return;
 			}
 
+			this.app.ui.ShowRefreshProgress();
 
 			Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + this.lastUpdated.toLocaleString()
 				+ ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
@@ -181,9 +186,16 @@ export class WeatherLoop {
 
 
 			const state = await Promise.race([
-				this.app["RefreshWeather"](rebuild, location, this.runningRefresh),
+				this.app["RefreshWeather"](rebuild, location, refreshRequest),
 				delay(30000).then(() => null)
 			]);
+
+			// A newer refresh replaced this one. Its result and cleanup
+			// must not affect the currently running request.
+			if (this.runningRefresh !== refreshRequest) {
+				Logger.Debug("Refresh superseded by a newer request, ignoring result.");
+				return;
+			}
 
 			switch (state) {
 				case null:
@@ -228,16 +240,25 @@ export class WeatherLoop {
 					break;
 			}
 
+			this.app.ui.ShowRefreshResult(state === RefreshState.Success);
 		}
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("Error in Main loop: " + e.message, e);
+
+			if (this.runningRefresh === refreshRequest)
+				this.app.ui.ShowRefreshResult(false);
 		}
 		finally {
-			this.refreshingResolver?.();
-			this.refreshingResolver = null;
-			this.runningRefresh?.cancel();
-			this.runningRefresh = null;
+			resolveRefreshing();
+
+			if (this.refreshing === refreshing)
+				this.refreshing = null;
+
+			if (this.runningRefresh === refreshRequest) {
+				refreshRequest.cancel();
+				this.runningRefresh = null;
+			}
 		}
 	}
 
