@@ -32,18 +32,22 @@ def read_hosts():
 
 
 def strip_section(text):
-    out = []
-    skip = False
-    for line in text.splitlines():
-        stripped = line.strip()
-        if stripped == BEGIN:
-            skip = True
-            continue
-        if stripped == END:
-            skip = False
-            continue
-        if not skip:
-            out.append(line)
+    lines = text.splitlines()
+    begin_idx = None
+    end_idx = None
+    for i, line in enumerate(lines):
+        s = line.strip()
+        if s == BEGIN and begin_idx is None:
+            begin_idx = i
+        elif s == END and begin_idx is not None and end_idx is None:
+            end_idx = i
+    # Only remove a well-formed [BEGIN .. END] block. If a marker is missing or
+    # out of order (e.g. external corruption), leave the file untouched rather
+    # than truncating everything after a lone BEGIN.
+    if begin_idx is not None and end_idx is not None and end_idx > begin_idx:
+        out = lines[:begin_idx] + lines[end_idx + 1:]
+    else:
+        out = lines
     res = "\n".join(out).rstrip("\n")
     return (res + "\n") if res else ""
 

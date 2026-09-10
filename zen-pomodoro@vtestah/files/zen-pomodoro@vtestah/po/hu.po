@@ -54,6 +54,9 @@ msgstr "SZÜNET MEGÁLLÍTVA"
 msgid "BREAK OVER"
 msgstr "SZÜNET VÉGE"
 
+msgid "FOCUS OVER"
+msgstr "FÓKUSZ VÉGET ÉRT"
+
 #: applet.js:1023 applet.js:1083 menu.js:214 menu.js:738
 msgid "Ready to focus"
 msgstr "Készen a fókuszra"
@@ -61,6 +64,9 @@ msgstr "Készen a fókuszra"
 #: applet.js:1041
 msgid "Short break running"
 msgstr "Rövid szünet folyamatban"
+
+msgid "Focus finished — Break ready"
+msgstr "Fókusz véget ért — Szünet kész"
 
 #: applet.js:1044
 msgid "Short break paused"
@@ -296,13 +302,17 @@ msgstr ""
 
 #: features.js:204
 #, javascript-format
-msgid "%d focus blocks today — great work!"
-msgstr "%d fókuszblokk ma — nagyszerű munka!"
+msgid "%d focus block today — great work!"
+msgid_plural "%d focus blocks today — great work!"
+msgstr[0] "%d fókuszblokk ma — nagyszerű munka!"
+msgstr[1] "%d fókuszblokk ma — nagyszerű munka!"
 
 #: features.js:206
 #, javascript-format
 msgid "🔥 %d-day streak"
-msgstr "🔥 %d napos sorozat"
+msgid_plural "🔥 %d-day streak"
+msgstr[0] "🔥 %d napos sorozat"
+msgstr[1] "🔥 %d napos sorozat"
 
 #: features.js:208
 msgid "Daily goal reached 🍅"
@@ -478,15 +488,15 @@ msgstr "A Pomodoro-technika 🍅"
 msgid ""
 "In the late 1980s, university student Francesco Cirillo couldn't focus on "
 "his studies. He bet himself he could stay concentrated for just a few "
-"minutes and reached for the first timer he could find — a kitchen one shaped "
-"like a tomato. In Italian, a tomato is a “pomodoro”, and that's how the "
+"minutes and reached for the first timer he could find — a kitchen one shaped"
+" like a tomato. In Italian, a tomato is a “pomodoro”, and that's how the "
 "method got its name."
 msgstr ""
 "Az 1980-as évek végén Francesco Cirillo egyetemista nem tudott a "
 "tanulmányaira koncentrálni. Fogadott magával, hogy akár csak néhány percig "
 "is képes összpontosítani, és felkapta az első keze ügyébe kerülő időzítőt — "
-"egy paradicsom alakú konyhai időzítőt. Olaszul a paradicsom „pomodoro” — így "
-"kapta a módszer a nevét."
+"egy paradicsom alakú konyhai időzítőt. Olaszul a paradicsom „pomodoro” — így"
+" kapta a módszer a nevét."
 
 #: features.js:933
 msgid ""
@@ -494,8 +504,8 @@ msgid ""
 "Promise yourself just 25 minutes of focus on one task, and starting becomes "
 "easy."
 msgstr ""
-"Az ötlet egyszerű: a nagy feladatok ijesztők, egyetlen pomodoro viszont nem. "
-"Ígérj magadnak mindössze 25 perc összpontosítást egyetlen feladatra, és a "
+"Az ötlet egyszerű: a nagy feladatok ijesztők, egyetlen pomodoro viszont nem."
+" Ígérj magadnak mindössze 25 perc összpontosítást egyetlen feladatra, és a "
 "nekikezdés könnyűvé válik."
 
 #: features.js:934
@@ -536,8 +546,8 @@ msgstr ""
 #: features.js:937
 msgid ""
 "Tip: when something distracts you, don't drop what you're doing — jot the "
-"thought down and come back to it on your break. Every finished pomodoro is a "
-"small win that keeps your momentum going."
+"thought down and come back to it on your break. Every finished pomodoro is a"
+" small win that keeps your momentum going."
 msgstr ""
 "Tipp: ha valami eltérít, ne hagyd abba, amit csinálsz — jegyezd fel a "
 "gondolatot, és térj vissza rá a szünetben. Minden befejezett pomodoro egy "
@@ -601,8 +611,8 @@ msgstr ""
 #: features.js:1144
 msgid ""
 "Focus in short sprints with deliberate rest: about 25 minutes on one task, "
-"then a 5-minute break; after four sprints, take a longer 15–30 minute break. "
-"The finite countdown keeps a task approachable and the regular breaks "
+"then a 5-minute break; after four sprints, take a longer 15–30 minute break."
+" The finite countdown keeps a task approachable and the regular breaks "
 "protect your attention."
 msgstr ""
 
@@ -647,8 +657,8 @@ msgstr "A személyre szabott beállításod 🍅"
 
 #: features.js:1184
 msgid ""
-"Based on your answers, here's what I'll set up. Untick anything you'd rather "
-"skip, then apply."
+"Based on your answers, here's what I'll set up. Untick anything you'd rather"
+" skip, then apply."
 msgstr ""
 "A válaszaid alapján a következőt állítom be. Vedd ki a pipát onnan, amit "
 "kihagynál, majd alkalmazd."
@@ -696,8 +706,10 @@ msgstr "Napi cél elérve — %d kész ma. Szép."
 
 #: features.js:1492
 #, javascript-format
-msgid "%d interruptions this week — what keeps pulling you away?"
-msgstr "%d megszakítás ezen a héten — mi vonja el folyton a figyelmed?"
+msgid "%d interruption this week — what keeps pulling you away?"
+msgid_plural "%d interruptions this week — what keeps pulling you away?"
+msgstr[0] "%d megszakítás ezen a héten — mi vonja el folyton a figyelmed?"
+msgstr[1] "%d megszakítás ezen a héten — mi vonja el folyton a figyelmed?"
 
 #: features.js:1495 features.js:1815
 #, javascript-format
@@ -711,8 +723,10 @@ msgstr "A legtöbb fókusz erre ment: „%s”."
 
 #: features.js:1500
 #, javascript-format
-msgid "%d pomodoros this week. Keep it going."
-msgstr "%d pomodoro ezen a héten. Csak így tovább."
+msgid "%d pomodoro this week. Keep it going."
+msgid_plural "%d pomodoros this week. Keep it going."
+msgstr[0] "%d pomodoro ezen a héten. Csak így tovább."
+msgstr[1] "%d pomodoro ezen a héten. Csak így tovább."
 
 #: features.js:1501
 msgid "Start a focus session — your insights will appear here."
@@ -999,8 +1013,8 @@ msgstr ""
 #: features.js:2867
 msgid ""
 "Focus spotlight is armed. When your next focus session starts, every window "
-"except the one you're working in dims, so your task stands out. Click the on-"
-"screen pill to exit."
+"except the one you're working in dims, so your task stands out. Click the "
+"on-screen pill to exit."
 msgstr ""
 
 #. settings-schema.json->sec_zen->title
@@ -1071,8 +1085,8 @@ msgstr "Időzítő visszaállítása"
 
 #: menu.js:377
 msgid ""
-"Stop the current timer and return to the start. Your pomodoro count for this "
-"set is kept."
+"Stop the current timer and return to the start. Your pomodoro count for this"
+" set is kept."
 msgstr ""
 
 #: menu.js:389
@@ -1347,8 +1361,8 @@ msgstr "Még nincs napi cél — csak ráérzünk."
 msgid ""
 "Flow extend: keep going up to 10 min past the timer when you're in the zone."
 msgstr ""
-"Flow meghosszabbítása: folytasd akár 10 perccel az időzítő után, amikor flow-"
-"ban vagy."
+"Flow meghosszabbítása: folytasd akár 10 perccel az időzítő után, amikor "
+"flow-ban vagy."
 
 #: recommend.js:171
 msgid "Silent focus — no ticking or chimes."
@@ -1685,7 +1699,8 @@ msgid "Long Break Duration:"
 msgstr "Hosszú szünet időtartama:"
 
 #. settings-schema.json->long_break_duration->tooltip
-msgid "Length of the longer break after a set of pomodoros (classic is 15–30)."
+msgid ""
+"Length of the longer break after a set of pomodoros (classic is 15–30)."
 msgstr ""
 "A hosszabb szünet hossza egy pomodoro-sorozat után (klasszikusan 15–30)."
 
@@ -1694,7 +1709,8 @@ msgid "Number of pomodori before long break:"
 msgstr "Pomodorók száma hosszú szünet előtt:"
 
 #. settings-schema.json->pomodori_number->tooltip
-msgid "How many focus blocks to complete before the long break (classic is 4)."
+msgid ""
+"How many focus blocks to complete before the long break (classic is 4)."
 msgstr "Hány fókuszblokk teljesüljön a hosszú szünet előtt (klasszikusan 4)."
 
 #. settings-schema.json->start_automatically_on_load->description
@@ -1735,15 +1751,21 @@ msgstr ""
 "Felugró párbeszédek megjelenítése minden fázis végén (kikapcsolva csendes "
 "marad — csak képernyős jelzések)."
 
-#. settings-schema.json->auto_start_next->description
-msgid "Automatically start the next phase"
-msgstr ""
+#. settings-schema.json->auto_start_break->description
+msgid "Automatically start breaks"
+msgstr "Szünetek automatikus indítása"
 
-#. settings-schema.json->auto_start_next->tooltip
-msgid ""
-"When a phase ends, start the next one (focus or break) automatically instead "
-"of waiting."
-msgstr ""
+#. settings-schema.json->auto_start_break->tooltip
+msgid "When a focus phase ends, start the break automatically."
+msgstr "Amikor a fókuszfázis véget ér, a szünet automatikusan elindul."
+
+#. settings-schema.json->auto_start_pomodoro->description
+msgid "Automatically start focus after a break"
+msgstr "Fókusz automatikus indítása szünet után"
+
+#. settings-schema.json->auto_start_pomodoro->tooltip
+msgid "When a break ends, start the next focus phase automatically."
+msgstr "Amikor a szünet véget ér, a következő fókuszfázis automatikusan elindul."
 
 #. settings-schema.json->panel_icon_style->description
 msgid "Panel icon"
@@ -1856,9 +1878,9 @@ msgstr "Az időzítő vezérlése egérrel a panelen"
 
 #. settings-schema.json->panel_scroll_control->tooltip
 msgid ""
-"Scroll up on the applet to start or resume, scroll down to pause, and middle-"
-"click to skip the phase. Turn this off if you sometimes scroll over the "
-"panel by accident."
+"Scroll up on the applet to start or resume, scroll down to pause, and "
+"middle-click to skip the phase. Turn this off if you sometimes scroll over "
+"the panel by accident."
 msgstr ""
 "Görgess felfelé az appleten az indításhoz vagy folytatáshoz, lefelé a "
 "szüneteltetéshez, középső kattintás a fázis kihagyásához. Kapcsold ki, ha "
@@ -1896,8 +1918,8 @@ msgstr ""
 
 #. settings-schema.json->focus_start_ritual->description
 msgid ""
-"Start ritual: brief centered 'Focus: <task>' and a smooth fade-in when focus "
-"begins"
+"Start ritual: brief centered 'Focus: <task>' and a smooth fade-in when focus"
+" begins"
 msgstr ""
 "Kezdő rituálé: rövid, középre igazított „Fókusz: <feladat>” és lágy beúszás "
 "a fókusz kezdetekor"
@@ -1905,8 +1927,8 @@ msgstr ""
 #. settings-schema.json->focus_start_ritual->tooltip
 msgid "Briefly show 'Focus: <task>' with a smooth fade-in when focus begins."
 msgstr ""
-"Röviden megjeleníti a „Fókusz: <feladat>” feliratot lágy beúszással a fókusz "
-"kezdetekor."
+"Röviden megjeleníti a „Fókusz: <feladat>” feliratot lágy beúszással a fókusz"
+" kezdetekor."
 
 #. settings-schema.json->prompt_focus_task->description
 msgid "Ask which task to focus on before starting"
@@ -2006,8 +2028,8 @@ msgstr "Ragyogás erőssége"
 
 #. settings-schema.json->glow_intensity->tooltip
 msgid ""
-"How bright the on-screen edge glow is during focus — higher is more visible, "
-"lower is subtler."
+"How bright the on-screen edge glow is during focus — higher is more visible,"
+" lower is subtler."
 msgstr ""
 "Mennyire erős a képernyőszéli ragyogás fókusz közben — magasabb láthatóbb, "
 "alacsonyabb finomabb."
@@ -2030,8 +2052,8 @@ msgstr "Lazító 4-6"
 
 #. settings-schema.json->breathing_pattern->tooltip
 msgid ""
-"Breathing rhythm for the guide: Box (4-4-4-4), calming 4-7-8, or relaxed 4-6 "
-"— seconds per phase."
+"Breathing rhythm for the guide: Box (4-4-4-4), calming 4-7-8, or relaxed 4-6"
+" — seconds per phase."
 msgstr ""
 "A vezető légzésritmusa: Doboz (4-4-4-4), nyugtató 4-7-8, vagy lazító 4-6 — "
 "másodperc fázisonként."
@@ -2069,11 +2091,12 @@ msgid "Disable focus animations (fades, pulsing, breathing)."
 msgstr "Fókuszanimációk kikapcsolása (úszások, pulzálás, légzés)."
 
 #. settings-schema.json->menu_font_scale->description
-msgid "Menu font scale (%)"
+msgid "Font scale (%)"
 msgstr "Menü betűméret-arány (%)"
 
 #. settings-schema.json->menu_font_scale->tooltip
-msgid "Make the applet menu's text larger or smaller (100% = default size)."
+msgid ""
+"Scale the text in the menu, dialogs and statistics (100% = default size)."
 msgstr ""
 "Az applet menü szövegének nagyítása vagy kicsinyítése (100% = alapméret)."
 
@@ -2083,8 +2106,8 @@ msgstr "Fókuszkeret előnézete"
 
 #. settings-schema.json->preview_appearance_button->tooltip
 msgid ""
-"Briefly show the on-screen focus frame and task chip with the current colors "
-"and style (works when no timer is running)."
+"Briefly show the on-screen focus frame and task chip with the current colors"
+" and style (works when no timer is running)."
 msgstr ""
 "Röviden megjeleníti a képernyős fókuszkeretet és feladatcímkét az aktuális "
 "színekkel és stílussal (akkor működik, ha nem fut időzítő)."
@@ -2186,9 +2209,9 @@ msgid ""
 "until a natural pause instead of interrupting you. Off by default; only "
 "applies when 'auto-continue to break' is off."
 msgstr ""
-"Amikor egy fókusz-pomodoro úgy ér véget, hogy épp aktívan dolgozol, a szünet "
-"megvárja a természetes megállást ahelyett, hogy félbeszakítana. Alapból ki; "
-"csak akkor él, ha az «automatikus átlépés a szünetre» ki van kapcsolva."
+"Amikor egy fókusz-pomodoro úgy ér véget, hogy épp aktívan dolgozol, a szünet"
+" megvárja a természetes megállást ahelyett, hogy félbeszakítana. Alapból ki;"
+" csak akkor él, ha az «automatikus átlépés a szünetre» ki van kapcsolva."
 
 #. settings-schema.json->flow_soft_landing_behavior->description
 msgid "When focus ends and you're still working"
@@ -2204,12 +2227,12 @@ msgstr "Fókusz csendes meghosszabbítása"
 
 #. settings-schema.json->flow_soft_landing_behavior->tooltip
 msgid ""
-"Wait: hold quietly at the end until you pause, then offer the break. Quietly "
-"extend: silently add focus time (the 'Extend amount' above) and keep going, "
-"re-checking each time."
+"Wait: hold quietly at the end until you pause, then offer the break. Quietly"
+" extend: silently add focus time (the 'Extend amount' above) and keep going,"
+" re-checking each time."
 msgstr ""
-"Várj: csendben várj a végén, amíg meg nem állsz, majd ajánld fel a szünetet. "
-"Csendes meghosszabbítás: észrevétlenül adj hozzá fókuszidőt (a fenti "
+"Várj: csendben várj a végén, amíg meg nem állsz, majd ajánld fel a szünetet."
+" Csendes meghosszabbítás: észrevétlenül adj hozzá fókuszidőt (a fenti "
 "«meghosszabbítás mértéke») és folytasd, minden alkalommal újraellenőrizve."
 
 #. settings-schema.json->focus_ambient_choice->description
@@ -2267,8 +2290,8 @@ msgid ""
 "Loop a soft ambient sound during focus — the built-in brown noise, or your "
 "own file below."
 msgstr ""
-"Lágy háttérhang ismétlése fókusz közben — a beépített barna zaj vagy a saját "
-"fájlod alább."
+"Lágy háttérhang ismétlése fókusz közben — a beépített barna zaj vagy a saját"
+" fájlod alább."
 
 #. settings-schema.json->focus_ambient_volume->description
 msgid "Ambient volume"
@@ -2318,7 +2341,8 @@ msgstr ""
 
 #. settings-schema.json->zen_mode_enabled->description
 msgid ""
-"Enable Zen mode (focus spotlight — dims other windows, toggled from the menu)"
+"Enable Zen mode (focus spotlight — dims other windows, toggled from the "
+"menu)"
 msgstr ""
 
 #. settings-schema.json->zen_mode_enabled->tooltip
@@ -2355,8 +2379,8 @@ msgstr "Szigorú fókusz: nincs szünet vagy kihagyás fókuszblokk közben"
 
 #. settings-schema.json->strict_focus->tooltip
 msgid ""
-"While a focus block is running, hide pause and skip so you commit to it. You "
-"can still Reset to abandon the session — it's never a hard lock."
+"While a focus block is running, hide pause and skip so you commit to it. You"
+" can still Reset to abandon the session — it's never a hard lock."
 msgstr ""
 "Amíg fókuszblokk fut, a szünet és kihagyás rejtve van, hogy elköteleződj "
 "mellette. A menetet a Nullázással így is feladhatod — soha nem teljes "
@@ -2398,8 +2422,8 @@ msgstr "Fókusz kezdetekor futtatandó parancs"
 
 #. settings-schema.json->focus_start_command->tooltip
 msgid ""
-"Pick a script to run when a focus block starts (e.g. enable Do Not Disturb). "
-"You can also type a command."
+"Pick a script to run when a focus block starts (e.g. enable Do Not Disturb)."
+" You can also type a command."
 msgstr ""
 
 #. settings-schema.json->break_start_command->description
@@ -2436,10 +2460,11 @@ msgstr ""
 
 #. settings-schema.json->pushover_help->description
 msgid ""
-"Free phone/desktop alerts. Sign up at pushover.net and paste your keys below."
+"Free phone/desktop alerts. Sign up at pushover.net and paste your keys "
+"below."
 msgstr ""
-"Ingyenes értesítések telefonra/asztalra. Regisztrálj a pushover.net oldalon, "
-"és illeszd be a kulcsokat alább."
+"Ingyenes értesítések telefonra/asztalra. Regisztrálj a pushover.net oldalon,"
+" és illeszd be a kulcsokat alább."
 
 #. settings-schema.json->pushover_user_key->description
 msgid "Pushover user key"
@@ -2475,8 +2500,8 @@ msgstr "Üzenetek, hangok és prioritás testreszabása"
 
 #. settings-schema.json->pushover_customize->tooltip
 msgid ""
-"Show options to change the text, sound and priority for each event. Off uses "
-"sensible defaults."
+"Show options to change the text, sound and priority for each event. Off uses"
+" sensible defaults."
 msgstr ""
 "Megjeleníti a szöveg, hang és prioritás módosítási lehetőségeit minden "
 "eseményhez. Kikapcsolva ésszerű alapértékeket használ."
@@ -2518,8 +2543,8 @@ msgstr ""
 #. settings-schema.json->enable_blocking->tooltip
 msgid ""
 "When on, the sites below are blocked right now and stay blocked until you "
-"turn this off. Run \"Set up passwordless blocking\" once so toggling doesn't "
-"ask for a password."
+"turn this off. Run \"Set up passwordless blocking\" once so toggling doesn't"
+" ask for a password."
 msgstr ""
 
 #. settings-schema.json->block_domains->description
@@ -2532,8 +2557,8 @@ msgstr "Domain"
 
 #. settings-schema.json->block_domains->tooltip
 msgid ""
-"Domains to block while blocking is on, one per row (e.g. youtube.com, www."
-"youtube.com)."
+"Domains to block while blocking is on, one per row (e.g. youtube.com, "
+"www.youtube.com)."
 msgstr ""
 
 #. settings-schema.json->sox-info->description
@@ -2720,8 +2745,8 @@ msgid ""
 "Your timer presets — name + focus / short / long minutes + pomodori. Apply "
 "them from the menu's Preset submenu."
 msgstr ""
-"Az időzítő-előbeállításaid — név + fókusz / rövid / hosszú perc + pomodorók. "
-"Alkalmazd őket a menü Előbeállítás almenüjéből."
+"Az időzítő-előbeállításaid — név + fókusz / rövid / hosszú perc + pomodorók."
+" Alkalmazd őket a menü Előbeállítás almenüjéből."
 
 #. settings-schema.json->setup_passwordless_button->description
 msgid "Set up passwordless blocking (one-time)"
@@ -2804,8 +2829,8 @@ msgid ""
 "Sent once when you hit your daily pomodoro goal. {task} and {minutes} are "
 "substituted. Leave empty to send nothing."
 msgstr ""
-"Egyszer kerül elküldésre, amikor eléred a napi pomodoro-célodat. A {task} és "
-"{minutes} behelyettesítésre kerül. Hagyd üresen, ha nem szeretnél semmit "
+"Egyszer kerül elküldésre, amikor eléred a napi pomodoro-célodat. A {task} és"
+" {minutes} behelyettesítésre kerül. Hagyd üresen, ha nem szeretnél semmit "
 "küldeni."
 
 #. settings-schema.json->pushover_sound->description
@@ -2866,8 +2891,8 @@ msgstr "Háttérhang fájl"
 
 #. settings-schema.json->focus_ambient_file->tooltip
 msgid ""
-"Pick your own looping ambient sound. Leave empty for the built-in soft brown "
-"noise."
+"Pick your own looping ambient sound. Leave empty for the built-in soft brown"
+" noise."
 msgstr ""
 "Válaszd ki a saját ismétlődő háttérhangod. Hagyd üresen a beépített lágy "
 "barna zajhoz."

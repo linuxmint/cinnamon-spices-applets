@@ -77,7 +77,8 @@
                 "start_automatically_on_load",
                 "session_recovery",
                 "show_dialog_messages",
-                "auto_start_next",
+                "auto_start_break",
+                "auto_start_pomodoro",
                 "onboarding_button",
                 "about_technique_button",
                 "restore_onboarding_button"
@@ -85,7 +86,7 @@
         },
         "sec_panel": {
             "type": "section",
-            "title": "Panel",
+            "title": "Display and controls",
             "keys": [
                 "panel_icon_style",
                 "panel_custom_icon",
@@ -158,7 +159,8 @@
                 "focus_ambient_choice",
                 "focus_ambient_file",
                 "focus_ambient_volume",
-                "focus_ambient_preview_button"
+                "focus_ambient_preview_button",
+                "focus_ambient_stop_button"
             ]
         },
         "sec_modes": {
@@ -193,6 +195,7 @@
                 "timer_sound_file",
                 "timer_sound_volume",
                 "timer_sound_test",
+                "timer_sound_stop_button",
                 "hdr_alerts",
                 "break_sound",
                 "break_sound_file",
@@ -237,6 +240,17 @@
                 "pushover_customize"
             ]
         },
+        "sec_po_reminder": {
+            "type": "section",
+            "title": "Reminder",
+            "dependency": "pushover_enabled",
+            "keys": [
+                "pushover_reminder",
+                "pushover_reminder_phase",
+                "pushover_reminder_minutes",
+                "pushover_msg_reminder"
+            ]
+        },
         "sec_po_messages": {
             "type": "section",
             "title": "Notification text",
@@ -256,15 +270,17 @@
             "dependency": "pushover_customize",
             "keys": [
                 "pushover_sound",
+                "pushover_sound_help",
                 "pushover_priority"
             ]
         },
         "sec_blocking": {
             "type": "section",
-            "title": "Distraction blocking (advanced)",
+            "title": "Distraction blocking",
             "keys": [
                 "enable_blocking",
                 "block_domains",
+                "blocking_auth_mode",
                 "setup_passwordless_button",
                 "remove_passwordless_button"
             ]
@@ -338,14 +354,20 @@
     "show_dialog_messages": {
         "type": "switch",
         "description": "Show a pop-up prompt at each phase change",
-        "default": true,
+        "default": false,
         "tooltip": "Show pop-up dialogs at the end of each phase (off keeps it quiet — only on-screen cues)."
     },
-    "auto_start_next": {
+    "auto_start_break": {
         "type": "switch",
-        "description": "Automatically start the next phase",
+        "description": "Automatically start breaks",
         "default": true,
-        "tooltip": "When a phase ends, start the next one (focus or break) automatically instead of waiting."
+        "tooltip": "When a focus phase ends, start the break automatically."
+    },
+    "auto_start_pomodoro": {
+        "type": "switch",
+        "description": "Automatically start focus after a break",
+        "default": false,
+        "tooltip": "When a break ends, start the next focus phase automatically."
     },
     "panel_icon_style": {
         "type": "combobox",
@@ -376,7 +398,7 @@
     "show_seconds": {
         "type": "switch",
         "description": "Show seconds in the panel timer",
-        "default": true,
+        "default": false,
         "tooltip": "Off shows only the remaining minutes on the panel (less distracting).",
         "dependency": "show_timer"
     },
@@ -496,7 +518,8 @@
         "max": 60,
         "step": 1,
         "description": "Glow intensity",
-        "tooltip": "How bright the on-screen edge glow is during focus — higher is more visible, lower is subtler."
+        "tooltip": "How bright the on-screen edge glow is during focus — higher is more visible, lower is subtler.",
+        "dependency": "frame_style=glow"
     },
     "breathing_pattern": {
         "type": "combobox",
@@ -507,7 +530,8 @@
             "4-7-8": "478",
             "Relaxing 4-6": "relax"
         },
-        "tooltip": "Breathing rhythm for the guide: Box (4-4-4-4), calming 4-7-8, or relaxed 4-6 — seconds per phase."
+        "tooltip": "Breathing rhythm for the guide: Box (4-4-4-4), calming 4-7-8, or relaxed 4-6 — seconds per phase.",
+        "dependency": "break_breathing"
     },
     "chip_position": {
         "type": "combobox",
@@ -519,7 +543,8 @@
             "Top-right": "tr",
             "Top-left": "tl"
         },
-        "tooltip": "Which screen corner the on-screen task chip appears in."
+        "tooltip": "Which screen corner the on-screen task chip appears in.",
+        "dependency": "focus_show_task_chip"
     },
     "reduce_motion": {
         "type": "switch",
@@ -533,8 +558,8 @@
         "min": 80,
         "max": 140,
         "step": 5,
-        "description": "Menu font scale (%)",
-        "tooltip": "Make the applet menu's text larger or smaller (100% = default size)."
+        "description": "Font scale (%)",
+        "tooltip": "Scale the text in the menu, dialogs and statistics (100% = default size)."
     },
     "preview_appearance_button": {
         "type": "button",
@@ -601,8 +626,8 @@
     "flow_extend": {
         "type": "switch",
         "description": "Offer to extend focus when a pomodoro ends (stay in flow)",
-        "default": true,
-        "tooltip": "When a pomodoro ends, offer to extend it to stay in flow."
+        "default": false,
+        "tooltip": "When a pomodoro ends, offer to extend it to stay in flow. Only applies when the next phase doesn't start automatically."
     },
     "flow_extend_minutes": {
         "type": "scale",
@@ -618,7 +643,7 @@
         "type": "switch",
         "description": "Soft landing: don't break focus while you're still working",
         "default": false,
-        "tooltip": "When a focus pomodoro ends while you're actively working, hold the break until a natural pause instead of interrupting you. Off by default; only applies when 'auto-continue to break' is off."
+        "tooltip": "When a focus pomodoro ends while you're actively working, hold the break until a natural pause instead of interrupting you. Off by default; only applies when the next phase doesn't start automatically."
     },
     "flow_soft_landing_behavior": {
         "type": "combobox",
@@ -673,8 +698,15 @@
     "focus_ambient_preview_button": {
         "type": "button",
         "description": "▶ Preview",
-        "tooltip": "Play a short sample of the chosen ambient sound at the set volume.",
+        "tooltip": "Loop a preview of the chosen ambient sound; drag the volume slider to adjust it live.",
         "callback": "_previewAmbientSound",
+        "dependency": "focus_ambient_choice!=off"
+    },
+    "focus_ambient_stop_button": {
+        "type": "button",
+        "description": "■ Stop",
+        "tooltip": "Stop the ambient preview.",
+        "callback": "_stopAmbientPreview",
         "dependency": "focus_ambient_choice!=off"
     },
     "break_breathing": {
@@ -814,7 +846,8 @@
         "expand-width": true,
         "description": "Notification title",
         "default": "Zen Pomodoro",
-        "tooltip": "Title shown on the push notifications."
+        "tooltip": "Title shown on the push notifications.",
+        "dependency": "pushover_enabled"
     },
     "pushover_msg_focus": {
         "type": "entry",
@@ -836,7 +869,7 @@
         "type": "switch",
         "description": "Block distracting sites",
         "default": false,
-        "tooltip": "When on, the sites below are blocked right now and stay blocked until you turn this off. Run \"Set up passwordless blocking\" once so toggling doesn't ask for a password."
+        "tooltip": "When on, the sites below are blocked right now and stay blocked until you turn this off. Run \"Set up passwordless blocking\" once so toggling doesn't ask for a password. Note: a browser using secure DNS (DoH) can bypass /etc/hosts blocking — disable the browser's secure DNS for it to take effect."
     },
     "block_domains": {
         "type": "list",
@@ -852,6 +885,17 @@
         "dependency": "enable_blocking",
         "tooltip": "Domains to block while blocking is on, one per row (e.g. youtube.com, www.youtube.com)."
     },
+    "blocking_auth_mode": {
+        "type": "combobox",
+        "description": "Authorization for toggling blocking",
+        "default": "yes",
+        "options": {
+            "Never ask (passwordless)": "yes",
+            "Ask once per login session (safer)": "keep"
+        },
+        "dependency": "enable_blocking",
+        "tooltip": "How the one-time setup configures the pkexec policy: never ask (passwordless, convenient), or ask once per login session (safer — a stray process can't then toggle blocking silently). Re-run \"Set up passwordless blocking\" after changing this."
+    },
     "sox-info": {
         "type": "label",
         "description": "No sound backend found — install GSound or a player like pulseaudio-utils.",
@@ -863,13 +907,13 @@
     },
     "timer_sound": {
         "type": "switch",
-        "description": "Play Timer Sound",
+        "description": "Play the ticking sound",
         "default": false,
         "tooltip": "Play a soft ticking sound while focusing."
     },
     "timer_sound_file": {
         "type": "filechooser",
-        "description": "Timer Sound File",
+        "description": "Ticking sound file",
         "default": "tick.ogg",
         "select-dir": false,
         "dependency": "timer_sound",
@@ -881,19 +925,19 @@
         "min": 1,
         "max": 100,
         "step": 1,
-        "description": "Sound volume:",
+        "description": "Volume",
         "dependency": "timer_sound",
         "tooltip": "Volume of the ticking sound (0 = silent)."
     },
     "break_sound": {
         "type": "switch",
-        "description": "Play Break Sound",
+        "description": "Play a sound when a break starts",
         "default": true,
         "tooltip": "Play a sound when a break begins."
     },
     "break_sound_file": {
         "type": "filechooser",
-        "description": "Break Sound File",
+        "description": "Break sound file",
         "default": "deskbell.wav",
         "select-dir": false,
         "dependency": "break_sound",
@@ -905,13 +949,13 @@
         "min": 1,
         "max": 100,
         "step": 1,
-        "description": "Sound volume:",
+        "description": "Volume",
         "dependency": "break_sound",
         "tooltip": "Volume of the break sound (0 = silent)."
     },
     "warn_sound": {
         "type": "switch",
-        "description": "Play Warn Sound",
+        "description": "Play a warning before focus ends",
         "default": false,
         "tooltip": "Play a warning sound shortly before a focus block ends."
     },
@@ -921,13 +965,13 @@
         "min": 5,
         "max": 600,
         "step": 5,
-        "description": "Warn Delay (in secs):",
+        "description": "Warning lead time (seconds)",
         "dependency": "warn_sound",
         "tooltip": "How many seconds before the end the warning sound plays."
     },
     "warn_sound_file": {
         "type": "filechooser",
-        "description": "Warn Sound File",
+        "description": "Warning sound file",
         "default": "warn.wav",
         "select-dir": false,
         "dependency": "warn_sound",
@@ -939,19 +983,19 @@
         "min": 1,
         "max": 100,
         "step": 1,
-        "description": "Sound volume:",
+        "description": "Volume",
         "dependency": "warn_sound",
         "tooltip": "Volume of the warning sound (0 = silent)."
     },
     "start_sound": {
         "type": "switch",
-        "description": "Play Start Sound",
+        "description": "Play a sound when focus starts",
         "default": true,
         "tooltip": "Play a sound when a focus block starts."
     },
     "start_sound_file": {
         "type": "filechooser",
-        "description": "Start Sound File",
+        "description": "Start sound file",
         "default": "deskbell.wav",
         "select-dir": false,
         "dependency": "start_sound",
@@ -963,7 +1007,7 @@
         "min": 1,
         "max": 100,
         "step": 1,
-        "description": "Sound volume:",
+        "description": "Volume",
         "dependency": "start_sound",
         "tooltip": "Volume of the start sound (0 = silent)."
     },
@@ -979,7 +1023,7 @@
         "min": 10,
         "max": 600,
         "step": 5,
-        "description": "Chime interval (seconds):",
+        "description": "Chime interval (seconds)",
         "dependency": "interval_chime",
         "tooltip": "Seconds between chimes during focus."
     },
@@ -997,15 +1041,21 @@
         "min": 1,
         "max": 100,
         "step": 1,
-        "description": "Chime volume:",
+        "description": "Volume",
         "dependency": "interval_chime",
         "tooltip": "Volume of the interval chime (0 = silent)."
     },
     "timer_sound_test": {
         "type": "button",
-        "description": "Listen",
+        "description": "▶ Preview",
         "callback": "_previewTimerSound",
-        "tooltip": "Play the selected sound now."
+        "tooltip": "Loop a preview of the ticking sound; drag the volume slider to adjust it live."
+    },
+    "timer_sound_stop_button": {
+        "type": "button",
+        "description": "■ Stop",
+        "callback": "_stopTimerPreview",
+        "tooltip": "Stop the ticking preview."
     },
     "break_sound_test": {
         "type": "button",
@@ -1174,6 +1224,44 @@
         "tooltip": "Sent once when you hit your daily pomodoro goal. {task} and {minutes} are substituted. Leave empty to send nothing.",
         "dependency": "pushover_enabled"
     },
+    "pushover_reminder": {
+        "type": "switch",
+        "default": false,
+        "description": "Remind before focus or break ends",
+        "tooltip": "Send a Pushover push shortly before a focus block or break ends, so you can wrap up or get ready to come back.",
+        "dependency": "pushover_enabled"
+    },
+    "pushover_reminder_phase": {
+        "type": "combobox",
+        "default": "breaks",
+        "description": "Remind before",
+        "options": {
+            "A break ends": "breaks",
+            "Focus ends": "focus",
+            "Either ends": "both"
+        },
+        "tooltip": "Whether the reminder fires before a break ends (to come back), before focus ends (to wrap up), or both.",
+        "dependency": "pushover_reminder"
+    },
+    "pushover_reminder_minutes": {
+        "type": "scale",
+        "default": 1,
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "units": "minutes",
+        "description": "Reminder time (minutes before end)",
+        "tooltip": "How many minutes before it ends to send the reminder.",
+        "dependency": "pushover_reminder"
+    },
+    "pushover_msg_reminder": {
+        "type": "entry",
+        "expand-width": true,
+        "description": "Reminder message",
+        "default": "⏳ {minutes} min left — get ready.",
+        "tooltip": "Sent before the phase ends. {task} and {minutes} (minutes left) are substituted. Leave empty to send nothing.",
+        "dependency": "pushover_reminder"
+    },
     "pushover_sound": {
         "type": "combobox",
         "description": "Notification sound",
@@ -1188,6 +1276,11 @@
             "Intermission": "intermission",
             "None": "none"
         },
+        "dependency": "pushover_enabled"
+    },
+    "pushover_sound_help": {
+        "type": "label",
+        "description": "Preview each sound (play buttons) at https://pushover.net/api#sounds",
         "dependency": "pushover_enabled"
     },
     "pushover_priority": {
