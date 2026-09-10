@@ -1,0 +1,11 @@
+{
+    "uuid": "cinnaquick@alex",
+    "name": "CinnaQuick",
+    "description": "Modern quick settings panel for Cinnamon with Wi-Fi, Bluetooth, volume, brightness, notifications, system updates, clock and network settings.",
+    "version": "1.0",
+    "author": "Alex",
+    "icon": "preferences-system",
+    "cinnamon-version": [
+        "6.6"
+    ]
+}
