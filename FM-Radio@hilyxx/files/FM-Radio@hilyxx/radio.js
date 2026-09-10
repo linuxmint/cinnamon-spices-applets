@@ -142,7 +142,13 @@ const RadioPlayer = class RadioPlayer {
     _initPipeline() {
         if (this.playbin && this.sink) return;
 
-        Gst.init([]);
+         // Gst.init(null) prevents a complete session crash on older GJS (e.g., Linux Mint).
+        // The fallback to [] handles strict type errors on newer GJS (e.g., Arch/CachyOS).
+        try {
+            Gst.init(null);
+        } catch (e) {
+            Gst.init([]);
+        }
         
         this.playbin = Gst.ElementFactory.make("playbin", "fmradio");
         
