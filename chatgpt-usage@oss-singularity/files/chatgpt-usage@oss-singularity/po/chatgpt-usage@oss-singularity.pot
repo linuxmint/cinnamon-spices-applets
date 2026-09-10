@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ChatGPT Usage Monitor 1.0.4\n"
+"Project-Id-Version: ChatGPT Usage Monitor 1.0.5\n"
 "Report-Msgid-Bugs-To: https://github.com/oss-singularity/cinnamon-chatgpt-usage/issues\n"
 "POT-Creation-Date: 2026-09-08 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -43,12 +43,17 @@ msgstr ""
 
 #: applet.js
 #, javascript-format
-msgid "  ·  %s  ·  %s buckets  ·  peak %s"
+msgid "  ·  %s  ·  %s buckets  ·  peak %s%s"
 msgstr ""
 
 #: applet.js
 #, javascript-format
 msgid "  ·  24h %s"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid " / %s AIC"
 msgstr ""
 
 #: settings-schema.json.js
@@ -277,7 +282,13 @@ msgid "<1%"
 msgstr ""
 
 #: metadata.json.js
-msgid "A tiny Cinnamon companion keeping ChatGPT Work & Codex usage beautifully in view."
+msgid ""
+"A tiny Cinnamon companion\n"
+"keeping ChatGPT Work & Codex usage beautifully in view."
+msgstr ""
+
+#: applet.js
+msgid "About..."
 msgstr ""
 
 #: usage-format.js
@@ -416,7 +427,23 @@ msgid "Colors"
 msgstr ""
 
 #: applet.js
+msgid "Configure..."
+msgstr ""
+
+#: applet.js
 msgid "Consumed:  "
+msgstr ""
+
+#: applet.js
+msgid "Copied"
+msgstr ""
+
+#: applet.js
+msgid "Copy Screenshot"
+msgstr ""
+
+#: applet.js
+msgid "Copy Usage Monitor Screenshot to Clipboard"
 msgstr ""
 
 #: applet.js path_settings.py
@@ -521,6 +548,21 @@ msgstr ""
 
 #: applet.js
 msgid "Invalid saved reset attempt; reset actions are disabled"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "Last %s reset: %s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "Last %s reset: %s (estimated from next reset)"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "Last %s reset: unavailable"
 msgstr ""
 
 #: applet.js

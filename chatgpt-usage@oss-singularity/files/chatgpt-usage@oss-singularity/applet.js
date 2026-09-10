@@ -20,8 +20,10 @@ const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const Pango = imports.gi.Pango;
+const GdkPixbuf = imports.gi.GdkPixbuf;
 const Cairo = imports.cairo;
 const Atk = imports.gi.Atk;
+const Cinnamon = imports.gi.Cinnamon;
 
 const UsageFormat = require("./usage-format");
 
@@ -54,9 +56,14 @@ const POPUP_RIGHT_INSET = 17;
 const POPUP_CHART_RIGHT_INSET = 39;
 const POPUP_NESTED_CHART_LEFT_SHIFT = 5;
 const POPUP_NESTED_CHART_RIGHT_BALANCE = 11;
+const POPUP_SCREENSHOT_CORNER_SIZE = 30;
+const POPUP_SCREENSHOT_CAMERA_STYLE = "color: rgba(218,222,228,0.48);";
+const POPUP_SCREENSHOT_CAMERA_OFFSET_X = -6;
+const POPUP_SCREENSHOT_CAMERA_OFFSET_Y = -7;
 const ACTIVITY_CHART_BAR_MAX_HEIGHT = 26;
 const CREDIT_CONSUMPTION_BASE_FONT_SIZE = 102;
 const CREDIT_CONSUMPTION_MIN_FONT_SIZE = 54;
+const CREDIT_CONSUMPTION_MARKUP_MODE = "numbers";
 // The non-square arrow glyph shifts inside its actor when Cinnamon rotates it.
 const POPUP_EXPANDED_RIGHT_INSET = 10;
 const QUOTA_RING_SIZE = 52;
@@ -70,6 +77,9 @@ const RESET_EXPIRY_WARNING_SECONDS = 7 * 24 * 60 * 60;
 const RESET_EXPIRY_CRITICAL_SECONDS = 24 * 60 * 60;
 const RESET_EXPIRY_BREATHING_OPACITY = 150;
 const RESET_EXPIRY_BREATHING_DURATION_MS = 1100;
+const WEEKLY_WINDOW_MINUTES = 10080;
+const WEEKLY_WINDOW_SECONDS = WEEKLY_WINDOW_MINUTES * 60;
+const WEEKLY_RESET_HISTORY_VERSION = 1;
 const POPUP_HEADING_STYLE = "font-size: 100%; font-weight: bold;";
 const AUTH_REQUIRED_TITLE = _("No ChatGPT login found");
 const AUTH_REQUIRED_DESCRIPTION =
@@ -81,6 +91,7 @@ class UsagePopupMenu extends Applet.AppletPopupMenu {
     constructor(owner, orientation) {
         super(owner, orientation);
         this._usageOwner = owner;
+        if (this._boxWrapper) this._boxWrapper.clip_to_allocation = false;
         this._content = new PopupMenu.PopupMenuSection();
         super.addMenuItem(this._content);
         // Keep the native section's menu signals and keyboard navigation, but
@@ -94,6 +105,18 @@ class UsagePopupMenu extends Applet.AppletPopupMenu {
         this._focusSignalId = global.stage.connect("notify::key-focus", () => {
             this._revealFocus();
         });
+    }
+
+    _boxAllocate(actor, box, flags) {
+        this.box.allocate(box, flags);
+        const corner = this._usageOwner && this._usageOwner._screenshotButton;
+        if (!corner || corner.is_finalized()) return;
+        const cornerBox = new Clutter.ActorBox();
+        cornerBox.x1 = box.x1;
+        cornerBox.y1 = box.y1;
+        cornerBox.x2 = box.x1 + POPUP_SCREENSHOT_CORNER_SIZE;
+        cornerBox.y2 = box.y1 + POPUP_SCREENSHOT_CORNER_SIZE;
+        corner.allocate(cornerBox, flags);
     }
 
     _revealFocus() {
@@ -193,6 +216,10 @@ class ChatGptUsageApplet extends Applet.Applet {
         this._pendingReset = null;
         this._resetJournalError = null;
         this._resetJournalReady = false;
+        this._weeklyResetHistory = {};
+        this._weeklyResetHistoryDirty = false;
+        this._weeklyResetHistoryReady = false;
+        this._weeklyResetHistorySavePromise = null;
         this._menuRebuildTimeoutId = 0;
         this._rightPanelPopupClosedId = 0;
         this._rightPanelPopupOpenStateChangedId = 0;
@@ -201,6 +228,12 @@ class ChatGptUsageApplet extends Applet.Applet {
         this._refreshButtonLabel = null;
         this._refreshSpinnerLabel = null;
         this._updatedLabel = null;
+        this._screenshotButton = null;
+        this._screenshotButtonLabel = null;
+        this._screenshotContextMenu = null;
+        this._screenshotCopyTimeoutId = 0;
+        this._screenshotResetTimeoutId = 0;
+        this._screenshotTempFile = null;
         this._refreshSpinnerFrame = 0;
         this._historySubmenus = [];
         this._limitSections = [];
@@ -225,6 +258,7 @@ class ChatGptUsageApplet extends Applet.Applet {
         this._use24HourClock = true;
 
         this._loadResetAttempt();
+        this._loadWeeklyResetHistory();
         this._setDefaults();
         this._bindSystemClockFormat();
         this._bindSettings(instanceId);
@@ -813,6 +847,22 @@ class ChatGptUsageApplet extends Applet.Applet {
         this._refreshButtonLabel = null;
         this._refreshSpinnerLabel = null;
         this._updatedLabel = null;
+        this._destroyScreenshotContextMenu();
+        if (this._screenshotButton && !this._screenshotButton.is_finalized()) {
+            const parent = this._screenshotButton.get_parent();
+            if (parent) parent.remove_child(this._screenshotButton);
+            this._screenshotButton.destroy();
+        }
+        if (this._screenshotCopyTimeoutId) {
+            Mainloop.source_remove(this._screenshotCopyTimeoutId);
+            this._screenshotCopyTimeoutId = 0;
+        }
+        if (this._screenshotResetTimeoutId) {
+            Mainloop.source_remove(this._screenshotResetTimeoutId);
+            this._screenshotResetTimeoutId = 0;
+        }
+        this._screenshotButton = null;
+        this._screenshotButtonLabel = null;
         this._historySubmenus = [];
         this._limitSections = [];
         this._actionFrame = null;
@@ -903,6 +953,27 @@ class ChatGptUsageApplet extends Applet.Applet {
             y_align: Clutter.ActorAlign.CENTER
         });
         text.x_expand = true;
+        this._screenshotButton = this._createLaunchButton(
+            _("Copy Screenshot"),
+            {
+                iconName: "camera-photo-symbolic",
+                symbolic: true,
+                compact: true,
+                iconOnly: true,
+                corner: true,
+                keepMenuOpen: true,
+                transparent: true
+            },
+            true,
+            () => this._copyAppletScreenshot(),
+            _("Copy Usage Monitor Screenshot to Clipboard")
+        );
+        this._screenshotButton.x_expand = false;
+        this._screenshotButton.x_align = Clutter.ActorAlign.START;
+        this._screenshotButton.y_expand = false;
+        this._screenshotButton.y_align = Clutter.ActorAlign.START;
+        this._screenshotButtonLabel = this._screenshotButton._usageLabel;
+        this._buildScreenshotContextMenu();
         const title = new St.Label({ text: _("ChatGPT Work & Codex usage") });
         title.style = POPUP_HEADING_STYLE;
         text.add_child(title);
@@ -918,6 +989,14 @@ class ChatGptUsageApplet extends Applet.Applet {
             ].join("; ") + ";";
             text.add_child(this._updatedLabel);
         }
+        const headerLayer = new St.Widget({
+            layout_manager: new Clutter.BinLayout({
+                x_align: Clutter.BinAlignment.START,
+                y_align: Clutter.BinAlignment.START
+            }),
+            x_expand: true
+        });
+        headerLayer.add_child(text);
         const row = new St.BoxLayout({
             vertical: false,
             x_expand: true,
@@ -925,7 +1004,8 @@ class ChatGptUsageApplet extends Applet.Applet {
         });
         row.style = `padding-right: ${POPUP_RIGHT_INSET}px;`;
         this._popupRightInsetRows.push(row);
-        row.add_child(text);
+        row.add_child(headerLayer);
+        if (this.menu._boxWrapper) this.menu._boxWrapper.add_actor(this._screenshotButton);
 
         if (this._snapshot) {
             const summaries = UsageFormat.listQuotaWindows(this._filterModelLimits(this._snapshot.limits));
@@ -944,7 +1024,8 @@ class ChatGptUsageApplet extends Applet.Applet {
                 rings.add_child(
                     this._createQuotaRing(
                         summary,
-                        compact ? COMPACT_QUOTA_RING_SIZE : QUOTA_RING_SIZE
+                        compact ? COMPACT_QUOTA_RING_SIZE : QUOTA_RING_SIZE,
+                        summary.durationMinutes === WEEKLY_WINDOW_MINUTES
                     )
                 );
             }
@@ -962,11 +1043,13 @@ class ChatGptUsageApplet extends Applet.Applet {
         return limit && !UsageFormat.hasQuotaUsage(limit.windows) ? 128 : 255;
     }
 
-    _createQuotaRing(window, size = QUOTA_RING_SIZE) {
+    _createQuotaRing(window, size = QUOTA_RING_SIZE, showLastResetTooltip = false) {
         const actor = new St.Widget({
             layout_manager: new Clutter.BinLayout(),
             width: size,
-            height: size
+            height: size,
+            reactive: showLastResetTooltip,
+            track_hover: showLastResetTooltip
         });
         const area = new St.DrawingArea({ width: size, height: size });
         const opacity = this._quotaRingOpacity(window);
@@ -1013,7 +1096,19 @@ class ChatGptUsageApplet extends Applet.Applet {
             badge.translation_y = size < QUOTA_RING_SIZE ? 8 : 11;
             actor.add_child(badge);
         }
-        this._quotaWidgets.push({ area, label, window });
+        let tooltip = null;
+        if (showLastResetTooltip) {
+            const details = this._weeklyResetTooltipDetails(window);
+            const tooltipText = UsageFormat.formatLastResetTooltip(
+                window,
+                details.timestamp,
+                this._use24HourClock,
+                details.estimated
+            );
+            actor.accessible_name = UsageFormat.formatAccessibleTooltip(tooltipText);
+            tooltip = this._createPositionedTooltip(actor, tooltipText);
+        }
+        this._quotaWidgets.push({ area, label, window, tooltip });
         area.queue_repaint();
         return actor;
     }
@@ -1299,6 +1394,391 @@ class ChatGptUsageApplet extends Applet.Applet {
         this._updatedLabel.set_text(_f("Updated %s", relativeTime));
     }
 
+    _restoreUpdatedLabel(label, text) {
+        if (!label || label.is_finalized()) return;
+        label.set_text(text || _f("Updated %s", UsageFormat.formatRelativeTime(
+            this._snapshot && this._snapshot.updatedAt
+        )));
+    }
+
+    _weeklyResetHistoryFile() {
+        return Gio.File.new_for_path(GLib.build_filenamev([
+            GLib.get_user_state_dir(), "cinnamon-chatgpt-usage", "weekly-reset-history.json"
+        ]));
+    }
+
+    async _loadWeeklyResetHistory() {
+        let loaded = {};
+        try {
+            const [ok, bytes] = await new Promise((resolve, reject) => {
+                this._weeklyResetHistoryFile().load_contents_async(null, (source, result) => {
+                    try { resolve(source.load_contents_finish(result)); } catch (error) { reject(error); }
+                });
+            });
+            const payload = ok ? JSON.parse(ByteArray.toString(bytes)) : null;
+            if (
+                !payload ||
+                payload.version !== WEEKLY_RESET_HISTORY_VERSION ||
+                !payload.entries ||
+                typeof payload.entries !== "object" ||
+                Array.isArray(payload.entries)
+            ) {
+                throw new Error("Invalid saved weekly reset history");
+            }
+            for (const key of Object.keys(payload.entries)) {
+                const saved = payload.entries[key];
+                const lastResetAt = Number(
+                    saved && typeof saved === "object" ? saved.lastResetAt : saved
+                );
+                if (!Number.isFinite(lastResetAt) || lastResetAt <= 0) continue;
+                const nextResetAt = Number(
+                    saved && typeof saved === "object" ? saved.nextResetAt : null
+                );
+                loaded[key] = {
+                    lastResetAt: Math.floor(lastResetAt),
+                    nextResetAt: Number.isFinite(nextResetAt) && nextResetAt > 0
+                        ? Math.floor(nextResetAt)
+                        : null
+                };
+            }
+        } catch (error) {
+            const notFound = typeof error.matches === "function" &&
+                error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND);
+            if (!notFound) {
+                global.logWarning(`${UUID}: weekly reset history unavailable: ${error}`);
+            }
+        }
+        this._weeklyResetHistory = Object.assign(loaded, this._weeklyResetHistory);
+        this._weeklyResetHistoryReady = true;
+        if (this._weeklyResetHistoryDirty) this._saveWeeklyResetHistory();
+        if (!this._destroyed && this.menu) this._scheduleMenuRebuild();
+    }
+
+    _weeklyResetTooltipDetails(window) {
+        const explicit = Number(window && window.lastResetAt);
+        if (Number.isFinite(explicit) && explicit > 0) {
+            return { timestamp: Math.floor(explicit), estimated: false };
+        }
+
+        const limitId = String(window && window.limitId || "codex");
+        const duration = Number(window && window.durationMinutes);
+        const key = `${limitId}:${duration}`;
+        const saved = this._weeklyResetHistory[key];
+        const savedTimestamp = Number(
+            saved && typeof saved === "object" ? saved.lastResetAt : saved
+        );
+        if (Number.isFinite(savedTimestamp) && savedTimestamp > 0) {
+            return { timestamp: Math.floor(savedTimestamp), estimated: false };
+        }
+
+        const nextReset = Number(window && window.resetsAt);
+        const fallback = nextReset - WEEKLY_WINDOW_SECONDS;
+        return Number.isFinite(fallback) && fallback > 0
+            ? { timestamp: Math.floor(fallback), estimated: true }
+            : { timestamp: null, estimated: false };
+    }
+
+    _rememberWeeklyReset(limitId, duration, resetAt, nextResetAt = null) {
+        if (Number(duration) !== WEEKLY_WINDOW_MINUTES) return;
+        const timestamp = Number(resetAt);
+        if (!Number.isFinite(timestamp) || timestamp <= 0) return;
+        const key = `${String(limitId || "codex")}:${WEEKLY_WINDOW_MINUTES}`;
+        const existing = this._weeklyResetHistory[key];
+        const existingTimestamp = Number(
+            existing && typeof existing === "object" ? existing.lastResetAt : existing
+        );
+        if (Number.isFinite(existingTimestamp) && existingTimestamp >= timestamp) return;
+        const next = Number(nextResetAt);
+        this._weeklyResetHistory[key] = {
+            lastResetAt: Math.floor(timestamp),
+            nextResetAt: Number.isFinite(next) && next > 0 ? Math.floor(next) : null
+        };
+        this._weeklyResetHistoryDirty = true;
+        if (this._weeklyResetHistoryReady) this._saveWeeklyResetHistory();
+    }
+
+    _recordWeeklyResetState(previousSnapshot, snapshot) {
+        for (const limit of snapshot && snapshot.limits || []) {
+            for (const window of limit.windows || []) {
+                if (Number(window.durationMinutes) !== WEEKLY_WINDOW_MINUTES) continue;
+                this._rememberWeeklyReset(
+                    limit.id,
+                    window.durationMinutes,
+                    window.lastResetAt,
+                    window.resetsAt
+                );
+            }
+        }
+        for (const reset of UsageFormat.findObservedWeeklyResets(previousSnapshot, snapshot)) {
+            this._rememberWeeklyReset(
+                reset.limitId,
+                reset.durationMinutes,
+                reset.resetAt,
+                reset.nextResetAt
+            );
+        }
+    }
+
+    _saveWeeklyResetHistory() {
+        if (
+            !this._weeklyResetHistoryReady ||
+            !this._weeklyResetHistoryDirty ||
+            this._weeklyResetHistorySavePromise
+        ) return;
+        this._weeklyResetHistoryDirty = false;
+        const file = this._weeklyResetHistoryFile();
+        const payload = JSON.stringify({
+            version: WEEKLY_RESET_HISTORY_VERSION,
+            entries: this._weeklyResetHistory
+        }) + "\n";
+        const save = (async () => {
+            await this._ensureResetDirectory(file.get_parent());
+            await new Promise((resolve, reject) => {
+                file.replace_contents_bytes_async(
+                    new GLib.Bytes(ByteArray.fromString(payload)),
+                    null,
+                    false,
+                    Gio.FileCreateFlags.REPLACE_DESTINATION,
+                    null,
+                    (source, result) => {
+                        try {
+                            source.replace_contents_finish(result);
+                            resolve();
+                        } catch (error) { reject(error); }
+                    }
+                );
+            });
+            const info = new Gio.FileInfo();
+            info.set_attribute_uint32("unix::mode", 0o600);
+            await new Promise((resolve, reject) => {
+                file.set_attributes_async(
+                    info,
+                    Gio.FileQueryInfoFlags.NONE,
+                    GLib.PRIORITY_DEFAULT,
+                    null,
+                    (source, result) => {
+                        try {
+                            source.set_attributes_finish(result);
+                            resolve();
+                        } catch (error) { reject(error); }
+                    }
+                );
+            });
+        })();
+        this._weeklyResetHistorySavePromise = save;
+        save.then(
+            () => {
+                this._weeklyResetHistorySavePromise = null;
+                if (this._weeklyResetHistoryDirty) this._saveWeeklyResetHistory();
+            },
+            error => {
+                this._weeklyResetHistorySavePromise = null;
+                this._weeklyResetHistoryDirty = true;
+                global.logWarning(`${UUID}: weekly reset history save failed: ${error}`);
+            }
+        );
+    }
+
+    _buildScreenshotContextMenu() {
+        if (!this._screenshotButton || !this.menuManager) return;
+        const menu = new PopupMenu.PopupMenu(this._screenshotButton, this._orientation);
+        Main.uiGroup.add_actor(menu.actor);
+        menu.actor.hide();
+        const aboutItem = new PopupMenu.PopupIconMenuItem(
+            _("About..."),
+            "xsi-dialog-question",
+            St.IconType.SYMBOLIC
+        );
+        aboutItem.connect("activate", () => {
+            if (this.menu && this.menu.isOpen)
+                this.menu.close(false);
+            this.openAbout();
+        });
+        const configureItem = new PopupMenu.PopupIconMenuItem(
+            _("Configure..."),
+            "xsi-preferences",
+            St.IconType.SYMBOLIC
+        );
+        configureItem.connect("activate", () => {
+            if (this.menu && this.menu.isOpen)
+                this.menu.close(false);
+            this.configureApplet();
+        });
+        menu.addMenuItem(aboutItem);
+        menu.addMenuItem(configureItem);
+        this.menu.addChildMenu(menu);
+        menu._usageRightClickOpen = false;
+        menu.connect("open-state-changed", (_menu, open) => {
+            if (!open) return;
+            if (!menu._usageRightClickOpen) {
+                menu.close(false);
+                return;
+            }
+            menu._usageRightClickOpen = false;
+        });
+        this._screenshotContextMenu = menu;
+    }
+
+    _destroyScreenshotContextMenu() {
+        const menu = this._screenshotContextMenu;
+        if (!menu) return;
+        this._screenshotContextMenu = null;
+        if (menu.isOpen) menu.close(false);
+        if (this.menu && this.menu.isChildMenu(menu)) this.menu.removeChildMenu(menu);
+        menu.destroy();
+    }
+
+    _toggleScreenshotContextMenu() {
+        if (!this._screenshotContextMenu || this._screenshotContextMenu.actor.is_finalized()) return;
+        const menu = this._screenshotContextMenu;
+        menu._usageRightClickOpen = !menu.isOpen;
+        if (menu.isOpen) menu.close(false);
+        else menu.open(false);
+    }
+
+    _copyAppletScreenshot() {
+        if (
+            this._screenshotCopyTimeoutId ||
+            !this.menu ||
+            !this.menu.isOpen ||
+            !this.menu.actor.visible
+        ) return;
+
+        // The release event leaves the corner in its lighter hover state.
+        // Paint the default surface before the asynchronous capture; the
+        // successful callback will replace it with the green Copied state.
+        if (this._screenshotButton && !this._screenshotButton.is_finalized()) {
+            this._screenshotButton._usageCornerState = "normal";
+            if (this._screenshotButton._usageCornerArea) {
+                this._screenshotButton._usageCornerArea.queue_repaint();
+            }
+        }
+        const updatedLabel = this._updatedLabel;
+        const relativeText = this._snapshot
+            ? _f("Updated %s", UsageFormat.formatRelativeTime(this._snapshot.updatedAt))
+            : null;
+        if (updatedLabel && this._snapshot) {
+            updatedLabel.set_text(_f(
+                "Updated %s",
+                UsageFormat.formatTimestamp(this._snapshot.updatedAt, this._use24HourClock)
+            ));
+        }
+
+        this._screenshotCopyTimeoutId = Mainloop.idle_add(() => {
+            this._screenshotCopyTimeoutId = 0;
+            this._captureAppletScreenshot(updatedLabel, relativeText);
+            return GLib.SOURCE_REMOVE;
+        });
+    }
+
+    _captureAppletScreenshot(updatedLabel, relativeText) {
+        let temporary = null;
+        const restore = () => this._restoreUpdatedLabel(updatedLabel, relativeText);
+        const cleanup = () => {
+            if (!temporary) return;
+            try {
+                temporary.delete(null);
+            } catch (error) {
+                global.logWarning(`${UUID}: screenshot cleanup failed: ${error}`);
+            }
+            if (this._screenshotTempFile === temporary) this._screenshotTempFile = null;
+            temporary = null;
+        };
+        try {
+            if (!this.menu || !this.menu.isOpen || !this.menu.actor.visible) {
+                throw new Error("usage menu is no longer visible");
+            }
+            const [x, y] = this.menu.actor.get_transformed_position();
+            const [width, height] = this.menu.actor.get_transformed_size();
+            let captureHeight = height;
+            if (this._actionFrame && !this._actionFrame.is_finalized() && this._actionFrame.visible) {
+                const [, actionY] = this._actionFrame.get_transformed_position();
+                const contentHeight = actionY - y;
+                if (contentHeight > 1 && contentHeight < height) captureHeight = contentHeight;
+            }
+            const scale = Number(global.ui_scale) > 0 ? Number(global.ui_scale) : 1;
+            const area = [x, y, width, captureHeight].map(value => Math.max(1, Math.round(value * scale)));
+            const cornerRadius = this._popupCornerRadiusForScreenshot(scale);
+            const [file, stream] = Gio.file_new_tmp("chatgpt-usage-screenshot-XXXXXX.png");
+            if (stream) stream.close(null);
+            temporary = file;
+            this._screenshotTempFile = file;
+            const screenshot = new Cinnamon.Screenshot();
+            screenshot.screenshot_area(
+                false,
+                area[0],
+                area[1],
+                area[2],
+                area[3],
+                file.get_path(),
+                (_source, success) => {
+                    try {
+                        if (!success) throw new Error("Cinnamon screenshot capture failed");
+                        try {
+                            this._makeScreenshotCornerTransparent(file, cornerRadius);
+                        } catch (error) {
+                            global.logWarning(`${UUID}: screenshot corner alpha mask failed: ${error}`);
+                        }
+                        const [ok, contents] = GLib.file_get_contents(file.get_path());
+                        if (!ok) throw new Error("captured PNG could not be read");
+                        St.Clipboard.get_default().set_content(
+                            St.ClipboardType.CLIPBOARD,
+                            "image/png",
+                            GLib.Bytes.new(contents)
+                        );
+                        if (this._screenshotButtonLabel && !this._screenshotButtonLabel.is_finalized()) {
+                            this._screenshotButtonLabel.set_text(_("Copied"));
+                            if (this._screenshotButton && !this._screenshotButton.is_finalized()) {
+                                this._screenshotButton.accessible_name = _("Copied");
+                                this._screenshotButton._usageIcon.style = "color: #8ed891;";
+                                this._screenshotButton._usageCornerState = "copied";
+                                if (this._screenshotButton._usageCornerArea) {
+                                    this._screenshotButton._usageCornerArea.queue_repaint();
+                                }
+                                if (this._screenshotButton._usageTooltip) {
+                                    this._screenshotButton._usageTooltip.set_text(_("Copied"));
+                                }
+                            }
+                            if (this._screenshotResetTimeoutId) {
+                                Mainloop.source_remove(this._screenshotResetTimeoutId);
+                            }
+                            this._screenshotResetTimeoutId = Mainloop.timeout_add(1600, () => {
+                                this._screenshotResetTimeoutId = 0;
+                                if (
+                                    this._screenshotButtonLabel &&
+                                    !this._screenshotButtonLabel.is_finalized()
+                                ) this._screenshotButtonLabel.set_text(_("Copy Screenshot"));
+                                if (this._screenshotButton && !this._screenshotButton.is_finalized()) {
+                                    this._screenshotButton.accessible_name = _("Copy Screenshot");
+                                    this._screenshotButton._usageIcon.style = POPUP_SCREENSHOT_CAMERA_STYLE;
+                                    this._screenshotButton._usageCornerState = "normal";
+                                    if (this._screenshotButton._usageCornerArea) {
+                                        this._screenshotButton._usageCornerArea.queue_repaint();
+                                    }
+                                    if (this._screenshotButton._usageTooltip) {
+                                        this._screenshotButton._usageTooltip.set_text(
+                                            _("Copy Usage Monitor Screenshot to Clipboard")
+                                        );
+                                    }
+                                }
+                                return GLib.SOURCE_REMOVE;
+                            });
+                        }
+                    } catch (error) {
+                        global.logWarning(`${UUID}: could not copy screenshot: ${error}`);
+                    } finally {
+                        restore();
+                        cleanup();
+                    }
+                }
+            );
+        } catch (error) {
+            global.logWarning(`${UUID}: could not start screenshot capture: ${error}`);
+            restore();
+            cleanup();
+        }
+    }
+
     _addLaunchButtons() {
         const chatGptApp = this._chatGptAppInfo();
         const codexPath = this._resolveCodexPath();
@@ -1471,12 +1951,9 @@ class ChatGptUsageApplet extends Applet.Applet {
     }
 
     _createLaunchButton(label, iconSpec, available, action, tooltipText = null) {
-        const content = new St.BoxLayout({
-            vertical: false,
-            y_align: Clutter.ActorAlign.CENTER
-        });
-        content.style = "spacing: 6px;";
-        const iconProperties = { icon_size: iconSpec.compact ? 18 : 28 };
+        const iconProperties = {
+            icon_size: iconSpec.corner ? 12 : iconSpec.compact ? 18 : 28
+        };
         if (iconSpec.fileName) {
             const iconPath = `${this.metadata.path}/icons/${iconSpec.fileName}`;
             iconProperties.gicon = new Gio.FileIcon({
@@ -1491,7 +1968,6 @@ class ChatGptUsageApplet extends Applet.Applet {
         if (iconSpec.symbolic) iconProperties.icon_type = St.IconType.SYMBOLIC;
         const icon = new St.Icon(iconProperties);
         icon.y_align = Clutter.ActorAlign.CENTER;
-        content.add_child(icon);
         const buttonLabel = new St.Label({
             text: label,
             y_align: Clutter.ActorAlign.CENTER
@@ -1500,7 +1976,40 @@ class ChatGptUsageApplet extends Applet.Applet {
             icon.style = "color: #8ed891;";
             buttonLabel.style = "color: #8ed891; font-weight: bold;";
         }
-        content.add_child(buttonLabel);
+        let content;
+        let cornerArea = null;
+        if (iconSpec.corner) {
+            content = new St.Widget({
+                layout_manager: new Clutter.BinLayout(),
+                width: POPUP_SCREENSHOT_CORNER_SIZE,
+                height: POPUP_SCREENSHOT_CORNER_SIZE
+            });
+            cornerArea = new St.DrawingArea({
+                width: POPUP_SCREENSHOT_CORNER_SIZE,
+                height: POPUP_SCREENSHOT_CORNER_SIZE
+            });
+            cornerArea.connect("repaint", drawingArea => {
+                this._paintScreenshotCorner(drawingArea);
+            });
+            content.add_child(cornerArea);
+            icon.x_align = Clutter.ActorAlign.START;
+            icon.y_align = Clutter.ActorAlign.START;
+            // St.Icon contributes its own internal half-size alignment offset.
+            // These offsets place the 12px camera at about [3,2] in the 30px
+            // surface, one pixel higher without shifting it horizontally.
+            icon.translation_x = POPUP_SCREENSHOT_CAMERA_OFFSET_X;
+            icon.translation_y = POPUP_SCREENSHOT_CAMERA_OFFSET_Y;
+            icon.style = POPUP_SCREENSHOT_CAMERA_STYLE;
+            content.add_child(icon);
+        } else {
+            content = new St.BoxLayout({
+                vertical: false,
+                y_align: Clutter.ActorAlign.CENTER
+            });
+            content.style = "spacing: 6px;";
+            content.add_child(icon);
+            if (!iconSpec.iconOnly) content.add_child(buttonLabel);
+        }
 
         const button = new St.Button({
             child: content,
@@ -1514,6 +2023,14 @@ class ChatGptUsageApplet extends Applet.Applet {
         button._usageLabel = buttonLabel;
         button._usageContent = content;
         button._usageBusy = false;
+        button._usageCornerArea = cornerArea;
+        button._usageCornerState = available ? "normal" : "disabled";
+        if (iconSpec.corner) {
+            button.width = POPUP_SCREENSHOT_CORNER_SIZE;
+            button.height = POPUP_SCREENSHOT_CORNER_SIZE;
+            button.x_expand = false;
+            button.y_expand = false;
+        }
         if (tooltipText) {
             button._usageTooltip = this._createPositionedTooltip(
                 button,
@@ -1522,49 +2039,50 @@ class ChatGptUsageApplet extends Applet.Applet {
                 LAUNCH_TOOLTIP_DELAY_MS
             );
         }
-        button.style = this._launchButtonStyle(
-            available ? "normal" : "disabled",
-            iconSpec.compact,
-            iconSpec.transparent
-        );
+        const setState = state => {
+            button.style = this._launchButtonStyle(
+                state,
+                iconSpec.compact,
+                iconSpec.transparent,
+                iconSpec.corner
+            );
+            if (button._usageCornerArea) {
+                button._usageCornerState = state;
+                button._usageCornerArea.queue_repaint();
+            }
+        };
+        setState(button._usageCornerState);
         if (!available) {
             button.opacity = 100;
             button.add_style_pseudo_class("insensitive");
         } else {
             button.connect("enter-event", () => {
                 if (button._usageBusy) return Clutter.EVENT_PROPAGATE;
-                button.style = this._launchButtonStyle(
-                    "hover",
-                    iconSpec.compact,
-                    iconSpec.transparent
-                );
+                setState("hover");
                 return Clutter.EVENT_PROPAGATE;
             });
             button.connect("leave-event", () => {
                 if (button._usageBusy) return Clutter.EVENT_PROPAGATE;
-                button.style = this._launchButtonStyle(
-                    "normal",
-                    iconSpec.compact,
-                    iconSpec.transparent
-                );
+                setState("normal");
                 return Clutter.EVENT_PROPAGATE;
             });
-            button.connect("button-press-event", () => {
+            button.connect("button-press-event", (_actor, event) => {
                 if (button._usageBusy) return Clutter.EVENT_PROPAGATE;
-                button.style = this._launchButtonStyle(
-                    "pressed",
-                    iconSpec.compact,
-                    iconSpec.transparent
-                );
+                if (iconSpec.corner && event.get_button() === 3) {
+                    setState("hover");
+                    this._toggleScreenshotContextMenu();
+                    return Clutter.EVENT_STOP;
+                }
+                setState("pressed");
                 return Clutter.EVENT_PROPAGATE;
             });
-            button.connect("button-release-event", () => {
+            button.connect("button-release-event", (_actor, event) => {
                 if (button._usageBusy) return Clutter.EVENT_PROPAGATE;
-                button.style = this._launchButtonStyle(
-                    "hover",
-                    iconSpec.compact,
-                    iconSpec.transparent
-                );
+                if (iconSpec.corner && event.get_button() === 3) {
+                    setState("hover");
+                    return Clutter.EVENT_STOP;
+                }
+                setState("hover");
                 return Clutter.EVENT_PROPAGATE;
             });
             button.connect("clicked", () => {
@@ -1574,6 +2092,162 @@ class ChatGptUsageApplet extends Applet.Applet {
             });
         }
         return button;
+    }
+
+    _paintScreenshotCorner(area) {
+        const [width, height] = area.get_surface_size();
+        const size = Math.max(1, Math.min(width, height));
+        const button = this._screenshotButton;
+        const state = button && button._usageCornerState || "normal";
+        let surface = new Clutter.Color({ red: 36, green: 36, blue: 40, alpha: 255 });
+        let radius = 6;
+        try {
+            const themeNode = this.menu.actor.get_theme_node();
+            const themedSurface = themeNode.get_background_color();
+            if (themedSurface && themedSurface.alpha > 0) surface = themedSurface;
+            const themedRadius = themeNode.get_length("border-radius");
+            if (Number.isFinite(themedRadius) && themedRadius > 0) radius = themedRadius;
+        } catch (error) {
+            global.logWarning(`${UUID}: could not read popup corner theme: ${error}`);
+        }
+        radius = Math.max(0, Math.min(Math.floor(size / 2), Math.round(radius)));
+        const mix = (from, to, amount) => new Clutter.Color({
+            red: Math.round(from.red * (1 - amount) + to.red * amount),
+            green: Math.round(from.green * (1 - amount) + to.green * amount),
+            blue: Math.round(from.blue * (1 - amount) + to.blue * amount),
+            alpha: 255
+        });
+        const white = new Clutter.Color({ red: 255, green: 255, blue: 255, alpha: 255 });
+        const black = new Clutter.Color({ red: 0, green: 0, blue: 0, alpha: 255 });
+        const copied = new Clutter.Color({ red: 142, green: 216, blue: 145, alpha: 255 });
+        const top = state === "copied"
+            ? mix(surface, copied, 0.52)
+            : mix(surface, white, state === "hover" ? 0.16 : state === "pressed" ? 0.045 : 0.09);
+        const dark = state === "copied"
+            ? mix(surface, copied, 0.18)
+            : mix(surface, black, state === "pressed" ? 0.11 : 0.18);
+        const context = area.get_context();
+        const gradient = new Cairo.LinearGradient(0, 0, size, size);
+        gradient.addColorStopRGBA(
+            0,
+            top.red / 255,
+            top.green / 255,
+            top.blue / 255,
+            0.985
+        );
+        gradient.addColorStopRGBA(
+            1,
+            dark.red / 255,
+            dark.green / 255,
+            dark.blue / 255,
+            0.985
+        );
+        context.newPath();
+        if (radius > 0) {
+            context.moveTo(0, radius);
+            context.arc(radius, radius, radius, Math.PI, Math.PI * 1.5);
+        } else {
+            context.moveTo(0, 0);
+        }
+        context.lineTo(size, 0);
+        context.lineTo(0, size);
+        context.closePath();
+        context.setSource(gradient);
+        context.fill();
+
+        const highlight = new Clutter.Color({ red: 255, green: 255, blue: 255, alpha: 70 });
+        context.setLineWidth(1.0);
+        Clutter.cairo_set_source_color(context, highlight);
+        context.newPath();
+        if (radius > 1) {
+            context.moveTo(1, radius);
+            context.arc(radius, radius, radius - 1, Math.PI, Math.PI * 1.5);
+            context.lineTo(size - 2, 1);
+            context.moveTo(1, radius);
+            context.lineTo(1, size - 2);
+        } else {
+            context.moveTo(1, 1);
+            context.lineTo(size - 2, 1);
+            context.moveTo(1, 1);
+            context.lineTo(1, size - 2);
+        }
+        context.stroke();
+
+        const shadow = new Clutter.Color({ red: 0, green: 0, blue: 0, alpha: 105 });
+        context.setLineWidth(1.75);
+        Clutter.cairo_set_source_color(context, shadow);
+        context.newPath();
+        context.moveTo(size - 1, 1);
+        context.lineTo(1, size - 1);
+        context.stroke();
+        context.$dispose();
+    }
+
+    _popupCornerRadiusForScreenshot(scale = 1) {
+        let radius = 6;
+        try {
+            const themedRadius = this.menu.actor.get_theme_node().get_length("border-radius");
+            if (Number.isFinite(themedRadius) && themedRadius > 0) radius = themedRadius;
+        } catch (error) {
+            global.logWarning(`${UUID}: could not read popup corner radius: ${error}`);
+        }
+        return Math.max(0, Math.round(radius * Math.max(1, Number(scale) || 1)));
+    }
+
+    _makeScreenshotCornerTransparent(file, radius) {
+        const source = GdkPixbuf.Pixbuf.new_from_file(file.get_path());
+        const width = source.get_width();
+        const height = source.get_height();
+        const corner = Math.min(
+            Math.max(0, Math.floor(Number(radius) || 0)),
+            width,
+            height
+        );
+        if (corner <= 0) return;
+        const sourceChannels = source.get_n_channels();
+        const sourceRowstride = source.get_rowstride();
+        const sourcePixels = new Uint8Array(source.get_pixels());
+        let channels = sourceChannels;
+        let rowstride = sourceRowstride;
+        let pixels = sourcePixels;
+        if (sourceChannels === 3) {
+            channels = 4;
+            rowstride = width * channels;
+            pixels = new Uint8Array(rowstride * height);
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const sourceOffset = y * sourceRowstride + x * sourceChannels;
+                    const targetOffset = y * rowstride + x * channels;
+                    pixels[targetOffset] = sourcePixels[sourceOffset];
+                    pixels[targetOffset + 1] = sourcePixels[sourceOffset + 1];
+                    pixels[targetOffset + 2] = sourcePixels[sourceOffset + 2];
+                    pixels[targetOffset + 3] = 255;
+                }
+            }
+        } else if (sourceChannels !== 4) {
+            throw new Error("captured PNG has an unsupported channel layout");
+        }
+        for (let y = 0; y < corner; y++) {
+            for (let x = 0; x < corner; x++) {
+                const distance = Math.hypot(
+                    corner - (x + 0.5),
+                    corner - (y + 0.5)
+                );
+                const coverage = Math.max(0, Math.min(1, corner + 0.5 - distance));
+                const offset = y * rowstride + x * channels + channels - 1;
+                pixels[offset] = Math.min(pixels[offset], Math.round(coverage * 255));
+            }
+        }
+        const pixbuf = GdkPixbuf.Pixbuf.new_from_bytes(
+            GLib.Bytes.new(pixels),
+            source.get_colorspace(),
+            true,
+            source.get_bits_per_sample(),
+            width,
+            height,
+            rowstride
+        );
+        pixbuf.savev(file.get_path(), "png", [], []);
     }
 
     _syncRefreshButtonState() {
@@ -1787,7 +2461,16 @@ class ChatGptUsageApplet extends Applet.Applet {
         this._onChatGptAppPathChanged();
     }
 
-    _launchButtonStyle(state, compact = false, transparent = false) {
+    _launchButtonStyle(state, compact = false, transparent = false, corner = false) {
+        if (corner) {
+            return [
+                "padding: 0",
+                "border: 0",
+                "border-radius: 0",
+                "background-color: transparent",
+                "box-shadow: none"
+            ].join("; ") + ";";
+        }
         const raisedColors = {
             normal: [`${this._menuColor(0.14)}`, `${this._menuColor(0.05)}`],
             hover: [`${this._menuColor(0.22)}`, `${this._menuColor(0.09)}`],
@@ -2030,12 +2713,13 @@ class ChatGptUsageApplet extends Applet.Applet {
     _emphasizedValueStyle(
         color,
         paddingLeft = 0,
-        fontSize = CREDIT_CONSUMPTION_BASE_FONT_SIZE
+        fontSize = CREDIT_CONSUMPTION_BASE_FONT_SIZE,
+        fontWeight = "bold"
     ) {
         return [
             `padding-left: ${paddingLeft}px`,
             `font-size: ${fontSize}%`,
-            "font-weight: bold",
+            `font-weight: ${fontWeight}`,
             `color: ${color}`
         ].join("; ") + ";";
     }
@@ -2049,7 +2733,8 @@ class ChatGptUsageApplet extends Applet.Applet {
         expiresLabel,
         expiryDateLabel,
         suffixColor,
-        suffixLabelColor
+        suffixLabelColor,
+        suffixEmphasized
     ) {
         let fitting = false;
         let plotActor = null;
@@ -2059,12 +2744,14 @@ class ChatGptUsageApplet extends Applet.Applet {
             expiresLabel.style = this._emphasizedValueStyle(
                 suffixLabelColor || this._menuColor(1),
                 0,
-                fontSize
+                fontSize,
+                suffixEmphasized ? "bold" : "normal"
             );
             expiryDateLabel.style = this._emphasizedValueStyle(
                 suffixColor || this._menuColor(1),
                 0,
-                fontSize
+                fontSize,
+                suffixEmphasized ? "bold" : "normal"
             );
         };
         const preferredWidth = actor => actor.get_preferred_width(-1)[1];
@@ -2154,6 +2841,14 @@ class ChatGptUsageApplet extends Applet.Applet {
         const creditConsumption = credits && !credits.unlimited && history
             ? UsageFormat.formatCreditConsumption(history.creditPeriods)
             : null;
+        const creditConsumptionMarkup = creditConsumption
+            ? UsageFormat.formatCreditConsumptionMarkup(
+                history.creditPeriods,
+                CREDIT_CONSUMPTION_MARKUP_MODE
+            )
+            : null;
+        const creditConsumptionEmphasized = Boolean(creditConsumption) &&
+            CREDIT_CONSUMPTION_MARKUP_MODE !== "numbers";
         const creditConsumptionColor = creditConsumption ? this.criticalColor : null;
         this._addCreditItem(
             _("Credits"),
@@ -2164,10 +2859,10 @@ class ChatGptUsageApplet extends Applet.Applet {
             null,
             creditConsumption ? _("Consumed:  ") : null,
             creditConsumptionColor,
-            Boolean(creditConsumption),
+            creditConsumptionEmphasized,
             false,
             Boolean(creditConsumption),
-            Boolean(creditConsumption)
+            creditConsumptionMarkup
         );
         const resetDisplay = UsageFormat.buildResetCreditDisplay(
             credits,
@@ -2224,15 +2919,19 @@ class ChatGptUsageApplet extends Applet.Applet {
         row.add_child(labelActor);
         const valueLabel = new St.Label({ text: value });
         if (emphasized) {
-            valueLabel.style = this._emphasizedValueStyle(this.normalColor, 4);
-            valueLabel.opacity = 195;
+            const zeroValue = String(value) === "0";
+            valueLabel.style = this._emphasizedValueStyle(
+                zeroValue ? this._menuColor(0.68) : this.normalColor,
+                4
+            );
+            valueLabel.opacity = zeroValue ? 255 : 195;
         } else {
             valueLabel.style = "padding-left: 4px;";
         }
         row.add_child(valueLabel);
         if (suffix) {
             const separatorLabel = new St.Label({
-                text: "•",
+                text: "·",
                 y_align: Clutter.ActorAlign.CENTER
             });
             separatorLabel.style = [
@@ -2245,12 +2944,15 @@ class ChatGptUsageApplet extends Applet.Applet {
             separatorLabel.translation_y = 2;
             const expiresLabel = new St.Label({
                 text: suffixLabel || _("expires "),
-                y_align: Clutter.ActorAlign.END
+                y_align: Clutter.ActorAlign.CENTER
             });
             const expiryDateLabel = new St.Label({
                 text: suffix,
-                y_align: Clutter.ActorAlign.END
+                y_align: Clutter.ActorAlign.CENTER
             });
+            const suffixTranslationY = suffixFitToChart ? 1 : 0;
+            expiresLabel.translation_y = suffixTranslationY;
+            expiryDateLabel.translation_y = suffixTranslationY;
             if (suffixEmphasized) {
                 expiresLabel.style = this._emphasizedValueStyle(
                     suffixLabelColor || this._menuColor(1)
@@ -2261,17 +2963,24 @@ class ChatGptUsageApplet extends Applet.Applet {
                 expiresLabel.opacity = 255;
                 expiryDateLabel.opacity = 255;
             } else {
-                expiresLabel.style = `color: ${suffixLabelColor || this._menuColor(0.68)};`;
-                expiryDateLabel.style = `color: ${suffixColor || this._menuColor(0.68)};`;
+                expiresLabel.style = [
+                    "font-weight: normal",
+                    `color: ${suffixLabelColor || this._menuColor(0.68)}`
+                ].join("; ") + ";";
+                expiryDateLabel.style = [
+                    "font-weight: normal",
+                    `color: ${suffixColor || this._menuColor(0.68)}`
+                ].join("; ") + ";";
             }
             if (suffixMarkup && expiryDateLabel.clutter_text) {
-                const escapedSuffix = String(suffix)
-                    .replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;")
-                    .replace(/\x20{2}•\x20{2}/g,
-                        "&#160;&#160;<span weight=\"normal\">•</span>&#160;&#160;");
-                expiryDateLabel.clutter_text.set_markup(escapedSuffix);
+                const markup = typeof suffixMarkup === "string"
+                    ? suffixMarkup
+                    : String(suffix)
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/\x20{2}·\x20{2}/g, "&#160;&#160;·&#160;&#160;");
+                expiryDateLabel.clutter_text.set_markup(markup);
             }
             if (suffixBreathing && suffixColor === RESET_EXPIRY_CRITICAL_COLOR) {
                 this._resetExpiryBreathingLabels.push(expiryDateLabel);
@@ -2303,7 +3012,8 @@ class ChatGptUsageApplet extends Applet.Applet {
                 fitTargets.expiresLabel,
                 fitTargets.expiryDateLabel,
                 suffixColor,
-                suffixLabelColor
+                suffixLabelColor,
+                suffixEmphasized
             );
         }
     }
@@ -2840,6 +3550,10 @@ class ChatGptUsageApplet extends Applet.Applet {
                 complete: model.peakComplete
             })
             : "—";
+        const peakCredits = hasCreditModel
+            ? UsageFormat.formatPeakCredits(creditValues)
+            : null;
+        const peakCreditsLabel = peakCredits ? _f(" / %s AIC", peakCredits) : "";
         const totalLabel = model.knownCount > 0
             ? UsageFormat.formatPercent(model.totalPercent)
             : "—";
@@ -2856,7 +3570,13 @@ class ChatGptUsageApplet extends Applet.Applet {
         const captionTitle = new St.Label({ text: _("  24h Activity") });
         captionTitle.style = "font-weight: bold;";
         const captionDetails = new St.Label({
-            text: _f("  ·  %s  ·  %s buckets  ·  peak %s", totalLabel, bucketLabel, peakLabel)
+            text: _f(
+                "  ·  %s  ·  %s buckets  ·  peak %s%s",
+                totalLabel,
+                bucketLabel,
+                peakLabel,
+                peakCreditsLabel
+            )
         });
         caption.add_child(captionTitle);
         caption.add_child(captionDetails);
@@ -3246,6 +3966,7 @@ class ChatGptUsageApplet extends Applet.Applet {
                     this._snapshot = snapshot;
                     this._lastError = null;
                     this._authenticationRequired = false;
+                    this._recordWeeklyResetState(previousSnapshot, snapshot);
                     this._showUsageNotifications(previousSnapshot, snapshot);
                     succeeded = true;
                 } catch (error) {
@@ -3447,6 +4168,23 @@ class ChatGptUsageApplet extends Applet.Applet {
         if (this._menuRebuildTimeoutId) {
             Mainloop.source_remove(this._menuRebuildTimeoutId);
             this._menuRebuildTimeoutId = 0;
+        }
+        if (this._screenshotCopyTimeoutId) {
+            Mainloop.source_remove(this._screenshotCopyTimeoutId);
+            this._screenshotCopyTimeoutId = 0;
+        }
+        if (this._screenshotResetTimeoutId) {
+            Mainloop.source_remove(this._screenshotResetTimeoutId);
+            this._screenshotResetTimeoutId = 0;
+        }
+        this._destroyScreenshotContextMenu();
+        if (this._screenshotTempFile) {
+            try {
+                this._screenshotTempFile.delete(null);
+            } catch (error) {
+                global.logWarning(`${UUID}: screenshot cleanup failed: ${error}`);
+            }
+            this._screenshotTempFile = null;
         }
         this._stopRefreshSpinner();
         for (const process of [this._usageProcess, this._resetProcess, this._backendDiscovery]) {

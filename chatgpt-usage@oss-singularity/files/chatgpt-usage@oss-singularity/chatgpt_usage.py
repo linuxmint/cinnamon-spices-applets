@@ -85,11 +85,13 @@ def _normalise_window(window: Any) -> dict[str, Any] | None:
     if used < 0 or used > 100:
         return None
     resets_at = int(_number(window.get("resetsAt"))) or None
+    last_reset_at = int(_number(window.get("lastResetAt"))) or None
     return {
         "durationMinutes": duration,
         "usedPercent": used,
         "remainingPercent": 100.0 - used,
         "resetsAt": resets_at,
+        "lastResetAt": last_reset_at,
     }
 
 

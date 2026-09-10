@@ -38,6 +38,10 @@ local to this desktop profile, not partitioned by account; see the full guide
 before switching accounts. Uninstalling retains settings, history and
 unresolved reset attempts.
 
+The upper-left **Copy Screenshot** action copies the usage content before the
+bottom action buttons, keeps the exact local update timestamp in the PNG and
+masks the outside of the rounded popup corner transparent.
+
 - [Full guide and screenshots](https://github.com/oss-singularity/cinnamon-chatgpt-usage#readme)
 - [Support and bug reports](https://github.com/oss-singularity/cinnamon-chatgpt-usage/issues)
 - [Security policy](https://github.com/oss-singularity/cinnamon-chatgpt-usage/blob/main/SECURITY.md)

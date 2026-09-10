@@ -34,10 +34,8 @@ the repository. This does not relicense the depicted software.
 ## Distribution review
 
 The code license does not grant rights to third-party artwork or trademarks.
-[The Spices readiness inventory](https://github.com/oss-singularity/cinnamon-chatgpt-usage/blob/main/docs/spices-readiness.md#ownership-and-assets)
-records the completed candidate review and the catalog publication workflow.
-
-The [dated rights review](https://github.com/oss-singularity/cinnamon-chatgpt-usage/blob/oss-oo/spices-readiness-01a07256/docs/rights-review.md)
-records verified Yaru/font/background evidence and replacement of the earlier
-robot and knot artwork. Historical commits and already published releases are
-outside the new payload review; their notices are not retroactive permissions.
+The [release evidence map](docs/README.md) and
+[rights inventory](docs/rights-inventory.json) record the current asset
+evidence and publication gates. Historical commits and already published
+releases are outside the current payload review; their notices are not
+retroactive permissions.

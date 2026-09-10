@@ -43,6 +43,7 @@ function summarizeWindows(limits) {
                     durationMinutes: duration,
                     remainingPercent: clamp(remaining, 0, 100),
                     resetsAt: Number(window.resetsAt) || null,
+                    lastResetAt: Number(window.lastResetAt) || null,
                     limitId: limit.id,
                     limitLabel: limit.label
                 });
@@ -73,6 +74,7 @@ function listQuotaWindows(limits) {
                 durationMinutes: duration,
                 remainingPercent: clamp(remaining, 0, 100),
                 resetsAt: Number(window.resetsAt) || null,
+                lastResetAt: Number(window.lastResetAt) || null,
                 limitId: limit.id,
                 limitLabel: limit.label
             });
@@ -156,7 +158,23 @@ function formatCreditConsumption(periods) {
         return Number.isFinite(value) && value > 0;
     });
     if (!hasConsumption) return null;
-    return keys.map(key => _f("%s %s", key, formatConsumedCredits(periods[key]))).join("  •  ");
+    return keys.map(key => _f("%s %s", key, formatConsumedCredits(periods[key]))).join("  ·  ");
+}
+
+function formatCreditConsumptionMarkup(periods, italicPart = "periods") {
+    if (!formatCreditConsumption(periods)) return null;
+    const keys = ["24h", "12h", "4h", "1h"];
+    return keys.map(key => {
+        const period = italicPart === "periods" ? `<i>${key}</i>` : key;
+        const value = formatConsumedCredits(periods && periods[key]);
+        const consumed = italicPart === "credits"
+            ? `<i>${value}</i>`
+            : italicPart === "numbers"
+                ? `<span weight="bold">${value}</span>`
+                : value;
+        return `${period} ${consumed}`;
+    // Keep separators unstyled so only the consumed values receive emphasis.
+    }).join("&#160;&#160;·&#160;&#160;");
 }
 
 function buildResetCountdown(window, nowSeconds = null) {
@@ -229,6 +247,17 @@ function formatResetCountdownTooltip(window, nowSeconds = null) {
         _f("Elapsed: %s", formatPercent(model.fractionElapsed * 100)),
         _f("Remaining: %s", remaining)
     ].join("\n");
+}
+
+function formatLastResetTooltip(window, lastResetAt, use24Hour = true, estimated = false) {
+    const durationLabel = formatDuration(window && window.durationMinutes);
+    const timestamp = formatTimestamp(lastResetAt, use24Hour);
+    if (timestamp === _("unknown")) {
+        return _f("Last %s reset: unavailable", durationLabel);
+    }
+    return estimated
+        ? _f("Last %s reset: %s (estimated from next reset)", durationLabel, timestamp)
+        : _f("Last %s reset: %s", durationLabel, timestamp);
 }
 
 function buildQuotaIndicator(window) {
@@ -322,6 +351,12 @@ function buildActivityChart(values, valueKey = "consumedPercent") {
 
 function buildCreditActivityChart(values) {
     return buildActivityChart(values, "consumed");
+}
+
+function formatPeakCredits(values) {
+    const chart = buildCreditActivityChart(values);
+    if (chart.knownCount === 0 || chart.peakPercent <= 0) return null;
+    return formatConsumedCredits({ consumed: chart.peakPercent });
 }
 
 function formatActivityBucketRange(
@@ -438,7 +473,8 @@ function formatWholeNumber(value) {
 function formatCreditNumber(value) {
     if (value === null || value === undefined || value === "") return _("unavailable");
     const numeric = Number(value);
-    return Number.isFinite(numeric) ? numeric.toFixed(1) : String(value);
+    if (!Number.isFinite(numeric)) return String(value);
+    return numeric === 0 ? "0" : numeric.toFixed(1);
 }
 
 function parseUsageHelperError(value) {
@@ -610,6 +646,29 @@ function resetWasObserved(previousWindow, currentWindow) {
         currentReset > previousReset + 60;
 }
 
+function findObservedWeeklyResets(previousSnapshot, snapshot) {
+    if (!previousSnapshot || !snapshot) return [];
+    const previousWindows = quotaWindowMap(previousSnapshot);
+    const currentWindows = quotaWindowMap(snapshot);
+    const resets = [];
+
+    for (const [key, current] of currentWindows) {
+        if (current.duration !== 10080) continue;
+        const previous = previousWindows.get(key);
+        if (!previous || !resetWasObserved(previous.window, current.window)) continue;
+        const resetAt = Number(previous.window.resetsAt);
+        if (!Number.isFinite(resetAt) || resetAt <= 0) continue;
+        resets.push({
+            limitId: current.limit.id,
+            durationMinutes: current.duration,
+            resetAt: Math.floor(resetAt),
+            nextResetAt: Number(current.window.resetsAt) || null,
+            observedAt: Number(snapshot.updatedAt) || null
+        });
+    }
+    return resets;
+}
+
 function lowNotificationSettings(duration, options) {
     if (duration === 300 && options.enableFiveHourLowNotifications === true) {
         return {
@@ -630,6 +689,10 @@ function buildUsageNotificationEvents(previousSnapshot, snapshot, options = {}) 
     if (!previousSnapshot || !snapshot) return [];
     const previousWindows = quotaWindowMap(previousSnapshot);
     const currentWindows = quotaWindowMap(snapshot);
+    const observedResets = new Map(
+        findObservedWeeklyResets(previousSnapshot, snapshot)
+            .map(reset => [`${reset.limitId}:${reset.durationMinutes}`, reset])
+    );
     const events = [];
 
     for (const [key, current] of currentWindows) {
@@ -637,15 +700,14 @@ function buildUsageNotificationEvents(previousSnapshot, snapshot, options = {}) 
         if (!previous) continue;
         const label = String(current.limit.label || current.limit.id || _("Usage"));
 
-        if (
-            current.duration === 10080 &&
-            resetNotificationEnabled(current.limit, options) &&
-            resetWasObserved(previous.window, current.window)
-        ) {
+        const observedReset = observedResets.get(key);
+        if (observedReset && resetNotificationEnabled(current.limit, options)) {
             events.push({
                 kind: "reset",
                 limitId: current.limit.id,
                 durationMinutes: current.duration,
+                resetAt: observedReset.resetAt,
+                observedAt: observedReset.observedAt,
                 title: _f("%s 7d limit refreshed", label),
                 message: _f("%s weekly usage is available again.", label)
             });
@@ -891,11 +953,13 @@ module.exports = {
     formatConsumedPercent,
     formatConsumedCredits,
     formatCreditConsumption,
+    formatCreditConsumptionMarkup,
     buildResetCountdown,
     formatResetCountdownTooltip,
     buildQuotaIndicator,
     buildActivityChart,
     buildCreditActivityChart,
+    formatPeakCredits,
     activityBarHeight,
     formatWholeNumber,
     formatCreditNumber,
@@ -906,12 +970,14 @@ module.exports = {
     buildSharedActivityValues,
     normalizeNotificationThresholds,
     notificationZone,
+    findObservedWeeklyResets,
     buildUsageNotificationEvents,
     formatActivityBucketTooltip,
     formatActivityBucketRange,
     formatActivityBucketTooltipLine,
     formatAccessibleTooltip,
     formatTimestamp,
+    formatLastResetTooltip,
     formatExpiryCountdown,
     buildResetCreditDisplay,
     selectResetCredit,

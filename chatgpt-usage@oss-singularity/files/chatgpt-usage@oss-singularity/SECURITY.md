@@ -46,6 +46,9 @@ safe synthetic reproduction when possible.
   reset timestamps and sampled numeric credit balances needed to derive
   observed credit consumption for eight days, capped at 10,000 samples. It
   never stores full provider responses, prompts or tokens.
+- The 7d reset tooltip may retain a separate local observation journal with
+  only model/window keys and reset timestamps. It is written with mode `0600`
+  beside history and contains no provider response, prompt or credential data.
 - History and the unresolved-reset journal live under
   `$XDG_STATE_HOME/cinnamon-chatgpt-usage` (normally `~/.local/state/...`), in
   files created with mode `0600`. Newly created state directories use `0700`.

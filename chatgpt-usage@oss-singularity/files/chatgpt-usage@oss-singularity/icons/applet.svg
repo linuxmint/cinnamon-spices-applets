@@ -1,8 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
   <!-- SPDX-License-Identifier: GPL-3.0-or-later; original OSS Singularity artwork. -->
-  <defs><linearGradient id="tile" x2="1" y2="1"><stop stop-color="#244b66"/><stop offset="1" stop-color="#122b3f"/></linearGradient></defs>
+  <defs>
+    <linearGradient id="tile" x2="1" y2="1"><stop stop-color="#244b66"/><stop offset="1" stop-color="#122b3f"/></linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b5ffed"/><stop offset="1" stop-color="#76d8d1"/></linearGradient>
+  </defs>
   <rect x="1" y="1" width="62" height="62" rx="17" fill="url(#tile)"/>
-  <path d="M45 46A20 20 0 1 1 47 20" fill="none" stroke="#a3f4e4" stroke-width="5" stroke-linecap="round"/>
-  <circle cx="50" cy="29" r="3.5" fill="#a3f4e4"/>
-  <path d="M24 39V33M32 39V27M40 39V21" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <!-- A complete ring remains underneath three broad ribbon-like sweeps. -->
+  <circle cx="32" cy="32" r="22" fill="none" stroke="url(#ring)" stroke-width="2.8"/>
+  <circle cx="32" cy="32" r="22" fill="none" stroke="url(#ring)" stroke-width="7" stroke-linecap="round" stroke-dasharray="23 23" stroke-dashoffset="11"/>
+  <path d="M22 41V34M30 41V28M38 41V22" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
 </svg>

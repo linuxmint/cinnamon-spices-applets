@@ -70,7 +70,7 @@ class InstallationPaths(SettingsWidget):
     def _window_pressed(self, gesture, _count, x, y):
         window = gesture.get_widget()
         entry = window.get_focus()
-        if self._closed or entry not in self.entries.values():
+        if self._closed or not self._is_text_input(entry):
             return
         position = entry.translate_coordinates(window, 0, 0)
         if position is None:
@@ -78,6 +78,11 @@ class InstallationPaths(SettingsWidget):
         left, top = position
         if not (left <= x < left + entry.get_allocated_width() and top <= y < top + entry.get_allocated_height()):
             window.set_focus(None)
+
+    @staticmethod
+    def _is_text_input(widget):
+        """Release focus from native settings inputs when clicking blank UI."""
+        return isinstance(widget, (Gtk.Entry, Gtk.SpinButton, Gtk.TextView))
 
     def _disconnect_click_gesture(self):
         if self._click_gesture is not None:
