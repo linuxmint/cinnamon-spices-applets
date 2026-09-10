@@ -226,6 +226,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         this.alreadyCalledBysetAppletTooltip = false;
 
         this._appVolumeSection = new PopupMenu.PopupMenuSection();
+        this._appVolumeSection.actor.clip_to_allocation = true;
 
         this.real_ui_scale = 1.0;
         this.menuWidth = 450;
@@ -555,6 +556,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, this.orientation);
+        this.menu.box.clip_to_allocation = true;
         this.menuManager.addMenu(this.menu);
         this._resizer = new Applet.PopupResizeHandler(
             this.menu.actor,
@@ -1407,7 +1409,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
 
     on_applet_added_to_panel() {
         this.themeNode = null;
-        this.menu.actor.set_width(this.popup_width);
+        this._setMenuWidth();
         this.title_text_old = "";
         this.startingUp = true;
         if (this._playerctl)
@@ -1583,12 +1585,16 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         else
             this._remove_OsdWithNumberATJosephMcc_button.actor.hide();
         this._balanceSection._onValueInit();
-        this.menu.actor.set_width(this.popup_width);
+        this._setMenuWidth();
     }
 
     _openMenu() {
-        this.menu.actor.set_width(this.popup_width);
+        this._setMenuWidth();
         this.menu.toggle(true);
+    }
+
+    _setMenuWidth() {
+        this.menu.actor.set_width(Math.round(Math.max(this.popup_width, 300) * this.real_ui_scale));
     }
 
     _toggle_out_mute() {

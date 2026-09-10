@@ -105,6 +105,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 
         if (this._slider)
             this.removeActor(this._slider);
+        this._slider.style = "min-width: 6em;";
         //this.addActor(this.icon, {span: 0});
         this.addActor(this.button.actor, {
             span: 0

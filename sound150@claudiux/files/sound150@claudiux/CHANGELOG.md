@@ -1,3 +1,6 @@
+### v16.5.2~20260909
+  * Keeps popup menu contents inside the menu width.
+
 ### v16.5.1~20260908
   * Avoids synchronous cover image loading.
 
