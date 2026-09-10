@@ -6,6 +6,7 @@ const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
+const Tooltips = imports.ui.tooltips; // Importación para los Tooltips emergentes
 
 // Cinnamon Translation Support
 const Gettext = imports.gettext;
@@ -135,9 +136,20 @@ BingWallpaperApplet.prototype = {
                 let imgData = json.images[i];
                 if (!imgData || !imgData.startdate) continue;
 
-                let labelText = imgData.copyright ? imgData.copyright : _("Bing Wallpaper");
+                // Usamos el copyright, pero lo recortamos inteligentemente para no romper el menú
+                let fullText = imgData.copyright ? imgData.copyright : _("Bing Wallpaper");
+                let labelText = fullText;
+
+                // Si el texto es muy largo, lo cortamos a 40 caracteres y le agregamos "..."
+                if (labelText.length > 40) {
+                    labelText = labelText.substring(0, 40) + "...";
+                }
 
                 let menuItem = new PopupMenu.PopupMenuItem(labelText);
+                
+                // El tooltip nativo muestra el texto completo sin recortar
+                let tooltip = new Tooltips.Tooltip(menuItem.actor, fullText);
+
                 menuItem.connect('activate', () => {
                     log(`User selected historical background: ${imgData.url}`);
                     this._saveOverrideState(true, imgData.startdate);
