@@ -1,36 +1,58 @@
-**Duolingo Helper Cinnamon Spice**
+# Duolingo Helper Cinnamon Spice
 
-This applet helps you track your Duolingo progress and boost your motivation.
+This applet shows public Duolingo profile statistics in the Cinnamon panel.
 
-Features:
-- the icon is a red "D" if you haven't reached your daily goal and a green "D" if you have
-- your daily XP is also displayed on the panel
-- if you click on the icon you will see the number of your crowns, the streak lenght and the number of lingots - just like on the website
-- the data is fetched every 30 seconds
-- click on the "Practise" button to open duolingo.com in the default browser
-- authentication via Cinnamon-native keyring
+The previous version used Duolingo's obsolete password login endpoint and displayed daily-goal/crown/lingot data that is no longer reliable in the current Duolingo product. This version no longer asks for or stores a Duolingo password. It reads public profile data from:
 
-Authentication troubleshooting:
-The Duolingo Helper will prompt you to enter your credentials (you may also be asked to unlock the keyring).
-If the stored credentials are wrong they will be deleted from the keyring and you will be prompted again to enter them.
-
-If you have issues with the authentication you can use `secret-tool` for troubleshooting:
-- install secret-tool:
-```
-sudo apt-get install -y libsecret-tools
-```
-- lookup duolingo.com credentials:
-```
-secret-tool lookup site duolingo.com
-```
-- manually store credentials:
-```
-secret-tool store --label="Duolingo" site duolingo.com
-```
-- clear credentials:
-```
-secret-tool clear site duolingo.com
+```text
+https://www.duolingo.com/2017-06-30/users?username=<username>
 ```
 
-Last updated:
-Mon 06 Jun 2022 10:36:12 AM CEST
+## Features
+
+- No Duolingo password is requested or stored.
+- Multiple Duolingo usernames can be configured.
+- Right-click the panel applet and choose `Settings` to edit users. The label is translated by Cinnamon.
+- Hover over the applet to see per-user statistics.
+- Left-click the applet for a compact menu, profile links, and manual refresh.
+- Refreshes automatically every 5 minutes.
+
+## Displayed Statistics
+
+The current public profile endpoint exposes:
+
+- Streak in days
+- Total XP
+- XP in the current course
+- Current course title
+- Duolingo Plus status when present
+- Error state per configured username
+
+The panel label stays compact:
+
+```text
+<loaded-users> | <sum-of-streaks>
+```
+
+Example:
+
+```text
+3 | 42
+```
+
+## Configure
+
+1. Right-click the Duolingo Helper applet in the Cinnamon panel.
+2. Click `Settings`.
+3. Add one row per Duolingo username.
+4. Enable the rows you want to fetch.
+
+Use the Duolingo username, not the email address.
+
+Clicking a loaded user in the applet menu opens that user's Duolingo profile.
+
+## Notes
+
+This applet uses an unofficial public Duolingo endpoint. Duolingo can change or remove it without notice.
+
+If a configured username shows an error, verify that the profile exists and that the username is public.
