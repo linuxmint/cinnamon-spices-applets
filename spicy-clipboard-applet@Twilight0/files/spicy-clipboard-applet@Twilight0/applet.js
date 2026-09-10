@@ -78,6 +78,7 @@ MyApplet.prototype = {
 
             // Setup Clipboard Monitor
             this._clipboard = St.Clipboard.get_default();
+            this._isCheckingImage = false;
             this._monitorTimeout = Mainloop.timeout_add(300, () => this._monitorClipboard());
         } catch (e) {
             global.logError(e);
@@ -117,6 +118,9 @@ MyApplet.prototype = {
     },
 
     _checkImageClipboard: function () {
+        if (this._isCheckingImage) return;
+        this._isCheckingImage = true;
+
         let cmd = [
             "bash",
             "-c",
@@ -149,11 +153,16 @@ MyApplet.prototype = {
                     }
                 } catch (e) {
                     // Ignore stream read errors
+                } finally {
+                    this._isCheckingImage = false;
                 }
             });
             
-            proc.wait_async(null, null);
+            proc.wait_async(null, () => {
+                this._isCheckingImage = false;
+            });
         } catch (e) {
+            this._isCheckingImage = false;
             global.logError("Failed to check image clipboard: " + e);
         }
     },
@@ -209,22 +218,44 @@ MyApplet.prototype = {
         return label;
     },
 
+    _ensureDirAsync: function (dirFile, callback) {
+        dirFile.make_directory_async(GLib.PRIORITY_DEFAULT, null, (dir, res) => {
+            try {
+                dir.make_directory_finish(res);
+                callback(true);
+            } catch (e) {
+                if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                    callback(true);
+                } else if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                    let parent = dirFile.get_parent();
+                    if (parent) {
+                        this._ensureDirAsync(parent, (ok) => {
+                            if (ok) {
+                                this._ensureDirAsync(dirFile, callback);
+                            } else {
+                                callback(false);
+                            }
+                        });
+                    } else {
+                        callback(false);
+                    }
+                } else {
+                    global.logError("Failed to create directory: " + e);
+                    callback(false);
+                }
+            }
+        });
+    },
+
     _saveHistory: function () {
         let configDir = GLib.get_user_config_dir() + "/cinnamon/spices/" + UUID;
         let historyPath = configDir + "/history.dat";
         let file = Gio.File.new_for_path(historyPath);
         let parent = file.get_parent();
-        
-        parent.make_directory_with_parents_async(GLib.PRIORITY_DEFAULT, null, (parentDir, dir_res) => {
-            try {
-                parentDir.make_directory_with_parents_finish(dir_res);
-            } catch (err) {
-                if (!err.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
-                    global.logError("Failed to create history directory: " + err);
-                    return;
-                }
-            }
-            
+
+        this._ensureDirAsync(parent, (ok) => {
+            if (!ok) return;
+
             try {
                 let data = JSON.stringify(this._history, null, 2);
                 let bytes = GLib.Bytes.new(data);
