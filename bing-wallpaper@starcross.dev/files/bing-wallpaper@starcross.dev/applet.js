@@ -10,9 +10,9 @@ const St = imports.gi.St;
 // Cinnamon Translation Support
 const Gettext = imports.gettext;
 const UUID = "bing-wallpaper@starcross.dev";
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+// FIX 3: Use GLib.get_user_data_dir() instead of hardcoding .local/share
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
-// Simplified translation function per standard pattern
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
@@ -60,8 +60,8 @@ BingWallpaperApplet.prototype = {
         this.metaDataPath = `${this.wallpaperDir}/meta.json`;
         this.overrideStatePath = `${this.wallpaperDir}/override.json`;
         
-        // Load manual override state to persist through restarts
-        this._loadOverrideState();
+        this.manualOverride = false;
+        this.manualOverrideDate = null;
 
         let refreshBg = new PopupMenu.PopupIconMenuItem(_("Refresh Now"), "view-refresh", St.IconType.SYMBOLIC);
         refreshBg.connect('activate', () => {
@@ -74,8 +74,10 @@ BingWallpaperApplet.prototype = {
         this.historyMenu = new PopupMenu.PopupSubMenuMenuItem(_("Recent Images"));
         this._applet_context_menu.addMenuItem(this.historyMenu);
 
-        // Begin refresh loop
-        this._refresh();
+        // Load manual override state to persist through restarts, then start refresh loop
+        this._loadOverrideState(() => {
+            this._refresh();
+        });
     },
 
     _saveOverrideState: function(isOverride, dateStr) {
@@ -83,26 +85,42 @@ BingWallpaperApplet.prototype = {
         this.manualOverrideDate = dateStr;
         let state = { manualOverride: isOverride, date: dateStr };
         let gFile = Gio.file_new_for_path(this.overrideStatePath);
-        try {
-            gFile.replace_contents(JSON.stringify(state), null, false, Gio.FileCreateFlags.NONE, null);
-        } catch (e) {
-            log(`Error saving override state: ${e.message}`);
-        }
+        
+        // FIX 2: Use replace_contents_async instead of sync
+        gFile.replace_contents_async(
+            JSON.stringify(state),
+            null,
+            false,
+            Gio.FileCreateFlags.NONE,
+            null,
+            (file, res) => {
+                try {
+                    file.replace_contents_finish(res);
+                } catch (e) {
+                    log(`Error saving override state: ${e.message}`);
+                }
+            }
+        );
     },
 
-    _loadOverrideState: function() {
+    _loadOverrideState: function(callback) {
         let gFile = Gio.file_new_for_path(this.overrideStatePath);
-        try {
-            let [success, contents] = gFile.load_contents(null);
-            if (success) {
-                let state = JSON.parse(ByteArray.toString(contents));
-                this.manualOverride = state.manualOverride;
-                this.manualOverrideDate = state.date;
+        
+        // FIX 1: Use load_contents_async instead of sync
+        gFile.load_contents_async(null, (file, res) => {
+            try {
+                let [success, contents] = file.load_contents_finish(res);
+                if (success) {
+                    let state = JSON.parse(ByteArray.toString(contents));
+                    this.manualOverride = state.manualOverride;
+                    this.manualOverrideDate = state.date;
+                }
+            } catch (e) {
+                this.manualOverride = false;
+                this.manualOverrideDate = null;
             }
-        } catch (e) {
-            this.manualOverride = false;
-            this.manualOverrideDate = null;
-        }
+            if (callback) callback();
+        });
     },
 
     _buildHistoryMenu: function(json) {
