@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.3
+
+* Add try/catch fallback for Gst.init to fix GJS strict type crashes
+
 ## 1.3.1 - 1.3.2
 
 * Small code refactor (Optimize startup performance and disk reads)
