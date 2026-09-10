@@ -86,9 +86,11 @@ BingWallpaperApplet.prototype = {
         let state = { manualOverride: isOverride, date: dateStr };
         let gFile = Gio.file_new_for_path(this.overrideStatePath);
         
-        // FIX 2: Use replace_contents_async instead of sync
+        // Convertimos el string JSON a un Array de Bytes para GJS
+        let contents = ByteArray.fromString(JSON.stringify(state));
+
         gFile.replace_contents_async(
-            JSON.stringify(state),
+            contents,
             null,
             false,
             Gio.FileCreateFlags.NONE,
