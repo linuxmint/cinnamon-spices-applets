@@ -1,0 +1,334 @@
+// === IMPORTS & CONSTANTS ===
+imports.gi.versions.Gst = "1.0";
+const Gst = imports.gi.Gst;
+const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
+const St = imports.gi.St;
+const Clutter = imports.gi.Clutter;
+
+const Channels = imports.channels;
+
+const DEFAULT_VOLUME = 1;
+const CLIENT_NAME = "fm-radio";
+
+// === CONTROL BUTTONS ===
+function createControlButtons(player, pr) {
+    let box = new St.BoxLayout({
+        vertical: false,
+        x_align: Clutter.ActorAlign.CENTER,
+        x_expand: true,
+    });
+
+    let prev = new St.Icon({
+        style_class: "icon",
+        icon_name: "media-skip-backward-symbolic",
+        reactive: true,
+        icon_size: 22,
+    });
+
+    let icon = new St.Icon({
+        style_class: "icon",
+        icon_name: player.isPlaying()
+            ? "media-playback-stop-symbolic"
+            : "media-playback-start-symbolic",
+        reactive: true,
+        icon_size: 40,
+    });
+
+    let next = new St.Icon({
+        style_class: "icon",
+        icon_name: "media-skip-forward-symbolic",
+        reactive: true,
+        icon_size: 22,
+    });
+
+    box.add_child(prev);
+    box.add_child(icon);
+    box.add_child(next);
+
+    pr.playStopIcon = icon;
+
+    next.connect("button-press-event", () => {
+        player.stop();
+        player.next();
+        player.play();
+        pr.channelChanged();
+    });
+
+    prev.connect("button-press-event", () => {
+        player.stop();
+        player.prev();
+        player.play();
+        pr.channelChanged();
+    });
+
+    icon.connect("button-press-event", () => {
+        if (player.isPlaying()) {
+            player.stop();
+            pr.setPlayingState(false);
+        } else {
+            player.play();
+            pr.setPlayingState(true);
+        }
+    });
+
+    return box;
+}
+
+// === GSTREAMER STREAM ===
+const RadioPlayer = class RadioPlayer {
+    constructor(channel) {
+        this.channel = channel;
+        this.playing = false;
+        this.isReconnecting = false;
+        this.volume = DEFAULT_VOLUME;
+        this.playbin = null;
+        this.sink = null;
+        this.onError = null;
+        this.onTagChanged = null;
+        
+        this._retryTimerId = null;
+
+        // System listener to instantly detect Wi-Fi/Network changes
+        this.networkMonitor = Gio.NetworkMonitor.get_default();
+        this.networkMonitorId = this.networkMonitor.connect("network-changed", (monitor, available) => {
+            if (!this.playing) return;
+            
+            if (!available) {
+                this._startReconnectLoop();
+            } else if (this.isReconnecting) {
+                this._forceReconnectTick();
+            }
+        });
+    }
+
+    _clearRetry() {
+        if (this._retryTimerId) {
+            GLib.source_remove(this._retryTimerId);
+            this._retryTimerId = null;
+        }
+        this.isReconnecting = false;
+    }
+
+    // Starts the reconnection loop (every 5 seconds)
+    _startReconnectLoop() {
+        if (!this.playing || this.isReconnecting) return;
+        
+        this.isReconnecting = true;
+        
+        if (this.playbin) {
+            this.playbin.set_state(Gst.State.NULL);
+        }
+        
+        if (this.onError != null) this.onError(); 
+
+        this._retryTimerId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 5000, () => {
+            this._forceReconnectTick();
+            return GLib.SOURCE_CONTINUE;
+        });
+    }
+
+    // Attempts to restart the stream
+    _forceReconnectTick() {
+        if (this.playing && this.networkMonitor.get_network_available()) {
+            if (this.playbin) {
+                this.playbin.set_state(Gst.State.NULL);
+                this.playbin.set_property("uri", this.channel.getLink());
+                this.playbin.set_state(Gst.State.PLAYING);
+            }
+        }
+    }
+
+    _initPipeline() {
+        if (this.playbin && this.sink) return;
+
+        Gst.init([]);
+        
+        this.playbin = Gst.ElementFactory.make("playbin", "fmradio");
+        
+        // If playbin is null, gst-plugins-base is missing
+        if (!this.playbin) {
+            if (this.onFatalError) this.onFatalError();
+            return;
+        }
+
+        this.playbin.set_property("uri", this.channel.getLink());
+        
+        this.sink = Gst.ElementFactory.make("pulsesink", "sink");
+        if (this.sink) {
+            this.sink.set_property("client-name", CLIENT_NAME);
+        } else {
+            this.sink = Gst.ElementFactory.make("autoaudiosink", "sink");
+        }
+
+        // If the audio sink is null, gst-plugins-good is missing
+        if (this.sink) {
+            this.playbin.set_property("audio-sink", this.sink);
+        } else {
+            this.playbin = null;
+            if (this.onFatalError) this.onFatalError();
+            return;
+        }
+
+        this.playbin.volume = this.volume;
+
+        let bus = this.playbin.get_bus();
+        bus.add_signal_watch();
+        bus.connect("message", (bus, msg) => {
+            if (msg != null) this._onMessageReceived(msg);
+        });
+    }
+
+    play() {
+        this._clearRetry();
+        this._initPipeline();
+
+        if (!this.playbin || !this.sink) {
+            this.playing = false;
+            return;
+        }
+
+        this.playbin.set_state(Gst.State.PLAYING);
+        this.playing = true;
+    }
+
+    setOnError(onError) {
+        this.onError = onError;
+    }
+
+    setOnFatalError(onFatalError) {
+        this.onFatalError = onFatalError;
+    }
+
+    setOnTagChanged(onTagChanged) {
+        this.onTagChanged = onTagChanged;
+    }
+
+    setMute(mute) {
+        if (this.playbin) {
+            this.playbin.set_property("mute", mute);
+        }
+    }
+
+    stop() {
+        this._clearRetry();
+        if (this.playbin) {
+            this.playbin.set_state(Gst.State.NULL);
+        }
+        this.playing = false;
+    }
+
+    destroy() {
+        this.stop();
+        if (this.networkMonitorId) {
+            this.networkMonitor.disconnect(this.networkMonitorId);
+            this.networkMonitorId = 0;
+        }
+    }
+
+    next() {
+        let num = this.channel.getNum();
+        let totalChannels = Channels.getChannels().length;
+        num = num >= totalChannels - 1 ? 0 : num + 1;
+        this.setChannel(Channels.getChannel(num));
+    }
+
+    prev() {
+        let num = this.channel.getNum();
+        let totalChannels = Channels.getChannels().length;
+        num = num <= 0 ? totalChannels - 1 : num - 1;
+        this.setChannel(Channels.getChannel(num));
+    }
+
+    setChannel(ch) {
+        this.channel = ch;
+        this.tag = "";
+        this.title = "";
+        this.artist = "";
+        this.stop();
+        if (this.playbin) {
+            this.playbin.set_property("uri", ch.getLink());
+        }
+        this.play();
+    }
+
+    getChannel() {
+        return this.channel;
+    }
+
+    setVolume(value) {
+        this.volume = value;
+        if (this.playbin) {
+            this.playbin.volume = value;
+        }
+    }
+
+    getVolume() {
+        return this.volume;
+    }
+
+    isPlaying() {
+        return this.playing;
+    }
+
+    getTag() {
+        return this.tag;
+    }
+
+    getTitle() {
+        return this.title || "";
+    }
+
+    getArtist() {
+        return this.artist || "";
+    }
+
+    _onMessageReceived(msg) {
+        switch (msg.type) {
+            case Gst.MessageType.TAG: {
+                let tagList = msg.parse_tag();
+    
+                let titleData = tagList.get_string("title");
+                let artistData = tagList.get_string("artist");
+
+                let title = titleData[0] ? titleData[1] : "";
+                let artist = artistData[0] ? artistData[1] : "";
+
+                if (!artist && title.includes("-")) {
+                    let parts = title.split("-");
+                    artist = parts[0].trim();
+                    title = parts.slice(1).join("-").trim();
+                }
+
+                if (title || artist) {
+                    this.title = title;
+                    this.artist = artist;
+                    
+                    this.tag = artist ? `${artist} - ${title}` : title;
+
+                    if (this.onTagChanged != null) this.onTagChanged();
+                }
+                break;
+            }
+
+            case Gst.MessageType.STREAM_START:
+                this._clearRetry();
+                if (this.onTagChanged != null) this.onTagChanged();
+                break;
+
+            case Gst.MessageType.EOS:
+            case Gst.MessageType.ERROR:
+                if (this.playing) {
+                    this._startReconnectLoop();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+};
+
+var Radio = {
+    RadioPlayer: RadioPlayer,
+    ControlButtons: createControlButtons
+};

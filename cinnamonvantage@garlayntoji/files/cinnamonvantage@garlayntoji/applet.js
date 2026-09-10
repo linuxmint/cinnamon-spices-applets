@@ -35,11 +35,11 @@ const FILE_PATHS = {
     [FN_LOCK]: "/sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/fn_lock",
     [CONSERVATION_MODE]: "/sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode",
     [USB_CHARGING]: "/sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/usb_charging",
-    [WINKEY]: "/sys/bus/platform/drivers/legion/PNP0C09:00/winkey",
-    [TOUCHPAD]: "/sys/bus/platform/drivers/legion/PNP0C09:00/touchpad",
-    [RAPID_CHARGE]: "/sys/bus/platform/drivers/legion/PNP0C09:00/rapidcharge",
-    [OVERDRIVE]: "/sys/bus/platform/drivers/legion/PNP0C09:00/overdrive",
-    [GSYNC]: "/sys/bus/platform/drivers/legion/PNP0C09:00/gsync"
+    [WINKEY]: "/sys/devices/platform/legion/winkey",
+    [TOUCHPAD]: "/sys/devices/platform/legion/touchpad",
+    [RAPID_CHARGE]: "/sys/devices/platform/legion/rapidcharge",
+    [OVERDRIVE]: "/sys/devices/platform/legion/overdrive",
+    [GSYNC]: "/sys/devices/platform/legion/gsync"
 };
 
 const Gettext = imports.gettext;

@@ -11,31 +11,40 @@ const Meta = imports.gi.Meta;
 const Gettext = imports.gettext;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
-const Extension = imports.ui.extension;
 const windowTracker = imports.gi.Cinnamon.WindowTracker.get_default();
 const ByteArray = imports.byteArray;
+const Extension = imports.ui.extension;
+function _require(relPath) {
+    if (Extension.getCurrentExtension) {
+        var Me = Extension.getCurrentExtension();
+        return Me.imports[relPath];
+    } else {
+        return require(relPath);
+    }
+}
 
 const uuid = "brightness-and-gamma-applet@cardsurf";
 
-const SunCalc = require('./lib/suncalc');
-const AppletGui = require('./lib/appletGui');
-const AppletConstants = require('./lib/appletConstants');
-const Values = require('./lib/values');
-const TempValues = require('./lib/tempValues');
+const SunCalc = _require('./lib/suncalc');
+const AppletGui = _require('./lib/appletGui');
+const AppletConstants = _require('./lib/appletConstants');
+const Values = _require('./lib/values');
+const TempValues = _require('./lib/tempValues');
 const {
   timeout_add_seconds,
   setTimeout,
   clearTimeout,
   remove_all_sources
-} = require('./lib/mainloopTools');
+} = _require('./lib/mainloopTools');
 
 const MinXrandrVersion = 1.4;
 const MinRandrVersion = 1.2;
 
-const SCRIPT_NUMBER_OF_MONITORS = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + uuid + "/6.4/scripts/number-of-monitors.sh";
+const SCRIPT_NUMBER_OF_MONITORS = GLib.get_user_data_dir() + "/cinnamon/applets/" + uuid + "/6.6/scripts/number-of-monitors.sh";
+const SCRIPT_GEO = GLib.get_user_data_dir() + "/cinnamon/applets/" + uuid + "/6.6/scripts/geo.py";
 
 // Translation support
-Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale")
+Gettext.bindtextdomain(uuid, GLib.get_user_data_dir() + "/locale")
 
 function _(str) {
   return Gettext.dgettext(uuid, str);
@@ -145,18 +154,37 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this._init_dependencies_satisfied();
     }
 
+    on_geoip_button_clicked() {
+        Util.spawnCommandLineAsyncIO(SCRIPT_GEO, (stdout, stderr, exitCode) => {
+            if (exitCode == 0) {
+                var [lat, lon] = stdout.trim().split(" ");
+                this.geolat = "" + lat;
+                this.geolon = "" + lon;
+            }
+        });
+    }
+
     sunrise_sunset() {
-        let schedule_mode = this.gsettings.get_string("night-light-schedule-mode");
-        if (schedule_mode == "manual") {
-            let _sunset = this.gsettings.get_value("night-light-schedule-from").unpack(); // type (d)
-            let _sunrise = this.gsettings.get_value("night-light-schedule-to").unpack(); // type (d)
-            this.sunrise = Math.round(_sunrise * 4)/4;
-            this.sunset = Math.round(_sunset * 4)/4;
-            return [this.sunrise, this.sunset];
+        let lat, lon;
+        if (this.use_geoip_values) {
+            lat = parseFloat(this.geolat);
+            lon = parseFloat(this.geolon);
+        } else {
+            let schedule_mode = this.gsettings.get_string("night-light-schedule-mode");
+            if (schedule_mode == "manual") {
+                let _sunset = this.gsettings.get_value("night-light-schedule-from").unpack(); // type (d)
+                let _sunrise = this.gsettings.get_value("night-light-schedule-to").unpack(); // type (d)
+                this.sunrise = Math.round(_sunrise * 4)/4;
+                this.sunset = Math.round(_sunset * 4)/4;
+                return [this.sunrise, this.sunset];
+            }
+            [lat, lon] = this.gsettings.get_value("night-light-last-coordinates").unpack(); // type (dd)
+            lat = lat.unpack(); // type (d)
+            lon = lon.unpack(); // type (d)
         }
-        let [lat, lon] = this.gsettings.get_value("night-light-last-coordinates").unpack(); // type (dd)
-        lat = lat.unpack(); // type (d)
-        lon = lon.unpack(); // type (d)
+
+        global.log("lat: " + lat);
+        global.log("lon: " + lon);
 
         if (  Math.round(lat) == 91 || Math.round(lon) == 181 ) {
           this.sunrise = 6;
@@ -194,7 +222,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     _get_applet_directory() {
-        let directory = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + uuid + "/";
+        let directory = GLib.get_user_data_dir() + "/cinnamon/applets/" + uuid + "/";
         return directory;
     }
 
@@ -350,6 +378,9 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["save_every", null],
                         ["update_scroll", null],
                         ["scroll_step", null],
+                        ["geolon", this.sunrise_sunset],
+                        ["geolat", this.sunrise_sunset],
+                        ["use_geoip_values", this.sunrise_sunset],
                         ["brightness_up_shortcut", this.on_shortcut_changed],
                         ["brightness_down_shortcut", this.on_shortcut_changed],
                         ["toggle_on_off_shortcut", this.on_shortcut_changed],
@@ -374,6 +405,9 @@ class BrightnessAndGamma extends Applet.IconApplet {
                 this.old_preset_list = this.preset_list;
                 this.old_preset_list_temp = this.preset_list_temp;
         }
+        if (this.geolat === "91.0" || this.geolon === "181.0")
+            this.on_geoip_button_clicked();
+        this.sunrise_sunset();
     }
 
     on_preset_list_changed() {

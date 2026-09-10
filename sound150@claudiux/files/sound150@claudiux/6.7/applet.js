@@ -322,13 +322,16 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("ignoredOutputDevices", "ignoredOutputDevices", () => {this._on_reload_this_applet_pressed();});
         this.settings.bind("runAsync", "runAsync");
         this.settings.bind("shortenArtistTitle", "shortenArtistTitle");
+        this.settings.bind("playerControl", "playerControl", () => {
+            this._on_reload_this_applet_pressed();
+        });
         this.settings.bind("doNotUsePlayerctld", "doNotUsePlayerctld", () => {
             this._on_reload_this_applet_pressed();
         });
-        if (this.doNotUsePlayerctld)
-            kill_playerctld();
-        else
+        if (this._playerctl)
             run_playerctld();
+        else
+            kill_playerctld();
         this.settings.bind("showMediaOptical", "showMediaOptical", () => {
             SHOW_MEDIA_OPTICAL = this.showMediaOptical;
             this._on_reload_this_applet_pressed();
@@ -406,9 +409,6 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             else this.unregisterSystrayIcons();
         });
 
-        this.settings.bind("playerControl", "playerControl", () => {
-            this.on_settings_changed()
-        });
         this.settings.bind("extendedPlayerControl", "extendedPlayerControl", () => {
             for (let i in this._players)
                 this._players[i].onSettingsChanged();
@@ -584,46 +584,48 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         this._playerItems = [];
         this._activePlayer = null;
 
-        Interfaces.getDBusAsync((proxy, error) => {
-            if (error) {
-                // ?? what else should we do if we fail completely here?
-                throw error;
-            }
-
-            this._dbus = proxy;
-
-            // player DBus name pattern
-            let name_regex = /^org\.mpris\.MediaPlayer2\./;
-            // load players
-            this._dbus.ListNamesRemote((names) => {
-                for (let n in names[0]) {
-                    let name = names[0][n];
-                    if (name_regex.test(name)) {
-                        //~ logDebug("name1: " + name);
-                        this._dbus.GetNameOwnerRemote(name, (owner) => this._addPlayer(name, owner[0]));
-                    }
+        if (this.playerControl) {
+            Interfaces.getDBusAsync((proxy, error) => {
+                if (error) {
+                    // ?? what else should we do if we fail completely here?
+                    throw error;
                 }
-            });
 
-            // watch players
-            this._ownerChangedId = this._dbus.connectSignal("NameOwnerChanged",
-                (proxy, sender, [name, old_owner, new_owner]) => {
-                    if (name_regex.test(name)) {
-                        //~ logDebug("name2: " + name);
-                        if (new_owner && !old_owner) {
-                            //~ logDebug("_addPlayer");
-                            this._addPlayer(name, new_owner);
-                        } else if (old_owner && !new_owner) {
-                            //~ logDebug("_removePlayer");
-                            this._removePlayer(name, old_owner);
-                        } else {
-                            //~ logDebug("_changePlayerOwner");
-                            this._changePlayerOwner(name, old_owner, new_owner);
+                this._dbus = proxy;
+
+                // player DBus name pattern
+                let name_regex = /^org\.mpris\.MediaPlayer2\./;
+                // load players
+                this._dbus.ListNamesRemote((names) => {
+                    for (let n in names[0]) {
+                        let name = names[0][n];
+                        if (name_regex.test(name) && !this._ignorePlayerName(name)) {
+                            //~ logDebug("name1: " + name);
+                            this._dbus.GetNameOwnerRemote(name, (owner) => this._addPlayer(name, owner[0]));
                         }
                     }
-                }
-            );
-        });
+                });
+
+                // watch players
+                this._ownerChangedId = this._dbus.connectSignal("NameOwnerChanged",
+                    (proxy, sender, [name, old_owner, new_owner]) => {
+                        if (name_regex.test(name) && !this._ignorePlayerName(name)) {
+                            //~ logDebug("name2: " + name);
+                            if (new_owner && !old_owner) {
+                                //~ logDebug("_addPlayer");
+                                this._addPlayer(name, new_owner);
+                            } else if (old_owner && !new_owner) {
+                                //~ logDebug("_removePlayer");
+                                this._removePlayer(name, old_owner);
+                            } else {
+                                //~ logDebug("_changePlayerOwner");
+                                this._changePlayerOwner(name, old_owner, new_owner);
+                            }
+                        }
+                    }
+                );
+            });
+        }
 
         //~ // Mixer control:
         //~ this._control = new Cvc.MixerControl({
@@ -654,6 +656,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         this._output = null;
         this._outputMutedId = null;
         this._outputIcon = "audio-volume-muted-symbolic";
+        this._playerIcon = [null, false];
 
         this._channelMap = null;
 
@@ -1214,9 +1217,11 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, () => {
             this._openMenu()
         });
-        Main.keybindingManager.addHotKey("switch-player-" + this.instance_id, this.keySwitchPlayer, () => {
-            this._switchToNextPlayer()
-        });
+        if (this.playerControl) {
+            Main.keybindingManager.addHotKey("switch-player-" + this.instance_id, this.keySwitchPlayer, () => {
+                this._switchToNextPlayer()
+            });
+        }
 
         Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => {
             //~ this.set_applet_tooltip("");
@@ -1229,32 +1234,17 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             this.setAppletTooltip();
         });
         Main.keybindingManager.addHotKey("volume-mute-" + this.instance_id, "AudioMute", () => this._toggle_out_mute());
-        Main.keybindingManager.addHotKey("pause-" + this.instance_id, "AudioPlay", () => this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote());
+        if (this.playerControl) {
+            Main.keybindingManager.addHotKey("pause-" + this.instance_id, "AudioPlay",
+                () => this._sendPlayerCommand("PlayPause"));
 
-        Main.keybindingManager.addHotKey("audio-next-" + this.instance_id, "AudioNext", () => {
-            if (this._players[this._activePlayer]._name.toLowerCase() === "mpv" &&
-                GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                GLib.file_set_contents(RUNTIME_DIR + "/R30Next", "");
-            } else {
-                this._players[this._activePlayer]._mediaServerPlayer.NextRemote()
-            }
-        });
-        Main.keybindingManager.addHotKey("audio-prev-" + this.instance_id, "AudioPrev", () => {
-            if (this._players[this._activePlayer]._name.toLowerCase() === "mpv" &&
-                GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                GLib.file_set_contents(RUNTIME_DIR + "/R30Previous", "");
-            } else {
-                this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote()
-            }
-        });
-        Main.keybindingManager.addHotKey("audio-stop-" + this.instance_id, "AudioStop", () => {
-            if (this._players[this._activePlayer]._name.toLowerCase() === "mpv" &&
-                GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
-            } else {
-                this._players[this._activePlayer]._mediaServerPlayer.StopRemote()
-            }
-        });
+            Main.keybindingManager.addHotKey("audio-next-" + this.instance_id, "AudioNext",
+                () => this._sendPlayerCommand("Next"));
+            Main.keybindingManager.addHotKey("audio-prev-" + this.instance_id, "AudioPrev",
+                () => this._sendPlayerCommand("Previous"));
+            Main.keybindingManager.addHotKey("audio-stop-" + this.instance_id, "AudioStop",
+                () => this._sendPlayerCommand("Stop"));
+        }
 
         if (!this.redefine_volume_keybindings) return;
 
@@ -1270,57 +1260,79 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         Main.keybindingManager.removeHotKey("volume-mute");
         Main.keybindingManager.removeHotKey("volume-up");
         Main.keybindingManager.removeHotKey("volume-down");
-        Main.keybindingManager.removeHotKey("pause");
-        Main.keybindingManager.removeHotKey("audio-stop");
-
-        Main.keybindingManager.removeHotKey("audio-next");
-        Main.keybindingManager.removeHotKey("audio-prev");
+        if (this.playerControl) {
+            Main.keybindingManager.removeHotKey("pause");
+            Main.keybindingManager.removeHotKey("audio-stop");
+            Main.keybindingManager.removeHotKey("audio-next");
+            Main.keybindingManager.removeHotKey("audio-prev");
+        }
         Main.keybindingManager.removeHotKey("mic-mute");
 
-        if (this.audio_stop.length > 2)
+        if (this.playerControl && this.audio_stop.length > 2)
             Main.keybindingManager.addHotKey("audio-stop", this.audio_stop,
-                () => {
-                    if (this._players[this._activePlayer]._name.toLowerCase() === "mpv" &&
-                        GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                        GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
-                    } else {
-                        this._players[this._activePlayer]._mediaServerPlayer.StopRemote()
-                    }
-                });
+                () => this._sendPlayerCommand("Stop"));
 
-        if (this.pause_on_off.length > 2)
+        if (this.playerControl && this.pause_on_off.length > 2)
             Main.keybindingManager.addHotKey("pause", this.pause_on_off,
-                () => this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote());
+                () => this._sendPlayerCommand("PlayPause"));
         if (this.volume_mute.length > 2)
             Main.keybindingManager.addHotKey("volume-mute", this.volume_mute, () => this._toggle_out_mute()); //(...args) => this._mutedChanged(...args, "_output"));
         if (this.volume_up.length > 2)
             Main.keybindingManager.addHotKey("volume-up", this.volume_up, () => this._volumeChange(Clutter.ScrollDirection.UP));
         if (this.volume_down.length > 2)
             Main.keybindingManager.addHotKey("volume-down", this.volume_down, () => this._volumeChange(Clutter.ScrollDirection.DOWN));
-        if (this.audio_next.length > 2)
-            Main.keybindingManager.addHotKey("audio-next", this.audio_next, () => {
-                if (this._players[this._activePlayer]._name.toLowerCase() === "mpv" &&
-                    GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                    GLib.file_set_contents(RUNTIME_DIR + "/R30Next", "");
-                } else {
-                    this._players[this._activePlayer]._mediaServerPlayer.NextRemote()
-                }
-            });
+        if (this.playerControl && this.audio_next.length > 2)
+            Main.keybindingManager.addHotKey("audio-next", this.audio_next,
+                () => this._sendPlayerCommand("Next"));
 
-        if (this.audio_prev.length > 2)
-            Main.keybindingManager.addHotKey("audio-prev", this.audio_prev, () => {
-                if (this._players[this._activePlayer]._name.toLowerCase() === "mpv" &&
-                    GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                    GLib.file_set_contents(RUNTIME_DIR + "/R30Previous", "");
-                } else {
-                    this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote()
-                }
-            });
+        if (this.playerControl && this.audio_prev.length > 2)
+            Main.keybindingManager.addHotKey("audio-prev", this.audio_prev,
+                () => this._sendPlayerCommand("Previous"));
         if (this.mic_mute.length > 2)
             Main.keybindingManager.addHotKey("mic-mute", this.mic_mute, () => {
                 this._toggle_in_mute()
             });
     } // End of _setKeybinding
+
+    _sendPlayerCommand(command) {
+        let player = this._players[this._activePlayer];
+        if (!player || !player._mediaServerPlayer) return;
+
+        let remoteCommand = player._mediaServerPlayer[command + "Remote"];
+        if (!remoteCommand) return;
+
+        let sendRemoteCommand = () => {
+            try { remoteCommand.call(player._mediaServerPlayer); } catch(e) { logError(e); }
+        };
+
+        if (player._name.toLowerCase() !== "mpv" || command === "PlayPause") {
+            sendRemoteCommand();
+            return;
+        }
+
+        let socket = Gio.File.new_for_path(R30MPVSOCKET);
+        socket.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_TYPE, Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (file, result) => {
+            try {
+                file.query_info_finish(result);
+            } catch (e) {
+                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
+                    logError(e);
+                sendRemoteCommand();
+                return;
+            }
+
+            let commandFile = Gio.File.new_for_path(RUNTIME_DIR + "/R30" + command);
+            let bytes = new GLib.Bytes(new TextEncoder().encode(""));
+            commandFile.replace_contents_bytes_async(bytes, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, (file, result) => {
+                try {
+                    file.replace_contents_finish(result);
+                } catch (e) {
+                    logError(e);
+                    sendRemoteCommand();
+                }
+            });
+        });
+    }
 
     _on_maxVolume_changed(value) {
         if (value > 100) {
@@ -1772,9 +1784,9 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
                 volumeChange = true;
             } else if (this.horizontalScroll && player !== null && player._playerStatus !== "Stopped") {
                 if (direction == Clutter.ScrollDirection.LEFT) {
-                    this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote();
+                    this._sendPlayerCommand("Previous");
                 } else if (direction == Clutter.ScrollDirection.RIGHT) {
-                    this._players[this._activePlayer]._mediaServerPlayer.NextRemote();
+                    this._sendPlayerCommand("Next");
                 }
             }
         }
@@ -1877,7 +1889,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
                 else if (this.middleShiftClickAction === "in_mute")
                     this._toggle_in_mute();
                 else if (this.middleShiftClickAction === "player")
-                    this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote();
+                    this._sendPlayerCommand("PlayPause");
             } else {
                 if (this.middleClickAction === "mute") {
                     if (this._input && this._output && this._output.is_muted === this._input.is_muted)
@@ -1887,13 +1899,13 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
                     this._toggle_out_mute();
                 else if (this.middleClickAction === "in_mute")
                     this._toggle_in_mute();
-                else if (this.middleClickAction === "player" && this._players[this._activePlayer])
-                    this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote();
+                else if (this.middleClickAction === "player")
+                    this._sendPlayerCommand("PlayPause");
             }
         } else if (buttonId === 8) { // previous and next track on mouse buttons 4 and 5 (8 and 9 by X11 numbering)
-            this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote();
+            this._sendPlayerCommand("Previous");
         } else if (buttonId === 9) {
-            this._players[this._activePlayer]._mediaServerPlayer.NextRemote();
+            this._sendPlayerCommand("Next");
         } else {
             return Applet.Applet.prototype._onButtonPressEvent.call(this, actor, event);
         }
@@ -2113,29 +2125,30 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
 
         if (!this.allowChangeArt) return;
 
-        if (player && (player === true || player._playerStatus == 'Playing')) {
-            // Something is playing
-            if (this.showalbum) {
-                if (path) {
-                    this.setIcon(path, "player-path");
-                } else {
-                    if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
-                        this.setIcon("media-optical-cd-audio-with-mic-disabled", "player-name");
-                    else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state))
-                        this.setIcon("media-optical-cd-audio-with-mic-enabled", "player-name");
-                    else
-                        this.setIcon("media-optical-cd-audio", "player-name");
-                }
-            } else {
-                if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
-                    this.setIcon("audio-x-generic-with-mic-disabled", "player-name");
-                else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state))
-                    this.setIcon("audio-x-generic-with-mic-enabled", "player-name");
-                else
-                    this.setIcon("audio-x-generic", "player-name");
-            }
+        if (player && (player === true || player._playerStatus == 'Playing') && this.showalbum && path) {
+            this.setIcon(path, "player-path");
+            //~ // Something is playing
+            //~ if (this.showalbum) {
+                //~ if (path) {
+                    //~ this.setIcon(path, "player-path");
+                //~ } else {
+                    //~ if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
+                        //~ this.setIcon("media-optical-cd-audio-with-mic-disabled", "player-name");
+                    //~ else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state))
+                        //~ this.setIcon("media-optical-cd-audio-with-mic-enabled", "player-name");
+                    //~ else
+                        //~ this.setIcon("media-optical-cd-audio", "player-name");
+                //~ }
+            //~ } else {
+                //~ if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
+                    //~ this.setIcon("audio-x-generic-with-mic-disabled", "player-name");
+                //~ else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state))
+                    //~ this.setIcon("audio-x-generic-with-mic-enabled", "player-name");
+                //~ else
+                    //~ this.setIcon("audio-x-generic", "player-name");
+            //~ }
         } else {
-            // Nothing is playing - clear player icon and show volume icon
+            //~ // Nothing is playing - clear player icon and show volume icon
             this._playerIcon = [null, false];
             this.setIcon(this._outputIcon);
         }
@@ -2252,7 +2265,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             }
             this.setAppletText(this.player);
         }
-        if (!this.doNotUsePlayerctld && !this._playerctl) {
+        if (this.playerControl && !this.doNotUsePlayerctld && !this._playerctl) {
             if (tooltips.length != 0) tooltips.push("");
             tooltips.push(_("The 'playerctl' package is required!"));
             tooltips.push(_("Please select 'Install playerctl' in this menu"));
@@ -2300,7 +2313,13 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             /^org\.mpris\.MediaPlayer2\.vlc-\d+$/.test(busName);
     }
 
+    _ignorePlayerName(busName) {
+        return busName === "org.mpris.MediaPlayer2.playerctld";
+    }
+
     _addPlayer(busName, owner) {
+        if (!this.playerControl || this._ignorePlayerName(busName)) return;
+
         if (this._players[owner]) {
             let prevName = this._players[owner]._busName;
             // HAVE: ADDING: ACTION:
@@ -2482,7 +2501,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             this._remove_OsdWithNumberATJosephMcc_button.actor.hide();
 
         //button Install playerctl (when it isn't installed)
-        if (this._playerctl === null && !this.doNotUsePlayerctld) {
+        if (this.playerControl && this._playerctl === null && !this.doNotUsePlayerctld) {
             let _install_playerctl_button = this.menu.addAction(_("Install playerctl"), () => {
                 Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_playerctl.sh'".format(PATH2SCRIPTS));
             });
@@ -2871,7 +2890,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             if (this._recordingAppsNum++ === 0) {
                 this._inputSection.actor.show();
                 if (this.mute_in_switch) this.mute_in_switch.actor.show();
-                if (!this.doNotUsePlayerctld)
+                if (this._playerctl)
                     run_playerctld();
             }
         }
@@ -3146,7 +3165,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
     }
 
     get _playerctl() {
-        return !this.doNotUsePlayerctld && GLib.find_program_in_path("playerctl");
+        return this.playerControl && !this.doNotUsePlayerctld && GLib.find_program_in_path("playerctl");
     }
 
     get _imagemagick() {

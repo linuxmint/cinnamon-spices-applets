@@ -1,0 +1,57 @@
+{
+  "main-section": {
+    "type": "section",
+    "description": "General Settings"
+  },
+  "checkInterval": {
+    "type": "spinbutton",
+    "default": 60,
+    "min": 5,
+    "max": 1440,
+    "step": 5,
+    "units": "minutes",
+    "description": "Check Interval",
+    "tooltip": "How often to check for updates in the background."
+  },
+  "showDesktopNotifications": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Desktop Notifications",
+    "tooltip": "Show a desktop alert when new updates are found."
+  },
+  "terminalEmulator": {
+    "type": "combobox",
+    "default": "gnome-terminal",
+    "options": {
+      "GNOME Terminal": "gnome-terminal",
+      "Kitty": "kitty",
+      "Konsole": "konsole",
+      "Alacritty": "alacritty"
+    },
+    "description": "Terminal Emulator",
+    "tooltip": "Terminal emulator to open when executing the package update."
+  },
+  "updateCommand": {
+    "type": "entry",
+    "default": "sudo pacman -Syu",
+    "description": "Update Command",
+    "tooltip": "The command executed inside the terminal to apply package upgrades."
+  },
+  "checkAur": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Check AUR Updates",
+    "tooltip": "Include updates from the Arch User Repository (AUR)."
+  },
+  "aurHelper": {
+    "type": "combobox",
+    "default": "yay",
+    "options": {
+      "Yay": "yay",
+      "Paru": "paru"
+    },
+    "description": "AUR Helper",
+    "tooltip": "The command line helper used to query AUR updates.",
+    "dependency": "checkAur"
+  }
+}

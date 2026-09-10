@@ -1,0 +1,12 @@
+{
+  "uuid": "spicy-clipboard-applet@Twilight0",
+  "name": "Spicy Clipboard Manager",
+  "description": "A lightweight clipboard history manager applet for Cinnamon. Works on both X11 and Wayland. Requires yad (for history management/editing), xclip (for X11/image support), or dotool (for Wayland auto-paste support).",
+  "cinnamon-version": [
+    "3.0",
+    "4.0",
+    "5.0",
+    "6.0",
+    "7.0"
+  ]
+}

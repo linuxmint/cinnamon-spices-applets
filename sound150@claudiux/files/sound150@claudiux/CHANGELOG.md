@@ -1,3 +1,13 @@
+### v16.5.1~20260908
+  * Avoids synchronous cover image loading.
+
+### v16.5.0~20260908
+  * Improves MPRIS player control responsiveness.
+  * Stops hidden seeker position polling.
+
+### v16.4.3~20260705
+  * Fixes some warnings when a player is first added.
+
 ### v16.4.2~20260617
   * Whether or not to display the OSD in full-screen mode.
   * Fixes [#8803](https://github.com/linuxmint/cinnamon-spices-applets/issues/8803)

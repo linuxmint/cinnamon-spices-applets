@@ -48,7 +48,7 @@ MyApplet.prototype = {
 
             if (this.startupScript && this.startupScript.trim()) {
                 this.wait_for_startup_cmd = true;
-                Util.spawn_async([this.shell, '-c', this.startupScript], Lang.bind(this, this.update_started));
+                Util.spawnCommandLineAsyncIO('', this.update_started.bind(this), { argv:  [this.shell, '-c', this.startupScript] });
             }
             this.autoupdate();
 
@@ -74,7 +74,7 @@ MyApplet.prototype = {
             if (!this.wait_for_clicked_cmd) {
                 this.wait_for_clicked_cmd = true;
             let cmd = (this.menuScript && this.menuScript.trim()) ? this.menuScript : this.script1;
-                Util.spawn_async([this.shell, '-c', cmd], Lang.bind(this, this.update_clicked));
+                Util.spawnCommandLineAsyncIO('', this.update_clicked.bind(this), { argv:  [this.shell, '-c', cmd] });
             } else {
                 this.menuLabel.set_text(_("Error: Still waiting for command to finish!"));
             }
@@ -83,16 +83,25 @@ MyApplet.prototype = {
         this.update();
     },
 
-    update_clicked: function (cmd_output) {
-        if (this.menuScriptDisplay) {
-            Main.notify(this.title, cmd_output.toString().trimRight());
+    update_clicked: function (cmd_output, cmd_error, cmd_exit_code) {
+        if(cmd_exit_code != 0) {
+            global.logError("[bash-sensors@pkkk]: update_clicked: command failed with error:\n" + cmd_error);
+        } else {
+            if (this.menuScriptDisplay) {
+                Main.notify(this.title, cmd_output.toString().trimRight());
+            }
         }
         this.wait_for_clicked_cmd = false;
         this.update();
     },
 
-    update_cmd1: function (cmd_output) {
-        this.labels[0] = cmd_output.toString().replace(/\n/g, "").substring(0, 50).trimRight();
+    update_cmd1: function (cmd_output, cmd_error, cmd_exit_code) {
+        if(cmd_exit_code != 0) {
+            global.logError("[bash-sensors@pkkk]: update_cmd1: command failed with error:\n" + cmd_error);            
+            this.labels[0] = "Error!";
+        } else {
+            this.labels[0] = cmd_output.toString().replace(/\n/g, "").substring(0, 50).trimRight();
+        }
         if (this.script2 && this.script2.trim() && this.enableScript2) {
             this.set_applet_label(this.labels.join('\n'));
         } else {
@@ -101,14 +110,24 @@ MyApplet.prototype = {
         this.wait_for_label_cmd[0] = false;
     },
 
-    update_cmd2: function (cmd_output) {
-        this.labels[1] = cmd_output.toString().replace(/\n/g, "").substring(0, 50).trimRight();
+    update_cmd2: function (cmd_output, cmd_error, cmd_exit_code) {
+        if(cmd_exit_code != 0) {
+            global.logError("[bash-sensors@pkkk]: update_cmd2: command failed with error:\n" + cmd_error);
+            this.labels[1] = "Error!";
+        } else {
+            this.labels[1] = cmd_output.toString().replace(/\n/g, "").substring(0, 50).trimRight();
+        }
         this.set_applet_label(this.labels.join('\n'));
         this.wait_for_label_cmd[1] = false;
     },
 
-    update_icon: function (cmd_output) {
-        let icon = cmd_output.toString().trim();
+    update_icon: function (cmd_output, cmd_error, cmd_exit_code) {
+        let icon = undefined;
+        if(cmd_exit_code != 0) {
+            global.logError("[bash-sensors@pkkk]: update_icon: command failed with error:\n" + cmd_error);
+        } else {
+            icon = cmd_output.toString().trim();
+        }
         if (icon) {
             // from placesCenter@scollins
             if (Gtk.IconTheme.get_default().has_icon(icon)) {
@@ -126,12 +145,19 @@ MyApplet.prototype = {
         this.wait_for_icon_cmd = false;
     },
 
-    update_tooltip: function (cmd_output) {
-        this.set_applet_tooltip(cmd_output.toString().trim());
+    update_tooltip: function (cmd_output, cmd_error, cmd_exit_code) {
+        if(cmd_exit_code != 0) {
+            global.logError("[bash-sensors@pkkk]: update_tooltip: command failed with error:\n" + cmd_error);
+        } else {
+            this.set_applet_tooltip(cmd_output.toString().trim());
+        }
         this.wait_for_tooltip_cmd = false;
     },
 
-    update_started: function (cmd_output) {
+    update_started: function (cmd_output, cmd_error, cmd_exit_code) {
+        if(cmd_exit_code != 0) {
+            global.logError("[bash-sensors@pkkk]: update_started: command failed with error:\n" + cmd_error);
+        }
         this.wait_for_startup_cmd = false;
     },
 
@@ -140,7 +166,7 @@ MyApplet.prototype = {
             if (!this.wait_for_tooltip_cmd) {
                 this.wait_for_tooltip_cmd = true;
             let cmd = (this.tooltipScript && this.tooltipScript.trim()) ? this.tooltipScript : this.script1;
-                Util.spawn_async([this.shell, '-c', cmd], Lang.bind(this, this.update_tooltip));
+                Util.spawnCommandLineAsyncIO('', this.update_tooltip.bind(this), { argv:  [this.shell, '-c', cmd] });
             }
         } else {
             this.set_applet_tooltip(this.tooltipScript.trim());
@@ -148,18 +174,18 @@ MyApplet.prototype = {
 
         if (this.script1 && this.script1.trim() && !this.wait_for_label_cmd[0]) {
             this.wait_for_label_cmd[0] = true;
-            Util.spawn_async([this.shell, '-c', this.script1], Lang.bind(this, this.update_cmd1));
+            Util.spawnCommandLineAsyncIO('', this.update_cmd1.bind(this), { argv:  [this.shell, '-c', this.script1] });
             }
         if (this.script2 && this.script2.trim() && this.enableScript2 && !this.wait_for_label_cmd[1]) {
             this.wait_for_label_cmd[1] = true;
-            Util.spawn_async([this.shell, '-c', this.script2], Lang.bind(this, this.update_cmd2));
+            Util.spawnCommandLineAsyncIO('', this.update_cmd2.bind(this), { argv:  [this.shell, '-c', this.script2] });
         }
 
         if (this.iconScript && this.iconScript.trim()) {
             if (this.dynamicIcon) {
                 if (!this.wait_for_icon_cmd) {
                     this.wait_for_icon_cmd = true;
-                    Util.spawn_async([this.shell, '-c', this.iconScript], Lang.bind(this, this.update_icon));
+                    Util.spawnCommandLineAsyncIO('', this.update_icon.bind(this), { argv:  [this.shell, '-c', this.iconScript] });
                 }
             } else {
                 this.set_applet_icon_path(this.iconScript);

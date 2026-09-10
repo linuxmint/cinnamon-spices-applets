@@ -1,14 +1,14 @@
 # ORLOJ
 # This file is put in the public domain.
-# faragofr, 2016
+# faragofr, 2026
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: orloj@faragofr 1.0.0\n"
+"Project-Id-Version: orloj@faragofr 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-05-11 22:18+0200\n"
+"POT-Creation-Date: 2026-07-01 22:35+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,45 +17,58 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->metadata.json->name
+#. metadata.json->name
 msgid "Orloj"
 msgstr ""
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->metadata.json->description
+#. metadata.json->description
 msgid "Prague-style astronomical clock applet"
 msgstr ""
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->latitude->description
+#. settings-schema.json->latitude->description
 msgid "Latitude (decimal degrees, north positive)"
 msgstr ""
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->latitude->tooltip
+#. settings-schema.json->latitude->tooltip
 msgid "Your geographic latitude in decimal degrees, e.g. 50.0875 for Prague"
 msgstr ""
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->longitude->description
+#. settings-schema.json->longitude->description
 msgid "Longitude (decimal degrees, east positive)"
 msgstr ""
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->longitude->tooltip
+#. settings-schema.json->longitude->tooltip
 msgid "Your geographic longitude in decimal degrees, e.g. 14.4214 for Prague"
 msgstr ""
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->refresh-seconds->units
+#. settings-schema.json->refresh-seconds->units
 msgid "seconds"
 msgstr ""
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->refresh-seconds->description
+#. settings-schema.json->refresh-seconds->description
 msgid "Refresh interval"
 msgstr ""
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->accent-color->description
+#. settings-schema.json->accent-color->description
 msgid "Accent color"
+msgstr ""
+
+#. settings-schema.json->foreground-color->description
+msgid "Foreground color (text, hands, glyphs)"
+msgstr ""
+
+#. settings-schema.json->background-color->description
+msgid "Background color"
+msgstr ""
+
+#. settings-schema.json->dial-size->units
+msgid "pixels"
+msgstr ""
+
+#. settings-schema.json->dial-size->description
+msgid "Dial size"
+msgstr ""
+
+#. settings-schema.json->dial-size->tooltip
+msgid "Diameter of the dial in the popup; larger values improve readability"
 msgstr ""

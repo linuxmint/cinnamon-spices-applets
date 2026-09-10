@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: orloj@faragofr 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-05-11 22:18+0200\n"
+"POT-Creation-Date: 2026-07-01 22:35+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,47 +18,60 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.9\n"
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->metadata.json->name
+#. metadata.json->name
 msgid "Orloj"
 msgstr "Orloj"
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->metadata.json->description
+#. metadata.json->description
 msgid "Prague-style astronomical clock applet"
 msgstr "Aplicación del reloj astronómico al estilo de Praga"
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->latitude->description
+#. settings-schema.json->latitude->description
 msgid "Latitude (decimal degrees, north positive)"
 msgstr "Latitud (grados decimales, norte positivo)"
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->latitude->tooltip
+#. settings-schema.json->latitude->tooltip
 msgid "Your geographic latitude in decimal degrees, e.g. 50.0875 for Prague"
-msgstr ""
-"Tu latitud geográfica en grados decimales, p. ej., 50,0875 para Praga"
+msgstr "Tu latitud geográfica en grados decimales, p. ej., 50,0875 para Praga"
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->longitude->description
+#. settings-schema.json->longitude->description
 msgid "Longitude (decimal degrees, east positive)"
 msgstr "Longitud (grados decimales, con el este como valor positivo)"
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->longitude->tooltip
+#. settings-schema.json->longitude->tooltip
 msgid "Your geographic longitude in decimal degrees, e.g. 14.4214 for Prague"
-msgstr ""
-"Tu longitud geográfica en grados decimales, p. ej., 14,4214 para Praga"
+msgstr "Tu longitud geográfica en grados decimales, p. ej., 14,4214 para Praga"
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->refresh-seconds->units
+#. settings-schema.json->refresh-seconds->units
 msgid "seconds"
 msgstr "segundos"
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->refresh-seconds->description
+#. settings-schema.json->refresh-seconds->description
 msgid "Refresh interval"
 msgstr "Intervalo de actualización"
 
-#. ..->..->..->orloj@faragofr->files->orloj@faragofr->settings-
-#. schema.json->accent-color->description
+#. settings-schema.json->accent-color->description
 msgid "Accent color"
 msgstr "Color de contraste"
+
+#. settings-schema.json->foreground-color->description
+msgid "Foreground color (text, hands, glyphs)"
+msgstr "Color de primer plano (texto, manecillas, símbolos)"
+
+#. settings-schema.json->background-color->description
+msgid "Background color"
+msgstr "Color de fondo"
+
+#. settings-schema.json->dial-size->units
+msgid "pixels"
+msgstr "pixeles"
+
+#. settings-schema.json->dial-size->description
+msgid "Dial size"
+msgstr "Tamaño de la esfera"
+
+#. settings-schema.json->dial-size->tooltip
+msgid "Diameter of the dial in the popup; larger values improve readability"
+msgstr ""
+"Diámetro de la esfera en la ventana emergente; los valores más grandes "
+"mejoran la legibilidad"

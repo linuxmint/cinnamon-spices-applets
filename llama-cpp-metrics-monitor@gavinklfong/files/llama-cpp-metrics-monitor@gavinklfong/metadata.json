@@ -1,0 +1,6 @@
+{
+  "uuid": "llama-cpp-metrics-monitor@gavinklfong",
+  "name": "Llama.cpp Metrics Monitor",
+  "description": "Shows real-time llama.cpp token rates and system hardware metrics",
+  "version": 1
+}

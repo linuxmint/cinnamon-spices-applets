@@ -1,0 +1,7 @@
+{
+  "uuid": "snippitor@FOSSCharlie",
+  "name": "Snippitor",
+  "description": "Expand short triggers into full text system-wide (e.g. fc# -> FOSSCharlie)",
+  "max-instances": 1,
+  "version": "1.8.0"
+}

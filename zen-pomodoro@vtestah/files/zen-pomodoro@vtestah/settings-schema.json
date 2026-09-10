@@ -1,0 +1,1211 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "timer",
+            "panel",
+            "appearance",
+            "focus",
+            "sounds",
+            "notifications",
+            "advanced"
+        ],
+        "timer": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "sec_behavior",
+                "sec_shortcuts"
+            ]
+        },
+        "panel": {
+            "type": "page",
+            "title": "Panel",
+            "sections": [
+                "sec_panel"
+            ]
+        },
+        "appearance": {
+            "type": "page",
+            "title": "Appearance",
+            "sections": [
+                "sec_theme",
+                "sec_motion",
+                "sec_preview"
+            ]
+        },
+        "focus": {
+            "type": "page",
+            "title": "Focus",
+            "sections": [
+                "sec_goals",
+                "sec_modes",
+                "sec_hud",
+                "sec_zen"
+            ]
+        },
+        "sounds": {
+            "type": "page",
+            "title": "Sounds",
+            "sections": [
+                "sec_ambient",
+                "sec_sounds"
+            ]
+        },
+        "notifications": {
+            "type": "page",
+            "title": "Push notifications",
+            "sections": [
+                "sec_po",
+                "sec_po_messages",
+                "sec_po_alerts"
+            ]
+        },
+        "advanced": {
+            "type": "page",
+            "title": "Advanced",
+            "sections": [
+                "sec_tools",
+                "sec_blocking"
+            ]
+        },
+        "sec_behavior": {
+            "type": "section",
+            "title": "Behavior",
+            "keys": [
+                "rhythm_hint_label",
+                "start_automatically_on_load",
+                "session_recovery",
+                "show_dialog_messages",
+                "auto_start_next",
+                "onboarding_button",
+                "about_technique_button",
+                "restore_onboarding_button"
+            ]
+        },
+        "sec_panel": {
+            "type": "section",
+            "title": "Panel",
+            "keys": [
+                "panel_icon_style",
+                "panel_custom_icon",
+                "show_timer",
+                "show_seconds",
+                "start_on_click",
+                "panel_scroll_control",
+                "scroll_action"
+            ]
+        },
+        "sec_hud": {
+            "type": "section",
+            "title": "On-screen focus cues",
+            "keys": [
+                "focus_show_task_chip",
+                "focus_start_ritual",
+                "prompt_focus_task",
+                "require_focus_task"
+            ]
+        },
+        "sec_theme": {
+            "type": "section",
+            "title": "Theme & frame",
+            "keys": [
+                "theme_preset",
+                "accent_focus_color",
+                "accent_break_color",
+                "frame_style",
+                "glow_intensity"
+            ]
+        },
+        "sec_motion": {
+            "type": "section",
+            "title": "Motion & menu",
+            "keys": [
+                "breathing_pattern",
+                "chip_position",
+                "reduce_motion",
+                "menu_font_scale"
+            ]
+        },
+        "sec_preview": {
+            "type": "section",
+            "title": "Preview",
+            "keys": [
+                "preview_appearance_button",
+                "preview_breathing_button"
+            ]
+        },
+        "sec_goals": {
+            "type": "section",
+            "title": "Goals & flow",
+            "keys": [
+                "daily_goal",
+                "task_celebration",
+                "task_celebration_preview_button",
+                "auto_pause_idle",
+                "auto_pause_idle_minutes",
+                "auto_resume_on_activity",
+                "flow_extend",
+                "flow_extend_minutes",
+                "flow_soft_landing",
+                "flow_soft_landing_behavior"
+            ]
+        },
+        "sec_ambient": {
+            "type": "section",
+            "title": "Ambient sound",
+            "keys": [
+                "focus_ambient_choice",
+                "focus_ambient_file",
+                "focus_ambient_volume",
+                "focus_ambient_preview_button"
+            ]
+        },
+        "sec_modes": {
+            "type": "section",
+            "title": "Modes",
+            "keys": [
+                "break_breathing",
+                "break_lock_enabled",
+                "break_lock_long_only",
+                "focus_dnd",
+                "pause_media",
+                "strict_focus"
+            ]
+        },
+        "sec_zen": {
+            "type": "section",
+            "title": "Zen mode",
+            "keys": [
+                "zen_mode_enabled",
+                "zen_dim_strength",
+                "zen_dim_desktop"
+            ]
+        },
+        "sec_sounds": {
+            "type": "section",
+            "title": "Alerts & effects",
+            "keys": [
+                "sox-info",
+                "show_sox_info",
+                "hdr_tick",
+                "timer_sound",
+                "timer_sound_file",
+                "timer_sound_volume",
+                "timer_sound_test",
+                "hdr_alerts",
+                "break_sound",
+                "break_sound_file",
+                "break_sound_volume",
+                "break_sound_test",
+                "warn_sound",
+                "warn_sound_delay",
+                "warn_sound_file",
+                "warn_sound_volume",
+                "warn_sound_test",
+                "start_sound",
+                "start_sound_file",
+                "start_sound_volume",
+                "start_sound_test",
+                "hdr_interval",
+                "interval_chime",
+                "interval_chime_seconds",
+                "interval_chime_file",
+                "interval_chime_volume",
+                "interval_chime_test"
+            ]
+        },
+        "sec_tools": {
+            "type": "section",
+            "title": "Run a command",
+            "keys": [
+                "run_command_enabled",
+                "focus_start_command",
+                "break_start_command",
+                "goal_command"
+            ]
+        },
+        "sec_po": {
+            "type": "section",
+            "title": "Push notifications (Pushover)",
+            "keys": [
+                "pushover_enabled",
+                "pushover_help",
+                "pushover_user_key",
+                "pushover_app_token",
+                "pushover_test_button",
+                "pushover_customize"
+            ]
+        },
+        "sec_po_messages": {
+            "type": "section",
+            "title": "Notification text",
+            "dependency": "pushover_customize",
+            "keys": [
+                "pushover_title",
+                "pushover_msg_focus",
+                "pushover_msg_short_break",
+                "pushover_msg_long_break",
+                "pushover_msg_resume",
+                "pushover_msg_goal"
+            ]
+        },
+        "sec_po_alerts": {
+            "type": "section",
+            "title": "Sound & priority",
+            "dependency": "pushover_customize",
+            "keys": [
+                "pushover_sound",
+                "pushover_priority"
+            ]
+        },
+        "sec_blocking": {
+            "type": "section",
+            "title": "Distraction blocking (advanced)",
+            "keys": [
+                "enable_blocking",
+                "block_domains",
+                "setup_passwordless_button",
+                "remove_passwordless_button"
+            ]
+        },
+        "sec_shortcuts": {
+            "type": "section",
+            "title": "Keyboard shortcuts",
+            "keys": [
+                "hotkey",
+                "hotkey_toggle",
+                "hotkey_skip",
+                "hotkey_distraction"
+            ]
+        }
+    },
+    "rhythm_hint_label": {
+        "type": "label",
+        "description": "Focus, break and cycle lengths come from presets — switch or edit them from the menu (Preset ▸)."
+    },
+    "pomodoro_duration": {
+        "type": "spinbutton",
+        "default": 25,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "description": "Pomodoro Duration:",
+        "units": "minutes",
+        "tooltip": "Length of one focus block, in minutes (classic Pomodoro is 25)."
+    },
+    "short_break_duration": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 15,
+        "step": 1,
+        "description": "Short Break Duration:",
+        "units": "minutes",
+        "tooltip": "Length of the short break after each focus block (classic is 5)."
+    },
+    "long_break_duration": {
+        "type": "spinbutton",
+        "default": 15,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "description": "Long Break Duration:",
+        "units": "minutes",
+        "tooltip": "Length of the longer break after a set of pomodoros (classic is 15–30)."
+    },
+    "pomodori_number": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "description": "Number of pomodori before long break:",
+        "tooltip": "How many focus blocks to complete before the long break (classic is 4)."
+    },
+    "start_automatically_on_load": {
+        "type": "switch",
+        "description": "Start the pomodoro timer as soon as the applet loads",
+        "default": false,
+        "tooltip": "Begin a focus session as soon as Cinnamon starts or the applet is added."
+    },
+    "session_recovery": {
+        "type": "switch",
+        "description": "Recover an in-progress focus session after a Cinnamon restart (resume manually)",
+        "default": true,
+        "tooltip": "If Cinnamon restarts mid-focus, the session is remembered so you can resume it from the menu — it won't auto-start."
+    },
+    "show_dialog_messages": {
+        "type": "switch",
+        "description": "Show a pop-up prompt at each phase change",
+        "default": true,
+        "tooltip": "Show pop-up dialogs at the end of each phase (off keeps it quiet — only on-screen cues)."
+    },
+    "auto_start_next": {
+        "type": "switch",
+        "description": "Automatically start the next phase",
+        "default": true,
+        "tooltip": "When a phase ends, start the next one (focus or break) automatically instead of waiting."
+    },
+    "panel_icon_style": {
+        "type": "combobox",
+        "description": "Panel icon",
+        "default": "ring",
+        "options": {
+            "Progress ring with icon": "ring",
+            "Symbolic icon": "symbolic",
+            "Custom icon": "own",
+            "No icon (timer only)": "none"
+        },
+        "tooltip": "What to show in the panel: a progress ring with the state icon inside (recommended), a plain symbolic icon, your own custom icon, or no icon at all. The timer text is a separate option below."
+    },
+    "panel_custom_icon": {
+        "type": "iconfilechooser",
+        "default": "alarm-symbolic",
+        "default_icon": "alarm-symbolic",
+        "description": "Custom panel icon",
+        "tooltip": "Pick your own panel icon — a theme icon name or an image file. Used when Panel icon is set to Custom icon.",
+        "dependency": "panel_icon_style=own"
+    },
+    "show_timer": {
+        "type": "switch",
+        "description": "Show the pomodoro timer in the applet panel",
+        "default": true,
+        "tooltip": "Show the remaining time as text in the panel."
+    },
+    "show_seconds": {
+        "type": "switch",
+        "description": "Show seconds in the panel timer",
+        "default": true,
+        "tooltip": "Off shows only the remaining minutes on the panel (less distracting).",
+        "dependency": "show_timer"
+    },
+    "hotkey": {
+        "type": "keybinding",
+        "description": "Shortcut: open the applet menu",
+        "default": "<Super><Shift>p",
+        "tooltip": "Keyboard shortcut to open or close the applet menu."
+    },
+    "hotkey_toggle": {
+        "type": "keybinding",
+        "description": "Shortcut: start / pause the timer",
+        "default": "",
+        "tooltip": "Keyboard shortcut to start or pause the timer."
+    },
+    "hotkey_skip": {
+        "type": "keybinding",
+        "description": "Shortcut: skip to the next step",
+        "default": "",
+        "tooltip": "Keyboard shortcut to skip to the next phase (focus ↔ break)."
+    },
+    "hotkey_distraction": {
+        "type": "keybinding",
+        "description": "Shortcut: capture a distraction",
+        "default": "",
+        "tooltip": "Keyboard shortcut to pop up a quick note for a distracting thought, without opening the menu."
+    },
+    "start_on_click": {
+        "type": "switch",
+        "description": "Start the timer with a single click when idle",
+        "default": false,
+        "tooltip": "When no timer is running, left-clicking the applet starts a focus session directly instead of opening the menu."
+    },
+    "panel_scroll_control": {
+        "type": "switch",
+        "description": "Control the timer with the mouse on the panel",
+        "default": true,
+        "tooltip": "Scroll up on the applet to start or resume, scroll down to pause, and middle-click to skip the phase. Turn this off if you sometimes scroll over the panel by accident."
+    },
+    "scroll_action": {
+        "type": "combobox",
+        "description": "Mouse-wheel action on the panel",
+        "default": "start_pause",
+        "dependency": "panel_scroll_control",
+        "options": {
+            "Start / pause the timer": "start_pause",
+            "Adjust the focus length": "focus_length"
+        },
+        "tooltip": "What the mouse wheel does on the applet: start/pause the timer, or change the focus length (when idle). Middle-click always skips to the next phase."
+    },
+    "focus_show_task_chip": {
+        "type": "switch",
+        "description": "Show the current task as an on-screen chip during focus",
+        "default": false,
+        "tooltip": "Show the current task in a small on-screen chip while focusing."
+    },
+    "focus_start_ritual": {
+        "type": "switch",
+        "description": "Start ritual: brief centered 'Focus: <task>' and a smooth fade-in when focus begins",
+        "default": true,
+        "tooltip": "Briefly show 'Focus: <task>' with a smooth fade-in when focus begins."
+    },
+    "prompt_focus_task": {
+        "type": "switch",
+        "description": "Ask which task to focus on before starting",
+        "default": true,
+        "tooltip": "When off, a focus session starts immediately with your current task instead of opening the task picker. If a task is required and none is set, the picker still appears."
+    },
+    "require_focus_task": {
+        "type": "switch",
+        "description": "Require a focus task before starting",
+        "default": false,
+        "tooltip": "Ask for a task name before a focus session can start."
+    },
+    "theme_preset": {
+        "type": "combobox",
+        "description": "Color theme",
+        "default": "warm",
+        "options": {
+            "Warm (amber / green)": "warm",
+            "Cool (teal)": "cool",
+            "Monochrome": "mono",
+            "Custom": "custom"
+        },
+        "tooltip": "Color scheme for accents and on-screen cues. Choose Custom to set your own focus/break colors below."
+    },
+    "accent_focus_color": {
+        "type": "colorchooser",
+        "description": "Custom focus accent color",
+        "default": "rgb(235,175,75)",
+        "dependency": "theme_preset=custom",
+        "tooltip": "Accent color during focus (used only when the theme is Custom)."
+    },
+    "accent_break_color": {
+        "type": "colorchooser",
+        "description": "Custom break accent color",
+        "default": "rgb(120,205,155)",
+        "dependency": "theme_preset=custom",
+        "tooltip": "Accent color during breaks (used only when the theme is Custom)."
+    },
+    "frame_style": {
+        "type": "combobox",
+        "description": "On-screen focus frame style",
+        "default": "glow",
+        "options": {
+            "Glow": "glow",
+            "Classic border": "border",
+            "Corners only": "corners",
+            "Off": "off"
+        },
+        "tooltip": "Style of the on-screen frame that traces focus progress: a soft Glow, a Classic border, just the Corners, or Off."
+    },
+    "glow_intensity": {
+        "type": "scale",
+        "default": 18,
+        "min": 5,
+        "max": 60,
+        "step": 1,
+        "description": "Glow intensity",
+        "tooltip": "How bright the on-screen edge glow is during focus — higher is more visible, lower is subtler."
+    },
+    "breathing_pattern": {
+        "type": "combobox",
+        "description": "Breathing pattern",
+        "default": "box",
+        "options": {
+            "Box 4-4-4-4": "box",
+            "4-7-8": "478",
+            "Relaxing 4-6": "relax"
+        },
+        "tooltip": "Breathing rhythm for the guide: Box (4-4-4-4), calming 4-7-8, or relaxed 4-6 — seconds per phase."
+    },
+    "chip_position": {
+        "type": "combobox",
+        "description": "Task chip position",
+        "default": "br",
+        "options": {
+            "Bottom-right": "br",
+            "Bottom-left": "bl",
+            "Top-right": "tr",
+            "Top-left": "tl"
+        },
+        "tooltip": "Which screen corner the on-screen task chip appears in."
+    },
+    "reduce_motion": {
+        "type": "switch",
+        "description": "Reduce motion (disable focus animations)",
+        "default": false,
+        "tooltip": "Disable focus animations (fades, pulsing, breathing)."
+    },
+    "menu_font_scale": {
+        "type": "scale",
+        "default": 100,
+        "min": 80,
+        "max": 140,
+        "step": 5,
+        "description": "Menu font scale (%)",
+        "tooltip": "Make the applet menu's text larger or smaller (100% = default size)."
+    },
+    "preview_appearance_button": {
+        "type": "button",
+        "description": "Preview focus frame",
+        "callback": "_previewAppearance",
+        "tooltip": "Briefly show the on-screen focus frame and task chip with the current colors and style (works when no timer is running)."
+    },
+    "preview_breathing_button": {
+        "type": "button",
+        "description": "Preview breathing guide",
+        "callback": "_previewBreathing",
+        "tooltip": "Briefly show the breathing guide with the selected pattern."
+    },
+    "daily_goal": {
+        "type": "scale",
+        "default": 0,
+        "min": 0,
+        "max": 16,
+        "step": 1,
+        "description": "Daily focus goal (pomodori, 0 = off)",
+        "tooltip": "Target pomodoros per day (0 turns off the goal and streak)."
+    },
+    "task_celebration": {
+        "type": "combobox",
+        "description": "Celebrate when a task is completed",
+        "default": "confetti",
+        "options": {
+            "Off": "off",
+            "Subtle (glow + check)": "subtle",
+            "Confetti": "confetti"
+        },
+        "tooltip": "A short celebration when you complete a task that met its 🍅 estimate (or earned at least one). Confetti respects reduce-motion."
+    },
+    "task_celebration_preview_button": {
+        "type": "button",
+        "description": "Preview the celebration",
+        "tooltip": "Play the task-completion celebration once to see how it looks.",
+        "callback": "_previewCelebration",
+        "dependency": "task_celebration!=off"
+    },
+    "auto_pause_idle": {
+        "type": "switch",
+        "description": "Auto-pause focus when you are away (idle)",
+        "default": false,
+        "tooltip": "Pause focus automatically when you step away from the computer."
+    },
+    "auto_pause_idle_minutes": {
+        "type": "scale",
+        "default": 5,
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "description": "Idle minutes before auto-pause",
+        "dependency": "auto_pause_idle",
+        "tooltip": "How long you can be away before focus auto-pauses, in minutes."
+    },
+    "auto_resume_on_activity": {
+        "type": "switch",
+        "description": "Resume automatically when you return",
+        "default": false,
+        "dependency": "auto_pause_idle",
+        "tooltip": "Resume a paused focus session automatically when you return to the computer."
+    },
+    "flow_extend": {
+        "type": "switch",
+        "description": "Offer to extend focus when a pomodoro ends (stay in flow)",
+        "default": true,
+        "tooltip": "When a pomodoro ends, offer to extend it to stay in flow."
+    },
+    "flow_extend_minutes": {
+        "type": "scale",
+        "default": 5,
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "description": "Extend amount (minutes)",
+        "dependency": "flow_extend",
+        "tooltip": "How many extra minutes the 'extend focus' option adds."
+    },
+    "flow_soft_landing": {
+        "type": "switch",
+        "description": "Soft landing: don't break focus while you're still working",
+        "default": false,
+        "tooltip": "When a focus pomodoro ends while you're actively working, hold the break until a natural pause instead of interrupting you. Off by default; only applies when 'auto-continue to break' is off."
+    },
+    "flow_soft_landing_behavior": {
+        "type": "combobox",
+        "description": "When focus ends and you're still working",
+        "default": "wait",
+        "options": {
+            "Wait for a natural pause": "wait",
+            "Quietly extend focus": "extend"
+        },
+        "dependency": "flow_soft_landing",
+        "tooltip": "Wait: hold quietly at the end until you pause, then offer the break. Quietly extend: silently add focus time (the 'Extend amount' above) and keep going, re-checking each time."
+    },
+    "focus_ambient_choice": {
+        "type": "combobox",
+        "description": "Ambient sound during focus",
+        "default": "off",
+        "options": {
+            "Off": "off",
+            "White noise": "white",
+            "Pink noise": "pink",
+            "Brown noise": "brown",
+            "Rain": "rain",
+            "Sea": "sea",
+            "Fan": "fan",
+            "Wind": "wind",
+            "Stream": "stream",
+            "Street": "street",
+            "Custom file": "custom"
+        },
+        "tooltip": "Loop a calming sound during focus. White/pink/brown noise and rain/sea are built in; pick \"Custom file\" to use your own."
+    },
+    "ambient_migrated": {
+        "type": "generic",
+        "default": false
+    },
+    "focus_ambient_sound": {
+        "type": "switch",
+        "description": "Play an ambient sound during focus",
+        "default": false,
+        "tooltip": "Loop a soft ambient sound during focus — the built-in brown noise, or your own file below."
+    },
+    "focus_ambient_volume": {
+        "type": "scale",
+        "default": 40,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "description": "Ambient volume",
+        "dependency": "focus_ambient_choice!=off",
+        "tooltip": "Volume of the ambient sound (0 = silent)."
+    },
+    "focus_ambient_preview_button": {
+        "type": "button",
+        "description": "▶ Preview",
+        "tooltip": "Play a short sample of the chosen ambient sound at the set volume.",
+        "callback": "_previewAmbientSound",
+        "dependency": "focus_ambient_choice!=off"
+    },
+    "break_breathing": {
+        "type": "switch",
+        "description": "Show a breathing guide during breaks",
+        "default": false,
+        "tooltip": "During breaks, show an expanding and contracting circle that paces your breathing to help you unwind."
+    },
+    "break_lock_enabled": {
+        "type": "switch",
+        "description": "Lock the screen during breaks",
+        "default": false,
+        "tooltip": "When a break starts, show a brief warning and then lock the screen so you actually step away. Never locks during focus; off by default."
+    },
+    "break_lock_long_only": {
+        "type": "switch",
+        "description": "Lock only on long breaks",
+        "default": true,
+        "dependency": "break_lock_enabled",
+        "tooltip": "Only lock for the longer breaks, not every short break."
+    },
+    "zen_mode_enabled": {
+        "type": "switch",
+        "description": "Enable Zen mode (focus spotlight — dims other windows, toggled from the menu)",
+        "default": false,
+        "tooltip": "Allow the focus spotlight, toggled from the menu: while focusing, the other windows dim so the one you're working in stands out."
+    },
+    "zen_dim_strength": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 20,
+        "max": 80,
+        "step": 5,
+        "units": "%",
+        "dependency": "zen_mode_enabled",
+        "description": "Zen spotlight: dim strength",
+        "tooltip": "How much to darken the other windows while a focus session runs (higher = darker)."
+    },
+    "zen_dim_desktop": {
+        "type": "switch",
+        "default": false,
+        "dependency": "zen_mode_enabled",
+        "description": "Zen spotlight: also dim the desktop wallpaper",
+        "tooltip": "Darken the desktop background too, not just the other windows."
+    },
+    "strict_focus": {
+        "type": "switch",
+        "description": "Strict focus: no pause or skip during a focus block",
+        "default": false,
+        "tooltip": "While a focus block is running, hide pause and skip so you commit to it. You can still Reset to abandon the session — it's never a hard lock."
+    },
+    "focus_dnd": {
+        "type": "switch",
+        "description": "Mute notifications while focusing (Do Not Disturb)",
+        "default": false,
+        "tooltip": "Mute Cinnamon notifications while focusing; restored afterwards."
+    },
+    "pause_media": {
+        "type": "switch",
+        "description": "Pause music & video on breaks and pauses",
+        "default": true,
+        "tooltip": "Pauses any playing media (browser tab, music app via MPRIS) when a break or pause starts, and resumes the same players when focus continues."
+    },
+    "run_command_enabled": {
+        "type": "switch",
+        "description": "Run a command when focus or a break starts",
+        "default": false,
+        "tooltip": "Run a command of your choice when focus or a break starts."
+    },
+    "focus_start_command": {
+        "type": "filechooser",
+        "description": "Command to run when focus starts",
+        "default": "",
+        "select-dir": false,
+        "dependency": "run_command_enabled",
+        "tooltip": "Pick a script to run when a focus block starts (e.g. enable Do Not Disturb). You can also type a command."
+    },
+    "break_start_command": {
+        "type": "filechooser",
+        "description": "Command to run when a break starts",
+        "default": "",
+        "select-dir": false,
+        "dependency": "run_command_enabled",
+        "tooltip": "Pick a script to run when a break starts (e.g. clear your status). You can also type a command."
+    },
+    "goal_command": {
+        "type": "filechooser",
+        "description": "Command to run when the daily goal is reached",
+        "default": "",
+        "select-dir": false,
+        "dependency": "run_command_enabled",
+        "tooltip": "Pick a script to run when you reach your daily goal (e.g. a small celebration). You can also type a command."
+    },
+    "pushover_enabled": {
+        "type": "switch",
+        "description": "Send push notifications to your phone (Pushover)",
+        "default": false,
+        "tooltip": "Send a push notification to your devices via Pushover when focus or breaks start."
+    },
+    "pushover_help": {
+        "type": "label",
+        "description": "Free phone/desktop alerts. Sign up at pushover.net and paste your keys below.",
+        "dependency": "pushover_enabled"
+    },
+    "pushover_user_key": {
+        "type": "entry",
+        "expand-width": true,
+        "description": "Pushover user key",
+        "default": "",
+        "dependency": "pushover_enabled",
+        "tooltip": "Your Pushover user key (from your Pushover account)."
+    },
+    "pushover_app_token": {
+        "type": "entry",
+        "expand-width": true,
+        "description": "Pushover application API token",
+        "default": "",
+        "dependency": "pushover_enabled",
+        "tooltip": "API token of your Pushover application (create one at pushover.net)."
+    },
+    "pushover_test_button": {
+        "type": "button",
+        "description": "Send a test notification",
+        "callback": "_pushoverTest",
+        "dependency": "pushover_enabled",
+        "tooltip": "Send a test message now to confirm your user key and app token work."
+    },
+    "pushover_customize": {
+        "type": "switch",
+        "default": false,
+        "description": "Customize messages, sounds and priority",
+        "dependency": "pushover_enabled",
+        "tooltip": "Show options to change the text, sound and priority for each event. Off uses sensible defaults."
+    },
+    "pushover_title": {
+        "type": "entry",
+        "expand-width": true,
+        "description": "Notification title",
+        "default": "Zen Pomodoro",
+        "tooltip": "Title shown on the push notifications."
+    },
+    "pushover_msg_focus": {
+        "type": "entry",
+        "expand-width": true,
+        "description": "Message when focus starts",
+        "default": "🎯 Focus: {task} ({minutes} min)",
+        "tooltip": "Sent when a focus session starts. {task} and {minutes} are substituted. Leave empty to send nothing.",
+        "dependency": "pushover_enabled"
+    },
+    "pushover_msg_resume": {
+        "type": "entry",
+        "expand-width": true,
+        "description": "Message when a break ends",
+        "default": "Break's over — back to focus.",
+        "tooltip": "Sent when a break finishes. Leave empty to send no message.",
+        "dependency": "pushover_enabled"
+    },
+    "enable_blocking": {
+        "type": "switch",
+        "description": "Block distracting sites",
+        "default": false,
+        "tooltip": "When on, the sites below are blocked right now and stay blocked until you turn this off. Run \"Set up passwordless blocking\" once so toggling doesn't ask for a password."
+    },
+    "block_domains": {
+        "type": "list",
+        "description": "Domains to block (e.g. youtube.com)",
+        "columns": [
+            {
+                "id": "domain",
+                "title": "Domain",
+                "type": "string"
+            }
+        ],
+        "default": [],
+        "dependency": "enable_blocking",
+        "tooltip": "Domains to block while blocking is on, one per row (e.g. youtube.com, www.youtube.com)."
+    },
+    "sox-info": {
+        "type": "label",
+        "description": "No sound backend found — install GSound or a player like pulseaudio-utils.",
+        "dependency": "show_sox_info"
+    },
+    "show_sox_info": {
+        "type": "generic",
+        "default": false
+    },
+    "timer_sound": {
+        "type": "switch",
+        "description": "Play Timer Sound",
+        "default": false,
+        "tooltip": "Play a soft ticking sound while focusing."
+    },
+    "timer_sound_file": {
+        "type": "filechooser",
+        "description": "Timer Sound File",
+        "default": "tick.ogg",
+        "select-dir": false,
+        "dependency": "timer_sound",
+        "tooltip": "Sound file for the ticking (leave empty for the built-in tone)."
+    },
+    "timer_sound_volume": {
+        "type": "scale",
+        "default": 100,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "description": "Sound volume:",
+        "dependency": "timer_sound",
+        "tooltip": "Volume of the ticking sound (0 = silent)."
+    },
+    "break_sound": {
+        "type": "switch",
+        "description": "Play Break Sound",
+        "default": true,
+        "tooltip": "Play a sound when a break begins."
+    },
+    "break_sound_file": {
+        "type": "filechooser",
+        "description": "Break Sound File",
+        "default": "deskbell.wav",
+        "select-dir": false,
+        "dependency": "break_sound",
+        "tooltip": "Sound file played when a break begins."
+    },
+    "break_sound_volume": {
+        "type": "scale",
+        "default": 100,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "description": "Sound volume:",
+        "dependency": "break_sound",
+        "tooltip": "Volume of the break sound (0 = silent)."
+    },
+    "warn_sound": {
+        "type": "switch",
+        "description": "Play Warn Sound",
+        "default": false,
+        "tooltip": "Play a warning sound shortly before a focus block ends."
+    },
+    "warn_sound_delay": {
+        "type": "scale",
+        "default": 30,
+        "min": 5,
+        "max": 600,
+        "step": 5,
+        "description": "Warn Delay (in secs):",
+        "dependency": "warn_sound",
+        "tooltip": "How many seconds before the end the warning sound plays."
+    },
+    "warn_sound_file": {
+        "type": "filechooser",
+        "description": "Warn Sound File",
+        "default": "warn.wav",
+        "select-dir": false,
+        "dependency": "warn_sound",
+        "tooltip": "Sound file used for the warning."
+    },
+    "warn_sound_volume": {
+        "type": "scale",
+        "default": 100,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "description": "Sound volume:",
+        "dependency": "warn_sound",
+        "tooltip": "Volume of the warning sound (0 = silent)."
+    },
+    "start_sound": {
+        "type": "switch",
+        "description": "Play Start Sound",
+        "default": true,
+        "tooltip": "Play a sound when a focus block starts."
+    },
+    "start_sound_file": {
+        "type": "filechooser",
+        "description": "Start Sound File",
+        "default": "deskbell.wav",
+        "select-dir": false,
+        "dependency": "start_sound",
+        "tooltip": "Sound file played when focus starts."
+    },
+    "start_sound_volume": {
+        "type": "scale",
+        "default": 100,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "description": "Sound volume:",
+        "dependency": "start_sound",
+        "tooltip": "Volume of the start sound (0 = silent)."
+    },
+    "interval_chime": {
+        "type": "switch",
+        "description": "Play a chime at a regular interval during focus",
+        "default": false,
+        "tooltip": "Play a sound at a fixed interval during focus to mark time passing."
+    },
+    "interval_chime_seconds": {
+        "type": "scale",
+        "default": 60,
+        "min": 10,
+        "max": 600,
+        "step": 5,
+        "description": "Chime interval (seconds):",
+        "dependency": "interval_chime",
+        "tooltip": "Seconds between chimes during focus."
+    },
+    "interval_chime_file": {
+        "type": "filechooser",
+        "description": "Chime sound file",
+        "default": "ding.ogg",
+        "select-dir": false,
+        "dependency": "interval_chime",
+        "tooltip": "Sound file used for the interval chime."
+    },
+    "interval_chime_volume": {
+        "type": "scale",
+        "default": 80,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "description": "Chime volume:",
+        "dependency": "interval_chime",
+        "tooltip": "Volume of the interval chime (0 = silent)."
+    },
+    "timer_sound_test": {
+        "type": "button",
+        "description": "Listen",
+        "callback": "_previewTimerSound",
+        "tooltip": "Play the selected sound now."
+    },
+    "break_sound_test": {
+        "type": "button",
+        "description": "Listen",
+        "callback": "_previewBreakSound",
+        "tooltip": "Play the selected sound now."
+    },
+    "warn_sound_test": {
+        "type": "button",
+        "description": "Listen",
+        "callback": "_previewWarnSound",
+        "tooltip": "Play the selected sound now."
+    },
+    "start_sound_test": {
+        "type": "button",
+        "description": "Listen",
+        "callback": "_previewStartSound",
+        "tooltip": "Play the selected sound now."
+    },
+    "interval_chime_test": {
+        "type": "button",
+        "description": "Listen",
+        "callback": "_previewChime",
+        "tooltip": "Play the selected sound now."
+    },
+    "hdr_tick": {
+        "type": "header",
+        "description": "Ticking sound (during focus)"
+    },
+    "hdr_alerts": {
+        "type": "header",
+        "description": "Alert sounds"
+    },
+    "hdr_interval": {
+        "type": "header",
+        "description": "Interval chime"
+    },
+    "custom_presets": {
+        "type": "list",
+        "description": "Your custom presets. Apply one from the Preset submenu in the applet menu.",
+        "columns": [
+            {
+                "id": "name",
+                "title": "Name",
+                "type": "string"
+            },
+            {
+                "id": "pomodoro",
+                "title": "Focus (min)",
+                "type": "integer",
+                "min": 1,
+                "max": 180,
+                "step": 1,
+                "units": "min"
+            },
+            {
+                "id": "short_break",
+                "title": "Short break (min)",
+                "type": "integer",
+                "min": 1,
+                "max": 120,
+                "step": 1,
+                "units": "min"
+            },
+            {
+                "id": "long_break",
+                "title": "Long break (min)",
+                "type": "integer",
+                "min": 1,
+                "max": 180,
+                "step": 1,
+                "units": "min"
+            },
+            {
+                "id": "pomodori",
+                "title": "Pomodori",
+                "type": "integer",
+                "min": 1,
+                "max": 16,
+                "step": 1
+            }
+        ],
+        "default": [
+            {
+                "name": "Classic",
+                "pomodoro": 25,
+                "short_break": 5,
+                "long_break": 15,
+                "pomodori": 4
+            },
+            {
+                "name": "Long focus",
+                "pomodoro": 50,
+                "short_break": 10,
+                "long_break": 20,
+                "pomodori": 4
+            }
+        ],
+        "tooltip": "Your timer presets — name + focus / short / long minutes + pomodori. Apply them from the menu's Preset submenu."
+    },
+    "setup_passwordless_button": {
+        "type": "button",
+        "description": "Set up passwordless blocking (one-time)",
+        "tooltip": "Asks for your password once and installs a small system policy so blocking no longer prompts during focus.",
+        "callback": "_setupPasswordlessBlocking",
+        "dependency": "enable_blocking"
+    },
+    "remove_passwordless_button": {
+        "type": "button",
+        "description": "Remove passwordless setup",
+        "tooltip": "Removes the system policy and the root helper, so blocking asks for your password again each time.",
+        "callback": "_removePasswordlessBlocking",
+        "dependency": "enable_blocking"
+    },
+    "onboarding_done": {
+        "type": "generic",
+        "default": false
+    },
+    "zen_intro_shown": {
+        "type": "generic",
+        "default": false
+    },
+    "onboarding_button": {
+        "type": "button",
+        "description": "Run the quick-start guide",
+        "tooltip": "Re-open the step-by-step setup guide.",
+        "callback": "_showOnboardingWizard"
+    },
+    "about_technique_button": {
+        "type": "button",
+        "description": "About the Pomodoro technique",
+        "tooltip": "A short explanation of how the Pomodoro technique works.",
+        "callback": "_showAboutTechnique"
+    },
+    "restore_onboarding_button": {
+        "type": "button",
+        "description": "Undo last setup",
+        "tooltip": "Restore your settings from just before the last time you applied a setup from the guide.",
+        "callback": "_restoreOnboardingBackup"
+    },
+    "onboarding_backup": {
+        "type": "generic",
+        "default": null
+    },
+    "pushover_msg_short_break": {
+        "type": "entry",
+        "expand-width": true,
+        "description": "Message when a short break starts",
+        "default": "Pomodoro done — short break ({minutes} min).",
+        "tooltip": "Sent when a short break begins. {task} and {minutes} are substituted. Leave empty to send nothing.",
+        "dependency": "pushover_enabled"
+    },
+    "pushover_msg_long_break": {
+        "type": "entry",
+        "expand-width": true,
+        "description": "Message when a long break starts",
+        "default": "Set complete — long break ({minutes} min).",
+        "tooltip": "Sent when a long break begins. {task} and {minutes} are substituted. Leave empty to send nothing.",
+        "dependency": "pushover_enabled"
+    },
+    "pushover_msg_goal": {
+        "type": "entry",
+        "expand-width": true,
+        "description": "Message when the daily goal is reached",
+        "default": "🏆 Daily goal reached — great work!",
+        "tooltip": "Sent once when you hit your daily pomodoro goal. {task} and {minutes} are substituted. Leave empty to send nothing.",
+        "dependency": "pushover_enabled"
+    },
+    "pushover_sound": {
+        "type": "combobox",
+        "description": "Notification sound",
+        "default": "pushover",
+        "options": {
+            "Default": "pushover",
+            "Magic": "magic",
+            "Bike": "bike",
+            "Cosmic": "cosmic",
+            "Gamelan": "gamelan",
+            "Incoming": "incoming",
+            "Intermission": "intermission",
+            "None": "none"
+        },
+        "dependency": "pushover_enabled"
+    },
+    "pushover_priority": {
+        "type": "combobox",
+        "description": "Priority",
+        "default": "0",
+        "options": {
+            "Low": "-1",
+            "Normal": "0",
+            "High": "1"
+        },
+        "dependency": "pushover_enabled"
+    },
+    "focus_ambient_file": {
+        "type": "filechooser",
+        "description": "Ambient sound file",
+        "default": "",
+        "dependency": "focus_ambient_choice=custom",
+        "tooltip": "Pick your own looping ambient sound. Leave empty for the built-in soft brown noise."
+    }
+}

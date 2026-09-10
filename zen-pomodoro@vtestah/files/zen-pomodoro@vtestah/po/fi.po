@@ -1,0 +1,2857 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-27 03:33+0700\n"
+"PO-Revision-Date: 2024-11-18 14:34+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: fi\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+#: applet.js:614
+msgid "Strict focus is on"
+msgstr "Tiukka fokus on päällä"
+
+#: applet.js:614
+msgid "Stay with it — finish the block, or reset to start over."
+msgstr "Pysy mukana — vie jakso loppuun tai nollaa aloittaaksesi alusta."
+
+#: applet.js:680
+#, javascript-format
+msgid "Focus length: %d min"
+msgstr "Fokuksen kesto: %d min"
+
+#: applet.js:973
+msgid "Focus session restored — resume when ready"
+msgstr "Fokusjakso palautettu — jatka kun olet valmis"
+
+#: applet.js:1010
+msgid "FOCUS"
+msgstr "FOKUS"
+
+#: applet.js:1012
+msgid "PAUSED FOCUS"
+msgstr "FOKUS PYSÄYTETTY"
+
+#: applet.js:1015
+msgid "BREAK"
+msgstr "TAUKO"
+
+#: applet.js:1018
+msgid "PAUSED BREAK"
+msgstr "TAUKO PYSÄYTETTY"
+
+#: applet.js:1020
+msgid "BREAK OVER"
+msgstr "TAUKO OHI"
+
+#: applet.js:1023 applet.js:1083 menu.js:214 menu.js:738
+msgid "Ready to focus"
+msgstr "Valmis keskittymään"
+
+#: applet.js:1041
+msgid "Short break running"
+msgstr "Lyhyt tauko meneillään"
+
+#: applet.js:1044
+msgid "Short break paused"
+msgstr "Lyhyt tauko pysäytetty"
+
+#: applet.js:1047
+msgid "Long break running"
+msgstr "Pitkä tauko meneillään"
+
+#: applet.js:1050
+msgid "Long break paused"
+msgstr "Pitkä tauko pysäytetty"
+
+#: applet.js:1053 applet.js:1568
+msgid "Break ended"
+msgstr "Tauko päättyi"
+
+#: applet.js:1056
+#, javascript-format
+msgid "Pomodori %d, set %d running"
+msgstr "Pomodori %d, erä %d käynnissä"
+
+#: applet.js:1061 features.js:553 features.js:1790
+#, javascript-format
+msgid "≈ finish %s · %d 🍅 left"
+msgstr "≈ valmis %s · %d 🍅 jäljellä"
+
+#: applet.js:1066
+msgid "Pomodoro paused"
+msgstr "Pomodoro pysäytetty"
+
+#: applet.js:1069
+msgid "Ready to focus — scroll or middle-click to start"
+msgstr "Valmis keskittymään — aloita vierittämällä tai keskipainikkeella"
+
+#: applet.js:1237
+msgid "Classic"
+msgstr "Klassinen"
+
+#: applet.js:1238
+msgid "Long focus"
+msgstr "Pitkä fokus"
+
+#: applet.js:1433
+msgid "Task complete"
+msgstr ""
+
+#. settings-schema.json->sec_preview->title
+#: applet.js:1534 visual.js:593
+msgid "Preview"
+msgstr "Esikatselu"
+
+#: applet.js:1548
+msgid "Pomodoro started"
+msgstr "Pomodoro alkaa"
+
+#: applet.js:1624
+msgid "Let's go to work!"
+msgstr "Sitten töihin!"
+
+#: applet.js:1651
+msgid "Pomodoro done"
+msgstr "Pomodoro valmis"
+
+#: applet.js:1653
+msgid "Take a short break"
+msgstr "Pidä lyhyt tauko"
+
+#: applet.js:1654 applet.js:1685
+#, javascript-format
+msgid "+%d min"
+msgstr "+%d min"
+
+#: applet.js:1655 applet.js:1686
+msgid "Skip break"
+msgstr "Ohita tauko"
+
+#: applet.js:1679
+msgid "Set complete!"
+msgstr "Erä valmis!"
+
+#: applet.js:1684
+msgid "Take a long break"
+msgstr "Pidä pitkä tauko"
+
+#: applet.js:1731
+msgid "Pomodoro ended"
+msgstr "Pomodoro päättyi"
+
+#: applet.js:2017 features.js:3157
+msgid "Stop the timer before changing Pomodoro preset"
+msgstr "Pysäytä ajastin ennen Pomodoro-esiasetuksen vaihtoa"
+
+#: applet.js:2035
+#, javascript-format
+msgid "Pomodoro preset %s applied"
+msgstr "Pomodoro-esiasetus %s otettu käyttöön"
+
+#: applet.js:2042 features.js:743 menu.js:456 menu.js:832 menu.js:1229
+msgid "Preset"
+msgstr "Esiasetus"
+
+#: applet.js:2068
+msgid "Keep at least one preset"
+msgstr "Säilytä vähintään yksi esiasetus"
+
+#: applet.js:2083
+#, javascript-format
+msgid "Break extended by %d min"
+msgstr "Taukoa jatkettu %d min"
+
+#: dialogs.js:37 dialogs.js:147
+msgid "Focus task"
+msgstr "Fokustehtävä"
+
+#: dialogs.js:38 dialogs.js:148
+msgid "What are you focusing on?"
+msgstr "Mihin keskityt?"
+
+#: dialogs.js:42 features.js:720
+msgid "e.g. Write the report"
+msgstr "esim. kirjoita raportti"
+
+#: dialogs.js:61
+msgid "Choose or type a focus task"
+msgstr "Valitse tai kirjoita fokustehtävä"
+
+#: dialogs.js:94 dialogs.js:150 dialogs.js:284 features.js:3206
+msgid "Start"
+msgstr "Aloita"
+
+#: dialogs.js:140 dialogs.js:591 features.js:828 features.js:891
+#: features.js:1930 features.js:3205
+msgid "Cancel"
+msgstr "Peruuta"
+
+#: dialogs.js:147
+msgid "Current task"
+msgstr "Nykyinen tehtävä"
+
+#: dialogs.js:148
+msgid "Choose a task to focus on"
+msgstr "Valitse tehtävä, johon keskityt"
+
+#: dialogs.js:150
+msgid "Switch"
+msgstr "Vaihda"
+
+#: dialogs.js:150
+msgid "Select"
+msgstr "Valitse"
+
+#: dialogs.js:394
+msgid "Hide"
+msgstr "Piilota"
+
+#: dialogs.js:401
+msgid "Switch Off Pomodoro"
+msgstr "Pomodoro pois"
+
+#: dialogs.js:407
+msgid "Start a new Pomodoro"
+msgstr "Aloita uusi Pomodoro"
+
+#: dialogs.js:418
+msgid "Pomodoro set finished, you deserve a break!"
+msgstr "Pomodoro valmis, ansaitset tauon!"
+
+#: dialogs.js:427
+msgid "Your break is over, start another pomodoro!"
+msgstr "Tauko on ohi, aloita uusi pomodoro!"
+
+#: dialogs.js:433
+#, javascript-format
+msgid "A new pomodoro begins in %s."
+msgstr "Uusi pomodoro alkaa %s."
+
+#: dialogs.js:445
+#, javascript-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minuutti"
+msgstr[1] "%d minuuttia"
+
+#: dialogs.js:446
+#, javascript-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d sekunti"
+msgstr[1] "%d sekuntia"
+
+#: dialogs.js:448
+#, javascript-format
+msgid "%s and %s"
+msgstr "%s ja %s"
+
+#: dialogs.js:469 dialogs.js:521
+msgid "Pause Pomodoro"
+msgstr "Pysäytä Pomodoro"
+
+#: dialogs.js:475
+msgid "Continue Current Pomodoro"
+msgstr "Jatka Pomodoroa"
+
+#: dialogs.js:487
+msgid "Short break finished, ready to continue?"
+msgstr "Lyhyt tauko on päättynyt, oletko valmis jatkamaan?"
+
+#: dialogs.js:529
+#, javascript-format
+msgid "Extend +%d min"
+msgstr "Jatka +%d min"
+
+#: dialogs.js:536
+msgid "Start break"
+msgstr "Pidä tauko"
+
+#: dialogs.js:546
+msgid "Pomodoro finished, ready to take a break?"
+msgstr "Pomodoro on valmis, pidätkö tauon?"
+
+#: dialogs.js:565 dialogs.js:599
+msgid "Reorder"
+msgstr ""
+
+#: dialogs.js:566
+msgid "Drag the rows to reorder, then press Done."
+msgstr ""
+
+#: dialogs.js:592
+msgid "Done"
+msgstr ""
+
+#: features.js:204
+#, javascript-format
+msgid "%d focus blocks today — great work!"
+msgstr "%d fokusjaksoa tänään — hienoa työtä!"
+
+#: features.js:206
+#, javascript-format
+msgid "🔥 %d-day streak"
+msgstr "🔥 %d päivän putki"
+
+#: features.js:208
+msgid "Daily goal reached 🍅"
+msgstr "Päivätavoite saavutettu 🍅"
+
+#: features.js:495
+msgid "Reorder tasks"
+msgstr ""
+
+#: features.js:519
+msgid "Reorder presets"
+msgstr ""
+
+#: features.js:544
+#, javascript-format
+msgid "Hit your %d 🍅 estimate for: %s. Mark it done when ready."
+msgstr ""
+"Saavutit arviosi %d 🍅 tehtävälle: %s. Merkitse valmiiksi, kun olet valmis."
+
+#: features.js:635
+msgid "Capture distraction"
+msgstr ""
+
+#: features.js:637
+msgid "Type it, press Enter — then back to work"
+msgstr ""
+
+#: features.js:690
+msgid "Look ~20 ft away for 20 seconds — rest your eyes."
+msgstr "Katso ~6 metrin päähän 20 sekuntia — lepuuta silmiäsi."
+
+#: features.js:691
+msgid "Stand up and stretch."
+msgstr "Nouse seisomaan ja venyttele."
+
+#: features.js:692
+msgid "Drink some water."
+msgstr "Juo vähän vettä."
+
+#: features.js:693
+msgid "Look out a window and relax your shoulders."
+msgstr "Katso ikkunasta ulos ja rentouta hartiat."
+
+#: features.js:694
+msgid "Close your eyes and take a few slow breaths."
+msgstr "Sulje silmäsi ja hengitä muutaman kerran rauhallisesti."
+
+#: features.js:695
+msgid "Step away from screens — don't check your phone."
+msgstr ""
+
+#: features.js:696
+msgid "Unclench your jaw and drop your shoulders."
+msgstr ""
+
+#: features.js:699
+msgid "Take a short walk."
+msgstr "Käy lyhyellä kävelyllä."
+
+#: features.js:700
+msgid "Step outside for some fresh air."
+msgstr "Käy ulkona raittiissa ilmassa."
+
+#: features.js:701
+msgid "Stretch and move around a little."
+msgstr "Venyttele ja liikuskele hetki."
+
+#: features.js:702
+msgid "Grab a snack and some water."
+msgstr "Hae välipalaa ja vettä."
+
+#: features.js:703
+msgid "Rest your eyes and look into the distance."
+msgstr "Lepuuta silmiäsi ja katso kauas."
+
+#: features.js:704
+msgid "Rest away from screens — no phone, no feeds, no news."
+msgstr ""
+
+#: features.js:705
+msgid "Move your body and let your mind wander."
+msgstr ""
+
+#: features.js:716 menu.js:1099
+msgid "Edit task"
+msgstr "Muokkaa tehtävää"
+
+#: features.js:716
+msgid "New task"
+msgstr "Uusi tehtävä"
+
+#: features.js:717
+msgid "What do you want to work on?"
+msgstr "Minkä parissa haluat työskennellä?"
+
+#: features.js:733
+#, javascript-format
+msgid "%d h %d min"
+msgstr "%d t %d min"
+
+#: features.js:733
+#, javascript-format
+msgid "%d h"
+msgstr "%d t"
+
+#: features.js:734 features.js:858 features.js:1278 menu.js:304
+#, javascript-format
+msgid "%d min"
+msgstr "%d min"
+
+#: features.js:746
+msgid "Custom"
+msgstr "Mukautettu"
+
+#: features.js:755
+#, javascript-format
+msgid "How many pomodoros? (1 🍅 = %d min)"
+msgstr "Montako pomodoroa? (1 🍅 = %d min)"
+
+#: features.js:761
+msgid "No estimate — just counts your 🍅"
+msgstr "Ei arviota — laskee vain 🍅"
+
+#: features.js:829 features.js:892
+msgid "Save"
+msgstr "Tallenna"
+
+#: features.js:829 features.js:892
+msgid "Add"
+msgstr "Lisää"
+
+#: features.js:839 menu.js:1203
+msgid "Edit preset"
+msgstr "Muokkaa esiasetusta"
+
+#: features.js:839
+msgid "New preset"
+msgstr "Uusi esiasetus"
+
+#: features.js:840
+msgid "Name it and set its rhythm."
+msgstr "Nimeä se ja aseta sen rytmi."
+
+#: features.js:843
+msgid "e.g. Deep work"
+msgstr "esim. Syvä työ"
+
+#. settings-schema.json->custom_presets->columns->title
+#: features.js:871
+msgid "Focus (min)"
+msgstr "Fokus (min)"
+
+#. settings-schema.json->custom_presets->columns->title
+#: features.js:872
+msgid "Short break (min)"
+msgstr "Lyhyt tauko (min)"
+
+#. settings-schema.json->custom_presets->columns->title
+#: features.js:873
+msgid "Long break (min)"
+msgstr "Pitkä tauko (min)"
+
+#. settings-schema.json->custom_presets->columns->title
+#: features.js:874
+msgid "Pomodori"
+msgstr "Pomodori"
+
+#: features.js:930
+msgid "The Pomodoro technique 🍅"
+msgstr "Pomodoro-tekniikka 🍅"
+
+#: features.js:932
+msgid ""
+"In the late 1980s, university student Francesco Cirillo couldn't focus on "
+"his studies. He bet himself he could stay concentrated for just a few "
+"minutes and reached for the first timer he could find — a kitchen one shaped "
+"like a tomato. In Italian, a tomato is a “pomodoro”, and that's how the "
+"method got its name."
+msgstr ""
+"1980-luvun lopulla opiskelija Francesco Cirillo ei pystynyt keskittymään "
+"opintoihinsa. Hän löi itsensä kanssa vetoa, että pystyisi keskittymään edes "
+"muutaman minuutin, ja tarttui ensimmäiseen löytämäänsä ajastimeen — "
+"keittiöajastimeen, joka oli tomaatin muotoinen. Italiaksi tomaatti on "
+"”pomodoro” — ja näin menetelmä sai nimensä."
+
+#: features.js:933
+msgid ""
+"The idea is simple: big tasks feel daunting, but a single pomodoro doesn't. "
+"Promise yourself just 25 minutes of focus on one task, and starting becomes "
+"easy."
+msgstr ""
+"Idea on yksinkertainen: isot tehtävät pelottavat, mutta yksi pomodoro ei. "
+"Lupaa itsellesi vain 25 minuuttia keskittymistä yhteen tehtävään, niin "
+"aloittaminen helpottuu."
+
+#: features.js:934
+msgid ""
+"The classic rhythm:\n"
+"• About 25 minutes — one task, nothing else.\n"
+"• A 5-minute breather — step away from the screen.\n"
+"• After four pomodoros, take a longer 15–30 minute break."
+msgstr ""
+"Klassinen rytmi:\n"
+"• Noin 25 minuuttia — vain yksi tehtävä, ei muuta.\n"
+"• 5 minuutin hengähdystauko — siirry pois näytön äärestä.\n"
+"• Neljän pomodoron jälkeen pidä pidempi 15–30 minuutin tauko."
+
+#: features.js:935
+msgid ""
+"This is a starting point, not a rule — the applet lets you change any "
+"interval and save your own presets."
+msgstr ""
+"Tämä on lähtökohta, ei sääntö — sovelmalla voit muuttaa mitä tahansa jaksoa "
+"ja tallentaa omat esiasetukset."
+
+#: features.js:936
+msgid ""
+"And it's not just a productivity fad: the exact numbers are flexible, but "
+"the principles behind them are backed by attention research. Staying on one "
+"task without switching saves energy — getting back on track after an "
+"interruption takes about 23 minutes on average. And regular pauses help you "
+"hold focus for longer without burning out."
+msgstr ""
+"Eikä tämä ole vain tuottavuusvillitys: tarkat luvut joustavat, mutta niiden "
+"taustalla olevat periaatteet on vahvistettu tarkkaavaisuustutkimuksessa. "
+"Yhdessä tehtävässä pysyminen ilman vaihtamista säästää energiaa — "
+"keskeytyksen jälkeen takaisin pääseminen vie keskimäärin noin 23 minuuttia. "
+"Ja säännölliset tauot auttavat pitämään keskittymisen pidempään uupumatta."
+
+#: features.js:937
+msgid ""
+"Tip: when something distracts you, don't drop what you're doing — jot the "
+"thought down and come back to it on your break. Every finished pomodoro is a "
+"small win that keeps your momentum going."
+msgstr ""
+"Vinkki: kun jokin häiritsee, älä jätä kesken sitä mitä teet — kirjaa ajatus "
+"ylös ja palaa siihen tauolla. Jokainen valmis pomodoro on pieni voitto, joka "
+"pitää vauhtia yllä."
+
+#: features.js:938 features.js:1942
+msgid "Close"
+msgstr "Sulje"
+
+#: features.js:951
+msgid "OK"
+msgstr "OK"
+
+#: features.js:964
+msgid "Nothing to undo"
+msgstr "Ei mitään peruttavaa"
+
+#: features.js:965
+msgid "Apply a setup from the guide first — then you can undo it here."
+msgstr ""
+"Ota ensin käyttöön ohjatun asennuksen asetus — sitten voit perua sen tästä."
+
+#: features.js:969
+msgid "Previous settings restored ✓"
+msgstr "Aiemmat asetukset palautettu ✓"
+
+#: features.js:970
+msgid "Your settings from just before the last setup have been put back."
+msgstr "Asetuksesi juuri ennen viimeisintä määritystä on palautettu."
+
+#: features.js:1031
+#, javascript-format
+msgid "Selected %d of %d"
+msgstr "%d / %d valittu"
+
+#: features.js:1131
+msgid "Intro"
+msgstr "Johdanto"
+
+#: features.js:1132
+#, javascript-format
+msgid "Step %d of %d"
+msgstr "Vaihe %d / %d"
+
+#: features.js:1133
+msgid "Review"
+msgstr "Yhteenveto"
+
+#: features.js:1135
+msgid "Smart setup"
+msgstr "Älykäs käyttöönotto"
+
+#: features.js:1139
+msgid "Skip"
+msgstr "Ohita"
+
+#: features.js:1143
+msgid "What is the Pomodoro technique? 🍅"
+msgstr ""
+
+#: features.js:1144
+msgid ""
+"Focus in short sprints with deliberate rest: about 25 minutes on one task, "
+"then a 5-minute break; after four sprints, take a longer 15–30 minute break. "
+"The finite countdown keeps a task approachable and the regular breaks "
+"protect your attention."
+msgstr ""
+
+#: features.js:1145
+msgid ""
+"Let's tune it to how you work — a few quick questions, and you can change "
+"anything later in Settings."
+msgstr ""
+"Sovitetaan se työskentelytapaasi — muutama nopea kysymys, ja voit muuttaa "
+"kaiken myöhemmin Asetuksissa."
+
+#. settings-schema.json->about_technique_button->description
+#: features.js:1147
+msgid "About the Pomodoro technique"
+msgstr ""
+
+#: features.js:1148
+msgid "Let's go"
+msgstr "Aloitetaan"
+
+#: features.js:1166
+#, javascript-format
+msgid "Space or 1–%d to toggle · ↑↓ to move · Enter for next"
+msgstr "Space tai 1–%d vaihtaaksesi · ↑↓ liiku · Enter seuraava"
+
+#: features.js:1167
+#, javascript-format
+msgid "Space or 1–%d to choose · ↑↓ to move · Enter for next"
+msgstr "Space tai 1–%d valitaksesi · ↑↓ liiku · Enter seuraava"
+
+#: features.js:1179 features.js:1257
+msgid "Back"
+msgstr "Takaisin"
+
+#: features.js:1180
+msgid "Next"
+msgstr "Seuraava"
+
+#: features.js:1183
+msgid "Your tailored setup 🍅"
+msgstr "Räätälöity asetuksesi 🍅"
+
+#: features.js:1184
+msgid ""
+"Based on your answers, here's what I'll set up. Untick anything you'd rather "
+"skip, then apply."
+msgstr ""
+"Vastaustesi perusteella tässä on, mitä määritän. Poista valinta siitä, minkä "
+"haluat ohittaa, ja ota käyttöön."
+
+#: features.js:1239
+msgid "Space to toggle · ↑↓ to move · Enter to apply"
+msgstr "Space vaihda · ↑↓ liiku · Enter käytä"
+
+#: features.js:1258
+msgid "Apply"
+msgstr "Käytä"
+
+#: features.js:1259
+msgid "Apply & start"
+msgstr "Käytä ja aloita"
+
+#: features.js:1282 menu.js:308
+#, javascript-format
+msgid "%dh %dm"
+msgstr "%d h %d min"
+
+#: features.js:1282 menu.js:308
+#, javascript-format
+msgid "%dh"
+msgstr "%d h"
+
+#: features.js:1464
+msgid "Statistics reset."
+msgstr "Tilastot nollattu."
+
+#: features.js:1486
+#, javascript-format
+msgid "%d to go today — at your pace, done by about %s."
+msgstr "%d jäljellä tänään — tällä tahdilla valmista noin %s."
+
+#: features.js:1487
+#, javascript-format
+msgid "%d more to reach today's goal of %d."
+msgstr "Vielä %d, niin saavutat päivätavoitteen %d."
+
+#: features.js:1489
+#, javascript-format
+msgid "Daily goal reached — %d done today. Nice."
+msgstr "Päivätavoite saavutettu — %d tehty tänään. Hienoa."
+
+#: features.js:1492
+#, javascript-format
+msgid "%d interruptions this week — what keeps pulling you away?"
+msgstr "%d keskeytystä tällä viikolla — mikä vie huomiosi?"
+
+#: features.js:1495 features.js:1815
+#, javascript-format
+msgid "Most focused around %s — good time for deep work."
+msgstr "Keskityit parhaiten noin %s — hyvä hetki syvätyölle."
+
+#: features.js:1498
+#, javascript-format
+msgid "Most focus went to “%s”."
+msgstr "Eniten fokusta sai “%s”."
+
+#: features.js:1500
+#, javascript-format
+msgid "%d pomodoros this week. Keep it going."
+msgstr "%d pomodoroa tällä viikolla. Jatka samaan malliin."
+
+#: features.js:1501
+msgid "Start a focus session — your insights will appear here."
+msgstr "Aloita fokusjakso — oivalluksesi näkyvät tässä."
+
+#: features.js:1539
+msgid "%d.%m"
+msgstr ""
+
+#: features.js:1638
+#, javascript-format
+msgid "Saved ✓ — %s"
+msgstr ""
+
+#: features.js:1641
+msgid "Could not save statistics export."
+msgstr ""
+
+#: features.js:1673
+msgid "Could not open the folder."
+msgstr ""
+
+#: features.js:1698 features.js:1771
+msgid "Sun"
+msgstr "Su"
+
+#: features.js:1698 features.js:1771
+msgid "Mon"
+msgstr "Ma"
+
+#: features.js:1698 features.js:1771
+msgid "Tue"
+msgstr "Ti"
+
+#: features.js:1698 features.js:1771
+msgid "Wed"
+msgstr "Ke"
+
+#: features.js:1698 features.js:1771
+msgid "Thu"
+msgstr "To"
+
+#: features.js:1698 features.js:1771
+msgid "Fri"
+msgstr "Pe"
+
+#: features.js:1698 features.js:1771
+msgid "Sat"
+msgstr "La"
+
+#: features.js:1745
+msgid "Focus statistics"
+msgstr "Fokustilastot"
+
+#: features.js:1759
+#, javascript-format
+msgid "%d / %d goal"
+msgstr "%d / %d tavoite"
+
+#: features.js:1760
+msgid "Today"
+msgstr "Tänään"
+
+#: features.js:1761
+msgid "This week"
+msgstr "Tällä viikolla"
+
+#: features.js:1762
+msgid "Streak"
+msgstr "Putki"
+
+#: features.js:1762
+#, javascript-format
+msgid "best %d"
+msgstr "paras %d"
+
+#: features.js:1763
+msgid "All time"
+msgstr "Kaikkiaan"
+
+#: features.js:1772
+#, javascript-format
+msgid "This week: %d 🍅 · %s · best day %s"
+msgstr "Tällä viikolla: %d 🍅 · %s · paras päivä %s"
+
+#: features.js:1776
+#, fuzzy, javascript-format
+msgid "This month: %d 🍅 · %s · best day %d 🍅"
+msgstr "Tällä viikolla: %d 🍅 · %s · paras päivä %s"
+
+#: features.js:1782
+msgid "Nothing harvested yet today"
+msgstr "Ei vielä satoa tänään"
+
+#: features.js:1784
+msgid "Today's harvest"
+msgstr "Tämän päivän sato"
+
+#: features.js:1791
+#, javascript-format
+msgid "Interruptions: %d today · %d this week"
+msgstr "Keskeytykset: %d tänään · %d tällä viikolla"
+
+#: features.js:1797
+msgid "When you focus (by hour)"
+msgstr "Milloin keskityt (tunneittain)"
+
+#: features.js:1806
+#, javascript-format
+msgid "Focus by hour; most focused around %s"
+msgstr ""
+
+#: features.js:1807
+msgid "Focus by hour; not enough data yet"
+msgstr ""
+
+#: features.js:1810
+msgid "night"
+msgstr "yö"
+
+#: features.js:1810
+msgid "morning"
+msgstr "aamu"
+
+#: features.js:1810
+msgid "afternoon"
+msgstr "iltapäivä"
+
+#: features.js:1810
+msgid "evening"
+msgstr "ilta"
+
+#: features.js:1816
+msgid "Not enough data yet to spot your best focus time."
+msgstr "Ei vielä tarpeeksi tietoa parhaan fokusajan löytämiseksi."
+
+#: features.js:1825
+msgid "Focus time — last 14 days"
+msgstr "Fokusaika — viimeiset 14 päivää"
+
+#: features.js:1827
+#, fuzzy, javascript-format
+msgid "┄┄ daily goal (%d 🍅)"
+msgstr "Päivätavoite saavutettu 🍅"
+
+#: features.js:1846
+#, javascript-format
+msgid "Last 14 days: %d 🍅 · best %s (%d 🍅)"
+msgstr ""
+
+#: features.js:1847
+msgid "Last 14 days: no focus yet"
+msgstr ""
+
+#: features.js:1850
+msgid "Activity — last 12 weeks"
+msgstr "Aktiivisuus — viimeiset 12 viikkoa"
+
+#: features.js:1870
+msgid "Less"
+msgstr "Vähemmän"
+
+#: features.js:1874
+msgid "More"
+msgstr "Enemmän"
+
+#: features.js:1880
+#, javascript-format
+msgid "Last 12 weeks: %d active days · busiest %s (%d 🍅)"
+msgstr ""
+
+#: features.js:1881
+msgid "Last 12 weeks: no focus yet"
+msgstr ""
+
+#: features.js:1894
+msgid "By task"
+msgstr "Tehtävittäin"
+
+#: features.js:1905
+#, javascript-format
+msgid "%s: %d 🍅"
+msgstr ""
+
+#: features.js:1918 menu.js:734
+#, javascript-format
+msgid "Milestones: %s"
+msgstr "Virstanpylväät: %s"
+
+#: features.js:1931
+msgid "Delete all statistics"
+msgstr "Poista kaikki tilastot"
+
+#: features.js:1936
+msgid "Export…"
+msgstr ""
+
+#: features.js:1939
+msgid "Open folder"
+msgstr ""
+
+#: features.js:1941
+msgid "Reset statistics…"
+msgstr "Nollaa tilastot…"
+
+#: features.js:2256
+msgid "No sound backend available for preview."
+msgstr ""
+
+#: features.js:2260
+msgid "Choose an ambient sound first (it's set to Off)."
+msgstr ""
+
+#: features.js:2513
+msgid "Break — locking the screen"
+msgstr ""
+
+#: features.js:2514
+msgid "Locking in a few seconds so you can step away."
+msgstr ""
+
+#: features.js:2515
+msgid "Don't lock now"
+msgstr ""
+
+#: features.js:2561
+msgid "Couldn't lock the screen"
+msgstr ""
+
+#: features.js:2561
+msgid "No screen locker was available."
+msgstr ""
+
+#: features.js:2581
+msgid "No task"
+msgstr "Ei tehtävää"
+
+#: features.js:2618
+msgid "Push notifications need libsoup, which isn't available here."
+msgstr "Push-ilmoitukset tarvitsevat libsoupin, jota ei ole täällä saatavilla."
+
+#: features.js:2624
+msgid "Enter your Pushover user key and app token first."
+msgstr "Syötä ensin Pushover-käyttäjäavaimesi ja sovellustunnuksesi."
+
+#: features.js:2631
+msgid "Test notification from Zen Pomodoro 🍅"
+msgstr "Testi-ilmoitus sovelluksesta Zen Pomodoro 🍅"
+
+#: features.js:2653
+msgid "Pushover test sent ✓ — check your device."
+msgstr "Pushover-testi lähetetty ✓ — tarkista laitteesi."
+
+#: features.js:2654 features.js:2658
+msgid "Pushover test failed. Double-check your user key and app token."
+msgstr "Pushover-testi epäonnistui. Tarkista käyttäjäavain ja sovellustunnus."
+
+#: features.js:2751
+#, javascript-format
+msgid "Blocking updated — %d site(s)."
+msgstr ""
+
+#: features.js:2758
+msgid "Site blocking cleared."
+msgstr ""
+
+#: features.js:2840
+msgid "Passwordless blocking enabled (no prompt)."
+msgstr "Salasanaton esto käytössä (ei kyselyä)."
+
+#: features.js:2844
+msgid "Passwordless blocking removed."
+msgstr "Salasanaton esto poistettu."
+
+#: features.js:2866
+msgid ""
+"Focus spotlight is on — every other window is dimmed so the one you're "
+"working in stands out. Click the on-screen pill (or switch Zen off) to exit."
+msgstr ""
+
+#: features.js:2867
+msgid ""
+"Focus spotlight is armed. When your next focus session starts, every window "
+"except the one you're working in dims, so your task stands out. Click the on-"
+"screen pill to exit."
+msgstr ""
+
+#. settings-schema.json->sec_zen->title
+#: features.js:2868 menu.js:468 menu.js:512
+msgid "Zen mode"
+msgstr "Zen-tila"
+
+#: features.js:3018
+msgid "Exit focus"
+msgstr ""
+
+#: features.js:3127
+msgid "Breathe in"
+msgstr "Hengitä sisään"
+
+#: features.js:3130 features.js:3136
+msgid "Hold"
+msgstr "Pidätä"
+
+#: features.js:3133
+msgid "Breathe out"
+msgstr "Hengitä ulos"
+
+#: features.js:3163
+msgid "Focus until"
+msgstr "Fokus kellonaikaan"
+
+#: features.js:3164
+msgid "Enter a time (HH:MM)"
+msgstr "Syötä kellonaika (TT:MM)"
+
+#: menu.js:147
+msgid "Error: menu unavailable"
+msgstr "Virhe: valikko ei käytettävissä"
+
+#: menu.js:231
+msgid "Ready to start"
+msgstr "Valmis aloittamaan"
+
+#: menu.js:239 menu.js:812
+msgid "No task yet — tap to choose one"
+msgstr ""
+
+#: menu.js:246
+msgid "Change task"
+msgstr "Vaihda tehtävä"
+
+#: menu.js:344
+#, javascript-format
+msgid "Pomodoro %d / %d"
+msgstr "Pomodoro %d / %d"
+
+#: menu.js:352 menu.js:882
+msgid "Start focus"
+msgstr "Aloita fokus"
+
+#: menu.js:368
+msgid "Skip phase"
+msgstr "Ohita vaihe"
+
+#: menu.js:370
+msgid "Skip the current phase and move on to the next."
+msgstr ""
+
+#: menu.js:375
+msgid "Reset timer"
+msgstr "Nollaa ajastin"
+
+#: menu.js:377
+msgid ""
+"Stop the current timer and return to the start. Your pomodoro count for this "
+"set is kept."
+msgstr ""
+
+#: menu.js:389
+#, fuzzy
+msgid "Reset timer & count"
+msgstr "Nollaa ajastin ja laskurit"
+
+#: menu.js:390
+msgid ""
+"Reset the timer and clear this set's pomodoro count. Your saved statistics "
+"aren't affected."
+msgstr ""
+
+#: menu.js:391
+msgid "Confirm reset"
+msgstr ""
+
+#: menu.js:413 menu.js:1010
+msgid "Task list"
+msgstr "Tehtävälista"
+
+#: menu.js:434 menu.js:999
+msgid "Distractions"
+msgstr ""
+
+#: menu.js:464
+msgid "Focus until…"
+msgstr "Fokus kellonaikaan…"
+
+#: menu.js:470 menu.js:514
+msgid ""
+"Focus spotlight: while a focus session runs, every other window dims so the "
+"one you're working in stands out. Click the on-screen pill to exit."
+msgstr ""
+
+#. settings-schema.json->sec_ambient->title
+#: menu.js:473 menu.js:516
+msgid "Ambient sound"
+msgstr "Taustaääni"
+
+#: menu.js:478
+msgid "Site blocking"
+msgstr "Sivustojen esto"
+
+#: menu.js:481 menu.js:822 menu.js:1236
+msgid "off"
+msgstr "pois"
+
+#: menu.js:484
+msgid "Manage blocked sites"
+msgstr ""
+
+#: menu.js:489
+msgid "Statistics"
+msgstr "Tilastot"
+
+#: menu.js:495
+msgid "Open the statistics dashboard"
+msgstr ""
+
+#: menu.js:500
+msgid "Setup wizard…"
+msgstr "Ohjattu asennus…"
+
+#: menu.js:704
+#, javascript-format
+msgid "Last 7 days: %d"
+msgstr "Viimeiset 7 päivää: %d"
+
+#: menu.js:713
+#, javascript-format
+msgid "Last 30 days: %d"
+msgstr "Viimeiset 30 päivää: %d"
+
+#: menu.js:716
+#, javascript-format
+msgid "All time: %d"
+msgstr "Kaikkiaan: %d"
+
+#: menu.js:719
+#, javascript-format
+msgid "Focus time: %s today · %s total"
+msgstr "Fokusaika: %s tänään · %s yhteensä"
+
+#: menu.js:722
+#, javascript-format
+msgid "Best day: %d"
+msgstr "Paras päivä: %d"
+
+#: menu.js:734
+msgid "none yet"
+msgstr "ei vielä"
+
+#: menu.js:744 menu.js:771
+#, javascript-format
+msgid "Finish your tasks by ~%s"
+msgstr "Saat tehtävät valmiiksi ~%s"
+
+#: menu.js:755
+#, javascript-format
+msgid "Pomodoro %d of %d"
+msgstr "Pomodoro %d / %d"
+
+#: menu.js:757
+msgid "Long break"
+msgstr "Pitkä tauko"
+
+#: menu.js:759
+msgid "Short break"
+msgstr "Lyhyt tauko"
+
+#: menu.js:762
+#, javascript-format
+msgid "until %s"
+msgstr "klo %s asti"
+
+#: menu.js:765
+#, javascript-format
+msgid "≈ finish %s"
+msgstr "≈ valmis %s"
+
+#: menu.js:769
+msgid "Break finished — press Start for focus"
+msgstr "Tauko päättyi — paina Aloita keskittyäksesi"
+
+#: menu.js:773
+#, javascript-format
+msgid "%d min focus — press Start"
+msgstr "%d min fokus — paina Aloita"
+
+#: menu.js:815
+msgid "Task: none"
+msgstr "Tehtävä: ei mitään"
+
+#: menu.js:821 menu.js:1235
+#, javascript-format
+msgid "blocking %d"
+msgstr "estää %d"
+
+#: menu.js:822 menu.js:1236
+#, javascript-format
+msgid "%d in list"
+msgstr "%d luettelossa"
+
+#: menu.js:861
+msgid "Resume break"
+msgstr "Jatka taukoa"
+
+#: menu.js:861
+msgid "Resume focus"
+msgstr "Jatka fokusta"
+
+#: menu.js:868
+msgid "Focusing — stay with it"
+msgstr "Keskitytään — pysy mukana"
+
+#: menu.js:873
+msgid "Pause focus"
+msgstr "Pysäytä fokus"
+
+#: menu.js:873
+msgid "Pause break"
+msgstr "Pysäytä tauko"
+
+#: menu.js:878
+msgid "Start next focus"
+msgstr "Aloita seuraava fokus"
+
+#: menu.js:930
+msgid "Jot a distraction, press Enter"
+msgstr ""
+
+#: menu.js:976
+msgid "Delete"
+msgstr ""
+
+#: menu.js:993
+msgid "Clear all"
+msgstr ""
+
+#: menu.js:1025
+msgid "Add task…"
+msgstr "Lisää tehtävä…"
+
+#: menu.js:1029 menu.js:1164
+msgid "Reorder…"
+msgstr ""
+
+#: menu.js:1040
+msgid "No tasks yet — add what you'll focus on, with a 🍅 estimate."
+msgstr "Ei vielä tehtäviä — lisää se, mihin keskityt, ja 🍅-arvio."
+
+#: menu.js:1106
+msgid "Reopen task"
+msgstr "Avaa tehtävä uudelleen"
+
+#: menu.js:1106
+msgid "Mark done"
+msgstr "Merkitse valmiiksi"
+
+#: menu.js:1113
+msgid "Delete task"
+msgstr "Poista tehtävä"
+
+#: menu.js:1160
+msgid "Add preset…"
+msgstr "Lisää esiasetus…"
+
+#: menu.js:1210
+msgid "Delete preset"
+msgstr "Poista esiasetus"
+
+#: recommend.js:78
+msgid "Notifications are muted while you focus."
+msgstr "Ilmoitukset vaimennetaan keskittyessäsi."
+
+#: recommend.js:82
+msgid "Distraction blocking is ready — add sites in Settings → Advanced."
+msgstr ""
+"Häiriöiden esto on valmis — lisää sivustot kohdassa Asetukset → "
+"Lisäasetukset."
+
+#: recommend.js:86
+msgid "One-click start and a calm start ritual make it easier to begin."
+msgstr ""
+"Yhden napsautuksen aloitus ja rauhallinen aloitusrituaali helpottavat alkuun "
+"pääsyä."
+
+#: recommend.js:91
+msgid "Breaks start on their own so you don't overwork."
+msgstr "Tauot alkavat itsestään, ettet tee liikaa töitä."
+
+#: recommend.js:96
+msgid "A calm theme, no ticking seconds and no end-of-timer rush."
+msgstr ""
+"Rauhallinen teema, ei tikittäviä sekunteja eikä kiirettä ajastimen lopussa."
+
+#: recommend.js:137
+msgid "longer focus blocks suit deep work"
+msgstr "pidemmät fokusjaksot sopivat syvätyöhön"
+
+#: recommend.js:138
+msgid "the classic rhythm suits studying"
+msgstr "klassinen rytmi sopii opiskeluun"
+
+#: recommend.js:139
+msgid "a little more break time lets ideas settle"
+msgstr "hieman enemmän taukoaikaa antaa ideoiden asettua"
+
+#: recommend.js:140
+msgid "shorter cycles keep small tasks moving"
+msgstr "lyhyemmät syklit pitävät pienet tehtävät liikkeessä"
+
+#: recommend.js:141
+msgid "a balanced rhythm"
+msgstr "tasapainoinen rytmi"
+
+#: recommend.js:145
+#, javascript-format
+msgid "Focus rhythm %d / %d / %d min — %s."
+msgstr "Fokusrytmi %d / %d / %d min — %s."
+
+#: recommend.js:154
+#, javascript-format
+msgid "Daily goal: %d focus blocks."
+msgstr "Päivätavoite: %d fokusjaksoa."
+
+#: recommend.js:155
+msgid "No daily goal yet — just getting a feel for it."
+msgstr "Ei vielä päivätavoitetta — vasta tunnustellaan."
+
+#: recommend.js:163
+msgid ""
+"Flow extend: keep going up to 10 min past the timer when you're in the zone."
+msgstr ""
+"Jatka flow’ta: jatka jopa 10 min ajastimen jälkeen, kun olet flow-tilassa."
+
+#: recommend.js:171
+msgid "Silent focus — no ticking or chimes."
+msgstr "Hiljainen fokus — ei tikitystä eikä kilahduksia."
+
+#: recommend.js:175
+msgid "Soft brown-noise ambience while you focus."
+msgstr "Pehmeä ruskean kohinan tausta keskittyessäsi."
+
+#: recommend.js:181
+#, javascript-format
+msgid "A gentle chime every %d min to mark time."
+msgstr "Hellävarainen kilahdus %d min välein ajan merkiksi."
+
+#: recommend.js:186
+msgid "Quiet, visual-only cues for a shared space."
+msgstr "Hiljaiset, vain visuaaliset vihjeet jaettuun tilaan."
+
+#: recommend.js:205
+#, javascript-format
+msgid "Block %d distracting sites while you focus."
+msgstr "Estä %d häiritsevää sivustoa keskittymisen aikana."
+
+#: recommend.js:217
+msgid "Breaks start on their own so you don't overrun."
+msgstr "Tauot alkavat itsestään, jotta et ylikuormita itseäsi."
+
+#: recommend.js:242
+msgid "What will you mainly focus on?"
+msgstr "Mihin keskityt pääasiassa?"
+
+#: recommend.js:243
+msgid "This shapes how long each focus block should be."
+msgstr "Tämä määrittää, kuinka pitkä kunkin fokusjakson tulisi olla."
+
+#: recommend.js:245
+msgid "Deep work or coding"
+msgstr "Syvätyö tai koodaus"
+
+#: recommend.js:246
+msgid "Studying or reading"
+msgstr "Opiskelu tai lukeminen"
+
+#: recommend.js:247
+msgid "Writing or creative work"
+msgstr "Kirjoittaminen tai luova työ"
+
+#: recommend.js:248
+msgid "Lots of small tasks"
+msgstr "Paljon pieniä tehtäviä"
+
+#: recommend.js:252
+msgid "How long can you usually concentrate?"
+msgstr "Kuinka kauan yleensä jaksat keskittyä?"
+
+#: recommend.js:253
+msgid "Pick a length you can actually keep — it beats an ideal one."
+msgstr "Valitse kesto, jonka oikeasti jaksat — se voittaa ihanteellisen."
+
+#: recommend.js:255
+msgid "About 15 minutes"
+msgstr "Noin 15 minuuttia"
+
+#: recommend.js:256
+msgid "About 25 minutes"
+msgstr "Noin 25 minuuttia"
+
+#: recommend.js:257
+msgid "45 minutes or more"
+msgstr "45 minuuttia tai enemmän"
+
+#: recommend.js:258
+msgid "I lose track of time when I'm in flow"
+msgstr "Menetän ajantajun flow-tilassa"
+
+#: recommend.js:262
+msgid "What gets in your way most?"
+msgstr "Mikä häiritsee sinua eniten?"
+
+#: recommend.js:263
+msgid "Pick up to 3 — I'll switch on the right help for each."
+msgstr "Valitse enintään 3 — kytken jokaiselle oikean avun."
+
+#: recommend.js:265
+msgid "Notifications and pings"
+msgstr "Ilmoitukset ja merkkiäänet"
+
+#: recommend.js:266
+msgid "Distracting websites"
+msgstr "Häiritsevät verkkosivut"
+
+#: recommend.js:267
+msgid "It's hard to get started"
+msgstr "Alkuun pääseminen on vaikeaa"
+
+#: recommend.js:268
+msgid "I forget to take breaks"
+msgstr "Unohdan pitää taukoja"
+
+#: recommend.js:269
+msgid "Timers make me anxious"
+msgstr "Ajastimet ahdistavat minua"
+
+#: recommend.js:275
+msgid "Which sites pull you away?"
+msgstr "Mitkä sivustot vievät huomiosi?"
+
+#: recommend.js:276
+msgid ""
+"I'll add these to the block list — edit it later in Settings → Advanced."
+msgstr ""
+"Lisään ne estolistalle — muokkaa sitä myöhemmin kohdassa Asetukset → "
+"Lisäasetukset."
+
+#: recommend.js:278
+msgid "Social media"
+msgstr "Sosiaalinen media"
+
+#: recommend.js:279
+msgid "Video & streaming"
+msgstr "Video ja suoratoisto"
+
+#: recommend.js:280
+msgid "News & forums"
+msgstr "Uutiset ja foorumit"
+
+#: recommend.js:281
+msgid "Shopping"
+msgstr "Ostokset"
+
+#: recommend.js:286
+msgid "What helps you concentrate?"
+msgstr "Mikä auttaa sinua keskittymään?"
+
+#: recommend.js:287
+msgid "Sets the focus soundscape — change it anytime in Sounds."
+msgstr "Asettaa fokuksen äänimaiseman — muuta milloin tahansa Äänet-osiossa."
+
+#: recommend.js:289
+msgid "Silence"
+msgstr "Hiljaisuus"
+
+#: recommend.js:290
+msgid "Soft background noise"
+msgstr "Pehmeä taustakohina"
+
+#: recommend.js:291
+msgid "A gentle chime to mark time"
+msgstr "Hellävarainen kilahdus ajan merkiksi"
+
+#: recommend.js:292
+msgid "I share my space — keep it quiet"
+msgstr "Jaan tilani — pidä hiljaa"
+
+#: recommend.js:298
+msgid "How often should the chime sound?"
+msgstr "Kuinka usein äänimerkin pitäisi soida?"
+
+#: recommend.js:299
+msgid "A soft cue to check in with your focus."
+msgstr "Hellävarainen vihje tarkistaa keskittymisesi."
+
+#: recommend.js:301
+msgid "Every 3 minutes"
+msgstr "3 minuutin välein"
+
+#: recommend.js:302
+msgid "Every 5 minutes"
+msgstr "5 minuutin välein"
+
+#: recommend.js:303
+msgid "Every 10 minutes"
+msgstr "10 minuutin välein"
+
+#: recommend.js:308
+msgid "How much do you want to get done today?"
+msgstr "Kuinka paljon haluat saada tehtyä tänään?"
+
+#: recommend.js:309
+msgid "Sets your daily goal — no pressure, you can change it."
+msgstr "Asettaa päivätavoitteesi — ei paineita, voit muuttaa sitä."
+
+#: recommend.js:311
+msgid "Just trying it out"
+msgstr "Vasta kokeilen"
+
+#: recommend.js:312
+msgid "A light day (about 4)"
+msgstr "Kevyt päivä (noin 4)"
+
+#: recommend.js:313
+msgid "A full day (about 6)"
+msgstr "Täysi päivä (noin 6)"
+
+#: recommend.js:314
+msgid "A big push (about 8)"
+msgstr "Iso rutistus (noin 8)"
+
+#: recommend.js:321
+msgid "Want breaks to start on their own?"
+msgstr "Haluatko, että tauot alkavat itsestään?"
+
+#: recommend.js:322
+msgid "Helps you step away instead of pushing through."
+msgstr "Auttaa sinua irrottautumaan sen sijaan, että puskisit läpi."
+
+#: recommend.js:324
+msgid "Yes, start breaks automatically"
+msgstr "Kyllä, aloita tauot automaattisesti"
+
+#: recommend.js:325
+msgid "No, I'll start them myself"
+msgstr "Ei, aloitan ne itse"
+
+#: visual.js:913
+#, javascript-format
+msgid "Focus: %s"
+msgstr "Fokus: %s"
+
+#. settings-schema.json->focus->title
+#: visual.js:914
+msgid "Focus"
+msgstr "Fokus"
+
+#. settings-schema.json->timer->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->panel->title
+#. settings-schema.json->sec_panel->title
+msgid "Panel"
+msgstr "Paneeli"
+
+#. settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr "Ulkoasu"
+
+#. settings-schema.json->sounds->title
+msgid "Sounds"
+msgstr "Äänet"
+
+#. settings-schema.json->notifications->title
+msgid "Push notifications"
+msgstr "Push-ilmoitukset"
+
+#. settings-schema.json->advanced->title
+msgid "Advanced"
+msgstr "Lisäasetukset"
+
+#. settings-schema.json->sec_behavior->title
+msgid "Behavior"
+msgstr "Toiminta"
+
+#. settings-schema.json->sec_hud->title
+msgid "On-screen focus cues"
+msgstr "Näytön fokusvihjeet"
+
+#. settings-schema.json->sec_theme->title
+msgid "Theme & frame"
+msgstr "Teema ja kehys"
+
+#. settings-schema.json->sec_motion->title
+msgid "Motion & menu"
+msgstr "Liike ja valikko"
+
+#. settings-schema.json->sec_goals->title
+msgid "Goals & flow"
+msgstr "Tavoitteet ja flow"
+
+#. settings-schema.json->sec_modes->title
+msgid "Modes"
+msgstr ""
+
+#. settings-schema.json->sec_sounds->title
+msgid "Alerts & effects"
+msgstr ""
+
+#. settings-schema.json->sec_tools->title
+msgid "Run a command"
+msgstr "Suorita komento"
+
+#. settings-schema.json->sec_po->title
+msgid "Push notifications (Pushover)"
+msgstr "Push-ilmoitukset (Pushover)"
+
+#. settings-schema.json->sec_po_messages->title
+msgid "Notification text"
+msgstr "Ilmoituksen teksti"
+
+#. settings-schema.json->sec_po_alerts->title
+msgid "Sound & priority"
+msgstr ""
+
+#. settings-schema.json->sec_blocking->title
+msgid "Distraction blocking (advanced)"
+msgstr "Häiriöiden esto (lisäasetukset)"
+
+#. settings-schema.json->sec_shortcuts->title
+msgid "Keyboard shortcuts"
+msgstr "Pikanäppäimet"
+
+#. settings-schema.json->rhythm_hint_label->description
+msgid ""
+"Focus, break and cycle lengths come from presets — switch or edit them from "
+"the menu (Preset ▸)."
+msgstr ""
+
+#. settings-schema.json->pomodoro_duration->description
+msgid "Pomodoro Duration:"
+msgstr "Pomodoron kesto:"
+
+#. settings-schema.json->pomodoro_duration->units
+#. settings-schema.json->short_break_duration->units
+#. settings-schema.json->long_break_duration->units
+msgid "minutes"
+msgstr "minuuttia"
+
+#. settings-schema.json->pomodoro_duration->tooltip
+msgid "Length of one focus block, in minutes (classic Pomodoro is 25)."
+msgstr "Yhden fokusjakson pituus minuutteina (klassinen Pomodoro on 25)."
+
+#. settings-schema.json->short_break_duration->description
+msgid "Short Break Duration:"
+msgstr "Lyhyen tauon kesto:"
+
+#. settings-schema.json->short_break_duration->tooltip
+msgid "Length of the short break after each focus block (classic is 5)."
+msgstr "Lyhyen tauon pituus kunkin fokusjakson jälkeen (klassinen on 5)."
+
+#. settings-schema.json->long_break_duration->description
+msgid "Long Break Duration:"
+msgstr "Pitkän tauon kesto:"
+
+#. settings-schema.json->long_break_duration->tooltip
+msgid "Length of the longer break after a set of pomodoros (classic is 15–30)."
+msgstr "Pitkän tauon pituus pomodoroerän jälkeen (klassinen on 15–30)."
+
+#. settings-schema.json->pomodori_number->description
+msgid "Number of pomodori before long break:"
+msgstr "Määrä ennen pitkää taukoa:"
+
+#. settings-schema.json->pomodori_number->tooltip
+msgid "How many focus blocks to complete before the long break (classic is 4)."
+msgstr "Kuinka monta fokusjaksoa ennen pitkää taukoa (klassinen on 4)."
+
+#. settings-schema.json->start_automatically_on_load->description
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "Käynnistä pomodoro heti, kun sovelma latautuu"
+
+#. settings-schema.json->start_automatically_on_load->tooltip
+msgid ""
+"Begin a focus session as soon as Cinnamon starts or the applet is added."
+msgstr "Aloita fokusjakso heti, kun Cinnamon käynnistyy tai sovelma lisätään."
+
+#. settings-schema.json->session_recovery->description
+msgid ""
+"Recover an in-progress focus session after a Cinnamon restart (resume "
+"manually)"
+msgstr ""
+"Palauta kesken jäänyt fokusjakso Cinnamonin uudelleenkäynnistyksen jälkeen "
+"(jatka käsin)"
+
+#. settings-schema.json->session_recovery->tooltip
+msgid ""
+"If Cinnamon restarts mid-focus, the session is remembered so you can resume "
+"it from the menu — it won't auto-start."
+msgstr ""
+"Jos Cinnamon käynnistyy uudelleen kesken fokuksen, istunto muistetaan, joten "
+"voit jatkaa sitä valikosta — se ei käynnisty itsestään."
+
+#. settings-schema.json->show_dialog_messages->description
+msgid "Show a pop-up prompt at each phase change"
+msgstr ""
+
+#. settings-schema.json->show_dialog_messages->tooltip
+msgid ""
+"Show pop-up dialogs at the end of each phase (off keeps it quiet — only on-"
+"screen cues)."
+msgstr ""
+"Näytä ponnahdusikkunat kunkin vaiheen lopussa (pois = hiljaista, vain näytön "
+"vihjeet)."
+
+#. settings-schema.json->auto_start_next->description
+msgid "Automatically start the next phase"
+msgstr ""
+
+#. settings-schema.json->auto_start_next->tooltip
+msgid ""
+"When a phase ends, start the next one (focus or break) automatically instead "
+"of waiting."
+msgstr ""
+
+#. settings-schema.json->panel_icon_style->description
+msgid "Panel icon"
+msgstr "Paneelikuvake"
+
+#. settings-schema.json->panel_icon_style->options
+msgid "Progress ring with icon"
+msgstr "Edistymisrengas kuvakkeella"
+
+#. settings-schema.json->panel_icon_style->options
+msgid "Symbolic icon"
+msgstr "Symbolinen kuvake"
+
+#. settings-schema.json->panel_icon_style->options
+msgid "Custom icon"
+msgstr "Mukautettu kuvake"
+
+#. settings-schema.json->panel_icon_style->options
+msgid "No icon (timer only)"
+msgstr "Ei kuvaketta (vain ajastin)"
+
+#. settings-schema.json->panel_icon_style->tooltip
+msgid ""
+"What to show in the panel: a progress ring with the state icon inside "
+"(recommended), a plain symbolic icon, your own custom icon, or no icon at "
+"all. The timer text is a separate option below."
+msgstr ""
+"Mitä paneelissa näytetään: edistymisrengas, jonka sisällä on tilakuvake "
+"(suositus), symbolinen kuvake, oma kuvakkeesi, tai ei kuvaketta lainkaan. "
+"Ajastimen teksti määritetään erikseen alla."
+
+#. settings-schema.json->panel_custom_icon->description
+msgid "Custom panel icon"
+msgstr "Mukautettu paneelikuvake"
+
+#. settings-schema.json->panel_custom_icon->tooltip
+msgid ""
+"Pick your own panel icon — a theme icon name or an image file. Used when "
+"Panel icon is set to Custom icon."
+msgstr ""
+"Valitse oma paneelikuvakkeesi — teeman kuvakkeen nimi tai kuvatiedosto. "
+"Käytetään, kun Paneelikuvake on asetettu arvoon Mukautettu kuvake."
+
+#. settings-schema.json->show_timer->description
+msgid "Show the pomodoro timer in the applet panel"
+msgstr "Näytä pomodoro ajastin"
+
+#. settings-schema.json->show_timer->tooltip
+msgid "Show the remaining time as text in the panel."
+msgstr "Näytä jäljellä oleva aika tekstinä paneelissa."
+
+#. settings-schema.json->show_seconds->description
+msgid "Show seconds in the panel timer"
+msgstr "Näytä sekunnit paneelin ajastimessa"
+
+#. settings-schema.json->show_seconds->tooltip
+msgid "Off shows only the remaining minutes on the panel (less distracting)."
+msgstr ""
+"Pois näyttää paneelissa vain jäljellä olevat minuutit (vähemmän häiritsevää)."
+
+#. settings-schema.json->hotkey->description
+msgid "Shortcut: open the applet menu"
+msgstr "Pikanäppäin: avaa sovelman valikko"
+
+#. settings-schema.json->hotkey->tooltip
+msgid "Keyboard shortcut to open or close the applet menu."
+msgstr "Pikanäppäin sovelman valikon avaamiseen tai sulkemiseen."
+
+#. settings-schema.json->hotkey_toggle->description
+msgid "Shortcut: start / pause the timer"
+msgstr "Pikanäppäin: aloita / pysäytä ajastin"
+
+#. settings-schema.json->hotkey_toggle->tooltip
+msgid "Keyboard shortcut to start or pause the timer."
+msgstr "Pikanäppäin ajastimen aloittamiseen tai pysäyttämiseen."
+
+#. settings-schema.json->hotkey_skip->description
+msgid "Shortcut: skip to the next step"
+msgstr "Pikanäppäin: siirry seuraavaan vaiheeseen"
+
+#. settings-schema.json->hotkey_skip->tooltip
+msgid "Keyboard shortcut to skip to the next phase (focus ↔ break)."
+msgstr "Pikanäppäin seuraavaan vaiheeseen siirtymiseen (fokus ↔ tauko)."
+
+#. settings-schema.json->hotkey_distraction->description
+msgid "Shortcut: capture a distraction"
+msgstr ""
+
+#. settings-schema.json->hotkey_distraction->tooltip
+msgid ""
+"Keyboard shortcut to pop up a quick note for a distracting thought, without "
+"opening the menu."
+msgstr ""
+
+#. settings-schema.json->start_on_click->description
+msgid "Start the timer with a single click when idle"
+msgstr "Käynnistä ajastin yhdellä napsautuksella valmiustilassa"
+
+#. settings-schema.json->start_on_click->tooltip
+msgid ""
+"When no timer is running, left-clicking the applet starts a focus session "
+"directly instead of opening the menu."
+msgstr ""
+"Kun ajastin ei ole käynnissä, sovelman vasen napsautus aloittaa fokusjakson "
+"suoraan valikon avaamisen sijaan."
+
+#. settings-schema.json->panel_scroll_control->description
+msgid "Control the timer with the mouse on the panel"
+msgstr "Ohjaa ajastinta hiirellä paneelissa"
+
+#. settings-schema.json->panel_scroll_control->tooltip
+msgid ""
+"Scroll up on the applet to start or resume, scroll down to pause, and middle-"
+"click to skip the phase. Turn this off if you sometimes scroll over the "
+"panel by accident."
+msgstr ""
+"Vieritä sovelman päällä ylös aloittaaksesi tai jatkaaksesi, alas "
+"pysäyttääksesi, ja napsauta keskipainiketta ohittaaksesi vaiheen. Poista "
+"tämä käytöstä, jos joskus vierität vahingossa paneelin yli."
+
+#. settings-schema.json->scroll_action->description
+msgid "Mouse-wheel action on the panel"
+msgstr "Hiiren rullan toiminto paneelissa"
+
+#. settings-schema.json->scroll_action->options
+msgid "Start / pause the timer"
+msgstr "Aloita / pysäytä ajastin"
+
+#. settings-schema.json->scroll_action->options
+msgid "Adjust the focus length"
+msgstr "Säädä fokuksen kestoa"
+
+#. settings-schema.json->scroll_action->tooltip
+msgid ""
+"What the mouse wheel does on the applet: start/pause the timer, or change "
+"the focus length (when idle). Middle-click always skips to the next phase."
+msgstr ""
+"Mitä hiiren rulla tekee sovelmassa: aloittaa/pysäyttää ajastimen tai muuttaa "
+"fokuksen kestoa (valmiustilassa). Keskipainike siirtyy aina seuraavaan "
+"vaiheeseen."
+
+#. settings-schema.json->focus_show_task_chip->description
+msgid "Show the current task as an on-screen chip during focus"
+msgstr "Näytä nykyinen tehtävä näytöllä lappuna fokuksen aikana"
+
+#. settings-schema.json->focus_show_task_chip->tooltip
+msgid "Show the current task in a small on-screen chip while focusing."
+msgstr "Näytä nykyinen tehtävä pienenä lappuna näytöllä keskittyessäsi."
+
+#. settings-schema.json->focus_start_ritual->description
+msgid ""
+"Start ritual: brief centered 'Focus: <task>' and a smooth fade-in when focus "
+"begins"
+msgstr ""
+"Aloitusrituaali: lyhyt keskitetty ”Fokus: <tehtävä>” ja pehmeä häivähdys "
+"fokuksen alkaessa"
+
+#. settings-schema.json->focus_start_ritual->tooltip
+msgid "Briefly show 'Focus: <task>' with a smooth fade-in when focus begins."
+msgstr ""
+"Näytä hetkeksi ”Fokus: <tehtävä>” pehmeästi häivyttäen fokuksen alkaessa."
+
+#. settings-schema.json->prompt_focus_task->description
+msgid "Ask which task to focus on before starting"
+msgstr "Kysy keskittymistehtävä ennen aloitusta"
+
+#. settings-schema.json->prompt_focus_task->tooltip
+msgid ""
+"When off, a focus session starts immediately with your current task instead "
+"of opening the task picker. If a task is required and none is set, the "
+"picker still appears."
+msgstr ""
+"Kun pois käytöstä, keskittymisjakso alkaa heti nykyisellä tehtävälläsi "
+"avaamatta tehtävävalitsinta. Jos tehtävä vaaditaan eikä sitä ole asetettu, "
+"valitsin avautuu silti."
+
+#. settings-schema.json->require_focus_task->description
+msgid "Require a focus task before starting"
+msgstr "Vaadi fokustehtävä ennen aloitusta"
+
+#. settings-schema.json->require_focus_task->tooltip
+msgid "Ask for a task name before a focus session can start."
+msgstr "Kysy tehtävän nimi ennen kuin fokusjakso voi alkaa."
+
+#. settings-schema.json->theme_preset->description
+msgid "Color theme"
+msgstr "Väriteema"
+
+#. settings-schema.json->theme_preset->options
+msgid "Warm (amber / green)"
+msgstr "Lämmin (meripihka / vihreä)"
+
+#. settings-schema.json->theme_preset->options
+msgid "Cool (teal)"
+msgstr "Viileä (sinivihreä)"
+
+#. settings-schema.json->theme_preset->options
+msgid "Monochrome"
+msgstr "Yksivärinen"
+
+#. settings-schema.json->theme_preset->tooltip
+msgid ""
+"Color scheme for accents and on-screen cues. Choose Custom to set your own "
+"focus/break colors below."
+msgstr ""
+"Aksenttien ja näytön vihjeiden väriteema. Valitse Custom asettaaksesi omat "
+"fokus-/taukovärisi alla."
+
+#. settings-schema.json->accent_focus_color->description
+msgid "Custom focus accent color"
+msgstr "Mukautettu fokuksen korostusväri"
+
+#. settings-schema.json->accent_focus_color->tooltip
+msgid "Accent color during focus (used only when the theme is Custom)."
+msgstr "Korostusväri fokuksen aikana (käytössä vain teemalla Custom)."
+
+#. settings-schema.json->accent_break_color->description
+msgid "Custom break accent color"
+msgstr "Mukautettu tauon korostusväri"
+
+#. settings-schema.json->accent_break_color->tooltip
+msgid "Accent color during breaks (used only when the theme is Custom)."
+msgstr "Korostusväri taukojen aikana (käytössä vain teemalla Custom)."
+
+#. settings-schema.json->frame_style->description
+msgid "On-screen focus frame style"
+msgstr "Näytön fokuskehyksen tyyli"
+
+#. settings-schema.json->frame_style->options
+msgid "Glow"
+msgstr "Hehku"
+
+#. settings-schema.json->frame_style->options
+msgid "Classic border"
+msgstr "Klassinen reunus"
+
+#. settings-schema.json->frame_style->options
+msgid "Corners only"
+msgstr "Vain kulmat"
+
+#. settings-schema.json->frame_style->options
+#. settings-schema.json->task_celebration->options
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Off"
+msgstr "Pois"
+
+#. settings-schema.json->frame_style->tooltip
+msgid ""
+"Style of the on-screen frame that traces focus progress: a soft Glow, a "
+"Classic border, just the Corners, or Off."
+msgstr ""
+"Näytön kehyksen tyyli, joka seuraa fokuksen edistymistä: pehmeä hehku, "
+"klassinen reunus, vain kulmat tai pois."
+
+#. settings-schema.json->glow_intensity->description
+msgid "Glow intensity"
+msgstr "Hehkun voimakkuus"
+
+#. settings-schema.json->glow_intensity->tooltip
+msgid ""
+"How bright the on-screen edge glow is during focus — higher is more visible, "
+"lower is subtler."
+msgstr ""
+"Kuinka kirkkaana näytön reunan hehku näkyy fokuksen aikana — korkeampi "
+"näkyvämpi, matalampi hienovaraisempi."
+
+#. settings-schema.json->breathing_pattern->description
+msgid "Breathing pattern"
+msgstr "Hengityskuvio"
+
+#. settings-schema.json->breathing_pattern->options
+msgid "Box 4-4-4-4"
+msgstr "Laatikko 4-4-4-4"
+
+#. settings-schema.json->breathing_pattern->options
+msgid "4-7-8"
+msgstr "4-7-8"
+
+#. settings-schema.json->breathing_pattern->options
+msgid "Relaxing 4-6"
+msgstr "Rentouttava 4-6"
+
+#. settings-schema.json->breathing_pattern->tooltip
+msgid ""
+"Breathing rhythm for the guide: Box (4-4-4-4), calming 4-7-8, or relaxed 4-6 "
+"— seconds per phase."
+msgstr ""
+"Oppaan hengitysrytmi: Laatikko (4-4-4-4), rauhoittava 4-7-8 tai rentouttava "
+"4-6 — sekunteja per vaihe."
+
+#. settings-schema.json->chip_position->description
+msgid "Task chip position"
+msgstr "Tehtävälapun sijainti"
+
+#. settings-schema.json->chip_position->options
+msgid "Bottom-right"
+msgstr "Alhaalla oikealla"
+
+#. settings-schema.json->chip_position->options
+msgid "Bottom-left"
+msgstr "Alhaalla vasemmalla"
+
+#. settings-schema.json->chip_position->options
+msgid "Top-right"
+msgstr "Ylhäällä oikealla"
+
+#. settings-schema.json->chip_position->options
+msgid "Top-left"
+msgstr "Ylhäällä vasemmalla"
+
+#. settings-schema.json->chip_position->tooltip
+msgid "Which screen corner the on-screen task chip appears in."
+msgstr "Missä näytön kulmassa tehtävälappu näkyy."
+
+#. settings-schema.json->reduce_motion->description
+msgid "Reduce motion (disable focus animations)"
+msgstr "Vähennä liikettä (poista fokusanimaatiot käytöstä)"
+
+#. settings-schema.json->reduce_motion->tooltip
+msgid "Disable focus animations (fades, pulsing, breathing)."
+msgstr "Poista fokusanimaatiot käytöstä (häivytykset, sykkiminen, hengitys)."
+
+#. settings-schema.json->menu_font_scale->description
+msgid "Menu font scale (%)"
+msgstr "Valikon fonttikoko (%)"
+
+#. settings-schema.json->menu_font_scale->tooltip
+msgid "Make the applet menu's text larger or smaller (100% = default size)."
+msgstr "Suurenna tai pienennä sovelman valikon tekstiä (100 % = oletuskoko)."
+
+#. settings-schema.json->preview_appearance_button->description
+msgid "Preview focus frame"
+msgstr "Esikatsele fokuskehystä"
+
+#. settings-schema.json->preview_appearance_button->tooltip
+msgid ""
+"Briefly show the on-screen focus frame and task chip with the current colors "
+"and style (works when no timer is running)."
+msgstr ""
+"Näytä hetkeksi näytön fokuskehys ja tehtävälappu nykyisillä väreillä ja "
+"tyylillä (toimii, kun ajastin ei ole käynnissä)."
+
+#. settings-schema.json->preview_breathing_button->description
+msgid "Preview breathing guide"
+msgstr "Esikatsele hengitysopasta"
+
+#. settings-schema.json->preview_breathing_button->tooltip
+msgid "Briefly show the breathing guide with the selected pattern."
+msgstr "Näytä hengitysopas hetkeksi valitulla kuviolla."
+
+#. settings-schema.json->daily_goal->description
+msgid "Daily focus goal (pomodori, 0 = off)"
+msgstr "Päivittäinen fokustavoite (pomodori, 0 = pois)"
+
+#. settings-schema.json->daily_goal->tooltip
+msgid "Target pomodoros per day (0 turns off the goal and streak)."
+msgstr "Tavoitepomodorot päivässä (0 poistaa tavoitteen ja putken käytöstä)."
+
+#. settings-schema.json->task_celebration->description
+msgid "Celebrate when a task is completed"
+msgstr ""
+
+#. settings-schema.json->task_celebration->options
+msgid "Subtle (glow + check)"
+msgstr ""
+
+#. settings-schema.json->task_celebration->options
+msgid "Confetti"
+msgstr ""
+
+#. settings-schema.json->task_celebration->tooltip
+msgid ""
+"A short celebration when you complete a task that met its 🍅 estimate (or "
+"earned at least one). Confetti respects reduce-motion."
+msgstr ""
+
+#. settings-schema.json->task_celebration_preview_button->description
+msgid "Preview the celebration"
+msgstr ""
+
+#. settings-schema.json->task_celebration_preview_button->tooltip
+msgid "Play the task-completion celebration once to see how it looks."
+msgstr ""
+
+#. settings-schema.json->auto_pause_idle->description
+msgid "Auto-pause focus when you are away (idle)"
+msgstr "Pysäytä fokus automaattisesti, kun olet poissa (jouten)"
+
+#. settings-schema.json->auto_pause_idle->tooltip
+msgid "Pause focus automatically when you step away from the computer."
+msgstr "Pysäytä fokus automaattisesti, kun poistut tietokoneelta."
+
+#. settings-schema.json->auto_pause_idle_minutes->description
+msgid "Idle minutes before auto-pause"
+msgstr "Joutominuutit ennen automaattista pysäytystä"
+
+#. settings-schema.json->auto_pause_idle_minutes->tooltip
+msgid "How long you can be away before focus auto-pauses, in minutes."
+msgstr ""
+"Kuinka kauan voit olla poissa ennen fokuksen automaattista pysäytystä, "
+"minuutteina."
+
+#. settings-schema.json->auto_resume_on_activity->description
+msgid "Resume automatically when you return"
+msgstr "Jatka automaattisesti, kun palaat"
+
+#. settings-schema.json->auto_resume_on_activity->tooltip
+msgid ""
+"Resume a paused focus session automatically when you return to the computer."
+msgstr ""
+"Jatka pysäytettyä fokusjaksoa automaattisesti, kun palaat tietokoneelle."
+
+#. settings-schema.json->flow_extend->description
+msgid "Offer to extend focus when a pomodoro ends (stay in flow)"
+msgstr "Tarjoa fokuksen jatkamista pomodoron päättyessä (pysy flow-tilassa)"
+
+#. settings-schema.json->flow_extend->tooltip
+msgid "When a pomodoro ends, offer to extend it to stay in flow."
+msgstr "Kun pomodoro päättyy, tarjoa sen jatkamista flow-tilassa pysymiseksi."
+
+#. settings-schema.json->flow_extend_minutes->description
+msgid "Extend amount (minutes)"
+msgstr "Jatkon määrä (minuuttia)"
+
+#. settings-schema.json->flow_extend_minutes->tooltip
+msgid "How many extra minutes the 'extend focus' option adds."
+msgstr "Kuinka monta lisäminuuttia ”jatka fokusta” -valinta lisää."
+
+#. settings-schema.json->flow_soft_landing->description
+msgid "Soft landing: don't break focus while you're still working"
+msgstr "Pehmeä lasku: älä keskeytä keskittymistä, kun vielä työskentelet"
+
+#. settings-schema.json->flow_soft_landing->tooltip
+msgid ""
+"When a focus pomodoro ends while you're actively working, hold the break "
+"until a natural pause instead of interrupting you. Off by default; only "
+"applies when 'auto-continue to break' is off."
+msgstr ""
+"Kun keskittymispomodoro päättyy työskennellessäsi aktiivisesti, tauko "
+"odottaa luonnollista taukoa keskeyttämisen sijaan. Oletuksena pois; pätee "
+"vain, kun «jatka automaattisesti tauolle» on pois."
+
+#. settings-schema.json->flow_soft_landing_behavior->description
+msgid "When focus ends and you're still working"
+msgstr "Kun keskittyminen päättyy ja vielä työskentelet"
+
+#. settings-schema.json->flow_soft_landing_behavior->options
+msgid "Wait for a natural pause"
+msgstr "Odota luonnollista taukoa"
+
+#. settings-schema.json->flow_soft_landing_behavior->options
+msgid "Quietly extend focus"
+msgstr "Jatka keskittymistä hiljaa"
+
+#. settings-schema.json->flow_soft_landing_behavior->tooltip
+msgid ""
+"Wait: hold quietly at the end until you pause, then offer the break. Quietly "
+"extend: silently add focus time (the 'Extend amount' above) and keep going, "
+"re-checking each time."
+msgstr ""
+"Odota: odota hiljaa lopussa, kunnes pidät tauon, ja tarjoa sitten taukoa. "
+"Jatka hiljaa: lisää huomaamatta keskittymisaikaa («jatkomäärä» yllä) ja "
+"jatka, tarkistaen joka kerta."
+
+#. settings-schema.json->focus_ambient_choice->description
+msgid "Ambient sound during focus"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "White noise"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Pink noise"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Brown noise"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Rain"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Sea"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Fan"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Wind"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Stream"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Street"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->tooltip
+msgid ""
+"Loop a calming sound during focus. White/pink/brown noise and rain/sea are "
+"built in; pick \"Custom file\" to use your own."
+msgstr ""
+
+#. settings-schema.json->focus_ambient_sound->description
+msgid "Play an ambient sound during focus"
+msgstr "Toista taustaääni keskittymisen aikana"
+
+#. settings-schema.json->focus_ambient_sound->tooltip
+msgid ""
+"Loop a soft ambient sound during focus — the built-in brown noise, or your "
+"own file below."
+msgstr ""
+"Toista pehmeää taustaääntä silmukassa keskittymisen aikana — "
+"sisäänrakennettu ruskea kohina tai oma tiedostosi alla."
+
+#. settings-schema.json->focus_ambient_volume->description
+msgid "Ambient volume"
+msgstr "Taustaäänen voimakkuus"
+
+#. settings-schema.json->focus_ambient_volume->tooltip
+msgid "Volume of the ambient sound (0 = silent)."
+msgstr "Taustaäänen voimakkuus (0 = vaimennettu)."
+
+#. settings-schema.json->focus_ambient_preview_button->description
+msgid "▶ Preview"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_preview_button->tooltip
+msgid "Play a short sample of the chosen ambient sound at the set volume."
+msgstr ""
+
+#. settings-schema.json->break_breathing->description
+msgid "Show a breathing guide during breaks"
+msgstr "Näytä hengitysopas taukojen aikana"
+
+#. settings-schema.json->break_breathing->tooltip
+msgid ""
+"During breaks, show an expanding and contracting circle that paces your "
+"breathing to help you unwind."
+msgstr ""
+"Taukojen aikana näyttää laajenevan ja supistuvan ympyrän, joka tahdittaa "
+"hengitystäsi auttaen rentoutumaan."
+
+#. settings-schema.json->break_lock_enabled->description
+msgid "Lock the screen during breaks"
+msgstr ""
+
+#. settings-schema.json->break_lock_enabled->tooltip
+msgid ""
+"When a break starts, show a brief warning and then lock the screen so you "
+"actually step away. Never locks during focus; off by default."
+msgstr ""
+
+#. settings-schema.json->break_lock_long_only->description
+msgid "Lock only on long breaks"
+msgstr ""
+
+#. settings-schema.json->break_lock_long_only->tooltip
+msgid "Only lock for the longer breaks, not every short break."
+msgstr ""
+
+#. settings-schema.json->zen_mode_enabled->description
+msgid ""
+"Enable Zen mode (focus spotlight — dims other windows, toggled from the menu)"
+msgstr ""
+
+#. settings-schema.json->zen_mode_enabled->tooltip
+msgid ""
+"Allow the focus spotlight, toggled from the menu: while focusing, the other "
+"windows dim so the one you're working in stands out."
+msgstr ""
+
+#. settings-schema.json->zen_dim_strength->units
+msgid "%"
+msgstr ""
+
+#. settings-schema.json->zen_dim_strength->description
+msgid "Zen spotlight: dim strength"
+msgstr ""
+
+#. settings-schema.json->zen_dim_strength->tooltip
+msgid ""
+"How much to darken the other windows while a focus session runs (higher = "
+"darker)."
+msgstr ""
+
+#. settings-schema.json->zen_dim_desktop->description
+msgid "Zen spotlight: also dim the desktop wallpaper"
+msgstr ""
+
+#. settings-schema.json->zen_dim_desktop->tooltip
+msgid "Darken the desktop background too, not just the other windows."
+msgstr ""
+
+#. settings-schema.json->strict_focus->description
+msgid "Strict focus: no pause or skip during a focus block"
+msgstr "Tiukka fokus: ei taukoa eikä ohitusta fokusjakson aikana"
+
+#. settings-schema.json->strict_focus->tooltip
+msgid ""
+"While a focus block is running, hide pause and skip so you commit to it. You "
+"can still Reset to abandon the session — it's never a hard lock."
+msgstr ""
+"Kun fokusjakso on käynnissä, pysäytys ja ohitus piilotetaan, jotta sitoudut "
+"siihen. Voit silti nollata istunnon ja keskeyttää sen — kyse ei ole koskaan "
+"kovasta lukosta."
+
+#. settings-schema.json->focus_dnd->description
+msgid "Mute notifications while focusing (Do Not Disturb)"
+msgstr "Vaimenna ilmoitukset keskittyessäsi (Älä häiritse)"
+
+#. settings-schema.json->focus_dnd->tooltip
+msgid "Mute Cinnamon notifications while focusing; restored afterwards."
+msgstr ""
+"Vaimenna Cinnamonin ilmoitukset keskittyessäsi; palautetaan jälkeenpäin."
+
+#. settings-schema.json->pause_media->description
+msgid "Pause music & video on breaks and pauses"
+msgstr "Keskeytä musiikki ja video taukojen ajaksi"
+
+#. settings-schema.json->pause_media->tooltip
+msgid ""
+"Pauses any playing media (browser tab, music app via MPRIS) when a break or "
+"pause starts, and resumes the same players when focus continues."
+msgstr ""
+"Keskeyttää kaiken toistettavan median (selaimen välilehti, musiikkisovellus "
+"MPRIS:n kautta), kun tauko tai keskeytys alkaa, ja jatkaa samoja soittimia, "
+"kun keskittyminen jatkuu."
+
+#. settings-schema.json->run_command_enabled->description
+msgid "Run a command when focus or a break starts"
+msgstr "Suorita komento, kun fokus tai tauko alkaa"
+
+#. settings-schema.json->run_command_enabled->tooltip
+msgid "Run a command of your choice when focus or a break starts."
+msgstr "Suorita valitsemasi komento, kun fokus tai tauko alkaa."
+
+#. settings-schema.json->focus_start_command->description
+msgid "Command to run when focus starts"
+msgstr "Fokuksen alkaessa suoritettava komento"
+
+#. settings-schema.json->focus_start_command->tooltip
+msgid ""
+"Pick a script to run when a focus block starts (e.g. enable Do Not Disturb). "
+"You can also type a command."
+msgstr ""
+
+#. settings-schema.json->break_start_command->description
+msgid "Command to run when a break starts"
+msgstr "Tauon alkaessa suoritettava komento"
+
+#. settings-schema.json->break_start_command->tooltip
+msgid ""
+"Pick a script to run when a break starts (e.g. clear your status). You can "
+"also type a command."
+msgstr ""
+
+#. settings-schema.json->goal_command->description
+msgid "Command to run when the daily goal is reached"
+msgstr ""
+
+#. settings-schema.json->goal_command->tooltip
+msgid ""
+"Pick a script to run when you reach your daily goal (e.g. a small "
+"celebration). You can also type a command."
+msgstr ""
+
+#. settings-schema.json->pushover_enabled->description
+msgid "Send push notifications to your phone (Pushover)"
+msgstr "Lähetä push-ilmoituksia puhelimeesi (Pushover)"
+
+#. settings-schema.json->pushover_enabled->tooltip
+msgid ""
+"Send a push notification to your devices via Pushover when focus or breaks "
+"start."
+msgstr ""
+"Lähetä push-ilmoitus laitteillesi Pushoverin kautta, kun fokus tai tauot "
+"alkavat."
+
+#. settings-schema.json->pushover_help->description
+msgid ""
+"Free phone/desktop alerts. Sign up at pushover.net and paste your keys below."
+msgstr ""
+"Ilmaiset ilmoitukset puhelimeen/työpöydälle. Rekisteröidy osoitteessa "
+"pushover.net ja liitä avaimesi alle."
+
+#. settings-schema.json->pushover_user_key->description
+msgid "Pushover user key"
+msgstr "Pushover-käyttäjäavain"
+
+#. settings-schema.json->pushover_user_key->tooltip
+msgid "Your Pushover user key (from your Pushover account)."
+msgstr "Pushover-käyttäjäavaimesi (Pushover-tililtäsi)."
+
+#. settings-schema.json->pushover_app_token->description
+msgid "Pushover application API token"
+msgstr "Pushover-sovelluksen API-tunnus"
+
+#. settings-schema.json->pushover_app_token->tooltip
+msgid "API token of your Pushover application (create one at pushover.net)."
+msgstr ""
+"Pushover-sovelluksesi API-tunnus (luo sellainen osoitteessa pushover.net)."
+
+#. settings-schema.json->pushover_test_button->description
+msgid "Send a test notification"
+msgstr "Lähetä testi-ilmoitus"
+
+#. settings-schema.json->pushover_test_button->tooltip
+msgid "Send a test message now to confirm your user key and app token work."
+msgstr ""
+"Lähetä testiviesti nyt varmistaaksesi, että käyttäjäavain ja sovellustunnus "
+"toimivat."
+
+#. settings-schema.json->pushover_customize->description
+msgid "Customize messages, sounds and priority"
+msgstr "Mukauta viestejä, ääniä ja prioriteettia"
+
+#. settings-schema.json->pushover_customize->tooltip
+msgid ""
+"Show options to change the text, sound and priority for each event. Off uses "
+"sensible defaults."
+msgstr ""
+"Näytä asetukset kunkin tapahtuman tekstin, äänen ja prioriteetin "
+"muuttamiseksi. Pois käytössä järkevät oletukset."
+
+#. settings-schema.json->pushover_title->description
+msgid "Notification title"
+msgstr "Ilmoituksen otsikko"
+
+#. settings-schema.json->pushover_title->tooltip
+msgid "Title shown on the push notifications."
+msgstr "Push-ilmoituksissa näkyvä otsikko."
+
+#. settings-schema.json->pushover_msg_focus->description
+msgid "Message when focus starts"
+msgstr "Viesti fokuksen alkaessa"
+
+#. settings-schema.json->pushover_msg_focus->tooltip
+msgid ""
+"Sent when a focus session starts. {task} and {minutes} are substituted. "
+"Leave empty to send nothing."
+msgstr ""
+"Lähetetään fokusjakson alkaessa. {task} ja {minutes} korvataan. Jätä "
+"tyhjäksi, niin mitään ei lähetetä."
+
+#. settings-schema.json->pushover_msg_resume->description
+msgid "Message when a break ends"
+msgstr "Viesti tauon päättyessä"
+
+#. settings-schema.json->pushover_msg_resume->tooltip
+msgid "Sent when a break finishes. Leave empty to send no message."
+msgstr "Lähetetään tauon päättyessä. Jätä tyhjäksi, niin viestiä ei lähetetä."
+
+#. settings-schema.json->enable_blocking->description
+msgid "Block distracting sites"
+msgstr ""
+
+#. settings-schema.json->enable_blocking->tooltip
+msgid ""
+"When on, the sites below are blocked right now and stay blocked until you "
+"turn this off. Run \"Set up passwordless blocking\" once so toggling doesn't "
+"ask for a password."
+msgstr ""
+
+#. settings-schema.json->block_domains->description
+msgid "Domains to block (e.g. youtube.com)"
+msgstr "Estettävät verkkotunnukset (esim. youtube.com)"
+
+#. settings-schema.json->block_domains->columns->title
+msgid "Domain"
+msgstr "Verkkotunnus"
+
+#. settings-schema.json->block_domains->tooltip
+msgid ""
+"Domains to block while blocking is on, one per row (e.g. youtube.com, www."
+"youtube.com)."
+msgstr ""
+
+#. settings-schema.json->sox-info->description
+msgid ""
+"No sound backend found — install GSound or a player like pulseaudio-utils."
+msgstr ""
+"Äänitaustaa ei löytynyt – asenna GSound tai soitin kuten pulseaudio-utils."
+
+#. settings-schema.json->timer_sound->description
+msgid "Play Timer Sound"
+msgstr "Soita äänimerkki"
+
+#. settings-schema.json->timer_sound->tooltip
+msgid "Play a soft ticking sound while focusing."
+msgstr "Soita pehmeää tikitystä keskittyessäsi."
+
+#. settings-schema.json->timer_sound_file->description
+msgid "Timer Sound File"
+msgstr "Äänitiedosto"
+
+#. settings-schema.json->timer_sound_file->tooltip
+msgid "Sound file for the ticking (leave empty for the built-in tone)."
+msgstr ""
+"Tikityksen äänitiedosto (jätä tyhjäksi sisäänrakennettua ääntä varten)."
+
+#. settings-schema.json->timer_sound_volume->description
+#. settings-schema.json->break_sound_volume->description
+#. settings-schema.json->warn_sound_volume->description
+#. settings-schema.json->start_sound_volume->description
+msgid "Sound volume:"
+msgstr "Voimakkuus:"
+
+#. settings-schema.json->timer_sound_volume->tooltip
+msgid "Volume of the ticking sound (0 = silent)."
+msgstr "Tikityksen voimakkuus (0 = hiljainen)."
+
+#. settings-schema.json->break_sound->description
+msgid "Play Break Sound"
+msgstr "Soita tauko äänimerkki"
+
+#. settings-schema.json->break_sound->tooltip
+msgid "Play a sound when a break begins."
+msgstr "Soita ääni tauon alkaessa."
+
+#. settings-schema.json->break_sound_file->description
+msgid "Break Sound File"
+msgstr "Äänitiedosto"
+
+#. settings-schema.json->break_sound_file->tooltip
+msgid "Sound file played when a break begins."
+msgstr "Tauon alkaessa soitettava äänitiedosto."
+
+#. settings-schema.json->break_sound_volume->tooltip
+msgid "Volume of the break sound (0 = silent)."
+msgstr "Taukoäänen voimakkuus (0 = hiljainen)."
+
+#. settings-schema.json->warn_sound->description
+msgid "Play Warn Sound"
+msgstr "Soita varoitus äänimerkki"
+
+#. settings-schema.json->warn_sound->tooltip
+msgid "Play a warning sound shortly before a focus block ends."
+msgstr "Soita varoitusääni vähän ennen fokusjakson päättymistä."
+
+#. settings-schema.json->warn_sound_delay->description
+msgid "Warn Delay (in secs):"
+msgstr "Varoituksen viive (sekunneissa):"
+
+#. settings-schema.json->warn_sound_delay->tooltip
+msgid "How many seconds before the end the warning sound plays."
+msgstr "Kuinka monta sekuntia ennen loppua varoitusääni soitetaan."
+
+#. settings-schema.json->warn_sound_file->description
+msgid "Warn Sound File"
+msgstr "Äänitiedosto"
+
+#. settings-schema.json->warn_sound_file->tooltip
+msgid "Sound file used for the warning."
+msgstr "Varoitukseen käytettävä äänitiedosto."
+
+#. settings-schema.json->warn_sound_volume->tooltip
+msgid "Volume of the warning sound (0 = silent)."
+msgstr "Varoitusäänen voimakkuus (0 = hiljainen)."
+
+#. settings-schema.json->start_sound->description
+msgid "Play Start Sound"
+msgstr "Soita aloitus äänimerkki"
+
+#. settings-schema.json->start_sound->tooltip
+msgid "Play a sound when a focus block starts."
+msgstr "Soita ääni fokusjakson alkaessa."
+
+#. settings-schema.json->start_sound_file->description
+msgid "Start Sound File"
+msgstr "Äänitiedosto"
+
+#. settings-schema.json->start_sound_file->tooltip
+msgid "Sound file played when focus starts."
+msgstr "Fokuksen alkaessa soitettava äänitiedosto."
+
+#. settings-schema.json->start_sound_volume->tooltip
+msgid "Volume of the start sound (0 = silent)."
+msgstr "Aloitusäänen voimakkuus (0 = hiljainen)."
+
+#. settings-schema.json->interval_chime->description
+msgid "Play a chime at a regular interval during focus"
+msgstr "Soita kilahdus säännöllisin väliajoin fokuksen aikana"
+
+#. settings-schema.json->interval_chime->tooltip
+msgid "Play a sound at a fixed interval during focus to mark time passing."
+msgstr ""
+"Soita ääni kiinteällä aikavälillä fokuksen aikana ajan kulumisen merkiksi."
+
+#. settings-schema.json->interval_chime_seconds->description
+msgid "Chime interval (seconds):"
+msgstr "Kilahdusten väli (sekuntia):"
+
+#. settings-schema.json->interval_chime_seconds->tooltip
+msgid "Seconds between chimes during focus."
+msgstr "Sekuntien määrä kilahdusten välillä fokuksen aikana."
+
+#. settings-schema.json->interval_chime_file->description
+msgid "Chime sound file"
+msgstr "Kilahduksen äänitiedosto"
+
+#. settings-schema.json->interval_chime_file->tooltip
+msgid "Sound file used for the interval chime."
+msgstr "Aikavälikilahdukseen käytettävä äänitiedosto."
+
+#. settings-schema.json->interval_chime_volume->description
+msgid "Chime volume:"
+msgstr "Kilahduksen voimakkuus:"
+
+#. settings-schema.json->interval_chime_volume->tooltip
+msgid "Volume of the interval chime (0 = silent)."
+msgstr "Aikavälikilahduksen voimakkuus (0 = hiljainen)."
+
+#. settings-schema.json->timer_sound_test->description
+#. settings-schema.json->break_sound_test->description
+#. settings-schema.json->warn_sound_test->description
+#. settings-schema.json->start_sound_test->description
+#. settings-schema.json->interval_chime_test->description
+msgid "Listen"
+msgstr "Kuuntele"
+
+#. settings-schema.json->timer_sound_test->tooltip
+#. settings-schema.json->break_sound_test->tooltip
+#. settings-schema.json->warn_sound_test->tooltip
+#. settings-schema.json->start_sound_test->tooltip
+#. settings-schema.json->interval_chime_test->tooltip
+msgid "Play the selected sound now."
+msgstr "Toista valittu ääni nyt."
+
+#. settings-schema.json->hdr_tick->description
+msgid "Ticking sound (during focus)"
+msgstr "Tikitys (fokuksen aikana)"
+
+#. settings-schema.json->hdr_alerts->description
+msgid "Alert sounds"
+msgstr "Hälytysäänet"
+
+#. settings-schema.json->hdr_interval->description
+msgid "Interval chime"
+msgstr "Aikavälikilahdus"
+
+#. settings-schema.json->custom_presets->description
+msgid ""
+"Your custom presets. Apply one from the Preset submenu in the applet menu."
+msgstr ""
+"Mukautetut esiasetuksesi. Ota yksi käyttöön sovelman valikon Esiasetus-"
+"alavalikosta."
+
+#. settings-schema.json->custom_presets->columns->title
+msgid "Name"
+msgstr "Nimi"
+
+#. settings-schema.json->custom_presets->columns->units
+msgid "min"
+msgstr "min"
+
+#. settings-schema.json->custom_presets->tooltip
+msgid ""
+"Your timer presets — name + focus / short / long minutes + pomodori. Apply "
+"them from the menu's Preset submenu."
+msgstr ""
+"Ajastimen esiasetuksesi — nimi + fokus-/lyhyen/pitkän minuutit + pomodorit. "
+"Ota ne käyttöön valikon Esiasetus-alavalikosta."
+
+#. settings-schema.json->setup_passwordless_button->description
+msgid "Set up passwordless blocking (one-time)"
+msgstr "Määritä salasanaton esto (kertaluontoinen)"
+
+#. settings-schema.json->setup_passwordless_button->tooltip
+msgid ""
+"Asks for your password once and installs a small system policy so blocking "
+"no longer prompts during focus."
+msgstr ""
+"Kysyy salasanasi kerran ja asentaa pienen järjestelmäkäytännön, jotta esto "
+"ei enää kysy sitä keskittymisen aikana."
+
+#. settings-schema.json->remove_passwordless_button->description
+msgid "Remove passwordless setup"
+msgstr "Poista salasanaton määritys"
+
+#. settings-schema.json->remove_passwordless_button->tooltip
+msgid ""
+"Removes the system policy and the root helper, so blocking asks for your "
+"password again each time."
+msgstr ""
+"Poistaa järjestelmäkäytännön ja root-apuohjelman, joten esto kysyy taas "
+"salasanasi joka kerta."
+
+#. settings-schema.json->onboarding_button->description
+msgid "Run the quick-start guide"
+msgstr "Avaa pikaopas"
+
+#. settings-schema.json->onboarding_button->tooltip
+msgid "Re-open the step-by-step setup guide."
+msgstr "Avaa vaiheittainen käyttöönotto-opas uudelleen."
+
+#. settings-schema.json->about_technique_button->tooltip
+msgid "A short explanation of how the Pomodoro technique works."
+msgstr ""
+
+#. settings-schema.json->restore_onboarding_button->description
+msgid "Undo last setup"
+msgstr "Kumoa viimeisin määritys"
+
+#. settings-schema.json->restore_onboarding_button->tooltip
+msgid ""
+"Restore your settings from just before the last time you applied a setup "
+"from the guide."
+msgstr ""
+"Palauttaa asetuksesi juuri ennen viimeisintä kertaa, kun otit käyttöön "
+"ohjatun asennuksen asetuksen."
+
+#. settings-schema.json->pushover_msg_short_break->description
+msgid "Message when a short break starts"
+msgstr "Viesti lyhyen tauon alkaessa"
+
+#. settings-schema.json->pushover_msg_short_break->tooltip
+msgid ""
+"Sent when a short break begins. {task} and {minutes} are substituted. Leave "
+"empty to send nothing."
+msgstr ""
+"Lähetetään lyhyen tauon alkaessa. {task} ja {minutes} korvataan. Jätä "
+"tyhjäksi, niin mitään ei lähetetä."
+
+#. settings-schema.json->pushover_msg_long_break->description
+msgid "Message when a long break starts"
+msgstr "Viesti pitkän tauon alkaessa"
+
+#. settings-schema.json->pushover_msg_long_break->tooltip
+msgid ""
+"Sent when a long break begins. {task} and {minutes} are substituted. Leave "
+"empty to send nothing."
+msgstr ""
+"Lähetetään pitkän tauon alkaessa. {task} ja {minutes} korvataan. Jätä "
+"tyhjäksi, niin mitään ei lähetetä."
+
+#. settings-schema.json->pushover_msg_goal->description
+msgid "Message when the daily goal is reached"
+msgstr "Viesti päivätavoitteen täyttyessä"
+
+#. settings-schema.json->pushover_msg_goal->tooltip
+msgid ""
+"Sent once when you hit your daily pomodoro goal. {task} and {minutes} are "
+"substituted. Leave empty to send nothing."
+msgstr ""
+"Lähetetään kerran, kun saavutat päivittäisen pomodoro-tavoitteesi. {task} ja "
+"{minutes} korvataan. Jätä tyhjäksi, niin mitään ei lähetetä."
+
+#. settings-schema.json->pushover_sound->description
+msgid "Notification sound"
+msgstr ""
+
+#. settings-schema.json->pushover_sound->options
+msgid "Default"
+msgstr "Oletus"
+
+#. settings-schema.json->pushover_sound->options
+msgid "Magic"
+msgstr "Taika"
+
+#. settings-schema.json->pushover_sound->options
+msgid "Bike"
+msgstr "Pyörä"
+
+#. settings-schema.json->pushover_sound->options
+msgid "Cosmic"
+msgstr "Kosminen"
+
+#. settings-schema.json->pushover_sound->options
+msgid "Gamelan"
+msgstr "Gamelan"
+
+#. settings-schema.json->pushover_sound->options
+msgid "Incoming"
+msgstr "Saapuva"
+
+#. settings-schema.json->pushover_sound->options
+msgid "Intermission"
+msgstr "Väliaika"
+
+#. settings-schema.json->pushover_sound->options
+msgid "None"
+msgstr "Ei mitään"
+
+#. settings-schema.json->pushover_priority->description
+msgid "Priority"
+msgstr ""
+
+#. settings-schema.json->pushover_priority->options
+msgid "Low"
+msgstr "Matala"
+
+#. settings-schema.json->pushover_priority->options
+msgid "Normal"
+msgstr "Normaali"
+
+#. settings-schema.json->pushover_priority->options
+msgid "High"
+msgstr "Korkea"
+
+#. settings-schema.json->focus_ambient_file->description
+msgid "Ambient sound file"
+msgstr "Taustaäänitiedosto"
+
+#. settings-schema.json->focus_ambient_file->tooltip
+msgid ""
+"Pick your own looping ambient sound. Leave empty for the built-in soft brown "
+"noise."
+msgstr ""
+"Valitse oma silmukoitu taustaääni. Jätä tyhjäksi sisäänrakennetulle "
+"pehmeälle ruskealle kohinalle."
