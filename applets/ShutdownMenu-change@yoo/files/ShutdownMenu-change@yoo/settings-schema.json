@@ -107,5 +107,52 @@
         "default" : "cinnamon-screensaver-command --lock",
         "description" : "The screen lock command",
         "dependency" : "screen_lock"
+    },
+
+    "custom_label": {
+        "type": "header",
+        "description": "Custom menu items"
+    },
+    "custom_position": {
+        "type": "combobox",
+        "default": 1,
+        "description": "Custom items position",
+        "options": {
+            "Above built-in items": 0,
+            "Below built-in items": 1
+        }
+    },
+    "show_custom_separator": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show separator",
+        "dependency": "custom_items"
+    },
+    "custom_icon_helper": {
+        "type": "iconfilechooser",
+        "default": "application-x-executable",
+        "description": "Icon picker (copy the value into the list below)"
+    },
+    "custom_items": {
+        "type": "list",
+        "default": [],
+        "description": "Add custom menu items",
+        "columns": [
+            {
+                "id": "name",
+                "title": "Name",
+                "type": "string"
+            },
+            {
+                "id": "icon",
+                "title": "Icon (name or path)",
+                "type": "string"
+            },
+            {
+                "id": "command",
+                "title": "Command",
+                "type": "string"
+            }
+        ]
     }
 }

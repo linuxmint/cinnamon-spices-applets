@@ -22,8 +22,8 @@ msgid "ShutdownMenu-change"
 msgstr "关机菜单（修改版）"
 
 #. metadata.json->description
-msgid "This is a Cinnamon panel applet that provides a menu with shutdown options and supports personalized actions via middle-click interaction. It was created by refactoring the code of ShutdownMenuWithIcons@LLOBERA to improve usability."
-msgstr "这是一个 Cinnamon 面板小工具，提供包含关机选项的菜单，并支持通过鼠标中键交互进行个性化操作。本工具通过重构 ShutdownMenuWithIcons@LLOBERA 的代码而来，使其更易于使用。"
+msgid "providing a shutdown menu with mouse wheel workspace switching, middle-click actions, and custom menu items."
+msgstr "提供关机菜单，并支持鼠标滚轮切换工作区、中键快捷操作以及自定义菜单项。"
 
 #: ../applet.js:66
 msgid "Shutdown Menu"
@@ -130,3 +130,39 @@ msgstr "锁屏图标"
 #: .settings:screen_lock_cmd/description
 msgid "The screen lock command"
 msgstr "锁屏命令"
+
+#: settings-schema.json
+msgid "Custom menu items"
+msgstr "自定义菜单项"
+
+#: settings-schema.json
+msgid "Add custom menu items"
+msgstr "添加自定义菜单项"
+
+#: settings-schema.json
+msgid "Name"
+msgstr "名称"
+
+#: settings-schema.json
+msgid "Icon (name or path)"
+msgstr "图标（名称或路径）"
+
+#: settings-schema.json
+msgid "Command"
+msgstr "命令"
+
+#: settings-schema.json
+msgid "Icon picker (copy the value into the list below)"
+msgstr "图标选择器（将值复制到下方的列表中）"
+
+#: settings-schema.json
+msgid "Custom items position"
+msgstr "自定义菜单项位置"
+
+#: settings-schema.json
+msgid "Above built-in items"
+msgstr "内置菜单项上方"
+
+#: settings-schema.json
+msgid "Below built-in items"
+msgstr "内置菜单项下方"

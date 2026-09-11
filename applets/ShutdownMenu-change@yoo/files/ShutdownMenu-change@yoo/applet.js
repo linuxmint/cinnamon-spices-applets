@@ -1,6 +1,6 @@
 // name： ShutdownMenu-change
-// description： 这是一个 Cinnamon 面板小工具，提供包含关机选项的菜单，并支持通过鼠标中键交互进行个性化操作。本工具通过重构 ShutdownMenuWithIcons@LLOBERA 的代码而来，使其更易于使用。
-// version: 1.2 (09-04-2026)
+// description： providing a shutdown menu with mouse wheel workspace switching, middle-click actions, and custom menu items.
+// version: 1.3 (11-09-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
@@ -35,16 +35,16 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panel_height, instanceId) {
         Applet.IconApplet.prototype._init.call(this, orientation);
         
-        try {        
+        try {
+            this.menuManager = new PopupMenu.PopupMenuManager(this);
+            this.menu = new Applet.AppletPopupMenu(this, orientation);
+            this.menuManager.addMenu(this.menu);
+
             this.settings = new Settings.AppletSettings(this, AppletUUID, instanceId);
             this.bindSettings();    
 
             this._updatePanelIcon();
             this.set_applet_tooltip(_("Shutdown Menu"));
-                      
-            this.menuManager = new PopupMenu.PopupMenuManager(this);
-            this.menu = new Applet.AppletPopupMenu(this, orientation);
-            this.menuManager.addMenu(this.menu);        
 
             this.createMenu();
 
@@ -95,6 +95,16 @@ MyApplet.prototype = {
         );
         this.settings.bindProperty(Settings.BindingDirection.IN,
             "screen_lock_cmd", "screen_lock_cmd", this._rebuildMenu, null
+        );
+
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "custom_items", "custom_items", this._rebuildMenu, null
+        );
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "custom_position", "custom_position", this._rebuildMenu, null
+        );
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "show_custom_separator", "show_custom_separator", this._rebuildMenu, null
         );
 
         this.settings.bindProperty(Settings.BindingDirection.IN,
@@ -154,7 +164,19 @@ MyApplet.prototype = {
     },
 
     createMenu: function() {
+        if (!this.menu) return;
         this.menu.removeAll();
+
+        let hasCustom = this.custom_items && this.custom_items.length > 0;
+        let hasBuiltin = this.quit_enable || this.log_out_enable || this.screen_lock_enable;
+        let customAbove = (this.custom_position === 0);
+
+        if (hasCustom && customAbove) {
+            this._addCustomItems();
+            if (this.show_custom_separator && hasBuiltin) {
+                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            }
+        }
 
         if (this.quit_enable) {
             this._createMenuItem(_("Quit"), this.quit_icon, this.quit_cmd);
@@ -168,28 +190,53 @@ MyApplet.prototype = {
         
         if (this.screen_lock_enable)
             this._createMenuItem(_("Screen Lock"), this.screen_lock_icon, this.screen_lock_cmd);
+
+        if (hasCustom && !customAbove) {
+            if (this.show_custom_separator && hasBuiltin) {
+                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            }
+            this._addCustomItems();
+        }
+    },
+
+    _addCustomItems: function() {
+        this.custom_items.forEach(item => {
+            if (item && item.name && item.command) {
+                let icon = item.icon || "application-x-executable";
+                this._createMenuItem(item.name, icon, item.command);
+            }
+        });
     },
     
     _createMenuItem: function(displayName, iconName, command) {
-        let iconParam = null;
-        if (iconName) {
-            if (GLib.path_is_absolute(iconName)) {
-                let file = Gio.file_new_for_path(iconName);
-                try {
-                    file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
-                    iconParam = new Gio.FileIcon({ file: file });
-                } catch (e) {
-                    iconParam = "image-missing";
-                }
-            } else {
-                iconParam = iconName;
-            }
-        }
-        if (!iconParam) {
-            iconParam = "image-missing";
-        }
+        let menuItem = new PopupMenu.PopupBaseMenuItem();
 
-        let menuItem = new PopupMenu.PopupIconMenuItem(displayName, iconParam, St.IconType.FULLCOLOR);
+        let icon;
+        if (iconName && GLib.path_is_absolute(iconName)) {
+            let file = Gio.file_new_for_path(iconName);
+            try {
+                file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
+                icon = new St.Icon({
+                    gicon: new Gio.FileIcon({ file: file }),
+                    icon_size: 24
+                });
+            } catch (e) {
+                icon = new St.Icon({ icon_name: "image-missing", icon_size: 24 });
+            }
+        } else {
+            icon = new St.Icon({
+                icon_name: iconName || "image-missing",
+                icon_size: 24
+            });
+        }
+        menuItem.addActor(icon);
+
+        let label = new St.Label({
+            text: displayName,
+            y_align: Clutter.ActorAlign.CENTER
+        });
+        menuItem.addActor(label, { expand: true });
+
         menuItem._command = command;
         menuItem.connect("activate", function() {
             Util.trySpawnCommandLine(command);
