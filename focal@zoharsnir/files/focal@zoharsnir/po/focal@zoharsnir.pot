@@ -1,0 +1,259 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-11 17:57+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:122
+msgid "Type direct text..."
+msgstr ""
+
+#. settings-schema.json->custom-color->description
+#: applet.js:152
+msgid "Text color"
+msgstr ""
+
+#. settings-schema.json->custom-bg-color->description
+#: applet.js:160
+msgid "Background color"
+msgstr ""
+
+#: applet.js:176
+msgid "Apply"
+msgstr ""
+
+#: applet.js:291 applet.js:319
+msgid "Direct Mode"
+msgstr ""
+
+#: applet.js:298 applet.js:320
+msgid "Calendar Mode"
+msgstr ""
+
+#: applet.js:376
+msgid "Listing calendars…"
+msgstr ""
+
+#: applet.js:412
+msgid "System Default (fallback - calendar list failed)"
+msgstr ""
+
+#: applet.js:413
+#, javascript-format
+msgid "Error: %s"
+msgstr ""
+
+#: applet.js:421
+#, javascript-format
+msgid "System Default (%s)"
+msgstr ""
+
+#. settings-schema.json->selected-calendar->options
+#: applet.js:421
+msgid "System Default"
+msgstr ""
+
+#: applet.js:500
+#, javascript-format
+msgid "Calendar list unavailable: %s"
+msgstr ""
+
+#: applet.js:528
+msgid "Fetching from calendar…"
+msgstr ""
+
+#: applet.js:676
+#, javascript-format
+msgid "Until %s"
+msgstr ""
+
+#: applet.js:683
+#, javascript-format
+msgid "%dh, %dm"
+msgstr ""
+
+#: applet.js:683
+#, javascript-format
+msgid "%dm"
+msgstr ""
+
+#: applet.js:684
+#, javascript-format
+msgid "Remaining %s"
+msgstr ""
+
+#: applet.js:759
+#, javascript-format
+msgid "Upcoming %s %s"
+msgstr ""
+
+#: applet.js:768
+msgid "No active or upcoming events"
+msgstr ""
+
+#: applet.js:769
+msgid "No active event"
+msgstr ""
+
+#: applet.js:775
+msgid "Calendar error"
+msgstr ""
+
+#. metadata.json->name
+msgid "Focal"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"A simple panel text label you set yourself (optionally with a color) or "
+"point at your system calendar to show whatever event you're currently in."
+msgstr ""
+
+#. settings-schema.json->mode-section->description
+msgid "Mode"
+msgstr ""
+
+#. settings-schema.json->mode->options
+msgid "Direct"
+msgstr ""
+
+#. settings-schema.json->mode->options
+msgid "Calendar"
+msgstr ""
+
+#. settings-schema.json->mode->description
+msgid "Source of the panel text: Direct or Calendar"
+msgstr ""
+
+#. settings-schema.json->mode->tooltip
+msgid ""
+"Direct: you type and set the text yourself.\n"
+"Calendar: shows the active event from your selected calendar(s)."
+msgstr ""
+
+#. settings-schema.json->display-section->description
+msgid "Display"
+msgstr ""
+
+#. settings-schema.json->max-text-length->units
+msgid "characters"
+msgstr ""
+
+#. settings-schema.json->max-text-length->description
+msgid "Truncate panel text to this length (0 = no limit)"
+msgstr ""
+
+#. settings-schema.json->max-text-length->tooltip
+msgid ""
+"Applies to the final text, including any \"Until\"/\"Remaining\" suffixes in"
+" Calendar mode. Hovering the panel always shows the full untruncated text."
+msgstr ""
+
+#. settings-schema.json->show-icon->description
+msgid "Show an icon to the left of the panel text"
+msgstr ""
+
+#. settings-schema.json->hotkey-section->description
+msgid "Keyboard Shortcut"
+msgstr ""
+
+#. settings-schema.json->hotkey->description
+msgid "Open the edit popup"
+msgstr ""
+
+#. settings-schema.json->custom-section->description
+msgid "Direct Mode Settings"
+msgstr ""
+
+#. settings-schema.json->custom-text->description
+msgid "Current text"
+msgstr ""
+
+#. settings-schema.json->calendar-section->description
+msgid "Calendar Mode Settings"
+msgstr ""
+
+#. settings-schema.json->selected-calendar->description
+msgid "Calendar to use"
+msgstr ""
+
+#. settings-schema.json->selected-calendar->tooltip
+msgid ""
+"\"System Default\" always tracks whatever calendar your system currently "
+"considers the default (shown in parentheses) - if that changes, this follows"
+" automatically, no need to re-pick anything. The list is fetched once each "
+"time Focal (re)loads and appears here automatically - no need to reopen or "
+"reload Settings. If listing fails, an error entry appears here instead, with"
+" System Default kept as a working fallback."
+msgstr ""
+
+#. settings-schema.json->poll-interval-seconds->units
+msgid "seconds"
+msgstr ""
+
+#. settings-schema.json->poll-interval-seconds->description
+msgid "How often to re-check the calendar"
+msgstr ""
+
+#. settings-schema.json->show-upcoming-fallback->description
+msgid "When not currently in an event, show the next upcoming one (dimmed)"
+msgstr ""
+
+#. settings-schema.json->show-upcoming-fallback->tooltip
+msgid ""
+"Only looks ahead until the end of today - an upcoming event tomorrow or "
+"later won't show, even with this on."
+msgstr ""
+
+#. settings-schema.json->default-event-color->description
+msgid "Text color for events with no color of their own"
+msgstr ""
+
+#. settings-schema.json->override-event-color->description
+msgid "Always use the color above, even for events with their own color"
+msgstr ""
+
+#. settings-schema.json->override-event-color->tooltip
+msgid ""
+"Off (default): an event's own calendar color wins when it has one, falling "
+"back to the color above otherwise. On: always use the color above, ignoring "
+"the event's own color."
+msgstr ""
+
+#. settings-schema.json->show-event-end-time->description
+msgid "Show when the current event ends"
+msgstr ""
+
+#. settings-schema.json->show-event-end-time->tooltip
+msgid ""
+"Adds \"Until 5:00 PM\" after the event text. Time format (12h/24h) follows "
+"your system's setting. Only applies to the current event, not the upcoming-"
+"event preview."
+msgstr ""
+
+#. settings-schema.json->show-time-remaining->description
+msgid "Show how much time is left in the current event"
+msgstr ""
+
+#. settings-schema.json->show-time-remaining->tooltip
+msgid ""
+"Adds \"Remaining 1h, 7m\" after the event text. Only applies to the current "
+"event, not the upcoming-event preview."
+msgstr ""
+
+#. settings-schema.json->upcoming-color->description
+msgid "Text color for the dimmed upcoming-event fallback"
+msgstr ""
