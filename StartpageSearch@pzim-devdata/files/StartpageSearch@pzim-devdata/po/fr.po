@@ -1,0 +1,38 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: StartpageSearch@pzim-devdata\n"
+"PO-Revision-Date: 2026-09-06 12:00+0200\n"
+"Last-Translator: pzim-devdata\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js
+msgid "Startpage Search"
+msgstr "Recherche Startpage"
+
+#: applet.js
+msgid "Search terms..."
+msgstr "Termes de recherche..."
+
+#: applet.js
+msgid "Paste & Search"
+msgstr "Coller & Rechercher"
+
+#: applet.js
+msgid "Search"
+msgstr "Rechercher"
+
+#: applet.js
+msgid "Paste clipboard"
+msgstr "Coller le presse-papiers"
+
+#: applet.js
+msgid "Paste clipboard and search"
+msgstr "Coller le presse-papiers et rechercher"
+
+#: metadata.json
+msgid "Search the web with Startpage on the panel"
+msgstr "Recherchez sur le web avec Startpage depuis le panneau"

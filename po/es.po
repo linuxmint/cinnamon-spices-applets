@@ -1,0 +1,31 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: StartpageSearch@pzim-devdata\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+
+#: applet.js
+msgid "Startpage Search"
+msgstr "Búsqueda de Startpage"
+
+#: applet.js
+msgid "Search terms..."
+msgstr "Términos de búsqueda..."
+
+#: applet.js
+msgid "Paste & Search"
+msgstr "Pegar y buscar"
+
+#: applet.js
+msgid "Search"
+msgstr "Buscar"
+
+#: applet.js
+msgid "Paste clipboard"
+msgstr "Pegar el portapapeles"
+
+#: applet.js
+msgid "Paste clipboard and search"
+msgstr "Pegar el portapapeles y buscar"
