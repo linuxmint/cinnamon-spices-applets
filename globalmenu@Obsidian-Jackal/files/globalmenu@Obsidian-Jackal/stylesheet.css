@@ -1,0 +1,25 @@
+.globalmenu-box {
+    spacing: 2px;
+    padding: 0 4px;
+}
+
+.globalmenu-app-label {
+    padding: 0 8px 0 4px;
+    font-weight: bold;
+}
+
+.globalmenu-button {
+    padding: 0 8px;
+}
+
+.globalmenu-button:hover,
+.globalmenu-button:active,
+.globalmenu-button:checked {
+    background-color: rgba(128, 128, 128, 0.25);
+    border-radius: 4px;
+}
+
+.globalmenu-placeholder {
+    padding: 0 6px;
+    opacity: 0.55;
+}
