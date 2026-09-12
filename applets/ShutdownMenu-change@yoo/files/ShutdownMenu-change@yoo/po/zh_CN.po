@@ -1,0 +1,180 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-03 10:41+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "ShutdownMenu-change"
+msgstr "关机菜单（修改版）"
+
+#. metadata.json->description
+msgid "providing a shutdown menu with mouse wheel workspace switching, middle-click actions, and custom menu items."
+msgstr "提供关机菜单，并支持鼠标滚轮切换工作区、中键快捷操作以及自定义菜单项。"
+
+#: ../applet.js:66
+msgid "Shutdown Menu"
+msgstr "关机菜单"
+
+#: ../applet.js:84
+msgid "Quit"
+msgstr "退出"
+
+#: ../applet.js:89
+msgid "Log out"
+msgstr "注销"
+
+#: ../applet.js:92
+msgid "Screen Lock"
+msgstr "锁屏"
+
+# ========== settings-schema.json 翻译 ==========
+
+#: .settings:panel_label/description
+msgid "Panel Icon"
+msgstr "面板图标"
+
+#: .settings:icon_size/description
+msgid "Panel icon size"
+msgstr "面板图标大小"
+
+#: settings-schema.json
+msgid "Switch workspace with mouse scroll"
+msgstr "使用鼠标滚轮切换工作区"
+
+#: settings-schema.json
+msgid "Middle click action"
+msgstr "鼠标中键单击动作"
+
+#: settings-schema.json
+msgid "Nothing"
+msgstr "无"
+
+#: settings-schema.json
+msgid "Show workspace selector (Expo)"
+msgstr "显示工作区选择器 (Expo)"
+
+#: settings-schema.json
+msgid "Show window selector (Scale)"
+msgstr "显示窗口选择器 (Scale)"
+
+#: settings-schema.json
+msgid "Toggle desktop icons visibility"
+msgstr "显示/隐藏桌面图标"
+
+#: settings-schema.json
+msgid "Note: When using live wallpapers, switching between showing and hiding desktop icons may not work."
+msgstr "提示：使用动态壁纸时，切换桌面图标显示/隐藏可能会失效。"
+
+#: settings-schema.json
+msgid "Global Settings"
+msgstr "全局设置"
+
+#: settings-schema.json
+msgid "Menu item text size (0 is the default)"
+msgstr "菜单项文字大小（0为默认）"
+
+#: settings-schema.json
+msgid "Menu item icon size"
+msgstr "菜单项图标大小"
+
+#: .settings:quit_label/description
+msgid "Shutdown"
+msgstr "关机"
+
+#: .settings:quit/description
+msgid "Add quit to the menu"
+msgstr "在菜单中添加退出"
+
+#: .settings:quit_icon/description
+msgid "The quit icon"
+msgstr "退出图标"
+
+#: .settings:quit_cmd/description
+msgid "The quit command"
+msgstr "退出命令"
+
+#: .settings:show_separator/description
+msgid "Show separator"
+msgstr "显示分隔线"
+
+#: .settings:log_out_label/description
+msgid "Logout"
+msgstr "注销"
+
+#: .settings:log_out/description
+msgid "Add log out to the menu"
+msgstr "在菜单中添加注销"
+
+#: .settings:log_out_icon/description
+msgid "The log out icon"
+msgstr "注销图标"
+
+#: .settings:log_out_cmd/description
+msgid "The log out command"
+msgstr "注销命令"
+
+#: .settings:screen_lock_label/description
+msgid "Screen lock"
+msgstr "锁屏"
+
+#: .settings:screen_lock/description
+msgid "Add screen lock to the menu"
+msgstr "在菜单中添加锁屏"
+
+#: .settings:screen_lock_icon/description
+msgid "The screen lock icon"
+msgstr "锁屏图标"
+
+#: .settings:screen_lock_cmd/description
+msgid "The screen lock command"
+msgstr "锁屏命令"
+
+#: settings-schema.json
+msgid "Custom menu items"
+msgstr "自定义菜单项"
+
+#: settings-schema.json
+msgid "Add custom menu items"
+msgstr "添加自定义菜单项"
+
+#: settings-schema.json
+msgid "Name"
+msgstr "名称"
+
+#: settings-schema.json
+msgid "Icon (name or path)"
+msgstr "图标（名称或路径）"
+
+#: settings-schema.json
+msgid "Command"
+msgstr "命令"
+
+#: settings-schema.json
+msgid "Icon picker (copy the value into the list below)"
+msgstr "图标选择器（将值复制到下方的列表中）"
+
+#: settings-schema.json
+msgid "Custom items position"
+msgstr "自定义菜单项位置"
+
+#: settings-schema.json
+msgid "Above built-in items"
+msgstr "内置菜单项上方"
+
+#: settings-schema.json
+msgid "Below built-in items"
+msgstr "内置菜单项下方"

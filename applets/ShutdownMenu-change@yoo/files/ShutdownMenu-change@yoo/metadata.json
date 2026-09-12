@@ -1,0 +1,8 @@
+{
+    "uuid": "ShutdownMenu-change@yoo",
+    "name": "ShutdownMenu-change",
+    "description": "providing a shutdown menu with mouse wheel workspace switching, middle-click actions, and custom menu items.",
+    "version": "1.3.1",
+    "author": "yoo",
+    "last-edited": 1789195752
+}

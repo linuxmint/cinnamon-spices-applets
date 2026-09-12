@@ -1,0 +1,185 @@
+{
+    "panel_label": {
+        "type": "header",
+        "description": "Panel Icon"
+    },
+    "panel_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-shutdown-symbolic",
+        "description" : "Panel Icon"
+    },
+    "icon_size": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 16,
+        "max": 64,
+        "step": 2,
+        "description": "Panel icon size"
+    },
+    "scroll_switch": {
+        "type" : "checkbox",
+        "default" : false,
+        "description" : "Switch workspace with mouse scroll"
+    },
+    "middle_click_action": {
+        "type" : "combobox",
+        "default" : "nothing",
+        "description" : "Middle click action",
+        "options" : {
+            "Nothing" : "nothing",
+            "Show workspace selector (Expo)" : "show_expo",
+            "Show window selector (Scale)" : "show_scale",
+            "Toggle desktop icons visibility" : "toggle_desktop_icons"
+        }
+    },
+    "dynamic_wallpaper_warning": {
+        "type": "label",
+        "description": "Note: When using live wallpapers, switching between showing and hiding desktop icons may not work."
+    },
+
+    "global_settings_label": {
+        "type": "header",
+        "description": "Global Settings"
+    },
+    "menu_text_size": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "description": "Menu item text size (0 is the default)"
+    },
+    "menu_icon_size": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 16,
+        "max": 48,
+        "step": 2,
+        "description": "Menu item icon size"
+    },
+
+    "quit_label": {
+        "type": "header",
+        "description": "Quit"
+    },
+    "quit": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Add quit to the menu"
+    },
+    "quit_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-shutdown",
+        "description" : "The quit icon",
+        "dependency" : "quit"
+    },
+    "quit_cmd": {
+        "type" : "entry",
+        "default" : "cinnamon-session-quit --power-off",
+        "description" : "The quit command",
+        "dependency" : "quit"
+    },
+    "show_separator": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show separator",
+        "dependency" : "quit"
+    },
+    
+    "log_out_label": {
+        "type": "header",
+        "description": "Logout"
+    },
+    "log_out": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Add log out to the menu"
+    },
+    "log_out_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-log-out",
+        "description" : "The log out icon",
+        "dependency" : "log_out"
+    },
+    "log_out_cmd": {
+        "type" : "entry",
+        "default" : "cinnamon-session-quit --logout",
+        "description" : "The log out command",
+        "dependency" : "log_out"
+    },
+        
+    "screen_lock_label": {
+        "type": "header",
+        "description": "Screen lock"
+    },
+    "screen_lock": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Add screen lock to the menu"
+    },
+    "screen_lock_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-lock-screen",
+        "description" : "The screen lock icon",
+        "dependency" : "screen_lock"
+    },
+    "screen_lock_cmd": {
+        "type" : "entry",
+        "default" : "cinnamon-screensaver-command --lock",
+        "description" : "The screen lock command",
+        "dependency" : "screen_lock"
+    },
+
+    "custom_label": {
+        "type": "header",
+        "description": "Custom menu items"
+    },
+    "custom_position": {
+        "type": "combobox",
+        "default": 0,
+        "description": "Custom items position",
+        "options": {
+            "Above built-in items": 0,
+            "Below built-in items": 1
+        }
+    },
+    "show_custom_separator": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show separator",
+        "dependency": "custom_items"
+    },
+    "custom_icon_helper": {
+        "type": "iconfilechooser",
+        "default": "application-x-executable",
+        "description": "Icon picker (copy the value into the list below)"
+    },
+    "custom_items": {
+        "type": "list",
+        "default": [
+            {
+                "name": "Neofetch",
+                "icon": "linuxmint-logo-badge-symbolic",
+                "command": "x-terminal-emulator -e bash -c 'neofetch; exec bash'"
+            }
+        ],
+        "description": "Add custom menu items",
+        "columns": [
+            {
+                "id": "name",
+                "title": "Name",
+                "type": "string"
+            },
+            {
+                "id": "icon",
+                "title": "Icon (name or path)",
+                "type": "string"
+            },
+            {
+                "id": "command",
+                "title": "Command",
+                "type": "string"
+            }
+        ]
+    }
+}
