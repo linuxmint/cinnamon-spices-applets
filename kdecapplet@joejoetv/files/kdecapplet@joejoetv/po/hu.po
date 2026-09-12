@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-08-22 18:28+0200\n"
-"PO-Revision-Date: 2023-05-07 21:00+0200\n"
+"PO-Revision-Date: 2026-09-12 07:46+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 5.8/applet.js:547 4.8/applet.js:574
 msgid "No Modules available"
@@ -35,7 +35,7 @@ msgstr "Kisalkalmazás újratöltése"
 
 #. 5.8/applet.js:1033 4.8/applet.js:1077
 msgid "Invalid KDE Connect version returned!"
-msgstr "Nem megfelelő KDE Connect verzió."
+msgstr "Érvénytelen KDE Connect-verzió érkezett!"
 
 #. 5.8/applet.js:1034 5.8/applet.js:1037 4.8/applet.js:1078 4.8/applet.js:1081
 msgid ""
@@ -94,23 +94,20 @@ msgid "{deviceCount} available devices"
 msgstr "{deviceCount} elérhető eszköz"
 
 #. 5.8/js/modules.js:450
-#, fuzzy
 msgid "Module"
-msgstr "Modulok"
+msgstr "Modul"
 
 #. 5.8/js/modules.js:597
-#, fuzzy
 msgid "Battery Module"
-msgstr "Akkumulátor információs modul"
+msgstr "Akkumulátor modul"
 
 #. 5.8/js/modules.js:646 4.8/js/modules.js:658
 msgid "Charging"
 msgstr "Töltődik"
 
 #. 5.8/js/modules.js:682
-#, fuzzy
 msgid "Device-Info Module"
-msgstr "Eszköz-információ információs modul"
+msgstr "Eszköz-információ modul"
 
 #. 5.8/js/modules.js:731 4.8/js/modules.js:741
 msgid "ID: {id}"
@@ -125,9 +122,8 @@ msgid "Click to copy ID"
 msgstr "Kattintson a saját telefonszám másolásához"
 
 #. 5.8/js/modules.js:751
-#, fuzzy
 msgid "Connectivity Module"
-msgstr "Kapcsolat információs modul"
+msgstr "Kapcsolódás modul"
 
 #. 5.8/js/modules.js:813 4.8/js/modules.js:822
 msgid "No Signal"
@@ -154,9 +150,8 @@ msgid "Unknown"
 msgstr "Ismeretlen"
 
 #. 5.8/js/modules.js:867
-#, fuzzy
 msgid "FindMyPhone Module"
-msgstr "Telefon keresés művelet modul"
+msgstr "Telefonkereső modul"
 
 #. 5.8/js/modules.js:892 4.8/js/modules.js:900
 msgid "Ring device"
@@ -167,9 +162,8 @@ msgid "Click to ring the device"
 msgstr "Kattintson az eszköz megcsöngetéséhez"
 
 #. 5.8/js/modules.js:907
-#, fuzzy
 msgid "Request Photo Module"
-msgstr "Fotó kérés művelet modul"
+msgstr "Fotó kérés modul"
 
 #. 5.8/js/modules.js:973 4.8/js/modules.js:980
 msgid "Photo received from '{deviceName}'"
@@ -189,9 +183,8 @@ msgid "Click to request a photo from the device"
 msgstr "Kattintson fotó kéréséhez az eszközről"
 
 #. 5.8/js/modules.js:1009
-#, fuzzy
 msgid "Ping Module"
-msgstr "Ping művelet modul"
+msgstr "Ping modul"
 
 #. 5.8/js/modules.js:1034 4.8/js/modules.js:1040
 msgid "Ping!"
@@ -210,9 +203,8 @@ msgid "Click to send a ping to the device"
 msgstr "Kattintson ping küldéséhez az eszközre"
 
 #. 5.8/js/modules.js:1062
-#, fuzzy
 msgid "Share Module"
-msgstr "Megosztás művelet modul"
+msgstr "Megosztás modul"
 
 #. 5.8/js/modules.js:1151 4.8/js/modules.js:1156
 msgid "Share received from '{deviceName}'"
@@ -248,9 +240,8 @@ msgid "Click to send file(s) to the device"
 msgstr "Kattintson a fájlküldéshez az eszközre"
 
 #. 5.8/js/modules.js:1243
-#, fuzzy
 msgid "SFTP Module"
-msgstr "SFTP művelet modul"
+msgstr "SFTP modul"
 
 #. 5.8/js/modules.js:1284 4.8/js/modules.js:1281
 msgid "Unmount"
@@ -273,9 +264,8 @@ msgid "Click to browse files"
 msgstr "Kattintson a fájlok tallózásához"
 
 #. 5.8/js/modules.js:1463
-#, fuzzy
 msgid "SMS Module"
-msgstr "SMS művelet modul"
+msgstr "SMS modul"
 
 #. 5.8/js/modules.js:1532 4.8/js/modules.js:1468
 msgid "SMS"
@@ -362,17 +352,17 @@ msgid "Text to send:"
 msgstr "Szöveges üzenet:"
 
 #. 5.8/py/dialogs.py:271
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Open remote directory on '{device_name}'"
-msgstr "Üzenet küldése ide: „{device_name}”"
+msgstr "Távoli könyvtár megnyitása a(z) „{device_name}” eszközön"
 
 #. 5.8/py/dialogs.py:290
 msgid "Open"
-msgstr ""
+msgstr "Megnyitás"
 
 #. 5.8/py/dialogs.py:300
 msgid "Directory to open:"
-msgstr ""
+msgstr "Megnyitandó könyvtár:"
 
 #. 5.8/py/dialogs.py:375 4.8/py/dialogs.py:225
 #, python-brace-format
@@ -548,11 +538,11 @@ msgstr "Egyéni ikon használata"
 #. 5.8->settings-schema.json->switch_different-icon-no-connected-
 #. devices->description
 msgid "Display a different icon when no devices are connected"
-msgstr ""
+msgstr "Másik ikon megjelenítése, ha nincsenek csatlakoztatva eszközök"
 
 #. 5.8->settings-schema.json->icon_no-connected-devices->description
 msgid "Icon to use when no devices are connected"
-msgstr ""
+msgstr "Ha nincs csatlakoztatva eszköz, ezt az ikont kell használni"
 
 #. 5.8->settings-schema.json->button_open-kdec-settings->description
 #. 4.8->settings-schema.json->button_open-kdec-settings->description
@@ -692,14 +682,12 @@ msgstr "Fájl(ok) küldéséhez menüpont engedélyezése"
 
 #. 5.8->settings-schema.json->module_sftp_description->description
 #. 4.8->settings-schema.json->module_sftp_description->description
-#, fuzzy
 msgid "Lets you remotely browse the storage of the device"
-msgstr ""
-"Lehetővé teszi, hogy távolról böngéssze az eszközön kiválasztott tárterületet"
+msgstr "Lehetővé teszi az eszköz tárhelyének távoli böngészését."
 
 #. 5.8->settings-schema.json->module_sftp_selectFirstDirectory->description
 msgid "Select the first directory automatically"
-msgstr ""
+msgstr "Az első könyvtár automatikus kijelölése"
 
 #. 5.8->settings-schema.json->module_sms_description->description
 #. 4.8->settings-schema.json->module_sms_description->description

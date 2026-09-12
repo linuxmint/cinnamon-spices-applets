@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-06-30 17:25+0200\n"
-"PO-Revision-Date: 2026-06-01 16:06+0200\n"
+"PO-Revision-Date: 2026-09-12 08:04+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -358,20 +358,19 @@ msgstr "Megosztott"
 
 #. 5.6/applet.js:2136 5.6/applet.js:2177
 msgid "ZRAM"
-msgstr ""
+msgstr "ZRAM"
 
 #. 5.6/applet.js:2184
-#, fuzzy
 msgid "Disk size"
-msgstr "Lemezek"
+msgstr "Lemezméret"
 
 #. 5.6/applet.js:2185
 msgid "Data"
-msgstr ""
+msgstr "Adat"
 
 #. 5.6/applet.js:2186
 msgid "Compressed"
-msgstr ""
+msgstr "Tömörített"
 
 #. 5.6/applet.js:2242
 msgid "CPUs"
@@ -1184,6 +1183,8 @@ msgstr "Cserehely eszköztipp engedélyezése"
 #. 5.6->settings-schema.json->Swap_enabledZramTooltip->description
 msgid "Enable ZRAM Tooltip (only shown if /dev/zram0 exists)"
 msgstr ""
+"ZRAM-eszköztipp engedélyezése (csak akkor jelenik meg, ha a /dev/zram0 "
+"létezik)"
 
 #. 5.6->settings-schema.json->Mem_chartType->description
 msgid "Chart Type"
@@ -1214,17 +1215,18 @@ msgid "Origin at 12 o'clock"
 msgstr "Eredet 12 órakor"
 
 #. 5.6->settings-schema.json->Mem_showAmountsInTooltip->description
-#, fuzzy
 msgid "Show Memory/Swap byte amounts (Total, Used, Available) in the tooltip"
 msgstr ""
-"A teljes, a felhasznált és az elérhető memória mennyiségének (bájtban) "
-"megjelenítése az eszköztippben"
+"Memória-/swap-bájtmennyiségek (összesen, használt, elérhető) megjelenítése "
+"az eszköztippben"
 
 #. 5.6->settings-schema.json->Mem_showBytesInTooltip->description
 msgid ""
 "Tooltip Memory/Swap amounts: ON = SI units (kB, MB, GB); OFF = IEC binary "
 "units (KiB, MiB, GiB)"
 msgstr ""
+"Eszköztipp Memória/Swap mennyisége: BE = SI-egységek (kB, MB, GB); KI = IEC "
+"bináris egységek (KiB, MiB, GiB)"
 
 #. 5.6->settings-schema.json->Mem_value_display->description
 msgid "Display memory usage percentage"
@@ -1300,9 +1302,8 @@ msgid "25%, left side"
 msgstr "25%, bal oldal"
 
 #. 5.6->settings-schema.json->Mem_swapWidth->options
-#, fuzzy
 msgid "50%, left side"
-msgstr "25%, bal oldal"
+msgstr "50%, bal oldal"
 
 #. 5.6->settings-schema.json->Mem_swapWidth->tooltip
 msgid ""
@@ -1550,7 +1551,7 @@ msgstr "Kitöltés"
 #. 5.6->settings-schema.json->Net_total1decimal->description
 #. 5.6->settings-schema.json->Disk_speed1decimal->description
 msgid "Show 1 decimal"
-msgstr ""
+msgstr "Mutasson 1 tizedesjegyet"
 
 #. 5.6->settings-schema.json->color0->description
 msgid "Color #0"
