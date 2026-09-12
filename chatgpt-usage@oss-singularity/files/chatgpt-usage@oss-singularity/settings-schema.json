@@ -1,0 +1,339 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["general-page", "colors-page", "notifications-page"],
+    "general-page": {
+      "type": "page",
+      "title": "General",
+      "sections": ["data-section", "display-section"]
+    },
+    "colors-page": {
+      "type": "page",
+      "title": "Colors",
+      "sections": ["panel-color-section", "color-section", "threshold-section"]
+    },
+    "notifications-page": {
+      "type": "page",
+      "title": "Notifications",
+      "sections": ["reset-notification-section", "low-notification-section"]
+    },
+    "data-section": {
+      "type": "section",
+      "title": "Usage data",
+      "keys": [
+        "refresh-interval",
+        "activity-bucket-minutes",
+        "installation-paths"
+      ]
+    },
+    "display-section": {
+      "type": "section",
+      "title": "Applet display",
+      "keys": [
+        "show-panel-icon",
+        "show-window-labels",
+        "show-model-specific-limits",
+        "show-model-limits-in-panel",
+        "show-weekly-with-five-hour",
+        "font-size",
+        "separator"
+      ]
+    },
+    "panel-color-section": {
+      "type": "section",
+      "title": "Panel text",
+      "keys": ["panel-text-color", "show-panel-threshold-colors"]
+    },
+    "color-section": {
+      "type": "section",
+      "title": "Colors",
+      "keys": ["show-colors", "normal-color", "warning-color", "critical-color"]
+    },
+    "threshold-section": {
+      "type": "section",
+      "title": "Remaining usage thresholds",
+      "keys": ["warning-remaining", "critical-remaining"]
+    },
+    "reset-notification-section": {
+      "type": "section",
+      "title": "Weekly limit refreshes",
+      "keys": [
+        "notify-all-weekly-resets",
+        "notify-codex-weekly-reset-control",
+        "notify-spark-weekly-reset-control"
+      ]
+    },
+    "low-notification-section": {
+      "type": "section",
+      "title": "Low remaining usage",
+      "keys": [
+        "enable-five-hour-low-notifications",
+        "five-hour-warning-remaining-control",
+        "five-hour-critical-remaining-control",
+        "enable-weekly-low-notifications",
+        "weekly-warning-remaining-control",
+        "weekly-critical-remaining-control"
+      ]
+    }
+  },
+  "refresh-interval": {
+    "type": "spinbutton",
+    "default": 3,
+    "min": 1,
+    "max": 60,
+    "step": 1,
+    "units": "minutes",
+    "description": "Refresh interval"
+  },
+  "activity-bucket-minutes": {
+    "type": "combobox",
+    "default": "60",
+    "description": "24h activity bucket size",
+    "options": {
+      "1 hour": "60",
+      "2 hours": "120"
+    }
+  },
+  "codex-path": {
+    "type": "entry",
+    "default": "",
+    "description": "codex-cli path (optional)",
+    "tooltip": "Leave empty to find Codex CLI or the ChatGPT app's bundled backend automatically. Set an executable path only to override detection. Example: /home/user/.local/bin/codex"
+  },
+  "chatgpt-app-path": {
+    "type": "entry",
+    "default": "",
+    "description": "ChatGPT path (optional)",
+    "tooltip": "Leave empty for automatic detection. Otherwise enter the ChatGPT executable path, such as ~/Applications/ChatGPT/chatgpt, without quotes or arguments. Used to launch the app and find its bundled backend when no Codex CLI is installed. An explicit Codex backend path takes priority."
+  },
+  "show-panel-icon": {
+    "type": "switch",
+    "default": true,
+    "description": "Show usage icon"
+  },
+  "show-window-labels": {
+    "type": "switch",
+    "default": true,
+    "description": "Show 5h / 7d window labels"
+  },
+  "show-model-specific-limits": {
+    "type": "switch",
+    "default": true,
+    "description": "Show model-specific limits in the applet",
+    "tooltip": "Show additional model limits such as Spark in the menu, history, rings, panel and tooltip. Turn off to show only Codex. Notification preferences are configured separately."
+  },
+  "show-model-limits-in-panel": {
+    "type": "switch",
+    "default": false,
+    "dependency": "show-model-specific-limits",
+    "description": "Show model-specific limits in the panel"
+  },
+  "show-weekly-with-five-hour": {
+    "type": "switch",
+    "default": true,
+    "description": "Show 7d in the panel when 5h is active"
+  },
+  "font-size": {
+    "type": "spinbutton",
+    "default": 100,
+    "min": 60,
+    "max": 125,
+    "step": 5,
+    "units": "%",
+    "description": "Font size"
+  },
+  "separator": {
+    "type": "entry",
+    "default": "\u00b7",
+    "description": "Separator in horizontal panels",
+    "tooltip": "Separators are hidden automatically in vertical panels."
+  },
+  "panel-text-color": {
+    "type": "colorchooser",
+    "default": "#ffffff",
+    "description": "Panel text color",
+    "tooltip": "Base color of panel percentages, window labels and separators. Warning and critical colors can override percentages below the configured thresholds."
+  },
+  "show-panel-threshold-colors": {
+    "type": "switch",
+    "default": true,
+    "description": "Use warning and critical colors in the panel",
+    "tooltip": "Color panel percentages at or below the remaining usage thresholds using the warning and critical colors below. Independent of menu coloring; window labels and separators keep the panel text color."
+  },
+  "show-colors": {
+    "type": "switch",
+    "default": true,
+    "description": "Color values by remaining usage"
+  },
+  "normal-color": {
+    "type": "colorchooser",
+    "default": "#62c7f5",
+    "description": "Normal color"
+  },
+  "warning-color": {
+    "type": "colorchooser",
+    "default": "#f6d32d",
+    "description": "Warning color"
+  },
+  "critical-color": {
+    "type": "colorchooser",
+    "default": "#ff4d8d",
+    "description": "Critical color"
+  },
+  "warning-remaining": {
+    "type": "spinbutton",
+    "default": 25,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Warning at or below"
+  },
+  "critical-remaining": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "Critical at or below"
+  },
+  "notify-all-weekly-resets": {
+    "type": "switch",
+    "default": true,
+    "description": "Notify when any model 7d limit refreshes"
+  },
+  "notify-codex-weekly-reset": {
+    "type": "switch",
+    "default": true,
+    "description": "Notify when 7d limits reset"
+  },
+  "notify-spark-weekly-reset": {
+    "type": "switch",
+    "default": true,
+    "description": "Notify when 7d Spark limits reset"
+  },
+  "notify-codex-weekly-reset-control": {
+    "type": "custom",
+    "file": "notification_settings.py",
+    "widget": "NotificationSwitchWidget",
+    "default": "",
+    "setting-key": "notify-codex-weekly-reset",
+    "dependency-key": "notify-all-weekly-resets",
+    "dependency-invert": true,
+    "description": "Notify when 7d limits reset"
+  },
+  "notify-spark-weekly-reset-control": {
+    "type": "custom",
+    "file": "notification_settings.py",
+    "widget": "NotificationSwitchWidget",
+    "default": "",
+    "setting-key": "notify-spark-weekly-reset",
+    "dependency-key": "notify-all-weekly-resets",
+    "dependency-invert": true,
+    "description": "Notify when 7d Spark limits reset"
+  },
+  "enable-five-hour-low-notifications": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable 5h low-limit notifications"
+  },
+  "five-hour-warning-remaining": {
+    "type": "spinbutton",
+    "default": 25,
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "5h warning at or below"
+  },
+  "five-hour-critical-remaining": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 0,
+    "max": 99,
+    "step": 1,
+    "units": "%",
+    "description": "5h critical at or below"
+  },
+  "five-hour-warning-remaining-control": {
+    "type": "custom",
+    "file": "notification_settings.py",
+    "widget": "NotificationThresholdWidget",
+    "default": "",
+    "setting-key": "five-hour-warning-remaining",
+    "dependency-key": "enable-five-hour-low-notifications",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "5h warning at or below"
+  },
+  "five-hour-critical-remaining-control": {
+    "type": "custom",
+    "file": "notification_settings.py",
+    "widget": "NotificationThresholdWidget",
+    "default": "",
+    "setting-key": "five-hour-critical-remaining",
+    "dependency-key": "enable-five-hour-low-notifications",
+    "min": 0,
+    "max": 99,
+    "step": 1,
+    "units": "%",
+    "description": "5h critical at or below"
+  },
+  "enable-weekly-low-notifications": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable 7d low-limit notifications"
+  },
+  "weekly-warning-remaining": {
+    "type": "spinbutton",
+    "default": 25,
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "7d warning at or below"
+  },
+  "weekly-critical-remaining": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 0,
+    "max": 99,
+    "step": 1,
+    "units": "%",
+    "description": "7d critical at or below"
+  },
+  "weekly-warning-remaining-control": {
+    "type": "custom",
+    "file": "notification_settings.py",
+    "widget": "NotificationThresholdWidget",
+    "default": "",
+    "setting-key": "weekly-warning-remaining",
+    "dependency-key": "enable-weekly-low-notifications",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "units": "%",
+    "description": "7d warning at or below"
+  },
+  "weekly-critical-remaining-control": {
+    "type": "custom",
+    "file": "notification_settings.py",
+    "widget": "NotificationThresholdWidget",
+    "default": "",
+    "setting-key": "weekly-critical-remaining",
+    "dependency-key": "enable-weekly-low-notifications",
+    "min": 0,
+    "max": 99,
+    "step": 1,
+    "units": "%",
+    "description": "7d critical at or below"
+  },
+  "installation-paths": {
+    "type": "custom",
+    "file": "path_settings.py",
+    "widget": "InstallationPaths"
+  }
+}
