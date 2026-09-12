@@ -1,0 +1,128 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "account-page",
+            "display-page"
+        ],
+        "account-page": {
+            "type": "page",
+            "title": "Account",
+            "sections": [
+                "credentials-section",
+                "cadence-section"
+            ]
+        },
+        "display-page": {
+            "type": "page",
+            "title": "Display",
+            "sections": [
+                "filter-section",
+                "panel-section"
+            ]
+        },
+        "credentials-section": {
+            "type": "section",
+            "title": "Live Tennis API key",
+            "keys": [
+                "credentials-label",
+                "api-key"
+            ]
+        },
+        "cadence-section": {
+            "type": "section",
+            "title": "Updates",
+            "keys": [
+                "cadence-label",
+                "refresh-minutes"
+            ]
+        },
+        "filter-section": {
+            "type": "section",
+            "title": "Which matches",
+            "keys": [
+                "tour",
+                "draw",
+                "menu-limit"
+            ]
+        },
+        "panel-section": {
+            "type": "section",
+            "title": "Panel",
+            "keys": [
+                "show-icon",
+                "cycle-seconds"
+            ]
+        }
+    },
+    "credentials-label": {
+        "type": "label",
+        "description": "This applet reads live scores from the Live Tennis API, a third-party service. A free key (no card) is issued at livetennisapi.com and is enough for everything this applet does. Until a key is entered the applet makes no network requests at all."
+    },
+    "api-key": {
+        "type": "entry",
+        "default": "",
+        "description": "API key",
+        "tooltip": "Paste the key from your Live Tennis API account. It is sent only to api.livetennisapi.com, in a request header, and is never written to the Cinnamon log."
+    },
+    "cadence-label": {
+        "type": "label",
+        "description": "A free key allows 100 requests a day. This applet spends one request per update, so 15 minutes (96 a day) is the fastest cadence a free key can sustain for a whole day. Shorter intervals are not offered, and the applet enforces the 15-minute floor itself."
+    },
+    "refresh-minutes": {
+        "type": "spinbutton",
+        "default": 15,
+        "min": 15,
+        "max": 240,
+        "step": 5,
+        "units": "minutes",
+        "description": "Fetch new scores every"
+    },
+    "tour": {
+        "type": "combobox",
+        "default": "",
+        "description": "Tour",
+        "options": {
+            "All tours": "",
+            "ATP": "atp",
+            "WTA": "wta",
+            "Challenger": "challenger",
+            "ITF": "itf"
+        }
+    },
+    "draw": {
+        "type": "combobox",
+        "default": "",
+        "description": "Draw",
+        "options": {
+            "Singles and doubles": "",
+            "Singles only": "singles",
+            "Doubles only": "doubles"
+        },
+        "tooltip": "Team ties, where the feed does not say which rubber a match belongs to, are left out by either of the narrower choices. This choice is applied to scores already fetched, so changing it costs no requests."
+    },
+    "menu-limit": {
+        "type": "spinbutton",
+        "default": 12,
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "units": "matches",
+        "description": "List at most"
+    },
+    "show-icon": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show an icon on the panel"
+    },
+    "cycle-seconds": {
+        "type": "spinbutton",
+        "default": 8,
+        "min": 3,
+        "max": 60,
+        "step": 1,
+        "units": "seconds",
+        "description": "Show the next match every",
+        "tooltip": "How long each match stays on the panel. This only rotates scores already fetched, so it costs no requests and does not affect your daily allowance."
+    }
+}
