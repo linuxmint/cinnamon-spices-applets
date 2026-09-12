@@ -18,6 +18,8 @@ class NetworkUsageApplet extends Applet.TextApplet {
         this.settings.bind("decimal-places", "decimal_places", this.on_settings_changed);
         this.settings.bind("hide-umbral", "hide_umbral", this.on_settings_changed);
         this.settings.bind("display-style", "display_style", this.on_settings_changed);
+        this.settings.bind("display-width", "display_width", this.on_settings_changed);
+        this.settings.bind("display-padding", "display_padding", this.on_settings_changed);
 
         this.set_applet_tooltip("Click for more details");
 
@@ -42,12 +44,15 @@ class NetworkUsageApplet extends Applet.TextApplet {
             this.devices = GTop.glibtop.get_netlist(new GTop.glibtop_netlist()).filter(device => device !== "lo");
         }
 
+        this.applyLayout();
+
         this.update();
     }
 
     on_settings_changed() {
         //TODO: This causes performance issues
         //this.update();
+        this.applyLayout();
     }
 
     on_applet_clicked(event) {
@@ -116,6 +121,25 @@ class NetworkUsageApplet extends Applet.TextApplet {
         const index = Math.floor(Math.log(bytes) / Math.log(kilo));
 
         return parseFloat((bytes / Math.pow(kilo, index)).toFixed(decimals)) + " " + sizes[index];
+    }
+
+    applyLayout()
+    {
+        const width = Number(this.display_width) || 0;
+        const padding = Number(this.display_padding) || 0;
+        let width_style = "";
+        let padding_style = ""
+
+        if(width > 0)
+        {
+            width_style = "max-width: " + width + "em; min-width: " + width + "em; ";
+        }
+        if(padding > 0)
+        {
+            padding_style = "padding-right: " + padding + "em; padding-left: " + padding + "em;";
+        }
+
+        this._applet_label.set_style("font-variant-numeric: tabular-nums; " + width_style + padding_style);
     }
 
     on_applet_removed_from_panel() {
