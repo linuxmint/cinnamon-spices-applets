@@ -34,12 +34,33 @@
     },
     "dynamic_wallpaper_warning": {
         "type": "label",
-        "description": "Warning: When using dynamic wallpapers, desktop icon toggling may be visually obscured by the wallpaper."
+        "description": "Note: When using live wallpapers, switching between showing and hiding desktop icons may not work."
+    },
+
+    "global_settings_label": {
+        "type": "header",
+        "description": "Global Settings"
+    },
+    "menu_text_size": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "description": "Menu item text size (0 is the default)"
+    },
+    "menu_icon_size": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 16,
+        "max": 48,
+        "step": 2,
+        "description": "Menu item icon size"
     },
 
     "quit_label": {
         "type": "header",
-        "description": "Shutdown"
+        "description": "Quit"
     },
     "quit": {
         "type" : "checkbox",
@@ -115,7 +136,7 @@
     },
     "custom_position": {
         "type": "combobox",
-        "default": 1,
+        "default": 0,
         "description": "Custom items position",
         "options": {
             "Above built-in items": 0,
@@ -135,7 +156,13 @@
     },
     "custom_items": {
         "type": "list",
-        "default": [],
+        "default": [
+            {
+                "name": "Neofetch",
+                "icon": "linuxmint-logo-badge-symbolic",
+                "command": "x-terminal-emulator -e bash -c 'neofetch; exec bash'"
+            }
+        ],
         "description": "Add custom menu items",
         "columns": [
             {

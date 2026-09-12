@@ -31,7 +31,7 @@ msgstr "关机菜单"
 
 #: ../applet.js:84
 msgid "Quit"
-msgstr "关机"
+msgstr "退出"
 
 #: ../applet.js:89
 msgid "Log out"
@@ -76,8 +76,20 @@ msgid "Toggle desktop icons visibility"
 msgstr "显示/隐藏桌面图标"
 
 #: settings-schema.json
-msgid "Warning: When using dynamic wallpapers, desktop icon toggling may be visually obscured by the wallpaper."
-msgstr "警告：使用动态壁纸时，切换桌面图标显示/隐藏可能会被壁纸遮挡。"
+msgid "Note: When using live wallpapers, switching between showing and hiding desktop icons may not work."
+msgstr "提示：使用动态壁纸时，切换桌面图标显示/隐藏可能会失效。"
+
+#: settings-schema.json
+msgid "Global Settings"
+msgstr "全局设置"
+
+#: settings-schema.json
+msgid "Menu item text size (0 is the default)"
+msgstr "菜单项文字大小（0为默认）"
+
+#: settings-schema.json
+msgid "Menu item icon size"
+msgstr "菜单项图标大小"
 
 #: .settings:quit_label/description
 msgid "Shutdown"
@@ -85,15 +97,15 @@ msgstr "关机"
 
 #: .settings:quit/description
 msgid "Add quit to the menu"
-msgstr "在菜单中添加关机"
+msgstr "在菜单中添加退出"
 
 #: .settings:quit_icon/description
 msgid "The quit icon"
-msgstr "关机图标"
+msgstr "退出图标"
 
 #: .settings:quit_cmd/description
 msgid "The quit command"
-msgstr "关机命令"
+msgstr "退出命令"
 
 #: .settings:show_separator/description
 msgid "Show separator"

@@ -1,6 +1,6 @@
 // name： ShutdownMenu-change
 // description： providing a shutdown menu with mouse wheel workspace switching, middle-click actions, and custom menu items.
-// version: 1.3 (11-09-2026)
+// version: 1.3.1 (12-09-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
@@ -18,7 +18,6 @@ const Settings = imports.ui.settings;
 const Main = imports.ui.main;          
 
 const UUID = "ShutdownMenu-change@yoo";
-const AppletUUID = "ShutdownMenu-change@yoo";
 
 Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 function _(str) {
@@ -40,7 +39,7 @@ MyApplet.prototype = {
             this.menu = new Applet.AppletPopupMenu(this, orientation);
             this.menuManager.addMenu(this.menu);
 
-            this.settings = new Settings.AppletSettings(this, AppletUUID, instanceId);
+            this.settings = new Settings.AppletSettings(this, UUID, instanceId);
             this.bindSettings();    
 
             this._updatePanelIcon();
@@ -105,6 +104,13 @@ MyApplet.prototype = {
         );
         this.settings.bindProperty(Settings.BindingDirection.IN,
             "show_custom_separator", "show_custom_separator", this._rebuildMenu, null
+        );
+
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "menu_text_size", "menu_text_size", this._rebuildMenu, null
+        );
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "menu_icon_size", "menu_icon_size", this._rebuildMenu, null
         );
 
         this.settings.bindProperty(Settings.BindingDirection.IN,
@@ -210,6 +216,7 @@ MyApplet.prototype = {
     
     _createMenuItem: function(displayName, iconName, command) {
         let menuItem = new PopupMenu.PopupBaseMenuItem();
+        let size = this.menu_icon_size || 24;
 
         let icon;
         if (iconName && GLib.path_is_absolute(iconName)) {
@@ -218,15 +225,15 @@ MyApplet.prototype = {
                 file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
                 icon = new St.Icon({
                     gicon: new Gio.FileIcon({ file: file }),
-                    icon_size: 24
+                    icon_size: size
                 });
             } catch (e) {
-                icon = new St.Icon({ icon_name: "image-missing", icon_size: 24 });
+                icon = new St.Icon({ icon_name: "image-missing", icon_size: size });
             }
         } else {
             icon = new St.Icon({
                 icon_name: iconName || "image-missing",
-                icon_size: 24
+                icon_size: size
             });
         }
         menuItem.addActor(icon);
@@ -235,6 +242,10 @@ MyApplet.prototype = {
             text: displayName,
             y_align: Clutter.ActorAlign.CENTER
         });
+        let textSize = parseInt(this.menu_text_size, 10);
+        if (!isNaN(textSize) && textSize > 0) {
+            label.set_style('font-size: ' + textSize + 'px;');
+        }
         menuItem.addActor(label, { expand: true });
 
         menuItem._command = command;
