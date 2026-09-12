@@ -4,9 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: window-closer@stefan-schmidbauer 1.0.2\n"
-"Report-Msgid-Bugs-To: https://github.com/Stefan-Schmidbauer/cinnamon-window-closer/issues\n"
-"POT-Creation-Date: 2026-04-10 18:56+0200\n"
+"Project-Id-Version: window-closer@stefan-schmidbauer 1.1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-12 20:12+0200\n"
 "PO-Revision-Date: 2026-04-12 15:32+0200\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: none\n"
@@ -16,18 +17,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: applet.js:37 applet.js:123
+#. metadata.json->name
+#. applet.js:70 applet.js:368
 msgid "Window Closer"
 msgstr "Window Closer"
 
-#: applet.js:131
+#. applet.js:377
+msgid "Click a window to close it · Scroll for more · Esc to exit"
+msgstr ""
+"Cliquez sur une fenêtre pour la fermer · Faites défiler pour en voir plus · "
+"Échap pour quitter"
+
+#. applet.js:378
 msgid "Click a window to close it · Esc to exit"
 msgstr "Cliquez sur une fenêtre pour la fermer · Échap pour quitter"
 
-#: applet.js:198
+#. applet.js:506
 msgid "No windows open"
 msgstr "Aucune fenêtre ouverte"
 
-#: applet.js:366
+#. applet.js:689
 msgid "All windows closed!"
 msgstr "Toutes les fenêtres sont fermées !"
+
+#. metadata.json->description
+msgid "Click to see all open windows. Click a window to close it."
+msgstr ""
+"Cliquez pour voir toutes les fenêtres ouvertes. Cliquez sur une fenêtre pour "
+"la fermer."

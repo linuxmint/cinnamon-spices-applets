@@ -8,40 +8,39 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-08-12 20:12+0200\n"
-"PO-Revision-Date: 2026-04-10 13:43-0400\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: es\n"
+"PO-Revision-Date: 2026-08-20 21:05+0200\n"
+"Last-Translator: Stefan-Schmidbauer\n"
+"Language-Team: none\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. metadata.json->name
 #. applet.js:70 applet.js:368
 msgid "Window Closer"
-msgstr "Cerrador de ventanas"
+msgstr "Fenster schließen"
 
 #. applet.js:377
 msgid "Click a window to close it · Scroll for more · Esc to exit"
 msgstr ""
-"Haga clic en una ventana para cerrarla · Desplácese para ver más · Pulse Esc "
-"para salir"
+"Fenster anklicken zum Schließen · Scrollen für weitere · Esc zum Beenden"
 
 #. applet.js:378
 msgid "Click a window to close it · Esc to exit"
-msgstr "Haga clic en una ventana para cerrarla · Pulse Esc para salir"
+msgstr "Fenster anklicken zum Schließen · Esc zum Beenden"
 
 #. applet.js:506
 msgid "No windows open"
-msgstr "No hay ventanas abiertas"
+msgstr "Keine Fenster geöffnet"
 
 #. applet.js:689
 msgid "All windows closed!"
-msgstr "¡Todas las ventanas cerradas!"
+msgstr "Alle Fenster geschlossen!"
 
 #. metadata.json->description
 msgid "Click to see all open windows. Click a window to close it."
 msgstr ""
-"Haga clic para ver todas las ventanas abiertas. Haga clic en una ventana "
-"para cerrarla."
+"Klicken, um alle geöffneten Fenster zu sehen. Ein Fenster anklicken, um es "
+"zu schließen."

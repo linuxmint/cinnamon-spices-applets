@@ -7,6 +7,7 @@ const Meta = imports.gi.Meta;
 const Mainloop = imports.mainloop;
 const Pango = imports.gi.Pango;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
 
 const UUID = "window-closer@stefan-schmidbauer";
@@ -17,10 +18,44 @@ function _(str) {
     return Gettext.dgettext(UUID, str);
 }
 
-const CARD_WIDTH = 220;
-const CARD_HEIGHT = 200;
-const CARD_SPACING = 16;
-const CARDS_PER_ROW = 5;
+// Base metrics, designed for a 1920x1080 screen at ui_scale 1.
+// Everything is multiplied by a factor derived from the actual monitor size,
+// so cards and labels stay readable on high resolution screens.
+const BASE_SCREEN_WIDTH = 1920;
+const BASE_SCREEN_HEIGHT = 1080;
+
+const BASE_CARD_WIDTH = 240;
+const BASE_CARD_HEIGHT = 215;
+const BASE_THUMB_HEIGHT = 130;
+const BASE_CARD_PADDING = 10;
+const BASE_CARD_SPACING = 16;
+const BASE_DIALOG_PADDING = 40;
+const BASE_HEADER_HEIGHT = 80;
+const BASE_FALLBACK_ICON = 64;
+const BASE_SMALL_ICON = 20;
+
+const DIALOG_MARGIN = 40;
+const MAX_CARDS_PER_ROW = 6;
+const ABS_MAX_CARDS_PER_ROW = 10;
+
+// Scale range: the grid starts at MIN_FACTOR..MAX_FACTOR and may shrink when a
+// lot of windows have to fit on screen — but only down to SHRINK_RATIO of its
+// ideal size. Below that the cards would be too small to recognise, so the
+// grid keeps its size and scrolls instead.
+const MIN_FACTOR = 0.9;
+const MAX_FACTOR = 2.0;
+const SHRINK_RATIO = 0.7;
+const SHRINK_FLOOR = 0.6;
+const SCROLLBAR_WIDTH = 16;
+
+// Resolution alone is not enough: a 2560x1600 laptop panel packs the same
+// pixels into half the area of a 4K desktop screen, which makes identically
+// sized cards look tiny on it. People on such screens usually turn up the
+// desktop text scaling, so that setting is taken as the cue to enlarge the
+// grid as well. It is capped, because beyond that the grid would rather
+// scroll than push cards off screen.
+const INTERFACE_SCHEMA = "org.cinnamon.desktop.interface";
+const MAX_TEXT_SCALE_BOOST = 1.6;
 
 function WindowCloserApplet(metadata, orientation, panelHeight, instanceId) {
     this._init(metadata, orientation, panelHeight, instanceId);
@@ -38,10 +73,32 @@ WindowCloserApplet.prototype = {
 
         this._backdrop = null;
         this._dialog = null;
+        this._scrollView = null;
         this._isModal = false;
         this._readyForInput = false;
         this._idleId = 0;
         this._timeoutId = 0;
+        this._metrics = null;
+        this._pendingThumbs = [];
+    },
+
+    // Scales a window clone into its thumbnail bin. The bin size is only known
+    // after the first layout pass, so this is called again from the idle
+    // handler once the dialog has been allocated.
+    _fitCloneToBin: function(entry) {
+        let boxW = entry.bin.get_width();
+        let boxH = entry.bin.get_height();
+
+        if (boxW <= 0 || boxH <= 0) {
+            boxW = this._metrics.thumbWidth * this._metrics.uiScale;
+            boxH = this._metrics.thumbHeight * this._metrics.uiScale;
+        }
+
+        let scale = Math.min(boxW / entry.winW, boxH / entry.winH);
+        if (!(scale > 0)) return;
+
+        entry.clone.set_size(Math.max(1, Math.round(entry.winW * scale)),
+                             Math.max(1, Math.round(entry.winH * scale)));
     },
 
     on_applet_clicked: function() {
@@ -82,20 +139,178 @@ WindowCloserApplet.prototype = {
         return windows;
     },
 
+    // The overlay belongs on the monitor whose panel holds this applet, not
+    // necessarily on the primary one.
+    _getAppletMonitor: function() {
+        try {
+            if (this.panel && this.panel.monitorIndex !== undefined) {
+                let monitor = Main.layoutManager.monitors[this.panel.monitorIndex];
+                if (monitor) return monitor;
+            }
+        } catch(e) {}
+
+        try {
+            let monitor = Main.layoutManager.findMonitorForActor(this.actor);
+            if (monitor) return monitor;
+        } catch(e) {}
+
+        return Main.layoutManager.primaryMonitor;
+    },
+
+    // Bounding box over all monitors, so the backdrop dims every screen and a
+    // click anywhere closes the overlay.
+    _getBackdropRect: function() {
+        let monitors = Main.layoutManager.monitors;
+        if (!monitors || monitors.length === 0) {
+            let m = this._getAppletMonitor();
+            return { x: m.x, y: m.y, width: m.width, height: m.height };
+        }
+
+        let x1 = monitors[0].x;
+        let y1 = monitors[0].y;
+        let x2 = monitors[0].x + monitors[0].width;
+        let y2 = monitors[0].y + monitors[0].height;
+
+        for (let i = 1; i < monitors.length; i++) {
+            let m = monitors[i];
+            if (m.x < x1) x1 = m.x;
+            if (m.y < y1) y1 = m.y;
+            if (m.x + m.width > x2) x2 = m.x + m.width;
+            if (m.y + m.height > y2) y2 = m.y + m.height;
+        }
+
+        return { x: x1, y: y1, width: x2 - x1, height: y2 - y1 };
+    },
+
+    // Metrics for one concrete scale factor. Returns the grid layout plus a
+    // "fits" flag telling the caller whether it still fits on the monitor.
+    _metricsForFactor: function(factor, logW, logH, windowCount, reserveScrollbar) {
+        let px = function(base, min) {
+            return Math.max(min || 1, Math.round(base * factor));
+        };
+
+        let spacing = px(BASE_CARD_SPACING, 8);
+        let dialogPadding = px(BASE_DIALOG_PADDING, 20);
+        let cardWidth = px(BASE_CARD_WIDTH);
+        let cardHeight = px(BASE_CARD_HEIGHT);
+        let cardPadding = px(BASE_CARD_PADDING, 6);
+
+        let availWidth = logW - 2 * DIALOG_MARGIN - 2 * dialogPadding;
+        let availHeight = logH - 2 * DIALOG_MARGIN - 2 * dialogPadding - px(BASE_HEADER_HEIGHT);
+
+        if (reserveScrollbar) availWidth -= SCROLLBAR_WIDTH;
+
+        // Once the cards have to shrink, allow wider rows instead of pushing
+        // the grid further down the screen.
+        let maxPerRow = Math.min(ABS_MAX_CARDS_PER_ROW,
+                                 Math.max(MAX_CARDS_PER_ROW,
+                                          Math.round(MAX_CARDS_PER_ROW / factor)));
+
+        let perRow = Math.floor((availWidth + spacing) / (cardWidth + spacing));
+        perRow = Math.max(1, Math.min(maxPerRow, perRow));
+
+        let rows = 1;
+        if (windowCount > 0) {
+            perRow = Math.min(perRow, windowCount);
+            rows = Math.ceil(windowCount / perRow);
+            // Balance the grid so the last row is not nearly empty.
+            perRow = Math.ceil(windowCount / rows);
+        }
+
+        let gridWidth = perRow * cardWidth + (perRow - 1) * spacing;
+        let gridHeight = rows * cardHeight + (rows - 1) * spacing;
+
+        return {
+            factor: factor,
+            cardsPerRow: perRow,
+            cardWidth: cardWidth,
+            cardHeight: cardHeight,
+            cardPadding: cardPadding,
+            cardSpacing: spacing,
+            dialogPadding: dialogPadding,
+            thumbHeight: px(BASE_THUMB_HEIGHT),
+            thumbWidth: cardWidth - 2 * cardPadding,
+            fallbackIconSize: px(BASE_FALLBACK_ICON),
+            smallIconSize: px(BASE_SMALL_ICON, 16),
+            headerFont: px(18, 14),
+            subtitleFont: px(12, 11),
+            appNameFont: px(13, 11),
+            titleFont: px(11, 9),
+            emptyFont: px(16, 14),
+            gridHeight: gridHeight,
+            availHeight: availHeight,
+            fits: gridWidth <= availWidth && gridHeight <= availHeight
+        };
+    },
+
+    // How much larger the user asked the desktop to be. St applies ui_scale to
+    // CSS pixels on HiDPI, but not the text scaling factor, and the sizes here
+    // are given in pixels — so it has to be applied by hand.
+    _getTextScaleBoost: function() {
+        try {
+            let settings = new Gio.Settings({ schema_id: INTERFACE_SCHEMA });
+            let scale = settings.get_double("text-scaling-factor");
+            if (!(scale > 0)) return 1;
+            return Math.max(1, Math.min(MAX_TEXT_SCALE_BOOST, scale));
+        } catch(e) {
+            return 1;
+        }
+    },
+
+    // Derives the scale factor from the monitor geometry. On HiDPI setups St
+    // already scales CSS pixels by global.ui_scale, so we work in logical
+    // pixels and only scale up what the higher resolution actually gains.
+    _computeMetrics: function(monitor, windowCount) {
+        let uiScale = 1;
+        try {
+            if (global.ui_scale > 0) uiScale = global.ui_scale;
+        } catch(e) {}
+
+        let logW = monitor.width / uiScale;
+        let logH = monitor.height / uiScale;
+
+        let textBoost = this._getTextScaleBoost();
+
+        let factor = Math.min(logW / BASE_SCREEN_WIDTH, logH / BASE_SCREEN_HEIGHT) * textBoost;
+        factor = Math.max(MIN_FACTOR, Math.min(MAX_FACTOR, factor));
+
+        // Cards shrink at most to SHRINK_RATIO of their ideal size...
+        let shrinkFloor = Math.max(SHRINK_FLOOR, factor * SHRINK_RATIO);
+
+        let metrics = this._metricsForFactor(factor, logW, logH, windowCount, false);
+        while (!metrics.fits && factor > shrinkFloor) {
+            factor = Math.max(shrinkFloor, factor * 0.95);
+            metrics = this._metricsForFactor(factor, logW, logH, windowCount, false);
+        }
+
+        // ...anything beyond that scrolls, which costs a bit of width.
+        metrics.needsScroll = !metrics.fits;
+        if (metrics.needsScroll) {
+            metrics = this._metricsForFactor(factor, logW, logH, windowCount, true);
+            metrics.needsScroll = true;
+        }
+
+        metrics.uiScale = uiScale;
+        metrics.textBoost = textBoost;
+        return metrics;
+    },
+
     _openOverlay: function() {
-        let monitor = Main.layoutManager.primaryMonitor;
+        let monitor = this._getAppletMonitor();
         let self = this;
         let windows = this._getWindows();
 
         this._readyForInput = false;
+        this._metrics = this._computeMetrics(monitor, windows.length);
 
-        // --- Fullscreen dark backdrop ---
+        // --- Fullscreen dark backdrop (all monitors) ---
+        let backdropRect = this._getBackdropRect();
         this._backdrop = new St.Bin({
             reactive: true,
-            x: monitor.x,
-            y: monitor.y,
-            width: monitor.width,
-            height: monitor.height,
+            x: backdropRect.x,
+            y: backdropRect.y,
+            width: backdropRect.width,
+            height: backdropRect.height,
             style: "background-color: rgba(0,0,0,0.7);"
         });
 
@@ -114,22 +329,25 @@ WindowCloserApplet.prototype = {
             style: "background-color: rgba(30,30,30,0.95); " +
                    "border-radius: 16px; " +
                    "border: 1px solid rgba(255,255,255,0.15); " +
-                   "padding: 40px;"
+                   "padding: " + this._metrics.dialogPadding + "px;"
         });
         this._monitor = monitor;
 
         // Header
         let header = new St.Label({
             text: _("Window Closer"),
-            style: "font-size: 18px; font-weight: bold; color: rgba(255,255,255,0.9); " +
-                   "padding-bottom: 6px;"
+            style: "font-size: " + this._metrics.headerFont + "px; font-weight: bold; " +
+                   "color: rgba(255,255,255,0.9); padding-bottom: 6px;"
         });
         header.set_x_align(Clutter.ActorAlign.CENTER);
         this._dialog.add_child(header);
 
         let subtitle = new St.Label({
-            text: _("Click a window to close it \u00b7 Esc to exit"),
-            style: "font-size: 12px; color: rgba(255,255,255,0.45); padding-bottom: 20px;"
+            text: this._metrics.needsScroll
+                ? _("Click a window to close it \u00b7 Scroll for more \u00b7 Esc to exit")
+                : _("Click a window to close it \u00b7 Esc to exit"),
+            style: "font-size: " + this._metrics.subtitleFont + "px; " +
+                   "color: rgba(255,255,255,0.45); padding-bottom: 20px;"
         });
         subtitle.set_x_align(Clutter.ActorAlign.CENTER);
         this._dialog.add_child(subtitle);
@@ -141,9 +359,23 @@ WindowCloserApplet.prototype = {
             x_expand: true
         });
 
+        this._pendingThumbs = [];
         this._buildCards(windows);
 
-        this._dialog.add_child(this._cardContainer);
+        if (this._metrics.needsScroll) {
+            // Too many windows to show at a readable size: keep the cards big
+            // and scroll the grid instead.
+            this._scrollView = new St.ScrollView({
+                hscrollbar_policy: St.PolicyType.NEVER,
+                vscrollbar_policy: St.PolicyType.ALWAYS,
+                x_expand: true,
+                style: "height: " + this._metrics.availHeight + "px;"
+            });
+            this._scrollView.add_actor(this._cardContainer);
+            this._dialog.add_child(this._scrollView);
+        } else {
+            this._dialog.add_child(this._cardContainer);
+        }
 
         this._dialog.set_opacity(0);
         Main.layoutManager.addChrome(this._dialog);
@@ -151,12 +383,17 @@ WindowCloserApplet.prototype = {
         // Push modal to grab keyboard + pointer
         this._isModal = Main.pushModal(this._dialog);
 
-        // ESC key on dialog (works because we have modal grab)
+        // Keys on the dialog (work because we have modal grab)
         this._dialog.connect("key-press-event", function(actor, event) {
-            if (event.get_key_symbol() === Clutter.KEY_Escape) {
+            let symbol = event.get_key_symbol();
+
+            if (symbol === Clutter.KEY_Escape) {
                 self._closeOverlay();
                 return Clutter.EVENT_STOP;
             }
+
+            if (self._scrollByKey(symbol)) return Clutter.EVENT_STOP;
+
             return Clutter.EVENT_PROPAGATE;
         });
 
@@ -164,12 +401,20 @@ WindowCloserApplet.prototype = {
         this._idleId = Mainloop.idle_add(function() {
             self._idleId = 0;
             if (!self._dialog) return GLib.SOURCE_REMOVE;
+
+            // Thumbnails now know their real allocation
+            for (let i = 0; i < self._pendingThumbs.length; i++) {
+                try { self._fitCloneToBin(self._pendingThumbs[i]); } catch(e) {}
+            }
+
             let dW = self._dialog.get_width();
             let dH = self._dialog.get_height();
             let m = self._monitor;
             // Clamp if too large
-            if (dW > m.width - 80) self._dialog.set_width(m.width - 80);
-            if (dH > m.height - 80) self._dialog.set_height(m.height - 80);
+            let maxW = m.width - 2 * DIALOG_MARGIN;
+            let maxH = m.height - 2 * DIALOG_MARGIN;
+            if (dW > maxW) self._dialog.set_width(maxW);
+            if (dH > maxH) self._dialog.set_height(maxH);
             dW = self._dialog.get_width();
             dH = self._dialog.get_height();
             self._dialog.set_position(
@@ -187,16 +432,50 @@ WindowCloserApplet.prototype = {
         });
     },
 
+    // Keyboard scrolling as a fallback — the modal grab makes mouse wheel
+    // events unreliable. Steps are derived from the page size so no pixel
+    // unit conversion is needed.
+    _scrollByKey: function(symbol) {
+        if (!this._scrollView) return false;
+
+        let adjustment;
+        try {
+            adjustment = this._scrollView.get_vscroll_bar().get_adjustment();
+        } catch(e) {
+            return false;
+        }
+        if (!adjustment) return false;
+
+        let page = adjustment.page_size;
+        let delta = 0;
+
+        if (symbol === Clutter.KEY_Down) delta = page * 0.4;
+        else if (symbol === Clutter.KEY_Up) delta = -page * 0.4;
+        else if (symbol === Clutter.KEY_Page_Down || symbol === Clutter.KEY_space) delta = page;
+        else if (symbol === Clutter.KEY_Page_Up) delta = -page;
+        else if (symbol === Clutter.KEY_Home) delta = -adjustment.upper;
+        else if (symbol === Clutter.KEY_End) delta = adjustment.upper;
+        else return false;
+
+        let max = Math.max(adjustment.lower, adjustment.upper - page);
+        let value = Math.max(adjustment.lower, Math.min(max, adjustment.value + delta));
+        adjustment.set_value(value);
+
+        return true;
+    },
+
     _buildCards: function(windows) {
         let self = this;
         let tracker = Cinnamon.WindowTracker.get_default();
+        let metrics = this._metrics;
 
         this._cardContainer.destroy_all_children();
 
         if (windows.length === 0) {
             let emptyLabel = new St.Label({
                 text: _("No windows open"),
-                style: "font-size: 16px; color: rgba(255,255,255,0.4); padding: 40px;"
+                style: "font-size: " + metrics.emptyFont + "px; " +
+                       "color: rgba(255,255,255,0.4); padding: 40px;"
             });
             emptyLabel.set_x_align(Clutter.ActorAlign.CENTER);
             this._cardContainer.add_child(emptyLabel);
@@ -207,12 +486,13 @@ WindowCloserApplet.prototype = {
         let cardCount = 0;
 
         for (let i = 0; i < windows.length; i++) {
-            if (cardCount % CARDS_PER_ROW === 0) {
+            if (cardCount % metrics.cardsPerRow === 0) {
                 currentRow = new St.BoxLayout({
                     vertical: false,
                     x_align: Clutter.ActorAlign.CENTER,
                     x_expand: true,
-                    style: "spacing: " + CARD_SPACING + "px; padding-bottom: " + CARD_SPACING + "px;"
+                    style: "spacing: " + metrics.cardSpacing + "px; " +
+                           "padding-bottom: " + metrics.cardSpacing + "px;"
                 });
                 this._cardContainer.add_child(currentRow);
             }
@@ -227,6 +507,7 @@ WindowCloserApplet.prototype = {
 
     _makeCard: function(win, tracker) {
         let self = this;
+        let metrics = this._metrics;
         let title = win.get_title();
         let appName = "";
         let app = null;
@@ -236,15 +517,18 @@ WindowCloserApplet.prototype = {
             if (app) appName = app.get_name() || "";
         } catch(e) {}
 
-        let normalStyle = "width: " + CARD_WIDTH + "px; height: " + CARD_HEIGHT + "px; " +
-                         "background-color: rgba(255,255,255,0.07); " +
-                         "border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); " +
-                         "padding: 10px;";
+        let cardBase = "width: " + metrics.cardWidth + "px; " +
+                       "height: " + metrics.cardHeight + "px; " +
+                       "border-radius: 10px; " +
+                       "padding: " + metrics.cardPadding + "px;";
 
-        let hoverStyle = "width: " + CARD_WIDTH + "px; height: " + CARD_HEIGHT + "px; " +
+        let normalStyle = cardBase +
+                         "background-color: rgba(255,255,255,0.07); " +
+                         "border: 1px solid rgba(255,255,255,0.1);";
+
+        let hoverStyle = cardBase +
                         "background-color: rgba(231,76,60,0.35); " +
-                        "border-radius: 10px; border: 1px solid rgba(231,76,60,0.8); " +
-                        "padding: 10px;";
+                        "border: 1px solid rgba(231,76,60,0.8);";
 
         let card = new St.Button({
             style: normalStyle,
@@ -270,18 +554,25 @@ WindowCloserApplet.prototype = {
                 let winW = actor.get_width();
                 let winH = actor.get_height();
                 if (winW > 0 && winH > 0) {
-                    let thumbW = CARD_WIDTH - 20;
-                    let thumbH = 120;
-                    let scale = Math.min(thumbW / winW, thumbH / winH);
                     let clone = new Clutter.Clone({ source: actor });
-                    clone.set_size(Math.round(winW * scale), Math.round(winH * scale));
 
+                    // The bin size is given in CSS pixels (scaled by St on HiDPI),
+                    // the clone lives in stage pixels — so the final clone size is
+                    // computed from the real allocation once the layout is done.
                     let thumbBin = new St.Bin({
-                        style: "background-color: rgba(0,0,0,0.3); border-radius: 6px;",
+                        style: "background-color: rgba(0,0,0,0.3); border-radius: 6px; " +
+                               "width: " + metrics.thumbWidth + "px; " +
+                               "height: " + metrics.thumbHeight + "px;",
                         x_align: Clutter.ActorAlign.CENTER,
                         y_expand: true
                     });
+                    thumbBin.set_clip_to_allocation(true);
                     thumbBin.set_child(clone);
+
+                    let entry = { clone: clone, bin: thumbBin, winW: winW, winH: winH };
+                    this._fitCloneToBin(entry);
+                    this._pendingThumbs.push(entry);
+
                     cardBox.add_child(thumbBin);
                     thumbAdded = true;
                 }
@@ -289,17 +580,18 @@ WindowCloserApplet.prototype = {
         } catch(e) {}
 
         if (!thumbAdded) {
+            let iconSize = metrics.fallbackIconSize;
             let iconBin = new St.Bin({
                 x_align: Clutter.ActorAlign.CENTER,
                 y_expand: true,
-                style: "padding: 20px;"
+                style: "padding: " + Math.round(20 * metrics.factor) + "px;"
             });
             if (app) {
-                try { iconBin.set_child(app.create_icon_texture(64)); } catch(e) {
-                    iconBin.set_child(new St.Icon({ icon_name: "application-x-executable", icon_size: 64 }));
+                try { iconBin.set_child(app.create_icon_texture(iconSize)); } catch(e) {
+                    iconBin.set_child(new St.Icon({ icon_name: "application-x-executable", icon_size: iconSize }));
                 }
             } else {
-                iconBin.set_child(new St.Icon({ icon_name: "application-x-executable", icon_size: 64 }));
+                iconBin.set_child(new St.Icon({ icon_name: "application-x-executable", icon_size: iconSize }));
             }
             cardBox.add_child(iconBin);
         }
@@ -313,7 +605,7 @@ WindowCloserApplet.prototype = {
 
         if (app) {
             try {
-                let smallIcon = app.create_icon_texture(20);
+                let smallIcon = app.create_icon_texture(metrics.smallIconSize);
                 let iconBin = new St.Bin({ y_align: Clutter.ActorAlign.CENTER });
                 iconBin.set_child(smallIcon);
                 infoBox.add_child(iconBin);
@@ -329,7 +621,8 @@ WindowCloserApplet.prototype = {
         if (appName) {
             let nameLabel = new St.Label({
                 text: appName,
-                style: "font-size: 12px; font-weight: bold; color: rgba(255,255,255,0.9);"
+                style: "font-size: " + metrics.appNameFont + "px; font-weight: bold; " +
+                       "color: rgba(255,255,255,0.9);"
             });
             if (nameLabel.clutter_text) nameLabel.clutter_text.set_ellipsize(Pango.EllipsizeMode.END);
             labelBox.add_child(nameLabel);
@@ -337,7 +630,7 @@ WindowCloserApplet.prototype = {
 
         let titleLabel = new St.Label({
             text: title,
-            style: "font-size: 10px; color: rgba(255,255,255,0.5);"
+            style: "font-size: " + metrics.titleFont + "px; color: rgba(255,255,255,0.5);"
         });
         if (titleLabel.clutter_text) titleLabel.clutter_text.set_ellipsize(Pango.EllipsizeMode.END);
         labelBox.add_child(titleLabel);
@@ -364,7 +657,8 @@ WindowCloserApplet.prototype = {
             if (self._cardContainer.get_n_children() === 0) {
                 let doneLabel = new St.Label({
                     text: _("All windows closed!"),
-                    style: "font-size: 16px; color: rgba(255,255,255,0.4); padding: 40px;"
+                    style: "font-size: " + metrics.emptyFont + "px; " +
+                           "color: rgba(255,255,255,0.4); padding: 40px;"
                 });
                 doneLabel.set_x_align(Clutter.ActorAlign.CENTER);
                 self._cardContainer.add_child(doneLabel);
@@ -392,11 +686,13 @@ WindowCloserApplet.prototype = {
             this._dialog.destroy();
             this._dialog = null;
         }
+        this._scrollView = null;
         if (this._backdrop) {
             Main.layoutManager.removeChrome(this._backdrop);
             this._backdrop.destroy();
             this._backdrop = null;
         }
+        this._pendingThumbs = [];
         this._readyForInput = false;
     },
 
