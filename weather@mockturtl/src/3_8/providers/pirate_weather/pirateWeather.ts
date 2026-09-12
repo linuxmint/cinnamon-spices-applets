@@ -9,6 +9,7 @@ import { ALERT_LEVEL_ORDER } from "../../consts";
 import { ProviderErrorCode, type LocationData, type SunTime, type WeatherProvider } from "../../types";
 import { Services, type Config } from "../../config";
 import { ErrorHandler } from "../../lib/services/error_handler";
+import { RedactUrlValue } from "../../lib/httpLog";
 
 export interface PirateWeatherOptions {
 	apiKey: string;
@@ -44,9 +45,11 @@ export class PirateWeather implements WeatherProvider<Services.PirateWeather, Pi
 	//--------------------------------------------------------
 	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config, options: PirateWeatherOptions): Promise<WeatherData | null> {
 		const unit = this.GetQueryUnit(config);
+		const url = `${this.query}${options.apiKey}/${loc.lat},${loc.lon}`;
 
 		const response = await HttpLib.Instance.LoadJsonAsync<PirateWeatherPayload>({
-			url: `${this.query}${options.apiKey}/${loc.lat},${loc.lon}`,
+			url,
+			logUrl: RedactUrlValue(url, options.apiKey),
 			cancellable,
 			params: {
 				units: this.GetQueryUnit(config),

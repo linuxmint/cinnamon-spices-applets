@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.6.11
+
+* Add QWeather support with dedicated API Host and API Key authentication.
+* Redact provider credentials from diagnostic exports and request logs.
+
 ## 3.6.9
 
 * Fixes [Unit label kph should be km/h (SI unit) #8036](https://github.com/linuxmint/cinnamon-spices-applets/issues/8036)

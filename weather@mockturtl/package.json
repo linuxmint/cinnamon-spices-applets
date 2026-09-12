@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "Adaptation of Gnome Shell's [weather extension](https://github.com/simon04/gnome-shell-extension-weather) for the Cinnamon desktop.",
   "main": "applet.js",
-  "scripts": {
-    "start": "webpack --config webpack.config.js",
-    "watch": "webpack --watch --config webpack.config.js",
-    "lint": "eslint ./src/3_8"
-  },
+	"scripts": {
+		"start": "webpack --config webpack.config.js",
+		"watch": "webpack --watch --config webpack.config.js",
+		"lint": "eslint ./src/3_8",
+		"test": "tsc --project tests/tsconfig.json && node tests/.build/tests/run.js",
+		"typecheck": "tsc --project src/3_8/tsconfig.json --noEmit --skipLibCheck"
+	},
   "sideEffects": false,
   "license": "MIT",
   "author": "Attila Greguss",
