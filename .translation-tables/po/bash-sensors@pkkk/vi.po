@@ -1,0 +1,146 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: bash-sensors@pkkk 1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2021-02-16 20:27+0100\n"
+"PO-Revision-Date: 2025-10-08 20:40+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:79
+msgid "Error: Still waiting for command to finish!"
+msgstr "Lỗi: Vẫn đang chờ lệnh hoàn tất!"
+
+#. metadata.json->name
+msgid "Bash Sensors"
+msgstr "Bash Sensors"
+
+#. metadata.json->description
+msgid ""
+"Write your Bash commands to specify applet output (temperature sensors and "
+"not only!)"
+msgstr ""
+"Viết lệnh Bash để chỉ định đầu ra của applet (cảm biến nhiệt độ và không "
+"chỉ vậy!)"
+
+#. settings-schema.json->head->description
+msgid "Settings - Bash Sensors (write commands in Bash!)"
+msgstr "Cài đặt - Cảm biến Bash (viết lệnh trong Bash!)"
+
+#. settings-schema.json->title1->description
+msgid "Title"
+msgstr "TIêu đề"
+
+#. settings-schema.json->title1->tooltip
+msgid "Title used when displaying notifications"
+msgstr "Tiêu đề được sử dụng khi hiển thị thông báo"
+
+#. settings-schema.json->refreshInterval->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh interval [0 for no refresh]"
+msgstr "Khoảng thời gian làm mới [0 nếu không làm mới]"
+
+#. settings-schema.json->shell->description
+msgid "Shell"
+msgstr "Shell"
+
+#. settings-schema.json->shell->tooltip
+msgid "Shell to be used ('-c' will be used to call commands)"
+msgstr "Shell được sử dụng ('-c' sẽ được sử dụng để gọi lệnh)"
+
+#. settings-schema.json->head1->description
+msgid "Commands"
+msgstr "Lệnh"
+
+#. settings-schema.json->script1->description
+msgid "Command 1"
+msgstr "Lệnh 1"
+
+#. settings-schema.json->script1->tooltip
+msgid "first line of output (use \\f for more lines)"
+msgstr "dòng đầu tiên của đầu ra (sử dụng \\f cho nhiều dòng hơn)"
+
+#. settings-schema.json->enableScript2->description
+msgid "Two-line mode (command 2 enabled)"
+msgstr "Chế độ hai dòng (lệnh 2 được bật)"
+
+#. settings-schema.json->script2->description
+msgid "Command 2"
+msgstr "Lệnh 2"
+
+#. settings-schema.json->script2->tooltip
+msgid "second line of output (optional)"
+msgstr "dòng đầu ra thứ hai (tùy chọn)"
+
+#. settings-schema.json->head2->description
+msgid "Icon"
+msgstr "Biểu tượng"
+
+#. settings-schema.json->dynamicIcon->description
+msgid "Dynamic icon (use output of icon command as icon)"
+msgstr "Biểu tượng động (sử dụng đầu ra của lệnh biểu tượng làm biểu tượng)"
+
+#. settings-schema.json->iconScript->description
+msgid "Static icon or command returning the full path to an icon"
+msgstr "Biểu tượng tĩnh hoặc lệnh trả về đường dẫn đầy đủ đến một biểu tượng"
+
+#. settings-schema.json->iconScript->tooltip
+msgid "command should return an icon (leave empty for no icon)"
+msgstr "lệnh sẽ trả về một biểu tượng (để trống nếu không có biểu tượng)"
+
+#. settings-schema.json->head3->description
+msgid "Tooltip"
+msgstr "Chú giải công cụ"
+
+#. settings-schema.json->dynamicTooltip->description
+msgid "Dynamic tooltip (use output of tooltip command as tooltip)"
+msgstr ""
+"Chú giải công cụ động (sử dụng đầu ra của lệnh chú giải công cụ làm chú "
+"giải công cụ)"
+
+#. settings-schema.json->tooltipScript->description
+msgid "Tooltip command or static tooltip text"
+msgstr "Lệnh chú giải công cụ hoặc văn bản chú giải công cụ tĩnh"
+
+#. settings-schema.json->tooltipScript->tooltip
+msgid "tooltip (static or dynamic)"
+msgstr "chú giải công cụ (tĩnh hoặc động)"
+
+#. settings-schema.json->head4->description
+msgid "Command on applet click"
+msgstr "Lệnh khi nhấp vào applet"
+
+#. settings-schema.json->menuScript->description
+msgid "Menu command (on applet left-click)"
+msgstr "Lệnh menu (nhấp chuột trái vào applet)"
+
+#. settings-schema.json->menuScript->tooltip
+msgid "allows to display lots of information in popup menu"
+msgstr "cho phép hiển thị nhiều thông tin trong menu bật lên"
+
+#. settings-schema.json->menuScriptDisplay->description
+msgid "Display output of menu command"
+msgstr "Hiển thị đầu ra của lệnh menu"
+
+#. settings-schema.json->head5->description
+msgid "Command on start-up"
+msgstr "Lệnh khi khởi động"
+
+#. settings-schema.json->startupScript->description
+msgid "Command run at start-up"
+msgstr "Lệnh chạy khi khởi động"

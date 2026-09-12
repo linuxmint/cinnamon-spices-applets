@@ -1,0 +1,613 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: batterymonitor@pdcurtis 2.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"PO-Revision-Date: 2025-10-08 21:14+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: 5.4/applet.js:300 3.2/applet.js:130
+msgid "--%"
+msgstr "--%"
+
+#: 5.4/applet.js:301 3.2/applet.js:131
+msgid "Waiting"
+msgstr "Chờ"
+
+#: 5.4/applet.js:327
+msgid "Some dependencies not installed."
+msgstr "Một số phụ thuộc chưa được cài đặt."
+
+#: 5.4/applet.js:327
+msgid ""
+"Both 'sox' and 'zenity' are required for this applet to have all of its functionality including notifications and audible alerts.\n"
+"\n"
+"Please view the README for help on installing them.\n"
+msgstr ""
+"Cả 'sox' và 'zenity' đều cần thiết để applet này có đầy đủ chức năng, bao gồm thông báo và cảnh báo bằng âm thanh.\n"
+"\n"
+"Vui lòng xem tệp README để được hướng dẫn cài đặt.\n"
+
+#: 5.4/applet.js:337 3.2/applet.js:193
+msgid "Battery Monitor Applet"
+msgstr "Ứng dụng theo dõi pin"
+
+#: 5.4/applet.js:337
+msgid ""
+"A user-defined sound file has been specified for Low Battery.\n"
+"\n"
+"Please ensure the volume is set sensibly in public places,\n"
+"especially if a long or loud file is specified.\n"
+msgstr ""
+"Tệp âm thanh do người dùng xác định đã được chỉ định cho chế độ Pin yếu.\n"
+"\n"
+"Vui lòng đảm bảo âm lượng được đặt ở mức hợp lý ở nơi công cộng,\n"
+"đặc biệt nếu tệp âm thanh dài hoặc lớn được chỉ định.\n"
+
+#: 5.4/applet.js:399 3.2/applet.js:307
+msgid "Open Power Statistics"
+msgstr "Mở thống kê năng lượng"
+
+#: 5.4/applet.js:405 3.2/applet.js:313
+msgid "Open System Monitor"
+msgstr "Mở giám sát hệ thống"
+
+#: 5.4/applet.js:414
+msgid "Housekeeping and System Submenu"
+msgstr "Quản lý nội bộ và hệ thống"
+
+#: 5.4/applet.js:417 3.2/applet.js:325
+msgid "View the Changelog"
+msgstr "Xem Nhật ký thay đổi"
+
+#: 5.4/applet.js:423
+msgid "Open the README"
+msgstr "Mở README"
+
+#: 5.4/applet.js:439 3.2/applet.js:358
+msgid "Waiting for battery information"
+msgstr "Đang chờ thông tin về pin"
+
+#: 5.4/applet.js:444
+msgid "Alert/Suspend:"
+msgstr "Cảnh báo/Tạm dừng:"
+
+#: 5.4/applet.js:549
+msgid "Battery Low - turn off or connect to power supply"
+msgstr "Pin yếu - tắt hoặc kết nối với nguồn điện"
+
+#: 5.4/applet.js:555
+msgid ""
+"The battery level has fallen to your alert level.\n"
+"\n"
+"Either connect to a power source or save or close down\n"
+"your work and suspend or shutdown the machine.\n"
+msgstr ""
+"Mức pin đã giảm xuống mức báo động.\n"
+"\n"
+"Hãy kết nối với nguồn điện hoặc lưu hoặc đóng công việc của bạn và tạm dừng hoặc tắt máy.\n"
+
+#: 5.4/applet.js:570
+msgid "Battery Critical - will suspend unless connected to power supply"
+msgstr "Pin quan trọng - sẽ tạm dừng trừ khi được kết nối với nguồn điện"
+
+#: 5.4/applet.js:589
+msgid "Time to Empty:"
+msgstr "Thời gian đến khi hết:"
+
+#: 5.4/applet.js:590
+msgid "Time to Full:"
+msgstr "Thời gian đến khi đầy:"
+
+#: 5.4/applet.js:593 5.4/applet.js:640
+msgid "Current Charge:"
+msgstr "Pin hiện tại:"
+
+#: 5.4/applet.js:593 3.2/applet.js:474
+msgid "Alert:"
+msgstr "Cảnh báo:"
+
+#: 5.4/applet.js:593 3.2/applet.js:474
+msgid "Suspend:"
+msgstr "Tạm dừng:"
+
+#: 5.4/applet.js:640 3.2/applet.js:522
+msgid "Alert at:"
+msgstr "Cảnh báo tại:"
+
+#: 5.4/applet.js:640 3.2/applet.js:522
+msgid "Suspend at:"
+msgstr "Tạm dừng tại:"
+
+#: 5.4/applet.js:646
+msgid "The battery level has been recharged to"
+msgstr "Mức pin đã được sạc lại"
+
+#: 3.2/applet.js:160
+msgid "Some Dependencies not Installed"
+msgstr "Một số phụ thuộc chưa được cài đặt"
+
+#: 3.2/applet.js:160
+msgid ""
+"'upower', 'sox' and 'zenity' are required for this applet to have all its facilities including notifications and audible alerts .\n"
+"\n"
+"Please read the help file on how to install them."
+msgstr ""
+"'upower', 'sox' và 'zenity' là bắt buộc để applet này có đầy đủ các tính năng, bao gồm thông báo và cảnh báo bằng âm thanh.\n"
+"\n"
+"Vui lòng đọc tệp trợ giúp để biết cách cài đặt chúng."
+
+#: 3.2/applet.js:193
+msgid ""
+"A User Defined Sound File has been Specified for Low Battery\n"
+"\n"
+"Please ensure the volume is set sensibly in public places\n"
+"especially if a long loud file is specifed\n"
+msgstr ""
+"Tệp âm thanh do người dùng xác định đã được chỉ định cho tình trạng pin yếu\n"
+"\n"
+"Vui lòng đảm bảo âm lượng được đặt ở mức hợp lý ở nơi công cộng\n"
+"đặc biệt nếu tệp âm thanh lớn và dài được chỉ định\n"
+
+#: 3.2/applet.js:322
+msgid "Housekeeping and System Sub Menu"
+msgstr "Menu phụ Quản lý và Hệ thống"
+
+#: 3.2/applet.js:331
+msgid "Open the Help file"
+msgstr "Mở tệp Trợ giúp"
+
+#: 3.2/applet.js:337
+msgid "Open stylesheet.css (Advanced Function)"
+msgstr "Mở stylesheet.css (Hàm nâng cao)"
+
+#. metadata.json->name
+#: 3.2/applet.js:353
+msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
+msgstr "Ứng dụng quản lý pin có chức năng giám sát và tắt máy (BAMS)"
+
+#: 3.2/applet.js:433
+msgid "Battery Low - turn off or connect to mains"
+msgstr "Pin yếu - tắt hoặc kết nối với nguồn điện"
+
+#: 3.2/applet.js:441
+msgid "Battery Monitor Applet Alert"
+msgstr "Cảnh báo của ứng dụng theo dõi pin"
+
+#: 3.2/applet.js:441
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+"either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"Mức pin đã giảm xuống mức báo động\n"
+"\n"
+"Hãy kết nối lại với nguồn điện,\n"
+"\n"
+"đóng công việc và tạm dừng hoặc tắt máy\n"
+
+#: 3.2/applet.js:443
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"Mức pin đã giảm xuống mức báo động\n"
+"\n"
+"Hãy kết nối lại với nguồn điện,\n"
+"\n"
+"đóng công việc và tạm dừng hoặc tắt máy\n"
+
+#: 3.2/applet.js:459
+msgid "Battery Critical will Suspend unless connected to mains"
+msgstr "Pin quan trọng sẽ tạm dừng trừ khi được kết nối với nguồn điện"
+
+#: 3.2/applet.js:474
+msgid "Charge:"
+msgstr "Sạc:"
+
+#: 3.2/applet.js:522
+msgid "Percentage Charge:"
+msgstr "Phần trăm sạc:"
+
+#. metadata.json->description
+msgid "Displays charge as percentage and allows alerts and actions"
+msgstr "Hiển thị phần trăm sạc và cho phép cảnh báo và hành động"
+
+#. 5.4->settings-schema.json->General->title
+msgid "General"
+msgstr "Chung"
+
+#. 5.4->settings-schema.json->Style->title
+msgid "Style"
+msgstr "Kiểu dáng"
+
+#. 5.4->settings-schema.json->general->title
+msgid "General Settings"
+msgstr "Cài đặt chung"
+
+#. 5.4->settings-schema.json->display_mode->title
+msgid "Display Options"
+msgstr "Tùy chọn hiển thị"
+
+#. 5.4->settings-schema.json->low_alert->title
+#. 3.2->settings-schema.json->head2->description
+msgid "Battery Low Alert Settings"
+msgstr "Cài đặt cảnh báo pin yếu"
+
+#. 5.4->settings-schema.json->advanced->title
+msgid "Advanced"
+msgstr "Nâng cao"
+
+#. 5.4->settings-schema.json->bam_normal->title
+msgid "Normal"
+msgstr "Bình thường"
+
+#. 5.4->settings-schema.json->bam_discharging->title
+msgid "Discharging"
+msgstr "Đang xả"
+
+#. 5.4->settings-schema.json->bam_alert->title
+msgid "Alert"
+msgstr "Cảnh báo"
+
+#. 5.4->settings-schema.json->bam_alert_discharging->title
+msgid "Alert Discharging"
+msgstr "Cảnh báo khi xả"
+
+#. 5.4->settings-schema.json->bam_limit_exceeded->title
+msgid "Limit Exceeded"
+msgstr "Vượt quá giới hạn"
+
+#. 5.4->settings-schema.json->bam_limit_exceeded2->title
+msgid "Limit Exceeded - Critical"
+msgstr "Vượt quá giới hạn - Nguy cấp"
+
+#. 5.4->settings-schema.json->refreshInterval-spinner->units
+#. 3.2->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "giây"
+
+#. 5.4->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display"
+msgstr "Khoảng thời gian làm mới hiển thị"
+
+#. 5.4->settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.2->settings-schema.json->refreshInterval-spinner->tooltip
+msgid "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine. This also governs the flash speed."
+msgstr "Tăng hoặc giảm giá trị này để thay đổi khoảng thời gian làm mới - sử dụng tốc độ làm mới chậm nếu máy của bạn chậm. Điều này cũng ảnh hưởng đến tốc độ nhấp nháy."
+
+#. 5.4->settings-schema.json->alertPercentage->units
+#. 5.4->settings-schema.json->recharged_alert_percentage->units
+#. 5.4->settings-schema.json->normal_font_size->units
+#. 5.4->settings-schema.json->discharging_font_size->units
+#. 5.4->settings-schema.json->alert_font_size->units
+#. 5.4->settings-schema.json->alert_discharging_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->units
+msgid "%"
+msgstr "%"
+
+#. 5.4->settings-schema.json->alertPercentage->description
+#. 3.2->settings-schema.json->alertPercentage->description
+msgid "Percentage Battery Charge at which Alert Displayed"
+msgstr "Phần trăm pin tại đó sẽ hiển thị cảnh báo"
+
+#. 5.4->settings-schema.json->alertPercentage->tooltip
+#. 3.2->settings-schema.json->alertPercentage->tooltip
+msgid "Percentage of Battery Charge at which Orange Warning Background is displayed - It is also shown and can be adjusted in the Applet left click menu"
+msgstr "Phần trăm pin tại đó nền cảnh báo màu cam sẽ được hiển thị - cũng có thể xem và điều chỉnh trong menu nhấp chuột trái vào ứng dụng"
+
+#. 5.4->settings-schema.json->recharged_alert->description
+msgid "Visible Alert when Recharging"
+msgstr "Cảnh báo hiển thị khi đang sạc"
+
+#. 5.4->settings-schema.json->recharged_alert->tooltip
+msgid "Provide visible alert when battery is recharged to a certain threshold"
+msgstr "Hiển thị cảnh báo khi pin được sạc đến một ngưỡng nhất định"
+
+#. 5.4->settings-schema.json->recharged_alert_percentage->description
+msgid "Percentage threshold for visible recharged alert"
+msgstr "Ngưỡng phần trăm cho cảnh báo sạc lại hiển thị"
+
+#. 5.4->settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Classic"
+msgstr "Cổ điển"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Classic Plus"
+msgstr "Cổ điển Plus"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Compact"
+msgstr "Gọn nhẹ"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Compact Plus"
+msgstr "Gọn nhẹ Plus"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Icon Only"
+msgstr "Chỉ biểu tượng"
+
+#. 5.4->settings-schema.json->displayType->description
+msgid "Toolbar Display Type"
+msgstr "Kiểu hiển thị thanh công cụ"
+
+#. 5.4->settings-schema.json->displayType->tooltip
+msgid ""
+"The following display options are available (including Compact, Compact Plus, and Icon Only for vertical panels):\n"
+"  Classic: Battery percentage with extended messages for horizontal panel\n"
+"  Classic Plus: Classic with the addition of a battery icon\n"
+"  Compact: Battery percentage without extended messages\n"
+"  Compact Plus: Compact with the addition of a battery icon\n"
+"  Icon Only: The battery icon on a colored background indicating the current status"
+msgstr ""
+"Các tùy chọn hiển thị sau có sẵn (bao gồm Gọn nhẹ, Gọn nhẹ Plus và Chỉ biểu tượng cho các bảng dọc):\n"
+"  Cổ điển: Phần trăm pin với thông báo mở rộng cho bảng ngang\n"
+"  Cổ điển Plus: Cổ điển với thêm biểu tượng pin\n"
+"  Gọn nhẹ: Phần trăm pin không có thông báo mở rộng\n"
+"  Gọn nhẹ Plus: Gọn nhẹ với thêm biểu tượng pin\n"
+"  Chỉ biểu tượng: Biểu tượng pin trên nền màu thể hiện trạng thái hiện tại"
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Light"
+msgstr "Yaru Sáng"
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Dark"
+msgstr "Yaru Tối"
+
+#. 5.4->settings-schema.json->iconTheme->description
+#. 5.4->settings-schema.json->iconTheme->tooltip
+msgid "Icon Theme"
+msgstr "Chủ đề biểu tượng"
+
+#. 5.4->settings-schema.json->time_remaining_display->description
+msgid "Append estimated time remaining to chosen display type"
+msgstr "Thêm thời gian còn lại ước tính vào kiểu hiển thị đã chọn"
+
+#. 5.4->settings-schema.json->time_remaining_display->tooltip
+msgid "This will append an estimate to the above option for time remaining based on the amount of remaining battery power"
+msgstr "Tùy chọn này sẽ thêm ước tính thời gian còn lại dựa trên lượng pin còn lại vào kiểu hiển thị trên"
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->description
+msgid "Append estimated time remaining to toolbar menu"
+msgstr "Thêm thời gian còn lại ước tính vào menu thanh công cụ"
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->tooltip
+msgid "This will append an estimate to the toolbar menu for time remaining based on the amount of remaining battery power"
+msgstr "Tùy chọn này sẽ thêm ước tính thời gian còn lại vào menu thanh công cụ dựa trên lượng pin còn lại"
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->description
+msgid "Append estimated time remaining to tooltip"
+msgstr "Thêm thời gian còn lại ước tính vào chú giải"
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->tooltip
+msgid "This will append an estimate to the tooltip for time remaining based on the amount of remaining battery power"
+msgstr "Tùy chọn này sẽ thêm ước tính thời gian còn lại vào chú giải dựa trên lượng pin còn lại"
+
+#. 5.4->settings-schema.json->useBatteryLowSound->description
+#. 3.2->settings-schema.json->useBatteryLowSound->description
+msgid "Provide audible alerts when Battery Low and at Shutdown Level"
+msgstr "Cung cấp cảnh báo âm thanh khi pin yếu và ở mức tắt máy"
+
+#. 5.4->settings-schema.json->useBatteryLowSound->tooltip
+msgid "Must have `sox` installed. Limited number of sound file types supported (.oga and .wav)"
+msgstr "Cần cài đặt `sox`. Chỉ hỗ trợ một số loại tệp âm thanh (.oga và .wav)"
+
+#. 5.4->settings-schema.json->chooseBatteryLowSound->description
+#. 3.2->settings-schema.json->chooseBatteryLowSound->description
+msgid "Allow choice of audible alert file when Battery Low and at Shutdown Level"
+msgstr "Cho phép chọn tệp âm thanh cảnh báo khi pin yếu và ở mức tắt máy"
+
+#. 5.4->settings-schema.json->chooseBatteryLowSound->tooltip
+msgid "Must have `sox` installed. Limited number of sound file types supported in versions < 4.2"
+msgstr "Cần cài đặt `sox`. Chỉ hỗ trợ một số loại tệp âm thanh ở các phiên bản < 4.2"
+
+#. 5.4->settings-schema.json->batteryLowSound->description
+#. 3.2->settings-schema.json->batteryLowSound->description
+msgid "Choose sound file to use when Battery is Low"
+msgstr "Chọn tệp âm thanh sử dụng khi pin yếu"
+
+#. 5.4->settings-schema.json->batteryLowSound->tooltip
+msgid "Please ensure the volume is set sensibly in public places, especially if a long or loud file is specified"
+msgstr "Vui lòng đảm bảo âm lượng được đặt hợp lý ở nơi công cộng, đặc biệt nếu chọn tệp âm thanh dài hoặc lớn"
+
+#. 5.4->settings-schema.json->batteryShutdownSound->description
+msgid "Sound file to use when Battery is at Shutdown Level"
+msgstr "Tệp âm thanh sử dụng khi pin ở mức tắt máy"
+
+#. 5.4->settings-schema.json->batteryShutdownSound->tooltip
+msgid "Please ensure the volume is set sensibly in public places - do not specify a long or loud file at Shutdown"
+msgstr "Vui lòng đảm bảo âm lượng được đặt hợp lý ở nơi công cộng - không chọn tệp âm thanh dài hoặc lớn khi tắt máy"
+
+#. 5.4->settings-schema.json->notifyBatteryLowSound->description
+msgid "Provide notification when user specified sound file is in use (Recommended)"
+msgstr "Cung cấp thông báo khi sử dụng tệp âm thanh do người dùng chỉ định (Khuyến nghị)"
+
+#. 5.4->settings-schema.json->notifyBatteryLowSound->tooltip
+msgid "To remind that the volume may need to be set sensibly in public places"
+msgstr "Nhắc nhở rằng âm lượng có thể cần được đặt hợp lý ở nơi công cộng"
+
+#. 5.4->settings-schema.json->customBatteryPath->description
+msgid "Path to battery capacity directory (device path)"
+msgstr "Đường dẫn đến thư mục dung lượng pin (đường dẫn thiết bị)"
+
+#. 5.4->settings-schema.json->customBatteryPath->tooltip
+msgid ""
+"Choose your own power_supply object e.g. for monitoring your secondary battery.\n"
+"\n"
+"Default:\n"
+"/sys/class/power_supply/BAT0"
+msgstr ""
+"Chọn đối tượng power_supply của riêng bạn, ví dụ để giám sát pin phụ.\n"
+"\n"
+"Mặc định:\n"
+"/sys/class/power_supply/BAT0"
+
+#. 5.4->settings-schema.json->normal_background_color->description
+#. 5.4->settings-schema.json->discharging_background_color->description
+#. 5.4->settings-schema.json->alert_background_color->description
+#. 5.4->settings-schema.json->alert_discharging_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->description
+msgid "Background Color"
+msgstr "Màu nền"
+
+#. 5.4->settings-schema.json->normal_background_color->tooltip
+#. 5.4->settings-schema.json->normal_border_color->tooltip
+#. 5.4->settings-schema.json->discharging_background_color->tooltip
+#. 5.4->settings-schema.json->discharging_border_color->tooltip
+#. 5.4->settings-schema.json->alert_background_color->tooltip
+#. 5.4->settings-schema.json->alert_border_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_background_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->tooltip
+msgid "RGB or RGBA"
+msgstr "RGB hoặc RGBA"
+
+#. 5.4->settings-schema.json->normal_border_color->description
+#. 5.4->settings-schema.json->discharging_border_color->description
+#. 5.4->settings-schema.json->alert_border_color->description
+#. 5.4->settings-schema.json->alert_discharging_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->description
+msgid "Border Color"
+msgstr "Màu viền"
+
+#. 5.4->settings-schema.json->normal_font_size->description
+#. 5.4->settings-schema.json->discharging_font_size->description
+#. 5.4->settings-schema.json->alert_font_size->description
+#. 5.4->settings-schema.json->alert_discharging_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->description
+msgid "Font Size"
+msgstr "Cỡ chữ"
+
+#. 3.2->settings-schema.json->head->description
+msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
+msgstr "Cài đặt chung cho ứng dụng pin có giám sát và tắt máy"
+
+#. 3.2->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Khoảng thời gian làm mới hiển thị:"
+
+#. 3.2->settings-schema.json->head1->description
+msgid "Display Mode"
+msgstr "Chế độ hiển thị"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Classic - Battery Percentage with extended messages for horizontal panel"
+msgstr "Cổ điển - Phần trăm pin với thông báo mở rộng cho bảng ngang"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Classic Plus - Classic with addition of Battery Icon"
+msgstr "Cổ điển Plus - Cổ điển với thêm biểu tượng pin"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Compact - Battery Percentage without extended messages"
+msgstr "Gọn nhẹ - Phần trăm pin không có thông báo mở rộng"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Compact Plus - Compact with addition of Battery Icon"
+msgstr "Gọn nhẹ Plus - Gọn nhẹ với thêm biểu tượng pin"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Icon Only on coloured background indicating status"
+msgstr "Chỉ biểu tượng trên nền màu thể hiện trạng thái"
+
+#. 3.2->settings-schema.json->displayType->description
+msgid "Type of Display in Toolbar"
+msgstr "Kiểu hiển thị trên thanh công cụ"
+
+#. 3.2->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional battery icon and some more compact displays suitable for a vertical panel (CompactCompact Plus and Icon "
+"Only)"
+msgstr ""
+"Tính năng này cung cấp kiểu hiển thị Cổ điển (gốc) với biểu tượng pin tùy chọn và một số kiểu hiển thị gọn nhẹ phù hợp cho bảng dọc (Gọn nhẹ, Gọn nhẹ Plus và Chỉ biểu tượng)"
+
+#. 3.2->settings-schema.json->useBatteryLowSound->tooltip
+msgid "Must have Sox installed. Limited number of sound file types supported (.oga and .wav)"
+msgstr "Cần cài đặt Sox. Chỉ hỗ trợ một số loại tệp âm thanh (.oga và .wav)"
+
+#. 3.2->settings-schema.json->chooseBatteryLowSound->tooltip
+msgid "Must have Sox installed. Limited number of sound file types supported in versions < 4.2"
+msgstr "Cần cài đặt Sox. Chỉ hỗ trợ một số loại tệp âm thanh ở các phiên bản < 4.2"
+
+#. 3.2->settings-schema.json->batteryLowSound->tooltip
+msgid "Please ensure the volume is set sensibly in public places especially if a long loud file is specifed"
+msgstr "Vui lòng đảm bảo âm lượng được đặt hợp lý ở nơi công cộng, đặc biệt nếu chọn tệp âm thanh dài hoặc lớn"
+
+#. 3.2->settings-schema.json->batteryShutdownSound->description
+msgid "Choose sound file to use when Battery is at Shutdown Level"
+msgstr "Chọn tệp âm thanh sử dụng khi pin ở mức tắt máy"
+
+#. 3.2->settings-schema.json->batteryShutdownSound->tooltip
+msgid "Please ensure the volume is set sensibly in public places - do not specify a long loud file at Shutdown"
+msgstr "Vui lòng đảm bảo âm lượng được đặt hợp lý ở nơi công cộng - không chọn tệp âm thanh dài hoặc lớn khi tắt máy"
+
+#. 3.2->settings-schema.json->notifyBatteryLowSound->description
+msgid "Provide Notification when user specified sound file is in use - Recommended"
+msgstr "Cung cấp thông báo khi sử dụng tệp âm thanh do người dùng chỉ định - Khuyến nghị"
+
+#. 3.2->settings-schema.json->notifyBatteryLowSound->tooltip
+msgid "To remind users that the volume may need to be set sensibly in public places"
+msgstr "Nhắc nhở người dùng rằng âm lượng có thể cần được đặt hợp lý ở nơi công cộng"
+
+#. 3.2->settings-schema.json->head3->description
+msgid "Household Tasks"
+msgstr "Tác vụ nội bộ"
+
+#. 3.2->settings-schema.json->deleteTempraryFiles->description
+msgid "Delete temporary files after upgrade to version 1.4"
+msgstr "Xóa các tệp tạm thời sau khi nâng cấp lên phiên bản 1.4"
+
+#. 3.2->settings-schema.json->deleteTempraryFiles->tooltip
+msgid "Versions prior to 1.4 used temporary files in the home directory. These are not needed any more and can be deleted."
+msgstr "Các phiên bản trước 1.4 sử dụng tệp tạm thời trong thư mục chính. Những tệp này không còn cần thiết và có thể xóa."
+
+#: 5.4/suspendScript.sh:22
+msgid "WARNING: SUSPENDING SOON"
+msgstr "CẢNH BÁO: SẮP TẠM DỪNG"
+
+#: 5.4/suspendScript.sh:23
+msgid "The battery level is critical. The machine will be suspended shortly."
+msgstr "Mức pin đang nguy cấp. Máy sẽ tạm dừng trong giây lát."
+
+#: 5.4/suspendScript.sh:24
+msgid "Abort Suspension"
+msgstr "Hủy tạm dừng"
+
+#: 5.4/suspendScript.sh:25
+msgid "Suspend Immediately"
+msgstr "Tạm dừng ngay lập tức"
+
+#: 5.4/suspendScript.sh:26
+msgid "The machine was suspended as the battery level was critical."
+msgstr "Máy đã bị tạm dừng do mức pin nguy cấp."

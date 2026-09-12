@@ -1,0 +1,13 @@
+# AUTOMATIC DARK/LIGHT THEMES
+# This file is put in the public domain.
+# guillaume-mueller, 2024
+#
+msgid ""
+msgstr ""
+
+#. 5.8->settings-schema.json->light-mode_themes_button_open-os-
+#. settings->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_button_open-os-
+#. settings->tooltip
+msgid "Open the system's settings window to select the themes"
+msgstr ""

@@ -1,0 +1,134 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2017-04-27 12:49+0800\n"
+"PO-Revision-Date: 2024-04-21 11:16+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:58
+msgid "GPU: ??ᴼC"
+msgstr "GPU: ??ᴼC"
+
+#: applet.js:70
+msgid "Current Temperature of your NVidia based GPU"
+msgstr "Huidige temperatuur van uw NVidia gebaseerde GPU"
+
+#: applet.js:75
+msgid "Current Temperature of your ATI based GPU"
+msgstr "Huidige temperatuur van uw ATI gebaseerde GPU"
+
+#: applet.js:80
+msgid "No supported GPUs detected."
+msgstr "Geen ondersteunde GPU's gedetecteerd."
+
+#: applet.js:133 applet.js:348
+msgid "Temperature"
+msgstr "Temperatuur"
+
+#: applet.js:152 applet.js:441
+msgid "GPU:"
+msgstr "GPU:"
+
+#: applet.js:352
+msgid "Driver"
+msgstr "Stuurprogramma"
+
+#: applet.js:360
+msgid "Video Memory"
+msgstr "Videogeheugen"
+
+#: applet.js:363
+msgid "Total"
+msgstr "Totaal"
+
+#: applet.js:367
+msgid "Used"
+msgstr "Gebruikt"
+
+#: applet.js:371
+msgid "Interface"
+msgstr "Interface"
+
+#: applet.js:375
+msgid "Memory Clock"
+msgstr "Geheugenklok"
+
+#: applet.js:380
+msgid "Cuda Cores"
+msgstr "Cuda-kernen"
+
+#: applet.js:384
+msgid "Gpu Clock"
+msgstr "GPU-klok"
+
+#: applet.js:388
+msgid "PCI Speed"
+msgstr "PCI-snelheid"
+
+#: applet.js:403
+msgid "Fan "
+msgstr "Ventilator "
+
+#: applet.js:411
+msgid "Displays:"
+msgstr "Schermen:"
+
+#: applet.js:740
+msgid "No GPU Name"
+msgstr "Geen GPU-naam"
+
+#: applet.js:805
+msgid "No Display Name"
+msgstr "Geen schermnaam"
+
+#: applet.js:844
+msgid " GPU: ??ᴼC ERROR"
+msgstr " GPU: ??ᴼC FOUT"
+
+#: applet.js:846
+msgid "We couldn't determine your GPU's temperature."
+msgstr "We konden de temperatuur van uw GPU niet bepalen."
+
+#: applet.js:848
+msgid "If you have a NVIDIA GPU, please try installing"
+msgstr "Als u een NVIDIA GPU heeft, probeer dan te installeren"
+
+#: applet.js:849
+msgid "the binary drivers from http://geforce.com/drivers"
+msgstr "de binaire stuurprogramma's vanaf http://geforce.com/drivers"
+
+#: applet.js:850
+msgid "and the nvidia-settings package for your distribution."
+msgstr "en het nvidia-settings pakket voor uw distributie."
+
+#: applet.js:852
+msgid "If you have an ATI GPU, please install the LM-SENSORS"
+msgstr "Als u een ATI GPU heeft, installeer dan de LM-SENSORS"
+
+#: applet.js:853
+msgid "packages for your distribution."
+msgstr "pakketten voor uw distributie."
+
+#. gputemperature@silentage.com->metadata.json->name
+msgid "GPU Temperature"
+msgstr "GPU-temperatuur"
+
+#. gputemperature@silentage.com->metadata.json->description
+msgid ""
+"Shows NVidia/ATI GPU temperature in the panel, and detailed/multi-gpu "
+"information in a popup menu."
+msgstr ""
+"Toont NVidia/ATI GPU-temperatuur in het paneel, en gedetailleerde/multi-gpu "
+"informatie in een popup-menu."

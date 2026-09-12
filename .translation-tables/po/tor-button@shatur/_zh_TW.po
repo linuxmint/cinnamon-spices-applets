@@ -1,0 +1,35 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:50
+msgid "Rebuild chain"
+msgstr ""
+
+#: applet.js:88 applet.js:107 applet.js:126 applet.js:154
+msgid "Error"
+msgstr ""
+
+#: applet.js:121
+msgid "Process launched."
+msgstr ""
+
+#: applet.js:142
+msgid "Process closed."
+msgstr ""
+
+#. tor-button@shatur->settings-schema.json->showNotifications->description
+msgid "Show notifications"
+msgstr ""
+
+#. tor-button@shatur->settings-schema.json->applet-section->title
+msgid "Settings for applet"
+msgstr ""
+
+#. tor-button@shatur->settings-schema.json->applet-page->title
+msgid "Applet settings"
+msgstr ""

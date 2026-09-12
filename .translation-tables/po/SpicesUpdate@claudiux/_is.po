@@ -1,0 +1,53 @@
+# Icelandic translation of SpicesUpdate@claudiux package
+# Copyright (C) 2021 Free Software Foundation
+# This file is distributed under the same license as the Cinnamon package.
+#
+# Sveinn í Felli <sv1@fellsnet.is>,  2021, 2024.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-12 18:05+0200\n"
+"PO-Revision-Date: 2024-11-23 17:24+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#. 6.0/constants.js:187 6.4/constants.js:187
+msgid "For private Spices, both boxes will be considered unchecked."
+msgstr ""
+
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_actions->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_actions->description
+msgid "Tick all the first boxes then refresh"
+msgstr ""
+
+#. 6.4->settings-schema.json->section_general5->title
+msgid "Dependencies"
+msgstr ""
+
+#. 6.4->settings-schema.json->btn_apply_applets->description
+#. 6.4->settings-schema.json->btn_apply_desklets->description
+#. 6.4->settings-schema.json->btn_apply_extensions->description
+#. 6.4->settings-schema.json->btn_apply_themes->description
+#. 6.4->settings-schema.json->btn_apply_actions->description
+msgid "Apply"
+msgstr ""
+
+#. 6.4->settings-schema.json->dont_check_dependencies->description
+msgid "Do not check dependencies"
+msgstr ""

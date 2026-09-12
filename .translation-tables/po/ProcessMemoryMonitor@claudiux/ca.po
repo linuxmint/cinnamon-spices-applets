@@ -1,0 +1,288 @@
+# PROCESS MEMORY MONITOR
+# This file is put in the public domain.
+# claudiux, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ProcessMemoryMonitor@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-29 14:35+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:58
+msgid "Click to reset or reconnect to the process"
+msgstr "Feu clic per a reiniciar o reconnectar-se al procés"
+
+#. applet.js:62
+msgid "Variation:"
+msgstr "Variació:"
+
+#. applet.js:63
+msgid "Process:"
+msgstr "Procés:"
+
+#. applet.js:64
+msgid "PID:"
+msgstr "PID:"
+
+#. applet.js:65
+msgid "Elapsed:"
+msgstr "Temps passat:"
+
+#. applet.js:66
+msgid "Start:"
+msgstr "Inici:"
+
+#. applet.js:67
+msgid "Diff:"
+msgstr "Diff:"
+
+#. applet.js:68
+msgid "Max:"
+msgstr "Màx:"
+
+#. applet.js:69
+msgid "Value:"
+msgstr "Valor:"
+
+#. applet.js:70
+msgid "Min:"
+msgstr "Mín:"
+
+#. applet.js:71
+msgid "Refresh interval:"
+msgstr "Interval d'actualització:"
+
+#. applet.js:204
+msgid "MiB"
+msgstr "MiB"
+
+#. applet.js:206
+msgid "kiB/min"
+msgstr "kiB/min"
+
+#. applet.js:431
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Elimina '%s'"
+
+#. applet.js:439
+msgid "About..."
+msgstr "Quant a..."
+
+#. applet.js:458
+msgid "Configure..."
+msgstr "Configura..."
+
+#. applet.js:475 applet.js:503
+#, javascript-format
+msgid "Refresh interval: %s seconds"
+msgstr "Interval d'actualització: %s segons"
+
+#. settings-schema.json->sysmon-button->description
+#. applet.js:480
+msgid "Open System Monitor"
+msgstr "Obre el monitor del sistema"
+
+#. metadata.json->description
+msgid "Monitors memory usage of Cinnamon or any other process"
+msgstr "Monitora l'ús de memòria de Cinnamon o qualsevol altre procés"
+
+#. metadata.json->name
+msgid "Process Memory Monitor"
+msgstr "Monitor de memòria de processos"
+
+#. settings-schema.json->page-process->title
+msgid "Process"
+msgstr "Procés"
+
+#. settings-schema.json->page-characters->title
+msgid "Characters"
+msgstr "Caràcters"
+
+#. settings-schema.json->page-abbrev->title
+#. settings-schema.json->section-abbrev->title
+msgid "Abbreviations"
+msgstr "Abreviacions"
+
+#. settings-schema.json->page-style->title
+#. settings-schema.json->section-style->title
+msgid "Style"
+msgstr "Estil"
+
+#. settings-schema.json->section-process->title
+msgid "Process to monitor"
+msgstr "Procés a monitorar"
+
+#. settings-schema.json->section-sysmon->title
+msgid "System Monitor"
+msgstr "Monitor del sistema"
+
+#. settings-schema.json->section-char-var->title
+msgid "Variation characters"
+msgstr "Caràcters de variació"
+
+#. settings-schema.json->process-name->description
+msgid ""
+"Name of process or PID to be monitored (by default, the Cinnamon process is "
+"used)"
+msgstr ""
+"Nom del procés o PID a monitorar (per defecte s'utilitza el procés de "
+"Cinnamon)"
+
+#. settings-schema.json->process-name->tooltip
+msgid ""
+"Set the name of the process or PID you want to monitor here.\n"
+"Note that, for the moment, no consideration is given to multiple instances "
+"of the same program (undefined behavior).\n"
+"Open the system monitor to see all running processes."
+msgstr ""
+"Establiu el nom del procés o PID que voleu monitorar aquí.\n"
+"Teniu en compte que no es consideren instàncies múltiples d'un mateix "
+"programa (comportament no definit).\n"
+"Obriu el monitor del sistema per a veure tots els processos actius."
+
+#. settings-schema.json->pn-button->description
+msgid "Apply"
+msgstr "Aplicar"
+
+#. settings-schema.json->reset-pn-button->description
+msgid "Reset to Cinnamon"
+msgstr "Reiniciar a Cinnamon"
+
+#. settings-schema.json->char-max->description
+msgid "Max value exceeded ⬆"
+msgstr "Valor màxim excedit⬆"
+
+#. settings-schema.json->char-max->tooltip
+#. settings-schema.json->char-up->tooltip
+#. settings-schema.json->char-flat->tooltip
+#. settings-schema.json->char-down->tooltip
+#. settings-schema.json->char-min->tooltip
+msgid "Emoji accepted. Empty to return to the default value."
+msgstr "S'accepten emojis. Deixeu buit per a retornar el valor per defecte."
+
+#. settings-schema.json->char-up->description
+msgid "Increasing ↗"
+msgstr "Augmentant ↗"
+
+#. settings-schema.json->char-flat->description
+msgid "Staying constant ➡"
+msgstr "Constant ➡"
+
+#. settings-schema.json->char-down->description
+msgid "Decreasing ↘"
+msgstr "Disminuint ↘"
+
+#. settings-schema.json->char-min->description
+msgid "Min value exceeded ⬇"
+msgstr "Valor mínim excedit ⬇"
+
+#. settings-schema.json->no-char-var->description
+msgid "Do not display any Variation character"
+msgstr "No mostris cap caràcter de variació"
+
+#. settings-schema.json->abbrev-MiB->description
+msgid "Abbreviation for mebibyte (default: MiB)"
+msgstr "Abreviació per mebibyte (per defecte: MiB)"
+
+#. settings-schema.json->abbrev-MiB->tooltip
+msgid "1 MiB = 1024 kiB"
+msgstr "1 MiB = 1024 kiB"
+
+#. settings-schema.json->abbrev-kpm->description
+msgid "Abbreviation for kibibyte per minute (default: kiB/min)"
+msgstr "Abreviació per kibibyte per minut (per defecte: kiB/min)"
+
+#. settings-schema.json->abbrev-kpm->tooltip
+msgid "1 kiB = 1024 B"
+msgstr "1 kiB = 1024 B"
+
+#. settings-schema.json->style-font-weight->description
+msgid "Font weight"
+msgstr "Gruix de la font"
+
+#. settings-schema.json->style-font-weight->options
+msgid "normal"
+msgstr "normal"
+
+#. settings-schema.json->style-font-weight->options
+msgid "bold"
+msgstr "negreta"
+
+#. settings-schema.json->style-font-family->description
+msgid "Font family"
+msgstr "Família de fonts"
+
+#. settings-schema.json->style-font-family->options
+msgid "monospace"
+msgstr "monospace"
+
+#. settings-schema.json->style-font-family->options
+msgid "sans-serif"
+msgstr "sans-serif"
+
+#. settings-schema.json->style-font-family->options
+msgid "serif"
+msgstr "serif"
+
+#. settings-schema.json->style-font-family->options
+msgid "cursive"
+msgstr "cursiva"
+
+#. settings-schema.json->style-font-family->options
+msgid "fantasy"
+msgstr "fantasy"
+
+#. settings-schema.json->style-font-family->tooltip
+msgid "Select monospace to ensure display stability."
+msgstr "Seleccioneu monospace per a garantir estabilitat."
+
+#. settings-schema.json->style-font-size->description
+msgid "Font size"
+msgstr "Mida de la font"
+
+#. settings-schema.json->style-font-size->options
+msgid "xx-small"
+msgstr "xx-petita"
+
+#. settings-schema.json->style-font-size->options
+msgid "x-small"
+msgstr "x-petita"
+
+#. settings-schema.json->style-font-size->options
+msgid "small"
+msgstr "petita"
+
+#. settings-schema.json->style-font-size->options
+msgid "medium"
+msgstr "mitjana"
+
+#. settings-schema.json->style-font-size->options
+msgid "large"
+msgstr "gran"
+
+#. settings-schema.json->style-font-size->options
+msgid "x-large"
+msgstr "x-gran"
+
+#. settings-schema.json->style-font-size->options
+msgid "xx-large"
+msgstr "xx-gran"
+
+#. settings-schema.json->style-customized-width->description
+msgid "Custom width"
+msgstr "Amplada personalitzada"
+
+#. settings-schema.json->style-label-width->description
+msgid "Label's width (pixels)"
+msgstr "Amplada de l'etiqueta (píxels)"

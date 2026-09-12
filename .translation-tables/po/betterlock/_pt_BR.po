@@ -1,0 +1,48 @@
+# LOCK KEYS INDICATOR WITH NOTIFICATIONS
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# entelechy, 2016
+# Cássio Louzada Rizzi <clrizzi@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-16 19:05+0100\n"
+"PO-Revision-Date: 2023-03-12 16:11+0200\n"
+"Last-Translator: Cássio Louzada Rizzi <clrizzi@gmail.com>\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. settings-schema.json->section1->description
+msgid "Indicators"
+msgstr ""
+
+#. settings-schema.json->hide-inactive-indicators->description
+msgid "Hide inactive indicators"
+msgstr ""
+
+#. settings-schema.json->toggle-on-click->description
+msgid "Toggle state when clicked"
+msgstr ""
+
+#. settings-schema.json->section2->description
+msgid "Notifications"
+msgstr ""
+
+#. settings-schema.json->show-osd-notifications->description
+msgid "Show OSD notifications"
+msgstr ""
+
+#. settings-schema.json->show-toast-notifications->description
+msgid "Show toast notifications"
+msgstr ""
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
+msgstr ""

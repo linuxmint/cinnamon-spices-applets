@@ -1,0 +1,192 @@
+# DDC/CI MULTI-MONITOR
+# This file is put in the public domain.
+# tim-we, 2021
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ddcci-multi-monitor@tim-we 1.3.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-28 19:03+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->description
+#. applet.js:21
+msgid "Adjust monitor brightness via DDC/CI"
+msgstr "Điều chỉnh độ sáng màn hình qua DDC/CI"
+
+#. applet.js:169
+msgid "Use for scroll/click"
+msgstr "Sử dụng cho cuộn/nhấp"
+
+#. applet.js:300
+msgid "Detect displays"
+msgstr "Phát hiện màn hình"
+
+#. applet.js:312
+msgid "Detecting displays..."
+msgstr "Đang phát hiện màn hình..."
+
+#. applet.js:475
+msgid "Failed to detect displays."
+msgstr "Không thể phát hiện màn hình."
+
+#. applet.js:476
+msgid "Make sure you have ddcutil installed and the correct permissions."
+msgstr "Hãy chắc chắn rằng bạn đã cài đặt ddcutil và có quyền phù hợp."
+
+#. applet.js:477
+msgid "Error:"
+msgstr "Lỗi:"
+
+#. metadata.json->name
+msgid "DDC/CI Multi-Monitor"
+msgstr "DDC/CI Đa Màn Hình"
+
+#. settings-schema.json->page_general->title
+msgid "General"
+msgstr "Chung"
+
+#. settings-schema.json->page_retry_detection->title
+msgid "Detection"
+msgstr "Phát hiện"
+
+#. settings-schema.json->section_appearance->title
+msgid "Appearance"
+msgstr "Giao diện"
+
+#. settings-schema.json->section_monitor->title
+msgid "Monitor Setup"
+msgstr "Cài đặt Màn hình"
+
+#. settings-schema.json->section_scrolling->title
+msgid "Scrolling Settings"
+msgstr "Cài đặt Cuộn"
+
+#. settings-schema.json->section_togglepoints->title
+msgid "Toggle Points"
+msgstr "Điểm chuyển đổi"
+
+#. settings-schema.json->section_retry_detection->title
+msgid "Automatic Retry Detection"
+msgstr "Phát hiện Tự động Thử lại"
+
+#. settings-schema.json->entry_applet-label->description
+msgid ""
+"Text shown next to the icon in the panel.\n"
+"Leave empty for no label."
+msgstr "Văn bản hiển thị cạnh biểu tượng trên thanh panel.\nĐể trống nếu không muốn nhãn."
+
+#. settings-schema.json->switch_show-bus-number->description
+msgid "Show bus number next to the detected monitors."
+msgstr "Hiển thị số bus bên cạnh các màn hình được phát hiện."
+
+#. settings-schema.json->switch_manual-select-monitors->description
+msgid ""
+"By default, scrolling & toggling adjusts brightness for all monitors.\n"
+"Switch to enable custom monitor selection.\n"
+"This will add checkbox options for each detected monitor."
+msgstr "Theo mặc định, cuộn & chuyển đổi điều chỉnh độ sáng cho tất cả màn hình.\nBật để chọn màn hình tùy chỉnh.\nĐiều này sẽ thêm các hộp kiểm cho từng màn hình được phát hiện."
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "50"
+msgstr "50"
+
+#. settings-schema.json->combobox_scroll-step->description
+msgid "Adjustment step for brightness"
+msgstr "Bước điều chỉnh độ sáng"
+
+#. settings-schema.json->switch_use-toggle-points->description
+msgid ""
+"Enable toggle points for brightness adjustment.\n"
+"(via mouse middle click)"
+msgstr "Bật các điểm chuyển đổi để điều chỉnh độ sáng.\n(qua nhấn giữa chuột)"
+
+#. settings-schema.json->spinbutton_num-of-toggle-points->description
+msgid ""
+"Number of toggle points for brightness adjustment\n"
+"(only the first N toggle points will be used)"
+msgstr "Số điểm chuyển đổi để điều chỉnh độ sáng\n(chỉ sử dụng N điểm đầu tiên)"
+
+#. settings-schema.json->scale_toggle_point_1->description
+msgid "Brightness level for toggle point 1"
+msgstr "Mức độ sáng cho điểm chuyển đổi 1"
+
+#. settings-schema.json->scale_toggle_point_2->description
+msgid "Brightness level for toggle point 2"
+msgstr "Mức độ sáng cho điểm chuyển đổi 2"
+
+#. settings-schema.json->scale_toggle_point_3->description
+msgid "Brightness level for toggle point 3"
+msgstr "Mức độ sáng cho điểm chuyển đổi 3"
+
+#. settings-schema.json->switch_enable-retry-detection->description
+msgid ""
+"Enable automatic retry detection during startup.\n"
+"Helps ensure all monitors are detected when DDC/CI buses take time to "
+"initialize."
+msgstr "Bật phát hiện thử lại tự động khi khởi động.\nGiúp đảm bảo tất cả màn hình được phát hiện khi bus DDC/CI mất thời gian khởi tạo."
+
+#. settings-schema.json->spinbutton_target-monitor-count->description
+msgid ""
+"Expected number of monitors to detect.\n"
+"The applet will retry detection until this many monitors are found or max "
+"attempts reached."
+msgstr "Số lượng màn hình dự kiến để phát hiện.\nApplet sẽ thử phát hiện lại cho đến khi tìm thấy đủ số màn hình này hoặc đạt số lần thử tối đa."
+
+#. settings-schema.json->spinbutton_max-retry-attempts->description
+msgid ""
+"Maximum number of retry attempts.\n"
+"Limited to 5 attempts to prevent excessive startup delays."
+msgstr "Số lần thử tối đa.\nGiới hạn 5 lần để tránh chậm khởi động quá mức."
+
+#. settings-schema.json->spinbutton_retry-delay->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->spinbutton_retry-delay->description
+msgid ""
+"Delay between detection attempts.\n"
+"Time to wait before retrying monitor detection (1-10 seconds)."
+msgstr "Khoảng thời gian giữa các lần thử phát hiện.\nThời gian chờ trước khi thử phát hiện màn hình lại (1-10 giây)."
+
+#. settings-schema.json->string_active-monitors->description
+msgid ""
+"Stores which monitors are active for scroll/click functions.\n"
+"This is a JSON object where keys are bus numbers and values are true/"
+"false.\n"
+"Example: {\"1\":true,\"2\":false}"
+msgstr "Lưu trữ những màn hình nào đang hoạt động cho các chức năng cuộn/nhấp.\nĐây là đối tượng JSON với khóa là số bus và giá trị là true/false.\nVí dụ: {\"1\":true,\"2\":false}"
+

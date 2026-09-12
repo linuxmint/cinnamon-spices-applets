@@ -1,0 +1,285 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SpiceSpy@claudiux 5.8.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-04-27 17:11+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:196
+msgid "score"
+msgstr "bedømmelse"
+
+#. applet.js:208
+msgid "comments"
+msgstr "kommentarer"
+
+#. applet.js:220
+msgid "recent issues"
+msgstr "seneste sager"
+
+#. applet.js:233
+msgid "translations"
+msgstr "oversættelser"
+
+#. applet.js:308
+msgid "Reload icons"
+msgstr "Genindlæs ikoner"
+
+#. applet.js:314
+msgid "Visit website"
+msgstr "Besøg websted"
+
+#. applet.js:417
+msgid ""
+"Check in progress.\n"
+"Time remaining:"
+msgstr ""
+"Tjek i gang.\n"
+"Tid tilbage:"
+
+#. applet.js:420
+msgid "Ends around:"
+msgstr "Slutter ca.:"
+
+#. applet.js:437
+msgid "Time remaining until the next check:"
+msgstr "Tid indtil næste tjek:"
+
+#. applet.js:439 applet.js:741
+msgid "Next check at:"
+msgstr "Næste tjek:"
+
+#. applet.js:444
+msgid "Getting Started. Please wait..."
+msgstr "Går i gang. Vent venligst …"
+
+#. applet.js:893
+msgid "Spices"
+msgstr "Spices"
+
+#. applet.js:984
+msgid "Mark all as read"
+msgstr "Markér alle som læst"
+
+#. applet.js:995
+msgid "Refresh"
+msgstr "Opdatér"
+
+#. applet.js:1009
+msgid "Refreshing in progress - Click to stop"
+msgstr "Opdatering i gang. Klik for at stoppe"
+
+#. applet.js:1023
+msgid "Refreshing in progress"
+msgstr "Opdatering i gang"
+
+#. applet.js:1035
+msgid "Configure..."
+msgstr "Konfigurér …"
+
+#. metadata.json->name
+msgid "SpiceSpy"
+msgstr "SpiceSpy"
+
+#. metadata.json->description
+msgid ""
+"Notifies you when there's a change to your favorite Spices on the website."
+msgstr ""
+"Underretter dig, når der er ændringer til dine yndlings-Spices på webstedet."
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr "Generelt"
+
+#. settings-schema.json->pageOptions->title
+#. settings-schema.json->section1->title
+msgid "Options"
+msgstr "Indstillinger"
+
+#. settings-schema.json->section2->title
+msgid "List of authors of the Spices you are interested in"
+msgstr "Liste over forfattere af de Spices du er interesseret i"
+
+#. settings-schema.json->section3->title
+msgid "List of specific Spices you are interested in"
+msgstr "Liste over specifikke Spices du er interesseret i"
+
+#. settings-schema.json->update-interval-hours->description
+msgid "Update interval"
+msgstr "Opdateringsinterval"
+
+#. settings-schema.json->update-interval-hours->units
+msgid "hours"
+msgstr "timer"
+
+#. settings-schema.json->update-interruptible->description
+msgid "The update can be interrupted by the user"
+msgstr "Opdateringen kan afbrydes af brugeren"
+
+#. settings-schema.json->standard-opacity->description
+msgid "Opacity in absence of change"
+msgstr "Uigennemsigtighed i fraværet af ændringer"
+
+#. settings-schema.json->color-on-change->description
+msgid "Color on change"
+msgstr "Farve ved ændringer"
+
+#. settings-schema.json->show-icon-in-menu->description
+msgid "Show each Spice icon in the menu"
+msgstr "Vis hvert Spice-ikon i menuen"
+
+#. settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Ikonstørrelse"
+
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr "16"
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr "22"
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr "24"
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->show-translations->description
+msgid "Show number of translations in the menu"
+msgstr "Vis antal oversættelser i menuen"
+
+#. settings-schema.json->show-commits->description
+msgid "Show available updates in the menu"
+msgstr "Vis tilgængelige opdateringer i menuen"
+
+#. settings-schema.json->show-issues->description
+msgid "Show number of issues in the menu"
+msgstr "Vis antallet af sager i menuen"
+
+#. settings-schema.json->sort-by->description
+msgid "Sort by"
+msgstr "Sortér efter"
+
+#. settings-schema.json->sort-by->options
+msgid "Translated name"
+msgstr "Oversat navn"
+
+#. settings-schema.json->sort-by->options
+msgid "Original name"
+msgstr "Oprindeligt navn"
+
+#. settings-schema.json->sort-by->options
+#. settings-schema.json->uuid-list->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (bottom-up)"
+msgstr "Bedømmelse (lavest først)"
+
+#. settings-schema.json->sort-by->options
+msgid "Score (top-down)"
+msgstr "Bedømmelse (højeste først)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (bottom-up)"
+msgstr "Antal kommentarer (laveste først)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of comments (top-down)"
+msgstr "Antal kommentarer (højeste først)"
+
+#. settings-schema.json->sort-by->options
+msgid "Number of issues"
+msgstr "Antal sager"
+
+#. settings-schema.json->show-uuid->description
+msgid "Show UUID instead of name"
+msgstr "Vis UUID i stedet for navn"
+
+#. settings-schema.json->translate-name->description
+msgid "Show translated name if available"
+msgstr "Vis oversat navn hvis tilgængeligt"
+
+#. settings-schema.json->display-on-panel->description
+msgid "If there is nothing new"
+msgstr "Hvis der ikke er noget nyt"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon and label"
+msgstr "Vis ikon og tekst"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Show icon only"
+msgstr "Vis kun ikon"
+
+#. settings-schema.json->display-on-panel->options
+msgid "Do not show anything"
+msgstr "Vis intet"
+
+#. settings-schema.json->useful-only->description
+msgid "Show only non-zero values in panel"
+msgstr "Vis kun værdier forskellige fra nul i panelet"
+
+#. settings-schema.json->colorWhileRefreshing->description
+msgid "Icon color while refreshing"
+msgstr "Ikonfarve under opdatering"
+
+#. settings-schema.json->author-list->columns->title
+msgid "GitHub user name"
+msgstr "GitHub-brugernavn"
+
+#. settings-schema.json->button-my-spices->description
+msgid "Add all the Spices I use"
+msgstr "Tilføj alle Spices, jeg bruger"
+
+#. settings-schema.json->label-reload->description
+msgid ""
+"There's no need to include Spices maintained by members of the Authors list "
+"in the UUID list.\n"
+"Once your lists are correct, you can reload this applet to speed up the "
+"process.\n"
+"Just don't do it too often."
+msgstr ""
+"Det er ikke nødvendigt at medtage Spices, der vedligeholdes af medlemmer af "
+"forfatterlisten, på UUID-listen.\n"
+"Når dine lister er korrekte, kan du genindlæse dette panelprogram for at "
+"gøre processen hurtigere.\n"
+"Gør det bare ikke for ofte."
+
+#. settings-schema.json->button-reload->description
+msgid "Reload this applet"
+msgstr "Genindlæs panelprogrammet"

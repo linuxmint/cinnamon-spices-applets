@@ -1,0 +1,506 @@
+# AUTOMATIC DARK/LIGHT THEMES
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# guillaume-mueller, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-18 11:37+0200\n"
+"PO-Revision-Date: 2025-09-28 16:17+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. 5.8/applet.js:33
+msgid "Click: toggle dark/light mode"
+msgstr "Clic: alterna el mode fosc/clar"
+
+#. 5.8/applet.js:34
+msgid "Middle-click: toggle automatic switch mode"
+msgstr "Clic del mig: alterna el mode de canvi automàtic"
+
+#. 5.8/applet.js:367
+msgid "Today's automatic mode switch times"
+msgstr "Hores de canvi de mode automàtic d'avui"
+
+#. 5.8/applet.js:367 5.8/applet.js:368 5.8/applet.js:369 5.8/applet.js:412
+#. 5.8/applet.js:418 5.8/lib/time_change_listener/time_change_listener.js:95
+#. 5.8/lib/commands_launcher/commands_launcher.js:37
+#. 5.8/lib/commands_launcher/commands_launcher.js:44
+#. 5.8/lib/commands_launcher/commands_launcher.js:50
+#. 5.8/lib/commands_launcher/commands_launcher.js:53 2.2/applet.js:19
+msgid ":"
+msgstr ":"
+
+#. 5.8->settings-schema.json->light-mode->title
+#. 5.8/applet.js:368
+msgid "Light mode"
+msgstr "Mode clar"
+
+#. 5.8->settings-schema.json->dark-mode->title
+#. 5.8/applet.js:369
+msgid "Dark mode"
+msgstr "Mode fosc"
+
+#. 5.8/applet.js:412
+msgid "Error"
+msgstr "Error"
+
+#. 5.8/applet.js:418 2.2/applet.js:19
+msgid "Critical error"
+msgstr "Error crític"
+
+#. 5.8/lib/time_change_listener/time_change_listener.js:28
+msgid ""
+"Missing dependencies `make` and/or `g++`. Install them, in e.g. on Debian-"
+"based system with `sudo apt install make g++`, then reload the applet in "
+"restarting Cinnamon."
+msgstr ""
+"Falten les dependències `make` i/o `g++`. Instal·leu-les, per exemple, en "
+"sistemes basats en Debian, amb `sudo apt install make g++` i recarregueu la "
+"miniaplicació reiniciant Cinnamon."
+
+#. 5.8/lib/time_change_listener/time_change_listener.js:41
+msgid "Compilation of"
+msgstr "Compilació de"
+
+#. 5.8/lib/time_change_listener/time_change_listener.js:41
+#. 5.8/lib/commands_launcher/commands_launcher.js:33
+msgid "failed"
+msgstr "ha fallat"
+
+#. 5.8/lib/time_change_listener/time_change_listener.js:95
+msgid "the subprocess"
+msgstr "el subprocés"
+
+#. 5.8/lib/time_change_listener/time_change_listener.js:95
+msgid "wrote on its error output"
+msgstr "ha escrit a la seva sortida d'error"
+
+#. 5.8/lib/twilights_calculator/twilights_calculator.js:21
+msgid "unable to calculate twilight times, check coordinates format or range"
+msgstr ""
+"no s'han pogut calcular les hores de crepuscle, reviseu el format o el rang "
+"de les coordenades"
+
+#. 5.8/lib/commands_launcher/commands_launcher.js:33
+msgid "the command"
+msgstr "l'ordre"
+
+#. 5.8/lib/commands_launcher/commands_launcher.js:35
+msgid "due to a wrong format"
+msgstr "degut a un format invàlid"
+
+#. 5.8/lib/commands_launcher/commands_launcher.js:37
+#. 5.8/lib/commands_launcher/commands_launcher.js:44
+#. 5.8/lib/commands_launcher/commands_launcher.js:50
+msgid "Detail"
+msgstr "Detall"
+
+#. 5.8/lib/commands_launcher/commands_launcher.js:42
+msgid "due to time expiration"
+msgstr "degut a l'esgotament del temps"
+
+#. 5.8/lib/commands_launcher/commands_launcher.js:48
+msgid "due to an error"
+msgstr "per culpa d'un error"
+
+#. 2.2/applet.js:20
+msgid "this applet is only supported by"
+msgstr "aquesta miniaplicació només és suportada per"
+
+#. metadata.json->name
+msgid "Automatic dark/light themes"
+msgstr "Temes fosc/clar automàtics"
+
+#. metadata.json->description
+msgid "Automatically switch between dark and light themes at twilight times."
+msgstr ""
+"Canvia de manera automàtica entre els temes fosc i clar en hores de "
+"crepuscle."
+
+#. 5.8->settings-schema.json->settings->title
+msgid "Settings"
+msgstr "Opcions"
+
+#. 5.8->settings-schema.json->settings_state->title
+msgid "State"
+msgstr "Estat"
+
+#. 5.8->settings-schema.json->settings_control->title
+msgid "Control"
+msgstr "Control"
+
+#. 5.8->settings-schema.json->settings_location->title
+msgid "Location"
+msgstr "Ubicació"
+
+#. 5.8->settings-schema.json->light-mode_themes->title
+#. 5.8->settings-schema.json->dark-mode_themes->title
+msgid "Themes"
+msgstr "Temes"
+
+#. 5.8->settings-schema.json->light-mode_others->title
+#. 5.8->settings-schema.json->dark-mode_others->title
+msgid "Others"
+msgstr "Altres"
+
+#. 5.8->settings-schema.json->light-mode_background->title
+#. 5.8->settings-schema.json->dark-mode_background->title
+msgid "Desktop background"
+msgstr "Fons d'escriptori"
+
+#. 5.8->settings-schema.json->light-mode_commands->title
+#. 5.8->settings-schema.json->dark-mode_commands->title
+msgid "Custom commands"
+msgstr "Ordres personalitzades"
+
+#. 5.8->settings-schema.json->settings_control_switch_auto-mode->description
+msgid "Automatically switch modes"
+msgstr "Canvia de mode automàticament"
+
+#. 5.8->settings-schema.json->settings_control_switch_auto-mode->tooltip
+msgid ""
+"Automatically switch between light and dark modes based on the location and "
+"time of day"
+msgstr ""
+"Canvia de modes entre clar i fosc basat en la ubicació i l'hora del dia"
+
+#. 5.8->settings-schema.json->settings_state_switch_dark-mode->description
+msgid "Light/dark mode"
+msgstr "Mode clar/fosc"
+
+#. 5.8->settings-schema.json->settings_state_switch_dark-mode->tooltip
+msgid "Toggle light or dark mode manually"
+msgstr "Alterna el mode clar o fosc manualment"
+
+#. 5.8->settings-schema.json->settings_location_switch_sync-from-
+#. timezone->description
+msgid "Sync from the system"
+msgstr "Sincronitza des del sistema"
+
+#. 5.8->settings-schema.json->settings_location_switch_sync-from-
+#. timezone->tooltip
+msgid ""
+"Dynamically sync the location coordinates from the region and city defined "
+"in the system using a local database"
+msgstr ""
+"Sincronitza de manera dinàmica les coordenades d'ubicació de la regió i "
+"ciutat definides al sistema utilitzant una base de dades local"
+
+#. 5.8->settings-schema.json->settings_location_button_open-os-
+#. settings->description
+#. 5.8->settings-schema.json->light-mode_themes_button_open-os-
+#. settings->description
+#. 5.8->settings-schema.json->light-mode_background_button_open-os-
+#. settings->description
+#. 5.8->settings-schema.json->dark-mode_themes_button_open-os-
+#. settings->description
+#. 5.8->settings-schema.json->dark-mode_background_button_open-os-
+#. settings->description
+msgid "Open the system settings"
+msgstr "Obre la configuració del sistema"
+
+#. 5.8->settings-schema.json->settings_location_button_open-os-
+#. settings->tooltip
+msgid ""
+"Open the system's settings window to select the region and city for the time "
+"zone"
+msgstr ""
+"Obre la finestra de la configuració del sistema per seleccionar regió i "
+"ciutat per la zona horària"
+
+#. 5.8->settings-schema.json->settings_location_entry_latitude->description
+msgid "Latitude"
+msgstr "Latitud"
+
+#. 5.8->settings-schema.json->settings_location_entry_latitude->tooltip
+msgid "Geographical latitude in decimal degrees"
+msgstr "Latitud geogràfica en graus decimals"
+
+#. 5.8->settings-schema.json->settings_location_entry_longitude->description
+msgid "Longitude"
+msgstr "Longitud"
+
+#. 5.8->settings-schema.json->settings_location_entry_longitude->tooltip
+msgid "Geographical longitude in decimal degrees"
+msgstr "Longitud geogràfica en graus decimals"
+
+#. 5.8->settings-schema.json->settings_location_button_show-twilight-
+#. times->description
+msgid "Show switch times in a notification"
+msgstr "Mostra els horaris de canvi en una notificació"
+
+#. 5.8->settings-schema.json->settings_location_button_show-twilight-
+#. times->tooltip
+msgid ""
+"Show today's switch times for light and dark modes based on the current "
+"location via a system notification message"
+msgstr ""
+"Mostra els horaris de canvi d'avui entre els modes clar i fosc basats en la "
+"ubicació actual mitjançant un missatge de notificació del sistema"
+
+#. 5.8->settings-schema.json->light-mode_themes_button_open-os-
+#. settings->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_button_open-os-
+#. settings->tooltip
+msgid "Open the system's settings window to select the themes"
+msgstr ""
+"Obre la finestra de configuració del sistema per a seleccionar els temes"
+
+#. 5.8->settings-schema.json->light-mode_themes_button_detect->description
+#. 5.8->settings-schema.json->light-mode_background_button_detect->description
+#. 5.8->settings-schema.json->dark-mode_themes_button_detect->description
+#. 5.8->settings-schema.json->dark-mode_background_button_detect->description
+msgid "Detect from the system"
+msgstr "Detecta des del sistema"
+
+#. 5.8->settings-schema.json->light-mode_themes_button_detect->tooltip
+msgid ""
+"Detect the system's themes currently set and assign them to the light mode"
+msgstr "Detecta els temes actius del sistema i els assigna al mode clar"
+
+#. 5.8->settings-schema.json->light-mode_themes_entry_mouse-
+#. pointer->description
+#. 5.8->settings-schema.json->dark-mode_themes_entry_mouse-
+#. pointer->description
+msgid "Mouse pointer"
+msgstr "Cursor del ratolí"
+
+#. 5.8->settings-schema.json->light-mode_themes_entry_mouse-pointer->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_entry_mouse-pointer->tooltip
+msgid "Name of the mouse pointer theme"
+msgstr "Nom del tema del cursor del ratolí"
+
+#. 5.8->settings-schema.json->light-
+#. mode_themes_entry_applications->description
+#. 5.8->settings-schema.json->dark-mode_themes_entry_applications->description
+msgid "Applications"
+msgstr "Aplicacions"
+
+#. 5.8->settings-schema.json->light-mode_themes_entry_applications->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_entry_applications->tooltip
+msgid "Name of the applications theme (GTK theme)"
+msgstr "Nom del tema d'aplicacions (tema GTK)"
+
+#. 5.8->settings-schema.json->light-mode_themes_entry_icons->description
+#. 5.8->settings-schema.json->dark-mode_themes_entry_icons->description
+msgid "Icons"
+msgstr "Icones"
+
+#. 5.8->settings-schema.json->light-mode_themes_entry_icons->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_entry_icons->tooltip
+msgid "Name of the icons theme"
+msgstr "Nom del tema d'icones"
+
+#. 5.8->settings-schema.json->light-mode_themes_entry_desktop->description
+#. 5.8->settings-schema.json->dark-mode_themes_entry_desktop->description
+msgid "Desktop"
+msgstr "Escriptori"
+
+#. 5.8->settings-schema.json->light-mode_themes_entry_desktop->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_entry_desktop->tooltip
+msgid "Name of the desktop theme (Cinnamon theme)"
+msgstr "Nom del tema de l'escriptori (tema Cinnamon)"
+
+#. 5.8->settings-schema.json->light-mode_themes_button_apply->description
+#. 5.8->settings-schema.json->light-mode_background_button_apply->description
+#. 5.8->settings-schema.json->dark-mode_themes_button_apply->description
+#. 5.8->settings-schema.json->dark-mode_background_button_apply->description
+msgid "Test applying to the system"
+msgstr "Prova d'aplicar al sistema"
+
+#. 5.8->settings-schema.json->light-mode_themes_button_apply->tooltip
+msgid "Apply the light mode themes to the system manually"
+msgstr "Aplica els temes clars al sistema manualment"
+
+#. 5.8->settings-schema.json->both-modes_background_switch_enable->description
+msgid "Set desktop background"
+msgstr "Establir fons d'escriptori"
+
+#. 5.8->settings-schema.json->both-modes_background_switch_enable->tooltip
+msgid "Enable setting the desktop backgrounds for light and dark modes"
+msgstr "Activar l'establiment dels fons d'escriptori per als modes clar i fosc"
+
+#. 5.8->settings-schema.json->light-mode_commands_switch_enable->description
+#. 5.8->settings-schema.json->dark-mode_commands_switch_enable->description
+msgid "Launch custom commands"
+msgstr "Llançar ordres personalitzades"
+
+#. 5.8->settings-schema.json->light-mode_commands_switch_enable->tooltip
+msgid "Enable setting commands to be launched when switching to light mode"
+msgstr "Activar el llançament d'ordres en canviar al mode clar"
+
+#. 5.8->settings-schema.json->light-mode_background_button_open-os-
+#. settings->tooltip
+#. 5.8->settings-schema.json->dark-mode_background_button_open-os-
+#. settings->tooltip
+msgid "Open the system's settings window to set the background settings"
+msgstr ""
+"Obre la finestra de configuració del sistema per establir les opcions del "
+"fons d'escriptori"
+
+#. 5.8->settings-schema.json->light-mode_background_button_detect->tooltip
+msgid ""
+"Detect the system's background settings currently set and assign them to the "
+"light mode"
+msgstr ""
+"Detecta els paràmetres establerts sobre el fons d'escriptori i els assigna "
+"al mode clar"
+
+#. 5.8->settings-schema.json->light-
+#. mode_background_switch_slideshow->description
+#. 5.8->settings-schema.json->dark-
+#. mode_background_switch_slideshow->description
+msgid "Slideshow"
+msgstr "Presentació"
+
+#. 5.8->settings-schema.json->light-mode_background_switch_slideshow->tooltip
+#. 5.8->settings-schema.json->dark-mode_background_switch_slideshow->tooltip
+msgid "Set the desktop background to be a slideshow"
+msgstr "Estableix el fons de l'escriptori com una presentació"
+
+#. 5.8->settings-schema.json->light-
+#. mode_background_filechooser_file->description
+#. 5.8->settings-schema.json->dark-
+#. mode_background_filechooser_file->description
+msgid "Image file"
+msgstr "Fitxer d'imatge"
+
+#. 5.8->settings-schema.json->light-mode_background_filechooser_file->tooltip
+#. 5.8->settings-schema.json->dark-mode_background_filechooser_file->tooltip
+msgid "Image file to be set as the desktop background"
+msgstr "Fitxer d'imatge a establir com a fons de l'escriptori"
+
+#. 5.8->settings-schema.json->light-
+#. mode_background_filechooser_folder->description
+#. 5.8->settings-schema.json->dark-
+#. mode_background_filechooser_folder->description
+msgid "Images folder"
+msgstr "Carpeta d'imatges"
+
+#. 5.8->settings-schema.json->light-
+#. mode_background_filechooser_folder->tooltip
+#. 5.8->settings-schema.json->dark-mode_background_filechooser_folder->tooltip
+msgid "Folder containing images to be set for the desktop background slideshow"
+msgstr ""
+"Carpeta contenidora de les imatges a utilitzar per a la presentació dels "
+"fons d'escriptori"
+
+#. 5.8->settings-schema.json->light-mode_background_button_apply->tooltip
+msgid "Apply the light mode background settings to the system manually"
+msgstr ""
+"Aplica la configuració dels fons d'escriptori clars al sistema manualment"
+
+#. 5.8->settings-schema.json->light-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->dark-mode_commands_list->columns->title
+msgid "Name"
+msgstr "Nom"
+
+#. 5.8->settings-schema.json->light-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->dark-mode_commands_list->columns->title
+msgid "Active"
+msgstr "Actiu"
+
+#. 5.8->settings-schema.json->light-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->dark-mode_commands_list->columns->title
+msgid "Expiry (s)"
+msgstr "Esgotament (s)"
+
+#. 5.8->settings-schema.json->light-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->dark-mode_commands_list->columns->title
+msgid "Command"
+msgstr "Ordre"
+
+#. 5.8->settings-schema.json->light-mode_commands_list->tooltip
+msgid ""
+"List of commands to be executed when switching to this mode\n"
+"\n"
+"Notes:\n"
+"- the name's purpose is for error messages\n"
+"- the expiry time terminates the command's process early\n"
+"- an expiry of 0 second means never\n"
+"- a process refusing to terminate 10 seconds after the expiry is killed\n"
+"- the path is in the user's home directory (~/)\n"
+"- the error messages are displayed in a notification and reports stderr"
+msgstr ""
+"Llista d'ordres que seran executades en canviar a aquest mode\n"
+"\n"
+"Notes:\n"
+"- La finalitat del nom és facilitar la identificació de missatges d'error\n"
+"- El temps d'esgotament interromp el procés d'execució de l'ordre\n"
+"- Un temps d'esgotament de 0 segons significa mai\n"
+"- Un procés que no acabi en 10 segons serà finalitzat\n"
+"- La ruta és al directori de l'usuari (~/)\n"
+"- Els missatges d'error reporten a stderr i apareixeran en una notificació"
+
+#. 5.8->settings-schema.json->light-mode_commands_button_launch->description
+#. 5.8->settings-schema.json->dark-mode_commands_button_launch->description
+msgid "Test commands launch"
+msgstr "Inicia la prova d'ordres"
+
+#. 5.8->settings-schema.json->light-mode_commands_button_launch->tooltip
+msgid "Test launching the commands set for the light mode"
+msgstr "Prova a executar les ordres assignades pel mode clar"
+
+#. 5.8->settings-schema.json->dark-mode_themes_button_detect->tooltip
+msgid ""
+"Detect the system's themes currently set and assign them to the dark mode"
+msgstr "Detecta els temes actius del sistema i els assigna al mode fosc"
+
+#. 5.8->settings-schema.json->dark-mode_themes_button_apply->tooltip
+msgid "Apply the dark mode themes to the system manually"
+msgstr "Aplica els temes foscos al sistema manualment"
+
+#. 5.8->settings-schema.json->dark-mode_commands_switch_enable->tooltip
+msgid "Enable setting commands to be launched when switching to dark mode"
+msgstr "Activar l'execució d'ordres en canviar al mode fosc"
+
+#. 5.8->settings-schema.json->dark-mode_background_button_detect->tooltip
+msgid ""
+"Detect the system's background settings currently set and assign them to the "
+"dark mode"
+msgstr ""
+"Detecta els paràmetres establerts sobre el fons d'escriptori i els assigna "
+"al mode fosc"
+
+#. 5.8->settings-schema.json->dark-mode_background_button_apply->tooltip
+msgid "Apply the dark mode background settings to the system manually"
+msgstr ""
+"Aplica la configuració dels fons d'escriptori foscos al sistema manualment"
+
+#. 5.8->settings-schema.json->dark-mode_commands_list->tooltip
+msgid ""
+"List of commands to be executed when switching to this mode\n"
+"\n"
+"Notes:\n"
+"- the name's purpose is for error messages\n"
+"- the expiry time kills the command's process\n"
+"- an expiry of 0 seconds means never\n"
+"- any child process won't be able to expire\n"
+"- the path is in the ~ directory\n"
+"- the error messages reports stderr when the return status is not 0 and will "
+"appear in a notification"
+msgstr ""
+"Llista d'ordres que seran executades en canviar a aquest mode\n"
+"\n"
+"Notes:\n"
+"- La finalitat del nom és facilitar la identificació de missatges d'error\n"
+"- El temps d'esgotament interromp el procés d'execució de l'ordre\n"
+"- Un temps d'esgotament de 0 segons significa mai\n"
+"- Qualsevol procés fill no serà aturat\n"
+"- La ruta és al directori ~\n"
+"- Els missatges d'error reporten stderr quan l'estat del retorn no és 0 i "
+"apareixeran en una notificació"
+
+#. 5.8->settings-schema.json->dark-mode_commands_button_launch->tooltip
+msgid "Test launching the commands set for the dark mode"
+msgstr "Prova a executar les ordres assignades pel mode fosc"

@@ -1,0 +1,54 @@
+# GNOTE
+# This file is put in the public domain.
+# brett-smith, 2019
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnote@brett-smith 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-09-23 01:55+08:00\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:278
+msgid "Gnote isn't running! Do you have it installed?"
+msgstr "Gnote 尚未執行！您是否已安裝 Gnote？"
+
+#. metadata.json->name
+#. applet.js:324
+msgid "Gnote"
+msgstr "Gnote"
+
+#. applet.js:339
+msgid "Error: "
+msgstr "錯誤： "
+
+#. applet.js:340
+msgid "Retry"
+msgstr "重試"
+
+#. applet.js:354
+msgid "New Note"
+msgstr "新增筆記"
+
+#. applet.js:363
+msgid "Type to search..."
+msgstr "輸入即可搜尋…"
+
+#. applet.js:436
+msgid "GNote DBus service not found. Is GNote installed?"
+msgstr "找不到 GNote DBus 服務。您是否已安裝 GNote？"
+
+#. applet.js:438
+msgid "Click to see error!"
+msgstr "點選以檢視錯誤！"
+
+#. metadata.json->description
+msgid "Lists notes, view notes, create notes and search notes."
+msgstr "列出、檢視、新增以及搜尋筆記。"

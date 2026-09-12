@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: shutdown-timer@webum.by 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-21 20:00+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:71 applet.js:200
+msgid "Shutdown-timer"
+msgstr "Shutdown-timer"
+
+#: applet.js:77 applet.js:204 applet.js:293
+msgid "Minutes"
+msgstr "Minuten"
+
+#: applet.js:98
+msgid "Timer"
+msgstr "Timer"
+
+#: applet.js:128
+msgid "Show time on panel"
+msgstr "Toon tijd op paneel"
+
+#: applet.js:290
+msgid "Minutes to <click action>"
+msgstr "Minuten tot <click action>"
+
+#. metadata.json->name
+msgid "Shutdown timer"
+msgstr "Shutdown-timer"
+
+#. metadata.json->description
+msgid "Applet to help you shutdown, restart and suspend your system with timer"
+msgstr ""
+"Applet om je te helpen je systeem af te sluiten, opnieuw op te starten en te "
+"doen slapen met een timer"
+
+#. settings-schema.json->shutdown->description
+msgid "Shutdown event on menu"
+msgstr "'Afsluiten' gebeurtenis in menu"
+
+#. settings-schema.json->restart->description
+msgid "Restart event on menu"
+msgstr "'Herstarten' gebeurtenis in menu"
+
+#. settings-schema.json->log-out->description
+msgid "Log out event on menu"
+msgstr "'Afmelden' gebeurtenis in menu"
+
+#. settings-schema.json->hibernate->description
+msgid "Hibernate event on menu"
+msgstr "'Slaapstand naar schijf' gebeurtenis in menu"
+
+#. settings-schema.json->suspend->description
+msgid "Suspend event on menu"
+msgstr "'Slaapstand' gebeurtenis in menu"
+
+#. settings-schema.json->lock-screen->description
+msgid "Lock screen event on menu"
+msgstr "'Scherm vergrendelen' gebeurtenis in menu"
+
+#. settings-schema.json->restart-cinnamon->description
+msgid "Restart Cinnamon event on menu"
+msgstr "'Cinnamon opnieuw starten' gebeurtenis in menu"
+
+#. settings-schema.json->show-time-on-panel->description
+msgid "Show timer in panel"
+msgstr "Toon timer in paneel"

@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-19 11:04+0800\n"
+"PO-Revision-Date: 2025-05-04 23:13+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:32
+msgid ""
+"Are you sure you want to restore all settings to default?\n"
+"\n"
+msgstr "您確定要將所有設定還原為預設值嗎？\n\n"
+
+#: applet.js:37
+msgid "Yes"
+msgstr "是"
+
+#: applet.js:44
+msgid "No"
+msgstr "否"
+
+#: applet.js:65
+msgid "Settings"
+msgstr "設定"
+
+#: applet.js:74
+msgid "Troubleshoot"
+msgstr "疑難排解"
+
+#: applet.js:75
+msgid "Restart Cinnamon"
+msgstr "重新啟動 Cinnamon"
+
+#: applet.js:80
+msgid "Reload Theme"
+msgstr "重新載入主題"
+
+#, fuzzy
+#: applet.js:85
+msgid "Looking Glass"
+msgstr "Looking Glass"
+
+#: applet.js:89
+msgid "Restore all settings to Default"
+msgstr "還原所有設定為預設值"
+
+#: applet.js:94
+msgid "Force Quit Application"
+msgstr "強制結束應用程式"
+
+#: applet.js:101
+msgid "Screenshot"
+msgstr "螢幕截圖"
+
+#: applet.js:105
+msgid "Terminal"
+msgstr "終端機"
+
+#: applet.js:113
+msgid "Panel Edit Mode"
+msgstr "面板編輯模式"
+
+#: applet.js:122
+msgid "Add/Remove Applets"
+msgstr "新增/移除小程式"
+
+#: applet.js:126
+msgid "Start up Applications"
+msgstr "啟動應用程式"
+
+#: applet.js:130
+msgid "Cinnamon Settings"
+msgstr "Cinnamon 設定"
+
+#: applet.js:134
+msgid "System Settings"
+msgstr "系統設定"
+
+#. bettersettings@bownz->metadata.json->description
+msgid "A Better Cinnamon Settings"
+msgstr "更完善的 Cinnamon 設定"
+
+#. bettersettings@bownz->metadata.json->name
+msgid "Better Cinnamon Settings"
+msgstr "Better Cinnamon Settings"

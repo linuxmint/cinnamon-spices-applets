@@ -1,0 +1,47 @@
+# REDSHIFT
+# This file is put in the public domain.
+# marvel4u, 2017
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->brightness->description
+#. applet.js:65 applet.js:235 applet.js:340
+msgid "Brightness"
+msgstr ""
+
+#. applet.js:103
+msgid "Transition on night"
+msgstr ""
+
+#. applet.js:341
+msgid "On"
+msgstr ""
+
+#. applet.js:345
+msgid "Day colour temperature"
+msgstr ""
+
+#. applet.js:346
+msgid "Night colour temperature"
+msgstr ""
+
+#. applet.js:350
+msgid "Colour temperature"
+msgstr ""
+
+#. settings-schema.json->brightness-section->title
+msgid "Brightness level"
+msgstr ""
+
+#. settings-schema.json->redshift-transition-section->title
+msgid "Transition between day and night configuration"
+msgstr ""
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr ""
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr ""

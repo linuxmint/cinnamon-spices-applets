@@ -1,0 +1,102 @@
+# COLOR PICKER
+# This file is put in the public domain.
+# fmete, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: color-picker@fmete 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-15 14:50+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: yankimax <yankidevel@gmail.com>\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:80
+msgid "Click here to pick a color"
+msgstr "Нажмите здесь чтобы выбрать цвет"
+
+#: applet.js:136
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr "Пожалуйста установите пакет '%s'"
+
+#: applet.js:158
+#, javascript-format
+msgid "Color code '%s' copied to clipboard."
+msgstr "Цвет с кодом '%s' скопирован в буфер."
+
+#. color-picker@fmete->settings-schema.json->pick-notification->description
+msgid "Show picked color code in a popup notification"
+msgstr "Показывать выбранный код цвета в всплывающем уведомлении"
+
+#. color-picker@fmete->settings-schema.json->pick-notification->tooltip
+msgid ""
+"Show the picked color code, which has been copied to the clipboard, in a "
+"popup notification."
+msgstr ""
+"Показывать выбранный код цвета, который был скопирован в буфер обмена в "
+"всплывающем уведомлении."
+
+#. color-picker@fmete->settings-schema.json->head->description
+msgid "Color Pick Settings"
+msgstr "Настройки пипетки"
+
+#. color-picker@fmete->settings-schema.json->head1->description
+msgid "Applet Settings"
+msgstr "Настройки апплета"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->description
+msgid "Color code format"
+msgstr "Формат кода цвета"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->tooltip
+msgid ""
+"Select the format of the color code, which will be copied to the clipboard "
+"by the color picker."
+msgstr ""
+"Выберите формат кода цвета, который будет скопирован в буфер обменапипеткой."
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "HEX-Color: #XXXXXX"
+msgstr "HEX-Цвет: #XXXXXX"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "RGB-Color: 250,250,250"
+msgstr "RGB-Цвет: 250,250,250"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "HEX-Color: #xxxxxx"
+msgstr "HEX-Цвет: #xxxxxx"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "RGB-Color: (250,250,250)"
+msgstr "RGB-Цвет: (250,250,250)"
+
+#. color-picker@fmete->settings-schema.json->icon-name->description
+msgid "The icon to use in the panel"
+msgstr "Иконка в панели"
+
+#. color-picker@fmete->settings-schema.json->icon-name->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr "Выберите файл иконки, или вы можете вписать название иконки в поле"
+
+#. color-picker@fmete->settings-schema.json->keybinding-test->description
+msgid "Keybinding, which activates the color picker"
+msgstr "Сочетание клавиш, которое активирует пипетку"
+
+#. color-picker@fmete->metadata.json->description
+msgid ""
+"Use the color picker to select a color on the screen. The color value (HEX "
+"or RGB) will be copied to the clipboard."
+msgstr ""
+"Используй пипетку чтобы выбрать цвет на экране. Значение цвета (HEX или RGB) "
+"будет скопировано в буфер обмена."
+
+#. color-picker@fmete->metadata.json->name
+msgid "Color Picker"
+msgstr "Пипетка"

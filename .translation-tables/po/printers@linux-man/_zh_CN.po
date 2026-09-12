@@ -1,0 +1,29 @@
+# PRINTERS
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# linux-man, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-06 23:30+0000\n"
+"PO-Revision-Date: 2023-02-09 20:50+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: cups-bsd_warning.py:27
+msgid ""
+"Missing dependency.\n"
+"'lpq' command is missing! Please install 'cups-bsd' package (if available)."
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Caldas Lopes"
+msgstr ""

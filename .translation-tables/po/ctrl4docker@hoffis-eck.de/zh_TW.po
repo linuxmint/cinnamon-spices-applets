@@ -1,0 +1,42 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ctrl4docker@hoffis-eck.de 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-04-25 00:29+08:00\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:93
+msgid "Checking status"
+msgstr "正在檢查狀態"
+
+#. metadata.json->name
+msgid "Docker Control"
+msgstr "Docker 控制"
+
+#. metadata.json->description
+msgid "Activates/Deactivates Docker Container"
+msgstr "啟用／停用 Docker 容器"
+
+#. settings-schema.json->image->description
+msgid "docker image"
+msgstr "Docker 映像檔"
+
+#. settings-schema.json->container->description
+msgid "container name"
+msgstr "容器名稱"
+
+#. settings-schema.json->parameter->description
+msgid "parameter for the container"
+msgstr "容器的參數"

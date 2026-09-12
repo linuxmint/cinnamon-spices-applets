@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gpumonitor@axel358 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-12 06:37-0400\n"
+"PO-Revision-Date: 2024-11-13 19:44+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:62
+msgid "Launch Radeontop"
+msgstr "Suorita Radeontop"
+
+#. metadata.json->name
+msgid "AMD GPU Monitor"
+msgstr "AMD GPU Monitor"
+
+#. metadata.json->description
+msgid "Monitor AMD GPU statistics, requires radeontop"
+msgstr "Tarkkaile AMD GPU tilastotietoja, vaatii ohjelman radeontop"
+
+#. settings-schema.json->head->description
+msgid "Settings"
+msgstr "Asetukset"
+
+#. settings-schema.json->display-style->description
+msgid "Display style"
+msgstr "Näyttötyyli"
+
+#. settings-schema.json->display-style->options
+msgid "Column"
+msgstr "Sarake"
+
+#. settings-schema.json->display-style->options
+msgid "Side by side"
+msgstr "Rinnakkain"
+
+#. settings-schema.json->display-style->options
+msgid "GPU only"
+msgstr "Vain GPU"
+
+#. settings-schema.json->display-style->options
+msgid "VRAM only"
+msgstr "Vain VRAM"
+
+#. settings-schema.json->use-compact-label->description
+msgid "Use compact label style"
+msgstr "Käytä pienikokoista tyyliä"
+
+#. settings-schema.json->use-compact-label->tooltip
+msgid "Show only the first character of each label. Example: G for GPU"
+msgstr "Näytä vain ensimmäinen merkki jokaisesta nimestä. Esim. G GPU:lle"
+
+#. settings-schema.json->refresh-interval->units
+msgid "milliseconds"
+msgstr "millisekuntia"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh interval"
+msgstr "Päivitysväli"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid "Time between data refeshes"
+msgstr "Tietojen päivitysten välinen aika"
+
+#. settings-schema.json->decimal-places->description
+msgid "Decimal places"
+msgstr "Desimaalipilkku"
+
+#. settings-schema.json->decimal-places->tooltip
+msgid "Number of decimal places to show"
+msgstr "Näytettävien desimaalien määrä"
+
+#. settings-schema.json->select-gpu->description
+msgid "Select GPU (bus no.)"
+msgstr "Valitse GPU (väylä nro.)"
+
+#. settings-schema.json->select-gpu->options
+msgid "Loading..."
+msgstr "Ladataan..."
+
+#. settings-schema.json->select-gpu->tooltip
+msgid "Use 'lshw -C display' for more info"
+msgstr "Käytä \"lshw -C display\" ja saat lisätietoja"
+
+#. settings-schema.json->font-size->description
+msgid "Font size"
+msgstr "Fontin koko"
+
+#. settings-schema.json->font-size->tooltip
+msgid "Label font size"
+msgstr "Nimen fonttikoko"

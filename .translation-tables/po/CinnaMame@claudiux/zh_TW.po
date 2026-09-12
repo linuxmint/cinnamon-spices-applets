@@ -1,0 +1,125 @@
+# CINNAMame
+# This file is put in the public domain.
+# claudiux, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CinnaMame@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-06-27 18:56+0200\n"
+"PO-Revision-Date: 2025-09-05 02:29+0800\n"
+"Last-Translator: GitHub Copilot\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. applet.js:36
+msgid ""
+"Once you've downloaded your roms from your library,\n"
+"you need to copy them to the local folder named here\n"
+"‘Local Mame Roms’.\n"
+"\n"
+"Then go to the ‘Games to show’ tab."
+msgstr ""
+"從 ROM 資料庫下載 ROM 後，\n"
+"請將其複製到此處命名的本機資料夾\n"
+"‘本機 MAME ROM’。\n"
+"\n"
+"接著請前往 ‘要顯示的遊戲’ 分頁。"
+
+#. applet.js:37
+msgid ""
+"Do not use [+]; use the 'Refresh Games' button instead.\n"
+"Disable games you don't want in the menu.\n"
+"Removing a line do not remove the game from the menu.\n"
+"You can change Titles but not Ids.\n"
+"You can change order to change that of the menu."
+msgstr ""
+"請勿使用 [+]；請改用 '重新整理遊戲' 按鈕。\n"
+"停用不想在選單中顯示的遊戲。\n"
+"移除一行並不會從選單中刪除遊戲。\n"
+"可以變更標題，但不可變更 ID。\n"
+"可變更順序以調整選單的排列。"
+
+#. applet.js:78
+msgid "Install mame"
+msgstr "安裝 NAME"
+
+#. metadata.json->description
+#. metadata.json->name
+msgid "CinnaMame"
+msgstr "CinnaMame"
+
+#. settings-schema.json->pageRoms->title
+msgid "Roms"
+msgstr "ROM"
+
+#. settings-schema.json->pageGames->title
+msgid "Games to show"
+msgstr "要顯示的遊戲"
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr "一般"
+
+#. settings-schema.json->sectionLink->title
+msgid "Rom Library"
+msgstr "ROM 資料庫"
+
+#. settings-schema.json->sectionTips->title
+#. settings-schema.json->sectionGamesTips->title
+msgid "Tips"
+msgstr "提示"
+
+#. settings-schema.json->sectionMameRoms->title
+#. settings-schema.json->sectionGamesToShow->title
+msgid "Local Mame Roms"
+msgstr "本機 MAME ROM"
+
+#. settings-schema.json->sectionIcon->title
+msgid "Icon"
+msgstr "圖示"
+
+#. settings-schema.json->linkURL->description
+msgid "URL of your Rom Library"
+msgstr "ROM 資料庫的 URL"
+
+#. settings-schema.json->linkButton->description
+msgid "Open your Rom Library"
+msgstr "開啟 ROM 資料庫"
+
+#. settings-schema.json->linkReset->description
+msgid "Reset Rom Library URL to default"
+msgstr "將 ROM 資料庫 URL 重設為預設值"
+
+#. settings-schema.json->mameRomsButton->description
+msgid "Open Local Mame Roms"
+msgstr "開啟本機 MAME ROM"
+
+#. settings-schema.json->refreshGamesButton->description
+msgid "Refresh Games"
+msgstr "重新整理遊戲"
+
+#. settings-schema.json->gamesToShow->columns->title
+msgid "Enabled"
+msgstr "已啟用"
+
+#. settings-schema.json->gamesToShow->columns->title
+msgid ""
+"Id\n"
+"Do not change!"
+msgstr ""
+"ID\n"
+"請勿變更！"
+
+#. settings-schema.json->gamesToShow->columns->title
+msgid "Title"
+msgstr "標題"
+
+#. settings-schema.json->useSymbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "使用符號圖示"

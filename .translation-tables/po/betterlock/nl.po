@@ -1,0 +1,113 @@
+# LOCK KEYS INDICATOR WITH NOTIFICATIONS
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# entelechy, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-16 19:05+0100\n"
+"PO-Revision-Date: 2024-09-11 12:16+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:104
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#. applet.js:108
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+#. applet.js:112
+msgid "Scr Lock"
+msgstr "Scr Lock"
+
+#. applet.js:156
+msgid "Lock Keys"
+msgstr "Toetsen vergrendelen"
+
+#. applet.js:231
+msgid "Num lock on"
+msgstr "Num lock aan"
+
+#. applet.js:233
+msgid "Num lock off"
+msgstr "Num lock uit"
+
+#. applet.js:239
+msgid "Caps lock on"
+msgstr "Caps lock aan"
+
+#. applet.js:241
+msgid "Caps lock off"
+msgstr "Caps lock uit"
+
+#. applet.js:247
+msgid "Scr lock on"
+msgstr "Scr lock aan"
+
+#. applet.js:249
+msgid "Scr lock off"
+msgstr "Scr lock uit"
+
+#. metadata.json->description
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification "
+"when these change."
+msgstr ""
+"Toont of caps lock/num lock/scr lock aan staat, en geeft een melding wanneer "
+"deze veranderen."
+
+#. metadata.json->name
+msgid "Lock keys indicator with notifications"
+msgstr "Vergrendelingstoetsenindicator met meldingen"
+
+#. settings-schema.json->section1->description
+msgid "Indicators"
+msgstr ""
+
+#. settings-schema.json->show-num-lock-indicator->description
+msgid "Show num lock indicator"
+msgstr "Num lock-indicator tonen"
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "Caps lock-indicator tonen"
+
+#. settings-schema.json->show-scr-lock-indicator->description
+msgid "Show scr lock indicator"
+msgstr "Scr lock-indicator tonen"
+
+#. settings-schema.json->hide-inactive-indicators->description
+msgid "Hide inactive indicators"
+msgstr ""
+
+#. settings-schema.json->toggle-on-click->description
+msgid "Toggle state when clicked"
+msgstr ""
+
+#. settings-schema.json->section2->description
+#, fuzzy
+msgid "Notifications"
+msgstr "Meldingen tonen"
+
+#. settings-schema.json->show-osd-notifications->description
+#, fuzzy
+msgid "Show OSD notifications"
+msgstr "Meldingen tonen"
+
+#. settings-schema.json->show-toast-notifications->description
+#, fuzzy
+msgid "Show toast notifications"
+msgstr "Meldingen tonen"
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
+msgstr "Demp het systeemwaarschuwingsgeluid"

@@ -1,0 +1,207 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2024-07-19 02:46+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:45 applet.js:46
+msgid "GitHub Explorer"
+msgstr "Explorador de Github"
+
+#. applet.js:45
+msgid "Attempting to Load your GitHub Repos"
+msgstr "S'estan intentant carregar els vostres repositoris de Github"
+
+#. applet.js:46
+#, javascript-format
+msgid "Successfully Loaded GitHub Repos for user %s"
+msgstr "S'han carregat els repositoris de Github de l'usuari %s"
+
+#. applet.js:47
+msgid "ERROR:: GitHub Explorer ::ERROR"
+msgstr "ERROR:: Explorador de Github ::ERROR"
+
+#. applet.js:47
+msgid "Failed to load GitHub Repositories! Check applet Configuration"
+msgstr ""
+"Error en carregar els repositoris de Github! Reviseu la configuració de la "
+"miniaplicació"
+
+#. applet.js:166
+msgid "Settings"
+msgstr "Opcions"
+
+#. applet.js:177 applet.js:270
+msgid "Check Applet Configuration"
+msgstr "Revisar la configuració de la miniaplicació"
+
+#. applet.js:266
+msgid "API Rate Exceeded will try again once we are allowed"
+msgstr "Límit de la clau API excedit. S'intentarà de nou quan sigui possible"
+
+#. applet.js:281
+msgid "Click here to open GitHub"
+msgstr "Cliqueu aquí per obrir Github"
+
+#. applet.js:331
+msgid "Open Repo In Browser"
+msgstr "Obrir repositori al navegador"
+
+#. applet.js:339
+msgid "Project Home"
+msgstr "Directori del projecte"
+
+#. applet.js:346
+msgid "Details"
+msgstr "Detalls"
+
+#. applet.js:349
+msgid "Watchers"
+msgstr "Watchers"
+
+#. applet.js:356
+msgid "Open Issues"
+msgstr "Incidències obertes"
+
+#. applet.js:363
+msgid "Forks"
+msgstr "Forks"
+
+#. settings-schema.json->open-github-homepage-button->description
+#. applet.js:393
+msgid "Open GitHub Home"
+msgstr "Obrir pàgina d'inici de Github"
+
+#. applet.js:401
+msgid "Create A Gist"
+msgstr "Crear un Gist"
+
+#. metadata.json->name
+msgid "Github Explorer"
+msgstr "Explorador de Github"
+
+#. metadata.json->description
+msgid "Click on the applet to explore your Public Github repositories"
+msgstr ""
+"Cliqueu a la miniaplicació per explorar els vostres repositoris públics a "
+"Github"
+
+#. settings-schema.json->head->description
+msgid "User Settings"
+msgstr "Configuració d'usuari"
+
+#. settings-schema.json->username->description
+msgid "GitHub username:"
+msgstr "Usuari de Github:"
+
+#. settings-schema.json->username->tooltip
+msgid "Set a username which you want to display public repositories for"
+msgstr ""
+"Establiu un usuari del qual vulgueu que es mostrin els repositoris públics"
+
+#. settings-schema.json->head1->description
+msgid "Usage Settings"
+msgstr "Configuració d'ús"
+
+#. settings-schema.json->enable-auto-refresh->description
+msgid "Check this to enable automatic refreshing"
+msgstr "Marqueu això per a actualitzacions automàtiques"
+
+#. settings-schema.json->enable-auto-refresh->tooltip
+msgid ""
+"Checking this will mean the applet will update itself according to your "
+"refresh interval"
+msgstr ""
+"Marcant això fareu que la miniaplicació s'actualitzi per si sola d'acord amb "
+"l'interval de refresc establert"
+
+#. settings-schema.json->enable-verbose-logging->description
+msgid "Check this to enable lots of logging in Looking Glass"
+msgstr ""
+"Marqueu això per activar un munt de registres d'esdeveniments a Looking Glass"
+
+#. settings-schema.json->enable-verbose-logging->tooltip
+msgid "Checking this will enable lots of logging"
+msgstr "Marcant això farà que es registrin molts esdeveniments"
+
+#. settings-schema.json->enable-github-change-notifications->description
+msgid ""
+"Check this to enable notifications about changes to Watchers, Forks and "
+"Issues"
+msgstr ""
+"Activeu això per a activar les notificacions de canvis pel que fa a "
+"Watchers, Forks i Incidències"
+
+#. settings-schema.json->enable-github-change-notifications->tooltip
+msgid "Checking this will enable more notification messages"
+msgstr "Activant això activarà més missatges de notificació"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->description
+msgid "Check this show the number of open issues next to the repository"
+msgstr ""
+"Marqueu això per mostrar el número d'incidències obertes al costat del "
+"repositori"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->tooltip
+msgid "Checking this show the number of issues next to each repository"
+msgstr ""
+"Marcant això es mostrarà el número d'incidències al costat de cada repositori"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh Interval:"
+msgstr "Interval de refresc:"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid ""
+"Change the amount of time between checking GitHub for changes to your "
+"Repositories"
+msgstr ""
+"Interval de temps entre comprovacions de canvis als vostres repositoris de "
+"Github"
+
+#. settings-schema.json->head2->description
+msgid "Version Details"
+msgstr "Detalls de la versió"
+
+#. settings-schema.json->applet-version->description
+msgid "Applet Version:"
+msgstr "Versió de la miniaplicació:"
+
+#. settings-schema.json->applet-version->tooltip
+msgid "Current version installed"
+msgstr "Versió instal·lada actualment"
+
+#. settings-schema.json->open-cinnamon-homepage-button->description
+msgid "Visit Cinnamon Applet Home"
+msgstr "Visitar el lloc web de la miniaplicació a Cinnamon"
+
+#. settings-schema.json->open-cinnamon-homepage-button->tooltip
+msgid "Open cinnamon.com - rate the application"
+msgstr "Obre cinnamon.com - valoreu la miniaplicació"
+
+#. settings-schema.json->open-github-homepage-button->tooltip
+msgid "Open github.com - fork the code or add features"
+msgstr "Obre github.com - podeu fer fork o afegir funcionalitats"
+
+#. settings-schema.json->open-developer-homepage-button->description
+msgid "Open Developer Home"
+msgstr "Obrir el lloc web del desenvolupador"
+
+#. settings-schema.json->open-developer-homepage-button->tooltip
+msgid "Open morgan-design.com - my personal blog"
+msgstr "Obre morgan-design.com - el meu blog personal"

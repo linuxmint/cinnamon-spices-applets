@@ -1,0 +1,495 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-27 03:33+0700\n"
+"PO-Revision-Date: 2024-11-18 14:34+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: fi\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+#: applet.js:1433
+msgid "Task complete"
+msgstr ""
+
+#: dialogs.js:565 dialogs.js:599
+msgid "Reorder"
+msgstr ""
+
+#: dialogs.js:566
+msgid "Drag the rows to reorder, then press Done."
+msgstr ""
+
+#: dialogs.js:592
+msgid "Done"
+msgstr ""
+
+#: features.js:495
+msgid "Reorder tasks"
+msgstr ""
+
+#: features.js:519
+msgid "Reorder presets"
+msgstr ""
+
+#: features.js:635
+msgid "Capture distraction"
+msgstr ""
+
+#: features.js:637
+msgid "Type it, press Enter — then back to work"
+msgstr ""
+
+#: features.js:695
+msgid "Step away from screens — don't check your phone."
+msgstr ""
+
+#: features.js:696
+msgid "Unclench your jaw and drop your shoulders."
+msgstr ""
+
+#: features.js:704
+msgid "Rest away from screens — no phone, no feeds, no news."
+msgstr ""
+
+#: features.js:705
+msgid "Move your body and let your mind wander."
+msgstr ""
+
+#: features.js:1143
+msgid "What is the Pomodoro technique? 🍅"
+msgstr ""
+
+#: features.js:1144
+msgid ""
+"Focus in short sprints with deliberate rest: about 25 minutes on one task, "
+"then a 5-minute break; after four sprints, take a longer 15–30 minute break. "
+"The finite countdown keeps a task approachable and the regular breaks "
+"protect your attention."
+msgstr ""
+
+#. settings-schema.json->about_technique_button->description
+#: features.js:1147
+msgid "About the Pomodoro technique"
+msgstr ""
+
+#: features.js:1539
+msgid "%d.%m"
+msgstr ""
+
+#: features.js:1638
+#, javascript-format
+msgid "Saved ✓ — %s"
+msgstr ""
+
+#: features.js:1641
+msgid "Could not save statistics export."
+msgstr ""
+
+#: features.js:1673
+msgid "Could not open the folder."
+msgstr ""
+
+#: features.js:1776
+#, javascript-format
+msgid "This month: %d 🍅 · %s · best day %d 🍅"
+msgstr ""
+
+#: features.js:1806
+#, javascript-format
+msgid "Focus by hour; most focused around %s"
+msgstr ""
+
+#: features.js:1807
+msgid "Focus by hour; not enough data yet"
+msgstr ""
+
+#: features.js:1827
+#, javascript-format
+msgid "┄┄ daily goal (%d 🍅)"
+msgstr ""
+
+#: features.js:1846
+#, javascript-format
+msgid "Last 14 days: %d 🍅 · best %s (%d 🍅)"
+msgstr ""
+
+#: features.js:1847
+msgid "Last 14 days: no focus yet"
+msgstr ""
+
+#: features.js:1880
+#, javascript-format
+msgid "Last 12 weeks: %d active days · busiest %s (%d 🍅)"
+msgstr ""
+
+#: features.js:1881
+msgid "Last 12 weeks: no focus yet"
+msgstr ""
+
+#: features.js:1905
+#, javascript-format
+msgid "%s: %d 🍅"
+msgstr ""
+
+#: features.js:1936
+msgid "Export…"
+msgstr ""
+
+#: features.js:1939
+msgid "Open folder"
+msgstr ""
+
+#: features.js:2256
+msgid "No sound backend available for preview."
+msgstr ""
+
+#: features.js:2260
+msgid "Choose an ambient sound first (it's set to Off)."
+msgstr ""
+
+#: features.js:2513
+msgid "Break — locking the screen"
+msgstr ""
+
+#: features.js:2514
+msgid "Locking in a few seconds so you can step away."
+msgstr ""
+
+#: features.js:2515
+msgid "Don't lock now"
+msgstr ""
+
+#: features.js:2561
+msgid "Couldn't lock the screen"
+msgstr ""
+
+#: features.js:2561
+msgid "No screen locker was available."
+msgstr ""
+
+#: features.js:2751
+#, javascript-format
+msgid "Blocking updated — %d site(s)."
+msgstr ""
+
+#: features.js:2758
+msgid "Site blocking cleared."
+msgstr ""
+
+#: features.js:2866
+msgid ""
+"Focus spotlight is on — every other window is dimmed so the one you're "
+"working in stands out. Click the on-screen pill (or switch Zen off) to exit."
+msgstr ""
+
+#: features.js:2867
+msgid ""
+"Focus spotlight is armed. When your next focus session starts, every window "
+"except the one you're working in dims, so your task stands out. Click the on-"
+"screen pill to exit."
+msgstr ""
+
+#: features.js:3018
+msgid "Exit focus"
+msgstr ""
+
+#: menu.js:239 menu.js:812
+msgid "No task yet — tap to choose one"
+msgstr ""
+
+#: menu.js:370
+msgid "Skip the current phase and move on to the next."
+msgstr ""
+
+#: menu.js:377
+msgid ""
+"Stop the current timer and return to the start. Your pomodoro count for this "
+"set is kept."
+msgstr ""
+
+#: menu.js:389
+msgid "Reset timer & count"
+msgstr ""
+
+#: menu.js:390
+msgid ""
+"Reset the timer and clear this set's pomodoro count. Your saved statistics "
+"aren't affected."
+msgstr ""
+
+#: menu.js:391
+msgid "Confirm reset"
+msgstr ""
+
+#: menu.js:434 menu.js:999
+msgid "Distractions"
+msgstr ""
+
+#: menu.js:470 menu.js:514
+msgid ""
+"Focus spotlight: while a focus session runs, every other window dims so the "
+"one you're working in stands out. Click the on-screen pill to exit."
+msgstr ""
+
+#: menu.js:484
+msgid "Manage blocked sites"
+msgstr ""
+
+#: menu.js:495
+msgid "Open the statistics dashboard"
+msgstr ""
+
+#: menu.js:930
+msgid "Jot a distraction, press Enter"
+msgstr ""
+
+#: menu.js:976
+msgid "Delete"
+msgstr ""
+
+#: menu.js:993
+msgid "Clear all"
+msgstr ""
+
+#: menu.js:1029 menu.js:1164
+msgid "Reorder…"
+msgstr ""
+
+#. settings-schema.json->timer->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->sec_modes->title
+msgid "Modes"
+msgstr ""
+
+#. settings-schema.json->sec_sounds->title
+msgid "Alerts & effects"
+msgstr ""
+
+#. settings-schema.json->sec_po_alerts->title
+msgid "Sound & priority"
+msgstr ""
+
+#. settings-schema.json->rhythm_hint_label->description
+msgid ""
+"Focus, break and cycle lengths come from presets — switch or edit them from "
+"the menu (Preset ▸)."
+msgstr ""
+
+#. settings-schema.json->show_dialog_messages->description
+msgid "Show a pop-up prompt at each phase change"
+msgstr ""
+
+#. settings-schema.json->auto_start_next->description
+msgid "Automatically start the next phase"
+msgstr ""
+
+#. settings-schema.json->auto_start_next->tooltip
+msgid ""
+"When a phase ends, start the next one (focus or break) automatically instead "
+"of waiting."
+msgstr ""
+
+#. settings-schema.json->hotkey_distraction->description
+msgid "Shortcut: capture a distraction"
+msgstr ""
+
+#. settings-schema.json->hotkey_distraction->tooltip
+msgid ""
+"Keyboard shortcut to pop up a quick note for a distracting thought, without "
+"opening the menu."
+msgstr ""
+
+#. settings-schema.json->task_celebration->description
+msgid "Celebrate when a task is completed"
+msgstr ""
+
+#. settings-schema.json->task_celebration->options
+msgid "Subtle (glow + check)"
+msgstr ""
+
+#. settings-schema.json->task_celebration->options
+msgid "Confetti"
+msgstr ""
+
+#. settings-schema.json->task_celebration->tooltip
+msgid ""
+"A short celebration when you complete a task that met its 🍅 estimate (or "
+"earned at least one). Confetti respects reduce-motion."
+msgstr ""
+
+#. settings-schema.json->task_celebration_preview_button->description
+msgid "Preview the celebration"
+msgstr ""
+
+#. settings-schema.json->task_celebration_preview_button->tooltip
+msgid "Play the task-completion celebration once to see how it looks."
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->description
+msgid "Ambient sound during focus"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "White noise"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Pink noise"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Brown noise"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Rain"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Sea"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Fan"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Wind"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Stream"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Street"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->tooltip
+msgid ""
+"Loop a calming sound during focus. White/pink/brown noise and rain/sea are "
+"built in; pick \"Custom file\" to use your own."
+msgstr ""
+
+#. settings-schema.json->focus_ambient_preview_button->description
+msgid "▶ Preview"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_preview_button->tooltip
+msgid "Play a short sample of the chosen ambient sound at the set volume."
+msgstr ""
+
+#. settings-schema.json->break_lock_enabled->description
+msgid "Lock the screen during breaks"
+msgstr ""
+
+#. settings-schema.json->break_lock_enabled->tooltip
+msgid ""
+"When a break starts, show a brief warning and then lock the screen so you "
+"actually step away. Never locks during focus; off by default."
+msgstr ""
+
+#. settings-schema.json->break_lock_long_only->description
+msgid "Lock only on long breaks"
+msgstr ""
+
+#. settings-schema.json->break_lock_long_only->tooltip
+msgid "Only lock for the longer breaks, not every short break."
+msgstr ""
+
+#. settings-schema.json->zen_mode_enabled->description
+msgid ""
+"Enable Zen mode (focus spotlight — dims other windows, toggled from the menu)"
+msgstr ""
+
+#. settings-schema.json->zen_mode_enabled->tooltip
+msgid ""
+"Allow the focus spotlight, toggled from the menu: while focusing, the other "
+"windows dim so the one you're working in stands out."
+msgstr ""
+
+#. settings-schema.json->zen_dim_strength->units
+msgid "%"
+msgstr ""
+
+#. settings-schema.json->zen_dim_strength->description
+msgid "Zen spotlight: dim strength"
+msgstr ""
+
+#. settings-schema.json->zen_dim_strength->tooltip
+msgid ""
+"How much to darken the other windows while a focus session runs (higher = "
+"darker)."
+msgstr ""
+
+#. settings-schema.json->zen_dim_desktop->description
+msgid "Zen spotlight: also dim the desktop wallpaper"
+msgstr ""
+
+#. settings-schema.json->zen_dim_desktop->tooltip
+msgid "Darken the desktop background too, not just the other windows."
+msgstr ""
+
+#. settings-schema.json->focus_start_command->tooltip
+msgid ""
+"Pick a script to run when a focus block starts (e.g. enable Do Not Disturb). "
+"You can also type a command."
+msgstr ""
+
+#. settings-schema.json->break_start_command->tooltip
+msgid ""
+"Pick a script to run when a break starts (e.g. clear your status). You can "
+"also type a command."
+msgstr ""
+
+#. settings-schema.json->goal_command->description
+msgid "Command to run when the daily goal is reached"
+msgstr ""
+
+#. settings-schema.json->goal_command->tooltip
+msgid ""
+"Pick a script to run when you reach your daily goal (e.g. a small "
+"celebration). You can also type a command."
+msgstr ""
+
+#. settings-schema.json->enable_blocking->description
+msgid "Block distracting sites"
+msgstr ""
+
+#. settings-schema.json->enable_blocking->tooltip
+msgid ""
+"When on, the sites below are blocked right now and stay blocked until you "
+"turn this off. Run \"Set up passwordless blocking\" once so toggling doesn't "
+"ask for a password."
+msgstr ""
+
+#. settings-schema.json->block_domains->tooltip
+msgid ""
+"Domains to block while blocking is on, one per row (e.g. youtube.com, www."
+"youtube.com)."
+msgstr ""
+
+#. settings-schema.json->about_technique_button->tooltip
+msgid "A short explanation of how the Pomodoro technique works."
+msgstr ""
+
+#. settings-schema.json->pushover_sound->description
+msgid "Notification sound"
+msgstr ""
+
+#. settings-schema.json->pushover_priority->description
+msgid "Priority"
+msgstr ""

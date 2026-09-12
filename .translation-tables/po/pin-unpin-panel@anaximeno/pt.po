@@ -1,0 +1,107 @@
+# PIN-UNPIN THE PANEL
+# This file is put in the public domain.
+# anaximeno, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pin-unpin-panel@anaximeno 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-10-13 14:05+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. 5.4/applet.js:155
+msgid "Click to Unpin the Panel"
+msgstr "Clique para Desafixar o Painel"
+
+#. 5.4/applet.js:155
+msgid "Click to Pin the Panel"
+msgstr "Clique para Fixar o Painel"
+
+#. metadata.json->name
+msgid "Pin-Unpin the Panel"
+msgstr "Fixar-Desafixar o Painel"
+
+#. metadata.json->description
+msgid ""
+"An applet that lets you pin or unpin the panel, making it fixed or "
+"collapsible."
+msgstr ""
+"Um applet que permite-lhe fixar ou desafixar o painel, tornando-o fixo ou "
+"colapsível."
+
+#. 5.4->settings-schema.json->general->description
+msgid "General"
+msgstr "Geral"
+
+#. 5.4->settings-schema.json->unpin-autohide-type->description
+msgid "Hide Type on Unpin"
+msgstr "Tipo de Ocultação durante a Desafixação"
+
+#. 5.4->settings-schema.json->unpin-autohide-type->options
+msgid "Auto Hide"
+msgstr "Ocultação Automática"
+
+#. 5.4->settings-schema.json->unpin-autohide-type->options
+msgid "Intelligent Hide"
+msgstr "Ocultação Inteligente"
+
+#. 5.4->settings-schema.json->pinned-at-startup->description
+msgid "At Startup"
+msgstr "Ao Iniciar"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Leave the panel as it is"
+msgstr "Manter o estado atual do painel"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Pin the panel"
+msgstr "Fixar o painel"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Unpin the panel"
+msgstr "Desafixar o painel"
+
+#. 5.4->settings-schema.json->style->description
+msgid "Style"
+msgstr "Estilo"
+
+#. 5.4->settings-schema.json->use-custom-icons->description
+msgid "Use Custom Icons"
+msgstr "Usar Ícones Personalizados"
+
+#. 5.4->settings-schema.json->pin-icon->description
+msgid "Pin Icon"
+msgstr "Ícone para Fixar"
+
+#. 5.4->settings-schema.json->unpin-icon->description
+msgid "Unpin Icon"
+msgstr "Ícone para Desafixar"
+
+#. 5.4->settings-schema.json->key-bindings->description
+msgid "Key Bindings"
+msgstr "Atalhos de Teclado"
+
+#. 5.4->settings-schema.json->toggle-panel-pin-binding-keys->description
+msgid "Toggle Panel Pin State"
+msgstr "Alternar Estado de Fixação do Painel"
+
+#. 5.4->settings-schema.json->toggle-panel-pin-binding-keys->tooltip
+msgid "Set keybinding to pin the panel"
+msgstr "Defina atalho de teclado para fixar o painel"
+
+#. 5.4->settings-schema.json->peek-panel-bindind-keys->description
+msgid "Peek Hidden Panel"
+msgstr "Mostrar o Painel Escondido"
+
+#. 5.4->settings-schema.json->peek-panel-bindind-keys->tooltip
+msgid "Set keybinding to temporarily show the panel"
+msgstr "Defina atalho de teclado para mostrar o painel"

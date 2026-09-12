@@ -1,0 +1,152 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-19 14:22+0800\n"
+"PO-Revision-Date: 2025-10-12 11:19+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. mylauncher@markbokil.com->metadata.json->name
+#: applet.js:64
+msgid "My Launcher"
+msgstr "Trình khởi chạy của tôi"
+
+#: applet.js:183
+msgid "Edit launcher menu"
+msgstr "Chỉnh sửa menu khởi chạy"
+
+#: applet.js:190 mylauncher.properties:46
+msgid "Help"
+msgstr "Trợ giúp"
+
+#: applet.js:194
+msgid "About"
+msgstr "Giới thiệu"
+
+#: applet.js:201
+msgid "Tooltips"
+msgstr "Chú giải công cụ"
+
+#: mylauncher.properties:6
+msgid "Apps"
+msgstr "Ứng dụng"
+
+#: mylauncher.properties:7
+msgid "Messenger"
+msgstr "Messenger"
+
+#: mylauncher.properties:9
+msgid "Office Suite"
+msgstr "Bộ ứng dụng văn phòng"
+
+#: mylauncher.properties:10
+msgid "Audio Player"
+msgstr "Trình phát âm thanh"
+
+#: mylauncher.properties:11
+msgid "Text Editor"
+msgstr "Trình soạn thảo văn bản"
+
+#: mylauncher.properties:12
+msgid "Image Editor"
+msgstr "Trình chỉnh sửa ảnh"
+
+#: mylauncher.properties:13
+msgid "SVG Editor"
+msgstr "Trình chỉnh sửa SVG"
+
+#: mylauncher.properties:16
+msgid "Calculator"
+msgstr "Máy tính"
+
+#: mylauncher.properties:18
+msgid "My Computer"
+msgstr "Máy tính của tôi"
+
+#: mylauncher.properties:19
+msgid "CUPS Printer Admin"
+msgstr "Quản lý máy in CUPS"
+
+#: mylauncher.properties:20
+msgid "Startup Applications"
+msgstr "Ứng dụng khởi động"
+
+#: mylauncher.properties:21
+msgid "System Monitor"
+msgstr "Trình giám sát hệ thống"
+
+#: mylauncher.properties:22
+msgid "System Settings"
+msgstr "Cài đặt hệ thống"
+
+#: mylauncher.properties:23
+msgid "CompizConfig"
+msgstr "CompizConfig"
+
+#: mylauncher.properties:24
+msgid "Cinnamon Settings"
+msgstr "Cài đặt Cinnamon"
+
+#: mylauncher.properties:25
+msgid "Screenshot"
+msgstr "Chụp ảnh màn hình"
+
+#: mylauncher.properties:26
+msgid "Search for files"
+msgstr "Tìm tệp"
+
+#: mylauncher.properties:31
+msgid "Add/Remove Applets"
+msgstr "Thêm/Xóa Applet"
+
+#: mylauncher.properties:32
+msgid "Reload Theme"
+msgstr "Tải lại giao diện"
+
+#: mylauncher.properties:33
+msgid "Looking Glass"
+msgstr "Looking Glass"
+
+#: mylauncher.properties:35
+msgid "Restart Cinnamon"
+msgstr "Khởi động lại Cinnamon"
+
+#: mylauncher.properties:36
+msgid "Suspend"
+msgstr "Ngủ đông"
+
+#: mylauncher.properties:38
+msgid "Home"
+msgstr "Trang chủ"
+
+#: mylauncher.properties:39
+msgid "Terminal"
+msgstr "Terminal"
+
+#: mylauncher.properties:40
+msgid "Browser"
+msgstr "Trình duyệt"
+
+#: mylauncher.properties:41
+msgid "Run..."
+msgstr "Chạy..."
+
+#: mylauncher.properties:42
+msgid "Toggle Desktop"
+msgstr "Chuyển đổi Desktop"
+
+#. mylauncher@markbokil.com->metadata.json->description
+msgid "Personal app launcher."
+msgstr "Trình khởi chạy ứng dụng cá nhân"

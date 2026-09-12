@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-04-15 19:46+0200\n"
+"PO-Revision-Date: 2024-04-22 09:39+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:122
+msgid "Settings"
+msgstr "Instellingen"
+
+#: applet.js:145
+msgid "Display"
+msgstr "Weergave"
+
+#: applet.js:146
+msgid "Headless"
+msgstr "Headless"
+
+#: applet.js:167
+msgid "ERROR. No compatible virtual machine programs found."
+msgstr "FOUT. Geen compatibele virtuele machine programma's gevonden."
+
+#: applet.js:273
+msgid "Update list"
+msgstr "Lijst bijwerken"
+
+#. metadata.json->name
+msgid "Vbox Launcher"
+msgstr "Vbox Starter"
+
+#. metadata.json->description
+msgid "An applet to launch virtual machines."
+msgstr "Een applet om virtuele machines te starten."
+
+#. settings-schema.json->autoUpdate->description
+msgid "Auto update (slow)"
+msgstr "Automatische update (langzaam)"
+
+#. settings-schema.json->showHeadlessMode->description
+msgid "Show Headless Mode"
+msgstr "Toon Headless Modus"

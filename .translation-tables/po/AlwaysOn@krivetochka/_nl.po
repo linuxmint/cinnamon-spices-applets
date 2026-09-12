@@ -1,0 +1,25 @@
+# ALWAYSON
+# This file is put in the public domain.
+# Krivetochka, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AlwaysOn@krivetochka 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-26 13:44+0200\n"
+"PO-Revision-Date: 2025-05-13 13:43+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. settings-schema.json->section-general->description
+msgid "Choose which parameters this applet affects"
+msgstr ""
+
+#. settings-schema.json->lid-close-action->description
+msgid "Do nothing when laptop lid is closed"
+msgstr ""

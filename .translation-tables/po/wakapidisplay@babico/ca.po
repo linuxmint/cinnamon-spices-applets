@@ -1,0 +1,96 @@
+# WAKAPI DISPLAY
+# This file is put in the public domain.
+# babico, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: wakapidisplay@babico 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:47
+msgid "Click to open your Wakapi Dashboard"
+msgstr "Feu clic per a obrir el vostre tauler de control de Wakapi"
+
+#. applet.js:50
+msgid "Open the Applet configuration to add your Wakapi API Key and link"
+msgstr ""
+"Obre la miniaplicació per a afegir la vostre clau d'API Wakapi i l'enllaç"
+
+#. metadata.json->name
+msgid "Wakapi Display"
+msgstr "Mostra Wakapi"
+
+#. metadata.json->description
+msgid "Displays your statistics from Wakapi"
+msgstr "Mostra les vostres estadístiques de Wakapi"
+
+#. settings-schema.json->wakapi-head->description
+msgid "Wakapi Settings"
+msgstr "Configuració Wakapi"
+
+#. settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "minuts"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh interval"
+msgstr "Interval de refresc"
+
+#. settings-schema.json->refreshInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine."
+msgstr ""
+"Augmenteu o disminuïu el valor del control per a canviar l'interval de "
+"refresc - utilitzeu un refresc lent si teniu un equip lent."
+
+#. settings-schema.json->apiLink->description
+msgid "Wakapi API Link"
+msgstr "Enllaç de l'API Wakapi"
+
+#. settings-schema.json->apiLink->tooltip
+msgid "The API link to your Wakapi instance."
+msgstr "L'enllaç a la vostra instància de l'API Wakapi"
+
+#. settings-schema.json->apiKey->description
+msgid "Wakapi API Key"
+msgstr "Clau d'API Wakapi"
+
+#. settings-schema.json->apiKey->tooltip
+msgid "The API key unique to your Wakapi account."
+msgstr "La clau d'API única del vostre compte de Wakapi"
+
+#. settings-schema.json->getApiKey->description
+msgid "Open the Wakapi page to get your API key"
+msgstr "Obre el lloc web de Wakapi per a obtenir la vostra clau API"
+
+#. settings-schema.json->getApiKey->tooltip
+msgid "Opens Wakapi API key webpage"
+msgstr "Obre el lloc web de l'API Wakapi"
+
+#. settings-schema.json->display-head->description
+msgid "Display Settings"
+msgstr "Opcions de mostra"
+
+#. settings-schema.json->logoColor->description
+msgid "Wakapi logo color"
+msgstr "Color del logo de Wakapi"
+
+#. settings-schema.json->logoColor->options
+msgid "White"
+msgstr "Blanc"
+
+#. settings-schema.json->logoColor->options
+msgid "Black"
+msgstr "Negre"

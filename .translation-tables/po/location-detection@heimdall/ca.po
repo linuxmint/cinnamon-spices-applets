@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-26 17:55+0200\n"
+"PO-Revision-Date: 2024-07-05 01:24+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:56
+msgid "Your percieved location."
+msgstr "La vostra ubicació percebuda."
+
+#: applet.js:104
+msgid "Your IPInfoDB account has been suspended."
+msgstr "El vostre compte de IPInfoDB ha estat suspès."
+
+#: applet.js:104 applet.js:107
+msgid "Please set a valid API key in the applets settings."
+msgstr "Si us plau, assigneu una clau API vàlida a les preferències de la miniaplicació."
+
+#: applet.js:107
+msgid "Invalid API key."
+msgstr "Clau API invàlida."
+
+#: applet.js:119
+msgid "Something went Wrong!"
+msgstr "Alguna cosa ha anat malament!"
+
+#. location-detection@heimdall->metadata.json->description
+msgid "Shows the geographic location of your public IP and country-flag."
+msgstr "Mostra la ubicació geogràfica de la vostra IP pública i la bandera del país."
+
+#. location-detection@heimdall->metadata.json->name
+msgid "Location Detection + Flags"
+msgstr "Detecció d'Ubicació + Banderes"
+
+#. location-detection@heimdall->settings-schema.json->register-
+#. ipinfodb->description
+msgid "Register on IPInfoDB to get an API key"
+msgstr "Registreu-vos a IPInfoDB per rebre una clau API"
+
+#. location-detection@heimdall->settings-schema.json->api-key->description
+msgid "API key from IPInfoDB"
+msgstr "Clau API d' IPInfoDB"
+
+#. location-detection@heimdall->settings-schema.json->api-key->tooltip
+msgid "Get your API key from IPInfoDB and place it here."
+msgstr "Obteniu la vostra clau API d' IPInfoDB i afegiu-la aquí."

@@ -1,0 +1,114 @@
+# LOCK KEYS INDICATOR WITH NOTIFICATIONS
+# This file is put in the public domain.
+# entelechy, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: betterlock 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-16 19:05+0100\n"
+"PO-Revision-Date: 2025-10-08 21:24+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:104
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#. applet.js:108
+msgid "Caps Lock"
+msgstr "Caps lock"
+
+#. applet.js:112
+msgid "Scr Lock"
+msgstr "Khóa màn hình"
+
+#. applet.js:156
+msgid "Lock Keys"
+msgstr "Lock Keys"
+
+#. applet.js:231
+msgid "Num lock on"
+msgstr "Num Lock đang bật"
+
+#. applet.js:233
+msgid "Num lock off"
+msgstr "Num Lock đang tắt"
+
+#. applet.js:239
+msgid "Caps lock on"
+msgstr "Caps lock đang bật"
+
+#. applet.js:241
+msgid "Caps lock off"
+msgstr "Caps lock đang tắt"
+
+#. applet.js:247
+msgid "Scr lock on"
+msgstr "Khóa màn hình đang bật"
+
+#. applet.js:249
+msgid "Scr lock off"
+msgstr "Khóa màn hình đang tắt"
+
+#. metadata.json->description
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification "
+"when these change."
+msgstr ""
+"Hiển thị trạng thái bật/tắt của Lock Keys (caps lock/num lock/scr lock) và "
+"thông báo khi chúng thay đổi."
+
+#. metadata.json->name
+msgid "Lock keys indicator with notifications"
+msgstr "Chỉ báo phím khóa kèm thông báo"
+
+#. settings-schema.json->section1->description
+msgid "Indicators"
+msgstr ""
+
+#. settings-schema.json->show-num-lock-indicator->description
+msgid "Show num lock indicator"
+msgstr "Hiển thị chỉ báo Num Lock"
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "Hiển thị chỉ báo Caps lock"
+
+#. settings-schema.json->show-scr-lock-indicator->description
+msgid "Show scr lock indicator"
+msgstr "Hiển thị chỉ báo khóa màn hình"
+
+#. settings-schema.json->hide-inactive-indicators->description
+msgid "Hide inactive indicators"
+msgstr ""
+
+#. settings-schema.json->toggle-on-click->description
+msgid "Toggle state when clicked"
+msgstr ""
+
+#. settings-schema.json->section2->description
+#, fuzzy
+msgid "Notifications"
+msgstr "Hiển thị thông báo"
+
+#. settings-schema.json->show-osd-notifications->description
+#, fuzzy
+msgid "Show OSD notifications"
+msgstr "Hiển thị thông báo"
+
+#. settings-schema.json->show-toast-notifications->description
+#, fuzzy
+msgid "Show toast notifications"
+msgstr "Hiển thị thông báo"
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
+msgstr "Tắt âm thanh thông báo hệ thống"

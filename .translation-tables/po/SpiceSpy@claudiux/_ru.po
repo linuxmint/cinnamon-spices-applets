@@ -1,0 +1,31 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+
+#. applet.js:196
+msgid "score"
+msgstr ""
+
+#. applet.js:208
+msgid "comments"
+msgstr ""
+
+#. applet.js:233
+msgid "translations"
+msgstr ""
+
+#. applet.js:995
+msgid "Refresh"
+msgstr ""
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->pageOptions->title
+#. settings-schema.json->section1->title
+msgid "Options"
+msgstr ""

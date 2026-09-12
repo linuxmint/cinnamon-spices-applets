@@ -1,0 +1,114 @@
+# INTERNET SEARCH BOX
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# mtwebster, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-25 21:36+0200\n"
+"PO-Revision-Date: 2023-02-09 20:54+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. applet.js:66 old/5.4/applet.js:63
+msgid "Right-click to select or add your search engine"
+msgstr ""
+
+#. applet.js:115 old/5.4/applet.js:112
+msgid "Select your Search Engine:"
+msgstr ""
+
+#. settings-schema.json->page-providers->title
+#. settings-schema.json->section-providers->title
+#. settings-schema.json->providers->description
+#. old->5.4->settings-schema.json->providers->description
+msgid "Providers"
+msgstr ""
+
+#. settings-schema.json->page-options->title
+#. settings-schema.json->section-options->title
+msgid "Options"
+msgstr ""
+
+#. settings-schema.json->section-keybinding->title
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#. settings-schema.json->section-colors->title
+#. old->5.4->settings-schema.json->header-colors->description
+msgid "Search-box colors"
+msgstr ""
+
+#. settings-schema.json->reset-after-search->description
+#. old->5.4->settings-schema.json->reset-after-search->description
+msgid "Reset query after search"
+msgstr ""
+
+#. settings-schema.json->reset-after-search->tooltip
+#. old->5.4->settings-schema.json->reset-after-search->tooltip
+msgid ""
+"Reset query after search? This may not be useful if you want to be able to "
+"perform the same query on other search engines afterwards."
+msgstr ""
+
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
+msgid "Show"
+msgstr ""
+
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
+msgid ""
+"Short name\n"
+"(3 lower-case letters)"
+msgstr ""
+
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
+msgid "Query URL"
+msgstr ""
+
+#. settings-schema.json->providers->tooltip
+#. old->5.4->settings-schema.json->providers->tooltip
+msgid ""
+"If your query begins with the 3 letters of the short name, it will be "
+"processed by the relevant search engine.\n"
+"Example: ddg linux mint iso"
+msgstr ""
+
+#. settings-schema.json->providers-help->description
+msgid ""
+"Only selected providers will be displayed in the context menu, so you can "
+"select your default provider.\n"
+"If you deselect the default provider, the first selected becomes the default "
+"provider.\n"
+"If no provider is selected, the default provider is Google."
+msgstr ""
+
+#. settings-schema.json->background-color->description
+#. old->5.4->settings-schema.json->background-color->description
+msgid "Background color"
+msgstr ""
+
+#. settings-schema.json->text-color->description
+#. old->5.4->settings-schema.json->text-color->description
+msgid "Text color"
+msgstr ""
+
+#. old->5.4->settings-schema.json->header-providers->description
+msgid "Search Engines"
+msgstr ""

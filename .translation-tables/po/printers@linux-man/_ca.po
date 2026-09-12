@@ -1,0 +1,13 @@
+# PRINTERS
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# linux-man, 2016
+#
+msgid ""
+msgstr ""
+
+#: cups-bsd_warning.py:27
+msgid ""
+"Missing dependency.\n"
+"'lpq' command is missing! Please install 'cups-bsd' package (if available)."
+msgstr ""

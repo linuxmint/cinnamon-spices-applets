@@ -1,0 +1,105 @@
+# SUSPEND COMPUTER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# janax, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-29 20:37-0400\n"
+"PO-Revision-Date: 2024-04-03 15:28+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. applet.js:48
+msgid "Suspend"
+msgstr "Mettre en veille"
+
+#. metadata.json->description
+msgid "Immediately suspends the computer"
+msgstr "Met immédiatement l'ordinateur en veille"
+
+#. metadata.json->name
+msgid "Suspend computer"
+msgstr "Mise en veille de l'ordinateur"
+
+#. settings-schema.json->suspend-header->description
+msgid "Suspend computer settings"
+msgstr "Paramètres de Mise en veille de l'ordinateur"
+
+#. settings-schema.json->suspend-on-double-click->description
+msgid "Double-click to suspend"
+msgstr "Double-clic pour mettre en veille"
+
+#. settings-schema.json->suspend-on-double-click->tooltip
+msgid ""
+"When enabled, a double-click will suspend the computer, otherwise the "
+"computer will suspend on a single click."
+msgstr ""
+"Lorsque cette option est activée un double-clic met en veille l'ordinateur, "
+"sinon l'ordinateur est mis en veille par un simple clic."
+
+#. settings-schema.json->count-down->description
+msgid "Use a count down before suspending"
+msgstr "Effectuer un compte à rebours avant de mettre en veille l'ordinateur"
+
+#. settings-schema.json->count-down->tooltip
+msgid ""
+"When enabled, a count down will occurs before suspending the computer.\n"
+"Clicking again during the count down will cancel the suspend."
+msgstr ""
+"Lorsque cette option est activée, un compte à rebours se produit avant la "
+"mise en veille de l'ordinateur.\n"
+"Un nouveau clic pendant le compte à rebours annule la mise en veille de "
+"l'ordinateur."
+
+#. settings-schema.json->count-down-duration->units
+msgid "seconds"
+msgstr "secondes"
+
+#. settings-schema.json->count-down-duration->description
+msgid "Count down duration"
+msgstr "Durée du compte à rebours"
+
+#. settings-schema.json->ctrl-override-countdown->description
+msgid "Ctrl+Click to override the count down and suspend immediately"
+msgstr ""
+"Ctrl+Clic pour annuler le compte à rebours et mettre en veille immédiatement"
+
+#. settings-schema.json->ctrl-override-countdown->tooltip
+msgid ""
+"When enabled, using Ctrl+Click will suspend the computer immediately, "
+"without starting a count down or waiting for an existing count down to "
+"finish."
+msgstr ""
+"Lorsque cette option est activée, l'utilisation de Ctrl+Clic met "
+"immédiatement en veille l'ordinateur, sans lancer de compte à rebours ni "
+"attendre la fin d'un compte à rebours existant."
+
+#. settings-schema.json->fullcolor-icon->description
+msgid "Use a full color icon"
+msgstr "Afficher une icône en couleurs"
+
+#. settings-schema.json->fullcolor-icon->tooltip
+msgid ""
+"When enabled, a full color panel icon will be used, otherwise a symbolic "
+"icon will be used."
+msgstr ""
+"Si cette option est activée, une icône de panneau en couleurs sera utilisée, "
+"sinon une icône symbolique sera utilisée."
+
+#. settings-schema.json->system-suspend-header->description
+msgid "System suspend settings"
+msgstr "Paramètres système de Mise en veille"
+
+#. settings-schema.json->config-power->description
+msgid "Open Power Management Settings"
+msgstr "Ouvrir les paramètres de Gestion d'alimentation"

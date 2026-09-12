@@ -1,0 +1,164 @@
+# TRILIUM API
+# This file is put in the public domain.
+# BeatLink, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: trilium-api@beatlink 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-23 15:43-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:83
+msgid "Toggle Reminders"
+msgstr "Attiva/Disattiva promemoria"
+
+#. metadata.json->description
+msgid "Applet for Displaying Text from a Trilium API Script"
+msgstr "Applet per visualizzare testo da uno script API di Trilium"
+
+#. metadata.json->name
+msgid "Trilium API"
+msgstr "Trilium API"
+
+#. settings-schema.json->page1->title
+msgid "Trilium Location"
+msgstr "Posizione di Trilium"
+
+#. settings-schema.json->page2->title
+msgid "API Settings"
+msgstr "Impostazioni API"
+
+#. settings-schema.json->page3->title
+msgid "Label Display"
+msgstr "Visualizzazione etichetta"
+
+#. settings-schema.json->page4->title
+msgid "Reminder Flash"
+msgstr "Lampeggio promemoria"
+
+#. settings-schema.json->page5->title
+msgid "Open On Click"
+msgstr "Apri al clic"
+
+#. settings-schema.json->api_location->description
+msgid "App Location"
+msgstr "Posizione dell’app"
+
+#. settings-schema.json->api_location->options
+msgid "This Computer"
+msgstr "Questo computer"
+
+#. settings-schema.json->api_location->options
+msgid "Remote Server"
+msgstr "Server remoto"
+
+#. settings-schema.json->api_location->tooltip
+msgid ""
+"Please indicate whether this applet should point to the Trilium app "
+"installed locally or a remote URL"
+msgstr ""
+"Indica se questo applet deve puntare all’app Trilium installata in locale "
+"oppure a un URL remoto"
+
+#. settings-schema.json->api_url->description
+msgid "Remote Server URL"
+msgstr "URL del server remoto"
+
+#. settings-schema.json->api_url->tooltip
+msgid ""
+"Enter the URL for the Trilium Server this app should connect to. (e.g "
+"https://trilium.example.com)"
+msgstr ""
+"Inserisci l’URL del server Trilium a cui questa app dovrebbe connettersi "
+"(es. https://trilium.example.com)"
+
+#. settings-schema.json->api_endpoint->description
+msgid "API Endpoint"
+msgstr "Endpoint API"
+
+#. settings-schema.json->api_endpoint->tooltip
+msgid ""
+"The Trilium API Endpoint that requests are sent to (whatever comes after "
+"'custom/')"
+msgstr ""
+"L’endpoint API di Trilium a cui inviare le richieste (ciò che segue "
+"‘custom/’)"
+
+#. settings-schema.json->api_key->description
+msgid "API Key"
+msgstr "Chiave API"
+
+#. settings-schema.json->api_key->tooltip
+msgid "The API Key used in Agenda Panel script"
+msgstr "La chiave API utilizzata nello script del pannello Agenda"
+
+#. settings-schema.json->fetch_action->description
+msgid "Fetch Action"
+msgstr "Azione di recupero"
+
+#. settings-schema.json->fetch_action->tooltip
+msgid "The action sent during fetch requests"
+msgstr "L’azione inviata durante le richieste di recupero"
+
+#. settings-schema.json->click_action->description
+msgid "Click Action"
+msgstr "Azione al clic"
+
+#. settings-schema.json->click_action->tooltip
+msgid "The  action sent when the applet is clicked"
+msgstr "L'azione inviata quando si fa clic sull’applet"
+
+#. settings-schema.json->api_polling_interval->description
+msgid "How often (in seconds) to check the API for new text."
+msgstr "Frequenza (in secondi) con cui controllare l’API per nuovo testo."
+
+#. settings-schema.json->prefix_string->description
+msgid "The text added to the beginning of every panel message"
+msgstr "Il testo aggiunto all’inizio di ogni messaggio del pannello"
+
+#. settings-schema.json->suffix_string->description
+msgid "The text added to the end of every panel message"
+msgstr "Il testo aggiunto alla fine di ogni messaggio del pannello"
+
+#. settings-schema.json->text_width->description
+msgid "The width of the panel text in characters"
+msgstr "La larghezza del testo del pannello in caratteri"
+
+#. settings-schema.json->reminder_enabled->description
+msgid "Sets whether the reminder flashes are enabled or not"
+msgstr "Imposta se i lampeggi dei promemoria sono abilitati o meno"
+
+#. settings-schema.json->reminder_delay->description
+msgid "How often (in seconds) to flash the applet periodically for reminders."
+msgstr ""
+"Frequenza (in secondi) del lampeggio periodico dell’applet per i promemoria."
+
+#. settings-schema.json->reminder_time->description
+msgid ""
+"How long (in milliseconds) should the applet reminder color stay set. Set to "
+"0 for infinity"
+msgstr ""
+"Per quanto tempo (in millisecondi) mantenere impostato il colore del "
+"promemoria dell’applet. Imposta a 0 per illimitato"
+
+#. settings-schema.json->reminder_color->description
+msgid "The color used when reminding"
+msgstr "Il colore utilizzato per i promemoria"
+
+#. settings-schema.json->open_on_click_toggle->description
+msgid "Open Trilium when the applet is clicked"
+msgstr "Apri Trilium quando si fa clic sull’applet"
+
+#. settings-schema.json->open_command->description
+msgid "The command to open Trilium"
+msgstr "Il comando per aprire Trilium"

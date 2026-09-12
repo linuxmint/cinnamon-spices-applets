@@ -1,0 +1,220 @@
+# INTERNET SEARCH BOX
+# This file is put in the public domain.
+# mtwebster, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: search-box@mtwebster 2.3.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-25 21:36+0200\n"
+"PO-Revision-Date: 2025-07-30 23:35+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:66 old/5.4/applet.js:63
+msgid "Right-click to select or add your search engine"
+msgstr "點選滑鼠右鍵以選擇或新增搜尋引擎"
+
+#. applet.js:85 old/applet.js:79 old/5.4/applet.js:82 old/3.2/applet.js:73
+msgid "Type to search..."
+msgstr "輸入關鍵字進行搜尋..."
+
+#. applet.js:115 old/5.4/applet.js:112
+msgid "Select your Search Engine:"
+msgstr "選擇搜尋引擎："
+
+#. old/applet.js:90
+msgid "Change default programs..."
+msgstr "變更預設程式..."
+
+#. old/applet.js:92
+msgid "Edit providers"
+msgstr "編輯搜尋服務提供者"
+
+#. metadata.json->name
+msgid "Internet Search Box"
+msgstr "Internet Search Box"
+
+#. metadata.json->description
+msgid "Perform an Internet search, using your favorite engine"
+msgstr "使用偏好的引擎進行網際網路搜尋"
+
+#. settings-schema.json->page-providers->title
+#. settings-schema.json->section-providers->title
+#. settings-schema.json->providers->description
+#. old->5.4->settings-schema.json->providers->description
+msgid "Providers"
+msgstr "搜尋服務提供者"
+
+#. settings-schema.json->page-options->title
+#. settings-schema.json->section-options->title
+msgid "Options"
+msgstr "選項"
+
+#. settings-schema.json->section-keybinding->title
+msgid "Keyboard shortcuts"
+msgstr "鍵盤快速鍵"
+
+#. settings-schema.json->section-colors->title
+#. old->5.4->settings-schema.json->header-colors->description
+msgid "Search-box colors"
+msgstr "搜尋框顏色"
+
+#. settings-schema.json->show-provider->description
+#. old->5.4->settings-schema.json->show-provider->description
+#. old->3.2->settings-schema.json->show-provider->description
+msgid "Show provider"
+msgstr "顯示搜尋服務提供者"
+
+#. settings-schema.json->show-provider->tooltip
+#. old->5.4->settings-schema.json->show-provider->tooltip
+#. old->3.2->settings-schema.json->show-provider->tooltip
+msgid "Show selected provider in the panel"
+msgstr "在面板顯示所選搜尋服務提供者"
+
+#. settings-schema.json->reset-after-search->description
+#. old->5.4->settings-schema.json->reset-after-search->description
+msgid "Reset query after search"
+msgstr "搜尋後重設查詢"
+
+#. settings-schema.json->reset-after-search->tooltip
+#. old->5.4->settings-schema.json->reset-after-search->tooltip
+msgid ""
+"Reset query after search? This may not be useful if you want to be able to "
+"perform the same query on other search engines afterwards."
+msgstr ""
+"搜尋後是否要重設查詢內容？若後續想要在其他搜尋引擎上執行相同查詢，"
+"此選項可能會造成不便。"
+
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
+msgid "Show"
+msgstr "顯示"
+
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
+msgid "Name"
+msgstr "名稱"
+
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
+msgid ""
+"Short name\n"
+"(3 lower-case letters)"
+msgstr ""
+"簡稱\n"
+"（三個小寫英文字母）"
+
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
+msgid "Query URL"
+msgstr "查詢網址"
+
+#. settings-schema.json->providers->tooltip
+#. old->5.4->settings-schema.json->providers->tooltip
+msgid ""
+"If your query begins with the 3 letters of the short name, it will be "
+"processed by the relevant search engine.\n"
+"Example: ddg linux mint iso"
+msgstr ""
+"若查詢以簡稱的 3 個字母開頭，將由對應的搜尋引擎處理。\n"
+"範例：ddg linux mint iso"
+
+#. settings-schema.json->providers-help->description
+msgid ""
+"Only selected providers will be displayed in the context menu, so you can "
+"select your default provider.\n"
+"If you deselect the default provider, the first selected becomes the default "
+"provider.\n"
+"If no provider is selected, the default provider is Google."
+msgstr ""
+"只有選取的提供者會顯示在選單中，以便選擇預設的搜尋服務提供者。\n"
+"如果取消選取預設搜尋服務提供者，第一個選取的將成為預設搜尋服務提供者。\n"
+"如果未選取任何搜尋服務提供者，預設為 Google。"
+
+#. settings-schema.json->custom-keybinding->description
+#. old->5.4->settings-schema.json->custom-keybinding->description
+#. old->3.2->settings-schema.json->custom-keybinding->description
+msgid "Keybinding, which opens the search box"
+msgstr "開啟搜尋框的快速鍵"
+
+#. settings-schema.json->background-color->description
+#. old->5.4->settings-schema.json->background-color->description
+msgid "Background color"
+msgstr "背景顏色"
+
+#. settings-schema.json->text-color->description
+#. old->5.4->settings-schema.json->text-color->description
+msgid "Text color"
+msgstr "文字顏色"
+
+#. old->5.4->settings-schema.json->header-provider->description
+#. old->3.2->settings-schema.json->header-provider->description
+msgid "Search Provider Settings"
+msgstr "搜尋服務提供者設定"
+
+#. old->5.4->settings-schema.json->header-providers->description
+msgid "Search Engines"
+msgstr "搜尋引擎"
+
+#. old->5.4->settings-schema.json->header-keybinding->description
+#. old->3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "快速鍵"
+
+#. old->3.2->settings-schema.json->selected-provider->description
+msgid "Select provider"
+msgstr "選擇搜尋服務提供者"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "Google"
+msgstr "Google"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "Bing"
+msgstr "Bing"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "Ask "
+msgstr "Ask "
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#. old->3.2->settings-schema.json->selected-provider->tooltip
+msgid "Select a search provider"
+msgstr "選擇一個搜尋服務提供者"
+
+#. old->3.2->settings-schema.json->use-custom-provider->description
+msgid "Use custom provider"
+msgstr "使用自訂搜尋服務提供者"
+
+#. old->3.2->settings-schema.json->use-custom-provider->tooltip
+msgid "Use your own search provider"
+msgstr "使用自訂搜尋服務提供者"
+
+#. old->3.2->settings-schema.json->custom-provider-label->description
+msgid "Name of custom provider"
+msgstr "自訂搜尋服務提供者名稱"
+
+#. old->3.2->settings-schema.json->custom-provider-label->tooltip
+msgid "Enter label of the custom provider to show in the panel."
+msgstr "輸入要顯示於面板的自訂搜尋服務提供者標籤。"
+
+#. old->3.2->settings-schema.json->custom-provider-url->description
+msgid "URL of custom provider"
+msgstr "自訂搜尋服務提供者網址"
+
+#. old->3.2->settings-schema.json->custom-provider-url->tooltip
+msgid "Enter the URL of the custom search provider"
+msgstr "輸入自訂搜尋服務提供者網址"

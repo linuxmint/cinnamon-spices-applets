@@ -1,0 +1,535 @@
+# Rules:
+#  1. The following strings should only be replaced with 3-character equivalent strings. They can be translations or comprehensible abbreviations of the original words in the target language; otherwise, they should remain unaltered.
+#    - GPU
+#    - Fan
+#    - mem
+#  2. The string "Hi!" is meant to be displayed in a very small container (up to 4 lines with a maximum of 4 characters per line). It should be translated into a friendly, playful, and non-offensive phrase in the target language, respecting this size limit. Regional slang or expressions that could be perceived as insulting must be avoided. If no suitable translation can be created within these constraints, preserve the original "Hi!".
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-monitor@kalin91 v1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-02 22:56-0600\n"
+"PO-Revision-Date: 2026-02-03 00:00+0000\n"
+"Last-Translator: Carlos Alberto Morales Ortega <carlos.mor.ort@gmail.com>\n"
+"Language-Team: Dutch <AI generated>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:43
+msgid "nvidia-smi not found"
+msgstr "nvidia-smi niet gevonden"
+
+#: applet.js:44
+msgid ""
+"nvidia-smi not found in PATH.\n"
+"Please ensure NVIDIA drivers are installed."
+msgstr ""
+"nvidia-smi niet gevonden in PATH.\n"
+"Zorg ervoor dat NVIDIA-stuurprogramma's zijn geïnstalleerd."
+
+#: applet.js:49
+msgid "Displays NVIDIA GPU monitor"
+msgstr "Toont NVIDIA GPU-monitor"
+
+#: applet.js:54
+msgid "Error initializing applet"
+msgstr "Fout bij initialiseren applet"
+
+#: applet.js:55
+msgid "Init Error"
+msgstr "Initialisatiefout"
+
+#: applet.js:80
+msgid "Open Monitor Graph"
+msgstr "Monitor grafiek openen"
+
+#: applet.js:84
+msgid "Settings"
+msgstr "Instellingen"
+
+#. settings-schema.json->Applet->title
+#: applet.js:89
+msgid "Applet Settings"
+msgstr "Applet-instellingen"
+
+#. settings-schema.json->Monitor->title
+#: applet.js:92
+msgid "Monitor Settings"
+msgstr "Monitorinstellingen"
+
+#: applet.js:95
+msgid "Reset All Settings"
+msgstr "Alle instellingen resetten"
+
+#: applet.js:97
+#, javascript-format
+msgid "Are you sure you want to reset all settings of '%s' to default?"
+msgstr ""
+"Weet u zeker dat u alle instellingen van '%s' naar de standaardwaarden wilt "
+"herstellen?"
+
+#: applet.js:108 applet.js:109
+msgid "Error resetting settings"
+msgstr "Fout bij resetten instellingen"
+
+#: applet.js:118
+msgid "Error building menu: "
+msgstr "Fout bij opbouwen van menu: "
+
+#: applet.js:171
+msgid "Launching"
+msgstr "Starten"
+
+#: applet.js:183
+msgid "Sending"
+msgstr "Verzenden"
+
+#: applet.js:183
+msgid "history points"
+msgstr "geschiedenispunten"
+
+#: applet.js:194
+msgid "subprocess exited with error"
+msgstr "subproces afgesloten met fout"
+
+#: applet.js:196
+msgid "Monitor subprocess exited"
+msgstr "Monitor-subproces afgesloten"
+
+#: applet.js:202
+msgid "Error starting monitor"
+msgstr "Fout bij starten monitor"
+
+#: applet.js:203
+msgid "Could not start monitor script"
+msgstr "Kon monitorscript niet starten"
+
+#: applet.js:213
+msgid "Error closing monitor"
+msgstr "Fout bij sluiten monitor"
+
+#: applet.js:241
+msgid "Error sending to monitor"
+msgstr "Fout bij verzenden naar monitor"
+
+#: applet.js:254 applet.js:509
+msgid "Error"
+msgstr "Fout"
+
+#: applet.js:271
+msgid "Initializing..."
+msgstr "Initialiseren..."
+
+#: applet.js:281
+msgid "Mem"
+msgstr "Mem"
+
+#: applet.js:290 applet.js:681
+msgid "GPU"
+msgstr "GPU"
+
+#: applet.js:299 applet.js:689
+msgid "Fan"
+msgstr "Fan"
+
+#: applet.js:510
+msgid "Failed to run nvidia-smi.\n"
+msgstr "Kan nvidia-smi niet uitvoeren.\n"
+
+#: applet.js:510 applet.js:511
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: applet.js:511
+msgid "Failed to run nvidia-smi"
+msgstr "Uitvoeren nvidia-smi mislukt"
+
+#: applet.js:515
+msgid "An unexpected error occurred while running nvidia-smi.\n"
+msgstr ""
+"Er is een onverwachte fout opgetreden bij het uitvoeren van nvidia-smi.\n"
+
+#: applet.js:516
+msgid "Err"
+msgstr "Err"
+
+#: applet.js:673
+msgid "MEM"
+msgstr "MEM"
+
+#: applet.js:689
+msgid "FAN"
+msgstr "FAN"
+
+#: applet.js:706
+msgid "Hi!"
+msgstr "Hoi"
+
+#: applet.js:739
+msgid "Error terminating monitor subprocess"
+msgstr "Fout bij beëindigen monitor-subproces"
+
+#: applet.js:753
+msgid "Menu toggled on click."
+msgstr "Menu omgeschakeld bij klik."
+
+#. metadata.json->name
+#: ui/monitor_window.glade:7
+msgid "NVIDIA Monitor"
+msgstr "NVIDIA Monitor"
+
+#. metadata.json->description
+msgid ""
+"Monitors GPU temperature, memory, utilization, and fan speed using nvidia-smi"
+msgstr ""
+"Bewaakt GPU-temperatuur, geheugen, gebruik en ventilatorsnelheid met nvidia-"
+"smi"
+
+#. settings-schema.json->section_general->title
+msgid "General Settings"
+msgstr "Algemene instellingen"
+
+#. settings-schema.json->section_temp->title
+msgid "Temperature"
+msgstr "Temperatuur"
+
+#. settings-schema.json->section_memory->title
+msgid "Memory Usage"
+msgstr "Geheugengebruik"
+
+#. settings-schema.json->section_gpu->title
+msgid "GPU Utilization"
+msgstr "GPU-gebruik"
+
+#. settings-schema.json->section_fan->title
+msgid "Fan Speed"
+msgstr "Ventilatorsnelheid"
+
+#. settings-schema.json->top_note->title
+msgid "Note"
+msgstr "Opmerking"
+
+#. settings-schema.json->metric_colors_section->title
+msgid "Metric Colors"
+msgstr "Metriekkleuren"
+
+#. settings-schema.json->layout_colors_section->title
+msgid "Layout Colors"
+msgstr "Lay-outkleuren"
+
+#. settings-schema.json->y_axis_section->title
+msgid "Y-Axis Settings"
+msgstr "Y-as instellingen"
+
+#. settings-schema.json->x_axis_section->title
+msgid "X-Axis Settings"
+msgstr "X-as instellingen"
+
+#. settings-schema.json->monitor-note->description
+msgid ""
+"Changes to monitor settings will take effect after restarting the monitor."
+msgstr "Wijzigingen worden van kracht na het herstarten van de monitor."
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "1 Line (50%)"
+msgstr "1 lijn (50%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "2 Lines (33%, 66%)"
+msgstr "2 lijnen (33%, 66%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "3 Lines (25%, 50%, 75%)"
+msgstr "3 lijnen (25%, 50%, 75%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "4 Lines (20%, 40%, 60%, 80%)"
+msgstr "4 lijnen (20%, 40%, 60%, 80%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "5 Lines (16%, 33%, 50%, 66%, 83%)"
+msgstr "5 lijnen (16%, 33%, 50%, 66%, 83%)"
+
+#. settings-schema.json->y-axis-steps->options
+#. settings-schema.json->x-axis-steps->options
+msgid "9 Lines (Every 10%)"
+msgstr "9 lijnen (elke 10%)"
+
+#. settings-schema.json->y-axis-steps->description
+msgid "Y-Axis Guides"
+msgstr "Y-as hulplijnen"
+
+#. settings-schema.json->y-axis-steps->tooltip
+msgid "Number of guide lines for the Y-Axis."
+msgstr "Aantal hulplijnen voor de Y-as."
+
+#. settings-schema.json->y-axis-temp-unit->options
+#. settings-schema.json->temp-unit->options
+msgid "Celsius (°C)"
+msgstr "Celsius (°C)"
+
+#. settings-schema.json->y-axis-temp-unit->options
+#. settings-schema.json->temp-unit->options
+msgid "Fahrenheit (°F)"
+msgstr "Fahrenheit (°F)"
+
+#. settings-schema.json->y-axis-temp-unit->description
+msgid "Y-Axis Temperature Unit"
+msgstr "Y-as temperatuureenheid"
+
+#. settings-schema.json->y-axis-temp-unit->tooltip
+msgid "Unit for the temperature axis in the monitor."
+msgstr "Eenheid voor de temperatuuras in de monitor."
+
+#. settings-schema.json->x-axis-steps->description
+msgid "X-Axis Guides"
+msgstr "X-as hulplijnen"
+
+#. settings-schema.json->x-axis-steps->tooltip
+msgid "Number of vertical guide lines for the X-Axis."
+msgstr "Aantal verticale hulplijnen voor de X-as."
+
+#. settings-schema.json->x-axis-unit->options
+msgid "Seconds"
+msgstr "Seconden"
+
+#. settings-schema.json->x-axis-unit->options
+msgid "Minutes"
+msgstr "Minuten"
+
+#. settings-schema.json->x-axis-unit->options
+msgid "Hours"
+msgstr "Uren"
+
+#. settings-schema.json->x-axis-unit->description
+msgid "X-Axis Unit"
+msgstr "X-as eenheid"
+
+#. settings-schema.json->x-axis-unit->tooltip
+msgid "Unit of time for the X-Axis."
+msgstr "Tijdseenheid voor de X-as."
+
+#. settings-schema.json->x-axis-length-sec->units
+#. settings-schema.json->refresh-interval->units
+msgid "s"
+msgstr "s"
+
+#. settings-schema.json->x-axis-length-sec->description
+msgid "X-Axis Length (Seconds)"
+msgstr "X-as lengte (seconden)"
+
+#. settings-schema.json->x-axis-length-sec->tooltip
+#. settings-schema.json->x-axis-length-min->tooltip
+#. settings-schema.json->x-axis-length-hour->tooltip
+msgid "Total duration shown on the graph."
+msgstr "Totale duur weergegeven op de grafiek."
+
+#. settings-schema.json->x-axis-length-min->units
+msgid "m"
+msgstr "m"
+
+#. settings-schema.json->x-axis-length-min->description
+msgid "X-Axis Length (Minutes)"
+msgstr "X-as lengte (minuten)"
+
+#. settings-schema.json->x-axis-length-hour->units
+msgid "h"
+msgstr "u"
+
+#. settings-schema.json->x-axis-length-hour->description
+msgid "X-Axis Length (Hours)"
+msgstr "X-as lengte (uren)"
+
+#. settings-schema.json->temp-color->description
+msgid "Temperature Color"
+msgstr "Temperatuurkleur"
+
+#. settings-schema.json->temp-color->tooltip
+msgid "Color used for temperature in the graph."
+msgstr "Kleur gebruikt voor temperatuur in de grafiek."
+
+#. settings-schema.json->mem_color->description
+msgid "Memory Usage Color"
+msgstr "Geheugengebruik kleur"
+
+#. settings-schema.json->mem_color->tooltip
+msgid "Color used for memory usage in the graph."
+msgstr "Kleur gebruikt voor geheugengebruik in de grafiek."
+
+#. settings-schema.json->gpu_color->description
+msgid "GPU Utilization Color"
+msgstr "GPU-gebruik kleur"
+
+#. settings-schema.json->gpu_color->tooltip
+msgid "Color used for GPU utilization in the graph."
+msgstr "Kleur gebruikt voor GPU-gebruik in de grafiek."
+
+#. settings-schema.json->fan_color->description
+msgid "Fan Speed Color"
+msgstr "Ventilatorsnelheid kleur"
+
+#. settings-schema.json->fan_color->tooltip
+msgid "Color used for fan speed in the graph."
+msgstr "Kleur gebruikt voor ventilatorsnelheid in de grafiek."
+
+#. settings-schema.json->background_color->description
+msgid "Background Color"
+msgstr "Achtergrondkleur"
+
+#. settings-schema.json->background_color->tooltip
+msgid "Background color of the graph."
+msgstr "Achtergrondkleur van de grafiek."
+
+#. settings-schema.json->temp-axis-color->description
+msgid "Temperature Axis Color"
+msgstr "Temperatuuras kleur"
+
+#. settings-schema.json->temp-axis-color->tooltip
+msgid "Color for the temperature axis labels."
+msgstr "Kleur voor temperatuuraslabels."
+
+#. settings-schema.json->percent-axis-color->description
+msgid "Percentage Axis Color"
+msgstr "Percentage-as kleur"
+
+#. settings-schema.json->percent-axis-color->tooltip
+msgid "Color for the percentage axis labels."
+msgstr "Kleur voor percentage-aslabels."
+
+#. settings-schema.json->x-axis-color->description
+msgid "X-Axis Color"
+msgstr "X-as kleur"
+
+#. settings-schema.json->x-axis-color->tooltip
+msgid "Color for the X-axis labels (Time)."
+msgstr "Kleur voor X-aslabels (tijd)."
+
+#. settings-schema.json->guidelines-color->description
+msgid "Guidelines Color"
+msgstr "Hulplijnen kleur"
+
+#. settings-schema.json->guidelines-color->tooltip
+msgid "Color for the grid/guide lines."
+msgstr "Kleur voor raster- en hulplijnen."
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh Interval"
+msgstr "Verversingsinterval"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid "How often to update the GPU stats (in seconds)."
+msgstr "Hoe vaak GPU-statistieken worden bijgewerkt (in seconden)."
+
+#. settings-schema.json->border-color->description
+msgid "Applet Border Color"
+msgstr "Applet randkleur"
+
+#. settings-schema.json->border-color->tooltip
+msgid "Color of the applet border. Set alpha to 0 for no border."
+msgstr "Kleur van de applet-rand. Stel alpha in op 0 voor geen rand."
+
+#. settings-schema.json->encoding->options
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#. settings-schema.json->encoding->options
+msgid "macintosh"
+msgstr "macintosh"
+
+#. settings-schema.json->encoding->options
+msgid "ASCII"
+msgstr "ASCII"
+
+#. settings-schema.json->encoding->description
+msgid "nvidia-smi Output Encoding"
+msgstr "nvidia-smi uitvoercodering"
+
+#. settings-schema.json->encoding->tooltip
+msgid "Select the character encoding used by nvidia-smi output."
+msgstr "Selecteer de tekenencodering die nvidia-smi gebruikt."
+
+#. settings-schema.json->show-temp->description
+msgid "Show Temperature"
+msgstr "Temperatuur tonen"
+
+#. settings-schema.json->show-temp->tooltip
+msgid "Show GPU temperature in the panel."
+msgstr "Toon GPU-temperatuur in het paneel."
+
+#. settings-schema.json->temp-unit->description
+msgid "Temperature Unit"
+msgstr "Temperatuureenheid"
+
+#. settings-schema.json->temp-unit->tooltip
+msgid "Choose the unit for displaying GPU temperature."
+msgstr "Kies de eenheid voor het weergeven van GPU-temperatuur."
+
+#. settings-schema.json->show-memory->description
+msgid "Show Memory Usage"
+msgstr "Geheugengebruik tonen"
+
+#. settings-schema.json->show-memory->tooltip
+msgid "Show GPU memory usage in the panel."
+msgstr "Toon GPU-geheugengebruik in het paneel."
+
+#. settings-schema.json->memory-display-mode->options
+msgid "Text (Used / Total)"
+msgstr "Tekst (gebruikt / totaal)"
+
+#. settings-schema.json->memory-display-mode->options
+#. settings-schema.json->gpu-display-mode->options
+#. settings-schema.json->fan-display-mode->options
+msgid "Pie Chart"
+msgstr "Cirkeldiagram"
+
+#. settings-schema.json->memory-display-mode->description
+msgid "Memory Display Mode"
+msgstr "Geheugenweergavemodus"
+
+#. settings-schema.json->memory-display-mode->tooltip
+msgid "Choose how to display memory usage: as text or as a pie chart."
+msgstr "Kies hoe geheugengebruik wordt weergegeven: tekst of cirkeldiagram."
+
+#. settings-schema.json->show-gpu-util->description
+msgid "Show GPU Utilization"
+msgstr "GPU-gebruik tonen"
+
+#. settings-schema.json->show-gpu-util->tooltip
+msgid "Show GPU utilization percentage in the panel."
+msgstr "Toon GPU-gebruik in procenten in het paneel."
+
+#. settings-schema.json->gpu-display-mode->options
+#. settings-schema.json->fan-display-mode->options
+msgid "Text (Percent)"
+msgstr "Tekst (procent)"
+
+#. settings-schema.json->gpu-display-mode->description
+msgid "GPU Display Mode"
+msgstr "GPU-weergavemodus"
+
+#. settings-schema.json->gpu-display-mode->tooltip
+msgid "Choose how to display GPU utilization: as text or as a pie chart."
+msgstr "Kies hoe GPU-gebruik wordt weergegeven."
+
+#. settings-schema.json->show-fan-speed->description
+msgid "Show Fan Speed"
+msgstr "Ventilatorsnelheid tonen"
+
+#. settings-schema.json->show-fan-speed->tooltip
+msgid "Show GPU fan speed percentage in the panel."
+msgstr "Toon GPU-ventilatorsnelheid in procenten in het paneel."
+
+#. settings-schema.json->fan-display-mode->description
+msgid "Fan Display Mode"
+msgstr "Ventilatorweergavemodus"
+
+#. settings-schema.json->fan-display-mode->tooltip
+msgid "Choose how to display fan speed: as text or as a pie chart."
+msgstr "Kies hoe ventilatorsnelheid wordt weergegeven."

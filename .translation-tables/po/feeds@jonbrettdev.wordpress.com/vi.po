@@ -1,0 +1,322 @@
+# FEEDS READER
+# This file is put in the public domain.
+# jake1164, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: feeds@jonbrettdev.wordpress.com 0.29\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:106
+msgid "Feed reader"
+msgstr "Trình đọc RSS"
+
+#. applet.js:141
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr "Vui lòng cài đặt gói '%s'."
+
+#. applet.js:221
+msgid "Mark all read"
+msgstr "Đánh dấu tất cả đã đọc"
+
+#. applet.js:232
+msgid "Reload"
+msgstr "Tải lại"
+
+#. applet.js:241
+msgid "Manage feeds"
+msgstr "Quản lý nguồn"
+
+#. applet.js:252
+msgid "Settings"
+msgstr "Cài đặt"
+
+#. applet.js:337
+msgid "No unread feeds"
+msgstr "Không có nguồn chưa đọc"
+
+#. applet.js:566
+msgid "Feeds"
+msgstr "Nguồn"
+
+#. applet.js:718
+msgid "Right Click to open feed: \n"
+msgstr "Nhấn chuột phải để mở nguồn: \n"
+
+#. applet.js:775
+msgid "Mark All Posts Read"
+msgstr "Đánh dấu tất cả bài đã đọc"
+
+#. applet.js:782
+msgid "Mark Next "
+msgstr "Đánh dấu tiếp theo "
+
+#. applet.js:782
+msgid " Posts Read"
+msgstr " bài đã đọc"
+
+#. applet.js:788
+msgid "Update feed URL"
+msgstr "Cập nhật URL nguồn"
+
+#. applet.js:847 applet.js:863
+msgid "Published: "
+msgstr "Đã xuất bản: "
+
+#. applet.js:926
+msgid "Mark Post Read"
+msgstr "Đánh dấu bài đã đọc"
+
+#. applet.js:958
+msgid "d) "
+msgstr "d) "
+
+#. applet.js:960
+msgid "h) "
+msgstr "h) "
+
+#. applet.js:962
+msgid "(<1h) "
+msgstr "(<1h) "
+
+#. feedreader.js:137
+msgid "Invalid feed url"
+msgstr "URL nguồn không hợp lệ"
+
+#. feedreader.js:213
+msgid " unread items!"
+msgstr " mục chưa đọc!"
+
+#. feedreader.js:348 feedreader.js:361
+msgid "Loading feed"
+msgstr "Đang tải nguồn"
+
+#. manage_feeds.py:53
+msgid "Manage your feeds"
+msgstr "Quản lý nguồn của bạn"
+
+#. manage_feeds.py:88
+msgid "Instance Name:"
+msgstr "Tên phiên:"
+
+#. manage_feeds.py:92
+msgid "Add/remove feed list"
+msgstr "Thêm/bớt nguồn"
+
+#. manage_feeds.py:113
+msgid "Enable"
+msgstr "Bật"
+
+#. manage_feeds.py:120
+msgid "Url"
+msgstr "URL"
+
+#. manage_feeds.py:127
+msgid "Custom title"
+msgstr "Tiêu đề tùy chỉnh"
+
+#. manage_feeds.py:133
+msgid "Notify"
+msgstr "Thông báo"
+
+#. manage_feeds.py:139
+msgid "Show Read"
+msgstr "Hiển thị đã đọc"
+
+#. manage_feeds.py:146
+msgid "Interval"
+msgstr "Khoảng thời gian"
+
+#. manage_feeds.py:154
+msgid "Show Image"
+msgstr "Hiển thị hình ảnh"
+
+#. manage_feeds.py:200
+msgid "Import"
+msgstr "Nhập"
+
+#. manage_feeds.py:204
+msgid "_Import OPML"
+msgstr "_Nhập OPML"
+
+#. manage_feeds.py:205
+msgid "Import feeds from OPML file"
+msgstr "Nhập nguồn từ tệp OPML"
+
+#. manage_feeds.py:211
+msgid "_Import Feeds File"
+msgstr "_Nhập tệp nguồn"
+
+#. manage_feeds.py:212
+msgid "Import feeds from file"
+msgstr "Nhập nguồn từ tệp"
+
+#. manage_feeds.py:218
+msgid "Export"
+msgstr "Xuất"
+
+#. manage_feeds.py:222
+msgid "_Export Feeds File"
+msgstr "_Xuất tệp nguồn"
+
+#. manage_feeds.py:223
+msgid "Export feeds to file"
+msgstr "Xuất nguồn ra tệp"
+
+#. manage_feeds.py:229
+msgid "Options"
+msgstr "Tùy chọn"
+
+#. manage_feeds.py:233
+msgid "_Toggle Hidden Fields"
+msgstr "_Bật/tắt trường ẩn"
+
+#. manage_feeds.py:234
+msgid "Show or Hide hidden fields"
+msgstr "Hiện hoặc ẩn các trường ẩn"
+
+#. manage_feeds.py:251
+msgid "Changes will be discarded, continue?"
+msgstr "Các thay đổi sẽ bị bỏ, tiếp tục?"
+
+#. manage_feeds.py:252
+msgid "Are you sure?"
+msgstr "Bạn có chắc không?"
+
+#. manage_feeds.py:260
+msgid "New Instance (List) Name"
+msgstr "Tên phiên (Danh sách) mới"
+
+#. manage_feeds.py:262
+msgid "Add New Instance (List)"
+msgstr "Thêm phiên (Danh sách) mới"
+
+#. manage_feeds.py:335
+msgid "Failed to save config file"
+msgstr "Lưu tệp cấu hình thất bại"
+
+#. manage_feeds.py:345
+msgid "Choose a OPML feed file"
+msgstr "Chọn tệp nguồn OPML"
+
+#. manage_feeds.py:346
+msgid "OPML files"
+msgstr "Tệp OPML"
+
+#. manage_feeds.py:349
+msgid "Choose a feed file"
+msgstr "Chọn tệp nguồn"
+
+#. manage_feeds.py:350 manage_feeds.py:411
+msgid "Text files"
+msgstr "Tệp văn bản"
+
+#. manage_feeds.py:367 manage_feeds.py:416
+msgid "All files"
+msgstr "Tất cả tệp"
+
+#. manage_feeds.py:384
+msgid "file imported"
+msgstr "tệp đã nhập"
+
+#. manage_feeds.py:385
+#, python-format
+msgid "Imported %d feeds"
+msgstr "Đã nhập %d nguồn"
+
+#. manage_feeds.py:393
+msgid "Failed to import file"
+msgstr "Nhập tệp thất bại"
+
+#. manage_feeds.py:400
+msgid "Save a feed file"
+msgstr "Lưu tệp nguồn"
+
+#. manage_feeds.py:429
+#, python-format
+msgid "Unable to export file, exception: %s"
+msgstr "Không thể xuất tệp, ngoại lệ: %s"
+
+#. manage_feeds.py:433
+msgid "Unable to export file"
+msgstr "Không thể xuất tệp"
+
+#. metadata.json->description
+msgid "Displays RSS news feeds"
+msgstr "Hiển thị nguồn tin RSS"
+
+#. metadata.json->name
+msgid "Feeds Reader"
+msgstr "Trình đọc RSS"
+
+#. settings-schema.json->heading1->description
+msgid "Feed URLs"
+msgstr "URL nguồn"
+
+#. settings-schema.json->manage_feeds_button->description
+msgid "Manage Feeds..."
+msgstr "Quản lý nguồn..."
+
+#. settings-schema.json->manage_feeds_button->tooltip
+msgid "Launch the feed management app to add/remove/edit feeds"
+msgstr "Khởi chạy ứng dụng quản lý nguồn để thêm/bớt/sửa nguồn"
+
+#. settings-schema.json->max_items->units
+msgid "feeds"
+msgstr "nguồn"
+
+#. settings-schema.json->max_items->description
+msgid "Maximum number of items"
+msgstr "Số mục tối đa"
+
+#. settings-schema.json->max_items->tooltip
+msgid "Maximum number of items to display for this feed"
+msgstr "Số mục tối đa hiển thị cho nguồn này"
+
+#. settings-schema.json->refresh_interval->units
+msgid "minutes"
+msgstr "phút"
+
+#. settings-schema.json->refresh_interval->description
+msgid "Update interval"
+msgstr "Khoảng cập nhật"
+
+#. settings-schema.json->refresh_interval->tooltip
+msgid "Interval between checking for new items"
+msgstr "Khoảng thời gian kiểm tra mục mới"
+
+#. settings-schema.json->notifications_enabled->description
+msgid "Show notifications for new items"
+msgstr "Hiển thị thông báo cho mục mới"
+
+#. settings-schema.json->notifications_enabled->tooltip
+msgid "If checked a popup notification will be displayed for new items"
+msgstr "Nếu chọn, sẽ hiển thị thông báo bật lên cho mục mới"
+
+#. settings-schema.json->enable-verbose-logging->description
+msgid "Check this to enable debug logging in Looking Glass"
+msgstr "Chọn để bật ghi nhật ký gỡ lỗi trong Looking Glass"
+
+#. settings-schema.json->enable-verbose-logging->tooltip
+msgid "Checking this will enable debug level logging"
+msgstr "Chọn để bật ghi nhật ký mức gỡ lỗi"
+
+#. settings-schema.json->instance_name->description
+msgid "Feed Instance Name"
+msgstr "Tên phiên nguồn"
+
+#. settings-schema.json->instance_name->tooltip
+msgid "Do not change, this is modified by the Manage Feeds window."
+msgstr "Không thay đổi, được sửa bởi cửa sổ Quản lý Nguồn."

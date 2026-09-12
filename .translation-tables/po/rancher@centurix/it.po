@@ -1,0 +1,262 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-08-27 18:58+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:172
+msgid "Settings"
+msgstr "Impostazioni"
+
+#. applet.js:184
+msgid "Editing Homestead configuration..."
+msgstr "Modifica della configurazione di Homestead..."
+
+#. applet.js:190
+msgid "Rancher: Bringing Homestead up, please wait..."
+msgstr "Rancher: Avviando Homestead, per favore aspetta..."
+
+#. applet.js:192
+msgid "Bringing Homestead up..."
+msgstr "Avviando Homestead..."
+
+#. applet.js:195
+msgid "Rancher: Taking Homestead down, please wait..."
+msgstr "Rancher: arrestando Homestead, per favore attendi..."
+
+#. applet.js:197
+msgid "Taking Homestead down..."
+msgstr "Arrestando Homestead..."
+
+#. applet.js:204
+msgid "Rancher: Provisioning Homestead, please wait..."
+msgstr "Rancher: Provisioning di Homestead, attendere..."
+
+#. applet.js:206
+msgid "Provisioning Homestead..."
+msgstr "Provisioning di Homestead..."
+
+#. applet.js:210
+msgid "Rancher: Destroying Homestead, please wait..."
+msgstr "Rancher: Distruzione di Homestead, per favore attendi..."
+
+#. applet.js:212
+msgid "Destroying Homestead..."
+msgstr "Distruzione di Homestead..."
+
+#. applet.js:216
+msgid "Rancher: Suspending Homestead, please wait..."
+msgstr "Rancher: Sospensione di Homestead, attendere..."
+
+#. applet.js:218
+msgid "Suspending Homestead..."
+msgstr "Sospensione di Homestead..."
+
+#. applet.js:223
+msgid "Homestead SSH Terminal opened"
+msgstr "Terminale SSH Homestead aperto"
+
+#. applet.js:227
+msgid "Rancher: Recompiling Kernel, please wait..."
+msgstr "Rancher: ricompilazione del kernel, attendere..."
+
+#. applet.js:229
+msgid "Recompiling Kernel..."
+msgstr "Ricompilazione del kernel..."
+
+#. applet.js:248 applet.js:327 applet.js:330 applet.js:343 applet.js:397
+msgid "Refresh this menu"
+msgstr "Aggiorna questo menù"
+
+#. applet.js:276
+msgid "Rancher: Homestead missing or not configured."
+msgstr "Rancher: Homestead mancante o non configurato."
+
+#. applet.js:277
+msgid "Homestead missing or not configured."
+msgstr "Homestead mancante o non configurata."
+
+#. applet.js:284 applet.js:285
+msgid "Vagrant is out of date, please update."
+msgstr "Vagrant non è aggiornato, per favore aggiornalo."
+
+#. applet.js:290 applet.js:291 applet.js:335
+msgid "Kernel Module not loaded. Needs recompilation."
+msgstr "Modulo del kernel non caricato. Ha bisogno di ricompilazione."
+
+#. applet.js:296
+msgid "Rancher: Homestead up."
+msgstr "Rancher: Homestead in esecuzione."
+
+#. applet.js:297
+msgid "Homestead up."
+msgstr "Homestead in esecuzione."
+
+#. applet.js:298
+msgid " (Running)"
+msgstr " (In esecuzione)"
+
+#. applet.js:302
+msgid "Rancher: Homestead suspended."
+msgstr "Rancher: Homestead sospeso."
+
+#. applet.js:303
+msgid "Homestead suspended."
+msgstr "Homestead sospeso."
+
+#. applet.js:304
+msgid " (Suspended)"
+msgstr " (Sospeso)"
+
+#. applet.js:307
+msgid "Rancher: Homestead down."
+msgstr "Rancher: Homestead arrestato."
+
+#. applet.js:308
+msgid "Homestead down."
+msgstr "Homestead arrestato."
+
+#. applet.js:309
+msgid " (Down)"
+msgstr " (Arrestato)"
+
+#. applet.js:312
+msgid "Rancher: Homestead not created."
+msgstr "Rancher: Homestead non creato."
+
+#. applet.js:313
+msgid "Homestead not created"
+msgstr "Homestead non creato"
+
+#. applet.js:314 applet.js:319
+msgid " (Not created/Destroyed)"
+msgstr " (Non creato/Distrutto)"
+
+#. applet.js:317
+msgid "Rancher: Homestead not installed."
+msgstr "Rancher: Homestead non è installato."
+
+#. applet.js:318 applet.js:325
+msgid "Homestead not installed"
+msgstr "Homestead non è installato"
+
+#. applet.js:326
+msgid "Click here for installation instructions"
+msgstr "Clicca qui per le istruzioni di installazione"
+
+#. applet.js:329
+msgid "Homestead missing or not configured"
+msgstr "Homestead mancante o non configurato"
+
+#. applet.js:336
+msgid "Recompile Kernel Module."
+msgstr "Ricompila il modulo del kernel."
+
+#. applet.js:341
+msgid "Vagrant is out of date for this version of Homestead, please update."
+msgstr ""
+"Vagrant non è aggiornato per questa versione di Homestead, si prega di "
+"aggiornarlo."
+
+#. applet.js:342
+msgid "Click here for the Vagrant download page."
+msgstr "Clicca qui per la pagina di download di Vagrant."
+
+#. applet.js:347
+msgid "Status"
+msgstr "Stato"
+
+#. applet.js:350
+msgid "Run provisioning"
+msgstr "Esegui il provisioning"
+
+#. applet.js:351
+msgid "Suspend Homestead"
+msgstr "Sospendi Homestead"
+
+#. applet.js:352
+msgid "SSH Terminal..."
+msgstr "Terminale SSH..."
+
+#. applet.js:356
+msgid "Destroy Homestead"
+msgstr "Distruggi Homestead"
+
+#. applet.js:363
+msgid "Configuration"
+msgstr "Configurazione"
+
+#. applet.js:364
+msgid "IP: "
+msgstr "IP: "
+
+#. applet.js:365
+msgid "Memory: "
+msgstr "Memoria: "
+
+#. applet.js:366
+msgid "CPU: "
+msgstr "CPU: "
+
+#. applet.js:367
+msgid "Provider: "
+msgstr "Provider: "
+
+#. applet.js:369
+msgid "Edit Homestead configuration..."
+msgstr "Modifica configurazione Homestead..."
+
+#. applet.js:372
+msgid "Hosted Sites"
+msgstr "Siti Hostati"
+
+#. applet.js:382
+msgid "Edit hosts file..."
+msgstr "Modifica file degli host..."
+
+#. applet.js:385
+msgid "Hosted Databases"
+msgstr "Database Hostati"
+
+#. terminal_reader.js:58
+msgid "Command not found."
+msgstr "Comando non trovato."
+
+#. metadata.json->description
+msgid "An applet to manage Homestead."
+msgstr "Un'applet per gestire Homestead."
+
+#. metadata.json->name
+msgid "Homestead manager"
+msgstr "Manager di Homestead"
+
+#. settings-schema.json->homesteadProjectFolder->description
+msgid "Homestead project folder"
+msgstr "Cartella del progetto Homestead"
+
+#. settings-schema.json->homesteadConfigFolder->description
+msgid "Homestead config folder"
+msgstr "Cartella di configurazione di Homestead"
+
+#. settings-schema.json->vagrantCmd->description
+msgid "Vagrant command"
+msgstr "Comando Vagrant"
+
+#. settings-schema.json->editor->description
+msgid "Default text editor"
+msgstr "Editor di testo predefinito"

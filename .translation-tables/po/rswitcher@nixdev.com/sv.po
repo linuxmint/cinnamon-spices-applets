@@ -1,0 +1,47 @@
+# Swedish translation for rswitcher@nixdev.com
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Dennis Johansson <dennis@nixdev.com>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rswitcher@nixdev.com\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-09 16:24+0200\n"
+"PO-Revision-Date: 2021-10-09 14:55+0200\n"
+"Last-Translator: Dennis <dennis@nixdev.com>\n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+
+#: applet.js:23
+#, fuzzy
+msgid "Switch resolution on-the-fly, with HiDPI support"
+msgstr "Byt upplösning med ett knapptryck - med stöd för HiDPI"
+
+#: applet.js:33
+msgid "HiDPI 200%"
+msgstr ""
+
+#: applet.js:41
+msgid "HiDPI 150%"
+msgstr ""
+
+#: applet.js:49
+msgid "2160p"
+msgstr ""
+
+#: applet.js:57
+msgid "1080p"
+msgstr ""
+
+#. metadata.json->name
+msgid "Resolution Switcher"
+msgstr ""
+
+#. metadata.json->description
+msgid "Switch resolution on-the-fly with HiDPI support"
+msgstr "Byt upplösning med ett knapptryck - med stöd för HiDPI"

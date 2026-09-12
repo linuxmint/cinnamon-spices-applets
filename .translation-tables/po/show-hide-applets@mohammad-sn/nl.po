@@ -1,0 +1,126 @@
+# DRAWER (SHOW/HIDE APPLETS)
+# This file is put in the public domain.
+# mohammad-sn, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: show-hide-applets@mohammad-sn 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-11-20 06:07+0100\n"
+"PO-Revision-Date: 2025-06-13 18:48+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:60 applet.js:231
+msgid "Autohide ON"
+msgstr "Automatisch verbergen AAN"
+
+#. applet.js:62 applet.js:233
+msgid "Autohide OFF"
+msgstr "Automatisch verbergen UIT"
+
+#. applet.js:82
+msgid "Panel Edit mode"
+msgstr "Paneel Bewerk Modus"
+
+#. applet.js:88
+msgid "Add applets to the panel"
+msgstr "Applets toevoegen aan het paneel"
+
+#. settings-schema.json->autohide->description
+#. applet.js:96
+msgid "Autohide"
+msgstr "Automatisch verbergen"
+
+#. metadata.json->description
+msgid ""
+"hide a few applet to have a neater panel, and make them show up again by a "
+"click"
+msgstr ""
+"Verberg enkele applets om een netter paneel te hebben, en laat ze weer "
+"verschijnen door een klik"
+
+#. metadata.json->name
+msgid "Drawer (show/hide applets)"
+msgstr "Drawer (toon/verberg applets)"
+
+#. settings-schema.json->head->description
+msgid "Settings for show-hide-applets@mohammad-sn"
+msgstr "Instellingen voor show-hide-applets@mohammad-sn"
+
+#. settings-schema.json->autohide->tooltip
+msgid ""
+"Check it if you want to hide applets automatically, unless you should click "
+"on applet to do so.\n"
+"Its status can be changed by middle-clicking on this applet."
+msgstr ""
+"Vink dit aan als je wilt dat applets automatisch worden verborgen, tenzij je "
+"op de applet moet klikken om dit te doen.\n"
+"De status kan worden gewijzigd door met de middelste muisknop op deze applet "
+"te klikken."
+
+#. settings-schema.json->statusintooltip->description
+msgid "Show Autohide status in tooltip"
+msgstr "Toon automatisch verbergen status in tooltip"
+
+#. settings-schema.json->disablestarttimeautohide->description
+msgid "Disable start time autohide"
+msgstr "Starttijd automatisch verbergen uitschakelen"
+
+#. settings-schema.json->disablestarttimeautohide->tooltip
+msgid "if not in autohide mode"
+msgstr "indien niet in de automatische verbergen modus"
+
+#. settings-schema.json->hidetime->units
+#. settings-schema.json->autohiderstime->units
+msgid "seconds"
+msgstr "seconden"
+
+#. settings-schema.json->hidetime->description
+msgid "Autohide after "
+msgstr "Automatisch verbergen na"
+
+#. settings-schema.json->hoveractivates->description
+msgid "Activate on hover"
+msgstr "Activeren bij zweven met muis"
+
+#. settings-schema.json->hoveractivates->tooltip
+msgid "show applets on mouse hover"
+msgstr "toon applets bij zweven met de muis"
+
+#. settings-schema.json->hoveractivateshide->description
+msgid "Hide on hovering again"
+msgstr "Verbergen bij opnieuw zweven met de muis"
+
+#. settings-schema.json->hoveractivateshide->tooltip
+msgid "toggle visibility of applets on mouse hover"
+msgstr "zichtbaarheid van applets bij zweven met de muis in- en uitschakelen"
+
+#. settings-schema.json->hovertime->units
+msgid "miliseconds"
+msgstr "milliseconden"
+
+#. settings-schema.json->hovertime->description
+msgid "Hover activates/hides after "
+msgstr "Zweven met de muis activeert/verbergt na "
+
+#. settings-schema.json->autohiders->description
+msgid "Autohide reshowing applets"
+msgstr "Automatisch verbergen en opnieuw tonen van applets"
+
+#. settings-schema.json->autohiderstime->description
+msgid "Reshowers' autohide delay: "
+msgstr "Automatisch verbergen vertraging van opnieuw getoonde applets: "
+
+#. settings-schema.json->hideuntilseparator->description
+msgid "Only hide until next separator"
+msgstr "Alleen verbergen tot de volgende scheiding"
+
+#. settings-schema.json->hideuntilseparator->tooltip
+msgid "Only hide everything until the next separator element occurs."
+msgstr "Verberg alles alleen totdat het volgende scheidingselement verschijnt."

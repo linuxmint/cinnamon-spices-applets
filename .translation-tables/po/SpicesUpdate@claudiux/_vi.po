@@ -1,0 +1,14 @@
+# SPICES UPDATE
+# This file is put in the public domain.
+# claudiux, 2019
+#
+msgid ""
+msgstr ""
+
+#. 6.4->settings-schema.json->btn_apply_applets->description
+#. 6.4->settings-schema.json->btn_apply_desklets->description
+#. 6.4->settings-schema.json->btn_apply_extensions->description
+#. 6.4->settings-schema.json->btn_apply_themes->description
+#. 6.4->settings-schema.json->btn_apply_actions->description
+msgid "Apply"
+msgstr ""

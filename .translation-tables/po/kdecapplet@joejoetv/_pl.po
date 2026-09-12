@@ -1,0 +1,82 @@
+# KDE CONNECT APPLET
+# This file is put in the public domain.
+# JoeJoeTV, 2020
+#
+msgid ""
+msgstr ""
+
+#. 5.8/js/modules.js:450
+msgid "Module"
+msgstr ""
+
+#. 5.8/js/modules.js:597
+msgid "Battery Module"
+msgstr ""
+
+#. 5.8/js/modules.js:682
+msgid "Device-Info Module"
+msgstr ""
+
+#. 5.8/js/modules.js:751
+msgid "Connectivity Module"
+msgstr ""
+
+#. 5.8/js/modules.js:867
+msgid "FindMyPhone Module"
+msgstr ""
+
+#. 5.8/js/modules.js:907
+msgid "Request Photo Module"
+msgstr ""
+
+#. 5.8/js/modules.js:1009
+msgid "Ping Module"
+msgstr ""
+
+#. 5.8/js/modules.js:1062
+msgid "Share Module"
+msgstr ""
+
+#. 5.8/js/modules.js:1243
+msgid "SFTP Module"
+msgstr ""
+
+#. 5.8/js/modules.js:1463
+msgid "SMS Module"
+msgstr ""
+
+#. 5.8/py/dialogs.py:271
+#, python-brace-format
+msgid "Open remote directory on '{device_name}'"
+msgstr ""
+
+#. 5.8/py/dialogs.py:290
+msgid "Open"
+msgstr ""
+
+#. 5.8/py/dialogs.py:300
+msgid "Directory to open:"
+msgstr ""
+
+#. 5.8->settings-schema.json->switch_different-icon-no-connected-
+#. devices->description
+msgid "Display a different icon when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_no-connected-devices->description
+msgid "Icon to use when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->module_battery_description->description
+#. 4.8->settings-schema.json->module_battery_description->description
+msgid "Shows the current battery charge and charging status of the device"
+msgstr ""
+
+#. 5.8->settings-schema.json->module_sftp_description->description
+#. 4.8->settings-schema.json->module_sftp_description->description
+msgid "Lets you remotely browse the storage of the device"
+msgstr ""
+
+#. 5.8->settings-schema.json->module_sftp_selectFirstDirectory->description
+msgid "Select the first directory automatically"
+msgstr ""

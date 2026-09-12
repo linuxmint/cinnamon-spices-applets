@@ -1,0 +1,109 @@
+# FANCTRL
+# This file is put in the public domain.
+# not-a-feature, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: fw_fanctrl@juleskreuer.eu 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+msgid "FanCTRL"
+msgstr "FanCTRL"
+
+#. metadata.json->description
+msgid "Applet to control the framework fan-speed strategy using fw_fanctrl."
+msgstr "Applet điều khiển chiến lược tốc độ quạt của framework bằng fw_fanctrl."
+
+#. settings-schema.json->header->description
+msgid ""
+"Framework FanCTRL - Fan Strategy Control Applet for Cinnamon \n"
+"\n"
+"List of valid strategies:"
+msgstr "Framework FanCTRL - Applet điều khiển chiến lược quạt cho Cinnamon \n\nDanh sách các chiến lược hợp lệ:"
+
+#. settings-schema.json->sleep-label->description
+msgid "Sleep"
+msgstr "Ngủ"
+
+#. settings-schema.json->sleep->description
+#. settings-schema.json->lazyest->description
+#. settings-schema.json->lazy->description
+#. settings-schema.json->medium->description
+#. settings-schema.json->agile->description
+#. settings-schema.json->very-agile->description
+#. settings-schema.json->deaf->description
+#. settings-schema.json->aeolus->description
+msgid "Visible"
+msgstr "Hiển thị"
+
+#. settings-schema.json->sleep-icon->description
+msgid "Icon for 'Sleep'"
+msgstr "Biểu tượng cho 'Ngủ'"
+
+#. settings-schema.json->lazyest-label->description
+msgid "Laziest"
+msgstr "Lười nhất"
+
+#. settings-schema.json->lazyest-icon->description
+msgid "Icon for 'Laziest'"
+msgstr "Biểu tượng cho 'Lười nhất'"
+
+#. settings-schema.json->lazy-label->description
+msgid "Lazy"
+msgstr "Lười"
+
+#. settings-schema.json->lazy-icon->description
+msgid "Icon for 'Lazy'"
+msgstr "Biểu tượng cho 'Lười'"
+
+#. settings-schema.json->medium-label->description
+msgid "Medium"
+msgstr "Trung bình"
+
+#. settings-schema.json->medium-icon->description
+msgid "Icon for 'Medium'"
+msgstr "Biểu tượng cho 'Trung bình'"
+
+#. settings-schema.json->agile-label->description
+msgid "Agile"
+msgstr "Nhanh nhẹn"
+
+#. settings-schema.json->agile-icon->description
+msgid "Icon for 'Agile'"
+msgstr "Biểu tượng cho 'Nhanh nhẹn'"
+
+#. settings-schema.json->very-agile-label->description
+msgid "Very Agile"
+msgstr "Rất nhanh nhẹn"
+
+#. settings-schema.json->very-agile-icon->description
+msgid "Icon for 'Very Agile'"
+msgstr "Biểu tượng cho 'Rất nhanh nhẹn'"
+
+#. settings-schema.json->deaf-label->description
+msgid "Deaf"
+msgstr "Im lặng"
+
+#. settings-schema.json->deaf-icon->description
+msgid "Icon for 'Deaf'"
+msgstr "Biểu tượng cho 'Im lặng'"
+
+#. settings-schema.json->aeolus-label->description
+msgid "Aeolus"
+msgstr "Aeolus"
+
+#. settings-schema.json->aeolus-icon->description
+msgid "Icon for 'Aeolus'"
+msgstr "Biểu tượng cho 'Aeolus'"

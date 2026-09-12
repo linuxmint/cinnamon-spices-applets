@@ -1,0 +1,219 @@
+# XSESSION
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-03 18:30+0200\n"
+"PO-Revision-Date: 2023-05-31 19:41+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#. applet.js:54
+msgid "Applet"
+msgstr "小程序"
+
+#. applet.js:55
+msgid "Desklet"
+msgstr "桌面小工具"
+
+#. applet.js:56
+msgid "Extension"
+msgstr "扩展"
+
+#. applet.js:57
+msgid "Applets"
+msgstr "小程序"
+
+#. applet.js:58
+msgid "Desklets"
+msgstr "桌面小工具"
+
+#. applet.js:59
+msgid "Extensions"
+msgstr "扩展"
+
+#. applet.js:112
+msgid "RELOAD ALL"
+msgstr ""
+
+#. applet.js:248
+msgid "Middle-click: \n"
+msgstr "中键点击：\n"
+
+#. applet.js:248 applet.js:327
+msgid "Show .xsession-errors"
+msgstr "显示 .xsession-errors"
+
+#. applet.js:249
+#, fuzzy
+msgid "Ctrl + Middle-click: \n"
+msgstr "中键点击：\n"
+
+#. applet.js:249 applet.js:341
+msgid "Show latest messages"
+msgstr ""
+
+#. applet.js:311 applet.js:553
+#, javascript-format
+msgid "%s latest messages"
+msgstr ""
+
+#. applet.js:311 applet.js:553
+msgid "min: 10. max: 250."
+msgstr ""
+
+#. applet.js:358
+msgid "Restart Cinnamon"
+msgstr "重新启动 Cinnamon"
+
+#. applet.js:376
+msgid "Repeat last action"
+msgstr ""
+
+#. applet.js:380
+msgid "--- Reload Spices ---"
+msgstr "--- 重新加载 Spices ---"
+
+#. applet.js:386
+msgid "Reload Applet:"
+msgstr "重新加载小程序："
+
+#. applet.js:413
+msgid "Reload Desklet:"
+msgstr "重新加载桌面小工具："
+
+#. applet.js:440
+msgid "Reload Extension:"
+msgstr "重新加载扩展："
+
+#. applet.js:466
+msgid "Reload Current Theme"
+msgstr ""
+
+#. applet.js:480
+msgid "--- Settings for ---"
+msgstr ""
+
+#. applet.js:486
+#, fuzzy
+msgid "Applet:"
+msgstr "小程序"
+
+#. applet.js:495
+#, fuzzy
+msgid "Desklet:"
+msgstr "桌面小工具"
+
+#. applet.js:504
+#, fuzzy
+msgid "Extension:"
+msgstr "扩展"
+
+#. applet.js:513
+msgid "--- View Code ---"
+msgstr "--- 查看代码 ---"
+
+#. applet.js:519
+msgid "View Applet Code for:"
+msgstr "查看小程序的代码："
+
+#. applet.js:528
+msgid "View Desklet Code for:"
+msgstr "查看桌面小工具的代码："
+
+#. applet.js:537
+msgid "View Extension Code for:"
+msgstr "查看扩展的代码："
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xsession"
+
+#. metadata.json->description
+#, fuzzy
+msgid ""
+"Restart, access source code and configure your Spices (Applets, Desklets, "
+"Extensions). View the contents of your .xsession-errors file in real time. "
+"Restart Cinnamon."
+msgstr ""
+"允许你重启 Spices (小程序、桌面小工具、扩展) ，打开它们的源代码，实时显示 ."
+"xsession-errors 文件的内容，以及重启 Cinnamon。"
+
+#. settings-schema.json->section1->description
+msgid "Icon size"
+msgstr ""
+
+#. settings-schema.json->icon_size->description
+msgid "Size (in pixels) of menu icons"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "16"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "22"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "24"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "32"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "48"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "64"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "96"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "128"
+msgstr ""
+
+#. settings-schema.json->section2->description
+msgid "RELOAD ALL option"
+msgstr ""
+
+#. settings-schema.json->show_reload_all->description
+msgid "Show the RELOAD ALL option in submenus"
+msgstr ""
+
+#. settings-schema.json->show_reload_all->tooltip
+msgid "Caution! Reloading all spices of a given type may lead to errors."
+msgstr ""
+
+#. settings-schema.json->section3->description
+msgid "Latest messages"
+msgstr ""
+
+#. settings-schema.json->number_latest->description
+msgid "Number of latest messages to show"
+msgstr ""
+
+#. settings-schema.json->number_latest->tooltip
+msgid "(Including empty lines.)"
+msgstr ""
+
+#. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
+msgid "-d"
+msgstr ""

@@ -1,0 +1,30 @@
+# BING DESKTOP WALLPAPER
+# This file is put in the public domain.
+# Starcross, 2019
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: bing-wallpaper@starcross.dev 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-19 08:43-0500\n"
+"PO-Revision-Date: 2025-04-26 00:15+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:50
+msgid "Refresh Now"
+msgstr "立即重新整理"
+
+#. metadata.json->name
+msgid "Bing Desktop Wallpaper"
+msgstr "Bing 桌布"
+
+#. metadata.json->description
+msgid "Download and apply Today's Bing Wallpaper to your desktop"
+msgstr "下載並套用今天的 Bing 桌布到您的桌面上"

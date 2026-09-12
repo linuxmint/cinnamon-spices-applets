@@ -1,0 +1,16 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. metadata.json->name
+#. applet.js:20
+msgid "Computer"
+msgstr ""
+
+#. metadata.json->description
+msgid "Show files at computer level"
+msgstr ""

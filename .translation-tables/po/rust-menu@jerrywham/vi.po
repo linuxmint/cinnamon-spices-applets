@@ -1,0 +1,127 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: rust-menu@jerrywham 0.1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2020-04-13 12:38+0800\n"
+"PO-Revision-Date: 2025-10-12 12:54+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:82
+msgid "Open cook book"
+msgstr "Mở sách hướng dẫn"
+
+#: applet.js:86
+msgid "Open projects directory"
+msgstr "Mở thư mục dự án"
+
+#: applet.js:93
+msgid "First edition of cook book"
+msgstr "Ấn bản đầu tiên của sách hướng dẫn"
+
+#: applet.js:96
+msgid "Rust by example"
+msgstr "Rust theo ví dụ"
+
+#: applet.js:99
+msgid "Cargo book"
+msgstr "Sách Cargo"
+
+#: applet.js:102
+msgid "Rustc book"
+msgstr "Sách Rustc"
+
+#: applet.js:105
+msgid "Rustdoc book"
+msgstr "Sách Rustdoc"
+
+#: applet.js:112
+msgid "Create std"
+msgstr "Tạo std"
+
+#: applet.js:115
+msgid "Create alloc"
+msgstr "Tạo alloc"
+
+#: applet.js:118
+msgid "Create core"
+msgstr "Tạo core"
+
+#: applet.js:121
+msgid "Create proc_macro"
+msgstr "Tạo proc_macro"
+
+#: applet.js:124
+msgid "Create test"
+msgstr "Tạo test"
+
+#: applet.js:131
+msgid "Edition guide"
+msgstr "Hướng dẫn ấn bản"
+
+#: applet.js:134
+msgid "Reference guide"
+msgstr "Hướng dẫn tham khảo"
+
+#: applet.js:137
+msgid "Embedded book"
+msgstr "Sách Embedded"
+
+#: applet.js:140
+msgid "Rustonomicon book"
+msgstr "Sách Rustonomicon"
+
+#: applet.js:143
+msgid "Unstable book"
+msgstr "Sách Unstable"
+
+#: applet.js:150
+msgid "Launch Nursery"
+msgstr "Khởi chạy Nursery"
+
+#. rust-menu@jerrywham->metadata.json->description
+msgid "A Menu for Rust Developers"
+msgstr "Menu cho lập trình viên Rust"
+
+#. rust-menu@jerrywham->settings-schema.json->head->description
+msgid "Applet Settings"
+msgstr "Cài đặt Applet"
+
+#. rust-menu@jerrywham->settings-schema.json->use-custom-directory->description
+msgid "Check this to use a custom directory"
+msgstr "Đánh dấu để dùng thư mục tùy chỉnh"
+
+#. rust-menu@jerrywham->settings-schema.json->use-custom-directory->tooltip
+msgid ""
+"Checking this box allows you to set a custom directory in the field below"
+msgstr "Đánh dấu ô này để đặt thư mục tùy chỉnh ở ô bên dưới"
+
+#. rust-menu@jerrywham->settings-schema.json->custom-directory->description
+msgid "Custom Directory Projects"
+msgstr "Thư mục dự án tùy chỉnh"
+
+#. rust-menu@jerrywham->settings-schema.json->custom-directory->tooltip
+msgid ""
+"Set your custom directory here.  This field is unavailable unless the switch "
+"above is enabled"
+msgstr "Đặt thư mục tùy chỉnh ở đây. Ô này chỉ khả dụng khi bật tùy chọn trên"
+
+#. rust-menu@jerrywham->settings-schema.json->keybinding-project->description
+msgid "Keybinding, which open the documentation"
+msgstr "Phím tắt mở tài liệu"
+
+#. rust-menu@jerrywham->settings-schema.json->keybinding-documentation->description
+msgid "Keybinding, which open the RUST projects directory"
+msgstr "Phím tắt mở thư mục dự án RUST"

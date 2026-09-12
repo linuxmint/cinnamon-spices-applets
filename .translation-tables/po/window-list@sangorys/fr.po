@@ -1,0 +1,194 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-05-03 21:35+0200\n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:1273
+msgid "Window information"
+msgstr "Informations sur la fenêtre"
+
+#: applet.js:1309
+msgid "Move to the other monitor"
+msgstr "Déplacer vers un autre moniteur"
+
+#: applet.js:1319
+#, javascript-format
+msgid "Move to monitor %d"
+msgstr "Déplacer vers le moniteur %d"
+
+#: applet.js:1330
+msgid "Only on this workspace"
+msgstr "Seulement sur cet espace de travail"
+
+#: applet.js:1336
+msgid "Visible on all workspaces"
+msgstr "Visible sur tous les espaces de travail"
+
+#: applet.js:1342
+msgid "Move to another workspace"
+msgstr "Déplacer vers un autre espace de travail"
+
+#: applet.js:1365
+msgid "Preferences"
+msgstr "Préférences"
+
+#: applet.js:1368
+msgid "About..."
+msgstr "À propos..."
+
+#: applet.js:1372
+msgid "Configure..."
+msgstr "Configurer..."
+
+#: applet.js:1376
+msgid "Remove 'Window list'"
+msgstr "Supprimer la liste de fenêtres"
+
+#: applet.js:1383
+msgid "Close all"
+msgstr "Tout fermer"
+
+#: applet.js:1392
+msgid "Close others"
+msgstr "Fermer les autres"
+
+#: applet.js:1406
+msgid "Restore to full opacity"
+msgstr "Rétablir la pleine opacité"
+
+#: applet.js:1414
+msgid "Restore"
+msgstr "Restaurer"
+
+#: applet.js:1419
+msgid "Minimize"
+msgstr "Minimiser"
+
+#: applet.js:1427
+msgid "Unmaximize"
+msgstr "Démaximiser"
+
+#: applet.js:1432
+msgid "Maximize"
+msgstr "Maximiser"
+
+#: applet.js:1440
+msgid "Close"
+msgstr "Fermer"
+
+#. metadata.json->name
+msgid "My perfect window-list applet"
+msgstr "Mon applet de liste de fenêtres parfaite"
+
+#. metadata.json->description
+msgid ""
+"Based on the original Cinnamon window list, the window order is memorized "
+"and restored. The next huge feature is to also group window like Google "
+"Chrome groups tab. This is my definition of a perfect window list applet"
+msgstr ""
+"Basé sur la liste originale des fenêtres de Cinnamon, l'ordre des fenêtres "
+"est mémorisé et restauré. La deuxième grande fonctionnalité est de "
+"regrouper les fenêtres comme Google Chrome le fait pour les onglets. C'est "
+"ma définition d'une applet de liste de fenêtres parfaite"
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr "Comportement"
+
+#. settings-schema.json->show-all-workspaces->description
+msgid "Show windows from all workspaces"
+msgstr "Afficher les fenêtres de tous les espaces de travail"
+
+#. settings-schema.json->enable-alerts->description
+msgid ""
+"Show an alert in the window list when a window from another workspace "
+"requires attention"
+msgstr ""
+"Afficher une alerte dans la liste des fenêtres lorsqu'une fenêtre d'un "
+"autre espace de travail nécessite une attention particulière"
+
+#. settings-schema.json->enable-scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr ""
+"Activer le défilement de la liste des fenêtres à l'aide de la molette de "
+"la souris"
+
+#. settings-schema.json->reverse-scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr ""
+"Inverser le sens de défilement de la souris dans la liste des fenêtres"
+
+#. settings-schema.json->left-click-minimize->description
+msgid "Left click to minimize window"
+msgstr "Clic gauche pour réduire la fenêtre"
+
+#. settings-schema.json->middle-click-close->description
+msgid "Middle click to close window"
+msgstr "Clic du milieu pour fermer la fenêtre"
+
+#. settings-schema.json->section2->description
+msgid "Display"
+msgstr "Affichage"
+
+#. settings-schema.json->panel-show-label->description
+msgid "Show window names in the panel"
+msgstr "Afficher les noms de fenêtres dans le panneau"
+
+#. settings-schema.json->button-width->units
+msgid "pixels"
+msgstr "pixels"
+
+#. settings-schema.json->button-width->description
+msgid "Window button width in the panel"
+msgstr "Largeur du bouton de fenêtre dans le panneau"
+
+#. settings-schema.json->buttons-use-entire-space->description
+msgid ""
+"Window buttons can have different sizes and use the entire space available"
+msgstr ""
+"Les boutons de fenêtre peuvent avoir différentes tailles et utiliser tout "
+"l'espace disponible"
+
+#. settings-schema.json->window-preview->description
+msgid "Show window thumbnails on hover"
+msgstr "Afficher les vignettes des fenêtres au survol"
+
+#. settings-schema.json->window-preview-show-label->description
+msgid "Show title above thumbnail"
+msgstr "Afficher le titre au-dessus de la vignette"
+
+#. settings-schema.json->window-preview-scale->description
+msgid "Thumbnail size"
+msgstr "Taille de la vignette"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Small"
+msgstr "Petite"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Medium"
+msgstr "Moyenne"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Large"
+msgstr "Grande"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Largest"
+msgstr "La plus grande"

@@ -1,0 +1,147 @@
+# REDSHIFT
+# This file is put in the public domain.
+# marvel4u, 2017
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: redshift@marvel4u 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-28 05:35-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. settings-schema.json->brightness->description
+#. applet.js:65 applet.js:235 applet.js:340
+msgid "Brightness"
+msgstr "Độ sáng"
+
+#. metadata.json->name
+#. applet.js:84 applet.js:341
+msgid "Redshift"
+msgstr "Redshift"
+
+#. applet.js:103
+msgid "Transition on night"
+msgstr "Chuyển đổi ban đêm"
+
+#. applet.js:214
+msgid "Redshift day colour"
+msgstr "Màu ban ngày Redshift"
+
+#. applet.js:219
+msgid "Redshift day brightness"
+msgstr "Độ sáng ban ngày Redshift"
+
+#. applet.js:224
+msgid "Redshift night colour"
+msgstr "Màu ban đêm Redshift"
+
+#. applet.js:229
+msgid "Redshift night brightness"
+msgstr "Độ sáng ban đêm Redshift"
+
+#. applet.js:341
+msgid "On"
+msgstr "Bật"
+
+#. applet.js:345
+msgid "Day colour temperature"
+msgstr "Nhiệt độ màu ban ngày"
+
+#. applet.js:346
+msgid "Night colour temperature"
+msgstr "Nhiệt độ màu ban đêm"
+
+#. applet.js:347
+msgid "Day Redshift brightness"
+msgstr "Độ sáng Redshift ban ngày"
+
+#. applet.js:348
+msgid "Night Redshift brightness"
+msgstr "Độ sáng Redshift ban đêm"
+
+#. applet.js:350
+msgid "Colour temperature"
+msgstr "Nhiệt độ màu"
+
+#. applet.js:351
+msgid "Redshift brightness"
+msgstr "Độ sáng Redshift"
+
+#. metadata.json->description
+msgid ""
+"An app to change the red filter level for late night screen time. Requires "
+"redshift: sudo apt-get install redshift"
+msgstr "Ứng dụng thay đổi mức lọc màu đỏ cho màn hình ban đêm. Yêu cầu redshift: sudo apt-get install redshift"
+
+#. settings-schema.json->panel->title
+msgid "Redshift settings"
+msgstr "Cài đặt Redshift"
+
+#. settings-schema.json->brightness-section->title
+msgid "Brightness level"
+msgstr "Mức độ sáng"
+
+#. settings-schema.json->redshift-section->title
+msgid "Redshift configuration"
+msgstr "Cấu hình Redshift"
+
+#. settings-schema.json->redshift-transition-section->title
+msgid "Transition between day and night configuration"
+msgstr "Cấu hình chuyển đổi ngày và đêm"
+
+#. settings-schema.json->brightness->units
+#. settings-schema.json->redshiftDayBrightness->units
+#. settings-schema.json->redshiftNightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->enabledOnStartup->description
+msgid "Redshift Enabled"
+msgstr "Bật Redshift"
+
+#. settings-schema.json->dayColour->units
+#. settings-schema.json->nightColour->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayColour->description
+msgid "Redshift Day colour temperature"
+msgstr "Nhiệt độ màu ban ngày Redshift"
+
+#. settings-schema.json->redshiftDayBrightness->description
+msgid "Redshift Day Brightness"
+msgstr "Độ sáng ban ngày Redshift"
+
+#. settings-schema.json->changeOnNight->description
+msgid "Change temperature colour and Redshift brightness between day and night"
+msgstr "Thay đổi nhiệt độ màu và độ sáng Redshift giữa ngày và đêm"
+
+#. settings-schema.json->nightColour->description
+msgid "Redshift Night colour temperature"
+msgstr "Nhiệt độ màu ban đêm Redshift"
+
+#. settings-schema.json->redshiftNightBrightness->description
+msgid "Redshift Night Brightness"
+msgstr "Độ sáng ban đêm Redshift"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "Vĩ độ"
+
+#. settings-schema.json->latitude->tooltip
+#. settings-schema.json->longitude->tooltip
+msgid "If not entered Redshift would use GeoClue2 provider"
+msgstr "Nếu không nhập, Redshift sẽ sử dụng nhà cung cấp GeoClue2"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "Kinh độ"

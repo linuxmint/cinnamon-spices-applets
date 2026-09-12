@@ -1,0 +1,118 @@
+# Russian translation for cinnamon-weather
+# Copyright (C) 2015
+# Gankov Andrey <gav@qsolution.ru>, 2011.
+# Timon <timosha@gmail.com>, 2014.
+# zluka <osam@tut.by>, 2015.
+# Dmitriy <dmitriy.pom0@gmail.com>, 2019, 2021.
+# Eugene <schtaufenberg@yandex.ru>, 2024, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-14 14:22+0000\n"
+"PO-Revision-Date: 2026-03-09 16:36+0300\n"
+"Last-Translator: Eugene <schtaufenberg@yandex.ru>, 2026\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:20411
+msgid "in"
+msgstr ""
+
+#. 3.0/met_norway.js:294 3.0/met_norway.js:295 3.0/yahoo.js:468
+#. 3.8/weather-applet.js:11786 3.8/weather-applet.js:11787
+msgid "Fair"
+msgstr ""
+
+#. 3.0/openWeatherMap.js:368 3.8/weather-applet.js:10887
+msgid "Ragged thunderstorm"
+msgstr ""
+
+#. 3.0/openWeatherMap.js:418 3.8/weather-applet.js:10984
+msgid "Overcast clouds"
+msgstr ""
+
+#. 3.0/yahoo.js:458
+msgid "Smoky"
+msgstr ""
+
+#. 3.8/weather-applet.js:14560
+msgid "AccuWeather"
+msgstr ""
+
+#. 3.8/weather-applet.js:15024
+msgid "Deutscher Wetterdienst"
+msgstr ""
+
+#. 3.8/weather-applet.js:15359
+msgid "Weather Underground"
+msgstr ""
+
+#. 3.8/weather-applet.js:15974
+msgid "Pirate Weather"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:16773
+msgid "Open-Meteo"
+msgstr ""
+
+#. 3.8/weather-applet.js:17247 3.8/weather-applet.js:17248
+#. 3.8/weather-applet.js:17254 3.8/weather-applet.js:17255
+msgid "High Clouds"
+msgstr ""
+
+#. 3.8/weather-applet.js:17262 3.8/weather-applet.js:17263
+msgid "Low Clouds"
+msgstr ""
+
+#. 3.8/weather-applet.js:17361 3.8/weather-applet.js:17362
+msgid "Overcast and Dry"
+msgstr ""
+
+#. 3.8/weather-applet.js:17368 3.8/weather-applet.js:17369
+#. 3.8/weather-applet.js:17375 3.8/weather-applet.js:17376
+#. 3.8/weather-applet.js:17425 3.8/weather-applet.js:17426
+#. 3.8/weather-applet.js:17433 3.8/weather-applet.js:17434
+msgid "Slightly Stormy"
+msgstr ""
+
+#. 3.8/weather-applet.js:17382 3.8/weather-applet.js:17383
+#. 3.8/weather-applet.js:17389 3.8/weather-applet.js:17390
+msgid "Stormy Snow Showers"
+msgstr ""
+
+#. 3.8/weather-applet.js:17396 3.8/weather-applet.js:17397
+#. 3.8/weather-applet.js:17403 3.8/weather-applet.js:17404
+msgid "Thundery Showers"
+msgstr ""
+
+#. 3.8/weather-applet.js:17410 3.8/weather-applet.js:17411
+#. 3.8/weather-applet.js:17417 3.8/weather-applet.js:17418
+#. 3.8/weather-applet.js:17441 3.8/weather-applet.js:17442
+msgid "Thundery Snow Showers"
+msgstr ""
+
+#. 3.8/weather-applet.js:17542
+msgid "Mass Movements Warning"
+msgstr ""
+
+#. 3.8/weather-applet.js:17552
+msgid "Flood Warning"
+msgstr ""
+
+#. 3.8/weather-applet.js:17572
+msgid "Swiss Météo"
+msgstr ""
+
+#. 3.8->settings-schema.json->maintainer->description
+msgid "Current maintainer: ---"
+msgstr ""

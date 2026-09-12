@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-26 05:28-0500\n"
+"PO-Revision-Date: 2025-05-12 00:09+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:21
+msgid "Currently preventing notifications"
+msgstr "目前已靜音通知"
+
+#: applet.js:22
+msgid "Currently allowing notifications"
+msgstr "目前已啟用通知"
+
+#: applet.js:92
+msgid "Notification settings"
+msgstr "通知設定"
+
+#. metadata.json->name
+msgid "Notification Mute"
+msgstr "Notification Mute"
+
+#. metadata.json->description
+msgid "Click to mute notifications, click again to unmute"
+msgstr "點選以靜音通知，再次點選以取消靜音"
+
+#. settings-schema.json->head->description
+msgid "Icons"
+msgstr "圖示"
+
+#. settings-schema.json->use-custom-off-icon->description
+msgid "Use a custom icon for when notifications are allowed."
+msgstr "通知啟用時使用自訂圖示。"
+
+#. settings-schema.json->off-icon->description
+msgid "Notifications allowed icon:"
+msgstr "通知啟用圖示："
+
+#. settings-schema.json->off-icon->tooltip
+#. settings-schema.json->on-icon->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr "選擇圖示檔案，或在輸入框中輸入圖示名稱"
+
+#. settings-schema.json->use-custom-on-icon->description
+msgid "Use a custom icon for when notifications are muted."
+msgstr "通知靜音時使用自訂圖示。"
+
+#. settings-schema.json->on-icon->description
+msgid "Notifications muted icon:"
+msgstr "通知靜音圖示："
+
+#. settings-schema.json->head1->description
+msgid "Keybinding"
+msgstr "快速鍵"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding for toggling notification mute"
+msgstr "設定切換通知靜音的快速鍵"

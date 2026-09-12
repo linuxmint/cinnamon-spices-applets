@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2017-04-20 23:15+0800\n"
+"PO-Revision-Date: 2025-09-10 00:06+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:40
+msgid "Xampp Panel"
+msgstr "Xampp 面板"
+
+#: applet.js:48
+msgid "Start XAMPP manager"
+msgstr "啟動 XAMPP 管理程式"
+
+#: applet.js:51
+msgid "XAMPP Start"
+msgstr "啟動 XAMPP"
+
+#: applet.js:55
+msgid "XAMPP Stop"
+msgstr "停止 XAMPP"
+
+#: applet.js:59
+msgid "XAMPP Restart"
+msgstr "重新啟動 XAMPP"
+
+#: applet.js:66
+msgid "Open Web Dir"
+msgstr "開啟網頁目錄"
+
+#: applet.js:70
+msgid "Launch Web Dir"
+msgstr "啟動網頁目錄"
+
+#: applet.js:74
+msgid "Launch phpMyAdmin"
+msgstr "啟動 phpMyAdmin"
+
+#: applet.js:78
+msgid "Edit default php.ini"
+msgstr "編輯預設 php.ini"
+
+#. xampp-panel@backids99->metadata.json->description
+msgid "A Panel Menu for XAMPP Web Developers"
+msgstr "專為 XAMPP 網頁開發者設計的面板選單"
+
+#. xampp-panel@backids99->metadata.json->name
+msgid "Xampp Panel Menu"
+msgstr "Xampp 面板選單"

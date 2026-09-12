@@ -1,0 +1,27 @@
+# MICROPHONE LEVEL MONITOR
+# This file is put in the public domain.
+# zamszowy, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mic-level@zamszowy 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 20:46+0200\n"
+"PO-Revision-Date: 2024-11-14 18:11+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:86
+msgid "Click so switch to HFP profile"
+msgstr ""
+
+#. applet.js:88
+msgid "Click so switch to A2DP profile"
+msgstr ""

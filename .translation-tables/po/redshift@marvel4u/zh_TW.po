@@ -1,0 +1,148 @@
+# REDSHIFT
+# This file is put in the public domain.
+# marvel4u, 2017
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: redshift@marvel4u 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-28 05:35-0400\n"
+"PO-Revision-Date: 2025-05-01 17:41+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. settings-schema.json->brightness->description
+#. applet.js:65 applet.js:235 applet.js:340
+msgid "Brightness"
+msgstr "亮度"
+
+#. metadata.json->name
+#. applet.js:84 applet.js:341
+msgid "Redshift"
+msgstr "Redshift"
+
+#. applet.js:103
+msgid "Transition on night"
+msgstr "夜間自動切換"
+
+#. applet.js:214
+msgid "Redshift day colour"
+msgstr "Redshift 日間色溫"
+
+#. applet.js:219
+msgid "Redshift day brightness"
+msgstr "Redshift 日間亮度"
+
+#. applet.js:224
+msgid "Redshift night colour"
+msgstr "Redshift 夜間色溫"
+
+#. applet.js:229
+msgid "Redshift night brightness"
+msgstr "Redshift 夜間亮度"
+
+#. applet.js:341
+msgid "On"
+msgstr "啟用"
+
+#. applet.js:345
+msgid "Day colour temperature"
+msgstr "日間色溫"
+
+#. applet.js:346
+msgid "Night colour temperature"
+msgstr "夜間色溫"
+
+#. applet.js:347
+msgid "Day Redshift brightness"
+msgstr "日間 Redshift 亮度"
+
+#. applet.js:348
+msgid "Night Redshift brightness"
+msgstr "夜間 Redshift 亮度"
+
+#. applet.js:350
+msgid "Colour temperature"
+msgstr "色溫"
+
+#. applet.js:351
+msgid "Redshift brightness"
+msgstr "Redshift 亮度"
+
+#. metadata.json->description
+msgid ""
+"An app to change the red filter level for late night screen time. Requires "
+"redshift: sudo apt-get install redshift"
+msgstr ""
+"這是一款可在深夜使用螢幕時調整紅色濾鏡強度的應用程式。"
+"需要透過 sudo apt-get install redshift 指令安裝 redshift"
+
+#. settings-schema.json->panel->title
+msgid "Redshift settings"
+msgstr "Redshift 設定"
+
+#. settings-schema.json->brightness-section->title
+msgid "Brightness level"
+msgstr "亮度等級"
+
+#. settings-schema.json->redshift-section->title
+msgid "Redshift configuration"
+msgstr "Redshift 設定"
+
+#. settings-schema.json->redshift-transition-section->title
+msgid "Transition between day and night configuration"
+msgstr "日夜轉換設定"
+
+#. settings-schema.json->brightness->units
+#. settings-schema.json->redshiftDayBrightness->units
+#. settings-schema.json->redshiftNightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->enabledOnStartup->description
+msgid "Redshift Enabled"
+msgstr "啟用 Redshift"
+
+#. settings-schema.json->dayColour->units
+#. settings-schema.json->nightColour->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayColour->description
+msgid "Redshift Day colour temperature"
+msgstr "Redshift 日間色溫"
+
+#. settings-schema.json->redshiftDayBrightness->description
+msgid "Redshift Day Brightness"
+msgstr "Redshift 日間亮度"
+
+#. settings-schema.json->changeOnNight->description
+msgid "Change temperature colour and Redshift brightness between day and night"
+msgstr "在日夜間自動切換色溫與 Redshift 亮度"
+
+#. settings-schema.json->nightColour->description
+msgid "Redshift Night colour temperature"
+msgstr "Redshift 夜間色溫"
+
+#. settings-schema.json->redshiftNightBrightness->description
+msgid "Redshift Night Brightness"
+msgstr "Redshift 夜間亮度"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "緯度"
+
+#. settings-schema.json->latitude->tooltip
+#. settings-schema.json->longitude->tooltip
+msgid "If not entered Redshift would use GeoClue2 provider"
+msgstr "若未輸入，Redshift 將使用 GeoClue2 定位服務"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "經度"
