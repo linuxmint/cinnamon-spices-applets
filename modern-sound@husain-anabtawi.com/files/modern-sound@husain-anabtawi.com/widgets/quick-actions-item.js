@@ -70,7 +70,9 @@ class QuickActionsItem extends PopupMenu.PopupBaseMenuItem {
             icon_type: iconType,
             icon_name: iconName,
             icon_size: 24,
-            style_class: "modern-sound-quick-icon",
+            style_class: iconType === St.IconType.SYMBOLIC ?
+                `popup-menu-icon modern-sound-quick-icon` :
+                "modern-sound-quick-icon",
             x_align: Clutter.ActorAlign.CENTER,
             y_align: Clutter.ActorAlign.CENTER
         });
