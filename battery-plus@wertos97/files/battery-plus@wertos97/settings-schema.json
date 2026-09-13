@@ -78,6 +78,16 @@
         "description": "How many hours of history to show on the graph",
         "tooltip": "Sampled every minute; data older than 8 days is removed."
     },
+    "zoom_minutes": {
+        "type": "spinbutton",
+        "default": 120,
+        "min": 15,
+        "max": 1440,
+        "step": 15,
+        "units": "min",
+        "description": "Zoomed graph span",
+        "tooltip": "Click the graph to zoom around that time, then scroll across the full history span. Click again or close the popup to reset."
+    },
     "graph_shade": {
         "type": "checkbox",
         "default": true,

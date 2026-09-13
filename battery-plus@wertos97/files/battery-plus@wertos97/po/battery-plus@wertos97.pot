@@ -225,6 +225,16 @@ msgstr ""
 msgid "Sampled every minute; data older than 8 days is removed."
 msgstr ""
 
+#. settings-schema.json->zoom_minutes->description
+msgid "Zoomed graph span"
+msgstr ""
+
+#. settings-schema.json->zoom_minutes->tooltip
+msgid ""
+"Click the graph to zoom around that time, then scroll across the full "
+"history span. Click again or close the popup to reset."
+msgstr ""
+
 #. settings-schema.json->graph_shade->description
 msgid "Shade charging periods on the graph"
 msgstr ""
