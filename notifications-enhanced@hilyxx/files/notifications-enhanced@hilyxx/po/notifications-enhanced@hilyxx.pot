@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: notifications-enhanced@hilyxx 1.3\n"
+"Project-Id-Version: notifications-enhanced@hilyxx 1.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-08-04 01:50+0200\n"
+"POT-Creation-Date: 2026-08-24 14:54+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,64 +18,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#. applet.js:43
+#. applet.js:45
 msgid "Notifications applet conflict"
 msgstr ""
 
-#. applet.js:44
+#. applet.js:46
 msgid ""
 "Conflict detected: notifications@cinnamon.org is active.\n"
 "Remove it and restart Cinnamon before using Notifications-Enhanced applet."
 msgstr ""
 
-#. applet.js:164
+#. applet.js:171
 msgid "Do not disturb"
 msgstr ""
 
-#. applet.js:170
+#. applet.js:177
 msgid "No notifications"
 msgstr ""
 
 #. settings-schema.json->keyClear->description
-#. applet.js:178
+#. applet.js:185
 msgid "Clear notifications"
 msgstr ""
 
-#. applet.js:193
+#. applet.js:200
 msgid "Enable notifications"
 msgstr ""
 
-#. applet.js:204
+#. applet.js:211
 msgid "Notification Settings"
 msgstr ""
 
-#. applet.js:327 applet.js:558
+#. applet.js:355 applet.js:611
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] ""
 msgstr[1] ""
 
-#. applet.js:364
+#. applet.js:392
 msgid "Notifications"
 msgstr ""
 
-#. applet.js:377
+#. applet.js:405
 msgid "Notifications disabled"
 msgstr ""
 
-#. applet.js:574
+#. applet.js:634
 msgid "just now"
 msgstr ""
 
-#. applet.js:577
+#. applet.js:637
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#. applet.js:581
+#. applet.js:641
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"

@@ -4,6 +4,7 @@ A Cinnamon Applet for interacting with the various functions provided by KDE Con
 
 - KDE Connect
 - python3 (Should be installed already, if you're using cinnamon)
+  - The specific modules used are: `gi`(Gtk, GLib, GObject, Gio), `setproctitle` (optional), _standard library_
 
 ## Installation
 
@@ -21,6 +22,7 @@ The menu items in the sub menu are grouped by "Info" modules, that mainly show i
 - **1.3**: Fully Supported; Not fully tested
 - **1.4**: Fully Supported; Fully tested
 - **21.12.3**: Fully Supported; Fully tested
+- **23.08.5**: Fully Supported; Fully tested
 
 NOTE: _Versions between these versions or older versions are likely to work but are not tested at all and there are no workarounds for these_
 

@@ -126,8 +126,9 @@ var equationOfTime = function(jd) {
 // Sunrise / sunset for the UTC date of `date`.
 // Returns { rise: Date, set: Date } or null fields if the sun doesn't
 // rise/set on that day at that latitude.
-// Note: uses UTC date, which can differ from local date at extreme time
-// zones near midnight. The nextSunEvent scanner compensates via its > now filter.
+// Note: uses UTC date, which can differ from the observer's local date (for
+// several hours a day at western longitudes). The nextSunEvent scanner
+// compensates by starting from the previous UTC day and filtering with > now.
 var sunriseSunset = function(date, lat, lon) {
     var d0 = new Date(Date.UTC(date.getUTCFullYear(),
                                date.getUTCMonth(),
@@ -292,8 +293,12 @@ var moonAltitude = function(date, lat, lonObs) {
 
 // Next sunrise or sunset after `now` for the observer at lat/lon.
 // Returns { type: "rise" | "set", time: Date } or null if no event in 7 days.
+// The scan starts at the previous UTC day: sunriseSunset() tables events by
+// UTC date, so west of Greenwich the remainder of the observer's local day
+// (e.g. tonight's sunset once UTC has passed midnight) lives in the previous
+// UTC day's entry; the > now filter discards events already past.
 var nextSunEvent = function(now, lat, lon) {
-    for (var dayOffset = 0; dayOffset < 7; dayOffset++) {
+    for (var dayOffset = -1; dayOffset < 7; dayOffset++) {
         var d = new Date(now.getTime() + dayOffset * 86400000);
         var ss = sunriseSunset(d, lat, lon);
         if (ss.rise && ss.rise > now) return { type: "rise", time: ss.rise };

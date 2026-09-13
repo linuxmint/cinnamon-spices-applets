@@ -1,3 +1,6 @@
+### v5.11.5~20260825
+  * Add Nvidia D3cold support.
+
 ### v5.11.4~20260508
   * Installing dependencies: Use pkgcli when available.
 

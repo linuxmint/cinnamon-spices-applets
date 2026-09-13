@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-06-24 18:54+0200\n"
-"PO-Revision-Date: 2026-06-01 15:48+0200\n"
+"PO-Revision-Date: 2026-09-11 21:50+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -385,11 +385,11 @@ msgstr "Elérte a beállított korlátot."
 
 #. applet.js:4168
 msgid "Temporary Mute"
-msgstr ""
+msgstr "Ideiglenes némítás"
 
 #. applet.js:4169
 msgid "Turn the sound back on"
-msgstr ""
+msgstr "Kapcsold vissza a hangot"
 
 #. applet.js:4278
 msgid "Please Log Out then Log In"
@@ -1075,6 +1075,9 @@ msgid ""
 "While\n"
 "Muted"
 msgstr ""
+"Másodpercek\n"
+"Némítás \n"
+"közben"
 
 #. settings-schema.json->radios->columns->title
 msgid "Streaming URL (empty for a category)"
@@ -1253,47 +1256,47 @@ msgstr ""
 
 #. settings-schema.json->waiting-time->description
 msgid "Waiting time before a new radio turns on"
-msgstr ""
+msgstr "Várakozási idő, mielőtt egy új rádió bekapcsol"
 
 #. settings-schema.json->waiting-time->options
 msgid "none"
-msgstr ""
+msgstr "semmi"
 
 #. settings-schema.json->waiting-time->options
 msgid "300 ms"
-msgstr ""
+msgstr "300 ms"
 
 #. settings-schema.json->waiting-time->options
 msgid "500 ms"
-msgstr ""
+msgstr "500 ms"
 
 #. settings-schema.json->waiting-time->options
 msgid "800 ms"
-msgstr ""
+msgstr "800 ms"
 
 #. settings-schema.json->waiting-time->options
 msgid "1 s"
-msgstr ""
+msgstr "1 s"
 
 #. settings-schema.json->waiting-time->options
 msgid "1.5 s"
-msgstr ""
+msgstr "1,5 s"
 
 #. settings-schema.json->waiting-time->options
 msgid "2 s"
-msgstr ""
+msgstr "2 s"
 
 #. settings-schema.json->waiting-time->options
 msgid "3 s"
-msgstr ""
+msgstr "3 s"
 
 #. settings-schema.json->waiting-time->options
 msgid "4 s"
-msgstr ""
+msgstr "4 s"
 
 #. settings-schema.json->waiting-time->options
 msgid "5 s"
-msgstr ""
+msgstr "5 s"
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
@@ -1566,7 +1569,7 @@ msgstr "Listák magasságának javítása"
 
 #. settings-schema.json->heightCat->units
 msgid " px"
-msgstr "px"
+msgstr " px"
 
 #. settings-schema.json->heightCat->description
 msgid "Height of these lists"

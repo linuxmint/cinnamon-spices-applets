@@ -47,7 +47,9 @@
                 "switch_show-device-count-tooltip",
                 "combobox_icon-type",
                 "switch_use-custom-icon",
-                "icon_custom-icon"
+                "icon_custom-icon",
+                "switch_different-icon-no-connected-devices",
+                "icon_no-connected-devices"
             ]
         },
         "section_kdecsettings": {
@@ -142,7 +144,8 @@
             "type": "section",
             "title": "SFTP Action Module",
             "keys": [
-                "module_sftp_description"
+                "module_sftp_description",
+                "module_sftp_selectFirstDirectory"
             ]
         },
         "section_module_sms": {
@@ -197,6 +200,17 @@
         "description": "Custom icon to use",
         "default": "kdeconnect",
         "dependency": "switch_use-custom-icon"
+    },
+    "switch_different-icon-no-connected-devices": {
+        "type": "switch",
+        "description": "Display a different icon when no devices are connected",
+        "default": false
+    },
+    "icon_no-connected-devices": {
+        "type": "iconfilechooser",
+        "description": "Icon to use when no devices are connected",
+        "default": "emblem-important-symbolic",
+        "dependency": "switch_different-icon-no-connected-devices"
     },
 
     "button_open-kdec-settings": {
@@ -446,7 +460,13 @@
 
     "module_sftp_description": {
         "type": "label",
-        "description": "Lets you remotely browse the storage selected on the device"
+        "description": "Lets you remotely browse the storage of the device"
+    },
+
+    "module_sftp_selectFirstDirectory": {
+        "type": "switch",
+        "description": "Select the first directory automatically",
+        "default": false
     },
 
     "module_sms_description": {
