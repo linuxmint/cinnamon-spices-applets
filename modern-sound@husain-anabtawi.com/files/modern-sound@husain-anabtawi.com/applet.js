@@ -26,7 +26,7 @@ function addSectionSeparator(menu) {
     return separator;
 }
 
-class ModernSoundApplet extends Applet.IconApplet {
+class ModernSoundApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
 
@@ -54,10 +54,20 @@ class ModernSoundApplet extends Applet.IconApplet {
         this._settings.bind("middleClickAction", "middleClickAction");
         this._settings.bind("middleShiftClickAction", "middleShiftClickAction");
         this._settings.bind("tooltipShowVolume", "tooltipShowVolume", () => this._updatePanelIcon());
+        this._settings.bind("showVolumePercentage", "showVolumePercentage", () => this._updatePanelIcon());
         this._settings.bind("scrollStep", "scrollStep");
         this._settings.bind("invertScrollDirection", "invertScrollDirection");
         this._settings.bind("playVolumeChangeSound", "playVolumeChangeSound");
         this._settings.bind("showVolumeOsdOnScroll", "showVolumeOsdOnScroll");
+        this._settings.bind("showQuickActions", "showQuickActions", () => {
+            this._syncMenuSectionVisibility();
+        });
+        this._settings.bind("showApplicationVolumes", "showApplicationVolumes", () => {
+            this._syncMenuSectionVisibility();
+        });
+        this._settings.bind("showInputDevice", "showInputDevice", () => {
+            this._syncMenuSectionVisibility();
+        });
         this._settings.bind("hideSingleOutputDevice", "hideSingleOutputDevice", () => {
             this._syncDeviceVisibility();
         });
@@ -81,16 +91,18 @@ class ModernSoundApplet extends Applet.IconApplet {
         this._inputDevice.bindControl(this._control);
         this._menu.addMenuItem(this._inputDevice);
 
-        addSectionSeparator(this._menu);
+        this._appsSeparator = addSectionSeparator(this._menu);
 
         this._applications = new ApplicationsItem(this);
         this._applications.bindControl(this._control);
         this._menu.addMenuItem(this._applications);
 
-        addSectionSeparator(this._menu);
+        this._actionsSeparator = addSectionSeparator(this._menu);
 
         this._quickActions = new QuickActionsItem(this);
         this._menu.addMenuItem(this._quickActions);
+
+        this._syncMenuSectionVisibility();
 
         this._control.connect("state-changed", () => {
             if (this._control.get_state() === Cvc.MixerControlState.READY)
@@ -154,6 +166,26 @@ class ModernSoundApplet extends Applet.IconApplet {
             this._inputDevice._updateVisibility();
     }
 
+    _syncMenuSectionVisibility() {
+        if (this._applications)
+            this._applications._updateVisibility();
+        if (this._inputDevice)
+            this._inputDevice._updateVisibility();
+        if (this._quickActions)
+            this._quickActions.actor.visible = this.showQuickActions !== false;
+        this._syncMenuSeparators();
+    }
+
+    _syncMenuSeparators() {
+        const appsVisible = this._applications && this._applications.actor.visible;
+        const actionsVisible = this._quickActions && this._quickActions.actor.visible;
+
+        if (this._appsSeparator)
+            this._appsSeparator.actor.visible = appsVisible;
+        if (this._actionsSeparator)
+            this._actionsSeparator.actor.visible = actionsVisible;
+    }
+
     _syncMuteStates() {
         if (!this._quickActions)
             return;
@@ -192,10 +224,19 @@ class ModernSoundApplet extends Applet.IconApplet {
         this.set_applet_tooltip(`${_("Volume")}: ${percent}%`);
     }
 
+    _setPanelPercentage(percent) {
+        if (this.showVolumePercentage !== true) {
+            this.set_applet_label("");
+            return;
+        }
+        this.set_applet_label(`${percent}%`);
+    }
+
     _updatePanelIcon() {
         if (!this._output) {
             this.set_applet_icon_symbolic_name("audio-volume-muted-symbolic");
             this._setPanelTooltip(0);
+            this._setPanelPercentage(0);
             return;
         }
 
@@ -217,6 +258,7 @@ class ModernSoundApplet extends Applet.IconApplet {
 
         this.set_applet_icon_symbolic_name(icon);
         this._setPanelTooltip(percent);
+        this._setPanelPercentage(percent);
     }
 
     _setKeybinding() {

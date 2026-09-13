@@ -35,6 +35,11 @@
         "default": true,
         "description": "Show volume in tooltip"
     },
+    "showVolumePercentage": {
+        "type": "switch",
+        "default": false,
+        "description": "Show volume percentage next to icon"
+    },
     "scrollStep": {
         "type": "spinbutton",
         "default": 5,
@@ -62,6 +67,25 @@
         "type": "switch",
         "default": true,
         "description": "Show volume OSD when scrolling the panel icon"
+    },
+    "section-menu": {
+        "type": "section",
+        "description": "Menu"
+    },
+    "showQuickActions": {
+        "type": "switch",
+        "default": true,
+        "description": "Show quick action toggles"
+    },
+    "showApplicationVolumes": {
+        "type": "switch",
+        "default": true,
+        "description": "Show application volumes"
+    },
+    "showInputDevice": {
+        "type": "switch",
+        "default": true,
+        "description": "Show input device"
     },
     "section-devices": {
         "type": "section",

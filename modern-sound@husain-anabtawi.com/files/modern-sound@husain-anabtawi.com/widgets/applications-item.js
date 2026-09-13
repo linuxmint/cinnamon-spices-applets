@@ -83,8 +83,10 @@ class ApplicationsItem extends PopupMenu.PopupMenuSection {
     }
 
     _updateVisibility() {
-        const visible = this._streams.length > 0;
-        this.actor.visible = visible;
+        const enabled = this._applet.showApplicationVolumes !== false;
+        this.actor.visible = enabled && this._streams.length > 0;
+        if (this._applet._syncMenuSeparators)
+            this._applet._syncMenuSeparators();
     }
 }
 

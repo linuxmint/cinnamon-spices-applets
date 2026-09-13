@@ -2,7 +2,7 @@
 
 Release notes for **Modern Sound**.
 
-## [1.3.0] — 2026-08-06
+## [1.3.0] — 2026-09-13
 
 ### Added
 
@@ -11,19 +11,24 @@ Release notes for **Modern Sound**.
 - **Sound Change Effects** settings — optional volume change sound (output only; mic stays silent).
 - **Volume OSD on panel scroll** — optional on-screen level indicator (respects Cinnamon media-keys OSD setting).
 - **Panel tooltip option** — show `Volume: N%` or **Sound** only.
+- **Panel volume percentage** — optional `N%` label next to the panel icon.
 - **Shift + scroll on panel icon** — adjust mic volume; plain scroll adjusts output.
 - **Volume scroll step** — configurable 1–10% for panel scroll and menu sliders.
 - **Invert scroll direction** — optional reversal for panel scroll and menu sliders.
+- **Menu section toggles** — show/hide quick actions, application volumes, and the input device row.
 
 ### Changed
 
 - **Theme-native styling** — menu uses Cinnamon shell theme classes (`popup-slider-menu-item`, `popup-device-menu-item`); layout-only custom CSS.
 - Volume sliders refactored to **`PopupSliderMenuItem`** (official sound applet pattern).
+- **Device list selection** — thin theme-colored outline for the active device (no radio/check icons); hover uses the theme highlight.
 
 ### Fixed
 
 - Shared scroll math aligned with Cinnamon (`step × norm / max`) for overamplification-aware scrolling.
 - Overamplification GSettings listener disconnected when the applet is removed from the panel.
+- Active device highlight uses Mixer **UI device ids** (not Pulse stream indexes).
+- Master/mic slider width no longer shrinks when opening or closing device lists.
 
 ---
 
