@@ -76,8 +76,12 @@ export class UIForecasts {
 			if (!weather.forecasts)
 				return false;
 
-			if (this.forecasts.length > weather.forecasts.length)
-				this.Rebuild(this.app.config, this.app.config.textColorStyle!, weather.forecasts.length);
+			if (this.forecasts.length > weather.forecasts.length) {
+				const textColorStyle = this.app.config.textColorStyle;
+				if (textColorStyle == null)
+					return false;
+				this.Rebuild(this.app.config, textColorStyle, weather.forecasts.length);
+			}
 
 			const len = Math.min(this.forecasts.length, weather.forecasts.length);
 			for (let i = 0; i < len; i++) {
