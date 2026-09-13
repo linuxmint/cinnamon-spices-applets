@@ -162,8 +162,9 @@ class ChatGPTLimitsApplet extends Applet.TextIconApplet {
                          "popup_card_color", "popup_track_color", "popup_text_color",
                          "popup_bar_height", "popup_card_padding", "popup_card_radius",
                          "popup_card_spacing", "popup_width", "theme_preset",
-                         "panel_show_q5", "panel_show_t5", "panel_show_q7", "panel_show_t7",
-                         "panel_bar_order", "bar_radius", "panel_bold_text",
+                          "panel_show_q5", "panel_show_t5", "panel_show_q7", "panel_show_t7",
+                          "panel_bar_order", "auto_weekly_fallback",
+                          "bar_radius", "panel_bold_text",
                          "panel_font_family", "popup_show_5h", "popup_show_7d"])
             this.settings.bind(key, key, () => this._applyAppearance());
 
@@ -546,7 +547,18 @@ class ChatGPTLimitsApplet extends Applet.TextIconApplet {
         }
         if (!bars.length)
             bars = ["q5"];
+        if (this.auto_weekly_fallback === true && this._weeklyExhausted()) {
+            let mapped = bars.map(bar => bar === "q5" ? "q7" : bar === "t5" ? "t7" : bar);
+            bars = mapped.filter((bar, index) => mapped.indexOf(bar) === index);
+        }
         return bars;
+    }
+
+    _weeklyExhausted() {
+        let weekly = this._windowByDuration(10080);
+        if (!weekly)
+            return false;
+        return Math.max(0, 100 - Number(weekly.usedPercent)) <= 0;
     }
 
     _applyAppearance() {

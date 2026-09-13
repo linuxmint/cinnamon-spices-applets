@@ -171,6 +171,16 @@ msgid ""
 "7d time."
 msgstr ""
 
+#. settings-schema.json->auto_weekly_fallback->description
+msgid "Show weekly bars when the weekly limit is exhausted"
+msgstr ""
+
+#. settings-schema.json->auto_weekly_fallback->tooltip
+msgid ""
+"Replaces the 5h panel bars with the 7d bars while the weekly remaining quota "
+"is zero. Returns to 5h bars after the weekly reset."
+msgstr ""
+
 #. settings-schema.json->panel_appearance_header->description
 msgid "Panel appearance"
 msgstr ""

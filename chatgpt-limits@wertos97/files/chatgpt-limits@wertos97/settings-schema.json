@@ -48,6 +48,12 @@
         "description": "Bar order",
         "tooltip": "Comma-separated bar order. Tokens: q5 5h quota, t5 5h time, q7 7d quota, t7 7d time."
     },
+    "auto_weekly_fallback": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Show weekly bars when the weekly limit is exhausted",
+        "tooltip": "Replaces the 5h panel bars with the 7d bars while the weekly remaining quota is zero. Returns to 5h bars after the weekly reset."
+    },
     "panel_appearance_header": {
         "type": "header",
         "description": "Panel appearance"
