@@ -20,8 +20,8 @@ In addition, it offers extra handy interactions:
 
 - **鼠标滚轮**：悬停滚动，循环切换工作区（默认关闭）  
   **Mouse wheel**: Hover and scroll to cycle through workspaces (disabled by default)
-- **鼠标中键**：呼出工作区选择器（Expo）或窗口选择器（Scale）或切换桌面图标的显示与隐藏  
-  **Middle click**: Opens workspace selector (Expo) or window selector (Scale) or Toggle desktop icons visibility
+- **鼠标中键**：显示桌面、呼出工作区选择器（Expo）、窗口选择器（Scale），或切换桌面图标的显示与隐藏  
+  **Middle click**: Show the desktop, open workspace selector (Expo) or window selector (Scale), or toggle desktop icons visibility
 - **自定义菜单项**：可自由添加任意数量的菜单项，并选择显示在内置项的上方或下方  
   **Custom menu items**: Freely add any number of menu items, positioned above or below built-in items
 
@@ -35,6 +35,13 @@ In addition, it offers extra handy interactions:
   Freely choose an icon (system icons or custom image path supported)
 - 可调整图标大小（16–64 像素）  
   Adjust icon size (16–64 pixels)
+
+### 全局设置 | Global Settings
+
+- **菜单项文字大小**：可调整菜单内所有项的文字大小（0 表示使用主题默认值）  
+  **Menu item text size**: Adjust the text size of all items in the menu (0 = theme default)
+- **菜单项图标大小**：统一调整菜单内所有项的图标大小（16–48 像素）  
+  **Menu item icon size**: Uniformly adjust the icon size of all items in the menu (16–48 pixels)
 
 ### 内置菜单项 | Built-in Menu Items
 
@@ -66,6 +73,8 @@ In addition, it offers extra handy interactions:
   **Middle click action**: Choose an action to perform:
   - `无` — 不执行任何操作  
     `Nothing` — Does nothing
+  - `显示桌面` — 最小化所有窗口显示桌面，再次触发则恢复  
+    `Show desktop` — Minimizes all windows to show the desktop; trigger again to restore
   - `显示工作区选择器 (Expo)` — 打开工作区选择器  
     `Show workspace selector (Expo)` — Opens the workspace selector
   - `显示窗口选择器 (Scale)` — 打开窗口选择器  
@@ -75,6 +84,9 @@ In addition, it offers extra handy interactions:
 
 > 💡 **所有更改都会立即生效，无需重启 Cinnamon。**  
 > **All changes take effect immediately – no need to restart Cinnamon.**
+
+> ℹ️ **注意**：使用动态壁纸（如 Hidamari 等）时，切换"显示/隐藏桌面图标"可能无法正常显示图标，建议在动态壁纸工具中开启"将桌面图标显示在视频之上"之类的选项。  
+> **Note**: When using a live wallpaper (such as Hidamari), toggling "desktop icons visibility" may not work correctly. Please enable an option like "Show desktop icons on top of the video" in your live wallpaper tool.
 
 ---
 

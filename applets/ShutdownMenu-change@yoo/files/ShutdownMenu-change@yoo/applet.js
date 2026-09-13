@@ -1,6 +1,6 @@
 // name： ShutdownMenu-change
 // description： providing a shutdown menu with mouse wheel workspace switching, middle-click actions, and custom menu items.
-// version: 1.3.1 (12-09-2026)
+// version: 1.3.2 (13-09-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
@@ -265,7 +265,9 @@ MyApplet.prototype = {
     },
     
     _performAction: function(action) {
-        if (action == "show_expo") {
+        if (action == "show_desktop") {
+            global.workspace_manager.toggle_desktop(global.get_current_time());
+        } else if (action == "show_expo") {
             if (Main.expo && !Main.expo.animationInProgress)
                 Main.expo.toggle();
         } else if (action == "show_scale") {

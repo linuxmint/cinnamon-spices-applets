@@ -27,6 +27,7 @@
         "description" : "Middle click action",
         "options" : {
             "Nothing" : "nothing",
+            "Show desktop" : "show_desktop",
             "Show workspace selector (Expo)" : "show_expo",
             "Show window selector (Scale)" : "show_scale",
             "Toggle desktop icons visibility" : "toggle_desktop_icons"

@@ -76,6 +76,10 @@ msgid "Toggle desktop icons visibility"
 msgstr "显示/隐藏桌面图标"
 
 #: settings-schema.json
+msgid "Show desktop"
+msgstr "显示桌面"
+
+#: settings-schema.json
 msgid "Note: When using live wallpapers, switching between showing and hiding desktop icons may not work."
 msgstr "提示：使用动态壁纸时，切换桌面图标显示/隐藏可能会失效。"
 
