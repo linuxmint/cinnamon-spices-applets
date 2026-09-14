@@ -233,7 +233,7 @@ class IconPickerRow(SettingsWidget):
             gicon = Gio.FileIcon.new(Gio.File.new_for_path(name))
         else:
             theme = Gtk.IconTheme.get_default()
-            if not theme.has_icon(name):
+            if theme.lookup_icon(name, 24, Gtk.IconLookupFlags.FORCE_SIZE) is None:
                 self.preview.clear()
                 return
             gicon = Gio.ThemedIcon.new(name)
