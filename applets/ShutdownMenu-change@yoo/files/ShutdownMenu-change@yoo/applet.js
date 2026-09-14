@@ -1,6 +1,6 @@
 // name： ShutdownMenu-change
-// description： Offers a shutdown menu with scroll workspace switching, middle-click actions, custom menu items, and grid layout — unlocking more ways to play.
-// version: 1.4.0 (14-09-2026)
+// description： Offers a shutdown menu with scroll workspace switching, middle-click actions, custom menu items, grid layout, and scene presets — unlocking more ways to play.
+// version: 1.4.3 (14-09-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
@@ -19,12 +19,56 @@ const Main = imports.ui.main;
 
 const UUID = "ShutdownMenu-change@yoo";
 
+// 默认图标
 const DEFAULT_PANEL_ICON = "system-shutdown";
 const DEFAULT_PANEL_ICON_SYMBOLIC = "system-shutdown-symbolic";
 const DEFAULT_CUSTOM_ICON = "application-x-executable";
 const FALLBACK_ICON = "image-missing";
+// 自定义项名称为此值且命令为空时，渲染为分隔线
 const SEPARATOR_ROW_NAME = "-";
+// 场景文件路径（相对用户数据目录）
+const SCENES_REL_PATH = '/ShutdownMenu-change@yoo/scenes.json';
 
+// 首次运行时注入的默认自定义项（用户可随时删除）
+const DEFAULT_CUSTOM_ITEM = {
+    name: "Neofetch",
+    icon: "linuxmint-logo-badge-symbolic",
+    command: "x-terminal-emulator -e bash -c 'neofetch; exec bash'",
+    type: "command"
+};
+
+// 与 widgets.py 的 DEFAULT_SNAPSHOT 保持一致；应用"默认场景"时使用
+const DEFAULT_SNAPSHOT = {
+    'panel_icon': 'system-shutdown-symbolic',
+    'icon_size': 24,
+    'scroll_switch': false,
+    'middle_click_action': 'nothing',
+    'quit': true,
+    'quit_icon': 'system-shutdown',
+    'quit_cmd': 'cinnamon-session-quit --power-off',
+    'show_separator': true,
+    'log_out': true,
+    'log_out_icon': 'system-log-out',
+    'log_out_cmd': 'cinnamon-session-quit --logout',
+    'screen_lock': true,
+    'screen_lock_icon': 'system-lock-screen',
+    'screen_lock_cmd': 'cinnamon-screensaver-command --lock',
+    'custom_items': [Object.assign({}, DEFAULT_CUSTOM_ITEM)],
+    'custom_position': 0,
+    'show_custom_separator': true,
+    'menu_text_size': 0,
+    'menu_icon_size': 24,
+    'custom_grid_mode': false,
+    'custom_grid_hide_builtin': false,
+    'custom_grid_columns': 3,
+    'custom_grid_cell_width': 0,
+    'custom_grid_cell_height': 0,
+    'custom_grid_show_label': false,
+    'custom_grid_icon_size': 40,
+    'custom_grid_label_spacing': 6,
+};
+
+// 国际化：翻译文件位于 ~/.local/share/locale/<lang>/LC_MESSAGES/<UUID>.mo
 Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -41,16 +85,25 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation);
 
         try {
+            // 菜单重建防抖计时器 ID；0 表示无待执行任务
             this._rebuildMenuId = 0;
+            // 图标主题查询结果缓存，切换主题时整体清空
             this._iconThemeCache = {};
+            // 场景文件缓存 {mtime, data}，避免每次打开右键菜单都读盘
+            this._scenesCache = null;
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
             this.menuManager.addMenu(this.menu);
 
             this.settings = new Settings.AppletSettings(this, UUID, instanceId);
+            this._initSceneMenu();
             this.bindSettings();
 
+            // 绑定完成后才能安全读取设置，此时决定是否注入默认自定义项
+            this._initCustomItems();
+
+            // 主题变化时清空缓存，避免旧结果被复用
             this._iconTheme = Gtk.IconTheme.get_default();
             this._iconTheme.connect('changed', () => {
                 this._iconThemeCache = {};
@@ -68,6 +121,21 @@ MyApplet.prototype = {
         }
     },
 
+    // 从面板移除时清理资源（防泄漏）
+    on_applet_removed_from_panel: function() {
+        if (this._rebuildMenuId) {
+            try { GLib.source_remove(this._rebuildMenuId); } catch (e) {}
+            this._rebuildMenuId = 0;
+        }
+        if (this._sceneSubmenu) {
+            try { this._sceneSubmenu.destroy(); } catch (e) {}
+            this._sceneSubmenu = null;
+        }
+    },
+
+    // 绑定所有设置项
+    // menuBound 里的项：变更后触发 _rebuildMenu（防抖）
+    // 其余项：变更后各自调用专门的回调，或不回调
     bindSettings: function() {
         let menuBound = [
             ["quit", "quit_enable"],
@@ -106,8 +174,34 @@ MyApplet.prototype = {
             "scroll_switch", "scroll_switch", null, null);
         this.settings.bindProperty(Settings.BindingDirection.IN,
             "middle_click_action", "middle_click_action", null, null);
+
+        // 这两个只作数据存储，不需要回调
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "custom_items_initialized", "custom_items_initialized", null, null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "show_default_in_context", "show_default_in_context", null, null);
     },
 
+    // 首次运行时把默认的 Neofetch 项写入 custom_items
+    // 用 custom_items_initialized 标记已初始化，用户删除后不会再自动加回
+    _initCustomItems: function() {
+        if (this.custom_items_initialized) return;
+
+        // 老用户升级上来的情况：已有自定义项就不动
+        if (this.custom_items && this.custom_items.length > 0) {
+            this.custom_items_initialized = true;
+            this.settings.setValue("custom_items_initialized", true);
+            return;
+        }
+
+        let defaults = [Object.assign({}, DEFAULT_CUSTOM_ITEM)];
+        this.custom_items = defaults;
+        this.settings.setValue("custom_items", defaults);
+        this.custom_items_initialized = true;
+        this.settings.setValue("custom_items_initialized", true);
+    },
+
+    // 同步检查文件是否存在（仅用于本地图标路径，代价可接受）
     _fileExists: function(path) {
         try {
             Gio.file_new_for_path(path).query_info(
@@ -118,6 +212,7 @@ MyApplet.prototype = {
         }
     },
 
+    // 根据图标名或路径构造 GIcon，供 St.Icon 使用
     _resolveGIcon: function(iconName) {
         if (!iconName) return null;
         if (GLib.path_is_absolute(iconName)) {
@@ -127,6 +222,7 @@ MyApplet.prototype = {
         return new Gio.ThemedIcon({ name: iconName });
     },
 
+    // 更新面板图标：支持空字符串（隐藏）、图标名、绝对路径、symbolic 变体
     _updatePanelIcon: function() {
         let iconName = this.panel_icon || DEFAULT_PANEL_ICON;
         if (iconName === '') {
@@ -144,6 +240,7 @@ MyApplet.prototype = {
         let isSymbolic = iconName.includes('-symbolic');
         let exists = isPath ? this._fileExists(iconName) : this._iconThemeHasIcon(iconName);
 
+        // 图标不存在时回退到默认 symbolic 图标
         if (!exists) {
             this.set_applet_icon_symbolic_name(DEFAULT_PANEL_ICON_SYMBOLIC);
             return;
@@ -158,6 +255,7 @@ MyApplet.prototype = {
         }
     },
 
+    // 带缓存的图标主题查询
     _iconThemeHasIcon: function(iconName) {
         if (Object.prototype.hasOwnProperty.call(this._iconThemeCache, iconName)) {
             return this._iconThemeCache[iconName];
@@ -175,6 +273,9 @@ MyApplet.prototype = {
         }
     },
 
+    // 构建主菜单
+    // 结构： [自定义项] [分隔线] [内置项] [分隔线] [自定义项]
+    // 自定义项可在内置项之上或之下，由 custom_position 决定
     createMenu: function() {
         if (!this.menu) return;
         this.menu.removeAll();
@@ -227,10 +328,12 @@ MyApplet.prototype = {
         }
     },
 
+    // 列表模式：每项一行
     _addCustomItemsList: function() {
         this.custom_items.forEach(item => {
             if (!item || !item.name) return;
 
+            // 名称为 "-" 且命令为空 → 渲染为分隔线
             if (item.name === SEPARATOR_ROW_NAME && !item.command) {
                 this._addSeparatorIf(true);
                 return;
@@ -242,6 +345,8 @@ MyApplet.prototype = {
         });
     },
 
+    // 网格模式：图标 + 可选文字，用 Clutter.GridLayout 布局
+    // 网格模式忽略分隔线（分隔线在网格中无意义）
     _addCustomItemsGrid: function() {
         let items = this.custom_items.filter(item =>
             item && item.name && item.command
@@ -254,6 +359,7 @@ MyApplet.prototype = {
             let iconSize = this.custom_grid_icon_size || this.menu_icon_size || 32;
             let textSize = parseInt(this.menu_text_size, 10);
 
+            // 0 表示自适应（由内容决定尺寸）
             let cellWidth = parseInt(this.custom_grid_cell_width, 10);
             if (isNaN(cellWidth) || cellWidth < 0) cellWidth = 0;
             let cellHeight = parseInt(this.custom_grid_cell_height, 10);
@@ -262,11 +368,13 @@ MyApplet.prototype = {
             let spacing = parseInt(this.custom_grid_label_spacing, 10);
             if (isNaN(spacing) || spacing < 0) spacing = 6;
 
+            // St.Bin + Clutter.Actor 组合，避免菜单项样式干扰内部布局
             let gridBox = new St.Bin({
                 style_class: 'menu-applications-grid-box',
                 x_fill: true,
                 y_fill: true
             });
+            // column_homogeneous: 所有列等宽，末行自动对齐
             let gridLayout = new Clutter.Actor({
                 layout_manager: new Clutter.GridLayout({
                     column_homogeneous: true,
@@ -320,6 +428,7 @@ MyApplet.prototype = {
                     this.menu.close();
                 });
 
+                // Cinnamon 菜单项的悬停高亮用 active 伪类（非 hover）
                 button.connect('enter-event', () => {
                     if (!button.has_style_pseudo_class('active')) {
                         button.add_style_pseudo_class('active');
@@ -344,11 +453,14 @@ MyApplet.prototype = {
             section.actor.add_actor(gridBox);
             this.menu.addMenuItem(section);
         } catch (e) {
-            global.logError('ShutdownMenu-change grid error: ' + e.message);
+            // 网格构建失败时回退到列表模式，避免菜单空白
+            global.logError('ShutdownMenu-change grid error: ' + e.message +
+                            (e.stack ? '\n' + e.stack : ''));
             this._addCustomItemsList();
         }
     },
 
+    // 通用菜单项：图标 + 文字 + 命令
     _createMenuItem: function(displayName, iconName, command) {
         let menuItem = new PopupMenu.PopupBaseMenuItem();
         let size = this.menu_icon_size || 24;
@@ -402,18 +514,21 @@ MyApplet.prototype = {
         if (fn) fn();
     },
 
+    // 通过 gsettings 切换 Nemo 桌面图标显示
     _toggleDesktopIcons: function() {
         let nemoSettings = new Gio.Settings({ schema_id: 'org.nemo.desktop' });
         let current = nemoSettings.get_boolean('show-desktop-icons');
         nemoSettings.set_boolean('show-desktop-icons', !current);
     },
 
+    // 滚轮事件：悬停时切换工作区（需 scroll_switch 开启）
     _on_scroll_event: function(actor, event) {
         if (!this.scroll_switch) {
             return true;
         }
 
         let direction = event.get_scroll_direction();
+        // 忽略触摸板的平滑滚动
         if (direction == Clutter.ScrollDirection.SMOOTH) {
             return true;
         }
@@ -437,6 +552,163 @@ MyApplet.prototype = {
         return true;
     },
 
+    // ============================================================
+    // 场景预设（右键菜单）
+    // ============================================================
+
+    // 注册右键菜单的 open 事件，每次展开时重建 Scenes 子菜单
+    // 这样无需依赖 DBus 通知，也能看到最新保存的场景
+    _initSceneMenu: function() {
+        this._applet_context_menu.connect('open-state-changed', (menu, open) => {
+            if (open) this._buildSceneSubmenu();
+        });
+
+        this._buildSceneSubmenu();
+    },
+
+    // 从 ~/.local/share/ShutdownMenu-change@yoo/scenes.json 读取场景
+    // 带 mtime 缓存，文件未变时直接返回上次的解析结果
+    _readScenesFile: function() {
+        try {
+            let path = GLib.get_user_data_dir() + SCENES_REL_PATH;
+            let file = Gio.file_new_for_path(path);
+            if (!file.query_exists(null)) {
+                this._scenesCache = { mtime: 0, data: [] };
+                return [];
+            }
+            let info = file.query_info('time::modified',
+                Gio.FileQueryInfoFlags.NONE, null);
+            let mtime = info.get_attribute_uint64('time::modified');
+            if (this._scenesCache && this._scenesCache.mtime === mtime) {
+                return this._scenesCache.data;
+            }
+            let [ok, contents] = file.load_contents(null);
+            if (!ok) return [];
+            let text = '';
+            try {
+                text = new TextDecoder('utf-8').decode(contents);
+            } catch (e) {
+                text = imports.byteArray.ByteArray.toString(contents);
+            }
+            let data = JSON.parse(text);
+            if (!Array.isArray(data)) data = [];
+            this._scenesCache = { mtime: mtime, data: data };
+            return data;
+        } catch (e) {
+            return [];
+        }
+    },
+
+    // 销毁旧子菜单并重建
+    // 必须先 removeMenuItem 再 destroy，否则 menuItems 数组会残留引用
+    // 子菜单内容 = [默认场景（可选）] + 已保存的场景
+    _buildSceneSubmenu: function() {
+        if (this._sceneSubmenu) {
+            try { this._applet_context_menu.removeMenuItem(this._sceneSubmenu); }
+            catch (e) {}
+            try { this._sceneSubmenu.destroy(); }
+            catch (e) {}
+            this._sceneSubmenu = null;
+        }
+
+        let presets = this._readScenesFile();
+
+        this._sceneSubmenu = new PopupMenu.PopupSubMenuMenuItem(_("Scenes"));
+
+        let entries = [];
+        // 默认场景项（可用设置关闭）
+        if (this.show_default_in_context !== false) {
+            entries.push({ name: _("Default"), _isDefault: true });
+        }
+        presets.forEach(p => {
+            if (p && p.name) entries.push(p);
+        });
+
+        if (entries.length === 0) {
+            let item = new PopupMenu.PopupMenuItem(_("No scenes saved"));
+            item.setSensitive(false);
+            this._sceneSubmenu.menu.addMenuItem(item);
+        } else {
+            entries.forEach(p => {
+                let item = new PopupMenu.PopupMenuItem(p.name);
+                item.connect('activate', () => this._applyScene(p));
+                this._sceneSubmenu.menu.addMenuItem(item);
+            });
+        }
+
+        // 位置 0 = 最顶；不支持位置参数时回退到末尾
+        try {
+            this._applet_context_menu.addMenuItem(this._sceneSubmenu, 0);
+        } catch (e) {
+            this._applet_context_menu.addMenuItem(this._sceneSubmenu);
+        }
+    },
+
+    // 应用场景：
+    // - preset._isDefault 为真 → 使用内置的 DEFAULT_SNAPSHOT
+    // - 否则从 preset.data 反序列化
+    // 先更新类属性（IN 方向不会自动同步），再写盘，最后立即重建菜单
+    _applyScene: function(preset) {
+        let snapshot;
+        if (preset && preset._isDefault) {
+            snapshot = DEFAULT_SNAPSHOT;
+        } else {
+            try {
+                snapshot = JSON.parse(preset.data || '{}');
+            } catch (e) {
+                return;
+            }
+        }
+
+        let propMap = {
+            'quit': 'quit_enable',
+            'quit_icon': 'quit_icon',
+            'quit_cmd': 'quit_cmd',
+            'show_separator': 'show_separator',
+            'log_out': 'log_out_enable',
+            'log_out_icon': 'log_out_icon',
+            'log_out_cmd': 'log_out_cmd',
+            'screen_lock': 'screen_lock_enable',
+            'screen_lock_icon': 'screen_lock_icon',
+            'screen_lock_cmd': 'screen_lock_cmd',
+            'custom_items': 'custom_items',
+            'custom_position': 'custom_position',
+            'show_custom_separator': 'show_custom_separator',
+            'menu_text_size': 'menu_text_size',
+            'menu_icon_size': 'menu_icon_size',
+            'custom_grid_mode': 'custom_grid_mode',
+            'custom_grid_columns': 'custom_grid_columns',
+            'custom_grid_show_label': 'custom_grid_show_label',
+            'custom_grid_icon_size': 'custom_grid_icon_size',
+            'custom_grid_hide_builtin': 'custom_grid_hide_builtin',
+            'custom_grid_label_spacing': 'custom_grid_label_spacing',
+            'custom_grid_cell_width': 'custom_grid_cell_width',
+            'custom_grid_cell_height': 'custom_grid_cell_height',
+            'scroll_switch': 'scroll_switch',
+            'middle_click_action': 'middle_click_action',
+            'panel_icon': 'panel_icon',
+            'icon_size': 'icon_size',
+        };
+
+        for (let key in snapshot) {
+            let prop = propMap[key];
+            if (prop) {
+                this[prop] = snapshot[key];
+            }
+            try {
+                this.settings.setValue(key, snapshot[key]);
+            } catch (e) {
+            }
+        }
+
+        this._updatePanelIcon();
+
+        // 立即重建，不走防抖，让用户感觉是即时切换
+        this.createMenu();
+    },
+
+    // 菜单重建防抖：80ms 内的多次调用合并为一次
+    // 场景应用时会有多个设置同时变更，避免重复构建菜单
     _rebuildMenu: function() {
         if (this._rebuildMenuId) {
             GLib.source_remove(this._rebuildMenuId);

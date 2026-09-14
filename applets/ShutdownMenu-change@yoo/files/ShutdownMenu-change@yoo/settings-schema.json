@@ -5,7 +5,8 @@
             "page-settings",
             "page-menu",
             "page-custom",
-            "page-grid"
+            "page-grid",
+            "page-scenes"
         ],
         "page-settings": {
             "type": "page",
@@ -114,6 +115,21 @@
                 "custom_grid_show_label",
                 "custom_grid_icon_size",
                 "custom_grid_label_spacing"
+            ]
+        },
+        "page-scenes": {
+            "type": "page",
+            "title": "Scenes",
+            "sections": [
+                "section-scenes"
+            ]
+        },
+        "section-scenes": {
+            "type": "section",
+            "title": "Scene Presets",
+            "keys": [
+                "show_default_in_context",
+                "scene_manager_widget"
             ]
         }
     },
@@ -294,6 +310,22 @@
     "custom_separator_hint": {
         "type": "label",
         "description": "Tip: In list mode, set Name to \"-\" with an empty Command to insert a separator. Grid mode ignores separators."
+    },
+    "scene_manager_widget": {
+        "type": "custom",
+        "file": "widgets.py",
+        "widget": "SceneManager",
+        "description": "Scene presets"
+    },
+    "show_default_in_context": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show default scene in context menu"
+    },
+    "custom_items_initialized": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Internal flag (do not edit)"
     },
 
     "custom_grid_mode": {

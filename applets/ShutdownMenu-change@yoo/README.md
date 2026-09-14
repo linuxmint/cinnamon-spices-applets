@@ -26,6 +26,8 @@ In addition, it offers extra handy interactions:
   **Custom menu items**: Freely add any number of items, from `.desktop` files or custom commands
 - **网格布局**：可将自定义项以图标网格形式展示，适合作为快速启动面板  
   **Grid layout**: Display custom items as an icon grid, ideal as a quick launcher
+- **场景预设**：保存整套配置为命名场景，右键菜单中一键切换  
+  **Scene presets**: Save the whole configuration as named scenes and switch from the right-click menu
 
 ---
 
@@ -49,8 +51,8 @@ In addition, it offers extra handy interactions:
 
 - 勾选对应复选框以添加项目  
   Check the corresponding checkboxes to add items
-- **图标可自定义**：为每项输入图标名或通过文件选择器挑选图片  
-  **Custom icon**: Enter an icon name or pick an image file for each item
+- **图标可自定义**：为每项输入图标名或通过文件选择器挑选图片，右侧有实时预览图  
+  **Custom icon**: Enter an icon name or pick an image file for each item; a live preview is shown next to the picker
 - **命令可自定义**：替换默认命令以改变行为  
   **Custom command**: Replace the default command to change behavior
 - 支持为关机项下方单独设置分隔线  
@@ -70,6 +72,8 @@ In addition, it offers extra handy interactions:
   **Position**: Choose whether custom items appear above or below built-in items
 - **分隔线可选**：可控制自定义项与内置项之间是否显示分隔线  
   **Separator between groups**: Toggle whether a separator is shown between custom and built-in items
+- **首次运行时自动注入**：默认会添加一个 "Neofetch" 项作为示例，可以随时删除；删除后不会再次自动添加  
+  **First-run injection**: A "Neofetch" item is added by default as a sample; it can be deleted and won't come back
 
 ### 网格布局 | Grid Layout
 
@@ -87,6 +91,29 @@ In addition, it offers extra handy interactions:
   **Grid icon size**: Independent icon size for grid mode
 - **文字间距**：图标与文字之间的间距  
   **Label spacing**: Gap between icon and label
+
+### 场景预设 | Scene Presets
+
+位于 **Scenes** 页，用来保存或切换整套配置（含面板图标、交互行为、内置项、自定义项、网格选项）。  
+Located on the **Scenes** page; used to save or switch the whole configuration (panel icon, interactions, built-in items, custom items, grid options).
+
+- **Default（默认）**：列表中的虚拟项，不写入文件。选中并应用后恢复所有默认值（包括首次注入的 Neofetch 项）  
+  **Default**: A virtual entry not written to disk. Applying it resets everything to the defaults (including the initial Neofetch item)
+- **保存为新场景**：在名称框输入名字并点击"保存为新场景"，同名则覆盖  
+  **Save as new**: Type a name and click "Save as new"; existing scene with the same name is overwritten
+- **覆盖保存当前**：选中一个已保存场景，点击 💾 按钮，用当前设置覆盖它  
+  **Save current scene**: Select a saved scene and click the 💾 button to overwrite it with the current settings
+- **复制**：选中任意场景（含 Default），点击 📋 生成一份副本  
+  **Duplicate**: Select any scene (including Default) and click 📋 to create a copy
+- **重命名**：选中已保存场景，点击 ✏ 修改名字  
+  **Rename**: Select a saved scene and click ✏ to change its name
+- **上移 / 下移 / 删除**：调整顺序或删除  
+  **Move up / Move down / Delete**: Reorder or delete
+- **在右键菜单中显示默认场景**：勾选后，右键菜单的 Scenes 子菜单中会显示"默认"项  
+  **Show default scene in context menu**: When enabled, a "Default" entry appears in the right-click "Scenes" submenu
+
+> 💡 场景保存在 `~/.local/share/ShutdownMenu-change@yoo/scenes.json`，可直接备份或迁移。  
+> **Scenes** are stored in `~/.local/share/ShutdownMenu-change@yoo/scenes.json`; you can back them up or move them to another machine.
 
 ### 交互行为 | Interaction Behavior
 
@@ -119,20 +146,30 @@ In addition, it offers extra handy interactions:
   - Name: `重启`
   - Icon: `system-reboot`
   - Command: `cinnamon-session-quit --reboot`
-- 网格模式下配合 `custom_grid_hide_builtin`，可以将菜单变成类似 Dock 的应用启动器。
+- 网格模式下配合 `Hide built-in items`，可以将菜单变成类似 Dock 的应用启动器。
 - 图标输入框支持两种形式：
   - **系统图标名**（如 `firefox`、`system-shutdown`）
   - **图片绝对路径**（如 `/usr/share/icons/my-icon.png`）
+- 场景可以理解为一整套设置的"存档"。例如：
+  - 保存一个"工作"场景，只显示办公相关应用；
+  - 保存一个"娱乐"场景，展示游戏和媒体。
+  - 右键点击面板图标 → Scenes → 选择某个场景，即可切换。
 
 ---
 
 ## 🔧 开发信息 | Development Information
 
-- 代码基于 `ShutdownMenuWithIcons@LLOBERA` 重构，网格化代码参考 `innamenu@json`
-  The code is refactored based on `ShutdownMenuWithIcons@LLOBERA`, and the grid-based code refers to `innamenu@json`
-- 扩展了交互功能、自定义菜单项与网格布局  
-  Extended with interaction features, custom menu items and grid layout
-- 自定义菜单项的 UI 由一个独立的 Python 组件（`widgets.py`）提供，用于解析 `.desktop` 文件并管理列表  
-  The custom menu item UI is provided by a standalone Python widget (`widgets.py`), used for parsing `.desktop` files and managing the list
-- 许可证：GPLv3
+- 代码基于 `ShutdownMenuWithIcons@LLOBERA` 重构，网格化代码参考 `Cinnamenu@json`  
+  The code is refactored based on `ShutdownMenuWithIcons@LLOBERA`; the grid-based code refers to `Cinnamenu@json`
+- 扩展了交互功能、自定义菜单项、网格布局与场景预设  
+  Extended with interaction features, custom menu items, grid layout, and scene presets
+- 自定义菜单项和场景预设的 UI 由独立的 Python 组件（`widgets.py`）提供：  
+  - `CustomAppList`：解析 `.desktop` 文件并管理列表  
+  - `SceneManager`：管理场景的保存 / 应用 / 复制 / 重命名 / 排序  
+  - `IconPickerRow`：带预览的图标选择行  
+  The UI for custom menu items and scenes is provided by a standalone Python widget (`widgets.py`):
+  - `CustomAppList`: parse `.desktop` files and manage the list
+  - `SceneManager`: save / apply / duplicate / rename / reorder scenes
+  - `IconPickerRow`: icon chooser row with live preview
+- 许可证：GPLv3  
   License: GPLv3

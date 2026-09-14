@@ -11,240 +11,240 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
 msgid "ShutdownMenu-change"
-msgstr "关机菜单（修改版）"
+msgstr "關機選單（修改版）"
 
 #. metadata.json->description
 msgid "Offers a shutdown menu with scroll workspace switching, middle-click actions, custom menu items, grid layout, and scene presets — unlocking more ways to play."
-msgstr "提供关机菜单，支持滚轮切换工作区、中键快捷操作、自定义菜单项、网格布局和场景预设，解锁更多玩法。"
+msgstr "提供關機選單，支援滾輪切換工作區、中鍵快捷操作、自訂選單項目、網格佈局和情境預設，解鎖更多玩法。"
 
 #: ../applet.js:66
 msgid "Shutdown Menu"
-msgstr "关机菜单"
+msgstr "關機選單"
 
 #: ../applet.js:84
 msgid "Quit"
-msgstr "退出"
+msgstr "關機"
 
 #: ../applet.js:89
 msgid "Log out"
-msgstr "注销"
+msgstr "登出"
 
 #: ../applet.js:92
 msgid "Screen Lock"
-msgstr "锁屏"
+msgstr "鎖定畫面"
 
 #: applet.js settings-schema.json
 msgid "Scenes"
-msgstr "场景"
+msgstr "情境"
 
 #: applet.js
 msgid "No scenes saved"
-msgstr "暂无保存的场景"
+msgstr "尚未儲存任何情境"
 
-# ========== settings-schema.json 翻译 ==========
+# ========== settings-schema.json 翻譯 ==========
 
 #: .settings:panel_label/description
 msgid "Settings"
-msgstr "设置"
+msgstr "設定"
 
 #: .settings:icon_size/description
 msgid "System"
-msgstr "系统"
+msgstr "系統"
 
 #: settings-schema.json
 msgid "Custom"
-msgstr "自定义"
+msgstr "自訂"
 
 #: .settings:panel_label/description
 msgid "Panel Icon"
-msgstr "面板图标"
+msgstr "面板圖示"
 
 #: .settings:icon_size/description
 msgid "Panel icon size"
-msgstr "面板图标大小"
+msgstr "面板圖示大小"
 
 #: .settings:icon_size/description
 msgid "Interaction"
-msgstr "交互行为"
+msgstr "互動行為"
 
 #: settings-schema.json
 msgid "Switch workspace with mouse scroll"
-msgstr "使用鼠标滚轮切换工作区"
+msgstr "使用滑鼠滾輪切換工作區"
 
 #: settings-schema.json
 msgid "Middle click action"
-msgstr "鼠标中键单击动作"
+msgstr "滑鼠中鍵點擊動作"
 
 #: settings-schema.json
 msgid "Nothing"
-msgstr "无"
+msgstr "無"
 
 #: settings-schema.json
 msgid "Show workspace selector (Expo)"
-msgstr "显示工作区选择器 (Expo)"
+msgstr "顯示工作區選擇器 (Expo)"
 
 #: settings-schema.json
 msgid "Show window selector (Scale)"
-msgstr "显示窗口选择器 (Scale)"
+msgstr "顯示視窗選擇器 (Scale)"
 
 #: settings-schema.json
 msgid "Toggle desktop icons visibility"
-msgstr "显示/隐藏桌面图标"
+msgstr "顯示/隱藏桌面圖示"
 
 #: settings-schema.json
 msgid "Show desktop"
-msgstr "显示桌面"
+msgstr "顯示桌面"
 
 #: settings-schema.json
 msgid "Note: When using live wallpapers, switching between showing and hiding desktop icons may not work."
-msgstr "提示：使用动态壁纸时，切换桌面图标显示/隐藏可能会失效。"
+msgstr "提示：使用動態桌布時，切換桌面圖示顯示/隱藏可能會失效。"
 
 #: settings-schema.json
 msgid "Global Settings"
-msgstr "全局设置"
+msgstr "全域設定"
 
 #: settings-schema.json
 msgid "Menu item text size (0 = default)"
-msgstr "菜单项文字大小（0为默认）"
+msgstr "選單項目文字大小（0 為預設）"
 
 #: settings-schema.json
 msgid "Menu item icon size"
-msgstr "菜单项图标大小"
+msgstr "選單項目圖示大小"
 
 #: settings-schema.json
 msgid "Hide built-in items in grid mode"
-msgstr "网格模式下隐藏内置菜单项"
+msgstr "網格模式下隱藏內建項目"
 
 #: .settings:quit_label/description
 msgid "Shutdown"
-msgstr "关机"
+msgstr "關機"
 
 #: .settings:quit/description
 msgid "Add quit to the menu"
-msgstr "在菜单中添加退出"
+msgstr "在選單中新增關機"
 
 #: .settings:show_separator/description
 msgid "Show separator"
-msgstr "显示分隔线"
+msgstr "顯示分隔線"
 
 #: .settings:log_out_label/description
 msgid "Logout"
-msgstr "注销"
+msgstr "登出"
 
 #: .settings:log_out/description
 msgid "Add log out to the menu"
-msgstr "在菜单中添加注销"
+msgstr "在選單中新增登出"
 
 #: .settings:screen_lock_label/description
 msgid "Screen lock"
-msgstr "锁屏"
+msgstr "鎖定畫面"
 
 #: .settings:screen_lock/description
 msgid "Add screen lock to the menu"
-msgstr "在菜单中添加锁屏"
+msgstr "在選單中新增鎖定畫面"
 
 #: settings-schema.json
 msgid "Custom Menu Items"
-msgstr "自定义菜单项"
+msgstr "自訂選單項目"
 
 #: settings-schema.json
 msgid "Name"
-msgstr "名称"
+msgstr "名稱"
 
 #: settings-schema.json
 msgid "Icon"
-msgstr "图标"
+msgstr "圖示"
 
 #: .settings:quit_icon/description
 msgid "Icon (name or path)"
-msgstr "图标（名称或路径）"
+msgstr "圖示（名稱或路徑）"
 
 #: settings-schema.json
 msgid "Command"
-msgstr "命令"
+msgstr "指令"
 
 #: settings-schema.json
 msgid "Custom items position"
-msgstr "自定义菜单项位置"
+msgstr "自訂項目位置"
 
 #: settings-schema.json
 msgid "Above built-in items"
-msgstr "内置菜单项上方"
+msgstr "內建項目上方"
 
 #: settings-schema.json
 msgid "Below built-in items"
-msgstr "内置菜单项下方"
+msgstr "內建項目下方"
 
 #: settings-schema.json
 msgid "Tip: In list mode, set Name to \"-\" with an empty Command to insert a separator. Grid mode ignores separators."
-msgstr "提示：列表模式下，将“名称”填为“-”且“命令”为空即可插入分隔线；网格模式会忽略分隔线。"
+msgstr "提示：清單模式下，將「名稱」填為「-」且「指令」留空即可插入分隔線；網格模式會忽略分隔線。"
 
 #: settings-schema.json
 msgid "Grid Layout"
-msgstr "网格布局"
+msgstr "網格佈局"
 
 #: settings-schema.json
 msgid "Use grid layout for custom items"
-msgstr "自定义菜单项使用网格布局"
+msgstr "自訂項目使用網格佈局"
 
 #: settings-schema.json
 msgid "Grid columns"
-msgstr "网格列数"
+msgstr "網格欄數"
 
 #: settings-schema.json
 msgid "Show labels in grid mode"
-msgstr "网格模式下显示文字标签"
+msgstr "網格模式下顯示文字標籤"
 
 #: settings-schema.json
 msgid "Grid icon size"
-msgstr "网格图标大小"
+msgstr "網格圖示大小"
 
 #: settings-schema.json
 msgid "Grid label spacing"
-msgstr "网格文字间距"
+msgstr "網格文字間距"
 
 #: settings-schema.json
 msgid "Grid cell width (0 = auto)"
-msgstr "网格宽度（0为自适应）"
+msgstr "網格寬度（0 為自動）"
 
 #: settings-schema.json
 msgid "Grid cell height (0 = auto)"
-msgstr "网格高度（0为自适应）"
+msgstr "網格高度（0 為自動）"
 
 #: settings-schema.json
 msgid "Scene Presets"
-msgstr "场景预设"
+msgstr "情境預設"
 
 #: settings-schema.json
 msgid "Scene presets"
-msgstr "场景预设"
+msgstr "情境預設"
 
 #: settings-schema.json
 msgid "Show default scene in context menu"
-msgstr "在右键菜单中显示默认场景"
+msgstr "在右鍵選單中顯示預設情境"
 
 #: settings-schema.json
 msgid "Internal flag (do not edit)"
-msgstr "内部标志（请勿修改）"
+msgstr "內部旗標（請勿修改）"
 
 #: widgets.py
 msgid "Choose icon file"
-msgstr "选择图标文件"
+msgstr "選擇圖示檔案"
 
 #: widgets.py
 msgid "Image files"
-msgstr "图片文件"
+msgstr "圖片檔案"
 
 #: widgets.py
 msgid "All files"
-msgstr "所有文件"
+msgstr "所有檔案"
 
 #: widgets.py
 msgid "Cancel"
@@ -252,27 +252,27 @@ msgstr "取消"
 
 #: widgets.py
 msgid "Open"
-msgstr "打开"
+msgstr "開啟"
 
 #: widgets.py
 msgid "Edit item"
-msgstr "编辑项目"
+msgstr "編輯項目"
 
 #: widgets.py
 msgid "Add application from .desktop"
-msgstr "从 .desktop 添加应用"
+msgstr "從 .desktop 新增應用程式"
 
 #: widgets.py
 msgid "Add custom command"
-msgstr "添加自定义命令"
+msgstr "新增自訂指令"
 
 #: widgets.py
 msgid "Edit selected"
-msgstr "编辑选中项"
+msgstr "編輯選取項目"
 
 #: widgets.py
 msgid "Remove selected"
-msgstr "删除选中项"
+msgstr "刪除選取項目"
 
 #: widgets.py
 msgid "Move up"
@@ -284,64 +284,64 @@ msgstr "下移"
 
 #: widgets.py
 msgid "Select application"
-msgstr "选择应用"
+msgstr "選擇應用程式"
 
 #: widgets.py
 msgid "Desktop files (*.desktop)"
-msgstr "桌面文件 (*.desktop)"
+msgstr "桌面檔案 (*.desktop)"
 
 #: widgets.py
 msgid "Invalid .desktop file"
-msgstr "无效的 .desktop 文件"
+msgstr "無效的 .desktop 檔案"
 
 #: widgets.py
 msgid "OK"
-msgstr "确定"
+msgstr "確定"
 
 #: widgets.py
 msgid "Apply"
-msgstr "应用"
+msgstr "套用"
 
 #: widgets.py
 msgid "Scene name"
-msgstr "场景名称"
+msgstr "情境名稱"
 
 #: widgets.py
 msgid "Apply selected scene"
-msgstr "应用选中的场景"
+msgstr "套用選取的情境"
 
 #: widgets.py
 msgid "Save as new"
-msgstr "保存为新场景"
+msgstr "另存為新情境"
 
 #: widgets.py
 msgid "Default"
-msgstr "默认"
+msgstr "預設"
 
 #: widgets.py
 msgid "Save current scene"
-msgstr "保存当前场景"
+msgstr "儲存目前情境"
 
 #: widgets.py
 msgid "Duplicate"
-msgstr "复制"
+msgstr "複製"
 
 #: widgets.py
 msgid "Scene"
-msgstr "场景"
+msgstr "情境"
 
 #: widgets.py
 msgid "Rename"
-msgstr "重命名"
+msgstr "重新命名"
 
 #: widgets.py
 msgid "Rename scene"
-msgstr "重命名场景"
+msgstr "重新命名情境"
 
 #: widgets.py
 msgid "Delete"
-msgstr "删除"
+msgstr "刪除"
 
 #: widgets.py
 msgid "Save the current settings as a scene, or apply a saved scene. Scenes include the panel icon, interaction behavior, built-in items, custom items, and grid options."
-msgstr "将当前设置保存为场景，或应用已保存的场景。场景包含面板图标、交互行为、内置菜单项、自定义菜单项和网格选项。"
+msgstr "將目前設定儲存為情境，或套用已儲存的情境。情境包含面板圖示、互動行為、內建項目、自訂項目和網格選項。"
