@@ -22,8 +22,10 @@ In addition, it offers extra handy interactions:
   **Mouse wheel**: Hover and scroll to cycle through workspaces (disabled by default)
 - **鼠标中键**：显示桌面、呼出工作区选择器（Expo）、窗口选择器（Scale），或切换桌面图标的显示与隐藏  
   **Middle click**: Show the desktop, open workspace selector (Expo) or window selector (Scale), or toggle desktop icons visibility
-- **自定义菜单项**：可自由添加任意数量的菜单项，并选择显示在内置项的上方或下方  
-  **Custom menu items**: Freely add any number of menu items, positioned above or below built-in items
+- **自定义菜单项**：可自由添加任意数量的菜单项，支持从 `.desktop` 文件选择应用或手动添加命令  
+  **Custom menu items**: Freely add any number of items, from `.desktop` files or custom commands
+- **网格布局**：可将自定义项以图标网格形式展示，适合作为快速启动面板  
+  **Grid layout**: Display custom items as an icon grid, ideal as a quick launcher
 
 ---
 
@@ -47,23 +49,44 @@ In addition, it offers extra handy interactions:
 
 - 勾选对应复选框以添加项目  
   Check the corresponding checkboxes to add items
-- 可自定义每个菜单项的名称、图标和命令  
-  Customize the name, icon, and command for each item
+- **图标可自定义**：为每项输入图标名或通过文件选择器挑选图片  
+  **Custom icon**: Enter an icon name or pick an image file for each item
+- **命令可自定义**：替换默认命令以改变行为  
+  **Custom command**: Replace the default command to change behavior
 - 支持为关机项下方单独设置分隔线  
   Separately toggle a separator below the shutdown item
 
 ### 自定义菜单项 | Custom Menu Items
 
-- **添加任意数量的菜单项**：在设置面板中通过列表新增、删除、调整顺序  
-  **Add any number of items**: Use the list in the settings panel to add, remove, or reorder items
-- **每项可独立设置**：名称、图标（图标名或文件路径）、命令  
-  **Each item is fully configurable**: Name, icon (icon name or file path), and command
-- **图标辅助选择器**：提供一个图形化图标选择器，选择后可复制其值填入列表  
-  **Icon helper**: A graphical icon picker is provided; copy its value into the list
+- **从 `.desktop` 添加应用**：点击列表工具栏的 **+** 按钮，打开文件选择器（默认路径 `/usr/share/applications`），选择任意 `.desktop` 文件即可自动提取名称、图标和启动命令  
+  **Add from `.desktop`**: Click the **+** button in the list toolbar, choose any `.desktop` file (file chooser opens `/usr/share/applications` by default); name, icon and launch command are auto-extracted
+- **添加自定义命令**：点击文本图标按钮，手动填写名称、图标和命令  
+  **Add custom command**: Click the text icon button to manually enter name, icon and command
+- **编辑 / 删除 / 上移 / 下移**：工具栏按钮操作选中项  
+  **Edit / Remove / Move up / Move down**: Toolbar buttons operate on the selected item
+- **分隔线**：将某项的 **名称设为 `-`** 且 **命令留空**，该行即渲染为分隔线（网格模式忽略分隔线）  
+  **Separator**: Set an item's **Name to `-`** with an **empty Command**; that row renders as a separator (grid mode ignores separators)
 - **位置可选**：自定义项可显示在内置项的上方或下方  
   **Position**: Choose whether custom items appear above or below built-in items
 - **分隔线可选**：可控制自定义项与内置项之间是否显示分隔线  
-  **Separator**: Toggle whether a separator is shown between custom and built-in items
+  **Separator between groups**: Toggle whether a separator is shown between custom and built-in items
+
+### 网格布局 | Grid Layout
+
+- **启用网格模式**：自定义项以图标网格形式显示  
+  **Enable grid mode**: Display custom items as an icon grid
+- **隐藏内置项**：网格模式下可隐藏关机/注销/锁屏，让菜单成为纯启动器  
+  **Hide built-in items**: In grid mode, optionally hide Quit/Logout/Lock so the menu becomes a pure launcher
+- **网格列数**：2–8 列  
+  **Grid columns**: 2–8
+- **单元格宽度 / 高度**：分别控制每格尺寸，0 表示自动  
+  **Cell width / height**: Control each cell's size individually; 0 = auto
+- **显示文字标签**：在图标下方显示名称  
+  **Show labels**: Display names below icons
+- **图标大小**：独立于内置项的网格图标尺寸  
+  **Grid icon size**: Independent icon size for grid mode
+- **文字间距**：图标与文字之间的间距  
+  **Label spacing**: Gap between icon and label
 
 ### 交互行为 | Interaction Behavior
 
@@ -90,9 +113,26 @@ In addition, it offers extra handy interactions:
 
 ---
 
+## 🧩 使用技巧 | Tips
+
+- 自定义菜单项支持 **手动添加命令**，不一定非要选择 `.desktop` 文件。例如可以添加一行：
+  - Name: `重启`
+  - Icon: `system-reboot`
+  - Command: `cinnamon-session-quit --reboot`
+- 网格模式下配合 `custom_grid_hide_builtin`，可以将菜单变成类似 Dock 的应用启动器。
+- 图标输入框支持两种形式：
+  - **系统图标名**（如 `firefox`、`system-shutdown`）
+  - **图片绝对路径**（如 `/usr/share/icons/my-icon.png`）
+
+---
+
 ## 🔧 开发信息 | Development Information
 
-- 代码基于 `ShutdownMenuWithIcons@LLOBERA` 重构  
-  The code is refactored based on `ShutdownMenuWithIcons@LLOBERA`
-- 并扩展了交互功能与自定义菜单项  
-  Extended with interaction features and custom menu items
+- 代码基于 `ShutdownMenuWithIcons@LLOBERA` 重构，网格化代码参考 `innamenu@json`
+  The code is refactored based on `ShutdownMenuWithIcons@LLOBERA`, and the grid-based code refers to `innamenu@json`
+- 扩展了交互功能、自定义菜单项与网格布局  
+  Extended with interaction features, custom menu items and grid layout
+- 自定义菜单项的 UI 由一个独立的 Python 组件（`widgets.py`）提供，用于解析 `.desktop` 文件并管理列表  
+  The custom menu item UI is provided by a standalone Python widget (`widgets.py`), used for parsing `.desktop` files and managing the list
+- 许可证：GPLv3
+  License: GPLv3

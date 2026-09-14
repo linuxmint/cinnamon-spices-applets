@@ -22,8 +22,8 @@ msgid "ShutdownMenu-change"
 msgstr "关机菜单（修改版）"
 
 #. metadata.json->description
-msgid "providing a shutdown menu with mouse wheel workspace switching, middle-click actions, and custom menu items."
-msgstr "提供关机菜单，并支持鼠标滚轮切换工作区、中键快捷操作以及自定义菜单项。"
+msgid "Offers a shutdown menu with scroll workspace switching, middle-click actions, custom menu items, and grid layout — unlocking more ways to play."
+msgstr "提供关机菜单，支持滚轮切换工作区、中键快捷操作、自定义菜单项和网格布局，解锁更多玩法。"
 
 #: ../applet.js:66
 msgid "Shutdown Menu"
@@ -44,12 +44,28 @@ msgstr "锁屏"
 # ========== settings-schema.json 翻译 ==========
 
 #: .settings:panel_label/description
+msgid "Settings"
+msgstr "设置"
+
+#: .settings:icon_size/description
+msgid "System"
+msgstr "系统"
+
+#: settings-schema.json
+msgid "Custom"
+msgstr "自定义"
+
+#: .settings:panel_label/description
 msgid "Panel Icon"
 msgstr "面板图标"
 
 #: .settings:icon_size/description
 msgid "Panel icon size"
 msgstr "面板图标大小"
+
+#: .settings:icon_size/description
+msgid "Interaction"
+msgstr "交互行为"
 
 #: settings-schema.json
 msgid "Switch workspace with mouse scroll"
@@ -88,12 +104,16 @@ msgid "Global Settings"
 msgstr "全局设置"
 
 #: settings-schema.json
-msgid "Menu item text size (0 is the default)"
+msgid "Menu item text size (0 = default)"
 msgstr "菜单项文字大小（0为默认）"
 
 #: settings-schema.json
 msgid "Menu item icon size"
 msgstr "菜单项图标大小"
+
+#: settings-schema.json
+msgid "Hide built-in items in grid mode"
+msgstr "网格模式下隐藏内置菜单项"
 
 #: .settings:quit_label/description
 msgid "Shutdown"
@@ -102,14 +122,6 @@ msgstr "关机"
 #: .settings:quit/description
 msgid "Add quit to the menu"
 msgstr "在菜单中添加退出"
-
-#: .settings:quit_icon/description
-msgid "The quit icon"
-msgstr "退出图标"
-
-#: .settings:quit_cmd/description
-msgid "The quit command"
-msgstr "退出命令"
 
 #: .settings:show_separator/description
 msgid "Show separator"
@@ -123,14 +135,6 @@ msgstr "注销"
 msgid "Add log out to the menu"
 msgstr "在菜单中添加注销"
 
-#: .settings:log_out_icon/description
-msgid "The log out icon"
-msgstr "注销图标"
-
-#: .settings:log_out_cmd/description
-msgid "The log out command"
-msgstr "注销命令"
-
 #: .settings:screen_lock_label/description
 msgid "Screen lock"
 msgstr "锁屏"
@@ -139,16 +143,8 @@ msgstr "锁屏"
 msgid "Add screen lock to the menu"
 msgstr "在菜单中添加锁屏"
 
-#: .settings:screen_lock_icon/description
-msgid "The screen lock icon"
-msgstr "锁屏图标"
-
-#: .settings:screen_lock_cmd/description
-msgid "The screen lock command"
-msgstr "锁屏命令"
-
 #: settings-schema.json
-msgid "Custom menu items"
+msgid "Custom Menu Items"
 msgstr "自定义菜单项"
 
 #: settings-schema.json
@@ -160,6 +156,10 @@ msgid "Name"
 msgstr "名称"
 
 #: settings-schema.json
+msgid "Icon"
+msgstr "图标"
+
+#: .settings:quit_icon/description
 msgid "Icon (name or path)"
 msgstr "图标（名称或路径）"
 
@@ -182,3 +182,99 @@ msgstr "内置菜单项上方"
 #: settings-schema.json
 msgid "Below built-in items"
 msgstr "内置菜单项下方"
+
+#: settings-schema.json
+msgid "Tip: In list mode, set Name to \"-\" with an empty Command to insert a separator. Grid mode ignores separators."
+msgstr "提示：列表模式下，将“名称”填为“-”且“命令”为空即可插入分隔线；网格模式会忽略分隔线。"
+
+#: settings-schema.json
+msgid "Grid Layout"
+msgstr "网格布局"
+
+#: settings-schema.json
+msgid "Use grid layout for custom items"
+msgstr "自定义菜单项使用网格布局"
+
+#: settings-schema.json
+msgid "Grid columns"
+msgstr "网格列数"
+
+#: settings-schema.json
+msgid "Show labels in grid mode"
+msgstr "网格模式下显示文字标签"
+
+#: settings-schema.json
+msgid "Grid icon size"
+msgstr "网格图标大小"
+
+#: settings-schema.json
+msgid "Grid label spacing"
+msgstr "网格文字间距"
+
+#: settings-schema.json
+msgid "Grid cell width (0 = auto)"
+msgstr "网格宽度（0为自适应）"
+
+#: settings-schema.json
+msgid "Grid cell height (0 = auto)"
+msgstr "网格高度（0为自适应）"
+
+#: widgets.py
+msgid "Choose icon file"
+msgstr "选择图标文件"
+
+#: widgets.py
+msgid "Image files"
+msgstr "图片文件"
+
+#: widgets.py
+msgid "All files"
+msgstr "所有文件"
+
+#: widgets.py
+msgid "Cancel"
+msgstr "取消"
+
+#: widgets.py
+msgid "Open"
+msgstr "打开"
+
+#: widgets.py
+msgid "Edit item"
+msgstr "编辑项目"
+
+#: widgets.py
+msgid "Add application from .desktop"
+msgstr "从 .desktop 添加应用"
+
+#: widgets.py
+msgid "Add custom command"
+msgstr "添加自定义命令"
+
+#: widgets.py
+msgid "Edit selected"
+msgstr "编辑选中项"
+
+#: widgets.py
+msgid "Remove selected"
+msgstr "删除选中项"
+
+#: widgets.py
+msgid "Move up"
+msgstr "上移"
+
+#: widgets.py
+msgid "Move down"
+msgstr "下移"
+
+#: widgets.py
+msgid "Select application"
+msgstr "选择应用"
+
+#: widgets.py
+msgid "Desktop files (*.desktop)"
+msgstr "桌面文件 (*.desktop)"
+
+#: widgets.py
+msgid "Invalid .desktop file"
+msgstr "无效的 .desktop 文件"
