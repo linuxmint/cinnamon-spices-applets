@@ -59,6 +59,7 @@ MyApplet.prototype = {
 
             // Bind settings
             this.settings = new Settings.AppletSettings(this, metadata.uuid, this.instance_id);
+            this.settings.bind("openShortcut", "openShortcut", this._onShortcutChanged);
             this.settings.bind("historySize", "_historySize", this.settings_changed);
             this.settings.bind("autoPaste", "_autoPaste", this.settings_changed);
             this.settings.bind("pasteTool", "_pasteTool", this.settings_changed);
@@ -67,6 +68,8 @@ MyApplet.prototype = {
             this.settings.bind("leftClickAction", "_leftClickAction", this.settings_changed);
             this.settings.bind("middleClickAction", "_middleClickAction", this.settings_changed);
             this.settings.bind("rightClickAction", "_rightClickAction", this.settings_changed);
+
+            this._onShortcutChanged();
 
             // Set up UI Menu
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -308,6 +311,27 @@ MyApplet.prototype = {
                 this._history = [];
             }
         });
+    },
+
+    _onShortcutChanged: function () {
+        if (this._keybindingId) {
+            Main.keybindingManager.removeHotKey(this._keybindingId);
+            this._keybindingId = null;
+        }
+
+        if (this.openShortcut && this.openShortcut !== "unassigned") {
+            this._keybindingId = UUID + "-" + this.instance_id;
+            Main.keybindingManager.addHotKey(
+                this._keybindingId,
+                this.openShortcut,
+                () => this._onOpenShortcut()
+            );
+        }
+    },
+
+    _onOpenShortcut: function () {
+        this._buildMenu();
+        this.menu.toggle();
     },
 
     on_applet_clicked: function (event) {
@@ -834,6 +858,10 @@ MyApplet.prototype = {
         if (this._monitorTimeout) {
             Mainloop.source_remove(this._monitorTimeout);
             this._monitorTimeout = null;
+        }
+        if (this._keybindingId) {
+            Main.keybindingManager.removeHotKey(this._keybindingId);
+            this._keybindingId = null;
         }
     }
 };
