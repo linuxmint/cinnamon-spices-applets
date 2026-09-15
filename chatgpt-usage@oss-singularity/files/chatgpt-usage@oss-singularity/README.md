@@ -19,6 +19,8 @@ The white panel text color and the blue/yellow/pink usage colors are configured
 separately; a panel switch lets threshold colors take precedence. Model-specific
 panel mode selects the tightest remaining quota for each duration. A separate
 global switch hides model-specific limits from the popup, history and panel.
+An opt-in panel switch can add the available AIC balance as a compact value
+beside the quota indicators; it is disabled by default.
 Notification defaults are enabled and delivered alerts remain in the center.
 Normal text uses a 420 px popup; larger text scales the layout and long menus
 scroll to keep actions reachable. Rings and charts stay aligned with the buttons
@@ -31,9 +33,10 @@ including incomplete periods marked with `~`, and cannot reconstruct
 consumption between samples. Credit consumption is shown in the critical
 color beside the balance and as a critical-color series stacked above quota bars
 in the account 7d activity chart. The available credit balance uses one decimal
-place, and consumption values are shown as whole numbers. Remaining percentages
-below the configured critical threshold retain two decimal places (except exact
-zero, shown as `0%`). Its state is
+place, and consumption values are shown as whole numbers. Limit remaining
+percentages use whole values because the current API exposes them at integer
+precision; the configured thresholds still control coloring independently. Its
+state is
 local to this desktop profile, not partitioned by account; see the full guide
 before switching accounts. Uninstalling retains settings, history and
 unresolved reset attempts.

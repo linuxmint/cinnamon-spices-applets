@@ -51,6 +51,7 @@ const LAUNCH_TOOLTIP_DELAY_MS = 420;
 const POPUP_ACTION_GRID_WIDTH = 352;
 // Cinnamon's one-pixel menu edge brings the visible popup width to 420 px.
 const POPUP_WIDTH = 419;
+const PANEL_VERTICAL_LABEL_WIDTH = 40;
 const POPUP_RIGHT_PANEL_CLOSE_WIDTH_TRIM = 1;
 const POPUP_RIGHT_INSET = 17;
 const POPUP_CHART_RIGHT_INSET = 39;
@@ -278,6 +279,7 @@ class ChatGptUsageApplet extends Applet.Applet {
         this.showWindowLabels = true;
         this.showModelSpecificLimits = true;
         this.showModelLimitsInPanel = false;
+        this.showCreditsInPanel = false;
         this.showWeeklyWithFiveHour = true;
         this.fontSize = 100;
         this.separator = "·";
@@ -323,6 +325,11 @@ class ChatGptUsageApplet extends Applet.Applet {
         this.settings.bind(
             "show-model-limits-in-panel",
             "showModelLimitsInPanel",
+            layoutChanged
+        );
+        this.settings.bind(
+            "show-credits-in-panel",
+            "showCreditsInPanel",
             layoutChanged
         );
         this.settings.bind(
@@ -609,6 +616,18 @@ class ChatGptUsageApplet extends Applet.Applet {
             });
         }
 
+        const panelCredits = this._panelCreditsValue();
+        if (panelCredits !== null) {
+            if (this.separator && !this._isVertical) {
+                this._root.add_child(new St.Label({
+                    text: this.separator,
+                    y_align: Clutter.ActorAlign.CENTER,
+                    style: `padding-left: 4px; padding-right: 4px; color: ${this.panelTextColor};`
+                }));
+            }
+            this._root.add_child(this._createPanelCreditsActor(panelCredits));
+        }
+
         this._updateTooltip(summaries);
     }
 
@@ -690,7 +709,10 @@ class ChatGptUsageApplet extends Applet.Applet {
                 vertical: false,
                 x_align: Clutter.ActorAlign.CENTER
             });
-            if (showIcon) labelRow.add_child(this._createPanelIcon(summary));
+            if (showIcon) {
+                labelRow.add_child(this._createPanelIcon(summary));
+                if (this._isVertical) labelRow.style = `min-width: ${PANEL_VERTICAL_LABEL_WIDTH}px;`;
+            }
             const label = new St.Label({
                 text: UsageFormat.formatDuration(summary.durationMinutes),
                 x_align: Clutter.ActorAlign.CENTER,
@@ -715,6 +737,56 @@ class ChatGptUsageApplet extends Applet.Applet {
         return actor;
     }
 
+    _panelCreditsValue() {
+        const credits = this._snapshot ? this._snapshot.credits : null;
+        if (!this.showCreditsInPanel || !credits) return null;
+        if (credits.unlimited) return "∞";
+        return UsageFormat.formatCreditNumber(credits.balance);
+    }
+
+    _createPanelCreditsActor(value) {
+        const fontSize = this._panelFontSize();
+        const labelFontSize = Math.max(60, Math.round(fontSize * PANEL_LABEL_SCALE));
+        const actor = new St.BoxLayout({
+            reactive: false,
+            vertical: true
+        });
+        actor.x_align = Clutter.ActorAlign.CENTER;
+        actor.y_align = Clutter.ActorAlign.CENTER;
+        actor.style = this._isVertical ? "padding: 1px 0px;" : "";
+
+        const labelRow = new St.BoxLayout({
+            reactive: false,
+            vertical: false,
+            x_align: Clutter.ActorAlign.CENTER
+        });
+        if (this.showPanelIcon) {
+            labelRow.add_child(this._createPanelIcon());
+            if (this._isVertical) labelRow.style = `min-width: ${PANEL_VERTICAL_LABEL_WIDTH}px;`;
+        }
+        const label = new St.Label({
+            text: _("AIC"),
+            x_align: Clutter.ActorAlign.CENTER,
+            y_align: Clutter.ActorAlign.CENTER,
+            style: `font-size: ${labelFontSize}%; color: ${this.panelTextColor};`
+        });
+        label.clutter_text.set_line_alignment(Pango.Alignment.CENTER);
+        labelRow.add_child(label);
+        actor.add_child(labelRow);
+
+        const balance = new St.Label({
+            text: value,
+            x_align: Clutter.ActorAlign.CENTER,
+            y_align: Clutter.ActorAlign.CENTER,
+            style: `font-size: ${fontSize}%; color: ${this.panelTextColor};`
+        });
+        balance.clutter_text.set_line_alignment(Pango.Alignment.CENTER);
+        if (!this._isVertical) balance.translation_y = 1;
+        actor.add_child(balance);
+        actor.accessible_name = _f("Credits: %s", value);
+        return actor;
+    }
+
     _panelFontSize() {
         return Math.round(this.fontSize * PANEL_FONT_SCALE);
     }
@@ -734,7 +806,7 @@ class ChatGptUsageApplet extends Applet.Applet {
                             "%s%s: %s remaining",
                             prefix,
                             duration,
-                            UsageFormat.formatPercent(window.remainingPercent, this.criticalRemaining)
+                            UsageFormat.formatPercent(window.remainingPercent)
                         )
                     );
                 }
@@ -746,10 +818,12 @@ class ChatGptUsageApplet extends Applet.Applet {
                 return _f(
                     "%s: %s remaining",
                     duration,
-                    UsageFormat.formatPercent(summary.remainingPercent, this.criticalRemaining)
+                    UsageFormat.formatPercent(summary.remainingPercent)
                 );
             }).join(" • ");
         }
+        const panelCredits = this._panelCreditsValue();
+        if (panelCredits !== null) text += `\n${_f("Credits: %s", panelCredits)}`;
         if (this._lastError) text += `\n${this._lastError}`;
         this.set_applet_tooltip(text);
     }
@@ -1115,7 +1189,7 @@ class ChatGptUsageApplet extends Applet.Applet {
 
     _addLimitWindowItem(window) {
         const duration = UsageFormat.formatDuration(window.durationMinutes);
-        const remaining = UsageFormat.formatPercent(window.remainingPercent, this.criticalRemaining);
+        const remaining = UsageFormat.formatPercent(window.remainingPercent);
         const reset = UsageFormat.formatTimestamp(
             window.resetsAt,
             this._use24HourClock

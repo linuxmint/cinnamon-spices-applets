@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ChatGPT Usage Monitor 1.0.5\n"
+"Project-Id-Version: ChatGPT Usage Monitor 1.0.6\n"
 "Report-Msgid-Bugs-To: https://github.com/oss-singularity/cinnamon-chatgpt-usage/issues\n"
 "POT-Creation-Date: 2026-09-08 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -288,6 +288,10 @@ msgid ""
 msgstr ""
 
 #: applet.js
+msgid "AIC"
+msgstr ""
+
+#: applet.js
 msgid "About..."
 msgstr ""
 
@@ -471,6 +475,11 @@ msgstr ""
 
 #: applet.js
 msgid "Credits"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "Credits: %s"
 msgstr ""
 
 #: settings-schema.json.js
@@ -796,11 +805,19 @@ msgid "Show additional model limits such as Spark in the menu, history, rings, p
 msgstr ""
 
 #: settings-schema.json.js
+msgid "Show credits in the panel"
+msgstr ""
+
+#: settings-schema.json.js
 msgid "Show model-specific limits in the applet"
 msgstr ""
 
 #: settings-schema.json.js
 msgid "Show model-specific limits in the panel"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show the available AIC credit balance as an additional compact panel value."
 msgstr ""
 
 #: settings-schema.json.js

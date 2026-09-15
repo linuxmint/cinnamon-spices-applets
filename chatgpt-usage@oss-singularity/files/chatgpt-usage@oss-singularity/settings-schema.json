@@ -34,6 +34,7 @@
         "show-window-labels",
         "show-model-specific-limits",
         "show-model-limits-in-panel",
+        "show-credits-in-panel",
         "show-weekly-with-five-hour",
         "font-size",
         "separator"
@@ -127,6 +128,12 @@
     "default": false,
     "dependency": "show-model-specific-limits",
     "description": "Show model-specific limits in the panel"
+  },
+  "show-credits-in-panel": {
+    "type": "switch",
+    "default": false,
+    "description": "Show credits in the panel",
+    "tooltip": "Show the available AIC credit balance as an additional compact panel value."
   },
   "show-weekly-with-five-hour": {
     "type": "switch",

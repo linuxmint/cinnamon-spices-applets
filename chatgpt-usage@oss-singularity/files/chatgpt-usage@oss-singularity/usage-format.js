@@ -113,19 +113,10 @@ function formatElapsedDuration(startSeconds, endSeconds) {
     return minutes === 0 ? _f("%sh", hours) : _f("%sh %sm", hours, minutes);
 }
 
-function formatPercent(value, preciseBelow = null) {
+function formatPercent(value) {
     const number = Number(value);
     if (!Number.isFinite(number)) return "--";
     const bounded = clamp(number, 0, 100);
-    const precisionThreshold = Number(preciseBelow);
-    if (
-        bounded > 0 &&
-        Number.isFinite(precisionThreshold) &&
-        precisionThreshold > 0 &&
-        bounded < precisionThreshold
-    ) {
-        return _f("%s%%", bounded.toFixed(2));
-    }
     return _f("%s%%", Math.round(bounded));
 }
 
@@ -741,7 +732,7 @@ function buildUsageNotificationEvents(previousSnapshot, snapshot, options = {}) 
             message: _f(
                 "%s has %s remaining.",
                 label,
-                formatPercent(current.window.remainingPercent, lowSettings.critical)
+                formatPercent(current.window.remainingPercent)
             )
         });
     }
