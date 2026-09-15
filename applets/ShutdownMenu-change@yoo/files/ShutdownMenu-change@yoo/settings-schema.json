@@ -141,11 +141,11 @@
     },
     "icon_size": {
         "type": "spinbutton",
-        "default": 24,
-        "min": 16,
+        "default": 0,
+        "min": 0,
         "max": 64,
         "step": 2,
-        "description": "Panel icon size"
+        "description": "Panel icon size (0 = follow panel size)"
     },
     "scroll_switch": {
         "type": "checkbox",

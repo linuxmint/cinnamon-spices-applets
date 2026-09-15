@@ -2,7 +2,7 @@
     "uuid": "ShutdownMenu-change@yoo",
     "name": "ShutdownMenu-change",
     "description": "Offers a shutdown menu with scroll workspace switching, middle-click actions, custom menu items, grid layout, and scene presets — unlocking more ways to play.",
-    "version": "1.4.3",
+    "version": "1.4.4",
     "author": "yoo",
-    "last-edited": 1789390215
+    "last-edited": 1789443298
 }

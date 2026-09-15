@@ -1,6 +1,6 @@
 // name： ShutdownMenu-change
 // description： Offers a shutdown menu with scroll workspace switching, middle-click actions, custom menu items, grid layout, and scene presets — unlocking more ways to play.
-// version: 1.4.3 (14-09-2026)
+// version: 1.4.4 (15-09-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
@@ -28,6 +28,8 @@ const FALLBACK_ICON = "image-missing";
 const SEPARATOR_ROW_NAME = "-";
 // 场景文件路径（相对用户数据目录）
 const SCENES_REL_PATH = '/ShutdownMenu-change@yoo/scenes.json';
+// 面板符号图标大小读取失败时的兜底值
+const FALLBACK_PANEL_ICON_SIZE = 16;
 
 // 首次运行时注入的默认自定义项（用户可随时删除）
 const DEFAULT_CUSTOM_ITEM = {
@@ -38,9 +40,10 @@ const DEFAULT_CUSTOM_ITEM = {
 };
 
 // 与 widgets.py 的 DEFAULT_SNAPSHOT 保持一致；应用"默认场景"时使用
+// icon_size 为 0：表示跟随 Cinnamon 面板的符号图标大小
 const DEFAULT_SNAPSHOT = {
     'panel_icon': 'system-shutdown-symbolic',
-    'icon_size': 24,
+    'icon_size': 0,
     'scroll_switch': false,
     'middle_click_action': 'nothing',
     'quit': true,
@@ -91,6 +94,8 @@ MyApplet.prototype = {
             this._iconThemeCache = {};
             // 场景文件缓存 {mtime, data}，避免每次打开右键菜单都读盘
             this._scenesCache = null;
+            // 面板符号图标大小的内存缓存；0 表示需要重新读取
+            this._panelIconSizeCache = 0;
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -108,6 +113,22 @@ MyApplet.prototype = {
             this._iconTheme.connect('changed', () => {
                 this._iconThemeCache = {};
             });
+
+            // 读取 Cinnamon 面板设置，用于 icon_size=0 时自动跟随面板图标大小
+            try {
+                this._panelSettings = new Gio.Settings({ schema_id: 'org.cinnamon' });
+                this._panelSettings.connect('changed::panel-symbolic-icon-size', () => {
+                    // 面板大小变化：先清缓存，再按需刷新图标
+                    this._panelIconSizeCache = 0;
+                    let s = parseInt(this.icon_size, 10);
+                    if (isNaN(s) || s <= 0) {
+                        this._updateIconSize();
+                    }
+                });
+            } catch (e) {
+                // 旧版本 Cinnamon 可能没有该键，忽略
+                this._panelSettings = null;
+            }
 
             this._updatePanelIcon();
             this.set_applet_tooltip(_("Shutdown Menu"));
@@ -266,11 +287,37 @@ MyApplet.prototype = {
         return exists;
     },
 
+    // 应用图标大小：
+    // - icon_size > 0：使用用户指定值
+    // - icon_size == 0：跟随 Cinnamon 面板的"符号图标大小"
     _updateIconSize: function() {
         let size = parseInt(this.icon_size, 10);
-        if (!isNaN(size) && size > 0) {
+        if (isNaN(size) || size <= 0) {
+            size = this._getPanelSymbolicIconSize();
+        }
+        if (size > 0) {
             this._applet_icon.set_icon_size(size);
         }
+    },
+
+    // 读取 Cinnamon 面板的符号图标大小；读取失败时回退到默认值
+    // 结果缓存到 _panelIconSizeCache；面板设置变更信号会清空该缓存
+    _getPanelSymbolicIconSize: function() {
+        if (this._panelIconSizeCache > 0) {
+            return this._panelIconSizeCache;
+        }
+        let size = FALLBACK_PANEL_ICON_SIZE;
+        try {
+            if (!this._panelSettings) {
+                this._panelSettings = new Gio.Settings({ schema_id: 'org.cinnamon' });
+            }
+            let v = this._panelSettings.get_int('panel-symbolic-icon-size');
+            if (v > 0) size = v;
+        } catch (e) {
+            // 忽略：老版本 Cinnamon 无此键
+        }
+        this._panelIconSizeCache = size;
+        return size;
     },
 
     // 构建主菜单
@@ -699,6 +746,11 @@ MyApplet.prototype = {
                 this.settings.setValue(key, snapshot[key]);
             } catch (e) {
             }
+        }
+
+        // icon_size 可能变了，清缓存防止旧值生效
+        if ('icon_size' in snapshot) {
+            this._panelIconSizeCache = 0;
         }
 
         this._updatePanelIcon();

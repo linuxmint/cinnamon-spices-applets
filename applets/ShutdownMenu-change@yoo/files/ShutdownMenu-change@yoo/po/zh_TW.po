@@ -66,9 +66,9 @@ msgstr "自訂"
 msgid "Panel Icon"
 msgstr "面板圖示"
 
-#: .settings:icon_size/description
-msgid "Panel icon size"
-msgstr "面板圖示大小"
+#: settings-schema.json
+msgid "Panel icon size (0 = follow panel size)"
+msgstr "面板圖示大小（0表示跟隨面板設定）"
 
 #: .settings:icon_size/description
 msgid "Interaction"
@@ -345,3 +345,15 @@ msgstr "刪除"
 #: widgets.py
 msgid "Save the current settings as a scene, or apply a saved scene. Scenes include the panel icon, interaction behavior, built-in items, custom items, and grid options."
 msgstr "將目前設定儲存為情境，或套用已儲存的情境。情境包含面板圖示、互動行為、內建項目、自訂項目和網格選項。"
+
+#: widgets.py
+msgid "An item with this name already exists"
+msgstr "已存在同名的選單項目"
+
+#: widgets.py
+msgid "Error"
+msgstr "錯誤"
+
+#: widgets.py
+msgid "Duplicate item"
+msgstr "重複的項目"

@@ -26,9 +26,10 @@ DEFAULT_CUSTOM_ITEM = {
 }
 
 # 虚拟"Default"场景使用的默认快照（与 settings-schema.json 中的 default 值保持一致）
+# icon_size 为 0：表示跟随 Cinnamon 面板的符号图标大小
 DEFAULT_SNAPSHOT = {
     'panel_icon': 'system-shutdown-symbolic',
-    'icon_size': 24,
+    'icon_size': 0,
     'scroll_switch': False,
     'middle_click_action': 'nothing',
     'quit': True,
@@ -98,7 +99,7 @@ def make_gicon(icon_str):
 
 # ============================================================
 #  内置项图标选择器
-#  输入框 + 文件选择按钮 + 预览图，数据写到对应的非 widget 键
+#  输入框 + 预览图 + 文件选择按钮，数据写到对应的非 widget 键
 # ============================================================
 
 class IconPickerRow(SettingsWidget):
@@ -132,13 +133,13 @@ class IconPickerRow(SettingsWidget):
         self.label.set_width_chars(min(len(label_text) + 1, 28))
         self.pack_start(self.label, False, False, 0)
 
-        # 输入框：初始值延后到 idle 读取，避免打开设置面板时同步阻塞
+        # 输入框
         self.entry = Gtk.Entry()
         self.entry.set_hexpand(True)
         self.entry.connect('changed', self._on_entry_changed)
         self.pack_start(self.entry, True, True, 0)
 
-        # 预览图：尺寸固定 24×24，延迟到 idle 填充
+        # 预览图（延迟到 idle 填充）
         self.preview = Gtk.Image()
         self.preview.set_size_request(24, 24)
         self.pack_start(self.preview, False, False, 0)
@@ -152,19 +153,15 @@ class IconPickerRow(SettingsWidget):
         self.button.connect('clicked', self._on_button_clicked)
         self.pack_start(self.button, False, False, 0)
 
-        # 监听设置变更，外部改动时同步刷新输入框
         try:
             self.settings.listen(self.data_key, self._on_setting_changed)
         except Exception:
             pass
 
         self.show_all()
-
-        # 延迟初始化：先显示面板，再填值 + 加载预览
         GLib.idle_add(self._init_from_settings)
 
     def _init_from_settings(self):
-        # 若 Cinnamon 已通过 set_value 填过值，不再覆盖
         if not self.entry.get_text().strip():
             try:
                 v = self.settings.get_value(self.data_key) or ''
@@ -182,7 +179,6 @@ class IconPickerRow(SettingsWidget):
         return GLib.SOURCE_REMOVE
 
     def set_value(self, value):
-        # custom key 无实际存储值，Cinnamon 用空值调用；此处不应覆盖 entry
         if value:
             try:
                 self.entry.set_text(value)
@@ -221,7 +217,11 @@ class IconPickerRow(SettingsWidget):
             self.entry.set_text(chosen)
 
     def _refresh_preview(self):
-        """根据当前输入值刷新预览图；无效或为空时清空。"""
+        """根据当前输入值刷新预览图；无效或为空时清空。
+
+        使用 lookup_icon 而非 has_icon：后者只查主题目录，
+        不查 /usr/share/pixmaps 等 legacy 路径。
+        """
         name = self.entry.get_text().strip()
         if not name:
             self.preview.clear()
@@ -233,7 +233,8 @@ class IconPickerRow(SettingsWidget):
             gicon = Gio.FileIcon.new(Gio.File.new_for_path(name))
         else:
             theme = Gtk.IconTheme.get_default()
-            if theme.lookup_icon(name, 24, Gtk.IconLookupFlags.FORCE_SIZE) is None:
+            info = theme.lookup_icon(name, 24, Gtk.IconLookupFlags.FORCE_SIZE)
+            if info is None:
                 self.preview.clear()
                 return
             gicon = Gio.ThemedIcon.new(name)
@@ -252,7 +253,6 @@ class IconPickerRow(SettingsWidget):
         return None
 
     def _choose_file(self, current):
-        """打开文件选择器；若当前值是绝对路径，定位到其所在目录。"""
         try:
             dlg = Gtk.FileChooserDialog(
                 title=_('Choose icon file'),
@@ -262,7 +262,6 @@ class IconPickerRow(SettingsWidget):
                             _('Open'), Gtk.ResponseType.OK)
             dlg.set_default_size(720, 520)
 
-            # 图片过滤器
             f_img = Gtk.FileFilter()
             f_img.set_name(_('Image files'))
             for mime in ('image/png', 'image/svg+xml', 'image/x-icon',
@@ -304,15 +303,23 @@ class IconPickerRow(SettingsWidget):
 
 # ============================================================
 #  自定义菜单项的编辑对话框
+#  名称输入时实时查重：右侧图标显示 ✅ 或 ❌，无效时禁用 OK
 # ============================================================
 
 class EditDialog(Gtk.Dialog):
-    def __init__(self, parent, name='', icon='', command=''):
+    def __init__(self, parent, name='', icon='', command='', existing_names=None):
+        """
+        existing_names: 该名字集合用于实时查重。编辑现有项时，
+        调用方应排除当前项自身的名字，否则一进入就会显示 ❌。
+        """
         super().__init__(title=_('Edit item'),
                          transient_for=parent, modal=True)
         self.add_buttons(_('Cancel'), Gtk.ResponseType.CANCEL,
                          _('OK'), Gtk.ResponseType.OK)
         self.set_default_size(420, -1)
+
+        # 已存在的名字集合，用于实时查重
+        self._existing_names = set(existing_names or [])
 
         box = self.get_content_area()
         box.set_spacing(8)
@@ -324,12 +331,18 @@ class EditDialog(Gtk.Dialog):
         grid = Gtk.Grid(column_spacing=8, row_spacing=8)
         box.add(grid)
 
-        # 名称
+        # 名称行（输入框 + 状态图标）
         grid.attach(Gtk.Label(label=_('Name'), halign=Gtk.Align.START), 0, 0, 1, 1)
+        name_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
         self.name_entry = Gtk.Entry(text=name, hexpand=True)
-        grid.attach(self.name_entry, 1, 0, 1, 1)
+        self.name_entry.connect('changed', self._on_name_changed)
+        name_box.pack_start(self.name_entry, True, True, 0)
+        self.name_status = Gtk.Image()
+        self.name_status.set_size_request(16, 16)
+        name_box.pack_start(self.name_status, False, False, 0)
+        grid.attach(name_box, 1, 0, 1, 1)
 
-        # 图标（输入框 + 实时预览 + 浏览按钮）
+        # 图标行（输入框 + 预览 + 浏览按钮）
         grid.attach(Gtk.Label(label=_('Icon'), halign=Gtk.Align.START), 0, 1, 1, 1)
         icon_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
         self.icon_entry = Gtk.Entry(text=icon, hexpand=True)
@@ -344,13 +357,51 @@ class EditDialog(Gtk.Dialog):
         icon_box.pack_start(browse_btn, False, False, 0)
         grid.attach(icon_box, 1, 1, 1, 1)
 
-        # 命令
+        # 命令行
         grid.attach(Gtk.Label(label=_('Command'), halign=Gtk.Align.START), 0, 2, 1, 1)
         self.command_entry = Gtk.Entry(text=command, hexpand=True)
+        # 在命令输入框按回车等同于点"确定"
+        self.command_entry.connect('activate',
+            lambda *a: self.response(Gtk.ResponseType.OK))
         grid.attach(self.command_entry, 1, 2, 1, 1)
 
         self.show_all()
         self._refresh_preview()
+        # 初始化名称状态（编辑时可能在集合中，但已被调用方排除）
+        self._on_name_changed()
+
+    def _on_name_changed(self, *args):
+        """名称变化时实时校验：更新状态图标并启用/禁用 OK 按钮。"""
+        name = self.name_entry.get_text().strip()
+        ok = False
+
+        if not name:
+            # 空名字：清除图标，禁用 OK
+            self.name_status.clear()
+            self.name_status.set_tooltip_text('')
+        elif name == '-':
+            # 分隔线总是有效
+            self.name_status.set_from_icon_name('emblem-ok-symbolic',
+                                                 Gtk.IconSize.MENU)
+            self.name_status.set_tooltip_text('')
+            ok = True
+        elif name in self._existing_names:
+            # 名称重复：显示红叉，禁用 OK
+            self.name_status.set_from_icon_name('dialog-error-symbolic',
+                                                 Gtk.IconSize.MENU)
+            self.name_status.set_tooltip_text(
+                _('An item with this name already exists'))
+        else:
+            # 名称唯一：显示对勾
+            self.name_status.set_from_icon_name('emblem-ok-symbolic',
+                                                 Gtk.IconSize.MENU)
+            self.name_status.set_tooltip_text('')
+            ok = True
+
+        # 根据校验结果启用/禁用 OK 按钮
+        ok_btn = self.get_widget_for_response(Gtk.ResponseType.OK)
+        if ok_btn:
+            ok_btn.set_sensitive(ok)
 
     def _on_icon_changed(self, *args):
         self._refresh_preview()
@@ -473,7 +524,6 @@ class CustomAppList(SettingsWidget):
         except Exception:
             pass
 
-        # 延迟加载数据，让设置面板先显示出来
         GLib.idle_add(self._deferred_load)
 
     def _deferred_load(self):
@@ -484,7 +534,6 @@ class CustomAppList(SettingsWidget):
     def _on_settings_changed(self, key, value):
         if self._saving:
             return
-        # 记住当前选中位置，重新加载后尝试恢复
         idx = -1
         model, it = self.tree_view.get_selection().get_selected()
         if it is not None:
@@ -532,6 +581,69 @@ class CustomAppList(SettingsWidget):
         model, it = self.tree_view.get_selection().get_selected()
         return it
 
+    def _selected_index(self):
+        """返回当前选中行的索引，未选中返回 -1。"""
+        it = self._selected_iter()
+        if it is None:
+            return -1
+        return self.store.get_path(it).get_indices()[0]
+
+    def _collect_names(self, exclude_index=-1):
+        """收集当前列表里所有非分隔线的名字，用于对话框实时查重。
+        exclude_index >= 0 时跳过该行（编辑场景下排除自己）。"""
+        names = set()
+        for i, row in enumerate(self.store):
+            if i == exclude_index:
+                continue
+            n = row[1] or ''
+            if n and n != '-':
+                names.add(n)
+        return names
+
+    def _show_duplicate_warning(self):
+        """显示重复提示对话框。
+
+        不用 Gtk.MessageDialog：它的默认布局把图标和文字放在同一行，
+        视觉上偏左，且间距不好控制。这里改为自定义垂直布局：
+        图标在顶部居中，文字在其下方居中。
+        """
+        dlg = Gtk.Dialog(title=_('Duplicate item'),
+                         transient_for=self.get_toplevel(), modal=True)
+        dlg.set_resizable(False)
+        dlg.set_default_size(320, -1)
+
+        box = dlg.get_content_area()
+        box.set_spacing(12)
+        box.set_margin_start(24)
+        box.set_margin_end(24)
+        box.set_margin_top(24)
+        box.set_margin_bottom(8)
+
+        # 顶部：较大的信息图标，居中
+        icon = Gtk.Image.new_from_icon_name('dialog-information',
+                                             Gtk.IconSize.DIALOG)
+        icon.set_halign(Gtk.Align.CENTER)
+        box.add(icon)
+
+        # 中间：提示文字，居中，自动换行
+        label = Gtk.Label(label=_('An item with this name already exists'))
+        label.set_halign(Gtk.Align.CENTER)
+        label.set_justify(Gtk.Justification.CENTER)
+        label.set_line_wrap(True)
+        box.add(label)
+
+        dlg.add_button(_('OK'), Gtk.ResponseType.OK)
+
+        # 按钮区居中（get_action_area 在部分 Gtk 版本上可能不可用，容错处理）
+        try:
+            dlg.get_action_area().set_halign(Gtk.Align.CENTER)
+        except Exception:
+            pass
+
+        dlg.show_all()
+        dlg.run()
+        dlg.destroy()
+
     def _update_buttons(self, *args):
         has = self._selected_iter() is not None
         self.edit_btn.set_sensitive(has)
@@ -565,6 +677,10 @@ class CustomAppList(SettingsWidget):
             dialog.destroy()
             data = parse_desktop_file(file_path)
             if data:
+                # 查重：从 .desktop 添加时无法实时提示，只能在此弹窗
+                if data['name'] in self._collect_names():
+                    self._show_duplicate_warning()
+                    return
                 self.store.append([make_gicon(data['icon']),
                                    data['name'], data['icon'], data['command']])
                 self._save()
@@ -580,49 +696,66 @@ class CustomAppList(SettingsWidget):
             dialog.destroy()
 
     def on_add_custom(self, *args):
-        """手动输入名称/图标/命令添加一项。"""
-        dlg = EditDialog(self.get_toplevel())
-        if dlg.run() == Gtk.ResponseType.OK:
-            data = dlg.get_values()
+        """手动输入名称/图标/命令添加一项。对话框会实时查重。"""
+        dlg = EditDialog(self.get_toplevel(),
+                         existing_names=self._collect_names())
+        if dlg.run() != Gtk.ResponseType.OK:
             dlg.destroy()
-            # 名称为 "-" 视为分隔线
-            is_sep = (data['name'] == '-')
-            if data['name'] and (data['command'] or is_sep):
-                if is_sep:
-                    self.store.append([make_gicon('list-remove-symbolic'),
-                                       '-', '-', ''])
-                else:
-                    self.store.append([make_gicon(data['icon']),
-                                       data['name'], data['icon'],
-                                       data['command']])
-                self._save()
+            return
+        data = dlg.get_values()
+        dlg.destroy()
+
+        # 对话框已实时查重，走到这里的名字应当唯一；保留一道保险
+        is_sep = (data['name'] == '-')
+        if not data['name'] or (not data['command'] and not is_sep):
+            return
+        if not is_sep and data['name'] in self._collect_names():
+            return
+
+        if is_sep:
+            self.store.append([make_gicon('list-remove-symbolic'),
+                               '-', '-', ''])
         else:
-            dlg.destroy()
+            self.store.append([make_gicon(data['icon']),
+                               data['name'], data['icon'],
+                               data['command']])
+        self._save()
 
     def on_edit(self, *args):
         it = self._selected_iter()
         if it is None:
             return
+        current_idx = self._selected_index()
         row = self.store[it]
+
+        # 编辑时排除当前行的名字，否则一进对话框就显示 ❌
         dlg = EditDialog(self.get_toplevel(),
                          name=row[1] or '',
                          icon=row[2] or '',
-                         command=row[3] or '')
-        if dlg.run() == Gtk.ResponseType.OK:
-            data = dlg.get_values()
+                         command=row[3] or '',
+                         existing_names=self._collect_names(
+                             exclude_index=current_idx))
+        if dlg.run() != Gtk.ResponseType.OK:
             dlg.destroy()
-            is_sep = (data['name'] == '-')
-            if data['name'] and (data['command'] or is_sep):
-                if is_sep:
-                    self.store[it] = [make_gicon('list-remove-symbolic'),
-                                      '-', '-', '']
-                else:
-                    self.store[it] = [make_gicon(data['icon']),
-                                      data['name'], data['icon'],
-                                      data['command']]
-                self._save()
+            return
+        data = dlg.get_values()
+        dlg.destroy()
+
+        is_sep = (data['name'] == '-')
+        if not data['name'] or (not data['command'] and not is_sep):
+            return
+        if not is_sep and data['name'] in self._collect_names(
+                exclude_index=current_idx):
+            return
+
+        if is_sep:
+            self.store[it] = [make_gicon('list-remove-symbolic'),
+                              '-', '-', '']
         else:
-            dlg.destroy()
+            self.store[it] = [make_gicon(data['icon']),
+                              data['name'], data['icon'],
+                              data['command']]
+        self._save()
 
     def on_remove(self, *args):
         it = self._selected_iter()
@@ -989,6 +1122,9 @@ class SceneManager(SettingsWidget):
         entry.set_margin_end(12)
         entry.set_margin_top(12)
         entry.set_margin_bottom(12)
+        # 输入框按回车等同于点"确定"
+        entry.connect('activate',
+            lambda *a: dlg.response(Gtk.ResponseType.OK))
         dlg.get_content_area().add(entry)
         dlg.show_all()
 
