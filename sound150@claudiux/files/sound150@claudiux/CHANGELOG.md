@@ -1,3 +1,6 @@
+### v16.5.3~20260915
+  * Avoids adding the Applications submenu twice in Cinnamon 6.6 and 6.7.
+
 ### v16.5.2~20260909
   * Keeps popup menu contents inside the menu width.
 
