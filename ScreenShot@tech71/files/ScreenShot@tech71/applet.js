@@ -43,22 +43,22 @@ MyApplet.prototype = {
           
 		//Advanced Screenshot - opens gnome-screenshot
 		this.menu.addAction(_("ScreenShot"), function(event) {
-                Util.spawnCommandLine("gnome-screenshot --interactive");
+                Util.spawn(["gnome-screenshot", "--interactive"]);
 		}); 
 
 		//Whole Screen - Dropdown Menu		
 		this.screenshotItem = new PopupMenu.PopupSubMenuMenuItem(_("Whole Screen")); 
 		//1 Sec Delay
 		this.screenshotItem.menu.addAction(_("1 Second Delay"), function(actor, event) {
-		Util.spawnCommandLine("gnome-screenshot --delay 1");
+		Util.spawn(["gnome-screenshot", "--delay", "1"]);
 		});
 		//3 Sec Delay
 		this.screenshotItem.menu.addAction(_("3 Second Delay"), function(actor, event) {
-		Util.spawnCommandLine("gnome-screenshot --delay 3");
+		Util.spawn(["gnome-screenshot", "--delay", "3"]);
 		}); 
 		//5 Sec Delay
 		this.screenshotItem.menu.addAction(_("5 Second Delay"), function(actor, event) {
-		Util.spawnCommandLine("gnome-screenshot --delay 5");
+		Util.spawn(["gnome-screenshot", "--delay", "5"]);
 		});  
                        
 		this.menu.addMenuItem(this.screenshotItem); 
@@ -67,7 +67,7 @@ MyApplet.prototype = {
 
 		//Current Window
 		this.menu.addAction(_("Current Window"), function(event) {
-                Util.spawnCommandLine("gnome-screenshot -w");
+                Util.spawn(["gnome-screenshot", "-w"]);
 		}); 
 
 		//Selected Area
@@ -75,7 +75,7 @@ MyApplet.prototype = {
                 // Release the popup grab before starting interactive selection.
                 this.menu.close(false);
                 GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
-                    Util.spawnCommandLine("gnome-screenshot -a");
+                    Util.spawn(["gnome-screenshot", "-a"]);
                     return GLib.SOURCE_REMOVE;
                 });
 		});
