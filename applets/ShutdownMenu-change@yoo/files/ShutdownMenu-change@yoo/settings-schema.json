@@ -53,7 +53,8 @@
             "title": "Global Settings",
             "keys": [
                 "menu_text_size",
-                "menu_icon_size"
+                "menu_icon_size",
+                "menu_label_max_chars"
             ]
         },
         "section-interaction": {
@@ -100,6 +101,8 @@
                 "custom_position",
                 "show_custom_separator",
                 "custom_items_widget",
+                "custom_list_scroll_enable",
+                "custom_list_max_height",
                 "custom_separator_hint"
             ]
         },
@@ -114,7 +117,8 @@
                 "custom_grid_cell_height",
                 "custom_grid_show_label",
                 "custom_grid_icon_size",
-                "custom_grid_label_spacing"
+                "custom_grid_label_spacing",
+                "grid_label_max_chars"
             ]
         },
         "page-scenes": {
@@ -184,6 +188,14 @@
         "max": 48,
         "step": 2,
         "description": "Menu item icon size"
+    },
+    "menu_label_max_chars": {
+        "type": "spinbutton",
+        "default": 16,
+        "min": 5,
+        "max": 100,
+        "step": 1,
+        "description": "List item label max chars"
     },
 
     "quit": {
@@ -285,6 +297,20 @@
         "widget": "CustomAppList",
         "description": "Custom menu items"
     },
+    "custom_list_scroll_enable": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Enable scrolling when custom items overflow"
+    },
+    "custom_list_max_height": {
+        "type": "spinbutton",
+        "default": 400,
+        "min": 200,
+        "max": 800,
+        "step": 20,
+        "description": "Custom items max height (pixels)",
+        "dependency": "custom_list_scroll_enable"
+    },
     "custom_items": {
         "type": "list",
         "default": [],
@@ -304,6 +330,12 @@
                 "id": "command",
                 "title": "Command",
                 "type": "string"
+            },
+            {
+                "id": "pinned",
+                "title": "Show",
+                "type": "boolean",
+                "default": true
             }
         ]
     },
@@ -389,5 +421,14 @@
         "step": 1,
         "description": "Grid label spacing",
         "dependency": "custom_grid_mode"
+    },
+        "grid_label_max_chars": {
+        "type": "spinbutton",
+        "default": 12,
+        "min": 3,
+        "max": 50,
+        "step": 1,
+        "description": "Grid label max chars",
+        "dependency": "custom_grid_mode"        
     }
 }

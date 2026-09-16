@@ -357,3 +357,47 @@ msgstr "錯誤"
 #: widgets.py
 msgid "Duplicate item"
 msgstr "重複的項目"
+
+#: settings-schema.json
+msgid "Enable scrolling when custom items overflow"
+msgstr "自訂項目過多時啟用捲動"
+
+#: settings-schema.json
+msgid "Custom items max height (pixels)"
+msgstr "自訂項目最大高度（像素）"
+
+#: widgets.py
+msgid "Import all applications from the start menu"
+msgstr "匯入開始選單中的所有應用程式"
+
+#: widgets.py
+msgid "Import all applications from the start menu?"
+msgstr "匯入開始選單中的所有應用程式？"
+
+#: widgets.py
+msgid "Applications already in the list will be skipped."
+msgstr "清單中已存在的應用程式會被略過。"
+
+#: widgets.py
+msgid "Import complete"
+msgstr "匯入完成"
+
+#: widgets.py
+msgid "Imported: %d"
+msgstr "已匯入：%d"
+
+#: widgets.py
+msgid "Skipped (already exists): %d"
+msgstr "已略過（同名已存在）：%d"
+
+#: settings-schema.json
+msgid "List item label max chars"
+msgstr "清單名稱最大長度"
+
+#: settings-schema.json
+msgid "Grid label max chars"
+msgstr "網格名稱最大長度"
+
+#: settings-schema.json
+msgid "Show"
+msgstr "顯示"

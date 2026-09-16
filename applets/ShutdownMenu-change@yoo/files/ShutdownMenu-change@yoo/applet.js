@@ -1,6 +1,6 @@
 // name： ShutdownMenu-change
 // description： Offers a shutdown menu with scroll workspace switching, middle-click actions, custom menu items, grid layout, and scene presets — unlocking more ways to play.
-// version: 1.4.4 (15-09-2026)
+// version: 1.4.5 (16-09-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
@@ -11,6 +11,7 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
+const Pango = imports.gi.Pango;
 const Util = imports.misc.util;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
@@ -30,17 +31,22 @@ const SEPARATOR_ROW_NAME = "-";
 const SCENES_REL_PATH = '/ShutdownMenu-change@yoo/scenes.json';
 // 面板符号图标大小读取失败时的兜底值
 const FALLBACK_PANEL_ICON_SIZE = 16;
+// 自定义项超过此数量时启用滚动容器
+const CUSTOM_LIST_SCROLL_THRESHOLD = 20;
+// 名称截断的兜底值（设置未绑定时使用）
+const DEFAULT_MENU_LABEL_MAX_CHARS = 30;
+const DEFAULT_GRID_LABEL_MAX_CHARS = 12;
 
 // 首次运行时注入的默认自定义项（用户可随时删除）
 const DEFAULT_CUSTOM_ITEM = {
     name: "Neofetch",
     icon: "linuxmint-logo-badge-symbolic",
     command: "x-terminal-emulator -e bash -c 'neofetch; exec bash'",
-    type: "command"
+    type: "command",
+    pinned: true
 };
 
 // 与 widgets.py 的 DEFAULT_SNAPSHOT 保持一致；应用"默认场景"时使用
-// icon_size 为 0：表示跟随 Cinnamon 面板的符号图标大小
 const DEFAULT_SNAPSHOT = {
     'panel_icon': 'system-shutdown-symbolic',
     'icon_size': 0,
@@ -61,6 +67,8 @@ const DEFAULT_SNAPSHOT = {
     'show_custom_separator': true,
     'menu_text_size': 0,
     'menu_icon_size': 24,
+    'menu_label_max_chars': 16,
+    'grid_label_max_chars': 12,
     'custom_grid_mode': false,
     'custom_grid_hide_builtin': false,
     'custom_grid_columns': 3,
@@ -75,6 +83,19 @@ const DEFAULT_SNAPSHOT = {
 Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 function _(str) {
     return Gettext.dgettext(UUID, str);
+}
+
+// 把过长的名称截断到 maxChars 个字符
+// 无效的 maxChars 会回退到 defaultLimit
+function truncateLabel(text, maxChars, defaultLimit) {
+    if (!text) return '';
+    let limit = parseInt(maxChars, 10);
+    if (isNaN(limit) || limit <= 0) {
+        limit = defaultLimit || DEFAULT_MENU_LABEL_MAX_CHARS;
+    }
+    let s = String(text);
+    if (s.length <= limit) return s;
+    return s.substring(0, limit - 1) + '…';
 }
 
 function MyApplet(metadata, orientation, panel_height, instanceId) {
@@ -118,7 +139,6 @@ MyApplet.prototype = {
             try {
                 this._panelSettings = new Gio.Settings({ schema_id: 'org.cinnamon' });
                 this._panelSettings.connect('changed::panel-symbolic-icon-size', () => {
-                    // 面板大小变化：先清缓存，再按需刷新图标
                     this._panelIconSizeCache = 0;
                     let s = parseInt(this.icon_size, 10);
                     if (isNaN(s) || s <= 0) {
@@ -126,7 +146,6 @@ MyApplet.prototype = {
                     }
                 });
             } catch (e) {
-                // 旧版本 Cinnamon 可能没有该键，忽略
                 this._panelSettings = null;
             }
 
@@ -172,8 +191,12 @@ MyApplet.prototype = {
             ["custom_items", "custom_items"],
             ["custom_position", "custom_position"],
             ["show_custom_separator", "show_custom_separator"],
+            ["custom_list_scroll_enable", "custom_list_scroll_enable"],
+            ["custom_list_max_height", "custom_list_max_height"],
             ["menu_text_size", "menu_text_size"],
             ["menu_icon_size", "menu_icon_size"],
+            ["menu_label_max_chars", "menu_label_max_chars"],
+            ["grid_label_max_chars", "grid_label_max_chars"],
             ["custom_grid_mode", "custom_grid_mode"],
             ["custom_grid_columns", "custom_grid_columns"],
             ["custom_grid_show_label", "custom_grid_show_label"],
@@ -261,7 +284,6 @@ MyApplet.prototype = {
         let isSymbolic = iconName.includes('-symbolic');
         let exists = isPath ? this._fileExists(iconName) : this._iconThemeHasIcon(iconName);
 
-        // 图标不存在时回退到默认 symbolic 图标
         if (!exists) {
             this.set_applet_icon_symbolic_name(DEFAULT_PANEL_ICON_SYMBOLIC);
             return;
@@ -301,7 +323,6 @@ MyApplet.prototype = {
     },
 
     // 读取 Cinnamon 面板的符号图标大小；读取失败时回退到默认值
-    // 结果缓存到 _panelIconSizeCache；面板设置变更信号会清空该缓存
     _getPanelSymbolicIconSize: function() {
         if (this._panelIconSizeCache > 0) {
             return this._panelIconSizeCache;
@@ -313,9 +334,7 @@ MyApplet.prototype = {
             }
             let v = this._panelSettings.get_int('panel-symbolic-icon-size');
             if (v > 0) size = v;
-        } catch (e) {
-            // 忽略：老版本 Cinnamon 无此键
-        }
+        } catch (e) {}
         this._panelIconSizeCache = size;
         return size;
     },
@@ -327,7 +346,10 @@ MyApplet.prototype = {
         if (!this.menu) return;
         this.menu.removeAll();
 
-        let hasCustom = this.custom_items && this.custom_items.length > 0;
+        let hasCustom = this.custom_items && this.custom_items.some(
+            item => item && item.name && item.pinned !== false &&
+            (item.name === SEPARATOR_ROW_NAME ? !item.command : item.command)
+        );
         let hideBuiltin = this.custom_grid_mode && this.custom_grid_hide_builtin;
         let hasBuiltin = !hideBuiltin &&
             (this.quit_enable || this.log_out_enable || this.screen_lock_enable);
@@ -375,12 +397,31 @@ MyApplet.prototype = {
         }
     },
 
-    // 列表模式：每项一行
-    _addCustomItemsList: function() {
-        this.custom_items.forEach(item => {
-            if (!item || !item.name) return;
+    // ============================================================
+    // 列表模式
+    // ============================================================
 
-            // 名称为 "-" 且命令为空 → 渲染为分隔线
+    // 列表模式入口：按数量分流到普通列表或滚动容器
+    _addCustomItemsList: function() {
+        let visibleItems = this.custom_items.filter(item =>
+            item && item.name && item.pinned !== false &&
+            (item.name === SEPARATOR_ROW_NAME ? !item.command : item.command)
+        );
+
+        let enableScroll = this.custom_list_scroll_enable !== false;
+        if (enableScroll && visibleItems.length > CUSTOM_LIST_SCROLL_THRESHOLD) {
+            this._addCustomItemsListScroll(visibleItems);
+        } else {
+            this._addCustomItemsListPlain(visibleItems);
+        }
+    },
+
+    // 普通列表：标准菜单项，支持键盘导航
+    _addCustomItemsListPlain: function(items) {
+        items.forEach(item => {
+            if (!item || !item.name) return;
+            if (item.pinned === false) return;
+
             if (item.name === SEPARATOR_ROW_NAME && !item.command) {
                 this._addSeparatorIf(true);
                 return;
@@ -392,11 +433,131 @@ MyApplet.prototype = {
         });
     },
 
+    // 滚动列表（参考 Cinnamenu 的 AppsView 结构）
+    _addCustomItemsListScroll: function(items) {
+        try {
+            let maxHeight = parseInt(this.custom_list_max_height, 10);
+            if (isNaN(maxHeight) || maxHeight < 100) maxHeight = 400;
+
+            let iconSize = this.menu_icon_size || 24;
+            let textSize = parseInt(this.menu_text_size, 10);
+            let labelLimit = this.menu_label_max_chars;
+
+            // 内部 BoxLayout：装所有自定义项
+            let innerBox = new St.BoxLayout({ vertical: true });
+
+            items.forEach(item => {
+                // 分隔线
+                if (item.name === SEPARATOR_ROW_NAME && !item.command) {
+                    let sep = new St.Widget({
+                        style_class: 'popup-separator-menu-item',
+                        x_expand: true
+                    });
+                    innerBox.add(sep, { x_fill: true });
+                    return;
+                }
+                if (!item.command) return;
+                if (item.pinned === false) return;
+
+                // 每项：带 popup-menu-item 样式的 Button
+                // x_align: FILL + x_expand: true 保证按钮横跨整行
+                let button = new St.Button({
+                    style_class: 'popup-menu-item',
+                    can_focus: true,
+                    x_expand: true,
+                    x_align: Clutter.ActorAlign.FILL
+                });
+
+                let hbox = new St.BoxLayout({
+                    x_expand: true,
+                    style: 'spacing: 8px; padding: 4px 8px;'
+                });
+
+                // 图标
+                let gicon = this._resolveGIcon(item.icon || DEFAULT_CUSTOM_ICON);
+                let icon = gicon
+                    ? new St.Icon({ gicon: gicon, icon_size: iconSize })
+                    : new St.Icon({ icon_name: FALLBACK_ICON, icon_size: iconSize });
+                hbox.add_child(icon);
+
+                // 文字：截断过长名称 + 启用省略号
+                let label = new St.Label({
+                    text: truncateLabel(item.name, labelLimit,
+                                        DEFAULT_MENU_LABEL_MAX_CHARS),
+                    y_align: Clutter.ActorAlign.CENTER,
+                    x_expand: true
+                });
+                try {
+                    label.get_clutter_text().set_ellipsize(Pango.EllipsizeMode.END);
+                } catch (e) {}
+                if (!isNaN(textSize) && textSize > 0) {
+                    label.set_style('font-size: ' + textSize + 'px;');
+                }
+                hbox.add_child(label);
+
+                button.set_child(hbox);
+                button.connect('clicked', () => {
+                    Util.trySpawnCommandLine(item.command);
+                    this.menu.close();
+                });
+
+                // 悬停高亮
+                button.connect('enter-event', () => {
+                    if (!button.has_style_pseudo_class('active')) {
+                        button.add_style_pseudo_class('active');
+                    }
+                });
+                button.connect('leave-event', () => {
+                    if (button.has_style_pseudo_class('active')) {
+                        button.remove_style_pseudo_class('active');
+                    }
+                });
+
+                // x_fill: true 让按钮撑满 innerBox 的整行宽度，左对齐
+                innerBox.add(button, { x_fill: true });
+            });
+
+            // ScrollView 包装
+            let scrollView = new St.ScrollView({
+                style_class: 'vfade',
+                x_expand: true,
+                y_expand: false
+            });
+            scrollView.add_actor(innerBox);
+            scrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
+            scrollView.set_clip_to_allocation(true);
+            scrollView.set_mouse_scrolling(true);
+
+            // 监听滚动条事件，避免菜单拦截滚动
+            try {
+                let vscroll = scrollView.get_vscroll_bar();
+                vscroll.connect('scroll-start', () => { this.menu.passEvents = true; });
+                vscroll.connect('scroll-stop', () => { this.menu.passEvents = false; });
+            } catch (e) {}
+
+            // 固定高度
+            scrollView.height = maxHeight;
+
+            // 用 PopupMenuSection 承载
+            let section = new PopupMenu.PopupMenuSection();
+            section.actor.add_actor(scrollView);
+            this.menu.addMenuItem(section);
+        } catch (e) {
+            global.logError('ShutdownMenu-change list scroll error: ' + e.message);
+            this._addCustomItemsListPlain(items);
+        }
+    },
+
+    // ============================================================
+    // 网格模式
+    // ============================================================
+
     // 网格模式：图标 + 可选文字，用 Clutter.GridLayout 布局
-    // 网格模式忽略分隔线（分隔线在网格中无意义）
+    // 网格模式忽略分隔线
+    // 只有"项数超过阈值 且 启用了滚动"时才包 ScrollView
     _addCustomItemsGrid: function() {
         let items = this.custom_items.filter(item =>
-            item && item.name && item.command
+            item && item.name && item.command && item.pinned !== false
         );
         if (items.length === 0) return;
 
@@ -405,6 +566,7 @@ MyApplet.prototype = {
             let showLabel = this.custom_grid_show_label;
             let iconSize = this.custom_grid_icon_size || this.menu_icon_size || 32;
             let textSize = parseInt(this.menu_text_size, 10);
+            let labelLimit = this.grid_label_max_chars;
 
             // 0 表示自适应（由内容决定尺寸）
             let cellWidth = parseInt(this.custom_grid_cell_width, 10);
@@ -415,7 +577,7 @@ MyApplet.prototype = {
             let spacing = parseInt(this.custom_grid_label_spacing, 10);
             if (isNaN(spacing) || spacing < 0) spacing = 6;
 
-            // St.Bin + Clutter.Actor 组合，避免菜单项样式干扰内部布局
+            // ---- 网格本体 ----
             let gridBox = new St.Bin({
                 style_class: 'menu-applications-grid-box',
                 x_fill: true,
@@ -459,9 +621,13 @@ MyApplet.prototype = {
 
                 if (showLabel) {
                     let label = new St.Label({
-                        text: item.name,
+                        text: truncateLabel(item.name, labelLimit,
+                                            DEFAULT_GRID_LABEL_MAX_CHARS),
                         x_align: Clutter.ActorAlign.CENTER
                     });
+                    try {
+                        label.get_clutter_text().set_ellipsize(Pango.EllipsizeMode.END);
+                    } catch (e) {}
                     if (!isNaN(textSize) && textSize > 0) {
                         label.set_style('font-size: ' + textSize + 'px;');
                     }
@@ -496,18 +662,64 @@ MyApplet.prototype = {
                 }
             });
 
+            // ---- 判断是否需要滚动 ----
+            let enableScroll = this.custom_list_scroll_enable !== false;
+            let needsScroll = enableScroll && items.length > CUSTOM_LIST_SCROLL_THRESHOLD;
+
             let section = new PopupMenu.PopupMenuSection();
-            section.actor.add_actor(gridBox);
+
+            if (needsScroll) {
+                // 需要滚动：包 ScrollView
+                // 结构：ScrollView → bugfixBox → wrapperBox → gridBox
+                let maxHeight = parseInt(this.custom_list_max_height, 10);
+                if (isNaN(maxHeight) || maxHeight < 100) maxHeight = 400;
+
+                // 布局参数（x_fill 等）只能传给 add/add_actor，
+                // 不能写在 St.BoxLayout 的构造函数里
+                let wrapperBox = new St.BoxLayout({ vertical: true });
+                wrapperBox.add(gridBox, { x_fill: true, y_fill: true });
+
+                // 外层：bugfixBox（规避 GitHub issue #11760）
+                let bugfixBox = new St.BoxLayout({
+                    style: 'padding: 0px; margin: 0px; spacing: 0px;'
+                });
+                bugfixBox.add_actor(wrapperBox);
+
+                let scrollView = new St.ScrollView({
+                    style_class: 'vfade menu-applications-scrollbox'
+                });
+                scrollView.add_actor(bugfixBox);
+                scrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
+                scrollView.set_clip_to_allocation(true);
+                scrollView.set_mouse_scrolling(true);
+                scrollView.height = maxHeight;
+
+                // 监听滚动条事件，避免菜单拦截滚动
+                try {
+                    let vscroll = scrollView.get_vscroll_bar();
+                    vscroll.connect('scroll-start', () => { this.menu.passEvents = true; });
+                    vscroll.connect('scroll-stop', () => { this.menu.passEvents = false; });
+                } catch (e) {}
+
+                section.actor.add_actor(scrollView);
+            } else {
+                // 不需要滚动：直接显示网格
+                section.actor.add_actor(gridBox);
+            }
+
             this.menu.addMenuItem(section);
         } catch (e) {
-            // 网格构建失败时回退到列表模式，避免菜单空白
-            global.logError('ShutdownMenu-change grid error: ' + e.message +
-                            (e.stack ? '\n' + e.stack : ''));
+            global.logError('ShutdownMenu-change grid error: ' + e.message);
             this._addCustomItemsList();
         }
     },
 
+    // ============================================================
+    // 通用菜单项
+    // ============================================================
+
     // 通用菜单项：图标 + 文字 + 命令
+    // 文字过长时截断并加省略号
     _createMenuItem: function(displayName, iconName, command) {
         let menuItem = new PopupMenu.PopupBaseMenuItem();
         let size = this.menu_icon_size || 24;
@@ -519,9 +731,14 @@ MyApplet.prototype = {
         menuItem.addActor(icon);
 
         let label = new St.Label({
-            text: displayName,
+            text: truncateLabel(displayName, this.menu_label_max_chars,
+                                DEFAULT_MENU_LABEL_MAX_CHARS),
             y_align: Clutter.ActorAlign.CENTER
         });
+        // 强制使用省略号（防止字体不支持 '…' 时显示异常）
+        try {
+            label.get_clutter_text().set_ellipsize(Pango.EllipsizeMode.END);
+        } catch (e) {}
         let textSize = parseInt(this.menu_text_size, 10);
         if (!isNaN(textSize) && textSize > 0) {
             label.set_style('font-size: ' + textSize + 'px;');
@@ -723,6 +940,8 @@ MyApplet.prototype = {
             'show_custom_separator': 'show_custom_separator',
             'menu_text_size': 'menu_text_size',
             'menu_icon_size': 'menu_icon_size',
+            'menu_label_max_chars': 'menu_label_max_chars',
+            'grid_label_max_chars': 'grid_label_max_chars',
             'custom_grid_mode': 'custom_grid_mode',
             'custom_grid_columns': 'custom_grid_columns',
             'custom_grid_show_label': 'custom_grid_show_label',

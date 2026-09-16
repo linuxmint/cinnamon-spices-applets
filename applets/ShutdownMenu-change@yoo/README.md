@@ -62,8 +62,12 @@ In addition, it offers extra handy interactions:
 
 - **从 `.desktop` 添加应用**：点击列表工具栏的 **+** 按钮，打开文件选择器（默认路径 `/usr/share/applications`），选择任意 `.desktop` 文件即可自动提取名称、图标和启动命令  
   **Add from `.desktop`**: Click the **+** button in the list toolbar, choose any `.desktop` file (file chooser opens `/usr/share/applications` by default); name, icon and launch command are auto-extracted
+- **一键导入所有应用**：点击全选图标按钮，一键导入系统开始菜单中的所有应用程序（跳过已存在的同名项）。导入的项默认**不勾选**，方便你逐个勾选想显示的程序  
+  **Import all apps**: Click the select-all icon button to import all applications from the start menu at once (duplicates are skipped). Imported items are **unchecked by default** so you can selectively enable the ones you want
 - **添加自定义命令**：点击文本图标按钮，手动填写名称、图标和命令  
   **Add custom command**: Click the text icon button to manually enter name, icon and command
+- **勾选框（Show）**：列表最左侧的勾选框控制该项是否在面板菜单中显示。勾选的项会自动置顶排列，方便查看和管理  
+  **Checkbox (Show)**: The checkbox on the leftmost column controls whether the item appears in the panel menu. Checked items are automatically pinned to the top for easy access
 - **编辑 / 删除 / 上移 / 下移**：工具栏按钮操作选中项  
   **Edit / Remove / Move up / Move down**: Toolbar buttons operate on the selected item
 - **分隔线**：将某项的 **名称设为 `-`** 且 **命令留空**，该行即渲染为分隔线（网格模式忽略分隔线）  
@@ -146,6 +150,7 @@ Located on the **Scenes** page; used to save or switch the whole configuration (
   - Name: `重启`
   - Icon: `system-reboot`
   - Command: `cinnamon-session-quit --reboot`
+- **一键导入 + 勾选框工作流**：先点击全选按钮导入所有应用，然后逐个勾选想在面板菜单中显示的程序，未勾选的不会出现在菜单中，已勾选的自动置顶，非常方便管理大量应用。
 - 网格模式下配合 `Hide built-in items`，可以将菜单变成类似 Dock 的应用启动器。
 - 图标输入框支持两种形式：
   - **系统图标名**（如 `firefox`、`system-shutdown`）

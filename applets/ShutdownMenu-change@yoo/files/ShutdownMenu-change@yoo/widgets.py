@@ -23,6 +23,7 @@ DEFAULT_CUSTOM_ITEM = {
     'icon': 'linuxmint-logo-badge-symbolic',
     'command': "x-terminal-emulator -e bash -c 'neofetch; exec bash'",
     'type': 'command',
+    'pinned': True,
 }
 
 # 虚拟"Default"场景使用的默认快照（与 settings-schema.json 中的 default 值保持一致）
@@ -47,6 +48,8 @@ DEFAULT_SNAPSHOT = {
     'show_custom_separator': True,
     'menu_text_size': 0,
     'menu_icon_size': 24,
+    'menu_label_max_chars': 16,
+    'grid_label_max_chars': 12,
     'custom_grid_mode': False,
     'custom_grid_hide_builtin': False,
     'custom_grid_columns': 3,
@@ -473,6 +476,8 @@ class CustomAppList(SettingsWidget):
 
         self.add_app_btn = add_tool_button('list-add-symbolic',
             _('Add application from .desktop'), self.on_add_app)
+        self.import_all_btn = add_tool_button('edit-select-all-symbolic',
+            _('Import all applications from the start menu'), self.on_import_all_apps)
         self.add_custom_btn = add_tool_button('insert-text-symbolic',
             _('Add custom command'), self.on_add_custom)
         self.edit_btn = add_tool_button('document-edit-symbolic',
@@ -485,10 +490,19 @@ class CustomAppList(SettingsWidget):
             _('Move down'), self.on_move_down)
 
         # Gio.Icon 按需渲染，比 Pixbuf 模型启动更快
-        self.store = Gtk.ListStore(Gio.Icon, str, str, str)
+        # 列: [Gio.Icon, name, icon_str, command, pinned]
+        self.store = Gtk.ListStore(Gio.Icon, str, str, str, bool)
 
         self.tree_view = Gtk.TreeView(model=self.store)
         self.tree_view.set_headers_visible(True)
+
+        # 勾选框列（pinned）— 放在最左侧
+        renderer_toggle = Gtk.CellRendererToggle()
+        renderer_toggle.set_property('activatable', True)
+        renderer_toggle.connect('toggled', self._on_toggle_pinned)
+        column_toggle = Gtk.TreeViewColumn(_('Show'), renderer_toggle, active=4)
+        column_toggle.set_min_width(40)
+        self.tree_view.append_column(column_toggle)
 
         renderer_icon = Gtk.CellRendererPixbuf()
         renderer_icon.set_property('stock-size', Gtk.IconSize.LARGE_TOOLBAR)
@@ -546,17 +560,27 @@ class CustomAppList(SettingsWidget):
     def _load(self):
         self.store.clear()
         items = self.settings.get_value(self.key) or []
+        pinned_rows = []
+        unpinned_rows = []
         for item in items:
             if not isinstance(item, dict):
                 continue
             name = item.get('name', '')
+            # 向后兼容：没有 pinned 字段的旧项视为 pinned
+            pinned = item.get('pinned', True)
             if name == '-':
-                self.store.append([make_gicon('list-remove-symbolic'),
-                                   '-', '-', item.get('command', '')])
+                pinned_rows.append(
+                    [make_gicon('list-remove-symbolic'), '-', '-', '', True])
                 continue
             icon = item.get('icon') or 'application-x-executable'
-            self.store.append([make_gicon(icon), name, icon,
-                               item.get('command', '')])
+            row = [make_gicon(icon), name, icon,
+                   item.get('command', ''), pinned]
+            if pinned:
+                pinned_rows.append(row)
+            else:
+                unpinned_rows.append(row)
+        for row in pinned_rows + unpinned_rows:
+            self.store.append(row)
 
     def _save(self):
         self._saving = True
@@ -572,6 +596,7 @@ class CustomAppList(SettingsWidget):
                     'icon': row[2] or '',
                     'command': row[3] or '',
                     'type': 'command',
+                    'pinned': row[4],
                 })
             self.settings.set_value(self.key, items)
         finally:
@@ -651,6 +676,40 @@ class CustomAppList(SettingsWidget):
         self.up_btn.set_sensitive(has)
         self.down_btn.set_sensitive(has)
 
+    def _on_toggle_pinned(self, cell, path):
+        """勾选/取消勾选 pinned 状态，然后重新排序使 pinned 项置顶。"""
+        iter = self.store.get_iter(path)
+        current = self.store.get_value(iter, 4)
+        self.store.set_value(iter, 4, not current)
+        self._save()
+        self._resort_store()
+
+    def _resort_store(self):
+        """重新排序：pinned 项置顶，unpinned 项在下方，各自保持原有相对顺序。"""
+        model, it = self.tree_view.get_selection().get_selected()
+        selected_name = None
+        if it is not None:
+            selected_name = self.store.get_value(it, 1)
+
+        rows = []
+        for row in self.store:
+            rows.append([row[0], row[1], row[2], row[3], row[4]])
+
+        pinned = [r for r in rows if r[4]]
+        unpinned = [r for r in rows if not r[4]]
+
+        self.store.clear()
+        for r in pinned + unpinned:
+            self.store.append(r)
+
+        # 恢复选中状态
+        if selected_name:
+            for i, row in enumerate(self.store):
+                if row[1] == selected_name:
+                    self.tree_view.get_selection().select_iter(
+                        self.store.get_iter(i))
+                    break
+
     def on_add_app(self, *args):
         """从 /usr/share/applications 选择 .desktop 文件并添加到列表。"""
         dialog = Gtk.FileChooserDialog(
@@ -682,7 +741,8 @@ class CustomAppList(SettingsWidget):
                     self._show_duplicate_warning()
                     return
                 self.store.append([make_gicon(data['icon']),
-                                   data['name'], data['icon'], data['command']])
+                                   data['name'], data['icon'],
+                                   data['command'], True])
                 self._save()
             else:
                 md = Gtk.MessageDialog(
@@ -694,6 +754,83 @@ class CustomAppList(SettingsWidget):
                 md.destroy()
         else:
             dialog.destroy()
+
+    def on_import_all_apps(self, *args):
+        """一键导入开始菜单中的所有应用。
+
+        使用 Gio.AppInfo.get_all() 枚举，与 Cinnamon 菜单的数据源一致。
+        过滤规则：
+        - should_show() 为 False 的项（NoDisplay=true 等）跳过
+        - 名字已存在于列表中的项跳过（按名称查重）
+        - 解析失败的 .desktop 跳过
+        """
+        # 先弹确认框：这是一次性批量操作，给用户反悔的机会
+        md = Gtk.MessageDialog(
+            transient_for=self.get_toplevel(),
+            message_type=Gtk.MessageType.QUESTION,
+            buttons=Gtk.ButtonsType.YES_NO,
+            text=_('Import all applications from the start menu?'))
+        md.format_secondary_text(_(
+            'Applications already in the list will be skipped.'))
+        response = md.run()
+        md.destroy()
+        if response != Gtk.ResponseType.YES:
+            return
+
+        # 用 set 加速查重
+        existing_names = self._collect_names()
+        imported = 0
+        skipped = 0
+
+        try:
+            apps = Gio.AppInfo.get_all()
+        except Exception as e:
+            print('import apps error:', e, file=sys.stderr)
+            return
+
+        # 先收集所有待添加项，最后统一写入（避免每次 append 都触发 _save）
+        to_add = []
+        for app in apps:
+            try:
+                if not app.should_show():
+                    continue
+                desktop_path = app.get_filename()
+                if not desktop_path:
+                    continue
+                data = parse_desktop_file(desktop_path)
+                if not data:
+                    continue
+                if data['name'] in existing_names:
+                    skipped += 1
+                    continue
+                to_add.append(data)
+                existing_names.add(data['name'])
+            except Exception:
+                # 单个应用解析失败不影响整体
+                continue
+
+        # 按名称排序后写入，菜单里顺序更友好
+        to_add.sort(key=lambda d: d['name'].lower())
+        for data in to_add:
+            self.store.append([make_gicon(data['icon']),
+                               data['name'], data['icon'],
+                               data['command'], False])
+            imported += 1
+
+        if imported > 0:
+            self._save()
+
+        # 显示结果
+        result = Gtk.MessageDialog(
+            transient_for=self.get_toplevel(),
+            message_type=Gtk.MessageType.INFO,
+            buttons=Gtk.ButtonsType.OK,
+            text=_('Import complete'))
+        result.format_secondary_text(
+            _('Imported: %d') % imported + '\n' +
+            _('Skipped (already exists): %d') % skipped)
+        result.run()
+        result.destroy()
 
     def on_add_custom(self, *args):
         """手动输入名称/图标/命令添加一项。对话框会实时查重。"""
@@ -714,11 +851,11 @@ class CustomAppList(SettingsWidget):
 
         if is_sep:
             self.store.append([make_gicon('list-remove-symbolic'),
-                               '-', '-', ''])
+                               '-', '-', '', True])
         else:
             self.store.append([make_gicon(data['icon']),
                                data['name'], data['icon'],
-                               data['command']])
+                               data['command'], True])
         self._save()
 
     def on_edit(self, *args):
@@ -727,6 +864,7 @@ class CustomAppList(SettingsWidget):
             return
         current_idx = self._selected_index()
         row = self.store[it]
+        old_pinned = row[4]
 
         # 编辑时排除当前行的名字，否则一进对话框就显示 ❌
         dlg = EditDialog(self.get_toplevel(),
@@ -750,11 +888,11 @@ class CustomAppList(SettingsWidget):
 
         if is_sep:
             self.store[it] = [make_gicon('list-remove-symbolic'),
-                              '-', '-', '']
+                              '-', '-', '', True]
         else:
             self.store[it] = [make_gicon(data['icon']),
                               data['name'], data['icon'],
-                              data['command']]
+                              data['command'], old_pinned]
         self._save()
 
     def on_remove(self, *args):
@@ -799,6 +937,7 @@ class SceneManager(SettingsWidget):
         'screen_lock', 'screen_lock_icon', 'screen_lock_cmd',
         'custom_items', 'custom_position', 'show_custom_separator',
         'menu_text_size', 'menu_icon_size',
+        'menu_label_max_chars', 'grid_label_max_chars',
         'custom_grid_mode', 'custom_grid_hide_builtin',
         'custom_grid_columns', 'custom_grid_cell_width',
         'custom_grid_cell_height', 'custom_grid_show_label',
