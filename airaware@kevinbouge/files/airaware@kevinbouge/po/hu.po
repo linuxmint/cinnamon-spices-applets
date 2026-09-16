@@ -105,7 +105,7 @@ msgstr "Ismeretlen"
 
 #. applet.js:258 applet.js:1320
 msgid "AirAware: loading environmental conditions"
-msgstr "LégFigyelő: környezeti feltételek betöltése"
+msgstr "Levegő-Figyelő: környezeti feltételek betöltése"
 
 #. applet.js:729 applet.js:1319
 msgid "Loading"
@@ -113,7 +113,7 @@ msgstr "Betöltés"
 
 #. applet.js:1216 applet.js:1831 lib/formatter.js:84
 msgid "Unavailable"
-msgstr "nem elérhető"
+msgstr "Nem elérhető"
 
 #. applet.js:1301
 msgid "Unable to refresh environmental data; showing cached data."
@@ -145,7 +145,7 @@ msgstr "A környezeti allergia okozta terhelés mértéke jelenleg {category}."
 #. applet.js:1413 applet.js:1562 applet.js:1942 applet.js:1949 applet.js:1954
 #. applet.js:1956 lib/dailySummaryFormatter.js:12
 msgid "AirAware"
-msgstr "LégFigyelő"
+msgstr "Levegő-Figyelő"
 
 #. applet.js:1425
 msgid "Test notification: environmental allergy burden is {category}."
@@ -237,7 +237,7 @@ msgstr "UV index"
 #. applet.js:1656
 msgid "Pollen data unavailable for this location or season"
 msgstr ""
-"Ehhez a helyszínhez vagy évszakhoz nem állnak rendelkezésre pollenadatok."
+"Ehhez a helyszínhez vagy évszakhoz nem állnak rendelkezésre pollenadatok"
 
 #. settings-schema.json->panel-score-mode->options
 #. settings-schema.json->daily-summary-score->options
