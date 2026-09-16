@@ -2466,7 +2466,6 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         this._outputVolumeSection.connect("values-changed", (...args) => this._outputValuesChanged(...args));
 
         // Applications, output and input volume sections:
-        this._appVolumeSection.addMenuItem(this._outputApplicationsMenu);
         this._appVolumeSection.actor.show();
         this._outputApplicationsMenu.actor.show();
         this._outputApplicationsMenu.menu.open();
