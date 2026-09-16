@@ -41,7 +41,7 @@ Or install manually by copying the `files/internet-speed-meter@mebs` folder to `
 ## Requirements
 
 - Cinnamon desktop environment (Linux Mint recommended)
-- Python 3 with `GObject` bindings (installed by default on Linux Mint)
+- No other dependencies — pure JavaScript (GJS) using only standard Cinnamon/GJS APIs
 
 ## Author
 
