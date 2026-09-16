@@ -929,22 +929,8 @@ class SensorsApplet extends Applet.Applet {
                 t["shown_name"] = ""
               }
               let name = (!t["shown_name"]) ?  t["sensor"] : t["shown_name"];
-              _tooltip +=  (t["show_in_panel"] && this.bold_italics_main_sensors) ?
-                " <i><b>" + name + "</b></i>\n" :
-                " " + name + "\n";
-              let str_value = this._formatted_temp(this.data["temps"][t["sensor"]]["input"]).padStart(10, " ");
-              _tooltip += (this.bold_values) ?
-                "  <b>" + str_value + "</b>" :
-                "  " + str_value;
-              let _max_temp = (t["high_by_user"] && t["high_by_user"].length > 0 && !isNaN(t["high_by_user"])) ?
-                1.0*t["high_by_user"] : 1.0*this._get_max_temp(this.data["temps"][t["sensor"]]);
-              _tooltip += "  "+ _("high:") + " " + ((_max_temp < 0) ? _("n/a") : this._formatted_temp(_max_temp));
-              let _crit_temp = (t["crit_by_user"] && t["crit_by_user"].length > 0 && !isNaN(t["crit_by_user"])) ?
-                1.0*t["crit_by_user"] : 1.0*this._get_crit_temp(this.data["temps"][t["sensor"]]);
-              _tooltip += "  "+ _("crit:") + " " + ((_crit_temp < 0) ? _("n/a") : this._formatted_temp(_crit_temp));
-              _tooltip += "\n";
-              _crit_temp = null;
-              _max_temp = null;
+              let str_value = this._formatted_temp(1.0*this.data["temps"][t["sensor"]]["input"]);
+              _tooltip += " <b>" + name.padEnd(10, " ") + "</b> " + str_value.padStart(5, " ") + "\n";
               str_value = null;
               name = null
             }
@@ -967,25 +953,9 @@ class SensorsApplet extends Applet.Applet {
               let _temp_max = 1*disk["high"];
               let _temp_crit = 1*disk["crit"];
 
-              let _shown_name = "";
-              if (this.show_temp_name) _shown_name = disk["shown_name"]+" ";
-              else _shown_name = disk["disk"]+" ";
-
-              _tooltip +=  (disk["show_in_panel"] && this.bold_italics_main_sensors) ?
-                  " <i><b>" + _shown_name + "</b></i>\n" :
-                  " " + _shown_name + "\n";
-
-              let str_value = this._formatted_temp(_temp).padStart(10, " ");
-              _tooltip += (this.bold_values) ?
-                "  <b>" + str_value + "</b>" :
-                "  " + str_value;
-
-              _tooltip += "  "+ _("high:") + " " + ((_temp_max === 0) ? _("n/a") : this._formatted_temp(_temp_max));
-
-              _tooltip += "  "+ _("crit:") + " " + ((_temp_crit === 0) ? _("n/a") : this._formatted_temp(_temp_crit));
-              _tooltip += "\n";
-              _temp_crit = null;
-              _temp_max = null;
+              let _shown_name = (this.show_temp_name && disk["shown_name"] && disk["shown_name"].length > 0) ? disk["shown_name"] : disk["disk"];
+              let str_value = this._formatted_temp(1.0*_temp);
+              _tooltip += " <b>" + _shown_name.padEnd(10, " ") + "</b> " + str_value.padStart(5, " ") + "\n";
               str_value = null;
               _shown_name = null
             }
@@ -1010,22 +980,13 @@ class SensorsApplet extends Applet.Applet {
           if (this.data["fans"][f["sensor"]] !== undefined) {
             if (f["show_in_tooltip"]) {
               let name = (!f["shown_name"]) ?  f["sensor"] : f["shown_name"];
-              _tooltip +=  (f["show_in_panel"] && this.bold_italics_main_sensors) ?
-                " <i><b>" + name + "</b></i>\n" :
-                " " + name + "\n";
               let _value = 1.0*this.data["fans"][f["sensor"]]["input"];
               if (f["user_formula"] && f["user_formula"].length > 0) {
                 let _formula_result = f["user_formula"].replace(/\$/g, _value);
                 _value = 1.0*eval(_formula_result)
               }
-              let str_value = this._formatted_fan(_value).padStart(10, " ");
-              _tooltip += (this.bold_values) ?
-                "  <b>" + str_value + "</b>" :
-                "  " + str_value;
-              let _min_fan = this._get_min_fan(this.data["fans"][f["sensor"]]);
-              _tooltip += "  "+ _("min:") + " " + ((_min_fan === 0) ? _("n/a") : this._formatted_fan(_min_fan));
-              _tooltip += "\n";
-              _min_fan = null;
+              let str_value = this._formatted_fan(_value);
+              _tooltip += " <b>" + name.padEnd(10, " ") + "</b> " + str_value.padStart(8, " ") + "\n";
               str_value = null;
               name = null
             }
@@ -1048,29 +1009,13 @@ class SensorsApplet extends Applet.Applet {
           if (this.data["voltages"][v["sensor"]] !== undefined) {
             if (v["show_in_tooltip"]) {
               let name = (!v["shown_name"]) ?  v["sensor"] : v["shown_name"];
-              _tooltip += (v["show_in_panel"] && this.bold_italics_main_sensors) ?
-                " <i><b>" + name + "</b></i>\n" :
-                " " + name + "\n";
               let _value = 1.0*this.data["voltages"][v["sensor"]]["input"];
               if (v["user_formula"] && v["user_formula"].length > 0) {
                 let _formula_result = v["user_formula"].replace(/\$/g, _value);
                 _value = 1.0*eval(_formula_result)
               }
-              let str_value = this._formatted_voltage(_value).padStart(10, " ");
-              _tooltip += (this.bold_values) ?
-                "  <b>" + str_value + "</b>" :
-                "  " + str_value;
-
-              let _max_defined_by_user = v["max_by_user"];
-              let _min_defined_by_user = v["min_by_user"];
-
-              let _voltage_max = (_max_defined_by_user && _max_defined_by_user.length > 0 && !isNaN(_max_defined_by_user)) ? 1.0*_max_defined_by_user : 1.0*this._get_max_voltage(this.data["voltages"][v["sensor"]]);
-              let _voltage_min = (_min_defined_by_user && _min_defined_by_user.length > 0 && !isNaN(_min_defined_by_user)) ? 1.0*_min_defined_by_user : 1.0*this._get_min_voltage(this.data["voltages"][v["sensor"]]);
-
-              _tooltip += "  "+ _("min:") + " " + this._formatted_voltage(_voltage_min);
-              _tooltip += " ";
-              _tooltip += "  "+ _("max:") + " " + this._formatted_voltage(_voltage_max);
-              _tooltip += "\n";
+              let str_value = this._formatted_voltage(_value);
+              _tooltip += " <b>" + name.padEnd(10, " ") + "</b> " + str_value.padStart(7, " ") + "\n";
               str_value = null;
               name = null
             }
