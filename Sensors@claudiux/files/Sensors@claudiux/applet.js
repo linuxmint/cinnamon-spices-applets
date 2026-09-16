@@ -682,6 +682,59 @@ class SensorsApplet extends Applet.Applet {
   }
 
   /**
+   * getDefaultShownName
+   *
+   * Returns a user-friendly default name for a freshly detected sensor, based on the
+   * names of its chip and feature as reported by lm-sensors. Returns "" when no
+   * sensible name can be inferred, in which case the raw sensor name is kept and the
+   * user can still rename it from the settings.
+   */
+  getDefaultShownName(sensor) {
+    if (!sensor) return "";
+    sensor = "" + sensor;
+    let i = sensor.lastIndexOf(": ");
+    let chip = (i > 0) ? sensor.substring(0, i) : sensor;
+    let feature = (i > 0) ? sensor.substring(i + 2) : "";
+    let fc = ("" + feature).toLowerCase();
+
+    if (fc === "tctl" || fc === "tdie" || fc === "tjmax") return "CPU";
+    let m;
+    if ((m = fc.match(/^tccd(\d+)$/))) return "CPU CCD" + m[1];
+    if ((m = fc.match(/^core (\d+)$/))) return "CPU Core " + m[1];
+    if ((m = fc.match(/^package id (\d+)$/))) return (m[1] === "0") ? "CPU" : "CPU " + m[1];
+    if (fc.indexOf("cputemp") === 0) return "CPU";
+
+    if (fc === "composite") return "NVMe";
+    if ((m = fc.match(/^sensor (\d+)$/))) return "NVMe " + m[1];
+
+    if (fc === "edge" || fc === "gpu_temp") return "GPU";
+    if (fc === "junction" || fc === "junc" || fc === "hot spot" || fc === "hotspot") return "GPU Hot Spot";
+    if (fc === "mem" || fc === "memory" || fc === "mempt" || fc === "mem temp" || fc === "mem_tmp") return "GPU Memory";
+    if (fc === "pcie" || fc === "pcie temp" || fc === "pcie_tmp") return "GPU PCIe";
+    if (fc === "soctemp") return "GPU SoC";
+    if (fc === "vddgfx" || fc === "vddc" || fc === "vddci") return "GPU Vcore";
+    if (fc === "vddnb" || fc === "vddnbmv") return "GPU VSOC";
+
+    let chipL = chip.toLowerCase();
+    if (/^temp\d+$/.test(fc)) {
+      if (chipL.indexOf("drivetemp") > -1) return "Disk";
+      if (chipL.indexOf("nvme") > -1) return "NVMe";
+      if (chipL.indexOf("spd") > -1 || chipL.indexOf("ee1004") > -1) return "RAM";
+      if (chipL.indexOf("nvidia") > -1 || chipL.indexOf("geforce") > -1) return "GPU";
+      if (chipL.indexOf("amdgpu") > -1 || chipL.indexOf("radeon") > -1 || chipL.indexOf("nouveau") > -1 || chipL.indexOf("i915") > -1) return "GPU";
+      if (chipL.indexOf("mdio") > -1 || chipL.indexOf("r8169") > -1 || chipL.indexOf("r8168") > -1 || chipL.indexOf("8111") > -1 || chipL.indexOf("8125") > -1 || chipL.indexOf("e1000") > -1 || chipL.indexOf("igc") > -1 || chipL.indexOf("igb") > -1 || chipL.indexOf("atlantic") > -1 || chipL.indexOf("realtek") > -1) return "NIC";
+      if (chipL.indexOf("k10temp") > -1 || chipL.indexOf("coretemp") > -1 || chipL.indexOf("zenpower") > -1 || chipL.indexOf("k8temp") > -1 || chipL.indexOf("acpitz") > -1) return "CPU";
+      if (chipL.indexOf("nct677") > -1 || chipL.indexOf("nct679") > -1 || chipL.indexOf("nct6106") > -1 || chipL.indexOf("it87") > -1 || chipL.indexOf("it862") > -1 || chipL.indexOf("w83627") > -1 || chipL.indexOf("w83667") > -1 || chipL.indexOf("w83795") > -1 || chipL.indexOf("f7188") > -1 || chipL.indexOf("asb100") > -1 || chipL.indexOf("smsc") > -1 || chipL.indexOf("applesmc") > -1 || chipL.indexOf("aht10") > -1) return "Motherboard";
+    }
+
+    if ((m = fc.match(/^fan(\d+)$/))) return "Fan " + m[1];
+    if ((m = fc.match(/^intrusion(\d+)$/))) return "Intrusion " + m[1];
+    if ((m = fc.match(/^curr(\d+)$/))) return "Current " + m[1];
+
+    return "";
+  }
+
+  /**
    * populate_xxx_sensors_in_settings
    */
 
@@ -697,6 +750,7 @@ class SensorsApplet extends Applet.Applet {
 
     var ret = [];
     var _known_keys = [];
+    var _auto_used = {};
 
     for (let k of this.sensors_list[type].get_value()) {
       //~ let _sensor = k["sensor"].trim();
@@ -754,7 +808,15 @@ class SensorsApplet extends Applet.Applet {
       } else if (index > -1) {
         toPush["shown_name"] = (this.sensors_list[type].get_value())[index]["shown_name"]
       } else {
-        toPush["shown_name"] = ""
+        toPush["shown_name"] = "";
+        let _auto_name = this.getDefaultShownName(name);
+        if (_auto_name.length > 0) {
+          let _usage = (_auto_used[_auto_name] || 0) + 1;
+          _auto_used[_auto_name] = _usage;
+          if (_usage > 1 && !/\d+$/.test(_auto_name))
+            _auto_name = _auto_name + " " + _usage;
+          toPush["shown_name"] = _auto_name
+        }
       }
 
       if (Object.keys(toPush).length != 0)
