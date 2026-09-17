@@ -133,6 +133,7 @@
             "title": "Scene Presets",
             "keys": [
                 "show_default_in_context",
+                "scene_nav_count",
                 "scene_manager_widget"
             ]
         }
@@ -196,6 +197,19 @@
         "max": 100,
         "step": 1,
         "description": "List item label max chars"
+    },
+    "scene_nav_count": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "description": "Scene quick-switch capsule (0 = hidden)"
+    },
+    "_active_scene_name": {
+        "type": "entry",
+        "default": "",
+        "description": "Active scene name (internal, do not edit)"
     },
 
     "quit": {
@@ -422,7 +436,7 @@
         "description": "Grid label spacing",
         "dependency": "custom_grid_mode"
     },
-        "grid_label_max_chars": {
+    "grid_label_max_chars": {
         "type": "spinbutton",
         "default": 12,
         "min": 3,

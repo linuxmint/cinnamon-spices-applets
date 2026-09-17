@@ -26,8 +26,8 @@ In addition, it offers extra handy interactions:
   **Custom menu items**: Freely add any number of items, from `.desktop` files or custom commands
 - **网格布局**：可将自定义项以图标网格形式展示，适合作为快速启动面板  
   **Grid layout**: Display custom items as an icon grid, ideal as a quick launcher
-- **场景预设**：保存整套配置为命名场景，右键菜单中一键切换  
-  **Scene presets**: Save the whole configuration as named scenes and switch from the right-click menu
+- **场景预设**：保存整套配置为命名场景，右键菜单或胶囊导航栏一键切换  
+  **Scene presets**: Save the whole configuration as named scenes and switch from the right-click menu or capsule navigation bar
 
 ---
 
@@ -46,6 +46,8 @@ In addition, it offers extra handy interactions:
   **Menu item text size**: Adjust the text size of all items in the menu (0 = theme default)
 - **菜单项图标大小**：统一调整菜单内所有项的图标大小（16–48 像素）  
   **Menu item icon size**: Uniformly adjust the icon size of all items in the menu (16–48 pixels)
+- **菜单项标签最大字符数**：超出部分自动截断并显示省略号  
+  **Menu label max chars**: Labels longer than this are truncated with an ellipsis
 
 ### 内置菜单项 | Built-in Menu Items
 
@@ -60,6 +62,8 @@ In addition, it offers extra handy interactions:
 
 ### 自定义菜单项 | Custom Menu Items
 
+- **搜索**：工具栏右侧的搜索框支持按名称实时过滤列表（不区分大小写）  
+  **Search**: The search box in the toolbar filters the list by name in real time (case-insensitive)
 - **从 `.desktop` 添加应用**：点击列表工具栏的 **+** 按钮，打开文件选择器（默认路径 `/usr/share/applications`），选择任意 `.desktop` 文件即可自动提取名称、图标和启动命令  
   **Add from `.desktop`**: Click the **+** button in the list toolbar, choose any `.desktop` file (file chooser opens `/usr/share/applications` by default); name, icon and launch command are auto-extracted
 - **一键导入所有应用**：点击全选图标按钮，一键导入系统开始菜单中的所有应用程序（跳过已存在的同名项）。导入的项默认**不勾选**，方便你逐个勾选想显示的程序  
@@ -96,6 +100,20 @@ In addition, it offers extra handy interactions:
 - **文字间距**：图标与文字之间的间距  
   **Label spacing**: Gap between icon and label
 
+### 场景胶囊导航栏 | Scene Capsule Navigation Bar
+
+在全局设置中将"场景快捷切换按钮数"设为 1–5，菜单顶部会显示胶囊导航栏，分段显示各场景名称，当前激活的场景高亮显示。  
+Set "Scene quick-switch capsule" to 1–5 in global settings to show a segmented capsule bar at the top of the menu. Each segment displays a scene name; the active scene is highlighted.
+
+- **分段式显示**：每个场景占一个分段，所有分段共享圆角胶囊外框  
+  **Segmented display**: Each scene occupies one segment; all segments share a rounded capsule border
+- **动态宽度**：胶囊宽度根据场景数量自动调整  
+  **Dynamic width**: Capsule width adjusts automatically based on the number of scenes
+- **点击切换**：点击任意场景分段即可切换，菜单保持打开状态  
+  **Click to switch**: Click any segment to switch scenes; the menu stays open
+- **悬停高亮**：鼠标悬停时显示半透明背景  
+  **Hover highlight**: A semi-transparent background appears on hover
+
 ### 场景预设 | Scene Presets
 
 位于 **Scenes** 页，用来保存或切换整套配置（含面板图标、交互行为、内置项、自定义项、网格选项）。  
@@ -121,8 +139,8 @@ Located on the **Scenes** page; used to save or switch the whole configuration (
 
 ### 交互行为 | Interaction Behavior
 
-- **滚轮切换工作区**：勾选“使用鼠标滚轮切换工作区”后，悬停滚动滚轮即可循环切换工作区（默认关闭）。  
-  **Scroll to switch workspaces**: Enable `Switch workspace with mouse scroll` to cycle through workspaces (disabled by default).
+- **滚轮切换工作区**：勾选"使用鼠标滚轮切换工作区"后，悬停滚动滚轮即可循环切换工作区（默认关闭）。菜单打开时滚轮自动禁用，避免误操作。  
+  **Scroll to switch workspaces**: Enable `Switch workspace with mouse scroll` to cycle through workspaces (disabled by default). Scroll is automatically disabled while the menu is open.
 - **鼠标中键单击动作**：可选择中键点击时执行的动作：  
   **Middle click action**: Choose an action to perform:
   - `无` — 不执行任何操作  
@@ -151,6 +169,8 @@ Located on the **Scenes** page; used to save or switch the whole configuration (
   - Icon: `system-reboot`
   - Command: `cinnamon-session-quit --reboot`
 - **一键导入 + 勾选框工作流**：先点击全选按钮导入所有应用，然后逐个勾选想在面板菜单中显示的程序，未勾选的不会出现在菜单中，已勾选的自动置顶，非常方便管理大量应用。
+- **搜索过滤**：在自定义菜单项列表的搜索框中输入关键词，可按名称实时过滤，快速定位目标应用。
+- **场景胶囊导航栏**：在全局设置中将"场景快捷切换按钮数"设为 1–5，菜单顶部会显示胶囊导航栏，点击分段即可即时切换场景，菜单保持打开。
 - 网格模式下配合 `Hide built-in items`，可以将菜单变成类似 Dock 的应用启动器。
 - 图标输入框支持两种形式：
   - **系统图标名**（如 `firefox`、`system-shutdown`）
@@ -169,11 +189,11 @@ Located on the **Scenes** page; used to save or switch the whole configuration (
 - 扩展了交互功能、自定义菜单项、网格布局与场景预设  
   Extended with interaction features, custom menu items, grid layout, and scene presets
 - 自定义菜单项和场景预设的 UI 由独立的 Python 组件（`widgets.py`）提供：  
-  - `CustomAppList`：解析 `.desktop` 文件并管理列表  
+  - `CustomAppList`：解析 `.desktop` 文件并管理列表，支持按名称搜索过滤  
   - `SceneManager`：管理场景的保存 / 应用 / 复制 / 重命名 / 排序  
   - `IconPickerRow`：带预览的图标选择行  
   The UI for custom menu items and scenes is provided by a standalone Python widget (`widgets.py`):
-  - `CustomAppList`: parse `.desktop` files and manage the list
+  - `CustomAppList`: parse `.desktop` files and manage the list, with name-based search filtering
   - `SceneManager`: save / apply / duplicate / rename / reorder scenes
   - `IconPickerRow`: icon chooser row with live preview
 - 许可证：GPLv3  

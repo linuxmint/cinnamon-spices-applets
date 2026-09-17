@@ -231,6 +231,10 @@ msgid "Show default scene in context menu"
 msgstr "在右键菜单中显示默认场景"
 
 #: settings-schema.json
+msgid "Scene quick-switch capsule (0 = hidden)"
+msgstr "场景快速切换胶囊（0为隐藏）"
+
+#: settings-schema.json
 msgid "Internal flag (do not edit)"
 msgstr "内部标志（请勿修改）"
 

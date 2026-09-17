@@ -1,6 +1,6 @@
 // name： ShutdownMenu-change
 // description： Offers a shutdown menu with scroll workspace switching, middle-click actions, custom menu items, grid layout, and scene presets — unlocking more ways to play.
-// version: 1.4.5 (16-09-2026)
+// version: 1.5.1 (17-09-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
@@ -36,6 +36,12 @@ const CUSTOM_LIST_SCROLL_THRESHOLD = 20;
 // 名称截断的兜底值（设置未绑定时使用）
 const DEFAULT_MENU_LABEL_MAX_CHARS = 30;
 const DEFAULT_GRID_LABEL_MAX_CHARS = 12;
+// 菜单重建防抖延迟（ms）
+const REBUILD_DEBOUNCE_MS = 80;
+// 应用场景后恢复 _suppressRebuild 的延迟（ms），需大于 REBUILD_DEBOUNCE_MS
+const SUPPRESS_RESTORE_DELAY_MS = 200;
+// 应用场景后延迟重新打开菜单的等待时间（ms）
+const MENU_REOPEN_DELAY_MS = 100;
 
 // 首次运行时注入的默认自定义项（用户可随时删除）
 const DEFAULT_CUSTOM_ITEM = {
@@ -117,10 +123,15 @@ MyApplet.prototype = {
             this._scenesCache = null;
             // 面板符号图标大小的内存缓存；0 表示需要重新读取
             this._panelIconSizeCache = 0;
+            // 当前激活的场景名称，用于胶囊高亮
+            this._activeSceneName = null;
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
             this.menuManager.addMenu(this.menu);
+
+            // 加载自定义 CSS 样式
+            this._loadStylesheet();
 
             this.settings = new Settings.AppletSettings(this, UUID, instanceId);
             this._initSceneMenu();
@@ -155,6 +166,10 @@ MyApplet.prototype = {
             this.createMenu();
 
             this.actor.connect('scroll-event', this._on_scroll_event.bind(this));
+
+            // 监控场景文件变化，实现实时更新胶囊
+            this._scenesMonitor = null;
+            this._setupScenesFileMonitor();
         }
         catch (e) {
             global.logError(e);
@@ -167,10 +182,22 @@ MyApplet.prototype = {
             try { GLib.source_remove(this._rebuildMenuId); } catch (e) {}
             this._rebuildMenuId = 0;
         }
+        if (this._scenesMonitor) {
+            try { this._scenesMonitor.cancel(); } catch (e) {}
+            this._scenesMonitor = null;
+        }
         if (this._sceneSubmenu) {
             try { this._sceneSubmenu.destroy(); } catch (e) {}
             this._sceneSubmenu = null;
         }
+        // 卸载自定义 CSS
+        try {
+            let cssFile = Gio.file_new_for_path(
+                this.metadata.path + '/applet.css');
+            let themeContext = St.ThemeContext.get_for_stage(global.stage);
+            let theme = themeContext.get_theme();
+            theme.unload_stylesheet(cssFile);
+        } catch (e) {}
     },
 
     // 绑定所有设置项
@@ -197,6 +224,7 @@ MyApplet.prototype = {
             ["menu_icon_size", "menu_icon_size"],
             ["menu_label_max_chars", "menu_label_max_chars"],
             ["grid_label_max_chars", "grid_label_max_chars"],
+            ["scene_nav_count", "scene_nav_count"],
             ["custom_grid_mode", "custom_grid_mode"],
             ["custom_grid_columns", "custom_grid_columns"],
             ["custom_grid_show_label", "custom_grid_show_label"],
@@ -224,6 +252,15 @@ MyApplet.prototype = {
             "custom_items_initialized", "custom_items_initialized", null, null);
         this.settings.bindProperty(Settings.BindingDirection.IN,
             "show_default_in_context", "show_default_in_context", null, null);
+
+        // 内部设置：活跃场景名，用于胶囊高亮（设置界面也可写入）
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "_active_scene_name", "_active_scene_name", (key) => {
+                this._activeSceneName = this._active_scene_name || null;
+                if (this._segScenes) {
+                    this._updateCapsuleHighlight(this._segScenes);
+                }
+            }, null);
     },
 
     // 首次运行时把默认的 Neofetch 项写入 custom_items
@@ -243,6 +280,24 @@ MyApplet.prototype = {
         this.settings.setValue("custom_items", defaults);
         this.custom_items_initialized = true;
         this.settings.setValue("custom_items_initialized", true);
+    },
+
+    // 加载自定义 CSS 样式表
+    _loadStylesheet: function() {
+        try {
+            let cssPath = this.metadata.path + '/applet.css';
+            let cssFile = Gio.file_new_for_path(cssPath);
+            if (!cssFile.query_exists(null)) {
+                global.log('ShutdownMenu-change: CSS file not found: ' + cssPath);
+                return;
+            }
+            let themeContext = St.ThemeContext.get_for_stage(global.stage);
+            let theme = themeContext.get_theme();
+            theme.load_stylesheet(cssFile);
+            global.log('ShutdownMenu-change: CSS loaded successfully');
+        } catch (e) {
+            global.logError('ShutdownMenu-change CSS load error: ' + e.message);
+        }
     },
 
     // 同步检查文件是否存在（仅用于本地图标路径，代价可接受）
@@ -339,12 +394,341 @@ MyApplet.prototype = {
         return size;
     },
 
+    // ============================================================
+    // 场景胶囊导航栏
+    // ============================================================
+
+    // 单个胶囊居中，内部分段显示场景名，当前场景高亮
+    // 切换场景时不关闭菜单，只局部更新自定义项部分
+    // 监控场景文件，变化时清缓存并刷新胶囊
+    _setupScenesFileMonitor: function() {
+        try {
+            let path = GLib.get_user_data_dir() + SCENES_REL_PATH;
+            let file = Gio.file_new_for_path(path);
+            this._scenesMonitor = file.monitor_file(
+                Gio.FileMonitorFlags.NONE, null);
+            this._scenesMonitor.connect('changed', (monitor, file, other, event) => {
+                if (event === Gio.FileMonitorEvent.CHANGED ||
+                    event === Gio.FileMonitorEvent.CREATED) {
+                    if (this._suppressRebuild) return;
+                    if (!this.menu) return;
+                    this._scenesFileMtime = 0;
+                    this._scenesCache = null;
+                    if (this._sceneCapsuleSection) {
+                        try {
+                            this.menu.removeMenuItem(this._sceneCapsuleSection);
+                        } catch (e) {}
+                        try { this._sceneCapsuleSection.destroy(); }
+                        catch (e) {}
+                        this._sceneCapsuleSection = null;
+                    }
+                    this._segBtns = null;
+                    this._segWrappers = null;
+                    this._segScenes = null;
+                    this._addSceneNavBar();
+                }
+            });
+        } catch (e) {
+            global.logError('ShutdownMenu-change: scenes monitor error: ' + e.message);
+        }
+    },
+
+    _addSceneNavBar: function() {
+        let count = parseInt(this.scene_nav_count, 10);
+        if (isNaN(count) || count <= 0) return;
+
+        // removeAll() 会销毁旧 section，清理失效引用
+        this._sceneCapsuleSection = null;
+
+        // 每次清缓存，确保读到最新文件（场景顺序/数目可能已变）
+        this._scenesFileMtime = 0;
+        this._scenesCache = null;
+
+        // 读取场景文件
+        let scenes = [];
+        try {
+            let path = GLib.get_user_data_dir() + SCENES_REL_PATH;
+            let file = Gio.file_new_for_path(path);
+            if (!file.query_exists(null)) return;
+
+            let [ok, contents] = file.load_contents(null);
+            if (!ok) return;
+            let text = '';
+            try {
+                text = new TextDecoder('utf-8').decode(contents);
+            } catch (e) {
+                text = imports.byteArray.ByteArray.toString(contents);
+            }
+            let data = JSON.parse(text);
+            if (!Array.isArray(data)) return;
+            scenes = data.filter(p => p && p.name);
+        } catch (e) {
+            return;
+        }
+        if (scenes.length === 0) return;
+
+        // 只取前 N 个
+        scenes = scenes.slice(0, count);
+
+        let textSize = parseInt(this.menu_text_size, 10);
+        if (isNaN(textSize) || textSize <= 0) textSize = 0;
+
+        // 检测当前激活的场景（从 settings 读取，确保设置界面应用场景后也能正确高亮）
+        let activeIdx = -1;
+        try {
+            this._activeSceneName = this._active_scene_name || null;
+        } catch (e) {}
+        if (this._activeSceneName) {
+            for (let i = 0; i < scenes.length; i++) {
+                if (scenes[i].name === this._activeSceneName) {
+                    activeIdx = i;
+                    break;
+                }
+            }
+        }
+
+        // 胶囊宽度根据场景数动态计算：基数 + 每段约 55px
+        let capsuleWidth = Math.max(180, 100 + scenes.length * 55);
+        // 圆角半径：胶囊高度约 34px 的一半 = 14px
+        let capsuleRadius = 14;
+
+        // 外层容器：圆角胶囊背景，居中显示
+        let outerBox = new St.BoxLayout({
+            vertical: false,
+            x_expand: true,
+            y_expand: true,
+            x_align: Clutter.ActorAlign.CENTER
+        });
+        outerBox.set_style(
+            'border-radius: ' + capsuleRadius + 'px; ' +
+            'min-width: ' + capsuleWidth + 'px; max-width: ' + capsuleWidth + 'px; ' +
+            'min-height: 32px; ' +
+            'border: 1px solid rgba(255,255,255,0.15); ' +
+            'background-color: rgba(0,0,0,0.15); ' +
+            'background-image: none;'
+        );
+        // 横向等宽排列
+        let hbox = new St.BoxLayout({
+            vertical: false,
+            x_expand: true,
+            y_expand: true
+        });
+
+        // 保存引用，供点击时原地刷新高亮
+        let segBtns = [];
+        let segWrappers = [];
+
+        scenes.forEach((preset, idx) => {
+            let isActive = (idx === activeIdx);
+
+            // wrapper：负责背景色和圆角，被胶囊 clip_path 裁切
+            let wrapper = new St.BoxLayout({
+                vertical: true,
+                x_expand: true,
+                y_expand: true,
+                style: 'min-height: 30px;'
+            });
+
+            // 按钮：透明，仅处理点击和悬停
+            let btn = new St.Button({
+                x_expand: true,
+                y_expand: true,
+                can_focus: true
+            });
+            btn.set_style('background-image: none; border: none; background-color: transparent; min-height: 28px;');
+
+            let label = new St.Label({
+                text: preset.name,
+                x_align: Clutter.ActorAlign.CENTER,
+                y_align: Clutter.ActorAlign.CENTER,
+                x_expand: true
+            });
+            try {
+                label.get_clutter_text().set_ellipsize(Pango.EllipsizeMode.END);
+            } catch (e) {}
+            if (textSize > 0) {
+                label.set_style('font-size: ' + textSize + 'px;');
+            }
+            btn.set_child(label);
+
+            // wrapper 背景色函数：所有段全圆角
+            function wrapperStyle(bg) {
+                let br = 'border-radius: ' + capsuleRadius + 'px;';
+                return 'background-image: none; border: none; min-height: 30px;' +
+                    ' background-color: ' + bg + ';' + br;
+            }
+
+            // 初始化背景
+            wrapper.set_style(wrapperStyle(
+                isActive ? 'rgba(255,255,255,0.3)' : 'transparent'));
+
+            // 悬停高亮
+            btn._enterId = btn.connect('enter-event', () => {
+                wrapper.set_style(wrapperStyle(
+                    isActive ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.1)'));
+            });
+            btn._leaveId = btn.connect('leave-event', () => {
+                wrapper.set_style(wrapperStyle(
+                    isActive ? 'rgba(255,255,255,0.3)' : 'transparent'));
+            });
+
+            // 点击切换场景
+            btn.connect('clicked', () => {
+                this._activeSceneName = preset.name || null;
+                // _applyScene 内部已处理 _suppressRebuild 和胶囊高亮更新
+                this._applyScene(preset);
+            });
+
+            wrapper.add_child(btn);
+            hbox.add_child(wrapper);
+            segBtns.push(btn);
+            segWrappers.push(wrapper);
+        });
+
+        outerBox.add_child(hbox);
+
+        let section = new PopupMenu.PopupMenuSection();
+        section.actor.add_actor(outerBox);
+
+        // 存储胶囊引用，供刷新时使用
+        this._sceneCapsuleSection = section;
+        this._segBtns = segBtns;
+        this._segWrappers = segWrappers;
+        this._segScenes = scenes;
+        this._capsuleRadius = capsuleRadius;
+
+        // 始终插入位置 0（菜单顶部），避免刷新后跑到末尾
+        try {
+            this.menu.addMenuItem(section, 0);
+        } catch (e) {
+            this.menu.addMenuItem(section);
+        }
+    },
+
+    // 原地更新胶囊高亮状态，不重建胶囊，避免菜单收起
+    _updateCapsuleHighlight: function(scenes) {
+        if (!this._segWrappers || !this._segBtns) return;
+        let r = this._capsuleRadius || 14;
+
+        // 检查 _activeSceneName 是否在当前胶囊展示范围内
+        let foundInCapsule = false;
+        if (this._activeSceneName) {
+            for (let j = 0; j < scenes.length; j++) {
+                if (scenes[j] && scenes[j].name === this._activeSceneName) {
+                    foundInCapsule = true;
+                    break;
+                }
+            }
+        }
+
+        for (let i = 0; i < this._segWrappers.length; i++) {
+            let isActive = foundInCapsule &&
+                (scenes[i] && scenes[i].name === this._activeSceneName);
+
+            // 圆角：所有段全圆角
+            let br = 'border-radius: ' + r + 'px;';
+
+            let bg = isActive ? 'rgba(255,255,255,0.3)' : 'transparent';
+            let wrapper = this._segWrappers[i];
+            wrapper.set_style(
+                'background-image: none; border: none; min-height: 30px;' +
+                ' background-color: ' + bg + ';' + br
+            );
+
+            // 更新悬停闭包中的 isActive
+            let w = wrapper;
+            let a = isActive;
+            let btn = this._segBtns[i];
+            btn.disconnect(btn._enterId);
+            btn.disconnect(btn._leaveId);
+            btn._enterId = btn.connect('enter-event', () => {
+                w.set_style(
+                    'background-image: none; border: none; min-height: 30px;' +
+                    ' background-color: ' + (a ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.1)') + ';' + br
+                );
+            });
+            btn._leaveId = btn.connect('leave-event', () => {
+                w.set_style(
+                    'background-image: none; border: none; min-height: 30px;' +
+                    ' background-color: ' + (a ? 'rgba(255,255,255,0.3)' : 'transparent') + ';' + br
+                );
+            });
+        }
+    },
+
+    // 检测当前激活的场景：逐一比对保存的快照与当前设置
+    // 返回匹配的场景索引，无匹配返回 -1
+    _findActiveScene: function(scenes) {
+        for (let i = 0; i < scenes.length; i++) {
+            let preset = scenes[i];
+            if (!preset || !preset.data) continue;
+            try {
+                let snapshot = JSON.parse(preset.data);
+                let match = true;
+                // 先快速比对 custom_items 长度
+                let curItems = this.custom_items || [];
+                let savItems = snapshot['custom_items'] || [];
+                if (curItems.length !== savItems.length) {
+                    match = false;
+                } else {
+                    for (let key in snapshot) {
+                        if (key === 'custom_items') {
+                            // 长度已比过，逐项比 name + command 避免完整 JSON 序列化
+                            for (let j = 0; j < curItems.length; j++) {
+                                let c = curItems[j] || {};
+                                let s = savItems[j] || {};
+                                if (c.name !== s.name || c.command !== s.command ||
+                                    c.icon !== s.icon || c.pinned !== s.pinned) {
+                                    match = false;
+                                    break;
+                                }
+                            }
+                        } else {
+                            if (this[key] !== snapshot[key]) {
+                                match = false;
+                                break;
+                            }
+                        }
+                        if (!match) break;
+                    }
+                }
+                if (match) return i;
+            } catch (e) {
+                continue;
+            }
+        }
+        return -1;
+    },
+
+    // 刷新胶囊高亮：移除旧胶囊，重建新胶囊（含新的高亮状态）
+    _refreshSceneCapsule: function() {
+        if (this._sceneCapsuleSection) {
+            try { this.menu.removeMenuItem(this._sceneCapsuleSection); }
+            catch (e) {}
+            try { this._sceneCapsuleSection.destroy(); } catch (e) {}
+            this._sceneCapsuleSection = null;
+        }
+        this._segBtns = null;
+        this._segWrappers = null;
+        this._segScenes = null;
+        this._scenesFileMtime = 0;
+        this._scenesCache = null;
+        this._addSceneNavBar();
+    },
+
+    // ============================================================
+    // 主菜单构建
+    // ============================================================
+
     // 构建主菜单
-    // 结构： [自定义项] [分隔线] [内置项] [分隔线] [自定义项]
+    // 结构： [胶囊导航栏] [自定义项 section] [分隔线] [内置项]
     // 自定义项可在内置项之上或之下，由 custom_position 决定
+    // _customSection 存储引用，供 _updateCustomItems 局部重建
     createMenu: function() {
         if (!this.menu) return;
         this.menu.removeAll();
+        // 菜单宽度始终大于胶囊，留出边距
+        this.menu.actor.set_style('min-width: 320px;');
 
         let hasCustom = this.custom_items && this.custom_items.some(
             item => item && item.name && item.pinned !== false &&
@@ -355,8 +739,22 @@ MyApplet.prototype = {
             (this.quit_enable || this.log_out_enable || this.screen_lock_enable);
         let customAbove = (this.custom_position === 0);
 
+        // 胶囊导航栏：始终在自定义项上方
+        this._addSceneNavBar();
+
+        // 胶囊与自定义项之间的间距
+        if (this.scene_nav_count > 0 && (hasCustom || !hideBuiltin)) {
+            let spacer = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+            spacer.actor.set_style('min-height: 4px; padding: 0;');
+            this.menu.addMenuItem(spacer);
+        }
+
+        // 创建自定义项 section（供局部重建）
+        this._customSection = new PopupMenu.PopupMenuSection();
+
         if (hasCustom && customAbove) {
-            this._addCustomItems();
+            this._addCustomItems(this._customSection);
+            this.menu.addMenuItem(this._customSection);
             this._addSeparatorIf(this.show_custom_separator && hasBuiltin);
         }
 
@@ -366,13 +764,19 @@ MyApplet.prototype = {
 
         if (hasCustom && !customAbove) {
             this._addSeparatorIf(this.show_custom_separator && hasBuiltin);
-            this._addCustomItems();
+            this.menu.addMenuItem(this._customSection);
+            this._addCustomItems(this._customSection);
+        }
+
+        // 没有自定义项时也要加入（保持引用有效）
+        if (!hasCustom) {
+            this.menu.addMenuItem(this._customSection);
         }
     },
 
-    _addSeparatorIf: function(condition) {
+    _addSeparatorIf: function(condition, parent) {
         if (condition) {
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            (parent || this.menu).addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         }
     },
 
@@ -389,11 +793,33 @@ MyApplet.prototype = {
         }
     },
 
-    _addCustomItems: function() {
+    _addCustomItems: function(parent) {
         if (this.custom_grid_mode) {
-            this._addCustomItemsGrid();
+            this._addCustomItemsGrid(parent);
         } else {
-            this._addCustomItemsList();
+            this._addCustomItemsList(parent);
+        }
+    },
+
+    // 局部重建自定义项 section，不重建整个菜单
+    // 用于场景切换时保持菜单打开状态
+    _updateCustomItems: function() {
+        if (!this._customSection) return;
+
+        // 临时禁用菜单关闭：销毁子元素触发的 leave-event 会导致菜单收起
+        // 覆盖 close 方法为空操作，重建后恢复
+        let savedClose = this.menu.close;
+        this.menu.close = function() {};
+
+        try {
+            // 清除 section 内所有子 actor
+            let children = this._customSection.actor.get_children();
+            for (let i = children.length - 1; i >= 0; i--) {
+                children[i].destroy();
+            }
+            this._addCustomItems(this._customSection);
+        } finally {
+            this.menu.close = savedClose;
         }
     },
 
@@ -401,8 +827,28 @@ MyApplet.prototype = {
     // 列表模式
     // ============================================================
 
+    // 将 actor 包装进 ScrollView，统一滚动条事件处理
+    _wrapInScrollView: function(actor, maxHeight) {
+        let scrollView = new St.ScrollView({
+            style_class: 'vfade menu-applications-scrollbox'
+        });
+        scrollView.add_actor(actor);
+        scrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
+        scrollView.set_clip_to_allocation(true);
+        scrollView.set_mouse_scrolling(true);
+        scrollView.style = 'max-height: ' + maxHeight + 'px;';
+
+        try {
+            let vscroll = scrollView.get_vscroll_bar();
+            vscroll.connect('scroll-start', () => { this.menu.passEvents = true; });
+            vscroll.connect('scroll-stop', () => { this.menu.passEvents = false; });
+        } catch (e) {}
+
+        return scrollView;
+    },
+
     // 列表模式入口：按数量分流到普通列表或滚动容器
-    _addCustomItemsList: function() {
+    _addCustomItemsList: function(parent) {
         let visibleItems = this.custom_items.filter(item =>
             item && item.name && item.pinned !== false &&
             (item.name === SEPARATOR_ROW_NAME ? !item.command : item.command)
@@ -410,31 +856,49 @@ MyApplet.prototype = {
 
         let enableScroll = this.custom_list_scroll_enable !== false;
         if (enableScroll && visibleItems.length > CUSTOM_LIST_SCROLL_THRESHOLD) {
-            this._addCustomItemsListScroll(visibleItems);
+            this._addCustomItemsListScroll(visibleItems, parent);
         } else {
-            this._addCustomItemsListPlain(visibleItems);
+            this._addCustomItemsListPlain(visibleItems, parent);
         }
     },
 
     // 普通列表：标准菜单项，支持键盘导航
-    _addCustomItemsListPlain: function(items) {
+    // 用 PopupMenuSection 包裹所有项，与网格模式一致
+    // _updateCustomItems 销毁 section.actor 时一次性销毁，不触发逐个 mouse-leave
+    _addCustomItemsListPlain: function(items, parent) {
+        let section = new PopupMenu.PopupMenuSection();
+
+        // 用内部 section 承载菜单项（PopupMenuItem 需要 addMenuItem）
+        let innerSection = new PopupMenu.PopupMenuSection();
+
         items.forEach(item => {
             if (!item || !item.name) return;
             if (item.pinned === false) return;
 
             if (item.name === SEPARATOR_ROW_NAME && !item.command) {
-                this._addSeparatorIf(true);
+                this._addSeparatorIf(true, innerSection);
                 return;
             }
 
             if (item.command) {
-                this._createMenuItem(item.name, item.icon || DEFAULT_CUSTOM_ICON, item.command);
+                this._createMenuItem(item.name, item.icon || DEFAULT_CUSTOM_ICON, item.command, innerSection);
             }
         });
+
+        // 应用自定义项最大高度：包 ScrollView
+        let maxHeight = parseInt(this.custom_list_max_height, 10);
+        if (!isNaN(maxHeight) && maxHeight > 100) {
+            let scrollView = this._wrapInScrollView(innerSection.actor, maxHeight);
+            section.actor.add_actor(scrollView);
+        } else {
+            section.actor.add_actor(innerSection.actor);
+        }
+
+        (parent || this.menu).addMenuItem(section);
     },
 
     // 滚动列表（参考 Cinnamenu 的 AppsView 结构）
-    _addCustomItemsListScroll: function(items) {
+    _addCustomItemsListScroll: function(items, parent) {
         try {
             let maxHeight = parseInt(this.custom_list_max_height, 10);
             if (isNaN(maxHeight) || maxHeight < 100) maxHeight = 400;
@@ -518,33 +982,14 @@ MyApplet.prototype = {
             });
 
             // ScrollView 包装
-            let scrollView = new St.ScrollView({
-                style_class: 'vfade',
-                x_expand: true,
-                y_expand: false
-            });
-            scrollView.add_actor(innerBox);
-            scrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
-            scrollView.set_clip_to_allocation(true);
-            scrollView.set_mouse_scrolling(true);
+            let scrollView = this._wrapInScrollView(innerBox, maxHeight);
 
-            // 监听滚动条事件，避免菜单拦截滚动
-            try {
-                let vscroll = scrollView.get_vscroll_bar();
-                vscroll.connect('scroll-start', () => { this.menu.passEvents = true; });
-                vscroll.connect('scroll-stop', () => { this.menu.passEvents = false; });
-            } catch (e) {}
-
-            // 固定高度
-            scrollView.height = maxHeight;
-
-            // 用 PopupMenuSection 承载
             let section = new PopupMenu.PopupMenuSection();
             section.actor.add_actor(scrollView);
-            this.menu.addMenuItem(section);
+            (parent || this.menu).addMenuItem(section);
         } catch (e) {
             global.logError('ShutdownMenu-change list scroll error: ' + e.message);
-            this._addCustomItemsListPlain(items);
+            this._addCustomItemsListPlain(items, parent);
         }
     },
 
@@ -555,7 +1000,7 @@ MyApplet.prototype = {
     // 网格模式：图标 + 可选文字，用 Clutter.GridLayout 布局
     // 网格模式忽略分隔线
     // 只有"项数超过阈值 且 启用了滚动"时才包 ScrollView
-    _addCustomItemsGrid: function() {
+    _addCustomItemsGrid: function(parent) {
         let items = this.custom_items.filter(item =>
             item && item.name && item.command && item.pinned !== false
         );
@@ -685,21 +1130,7 @@ MyApplet.prototype = {
                 });
                 bugfixBox.add_actor(wrapperBox);
 
-                let scrollView = new St.ScrollView({
-                    style_class: 'vfade menu-applications-scrollbox'
-                });
-                scrollView.add_actor(bugfixBox);
-                scrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
-                scrollView.set_clip_to_allocation(true);
-                scrollView.set_mouse_scrolling(true);
-                scrollView.height = maxHeight;
-
-                // 监听滚动条事件，避免菜单拦截滚动
-                try {
-                    let vscroll = scrollView.get_vscroll_bar();
-                    vscroll.connect('scroll-start', () => { this.menu.passEvents = true; });
-                    vscroll.connect('scroll-stop', () => { this.menu.passEvents = false; });
-                } catch (e) {}
+                let scrollView = this._wrapInScrollView(bugfixBox, maxHeight);
 
                 section.actor.add_actor(scrollView);
             } else {
@@ -707,10 +1138,10 @@ MyApplet.prototype = {
                 section.actor.add_actor(gridBox);
             }
 
-            this.menu.addMenuItem(section);
+            (parent || this.menu).addMenuItem(section);
         } catch (e) {
             global.logError('ShutdownMenu-change grid error: ' + e.message);
-            this._addCustomItemsList();
+            this._addCustomItemsList(parent);
         }
     },
 
@@ -720,7 +1151,7 @@ MyApplet.prototype = {
 
     // 通用菜单项：图标 + 文字 + 命令
     // 文字过长时截断并加省略号
-    _createMenuItem: function(displayName, iconName, command) {
+    _createMenuItem: function(displayName, iconName, command, parent) {
         let menuItem = new PopupMenu.PopupBaseMenuItem();
         let size = this.menu_icon_size || 24;
 
@@ -749,7 +1180,7 @@ MyApplet.prototype = {
         menuItem.connect("activate", function() {
             Util.trySpawnCommandLine(command);
         });
-        this.menu.addMenuItem(menuItem);
+        (parent || this.menu).addMenuItem(menuItem);
     },
 
     on_applet_clicked: function(event) {
@@ -780,14 +1211,21 @@ MyApplet.prototype = {
 
     // 通过 gsettings 切换 Nemo 桌面图标显示
     _toggleDesktopIcons: function() {
-        let nemoSettings = new Gio.Settings({ schema_id: 'org.nemo.desktop' });
-        let current = nemoSettings.get_boolean('show-desktop-icons');
-        nemoSettings.set_boolean('show-desktop-icons', !current);
+        try {
+            let nemoSettings = new Gio.Settings({ schema_id: 'org.nemo.desktop' });
+            let current = nemoSettings.get_boolean('show-desktop-icons');
+            nemoSettings.set_boolean('show-desktop-icons', !current);
+        } catch (e) {
+            global.log('ShutdownMenu-change: failed to toggle desktop icons: ' + e.message);
+        }
     },
 
     // 滚轮事件：悬停时切换工作区（需 scroll_switch 开启）
     _on_scroll_event: function(actor, event) {
         if (!this.scroll_switch) {
+            return true;
+        }
+        if (this.menu && this.menu.isOpen) {
             return true;
         }
 
@@ -911,7 +1349,8 @@ MyApplet.prototype = {
     // 应用场景：
     // - preset._isDefault 为真 → 使用内置的 DEFAULT_SNAPSHOT
     // - 否则从 preset.data 反序列化
-    // 先更新类属性（IN 方向不会自动同步），再写盘，最后立即重建菜单
+    // 先更新类属性（IN 方向不会自动同步），再写盘
+    // 最后只局部更新自定义项部分，不重建整个菜单，保持菜单打开
     _applyScene: function(preset) {
         let snapshot;
         if (preset && preset._isDefault) {
@@ -923,70 +1362,98 @@ MyApplet.prototype = {
                 return;
             }
         }
-
-        let propMap = {
-            'quit': 'quit_enable',
-            'quit_icon': 'quit_icon',
-            'quit_cmd': 'quit_cmd',
-            'show_separator': 'show_separator',
-            'log_out': 'log_out_enable',
-            'log_out_icon': 'log_out_icon',
-            'log_out_cmd': 'log_out_cmd',
-            'screen_lock': 'screen_lock_enable',
-            'screen_lock_icon': 'screen_lock_icon',
-            'screen_lock_cmd': 'screen_lock_cmd',
-            'custom_items': 'custom_items',
-            'custom_position': 'custom_position',
-            'show_custom_separator': 'show_custom_separator',
-            'menu_text_size': 'menu_text_size',
-            'menu_icon_size': 'menu_icon_size',
-            'menu_label_max_chars': 'menu_label_max_chars',
-            'grid_label_max_chars': 'grid_label_max_chars',
-            'custom_grid_mode': 'custom_grid_mode',
-            'custom_grid_columns': 'custom_grid_columns',
-            'custom_grid_show_label': 'custom_grid_show_label',
-            'custom_grid_icon_size': 'custom_grid_icon_size',
-            'custom_grid_hide_builtin': 'custom_grid_hide_builtin',
-            'custom_grid_label_spacing': 'custom_grid_label_spacing',
-            'custom_grid_cell_width': 'custom_grid_cell_width',
-            'custom_grid_cell_height': 'custom_grid_cell_height',
-            'scroll_switch': 'scroll_switch',
-            'middle_click_action': 'middle_click_action',
-            'panel_icon': 'panel_icon',
-            'icon_size': 'icon_size',
-        };
-
-        for (let key in snapshot) {
-            let prop = propMap[key];
-            if (prop) {
-                this[prop] = snapshot[key];
+        // 抑制菜单重建，避免 settings.setValue 触发 _rebuildMenu -> createMenu 导致菜单收起
+        let wasSuppressed = this._suppressRebuild;
+        this._suppressRebuild = true;
+        try {
+            let propMap = {
+                'quit': 'quit_enable',
+                'quit_icon': 'quit_icon',
+                'quit_cmd': 'quit_cmd',
+                'show_separator': 'show_separator',
+                'log_out': 'log_out_enable',
+                'log_out_icon': 'log_out_icon',
+                'log_out_cmd': 'log_out_cmd',
+                'screen_lock': 'screen_lock_enable',
+                'screen_lock_icon': 'screen_lock_icon',
+                'screen_lock_cmd': 'screen_lock_cmd',
+                'custom_items': 'custom_items',
+                'custom_position': 'custom_position',
+                'show_custom_separator': 'show_custom_separator',
+                'menu_text_size': 'menu_text_size',
+                'menu_icon_size': 'menu_icon_size',
+                'menu_label_max_chars': 'menu_label_max_chars',
+                'grid_label_max_chars': 'grid_label_max_chars',
+                'custom_grid_mode': 'custom_grid_mode',
+                'custom_grid_columns': 'custom_grid_columns',
+                'custom_grid_show_label': 'custom_grid_show_label',
+                'custom_grid_icon_size': 'custom_grid_icon_size',
+                'custom_grid_hide_builtin': 'custom_grid_hide_builtin',
+                'custom_grid_label_spacing': 'custom_grid_label_spacing',
+                'custom_grid_cell_width': 'custom_grid_cell_width',
+                'custom_grid_cell_height': 'custom_grid_cell_height',
+                'scroll_switch': 'scroll_switch',
+                'middle_click_action': 'middle_click_action',
+                'panel_icon': 'panel_icon',
+                'icon_size': 'icon_size',
+            };
+            for (let key in snapshot) {
+                let prop = propMap[key];
+                if (prop) {
+                    this[prop] = snapshot[key];
+                }
+                try {
+                    this.settings.setValue(key, snapshot[key]);
+                } catch (e) {
+                }
             }
+            // icon_size 可能变了，清缓存防止旧值生效
+            if ('icon_size' in snapshot) {
+                this._panelIconSizeCache = 0;
+            }
+            this._updatePanelIcon();
+            // 记录当前激活的场景名，用于胶囊高亮
+            this._activeSceneName = preset.name || null;
             try {
-                this.settings.setValue(key, snapshot[key]);
-            } catch (e) {
+                this.settings.setValue('_active_scene_name', preset.name || '');
+            } catch (e) {}
+            // 局部更新自定义项，不重建整个菜单，保持菜单打开
+            this._updateCustomItems();
+            // 显式刷新胶囊高亮（callback 可能有异步延迟，这里兜底）
+            if (this._segScenes) {
+                this._updateCapsuleHighlight(this._segScenes);
+            }
+            // 延迟重新打开菜单，防止内容变化导致菜单收起
+            GLib.timeout_add(GLib.PRIORITY_DEFAULT, MENU_REOPEN_DELAY_MS, () => {
+                try {
+                    if (this.menu && !this.menu.isOpen) {
+                        this.menu.open();
+                    }
+                } catch (e) {}
+                return GLib.SOURCE_REMOVE;
+            });
+        } finally {
+            // 恢复 _suppressRebuild（仅当调用前未抑制时）
+            if (!wasSuppressed) {
+                GLib.timeout_add(GLib.PRIORITY_DEFAULT, SUPPRESS_RESTORE_DELAY_MS, () => {
+                    this._suppressRebuild = false;
+                    return GLib.SOURCE_REMOVE;
+                });
             }
         }
-
-        // icon_size 可能变了，清缓存防止旧值生效
-        if ('icon_size' in snapshot) {
-            this._panelIconSizeCache = 0;
-        }
-
-        this._updatePanelIcon();
-
-        // 立即重建，不走防抖，让用户感觉是即时切换
-        this.createMenu();
     },
 
-    // 菜单重建防抖：80ms 内的多次调用合并为一次
+    // 菜单重建防抖：REBUILD_DEBOUNCE_MS 内的多次调用合并为一次
     // 场景应用时会有多个设置同时变更，避免重复构建菜单
     _rebuildMenu: function() {
+        if (this._suppressRebuild) return;
         if (this._rebuildMenuId) {
             GLib.source_remove(this._rebuildMenuId);
             this._rebuildMenuId = 0;
         }
-        this._rebuildMenuId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 80, () => {
+        this._rebuildMenuId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, REBUILD_DEBOUNCE_MS, () => {
             this._rebuildMenuId = 0;
+            if (this._suppressRebuild) return GLib.SOURCE_REMOVE;
             this.createMenu();
             return GLib.SOURCE_REMOVE;
         });
