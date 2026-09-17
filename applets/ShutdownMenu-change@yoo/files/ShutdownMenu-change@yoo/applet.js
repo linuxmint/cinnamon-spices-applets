@@ -1,6 +1,6 @@
 // name： ShutdownMenu-change
 // description： Offers a shutdown menu with scroll workspace switching, middle-click actions, custom menu items, grid layout, and scene presets — unlocking more ways to play.
-// version: 1.5.3 (17-09-2026)
+// version: 1.5.4 (17-09-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
