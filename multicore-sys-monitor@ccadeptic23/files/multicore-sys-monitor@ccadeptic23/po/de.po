@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-06-30 17:25+0200\n"
-"PO-Revision-Date: 2026-05-07 19:47+0200\n"
+"PO-Revision-Date: 2026-09-17 07:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -360,7 +360,7 @@ msgstr "Shared"
 
 #. 5.6/applet.js:2136 5.6/applet.js:2177
 msgid "ZRAM"
-msgstr ""
+msgstr "ZRAM"
 
 #. 5.6/applet.js:2184
 #, fuzzy
@@ -369,11 +369,11 @@ msgstr "Festplatten"
 
 #. 5.6/applet.js:2185
 msgid "Data"
-msgstr ""
+msgstr "Daten"
 
 #. 5.6/applet.js:2186
 msgid "Compressed"
-msgstr ""
+msgstr "Komprimiert"
 
 #. 5.6/applet.js:2242
 msgid "CPUs"
@@ -648,7 +648,7 @@ msgstr "Hintergrundfarbe"
 
 #. 5.6->settings-schema.json->quickTooltip->description
 msgid "Show the tooltip immediately"
-msgstr ""
+msgstr "Tooltip sofort anzeigen"
 
 #. 5.6->settings-schema.json->percentAtEndOfLine->description
 msgid "Place % at the very end of the line"
@@ -683,8 +683,8 @@ msgid ""
 "you move the pointer.\n"
 "Refresh All after making changes."
 msgstr ""
-"Das ist nützlich um zu verhindern, dass der Tooltip zu früh verschwindet, "
-"wenn man den Zeiger bewegt.\n"
+"Nützlich, um zu verhindern, dass der Tooltip zu früh verschwindet, wenn man "
+"den Zeiger bewegt.\n"
 "Alles Aktualisieren nachdem Änderungen gemacht wurden."
 
 #. 5.6->settings-schema.json->tooltipCustomTranslationsLabel->description
@@ -805,7 +805,7 @@ msgstr "Tooltip aktivieren"
 #. 5.6->settings-schema.json->DiskUsage_labelOn->description
 #. 5.6->settings-schema.json->Battery_labelOn->description
 msgid "Display this label"
-msgstr "Diese Beschriftung anzeigen"
+msgstr "Beschriftung anzeigen"
 
 #. 5.6->settings-schema.json->CPU_labelForeground->description
 #. 5.6->settings-schema.json->Mem_labelForeground->description
@@ -814,7 +814,7 @@ msgstr "Diese Beschriftung anzeigen"
 #. 5.6->settings-schema.json->DiskUsage_labelForeground->description
 #. 5.6->settings-schema.json->Battery_labelForeground->description
 msgid "Bring this label to the foreground"
-msgstr "Diese Beschriftung in den Vordergrund bringen"
+msgstr "Beschriftung in den Vordergrund bringen"
 
 #. 5.6->settings-schema.json->CPU_labelPos->description
 #. 5.6->settings-schema.json->Mem_labelPos->description
@@ -843,7 +843,7 @@ msgstr "Negativ: zum oberen Rand. Positiv: zum unteren Rand."
 #. 5.6->settings-schema.json->DiskUsage_labelZoom->description
 #. 5.6->settings-schema.json->Battery_labelZoom->description
 msgid "Label zoom"
-msgstr "Vergrößerung der Beschriftung"
+msgstr "Beschriftung vergrößern"
 
 #. 5.6->settings-schema.json->CPU_labelZoom->options
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
@@ -891,7 +891,7 @@ msgstr ""
 #. 5.6->settings-schema.json->DiskUsage_labelCustomized->description
 #. 5.6->settings-schema.json->Battery_labelCustomized->description
 msgid "Customize this label"
-msgstr "Diese Beschriftung anpassen"
+msgstr "Beschriftung anpassen"
 
 #. 5.6->settings-schema.json->CPU_labelCustom->description
 #. 5.6->settings-schema.json->Mem_labelCustom->description
@@ -992,9 +992,8 @@ msgid "Show the CPU temperature"
 msgstr "CPU-Temperatur anzeigen"
 
 #. 5.6->settings-schema.json->CPU_showTempUnit->description
-#, fuzzy
 msgid "Display the temperature unit"
-msgstr "Ecke, in der die Temperatur angezeigt werden soll"
+msgstr "Temperatureinheit anzeigen"
 
 #. 5.6->settings-schema.json->CPU_temp_hovering_only->description
 #. 5.6->settings-schema.json->CPU_loadAverage_hovering_only->description
@@ -1185,7 +1184,7 @@ msgstr "Swap-Tooltip aktivieren"
 
 #. 5.6->settings-schema.json->Swap_enabledZramTooltip->description
 msgid "Enable ZRAM Tooltip (only shown if /dev/zram0 exists)"
-msgstr ""
+msgstr "ZRAM-Tooltip aktivieren (nur sichtbar, wenn /dev/zram0 existiert)"
 
 #. 5.6->settings-schema.json->Mem_chartType->description
 msgid "Chart Type"
@@ -1201,7 +1200,7 @@ msgstr "Balkendiagramm"
 
 #. 5.6->settings-schema.json->Mem_method->description
 msgid "Memory Calculation Method"
-msgstr "Berechnungsmethode Speicher"
+msgstr "Berechnungsmethode für Speicher"
 
 #. 5.6->settings-schema.json->Mem_method->options
 msgid "htop (recommended)"
@@ -1216,17 +1215,16 @@ msgid "Origin at 12 o'clock"
 msgstr "Ursprung bei 12 Uhr"
 
 #. 5.6->settings-schema.json->Mem_showAmountsInTooltip->description
-#, fuzzy
 msgid "Show Memory/Swap byte amounts (Total, Used, Available) in the tooltip"
-msgstr ""
-"Im Tooltip den gesamten, belegten und verfügbaren Speicher (in Bytes) "
-"anzeigen"
+msgstr "Speicher/Swap (gesamt, belegt, verfügbar) in Bytes im Tooltip anzeigen"
 
 #. 5.6->settings-schema.json->Mem_showBytesInTooltip->description
 msgid ""
 "Tooltip Memory/Swap amounts: ON = SI units (kB, MB, GB); OFF = IEC binary "
 "units (KiB, MiB, GiB)"
 msgstr ""
+"Speicher/Swap im Tooltip: EIN = SI-Einheiten (kB, MB, GB); AUS = IEC "
+"Binärpräfixe (KiB, MiB, GiB)"
 
 #. 5.6->settings-schema.json->Mem_value_display->description
 msgid "Display memory usage percentage"
@@ -1257,7 +1255,7 @@ msgstr "Immer"
 #. 5.6->settings-schema.json->DiskUsage_valueCorner->description
 #. 5.6->settings-schema.json->Battery_valueCorner->description
 msgid "Where to display this"
-msgstr "Wo das angezeigt wird"
+msgstr "Position im Diagramm"
 
 #. 5.6->settings-schema.json->Mem_valueCorner->options
 #. 5.6->settings-schema.json->DiskUsage_valueCorner->options
@@ -1303,9 +1301,8 @@ msgid "25%, left side"
 msgstr "25%, linke Seite"
 
 #. 5.6->settings-schema.json->Mem_swapWidth->options
-#, fuzzy
 msgid "50%, left side"
-msgstr "25%, linke Seite"
+msgstr "50%, linke Seite"
 
 #. 5.6->settings-schema.json->Mem_swapWidth->tooltip
 msgid ""
@@ -1553,7 +1550,7 @@ msgstr "Entladen"
 #. 5.6->settings-schema.json->Net_total1decimal->description
 #. 5.6->settings-schema.json->Disk_speed1decimal->description
 msgid "Show 1 decimal"
-msgstr ""
+msgstr "Eine Nachkommastelle anzeigen"
 
 #. 5.6->settings-schema.json->color0->description
 msgid "Color #0"
