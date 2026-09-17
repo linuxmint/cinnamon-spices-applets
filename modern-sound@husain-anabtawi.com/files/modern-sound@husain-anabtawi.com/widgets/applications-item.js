@@ -20,7 +20,7 @@ class ApplicationsItem extends PopupMenu.PopupMenuSection {
 
         this._headerLabel = new St.Label({
             text: _("Applications"),
-            style_class: "modern-sound-applications-title"
+            style_class: "popup-inactive-menu-item modern-sound-applications-title"
         });
         if (this._headerLabel.clutter_text)
             this._headerLabel.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
@@ -83,8 +83,10 @@ class ApplicationsItem extends PopupMenu.PopupMenuSection {
     }
 
     _updateVisibility() {
-        const visible = this._streams.length > 0;
-        this.actor.visible = visible;
+        const enabled = this._applet.showApplicationVolumes !== false;
+        this.actor.visible = enabled && this._streams.length > 0;
+        if (this._applet._syncMenuSeparators)
+            this._applet._syncMenuSeparators();
     }
 }
 
