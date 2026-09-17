@@ -1,0 +1,34 @@
+NET SPEED MONITOR - USER GUIDE
+==============================
+
+Welcome! This little tool sits on your panel and shows you how fast your internet is working right now.
+
+Here is what the different views mean (Click the applet to switch):
+
+1. Real-time Speed (Standard View)
+----------------------------------
+Shows your current Download (↓) and Upload (↑) speeds.
+- If you see "KB/s", it stands for Kilobytes per second (Normal speed).
+- If you see "MB/s", it stands for Megabytes per second (Fast speed!).
+
+2. Session Usage
+----------------
+Shows how much data you have used since you last logged in or restarted your computer. 
+Great for tracking usage during a specific work session.
+
+3. Daily Usage
+--------------
+Shows how much data you have used TODAY (since midnight).
+Useful if you have a daily data limit.
+
+4. Applications
+---------------
+Show how many apps are currently using the internet.
+- Hover your mouse over the applet to see EXACTLY which apps are using your internet and how much speed they are taking.
+
+FEATURES
+--------
+- Right-click the applet to find "Select Interface" if you want to switch between Wi-Fi and Ethernet manually.
+- Use "Reset Today's Stats" in the right-click menu if you want to start counting from zero again.
+
+That's it! Simple and effective.
