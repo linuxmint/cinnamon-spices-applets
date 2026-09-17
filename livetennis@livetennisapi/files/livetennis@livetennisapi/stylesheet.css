@@ -1,0 +1,18 @@
+.livetennis-match {
+    padding: 2px 4px;
+}
+
+.livetennis-score {
+    font-weight: bold;
+}
+
+.livetennis-break-point {
+    /* Break points are the moment worth looking up for, so the row is warmed
+       rather than recoloured outright - readable on light and dark themes. */
+    color: #e06c1e;
+}
+
+.livetennis-context {
+    font-size: 0.85em;
+    opacity: 0.65;
+}
