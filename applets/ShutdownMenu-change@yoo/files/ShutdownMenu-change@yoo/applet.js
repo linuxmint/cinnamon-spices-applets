@@ -1,6 +1,6 @@
 // name： ShutdownMenu-change
 // description： Offers a shutdown menu with scroll workspace switching, middle-click actions, custom menu items, grid layout, and scene presets — unlocking more ways to play.
-// version: 1.5.2 (17-09-2026)
+// version: 1.5.3 (17-09-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
@@ -1017,7 +1017,7 @@ MyApplet.prototype = {
             let gridBox = new St.Bin({
                 style_class: 'menu-applications-grid-box',
                 x_fill: true,
-                y_fill: true
+                y_expand: true
             });
             // column_homogeneous: 所有列等宽，末行自动对齐
             let gridLayout = new Clutter.Actor({
@@ -1100,20 +1100,15 @@ MyApplet.prototype = {
 
             // ---- 判断是否需要滚动 ----
             let enableScroll = this.custom_list_scroll_enable !== false;
-            let needsScroll = enableScroll && items.length > CUSTOM_LIST_SCROLL_THRESHOLD;
+            let maxHeight = parseInt(this.custom_list_max_height, 10);
+            if (isNaN(maxHeight) || maxHeight < 100) maxHeight = 0;
+            let needsScroll = enableScroll && maxHeight > 0;
 
             let section = new PopupMenu.PopupMenuSection();
 
             if (needsScroll) {
-                // 需要滚动：包 ScrollView
-                // 结构：ScrollView → bugfixBox → wrapperBox → gridBox
-                let maxHeight = parseInt(this.custom_list_max_height, 10);
-                if (isNaN(maxHeight) || maxHeight < 100) maxHeight = 400;
-
-                // 布局参数（x_fill 等）只能传给 add/add_actor，
-                // 不能写在 St.BoxLayout 的构造函数里
                 let wrapperBox = new St.BoxLayout({ vertical: true });
-                wrapperBox.add(gridBox, { x_fill: true, y_fill: true });
+                wrapperBox.add(gridBox, { x_fill: true });
 
                 // 外层：bugfixBox（规避 GitHub issue #11760）
                 let bugfixBox = new St.BoxLayout({
@@ -1168,8 +1163,9 @@ MyApplet.prototype = {
         menuItem.addActor(label, { expand: true });
 
         menuItem._command = command;
-        menuItem.connect("activate", function() {
+        menuItem.connect("activate", () => {
             Util.trySpawnCommandLine(command);
+            this.menu.close();
         });
         (parent || this.menu).addMenuItem(menuItem);
     },

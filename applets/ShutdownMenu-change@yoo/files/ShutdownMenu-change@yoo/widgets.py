@@ -479,6 +479,8 @@ class CustomAppList(SettingsWidget):
         renderer_toggle.connect('toggled', self._on_toggle_pinned)
         column_toggle = Gtk.TreeViewColumn(_('Show'), renderer_toggle, active=4)
         column_toggle.set_min_width(40)
+        column_toggle.set_clickable(True)
+
         self.tree_view.append_column(column_toggle)
 
         renderer_icon = Gtk.CellRendererPixbuf()
@@ -507,6 +509,20 @@ class CustomAppList(SettingsWidget):
         scroll.set_shadow_type(Gtk.ShadowType.IN)
         scroll.add(self.tree_view)
         self.pack_start(scroll, True, True, 0)
+
+        # 底部全选/取消全选按钮
+        btn_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
+        btn_bar.set_halign(Gtk.Align.END)
+        self.pack_start(btn_bar, False, False, 4)
+        btn_select_all = Gtk.Button(label=_('Select All'))
+        btn_select_all.set_relief(Gtk.ReliefStyle.NONE)
+        btn_select_all.connect('clicked', lambda b: self._toggle_all(True))
+        btn_bar.pack_start(btn_select_all, False, False, 0)
+        btn_deselect_all = Gtk.Button(label=_('Deselect All'))
+        btn_deselect_all.set_relief(Gtk.ReliefStyle.NONE)
+        btn_deselect_all.connect('clicked', lambda b: self._toggle_all(False))
+        btn_bar.pack_start(btn_deselect_all, False, False, 0)
+        btn_bar.show_all()
 
         self._update_buttons()
 
@@ -711,8 +727,21 @@ class CustomAppList(SettingsWidget):
         child_path = self.filter_model.convert_path_to_child_path(
             Gtk.TreePath(path))
         iter = self.store.get_iter(child_path)
+        if self.store.get_value(iter, 1) == '-':
+            return
         current = self.store.get_value(iter, 4)
         self.store.set_value(iter, 4, not current)
+        self._save()
+        self._resort_store()
+
+    def _toggle_all(self, state):
+        """全选或取消全选所有项（含分隔线）。"""
+        self._saving = True
+        try:
+            for row in self.store:
+                self.store.set_value(row.iter, 4, state)
+        finally:
+            self._saving = False
         self._save()
         self._resort_store()
 
@@ -724,6 +753,10 @@ class CustomAppList(SettingsWidget):
             child_it = self._store_iter(it)
             if child_it is not None:
                 selected_name = self.store.get_value(child_it, 1)
+
+        # 保存滚动位置和选中名
+        adj = self.tree_view.get_vadjustment()
+        scroll_pos = adj.get_value()
 
         rows = []
         for row in self.store:
@@ -741,6 +774,9 @@ class CustomAppList(SettingsWidget):
             filter_it = self._find_filter_iter_by_name(selected_name)
             if filter_it is not None:
                 self.tree_view.get_selection().select_iter(filter_it)
+
+        # 恢复滚动位置
+        adj.set_value(scroll_pos)
 
     def on_add_app(self, *args):
         """从 /usr/share/applications 选择 .desktop 文件并添加到列表。"""
@@ -771,9 +807,14 @@ class CustomAppList(SettingsWidget):
                 if data['name'] in self._collect_names():
                     self._show_duplicate_warning()
                     return
-                self.store.append([make_gicon(data['icon']),
-                                   data['name'], data['icon'],
-                                   data['command'], True])
+                row = [make_gicon(data['icon']),
+                       data['name'], data['icon'],
+                       data['command'], True]
+                idx = self._selected_index()
+                if idx >= 0:
+                    self.store.insert_after(self.store.get_iter(idx), row)
+                else:
+                    self.store.append(row)
                 self._save()
             else:
                 md = Gtk.MessageDialog(
@@ -871,12 +912,17 @@ class CustomAppList(SettingsWidget):
             return
 
         if is_sep:
-            self.store.append([make_gicon('list-remove-symbolic'),
-                               '-', '-', '', True])
+            row = [make_gicon('list-remove-symbolic'),
+                   '-', '-', '', True]
         else:
-            self.store.append([make_gicon(data['icon']),
-                               data['name'], data['icon'],
-                               data['command'], True])
+            row = [make_gicon(data['icon']),
+                   data['name'], data['icon'],
+                   data['command'], True]
+        idx = self._selected_index()
+        if idx >= 0:
+            self.store.insert_after(self.store.get_iter(idx), row)
+        else:
+            self.store.append(row)
         self._save()
 
     def on_edit(self, *args):

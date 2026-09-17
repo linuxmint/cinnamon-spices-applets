@@ -402,6 +402,18 @@ msgstr "列表名称最大长度"
 msgid "Grid label max chars"
 msgstr "网格名称最大长度"
 
+#: widgets.py
+msgid "Select All"
+msgstr "全选"
+
+#: widgets.py
+msgid "Deselect All"
+msgstr "取消全选"
+
+#: widgets.py
+msgid "Search..."
+msgstr "搜索..."
+
 #: settings-schema.json
 msgid "Show"
 msgstr "显示"
