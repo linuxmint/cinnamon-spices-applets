@@ -134,11 +134,9 @@ AgyUsageApplet.prototype = {
             return fromPath;
         }
 
-        const fallback = GLib.get_home_dir() + '/.local/bin/agy';
-        if (GLib.file_test(fallback, GLib.FileTest.IS_EXECUTABLE)) {
-            return fallback;
-        }
-        return null;
+        // Bez sprawdzania, czy plik istnieje: file_test() to synchroniczny stat,
+        // a nieudany start i tak wpada w catch niżej i daje ten sam komunikat.
+        return GLib.get_home_dir() + '/.local/bin/agy';
     },
 
     _renderData: function(note, forceYellow) {
