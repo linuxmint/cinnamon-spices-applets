@@ -1,6 +1,6 @@
 // name： ShutdownMenu-change
 // description： Offers a shutdown menu with scroll workspace switching, middle-click actions, custom menu items, grid layout, and scene presets — unlocking more ways to play.
-// version: 1.5.1 (17-09-2026)
+// version: 1.5.2 (17-09-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
@@ -285,19 +285,11 @@ MyApplet.prototype = {
     // 加载自定义 CSS 样式表
     _loadStylesheet: function() {
         try {
-            let cssPath = this.metadata.path + '/applet.css';
-            let cssFile = Gio.file_new_for_path(cssPath);
-            if (!cssFile.query_exists(null)) {
-                global.log('ShutdownMenu-change: CSS file not found: ' + cssPath);
-                return;
-            }
+            let cssFile = Gio.file_new_for_path(this.metadata.path + '/applet.css');
             let themeContext = St.ThemeContext.get_for_stage(global.stage);
             let theme = themeContext.get_theme();
             theme.load_stylesheet(cssFile);
-            global.log('ShutdownMenu-change: CSS loaded successfully');
-        } catch (e) {
-            global.logError('ShutdownMenu-change CSS load error: ' + e.message);
-        }
+        } catch (e) {}
     },
 
     // 同步检查文件是否存在（仅用于本地图标路径，代价可接受）
@@ -449,7 +441,6 @@ MyApplet.prototype = {
         try {
             let path = GLib.get_user_data_dir() + SCENES_REL_PATH;
             let file = Gio.file_new_for_path(path);
-            if (!file.query_exists(null)) return;
 
             let [ok, contents] = file.load_contents(null);
             if (!ok) return;
@@ -1274,12 +1265,14 @@ MyApplet.prototype = {
         try {
             let path = GLib.get_user_data_dir() + SCENES_REL_PATH;
             let file = Gio.file_new_for_path(path);
-            if (!file.query_exists(null)) {
+            let info;
+            try {
+                info = file.query_info('time::modified',
+                    Gio.FileQueryInfoFlags.NONE, null);
+            } catch (e) {
                 this._scenesCache = { mtime: 0, data: [] };
                 return [];
             }
-            let info = file.query_info('time::modified',
-                Gio.FileQueryInfoFlags.NONE, null);
             let mtime = info.get_attribute_uint64('time::modified');
             if (this._scenesCache && this._scenesCache.mtime === mtime) {
                 return this._scenesCache.data;
