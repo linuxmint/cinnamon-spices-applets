@@ -1,0 +1,124 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: vnstat@linuxmint.com 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2026-05-30 11:31+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:192 4.0/applet.js:186
+msgid "Current Active Interface:"
+msgstr "Nuværende aktive grænseflade:"
+
+#: applet.js:192 4.0/applet.js:186
+msgid "Last update time is at top right"
+msgstr "Sidste opdateringstid er øverst til højre"
+
+#: applet.js:195 4.0/applet.js:189
+msgid "No interface devices currently active - Showing last update"
+msgstr "Ingen grænsefladeenheder er aktive — Viser seneste opdatering"
+
+#: applet.js:205 4.0/applet.js:199
+msgid ""
+"Please make sure vnstat and vnstati are installed and that the vnstat daemon "
+"is running!"
+msgstr ""
+"Sørg for, at vnstat og vnstati er installerede, og at vnstat-dæmonen kører!"
+
+#. metadata.json->name
+msgid "Network usage monitor"
+msgstr "Netværksforbrug"
+
+#. metadata.json->description
+msgid "Network usage monitor using vnstat"
+msgstr "Overvågning af netværksforbrug ved hjælp af vnstat"
+
+#. settings-schema.json->head->description
+#. 4.0->settings-schema.json->head->description
+msgid "Settings for the Network Usage Applet (uses vnstati)"
+msgstr "Indstillinger for Netværksforbrug (bruger vnstati)"
+
+#. settings-schema.json->useExtendedDisplay->description
+#. 4.0->settings-schema.json->useExtendedDisplay->description
+msgid "Enable Extended Display Options"
+msgstr "Aktivér udvidede visningsindstillinger"
+
+#. settings-schema.json->useExtendedDisplay->tooltip
+#. 4.0->settings-schema.json->useExtendedDisplay->tooltip
+msgid "This is new option version 1.0.2"
+msgstr "Dette er en ny mulighed fra og med version 1.0.2"
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid "Classic - Summary of Data Usage for last Days and Months"
+msgstr "Klassisk  Resumé af de sidste dages og måneders trafik"
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid ""
+"Classic Plus - Classic with addition of breakdown by hour for last 24 hours"
+msgstr ""
+"Klassisk plus — Klassisk med tilføjelse af opdeling efter timer for de "
+"sidste 24 timer"
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid "Custom Display - requires enabling below"
+msgstr "Tilpasset visning (kræver aktivering nedenfor)"
+
+#. settings-schema.json->extendedDisplay->description
+#. 4.0->settings-schema.json->extendedDisplay->description
+msgid "Type of Display - default 'classic'"
+msgstr "Visningstype (som standard Klassisk)"
+
+#. settings-schema.json->extendedDisplay->tooltip
+#. 4.0->settings-schema.json->extendedDisplay->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional of adding "
+"an hourly breakdown over the last 24 hours and an experimental option of a "
+"user defined string for vnstati when enabled below"
+msgstr ""
+"Denne funktion tilbyder den klassiske (oprindelige) visning med mulighed for "
+"at tilføje en timeopdeling over de sidste 24 timer og en eksperimentel "
+"mulighed for en brugerdefineret streng for vnstati, når den er aktiveret "
+"nedenfor"
+
+#. settings-schema.json->useVnstatiCommandString->description
+#. 4.0->settings-schema.json->useVnstatiCommandString->description
+msgid "Enable Custom Display Option"
+msgstr "Aktivér tilpasset visningsindstilling"
+
+#. settings-schema.json->useVnstatiCommandString->tooltip
+#. 4.0->settings-schema.json->useVnstatiCommandString->tooltip
+msgid "Check box"
+msgstr "Afkrydsningsfelt"
+
+#. settings-schema.json->vnstatiCommandString->description
+#. 4.0->settings-schema.json->vnstatiCommandString->description
+msgid "Custom options to pass to vnstati - default is '-vs' "
+msgstr "Tilpasset tilvalg som sendes til vnstati (standard er “-vs”) "
+
+#. settings-schema.json->vnstatiCommandString->tooltip
+#. 4.0->settings-schema.json->vnstatiCommandString->tooltip
+msgid ""
+"The default is the options used for the extended display. Note: this is not "
+"the whole vnstati option string - the interface and output file options are "
+"added to it automatically. Please read the vnstati manual for further "
+"information on options avaiilable"
+msgstr ""
+"Standardindstillingen er de indstillinger, der bruges til den udvidede "
+"visning. Bemærk: Dette er ikke hele vnstati-tilvalgsstrengen; interface- og "
+"outputfiltilvalgene føjes automatisk til den. Læs vnstati-manualen for "
+"yderligere information om tilgængelige indstillinger."

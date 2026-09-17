@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-08 19:11+0530\n"
+"PO-Revision-Date: 2023-12-28 08:45+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->name
+#: applet.js:81
+msgid "Wallpaper Slideshow"
+msgstr "Slideshow med skrivebordsbaggrunde"
+
+#: applet.js:207
+msgid "The wallpaper path does not exists!"
+msgstr "Stien til skrivebordsbaggrunde findes ikke!"
+
+#. settings-schema.json->head_delay->description
+#: applet.js:220
+msgid "Delay"
+msgstr "Forsinkelse"
+
+#: applet.js:238
+msgid "Open wallpapers directory"
+msgstr "Åbn mappe til skrivebordsbaggrunde"
+
+#: applet.js:251
+msgid "Next"
+msgstr "Næste"
+
+#: applet.js:260
+msgid "Previous"
+msgstr "Forrige"
+
+#. settings-schema.json->head_paused->description
+#: applet.js:273
+msgid "Paused"
+msgstr "På pause"
+
+#: applet.js:287
+msgid "Preferences"
+msgstr "Indstillinger"
+
+#. metadata.json->description
+msgid "Starts a wallpaper slideshow persisting across reboots"
+msgstr "Starter et slideshow af skrivebordsbaggrunde, der fortsætter selv efter genstart"
+
+#. settings-schema.json->head_path->description
+msgid "Wallpaper path"
+msgstr "Sti til skrivebordsbaggrunde"
+
+#. settings-schema.json->wallpaper_path->description
+msgid "Specify path of the wallpaper directory"
+msgstr "Angiv sti til mappen til skrivebordsbaggrunde"
+
+#. settings-schema.json->wallpaper_path->tooltip
+msgid "For example: /home/username/Pictures/wallpapers"
+msgstr "For eksempel: /home/username/Pictures/wallpapers"
+
+#. settings-schema.json->wallpaper_delay->description
+msgid "Specify the delay to change the wallpaper (in seconds)"
+msgstr "Angiv interval for skift af skrivebordsbaggrund ( i sekunder)"
+
+#. settings-schema.json->wallpaper_delay->tooltip
+msgid "For example: 86400 for 24hrs"
+msgstr "For eksempel 86400 for 24 timer"
+
+#. settings-schema.json->head_timer->description
+msgid "Custom interval"
+msgstr "Tilpasset interval"
+
+#. settings-schema.json->wallpaper_custom_timer->description
+msgid "Specify a custom interval to check for updates"
+msgstr "Angiv et selvvalgt interval for søgning efter opdateringer"
+
+#. settings-schema.json->wallpaper_custom_timer->tooltip
+msgid "Default: 1hr"
+msgstr "Standard: 1 time"
+
+#. settings-schema.json->wallpaper_timer->description
+msgid "Specify the interval (in seconds) to check for updates"
+msgstr "Angiv intervallet (i sekunder) for søgning efter opdateringer"
+
+#. settings-schema.json->wallpaper_timer->tooltip
+msgid "For example: 3600 for 1hr"
+msgstr "For eksempel: 3600 for 1 time"
+
+#. settings-schema.json->wallpaper_paused->description
+msgid "Pause the wallpaper slideshow"
+msgstr "Sæt slideshow på pause"

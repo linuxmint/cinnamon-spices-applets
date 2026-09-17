@@ -1,0 +1,362 @@
+# EXIT
+# This file is put in the public domain.
+# claudiux, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Exit@claudiux 1.8.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-04-07 22:24+0200\n"
+"PO-Revision-Date: 2026-06-10 00:00+0000\n"
+"Last-Translator: Grom-TS\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. 5.4/applet.js:140 6.4/applet.js:352
+msgid "Restart Cinnamon"
+msgstr "Перезапустить Cinnamon"
+
+#. 5.4/applet.js:152
+msgid "Screen Off"
+msgstr "Выключить экран"
+
+#. 5.4/applet.js:177 6.4/applet.js:392
+msgid "Lock Screen"
+msgstr "Заблокировать экран"
+
+#. 5.4/applet.js:205 5.4/applet.js:215 5.4/applet.js:224 5.4/applet.js:233
+#. 6.4/applet.js:420 6.4/applet.js:431 6.4/applet.js:441 6.4/applet.js:451
+msgid "Switch User"
+msgstr "Сменить пользователя"
+
+#. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
+#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:454 6.4/applet.js:481
+#. 6.4/applet.js:507 6.4/applet.js:543 6.4/applet.js:569 6.4/applet.js:593
+msgid "Performing automatic updates"
+msgstr "Выполняются автоматические обновления"
+
+#. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
+#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:454 6.4/applet.js:481
+#. 6.4/applet.js:507 6.4/applet.js:543 6.4/applet.js:569 6.4/applet.js:593
+msgid "Please wait"
+msgstr "Пожалуйста, подождите"
+
+#. 5.4/applet.js:249 5.4/applet.js:256 6.4/applet.js:467 6.4/applet.js:478
+msgid "Log Out"
+msgstr "Выйти"
+
+#. 5.4/applet.js:270 5.4/applet.js:277 6.4/applet.js:493 6.4/applet.js:495
+#. 6.4/applet.js:504
+msgid "Suspend"
+msgstr "Ждущий режим"
+
+#. 5.4/applet.js:288 5.4/applet.js:298 6.4/applet.js:516 6.4/applet.js:518
+#. 6.4/applet.js:540
+msgid "Hibernate"
+msgstr "Гибернация"
+
+#. 5.4/applet.js:312 5.4/applet.js:319 6.4/applet.js:555 6.4/applet.js:557
+#. 6.4/applet.js:566
+msgid "Restart"
+msgstr "Перезагрузить"
+
+#. 5.4/applet.js:330 5.4/applet.js:337 6.4/applet.js:578 6.4/applet.js:580
+#. 6.4/applet.js:590
+msgid "Power Off"
+msgstr "Выключить"
+
+#. 6.4/applet.js:365 6.4/applet.js:367
+msgid "Screen On/Off"
+msgstr "Экран вкл./выкл."
+
+#. 6.4/applet.js:378 6.4/applet.js:380
+msgid "Screen On/Off with Lock feature"
+msgstr "Экран вкл./выкл. с блокировкой"
+
+#. metadata.json->description
+msgid ""
+"Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
+"out, suspend, hibernate, reboot or shut down the computer"
+msgstr ""
+"Перезапуск Cinnamon, выключение экрана, блокировка экрана, смена пользователя, "
+"выход из системы, ждущий режим, гибернация, перезагрузка и выключение компьютера"
+
+#. metadata.json->name
+msgid "Exit"
+msgstr "Выход"
+
+#. 5.4->settings-schema.json->sectionOSD->description
+#. 6.4->settings-schema.json->sectionOSD->title
+msgid "Cinnamon restart"
+msgstr "Перезапуск Cinnamon"
+
+#. 5.4->settings-schema.json->showOSD->description
+#. 6.4->settings-schema.json->showOSD->description
+msgid "Show OSD while restarting Cinnamon"
+msgstr "Показывать OSD при перезапуске Cinnamon"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+#. 6.4->settings-schema.json->showOSD->tooltip
+msgid "OSD: On Screen Display"
+msgstr "OSD: экранное уведомление"
+
+#. 5.4->settings-schema.json->sectionMenu->description
+#. 6.4->settings-schema.json->sectionMenu->title
+msgid "Menu options"
+msgstr "Параметры меню"
+
+#. 5.4->settings-schema.json->showRestartCinnamon->description
+#. 6.4->settings-schema.json->showRestartCinnamon->description
+msgid "Show the Restart Cinnamon option"
+msgstr "Показывать пункт «Перезапуск Cinnamon»"
+
+#. 5.4->settings-schema.json->showSuspend->description
+#. 6.4->settings-schema.json->showSuspend->description
+msgid "Show the Suspend option"
+msgstr "Показывать ждущий режим"
+
+#. 5.4->settings-schema.json->showHibernate->description
+#. 6.4->settings-schema.json->showHibernate->description
+msgid "Show the Hibernate option"
+msgstr "Показывать гибернацию"
+
+#. 5.4->settings-schema.json->hibernateNeedsSudo->description
+#. 6.4->settings-schema.json->hibernateNeedsSudo->description
+msgid "Hibernate needs root user rights (sudo)"
+msgstr "Гибернация требует прав root (sudo)"
+
+#. 5.4->settings-schema.json->showRestart->description
+#. 6.4->settings-schema.json->showRestart->description
+msgid "Show the Restart option"
+msgstr "Показывать перезагрузку"
+
+#. 5.4->settings-schema.json->showPowerOff->description
+#. 6.4->settings-schema.json->showPowerOff->description
+msgid "Show the Power Off option"
+msgstr "Показывать выключение"
+
+#. 5.4->settings-schema.json->labelOthers->description
+#. 6.4->settings-schema.json->labelOthers->description
+msgid ""
+"All the menu options below may be managed by the system.\n"
+"If they are, you can't see them."
+msgstr ""
+"Некоторые пункты меню могут управляться системой.\n"
+"В этом случае они не отображаются."
+
+#. 5.4->settings-schema.json->showScreenOff->description
+#. 6.4->settings-schema.json->showScreenOff->description
+msgid "Show the Screen Off option"
+msgstr "Показывать выключение экрана"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->units
+#. 6.4->settings-schema.json->mouse-deactivation-duration->units
+msgid "seconds"
+msgstr "сек."
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->description
+#. 6.4->settings-schema.json->mouse-deactivation-duration->description
+msgid "Duration of deactivation of the mouse"
+msgstr "Время отключения мыши"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
+#. 6.4->settings-schema.json->mouse-deactivation-duration->tooltip
+msgid ""
+"To prevent the monitor from turning on too soon after turning it off, the "
+"mouse will be disabled for the number of seconds set here."
+msgstr ""
+"Чтобы монитор не включался сразу после выключения, мышь будет отключена "
+"на указанное количество секунд."
+
+#. 5.4->settings-schema.json->showLockscreen->description
+#. 6.4->settings-schema.json->showLockscreen->description
+msgid "Show the Lock Screen option"
+msgstr "Показывать блокировку экрана"
+
+#. 5.4->settings-schema.json->showLockscreen->tooltip
+#. 5.4->settings-schema.json->showSwitchUser->tooltip
+#. 5.4->settings-schema.json->showLogout->tooltip
+#. 6.4->settings-schema.json->showLockscreen->tooltip
+#. 6.4->settings-schema.json->showSwitchUser->tooltip
+#. 6.4->settings-schema.json->showLogout->tooltip
+msgid "Managed by system"
+msgstr "Управляется системой"
+
+#. 5.4->settings-schema.json->showSwitchUser->description
+#. 6.4->settings-schema.json->showSwitchUser->description
+msgid "Show the Switch User option"
+msgstr "Показывать смену пользователя"
+
+#. 5.4->settings-schema.json->showLogout->description
+#. 6.4->settings-schema.json->showLogout->description
+msgid "Show the Log Out option"
+msgstr "Показывать выход"
+
+#. 5.4->settings-schema.json->logoutMode->description
+#. 6.4->settings-schema.json->logoutMode->description
+msgid "Log Out Mode"
+msgstr "Режим выхода"
+
+#. 5.4->settings-schema.json->logoutMode->options
+#. 6.4->settings-schema.json->logoutMode->options
+msgid "With confirmation"
+msgstr "С подтверждением"
+
+#. 5.4->settings-schema.json->logoutMode->options
+#. 6.4->settings-schema.json->logoutMode->options
+msgid "Without confirmation"
+msgstr "Без подтверждения"
+
+#. 5.4->settings-schema.json->logoutMode->options
+#. 6.4->settings-schema.json->logoutMode->options
+msgid "Force"
+msgstr "Принудительно"
+
+#. 5.4->settings-schema.json->logoutMode->tooltip
+#. 6.4->settings-schema.json->logoutMode->tooltip
+msgid ""
+"The 'Force' option lets you log out while ignoring inhibitors. Useful when "
+"several sessions are open."
+msgstr ""
+"Опция «Принудительно» позволяет выйти, игнорируя блокировки. Полезно при "
+"нескольких открытых сессиях."
+
+#. 6.4->settings-schema.json->page_General->title
+msgid "General"
+msgstr "Общие"
+
+#. 6.4->settings-schema.json->page_Shortcuts->title
+msgid "Shortcuts"
+msgstr "Горячие клавиши"
+
+#. 6.4->settings-schema.json->page_Options->title
+msgid "Options"
+msgstr "Параметры"
+
+#. 6.4->settings-schema.json->sectionMaximize->title
+msgid "Vertical maximization"
+msgstr "Вертикальное разворачивание"
+
+#. 6.4->settings-schema.json->sectionMenuOthers->title
+msgid "System-managed menu options"
+msgstr "Системные пункты меню"
+
+#. 6.4->settings-schema.json->section_DontShowShortcutsInMenu->title
+msgid "Menu appearance"
+msgstr "Внешний вид меню"
+
+#. 6.4->settings-schema.json->section_Shortcuts->title
+msgid "Keybindings"
+msgstr "Горячие клавиши"
+
+#. 6.4->settings-schema.json->section_MenuKeys->title
+msgid "Keys used to select certain options in the open menu."
+msgstr "Клавиши выбора пунктов меню"
+
+#. 6.4->settings-schema.json->lockOnSuspend->description
+msgid "Lock On Suspend"
+msgstr "Блокировать при переходе в ждущий режим"
+
+#. 6.4->settings-schema.json->screenOffUsesXset->description
+msgid "Use the hardware method to turn On/Off the screen"
+msgstr "Использовать аппаратный метод управления экраном"
+
+#. 6.4->settings-schema.json->screenOffUsesXset->tooltip
+msgid ""
+"The hardware method does not always work correctly.\n"
+"In this case, disable this option to use only a software method."
+msgstr ""
+"Аппаратный метод не всегда работает корректно.\n"
+"В этом случае отключите опцию для использования программного метода."
+
+#. 6.4->settings-schema.json->dontShowShortcutsInMenu->description
+msgid "Do not show any shortcut in the menu"
+msgstr "Не показывать горячие клавиши в меню"
+
+#. 6.4->settings-schema.json->kbToggleMenu->description
+msgid "Toggle menu"
+msgstr "Переключить меню"
+
+#. 6.4->settings-schema.json->kbWakeUpMonitor->description
+msgid "Turn screen On/Off"
+msgstr "Включить/выключить экран"
+
+#. 6.4->settings-schema.json->kbWakeUpMonitorWithLock->description
+msgid "Turn screen On/Off with Lock feature"
+msgstr "Включить/выключить экран с блокировкой"
+
+#. 6.4->settings-schema.json->mkShutdown->description
+msgid "Key to select Power Off"
+msgstr "Клавиша выбора выключения"
+
+#. 6.4->settings-schema.json->mkShutdown->tooltip
+msgid "Single key. Default is U"
+msgstr "Одна клавиша. По умолчанию — U"
+
+#. 6.4->settings-schema.json->mkRestart->description
+msgid "Key to select Restart"
+msgstr "Клавиша выбора перезагрузки"
+
+#. 6.4->settings-schema.json->mkRestart->tooltip
+msgid "Single key. Default is R"
+msgstr "Одна клавиша. По умолчанию — R"
+
+#. 6.4->settings-schema.json->mkHibernate->description
+msgid "Key to select Hibernate"
+msgstr "Клавиша выбора гибернации"
+
+#. 6.4->settings-schema.json->mkHibernate->tooltip
+msgid "Single key. Default is H"
+msgstr "Одна клавиша. По умолчанию — H"
+
+#. 6.4->settings-schema.json->mkSuspend->description
+msgid "Key to select Suspend"
+msgstr "Клавиша выбора ждущего режима"
+
+#. 6.4->settings-schema.json->mkSuspend->tooltip
+msgid "Single key. Default is S"
+msgstr "Одна клавиша. По умолчанию — S"
+
+#. 6.4->settings-schema.json->buttonApplyMenuKeys->description
+msgid "Apply these keys to the menu"
+msgstr "Применить эти клавиши к меню"
+
+#. 6.4->settings-schema.json->buttonDefaultMenuKeys->description
+msgid "Reset to default keys"
+msgstr "Сбросить к стандартным клавишам"
+
+#. 6.4->settings-schema.json->alertMenuKeys->description
+msgid ""
+"Several keys are identical.\n"
+"Please correct this and reapply the changes."
+msgstr ""
+"Несколько клавиш совпадают.\n"
+"Исправьте это и примените изменения заново."
+
+#. 6.4->settings-schema.json->alreadyUsedKeys->description
+msgid "Already used keys (for your information only)"
+msgstr "Уже используемые клавиши (только для информации)"
+
+#. 6.4->settings-schema.json->alreadyUsedKeys->tooltip
+msgid "There is no point in changing this."
+msgstr "Изменение этого параметра не имеет смысла."
+
+#. 6.4->settings-schema.json->maximizeSettingsWindow->description
+msgid "Vertically maximize this Settings window"
+msgstr "Развернуть окно настроек по вертикали"
+
+#. 6.4->settings-schema.json->maximizeSettingsWindow->tooltip
+msgid ""
+"This option will only be taken into account the next times this Settings "
+"window is opened. "
+msgstr ""
+"Эта настройка вступит в силу только при следующем открытии окна настроек."
+
+#. 6.4->settings-schema.json->labelSeparator->description
+msgid "────────────────────────────────────────────────────────────────"
+msgstr "────────────────────────────────────────────────────────────────"

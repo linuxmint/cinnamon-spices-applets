@@ -1,0 +1,129 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vnstat@linuxmint.com 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-28 08:01-0400\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:192 4.0/applet.js:186
+msgid "Current Active Interface:"
+msgstr "Jelenlegi aktív interfész:"
+
+#: applet.js:192 4.0/applet.js:186
+msgid "Last update time is at top right"
+msgstr "Az utolsó frissítés ideje a jobb felső sarokban látható"
+
+#: applet.js:195 4.0/applet.js:189
+msgid "No interface devices currently active - Showing last update"
+msgstr ""
+"Jelenleg nincs aktív interfészeszköz – Az utolsó frissítés megjelenítése"
+
+#: applet.js:205 4.0/applet.js:199
+msgid ""
+"Please make sure vnstat and vnstati are installed and that the vnstat daemon "
+"is running!"
+msgstr ""
+"Győződjön meg róla, hogy a vnstat és a vnstati csomagok telepítve vannak, "
+"valamint a vnstat szolgáltatás fut!"
+
+#. metadata.json->name
+msgid "Network usage monitor"
+msgstr "Hálózat-használati statisztikák"
+
+#. metadata.json->description
+msgid "Network usage monitor using vnstat"
+msgstr "Hálózat-használati statisztikák a vnstat használatával"
+
+#. settings-schema.json->head->description
+#. 4.0->settings-schema.json->head->description
+msgid "Settings for the Network Usage Applet (uses vnstati)"
+msgstr ""
+"A hálózati használati kisalkalmazás beállításai (a vnstatikát használja)"
+
+#. settings-schema.json->useExtendedDisplay->description
+#. 4.0->settings-schema.json->useExtendedDisplay->description
+msgid "Enable Extended Display Options"
+msgstr "Kibővített megjelenítési beállítások engedélyezése"
+
+#. settings-schema.json->useExtendedDisplay->tooltip
+#. 4.0->settings-schema.json->useExtendedDisplay->tooltip
+msgid "This is new option version 1.0.2"
+msgstr "Ez az opció új verziója, az 1.0.2"
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid "Classic - Summary of Data Usage for last Days and Months"
+msgstr ""
+"Klasszikus – Az elmúlt napok és hónapok adathasználatának összefoglalása"
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid ""
+"Classic Plus - Classic with addition of breakdown by hour for last 24 hours"
+msgstr ""
+"Klasszikus Plussz – Klasszikus, az elmúlt 24 órában óránkénti lebontással"
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid "Custom Display - requires enabling below"
+msgstr "Egyéni megjelenítés – az alábbiakban engedélyezni kell"
+
+#. settings-schema.json->extendedDisplay->description
+#. 4.0->settings-schema.json->extendedDisplay->description
+msgid "Type of Display - default 'classic'"
+msgstr "Megjelenítés típusa – alapértelmezett „klasszikus”"
+
+#. settings-schema.json->extendedDisplay->tooltip
+#. 4.0->settings-schema.json->extendedDisplay->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional of adding "
+"an hourly breakdown over the last 24 hours and an experimental option of a "
+"user defined string for vnstati when enabled below"
+msgstr ""
+"Ez a funkció a klasszikus (eredeti) megjelenítést kínálja, amely "
+"opcionálisan hozzáadhatja az elmúlt 24 óra óránkénti lebontását, valamint "
+"egy kísérleti lehetőséget a felhasználó által definiált karakterlánchoz a "
+"vnstati számára, ha az alábbiakban engedélyezve van"
+
+#. settings-schema.json->useVnstatiCommandString->description
+#. 4.0->settings-schema.json->useVnstatiCommandString->description
+msgid "Enable Custom Display Option"
+msgstr "Egyéni megjelenítési opció engedélyezése"
+
+#. settings-schema.json->useVnstatiCommandString->tooltip
+#. 4.0->settings-schema.json->useVnstatiCommandString->tooltip
+msgid "Check box"
+msgstr "Jelölje be a négyzetet"
+
+#. settings-schema.json->vnstatiCommandString->description
+#. 4.0->settings-schema.json->vnstatiCommandString->description
+msgid "Custom options to pass to vnstati - default is '-vs' "
+msgstr ""
+"Egyéni beállítások a vnstati-nak átadni - az alapértelmezett a \"-vs\" "
+
+#. settings-schema.json->vnstatiCommandString->tooltip
+#. 4.0->settings-schema.json->vnstatiCommandString->tooltip
+msgid ""
+"The default is the options used for the extended display. Note: this is not "
+"the whole vnstati option string - the interface and output file options are "
+"added to it automatically. Please read the vnstati manual for further "
+"information on options avaiilable"
+msgstr ""
+"Az alapértelmezés a kiterjesztett megjelenítéshez használt opciók. "
+"Megjegyzés: ez nem a teljes vnstati beállítási karakterlánc – az interfész "
+"és a kimeneti fájl beállításai automatikusan hozzáadódnak hozzá. Kérjük, "
+"olvassa el a vnstati kézikönyvet az elérhető opciókkal kapcsolatos további "
+"információkért"

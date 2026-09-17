@@ -1,0 +1,31 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:121
+msgid "Initializing"
+msgstr ""
+
+#: applet.js:294
+msgid "Internet OK"
+msgstr ""
+
+#: applet.js:312
+msgid "No Internet"
+msgstr ""
+
+#. settings-schema.json->update-interval-when-no-internet->units
+#. settings-schema.json->update-interval-when-internet->units
+msgid "s"
+msgstr ""
+
+#. settings-schema.json->update-interval-when-no-internet->description
+msgid "Update interval when no internet connection"
+msgstr ""
+
+#. settings-schema.json->update-interval-when-internet->description
+msgid "Update interval when internet is detected"
+msgstr ""

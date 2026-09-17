@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-09 14:28-0400\n"
+"PO-Revision-Date: 2024-06-27 18:12+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. metadata.json->name
+#. 3.0->settings-schema.json->page_dark_mode->title
+#. 5.8->settings-schema.json->page_dark_mode->title
+#: 3.0/applet.js:75 3.0/applet.js:177 5.8/applet.js:75 5.8/applet.js:177
+msgid "Dark Mode"
+msgstr "Tumma tila"
+
+#. metadata.json->description
+msgid "Easily switch between dark mode and light mode with one click."
+msgstr ""
+"Vaihda tumman ja vaalean tilan välillä yhdellä painalluksella. Vaihto myös "
+"kellon mukaan."
+
+#. 3.0->settings-schema.json->page_general->title
+#. 5.8->settings-schema.json->page_general->title
+msgid "General"
+msgstr "Yleistä"
+
+#. 3.0->settings-schema.json->page_light_mode->title
+#. 5.8->settings-schema.json->page_light_mode->title
+msgid "Light Mode"
+msgstr "Vaalea tila"
+
+#. 3.0->settings-schema.json->enable_dark_mode->description
+#. 5.8->settings-schema.json->enable_dark_mode->description
+msgid "Dark mode"
+msgstr "Tumma tila"
+
+#. 3.0->settings-schema.json->enable_auto_mode_switch->description
+#. 5.8->settings-schema.json->enable_auto_mode_switch->description
+msgid "Automatically switch modes"
+msgstr "Autom. tilan vaihto"
+
+#. 3.0->settings-schema.json->light_mode_start->description
+#. 5.8->settings-schema.json->light_mode_start->description
+msgid "Light mode start time"
+msgstr "Vaalean tilan alkamisaika"
+
+#. 3.0->settings-schema.json->dark_mode_start->description
+#. 5.8->settings-schema.json->dark_mode_start->description
+msgid "Dark mode start time"
+msgstr "Tumman tilan alkamisaika"
+
+#. 3.0->settings-schema.json->light_gtk_theme->description
+#. 3.0->settings-schema.json->dark_gtk_theme->description
+#. 5.8->settings-schema.json->light_gtk_theme->description
+#. 5.8->settings-schema.json->dark_gtk_theme->description
+msgid "Window control theme"
+msgstr "Ikkunan teema"
+
+#. 3.0->settings-schema.json->light_win_border_theme->description
+#. 3.0->settings-schema.json->dark_win_border_theme->description
+#. 5.8->settings-schema.json->light_win_border_theme->description
+#. 5.8->settings-schema.json->dark_win_border_theme->description
+msgid "Window border theme"
+msgstr "Ikkunan kehysten teema"
+
+#. 3.0->settings-schema.json->light_cinnamon_theme->description
+#. 3.0->settings-schema.json->dark_cinnamon_theme->description
+#. 5.8->settings-schema.json->light_cinnamon_theme->description
+#. 5.8->settings-schema.json->dark_cinnamon_theme->description
+msgid "Desktop theme"
+msgstr "Työpöydän teema"
+
+#. 3.0->settings-schema.json->light_icon_theme->description
+#. 3.0->settings-schema.json->dark_icon_theme->description
+#. 5.8->settings-schema.json->light_icon_theme->description
+#. 5.8->settings-schema.json->dark_icon_theme->description
+msgid "Icon theme"
+msgstr "Kuvakkeiden teema"
+
+#. 3.0->settings-schema.json->enable_light_background_switch->description
+#. 3.0->settings-schema.json->enable_dark_background_switch->description
+#. 5.8->settings-schema.json->enable_light_background_switch->description
+#. 5.8->settings-schema.json->enable_dark_background_switch->description
+msgid "Change desktop background"
+msgstr "Vaihda työpöydän taustaa"
+
+#. 3.0->settings-schema.json->light_background_dir->description
+#. 3.0->settings-schema.json->dark_background_dir->description
+#. 5.8->settings-schema.json->light_background_dir->description
+#. 5.8->settings-schema.json->dark_background_dir->description
+msgid "Desktop background location"
+msgstr "Työpöydän taustan sijainti"
+
+#. 3.0->settings-schema.json->light_background_dir->tooltip
+#. 3.0->settings-schema.json->dark_background_dir->tooltip
+#. 5.8->settings-schema.json->light_background_dir->tooltip
+#. 5.8->settings-schema.json->dark_background_dir->tooltip
+msgid "A picture from this folder will be randomly chosen."
+msgstr "Kansiosta valitaan satunnaisesti kuva."
+
+#. 3.0->settings-schema.json->postpone_auto_mode_until->description
+#. 5.8->settings-schema.json->postpone_auto_mode_until->description
+msgid "Internal use"
+msgstr "Sisäiseen käyttöön"

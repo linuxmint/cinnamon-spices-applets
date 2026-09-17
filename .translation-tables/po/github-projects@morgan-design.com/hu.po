@@ -1,0 +1,200 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2021-03-30 08:24+0200\n"
+"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#. applet.js:45 applet.js:46
+msgid "GitHub Explorer"
+msgstr "GitHub Explorer"
+
+#. applet.js:45
+msgid "Attempting to Load your GitHub Repos"
+msgstr "Kísérlet az ön GitHub tárolóinak betöltésére"
+
+#. applet.js:46
+#, javascript-format
+msgid "Successfully Loaded GitHub Repos for user %s"
+msgstr "%s felhasználó GitHub tárolói betöltődtek"
+
+#. applet.js:47
+msgid "ERROR:: GitHub Explorer ::ERROR"
+msgstr "HIBA:: GitHub Explorer ::HIBA"
+
+#. applet.js:47
+msgid "Failed to load GitHub Repositories! Check applet Configuration"
+msgstr ""
+"Nem sikerült betölteni a GitHub tárolókat! Ellenőrizze a kisalkalmazás "
+"konfigurációját"
+
+#. applet.js:166
+msgid "Settings"
+msgstr "Beállítások"
+
+#. applet.js:177 applet.js:270
+msgid "Check Applet Configuration"
+msgstr "Kisalkalmazás konfigurációjának megtekintése"
+
+#. applet.js:266
+msgid "API Rate Exceeded will try again once we are allowed"
+msgstr "API ráta túllépve, amint lehetséges újra megpróbáljuk"
+
+#. applet.js:281
+msgid "Click here to open GitHub"
+msgstr "Kattintson ide a GitHub megnyitásához"
+
+#. applet.js:331
+msgid "Open Repo In Browser"
+msgstr "Tároló megnyitása böngészőben"
+
+#. applet.js:339
+msgid "Project Home"
+msgstr "Projekt mappa"
+
+#. applet.js:346
+msgid "Details"
+msgstr "Részletek"
+
+#. applet.js:349
+msgid "Watchers"
+msgstr "Megfigyelők"
+
+#. applet.js:356
+msgid "Open Issues"
+msgstr "Ügyek megnyitása"
+
+#. applet.js:363
+msgid "Forks"
+msgstr "Elágaztatások"
+
+#. settings-schema.json->open-github-homepage-button->description
+#. applet.js:393
+msgid "Open GitHub Home"
+msgstr "GitHub kezdőoldal megnyitása"
+
+#. applet.js:401
+msgid "Create A Gist"
+msgstr "Gist létrehozása"
+
+#. metadata.json->name
+msgid "Github Explorer"
+msgstr "GitHub Explorer"
+
+#. metadata.json->description
+msgid "Click on the applet to explore your Public Github repositories"
+msgstr "Kattintson a kisalkalmazásra, hogy elérje nyilvános Github tárolóit"
+
+#. settings-schema.json->head->description
+msgid "User Settings"
+msgstr "Felhasználói beállítások"
+
+#. settings-schema.json->username->description
+msgid "GitHub username:"
+msgstr "GitHub felhasználónév:"
+
+#. settings-schema.json->username->tooltip
+msgid "Set a username which you want to display public repositories for"
+msgstr ""
+"Állítson be egy felhasználónevet nyilvános tárolókhoz való megjelenítéshez"
+
+#. settings-schema.json->head1->description
+msgid "Usage Settings"
+msgstr "Használati beállítások"
+
+#. settings-schema.json->enable-auto-refresh->description
+msgid "Check this to enable automatic refreshing"
+msgstr "Jelölje be ezt az automatikus frissítés engedélyezéséhez"
+
+#. settings-schema.json->enable-auto-refresh->tooltip
+msgid ""
+"Checking this will mean the applet will update itself according to your "
+"refresh interval"
+msgstr ""
+"Ennek bejelölésével a kisalkalmazás az ön frissítési gyakoriságának "
+"megfelelően fog frissülni"
+
+#. settings-schema.json->enable-verbose-logging->description
+msgid "Check this to enable lots of logging in Looking Glass"
+msgstr "Jelölje be ezt Looking Glass alkalmazásban való részletes naplózáshoz"
+
+#. settings-schema.json->enable-verbose-logging->tooltip
+msgid "Checking this will enable lots of logging"
+msgstr "Ennek bejelölése bekapcsolja a részletes naplózást"
+
+#. settings-schema.json->enable-github-change-notifications->description
+msgid ""
+"Check this to enable notifications about changes to Watchers, Forks and "
+"Issues"
+msgstr ""
+"Jelölje be ezt az opciót a Megfigyelőkkel, Elágaztatásokkal és Ügyekkel "
+"kapcsolatos változások értesítéseinek engedélyezéséhez"
+
+#. settings-schema.json->enable-github-change-notifications->tooltip
+msgid "Checking this will enable more notification messages"
+msgstr "Ennek bejelölésével további értesítési üzeneteket engedélyez"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->description
+msgid "Check this show the number of open issues next to the repository"
+msgstr "Jelölje be, hogy a tárolók mellett megjelenjen a nyitott ügyek száma"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->tooltip
+msgid "Checking this show the number of issues next to each repository"
+msgstr "Jelölje be, hogy az egyes tárolók mellett megjelenjen a z ügyek száma"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh Interval:"
+msgstr "Frissítési intervallum:"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid ""
+"Change the amount of time between checking GitHub for changes to your "
+"Repositories"
+msgstr ""
+"Állítsa be az ön GitHub tárolóiban történő változások ellenőrzésének "
+"gyakoriságát"
+
+#. settings-schema.json->head2->description
+msgid "Version Details"
+msgstr "Verzió részletek"
+
+#. settings-schema.json->applet-version->description
+msgid "Applet Version:"
+msgstr "Kisalkalmazás verzió:"
+
+#. settings-schema.json->applet-version->tooltip
+msgid "Current version installed"
+msgstr "Aktuális telepített verzió"
+
+#. settings-schema.json->open-cinnamon-homepage-button->description
+msgid "Visit Cinnamon Applet Home"
+msgstr "Látogasson el a Cinnamon Applet Home oldalra"
+
+#. settings-schema.json->open-cinnamon-homepage-button->tooltip
+msgid "Open cinnamon.com - rate the application"
+msgstr "Cinnamon.com megnyitása - értékelje az alkalmazást"
+
+#. settings-schema.json->open-github-homepage-button->tooltip
+msgid "Open github.com - fork the code or add features"
+msgstr "GitHub.com megnyitása - kód elágaztatása vagy funkció hozzáadása"
+
+#. settings-schema.json->open-developer-homepage-button->description
+msgid "Open Developer Home"
+msgstr "Fejlesztő honlapjának megnyitása"
+
+#. settings-schema.json->open-developer-homepage-button->tooltip
+msgid "Open morgan-design.com - my personal blog"
+msgstr "Morgan-design.com - a fejlesztő személyes blogja"

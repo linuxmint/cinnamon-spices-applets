@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sct@skulptist.de 1.2.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-14 12:38+0100\n"
+"PO-Revision-Date: 2025-10-12 15:26+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:70
+msgid "sct is now at"
+msgstr "sct hiện đang ở"
+
+#: connectSct.js:14
+msgid "sct not found"
+msgstr "Không tìm thấy sct"
+
+#: connectSct.js:15
+msgid "Please install sct to set the color temperature with this applet."
+msgstr "Vui lòng cài đặt sct để đặt nhiệt độ màu bằng applet này."
+
+#. metadata.json->name
+msgid "SCT Toggle"
+msgstr "Chuyển đổi SCT"
+
+#. metadata.json->description
+msgid ""
+"Toggle screen temperatures with sct. Set up to 7 custom color temperatures "
+"and toggle through by clicking on the applet"
+msgstr "Chuyển đổi nhiệt độ màn hình bằng sct. Thiết lập tối đa 7 mức nhiệt độ màu tùy chỉnh và chuyển qua lại bằng cách nhấp vào applet"
+
+#. settings-schema.json->head->description
+msgid "Color Temperatur Steps"
+msgstr "Các mức nhiệt độ màu"
+
+#. settings-schema.json->colorStep1->description
+msgid "Color temperature at step 1"
+msgstr "Nhiệt độ màu ở bước 1"
+
+#. settings-schema.json->colorStep1->tooltip
+#. settings-schema.json->colorStep2->tooltip
+msgid ""
+"Add a value between 1000 and 10000, where 1000 is red, 6500 is daylight and "
+"10000 is blue."
+msgstr "Nhập giá trị từ 1000 đến 10000, trong đó 1000 là đỏ, 6500 là ánh sáng ban ngày và 10000 là xanh lam."
+
+#. settings-schema.json->colorStep2->description
+msgid "Color temperature at step 2"
+msgstr "Nhiệt độ màu ở bước 2"
+
+#. settings-schema.json->colorStep3->description
+msgid "Color temperature at step 3"
+msgstr "Nhiệt độ màu ở bước 3"
+
+#. settings-schema.json->colorStep3->tooltip
+#. settings-schema.json->colorStep4->tooltip
+#. settings-schema.json->colorStep5->tooltip
+#. settings-schema.json->colorStep6->tooltip
+#. settings-schema.json->colorStep7->tooltip
+msgid "Optional. Add another value between 1000 and 10000, or leave empty."
+msgstr "Tùy chọn. Nhập giá trị khác từ 1000 đến 10000 hoặc để trống."
+
+#. settings-schema.json->colorStep4->description
+msgid "Color temperature at step 4"
+msgstr "Nhiệt độ màu ở bước 4"
+
+#. settings-schema.json->colorStep5->description
+msgid "Color temperature at step 5"
+msgstr "Nhiệt độ màu ở bước 5"
+
+#. settings-schema.json->colorStep6->description
+msgid "Color temperature at step 6"
+msgstr "Nhiệt độ màu ở bước 6"
+
+#. settings-schema.json->colorStep7->description
+msgid "Color temperature at step 7"
+msgstr "Nhiệt độ màu ở bước 7"
+
+#. settings-schema.json->head2->description
+msgid "Applet Icon"
+msgstr "Biểu tượng Applet"
+
+#. settings-schema.json->iconName->description
+msgid "The icon to use in the panel"
+msgstr "Biểu tượng dùng trong bảng"
+
+#. settings-schema.json->iconName->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box."
+msgstr "Chọn tệp biểu tượng hoặc nhập tên biểu tượng vào ô nhập."
+
+#. settings-schema.json->resetIconName->description
+msgid "Reset icon name"
+msgstr "Đặt lại tên biểu tượng"

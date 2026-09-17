@@ -1,0 +1,266 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: stevedore@centurix 0.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-05 12:03+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:84
+msgid "Create a container from an image"
+msgstr "Crea un contenitore da un'immagine"
+
+#: applet.js:94
+msgid "Mount location:"
+msgstr "Posizione di montaggio:"
+
+#: applet.js:116
+msgid "Destination location:"
+msgstr "Posizione di destinazione:"
+
+#: applet.js:138
+msgid "Working directory:"
+msgstr "Directory di lavoro:"
+
+#: applet.js:160
+msgid "Memory:"
+msgstr "Memoria:"
+
+#: applet.js:182
+msgid "Swap size:"
+msgstr "Dimensione swap:"
+
+#: applet.js:204
+msgid "Entry point:"
+msgstr "Punto di ingresso:"
+
+#: applet.js:226
+msgid "Extra parameters:"
+msgstr "Parametri extra:"
+
+#: applet.js:248
+msgid "Start"
+msgstr "Avvia"
+
+#: applet.js:263 applet.js:342
+msgid "Cancel"
+msgstr "Annulla"
+
+#: applet.js:312
+msgid "Search for a Docker image:"
+msgstr "Cerca un'immagine Docker:"
+
+#: applet.js:397
+msgid "Select"
+msgstr "Seleziona"
+
+#: applet.js:424
+msgid "Searching..."
+msgstr "Cercando..."
+
+#: applet.js:468
+msgid "Stevedore: Docker controller"
+msgstr "Stevedore: controller Docker"
+
+#: applet.js:481
+msgid "Stevedor: Cannot locate Docker, is it installed?"
+msgstr "Stevedor: Impossibile individuare Docker, è installato?"
+
+#: applet.js:482
+msgid "Cannot locate Docker, is it installed?"
+msgstr "Impossibile individuare Docker, è installato?"
+
+#: applet.js:485 applet.js:497
+msgid "Get Docker"
+msgstr "Ottieni Docker"
+
+#: applet.js:493 applet.js:494
+msgid ""
+"Stevedor: Docker is out of date, please install version 17.03.0-ce or higher."
+msgstr ""
+"Stevedor: Docker non è aggiornato, installa la versione 17.03.0-ce o "
+"successiva."
+
+#: applet.js:513
+msgid "Create a new image"
+msgstr "Crea una nuova immagine"
+
+#: applet.js:516
+msgid "Images"
+msgstr "Immagini"
+
+#: applet.js:522
+msgid "No Images Installed"
+msgstr "Nessuna immagine installata"
+
+#: applet.js:532
+msgid "Start a new container from this image"
+msgstr "Avvia un nuovo container da questa immagine"
+
+#: applet.js:539
+msgid "Image Home Page"
+msgstr "Homepage dell'immagine"
+
+#: applet.js:546
+msgid "Remove this image"
+msgstr "Rimuovi questa immagine"
+
+#: applet.js:555
+msgid "Containers"
+msgstr "Container"
+
+#: applet.js:560
+msgid "No Containers Created"
+msgstr "Nessun Container Creato"
+
+#: applet.js:568 applet.js:571
+msgid "Running"
+msgstr "In esecuzione"
+
+#: applet.js:568 applet.js:571
+msgid "Stopped"
+msgstr "Interrotto"
+
+#: applet.js:578
+msgid "Memory: "
+msgstr "Memoria: "
+
+#: applet.js:584
+msgid "Entry point: "
+msgstr "Punto di ingresso: "
+
+#: applet.js:592
+msgid "Mount: "
+msgstr "Mount: "
+
+#: applet.js:603
+msgid "IP Address: "
+msgstr "Indirizzo IP: "
+
+#: applet.js:615
+msgid "Open a terminal"
+msgstr "Apri un terminale"
+
+#: applet.js:627
+msgid "Show TTY Session"
+msgstr "Mostra Sessione TTY"
+
+#: applet.js:640
+msgid "Open a browser"
+msgstr "Apri un browser"
+
+#: applet.js:651
+msgid "Delete this container"
+msgstr "Elimina questo container"
+
+#: applet.js:660
+msgid "Docker Version"
+msgstr "Versione Docker"
+
+#: applet.js:661
+msgid "Docker Version: "
+msgstr "Versione Docker: "
+
+#: applet.js:662
+msgid "API Version: "
+msgstr "Versione API: "
+
+#: applet.js:663
+msgid "Go Version: "
+msgstr "Versione Go: "
+
+#: applet.js:664
+msgid "Git Commit: "
+msgstr "Commit Git: "
+
+#: applet.js:665
+msgid "Build Date: "
+msgstr "Data Build: "
+
+#: applet.js:666
+msgid "OS/Arch: "
+msgstr "OS/Arch: "
+
+#: applet.js:670
+msgid "Refresh this menu"
+msgstr "Aggiorna questo menù"
+
+#: applet.js:681
+msgid "Installing image"
+msgstr "Installazione dell'immagine"
+
+#: applet.js:681 applet.js:797 applet.js:828
+msgid "please wait..."
+msgstr "attendi..."
+
+#: applet.js:691 applet.js:716
+msgid "Image"
+msgstr "Immagine"
+
+#: applet.js:691
+msgid "installed, ready to run."
+msgstr "installata, pronta per l'uso."
+
+#: applet.js:716
+msgid "removed."
+msgstr "rimossa."
+
+#: applet.js:780
+msgid "Starting container"
+msgstr "Avvio del container"
+
+#: applet.js:782
+msgid "Container up"
+msgstr "Container attivo"
+
+#: applet.js:784
+msgid "Stopping container"
+msgstr "Arresto del container"
+
+#: applet.js:786
+msgid "Container down"
+msgstr "Container fermato"
+
+#: applet.js:797
+msgid "Creating container from"
+msgstr "Creando il container da"
+
+#: applet.js:800
+msgid "Image created."
+msgstr "Immagine creata."
+
+#: applet.js:828
+msgid "Removing container"
+msgstr "Rimuovendo il container"
+
+#: applet.js:831
+msgid "Container removed"
+msgstr "Container rimosso"
+
+#: applet.js:838
+msgid "Copied to the clipboard"
+msgstr "Copiato negli Appunti"
+
+#: terminal_reader.js:60
+msgid "Command not found."
+msgstr "Comando non trovato."
+
+#. metadata.json->description
+msgid "Docker controlling applet."
+msgstr "Applet di controllo Docker."
+
+#. metadata.json->name
+msgid "Stevedor - Docker controller"
+msgstr "Stevedor - Docker controller"

@@ -1,0 +1,171 @@
+# KDE CONNECT APPLET
+# This file is put in the public domain.
+# JoeJoeTV, 2020
+#
+msgid ""
+msgstr ""
+
+#. 5.8/js/modules.js:450
+msgid "Module"
+msgstr ""
+
+#. 5.8/js/modules.js:597
+msgid "Battery Module"
+msgstr ""
+
+#. 5.8/js/modules.js:646 4.8/js/modules.js:658
+msgid "Charging"
+msgstr ""
+
+#. 5.8/js/modules.js:682
+msgid "Device-Info Module"
+msgstr ""
+
+#. 5.8/js/modules.js:751
+msgid "Connectivity Module"
+msgstr ""
+
+#. 5.8/js/modules.js:816 4.8/js/modules.js:825
+msgid "Low"
+msgstr ""
+
+#. 5.8/js/modules.js:819 4.8/js/modules.js:828
+msgid "Ok"
+msgstr ""
+
+#. 5.8/js/modules.js:822 4.8/js/modules.js:831
+msgid "Good"
+msgstr ""
+
+#. 5.8/js/modules.js:825 4.8/js/modules.js:834
+msgid "Excellent"
+msgstr ""
+
+#. 5.8/js/modules.js:837 4.8/js/modules.js:846
+msgid "Unknown"
+msgstr ""
+
+#. 5.8/js/modules.js:867
+msgid "FindMyPhone Module"
+msgstr ""
+
+#. 5.8/js/modules.js:907
+msgid "Request Photo Module"
+msgstr ""
+
+#. 5.8/js/modules.js:1009
+msgid "Ping Module"
+msgstr ""
+
+#. 5.8/js/modules.js:1062
+msgid "Share Module"
+msgstr ""
+
+#. 5.8/js/modules.js:1243
+msgid "SFTP Module"
+msgstr ""
+
+#. 5.8/js/modules.js:1284 4.8/js/modules.js:1281
+msgid "Unmount"
+msgstr ""
+
+#. 5.8/js/modules.js:1286 4.8/js/modules.js:1283
+msgid "Mount"
+msgstr ""
+
+#. 5.8/js/modules.js:1463
+msgid "SMS Module"
+msgstr ""
+
+#. 5.8/py/dialogs.py:60 5.8/py/dialogs.py:132 5.8/py/dialogs.py:207
+#. 5.8/py/dialogs.py:285 4.8/py/dialogs.py:50 4.8/py/dialogs.py:106
+#. 4.8/py/dialogs.py:169
+msgid "Cancel"
+msgstr ""
+
+#. 5.8/py/dialogs.py:65 5.8/py/dialogs.py:137 5.8/py/dialogs.py:212
+#. 4.8/py/dialogs.py:53 4.8/py/dialogs.py:109 4.8/py/dialogs.py:172
+msgid "Send"
+msgstr ""
+
+#. 5.8/py/dialogs.py:271
+#, python-brace-format
+msgid "Open remote directory on '{device_name}'"
+msgstr ""
+
+#. 5.8/py/dialogs.py:290
+msgid "Open"
+msgstr ""
+
+#. 5.8/py/dialogs.py:300
+msgid "Directory to open:"
+msgstr ""
+
+#. 5.8->settings-schema.json->page_general->title
+#. 4.8->settings-schema.json->page_general->title
+msgid "General"
+msgstr ""
+
+#. 5.8->settings-schema.json->page_modules->title
+#. 4.8->settings-schema.json->page_modules->title
+msgid "Modules"
+msgstr ""
+
+#. 5.8->settings-schema.json->section_panel->title
+#. 4.8->settings-schema.json->section_panel->title
+msgid "Panel"
+msgstr ""
+
+#. 5.8->settings-schema.json->section_devices->title
+#. 4.8->settings-schema.json->section_devices->title
+msgid "Devices"
+msgstr ""
+
+#. 5.8->settings-schema.json->combobox_icon-type->options
+#. 4.8->settings-schema.json->combobox_icon-type->options
+msgid "Symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->combobox_icon-type->options
+#. 4.8->settings-schema.json->combobox_icon-type->options
+msgid "Color"
+msgstr ""
+
+#. 5.8->settings-schema.json->switch_different-icon-no-connected-
+#. devices->description
+msgid "Display a different icon when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_no-connected-devices->description
+msgid "Icon to use when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->orderlist_device-order->columns->title
+#. 5.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 5.8->settings-schema.json->oderlist_action-modules->columns->title
+#. 4.8->settings-schema.json->orderlist_device-order->columns->title
+#. 4.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_action-modules->columns->title
+msgid "Name"
+msgstr ""
+
+#. 5.8->settings-schema.json->orderlist_device-order->columns->title
+#. 4.8->settings-schema.json->orderlist_device-order->columns->title
+msgid "Expand"
+msgstr ""
+
+#. 5.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 5.8->settings-schema.json->oderlist_action-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_action-modules->columns->title
+msgid "Enabled"
+msgstr ""
+
+#. 5.8->settings-schema.json->module_sftp_description->description
+#. 4.8->settings-schema.json->module_sftp_description->description
+msgid "Lets you remotely browse the storage of the device"
+msgstr ""
+
+#. 5.8->settings-schema.json->module_sftp_selectFirstDirectory->description
+msgid "Select the first directory automatically"
+msgstr ""

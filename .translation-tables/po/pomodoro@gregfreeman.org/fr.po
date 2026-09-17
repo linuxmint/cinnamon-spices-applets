@@ -1,0 +1,292 @@
+# French translations for PACKAGE package
+# Traductions françaises du paquet PACKAGE.
+# Copyright (C) 2016 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Alador <alador77@free.fr>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-25 20:30+1000\n"
+"PO-Revision-Date: 2024-10-02 21:47+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:278
+msgid "Short break running"
+msgstr "Courte pose en cours"
+
+#: applet.js:281
+msgid "Long break running"
+msgstr "Longue pause en cours"
+
+#: applet.js:284
+#, javascript-format
+msgid "Pomodori %d, set %d running"
+msgstr "Pomodoro %d, set %d en cours"
+
+#: applet.js:289
+msgid "Waiting to start"
+msgstr "En attente pour démarrer"
+
+# notifications
+#: applet.js:342
+msgid "Pomodoro started"
+msgstr "Pomodoro démarré"
+
+#: applet.js:407
+msgid "Let's go to work!"
+msgstr "Au travail!"
+
+#: applet.js:425
+msgid "Take a short break"
+msgstr "Prenez une courte pause"
+
+#: applet.js:448
+msgid "Take a long break"
+msgstr "Prenez une longue pause"
+
+#: applet.js:484
+msgid "Pomodoro ended"
+msgstr "Pomodoro terminé"
+
+#: applet.js:607
+msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
+msgstr "https://fr.wikipedia.org/wiki/Technique_Pomodoro"
+
+# applet menu
+#. metadata.json->name
+#: applet.js:753
+msgid "Pomodoro Timer"
+msgstr "Minuteur Pomodoro"
+
+#: applet.js:762
+msgid "Completed"
+msgstr "Terminé"
+
+#: applet.js:770
+msgid "Reset Timer"
+msgstr "Remise à zéro du minuteur"
+
+#: applet.js:778
+msgid "Reset Counts and Timer"
+msgstr "Remise à zéro des comptes et du minuteur"
+
+#: applet.js:787
+msgid "Skip To Next Timer"
+msgstr "Passer à la minuterie suivante"
+
+#: applet.js:794
+msgid "What is this?"
+msgstr "Qu'est cela ?"
+
+#: applet.js:834
+msgid "None"
+msgstr "Aucun"
+
+# dialog
+#: applet.js:851
+msgid "Switch Off Pomodoro"
+msgstr "Désactiver Pomodoro"
+
+#: applet.js:857
+msgid "Start a new Pomodoro"
+msgstr "Démarrer un nouveau Pomodoro"
+
+#: applet.js:863
+msgid "Hide"
+msgstr "Masquer"
+
+#: applet.js:875
+msgid "Pomodoro set finished, you deserve a break!"
+msgstr "Pomodoro terminé, vous méritez un break !"
+
+#: applet.js:884
+msgid "Your break is over, start another pomodoro!"
+msgstr "Votre pause est terminée, démarrez un nouveau Pomodoro !"
+
+#: applet.js:890
+#, javascript-format
+msgid "A new pomodoro begins in %s."
+msgstr "Un nouveau Pomodoro débute dans %s."
+
+#: applet.js:902
+#, javascript-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minute"
+msgstr[1] "%d minutes"
+
+#: applet.js:903
+#, javascript-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d seconde"
+msgstr[1] "%d secondes"
+
+#: applet.js:905
+#, javascript-format
+msgid "%s and %s"
+msgstr "%s et %s"
+
+#: applet.js:920
+msgid "Continue Current Pomodoro"
+msgstr "Poursuivre avec le Pomodoro actuel"
+
+#: applet.js:926 applet.js:959
+msgid "Pause Pomodoro"
+msgstr "Pause Pomodoro"
+
+#: applet.js:937
+msgid "Short break finished, ready to continue?"
+msgstr "Petite pause terminée, prêt à continuer ?"
+
+#: applet.js:953
+msgid "Start break"
+msgstr "Début de la pause"
+
+#: applet.js:970
+msgid "Pomodoro finished, ready to take a break?"
+msgstr "Pomodoro terminé, prêt à faire une pause ?"
+
+#. metadata.json->description
+msgid "Great tool for boosted productivity!"
+msgstr "Un excellent outil pour améliorer sa productivité !"
+
+#. settings-schema.json->head_durations->description
+msgid "Durations (minutes)"
+msgstr "Durées (en minutes)"
+
+#. settings-schema.json->pomodoro_duration->description
+msgid "Pomodoro Duration:"
+msgstr "Durée du Pomodoro :"
+
+#. settings-schema.json->short_break_duration->description
+msgid "Short Break Duration:"
+msgstr "Durée d'une courte pause :"
+
+#. settings-schema.json->long_break_duration->description
+msgid "Long Break Duration:"
+msgstr "Durée d'une longue pause :"
+
+#. settings-schema.json->pomodori_number->description
+msgid "Number of pomodori before long break:"
+msgstr "Nombre de Pomodoro avant une longue pause :"
+
+#. settings-schema.json->head_options->description
+msgid "Options"
+msgstr "Options"
+
+#. settings-schema.json->start_automatically_on_load->description
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "Lancer le minuteur pomodoro dès le chargement de l'applet"
+
+#. settings-schema.json->show_dialog_messages->description
+msgid "Show Dialog Messages"
+msgstr "Voir les messages de dialogue"
+
+#. settings-schema.json->auto_start_after_pomodoro_ends->description
+msgid "Auto start after a pomodoro ends"
+msgstr "Démarrage automatique à la fin d'un pomodoro"
+
+#. settings-schema.json->auto_start_after_short_break_ends->description
+msgid "Auto start after a short break ends"
+msgstr "Démarrer automatiquement lorsque la pause est terminée"
+
+#. settings-schema.json->auto_start_after_break_ends->description
+msgid "Auto start a new pomodoro after a break ends"
+msgstr ""
+"Démarrer automatiquement un nouveau Pomodoro lorsque la pause est terminée"
+
+#. settings-schema.json->display_icon->description
+msgid "Display the pomodoro icon in the applet panel"
+msgstr "Afficher l'icône du Pomodoro dans le panneau d'applet"
+
+#. settings-schema.json->use_symbolic_icon->description
+msgid "Use a symbolic icon in the applet panel"
+msgstr "Utiliser une icône symbolique dans le panneau"
+
+#. settings-schema.json->show_timer->description
+msgid "Show the pomodoro timer in the applet panel"
+msgstr "Afficher le minuteur du Pomodoro dans le panneau d'applet"
+
+#. settings-schema.json->hotkey->description
+msgid "Set the keybinding to open the applet menu"
+msgstr "Définir le raccourci clavier pour ouvrir le menu de l'applet"
+
+#. settings-schema.json->head_sounds->description
+msgid "Sounds"
+msgstr "Sons"
+
+#. settings-schema.json->sox-info->description
+msgid "Please install 'sox' and restart Cinnamon to use the sound feature!"
+msgstr ""
+"Veuillez installer \"sox\" puis redémarrer Cinnamon pour utiliser les "
+"fonctionnalités sonores !"
+
+#. settings-schema.json->timer_sound->description
+msgid "Play Timer Sound"
+msgstr "Jouer le son du minuteur"
+
+#. settings-schema.json->timer_sound_file->description
+msgid "Timer Sound File"
+msgstr "Fichier son du minuteur"
+
+#. settings-schema.json->timer_sound_volume->description
+#. settings-schema.json->break_sound_volume->description
+#. settings-schema.json->warn_sound_volume->description
+#. settings-schema.json->start_sound_volume->description
+msgid "Sound volume:"
+msgstr "Volume du son :"
+
+#. settings-schema.json->break_sound->description
+msgid "Play Break Sound"
+msgstr "Jouer un son de pause"
+
+#. settings-schema.json->break_sound_file->description
+msgid "Break Sound File"
+msgstr "Fichier son de pause"
+
+#. settings-schema.json->warn_sound->description
+msgid "Play Warn Sound"
+msgstr "Jouer un son d'avertissement"
+
+#. settings-schema.json->warn_sound_delay->description
+msgid "Warn Delay (in secs):"
+msgstr "Délai d'avertissement (en secondes) :"
+
+#. settings-schema.json->warn_sound_file->description
+msgid "Warn Sound File"
+msgstr "Fichier son d'avertissement"
+
+#. settings-schema.json->start_sound->description
+msgid "Play Start Sound"
+msgstr "Jouer un son de début"
+
+#. settings-schema.json->start_sound_file->description
+msgid "Start Sound File"
+msgstr "Fichier son de début"
+
+#. settings-schema.json->head_scripts->description
+msgid "Scripts"
+msgstr "Scripts"
+
+#. settings-schema.json->enable_scripts->description
+msgid "Enable scripts"
+msgstr "Activer les scripts"
+
+#. settings-schema.json->custom_short_break_script->description
+msgid "Execute this custom script when a short break starts"
+msgstr "Exécuter ce script personnalisé lorsqu'une pause courte commence"
+
+#. settings-schema.json->custom_long_break_script->description
+msgid "Execute this custom script when a long break starts"
+msgstr "Exécuter ce script personnalisé lorsqu'une pause longue commence"

@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: places-with-terminal@mtwebster 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-05 01:47+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:99
+msgid "Places and bookmarks"
+msgstr "Llocs i marcadors"
+
+#: applet.js:106
+msgid "Refresh bookmarks..."
+msgstr "Refrescar marcadors..."
+
+#: applet.js:109
+msgid "Change default programs..."
+msgstr "Canviar els programes per defecte..."
+
+#: applet.js:153
+msgid "Computer"
+msgstr "Ordinador"
+
+#: applet.js:161
+msgid "File System"
+msgstr "Sistema de fitxers"
+
+#. metadata.json->name
+msgid "Places with Terminal Launcher"
+msgstr "Llocs amb llançadora del Terminal"
+
+#. metadata.json->description
+msgid "Access your places and bookmarks, or launch a terminal at that location"
+msgstr ""
+"Accediu als vostres llocs i marcadors o llanceu un terminal a aquella "
+"ubicació"
+
+#. settings-schema.json->icon->description
+msgid "icon"
+msgstr "icona"
+
+#. settings-schema.json->show-terminal->description
+msgid "Add terminal button to menu items"
+msgstr "Afegir botó del terminal als ítems del menú"

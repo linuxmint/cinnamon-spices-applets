@@ -1,0 +1,13 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Quiet reminder to take a break every half an hour. When the circle is red, "
+"give your eyes a rest by looking away from your monitor, then click the "
+"circle."
+msgstr ""

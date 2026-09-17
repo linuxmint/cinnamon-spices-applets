@@ -1,0 +1,286 @@
+# RADIO++
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Driglu4it, 2017
+# Cássio Louzada Rizzi <clrizzi@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-20 14:55-0500\n"
+"PO-Revision-Date: 2023-04-30 22:13-0300\n"
+"Last-Translator: Cássio Louzada Rizzi\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. metadata.json->name
+#. 3.0/applet.js:99 3.0/applet.js:117 3.0/applet.js:143 3.0/applet.js:153
+msgid "Radio++"
+msgstr "Radio++"
+
+#. 3.0/applet.js:130
+#, javascript-format
+msgid "Playing %s"
+msgstr "Reproduzindo %s"
+
+#. 3.0/applet.js:140
+msgid "Stop"
+msgstr "Parar"
+
+#. 3.0/applet.js:149
+msgid "Stop Radio++"
+msgstr "Parar Radio++"
+
+#. 3.0/applet.js:183
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr "Por favor, instale o pacote '%s'."
+
+#. 4.6/RadioSearchWidget.py:48 6.4/RadioSearchWidget.py:48
+msgid "Find Radio Station"
+msgstr "Buscar uma estação de Rádio"
+
+#. 4.6/RadioSearchWidget.py:53 6.4/RadioSearchWidget.py:53
+msgid "Add to My Stations"
+msgstr "Adicionar às Minhas Estações"
+
+#. 4.6/download-dialog-mpris.py:41 6.4/download-dialog-mpris.py:41
+msgid "Download Confirmation Dialog"
+msgstr "Diálogo de Confirmação de Download"
+
+#. 4.6/download-dialog-mpris.py:45 6.4/download-dialog-mpris.py:45
+#, python-format
+msgid ""
+"The radio applet depends on the '%s' plugin. It's a 3rd party plugin for "
+"mpv, which allows controlling the radio player with the sound applet."
+msgstr ""
+"O applet de rádio depende do plugin '%s'. É um plugin de terceiros para mpv, "
+"que permite controlar o reprodutor de rádio com o applet de som."
+
+#. 4.6/download-dialog-mpris.py:46 6.4/download-dialog-mpris.py:46
+msgid "Do you want to proceed the download at your own risk?"
+msgstr "Deseja prosseguir com o download por sua conta e risco?"
+
+#. 4.6/download-dialog-mpris.py:47 6.4/download-dialog-mpris.py:47
+msgid "Cancel download"
+msgstr "Cancelar download"
+
+#. 4.6/download-dialog-mpris.py:48 6.4/download-dialog-mpris.py:48
+msgid "More info"
+msgstr "Mais informações"
+
+#. 4.6/download-dialog-mpris.py:49 6.4/download-dialog-mpris.py:49
+msgid "Download plugin at my own risk"
+msgstr "Baixar o plugin por minha própria conta e risco."
+
+#. metadata.json->description
+msgid ""
+"A radio applet with 1000's of searchable stations, mpris support, youtube-"
+"download function and more"
+msgstr ""
+
+#. 3.0->settings-schema.json->page1->title
+#. 3.0->settings-schema.json->tree->description
+#. 4.6->settings-schema.json->station-list-section->title
+#. 6.4->settings-schema.json->station-list-section->title
+msgid "List of stations"
+msgstr "Lista de estações"
+
+#. 3.0->settings-schema.json->page2->title
+#. 3.0->settings-schema.json->section2->title
+msgid "Icon"
+msgstr "Ícone"
+
+#. 3.0->settings-schema.json->section1->title
+msgid "Radio"
+msgstr "Rádio"
+
+#. 3.0->settings-schema.json->section3->title
+msgid "Symbolic Icon Color"
+msgstr "Cor do ícone simbólico"
+
+#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
+#. 6.4->settings-schema.json->tree->columns->title
+msgid "Show in list"
+msgstr "Mostrar na lista"
+
+#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
+#. 6.4->settings-schema.json->tree->columns->title
+msgid "Title"
+msgstr "Título"
+
+#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
+#. 6.4->settings-schema.json->tree->columns->title
+msgid "URL"
+msgstr "URL"
+
+#. 3.0->settings-schema.json->streamurl-button->description
+msgid "Open radio stream URL search engine"
+msgstr "Abrir motor de busca de URL de transmissões de rádio online"
+
+#. 3.0->settings-schema.json->streamurl-button->tooltip
+msgid "Opens a website, which helps you to determine radio stream URLs."
+msgstr ""
+"Abrir uma página da web que lhe ajudará a determinar as URL's de "
+"transmissões de rádio online."
+
+#. 3.0->settings-schema.json->radiolist-button->description
+msgid "Show URL-list of radio stations"
+msgstr "Mostrar a lista de URL das estações de rádio"
+
+#. 3.0->settings-schema.json->radiolist-button->tooltip
+msgid "Opens a website, which lists URLs of radio stations."
+msgstr "Abrir uma página da web com uma lista de URL's de estações de rádio."
+
+#. 3.0->settings-schema.json->icon-type->description
+msgid "Type"
+msgstr "Estilo"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Symbolic Icon"
+msgstr "Ícone simbólico"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Full Color Icon"
+msgstr "Ícone colorido"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Bicolor Icon"
+msgstr "Ícone bicolor"
+
+#. 3.0->settings-schema.json->color-on->description
+msgid "Color of Symbolic Icon when playing a radio"
+msgstr "Cor do ícone simbólico ao reproduzir uma estação de rádio"
+
+#. 4.6->settings-schema.json->search-page->title
+#. 6.4->settings-schema.json->search-page->title
+msgid "Find Station"
+msgstr "Buscar Estação"
+
+#. 4.6->settings-schema.json->my-stations-page->title
+#. 6.4->settings-schema.json->my-stations-page->title
+msgid "My Stations"
+msgstr "Minhas Estações"
+
+#. 4.6->settings-schema.json->preferences-page->title
+#. 6.4->settings-schema.json->preferences-page->title
+msgid "Preferences"
+msgstr "Preferências"
+
+#. 4.6->settings-schema.json->find-station-section->title
+#. 6.4->settings-schema.json->find-station-section->title
+msgid "Search Radio station"
+msgstr "Buscar uma estação de rádio"
+
+#. 4.6->settings-schema.json->appearance-section->title
+#. 6.4->settings-schema.json->appearance-section->title
+msgid "Appearance"
+msgstr "Aparência"
+
+#. 4.6->settings-schema.json->volume-section->title
+#. 6.4->settings-schema.json->volume-section->title
+msgid "Volume"
+msgstr "Volume"
+
+#. 4.6->settings-schema.json->youtube-section->title
+#. 6.4->settings-schema.json->youtube-section->title
+msgid "YouTube Download"
+msgstr "Baixar do Youtube"
+
+#. 4.6->settings-schema.json->icon-type->description
+#. 6.4->settings-schema.json->icon-type->description
+msgid "Icon type"
+msgstr "Tipo de ícone"
+
+#. 4.6->settings-schema.json->icon-type->options
+#. 6.4->settings-schema.json->icon-type->options
+msgid "Symbolic"
+msgstr "Simbólico"
+
+#. 4.6->settings-schema.json->icon-type->options
+#. 6.4->settings-schema.json->icon-type->options
+msgid "Full Color"
+msgstr "Colorido"
+
+#. 4.6->settings-schema.json->icon-type->options
+#. 6.4->settings-schema.json->icon-type->options
+msgid "Bicolor"
+msgstr "Bicolor"
+
+#. 4.6->settings-schema.json->color-on->description
+#. 6.4->settings-schema.json->color-on->description
+msgid "Color of symbolic icon when playing a radio station"
+msgstr "Cor do ícone simbólico ao reproduzir uma estação de rádio"
+
+#. 4.6->settings-schema.json->color-paused->description
+#. 6.4->settings-schema.json->color-paused->description
+msgid "Color of symbolic icon while a radio station is paused"
+msgstr "Cor do ícone simbólico quando a estação de rádio está em pausa"
+
+#. 4.6->settings-schema.json->channel-on-panel->description
+#. 6.4->settings-schema.json->channel-on-panel->description
+msgid "Show current radio station on the panel"
+msgstr "Mostrar a estação de rádio atual no painel"
+
+#. 4.6->settings-schema.json->keep-volume-between-sessions->description
+#. 6.4->settings-schema.json->keep-volume-between-sessions->description
+msgid "Remember volume after stopping the radio"
+msgstr "Lembrar o volume após pausar a rádio"
+
+#. 4.6->settings-schema.json->initial-volume->description
+#. 6.4->settings-schema.json->initial-volume->description
+msgid "Initial volume"
+msgstr "Volume inicial"
+
+#. 4.6->settings-schema.json->initial-volume->tooltip
+#. 6.4->settings-schema.json->initial-volume->tooltip
+msgid ""
+"The initial volume is applied when clicking on a radio stream and no other "
+"radio stream is already running"
+msgstr ""
+"O volume inicial é aplicado ao clicar em uma transmissão de rádio e nenhuma "
+"outra transmissão estiver em execução"
+
+#. 4.6->settings-schema.json->youtube-download-cli->description
+#. 6.4->settings-schema.json->youtube-download-cli->description
+#, fuzzy
+msgid "YouTube Download CLI tool"
+msgstr "Baixar do Youtube"
+
+#. 4.6->settings-schema.json->youtube-download-cli->tooltip
+#. 6.4->settings-schema.json->youtube-download-cli->tooltip
+#, fuzzy
+msgid "The CLI tool used to download songs from YouTube"
+msgstr "Impossível baixar a música do youtube devido a um erro."
+
+#. 4.6->settings-schema.json->youtube-download-cli->options
+#. 6.4->settings-schema.json->youtube-download-cli->options
+msgid "yt-dlp"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->options
+#. 6.4->settings-schema.json->youtube-download-cli->options
+msgid "youtube-dl"
+msgstr ""
+
+#. 4.6->settings-schema.json->music-download-dir-select->description
+#. 6.4->settings-schema.json->music-download-dir-select->description
+msgid "Download directory"
+msgstr "Diretório de Download"
+
+#. 4.6->settings-schema.json->music-download-dir-select->tooltip
+#. 6.4->settings-schema.json->music-download-dir-select->tooltip
+#, fuzzy
+msgid "Songs downloaded from YouTube will be saved to this directory."
+msgstr ""
+"As músicas baixadas do YouTube serão salvas neste diretório. Esta "
+"funcionalidade pode ser encontrada no menu de clique-direito do applet"
