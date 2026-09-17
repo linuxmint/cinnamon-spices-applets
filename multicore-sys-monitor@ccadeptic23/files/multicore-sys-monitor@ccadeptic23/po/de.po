@@ -1075,7 +1075,7 @@ msgstr ""
 #. 5.6->settings-schema.json->percentFontFactor->description
 #. 5.6->settings-schema.json->flowFontFactor->description
 msgid "Font size: percentage of the box height"
-msgstr "Schriftgröße: Prozent der Höhe des Kästchens"
+msgstr "Schriftgröße in Prozent der Kästchenhöhe"
 
 #. 5.6->settings-schema.json->CPU_showLoadAverage->description
 msgid "Show the CPU average load"
@@ -1099,19 +1099,19 @@ msgstr ""
 
 #. 5.6->settings-schema.json->CPU_loadAverageColor->description
 msgid "Normal Average Load Color"
-msgstr "Farbe normale Durschnittslast"
+msgstr "Farbe normale Durchschnittslast"
 
 #. 5.6->settings-schema.json->CPU_loadAverageColorHigh->description
 msgid "High Average Load Color"
-msgstr "Farbe hohe Durschnittslast"
+msgstr "Farbe hohe Durchschnittslast"
 
 #. 5.6->settings-schema.json->CPU_loadAverageColorCrit->description
 msgid "Critical Average Load Color"
-msgstr "Farbe kritische Durschnittslast"
+msgstr "Farbe kritische Durchschnittslast"
 
 #. 5.6->settings-schema.json->CPU_loadAverageCorner->description
 msgid "Corner in which to display the average load"
-msgstr "Ecke, in der die Durschnittslast angezeigt werden soll"
+msgstr "Ecke, in der die Durchschnittslast angezeigt werden soll"
 
 #. 5.6->settings-schema.json->CPU_tempColor->description
 msgid "Normal Temperature Color"
