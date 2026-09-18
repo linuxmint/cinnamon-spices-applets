@@ -1,0 +1,36 @@
+{
+    "update-interval": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "units": "minutes",
+        "description": "Update interval",
+        "tooltip": "How often the applet runs `agy -p \"/usage\"`"
+    },
+    "model-group": {
+        "type": "combobox",
+        "default": "gemini",
+        "description": "Model group on panel",
+        "options": {
+            "Gemini": "gemini",
+            "Claude / GPT": "3p"
+        },
+        "tooltip": "Which group of limits appears on the panel. The tooltip always shows both."
+    },
+    "agy-path": {
+        "type": "filechooser",
+        "default": "",
+        "description": "Path to the agy binary",
+        "tooltip": "Set this when `agy` is not in PATH or in ~/.local/bin"
+    },
+    "last-data": {
+        "type": "generic",
+        "default": null
+    },
+    "last-fetch-time": {
+        "type": "generic",
+        "default": 0
+    }
+}
