@@ -365,15 +365,37 @@ class SpotifyControlApplet extends Applet.Applet {
     }
 
     _loadCoverFromFile(path, token) {
-        if (!path || !GLib.file_test(path, GLib.FileTest.EXISTS)) {
+        if (!path) {
             if (token === this._coverLoadToken)
                 this._applet_tooltip.setDefaultArt();
             return;
         }
-        St.TextureCache.get_default().load_image_from_file_async(path, COVER_SIZE, COVER_SIZE,
-            (cache, handle, actor) => {
-                if (token === this._coverLoadToken)
-                    this._applet_tooltip.setArt(actor);
+
+        // Check the file exists asynchronously rather than blocking on a
+        // synchronous stat call.
+        Gio.File.new_for_path(path).query_info_async(
+            Gio.FILE_ATTRIBUTE_STANDARD_TYPE, Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT, null, (file, res) => {
+                let exists = true;
+                try {
+                    file.query_info_finish(res);
+                } catch (e) {
+                    exists = false;
+                }
+
+                if (token !== this._coverLoadToken)
+                    return;
+
+                if (!exists) {
+                    this._applet_tooltip.setDefaultArt();
+                    return;
+                }
+
+                St.TextureCache.get_default().load_image_from_file_async(path, COVER_SIZE, COVER_SIZE,
+                    (cache, handle, actor) => {
+                        if (token === this._coverLoadToken)
+                            this._applet_tooltip.setArt(actor);
+                    });
             });
     }
 
