@@ -1,0 +1,10 @@
+{
+    "uuid": "stocktracker@hololand",
+    "name": "Stock Tracker",
+    "description": "A clean, configurable, minimalist stock ticker for your panel. Cycles through your watchlist and shows live prices with a detail popup and mini charts.",
+    "version": "1.2.4",
+    "cinnamon-version": ["6.0", "6.2", "6.4", "6.6"],
+    "author": "hololand",
+    "max-instances": "10",
+    "multiversion": false
+}
