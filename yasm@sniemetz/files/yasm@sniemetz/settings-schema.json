@@ -124,6 +124,7 @@
         "cpu-enabled",
         "cpu-display",
         "cpu-label",
+        "cpu-hwmon-list",
         "cpu-temp-warn",
         "cpu-temp-alert",
         "cpu-temp-alert-notify",
@@ -383,6 +384,33 @@
     "default": "",
     "dependency": "!cpu-display",
     "description": "Label text"
+  },
+  "cpu-hwmon-list": {
+    "type": "list",
+    "description": "CPU temperature chips (auto-discovered on first run)",
+    "columns": [
+      {
+        "id": "enabled",
+        "title": "Show",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "hwmon",
+        "title": "hwmon",
+        "type": "string",
+        "default": "0"
+      },
+      {
+        "id": "name",
+        "title": "Chip",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ],
+    "default": []
   },
   "memory-enabled": {
     "type": "checkbox",

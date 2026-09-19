@@ -11,7 +11,18 @@ const Pango      = imports.gi.Pango;
 const GdkPixbuf  = imports.gi.GdkPixbuf;
 const Cogl       = imports.gi.Cogl;
 
-const UUID       = 'yasm@sniemetz';
+// Derive AppletPath and UUID from this file's own location instead of
+// hardcoding them, so a checkout can be installed under any UUID (e.g.
+// yasm@local for local dev alongside the published yasm@sniemetz) without
+// editing the source. GJS exposes the current script's absolute path in
+// Error.stack as "@<path>:line:col"; the applet's directory name is its
+// UUID by Cinnamon convention.
+const AppletPath = (function() {
+  const m = (new Error()).stack.match(/@(.*)\/applet\.js:/);
+  return m ? m[1] : null;
+})();
+const UUID = AppletPath.split('/').pop();
+imports.searchPath.unshift(AppletPath);
 
 // Graph colors — edit here to retheme all canvas graphs at once.
 // Values are [red, green, blue, alpha] in 0-1 range for Cairo.
@@ -23,8 +34,6 @@ const C = {
   purple: [0.70, 0.50, 1.00, 0.85],  // RX
   draw:   [1.00, 0.40, 0.40, 0.85],  // battery draw / discharge
 };
-const AppletPath = imports.ui.appletManager.appletMeta[UUID].path;
-imports.searchPath.unshift(AppletPath);
 
 const { MetricsManager } = imports.lib.metricsManager;
 const { parseList } = imports.lib.util;
@@ -322,7 +331,8 @@ class YasmApplet extends Applet.Applet {
   _autoScanIfEmpty() {
     const empty = l => parseList(l).length === 0;
     if (empty(this._batteryList) || empty(this._netList) ||
-        empty(this._fanHwmonList) || empty(this._diskList))
+        empty(this._fanHwmonList) || empty(this._cpuHwmonList) ||
+        empty(this._diskList))
       this.refreshSources();
   }
 
@@ -335,6 +345,7 @@ class YasmApplet extends Applet.Applet {
     bind('net-list',         '_netList');
     bind('disk-list',        '_diskList');
     bind('fan-hwmon-list',   '_fanHwmonList', () => this._restartManager());
+    bind('cpu-hwmon-list',   '_cpuHwmonList', () => this._restartManager());
 
     bind('load-warn',      '_loadWarn');
     bind('load-alert',     '_loadAlert');
@@ -375,6 +386,11 @@ class YasmApplet extends Applet.Applet {
     const newFans  = fanChips.map(c => ({ enabled: true, hwmon: String(c.hwmon), name: c.name }));
     this._settings.setValue('fan-hwmon-list',
       Discover.mergeHwmonLists(newFans, parseList(this._fanHwmonList)));
+
+    const cpuChips = CpuMetric.findCpuTempChips(fileutil);
+    const newCpu   = cpuChips.map(c => ({ enabled: true, hwmon: String(c.hwmon), name: c.name }));
+    this._settings.setValue('cpu-hwmon-list',
+      Discover.mergeHwmonLists(newCpu, parseList(this._cpuHwmonList)));
 
     const diskDevs = Discover.discoverDiskDevices(fileutil);
     const newDisks = diskDevs.map(d => ({ enabled: true, device: d }));

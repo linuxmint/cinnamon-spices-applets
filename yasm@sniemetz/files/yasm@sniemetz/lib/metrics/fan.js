@@ -13,7 +13,7 @@ function parseFanInputs(fileutil, hwmonPath) {
 function formatPanel(fans) {
   if (!fans || fans.length === 0) return 'no fans';
   const maxRpm = Math.max(...fans.map(f => f.rpm));
-  return `${maxRpm} rpm`;
+  return `${maxRpm}rpm`;
 }
 
 function formatTooltip(fans) {
