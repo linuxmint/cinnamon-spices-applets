@@ -177,36 +177,41 @@ export class CurrentWeather {
 
 	/** Builds Weather Information on the right side */
 	private BuildRightColumn(textColorStyle: string, config: Config) {
-		// Current Weather Right Column
-		this.temperatureLabel = Label();
-		this.humidityLabel = Label();
-		this.pressureLabel = Label();
-		this.dewPointLabel = Label();
+		// CJK 字体与拉丁字体的基线不同，用 CJK 字体统一 caption 与 value 的度量
+		const minRowHeight = Math.ceil(config.CurrentFontSize * 2);
+		const captionStyle = "min-height: " + minRowHeight + "px;";
+		const valueStyle = "min-height: " + minRowHeight + "px; font-family: 'Noto Sans CJK SC', sans-serif;";
 
-		this.apiUniqueLabel = Label();
+		// Current Weather Right Column
+		this.temperatureLabel = Label({ style: valueStyle });
+		this.humidityLabel = Label({ style: valueStyle });
+		this.pressureLabel = Label({ style: valueStyle });
+		this.dewPointLabel = Label({ style: valueStyle });
+
+		this.apiUniqueLabel = Label({ style: valueStyle });
 		this.temperatureCaption = Label({
 			text: _('Temperature') + LocalizedColon(config.currentLocale),
-			style: textColorStyle,
+			style: textColorStyle + "; " + captionStyle,
 			x_align: imports.gi.Clutter.ActorAlign.END,
 		});
 		this.humidityCaption = Label({
 			text: _('Humidity') + LocalizedColon(config.currentLocale),
-			style: textColorStyle,
+			style: textColorStyle + "; " + captionStyle,
 			x_align: imports.gi.Clutter.ActorAlign.END,
 		});
 		this.pressureCaption = Label({
 			text: _('Pressure') + LocalizedColon(config.currentLocale),
-			style: textColorStyle,
+			style: textColorStyle + "; " + captionStyle,
 			x_align: imports.gi.Clutter.ActorAlign.END,
 		});
 		this.dewPointCaption = Label({
 			text: _("Dew Point") + LocalizedColon(config.currentLocale),
-			style: textColorStyle,
+			style: textColorStyle + "; " + captionStyle,
 			x_align: imports.gi.Clutter.ActorAlign.END,
 		});
 		// APi Unique Caption
 		this.apiUniqueCaption = Label({
-			style: textColorStyle,
+			style: textColorStyle + "; " + captionStyle,
 			x_align: imports.gi.Clutter.ActorAlign.END,
 		});
 

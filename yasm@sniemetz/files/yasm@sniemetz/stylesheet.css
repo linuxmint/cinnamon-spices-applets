@@ -131,3 +131,41 @@
   padding: 2px 8px 2px 1px;
   min-width: 0;
 }
+
+/* ─── Light theme overrides ──────────────────────────────── */
+
+.yasm-light.yasm-box {
+  background-color: rgba(220, 220, 220, 0.6);
+}
+.applet-box.yasm-light.yasm-box:hover {
+  background-color: rgb(200, 200, 200);
+}
+
+.yasm-light .yasm-label {
+  background-color: rgba(255, 255, 255, 0.75);
+  border-color: rgba(160, 160, 160, 0.55);
+}
+
+.yasm-light .yasm-sep {
+  color: rgba(0, 0, 0, 0.30);
+}
+
+.yasm-light .threshold-warn  { background-color: rgba(200, 150, 0, 0.45); }
+.yasm-light .threshold-alert { background-color: rgba(200, 40, 40, 0.45); }
+
+.yasm-light.yasm-tooltip {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.20);
+}
+
+.yasm-light .yasm-tooltip-text {
+  color: #222222;
+}
+
+.yasm-light .yasm-graph-label {
+  color: #444444;
+}
+
+.yasm-light .yasm-graph-canvas {
+  border-color: #999999;
+}

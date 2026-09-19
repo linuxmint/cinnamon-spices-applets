@@ -3,6 +3,7 @@ import { isConstructor, setTimeout } from "../utils";
 import type { HTTPHeaders, HTTPParams, Method } from "./httpLib";
 import { LoadContents } from "./io_lib";
 import { Logger } from "./services/logger";
+import { BuildRequestUrls } from "./httpLog";
 const { Message, Session } = imports.gi.Soup;
 const { PRIORITY_DEFAULT }  = imports.gi.GLib;
 const { Cancellable, File } = imports.gi.Gio;
@@ -17,7 +18,9 @@ export interface SoupLibSendOptions {
 	 */
 	cancellable?: imports.gi.Gio.Cancellable,
 	/** Do not encode the url.  */
-	noEncode?: boolean
+	noEncode?: boolean,
+	/** URL to use in logs when the request URL contains credentials. */
+	logUrl?: string
 }
 export interface SoupLib {
     Send: (
@@ -38,18 +41,6 @@ export interface SoupResponse {
 	reason_phrase: string;
 	response_body: string | null;
 	response_headers: Record<string, string>;
-}
-
-function AddParamsToURI(url: string, params?: HTTPParams | null): string {
-    let result = url;
-    if (params != null) {
-        const items = Object.keys(params);
-        for (const [index, item] of items.entries()) {
-            result += (index == 0) ? "?" : "&";
-            result += (item) + "=" + params[item]
-        }
-    }
-    return result;
 }
 
 function AddHeadersToMessage(message: imports.gi.Soup.Message, headers?: HTTPHeaders): void {
@@ -124,7 +115,8 @@ class Soup3 implements SoupLib {
 			headers,
 			method = "GET",
 			cancellable,
-			noEncode = false
+			noEncode = false,
+			logUrl
 		} = options;
 
 		await this.defaultUserAgentReady;
@@ -133,11 +125,10 @@ class Soup3 implements SoupLib {
 			return null;
 		}
 
-        // Add params to url
-        url = AddParamsToURI(url, params);
-
-		const query = noEncode ? url : encodeURI(url);
-        Logger.Debug("URL called: " + query);
+		const urls = BuildRequestUrls(url, params ?? undefined, logUrl, !noEncode);
+		const query = urls.requestUrl;
+		const safeQuery = urls.logUrl;
+        Logger.Debug("URL called: " + safeQuery);
         const data: SoupResponse | null = await new Promise((resolve) => {
             const message = Message.new(method, query);
             if (message == null) {
@@ -242,7 +233,8 @@ class Soup2 implements SoupLib {
 			params,
 			headers,
 			method = "GET",
-			cancellable
+			cancellable,
+			logUrl
 		} = options;
 
 		await this.defaultUserAgentReady;
@@ -251,11 +243,10 @@ class Soup2 implements SoupLib {
 			return null;
 		}
 
-		// Add params to url
-		url = AddParamsToURI(url, params);
-
-		const query = encodeURI(url);
-		Logger.Debug("URL called: " + query);
+		const urls = BuildRequestUrls(url, params ?? undefined, logUrl);
+		const query = urls.requestUrl;
+		const safeQuery = urls.logUrl;
+		Logger.Debug("URL called: " + safeQuery);
 		const data: SoupResponse | null = await new Promise((resolve) => {
 			const message = Message.new(method, query);
 			if (message == null) {
@@ -271,7 +262,7 @@ class Soup2 implements SoupLib {
 					timeout = setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
 				}
 
-				Logger.Debug("Sending http request to " + query);
+				Logger.Debug("Sending http request to " + safeQuery);
 				this._httpSession.send_async(message, finalCancellable, async (session: unknown, result: imports.gi.Gio.AsyncResult) => {
 					if (timeout != null)
 						clearTimeout(timeout);
@@ -279,9 +270,9 @@ class Soup2 implements SoupLib {
 					const headers: Record<string, string> = {};
 					let res: string | null = null;
 					try {
-						Logger.Debug("Reading reply from " + query);
+						Logger.Debug("Reading reply from " + safeQuery);
 						const stream: imports.gi.Gio.InputStream = this._httpSession.send_finish(result);
-						Logger.Debug("Reply received from " + query + " with status code " + message.status_code + " and reason: " + message.reason_phrase);
+						Logger.Debug("Reply received from " + safeQuery + " with status code " + message.status_code + " and reason: " + message.reason_phrase);
 						res = await this.read_all_bytes(stream, finalCancellable);
 						stream.close(null);
 						message.response_headers.foreach((name: string, value: string) => {

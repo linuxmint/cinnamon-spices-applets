@@ -76,27 +76,44 @@ function formatPanel(dfDisks, diskRates) {
   return `${humanG(totalFreeG)} avail | ${humanBps(totalBps)}`;
 }
 
-// Returns {blockDevice: tempC} for every NVMe hwmon found.
-// Resolves hwmon → NVMe controller via the symlink in /sys/class/hwmon/.
-function readNvmeTemps(fileutil) {
-  const result = {};
-  for (let i = 0; i < 20; i++) {
-    const base = `/sys/class/hwmon/hwmon${i}`;
-    if ((fileutil.readFile(`${base}/name`) || '').trim() !== 'nvme') continue;
-    const raw = parseInt(fileutil.readFile(`${base}/temp1_input`) || '0');
-    if (raw <= 0) continue;
-    const tempC = raw / 1000;
-    let dev = null;
-    try {
-      // Symlink target is like "../../devices/.../nvme/nvme0/hwmon2"
-      const GLib = typeof imports !== 'undefined' ? imports.gi.GLib : null;
-      const link = GLib && GLib.file_read_link(base);
-      const m = link && link.match(/nvme(\d+)/);
-      if (m) dev = `nvme${m[1]}n1`;
-    } catch(e) {}
-    if (dev) result[dev] = tempC;
-  }
-  return result;
+// Reading /sys/class/hwmon/hwmon*/temp1_input for an NVMe controller makes
+// the kernel issue an NVMe admin command; a slow controller can stall that
+// read for tens of seconds, which would freeze the whole panel if done on
+// the main thread. So temps are read in a child process and cached here.
+let _nvmeTemps = {};
+let _nvmeTempsAt = 0;
+let _nvmeTempsBusy = false;
+
+function getNvmeTemps() {
+  return _nvmeTemps;
+}
+
+// Kicks off an async refresh at most once per minIntervalMs (default 30s).
+// Emits lines like "nvme0 42300" from the shell; maps to nvme0n1 keys.
+function maybeRefreshNvmeTemps(fileutil, minIntervalMs) {
+  const now = Date.now();
+  if (_nvmeTempsBusy || now - _nvmeTempsAt < (minIntervalMs || 30000)) return;
+  _nvmeTempsBusy = true;
+  _nvmeTempsAt = now;
+  fileutil.spawnAsync(
+    ['sh', '-c',
+     'for d in /sys/class/hwmon/hwmon*; do ' +
+       '[ "$(cat "$d/name" 2>/dev/null)" = nvme ] || continue; ' +
+       'n=$(readlink "$d" | grep -oE "nvme[0-9]+" | head -1); ' +
+       't=$(cat "$d/temp1_input" 2>/dev/null); ' +
+       '[ -n "$n" ] && [ -n "$t" ] && echo "$n $t"; ' +
+     'done'],
+    out => {
+      _nvmeTempsBusy = false;
+      const temps = {};
+      (out || '').split('\n').forEach(line => {
+        const p = line.trim().split(/\s+/);
+        const raw = parseInt(p[1]);
+        if (p.length === 2 && p[0].indexOf('nvme') === 0 && raw > 0)
+          temps[p[0] + 'n1'] = raw / 1000;
+      });
+      _nvmeTemps = temps;
+    });
 }
 
 // Name column width: device padEnd(16) aligns with "  └─ " (5) + name padEnd(11)
@@ -106,7 +123,7 @@ function _diskRow(name, totalG, freePct, suffix) {
   return `${name.padEnd(COL_NAME)} ${humanG(totalG).padStart(COL_SIZE)}  ${pct}free  ${suffix}`;
 }
 
-// nvmeTemps: {blockDevice: tempC} map from readNvmeTemps(), or null
+// nvmeTemps: {blockDevice: tempC} map from getNvmeTemps(), or null
 function formatTooltip(dfDisks, diskRates, history, nvmeTemps) {
   const lines = [];
   if (history) {
@@ -141,5 +158,5 @@ function read(fileutil, dfOut) {
 }
 
 if (typeof module !== 'undefined') {
-  module.exports = { parseDiskstats, computeDiskRate, humanBps, parseDf, parentDevice, groupDisksByDevice, formatPanel, formatTooltip, readNvmeTemps, read };
+  module.exports = { parseDiskstats, computeDiskRate, humanBps, parseDf, parentDevice, groupDisksByDevice, formatPanel, formatTooltip, getNvmeTemps, maybeRefreshNvmeTemps, read };
 }

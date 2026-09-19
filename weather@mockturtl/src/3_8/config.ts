@@ -33,6 +33,8 @@ import { MetUk } from "./providers/met_uk/provider";
 import { IpApi } from "./location_services/geoip_services/ipApi";
 import { GeoJS } from "./location_services/geoip_services/geojs.io";
 import { GeoIPLookupIO } from "./location_services/geoip_services/geoiplookup.io";
+import { RedactAppletConfig } from "./config-redaction";
+import { QWeather } from "./providers/qweather/provider";
 
 const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -74,7 +76,8 @@ export enum Services {
 	PirateWeather = "PirateWeather",
 	OpenMeteo = "OpenMeteo",
 	OpenWeatherMap_OneCall = "OpenWeatherMap_OneCall",
-	SwissMeteo = "Swiss Meteo"
+	SwissMeteo = "Swiss Meteo",
+	QWeather = "QWeather"
 }
 
 export enum LocationProvider {
@@ -101,6 +104,7 @@ export const ServiceClassMapping = {
 	[Services.PirateWeather]: () => new PirateWeather(),
 	[Services.OpenMeteo]: () => new OpenMeteo(),
 	[Services.SwissMeteo]: () => new SwissMeteo(),
+	[Services.QWeather]: () => new QWeather(),
 } satisfies ServiceClassMappingType;
 
 type ServiceImplementation<T extends Services> = ReturnType<typeof ServiceClassMapping[T]>;
@@ -128,6 +132,8 @@ export class Config {
 	private readonly _tomorrowio_apikey!: string;
 	private readonly _accuweather_apikey!: string;
 	private readonly _weatherunderground_apikey!: string;
+	private readonly _qweather_api_host!: string;
+	private readonly _qweather_apikey!: string;
 	private readonly _useSymbolicIcons!: boolean;
 	public readonly keybinding!: string;
 
@@ -187,6 +193,8 @@ export class Config {
 	public readonly TomorrowIOApiKeyChanged = new Event<Config, string>();
 	public readonly AccuWeatherApiKeyChanged = new Event<Config, string>();
 	public readonly WeatherUndergroundApiKeyChanged = new Event<Config, string>();
+	public readonly QWeatherApiHostChanged = new Event<Config, string>();
+	public readonly QWeatherApiKeyChanged = new Event<Config, string>();
 	public readonly TemperatureUnitChanged = new Event<Config, WeatherUnits>();
 	public readonly TemperatureHighFirstChanged = new Event<Config, boolean>();
 	public readonly WindSpeedUnitChanged = new Event<Config, WeatherWindSpeedUnits>();
@@ -446,6 +454,12 @@ export class Config {
 				return {
 					apiKey: this._pirateweather_apikey.trim() || oldApiKey
 				} satisfies ServiceOption<Services.PirateWeather> as ServiceOption<T>;
+			}
+			case Services.QWeather: {
+				return {
+					apiHost: this._qweather_api_host.trim(),
+					apiKey: this._qweather_apikey.trim(),
+				} satisfies ServiceOption<Services.QWeather> as ServiceOption<T>;
 			}
 			case Services.OpenWeatherMap_Open:
 			case Services.DeutscherWetterdienst:
@@ -770,20 +784,7 @@ export class Config {
 		}
 
 		const conf = JSON.parse(confString) as SettingsSchemaWithValues;
-		if (conf?.apiKey?.value != null)
-			conf.apiKey.value = "REDACTED";
-
-		for (const item of conf?.locationList?.value ?? []) {
-			item.lat = "REDACTED";
-			item.lon = "REDACTED";
-			item.city = "REDACTED";
-			item.entryText = "REDACTED";
-		}
-
-		if (conf?.location?.value != null)
-			conf.location.value = "REDACTED";
-
-		return conf;
+		return RedactAppletConfig(conf);
 	}
 
 	public Destroy(): void {
@@ -838,6 +839,14 @@ const Keys = {
 	WEATHER_UNDERGROUND_APIKEY: {
 		key: "weatherunderground_apikey",
 		prop: "WeatherUndergroundApiKey"
+	},
+	QWEATHER_API_HOST: {
+		key: "qweather_api_host",
+		prop: "QWeatherApiHost",
+	},
+	QWEATHER_APIKEY: {
+		key: "qweather_apikey",
+		prop: "QWeatherApiKey",
 	},
 	TEMPERATURE_UNIT_KEY: {
 		key: "temperatureUnit",
