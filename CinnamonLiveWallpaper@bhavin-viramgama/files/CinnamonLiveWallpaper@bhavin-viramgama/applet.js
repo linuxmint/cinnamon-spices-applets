@@ -45,8 +45,8 @@ class LiveWallpaperApplet extends Applet.IconApplet {
 
     on_applet_added_to_panel() {
         // Aggressively kill any leftover processes from previous Cinnamon sessions
-        Util.spawn(["pkill", "-f", "mpv.*mpv-wallpaper-socket"]);
-        Util.spawn(["pkill", "-f", "xwinwrap.*mpv-wallpaper-socket"]);
+        Util.spawnCommandLine("pkill -f 'mpv.*mpv-wallpaper-socket'");
+        Util.spawnCommandLine("pkill -f 'xwinwrap.*mpv-wallpaper-socket'");
 
         if (this.hide_icon) {
             this.actor.hide();
@@ -153,7 +153,7 @@ class LiveWallpaperApplet extends Applet.IconApplet {
         }
     }
 
-    getWallpaperPath(callback) {
+    getWallpaperPath() {
         if (this.wallpaper_mode === "playlist") {
             if (this.custom_playlist && this.custom_playlist.length > 0) {
                 let m3uPath = GLib.get_user_config_dir() + "/live-wallpaper-playlist.m3u";
@@ -165,70 +165,48 @@ class LiveWallpaperApplet extends Applet.IconApplet {
                 }
                 if (m3uContent !== "") {
                     let file = Gio.File.new_for_path(m3uPath);
-                    
-                    let ByteArray = imports.byteArray;
-                    let bytes = ByteArray.fromString ? ByteArray.fromString(m3uContent) : m3uContent;
-                    
-                    file.replace_contents_async(bytes, null, false, Gio.FileCreateFlags.NONE, null, (fileObj, res) => {
-                        try {
-                            fileObj.replace_contents_finish(res);
-                            callback(m3uPath);
-                        } catch (e) {
-                            global.logError("Live Wallpaper file write error: " + e);
-                            callback(null);
-                        }
-                    });
-                    return;
+                    file.replace_contents(m3uContent, null, false, Gio.FileCreateFlags.NONE, null);
+                    return m3uPath;
                 }
             }
-            callback(null);
-            return;
+            return null;
         }
 
         if (this.wallpaper_mode === "custom") {
-            callback(this._decodePath(this.custom_path));
-            return;
+            return this._decodePath(this.custom_path);
         }
 
         if (this.wallpaper_mode === "folder") {
-            callback(this._decodePath(this.video_folder));
-            return;
+            return this._decodePath(this.video_folder);
         }
 
         if (this.wallpaper_mode === "single") {
-            callback(this._decodePath(this.video_file));
-            return;
+            return this._decodePath(this.video_file);
         }
 
-        callback(null);
+        return null;
     }
 
-    getLaunchCommand(callback) {
-        this.getWallpaperPath((path) => {
-            if (!path) {
-                callback(null);
-                return;
+    getLaunchCommand() {
+        let path = this.getWallpaperPath();
+        if (!path) return null;
+
+        let displayArg = "-fs";
+
+        // Multi-monitor support: fetch geometry if specific display is chosen
+        if (this.target_display !== -1) {
+            let monitors = Main.layoutManager.monitors;
+            if (this.target_display < monitors.length) {
+                let m = monitors[this.target_display];
+                displayArg = `-g ${m.width}x${m.height}+${m.x}+${m.y}`;
             }
+        }
 
-            let displayArg = "-fs";
-
-            // Multi-monitor support: fetch geometry if specific display is chosen
-            if (this.target_display !== -1) {
-                let monitors = Main.layoutManager.monitors;
-                if (this.target_display < monitors.length) {
-                    let m = monitors[this.target_display];
-                    displayArg = `-g ${m.width}x${m.height}+${m.x}+${m.y}`;
-                }
-            }
-
-            let vol = Math.round(this.volumeSlider.value * 100);
-            if (vol === 0 && !this.start_muted) vol = 50;
-            let muteArg = (this.mute_all || this.start_muted) ? "--mute=yes" : "--mute=no";
-            let shuffleArg = this.shuffle_playlist ? "--shuffle" : "";
-            
-            let cmd = `xwinwrap ${displayArg} -fdt -ni -b -nf -un -- mpv -wid WID --loop-playlist=inf --no-osc --no-osd-bar --panscan=1.0 ${muteArg} ${shuffleArg} --volume=${vol} --input-ipc-server=/tmp/mpv-wallpaper-socket "${path}"`;
-            callback(cmd);
-        });
+        let vol = Math.round(this.volumeSlider.value * 100);
+        if (vol === 0 && !this.start_muted) vol = 50;
+        let muteArg = (this.mute_all || this.start_muted) ? "--mute=yes" : "--mute=no";
+        let shuffleArg = this.shuffle_playlist ? "--shuffle" : "";
+        return `xwinwrap ${displayArg} -fdt -ni -b -nf -un -- mpv -wid WID --loop-playlist=inf --no-osc --no-osd-bar --panscan=1.0 ${muteArg} ${shuffleArg} --volume=${vol} --input-ipc-server=/tmp/mpv-wallpaper-socket "${path}"`;
     }
 
     on_settings_changed() {
@@ -305,54 +283,51 @@ class LiveWallpaperApplet extends Applet.IconApplet {
     }
 
     startWallpaper() {
-        if (this.isPlaying) return;
+        let cmd = this.getLaunchCommand();
+        if (!cmd) {
+            Main.notify("Live Wallpaper", "Please configure a video file, folder, or custom playlist in the applet settings.");
+            return;
+        }
 
-        this.getLaunchCommand((cmd) => {
-            if (!cmd) {
-                Main.notify("Live Wallpaper", "Please configure a video file, folder, or custom playlist in the applet settings.");
-                return;
-            }
+        let execCmd = `bash -c "
+            while ! xdotool search --class nemo-desktop >/dev/null 2>&1; do sleep 0.1; done;
+            while ! pactl info >/dev/null 2>&1; do sleep 0.1; done;
+            rm -f /tmp/mpv-wallpaper-socket;
+            ${cmd.replace(/"/g, '\\"')} &
+            while ! xdotool search --class xwinwrap >/dev/null 2>&1; do sleep 0.1; done;
+            xdotool search --class xwinwrap windowlower >/dev/null 2>&1;
+            wait
+        "`;
 
-            let bashCmd = `
-                while ! xdotool search --class nemo-desktop >/dev/null 2>&1; do sleep 0.1; done;
-                while ! pactl info >/dev/null 2>&1; do sleep 0.1; done;
-                rm -f /tmp/mpv-wallpaper-socket;
-                eval "$1" &
-                while ! xdotool search --class xwinwrap >/dev/null 2>&1; do sleep 0.1; done;
-                xdotool search --class xwinwrap windowlower >/dev/null 2>&1;
-                wait
-            `;
+        Util.spawnCommandLine(execCmd);
+        this.isPlaying = true;
+        this.togglePlayItem.label.set_text("Stop Wallpaper");
 
-            Util.spawn(["bash", "-c", bashCmd, "--", cmd]);
-            this.isPlaying = true;
-            this.togglePlayItem.label.set_text("Stop Wallpaper");
+        let isSingle = (this.wallpaper_mode === "single" || this.wallpaper_mode === "custom");
+        this.nextTrackItem.setSensitive(!isSingle);
+        this.prevTrackItem.setSensitive(!isSingle);
+        this.shuffleSwitch.setSensitive(!isSingle);
 
-            let isSingle = (this.wallpaper_mode === "single" || this.wallpaper_mode === "custom");
-            this.nextTrackItem.setSensitive(!isSingle);
-            this.prevTrackItem.setSensitive(!isSingle);
-            this.shuffleSwitch.setSensitive(!isSingle);
+        this.isMuted = this.start_muted;
+        let iconName = this.isMuted ? "audio-volume-muted-symbolic" : "audio-volume-high-symbolic";
+        this.volumeIcon.set_icon_name(iconName);
 
-            this.isMuted = this.start_muted;
-            let iconName = this.isMuted ? "audio-volume-muted-symbolic" : "audio-volume-high-symbolic";
-            this.volumeIcon.set_icon_name(iconName);
+        if (!this.isMuted && this.volumeSlider.value === 0) {
+            this.volumeSlider.setValue(0.5);
+        } else if (this.isMuted) {
+            this.volumeSlider.setValue(0.0);
+        }
 
-            if (!this.isMuted && this.volumeSlider.value === 0) {
-                this.volumeSlider.setValue(0.5);
-            } else if (this.isMuted) {
-                this.volumeSlider.setValue(0.0);
-            }
+        if (this.mute_all) {
+            this.volumeSlider.actor.hide();
+        } else {
+            this.volumeSlider.actor.show();
+        }
 
-            if (this.mute_all) {
-                this.volumeSlider.actor.hide();
-            } else {
-                this.volumeSlider.actor.show();
-            }
-
-            // Start smart pause loop if enabled
-            if (this.smart_pause && this.smartPauseLoopId === 0) {
-                this.smartPauseLoopId = Mainloop.timeout_add_seconds(1, () => this._onSmartPauseTick());
-            }
-        });
+        // Start smart pause loop if enabled
+        if (this.smart_pause && this.smartPauseLoopId === 0) {
+            this.smartPauseLoopId = Mainloop.timeout_add_seconds(1, () => this._onSmartPauseTick());
+        }
     }
 
     stopWallpaper() {
@@ -362,8 +337,8 @@ class LiveWallpaperApplet extends Applet.IconApplet {
             this.smartPauseLoopId = 0;
         }
 
-        Util.spawn(["pkill", "-f", "mpv.*mpv-wallpaper-socket"]);
-        Util.spawn(["pkill", "-f", "xwinwrap.*mpv-wallpaper-socket"]);
+        Util.spawnCommandLine("pkill -f 'mpv.*mpv-wallpaper-socket'");
+        Util.spawnCommandLine("pkill -f 'xwinwrap.*mpv-wallpaper-socket'");
         this.isPlaying = false;
         this.isSmartPaused = false;
         this.togglePlayItem.label.set_text("Start Wallpaper");
@@ -385,7 +360,7 @@ class LiveWallpaperApplet extends Applet.IconApplet {
         let jsonStr = JSON.stringify({ command: cmdArray });
         let escapedJsonStr = jsonStr.replace(/"/g, '\\"');
 
-        Util.spawn(["sh", "-c", `echo '${escapedJsonStr}' | socat - /tmp/mpv-wallpaper-socket`]);
+        Util.spawnCommandLine(`sh -c "echo '${escapedJsonStr}' | socat - /tmp/mpv-wallpaper-socket"`);
     }
 
     _onSmartPauseTick() {
