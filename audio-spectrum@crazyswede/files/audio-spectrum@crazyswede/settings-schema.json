@@ -1,0 +1,126 @@
+{
+    "appearance": {
+        "type": "section",
+        "title": "Appearance",
+        "keys": [
+            "bar_count",
+            "sensitivity",
+            "bar_width",
+            "width",
+            "height",
+            "separator",
+            "skin"
+        ],
+        "description": "Appearance"
+    },
+    "bar_count": {
+        "type": "spinbutton",
+        "default": 60,
+        "min": 20,
+        "max": 200,
+        "step": 10,
+        "units": "bars",
+        "description": "Number of EQ bars"
+    },
+    "sensitivity": {
+        "type": "spinbutton",
+        "default": 23,
+        "min": 5,
+        "max": 300,
+        "step": 1,
+        "units": "%",
+        "description": "Sensitivity (100 = normal)"
+    },
+    "bar_width": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 1,
+        "max": 10,
+        "step": 0.5,
+        "units": "px",
+        "description": "Bar width"
+    },
+    "width": {
+        "type": "spinbutton",
+        "default": 300,
+        "min": 200,
+        "max": 1200,
+        "step": 10,
+        "units": "px",
+        "description": "Width"
+    },
+    "height": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 10,
+        "max": 60,
+        "step": 1,
+        "units": "px",
+        "description": "Height"
+    },
+    "separator": {
+        "type": "spinbutton",
+        "default": 0.8,
+        "min": 0,
+        "max": 3,
+        "step": 0.1,
+        "units": "px",
+        "description": "Bar spacing"
+    },
+    "skin": {
+        "type": "combobox",
+        "default": "classic",
+        "description": "Visualization",
+        "options": {
+            "Classic LED": "classic",
+            "80s Car Stereo": "stereo80",
+            "Dot Matrix": "dotmatrix",
+            "Classic Spectrum": "spectrum",
+            "Fire": "fire",
+            "Neon Line": "neon",
+            "VU Meter": "vu",
+            "1980s Digital": "digital80",
+            "Oscilloscope": "oscilloscope",
+            "Classic Neon": "classicneon"
+        }
+    },
+    "animation": {
+        "type": "section",
+        "title": "Animation",
+        "keys": [
+            "fps",
+            "gravity",
+            "peak_hold"
+        ],
+        "description": "Animation"
+    },
+    "fps": {
+        "type": "combobox",
+        "default": "25",
+        "description": "FPS",
+        "options": {
+            "20 FPS": "20",
+            "25 FPS": "25",
+            "30 FPS": "30",
+            "60 FPS": "60"
+        }
+    },
+    "gravity": {
+        "type": "spinbutton",
+        "default": 400,
+        "min": 50,
+        "max": 600,
+        "step": 25,
+        "units": "%",
+        "description": "Fall speed (higher = faster)"
+    },
+    "peak_hold": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 2000,
+        "step": 50,
+        "units": "ms",
+        "description": "Peak hold (0 = off)"
+    }
+}

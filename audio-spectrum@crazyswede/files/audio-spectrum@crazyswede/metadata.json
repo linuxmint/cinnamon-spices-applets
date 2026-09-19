@@ -1,0 +1,7 @@
+{
+    "uuid": "audio-spectrum@crazyswede",
+    "name": "Audio Spectrum",
+    "description": "System audio spectrum visualizer for the Cinnamon panel",
+    "version": "1.0",
+    "author": "CrazySwede"
+}
