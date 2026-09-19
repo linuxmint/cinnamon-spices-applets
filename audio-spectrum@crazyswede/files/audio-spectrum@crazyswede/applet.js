@@ -120,46 +120,66 @@ AudioSpectrum.prototype = {
             "cava.conf"
         ]);
 
-        try {
-            let contents = GLib.file_get_contents(config)[1];
-            contents = contents.toString();
+        let file = Gio.File.new_for_path(config);
 
-            contents = contents.replace(
-                /^bars\s*=\s*\d+/m,
-                "bars = " + this._barCount
-            );
-            contents = contents.replace(
-                /^sensitivity\s*=\s*\d+/m,
-                "sensitivity = " + this._sensitivity
-            );
-            contents = contents.replace(
-                /^framerate\s*=\s*\d+/m,
-                "framerate = " + this._fps
-            );
-            contents = contents.replace(
-                /^gravity\s*=\s*\d+/m,
-                "gravity = " + this._gravity
-            );
+        file.load_contents_async(null, (source, result) => {
+            try {
+                let [, contents] = source.load_contents_finish(result);
+                contents = contents.toString();
 
-            GLib.file_set_contents(config, contents);
+                contents = contents.replace(
+                    /^bars\s*=\s*\d+/m,
+                    "bars = " + this._barCount
+                );
+                contents = contents.replace(
+                    /^sensitivity\s*=\s*\d+/m,
+                    "sensitivity = " + this._sensitivity
+                );
+                contents = contents.replace(
+                    /^framerate\s*=\s*\d+/m,
+                    "framerate = " + this._fps
+                );
+                contents = contents.replace(
+                    /^gravity\s*=\s*\d+/m,
+                    "gravity = " + this._gravity
+                );
 
-            if (this._process) {
-                try {
-                    this._process.force_exit();
-                } catch (e) {
-                }
+                file.replace_contents_async(
+                    contents,
+                    null,
+                    false,
+                    Gio.FileCreateFlags.REPLACE_DESTINATION,
+                    null,
+                    (source, result) => {
+                        try {
+                            source.replace_contents_finish(result);
 
-                this._process = null;
+                            if (this._process) {
+                                try {
+                                    this._process.force_exit();
+                                } catch (e) {
+                                }
+
+                                this._process = null;
+                            }
+
+                            this._stream = null;
+                            this._startCava();
+
+                        } catch (e) {
+                            global.logError(
+                                "Audio Spectrum: could not update CAVA: " + e
+                            );
+                        }
+                    }
+                );
+
+            } catch (e) {
+                global.logError(
+                    "Audio Spectrum: could not update CAVA: " + e
+                );
             }
-
-            this._stream = null;
-            this._startCava();
-
-        } catch (e) {
-            global.logError(
-                "Audio Spectrum: could not update CAVA: " + e
-            );
-        }
+        });
     },
 
     _onHeightChanged: function() {
