@@ -5,6 +5,11 @@ Native xlet settings entries keep keyboard focus when the click lands on
 a non-focusable area (labels, empty space). This widget captures window
 presses before the entry consumes them and releases focus when the press
 lands outside the entry, matching normal desktop text field behavior.
+
+The visible control edits the native hidden "api-key" entry through its
+"setting-key", so the applet-side binder sees a valid settings type. A
+configured key is never shown or exported in plain text: the field renders
+masked and its copy/cut actions are swallowed before the clipboard.
 """
 
 from gi.repository import Gtk
@@ -13,13 +18,21 @@ from JsonSettingsWidgets import JSONSettingsEntry
 
 
 class ApiKeyEntryWidget(JSONSettingsEntry):
-    def __init__(self, info, key, settings):
-        JSONSettingsEntry.__init__(self, key, settings, info)
+    def __init__(self, info, _key, settings):
+        JSONSettingsEntry.__init__(self, info["setting-key"], settings, info)
+        self.content_widget.set_visibility(False)
+        self.content_widget.set_invisible_char("•")
+        self.content_widget.connect("copy-clipboard", self._block_clipboard)
+        self.content_widget.connect("cut-clipboard", self._block_clipboard)
         self._closed = False
         self._click_gesture = None
         self._click_handler = 0
         self.connect("hierarchy-changed", self._hierarchy_changed)
         self.connect("destroy", self._on_destroy)
+
+    def _block_clipboard(self, *_args):
+        """Swallow copy/cut so the masked value cannot leave the field."""
+        return True
 
     def _hierarchy_changed(self, *_args):
         self._disconnect_click_gesture()

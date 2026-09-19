@@ -23,7 +23,7 @@
       "keys": [
         "refresh-interval",
         "activity-bucket-minutes",
-        "api-key",
+        "api-key-control",
         "api-keys-page-button"
       ]
     },
@@ -98,10 +98,17 @@
     }
   },
   "api-key": {
+    "type": "entry",
+    "default": "",
+    "description": "Z.ai API key (optional)",
+    "tooltip": "Leave empty for automatic detection: the applet reuses the Coding Plan API key of the signed-in ZCode app, then falls back to the ZAI_API_KEY environment variable and the ~/.config/cinnamon-z-usage/api-key file."
+  },
+  "api-key-control": {
     "type": "custom",
     "file": "api_key_settings.py",
     "widget": "ApiKeyEntryWidget",
     "default": "",
+    "setting-key": "api-key",
     "description": "Z.ai API key (optional)",
     "tooltip": "Leave empty for automatic detection: the applet reuses the Coding Plan API key of the signed-in ZCode app, then falls back to the ZAI_API_KEY environment variable and the ~/.config/cinnamon-z-usage/api-key file."
   },
