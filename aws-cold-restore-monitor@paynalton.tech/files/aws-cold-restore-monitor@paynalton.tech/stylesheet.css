@@ -1,0 +1,17 @@
+/*
+ * Copyright (C) 2026 paynalton
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+/* Layout only. Visual appearance is provided by the Cinnamon theme. */
+.aws-cold-restore-content {
+    spacing: 0.4em;
+}
+
+.aws-cold-restore-progress {
+    width: 5em;
+    min-width: 5em;
+}
+
+.aws-cold-restore-detail {
+    max-width: 32em;
+}
