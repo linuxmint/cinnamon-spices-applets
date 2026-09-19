@@ -5,6 +5,7 @@ const Settings   = imports.ui.settings;
 const St         = imports.gi.St;
 const Clutter    = imports.gi.Clutter;
 const GLib       = imports.gi.GLib;
+const Gio        = imports.gi.Gio;
 const Util       = imports.misc.util;
 const Pango      = imports.gi.Pango;
 const GdkPixbuf  = imports.gi.GdkPixbuf;
@@ -299,7 +300,8 @@ class YasmApplet extends Applet.Applet {
     this._orientation = orientation;
 
     this._instanceId = instanceId;
-    this._tempAlertNotified = false;
+    this._cpuTempAlertLastMs = 0;
+    this._gpuTempAlertLastMs = 0;
     this._settings = new Settings.AppletSettings(this, UUID, instanceId);
     this._bindSettings();
     this._autoScanIfEmpty();
@@ -338,8 +340,12 @@ class YasmApplet extends Applet.Applet {
     bind('load-alert',     '_loadAlert');
     bind('cpu-temp-warn',  '_cpuTempWarn');
     bind('cpu-temp-alert', '_cpuTempAlert');
+    bind('cpu-temp-alert-notify', '_cpuTempAlertNotify');
     bind('cpu-use-warn',   '_cpuUseWarn');
     bind('cpu-use-alert',  '_cpuUseAlert');
+    bind('gpu-temp-warn',  '_gpuTempWarn');
+    bind('gpu-temp-alert', '_gpuTempAlert');
+    bind('gpu-temp-alert-notify', '_gpuTempAlertNotify');
     bind('bat-warn',       '_batWarn');
     bind('bat-alert',      '_batAlert');
 
@@ -380,7 +386,7 @@ class YasmApplet extends Applet.Applet {
     const script = `${AppletPath}/setup-rapl.sh`;
     fileutil.spawnAsync(['pkexec', 'bash', script], result => {
       // result is null on error, stdout string on success
-      Mainloop.timeout_add_seconds(1, () => { this._restartManager(); return GLib.SOURCE_REMOVE; });
+      this._restartTimeout = Mainloop.timeout_add_seconds(1, () => { this._restartTimeout = null; this._restartManager(); return GLib.SOURCE_REMOVE; });
     });
   }
 
@@ -583,8 +589,8 @@ class YasmApplet extends Applet.Applet {
             if (data.uptime) {
               const numCores = this._manager.getNumCores();
               const normLoad = data.uptime.load.avg1 / numCores;
-              const loadLevel = normLoad >= (this._loadAlert || 0.9) ? 'alert'
-                              : normLoad >= (this._loadWarn  || 0.7) ? 'warn' : 'ok';
+              const loadLevel = normLoad >= ((this._loadAlert || 90) / 100) ? 'alert'
+                              : normLoad >= ((this._loadWarn  || 70) / 100) ? 'warn' : 'ok';
               this._applyThreshold(s.tile, loadLevel);
               s.label.set_text(this._buildText('uptime', UptimeMetric.formatUptimeOnly(data.uptime.uptime)));
               if (s.loadLabel)
@@ -611,8 +617,8 @@ class YasmApplet extends Applet.Applet {
                   height: 20, marginTop: 8, marginBottom: 12,
                   series: [{ vals: history.loadAvg.values(),
                     color: C.ok,
-                    thresholds: { warn: (this._loadWarn || 0.7) * numCores,
-                                  alert: (this._loadAlert || 0.9) * numCores } }] },
+                    thresholds: { warn: (this._loadWarn || 70) / 100 * numCores,
+                                  alert: (this._loadAlert || 90) / 100 * numCores } }] },
                 { type: 'text', html: procTxt },
               ]);
               hasData = true;
@@ -698,14 +704,21 @@ class YasmApplet extends Applet.Applet {
               const tempLevel = data.cpu.packageC >= (this._cpuTempAlert || 85) ? 'alert'
                               : data.cpu.packageC >= (this._cpuTempWarn  || 70) ? 'warn' : 'ok';
               this._applyThreshold(s.tile, tempLevel);
-              if (tempLevel === 'alert' && !this._tempAlertNotified) {
-                this._tempAlertNotified = true;
-                GLib.spawn_command_line_async(
-                  `notify-send -u critical -i dialog-warning "CPU Temperature" "Your CPU temp reached ${Math.round(data.cpu.packageC)}°C"`
-                );
+              if (tempLevel === 'alert' && this._cpuTempAlertNotify !== false) {
+                const now = GLib.get_monotonic_time() / 1000;  // ms
+                if ((now - this._cpuTempAlertLastMs) > 30000) {
+                  this._cpuTempAlertLastMs = now;
+                  try {
+                    Gio.Subprocess.new(
+                      ['notify-send', '-u', 'critical', '-i', 'dialog-warning',
+                       'CPU Temperature', `CPU temp critical: ${Math.round(data.cpu.packageC)}\xb0C`],
+                      Gio.SubprocessFlags.NONE
+                    );
+                  } catch(e) {}
+                }
               } else if (tempLevel !== 'alert') {
-                this._tempAlertNotified = false;
-              }
+                this._cpuTempAlertLastMs = 0;
+              } 
               s.label.set_text(this._buildText('cpu', CpuMetric.formatPanel(data.cpu.cpuPct, data.cpu.packageC)));
               // Build core table inline so graphs can be placed above it
               const coreHdr  = `${'Core'.padEnd(6)} ${'%usr'.padStart(5)} ${'%sys'.padStart(5)} ${'%iowt'.padStart(6)} ${'temp'.padStart(6)}`;
@@ -795,6 +808,24 @@ class YasmApplet extends Applet.Applet {
           case 'gpu':
             if (data.gpu && data.gpu.length > 0) {
               const primary = data.gpu.find(g => g.type !== 'intel') || data.gpu[0];
+              const gpuTempC = primary.tempC;
+              const gpuTempLevel = gpuTempC != null && gpuTempC >= (this._gpuTempAlert || 85) ? 'alert'
+                                : gpuTempC != null && gpuTempC >= (this._gpuTempWarn  || 70) ? 'warn' : 'ok';
+              if (gpuTempLevel === 'alert' && this._gpuTempAlertNotify !== false) {
+                const now = GLib.get_monotonic_time() / 1000;  // ms
+                if ((now - this._gpuTempAlertLastMs) > 30000) {
+                  this._gpuTempAlertLastMs = now;
+                  try {
+                    Gio.Subprocess.new(
+                      ['notify-send', '-u', 'critical', '-i', 'dialog-warning',
+                       'GPU Temperature', `GPU temp critical: ${Math.round(gpuTempC)}\xb0C`],
+                      Gio.SubprocessFlags.NONE
+                    );
+                  } catch(e) {}
+                }
+              } else if (gpuTempLevel !== 'alert') {
+                this._gpuTempAlertLastMs = 0;
+              }
               s.label.set_text(this._buildText('gpu', GpuMetric.formatPanel(primary)));
               const hasDiscrete = data.gpu.some(g => g.type !== 'intel');
               const gpuItems = [];
@@ -853,8 +884,9 @@ class YasmApplet extends Applet.Applet {
   }
 
   on_applet_removed_from_panel() {
-    if (this._earlyTimeout) { Mainloop.source_remove(this._earlyTimeout); this._earlyTimeout = null; }
-    if (this._timeout) Mainloop.source_remove(this._timeout);
+    if (this._restartTimeout) { Mainloop.source_remove(this._restartTimeout); this._restartTimeout = null; }
+    if (this._earlyTimeout)   { Mainloop.source_remove(this._earlyTimeout);   this._earlyTimeout   = null; }
+    if (this._timeout)        { Mainloop.source_remove(this._timeout);         this._timeout        = null; }
     if (this._sections) {
       for (const { tooltip } of Object.values(this._sections))
         try { tooltip.destroy(); } catch(e) {}
