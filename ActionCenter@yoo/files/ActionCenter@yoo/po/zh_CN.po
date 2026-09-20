@@ -1,0 +1,257 @@
+# Simplified Chinese translation for ActionCenter@yoo
+msgid ""
+msgstr ""
+"Project-Id-Version: ActionCenter@yoo\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# ------------- metadata.json -------------
+msgid "An all-in-one Quick Settings panel for Cinnamon, featuring media control, brightness, volume, network, Bluetooth, power menu and more."
+msgstr "一款面向 Cinnamon 的一体化快捷设置面板，集媒体控制、亮度、音量、网络、蓝牙、电源菜单等功能于一身。"
+
+# ---------- applet.js / modules ----------
+msgid "ActionCenter"
+msgstr "操作中心"
+
+msgid "Screenshot"
+msgstr "截图"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Lock"
+msgstr "锁定"
+
+msgid "Power"
+msgstr "电源"
+
+msgid "Power Off"
+msgstr "关机"
+
+msgid "Suspend"
+msgstr "挂起"
+
+msgid "Reboot"
+msgstr "重启"
+
+msgid "Log Out"
+msgstr "注销"
+
+msgid "Switch User"
+msgstr "切换用户"
+
+msgid "No media"
+msgstr "无媒体"
+
+msgid "No Battery"
+msgstr "无电池"
+
+msgid "Built-in Display"
+msgstr "内置显示器"
+
+msgid "Network"
+msgstr "网络"
+
+msgid "Wired"
+msgstr "有线"
+
+msgid "Bluetooth"
+msgstr "蓝牙"
+
+msgid "Connected"
+msgstr "已连接"
+
+msgid "Not connected"
+msgstr "未连接"
+
+msgid "No signal"
+msgstr "无信号"
+
+msgid "Off"
+msgstr "关闭"
+
+msgid "Power Mode"
+msgstr "性能模式"
+
+msgid "Night Light"
+msgstr "夜灯"
+
+msgid "Dark Style"
+msgstr "深色样式"
+
+msgid "Airplane Mode"
+msgstr "飞行模式"
+
+msgid "No device"
+msgstr "无设备"
+
+msgid "No adapter"
+msgstr "无适配器"
+
+msgid "Mute output"
+msgstr "输出静音"
+
+msgid "Mute input"
+msgstr "输入静音"
+
+msgid "Sound Settings"
+msgstr "声音设置"
+
+msgid "Wireless"
+msgstr "无线"
+
+msgid "Mobile broadband"
+msgstr "移动宽带"
+
+msgid "Network Settings"
+msgstr "网络设置"
+
+msgid "Network Connections"
+msgstr "网络连接"
+
+msgid "No Wi-Fi networks found"
+msgstr "未找到 Wi-Fi 网络"
+
+msgid "Scanning…"
+msgstr "正在扫描…"
+
+msgid "Wi-Fi is off"
+msgstr "Wi-Fi 已关闭"
+
+# ---------- settings-schema.json ----------
+msgid "Basic"
+msgstr "基础设置"
+
+msgid "Toggle Switches"
+msgstr "快捷开关"
+
+msgid "Context Menu"
+msgstr "右键菜单"
+
+msgid "Panel Icon"
+msgstr "面板图标"
+
+msgid "Custom panel icon image"
+msgstr "自定义面板图标"
+
+msgid "Panel Icon Height (px, 0=auto)"
+msgstr "面板图标高度（像素，0=自动）"
+
+msgid "0 = use panel icon size"
+msgstr "0=使用面板图标大小"
+
+msgid "Screenshot Command"
+msgstr "截图命令"
+
+msgid "Command to run when clicking the screenshot button"
+msgstr "点击截图按钮时执行的命令"
+
+msgid "Player Module"
+msgstr "播放器模块"
+
+msgid "Show Player Module"
+msgstr "显示播放器模块"
+
+msgid "Show/hide the MPRIS media player module"
+msgstr "显示/隐藏 MPRIS 播放器模块"
+
+msgid "Auto-switch to Playing Player"
+msgstr "自动切换到播放中的播放器"
+
+msgid "Automatically switch to the player that starts playing"
+msgstr "当有播放器开始播放时自动切换过去"
+
+msgid "Show Power Mode Toggle"
+msgstr "显示性能模式开关"
+
+msgid "Show Night Light Toggle"
+msgstr "显示夜灯开关"
+
+msgid "Show Dark Style Toggle"
+msgstr "显示深色样式开关"
+
+msgid "Show Airplane Mode Toggle"
+msgstr "显示飞行模式开关"
+
+msgid "Power Menu"
+msgstr "电源菜单"
+
+msgid "Smooth Menu"
+msgstr "平滑菜单"
+
+msgid "Enable Animation Effects"
+msgstr "启用动画效果"
+
+msgid "Smooth expand/collapse animations for submenus and Wi-Fi list. Turn off on low-end machines."
+msgstr "子菜单与 Wi-Fi 列表的平滑展开/收起动画，低性能机器可关闭"
+
+msgid "Use System Dialog for Power Off"
+msgstr "使用系统对话框关机"
+
+msgid "Yes: use cinnamon-session-quit dialog. No: show individual power items"
+msgstr "是：使用系统关机对话框；否：显示各自电源项"
+
+msgid "Dark Style Theme"
+msgstr "深色样式主题"
+
+msgid "GTK Theme (dark mode)"
+msgstr "GTK 主题（深色）"
+
+msgid "Icon Theme (dark mode)"
+msgstr "图标主题（深色）"
+
+msgid "Cursor Theme (dark mode)"
+msgstr "光标主题（深色）"
+
+msgid "GTK Theme (light mode)"
+msgstr "GTK 主题（浅色）"
+
+msgid "Icon Theme (light mode)"
+msgstr "图标主题（浅色）"
+
+msgid "Cursor Theme (light mode)"
+msgstr "光标主题（浅色）"
+
+msgid "GTK theme when Dark Style is enabled"
+msgstr "启用深色样式时的 GTK 主题"
+
+msgid "Icon theme when Dark Style is enabled"
+msgstr "启用深色样式时的图标主题"
+
+msgid "Cursor theme when Dark Style is enabled"
+msgstr "启用深色样式时的光标主题"
+
+msgid "GTK theme when Dark Style is disabled"
+msgstr "关闭深色样式时的 GTK 主题"
+
+msgid "Icon theme when Dark Style is disabled"
+msgstr "关闭深色样式时的图标主题"
+
+msgid "Cursor theme when Dark Style is disabled"
+msgstr "关闭深色样式时的光标主题"
+
+msgid "Sound"
+msgstr "声音"
+
+msgid "Show Sound Items"
+msgstr "显示声音项"
+
+msgid "Show Mute Switches"
+msgstr "显示静音开关"
+
+msgid "Show Network Items"
+msgstr "显示网络项"
+
+msgid "Show Wired Switch"
+msgstr "显示有线开关"
+
+msgid "Show Wireless Switch + Wi-Fi List"
+msgstr "显示无线开关和 Wi-Fi 列表"
+
+msgid "Show Mobile Broadband Switch"
+msgstr "显示移动宽带开关"
+
+msgid "Off by default (most machines have no WWAN hardware)"
+msgstr "默认关闭（多数机器没有 WWAN 硬件）"

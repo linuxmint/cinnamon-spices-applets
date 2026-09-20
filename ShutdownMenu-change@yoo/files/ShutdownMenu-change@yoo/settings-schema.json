@@ -1,0 +1,448 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "page-settings",
+            "page-menu",
+            "page-custom",
+            "page-grid",
+            "page-scenes"
+        ],
+        "page-settings": {
+            "type": "page",
+            "title": "Settings",
+            "sections": [
+                "section-panel",
+                "section-global",
+                "section-interaction"
+            ]
+        },
+        "page-menu": {
+            "type": "page",
+            "title": "System",
+            "sections": [
+                "section-quit",
+                "section-logout",
+                "section-lock"
+            ]
+        },
+        "page-custom": {
+            "type": "page",
+            "title": "Custom",
+            "sections": [
+                "section-custom"
+            ]
+        },
+        "page-grid": {
+            "type": "page",
+            "title": "Grid Layout",
+            "sections": [
+                "section-grid"
+            ]
+        },
+        "section-panel": {
+            "type": "section",
+            "title": "Panel Icon",
+            "keys": [
+                "panel_icon",
+                "icon_size"
+            ]
+        },
+        "section-global": {
+            "type": "section",
+            "title": "Global Settings",
+            "keys": [
+                "menu_text_size",
+                "menu_icon_size",
+                "menu_label_max_chars"
+            ]
+        },
+        "section-interaction": {
+            "type": "section",
+            "title": "Interaction",
+            "keys": [
+                "scroll_switch",
+                "middle_click_action",
+                "dynamic_wallpaper_warning"
+            ]
+        },
+        "section-quit": {
+            "type": "section",
+            "title": "Quit",
+            "keys": [
+                "quit",
+                "quit_icon_widget",
+                "quit_cmd",
+                "show_separator"
+            ]
+        },
+        "section-logout": {
+            "type": "section",
+            "title": "Logout",
+            "keys": [
+                "log_out",
+                "log_out_icon_widget",
+                "log_out_cmd"
+            ]
+        },
+        "section-lock": {
+            "type": "section",
+            "title": "Screen Lock",
+            "keys": [
+                "screen_lock",
+                "screen_lock_icon_widget",
+                "screen_lock_cmd"
+            ]
+        },
+        "section-custom": {
+            "type": "section",
+            "title": "Custom Menu Items",
+            "keys": [
+                "custom_position",
+                "show_custom_separator",
+                "custom_items_widget",
+                "custom_list_scroll_enable",
+                "custom_list_max_height",
+                "custom_separator_hint"
+            ]
+        },
+        "section-grid": {
+            "type": "section",
+            "title": "Grid Layout",
+            "keys": [
+                "custom_grid_mode",
+                "custom_grid_hide_builtin",
+                "custom_grid_columns",
+                "custom_grid_cell_width",
+                "custom_grid_cell_height",
+                "custom_grid_show_label",
+                "custom_grid_icon_size",
+                "custom_grid_label_spacing",
+                "grid_label_max_chars"
+            ]
+        },
+        "page-scenes": {
+            "type": "page",
+            "title": "Scenes",
+            "sections": [
+                "section-scenes"
+            ]
+        },
+        "section-scenes": {
+            "type": "section",
+            "title": "Scene Presets",
+            "keys": [
+                "show_default_in_context",
+                "scene_nav_count",
+                "scene_manager_widget"
+            ]
+        }
+    },
+
+    "panel_icon": {
+        "type": "iconfilechooser",
+        "default": "system-shutdown-symbolic",
+        "description": "Panel Icon"
+    },
+    "icon_size": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 64,
+        "step": 2,
+        "description": "Panel icon size (0 = follow panel size)"
+    },
+    "scroll_switch": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Switch workspace with mouse scroll"
+    },
+    "middle_click_action": {
+        "type": "combobox",
+        "default": "nothing",
+        "description": "Middle click action",
+        "options": {
+            "Nothing": "nothing",
+            "Show desktop": "show_desktop",
+            "Show workspace selector (Expo)": "show_expo",
+            "Show window selector (Scale)": "show_scale",
+            "Toggle desktop icons visibility": "toggle_desktop_icons"
+        }
+    },
+    "dynamic_wallpaper_warning": {
+        "type": "label",
+        "description": "Note: When using live wallpapers, switching between showing and hiding desktop icons may not work."
+    },
+
+    "menu_text_size": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "description": "Menu item text size (0 = default)"
+    },
+    "menu_icon_size": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 16,
+        "max": 48,
+        "step": 2,
+        "description": "Menu item icon size"
+    },
+    "menu_label_max_chars": {
+        "type": "spinbutton",
+        "default": 16,
+        "min": 5,
+        "max": 100,
+        "step": 1,
+        "description": "List item label max chars"
+    },
+    "scene_nav_count": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "description": "Scene quick-switch capsule (0 = hidden)"
+    },
+    "_active_scene_name": {
+        "type": "entry",
+        "default": "",
+        "description": "Active scene name (internal, do not edit)"
+    },
+
+    "quit": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Add quit to the menu"
+    },
+    "quit_icon": {
+        "type": "entry",
+        "default": "system-shutdown",
+        "description": "Quit icon (name or path)"
+    },
+    "quit_icon_widget": {
+        "type": "custom",
+        "file": "widgets.py",
+        "widget": "IconPickerRow",
+        "description": "Icon (name or path)",
+        "dependency": "quit"
+    },
+    "quit_cmd": {
+        "type": "entry",
+        "default": "cinnamon-session-quit --power-off",
+        "description": "Command",
+        "dependency": "quit"
+    },
+    "show_separator": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show separator",
+        "dependency": "quit"
+    },
+
+    "log_out": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Add log out to the menu"
+    },
+    "log_out_icon": {
+        "type": "entry",
+        "default": "system-log-out",
+        "description": "Log out icon (name or path)"
+    },
+    "log_out_icon_widget": {
+        "type": "custom",
+        "file": "widgets.py",
+        "widget": "IconPickerRow",
+        "description": "Icon (name or path)",
+        "dependency": "log_out"
+    },
+    "log_out_cmd": {
+        "type": "entry",
+        "default": "cinnamon-session-quit --logout",
+        "description": "Command",
+        "dependency": "log_out"
+    },
+
+    "screen_lock": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Add screen lock to the menu"
+    },
+    "screen_lock_icon": {
+        "type": "entry",
+        "default": "system-lock-screen",
+        "description": "Screen lock icon (name or path)"
+    },
+    "screen_lock_icon_widget": {
+        "type": "custom",
+        "file": "widgets.py",
+        "widget": "IconPickerRow",
+        "description": "Icon (name or path)",
+        "dependency": "screen_lock"
+    },
+    "screen_lock_cmd": {
+        "type": "entry",
+        "default": "cinnamon-screensaver-command --lock",
+        "description": "Command",
+        "dependency": "screen_lock"
+    },
+
+    "custom_position": {
+        "type": "combobox",
+        "default": 0,
+        "description": "Custom items position",
+        "options": {
+            "Above built-in items": 0,
+            "Below built-in items": 1
+        }
+    },
+    "show_custom_separator": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show separator",
+        "dependency": "custom_items"
+    },
+    "custom_items_widget": {
+        "type": "custom",
+        "file": "widgets.py",
+        "widget": "CustomAppList",
+        "description": "Custom menu items"
+    },
+    "custom_list_scroll_enable": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Enable scrolling when custom items overflow"
+    },
+    "custom_list_max_height": {
+        "type": "spinbutton",
+        "default": 400,
+        "min": 200,
+        "max": 800,
+        "step": 20,
+        "description": "Custom items max height (pixels)",
+        "dependency": "custom_list_scroll_enable"
+    },
+    "custom_items": {
+        "type": "list",
+        "default": [],
+        "description": "Custom menu items",
+        "columns": [
+            {
+                "id": "name",
+                "title": "Name",
+                "type": "string"
+            },
+            {
+                "id": "icon",
+                "title": "Icon (name or path)",
+                "type": "string"
+            },
+            {
+                "id": "command",
+                "title": "Command",
+                "type": "string"
+            },
+            {
+                "id": "pinned",
+                "title": "Show",
+                "type": "boolean",
+                "default": true
+            }
+        ]
+    },
+    "custom_separator_hint": {
+        "type": "label",
+        "description": "Tip: In list mode, set Name to \"-\" with an empty Command to insert a separator. Grid mode ignores separators."
+    },
+    "scene_manager_widget": {
+        "type": "custom",
+        "file": "widgets.py",
+        "widget": "SceneManager",
+        "description": "Scene presets"
+    },
+    "show_default_in_context": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show default scene in context menu"
+    },
+    "custom_items_initialized": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Internal flag (do not edit)"
+    },
+
+    "custom_grid_mode": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use grid layout for custom items"
+    },
+    "custom_grid_hide_builtin": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Hide built-in items in grid mode",
+        "dependency": "custom_grid_mode"
+    },
+    "custom_grid_columns": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "description": "Grid columns",
+        "dependency": "custom_grid_mode"
+    },
+    "custom_grid_cell_width": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 300,
+        "step": 4,
+        "description": "Grid cell width (0 = auto)",
+        "dependency": "custom_grid_mode"
+    },
+    "custom_grid_cell_height": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 300,
+        "step": 4,
+        "description": "Grid cell height (0 = auto)",
+        "dependency": "custom_grid_mode"
+    },
+    "custom_grid_show_label": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Show labels in grid mode",
+        "dependency": "custom_grid_mode"
+    },
+    "custom_grid_icon_size": {
+        "type": "spinbutton",
+        "default": 40,
+        "min": 16,
+        "max": 96,
+        "step": 2,
+        "description": "Grid icon size",
+        "dependency": "custom_grid_mode"
+    },
+    "custom_grid_label_spacing": {
+        "type": "spinbutton",
+        "default": 6,
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "description": "Grid label spacing",
+        "dependency": "custom_grid_mode"
+    },
+    "grid_label_max_chars": {
+        "type": "spinbutton",
+        "default": 12,
+        "min": 3,
+        "max": 50,
+        "step": 1,
+        "description": "Grid label max chars",
+        "dependency": "custom_grid_mode"        
+    }
+}
