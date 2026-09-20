@@ -32,7 +32,6 @@ MyApplet.prototype = {
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
-        // Built-in Cinnamon wrapper for org.gnome.SessionManager
         this._sessionManager = new GnomeSession.SessionManager();
 
         this._updateLoop();
