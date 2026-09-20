@@ -4,7 +4,6 @@
 
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Cinnamon](https://img.shields.io/badge/Cinnamon-6.x%2B-green.svg)](https://github.com/linuxmint/Cinnamon)
-[![Version](https://img.shields.io/badge/Version-1.0-orange.svg)](#)
 
 ---
 
@@ -130,19 +129,12 @@
 
 ---
 
-
-
-## English Version
-
----
-
 ## ActionCenter
 
 > **An all-in-one Quick Settings panel for Cinnamon desktop**
 
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Cinnamon](https://img.shields.io/badge/Cinnamon-6.x%2B-green.svg)](https://github.com/linuxmint/Cinnamon)
-[![Version](https://img.shields.io/badge/Version-1.0-orange.svg)](#)
 
 ---
 
@@ -265,4 +257,3 @@ Two modes available:
 ### Optional Dependencies
 
 - `cinnamon-session-quit` — for system dialog mode power management
-
