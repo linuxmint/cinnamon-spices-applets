@@ -245,11 +245,30 @@ var LaptopTooltip = class LaptopTooltip {
   _show() {
     this._box.show();
     const [ox, oy] = this._owner.get_transformed_position();
-    const [, oh]   = this._owner.get_transformed_size();
+    const [ow, oh] = this._owner.get_transformed_size();
     const [bw, bh] = this._box.get_size();
     const monitor  = Main.layoutManager.primaryMonitor;
-    const x = Math.max(monitor.x, Math.min(ox, monitor.x + monitor.width - bw));
-    const y = this._orientation === St.Side.TOP ? oy + oh : oy - bh;
+
+    let x, y;
+    // Vertical panels: place the tooltip beside the tile so it doesn't
+    // cover the panel or the icons above/below.
+    //   LEFT panel  → tooltip to the right of the tile
+    //   RIGHT panel → tooltip to the left of the tile
+    // Horizontal panels: keep the existing top-vs-bottom logic.
+    if (this._orientation === St.Side.LEFT) {
+      x = ox + ow;
+      y = oy;
+    } else if (this._orientation === St.Side.RIGHT) {
+      x = ox - bw;
+      y = oy;
+    } else {
+      x = ox;
+      y = this._orientation === St.Side.TOP ? oy + oh : oy - bh;
+    }
+
+    // Clamp so the whole tooltip stays on the primary monitor.
+    x = Math.max(monitor.x, Math.min(x, monitor.x + monitor.width  - bw));
+    y = Math.max(monitor.y, Math.min(y, monitor.y + monitor.height - bh));
     this._box.set_position(Math.round(x), Math.round(y));
   }
 
@@ -306,6 +325,10 @@ function makeIconActor(path, size) {
 class YasmApplet extends Applet.Applet {
   constructor(metadata, orientation, panelHeight, instanceId) {
     super(orientation, panelHeight, instanceId);
+    // Advertise support for both horizontal and vertical panels — Cinnamon
+    // reads this via getAllowedLayout(), NOT via metadata.json's
+    // panel-orientation-support field (which is checked by nothing).
+    this.setAllowedLayout(Applet.AllowedLayout.BOTH);
     this._orientation = orientation;
 
     this._instanceId = instanceId;
@@ -324,7 +347,10 @@ class YasmApplet extends Applet.Applet {
   }
 
   _getColoredIconSize() {
-    return Math.max(16, Math.round((this._panelHeight || 40) * 0.6));
+    // Icons in compact mode are load-bearing (no text alongside), so a
+    // 60% multiplier ends up dominating the panel. Shrink to 45% there.
+    const mult = this._useCompactMode() ? 0.45 : 0.6;
+    return Math.max(16, Math.round((this._panelHeight || 40) * mult));
   }
 
 
@@ -340,6 +366,7 @@ class YasmApplet extends Applet.Applet {
     const bind = (key, prop, cb) => this._settings.bind(key, prop, cb || null);
     bind('refresh-interval', '_refreshInterval', () => this._restartPolling());
     bind('panel-separator',   '_separator');
+    bind('compact-mode',      '_compactMode', () => this._rebuildSections());
     bind('uptime-load-label', '_uptimeLoadLabel');
     bind('battery-list',      '_batteryList',    () => this._restartManager());
     bind('net-list',         '_netList');
@@ -410,6 +437,17 @@ class YasmApplet extends Applet.Applet {
     return this._orientation === St.Side.LEFT || this._orientation === St.Side.RIGHT;
   }
 
+  // Compact mode: icons only, no text labels. Triggers:
+  //   - Vertical panel (always) — narrow panels cannot fit tile text.
+  //   - compact-mode setting = 'icon' (user override on horizontal panels).
+  // In text mode the per-tile `<section>-display` switch chooses icon vs
+  // label; in compact mode the icon is forced on every tile regardless.
+  _useCompactMode() {
+    if (this._compactMode === 'text') return false;
+    if (this._compactMode === 'icon') return true;
+    return this._isVertical(); // 'auto'
+  }
+
   on_orientation_changed(orientation) {
     this._orientation = orientation;
     this._rebuildSections();
@@ -439,6 +477,7 @@ class YasmApplet extends Applet.Applet {
 
     this._sections = {};
     const vertical = this._isVertical();
+    const compact  = this._useCompactMode();
     this.actor.vertical = vertical;
     this.actor.add_style_class_name('yasm-box');
 
@@ -456,6 +495,7 @@ class YasmApplet extends Applet.Applet {
       tile.add_style_class_name('yasm-label');
       tile.add_style_class_name('threshold-ok');
       if (vertical) tile.add_style_class_name('yasm-label-vertical');
+      if (compact)  tile.add_style_class_name('yasm-label-compact');
       tile.set_y_align(Clutter.ActorAlign.CENTER);
 
       const iconSize = this._getColoredIconSize();
@@ -465,11 +505,16 @@ class YasmApplet extends Applet.Applet {
       tile.set_style(`padding: ${pad}px ${pad + 2}px; border-width: ${brd}px;`);
       tile.spacing = spc;
 
-      // Show icon or placeholder spacer based on display switch
-      const showIcon  = !!this[`_${key}Display`];
+      // Compact mode forces the icon on regardless of per-tile display switch,
+      // since hiding both icon and text would produce an empty tile.
+      const showIcon  = compact || !!this[`_${key}Display`];
       const iconPath  = showIcon ? `${AppletPath}/icons/${ICON_FILES[key]}` : null;
       const iconActor = iconPath ? makeIconActor(iconPath, iconSize) : null;
       if (iconActor) {
+        // In compact mode, the uptime tile drops its clock icon so only the
+        // load icon (added below) remains — clock face is redundant when the
+        // uptime text is hidden anyway.
+        if (compact && key === 'uptime') iconActor.hide();
         tile.add_actor(iconActor);
       } else {
         tile.add_actor(new St.Widget({ width: 0, height: iconSize }));
@@ -495,6 +540,7 @@ class YasmApplet extends Applet.Applet {
       label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
       label.add_style_class_name('yasm-tile-text');
       label.set_y_align(Clutter.ActorAlign.CENTER);
+      if (compact) label.hide();
       tile.add_actor(label);
 
       // Uptime tile: separator + load icon/spacer + load label after the time value
@@ -502,6 +548,7 @@ class YasmApplet extends Applet.Applet {
       if (key === 'uptime') {
         const sepActor = new St.Label({ text: ' | ' });
         sepActor.set_y_align(Clutter.ActorAlign.CENTER);
+        if (compact) sepActor.hide();
         tile.add_actor(sepActor);
 
         const showLoadIcon = !!this._loadDisplay;
@@ -516,6 +563,7 @@ class YasmApplet extends Applet.Applet {
 
         loadLabel = new St.Label({ text: '' });
         loadLabel.set_y_align(Clutter.ActorAlign.CENTER);
+        if (compact) loadLabel.hide();
         tile.add_actor(loadLabel);
       }
 

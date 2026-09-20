@@ -82,7 +82,8 @@
       "keys": [
         "applet-description",
         "refresh-interval",
-        "panel-separator"
+        "panel-separator",
+        "compact-mode"
       ]
     },
     "uptime-section": {
@@ -293,6 +294,17 @@
     "type": "entry",
     "default": "",
     "description": "Separator between panel sections (blank = none)"
+  },
+  "compact-mode": {
+    "type": "combobox",
+    "default": "auto",
+    "description": "Compact mode",
+    "tooltip": "Auto: icon-only on vertical panels, text elsewhere. Icons: icon-only everywhere. Text: text everywhere (may clip on narrow panels).",
+    "options": {
+      "Auto": "auto",
+      "Icons only": "icon",
+      "Text (always)": "text"
+    }
   },
   "uptime-enabled": {
     "type": "checkbox",

@@ -13,6 +13,9 @@ function parseFanInputs(fileutil, hwmonPath) {
 function formatPanel(fans) {
   if (!fans || fans.length === 0) return 'no fans';
   const maxRpm = Math.max(...fans.map(f => f.rpm));
+  // Every fan reporting 0 rpm means the fan curve has spun them down —
+  // '0rpm' reads as a broken sensor, 'off' reads as the actual state.
+  if (maxRpm === 0) return 'off';
   return `${maxRpm}rpm`;
 }
 
