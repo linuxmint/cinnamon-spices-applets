@@ -646,10 +646,13 @@ class YasmApplet extends Applet.Applet {
               const bat        = data.battery;
               const pct        = bat.capacityPct;
               const isCharging = bat.isCharging;
+              const isFull     = bat.isFull;
+              const isOnAC     = bat.isOnAC;
 
-              // Dynamic icon swap: AC icon when charging, battery icon when on battery
+              // Dynamic icon swap: AC icon whenever on AC (charging OR full),
+              // battery icon only while actually discharging.
               if (s.iconActor) {
-                const targetImg = isCharging ? s.acIconImage : s.batIconImage;
+                const targetImg = isOnAC ? s.acIconImage : s.batIconImage;
                 if (targetImg) s.iconActor.set_content(targetImg);
               }
 
@@ -658,11 +661,9 @@ class YasmApplet extends Applet.Applet {
                              : pct <= (this._batWarn  || 30) ? 'warn' : 'ok';
               this._applyThreshold(s.tile, batLevel);
               let tileWatt;
-              if (isCharging) {
-                tileWatt = bat.usageW != null ? `≈${Math.round(bat.usageW)}W` : `+${bat.powerW.toFixed(1)}W`;
-              } else {
-                tileWatt = `-${bat.powerW.toFixed(1)}W`;
-              }
+              if (isCharging)     tileWatt = bat.usageW != null ? `≈${Math.round(bat.usageW)}W` : `+${bat.powerW.toFixed(1)}W`;
+              else if (isFull)    tileWatt = bat.usageW != null ? `≈${Math.round(bat.usageW)}W` : `AC`;
+              else                tileWatt = `-${bat.powerW.toFixed(1)}W`;
               s.label.set_text(this._buildText('battery', `${pct}% | ${tileWatt}`));
 
               const { pctVals, currentDrawW, currentChargeW, avgDrawW,
@@ -670,17 +671,22 @@ class YasmApplet extends Applet.Applet {
               const pctToLbl = ` ${String(pct).padStart(3)}% `;
 
               // Watt graph right label
-              let wattRight = isCharging ? `+${bat.powerW.toFixed(1)}W`
-                                         : `-${bat.powerW.toFixed(1)}W`;
-              if (!isCharging && avgDrawW) {
-                wattRight += `\nø ${avgDrawW.toFixed(1)}W`;
-                const remH = bat.energyWh / avgDrawW;
-                if (remH > 0) wattRight += `\n~${BatteryMetric.formatTimeHours(remH)}`;
+              let wattRight;
+              if (isCharging)     wattRight = `+${bat.powerW.toFixed(1)}W`;
+              else if (isFull)    wattRight = `0.0W`;
+              else {
+                wattRight = `-${bat.powerW.toFixed(1)}W`;
+                if (avgDrawW) {
+                  wattRight += `\nø ${avgDrawW.toFixed(1)}W`;
+                  const remH = bat.energyWh / avgDrawW;
+                  if (remH > 0) wattRight += `\n~${BatteryMetric.formatTimeHours(remH)}`;
+                }
               }
 
-              // Usage breakdown for AC tooltip
+              // Usage breakdown for AC tooltip (both charging and full — the
+              // RAPL-based estimate is meaningful whenever we're on AC).
               const usageLines = [];
-              if (isCharging && bat.usageDetail) {
+              if (isOnAC && bat.usageDetail) {
                 const d = bat.usageDetail;
                 usageLines.push('');
                 usageLines.push('<b>≈ Usage</b>');
@@ -689,20 +695,27 @@ class YasmApplet extends Applet.Applet {
                 usageLines.push(`DRAM:     ~${d.dram}W`);
                 if (d.display)         usageLines.push(`Display:  ~${d.display}W`);
                 usageLines.push(`Total:    ≈${Math.round(bat.usageW)}W`);
-              } else if (isCharging && bat.raplAvail === false) {
+              } else if (isOnAC && bat.raplAvail === false) {
                 usageLines.push('');
                 usageLines.push('<i>CPU power unavailable — click\n"Enable CPU power monitoring"\nin Power settings</i>');
               }
 
+              const headerText = isCharging ? '<b>Power — AC</b>'
+                              : isFull     ? '<b>Power — AC (full)</b>'
+                              :              '<b>Power — Battery</b>';
+              const graphLeft  = isCharging ? 'AC↑\n(3hrs)\nDraw↓'
+                              : isFull     ? '(3hrs)'
+                              :              '(3hrs)\nDraw↓';
+              const graphSplit = isCharging ? 1/3 : isFull ? 0.5 : 0.05;
               const tooltipItems = [
-                { type: 'text', html: isCharging ? '<b>Power — AC</b>' : '<b>Power — Battery</b>' },
+                { type: 'text', html: headerText },
                 { type: 'graph', left: `${String(pctVals.find(v => v != null) ?? '').padStart(3)}%\n(6hrs)`, right: pctToLbl,
                   height: 20, marginBottom: 8, marginTop: 8,
                   series: [{ vals: pctVals, color: C.ok, maxV: 100,
                     thresholds: { warn: this._batWarn || 30, alert: this._batAlert || 15,
                                   inverted: true } }] },
-                { type: 'graph', left: isCharging ? 'AC↑\n(3hrs)\nDraw↓' : '(3hrs)\nDraw↓', right: wattRight,
-                  height: 30, splitFrac: isCharging ? 1/3 : 0.05, marginBottom: 12, mode: 'bidir',
+                { type: 'graph', left: graphLeft, right: wattRight,
+                  height: 30, splitFrac: graphSplit, marginBottom: 12, mode: 'bidir',
                   series: [
                     { vals: chargeVals, color: C.ok,   dir: 'up'   },
                     { vals: drawVals,   color: C.draw,  dir: 'down' },
