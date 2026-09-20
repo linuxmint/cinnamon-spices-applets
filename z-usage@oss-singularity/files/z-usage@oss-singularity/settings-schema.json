@@ -36,7 +36,9 @@
         "show-model-specific-limits",
         "show-zcode-plan-quotas",
         "expand-zcode-plan-sections",
+        "show-start-plan-quotas",
         "show-model-limits-in-panel",
+        "show-five-hour-in-panel",
         "show-weekly-with-five-hour",
         "font-size",
         "separator"
@@ -152,6 +154,19 @@
     "dependency": "show-zcode-plan-quotas",
     "description": "Keep ZCode plan sections expanded",
     "tooltip": "Open the ZCode plan sections by default whenever the popup is rebuilt. Manual collapsing still works per popup."
+  },
+  "show-start-plan-quotas": {
+    "type": "switch",
+    "default": true,
+    "dependency": "show-zcode-plan-quotas",
+    "description": "Show Start Plan quotas",
+    "tooltip": "Turn off to hide the minimal ZCode Start Plan section from the menu, panel and tooltip. Other ZCode plan quotas such as Global Build stay visible. The master 'Show ZCode plan quotas' switch above hides them all."
+  },
+  "show-five-hour-in-panel": {
+    "type": "switch",
+    "default": true,
+    "description": "Show 5h in the panel",
+    "tooltip": "Turn off to keep only the weekly 7d value in the panel. The popup, rings and tooltip always show both windows. While 5h is hidden, the 'Show 7d in the panel' switch below has nothing left to hide and is ignored."
   },
   "show-weekly-with-five-hour": {
     "type": "switch",

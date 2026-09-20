@@ -89,9 +89,15 @@ function listQuotaWindows(limits) {
     return windows;
 }
 
-function selectPanelWindows(summaries, showWeeklyWithFiveHour) {
+function selectPanelWindows(summaries, showWeeklyWithFiveHour, showFiveHourInPanel) {
     const windows = Array.from(summaries || []);
     const hasFiveHour = windows.some(window => window.durationMinutes === 300);
+    if (showFiveHourInPanel === false && hasFiveHour) {
+        // With the 5-hour window hidden the weekly value is the only panel
+        // window left, so show-weekly-with-five-hour has nothing to hide
+        // and would otherwise blank the panel entirely.
+        return windows.filter(window => window.durationMinutes !== 300);
+    }
     if (showWeeklyWithFiveHour !== false || !hasFiveHour) return windows;
     return windows.filter(window => window.durationMinutes !== 10080);
 }
@@ -454,6 +460,35 @@ function formatActivityBucketRange(
     return sameDay
         ? _f("%s %s–%s", start.format("%a"), start.format(timeFormat), end.format(timeFormat))
         : _f("%s %s–%s %s", start.format("%a"), start.format(timeFormat), end.format("%a"), end.format(timeFormat));
+}
+
+// Start of the bucket at `index` inside a `bucketCount`-slot chart ending
+// at `endAt`, in epoch seconds; null for invalid chart geometry. Shared by
+// the range label above and the applet's no-data tick decision.
+function activityBucketStartSeconds(index, bucketCount, bucketMinutes, endAt) {
+    const count = Number(bucketCount);
+    const position = Number(index);
+    const seconds = Number(bucketMinutes) * 60;
+    const endSeconds = Number(endAt);
+    if (
+        !Number.isFinite(count) || count <= 0 ||
+        !Number.isFinite(position) || position < 0 || position >= count ||
+        !Number.isFinite(seconds) || seconds <= 0 ||
+        !Number.isFinite(endSeconds) || endSeconds <= 0
+    ) {
+        return null;
+    }
+    return endSeconds - ((count - position) * seconds);
+}
+
+// A bucket with no observation after tracking began (refresh failures,
+// connection outages, suspend) renders the thin no-data tick instead of an
+// invisible gap. Buckets from before trackedSince were never observed and
+// stay empty, and a missing tracking start (0/NaN) keeps the old gaps.
+function activityNoDataTick(quotaVisible, creditVisible, bucketStartSeconds, trackedSince) {
+    if (quotaVisible || creditVisible) return false;
+    if (!Number.isFinite(trackedSince) || trackedSince <= 0) return false;
+    return Number.isFinite(bucketStartSeconds) && bucketStartSeconds >= trackedSince;
 }
 
 function formatActivityBucketDetails(bar, index, bucketCount, valueKind) {
@@ -1061,6 +1096,8 @@ module.exports = {
     buildUsageNotificationEvents,
     formatActivityBucketTooltip,
     formatActivityBucketRange,
+    activityBucketStartSeconds,
+    activityNoDataTick,
     formatActivityBucketTooltipLine,
     formatAccessibleTooltip,
     formatTimestamp,

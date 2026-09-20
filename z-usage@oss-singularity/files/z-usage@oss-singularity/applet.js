@@ -443,7 +443,9 @@ class ZUsageApplet extends Applet.Applet {
         this.showModelSpecificLimits = true;
         this.showZcodePlanQuotas = true;
         this.expandZcodePlanSections = true;
+        this.showStartPlanQuotas = true;
         this.showModelLimitsInPanel = false;
+        this.showFiveHourInPanel = true;
         this.showWeeklyWithFiveHour = true;
         this.fontSize = 100;
         this.separator = "·";
@@ -488,8 +490,18 @@ class ZUsageApplet extends Applet.Applet {
         this.settings.bind("show-zcode-plan-quotas", "showZcodePlanQuotas", this._onModelVisibilityChanged.bind(this));
         this.settings.bind("expand-zcode-plan-sections", "expandZcodePlanSections", this._onModelVisibilityChanged.bind(this));
         this.settings.bind(
+            "show-start-plan-quotas",
+            "showStartPlanQuotas",
+            this._onModelVisibilityChanged.bind(this)
+        );
+        this.settings.bind(
             "show-model-limits-in-panel",
             "showModelLimitsInPanel",
+            layoutChanged
+        );
+        this.settings.bind(
+            "show-five-hour-in-panel",
+            "showFiveHourInPanel",
             layoutChanged
         );
         this.settings.bind(
@@ -852,7 +864,8 @@ class ZUsageApplet extends Applet.Applet {
         const allSummaries = UsageFormat.summarizeWindows(panelLimits);
         const summaries = UsageFormat.selectPanelWindows(
             allSummaries,
-            this.showWeeklyWithFiveHour
+            this.showWeeklyWithFiveHour,
+            this.showFiveHourInPanel
         );
 
         if (summaries.length === 0) {
@@ -886,6 +899,18 @@ class ZUsageApplet extends Applet.Applet {
         let list = Array.from(limits || []);
         if (this.showZcodePlanQuotas === false) {
             list = list.filter(limit => limit.source !== ZCODE_PLAN_SOURCE);
+        }
+        if (this.showStartPlanQuotas === false) {
+            // The Start Plan quota is minimal; plenty of accounts want it
+            // gone even while it is active. Z.ai has no dedicated source
+            // flag for it, so the label/planType/id carry the decision -
+            // the same /start/i signal the panel badge uses (Claudiu's
+            // minimal-look request).
+            list = list.filter(limit => !(
+                /start/i.test(String(limit.label || limit.limitLabel || "")) ||
+                /start/i.test(String(limit.planType || "")) ||
+                /start/i.test(String(limit.id || ""))
+            ));
         }
         return this.showModelSpecificLimits === false
             ? list.filter(limit => (limit.id || ACCOUNT_LIMIT_ID) === ACCOUNT_LIMIT_ID)
@@ -3717,12 +3742,22 @@ class ZUsageApplet extends Applet.Applet {
             this._addInfoItem(`    ${periodParts.join("  ·  ")}`, null, menu);
         }
         if (activityValues) {
+            // The no-data tick needs the tracking start: buckets left of it
+            // were never observed (fresh installs) and stay empty, buckets
+            // right of it without observation get the thin tick. The credit
+            // series rides the same slots, so the earlier tracking start
+            // decides.
+            const trackingStarts = [
+                Number(window.trackedSince),
+                creditValues ? Number(history.trackedSince) : NaN
+            ].filter(Number.isFinite);
             this._addActivityChart(
                 activityValues,
                 history.activityBucketMinutes,
                 history.activityEndAt || this._snapshot.updatedAt,
                 menu,
-                creditValues
+                creditValues,
+                trackingStarts.length > 0 ? Math.min(...trackingStarts) : 0
             );
         }
     }
@@ -3756,7 +3791,14 @@ class ZUsageApplet extends Applet.Applet {
         }
     }
 
-    _addActivityChart(values, bucketMinutes, endAt, menu = this.menu, creditValues = null) {
+    _addActivityChart(
+        values,
+        bucketMinutes,
+        endAt,
+        menu = this.menu,
+        creditValues = null,
+        trackedSince = 0
+    ) {
         const model = UsageFormat.buildActivityChart(values);
         const creditModel = Array.isArray(creditValues)
             ? UsageFormat.buildCreditActivityChart(creditValues)
@@ -3853,7 +3895,8 @@ class ZUsageApplet extends Applet.Applet {
             // rounded-zero bar below): an all-zero window otherwise renders
             // an empty plot - caption and axis labels with no bars between
             // them read as a broken chart (Claudiu's first-open report).
-            // Unknown buckets (beyond the data range) stay invisible.
+            // Buckets left of trackedSince stay invisible; observed gaps
+            // right of it get the thin no-data tick added below.
             const quotaVisible = Boolean(
                 bar && bar.known && Number.isFinite(bar.consumedPercent)
             );
@@ -3935,6 +3978,28 @@ class ZUsageApplet extends Applet.Applet {
                 true
             );
             addBar(bar, model.peakPercent, false);
+            if (
+                UsageFormat.activityNoDataTick(
+                    quotaHasVisibleBar,
+                    creditHasVisibleBar,
+                    UsageFormat.activityBucketStartSeconds(
+                        index,
+                        barCount,
+                        bucketMinutes,
+                        endAt
+                    ),
+                    trackedSince
+                )
+            ) {
+                // Thinner and dimmer than the known-zero stub so a data gap
+                // (no observation) reads differently from an observed 0%
+                // hour (Claudiu's outage-gap report).
+                bars.add_child(new St.Widget({
+                    width: Math.max(2, Math.round(barWidth / 3)),
+                    height: 2,
+                    style: `background-color: ${this._menuColor(0.28)}; border-radius: 1px;`
+                }));
+            }
             slot.set_child(bars);
             const tooltipLines = [];
             if (bar && bar.known) {
