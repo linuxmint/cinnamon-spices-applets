@@ -7,10 +7,6 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-# ------------- metadata.json -------------
-msgid "An all-in-one Quick Settings panel for Cinnamon, featuring media control, brightness, volume, network, Bluetooth, power menu and more."
-msgstr "一款面向 Cinnamon 的一体化快捷设置面板，集媒体控制、亮度、音量、网络、蓝牙、电源菜单等功能于一身。"
-
 # ---------- applet.js / modules ----------
 msgid "ActionCenter"
 msgstr "操作中心"
@@ -95,6 +91,12 @@ msgstr "输出静音"
 
 msgid "Mute input"
 msgstr "输入静音"
+
+msgid "Output Device"
+msgstr "输出设备"
+
+msgid "Muted"
+msgstr "已静音"
 
 msgid "Sound Settings"
 msgstr "声音设置"
@@ -240,6 +242,12 @@ msgstr "显示声音项"
 
 msgid "Show Mute Switches"
 msgstr "显示静音开关"
+
+msgid "Show Output Selector With Single Device"
+msgstr "单输出设备时也显示选择器"
+
+msgid "Still show the output device submenu when only one device exists"
+msgstr "只有一个输出设备时也显示选择器"
 
 msgid "Show Network Items"
 msgstr "显示网络项"

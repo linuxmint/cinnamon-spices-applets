@@ -590,8 +590,9 @@ MprisController.prototype = {
         this._pollId = 0;
         this._listChangeTimer = 0;
         try {
+            // spawn_command_line_async 只收单个命令字符串；用户名来自系统非外部输入，无注入面
             GLib.spawn_command_line_async(
-                'pkill', ['-f', '-u', GLib.get_user_name(), 'mpris_monitor.py']);
+                'pkill -f -u ' + GLib.get_user_name() + ' mpris_monitor.py');
         } catch(e) {}
     }
 };

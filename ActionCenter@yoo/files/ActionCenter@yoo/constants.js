@@ -21,7 +21,7 @@ const PLAYER_CONTENT_WIDTH = MPRIS_CONTENT_WIDTH - 12 - 16;
 const POLL_INTERVAL_SEC = 12;
 
 // ---------- 缓存文件 ----------
-const CACHE_DIR = GLib.get_home_dir() + "/.cache/ActionCenter@yoo";
+const CACHE_DIR = GLib.get_user_cache_dir() + "/ActionCenter@yoo";
 const MPRIS_STATE_FILE = CACHE_DIR + "/players.json";
 const MPRIS_CMD_FILE = CACHE_DIR + "/commands";
 const WIFI_CACHE_FILE = CACHE_DIR + "/wifi_cache.json";

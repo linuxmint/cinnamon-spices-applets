@@ -379,7 +379,7 @@ MyApplet.prototype = {
         if (!GLib.path_is_absolute(path)) {
             let appletDir = (this._appletMetadata && this._appletMetadata.path)
                 ? this._appletMetadata.path
-                : GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + UUID;
+                : GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
             path = appletDir + "/" + filename;
         }
 
@@ -439,7 +439,7 @@ MyApplet.prototype = {
             if (filename && GLib.path_is_absolute(filename)) return;
             let appletDir = (this._appletMetadata && this._appletMetadata.path)
                 ? this._appletMetadata.path
-                : GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + UUID;
+                : GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
             let defaultFile = appletDir + "/icons/panel-icon-dark.png";
             if (GLib.file_test(defaultFile, GLib.FileTest.EXISTS)) {
                 this._settings.setValue('panel-icon', defaultFile);
@@ -997,8 +997,11 @@ MyApplet.prototype = {
     _openSettings: function() {
         this._ignoreClose = false;
         try {
-            // 同步扫描主题列表：实测约 20ms，用户无感知；扫完再开设置，保证下拉项最新
-            GLib.spawn_command_line_sync('python3 ' + this._appletMetadata.path + '/scripts/scan_themes.py');
+            // 同步扫描主题列表：实测约 20ms，用户无感知；扫完再开设置，保证下拉项最新。
+            // argv 形式：applet 路径含空格也不会被 shell 切碎。
+            GLib.spawn_sync(null,
+                ['python3', this._appletMetadata.path + '/scripts/scan_themes.py'],
+                null, GLib.SpawnFlags.SEARCH_PATH, null);
             this._updateSettingsSchema();
         } catch(e) {
             global.logError("QS scan themes: " + e.message);

@@ -1,7 +1,9 @@
 """ActionCenter@yoo 共享路径配置（唯一真相源）"""
 import os
 
-CACHE_DIR = os.path.expanduser("~/.cache/ActionCenter@yoo")
+CACHE_DIR = os.path.join(
+    os.environ.get("XDG_CACHE_HOME", os.path.expanduser("~/.cache")),
+    "ActionCenter@yoo")
 STATE_FILE = os.path.join(CACHE_DIR, "players.json")
 CMD_FILE = os.path.join(CACHE_DIR, "commands")
 WIFI_CACHE_FILE = os.path.join(CACHE_DIR, "wifi_cache.json")
