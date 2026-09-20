@@ -1,13 +1,11 @@
 const Applet = imports.ui.applet;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
+const GnomeSession = imports.misc.gnomeSession;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 
 const FLAG_INHIBIT_IDLE = 8;
 const POLL_INTERVAL_SECONDS = 3;
 
-// Match standard compact panel icon sizing
 const ICON_SIZE = 16;
 const COLOR_ALLOWED = "color: #2ecc71;";   // Green
 const COLOR_INHIBITED = "color: #e74c3c;"; // Red
@@ -22,10 +20,7 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
-        this.set_applet_icon_name("changes-allow-symbolic");
         this.set_applet_icon_symbolic_name("changes-allow-symbolic");
-        
-        // Force explicit icon size to match neighboring tray icons
         if (this._applet_icon) {
             this._applet_icon.set_icon_size(ICON_SIZE);
             this._applet_icon.set_style(COLOR_ALLOWED);
@@ -33,12 +28,13 @@ MyApplet.prototype = {
 
         this.set_applet_tooltip("Screensaver: Allowed (No active idle inhibitors)");
 
-        // Setup dropdown popup menu for inhibitor list
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
-        this._dbus = Gio.DBus.session;
+        // Built-in Cinnamon wrapper for org.gnome.SessionManager
+        this._sessionManager = new GnomeSession.SessionManager();
+
         this._updateLoop();
     },
 
@@ -68,65 +64,36 @@ MyApplet.prototype = {
     },
 
     _checkInhibitors: function() {
-        this._dbus.call(
-            "org.gnome.SessionManager",
-            "/org/gnome/SessionManager",
-            "org.gnome.SessionManager",
-            "GetInhibitors",
-            null,
-            new GLib.VariantType("(ao)"),
-            Gio.DBusCallFlags.NONE,
-            -1,
-            null,
-            (conn, res) => {
-                try {
-                    let reply = conn.call_finish(res);
-                    let [paths] = reply.deepUnpack();
-
-                    if (!paths || paths.length === 0) {
-                        this._renderInhibitors([]);
-                        return;
-                    }
-
-                    this._inspectInhibitorPaths(paths);
-                } catch (e) {
-                    this._renderInhibitors([]);
-                }
+        this._sessionManager.GetInhibitorsRemote((paths, err) => {
+            if (err || !paths || paths.length === 0) {
+                this._renderInhibitors([]);
+                return;
             }
-        );
-    },
 
-    _inspectInhibitorPaths: function(paths) {
-        let active = [];
-        let remaining = paths.length;
+            let pathList = paths[0];
+            if (!pathList || pathList.length === 0) {
+                this._renderInhibitors([]);
+                return;
+            }
 
-        paths.forEach(objPath => {
-            this._dbus.call(
-                "org.gnome.SessionManager",
-                objPath,
-                "org.gnome.SessionManager.Inhibitor",
-                "GetFlags",
-                null,
-                new GLib.VariantType("(u)"),
-                Gio.DBusCallFlags.NONE,
-                -1,
-                null,
-                (conn, resFlags) => {
-                    let flags = 0;
-                    try {
-                        let reply = conn.call_finish(resFlags);
-                        [flags] = reply.deepUnpack();
-                    } catch (e) {}
+            let active = [];
+            let remaining = pathList.length;
 
+            pathList.forEach(objPath => {
+                let inhibitor = new GnomeSession.Inhibitor(objPath);
+                inhibitor.GetFlagsRemote((flagsResult, fErr) => {
+                    let flags = (!fErr && flagsResult) ? flagsResult[0] : 0;
                     if ((flags & FLAG_INHIBIT_IDLE) !== 0) {
-                        this._getInhibitorDetails(objPath, (details) => {
-                            if (details) {
-                                active.push(details);
-                            }
-                            remaining--;
-                            if (remaining === 0) {
-                                this._renderInhibitors(active);
-                            }
+                        inhibitor.GetAppIdRemote((appIdResult, aErr) => {
+                            let appId = (!aErr && appIdResult) ? appIdResult[0] : "Unknown";
+                            inhibitor.GetReasonRemote((reasonResult, rErr) => {
+                                let reason = (!rErr && reasonResult) ? reasonResult[0] : "No reason provided";
+                                active.push({ appId: appId, reason: reason });
+                                remaining--;
+                                if (remaining === 0) {
+                                    this._renderInhibitors(active);
+                                }
+                            });
                         });
                     } else {
                         remaining--;
@@ -134,51 +101,9 @@ MyApplet.prototype = {
                             this._renderInhibitors(active);
                         }
                     }
-                }
-            );
+                });
+            });
         });
-    },
-
-    _getInhibitorDetails: function(objPath, callback) {
-        this._dbus.call(
-            "org.gnome.SessionManager",
-            objPath,
-            "org.gnome.SessionManager.Inhibitor",
-            "GetAppId",
-            null,
-            new GLib.VariantType("(s)"),
-            Gio.DBusCallFlags.NONE,
-            -1,
-            null,
-            (conn, resApp) => {
-                let appId = "Unknown";
-                try {
-                    let reply = conn.call_finish(resApp);
-                    [appId] = reply.deepUnpack();
-                } catch (e) {}
-
-                this._dbus.call(
-                    "org.gnome.SessionManager",
-                    objPath,
-                    "org.gnome.SessionManager.Inhibitor",
-                    "GetReason",
-                    null,
-                    new GLib.VariantType("(s)"),
-                    Gio.DBusCallFlags.NONE,
-                    -1,
-                    null,
-                    (conn2, resReason) => {
-                        let reason = "No reason provided";
-                        try {
-                            let reply = conn2.call_finish(resReason);
-                            [reason] = reply.deepUnpack();
-                        } catch (e) {}
-
-                        callback({ appId: appId, reason: reason });
-                    }
-                );
-            }
-        );
     },
 
     _renderInhibitors: function(inhibitors) {
@@ -226,3 +151,4 @@ MyApplet.prototype = {
 function main(metadata, orientation, panel_height, instance_id) {
     return new MyApplet(metadata, orientation, panel_height, instance_id);
 }
+
