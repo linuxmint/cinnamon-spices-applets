@@ -126,6 +126,7 @@
         "cpu-label",
         "cpu-temp-warn",
         "cpu-temp-alert",
+        "cpu-temp-alert-notify",
         "cpu-use-warn",
         "cpu-use-alert"
       ]
@@ -175,7 +176,10 @@
       "keys": [
         "gpu-enabled",
         "gpu-display",
-        "gpu-label"
+        "gpu-label",
+        "gpu-temp-warn",
+        "gpu-temp-alert",
+        "gpu-temp-alert-notify"
       ]
     }
   },
@@ -233,6 +237,11 @@
     "step": 5,
     "description": "CPU usage alert %"
   },
+  "cpu-temp-alert-notify": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Notify when CPU temperature is critical"
+  },
   "bat-warn": {
     "type": "spinbutton",
     "default": 30,
@@ -249,10 +258,31 @@
     "step": 5,
     "description": "Battery alert %"
   },
+  "gpu-temp-warn": {
+    "type": "spinbutton",
+    "default": 70,
+    "min": 40,
+    "max": 100,
+    "step": 5,
+    "description": "GPU temp warn (°C)"
+  },
+  "gpu-temp-alert": {
+    "type": "spinbutton",
+    "default": 85,
+    "min": 40,
+    "max": 100,
+    "step": 5,
+    "description": "GPU temp alert (°C)"
+  },
+  "gpu-temp-alert-notify": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Notify when GPU temperature is critical"
+  },
   "refresh-interval": {
     "type": "spinbutton",
     "default": 5,
-    "min": 1,
+    "min": 3,
     "max": 30,
     "step": 1,
     "units": "seconds",
