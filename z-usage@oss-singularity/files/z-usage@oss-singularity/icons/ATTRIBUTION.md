@@ -2,11 +2,10 @@
 
 ## Original project artwork
 
-`applet.svg`, `usage.svg`, `zai-chat.svg` and `terminal-bot.svg` were drawn
+`applet.svg`, `usage.svg`, `zai-chat.svg` and `zcode.svg` were drawn
 for OSS Singularity as original geometric artwork. They are licensed under
-GPL-3.0-or-later, as are the PNGs rendered from them: `../icon.png`,
-`usage-white.png` and `terminal-bot.png`. The robot is a terminal-themed project
-character, not the Codex desktop sprite. No OpenAI knot or character is included.
+GPL-3.0-or-later, as are the PNGs rendered from them: `../icon.png` and
+`usage-white.png`.
 
 Reproduce the PNGs with `python3 scripts/render-icons.py` in the source
 repository; `--check` verifies their correspondence to the editable SVGs.
@@ -18,7 +17,7 @@ as shipped by `yaru-theme-icon` version `24.04.2-0ubuntu1`:
 
 - `view-refresh-symbolic.svg` — Refresh now
 - `utilities-system-monitor-symbolic.svg` — Analytics
-- `web-browser-symbolic.svg` — ChatGPT and Codex Cloud
+- `web-browser-symbolic.svg` — Z.ai usage dashboard and API key pages
 - `emblem-ok-symbolic.svg` — Updated confirmation
 
 Yaru Icons — Copyright 2018 [Sam Hewitt](https://snwh.org/). Licensed under

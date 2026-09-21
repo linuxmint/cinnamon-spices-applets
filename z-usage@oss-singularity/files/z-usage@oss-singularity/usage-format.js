@@ -1009,27 +1009,6 @@ function formatLocalDate(epochSeconds) {
     return dateTime.format("%d.%m.%Y");
 }
 
-function formatChatGptVersionDate(version) {
-    const match = String(version || "").trim().match(/^(\d{2})\.(\d{3,4})\.\d{5}$/);
-    if (!match) return null;
-
-    const year = 2000 + Number(match[1]);
-    const dateCode = match[2];
-    const month = Number(dateCode.slice(0, -2));
-    const day = Number(dateCode.slice(-2));
-    const date = new Date(Date.UTC(year, month - 1, day));
-    if (
-        month < 1 || month > 12 || day < 1 ||
-        date.getUTCFullYear() !== year ||
-        date.getUTCMonth() !== month - 1 ||
-        date.getUTCDate() !== day
-    ) {
-        return null;
-    }
-
-    return `${String(day).padStart(2, "0")}.${String(month).padStart(2, "0")}.${year}`;
-}
-
 function formatRelativeTime(epochSeconds, nowSeconds = null) {
     const updatedSeconds = Number(epochSeconds);
     const currentSeconds = nowSeconds === null
@@ -1048,16 +1027,6 @@ function formatRelativeTime(epochSeconds, nowSeconds = null) {
     if (elapsedSeconds < 3600) return _f("%sm ago", Math.floor(elapsedSeconds / 60));
     if (elapsedSeconds < 86400) return _f("%sh ago", Math.floor(elapsedSeconds / 3600));
     return _f("%sd ago", Math.floor(elapsedSeconds / 86400));
-}
-
-function formatAppTooltip(installed, version = null, prefix = "", releaseDate = null) {
-    const status = installed
-        ? (String(version || "").trim() || _("version unavailable"))
-        : _("not installed");
-    const datedStatus = installed && releaseDate
-        ? _f("%s — %s", status, releaseDate)
-        : status;
-    return installed && prefix ? _f("%s %s", prefix, datedStatus) : datedStatus;
 }
 
 module.exports = {
@@ -1108,7 +1077,5 @@ module.exports = {
     buildResetCreditConfirmation,
     buildResetConsumeFeedback,
     formatLocalDate,
-    formatChatGptVersionDate,
-    formatRelativeTime,
-    formatAppTooltip
+    formatRelativeTime
 };

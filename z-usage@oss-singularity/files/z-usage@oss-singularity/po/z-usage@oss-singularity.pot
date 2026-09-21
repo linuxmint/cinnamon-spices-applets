@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Z Usage Monitor 1.0.3\n"
+"Project-Id-Version: Z Usage Monitor 1.0.4\n"
 "Report-Msgid-Bugs-To: https://github.com/oss-singularity/cinnamon-z-usage/issues\n"
 "POT-Creation-Date: 2026-09-08 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -130,11 +130,6 @@ msgstr ""
 #: usage-format.js
 #, javascript-format
 msgid "%s · partial bucket · estimated"
-msgstr ""
-
-#: usage-format.js
-#, javascript-format
-msgid "%s — %s"
 msgstr ""
 
 #: usage-format.js
@@ -800,10 +795,6 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-#: usage-format.js
-msgid "not installed"
-msgstr ""
-
 #: applet.js usage-format.js
 msgid "now"
 msgstr ""
@@ -818,10 +809,6 @@ msgstr ""
 
 #: usage-format.js
 msgid "unknown"
-msgstr ""
-
-#: usage-format.js
-msgid "version unavailable"
 msgstr ""
 
 #: usage-format.js

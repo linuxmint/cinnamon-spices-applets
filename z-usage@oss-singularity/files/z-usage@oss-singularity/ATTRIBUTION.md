@@ -5,20 +5,26 @@ the OSS-SINGULARITY project
 [Adaptive System Monitor](https://github.com/oss-singularity/cinnamon-system-monitor)
 and is reused here under GPL-3.0-or-later.
 
-All ChatGPT usage retrieval and normalization code in this repository is an
-original implementation based on the public Codex app-server protocol.
+The Z.ai usage retrieval and normalization code in this repository
+(`z_usage.py`) is an original implementation against the public Z.ai
+usage monitor API; the formatting, popup and panel code derive from the
+[cinnamon-chatgpt-usage](https://github.com/oss-singularity/cinnamon-chatgpt-usage)
+fork under GPL-3.0-or-later.
 
-OpenAI, ChatGPT and Codex are trademarks of OpenAI. This community project is
-not affiliated with or endorsed by OpenAI.
+Z.ai, GLM and ZCode are products of their respective owners. This
+community project is not affiliated with or endorsed by them. OpenAI,
+ChatGPT and Codex are trademarks of OpenAI and are referenced only as
+fork provenance.
 
-The quota emblem, chat bubble and terminal robot are original OSS Singularity
-SVG artwork under GPL-3.0-or-later. Their editable sources travel with the
-applet; generated PNGs carry the same license. See `icons/ATTRIBUTION.md`.
-No OpenAI logo or desktop character is bundled in the current source tree or
-release payload. Product names refer to their respective external services.
+The usage emblem, Z.ai chat bubble and ZCode icon are original OSS
+Singularity SVG artwork under GPL-3.0-or-later. Their editable sources
+travel with the applet; generated PNGs carry the same license. See
+`icons/ATTRIBUTION.md`. Product names refer to their respective external
+services.
 
-The abstract social background was generated with ImageGen; its original
-prompt and editable layout are preserved in `.github/social-preview-src/`.
+The social background is a hand-painted ImageGen artwork provided by the
+maintainer (2026-09-21); the project's deterministic fallback generator
+and editable layout are preserved in `.github/social-preview-src/`.
 Project rights, to the extent they exist, in this background and the social
 composition are offered under GPL-3.0-or-later. Noto Sans is used to render
 text under OFL-1.1; font binaries are not bundled.
