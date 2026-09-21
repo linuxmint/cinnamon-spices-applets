@@ -1,0 +1,102 @@
+# Desktop Drawer
+# Copyright (C) 2026 TitasDas
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Distributed under the same licence as Desktop Drawer.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Desktop Drawer 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-09-22 02:16+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:30
+msgid "Desktop Drawer: browse your files"
+msgstr ""
+
+#: applet.js:114 applet.js:201
+msgid "Loading files..."
+msgstr ""
+
+#: applet.js:122
+msgid "Open folder"
+msgstr ""
+
+#: applet.js:126
+msgid "Private folder contents are hidden."
+msgstr ""
+
+#: applet.js:135 applet.js:219
+msgid "Cannot read this folder."
+msgstr ""
+
+#: applet.js:143
+msgid "Choose folder"
+msgstr ""
+
+#: applet.js:206
+msgid "No files to show."
+msgstr ""
+
+#: applet.js:209
+msgid "Open Private folder"
+msgstr ""
+
+#: applet.js:215
+msgid "More files may be available in the file manager."
+msgstr ""
+
+#: applet.js:226
+msgid "Open this folder"
+msgstr ""
+
+#: applet.js:262
+msgid "Could not open this item"
+msgstr ""
+
+#: applet.js:263
+msgid "Check its default application in your file manager."
+msgstr ""
+
+#. metadata.json->name
+#. settings-schema.json->drawer-heading->description
+msgid "Desktop Drawer"
+msgstr ""
+
+#. metadata.json->description
+msgid "Open files and browse folders from your Cinnamon panel."
+msgstr ""
+
+#. settings-schema.json->folder->description
+msgid "Choose a folder"
+msgstr ""
+
+#. settings-schema.json->folder->tooltip
+msgid ""
+"Leave empty to use your Desktop, or its Organized Desktop folder when "
+"present. Folders named Private stay closed in the drawer."
+msgstr ""
+
+#. settings-schema.json->open-on-hover->description
+msgid "Open menus on hover"
+msgstr ""
+
+#. settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr ""
+
+#. settings-schema.json->hover-delay->description
+msgid "Wait before opening the drawer"
+msgstr ""
+
+#. settings-schema.json->folder-help->description
+msgid ""
+"Without a selected folder, the drawer uses your Desktop or its Organized "
+"Desktop folder."
+msgstr ""
