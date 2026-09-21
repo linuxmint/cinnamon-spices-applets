@@ -20,12 +20,7 @@
     "data-section": {
       "type": "section",
       "title": "Usage data",
-      "keys": [
-        "refresh-interval",
-        "activity-bucket-minutes",
-        "api-key-control",
-        "api-keys-page-button"
-      ]
+      "keys": ["refresh-interval", "activity-bucket-minutes", "api-key-control"]
     },
     "display-section": {
       "type": "section",
@@ -114,12 +109,6 @@
     "description": "Z.ai API key (optional)",
     "tooltip": "Leave empty for automatic detection: the applet reuses the Coding Plan API key of the signed-in ZCode app, then falls back to the ZAI_API_KEY environment variable and the ~/.config/cinnamon-z-usage/api-key file."
   },
-  "api-keys-page-button": {
-    "type": "button",
-    "description": "Open the Z.ai API keys page",
-    "callback": "on_open_api_keys_page_pressed",
-    "tooltip": "Opens the Z.ai API key management page in your browser."
-  },
   "show-panel-icon": {
     "type": "switch",
     "default": true,
@@ -184,7 +173,7 @@
   },
   "separator": {
     "type": "entry",
-    "default": "·",
+    "default": "\u00b7",
     "description": "Separator in horizontal panels",
     "tooltip": "Separators are hidden automatically in vertical panels."
   },

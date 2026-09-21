@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Z Usage Monitor 1.0.4\n"
+"Project-Id-Version: Z Usage Monitor 1.0.5\n"
 "Report-Msgid-Bugs-To: https://github.com/oss-singularity/cinnamon-z-usage/issues\n"
 "POT-Creation-Date: 2026-09-08 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -463,10 +463,6 @@ msgstr ""
 msgid "Open installation guide"
 msgstr ""
 
-#: settings-schema.json.js
-msgid "Open the Z.ai API keys page"
-msgstr ""
-
 #: applet.js
 msgid "Open the Z.ai chat web app"
 msgstr ""
@@ -481,10 +477,6 @@ msgstr ""
 
 #: settings-schema.json.js
 msgid "Open the ZCode plan sections by default whenever the popup is rebuilt. Manual collapsing still works per popup."
-msgstr ""
-
-#: settings-schema.json.js
-msgid "Opens the Z.ai API key management page in your browser."
 msgstr ""
 
 #: z_usage.py

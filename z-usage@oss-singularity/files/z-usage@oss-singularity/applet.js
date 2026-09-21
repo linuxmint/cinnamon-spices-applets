@@ -41,7 +41,6 @@ const ACCOUNT_LIMIT_ID = "zai";
 const ZCODE_PLAN_SOURCE = "zcode-plan";
 const ZAI_URL = "https://chat.z.ai/";
 const ZAI_USAGE_URL = "https://z.ai/manage-apikey/coding-plan/personal/usage";
-const ZAI_API_KEYS_URL = "https://z.ai/manage-apikey/apikey-list";
 const ZCODE_INSTALL_URL = "https://zcode.z.ai";
 const PANEL_FONT_SCALE = 0.95;
 const PANEL_LABEL_SCALE = 0.79;
@@ -2397,10 +2396,6 @@ class ZUsageApplet extends Applet.Applet {
             restore();
             cleanup();
         }
-    }
-
-    on_open_api_keys_page_pressed() {
-        Util.spawn(["xdg-open", ZAI_API_KEYS_URL]);
     }
 
     _addLaunchButtons() {
