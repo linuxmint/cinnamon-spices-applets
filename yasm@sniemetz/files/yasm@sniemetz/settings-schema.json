@@ -82,7 +82,8 @@
       "keys": [
         "applet-description",
         "refresh-interval",
-        "panel-separator"
+        "panel-separator",
+        "compact-mode"
       ]
     },
     "uptime-section": {
@@ -124,6 +125,7 @@
         "cpu-enabled",
         "cpu-display",
         "cpu-label",
+        "cpu-hwmon-list",
         "cpu-temp-warn",
         "cpu-temp-alert",
         "cpu-temp-alert-notify",
@@ -293,6 +295,17 @@
     "default": "",
     "description": "Separator between panel sections (blank = none)"
   },
+  "compact-mode": {
+    "type": "combobox",
+    "default": "auto",
+    "description": "Compact mode",
+    "tooltip": "Auto: icon-only on vertical panels, text elsewhere. Icons: icon-only everywhere. Text: text everywhere (may clip on narrow panels).",
+    "options": {
+      "Auto": "auto",
+      "Icons only": "icon",
+      "Text (always)": "text"
+    }
+  },
   "uptime-enabled": {
     "type": "checkbox",
     "default": true,
@@ -383,6 +396,33 @@
     "default": "",
     "dependency": "!cpu-display",
     "description": "Label text"
+  },
+  "cpu-hwmon-list": {
+    "type": "list",
+    "description": "CPU temperature chips (auto-discovered on first run)",
+    "columns": [
+      {
+        "id": "enabled",
+        "title": "Show",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "hwmon",
+        "title": "hwmon",
+        "type": "string",
+        "default": "0"
+      },
+      {
+        "id": "name",
+        "title": "Chip",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ],
+    "default": []
   },
   "memory-enabled": {
     "type": "checkbox",
