@@ -1,8 +1,8 @@
 # Mouse Trail
 
 Mouse Trail highlights pointer movement, clicks, and keystrokes for screen
-recordings on Cinnamon/X11. The overlay is click-through. Press the configured
-hotkey to hide or show it; the default is the backtick key. Right-click the
+recordings on Cinnamon/X11. The overlay is click through. Press the configured
+hotkey to hide or show it; the default is the backtick key. Right click the
 panel icon and choose **Configure…** to adjust its appearance and hotkey.
 
 Requires Python 3, GTK 3 with PyGObject, `python3-xlib`, X11 with the X RECORD
