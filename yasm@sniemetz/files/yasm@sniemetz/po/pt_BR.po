@@ -1,0 +1,573 @@
+# YASM
+# Machine-generated pt_BR.po — corrections welcome.
+# This file is put in the public domain.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yasm@sniemetz 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-09-22 22:49+0200\n"
+"PO-Revision-Date: 2026-09-22 22:49\n"
+"Last-Translator: Machine-generated stub\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:676
+msgid "Click to open top"
+msgstr "Clique para abrir top"
+
+#. applet.js:740
+msgid "Usage"
+msgstr "Uso"
+
+#. applet.js:741
+msgid "CPU pkg:"
+msgstr "CPU pkg:"
+
+#. applet.js:742
+msgid "GPU:"
+msgstr "GPU:"
+
+#. applet.js:743
+msgid "DRAM:"
+msgstr "DRAM:"
+
+#. applet.js:744
+msgid "Display:"
+msgstr "Tela:"
+
+#. applet.js:745
+msgid "Total:"
+msgstr "Total:"
+
+#. applet.js:748
+msgid ""
+"CPU power unavailable — click\n"
+"\"Enable CPU power monitoring\"\n"
+"in Power settings"
+msgstr ""
+"Energia da CPU indisponível — clique em\n"
+"\"Ativar monitoramento de energia da CPU\"\n"
+"nas configurações de Energia"
+
+#. applet.js:751
+msgid "Power — AC"
+msgstr "Energia — CA"
+
+#. applet.js:752
+msgid "Power — AC (full)"
+msgstr "Energia — CA (cheia)"
+
+#. applet.js:753
+msgid "Power — Battery"
+msgstr "Energia — Bateria"
+
+#. applet.js:754
+msgid "AC↑"
+msgstr "AC↑"
+
+#. applet.js:754 applet.js:755 applet.js:756
+msgid "(3hrs)"
+msgstr "(3 h)"
+
+#. applet.js:754 applet.js:756
+msgid "Draw↓"
+msgstr "Consumo↓"
+
+#. applet.js:791
+msgid "CPU Temperature"
+msgstr "Temperatura da CPU"
+
+#. applet.js:791
+#, javascript-format
+msgid "CPU temp critical: %d°C"
+msgstr "Temp CPU crítica: %d°C"
+
+#. applet.js:810
+msgid "Package"
+msgstr "Package"
+
+#. applet.js:812 lib/metrics/battery.js:32 lib/metrics/gpu.js:144
+msgid "Temp:"
+msgstr "Temp:"
+
+#. applet.js:817
+msgid "CPU:"
+msgstr "CPU:"
+
+#. settings-schema.json->memory->title
+#. settings-schema.json->memory-section->title
+#. applet.js:834 lib/metrics/memory.js:36
+msgid "Memory"
+msgstr "Memória"
+
+#. applet.js:836
+msgid "used"
+msgstr "usado"
+
+#. applet.js:837 lib/metrics/disk.js:112 lib/metrics/disk.js:134
+msgid "free"
+msgstr "livre"
+
+#. applet.js:864
+msgid "Disks"
+msgstr "Discos"
+
+#. applet.js:866 lib/metrics/disk.js:121
+msgid "I/O"
+msgstr "E/S"
+
+#. applet.js:898
+msgid "GPU Temperature"
+msgstr "Temperatura da GPU"
+
+#. applet.js:898
+#, javascript-format
+msgid "GPU temp critical: %d°C"
+msgstr "Temp GPU crítica: %d°C"
+
+#. applet.js:912
+msgid "Busy"
+msgstr "Ocupado"
+
+#. settings-schema.json->network->title
+#. settings-schema.json->network-section->title
+#. applet.js:937
+msgid "Network"
+msgstr "Rede"
+
+#. applet.js:938
+msgid "TX↑"
+msgstr "TX↑"
+
+#. applet.js:941
+msgid "RX↓"
+msgstr "RX↓"
+
+#. lib/metrics/battery.js:21
+msgid "Charging:"
+msgstr "Carregando:"
+
+#. lib/metrics/battery.js:22
+msgid "Idle:"
+msgstr "Ocioso:"
+
+#. lib/metrics/battery.js:23
+msgid "Draw:"
+msgstr "Consumo:"
+
+#. lib/metrics/battery.js:24
+msgid "Full in:"
+msgstr "Cheia em:"
+
+#. lib/metrics/battery.js:24
+msgid "Empty in:"
+msgstr "Vazia em:"
+
+#. lib/metrics/battery.js:26
+msgid "Charge:"
+msgstr "Carga:"
+
+#. lib/metrics/battery.js:27
+msgid "Energy:"
+msgstr "Energia:"
+
+#. lib/metrics/battery.js:28
+msgid "Capacity:"
+msgstr "Capacidade:"
+
+#. lib/metrics/battery.js:30
+msgid "Voltage:"
+msgstr "Voltagem:"
+
+#. lib/metrics/battery.js:31
+msgid "Current:"
+msgstr "Corrente:"
+
+#. lib/metrics/cpu.js:134
+msgid "Core"
+msgstr "Núcleo"
+
+#. lib/metrics/cpu.js:134
+msgid "%usr"
+msgstr "%usr"
+
+#. lib/metrics/cpu.js:134
+#, javascript-format
+msgid "%sys"
+msgstr "%sys"
+
+#. lib/metrics/cpu.js:134
+msgid "%iowt"
+msgstr "%iowt"
+
+#. lib/metrics/cpu.js:134
+msgid "temp"
+msgstr "temp"
+
+#. settings-schema.json->cpu->title
+#. settings-schema.json->cpu-section->title
+#. lib/metrics/cpu.js:138
+msgid "CPU"
+msgstr "CPU"
+
+#. lib/metrics/disk.js:72
+msgid "no disk"
+msgstr "sem disco"
+
+#. lib/metrics/fan.js:16
+msgid "no fans"
+msgstr "sem ventoinhas"
+
+#. lib/metrics/fan.js:20
+msgid "off"
+msgstr "desl."
+
+#. lib/metrics/fan.js:25
+msgid "No fans detected"
+msgstr "Nenhuma ventoinha detectada"
+
+#. lib/metrics/fan.js:26
+msgid "Fans"
+msgstr "Ventoinhas"
+
+#. lib/metrics/gpu.js:127
+msgid "susp."
+msgstr "susp."
+
+#. settings-schema.json->gpu->title
+#. settings-schema.json->gpu-section->title
+#. lib/metrics/gpu.js:137
+msgid "GPU"
+msgstr "GPU"
+
+#. lib/metrics/gpu.js:141
+msgid "Name:"
+msgstr "Nome:"
+
+#. lib/metrics/gpu.js:142
+msgid "Type:"
+msgstr "Tipo:"
+
+#. lib/metrics/gpu.js:143
+msgid "Status:"
+msgstr "Estado:"
+
+#. lib/metrics/gpu.js:143
+msgid "active"
+msgstr "ativo"
+
+#. lib/metrics/gpu.js:143
+msgid "suspended"
+msgstr "suspenso"
+
+#. lib/metrics/gpu.js:145
+msgid "Busy:"
+msgstr "Ocupado:"
+
+#. lib/metrics/gpu.js:146
+msgid "Power:"
+msgstr "Potência:"
+
+#. lib/metrics/gpu.js:147
+msgid "VRAM:"
+msgstr "VRAM:"
+
+#. lib/metrics/gpu.js:148
+msgid "Clock:"
+msgstr "Clock:"
+
+#. lib/metrics/memory.js:37
+msgid "in Use"
+msgstr "em uso"
+
+#. lib/metrics/memory.js:40
+msgid "Used:"
+msgstr "Usado:"
+
+#. lib/metrics/memory.js:41
+msgid "Free:"
+msgstr "Livre:"
+
+#. lib/metrics/memory.js:42
+msgid "Avail.:"
+msgstr "Disp.:"
+
+#. lib/metrics/memory.js:45
+msgid "Swap:"
+msgstr "Swap:"
+
+#. lib/metrics/network.js:30
+msgid "no net"
+msgstr "sem rede"
+
+#. lib/metrics/processes.js:76
+msgid "Top processes"
+msgstr "Processos principais"
+
+#. metadata.json->name
+msgid "YASM"
+msgstr "YASM"
+
+#. metadata.json->description
+msgid ""
+"Yet Another System Monitor: load, CPU, battery, memory, disk, network, fans "
+"& GPU with sparkline history"
+msgstr ""
+"Yet Another System Monitor: carga, CPU, bateria, memória, disco, rede, "
+"ventoinhas e GPU com histórico sparkline"
+
+#. settings-schema.json->general->title
+msgid "General"
+msgstr "Geral"
+
+#. settings-schema.json->uptime->title
+msgid "Load"
+msgstr "Carga"
+
+#. settings-schema.json->battery->title
+#. settings-schema.json->battery-section->title
+msgid "Power"
+msgstr "Energia"
+
+#. settings-schema.json->disk->title
+#. settings-schema.json->disk-section->title
+msgid "Disk"
+msgstr "Disco"
+
+#. settings-schema.json->fan->title
+#. settings-schema.json->fan-section->title
+msgid "Fan"
+msgstr "Ventoinha"
+
+#. settings-schema.json->general-section->title
+msgid "General Settings"
+msgstr "Configurações gerais"
+
+#. settings-schema.json->uptime-section->title
+msgid "Uptime"
+msgstr "Tempo ativo"
+
+#. settings-schema.json->load-section->title
+msgid "Load Average"
+msgstr "Carga média"
+
+#. settings-schema.json->applet-description->description
+msgid ""
+"YASM displays live system metrics directly in your Cinnamon panel — uptime, load average, battery charge and power draw, CPU and GPU temperature and usage, memory, disk utilisation and throughput, network transfer rates, and fan speeds.\n"
+"\n"
+"Each tile shows a compact sparkline history graph on hover. Metrics are collected every few seconds and thresholds can be configured per tile to colour-code warn and alert states."
+msgstr ""
+"YASM exibe métricas do sistema em tempo real diretamente no seu painel Cinnamon — tempo ativo, carga média, carga e consumo da bateria, temperatura e uso de CPU e GPU, memória, uso e taxa de transferência de disco, taxas de transferência de rede e velocidades de ventoinha.\n"
+"\n"
+"Cada bloco mostra um gráfico sparkline compacto ao passar o mouse. As métricas são coletadas a cada poucos segundos e os limites podem ser configurados por bloco para colorir os estados de aviso e alerta."
+
+#. settings-schema.json->load-warn->units
+#. settings-schema.json->load-alert->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->load-warn->description
+msgid "Load warn (% per core)"
+msgstr "Aviso de carga (% por núcleo)"
+
+#. settings-schema.json->load-alert->description
+msgid "Load alert (% per core)"
+msgstr "Alerta de carga (% por núcleo)"
+
+#. settings-schema.json->cpu-temp-warn->description
+msgid "CPU temp warn (°C)"
+msgstr "Aviso temp CPU (°C)"
+
+#. settings-schema.json->cpu-temp-alert->description
+msgid "CPU temp alert (°C)"
+msgstr "Alerta temp CPU (°C)"
+
+#. settings-schema.json->cpu-use-warn->description
+msgid "CPU usage warn %"
+msgstr "Aviso uso CPU %"
+
+#. settings-schema.json->cpu-use-alert->description
+msgid "CPU usage alert %"
+msgstr "Alerta uso CPU %"
+
+#. settings-schema.json->cpu-temp-alert-notify->description
+msgid "Notify when CPU temperature is critical"
+msgstr "Notificar quando a temperatura da CPU estiver crítica"
+
+#. settings-schema.json->bat-warn->description
+msgid "Battery warn %"
+msgstr "Aviso de bateria %"
+
+#. settings-schema.json->bat-alert->description
+msgid "Battery alert %"
+msgstr "Alerta de bateria %"
+
+#. settings-schema.json->gpu-temp-warn->description
+msgid "GPU temp warn (°C)"
+msgstr "Aviso temp GPU (°C)"
+
+#. settings-schema.json->gpu-temp-alert->description
+msgid "GPU temp alert (°C)"
+msgstr "Alerta temp GPU (°C)"
+
+#. settings-schema.json->gpu-temp-alert-notify->description
+msgid "Notify when GPU temperature is critical"
+msgstr "Notificar quando a temperatura da GPU estiver crítica"
+
+#. settings-schema.json->refresh-interval->units
+msgid "seconds"
+msgstr "segundos"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh interval"
+msgstr "Intervalo de atualização"
+
+#. settings-schema.json->panel-separator->description
+msgid "Separator between panel sections (blank = none)"
+msgstr "Separador entre seções do painel (vazio = nenhum)"
+
+#. settings-schema.json->compact-mode->description
+msgid "Compact mode"
+msgstr "Modo compacto"
+
+#. settings-schema.json->compact-mode->tooltip
+msgid ""
+"Auto: icon-only on vertical panels, text elsewhere. Icons: icon-only "
+"everywhere. Text: text everywhere (may clip on narrow panels)."
+msgstr ""
+"Auto: apenas ícone em painéis verticais, texto em outros lugares. Ícones: "
+"apenas ícone em todos os lugares. Texto: texto em todos os lugares (pode ser"
+" cortado em painéis estreitos)."
+
+#. settings-schema.json->compact-mode->options
+msgid "Auto"
+msgstr "Auto"
+
+#. settings-schema.json->compact-mode->options
+msgid "Icons only"
+msgstr "Apenas ícones"
+
+#. settings-schema.json->compact-mode->options
+msgid "Text (always)"
+msgstr "Texto (sempre)"
+
+#. settings-schema.json->uptime-enabled->description
+msgid "Show uptime & load"
+msgstr "Mostrar tempo ativo e carga"
+
+#. settings-schema.json->uptime-display->description
+#. settings-schema.json->load-display->description
+#. settings-schema.json->battery-display->description
+#. settings-schema.json->cpu-display->description
+#. settings-schema.json->memory-display->description
+#. settings-schema.json->disk-display->description
+#. settings-schema.json->network-display->description
+#. settings-schema.json->fan-display->description
+#. settings-schema.json->gpu-display->description
+msgid "Show icon (off = show label)"
+msgstr "Mostrar ícone (desl. = mostrar rótulo)"
+
+#. settings-schema.json->uptime-label->description
+#. settings-schema.json->battery-label->description
+#. settings-schema.json->cpu-label->description
+#. settings-schema.json->memory-label->description
+#. settings-schema.json->disk-label->description
+#. settings-schema.json->network-label->description
+#. settings-schema.json->fan-label->description
+#. settings-schema.json->gpu-label->description
+msgid "Label text"
+msgstr "Texto do rótulo"
+
+#. settings-schema.json->uptime-load-label->description
+msgid "Label before load average value"
+msgstr "Texto antes do valor de carga média"
+
+#. settings-schema.json->battery-enabled->description
+msgid "Show battery"
+msgstr "Mostrar bateria"
+
+#. settings-schema.json->rapl-enable->description
+msgid "Enable CPU power monitoring (requires admin password)"
+msgstr ""
+"Ativar monitoramento de energia da CPU (requer senha de administrador)"
+
+#. settings-schema.json->battery-list->description
+msgid "Battery devices to monitor (use Scan button to discover)"
+msgstr "Baterias a monitorar (use Escanear para detectar)"
+
+#. settings-schema.json->battery-list->columns->title
+#. settings-schema.json->cpu-hwmon-list->columns->title
+#. settings-schema.json->disk-list->columns->title
+#. settings-schema.json->net-list->columns->title
+#. settings-schema.json->fan-hwmon-list->columns->title
+msgid "Show"
+msgstr "Mostrar"
+
+#. settings-schema.json->battery-list->columns->title
+#. settings-schema.json->disk-list->columns->title
+msgid "Device"
+msgstr "Dispositivo"
+
+#. settings-schema.json->battery-list->columns->title
+#. settings-schema.json->net-list->columns->title
+msgid "Label"
+msgstr "Rótulo"
+
+#. settings-schema.json->cpu-enabled->description
+msgid "Show CPU"
+msgstr "Mostrar CPU"
+
+#. settings-schema.json->cpu-hwmon-list->description
+msgid "CPU temperature chips (auto-discovered on first run)"
+msgstr "Chips de temperatura da CPU (detectados automaticamente)"
+
+#. settings-schema.json->cpu-hwmon-list->columns->title
+#. settings-schema.json->fan-hwmon-list->columns->title
+msgid "hwmon"
+msgstr "hwmon"
+
+#. settings-schema.json->cpu-hwmon-list->columns->title
+#. settings-schema.json->fan-hwmon-list->columns->title
+msgid "Chip"
+msgstr "Chip"
+
+#. settings-schema.json->memory-enabled->description
+msgid "Show memory"
+msgstr "Mostrar memória"
+
+#. settings-schema.json->disk-enabled->description
+msgid "Show disk"
+msgstr "Mostrar disco"
+
+#. settings-schema.json->disk-list->description
+msgid "Disk devices to show (auto-discovered on first run)"
+msgstr "Discos a exibir (detectados automaticamente)"
+
+#. settings-schema.json->network-enabled->description
+msgid "Show network"
+msgstr "Mostra a rede"
+
+#. settings-schema.json->net-list->description
+msgid "Network interfaces to monitor (use Scan button to discover)"
+msgstr "Interfaces de rede a monitorar (use Escanear para detectar)"
+
+#. settings-schema.json->net-list->columns->title
+msgid "Interface"
+msgstr "Interface"
+
+#. settings-schema.json->fan-enabled->description
+msgid "Show fan speeds"
+msgstr "Mostrar velocidades das ventoinhas"
+
+#. settings-schema.json->fan-hwmon-list->description
+msgid "Fan controller chips (auto-discovered on first run)"
+msgstr "Chips controladores de ventoinha (detectados automaticamente)"
+
+#. settings-schema.json->gpu-enabled->description
+msgid "Show GPU"
+msgstr "Mostrar GPU"

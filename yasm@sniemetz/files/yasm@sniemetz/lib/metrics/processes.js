@@ -66,12 +66,14 @@ function read(fileutil, prevProcStats, prevCpuStat, currCpuStat, numCores) {
   return { topProcs, currStats };
 }
 
+const { _ } = typeof imports !== 'undefined' ? imports.lib.util : require('../util.js');
+
 function formatTooltip(topProcs) {
   if (!topProcs || topProcs.length === 0) return '';
   const rows = topProcs.map(p =>
     `${p.comm.slice(0, 20).padEnd(20)} ${p.cpuPct.toFixed(1).padStart(5)}%`
   );
-  return '<b>Top processes</b>\n' + rows.join('\n');
+  return `<b>${_("Top processes")}</b>\n` + rows.join('\n');
 }
 
 if (typeof module !== 'undefined') {
