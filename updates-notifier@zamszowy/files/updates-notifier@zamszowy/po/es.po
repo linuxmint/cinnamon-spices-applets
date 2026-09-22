@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-01 10:57+0100\n"
+"POT-Creation-Date: 2026-09-22 14:37-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,42 +22,42 @@ msgstr ""
 msgid "missing dependencies"
 msgstr "dependencias que faltan"
 
-#. applet.js:230
+#. applet.js:233
 msgid "View error details"
 msgstr "Ver detalles del error"
 
-#. applet.js:244
+#. applet.js:247
 msgid "Check for new updates"
 msgstr "Buscar nuevas actualizaciones"
 
-#. applet.js:258
+#. applet.js:261
 #, javascript-format
 msgid "View %s updates"
 msgstr "Ver %s actualizaciones"
 
-#. applet.js:258
+#. applet.js:261
 msgid "No updates to view"
 msgstr "No hay actualizaciones que ver"
 
-#. applet.js:273
+#. applet.js:276
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "Actualizar %s paquetes"
 
-#. applet.js:273
+#. applet.js:276
 msgid "No packages to upgrade"
 msgstr "No hay paquetes que actualizar"
 
-#. applet.js:299
+#. applet.js:302
 msgid "Error checking for updates"
 msgstr "Error al comprobar las actualizaciones"
 
-#. applet.js:307
+#. applet.js:310
 #, javascript-format
 msgid "%s updates available"
 msgstr "%s actualizaciones disponibles"
 
-#. applet.js:308
+#. applet.js:311
 msgid "No updates available"
 msgstr "No hay actualizaciones disponibles"
 
@@ -69,11 +69,11 @@ msgstr "Error"
 msgid "Error log file not found."
 msgstr "No se ha encontrado el archivo de registro de errores."
 
-#. info-window.js:66 info-window.js:85
+#. info-window.js:75 info-window.js:94
 msgid "No details available."
 msgstr "No hay detalles disponibles."
 
-#. info-window.js:68 info-window.js:87
+#. info-window.js:77 info-window.js:96
 msgid ""
 "Error:\n"
 "{0}"
@@ -81,7 +81,7 @@ msgstr ""
 "Error:\n"
 "{0}"
 
-#. info-window.js:72 info-window.js:91
+#. info-window.js:81 info-window.js:100
 msgid ""
 "Failed to run command:\n"
 "{0}"
@@ -89,23 +89,23 @@ msgstr ""
 "No se pudo ejecutar el comando:\n"
 "{0}"
 
-#. info-window.js:108
+#. info-window.js:117
 msgid "Loading update details…"
 msgstr "Cargando detalles de la actualización…"
 
-#. info-window.js:173
+#. info-window.js:182
 msgid "Updates"
 msgstr "Actualizaciones"
 
-#. info-window.js:188
+#. info-window.js:197
 msgid "Search updates…"
 msgstr "Buscar actualizaciones…"
 
-#. info-window.js:223
+#. info-window.js:232
 msgid "{0} updates"
 msgstr "{0} actualizaciones"
 
-#. info-window.js:251
+#. info-window.js:260
 msgid ""
 "Failed to read updates file:\n"
 "{0}"
@@ -149,9 +149,27 @@ msgstr "Menú"
 msgid "Theme"
 msgstr "Tema"
 
+#. settings-schema.json->use-timer->description
+#, fuzzy
+msgid "Automatically check for updates"
+msgstr "Error al comprobar las actualizaciones"
+
+#. settings-schema.json->use-timer->tooltip
+msgid ""
+"When turned off, updates will still show when checked manually or refreshed "
+"by another process"
+msgstr ""
+
 #. settings-schema.json->update-refresh->description
-msgid "Minutes to wait before refreshing updates"
+#, fuzzy
+msgid "Active minutes to wait before refreshing updates"
 msgstr "Minutos de espera antes de actualizar"
+
+#. settings-schema.json->update-refresh->tooltip
+msgid ""
+"Refresh wait time is reset when applet or Cinnamon are reset and does not "
+"include inactive time (e.g. when computer is suspended)"
+msgstr ""
 
 #. settings-schema.json->show-firmware->description
 msgid "Show firmware updates"
