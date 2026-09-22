@@ -6,25 +6,32 @@ function formatTimeHours(h) {
 }
 
 function formatPanel(data) {
-  const sign = data.isCharging ? '+' : '-';
   const tte  = data.timeHours !== null ? ` | ${formatTimeHours(data.timeHours)}` : '';
+  if (data.isFull)     return `${data.capacityPct}% | AC${tte}`;
+  const sign = data.isCharging ? '+' : '-';
   return `${data.capacityPct}% | ${sign}${data.powerW.toFixed(1)}W${tte}`;
 }
 
 function formatTooltip(data, tempC) {
   const pad = (l, v) => `${l.padEnd(14)}${v}`;
+  // Tri-state: Charging → '+N.NN W', Full/idle on AC → '0.00 W' (no sign),
+  //            Discharging → '-N.NN W'.
+  let rateLabel, rateValue;
+  if (data.isCharging)      { rateLabel = 'Charging:'; rateValue = `+${data.powerW.toFixed(2)} W`; }
+  else if (data.isFull)     { rateLabel = 'Idle:';     rateValue = `${data.powerW.toFixed(2)} W`; }
+  else                      { rateLabel = 'Draw:';     rateValue = `-${data.powerW.toFixed(2)} W`; }
+  const timeLabel = data.isCharging ? 'Full in:' : data.isFull ? '' : 'Empty in:';
   const lines = [];
   lines.push(
     pad('Charge:',    `${data.capacityPct}%`),
     pad('Energy:',    `${data.energyWh.toFixed(1)} / ${data.energyFullWh.toFixed(1)} Wh`),
     pad('Capacity:',  `${data.designCapacityPct.toFixed(1)}%`),
-    pad(data.isCharging ? 'Charging:' : 'Draw:',
-        `${data.isCharging ? '+' : '-'}${data.powerW.toFixed(2)} W`),
+    pad(rateLabel,    rateValue),
     pad('Voltage:',   `${data.voltageV.toFixed(2)} V`),
     pad('Current:',   `${data.currentA.toFixed(2)} A`),
     pad('Temp:',      tempC != null ? `${tempC.toFixed(1)}°C` : '—'),
-    pad(data.isCharging ? 'Full in:' : 'Empty in:', formatTimeHours(data.timeHours)),
   );
+  if (timeLabel) lines.push(pad(timeLabel, formatTimeHours(data.timeHours)));
   return lines.join('\n');
 }
 
@@ -56,8 +63,13 @@ function readSys(fileutil, path) {
   const rd  = f => (fileutil.readFile(`${path}/${f}`) || '').trim();
   const num = (f, div) => { const v = parseInt(rd(f)); return isNaN(v) ? 0 : v / div; };
 
-  const status     = rd('status');
-  const isCharging = status === 'Charging';
+  const status      = rd('status');
+  const isCharging  = status === 'Charging';
+  // On AC with battery topped up: kernel reports 'Full' or 'Not charging'.
+  // In this state current_now is an unsigned trickle (leakage/topping-up)
+  // that should not be surfaced as either charge or draw.
+  const isFull      = status === 'Full' || status === 'Not charging';
+  const isOnAC      = isCharging || isFull;
   const capacityPct = parseInt(rd('capacity')) || 0;
   const voltageV    = num('voltage_now',        1e6);
   // Use nominal voltage for capacity math — instantaneous voltage swings
@@ -80,14 +92,20 @@ function readSys(fileutil, path) {
     powerW             = currentA * voltageV;
   }
 
+  // Suppress residual leakage/topping-up trickle when the battery is
+  // full so it does not render as a fake draw.
+  if (isFull) { powerW = 0; currentA = 0; }
+
   const designCapacityPct = energyFullDesignWh > 0 ? energyFullWh / energyFullDesignWh * 100 : 0;
   let timeHours = null;
   if (powerW > 0.1)
     timeHours = isCharging ? (energyFullWh - energyWh) / powerW : energyWh / powerW;
 
   return {
-    status: isCharging ? 'Charging' : status === 'Discharging' ? 'Discharging' : 'Unknown',
-    isCharging, powerW, voltageV, currentA,
+    status: isCharging ? 'Charging' : isFull ? 'Full'
+          : status === 'Discharging' ? 'Discharging' : 'Unknown',
+    isCharging, isFull, isOnAC,
+    powerW, voltageV, currentA,
     energyWh, energyFullWh, energyFullDesignWh,
     capacityPct, designCapacityPct, timeHours,
   };
