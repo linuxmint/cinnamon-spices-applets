@@ -115,7 +115,7 @@ class QbittorrentApplet extends Applet.TextIconApplet {
     }
 
     _openWebUi() {
-        Util.spawnCommandLineAsync(`xdg-open ${GLib.shell_quote(this._baseUrl())}`);
+        Util.spawn(["xdg-open", this._baseUrl()]);
     }
 
     on_applet_clicked(event) {
