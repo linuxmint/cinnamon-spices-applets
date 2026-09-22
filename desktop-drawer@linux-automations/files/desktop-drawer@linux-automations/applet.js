@@ -15,6 +15,8 @@ const Gettext = imports.gettext;
 const UUID = 'desktop-drawer@linux-automations';
 const MAX_DEPTH = 2;
 const MAX_ITEMS = 30;
+const MAX_SCANNED = 300;
+const READ_BATCH_SIZE = 30;
 const QUERY = 'standard::name,standard::display-name,standard::type,standard::is-hidden';
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 function _(text) { return Gettext.dgettext(UUID, text); }
@@ -117,12 +119,13 @@ class DesktopDrawerApplet extends Applet.IconApplet {
             const path = await this._rootPath(cancellable);
             if (this._removed || generation !== this._generation) return;
             this.menu.removeAll();
-            const heading = this._message(this.menu, this._shortLabel(Gio.File.new_for_path(path).get_basename() || path));
+            const name = Gio.File.new_for_path(path).get_basename() || path;
+            const heading = this._message(this.menu, this._shortLabel(name));
             heading.actor.add_style_class_name('drawer-heading');
-            this._openFolderItem(this.menu, path, _('Open folder'));
+            this._addOpenItem(this.menu, path, _('Open folder'));
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             // Choosing a Private directory explicitly must not expose its contents either.
-            if (Gio.File.new_for_path(path).get_basename().toLowerCase() === 'private') {
+            if (name.toLowerCase() === 'private') {
                 this._message(this.menu, _('Private folder contents are hidden.'));
                 this._addSettingsAction();
                 return;
@@ -168,9 +171,9 @@ class DesktopDrawerApplet extends Applet.IconApplet {
         // Bound total work too: a directory full of hidden files must not cause an unbounded scan.
         let scanned = 0;
         try {
-            while (entries.length <= MAX_ITEMS && scanned < 300) {
+            while (entries.length <= MAX_ITEMS && scanned < MAX_SCANNED) {
                 const batch = await new Promise((resolve, reject) => {
-                    enumerator.next_files_async(30, GLib.PRIORITY_DEFAULT, cancellable, (source, result) => {
+                    enumerator.next_files_async(READ_BATCH_SIZE, GLib.PRIORITY_DEFAULT, cancellable, (source, result) => {
                         try { resolve(source.next_files_finish(result)); }
                         catch (error) { reject(error); }
                     });
@@ -186,7 +189,7 @@ class DesktopDrawerApplet extends Applet.IconApplet {
                     if (entries.length > MAX_ITEMS) break;
                 }
             }
-            truncated = entries.length > MAX_ITEMS || scanned >= 300;
+            truncated = entries.length > MAX_ITEMS || scanned >= MAX_SCANNED;
         } finally {
             // Close even when the read was cancelled; do not reuse its cancelled token.
             enumerator.close_async(GLib.PRIORITY_DEFAULT, null, (source, result) => {
@@ -205,11 +208,11 @@ class DesktopDrawerApplet extends Applet.IconApplet {
             loading.destroy();
             if (!result.entries.length) this._message(menu, _('No files to show.'));
             for (const entry of result.entries) {
-                if (entry.name.toLowerCase() === 'private')
-                    this._openFolderItem(menu, entry.path, _('Open Private folder'));
+                if (entry.isDirectory && entry.name.toLowerCase() === 'private')
+                    this._addOpenItem(menu, entry.path, _('Open Private folder'));
                 else if (entry.isDirectory)
                     this._addDirectoryMenu(menu, entry, depth, generation, cancellable);
-                else this._addFileItem(menu, entry);
+                else this._addOpenItem(menu, entry.path, this._shortLabel(entry.label), 'text-x-generic-symbolic');
             }
             if (result.truncated)
                 this._message(menu, _('More files may be available in the file manager.'));
@@ -223,7 +226,7 @@ class DesktopDrawerApplet extends Applet.IconApplet {
     _addDirectoryMenu(parent, entry, depth, generation, cancellable) {
         const submenu = new PopupMenu.PopupSubMenuMenuItem(this._shortLabel(entry.label));
         parent.addMenuItem(submenu);
-        this._openFolderItem(submenu.menu, entry.path, _('Open this folder'));
+        this._addOpenItem(submenu.menu, entry.path, _('Open this folder'));
         let loaded = false;
         submenu.menu.connect('open-state-changed', (menu, open) => {
             if (!open || loaded || depth >= MAX_DEPTH) return;
@@ -236,20 +239,15 @@ class DesktopDrawerApplet extends Applet.IconApplet {
         });
     }
 
-    _openFolderItem(menu, path, label) {
-        const item = new PopupMenu.PopupIconMenuItem(label, 'folder-open-symbolic', St.IconType.SYMBOLIC);
+    _addOpenItem(menu, path, label, icon = 'folder-open-symbolic') {
+        const item = new PopupMenu.PopupIconMenuItem(label, icon, St.IconType.SYMBOLIC);
         item.connect('activate', () => this._openPath(path));
         menu.addMenuItem(item);
     }
 
-    _addFileItem(menu, entry) {
-        const item = new PopupMenu.PopupIconMenuItem(this._shortLabel(entry.label), 'text-x-generic-symbolic', St.IconType.SYMBOLIC);
-        item.connect('activate', () => this._openPath(entry.path));
-        menu.addMenuItem(item);
-    }
-
     _shortLabel(text) {
-        return text.length <= 44 ? text : Array.from(text).slice(0, 20).join('') + '...' + Array.from(text).slice(-20).join('');
+        const characters = Array.from(text);
+        return characters.length <= 44 ? text : characters.slice(0, 20).join('') + '...' + characters.slice(-20).join('');
     }
 
     _openPath(path) {

@@ -1,6 +1,6 @@
 # Desktop Drawer beta check
 
-Candidate: 1.2.0. Use a test folder with harmless demo files.
+Candidate: 1.2.1. Use a test folder with harmless demo files.
 
 Record your Linux distribution, Cinnamon version, X11 or Wayland session,
 display scale, and whether you use a keyboard, mouse or assistive technology.
@@ -38,5 +38,4 @@ keyboard Right and Left, Escape, hover controls and removal/re-addition.
 File and folder dispatch has been tested with an isolated desktop handler.
 Testing with your normal file manager and document applications is still useful.
 
-Cinnamon Spices submission has not been made. Passing this checklist does not
-replace maintainer review or an independent security review.
+Passing this checklist does not replace maintainer review.

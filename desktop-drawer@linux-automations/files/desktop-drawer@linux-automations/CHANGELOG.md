@@ -1,5 +1,12 @@
 # Desktop Drawer changes
 
+## 1.2.1 (2026-09-22)
+
+- Treat regular files named Private as files, not private folders.
+- Preserve short Unicode filenames without unnecessary shortening.
+- Share file and folder menu construction and name the directory scan limits.
+- Shorten the front page and keep detailed instructions in the user guide.
+
 ## 1.2.0 (2026-09-22)
 
 - Show the current folder name and a Choose folder action in the drawer.
@@ -19,5 +26,3 @@
 - Load directories asynchronously and submenus on demand.
 - Keep Private folder contents hidden at every browsing depth.
 - Include an installation ZIP, translation template and submission checklist.
-
-Neither candidate has been submitted to Cinnamon Spices yet.

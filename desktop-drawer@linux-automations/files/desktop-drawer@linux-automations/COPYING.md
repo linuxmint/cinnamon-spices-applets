@@ -21,7 +21,7 @@ with Desktop Drawer. If not, see <https://www.gnu.org/licenses/>.
 This licence covers the standalone Desktop Drawer source package, including
 its build and test scripts, applet code, settings, metadata,
 documentation, translation template, original `icons/desktop-vault.svg`,
-its derived `icon.png`, and the supplied demonstration screenshots.
+its derived `icon.png`, and the supplied demonstration screenshots and recordings.
 The PNG icon is rendered from the included SVG source.
 
 This applies to the standalone Desktop Drawer release only. It does not
