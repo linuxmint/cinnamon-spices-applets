@@ -1,0 +1,30 @@
+{
+  "name": "show-hide-applets@mohammad-sn",
+  "version": "0.0.0",
+  "description": "",
+  "author": "Andreas Opferkuch <andreas.opferkuch@gmail.com>",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild --bundle src/applet.ts --outfile=files/show-hide-applets@mohammad-sn/6.6/applet.js --platform=neutral --format=cjs",
+    "dev": "esbuild --watch --bundle src/applet.ts --outfile=files/show-hide-applets@mohammad-sn/6.6/applet.js --platform=neutral --format=cjs",
+    "format": "oxfmt",
+    "lint": "oxlint",
+    "test": "vitest",
+    "typecheck": "tsc && tsc --project test/tsconfig.json",
+    "prepare": "cd .. && husky show-hide-applets@mohammad-sn/.husky"
+  },
+  "devDependencies": {
+    "@ci-types/cjs": "^6.0.2-5",
+    "@s-h-a-d-o-w/oxlint-config": "^1.1.2",
+    "@types/node": "^24.13.2",
+    "esbuild": "^0.28.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
+    "oxfmt": "^0.61.0",
+    "oxlint": "^1.76.0",
+    "oxlint-tsgolint": "^7.0.2001",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  },
+  "packageManager": "pnpm@11.15.1+sha512.81350b07e53c9538a02f1f2303b4290fa2d7be04e56e2a970c4cc4b417dc761de196edabd49d55c7dc9580db81007c44143e4e3d7e462b3000d23c255122d065"
+}

@@ -1,14 +1,14 @@
 # DRAWER (SHOW/HIDE APPLETS)
 # This file is put in the public domain.
-# mohammad-sn, 2016
+# mohammad-sn, 2026
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: show-hide-applets@mohammad-sn 1.0\n"
+"Project-Id-Version: show-hide-applets@mohammad-sn 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-20 06:07+0100\n"
+"POT-Creation-Date: 2026-07-30 15:05+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,105 +17,133 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:60 applet.js:231
+#. 3.0/applet.js:74 3.0/applet.js:336 6.6/applet.js:563
 msgid "Autohide ON"
 msgstr ""
 
-#. applet.js:62 applet.js:233
+#. 3.0/applet.js:75 3.0/applet.js:337 6.6/applet.js:565
 msgid "Autohide OFF"
 msgstr ""
 
-#. applet.js:82
+#. 3.0/applet.js:145 6.6/applet.js:598
 msgid "Panel Edit mode"
 msgstr ""
 
-#. applet.js:88
+#. 3.0/applet.js:154
 msgid "Add applets to the panel"
 msgstr ""
 
-#. settings-schema.json->autohide->description
-#. applet.js:96
+#. 3.0->settings-schema.json->autohide->description
+#. 6.6->settings-schema.json->do_autohide->description
+#. 3.0/applet.js:173 6.6/applet.js:609
 msgid "Autohide"
 msgstr ""
 
-#. metadata.json->description
-msgid ""
-"hide a few applet to have a neater panel, and make them show up again by a "
-"click"
+#. 6.6/applet.js:591
+msgid "Reset icons list"
 msgstr ""
 
 #. metadata.json->name
 msgid "Drawer (show/hide applets)"
 msgstr ""
 
-#. settings-schema.json->head->description
+#. metadata.json->description
+msgid ""
+"Hide a few applets to have a neater panel, and make them show up again by a "
+"click"
+msgstr ""
+
+#. 3.0->settings-schema.json->head->description
+#. 6.6->settings-schema.json->head->description
 msgid "Settings for show-hide-applets@mohammad-sn"
 msgstr ""
 
-#. settings-schema.json->autohide->tooltip
+#. 3.0->settings-schema.json->autohide->tooltip
+#. 6.6->settings-schema.json->do_autohide->tooltip
 msgid ""
 "Check it if you want to hide applets automatically, unless you should click "
 "on applet to do so.\n"
 "Its status can be changed by middle-clicking on this applet."
 msgstr ""
 
-#. settings-schema.json->statusintooltip->description
+#. 3.0->settings-schema.json->statusintooltip->description
 msgid "Show Autohide status in tooltip"
 msgstr ""
 
-#. settings-schema.json->disablestarttimeautohide->description
+#. 3.0->settings-schema.json->disablestarttimeautohide->description
 msgid "Disable start time autohide"
 msgstr ""
 
-#. settings-schema.json->disablestarttimeautohide->tooltip
+#. 3.0->settings-schema.json->disablestarttimeautohide->tooltip
 msgid "if not in autohide mode"
 msgstr ""
 
-#. settings-schema.json->hidetime->units
-#. settings-schema.json->autohiderstime->units
+#. 3.0->settings-schema.json->hidetime->units
+#. 3.0->settings-schema.json->autohiderstime->units
+#. 6.6->settings-schema.json->hidetime->units
 msgid "seconds"
 msgstr ""
 
-#. settings-schema.json->hidetime->description
+#. 3.0->settings-schema.json->hidetime->description
+#. 6.6->settings-schema.json->hidetime->description
 msgid "Autohide after "
 msgstr ""
 
-#. settings-schema.json->hoveractivates->description
+#. 3.0->settings-schema.json->hoveractivates->description
 msgid "Activate on hover"
 msgstr ""
 
-#. settings-schema.json->hoveractivates->tooltip
+#. 3.0->settings-schema.json->hoveractivates->tooltip
+#. 6.6->settings-schema.json->hoveractivates->tooltip
 msgid "show applets on mouse hover"
 msgstr ""
 
-#. settings-schema.json->hoveractivateshide->description
+#. 3.0->settings-schema.json->hoveractivateshide->description
+#. 6.6->settings-schema.json->hoveractivateshide->description
 msgid "Hide on hovering again"
 msgstr ""
 
-#. settings-schema.json->hoveractivateshide->tooltip
+#. 3.0->settings-schema.json->hoveractivateshide->tooltip
+#. 6.6->settings-schema.json->hoveractivateshide->tooltip
 msgid "toggle visibility of applets on mouse hover"
 msgstr ""
 
-#. settings-schema.json->hovertime->units
+#. 3.0->settings-schema.json->hovertime->units
+#. 6.6->settings-schema.json->hovertime->units
 msgid "miliseconds"
 msgstr ""
 
-#. settings-schema.json->hovertime->description
+#. 3.0->settings-schema.json->hovertime->description
 msgid "Hover activates/hides after "
 msgstr ""
 
-#. settings-schema.json->autohiders->description
+#. 3.0->settings-schema.json->autohiders->description
+#. 6.6->settings-schema.json->autohiders->description
 msgid "Autohide reshowing applets"
 msgstr ""
 
-#. settings-schema.json->autohiderstime->description
+#. 3.0->settings-schema.json->autohiderstime->description
 msgid "Reshowers' autohide delay: "
 msgstr ""
 
-#. settings-schema.json->hideuntilseparator->description
+#. 3.0->settings-schema.json->hideuntilseparator->description
+#. 6.6->settings-schema.json->hideuntilseparator->description
 msgid "Only hide until next separator"
 msgstr ""
 
-#. settings-schema.json->hideuntilseparator->tooltip
+#. 3.0->settings-schema.json->hideuntilseparator->tooltip
+#. 6.6->settings-schema.json->hideuntilseparator->tooltip
 msgid "Only hide everything until the next separator element occurs."
+msgstr ""
+
+#. 6.6->settings-schema.json->hoveractivates->description
+msgid "Show on hover"
+msgstr ""
+
+#. 6.6->settings-schema.json->hovertime->description
+msgid "Hover shows/hides after "
+msgstr ""
+
+#. 6.6->settings-schema.json->icons->description
+msgid "Internal icons state"
 msgstr ""
