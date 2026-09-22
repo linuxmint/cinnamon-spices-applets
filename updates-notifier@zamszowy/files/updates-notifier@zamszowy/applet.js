@@ -83,6 +83,7 @@ UpdatesNotifier.prototype = {
         this.uuid = metadata.uuid;
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
 
+        this.settings.bind("use-timer", "useTimer", this._set_check_interval, null);
         this.settings.bind("update-refresh", "refreshTimeout", this._set_check_interval, null);
         this.settings.bind("hide-applet", "hideApplet", this._update, null);
 
@@ -195,19 +196,21 @@ UpdatesNotifier.prototype = {
     },
 
     _set_check_interval: function () {
-        let parsedMinutes = parseInt(this.refreshTimeout);
-        if (isNaN(parsedMinutes) || parsedMinutes < 1) {
-            this.refreshTimeout = "60";
-            parsedMinutes = 60;
-        }
-        const milis = parsedMinutes * 60 * 1000;
+        if (this.useTimer) {
+            let parsedMinutes = parseInt(this.refreshTimeout);
+            if (isNaN(parsedMinutes) || parsedMinutes < 1) {
+                this.refreshTimeout = "60";
+                parsedMinutes = 60;
+            }
+            const milis = parsedMinutes * 60 * 1000;
 
-        if (this.interval) {
-            Util.clearInterval(this.interval);
+            if (this.interval) {
+                Util.clearInterval(this.interval);
+            }
+            this.interval = Util.setInterval(() => {
+                this._refreshUpdatesInfo();
+            }, milis);
         }
-        this.interval = Util.setInterval(() => {
-            this._refreshUpdatesInfo();
-        }, milis);
     },
 
     _buildMenu: function (count) {
