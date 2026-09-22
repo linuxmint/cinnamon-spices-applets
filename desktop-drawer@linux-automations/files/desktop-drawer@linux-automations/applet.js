@@ -18,7 +18,7 @@ const MAX_ITEMS = 30;
 const MAX_SCANNED = 300;
 const READ_BATCH_SIZE = 30;
 const QUERY = 'standard::name,standard::display-name,standard::type,standard::is-hidden';
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain(UUID, GLib.build_filenamev([GLib.get_user_data_dir(), 'locale']));
 function _(text) { return Gettext.dgettext(UUID, text); }
 
 class DesktopDrawerApplet extends Applet.IconApplet {
@@ -82,7 +82,7 @@ class DesktopDrawerApplet extends Applet.IconApplet {
         if (selected.startsWith('file://'))
             selected = Gio.File.new_for_uri(selected).get_path();
         if (selected === '~') selected = GLib.get_home_dir();
-        else if (selected.startsWith('~/'))
+        else if (selected[0] === '~' && selected[1] === '/')
             selected = GLib.build_filenamev([GLib.get_home_dir(), selected.slice(2)]);
         if (selected) {
             if (!GLib.path_is_absolute(selected))
