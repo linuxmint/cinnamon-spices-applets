@@ -25,6 +25,8 @@ class MouseTrailApplet extends Applet.IconApplet {
         this._running = false;
         this._removed = false;
         this._restartTimer = 0;
+        this._reading = false;
+        this._cancellable = new Gio.Cancellable();
         this.set_applet_tooltip("Mouse trail visual indicator");
 
         // The overlay owns the visibility hotkey. Clicking this icon opens
@@ -89,10 +91,20 @@ class MouseTrailApplet extends Applet.IconApplet {
     }
 
     _refresh() {
-        let state = "inactive";
-        if (this._running) {
+        if (!this._running) {
+            this._setState("inactive");
+            return true;
+        }
+        // Skip this tick if the previous read has not finished yet.
+        if (this._reading)
+            return true;
+        this._reading = true;
+        let file = Gio.File.new_for_path(this._statusPath);
+        file.load_contents_async(this._cancellable, (source, result) => {
+            this._reading = false;
+            let state = "inactive";
             try {
-                let [ok, contents] = GLib.file_get_contents(this._statusPath);
+                let [ok, contents] = source.load_contents_finish(result);
                 if (ok) {
                     let value = "";
                     for (let i = 0; i < contents.length; i++)
@@ -101,10 +113,16 @@ class MouseTrailApplet extends Applet.IconApplet {
                         state = "active";
                 }
             } catch (error) {
-                // The helper may not have written its first status yet.
+                // The helper may not have written its first status yet,
+                // or the read was cancelled because the applet was removed.
             }
-        }
+            if (!this._removed && this._running)
+                this._setState(state);
+        });
+        return true;
+    }
 
+    _setState(state) {
         if (state !== this._state) {
             this._state = state;
             this.set_applet_tooltip(state === "active"
@@ -113,7 +131,6 @@ class MouseTrailApplet extends Applet.IconApplet {
                 this._iconDirectory, "mousetrail-" + state + "-symbolic.svg"
             ]));
         }
-        return true;
     }
 
     on_applet_clicked() {
@@ -122,6 +139,7 @@ class MouseTrailApplet extends Applet.IconApplet {
 
     on_applet_removed_from_panel() {
         this._removed = true;
+        this._cancellable.cancel();
         Mainloop.source_remove(this._timer);
         if (this._restartTimer)
             Mainloop.source_remove(this._restartTimer);
