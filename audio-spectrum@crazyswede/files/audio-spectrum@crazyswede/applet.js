@@ -406,20 +406,20 @@ AudioSpectrum.prototype = {
                 'cava'
             ]);
 
-            let cavaExecutable = GLib.file_test(
-                localCava,
-                GLib.FileTest.IS_EXECUTABLE
-            ) ? localCava : 'cava';
+            let subprocessFlags = Gio.SubprocessFlags.STDOUT_PIPE |
+                Gio.SubprocessFlags.STDERR_PIPE;
 
-            this._process = Gio.Subprocess.new(
-                [
-                    cavaExecutable,
-                    '-p',
-                    config
-                ],
-                Gio.SubprocessFlags.STDOUT_PIPE |
-                Gio.SubprocessFlags.STDERR_PIPE
-            );
+            try {
+                this._process = Gio.Subprocess.new(
+                    [localCava, '-p', config],
+                    subprocessFlags
+                );
+            } catch (e) {
+                this._process = Gio.Subprocess.new(
+                    ['cava', '-p', config],
+                    subprocessFlags
+                );
+            }
 
             this._stream = new Gio.DataInputStream({
                 base_stream: this._process.get_stdout_pipe()
