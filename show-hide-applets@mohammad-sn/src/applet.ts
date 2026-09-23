@@ -17,7 +17,7 @@ const {
 } = imports;
 
 const UUID = "show-hide-applets@mohammad-sn";
-gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 type Side = imports.gi.St.Side;
 
@@ -136,8 +136,7 @@ class MyApplet extends IconApplet {
       );
 
       // Initial populate + start periodic updaters
-      this.icon_config.update(this.get_eligible_children());
-      this.update_popup_menu();
+      void this.refresh_icons();
 
       this.connected_on_allocation_changed = this.get_our_panel_zone().connect(
         "allocation-changed",
@@ -200,7 +199,7 @@ class MyApplet extends IconApplet {
       this.do_hide &&
       !global.settings.get_boolean("panel-edit-mode")
     ) {
-      this.toggle_hiding();
+      void this.toggle_hiding();
     }
   }
 
@@ -280,14 +279,15 @@ class MyApplet extends IconApplet {
     return this.loaded_panel["_centerBox"];
   }
 
-  // logs say these children are `StBoxLayout` but `StBoxLayout` type has `no _applet`, even though it exists...
+  // logs say these children are `StBoxLayout` but `StBoxLayout` type has no `_applet`, even though it exists...
   // So we return `any`, even though it should be `StBoxLayout`.
   get_zone_children() {
     try {
       return (
-        (this.get_our_panel_zone() as imports.gi.Clutter.Actor)
-          // oxlint-disable-next-line typescript/no-unnecessary-type-assertion
-          .get_children() as any[]
+        // oxlint-disable-next-line typescript/no-unnecessary-type-assertion
+        (
+          this.get_our_panel_zone() as imports.gi.Clutter.Actor
+        ).get_children() as any[]
       );
     } catch (error) {
       global.logError(error);
@@ -316,8 +316,7 @@ class MyApplet extends IconApplet {
       return;
     }
 
-    this.icon_config.update(this.get_eligible_children());
-    this.update_popup_menu();
+    void this.refresh_icons();
 
     if (this.autohideReshowing) {
       // Seems like allocation event sometimes fires before the icons are actually shown.
@@ -330,13 +329,13 @@ class MyApplet extends IconApplet {
   }
 
   override on_applet_clicked() {
-    this.toggle_hiding();
+    void this.toggle_hiding();
     return true;
   }
 
   override on_applet_removed_from_panel() {
     if (!this.do_hide) {
-      this.toggle_hiding();
+      void this.toggle_hiding();
     }
 
     // Disconnect all signals
@@ -374,7 +373,7 @@ class MyApplet extends IconApplet {
     if (this.menu_item_auto_hide) {
       this.menu_item_auto_hide["_switch"].setToggleState(this.do_autohide);
     }
-    this.toggle_hiding();
+    void this.toggle_hiding();
     return true;
   }
 
@@ -386,7 +385,7 @@ class MyApplet extends IconApplet {
     ) {
       timeout_add_once(this.hover_time, () => {
         if (this.actor.hover && (this.hover_activates_hide || !this.do_hide)) {
-          this.toggle_hiding();
+          void this.toggle_hiding();
         }
       });
     }
@@ -398,10 +397,10 @@ class MyApplet extends IconApplet {
     );
     if (global.settings.get_boolean("panel-edit-mode")) {
       if (!this.do_hide) {
-        this.toggle_hiding();
+        void this.toggle_hiding();
       }
     } else if (this.do_hide) {
-      this.toggle_hiding();
+      void this.toggle_hiding();
     }
   }
 
@@ -409,26 +408,39 @@ class MyApplet extends IconApplet {
     this.orientation = orientation;
   }
 
-  refresh_if_hidden() {
-    if (!this.do_hide) {
-      this.do_hide = true;
-      this.toggle_hiding();
+  async refresh_icons() {
+    try {
+      await this.icon_config.update(this.get_eligible_children());
+      this.update_popup_menu();
+    } catch (error: unknown) {
+      global.logError(error);
     }
   }
 
-  reset_icons() {
-    this._applet_context_menu.close(false);
-
-    this.icon_config.reset(this.get_eligible_children());
-    this.update_popup_menu();
-
-    // Wait for external close event to be processed before opening the menu again
-    timeout_add_once(10, () => {
-      this._applet_context_menu.open(false);
-    });
+  refresh_if_hidden() {
+    if (!this.do_hide) {
+      this.do_hide = true;
+      void this.toggle_hiding();
+    }
   }
 
-  toggle_hiding() {
+  async reset_icons() {
+    this._applet_context_menu.close(false);
+
+    try {
+      await this.icon_config.reset(this.get_eligible_children());
+      this.update_popup_menu();
+
+      // Wait for external close event to be processed before opening the menu again
+      timeout_add_once(10, () => {
+        this._applet_context_menu.open(false);
+      });
+    } catch (error: unknown) {
+      global.logError(error);
+    }
+  }
+
+  async toggle_hiding() {
     try {
       if (this.hide_timeout_id) {
         GLib.source_remove(this.hide_timeout_id);
@@ -438,26 +450,30 @@ class MyApplet extends IconApplet {
       this.last_toggle_hiding_start = GLib.get_monotonic_time();
       this.update_our_icon();
 
-      for (const child of this.get_eligible_children()) {
-        this.icon_config.extract_icon_infos(child).forEach((icon_info) => {
-          const { visible, hideable_object } = icon_info;
-          if (this.do_hide) {
-            if (!visible && !this.hidden_by_us.has(hideable_object)) {
-              return;
-            }
+      await Promise.all(
+        this.get_eligible_children().map(async (child) => {
+          (await this.icon_config.extract_icon_infos(child)).forEach(
+            (icon_info) => {
+              const { visible, hideable_object } = icon_info;
+              if (this.do_hide) {
+                if (!visible && !this.hidden_by_us.has(hideable_object)) {
+                  return;
+                }
 
-            const key = IconConfig.get_icon_key(icon_info);
-            if (!this.icon_config.icons[key]?.show) {
-              hideable_object.hide();
-              this.hidden_by_us.add(hideable_object);
-            } else if (this.hidden_by_us.delete(hideable_object)) {
-              hideable_object.show();
-            }
-          } else if (this.hidden_by_us.has(hideable_object)) {
-            hideable_object.show();
-          }
-        });
-      }
+                const key = IconConfig.get_icon_key(icon_info);
+                if (!this.icon_config.icons[key]?.show) {
+                  hideable_object.hide();
+                  this.hidden_by_us.add(hideable_object);
+                } else if (this.hidden_by_us.delete(hideable_object)) {
+                  hideable_object.show();
+                }
+              } else if (this.hidden_by_us.has(hideable_object)) {
+                hideable_object.show();
+              }
+            },
+          );
+        }),
+      );
 
       if (!this.do_hide) {
         this.hidden_by_us.clear();
@@ -517,7 +533,7 @@ class MyApplet extends IconApplet {
           _("Reset icons list"),
         );
         menu_item_reset_icons_list.connect("activate", () => {
-          this.reset_icons();
+          void this.reset_icons();
         });
         this._applet_context_menu.addMenuItem(menu_item_reset_icons_list, 0);
 
@@ -550,11 +566,11 @@ class MyApplet extends IconApplet {
 
       this.menu_items_icon_section.removeAll();
       this.icon_config
-        .create_menu_items(() => {
-          // Change both show AND hide statuses if currently hidden
+        .create_menu_items(async () => {
+          // Update both show AND hide statuses if currently hidden
           if (!this.do_hide) {
-            this.toggle_hiding();
-            this.toggle_hiding();
+            await this.toggle_hiding();
+            void this.toggle_hiding();
           }
         })
         .forEach((icon_toggle) => {

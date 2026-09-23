@@ -3,6 +3,12 @@
 // eligible zone children (St.BoxLayout[]) -> child (St.BoxLayout) -> child._applet (Applet) => icon data either via the Applet (xapp status icons or other applets) or BoxLayout (systray).
 // ====================================
 
+import {
+  load_contents_async,
+  matches_io_error,
+  query_exists_async,
+} from "./gio_async";
+
 const {
   gi: {
     St,
@@ -18,7 +24,7 @@ const {
 
 // `applet._meta` example:
 // {"uuid":"network@cinnamon.org","name":"Network Manager","description":"Network manager applet","icon":"cs-network","state":1,"path":"/usr/share/cinnamon/applets/network@cinnamon.org","error":"","force_loaded":false}
-export type AppletMeta = {
+type AppletMeta = {
   uuid: string;
   name: string;
   description: string;
@@ -53,7 +59,7 @@ type IconInfo = {
 };
 
 // 7 days, since some apps use multiple distinct icons but only one at the time. It's not possible to identify correlated icons by app name (multiple apps can have the same name), so users unfortunately sometimes have to toggle different icon states "on" if that is an app that they always want to see.
-const ICON_SWITCH_STORE_DURATION = 7 * 24 * 60 * 60 * 1000;
+const ICON_SWITCH_STORE_DURATION = 7 * 24 * 60 * 60 * 1_000;
 
 // Some apps embed volatile data in their icon title (e.g. SABnzbd progress), so only
 // the stable part of the name is kept across sightings.
@@ -70,17 +76,13 @@ function common_prefix(current: string, next: string) {
   return length === 0 ? next : current.slice(0, length).trim();
 }
 
-function hash_icon(
+async function hash_icon(
   file: imports.gi.Gio.File,
   checksumType = GLib.ChecksumType.SHA256,
 ) {
-  const [ok, contents] = file.load_contents(null);
-  if (!ok) {
-    return;
-  }
-  return (
-    // @ts-expect-error Works at runtime. Opus explains: "At runtime, cjs/gjs marshals a Uint8Array into that parameter perfectly fine — a Uint8Array is an array of byte-sized numbers. The number[] type is just an imprecise representation; you don't need to convert to a plain JS array."
-    GLib.compute_checksum_for_bytes(checksumType, GLib.Bytes.new(contents))
+  return GLib.compute_checksum_for_bytes(
+    checksumType,
+    GLib.Bytes.new(await load_contents_async(file)),
   );
 }
 
@@ -102,27 +104,27 @@ export class IconConfig {
 
     Gtk.IconTheme.get_default().append_search_path(metadata_path);
     this.icons_dir = Gio.File.new_for_path(metadata_path + "/icons");
-    if (!this.icons_dir.query_exists(null)) {
+    try {
       this.icons_dir.make_directory_with_parents(null);
+    } catch (error) {
+      if (!matches_io_error(error, Gio.IOErrorEnum.EXISTS)) {
+        throw error;
+      }
     }
     Gtk.IconTheme.get_default().append_search_path(this.icons_dir.get_path()!);
   }
 
-  ensure_local_icon(icon_name: string) {
+  async ensure_local_icon(icon_name: string) {
     if (!icon_name.includes("/") || !icon_name.includes(".")) {
       return icon_name;
     }
 
     try {
       const source_file = Gio.File.new_for_path(icon_name);
-      if (!source_file.query_exists(null)) {
-        return undefined;
-      }
-
-      const file_extension = icon_name.split(".").at(-1)!;
-      const dest_name = hash_icon(source_file) + ".png";
+      const dest_name = (await hash_icon(source_file)) + ".png";
       const dest_file = this.icons_dir.get_child(dest_name);
-      if (!dest_file.query_exists(null)) {
+      const file_extension = icon_name.split(".").at(-1)!;
+      if (!(await query_exists_async(dest_file))) {
         if (file_extension !== "png") {
           const pixbuf = Pixbuf.new_from_file(icon_name);
           pixbuf?.savev(dest_file.get_path()!, "png", null, null);
@@ -131,7 +133,7 @@ export class IconConfig {
         }
       }
 
-      // Get rid of the extension
+      // Get rid of the extension, since GTK expects the icon name without an extension.
       return dest_name.replace(/\.[^.]+$/u, "");
     } catch (error) {
       global.logError(error);
@@ -145,9 +147,19 @@ export class IconConfig {
     return owner_uuid + (icon_name ?? name);
   }
 
-  extract_icon_infos(child: any): IconInfo[] {
+  async extract_icon_infos(child: any): Promise<IconInfo[]> {
     const applet = child._applet;
     if (applet._uuid === "xapp-status@cinnamon.org") {
+      const ensured_icon_names = Object.fromEntries(
+        await Promise.all(
+          Object.values(applet.statusIcons as Record<string, any>).map(
+            async ({ iconName: icon_name }) => [
+              icon_name,
+              await this.ensure_local_icon(icon_name),
+            ],
+          ),
+        ),
+      );
       return Object.values(applet.statusIcons as Record<string, any>)
         .map((icon) => {
           // `icon` is a XAppStatusIcon, NOT imports.gi.XApp.StatusIcon
@@ -165,7 +177,7 @@ export class IconConfig {
           return {
             owner_uuid: applet._uuid,
             name: name.startsWith(":") ? "<no name>" : name,
-            icon_name: this.ensure_local_icon(icon_name),
+            icon_name: ensured_icon_names[icon_name],
             visible,
             hideable_object: icon.actor,
           } satisfies IconInfo;
@@ -204,27 +216,29 @@ export class IconConfig {
 
   // Collects/refreshes the icon state from the given panel zone children,
   // prunes stale entries, keeps xapp-status icons at the bottom and persists.
-  update(eligible_children: any[]) {
-    for (const child of eligible_children) {
-      this.extract_icon_infos(child).forEach((icon_info) => {
-        const { owner_uuid, name, icon_name } = icon_info;
-        const key = IconConfig.get_icon_key(icon_info);
+  async update(eligible_children: any[]) {
+    await Promise.all(
+      eligible_children.map(async (child) => {
+        (await this.extract_icon_infos(child)).forEach((icon_info) => {
+          const { owner_uuid, name, icon_name } = icon_info;
+          const key = IconConfig.get_icon_key(icon_info);
 
-        const icon = this.icons[key];
-        if (icon) {
-          icon.name = common_prefix(icon.name, name);
-          icon.last_seen = Date.now();
-        } else {
-          this.icons[key] = {
-            owner_uuid,
-            name,
-            last_seen: Date.now(),
-            show: true,
-            icon_name,
-          };
-        }
-      });
-    }
+          const icon = this.icons[key];
+          if (icon) {
+            icon.name = common_prefix(icon.name, name);
+            icon.last_seen = Date.now();
+          } else {
+            this.icons[key] = {
+              owner_uuid,
+              name,
+              last_seen: Date.now(),
+              show: true,
+              icon_name,
+            };
+          }
+        });
+      }),
+    );
 
     Object.entries(this.icons).forEach(([key, icon]) => {
       if (Date.now() - icon.last_seen > ICON_SWITCH_STORE_DURATION) {
@@ -237,12 +251,12 @@ export class IconConfig {
   }
 
   // Rebuilds the icon list from scratch while preserving each icon's `show` state.
-  reset(eligible_children: any[]) {
+  async reset(eligible_children: any[]) {
     const iconsBackup = JSON.parse(
       JSON.stringify(this.icons),
     ) as IconsConfigData;
     this.icons = {};
-    this.update(eligible_children);
+    await this.update(eligible_children);
     // Restore `show` status
     Object.entries(iconsBackup).forEach(([key, { show }]) => {
       if (this.icons[key]) {

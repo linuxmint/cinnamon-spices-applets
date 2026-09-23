@@ -15,16 +15,17 @@
   },
   "devDependencies": {
     "@ci-types/cjs": "^6.0.2-5",
-    "@s-h-a-d-o-w/oxlint-config": "^1.1.2",
-    "@types/node": "^24.13.2",
-    "esbuild": "^0.28.1",
+    "@s-h-a-d-o-w/oxlint-config": "^1.6.0",
+    "@types/node": "^26.6.2",
+    "esbuild": "^0.28.2",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.8",
-    "oxfmt": "^0.61.0",
-    "oxlint": "^1.76.0",
-    "oxlint-tsgolint": "^7.0.2001",
+    "knip": "^6.37.0",
+    "lint-staged": "^17.5.1",
+    "oxfmt": "^0.70.0",
+    "oxlint": "^1.85.0",
+    "oxlint-tsgolint": "^7.0.2002",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.10"
+    "vitest": "^5.0.1"
   },
-  "packageManager": "pnpm@11.15.1+sha512.81350b07e53c9538a02f1f2303b4290fa2d7be04e56e2a970c4cc4b417dc761de196edabd49d55c7dc9580db81007c44143e4e3d7e462b3000d23c255122d065"
+  "packageManager": "pnpm@12.6.0+sha512.3ef68f951cb111ac204b4a5a16f0b2ddf0da56a96e0413e81d855d9f0b55ef926714709028e1cd00c405c2c5fb7b9e8ec4dc46777c805d0373c2f2ff00fd20ec"
 }

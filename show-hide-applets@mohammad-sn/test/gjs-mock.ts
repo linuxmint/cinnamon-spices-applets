@@ -41,6 +41,23 @@ export function fileHash(path: string): string {
   return sha256(vfs.contents(path) ?? path);
 }
 
+const IOErrorEnum = { NOT_FOUND: 1, EXISTS: 2 };
+
+// Mimics a GLib.Error, which GJS throws for failed GIO calls.
+class MockGioError extends Error {
+  private readonly code: number;
+
+  constructor(code: number, message: string) {
+    super(message);
+    this.name = "MockGioError";
+    this.code = code;
+  }
+
+  matches(domain: unknown, code: number) {
+    return domain === IOErrorEnum && code === this.code;
+  }
+}
+
 class MockGioFile {
   path: string;
 
@@ -48,16 +65,32 @@ class MockGioFile {
     this.path = path;
   }
 
-  query_exists() {
-    return vfs.has(this.path);
+  async load_contents_async(
+    _cancellable: unknown,
+    callback: (source: MockGioFile, result: unknown) => void,
+  ) {
+    await Promise.resolve();
+    callback(this, null);
   }
 
-  load_contents(): [boolean, string | undefined] {
-    return [vfs.has(this.path), vfs.contents(this.path)];
+  load_contents_finish(): [boolean, string] {
+    if (!vfs.has(this.path)) {
+      throw new MockGioError(
+        IOErrorEnum.NOT_FOUND,
+        "No such file: " + this.path,
+      );
+    }
+    return [true, vfs.contents(this.path)!];
   }
 
   make_directory_with_parents() {
     mkdirCalls.push(this.path);
+    if (vfs.has(this.path)) {
+      throw new MockGioError(
+        IOErrorEnum.EXISTS,
+        "Directory exists: " + this.path,
+      );
+    }
     vfs.add(this.path);
     return true;
   }
@@ -137,6 +170,7 @@ const importsMock = {
     Gio: {
       File: { new_for_path: (p: string) => new MockGioFile(p) },
       FileCopyFlags: { NONE: 0 },
+      IOErrorEnum,
     },
     GdkPixbuf: {
       Pixbuf: { new_from_file: () => ({ savev: pixbufSavev }) },
