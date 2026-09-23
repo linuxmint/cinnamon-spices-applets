@@ -1,0 +1,5 @@
+# Arguments for terminals
+# 
+
+gnome-terminal: --working-directory=%W
+
