@@ -6,7 +6,7 @@ if (typeof imports !== 'undefined') {
   try {
     const Gettext = imports.gettext;
     const GLib    = imports.gi.GLib;
-    Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+    Gettext.bindtextdomain(UUID, GLib.get_user_data_dir()  + '/locale');
     _translator = (s) => Gettext.dgettext(UUID, s);
   } catch(e) {}
 }
