@@ -88,8 +88,15 @@ var MetricsManager = class MetricsManager {
   }
 
   _resolveHwmonPaths() {
-    const auto = CpuMetric.findCoretemPath(fileutil);
-    return auto ? [auto] : [];
+    const list    = parseList(this._applet._cpuHwmonList);
+    const enabled = list.filter(h => h.enabled);
+    const valid   = enabled.filter(h => {
+      const actual = (fileutil.readFile(`/sys/class/hwmon/hwmon${h.hwmon}/name`) || '').trim();
+      return actual && (!h.name || actual === h.name);
+    });
+    if (valid.length > 0) return valid.map(h => `/sys/class/hwmon/hwmon${h.hwmon}`);
+    // Fallback: auto-discover if the settings list is empty or all entries are stale
+    return CpuMetric.findCpuTempChips(fileutil).map(c => `/sys/class/hwmon/hwmon${c.hwmon}`);
   }
 
   _detectDisplay() {
