@@ -5,6 +5,7 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Mainloop = imports.mainloop;
 const Cairo = imports.cairo;
+const ByteArray = imports.byteArray;
 
 function AudioSpectrum(metadata, orientation, panelHeight, instanceId) {
     this._init(metadata, orientation, panelHeight, instanceId);
@@ -22,11 +23,22 @@ AudioSpectrum.prototype = {
         );
 
         this._metadata = metadata;
+        this._cavaRestartInProgress = false;
+        this._cavaRestartPending = false;
+        this._removed = false;
+
+        // Cinnamon supplies the current panel height when the applet is
+        // created. Keep it separately from the requested visualization
+        // height so Auto mode can fit different panel sizes.
+        this._availablePanelHeight = panelHeight;
+
+        // The visualization manages its own horizontal geometry.
+        this.actor.set_style("padding-left: 0px; padding-right: 0px;");
 
         this._settings = new Settings.AppletSettings(this, this._metadata.uuid, instanceId);
 
         // Number of EQ bars
-        this._barCount = 60;
+        this._barCount = 120;
 
         this._settings.bind("bar_count", "_barCount", this._onBarCountChanged.bind(this));
         this._sensitivity = 100;
@@ -46,16 +58,32 @@ AudioSpectrum.prototype = {
         this._peaks = new Array(this._barCount).fill(0);
         this._peakHoldUntil = new Array(this._barCount).fill(0);
 
-        // Storlek i panelen
-        this._width = 600;
-
-        this._settings.bind("width", "_width", this._onWidthChanged.bind(this));
+        // Width is calculated automatically from the visualization geometry.
+        this._width = 1;
         this._barWidth = 4;
         this._settings.bind("bar_width", "_barWidth", this._onBarWidthChanged.bind(this));
         this._separator = 0.8;
         this._settings.bind("separator", "_separator", this._onSeparatorChanged.bind(this));
+        this._heightMode = "auto";
+        this._settings.bind(
+            "height_mode",
+            "_heightMode",
+            this._onHeightChanged.bind(this)
+        );
+
         this._height = 24;
-        this._settings.bind("height", "_height", this._onHeightChanged.bind(this));
+        this._settings.bind(
+            "height",
+            "_height",
+            this._onHeightChanged.bind(this)
+        );
+
+        this._verticalAlignment = "center";
+        this._settings.bind(
+            "vertical_alignment",
+            "_verticalAlignment",
+            this._onHeightChanged.bind(this)
+        );
 
         this._peakHold = 500;
         this._settings.bind(
@@ -65,13 +93,16 @@ AudioSpectrum.prototype = {
         );
 
         this.actor.set_width(this._width);
-        this.actor.set_height(this._height);
 
-        // Rita själva visualiseringen
+        // Draw the visualization. Height is applied after the drawing
+        // area exists so Auto and Manual modes use the same code path.
         this._drawingArea = new St.DrawingArea({
             width: this._width,
-            height: this._height
+            height: 1
         });
+
+        this._updateWidth();
+        this._updateHeight();
 
         this._drawingArea.connect(
             'repaint',
@@ -84,11 +115,12 @@ AudioSpectrum.prototype = {
         this._stream = null;
         this._animationId = null;
 
-        this._startCava();
+        this._restartCava();
         this._animate();
     },
 
     _onSkinChanged: function() {
+        this._updateWidth();
         this._drawingArea.queue_repaint();
     },
 
@@ -101,7 +133,8 @@ AudioSpectrum.prototype = {
     },
 
     _onGravityChanged: function() {
-        this._restartCava();
+        // Fall speed is consumed directly by the animation loop.
+        // No CAVA restart is required.
     },
 
     _onBarCountChanged: function() {
@@ -110,42 +143,77 @@ AudioSpectrum.prototype = {
         this._peaks = new Array(this._barCount).fill(0);
         this._peakHoldUntil = new Array(this._barCount).fill(0);
 
+        this._updateWidth();
         this._drawingArea.queue_repaint();
         this._restartCava();
     },
 
     _restartCava: function() {
-        let config = GLib.build_filenamev([
+        if (this._removed)
+            return;
+
+        if (this._cavaRestartInProgress) {
+            this._cavaRestartPending = true;
+            return;
+        }
+
+        this._cavaRestartInProgress = true;
+        this._cavaRestartPending = false;
+
+        let templateConfig = GLib.build_filenamev([
             this._metadata.path,
             "cava.conf"
         ]);
 
-        let file = Gio.File.new_for_path(config);
+        let runtimeConfig = GLib.build_filenamev([
+            GLib.get_user_cache_dir(),
+            this._metadata.uuid + "-cava.conf"
+        ]);
 
-        file.load_contents_async(null, (source, result) => {
+        let templateFile = Gio.File.new_for_path(templateConfig);
+        let runtimeFile = Gio.File.new_for_path(runtimeConfig);
+        let rawBarCount = this._barCount * 2;
+        let sensitivity = this._sensitivity;
+        let fps = this._fps;
+        let gravity = this._gravity;
+
+        templateFile.load_contents_async(null, (source, result) => {
             try {
                 let [, contents] = source.load_contents_finish(result);
-                contents = contents.toString();
 
+                if (this._removed || this._cavaRestartPending) {
+                    this._finishCavaRestart();
+                    return;
+                }
+
+                contents = ByteArray.toString(contents);
+
+                // The parser combines one left- and one right-channel value
+                // for every visible bar. Request two raw values per visible
+                // bar so both stereo channel halves cover the full spectrum.
                 contents = contents.replace(
                     /^bars\s*=\s*\d+/m,
-                    "bars = " + this._barCount
+                    "bars = " + rawBarCount
                 );
                 contents = contents.replace(
                     /^sensitivity\s*=\s*\d+/m,
-                    "sensitivity = " + this._sensitivity
+                    "sensitivity = " + sensitivity
                 );
                 contents = contents.replace(
                     /^framerate\s*=\s*\d+/m,
-                    "framerate = " + this._fps
+                    "framerate = " + fps
                 );
                 contents = contents.replace(
                     /^gravity\s*=\s*\d+/m,
-                    "gravity = " + this._gravity
+                    "gravity = " + gravity
                 );
 
-                file.replace_contents_async(
-                    contents,
+                let bytes = new GLib.Bytes(
+                    ByteArray.fromString(contents)
+                );
+
+                runtimeFile.replace_contents_async(
+                    bytes,
                     null,
                     false,
                     Gio.FileCreateFlags.REPLACE_DESTINATION,
@@ -153,6 +221,11 @@ AudioSpectrum.prototype = {
                     (source, result) => {
                         try {
                             source.replace_contents_finish(result);
+
+                            if (this._removed || this._cavaRestartPending) {
+                                this._finishCavaRestart();
+                                return;
+                            }
 
                             if (this._process) {
                                 try {
@@ -164,12 +237,14 @@ AudioSpectrum.prototype = {
                             }
 
                             this._stream = null;
-                            this._startCava();
+                            this._startCava(runtimeConfig);
+                            this._finishCavaRestart();
 
                         } catch (e) {
                             global.logError(
                                 "Audio Spectrum: could not update CAVA: " + e
                             );
+                            this._finishCavaRestart();
                         }
                     }
                 );
@@ -178,26 +253,82 @@ AudioSpectrum.prototype = {
                 global.logError(
                     "Audio Spectrum: could not update CAVA: " + e
                 );
+                this._finishCavaRestart();
             }
         });
     },
 
+    _finishCavaRestart: function() {
+        this._cavaRestartInProgress = false;
+
+        if (this._removed)
+            return;
+
+        if (this._cavaRestartPending) {
+            this._cavaRestartPending = false;
+            this._restartCava();
+        }
+    },
+
     _onHeightChanged: function() {
-        if (this.actor)
-            this.actor.set_height(this._height);
+        this._updateHeight();
+    },
 
-        if (this._drawingArea)
-            this._drawingArea.set_height(this._height);
+    _updateHeight: function() {
+        if (!this._drawingArea)
+            return;
 
-        if (this._drawingArea)
-            this._drawingArea.queue_repaint();
+        let panelHeight = Math.max(
+            1,
+            Math.round(Number(this._availablePanelHeight) || 24)
+        );
+
+        let requestedHeight = Math.max(
+            1,
+            Math.round(Number(this._height) || 24)
+        );
+
+        // Auto fills the panel's available applet height.
+        // Manual never grows beyond the panel.
+        let visualHeight =
+            this._heightMode === "manual"
+                ? Math.min(requestedHeight, panelHeight)
+                : panelHeight;
+
+        visualHeight = Math.max(1, visualHeight);
+
+        // Keep the Cinnamon actor and DrawingArea at the panel's full
+        // allocated height. Only the visualization itself is constrained.
+        // This avoids fighting Cinnamon's panel layout.
+        this._visualHeight = visualHeight;
+
+        if (this._verticalAlignment === "bottom") {
+            this._visualY = panelHeight - visualHeight;
+        } else if (this._verticalAlignment === "center") {
+            this._visualY = Math.floor(
+                (panelHeight - visualHeight) / 2
+            );
+        } else {
+            this._visualY = 0;
+        }
+
+        this._visualY = Math.max(0, this._visualY);
+
+        this.actor.set_height(panelHeight);
+        this._drawingArea.set_height(panelHeight);
+
+        this.actor.queue_relayout();
+        this._drawingArea.queue_relayout();
+        this._drawingArea.queue_repaint();
     },
 
     _onBarWidthChanged: function() {
+        this._updateWidth();
         this._drawingArea.queue_repaint();
     },
 
     _onSeparatorChanged: function() {
+        this._updateWidth();
         this._drawingArea.queue_repaint();
     },
 
@@ -205,22 +336,84 @@ AudioSpectrum.prototype = {
         this._drawingArea.queue_repaint();
     },
 
-    _onWidthChanged: function() {
-        this.actor.set_width(this._width);
-        this._drawingArea.set_width(this._width);
-        this._drawingArea.queue_repaint();
+    _restoreDefaultSettings: function() {
+        const defaults = {
+            bar_count: 60,
+            sensitivity: 650,
+            bar_width: 4,
+            height_mode: "auto",
+            height: 24,
+            vertical_alignment: "center",
+            separator: 0.8,
+            skin: "classic",
+            fps: "25",
+            gravity: 400,
+            peak_hold: 0
+        };
+
+        for (let key in defaults) {
+            this._settings.setValue(
+                key,
+                defaults[key]
+            );
+        }
+
+        // Recalculate final geometry after all settings have been
+        // restored. Individual setting callbacks may run while other
+        // settings still contain their previous values.
+        this._updateWidth();
+        this._updateHeight();
+
+        if (this._drawingArea)
+            this._drawingArea.queue_repaint();
     },
 
-    _startCava: function() {
-        let config = GLib.build_filenamev([
-            this._metadata.path,
-            'cava.conf'
-        ]);
+    _updateWidth: function() {
+        let count = Math.max(1, this._barCount);
+        let width;
 
+        if (this._skin === "classicneon") {
+            // Classic Neon: 1 px core with 3 px pitch.
+            width = 3 * (count - 1) + 1;
+        } else if (this._skin === "fire" || this._skin === "spectrum") {
+            let barWidth = Math.max(2, this._barWidth);
+            let gap = Math.max(0, this._separator);
+            width = barWidth * count + gap * (count - 1);
+        } else {
+            let barWidth = this._barWidth;
+            let gap = this._separator;
+            width = barWidth * count + gap * (count - 1);
+        }
+
+        this._width = Math.max(1, Math.ceil(width));
+
+        if (this.actor)
+            this.actor.set_width(this._width);
+
+        if (this._drawingArea)
+            this._drawingArea.set_width(this._width);
+    },
+
+    _startCava: function(config) {
         try {
+            // Prefer Audio Spectrum's private CAVA installation when
+            // available. Otherwise fall back to CAVA from the user's PATH.
+            let localCava = GLib.build_filenamev([
+                GLib.get_home_dir(),
+                '.local',
+                'lib',
+                'audio-spectrum',
+                'cava'
+            ]);
+
+            let cavaExecutable = GLib.file_test(
+                localCava,
+                GLib.FileTest.IS_EXECUTABLE
+            ) ? localCava : 'cava';
+
             this._process = Gio.Subprocess.new(
                 [
-                    'cava',
+                    cavaExecutable,
                     '-p',
                     config
                 ],
@@ -232,7 +425,7 @@ AudioSpectrum.prototype = {
                 base_stream: this._process.get_stdout_pipe()
             });
 
-            this._readLine();
+            this._readLine(this._stream);
 
         } catch (e) {
             global.logError(
@@ -241,29 +434,49 @@ AudioSpectrum.prototype = {
         }
     },
 
-    _readLine: function() {
-        if (!this._stream)
+    _readLine: function(activeStream) {
+        if (
+            !activeStream ||
+            activeStream !== this._stream ||
+            this._removed
+        )
             return;
 
-        this._stream.read_line_async(
+        activeStream.read_line_async(
             GLib.PRIORITY_DEFAULT,
             null,
             (stream, result) => {
                 try {
                     let data = stream.read_line_finish_utf8(result);
+
+                    // A callback from a stopped CAVA process may finish
+                    // after a replacement process has already created a
+                    // new stream. Never continue reading on that new stream
+                    // from the stale callback.
+                    if (
+                        stream !== this._stream ||
+                        this._removed
+                    )
+                        return;
+
                     let line = data[0];
 
                     if (line !== null && line !== undefined) {
                         if (line.length > 0)
                             this._parse(line);
 
-                        this._readLine();
+                        this._readLine(stream);
                     }
 
                 } catch (e) {
-                    global.logError(
-                        'Audio Spectrum: error reading from CAVA: ' + e
-                    );
+                    if (
+                        stream === this._stream &&
+                        !this._removed
+                    ) {
+                        global.logError(
+                            'Audio Spectrum: error reading from CAVA: ' + e
+                        );
+                    }
                 }
             }
         );
@@ -276,11 +489,34 @@ AudioSpectrum.prototype = {
             .split(';')
             .map(Number);
 
+        // CAVA outputs stereo spectrum data as:
+        // left-channel bands followed by right-channel bands.
+        //
+        // Combine corresponding frequency bands only AFTER
+        // CAVA has analysed each channel separately. Using the
+        // stronger magnitude prevents opposite-polarity stereo
+        // signals from cancelling each other.
+        let channelBars = Math.floor(values.length / 2);
+
         for (let i = 0; i < this._barCount; i++) {
-            if (i < values.length && !isNaN(values[i])) {
+            // CAVA stereo output is mirrored:
+            // left channel runs high -> low, right runs low -> high.
+            // Reverse the left half so corresponding frequencies align.
+            let left = values[channelBars - 1 - i];
+            let right = values[channelBars + i];
+
+            if (!isNaN(left) || !isNaN(right)) {
+                if (isNaN(left))
+                    left = 0;
+
+                if (isNaN(right))
+                    right = 0;
+
+                let value = Math.max(left, right);
+
                 this._targets[i] = Math.max(
                     0,
-                    Math.min(100, values[i])
+                    Math.min(100, value)
                 );
             }
         }
@@ -291,22 +527,35 @@ AudioSpectrum.prototype = {
             let current = this._bars[i];
             let target = this._targets[i];
 
-            // Mild dynamikkurva:
-            // lyfter svaga frekvensband utan att ändra maxnivån.
+            // Mild dynamic curve lifts quieter bands without
+            // changing the maximum level.
             target = Math.pow(target / 100, 0.90) * 100;
 
-            // Snabb attack: förstärk plötsliga uppåtgående transienter.
-            // Fallande nivåer lämnas orörda.
+            // Smooth bar movement while keeping transients responsive.
+            // Attack is faster than decay.
+            let smoothing;
+
             if (target > current) {
-                this._bars[i] = Math.min(
-                    100,
-                    target + (target - current) * 0.35
-                );
+                // Fast attack is independent of Fall speed.
+                smoothing = 0.65;
             } else {
-                this._bars[i] = target;
+                // Fall speed controls only downward movement.
+                // 400 preserves the previous 0.30 behaviour.
+                smoothing = Math.min(
+                    0.95,
+                    Math.max(0.02, 0.30 * (this._gravity / 400))
+                );
             }
 
-            // Peak-hold: håll toppen i 0,5 sekunder
+            this._bars[i] = current + (target - current) * smoothing;
+
+            // Snap fully to silence once the decaying value is visually
+            // negligible. Exponential smoothing otherwise approaches zero
+            // forever without actually reaching it.
+            if (target === 0 && this._bars[i] < 0.5)
+                this._bars[i] = 0;
+
+            // Peak hold: hold the peak for 0.5 seconds
             if (target > this._peaks[i]) {
                 this._peaks[i] = target;
 
@@ -317,7 +566,7 @@ AudioSpectrum.prototype = {
                     this._peaks[i] = 0;
                 }
             } else if (Date.now() > this._peakHoldUntil[i]) {
-                // Låt peak-markören falla långsamt efter hold-tiden
+                // Let the peak marker fall slowly after the hold time
                 this._peaks[i] = Math.max(
                     0,
                     this._peaks[i] - 2
@@ -337,9 +586,33 @@ AudioSpectrum.prototype = {
         let cr = area.get_context();
 
         let width = area.width;
-        let height = area.height;
 
-        // Transparent bakgrund
+        // The DrawingArea occupies the full panel height. The actual
+        // visualizer may use a smaller region in Manual mode.
+        let fullHeight = area.height;
+        let height = Math.max(
+            1,
+            Math.min(
+                fullHeight,
+                Math.round(Number(this._visualHeight) || fullHeight)
+            )
+        );
+
+        let visualY = Math.max(
+            0,
+            Math.min(
+                fullHeight - height,
+                Math.round(Number(this._visualY) || 0)
+            )
+        );
+
+        // Draw the visualization in its own vertical region.
+        cr.save();
+        cr.translate(0, visualY);
+        cr.rectangle(0, 0, width, height);
+        cr.clip();
+
+        // Transparent background
         cr.setSourceRGBA(0, 0, 0, 0);
         cr.paint();
 
@@ -355,7 +628,7 @@ AudioSpectrum.prototype = {
             (width - totalWidth) / 2
         );
 
-        // VU Meter: en enda horisontell nivåmätare
+        // VU Meter: a single horizontal level meter
         if (this._skin === "vu") {
             let vuSum = 0;
             let vuPeak = 0;
@@ -369,7 +642,7 @@ AudioSpectrum.prototype = {
                 );
             }
 
-            // Medelnivå i stället för maxnivå
+            // Average level instead of maximum level
             let vuLevel =
                 Math.min(
                     1,
@@ -385,7 +658,7 @@ AudioSpectrum.prototype = {
                 (height - vuHeight) / 2
             );
 
-            // Diskret bakgrund
+            // Subtle background
             cr.setSourceRGBA(
                 0.18, 0.18, 0.18, 0.35
             );
@@ -398,7 +671,7 @@ AudioSpectrum.prototype = {
             );
             cr.fill();
 
-            // Klassisk VU-skala: grön -> gul -> röd
+            // Classic VU scale: green -> yellow -> red
             if (vuLevel > 0) {
                 let vuGradient =
                     new Cairo.LinearGradient(
@@ -474,7 +747,7 @@ AudioSpectrum.prototype = {
 
             // Oscilloscope-skin
             if (this._skin === "oscilloscope") {
-                  // Rita hela oscilloskopet endast en gång per frame.
+                  // Draw the entire oscilloscope only once per frame.
                   if (i > 0)
                       continue;
 
@@ -721,7 +994,7 @@ AudioSpectrum.prototype = {
                     cr.fill();
                 }
 
-                // Peak-markör
+                // Peak marker
                 if (this._peaks[i] > 0) {
                     let peakY =
                         height -
@@ -892,7 +1165,7 @@ AudioSpectrum.prototype = {
                 cr.setSourceRGBA(0.10, 0.80, 0.15, 0.95);
             }
 
-            // Classic Spectrum: hel nålform
+            // Classic Spectrum: solid needle shape
             let needleWidth = Math.max(1, spectrumWidth);
 
             cr.moveTo(
@@ -940,9 +1213,9 @@ AudioSpectrum.prototype = {
         }
 
         if (this._skin === "stereo80") {
-                // Visuell nivåkurva för 80's Car Stereo.
-                // Behåller låg/normal nivå relativt lugn men låter
-                // strong peaks can use the full bar height.
+                // Visual level curve for 80's Car Stereo.
+                // Keeps low/normal levels relatively calm while allowing
+                // strong peaks to use the full bar height.
                 value = Math.min(1, value * 1.25);
 
                 let segmentHeight = 2;
@@ -974,7 +1247,7 @@ AudioSpectrum.prototype = {
                     cr.fill();
                 }
 
-                // Peak-markör
+                // Peak marker
                 if (this._peaks[i] > 0) {
                     let peakY =
                         height -
@@ -997,7 +1270,7 @@ AudioSpectrum.prototype = {
 
             // Neon Line
             if (this._skin === "neon") {
-                // Rita hela linjen bara en gång.
+                // Draw the entire line only once.
                 if (i > 0)
                     continue;
 
@@ -1008,8 +1281,8 @@ AudioSpectrum.prototype = {
 
                 let step = width / Math.max(1, points - 1);
 
-                // Returnerar Y-position för respektive punkt.
-                // Lite marginal upptill så glow inte kapas.
+                // Return the Y position for each point.
+                // Leave a small top margin so the glow is not clipped.
                 function neonY(p) {
                     let index = Math.floor(
                         p * (this._barCount - 1) /
@@ -1024,7 +1297,7 @@ AudioSpectrum.prototype = {
                     return (height - 2) - level * (height - 4);
                 }
 
-                // Yttre glow
+                // Outer glow
                 cr.setSourceRGBA(0.00, 0.65, 1.00, 0.16);
                 cr.setLineWidth(7);
                 cr.setLineCap(Cairo.LineCap.ROUND);
@@ -1056,7 +1329,7 @@ AudioSpectrum.prototype = {
 
                 cr.stroke();
 
-                // Ljus neonkärna
+                // Bright neon core
                 cr.setSourceRGBA(0.55, 0.95, 1.00, 1.00);
                 cr.setLineWidth(1.5);
 
@@ -1076,12 +1349,12 @@ AudioSpectrum.prototype = {
 
             // Classic Neon
             if (this._skin === "classicneon") {
-                // Egen visuell nivåförstärkning för Classic Neon.
+                // Dedicated visual level boost for Classic Neon.
                 value = Math.min(1, value * 1.25);
 
                 // Narrow classic spectrum bars with cyan neon glow.
-                // Bar width is intentionally kept small regardless of
-                // den globala bar_width-inställningen.
+                // The bar width is intentionally kept narrow regardless of
+                // the global bar_width setting.
                 let neonWidth = 1;
 
                 // Classic Neon har egen horisontell geometri.
@@ -1102,7 +1375,7 @@ AudioSpectrum.prototype = {
                 let neonY =
                     height - neonHeight;
 
-                // Yttre glow
+                // Outer glow
                 cr.setSourceRGBA(
                     0.00, 0.55, 1.00, 0.16
                 );
@@ -1115,7 +1388,7 @@ AudioSpectrum.prototype = {
                 );
                 cr.fill();
 
-                // Inre blå glow
+                // Inner blue glow
                 cr.setSourceRGBA(
                     0.00, 0.78, 1.00, 0.38
                 );
@@ -1128,7 +1401,7 @@ AudioSpectrum.prototype = {
                 );
                 cr.fill();
 
-                // Själva neonstapeln
+                // The neon bar itself
                 let neonGradient =
                     new Cairo.LinearGradient(
                         0,
@@ -1162,7 +1435,7 @@ AudioSpectrum.prototype = {
                 );
                 cr.fill();
 
-                // Ljus cyan topp på varje stapel
+                // Bright cyan top on each bar
                 cr.setSourceRGBA(
                     0.65, 1.00, 1.00, 0.95
                 );
@@ -1178,12 +1451,12 @@ AudioSpectrum.prototype = {
                 continue;
             }
 
-            // Cyan/blå färg
-            // Retro LED-färger: grönt -> gult -> rött
+            // Cyan/blue color
+            // Retro LED colors: green -> yellow -> red
             let bottom = height;
             let top = y;
 
-            // Grönt: nedersta 55 %
+            // Green: bottom 55%
             let greenTop = Math.max(
                 top,
                 height - height * 0.55
@@ -1200,7 +1473,7 @@ AudioSpectrum.prototype = {
                 cr.fill();
             }
 
-            // Gult: 55–80 %
+            // Yellow: 55–80%
             let yellowTop = Math.max(
                 top,
                 height - height * 0.80
@@ -1217,7 +1490,7 @@ AudioSpectrum.prototype = {
                 cr.fill();
             }
 
-            // Rött: översta 20 %
+            // Red: top 20%
             if (yellowTop > top) {
                 cr.setSourceRGBA(0.90, 0.05, 0.05, 0.95);
                 cr.rectangle(
@@ -1229,7 +1502,7 @@ AudioSpectrum.prototype = {
                 cr.fill();
             }
 
-            // Peak-markör
+            // Peak marker
             if (this._peaks[i] > 0) {
                 let peakY =
                     height - (this._peaks[i] / 100) * height;
@@ -1251,7 +1524,7 @@ AudioSpectrum.prototype = {
                 cr.fill();
             }
 
-            // Thin dark separator between LED bars
+            // Thin dark separator between the LED bars
             if (i < this._barCount - 1) {
                 cr.setSourceRGBA(0, 0, 0, 0.65);
                 cr.rectangle(
@@ -1264,10 +1537,18 @@ AudioSpectrum.prototype = {
             }
         }
 
+        cr.restore();
         cr.$dispose();
     },
 
+    on_panel_height_changed: function(panelHeight) {
+        this._availablePanelHeight = panelHeight;
+        this._updateHeight();
+    },
+
     on_applet_removed_from_panel: function() {
+        this._removed = true;
+        this._cavaRestartPending = false;
 
         if (this._animationId) {
             Mainloop.source_remove(

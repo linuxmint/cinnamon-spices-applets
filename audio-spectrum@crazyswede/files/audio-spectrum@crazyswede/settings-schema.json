@@ -6,8 +6,9 @@
             "bar_count",
             "sensitivity",
             "bar_width",
-            "width",
+            "height_mode",
             "height",
+            "vertical_alignment",
             "separator",
             "skin"
         ],
@@ -24,12 +25,12 @@
     },
     "sensitivity": {
         "type": "spinbutton",
-        "default": 23,
+        "default": 650,
         "min": 5,
-        "max": 300,
+        "max": 1000,
         "step": 1,
         "units": "%",
-        "description": "Sensitivity (100 = normal)"
+        "description": "Audio sensitivity"
     },
     "bar_width": {
         "type": "spinbutton",
@@ -40,14 +41,14 @@
         "units": "px",
         "description": "Bar width"
     },
-    "width": {
-        "type": "spinbutton",
-        "default": 300,
-        "min": 200,
-        "max": 1200,
-        "step": 10,
-        "units": "px",
-        "description": "Width"
+    "height_mode": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Visualizer height",
+        "options": {
+            "Fit panel automatically": "auto",
+            "Set height manually": "manual"
+        }
     },
     "height": {
         "type": "spinbutton",
@@ -56,7 +57,19 @@
         "max": 60,
         "step": 1,
         "units": "px",
-        "description": "Height"
+        "description": "Manual visualizer height",
+        "dependency": "height_mode=manual"
+    },
+    "vertical_alignment": {
+        "type": "combobox",
+        "default": "center",
+        "description": "Vertical alignment",
+        "options": {
+            "Top": "top",
+            "Center": "center",
+            "Bottom": "bottom"
+        },
+        "dependency": "height_mode=manual"
     },
     "separator": {
         "type": "spinbutton",
@@ -65,7 +78,7 @@
         "max": 3,
         "step": 0.1,
         "units": "px",
-        "description": "Bar spacing"
+        "description": "Spacing / separator"
     },
     "skin": {
         "type": "combobox",
@@ -122,5 +135,19 @@
         "step": 50,
         "units": "ms",
         "description": "Peak hold (0 = off)"
+    },
+    "reset": {
+        "type": "section",
+        "title": "Reset",
+        "keys": [
+            "restore_defaults"
+        ],
+        "description": "Reset"
+    },
+    "restore_defaults": {
+        "type": "button",
+        "description": "Restore default settings",
+        "callback": "_restoreDefaultSettings",
+        "tooltip": "Restore all Audio Spectrum settings to their default values"
     }
 }
