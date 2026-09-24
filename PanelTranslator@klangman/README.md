@@ -9,14 +9,14 @@ Uses [Google](https://translate.google.com/), [Bing](https://www.bing.com/transl
 2. Optional automatically translate and playback (Text-to-Speech) from the current selection or clipboard
 3. Middle mouse button can be configured to perform 8 different translation actions
 4. Ctrl + Middle mouse button can be configured to perform 8 different translation actions
-5. Two hotkeys that can be configured to perform 8 different translation actions
+5. Hotkeys that can be configured to perform 8 different translation actions
 6. Smart language selection entry fields automatically finds language matches as you type, or use the up/down arrow keys to cycle through available languages
 
 The translation action options include translating the current selection or the clipboard contents and then showing the panel popup, playing the translation or placing the translated text into the clipboard.
 
 ## Current Limitations
 
-1. The text boxes are using St.Entry widgets without scroll bars so I have ***limited the text to 200 characters*** until I can find a way to have a type of widget that supports scroll bars. It also seems like translation-shell can not perform "Text-to-Speech" when the text is more than than 200 characters.
+1. The text boxes are limited to 2000 characters, but It seems like translation-shell can not perform "Text-to-Speech" when the text is more than than 200 characters. In such cases you may see an error message in the GUI, but reducing the size of the input text should allow the Text-to-Speech to work.
 2. In my testing, only the Goggle translate engine works consistently (but Bing worked most of the time), and it's the only one that would perform Text-to-Speech for me. I allow other engines to be selected in case some future versions of translate-shell (or different OS setups) works better then what I have seen.
 
 ## Requirements

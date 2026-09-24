@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0
+
+* Use scrollbars when the text is too large for the text area
+* Allow the text areas to hold up to 2000 characters (was 200)
+* Auto-detect the input language when no language was entered
+* Fix some issues with handling input to the from/to language entries fields
+
 ## 1.2.1
 
 * Fix for a 1.2.0 regression when running under older Cinnamon releases where the PopupResizeHandler class does not exist. The popup window can only be resized in versions of Cinnamon where that class exists (5.8+), but the Applet will now work with or without that class.
