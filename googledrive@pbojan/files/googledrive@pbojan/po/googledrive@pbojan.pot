@@ -1,17 +1,17 @@
-# SOME DESCRIPTIVE TITLE.
+# GOOGLE DRIVE
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# pbojan, 2021
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: googledrive@pbojan 1.0\n"
+"Project-Id-Version: googledrive@pbojan 2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-09 14:22-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2026-04-07 20:44+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,12 +39,16 @@ msgstr ""
 msgid "Google Drive Options"
 msgstr ""
 
+#. settings-schema.json->sectionRcloneConfig->title
+msgid "rclone Remote"
+msgstr ""
+
 #. settings-schema.json->sectionWhitelist->title
 msgid "Whitelisted Folders"
 msgstr ""
 
-#. settings-schema.json->sectionNote->title
-msgid "Important Message"
+#. settings-schema.json->sectionRcloneDocs->title
+msgid "rclone Setup"
 msgstr ""
 
 #. settings-schema.json->sectionHelp->title
@@ -65,6 +69,24 @@ msgid ""
 "~/Documents/Drive."
 msgstr ""
 
+#. settings-schema.json->remote->description
+msgid "rclone Remote Name"
+msgstr ""
+
+#. settings-schema.json->remote->tooltip
+msgid ""
+"The name of your rclone Google Drive remote, without the trailing colon (e."
+"g. gdrive). Run 'rclone listremotes' in a terminal to see your configured "
+"remotes."
+msgstr ""
+
+#. settings-schema.json->remoteHelp->description
+msgid ""
+"Enter the rclone remote name configured for Google Drive (run 'rclone "
+"listremotes' in a terminal to see your remotes, without the trailing colon e."
+"g. gdrive)."
+msgstr ""
+
 #. settings-schema.json->whitelistHelp->description
 msgid ""
 "Note: If you want to sync only specific folders please make sure to add them "
@@ -82,16 +104,22 @@ msgstr ""
 
 #. settings-schema.json->whitelist->tooltip
 msgid ""
-"Whitelist folders that will be sycned from Google Drive e.g. Documents, "
+"Whitelist folders that will be synced from Google Drive e.g. Documents, "
 "Photos"
 msgstr ""
 
-#. settings-schema.json->note->description
+#. settings-schema.json->rcloneDocs->description
 msgid ""
-"Note: This is a new release of this Applet, so your feedback and ideas are "
-"very important to make this applet better in the future. Please consider "
-"reporting any issues, bugs, instabilities, or ideas for general improvements "
-"on the links below! Thank you!"
+"To configure rclone with Google Drive, click the button below to open the "
+"official rclone Google Drive documentation."
+msgstr ""
+
+#. settings-schema.json->rcloneDocsButton->description
+msgid "Open rclone Google Drive Docs"
+msgstr ""
+
+#. settings-schema.json->rcloneDocsButton->tooltip
+msgid "Opens the rclone Google Drive setup documentation in a browser."
 msgstr ""
 
 #. settings-schema.json->website->description
