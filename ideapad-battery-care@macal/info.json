@@ -1,0 +1,9 @@
+{
+  "author": "Macal",
+  "description": "Battery conservation mode controller for Lenovo IdeaPad laptops. Limits battery charging to 80% to extend battery lifespan on laptops frequently connected to AC power.",
+  "name": "IdeaPad Battery Care",
+  "spices-human-readable-changelog": "## 1.1.0 (2025-11-28)\n- Renamed from 'Coidado Batería' to 'IdeaPad Battery Care'\n- Changed active mode icon to plug (ac-adapter-symbolic)\n- Updated user-facing strings to English\n- Migrated to PolicyKit for better security\n- Restructured for Cinnamon Spices compatibility\n\n## 1.0.0 (2025-11-27)\n- Initial release\n- Battery conservation mode control\n- Cinnamon panel applet integration\n- PolicyKit support for passwordless operation\n- Real-time battery status display\n- Persistent configuration across reboots",
+  "url": "https://github.com/Macal2/ideapad-battery-care",
+  "uuid": "ideapad-battery-care@cinnamon",
+  "version": "1.1.0"
+}
