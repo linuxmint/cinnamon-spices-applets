@@ -1,53 +1,54 @@
-# SOME DESCRIPTIVE TITLE.
+# SSH LAUNCHER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# sumo, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-19 17:20+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-06 20:34+0100\n"
 "PO-Revision-Date: 2020-02-29 18:07+0100\n"
+"Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
 
 #. metadata.json->name
-#: applet.js:40 applet.js:56 applet.js:99 applet.js:206 applet.js:223
+#. applet.js:51 applet.js:67 applet.js:114 applet.js:256 applet.js:271
 msgid "SSH Launcher"
 msgstr "SSH Launcher"
 
-#: applet.js:99
+#. applet.js:114
 msgid "No suitable icon found, falling back to custom icon"
 msgstr "Aucune icône appropriée trouvée, repasse sur l'icône personnalisée"
 
-#: applet.js:105
+#. applet.js:126
 msgid "Force Update from SSH config"
 msgstr "Forcer la mise à jour à partir de la configuration SSH"
 
-#: applet.js:143
+#. applet.js:193
 msgid "Background (-fN)"
 msgstr "En arrière-plan (-fN)"
 
-#: applet.js:146
+#. applet.js:196
 msgid "Forward X11 (-X)"
 msgstr "Déport X11 (-X)"
 
-#: applet.js:187
+#. applet.js:237
 msgid "ERROR. "
 msgstr "ERREUR. "
 
-#: applet.js:190
+#. applet.js:240
 msgid "Edit SSH config"
 msgstr "Modifier la configuration SSH"
 
-#: applet.js:206
+#. applet.js:256
 msgid ""
 "Error: I can't open the terminal.\n"
 "You need to set a default terminal first in Preferred Applications!\n"
@@ -60,13 +61,18 @@ msgstr ""
 "\n"
 "(Plus d'aide dans Clic droit-> À propos-> Plus d'infos)"
 
-#: applet.js:223
+#. applet.js:271
 msgid "Connection opened to "
 msgstr "Connexion ouverte vers "
 
-#: applet.js:223
+#. applet.js:271
 msgid " using "
 msgstr " utilise "
+
+#. metadata.json->description
+msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
+msgstr ""
+"Une applet pour se connecter aux hôtes SSH configurés dans ~/ .ssh/config"
 
 #. settings-schema.json->headAppearance->description
 msgid "Appearance"
@@ -104,7 +110,10 @@ msgstr "Afficher une notification lors du lancement de connexion SSH"
 msgid "Display a notification message when SSH terminal is launched"
 msgstr "Afficher un message de notification lorsque le terminal SSH est lancé"
 
-#. metadata.json->description
-msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
-msgstr ""
-"Une applet pour se connecter aux hôtes SSH configurés dans ~/ .ssh/config"
+#. settings-schema.json->openMenuKey->description
+msgid "Keyboard shortcut to open the SSH menu"
+msgstr "Raccourci clavier pour ouvrir le menu SSH"
+
+#. settings-schema.json->openMenuKey->tooltip
+msgid "Set a global keyboard shortcut to open the SSH launcher menu"
+msgstr "Définir un raccourci clavier global pour ouvrir le menu SSH"
