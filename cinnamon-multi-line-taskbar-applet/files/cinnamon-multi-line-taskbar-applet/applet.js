@@ -555,7 +555,7 @@ AppMenuButton.prototype = {
             alloc.natural_size = naturalSize;
     },
 
-    _contentAllocate: function(actor, box, flags) {
+    _contentAllocate: function(actor, box) {
         let allocWidth = box.x2 - box.x1;
         let allocHeight = box.y2 - box.y1;
         let childBox = new Clutter.ActorBox();
@@ -574,7 +574,7 @@ AppMenuButton.prototype = {
             childBox.x1 = Math.max(0, allocWidth - naturalWidth);
             childBox.x2 = allocWidth;
         }
-        this._iconBox.allocate(childBox, flags);
+        this._iconBox.allocate(childBox);
 
         let iconWidth = this.iconSize;
 
@@ -591,20 +591,20 @@ AppMenuButton.prototype = {
             childBox.x2 = allocWidth - Math.floor(iconWidth + 3);
             childBox.x1 = Math.max(0, childBox.x2 - naturalWidth);
         }
-        this._label.allocate(childBox, flags);
+        this._label.allocate(childBox);
 
         if (direction == Clutter.TextDirection.LTR) {
             childBox.x1 = Math.floor(iconWidth / 2) + this._label.width;
             childBox.x2 = childBox.x1 + this._spinner.actor.width;
             childBox.y1 = box.y1;
             childBox.y2 = box.y2 - 1;
-            this._spinner.actor.allocate(childBox, flags);
+            this._spinner.actor.allocate(childBox);
         } else {
             childBox.x1 = -this._spinner.actor.width;
             childBox.x2 = childBox.x1 + this._spinner.actor.width;
             childBox.y1 = box.y1;
             childBox.y2 = box.y2 - 1;
-            this._spinner.actor.allocate(childBox, flags);
+            this._spinner.actor.allocate(childBox);
         }
     },
     
@@ -1031,7 +1031,7 @@ try {
         }
     },
     
-    _allocateBoxes: function(container, box, flags) {	
+    _allocateBoxes: function(container, box) {
         _multirowtaskbarlog("MyApplet._allocateBoxes(" + container + ", " + box);
 		let allocWidth = box.x2 - box.x1;
 		let allocHeight = box.y2 - box.y1;
@@ -1060,13 +1060,13 @@ try {
 			childBox.x1 = 0;
 			childBox.x2 = Math.min(allocWidth - rightNaturalWidth, leftNaturalWidth);
 		}
-		this._leftBox.allocate(childBox, flags);
+		this._leftBox.allocate(childBox);
 
 		childBox.x1 = Math.ceil(sideWidth);
 		childBox.y1 = 0;
 		childBox.x2 = childBox.x1 + centerWidth;
 		childBox.y2 = allocHeight;
-		this._centerBox.allocate(childBox, flags);
+		this._centerBox.allocate(childBox);
 
 		childBox.y1 = 0;
 		childBox.y2 = allocHeight;
@@ -1079,7 +1079,7 @@ try {
 												rightNaturalWidth);
 			childBox.x2 = allocWidth;
 		}
-		this._rightBox.allocate(childBox, flags);
+		this._rightBox.allocate(childBox);
     }
 };
 
