@@ -58,6 +58,10 @@ MyApplet.prototype = {
 
       this.cpuLabel = new St.Label();
       this.memLabel = new St.Label();
+      
+      // Prevent ellipsizing (showing "...") when space is limited
+      this.cpuLabel.clutter_text.ellipsize = imports.gi.Pango.EllipsizeMode.NONE;
+      this.memLabel.clutter_text.ellipsize = imports.gi.Pango.EllipsizeMode.NONE;
 
       let iconBasePath = HOME_DIR + "/.local/share/cinnamon/applets/sysmon@rohan/icons";
 
