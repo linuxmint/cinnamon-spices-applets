@@ -18,162 +18,117 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:29
+#: applet.js
 msgid "Bulgarian Radio and TV Streams"
 msgstr ""
 
-#: applet.js:45
+#: applet.js
 msgid "Radio stations"
 msgstr ""
 
-#: applet.js:49
+#: applet.js
 msgid "Bg Radio"
 msgstr ""
 
-#: applet.js:53 applet.js:61 applet.js:69 applet.js:77 applet.js:85
-#: applet.js:93 applet.js:101 applet.js:109 applet.js:117 applet.js:125
-#: applet.js:133 applet.js:141 applet.js:149 applet.js:157 applet.js:165
-#: applet.js:173 applet.js:181 applet.js:189
+#: applet.js
 #, javascript-format
 msgid "Listening %s"
 msgstr ""
 
-#: applet.js:57
+#: applet.js
 msgid "bTV Radio"
 msgstr ""
 
-#: applet.js:65
+#: applet.js
 msgid "City Radio"
 msgstr ""
 
-#: applet.js:73
+#: applet.js
 msgid "Classic FM"
 msgstr ""
 
-#: applet.js:81
+#: applet.js
 msgid "Darik"
 msgstr ""
 
-#: applet.js:89
+#: applet.js
 msgid "Darik Nostalgie"
 msgstr ""
 
-#: applet.js:97
+#: applet.js
 msgid "Energy"
 msgstr ""
 
-#: applet.js:105
+#: applet.js
 msgid "FM+"
 msgstr ""
 
-#: applet.js:113
+#: applet.js
 msgid "Fresh"
 msgstr ""
 
-#: applet.js:121
+#: applet.js
 msgid "Jazz FM"
 msgstr ""
 
-#: applet.js:129
-msgid "K2"
-msgstr ""
-
-#: applet.js:137
+#: applet.js
 msgid "Melody"
 msgstr ""
 
-#: applet.js:145
+#: applet.js
 msgid "N-Joy"
 msgstr ""
 
-#: applet.js:153
+#: applet.js
 msgid "Nova Radio"
 msgstr ""
 
-#: applet.js:161
+#: applet.js
 msgid "Radio 1"
 msgstr ""
 
-#: applet.js:169
+#: applet.js
 msgid "Radio 1 Rock"
 msgstr ""
 
-#: applet.js:177
+#: applet.js
 msgid "The Voice Radio"
 msgstr ""
 
-#: applet.js:185
+#: applet.js
 msgid "Z-Rock"
 msgstr ""
 
-#: applet.js:197
+#: applet.js
 msgid "TV stations"
 msgstr ""
 
-#: applet.js:201
-msgid "BNT"
-msgstr ""
-
-#: applet.js:205 applet.js:213 applet.js:221 applet.js:229 applet.js:237
-#: applet.js:245 applet.js:253 applet.js:261 applet.js:269 applet.js:277
-#: applet.js:285 applet.js:293
+#: applet.js
 #, javascript-format
 msgid "Watching %s"
 msgstr ""
 
-#: applet.js:209
-msgid "BNT 2"
-msgstr ""
-
-#: applet.js:217
-msgid "BNT HD"
-msgstr ""
-
-#: applet.js:225
-msgid "BNT World"
-msgstr ""
-
-#: applet.js:233
-msgid "bTV"
-msgstr ""
-
-#: applet.js:241
-msgid "BIT"
-msgstr ""
-
-#: applet.js:249
+#: applet.js
 msgid "City"
 msgstr ""
 
-#: applet.js:257
+#: applet.js
 msgid "Kanal 3"
 msgstr ""
 
-#: applet.js:265
-msgid "Nova"
-msgstr ""
-
-#: applet.js:273
-msgid "On Air"
-msgstr ""
-
-#: applet.js:281
+#: applet.js
 msgid "The Voice"
 msgstr ""
 
-#: applet.js:289
+#: applet.js
 msgid "Magic TV"
 msgstr ""
 
-#: applet.js:223
-msgid "Euronews Bulgaria"
-msgstr ""
-
-#: applet.js:300
+#: applet.js
 msgid "Stop"
 msgstr ""
 
-#: applet.js:303
+#: applet.js
 msgid "All Stop"
 msgstr ""
 
@@ -181,5 +136,5 @@ msgstr ""
 msgid ""
 "The most famous bulgarian radio and TV streams. Some of the streams are "
 "available only from bulgaria. To watch a TVs, you'll need to install "
-"rtmpdump and mpv packages."
+"mpv player."
 msgstr ""

@@ -2,6 +2,18 @@
 
 Applet for streaming some of bulgarian's radio and tv streams.
 
+
+Changes 03.05.2026:
+
+Euronews Bulgaria has been replaced with This Is Bulgaria TV.
+Description has been updated.
+Translation files has been updated.
+
+
+Changes 01.05.2026:
+
+Added Euronews Bulgaria.
+
 Changes 03.12.2025:
 
  
