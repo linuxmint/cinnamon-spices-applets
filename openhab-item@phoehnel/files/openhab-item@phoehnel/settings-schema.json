@@ -1,0 +1,205 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["page_server", "page_item", "page_display"],
+    "page_server": {
+      "type": "page",
+      "title": "Server",
+      "sections": ["section_connection"]
+    },
+    "page_item": {
+      "type": "page",
+      "title": "Item",
+      "sections": ["section_item"]
+    },
+    "page_display": {
+      "type": "page",
+      "title": "Display",
+      "sections": ["section_display", "section_tooltip"]
+    },
+    "section_connection": {
+      "type": "section",
+      "title": "OpenHAB Server",
+      "keys": ["serverUrl", "apiToken", "pollInterval"]
+    },
+    "section_item": {
+      "type": "section",
+      "title": "Item Configuration",
+      "keys": ["itemName", "itemLabel", "additionalItems", "scrollDimmerItem", "scrollDimmerStep", "readOnly"]
+    },
+    "section_display": {
+      "type": "section",
+      "title": "Display Options",
+      "keys": ["showIcon", "customIcon", "showLabel", "showState", "panelTextFormat", "doubleClickToggle", "dimmerShowToggle", "colorShowPercent", "colorPreviewWidth", "colorPreviewHeight", "popupAutoClose", "popupAutoCloseDelay"]
+    },
+    "section_tooltip": {
+      "type": "section",
+      "title": "Tooltip (Mouseover)",
+      "keys": ["tooltipShowLabel", "tooltipShowType", "tooltipShowState", "tooltipShowName", "tooltipShowServer"]
+    }
+  },
+
+  "serverUrl": {
+    "type": "entry",
+    "default": "",
+    "description": "OpenHAB Server URL",
+    "tooltip": "URL of your OpenHAB server (e.g. http://openhabianpi:8080). Shared across all applet instances."
+  },
+  "apiToken": {
+    "type": "entry",
+    "default": "",
+    "description": "API Token (optional)",
+    "tooltip": "Bearer token for authentication. Leave empty if not required."
+  },
+  "pollInterval": {
+    "type": "spinbutton",
+    "default": 30,
+    "min": 1,
+    "max": 300,
+    "step": 1,
+    "units": "seconds",
+    "description": "Poll interval"
+  },
+  "itemName": {
+    "type": "entry",
+    "default": "",
+    "description": "Item Name",
+    "tooltip": "The exact OpenHAB item name (e.g. LivingRoom_Light)"
+  },
+  "itemLabel": {
+    "type": "entry",
+    "default": "",
+    "description": "Custom Label (optional)",
+    "tooltip": "Custom label for the panel. If empty, uses the item label from OpenHAB."
+  },
+  "additionalItems": {
+    "type": "entry",
+    "default": "",
+    "description": "Additional items in popup (comma-separated)",
+    "tooltip": "Comma-separated item names to show in the popup menu (e.g. LivingRoom_Dimmer, LivingRoom_Color). Each item gets its own controls."
+  },
+  "scrollDimmerItem": {
+    "type": "entry",
+    "default": "",
+    "description": "Scroll-wheel dimmer item (optional)",
+    "tooltip": "Item name to control via mouse wheel directly on the panel applet (no popup needed). For Dimmer items, this is auto-populated with the main item. Leave empty to disable scroll control."
+  },
+  "scrollDimmerStep": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 25,
+    "step": 1,
+    "units": "%",
+    "description": "Scroll step size"
+  },
+  "showIcon": {
+    "type": "switch",
+    "default": true,
+    "description": "Show icon on panel"
+  },
+  "customIcon": {
+    "type": "iconfilechooser",
+    "default": "",
+    "description": "Custom icon",
+    "tooltip": "Choose a custom icon. Leave empty to use the default icon for the item type.",
+    "dependency": "showIcon",
+    "allow-none": true
+  },
+  "showLabel": {
+    "type": "switch",
+    "default": false,
+    "description": "Show label on panel"
+  },
+  "showState": {
+    "type": "switch",
+    "default": true,
+    "description": "Show state value on panel"
+  },
+  "panelTextFormat": {
+    "type": "entry",
+    "default": "{state}",
+    "description": "Panel text format",
+    "tooltip": "Format string. Available placeholders: {label}, {state}, {name}"
+  },
+  "readOnly": {
+    "type": "switch",
+    "default": false,
+    "description": "Read-only mode (disable all controls)"
+  },
+  "doubleClickToggle": {
+    "type": "switch",
+    "default": true,
+    "description": "Double-click to toggle Switch/Dimmer items"
+  },
+  "dimmerShowToggle": {
+    "type": "switch",
+    "default": false,
+    "description": "Show ON/OFF toggle for Dimmer items"
+  },
+  "colorShowPercent": {
+    "type": "switch",
+    "default": true,
+    "description": "Show brightness % on panel for Color items"
+  },
+  "colorPreviewWidth": {
+    "type": "spinbutton",
+    "default": 16,
+    "min": 8,
+    "max": 64,
+    "step": 2,
+    "units": "px",
+    "description": "Color swatch width on panel",
+    "tooltip": "Width of the color preview swatch shown on the panel for Color items."
+  },
+  "colorPreviewHeight": {
+    "type": "spinbutton",
+    "default": 16,
+    "min": 8,
+    "max": 64,
+    "step": 2,
+    "units": "px",
+    "description": "Color swatch height on panel",
+    "tooltip": "Height of the color preview swatch shown on the panel for Color items."
+  },
+  "popupAutoClose": {
+    "type": "switch",
+    "default": true,
+    "description": "Auto-close popup menu after timeout"
+  },
+  "popupAutoCloseDelay": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 3,
+    "max": 60,
+    "step": 1,
+    "units": "seconds",
+    "description": "Auto-close delay",
+    "dependency": "popupAutoClose"
+  },
+  "tooltipShowLabel": {
+    "type": "switch",
+    "default": true,
+    "description": "Show label"
+  },
+  "tooltipShowType": {
+    "type": "switch",
+    "default": false,
+    "description": "Show item type"
+  },
+  "tooltipShowState": {
+    "type": "switch",
+    "default": true,
+    "description": "Show state value"
+  },
+  "tooltipShowName": {
+    "type": "switch",
+    "default": false,
+    "description": "Show item name"
+  },
+  "tooltipShowServer": {
+    "type": "switch",
+    "default": false,
+    "description": "Show server URL"
+  }
+}
