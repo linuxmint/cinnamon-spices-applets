@@ -338,7 +338,10 @@ SystemState.prototype = {
                 if (parts.length < 3) continue;
                 if (parts[1] === 'ethernet') {
                     s.hasWiredDevice = true;
+                    // 接口名见牌就记（不管连没连上），否则断开后名字丢失就再也打不开了；
+                    // 已连接的优先，没有已连接时留第一个
                     if (parts[2] === 'connected') { s.hasWired = true; s.wiredIface = parts[0]; }
+                    else if (!s.wiredIface) s.wiredIface = parts[0];
                 } else if (parts[1] === 'wifi') {
                     s.wifiDevice = true;
                     if (parts[2] === 'connected') s.hasWifi = true;
