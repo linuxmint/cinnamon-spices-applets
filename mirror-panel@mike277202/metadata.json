@@ -1,0 +1,14 @@
+{
+  "uuid": "mirror-panel@mike277202",
+  "name": "Mirror Panel",
+  "description": "Click to mirror panel 1 applet layout to other monitors",
+  "version": "1.0.0",
+  "cinnamon-version": [
+    "4.x",
+    "5.x",
+    "6.x"
+  ],
+  "max-instances": 1,
+  "icon": "video-display",
+  "url": "https://cinnamon-spices.linuxmint.com/applets"
+}
