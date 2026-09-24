@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Combined Monitor Applet 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-15 21:36+0100\n"
+"POT-Creation-Date: 2026-05-14 22:09+0300\n"
 "PO-Revision-Date: 2025-12-15 21:49+0100\n"
 "Last-Translator: Automated Translator <example@example.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -13,59 +13,109 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # applet.js strings
+#: ../combined-monitor@danipin/applet.js:155
 msgid "Slot 1 (Standard)"
 msgstr "Sleuf 1 (Standaard)"
 
+#: ../combined-monitor@danipin/applet.js:157
 msgid "Slot 2 (Empty)"
 msgstr "Sleuf 2 (Leeg)"
 
+#: ../combined-monitor@danipin/applet.js:159
 msgid "Slot 3 (Empty)"
 msgstr "Sleuf 3 (Leeg)"
 
+#: ../combined-monitor@danipin/applet.js:329
 msgid "Separator"
 msgstr "Scheidingsteken"
 
+#: ../combined-monitor@danipin/applet.js:350
+msgid "Space"
+msgstr "Spatie"
+
+#: ../combined-monitor@danipin/applet.js:352
 msgid "No Separator"
 msgstr "Geen Scheidingsteken"
 
+#: ../combined-monitor@danipin/applet.js:362
 msgid "Symbols"
 msgstr "Symbolen"
 
+#: ../combined-monitor@danipin/applet.js:434
 msgid "CPU"
 msgstr "CPU"
 
+#: ../combined-monitor@danipin/applet.js:438
+#: ../combined-monitor@danipin/applet.js:448
+#: ../combined-monitor@danipin/applet.js:458
+#: ../combined-monitor@danipin/applet.js:468
 msgid "Icon-White"
 msgstr "Icoon-Wit"
 
+#: ../combined-monitor@danipin/applet.js:439
+#: ../combined-monitor@danipin/applet.js:449
+#: ../combined-monitor@danipin/applet.js:459
+#: ../combined-monitor@danipin/applet.js:469
 msgid "Icon-Dark"
 msgstr "Icoon-Donker"
 
+#: ../combined-monitor@danipin/applet.js:440
+#: ../combined-monitor@danipin/applet.js:450
+#: ../combined-monitor@danipin/applet.js:460
+#: ../combined-monitor@danipin/applet.js:470
 msgid "No Symbol (Text Label)"
 msgstr "Geen Symbool (Tekstlabel)"
 
+#: ../combined-monitor@danipin/applet.js:444
 msgid "TEMP"
 msgstr "TEMP"
 
+#: ../combined-monitor@danipin/applet.js:454
 msgid "RAM"
 msgstr "RAM"
 
+#: ../combined-monitor@danipin/applet.js:464
 msgid "SWAP"
 msgstr "SWAP"
 
+#: ../combined-monitor@danipin/applet.js:476
 msgid "Profile Management"
 msgstr "Profielbeheer"
 
+#: ../combined-monitor@danipin/applet.js:489
 msgid "Activate (Load)"
 msgstr "Activeren (Laden)"
 
+#: ../combined-monitor@danipin/applet.js:495
 msgid "Save Current Settings"
 msgstr "Huidige Instellingen Opslaan"
 
+#: ../combined-monitor@danipin/applet.js:514
 msgid "System Monitor"
 msgstr "Systeemmonitor"
 
+#: ../combined-monitor@danipin/applet.js:525
 msgid "Restart Cinnamon"
 msgstr "Cinnamon Herstarten"
+
+#: ../combined-monitor@danipin/applet.js:860
+msgid "Slot is empty - Ready to save"
+msgstr "Sleuf is leeg - Klaar om op te slaan"
+
+#: ../combined-monitor@danipin/applet.js:1325
+#: ../combined-monitor@danipin/applet.js:1423
+msgid "N/A"
+msgstr "N.V.T."
+
+# settings-schema.json strings
+msgid "Decimal places for temperature"
+msgstr "Decimalen voor temperatuur"
+
+msgid "Number of decimal places to display for temperature. Set to 0 for whole numbers."
+msgstr "Aantal decimalen om weer te geven voor temperatuur. Stel in op 0 voor hele getallen."
+
+msgid "decimal places"
+msgstr "decimalen"
 
 msgid "Profile Saved: %s"
 msgstr "Profiel Opgeslagen: %s"
@@ -73,14 +123,13 @@ msgstr "Profiel Opgeslagen: %s"
 msgid "Active: %s"
 msgstr "Actief: %s"
 
-msgid "N/A"
-msgstr "N.V.T."
-
 # settings-schema.json strings (Descriptions, Tooltips, Options)
-
 # Page Titles
 msgid "CPU Temperature"
 msgstr "CPU Temperatuur"
+
+msgid "GPU Temperature"
+msgstr "GPU Temperatuur"
 
 msgid "Profiles"
 msgstr "Profielen"
@@ -182,7 +231,8 @@ msgid "Text for Temperature"
 msgstr "Tekst voor Temperatuur"
 
 msgid "Custom symbol/icon for Temperature. Leave empty for text label."
-msgstr "Aangepast symbool/icoon voor Temperatuur. Leeg laten voor tekstlabel."
+msgstr ""
+"Aangepast symbool/icoon voor Temperatuur. Leeg laten voor tekstlabel."
 
 msgid "Unit of Measurement"
 msgstr "Meeteenheid"
@@ -197,7 +247,7 @@ msgid "Choose whether the temperature should be displayed in Celsius or Fahrenhe
 msgstr "Kies of de temperatuur in Celsius of Fahrenheit moet worden weergegeven. Drempelwaarden moeten dienovereenkomstig worden aangepast."
 
 msgid "The LOW color is used below this value (applies to °C and °F)"
-msgstr "De LAAG-kleur wordt gebruikt onder deze waarde (geldt voor °C en °F)"
+msgstr "De LAAG-kleur wirdt gebruikt onder deze waarde (geldt voor °C en °F)"
 
 msgid "The MED color is used between LOW and MED (applies to °C and °F)"
 msgstr "De MIDDEN-kleur wordt gebruikt tussen LAAG en MIDDEN (geldt voor °C en °F)"
@@ -265,7 +315,9 @@ msgid "Only show SWAP when used"
 msgstr "Toon SWAP alleen wanneer gebruikt"
 
 msgid "If active, it only shows SWAP when usage is greater than 0%."
-msgstr "Indien actief, wordt SWAP alleen getoond wanneer het gebruik groter is dan 0%."
+msgstr ""
+"Indien actief, wordt SWAP alleen getoond wanneer het gebruik groter is "
+"dan 0%."
 
 msgid "Show percentage sign (%) for SWAP"
 msgstr "Toon percentageteken (%) voor SWAP"
@@ -299,7 +351,7 @@ msgid "Position 4 (Right)"
 msgstr "Positie 4 (Rechts)"
 
 msgid "Defines the display position of CPU. The position is automatically swapped with the metric at the same position."
-msgstr "Definieert de weergavepositie van CPU. De positie wordt automatisch verwisseld met de meting op dezelfde positie."
+msgstr "Definieert de weergavepositie van CPU. Die positie wordt automatisch verwisseld met de meting op dezelfde positie."
 
 msgid "TEMP Position"
 msgstr "TEMP Positie"
@@ -327,7 +379,7 @@ msgid "Show percentage sign (%) (Master Switch)"
 msgstr "Toon percentageteken (%) (Hoofdschakelaar)"
 
 msgid "If disabled, only the value (e.g., '45') is displayed for all percentage displays without the percentage sign (e.g., '45%'). Individual switches for CPU/RAM/SWAP must also be active."
-msgstr "Indien uitgeschakeld, wordt alleen de waarde (bijv. '45') weergegeven voor alle percentage-weergaven zonder het percentageteken (bijv. '45%'). Individuele schakelaars voor CPU/RAM/SWAP moeten ook actief zijn."
+msgstr "Indien uitgeschakeld, wordt alleen de waarde (bijv. '45') weergegeven voor alle percentage-weergaven zonder het percentageteken (bijv. '45%'). Individuele schakelaars voor CPU/RAM/SWAP moeten ook actief sein."
 
 # Profiles
 msgid "Profile Message Duration (Seconds)"
@@ -365,3 +417,36 @@ msgstr "Klik op 'Activeren' of 'Opslaan' voor Profiel 3 in het pop-upmenu."
 
 msgid "Saved data for Profile 3 (internal)"
 msgstr "Opgeslagen gegevens voor Profiel 3 (intern)"
+
+# metadata.json strings
+msgid "Combined Monitor"
+msgstr "Gecombineerde Monitor"
+
+msgid "A compact and comprehensive system monitor for Cinnamon. Displays CPU, RAM, and SWAP usage in a single panel element. Configure colors, thresholds, separators, and the order of metrics. Supports displaying text, theme icons, or custom symbols for perfect integration into your panel."
+msgstr "Een compacte en uitgebreide systeemmonitor voor Cinnamon. Toont CPU-, RAM- en SWAP-gebruik in een enkel paneelelement. Configureer kleuren, drempelwaarden, scheidingstekens en de volgorde van metingen. Ondersteunt de weergave van tekst, thema-iconen of aangepaste symbolen voor een perfecte integratie in uw paneel."
+
+# Page Titles
+# GPU
+msgid "Show GPU Temperature"
+msgstr "Toon GPU Temperatuur"
+
+msgid "Enables the display of GPU temperature. **Important:** On many systems, installing the 'lm-sensors' package and running 'sudo sensors-detect' is necessary for this function to work correctly. Integrated GPUs (iGPUs) may report their temperature as part of the CPU temperature."
+msgstr "Schakelt de weergave van de GPU-temperatuur in. **Belangrijk:** Op veel systemen is het noodzakelijk om het pakket 'lm-sensors' te installeren en 'sudo sensors-detect' uit te voeren om deze functie correct te laten werken. Geïntegreerde GPU's (iGPU's) kunnen hun temperatuur rapporteren als onderdeel van de CPU-temperatuur."
+
+msgid "Text for GPU"
+msgstr "Tekst voor GPU"
+
+msgid "Custom symbol/icon for GPU. Leave empty for text label."
+msgstr "Aangepast symbool/icoon voor GPU. Leeg laten voor tekstlabel."
+
+msgid "Decimal places for GPU temperature"
+msgstr "Decimalen voor GPU temperatuur"
+
+msgid "Number of decimal places to display for GPU temperature. Set to 0 for whole numbers."
+msgstr "Aantal decimalen om weer te geven voor GPU temperatuur. Stel in op 0 voor hele getallen."
+
+msgid "Enable color change for GPU"
+msgstr "Schakel kleurverandering voor GPU in"
+
+msgid "Defines the display position of GPU. The position is automatically swapped with the metric at the same position."
+msgstr "Definieert de weergavepositie van GPU. Die positie wordt automatisch verwisseld met de meting op dezelfde positie."
