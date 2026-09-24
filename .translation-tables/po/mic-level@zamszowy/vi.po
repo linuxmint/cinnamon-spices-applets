@@ -1,0 +1,92 @@
+# MICROPHONE LEVEL MONITOR
+# This file is put in the public domain.
+# zamszowy, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mic-level@zamszowy 1.1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 20:46+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:86
+msgid "Click so switch to HFP profile"
+msgstr "Nhấp để chuyển sang hồ sơ HFP"
+
+#. applet.js:88
+msgid "Click so switch to A2DP profile"
+msgstr "Nhấp để chuyển sang hồ sơ A2DP"
+
+#. metadata.json->name
+msgid "Microphone level monitor"
+msgstr "Giám sát mức Microphone"
+
+#. metadata.json->description
+msgid "Monitors microphone level"
+msgstr "Giám sát mức độ âm thanh từ micro"
+
+#. settings-schema.json->page1->title
+msgid "Settings"
+msgstr "Cài đặt"
+
+#. settings-schema.json->section0->title
+msgid "Timings (seconds)"
+msgstr "Thời gian (giây)"
+
+#. settings-schema.json->section1->title
+msgid "Bluetooth devices"
+msgstr "Thiết bị Bluetooth"
+
+#. settings-schema.json->section2->title
+msgid "Keybindings"
+msgstr "Phím tắt"
+
+#. settings-schema.json->measure-time->description
+msgid "For how long to record a sample and report result"
+msgstr "Thời gian ghi mẫu và báo cáo kết quả"
+
+#. settings-schema.json->sleep-time->description
+msgid "How long to wait before recoring another sample"
+msgstr "Thời gian chờ trước khi ghi mẫu tiếp theo"
+
+#. settings-schema.json->enable-bt-only->description
+msgid "Show applet only when BT device is active and has HFP profile enabled"
+msgstr "Chỉ hiển thị applet khi thiết bị BT hoạt động và hồ sơ HFP được bật"
+
+#. settings-schema.json->enable-bt-only->tooltip
+msgid ""
+"This option disables keybinding, since it would interfere with the automatic "
+"detection of HFP profile"
+msgstr ""
+"Tùy chọn này vô hiệu hóa phím tắt vì sẽ ảnh hưởng đến việc phát hiện tự động "
+"hồ sơ HFP"
+
+#. settings-schema.json->enable-click-to-switch-bt-profile->description
+msgid "Enable click on applet to switch between HFP and A2DP profiles"
+msgstr "Cho phép nhấp vào applet để chuyển giữa hồ sơ HFP và A2DP"
+
+#. settings-schema.json->enable-keybind->description
+msgid "Enable keybind to enable/disable the applet"
+msgstr "Bật phím tắt để bật/tắt applet"
+
+#. settings-schema.json->enable-keybind->tooltip
+#. settings-schema.json->keybind-toggle->tooltip
+msgid ""
+"This option will not work if optoon to show applet only when BT device is on "
+"as it would interfere with the automatic detection of HFP profile"
+msgstr ""
+"Tùy chọn này sẽ không hoạt động nếu bật tùy chọn chỉ hiển thị applet khi "
+"thiết bị BT đang bật, vì sẽ ảnh hưởng đến việc phát hiện tự động hồ sơ HFP"
+
+#. settings-schema.json->keybind-toggle->description
+msgid "Set key for toggling enable state of the applet"
+msgstr "Đặt phím để chuyển đổi trạng thái bật/tắt của applet"

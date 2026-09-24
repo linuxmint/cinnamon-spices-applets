@@ -1,0 +1,214 @@
+# XSESSION
+# This file is put in the public domain.
+# claudiux, 2022
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xsession@claudiux 5.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-03 18:30+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:54
+msgid "Applet"
+msgstr "Applet"
+
+#. applet.js:55
+msgid "Desklet"
+msgstr "Desklet"
+
+#. applet.js:56
+msgid "Extension"
+msgstr "Extension"
+
+#. applet.js:57
+msgid "Applets"
+msgstr "Applets"
+
+#. applet.js:58
+msgid "Desklets"
+msgstr "Desklets"
+
+#. applet.js:59
+msgid "Extensions"
+msgstr "Extensions"
+
+#. applet.js:112
+msgid "RELOAD ALL"
+msgstr "TẢI LẠI TẤT CẢ"
+
+#. applet.js:248
+msgid "Middle-click: \n"
+msgstr "Nhấp giữa: \n"
+
+#. applet.js:248 applet.js:327
+msgid "Show .xsession-errors"
+msgstr "Hiển thị .xsession-errors"
+
+#. applet.js:249
+msgid "Ctrl + Middle-click: \n"
+msgstr "Ctrl + Nhấp giữa: \n"
+
+#. applet.js:249 applet.js:341
+msgid "Show latest messages"
+msgstr "Hiển thị tin nhắn mới nhất"
+
+#. applet.js:311 applet.js:553
+#, javascript-format
+msgid "%s latest messages"
+msgstr "%s tin nhắn mới nhất"
+
+#. applet.js:311 applet.js:553
+msgid "min: 10. max: 250."
+msgstr "tối thiểu: 10. tối đa: 250."
+
+#. applet.js:358
+msgid "Restart Cinnamon"
+msgstr "Khởi động lại Cinnamon"
+
+#. applet.js:376
+msgid "Repeat last action"
+msgstr "Lặp lại hành động cuối"
+
+#. applet.js:380
+msgid "--- Reload Spices ---"
+msgstr "--- Tải lại Spices ---"
+
+#. applet.js:386
+msgid "Reload Applet:"
+msgstr "Tải lại Applet:"
+
+#. applet.js:413
+msgid "Reload Desklet:"
+msgstr "Tải lại Desklet:"
+
+#. applet.js:440
+msgid "Reload Extension:"
+msgstr "Tải lại Extension:"
+
+#. applet.js:466
+msgid "Reload Current Theme"
+msgstr "Tải lại Chủ đề Hiện tại"
+
+#. applet.js:480
+msgid "--- Settings for ---"
+msgstr "--- Cài đặt cho ---"
+
+#. applet.js:486
+msgid "Applet:"
+msgstr "Applet:"
+
+#. applet.js:495
+msgid "Desklet:"
+msgstr "Desklet:"
+
+#. applet.js:504
+msgid "Extension:"
+msgstr "Extension:"
+
+#. applet.js:513
+msgid "--- View Code ---"
+msgstr "--- Xem Mã nguồn ---"
+
+#. applet.js:519
+msgid "View Applet Code for:"
+msgstr "Xem Mã nguồn Applet cho:"
+
+#. applet.js:528
+msgid "View Desklet Code for:"
+msgstr "Xem Mã nguồn Desklet cho:"
+
+#. applet.js:537
+msgid "View Extension Code for:"
+msgstr "Xem Mã nguồn Extension cho:"
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xsession"
+
+#. metadata.json->description
+msgid ""
+"Restart, access source code and configure your Spices (Applets, Desklets, "
+"Extensions). View the contents of your .xsession-errors file in real time. "
+"Restart Cinnamon."
+msgstr ""
+"Khởi động lại, truy cập mã nguồn và cấu hình Spices của bạn (Applets, "
+"Desklets, Extensions). Xem nội dung tập tin .xsession-errors của bạn theo "
+"thời gian thực. Khởi động lại Cinnamon."
+
+#. settings-schema.json->section1->description
+msgid "Icon size"
+msgstr "Kích thước biểu tượng"
+
+#. settings-schema.json->icon_size->description
+msgid "Size (in pixels) of menu icons"
+msgstr "Kích thước (tính bằng pixel) của biểu tượng menu"
+
+#. settings-schema.json->icon_size->options
+msgid "16"
+msgstr "16"
+
+#. settings-schema.json->icon_size->options
+msgid "22"
+msgstr "22"
+
+#. settings-schema.json->icon_size->options
+msgid "24"
+msgstr "24"
+
+#. settings-schema.json->icon_size->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->icon_size->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->icon_size->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->icon_size->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->icon_size->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->section2->description
+msgid "RELOAD ALL option"
+msgstr "Tùy chọn TẢI LẠI TẤT CẢ"
+
+#. settings-schema.json->show_reload_all->description
+msgid "Show the RELOAD ALL option in submenus"
+msgstr "Hiển thị tùy chọn TẢI LẠI TẤT CẢ trong menu phụ"
+
+#. settings-schema.json->show_reload_all->tooltip
+msgid "Caution! Reloading all spices of a given type may lead to errors."
+msgstr "Cảnh báo! Tải lại tất cả spices của một loại nhất định có thể dẫn đến lỗi."
+
+#. settings-schema.json->section3->description
+msgid "Latest messages"
+msgstr "Tin nhắn mới nhất"
+
+#. settings-schema.json->number_latest->description
+msgid "Number of latest messages to show"
+msgstr "Số lượng tin nhắn mới nhất để hiển thị"
+
+#. settings-schema.json->number_latest->tooltip
+msgid "(Including empty lines.)"
+msgstr "(Bao gồm cả các dòng trống.)"
+
+#. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
+msgid "-d"
+msgstr "-d"

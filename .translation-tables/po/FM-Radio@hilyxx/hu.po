@@ -1,0 +1,301 @@
+# FM RADIO
+# This file is put in the public domain.
+# hilyxx, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FM-Radio@hilyxx 1.3.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-09-09 11:13+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#. applet.js:68 applet.js:140 applet.js:172 applet.js:211 applet.js:214
+#. applet.js:220 applet.js:242 applet.js:244 applet.js:249 applet.js:489
+#. applet.js:541 applet.js:557 applet.js:583 applet.js:609 applet.js:630
+msgid "FM Radio"
+msgstr "FM Rádió"
+
+#. applet.js:81
+msgid "Reload applet"
+msgstr "Kisalkalmazás ujratöltése"
+
+#. applet.js:140
+msgid "Please select a station."
+msgstr "Kérjük, válasszon egy állomást."
+
+#. applet.js:169
+msgid "station added successfully!"
+msgstr "Az állomás sikeresen hozzáadva!"
+
+#. applet.js:170
+msgid "stations added successfully!"
+msgstr "Az állomások sikeresen hozzáadva!"
+
+#. applet.js:185
+msgid "Music"
+msgstr "Zene"
+
+#. applet.js:211
+msgid "Stations successfully saved to:\n"
+msgstr "Az állomások mentése sikeresen megtörtént ide:\n"
+
+#. applet.js:214
+msgid "Error saving backup."
+msgstr "Hiba a biztonsági mentés mentése közben."
+
+#. applet.js:220
+msgid "Please select a backup file to import first."
+msgstr ""
+"Kérjük, először válasszon ki egy biztonsági mentési fájlt az importáláshoz."
+
+#. applet.js:242
+msgid "Stations successfully restored!"
+msgstr "Az állomások sikeresen visszaállítva!"
+
+#. applet.js:244
+msgid "Invalid JSON file format."
+msgstr "Érvénytelen JSON fájlformátum."
+
+#. applet.js:249
+msgid "Error reading the backup file."
+msgstr "Hiba a biztonsági mentés fájl olvasása közben."
+
+#. applet.js:373
+msgid "All stations"
+msgstr "Minden állomás"
+
+#. applet.js:386
+msgid "Reconnecting..."
+msgstr "Újracsatlakozás..."
+
+#. applet.js:403
+msgid ""
+"Multimedia codecs are missing.\n"
+"\n"
+"Please install GStreamer plugins (good, base, bad, ugly) for your "
+"distribution to use the radio."
+msgstr ""
+"Hiányoznak a multimédiás kodekek.\n"
+"\n"
+"Kérjük, telepítse a GStreamer beépülő modulokat (jó, alap, rossz, csúnya) a "
+"rádió használatához."
+
+#. applet.js:404
+msgid "FM Radio Error"
+msgstr "FM Rádió hiba"
+
+#. applet.js:407
+msgid "Missing Codecs"
+msgstr "Hiányzó kodekek"
+
+#. applet.js:429 applet.js:480
+msgid "Waiting..."
+msgstr "Várakozik..."
+
+#. applet.js:489
+msgid "Please start a radio station first to record it."
+msgstr "Először indítson el egy rádióállomást a felvételhez."
+
+#. applet.js:541
+msgid "Cannot record: This station has no valid URL."
+msgstr "Nem lehet rögzíteni: Ennek az állomásnak nincs érvényes URL-címe."
+
+#. applet.js:557
+msgid "Recording started: "
+msgstr "Felvétel elkezdődött: "
+
+#. applet.js:583
+msgid "Error starting recording."
+msgstr "Hiba a felvétel indításakor."
+
+#. applet.js:609
+msgid "Recording finished and saved to the /FM-Radio folder."
+msgstr "A felvétel befejeződött és mentésre került a /FM-Radio mappába."
+
+#. channels.js:39
+msgid "Error"
+msgstr "Hiba"
+
+#. settings-schema.json->msg_empty_search->description
+#. search.js:19
+msgid "Please enter a radio station name to search for."
+msgstr "Kérjük, adjon meg egy rádióállomás nevét a kereséshez."
+
+#. search.js:43
+msgid "Unknown Station"
+msgstr "Ismeretlen állomás"
+
+#. metadata.json->description
+msgid "A stupidly simple radio player for Cinnamon"
+msgstr "Egy ostobán egyszerű rádiólejátszó a Cinnamonhoz"
+
+#. settings-schema.json->page_stations->title
+msgid "Radios"
+msgstr "Rádiók"
+
+#. settings-schema.json->tips->title
+#. settings-schema.json->tips-section->title
+msgid "Tips"
+msgstr "Tippek"
+
+#. settings-schema.json->page_settings->title
+msgid "Settings"
+msgstr "Beállítások"
+
+#. settings-schema.json->section_search->title
+msgid "Radio station search (Radio-Browser API)"
+msgstr "Rádióállomás-keresés (Radio-Browser API)"
+
+#. settings-schema.json->section_list->title
+msgid "Station management"
+msgstr "Állomáskezelés"
+
+#. settings-schema.json->section_settings->title
+msgid "Recording"
+msgstr "Felvétel"
+
+#. settings-schema.json->section_shortcuts->title
+msgid "Keyboard Shortcuts"
+msgstr "Billentyűparancsok"
+
+#. settings-schema.json->section_backup->title
+msgid "Backup and Restore radio stations"
+msgstr "Rádióállomások biztonsági mentése és visszaállítása"
+
+#. settings-schema.json->search_keyword->description
+msgid "Radio station name to search for"
+msgstr "Rádióállomás neve a kereséshez"
+
+#. settings-schema.json->search_button->description
+msgid "Launch search"
+msgstr "Keresés indítása"
+
+#. settings-schema.json->clear_button->description
+msgid "Clear results"
+msgstr "Eredmények törlése"
+
+#. settings-schema.json->msg_no_results->description
+msgid "No stations found for this search."
+msgstr "Nem található állomás ehhez a kereséshez."
+
+#. settings-schema.json->search_results_list->description
+msgid "Search results"
+msgstr "Keresési eredmények"
+
+#. settings-schema.json->search_results_list->columns->title
+msgid "➕"
+msgstr "➕"
+
+#. settings-schema.json->search_results_list->columns->title
+msgid "📻 Station"
+msgstr "📻 Állomás"
+
+#. settings-schema.json->search_results_list->columns->title
+msgid "🎶 Quality"
+msgstr "🎶 Minőség"
+
+#. settings-schema.json->search_results_list->columns->title
+msgid "🌐 Stream URL"
+msgstr "🌐 Stream URL"
+
+#. settings-schema.json->add_selected_button->description
+msgid "Add selected stations to my list"
+msgstr "Kiválasztott állomások hozzáadása a listámhoz"
+
+#. settings-schema.json->custom_stations->description
+msgid "Custom radio stations"
+msgstr "Egyéni rádióállomások"
+
+#. settings-schema.json->custom_stations->columns->title
+msgid "Station name"
+msgstr "Állomás neve"
+
+#. settings-schema.json->custom_stations->columns->title
+msgid "Stream URL"
+msgstr "Stream URL"
+
+#. settings-schema.json->custom_stations->columns->title
+msgid "Image path (e.g., /home/user/logo.png)"
+msgstr "Kép elérési útja (pl. /home/user/logo.png)"
+
+#. settings-schema.json->info1->description
+msgid ""
+"\n"
+"To create a custom image for a radio station:\n"
+"\n"
+"• Create an image of any format (png, jpeg, or svg) with a square 'cover' "
+"style size (e.g., 300x300).\n"
+"\n"
+"• Station images are stored by default in the applet's image folder, and the "
+"path is /images/yourcover.png. For images located in another folder, apply "
+"the same process and adapt the path accordingly.\n"
+"\n"
+"• The easiest way is to copy the desired image and paste it into the "
+"provided field; this will directly paste the image path.\n"
+msgstr ""
+"\n"
+"Egyéni kép létrehozása egy rádióállomáshoz:\n"
+"\n"
+"• Hozzon létre egy képet bármilyen formátumban (png, jpeg vagy svg) négyzet "
+"alakú „borító” stílusú mérettel (pl. 300x300).\n"
+"\n"
+"• Az állomások képei alapértelmezés szerint az applet képmappájában "
+"tárolódnak, az elérési út /images/yourcover.png. Más mappában található "
+"képek esetén alkalmazza ugyanezt a folyamatot, és ennek megfelelően "
+"módosítsa az elérési utat.\n"
+"\n"
+"• A legegyszerűbb módja, ha a kívánt képet másolja, és beilleszti a megadott "
+"mezőbe; ez közvetlenül beilleszti a kép elérési útját.\n"
+
+#. settings-schema.json->info2->description
+msgid ""
+"\n"
+"To record a live stream, simply click on the cover icon.\n"
+"Click it again to stop the recording.\n"
+msgstr ""
+"\n"
+"Élő közvetítés rögzítéséhez egyszerűen kattintson a borító ikonra.\n"
+"Kattintson rá újra a felvétel leállításához.\n"
+
+#. settings-schema.json->show_recording_notifications->description
+msgid "Show a notification at the start and end of a recording"
+msgstr "Értesítés megjelenítése a felvétel elején és végén"
+
+#. settings-schema.json->recording_folder->description
+msgid "Custom recording folder"
+msgstr "Egyéni felvételi mappa"
+
+#. settings-schema.json->recording_folder->tooltip
+msgid "Select the directory where your audio recordings will be saved."
+msgstr ""
+"Válassza ki azt a könyvtárat, ahová a hangfelvételeit menteni szeretné."
+
+#. settings-schema.json->reset_folder_button->description
+msgid "Reset to default Music folder"
+msgstr "Visszaállítás az alapértelmezett Zene mappára"
+
+#. settings-schema.json->key_play_pause->description
+msgid "Play / Stop"
+msgstr "Lejátszás / Leállítás"
+
+#. settings-schema.json->export_button->description
+msgid "Export stations"
+msgstr "Állomások exportálása"
+
+#. settings-schema.json->import_file->description
+msgid "Select a Backup file (.json) to restore"
+msgstr "Válasszon ki egy biztonsági mentési fájlt (.json) a visszaállításhoz"
+
+#. settings-schema.json->import_button->description
+msgid "Restore stations from the selected file"
+msgstr "Állomások visszaállítása a kiválasztott fájlból"

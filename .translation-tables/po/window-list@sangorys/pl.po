@@ -1,0 +1,182 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2020-10-29 20:48+0100\n"
+"Last-Translator: Lars Mueller <cobinja@gmail.com>\n"
+"Language-Team: krzysztof.blachowicz@gmail.com\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+#: applet.js:1273
+msgid "Window information"
+msgstr ""
+
+#: applet.js:1309
+#, fuzzy
+msgid "Move to the other monitor"
+msgstr "Przenieś na inny monitor"
+
+#: applet.js:1319
+#, fuzzy, javascript-format
+msgid "Move to monitor %d"
+msgstr "Przenieś na inny monitor"
+
+#: applet.js:1330
+msgid "Only on this workspace"
+msgstr "Widoczne tylko na tym obszarze roboczym"
+
+#: applet.js:1336
+msgid "Visible on all workspaces"
+msgstr "Widoczne na wszystkich obszarach roboczych"
+
+#: applet.js:1342
+msgid "Move to another workspace"
+msgstr "Przenieś na inny obszar roboczy"
+
+#: applet.js:1365
+msgid "Preferences"
+msgstr "Ustawienia"
+
+#: applet.js:1368
+msgid "About..."
+msgstr "O programie..."
+
+#: applet.js:1372
+msgid "Configure..."
+msgstr "Konfiguruj..."
+
+#: applet.js:1376
+#, fuzzy
+msgid "Remove 'Window list'"
+msgstr "Usuń '%s'"
+
+#: applet.js:1383
+msgid "Close all"
+msgstr "Zamknij wszystkie"
+
+#: applet.js:1392
+msgid "Close others"
+msgstr "Zamknij inne"
+
+#: applet.js:1406
+msgid "Restore to full opacity"
+msgstr ""
+
+#: applet.js:1414
+msgid "Restore"
+msgstr "Przywróć"
+
+#: applet.js:1419
+msgid "Minimize"
+msgstr "Minimalizuj"
+
+#: applet.js:1427
+msgid "Unmaximize"
+msgstr "Cofnij maksymalizację"
+
+#: applet.js:1432
+#, fuzzy
+msgid "Maximize"
+msgstr "Cofnij maksymalizację"
+
+#: applet.js:1440
+msgid "Close"
+msgstr "Zamknij"
+
+#. metadata.json->name
+msgid "My perfect window-list applet"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Based on the original Cinnamon window list, the window order is memorized "
+"and restored. The next huge feature is to also group window like Google "
+"Chrome groups tab. This is my definition of a perfect window list applet"
+msgstr ""
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->show-all-workspaces->description
+#, fuzzy
+msgid "Show windows from all workspaces"
+msgstr "Widoczne na wszystkich obszarach roboczych"
+
+#. settings-schema.json->enable-alerts->description
+msgid ""
+"Show an alert in the window list when a window from another workspace "
+"requires attention"
+msgstr ""
+
+#. settings-schema.json->enable-scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr ""
+
+#. settings-schema.json->reverse-scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr ""
+
+#. settings-schema.json->left-click-minimize->description
+msgid "Left click to minimize window"
+msgstr ""
+
+#. settings-schema.json->middle-click-close->description
+msgid "Middle click to close window"
+msgstr ""
+
+#. settings-schema.json->section2->description
+#, fuzzy
+msgid "Display"
+msgstr "Wyświetl ilość okien"
+
+#. settings-schema.json->panel-show-label->description
+msgid "Show window names in the panel"
+msgstr ""
+
+#. settings-schema.json->button-width->units
+msgid "pixels"
+msgstr "piksele"
+
+#. settings-schema.json->button-width->description
+msgid "Window button width in the panel"
+msgstr ""
+
+#. settings-schema.json->buttons-use-entire-space->description
+msgid ""
+"Window buttons can have different sizes and use the entire space available"
+msgstr ""
+
+#. settings-schema.json->window-preview->description
+msgid "Show window thumbnails on hover"
+msgstr ""
+
+#. settings-schema.json->window-preview-show-label->description
+msgid "Show title above thumbnail"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->description
+msgid "Thumbnail size"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Small"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Medium"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Large"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Largest"
+msgstr ""

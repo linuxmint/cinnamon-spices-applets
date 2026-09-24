@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-14 12:38+0100\n"
+"PO-Revision-Date: 2024-02-14 12:40+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:70
+msgid "sct is now at"
+msgstr "sct ist jetzt bei"
+
+#: connectSct.js:14
+msgid "sct not found"
+msgstr "sct wurde nicht gefunden"
+
+#: connectSct.js:15
+msgid "Please install sct to set the color temperature with this applet."
+msgstr ""
+"Bitte installiere sct um mit diesem Applet die Farbtemperatur zu ändern."
+
+#. metadata.json->name
+msgid "SCT Toggle"
+msgstr "SCT Toggle"
+
+#. metadata.json->description
+msgid ""
+"Toggle screen temperatures with sct. Set up to 7 custom color temperatures "
+"and toggle through by clicking on the applet"
+msgstr ""
+"Ändere die Farbtemperatur des Bildschirms mit sct. Konfiguriere bis zu 7 "
+"Farbtemperaturen und wechsle zwischen Ihnen mit einem Klick auf das Applet"
+
+#. settings-schema.json->head->description
+msgid "Color Temperatur Steps"
+msgstr "Farbtemperaturschritte"
+
+#. settings-schema.json->colorStep1->description
+msgid "Color temperature at step 1"
+msgstr "Farbtemperatur an Schritt 1"
+
+#. settings-schema.json->colorStep1->tooltip
+#. settings-schema.json->colorStep2->tooltip
+msgid ""
+"Add a value between 1000 and 10000, where 1000 is red, 6500 is daylight and "
+"10000 is blue."
+msgstr ""
+"Füge ein Wert zwischen 1000 und 10000 ein, wobei 1000 rot, 6500 Tageslicht "
+"und 10000 blau ist."
+
+#. settings-schema.json->colorStep2->description
+msgid "Color temperature at step 2"
+msgstr "Farbtemperatur an Schritt 2"
+
+#. settings-schema.json->colorStep3->description
+msgid "Color temperature at step 3"
+msgstr "Farbtemperatur an Schritt 3"
+
+#. settings-schema.json->colorStep3->tooltip
+#. settings-schema.json->colorStep4->tooltip
+#. settings-schema.json->colorStep5->tooltip
+#. settings-schema.json->colorStep6->tooltip
+#. settings-schema.json->colorStep7->tooltip
+msgid "Optional. Add another value between 1000 and 10000, or leave empty."
+msgstr ""
+"Optional. Setze einen Wert zwischen 1000 und 10000 ein, oder lasse es leer."
+
+#. settings-schema.json->colorStep4->description
+msgid "Color temperature at step 4"
+msgstr "Farbtemperatur an Schritt 4"
+
+#. settings-schema.json->colorStep5->description
+msgid "Color temperature at step 5"
+msgstr "Farbtemperatur an Schritt 5"
+
+#. settings-schema.json->colorStep6->description
+msgid "Color temperature at step 6"
+msgstr "Farbtemperatur an Schritt 6"
+
+#. settings-schema.json->colorStep7->description
+msgid "Color temperature at step 7"
+msgstr "Farbtemperatur an Schritt 7"
+
+#. settings-schema.json->head2->description
+msgid "Applet Icon"
+msgstr "Applet Icon"
+
+#. settings-schema.json->iconName->description
+msgid "The icon to use in the panel"
+msgstr "Das Icon in dem Panel"
+
+#. settings-schema.json->iconName->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box."
+msgstr ""
+"Wähle eine Datei, oder du kannst einen Icon Namen in das Eingabefeld tippen."
+
+#. settings-schema.json->resetIconName->description
+msgid "Reset icon name"
+msgstr "Das Icon auf den Standard zurücksetzen"

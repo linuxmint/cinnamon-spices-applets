@@ -1,0 +1,167 @@
+# MAILNAG
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# hyOzd, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-26 12:36-0500\n"
+"PO-Revision-Date: 2017-10-19 21:09+0300\n"
+"Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
+"Language-Team: \n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:169
+msgid "just now"
+msgstr "Току-що"
+
+#. applet.js:177
+msgid " minutes ago"
+msgstr "минути по-рано"
+
+#. applet.js:185
+msgid " hours ago"
+msgstr "часа по-рано "
+
+#. applet.js:192
+msgid "yesterday"
+msgstr "вчера"
+
+#. applet.js:196
+msgid " days ago"
+msgstr "дни по-рано"
+
+#. applet.js:200
+msgid " weeks ago"
+msgstr "седмици по-рано"
+
+#. applet.js:285
+msgid "Configure Mailnag"
+msgstr "Конфигуриране на Mailnag"
+
+#. applet.js:370
+msgid "Mailnag daemon stopped working!"
+msgstr "Mailnag демона спря!"
+
+#. applet.js:374
+msgid "Mailnag daemon isn't running! Do you have it installed?"
+msgstr "Mailnag не работи! Инсталирахте ли го?"
+
+#. applet.js:607
+#, javascript-format
+msgid "You have %d new mails!"
+msgstr "Имате %d нови писма!"
+
+#. applet.js:608 applet.js:653
+msgid "Mark All Read"
+msgstr "Маркирай всички като прочетени"
+
+#. applet.js:616
+msgid "You have new mail!"
+msgstr "Имате поща!"
+
+#. applet.js:618
+msgid "Mark Read"
+msgstr "Маркирай като прочетено"
+
+#. applet.js:701 applet.js:763
+msgid "No unread mails."
+msgstr "Няма нови писма."
+
+#. applet.js:739
+msgid "Mailnag daemon is not running!"
+msgstr "Mailnag демона не работи!"
+
+#. applet.js:752
+#, javascript-format
+msgid "You have a mail from %s!"
+msgstr "Имате писмо от %s!"
+
+#. applet.js:758
+#, javascript-format
+msgid "You have %d unread mails!"
+msgstr "Имате %d непрочетени писма!"
+
+#. applet.js:774
+msgid "Click to see error!"
+msgstr "Натиснете, за да видите грешката!"
+
+#. applet.js:775
+msgid "Error: "
+msgstr "Грешка:"
+
+#. metadata.json->name
+msgid "Mailnag"
+msgstr "Mailnag"
+
+#. metadata.json->description
+msgid "Mailnag mail notifier applet"
+msgstr "Аплет за известия на Mailnag"
+
+#. settings-schema.json->notifications->description
+msgid "Show notifications"
+msgstr "Показвай известия"
+
+#. settings-schema.json->notifications->tooltip
+msgid ""
+"Enables display of mail arrived notifications by applet. Make sure you "
+"disable mailnag notification plugin, otherwise you will have duplicates."
+msgstr ""
+"Включва аплет за известяване при пристигане на ново писмо. Убедете се че "
+"Mailnag плъгина е изключен, в противен случай ще има дублиране."
+
+#. settings-schema.json->launch_client_on_click->description
+msgid "Launch mail client on click"
+msgstr "Стартиране на пощенски клиент при натискане"
+
+#. settings-schema.json->launch_client_on_click->tooltip
+msgid "Mail client is launched when clicked on a menu item."
+msgstr "Пощенския клиент ще стартира, когато натиснате на елемента в менюто."
+
+#. settings-schema.json->middle_click->description
+msgid "On middle click:"
+msgstr "При натискане на колелцето:"
+
+#. settings-schema.json->middle_click->tooltip
+msgid "What to do when middle clicked on applet icon"
+msgstr "Какво да се случи при клик с колелцето върху иконката на аплета"
+
+#. settings-schema.json->middle_click->options
+msgid "Mark all read"
+msgstr "Маркирай всички като прочетени"
+
+#. settings-schema.json->middle_click->options
+msgid "Launch mail client"
+msgstr "Стартирай пощенския клиент"
+
+#. settings-schema.json->middle_click->options
+msgid "Do nothing"
+msgstr "Не прави нищо"
+
+#. settings-schema.json->max_length->description
+msgid "Max sender / subject display length"
+msgstr ""
+
+#. settings-schema.json->max_length->tooltip
+msgid "Sender or subject lines longer than this will be cropped"
+msgstr ""
+
+#. settings-schema.json->client->description
+msgid "Mail client to launch (or webpage)"
+msgstr "Пощенски клент за стартиране (или страница)"
+
+#. settings-schema.json->client->tooltip
+msgid ""
+"Enter the command to launch your mail client here. You can also enter a web "
+"address that starts with 'http'."
+msgstr ""
+"Въведете команда за стартиране на пощенски клиент. Също така може да "
+"въведете мрежов адрес, започващ с 'http'"

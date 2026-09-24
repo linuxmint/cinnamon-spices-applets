@@ -1,0 +1,132 @@
+# Bulgarian translation for qredshift@quintao.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Peyu Yovev <spacy00001@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-01-16 03:29-0100\n"
+"PO-Revision-Date: 2020-04-18 10:45+0300\n"
+"Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
+"Language-Team: \n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:305
+msgid "Requires Redshift: yay -S redshift-minimal"
+msgstr ""
+
+#: applet.js:460 applet.js:489
+msgid "should be removed."
+msgstr ""
+
+#: applet.js:482
+msgid "should be replaced by redshift-minimal"
+msgstr ""
+
+#: applet.js:976 applet.js:1001
+msgid "Transition to day"
+msgstr ""
+
+#: applet.js:977 applet.js:1002
+msgid "Transition to night"
+msgstr ""
+
+#: applet.js:978 applet.js:1003
+msgid "Night"
+msgstr ""
+
+#: applet.js:979 applet.js:1004
+msgid "Day"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"It makes the color of your computer's display adapt to the time of day, warm "
+"at night and like sunlight during the day."
+msgstr ""
+
+#. settings-schema.json->enabled->tooltip
+msgid ""
+"Automatically disabled under Wayland due to redshift not being yet supported "
+"by Wayland"
+msgstr ""
+
+#. settings-schema.json->enableAtStartup->description
+msgid "Reactivate QRedshift as soon as Cinnamon starts up"
+msgstr ""
+
+#. settings-schema.json->enableAtStartup->tooltip
+msgid ""
+"Won't work under Wayland due to redshift not being yet supported by Wayland"
+msgstr ""
+
+#. settings-schema.json->autoUpdateInterval->units
+msgid "Seconds"
+msgstr ""
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr ""
+
+#. settings-schema.json->keyBrightnessUp->description
+msgid "Increase brightness level"
+msgstr ""
+
+#. settings-schema.json->keyBrightnessDown->description
+msgid "Decrease brightness level"
+msgstr ""
+
+#. settings-schema.json->keyTempUp->description
+msgid "Increase temperature level"
+msgstr ""
+
+#. settings-schema.json->keyTempDown->description
+msgid "Decrease temperature level"
+msgstr ""
+
+#. settings-schema.json->keyGammaUp->description
+msgid "Increase gamma level"
+msgstr ""
+
+#. settings-schema.json->keyGammaDown->description
+msgid "Decrease gamma level"
+msgstr ""
+
+#. settings-schema.json->smoothTransition->description
+msgid "Smooth transition between day and night"
+msgstr ""
+
+#. settings-schema.json->transitionDuration->units
+msgid "Minutes"
+msgstr ""
+
+#. settings-schema.json->transitionDuration->description
+msgid "Transition Duration"
+msgstr ""
+
+#. settings-schema.json->manualNightTime->description
+msgid "Use Manual Night Time"
+msgstr ""
+
+#. settings-schema.json->nightTimeStart->description
+msgid "Choose Start Time"
+msgstr ""
+
+#. settings-schema.json->nightTimeEnd->description
+msgid "Choose End Time"
+msgstr ""
+
+#. settings-schema.json->textHelp->description
+msgid ""
+"When update to a new version make sure you reset the configs to default by "
+"deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+"You will lost all your configs."
+msgstr ""

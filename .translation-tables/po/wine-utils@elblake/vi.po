@@ -1,0 +1,270 @@
+# WINE UTILS
+# This file is put in the public domain.
+# elblake, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: wine-utils@elblake 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-03 08:25-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:50
+msgid "Config"
+msgstr "Cấu hình"
+
+#. applet.js:51
+msgid "Control Panel"
+msgstr "Bảng điều khiển"
+
+#. applet.js:52
+msgid "Files"
+msgstr "Tập tin"
+
+#. applet.js:53
+msgid "Files (winefile)"
+msgstr "Tập tin (winefile)"
+
+#. applet.js:54
+msgid "Registry Editor"
+msgstr "Trình chỉnh sửa Registry"
+
+#. applet.js:55
+msgid "Task Manager"
+msgstr "Trình quản lý Tác vụ"
+
+#. applet.js:58
+msgid "Bottles"
+msgstr "Bottles"
+
+#. applet.js:59
+msgid "Lutris"
+msgstr "Lutris"
+
+#. applet.js:60
+msgid "PlayOnLinux"
+msgstr "PlayOnLinux"
+
+#. applet.js:61
+msgid "Q4Wine"
+msgstr "Q4Wine"
+
+#. metadata.json->name
+#. applet.js:149
+msgid "Wine Utils"
+msgstr "Tiện ích Wine"
+
+#. applet.js:326
+msgid "Prefixes"
+msgstr "Prefixes"
+
+#. applet.js:335
+msgid "Run Command..."
+msgstr "Chạy Lệnh..."
+
+#. applet.js:343
+msgid "Command Prompt"
+msgstr "Command Prompt"
+
+#. applet.js:349
+msgid "Configuration"
+msgstr "Cấu hình"
+
+#. applet.js:354
+msgid "Programs"
+msgstr "Chương trình"
+
+#. applet.js:483
+msgid "Default"
+msgstr "Mặc định"
+
+#. metadata.json->description
+msgid "Easy access to Wine's utilities"
+msgstr "Truy cập dễ dàng vào các tiện ích của Wine"
+
+#. settings-schema.json->head0->description
+msgid "Settings for wine-utils@elblake"
+msgstr "Cài đặt cho wine-utils@elblake"
+
+#. settings-schema.json->head1->description
+msgid "General"
+msgstr "Chung"
+
+#. settings-schema.json->show-launchers->description
+msgid "Show Launchers"
+msgstr "Hiển thị Trình khởi chạy"
+
+#. settings-schema.json->show-launchers->tooltip
+msgid "Show some of the Wine launchers if they are installed."
+msgstr "Hiển thị một số trình khởi chạy Wine nếu chúng được cài đặt."
+
+#. settings-schema.json->show-run-command->description
+msgid "Show 'Run Command...'"
+msgstr "Hiển thị 'Chạy Lệnh...'"
+
+#. settings-schema.json->show-run-command->tooltip
+msgid "For running a Wine command."
+msgstr "Để chạy một lệnh Wine."
+
+#. settings-schema.json->show-cmd->description
+msgid "Show 'Command Prompt'"
+msgstr "Hiển thị 'Command Prompt'"
+
+#. settings-schema.json->show-cmd->tooltip
+msgid "For easy access to the Wine command prompt."
+msgstr "Để truy cập dễ dàng vào command prompt của Wine."
+
+#. settings-schema.json->show-admin-programs-menu->description
+msgid "Show the Configuration menu"
+msgstr "Hiển thị menu Cấu hình"
+
+#. settings-schema.json->show-admin-programs-menu->tooltip
+msgid ""
+"Show a menu of useful Wine utilities that typically need to be accessed by "
+"CLI."
+msgstr ""
+"Hiển thị một menu các tiện ích Wine hữu ích mà thường cần được truy cập bằng "
+"CLI."
+
+#. settings-schema.json->show-programs-menu->description
+msgid "Show the Programs menu"
+msgstr "Hiển thị menu Chương trình"
+
+#. settings-schema.json->show-programs-menu->tooltip
+msgid ""
+"Show a menu to access programs directly from Wine's installed program "
+"shortcuts."
+msgstr ""
+"Hiển thị một menu để truy cập chương trình trực tiếp từ các phím tắt chương "
+"trình đã cài đặt của Wine."
+
+#. settings-schema.json->use-dark-theme-icons->description
+msgid "Use dark theme icons when available."
+msgstr "Sử dụng biểu tượng chủ đề tối khi có sẵn."
+
+#. settings-schema.json->icon-style->description
+msgid "Panel Icon Style"
+msgstr "Kiểu Biểu tượng Panel"
+
+#. settings-schema.json->icon-style->options
+msgid "default"
+msgstr "mặc định"
+
+#. settings-schema.json->icon-style->options
+msgid "style 1"
+msgstr "kiểu 1"
+
+#. settings-schema.json->icon-style->options
+msgid "style 2"
+msgstr "kiểu 2"
+
+#. settings-schema.json->icon-style->options
+msgid "style 3"
+msgstr "kiểu 3"
+
+#. settings-schema.json->specify-custom-icon->description
+msgid "Use custom panel icon"
+msgstr "Sử dụng biểu tượng panel tùy chỉnh"
+
+#. settings-schema.json->specify-custom-icon->tooltip
+msgid "Use a custom icon for the applet."
+msgstr "Sử dụng biểu tượng tùy chỉnh cho applet."
+
+#. settings-schema.json->custom-icon->description
+msgid "Custom icon"
+msgstr "Biểu tượng tùy chỉnh"
+
+#. settings-schema.json->head2->description
+msgid "Advanced"
+msgstr "Nâng cao"
+
+#. settings-schema.json->prefix-file-list->description
+msgid "Path to prefix list"
+msgstr "Đường dẫn đến danh sách prefix"
+
+#. settings-schema.json->prefix-file-list->tooltip
+msgid ""
+"Select a text file, each line in the file should contain the full path of a "
+"wine prefix directory. You can add a name followed by a colon at the "
+"beginning of each line to give that prefix path a label."
+msgstr ""
+"Chọn một tập tin văn bản, mỗi dòng trong tập tin nên chứa đường dẫn đầy đủ "
+"của một thư mục prefix wine. Bạn có thể thêm một tên theo sau là dấu hai "
+"chấm ở đầu mỗi dòng để gán nhãn cho đường dẫn prefix đó."
+
+#. settings-schema.json->specify-wine-exec->description
+msgid "Specify the wine executable"
+msgstr "Chỉ định tệp thực thi wine"
+
+#. settings-schema.json->specify-wine-exec->tooltip
+msgid "Specify the wine executable, by default 'wine' is used."
+msgstr "Chỉ định tệp thực thi wine, mặc định 'wine' được sử dụng."
+
+#. settings-schema.json->wine-exec->description
+msgid "Wine executable"
+msgstr "Tệp thực thi Wine"
+
+#. settings-schema.json->wine-exec->tooltip
+msgid "The wine executable to use."
+msgstr "Tệp thực thi wine để sử dụng."
+
+#. settings-schema.json->wineconsole-exec->description
+msgid "Wine console executable"
+msgstr "Tệp thực thi Wine console"
+
+#. settings-schema.json->wineconsole-exec->tooltip
+msgid "The wine console executable to use."
+msgstr "Tệp thực thi wine console để sử dụng."
+
+#. scripts/run-wine.sh:6
+msgid "Error running program:"
+msgstr "Lỗi chạy chương trình:"
+
+#. scripts/run-wine.sh:7 scripts/run-wine-start.sh:7
+msgid "Run Program Error"
+msgstr "Lỗi Chạy Chương trình"
+
+#. scripts/run-wine-start.sh:6
+msgid "Error starting"
+msgstr "Lỗi khởi động"
+
+#. scripts/run-command.sh:6
+msgid "Command to run:"
+msgstr "Lệnh để chạy:"
+
+#. scripts/run-command.sh:7
+msgid "Run Command"
+msgstr "Chạy Lệnh"
+
+#. scripts/run-command.sh:8
+msgid "Error running command:"
+msgstr "Lỗi chạy lệnh:"
+
+#. scripts/run-command.sh:9
+msgid "Run Command Error"
+msgstr "Lỗi Chạy Lệnh"
+
+#. scripts/use-cmd.sh:6
+msgid "Command Prompt Error"
+msgstr "Lỗi Command Prompt"
+
+#. scripts/version.sh:3
+msgid "Wine could not be found, make sure Wine is installed correctly."
+msgstr "Không thể tìm thấy Wine, hãy đảm bảo Wine được cài đặt chính xác."
+
+#. scripts/version.sh:4
+msgid "Wine Not Found"
+msgstr "Không tìm thấy Wine"
+
+#. scripts/version.sh:5
+msgid "Wine version: "
+msgstr "Phiên bản Wine: "

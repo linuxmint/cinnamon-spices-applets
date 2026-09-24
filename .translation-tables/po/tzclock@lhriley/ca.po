@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-26 15:34-0800\n"
+"PO-Revision-Date: 2024-07-08 23:39+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:26
+msgid "%l:%M %p %Z"
+msgstr "%l:%M %p %Z"
+
+#: tzclock_settings.py:66
+msgid "Timezone"
+msgstr "Zona horària"
+
+#: tzclock_settings.py:207
+msgid "Region"
+msgstr "Regió"
+
+#: tzclock_settings.py:210
+msgid "City"
+msgstr "Ciutat"
+
+#. settings-schema.json->tzclock-settings-header->description
+msgid "Timezone Clock Settings"
+msgstr "Configuració de la zona horària"
+
+#. settings-schema.json->displayed-timezone->description
+msgid "Timezone to display"
+msgstr "Zona horària a mostrar"
+
+#. settings-schema.json->displayed-timezone->tooltip
+msgid "Enter a valid timezone name to display."
+msgstr "Introduïu un nom de zona horària vàlid per mostrar."
+
+#. settings-schema.json->tzclocks-settings-button->description
+msgid "Select timezone on map"
+msgstr "Seleccionar zona horària al mapa"
+
+#. settings-schema.json->tzclocks-settings-button->tooltip
+msgid "Click this button to select timezone on map."
+msgstr "Cliqueu aquest botó per seleccionar la zona horària al mapa."
+
+#. settings-schema.json->browse-timezones-button->description
+msgid "Browse valid timezone values by country"
+msgstr "Navegar valors de zones horàries vàlides per cada país"
+
+#. settings-schema.json->browse-timezones-button->tooltip
+msgid "Click this button to browse valid timezone values by country."
+msgstr ""
+"Clique aquest botó per navegar per zones horàries vàlides per cada país."
+
+#. settings-schema.json->clock-display->description
+msgid "Clock Display Format"
+msgstr "Format de visualització del rellotge"
+
+#. settings-schema.json->clock-use-24h->description
+msgid "Display the time using a 24 hour clock"
+msgstr "Mostrar el temps utilitzant un rellotge de 24 hores"
+
+#. settings-schema.json->clock-use-24h->tooltip
+msgid ""
+"Check this to display the time using a 24 hour clock in the timezone clock "
+"applet."
+msgstr ""
+"Marqueu això per a mostrar el temps utilitzant un rellotge de 24h a la "
+"miniaplicació."
+
+#. settings-schema.json->clock-show-seconds->description
+msgid "Display the time with seconds"
+msgstr "Mostrar l'hora amb segons"
+
+#. settings-schema.json->clock-show-seconds->tooltip
+msgid ""
+"Check this to display the time with seconds in the timezone clock applet."
+msgstr ""
+"Marqueu això per a mostrar l'hora amb segons al rellotge de la "
+"miniaplicació."
+
+#. settings-schema.json->clock-show-date->description
+msgid "Display the date"
+msgstr "Mostrar la data"
+
+#. settings-schema.json->clock-show-date->tooltip
+msgid "Check this to display the date in the timezone clock applet."
+msgstr "Marqueu això per mostrar la data al rellotge de la miniaplicació."
+
+#. settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr "Utilitzar un format de data personalitzat"
+
+#. settings-schema.json->use-custom-format->tooltip
+msgid ""
+"Check this to define a custom format for the date in the timezone clock "
+"applet."
+msgstr ""
+"Cliqueu aquí per establir un format personalitzat per a la data al "
+"rellotge de la miniaplicació."
+
+#. settings-schema.json->custom-format->description
+msgid "Date format:"
+msgstr "Format de data:"
+
+#. settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr "Establiu el vostre format personalitzat aquí."
+
+#. settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr "Mostrar informació sobre la sintaxi del format de dates"
+
+#. settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr ""
+"Cliqueu aquest botó per a saber més sobre el format de visualització de "
+"dates."
+
+#. metadata.json->name
+msgid "Timezone Clock"
+msgstr "Rellotge de franja horària"
+
+#. metadata.json->description
+msgid "A simple clock for displaying the current time in a timezone"
+msgstr ""
+"Un rellotge simple que mostra el temps actual per una determinada franja "
+"horària"

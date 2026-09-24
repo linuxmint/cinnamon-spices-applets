@@ -1,0 +1,44 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. applet.js:202
+msgid "Computer"
+msgstr ""
+
+#. applet.js:215
+msgid "File System"
+msgstr ""
+
+#. metadata.json->description
+msgid "Access your places and bookmarks"
+msgstr ""
+
+#. settings-schema.json->head->description
+msgid "Settings for places-bookmarks@dmo60.de"
+msgstr ""
+
+#. settings-schema.json->pref_applet_label->description
+msgid "Applet label"
+msgstr ""
+
+#. settings-schema.json->pref_applet_label->tooltip
+#. settings-schema.json->pref_applet_icon->tooltip
+msgid "Leave blank to remove."
+msgstr ""
+
+#. settings-schema.json->pref_applet_icon->description
+msgid "Applet icon"
+msgstr ""
+
+#. settings-schema.json->pref_icon_size->units
+msgid "pixels"
+msgstr ""
+
+#. settings-schema.json->pref_icon_size->description
+msgid "Menu items icon size"
+msgstr ""

@@ -1,0 +1,574 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-03 15:53+0100\n"
+"PO-Revision-Date: 2025-09-13 02:07+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#: applet.js:56
+msgid "VPN Sentinel"
+msgstr "VPN Sentinel"
+
+#: applet.js:71
+msgid "Timestamp"
+msgstr "時間戳記"
+
+#: applet.js:72
+msgid "Date and Time"
+msgstr "日期與時間"
+
+#: applet.js:73
+msgid "Message"
+msgstr "訊息"
+
+#: applet.js:229
+msgid "VPN-Sentinel has just started."
+msgstr "VPN-Sentinel 已啟動。"
+
+#: applet.js:233
+#, javascript-format
+msgid "Connected to VPN: %s"
+msgstr "已連線至 VPN：%s"
+
+#: applet.js:235
+#, javascript-format
+msgid "Connected to WIREGUARD: %s"
+msgstr "已連線至 WIREGUARD：%s"
+
+#: applet.js:237
+#, javascript-format
+msgid "Connected to: %s"
+msgstr "已連線至：%s"
+
+#: applet.js:589
+#, javascript-format
+msgid "%s has just been launched."
+msgstr "%s 已啟動。"
+
+#: applet.js:645
+#, javascript-format
+msgid "%s has just been stopped."
+msgstr "%s 已停止。"
+
+#: applet.js:668
+#, javascript-format
+msgid "%s stopped because the VPN link is idle."
+msgstr "%s 已停止，因為 VPN 連線處於閒置狀態。"
+
+#: applet.js:760
+#, javascript-format
+msgid "Connection lost. Attempt to reconnect to: %s"
+msgstr "連線中斷。正在嘗試重新連線至：%s"
+
+#: applet.js:770
+msgid "Connection to: "
+msgstr "連線至："
+
+#: applet.js:777
+msgid "Connected to: "
+msgstr "已連線至："
+
+#: applet.js:791
+msgid "Disconnected from: "
+msgstr "已中斷連線："
+
+#: applet.js:809
+msgid "Switching to: "
+msgstr "切換至："
+
+#: applet.js:866 applet.js:891 applet.js:950 applet.js:964
+msgid "(None)"
+msgstr "（無）"
+
+#: applet.js:1059
+msgid "ENABLED"
+msgstr "已啟用"
+
+#: applet.js:1059
+msgid "DISABLED"
+msgstr "已停用"
+
+#: applet.js:1059
+msgid "TRANSIENT"
+msgstr "轉換中"
+
+#: applet.js:1077
+msgid "Other active VPN links (select to disable):"
+msgstr "其他使用中的 VPN 連線（選取以停用）："
+
+#: applet.js:1094
+msgid "Connections"
+msgstr "連線"
+
+#: applet.js:1120
+msgid "Connect to VPN as soon as this applet starts."
+msgstr "小程式啟動時立即連線至 VPN。"
+
+#. settings-schema.json->reconnect->description
+#: applet.js:1128
+msgid "Try to reconnect to VPN when it shuts down incidentally."
+msgstr "當 VPN 意外中斷時嘗試重新連線。"
+
+#: applet.js:1137
+msgid "VPN Policy"
+msgstr "VPN 政策"
+
+#. settings-schema.json->InternetPolicy->title
+#: applet.js:1144
+msgid "Internet Apps Manager"
+msgstr "網際網路應用程式管理員"
+
+#: applet.js:1152
+msgid "Open Activity Logs"
+msgstr "開啟活動記錄"
+
+#: applet.js:1161
+msgid "Reload Country Flag"
+msgstr "重新載入國旗"
+
+#: applet.js:1163
+msgid "Confirm this Country Flag"
+msgstr "確認此國旗"
+
+#: applet.js:1179
+msgid "Network Settings"
+msgstr "網路設定"
+
+#: applet.js:1183
+msgid "Network Connections"
+msgstr "網路連線"
+
+#: applet.js:1202
+#, javascript-format
+msgid ""
+"VPN: %s\n"
+" Device: %s\n"
+" Since: %s"
+msgstr ""
+"VPN: %s\n"
+" 裝置：%s\n"
+" 開始時間：%s"
+
+#: applet.js:1208
+#, javascript-format
+msgid ""
+"WIREGUARD: %s\n"
+" Device: %s\n"
+" Since: %s"
+msgstr ""
+"WIREGUARD: %s\n"
+" 裝置：%s\n"
+" 開始時間：%s"
+
+#: applet.js:1215
+msgid "Disconnected"
+msgstr "已中斷連線"
+
+#: applet.js:1217
+msgid "Transient"
+msgstr "轉換中"
+
+#: applet.js:1219
+msgid "Deactivated"
+msgstr "已停用"
+
+#: applet.js:1349
+msgid "VPN-Sentinel re-loading requested."
+msgstr "已要求重新載入 VPN-Sentinel。"
+
+#: applet.js:1362
+msgid "VPN-Sentinel was stopped."
+msgstr "VPN-Sentinel 已停止。"
+
+#: applet.js:1366
+#, javascript-format
+msgid "Still connected to VPN: %s"
+msgstr "仍然連線至 VPN：%s"
+
+#: applet.js:1368
+#, javascript-format
+msgid "Still connected to WIREGUARD: %s"
+msgstr "仍然連線至 WIREGUARD：%s"
+
+#: applet.js:1370
+#, javascript-format
+msgid "Still connected to: %s"
+msgstr "仍然連線至：%s"
+
+#: applet.js:1373
+msgid "No VPN/WIREGUARD link."
+msgstr "無 VPN/WIREGUARD 連線。"
+
+#: applet.js:1375
+msgid "VPN/WIREGUARD Status: Transient."
+msgstr "VPN/WIREGUARD 狀態：轉換中。"
+
+#: lib/checkDependencies.js:292
+#, javascript-format
+msgid "The applet %s is fully functional."
+msgstr "小程式 %s 功能完整。"
+
+#: lib/checkDependencies.js:293
+msgid "All dependencies are installed"
+msgstr "所有相依性套件均已安裝"
+
+#: lib/checkDependencies.js:321
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr "您似乎缺少讓此小程式完整運作所需的部分程式。"
+
+#: lib/checkDependencies.js:322
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr "請在剛開啟的終端機中執行以下指令："
+
+#: lib/checkDependencies.js:323
+msgid "Some dependencies are not installed!"
+msgstr "部分相依性套件尚未安裝！"
+
+#: lib/util.js:245
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "執行「%s」失敗："
+
+#. metadata.json->description
+msgid ""
+"VPN Sentinel is a powerful applet that monitors the VPN (or Wireguard) link, "
+"displays its status, can automatically connect to the last used VPN, "
+"reconnect the VPN link in case of unexpected disconnection, and start or "
+"stop certain Internet applications depending on the VPN status."
+msgstr ""
+"VPN Sentinel 是一個功能強大的小程式，可監控 VPN（或 WireGuard）連線、顯示其狀"
+"態、自動連線至上次使用的 VPN、在意外中斷時重新連線 VPN，並根據 VPN 狀態啟動或"
+"停止特定的網際網路應用程式。"
+
+#. settings-schema.json->Alerts->title
+msgid "Notifications"
+msgstr "通知"
+
+#. settings-schema.json->VPNpolicy->title
+msgid "VPN"
+msgstr "VPN"
+
+#. settings-schema.json->CountryFlags->title
+#. settings-schema.json->sectionF1->title
+msgid "Flags"
+msgstr "國旗"
+
+#. settings-schema.json->sectionA1->title
+#. settings-schema.json->flagList->columns->title
+msgid "Flag"
+msgstr "國旗"
+
+#. settings-schema.json->sectionA2->title
+msgid "Sound Alert"
+msgstr "音效警示"
+
+#. settings-schema.json->sectionA3->title
+msgid "Icon colors"
+msgstr "圖示顏色"
+
+#. settings-schema.json->sectionV1->title
+msgid "Connection Policy"
+msgstr "連線政策"
+
+#. settings-schema.json->sectionV2->title
+msgid "Bypass VPN for below domains"
+msgstr "以下網域略過 VPN"
+
+#. settings-schema.json->sectionV3->title
+msgid "Activity Log"
+msgstr "活動記錄"
+
+#. settings-schema.json->sectionI1->title
+msgid "Settings"
+msgstr "設定"
+
+#. settings-schema.json->sectionI2->title
+msgid "Managed Apps"
+msgstr "託管應用程式"
+
+#. settings-schema.json->showCountryFlag->description
+msgid "Show the VPN server country flag next to the icon"
+msgstr "在圖示旁顯示 VPN 伺服器的國旗"
+
+#. settings-schema.json->showCountryFlag->tooltip
+msgid ""
+"If this box is checked, a request is sent to a geolocation server to find "
+"out the country where your VPN server is located and its flag is displayed "
+"next to the icon of this applet."
+msgstr ""
+"若勾選此選項，系統將會傳送請求至地理位置伺服器，以找出您 VPN 伺服器所在的國"
+"家，並在此小程式的圖示旁顯示其國旗。"
+
+#. settings-schema.json->labelWhenVPNisOff->description
+msgid "While VPN is OFF"
+msgstr "當 VPN 關閉時"
+
+#. settings-schema.json->labelWhenVPNisOff->options
+msgid "Hide the flag place"
+msgstr "隱藏國旗位置"
+
+#. settings-schema.json->labelWhenVPNisOff->options
+msgid "No flag, but leave its place"
+msgstr "不顯示國旗，但保留其位置"
+
+#. settings-schema.json->labelWhenVPNisOff->options
+msgid "Show my Country's Flag"
+msgstr "顯示我的國旗"
+
+#. settings-schema.json->labelWhenVPNisOff->tooltip
+msgid "(While VPN is OFF or in TRANSIENT mode)"
+msgstr "（當 VPN 關閉或處於轉換模式時）"
+
+#. settings-schema.json->useSoundAlert->description
+msgid "Emit an audible alert when VPN shuts down incidentally"
+msgstr "當 VPN 意外關閉時發出音效警示"
+
+#. settings-schema.json->useSoundAlertAtBeginning->description
+msgid "Emit this audible alert when this Applet starts, if VPN is down."
+msgstr "若此小程式啟動時 VPN 已中斷，則發出此音效警示。"
+
+#. settings-schema.json->connectedColor->description
+msgid "While VPN is Connected"
+msgstr "當 VPN 已連線時"
+
+#. settings-schema.json->disconnectedColor->description
+msgid "While VPN is Disconnected"
+msgstr "當 VPN 已中斷連線時"
+
+#. settings-schema.json->transitionColor->description
+msgid "While VPN is in Transition state"
+msgstr "當 VPN 處於轉換狀態時"
+
+#. settings-schema.json->borderOpacity->description
+msgid "Border opacity"
+msgstr "邊框不透明度"
+
+#. settings-schema.json->applyColors->description
+#. settings-schema.json->applyBypassListButton->description
+msgid "Apply"
+msgstr "套用"
+
+#. settings-schema.json->connectAtStartup->description
+msgid "Try to connect to last VPN as soon as VPN Sentinel starts."
+msgstr "VPN Sentinel 啟動時立即嘗試連線至上次使用的 VPN。"
+
+#. settings-schema.json->deactivateAtStartup->description
+msgid "Deactivate this applet at startup"
+msgstr "啟動時停用此小程式"
+
+#. settings-schema.json->deactivateAtStartup->tooltip
+msgid ""
+"When this option is checked, this applet starts in 'deactivated' state, "
+"saving resources but not monitoring anything. You can activate it from its "
+"menu."
+msgstr ""
+"勾選此選項時，此小程式將以「已停用」狀態啟動，可節省資源但不會監控任何內容。"
+"您可以從其選單中啟用它。"
+
+#. settings-schema.json->respectUserRequest->description
+msgid ""
+"Do not try to automatically reconnect to VPN when disconnected through VPN "
+"Sentinel"
+msgstr "透過 VPN Sentinel 中斷連線時，不要自動嘗試重新連線至 VPN"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding here to activate/deactivate the last used VPN."
+msgstr "在此設定快速鍵以啟用/停用上次使用的 VPN。"
+
+#. settings-schema.json->bypassList->columns->title
+msgid "Domain"
+msgstr "網域"
+
+#. settings-schema.json->applyBypassHelp->description
+msgid ""
+"Clicking this 'Apply' button will stop and then start your default "
+"connection. Thus, all active VPN connections will be closed."
+msgstr ""
+"點選 [套用] 按鈕將會停止並重新啟動您的預設連線。因此，所有使用中的 VPN 連線都"
+"會被關閉。"
+
+#. settings-schema.json->doLogActivity->description
+msgid "Log status changes of VPNs and Internet applications"
+msgstr "記錄 VPN 與網際網路應用程式的狀態變更"
+
+#. settings-schema.json->logLifetime->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->logLifetime->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->logLifetime->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->logLifetime->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->logLifetime->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->logLifetime->options
+msgid "6"
+msgstr "6"
+
+#. settings-schema.json->logLifetime->options
+msgid "7"
+msgstr "7"
+
+#. settings-schema.json->logLifetime->options
+msgid "8"
+msgstr "8"
+
+#. settings-schema.json->logLifetime->options
+msgid "9"
+msgstr "9"
+
+#. settings-schema.json->logLifetime->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->logLifetime->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->logLifetime->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->logLifetime->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->logLifetime->options
+msgid "45"
+msgstr "45"
+
+#. settings-schema.json->logLifetime->options
+msgid "60"
+msgstr "60"
+
+#. settings-schema.json->logLifetime->options
+msgid "90"
+msgstr "90"
+
+#. settings-schema.json->logLifetime->description
+msgid "Lifetime (days)"
+msgstr "保留期限（天）"
+
+#. settings-schema.json->logLifetime->tooltip
+msgid "Lifetime of a record in the log file, in days."
+msgstr "記錄檔中單筆記錄的保留期限（天）。"
+
+#. settings-schema.json->view_activity_log_button->description
+msgid "Open Activity Log"
+msgstr "開啟活動記錄"
+
+#. settings-schema.json->clear_activity_log_button->description
+msgid "Clear Activity Log"
+msgstr "清除活動記錄"
+
+#. settings-schema.json->flagListHelp->description
+msgid ""
+"This list will be completed automatically.\n"
+"\n"
+"Confirm the lines with correct data in order to immediately display the flag "
+"of the country where the VPN server is located."
+msgstr ""
+"此清單將會自動完成。\n"
+"\n"
+"請確認每筆資料都正確，才能即時顯示 VPN 伺服器所在國家的國旗。"
+
+#. settings-schema.json->flagList->description
+msgid "Flag List"
+msgstr "國旗清單"
+
+#. settings-schema.json->flagList->columns->title
+#. settings-schema.json->sortFlagListBy->options
+msgid "VPN Name"
+msgstr "VPN 名稱"
+
+#. settings-schema.json->flagList->columns->title
+#. settings-schema.json->sortFlagListBy->options
+msgid "Country Code"
+msgstr "國家代號"
+
+#. settings-schema.json->flagList->columns->title
+msgid "Confirmed"
+msgstr "已確認"
+
+#. settings-schema.json->sortFlagListBy->description
+msgid "Sort by"
+msgstr "排序依據"
+
+#. settings-schema.json->sortFlagListBy->options
+msgid "None"
+msgstr "無"
+
+#. settings-schema.json->manageClients->description
+msgid "Manage Internet Apps"
+msgstr "管理網際網路應用程式"
+
+#. settings-schema.json->manageClients->tooltip
+msgid ""
+"This option allows this applet to manage the Internet applications you "
+"listed below."
+msgstr "此選項允許此小程式管理您在下方列出的網際網路應用程式。"
+
+#. settings-schema.json->showClientsHelp->description
+msgid "Show Help"
+msgstr "顯示說明"
+
+#. settings-schema.json->clientsHelp->description
+msgid ""
+"Name: Application name, as it appears in Menu/Internet.\n"
+"\n"
+"Launch: Whether or not to launch this application as soon as the VPN link "
+"becomes active.\n"
+"\n"
+"VPN only: Whether or not to quickly stop this application if it is started "
+"while the VPN is idle."
+msgstr ""
+"名稱：應用程式名稱，如同在「選單/網際網路」中所顯示。\n"
+"\n"
+"啟動：VPN 連線變為啟用狀態時，是否要啟動此應用程式。\n"
+"\n"
+"僅限 VPN：若此應用程式在 VPN 閒置時啟動，是否要立即停止。"
+
+#. settings-schema.json->clientsList->description
+msgid "Managed applications"
+msgstr "託管應用程式"
+
+#. settings-schema.json->clientsList->columns->title
+msgid "Name"
+msgstr "名稱"
+
+#. settings-schema.json->clientsList->columns->title
+msgid "Launch"
+msgstr "啟動"
+
+#. settings-schema.json->clientsList->columns->title
+msgid "VPN only"
+msgstr "僅限 VPN"
+
+#. settings-schema.json->buttonPopulateClientsList->description
+msgid "Add all Menu/Internet applications"
+msgstr "新增所有選單/網際網路應用程式"

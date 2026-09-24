@@ -1,0 +1,91 @@
+# KDE CONNECT APPLET
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# JoeJoeTV, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-22 18:28+0200\n"
+"PO-Revision-Date: 2023-03-13 10:12+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. 5.8/js/modules.js:450
+msgid "Module"
+msgstr ""
+
+#. 5.8/js/modules.js:597
+msgid "Battery Module"
+msgstr ""
+
+#. 5.8/js/modules.js:682
+msgid "Device-Info Module"
+msgstr ""
+
+#. 5.8/js/modules.js:751
+msgid "Connectivity Module"
+msgstr ""
+
+#. 5.8/js/modules.js:867
+msgid "FindMyPhone Module"
+msgstr ""
+
+#. 5.8/js/modules.js:907
+msgid "Request Photo Module"
+msgstr ""
+
+#. 5.8/js/modules.js:1009
+msgid "Ping Module"
+msgstr ""
+
+#. 5.8/js/modules.js:1062
+msgid "Share Module"
+msgstr ""
+
+#. 5.8/js/modules.js:1243
+msgid "SFTP Module"
+msgstr ""
+
+#. 5.8/js/modules.js:1463
+msgid "SMS Module"
+msgstr ""
+
+#. 5.8/py/dialogs.py:271
+#, python-brace-format
+msgid "Open remote directory on '{device_name}'"
+msgstr ""
+
+#. 5.8/py/dialogs.py:290
+msgid "Open"
+msgstr ""
+
+#. 5.8/py/dialogs.py:300
+msgid "Directory to open:"
+msgstr ""
+
+#. 5.8->settings-schema.json->switch_different-icon-no-connected-
+#. devices->description
+msgid "Display a different icon when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_no-connected-devices->description
+msgid "Icon to use when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->module_sftp_description->description
+#. 4.8->settings-schema.json->module_sftp_description->description
+msgid "Lets you remotely browse the storage of the device"
+msgstr ""
+
+#. 5.8->settings-schema.json->module_sftp_selectFirstDirectory->description
+msgid "Select the first directory automatically"
+msgstr ""

@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-16 18:41+0100\n"
+"PO-Revision-Date: 2025-10-12 11:18+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:55
+msgid "Click to mute/unmute microphone"
+msgstr "Nhấp để tắt/bật tiếng micro"
+
+#. metadata.json->name
+msgid "Mic mute toggler"
+msgstr "Công tắc micro"
+
+#. metadata.json->description
+msgid "Quickly toggle global microphone mute on and off."
+msgstr "Nhanh chóng bật/tắt tắt tiếng micro toàn cục."
+
+#. settings-schema.json->section_keybinding->description
+msgid "Keyboard shortcuts"
+msgstr "Phím tắt"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding for toggling microphone mute"
+msgstr "Đặt phím để bật/tắt micro"
+
+#. settings-schema.json->section_icons->description
+msgid "Icons"
+msgstr "Biểu tượng"
+
+#. settings-schema.json->use_symbolic_icon->description
+msgid "Use symbolic icons"
+msgstr "Dùng biểu tượng tượng trưng"
+
+#. settings-schema.json->tint_symbolic_icon->description
+msgid "Tint symbolic icons"
+msgstr "Tô màu biểu tượng tượng trưng"
+
+#. settings-schema.json->muted_color->description
+msgid "Icon color when microphone is muted"
+msgstr "Màu biểu tượng khi micro tắt tiếng"
+
+#. settings-schema.json->unmuted_color->description
+msgid "Icon color when microphone is unmuted"
+msgstr "Màu biểu tượng khi micro bật tiếng"
+
+#. settings-schema.json->section_debug_messages->description
+msgid "Debug messages"
+msgstr "Thông điệp gỡ lỗi"
+
+#. settings-schema.json->verbose->description
+msgid "Make it verbose in ~/.xsession-errors"
+msgstr "Ghi chi tiết vào ~/.xsession-errors"

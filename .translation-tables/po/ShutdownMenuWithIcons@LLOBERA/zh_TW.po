@@ -1,0 +1,194 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ShutdownMenuWithIcons@LLOBERA 2.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-08 15:58-0500\n"
+"PO-Revision-Date: 2025-07-21 05:05+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#: applet.js:42
+msgid "Shutdown Menu With Icons"
+msgstr "具備圖示的關機選單"
+
+#: applet.js:143
+msgid "Quit"
+msgstr "關機"
+
+#: applet.js:146
+msgid "Suspend"
+msgstr "待命"
+
+#: applet.js:149
+msgid "Hibernate"
+msgstr "休眠"
+
+#: applet.js:152
+msgid "Hybrid sleep"
+msgstr "混合式睡眠"
+
+#: applet.js:155
+msgid "Restart"
+msgstr "重新啟動"
+
+#. settings-schema.json->switch_users_label->description
+#: applet.js:160
+msgid "Switch users"
+msgstr "切換使用者"
+
+#. settings-schema.json->log_out_label->description
+#: applet.js:163
+msgid "Log out"
+msgstr "登出"
+
+#: applet.js:166
+msgid "Screen Lock"
+msgstr "鎖定螢幕"
+
+#: applet.js:185
+msgid "Settings"
+msgstr "設定"
+
+#: applet.js:190
+msgid "Help"
+msgstr "說明"
+
+#: applet.js:195
+msgid "About"
+msgstr "關於"
+
+#. metadata.json->description
+msgid ""
+"An applet to help you shutdown, restart and suspend your system with single "
+"click"
+msgstr "一個可協助您單鍵關機、重新啟動和讓系統待命的小程式"
+
+#. settings-schema.json->quit_label->description
+msgid "Quit: shut down and power-off the system"
+msgstr "關機：關閉系統並切斷電源"
+
+#. settings-schema.json->quit->description
+msgid "Add quit to the menu"
+msgstr "將關機新增至選單"
+
+#. settings-schema.json->quit_icon->description
+msgid "The quit icon "
+msgstr "關機圖示"
+
+#. settings-schema.json->quit_cmd->description
+msgid "The quit command "
+msgstr "關機指令"
+
+#. settings-schema.json->suspend_label->description
+msgid "Suspend: suspend the system"
+msgstr "待命：讓系統進入待命狀態"
+
+#. settings-schema.json->suspend->description
+msgid "Add suspend to the menu"
+msgstr "將待命新增至選單"
+
+#. settings-schema.json->suspend_icon->description
+msgid "The suspend icon "
+msgstr "待命圖示"
+
+#. settings-schema.json->suspend_cmd->description
+msgid "The suspend command "
+msgstr "待命指令"
+
+#. settings-schema.json->hibernate_label->description
+msgid "Hibernate: hibernate the system"
+msgstr "休眠：讓系統進入休眠狀態"
+
+#. settings-schema.json->hibernate->description
+msgid "Add hibernate to the menu"
+msgstr "將休眠新增至選單"
+
+#. settings-schema.json->hibernate_icon->description
+msgid "The hibernate icon "
+msgstr "休眠圖示"
+
+#. settings-schema.json->hibernate_cmd->description
+msgid "The hibernate command "
+msgstr "休眠指令"
+
+#. settings-schema.json->hybrid_sleep_label->description
+msgid "Hybrid sleep: hibernate and suspend the system"
+msgstr "混合式睡眠：讓系統同時進入休眠與待命狀態"
+
+#. settings-schema.json->hybrid_sleep->description
+msgid "Add hybrid sleep to the menu"
+msgstr "將混合式睡眠新增至選單"
+
+#. settings-schema.json->hybrid_sleep_icon->description
+msgid "The hybrid sleep icon "
+msgstr "混合式睡眠圖示"
+
+#. settings-schema.json->hybrid_sleep_cmd->description
+msgid "The hybrid sleep command "
+msgstr "混合式睡眠指令"
+
+#. settings-schema.json->restart_label->description
+msgid "Restart: shut down and reboot the system"
+msgstr "重新啟動：關閉系統並重新開機"
+
+#. settings-schema.json->restart->description
+msgid "Add restart to the menu"
+msgstr "將重新啟動新增至選單"
+
+#. settings-schema.json->restart_icon->description
+msgid "The restart icon "
+msgstr "重新啟動圖示"
+
+#. settings-schema.json->restart_cmd->description
+msgid "The restart command "
+msgstr "重新啟動指令"
+
+#. settings-schema.json->switch_users->description
+msgid "Add switch users to the menu"
+msgstr "將切換使用者新增至選單"
+
+#. settings-schema.json->switch_users_icon->description
+msgid "The switch users icon"
+msgstr "切換使用者圖示"
+
+#. settings-schema.json->switch_users_cmd->description
+msgid "The switch users command"
+msgstr "切換使用者指令"
+
+#. settings-schema.json->log_out->description
+msgid "Add log out to the menu"
+msgstr "將登出新增至選單"
+
+#. settings-schema.json->log_out_icon->description
+msgid "The log out icon "
+msgstr "登出圖示"
+
+#. settings-schema.json->log_out_cmd->description
+msgid "The log out command "
+msgstr "登出指令"
+
+#. settings-schema.json->screen_lock_label->description
+msgid "Screen lock: lock the screen"
+msgstr "鎖定螢幕：將螢幕鎖定"
+
+#. settings-schema.json->screen_lock->description
+msgid "Add screen lock to the menu"
+msgstr "將鎖定螢幕新增至選單"
+
+#. settings-schema.json->screen_lock_icon->description
+msgid "The screen lock icon "
+msgstr "鎖定螢幕圖示"
+
+#. settings-schema.json->screen_lock_cmd->description
+msgid "The screen lock command "
+msgstr "鎖定螢幕指令"

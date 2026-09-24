@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: password-generator@spencerlommel.com 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-05-07 20:32-0500\n"
+"PO-Revision-Date: 2024-07-13 03:04+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:33
+msgid "Generate Random Password"
+msgstr "Generar contrasenya aleatòria"
+
+#: applet.js:42
+msgid "Please enable at least one value in settings."
+msgstr "Si us plau, activeu com a mínim un valor a les opcions."
+
+#: applet.js:49
+msgid "Copy"
+msgstr "Copiar"
+
+#. metadata.json->description
+msgid "Configurable Password Generator"
+msgstr "Generador de contrasenyes configurable"
+
+#. metadata.json->name
+msgid "Password Generator"
+msgstr "Generador de Contrasenyes"
+
+#. settings-schema.json->password-settings-header->description
+msgid "Password Settings"
+msgstr "Opcions de contrasenya"
+
+#. settings-schema.json->password-length->units
+msgid "characters"
+msgstr "caràcters"
+
+#. settings-schema.json->password-length->description
+msgid "Password Length"
+msgstr "Longitud de la contrasenya"
+
+#. settings-schema.json->password-length->tooltip
+msgid "The password can be any length from 1 to 32 characters."
+msgstr ""
+"La contrasenya pot ser de qualsevol longitud d'entre 1 i 32 caràcters."
+
+#. settings-schema.json->include-lowercase->description
+msgid "Include Lowercase Letters"
+msgstr "Incloure minúscules"
+
+#. settings-schema.json->include-uppercase->description
+msgid "Include Uppercase Letters"
+msgstr "Incloure majúscules"
+
+#. settings-schema.json->include-numbers->description
+msgid "Include Numbers"
+msgstr "Incloure números"
+
+#. settings-schema.json->include-symbols->description
+msgid "Include Symbols"
+msgstr "Incloure símbols"
+
+#. settings-schema.json->copy-settings-header->description
+msgid "Copy Settings"
+msgstr "Copiar les opcions"
+
+#. settings-schema.json->auto-copy->description
+msgid "Automatically Copy To Clipboard"
+msgstr "Copiar automàticament al porta-papers"
+
+#. settings-schema.json->auto-copy->tooltip
+msgid ""
+"When clicking the lock icon, instead of opening a window where the password "
+"can be copied it is instead automatically copied to your Clipboard."
+msgstr ""
+"En clicar la icona, la contrasenya es copiarà automàticament al vostre "
+"porta-papers en lloc de ser mostrada en una finestra emergent des de la "
+"qual copiar-la."
+
+#. settings-schema.json->play-sound->description
+#. settings-schema.json->sound-file->description
+msgid "Play sound on copy"
+msgstr "Reproduir un so en copiar"
+
+#. settings-schema.json->play-sound->tooltip
+msgid ""
+"Toggles whether or not a sound is played when the password is copied to the "
+"Clipboard"
+msgstr "Determina si es reprodueix o no un so en copiar la contrasenya"
+
+#. settings-schema.json->sound-file->tooltip
+msgid "Select a sound to play when the password is copied"
+msgstr "Seleccioneu un so a reproduir en copiar la contrasenya"

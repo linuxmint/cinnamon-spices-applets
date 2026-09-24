@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-12 22:04-0400\n"
+"PO-Revision-Date: 2023-12-27 10:39+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:51
+msgid "Ctrl+"
+msgstr "Ctrl+"
+
+#: applet.js:54
+msgid "Shift+"
+msgstr "Skift+"
+
+#: applet.js:58
+msgid "Left Click"
+msgstr "Venstreklik"
+
+#: applet.js:60
+msgid "Middle Click"
+msgstr "Midterklik"
+
+#: applet.js:62
+msgid "Right Click"
+msgstr "Højreklik"
+
+#: applet.js:64
+msgid "Back Click"
+msgstr "Tilbageklik"
+
+#: applet.js:66
+msgid "Forward Click"
+msgstr "Fremklik"
+
+#: applet.js:158 applet.js:390 applet.js:392
+msgid "Monitor input sources"
+msgstr "Skærminputkilder"
+
+#: applet.js:170 applet.js:217 applet.js:480
+msgid "Detecting monitors..."
+msgstr "Registrerer skærme …"
+
+#: applet.js:176
+msgid "Options"
+msgstr "Indstillinger"
+
+#: applet.js:178
+msgid "Clear monitor cache"
+msgstr "Ryd skærmcache"
+
+#: applet.js:184
+msgid "Clear quick actions"
+msgstr "Ryd hurtige handlinger"
+
+#: applet.js:197
+msgid "Help"
+msgstr "Hjælp"
+
+#: applet.js:339
+msgid "Required \"ddcutil\" not found"
+msgstr "“ddcutil“ er krævet, men blev ikke fundet"
+
+#: applet.js:343
+msgid "Error, \"ddcutil\" exit code "
+msgstr "Fejl: “ddcutil“-afslutningskode"
+
+#: applet.js:347
+msgid "No capable monitors detected"
+msgstr "Ingen egnede skærme registreret"
+
+#: applet.js:386
+msgid "for"
+msgstr "for"
+
+#: applet.js:473
+msgid "Refresh"
+msgstr "Opdatér"
+
+#. metadata.json->name
+msgid "Monitor Input Source"
+msgstr "Skærminputkilde"
+
+#. metadata.json->description
+msgid ""
+"Change your monitors video input source directly from the cinnamon panel"
+msgstr "Skift skærmens videoinputkilde direkte i panelet"

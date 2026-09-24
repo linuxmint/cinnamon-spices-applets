@@ -1,0 +1,50 @@
+# SpicesUpdate@claudiux Applet POT File.
+# Copyright (C) 2019 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the Cinnamon package.
+# FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2019.
+# Translator: Serkan Önder <serkanonder@outlook.com>, 2020, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SpicesUpdate@claudiux v1.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-12 18:05+0200\n"
+"PO-Revision-Date: 2025-02-02 16:23+0300\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_actions->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_actions->description
+msgid "Tick all the first boxes then refresh"
+msgstr ""
+
+#. 6.4->settings-schema.json->section_general5->title
+msgid "Dependencies"
+msgstr ""
+
+#. 6.4->settings-schema.json->btn_apply_applets->description
+#. 6.4->settings-schema.json->btn_apply_desklets->description
+#. 6.4->settings-schema.json->btn_apply_extensions->description
+#. 6.4->settings-schema.json->btn_apply_themes->description
+#. 6.4->settings-schema.json->btn_apply_actions->description
+msgid "Apply"
+msgstr ""
+
+#. 6.4->settings-schema.json->dont_check_dependencies->description
+msgid "Do not check dependencies"
+msgstr ""
