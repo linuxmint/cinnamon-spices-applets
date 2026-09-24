@@ -1,0 +1,314 @@
+{
+  "section1": {
+    "type": "section",
+    "description": "Menu"
+  },
+  "playerControl": {
+    "type": "switch",
+    "default": true,
+    "description": "Control Players"
+  },
+  "extendedPlayerControl": {
+    "type": "switch",
+    "default": false,
+    "description": "Show Loop and Shuffle controls",
+    "dependency": "playerControl"
+  },
+  "keyOpen": {
+    "type": "keybinding",
+    "description": "Show menu",
+    "default": "<Shift><Super>s",
+    "tooltip": "Set keybinding(s) to show the sound applet menu."
+  },
+  "alwaysShowMuteInput": {
+    "type": "switch",
+    "description": "Always show input switch",
+    "tooltip": "Always show the 'Mute input' switch in the context menu.",
+    "default": false
+  },
+  "_knownPlayers": {
+    "type": "generic",
+    "default": [
+      "banshee",
+      "vlc",
+      "rhythmbox"
+    ]
+  },
+  "section2": {
+    "type": "section",
+    "description": "Panel"
+  },
+  "showtrack": {
+    "type": "switch",
+    "default": false,
+    "description": "Show song information on the panel",
+    "dependency": "playerControl"
+  },
+  "truncatetext": {
+    "type": "spinbutton",
+    "default": 30,
+    "min": 5,
+    "max": 512,
+    "units": "characters",
+    "step": 1,
+    "description": "Limit song information to",
+    "dependency": "showtrack"
+  },
+  "middleClickAction": {
+    "type": "combobox",
+    "default": "mute",
+    "options": {
+      "Toggle Mute": "mute",
+      "Toggle Mute output": "out_mute",
+      "Toggle Mute input": "in_mute",
+      "Toggle Play / Pause": "player"
+    },
+    "description": "Action on middle click"
+  },
+  "middleShiftClickAction": {
+    "type": "combobox",
+    "default": "in_mute",
+    "options": {
+      "Toggle Mute": "mute",
+      "Toggle Mute output": "out_mute",
+      "Toggle Mute input": "in_mute",
+      "Toggle Play / Pause": "player"
+    },
+    "description": "Action on shift+middle click"
+  },
+  "horizontalScroll": {
+    "type": "switch",
+    "default": false,
+    "description": "Use horizontal scrolling to move between tracks",
+    "dependency": "playerControl"
+  },
+  "showalbum": {
+    "type": "switch",
+    "default": false,
+    "description": "Show album art as icon",
+    "dependency": "playerControl"
+  },
+  "hideSystray": {
+    "type": "switch",
+    "description": "Hide system tray icons for compatible players",
+    "default": true
+  },
+  "section3": {
+    "type": "section",
+    "description": "Tooltip"
+  },
+  "tooltipShowVolume": {
+    "type": "switch",
+    "default": true,
+    "description": "Show volume in tooltip"
+  },
+  "tooltipShowPlayer": {
+    "type": "switch",
+    "default": false,
+    "description": "Show player in tooltip"
+  },
+  "tooltipShowArtistTitle": {
+    "type": "switch",
+    "default": false,
+    "description": "Show song artist and title in tooltip"
+  },
+  "sectionRule1": {
+    "type": "section",
+    "description": "Device rules - Rule 1"
+  },
+  "iconRules1Name": {
+    "type": "entry",
+    "default": "Headset",
+    "description": "Devices will use this name instead"
+  },
+  "iconRules1Icon": {
+    "type": "entry",
+    "default": "audio-headphones-symbolic",
+    "description": "Icon representing Rule 1"
+  },
+  "iconRules1Rule": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices including this string will display the Rule 1 icon"
+  },
+  "sectionRule2": {
+    "type": "section",
+    "description": "Device rules - Rule 2"
+  },
+  "iconRules2Name": {
+    "type": "entry",
+    "default": "Bluetooth Headset",
+    "description": "Devices will use this name instead"
+  },
+  "iconRules2Icon": {
+    "type": "entry",
+    "default": "bluetooth-symbolic",
+    "description": "Icon representing Rule 2"
+  },
+  "iconRules2Rule": {
+    "type": "entry",
+    "default": "1000XM",
+    "description": "Devices including this string will display the Rule 2 icon"
+  },
+  "sectionRule3": {
+    "type": "section",
+    "description": "Device rules - Rule 3"
+  },
+  "iconRules3Name": {
+    "type": "entry",
+    "default": "Headset",
+    "description": "Devices will use this name instead"
+  },
+  "iconRules3Icon": {
+    "type": "entry",
+    "default": "audio-volume-high-symbolic",
+    "description": "Icon representing Rule 3"
+  },
+  "iconRules3Rule": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices including this string will display the Rule 3 icon"
+  },
+  "sectionRule4": {
+    "type": "section",
+    "description": "Device rules - Rule 4"
+  },
+  "iconRules4Name": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices will use this name instead"
+  },
+  "iconRules4Icon": {
+    "type": "entry",
+    "default": "",
+    "description": "Icon representing Rule 4"
+  },
+  "iconRules4Rule": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices including this string will display the Rule 4 icon"
+  },
+  "section5": {
+    "type": "section",
+    "description": "Device rules - Rule 5"
+  },
+  "iconRules5Name": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices will use this name instead"
+  },
+  "iconRules5Icon": {
+    "type": "entry",
+    "default": "",
+    "description": "Icon representing Rule 5"
+  },
+  "iconRules5Rule": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices including this string will display the Rule 5 icon"
+  },
+  "section6": {
+    "type": "section",
+    "description": "Device rules - Rule 6"
+  },
+  "iconRules6Name": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices will use this name instead"
+  },
+  "iconRules6Icon": {
+    "type": "entry",
+    "default": "",
+    "description": "Icon representing Rule 6"
+  },
+  "iconRules6Rule": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices including this string will display the Rule 6 icon"
+  },
+  "section7": {
+    "type": "section",
+    "description": "Device rules - Rule 7"
+  },
+  "iconRules7Name": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices will use this name instead"
+  },
+  "iconRules7Icon": {
+    "type": "entry",
+    "default": "",
+    "description": "Icon representing Rule 7"
+  },
+  "iconRules7Rule": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices including this string will display the Rule 7 icon"
+  },
+  "section8": {
+    "type": "section",
+    "description": "Device rules - Rule 8"
+  },
+  "iconRules8Name": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices will use this name instead"
+  },
+  "iconRules8Icon": {
+    "type": "entry",
+    "default": "",
+    "description": "Icon representing Rule 8"
+  },
+  "iconRules8Rule": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices including this string will display the Rule 8 icon"
+  },
+  "section9": {
+    "type": "section",
+    "description": "Device rules - Rule 9"
+  },
+  "iconRules9Name": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices will use this name instead"
+  },
+  "iconRules9Icon": {
+    "type": "entry",
+    "default": "",
+    "description": "Icon representing Rule 9"
+  },
+  "iconRules9Rule": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices including this string will display the Rule 9 icon"
+  },
+  "section10": {
+    "type": "section",
+    "description": "Device rules - Rule 10"
+  },
+  "iconRules10Name": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices will use this name instead"
+  },
+  "iconRules10Icon": {
+    "type": "entry",
+    "default": "",
+    "description": "Icon representing Rule 10"
+  },
+  "iconRules10Rule": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices including this string will display the Rule 10 icon"
+  },
+  "section11": {
+    "type": "section",
+    "description": "Filter list"
+  },
+  "iconRulesFilterList": {
+    "type": "entry",
+    "default": "",
+    "description": "Devices containing any word in this comma-separated list will be filtered out"
+  }
+}
