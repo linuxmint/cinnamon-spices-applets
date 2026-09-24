@@ -93,6 +93,17 @@ ContextMenu.prototype = {
         menu.addMenuItem(netConnections);
         this._netConnectionsItem = netConnections;
 
+        this._sepNetPrinter = new PopupMenu.PopupSeparatorMenuItem();
+        menu.addMenuItem(this._sepNetPrinter);
+
+        // 打印机设置（cinnamon-settings 无打印机模块，用 system-config-printer）
+        let printerSettings = new PopupMenu.PopupMenuItem(_("Printer Settings"));
+        printerSettings.connect('activate', function() {
+            applet._spawnDetached(['system-config-printer']);
+        });
+        menu.addMenuItem(printerSettings);
+        this._printerSettingsItem = printerSettings;
+
         // 每次打开右键菜单时刷新动态项
         this._openStateId = menu.connect('open-state-changed', function(m, open) {
             if (open) self.refresh();
@@ -154,14 +165,16 @@ ContextMenu.prototype = {
     applyVisibility: function() {
         if (!this._sinkSubmenu) return;
         let showSound = this._getShow('show-context-sound', true);
-        let showMute = showSound && this._getShow('show-context-mute', true);
+        let showMuteOut = showSound && this._getShow('show-context-mute-output', true);
+        let showMuteIn = showSound && this._getShow('show-context-mute-input', true);
         let showNet = this._getShow('show-context-network', true);
         let showWired = showNet && this._getShow('show-context-wired', true);
         let showWireless = showNet && this._getShow('show-context-wireless', true);
         let showWwan = showNet && this._getShow('show-context-wwan', false);
+        let showPrinter = this._getShow('show-context-printer', true);
 
-        this._muteOutItem.actor.visible = showMute;
-        this._muteInItem.actor.visible = showMute;
+        this._muteOutItem.actor.visible = showMuteOut;
+        this._muteInItem.actor.visible = showMuteIn;
         this._sinkSubmenu.actor.visible = showSound && this._sinkVisible(this._sinkCount);
         this._soundSettingsItem.actor.visible = showSound;
 
@@ -171,6 +184,10 @@ ContextMenu.prototype = {
         this._wwanSwitch.actor.visible = showWwan;
         this._netSettingsItem.actor.visible = showNet;
         this._netConnectionsItem.actor.visible = showNet;
+        if (this._printerSettingsItem)
+            this._printerSettingsItem.actor.visible = showPrinter;
+        if (this._sepNetPrinter)
+            this._sepNetPrinter.actor.visible = showNet && showPrinter;
 
         let anyNetChild = showWired || showWireless || showWwan;
         this._sepSoundNet.actor.visible = showSound && (showNet && anyNetChild);
@@ -199,8 +216,9 @@ ContextMenu.prototype = {
             this._muteOutItem.setToggleState(false);
             this._muteOutItem.actor.reactive = false;
         }
-        // 输入（无麦克风时禁用）
-        let input = this._getInput();
+        // 输入（无麦克风时禁用；尊重显示开关，applyVisibility 之后跑，别擅自 show）
+        let showMuteIn = this._getShow('show-context-mute-input', true);
+        let input = showMuteIn ? this._getInput() : null;
         if (input) {
             this._muteInItem.setToggleState(input.is_muted);
             this._muteInItem.actor.reactive = true;
@@ -208,6 +226,7 @@ ContextMenu.prototype = {
         } else {
             this._muteInItem.setToggleState(false);
             this._muteInItem.actor.reactive = false;
+            if (!showMuteIn) this._muteInItem.actor.hide();
         }
     },
 
@@ -238,6 +257,7 @@ ContextMenu.prototype = {
     _rebuildSinkList: function() {
         let applet = this._applet;
         let self = this;
+        this._pinMenuFocus();
         this._sinkSubmenu.menu.removeAll();
         let rows = (applet._volumeCtrl && this._getShow('show-context-sound', true))
             ? applet._volumeCtrl.getSinkList() : [];
@@ -327,8 +347,21 @@ ContextMenu.prototype = {
         });
     },
 
+    // 开着重建内容前先把键盘焦点钉在稳定的菜单 actor 上：
+    // 否则 removeAll 销毁的恰是焦点所在行，焦点掉出菜单 →
+    // PopupMenuManager._onKeyFocusChanged 直接整菜单 close（已实锤）。
+    _pinMenuFocus: function() {
+        try {
+            let menu = this._applet._applet_context_menu;
+            if (menu && menu.isOpen && menu.actor && !menu.actor.is_finalized()) {
+                menu.actor.grab_key_focus();
+            }
+        } catch (e) {}
+    },
+
     // WiFi 列表占位行
     _showWifiPlaceholder: function(label) {
+        this._pinMenuFocus();
         this._wifiSection.removeAll();
         this._wifiSection.addMenuItem(new PopupMenu.PopupMenuItem(label, { reactive: false }));
     },
@@ -372,6 +405,7 @@ ContextMenu.prototype = {
         if (cached.rows.length > 0) {
             this._renderWifiRows(cached.rows);
         } else {
+            this._pinMenuFocus();
             this._wifiSection.removeAll();
             this._wifiSection.addMenuItem(
                 new PopupMenu.PopupMenuItem(_("Scanning…"), { reactive: false }));
@@ -470,6 +504,7 @@ ContextMenu.prototype = {
     _renderWifiRows: function(rows) {
         let self = this;
         let sectionActor = this._wifiSection.actor;
+        this._pinMenuFocus();
         this._wifiSection.removeAll();
         if (rows.length === 0) {
             this._wifiSection.addMenuItem(

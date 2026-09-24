@@ -149,6 +149,7 @@ MyApplet.prototype = {
         this._sysState = new SystemState(this);
         this._powerMenu = new PowerMenuMod(this);
         this._themeSwitcher = new ThemeSwitcherMod(this);
+        try { this._themeSwitcher.watchSettings(); } catch (e) { global.logError("QS theme watch: " + e.message); }
         try { this._contextMenu = new ContextMenuMod(this); this._contextMenu.build(); }
         catch (e) { global.logError("QS context menu: " + e.message + "\n" + e.stack); }
 
@@ -203,9 +204,10 @@ MyApplet.prototype = {
         }.bind(this));
 
         // 右键菜单显隐
-        let ctxKeys = ['show-context-sound', 'show-context-mute', 'show-context-network',
+        let ctxKeys = ['show-context-sound', 'show-context-mute-output', 'show-context-mute-input',
+                       'show-context-network',
                        'show-context-wired', 'show-context-wireless', 'show-context-wwan',
-                       'show-context-sink-single'];
+                       'show-context-printer', 'show-context-sink-single'];
         for (let i = 0; i < ctxKeys.length; i++) {
             on('changed::' + ctxKeys[i], function() {
                 if (this._contextMenu) this._contextMenu.applyVisibility();
@@ -258,8 +260,20 @@ MyApplet.prototype = {
 
             let themeFile = Gio.File.new_for_path(C.THEMES_CACHE_FILE);
             if (!themeFile.query_exists(null)) {
-                global.log("QS _updateSettingsSchema: theme file not found");
-                return;
+                // 缓存缺失（如首次安装/手动清过）：当场扫一次再继续，
+                // 否则六个主题下拉永远停在 schema 静态值（深色项只有 None）。
+                // 只缺失时跑，平时不增加启动开销。
+                try {
+                    GLib.spawn_sync(null,
+                        ['python3', this._appletMetadata.path + '/scripts/scan_themes.py'],
+                        null, GLib.SpawnFlags.SEARCH_PATH, null);
+                } catch (e) {
+                    global.logError("QS scan themes: " + e.message);
+                }
+                if (!themeFile.query_exists(null)) {
+                    global.log("QS _updateSettingsSchema: theme file not found");
+                    return;
+                }
             }
             let [ok, content] = themeFile.load_contents(null);
             if (!ok || !content) {
@@ -1064,9 +1078,14 @@ MyApplet.prototype = {
         if (this._volumeCtrl) {
             try { this._volumeCtrl.detachAll(); } catch(e) {}
         }
-        if (this._sysState && this._sysState._pollTimeoutId) {
-            Mainloop.source_remove(this._sysState._pollTimeoutId);
-            this._sysState._pollTimeoutId = 0;
+        if (this._sysState) {
+            // destroy 内含 poll 定时器 + UPower/BlueZ/NM 信号订阅的清理
+            try { this._sysState.destroy(); } catch(e) {}
+            this._sysState = null;
+        }
+        if (this._themeSwitcher) {
+            try { this._themeSwitcher.destroy(); } catch(e) {}
+            this._themeSwitcher = null;
         }
         if (this._mprisController) {
             this._mprisController.destroy();

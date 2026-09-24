@@ -90,11 +90,36 @@ MprisController.prototype = {
     init: function() {
         this._ensureDaemon();
 
-        this._pollId = Mainloop.timeout_add(1000, () => {
+        // 状态文件监视（inotify）：daemon 一写就 _poll，1 秒轮询只当兜底
+        try { this._watchStateFile(); } catch (e) {
+            global.logError("QS mpris watch: " + e.message);
+        }
+        this._pollId = Mainloop.timeout_add(30000, () => {
             this._poll();
             return true;
         });
         this._poll();
+    },
+
+    _watchStateFile: function() {
+        if (this._stateMonitor) return;
+        let self = this;
+        let file = Gio.File.new_for_path(STATE_FILE);
+        // 文件尚不存在时监视依然有效，daemon 首次写入会触发 CREATED
+        this._stateMonitor = file.monitor_file(Gio.FileMonitorFlags.NONE, null);
+        this._stateMonitorId = this._stateMonitor.connect('changed',
+            function(m, f, other, event) {
+                if (event === Gio.FileMonitorEvent.CHANGED ||
+                    event === Gio.FileMonitorEvent.CREATED ||
+                    event === Gio.FileMonitorEvent.CHANGES_DONE_HINT) {
+                    let now = GLib.get_monotonic_time();
+                    if (now - (self._lastFilePoll || 0) < 400000) return;
+                    self._lastFilePoll = now;
+                    try { self._poll(); } catch (e) {
+                        global.logError("QS mpris filepoll: " + e.message);
+                    }
+                }
+            });
     },
 
     _poll: function() {
@@ -589,6 +614,11 @@ MprisController.prototype = {
         if (this._listChangeTimer) Mainloop.source_remove(this._listChangeTimer);
         this._pollId = 0;
         this._listChangeTimer = 0;
+        if (this._stateMonitor) {
+            try { this._stateMonitor.cancel(); } catch(e) {}
+            this._stateMonitor = null;
+            this._stateMonitorId = 0;
+        }
         try {
             // spawn_command_line_async 只收单个命令字符串；用户名来自系统非外部输入，无注入面
             GLib.spawn_command_line_async(

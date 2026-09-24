@@ -10,6 +10,33 @@ function ThemeSwitcher(applet) {
 }
 
 ThemeSwitcher.prototype = {
+    // 主题/夜灯走 gsettings 信号即时刷新（12 秒轮询只当兜底）。
+    // 外部改主题（lxappearance/别的小工具）也能立刻反映到开关上。
+    watchSettings: function() {
+        if (this._themeWatches) return;
+        this._themeWatches = [];
+        let self = this;
+        let watch = function(obj, key, fn) {
+            try {
+                self._themeWatches.push([obj, obj.connect('changed::' + key, fn)]);
+            } catch (e) {
+                global.logError("QS theme watch: " + e.message);
+            }
+        };
+        watch(this._desktopSettings, 'gtk-theme', function() { self.updateDarkModeState(); });
+        watch(this._desktopSettings, 'icon-theme', function() { self.updateDarkModeState(); });
+        watch(this._colorSettings, 'night-light-enabled', function() { self.updateNightLightState(); });
+    },
+
+    destroy: function() {
+        if (this._themeWatches) {
+            for (let i = 0; i < this._themeWatches.length; i++) {
+                try { this._themeWatches[i][0].disconnect(this._themeWatches[i][1]); } catch (e) {}
+            }
+            this._themeWatches = null;
+        }
+    },
+
     _isDarkNow: function() {
         // 已配置暗/亮主题时按配置判断，否则回退到名称启发式
         try {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-19 15:26+0800\n"
+"POT-Creation-Date: 2026-09-23 14:45+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,163 +17,163 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/hi/MyApplets/QuickSettings@yoo/applet.js:61
+#: ../applet.js:61
 msgid "ActionCenter"
 msgstr ""
 
-#: /home/hi/MyApplets/QuickSettings@yoo/toggle_manager.js:60
-msgid "Airplane Mode"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:233
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:241
-#: /home/hi/MyApplets/QuickSettings@yoo/toggle_manager.js:46
-msgid "Bluetooth"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/brightness_controller.js:31
-msgid "Built-in Display"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/context_menu.js:390
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:162
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:173
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:176
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:247
-msgid "Connected"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/toggle_manager.js:58
-msgid "Dark Style"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/applet.js:519
-msgid "Lock"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/power_menu.js:62
-#: /home/hi/MyApplets/QuickSettings@yoo/power_menu.js:77
-msgid "Log Out"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/context_menu.js:75
-msgid "Mobile broadband"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/context_menu.js:41
-msgid "Mute input"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/context_menu.js:34
-msgid "Mute output"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:185
-#: /home/hi/MyApplets/QuickSettings@yoo/toggle_manager.js:39
-msgid "Network"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/context_menu.js:91
-msgid "Network Connections"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/context_menu.js:84
-msgid "Network Settings"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/toggle_manager.js:56
-msgid "Night Light"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:58
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:63
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:68
-msgid "No Battery"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/context_menu.js:374
-msgid "No Wi-Fi networks found"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:235
-msgid "No adapter"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/theme_switcher.js:136
-msgid "No device"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/mpris_controller.js:182
-#: /home/hi/MyApplets/QuickSettings@yoo/mpris_controller.js:428
-msgid "No media"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:173
-msgid "No signal"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:181
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:250
-msgid "Not connected"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:186
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:244
-msgid "Off"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/applet.js:520
-msgid "Power"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/toggle_manager.js:54
-msgid "Power Mode"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/power_menu.js:46
-#: /home/hi/MyApplets/QuickSettings@yoo/power_menu.js:56
-#: /home/hi/MyApplets/QuickSettings@yoo/power_menu.js:71
-msgid "Power Off"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/power_menu.js:70
-msgid "Reboot"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/context_menu.js:302
-msgid "Scanning…"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/applet.js:517
+#: ../applet.js:638
 msgid "Screenshot"
 msgstr ""
 
-#: /home/hi/MyApplets/QuickSettings@yoo/applet.js:518
+#: ../applet.js:639
 msgid "Settings"
 msgstr ""
 
-#: /home/hi/MyApplets/QuickSettings@yoo/context_menu.js:47
+#: ../applet.js:640
+msgid "Lock"
+msgstr ""
+
+#: ../applet.js:641
+msgid "Power"
+msgstr ""
+
+#: ../brightness_controller.js:33
+msgid "Built-in Display"
+msgstr ""
+
+#: ../context_menu.js:27
+msgid "Mute output"
+msgstr ""
+
+#: ../context_menu.js:34
+msgid "Mute input"
+msgstr ""
+
+#: ../context_menu.js:41
+msgid "Output Device"
+msgstr ""
+
+#: ../context_menu.js:45
 msgid "Sound Settings"
 msgstr ""
 
-#: /home/hi/MyApplets/QuickSettings@yoo/power_menu.js:69
-msgid "Suspend"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/power_menu.js:78
-msgid "Switch User"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:165
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:180
-msgid "Wi-Fi"
-msgstr ""
-
-#: /home/hi/MyApplets/QuickSettings@yoo/context_menu.js:59
-#: /home/hi/MyApplets/QuickSettings@yoo/system_state.js:161
+#: ../context_menu.js:57 ../system_state.js:158
 msgid "Wired"
 msgstr ""
 
-#: /home/hi/MyApplets/QuickSettings@yoo/context_menu.js:65
+#: ../context_menu.js:63
 msgid "Wireless"
+msgstr ""
+
+#: ../context_menu.js:73
+msgid "Mobile broadband"
+msgstr ""
+
+#: ../context_menu.js:82
+msgid "Network Settings"
+msgstr ""
+
+#: ../context_menu.js:89
+msgid "Network Connections"
+msgstr ""
+
+#: ../context_menu.js:100
+msgid "Printer Settings"
+msgstr ""
+
+#: ../context_menu.js:266
+msgid "Muted"
+msgstr ""
+
+#: ../context_menu.js:340 ../context_menu.js:393
+msgid "Scanning…"
+msgstr ""
+
+#: ../context_menu.js:340 ../context_menu.js:384
+msgid "Wi-Fi is off"
+msgstr ""
+
+#: ../context_menu.js:492
+msgid "No Wi-Fi networks found"
+msgstr ""
+
+#: ../context_menu.js:507 ../system_state.js:159 ../system_state.js:170
+#: ../system_state.js:173 ../system_state.js:243
+msgid "Connected"
+msgstr ""
+
+#: ../mpris_controller.js:199 ../mpris_controller.js:465
+msgid "No media"
+msgstr ""
+
+#: ../power_menu.js:43 ../power_menu.js:53 ../power_menu.js:68
+msgid "Power Off"
+msgstr ""
+
+#: ../power_menu.js:59 ../power_menu.js:74
+msgid "Log Out"
+msgstr ""
+
+#: ../power_menu.js:66
+msgid "Suspend"
+msgstr ""
+
+#: ../power_menu.js:67
+msgid "Reboot"
+msgstr ""
+
+#: ../power_menu.js:75
+msgid "Switch User"
+msgstr ""
+
+#: ../system_state.js:56 ../system_state.js:60 ../system_state.js:65
+msgid "No Battery"
+msgstr ""
+
+#: ../system_state.js:162 ../system_state.js:177
+msgid "Wi-Fi"
+msgstr ""
+
+#: ../system_state.js:170
+msgid "No signal"
+msgstr ""
+
+#: ../system_state.js:178 ../system_state.js:246
+msgid "Not connected"
+msgstr ""
+
+#: ../system_state.js:182 ../toggle_manager.js:31
+msgid "Network"
+msgstr ""
+
+#: ../system_state.js:183 ../system_state.js:240
+msgid "Off"
+msgstr ""
+
+#: ../system_state.js:229 ../system_state.js:237 ../toggle_manager.js:38
+msgid "Bluetooth"
+msgstr ""
+
+#: ../system_state.js:231
+msgid "No adapter"
+msgstr ""
+
+#: ../theme_switcher.js:146
+msgid "No device"
+msgstr ""
+
+#: ../toggle_manager.js:46
+msgid "Power Mode"
+msgstr ""
+
+#: ../toggle_manager.js:48
+msgid "Night Light"
+msgstr ""
+
+#: ../toggle_manager.js:50
+msgid "Dark Style"
+msgstr ""
+
+#: ../toggle_manager.js:52
+msgid "Airplane Mode"
 msgstr ""

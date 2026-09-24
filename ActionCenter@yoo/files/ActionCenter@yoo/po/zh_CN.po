@@ -7,6 +7,10 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: ../metadata.json
+msgid "An all-in-one Quick Settings panel for Cinnamon, featuring media control, brightness, volume, network, Bluetooth, power menu and more."
+msgstr "一款面向 Cinnamon 的一体化快捷设置面板，集媒体控制、亮度、音量、网络、蓝牙、电源菜单等功能于一身。"
+
 # ---------- applet.js / modules ----------
 msgid "ActionCenter"
 msgstr "操作中心"
@@ -113,6 +117,9 @@ msgstr "网络设置"
 msgid "Network Connections"
 msgstr "网络连接"
 
+msgid "Printer Settings"
+msgstr "打印机设置"
+
 msgid "No Wi-Fi networks found"
 msgstr "未找到 Wi-Fi 网络"
 
@@ -131,6 +138,18 @@ msgstr "快捷开关"
 
 msgid "Context Menu"
 msgstr "右键菜单"
+
+msgid "Dependencies"
+msgstr "依赖"
+
+msgid "Display Brightness"
+msgstr "显示器亮度"
+
+msgid "Printer"
+msgstr "打印机"
+
+msgid "System Tools"
+msgstr "系统工具"
 
 msgid "Panel Icon"
 msgstr "面板图标"
@@ -240,8 +259,11 @@ msgstr "声音"
 msgid "Show Sound Items"
 msgstr "显示声音项"
 
-msgid "Show Mute Switches"
-msgstr "显示静音开关"
+msgid "Show Output Mute Switch"
+msgstr "显示输出静音开关"
+
+msgid "Show Input Mute Switch"
+msgstr "显示输入静音开关"
 
 msgid "Show Output Selector With Single Device"
 msgstr "单输出设备时也显示选择器"
@@ -260,6 +282,18 @@ msgstr "显示无线开关和 Wi-Fi 列表"
 
 msgid "Show Mobile Broadband Switch"
 msgstr "显示移动宽带开关"
+
+msgid "Show Printer Settings Item"
+msgstr "显示打印机设置项"
+
+msgid "Built-in display brightness prefers the system backlight service (CSD Screen D-Bus, no extra package needed), falling back to brightnessctl. External monitors need ddcutil. If none is available, the brightness slider is hidden automatically.\n\nsudo apt install brightnessctl ddcutil\n\nNOTE: ddcutil needs i2c access. After installing, run: sudo usermod -aG i2c $USER\nand log out and back in."
+msgstr "内屏亮度优先使用系统背光服务（CSD Screen D-Bus，无需额外安装），失败回退到 brightnessctl；外接显示器需要 ddcutil。三者都不可用时亮度滑块会自动隐藏。\n\nsudo apt install brightnessctl ddcutil\n\n注意：ddcutil 需要 i2c 访问权限，安装后执行：sudo usermod -aG i2c $USER\n然后注销重进。"
+
+msgid "The Printer Settings context menu item opens system-config-printer.\n\nsudo apt install system-config-printer"
+msgstr "右键菜单的打印机设置项会打开 system-config-printer。\n\nsudo apt install system-config-printer"
+
+msgid "Network (nmcli/NM D-Bus), Bluetooth (bluetoothctl/BlueZ D-Bus), Power Mode (powerprofilesctl), battery (UPower D-Bus) and the default screenshot command (gnome-screenshot) are preinstalled on Linux Mint. Status updates are event-driven via system D-Bus signals. If a toggle appears disabled, install the missing tool:\n\nsudo apt install network-manager bluez rfkill power-profiles-daemon gnome-screenshot"
+msgstr "网络（nmcli/NM D-Bus）、蓝牙（bluetoothctl/BlueZ D-Bus）、性能模式（powerprofilesctl）、电池（UPower D-Bus）和默认截图命令（gnome-screenshot）在 Linux Mint 上预装，状态更新走系统 D-Bus 信号事件驱动。如果某个开关显示为禁用，安装缺失的工具：\n\nsudo apt install network-manager bluez rfkill power-profiles-daemon gnome-screenshot"
 
 msgid "Off by default (most machines have no WWAN hardware)"
 msgstr "默认关闭（多数机器没有 WWAN 硬件）"
