@@ -1,0 +1,996 @@
+# Hungarian translation for crypto-tracker@danipin
+# Copyright (C) 2025
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin 1.1.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 22:08+0200\n"
+"PO-Revision-Date: 2025-01-24 22:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: Hungarian\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Row 2: Total Value
+#: applet.js:442 applet.js:445 applet.js:789 portfolio.js:699 utils.js:106
+msgid "Loading..."
+msgstr "Betöltés..."
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Price Alarm: %s"
+msgstr "Árriasztás: "
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Target %s reached! Price: %s"
+msgstr " elérve! Ár: "
+
+#: applet.js:742 alarm.js:336
+msgid "risen"
+msgstr "emelkedett"
+
+#: applet.js:742 alarm.js:336
+msgid "fallen"
+msgstr "csökkent"
+
+#: applet.js:743 alarm.js:337
+#, fuzzy, javascript-format
+msgid "Volatility Alarm: %s"
+msgstr "Volatilitás riasztás: "
+
+#: applet.js:743 alarm.js:337
+#, javascript-format
+msgid "%s has %s by %s%%"
+msgstr ""
+
+#: applet.js:857
+msgid "Colors reset to default values."
+msgstr "Színek visszaállítva alapértelmezettre."
+
+#: applet.js:917
+msgid "List updated! Please reopen settings."
+msgstr "Lista frissítve! Kérjük, nyissa meg újra a beállításokat."
+
+#: applet.js:1468
+msgid "NEW ALL TIME HIGH 🚀"
+msgstr "ÚJ MINDENKORI CSÚCS 🚀"
+
+#: applet.js:1977
+msgid "API Limit Reached"
+msgstr "API korlát elérve"
+
+#: applet.js:1977
+#, fuzzy, javascript-format
+msgid "You have used 100% of your monthly limit (10k)."
+msgstr "Felhasználta a havi korlátjának (10k) 100%-át."
+
+#: applet.js:1984
+msgid "Power Saving Enabled"
+msgstr "Energiatakarékosság engedélyezve"
+
+#: applet.js:1984
+msgid "Interval set to 5 min to avoid API ban."
+msgstr "Intervallum 5 percre állítva az API tiltás elkerülése érdekében."
+
+#: applet.js:1987
+msgid "API Limit Warning"
+msgstr "API korlát figyelmeztetés"
+
+#: applet.js:1987
+#, fuzzy, javascript-format
+msgid "You have reached 90% of your limit."
+msgstr "Elérte a korlátjának 90%-át."
+
+#: applet.js:1990
+msgid "API Limit Info"
+msgstr "API korlát infó"
+
+#: applet.js:1990
+#, fuzzy, javascript-format
+msgid "You have reached 80% of your limit."
+msgstr "Elérte a korlátjának 80%-át."
+
+#. Set base texts
+#: footer.js:94
+msgid "API: Active"
+msgstr "API: Aktív"
+
+#: footer.js:94
+msgid "Basic Mode"
+msgstr "Alap mód"
+
+#: footer.js:98
+msgid "Source: CoinGecko"
+msgstr "Forrás: CoinGecko"
+
+#: footer.js:101
+msgid "Get Free API Key"
+msgstr "Ingyenes API kulcs beszerzése"
+
+#: footer.js:111
+#, fuzzy, javascript-format
+msgid "Month: %s"
+msgstr "Hónap: "
+
+#: footer.js:112
+#, javascript-format
+msgid "Ø: %s"
+msgstr ""
+
+#: footer.js:115
+#, fuzzy, javascript-format
+msgid "Alarms: %s"
+msgstr "Riasztások: "
+
+#: header.js:117 header.js:275
+msgid "Portfolio Tracker"
+msgstr "Portfólió követő"
+
+#: header.js:119 header.js:276
+msgid "Alarm Management"
+msgstr "Riasztáskezelés"
+
+#: header.js:121 header.js:278
+msgid "API Usage & Stats"
+msgstr "API használat és statisztikák"
+
+#: header.js:123
+msgid "Support Development"
+msgstr "Fejlesztés támogatása"
+
+# Strings from JS files
+#. IMPORTANT: For the drawing loop we need the pure text without markup!
+#: header.js:128 header.js:274 header.js:641
+msgid "Market Dashboard"
+msgstr "Piaci irányítópult"
+
+#: header.js:130 header.js:642
+msgid "24H Price Change [%]"
+msgstr "24ó árváltozás [%]"
+
+#: header.js:280
+msgid "Support"
+msgstr "Támogatás"
+
+#: header.js:284
+msgid "Settings"
+msgstr "Beállítások"
+
+#: alarm.js:242
+msgid "Alarm Archive Full"
+msgstr "Riasztási archívum megtelt"
+
+#: alarm.js:242
+#, fuzzy, javascript-format
+msgid "Oldest alarm for %s was deleted."
+msgstr "A legrégebbi riasztás ehhez: "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Background Alarm: %s"
+msgstr "Háttér riasztás: "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Target price %s reached! Current: %s"
+msgstr " elérve! Jelenlegi: "
+
+#: alarm.js:469
+msgid "Alarm Settings"
+msgstr "Riasztás beállításai"
+
+#: alarm.js:573
+#, fuzzy, javascript-format
+msgid "Target Price (%s):"
+msgstr "Célár ("
+
+#: alarm.js:574
+msgid "Change (%):"
+msgstr "Változás (%):"
+
+#: alarm.js:577
+msgid "Press ENTER to save."
+msgstr "Nyomjon ENTER-t a mentéshez."
+
+#: alarm.js:643 alarm.js:652
+msgid "Search alarms..."
+msgstr "Riasztások keresése..."
+
+#: alarm.js:739 portfolio.js:1262
+msgid "No matches."
+msgstr "Nincs találat."
+
+#: alarm.js:739
+msgid "No alarms here yet."
+msgstr "Még nincsenek riasztások."
+
+#: alarm.js:856
+#, fuzzy, javascript-format
+msgid "Target: %s"
+msgstr "Cél:"
+
+#: alarm.js:857
+#, fuzzy, javascript-format
+msgid "Vol: %s%%"
+msgstr "24ó Forg.:"
+
+#: alarm.js:860
+#, fuzzy, javascript-format
+msgid "Current: %s"
+msgstr "Jelenlegi: "
+
+#: alarm.js:865
+#, fuzzy, javascript-format
+msgid "Created: %s"
+msgstr "Létrehozva: "
+
+#. Price Input
+#: alarm.js:1023
+msgid "Target:"
+msgstr "Cél:"
+
+#. Vol Input
+#: alarm.js:1044
+msgid "Vol %:"
+msgstr "Vol %:"
+
+#: alarm.js:1058
+msgid "ENTER to save"
+msgstr "ENTER a mentéshez"
+
+#. Sort options
+#: alarm.js:1102 portfolio.js:1008
+msgid "Date"
+msgstr "Dátum"
+
+#: alarm.js:1103
+msgid "Name"
+msgstr "Név"
+
+#: alarm.js:1166 alarm.js:1218
+msgid "Delete all"
+msgstr "Összes törlése"
+
+#: alarm.js:1174 alarm.js:1182 alarm.js:1190 alarm.js:1213 portfolio.js:1212
+#: portfolio.js:1219
+msgid "Sure?"
+msgstr "Biztos?"
+
+#: alarm.js:1230
+#, fuzzy, javascript-format
+msgid "Alarms %s of %s"
+msgstr "Riasztások "
+
+#: donate.js:35
+msgid ""
+"If you like this applet, you can support\n"
+"its development with a donation."
+msgstr ""
+"Ha tetszik ez az applet, támogathatja\n"
+"a fejlesztését adománnyal."
+
+#: donate.js:181
+msgid "Address:"
+msgstr "Cím:"
+
+#: donate.js:212
+msgid "Copied"
+msgstr "Másolva"
+
+#: donate.js:212
+#, fuzzy, javascript-format
+msgid "%s address copied."
+msgstr " cím másolva."
+
+#: search.js:33
+msgid "Search..."
+msgstr "Keresés..."
+
+#: search.js:172
+msgid "No results..."
+msgstr "Nincs találat..."
+
+#: portfolio.js:316
+msgid "Converting..."
+msgstr "Átváltás..."
+
+#: portfolio.js:365
+msgid "Error"
+msgstr "Hiba"
+
+#: portfolio.js:365
+msgid "Currency conversion failed."
+msgstr "Pénznem átváltása sikertelen."
+
+#: portfolio.js:603
+msgid "Total Balance"
+msgstr "Teljes egyenleg"
+
+#. FIX: expand: false for label, insert spacer instead
+#: portfolio.js:720
+msgid "Select Currency"
+msgstr "Pénznem kiválasztása"
+
+#: portfolio.js:790 portfolio.js:798
+msgid "Filter portfolio..."
+msgstr "Portfólió szűrése..."
+
+#: portfolio.js:1006
+msgid "Amount"
+msgstr "Mennyiség"
+
+#: portfolio.js:1007
+msgid "Buy Price"
+msgstr "Vételi ár"
+
+#. Add TX Button
+#: portfolio.js:1199
+msgid "+ Transaction"
+msgstr "+ Tranzakció"
+
+#. Delete Coin Button
+#: portfolio.js:1208 portfolio.js:1224
+msgid "Remove Position"
+msgstr "Pozíció eltávolítása"
+
+#: portfolio.js:1262
+msgid "No positions here yet."
+msgstr "Még nincsenek pozíciók."
+
+#: portfolio.js:1288
+msgid "Add Coin"
+msgstr "Érme hozzáadása"
+
+#: portfolio.js:1305 portfolio.js:1311
+msgid "Search (e.g. Bitcoin)..."
+msgstr "Keresés (pl. Bitcoin)..."
+
+#: portfolio.js:1398
+msgid "No results"
+msgstr "Nincs találat"
+
+#: seasonal.js:80
+msgid "HAPPY HALLOWEEN !"
+msgstr "BOLDOG HALLOWEENT !"
+
+#: seasonal.js:378
+msgid "MERRY CHRISTMAS 🎄"
+msgstr "BOLDOG KARÁCSONYT 🎄"
+
+#. Straighten up
+#: seasonal.js:486
+msgid "HAPPY BITCOIN PIZZA DAY 🍕"
+msgstr "BOLDOG BITCOIN PIZZA NAPOT 🍕"
+
+#: charts.js:181
+msgid "?"
+msgstr ""
+
+#: charts.js:228
+msgid "Rank:"
+msgstr "Rang:"
+
+#: charts.js:228
+msgid "M.Cap:"
+msgstr "Piaci kap.:"
+
+#: charts.js:229
+msgid "24h High:"
+msgstr "24ó Magas:"
+
+#: charts.js:229
+msgid "24h Vol:"
+msgstr "24ó Forg.:"
+
+#: charts.js:230
+msgid "24h Low:"
+msgstr "24ó Alacsony:"
+
+#: charts.js:230
+msgid "ATH:"
+msgstr "ATH:"
+
+#: utils.js:348
+msgid " (Rate Limit)"
+msgstr " (Sebességkorlát)"
+
+#: utils.js:349
+msgid " (API Key invalid)"
+msgstr " (Érvénytelen API kulcs)"
+
+#: utils.js:350
+msgid " (Network)"
+msgstr " (Hálózat)"
+
+#: utils.js:352
+msgid "Crypto-Tracker Error"
+msgstr "Crypto-Tracker hiba"
+
+#: utils.js:352
+#, fuzzy, javascript-format
+msgid "An error was intercepted%s. See log."
+msgstr "Hiba történt"
+
+#: api.js:67
+msgid "API successfully activated."
+msgstr "API sikeresen aktiválva."
+
+#: api.js:73
+msgid "No internet connection"
+msgstr "Nincs internetkapcsolat"
+
+#: api.js:75
+msgid "Key invalid"
+msgstr "Érvénytelen kulcs"
+
+#: api.js:77
+msgid "Key blocked"
+msgstr "Kulcs blokkolva"
+
+#: api.js:79
+msgid "Limit reached"
+msgstr "Korlát elérve"
+
+#: api.js:81
+msgid "Server error"
+msgstr "Szerverhiba"
+
+#: api.js:85
+#, fuzzy, javascript-format
+msgid "API Error: %s"
+msgstr "API hiba: "
+
+#: api.js:90
+msgid "System error"
+msgstr "Rendszerhiba"
+
+#: api.js:131
+msgid "System Diagnosis"
+msgstr "Rendszerdiagnosztika"
+
+#: api.js:143
+msgid "API Connection: Active & Valid"
+msgstr "API kapcsolat: Aktív és érvényes"
+
+#: api.js:145
+msgid "Not configured"
+msgstr "Nincs konfigurálva"
+
+#: api.js:146
+#, fuzzy, javascript-format
+msgid "API Status: %s"
+msgstr "API állapot: "
+
+#: api.js:154
+#, fuzzy, javascript-format
+msgid "Quota critical: %s%% used"
+msgstr "Kvóta kritikus: "
+
+#: api.js:156
+#, fuzzy, javascript-format
+msgid "Quota high: %s%% used"
+msgstr "Kvóta magas: "
+
+#: api.js:158
+#, fuzzy, javascript-format
+msgid "Quota: %s%% (In the green)"
+msgstr "(Rendben)"
+
+#: api.js:165
+#, fuzzy, javascript-format
+msgid "Period: %s days left in month."
+msgstr " nap van hátra a hónapból."
+
+#: api.js:171
+#, fuzzy, javascript-format
+msgid "Tip: Interval (%ss) is aggressive for Free Tier."
+msgstr "mp) agresszív az ingyenes szinthez."
+
+#: api.js:178
+msgid "Note: Error log exists."
+msgstr "Megjegyzés: Hibanapló létezik."
+
+#: api.js:180
+msgid "System: No crashes logged."
+msgstr "Rendszer: Nincs naplózott összeomlás."
+
+#: api.js:202 api.js:397
+msgid "Free API (Basic)"
+msgstr "Ingyenes API (Alap)"
+
+#: api.js:203 api.js:210
+msgid "Today:"
+msgstr "Ma:"
+
+#: api.js:204 api.js:211
+msgid "Month:"
+msgstr "Hónap:"
+
+#: api.js:205 api.js:212
+msgid "Ø per Day:"
+msgstr "Ø naponta:"
+
+#: api.js:209 api.js:398
+msgid "Key API (Pro)"
+msgstr "Kulcs API (Pro)"
+
+#: api.js:224
+msgid "Distribution (Key Calls)"
+msgstr "Eloszlás (Kulcs hívások)"
+
+#: api.js:239
+msgid "Charts"
+msgstr "Diagramok"
+
+#. Blue
+#: api.js:240
+msgid "Details"
+msgstr "Részletek"
+
+#. Purple
+#: api.js:241
+msgid "Search"
+msgstr "Keresés"
+
+#. Yellow
+#: api.js:242
+msgid "Portfolio"
+msgstr "Portfólió"
+
+#. Cyan
+#: api.js:243
+msgid "Alarms"
+msgstr "Riasztások"
+
+#. Red/Pink
+#: api.js:244
+msgid "Updates"
+msgstr "Frissítések"
+
+#: api.js:294
+msgid "History (Last 14 Days)"
+msgstr "Előzmények (Utolsó 14 nap)"
+
+#: api.js:417
+#, fuzzy, javascript-format
+msgid "Error Log (%s KB)"
+msgstr "Hibanapló ("
+
+#: api.js:420
+msgid "The system prevented and logged crashes."
+msgstr "A rendszer megakadályozta és naplózta az összeomlásokat."
+
+#: api.js:426
+msgid "Delete"
+msgstr "Törlés"
+
+#: api.js:439
+msgid "Dismiss"
+msgstr "Elvetés"
+
+#, fuzzy
+#~ msgid "Ø:"
+#~ msgstr "Ø: "
+
+#~ msgid " was deleted."
+#~ msgstr " törölve lett."
+
+#~ msgid "Target price "
+#~ msgstr "Célár "
+
+#, fuzzy
+#~ msgid " has "
+#~ msgstr " "
+
+#~ msgid " by "
+#~ msgstr " értékkel "
+
+#~ msgid " of "
+#~ msgstr " / "
+
+#~ msgid ". See log."
+#~ msgstr ". Lásd a naplót."
+
+#~ msgid "% used"
+#~ msgstr "% felhasználva"
+
+#~ msgid "Quota: "
+#~ msgstr "Kvóta: "
+
+#~ msgid "Period: "
+#~ msgstr "Időszak: "
+
+#~ msgid "Tip: Interval ("
+#~ msgstr "Tipp: Intervallum ("
+
+#~ msgid " KB)"
+#~ msgstr " KB)"
+
+#~ msgid "Crypto Tracker"
+#~ msgstr "Crypto Tracker"
+
+#~ msgid ""
+#~ "A comprehensive cryptocurrency dashboard providing real-time market data, "
+#~ "portfolio management, interactive charts, and advanced alerting "
+#~ "capabilities, enhanced with seasonal visual elements."
+#~ msgstr ""
+#~ "Egy átfogó kriptovaluta irányítópult, amely valós idejű piaci adatokat, "
+#~ "portfóliókezelést, interaktív diagramokat és fejlett riasztási "
+#~ "képességeket biztosít, szezonális vizuális elemekkel kiegészítve."
+
+#~ msgid "Metric 1 (Primary)"
+#~ msgstr "1. Metrika (Elsődleges)"
+
+#~ msgid "Metric 2"
+#~ msgstr "2. Metrika"
+
+#~ msgid "Metric 3"
+#~ msgstr "3. Metrika"
+
+#~ msgid "General"
+#~ msgstr "Általános"
+
+#~ msgid "DevTools (Debug)"
+#~ msgstr "Fejlesztői eszközök (Hibakeresés)"
+
+#~ msgid "Developer Options"
+#~ msgstr "Fejlesztői beállítások"
+
+#~ msgid "Applet Settings"
+#~ msgstr "Applet beállításai"
+
+#~ msgid "CoinGecko API Configuration"
+#~ msgstr "CoinGecko API konfiguráció"
+
+#~ msgid "Display and Activation"
+#~ msgstr "Megjelenítés és aktiválás"
+
+#~ msgid "Data Source (API)"
+#~ msgstr "Adatforrás (API)"
+
+#~ msgid "Color Settings"
+#~ msgstr "Színbeállítások"
+
+#~ msgid "Changes will activate on the next API update interval."
+#~ msgstr ""
+#~ "A változtatások a következő API frissítési intervallumban lépnek életbe."
+
+#~ msgid "CoinGecko API Key (Demo or Pro)"
+#~ msgstr "CoinGecko API kulcs (Demo vagy Pro)"
+
+#~ msgid "Unlocks higher limits and more stable data queries."
+#~ msgstr "Magasabb korlátokat és stabilabb adatlekérdezéseket tesz lehetővé."
+
+#~ msgid ""
+#~ "CALL TRACKING OVERVIEW:\n"
+#~ "\n"
+#~ "• BASIC CALLS: Run via public servers (approx. 5-15 calls/min). \n"
+#~ "  Used for: Standard price queries (saves key quota).\n"
+#~ "\n"
+#~ "• KEY CALLS: Run via your Demo Key quota.\n"
+#~ "  Used for: Charts, coin details & more stable queries.\n"
+#~ "\n"
+#~ "LIMITS (DEMO KEY):\n"
+#~ "• Total: 10,000 calls per month\n"
+#~ "• Speed: Max. 30 requests per minute\n"
+#~ "\n"
+#~ "The tracking in the footer shows you in real-time how many requests have "
+#~ "been used so you can keep an eye on your monthly 10k limit."
+#~ msgstr ""
+#~ "HÍVÁSKÖVETÉS ÁTTEKINTÉSE:\n"
+#~ "\n"
+#~ "• ALAP HÍVÁSOK: Nyilvános szervereken keresztül futnak (kb. 5-15 hívás/"
+#~ "perc). \n"
+#~ "  Használat: Standard árlekérdezések (kíméli a kulcskvótát).\n"
+#~ "\n"
+#~ "• KULCS HÍVÁSOK: A Demo kulcs kvótáján keresztül futnak.\n"
+#~ "  Használat: Diagramok, érme részletek és stabilabb lekérdezések.\n"
+#~ "\n"
+#~ "KORLÁTOK (DEMO KULCS):\n"
+#~ "• Összesen: 10 000 hívás havonta\n"
+#~ "• Sebesség: Max. 30 kérés percenként\n"
+#~ "\n"
+#~ "A láblécben található követés valós időben mutatja, hány kérést használt "
+#~ "fel, így szemmel tarthatja a havi 10k limitet."
+
+#~ msgid "Show Active Alarms"
+#~ msgstr "Aktív riasztások megjelenítése"
+
+#~ msgid "Shows the count of active alarms in the footer."
+#~ msgstr "Megjeleníti az aktív riasztások számát a láblécben."
+
+#~ msgid "Show Monthly Statistics"
+#~ msgstr "Havi statisztikák megjelenítése"
+
+#~ msgid "Shows total API key calls this month."
+#~ msgstr "Megjeleníti az e havi összes API kulcs hívást."
+
+#~ msgid "Show Daily Average"
+#~ msgstr "Napi átlag megjelenítése"
+
+#~ msgid "Shows the calculated average per day."
+#~ msgstr "Megjeleníti a számított napi átlagot."
+
+#~ msgid "Candle Charts as Default"
+#~ msgstr "Gyertyadiagramok alapértelmezettként"
+
+#~ msgid "Shows charts as candlesticks by default where possible."
+#~ msgstr ""
+#~ "Ahol lehetséges, alapértelmezés szerint gyertyadiagramokat jelenít meg."
+
+#~ msgid "Chart: Bullish Candle Color (Up)"
+#~ msgstr "Diagram: Emelkedő gyertya színe (Fel)"
+
+#~ msgid "Color for rising candles."
+#~ msgstr "Szín az emelkedő gyertyákhoz."
+
+#~ msgid "Chart: Bearish Candle Color (Down)"
+#~ msgstr "Diagram: Csökkenő gyertya színe (Le)"
+
+#~ msgid "Color for falling candles."
+#~ msgstr "Szín a csökkenő gyertyákhoz."
+
+#~ msgid "Price Alarm"
+#~ msgstr "Árriasztás"
+
+#~ msgid "Notification when this price is reached."
+#~ msgstr "Értesítés, ha ezt az árat eléri."
+
+#~ msgid "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+#~ msgstr "Adja meg a célárat, pl. 5 vagy 2598. A 0 letiltja a riasztást."
+
+#~ msgid "Percent Alarm"
+#~ msgstr "Százalékos riasztás"
+
+#~ msgid "Alarm on percentage change (24h)."
+#~ msgstr "Riasztás százalékos változás esetén (24ó)."
+
+#~ msgid "Enter a percentage value e.g. 5. 0 disables the alarm."
+#~ msgstr "Adjon meg egy százalékos értéket, pl. 5. A 0 letiltja a riasztást."
+
+#~ msgid "Compact Mode"
+#~ msgstr "Kompakt mód"
+
+#~ msgid "Space-saving display in panel (BTC $85.5K)."
+#~ msgstr "Helytakarékos megjelenítés a panelen (BTC $85.5K)."
+
+#~ msgid "Enable Seasonal Theme"
+#~ msgstr "Szezonális téma engedélyezése"
+
+#~ msgid ""
+#~ "Automatically activates festive designs (e.g. Christmas) at certain times."
+#~ msgstr ""
+#~ "Automatikusan aktiválja az ünnepi dizájnokat (pl. Karácsony) bizonyos "
+#~ "időszakokban."
+
+#~ msgid "Show Decimals"
+#~ msgstr "Tizedesjegyek megjelenítése"
+
+#~ msgid "Toggles the display of cent amounts on or off."
+#~ msgstr "Be- vagy kikapcsolja a cent összegek megjelenítését."
+
+#~ msgid "Show Trend Arrows"
+#~ msgstr "Trendnyilak megjelenítése"
+
+#~ msgid "Shows or hides trend arrows for price changes."
+#~ msgstr "Megjeleníti vagy elrejti a trendnyilakat az árváltozásoknál."
+
+#~ msgid "Icon Opacity"
+#~ msgstr "Ikon átlátszatlansága"
+
+#~ msgid "Controls the visibility of crypto icons."
+#~ msgstr "Szabályozza a kripto ikonok láthatóságát."
+
+#~ msgid "Update Interval"
+#~ msgstr "Frissítési intervallum"
+
+#~ msgid "How often prices are fetched from CoinGecko."
+#~ msgstr "Milyen gyakran kérje le az árakat a CoinGecko-tól."
+
+#~ msgid "Reset Colors"
+#~ msgstr "Színek visszaállítása"
+
+#~ msgid "Resets all custom colors (charts & metrics) to default values."
+#~ msgstr ""
+#~ "Visszaállítja az összes egyéni színt (diagramok és metrikák) az "
+#~ "alapértelmezett értékekre."
+
+#~ msgid "Update Top Coins List"
+#~ msgstr "Top érmék listájának frissítése"
+
+#~ msgid ""
+#~ "Loads the current top 50 coins from CoinGecko and updates the selection "
+#~ "lists (requires settings restart)."
+#~ msgstr ""
+#~ "Betölti az aktuális top 50 érmét a CoinGecko-tól és frissíti a "
+#~ "kiválasztási listákat (a beállítások újraindítását igényli)."
+
+#~ msgid "Force ATH Rocket"
+#~ msgstr "ATH rakéta kényszerítése"
+
+#~ msgid "Always show the rocket animation (for testing purposes)."
+#~ msgstr "Mindig jelenítse meg a rakéta animációt (tesztelési célokra)."
+
+#~ msgid "Force Seasonal Theme"
+#~ msgstr "Szezonális téma kényszerítése"
+
+#~ msgid "Override the date-based theme selection."
+#~ msgstr "Felülbírálja a dátum alapú témaválasztást."
+
+#~ msgid "Debug Frames (Layout)"
+#~ msgstr "Hibakereső keretek (Elrendezés)"
+
+#~ msgid "Draws colorful frames around menu elements for layout inspection."
+#~ msgstr ""
+#~ "Színes kereteket rajzol a menüelemek köré az elrendezés vizsgálatához."
+
+#~ msgid "Show Error Notifications"
+#~ msgstr "Hibaértesítések megjelenítése"
+
+#~ msgid "Sends a desktop notification when an internal error is caught."
+#~ msgstr "Asztali értesítést küld, ha belső hiba történik."
+
+#~ msgid "Test Crash (Safe)"
+#~ msgstr "Teszt összeomlás (Biztonságos)"
+
+#~ msgid "Provokes an error to test logging and notifications."
+#~ msgstr "Hibát idéz elő a naplózás és az értesítések teszteléséhez."
+
+#~ msgid "Show Icon"
+#~ msgstr "Ikon megjelenítése"
+
+#~ msgid "Shows the crypto icon next to the price."
+#~ msgstr "Megjeleníti a kripto ikont az ár mellett."
+
+#~ msgid "Toggles the display of decimal places on/off."
+#~ msgstr "Be- vagy kikapcsolja a tizedesjegyek megjelenítését."
+
+#~ msgid "Number of Decimals"
+#~ msgstr "Tizedesjegyek száma"
+
+#~ msgid "Number of decimal places (2-8)."
+#~ msgstr "Tizedesjegyek száma (2-8)."
+
+#~ msgid "Color the Arrow Only"
+#~ msgstr "Csak a nyíl színezése"
+
+#~ msgid "If active, the price text remains white."
+#~ msgstr "Ha aktív, az árszöveg fehér marad."
+
+#~ msgid "Show Currency Symbol (e.g. $ or €)"
+#~ msgstr "Pénznemszimbólum megjelenítése (pl. $ vagy €)"
+
+#~ msgid "Replaces the currency code with the symbol."
+#~ msgstr "A pénznemkódot a szimbólumra cseréli."
+
+#~ msgid "Enabled"
+#~ msgstr "Engedélyezve"
+
+#~ msgid "Toggles the display of this metric on/off."
+#~ msgstr "Be- vagy kikapcsolja ennek a metrikának a megjelenítését."
+
+#~ msgid "Currency ID (CoinGecko)"
+#~ msgstr "Pénznem azonosító (CoinGecko)"
+
+#~ msgid "Select the cryptocurrency from the top list."
+#~ msgstr "Válassza ki a kriptovalutát a toplistából."
+
+#~ msgid "Custom Currency ID"
+#~ msgstr "Egyéni pénznem azonosító"
+
+#~ msgid "CoinGecko ID (e.g. 'litecoin')"
+#~ msgstr "CoinGecko azonosító (pl. 'litecoin')"
+
+#~ msgid "Comparison Currency"
+#~ msgstr "Összehasonlító pénznem"
+
+#~ msgid "Select the currency for the price comparison."
+#~ msgstr "Válassza ki a pénznemet az árösszehasonlításhoz."
+
+#~ msgid "Display Symbol"
+#~ msgstr "Megjelenített szimbólum"
+
+#~ msgid "The symbol displayed on the panel (e.g. BTC)."
+#~ msgstr "A panelen megjelenített szimbólum (pl. BTC)."
+
+#~ msgid "Color for Rising Price (▲)"
+#~ msgstr "Szín emelkedő árhoz (▲)"
+
+#~ msgid "Select the color for positive price movement."
+#~ msgstr "Válassza ki a színt a pozitív ármozgáshoz."
+
+#~ msgid "Color for Falling Price (▼)"
+#~ msgstr "Szín csökkenő árhoz (▼)"
+
+#~ msgid "Select the color for negative price movement."
+#~ msgstr "Válassza ki a színt a negatív ármozgáshoz."
+
+#~ msgid "15 Seconds (Minimum)"
+#~ msgstr "15 másodperc (Minimum)"
+
+#~ msgid "30 Seconds"
+#~ msgstr "30 másodperc"
+
+#~ msgid "60 Seconds (1 Minute)"
+#~ msgstr "60 másodperc (1 perc)"
+
+#~ msgid "120 Seconds (2 Minutes)"
+#~ msgstr "120 másodperc (2 perc)"
+
+#~ msgid "300 Seconds (5 Minutes)"
+#~ msgstr "300 másodperc (5 perc)"
+
+#~ msgid "Automatic (Date based)"
+#~ msgstr "Automatic (Date based)"
+
+#~ msgid "New Year"
+#~ msgstr "New Year"
+
+#~ msgid "Christmas (General)"
+#~ msgstr "Christmas (General)"
+
+#~ msgid "Christmas (Eve & Day)"
+#~ msgstr "Christmas (Eve & Day)"
+
+#~ msgid "Halloween"
+#~ msgstr "Halloween"
+
+#~ msgid "Valentine's Day"
+#~ msgstr "Valentine's Day"
+
+#~ msgid "Bitcoin Pizza Day"
+#~ msgstr "Bitcoin Pizza Day"
+
+#~ msgid "Easter"
+#~ msgstr "Easter"
+
+#~ msgid "Custom ID"
+#~ msgstr "Egyéni azonosító"
+
+#~ msgid "US Dollar (USD)"
+#~ msgstr "Amerikai dollár (USD)"
+
+#~ msgid "Euro (EUR)"
+#~ msgstr "Euró (EUR)"
+
+#~ msgid "Canadian Dollar (CAD)"
+#~ msgstr "Kanadai dollár (CAD)"
+
+#~ msgid "British Pound (GBP)"
+#~ msgstr "Angol font (GBP)"
+
+#~ msgid "Japanese Yen (JPY)"
+#~ msgstr "Japán jen (JPY)"
+
+#~ msgid "Swiss Franc (CHF)"
+#~ msgstr "Svájci frank (CHF)"
+
+#~ msgid "Australian Dollar (AUD)"
+#~ msgstr "Ausztrál dollár (AUD)"
+
+#~ msgid "Happy New Year"
+#~ msgstr "Boldog Új Évet"
+
+#~ msgid " Loading..."
+#~ msgstr " Betöltés..."
+
+#~ msgid "Target "
+#~ msgstr "Cél "
+
+#~ msgid "Search Coin"
+#~ msgstr "Érme keresése"
+
+#~ msgid "Loading market data..."
+#~ msgstr "Piaci adatok betöltése..."
+
+#~ msgid "Power Saving Disabled"
+#~ msgstr "Energiatakarékosság kikapcsolva"
+
+#~ msgid "New month: Interval reset to 120s."
+#~ msgstr "Új hónap: Intervallum visszaállítva 120mp-re."

@@ -1,0 +1,989 @@
+# Hindi translation for crypto-tracker@danipin
+# Copyright (C) 2025
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin 1.1.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 22:08+0200\n"
+"PO-Revision-Date: 2025-01-24 22:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: Hindi\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Row 2: Total Value
+#: applet.js:442 applet.js:445 applet.js:789 portfolio.js:699 utils.js:106
+msgid "Loading..."
+msgstr "लोड हो रहा है..."
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Price Alarm: %s"
+msgstr "मूल्य अलार्म: "
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Target %s reached! Price: %s"
+msgstr " पहुँच गया! मूल्य: "
+
+#: applet.js:742 alarm.js:336
+msgid "risen"
+msgstr "बढ़ा"
+
+#: applet.js:742 alarm.js:336
+msgid "fallen"
+msgstr "गिरा"
+
+#: applet.js:743 alarm.js:337
+#, fuzzy, javascript-format
+msgid "Volatility Alarm: %s"
+msgstr "अस्थिरता अलार्म: "
+
+#: applet.js:743 alarm.js:337
+#, javascript-format
+msgid "%s has %s by %s%%"
+msgstr ""
+
+#: applet.js:857
+msgid "Colors reset to default values."
+msgstr "रंग डिफ़ॉल्ट मानों पर रीसेट हो गए।"
+
+#: applet.js:917
+msgid "List updated! Please reopen settings."
+msgstr "सूची अपडेट हो गई! कृपया सेटिंग्स फिर से खोलें।"
+
+#: applet.js:1468
+msgid "NEW ALL TIME HIGH 🚀"
+msgstr "नया सर्वकालिक उच्च 🚀"
+
+#: applet.js:1977
+msgid "API Limit Reached"
+msgstr "API सीमा समाप्त"
+
+#: applet.js:1977
+#, fuzzy, javascript-format
+msgid "You have used 100% of your monthly limit (10k)."
+msgstr "आपने अपनी मासिक सीमा (10k) का 100% उपयोग कर लिया है।"
+
+#: applet.js:1984
+msgid "Power Saving Enabled"
+msgstr "पावर सेविंग सक्षम"
+
+#: applet.js:1984
+msgid "Interval set to 5 min to avoid API ban."
+msgstr "API प्रतिबंध से बचने के लिए अंतराल 5 मिनट पर सेट किया गया।"
+
+#: applet.js:1987
+msgid "API Limit Warning"
+msgstr "API सीमा चेतावनी"
+
+#: applet.js:1987
+#, fuzzy, javascript-format
+msgid "You have reached 90% of your limit."
+msgstr "आप अपनी सीमा के 90% तक पहुँच गए हैं।"
+
+#: applet.js:1990
+msgid "API Limit Info"
+msgstr "API सीमा जानकारी"
+
+#: applet.js:1990
+#, fuzzy, javascript-format
+msgid "You have reached 80% of your limit."
+msgstr "आप अपनी सीमा के 80% तक पहुँच गए हैं।"
+
+#. Set base texts
+#: footer.js:94
+msgid "API: Active"
+msgstr "API: सक्रिय"
+
+#: footer.js:94
+msgid "Basic Mode"
+msgstr "बेसिक मोड"
+
+#: footer.js:98
+msgid "Source: CoinGecko"
+msgstr "स्रोत: CoinGecko"
+
+#: footer.js:101
+msgid "Get Free API Key"
+msgstr "फ्री API कुंजी प्राप्त करें"
+
+#: footer.js:111
+#, fuzzy, javascript-format
+msgid "Month: %s"
+msgstr "महीना: "
+
+#: footer.js:112
+#, javascript-format
+msgid "Ø: %s"
+msgstr ""
+
+#: footer.js:115
+#, fuzzy, javascript-format
+msgid "Alarms: %s"
+msgstr "अलार्म: "
+
+#: header.js:117 header.js:275
+msgid "Portfolio Tracker"
+msgstr "पोर्टफोलियो ट्रैकर"
+
+#: header.js:119 header.js:276
+msgid "Alarm Management"
+msgstr "अलार्म प्रबंधन"
+
+#: header.js:121 header.js:278
+msgid "API Usage & Stats"
+msgstr "API उपयोग और आंकड़े"
+
+#: header.js:123
+msgid "Support Development"
+msgstr "विकास का समर्थन करें"
+
+# Strings from JS files
+#. IMPORTANT: For the drawing loop we need the pure text without markup!
+#: header.js:128 header.js:274 header.js:641
+msgid "Market Dashboard"
+msgstr "बाजार डैशबोर्ड"
+
+#: header.js:130 header.js:642
+msgid "24H Price Change [%]"
+msgstr "24 घंटे मूल्य परिवर्तन [%]"
+
+#: header.js:280
+msgid "Support"
+msgstr "समर्थन"
+
+#: header.js:284
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+#: alarm.js:242
+msgid "Alarm Archive Full"
+msgstr "अलार्म पुरालेख भरा हुआ"
+
+#: alarm.js:242
+#, fuzzy, javascript-format
+msgid "Oldest alarm for %s was deleted."
+msgstr "के लिए सबसे पुराना अलार्म "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Background Alarm: %s"
+msgstr "पृष्ठभूमि अलार्म: "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Target price %s reached! Current: %s"
+msgstr " पहुँच गया! वर्तमान: "
+
+#: alarm.js:469
+msgid "Alarm Settings"
+msgstr "अलार्म सेटिंग्स"
+
+#: alarm.js:573
+#, fuzzy, javascript-format
+msgid "Target Price (%s):"
+msgstr "लक्ष्य मूल्य ("
+
+#: alarm.js:574
+msgid "Change (%):"
+msgstr "परिवर्तन (%):"
+
+#: alarm.js:577
+msgid "Press ENTER to save."
+msgstr "सहेजने के लिए ENTER दबाएं।"
+
+#: alarm.js:643 alarm.js:652
+msgid "Search alarms..."
+msgstr "अलार्म खोजें..."
+
+#: alarm.js:739 portfolio.js:1262
+msgid "No matches."
+msgstr "कोई मेल नहीं।"
+
+#: alarm.js:739
+msgid "No alarms here yet."
+msgstr "यहाँ अभी कोई अलार्म नहीं है।"
+
+#: alarm.js:856
+#, fuzzy, javascript-format
+msgid "Target: %s"
+msgstr "लक्ष्य:"
+
+#: alarm.js:857
+#, fuzzy, javascript-format
+msgid "Vol: %s%%"
+msgstr "24घंटे वॉल्यूम:"
+
+#: alarm.js:860
+#, fuzzy, javascript-format
+msgid "Current: %s"
+msgstr "वर्तमान: "
+
+#: alarm.js:865
+#, fuzzy, javascript-format
+msgid "Created: %s"
+msgstr "बनाया गया: "
+
+#. Price Input
+#: alarm.js:1023
+msgid "Target:"
+msgstr "लक्ष्य:"
+
+#. Vol Input
+#: alarm.js:1044
+msgid "Vol %:"
+msgstr "Vol %:"
+
+#: alarm.js:1058
+msgid "ENTER to save"
+msgstr "सहेजने के लिए ENTER"
+
+#. Sort options
+#: alarm.js:1102 portfolio.js:1008
+msgid "Date"
+msgstr "तारीख"
+
+#: alarm.js:1103
+msgid "Name"
+msgstr "नाम"
+
+#: alarm.js:1166 alarm.js:1218
+msgid "Delete all"
+msgstr "सभी हटाएं"
+
+#: alarm.js:1174 alarm.js:1182 alarm.js:1190 alarm.js:1213 portfolio.js:1212
+#: portfolio.js:1219
+msgid "Sure?"
+msgstr "पक्का?"
+
+#: alarm.js:1230
+#, fuzzy, javascript-format
+msgid "Alarms %s of %s"
+msgstr "अलार्म "
+
+#: donate.js:35
+msgid ""
+"If you like this applet, you can support\n"
+"its development with a donation."
+msgstr ""
+"यदि आपको यह एप्लेट पसंद है, तो आप दान के साथ\n"
+"इसके विकास का समर्थन कर सकते हैं।"
+
+#: donate.js:181
+msgid "Address:"
+msgstr "पता:"
+
+#: donate.js:212
+msgid "Copied"
+msgstr "कॉपी किया गया"
+
+#: donate.js:212
+#, fuzzy, javascript-format
+msgid "%s address copied."
+msgstr " पता कॉपी किया गया।"
+
+#: search.js:33
+msgid "Search..."
+msgstr "खोजें..."
+
+#: search.js:172
+msgid "No results..."
+msgstr "कोई परिणाम नहीं..."
+
+#: portfolio.js:316
+msgid "Converting..."
+msgstr "परिवर्तित हो रहा है..."
+
+#: portfolio.js:365
+msgid "Error"
+msgstr "त्रुटि"
+
+#: portfolio.js:365
+msgid "Currency conversion failed."
+msgstr "मुद्रा रूपांतरण विफल।"
+
+#: portfolio.js:603
+msgid "Total Balance"
+msgstr "कुल शेष"
+
+#. FIX: expand: false for label, insert spacer instead
+#: portfolio.js:720
+msgid "Select Currency"
+msgstr "मुद्रा चुनें"
+
+#: portfolio.js:790 portfolio.js:798
+msgid "Filter portfolio..."
+msgstr "पोर्टफोलियो फ़िल्टर करें..."
+
+#: portfolio.js:1006
+msgid "Amount"
+msgstr "राशि"
+
+#: portfolio.js:1007
+msgid "Buy Price"
+msgstr "खरीद मूल्य"
+
+#. Add TX Button
+#: portfolio.js:1199
+msgid "+ Transaction"
+msgstr "+ लेनदेन"
+
+#. Delete Coin Button
+#: portfolio.js:1208 portfolio.js:1224
+msgid "Remove Position"
+msgstr "स्थिति हटाएं"
+
+#: portfolio.js:1262
+msgid "No positions here yet."
+msgstr "यहाँ अभी कोई स्थिति नहीं है।"
+
+#: portfolio.js:1288
+msgid "Add Coin"
+msgstr "सिक्का जोड़ें"
+
+#: portfolio.js:1305 portfolio.js:1311
+msgid "Search (e.g. Bitcoin)..."
+msgstr "खोजें (जैसे Bitcoin)..."
+
+#: portfolio.js:1398
+msgid "No results"
+msgstr "कोई परिणाम नहीं"
+
+#: seasonal.js:80
+msgid "HAPPY HALLOWEEN !"
+msgstr "हैप्पी हैलोवीन !"
+
+#: seasonal.js:378
+msgid "MERRY CHRISTMAS 🎄"
+msgstr "मेरी क्रिसमस 🎄"
+
+#. Straighten up
+#: seasonal.js:486
+msgid "HAPPY BITCOIN PIZZA DAY 🍕"
+msgstr "हैप्पी बिटकॉइन पिज्जा डे 🍕"
+
+#: charts.js:181
+msgid "?"
+msgstr ""
+
+#: charts.js:228
+msgid "Rank:"
+msgstr "रैंक:"
+
+#: charts.js:228
+msgid "M.Cap:"
+msgstr "बाजार पूंजी:"
+
+#: charts.js:229
+msgid "24h High:"
+msgstr "24घंटे उच्च:"
+
+#: charts.js:229
+msgid "24h Vol:"
+msgstr "24घंटे वॉल्यूम:"
+
+#: charts.js:230
+msgid "24h Low:"
+msgstr "24घंटे निम्न:"
+
+#: charts.js:230
+msgid "ATH:"
+msgstr "ATH:"
+
+#: utils.js:348
+msgid " (Rate Limit)"
+msgstr " (दर सीमा)"
+
+#: utils.js:349
+msgid " (API Key invalid)"
+msgstr " (API कुंजी अमान्य)"
+
+#: utils.js:350
+msgid " (Network)"
+msgstr " (नेटवर्क)"
+
+#: utils.js:352
+msgid "Crypto-Tracker Error"
+msgstr "Crypto-Tracker त्रुटि"
+
+#: utils.js:352
+#, fuzzy, javascript-format
+msgid "An error was intercepted%s. See log."
+msgstr "एक त्रुटि पकड़ी गई"
+
+#: api.js:67
+msgid "API successfully activated."
+msgstr "API सफलतापूर्वक सक्रिय हो गया।"
+
+#: api.js:73
+msgid "No internet connection"
+msgstr "कोई इंटरनेट कनेक्शन नहीं"
+
+#: api.js:75
+msgid "Key invalid"
+msgstr "कुंजी अमान्य"
+
+#: api.js:77
+msgid "Key blocked"
+msgstr "कुंजी अवरुद्ध"
+
+#: api.js:79
+msgid "Limit reached"
+msgstr "सीमा समाप्त"
+
+#: api.js:81
+msgid "Server error"
+msgstr "सर्वर त्रुटि"
+
+#: api.js:85
+#, fuzzy, javascript-format
+msgid "API Error: %s"
+msgstr "API त्रुटि: "
+
+#: api.js:90
+msgid "System error"
+msgstr "सिस्टम त्रुटि"
+
+#: api.js:131
+msgid "System Diagnosis"
+msgstr "सिस्टम निदान"
+
+#: api.js:143
+msgid "API Connection: Active & Valid"
+msgstr "API कनेक्शन: सक्रिय और मान्य"
+
+#: api.js:145
+msgid "Not configured"
+msgstr "कॉन्फ़िगर नहीं किया गया"
+
+#: api.js:146
+#, fuzzy, javascript-format
+msgid "API Status: %s"
+msgstr "API स्थिति: "
+
+#: api.js:154
+#, fuzzy, javascript-format
+msgid "Quota critical: %s%% used"
+msgstr "कोटा गंभीर: "
+
+#: api.js:156
+#, fuzzy, javascript-format
+msgid "Quota high: %s%% used"
+msgstr "कोटा उच्च: "
+
+#: api.js:158
+#, fuzzy, javascript-format
+msgid "Quota: %s%% (In the green)"
+msgstr "(हरे में)"
+
+#: api.js:165
+#, fuzzy, javascript-format
+msgid "Period: %s days left in month."
+msgstr " महीने में दिन शेष।"
+
+#: api.js:171
+#, fuzzy, javascript-format
+msgid "Tip: Interval (%ss) is aggressive for Free Tier."
+msgstr "s) फ्री टियर के लिए आक्रामक है।"
+
+#: api.js:178
+msgid "Note: Error log exists."
+msgstr "नोट: त्रुटि लॉग मौजूद है।"
+
+#: api.js:180
+msgid "System: No crashes logged."
+msgstr "सिस्टम: कोई क्रैश लॉग नहीं किया गया।"
+
+#: api.js:202 api.js:397
+msgid "Free API (Basic)"
+msgstr "फ्री API (बेसिक)"
+
+#: api.js:203 api.js:210
+msgid "Today:"
+msgstr "आज:"
+
+#: api.js:204 api.js:211
+msgid "Month:"
+msgstr "महीना:"
+
+#: api.js:205 api.js:212
+msgid "Ø per Day:"
+msgstr "Ø प्रति दिन:"
+
+#: api.js:209 api.js:398
+msgid "Key API (Pro)"
+msgstr "की API (प्रो)"
+
+#: api.js:224
+msgid "Distribution (Key Calls)"
+msgstr "वितरण (की कॉल्स)"
+
+#: api.js:239
+msgid "Charts"
+msgstr "चार्ट"
+
+#. Blue
+#: api.js:240
+msgid "Details"
+msgstr "विवरण"
+
+#. Purple
+#: api.js:241
+msgid "Search"
+msgstr "खोज"
+
+#. Yellow
+#: api.js:242
+msgid "Portfolio"
+msgstr "पोर्टफोलियो"
+
+#. Cyan
+#: api.js:243
+msgid "Alarms"
+msgstr "अलार्म"
+
+#. Red/Pink
+#: api.js:244
+msgid "Updates"
+msgstr "अपडेट"
+
+#: api.js:294
+msgid "History (Last 14 Days)"
+msgstr "इतिहास (पिछले 14 दिन)"
+
+#: api.js:417
+#, fuzzy, javascript-format
+msgid "Error Log (%s KB)"
+msgstr "त्रुटि लॉग ("
+
+#: api.js:420
+msgid "The system prevented and logged crashes."
+msgstr "सिस्टम ने क्रैश को रोका और लॉग किया।"
+
+#: api.js:426
+msgid "Delete"
+msgstr "हटाएं"
+
+#: api.js:439
+msgid "Dismiss"
+msgstr "खारिज करें"
+
+#, fuzzy
+#~ msgid "Ø:"
+#~ msgstr "Ø: "
+
+#~ msgid " was deleted."
+#~ msgstr " हटा दिया गया था।"
+
+#~ msgid "Target price "
+#~ msgstr "लक्ष्य मूल्य "
+
+#, fuzzy
+#~ msgid " has "
+#~ msgstr "ने "
+
+#~ msgid " by "
+#~ msgstr " द्वारा "
+
+#~ msgid " of "
+#~ msgstr " का "
+
+#~ msgid ". See log."
+#~ msgstr "। लॉग देखें।"
+
+#~ msgid "% used"
+#~ msgstr "% उपयोग किया गया"
+
+#~ msgid "Quota: "
+#~ msgstr "कोटा: "
+
+#~ msgid "Period: "
+#~ msgstr "अवधि: "
+
+#~ msgid "Tip: Interval ("
+#~ msgstr "सुझाव: अंतराल ("
+
+#~ msgid " KB)"
+#~ msgstr " KB)"
+
+#~ msgid "Crypto Tracker"
+#~ msgstr "क्रिप्टो ट्रैकर"
+
+#~ msgid ""
+#~ "A comprehensive cryptocurrency dashboard providing real-time market data, "
+#~ "portfolio management, interactive charts, and advanced alerting "
+#~ "capabilities, enhanced with seasonal visual elements."
+#~ msgstr ""
+#~ "एक व्यापक क्रिप्टोकरेंसी डैशबोर्ड जो वास्तविक समय के बाजार डेटा, पोर्टफोलियो प्रबंधन, "
+#~ "इंटरैक्टिव चार्ट और उन्नत चेतावनी क्षमताएं प्रदान करता है, मौसमी दृश्य तत्वों के साथ "
+#~ "बढ़ाया गया है।"
+
+#~ msgid "Metric 1 (Primary)"
+#~ msgstr "मेट्रिक 1 (प्राथमिक)"
+
+#~ msgid "Metric 2"
+#~ msgstr "मेट्रिक 2"
+
+#~ msgid "Metric 3"
+#~ msgstr "मेट्रिक 3"
+
+#~ msgid "General"
+#~ msgstr "सामान्य"
+
+#~ msgid "DevTools (Debug)"
+#~ msgstr "डेव टूल्स (डिबग)"
+
+#~ msgid "Developer Options"
+#~ msgstr "डेवलपर विकल्प"
+
+#~ msgid "Applet Settings"
+#~ msgstr "एप्लेट सेटिंग्स"
+
+#~ msgid "CoinGecko API Configuration"
+#~ msgstr "CoinGecko API कॉन्फ़िगरेशन"
+
+#~ msgid "Display and Activation"
+#~ msgstr "प्रदर्शन और सक्रियण"
+
+#~ msgid "Data Source (API)"
+#~ msgstr "डेटा स्रोत (API)"
+
+#~ msgid "Color Settings"
+#~ msgstr "रंग सेटिंग्स"
+
+#~ msgid "Changes will activate on the next API update interval."
+#~ msgstr "परिवर्तन अगले API अपडेट अंतराल पर सक्रिय होंगे।"
+
+#~ msgid "CoinGecko API Key (Demo or Pro)"
+#~ msgstr "CoinGecko API कुंजी (डेमो या प्रो)"
+
+#~ msgid "Unlocks higher limits and more stable data queries."
+#~ msgstr "उच्च सीमाएं और अधिक स्थिर डेटा क्वेरी अनलॉक करता है।"
+
+#~ msgid ""
+#~ "CALL TRACKING OVERVIEW:\n"
+#~ "\n"
+#~ "• BASIC CALLS: Run via public servers (approx. 5-15 calls/min). \n"
+#~ "  Used for: Standard price queries (saves key quota).\n"
+#~ "\n"
+#~ "• KEY CALLS: Run via your Demo Key quota.\n"
+#~ "  Used for: Charts, coin details & more stable queries.\n"
+#~ "\n"
+#~ "LIMITS (DEMO KEY):\n"
+#~ "• Total: 10,000 calls per month\n"
+#~ "• Speed: Max. 30 requests per minute\n"
+#~ "\n"
+#~ "The tracking in the footer shows you in real-time how many requests have "
+#~ "been used so you can keep an eye on your monthly 10k limit."
+#~ msgstr ""
+#~ "कॉल ट्रैकिंग अवलोकन:\n"
+#~ "\n"
+#~ "• बेसिक कॉल्स: सार्वजनिक सर्वर के माध्यम से चलाएं (लगभग 5-15 कॉल/मिनट)। \n"
+#~ "  इसके लिए उपयोग किया जाता है: मानक मूल्य प्रश्न (कुंजी कोटा बचाता है)।\n"
+#~ "\n"
+#~ "• कुंजी कॉल्स: अपने डेमो कुंजी कोटा के माध्यम से चलाएं।\n"
+#~ "  इसके लिए उपयोग किया जाता है: चार्ट, सिक्का विवरण और अधिक स्थिर प्रश्न।\n"
+#~ "\n"
+#~ "सीमाएं (डेमो कुंजी):\n"
+#~ "• कुल: 10,000 कॉल प्रति माह\n"
+#~ "• गति: अधिकतम 30 अनुरोध प्रति मिनट\n"
+#~ "\n"
+#~ "फुटर में ट्रैकिंग आपको वास्तविक समय में दिखाती है कि कितने अनुरोधों का उपयोग किया गया "
+#~ "है ताकि आप अपनी मासिक 10k सीमा पर नज़र रख सकें।"
+
+#~ msgid "Show Active Alarms"
+#~ msgstr "सक्रिय अलार्म दिखाएं"
+
+#~ msgid "Shows the count of active alarms in the footer."
+#~ msgstr "फुटर में सक्रिय अलार्म की गिनती दिखाता है।"
+
+#~ msgid "Show Monthly Statistics"
+#~ msgstr "मासिक आंकड़े दिखाएं"
+
+#~ msgid "Shows total API key calls this month."
+#~ msgstr "इस महीने कुल API कुंजी कॉल दिखाता है।"
+
+#~ msgid "Show Daily Average"
+#~ msgstr "दैनिक औसत दिखाएं"
+
+#~ msgid "Shows the calculated average per day."
+#~ msgstr "प्रति दिन गणना किया गया औसत दिखाता है।"
+
+#~ msgid "Candle Charts as Default"
+#~ msgstr "डिफ़ॉल्ट रूप में कैंडल चार्ट"
+
+#~ msgid "Shows charts as candlesticks by default where possible."
+#~ msgstr "जहाँ संभव हो, चार्ट को डिफ़ॉल्ट रूप से कैंडलस्टिक्स के रूप में दिखाता है।"
+
+#~ msgid "Chart: Bullish Candle Color (Up)"
+#~ msgstr "चार्ट: बुलिश कैंडल रंग (ऊपर)"
+
+#~ msgid "Color for rising candles."
+#~ msgstr "बढ़ती कैंडल्स के लिए रंग।"
+
+#~ msgid "Chart: Bearish Candle Color (Down)"
+#~ msgstr "चार्ट: बियरिश कैंडल रंग (नीचे)"
+
+#~ msgid "Color for falling candles."
+#~ msgstr "गिरती कैंडल्स के लिए रंग।"
+
+#~ msgid "Price Alarm"
+#~ msgstr "मूल्य अलार्म"
+
+#~ msgid "Notification when this price is reached."
+#~ msgstr "इस मूल्य तक पहुँचने पर अधिसूचना।"
+
+#~ msgid "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+#~ msgstr "लक्ष्य मूल्य दर्ज करें जैसे 5 या 2598। 0 अलार्म को अक्षम करता है।"
+
+#~ msgid "Percent Alarm"
+#~ msgstr "प्रतिशत अलार्म"
+
+#~ msgid "Alarm on percentage change (24h)."
+#~ msgstr "प्रतिशत परिवर्तन (24 घंटे) पर अलार्म।"
+
+#~ msgid "Enter a percentage value e.g. 5. 0 disables the alarm."
+#~ msgstr "प्रतिशत मान दर्ज करें जैसे 5। 0 अलार्म को अक्षम करता है।"
+
+#~ msgid "Compact Mode"
+#~ msgstr "कॉम्पैक्ट मोड"
+
+#~ msgid "Space-saving display in panel (BTC $85.5K)."
+#~ msgstr "पैनल में जगह बचाने वाला प्रदर्शन (BTC $85.5K)।"
+
+#~ msgid "Enable Seasonal Theme"
+#~ msgstr "मौसमी थीम सक्षम करें"
+
+#~ msgid ""
+#~ "Automatically activates festive designs (e.g. Christmas) at certain times."
+#~ msgstr ""
+#~ "निश्चित समय पर उत्सव के डिज़ाइन (जैसे क्रिसमस) को स्वचालित रूप से सक्रिय करता है।"
+
+#~ msgid "Show Decimals"
+#~ msgstr "दशमलव दिखाएं"
+
+#~ msgid "Toggles the display of cent amounts on or off."
+#~ msgstr "सेंट राशियों के प्रदर्शन को चालू या बंद करता है।"
+
+#~ msgid "Show Trend Arrows"
+#~ msgstr "ट्रेंड तीर दिखाएं"
+
+#~ msgid "Shows or hides trend arrows for price changes."
+#~ msgstr "मूल्य परिवर्तन के लिए ट्रेंड तीर दिखाता या छिपाता है।"
+
+#~ msgid "Icon Opacity"
+#~ msgstr "आइकन अपारदर्शिता"
+
+#~ msgid "Controls the visibility of crypto icons."
+#~ msgstr "क्रिप्टो आइकन की दृश्यता को नियंत्रित करता है।"
+
+#~ msgid "Update Interval"
+#~ msgstr "अपडेट अंतराल"
+
+#~ msgid "How often prices are fetched from CoinGecko."
+#~ msgstr "CoinGecko से कीमतें कितनी बार प्राप्त की जाती हैं।"
+
+#~ msgid "Reset Colors"
+#~ msgstr "रंग रीसेट करें"
+
+#~ msgid "Resets all custom colors (charts & metrics) to default values."
+#~ msgstr "सभी कस्टम रंगों (चार्ट और मेट्रिक्स) को डिफ़ॉल्ट मानों पर रीसेट करता है।"
+
+#~ msgid "Update Top Coins List"
+#~ msgstr "शीर्ष सिक्के सूची अपडेट करें"
+
+#~ msgid ""
+#~ "Loads the current top 50 coins from CoinGecko and updates the selection "
+#~ "lists (requires settings restart)."
+#~ msgstr ""
+#~ "CoinGecko से वर्तमान शीर्ष 50 सिक्के लोड करता है और चयन सूचियों को अपडेट करता है "
+#~ "(सेटिंग्स पुनरारंभ की आवश्यकता है)।"
+
+#~ msgid "Force ATH Rocket"
+#~ msgstr "ATH रॉकेट को बाध्य करें"
+
+#~ msgid "Always show the rocket animation (for testing purposes)."
+#~ msgstr "हमेशा रॉकेट एनीमेशन दिखाएं (परीक्षण उद्देश्यों के लिए)।"
+
+#~ msgid "Force Seasonal Theme"
+#~ msgstr "मौसमी थीम को बाध्य करें"
+
+#~ msgid "Override the date-based theme selection."
+#~ msgstr "दिनांक-आधारित थीम चयन को ओवरराइड करें।"
+
+#~ msgid "Debug Frames (Layout)"
+#~ msgstr "डिबग फ्रेम्स (लेआउट)"
+
+#~ msgid "Draws colorful frames around menu elements for layout inspection."
+#~ msgstr "लेआउट निरीक्षण के लिए मेनू तत्वों के चारों ओर रंगीन फ्रेम बनाता है।"
+
+#~ msgid "Show Error Notifications"
+#~ msgstr "त्रुटि सूचनाएं दिखाएं"
+
+#~ msgid "Sends a desktop notification when an internal error is caught."
+#~ msgstr "आंतरिक त्रुटि पकड़े जाने पर डेस्कटॉप अधिसूचना भेजता है।"
+
+#~ msgid "Test Crash (Safe)"
+#~ msgstr "क्रैश टेस्ट (सुरक्षित)"
+
+#~ msgid "Provokes an error to test logging and notifications."
+#~ msgstr "लॉगिंग और सूचनाओं का परीक्षण करने के लिए त्रुटि उत्पन्न करता है।"
+
+#~ msgid "Show Icon"
+#~ msgstr "आइकन दिखाएं"
+
+#~ msgid "Shows the crypto icon next to the price."
+#~ msgstr "मूल्य के बगल में क्रिप्टो आइकन दिखाता है।"
+
+#~ msgid "Toggles the display of decimal places on/off."
+#~ msgstr "दशमलव स्थानों के प्रदर्शन को चालू/बंद करता है।"
+
+#~ msgid "Number of Decimals"
+#~ msgstr "दशमलव की संख्या"
+
+#~ msgid "Number of decimal places (2-8)."
+#~ msgstr "दशमलव स्थानों की संख्या (2-8)।"
+
+#~ msgid "Color the Arrow Only"
+#~ msgstr "केवल तीर को रंग दें"
+
+#~ msgid "If active, the price text remains white."
+#~ msgstr "यदि सक्रिय है, तो मूल्य पाठ सफेद रहता है।"
+
+#~ msgid "Show Currency Symbol (e.g. $ or €)"
+#~ msgstr "मुद्रा प्रतीक दिखाएं (जैसे $ या €)"
+
+#~ msgid "Replaces the currency code with the symbol."
+#~ msgstr "मुद्रा कोड को प्रतीक से बदल देता है।"
+
+#~ msgid "Enabled"
+#~ msgstr "सक्षम"
+
+#~ msgid "Toggles the display of this metric on/off."
+#~ msgstr "इस मेट्रिक के प्रदर्शन को चालू/बंद करता है।"
+
+#~ msgid "Currency ID (CoinGecko)"
+#~ msgstr "मुद्रा आईडी (CoinGecko)"
+
+#~ msgid "Select the cryptocurrency from the top list."
+#~ msgstr "शीर्ष सूची से क्रिप्टोकरेंसी का चयन करें।"
+
+#~ msgid "Custom Currency ID"
+#~ msgstr "कस्टम मुद्रा आईडी"
+
+#~ msgid "CoinGecko ID (e.g. 'litecoin')"
+#~ msgstr "CoinGecko आईडी (जैसे 'litecoin')"
+
+#~ msgid "Comparison Currency"
+#~ msgstr "तुलना मुद्रा"
+
+#~ msgid "Select the currency for the price comparison."
+#~ msgstr "मूल्य तुलना के लिए मुद्रा का चयन करें।"
+
+#~ msgid "Display Symbol"
+#~ msgstr "प्रदर्शन प्रतीक"
+
+#~ msgid "The symbol displayed on the panel (e.g. BTC)."
+#~ msgstr "पैनल पर प्रदर्शित प्रतीक (जैसे BTC)।"
+
+#~ msgid "Color for Rising Price (▲)"
+#~ msgstr "बढ़ती कीमत के लिए रंग (▲)"
+
+#~ msgid "Select the color for positive price movement."
+#~ msgstr "सकारात्मक मूल्य आंदोलन के लिए रंग का चयन करें।"
+
+#~ msgid "Color for Falling Price (▼)"
+#~ msgstr "गिरती कीमत के लिए रंग (▼)"
+
+#~ msgid "Select the color for negative price movement."
+#~ msgstr "नकारात्मक मूल्य आंदोलन के लिए रंग का चयन करें।"
+
+#~ msgid "15 Seconds (Minimum)"
+#~ msgstr "15 सेकंड (न्यूनतम)"
+
+#~ msgid "30 Seconds"
+#~ msgstr "30 सेकंड"
+
+#~ msgid "60 Seconds (1 Minute)"
+#~ msgstr "60 सेकंड (1 मिनट)"
+
+#~ msgid "120 Seconds (2 Minutes)"
+#~ msgstr "120 सेकंड (2 मिनट)"
+
+#~ msgid "300 Seconds (5 Minutes)"
+#~ msgstr "300 सेकंड (5 मिनट)"
+
+#~ msgid "Automatic (Date based)"
+#~ msgstr "Automatic (Date based)"
+
+#~ msgid "New Year"
+#~ msgstr "New Year"
+
+#~ msgid "Christmas (General)"
+#~ msgstr "Christmas (General)"
+
+#~ msgid "Christmas (Eve & Day)"
+#~ msgstr "Christmas (Eve & Day)"
+
+#~ msgid "Halloween"
+#~ msgstr "Halloween"
+
+#~ msgid "Valentine's Day"
+#~ msgstr "Valentine's Day"
+
+#~ msgid "Bitcoin Pizza Day"
+#~ msgstr "Bitcoin Pizza Day"
+
+#~ msgid "Easter"
+#~ msgstr "Easter"
+
+#~ msgid "Custom ID"
+#~ msgstr "कस्टम आईडी"
+
+#~ msgid "US Dollar (USD)"
+#~ msgstr "अमेरिकी डॉलर (USD)"
+
+#~ msgid "Euro (EUR)"
+#~ msgstr "यूरो (EUR)"
+
+#~ msgid "Canadian Dollar (CAD)"
+#~ msgstr "कनाडाई डॉलर (CAD)"
+
+#~ msgid "British Pound (GBP)"
+#~ msgstr "ब्रिटिश पाउंड (GBP)"
+
+#~ msgid "Japanese Yen (JPY)"
+#~ msgstr "जापानी येन (JPY)"
+
+#~ msgid "Swiss Franc (CHF)"
+#~ msgstr "स्विस फ्रैंक (CHF)"
+
+#~ msgid "Australian Dollar (AUD)"
+#~ msgstr "ऑस्ट्रेलियाई डॉलर (AUD)"
+
+#~ msgid "Happy New Year"
+#~ msgstr "नव वर्ष की शुभकामनाएँ"
+
+#~ msgid " Loading..."
+#~ msgstr " लोड हो रहा है..."
+
+#~ msgid "Target "
+#~ msgstr "लक्ष्य "
+
+#~ msgid "Search Coin"
+#~ msgstr "सिक्का खोजें"
+
+#~ msgid "Loading market data..."
+#~ msgstr "बाजार डेटा लोड हो रहा है..."
+
+#~ msgid "Power Saving Disabled"
+#~ msgstr "पावर सेविंग अक्षम"
+
+#~ msgid "New month: Interval reset to 120s."
+#~ msgstr "नया महीना: अंतराल 120s पर रीसेट।"
