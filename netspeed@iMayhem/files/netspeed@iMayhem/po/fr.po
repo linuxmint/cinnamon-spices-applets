@@ -186,3 +186,62 @@ msgstr "Actions"
 #. settings-schema.json->applySettings->description
 msgid "Save / Apply Settings"
 msgstr "Enregistrer/Appliquer les paramètres"
+msgid "Language"
+msgstr "Langue"
+
+msgid "No history available"
+msgstr "Aucun historique disponible"
+
+msgid "Open Usage Log"
+msgstr "Ouvrir le journal"
+
+msgid "System Default"
+msgstr "Langue système"
+
+msgid "Usage History"
+msgstr "Historique d'utilisation"
+
+msgid "Enable Per-App Network Monitoring (Tooltip)"
+msgstr "Activer le suivi réseau par application (infobulle)"
+
+msgid "Applications"
+msgstr "Applications"
+
+msgid "apps"
+msgstr "apps"
+
+msgid "Real-time Speed"
+msgstr "Vitesse en temps réel"
+
+msgid "Session Usage"
+msgstr "Utilisation de la session"
+
+msgid "Daily Usage"
+msgstr "Utilisation quotidienne"
+
+msgid "Network Logger"
+msgstr "Journal réseau"
+
+msgid "Logger"
+msgstr "Journal"
+
+msgid "No active connections"
+msgstr "Pas de connexions actives"
+
+msgid "Interface"
+msgstr "Interface"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "High Network Usage Detected"
+msgstr "Utilisation intensive du réseau détectée"
+
+msgid "Application '%s' is consuming %s MB/s"
+msgstr "L'application '%s' consomme %s Mo/s"
+
+msgid "Enable High-Usage App Notifications"
+msgstr "Activer les notifications d'utilisation intensive"
+
+msgid "High-Usage Threshold"
+msgstr "Seuil d'utilisation intensive"
