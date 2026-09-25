@@ -3,7 +3,7 @@
   "name": "Weather",
   "description": "View your local weather forecast",
   "max-instances": 3,
-  "version": "3.6.10",
+  "version": "3.6.11",
   "multiversion": true,
   "cinnamon-version": [
     "2.2",

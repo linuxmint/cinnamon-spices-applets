@@ -154,12 +154,12 @@ export class UI {
 		return true;
 	}
 
-	public ShowRefreshIcon(): void {
-		this.Bar.ShowRefreshIcon();
+	public ShowRefreshProgress(): void {
+		this.Bar.ShowRefreshProgress();
 	}
 
-	public HideRefreshIcon(): void {
-		this.Bar.HideRefreshIcon();
+	public ShowRefreshResult(success: boolean): void {
+		this.Bar.ShowRefreshResult(success);
 	}
 
 	// --------------------------------------------------------------------
