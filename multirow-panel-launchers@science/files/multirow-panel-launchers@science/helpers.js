@@ -186,9 +186,54 @@ function pickCellWidth(iconSize, preferredWidth) {
     return iconSize + CELL_WIDTH_PADDING_FALLBACK;
 }
 
+// The launcherList default from settings-schema.json (schema.test.js keeps the
+// two equal). A live list equal to this while the backup holds something else
+// is what a reset or recreated instance config looks like.
+const DEFAULT_LAUNCHERS = ['firefox.desktop', 'org.gnome.Terminal.desktop', 'nemo.desktop'];
+
+function _sameList(a, b) {
+    return Array.isArray(a) && Array.isArray(b) &&
+        a.length === b.length && a.every((v, i) => v === b[i]);
+}
+
+/**
+ * Decide whether _saveBackup should write panel-launchers-backup.json.
+ *
+ * - 'unchanged': identical text, so don't touch the file (or its mtime).
+ * - 'keep-existing': the new launcher list is exactly the schema default and
+ *   the existing backup holds a different, non-empty list. A reset or
+ *   recreated instance config comes back holding the default, and _reload()
+ *   saves right away -- the moment the backup is needed for restore-config.sh.
+ *   Only an exact default match counts: any other change, including removing
+ *   launchers, is a real edit and gets written.
+ * - 'write': everything else, including a missing or unparseable backup.
+ *
+ * @param {string} newText - JSON the applet would write
+ * @param {?string} existingText - current file contents, or null if missing
+ * @param {string[]} defaultList - the schema's default launcherList
+ * @returns {'write'|'unchanged'|'keep-existing'}
+ */
+function backupWriteDecision(newText, existingText, defaultList) {
+    if (existingText === null || existingText === undefined) return 'write';
+    if (newText === existingText) return 'unchanged';
+    let existing, next;
+    try {
+        existing = JSON.parse(existingText);
+        next = JSON.parse(newText);
+    } catch (e) {
+        return 'write';
+    }
+    const oldList = existing ? existing.launcherList : null;
+    if (next && _sameList(next.launcherList, defaultList) &&
+        Array.isArray(oldList) && oldList.length > 0 && !_sameList(oldList, defaultList))
+        return 'keep-existing';
+    return 'write';
+}
+
 // Export for Node.js testing; ignored in GJS runtime
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        calcLauncherIconSize, calcNeededRows, calcEffectiveRows, calcContainerColumns, calcContainerWidth, calcVisibleLauncherCount, calcGridDropIndex, calcIconSizeWithFallback, pickCellWidth
+        calcLauncherIconSize, calcNeededRows, calcEffectiveRows, calcContainerColumns, calcContainerWidth, calcVisibleLauncherCount, calcGridDropIndex, calcIconSizeWithFallback, pickCellWidth,
+        DEFAULT_LAUNCHERS, backupWriteDecision
     };
 }
