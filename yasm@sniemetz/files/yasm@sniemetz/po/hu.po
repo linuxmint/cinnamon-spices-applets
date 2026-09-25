@@ -1,0 +1,572 @@
+# YASM
+# Machine-generated hu.po — corrections welcome.
+# This file is put in the public domain.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yasm@sniemetz 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-09-22 22:49+0200\n"
+"PO-Revision-Date: 2026-09-22 22:49\n"
+"Last-Translator: Machine-generated stub\n"
+"Language-Team: none\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:676
+msgid "Click to open top"
+msgstr "Kattints a top megnyitásához"
+
+#. applet.js:740
+msgid "Usage"
+msgstr "Használat"
+
+#. applet.js:741
+msgid "CPU pkg:"
+msgstr "CPU pkg:"
+
+#. applet.js:742
+msgid "GPU:"
+msgstr "GPU:"
+
+#. applet.js:743
+msgid "DRAM:"
+msgstr "DRAM:"
+
+#. applet.js:744
+msgid "Display:"
+msgstr "Kijelző:"
+
+#. applet.js:745
+msgid "Total:"
+msgstr "Összes:"
+
+#. applet.js:748
+msgid ""
+"CPU power unavailable — click\n"
+"\"Enable CPU power monitoring\"\n"
+"in Power settings"
+msgstr ""
+"CPU teljesítmény nem elérhető — kattints a\n"
+"„CPU teljesítmény-felügyelet engedélyezése” pontra\n"
+"az Energia beállításokban"
+
+#. applet.js:751
+msgid "Power — AC"
+msgstr "Energia — Hálózat"
+
+#. applet.js:752
+msgid "Power — AC (full)"
+msgstr "Energia — Hálózat (tele)"
+
+#. applet.js:753
+msgid "Power — Battery"
+msgstr "Energia — Akku"
+
+#. applet.js:754
+msgid "AC↑"
+msgstr "AC↑"
+
+#. applet.js:754 applet.js:755 applet.js:756
+msgid "(3hrs)"
+msgstr "(3 ó)"
+
+#. applet.js:754 applet.js:756
+msgid "Draw↓"
+msgstr "Fogyaszt.↓"
+
+#. applet.js:791
+msgid "CPU Temperature"
+msgstr "CPU hőmérséklet"
+
+#. applet.js:791
+#, javascript-format
+msgid "CPU temp critical: %d°C"
+msgstr "CPU hőmérséklet kritikus: %d°C"
+
+#. applet.js:810
+msgid "Package"
+msgstr "Package"
+
+#. applet.js:812 lib/metrics/battery.js:32 lib/metrics/gpu.js:144
+msgid "Temp:"
+msgstr "Hőm:"
+
+#. applet.js:817
+msgid "CPU:"
+msgstr "CPU:"
+
+#. settings-schema.json->memory->title
+#. settings-schema.json->memory-section->title
+#. applet.js:834 lib/metrics/memory.js:36
+msgid "Memory"
+msgstr "Memória"
+
+#. applet.js:836
+msgid "used"
+msgstr "használt"
+
+#. applet.js:837 lib/metrics/disk.js:112 lib/metrics/disk.js:134
+msgid "free"
+msgstr "szabad"
+
+#. applet.js:864
+msgid "Disks"
+msgstr "Lemezek"
+
+#. applet.js:866 lib/metrics/disk.js:121
+msgid "I/O"
+msgstr "I/O"
+
+#. applet.js:898
+msgid "GPU Temperature"
+msgstr "GPU hőmérséklet"
+
+#. applet.js:898
+#, javascript-format
+msgid "GPU temp critical: %d°C"
+msgstr "GPU hőmérséklet kritikus: %d°C"
+
+#. applet.js:912
+msgid "Busy"
+msgstr "Foglalt"
+
+#. settings-schema.json->network->title
+#. settings-schema.json->network-section->title
+#. applet.js:937
+msgid "Network"
+msgstr "Hálózat"
+
+#. applet.js:938
+msgid "TX↑"
+msgstr "TX↑"
+
+#. applet.js:941
+msgid "RX↓"
+msgstr "RX↓"
+
+#. lib/metrics/battery.js:21
+msgid "Charging:"
+msgstr "Töltődik:"
+
+#. lib/metrics/battery.js:22
+msgid "Idle:"
+msgstr "Üresjárat:"
+
+#. lib/metrics/battery.js:23
+msgid "Draw:"
+msgstr "Fogyaszt.:"
+
+#. lib/metrics/battery.js:24
+msgid "Full in:"
+msgstr "Feltöltődik:"
+
+#. lib/metrics/battery.js:24
+msgid "Empty in:"
+msgstr "Lemerül:"
+
+#. lib/metrics/battery.js:26
+msgid "Charge:"
+msgstr "Töltés:"
+
+#. lib/metrics/battery.js:27
+msgid "Energy:"
+msgstr "Energia:"
+
+#. lib/metrics/battery.js:28
+msgid "Capacity:"
+msgstr "Kapacitás:"
+
+#. lib/metrics/battery.js:30
+msgid "Voltage:"
+msgstr "Feszültség:"
+
+#. lib/metrics/battery.js:31
+msgid "Current:"
+msgstr "Áram:"
+
+#. lib/metrics/cpu.js:134
+msgid "Core"
+msgstr "Mag"
+
+#. lib/metrics/cpu.js:134
+msgid "%usr"
+msgstr "%usr"
+
+#. lib/metrics/cpu.js:134
+#, javascript-format
+msgid "%sys"
+msgstr "%sys"
+
+#. lib/metrics/cpu.js:134
+msgid "%iowt"
+msgstr "%iowt"
+
+#. lib/metrics/cpu.js:134
+msgid "temp"
+msgstr "hőm"
+
+#. settings-schema.json->cpu->title
+#. settings-schema.json->cpu-section->title
+#. lib/metrics/cpu.js:138
+msgid "CPU"
+msgstr "CPU"
+
+#. lib/metrics/disk.js:72
+msgid "no disk"
+msgstr "nincs lemez"
+
+#. lib/metrics/fan.js:16
+msgid "no fans"
+msgstr "nincs ventilátor"
+
+#. lib/metrics/fan.js:20
+msgid "off"
+msgstr "ki"
+
+#. lib/metrics/fan.js:25
+msgid "No fans detected"
+msgstr "Nem található ventilátor"
+
+#. lib/metrics/fan.js:26
+msgid "Fans"
+msgstr "Ventilátorok"
+
+#. lib/metrics/gpu.js:127
+msgid "susp."
+msgstr "felf."
+
+#. settings-schema.json->gpu->title
+#. settings-schema.json->gpu-section->title
+#. lib/metrics/gpu.js:137
+msgid "GPU"
+msgstr "GPU"
+
+#. lib/metrics/gpu.js:141
+msgid "Name:"
+msgstr "Név:"
+
+#. lib/metrics/gpu.js:142
+msgid "Type:"
+msgstr "Típus:"
+
+#. lib/metrics/gpu.js:143
+msgid "Status:"
+msgstr "Állapot:"
+
+#. lib/metrics/gpu.js:143
+msgid "active"
+msgstr "aktív"
+
+#. lib/metrics/gpu.js:143
+msgid "suspended"
+msgstr "felfüggesztve"
+
+#. lib/metrics/gpu.js:145
+msgid "Busy:"
+msgstr "Foglalt:"
+
+#. lib/metrics/gpu.js:146
+msgid "Power:"
+msgstr "Teljesítmény:"
+
+#. lib/metrics/gpu.js:147
+msgid "VRAM:"
+msgstr "VRAM:"
+
+#. lib/metrics/gpu.js:148
+msgid "Clock:"
+msgstr "Órajel:"
+
+#. lib/metrics/memory.js:37
+msgid "in Use"
+msgstr "használatban"
+
+#. lib/metrics/memory.js:40
+msgid "Used:"
+msgstr "Használt:"
+
+#. lib/metrics/memory.js:41
+msgid "Free:"
+msgstr "Szabad:"
+
+#. lib/metrics/memory.js:42
+msgid "Avail.:"
+msgstr "Elérh.:"
+
+#. lib/metrics/memory.js:45
+msgid "Swap:"
+msgstr "Swap:"
+
+#. lib/metrics/network.js:30
+msgid "no net"
+msgstr "nincs hálózat"
+
+#. lib/metrics/processes.js:76
+msgid "Top processes"
+msgstr "Legfontosabb folyamatok"
+
+#. metadata.json->name
+msgid "YASM"
+msgstr "YASM"
+
+#. metadata.json->description
+msgid ""
+"Yet Another System Monitor: load, CPU, battery, memory, disk, network, fans "
+"& GPU with sparkline history"
+msgstr ""
+"Yet Another System Monitor: terhelés, CPU, akku, memória, lemez, hálózat, "
+"ventilátorok és GPU sparkline előzményekkel"
+
+#. settings-schema.json->general->title
+msgid "General"
+msgstr "Általános"
+
+#. settings-schema.json->uptime->title
+msgid "Load"
+msgstr "Terhelés"
+
+#. settings-schema.json->battery->title
+#. settings-schema.json->battery-section->title
+msgid "Power"
+msgstr "Energia"
+
+#. settings-schema.json->disk->title
+#. settings-schema.json->disk-section->title
+msgid "Disk"
+msgstr "Lemez"
+
+#. settings-schema.json->fan->title
+#. settings-schema.json->fan-section->title
+msgid "Fan"
+msgstr "Ventilátor"
+
+#. settings-schema.json->general-section->title
+msgid "General Settings"
+msgstr "Általános beállítások"
+
+#. settings-schema.json->uptime-section->title
+msgid "Uptime"
+msgstr "Üzemidő"
+
+#. settings-schema.json->load-section->title
+msgid "Load Average"
+msgstr "Átlagos terhelés"
+
+#. settings-schema.json->applet-description->description
+msgid ""
+"YASM displays live system metrics directly in your Cinnamon panel — uptime, load average, battery charge and power draw, CPU and GPU temperature and usage, memory, disk utilisation and throughput, network transfer rates, and fan speeds.\n"
+"\n"
+"Each tile shows a compact sparkline history graph on hover. Metrics are collected every few seconds and thresholds can be configured per tile to colour-code warn and alert states."
+msgstr ""
+"A YASM valós idejű rendszermetrikákat jelenít meg közvetlenül a Cinnamon panelen — üzemidő, átlagos terhelés, akku töltöttség és fogyasztás, CPU- és GPU-hőmérséklet és -használat, memória, lemezhasználat és -átvitel, hálózati átviteli sebességek és ventilátor-fordulatszámok.\n"
+"\n"
+"Minden csempe egy kompakt sparkline előzményt mutat rámutatáskor. A metrikák néhány másodpercenként frissülnek, és a küszöbértékek csempénként beállíthatók a figyelmeztető és riasztási állapotok színkódolására."
+
+#. settings-schema.json->load-warn->units
+#. settings-schema.json->load-alert->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->load-warn->description
+msgid "Load warn (% per core)"
+msgstr "Terhelés figyelmeztetés (%/mag)"
+
+#. settings-schema.json->load-alert->description
+msgid "Load alert (% per core)"
+msgstr "Terhelés riasztás (%/mag)"
+
+#. settings-schema.json->cpu-temp-warn->description
+msgid "CPU temp warn (°C)"
+msgstr "CPU hőm. figyelmeztetés (°C)"
+
+#. settings-schema.json->cpu-temp-alert->description
+msgid "CPU temp alert (°C)"
+msgstr "CPU hőm. riasztás (°C)"
+
+#. settings-schema.json->cpu-use-warn->description
+msgid "CPU usage warn %"
+msgstr "CPU használat figyelmeztetés %"
+
+#. settings-schema.json->cpu-use-alert->description
+msgid "CPU usage alert %"
+msgstr "CPU használat riasztás %"
+
+#. settings-schema.json->cpu-temp-alert-notify->description
+msgid "Notify when CPU temperature is critical"
+msgstr "Értesítés, ha a CPU hőmérséklet kritikus"
+
+#. settings-schema.json->bat-warn->description
+msgid "Battery warn %"
+msgstr "Akku figyelmeztetés %"
+
+#. settings-schema.json->bat-alert->description
+msgid "Battery alert %"
+msgstr "Akku riasztás %"
+
+#. settings-schema.json->gpu-temp-warn->description
+msgid "GPU temp warn (°C)"
+msgstr "GPU hőm. figyelmeztetés (°C)"
+
+#. settings-schema.json->gpu-temp-alert->description
+msgid "GPU temp alert (°C)"
+msgstr "GPU hőm. riasztás (°C)"
+
+#. settings-schema.json->gpu-temp-alert-notify->description
+msgid "Notify when GPU temperature is critical"
+msgstr "Értesítés, ha a GPU hőmérséklet kritikus"
+
+#. settings-schema.json->refresh-interval->units
+msgid "seconds"
+msgstr "másodpercek"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh interval"
+msgstr "Frissítési intervallum"
+
+#. settings-schema.json->panel-separator->description
+msgid "Separator between panel sections (blank = none)"
+msgstr "Elválasztó a panel szekciók között (üres = nincs)"
+
+#. settings-schema.json->compact-mode->description
+msgid "Compact mode"
+msgstr "Kompakt mód"
+
+#. settings-schema.json->compact-mode->tooltip
+msgid ""
+"Auto: icon-only on vertical panels, text elsewhere. Icons: icon-only "
+"everywhere. Text: text everywhere (may clip on narrow panels)."
+msgstr ""
+"Auto: csak ikon a függőleges paneleken, máshol szöveg. Ikonok: mindenhol "
+"csak ikon. Szöveg: mindenhol szöveg (a keskeny paneleken levágódhat)."
+
+#. settings-schema.json->compact-mode->options
+msgid "Auto"
+msgstr "Auto"
+
+#. settings-schema.json->compact-mode->options
+msgid "Icons only"
+msgstr "Csak ikonok"
+
+#. settings-schema.json->compact-mode->options
+msgid "Text (always)"
+msgstr "Szöveg (mindig)"
+
+#. settings-schema.json->uptime-enabled->description
+msgid "Show uptime & load"
+msgstr "Üzemidő és terhelés megjelenítése"
+
+#. settings-schema.json->uptime-display->description
+#. settings-schema.json->load-display->description
+#. settings-schema.json->battery-display->description
+#. settings-schema.json->cpu-display->description
+#. settings-schema.json->memory-display->description
+#. settings-schema.json->disk-display->description
+#. settings-schema.json->network-display->description
+#. settings-schema.json->fan-display->description
+#. settings-schema.json->gpu-display->description
+msgid "Show icon (off = show label)"
+msgstr "Ikon megjelenítése (ki = címke megjelenítése)"
+
+#. settings-schema.json->uptime-label->description
+#. settings-schema.json->battery-label->description
+#. settings-schema.json->cpu-label->description
+#. settings-schema.json->memory-label->description
+#. settings-schema.json->disk-label->description
+#. settings-schema.json->network-label->description
+#. settings-schema.json->fan-label->description
+#. settings-schema.json->gpu-label->description
+msgid "Label text"
+msgstr "Címke szövege"
+
+#. settings-schema.json->uptime-load-label->description
+msgid "Label before load average value"
+msgstr "Szöveg az átlagos terhelés érték előtt"
+
+#. settings-schema.json->battery-enabled->description
+msgid "Show battery"
+msgstr "Akku megjelenítése"
+
+#. settings-schema.json->rapl-enable->description
+msgid "Enable CPU power monitoring (requires admin password)"
+msgstr ""
+"CPU teljesítmény-felügyelet engedélyezése (rendszergazdai jelszó szükséges)"
+
+#. settings-schema.json->battery-list->description
+msgid "Battery devices to monitor (use Scan button to discover)"
+msgstr "Figyelendő akkuk (a Keresés gombbal fedezhetők fel)"
+
+#. settings-schema.json->battery-list->columns->title
+#. settings-schema.json->cpu-hwmon-list->columns->title
+#. settings-schema.json->disk-list->columns->title
+#. settings-schema.json->net-list->columns->title
+#. settings-schema.json->fan-hwmon-list->columns->title
+msgid "Show"
+msgstr "Megjelenítés"
+
+#. settings-schema.json->battery-list->columns->title
+#. settings-schema.json->disk-list->columns->title
+msgid "Device"
+msgstr "Eszköz"
+
+#. settings-schema.json->battery-list->columns->title
+#. settings-schema.json->net-list->columns->title
+msgid "Label"
+msgstr "Címke"
+
+#. settings-schema.json->cpu-enabled->description
+msgid "Show CPU"
+msgstr "CPU megjelenítése"
+
+#. settings-schema.json->cpu-hwmon-list->description
+msgid "CPU temperature chips (auto-discovered on first run)"
+msgstr "CPU hőmérséklet-chipek (automatikusan felismerve)"
+
+#. settings-schema.json->cpu-hwmon-list->columns->title
+#. settings-schema.json->fan-hwmon-list->columns->title
+msgid "hwmon"
+msgstr "hwmon"
+
+#. settings-schema.json->cpu-hwmon-list->columns->title
+#. settings-schema.json->fan-hwmon-list->columns->title
+msgid "Chip"
+msgstr "Chip"
+
+#. settings-schema.json->memory-enabled->description
+msgid "Show memory"
+msgstr "Memória megjelenítése"
+
+#. settings-schema.json->disk-enabled->description
+msgid "Show disk"
+msgstr "Lemez megjelenítése"
+
+#. settings-schema.json->disk-list->description
+msgid "Disk devices to show (auto-discovered on first run)"
+msgstr "Megjelenítendő lemezek (automatikusan felismerve)"
+
+#. settings-schema.json->network-enabled->description
+msgid "Show network"
+msgstr "Hálózat megjelenítése"
+
+#. settings-schema.json->net-list->description
+msgid "Network interfaces to monitor (use Scan button to discover)"
+msgstr "Figyelendő hálózati interfészek (a Keresés gombbal fedezhetők fel)"
+
+#. settings-schema.json->net-list->columns->title
+msgid "Interface"
+msgstr "Interfész"
+
+#. settings-schema.json->fan-enabled->description
+msgid "Show fan speeds"
+msgstr "Ventilátor-sebességek megjelenítése"
+
+#. settings-schema.json->fan-hwmon-list->description
+msgid "Fan controller chips (auto-discovered on first run)"
+msgstr "Ventilátor-vezérlő chipek (automatikusan felismerve)"
+
+#. settings-schema.json->gpu-enabled->description
+msgid "Show GPU"
+msgstr "GPU megjelenítése"

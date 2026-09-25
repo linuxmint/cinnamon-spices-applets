@@ -124,17 +124,23 @@ function readHwmonTemps(fileutil, hwmonPath) {
   return { packageC: packageC || 0, coresC };
 }
 
+const { _ } = typeof imports !== 'undefined' ? imports.lib.util : require('../util.js');
+
 function formatPanel(cpuPct, packageTempC) {
   return `${Math.round(cpuPct)}% | ${Math.round(packageTempC)}°C`;
 }
 
+function coreHeader() {
+  return `${_("Core").padEnd(6)} ${_("%usr").padStart(5)} ${_("%sys").padStart(5)} ${_("%iowt").padStart(6)} ${_("temp").padStart(6)}`;
+}
+
 function formatTooltip(coreBreakdowns, coreTemps, packageTempC, history, cpuPct) {
-  const lines = [`<b>CPU</b>   ${Math.round(packageTempC)}°C`];
+  const lines = [`<b>${_("CPU")}</b>   ${Math.round(packageTempC)}°C`];
   if (history) {
     const pctStr = cpuPct != null ? `  ${Math.round(cpuPct)}%` : '';
     lines.push(`total %  ${history}${pctStr}`, '');
   }
-  lines.push(`${'Core'.padEnd(6)} ${'%usr'.padStart(5)} ${'%sys'.padStart(5)} ${'%iowt'.padStart(6)} ${'temp'.padStart(6)}`);
+  lines.push(coreHeader());
   const nTemps = coreTemps ? coreTemps.length : 0;
   coreBreakdowns.forEach((b, i) => {
     // Map logical core to physical: multiple logical cores share one physical temp sensor
@@ -171,5 +177,5 @@ function read(fileutil, prevStat, hwmonPath) {
 if (typeof module !== 'undefined') {
   module.exports = { parseStat, computeCpuPct, computeCpuBreakdown, validateHwmonPath,
                      findCoretemPath, findCpuTempChips, readHwmonTemps,
-                     formatPanel, formatTooltip, read };
+                     formatPanel, formatTooltip, coreHeader, read };
 }

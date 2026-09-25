@@ -24,8 +24,10 @@ function humanRate(bps) {
   return `${(bps/1024).toFixed(1)}k`;
 }
 
+const { _ } = typeof imports !== 'undefined' ? imports.lib.util : require('../util.js');
+
 function formatPanel(rates) {
-  if (!rates || rates.length === 0) return 'no net';
+  if (!rates || rates.length === 0) return _("no net");
   const totalTx = rates.reduce((s, r) => s + r.txBytesPerSec, 0);
   const totalRx = rates.reduce((s, r) => s + r.rxBytesPerSec, 0);
   return `${humanRate(totalTx)} ↑ ${humanRate(totalRx)} ↓`;
