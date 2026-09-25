@@ -1,0 +1,39 @@
+/* Stock Tracker applet styles. Kept minimal and theme-friendly:
+   colors that aren't gain/loss specific inherit from the active Cinnamon theme. */
+
+.stock-header {
+    font-weight: bold;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.stock-row {
+    padding: 6px 4px;
+    spacing: 4px;
+    min-width: 260px;
+}
+
+.stock-name {
+    font-weight: bold;
+    font-size: 1.0em;
+}
+
+.stock-symbol {
+    font-size: 0.8em;
+    opacity: 0.6;
+}
+
+.stock-price {
+    font-weight: bold;
+    font-size: 1.0em;
+    text-align: right;
+}
+
+.stock-change {
+    font-size: 0.85em;
+    text-align: right;
+}
+
+.stock-chart {
+    margin-top: 4px;
+}

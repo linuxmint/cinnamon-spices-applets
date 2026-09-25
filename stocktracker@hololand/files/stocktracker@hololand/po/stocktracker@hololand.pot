@@ -1,0 +1,72 @@
+# Stock Tracker applet - translation template.
+# Copyright (C) 2026
+# This file is distributed under the same license as the Stock Tracker applet.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: stocktracker@hololand 1.2.4\n"
+"Report-Msgid-Bugs-To: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js
+msgid "Stock Tracker"
+msgstr ""
+
+#: applet.js
+msgid "No stocks"
+msgstr ""
+
+#: applet.js
+msgid "Add symbols in this applet's settings."
+msgstr ""
+
+#: applet.js
+msgid "Updated %s"
+msgstr ""
+
+#: applet.js
+msgid "No stocks yet — add some in Settings."
+msgstr ""
+
+#: applet.js
+msgid "Waiting for data…"
+msgstr ""
+
+#: applet.js
+msgid "Refresh now"
+msgstr ""
+
+#: applet.js
+msgid "No data"
+msgstr ""
+
+#: applet.js
+msgid "Rate limited"
+msgstr ""
+
+#: applet.js
+msgid "Connecting…"
+msgstr ""
+
+#: applet.js
+msgid "Yahoo sign-in failed"
+msgstr ""
+
+#: applet.js
+msgid "Auth expired — will retry"
+msgstr ""
+
+#: applet.js
+msgid "curl not available"
+msgstr ""
+
+#: applet.js
+msgid "Unrecognized symbol"
+msgstr ""
+
+#: applet.js
+msgid "Parse error"
+msgstr ""
