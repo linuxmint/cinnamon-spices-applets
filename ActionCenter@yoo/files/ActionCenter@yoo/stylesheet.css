@@ -1,0 +1,102 @@
+/* ============================================================
+    ActionCenter Applet 样式
+   所有类名均带 qs-/quick-settings- 前缀，不影响全局
+   ============================================================ */
+
+/* 顶部电池胶囊 */
+.quick-settings-pill {
+    background-color: rgba(255, 255, 255, 0.10);
+    border-radius: 16px;
+}
+
+/* 右上角四个按钮 */
+.quick-settings-icon-button {
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(255, 255, 255, 0.12);
+    transition-duration: 150ms;
+    margin-left: 4px;
+}
+.quick-settings-icon-button:hover {
+    background-color: rgba(255, 255, 255, 0.22);
+}
+.quick-settings-icon-button:active {
+    background-color: rgba(255, 255, 255, 0.32);
+}
+
+/* 音量 / 亮度主行 */
+.quick-settings-slider-item {
+    padding: 10px 6px;
+    margin: 2px auto !important;
+    width: 356px;
+}
+
+.quick-settings-icon-inline-btn {
+    border-radius: 6px;
+    padding: 4px;
+    background-color: transparent;
+    transition-duration: 150ms;
+}
+.quick-settings-icon-inline-btn:hover {
+    background-color: rgba(255, 255, 255, 0.20);
+}
+.quick-settings-icon-inline-btn:active {
+    background-color: rgba(255, 255, 255, 0.30);
+}
+
+/* 快捷开关（网络 / 蓝牙 / 常规） */
+.quick-settings-toggle {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.10);
+    transition-duration: 150ms;
+    padding: 0;
+}
+.quick-settings-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.16);
+}
+.quick-settings-toggle.active {
+    background-color: #3584e4;
+}
+.quick-settings-toggle.active .quick-settings-toggle-label,
+.quick-settings-toggle.active .quick-settings-toggle-status {
+    color: #ffffff;
+}
+
+.quick-settings-toggle-main {
+    background-color: transparent;
+    border-radius: 10px 0 0 10px;
+    padding: 0;
+}
+.quick-settings-toggle-main:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.quick-settings-toggle-main:active {
+    background-color: rgba(255, 255, 255, 0.20);
+}
+
+.quick-settings-arrow-btn {
+    background-color: transparent;
+    border-radius: 0 10px 10px 0;
+    padding: 0;
+    margin: 0;
+    min-width: 28px;
+    max-width: 28px;
+    min-height: 100%;
+}
+.quick-settings-arrow-btn:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+}
+.quick-settings-arrow-btn:active {
+    background-color: rgba(255, 255, 255, 0.28);
+}
+
+/* 文字 */
+.quick-settings-toggle-label {
+    font-size: 12px;
+    color: #ffffff;
+}
+.quick-settings-toggle-status {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.75);
+}
