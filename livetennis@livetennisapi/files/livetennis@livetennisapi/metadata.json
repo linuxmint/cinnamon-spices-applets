@@ -1,0 +1,7 @@
+{
+  "uuid": "livetennis@livetennisapi",
+  "name": "Live Tennis Scores",
+  "description": "Live ATP, WTA, Challenger and ITF scores on the panel, with serve and break-point markers",
+  "version": "1.0.0",
+  "max-instances": 1
+}
