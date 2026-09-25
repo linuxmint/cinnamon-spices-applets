@@ -1,0 +1,335 @@
+# Hindi translations for AWS Cold Restore Monitor.
+# Copyright (C) 2026 paynalton
+# This file is distributed under the same license as the AWS Cold Restore Monitor package.
+# paynalton, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AWS Cold Restore Monitor 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-09-08 13:22-0600\n"
+"PO-Revision-Date: 2026-09-08 20:00+0000\n"
+"Last-Translator: paynalton\n"
+"Language-Team: Hindi\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: applet.js:62
+#, javascript-format
+msgid "AWS · Configure"
+msgstr "AWS · कॉन्फ़िगर करें"
+
+#: applet.js:90
+#, javascript-format
+msgid "Refresh now"
+msgstr "अभी रीफ़्रेश करें"
+
+#: applet.js:91
+#, javascript-format
+msgid "Configure…"
+msgstr "कॉन्फ़िगर करें…"
+
+#: applet.js:180
+#, javascript-format
+msgid "Could not send the system notification."
+msgstr "सिस्टम सूचना नहीं भेजी जा सकी।"
+
+#: applet.js:197
+#, javascript-format
+msgid "AWS · Internal error"
+msgstr "AWS · आंतरिक त्रुटि"
+
+#: applet.js:210
+#, javascript-format
+msgid "no percentage"
+msgstr "प्रतिशत उपलब्ध नहीं है"
+
+#: applet.js:214
+#, javascript-format
+msgid "AWS · Error"
+msgstr "AWS · त्रुटि"
+
+#: applet.js:214
+#, javascript-format
+msgid "AWS · Retrying"
+msgstr "AWS · फिर से प्रयास जारी है"
+
+#: applet.js:214
+#, javascript-format
+msgid "AWS %s"
+msgstr "AWS %s"
+
+#: applet.js:214
+#, javascript-format
+msgid "AWS · %s"
+msgstr "AWS · %s"
+
+#: applet.js:218
+#, javascript-format
+msgid "AWS Cold Restore Monitor: %s"
+msgstr "AWS Cold Restore Monitor: %s"
+
+#: applet.js:219
+#, javascript-format
+msgid "%s · %s"
+msgstr "%s · %s"
+
+#: applet.js:220
+#, javascript-format
+msgid "Right-click and choose Configure to select a restore job."
+msgstr "पुनर्स्थापना कार्य चुनने के लिए राइट-क्लिक करें और “कॉन्फ़िगर करें” चुनें।"
+
+#: applet.js:223
+#, javascript-format
+msgid ""
+"Automatic queries are paused. Fix the problem and click Refresh now or "
+"change the settings."
+msgstr "स्वचालित क्वेरी रोक दी गई हैं। समस्या ठीक करके “अभी रीफ़्रेश करें” पर क्लिक करें या सेटिंग बदलें।"
+
+#: applet.js:224
+#, javascript-format
+msgid "AWS: %s"
+msgstr "AWS: %s"
+
+#: applet.js:226
+#, javascript-format
+msgid "Status: %s (previous result; query pending)"
+msgstr "स्थिति: %s (पिछला परिणाम; क्वेरी लंबित है)"
+
+#: applet.js:226
+#, javascript-format
+msgid "Status: %s"
+msgstr "स्थिति: %s"
+
+#: applet.js:227
+#, javascript-format
+msgid "Estimated progress: %s"
+msgstr "अनुमानित प्रगति: %s"
+
+#: applet.js:228
+#, javascript-format
+msgid "Job: %s"
+msgstr "कार्य: %s"
+
+#: applet.js:228
+#, javascript-format
+msgid "not configured"
+msgstr "कॉन्फ़िगर नहीं किया गया"
+
+#: applet.js:229
+#, javascript-format
+msgid "Profile: %s · Region: %s"
+msgstr "प्रोफ़ाइल: %s · क्षेत्र: %s"
+
+#: applet.js:230
+#, javascript-format
+msgid "Started: %s"
+msgstr "आरंभ: %s"
+
+#: applet.js:231
+#, javascript-format
+msgid "Completed: %s"
+msgstr "समाप्ति: %s"
+
+#: applet.js:232
+#, javascript-format
+msgid "Last successful query: %s"
+msgstr "अंतिम सफल क्वेरी: %s"
+
+#: applet.js:273
+#, javascript-format
+msgid "Configure"
+msgstr "कॉन्फ़िगर करें"
+
+#: applet.js:274
+#, javascript-format
+msgid ""
+"Enter the profile, region, restore job ID, and AWS CLI path in Configure."
+msgstr "“कॉन्फ़िगर करें” में प्रोफ़ाइल, क्षेत्र, पुनर्स्थापना कार्य की ID और AWS CLI का पथ दर्ज करें।"
+
+#: applet.js:278
+#, javascript-format
+msgid "The interval must be between 10 and 3600 seconds. Check the settings."
+msgstr "अंतराल 10 से 3600 सेकंड के बीच होना चाहिए। सेटिंग जाँचें।"
+
+#: applet.js:281
+#, javascript-format
+msgid "Querying…"
+msgstr "क्वेरी जारी है…"
+
+#: applet.js:339
+#, javascript-format
+msgid "AWS reports that the restore failed. Review the job in AWS Backup."
+msgstr "AWS के अनुसार पुनर्स्थापना विफल हो गई है। AWS Backup में कार्य की जाँच करें।"
+
+#: applet.js:339
+#, javascript-format
+msgid "AWS reports that the restore was aborted. Review the job in AWS Backup."
+msgstr "AWS के अनुसार पुनर्स्थापना निरस्त कर दी गई है। AWS Backup में कार्य की जाँच करें।"
+
+#: applet.js:343
+#, javascript-format
+msgid "Query successful"
+msgstr "क्वेरी सफल रही"
+
+#: applet.js:345
+#, javascript-format
+msgid ""
+"AWS has not reported a valid percentage. The job status is still available."
+msgstr "AWS ने मान्य प्रतिशत नहीं दिया है। कार्य की स्थिति अभी भी उपलब्ध है।"
+
+#: applet.js:348
+#, javascript-format
+msgid ""
+"The query succeeded, but AWS CLI issued a warning. Run the query in your "
+"terminal to review it."
+msgstr "क्वेरी सफल रही, लेकिन AWS CLI ने चेतावनी दी है। उसे देखने के लिए अपने टर्मिनल में क्वेरी चलाएँ।"
+
+#: applet.js:380
+#, javascript-format
+msgid "Could not load the applet. Check the installation and add it again."
+msgstr "एप्लेट लोड नहीं हो सका। इंस्टॉलेशन जाँचें और एप्लेट फिर से जोड़ें।"
+
+#: errors.js:28
+#, javascript-format
+msgid "The query exceeded 60 seconds. It will be retried automatically."
+msgstr "क्वेरी में 60 सेकंड से अधिक समय लग गया। अपने आप फिर से प्रयास किया जाएगा।"
+
+#: errors.js:30
+#, javascript-format
+msgid ""
+"The monitor encountered an internal error. Remove the applet and add it "
+"again."
+msgstr "मॉनिटर में आंतरिक त्रुटि आई है। एप्लेट हटाएँ और फिर से जोड़ें।"
+
+#: errors.js:32
+#, javascript-format
+msgid ""
+"AWS returned an invalid response. Check the query with AWS CLI and click "
+"Refresh now."
+msgstr "AWS ने अमान्य जवाब दिया है। AWS CLI से क्वेरी जाँचें और “अभी रीफ़्रेश करें” पर क्लिक करें।"
+
+#: errors.js:34
+#, javascript-format
+msgid ""
+"Could not authenticate with AWS. Check your credentials or renew your SSO "
+"session, then click Refresh now."
+msgstr "AWS के साथ प्रमाणीकरण नहीं हो सका। अपने क्रेडेंशियल जाँचें या SSO सत्र नवीनीकृत करें, फिर “अभी रीफ़्रेश करें” पर क्लिक करें।"
+
+#: errors.js:36
+#, javascript-format
+msgid ""
+"AWS denied access. Check the backup:DescribeRestoreJob permission for this "
+"profile."
+msgstr "AWS ने पहुँच अस्वीकार कर दी है। इस प्रोफ़ाइल के लिए backup:DescribeRestoreJob अनुमति जाँचें।"
+
+#: errors.js:38
+#, javascript-format
+msgid ""
+"The job or profile was not found. Check the profile, region, and restore job "
+"ID."
+msgstr "कार्य या प्रोफ़ाइल नहीं मिली। प्रोफ़ाइल, क्षेत्र और पुनर्स्थापना कार्य की ID जाँचें।"
+
+#: errors.js:40
+#, javascript-format
+msgid ""
+"The secure connection could not be verified. Check your certificates and "
+"network configuration."
+msgstr "सुरक्षित कनेक्शन सत्यापित नहीं हो सका। अपने प्रमाणपत्र और नेटवर्क कॉन्फ़िगरेशन जाँचें।"
+
+#: errors.js:42
+#, javascript-format
+msgid ""
+"Could not start AWS CLI. Check that it is installed and that the executable "
+"path and permissions are correct."
+msgstr "AWS CLI शुरू नहीं हो सका। सुनिश्चित करें कि वह इंस्टॉल है और निष्पादन योग्य फ़ाइल का पथ और अनुमतियाँ सही हैं।"
+
+#: errors.js:44
+#, javascript-format
+msgid ""
+"The AWS CLI configuration or arguments are invalid. Check the applet "
+"settings."
+msgstr "AWS CLI का कॉन्फ़िगरेशन या आर्ग्युमेंट अमान्य हैं। एप्लेट की सेटिंग जाँचें।"
+
+#: errors.js:46
+#, javascript-format
+msgid ""
+"AWS is throttling requests. The query will be retried after a longer delay."
+msgstr "AWS अनुरोधों की दर सीमित कर रहा है। अधिक समय प्रतीक्षा करने के बाद फिर से प्रयास किया जाएगा।"
+
+#: errors.js:48
+#, javascript-format
+msgid ""
+"AWS is unavailable or there is a network problem. The query will be retried "
+"automatically."
+msgstr "AWS उपलब्ध नहीं है या नेटवर्क में समस्या है। क्वेरी अपने आप फिर से चलाई जाएगी।"
+
+#: errors.js:50
+#, javascript-format
+msgid ""
+"Communication with AWS CLI was interrupted. The query will be retried "
+"automatically."
+msgstr "AWS CLI के साथ संचार बाधित हो गया है। क्वेरी अपने आप फिर से चलाई जाएगी।"
+
+#: errors.js:51
+#, javascript-format
+msgid ""
+"AWS CLI exited with an unrecognized error. Check the query in your terminal "
+"and click Refresh now."
+msgstr "AWS CLI एक अज्ञात त्रुटि के कारण बंद हो गया। अपने टर्मिनल में क्वेरी जाँचें और “अभी रीफ़्रेश करें” पर क्लिक करें।"
+
+#: settings-schema.json
+#, javascript-format
+msgid "Restore job"
+msgstr "पुनर्स्थापना कार्य"
+
+#: settings-schema.json
+#, javascript-format
+msgid "AWS profile (PROFILE)"
+msgstr "AWS प्रोफ़ाइल (PROFILE)"
+
+#: settings-schema.json
+#, javascript-format
+msgid "Region (REGION)"
+msgstr "क्षेत्र (REGION)"
+
+#: settings-schema.json
+#, javascript-format
+msgid "Restore job ID (RESTORE_JOB_ID)"
+msgstr "पुनर्स्थापना कार्य की ID (RESTORE_JOB_ID)"
+
+#: settings-schema.json
+#, javascript-format
+msgid "seconds"
+msgstr "सेकंड"
+
+#: settings-schema.json
+#, javascript-format
+msgid "Polling interval"
+msgstr "क्वेरी का अंतराल"
+
+#: settings-schema.json
+#, javascript-format
+msgid "AWS CLI executable"
+msgstr "AWS CLI की निष्पादन योग्य फ़ाइल"
+
+#: settings-schema.json
+#, javascript-format
+msgid ""
+"Use aws or the absolute path returned by command -v aws in your terminal."
+msgstr "aws का उपयोग करें या अपने टर्मिनल में command -v aws से मिला पूर्ण पथ दर्ज करें।"
+
+#: metadata.json
+#, javascript-format
+msgid ""
+"Monitor the status and progress of cold storage restores through AWS Backup."
+msgstr "AWS Backup के माध्यम से कोल्ड स्टोरेज से पुनर्स्थापना की स्थिति और प्रगति पर नज़र रखें।"
+
+#: metadata.json
+#, javascript-format
+msgid "AWS Cold Restore Monitor"
+msgstr "AWS Cold Restore Monitor"
