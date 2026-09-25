@@ -1,0 +1,27 @@
+.codex-panel-icon {
+  margin-right: 6px;
+}
+.codex-section {
+  font-weight: bold;
+  padding-top: 8px;
+}
+.codex-row {
+  min-width: 290px;
+  spacing: 24px;
+}
+.codex-note {
+  font-size: 0.9em;
+  opacity: 0.75;
+}
+.codex-track {
+  background-color: rgba(127, 127, 127, 0.25);
+  height: 5px;
+  width: 270px;
+  border-radius: 3px;
+  margin: 4px 0;
+}
+.codex-fill {
+  background-color: #8fbcbb;
+  height: 5px;
+  border-radius: 3px;
+}
