@@ -1,0 +1,22 @@
+{
+    "show-app-name": {
+        "type": "switch",
+        "default": true,
+        "description": "Show application name"
+    },
+    "desaturate-app-name": {
+        "type": "switch",
+        "default": false,
+        "description": "Use bold application name"
+    },
+    "max-app-name-length": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 4,
+        "max": 64,
+        "units": "characters",
+        "step": 1,
+        "description": "Maximum application name length",
+        "dependency": "show-app-name"
+    }
+}
