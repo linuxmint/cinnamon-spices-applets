@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#20273a"/>
+      <stop offset="1" stop-color="#3c3154"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#wall)"/>
+  <circle cx="160" cy="160" r="240" fill="#4d73d9" opacity=".14"/>
+  <circle cx="1040" cy="510" r="270" fill="#9d5ad8" opacity=".12"/>
+  <text x="600" y="155" text-anchor="middle" fill="#fff"
+        font-family="sans-serif" font-size="48" font-weight="700">
+    XApp Status Applet Reloaded
+  </text>
+  <text x="600" y="205" text-anchor="middle" fill="#cbd2e5"
+        font-family="sans-serif" font-size="24">
+    Drag status icons into the order you want
+  </text>
+  <g>
+    <rect x="165" y="280" width="870" height="108" rx="22" fill="#171a23" opacity=".96"/>
+    <rect x="185" y="299" width="112" height="70" rx="14" fill="#2b303e"/>
+    <circle cx="218" cy="334" r="17" fill="#61dafb"/>
+    <path d="M252 321v26m-13-13h26" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <rect x="315" y="299" width="112" height="70" rx="14" fill="#2b303e"/>
+    <path d="M346 345l18-29 18 29z" fill="#ffca58"/>
+    <circle cx="397" cy="334" r="16" fill="#7cd992"/>
+    <rect x="445" y="299" width="112" height="70" rx="14" fill="#5664d8" stroke="#9fa8ff" stroke-width="3"/>
+    <path d="M476 317h19v34h-19zm28 0h19v34h-19z" fill="#fff"/>
+    <rect x="575" y="299" width="112" height="70" rx="14" fill="#2b303e"/>
+    <circle cx="608" cy="334" r="16" fill="#f36f6f"/>
+    <path d="M641 320l16 14-16 14" fill="none" stroke="#fff" stroke-width="5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="705" y="299" width="112" height="70" rx="14" fill="#2b303e"/>
+    <path d="M736 348V320h31v28" fill="none" stroke="#a9c4ff" stroke-width="6"
+          stroke-linejoin="round"/>
+    <circle cx="787" cy="334" r="15" fill="#b98aff"/>
+    <rect x="835" y="299" width="180" height="70" rx="14" fill="#2b303e"/>
+    <circle cx="872" cy="334" r="17" fill="#f8f8fa"/>
+    <path d="M907 334h74" stroke="#8c94a8" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <path d="M501 416v71m0 0-18-20m18 20 18-20" fill="none" stroke="#aeb9ff"
+        stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M631 487v-71m0 0-18 20m18-20 18 20" fill="none" stroke="#aeb9ff"
+        stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="566" y="548" text-anchor="middle" fill="#fff"
+        font-family="sans-serif" font-size="28" font-weight="600">
+    Order is saved automatically
+  </text>
+</svg>
