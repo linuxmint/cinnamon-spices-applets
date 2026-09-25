@@ -1,0 +1,7 @@
+{
+    "max-instances": "1",
+    "description": "Read-only ChatGPT and Codex remaining limits and reset countdowns",
+    "name": "ChatGPT Limits",
+    "version": "1.0",
+    "uuid": "chatgpt-limits@wertos97"
+}
