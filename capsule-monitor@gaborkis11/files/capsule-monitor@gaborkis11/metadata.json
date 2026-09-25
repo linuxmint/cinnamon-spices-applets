@@ -1,0 +1,14 @@
+{
+    "uuid": "capsule-monitor@gaborkis11",
+    "name": "Capsule System Monitor",
+    "description": "A compact capsule on the panel: memory, CPU, video memory, disk and network at a glance. Quiet at rest, orange when something needs attention. The panel never jumps: every value lives in a fixed-width slot.",
+    "version": "0.1.0",
+    "author": "gaborkis11",
+    "max-instances": 1,
+    "cinnamon-version": [
+        "6.0",
+        "6.2",
+        "6.4",
+        "6.6"
+    ]
+}
