@@ -2495,15 +2495,14 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         if (!button.withMenu)
             return;
         
+        let targetBox = (button instanceof FavoritesButton) ? this.favoritesBox : this.applicationsBox;
+
         if (!this.contextMenu) {
             let menu = new PopupMenu.PopupSubMenu(null); // hack: creating without actor
             menu.actor.set_style_class_name('menu-context-menu');
             menu.connect('open-state-changed', Lang.bind(this, this._contextMenuOpenStateChanged));
             this.contextMenu = menu;
-            if (button instanceof FavoritesButton)
-                this.favoritesBox.add_actor(menu.actor);
-            else
-                this.applicationsBox.add_actor(menu.actor);
+            targetBox.add_actor(menu.actor);
         } else if (this.contextMenu.isOpen &&
                    this.contextMenu.sourceActor != button.actor) {
             this.contextMenu.close();
@@ -2511,10 +2510,16 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
         if (!this.contextMenu.isOpen) {
             this.contextMenu.box.destroy_all_children();
-            if (button instanceof FavoritesButton)
-                this.favoritesBox.set_child_above_sibling(this.contextMenu.actor, button.actor);
-            else
-                this.applicationsBox.set_child_above_sibling(this.contextMenu.actor, button.actor);
+            // A single context menu is shared by both panes, so move it to the box
+            // the clicked button lives in - otherwise it stays in the box it was
+            // first created in and opens off-screen.
+            let parent = this.contextMenu.actor.get_parent();
+            if (parent !== targetBox) {
+                if (parent)
+                    parent.remove_actor(this.contextMenu.actor);
+                targetBox.add_actor(this.contextMenu.actor);
+            }
+            targetBox.set_child_above_sibling(this.contextMenu.actor, button.actor);
             this.contextMenu.sourceActor = button.actor;
             button.populateMenu(this.contextMenu);
         }
