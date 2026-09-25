@@ -1,0 +1,7 @@
+{
+  "uuid": "DailyAppUsage@ghostypixel",
+  "name": "Daily App Usage",
+  "description": "Keeps track of app usage during the day.",
+  "version": "1.0.0",
+  "max-instances": 1
+}
