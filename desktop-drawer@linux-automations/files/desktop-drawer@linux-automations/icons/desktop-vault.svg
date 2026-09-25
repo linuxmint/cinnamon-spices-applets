@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- SPDX-License-Identifier: GPL-3.0-or-later; Copyright (C) 2026 TitasDas -->
+  <path d="M10 16a5 5 0 0 1 5-5h13l6 7h15a5 5 0 0 1 5 5v25H10z" fill="#8dd6d0" stroke="#173b47" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="7" y="28" width="50" height="28" rx="6" fill="#237e89" stroke="#b9eeeb" stroke-width="3"/>
+  <path d="M25 39h14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+</svg>
