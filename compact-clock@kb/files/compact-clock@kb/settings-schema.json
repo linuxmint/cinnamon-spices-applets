@@ -1,0 +1,93 @@
+{
+    "time-format": {
+        "type": "entry",
+        "default": "%H:%M",
+        "description": "Time format (strftime)",
+        "tooltip": "Format string for the time line. E.g. %H:%M for 24-h, %I:%M %p for 12-h."
+    },
+    "date-format": {
+        "type": "entry",
+        "default": "%b %-e",
+        "description": "Date format (strftime)",
+        "tooltip": "Format string for the date line shown bottom-right. E.g. '%b %-e' → 'Jun 4'."
+    },
+    "day-format": {
+        "type": "entry",
+        "default": "%a",
+        "description": "Day-of-week format (strftime)",
+        "tooltip": "Format for the large left label. %a = short (Mon), %A = full (Monday)."
+    },
+    "show-seconds": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Show seconds in time",
+        "tooltip": "Appends :%S to the time. Updates every second when enabled."
+    },
+    "font-family": {
+        "type": "fontchooser",
+        "default": "JetBrains Mono 12",
+        "description": "Font (click to browse all installed fonts)",
+        "tooltip": "Pick any font installed on your system. The size set here is ignored — use the size spinbuttons below."
+    },
+    "day-font-size": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 10,
+        "max": 48,
+        "step": 1,
+        "units": "px",
+        "description": "Day-of-week font size (left label)"
+    },
+    "time-font-size": {
+        "type": "spinbutton",
+        "default": 13,
+        "min": 8,
+        "max": 32,
+        "step": 1,
+        "units": "px",
+        "description": "Time font size (top-right)"
+    },
+    "date-font-size": {
+        "type": "spinbutton",
+        "default": 9,
+        "min": 6,
+        "max": 20,
+        "step": 1,
+        "units": "px",
+        "description": "Date font size (bottom-right)"
+    },
+    "day-color": {
+        "type": "colorchooser",
+        "default": "rgba(255,255,255,0.95)",
+        "description": "Day-of-week color"
+    },
+    "time-color": {
+        "type": "colorchooser",
+        "default": "rgba(255,255,255,0.92)",
+        "description": "Time color"
+    },
+    "date-color": {
+        "type": "colorchooser",
+        "default": "rgba(255,255,255,0.45)",
+        "description": "Date color"
+    },
+    "separator-color": {
+        "type": "colorchooser",
+        "default": "rgba(255,255,255,0.18)",
+        "description": "Divider color"
+    },
+    "background-color": {
+        "type": "colorchooser",
+        "default": "transparent",
+        "description": "Background color (set transparent to blend with panel)"
+    },
+    "background-radius": {
+        "type": "spinbutton",
+        "default": 6,
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "units": "px",
+        "description": "Background corner radius"
+    }
+}
