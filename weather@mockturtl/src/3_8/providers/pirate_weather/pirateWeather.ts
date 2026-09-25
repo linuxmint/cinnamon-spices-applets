@@ -75,6 +75,7 @@ export class PirateWeather implements WeatherProvider<Services.PirateWeather, Pi
 		try {
 			const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
 			const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
+			const hourlyForecasts: HourlyForecastData[] = [];
 			const result: WeatherData = {
 				date: DateTime.fromSeconds(json.currently.time, { zone: json.timezone }),
 				coord: {
@@ -108,7 +109,7 @@ export class PirateWeather implements WeatherProvider<Services.PirateWeather, Pi
 				},
 				uvIndex: json.currently.uvIndex ?? json.hourly.data[0]?.uvIndex ?? json.daily.data[0]?.uvIndex ?? null,
 				forecasts: [],
-				hourlyForecasts: [],
+				hourlyForecasts,
 			}
 
 			// Forecast
@@ -151,7 +152,7 @@ export class PirateWeather implements WeatherProvider<Services.PirateWeather, Pi
 				};
 
 				// never null here
-				result.hourlyForecasts!.push(forecast);
+				hourlyForecasts.push(forecast);
 			}
 
 			if (json.minutely != null) {

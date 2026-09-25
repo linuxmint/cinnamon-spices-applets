@@ -185,25 +185,25 @@ export class AccuWeather implements WeatherProvider<Services.AccuWeather, AccuWe
 		for (const hour of hourly) {
 			let precipitation: Precipitation | undefined = undefined;
 			if (hour.PrecipitationProbability ?? 0 > 0) {
-				switch (hour.PrecipitationType!) {
+				switch (hour.PrecipitationType) {
 					case "Rain":
 						precipitation = {
 							type: "rain",
-							chance: hour.RainProbability!,
+							chance: hour.RainProbability ?? undefined,
 							volume: hour?.Rain?.Value ?? undefined
 						}
 						break;
 					case "Snow":
 						precipitation = {
 							type: "snow",
-							chance: hour.SnowProbability!,
+							chance: hour.SnowProbability ?? undefined,
 							volume: hour?.Snow?.Value ?? undefined
 						}
 						break;
 					case "Ice":
 						precipitation = {
 							type: "ice pellets",
-							chance: hour.IceProbability!,
+							chance: hour.IceProbability ?? undefined,
 							volume: hour?.Ice?.Value ?? undefined
 						}
 						break;

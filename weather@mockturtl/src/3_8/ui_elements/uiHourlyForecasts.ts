@@ -70,8 +70,12 @@ export class UIHourlyForecasts {
 		this.actor.connect("scroll-event", (owner, event) => {
 			const adjustment = hScroll.get_adjustment();
 			const direction = event.get_scroll_direction();
-			const newVal = adjustment.get_value() +
-				((direction === ScrollDirection.UP) ? -adjustment.step_increment : (direction === ScrollDirection.DOWN) ? adjustment.step_increment : 0);
+			let scrollDelta = 0;
+			if (direction === ScrollDirection.UP)
+				scrollDelta = -adjustment.step_increment;
+			else if (direction === ScrollDirection.DOWN)
+				scrollDelta = adjustment.step_increment;
+			const newVal = adjustment.get_value() + scrollDelta;
 
 			if (global.settings.get_boolean("desktop-effects-on-menus"))
 				addTween(adjustment, { value: newVal, time: 0.25 });
@@ -153,7 +157,10 @@ export class UIHourlyForecasts {
 			return true;
 
 		if (this.hourlyForecasts.length > forecasts.length) {
-			this.Rebuild(this.app.config, this.app.config.textColorStyle!, forecasts.length);
+			const textColorStyle = this.app.config.textColorStyle;
+			if (textColorStyle == null)
+				return false;
+			this.Rebuild(this.app.config, textColorStyle, forecasts.length);
 		}
 
 		this.hourlyForecastDates = [];
