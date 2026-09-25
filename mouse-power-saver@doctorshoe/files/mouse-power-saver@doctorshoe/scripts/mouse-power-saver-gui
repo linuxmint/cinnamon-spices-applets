@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+set -u
+
+LOG="/tmp/mouse-power-saver-applet.log"
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/mouse-power-saver"
+LAST_FILE="$CONFIG_DIR/last_delay_ms"
+
+mkdir -p "$CONFIG_DIR"
+
+log() {
+    echo "$*" >> "$LOG"
+}
+
+valid_delay() {
+    case "$1" in
+        10000|20000|30000|60000) return 0 ;;
+        *) return 1 ;;
+    esac
+}
+
+last_delay() {
+    if [[ -f "$LAST_FILE" ]]; then
+        d="$(cat "$LAST_FILE" 2>/dev/null || true)"
+        if valid_delay "$d"; then
+            echo "$d"
+            return
+        fi
+    fi
+    echo "60000"
+}
+
+run_root() {
+    sudo -n /usr/local/bin/mouse-power-saver "$@" >> "$LOG" 2>&1
+}
+
+{
+    echo "----"
+    date
+    echo "Aufruf: $0 $*"
+} >> "$LOG"
+
+cmd="${1:-}"
+
+case "$cmd" in
+    on)
+        delay="${2:-60000}"
+        if ! valid_delay "$delay"; then
+            log "Ungültiger Delay-Wert: $delay"
+            exit 1
+        fi
+        echo "$delay" > "$LAST_FILE"
+        run_root on "$delay"
+        RET=$?
+        ;;
+    off)
+        run_root off
+        RET=$?
+        ;;
+    toggle)
+        status="$(/usr/local/bin/mouse-power-saver status 2>/dev/null || true)"
+        if echo "$status" | grep -q '^Ein:'; then
+            log "Toggle: ist Ein, schalte Aus"
+            run_root off
+        else
+            delay="$(last_delay)"
+            log "Toggle: ist Aus, schalte Ein mit $delay ms"
+            run_root on "$delay"
+        fi
+        RET=$?
+        ;;
+    status)
+        /usr/local/bin/mouse-power-saver status
+        RET=$?
+        ;;
+    *)
+        log "Unbekannter Befehl: $cmd"
+        RET=1
+        ;;
+esac
+
+echo "Exit-Code: $RET" >> "$LOG"
+exit "$RET"
