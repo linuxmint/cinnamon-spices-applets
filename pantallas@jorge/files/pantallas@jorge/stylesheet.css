@@ -1,0 +1,10 @@
+/* Etiquetas de los sliders dentro del menú del applet */
+.pantalla-label {
+    font-weight: bold;
+    padding-top: 4px;
+}
+
+/* Da algo más de ancho al menú para que los sliders sean cómodos */
+.pantalla-slider {
+    min-width: 240px;
+}
