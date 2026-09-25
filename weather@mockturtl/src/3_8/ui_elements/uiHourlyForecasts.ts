@@ -15,6 +15,7 @@ const { BoxLayout, Side, ScrollView, Icon, Align } = imports.gi.St;
 export class UIHourlyForecasts {
 	private app: WeatherApplet;
 	private readonly tempGraphHeight = 45;
+	private readonly precipGraphHeight = 16;
 	private readonly volumeGraphWidth = 20;
 	// Hourly Weather
 	public actor: imports.gi.St.ScrollView;
@@ -423,6 +424,10 @@ export class UIHourlyForecasts {
 			box.add_child(hourlySet.Hour);
 			box.add_child(hourlySet.Icon,);
 			box.add_child(hourlySet.Temperature);
+
+			if (this.app.Provider?.supportHourlyPrecipVolume)
+				box.add_child(new BoxLayout({ height: this.precipGraphHeight }));
+
 			if (this.app.Provider?.supportHourlyPrecipChance)
 				box.add_child(hourlySet.PrecipPercent);
 			if (this.app.Provider?.supportHourlyPrecipVolume)
@@ -456,7 +461,10 @@ export class UIHourlyForecasts {
 		const itemWidth = this.hourlyContainers[0].width;
 		// const totalWidth = this.hourlyContainers.length * itemWidth;
 		const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
-		const precipitationHeight = this.hourlyForecasts[0].PrecipPercent.get_height() + this.hourlyForecasts[0].PrecipVolume.get_height();
+		const precipitationTextHeight =
+			(this.app.Provider?.supportHourlyPrecipChance ? this.hourlyForecasts[0].PrecipPercent.get_height() : 0) +
+			(this.app.Provider?.supportHourlyPrecipVolume ? this.hourlyForecasts[0].PrecipVolume.get_height() : 0);
+		const precipitationGraphTop = totalHeight - precipitationTextHeight - this.precipGraphHeight;
 		const tempPadding = 6;
 
 		const points: Array<{ x: number, y: number }> = [];
@@ -494,8 +502,13 @@ export class UIHourlyForecasts {
 			const element = precipitation[i];
 			const point = points[i];
 			// Normalize the precipitation height to the max precipitation volume, but make sure it's at least 2 mm
-			const normalized = precipitationHeight * (element / Math.max(maxPrecipVolume, 2));
-			ctx.rectangle(point.x - this.volumeGraphWidth / 2, totalHeight - normalized, this.volumeGraphWidth, normalized);
+			const normalized = this.precipGraphHeight * (element / Math.max(maxPrecipVolume, 2));
+			ctx.rectangle(
+				point.x - this.volumeGraphWidth / 2,
+				precipitationGraphTop + this.precipGraphHeight - normalized,
+				this.volumeGraphWidth,
+				normalized
+			);
 			ctx.fill();
 		}
 		return true;

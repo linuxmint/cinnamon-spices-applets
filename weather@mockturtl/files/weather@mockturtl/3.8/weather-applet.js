@@ -20049,6 +20049,7 @@ class UIHourlyForecasts {
     }
     constructor(app, menu) {
         this.tempGraphHeight = 45;
+        this.precipGraphHeight = 16;
         this.volumeGraphWidth = 20;
         this.hourlyForecasts = [];
         this.hourlyForecastData = [];
@@ -20073,7 +20074,11 @@ class UIHourlyForecasts {
             const totalHeight = this.hourlyContainers[0].height;
             const itemWidth = this.hourlyContainers[0].width;
             const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
-            const precipitationHeight = this.hourlyForecasts[0].PrecipPercent.get_height() + this.hourlyForecasts[0].PrecipVolume.get_height();
+            const provider = this.app.Provider;
+            const precipitationTextHeight =
+                (provider && provider.supportHourlyPrecipChance ? this.hourlyForecasts[0].PrecipPercent.get_height() : 0) +
+                (provider && provider.supportHourlyPrecipVolume ? this.hourlyForecasts[0].PrecipVolume.get_height() : 0);
+            const precipitationGraphTop = totalHeight - precipitationTextHeight - this.precipGraphHeight;
             const tempPadding = 6;
             const points = [];
             const precipitation = [];
@@ -20102,8 +20107,8 @@ class UIHourlyForecasts {
             for (let i = 0; i < precipitation.length; i++) {
                 const element = precipitation[i];
                 const point = points[i];
-                const normalized = precipitationHeight * (element / Math.max(maxPrecipVolume, 2));
-                ctx.rectangle(point.x - this.volumeGraphWidth / 2, totalHeight - normalized, this.volumeGraphWidth, normalized);
+                const normalized = this.precipGraphHeight * (element / Math.max(maxPrecipVolume, 2));
+                ctx.rectangle(point.x - this.volumeGraphWidth / 2, precipitationGraphTop + this.precipGraphHeight - normalized, this.volumeGraphWidth, normalized);
                 ctx.fill();
             }
             return true;
@@ -20395,6 +20400,8 @@ class UIHourlyForecasts {
             box.add_child(hourlySet.Hour);
             box.add_child(hourlySet.Icon);
             box.add_child(hourlySet.Temperature);
+            if (this.app.Provider && this.app.Provider.supportHourlyPrecipVolume)
+                box.add_child(new uiHourlyForecasts_BoxLayout({ height: this.precipGraphHeight }));
             if ((_a = this.app.Provider) === null || _a === void 0 ? void 0 : _a.supportHourlyPrecipChance)
                 box.add_child(hourlySet.PrecipPercent);
             if ((_b = this.app.Provider) === null || _b === void 0 ? void 0 : _b.supportHourlyPrecipVolume)
