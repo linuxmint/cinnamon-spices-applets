@@ -1,0 +1,10 @@
+{
+    "uuid": "taskbar-menu@cornelishaferkamp",
+    "name": "Taskbar Menu",
+    "description": "Create independent application menus in the Cinnamon panel",
+    "version": "0.1.0",
+    "cinnamon-version": [
+        "6.6"
+    ],
+    "max-instances": -1
+}
