@@ -22,6 +22,8 @@ class WallpaperBrightnessApplet extends Applet.IconApplet {
         this.set_applet_tooltip(_("Wallpaper Brightness"));
 
         this.scriptPath = GLib.build_filenamev([this.metadata.path, "dimmer.py"]);
+        this.cacheDir = GLib.build_filenamev([GLib.get_user_cache_dir(), "wallpaper-brightness"]);
+        this.cacheUri = GLib.filename_to_uri(this.cacheDir, null);
         this.brightness = 100;
         this._applyTimeoutId = 0;
         this._isApplying = false;
@@ -94,7 +96,7 @@ class WallpaperBrightnessApplet extends Applet.IconApplet {
         // Quick Actions: Open Background Settings
         let settingsItem = new PopupMenu.PopupIconMenuItem("Background Settings...", "cs-backgrounds", St.IconType.SYMBOLIC);
         settingsItem.connect("activate", () => {
-            Util.spawnCommandLineAsync("cinnamon-settings backgrounds");
+            Util.spawn(["cinnamon-settings", "backgrounds"]);
         });
         this.menu.addMenuItem(settingsItem);
     }
@@ -166,7 +168,7 @@ class WallpaperBrightnessApplet extends Applet.IconApplet {
     _onPictureUriChanged() {
         let uri = this._bgSettings.get_string("picture-uri");
         // If URI does not point to cache folder, it's a new external wallpaper
-        if (uri && !uri.includes(".cache/wallpaper-brightness")) {
+        if (uri && !uri.startsWith(this.cacheUri) && !uri.includes(this.cacheDir)) {
             Util.spawn_async([this.scriptPath, "--sync"], () => {
                 this._loadCurrentBrightness();
             });

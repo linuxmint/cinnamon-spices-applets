@@ -22,23 +22,28 @@ Perfect for when you have beautiful wallpapers that are otherwise too bright and
 
 ---
 
-## 🛠️ Installation & Activation
+## 🛠️ Installation
 
-Open a terminal and run:
+### Via Cinnamon Settings
+1. Open **System Settings** → **Applets**.
+2. Click the **Download** tab.
+3. Search for **Wallpaper Brightness** and click **Install**.
+4. Return to the **Manage** tab, select **Wallpaper Brightness**, and click **+** to add it to your panel.
+
+### Manual Installation (Development)
+Link or copy the applet folder into your local applets directory:
 
 ```bash
-cd /home/rsmendes/Documents/cinnamon-wallpaper-brightness
-chmod +x install.sh uninstall.sh dimmer.py
-./install.sh
+ln -s "$(pwd)/files/wallpaper-brightness@rsmendes" ~/.local/share/cinnamon/applets/wallpaper-brightness@rsmendes
 ```
 
-The applet will be linked into `~/.local/share/cinnamon/applets/wallpaper-brightness@rsmendes`, enabled on your top panel, and Cinnamon will reload smoothly.
+Then enable it from **System Settings** → **Applets**.
 
 ---
 
 ## ⌨️ CLI Usage (Optional)
 
-You can also adjust wallpaper brightness directly via the command line using [`dimmer.py`](file:///home/rsmendes/Documents/cinnamon-wallpaper-brightness/dimmer.py):
+You can also adjust wallpaper brightness directly via the command line using `dimmer.py` located in the applet folder:
 
 ```bash
 # Set brightness to 60%
@@ -49,15 +54,4 @@ You can also adjust wallpaper brightness directly via the command line using [`d
 
 # Restore to 100% (original image)
 ./dimmer.py --reset
-```
-
----
-
-## 🗑️ Uninstallation
-
-To remove the applet from your system:
-
-```bash
-cd /home/rsmendes/Documents/cinnamon-wallpaper-brightness
-./uninstall.sh
 ```

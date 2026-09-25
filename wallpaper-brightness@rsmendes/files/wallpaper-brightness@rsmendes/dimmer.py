@@ -17,8 +17,11 @@ import gi
 gi.require_version('Gio', '2.0')
 from gi.repository import Gio
 
-CONFIG_DIR = Path.home() / ".config" / "wallpaper-brightness"
-CACHE_DIR = Path.home() / ".cache" / "wallpaper-brightness"
+_xdg_config = os.environ.get("XDG_CONFIG_HOME")
+CONFIG_DIR = Path(_xdg_config) / "wallpaper-brightness" if _xdg_config else Path.home() / ".config" / "wallpaper-brightness"
+
+_xdg_cache = os.environ.get("XDG_CACHE_HOME")
+CACHE_DIR = Path(_xdg_cache) / "wallpaper-brightness" if _xdg_cache else Path.home() / ".cache" / "wallpaper-brightness"
 CONFIG_FILE = CONFIG_DIR / "config.json"
 
 SCHEMA_ID = "org.cinnamon.desktop.background"
