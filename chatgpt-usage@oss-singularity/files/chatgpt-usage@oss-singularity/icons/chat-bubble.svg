@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- SPDX-License-Identifier: GPL-3.0-or-later; original OSS Singularity artwork. -->
+  <defs>
+    <linearGradient id="back" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#c8b4ff"/><stop offset="1" stop-color="#716bd8"/>
+    </linearGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="0.8" y2="1">
+      <stop stop-color="#c0f0ff"/><stop offset="1" stop-color="#65b1eb"/>
+    </linearGradient>
+  </defs>
+  <path d="M30 6h17a12 12 0 0 1 12 12v12a12 12 0 0 1-9 12v7l-12-7H30a12 12 0 0 1-12-12V18A12 12 0 0 1 30 6Z" fill="#1d2548" stroke="#1d2548" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M30 7h17a11 11 0 0 1 11 11v12a11 11 0 0 1-10 11v5l-10-5h-8a11 11 0 0 1-11-11V18A11 11 0 0 1 30 7Z" fill="url(#back)"/>
+  <path d="M31 17h15M38 25h8" fill="none" stroke="#f1eaff" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <path d="M17 24h18a12 12 0 0 1 12 12v8a12 12 0 0 1-12 12H22L10 62v-9a12 12 0 0 1-5-9v-8a12 12 0 0 1 12-12Z" fill="#18374f" stroke="#18374f" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M17 24h18a11 11 0 0 1 11 11v8a11 11 0 0 1-11 11H21l-9 5v-8a10 10 0 0 1-6-8v-8a11 11 0 0 1 11-11Z" fill="url(#front)"/>
+  <path d="M13 30a8 8 0 0 1 6-2h15" fill="none" stroke="#e6f9ff" stroke-width="2" stroke-linecap="round"/>
+  <g fill="#1d466b"><circle cx="17" cy="40" r="2.5"/><circle cx="26" cy="40" r="2.5"/><circle cx="35" cy="40" r="2.5"/></g>
+</svg>
