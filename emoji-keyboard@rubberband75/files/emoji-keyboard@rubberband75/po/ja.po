@@ -1,0 +1,187 @@
+# EMOJI KEYBOARD
+# This file is put in the public domain.
+# rubberband75, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: emoji-keyboard@rubberband75 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-27 15:25-0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. applet.js:46
+msgid "Recent"
+msgstr "最近使った項目"
+
+#. applet.js:47
+msgid "Smileys & Emotions"
+msgstr "スマイリーと感情"
+
+#. applet.js:48
+msgid "People"
+msgstr "人々"
+
+#. applet.js:49
+msgid "Animals & Nature"
+msgstr "動物と自然"
+
+#. applet.js:50
+msgid "Food & Drink"
+msgstr "食べ物と飲み物"
+
+#. applet.js:51
+msgid "Travel & Places"
+msgstr "旅行と場所"
+
+#. applet.js:52
+msgid "Activities & Events"
+msgstr "活動とイベント"
+
+#. applet.js:53
+msgid "Objects"
+msgstr "物"
+
+#. applet.js:54
+msgid "Symbols"
+msgstr "記号"
+
+#. applet.js:55
+msgid "Flags"
+msgstr "旗"
+
+#. metadata.json->name
+#. applet.js:142
+msgid "Emoji Keyboard"
+msgstr "絵文字キーボード"
+
+#. applet.js:167
+msgid "Search emoji"
+msgstr "絵文字を検索"
+
+#. applet.js:206
+msgid "Loading emoji…"
+msgstr "絵文字を読み込み中…"
+
+#. applet.js:415
+msgid "Unable to load the emoji catalog"
+msgstr "絵文字カタログを読み込めませんでした"
+
+#. applet.js:492
+#, javascript-format
+msgid "%d search result"
+msgid_plural "%d search results"
+msgstr[0] "検索結果 %d 件"
+
+#. applet.js:519
+msgid "Your recently used emoji will appear here"
+msgstr "最近使った絵文字がここに表示されます"
+
+#. applet.js:520
+msgid "No emoji found"
+msgstr "絵文字が見つかりません"
+
+#. metadata.json->description
+msgid "Search, copy, and insert emoji from a native Cinnamon panel popup."
+msgstr ""
+"Cinnamon パネルのネイティブなポップアップから絵文字を検索、コピー、挿入しま"
+"す。"
+
+#. settings-schema.json->copy-to-clipboard->description
+msgid "Copy emoji to clipboard"
+msgstr "絵文字をクリップボードにコピー"
+
+#. settings-schema.json->copy-to-clipboard->tooltip
+msgid ""
+"When enabled, the selected emoji stays on the clipboard after it is "
+"inserted. When disabled, the clipboard is restored to its previous contents "
+"after insertion."
+msgstr ""
+"有効にすると、選択した絵文字は挿入後もクリップボードに残ります。無効にする"
+"と、挿入直後にクリップボードの内容が元に戻ります。"
+
+#. settings-schema.json->category-icon-size->description
+msgid "Category icon size"
+msgstr "カテゴリアイコンのサイズ"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Colored Icon Size"
+msgstr "パネルのカラーアイコンサイズに合わせる"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Symbolic Icon Size"
+msgstr "パネルのシンボリックアイコンサイズに合わせる"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "16px"
+msgstr "16px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "22px"
+msgstr "22px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "24px"
+msgstr "24px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "32px"
+msgstr "32px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "48px"
+msgstr "48px"
+
+#. settings-schema.json->emoji-size->description
+msgid "Emoji size"
+msgstr "絵文字のサイズ"
+
+#. settings-schema.json->default-skin-tone->description
+msgid "Default skin tone"
+msgstr "既定の肌の色"
+
+#. settings-schema.json->default-skin-tone->tooltip
+msgid ""
+"Emoji that support skin tones show this tone by default. Emoji without skin "
+"tone variants are unaffected."
+msgstr ""
+"肌の色に対応した絵文字は、既定でこの色合いで表示されます。肌の色のバリエー"
+"ションがない絵文字には影響しません。"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍"
+msgstr "👍"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏻"
+msgstr "👍🏻"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏼"
+msgstr "👍🏼"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏽"
+msgstr "👍🏽"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏾"
+msgstr "👍🏾"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏿"
+msgstr "👍🏿"

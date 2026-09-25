@@ -1,0 +1,54 @@
+.emoji-keyboard-popup .popup-menu-content {
+    padding-bottom: 0;
+}
+
+.emoji-keyboard {
+    spacing: 8px;
+    padding: 4px 1px 0 4px;
+}
+
+.emoji-search-entry {
+    margin-left: 4px;
+    margin-right: 7px;
+}
+
+.emoji-category-box {
+    spacing: 2px;
+}
+
+.emoji-category-button {
+    padding: 0;
+    border-radius: 16px;
+}
+
+.emoji-category-button:active {
+    background-color: rgba(128, 128, 128, 0.28);
+}
+
+.emoji-category-heading {
+    font-weight: bold;
+    padding: 2px 4px 0 4px;
+}
+
+.emoji-grid {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.emoji-row {
+    spacing: 2px;
+}
+
+.emoji-button {
+    padding: 0;
+    border-radius: 6px;
+}
+
+.emoji-button:hover,
+.emoji-button:focus {
+    background-color: rgba(128, 128, 128, 0.22);
+}
+
+.emoji-empty-label {
+    padding: 28px 8px;
+}

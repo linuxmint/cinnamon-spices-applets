@@ -1,0 +1,190 @@
+# EMOJI KEYBOARD
+# This file is put in the public domain.
+# rubberband75, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: emoji-keyboard@rubberband75 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-27 15:25-0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. applet.js:46
+msgid "Recent"
+msgstr "Недавно"
+
+#. applet.js:47
+msgid "Smileys & Emotions"
+msgstr "Смајлији и емоције"
+
+#. applet.js:48
+msgid "People"
+msgstr "Људи"
+
+#. applet.js:49
+msgid "Animals & Nature"
+msgstr "Животиње и природа"
+
+#. applet.js:50
+msgid "Food & Drink"
+msgstr "Храна и пиће"
+
+#. applet.js:51
+msgid "Travel & Places"
+msgstr "Путовања и места"
+
+#. applet.js:52
+msgid "Activities & Events"
+msgstr "Активности и догађаји"
+
+#. applet.js:53
+msgid "Objects"
+msgstr "Предмети"
+
+#. applet.js:54
+msgid "Symbols"
+msgstr "Симболи"
+
+#. applet.js:55
+msgid "Flags"
+msgstr "Заставе"
+
+#. metadata.json->name
+#. applet.js:142
+msgid "Emoji Keyboard"
+msgstr "Тастатура за емоџије"
+
+#. applet.js:167
+msgid "Search emoji"
+msgstr "Тражи емоџије"
+
+#. applet.js:206
+msgid "Loading emoji…"
+msgstr "Учитавање емоџија…"
+
+#. applet.js:415
+msgid "Unable to load the emoji catalog"
+msgstr "Каталог емоџија није могуће учитати"
+
+#. applet.js:492
+#, javascript-format
+msgid "%d search result"
+msgid_plural "%d search results"
+msgstr[0] "%d резултат претраге"
+msgstr[1] "%d резултата претраге"
+msgstr[2] "%d резултата претраге"
+
+#. applet.js:519
+msgid "Your recently used emoji will appear here"
+msgstr "Овде ће се приказати ваши недавно коришћени емоџији"
+
+#. applet.js:520
+msgid "No emoji found"
+msgstr "Није пронађен ниједан емоџи"
+
+#. metadata.json->description
+msgid "Search, copy, and insert emoji from a native Cinnamon panel popup."
+msgstr ""
+"Тражите, копирајте и уметните емоџије из изворног искачућег прозора Cinnamon "
+"панела."
+
+#. settings-schema.json->copy-to-clipboard->description
+msgid "Copy emoji to clipboard"
+msgstr "Копирај емоџи у клипборд"
+
+#. settings-schema.json->copy-to-clipboard->tooltip
+msgid ""
+"When enabled, the selected emoji stays on the clipboard after it is "
+"inserted. When disabled, the clipboard is restored to its previous contents "
+"after insertion."
+msgstr ""
+"Када је омогућено, изабрани емоџи остаје у клипборду након уметања. Када је "
+"онемогућено, претходни садржај клипборда се враћа одмах након уметања."
+
+#. settings-schema.json->category-icon-size->description
+msgid "Category icon size"
+msgstr "Величина иконице категорије"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Colored Icon Size"
+msgstr "Ускладити са величином иконице панела у боји"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Symbolic Icon Size"
+msgstr "Ускладити са величином симболичке иконице панела"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "16px"
+msgstr "16px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "22px"
+msgstr "22px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "24px"
+msgstr "24px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "32px"
+msgstr "32px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "48px"
+msgstr "48px"
+
+#. settings-schema.json->emoji-size->description
+msgid "Emoji size"
+msgstr "Величина емоџија"
+
+#. settings-schema.json->default-skin-tone->description
+msgid "Default skin tone"
+msgstr "Подразумевани тон коже"
+
+#. settings-schema.json->default-skin-tone->tooltip
+msgid ""
+"Emoji that support skin tones show this tone by default. Emoji without skin "
+"tone variants are unaffected."
+msgstr ""
+"Емоџији који подржавају тонове коже подразумевано приказују овај тон. "
+"Емоџији без варијанти тона коже нису под утицајем."
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍"
+msgstr "👍"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏻"
+msgstr "👍🏻"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏼"
+msgstr "👍🏼"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏽"
+msgstr "👍🏽"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏾"
+msgstr "👍🏾"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏿"
+msgstr "👍🏿"

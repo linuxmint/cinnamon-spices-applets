@@ -1,0 +1,183 @@
+# EMOJI KEYBOARD
+# This file is put in the public domain.
+# rubberband75, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: emoji-keyboard@rubberband75 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-27 15:25-0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#. applet.js:46
+msgid "Recent"
+msgstr ""
+
+#. applet.js:47
+msgid "Smileys & Emotions"
+msgstr ""
+
+#. applet.js:48
+msgid "People"
+msgstr ""
+
+#. applet.js:49
+msgid "Animals & Nature"
+msgstr ""
+
+#. applet.js:50
+msgid "Food & Drink"
+msgstr ""
+
+#. applet.js:51
+msgid "Travel & Places"
+msgstr ""
+
+#. applet.js:52
+msgid "Activities & Events"
+msgstr ""
+
+#. applet.js:53
+msgid "Objects"
+msgstr ""
+
+#. applet.js:54
+msgid "Symbols"
+msgstr ""
+
+#. applet.js:55
+msgid "Flags"
+msgstr ""
+
+#. metadata.json->name
+#. applet.js:142
+msgid "Emoji Keyboard"
+msgstr ""
+
+#. applet.js:167
+msgid "Search emoji"
+msgstr ""
+
+#. applet.js:206
+msgid "Loading emoji…"
+msgstr ""
+
+#. applet.js:415
+msgid "Unable to load the emoji catalog"
+msgstr ""
+
+#. applet.js:492
+#, javascript-format
+msgid "%d search result"
+msgid_plural "%d search results"
+msgstr[0] ""
+msgstr[1] ""
+
+#. applet.js:519
+msgid "Your recently used emoji will appear here"
+msgstr ""
+
+#. applet.js:520
+msgid "No emoji found"
+msgstr ""
+
+#. metadata.json->description
+msgid "Search, copy, and insert emoji from a native Cinnamon panel popup."
+msgstr ""
+
+#. settings-schema.json->copy-to-clipboard->description
+msgid "Copy emoji to clipboard"
+msgstr ""
+
+#. settings-schema.json->copy-to-clipboard->tooltip
+msgid ""
+"When enabled, the selected emoji stays on the clipboard after it is "
+"inserted. When disabled, the clipboard is restored to its previous contents "
+"after insertion."
+msgstr ""
+
+#. settings-schema.json->category-icon-size->description
+msgid "Category icon size"
+msgstr ""
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Colored Icon Size"
+msgstr ""
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Symbolic Icon Size"
+msgstr ""
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "16px"
+msgstr ""
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "22px"
+msgstr ""
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "24px"
+msgstr ""
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "32px"
+msgstr ""
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "48px"
+msgstr ""
+
+#. settings-schema.json->emoji-size->description
+msgid "Emoji size"
+msgstr ""
+
+#. settings-schema.json->default-skin-tone->description
+msgid "Default skin tone"
+msgstr ""
+
+#. settings-schema.json->default-skin-tone->tooltip
+msgid ""
+"Emoji that support skin tones show this tone by default. Emoji without skin "
+"tone variants are unaffected."
+msgstr ""
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍"
+msgstr ""
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏻"
+msgstr ""
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏼"
+msgstr ""
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏽"
+msgstr ""
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏾"
+msgstr ""
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏿"
+msgstr ""
