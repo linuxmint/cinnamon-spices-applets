@@ -1,0 +1,10 @@
+{
+    "uuid": "HomeAssistant@MatthewGodding",
+    "name": "Home Assistant",
+    "description": "Applet to control Home Assistant devices (minimal version)",
+    "config": {
+        "ha-url": "http://homeassistant.local:8123",
+        "token": "",
+        "entity-id": ""
+    }
+}
