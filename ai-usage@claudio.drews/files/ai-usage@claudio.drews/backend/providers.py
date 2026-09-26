@@ -210,7 +210,7 @@ class NoRedirect(HTTPRedirectHandler):
         raise Unavailable(i18n.N_("Unexpected redirect; consultation interrupted."), "error")
 
 
-VERSION = "0.2.0"  # mesma versão de applet/metadata.json (o teste confere)
+VERSION = "0.2.1"  # mesma versão de applet/metadata.json (o teste confere)
 
 
 def request(url, token=None, data=None, headers=None, local=False, timeout=8):

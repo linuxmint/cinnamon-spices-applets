@@ -10,7 +10,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ai-usage@claudio.drews 0.2.0\n"
+"Project-Id-Version: ai-usage@claudio.drews 0.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-09-26 15:11-0300\n"
@@ -23,148 +23,152 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: applet/applet.js:372
+#: applet/applet.js:375 applet/applet.js:390
+msgid "Could not find the applet backend."
+msgstr "Não foi possível encontrar o backend do applet."
+
+#: applet/applet.js:494
 msgid "Could not start the collector."
 msgstr "Não foi possível iniciar o coletor."
 
-#: applet/applet.js:406
+#: applet/applet.js:528
 msgid "Collection timed out."
 msgstr "Tempo limite da coleta excedido."
 
-#: applet/applet.js:406
+#: applet/applet.js:528
 msgid "Could not read the collector output."
 msgstr "Falha ao ler o coletor."
 
 # Applet (applet/applet.js)
-#: applet/applet.js:460
+#: applet/applet.js:585
 msgid "AI usage"
 msgstr "Uso de IA"
 
-#: applet/applet.js:467 applet/applet.js:597
+#: applet/applet.js:592 applet/applet.js:723
 msgid "{label}: {percent} used"
 msgstr "{label}: {percent} usado"
 
-#: applet/applet.js:470 applet/applet.js:614
+#: applet/applet.js:595 applet/applet.js:740
 msgid "{label}: {money}"
 msgstr "{label}: {money}"
 
-#: applet/applet.js:473
+#: applet/applet.js:598
 msgid "Not configured"
 msgstr "Não configurado"
 
-#: applet/applet.js:473
+#: applet/applet.js:598
 msgid "Unavailable"
 msgstr "Indisponível"
 
-#: applet/applet.js:474
+#: applet/applet.js:599
 msgid "Reading failed"
 msgstr "Falha na leitura"
 
-#: applet/applet.js:474
+#: applet/applet.js:599
 msgid "No reading"
 msgstr "Sem leitura"
 
-#: applet/applet.js:476
+#: applet/applet.js:601
 msgid " (stale reading)"
 msgstr " (leitura antiga)"
 
-#: applet/applet.js:479
+#: applet/applet.js:604
 msgid "Waiting for the first reading…"
 msgstr "Aguardando a primeira leitura…"
 
-#: applet/applet.js:480
+#: applet/applet.js:605
 msgid "Critical quota"
 msgstr "Cota crítica"
 
-#: applet/applet.js:480
+#: applet/applet.js:605
 msgid "Attention"
 msgstr "Atenção"
 
-#: applet/applet.js:483
+#: applet/applet.js:608
 msgid "Last collection: {time}"
 msgstr "Última coleta: {time}"
 
-#: applet/applet.js:485 applet/applet.js:547
+#: applet/applet.js:610 applet/applet.js:673
 msgid "Automatic collection paused"
 msgstr "Coleta automática pausada"
 
-#: applet/applet.js:486
+#: applet/applet.js:611
 msgid "Updating…"
 msgstr "Atualizando…"
 
-#: applet/applet.js:490 applet/applet.js:552
+#: applet/applet.js:615 applet/applet.js:678
 msgid "Reading failed: {services}"
 msgstr "Falha na leitura: {services}"
 
-#: applet/applet.js:492 applet/applet.js:555
+#: applet/applet.js:617 applet/applet.js:681
 msgid "Stale reading: {services}"
 msgstr "Leitura antiga: {services}"
 
-#: applet/applet.js:493
+#: applet/applet.js:618
 msgid "Click: recent · double-click: all"
 msgstr "Clique: recentes · clique duplo: todos"
 
-#: applet/applet.js:519
+#: applet/applet.js:645
 msgid "and {count} more"
 msgstr "e mais {count}"
 
-#: applet/applet.js:546
+#: applet/applet.js:672
 msgid "Five most recent · estimated usage"
 msgstr "Cinco mais recentes · uso estimado"
 
-#: applet/applet.js:548
+#: applet/applet.js:674
 msgid "Updating… Reopen to see the new reading."
 msgstr "Atualizando… Reabra para ver a nova leitura."
 
-#: applet/applet.js:550
+#: applet/applet.js:676
 msgid "Last values preserved."
 msgstr "Últimos valores preservados."
 
-#: applet/applet.js:557
+#: applet/applet.js:683
 msgid "No reading yet; use Update or See all."
 msgstr "Sem leitura ainda; use Atualizar ou Ver todos."
 
-#: applet/applet.js:561
+#: applet/applet.js:687
 msgid "{count} service(s) without a reading; see Credentials…"
 msgstr "{count} serviço(s) sem leitura; veja Credenciais…"
 
-#: applet/applet.js:563
+#: applet/applet.js:689
 msgid "See all services…"
 msgstr "Ver todos os serviços…"
 
-#: applet/applet.js:564
+#: applet/applet.js:690
 msgid "Update"
 msgstr "Atualizar"
 
-#: applet/applet.js:565
+#: applet/applet.js:691
 msgid "Credentials…"
 msgstr "Credenciais…"
 
-#: applet/applet.js:566
+#: applet/applet.js:692
 msgid "Settings…"
 msgstr "Configurações…"
 
-#: applet/applet.js:575
+#: applet/applet.js:701
 msgid "Could not run the action."
 msgstr "Não foi possível executar a ação."
 
-#: applet/applet.js:619
+#: applet/applet.js:745
 msgid "Stale reading — see details"
 msgstr "Leitura antiga — ver detalhes"
 
-#: applet/applet.js:619
+#: applet/applet.js:745
 msgid "No current reading"
 msgstr "Sem leitura atual"
 
-#: applet/applet.js:621
+#: applet/applet.js:747
 msgid "No observed use since installation"
 msgstr "Sem uso observado desde a instalação"
 
-#: applet/applet.js:629
+#: applet/applet.js:755
 msgid "Could not open the window."
 msgstr "Não foi possível abrir a janela."
 
-#: applet/applet.js:634
+#: applet/applet.js:760
 msgid "Could not open the credentials."
 msgstr "Não foi possível abrir as credenciais."
 

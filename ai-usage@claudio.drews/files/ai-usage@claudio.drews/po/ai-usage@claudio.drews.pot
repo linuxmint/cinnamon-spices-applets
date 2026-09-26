@@ -5,7 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ai-usage@claudio.drews 0.2.0\n"
+"Project-Id-Version: ai-usage@claudio.drews 0.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
@@ -15,147 +15,151 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet/applet.js:372
+#: applet/applet.js:375 applet/applet.js:390
+msgid "Could not find the applet backend."
+msgstr ""
+
+#: applet/applet.js:494
 msgid "Could not start the collector."
 msgstr ""
 
-#: applet/applet.js:406
+#: applet/applet.js:528
 msgid "Collection timed out."
 msgstr ""
 
-#: applet/applet.js:406
+#: applet/applet.js:528
 msgid "Could not read the collector output."
 msgstr ""
 
-#: applet/applet.js:460
+#: applet/applet.js:585
 msgid "AI usage"
 msgstr ""
 
-#: applet/applet.js:467 applet/applet.js:597
+#: applet/applet.js:592 applet/applet.js:723
 msgid "{label}: {percent} used"
 msgstr ""
 
-#: applet/applet.js:470 applet/applet.js:614
+#: applet/applet.js:595 applet/applet.js:740
 msgid "{label}: {money}"
 msgstr ""
 
-#: applet/applet.js:473
+#: applet/applet.js:598
 msgid "Not configured"
 msgstr ""
 
-#: applet/applet.js:473
+#: applet/applet.js:598
 msgid "Unavailable"
 msgstr ""
 
-#: applet/applet.js:474
+#: applet/applet.js:599
 msgid "Reading failed"
 msgstr ""
 
-#: applet/applet.js:474
+#: applet/applet.js:599
 msgid "No reading"
 msgstr ""
 
-#: applet/applet.js:476
+#: applet/applet.js:601
 msgid " (stale reading)"
 msgstr ""
 
-#: applet/applet.js:479
+#: applet/applet.js:604
 msgid "Waiting for the first reading…"
 msgstr ""
 
-#: applet/applet.js:480
+#: applet/applet.js:605
 msgid "Critical quota"
 msgstr ""
 
-#: applet/applet.js:480
+#: applet/applet.js:605
 msgid "Attention"
 msgstr ""
 
-#: applet/applet.js:483
+#: applet/applet.js:608
 msgid "Last collection: {time}"
 msgstr ""
 
-#: applet/applet.js:485 applet/applet.js:547
+#: applet/applet.js:610 applet/applet.js:673
 msgid "Automatic collection paused"
 msgstr ""
 
-#: applet/applet.js:486
+#: applet/applet.js:611
 msgid "Updating…"
 msgstr ""
 
-#: applet/applet.js:490 applet/applet.js:552
+#: applet/applet.js:615 applet/applet.js:678
 msgid "Reading failed: {services}"
 msgstr ""
 
-#: applet/applet.js:492 applet/applet.js:555
+#: applet/applet.js:617 applet/applet.js:681
 msgid "Stale reading: {services}"
 msgstr ""
 
-#: applet/applet.js:493
+#: applet/applet.js:618
 msgid "Click: recent · double-click: all"
 msgstr ""
 
-#: applet/applet.js:519
+#: applet/applet.js:645
 msgid "and {count} more"
 msgstr ""
 
-#: applet/applet.js:546
+#: applet/applet.js:672
 msgid "Five most recent · estimated usage"
 msgstr ""
 
-#: applet/applet.js:548
+#: applet/applet.js:674
 msgid "Updating… Reopen to see the new reading."
 msgstr ""
 
-#: applet/applet.js:550
+#: applet/applet.js:676
 msgid "Last values preserved."
 msgstr ""
 
-#: applet/applet.js:557
+#: applet/applet.js:683
 msgid "No reading yet; use Update or See all."
 msgstr ""
 
-#: applet/applet.js:561
+#: applet/applet.js:687
 msgid "{count} service(s) without a reading; see Credentials…"
 msgstr ""
 
-#: applet/applet.js:563
+#: applet/applet.js:689
 msgid "See all services…"
 msgstr ""
 
-#: applet/applet.js:564
+#: applet/applet.js:690
 msgid "Update"
 msgstr ""
 
-#: applet/applet.js:565
+#: applet/applet.js:691
 msgid "Credentials…"
 msgstr ""
 
-#: applet/applet.js:566
+#: applet/applet.js:692
 msgid "Settings…"
 msgstr ""
 
-#: applet/applet.js:575
+#: applet/applet.js:701
 msgid "Could not run the action."
 msgstr ""
 
-#: applet/applet.js:619
+#: applet/applet.js:745
 msgid "Stale reading — see details"
 msgstr ""
 
-#: applet/applet.js:619
+#: applet/applet.js:745
 msgid "No current reading"
 msgstr ""
 
-#: applet/applet.js:621
+#: applet/applet.js:747
 msgid "No observed use since installation"
 msgstr ""
 
-#: applet/applet.js:629
+#: applet/applet.js:755
 msgid "Could not open the window."
 msgstr ""
 
-#: applet/applet.js:634
+#: applet/applet.js:760
 msgid "Could not open the credentials."
 msgstr ""
 

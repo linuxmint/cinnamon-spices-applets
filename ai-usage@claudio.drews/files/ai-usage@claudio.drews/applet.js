@@ -22,7 +22,8 @@ const CRITICAL_COLOR = '#e01b24';
 let _uuid = null;
 let _appletPath = null;
 let _language = 'en';
-const _catalogs = {};
+const _catalogs = {};      // code -> tabela | null, depois da leitura concluída
+const _catalogLoads = {};  // code -> {waiters} enquanto a leitura assíncrona está em curso
 
 function _(text) {
     const table = catalogFor(_language);
@@ -114,26 +115,69 @@ function catalogPaths(code) {
 // É o mesmo formato que o gettext do Python e o shell leem; nenhum arquivo intermediário
 // precisa existir só para o painel.
 //
+// A leitura do catálogo é assíncrona porque o applet roda dentro do processo do shell:
+// `Gio.File.load_contents_async()` devolve o controle ao laço principal e a tabela é aplicada
+// quando a resposta chega. A leitura síncrona que existia aqui segurava o painel pelo tempo de
+// abrir e ler o arquivo — alguns KB num disco local custam pouco (medido nesta máquina: 0,26 ms
+// no primeiro caminho, 0,03 a 0,09 ms num caminho ausente), mas o custo não é garantido em toda
+// máquina: pasta pessoal em montagem de rede, armazenamento lento ou sistema de arquivos em
+// espaço de usuário têm espera que o applet não controla. O scanner de padrões da loja do
+// Cinnamon avisa exatamente nesse ponto (`sync_file_get_contents`).
+//
+// O que não muda: nenhuma frase é traduzida durante o desenho. `_()` consulta só a tabela que já
+// está em memória — a leitura acontece uma vez, na resolução do idioma, e a apresentação anterior
+// fica como está até a nova chegar.
+function loadCatalog(code, cancellable, callback) {
+    const emAndamento = _catalogLoads[code];
+    if (emAndamento) {
+        // Leitura em curso não é catálogo ausente: quem pedir o mesmo idioma agora espera a mesma
+        // resposta, em vez de disparar uma segunda leitura e concluir que não há catálogo.
+        emAndamento.waiters.push(callback);
+        return;
+    }
+    const estado = {waiters: [callback]};
+    _catalogLoads[code] = estado;
+    const caminhos = catalogPaths(code);
+    const terminar = (table) => {
+        if (_catalogLoads[code] === estado) delete _catalogLoads[code];
+        _catalogs[code] = table;      // fica em memória, inclusive o "não há catálogo"
+        let falha = null;
+        for (const espera of estado.waiters) {
+            try { espera(table); } catch (error) { falha = falha || error; }
+        }
+        // O erro de um consumidor não impede os outros de receber a tabela, mas não some.
+        if (falha) throw falha;
+    };
+    const proximo = () => {
+        const caminho = caminhos.shift();
+        if (!caminho) { terminar(null); return; }
+        Gio.File.new_for_path(caminho).load_contents_async(cancellable, (fonte, resultado) => {
+            let table = null;
+            try {
+                const [ok, bytes] = fonte.load_contents_finish(resultado);
+                if (ok && bytes && bytes.length >= 28)
+                    table = parseMoBytes(bytes, new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength));
+            } catch (error) {
+                // Em GJS o `*_finish` de arquivo ausente lança (Gio.IOErrorEnum) em vez de devolver
+                // [false, null]; arquivo ilegível ou .mo corrompido devolve tabela nula pelo parser.
+                // Nos dois casos o caminho seguinte ainda pode ter o catálogo — e nenhum deles pode
+                // derrubar o painel: sem catálogo o idioma não vale e a interface sai em inglês.
+                table = null;
+                // Instância removida: sondar os caminhos restantes não serve a ninguém.
+                if (cancellable && typeof cancellable.is_cancelled === 'function' && cancellable.is_cancelled()) {
+                    terminar(null);
+                    return;
+                }
+            }
+            if (table) terminar(table); else proximo();
+        });
+    };
+    proximo();
+}
+
 // As strings são separadas nos bytes antes de decodificar: `ByteArray.toString` para no
 // primeiro NUL, e uma entrada de plural é exatamente "singular\0plural" — decodificar a
 // fatia inteira de uma vez devolveria só o singular, sem erro nenhum.
-function parseMo(path) {
-    try {
-        // Leitura síncrona de propósito: é um arquivo local de poucos KB, lido uma vez por
-        // idioma e guardado em `_catalogs`. Os rótulos do painel são montados string a
-        // string, no desenho, onde não há como esperar um callback; assíncrono obrigaria a
-        // adiar todo texto até o catálogo chegar. Idioma sem catálogo — o caso comum — é o
-        // arquivo ausente, que custa só a exceção tratada logo abaixo.
-        const [ok, bytes] = GLib.file_get_contents(path);
-        if (!ok || !bytes || bytes.length < 28) return null;
-        return parseMoBytes(bytes, new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength));
-    } catch (error) {
-        // Arquivo ausente ou ilegível: em GJS `file_get_contents` lança. Sem catálogo o
-        // idioma não vale e a interface sai em inglês, que é o combinado.
-        return null;
-    }
-}
-
 function parseMoBytes(bytes, view) {
     const magic = view.getUint32(0, true);
     const little = magic === 0x950412de;
@@ -170,25 +214,26 @@ function parseMoBytes(bytes, view) {
     return table;
 }
 
+// Só memória: quem chama é o desenho, e o desenho não pode tocar no disco. Quem lê é
+// `loadCatalog`, uma vez por idioma, na resolução — e o resultado fica aqui, inclusive o
+// "não há catálogo".
 function catalogFor(code) {
-    if (!(code in _catalogs)) {
-        let table = null;
-        for (const path of catalogPaths(code)) {
-            // Sem pré-teste de existência: `file_test` é um stat síncrono, e `parseMo` já
-            // devolve null para caminho ausente ou ilegível — a checagem só repetia o que a
-            // leitura faz de qualquer forma.
-            table = parseMo(path);
-            if (table) break;
-        }
-        _catalogs[code] = table;
-    }
-    return _catalogs[code];
+    return code in _catalogs ? _catalogs[code] : null;
 }
 
-// O catálogo tem de existir para o idioma valer: pedir francês sem catálogo
-// francês não pode deixar a interface pela metade.
+// O catálogo tem de existir para o idioma valer: pedir francês sem catálogo francês não pode
+// deixar a interface pela metade. Só memória — ausência em disco é conclusão de `loadCatalog`,
+// nunca deste teste, que não pode voltar a ser uma leitura síncrona disfarçada.
 function hasCatalog(code) {
     return catalogFor(code) !== null;
+}
+
+// Já perguntamos ao disco por este idioma — a resposta pode ter sido "não há". Distinguir isto
+// de "ainda não perguntei" evita repetir quatro leituras a cada troca de configuração para
+// chegar à mesma conclusão. O preço é conhecido: um catálogo instalado com o painel já rodando
+// só é visto na próxima sessão do Cinnamon.
+function catalogoConhecido(code) {
+    return code in _catalogs;
 }
 
 function normalizeTag(tag) {
@@ -214,18 +259,35 @@ function envCandidates() {
     return [];
 }
 
-function resolveLanguage(requested) {
-    // Pedido explícito vence o ambiente sempre: `auto`/vazio seguem a sessão; qualquer outro
-    // valor, ainda que sem catálogo, cai no inglês — nunca no idioma de quem estava logado.
+// Mesma política de antes, agora com a leitura do catálogo fora do caminho: pedido explícito
+// vence o ambiente sempre; `auto`/vazio seguem a sessão; qualquer valor sem catálogo cai no
+// inglês — nunca no idioma de quem estava logado. O inglês é o msgid, então acerta sem tocar no
+// disco; idioma já lido acerta na hora, em memória; só o idioma ainda não lido espera a resposta
+// assíncrona.
+function resolveLanguageAsync(requested, cancellable, callback) {
+    const candidatos = [];
     if (typeof requested === 'string' && requested.trim()) {
         const wanted = normalizeTag(requested);
-        return (wanted === 'en' || (wanted && hasCatalog(wanted))) ? wanted : 'en';
+        if (wanted) candidatos.push(wanted);
+    } else {
+        for (const name of envCandidates()) {
+            const code = normalizeTag(name);
+            if (code) candidatos.push(code);
+        }
     }
-    for (const name of envCandidates()) {
-        const code = normalizeTag(name);
-        if (code && (code === 'en' || hasCatalog(code))) return code;
-    }
-    return 'en';
+    candidatos.push('en');
+    const tentar = () => {
+        const code = candidatos.shift();
+        if (code === undefined) { callback('en'); return; }
+        if (code === 'en' || hasCatalog(code)) { callback(code); return; }
+        // Ausência já concluída não volta ao disco: sem isto, cada troca de configuração
+        // repetiria as quatro leituras para terminar em inglês outra vez.
+        if (catalogoConhecido(code)) { tentar(); return; }
+        loadCatalog(code, cancellable, (table) => {
+            if (table) callback(code); else tentar();
+        });
+    };
+    tentar();
 }
 
 // Número e data sem Intl e sem setlocale: separador e formato vêm da tabela do
@@ -272,12 +334,15 @@ class AIUsageApplet extends Applet.IconApplet {
         this._killTimer = 0;
         this._instance = instanceId;
         this._uuid = metadata.uuid;
-        this._backend = GLib.build_filenamev([metadata.path, 'backend']);
-        if (!GLib.file_test(this._backend, GLib.FileTest.IS_DIR))
-            this._backend = GLib.build_filenamev([metadata.path, '..', 'backend']);
-        this._assets = GLib.build_filenamev([this._backend, '..', 'assets']);
-        // Ícone simbólico: herda a cor do tema e recebe a cor de alerta pela cota mais alta.
-        this.set_applet_icon_symbolic_path(GLib.build_filenamev([this._assets, 'robot-head-symbolic.svg']));
+        this._path = metadata.path;
+        // Backend e assets dependem de consultar o sistema de arquivos, e a consulta é assíncrona:
+        // nascem nulos e `_resolveBackend()` os preenche, seta o ícone e libera o que depende do
+        // backend. `_cancellable` desarma a resposta tardia quando o applet sai do painel.
+        this._backend = null;
+        this._assets = null;
+        this._cancellable = new Gio.Cancellable();
+        this._langGen = 0;
+        this._languageResolved = false;
         this._menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this._menuManager.addMenu(this.menu);
@@ -295,6 +360,59 @@ class AIUsageApplet extends Applet.IconApplet {
         this.settings.bind('language', 'language', () => this._configure());
         this._ready = true;
         this._configure();
+        this._resolveBackend();
+    }
+
+    // Duas formas de instalação, as mesmas que o projeto já suporta: `backend` ao lado do
+    // applet.js (instalação pelo instalador ou pela loja) e um nível acima (applet carregado
+    // direto da árvore de código). A consulta é assíncrona porque o applet roda no processo do
+    // shell — o `stat` síncrono que existia aqui segurava o painel pelo tempo do sistema de
+    // arquivos, e o scanner de padrões da loja avisa nesse ponto (`sync_file_test`).
+    //
+    // Diretório ausente e erro de permissão têm tratamentos distintos: ausente faz tentar o outro
+    // layout; permissão não, porque o caminho existe e o problema é outro — cair para o irmão
+    // esconderia o motivo. Até a resposta chegar, o backend é nulo e as ações que dependem dele
+    // não spawnam nada (`_configure`, `_collect` e `_runBackend` têm essa guarda).
+    _resolveBackend() {
+        const candidatos = [
+            GLib.build_filenamev([this._path, 'backend']),
+            GLib.build_filenamev([this._path, '..', 'backend']),
+        ];
+        const tentar = () => {
+            const caminho = candidatos.shift();
+            if (!caminho) {
+                this._error = _('Could not find the applet backend.');
+                this._refreshIcon();
+                return;
+            }
+            Gio.File.new_for_path(caminho).query_info_async(
+                'standard::type', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, this._cancellable,
+                (fonte, resultado) => {
+                    if (this._stopped) return;
+                    let pasta = false;
+                    try {
+                        pasta = fonte.query_info_finish(resultado).get_file_type() === Gio.FileType.DIRECTORY;
+                    } catch (error) {
+                        const ausente = typeof error.matches === 'function' &&
+                            error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND);
+                        if (!ausente) {
+                            this._error = _('Could not find the applet backend.');
+                            this._refreshIcon();
+                            return;
+                        }
+                    }
+                    if (!pasta) { tentar(); return; }
+                    this._backend = caminho;
+                    this._assets = GLib.build_filenamev([caminho, '..', 'assets']);
+                    // Ícone simbólico: herda a cor do tema e recebe a cor de alerta pela cota mais
+                    // alta. Só depois disto o caminho do ícone é conhecido.
+                    this.set_applet_icon_symbolic_path(
+                        GLib.build_filenamev([this._assets, 'robot-head-symbolic.svg']));
+                    this._configure();
+                    this._refreshIcon();
+                });
+        };
+        tentar();
     }
 
     // 'auto' segue o idioma da sessão; um idioma fixado na configuração passa a
@@ -302,17 +420,30 @@ class AIUsageApplet extends Applet.IconApplet {
     _applyLanguage() {
         const wanted = this.language && this.language !== 'auto' ? this.language : null;
         this._languageOverride = wanted;
-        this._language = resolveLanguage(wanted);
         // O texto do painel segue a preferência desta instância (o catálogo é lido por
         // idioma, não pelo locale do processo). O xlet aceita uma instância só
         // (max-instances: 1 em metadata.json); com duas, o texto seria o da última que
         // aplicou o idioma — a formatação já é por instância.
-        _language = this._language;
+        //
+        // A leitura do catálogo é assíncrona: até a resposta chegar vale o idioma anterior, e a
+        // geração descarta resposta de uma escolha já superada — trocar de idioma duas vezes
+        // depressa não pode terminar com o texto da primeira.
+        const geracao = ++this._langGen;
+        resolveLanguageAsync(wanted, this._cancellable, (code) => {
+            if (this._stopped || geracao !== this._langGen) return;
+            this._language = code;
+            _language = code;
+            this._languageResolved = true;
+            this._refreshIcon();
+        });
     }
 
     _configure() {
         if (!this._ready || this._stopped) return;
         this._applyLanguage();
+        // Sem backend resolvido não há caminho de coletor a montar: a descoberta assíncrona chama
+        // `_configure()` de novo quando termina, e até lá um clique não spawna caminho inválido.
+        if (!this._backend) return;
         if (this._loop) Mainloop.source_remove(this._loop);
         this._loop = 0;
         if (this.collectEnabled) {
@@ -359,7 +490,7 @@ class AIUsageApplet extends Applet.IconApplet {
     }
 
     _collect(force, readOnly = false) {
-        if (this._stopped || this._proc) return;
+        if (this._stopped || this._proc || !this._backend) return;
         if (!force && !readOnly && !this.collectEnabled) return;
         const argv = ['/usr/bin/python3', GLib.build_filenamev([this._backend, 'collector.py']),
                       readOnly ? 'read' : 'collect'];
@@ -452,6 +583,9 @@ class AIUsageApplet extends Applet.IconApplet {
 
     _refreshIcon() {
         if (this._stopped) return;
+        // O primeiro desenho espera o idioma resolver: com sessão pt_BR e catálogo lido de forma
+        // assíncrona, desenhar antes disto mostraria um quadro de inglês.
+        if (!this._languageResolved) return;
         const services = this._snapshot ? this._snapshot.services : [];
         const agora = Date.now();
         const quotas = this._quotas(services);
@@ -486,7 +620,7 @@ class AIUsageApplet extends Applet.IconApplet {
         if (this._proc) lines.push(_('Updating…'));
         if (this._error) lines.push(this._error);
         if (this._notice()) lines.push(this._notice());
-        const comFalha = this._byStatus('error');
+        const comFalha = this._failedServices();
         if (comFalha.length) lines.push(_f(_('Reading failed: {services}'), {services: this._list(comFalha)}));
         const antigas = this._agedServices().map(s => s.label || s.id);
         if (antigas.length) lines.push(_f(_('Stale reading: {services}'), {services: this._list(antigas)}));
@@ -507,10 +641,11 @@ class AIUsageApplet extends Applet.IconApplet {
         return aviso ? aviso : null;
     }
 
-    // Indicador de erro separado de cota: nomeia quem falhou, sem tocar na cor da cota.
-    _byStatus(...statuses) {
+    // Uma falha com leitura preservada também é erro; intervalo vencido não é.
+    _failedServices() {
         const services = (this._snapshot && this._snapshot.services) || [];
-        return services.filter(s => statuses.includes(s.status)).map(s => s.label || s.id);
+        return services.filter(s => s.status === 'error' ||
+            (s.status === 'stale' && s.stale_reason === 'failure')).map(s => s.label || s.id);
     }
 
     _list(names, limit = 3) {
@@ -548,7 +683,7 @@ class AIUsageApplet extends Applet.IconApplet {
         if (this._proc) this._note(_('Updating… Reopen to see the new reading.'));
         if (this._notice()) this._note(this._notice());
         if (this._error) this._note(this._error + ' ' + _('Last values preserved.'));
-        const comFalha = this._byStatus('error');
+        const comFalha = this._failedServices();
         if (comFalha.length) this._note(_f(_('Reading failed: {services}'), {services: this._list(comFalha)}),
                                         'ai-usage-menu-error');
         const antigas = this._agedServices().map(s => s.label || s.id);
@@ -644,6 +779,7 @@ class AIUsageApplet extends Applet.IconApplet {
     }
 
     _runBackend(script, errorMessage) {
+        if (!this._backend) return;   // backend ainda em descoberta: nada de caminho inválido
         try {
             this._spawn(['/usr/bin/python3', GLib.build_filenamev([this._backend, script])],
                         Gio.SubprocessFlags.STDOUT_SILENCE | Gio.SubprocessFlags.STDERR_SILENCE);
@@ -652,6 +788,9 @@ class AIUsageApplet extends Applet.IconApplet {
 
     on_applet_removed_from_panel() {
         this._stopped = true;
+        // Resposta tardia de leitura de catálogo ou de descoberta do backend não pode tocar
+        // interface destruída nem manter operação viva.
+        this._cancellable.cancel();
         for (const name of ['_click', '_loop', '_ageLoop', '_watchdog', '_killTimer']) {
             if (this[name]) Mainloop.source_remove(this[name]);
             this[name] = 0;
