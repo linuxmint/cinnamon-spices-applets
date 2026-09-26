@@ -1,0 +1,51 @@
+{
+ "layout": {
+  "type": "layout",
+  "pages": ["general"],
+  "general": {
+   "type": "page",
+   "title": "Collection",
+   "sections": ["collect", "interface"]
+  },
+  "collect": {
+   "type": "section",
+   "title": "Usage collection",
+   "keys": ["collect-enabled", "collect-interval"]
+  },
+  "interface": {
+   "type": "section",
+   "title": "Interface",
+   "keys": ["language"]
+  }
+ },
+
+ "collect-enabled": {
+  "type": "switch",
+  "default": true,
+  "description": "Collect usage periodically",
+  "tooltip": "When off, the applet keeps the last valid reading and stops querying the services. No credential is stored here."
+ },
+
+ "collect-interval": {
+  "type": "spinbutton",
+  "default": 120,
+  "min": 30,
+  "max": 3600,
+  "step": 30,
+  "units": "seconds",
+  "description": "Interval between collections",
+  "tooltip": "Time between two automatic readings. The Update button in the menu always forces an immediate reading."
+ },
+
+ "language": {
+  "type": "combobox",
+  "default": "auto",
+  "description": "Interface language",
+  "tooltip": "Automatic follows the session language; a fixed language also applies to the collection, the usage window and the credentials window.",
+  "options": {
+   "Automatic (system language)": "auto",
+   "English": "en",
+   "Português (Brasil)": "pt_BR"
+  }
+ }
+}

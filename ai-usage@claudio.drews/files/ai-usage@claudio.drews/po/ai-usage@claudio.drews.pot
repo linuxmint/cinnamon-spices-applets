@@ -1,0 +1,1225 @@
+# AI USAGE
+# This file is put in the public domain.
+# ClaudioDrews, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ai-usage@claudio.drews 0.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet/applet.js:372
+msgid "Could not start the collector."
+msgstr ""
+
+#: applet/applet.js:406
+msgid "Collection timed out."
+msgstr ""
+
+#: applet/applet.js:406
+msgid "Could not read the collector output."
+msgstr ""
+
+#: applet/applet.js:460
+msgid "AI usage"
+msgstr ""
+
+#: applet/applet.js:467 applet/applet.js:597
+msgid "{label}: {percent} used"
+msgstr ""
+
+#: applet/applet.js:470 applet/applet.js:614
+msgid "{label}: {money}"
+msgstr ""
+
+#: applet/applet.js:473
+msgid "Not configured"
+msgstr ""
+
+#: applet/applet.js:473
+msgid "Unavailable"
+msgstr ""
+
+#: applet/applet.js:474
+msgid "Reading failed"
+msgstr ""
+
+#: applet/applet.js:474
+msgid "No reading"
+msgstr ""
+
+#: applet/applet.js:476
+msgid " (stale reading)"
+msgstr ""
+
+#: applet/applet.js:479
+msgid "Waiting for the first reading…"
+msgstr ""
+
+#: applet/applet.js:480
+msgid "Critical quota"
+msgstr ""
+
+#: applet/applet.js:480
+msgid "Attention"
+msgstr ""
+
+#: applet/applet.js:483
+msgid "Last collection: {time}"
+msgstr ""
+
+#: applet/applet.js:485 applet/applet.js:547
+msgid "Automatic collection paused"
+msgstr ""
+
+#: applet/applet.js:486
+msgid "Updating…"
+msgstr ""
+
+#: applet/applet.js:490 applet/applet.js:552
+msgid "Reading failed: {services}"
+msgstr ""
+
+#: applet/applet.js:492 applet/applet.js:555
+msgid "Stale reading: {services}"
+msgstr ""
+
+#: applet/applet.js:493
+msgid "Click: recent · double-click: all"
+msgstr ""
+
+#: applet/applet.js:519
+msgid "and {count} more"
+msgstr ""
+
+#: applet/applet.js:546
+msgid "Five most recent · estimated usage"
+msgstr ""
+
+#: applet/applet.js:548
+msgid "Updating… Reopen to see the new reading."
+msgstr ""
+
+#: applet/applet.js:550
+msgid "Last values preserved."
+msgstr ""
+
+#: applet/applet.js:557
+msgid "No reading yet; use Update or See all."
+msgstr ""
+
+#: applet/applet.js:561
+msgid "{count} service(s) without a reading; see Credentials…"
+msgstr ""
+
+#: applet/applet.js:563
+msgid "See all services…"
+msgstr ""
+
+#: applet/applet.js:564
+msgid "Update"
+msgstr ""
+
+#: applet/applet.js:565
+msgid "Credentials…"
+msgstr ""
+
+#: applet/applet.js:566
+msgid "Settings…"
+msgstr ""
+
+#: applet/applet.js:575
+msgid "Could not run the action."
+msgstr ""
+
+#: applet/applet.js:619
+msgid "Stale reading — see details"
+msgstr ""
+
+#: applet/applet.js:619
+msgid "No current reading"
+msgstr ""
+
+#: applet/applet.js:621
+msgid "No observed use since installation"
+msgstr ""
+
+#: applet/applet.js:629
+msgid "Could not open the window."
+msgstr ""
+
+#: applet/applet.js:634
+msgid "Could not open the credentials."
+msgstr ""
+
+#: backend/collector.py:24
+msgid "Last reading available; refresh pending."
+msgstr ""
+
+#: backend/collector.py:28
+msgid ""
+"Refresh skipped: a collection is already running; the values are the last "
+"reading."
+msgstr ""
+
+#: backend/collector.py:51
+msgid "No reading available; refresh to query."
+msgstr ""
+
+#: backend/collector.py:182
+msgid ""
+"Previous reading data: the refresh interval has passed and this service has "
+"not been read again yet."
+msgstr ""
+
+#: backend/collector.py:184
+msgid "Previous reading data: the most recent refresh of this service failed."
+msgstr ""
+
+#: backend/collector.py:252
+msgid "Disabled in the configuration."
+msgstr ""
+
+#: backend/collector.py:264
+msgid "The query timed out or returned invalid data."
+msgstr ""
+
+#: backend/collector.py:300 backend/collector.py:302 backend/collector.py:304
+msgid "5 h window"
+msgstr ""
+
+#: backend/collector.py:301 backend/collector.py:303 backend/collector.py:305
+#: backend/collector.py:307 backend/providers.py:426 backend/providers.py:859
+#: backend/providers.py:967 backend/providers.py:970
+msgid "Week"
+msgstr ""
+
+#: backend/collector.py:306 backend/providers.py:425
+msgid "Rolling window"
+msgstr ""
+
+#: backend/collector.py:308 backend/providers.py:427
+msgid "Month"
+msgstr ""
+
+#: backend/collector.py:309
+msgid "Example model"
+msgstr ""
+
+#: backend/collector.py:310 backend/providers.py:469
+msgid "API prepaid balance"
+msgstr ""
+
+#: backend/collector.py:311 backend/providers.py:472
+msgid "Prepaid credits used"
+msgstr ""
+
+#: backend/collector.py:312 backend/providers.py:394
+msgid "Total available balance"
+msgstr ""
+
+#: backend/collector.py:313 backend/providers.py:398
+msgid "Plan balance"
+msgstr ""
+
+#: backend/collector.py:314 backend/providers.py:374
+msgid "Available balance"
+msgstr ""
+
+#: backend/collector.py:315 backend/providers.py:360
+msgid "Monthly spend"
+msgstr ""
+
+#: backend/collector.py:332
+msgid "Simulation — no real data"
+msgstr ""
+
+#: backend/collector.py:352
+msgid "TTL for this query, in seconds"
+msgstr ""
+
+#: backend/collector.py:356
+msgid "worker requires a provider"
+msgstr ""
+
+#: backend/collector.py:365
+msgid "diag requires a provider"
+msgstr ""
+
+#: backend/collector.py:380
+msgid "Failed to read the configuration or write the local cache."
+msgstr ""
+
+#: backend/credentials.py:99
+msgid "unterminated quotes"
+msgstr ""
+
+#: backend/credentials.py:102
+msgid "more than one value inside quotes"
+msgstr ""
+
+#: backend/credentials.py:176 backend/credentials.py:186
+msgid "System keyring unavailable."
+msgstr ""
+
+#: backend/credentials.py:177
+#, python-brace-format
+msgid "{app} — {label}"
+msgstr ""
+
+#: backend/credentials.py:292
+msgid "stored in the system keyring"
+msgstr ""
+
+#: backend/credentials.py:293
+msgid "from the indicated file"
+msgstr ""
+
+#: backend/credentials.py:294
+msgid "from the environment variable"
+msgstr ""
+
+#: backend/credentials.py:296
+msgid "not configured"
+msgstr ""
+
+#: backend/credentials_window.py:48
+msgid "the key at /api/v1/key"
+msgstr ""
+
+#: backend/credentials_window.py:49
+msgid "the balance API key"
+msgstr ""
+
+#: backend/credentials_window.py:50
+msgid "the Go plan key (Zen does not work)"
+msgstr ""
+
+#: backend/credentials_window.py:51
+msgid ""
+"the Console management key → Settings → Management Keys (the inference one "
+"does not work)"
+msgstr ""
+
+#: backend/credentials_window.py:53
+msgid "the account OAuth token"
+msgstr ""
+
+#: backend/credentials_window.py:110 backend/credentials_window.py:117
+msgid "Credentials — AI usage"
+msgstr ""
+
+#: backend/credentials_window.py:118
+msgid "Nothing here is written to the cache or the repository"
+msgstr ""
+
+#: backend/credentials_window.py:136
+msgid "System keyring unavailable: use a file indicated below."
+msgstr ""
+
+#: backend/credentials_window.py:165
+msgid "API keys"
+msgstr ""
+
+#: backend/credentials_window.py:166
+msgid ""
+"The key goes to the system keyring (gnome-keyring) and is read by the "
+"collector at query time. The field is cleared after saving."
+msgstr ""
+
+#: backend/credentials_window.py:181
+#, python-brace-format
+msgid "{variable} — {hint}"
+msgstr ""
+
+#: backend/credentials_window.py:185
+msgid "Save to the keyring"
+msgstr ""
+
+#: backend/credentials_window.py:187
+msgid "Remove from the keyring"
+msgstr ""
+
+#: backend/credentials_window.py:197
+msgid "Credentials file (NAME=VALUE)"
+msgstr ""
+
+#: backend/credentials_window.py:198
+msgid ""
+"Use it when the keys are already in a file of yours, at any path (for "
+"example ~/.env or ~/.config/secrets.env). The file is read without a shell."
+msgstr ""
+
+#: backend/credentials_window.py:204
+msgid "/path/to/credentials.env"
+msgstr ""
+
+#: backend/credentials_window.py:206
+msgid "Choose…"
+msgstr ""
+
+#: backend/credentials_window.py:209 backend/credentials_window.py:252
+msgid "Save path"
+msgstr ""
+
+#: backend/credentials_window.py:218
+msgid "Team identifiers"
+msgstr ""
+
+#: backend/credentials_window.py:219
+msgid ""
+"Data that is not a secret, but the API requires — such as the xAI team. It "
+"can come from here, from config.json or from the credentials file itself "
+"(XAI_TEAM_ID)."
+msgstr ""
+
+#: backend/credentials_window.py:224
+msgid "Grok / xAI — team_id"
+msgstr ""
+
+#: backend/credentials_window.py:228
+msgid "console.x.ai/team/&lt;team_id&gt;/…"
+msgstr ""
+
+#: backend/credentials_window.py:230
+msgid "Save"
+msgstr ""
+
+#: backend/credentials_window.py:238
+msgid "OAuth token in a JSON file"
+msgstr ""
+
+#: backend/credentials_window.py:239
+msgid ""
+"For services that authenticate by login instead of a key. The token is "
+"looked up in the JSON, at any level; nothing is copied to the cache."
+msgstr ""
+
+#: backend/credentials_window.py:250
+msgid "/path/to/auth.json"
+msgstr ""
+
+#: backend/credentials_window.py:259
+msgid "Without a key"
+msgstr ""
+
+#: backend/credentials_window.py:260
+msgid ""
+"Codex uses the login of the CLI itself (codex login) and Antigravity uses "
+"the local server of the open IDE — neither one asks for a key here."
+msgstr ""
+
+#: backend/credentials_window.py:274
+msgid "Type the credential before saving."
+msgstr ""
+
+#: backend/credentials_window.py:279
+#, python-brace-format
+msgid "Could not write to the keyring: {error}"
+msgstr ""
+
+#: backend/credentials_window.py:284
+#, python-brace-format
+msgid ""
+"{label}: credential saved to the keyring as {variable}. The keyring has "
+"precedence; the next collection already uses it."
+msgstr ""
+
+#: backend/credentials_window.py:296
+#, python-brace-format
+msgid "Could not remove: {error}"
+msgstr ""
+
+#: backend/credentials_window.py:300
+#, python-brace-format
+msgid "{label}: removed from the keyring."
+msgstr ""
+
+#: backend/credentials_window.py:301
+#, python-brace-format
+msgid "{label}: there was nothing in the keyring."
+msgstr ""
+
+#: backend/credentials_window.py:305
+msgid "Choose credentials file"
+msgstr ""
+
+#: backend/credentials_window.py:307
+msgid "Cancel"
+msgstr ""
+
+#: backend/credentials_window.py:308
+msgid "Choose"
+msgstr ""
+
+#: backend/credentials_window.py:317
+msgid "Credentials file path updated."
+msgstr ""
+
+#: backend/credentials_window.py:323
+#, python-brace-format
+msgid "{done} The indicated file does not exist yet."
+msgstr ""
+
+#: backend/credentials_window.py:329
+msgid "The team_id accepts only letters, numbers, hyphen and underscore."
+msgstr ""
+
+#: backend/credentials_window.py:339
+msgid "Team identifier updated."
+msgstr ""
+
+#: backend/credentials_window.py:350
+#, python-brace-format
+msgid "Token file for {service} updated."
+msgstr ""
+
+#: backend/credentials_window.py:356
+#, python-brace-format
+msgid "Could not write the configuration: {error}"
+msgstr ""
+
+#: backend/credentials_window.py:369
+msgid "from the indicated token file"
+msgstr ""
+
+#: backend/credentials_window.py:378
+#, python-brace-format
+msgid ""
+"{path} — {found} of {expected} expected variables found; the other variables "
+"remain available to the connectors."
+msgstr ""
+
+#: backend/credentials_window.py:384
+#, python-brace-format
+msgid "{path} — the file does not exist yet."
+msgstr ""
+
+#: backend/credentials_window.py:388
+#, python-brace-format
+msgid " Line(s) ignored due to syntax: {lines}."
+msgstr ""
+
+#: backend/credentials_window.py:391
+msgid "No file indicated."
+msgstr ""
+
+#: backend/credentials_window.py:395
+msgid "not defined"
+msgstr ""
+
+#: backend/credentials_window.py:396
+#, python-brace-format
+msgid "Current team_id: {value}"
+msgstr ""
+
+#: backend/credentials_window.py:398
+msgid " (from the configuration)"
+msgstr ""
+
+#: backend/credentials_window.py:400
+msgid " (from the credentials file)"
+msgstr ""
+
+#: backend/i18n.py:324 backend/i18n.py:342 backend/window.py:160
+msgid "unavailable"
+msgstr ""
+
+#: backend/i18n.py:335
+msgid "percentage unavailable"
+msgstr ""
+
+#: backend/i18n.py:366 backend/i18n.py:378
+msgid "unknown time"
+msgstr ""
+
+#: backend/i18n.py:387
+msgid "unknown duration"
+msgstr ""
+
+#: backend/i18n.py:389
+msgid "under 2 minutes"
+msgstr ""
+
+#: backend/i18n.py:392
+#, python-brace-format
+msgid "{minutes} min"
+msgstr ""
+
+#: backend/i18n.py:397
+#, python-brace-format
+msgid "{hours} h {minutes} min"
+msgstr ""
+
+#: backend/i18n.py:398
+#, python-brace-format
+msgid "{hours} h"
+msgstr ""
+
+#: backend/i18n.py:400
+#, python-brace-format
+msgid "{days} day"
+msgid_plural "{days} days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: backend/i18n.py:410
+msgid "now"
+msgstr ""
+
+#: backend/i18n.py:411
+#, python-brace-format
+msgid "{duration} ago"
+msgstr ""
+
+#: backend/providers.py:48
+msgid "Failed to query the service; the previous reading is kept."
+msgstr ""
+
+#: backend/providers.py:53
+#, python-brace-format
+msgid "Application subscription; not API usage billing.{details}"
+msgstr ""
+
+#: backend/providers.py:54
+#, python-brace-format
+msgid ""
+"Claude Code subscription; not API usage billing. Connector not verified on a "
+"real account.{details}"
+msgstr ""
+
+#: backend/providers.py:204
+msgid "Credentials not configured."
+msgstr ""
+
+#: backend/providers.py:210
+msgid "Unexpected redirect; consultation interrupted."
+msgstr ""
+
+#: backend/providers.py:234
+msgid "Response larger than the allowed limit."
+msgstr ""
+
+#: backend/providers.py:239
+msgid "Login expired or credentials refused."
+msgstr ""
+
+#: backend/providers.py:240
+msgid "Consultation access refused (HTTP 403)."
+msgstr ""
+
+#: backend/providers.py:241
+msgid "Usage source not found (HTTP 404)."
+msgstr ""
+
+#: backend/providers.py:242
+msgid "Consultation limit reached; wait for the next update."
+msgstr ""
+
+#: backend/providers.py:243
+#, python-brace-format
+msgid "Consultation failed (HTTP {code})."
+msgstr ""
+
+#: backend/providers.py:246
+msgid "Could not query the service; check the connection."
+msgstr ""
+
+#: backend/providers.py:249
+msgid "Unrecognized response format."
+msgstr ""
+
+#: backend/providers.py:266
+msgid "Quota"
+msgstr ""
+
+#: backend/providers.py:268 backend/providers.py:851 backend/providers.py:966
+#, python-brace-format
+msgid "Window of {hours} h"
+msgstr ""
+
+#: backend/providers.py:276
+#, python-brace-format
+msgid "{name} · {hours} h window"
+msgstr ""
+
+#: backend/providers.py:279
+#, python-brace-format
+msgid "{name} · quota"
+msgstr ""
+
+#: backend/providers.py:289
+msgid "Codex CLI not found."
+msgstr ""
+
+#: backend/providers.py:314
+msgid "Codex did not provide quotas; check the CLI login."
+msgstr ""
+
+#: backend/providers.py:324
+msgid "Timeout querying Codex."
+msgstr ""
+
+#: backend/providers.py:342
+msgid "The current login did not return Codex quotas."
+msgstr ""
+
+#: backend/providers.py:343
+msgid "Codex app-server"
+msgstr ""
+
+#: backend/providers.py:354
+#, python-brace-format
+msgid "Key limit ({reset})"
+msgstr ""
+
+#: backend/providers.py:358
+msgid "Key limit"
+msgstr ""
+
+#: backend/providers.py:361
+msgid "Cumulative key spend"
+msgstr ""
+
+#: backend/providers.py:369
+msgid "OpenRouter · key"
+msgstr ""
+
+#: backend/providers.py:382
+msgid "DeepSeek · balance"
+msgstr ""
+
+#: backend/providers.py:401
+msgid "Prepaid credit balance"
+msgstr ""
+
+#: backend/providers.py:414
+msgid "Nous Portal token not configured."
+msgstr ""
+
+#: backend/providers.py:416
+msgid "Nous Portal · OAuth token"
+msgstr ""
+
+#: backend/providers.py:441
+msgid "OpenCode Go key not configured."
+msgstr ""
+
+#: backend/providers.py:445
+msgid "Go response without recognized quotas; experimental connector."
+msgstr ""
+
+#: backend/providers.py:446
+msgid "OpenCode Go · usage (experimental)"
+msgstr ""
+
+#: backend/providers.py:461
+msgid "Unrecognized xAI balance."
+msgstr ""
+
+#: backend/providers.py:481
+msgid "xAI management key not configured."
+msgstr ""
+
+#: backend/providers.py:484
+msgid ""
+"Set grok.team_id in the configuration or XAI_TEAM_ID together with the "
+"credentials to query the xAI API."
+msgstr ""
+
+#: backend/providers.py:489
+msgid "xAI Management API · does not include the Grok subscription"
+msgstr ""
+
+#: backend/providers.py:490
+msgid ""
+"xAI records prepaid credits as a negative value in total.val; the displayed "
+"balance is the available credit."
+msgstr ""
+
+#: backend/providers.py:506
+msgid "Prompt credits"
+msgstr ""
+
+#: backend/providers.py:506
+msgid "Flow credits"
+msgstr ""
+
+#: backend/providers.py:523 backend/providers.py:534 backend/providers.py:549
+#, python-brace-format
+msgid "Model {number}"
+msgstr ""
+
+#: backend/providers.py:599
+msgid "Open Antigravity to consult the local quotas."
+msgstr ""
+
+#: backend/providers.py:629
+msgid "Antigravity · local server (experimental)"
+msgstr ""
+
+#: backend/providers.py:633
+msgid "Local server found, but it did not return recognized quotas."
+msgstr ""
+
+#: backend/providers.py:816
+#, python-brace-format
+msgid ""
+"Consultation deferred: there was already an attempt in the last {minutes} "
+"min and the minimum interval between calls has not passed yet; the previous "
+"reading is kept."
+msgstr ""
+
+#: backend/providers.py:849
+msgid "Current window"
+msgstr ""
+
+#: backend/providers.py:877 backend/providers.py:1022
+#, python-brace-format
+msgid "Plan: {plan}."
+msgstr ""
+
+#: backend/providers.py:882
+#, python-brace-format
+msgid "Meta reported {percent}% usage; the applet bar stops at 100%."
+msgstr ""
+
+#: backend/providers.py:901
+msgid ""
+"Muse Code login not found; run `muse login` to read the Meta subscription."
+msgstr ""
+
+#: backend/providers.py:904
+msgid "Muse Code · Meta subscription"
+msgstr ""
+
+#: backend/providers.py:910
+msgid ""
+"Reading reused; the subscription is queried respecting a minimum interval "
+"between calls."
+msgstr ""
+
+#: backend/providers.py:928
+msgid ""
+"Meta answered without the subscription percentages; run `diag meta` and "
+"report the result on GitHub to adjust the connector."
+msgstr ""
+
+#: backend/providers.py:1009
+#, python-brace-format
+msgid "Week · {model}"
+msgstr ""
+
+#: backend/providers.py:1020
+#, python-brace-format
+msgid "Plan: {plan} · {tier}."
+msgstr ""
+
+#: backend/providers.py:1043
+msgid "Claude Code login not found; run `claude` and use /login."
+msgstr ""
+
+#: backend/providers.py:1051
+msgid ""
+"Claude Code token expired; run `claude` to renew the session (the applet "
+"does not renew credentials)."
+msgstr ""
+
+#: backend/providers.py:1055
+msgid "Claude Code · subscription (not verified)"
+msgstr ""
+
+#: backend/providers.py:1061
+msgid ""
+"Reading reused; the route is queried respecting a minimum interval between "
+"calls."
+msgstr ""
+
+#: backend/providers.py:1071
+msgid ""
+"Response without the expected windows; run `diag claude` and report the "
+"result on GitHub to adjust the connector."
+msgstr ""
+
+#: backend/providers.py:1091
+msgid "…"
+msgstr ""
+
+#: backend/providers.py:1101
+msgid "negative number"
+msgstr ""
+
+#: backend/providers.py:1103
+msgid "number between 0 and 1"
+msgstr ""
+
+#: backend/providers.py:1104
+msgid "number between 1 and 100"
+msgstr ""
+
+#: backend/providers.py:1104
+msgid "number above 100"
+msgstr ""
+
+#: backend/providers.py:1106
+msgid "text (date and time)"
+msgstr ""
+
+#: backend/providers.py:1107
+msgid "text"
+msgstr ""
+
+#: backend/providers.py:1114 backend/providers.py:1171
+msgid "configuration"
+msgstr ""
+
+#: backend/providers.py:1115 backend/providers.py:1172
+msgid "default"
+msgstr ""
+
+#: backend/providers.py:1120 backend/providers.py:1177
+msgid "not found"
+msgstr ""
+
+#: backend/providers.py:1122 backend/providers.py:1179
+msgid "found"
+msgstr ""
+
+#: backend/providers.py:1130 backend/providers.py:1187
+msgid "ok"
+msgstr ""
+
+#: backend/providers.py:1157
+msgid "absent"
+msgstr ""
+
+#: backend/providers.py:1158
+msgid "null"
+msgstr ""
+
+#: backend/providers.py:1201
+msgid "no diagnostic for this service"
+msgstr ""
+
+#: backend/providers.py:1207
+msgid "unexpected failure in the diagnostic"
+msgstr ""
+
+#: backend/providers.py:1215
+msgid "Source did not return recognized usage metrics."
+msgstr ""
+
+#: backend/providers.py:1223
+msgid "Failed to read the service data; try refreshing."
+msgstr ""
+
+#: backend/window.py:162
+#, python-format, python-brace-format
+msgid "{percent}% used"
+msgstr ""
+
+#: backend/window.py:168
+msgid "OK"
+msgstr ""
+
+#: backend/window.py:169
+msgid "Stale"
+msgstr ""
+
+#: backend/window.py:172
+msgid "Error"
+msgstr ""
+
+#: backend/window.py:173
+msgid "Disabled"
+msgstr ""
+
+#: backend/window.py:175
+msgid "Undefined"
+msgstr ""
+
+#: backend/window.py:192
+msgid "Last use: unknown (the first reading has no history)"
+msgstr ""
+
+#: backend/window.py:195
+msgid "approximate, inferred from the change in consumption"
+msgstr ""
+
+#: backend/window.py:196
+msgid "reported by the source"
+msgstr ""
+
+#: backend/window.py:197
+msgid "approximate, the origin of the date is unknown"
+msgstr ""
+
+#: backend/window.py:200
+#, python-brace-format
+msgid "Last use: {relative} ({description})"
+msgstr ""
+
+#: backend/window.py:210
+#, python-brace-format
+msgid "in {duration}"
+msgstr ""
+
+#: backend/window.py:211
+msgid "awaiting update"
+msgstr ""
+
+#: backend/window.py:212
+#, python-brace-format
+msgid "Renews {datetime} ({relative})"
+msgstr ""
+
+#: backend/window.py:213
+#, python-brace-format
+msgid "Resets {datetime} ({relative})"
+msgstr ""
+
+#: backend/window.py:221
+#, python-brace-format
+msgid "Window: {duration}"
+msgstr ""
+
+#: backend/window.py:280
+#, python-brace-format
+msgid "Collector not found at {path}."
+msgstr ""
+
+#: backend/window.py:295
+#, python-brace-format
+msgid "Could not start the collector: {error}"
+msgstr ""
+
+#: backend/window.py:359
+#, python-brace-format
+msgid "Could not read the collector output: {error}"
+msgstr ""
+
+#: backend/window.py:367
+#, python-brace-format
+msgid "Collection timed out after {seconds} seconds."
+msgstr ""
+
+#: backend/window.py:381
+#, python-brace-format
+msgid "Collector exited with error (code {code})."
+msgstr ""
+
+#: backend/window.py:391
+msgid "Collector response is not valid JSON."
+msgstr ""
+
+#: backend/window.py:397
+msgid "Collector response is outside the contract."
+msgstr ""
+
+#: backend/window.py:424
+msgid "Monitored AI services"
+msgstr ""
+
+#: backend/window.py:435
+msgid "For the project robot, install the librsvg2-common package"
+msgstr ""
+
+#: backend/window.py:439
+msgid "Update now (forces a new collection)"
+msgstr ""
+
+#: backend/window.py:444
+msgid "API keys and file paths: kept in the system keyring"
+msgstr ""
+
+#: backend/window.py:465
+msgid "Demo — made-up values, without changing your history."
+msgstr ""
+
+#: backend/window.py:482
+msgid "Loading service data…"
+msgstr ""
+
+#: backend/window.py:538
+#, python-brace-format
+msgid ""
+"The collection is taking longer than expected. The collector is stopped "
+"after {seconds} seconds."
+msgstr ""
+
+#: backend/window.py:560
+#, python-brace-format
+msgid "Collection error: {error}"
+msgstr ""
+
+#: backend/window.py:563
+msgid "No data to show while the collection fails."
+msgstr ""
+
+#: backend/window.py:580
+#, python-brace-format
+msgid "Error opening the credentials: {error}"
+msgstr ""
+
+#: backend/window.py:598
+msgid "The collector returned no services."
+msgstr ""
+
+#: backend/window.py:607
+#, python-brace-format
+msgid "No reading ({count} service)"
+msgid_plural "No reading ({count} services)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: backend/window.py:621
+#, python-brace-format
+msgid ""
+"Showing the last known reading; the most recent collection failed: {reason}"
+msgstr ""
+
+#: backend/window.py:636
+#, python-brace-format
+msgid "Collection from {datetime} ({relative})"
+msgstr ""
+
+#: backend/window.py:640
+#, python-brace-format
+msgid " · shown at {time}"
+msgstr ""
+
+#: backend/window.py:643
+msgid " · demo data"
+msgstr ""
+
+#: backend/window.py:657
+msgid "Service"
+msgstr ""
+
+#: backend/window.py:673
+#, python-brace-format
+msgid "Source: {source}"
+msgstr ""
+
+#: backend/window.py:678
+#, python-brace-format
+msgid "Reading: {datetime} ({relative})"
+msgstr ""
+
+#: backend/window.py:681
+#, python-brace-format
+msgid "Reading: {datetime}"
+msgstr ""
+
+#: backend/window.py:706
+msgid "Reading details"
+msgstr ""
+
+#: backend/window.py:716
+msgid "Metric"
+msgstr ""
+
+#: backend/window.py:719
+#, python-brace-format
+msgid "{label} · {percent}"
+msgstr ""
+
+#: backend/window.py:727
+#, python-format, python-brace-format
+msgid "{percent}% of the quota used"
+msgstr ""
+
+#: backend/window.py:732
+#, python-brace-format
+msgid "{window} · {reset}"
+msgstr ""
+
+#: backend/window.py:749
+msgid "No value reported."
+msgstr ""
+
+#: backend/window.py:775
+msgid "Shows demo data (a simulation; it does not write the cache)"
+msgstr ""
+
+#: backend/window.py:814
+#, python-brace-format
+msgid ""
+"Warning: single instance unavailable ({reason}); opening without "
+"registration."
+msgstr ""
+
+msgid "Recent usage of the configured AI services, right in the Cinnamon panel"
+msgstr ""
+
+msgid "Collection"
+msgstr ""
+
+msgid "Usage collection"
+msgstr ""
+
+msgid "Interface"
+msgstr ""
+
+msgid "Collect usage periodically"
+msgstr ""
+
+msgid ""
+"When off, the applet keeps the last valid reading and stops querying the "
+"services. No credential is stored here."
+msgstr ""
+
+msgid "Interval between collections"
+msgstr ""
+
+msgid ""
+"Time between two automatic readings. The Update button in the menu always "
+"forces an immediate reading."
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+msgid "Interface language"
+msgstr ""
+
+msgid ""
+"Automatic follows the session language; a fixed language also applies to the "
+"collection, the usage window and the credentials window."
+msgstr ""
+
+msgid "Automatic (system language)"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Português (Brasil)"
+msgstr ""
+
+#: install.py:72
+msgid "Previous copy preserved in:"
+msgstr ""
+
+#: install.py:76
+msgid "Installed in:"
+msgstr ""
+
+#: install.py:80
+msgid "Catalog installed in:"
+msgstr ""
+
+#: install.py:81
+msgid "Open the Cinnamon Applets settings and add AI usage to the panel."
+msgstr ""
+
+#: install.py:92
+msgid "where to write the catalogs (default: ~/.local/share/locale)"
+msgstr ""
