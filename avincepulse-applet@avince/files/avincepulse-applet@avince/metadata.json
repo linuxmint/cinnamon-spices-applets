@@ -1,0 +1,10 @@
+{
+    "uuid": "avincepulse-applet@avince",
+    "name": "aVincePulse Applet",
+    "description": "Hardware and network monitor for the Cinnamon panel, with a large hover display.",
+    "version": "0.1.0",
+    "cinnamon-version": [
+        "6.6"
+    ],
+    "max-instances": 1
+}
