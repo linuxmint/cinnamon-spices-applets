@@ -114,11 +114,11 @@ class FMRadioApplet extends Applet.IconApplet {
 
         let customDir = Gio.File.new_for_path(CUSTOM_IMAGE_DIR);
         
-        if (!customDir.query_exists(null)) {
-            try {
-                customDir.make_directory_with_parents(null);
-                global.log("FM Radio: Created custom covers directory at " + CUSTOM_IMAGE_DIR);
-            } catch (e) {
+        try {
+            customDir.make_directory_with_parents(null);
+            global.log("FM Radio: Created custom covers directory at " + CUSTOM_IMAGE_DIR);
+        } catch (e) {
+            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
                 global.logError("FM Radio: Failed to create custom covers directory: " + e.message);
             }
         }

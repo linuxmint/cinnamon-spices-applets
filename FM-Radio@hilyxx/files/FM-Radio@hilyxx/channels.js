@@ -64,27 +64,30 @@ var Channel = class Channel {
         }
 
         if (path.startsWith("/home/")) {
-            let absoluteFile = Gio.File.new_for_path(path);
-            if (absoluteFile.query_exists(null)) {
+            try {
+                let absoluteFile = Gio.File.new_for_path(path);
+                absoluteFile.query_info('*', Gio.FileQueryInfoFlags.NONE, null);
                 return Gio.icon_new_for_string(path);
-            }
+            } catch (e) {}
         }
 
         let fileName = path.split('/').pop();
 
         if (CUSTOM_IMAGE_DIR) {
             let customPath = CUSTOM_IMAGE_DIR + "/" + fileName;
-            let customFile = Gio.File.new_for_path(customPath);
-            if (customFile.query_exists(null)) {
+            try {
+                let customFile = Gio.File.new_for_path(customPath);
+                customFile.query_info('*', Gio.FileQueryInfoFlags.NONE, null);
                 return Gio.icon_new_for_string(customPath);
-            }
+            } catch (e) {}
         }
 
         let defaultPath = extPath + "/images/" + fileName;
-        let defaultFile = Gio.File.new_for_path(defaultPath);
-        if (defaultFile.query_exists(null)) {
+        try {
+            let defaultFile = Gio.File.new_for_path(defaultPath);
+            defaultFile.query_info('*', Gio.FileQueryInfoFlags.NONE, null);
             return Gio.icon_new_for_string(defaultPath);
-        }
+        } catch (e) {}
 
         return Gio.icon_new_for_string(extPath + "/images/default-cover.png");
     }
