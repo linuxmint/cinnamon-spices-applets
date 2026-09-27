@@ -8,6 +8,9 @@ const Gettext = imports.gettext;
 
 const PopupMenu = imports.ui.popupMenu;
 
+const PICTURES_DIR = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES);
+const CUSTOM_IMAGE_DIR = PICTURES_DIR ? (PICTURES_DIR + "/fm-radio-covers") : null;
+
 const UUID = "FM-Radio@hilyxx";
 Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
@@ -55,11 +58,35 @@ var Channel = class Channel {
 
     getResolvedIcon() {
         let path = this.pic;
+        
         if (!path || path.trim() === "") {
-            path = "/images/default-cover.png";
+            path = "default-cover.png";
         }
-        let iconPath = path.startsWith("/home/") ? path : extPath + (path.startsWith("/") ? "" : "/") + path;
-        return Gio.icon_new_for_string(iconPath);
+
+        if (path.startsWith("/home/")) {
+            let absoluteFile = Gio.File.new_for_path(path);
+            if (absoluteFile.query_exists(null)) {
+                return Gio.icon_new_for_string(path);
+            }
+        }
+
+        let fileName = path.split('/').pop();
+
+        if (CUSTOM_IMAGE_DIR) {
+            let customPath = CUSTOM_IMAGE_DIR + "/" + fileName;
+            let customFile = Gio.File.new_for_path(customPath);
+            if (customFile.query_exists(null)) {
+                return Gio.icon_new_for_string(customPath);
+            }
+        }
+
+        let defaultPath = extPath + "/images/" + fileName;
+        let defaultFile = Gio.File.new_for_path(defaultPath);
+        if (defaultFile.query_exists(null)) {
+            return Gio.icon_new_for_string(defaultPath);
+        }
+
+        return Gio.icon_new_for_string(extPath + "/images/default-cover.png");
     }
 };
 
@@ -73,7 +100,6 @@ var ChannelBox = class ChannelBox extends PopupMenu.PopupBaseMenuItem {
 
         this.vbox = new St.BoxLayout({ 
             vertical: false,
-            width: 200,
             x_expand: true 
         });
         this.addActor(this.vbox);
@@ -84,13 +110,13 @@ var ChannelBox = class ChannelBox extends PopupMenu.PopupBaseMenuItem {
             icon_size: 32,
         });
 
-        let box2 = new St.BoxLayout({ vertical: false });
+        let box2 = new St.BoxLayout({ vertical: false, x_expand: true });
         let label1 = new St.Label({
             text: channel.getName(),
             y_align: Clutter.ActorAlign.CENTER,
             y_expand: true,
-            style_class: 'channel-label',
-            style: 'max-width: 165px;' 
+            x_expand: true,
+            style_class: 'channel-label'
         });
         
         label1.clutter_text.line_wrap = true;
