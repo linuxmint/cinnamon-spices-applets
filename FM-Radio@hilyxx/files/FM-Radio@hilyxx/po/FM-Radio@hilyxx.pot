@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FM-Radio@hilyxx 1.3.2\n"
+"Project-Id-Version: FM-Radio@hilyxx 1.3.4\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-09-09 11:13+0200\n"
+"POT-Creation-Date: 2026-09-27 15:29+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,65 +18,65 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#. applet.js:68 applet.js:140 applet.js:172 applet.js:211 applet.js:214
-#. applet.js:220 applet.js:242 applet.js:244 applet.js:249 applet.js:489
-#. applet.js:541 applet.js:557 applet.js:583 applet.js:609 applet.js:630
+#. applet.js:74 applet.js:164 applet.js:196 applet.js:235 applet.js:238
+#. applet.js:244 applet.js:266 applet.js:268 applet.js:273 applet.js:513
+#. applet.js:565 applet.js:581 applet.js:607 applet.js:633 applet.js:654
 msgid "FM Radio"
 msgstr ""
 
-#. applet.js:81
+#. applet.js:87
 msgid "Reload applet"
 msgstr ""
 
-#. applet.js:140
+#. applet.js:164
 msgid "Please select a station."
 msgstr ""
 
-#. applet.js:169
+#. applet.js:193
 msgid "station added successfully!"
 msgstr ""
 
-#. applet.js:170
+#. applet.js:194
 msgid "stations added successfully!"
 msgstr ""
 
-#. applet.js:185
+#. applet.js:209
 msgid "Music"
 msgstr ""
 
-#. applet.js:211
+#. applet.js:235
 msgid "Stations successfully saved to:\n"
 msgstr ""
 
-#. applet.js:214
+#. applet.js:238
 msgid "Error saving backup."
 msgstr ""
 
-#. applet.js:220
+#. applet.js:244
 msgid "Please select a backup file to import first."
 msgstr ""
 
-#. applet.js:242
+#. applet.js:266
 msgid "Stations successfully restored!"
 msgstr ""
 
-#. applet.js:244
+#. applet.js:268
 msgid "Invalid JSON file format."
 msgstr ""
 
-#. applet.js:249
+#. applet.js:273
 msgid "Error reading the backup file."
 msgstr ""
 
-#. applet.js:373
+#. applet.js:397
 msgid "All stations"
 msgstr ""
 
-#. applet.js:386
+#. applet.js:410
 msgid "Reconnecting..."
 msgstr ""
 
-#. applet.js:403
+#. applet.js:427
 msgid ""
 "Multimedia codecs are missing.\n"
 "\n"
@@ -84,39 +84,39 @@ msgid ""
 "distribution to use the radio."
 msgstr ""
 
-#. applet.js:404
+#. applet.js:428
 msgid "FM Radio Error"
 msgstr ""
 
-#. applet.js:407
+#. applet.js:431
 msgid "Missing Codecs"
 msgstr ""
 
-#. applet.js:429 applet.js:480
+#. applet.js:453 applet.js:504
 msgid "Waiting..."
 msgstr ""
 
-#. applet.js:489
+#. applet.js:513
 msgid "Please start a radio station first to record it."
 msgstr ""
 
-#. applet.js:541
+#. applet.js:565
 msgid "Cannot record: This station has no valid URL."
 msgstr ""
 
-#. applet.js:557
+#. applet.js:581
 msgid "Recording started: "
 msgstr ""
 
-#. applet.js:583
+#. applet.js:607
 msgid "Error starting recording."
 msgstr ""
 
-#. applet.js:609
+#. applet.js:633
 msgid "Recording finished and saved to the /FM-Radio folder."
 msgstr ""
 
-#. channels.js:39
+#. channels.js:42
 msgid "Error"
 msgstr ""
 
@@ -219,7 +219,7 @@ msgid "Stream URL"
 msgstr ""
 
 #. settings-schema.json->custom_stations->columns->title
-msgid "Image path (e.g., /home/user/logo.png)"
+msgid "Image name (e.g., cover.png)"
 msgstr ""
 
 #. settings-schema.json->info1->description
@@ -230,12 +230,13 @@ msgid ""
 "• Create an image of any format (png, jpeg, or svg) with a square 'cover' "
 "style size (e.g., 300x300).\n"
 "\n"
-"• Station images are stored by default in the applet's image folder, and the "
-"path is /images/yourcover.png. For images located in another folder, apply "
-"the same process and adapt the path accordingly.\n"
+"• A folder named 'fm-radio-covers' is created in the Pictures directory to "
+"securely store your custom covers. It is not recommended to place your "
+"images directly in the applet folder, as they will be overwritten with every "
+"update.\n"
 "\n"
-"• The easiest way is to copy the desired image and paste it into the "
-"provided field; this will directly paste the image path.\n"
+"• Then simply copy the name of the image and paste it into the field "
+"provided (e.g., cover.png).\n"
 msgstr ""
 
 #. settings-schema.json->info2->description

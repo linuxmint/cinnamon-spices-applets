@@ -10,9 +10,9 @@ msgstr ""
 "issues\n"
 "POT-Creation-Date: 2026-09-27 15:29+0200\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"Language: da\n"
+"Language: el_GR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,59 +23,59 @@ msgstr ""
 #. applet.js:244 applet.js:266 applet.js:268 applet.js:273 applet.js:513
 #. applet.js:565 applet.js:581 applet.js:607 applet.js:633 applet.js:654
 msgid "FM Radio"
-msgstr "FM-Radio"
+msgstr "Ραδιόφωνο FM"
 
 #. applet.js:87
 msgid "Reload applet"
-msgstr "Genindlæs panelprogrammet"
+msgstr "Επαναφόρτωση εφαρμογής"
 
 #. applet.js:164
 msgid "Please select a station."
-msgstr "Vælg venligst en station."
+msgstr "Παρακαλώ επιλέξτε ένα σταθμό."
 
 #. applet.js:193
 msgid "station added successfully!"
-msgstr "station tilføjet!"
+msgstr "επιτυχής προσθήκη σταθμού!"
 
 #. applet.js:194
 msgid "stations added successfully!"
-msgstr "stationer tilføjet!"
+msgstr "επιτυχής προσθήκη σταθμών!"
 
 #. applet.js:209
 msgid "Music"
-msgstr "Musik"
+msgstr "Μουσική"
 
 #. applet.js:235
 msgid "Stations successfully saved to:\n"
-msgstr "Stationer blev gemt korrekt i:\n"
+msgstr "Οι σταθμοί αποθηκεύτηκαν επιτυχώς στο:\n"
 
 #. applet.js:238
 msgid "Error saving backup."
-msgstr "Fejl ved lagring af sikkerhedskopi."
+msgstr "Σφάλμα αποθήκευσης αντιγράφων ασφαλείας."
 
 #. applet.js:244
 msgid "Please select a backup file to import first."
-msgstr "Vælg først en sikkerhedskopi, der skal importeres."
+msgstr "Παρακαλώ επιλέξτε πρώτα ένα αντίγραφο ασφαλείας για εισαγωγή."
 
 #. applet.js:266
 msgid "Stations successfully restored!"
-msgstr "Stationer blev gendannet korrekt!"
+msgstr "Επιτυχής επαναφορά σταθμών!"
 
 #. applet.js:268
 msgid "Invalid JSON file format."
-msgstr "Ugyldigt JSON-filformat."
+msgstr "Άκυρη μορφή αρχείων JSON."
 
 #. applet.js:273
 msgid "Error reading the backup file."
-msgstr "Fejl ved læsning af sikkerhedskopifilen."
+msgstr "Σφάλμα ανάγνωσης αρχείου ασφαλείας."
 
 #. applet.js:397
 msgid "All stations"
-msgstr "All stationer"
+msgstr "Όλοι οι σταθμοί"
 
 #. applet.js:410
 msgid "Reconnecting..."
-msgstr "Genforbinder..."
+msgstr "Επανασύνδεση..."
 
 #. applet.js:427
 msgid ""
@@ -84,112 +84,112 @@ msgid ""
 "Please install GStreamer plugins (good, base, bad, ugly) for your "
 "distribution to use the radio."
 msgstr ""
-"Multimedie-codecs mangler.\n"
+"Απουσία αποκωδικοποιητών πολυμέσων.\n"
 "\n"
-"Installer venligst GStreamer-plugins (good, base, bad, ugly) til din "
-"distribution for at bruge radioen."
+"Παρακαλώ εγκαταστήστε τα πρόσθετα του GStreamer (good, base, bad, ugly) της "
+"διανομής σας, για να χρησιμοποιήσετε το ραδιόφωνο."
 
 #. applet.js:428
 msgid "FM Radio Error"
-msgstr "FM-radiofejl"
+msgstr "Σφάλμα του ραδιοφώνου FM"
 
 #. applet.js:431
 msgid "Missing Codecs"
-msgstr "Manglende codecs"
+msgstr "Απουσία αποκωδικοποιητών"
 
 #. applet.js:453 applet.js:504
 msgid "Waiting..."
-msgstr "Venter …"
+msgstr "Αναμονή..."
 
 #. applet.js:513
 msgid "Please start a radio station first to record it."
-msgstr "Start en radiostation for at optage den."
+msgstr "Παρακαλώ εκκινήστε πρώτα ένα ραδιοφωνικό σταθμό για να κάνετε εγγραφή."
 
 #. applet.js:565
 msgid "Cannot record: This station has no valid URL."
-msgstr "Kan ikke optage: Denne station har ikke en gyldig URL."
+msgstr "Αδυναμία εγγραφής: Ο σταθμός δεν έχει έγκυρη διεύθυνση ροής (URL)."
 
 #. applet.js:581
 msgid "Recording started: "
-msgstr "Optagelse begyndte: "
+msgstr "Εκκίνηση εγγραφής: "
 
 #. applet.js:607
 msgid "Error starting recording."
-msgstr "Der opstod en fejl ved start af optagelse."
+msgstr "Σφάλμα εκκίνησης εγγραφής."
 
 #. applet.js:633
 msgid "Recording finished and saved to the /FM-Radio folder."
-msgstr "Optagelsen er færdig og gemt i /FM-Radio-mappen."
+msgstr "Η εγγραφή ολοκληρώθηκε και αποθηκεύτηκε στο φάκελο /FM-Radio."
 
 #. channels.js:42
 msgid "Error"
-msgstr "Fejl"
+msgstr "Σφάλμα"
 
 #. settings-schema.json->msg_empty_search->description
 #. search.js:19
 msgid "Please enter a radio station name to search for."
-msgstr "Indtast en radiostation for at søge efter den."
+msgstr "Παρακαλώ εισάγετε μια ονομασία σταθμού για αναζήτηση."
 
 #. search.js:43
 msgid "Unknown Station"
-msgstr "Ukendt station"
+msgstr "Άγνωστος σταθμός"
 
 #. metadata.json->description
 msgid "A stupidly simple radio player for Cinnamon"
-msgstr "En helt enkel radioafspiller til Cinnamon"
+msgstr "Ένα βλακωδώς απλό ραδιόφωνο για το Cinnamon"
 
 #. settings-schema.json->page_stations->title
 msgid "Radios"
-msgstr "Stationer"
+msgstr "Ραδιόφωνα"
 
 #. settings-schema.json->tips->title
 #. settings-schema.json->tips-section->title
 msgid "Tips"
-msgstr "Tips"
+msgstr "Συμβουλές"
 
 #. settings-schema.json->page_settings->title
 msgid "Settings"
-msgstr "Indstillinger"
+msgstr "Ρυθμίσεις"
 
 #. settings-schema.json->section_search->title
 msgid "Radio station search (Radio-Browser API)"
-msgstr "Radiostationsøgning"
+msgstr "Αναζήτηση ραδιοφωνικού σταθμού (Radio-Browser API)"
 
 #. settings-schema.json->section_list->title
 msgid "Station management"
-msgstr "Stationshåndtering"
+msgstr "Διαχείριση σταθμού"
 
 #. settings-schema.json->section_settings->title
 msgid "Recording"
-msgstr "Optagelse"
+msgstr "Εγγραφή"
 
 #. settings-schema.json->section_shortcuts->title
 msgid "Keyboard Shortcuts"
-msgstr "Tastaturgenveje"
+msgstr "Συντομεύσεις πληκτρολογίου"
 
 #. settings-schema.json->section_backup->title
 msgid "Backup and Restore radio stations"
-msgstr "Sikkerhedskopiering og gendannelse af radiostationer"
+msgstr "Αντίγραφα ασφαλείας και επαναφορά ραδιοφωνικών σταθμών"
 
 #. settings-schema.json->search_keyword->description
 msgid "Radio station name to search for"
-msgstr "Navn på radiostation der skal søges efter"
+msgstr "Ονομασία ραδιοφωνικού σταθμού για αναζήτηση"
 
 #. settings-schema.json->search_button->description
 msgid "Launch search"
-msgstr "Kør søgning"
+msgstr "Εκκίνηση αναζήτησης"
 
 #. settings-schema.json->clear_button->description
 msgid "Clear results"
-msgstr "Ryd resultater"
+msgstr "Εκκαθάριση αποτελεσμάτων"
 
 #. settings-schema.json->msg_no_results->description
 msgid "No stations found for this search."
-msgstr "Ingen stationer fundet for denne søgning."
+msgstr "Δεν βρέθηκαν σταθμοί γι' αυτή την αναζήτηση."
 
 #. settings-schema.json->search_results_list->description
 msgid "Search results"
-msgstr "Søgeresultater"
+msgstr "Αποτελέσματα αναζήτησης"
 
 #. settings-schema.json->search_results_list->columns->title
 msgid "➕"
@@ -197,35 +197,35 @@ msgstr "➕"
 
 #. settings-schema.json->search_results_list->columns->title
 msgid "📻 Station"
-msgstr "📻 Station"
+msgstr "📻  Σταθμός"
 
 #. settings-schema.json->search_results_list->columns->title
 msgid "🎶 Quality"
-msgstr "🎶 Kvalitet"
+msgstr "🎶  Ποιότητα"
 
 #. settings-schema.json->search_results_list->columns->title
 msgid "🌐 Stream URL"
-msgstr "🌐 Stream-URL"
+msgstr "🌐 Διεύθυνση ροής (URL)"
 
 #. settings-schema.json->add_selected_button->description
 msgid "Add selected stations to my list"
-msgstr "Tilføj valgte stationer til min liste"
+msgstr "Προσθήκη των επιλεγμένων σταθμών στον κατάλογό μου"
 
 #. settings-schema.json->custom_stations->description
 msgid "Custom radio stations"
-msgstr "Brugerdefinerede radiostationer"
+msgstr "Προσαρμοσμένοι ραδιοφωνικοί σταθμοί"
 
 #. settings-schema.json->custom_stations->columns->title
 msgid "Station name"
-msgstr "Stationsnavn"
+msgstr "Ονομασία σταθμού"
 
 #. settings-schema.json->custom_stations->columns->title
 msgid "Stream URL"
-msgstr "Stream-URL"
+msgstr "Διεύθυνση ροής (URL)"
 
 #. settings-schema.json->custom_stations->columns->title
 msgid "Image name (e.g., cover.png)"
-msgstr "Billednavn (f.eks. cover.png)"
+msgstr "Όνομα εικόνας (π.χ. cover.png)"
 
 #. settings-schema.json->info1->description
 msgid ""
@@ -244,18 +244,18 @@ msgid ""
 "provided (e.g., cover.png).\n"
 msgstr ""
 "\n"
-"Sådan opretter du et brugerdefineret billede til en radiostation:\n"
+"Για χρήση προσαρμοσμένης εικόνας ενός ραδιοφωνικού σταθμού:\n"
 "\n"
-"• Opret et billede i et vilkårligt format (png, jpeg eller svg) med en "
-"kvadratisk størrelse i “album”-stil (f.eks. 300x300).\n"
+"• Δημιουργήστε μια εικόνα οποιασδήποτε μορφής (png, jpeg, or svg) με σχήμα "
+"τετράγωνου 'εξώφυλλου' συγκεκριμένου μεγέθους (π.χ. 300x300).\n"
 "\n"
-"• En mappe med navnet 'fm-radio-covers' oprettes i billedmappen for sikkert "
-"at opbevare dine tilpassede covers. Det anbefales ikke at placere dine "
-"billeder direkte i applet-mappen, da de vil blive overskrevet ved hver "
-"opdatering.\n"
+"• Ένας φάκελος με το όνομα «fm-radio-covers» δημιουργείται στον κατάλογο "
+"Pictures, ώστε να αποθηκεύετε με ασφάλεια τις προσαρμοσμένες εικόνες σας. "
+"Δεν συνιστάται να τοποθετείτε τις εικόνες απευθείας στον φάκελο της "
+"εφαρμογής, καθώς θα αντικαθίστανται σε κάθε ενημέρωση.\n"
 "\n"
-"•Kopier derefter blot billedets navn og indsæt det i det angivne felt "
-"(f.eks. cover.png).\n"
+"• Στη συνέχεια, απλώς αντιγράψτε το όνομα της εικόνας και επικολλήστε το στο "
+"αντίστοιχο πεδίο (π.χ. cover.png).\n"
 
 #. settings-schema.json->info2->description
 msgid ""
@@ -264,37 +264,39 @@ msgid ""
 "Click it again to stop the recording.\n"
 msgstr ""
 "\n"
-"For at optage en livestream skal du blot klikke på omslagsikonet.\n"
-"Klik på det igen for at stoppe optagelsen.\n"
+"Για να εγγράψετε μια ζωντανή μετάδοση, απλά πιέστε στην εικόνα του εξώφυλλου "
+"του σταθμού.\n"
+"Πιέστε την ξανά για να τερματίσετε την εγγραφή.\n"
+" \n"
 
 #. settings-schema.json->show_recording_notifications->description
 msgid "Show a notification at the start and end of a recording"
-msgstr "Vis en underretning ved begyndelsen og slutningen af en optagelse"
+msgstr "Εμφάνιση ειδοποίησης κατά την έναρξη και τον τερματισμό μιας εγγραφής"
 
 #. settings-schema.json->recording_folder->description
 msgid "Custom recording folder"
-msgstr "Brugerdefineret mappe til optagelse"
+msgstr "Προσαρμοσμένος φάκελος εγγραφών"
 
 #. settings-schema.json->recording_folder->tooltip
 msgid "Select the directory where your audio recordings will be saved."
-msgstr "Vælg den mappe, hvor dine lydoptagelser skal gemmes."
+msgstr "Επιλογή τοποθεσίας αποθήκευσης των ηχητικών εγγραφών."
 
 #. settings-schema.json->reset_folder_button->description
 msgid "Reset to default Music folder"
-msgstr "Nulstil til standardmappe"
+msgstr "Επαναφορά προεπιλεγμένου φακέλου μουσικής"
 
 #. settings-schema.json->key_play_pause->description
 msgid "Play / Stop"
-msgstr "Afspil / Stop"
+msgstr "Αναπαραγωγή / Τερματισμός"
 
 #. settings-schema.json->export_button->description
 msgid "Export stations"
-msgstr "Eksportér stationer"
+msgstr "Εξαγωγή σταθμών"
 
 #. settings-schema.json->import_file->description
 msgid "Select a Backup file (.json) to restore"
-msgstr "Vælg en sikkerhedskopi (.json), der skal gendannes"
+msgstr "Επιλέξτε ένα αρχείο αντιγράφου ασφαλείας (.json) για επαναφορά"
 
 #. settings-schema.json->import_button->description
 msgid "Restore stations from the selected file"
-msgstr "Gendan stationer fra den valgte fil"
+msgstr "Επαναφορά σταθμών από το επιλεγμένο αρχείο"
