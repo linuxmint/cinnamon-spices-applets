@@ -1,0 +1,146 @@
+# CODEX USAGE
+# Copyright (C) 2026 Pila Gonzalez
+# This file is distributed under the same license as the Codex Usage applet.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: codex-usage@pila 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-09-23 20:00+0200\n"
+"PO-Revision-Date: 2026-09-23 20:00+0200\n"
+"Last-Translator: Pila Gonzalez\n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Codex Usage"
+msgstr "Użycie Codexa"
+
+msgid "Display local Codex token statistics and current account rate limits"
+msgstr "Wyświetlaj lokalne statystyki tokenów Codex i bieżące limity użycia konta"
+
+msgid "Panel display"
+msgstr "Wyświetlanie na panelu"
+
+msgid "Rate limits"
+msgstr "Limity użycia"
+
+msgid "Daily tokens"
+msgstr "Tokeny dzienne"
+
+msgid "seconds"
+msgstr "sekundy"
+
+msgid "Refresh interval"
+msgstr "Interwał odświeżania"
+
+msgid "Mark limit snapshots stale after"
+msgstr "Oznacz migawki limitów jako nieaktualne po"
+
+msgid "Reset time passed"
+msgstr "Czas resetu już minął"
+
+#, javascript-format
+msgid "Reset in %dd %dh"
+msgstr "Reset za %dd %dg"
+
+#, javascript-format
+msgid "Reset in %dh %dm"
+msgstr "Reset za %dg %dmin"
+
+msgid "Unavailable"
+msgstr "Niedostępne"
+
+msgid "Local Codex usage · limit percentages used"
+msgstr "Lokalne użycie Codexa · wykorzystane wartości procentowe limitów"
+
+#, javascript-format
+msgid "%d%% used"
+msgstr "Wykorzystano %d%%"
+
+#, javascript-format
+msgid "%d%% used · stale"
+msgstr "Wykorzystano %d%% · dane nieaktualne"
+
+msgid "CODEX USAGE"
+msgstr "UŻYCIE CODEXA"
+
+#, javascript-format
+msgid "%s today"
+msgstr "%s dzisiaj"
+
+msgid "Local Codex daily tokens · * = cached statistics; refresh failed · — = unavailable"
+msgstr "Lokalne dzienne tokeny Codex · * = statystyki z pamięci podręcznej; odświeżanie nie powiodło się · — = niedostępne"
+
+#, javascript-format
+msgid "5h %s · W %s"
+msgstr "5h %s · T %s"
+
+msgid "Codex limit percentages used · * = last observed value, outdated or refresh failed · — = unavailable"
+msgstr "Wykorzystanie limitów Codex · * = ostatnia zaobserwowana wartość, dane nieaktualne lub błąd odświeżania · — = niedostępne"
+
+msgid "Usage collector unavailable"
+msgstr "Moduł zbierania danych o użyciu jest niedostępny"
+
+msgid "Loading…"
+msgstr "Ładowanie…"
+
+msgid "Refresh failed · showing cached statistics"
+msgstr "Odświeżanie nie powiodło się · wyświetlane są statystyki z pamięci podręcznej"
+
+msgid "Local Codex data not found"
+msgstr "Nie znaleziono lokalnych danych Codex"
+
+msgid "5-hour limit"
+msgstr "Limit 5-godzinny"
+
+msgid "Weekly limit"
+msgstr "Limit tygodniowy"
+
+msgid "Limits observed"
+msgstr "Zaobserwowane limity"
+
+msgid "TODAY"
+msgstr "DZISIAJ"
+
+msgid "Input"
+msgstr "Wejście"
+
+msgid "Cached input"
+msgstr "Wejście z pamięci podręcznej"
+
+msgid "Output"
+msgstr "Wyjście"
+
+msgid "Reasoning output"
+msgstr "Wyjście rozumowania"
+
+msgid "Total"
+msgstr "Łącznie"
+
+msgid "Sessions"
+msgstr "Sesje"
+
+msgid "Cache share of input"
+msgstr "Udział wejścia z pamięci podręcznej"
+
+msgid "THIS WEEK"
+msgstr "TEN TYDZIEŃ"
+
+msgid "THIS MONTH"
+msgstr "TEN MIESIĄC"
+
+msgid "Last model"
+msgstr "Ostatni model"
+
+msgid "Last reasoning effort"
+msgstr "Ostatni poziom rozumowania"
+
+msgid "Updated"
+msgstr "Zaktualizowano"
+
+msgid "Some records could not be read"
+msgstr "Nie udało się odczytać części rekordów"
+
