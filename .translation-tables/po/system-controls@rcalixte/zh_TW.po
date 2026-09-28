@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+
+msgid ""
+msgstr ""
+"Project-Id-Version: system-controls@rcalixte 1.2.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-07 16:57-0500\n"
+"PO-Revision-Date: 2025-09-13 03:17+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#: 5.4/applet.js:29
+msgid "System Controls"
+msgstr "系統控制"
+
+#: 5.4/applet.js:64
+msgid "Restart Cinnamon"
+msgstr "重新啟動 Cinnamon"
+
+#: 5.4/applet.js:72
+msgid "Lock Screen"
+msgstr "鎖定螢幕"
+
+#: 5.4/applet.js:94 5.4/applet.js:103 5.4/applet.js:111
+msgid "Switch User"
+msgstr "切換使用者"
+
+#: 5.4/applet.js:121
+msgid "Log Out"
+msgstr "登出"
+
+#: 5.4/applet.js:129
+msgid "Suspend"
+msgstr "暫停"
+
+#: 5.4/applet.js:135
+msgid "Hibernate"
+msgstr "休眠"
+
+#: 5.4/applet.js:143
+msgid "Restart"
+msgstr "重新啟動"
+
+#: 5.4/applet.js:149
+msgid "Power Off"
+msgstr "關機"
+
+#. metadata.json->description
+msgid ""
+"A simple system controls applet to restart Cinnamon, lock the screen, switch "
+"users, log off, suspend, hibernate, reboot, or power off the computer"
+msgstr ""
+"簡單的系統控制小程式，可重新啟動 Cinnamon、鎖定螢幕、切換使用者、登出、暫停、"
+"休眠、重新啟動或關閉電腦"

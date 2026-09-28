@@ -1,0 +1,221 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: website-notifier@cardsurf 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-19 20:34-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->description
+msgid "Shows a notification when a website updates"
+msgstr "Muestra una notificación cuando se actualiza un sitio web"
+
+#. metadata.json->name
+msgid "Website notifier"
+msgstr "Notificador de sitios web"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Configuración"
+
+#. settings-schema.json->update_every->units
+msgid "minutes"
+msgstr "minutos"
+
+#. settings-schema.json->update_every->description
+msgid "Refresh every"
+msgstr "Actualizar cada"
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to refresh a website. 0 means no refreshing."
+msgstr ""
+"Frecuencia de actualización de un sitio web. 0 significa que no se "
+"actualiza."
+
+#. settings-schema.json->notification_type->description
+msgid "Notification type"
+msgstr "Tipo de notificación"
+
+#. settings-schema.json->notification_type->options
+msgid "System popup"
+msgstr "Ventana emergente de sistema"
+
+#. settings-schema.json->notification_type->options
+msgid "Applet popup"
+msgstr "Ventana emergente del Applet"
+
+#. settings-schema.json->notification_type->tooltip
+msgid "A user interface that shows notficiation text"
+msgstr "Una interfaz de usuario que muestra el texto de notficación"
+
+#. settings-schema.json->tooltip_type->description
+msgid "Tooltip text"
+msgstr "Texto de información sobre herramientas"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Time left next refresh"
+msgstr "Tiempo restante para la próxima actualización"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Next refresh time"
+msgstr "Hora de la próxima actualización"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last refresh time"
+msgstr "Hora de la última actualización"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last notification time"
+msgstr "Hora de la última notificación"
+
+#. settings-schema.json->tooltip_type->options
+msgid "None"
+msgstr "Ninguno"
+
+#. settings-schema.json->tooltip_type->tooltip
+msgid "Text shown in an applet tooltip"
+msgstr "Texto mostrado en la información sobre herramientas del applet"
+
+#. settings-schema.json->primary_button_type->description
+msgid "Primary button"
+msgstr "Botón principal"
+
+#. settings-schema.json->primary_button_type->options
+msgid "Left"
+msgstr "Izquierda"
+
+#. settings-schema.json->primary_button_type->options
+msgid "Middle"
+msgstr "Medio"
+
+#. settings-schema.json->primary_button_type->tooltip
+msgid ""
+"A mouse button used to perform main actions.\n"
+"The primary button refreshes a website on demand.\n"
+"The secondary button toggles an applet popup."
+msgstr ""
+"Botón del ratón utilizado para realizar acciones principales.\n"
+"El botón primario actualiza un sitio web a petición.\n"
+"El botón secundario activa un applet emergente."
+
+#. settings-schema.json->applet_popup_click_type->description
+msgid "On popup clicked"
+msgstr "Al hacer clic en la ventana emergente"
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup and open browser"
+msgstr "Cerrar la ventana emergente y abrir el navegador"
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup"
+msgstr "Cerrar ventana emergente"
+
+#. settings-schema.json->applet_popup_click_type->tooltip
+msgid "An action to perform when an applet popup is clicked"
+msgstr ""
+"Acción que se realiza al hacer clic en una ventana emergente de applet"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Interfaz"
+
+#. settings-schema.json->max_title_length->units
+#. settings-schema.json->max_message_length->units
+msgid "characters"
+msgstr "caracteres"
+
+#. settings-schema.json->max_title_length->description
+msgid "Title length"
+msgstr "Longitud del título"
+
+#. settings-schema.json->max_title_length->tooltip
+msgid "A maximum number of characters in a notification title"
+msgstr "Número máximo de caracteres de un título de notificación"
+
+#. settings-schema.json->max_message_length->description
+msgid "Message length"
+msgstr "Longitud del mensaje"
+
+#. settings-schema.json->max_message_length->tooltip
+msgid "A maximum number of characters in a notification message"
+msgstr "Número máximo de caracteres de un mensaje de notificación"
+
+#. settings-schema.json->applet_popup_width->units
+#. settings-schema.json->applet_popup_height->units
+msgid "pixels"
+msgstr "pixeles"
+
+#. settings-schema.json->applet_popup_width->description
+msgid "Popup width"
+msgstr "Anchura de la ventana emergente"
+
+#. settings-schema.json->applet_popup_width->tooltip
+msgid "A width of an applet popup"
+msgstr "Anchura de una ventana emergente de applet"
+
+#. settings-schema.json->applet_popup_height->description
+msgid "Popup height"
+msgstr "Altura de la ventana emergente"
+
+#. settings-schema.json->applet_popup_height->tooltip
+msgid "A height of an applet popup"
+msgstr "Altura de una ventana emergente de applet"
+
+#. settings-schema.json->applet_popup_title_css->description
+msgid "Popup title CSS"
+msgstr "Título de la ventana emergente CSS"
+
+#. settings-schema.json->applet_popup_title_css->tooltip
+msgid "A CSS style applied to a notification title in an applet popup"
+msgstr ""
+"Un estilo CSS aplicado a un título de notificación en una ventana "
+"emergente de applet"
+
+#. settings-schema.json->applet_popup_message_css->description
+msgid "Popup message CSS"
+msgstr "Mensaje emergente CSS"
+
+#. settings-schema.json->applet_popup_message_css->tooltip
+msgid "A CSS style applied to a notification message in an applet popup"
+msgstr ""
+"Un estilo CSS aplicado a un mensaje de notificación en una ventana "
+"emergente de applet"
+
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Icon"
+msgstr "Icono"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "An icon displayed in a panel"
+msgstr "Un icono que aparece en un panel"
+
+#. settings-schema.json->scripts_start->description
+msgid "Scripts"
+msgstr "Scripts"
+
+#. settings-schema.json->script_filepath->description
+msgid "Script"
+msgstr "Script"
+
+#. settings-schema.json->script_filepath->tooltip
+msgid "A path to a script that refeshes a website"
+msgstr "Una ruta a un script que actualiza un sitio web"
+
+#. settings-schema.json->script_separator->description
+msgid "Separator "
+msgstr "Separador "
+
+#. settings-schema.json->script_separator->tooltip
+msgid "A string that seperates values returned from the script"
+msgstr "Una cadena que separa los valores devueltos por el script"

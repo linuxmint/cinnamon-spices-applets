@@ -1,0 +1,24 @@
+# IP INDICATOR
+# This file is put in the public domain.
+# PrimaMateria, 2016
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->appearance->options
+msgid "Icon"
+msgstr ""
+
+#. settings-schema.json->update_interval_ifconfig->units
+msgid "seconds"
+msgstr ""
+
+#. settings-schema.json->update_interval_service->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->update_interval_service->tooltip
+msgid ""
+"Interval in which applet will fire get request to one of IP Services. Don't "
+"make it too frequent to not overload the servers."
+msgstr ""

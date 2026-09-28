@@ -1,0 +1,89 @@
+# CINNAMON PANEL TWEAKER
+# This file is put in the public domain.
+# anaximeno, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: panel-tweaks@anaximeno 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-09 21:27-0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+msgid "Cinnamon Panel Tweaker"
+msgstr "Tinh chỉnh Thanh Panel Cinnamon"
+
+#. metadata.json->description
+msgid "Make some additional tweaks to each panel like color, shadow, border, etc"
+msgstr "Thực hiện các tinh chỉnh bổ sung cho từng panel như màu sắc, bóng, viền, v.v."
+
+#. 5.4->settings-schema.json->style->description
+msgid "Style"
+msgstr "Phong cách"
+
+#. 5.4->settings-schema.json->enable-panel-background-color-tweak->description
+msgid "Tweak Background Color"
+msgstr "Tinh chỉnh màu nền"
+
+#. 5.4->settings-schema.json->panel-background-color->description
+msgid "Background Color"
+msgstr "Màu nền"
+
+#. 5.4->settings-schema.json->enable-panel-shadow-tweak->description
+msgid "Tweak Panel Shadow"
+msgstr "Tinh chỉnh bóng panel"
+
+#. 5.4->settings-schema.json->panel-shadow-x-axis-shift->units
+#. 5.4->settings-schema.json->panel-shadow-y-axis-shift->units
+#. 5.4->settings-schema.json->panel-shadow-bluriness->units
+msgid "px"
+msgstr "px"
+
+#. 5.4->settings-schema.json->panel-shadow-x-axis-shift->description
+msgid "Shadow X-Axis Shift"
+msgstr "Dịch chuyển bóng theo trục X"
+
+#. 5.4->settings-schema.json->panel-shadow-y-axis-shift->description
+msgid "Shadow Y-Axis Shift"
+msgstr "Dịch chuyển bóng theo trục Y"
+
+#. 5.4->settings-schema.json->panel-shadow-bluriness->description
+msgid "Shadow Bluriness"
+msgstr "Độ mờ của bóng"
+
+#. 5.4->settings-schema.json->panel-shadow-color->description
+msgid "Panel Shadow Color"
+msgstr "Màu bóng panel"
+
+#. 5.4->settings-schema.json->enable-panel-border-tweak->description
+msgid "Tweak Panel Border"
+msgstr "Tinh chỉnh viền panel"
+
+#. 5.4->settings-schema.json->panel-border-color->description
+msgid "Border Color"
+msgstr "Màu viền"
+
+#. 5.4->settings-schema.json->panel-border-top-thickness->description
+msgid "Top Border Thickness"
+msgstr "Độ dày viền trên"
+
+#. 5.4->settings-schema.json->panel-border-right-thickness->description
+msgid "Right Border Thickness"
+msgstr "Độ dày viền phải"
+
+#. 5.4->settings-schema.json->panel-border-bottom-thickness->description
+msgid "Bottom Border Thickness"
+msgstr "Độ dày viền dưới"
+
+#. 5.4->settings-schema.json->panel-border-left-thickness->description
+msgid "Left Border Thickness"
+msgstr "Độ dày viền trái"

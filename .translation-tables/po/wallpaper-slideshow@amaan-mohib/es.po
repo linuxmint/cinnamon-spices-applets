@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-08 19:11+0530\n"
+"PO-Revision-Date: 2023-06-10 14:13-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#. metadata.json->name
+#: applet.js:81
+msgid "Wallpaper Slideshow"
+msgstr "Cambiador de fondo de pantalla"
+
+#: applet.js:207
+msgid "The wallpaper path does not exists!"
+msgstr "¡La ruta del fondo de pantalla no existe!"
+
+#. settings-schema.json->head_delay->description
+#: applet.js:220
+msgid "Delay"
+msgstr "Retraso"
+
+#: applet.js:238
+msgid "Open wallpapers directory"
+msgstr "Abrir el directorio de fondos de pantalla"
+
+#: applet.js:251
+msgid "Next"
+msgstr "Siguiente"
+
+#: applet.js:260
+msgid "Previous"
+msgstr "Anterior"
+
+#. settings-schema.json->head_paused->description
+#: applet.js:273
+msgid "Paused"
+msgstr "Pausado"
+
+#: applet.js:287
+msgid "Preferences"
+msgstr "Preferencias"
+
+#. metadata.json->description
+msgid "Starts a wallpaper slideshow persisting across reboots"
+msgstr "Inicia un cambiador de fondo de pantalla que persiste a través de los reinicios"
+
+#. settings-schema.json->head_path->description
+msgid "Wallpaper path"
+msgstr "Ruta del fondo de pantalla"
+
+#. settings-schema.json->wallpaper_path->description
+msgid "Specify path of the wallpaper directory"
+msgstr "Especifique la ruta del directorio del fondo de pantalla"
+
+#. settings-schema.json->wallpaper_path->tooltip
+msgid "For example: /home/username/Pictures/wallpapers"
+msgstr "Por ejemplo: /inicio/nombre de usuario/Imágenes/fondos de pantalla"
+
+#. settings-schema.json->wallpaper_delay->description
+msgid "Specify the delay to change the wallpaper (in seconds)"
+msgstr "Especifique el retraso para cambiar el fondo de pantalla (en segundos)"
+
+#. settings-schema.json->wallpaper_delay->tooltip
+msgid "For example: 86400 for 24hrs"
+msgstr "Por ejemplo: 86400 para 24 horas"
+
+#. settings-schema.json->head_timer->description
+msgid "Custom interval"
+msgstr "Intervalo personalizado"
+
+#. settings-schema.json->wallpaper_custom_timer->description
+msgid "Specify a custom interval to check for updates"
+msgstr "Especifique un intervalo personalizado para comprobar si hay actualizaciones"
+
+#. settings-schema.json->wallpaper_custom_timer->tooltip
+msgid "Default: 1hr"
+msgstr "Por defecto: 1hr"
+
+#. settings-schema.json->wallpaper_timer->description
+msgid "Specify the interval (in seconds) to check for updates"
+msgstr "Especifique el intervalo (en segundos) para comprobar si hay actualizaciones"
+
+#. settings-schema.json->wallpaper_timer->tooltip
+msgid "For example: 3600 for 1hr"
+msgstr "Por ejemplo: 3600 para 1hr"
+
+#. settings-schema.json->wallpaper_paused->description
+msgid "Pause the wallpaper slideshow"
+msgstr "Pausar el cambiador de fondo de pantalla"

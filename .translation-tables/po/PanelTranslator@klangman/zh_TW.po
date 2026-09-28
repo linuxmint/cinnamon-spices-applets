@@ -1,0 +1,256 @@
+# PANEL TRANSLATOR
+# This file is put in the public domain.
+# klangman, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PanelTranslator@klangman 1.2.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-02 12:30-0500\n"
+"PO-Revision-Date: 2025-08-03 01:31+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:108 applet.js:345 applet.js:347
+msgid "Translator"
+msgstr "翻譯工具"
+
+#. applet.js:273
+msgid "Unable to query available languages from translate-shell"
+msgstr "無法從 translate-shell 取得可用語言清單"
+
+#. applet.js:284
+msgid "Required \"trans\" command not found, please install translate-shell"
+msgstr "找不到必要的 \"trans\" 命令，請先安裝 translate-shell"
+
+#. applet.js:288
+msgid "Error, the \"trans\" command returned an exit code of "
+msgstr "發生錯誤，\"trans\" 命令回傳結束狀態碼："
+
+#. applet.js:368
+msgid "Swap Languages"
+msgstr "語言互換"
+
+#. applet.js:411
+msgid "{Text to translate}"
+msgstr "{要翻譯的內容}"
+
+#. applet.js:422
+msgid "{Translated text}"
+msgstr "{翻譯結果}"
+
+#. applet.js:436
+msgid "Configure"
+msgstr "設定"
+
+#. applet.js:437
+msgid "Help"
+msgstr "說明"
+
+#. applet.js:441
+msgid "Play"
+msgstr "播放"
+
+#. applet.js:445
+msgid "Paste"
+msgstr "貼上"
+
+#. applet.js:449
+msgid "Clear"
+msgstr "清除"
+
+#. applet.js:453
+msgid "Translate"
+msgstr "翻譯"
+
+#. applet.js:458
+msgid "Copy"
+msgstr "複製"
+
+#. applet.js:464
+msgid "Play Translation"
+msgstr "播放翻譯結果"
+
+#. metadata.json->name
+msgid "Panel Translator"
+msgstr "Panel Translator"
+
+#. metadata.json->description
+msgid ""
+"Translate text to other languages from the Cinnamon panel using Google, Bing "
+"and other translators"
+msgstr ""
+"在 Cinnamon 面板上，透過 Google、Bing 與其他翻譯服務，將文字翻譯成不同語言"
+
+#. settings-schema.json->general-page->title
+msgid "General"
+msgstr "一般"
+
+#. settings-schema.json->hotkey-page->title
+msgid "Hotkeys"
+msgstr "快速鍵"
+
+#. settings-schema.json->engine-settings->title
+msgid "Translation Engine"
+msgstr "翻譯引擎"
+
+#. settings-schema.json->action-settings->title
+msgid "Panel Button Actions"
+msgstr "面板按鈕動作"
+
+#. settings-schema.json->hotkey-settings->title
+msgid "Translation action hotkeys"
+msgstr "翻譯動作快速鍵"
+
+#. settings-schema.json->translate-engine->options
+msgid "Apertium"
+msgstr "Apertium"
+
+#. settings-schema.json->translate-engine->options
+msgid "Aspell"
+msgstr "Aspell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Auto"
+msgstr "自動"
+
+#. settings-schema.json->translate-engine->options
+msgid "Bing"
+msgstr "Bing"
+
+#. settings-schema.json->translate-engine->options
+msgid "Google"
+msgstr "Google"
+
+#. settings-schema.json->translate-engine->options
+msgid "Hunspell"
+msgstr "Hunspell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Spell"
+msgstr "拼字檢查"
+
+#. settings-schema.json->translate-engine->options
+msgid "Yandex"
+msgstr "Yandex"
+
+#. settings-schema.json->translate-engine->description
+msgid "Engine (Auto/Google recommended!)"
+msgstr "翻譯引擎（建議使用「自動」或 Google！）"
+
+#. settings-schema.json->translate-engine->tooltip
+msgid ""
+"Most engines don't support play back and some don't even translate, others "
+"just report HTTP errors. So it's best to use \"Auto\" and let translate-"
+"shell decide what translator to use."
+msgstr ""
+"多數引擎不支援語音播放，有些甚至無法翻譯，或只會回報 HTTP 錯誤。"
+"因此，最好使用「自動」模式，讓 translate-shell 自動決定要使用的翻譯服務。"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Disabled"
+msgstr "停用"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Selection"
+msgstr "選取範圍"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Clipboard"
+msgstr "剪貼簿"
+
+#. settings-schema.json->left-auto-paste->description
+msgid "Automatically translate on left click"
+msgstr "滑鼠左鍵點選時自動翻譯"
+
+#. settings-schema.json->left-auto-paste->tooltip
+msgid ""
+"Automatically translate the selection/clipboard contents when opening the "
+"Panel Translator popup window using a left click on the Panel Translator "
+"button"
+msgstr ""
+"以滑鼠左鍵點選 [Panel Translator] 按鈕開啟對話視窗時，會自動翻譯選取範圍或剪貼簿的內容"
+
+#. settings-schema.json->left-auto-play->description
+msgid "Automatically play the translation on left click"
+msgstr "滑鼠左鍵點選時自動播放翻譯結果"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Do nothing"
+msgstr "不執行任何動作"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-selection->description
+msgid "Show popup dialog and translate Selection"
+msgstr "顯示彈出式對話方塊並翻譯選取範圍"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-clipboard->description
+msgid "Show popup dialog and translate Clipboard"
+msgstr "顯示彈出式對話方塊並翻譯剪貼簿內容"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-play-selection->description
+msgid "Show popup dialog, translate Selection and play"
+msgstr "顯示彈出式對話方塊、翻譯選取範圍並播放"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-play-clipboard->description
+msgid "Show popup dialog, translate Clipboard and play"
+msgstr "顯示彈出式對話方塊、翻譯剪貼簿內容並播放"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-play-selection->description
+msgid "Play translation of Selection"
+msgstr "播放選取範圍的翻譯結果"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-play-clipboard->description
+msgid "Play translation of Clipboard"
+msgstr "播放剪貼簿內容的翻譯結果"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-copy-selection->description
+msgid "Translate Selection and copy the translation"
+msgstr "翻譯選取範圍並複製翻譯結果"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-copy-clipboard->description
+msgid "Translate Clipboard and copy the translation"
+msgstr "翻譯剪貼簿內容並複製翻譯結果"
+
+#. settings-schema.json->middle-button-action->description
+msgid "Middle button action"
+msgstr "滑鼠中鍵動作"
+
+#. settings-schema.json->middle-button-action->tooltip
+msgid ""
+"Select the action to take when using the middle mouse button to click on the "
+"translator panel button"
+msgstr ""
+"選擇使用滑鼠中鍵點選面板上的翻譯工具按鈕時要執行的動作"
+
+#. settings-schema.json->ctrl-middle-button-action->description
+msgid "Ctrl + Middle button action"
+msgstr "Ctrl + 滑鼠中鍵動作"
+
+#. settings-schema.json->ctrl-middle-button-action->tooltip
+msgid ""
+"Select the action to take when holding the Ctrl key and using the middle "
+"mouse button to click on the translator panel button"
+msgstr ""
+"選擇在按住 Ctrl 鍵並以滑鼠中鍵點選翻譯工具面板按鈕時要執行的動作"

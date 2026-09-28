@@ -1,0 +1,10 @@
+# COLOR PICKER
+# This file is put in the public domain.
+# fmete, 2016
+#
+msgid ""
+msgstr ""
+
+#. color-picker@fmete->metadata.json->name
+msgid "Color Picker"
+msgstr ""

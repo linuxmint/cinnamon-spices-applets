@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-10 18:26+0300\n"
+"PO-Revision-Date: 2025-10-12 11:26+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:45
+msgid "Night Light can't work properly: sct package not installed!"
+msgstr "Night Light không hoạt động được: gói sct chưa được cài đặt!"
+
+#. metadata.json->name
+#: applet.js:46 applet.js:49 applet.js:81
+msgid "Night Light"
+msgstr "Đèn ban đêm"
+
+#: applet.js:46
+msgid "error"
+msgstr "lỗi"
+
+#: applet.js:49
+msgid ""
+"Warning: 'sct' command not found! This applet is a frontend for this "
+"command. Please, install 'sct' package and restart Cinnamon or reload the "
+"applet."
+msgstr "Cảnh báo: lệnh 'sct' không tìm thấy! Applet này là giao diện cho lệnh đó. Vui lòng cài gói 'sct' và khởi động lại Cinnamon hoặc tải lại applet."
+
+#: applet.js:57
+msgid "off"
+msgstr "tắt"
+
+#: applet.js:57
+msgid "on"
+msgstr "bật"
+
+#: applet.js:57
+msgid "auto"
+msgstr "tự động"
+
+#. metadata.json->description
+msgid "Screen night light activating applet"
+msgstr "Applet bật đèn ban đêm cho màn hình"
+
+#. settings-schema.json->common_label->description
+msgid "Common"
+msgstr "Chung"
+
+#. settings-schema.json->temperature->description
+msgid "Night Light temperature (K)"
+msgstr "Nhiệt độ Night Light (K)"
+
+#. settings-schema.json->temperature->tooltip
+msgid "Night Light screen temperature"
+msgstr "Nhiệt độ màn hình Night Light"
+
+#. settings-schema.json->auto_label->description
+msgid "Auto mode schedule"
+msgstr "Lịch chế độ tự động"
+
+#. settings-schema.json->startH->description
+msgid "Start time, hour"
+msgstr "Giờ bắt đầu"
+
+#. settings-schema.json->startH->tooltip
+msgid "Start time (hour)"
+msgstr "Thời gian bắt đầu (giờ)"
+
+#. settings-schema.json->startM->description
+msgid "Start time, minute"
+msgstr "Phút bắt đầu"
+
+#. settings-schema.json->startM->tooltip
+msgid "Start time (minute)"
+msgstr "Thời gian bắt đầu (phút)"
+
+#. settings-schema.json->endH->description
+msgid "End time, hour"
+msgstr "Giờ kết thúc"
+
+#. settings-schema.json->endH->tooltip
+msgid "End time (hour)"
+msgstr "Thời gian kết thúc (giờ)"
+
+#. settings-schema.json->endM->description
+msgid "End time, minute"
+msgstr "Phút kết thúc"
+
+#. settings-schema.json->endM->tooltip
+msgid "End time (minute)"
+msgstr "Thời gian kết thúc (phút)"
+
+#. settings-schema.json->mode->description
+#. settings-schema.json->mode->tooltip
+msgid "mode"
+msgstr "chế độ"

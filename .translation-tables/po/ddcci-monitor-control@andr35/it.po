@@ -1,0 +1,73 @@
+# DDC/CI MONITOR BRIGHTNESS
+# This file is put in the public domain.
+# andr35, 2020
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ddcci-monitor-control@andr35 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->description
+#. applet.js:41
+msgid "Adjust external monitor brightness and contrast"
+msgstr "Regola la luminosità e il contrasto del monitor esterno"
+
+#. metadata.json->name
+msgid "DDC/CI Monitor Brightness"
+msgstr "Luminosità del monitor DDC/CI"
+
+#. settings-schema.json->brightness-default-label-1->description
+msgid "\"Default brightness 1\" button label"
+msgstr "Etichetta del pulsante \"Luminosità predefinita 1\""
+
+#. settings-schema.json->brightness-default-label-1->tooltip
+msgid "For example \"Daily Brightness\""
+msgstr "Ad esempio \"Luminosità giornaliera\""
+
+#. settings-schema.json->brightness-default-value-1->description
+msgid "\"Default brightness 1\" value"
+msgstr "Valore \"Luminosità predefinita 1\""
+
+#. settings-schema.json->brightness-default-value-1->tooltip
+msgid ""
+"Set the brightness level that will be applied when the \"Default brightness "
+"1\" button is clicked"
+msgstr ""
+"Imposta il livello di luminosità che verrà applicato quando si fa clic sul "
+"pulsante \"Luminosità predefinita 1\""
+
+#. settings-schema.json->brightness-default-value-1->units
+#. settings-schema.json->brightness-default-value-2->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->brightness-default-label-2->description
+msgid "\"Default brightness 2\" button label"
+msgstr "Etichetta del pulsante \"Luminosità predefinita 2\""
+
+#. settings-schema.json->brightness-default-label-2->tooltip
+msgid "For example \"Night Brightness\""
+msgstr "Ad esempio \"Luminosità notturna\""
+
+#. settings-schema.json->brightness-default-value-2->description
+msgid "\"Default brightness 2\" value"
+msgstr "Valore \"Luminosità predefinita 2\""
+
+#. settings-schema.json->brightness-default-value-2->tooltip
+msgid ""
+"Set the brightness level that will be applied when the \"Default brightness "
+"2\" button is clicked"
+msgstr ""
+"Imposta il livello di luminosità che verrà applicato quando si fa clic sul "
+"pulsante \"Luminosità predefinita 2\""

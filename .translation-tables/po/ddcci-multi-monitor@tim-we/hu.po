@@ -1,0 +1,220 @@
+# DDC/CI MULTI-MONITOR
+# This file is put in the public domain.
+# tim-we, 2021
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ddcci-multi-monitor@tim-we 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-28 19:03+0200\n"
+"PO-Revision-Date: 2025-11-17 14:13+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.8\n"
+
+#. metadata.json->description
+#. applet.js:21
+msgid "Adjust monitor brightness via DDC/CI"
+msgstr "Állítsa be a monitor fényerejét DDC/CI-n keresztül"
+
+#. applet.js:169
+msgid "Use for scroll/click"
+msgstr "Használja görgetéshez/kattintáshoz"
+
+#. applet.js:300
+msgid "Detect displays"
+msgstr "Kijelzők észlelése"
+
+#. applet.js:312
+msgid "Detecting displays..."
+msgstr "Kijelzők észlelése folyamatban..."
+
+#. applet.js:475
+msgid "Failed to detect displays."
+msgstr "Nem sikerült észlelni a kijelzőket."
+
+#. applet.js:476
+msgid "Make sure you have ddcutil installed and the correct permissions."
+msgstr ""
+"Győződjön meg arról, hogy a ddcutil telepítve van, és a megfelelő "
+"jogosultságokkal rendelkezik."
+
+#. applet.js:477
+msgid "Error:"
+msgstr "Hiba:"
+
+#. metadata.json->name
+msgid "DDC/CI Multi-Monitor"
+msgstr "DDC/CI Multi-Monitor"
+
+#. settings-schema.json->page_general->title
+msgid "General"
+msgstr "Általános"
+
+#. settings-schema.json->page_retry_detection->title
+msgid "Detection"
+msgstr "Észlelés"
+
+#. settings-schema.json->section_appearance->title
+msgid "Appearance"
+msgstr "Megjelenítés"
+
+#. settings-schema.json->section_monitor->title
+msgid "Monitor Setup"
+msgstr "Monitor beállítás"
+
+#. settings-schema.json->section_scrolling->title
+msgid "Scrolling Settings"
+msgstr "Görgetés Beállítások"
+
+#. settings-schema.json->section_togglepoints->title
+msgid "Toggle Points"
+msgstr "Kapcsolási pontok"
+
+#. settings-schema.json->section_retry_detection->title
+msgid "Automatic Retry Detection"
+msgstr "Automatikus újrapróbálkozás-észlelés"
+
+#. settings-schema.json->entry_applet-label->description
+msgid ""
+"Text shown next to the icon in the panel.\n"
+"Leave empty for no label."
+msgstr ""
+"A panelen az ikon mellett megjelenő szöveg.\n"
+"Ha nem szeretne címkét használni, hagyja üresen."
+
+#. settings-schema.json->switch_show-bus-number->description
+msgid "Show bus number next to the detected monitors."
+msgstr "Mutassa a buszszámot az észlelt monitorok mellett."
+
+#. settings-schema.json->switch_manual-select-monitors->description
+msgid ""
+"By default, scrolling & toggling adjusts brightness for all monitors.\n"
+"Switch to enable custom monitor selection.\n"
+"This will add checkbox options for each detected monitor."
+msgstr ""
+"Alapértelmezés szerint a görgetés és a váltás az összes monitor fényerejét "
+"állítja be.\n"
+"Kapcsolja be az egyéni monitorkiválasztás engedélyezéséhez.\n"
+"Ez minden észlelt monitorhoz jelölőnégyzeteket ad hozzá."
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "50"
+msgstr "50"
+
+#. settings-schema.json->combobox_scroll-step->description
+msgid "Adjustment step for brightness"
+msgstr "Fényerő beállítási lépése"
+
+#. settings-schema.json->switch_use-toggle-points->description
+msgid ""
+"Enable toggle points for brightness adjustment.\n"
+"(via mouse middle click)"
+msgstr ""
+"Fényerő-beállítás váltási pontjainak engedélyezése.\n"
+"(egér középső gombjával kattintva)"
+
+#. settings-schema.json->spinbutton_num-of-toggle-points->description
+msgid ""
+"Number of toggle points for brightness adjustment\n"
+"(only the first N toggle points will be used)"
+msgstr ""
+"A fényerő beállításához használható kapcsolási pontok száma\n"
+"(csak az első N kapcsolási pontot fogja használni a rendszer)"
+
+#. settings-schema.json->scale_toggle_point_1->description
+msgid "Brightness level for toggle point 1"
+msgstr "1. kapcsolópont fényerőszintje"
+
+#. settings-schema.json->scale_toggle_point_2->description
+msgid "Brightness level for toggle point 2"
+msgstr "2. kapcsolópont fényerőszintje"
+
+#. settings-schema.json->scale_toggle_point_3->description
+msgid "Brightness level for toggle point 3"
+msgstr "3. kapcsolópont fényerőszintje"
+
+#. settings-schema.json->switch_enable-retry-detection->description
+msgid ""
+"Enable automatic retry detection during startup.\n"
+"Helps ensure all monitors are detected when DDC/CI buses take time to "
+"initialize."
+msgstr ""
+"Automatikus újrapróbálkozás-észlelés engedélyezése indításkor.\n"
+"Segít biztosítani, hogy az összes monitor észlelve legyen, amikor a DDC/CI "
+"buszok inicializálása időbe telik."
+
+#. settings-schema.json->spinbutton_target-monitor-count->description
+msgid ""
+"Expected number of monitors to detect.\n"
+"The applet will retry detection until this many monitors are found or max "
+"attempts reached."
+msgstr ""
+"A monitorok észlelésének várható száma.\n"
+"Az applet addig próbálkozik újra az észleléssel, amíg ennyi monitort nem "
+"talál, vagy el nem éri a maximális próbálkozási számot."
+
+#. settings-schema.json->spinbutton_max-retry-attempts->description
+msgid ""
+"Maximum number of retry attempts.\n"
+"Limited to 5 attempts to prevent excessive startup delays."
+msgstr ""
+"Az újrapróbálkozások maximális száma.\n"
+"A túlzott indítási késedelmek elkerülése érdekében legfeljebb 5 "
+"próbálkozásra van lehetőség."
+
+#. settings-schema.json->spinbutton_retry-delay->units
+msgid "seconds"
+msgstr "másodperc"
+
+#. settings-schema.json->spinbutton_retry-delay->description
+msgid ""
+"Delay between detection attempts.\n"
+"Time to wait before retrying monitor detection (1-10 seconds)."
+msgstr ""
+"Az észlelési kísérletek közötti késleltetés.\n"
+"Várakozási idő a monitor észlelésének újbóli megkísérlése előtt (1-10 "
+"másodperc)."
+
+#. settings-schema.json->string_active-monitors->description
+msgid ""
+"Stores which monitors are active for scroll/click functions.\n"
+"This is a JSON object where keys are bus numbers and values are true/"
+"false.\n"
+"Example: {\"1\":true,\"2\":false}"
+msgstr ""
+"Tárolja, hogy mely monitorok aktívak a görgetési/kattintási "
+"függvényeknél.\n"
+"Ez egy JSON objektum, ahol a kulcsok buszszámok, az értékek pedig igazak/"
+"hamisak.\n"
+"Példa: {\"1\":true,\"2\":false}"

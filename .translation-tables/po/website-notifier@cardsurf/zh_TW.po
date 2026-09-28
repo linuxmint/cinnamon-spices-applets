@@ -1,0 +1,213 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: website-notifier@cardsurf 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-09-14 04:16+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->description
+msgid "Shows a notification when a website updates"
+msgstr "當網站內容更新時顯示通知"
+
+#. metadata.json->name
+msgid "Website notifier"
+msgstr "網站更新通知器"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "設定"
+
+#. settings-schema.json->update_every->units
+msgid "minutes"
+msgstr "分鐘"
+
+#. settings-schema.json->update_every->description
+msgid "Refresh every"
+msgstr "更新頻率"
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to refresh a website. 0 means no refreshing."
+msgstr "更新網站的頻率。設為 0 表示不自動更新。"
+
+#. settings-schema.json->notification_type->description
+msgid "Notification type"
+msgstr "通知類型"
+
+#. settings-schema.json->notification_type->options
+msgid "System popup"
+msgstr "系統彈出式視窗"
+
+#. settings-schema.json->notification_type->options
+msgid "Applet popup"
+msgstr "小程式彈出式視窗"
+
+#. settings-schema.json->notification_type->tooltip
+msgid "A user interface that shows notficiation text"
+msgstr "用來顯示通知文字的使用者介面"
+
+#. settings-schema.json->tooltip_type->description
+msgid "Tooltip text"
+msgstr "工具提示內容"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Time left next refresh"
+msgstr "下次更新剩餘時間"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Next refresh time"
+msgstr "下次更新時間"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last refresh time"
+msgstr "上次更新時間"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last notification time"
+msgstr "上次通知時間"
+
+#. settings-schema.json->tooltip_type->options
+msgid "None"
+msgstr "無"
+
+#. settings-schema.json->tooltip_type->tooltip
+msgid "Text shown in an applet tooltip"
+msgstr "在小程式工具提示中顯示的文字"
+
+#. settings-schema.json->primary_button_type->description
+msgid "Primary button"
+msgstr "主要按鍵"
+
+#. settings-schema.json->primary_button_type->options
+msgid "Left"
+msgstr "滑鼠左鍵"
+
+#. settings-schema.json->primary_button_type->options
+msgid "Middle"
+msgstr "滑鼠中鍵"
+
+#. settings-schema.json->primary_button_type->tooltip
+msgid ""
+"A mouse button used to perform main actions.\n"
+"The primary button refreshes a website on demand.\n"
+"The secondary button toggles an applet popup."
+msgstr ""
+"用於執行主要動作的滑鼠按鍵。\n"
+"主要按鍵可隨時更新網站。\n"
+"次要按鍵可切換小程式彈出式視窗的開關狀態。"
+
+#. settings-schema.json->applet_popup_click_type->description
+msgid "On popup clicked"
+msgstr "點選彈出式視窗後"
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup and open browser"
+msgstr "關閉彈出式視窗並開啟瀏覽器"
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup"
+msgstr "關閉彈出式視窗"
+
+#. settings-schema.json->applet_popup_click_type->tooltip
+msgid "An action to perform when an applet popup is clicked"
+msgstr "點選小程式彈出式視窗後要執行的動作"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "圖形化介面"
+
+#. settings-schema.json->max_title_length->units
+#. settings-schema.json->max_message_length->units
+msgid "characters"
+msgstr "字元"
+
+#. settings-schema.json->max_title_length->description
+msgid "Title length"
+msgstr "標題長度上限"
+
+#. settings-schema.json->max_title_length->tooltip
+msgid "A maximum number of characters in a notification title"
+msgstr "通知標題的字元數量上限"
+
+#. settings-schema.json->max_message_length->description
+msgid "Message length"
+msgstr "訊息長度上限"
+
+#. settings-schema.json->max_message_length->tooltip
+msgid "A maximum number of characters in a notification message"
+msgstr "通知訊息的字元數量上限"
+
+#. settings-schema.json->applet_popup_width->units
+#. settings-schema.json->applet_popup_height->units
+msgid "pixels"
+msgstr "像素"
+
+#. settings-schema.json->applet_popup_width->description
+msgid "Popup width"
+msgstr "彈出式視窗寬度"
+
+#. settings-schema.json->applet_popup_width->tooltip
+msgid "A width of an applet popup"
+msgstr "小程式彈出式視窗的寬度"
+
+#. settings-schema.json->applet_popup_height->description
+msgid "Popup height"
+msgstr "彈出式視窗高度"
+
+#. settings-schema.json->applet_popup_height->tooltip
+msgid "A height of an applet popup"
+msgstr "小程式彈出式視窗的高度"
+
+#. settings-schema.json->applet_popup_title_css->description
+msgid "Popup title CSS"
+msgstr "彈出式視窗標題 CSS"
+
+#. settings-schema.json->applet_popup_title_css->tooltip
+msgid "A CSS style applied to a notification title in an applet popup"
+msgstr "套用至小程式彈出式視窗中通知標題的 CSS 樣式"
+
+#. settings-schema.json->applet_popup_message_css->description
+msgid "Popup message CSS"
+msgstr "彈出式視窗訊息 CSS"
+
+#. settings-schema.json->applet_popup_message_css->tooltip
+msgid "A CSS style applied to a notification message in an applet popup"
+msgstr "套用至小程式彈出式視窗中通知訊息的 CSS 樣式"
+
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Icon"
+msgstr "圖示"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "An icon displayed in a panel"
+msgstr "顯示於面板上的圖示"
+
+#. settings-schema.json->scripts_start->description
+msgid "Scripts"
+msgstr "指令稿"
+
+#. settings-schema.json->script_filepath->description
+msgid "Script"
+msgstr "指令稿"
+
+#. settings-schema.json->script_filepath->tooltip
+msgid "A path to a script that refeshes a website"
+msgstr "用來更新網站的指令稿路徑"
+
+#. settings-schema.json->script_separator->description
+msgid "Separator "
+msgstr "分隔符號"
+
+#. settings-schema.json->script_separator->tooltip
+msgid "A string that seperates values returned from the script"
+msgstr "用來分隔指令稿回傳值的字串"

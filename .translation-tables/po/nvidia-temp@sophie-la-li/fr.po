@@ -1,0 +1,75 @@
+# NVIDIA GPU TEMPERATURE INDICATOR
+# This file is put in the public domain.
+# sophie-la-li, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidia-temp@sophie-la-li 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-13 18:46+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:18
+msgid "GPU Temperature"
+msgstr "Température du GPU"
+
+#. applet.js:34
+msgid "Nvidia GPU Temperature Indicator: Error"
+msgstr "Indicateur de température du GPU nVidia : Erreur"
+
+#. applet.js:34
+msgid "It seems that nvidia-smi is not installed."
+msgstr "Il semble que nvidia-smi ne soit pas installé."
+
+#. metadata.json->name
+msgid "Nvidia GPU Temperature Indicator"
+msgstr "Indicateur de température du GPU nVidia"
+
+#. metadata.json->description
+msgid "Shows Nvidia GPU Temperature"
+msgstr "Affiche la température du GPU nVidia"
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr "Périodicité de la mise à jour"
+
+#. settings-schema.json->interval->tooltip
+msgid "How often to update the temperature value."
+msgstr "Fréquence de mise à jour de la valeur de la température."
+
+#. settings-schema.json->use-fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr "Afficher la température en degrés Fahrenheit"
+
+#. settings-schema.json->use-fahrenheit->tooltip
+msgid "Whether or not show the temperature in Fahrenheit instead of Celsius."
+msgstr "Afficher ou non la température en Fahrenheit plutôt qu'en Celsius."
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "Afficher l'unité"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Whether or not show the unit after the temperature value."
+msgstr "Afficher ou non l'unité après la valeur de la température."
+
+#. settings-schema.json->show-unit-letter->description
+msgid "Show unit letter"
+msgstr "Afficher la lettre de l'unité"
+
+#. settings-schema.json->show-unit-letter->tooltip
+msgid "Whether or not show the unit letter (C or F)."
+msgstr "Afficher ou non la lettre de l'unité (C ou F)."

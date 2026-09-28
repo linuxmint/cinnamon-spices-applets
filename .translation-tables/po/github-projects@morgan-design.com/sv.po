@@ -1,0 +1,198 @@
+# Swedish translation for github-projects@morgan-design.com.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: github-projects@morgan-design.com\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2019-03-02 14:43+0100\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:45 applet.js:46
+msgid "GitHub Explorer"
+msgstr "GitHub Explorer"
+
+#. applet.js:45
+msgid "Attempting to Load your GitHub Repos"
+msgstr "Försöker läsa in dina GitHub-förråd"
+
+#. applet.js:46
+#, javascript-format
+msgid "Successfully Loaded GitHub Repos for user %s"
+msgstr "Läste in GitHub-förråd för användare %s"
+
+#. applet.js:47
+msgid "ERROR:: GitHub Explorer ::ERROR"
+msgstr "FEL:: GitHub Explorer ::FEL"
+
+#. applet.js:47
+msgid "Failed to load GitHub Repositories! Check applet Configuration"
+msgstr "Kunde inte läsa in GitHub-förråd! Kontrollera programinställningarna."
+
+#. applet.js:166
+msgid "Settings"
+msgstr "Inställningar"
+
+#. applet.js:177 applet.js:270
+msgid "Check Applet Configuration"
+msgstr "Kontrollera programinställningarna"
+
+#. applet.js:266
+msgid "API Rate Exceeded will try again once we are allowed"
+msgstr "API-hastigheten har överskridits, försöker igen när vi får"
+
+#. applet.js:281
+msgid "Click here to open GitHub"
+msgstr "Klicka här för att öppna GitHub"
+
+#. applet.js:331
+msgid "Open Repo In Browser"
+msgstr "Öppna förrådet i webbläsaren"
+
+#. applet.js:339
+msgid "Project Home"
+msgstr "Projektets hemsida"
+
+#. applet.js:346
+msgid "Details"
+msgstr "Detaljer"
+
+#. applet.js:349
+msgid "Watchers"
+msgstr "Bevakare"
+
+#. applet.js:356
+msgid "Open Issues"
+msgstr "Öppna ärenden"
+
+#. applet.js:363
+msgid "Forks"
+msgstr "Kodförgreningar"
+
+#. settings-schema.json->open-github-homepage-button->description
+#. applet.js:393
+msgid "Open GitHub Home"
+msgstr "Öppna GitHub-sidan"
+
+#. applet.js:401
+msgid "Create A Gist"
+msgstr "Skapa en \"Gist\""
+
+#. metadata.json->name
+msgid "Github Explorer"
+msgstr "GitHub-utforskare"
+
+#. metadata.json->description
+msgid "Click on the applet to explore your Public Github repositories"
+msgstr "Klicka på panelikonen för att utforska dina offentliga GitHub-förråd"
+
+#. settings-schema.json->head->description
+msgid "User Settings"
+msgstr "Användarinställningar"
+
+#. settings-schema.json->username->description
+msgid "GitHub username:"
+msgstr "Användarnamn på GitHub:"
+
+#. settings-schema.json->username->tooltip
+msgid "Set a username which you want to display public repositories for"
+msgstr "Ange det användarnamn vars offentliga förråd du vill visa"
+
+#. settings-schema.json->head1->description
+msgid "Usage Settings"
+msgstr "Användningsinställningar"
+
+#. settings-schema.json->enable-auto-refresh->description
+msgid "Check this to enable automatic refreshing"
+msgstr "Automatisk uppdatering"
+
+#. settings-schema.json->enable-auto-refresh->tooltip
+msgid ""
+"Checking this will mean the applet will update itself according to your "
+"refresh interval"
+msgstr ""
+"Aktivering innebär att programmet uppdateras automatiskt, enligt angivet "
+"uppdateringsintervall"
+
+#. settings-schema.json->enable-verbose-logging->description
+msgid "Check this to enable lots of logging in Looking Glass"
+msgstr "Aktivera massor av loggning i Looking Glass"
+
+#. settings-schema.json->enable-verbose-logging->tooltip
+msgid "Checking this will enable lots of logging"
+msgstr "Aktivering innebär massor av loggning"
+
+#. settings-schema.json->enable-github-change-notifications->description
+msgid ""
+"Check this to enable notifications about changes to Watchers, Forks and "
+"Issues"
+msgstr "Avisering om ändringar i antal bevakare, kodförgreningar och ärenden"
+
+#. settings-schema.json->enable-github-change-notifications->tooltip
+msgid "Checking this will enable more notification messages"
+msgstr "Detta aktiverar fler aviseringsmeddelanden"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->description
+msgid "Check this show the number of open issues next to the repository"
+msgstr "Visa antalet öppna ärenden intill förrådet"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->tooltip
+msgid "Checking this show the number of issues next to each repository"
+msgstr "Aktivering visar antalet ärenden vid sidan om varje förråd"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh Interval:"
+msgstr "Uppdateringsintervall:"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid ""
+"Change the amount of time between checking GitHub for changes to your "
+"Repositories"
+msgstr ""
+"Ändra tidsintervallet mellan sökningarna efter ändringar i dina GitHub-förråd"
+
+#. settings-schema.json->head2->description
+msgid "Version Details"
+msgstr "Versionsinfo"
+
+#. settings-schema.json->applet-version->description
+msgid "Applet Version:"
+msgstr "Programversion:"
+
+#. settings-schema.json->applet-version->tooltip
+msgid "Current version installed"
+msgstr "Aktuell installerad version"
+
+#. settings-schema.json->open-cinnamon-homepage-button->description
+msgid "Visit Cinnamon Applet Home"
+msgstr "Besök programmets Cinnamon Applet-sida"
+
+#. settings-schema.json->open-cinnamon-homepage-button->tooltip
+msgid "Open cinnamon.com - rate the application"
+msgstr "Öppna cinnamon.com - Betygsätt programmet"
+
+#. settings-schema.json->open-github-homepage-button->tooltip
+msgid "Open github.com - fork the code or add features"
+msgstr "Öppna github.com - Förgrena/Kopiera koden eller lägg till funktioner"
+
+#. settings-schema.json->open-developer-homepage-button->description
+msgid "Open Developer Home"
+msgstr "Öppna utvecklarens hemsida"
+
+#. settings-schema.json->open-developer-homepage-button->tooltip
+msgid "Open morgan-design.com - my personal blog"
+msgstr "Öppna morgan-design.com - Min personliga blogg"
+
+#~ msgid "Check applet Configuration"
+#~ msgstr "Kontrollera programinställningarna"

@@ -1,0 +1,541 @@
+# FISH
+# This file is put in the public domain.
+# kriegcc, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fish@kriegcc 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-20 18:32+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. fish-applet.js:838
+msgid "Fish Applet"
+msgstr "Applet de Pez"
+
+#. fish-applet.js:895
+msgid "There's something fishy going on here:"
+msgstr "Hay algo sospechoso aquí:"
+
+#. fish-applet.js:936
+msgid "Copy Error Messages"
+msgstr "Copiar mensajes de error"
+
+#. fish-applet.js:939
+msgid "Copy Error Message"
+msgstr "Copiar mensaje de error"
+
+#. fish-applet.js:955 fish-applet.js:1459
+msgid "Open Preferences"
+msgstr "Abrir Preferencias"
+
+#. fish-applet.js:967
+msgid "Errors copied to the clipboard"
+msgstr "Errores copiados en el portapapeles"
+
+#. fish-applet.js:970
+msgid "Error copied to the clipboard"
+msgstr "Error copiado en el portapapeles"
+
+#. fish-applet.js:1043
+msgid "Copy Message"
+msgstr "Copiar mensaje"
+
+#. fish-applet.js:1055
+msgid "Speak again"
+msgstr "Habla de nuevo"
+
+#. fish-applet.js:1060
+msgid "Close"
+msgstr "Cerrar"
+
+#. fish-applet.js:1080
+#, javascript-format
+msgid "%s the Fish Says:"
+msgstr "%s el Pez Dice:"
+
+#. fish-applet.js:1088
+msgid "Message copied to the clipboard"
+msgstr "Mensaje copiado en el portapapeles"
+
+#. fish-applet.js:1116
+msgid "The water needs changing"
+msgstr "Hay que cambiar el agua"
+
+#. fish-applet.js:1121
+msgid "Look at today's date!"
+msgstr "¡Mira la fecha de hoy!"
+
+#. fish-applet.js:1422
+#, javascript-format
+msgid "%s the Fish, the fortune teller"
+msgstr "%s el Pez, el adivino"
+
+#. fish-applet.js:1439
+#, javascript-format
+msgid ""
+"Warning: The command appears to be something actually useful. \n"
+"Since this is a useless applet, you may not want to do this. \n"
+"We strongly advise you against using %s for anything which would make the "
+"applet \"practical\" or useful."
+msgstr ""
+"Advertencia: El comando parece ser algo realmente útil. \n"
+"Dado que se trata de un applet inútil, es posible que no desee hacer esto. \n"
+"Le recomendamos encarecidamente que no utilice %s para nada que pueda hacer "
+"que el applet sea \"práctico\" o útil."
+
+#. fish-applet.js:1447
+msgid ""
+"Normally, the Fish's wisdom is derived from the 'fortune' command-line "
+"utility. \n"
+"It seems that this dependency is missing on your system.\n"
+"However, it should be available for most distributions. \n"
+"Please refer to the documentation for instructions on how to install it. \n"
+"If you prefer not to install any additional packages, you can change the "
+"command in the applet's settings."
+msgstr ""
+"Normalmente, la sabiduría de pez se deriva de la utilidad de línea de "
+"comandos 'fortune'. \n"
+"Parece que esta dependencia falta en su sistema.\n"
+"Sin embargo, debería estar disponible para la mayoría de las "
+"distribuciones. \n"
+"Consulte la documentación para obtener instrucciones sobre cómo "
+"instalarla. \n"
+"Si prefiere no instalar ningún paquete adicional, puede cambiar el comando "
+"en la configuración del applet."
+
+#. fish-applet.js:1455
+msgid "Open Documentation"
+msgstr "Abrir documentación"
+
+#. ImageChooser.py:56
+msgid "File"
+msgstr "Archivo"
+
+#. ImageChooser.py:61
+msgid "Select an animation"
+msgstr "Seleccionar una animación"
+
+#. ImageChooser.py:66
+msgid "Images"
+msgstr "Imágenes"
+
+#. metadata.json->name
+msgid "Fish"
+msgstr "Pez"
+
+#. metadata.json->description
+msgid ""
+"Displays a small fish in your panel and does nothing useful whatsoever "
+"beyond that."
+msgstr ""
+"Muestra un pequeño pez en tu panel y no hace nada útil más allá de eso."
+
+#. settings-schema.json->pagePreferences->title
+msgid "Preferences"
+msgstr "Preferencias"
+
+#. settings-schema.json->pageAdvancedSettings->title
+msgid "Advanced Settings"
+msgstr "Configuración avanzada"
+
+#. settings-schema.json->pageHelp->title
+msgid "Help"
+msgstr "Ayuda"
+
+#. settings-schema.json->pageAbout->title
+msgid "About"
+msgstr "Acerca de"
+
+#. settings-schema.json->sectionGeneral->title
+msgid "General"
+msgstr "General"
+
+#. settings-schema.json->sectionAnimation->title
+msgid "Animation"
+msgstr "Animación"
+
+#. settings-schema.json->sectionAdvancedAnimationSettings->title
+msgid "Animation Settings"
+msgstr "Configuración de la animación"
+
+#. settings-schema.json->sectionAdvancedAnimationSettingsMargin->title
+msgid "Animation Margin"
+msgstr "Margen de animación"
+
+#. settings-
+#. schema.json->sectionAdvancedAnimationSettingsCustomDimension->title
+msgid "Animation Custom Dimension"
+msgstr "Dimensión personalizada de animación"
+
+#. settings-schema.json->sectionDeveloperOptions->title
+msgid "Developer Options"
+msgstr "Opciones de desarrollador"
+
+#. settings-schema.json->sectionInstruction->title
+msgid "Manual"
+msgstr "Manual"
+
+#. settings-schema.json->sectionReportIssue->title
+msgid "Report an Issue"
+msgstr "Informar de un problema"
+
+#. settings-schema.json->sectionAbout->title
+msgid "About Fish Applet"
+msgstr "Acerca del applet de Pez"
+
+#. settings-schema.json->sectionVersion->title
+msgid "Version"
+msgstr "Versión"
+
+#. settings-schema.json->sectionLicense->title
+msgid "License"
+msgstr "Licencia"
+
+#. settings-schema.json->sectionCredits->title
+msgid "Credits"
+msgstr "Créditos"
+
+#. settings-schema.json->sectionMaintainersAndContributors->title
+msgid "Maintainer and Contributors"
+msgstr "Mantenedor y colaboradores"
+
+#. settings-schema.json->keyNameOfFish->description
+msgid "Name of fish"
+msgstr "Nombre del pez"
+
+#. settings-schema.json->keyNameOfFish->tooltip
+msgid "Use this text box to specify the name of the fish."
+msgstr "Utilice este cuadro de texto para especificar el nombre del pez."
+
+#. settings-schema.json->keyCommand->description
+msgid "Command to run when clicked"
+msgstr "Comando que se ejecutará al hacer clic"
+
+#. settings-schema.json->keyCommand->tooltip
+msgid ""
+"By default, Fish runs the 'fortune' command when you click on the applet. "
+"Use this text box to specify an alternative command to run."
+msgstr ""
+"Por defecto, Pez ejecuta el comando 'fortune' cuando se pulsa sobre el "
+"applet. Utilice esta caja de texto para especificar un comando alternativo a "
+"ejecutar."
+
+#. settings-schema.json->keyFrames->units
+msgid "frames"
+msgstr "fotogramas"
+
+#. settings-schema.json->keyFrames->description
+msgid "Total frames in animation"
+msgstr "Total de fotogramas de la animación"
+
+#. settings-schema.json->keyFrames->tooltip
+msgid "Use this spin box to specify the number of frames in the animation."
+msgstr ""
+"Utilice esta casilla para especificar el número de fotogramas de la "
+"animación."
+
+#. settings-schema.json->keyPausePerFrameInSeconds->units
+msgid "seconds"
+msgstr "segundos"
+
+#. settings-schema.json->keyPausePerFrameInSeconds->description
+msgid "Pause per frame"
+msgstr "Pausa por fotograma"
+
+#. settings-schema.json->keyPausePerFrameInSeconds->tooltip
+msgid ""
+"Use this spin box to specify the pause in seconds between each frame in the "
+"animation."
+msgstr ""
+"Utilice esta casilla para especificar la pausa en segundos entre cada "
+"fotograma de la animación."
+
+#. settings-schema.json->keyFlipSidewaysOnVerticalPanel->description
+msgid "Flip sideways on vertical panels"
+msgstr "Rotar lateralmente los paneles verticales"
+
+#. settings-schema.json->keyFlipSidewaysOnVerticalPanel->tooltip
+msgid ""
+"Select this option to rotate the applet image sideways when you add the "
+"applet to a vertical panel."
+msgstr ""
+"Seleccione esta opción para rotar lateralmente la imagen del applet cuando "
+"lo añada a un panel vertical."
+
+#. settings-schema.json->keyImagePath->tooltip
+msgid ""
+"Use this field to select the image to display in the applet. You can select "
+"an image that is supplied with the applet or a personal image."
+msgstr ""
+"Utilice este campo para seleccionar la imagen que se mostrará en el applet. "
+"Puede seleccionar una imagen suministrada con el applet o una imagen "
+"personal."
+
+#. settings-schema.json->keyAnimationScalingMode->description
+msgid "Scaling Mode"
+msgstr "Modo de escala"
+
+#. settings-schema.json->keyAnimationScalingMode->options
+msgid "Auto-fit"
+msgstr "Ajuste automático"
+
+#. settings-schema.json->keyAnimationScalingMode->options
+msgid "Preserve original size"
+msgstr "Conservar el tamaño original"
+
+#. settings-schema.json->keyAnimationScalingMode->options
+msgid "Custom"
+msgstr "Personalizado"
+
+#. settings-schema.json->keyAnimationScalingMode->tooltip
+msgid "Select how the animation image in the panel should be scaled."
+msgstr "Seleccione cómo debe escalarse la imagen de animación en el panel."
+
+#. settings-schema.json->keyAnimationMarginHint->description
+msgid ""
+"Margin options apply only when the 'auto-fit' option is enabled. For other "
+"settings, margins appear if the animation is smaller than the panel."
+msgstr ""
+"Las opciones de márgenes sólo se aplican cuando está activada la opción "
+"'ajuste automático'. Para otros ajustes, los márgenes aparecen si la "
+"animación es más pequeña que el panel."
+
+#. settings-schema.json->keyAnimationAutoMargin->description
+msgid "Auto-margin"
+msgstr "Margen automático"
+
+#. settings-schema.json->keyAnimationAutoMargin->tooltip
+msgid "Check this to use the default margin from theme."
+msgstr "Marque esta opción para utilizar el margen por defecto del tema."
+
+#. settings-schema.json->keyAnimationMargin->units
+#. settings-schema.json->keyAnimationHeight->units
+#. settings-schema.json->keyAnimationWidth->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->keyAnimationMargin->description
+msgid "Margin around the animation frame"
+msgstr "Margen alrededor del fotograma de animación"
+
+#. settings-schema.json->keyAnimationMargin->tooltip
+msgid ""
+"Use this spin box to specify the margin around the animation frame shown in "
+"the panel."
+msgstr ""
+"Utilice esta casilla para especificar el margen alrededor del cuadro de "
+"animación mostrado en el panel."
+
+#. settings-schema.json->keyAnimationHeight->description
+msgid "Height"
+msgstr "Altura"
+
+#. settings-schema.json->keyAnimationHeight->tooltip
+msgid "Use this spin box to specify a custom height for the animation frame."
+msgstr ""
+"Utilice esta casilla para especificar una altura personalizada para el "
+"fotograma de animación."
+
+#. settings-schema.json->keyAnimationWidth->description
+msgid "Width"
+msgstr "Anchura"
+
+#. settings-schema.json->keyAnimationWidth->tooltip
+msgid "Use this spin box to specify a custom width for the animation frame."
+msgstr ""
+"Utilice esta casilla para especificar un ancho personalizado para el marco "
+"de animación."
+
+#. settings-schema.json->keyAnimationPreserveAspectRatio->description
+msgid "Preserve aspect ratio"
+msgstr "Conservar la relación de aspecto"
+
+#. settings-schema.json->keyAnimationPreserveAspectRatio->tooltip
+msgid ""
+"Enable this option to maintain the original aspect ratio of the animation. "
+"If enabled, the specified width will be ignored."
+msgstr ""
+"Active esta opción para mantener la relación de aspecto original de la "
+"animación. Si se activa, se ignorará la anchura especificada."
+
+#. settings-schema.json->keyAnimationRotationHint->description
+msgid ""
+"If a rotation is selected, the image may also be flipped sideways depending "
+"on the 'Flip sideways on vertical panels' option."
+msgstr ""
+"Si se selecciona una rotación, la imagen también puede voltearse "
+"lateralmente en función de la opción 'Voltear lateralmente en paneles "
+"verticales'."
+
+#. settings-schema.json->keyAnimationRotation->description
+msgid "Rotation"
+msgstr "Rotación"
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "0°"
+msgstr "0°"
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "90°"
+msgstr "90°"
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "180°"
+msgstr "180°"
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "270°"
+msgstr "270°"
+
+#. settings-schema.json->keyLogLevel->description
+msgid "Log Level"
+msgstr "Nivel del registro"
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Info"
+msgstr "Información"
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Debug"
+msgstr "Depuración"
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Warning"
+msgstr "Advertencia"
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Error"
+msgstr "Error"
+
+#. settings-schema.json->keyForceFoolsDay->description
+msgid "Force Fool's Day"
+msgstr "Día de los Inocentes"
+
+#. settings-schema.json->keyForceFoolsDay->tooltip
+msgid ""
+"Enforces Fool's Day mode for debugging purposes. Simulates Fool's Day (April "
+"1st) without modifying the system date."
+msgstr ""
+"Aplica el modo Día de los Inocentes con fines de depuración. Simula el Día "
+"de los Inocentes (1 de abril) sin modificar la fecha del sistema."
+
+#. settings-schema.json->keyInstructionsText->description
+msgid ""
+"For instructions on how to use and configure this applet, please visit the "
+"applet's page on the Cinnamon Spices website."
+msgstr ""
+"Para obtener instrucciones sobre cómo utilizar y configurar este applet, "
+"visite la página del applet en el sitio web de especias de Cinnamon."
+
+#. settings-schema.json->keyReportIssueText->description
+msgid ""
+"If you encounter a problem with this applet, please file an issue report on "
+"GitHub. Note that a GitHub account is required to submit an issue. Before "
+"doing so, check if the issue has already been submitted by someone else. "
+"Since this applet is part of Linux Mint's `cinnamon-spices-applets` "
+"repository, it's important to follow their guidelines for this process. Make "
+"sure that the applet name (fish@kriegcc) is included in the title when "
+"opening a new issue. Follow the provided template for the description and "
+"provide as much information as possible about the issue."
+msgstr ""
+"Si tiene algún problema con este applet, envíe un reporte de errores a "
+"GitHub. Tenga en cuenta que es necesario tener una cuenta de GitHub para "
+"enviar un reporte. Antes de hacerlo, compruebe si el problema ya ha sido "
+"enviado por otra persona. Dado que este applet es parte del repositorio "
+"`cinnamon-spices-applets` de Linux Mint, es importante seguir sus "
+"directrices para este proceso. Asegúrese de que el nombre del applet "
+"(fish@kriegcc) se incluye en el título al abrir un nuevo reporte. Siga la "
+"plantilla proporcionada para la descripción y proporcione tanta información "
+"como sea posible sobre el problema."
+
+#. settings-schema.json->keyButtonReportIssueInstructions->description
+msgid "Reporting Bugs Instructions of Cinnamon Spices applets"
+msgstr ""
+"Instrucciones para informar errores de los applets de especias de Cinnamon"
+
+#. settings-schema.json->keyButtonReportIssueInstructions->tooltip
+msgid ""
+"Opens the contributions guidelines of the Cinnamon Spices applets repository "
+"on Github."
+msgstr ""
+"Abrir las directrices de contribución del repositorio de applets  de "
+"especias de Cinnamon en Github."
+
+#. settings-schema.json->keyAboutText->description
+msgid ""
+"The Fish applet displays a small fish, called Wanda, in the panel. Wanda "
+"does nothing useful. The applet has really no use what-so-ever. It only "
+"takes up disk space and compilation time, and if loaded it also takes up "
+"precious panel space and memory. Anybody found using it should be promptly "
+"sent for a psychiatric evaluation."
+msgstr ""
+"El applet Pez muestra un pequeño pez, llamado Wanda, en el panel. Wanda no "
+"hace nada útil. El applet no tiene realmente ninguna utilidad. Sólo ocupa "
+"espacio en disco y tiempo de compilación, y si se carga también ocupa un "
+"precioso espacio en el panel y memoria. Cualquiera que sea sorprendido "
+"usándolo debería ser enviado inmediatamente a una evaluación psiquiátrica."
+
+#. settings-schema.json->keyButtonWebsite->description
+msgid "Fish Applet at Cinnamon Spices Website"
+msgstr "Applet de pescado en la web de especias de Cinnamon"
+
+#. settings-schema.json->keyButtonWebsite->tooltip
+msgid "Opens the applet's page on Cinnamon Spices website."
+msgstr "Abre la página del applet en el sitio web de las especias de Cinnamon."
+
+#. settings-schema.json->keyVersion->description
+msgid "v0.2.0"
+msgstr "v0.2.0"
+
+#. settings-schema.json->keyLicenseText->description
+msgid "GPL-3.0-or-later"
+msgstr "GPL-3.0 o posterior"
+
+#. settings-schema.json->keyCreditsText->description
+msgid ""
+"This project is an adaption of the Fish applet from GNOME and MATE desktops "
+"for Cinnamon desktop.\n"
+"The original Fish applet is licensed under the GNU General Public License "
+"(GPL).\n"
+"\n"
+"Original Authors:\n"
+"George Lebl\n"
+"Mark McLoughlin\n"
+"Vincent Untz\n"
+"Stefano Karapetsas\n"
+"\n"
+"Copyright:\n"
+"(C) 1998-2002 Free Software Foundation, Inc.\n"
+"(C) 2002-2005 Vincent Untz\n"
+"(C) 2012-2021 MATE developers"
+msgstr ""
+"Este proyecto es una adaptación del applet Pez de los escritorios GNOME y "
+"MATE para el escritorio Cinnamon.\n"
+"El applet Pez original está licenciado bajo la Licencia Pública General de "
+"GNU (GPL).\n"
+"\n"
+"Autores originales:\n"
+"George Lebl\n"
+"Mark McLoughlin\n"
+"Vincent Untz"
+
+#. settings-schema.json->keyMaintainersAndContributorsText->description
+msgid ""
+"Maintainer:\n"
+"kriegcc\n"
+"\n"
+"Contributors:\n"
+msgstr ""
+"Mantenedor:\n"
+"kriegcc\n"
+"\n"
+"Colaboradores:\n"

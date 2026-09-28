@@ -1,0 +1,45 @@
+# MAXIMUS WINDOW TITLE
+# This file is put in the public domain.
+# hanspr, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: maximus-title@hanspr 0.0.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-11 16:54-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#. metadata.json->description
+msgid "Maximus show title for the current window"
+msgstr "Maximus muestra el título de la ventana actual"
+
+#. metadata.json->name
+msgid "Maximus window title"
+msgstr "Título de la ventana Maximus"
+
+#. settings-schema.json->head->description
+msgid "Window Title Settings"
+msgstr "Configuración del título de la ventana"
+
+#. settings-schema.json->title-len->description
+msgid "Maximum title length"
+msgstr "Longitud máxima del título"
+
+#. settings-schema.json->title-bg->description
+msgid "Title focused background color"
+msgstr "Título con color de fondo destacado"
+
+#. settings-schema.json->title-regex->description
+msgid "Apply regex to title to remove string, before showing"
+msgstr ""
+"Aplicar una expresión regular al título para eliminar una línea antes de "
+"mostrarla"

@@ -1,0 +1,129 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-26 15:34-0800\n"
+"PO-Revision-Date: 2025-09-14 05:32+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:26
+msgid "%l:%M %p %Z"
+msgstr "%l:%M %p %Z"
+
+#: tzclock_settings.py:66
+msgid "Timezone"
+msgstr "時區"
+
+#: tzclock_settings.py:207
+msgid "Region"
+msgstr "地區"
+
+#: tzclock_settings.py:210
+msgid "City"
+msgstr "城市"
+
+#. settings-schema.json->tzclock-settings-header->description
+msgid "Timezone Clock Settings"
+msgstr "時區時鐘設定"
+
+#. settings-schema.json->displayed-timezone->description
+msgid "Timezone to display"
+msgstr "要顯示的時區"
+
+#. settings-schema.json->displayed-timezone->tooltip
+msgid "Enter a valid timezone name to display."
+msgstr "請輸入有效的時區名稱以顯示。"
+
+#. settings-schema.json->tzclocks-settings-button->description
+msgid "Select timezone on map"
+msgstr "在地圖上選擇時區"
+
+#. settings-schema.json->tzclocks-settings-button->tooltip
+msgid "Click this button to select timezone on map."
+msgstr "點選此按鈕即可在地圖上選擇時區。"
+
+#. settings-schema.json->browse-timezones-button->description
+msgid "Browse valid timezone values by country"
+msgstr "依國家瀏覽有效的時區值"
+
+#. settings-schema.json->browse-timezones-button->tooltip
+msgid "Click this button to browse valid timezone values by country."
+msgstr "點選此按鈕即可依國家瀏覽有效的時區值。"
+
+#. settings-schema.json->clock-display->description
+msgid "Clock Display Format"
+msgstr "時鐘顯示格式"
+
+#. settings-schema.json->clock-use-24h->description
+msgid "Display the time using a 24 hour clock"
+msgstr "使用 24 小時制顯示時間"
+
+#. settings-schema.json->clock-use-24h->tooltip
+msgid ""
+"Check this to display the time using a 24 hour clock in the timezone clock "
+"applet."
+msgstr ""
+"勾選此選項即可在時區時鐘小程式中使用 24 小時制顯示時間。"
+
+#. settings-schema.json->clock-show-seconds->description
+msgid "Display the time with seconds"
+msgstr "顯示時間（含秒數）"
+
+#. settings-schema.json->clock-show-seconds->tooltip
+msgid ""
+"Check this to display the time with seconds in the timezone clock applet."
+msgstr "勾選此選項即可在時區時鐘小程式中顯示含秒數的時間。"
+
+#. settings-schema.json->clock-show-date->description
+msgid "Display the date"
+msgstr "顯示日期"
+
+#. settings-schema.json->clock-show-date->tooltip
+msgid "Check this to display the date in the timezone clock applet."
+msgstr "勾選此選項即可在時區時鐘小程式中顯示日期。"
+
+#. settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr "使用自訂日期格式"
+
+#. settings-schema.json->use-custom-format->tooltip
+msgid ""
+"Check this to define a custom format for the date in the timezone clock "
+"applet."
+msgstr ""
+"勾選此選項即可為時區時鐘小程式中的日期定義自訂格式。"
+
+#. settings-schema.json->custom-format->description
+msgid "Date format:"
+msgstr "日期格式："
+
+#. settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr "請在此設定您的自訂格式。"
+
+#. settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr "顯示日期格式的語法資訊"
+
+#. settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr "點選此按鈕可了解更多關於日期格式語法的資訊。"
+
+#. metadata.json->name
+msgid "Timezone Clock"
+msgstr "時區時鐘"
+
+#. metadata.json->description
+msgid "A simple clock for displaying the current time in a timezone"
+msgstr "一個顯示指定時區目前時間的簡易時鐘"

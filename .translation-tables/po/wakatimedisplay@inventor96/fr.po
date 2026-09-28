@@ -1,0 +1,85 @@
+# WAKATIME DISPLAY
+# This file is put in the public domain.
+# inventor96, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wakatimedisplay@inventor96 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-10-18 12:36+0200\n"
+"Last-Translator: FabRCT\n"
+"Language-Team:\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. applet.js:91
+msgid "Click to open your WakaTime Dashboard"
+msgstr "Cliquez pour ouvrir votre tableau de bord WakaTime"
+
+#. applet.js:94
+msgid "Open the Applet configuration to add your WakaTime API Key"
+msgstr "Ouvrez la configuration de l'applet pour ajouter votre clé API WakaTime"
+
+#. metadata.json->name
+msgid "WakaTime Display"
+msgstr "WakaTime Display"
+
+#. metadata.json->description
+msgid "Displays your statistics from WakaTime"
+msgstr "Affiche vos statistiques WakaTime"
+
+#. settings-schema.json->wakatime-head->description
+msgid "WakaTime Settings"
+msgstr "Paramètres WakaTime"
+
+#. settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "minutes"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh interval"
+msgstr "Intervalle de rafraîchissement"
+
+#. settings-schema.json->refreshInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine."
+msgstr ""
+"Augmentez ou diminuez la valeur de ce bouton rotatif pour modifier l'intervalle\n"
+"d'actualisation. Utilisez une actualisation lente si votre ordinateur est lent."
+
+#. settings-schema.json->apiKey->description
+msgid "WakaTime API Key"
+msgstr "Clé d'API WakaTime"
+
+#. settings-schema.json->apiKey->tooltip
+msgid "The API key unique to your WakaTime account."
+msgstr "La clé API unique à votre compte WakaTime."
+
+#. settings-schema.json->getApiKey->description
+msgid "Open the WakaTime page to get your API key"
+msgstr "Ouvrez la page WakaTime pour obtenir votre clé API"
+
+#. settings-schema.json->getApiKey->tooltip
+msgid "Opens WakaTime API key webpage"
+msgstr "Ouvre la page Web de clé API WakaTime"
+
+#. settings-schema.json->display-head->description
+msgid "Display Settings"
+msgstr "Paramètres d'affichage"
+
+#. settings-schema.json->logoColor->description
+msgid "WakaTime logo color"
+msgstr "Couleur du logo WakaTime"
+
+#. settings-schema.json->logoColor->options
+msgid "White"
+msgstr "Blanc"
+
+#. settings-schema.json->logoColor->options
+msgid "Black"
+msgstr "Noir"

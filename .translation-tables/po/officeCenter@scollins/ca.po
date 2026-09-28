@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2024-07-13 03:52+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:127
+msgid "Clear"
+msgstr "Netejar"
+
+#. applet.js:162
+msgid "Office"
+msgstr "Oficina"
+
+#. applet.js:241
+msgid "LAUNCHERS"
+msgstr "LLANÇADORS"
+
+#. applet.js:257
+msgid "DOCUMENTS"
+msgstr "DOCUMENTS"
+
+#. applet.js:268
+msgid "Open folder"
+msgstr "Obrir carpeta"
+
+#. applet.js:294
+msgid "RECENT DOCUMENTS"
+msgstr "DOCUMENTS RECENTS"
+
+#. metadata.json->name
+msgid "Office Center"
+msgstr "Centre d'Oficina"
+
+#. metadata.json->description
+msgid "Provides an easy and fast resource for all your office needs"
+msgstr ""
+"Proveeix recursos fàcils i ràpids per totes les vostres necessitats d'oficina"
+
+#. metadata.json->comments
+msgid ""
+"Office Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy aceess to all of your office programs and documents. Feel free "
+"to contribute by submitting pull requests, bug reports and feature requests "
+"to my github repo."
+msgstr ""
+"El Centre d'Oficina és una miniaplicació rica en funcionalitat i "
+"multiplataforma en entorns Cinnamon que proveeix accés a tots els vostres "
+"documents i programes d'oficina. Podeu contribuir-hi via pull requests, "
+"incidències o sol·licituds de funcionalitats a través del meu directori de "
+"Github."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Autor - Stephen Collins"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Opcions generals"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Icona del tauler"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+"Accepta un nom d'icona o una ruta al fitxer (suporta icones simbòliques)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Text del tauler"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shorcut key"
+msgstr "Drecera del menú"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon size"
+msgstr "Mida de la icona"
+
+#. settings-schema.json->documents->description
+msgid "Documents"
+msgstr "Documents"
+
+#. settings-schema.json->showDocuments->description
+msgid "Show contents of documents folder"
+msgstr "Mostrar el contingut de la carpeta de documents"
+
+#. settings-schema.json->recurseDocuments->description
+msgid "Include subfolders"
+msgstr "Incloure subdirectoris"
+
+#. settings-schema.json->altDir->description
+msgid "Use alternate directory"
+msgstr "Utilitzar un directori alternatiu"
+
+#. settings-schema.json->docMax->description
+msgid "Limit number of documents shown to"
+msgstr "Limitar el número de documents mostrats a"
+
+#. settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "Documents recents"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Mostrar els documents recents"
+
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Número a mostrar"

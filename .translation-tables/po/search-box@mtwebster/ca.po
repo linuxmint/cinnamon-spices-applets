@@ -1,0 +1,225 @@
+# INTERNET SEARCH BOX
+# This file is put in the public domain.
+# mtwebster, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: search-box@mtwebster 2.3.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-25 21:36+0200\n"
+"PO-Revision-Date: 2025-09-28 16:54+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:66 old/5.4/applet.js:63
+msgid "Right-click to select or add your search engine"
+msgstr "Clic dret per a seleccionar o afegir el vostre motor de cerca"
+
+#. applet.js:85 old/applet.js:79 old/5.4/applet.js:82 old/3.2/applet.js:73
+msgid "Type to search..."
+msgstr "Escriviu per buscar..."
+
+#. applet.js:115 old/5.4/applet.js:112
+msgid "Select your Search Engine:"
+msgstr "Seleccioneu el vostre motor de cerca:"
+
+#. old/applet.js:90
+msgid "Change default programs..."
+msgstr "Canviar els programes per defecte..."
+
+#. old/applet.js:92
+msgid "Edit providers"
+msgstr "Editar proveïdors"
+
+#. metadata.json->name
+msgid "Internet Search Box"
+msgstr "Caixa de cerca a Internet"
+
+#. metadata.json->description
+msgid "Perform an Internet search, using your favorite engine"
+msgstr "Feu una cerca a Internet utilitzant el vostre motor preferit"
+
+#. settings-schema.json->page-providers->title
+#. settings-schema.json->section-providers->title
+#. settings-schema.json->providers->description
+#. old->5.4->settings-schema.json->providers->description
+msgid "Providers"
+msgstr "Proveïdors"
+
+#. settings-schema.json->page-options->title
+#. settings-schema.json->section-options->title
+msgid "Options"
+msgstr "Opcions"
+
+#. settings-schema.json->section-keybinding->title
+msgid "Keyboard shortcuts"
+msgstr "Dreceres del teclat"
+
+#. settings-schema.json->section-colors->title
+#. old->5.4->settings-schema.json->header-colors->description
+msgid "Search-box colors"
+msgstr "Colors de la caixa de cerca"
+
+#. settings-schema.json->show-provider->description
+#. old->5.4->settings-schema.json->show-provider->description
+#. old->3.2->settings-schema.json->show-provider->description
+msgid "Show provider"
+msgstr "Mostrar proveïdor"
+
+#. settings-schema.json->show-provider->tooltip
+#. old->5.4->settings-schema.json->show-provider->tooltip
+#. old->3.2->settings-schema.json->show-provider->tooltip
+msgid "Show selected provider in the panel"
+msgstr "Mostrar el proveïdor seleccionat al tauler"
+
+#. settings-schema.json->reset-after-search->description
+#. old->5.4->settings-schema.json->reset-after-search->description
+msgid "Reset query after search"
+msgstr "Reiniciar consulta després de la cerca"
+
+#. settings-schema.json->reset-after-search->tooltip
+#. old->5.4->settings-schema.json->reset-after-search->tooltip
+msgid ""
+"Reset query after search? This may not be useful if you want to be able to "
+"perform the same query on other search engines afterwards."
+msgstr ""
+"Voleu reiniciar la consulta després de buscar? Aquesta opció pot no ser útil "
+"si voleu buscar la mateixa consulta a altres motors de cerca després."
+
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
+msgid "Show"
+msgstr "Mostrar"
+
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
+msgid "Name"
+msgstr "Nom"
+
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
+msgid ""
+"Short name\n"
+"(3 lower-case letters)"
+msgstr ""
+"Nom curt\n"
+"(3 caràcters en minúscules)"
+
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
+msgid "Query URL"
+msgstr "URL de consulta"
+
+#. settings-schema.json->providers->tooltip
+#. old->5.4->settings-schema.json->providers->tooltip
+msgid ""
+"If your query begins with the 3 letters of the short name, it will be "
+"processed by the relevant search engine.\n"
+"Example: ddg linux mint iso"
+msgstr ""
+"Si la vostra consulta comença amb els 3 caràcters del nom curt, es "
+"processarà amb el motor de cerca corresponent.\n"
+"Exemple: ddg linux mint iso"
+
+#. settings-schema.json->providers-help->description
+msgid ""
+"Only selected providers will be displayed in the context menu, so you can "
+"select your default provider.\n"
+"If you deselect the default provider, the first selected becomes the default "
+"provider.\n"
+"If no provider is selected, the default provider is Google."
+msgstr ""
+"Només els proveïdors seleccionats es mostraran al menú contextual, permetent-"
+"vos seleccionar-ne un per defecte.\n"
+"Si desmarqueu el proveïdor per defecte, es reemplaçarà pel primer "
+"seleccionat.\n"
+"Si no hi ha proveïdor seleccionat, s'utilitzarà Google."
+
+#. settings-schema.json->custom-keybinding->description
+#. old->5.4->settings-schema.json->custom-keybinding->description
+#. old->3.2->settings-schema.json->custom-keybinding->description
+msgid "Keybinding, which opens the search box"
+msgstr "Drecera del teclat que obre la finestra de cerca"
+
+#. settings-schema.json->background-color->description
+#. old->5.4->settings-schema.json->background-color->description
+msgid "Background color"
+msgstr "Color de fons"
+
+#. settings-schema.json->text-color->description
+#. old->5.4->settings-schema.json->text-color->description
+msgid "Text color"
+msgstr "Color del text"
+
+#. old->5.4->settings-schema.json->header-provider->description
+#. old->3.2->settings-schema.json->header-provider->description
+msgid "Search Provider Settings"
+msgstr "Configuració del proveïdor de la cerca"
+
+#. old->5.4->settings-schema.json->header-providers->description
+msgid "Search Engines"
+msgstr "Motors de cerca"
+
+#. old->5.4->settings-schema.json->header-keybinding->description
+#. old->3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "Dreceres"
+
+#. old->3.2->settings-schema.json->selected-provider->description
+msgid "Select provider"
+msgstr "Seleccionar proveïdor"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "Google"
+msgstr "Google"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "Bing"
+msgstr "Bing"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "Ask "
+msgstr "Ask "
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#. old->3.2->settings-schema.json->selected-provider->tooltip
+msgid "Select a search provider"
+msgstr "Seleccioneu un proveïdor de cerca"
+
+#. old->3.2->settings-schema.json->use-custom-provider->description
+msgid "Use custom provider"
+msgstr "Utilitzar un proveïdor personalitzat"
+
+#. old->3.2->settings-schema.json->use-custom-provider->tooltip
+msgid "Use your own search provider"
+msgstr "Utilitzeu el vostre propi proveïdor"
+
+#. old->3.2->settings-schema.json->custom-provider-label->description
+msgid "Name of custom provider"
+msgstr "Nom del proveïdor personalitzat"
+
+#. old->3.2->settings-schema.json->custom-provider-label->tooltip
+msgid "Enter label of the custom provider to show in the panel."
+msgstr "Introduïu el nom del vostre proveïdor personalitzat al tauler."
+
+#. old->3.2->settings-schema.json->custom-provider-url->description
+msgid "URL of custom provider"
+msgstr "URL del proveïdor personalitzat"
+
+#. old->3.2->settings-schema.json->custom-provider-url->tooltip
+msgid "Enter the URL of the custom search provider"
+msgstr "Introduïu l'URL del proveïdor personalitzat"

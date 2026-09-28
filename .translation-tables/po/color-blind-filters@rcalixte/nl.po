@@ -1,0 +1,145 @@
+# COLOR-BLIND FILTERS
+# This file is put in the public domain.
+# rcalixte, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: color-blind-filters@rcalixte 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-20 21:06-0400\n"
+"PO-Revision-Date: 2024-04-20 17:17+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. 5.4->settings-schema.json->category->options
+#. 5.4/applet.js:109
+msgid "Color Blindness - Corrections"
+msgstr "Kleurblindheid - Correcties"
+
+#. 5.4->settings-schema.json->color_corrections->options
+#. 5.4/applet.js:112
+msgid "Protanopia Correction"
+msgstr "Protanopie Correctie"
+
+#. 5.4->settings-schema.json->color_corrections->options
+#. 5.4/applet.js:118
+msgid "Protanopia High Contrast"
+msgstr "Protanopie Hoog Contrast"
+
+#. 5.4->settings-schema.json->color_corrections->options
+#. 5.4/applet.js:124
+msgid "Deuteranopia Correction"
+msgstr "Deuteranopie Correctie"
+
+#. 5.4->settings-schema.json->color_corrections->options
+#. 5.4/applet.js:130
+msgid "Deuteranopia High Contrast"
+msgstr "Deuteranopie Hoog Contrast"
+
+#. 5.4->settings-schema.json->color_corrections->options
+#. 5.4/applet.js:136
+msgid "Tritanopia Correction"
+msgstr "Tritanopie Correctie"
+
+#. 5.4->settings-schema.json->category->options
+#. 5.4/applet.js:142
+msgid "Color Blindness - Simulations"
+msgstr "Kleurblindheid - Simulaties"
+
+#. 5.4->settings-schema.json->color_simulations->options
+#. 5.4/applet.js:145
+msgid "Protanopia Simulation"
+msgstr "Protanopie Simulatie"
+
+#. 5.4->settings-schema.json->color_simulations->options
+#. 5.4/applet.js:151
+msgid "Deuteranopia Simulation"
+msgstr "Deuteranopie Simulatie"
+
+#. 5.4->settings-schema.json->color_simulations->options
+#. 5.4/applet.js:157
+msgid "Tritanopia Simulation"
+msgstr "Tritanopie Simulatie"
+
+#. 5.4->settings-schema.json->category->options
+#. 5.4->settings-schema.json->inversions->description
+#. 5.4/applet.js:163
+msgid "Inversions"
+msgstr "Inversies"
+
+#. 5.4->settings-schema.json->inversions->options
+#. 5.4/applet.js:166
+msgid "Lightness Inversion"
+msgstr "Helderheidsinversie"
+
+#. 5.4->settings-schema.json->inversions->options
+#. 5.4/applet.js:173
+msgid "Color Inversion"
+msgstr "Kleurinversie"
+
+#. 5.4->settings-schema.json->category->options
+#. 5.4->settings-schema.json->other->description
+#. 5.4/applet.js:178
+msgid "Other Effects"
+msgstr "Andere Effecten"
+
+#. 5.4->settings-schema.json->other->options
+#. 5.4/applet.js:180
+msgid "Desaturation"
+msgstr "Verzadiging verminderen"
+
+#. 5.4->settings-schema.json->other->options
+#. 5.4/applet.js:185
+msgid "Channel Mixer - GBR"
+msgstr "Kanaalmixer - GBR"
+
+#. 5.4->settings-schema.json->other->options
+#. 5.4/applet.js:190
+msgid "Channel Mixer - BRG"
+msgstr "Kanaalmixer - BRG"
+
+#. 5.4/applet.js:375
+msgid "Current filter:"
+msgstr "Huidige filter:"
+
+#. 5.4/applet.js:380
+msgid "Filters disabled."
+msgstr "Filters uitgeschakeld."
+
+#. metadata.json->description
+msgid ""
+"An applet for the Cinnamon Desktop Environment that offers full-screen color "
+"filters that should help color-blind users and developers."
+msgstr ""
+"Een applet voor de Cinnamon Desktop Environment dat voor het volledige "
+"scherm kleurenfilters biedt die kleurenblinde gebruikers en ontwikkelaars "
+"zouden moeten helpen."
+
+#. metadata.json->name
+msgid "Color-blind Filters"
+msgstr "Kleurblinde Filters"
+
+#. 5.4->settings-schema.json->filter_active->description
+msgid "Filter Active"
+msgstr "Filter Actief"
+
+#. 5.4->settings-schema.json->category->description
+msgid "Category"
+msgstr "Categorie"
+
+#. 5.4->settings-schema.json->color_corrections->description
+msgid "Corrections"
+msgstr "Correcties"
+
+#. 5.4->settings-schema.json->color_simulations->description
+msgid "Simulations"
+msgstr "Simulaties"
+
+#. 5.4->settings-schema.json->filter_strength->description
+msgid "Filter Strength"
+msgstr "Filtersterkte"

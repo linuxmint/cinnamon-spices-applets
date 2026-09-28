@@ -1,0 +1,79 @@
+# RSSDOCK
+# This file is put in the public domain.
+# lyk4s5, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: rssdock@lyk4s5 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-31 14:40+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#. applet.js:23
+msgid "Loading Newsticker..."
+msgstr "Hírmatrica betöltése..."
+
+#. applet.js:86
+msgid "No RSS source configured"
+msgstr "Nincs RSS-forrás konfigurálva"
+
+#. metadata.json->name
+msgid "RSSDock"
+msgstr "RSSDokk"
+
+#. metadata.json->description
+msgid "Multi-source RSS news ticker with smooth scrolling and time stamps."
+msgstr "Többforrású RSS hírösszefoglaló sima görgetéssel és időbélyegekkel."
+
+#. settings-schema.json->news_sources->description
+msgid "NEWS Sources"
+msgstr "HÍRFORRÁSOK"
+
+#. settings-schema.json->news_sources->columns->title
+msgid "Source Name"
+msgstr "Forrásnév"
+
+#. settings-schema.json->news_sources->columns->title
+msgid "RSS URL"
+msgstr "RSS URL"
+
+#. settings-schema.json->update_interval->units
+msgid "minutes"
+msgstr "perc"
+
+#. settings-schema.json->update_interval->description
+msgid "Update Frequency"
+msgstr "Frissítési gyakoriság"
+
+#. settings-schema.json->scroll_limit->description
+msgid "Visible Characters"
+msgstr "Látható karakterek"
+
+#. settings-schema.json->width_multiplier->description
+msgid "Width Multiplier"
+msgstr "Szélesség-szorzó"
+
+#. settings-schema.json->scroll_speed->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->scroll_speed->description
+msgid "Speed (Low=Fast)"
+msgstr "Sebesség (Alacsony=Gyors)"
+
+#. settings-schema.json->vertical_offset->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->vertical_offset->description
+msgid "Vertical Offset"
+msgstr "Függőleges eltolás"

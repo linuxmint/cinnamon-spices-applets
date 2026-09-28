@@ -1,0 +1,233 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-02 12:12+0300\n"
+"PO-Revision-Date: 2025-10-12 16:15+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:32 applet.js:58
+msgid "Required GTop package missing!"
+msgstr "Thiếu gói GTop cần thiết!"
+
+#: applet.js:56
+msgid "Error!"
+msgstr "Lỗi!"
+
+#: applet.js:61
+msgid "Reset Peak Temperature"
+msgstr "Đặt lại nhiệt độ cực đại"
+
+#: applet.js:64
+msgid "Clear Cache"
+msgstr "Xóa bộ nhớ đệm"
+
+#: applet.js:161
+msgid "CPUs"
+msgstr "Bộ xử lý"
+
+#: applet.js:161
+msgid "°C max; "
+msgstr "°C tối đa; "
+
+#: applet.js:161
+msgid "°C peak"
+msgstr "°C cực đại"
+
+#: applet.js:164
+msgid "Memory"
+msgstr "Bộ nhớ"
+
+#: applet.js:164
+msgid "GB"
+msgstr "GB"
+
+#: applet.js:164
+msgid "GB swap"
+msgstr "GB bộ nhớ ảo"
+
+#: applet.js:167
+msgid "Network"
+msgstr "Mạng"
+
+#: applet.js:321
+msgid "Core "
+msgstr "Nhân "
+
+#: applet.js:366
+msgid "Used:   "
+msgstr "Đã dùng:   "
+
+#: applet.js:367
+msgid "Cache:  "
+msgstr "Bộ đệm:  "
+
+#: applet.js:368
+msgid "Buffer: "
+msgstr "Bộ đệm tạm: "
+
+#: applet.js:372
+msgid "Swap:   "
+msgstr "Bộ nhớ ảo:   "
+
+#: applet.js:442
+msgid "Up:      "
+msgstr "Tải lên:      "
+
+#: applet.js:442 applet.js:443
+msgid "B/s"
+msgstr "B/s"
+
+#: applet.js:443
+msgid "Down:    "
+msgstr "Tải xuống:    "
+
+#: applet.js:444
+msgid "Data:    "
+msgstr "Dữ liệu:    "
+
+#: applet.js:444
+msgid "B"
+msgstr "B"
+
+#: applet.js:448
+msgid "no interfaces to show"
+msgstr "không có giao diện nào để hiển thị"
+
+#: applet.js:453
+msgid "k"
+msgstr "k"
+
+#: applet.js:453
+msgid "M"
+msgstr "M"
+
+#: applet.js:453
+msgid "G"
+msgstr "G"
+
+#: applet.js:453
+msgid "T"
+msgstr "T"
+
+#. metadata.json->name
+msgid "Simplified System Monitor"
+msgstr "Trình giám sát hệ thống đơn giản"
+
+#. metadata.json->description
+msgid "Applet to show system load and state"
+msgstr "Tiện ích hiển thị tải và trạng thái hệ thống"
+
+#. settings-schema.json->common_label->description
+msgid "Common"
+msgstr "Chung"
+
+#. settings-schema.json->refresh->description
+msgid "Sections info refresh rate (seconds)"
+msgstr "Tần suất làm mới thông tin các phần (giây)"
+
+#. settings-schema.json->refresh->tooltip
+msgid "CPUs, memory, network info refresh rate"
+msgstr "Tần suất làm mới thông tin CPU, bộ nhớ và mạng"
+
+#. settings-schema.json->cpu_label->description
+msgid "CPUs and memory sections"
+msgstr "Các phần CPU và bộ nhớ"
+
+#. settings-schema.json->size->description
+msgid "CPUs and memory panel sections widths (px)"
+msgstr "Chiều rộng các phần CPU và bộ nhớ (px)"
+
+#. settings-schema.json->size->tooltip
+msgid "CPUs and memory panel sections widths"
+msgstr "Chiều rộng các phần CPU và bộ nhớ"
+
+#. settings-schema.json->temp_refresh->description
+msgid "CPUs temperature refresh rate (seconds)"
+msgstr "Tần suất làm mới nhiệt độ CPU (giây)"
+
+#. settings-schema.json->temp_refresh->tooltip
+msgid "CPUs temperature refresh rate"
+msgstr "Tần suất cập nhật nhiệt độ CPU"
+
+#. settings-schema.json->cold_temp->description
+msgid "CPU cold temperature (°C)"
+msgstr "Nhiệt độ CPU lạnh (°C)"
+
+#. settings-schema.json->cold_temp->tooltip
+msgid ""
+"CPUs' temperature below which they are regarded as cold (for color "
+"representation in the panel)"
+msgstr "Nhiệt độ CPU dưới mức này được coi là lạnh (dùng để hiển thị màu trên bảng)"
+
+#. settings-schema.json->color_cold->description
+msgid "Color for CPU cold temperature"
+msgstr "Màu cho nhiệt độ CPU lạnh"
+
+#. settings-schema.json->hot_temp->description
+msgid "CPU hot temperature (°C)"
+msgstr "Nhiệt độ CPU nóng (°C)"
+
+#. settings-schema.json->hot_temp->tooltip
+msgid ""
+"CPUs' temperature above which they are regarded as hot (for color "
+"representation in the panel)"
+msgstr "Nhiệt độ CPU trên mức này được coi là nóng (dùng để hiển thị màu trên bảng)"
+
+#. settings-schema.json->color_hot->description
+msgid "Color for CPU hot temperature"
+msgstr "Màu cho nhiệt độ CPU nóng"
+
+#. settings-schema.json->sensors_cmd->description
+msgid "Command to start 'sensors'"
+msgstr "Lệnh khởi động 'sensors'"
+
+#. settings-schema.json->sensors_cmd->tooltip
+msgid ""
+"Command to start 'sensors'. Use 'which sensors' command to find it. Install "
+"'lmsensors' package, if not found"
+msgstr "Lệnh khởi động 'sensors'. Dùng lệnh 'which sensors' để xác định. Cài gói 'lmsensors' nếu chưa có"
+
+#. settings-schema.json->net_label->description
+msgid "Network section"
+msgstr "Phần mạng"
+
+#. settings-schema.json->net_size->description
+msgid "Network panel section width (px)"
+msgstr "Chiều rộng phần mạng (px)"
+
+#. settings-schema.json->net_size->tooltip
+msgid "Network panel section width"
+msgstr "Chiều rộng phần mạng"
+
+#. settings-schema.json->net_style->description
+msgid "Network panel section style"
+msgstr "Kiểu hiển thị phần mạng"
+
+#. settings-schema.json->net_style->tooltip
+msgid ""
+"Network panel section HTML style (e.g.: text-align: left; margin-left: 5px; "
+"font-size: 8pt;)"
+msgstr "Kiểu HTML cho phần mạng (ví dụ: text-align: left; margin-left: 5px; font-size: 8pt;)"
+
+#. settings-schema.json->net_black_list->description
+msgid "Network interfaces blacklist"
+msgstr "Danh sách đen giao diện mạng"
+
+#. settings-schema.json->net_black_list->tooltip
+msgid ""
+"Semicolon-separated network interfaces list not to consider for counting "
+"traffic"
+msgstr "Danh sách các giao diện mạng, cách nhau bằng dấu chấm phẩy, không tính vào lưu lượng"

@@ -1,0 +1,706 @@
+# KDE CONNECT APPLET
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# JoeJoeTV, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-22 18:28+0200\n"
+"PO-Revision-Date: 2023-12-09 16:03+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. 5.8/applet.js:547 4.8/applet.js:574
+msgid "No Modules available"
+msgstr "Moduuleja ei ole saatavilla"
+
+#. 5.8/applet.js:1021 5.8/applet.js:1024 4.8/applet.js:1065 4.8/applet.js:1068
+msgid "KDE Connect not available, make sure it's installed and running."
+msgstr ""
+"KDE Connect ei ole käytettävissä, varmista että se on asennettu ja käynnissä."
+
+#. 5.8/applet.js:1028 5.8/applet.js:1041 5.8/applet.js:1230 4.8/applet.js:1072
+#. 4.8/applet.js:1085 4.8/applet.js:1270
+msgid "Reload Applet"
+msgstr "Lataa sovelma uudelleen"
+
+#. 5.8/applet.js:1033 4.8/applet.js:1077
+msgid "Invalid KDE Connect version returned!"
+msgstr "Väärä KDE Connect versio havaittu!"
+
+#. 5.8/applet.js:1034 5.8/applet.js:1037 4.8/applet.js:1078 4.8/applet.js:1081
+msgid ""
+"The KDE Connect DBus service returned an invalid version, please try "
+"reloading the Applet!"
+msgstr ""
+"KDE Connect DBus palvelu ilmoitti väärän versionumeron, yritä ladata sovelma "
+"uudelleen!"
+
+#. 5.8/applet.js:1075 4.8/applet.js:1120
+msgid "No connected Devices!"
+msgstr "Ei kytkettyjä laitteita!"
+
+#. 5.8/applet.js:1075 4.8/applet.js:1120
+msgid "Add them in the KDE Connect settings"
+msgstr "Lisää ne KDE Connect asetuksiin"
+
+#. 5.8/applet.js:1120 4.8/applet.js:1165
+msgid "Debug Stuff, don't touch!"
+msgstr "Virheenkorjaus, älä koske!"
+
+#. 5.8/applet.js:1209 4.8/applet.js:1254
+msgid "KDE Connect Version: {version}"
+msgstr "KDE Connect versio: {version}"
+
+#. 5.8/applet.js:1221 4.8/applet.js:1261
+msgid "Own ID: {own_id}"
+msgstr "Oma ID: {own_id}"
+
+#. 5.8/applet.js:1223 4.8/applet.js:1263
+msgid "own ID"
+msgstr "oma ID"
+
+#. 5.8/applet.js:1225 4.8/applet.js:1265
+msgid "Click to copy own ID"
+msgstr "Kopioi oma id painamalla"
+
+#. 5.8/applet.js:1235 4.8/applet.js:1275
+msgid "Configure KDE Connect"
+msgstr "Määritä KDE Connect"
+
+#. 5.8/applet.js:1237 4.8/applet.js:1277
+msgid "Click to open KDE Connect Configuration"
+msgstr "Avaa KDE Connect määritykset painamalla"
+
+#. 5.8/applet.js:1283 4.8/applet.js:1321
+msgid "No available devices"
+msgstr "Ei saatavilla olevia laitteita"
+
+#. 5.8/applet.js:1285 4.8/applet.js:1323
+msgid "{deviceCount} available device"
+msgstr "{deviceCount} laite saatavilla"
+
+#. 5.8/applet.js:1287 4.8/applet.js:1325
+msgid "{deviceCount} available devices"
+msgstr "{deviceCount} laitetta saatavilla"
+
+#. 5.8/js/modules.js:450
+#, fuzzy
+msgid "Module"
+msgstr "Moduulit"
+
+#. 5.8/js/modules.js:597
+#, fuzzy
+msgid "Battery Module"
+msgstr "Akkutieto moduuli"
+
+#. 5.8/js/modules.js:646 4.8/js/modules.js:658
+msgid "Charging"
+msgstr "Latauksessa"
+
+#. 5.8/js/modules.js:682
+#, fuzzy
+msgid "Device-Info Module"
+msgstr "Laitetieto moduuli"
+
+#. 5.8/js/modules.js:731 4.8/js/modules.js:741
+msgid "ID: {id}"
+msgstr "ID: {id}"
+
+#. 5.8/js/modules.js:735 4.8/js/modules.js:745
+msgid "Device ID"
+msgstr "Laite ID"
+
+#. 5.8/js/modules.js:739 4.8/js/modules.js:749
+msgid "Click to copy ID"
+msgstr "Kopioi id painamalla"
+
+#. 5.8/js/modules.js:751
+#, fuzzy
+msgid "Connectivity Module"
+msgstr "Yhteystieto moduuli"
+
+#. 5.8/js/modules.js:813 4.8/js/modules.js:822
+msgid "No Signal"
+msgstr "Ei signaalia"
+
+#. 5.8/js/modules.js:816 4.8/js/modules.js:825
+msgid "Low"
+msgstr "Matala"
+
+#. 5.8/js/modules.js:819 4.8/js/modules.js:828
+msgid "Ok"
+msgstr "Selvä"
+
+#. 5.8/js/modules.js:822 4.8/js/modules.js:831
+msgid "Good"
+msgstr "Hyvä"
+
+#. 5.8/js/modules.js:825 4.8/js/modules.js:834
+msgid "Excellent"
+msgstr "Erinomainen"
+
+#. 5.8/js/modules.js:837 4.8/js/modules.js:846
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#. 5.8/js/modules.js:867
+#, fuzzy
+msgid "FindMyPhone Module"
+msgstr "Etsi puhelimeni moduuli"
+
+#. 5.8/js/modules.js:892 4.8/js/modules.js:900
+msgid "Ring device"
+msgstr "Lähetä äänimerkki"
+
+#. 5.8/js/modules.js:893 4.8/js/modules.js:901
+msgid "Click to ring the device"
+msgstr "Lähetä äänimerkki painamalla"
+
+#. 5.8/js/modules.js:907
+#, fuzzy
+msgid "Request Photo Module"
+msgstr "Pyydä kuvaa moduuli"
+
+#. 5.8/js/modules.js:973 4.8/js/modules.js:980
+msgid "Photo received from '{deviceName}'"
+msgstr "Kuva vastaanotettu '{deviceName}'"
+
+#. 5.8/js/modules.js:973 5.8/js/modules.js:1151 4.8/js/modules.js:980
+#. 4.8/js/modules.js:1156
+msgid "Click to open in default application"
+msgstr "Paina ja avaa oletussovelluksessa"
+
+#. 5.8/js/modules.js:982 4.8/js/modules.js:989
+msgid "Request Photo"
+msgstr "Pyydä valokuva"
+
+#. 5.8/js/modules.js:983 4.8/js/modules.js:990
+msgid "Click to request a photo from the device"
+msgstr "Pyydä laitteelta valokuvaa painamalla"
+
+#. 5.8/js/modules.js:1009
+#, fuzzy
+msgid "Ping Module"
+msgstr "Kilutus moduuli"
+
+#. 5.8/js/modules.js:1034 4.8/js/modules.js:1040
+msgid "Ping!"
+msgstr "Lähetä kilahdus!"
+
+#. 5.8/js/modules.js:1041 4.8/js/modules.js:1047
+msgid "Sent ping to device '{deviceName}'"
+msgstr "Kilahdus lähetetty laitteeseen '{deviceName}'"
+
+#. 5.8/js/modules.js:1047 4.8/js/modules.js:1053
+msgid "Ping Device"
+msgstr "Kilauta laitetta"
+
+#. 5.8/js/modules.js:1048 4.8/js/modules.js:1054
+msgid "Click to send a ping to the device"
+msgstr "Lähetä kilautus laitteeseen painamalla"
+
+#. 5.8/js/modules.js:1062
+#, fuzzy
+msgid "Share Module"
+msgstr "Jakaminen moduuli"
+
+#. 5.8/js/modules.js:1151 4.8/js/modules.js:1156
+msgid "Share received from '{deviceName}'"
+msgstr "Jako vastaanotettu '{deviceName}'"
+
+#. 5.8/js/modules.js:1186 4.8/js/modules.js:1191
+msgid "Share"
+msgstr "Jako"
+
+#. 5.8/js/modules.js:1198 4.8/js/modules.js:1204
+msgid "Send URL"
+msgstr "Lähetä URL"
+
+#. 5.8/js/modules.js:1199 4.8/js/modules.js:1205
+msgid "Click to send a URL to the device"
+msgstr "Lähetä URL laitteeseen painamalla"
+
+#. 5.8/js/modules.js:1208 4.8/js/modules.js:1214
+msgid "Send Text"
+msgstr "Lähetä teksti"
+
+#. 5.8/js/modules.js:1209 5.8/js/modules.js:1553 4.8/js/modules.js:1215
+#. 4.8/js/modules.js:1490
+msgid "Click to send text to the device"
+msgstr "Lähetä teksti laitteeseen painamalla"
+
+#. 5.8/js/modules.js:1218 4.8/js/modules.js:1224
+msgid "Send File(s)"
+msgstr "Lähetä tiedosto"
+
+#. 5.8/js/modules.js:1219 4.8/js/modules.js:1225
+msgid "Click to send file(s) to the device"
+msgstr "Lähetä tiedostot laitteeseen painamalla"
+
+#. 5.8/js/modules.js:1243
+#, fuzzy
+msgid "SFTP Module"
+msgstr "SFTP moduuli"
+
+#. 5.8/js/modules.js:1284 4.8/js/modules.js:1281
+msgid "Unmount"
+msgstr "Poista laite"
+
+#. 5.8/js/modules.js:1286 4.8/js/modules.js:1283
+msgid "Mount"
+msgstr "Liitä laite"
+
+#. 5.8/js/modules.js:1292 4.8/js/modules.js:1289
+msgid "Click to unmount"
+msgstr "Poista laite painamalla"
+
+#. 5.8/js/modules.js:1294 4.8/js/modules.js:1291
+msgid "Click to mount"
+msgstr "Liitä laite painamalla"
+
+#. 5.8/js/modules.js:1424 4.8/js/modules.js:1364
+msgid "Click to browse files"
+msgstr "Selaa tiedostoja painamalla"
+
+#. 5.8/js/modules.js:1463
+#, fuzzy
+msgid "SMS Module"
+msgstr "Tekstiviesti moduuli"
+
+#. 5.8/js/modules.js:1532 4.8/js/modules.js:1468
+msgid "SMS"
+msgstr "Tekstiviesti"
+
+#. 5.8/js/modules.js:1544 4.8/js/modules.js:1481
+msgid "Launch SMS App"
+msgstr "Tekstiviestit"
+
+#. 5.8/js/modules.js:1545 4.8/js/modules.js:1482
+msgid "Click to open the KDE Connect SMS App"
+msgstr "Avaa KDE Connect tekstiviestisovellus painamalla"
+
+#. 5.8/js/modules.js:1552 4.8/js/modules.js:1489
+msgid "Send SMS"
+msgstr "Lähetä tekstiviesti"
+
+#. metadata.json->name
+#. 5.8/js/utils.js:24
+msgid "KDE Connect Applet"
+msgstr "KDE Connect sovelma"
+
+#. 5.8/js/utils.js:126 4.8/js/commonUtils.js:223
+msgid "Copied {typestring} to the clipboard"
+msgstr "Kopioitu {typestring} leikepöydälle"
+
+#. 5.8/settingsWidgets.py:153 4.8/settingsWidgets.py:153
+msgid "Move selected entry up"
+msgstr "Siirrä valittu kohta ylöspäin"
+
+#. 5.8/settingsWidgets.py:160 4.8/settingsWidgets.py:160
+msgid "Move selected entry down"
+msgstr "Siirrä valittu kohta alaspäin"
+
+#. 5.8/py/dialogs.py:50 4.8/py/dialogs.py:43
+#, python-brace-format
+msgid "Send URL to '{device_name}'"
+msgstr "Lähetä URL '{device_name}'"
+
+#. 5.8/py/dialogs.py:60 5.8/py/dialogs.py:132 5.8/py/dialogs.py:207
+#. 5.8/py/dialogs.py:285 4.8/py/dialogs.py:50 4.8/py/dialogs.py:106
+#. 4.8/py/dialogs.py:169
+msgid "Cancel"
+msgstr "Peru"
+
+#. 5.8/py/dialogs.py:65 5.8/py/dialogs.py:137 5.8/py/dialogs.py:212
+#. 4.8/py/dialogs.py:53 4.8/py/dialogs.py:109 4.8/py/dialogs.py:172
+msgid "Send"
+msgstr "Lähetä"
+
+#. 5.8/py/dialogs.py:76 4.8/py/dialogs.py:60
+#, python-brace-format
+msgid "Enter a URL to send to '{device_name}'"
+msgstr "Kirjoita URL ja lähetä se '{device_name}'"
+
+#. 5.8/py/dialogs.py:83 4.8/py/dialogs.py:64
+msgid "URL"
+msgstr "URL"
+
+#. 5.8/py/dialogs.py:122 4.8/py/dialogs.py:99
+#, python-brace-format
+msgid "Send SMS using '{device_name}'"
+msgstr "Lähetä tekstiviesti '{device_name}'"
+
+#. 5.8/py/dialogs.py:147 4.8/py/dialogs.py:116
+msgid "Phone Number:"
+msgstr "Puhelinnumero:"
+
+#. 5.8/py/dialogs.py:151 4.8/py/dialogs.py:120
+msgid "Phone Number"
+msgstr "Puhelinnumero"
+
+#. 5.8/py/dialogs.py:154 4.8/py/dialogs.py:122
+msgid "Message:"
+msgstr "Viesti:"
+
+#. 5.8/py/dialogs.py:197 4.8/py/dialogs.py:162
+#, python-brace-format
+msgid "Send text to '{device_name}'"
+msgstr "Lähetä teksti '{device_name}'"
+
+#. 5.8/py/dialogs.py:222 4.8/py/dialogs.py:179
+msgid "Text to send:"
+msgstr "Lähetettävä teksti:"
+
+#. 5.8/py/dialogs.py:271
+#, fuzzy, python-brace-format
+msgid "Open remote directory on '{device_name}'"
+msgstr "Lähetä teksti '{device_name}'"
+
+#. 5.8/py/dialogs.py:290
+msgid "Open"
+msgstr ""
+
+#. 5.8/py/dialogs.py:300
+msgid "Directory to open:"
+msgstr ""
+
+#. 5.8/py/dialogs.py:375 4.8/py/dialogs.py:225
+#, python-brace-format
+msgid "Select files to send to '{deviceName}'"
+msgstr "Valitse tiedostot ja lähetä '{deviceName}'"
+
+#. 5.8/py/dialogs.py:442 4.8/py/dialogs.py:286
+#, python-brace-format
+msgid "Select where to save photo received from '{deviceName}'"
+msgstr "Valitse, mihin tallennat vastaanotetun valokuvan '{deviceName}'"
+
+#. 5.8/py/dialogs.py:449 4.8/py/dialogs.py:290
+msgid "photo.jpg"
+msgstr "photo.jpg"
+
+#. 5.8/py/dialogs.py:452 4.8/py/dialogs.py:293
+msgid "JPEG Photo"
+msgstr "JPEG kuva"
+
+#. metadata.json->description
+msgid "Enables interacting with devices connected via KDE Connect"
+msgstr "Mahdollistaa yhteyden KDE Connectin kautta yhdistettyille laitteille"
+
+#. metadata.json->comments
+msgid ""
+"KDE Connect Applet makes it easy to use the various features provided by KDE "
+"Connect to interact with connected devices, like sending files, sending SMS "
+"messages, browsing the storage of the device and more"
+msgstr ""
+"KDE Connect sovelman tarjoaa helpon tavan käyttää KDE Connectin tarjoamia "
+"ominaisuuksia yhdistettyjen laitteiden kanssa, kuten tiedostojen ja "
+"tekstiviestien lähettäminen, sekä tallennustilan selaaminen"
+
+#. metadata.json->contributors
+msgid "Johannes Schoeneberger - Author"
+msgstr "Kehittäjä - Johannes Schoeneberger"
+
+#. metadata.json->contributors
+msgid "Severga - Inspiration for the Applet"
+msgstr "Severga - inspiraatio tähän sovelmaan"
+
+#. 5.8->settings-schema.json->page_general->title
+#. 4.8->settings-schema.json->page_general->title
+msgid "General"
+msgstr "Yleistä"
+
+#. 5.8->settings-schema.json->page_modules->title
+#. 4.8->settings-schema.json->page_modules->title
+msgid "Modules"
+msgstr "Moduulit"
+
+#. 5.8->settings-schema.json->section_contextmenu->title
+#. 4.8->settings-schema.json->section_contextmenu->title
+msgid "Context Menu"
+msgstr "Pudotusvalikko"
+
+#. 5.8->settings-schema.json->section_panel->title
+#. 4.8->settings-schema.json->section_panel->title
+msgid "Panel"
+msgstr "Paneeli"
+
+#. 5.8->settings-schema.json->section_devices->title
+#. 4.8->settings-schema.json->section_devices->title
+msgid "Devices"
+msgstr "Laitteet"
+
+#. 5.8->settings-schema.json->section_info-modules->title
+#. 4.8->settings-schema.json->section_info-modules->title
+msgid "Info Modules"
+msgstr "Moduulien tiedot"
+
+#. 5.8->settings-schema.json->section_action-modules->title
+#. 4.8->settings-schema.json->section_action-modules->title
+msgid "Action Modules"
+msgstr "Moduulien toiminta"
+
+#. 5.8->settings-schema.json->section_module_battery->title
+#. 4.8->settings-schema.json->section_module_battery->title
+msgid "Battery Info Module"
+msgstr "Akkutieto moduuli"
+
+#. 5.8->settings-schema.json->section_module_deviceinfo->title
+#. 4.8->settings-schema.json->section_module_deviceinfo->title
+msgid "Device-Info Info Module"
+msgstr "Laitetieto moduuli"
+
+#. 5.8->settings-schema.json->section_module_connectivity->title
+#. 4.8->settings-schema.json->section_module_connectivity->title
+msgid "Connectivity Info Module"
+msgstr "Yhteystieto moduuli"
+
+#. 5.8->settings-schema.json->section_module_findmyphone->title
+#. 4.8->settings-schema.json->section_module_findmyphone->title
+msgid "FindMyPhone Action Module"
+msgstr "Etsi puhelimeni moduuli"
+
+#. 5.8->settings-schema.json->section_module_requestphoto->title
+#. 4.8->settings-schema.json->section_module_requestphoto->title
+msgid "Request-Photo Action Module"
+msgstr "Pyydä kuvaa moduuli"
+
+#. 5.8->settings-schema.json->section_module_ping->title
+#. 4.8->settings-schema.json->section_module_ping->title
+msgid "Ping Action Module"
+msgstr "Kilutus moduuli"
+
+#. 5.8->settings-schema.json->section_module_share->title
+#. 4.8->settings-schema.json->section_module_share->title
+msgid "Share Action Module"
+msgstr "Jakaminen moduuli"
+
+#. 5.8->settings-schema.json->section_module_sftp->title
+#. 4.8->settings-schema.json->section_module_sftp->title
+msgid "SFTP Action Module"
+msgstr "SFTP moduuli"
+
+#. 5.8->settings-schema.json->section_module_sms->title
+#. 4.8->settings-schema.json->section_module_sms->title
+msgid "SMS Action Module"
+msgstr "Tekstiviesti moduuli"
+
+#. 5.8->settings-schema.json->switch_show-own-id->description
+#. 4.8->settings-schema.json->switch_show-own-id->description
+msgid "Show own ID in the context menu of the applet"
+msgstr "Näytä oma id sovelman valikossa"
+
+#. 5.8->settings-schema.json->switch_show-kdec-version->description
+#. 4.8->settings-schema.json->switch_show-kdec-version->description
+msgid "Show KDE Connect version in the context menu of the applet"
+msgstr "Näytä KDE Connect versio sovelman valikossa"
+
+#. 5.8->settings-schema.json->switch_show-device-count->description
+#. 4.8->settings-schema.json->switch_show-device-count->description
+msgid "Show the number of connected devices next to the icon in the panel"
+msgstr "Näytä yhdistettyjen laitteiden määrä paneelin kuvakkeen vieressä"
+
+#. 5.8->settings-schema.json->switch_show-device-count-tooltip->description
+#. 4.8->settings-schema.json->switch_show-device-count-tooltip->description
+msgid "Show the device count in the tooltip of the applet"
+msgstr "Näytä laitteiden lukumäärä sovelman valikossa"
+
+#. 5.8->settings-schema.json->combobox_icon-type->description
+#. 4.8->settings-schema.json->combobox_icon-type->description
+msgid "Icon type"
+msgstr "Kuvakkeen tyyppi"
+
+#. 5.8->settings-schema.json->combobox_icon-type->options
+#. 4.8->settings-schema.json->combobox_icon-type->options
+msgid "Symbolic"
+msgstr "Symbolinen"
+
+#. 5.8->settings-schema.json->combobox_icon-type->options
+#. 4.8->settings-schema.json->combobox_icon-type->options
+msgid "Color"
+msgstr "Väri"
+
+#. 5.8->settings-schema.json->switch_use-custom-icon->description
+#. 4.8->settings-schema.json->switch_use-custom-icon->description
+msgid "Use custom icon"
+msgstr "Käytä omaa kuvaketta"
+
+#. 5.8->settings-schema.json->icon_custom-icon->description
+#. 4.8->settings-schema.json->icon_custom-icon->description
+msgid "Custom icon to use"
+msgstr "Kuvake jota käytetään"
+
+#. 5.8->settings-schema.json->switch_different-icon-no-connected-
+#. devices->description
+msgid "Display a different icon when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_no-connected-devices->description
+msgid "Icon to use when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->button_open-kdec-settings->description
+#. 4.8->settings-schema.json->button_open-kdec-settings->description
+msgid "Open KDE Connect Configuration"
+msgstr "KDE Connect määritykset"
+
+#. 5.8->settings-schema.json->switch_expand-only-device->description
+#. 4.8->settings-schema.json->switch_expand-only-device->description
+msgid ""
+"Expand the device sub menu automatically, if only one device is available"
+msgstr ""
+"Avaa laitteen alavalikot automaattisesti, jos käytössä on vain yksi laite"
+
+#. 5.8->settings-schema.json->orderlist_device-order->columns->title
+#. 5.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 5.8->settings-schema.json->oderlist_action-modules->columns->title
+#. 4.8->settings-schema.json->orderlist_device-order->columns->title
+#. 4.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_action-modules->columns->title
+msgid "Name"
+msgstr "Nimi"
+
+#. 5.8->settings-schema.json->orderlist_device-order->columns->title
+#. 4.8->settings-schema.json->orderlist_device-order->columns->title
+msgid "Expand"
+msgstr "Laajenna"
+
+#. 5.8->settings-schema.json->orderlist_device-order->columns->title
+#. 4.8->settings-schema.json->orderlist_device-order->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. 5.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 5.8->settings-schema.json->oderlist_action-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_action-modules->columns->title
+msgid "Enabled"
+msgstr "Käytössä"
+
+#. 5.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 5.8->settings-schema.json->oderlist_action-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_action-modules->columns->title
+msgid "ID"
+msgstr "ID"
+
+#. 5.8->settings-schema.json->module_battery_description->description
+#. 4.8->settings-schema.json->module_battery_description->description
+msgid "Shows the current battery charge and charging status of the device"
+msgstr "Näyttää laitteen akun latauksen ja lataustilan"
+
+#. 5.8->settings-schema.json->module_deviceinfo_description->description
+#. 4.8->settings-schema.json->module_deviceinfo_description->description
+msgid "Shows the device icon along with its ID"
+msgstr "Näyttää laitteen kuvakkeen ja sen id:n"
+
+#. 5.8->settings-schema.json->module_connectivity_description->description
+#. 4.8->settings-schema.json->module_connectivity_description->description
+msgid "Shows the current connectivity status and network type of the device"
+msgstr "Näyttää laitteen nykyisen yhteystilan ja verkon tyypin"
+
+#. 5.8->settings-schema.json->module_connectivity_showNetworkType->description
+#. 4.8->settings-schema.json->module_connectivity_showNetworkType->description
+msgid "Show the mobile network type"
+msgstr "Näytä matkapuhelinverkko"
+
+#. 5.8->settings-schema.json->module_findmyphone_description->description
+#. 4.8->settings-schema.json->module_findmyphone_description->description
+msgid ""
+"Lets you make the device ring, so you can find it, if you have misplaced it"
+msgstr "Voit saada laitteen soimaan, joten voit löytää sen helposti"
+
+#. 5.8->settings-schema.json->module_requestphoto_description->description
+#. 4.8->settings-schema.json->module_requestphoto_description->description
+msgid ""
+"Lets you request a photo from the remote device and save it on this device"
+msgstr ""
+"Voit pyytää valokuvaa puhelimesta tai tabletista ja tallentaa se tähän "
+"tietokoneeseen"
+
+#. 5.8->settings-schema.json->module_requestphoto_saveToDir->description
+#. 4.8->settings-schema.json->module_requestphoto_saveToDir->description
+msgid "Save received photos directly to directory"
+msgstr "Tallenna vastaanotettu kuva suoraan kansioon"
+
+#. 5.8->settings-schema.json->module_requestphoto_saveDirectory->description
+#. 4.8->settings-schema.json->module_requestphoto_saveDirectory->description
+msgid "The directory to save received photos to"
+msgstr "Kasio, johon vastaanotetut valokuvat tallennetaan"
+
+#. 5.8->settings-schema.json->module_ping_description->description
+#. 4.8->settings-schema.json->module_ping_description->description
+msgid "Lets you ping the the device to make sure it's connected"
+msgstr "Voit kutsua laitetta ja varmistaa, että se on kytketty verkkoon"
+
+#. 5.8->settings-schema.json->module_ping_useCustomMessage->description
+#. 4.8->settings-schema.json->module_ping_useCustomMessage->description
+msgid "Use custom message for ping"
+msgstr "Käytä omaa viestiä kutsuun"
+
+#. 5.8->settings-schema.json->module_ping_customMessage->description
+#. 4.8->settings-schema.json->module_ping_customMessage->description
+msgid "Custom message"
+msgstr "Oma viesti"
+
+#. 5.8->settings-schema.json->module_share_description->description
+#. 4.8->settings-schema.json->module_share_description->description
+msgid "Lets you share URLs, files or text to the device"
+msgstr "Voit jakaa URL-osoitteella, tiedostoja tai tekstiä laitteeseen"
+
+#. 5.8->settings-schema.json->module_share_useSubMenu->description
+#. 5.8->settings-schema.json->module_sms_useSubMenu->description
+#. 4.8->settings-schema.json->module_share_useSubMenu->description
+#. 4.8->settings-schema.json->module_sms_useSubMenu->description
+msgid "Show menu items in sub menu"
+msgstr "Näytä valikossa alivalikot"
+
+#. 5.8->settings-schema.json->module_share_enableSendURL->description
+#. 4.8->settings-schema.json->module_share_enableSendURL->description
+msgid "Enable the menu item to send a URL"
+msgstr "Ota käyttöön kohde valikossa URL-osoitteen lähettämiseksi"
+
+#. 5.8->settings-schema.json->module_share_enableSendText->description
+#. 4.8->settings-schema.json->module_share_enableSendText->description
+msgid "Enable the menu item to send some text"
+msgstr "Ota käyttöön kohde tekstiviestien lähettämiseksi"
+
+#. 5.8->settings-schema.json->module_share_enableSendFiles->description
+#. 4.8->settings-schema.json->module_share_enableSendFiles->description
+msgid "Enable the menu item to send file(s)"
+msgstr "Ota käyttöön kohde tiedostojen lähettämiseksi"
+
+#. 5.8->settings-schema.json->module_sftp_description->description
+#. 4.8->settings-schema.json->module_sftp_description->description
+#, fuzzy
+msgid "Lets you remotely browse the storage of the device"
+msgstr "Voit selata laitteelle valittua tallennustilaa"
+
+#. 5.8->settings-schema.json->module_sftp_selectFirstDirectory->description
+msgid "Select the first directory automatically"
+msgstr ""
+
+#. 5.8->settings-schema.json->module_sms_description->description
+#. 4.8->settings-schema.json->module_sms_description->description
+msgid "Lets you remotely send SMS messages from the device"
+msgstr "Voit lähettää tekstiviestejä laitteesta"
+
+#. 5.8->settings-schema.json->module_sms_enableSendSMS->description
+#. 4.8->settings-schema.json->module_sms_enableSendSMS->description
+msgid "Enable the menu item to send an SMS message"
+msgstr "Ota käyttöön kohta tekstiviestin lähettämiseksi"
+
+#. 5.8->settings-schema.json->module_sms_enableLaunchSMSApp->description
+#. 4.8->settings-schema.json->module_sms_enableLaunchSMSApp->description
+msgid "Enable the menu item to launch the KDE Connect SMS app"
+msgstr ""
+"Ota käyttöön kohta joka käynnistää KDE Connect tekstiviestit sovelluksen"

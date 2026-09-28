@@ -1,0 +1,270 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-06-11 16:17+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: blogdron\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:122
+msgid "All workspaces"
+msgstr ""
+
+#. applet.js:150
+msgid "Edit Applications"
+msgstr "Редактировать Приложения"
+
+#. applet.js:886 applet.js:1199
+msgid "Delete"
+msgstr "Удалить"
+
+#. applet.js:887 applet.js:1200
+msgid "Edit"
+msgstr "Редактировать"
+
+#. applet.js:888 applet.js:1201 dialogs.py:111 dialogs.py:262 dialogs.py:327
+#. dialogs.py:416 widgets.py:73
+msgid "Cancel"
+msgstr "Отменить"
+
+#. dialogs.py:109 dialogs.py:261 dialogs.py:325 dialogs.py:415
+msgid "OK"
+msgstr "OK"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. dialogs.py:112 dialogs.py:263 widgets.py:47 ui/widget.glade:40
+msgid "Name"
+msgstr "Имя"
+
+#. settings-schema.json->list-applications->columns->title
+#. dialogs.py:113 dialogs.py:328
+msgid "Group"
+msgstr "Группа"
+
+#. settings-schema.json->list-applications->columns->title
+#. dialogs.py:114 widgets.py:48 ui/widget.glade:51
+msgid "Command"
+msgstr "Команда"
+
+#. dialogs.py:214 dialogs.py:305
+msgid "Valid name"
+msgstr "Допустимое имя"
+
+#. dialogs.py:217 dialogs.py:295
+msgid "The name cannot be empty"
+msgstr "Имя не может быть пустым"
+
+#. dialogs.py:222
+msgid "Valid command"
+msgstr "Допустимая команда"
+
+#. dialogs.py:225
+msgid "The command is not valid"
+msgstr "Эта команда недопустима"
+
+#. dialogs.py:299
+msgid "The name is already used"
+msgstr "Имя уже занято"
+
+#. dialogs.py:414
+msgid "Which data should be replaced from *.desktop file?"
+msgstr "Какие данные следует заменить из *.desktop файла?"
+
+#. dialogs.py:458
+msgid "really delete?"
+msgstr "точно удалить?"
+
+#. dialogs.py:459
+msgid "No"
+msgstr "Нет"
+
+#. dialogs.py:460
+msgid "Yes"
+msgstr "Да"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+#. widgets.py:46 ui/widget.glade:29
+msgid "Icon"
+msgstr "Значок"
+
+#. widgets.py:51
+msgid "Add application"
+msgstr "Добавить приложение"
+
+#. widgets.py:52
+msgid "Add new entry"
+msgstr "Добавить новый элемент"
+
+#. widgets.py:55
+msgid "Add separator"
+msgstr "Добавить разделитель"
+
+#. widgets.py:58
+msgid "Edit selected entry"
+msgstr "Редактировать выделенный элемент"
+
+#. widgets.py:61
+msgid "Duplicate selected entry"
+msgstr "Дублировать выделенный элемент"
+
+#. widgets.py:64
+msgid "Move selected entry up"
+msgstr "Поднять выделенное вверх"
+
+#. widgets.py:67
+msgid "Move selected entry down"
+msgstr "Опустить выделенное вниз"
+
+#. widgets.py:70
+msgid "Remove selected entry"
+msgstr "Удалить выделенный элемент"
+
+#. widgets.py:76
+msgid "Save?"
+msgstr "Сохранить?"
+
+#. widgets.py:77
+msgid "Save the current configuration"
+msgstr "Сохранить текущую конфигурацию"
+
+#. widgets.py:230
+msgid "Separator"
+msgstr "Разделитель"
+
+#. metadata.json->name
+msgid "App Launcher"
+msgstr "Запуск Приложений (App Launcher)"
+
+#. metadata.json->description
+msgid "A simple App Launcher"
+msgstr "Простое меню запуска приложений"
+
+#. settings-schema.json->page-applications->title
+#. settings-schema.json->section-applications->title
+msgid "Applications"
+msgstr "Приложения"
+
+#. settings-schema.json->page-settings-global->title
+#. settings-schema.json->section-settings-global->title
+msgid "Global Settings"
+msgstr "Глобальные Настройки"
+
+#. settings-schema.json->page-settings-application->title
+#. settings-schema.json->section-settings-applications->title
+msgid "Application Settings"
+msgstr "Настройки Приложений"
+
+#. settings-schema.json->visible-launcher-label->description
+msgid "Show Label"
+msgstr "Показать Название"
+
+#. settings-schema.json->launcher-label->description
+msgid "Label"
+msgstr "Название"
+
+#. settings-schema.json->custom-launcher-icon->description
+msgid "Custom Icon"
+msgstr "Пользовательский Значок"
+
+#. settings-schema.json->notification-enabled->description
+msgid "Show Notifications"
+msgstr "Показать Уведомления"
+
+#. settings-schema.json->notification-enabled->tooltip
+msgid "Show notification on application launch"
+msgstr "Показать уведомление при запуске приложения"
+
+#. settings-schema.json->notification-text->description
+msgid "Notification Text"
+msgstr "Текст Уведомления"
+
+#. settings-schema.json->notification-text->tooltip
+msgid "%s will be your application name"
+msgstr "%s будет именем вашего приложения"
+
+#. settings-schema.json->hotkeys-enabled->description
+msgid "Enable Hotkeys"
+msgstr ""
+
+#. settings-schema.json->hotkey-bindings->description
+msgid "Show menu"
+msgstr "Показать меню"
+
+#. settings-schema.json->hotkey-bindings->tooltip
+msgid "Set keybinding(s) to show the menu"
+msgstr "Задайте клавиатурное сочетание для показа меню"
+
+#. settings-schema.json->menu-at-pointer->description
+msgid "Menu at mouse position"
+msgstr ""
+
+#. settings-schema.json->menu-at-pointer->tooltip
+msgid "Show the menu next to the cursor when triggered by hotkey"
+msgstr ""
+
+#. settings-schema.json->open-by-hover->description
+msgid "Open menus by hovering over them"
+msgstr ""
+
+#. settings-schema.json->open-by-hover->tooltip
+msgid "Open all menus when you move the mouse pointer over them"
+msgstr ""
+
+#. settings-schema.json->open-by-hover-delay->description
+msgid "Hover delay"
+msgstr ""
+
+#. settings-schema.json->open-by-hover-delay->units
+msgid "milliseconds"
+msgstr ""
+
+#. settings-schema.json->bind-to-workspace->description
+msgid "Bind to workspace"
+msgstr ""
+
+#. settings-schema.json->bind-to-workspace->tooltip
+msgid "Show the applet only on the selected workspace"
+msgstr ""
+
+#. settings-schema.json->fixed-menu-width->description
+msgid "Fixed Menu Width"
+msgstr "Фиксированная Ширина Меню"
+
+#. settings-schema.json->fixed-menu-width->tooltip
+msgid "Based on the largest submenu item, to prevent menu width flickering"
+msgstr "На основе самого большого элемента меню, для избежания мерцания"
+
+#. settings-schema.json->visible-app-icons->description
+msgid "Show Application Icons"
+msgstr "Показать Значки приложений"
+
+#. settings-schema.json->visible-app-icons->tooltip
+msgid "Show Application Icons in Popup-Menu"
+msgstr "Показать Значки приложений в всплывающем меню"
+
+#. settings-schema.json->use-symbolic-icons->description
+msgid "Use Symbolic Application Icons"
+msgstr "Использовать символические значки приложений"
+
+#. settings-schema.json->use-symbolic-icons->tooltip
+msgid "Use Symbolic Application Icons, where it's possible"
+msgstr "Использовать символические значки приложений, если это возможно"
+
+#. settings-schema.json->app-icon-size->description
+msgid "Application Icon Size"
+msgstr "Размер Значка приложения"
+
+#. settings-schema.json->app-icon-size->tooltip
+msgid "Set Icon size"
+msgstr "Задайте размер значка"
