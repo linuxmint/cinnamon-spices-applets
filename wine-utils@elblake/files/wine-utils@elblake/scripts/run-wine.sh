@@ -10,14 +10,17 @@ ERROR_TITLE="$(/usr/bin/gettext "$_ERROR_TITLE")"
 
 prefix=$1; shift
 wine_cmd=$1; shift
+
+DIR=$(dirname $0)
+DIALOG=$DIR/dialog.py
+
 WINEPREFIX="$prefix" $wine_cmd "$@"
 if [ "$?" -ne 0 ]
 then
-    . "$(dirname $0)/version.sh"
+    . "$DIR/version.sh"
     cmd_used=$1
     get_wine_version
-    zenity --info --text="${ERROR_MSG}\n\n${cmd_used}\n\n${WINE_VER_MSG}${wine_version}" \
-                  --title="${ERROR_TITLE}" \
-                  --width="380"
+    $DIALOG error "${ERROR_MSG}\n\n${cmd_used}\n\n${WINE_VER_MSG}${wine_version}" \
+                  "${ERROR_TITLE}"
 fi
 
