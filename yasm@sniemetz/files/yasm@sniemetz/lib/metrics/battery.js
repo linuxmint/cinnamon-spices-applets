@@ -1,3 +1,5 @@
+const { _, padColumn } = typeof imports !== 'undefined' ? imports.lib.util : require('../util.js');
+
 function formatTimeHours(h) {
   if (h === null || h === undefined) return '—';
   const hrs = Math.floor(h);
@@ -13,26 +15,24 @@ function formatPanel(data) {
 }
 
 function formatTooltip(data, tempC) {
-  const pad = (l, v) => `${l.padEnd(14)}${v}`;
   // Tri-state: Charging → '+N.NN W', Full/idle on AC → '0.00 W' (no sign),
   //            Discharging → '-N.NN W'.
   let rateLabel, rateValue;
-  if (data.isCharging)      { rateLabel = 'Charging:'; rateValue = `+${data.powerW.toFixed(2)} W`; }
-  else if (data.isFull)     { rateLabel = 'Idle:';     rateValue = `${data.powerW.toFixed(2)} W`; }
-  else                      { rateLabel = 'Draw:';     rateValue = `-${data.powerW.toFixed(2)} W`; }
-  const timeLabel = data.isCharging ? 'Full in:' : data.isFull ? '' : 'Empty in:';
-  const lines = [];
-  lines.push(
-    pad('Charge:',    `${data.capacityPct}%`),
-    pad('Energy:',    `${data.energyWh.toFixed(1)} / ${data.energyFullWh.toFixed(1)} Wh`),
-    pad('Capacity:',  `${data.designCapacityPct.toFixed(1)}%`),
-    pad(rateLabel,    rateValue),
-    pad('Voltage:',   `${data.voltageV.toFixed(2)} V`),
-    pad('Current:',   `${data.currentA.toFixed(2)} A`),
-    pad('Temp:',      tempC != null ? `${tempC.toFixed(1)}°C` : '—'),
-  );
-  if (timeLabel) lines.push(pad(timeLabel, formatTimeHours(data.timeHours)));
-  return lines.join('\n');
+  if (data.isCharging)      { rateLabel = _("Charging:"); rateValue = `+${data.powerW.toFixed(2)} W`; }
+  else if (data.isFull)     { rateLabel = _("Idle:");     rateValue = `${data.powerW.toFixed(2)} W`; }
+  else                      { rateLabel = _("Draw:");     rateValue = `-${data.powerW.toFixed(2)} W`; }
+  const timeLabel = data.isCharging ? _("Full in:") : data.isFull ? '' : _("Empty in:");
+  const pairs = [
+    [_("Charge:"),   `${data.capacityPct}%`],
+    [_("Energy:"),   `${data.energyWh.toFixed(1)} / ${data.energyFullWh.toFixed(1)} Wh`],
+    [_("Capacity:"), `${data.designCapacityPct.toFixed(1)}%`],
+    [rateLabel,      rateValue],
+    [_("Voltage:"),  `${data.voltageV.toFixed(2)} V`],
+    [_("Current:"),  `${data.currentA.toFixed(2)} A`],
+    [_("Temp:"),     tempC != null ? `${tempC.toFixed(1)}°C` : '—'],
+  ];
+  if (timeLabel) pairs.push([timeLabel, formatTimeHours(data.timeHours)]);
+  return padColumn(pairs).join('\n');
 }
 
 function findBatteryPath(fileutil, source) {

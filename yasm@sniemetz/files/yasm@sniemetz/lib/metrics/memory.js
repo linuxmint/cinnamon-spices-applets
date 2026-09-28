@@ -26,20 +26,24 @@ function parseMeminfo(content) {
   };
 }
 
+const { _, padColumn } = typeof imports !== 'undefined' ? imports.lib.util : require('../util.js');
+
 function formatPanel(data) {
   return `${data.usedG.toFixed(1)}G | ${Math.round(data.usedPct)}%`;
 }
 
 function formatTooltip(data, history) {
-  const lines = [`<b>Memory</b>   ${data.totalG.toFixed(1)} G`];
-  if (history) { lines.push(`${'in Use'.padEnd(10)}${history}  ${Math.round(data.usedPct)}%`, ''); }
-  lines.push(
-    `${'Used:'.padEnd(10)}${data.usedG.toFixed(1)} G`,
-    `${'Free:'.padEnd(10)}${data.freeG.toFixed(1)} G`,
-    `${'Avail.:'.padEnd(10)}${data.availableG.toFixed(1)} G`,
-  );
+  const lines = [`<b>${_("Memory")}</b>   ${data.totalG.toFixed(1)} G`];
+  const inUse = _("in Use");
+  if (history) { lines.push(`${inUse.padEnd(10)}${history}  ${Math.round(data.usedPct)}%`, ''); }
+  const pairs = [
+    [_("Used:"),   `${data.usedG.toFixed(1)} G`],
+    [_("Free:"),   `${data.freeG.toFixed(1)} G`],
+    [_("Avail.:"), `${data.availableG.toFixed(1)} G`],
+  ];
   if (data.swapTotalG > 0)
-    lines.push(`${'Swap:'.padEnd(10)}${data.swapUsedG.toFixed(1)} / ${data.swapTotalG.toFixed(1)} G`);
+    pairs.push([_("Swap:"), `${data.swapUsedG.toFixed(1)} / ${data.swapTotalG.toFixed(1)} G`]);
+  lines.push(...padColumn(pairs));
   return lines.join('\n');
 }
 
