@@ -1,0 +1,8 @@
+{
+    "uuid": "audio-spectrum@crazyswede",
+    "name": "Audio Spectrum",
+    "description": "System audio spectrum visualizer for the Cinnamon desktop. Uses CAVA as its audio analysis backend; CAVA 1.0 or newer is recommended.",
+    "version": "1.1",
+    "author": "CrazySwede",
+    "website": "https://github.com/CrazySwede87/audio-spectrum-cinnamon"
+}
