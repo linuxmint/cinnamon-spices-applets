@@ -1,0 +1,6 @@
+{
+    "uuid": "mousetrail@sysrpl",
+    "name": "Mouse Trail",
+    "description": "Configure the mouse and keystroke overlay",
+    "max-instances": 1
+}
