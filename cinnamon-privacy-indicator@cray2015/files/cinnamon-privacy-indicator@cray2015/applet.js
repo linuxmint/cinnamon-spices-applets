@@ -15,7 +15,7 @@ const UUID = 'cinnamon-privacy-indicator@cray2015';
 // Bind our own translation domain rather than relying on Cinnamon's global
 // gettext setup, which only covers Cinnamon's own strings — without this,
 // a translator's po/ files for this applet would never actually apply.
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + '/locale');
 
 function _(text) {
     return Gettext.dgettext(UUID, text);
