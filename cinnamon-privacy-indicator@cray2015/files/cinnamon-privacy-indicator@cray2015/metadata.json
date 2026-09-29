@@ -6,5 +6,7 @@
     "max-instances": 1,
     "role": "notifications",
     "cinnamon-version": ["4.0"],
-    "license": "GPL-2.0-or-later"
+    "license": "GPL-2.0-or-later",
+    "author": "cray2015",
+    "website": "https://github.com/linuxmint/cinnamon-spices-applets"
 }
