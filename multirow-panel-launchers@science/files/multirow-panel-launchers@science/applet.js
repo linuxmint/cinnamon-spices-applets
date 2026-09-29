@@ -600,7 +600,26 @@ class CinnamonPanelLaunchersApplet extends Applet.Applet {
         this._reload();
     }
 
+    // Writes panel-launchers-backup.json, the copy restore-config.sh restores
+    // from after a panel reset. Rules (see Helpers.backupWriteDecision):
+    //  - Follow a symlink. The file is often a link into a dotfiles repo.
+    //    Gio.FileCreateFlags.NONE rewrites the link's target;
+    //    REPLACE_DESTINATION ("replace instead of following links") swapped the
+    //    link for a plain file on every Cinnamon start.
+    //  - Never overwrite a real backup with the schema default. A reset or
+    //    recreated instance config comes back holding the default, and
+    //    _reload() saves right away -- exactly when the backup is needed.
+    //  - Skip identical content, so an unchanged panel never touches the file.
+    // Saves are serialized: a write through a link is in place, not atomic, so
+    // overlapping saves could interleave or finish out of order.
     _saveBackup() {
+        if (this._removed)
+            return;
+        if (this._backupInFlight) {
+            this._backupDirty = true;
+            return;
+        }
+        let file, contents;
         try {
             let backup = {
                 launcherList: this.launcherList,
@@ -611,20 +630,63 @@ class CinnamonPanelLaunchersApplet extends Applet.Applet {
             };
             let dir = this.settings.file.get_parent().get_path();
             let backupPath = dir + '/panel-launchers-backup.json';
-            let contents = JSON.stringify(backup, null, 4) + '\n';
-            let file = Gio.File.new_for_path(backupPath);
-            let bytes = new GLib.Bytes(new TextEncoder().encode(contents));
-            file.replace_contents_bytes_async(
-                bytes, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null,
-                (f, res) => {
-                    try {
-                        f.replace_contents_finish(res);
-                    } catch (e) {
-                        global.logWarning('multirow-panel-launchers: backup save failed: ' + e);
-                    }
-                });
+            contents = JSON.stringify(backup, null, 4) + '\n';
+            file = Gio.File.new_for_path(backupPath);
         } catch (e) {
             global.logWarning('multirow-panel-launchers: backup save failed: ' + e);
+            return;
+        }
+        this._backupInFlight = true;
+        file.load_contents_async(null, (f, res) => {
+            let existing = null;
+            try {
+                let [, bytes] = f.load_contents_finish(res);
+                existing = new TextDecoder().decode(bytes);
+            } catch (e) {
+                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                    // Unreadable but present: don't risk overwriting it.
+                    global.logWarning('multirow-panel-launchers: backup read failed, not saving: ' + e);
+                    this._backupFinished();
+                    return;
+                }
+            }
+            let decision = Helpers.backupWriteDecision(contents, existing, Helpers.DEFAULT_LAUNCHERS);
+            if (decision === 'keep-existing' && !this._backupKeptLogged) {
+                this._backupKeptLogged = true;
+                global.log('multirow-panel-launchers: kept ' + f.get_path() +
+                    ': the launcher list is the default, which is what a panel reset looks like. ' +
+                    'Run restore-config.sh to restore the backed-up list, or change the list to replace it.');
+            }
+            if (decision !== 'write') {
+                this._backupFinished();
+                return;
+            }
+            try {
+                let bytes = new GLib.Bytes(new TextEncoder().encode(contents));
+                f.replace_contents_bytes_async(
+                    bytes, null, false, Gio.FileCreateFlags.NONE, null,
+                    (f2, res2) => {
+                        try {
+                            f2.replace_contents_finish(res2);
+                        } catch (e) {
+                            global.logWarning('multirow-panel-launchers: backup save failed: ' + e);
+                        }
+                        this._backupFinished();
+                    });
+            } catch (e) {
+                global.logWarning('multirow-panel-launchers: backup save failed: ' + e);
+                this._backupFinished();
+            }
+        });
+    }
+
+    // End of one save: if the config changed meanwhile, save once more with
+    // the latest state.
+    _backupFinished() {
+        this._backupInFlight = false;
+        if (this._backupDirty) {
+            this._backupDirty = false;
+            this._saveBackup();
         }
     }
 
@@ -1418,6 +1480,8 @@ class CinnamonPanelLaunchersApplet extends Applet.Applet {
     }
 
     on_applet_removed_from_panel() {
+        // Stops _saveBackup re-entering from a still-running async callback.
+        this._removed = true;
         if (this._verifySourceId) {
             GLib.source_remove(this._verifySourceId);
             this._verifySourceId = 0;
@@ -1426,6 +1490,10 @@ class CinnamonPanelLaunchersApplet extends Applet.Applet {
         this._launchers.forEach(l => l.destroy());
         this._launchers = [];
         this.signals.disconnectAllSignals();
+        // Drop the settings bindings and file monitor. Without this an unloaded
+        // instance (ReloadXlet, remove + re-add) keeps reacting to every
+        // settings change with the code it was loaded with.
+        this.settings.finalize();
     }
 }
 Signals.addSignalMethods(CinnamonPanelLaunchersApplet.prototype);
