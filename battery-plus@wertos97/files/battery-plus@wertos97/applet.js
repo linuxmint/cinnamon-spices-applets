@@ -140,7 +140,7 @@ function formatClock(epochSeconds) {
     let d = new Date(epochSeconds * 1000);
     let h = d.getHours();
     let m = d.getMinutes();
-    return h + ":" + (m < 10 ? "0" + m : m);
+    return (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m);
 }
 
 function stateToString(state) {
@@ -1354,6 +1354,7 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
             cr.showText(_("Collecting battery data…"));
             if (this._minmaxLabel)
                 this._minmaxLabel.set_text("");
+            cr.$dispose();
             return;
         }
 
@@ -1511,6 +1512,7 @@ class BatteryPlusApplet extends Applet.TextIconApplet {
             cr.moveTo(label.tx, h - 4);
             cr.showText(label.text);
         }
+        cr.$dispose();
     }
 }
 
