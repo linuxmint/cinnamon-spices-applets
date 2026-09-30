@@ -586,17 +586,7 @@ export function MillimeterToUserUnits(mm: number, distanceUnit: DistanceUnits): 
 // --------------------------------------------------------------
 // Converters
 
-export function KPHtoMPS(speed: number | null): number {
-	if (speed == null) return 0;
-	return speed / WEATHER_CONV_KPH_IN_MPS;
-};
-
-export function CelsiusToKelvin(celsius: number): number;
-export function CelsiusToKelvin(celsius: number | null): number | null;
-export function CelsiusToKelvin(celsius: number | null): number | null {
-	if (celsius == null) return null;
-	return (celsius + 273.15);
-}
+export { CelsiusToKelvin, KPHtoMPS } from "./lib/unitConversions";
 
 export function FahrenheitToKelvin(fahrenheit: number): number;
 export function FahrenheitToKelvin(fahrenheit: number | null): number | null;

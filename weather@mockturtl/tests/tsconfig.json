@@ -1,0 +1,28 @@
+{
+  "extends": "../src/3_8/tsconfig.json",
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "verbatimModuleSyntax": false,
+    "isolatedModules": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "rootDir": "..",
+    "outDir": "./.build",
+    "noEmit": false,
+    "noEmitOnError": true,
+    "lib": ["es2019", "dom"]
+  },
+  "include": [
+    "./**/*.ts",
+    "../src/3_8/config-redaction.ts",
+    "../src/3_8/lib/httpLog.ts",
+    "../src/3_8/lib/precipitation.ts",
+    "../src/3_8/lib/unitConversions.ts",
+    "../src/3_8/providers/qweather/**/*.ts",
+    "../src/3_8/providers/caiyun/**/*.ts",
+    "../src/3_8/types.ts",
+    "../src/3_8/weather-data.ts"
+  ]
+}
