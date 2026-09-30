@@ -161,7 +161,7 @@ class ChatGPTLimitsApplet extends Applet.TextIconApplet {
                          "color_critical", "color_time", "color_empty", "color_panel_text",
                          "popup_card_color", "popup_track_color", "popup_text_color",
                          "popup_bar_height", "popup_card_padding", "popup_card_radius",
-                         "popup_card_spacing", "popup_width", "theme_preset",
+                          "popup_card_spacing", "popup_width", "theme_preset",
                           "panel_show_q5", "panel_show_t5", "panel_show_q7", "panel_show_t7",
                           "panel_bar_order", "auto_weekly_fallback",
                           "bar_radius", "panel_bold_text",
@@ -339,9 +339,7 @@ class ChatGPTLimitsApplet extends Applet.TextIconApplet {
                 Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE);
         } catch (e) {
             this._loading = false;
-            if (!this._windows.length)
-                this._error = "backend";
-            else if (!this._error)
+            if (!this._windows.length || !this._error)
                 this._error = "backend";
             this._updateDisplay();
             this._scheduleQuickRetry();
