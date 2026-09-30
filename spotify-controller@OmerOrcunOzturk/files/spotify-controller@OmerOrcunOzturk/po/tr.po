@@ -1,0 +1,58 @@
+# Turkish translation for spotify-controller@OmerOrcunOzturk.
+# This file is distributed under the same license as the spotify-controller@OmerOrcunOzturk package.
+# OmerOrcunOzturk, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: spotify-controller@OmerOrcunOzturk 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-09-30 19:25+0300\n"
+"PO-Revision-Date: 2026-09-30 19:25+0300\n"
+"Last-Translator: OmerOrcunOzturk\n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:105
+msgid "Play / Pause"
+msgstr "Oynat / Duraklat"
+
+#: applet.js:107
+msgid "Previous"
+msgstr "Önceki"
+
+#: applet.js:109
+msgid "Next"
+msgstr "Sonraki"
+
+#: applet.js:112
+msgid "Open / Show Spotify"
+msgstr "Spotify'ı Aç / Öne Getir"
+
+#: applet.js:114
+msgid "Quit Spotify"
+msgstr "Spotify'ı Kapat"
+
+#: applet.js:139
+msgid "Spotify — Closed"
+msgstr "Spotify — Kapalı"
+
+#: applet.js:139
+msgid "Spotify — Not installed"
+msgstr "Spotify — Kurulu değil"
+
+#. metadata.json->name
+msgid "Spotify Controller"
+msgstr "Spotify Kontrolcüsü"
+
+#. metadata.json->description
+msgid ""
+"Launch, show and control Spotify from the panel. Shows the current song in "
+"the tooltip."
+msgstr ""
+"Spotify'ı panelden başlatın, öne getirin ve kontrol edin. Çalan şarkıyı "
+"ipucunda gösterir."
