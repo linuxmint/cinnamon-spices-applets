@@ -83,8 +83,8 @@ var MetricsManager = class MetricsManager {
       const actual = (fileutil.readFile(`/sys/class/hwmon/hwmon${h.hwmon}/name`) || '').trim();
       return actual && (!h.name || actual === h.name);
     });
-    if (valid.length > 0) return valid.map(h => `/sys/class/hwmon/hwmon${h.hwmon}`);
-    return FanMetric.findFanChips(fileutil).map(c => c.path);
+    if (valid.length > 0) return valid.map(h => ({ path: `/sys/class/hwmon/hwmon${h.hwmon}`, name: h.name }));
+    return FanMetric.findFanChips(fileutil).map(c => ({ path: c.path, name: c.name }));
   }
 
   _resolveHwmonPaths() {
