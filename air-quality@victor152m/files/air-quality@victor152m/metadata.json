@@ -1,0 +1,7 @@
+{
+  "version": "0.1.0",
+  "uuid": "air-quality@victor152m",
+  "name": "Air Quality",
+  "max-instances": 10,
+  "description": "Monitors air quality near user-defined coordinates. It displays PM2.5 levels and an air quality label based on these values."
+}
