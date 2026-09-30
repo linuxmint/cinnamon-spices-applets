@@ -1,6 +1,7 @@
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
+const Util = imports.misc.util;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
@@ -15,7 +16,6 @@ const INSTALL_TYPES = [
 ];
 // WM_CLASS of the Spotify window (same for all install types).
 const WM_CLASS = "spotify";
-const FALLBACK_ICON = "multimedia-player-symbolic";
 
 // MPRIS D-Bus endpoint (same for all install types).
 const MPRIS_NAME = "org.mpris.MediaPlayer2.spotify";
@@ -25,7 +25,7 @@ const MPRIS_PLAYER_IFACE = "org.mpris.MediaPlayer2.Player";
 const PROPERTIES_IFACE = "org.freedesktop.DBus.Properties";
 
 // Translations: Spices compiles po/*.po into ~/.local/share/locale.
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -89,13 +89,8 @@ class SpotifyApplet extends Applet.IconApplet {
     // --- Icon, menu, tooltip ---------------------------------------------
 
     _setIcon(appletPath) {
-        let iconPath = `${appletPath}/icons/spotify-symbolic.svg`;
-        if (GLib.file_test(iconPath, GLib.FileTest.EXISTS)) {
-            this.set_applet_icon_symbolic_path(iconPath);
-        } else {
-            logError(`Icon not found at ${iconPath}, using fallback`);
-            this.set_applet_icon_symbolic_name(FALLBACK_ICON);
-        }
+        // Shipped with the applet, so no existence check is needed.
+        this.set_applet_icon_symbolic_path(`${appletPath}/icons/spotify-symbolic.svg`);
     }
 
     _buildMenu() {
@@ -253,7 +248,7 @@ class SpotifyApplet extends Applet.IconApplet {
             if (this._install.appInfo)
                 this._install.appInfo.launch([], global.create_app_launch_context());
             else
-                GLib.spawn_command_line_async("spotify");
+                Util.trySpawn(["spotify"]);
         } catch (e) {
             logError(`Failed to launch Spotify (${this._install.kind}): ${e.message}`);
         }
