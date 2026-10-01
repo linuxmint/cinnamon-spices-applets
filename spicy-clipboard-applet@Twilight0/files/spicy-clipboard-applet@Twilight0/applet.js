@@ -59,6 +59,7 @@ MyApplet.prototype = {
 
             // Bind settings
             this.settings = new Settings.AppletSettings(this, metadata.uuid, this.instance_id);
+            this.settings.bind("openShortcut", "openShortcut", this._onShortcutChanged);
             this.settings.bind("historySize", "_historySize", this.settings_changed);
             this.settings.bind("autoPaste", "_autoPaste", this.settings_changed);
             this.settings.bind("pasteTool", "_pasteTool", this.settings_changed);
@@ -67,6 +68,8 @@ MyApplet.prototype = {
             this.settings.bind("leftClickAction", "_leftClickAction", this.settings_changed);
             this.settings.bind("middleClickAction", "_middleClickAction", this.settings_changed);
             this.settings.bind("rightClickAction", "_rightClickAction", this.settings_changed);
+
+            this._onShortcutChanged();
 
             // Set up UI Menu
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -78,6 +81,7 @@ MyApplet.prototype = {
 
             // Setup Clipboard Monitor
             this._clipboard = St.Clipboard.get_default();
+            this._isCheckingImage = false;
             this._monitorTimeout = Mainloop.timeout_add(300, () => this._monitorClipboard());
         } catch (e) {
             global.logError(e);
@@ -117,6 +121,9 @@ MyApplet.prototype = {
     },
 
     _checkImageClipboard: function () {
+        if (this._isCheckingImage) return;
+        this._isCheckingImage = true;
+
         let cmd = [
             "bash",
             "-c",
@@ -149,11 +156,16 @@ MyApplet.prototype = {
                     }
                 } catch (e) {
                     // Ignore stream read errors
+                } finally {
+                    this._isCheckingImage = false;
                 }
             });
             
-            proc.wait_async(null, null);
+            proc.wait_async(null, () => {
+                this._isCheckingImage = false;
+            });
         } catch (e) {
+            this._isCheckingImage = false;
             global.logError("Failed to check image clipboard: " + e);
         }
     },
@@ -209,22 +221,44 @@ MyApplet.prototype = {
         return label;
     },
 
+    _ensureDirAsync: function (dirFile, callback) {
+        dirFile.make_directory_async(GLib.PRIORITY_DEFAULT, null, (dir, res) => {
+            try {
+                dir.make_directory_finish(res);
+                callback(true);
+            } catch (e) {
+                if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                    callback(true);
+                } else if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                    let parent = dirFile.get_parent();
+                    if (parent) {
+                        this._ensureDirAsync(parent, (ok) => {
+                            if (ok) {
+                                this._ensureDirAsync(dirFile, callback);
+                            } else {
+                                callback(false);
+                            }
+                        });
+                    } else {
+                        callback(false);
+                    }
+                } else {
+                    global.logError("Failed to create directory: " + e);
+                    callback(false);
+                }
+            }
+        });
+    },
+
     _saveHistory: function () {
         let configDir = GLib.get_user_config_dir() + "/cinnamon/spices/" + UUID;
         let historyPath = configDir + "/history.dat";
         let file = Gio.File.new_for_path(historyPath);
         let parent = file.get_parent();
-        
-        parent.make_directory_with_parents_async(GLib.PRIORITY_DEFAULT, null, (parentDir, dir_res) => {
-            try {
-                parentDir.make_directory_with_parents_finish(dir_res);
-            } catch (err) {
-                if (!err.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
-                    global.logError("Failed to create history directory: " + err);
-                    return;
-                }
-            }
-            
+
+        this._ensureDirAsync(parent, (ok) => {
+            if (!ok) return;
+
             try {
                 let data = JSON.stringify(this._history, null, 2);
                 let bytes = GLib.Bytes.new(data);
@@ -277,6 +311,27 @@ MyApplet.prototype = {
                 this._history = [];
             }
         });
+    },
+
+    _onShortcutChanged: function () {
+        if (this._keybindingId) {
+            Main.keybindingManager.removeHotKey(this._keybindingId);
+            this._keybindingId = null;
+        }
+
+        if (this.openShortcut && this.openShortcut !== "unassigned") {
+            this._keybindingId = UUID + "-" + this.instance_id;
+            Main.keybindingManager.addHotKey(
+                this._keybindingId,
+                this.openShortcut,
+                () => this._onOpenShortcut()
+            );
+        }
+    },
+
+    _onOpenShortcut: function () {
+        this._buildMenu();
+        this.menu.toggle();
     },
 
     on_applet_clicked: function (event) {
@@ -803,6 +858,10 @@ MyApplet.prototype = {
         if (this._monitorTimeout) {
             Mainloop.source_remove(this._monitorTimeout);
             this._monitorTimeout = null;
+        }
+        if (this._keybindingId) {
+            Main.keybindingManager.removeHotKey(this._keybindingId);
+            this._keybindingId = null;
         }
     }
 };
