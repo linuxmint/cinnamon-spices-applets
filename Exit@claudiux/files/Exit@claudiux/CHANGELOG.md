@@ -1,3 +1,9 @@
+### v1.8.6~20260527
+* Ready for Linux Mint 23.
+
+### v1.8.5~20260407
+* Added option: Lock On Suspend.
+
 ### v1.8.4~20251212
 * No longer blocked by systemd-inhibit.
 * Fixes [#8001](https://github.com/linuxmint/cinnamon-spices-applets/issues/8001)

@@ -352,11 +352,11 @@ class Eye extends Applet.Applet {
 		if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
 			this.actor.set_style("padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;");
 			height = (Configs.AREA_DEFAULT_WIDTH + 2 * this.margin) * global.ui_scale;
-			width = this.panel.height;
+			width = this.panel.get_width ? this.panel.get_width() : this._panelHeight;
 		} else {
 			this.actor.set_style("padding-left: 0px; padding-right: 0px; margin-left: 0px; margin-right: 0px;");
 			width = (Configs.AREA_DEFAULT_WIDTH + 2 * this.margin) * global.ui_scale;
-			height = this.panel.height;
+			height = this.panel.get_height ? this.panel.get_height() : this._panelHeight;
 		}
 
 		this.area.set_width(width);

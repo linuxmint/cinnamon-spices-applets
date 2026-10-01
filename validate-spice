@@ -77,6 +77,8 @@ def validate_xlet(uuid):
             for field in ['author']:
                 if field not in info:
                     raise CheckError("[%s] Missing field '%s' in info.json" % (uuid, field))
+                elif any(char.isspace() for char in info[field]):
+                    raise CheckError(f"Invalid whitespace in {field} '{info[field]}'")
 
         # check metadata.json
         with open("files/%s/metadata.json" % uuid) as file:
@@ -151,6 +153,8 @@ def exit_status(valid):
 if sys.argv[1] == "--all":
     valid = True
     for uuid in os.listdir("."):
+        if any(char.isspace() for char in uuid):
+            raise CheckError(f"Invalid whitespace in path '{uuid}'")
         if os.path.isdir(uuid) and not uuid.startswith("."):
             valid = validate_xlet(uuid) and valid
 else:

@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-01-07 23:43+0100\n"
-"PO-Revision-Date: 2026-01-07 20:14-0300\n"
+"POT-Creation-Date: 2026-03-29 12:10+0200\n"
+"PO-Revision-Date: 2026-03-29 10:39-0300\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,79 +17,79 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
-#. applet.js:46 applet.js:654
-msgid "SYSTEM"
-msgstr "SISTEMA"
-
-#. applet.js:46 applet.js:694
-msgid "FAVORITES"
-msgstr "FAVORITOS"
-
-#. applet.js:46 applet.js:725
-msgid "APPLICATIONS"
-msgstr "APLICACIONES"
-
-#. applet.js:46 applet.js:756
-msgid "RECENT DOCUMENTS"
-msgstr "DOCUMENTOS RECIENTES"
-
-#. applet.js:46 applet.js:800
-msgid "CUSTOM"
-msgstr "PERSONALIZADO"
-
-#. applet.js:189
+#. applet.js:190
 msgid "(Right click to open folder)"
 msgstr "(Haga clic con el botón derecho para abrir la carpeta)"
 
 #. metadata.json->name
-#. applet.js:317
+#. applet.js:323
 msgid "Direct"
 msgstr "Directo"
 
-#. applet.js:624
+#. applet.js:631
 msgid "Search Home Folder"
 msgstr "Buscar en la carpeta personal"
 
-#. applet.js:631 applet.js:671 applet.js:702 applet.js:733 applet.js:764
-#. applet.js:808
+#. applet.js:638 applet.js:678 applet.js:709 applet.js:740 applet.js:771
+#. applet.js:815
 msgid "Configure"
 msgstr "Configurar"
 
-#. applet.js:664
+#. applet.js:661
+msgid "SYSTEM"
+msgstr "SISTEMA"
+
+#. applet.js:671
 msgid "Search File System"
 msgstr "Buscar en el sistema de archivos"
 
-#. applet.js:778
+#. applet.js:701
+msgid "FAVORITES"
+msgstr "FAVORITOS"
+
+#. applet.js:732
+msgid "APPLICATIONS"
+msgstr "APLICACIONES"
+
+#. applet.js:763
+msgid "RECENT DOCUMENTS"
+msgstr "DOCUMENTOS RECIENTES"
+
+#. applet.js:785
 msgid "Clear"
 msgstr "Limpiar"
 
-#. applet.js:785
+#. applet.js:792
 msgid "Recent"
 msgstr "Recientes"
 
-#. applet.js:862
+#. applet.js:807
+msgid "CUSTOM"
+msgstr "PERSONALIZADO"
+
+#. applet.js:869
 msgid "Computer"
 msgstr "PC"
 
-#. applet.js:868
+#. applet.js:875
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#. applet.js:885
+#. applet.js:892
 msgid "Network"
 msgstr "Red"
 
-#. applet.js:900
+#. applet.js:908
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#. applet.js:907
+#. applet.js:915
 msgid "Quit"
 msgstr "Salir"
 
-#. applet.js:1215
+#. applet.js:1224
 msgid "Trash"
 msgstr "Papelera"
 
@@ -385,6 +385,10 @@ msgstr "Sólo mostrar volúmenes montados"
 #. settings-schema.json->showNetwork->description
 msgid "Show network"
 msgstr "Mostrar Red"
+
+#. settings-schema.json->showSession->description
+msgid "Show Logout and Quit"
+msgstr "Mostrar Cerrar sesión y Salir"
 
 #. settings-schema.json->showFavorites->description
 msgid "Show favorite documents"

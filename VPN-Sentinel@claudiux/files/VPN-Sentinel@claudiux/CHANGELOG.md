@@ -1,3 +1,6 @@
+### v2.5.2~20260508
+  * Installing dependencies: Use pkgcli when available.
+
 ### v2.5.1~20260207
   * Updates checkDependencies.js for Arch.
 

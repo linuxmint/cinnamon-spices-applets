@@ -28,12 +28,22 @@ const {
   app_info_get_default_for_type,
   FileQueryInfoFlags,
   FileType,
-  DataInputStream,
-  UnixInputStream,
+  //~ DataInputStream,
+  //~ UnixInputStream,
   Settings
 } = imports.gi.Gio; //Gio
 
-const {
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
+var {
   spawnCommandLineAsyncIO,
   spawnCommandLineAsync,
   spawnCommandLine,
@@ -42,7 +52,7 @@ const {
   //killall,
   setTimeout,
   clearTimeout
-} = require("./lib/util"); //Util
+} = _require("./lib/util"); //Util
 
 const ByteArray = imports.byteArray;
 const to_string = function(data) {
@@ -50,15 +60,6 @@ const to_string = function(data) {
 }
 
 const HOME_DIR = get_home_dir();
-//~ let METADATA_JSON_PATH;
-//~ if (file_test("./metadata.json", FileTest.EXISTS)) {
-  //~ METADATA_JSON_PATH = "./metadata.json"
-//~ } else {
-  //~ METADATA_JSON_PATH = "../metadata.json"
-//~ }
-
-//~ const METADATA = JSON.parse(to_string(file_get_contents(METADATA_JSON_PATH)[1]));
-//~ const UUID = METADATA.uuid;
 const UUID = "Radio3.0@claudiux";
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const APPLET_ICON = APPLET_DIR + "/icon.svg";
@@ -116,7 +117,9 @@ function install_translations() {
 //~ file_set_contents("./RESULT.txt", ""+result);
 //~ if (!result) install_translations();
 
-module.exports = {
-  are_translations_installed,
-  install_translations
+if (!Extension.getCurrentExtension) {
+  module.exports = {
+    are_translations_installed,
+    install_translations
+  }
 }

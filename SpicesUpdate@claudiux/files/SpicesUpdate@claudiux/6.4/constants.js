@@ -2,10 +2,19 @@
 const Gettext = imports.gettext; // ++ Needed for translations
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
 
 const {
   versionCompare
-} = require("./utils");
+} = _require("./utils");
 
 const UUID="SpicesUpdate@claudiux";
 
@@ -186,6 +195,7 @@ const EXP2 = {
 
 const EXP3 = _("For private Spices, both boxes will be considered unchecked.") + "\n" + _("When all your choices are made, click the Refresh button.");
 
+if (!Extension.getCurrentExtension)
 module.exports = {
   UUID,
   HOME_DIR,

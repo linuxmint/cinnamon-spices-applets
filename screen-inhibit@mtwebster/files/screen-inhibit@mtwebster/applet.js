@@ -6,11 +6,21 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
 const { PopupSwitchMenuItem, PopupSeparatorMenuItem } = imports.ui.popupMenu;
-const Mainloop = imports.mainloop;
+//~ const Mainloop = imports.mainloop;
+const {
+  timeout_add_seconds,
+  setInterval,
+  clearInterval,
+  source_exists,
+  source_remove,
+  remove_all_sources
+} = require("./lib/mainloopTools");
 
 const UUID = 'screen-inhibit@mtwebster';
 const Gettext = imports.gettext;
 const HOME_DIR = GLib.get_home_dir();
+const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const ICONS_DIR = APPLET_DIR + "/icons";
 
 Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale")
 
@@ -49,9 +59,46 @@ function SessionManager(initCallback, cancellable) {
     return new SessionManagerProxy(Gio.DBus.session, 'org.gnome.SessionManager', '/org/gnome/SessionManager', initCallback, cancellable);
 }
 
+const versionCompare = (left, right) => {
+    if (typeof left + typeof right != "stringstring")
+        return false;
+    
+    let a = left.split(".");
+    let b = right.split(".");
+    let len = Math.min(a.length, b.length);
+    
+    for (let i = 0; i < len; i++) {
+        let l = parseInt(a[i], 10);
+        let r = parseInt(b[i], 10);
+        if (isNaN(l) || isNaN(r))
+            return false;
+        if (l > r) {
+            return 1;
+        } else if (l < r) {
+            return -1;
+        }
+    }
+    
+    return 0;
+};
+
+//~ const Cin_6dot4_or_more = versionCompare(GLib.getenv('CINNAMON_VERSION'), "6.4") >= 0;
+
 const POWER_SCHEMA = "org.cinnamon.settings-daemon.plugins.power";
-const SLEEP_DISPLAY_AC_KEY = "sleep-display-ac";
-const SLEEP_INACTIVE_AC_TIMEOUT_KEY = "sleep-inactive-ac-timeout";
+const POWER_SLEEP_DISPLAY_AC_KEY = "sleep-display-ac";
+const POWER_SLEEP_INACTIVE_AC_TIMEOUT_KEY = "sleep-inactive-ac-timeout";
+
+const SCREENSAVER_SCHEMA = "org.cinnamon.desktop.session";
+const SCREENSAVER_IDLE_DELAY_KEY = "idle-delay";
+
+//~ var POWER_SCHEMA2 = "org.cinnamon.settings-daemon.plugins.power";
+//~ if (Cin_6dot4_or_more)
+    //~ POWER_SCHEMA2 = "org.cinnamon.desktop.session";
+
+//~ var SLEEP_DISPLAY_AC_KEY = "sleep-display-ac";
+//~ if (Cin_6dot4_or_more)
+    //~ SLEEP_DISPLAY_AC_KEY = "idle-delay";
+
 
 const SCREENSAVER_COMMAND = GLib.find_program_in_path("cinnamon-screensaver-command");
 
@@ -64,6 +111,7 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
         this.icon_path_off = false;
 
         this.power_settings = new Gio.Settings({ schema_id: POWER_SCHEMA });
+        this.screensaver_settings = new Gio.Settings({ schema_id: SCREENSAVER_SCHEMA });
 
         try {
             this.settings = new Settings.AppletSettings(this, this.uuid, instance_id);
@@ -100,6 +148,8 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
                                 "old_sleep_inactive_ac_timeout");
             this.settings.bind( "starting-time-in-minutes",
                                 "starting_time_in_minutes");
+            this.settings.bind( "old-idle-delay",
+                                "old_idle_delay");
         } catch (e) {
             this.settings = null;
             this.off_icon = "screen-inhibit-symbolic"; // "video-display-symbolic";
@@ -109,8 +159,9 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.icon_path_off = false;
             this.locktype = "normal";
             this.lockinterval = 5;
-            this.old_sleep_display_ac = 0;
-            this.old_sleep_inactive_ac_timeout = 0;
+            this.old_sleep_display_ac = this.sleep_display_ac;
+            this.old_sleep_inactive_ac_timeout = this.sleep_inactive_ac_timeout;
+            this.old_idle_delay = this.idle_delay;
         }
 
         try {
@@ -120,9 +171,12 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this._inhibit = undefined;
             this.inhibited = false;
 
-            SessionManager(Lang.bind(this, function(obj, err) {
+            //~ SessionManager(Lang.bind(this, function(obj, err) {
+                //~ this._sessionProxy = obj;
+            //~ }));
+            SessionManager((obj, err) => {
                 this._sessionProxy = obj;
-            }));
+            });
 
             this._onInhibit = function(cookie) {
                 this._inhibit = cookie;
@@ -132,14 +186,18 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
         }
 
         this.screen_menu_item = new Applet.MenuItem(_("Screensaver settings"), 'system-run-symbolic',
-                                                    Lang.bind(this, this._screen_menu));
+                                                    () => { this._screen_menu() });
         this._applet_context_menu.addMenuItem(this.screen_menu_item);
+
+        this.power_menu_item = new Applet.MenuItem(_("Power settings"), 'system-run-symbolic',
+                                                    () => { this._power_menu() });
+        this._applet_context_menu.addMenuItem(this.power_menu_item);
 
         this.startup_menu_item = new PopupSwitchMenuItem(_("Inhibit screensaver at startup"),
             this.inhibit_at_startup, null);
-        this.startup_menu_item.connect("toggled", Lang.bind(this, function() {
+        this.startup_menu_item.connect("toggled", () => {
           this.inhibit_at_startup = !this.inhibit_at_startup;
-        }));
+        });
         this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
         this._applet_context_menu.addMenuItem(this.startup_menu_item);
 
@@ -152,8 +210,9 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
     }
 
     loop() {
-        if (this.loopId) {
-            Mainloop.source_remove(this.loopId);
+        if (source_exists(this.loopId)) {
+            //~ Mainloop.source_remove(this.loopId);
+            source_remove(this.loopId);
             this.loopId = null;
         }
 
@@ -178,7 +237,8 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             }
         }
 
-        this.loopId = Mainloop.timeout_add(this.lockinterval * 60000, this.loop.bind(this));
+        //~ this.loopId = Mainloop.timeout_add(this.lockinterval * 60000, this.loop.bind(this));
+        this.loopId = timeout_add_seconds(this.lockinterval * 60, this.loop.bind(this));
     }
 
     is_end_time() {
@@ -208,7 +268,7 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
 
     on_settings_changed() {
         if (this.keybinding != null)
-            Main.keybindingManager.addHotKey(this.uuid, this.keybinding, Lang.bind(this, this.on_applet_clicked));
+            Main.keybindingManager.addHotKey(this.uuid, this.keybinding, () => { this.on_applet_clicked() });
 
         let on_file = Gio.file_new_for_path(this.on_icon);
         let off_file = Gio.file_new_for_path(this.off_icon);
@@ -222,11 +282,16 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
     _screen_menu() {
         Util.spawn(['cinnamon-settings', 'screensaver']);
     }
+    
+    _power_menu() {
+        Util.spawn(['cinnamon-settings', 'power']);
+    }
 
     on_applet_clicked(event) {
         if (this._inhibit) {
             this.sleep_display_ac = this.old_sleep_display_ac;
             this.sleep_inactive_ac_timeout = this.old_sleep_inactive_ac_timeout;
+            this.idle_delay = this.old_idle_delay;
             this._sessionProxy.UninhibitRemote(this._inhibit);
             if (SCREENSAVER_COMMAND)
                 Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -a; "+SCREENSAVER_COMMAND+" -d");
@@ -234,8 +299,15 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.set_applet_tooltip(ALLOW_TT);
             this.inhibited = false;
         } else {
+			if (this.sleep_display_ac != 0)
+				this.old_sleep_display_ac = this.sleep_display_ac;
+			if (this.sleep_inactive_ac_timeout != 0)
+				this.old_sleep_inactive_ac_timeout = this.sleep_inactive_ac_timeout;
+            if (this.idle_delay != 0)
+                this.old_idle_delay = this.idle_delay;
             this.sleep_display_ac = 0;
             this.sleep_inactive_ac_timeout = 0;
+            this.idle_delay = 0;
             try {
                 this._sessionProxy.InhibitRemote(
                     "inhibitor-screen-inhibit@mtwebster",
@@ -304,47 +376,83 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
 
         if (this.sleep_inactive_ac_timeout != 0 && this.sleep_inactive_ac_timeout != this.old_sleep_inactive_ac_timeout)
             this.old_sleep_inactive_ac_timeout = this.sleep_inactive_ac_timeout;
+            
+        if (this.idle_delay != 0 && this.idle_delay != this.old_idle_delay)
+            this.old_idle_delay = this.idle_delay;
 
         if (this.inhibit_at_startup && !this.inhibited) {
             let id = setInterval ( () => {
                 if (this._sessionProxy) { // Ensures that this._sessionProxy is defined.
+                    clearInterval(id);
                     if (!this.inhibited)
                         this.on_applet_clicked();
-                    clearTimeout(id);
                 }
-            }, (this.seconds_after_startup === 0) ? 300 : this.seconds_after_startup*1000);
+            }, (this.seconds_after_startup === 0) ? 300 : 1000 * this.seconds_after_startup);
         }
     }
 
     on_applet_removed_from_panel() {
         this.sleep_display_ac = this.old_sleep_display_ac;
         this.sleep_inactive_ac_timeout = this.old_sleep_inactive_ac_timeout;
-        if (this.loopId) {
-            Mainloop.source_remove(this.loopId);
+        this.idle_delay = this.old_idle_delay;
+        if (source_exists(this.loopId)) {
+            //~ Mainloop.source_remove(this.loopId);
+            source_remove(this.loopId);
             this.loopId = null;
         }
+        remove_all_sources();
     }
 
     reset_to_default_icons() {
-        this.off_icon = HOME_DIR + "/.local/share/cinnamon/applets/screen-inhibit@mtwebster/icons/screen-inhibit-symbolic.svg";
-        this.on_icon = HOME_DIR + "/.local/share/cinnamon/applets/screen-inhibit@mtwebster/icons/screen-inhibit-active-symbolic.svg";
+        this.off_icon = ICONS_DIR + "/screen-inhibit-symbolic.svg";
+        this.on_icon = ICONS_DIR + "/screen-inhibit-active-symbolic.svg";
         this.on_settings_changed();
     }
 
     get sleep_display_ac() {
-        return this.power_settings.get_int(SLEEP_DISPLAY_AC_KEY);
+        //~ return Math.abs(this.power_settings.get_value(POWER_SLEEP_DISPLAY_AC_KEY));
+        var ret;
+        try {
+            ret = this.power_settings.get_int(POWER_SLEEP_DISPLAY_AC_KEY);
+        } catch(e) {
+            ret = this.power_settings.get_uint(POWER_SLEEP_DISPLAY_AC_KEY);
+        }
+        return ret;
     }
 
     set sleep_display_ac(value) {
-        this.power_settings.set_int(SLEEP_DISPLAY_AC_KEY, value);
+        //~ this.power_settings.set_value(POWER_SLEEP_DISPLAY_AC_KEY, Math.abs(value));
+        try {
+            this.power_settings.set_int(POWER_SLEEP_DISPLAY_AC_KEY, Math.abs(value));
+        } catch(e) {
+            this.power_settings.set_uint(POWER_SLEEP_DISPLAY_AC_KEY, Math.abs(value));
+        }
     }
 
     get sleep_inactive_ac_timeout() {
-        return this.power_settings.get_int(SLEEP_INACTIVE_AC_TIMEOUT_KEY);
+        return this.power_settings.get_int(POWER_SLEEP_INACTIVE_AC_TIMEOUT_KEY);
     }
 
     set sleep_inactive_ac_timeout(value) {
-        this.power_settings.set_int(SLEEP_INACTIVE_AC_TIMEOUT_KEY, value);
+        this.power_settings.set_int(POWER_SLEEP_INACTIVE_AC_TIMEOUT_KEY, Math.abs(value));
+    }
+    
+    get idle_delay() {
+        var ret;
+        try {
+            ret = this.screensaver_settings.get_uint(SCREENSAVER_IDLE_DELAY_KEY);
+        } catch(e) {
+            ret = this.screensaver_settings.get_int(SCREENSAVER_IDLE_DELAY_KEY);
+        }
+        return ret;
+    }
+    
+    set idle_delay(value) {
+        try {
+            this.screensaver_settings.set_uint(SCREENSAVER_IDLE_DELAY_KEY, Math.abs(value));
+        } catch(e) {
+            this.screensaver_settings.set_int(SCREENSAVER_IDLE_DELAY_KEY, Math.abs(value));
+        }
     }
 };
 

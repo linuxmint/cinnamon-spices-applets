@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-05 14:36-0500\n"
-"PO-Revision-Date: 2024-01-21 17:50-0500\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-04-22 11:21+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: 5.4/applet.js:300 3.2/applet.js:130
 msgid "--%"
@@ -28,12 +28,10 @@ msgid "Waiting"
 msgstr "Venter"
 
 #: 5.4/applet.js:327
-#, fuzzy
 msgid "Some dependencies not installed."
-msgstr "Nogle afhængigheder er ikke installerede"
+msgstr "Nogle afhængigheder er ikke installeret."
 
 #: 5.4/applet.js:327
-#, fuzzy
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts.\n"
@@ -43,7 +41,7 @@ msgstr ""
 "Både “sox” og “zenity” er nødvendige for at dette panelprogram har alle "
 "funktioner inklusive underretninger og hørbare advarsler.\n"
 "\n"
-"Læs hjælpefilen for information om, hvordan de installeres."
+"Læs README for information om, hvordan de installeres.\n"
 
 #: 5.4/applet.js:337 3.2/applet.js:193
 msgid "Battery Monitor Applet"
@@ -86,16 +84,14 @@ msgid "Waiting for battery information"
 msgstr "Venter på information om batteriet"
 
 #: 5.4/applet.js:444
-#, fuzzy
 msgid "Alert/Suspend:"
-msgstr "Hviletilstand:"
+msgstr "Advarsel/hviletilstand:"
 
 #: 5.4/applet.js:549
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Lavt batteriniveau - sluk eller sæt strømstikket i"
 
 #: 5.4/applet.js:555
-#, fuzzy
 msgid ""
 "The battery level has fallen to your alert level.\n"
 "\n"
@@ -104,10 +100,8 @@ msgid ""
 msgstr ""
 "Batteriniveauet er faldet til dit advarselsniveau\n"
 "\n"
-" tilslut strømmen eller stop dit arbejde\n"
-"\n"
-"og sluk computeren eller sæt den i hviletilstand\n"
-"\n"
+"Tilslut enten en strømkilde, eller gem eller luk\n"
+"dit arbejde, og sæt maskinen i hviletilstand eller sluk den.\n"
 
 #: 5.4/applet.js:570
 msgid "Battery Critical - will suspend unless connected to power supply"
@@ -247,7 +241,6 @@ msgid "Percentage Charge:"
 msgstr "Procent opladt:"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Displays charge as percentage and allows alerts and actions"
 msgstr "Viser opladningsniveau som procent og tillader advarsler og handlinger"
 
@@ -407,12 +400,12 @@ msgstr ""
 #. 5.4->settings-schema.json->iconTheme->options
 #. 3.2->settings-schema.json->iconTheme->options
 msgid "Yaru Light"
-msgstr ""
+msgstr "Yary lys"
 
 #. 5.4->settings-schema.json->iconTheme->options
 #. 3.2->settings-schema.json->iconTheme->options
 msgid "Yaru Dark"
-msgstr ""
+msgstr "Yaru mørk"
 
 #. 5.4->settings-schema.json->iconTheme->description
 #. 5.4->settings-schema.json->iconTheme->tooltip

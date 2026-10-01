@@ -55,6 +55,7 @@ body:
     - azan@fahri.nurul.id
     - backgroundroll@Sokawaii25 @Sokawaii25
     - bash-sensors@pkkk
+    - battery-view@ccarnivore @ccarnivore
     - batterymonitor@pdcurtis @pdcurtis
     - batterypower@joka42 @joka42
     - better-backgrounds@simonmicro @fredcw
@@ -78,6 +79,7 @@ body:
     - CinnaMame@claudiux @claudiux
     - Cinnamenu@json @fredcw
     - cinnamon-multi-line-taskbar-applet
+    - cinnamon-sidebar@beatlink @beatlink
     - cinnamon-timer@jake1164 @jake1164
     - cinnamonvantage@garlayntoji @Garlayntoji
     - CinnVIIStarkMenu@NikoKrause @fredcw
@@ -122,6 +124,7 @@ body:
     - expressvpn@Hukuta @Hukuta
     - feeds@jonbrettdev.wordpress.com @philipp-meier
     - fish@kriegcc @kriegcc
+    - FM-Radio@hilyxx @hilyxx
     - force-quit@cinnamon.org
     - fw_fanctrl@juleskreuer.eu @not-a-feature
     - gamemode@axel358 @axel358
@@ -133,12 +136,14 @@ body:
     - gpaste-reloaded@feuerfuchs.eu @feuerfuchs
     - gpumonitor@axel358 @axel358
     - gputemperature@silentage.com
+    - GraphicalSystemMonitor@batzkass @batzkass
     - graphicsCenter@scollins @collinss
     - hamster@projecthamster.wordpress.com
+    - hdd-led@tucsonst @tucsonst
     - healthyeyes@ipolozov @GingerGigiCat
     - hideable-applets@cardsurf @cardsurf
     - hijri@mubashirzamir @mubashirzamir
-    - hwmonitor@sylfurd
+    - hwmonitor@sylfurd @UditDewan
     - ifstat@tagadan
     - IntelTurboBoost@wsmenezes @wsmenezes
     - internet-indicator@sangorys @sangorys
@@ -160,13 +165,16 @@ body:
     - mediacontrols@rbfraphael @rbfraphael
     - mem-monitor-text@datanom.net @icarter09
     - menu@csknet.org
+    - menueleven@djb @DJB
     - MessagingMenuV3@blub
     - mic-level@zamszowy @zamszowy
+    - mint-screenshot@khumnath @khumnath
     - Mint-Unsplash-Background@omidmaldar @omidmaldar
     - MonitorInputSource@klangman @klangman
     - moonphase@techi-freki @Techi-Freki
     - mouse-keys-shortcut@GabrielCamara3526 @GabrielCamara3526
     - multicore-sys-monitor@ccadeptic23 @claudiux
+    - multirow-panel-launchers@science @science
     - MuteToggler@jebeaudet.com @jebeaudet
     - mybookmarks@markbokil.com @Centurix
     - mylauncher@markbokil.com @Centurix
@@ -188,7 +196,9 @@ body:
     - octopussy@centurix @centurix
     - officeCenter@scollins @collinss
     - onekoToggle@kusch3l @kusch3l
+    - orloj@faragofr @faragofr
     - pa-equalizer@jschug.com
+    - pacman-updates@Twilight0 @Twilight0
     - panel-tweaks@anaximeno @anaximeno
     - paneldo@beatlink
     - PanelTranslator@klangman @klangman
@@ -200,6 +210,7 @@ body:
     - placesCenter@scollins @collinss
     - pomodoro@gregfreeman.org @gfreeau
     - power-profiles@rcalixte @rcalixte
+    - powerman@dr.drummie @drdrummie
     - printers@linux-man @linux-man
     - ProcessMemoryMonitor@claudiux @claudiux
     - profile-switcher@pixunil @pixunil
@@ -246,6 +257,7 @@ body:
     - spices-notifier@germanfr @germanfr
     - SpiceSpy@claudiux @claudiux
     - SpicesUpdate@claudiux @claudiux
+    - spicy-clipboard-applet@Twilight0 @Twilight0
     - sshconnect@foobar-beer @foobar-beer
     - sshlauncher@sumo @sumo
     - ssm@Severga @Severga
@@ -279,6 +291,7 @@ body:
     - updates-notifier@zamszowy @zamszowy
     - uptime@vatanuki.kun
     - vboxlauncher@mockturtl @mockturtl
+    - vertical-speedmeter@2u841r @2u841r
     - vnstat@linuxmint.com @pdcurtis
     - VPN-Sentinel@claudiux @claudiux
     - vpnLookOut@claudiux @claudiux
@@ -288,6 +301,7 @@ body:
     - weather@mockturtl
     - web-developer-menu@infiniteshroom
     - website-notifier@cardsurf @cardsurf
+    - window-closer@stefan-schmidbauer @Stefan-Schmidbauer
     - window-list@sangorys @sangorys
     - window-list@zeripath.sdf-eu.org @zeripath
     - windowlist@cobinja.de @Cobinja
@@ -297,6 +311,8 @@ body:
     - workspace-name@willurd @willurd
     - xampp-panel@backids99
     - xsession@claudiux @claudiux
+    - yasm@sniemetz @sniemetz
+    - zen-pomodoro@vtestah @vtestah
   id: applet
   type: dropdown
   validations:

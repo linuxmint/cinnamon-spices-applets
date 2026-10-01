@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 23:34+0100\n"
-"PO-Revision-Date: 2023-03-13 21:12-0300\n"
+"PO-Revision-Date: 2026-05-01 15:05-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.9\n"
 
 #. metadata.json->name
 #: applet.js:29
@@ -166,6 +166,10 @@ msgstr "The Voice"
 msgid "Magic TV"
 msgstr "Magic TV"
 
+#: applet.js:223
+msgid "Euronews Bulgaria"
+msgstr "Euronews Bulgaria"
+
 #: applet.js:300
 msgid "Stop"
 msgstr "Detener"
@@ -180,6 +184,6 @@ msgid ""
 "available only from bulgaria. To watch a TVs, you'll need to install "
 "rtmpdump and mpv packages."
 msgstr ""
-"Los streams de radio y TV más famosos de bulgaria. Algunos de los "
-"streams sólo están disponibles desde bulgaria. Para ver una TV, tendrá "
-"que instalar los paquetes rtmpdump y mpv."
+"Los streams de radio y TV más famosos de bulgaria. Algunos de los streams "
+"sólo están disponibles desde bulgaria. Para ver una TV, tendrá que instalar "
+"los paquetes rtmpdump y mpv."

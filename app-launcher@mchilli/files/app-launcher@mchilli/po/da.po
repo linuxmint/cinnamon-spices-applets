@@ -9,8 +9,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-11 16:17+0200\n"
-"PO-Revision-Date: 2024-09-05 17:08+0200\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-04-22 11:14+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #. applet.js:122
 msgid "All workspaces"
-msgstr ""
+msgstr "Alle arbejdsområder"
 
 #. applet.js:150
 msgid "Edit Applications"
@@ -200,7 +200,7 @@ msgstr "%s er navnet på programmet"
 
 #. settings-schema.json->hotkeys-enabled->description
 msgid "Enable Hotkeys"
-msgstr ""
+msgstr "Aktivér genvejstaster"
 
 #. settings-schema.json->hotkey-bindings->description
 msgid "Show menu"
@@ -212,35 +212,35 @@ msgstr "Angiv tastegenvej(e) til visning af menuen"
 
 #. settings-schema.json->menu-at-pointer->description
 msgid "Menu at mouse position"
-msgstr ""
+msgstr "Menu ved museposition"
 
 #. settings-schema.json->menu-at-pointer->tooltip
 msgid "Show the menu next to the cursor when triggered by hotkey"
-msgstr ""
+msgstr "Vis menuen ved siden af markøren, når udløst af genvejstast"
 
 #. settings-schema.json->open-by-hover->description
 msgid "Open menus by hovering over them"
-msgstr ""
+msgstr "Åbn menuer ved at føre markøren hen over"
 
 #. settings-schema.json->open-by-hover->tooltip
 msgid "Open all menus when you move the mouse pointer over them"
-msgstr ""
+msgstr "Åbn alle menuer, når musemarkøren føres hen over"
 
 #. settings-schema.json->open-by-hover-delay->description
 msgid "Hover delay"
-msgstr ""
+msgstr "Forsinkelse når markøren føres hen over"
 
 #. settings-schema.json->open-by-hover-delay->units
 msgid "milliseconds"
-msgstr ""
+msgstr "millisekunder"
 
 #. settings-schema.json->bind-to-workspace->description
 msgid "Bind to workspace"
-msgstr ""
+msgstr "Lås til arbejdsområde"
 
 #. settings-schema.json->bind-to-workspace->tooltip
 msgid "Show the applet only on the selected workspace"
-msgstr ""
+msgstr "Vis kun panelprogrammet på det valgte arbejdsområde"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"

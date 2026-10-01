@@ -2,7 +2,7 @@
   "description": "Runs glxgears with options",
   "uuid": "Gears@claudiux",
   "name": "Gears",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "max-instances": 1,
   "author": "claudiux"
 }

@@ -1,3 +1,57 @@
+### v16.5.3~20260915
+  * Avoids adding the Applications submenu twice in Cinnamon 6.6 and 6.7.
+
+### v16.5.2~20260909
+  * Keeps popup menu contents inside the menu width.
+
+### v16.5.1~20260908
+  * Avoids synchronous cover image loading.
+
+### v16.5.0~20260908
+  * Improves MPRIS player control responsiveness.
+  * Stops hidden seeker position polling.
+
+### v16.4.3~20260705
+  * Fixes some warnings when a player is first added.
+
+### v16.4.2~20260617
+  * Whether or not to display the OSD in full-screen mode.
+  * Fixes [#8803](https://github.com/linuxmint/cinnamon-spices-applets/issues/8803)
+
+### v16.4.1~20260612
+  * Do not display the OSD interface when an application is in full-screen mode.
+
+### v16.4.0~20260529
+  * Ready for Linux Mint 23.
+
+### v16.3.4~20260504
+  * You can set the menu width using an option available in this applet's settings.
+  * Fixes [#8645](https://github.com/linuxmint/cinnamon-spices-applets/issues/8645)
+
+### v16.3.3~20260503
+  * Uses the wget method instead of the httpLib one to download certain cover art (Spotify).
+
+### v16.3.2~20260424
+  * Uses the httpLib method to download certain cover art.
+  * Prepares this applet for Linux Mint 23.
+
+### v16.3.1~20260420
+  * Max Volume fixed by user takes precedence on over-amplification setting.
+  * Fixes [#8567](https://github.com/linuxmint/cinnamon-spices-applets/issues/8567)
+
+### v16.3.0~20260419
+  * Sound tab in settings: Add button to open the settings of the OSD150@claudiux (v2+) extension when available.
+
+### v16.2.0~20260325
+  * Adds option "Apps Not to Display" in the Menu section of the General tab.
+  * Fixes [#8295](https://github.com/linuxmint/cinnamon-spices-applets/issues/8295)
+
+### v16.1.2~20260320
+  * Minor bug fixed.
+
+### v16.1.1~20260320
+  * Replaces the "Keep App selector open" option in the context menu with "Keep the App Volume Control open" in the main menu.
+
 ### v16.1.0~20260318
   * Application volume sliders are moved from the context menu to the main menu.
   * Many improvements.

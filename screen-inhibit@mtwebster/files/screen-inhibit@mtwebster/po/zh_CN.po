@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-01 18:55+0200\n"
+"POT-Creation-Date: 2026-03-31 16:56+0200\n"
 "PO-Revision-Date: 2017-04-18 13:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,20 +19,25 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. applet.js:21
+#. applet.js:31
 msgid "Currently preventing screensaver"
 msgstr "当前阻止屏保程序"
 
-#. applet.js:22
+#. applet.js:32
 msgid "Currently allowing screensaver"
 msgstr "当前允许屏保程序"
 
-#. applet.js:134
+#. applet.js:188
 msgid "Screensaver settings"
 msgstr "屏保程序设置"
 
+#. applet.js:192
+#, fuzzy
+msgid "Power settings"
+msgstr "屏保程序设置"
+
 #. settings-schema.json->inhibit-at-startup->description
-#. applet.js:138
+#. applet.js:196
 msgid "Inhibit screensaver at startup"
 msgstr ""
 

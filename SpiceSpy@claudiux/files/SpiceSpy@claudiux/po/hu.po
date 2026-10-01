@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-06 01:25+0100\n"
-"PO-Revision-Date: 2026-01-01 22:03+0100\n"
+"POT-Creation-Date: 2026-04-27 17:11+0200\n"
+"PO-Revision-Date: 2026-05-11 18:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,53 +16,77 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
-#. applet.js:185
+#. applet.js:196
 msgid "score"
 msgstr "pontszám"
 
-#. applet.js:197
+#. applet.js:208
 msgid "comments"
 msgstr "megjegyzések"
 
-#. applet.js:209
+#. applet.js:220
 msgid "recent issues"
 msgstr "legutóbbi kiadások"
 
-#. applet.js:222
+#. applet.js:233
 msgid "translations"
 msgstr "fordítások"
 
-#. applet.js:297
+#. applet.js:308
 msgid "Reload icons"
 msgstr "Ikonok újratöltése"
 
-#. applet.js:303
+#. applet.js:314
 msgid "Visit website"
 msgstr "Látogassa meg a weboldalt"
 
-#. applet.js:832
+#. applet.js:417
+msgid ""
+"Check in progress.\n"
+"Time remaining:"
+msgstr ""
+"Ellenőrzés folyamatban.\n"
+"Hátralévő idő:"
+
+#. applet.js:420
+msgid "Ends around:"
+msgstr "Vége körülbelül:"
+
+#. applet.js:437
+msgid "Time remaining until the next check:"
+msgstr "Hátralévő idő a következő ellenőrzésig:"
+
+#. applet.js:439 applet.js:741
+msgid "Next check at:"
+msgstr "Következő ellenőrzés ekkor:"
+
+#. applet.js:444
+msgid "Getting Started. Please wait..."
+msgstr "Kezdés. Kérlek várj..."
+
+#. applet.js:893
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:923
+#. applet.js:984
 msgid "Mark all as read"
 msgstr "Összes megjelölése olvasottként"
 
-#. applet.js:934
+#. applet.js:995
 msgid "Refresh"
 msgstr "Frissítés"
 
-#. applet.js:948
+#. applet.js:1009
 msgid "Refreshing in progress - Click to stop"
 msgstr "Frissítés folyamatban - Kattintson a leállításhoz"
 
-#. applet.js:973
+#. applet.js:1023
 msgid "Refreshing in progress"
 msgstr "Frissítés folyamatban"
 
-#. applet.js:985
+#. applet.js:1035
 msgid "Configure..."
 msgstr "Beállítások…"
 
@@ -199,9 +223,8 @@ msgid "Number of comments (top-down)"
 msgstr "A megjegyzések száma (felülről lefelé)"
 
 #. settings-schema.json->sort-by->options
-#, fuzzy
 msgid "Number of issues"
-msgstr "A problémák számának megjelenítése a menüben"
+msgstr "A problémák száma"
 
 #. settings-schema.json->show-uuid->description
 msgid "Show UUID instead of name"
@@ -230,10 +253,6 @@ msgstr "Ne mutasson semmit"
 #. settings-schema.json->useful-only->description
 msgid "Show only non-zero values in panel"
 msgstr "Csak a nem nulla értékek megjelenítése a panelen"
-
-#. settings-schema.json->coloredIcon->description
-msgid "Change icon color while refreshing"
-msgstr "Ikon színének módosítása frissítés közben"
 
 #. settings-schema.json->colorWhileRefreshing->description
 msgid "Icon color while refreshing"

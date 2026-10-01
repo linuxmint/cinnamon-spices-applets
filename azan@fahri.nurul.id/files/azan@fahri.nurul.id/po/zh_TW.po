@@ -25,11 +25,11 @@ msgstr "%Y 年 %B %e 日（%A）"
 msgid "Settings"
 msgstr "設定"
 
-#: applet.js:325
+#: applet.js:338
 msgid "It's time for "
 msgstr "現在是 "
 
-#: applet.js:326
+#: applet.js:339
 msgid "Now : "
 msgstr "現在："
 

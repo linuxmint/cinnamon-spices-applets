@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="22" height="22">
+  <!-- Solar panel (green = producing/exporting) -->
+  <rect x="3" y="5" width="16" height="11" rx="1" ry="1" fill="#4caf50" stroke="#388e3c" stroke-width="1"/>
+  <!-- Grid lines on panel -->
+  <line x1="3" y1="8.5" x2="19" y2="8.5" stroke="#81c784" stroke-width="0.5"/>
+  <line x1="3" y1="12.5" x2="19" y2="12.5" stroke="#81c784" stroke-width="0.5"/>
+  <line x1="8" y1="5" x2="8" y2="16" stroke="#81c784" stroke-width="0.5"/>
+  <line x1="14" y1="5" x2="14" y2="16" stroke="#81c784" stroke-width="0.5"/>
+  <!-- Stand -->
+  <line x1="11" y1="16" x2="11" y2="19" stroke="#388e3c" stroke-width="1.5"/>
+  <line x1="7" y1="19" x2="15" y2="19" stroke="#388e3c" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- >> arrows -->
+  <polyline points="7,7 10,10.5 7,14" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="11,7 14,10.5 11,14" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

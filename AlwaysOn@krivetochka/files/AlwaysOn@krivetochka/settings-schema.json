@@ -1,43 +1,33 @@
 {
 	"section-general" : {
 		"type" : "section",
-		"description" : "General"
-	},
-
-    
-    "change-affected-settings" : {
-		"type" : "switch",
-        "default" : false,
-		"description" : "Click to select which settings will be affected by this applet"
+		"description" : "Choose which parameters this applet affects"
 	},
     
     "idle-dim-battery" : {
 		"type" : "switch",
         "default" : true,
-		"description" : "Dim the screen when idle",
-        "dependency" : "change-affected-settings"
+		"description" : "Dim the screen when idle"
 	},
 
     "sleep-inactive" : {
 		"type" : "switch",
         "default" : true,
-		"description" : "Sleep mode when idle",
-        "dependency" : "change-affected-settings"
+		"description" : "Sleep mode when idle"
 	},
 
     "sleep-display" : {
 		"type" : "switch",
         "default" : true,
-		"description" : "Turning off the screen when idle",
-        "dependency" : "change-affected-settings"
+		"description" : "Turning off the screen when idle"
 	},
 
-    "key-bind" : {
-		"type" : "keybinding",
-        "default" : "<Ctrl><Alt>a",
-		"description" : "Select a combination to activate the applet"
+    "lid-close-action" : {
+		"type" : "switch",
+		"default" : true,
+		"description" : "Do nothing when laptop lid is closed"
 	},
-    
+
     "section-not" : {
 		"type" : "section",
 		"description" : "Notifications"
@@ -62,6 +52,12 @@
 			"Symbolic": "SYMBOLIC",
 			"Colored": "COLORED"
 		}
+	},
+
+    "key-bind" : {
+		"type" : "keybinding",
+        "default" : "<Ctrl><Alt>a",
+		"description" : "Select a combination to activate the applet"
 	},
 
     "hide-applet" : {

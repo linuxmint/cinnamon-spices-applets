@@ -1,0 +1,71 @@
+# ANY ALARM
+# This file is put in the public domain.
+# sophie-la-li, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: any-alarm@sophie-la-li 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-06-11 00:38+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:17 applet.js:56
+msgid "AnyAlarm"
+msgstr "AnyAlarm"
+
+#. metadata.json->name
+msgid "Any Alarm"
+msgstr "Any Alarm"
+
+#. metadata.json->description
+msgid "Will remind you regularly about something"
+msgstr "Ilmoittaa sinulle säännöllisesti valitulla aikavälillä"
+
+#. settings-schema.json->enabled->description
+msgid "Alarm enabled"
+msgstr "Hälytys käytössä"
+
+#. settings-schema.json->mode->description
+msgid "When to trigger the alarm"
+msgstr "Koska hälytys laukaistaan?"
+
+#. settings-schema.json->mode->options
+msgid "every # seconds (see option below)"
+msgstr "joka sekunti (ks. aikaväli alla)"
+
+#. settings-schema.json->mode->options
+msgid "every full minute"
+msgstr "joka minuutti"
+
+#. settings-schema.json->mode->options
+msgid "every quarter hour"
+msgstr "joka varttitunti"
+
+#. settings-schema.json->mode->options
+msgid "every half hour"
+msgstr "joka puolitunti"
+
+#. settings-schema.json->mode->options
+msgid "every full hour"
+msgstr "joka tunti"
+
+#. settings-schema.json->xs-mode-seconds->units
+msgid "seconds"
+msgstr "sekuntia"
+
+#. settings-schema.json->xs-mode-seconds->description
+msgid "Seconds for the \"every # seconds\" mode"
+msgstr "Sekuntia aikaväli \"joka sekunti\" -tilassa"
+
+#. settings-schema.json->alarm-text->description
+msgid "Alarm Text"
+msgstr "Ilmoitusteksti"

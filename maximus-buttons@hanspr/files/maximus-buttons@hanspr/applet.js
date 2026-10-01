@@ -170,7 +170,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     minimizeWindow() {
-        if (this.button["minimize"].opacity == 0) {
+        if (this.button["minimize"].opacity < 255) {
             return false
         }
         let activeWindow = global.display.focus_window
@@ -202,7 +202,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     maximizeWindow() {
-        if (this.button["maximize"].opacity == 0) {
+        if (this.button["minimize"].opacity < 255) {
             return false
         }
         let activeWindow = global.display.focus_window
@@ -239,7 +239,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     closeWindow() {
-        if (this.button["close"].opacity == 0) {
+        if (this.button["minimize"].opacity < 255) {
             return false
         }
         let activeWindow = global.display.focus_window
@@ -357,15 +357,19 @@ class MyApplet extends Applet.TextIconApplet {
                 show = false
             }
             if (what == "show" && show) {
-                if (!this.hideButtons) {
+                if (this.hideButtons == "hide") {
                     this.button[buttons[i]].show()
                 }
                 this.button[buttons[i]].opacity = 255
             } else {
-                if (!this.hideButtons) {
+                if (this.hideButtons == "hide") {
                     this.button[buttons[i]].hide()
+                    this.button[buttons[i]].opacity = 0
+                } else if (this.hideButtons == "dim") {
+                    this.button[buttons[i]].opacity = 100
+                } else {
+                    this.button[buttons[i]].opacity = 0
                 }
-                this.button[buttons[i]].opacity = 0
             }
         }
     }

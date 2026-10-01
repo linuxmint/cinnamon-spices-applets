@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-01-07 23:43+0100\n"
+"POT-Creation-Date: 2026-03-29 12:10+0200\n"
 "PO-Revision-Date: 2024-06-18 15:39+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -19,77 +19,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:46 applet.js:654
-msgid "SYSTEM"
-msgstr "SISTEMA"
-
-#. applet.js:46 applet.js:694
-msgid "FAVORITES"
-msgstr ""
-
-#. applet.js:46 applet.js:725
-msgid "APPLICATIONS"
-msgstr ""
-
-#. applet.js:46 applet.js:756
-msgid "RECENT DOCUMENTS"
-msgstr "DOCUMENTI RECENTI"
-
-#. applet.js:46 applet.js:800
-msgid "CUSTOM"
-msgstr ""
-
-#. applet.js:189
+#. applet.js:190
 msgid "(Right click to open folder)"
 msgstr "(Fare clic con il tasto destro per aprire la cartella)"
 
 #. metadata.json->name
-#. applet.js:317
+#. applet.js:323
 msgid "Direct"
 msgstr "Diretto"
 
-#. applet.js:624
+#. applet.js:631
 msgid "Search Home Folder"
 msgstr "Cerca nella cartella Home"
 
-#. applet.js:631 applet.js:671 applet.js:702 applet.js:733 applet.js:764
-#. applet.js:808
+#. applet.js:638 applet.js:678 applet.js:709 applet.js:740 applet.js:771
+#. applet.js:815
 msgid "Configure"
 msgstr ""
 
-#. applet.js:664
+#. applet.js:661
+msgid "SYSTEM"
+msgstr "SISTEMA"
+
+#. applet.js:671
 msgid "Search File System"
 msgstr "Cerca nel File System"
 
-#. applet.js:778
+#. applet.js:701
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:732
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:763
+msgid "RECENT DOCUMENTS"
+msgstr "DOCUMENTI RECENTI"
+
+#. applet.js:785
 msgid "Clear"
 msgstr "Pulisci"
 
-#. applet.js:785
+#. applet.js:792
 msgid "Recent"
 msgstr "Recenti"
 
-#. applet.js:862
+#. applet.js:807
+msgid "CUSTOM"
+msgstr ""
+
+#. applet.js:869
 msgid "Computer"
 msgstr "Computer"
 
-#. applet.js:868
+#. applet.js:875
 msgid "File System"
 msgstr "File System"
 
-#. applet.js:885
+#. applet.js:892
 msgid "Network"
 msgstr "Rete"
 
-#. applet.js:900
+#. applet.js:908
 msgid "Logout"
 msgstr ""
 
-#. applet.js:907
+#. applet.js:915
 msgid "Quit"
 msgstr ""
 
-#. applet.js:1215
+#. applet.js:1224
 msgid "Trash"
 msgstr "Cestino"
 
@@ -390,6 +390,10 @@ msgstr "Mostra solo le unità montate"
 #. settings-schema.json->showNetwork->description
 msgid "Show network"
 msgstr "Mostra rete"
+
+#. settings-schema.json->showSession->description
+msgid "Show Logout and Quit"
+msgstr ""
 
 #. settings-schema.json->showFavorites->description
 #, fuzzy

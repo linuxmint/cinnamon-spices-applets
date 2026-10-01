@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-17 10:44-0400\n"
+"POT-Creation-Date: 2026-05-31 21:52-0400\n"
 "PO-Revision-Date: 2025-08-27 18:28+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -19,31 +19,31 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:62
+#. applet.js:77
 msgid "Click to disable effect"
 msgstr "Clicca per disattivare l'effetto"
 
-#. applet.js:64
+#. applet.js:79
 msgid "Click to desaturate the desktop"
 msgstr "Clicca per desaturare il desktop"
 
-#. applet.js:72
+#. applet.js:87
 msgid "Will automatically desaturate in"
 msgstr "Si desaturerà automaticamente tra"
 
-#. applet.js:74
+#. applet.js:89
 msgid "Will automatically disable in"
 msgstr "Si disattiverà automaticamente tra"
 
-#. applet.js:76
+#. applet.js:91
 msgid "minutes"
 msgstr "minuti"
 
-#. applet.js:79
+#. applet.js:94
 msgid "Will automatically desaturate at"
 msgstr "Si desaturerà automaticamente alle"
 
-#. applet.js:81
+#. applet.js:96
 msgid "Will automatically disable at"
 msgstr "Si disattiverà automaticamente alle"
 
@@ -56,8 +56,8 @@ msgid "Convert your screen to gray-scale."
 msgstr "Converti il tuo schermo in scala di grigi."
 
 #. settings-schema.json->saturation->description
-msgid "Color saturation"
-msgstr "Saturazione del colore"
+msgid "Color saturation when desaturation effect is enabled (percent)"
+msgstr ""
 
 #. settings-schema.json->keybinding->description
 msgid "Shortcut to toggle desaturation effect"
@@ -92,3 +92,7 @@ msgid "Restore the previously set desaturation state when cinnamon starts"
 msgstr ""
 "Ripristina lo stato di desaturazione precedentemente impostato all'avvio di "
 "Cinnamon"
+
+#. settings-schema.json->fade-time->description
+msgid "Saturation fade in/out duration (seconds)"
+msgstr ""

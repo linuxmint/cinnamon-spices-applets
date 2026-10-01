@@ -12,8 +12,6 @@ const Lang = imports.lang;
 const { PopupMenu, PopupMenuManager, PopupMenuItem, PopupSeparatorMenuItem, PopupIconMenuItem, PopupSwitchMenuItem, PopupMenuSection, PopupSubMenuMenuItem, PopupBaseMenuItem, PopupSubMenu, PopupSwitchIconMenuItem, arrowIcon } = imports.ui.popupMenu;
 // Settings:
 const { AppletSettings } = imports.ui.settings;
-// ./lib/util:
-const { spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, spawn, spawn_async, trySpawnCommandLine } = require("./lib/util");
 //Clutter:
 const { ScrollDirection, Image, Actor, Color, RotateAxis } = imports.gi.Clutter;
 //Gettext:
@@ -29,22 +27,26 @@ const FileDialog = imports.misc.fileDialog;
 //ModalDialog:
 const ModalDialog = imports.ui.modalDialog;
 //Gio:
-const { network_monitor_get_default, NetworkConnectivity, file_new_for_path, app_info_get_default_for_type, FileInfo, FileQueryInfoFlags, FileType, FileIcon, FileMonitorFlags, DataInputStream, UnixInputStream, Settings, Cancellable } = imports.gi.Gio;
+//~ const { network_monitor_get_default, NetworkConnectivity, file_new_for_path, app_info_get_default_for_type, FileInfo, FileQueryInfoFlags, FileType, FileIcon, FileMonitorFlags, DataInputStream, UnixInputStream, Settings, Cancellable } = imports.gi.Gio;
+const { network_monitor_get_default, NetworkConnectivity, file_new_for_path, app_info_get_default_for_type, FileInfo, FileQueryInfoFlags, FileType, FileIcon, FileMonitorFlags, Settings, Cancellable } = imports.gi.Gio;
 //St:
 const { Icon, IconType, Button, Widget, ScrollView, Align, Label, BoxLayout, Bin, Side, Clipboard, ClipboardType, TextDirection } = imports.gi.St;
 //Tooltips:
 const { Tooltip } = imports.ui.tooltips;
-//MessageTray:
-//~ const { Urgency, MessageTray, SystemNotificationSource, Notification } = imports.ui.messageTray;
-const { Urgency, MessageTray, SystemNotificationSource, Notification } = require("./lib/messageTray");
-
-const TABS = ["Radios", "Search", "Import", "Menu", "Behavior", "Network", "Recording", "YT", "Scheduling", "Alarm Clock"];
-var RADIO_NOTIFICATION_TIMEOUT = 2;
-const RADIO_NOTIFICATION_CRITICAL_TIMEOUT_WITH_APPLET = 10;
+//Util:
+const Util = imports.misc.util;
 //Pango
 const { parse_markup, WrapMode, EllipsizeMode } = imports.gi.Pango;
 //Extension:
-const { reloadExtension, Type } = imports.ui.extension;
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
 //Clutter:
 const Clutter = imports.gi.Clutter;
 //GdkPixbuf:
@@ -59,43 +61,60 @@ const Atk = imports.gi.Atk;
 const Cvc = imports.gi.Cvc;
 //Signals:
 const Signals = imports.signals;
+
+//~ const CINNAMON_VERSION = getenv("CINNAMON_VERSION");
+//~ const isCin67plus = Util.version_exceeds(CINNAMON_VERSION, "6.7");
+//~ var Me;
+//~ if (isCin67plus) {
+  //~ Me = Extension.getCurrentExtension();
+//~ }
+//~ global.log("isCin67plus: " + isCin67plus);
+
+// ./lib/util:
+var { spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, spawn, spawn_async, trySpawnCommandLine } = _require("./lib/util");
+//MessageTray:
+var { Urgency, MessageTray, SystemNotificationSource, Notification } = _require("./lib/messageTray");
+
+const TABS = ["Radios", "Search", "Import", "Menu", "Behavior", "Network", "Recording", "YT", "Scheduling", "Alarm Clock"];
+var RADIO_NOTIFICATION_TIMEOUT = 2;
+const RADIO_NOTIFICATION_CRITICAL_TIMEOUT_WITH_APPLET = 10;
 //readFileAsync:
-const { readFileAsync } = require("./lib/readFileAsync");
+var { readFileAsync } = _require("./lib/readFileAsync");
 //checkDependencies:
-const { Dependencies, criticalNotify } = require("./lib/checkDependencies");
+var { Dependencies, criticalNotify } = _require("./lib/checkDependencies");
 //htmlEncodeDecode:
-let HtmlEncodeDecode = require('./lib/htmlEncodeDecode');
+var { HtmlEncodeDecode } = _require("./lib/htmlEncodeDecode");
 //xml2json.min:
-const { xml2json } = require('./lib/xml2json.min');
+var { xml2json } = _require("./lib/xml2json.min");
 //filesCsv:
-const FilesCsv = require("./lib/filesCsv");
+var FilesCsv = _require("./lib/filesCsv");
 //filesPls:
-const FilesPls = require("./lib/filesPls");
+var FilesPls = _require("./lib/filesPls");
 //filesM3u:
-const FilesM3u = require("./lib/filesM3u");
+var FilesM3u = _require("./lib/filesM3u");
 //filesXspf:
-const FilesXspf = require("./lib/filesXspf");
+var FilesXspf = _require("./lib/filesXspf");
 //filesJson:
-const FilesJson = require("./lib/filesJson");
+var FilesJson = _require("./lib/filesJson");
 //files:
-const Files = require("./lib/files");
+var Files = _require("./lib/files");
 //volumeslider:
-const VolumeSlider = require("./lib/volumeslider");
+var VolumeSlider = _require("./lib/volumeslider");
 //screensaverInhibitor:
-const ScreensaverInhibitor = require("./lib/screensaverInhibitor");
+var { ScreensaverInhibitor } = _require("./lib/screensaverInhibitor");
 //to-string:
-const {to_string} = require("./lib/to-string");
+var { to_string } = _require("./lib/to-string");
 //text-wrap:
-const {formatTextWrap} = require("./lib/text-wrap");
+var { formatTextWrap } = _require("./lib/text-wrap");
 //httpLib:
-const{HttpLib} = require("./lib/httpLib");
+var { HttpLib } = _require("./lib/httpLib");
 //fixedEncodeURIComponent:
-const { fixedEncodeURIComponent } = require("./lib/fixedEncodeURIComponent");
+var { fixedEncodeURIComponent } = _require("./lib/fixedEncodeURIComponent");
 //checkTranslations:
-const { are_translations_installed, install_translations } = require("./lib/checkTranslations");
+var { are_translations_installed, install_translations } = _require("./lib/checkTranslations");
 
 //mainloopTools:
-const {
+var {
   _sourceIds,
   timeout_add_seconds,
   timeout_add,
@@ -106,11 +125,10 @@ const {
   source_exists,
   source_remove,
   remove_all_sources
-} = require("./lib/mainloopTools");
-
-//~ const {
+} = _require("./lib/mainloopTools");
+//~ var {
   //~ Shoutcast
-//~ } = require("./lib/shoutcast");
+//~ } = _require("./lib/shoutcast");
 
 var WRAP_LENGTH = 25;
 
@@ -752,7 +770,7 @@ const messageTray = new RadioMessageTray();
 const SOURCE = new RadioNotificationSource();
 messageTray.add(SOURCE);
 
-class TitleSeparatorMenuItem extends PopupBaseMenuItem {
+var TitleSeparatorMenuItem = class TitleSeparatorMenuItem extends PopupBaseMenuItem {
   constructor(title, icon_name, reactive=false) {
     super({ reactive: reactive });
     if (typeof icon_name === 'string') {
@@ -1030,7 +1048,7 @@ var R3PopupMenu = class R3PopupMenu extends PopupMenu {
 }
 Signals.addSignalMethods(R3PopupMenu.prototype);
 
-class WebRadioReceiverAndRecorder extends TextIconApplet {
+var WebRadioReceiverAndRecorder = class WebRadioReceiverAndRecorder extends TextIconApplet {
   constructor(orientation, panel_height, instance_id) {
     super(orientation, panel_height, instance_id);
 
@@ -1212,7 +1230,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     favorite_options = null;
 
     // Screensaver Inhibitor:
-    this.screensaver_inhibitor = new ScreensaverInhibitor.ScreensaverInhibitor(this);
+    //~ this.screensaver_inhibitor = new ScreensaverInhibitor.ScreensaverInhibitor(this);
+    this.screensaver_inhibitor = new ScreensaverInhibitor(this);
 
     // The hash table is useful to get the name of a radio knowing its Id.
     // (This must be made after getting the user's settings.)
@@ -1291,6 +1310,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("volume-magnetic-on", "magnetic25On");
     this.settings.bind("volume-step", "volume_step");
     this.settings.bind("volume-at-startup", "volume_at_startup");
+    this.settings.bind("waiting-time", "waiting_time");
     this.settings.bind("volume-percentage", "percentage");
 
     this.settings.bind("show-title-and-version", "show_version");
@@ -1344,6 +1364,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("horizontal-max-title-length", "horizontal_max_title_length", () => { this.volume_near_icon() });
     // Menu:
     this.settings.bind("show-by-category", "show_by_category");
+    this.settings.bind("fixHeightCat", "fixHeightCat");
+    this.settings.bind("heightCat", "heightCat");
     this.settings.bind("shortcut-volume-up", "shortcutVolUp", () => { this.onShortcutChanged() });
     this.settings.bind("shortcut-volume-down", "shortcutVolDown", () => { this.onShortcutChanged() });
     this.settings.bind("shortcut-volume-cut", "shortcutVolCut", () => { this.onShortcutChanged() });
@@ -1925,6 +1947,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           "name": ""+station.name,
           "bitrate": ""+station.bitrate,
           "codec": ""+station.codec,
+          "muteseconds": (station.muteseconds == undefined || station.muteseconds.length === 0 || station.muteseconds === "0") ? "" : ""+station.muteseconds,
           "uuid": station.uuid,
           "homepage": station.homepage,
           "tags": station.tags,
@@ -2137,7 +2160,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     readFileAsync(MPV_TITLE_FILE).then( (_title) => {
       let title = _title.trim();
       if (title.length === 0 || (title.length > 0 && this.songTitle == title)) return;
-      
+
       if (title.includes("xml")) {
         let xml_string = title.replace(/>\s*</g, "><"); // deletes all useless spaces.
         try {
@@ -2162,7 +2185,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           title = "";
         }
       }
-  
+
       this.on_song_changed(this.get_radio_name(this.radioId), title);
     });
   }
@@ -2446,6 +2469,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           "name": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].name != undefined) ? this.radiosHash[""+station_url].name : ""+r.name,
           "inc": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].inc != undefined) ? this.radiosHash[""+station_url].inc : true,
           "codec": r.codec,
+          "muteseconds": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].muteseconds != undefined && this.radiosHash[""+station_url].muteseconds.length != 0 && this.radiosHash[""+station_url].muteseconds != "0") ? ""+this.radiosHash[""+station_url].muteseconds : "",
           "bitrate": r.bitrate,
           "homepage": r.homepage,
           "uuid": r.stationuuid,
@@ -2469,6 +2493,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           "name": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].name != undefined) ? this.radiosHash[""+station_url].name : ""+r.name,
           "inc": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].inc != undefined) ? this.radiosHash[""+station_url].inc : true,
           "codec": (!r.codec) ? "" : ""+r.codec,
+          "muteseconds": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].muteseconds != undefined && this.radiosHash[""+station_url].muteseconds.length != 0 && this.radiosHash[""+station_url].muteseconds != "0") ? ""+this.radiosHash[""+station_url].muteseconds : "",
           "bitrate": (!r.bitrate) ? "" : ""+r.bitrate,
           "homepage": (!r.homepage) ? "" : ""+r.homepage,
           "uuid": (!r.stationuuid) ? "" : ""+r.stationuuid,
@@ -2504,6 +2529,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           "name": (this.radiosHash[""+old_url] != undefined && this.radiosHash[""+old_url].name != undefined) ? this.radiosHash[""+old_url].name : ""+r.name,
           "inc": (this.radiosHash[""+old_url] != undefined && this.radiosHash[""+old_url].inc != undefined) ? this.radiosHash[""+old_url].inc : true,
           "codec": (!r.codec) ? "" : ""+r.codec,
+          "muteseconds": (this.radiosHash[""+old_url] != undefined && this.radiosHash[""+old_url].muteseconds != undefined && this.radiosHash[""+old_url].muteseconds.length != 0 && this.radiosHash[""+old_url].muteseconds != "0") ? ""+this.radiosHash[""+old_url].muteseconds : "",
           "bitrate": (!r.bitrate) ? "" : ""+r.bitrate,
           "homepage": (!r.homepage) ? "" : ""+r.homepage,
           "uuid": (!r.stationuuid) ? "" : ""+r.stationuuid,
@@ -2520,6 +2546,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             "name": (this.radiosHash[""+r.url] != undefined && this.radiosHash[""+r.url].name != undefined) ? this.radiosHash[""+r.url].name : ""+r.name,
             "inc": (this.radiosHash[""+r.url] != undefined && this.radiosHash[""+r.url].inc != undefined) ? this.radiosHash[""+r.url].inc : true,
             "codec": (!r.codec) ? "" : ""+r.codec,
+            "muteseconds": (this.radiosHash[""+r.url] != undefined && this.radiosHash[""+r.url].muteseconds != undefined && this.radiosHash[""+r.url].muteseconds.length != 0 && this.radiosHash[""+r.url].muteseconds != "0") ? ""+this.radiosHash[""+r.url].muteseconds : "",
             "bitrate": (!r.bitrate) ? "" : ""+r.bitrate,
             "homepage": (!r.homepage) ? "" : ""+r.homepage,
             "uuid": (!r.stationuuid) ? "" : ""+r.stationuuid,
@@ -2747,7 +2774,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       return;
     }
 
-    // NORMAL MENU
+    // NORMAL MENU:
     if (force || this.oldRadios != JSON.stringify(this.radios)) {
       this.set_radio_hashtable();
 
@@ -2766,8 +2793,18 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.menu.removeAll();
       } else {
         this.menu = new AppletPopupMenu(this, this.orientation);
+        //~ this.menu.actor.style = "width: 800px; height: 900px; spacing: 0px; padding: 0px; expand: true; ";
         this.menuManager.addMenu(this.menu);
       }
+
+      this.sectionTop = new PopupMenuSection();
+      this.sectionMiddle = new PopupMenuSection();
+      if (this.show_by_category && this.fixHeightCat)
+        this.sectionMiddle.box.set_height(this.heightCat);
+      this.sectionBottom = new PopupMenuSection();
+      this.menu.addMenuItem(this.sectionTop);
+      this.menu.addMenuItem(this.sectionMiddle);
+      this.menu.addMenuItem(this.sectionBottom);
 
       this.currentMenuItem = null;
       this.menuItems = [];
@@ -2777,12 +2814,24 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       // APPLET NAME and VERSION:
       if (this.show_version) {
         let menuitemHead1 = new PopupIconMenuItem("" + APPNAME + "  v" + VERSION, "webradioreceiver", IconType.SYMBOLIC, { reactive: false });
-        this.menu.addMenuItem(menuitemHead1);
-        this.menu.addMenuItem(new PopupSeparatorMenuItem());
+        //~ this.menu.addMenuItem(menuitemHead1);
+        //~ this.menu.addMenuItem(new PopupSeparatorMenuItem());
+        this.sectionTop.addMenuItem(menuitemHead1);
+        this.sectionTop.addMenuItem(new PopupSeparatorMenuItem());
       }
+
+      let horizontalSection = new PopupMenuSection();
+      horizontalSection.box.set_vertical(false);
+      horizontalSection.box.set_width(800);
+      this.horizontalSection2 = new PopupMenuSection();
+      this.horizontalSection2.box.set_vertical(false);
+      this.horizontalSection2.box.set_width(800);
+      this.sectionTop.addMenuItem(horizontalSection);
+      this.sectionTop.addMenuItem(this.horizontalSection2);
 
       // SONG TITLE, BRAINZ LINK, YT LINK:
       if (this.songTitle && this.songTitle.length > 0) {
+
         let title = this.songTitle.replace(/\//g, " & ");
         //~ let query = fixedEncodeURIComponent(title.replace(/\ - /g, ' '));
         let query = fixedEncodeURIComponent(title);
@@ -2814,13 +2863,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         brainz_item.connect('activate', () => {
           spawnCommandLine("xdg-open " + brainz_link);
         });
-        this.menu.addMenuItem(brainz_item);
+        horizontalSection.addMenuItem(brainz_item);
 
         let yt_watch_item  = new PopupIconMenuItem(formatTextWrap(_("Watch on YT"), WRAP_LENGTH), "media-playback-start", IconType.SYMBOLIC, { reactive: true });
         yt_watch_item.connect('activate', () => {
           spawnCommandLine("xdg-open " + yt_watch_link);
         });
-        this.menu.addMenuItem(yt_watch_item);
+        horizontalSection.addMenuItem(yt_watch_item);
 
         if (this.yt_downloads.indexOf(title) < 0 && this.check_hd_space_left(false)) {
           let yt_dl_item  = new PopupIconMenuItem(formatTextWrap(_("Try to download it from YT (unsafe)"), WRAP_LENGTH), "folder-download-symbolic", IconType.SYMBOLIC, { reactive: true });
@@ -2830,21 +2879,21 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           });
 
           if (YTDL_PROGRAM() != null && this.yt_downloads.indexOf(title) < 0) {
-            this.menu.addMenuItem(yt_dl_item)
+            this.horizontalSection2.addMenuItem(yt_dl_item)
           } else {
             yt_dl_item.destroy();
             yt_dl_item = null
           }
         }
 
-        this.menu.addMenuItem(new PopupSeparatorMenuItem());
+        this.sectionTop.addMenuItem(new PopupSeparatorMenuItem());
       }
 
       // RECENTS STATIONS:
       var to_remove_from_recentRadios = [];
       if (this.recent_number > 0) {
         let menuitemHead2 = new TitleSeparatorMenuItem(formatTextWrap(_("Recently Played Stations:"), WRAP_LENGTH), "pan-down");
-        this.menu.addMenuItem(menuitemHead2);
+        this.sectionTop.addMenuItem(menuitemHead2);
 
         var titles = [];
         let blacklist = this.settings.getValue("blacklist");
@@ -2899,7 +2948,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             }
           }
 
-          this.menu.addMenuItem(item);
+          this.sectionTop.addMenuItem(item);
         }
         titles = [];
         titles = null;
@@ -2910,7 +2959,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.recentRadios.splice(this.recentRadios.indexOf(to_remove), 1);
       }
       this.set_radio_tooltip_to_default_one();
-      this.menu.addMenuItem(new PopupSeparatorMenuItem());
+      this.sectionTop.addMenuItem(new PopupSeparatorMenuItem());
 
       // FAV SWITCH
       let fav_switch_item = new PopupSwitchIconMenuItem("", this.is_fav_radio, "emblem-favorite", IconType.SYMBOLIC);
@@ -2918,7 +2967,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.is_fav_radio = !this.is_fav_radio;
         this.menu.toggle();
       });
-      this.menu.addMenuItem(fav_switch_item);
+      this.sectionTop.addMenuItem(fav_switch_item);
 
       // CATEGORIES AND RADIO STATIONS
       if (this.show_by_category) {
@@ -2930,8 +2979,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         section.box.set_vertical(false);
         section.blockSourceEvents = true;
         section.box.connect("leave-event", () => {});
-        section.box.set_style("width: 700px;spacing: 0px;padding:0px;expand: true;");
-        this.menu.addMenuItem(section);
+        section.box.style = "width: 850px; spacing: 0px; padding: 0px; expand: false; ";
+        this.sectionMiddle.addMenuItem(section);
 
         let sectionCats = new PopupMenuSection();
         sectionCats.blockSourceEvents = true;
@@ -3003,7 +3052,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       } else {
         // MY RADIO STATIONS:
         this.allRadiosMenu = new RadioPopupSubMenuMenuItem(formatTextWrap(_("My Radio Stations") + "  (%s)".format(""+this.number_of_stations), WRAP_LENGTH));
-        this.menu.addMenuItem(this.allRadiosMenu);
+        this.sectionMiddle.addMenuItem(this.allRadiosMenu);
 
         for (let i = 0, _length = (this.radios) ? this.radios.length : 0; i < _length; i++) {
           let title = ""+this.radios[i].name;
@@ -3056,41 +3105,41 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         }
       }
 
-      this.menu.addMenuItem(new PopupSeparatorMenuItem());
+      this.sectionMiddle.addMenuItem(new PopupSeparatorMenuItem());
 
       // STOP:
       if (this.stopItem) this.stopItem.destroy(); // ???
       this.stopItem = new TitleSeparatorMenuItem(formatTextWrap(_("Stop"), WRAP_LENGTH), "media-playback-stop", true);
       this.stopItem.connect('activate', () => { this.stop_mpv() });
-      this.menu.addMenuItem(this.stopItem);
+      this.sectionBottom.addMenuItem(this.stopItem);
       if (force) {
         if (this.mpvStatus === "STOP") this.stopItem.setShowDot(true);
         if (change_tooltip) this.set_radio_tooltip_to_default_one();
       }
 
       // SEARCH FOR NEW STATIONS:
-      this.menu.addMenuItem(new PopupSeparatorMenuItem());
+      this.sectionBottom.addMenuItem(new PopupSeparatorMenuItem());
       let searchItem = new PopupIconMenuItem(formatTextWrap(_("Search for new stations..."), WRAP_LENGTH), "system-search", IconType.SYMBOLIC);
       searchItem.connect('activate', () => {
         let pidOfSearch = this.configureApplet(TABS.indexOf("Search"));
       });
-      this.menu.addMenuItem(searchItem);
+      this.sectionBottom.addMenuItem(searchItem);
 
       // CONFIGURE APPLET and SOUND SETTINGS:
       if (this.show_system_items) {
         let configureItem = new PopupIconMenuItem(formatTextWrap(_("Configure..."), WRAP_LENGTH), "system-run", IconType.SYMBOLIC);
         configureItem.connect('activate', () => { this.configureApplet() });
-        this.menu.addMenuItem(configureItem);
+        this.sectionBottom.addMenuItem(configureItem);
 
         let soundSettingsItem = new PopupIconMenuItem(formatTextWrap(_("Sound Settings"), WRAP_LENGTH), "audio-card", IconType.SYMBOLIC);
         soundSettingsItem.connect('activate', () => { spawnCommandLine("cinnamon-settings sound") });
-        this.menu.addMenuItem(soundSettingsItem);
+        this.sectionBottom.addMenuItem(soundSettingsItem);
       }
 
       //HOMEPAGE:
       if (item_homepage != null) {
-        this.menu.addMenuItem(new PopupSeparatorMenuItem());
-        this.menu.addMenuItem(item_homepage)
+        this.sectionBottom.addMenuItem(new PopupSeparatorMenuItem());
+        this.sectionBottom.addMenuItem(item_homepage)
       }
 
       this.oldRadios = JSON.stringify(this.radios);
@@ -3561,63 +3610,72 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //log("start_mpv_radio: " + _id);
     if (_id.length === 0) return;
 
-    this.last_radio_listened_to = _id;
+    let wt = setTimeout( () => {
+      clearTimeout(wt);
+      this.last_radio_listened_to = _id;
 
-    let recentRadios = this.recentRadios; // this.settings.getValue("recentRadios");
+      let recentRadios = this.recentRadios; // this.settings.getValue("recentRadios");
 
-    let index_of_id = recentRadios.indexOf(_id);
+      let index_of_id = recentRadios.indexOf(_id);
 
-    while (index_of_id >= 0) {
-      recentRadios.splice(index_of_id, 1); // Removes _id from the list of recent radios.
-      index_of_id = recentRadios.indexOf(_id);
-    }
+      while (index_of_id >= 0) {
+        recentRadios.splice(index_of_id, 1); // Removes _id from the list of recent radios.
+        index_of_id = recentRadios.indexOf(_id);
+      }
 
-    recentRadios.unshift(_id);
+      recentRadios.unshift(_id);
 
-    while (recentRadios.length > 12) recentRadios.pop();
+      while (recentRadios.length > 12) recentRadios.pop();
 
-    this.recentRadios = recentRadios; // this.settings.setValue("recentRadios", recentRadios);
+      this.recentRadios = recentRadios; // this.settings.setValue("recentRadios", recentRadios);
 
-    this.radioId = _id;
+      this.radioId = _id;
 
-    this.icon_or_favicon(_id);
+      this.icon_or_favicon(_id);
 
-    this.progress = 10/REFRESH_INTERVAL;
-    this.interval = setInterval(() => { this.on_progress_change(); }, 100);  // 100 ms.
-    
-    this.appletRunning = true;
+      this.progress = 10/REFRESH_INTERVAL;
+      this.interval = setInterval(() => { this.on_progress_change(); }, 100);  // 100 ms.
 
-    timeout_add_seconds(1, () => { 
-      this.monitor_mpv_title(); 
-      //~ return this.titleMonitor == null 
-      return this.appletRunning;
-    });
-    timeout_add_seconds(1, () => { this.monitor_r30stop(); return this.r30stopMonitor == null });
-    timeout_add_seconds(1, () => { this.monitor_r30next(); return this.r30nextMonitor == null });
-    timeout_add_seconds(1, () => { this.monitor_r30previous(); return this.r30previousMonitor == null });
+      this.appletRunning = true;
 
-    this.set_MPV_ALIAS();
-    spawnCommandLine("%s %s".format(this.MPV_ALIAS, _id));
-    this.mpvStatus = "PLAY";
+      timeout_add_seconds(1, () => {
+        this.monitor_mpv_title();
+        //~ return this.titleMonitor == null
+        return this.appletRunning;
+      });
+      timeout_add_seconds(1, () => { this.monitor_r30stop(); return this.r30stopMonitor == null });
+      timeout_add_seconds(1, () => { this.monitor_r30next(); return this.r30nextMonitor == null });
+      timeout_add_seconds(1, () => { this.monitor_r30previous(); return this.r30previousMonitor == null });
 
-    this._connect_signals();
+      this.set_MPV_ALIAS();
+      spawnCommandLine("%s %s".format(this.MPV_ALIAS, _id));
+      this.mpvStatus = "PLAY";
 
-    if (this.settings.getValue("notif-station-change") === true) {
-      this.radio_notify(_("Playing %s%s").format(this.get_radio_name(_id), this.codecAndBitrate));
-    }
+      this._connect_signals();
 
-    this.set_radio_tooltip_to_default_one();
+      if (this.settings.getValue("notif-station-change") === true) {
+        this.radio_notify(_("Playing %s%s").format(this.get_radio_name(_id), this.codecAndBitrate));
+      }
+
+      this.set_radio_tooltip_to_default_one();
 
 
-    this._increase_click_number(_id);
+      this._increase_click_number(_id);
 
-    _id = null;
-    recentRadios = null;
+      _id = null;
+      recentRadios = null;
 
-    //~ this.appletRunning = true;
+      //~ this.appletRunning = true;
+      },
+      this.waiting_time
+    );
   }
 
   stop_mpv_radio(notify_user=true) {
+    if (this.muteId) {
+      clearTimeout(this.muteId);
+      this.muteId = null;
+    }
     let pid = this.get_mpv_pid();
 
     if (!this.radioId || this.radioId.length === 0 || pid == null) return;
@@ -4090,6 +4148,36 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
     }
 
+    let _id = this.last_radio_listened_to;
+    if (this.radiosHash[_id].muteseconds && this.radiosHash[_id].muteseconds.length > 0 && this.radiosHash[_id].muteseconds != "0") {
+      let muteseconds = parseInt(this.radiosHash[_id].muteseconds);
+      if (!isNaN(muteseconds) && this.context_menu_item_slider) {
+        let old_value = this.context_menu_item_slider.slider._value;
+        this.context_menu_item_slider.slider._value = 1 / 100;
+        try { this.context_menu_item_slider.slider._slider.queue_repaint() } catch(e) {};
+        this.context_menu_item_slider.slider.emit('value-changed', 1 / 100);
+        this.volume = 1;
+        let unmute_func = () => {
+          this.volume = old_value * 100;
+          this.context_menu_item_slider.slider._value = old_value;
+          try { this.context_menu_item_slider.slider._slider.queue_repaint() } catch(e) {};
+          this.context_menu_item_slider.slider.emit('value-changed', old_value);
+          if (this.muteId != null) clearTimeout(this.muteId);
+          this.muteId = null;
+        };
+        this.radio_notify(this.radiosHash[_id].name, _("Temporary Mute"), [
+          _("Turn the sound back on"),
+          "callback",
+          () => unmute_func()
+        ]);
+        this.muteId = setTimeout(() => {
+            unmute_func();
+          },
+          1000 * muteseconds
+        );
+      }
+    }
+
     this.page_label = undefined;
     this.settingsWindow = undefined;
     this.volume_near_icon();
@@ -4470,6 +4558,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             (""+rh.codec != "undefined") && (""+rh.codec.length > 0)
           ) ? ""+rh.codec : (station.codec) ? station.codec : "";
 
+          new_station["muteseconds"] = (station.muteseconds) ? station.muteseconds : "";
+
           new_station["bitrate"] = ( (rh.bitrate != null) &&
             (""+rh.bitrate != "undefined") && (""+rh.bitrate.length > 0)
           ) ? ""+rh.bitrate : (station.bitrate) ? station.bitrate : "";
@@ -4492,6 +4582,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           new_station["play"] = false;
           new_station["name"] = station.name;
           new_station["codec"] = (station.codec && (station.codec.length > 0)) ? station.codec : "";
+          new_station["muteseconds"] = "";
           new_station["bitrate"] = (station.bitrate && (station.bitrate.length > 0)) ? station.bitrate : "";
           new_station["url"] = ""+id;
           new_station["uuid"] = "";
@@ -4521,7 +4612,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     let to = setTimeout( () => {
         // Reload this applet
         clearTimeout(to);
-        reloadExtension(UUID, Type.APPLET);
+        Extension.reloadExtension(UUID, Extension.Type.APPLET);
       },
       600
     );
@@ -5685,7 +5776,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           this.settingsWindow = window;
           app.connect("windows-changed", () => { this.settingsWindow = undefined; });
         }
-      }, 1000);
+      }, 2000);
     }
     // Returns the pid:
     return pid;
@@ -6208,6 +6299,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           "name": ""+_import.name,
           "bitrate": ""+_import.bitrate,
           "codec": ""+_import.codec,
+          "muteseconds": "",
           "url": ""+ _import.url,
           "uuid": ""+_import.uuid,
           "homepage": ""+_import.homepage,

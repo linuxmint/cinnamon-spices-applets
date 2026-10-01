@@ -10,15 +10,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-14 14:22+0000\n"
-"PO-Revision-Date: 2023-12-25 11:54+0100\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2026-06-02 19:17+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: dansk <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #. 3.8/weather-applet.js:20974
@@ -1525,7 +1525,7 @@ msgstr ""
 
 #. 3.8/weather-applet.js:9462
 msgid "Low"
-msgstr ""
+msgstr "Lav"
 
 #. 3.8/weather-applet.js:9465
 msgid "Moderate"
@@ -1533,17 +1533,15 @@ msgstr "Moderat"
 
 #. 3.8/weather-applet.js:9468
 msgid "High"
-msgstr ""
+msgstr "Høj"
 
 #. 3.8/weather-applet.js:9471
-#, fuzzy
 msgid "Very High"
-msgstr "Meget god"
+msgstr "Meget høj"
 
 #. 3.8/weather-applet.js:9474
-#, fuzzy
 msgid "Extreme"
-msgstr "Ekstrem regn"
+msgstr "Ekstrem"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
@@ -1554,12 +1552,11 @@ msgstr "mph"
 #. 3.8->settings-schema.json->windSpeedUnit->options
 #. 3.8/weather-applet.js:9607
 msgid "km/h"
-msgstr ""
+msgstr "km/h"
 
 #. 3.8/weather-applet.js:9609
-#, fuzzy
 msgid "Knots"
-msgstr "knob"
+msgstr "Knob"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
@@ -1572,20 +1569,20 @@ msgid ""
 "Address to location lookup service is blocked. You can try to change your "
 "User-Agent in help to see if it resolves the issue."
 msgstr ""
+"Adressen til placeringsopslagstjenesten er blokeret. Du kan prøve at ændre "
+"din “User-Agent” i hjælp for at se, om det løser problemet."
 
 #. 3.8/weather-applet.js:10862
 msgid "Ash"
-msgstr ""
+msgstr "Aske"
 
 #. 3.8/weather-applet.js:10864
-#, fuzzy
 msgid "Squall"
-msgstr "Vindstød"
+msgstr "Byge"
 
 #. 3.8/weather-applet.js:10941
-#, fuzzy
 msgid "Light shower sleet"
-msgstr "Lette snebyger"
+msgstr "Lette sludbyger"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1609,22 +1606,18 @@ msgid "Heavy drizzle"
 msgstr "Kraftig støvregn"
 
 #. 3.8/weather-applet.js:12462
-#, fuzzy
 msgid "Light shower rain"
-msgstr "Lette snebyger"
+msgstr "Lette regnbyger"
 
 #. 3.8/weather-applet.js:12466
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr "Kraftige snebyger"
+msgstr "Kraftige regnbyger"
 
 #. 3.8/weather-applet.js:12474
-#, fuzzy
 msgid "Mix snow/rain"
 msgstr "Slud"
 
 #. 3.8/weather-applet.js:12476
-#, fuzzy
 msgid "Snow shower"
 msgstr "Snebyger"
 
@@ -1839,211 +1832,185 @@ msgid "Pirate Weather"
 msgstr "Pirate Weather"
 
 #. 3.8/weather-applet.js:16002
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "Sikr dig, at du har indtastet\n"
-"API-nøglen, som du har fra Climacell"
+"API-nøglen, som du har fra Pirate Weather"
 
 #. 3.8/weather-applet.js:16458
-#, fuzzy
 msgid ""
 "Location Service couldn't find your location, please see the logs in Looking "
 "Glass"
-msgstr "Lokalitetstjenesten svarede med fejl. Se loggene i Luppen"
+msgstr ""
+"Lokalitetstjenesten kunne ikke finde din placering. Se loggene i Luppen"
 
 #. 3.8/weather-applet.js:16621
-#, fuzzy
 msgid "Snow grains"
-msgstr "Slud"
+msgstr "Snekorn"
 
 #. 3.8/weather-applet.js:16628
-#, fuzzy
 msgid "Light showers"
-msgstr "Lette snebyger"
+msgstr "Lette byger"
 
 #. 3.8/weather-applet.js:16642
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Kraftige snebyger"
+msgstr "Kraftige byger"
 
 #. 3.8/weather-applet.js:16670
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Tordenvejr med let regn"
+msgstr "Tordenvejr med let hagl"
 
 #. 3.8/weather-applet.js:16677
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Tordenvejr med regn"
+msgstr "Tordenvejr med hagl"
 
 #. 3.8/weather-applet.js:16704 3.8/weather-applet.js:16870
-#, fuzzy
 msgid "Feels like"
 msgstr "Føles som"
 
 #. 3.8->settings-schema.json->dataService->options
 #. 3.8/weather-applet.js:16773
 msgid "Open-Meteo"
-msgstr ""
+msgstr "Open-Meteo"
 
 #. 3.8/weather-applet.js:17053 3.8/weather-applet.js:17054
 #. 3.8/weather-applet.js:17060 3.8/weather-applet.js:17061
 #. 3.8/weather-applet.js:17304 3.8/weather-applet.js:17305
 #. 3.8/weather-applet.js:17311 3.8/weather-applet.js:17312
-#, fuzzy
 msgid "Scattered Sleet"
-msgstr "Spredte byger"
+msgstr "Spredt slud"
 
 #. 3.8/weather-applet.js:17123 3.8/weather-applet.js:17124
 #. 3.8/weather-applet.js:17130 3.8/weather-applet.js:17131
 #. 3.8/weather-applet.js:17224 3.8/weather-applet.js:17225
-#, fuzzy
 msgid "Chance of Thunderstorms"
-msgstr "Tordenvejr"
+msgstr "Risiko for tordenvejr"
 
 #. 3.8/weather-applet.js:17152 3.8/weather-applet.js:17153
-#, fuzzy
 msgid "Light Rain"
 msgstr "Let regn"
 
 #. 3.8/weather-applet.js:17160 3.8/weather-applet.js:17161
-#, fuzzy
 msgid "Light Sleet"
 msgstr "Let slud"
 
 #. 3.8/weather-applet.js:17176 3.8/weather-applet.js:17177
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "Periodisk regn"
 
 #. 3.8/weather-applet.js:17184 3.8/weather-applet.js:17185
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "Periodisk slud"
 
 #. 3.8/weather-applet.js:17192 3.8/weather-applet.js:17193
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "Periodisk sne"
 
 #. 3.8/weather-applet.js:17240 3.8/weather-applet.js:17241
-#, fuzzy
 msgid "Frequent Thunderstorms"
-msgstr "Kraftige tordenbyger"
+msgstr "Hyppige tordenbyger"
 
 #. 3.8/weather-applet.js:17247 3.8/weather-applet.js:17248
 #. 3.8/weather-applet.js:17254 3.8/weather-applet.js:17255
-#, fuzzy
 msgid "High Clouds"
-msgstr "Skyer"
+msgstr "Højtliggende skyer"
 
 #. 3.8/weather-applet.js:17262 3.8/weather-applet.js:17263
-#, fuzzy
 msgid "Low Clouds"
-msgstr "Skyer"
+msgstr "Lavtliggende skyer"
 
 #. 3.8/weather-applet.js:17361 3.8/weather-applet.js:17362
-#, fuzzy
 msgid "Overcast and Dry"
-msgstr "Overskyet og blæsende"
+msgstr "Overskyet og tørt"
 
 #. 3.8/weather-applet.js:17368 3.8/weather-applet.js:17369
 #. 3.8/weather-applet.js:17375 3.8/weather-applet.js:17376
 #. 3.8/weather-applet.js:17425 3.8/weather-applet.js:17426
 #. 3.8/weather-applet.js:17433 3.8/weather-applet.js:17434
-#, fuzzy
 msgid "Slightly Stormy"
-msgstr "Let sne"
+msgstr "Let storm"
 
 #. 3.8/weather-applet.js:17382 3.8/weather-applet.js:17383
 #. 3.8/weather-applet.js:17389 3.8/weather-applet.js:17390
-#, fuzzy
 msgid "Stormy Snow Showers"
-msgstr "Spredte snebyger"
+msgstr "Stormende snebyger"
 
 #. 3.8/weather-applet.js:17396 3.8/weather-applet.js:17397
 #. 3.8/weather-applet.js:17403 3.8/weather-applet.js:17404
-#, fuzzy
 msgid "Thundery Showers"
 msgstr "Tordenbyger"
 
 #. 3.8/weather-applet.js:17410 3.8/weather-applet.js:17411
 #. 3.8/weather-applet.js:17417 3.8/weather-applet.js:17418
 #. 3.8/weather-applet.js:17441 3.8/weather-applet.js:17442
-#, fuzzy
 msgid "Thundery Snow Showers"
-msgstr "Tordenbyger"
+msgstr "Tordensnebyger"
 
 #. 3.8/weather-applet.js:17530
-#, fuzzy
 msgid "Wind Warning"
-msgstr "Advarsel"
+msgstr "Vindvarsel"
 
 #. 3.8/weather-applet.js:17532
-#, fuzzy
 msgid "Thunderstorm Warning"
-msgstr "Tordenvejr med regn"
+msgstr "Tordenvarsel"
 
 #. 3.8/weather-applet.js:17534
-#, fuzzy
 msgid "Rain Warning"
-msgstr "Advarsel"
+msgstr "Regnvarsel"
 
 #. 3.8/weather-applet.js:17536
-#, fuzzy
 msgid "Snow Warning"
-msgstr "Advarsel"
+msgstr "Snevarsel"
 
 #. 3.8/weather-applet.js:17538
 msgid "Slippery Roads Warning"
-msgstr ""
+msgstr "Varsel om glatte vejr"
 
 #. 3.8/weather-applet.js:17540
-#, fuzzy
 msgid "Frost Warning"
-msgstr "Advarsel"
+msgstr "Frostvarsel"
 
 #. 3.8/weather-applet.js:17542
 msgid "Mass Movements Warning"
-msgstr ""
+msgstr "Varsel om skred"
 
 #. 3.8/weather-applet.js:17544
-#, fuzzy
 msgid "Heat Warning"
-msgstr "Advarsel"
+msgstr "Varmevarsel"
 
 #. 3.8/weather-applet.js:17546
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "Lavinevarsel"
 
 #. 3.8/weather-applet.js:17548
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "Jorskælvsvarsel"
 
 #. 3.8/weather-applet.js:17550
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "Skovbrandsvarsel"
 
 #. 3.8/weather-applet.js:17552
-#, fuzzy
 msgid "Flood Warning"
-msgstr "Advarsel"
+msgstr "Oversvømmelsesvarsel"
 
 #. 3.8/weather-applet.js:17572
 msgid "Swiss Météo"
-msgstr ""
+msgstr "Swiss Météo"
 
 #. 3.8/weather-applet.js:17591
 msgid "For this provider, you need to use a postcode."
-msgstr ""
+msgstr "Til denne udbyder skal bruges et postnummer."
 
 #. 3.8/weather-applet.js:17603
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
-msgstr ""
+msgstr "Til denne udbyder skal bruges et schweizisk postnummer fra 1000–9999."
 
 #. 3.8/weather-applet.js:17625
 msgid "Switzerland"
-msgstr ""
+msgstr "Schweiz"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8/weather-applet.js:17698
@@ -2051,9 +2018,8 @@ msgid "Met Office UK"
 msgstr "Met Office UK"
 
 #. 3.8/weather-applet.js:18216 3.8/weather-applet.js:18276
-#, fuzzy
 msgid "Could not obtain location, please see the logs in Looking Glass"
-msgstr "Lokalitetstjenesten svarede med fejl. Se loggene i Luppen"
+msgstr "Kunne ikke hente lokaliteten. Se loggene i Luppen"
 
 #. 3.8/weather-applet.js:18821
 msgid ""
@@ -2072,11 +2038,10 @@ msgstr ""
 " {configFilePath}"
 
 #. 3.8/weather-applet.js:19146
-#, fuzzy
 msgid "Make sure you entered a location or use Automatic location instead."
 msgstr ""
 "Sikr dig, at du har angivet en lokalitet eller brug automatisk lokalitet i "
-"stedet"
+"stedet."
 
 #. 3.8/weather-applet.js:19164
 msgid "This provider requires an API key to operate"
@@ -2101,22 +2066,32 @@ msgstr "Nedbøren vil begynde om {precipStart} minutter"
 #. 3.8/weather-applet.js:19791
 msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Lav risiko for skader som følge af udsættelse for sollys. UV-indeks: "
+"{uvIndex}"
 
 #. 3.8/weather-applet.js:19795
 msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Moderat risiko for skader som følge af udsættelse for sollys. UV-indeks: "
+"{uvIndex}"
 
 #. 3.8/weather-applet.js:19799
 msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Høj risiko for skader som følge af udsættelse for sollys. UV-indeks: "
+"{uvIndex}"
 
 #. 3.8/weather-applet.js:19803
 msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
 msgstr ""
+"Meget høj risiko for skader som følge af udsættelse for sollys. UV-indeks: "
+"{uvIndex}"
 
 #. 3.8/weather-applet.js:19807
 msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Ekstrem risiko for skader som følge af udsættelse for sollys. UV-indeks: "
+"{uvIndex}"
 
 #. 3.8/weather-applet.js:19925
 msgid "Forecast parsing failed, see logs for more details."
@@ -2124,7 +2099,7 @@ msgstr "Tolkning af vejrudsigt mislykkedes. Se loggen for flere detaljer."
 
 #. 3.8/weather-applet.js:20518 3.8/weather-applet.js:21145
 msgid "As of {lastUpdatedTime}"
-msgstr "Fra"
+msgstr "Fra {lastUpdatedTime}"
 
 #. 3.8/weather-applet.js:20524
 msgid "{distance} {distanceUnit} from you"
@@ -2140,7 +2115,7 @@ msgstr "Område: {stationArea}"
 
 #. 3.8/weather-applet.js:20541
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} vejrvarsler"
 
 #. 3.8/weather-applet.js:20936 3.8/weather-applet.js:20946
 #. 3.8/weather-applet.js:20953
@@ -2148,9 +2123,8 @@ msgid "Error Saving Debug Information"
 msgstr "Der opstod en fejl, da fejlsøgningsinformation skulle gemmes"
 
 #. 3.8/weather-applet.js:20953
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "Kunne ikke hente oplysninger om vejret"
+msgstr "Kunne ikke åbne filen {filePath} til skrivning"
 
 #. 3.8/weather-applet.js:20962
 msgid "Debug Information saved successfully"
@@ -2161,47 +2135,44 @@ msgid "Saved to {filePath}"
 msgstr "Gemt i {filePath}"
 
 #. 3.8/weather-applet.js:20991
-#, fuzzy
 msgid "Location Service Blocked"
-msgstr "Lokalitetslager"
+msgstr "Lokalitetstjeneste blokeret"
 
 #. 3.8/weather-applet.js:21185
 msgid "No Script Provided"
-msgstr ""
+msgstr "Intet program angivet"
 
 #. 3.8/weather-applet.js:21185
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Du skal først tilføje et program."
 
 #. 3.8/weather-applet.js:21189
-#, fuzzy
 msgid "No Weather Data"
-msgstr "US Weather"
+msgstr "Ingen vejrdata"
 
 #. 3.8/weather-applet.js:21189
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Ingen vejrdata som programmet kan køres med"
 
 #. 3.8/weather-applet.js:21197
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "Programmet blev udført"
 
 #. 3.8/weather-applet.js:21197
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Dit program blev udført."
 
 #. 3.8/weather-applet.js:21200
 msgid "Error Running Script"
-msgstr ""
+msgstr "Fejl under kørsel af program"
 
 #. 3.8/weather-applet.js:21200
 msgid "Script returned error, see logs for more information"
-msgstr ""
+msgstr "Programmet returnerede fejl. Se loggene for flere oplysninger"
 
 #. 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Vejret"
+msgstr "Vejret — Varsler"
 
 #. 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2621,7 +2592,7 @@ msgstr "Lokalitetssindstillinger"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Teknisk og automatisering"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2684,17 +2655,15 @@ msgstr "US National Weather (kun USA)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Swiss Météo (Switzerland only)"
-msgstr ""
+msgstr "Swiss Météo (kun Schweiz)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "Met Office UK (key needed)"
-msgstr "Met Office UK (kun UK)"
+msgstr "Met Office UK (nøgle påkrævet)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "Weatherbit (nøgle nødvendig)"
+msgstr "OpenWeatherMap OneCall (nøgle påkrævet)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Pirate Weather (key needed)"
@@ -2722,12 +2691,18 @@ msgid ""
 "provides global weather data with various parameters and forecast lengths. "
 "More information can be found at open-meteo.com."
 msgstr ""
+"Open-Meteo er en gratis vejrtjeneste, der ikke kræver en API-nøgle. Den "
+"leverer globale vejrdata med forskellige parametre og vejrudsigtslængder. Du "
+"kan finde mere information på open-meteo.com."
 
 #. 3.8->settings-schema.json->openweathermap_label->description
 msgid ""
 "Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with "
 "headquarters in London UK. Read more about the service at openweathermap.org."
 msgstr ""
+"Global online vejrtjeneste fra OpenWeather Ltd. der blev grundlagt i 2012 "
+"med hovedkontor i London, Storbritannien. Læs mere om tjenesten på "
+"openweathermap.org."
 
 #. 3.8->settings-schema.json->metnorway_label->description
 msgid ""
@@ -2741,6 +2716,15 @@ msgid ""
 "there is a possibility that they are inaccurate sometimes.\n"
 " - Alerts are only available in Norway"
 msgstr ""
+"Gratis vejrdata og vejrudsigter fra Norges Meteorologisk institutt, der blev "
+"grundlagt i 1866. Læs mere om tjenesten på www.met.no/en.\n"
+"\n"
+" - Nowcast (øjeblikkelig nedbør og detaljerede observationer) er ikke "
+"tilgængelig uden for Norge. I så fald vises observationer for den kommende "
+"time.\n"
+" - Daglige vejrudsigter genereres ud fra 6-timers prognoser (for hver time), "
+"så der er en mulighed for, at de nogle gange er unøjagtige.\n"
+" - Varsler er kun tilgængelige i Norge"
 
 #. 3.8->settings-schema.json->dmidenmark_label->description
 msgid ""
@@ -2748,12 +2732,15 @@ msgid ""
 "forecasts and observations for Denmark, Greenland, and the Faroe Islands. "
 "Read more about the institute at www.dmi.dk."
 msgstr ""
+"Danmarks Meteorologiske Institut (DMI) blev oprettet i 1872 og udarbejder "
+"vejrudsigter og foretager vejrobservationer for Danmark, Grønland og "
+"Færøerne. Læs mere om instituttet på www.dmi.dk."
 
 #. 3.8->settings-schema.json->deutscherwetterdienst_label->description
 msgid ""
-"German National Weather Provider. Read more about the institute at "
-"www.dwd.de."
-msgstr ""
+"German National Weather Provider. Read more about the institute at www.dwd."
+"de."
+msgstr "Der Deutsche Wetterdienst . Læs mere om instituttet på www.dwd.de."
 
 #. 3.8->settings-schema.json->usweather_label->description
 msgid ""
@@ -2766,26 +2753,47 @@ msgid ""
 " - Observations are quite spotty so it combines multiple observation "
 "stations if needed in a 50km area"
 msgstr ""
+"National Weather Service i USA er en føderal myndighed, der blev oprettet i "
+"1861. Læs mere om tjenesten på www.weather.gov.\n"
+"\n"
+" - Dækker kun USA\n"
+" - Det kan tage 10-15 sekunder at hente vejrdata, så vær tålmodig, når der "
+"indlæses første gang\n"
+" - Målingerne er ret spredte, så tjenesten kombinerer om nødvendigt data fra "
+"flere målestationer inden for et område på 50 km"
 
 #. 3.8->settings-schema.json->swissmeteo_label->description
 msgid ""
-"Swiss national weather service. Read more about the service at "
-"www.meteoswiss.admin.ch.\n"
+"Swiss national weather service. Read more about the service at www."
+"meteoswiss.admin.ch.\n"
 "\n"
 " - Only covers Switzerland\n"
 " - You need to use your post code instead of coordinates"
 msgstr ""
+"MeteoSwiss — Det schweiziske meteorologiske institut. Læs mere om tjenesten "
+"på www.meteoswiss.admin.ch.\n"
+"\n"
+" - Dækker kun Schweiz\n"
+" - Du skal bruge dit postnummer i stedet for koordinater"
 
 #. 3.8->settings-schema.json->metoffice_label->description
 msgid ""
 "The Meteorological Office, abbreviated as the Met Office, is the UK's "
-"national weather service founded in 1854. Read more about the service at "
-"www.metoffice.gov.uk.\n"
+"national weather service founded in 1854. Read more about the service at www."
+"metoffice.gov.uk.\n"
 "\n"
 " - You only have 360 calls a day free, the applet uses 2 at a time so "
 "minimum of 15 minutes refresh time is recommended.\n"
 " - To get API keys, register at datahub.metoffice.gov.uk"
 msgstr ""
+"Meteorological Office, også kaldet Met Office, er Storbritanniens nationale "
+"vejrtjeneste, der blev grundlagt i 1854. Læs mere om tjenesten på www."
+"metoffice.gov.uk.\n"
+"\n"
+" - Du har kun 360 gratis forespørgsler om dagen, og appen bruger 2 ad "
+"gangen, så det anbefales at indstille opdateringsintervallet til mindst 15 "
+"minutter.\n"
+" - For at få API-nøgler skal du registrere dig på datahub.metoffice.gov.uk"
 
 #. 3.8->settings-schema.json->openweathermap_onecall_label->description
 msgid ""
@@ -2793,6 +2801,10 @@ msgid ""
 "an API key. Make sure your call limit is 1000 calls/day to avoid charges. "
 "Read more about the service at openweathermap.org/api/one-call-api."
 msgstr ""
+"En version af OpenWeatherMap, der understøtter flere funktioner (som før), "
+"men kræver en API-nøgle. Sørg for, at din forbrugsgrænse er sat til 1000 "
+"forespørgsler om dagen for at undgå gebyrer. Læs mere om tjenesten på "
+"openweathermap.org/api/one-call-api."
 
 #. 3.8->settings-schema.json->pirateweather_label->description
 msgid ""
@@ -2800,6 +2812,9 @@ msgid ""
 "data that is compatible with the Dark Sky API. Read more about the service "
 "at pirateweather.net."
 msgstr ""
+"Pirate Weather er en gratis open source-vejrtjeneste, der leverer vejrdata, "
+"som er kompatible med Dark Sky API. Læs mere om tjenesten på pirateweather."
+"net."
 
 #. 3.8->settings-schema.json->visualcrossing_label->description
 msgid ""
@@ -2810,6 +2825,12 @@ msgid ""
 " - Provides 1000 Free calls a day\n"
 " - Needs an API key"
 msgstr ""
+"Vejrtjeneste fra Visual Crossing Corporation der blev grundlagt i 2003 med "
+"hovedkontorer i USA og Tyskland. Læs mere om tjenesten på visualcrossing."
+"com.\n"
+"\n"
+" - Tilbyder 1000 gratis forespørgsler om dagen\n"
+" - Kræver en API-nøgle"
 
 #. 3.8->settings-schema.json->weatherbit_label->description
 msgid ""
@@ -2822,16 +2843,30 @@ msgid ""
 " - Using alerts will increase call usage by 33%\n"
 " - Hourly Weather forecast is supported but requires a non-free account."
 msgstr ""
+"Tjeneste med historiske og forventede vejrdata leveret af Weatherbit LLC i "
+"USA. Læs mere om tjenesten på weatherbit.io.\n"
+"\n"
+" - En opdateringsfrekvens på mindst 1 time anbefales, ellers risikerer du at "
+"overskride din daglige kvote. Det gratis API-abonnement er begrænset til 50 "
+"forespørgsler om dagen.\n"
+" - Kræver en API-nøgle\n"
+" - Brug af alarmer øger antal forespørgsler med 33 %\n"
+" - Timebaserede vejrudsigter understøttes, men kræver en betalt konto."
 
 #. 3.8->settings-schema.json->tomorrowio_label->description
 msgid ""
 "Meteorological data from American weather technology company with "
-"headquarters in Boston since 2016. Read more about the service at "
-"tomorrow.io.\n"
+"headquarters in Boston since 2016. Read more about the service at tomorrow."
+"io.\n"
 "\n"
 " - Free plan includes 1000 calls per day\n"
 " - Needs an API key"
 msgstr ""
+"Vejrdata fra et amerikansk vejrteknologifirma med hovedkvarter i Boston "
+"siden 2016. Læs mere om tjenesten på tomorrow.io.\n"
+"\n"
+" - Gratisabonnementet omfatter 1000 forespørgsler om dagen\n"
+" - Kræver en API-nøgle"
 
 #. 3.8->settings-schema.json->accuweather_label->description
 msgid ""
@@ -2843,6 +2878,13 @@ msgid ""
 "day, remaining number of calls are shown in the applet tooltip\n"
 " - Needs an API key"
 msgstr ""
+"Onlinetjeneste fra firmaet AccuWeather Inc., der blev grundlagt i 1962 og "
+"har hovedkvarter i USA, tilbyder globale vejrdata. Læs mere om tjenesten på "
+"accuweather.com.\n"
+"\n"
+" - Med den gratis version er der kun et meget begrænset antal forespørgsler "
+"om dagen; det resterende antal vises i panelprogrammets værktøjstip\n"
+" - Kræver en API-nøgle"
 
 #. 3.8->settings-schema.json->weatherunderground_label->description
 msgid ""
@@ -2855,106 +2897,107 @@ msgid ""
 " - Needs an API key\n"
 " - Current weather condition come from forecast"
 msgstr ""
+"Weather Underground er et privatejet, webbaseret firma, der leverer "
+"vejrinformation. Det leverer vejrobservationer og -udsigter for et stort "
+"antal steder rundt om i verden. Hovedkvarteret ligger i Ann Arbor i USA. Læs "
+"mere om tjenesten på wunderground.com.\n"
+"\n"
+" - Tillader kun 1500 forespørgsler om dagen, så en opdateringsfrekvens på 15 "
+"minutter anbefales\n"
+" - Kræver en API-nøgle\n"
+" - De aktuelle vejrforhold stammer fra vejrudsigten"
 
 #. 3.8->settings-schema.json->metoffice_forecast_apikey->description
-#, fuzzy
 msgid "Forecasts API Key"
-msgstr "Forkert API-nøgle"
+msgstr "API-nøgle til vejrudsigter"
 
 #. 3.8->settings-schema.json->metoffice_forecast_apikey->tooltip
 msgid ""
 "Subscribe to 'Site Specific' -> 'Global Spot' Free plan to get this key."
 msgstr ""
+"Abonnér på “Site Specific” -> “Global Spot” (gratis abonnement) for at få "
+"denne nøgle."
 
 #. 3.8->settings-schema.json->metoffice_observations_apikey->description
 msgid "Observations API Key"
-msgstr ""
+msgstr "API-nøgle til observationer"
 
 #. 3.8->settings-schema.json->metoffice_observations_apikey->tooltip
 msgid ""
 "Subscribe to 'Observations' -> 'Land Observations' Free plan to get this key."
 msgstr ""
+"Abonnér på “Observations” -> “Land Observations” (gratis abonnement) for at "
+"få denne nøgle."
 
 #. 3.8->settings-schema.json->openweathermap_onecall_apikey->description
-#, fuzzy
 msgid "OpenWeatherMap OneCall API Key"
-msgstr "Weatherbit (nøgle nødvendig)"
+msgstr "API-nøgle til OpenWeatherMap OneCall"
 
 #. 3.8->settings-schema.json->openweathermap_onecall_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at openweathermap.org and paste it here."
-msgstr "Kopiér denne fra din konto hos datatjenesten og indsæt den her."
+msgstr "Kopiér denne fra din konto hos openweathermap.org og indsæt den her."
 
 #. 3.8->settings-schema.json->pirateweather_apikey->description
-#, fuzzy
 msgid "Pirate Weather API Key"
-msgstr "Pirate Weather"
+msgstr "API-nøgle til Pirate Weather"
 
 #. 3.8->settings-schema.json->pirateweather_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at pirateweather.net and paste it here."
-msgstr "Kopiér denne fra din konto hos datatjenesten og indsæt den her."
+msgstr "Kopiér denne fra din konto hos pirateweather.net og indsæt den her."
 
 #. 3.8->settings-schema.json->visualcrossing_apikey->description
-#, fuzzy
 msgid "Visual Crossing API Key"
-msgstr "Visual Crossing"
+msgstr "API-nøgle til Visual Crossing"
 
 #. 3.8->settings-schema.json->visualcrossing_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at visualcrossing.com and paste it here."
-msgstr "Kopiér denne fra din konto hos datatjenesten og indsæt den her."
+msgstr "Kopiér denne fra din konto hos visualcrossing.com og indsæt den her."
 
 #. 3.8->settings-schema.json->weatherbit_apikey->description
-#, fuzzy
 msgid "Weatherbit API Key"
-msgstr "WeatherBit"
+msgstr "API-nøgle til WeatherBit"
 
 #. 3.8->settings-schema.json->weatherbit_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at weatherbit.io and paste it here."
-msgstr "Kopiér denne fra din konto hos datatjenesten og indsæt den her."
+msgstr "Kopiér denne fra din konto hos weatherbit.io og indsæt den her."
 
 #. 3.8->settings-schema.json->tomorrowio_apikey->description
-#, fuzzy
 msgid "Tomorrow.io API Key"
-msgstr "Tomorrow.io"
+msgstr "API-nøgle til Tomorrow.io"
 
 #. 3.8->settings-schema.json->tomorrowio_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at tomorrow.io and paste it here."
-msgstr "Kopiér denne fra din konto hos datatjenesten og indsæt den her."
+msgstr "Kopiér denne fra din konto hos tomorrow.io og indsæt den her."
 
 #. 3.8->settings-schema.json->accuweather_apikey->description
-#, fuzzy
 msgid "AccuWeather API Key"
-msgstr "AccuWeather"
+msgstr "API-nøgle til AccuWeather"
 
 #. 3.8->settings-schema.json->accuweather_apikey->tooltip
-#, fuzzy
 msgid ""
 "Copy this from your account at developer.accuweather.com and paste it here."
-msgstr "Kopiér denne fra din konto hos datatjenesten og indsæt den her."
+msgstr ""
+"Kopiér denne fra din konto hos developer.accuweather.com og indsæt den her."
 
 #. 3.8->settings-schema.json->weatherunderground_apikey->description
-#, fuzzy
 msgid "Weather Underground API Key"
-msgstr "Weather Underground"
+msgstr "API-nøgle til Weather Underground"
 
 #. 3.8->settings-schema.json->weatherunderground_apikey->tooltip
-#, fuzzy
 msgid ""
 "Copy this from your account at www.wunderground.com/weather/api and paste it "
 "here."
-msgstr "Kopiér denne fra din konto hos datatjenesten og indsæt den her."
+msgstr ""
+"Kopiér denne fra din konto hos www.wunderground.com/weather/api og indsæt "
+"den her."
 
 #. 3.8->settings-schema.json->apiKey->description
 msgid "API Key - Hidden, only for backwards compatibility"
-msgstr ""
+msgstr "API-nøgle (skjult, udelukkende af hensyn til bagudkompatibilitet)"
 
 #. 3.8->settings-schema.json->geoclue->description
 msgid "Prioritize GeoClue for location detection"
-msgstr ""
+msgstr "Prioritér GeoClue til lokalitetsbestemmelse"
 
 #. 3.8->settings-schema.json->geoclue->tooltip
 msgid ""
@@ -2964,54 +3007,66 @@ msgid ""
 "fall back to IP-based location detection if GeoClue is not available or "
 "fails to provide location information."
 msgstr ""
+"Aktivér denne indstilling for først at forsøge at bruge GeoClue til "
+"automatisk lokalitetsbestemmelse, hvis det er muligt. Dette kan give mere "
+"nøjagtige lokalitetsoplysninger på enheder med understøttende hardware, men "
+"kan være meget unøjagtigt uden. Systemet vil stadig falde tilbage på IP-"
+"baseret lokalitetsbestemmelse, hvis GeoClue ikke er tilgængelig eller ikke "
+"kan levere lokalitetsoplysninger."
 
 #. 3.8->settings-schema.json->autoloc_provider->description
 msgid "IP-based automatic location provider"
-msgstr ""
+msgstr "Automatisk lokalitetsudbyder baseret på IP"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geoip.fedoraproject.org"
-msgstr ""
+msgstr "geoip.fedoraproject.org"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "ipapi.com"
-msgstr ""
+msgstr "ipapi.com"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geojs.io"
-msgstr ""
+msgstr "geojs.io"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geoiplookup.io"
-msgstr ""
+msgstr "geoiplookup.io"
 
 #. 3.8->settings-schema.json->autoloc_provider->tooltip
 msgid ""
 "Usually this doesn't need changed, some users have reported better accuracy, "
 "corporate network support or various country-wide bans with one or other."
 msgstr ""
+"Normalt er der ingen grund til at ændre dette, men nogle brugere har "
+"rapporteret om bedre nøjagtighed, understøttelse af virksomhedsnetværk eller "
+"forskellige landsdækkende blokeringer med den ene eller den anden "
+"indstilling."
 
 #. 3.8->settings-schema.json->location->tooltip
-#, fuzzy
 msgid ""
 "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
 "{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
 "the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice. Powered by "
-"nominatim.openstreetmap.org."
+"replaced automatically for validating your choice. Powered by nominatim."
+"openstreetmap.org."
 msgstr ""
-"Du kan indtaste koordinaterne manuelt som “breddegrad,længdegrad” (f.eks.. "
+"Du kan indtaste koordinaterne “breddegrad,længdegrad” (f.eks.. "
 "51.5085,-0.1257) eller bruge “by,landekode” (f.eks. København,DK) eller prøv "
 "at skrive {Husnummer} {Gade} {By} {Postnummer} {Land}. Søgealgoritmen er "
 "meget fleksibel mht. formatet. Tre sekunder efter, du har tastet, erstattes "
-"den indtastede adresse automatisk for at validere din indtastning."
+"den indtastede adresse automatisk for at validere din indtastning. Leveret "
+"af nominatim.openstreetmap.org."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
 "If the location field matches a saved location's 'Search Entry' field, the "
 "saved location will be used instead."
 msgstr ""
+"Hvis feltet “Lokalitet” stemmer overens med feltet “Søgeindtastning” for en "
+"gemt lokalitet, vil den gemte lokalitet blive brugt i stedet."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -3071,20 +3126,21 @@ msgstr ""
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Aktivér visning af vejrvarsler"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Knappen “Varsler” vises i pop op-menuen, hvis der er aktive varsler for din "
+"lokalitet."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
 msgstr "Vis begge temperaturenheder på samme tid"
 
 #. 3.8->settings-schema.json->tempTextOverride->tooltip
-#, fuzzy
 msgid ""
 "Some of the available values are: {c} is condition, {t} is temperature and "
 "{u} is unit. Full list of values are available on the Cinnamon spices "
@@ -3093,7 +3149,7 @@ msgid ""
 "things."
 msgstr ""
 "Nogle af de tilgængelige værdier er: {c} forhold, {t} temperatur og {u} "
-"enhed.\n"
+"enhed. Den fulde liste over værdier findes på Cinnamon Spices’ websted.\n"
 "Kan bruges (som en blandt flere smarte ting), hvis mærkaten ikke passer i et "
 "lodret panel."
 
@@ -3170,7 +3226,7 @@ msgstr "F.eks. SØ, N i stedet for retningsikoner."
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "Udbyder skal oversætte forholdene (hvis tilgængeligt)"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -3178,6 +3234,9 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Din udbyder bør oversætte forholdene til dit sprog, hvis din "
+"sprogindstilling understøttes af udbyderen. I modsat fald vil "
+"panelprogrammet bruge sit eget oversættelsessystem."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -3212,9 +3271,8 @@ msgstr ""
 " Sørg for, at problemet ikke allerede er rapporteret."
 
 #. 3.8->settings-schema.json->maintainer->description
-#, fuzzy
 msgid "Current maintainer: ---"
-msgstr "Nuværende vedligeholder: Gr3q"
+msgstr "Nuværende vedligeholder: ---"
 
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
@@ -3241,11 +3299,11 @@ msgstr ""
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
 "Your location in most cases work automatically but you can enter it manually "
-"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
-"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
-"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
-"the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice."
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,"
+"Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/"
+"Town} {Postcode} {Country}. The search algorithm is very flexible with the "
+"format. After 3 seconds without typing the address you entered is replaced "
+"automatically for validating your choice."
 msgstr ""
 "I de fleste tilfælde findes din lokalitet automatisk, men du kan også "
 "indtaste koordinaterne manuelt som “breddegrad,længdegrad” (f.eks. "
@@ -3291,7 +3349,7 @@ msgstr "Valgt sti hvor logge gemmes"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Tilsidesættelse af User Agent-strengen"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -3300,10 +3358,14 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Hvis du oplever problemer med, at panelprogrammet ikke fungerer korrekt, og "
+"du ved, at User Agent-strengen er årsagen, kan du prøve at ændre den. Du bør "
+"kun ændre den, hvis du ved, hvad du gør. Dette er en streng, der sendes til "
+"serveren, når panelprogrammet forsøger at hente vejrdata."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Kør en kommando, når vejroplysningerne ændres"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -3323,14 +3385,28 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"Penelprogrammet udfører den kommando, du angiver, hver gang vejrdataene "
+"opdateres. Kommandoen vil indeholde de samme værdier i det samme format, som "
+"du kan få i alle overskrivningerne, og derudover får du {full_data}, som er "
+"de fulde aktuelle vejrdata. Interpolering med enkeltparenteser {xxx} vil "
+"ikke blive undtaget, med dobbeltparenteser {{xxxx}} indsættes de i "
+"enkeltanførselstegn (') og alle andre enkeltanførselstegn undtages indeni. "
+"Du kan bruge dette til at integrere vejrdataene med andre dele af dit "
+"system. Du kan slå den fulde vejrdatastruktur op via linket i README.\n"
+"\n"
+"Eksempel: 'notify-send \"Vejret er {c}, og temperaturen er {t}{u}\"' viser "
+"en meddelelse med de aktuelle vejrforhold og temperaturen.\n"
+"\n"
+"Eksempel: 'echo {{full_data}} > /tmp/weather_data' gemmer de fulde vejrdata "
+"i en fil i /tmp."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Test din kommando"
 
 #. 3.8->settings-schema.json->uvIndex->description
 msgid "Enable displaying UV Index"
-msgstr ""
+msgstr "Aktivér visning af UV-indeks"
 
 #. 3.8->settings-schema.json->uvIndex->tooltip
 msgid ""
@@ -3338,3 +3414,6 @@ msgid ""
 "next to sunrise/sunset times. It will not show if the UV index is low risk "
 "(0-2)."
 msgstr ""
+"Hvis din udbyder understøtter det, vises UV-indekset i pop op-menuen ved "
+"siden af solopgangs- og solnedgangstiderne. Det vises ikke, hvis UV-indekset "
+"er lavt (0–2)."

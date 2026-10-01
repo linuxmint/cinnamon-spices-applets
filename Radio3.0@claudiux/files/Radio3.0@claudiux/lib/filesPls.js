@@ -2,11 +2,22 @@
  * Code from the download-and-upload-speed@cardsurf applet.
  * Many thanks to @cardsurf!
  */
-let Files= require('./lib/files');
-
 const {
-  get_home_dir
+  get_home_dir,
+  getenv
 } = imports.gi.GLib; //GLib
+
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
+var { Files } = _require("./lib/files");
 
 /** Constants
  */
@@ -31,7 +42,7 @@ const COLUMNS = {
 /**
  * class StationsRowCsv
  */
-class StationsRowCsv {
+var StationsRowCsv = class StationsRowCsv {
     constructor (inc, name, url) {
         this.inc = inc;
         this.name = name;
@@ -43,7 +54,7 @@ class StationsRowCsv {
 /**
  * class StationsFilePls
  */
-class StationsFilePls {
+var StationsFilePls = class StationsFilePls {
     constructor (path = DEFAULT_PLS_PATH) {
         this.path = path;
         this.csv_separator = ";";

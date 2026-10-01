@@ -1,76 +1,78 @@
-# SOME DESCRIPTIVE TITLE.
+# DAILY DESKTOP WALLPAPER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Tomfez, 2025
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: daily-wallpaper@Tomfez\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2024-09-25 20:36+0200\n"
-"PO-Revision-Date: 2025-12-09 10:50+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-25 21:09+0100\n"
+"PO-Revision-Date: 2026-02-25 21:10+0100\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 #. applet.js:47
 msgid "Daily desktop wallpaper"
 msgstr "Fond d'écran quotidien"
 
-#. applet.js:117
+#. applet.js:123
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#. applet.js:130
+#. applet.js:136
 msgid "Copy image URL to clipboard"
 msgstr "Copier l'URL de l'image vers le presse-papiers"
 
-#. applet.js:131
+#. applet.js:137
 msgid "Open image folder"
 msgstr "Ouvrir le répertoire de l'image"
 
-#. applet.js:133
+#. applet.js:139
 msgid "Settings"
 msgstr "Paramètres"
 
-#. applet.js:290
+#. applet.js:296
 msgid "Next refresh"
 msgstr "Prochaine actualisation"
 
-#. applet.js:336
+#. applet.js:343
 msgid "This is the most recent image."
 msgstr "L'image est déjà la plus récente."
 
-#. applet.js:344
+#. applet.js:351
 msgid "Last image. Unable to get more images."
 msgstr "Dernière image. Impossible d'obtenir plus d'images."
 
-#. applet.js:388
+#. applet.js:395
 msgid "Refresh deactivated"
 msgstr "Actualisation désactivée"
 
-#. applet.js:448 applet.js:475
+#. applet.js:455 applet.js:482
 #, javascript-format
 msgid "Wallpaper of the day at %s for %s"
 msgstr "Fond d'écran du jour de %s du %s"
 
-#. source.js:83 source.js:102
+#. source.js:98 source.js:117
 msgid "No image today."
 msgstr "Pas d'image aujourd'hui."
 
-#. utils.js:90 utils.js:93
+#. utils.js:96 utils.js:99
 msgid "minutes"
 msgstr "minutes"
 
-#. utils.js:96
+#. utils.js:102
 msgid "days"
 msgstr "jours"
 
-#. utils.js:99
+#. utils.js:105
 msgid "hours"
 msgstr "heures"
 
@@ -114,6 +116,10 @@ msgstr "Wikimedia"
 #. settings-schema.json->currentSource->options
 msgid "APOD"
 msgstr "APOD"
+
+#. settings-schema.json->currentSource->options
+msgid "Picsum Photos"
+msgstr "Picsum Photos"
 
 #. settings-schema.json->refreshInterval->description
 msgid "Update interval to check new wallpaper"
@@ -350,6 +356,26 @@ msgstr ""
 "Ajouter votre clé API pour l'APOD. La clé API par défaut est utilisée à des "
 "fins d'exploration des autres APIs avant l'inscription. Cependant les taux "
 "ont une limite bien plus faibles."
+
+#. settings-schema.json->image-width-option->description
+msgid "Set the prefered width for the image"
+msgstr "Définir la largeur souhaitée pour l'image"
+
+#. settings-schema.json->image-height-option->description
+msgid "Set the prefered height for the image"
+msgstr "Définir la hauteur souhaitée pour l'image"
+
+#. settings-schema.json->image-blur-option->description
+msgid "Get a blurred image"
+msgstr "Obtenir une image floutée"
+
+#. settings-schema.json->image-blur-amount->description
+msgid "Adjust the amount of blur by providing a number between 1 and 10"
+msgstr "Ajustez le niveau de flou en saisissant un nombre entre 1 et 10"
+
+#. settings-schema.json->image-grayscale-option->description
+msgid "Get a grayscale image"
+msgstr "Obtenir une image en noir et blanc"
 
 #. settings-schema.json->image-aspect-options->description
 msgid "Image aspect"

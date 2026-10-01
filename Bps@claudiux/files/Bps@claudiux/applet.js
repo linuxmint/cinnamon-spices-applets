@@ -6,11 +6,21 @@ const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const Util = imports.misc.util;
-const { to_string } = require("./lib/to-string");
+
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
+const { to_string } = _require("./lib/to-string");
 const {
   timeout_add_seconds,
   remove_all_sources
-} = require("./lib/mainloopTools");
+} = _require("./lib/mainloopTools");
 
 const UUID = "Bps@claudiux";
 const APPLET_NAME = _("Bps: Instant Network Speed");
@@ -55,7 +65,7 @@ function _(str) {
     return Gettext.dgettext(UUID, str);
 }
 
-class Bps extends Applet.Applet {
+var Bps = class Bps extends Applet.Applet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
         this.orientation = orientation;
@@ -255,7 +265,7 @@ class Bps extends Applet.Applet {
                         unit = _(" kb");
                 }
             }
-            return value + unit;
+            return value.padStart(5) + unit;
         }
 
         if (this.unit_type === 0) { // bytes
@@ -332,8 +342,8 @@ class Bps extends Applet.Applet {
         } else {
             // Returns 1 decimal, even if this is 0.
             if (v.includes("."))
-                return v;
-            return v+".0"
+                return v.padStart(5);
+            return (v+".0").padStart(5)
         }
     } // End of formatted_string
 

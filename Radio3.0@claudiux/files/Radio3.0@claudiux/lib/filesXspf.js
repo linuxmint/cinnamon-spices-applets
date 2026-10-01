@@ -2,16 +2,29 @@
  * Code from the download-and-upload-speed@cardsurf applet.
  * Many thanks to @cardsurf!
  */
-
-let Files = require('./lib/files');
-let HtmlEncodeDecode = require('./lib/htmlEncodeDecode');
 const {
-  xml2json
-} = require('lib/xml2json.min');
-
-const {
-  get_home_dir
+  get_home_dir,
+  getenv
 } = imports.gi.GLib; //GLib
+
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
+var { Files } = _require("./lib/files");
+var { HtmlEncodeDecode } = _require("./lib/htmlEncodeDecode");
+var { xml2json } = _require("lib/xml2json.min");
+
+//~ let HtmlEncodeDecode = require('./lib/htmlEncodeDecode');
+//~ const {
+  //~ xml2json
+//~ } = require('lib/xml2json.min');
 
 /** Constants
  */
@@ -34,7 +47,7 @@ const COLUMNS = {
 /**
  * class StationsRowCsv
  */
-class StationsRowCsv {
+var StationsRowCsv = class StationsRowCsv {
     constructor (inc, name, url) {
         this.inc = inc;
         this.name = name;
@@ -46,7 +59,7 @@ class StationsRowCsv {
 /**
  * class StationsFileXspf
  */
-class StationsFileXspf {
+var StationsFileXspf = class StationsFileXspf {
     constructor (path = DEFAULT_XSPF_PATH) {
         this.path = path;
         this.csv_separator = ";";

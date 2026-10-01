@@ -136,17 +136,17 @@ MyApplet.prototype = {
         this.menuItemContrastValue.set_text(this._get_contrast_label(this.currContrastValue));
 
         if (this.currBrightnessValue === undefined) {
-            this.menutItemBrightnessSlider.actor.hide();
+            this.menutItemBrightnessSlider.actor.reactive = false;
         } else {
             this.menutItemBrightnessSlider.setValue(this.currBrightnessValue);
-            this.menutItemBrightnessSlider.actor.show();
+            this.menutItemBrightnessSlider.actor.reactive = true;
         }
 
         if (this.currContrastValue === undefined) {
-            this.menutItemContrastSlider.actor.hide();
+            this.menutItemContrastSlider.actor.reactive = false;
         } else {
             this.menutItemContrastSlider.setValue(this.currContrastValue);
-            this.menutItemContrastSlider.actor.show();
+            this.menutItemContrastSlider.actor.reactive = true;
         }
     },
 
@@ -169,7 +169,7 @@ MyApplet.prototype = {
     _get_current_brightness: function () {
         return new Promise(Lang.bind(this, function (resolve, reject) {
 
-            this.menutItemBrightnessSlider.actor.hide();
+            this.menutItemBrightnessSlider.actor.reactive = false;
 
             // this._spawn_cmd(['ddcutil', 'capabilities', '|', 'grep', 'Brightness'])
             this._spawn_cmd(['ddcutil', 'getvcp', '10'])
@@ -219,7 +219,7 @@ MyApplet.prototype = {
     _get_current_contrast: function () {
         return new Promise(Lang.bind(this, function (resolve, reject) {
 
-            this.menutItemContrastSlider.actor.hide();
+            this.menutItemContrastSlider.actor.reactive = false;
 
             // this._spawn_cmd(['ddcutil', 'capabilities', '|', 'grep', 'Contrast'])
             this._spawn_cmd(['ddcutil', 'getvcp', '12'])

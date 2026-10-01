@@ -42,6 +42,8 @@ With Radio3.0 you can:
 
   * **Use an horizontal OSD**.
 
+  * **Skip ads at startup**: The stream is muted for the number of seconds you've set (for each radio station).
+
 Details, help and FAQ can be found in the [Manual](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/Radio3.0%40claudiux/files/Radio3.0%40claudiux/help/MANUAL.md).
 
 ## Translations

@@ -25,11 +25,31 @@ class Source {
             case "APOD":
                 this.host = "https://api.nasa.gov/planetary/apod?api_key=";
                 break;
+            case "Picsum Photos":
+                this.host = "https://picsum.photos/v2/list?page=";
+                break;
             case "Bing":
             default:
                 this.host = "https://www.bing.com";
                 break;
         }
+    }
+
+    callUrl(url, callback, callbackError) {
+        const processPicsumResponse = finalUrl => {
+            if (finalUrl === false || finalUrl === null) {
+                callbackError();
+            } else {
+                finalUrl.download_url += url;
+                const data = JSON.stringify(finalUrl, null, 2);
+
+                this._writeMetaDataFile(data);
+
+                this.getMetaDataLocal();
+                callback();
+            }
+        };
+        this.httpSession.fetchRandomImage(processPicsumResponse);
     }
 
     getMetaData(url, callback, callbackError) {
@@ -38,12 +58,7 @@ class Source {
                 callbackError();
             } else {
                 // Write to meta data file
-                let gFile = Gio.file_new_for_path(this.metaDataPath);
-                let fStream = gFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
-                let toWrite = data.length;
-                while (toWrite > 0)
-                    toWrite -= fStream.write(data, null);
-                fStream.close(null);
+                this._writeMetaDataFile(data);
 
                 this.getMetaDataLocal();
                 callback();
@@ -111,6 +126,11 @@ class Source {
             const idx = json.hdurl.lastIndexOf('/');
             const filename = json.hdurl.slice(idx + 1);
             this.filename = filename;
+        } else if (this.source === "Picsum Photos") {
+            this.description = "Image " + json.id;
+            this.copyrightsAutor = json.author === undefined ? "Unknow autor" : json.author;
+            this.imageURL = json.download_url;
+            this.copyrights = this.description + " - " + this.copyrightsAutor;
         }
     }
 
@@ -129,6 +149,15 @@ class Source {
         } else {
             this.httpSession.downloadImageFromUrl(this.imageURL, this.wallpaperPath, res);
         }
+    }
+
+    _writeMetaDataFile(data) {
+        let gFile = Gio.file_new_for_path(this.metaDataPath);
+        let fStream = gFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
+        let toWrite = data.length;
+        while (toWrite > 0)
+            toWrite -= fStream.write(data, null);
+        fStream.close(null);
     }
 
     getWallpaperDate() {

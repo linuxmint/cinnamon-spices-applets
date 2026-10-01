@@ -25,11 +25,11 @@ msgstr "%A %B %e, %Y"
 msgid "Settings"
 msgstr "Instellingen"
 
-#: applet.js:325
+#: applet.js:338
 msgid "It's time for "
 msgstr "Het is tijd voor "
 
-#: applet.js:326
+#: applet.js:339
 msgid "Now : "
 msgstr "Nu : "
 

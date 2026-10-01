@@ -153,8 +153,7 @@ class Monitor {
         this.menuSlider = menuSlider;
         menuSlider.connect("value-changed", async (slider) => {
             const brightness = Math.round(100 * slider.value);
-            this.brightness = brightness;
-            this.updateLabel();
+            this.setBrightness(brightness);
         });
 
         menuSlider.connect("drag-end", (slider) => {

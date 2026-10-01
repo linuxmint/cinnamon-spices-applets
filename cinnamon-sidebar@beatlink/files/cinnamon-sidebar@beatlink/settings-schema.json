@@ -1,0 +1,58 @@
+{
+    "dock-side": {
+        "type": "combobox",
+        "default": "left",
+        "description": "Which side to dock to",
+        "options": {
+            "Left": "left",
+            "Right": "right"
+        }
+    },
+    "dock-width-mode": {
+        "type": "combobox",
+        "default": "fraction",
+        "description": "How to interpret the dock width",
+        "options": {
+            "Fraction of monitor width": "fraction",
+            "Fixed pixels": "pixels"
+        }
+    },
+    "dock-width-fraction": {
+        "type": "scale",
+        "default": 0.3,
+        "min": 0.1,
+        "max": 0.7,
+        "step": 0.05,
+        "description": "Dock width as a fraction of the monitor width",
+        "dependency": "dock-width-mode=fraction"
+    },
+    "dock-width-pixels": {
+        "type": "spinbutton",
+        "default": 600,
+        "min": 200,
+        "max": 3000,
+        "step": 10,
+        "units": "px",
+        "description": "Dock width in pixels",
+        "dependency": "dock-width-mode=pixels"
+    },
+    "arrange-others": {
+        "type": "switch",
+        "default": true,
+        "description": "Shrink/move other visible windows into the remaining area"
+    },
+    "keybinding-header": {
+        "type": "header",
+        "description": "Keyboard shortcuts"
+    },
+    "dock-hotkey": {
+        "type": "keybinding",
+        "default": "<Super><Shift>Left",
+        "description": "Dock the focused window to the configured side"
+    },
+    "undock-hotkey": {
+        "type": "keybinding",
+        "default": "<Super><Shift>Down",
+        "description": "Undock the docked window (restore its size)"
+    }
+}

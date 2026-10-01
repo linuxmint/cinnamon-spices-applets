@@ -8,6 +8,8 @@ const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
 
+let HtmlEncodeDecode = require("./lib/htmlEncodeDecode");
+
 const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 const TMP_ALBUMART_DIR = XDG_RUNTIME_DIR + "/AlbumArt";
 const ALBUMART_ON = TMP_ALBUMART_DIR + "/ON";
@@ -22,9 +24,10 @@ const PopupMenu = imports.ui.popupMenu;
 const { del_song_arts } = require("./lib/del_song_arts");
 const { ControlButton } = require("./lib/controlButton");
 const { VolumeSlider } = require("./lib/volumeSlider");
+const { HttpLib } = require("./lib/httpLib");
+
 const Interfaces = imports.misc.interfaces;
 const Clutter = imports.gi.Clutter;
-const GdkPixbuf = imports.gi.GdkPixbuf;
 const Slider = imports.ui.slider;
 const Gettext = imports.gettext;
 const Pango = imports.gi.Pango;
@@ -59,20 +62,6 @@ function run_playerctld() {
 
 function kill_playerctld() {
     Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
-}
-
-function getImageAtScale(imageFileName, width, height) {
-  let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(imageFileName, width, height);
-  let image = new Clutter.Image();
-  image.set_data(
-    pixBuf.get_pixels(),
-    pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
-    width, height,
-    pixBuf.get_rowstride()
-  );
-  let actor = new Clutter.Actor({width: width, height: height});
-  actor.set_content(image);
-  return actor;
 }
 
 // Text wrapper
@@ -168,6 +157,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this._owner = owner;
         this._busName = busname;
         this._applet = applet;
+        this._menuOpenStateChangedId = 0;
         players_without_seek_support = this._applet.players_without_seek_support;
 
         // We'll update this later with a proper name
@@ -371,40 +361,23 @@ class Player extends PopupMenu.PopupMenuSection {
             _("Previous"),
             () => {
                 if (this._seeker) {
-                    if (this._seeker.status === "Playing" && this._seeker.posLabel) 
+                    if (this._seeker.status === "Playing" && this._seeker.posLabel)
                         this._seeker.posLabel.set_text(" 00:00:00 ");
                     this._seeker.startingDate = Date.now();
                     this._seeker._setPosition(0);
                 }
 
-                if (this._name.toLowerCase() === "mpv" &&
-                    GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                    GLib.file_set_contents(RUNTIME_DIR + "/R30Previous", "");
-                } else
-                    this._mediaServerPlayer.PreviousRemote();
+                this._sendPlayerCommand("Previous");
             });
         this._playButton = new ControlButton("media-playback-start",
             _("Play"),
-            () => this._mediaServerPlayer.PlayPauseRemote());
+            () => this._sendPlayerCommand("PlayPause"));
         this._stopButton = new ControlButton("media-playback-stop",
             _("Stop"),
-            () => {
-                if (this._name.toLowerCase() === "mpv" &&
-                    GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                    GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
-                } else {
-                    this._mediaServerPlayer.StopRemote()
-                }
-            });
+            () => this._sendPlayerCommand("Stop"));
         this._nextButton = new ControlButton("media-skip-forward",
             _("Next"),
-            () => {
-                if (this._name.toLowerCase() === "mpv" &&
-                    GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                    GLib.file_set_contents(RUNTIME_DIR + "/R30Next", "");
-                } else
-                    this._mediaServerPlayer.NextRemote();
-            });
+            () => this._sendPlayerCommand("Next"));
 
         try {
             this.trackInfo.add_actor(trackControls);
@@ -432,11 +405,25 @@ class Player extends PopupMenu.PopupMenuSection {
         // Position slider
         if (this._mediaServerPlayer) {
             this._seeker = new Seeker(
+                this._applet,
                 this._mediaServerPlayer,
                 this._prop,
                 this._name.toLowerCase()
             );
             this.vertBox.add_actor(this._seeker.getActor());
+            if (this._applet.menu) {
+                this._menuOpenStateChangedId = this._applet.menu.connect("open-state-changed", (menu, open) => {
+                    if (!this._seeker) return;
+
+                    if (open)
+                        this._seeker.startPolling();
+                    else
+                        this._seeker.stopPolling();
+                });
+
+                if (this._applet.menu.isOpen)
+                    this._seeker.startPolling();
+            }
         }
 
 
@@ -481,6 +468,45 @@ class Player extends PopupMenu.PopupMenuSection {
         }
     }
 
+    _sendPlayerCommand(command, fallback) {
+        if (!fallback) {
+            if (!this._mediaServerPlayer) return;
+
+            let remoteCommand = this._mediaServerPlayer[command + "Remote"];
+            if (!remoteCommand) return;
+
+            fallback = () => remoteCommand.call(this._mediaServerPlayer);
+        }
+
+        if (this._name.toLowerCase() !== "mpv" || command === "PlayPause") {
+            try { fallback() } catch(e) { global.logError(e); }
+            return;
+        }
+
+        let socket = Gio.File.new_for_path(R30MPVSOCKET);
+        socket.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_TYPE, Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (file, result) => {
+            try {
+                file.query_info_finish(result);
+            } catch (e) {
+                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
+                    global.logError(e);
+                try { fallback() } catch(e) { global.logError(e); }
+                return;
+            }
+
+            let commandFile = Gio.File.new_for_path(RUNTIME_DIR + "/R30" + command);
+            let bytes = new GLib.Bytes(new TextEncoder().encode(""));
+            commandFile.replace_contents_bytes_async(bytes, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, (file, result) => {
+                try {
+                    file.replace_contents_finish(result);
+                } catch (e) {
+                    global.logError(e);
+                    try { fallback() } catch(e) { global.logError(e); }
+                }
+            });
+        });
+    }
+
     _showCanRaise() {
         let btn = new ControlButton("go-up", _("Open Player"), () => {
             if (this._name.toLowerCase() === "spotify") {
@@ -496,11 +522,7 @@ class Player extends PopupMenu.PopupMenuSection {
 
     _showCanQuit() {
         let btn = new ControlButton("window-close", _("Quit Player"), () => {
-            if (this._name.toLowerCase() === "mpv" &&
-                GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
-            } else
-                this._mediaServer.QuitRemote();
+            this._sendPlayerCommand("Stop", () => this._mediaServer.QuitRemote());
             this._applet.menu.close();
         }, true);
         this._playerBox.add_actor(btn.actor);
@@ -546,7 +568,24 @@ class Player extends PopupMenu.PopupMenuSection {
         }
     }
 
-    _setMetadata(metadata) {
+    _clean_str(str) {
+        var ret = "" + str;
+        const dico = {
+            "_": " ",
+            "&": "-",
+            "|": " ",
+            "'": " "
+        };
+        let keys = Object.keys(dico);
+        for (let k of keys) {
+            while (ret.includes(k)) {
+                ret = ret.replace(k, dico[k]);
+            }
+        }
+        return ret
+    }
+
+    async _setMetadata(metadata) {
         if (!metadata || (this._applet.actor.get_stage() == null))
             return;
 
@@ -564,11 +603,11 @@ class Player extends PopupMenu.PopupMenuSection {
             switch (metadata["xesam:artist"].get_type_string()) {
                 case "s":
                     // smplayer sends a string
-                    this._artist = metadata["xesam:artist"].unpack();
+                    this._artist = this._clean_str(metadata["xesam:artist"].unpack());
                     break;
                 case "as":
                     // others send an array of strings
-                    this._artist = metadata["xesam:artist"].deep_unpack().join(", ");
+                    this._artist = this._clean_str(metadata["xesam:artist"].deep_unpack().join(", "));
                     break;
                 default:
                     this._artist = _("Unknown Artist");
@@ -582,7 +621,7 @@ class Player extends PopupMenu.PopupMenuSection {
             this.artistLabel.set_text(this._artist);
 
         if (metadata["xesam:album"])
-            this._album = metadata["xesam:album"].unpack();
+            this._album = this._clean_str(metadata["xesam:album"].unpack());
         else
             this._album = _("Unknown Album");
 
@@ -599,12 +638,12 @@ class Player extends PopupMenu.PopupMenuSection {
                         let json_title = "" + json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Title"];
                         let json_artist = "" + json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Artist1"];
                         if (json_title) {
-                            this._title = json_title.capitalize();
+                            this._title = this._clean_str(json_title.capitalize());
                         } else {
                             this._title = _("Unknown Title");
                         }
                         if (json_artist) {
-                            this._artist = json_artist.capitalize();
+                            this._artist = this._clean_str(json_artist.capitalize());
                             if (this.artistLabel != null)
                                 this.artistLabel.set_text(this._artist);
                         } else {
@@ -639,7 +678,7 @@ class Player extends PopupMenu.PopupMenuSection {
         if (this.titleLabel != null)
             this.titleLabel.set_text(this._title);
         this._seeker.setTrack(trackid, trackLength, old_title != this._title);
-        
+
         if (metadata["xesam:url"]) {
             let dontDisplayArtSites = this._applet.sitesNotDisplayingAlbumArt;
             for (let site of dontDisplayArtSites) {
@@ -653,17 +692,17 @@ class Player extends PopupMenu.PopupMenuSection {
                         return;
                     } else {
                         switch (site) {
-                            case "youtube": 
+                            case "youtube":
                                 this._trackCoverFile = `file://${APPLET_DIR}/6.4/icons/youtube.png`;
                                 this._applet._icon_path = `${APPLET_DIR}/6.4/icons/youtube.png`;
                                 this._applet.setAppletIcon(true, true);
                                 return;
-                            case "spotify": 
+                            case "spotify":
                                 this._trackCoverFile = `file://${APPLET_DIR}/6.4/icons/spotify.png`;
                                 this._applet._icon_path = `${APPLET_DIR}/6.4/icons/spotify.png`;
                                 this._applet.setAppletIcon(true, true);
                                 return;
-                            case "strawberry": 
+                            case "strawberry":
                                 this._trackCoverFile = `file://${APPLET_DIR}/6.4/icons/strawberry.png`;
                                 this._applet._icon_path = `${APPLET_DIR}/6.4/icons/strawberry.png`;
                                 this._applet.setAppletIcon(true, true);
@@ -675,7 +714,7 @@ class Player extends PopupMenu.PopupMenuSection {
                                 return;
                         }
                     }
-                    
+
                 }
             }
         }
@@ -745,7 +784,20 @@ class Player extends PopupMenu.PopupMenuSection {
                 if (this._trackCoverFile.match(/^http/)) {
                     if (!this._trackCoverFileTmp)
                         this._trackCoverFileTmp = Gio.file_new_tmp("XXXXXX.mediaplayer-cover")[0];
+
+                    // Method using wget:
                     Util.spawn_async(["wget", this._trackCoverFile, "-O", this._trackCoverFileTmp.get_path()], () => this._onDownloadedCover());
+
+                    // Method using HttpLib://FIXME!!! No image is loaded!
+                    //~ global.log("!!! Using HttpLib !!!");
+                    //~ var http = new HttpLib();
+                    //~ let response = await http.LoadAsync(this._trackCoverFile);
+                    //~ let _trackCoverFilePath = this._trackCoverFileTmp.get_path();
+                    //~ if (response.Success) {
+                        //~ GLib.file_set_contents(_trackCoverFilePath, response.Data);
+                    //~ } else {
+                        //~ global.logError(`Unable to download ${this._trackCoverFile} in ${_trackCoverFilePath}`);
+                    //~ }
                 } else if (this._trackCoverFile.match(/data:image\/(png|jpeg);base64,/)) {
                     if (!this._trackCoverFileTmp)
                         this._trackCoverFileTmp = Gio.file_new_tmp("XXXXXX.mediaplayer-cover")[0];
@@ -852,13 +904,17 @@ class Player extends PopupMenu.PopupMenuSection {
         let rnd, baseName;
         if (!cover_path || !GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
             del_song_arts();
-            this.cover = new St.Icon({
+            this._cover_load_handle = 0;
+            let genericCover = new St.Icon({
                 style_class: "sound-player-generic-coverart",
                 important: true,
                 icon_name: "media-optical",
                 icon_size: Math.trunc(300 * this._applet.real_ui_scale),
                 icon_type: St.IconType.SYMBOLIC
             });
+            if (!this._applet.showMediaOptical)
+                genericCover.hide();
+            this._setCoverActor(genericCover);
             cover_path = null;
             this._cover_path = null;
             this._applet.setAppletTextIcon(this, null);
@@ -909,7 +965,7 @@ class Player extends PopupMenu.PopupMenuSection {
             this._cover_path = cover_path;
             this._applet._icon_path = cover_path; // Added
             this._applet.setAppletIcon(this._applet.player, cover_path); // Added
-            if (cover_path != null && GLib.file_test(cover_path, GLib.FileTest.EXISTS))
+            if (cover_path != null && !this._applet.dontShowAnyImageInMenu)
                 this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(
                     cover_path,
                     Math.trunc(300 * this._applet.real_ui_scale),
@@ -918,54 +974,36 @@ class Player extends PopupMenu.PopupMenuSection {
                         this._on_cover_loaded(cache, handle, actor)
                     }
                 );
+            else
+                this._setCoverActor(null);
             this._applet.setIcon();
-
-            //~ log("this._cover_path: "+this._cover_path, true);
-            try {
-                let pixbuf = null;
-                if (GLib.file_test(this._cover_path, GLib.FileTest.EXISTS)) {
-                    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
-                        this._cover_path,
-                        Math.trunc(300 * this._applet.real_ui_scale),
-                        Math.trunc(300 * this._applet.real_ui_scale)
-                    );
-                }
-                
-                if (pixbuf) {
-                    let image = new Clutter.Image();
-                    image.set_data(
-                        pixbuf.get_pixels(),
-                        pixbuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGB_888,
-                        pixbuf.get_width(),
-                        pixbuf.get_height(),
-                        pixbuf.get_rowstride()
-                    );
-                    this.cover = image.get_texture();
-                }
-                if (this._applet.keepAlbumAspectRatio) {
-                    //TODO: Replace Texture by Image.
-                    this.cover = new Clutter.Texture({
-                        width: Math.trunc(300 * this._applet.real_ui_scale),
-                        keep_aspect_ratio: true,
-                        //filter_quality: 2,
-                        filter_quality: Clutter.Texture.QUALITY_HIGH,
-                        filename: cover_path
-                    });
-                } else {
-                    //TODO: Replace Texture by Image.
-                    this.cover = new Clutter.Texture({
-                        width: Math.trunc(300 * this._applet.real_ui_scale),
-                        height: Math.trunc(300 * this._applet.real_ui_scale),
-                        keep_aspect_ratio: false,
-                        filter_quality: Clutter.Texture.QUALITY_HIGH,
-                        filename: cover_path
-                    });
-                }
-                this.cover.icon_size = Math.trunc(300 * this._applet.real_ui_scale);
-                //~ this.display_cover_button.show();
-            } catch (e) {}
         }
         this._oldTitle = this._title; // Here??? FIXME!!!
+    }
+
+    _setCoverActor(actor) {
+        if (this.coverBox != null && this.cover != null) {
+            let coverBoxChildren = this.coverBox.get_children();
+            if (coverBoxChildren.length > 0 && coverBoxChildren.indexOf(this.cover) > -1)
+                try { this.coverBox.remove_child(this.cover) } catch(e) {}
+        }
+
+        this.cover = actor;
+
+        try {
+            if (this.coverBox) {
+                if (this.cover && !this._applet.dontShowAnyImageInMenu) {
+                    this.coverBox.add_actor(this.cover);
+                    try {
+                        this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
+                    } catch(e) {}
+                } else {
+                    try {
+                        this.coverBox.set_child_below_sibling(this.trackInfo, null);
+                    } catch(e) {}
+                }
+            }
+        } catch (e) {}
     }
 
     _on_cover_loaded(cache, handle, actor) {
@@ -973,12 +1011,9 @@ class Player extends PopupMenu.PopupMenuSection {
             // Maybe a cover image load stalled? Make sure our requests match the callback.
             return;
         }
-
-        if (this.coverBox != null && this.cover != null) {
-            let coverBoxChildren = this.coverBox.get_children();
-            if (coverBoxChildren.length > 0 && coverBoxChildren.indexOf(this.cover) > -1)
-                try { this.coverBox.remove_child(this.cover) } catch(e) {}
-        }
+        this._cover_load_handle = 0;
+        if (!actor)
+            return;
 
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).
@@ -1010,22 +1045,7 @@ class Player extends PopupMenu.PopupMenuSection {
 
         actor.set_margin_left(Math.max(0, Math.round(300 * this._applet.real_ui_scale - actor.width)));
 
-        this.cover = actor;
-
-        try {
-            if (this.coverBox) {
-                if (this.cover && !this._applet.dontShowAnyImageInMenu) {
-                    this.coverBox.add_actor(this.cover);
-                    try {
-                        this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
-                    } catch(e) {}
-                } else {
-                    try {
-                        this.coverBox.set_child_below_sibling(this.trackInfo, null);
-                    } catch(e) {}
-                }
-            }
-        } catch (e) {}
+        this._setCoverActor(actor);
 
         this._applet.setAppletTextIcon(this, this._cover_path);
     }
@@ -1042,6 +1062,11 @@ class Player extends PopupMenu.PopupMenuSection {
         if (this._prop && this._propChangedId)
             try { this._prop.disconnectSignal(this._propChangedId) } catch(e) {};
 
+        if (this._applet && this._applet.menu && this._menuOpenStateChangedId) {
+            try { this._applet.menu.disconnect(this._menuOpenStateChangedId) } catch(e) {};
+            this._menuOpenStateChangedId = 0;
+        }
+
         if (this._seeker)
             try { this._seeker.destroy() } catch(e) {};
 
@@ -1056,10 +1081,11 @@ class Player extends PopupMenu.PopupMenuSection {
 Signals.addSignalMethods(Player.prototype);
 
 class Seeker extends Slider.Slider {
-    constructor(mediaServerPlayer, props, playerName) {
+    constructor(applet, mediaServerPlayer, props, playerName) {
         super(0, true);
 
         this.destroyed = false;
+        this._applet = applet;
 
         this.actor.set_direction(St.TextDirection.LTR); // Do not invert on RTL layout
         //~ this.actor.expand = true;
@@ -1078,6 +1104,8 @@ class Seeker extends Slider.Slider {
         this._timeoutId = null;
         this._timeoutId_timerCallback = null;
         this._timerTicker = 0;
+        this._positionQueryPending = false;
+        this._pollingRequested = false;
 
         this._mediaServerPlayer = mediaServerPlayer;
         this._prop = props;
@@ -1088,6 +1116,14 @@ class Seeker extends Slider.Slider {
         this.seekerBox = new St.BoxLayout();
         this.seekerBox.expand = true;
         this.seekerBox.x_align = St.Align.END;
+        this._mappedId = this.seekerBox.connect("notify::mapped", () => {
+            if (this.destroyed) return;
+
+            if (this.seekerBox.mapped && this._pollingRequested)
+                this._getCanSeek();
+            else
+                this._removePositionTimers();
+        });
 
 
 
@@ -1171,8 +1207,6 @@ class Seeker extends Slider.Slider {
             this._wantedSeekValue = 0;
         });
 
-        this._getCanSeek();
-        this._getPosition(); // Added
     }
 
     show_target_time() {
@@ -1202,6 +1236,47 @@ class Seeker extends Slider.Slider {
         return this.seekerBox;
     }
 
+    startPolling() {
+        if (this.destroyed) return;
+
+        this._pollingRequested = true;
+        if (this._canPollPosition())
+            this._getCanSeek();
+    }
+
+    stopPolling() {
+        if (this.destroyed) return;
+
+        this._pollingRequested = false;
+        this._removePositionTimers();
+    }
+
+    _isVisible() {
+        return this.seekerBox != null &&
+            this.seekerBox.visible &&
+            this.seekerBox.mapped &&
+            this.actor != null &&
+            this.actor.visible;
+    }
+
+    _canPollPosition() {
+        return !this.destroyed &&
+            this._pollingRequested &&
+            this._isVisible();
+    }
+
+    _removePositionTimers() {
+        if (this._timeoutId != null) {
+            source_remove(this._timeoutId);
+            this._timeoutId = null;
+        }
+
+        if (this._timeoutId_timerCallback != null) {
+            source_remove(this._timeoutId_timerCallback);
+            this._timeoutId_timerCallback = null;
+        }
+    }
+
     time_for_label(sec) {
         let milliseconds = 1000 * sec;
         var date = new Date(milliseconds);
@@ -1211,27 +1286,35 @@ class Seeker extends Slider.Slider {
 
     play() {
         if (this.destroyed) return;
-        run_playerctld();
+        if (this._applet._playerctl)
+            run_playerctld();
         this.status = "Playing";
-        this._getCanSeek();
+        if (this._pollingRequested)
+            this._getCanSeek();
     }
 
     pause() {
         if (this.destroyed) return;
         this.status = "Paused";
-        if (this.canSeek)
-            this._updateTimer();
-        else
-            this._updateValue();
-        run_playerctld();
+        if (this._canPollPosition()) {
+            if (this.canSeek)
+                this._updateTimer();
+            else
+                this._updateValue();
+        } else {
+            this._removePositionTimers();
+        }
+        if (this._applet._playerctl)
+            run_playerctld();
     }
 
     stop() {
         if (this.destroyed) return;
         this.status = "Stopped";
+        this._removePositionTimers();
         if (this.canSeek)
-            this._updateTimer();
-        else
+            this._currentTime = 0;
+        else if (this._isVisible())
             this._updateValue();
     }
 
@@ -1241,6 +1324,7 @@ class Seeker extends Slider.Slider {
         if (this.actor) this.actor.hide();
         if (this.posLabel) this.posLabel.hide();
         if (this.seekerBox) this.seekerBox.hide();
+        this._removePositionTimers();
     }
 
     showAll() {
@@ -1268,6 +1352,8 @@ class Seeker extends Slider.Slider {
         if (this.status !== "Stopped" && this.durLabel != null) this.durLabel.set_text(this.time_for_label(length));
         this._wantedSeekValue = 0;
         this._updateValue();
+        if (this._pollingRequested)
+            this._getCanSeek();
     }
 
     _updateValue() {
@@ -1289,7 +1375,7 @@ class Seeker extends Slider.Slider {
                     this.setValue(this._currentTime / this._length);
                 } else {
                     this.setValue(0);
-                    if (this.status === "Playing" && this.posLabel != null) 
+                    if (this.status === "Playing" && this.posLabel != null)
                         this.posLabel.set_text(" 00:00:00 ");
                 }
             }
@@ -1307,29 +1393,11 @@ class Seeker extends Slider.Slider {
                 } else if (!this._dragging) {
                     if (this.status === "Playing" && this.posLabel != null) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this.setValue(this._currentTime / this._length);
-                    if (this._timeoutId != null) {
-                        source_remove(this._timeoutId);
-                    }
-                    this._timeoutId = null;
-                    if (this._timeoutId_timerCallback != null) {
-                        source_remove(this._timeoutId_timerCallback);
-                    }
-                    this._timeoutId_timerCallback = null;
-
-                    if (!this.destroyed) {
-                        this._timeoutId = timeout_add_seconds(1, () => {
-                            this._updateValue();
-                            return !this.destroyed
-                        });
-                        this._timeoutId_timerCallback = timeout_add_seconds(1, () => {
-                            return this._timerCallback()
-                        });
-                    }
                     //return (!this.destroyed && this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE; //???
                 }
             } else {
                 this.setValue(0);
-                if (!this.destroyed && this.status === "Playing" && this.posLabel != null) 
+                if (!this.destroyed && this.status === "Playing" && this.posLabel != null)
                     this.posLabel.set_text(" 00:00:00 ");
                 this.hideAll();
             }
@@ -1338,7 +1406,10 @@ class Seeker extends Slider.Slider {
     }
 
     _timerCallback() {
-        if (this.destroyed) return GLib.SOURCE_REMOVE;
+        if (this.destroyed || !this._canPollPosition()) {
+            this._timeoutId_timerCallback = null;
+            return GLib.SOURCE_REMOVE;
+        }
         if (this.status === "Playing") {
             if (this._timerTicker < 10) {
                 this._currentTime += 1;
@@ -1353,18 +1424,20 @@ class Seeker extends Slider.Slider {
             this._setPosition(0);
             this._timerTicker = 0;
             this._currentTime = 0;
+            this._timeoutId_timerCallback = null;
             return GLib.SOURCE_REMOVE;
         }
-        return (this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE;
+        this._timeoutId_timerCallback = null;
+        return GLib.SOURCE_REMOVE;
     }
 
     _updateTimer() {
         //~ if (this.destroyed) return GLib.SOURCE_REMOVE;
 
-        if (this._timeoutId_timerCallback != null) {
-            source_remove(this._timeoutId_timerCallback);
-        }
-        this._timeoutId_timerCallback = null;
+        this._removePositionTimers();
+
+        if (!this._canPollPosition())
+            return;
 
         if (this.status === "Playing") {
             if (this.canSeek) {
@@ -1389,6 +1462,9 @@ class Seeker extends Slider.Slider {
     }
 
     _getCanSeek() {
+        if (this.destroyed || !this._pollingRequested)
+            return;
+
         // Some players say they "CanSeek" but don't actually give their position over dbus
         if (players_without_seek_support.indexOf(this._playerName) > -1) {
             this._setCanSeek(false);
@@ -1410,14 +1486,17 @@ class Seeker extends Slider.Slider {
         //~ if (this.destroyed) return;
         if (this._length > 0) {
             this.showAll();
-            this._updateValue();
+            if (this._canPollPosition()) {
+                this._updateValue();
+                this._updateTimer();
+            }
         } else {
             this.hideAll();
         }
     }
 
     _setCanSeek(seek) {
-        if (this.destroyed) return;
+        if (this.destroyed || !this._pollingRequested) return;
 
         if (!this._mediaServerPlayer) {
             this._cantSeek();
@@ -1450,9 +1529,12 @@ class Seeker extends Slider.Slider {
     }
 
     _getPosition() {
-        if (this.destroyed) return;
+        if (!this._canPollPosition() || this._positionQueryPending || !this._prop) return;
 
+        this._positionQueryPending = true;
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, "Position", (position, error) => {
+            this._positionQueryPending = false;
+            if (!this._canPollPosition()) return;
             //~ logDebug("_getPosition dbus !error: "+!error);
             if (!error && position[0]) {
                 //~ logDebug("_getPosition position: "+position[0].get_int64());
@@ -1486,6 +1568,18 @@ class Seeker extends Slider.Slider {
         if (this._seekChangedId) {
             this._mediaServerPlayer.disconnectSignal(this._seekChangedId);
             this._seekChangedId = null;
+        }
+        if (this._mappedId && this.seekerBox) {
+            this.seekerBox.disconnect(this._mappedId);
+            this._mappedId = null;
+        }
+        if (this._timeoutId) {
+            source_remove(this._timeoutId);
+            this._timeoutId = null;
+        }
+        if (this._timeoutId_timerCallback) {
+            source_remove(this._timeoutId_timerCallback);
+            this._timeoutId_timerCallback = null;
         }
 
         this.disconnectAll(); //??? Seems cause of bugs.

@@ -1,1 +1,1 @@
-../4.0/applet.js
+../5.4/applet.js

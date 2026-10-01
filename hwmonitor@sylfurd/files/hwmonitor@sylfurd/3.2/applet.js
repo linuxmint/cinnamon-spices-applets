@@ -17,7 +17,11 @@ You should have received a copy of the GNU General Public License along
 with Foobar. If not, see http://www.gnu.org/licenses/.
 */
 
-// 2019-10-15 : I added a version to metadata.json, please increase that 
+// Original author: Renaud Delcoigne (Sylfurd)
+// Past maintainer: hultan
+// Current maintainer: UditDewan
+
+// 2019-10-15 : I added a version to metadata.json, please increase that
 // when making changes to this applet
 
 const Applet = imports.ui.applet;

@@ -37,8 +37,7 @@
         "show-uuid",
         "translate-name",
         "display-on-panel",
-        "useful-only",
-        "coloredIcon"
+        "useful-only"
       ]
     },
     "section2": {
@@ -160,8 +159,7 @@
     "default": true
   },
   "coloredIcon": {
-    "type": "switch",
-    "description": "Change icon color while refreshing",
+    "type": "generic",
     "default": true
   },
   "colorWhileRefreshing": {

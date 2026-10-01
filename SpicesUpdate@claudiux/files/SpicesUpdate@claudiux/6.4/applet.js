@@ -6,6 +6,16 @@ const { IconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
 const { AppletSettings } = imports.ui.settings;
 //WindowTracker:
 const windowTracker = imports.gi.Cinnamon.WindowTracker.get_default();
+//Extension:
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
 //St:
 const {
   Icon,
@@ -82,11 +92,10 @@ const {
   source_exists,
   source_remove,
   remove_all_sources,
-} = require("mainloopTools");
+} = _require("mainloopTools");
 
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
-const Extension = imports.ui.extension;
 const Tooltips = imports.ui.tooltips;
 //~ const Tweener = imports.ui.tweener;
 const Json = imports.gi.Json;
@@ -97,9 +106,9 @@ const Cinnamon = imports.gi.Cinnamon;
 const Pango = imports.gi.Pango;
 const Clutter = imports.gi.Clutter;
 
-const { to_string } = require("to-string");
+const { to_string } = _require("to-string");
 
-const { HttpLib, Jobs } = require("httpLib");
+const { HttpLib, Jobs } = _require("httpLib");
 // constants:
 const {
   UUID,
@@ -132,13 +141,13 @@ const {
   log,
   logDebug,
   logError,
-} = require("./constants");
+} = _require("./constants");
 
 // Waiting times for downloads:
 //~ var WAITING = {}
 //~ for (let t of TYPES) WAITING[t] = 30000; // 30 seconds
 
-const { versionCompare } = require("./utils");
+const { versionCompare } = _require("./utils");
 
 const ICONTHEME = Gtk.IconTheme.get_default();
 ICONTHEME.prepend_search_path(ICONS_DIR);
@@ -176,7 +185,7 @@ function SU_setup_logging(quiet = false, verbose = false) {
   }
 }
 
-const SpicesUpdate_Notification = require("./notifications");
+const SpicesUpdate_Notification = _require("./notifications");
 
 let SU_Notification = SpicesUpdate_Notification.SU_Notification;
 
@@ -226,7 +235,7 @@ function get_current_timestamp() {
 /**
  * Class SpicesUpdate
  */
-class SpicesUpdate extends IconApplet {
+var SpicesUpdate = class SpicesUpdate extends IconApplet {
   constructor(metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
     this.instanceId = "" + instance_id;
@@ -1145,12 +1154,12 @@ class SpicesUpdate extends IconApplet {
   } // End of on_btn_cs_extensions_pressed
 
   on_btn_cs_themes_pressed() {
-    spawnCommandLineAsync("%s themes -t %s -s %s".format(CS_PATH, TAB, SORT));
+    spawnCommandLineAsync("%s themes -t 2 -s 4".format(CS_PATH));
   } // End of on_btn_cs_themes_pressed
 
   on_btn_cs_actions_pressed() {
     spawnCommandLineAsync("%s actions -t %s -s %s".format(CS_PATH, TAB, SORT));
-  } // End of on_btn_cs_themes_pressed
+  } // End of on_btn_cs_actions_pressed
 
   on_tooltip_max_width_screen_percentage_changed() {
     let _screen;
@@ -2336,6 +2345,7 @@ class SpicesUpdate extends IconApplet {
     let char_new = "☄"; // "\u2604";
     let ts;
     for (let t of TYPES) {
+      var tab = ""+TAB;
       ts = _(capitalize(t.toString()));
       if (this.nb_in_menu[t] - this.new_Spices[t].length > 0)
         ts += "   %s %s".format(
@@ -2348,7 +2358,9 @@ class SpicesUpdate extends IconApplet {
         ts = "⏺  " + ts;
       else
         ts = "    " + ts;
-      this.menu.addCommandlineAction(ts, "%s %s -t %s -s %s".format(CS_PATH, t.toString(), TAB, SORT));
+      if (t === "themes")
+        tab = "2";
+      this.menu.addCommandlineAction(ts, "%s %s -t %s -s %s".format(CS_PATH, t.toString(), tab, SORT));
     }
     // button Forget
     if (this.nb_to_watch > 0) {

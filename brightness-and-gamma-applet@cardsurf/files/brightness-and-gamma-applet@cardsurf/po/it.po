@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-02-22 21:37+0100\n"
+"POT-Creation-Date: 2026-07-13 15:48+0200\n"
 "PO-Revision-Date: 2025-08-27 18:19+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -19,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:178 6.6/applet.js:268 6.4/applet.js:250
+#. applet.js:178 6.6/applet.js:296 6.4/applet.js:250
 msgid "The following packages were not found:"
 msgstr "Non sono stati trovati i seguenti pacchetti:"
 
-#. applet.js:179 6.6/applet.js:269 6.4/applet.js:251
+#. applet.js:179 6.6/applet.js:297 6.4/applet.js:251
 msgid "Please install the above packages to use the applet"
 msgstr "Installa i pacchetti sopracitati per usare l'applet"
 
-#. applet.js:564 6.6/applet.js:1023 6.4/applet.js:855
+#. applet.js:564 6.6/applet.js:1061 6.4/applet.js:855
 msgid "Screen"
 msgstr "Schermo"
 
-#. applet.js:647 6.6/applet.js:1106 6.4/applet.js:938
+#. applet.js:647 6.6/applet.js:1144 6.4/applet.js:938
 msgid "Outputs"
 msgstr "Output"
 
@@ -41,70 +41,70 @@ msgstr "Output"
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
 #. 6.4->settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->preset_list->columns->title
-#. appletGui.js:235 6.6/applet.js:44 6.6/lib/appletGui.js:208 6.4/applet.js:43
+#. appletGui.js:235 6.6/applet.js:53 6.6/lib/appletGui.js:208 6.4/applet.js:43
 #. 6.4/lib/appletGui.js:212
 msgid "Brightness"
 msgstr "Luminosità"
 
-#. appletGui.js:236 6.6/applet.js:45 6.6/lib/appletGui.js:209 6.4/applet.js:44
+#. appletGui.js:236 6.6/applet.js:54 6.6/lib/appletGui.js:209 6.4/applet.js:44
 #. 6.4/lib/appletGui.js:213
 msgid "Red"
 msgstr "Rosso"
 
-#. appletGui.js:237 6.6/applet.js:46 6.6/lib/appletGui.js:210 6.4/applet.js:45
+#. appletGui.js:237 6.6/applet.js:55 6.6/lib/appletGui.js:210 6.4/applet.js:45
 #. 6.4/lib/appletGui.js:214
 msgid "Green"
 msgstr "Verde"
 
-#. appletGui.js:238 6.6/applet.js:47 6.6/lib/appletGui.js:211 6.4/applet.js:46
+#. appletGui.js:238 6.6/applet.js:56 6.6/lib/appletGui.js:211 6.4/applet.js:46
 #. 6.4/lib/appletGui.js:215
 msgid "Blue"
 msgstr "Blu"
 
-#. 6.6/applet.js:48 6.6/applet.js:1188 6.4/applet.js:47 6.4/applet.js:1009
+#. 6.6/applet.js:57 6.6/applet.js:1226 6.4/applet.js:47 6.4/applet.js:1009
 msgid "Sunrise"
 msgstr "Alba"
 
-#. 6.6/applet.js:49 6.6/applet.js:1190 6.4/applet.js:48 6.4/applet.js:1011
+#. 6.6/applet.js:58 6.6/applet.js:1228 6.4/applet.js:48 6.4/applet.js:1011
 msgid "Sunset"
 msgstr "Tramonto"
 
 #. 6.6->settings-schema.json->preset_list_temp->columns->title
-#. 6.6/applet.js:50 6.6/lib/appletGui.js:212
+#. 6.6/applet.js:59 6.6/lib/appletGui.js:212
 msgid "Temperature"
 msgstr ""
 
-#. 6.6/applet.js:52
+#. 6.6/applet.js:61
 msgid "Standard values"
 msgstr ""
 
-#. 6.6/applet.js:53
+#. 6.6/applet.js:62
 msgid "Day-time comfort"
 msgstr ""
 
-#. 6.6/applet.js:54
+#. 6.6/applet.js:63
 msgid "Night-time comfort"
 msgstr ""
 
-#. 6.6/applet.js:55
+#. 6.6/applet.js:64
 msgid "All values at maximum"
 msgstr ""
 
-#. 6.6/applet.js:848 6.4/applet.js:760
+#. 6.6/applet.js:886 6.4/applet.js:760
 msgid "Toggle On / Off"
 msgstr ""
 
-#. 6.6/applet.js:858 6.4/applet.js:770
+#. 6.6/applet.js:896 6.4/applet.js:770
 msgid "Reload"
 msgstr "Ricarica"
 
-#. 6.6/applet.js:868 6.4/applet.js:780
+#. 6.6/applet.js:906 6.4/applet.js:780
 msgid "Configure Presets"
 msgstr "Configura Preset"
 
 #. 6.6->settings-schema.json->page_presets->title
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.6/applet.js:970 6.4/applet.js:824
+#. 6.6/applet.js:1008 6.4/applet.js:824
 msgid "Presets"
 msgstr "Preset"
 
@@ -326,6 +326,10 @@ msgstr "Un'icona visualizzata in un pannello"
 #. 6.4->settings-schema.json->page_general->title
 msgid "General"
 msgstr "Generale"
+
+#. 6.6->settings-schema.json->section_geoip->title
+msgid "Geolocation"
+msgstr ""
 
 #. 6.6->settings-schema.json->section_presets->title
 #. 6.6->settings-schema.json->preset_list->description
@@ -586,4 +590,28 @@ msgstr "Applica tutti i cambiamenti"
 
 #. 6.6->settings-schema.json->values_reload->description
 msgid "Apply the selected method"
+msgstr ""
+
+#. 6.6->settings-schema.json->use_geoip_values->description
+msgid "Use your own values below"
+msgstr ""
+
+#. 6.6->settings-schema.json->geolat->description
+msgid "Latitude"
+msgstr ""
+
+#. 6.6->settings-schema.json->geolat->tooltip
+#. 6.6->settings-schema.json->geolon->tooltip
+msgid ""
+"The default value is an invalid value to ensure it is always updated at "
+"startup.\n"
+"If the default value is valid, it means that this value has been calculated."
+msgstr ""
+
+#. 6.6->settings-schema.json->geolon->description
+msgid "Longitude"
+msgstr ""
+
+#. 6.6->settings-schema.json->geoip_button->description
+msgid "Change these values by using geolocation by ip"
 msgstr ""

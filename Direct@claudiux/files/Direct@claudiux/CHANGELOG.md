@@ -1,3 +1,12 @@
+### v1.6.4~20260618
+* Changes in Custom Places section. Better take into account of flatpak applications. Fixes a typo.
+* Fixes [#8792](https://github.com/linuxmint/cinnamon-spices-applets/issues/8792).
+
+### v1.6.3~20260329
+* Changes made by [timfeierabend](https://github.com/timfeierabend) on [#8474](https://github.com/linuxmint/cinnamon-spices-applets/pull/8474).
+* Updated translation files.
+* Updated README and CHANGELOG files.
+
 ### v1.6.2~20260107
 * System section: Add Quit and Logout buttons.
 

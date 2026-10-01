@@ -12,7 +12,18 @@ const PopupMenu = imports.ui.popupMenu;
 const ScreenSaver = imports.misc.screenSaver;
 const St = imports.gi.St;
 const { restartCinnamon } = imports.ui.main;
-const ScreensaverInhibitor = require("./screensaverInhibitor");
+
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
+const ScreensaverInhibitor = _require("./screensaverInhibitor");
 //mainloopTools:
 const {
   _sourceIds,
@@ -25,7 +36,7 @@ const {
   source_exists,
   source_remove,
   remove_all_sources
-} = require("mainloopTools");
+} = _require("mainloopTools");
 
 const UUID = "Exit@claudiux";
 const SCRIPTS_DIR = GLib.get_home_dir()+"/.local/share/cinnamon/applets/"+UUID+"/scripts";
@@ -133,7 +144,7 @@ var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
     }
 }
 
-class ExitApplet extends Applet.IconApplet {
+var ExitApplet = class ExitApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
@@ -168,6 +179,10 @@ class ExitApplet extends Applet.IconApplet {
         });
 
         this.lockdown_settings = new Gio.Settings({ schema_id: 'org.cinnamon.desktop.lockdown' });
+        this.lockOnSuspend_settings = new Gio.Settings({ schema_id: 'org.cinnamon.settings-daemon.plugins.power' });
+        this.lockOnSuspend_system = this.lockOnSuspend_settings.get_boolean("lock-on-suspend");
+        this.lockOnSuspend_settings.connect("changed::lock-on-suspend", () => { this.lockOnSuspend = this.lockOnSuspend_settings.get_boolean("lock-on-suspend") });
+
 
         this.get_user_settings();
 
@@ -195,6 +210,8 @@ class ExitApplet extends Applet.IconApplet {
         this.s.bind("showOSD", "showOSD");
         this.s.bind("showRestartCinnamon", "showRestartCinnamon");
         this.s.bind("showSuspend", "showSuspend");
+        this.s.bind("lockOnSuspend", "lockOnSuspend", () => { this.on_lockOnSuspend_changed() } );
+        this.lockOnSuspend = this.lockOnSuspend_system;
         this.s.bind("showHibernate", "showHibernate");
         this.s.bind("hibernateNeedsSudo", "hibernateNeedsSudo");
         this.s.bind("showRestart", "showRestart");
@@ -491,6 +508,8 @@ class ExitApplet extends Applet.IconApplet {
                 item.connect('activate', () => {
                     this.menu.close();
                     Util.spawnCommandLine(UNBLOCK_SCRIPT);
+                    if (this.lockOnSuspend)
+                        launcher.spawnv(["cinnamon-screensaver-command", "-l"]);
                     launcher.spawnv(["systemctl", "suspend"]);
                 });
                 this.menu.addMenuItem(item);
@@ -643,6 +662,10 @@ class ExitApplet extends Applet.IconApplet {
         if (this.showScreenOff === false) {
             this.screenOffUsesXset = false;
         }
+    }
+
+    on_lockOnSuspend_changed() {
+        this.lockOnSuspend_settings.set_boolean("lock-on-suspend", this.lockOnSuspend);
     }
 
     on_keybinds_changed() {

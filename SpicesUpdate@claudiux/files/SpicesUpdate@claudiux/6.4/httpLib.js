@@ -1,9 +1,19 @@
 //!/usr/bin/cjs
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
 const {
     source_remove,
     timeout_add_seconds,
     timeout_add
-} = require("mainloopTools");
+} = _require("mainloopTools");
 
 /**
  * Usage of log and logError:
@@ -24,8 +34,8 @@ function logError(error) {
 /// Code from the Weather applet (weather@mockturtl). Many thanks to @Gr3q!
 const { Message, Session, SessionAsync } = imports.gi.Soup;
 const { PRIORITY_DEFAULT } = imports.gi.GLib;
-//~ const soupLib_ByteArray = imports.byteArray;
-const {to_string} = require("to-string");
+const soupLib_ByteArray = imports.byteArray;
+const {to_string} = _require("to-string");
 function AddParamsToURI(url, params) {
     let result = url;
     if (params != null) {
@@ -44,7 +54,7 @@ function AddHeadersToMessage(message, headers) {
         }
     }
 }
-class Soup3 {
+var Soup3 = class Soup3 {
     constructor() {
         this._httpSession = new Session();
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0";
@@ -72,8 +82,8 @@ class Soup3 {
                     resolve({
                         reason_phrase: (_a = message.get_reason_phrase()) !== null && _a !== void 0 ? _a : "",
                         status_code: message.get_status(),
-                        //~ response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
-                        response_body : res != null ? to_string(res) : null,
+                        response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
+                        //~ response_body : res != null ? to_string(res) : null,
                         response_headers: headers
                     });
                 });
@@ -82,7 +92,7 @@ class Soup3 {
         return data;
     }
 }
-class Soup2 {
+var Soup2 = class Soup2 {
     constructor() {
         this._httpSession = new SessionAsync();
         const { ProxyResolverDefault } = imports.gi.Soup;
@@ -125,7 +135,7 @@ const soupLib = (imports.gi.Soup.SessionAsync == undefined) ? new Soup3() : new 
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
 
-class Jobs {
+var Jobs = class Jobs {
     constructor() {
         this.jobs = [];
         this.loopId = -1;
@@ -152,7 +162,7 @@ class Jobs {
 
 }
 
-class HttpLib {
+var HttpLib = class HttpLib {
     static get Instance() {
         if (this.instance == null)
             this.instance = new HttpLib();
@@ -240,6 +250,7 @@ class HttpLib {
     }
 }
 
+if (!Extension.getCurrentExtension)
 module.exports = {
     Soup3,
     Soup2,

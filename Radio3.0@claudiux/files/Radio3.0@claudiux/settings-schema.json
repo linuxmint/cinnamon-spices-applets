@@ -239,7 +239,8 @@
       "title": "Start-up",
       "keys": [
         "switch-on-last-station-at-start-up",
-        "volume-at-startup"
+        "volume-at-startup",
+        "waiting-time"
       ]
     },
     "sectionBehaviorVolumeStep": {
@@ -275,6 +276,8 @@
         "show-title-and-version",
         "recent-number",
         "show-by-category",
+        "fixHeightCat",
+        "heightCat",
         "show-system-items"
       ]
     },
@@ -577,6 +580,13 @@
         "align": 0.5
       },
       {
+        "id": "muteseconds",
+        "title": "Seconds\nWhile\nMuted",
+        "type": "string",
+        "default": "",
+        "align": 0.5
+      },
+      {
         "id": "url",
         "title": "Streaming URL (empty for a category)",
         "type": "string",
@@ -706,7 +716,9 @@
         "default": ""
       }
     ],
-    "default": []
+    "default": [
+
+    ]
   },
   "show-scale-update": {
     "type": "generic",
@@ -961,6 +973,23 @@
     "description": "Width (in pixels)",
     "tooltip": "Limited by the width of the screen.\nWill only be valid from the next time this window is opened."
   },
+  "waiting-time": {
+    "type": "combobox",
+    "default": 0,
+    "description": "Waiting time before a new radio turns on",
+    "options": {
+      "none": 0,
+      "300 ms": 300,
+      "500 ms": 500,
+      "800 ms": 800,
+      "1 s": 1000,
+      "1.5 s": 1500,
+      "2 s": 2000,
+      "3 s": 3000,
+      "4 s": 4000,
+      "5 s": 5000
+    }
+  },
   "switch-on-last-station-at-start-up": {
     "type": "switch",
     "default": false,
@@ -1083,6 +1112,22 @@
     "default": false,
     "description": "Display the Station list beside the Category list",
     "tooltip": "Checked: Hover (without clicking) over a Category to display its list of Stations; then select your station.\nUnchecked: Single list containing each category followed by its stations."
+  },
+  "fixHeightCat": {
+    "type": "switch",
+    "default": false,
+    "description": "Fix the height of these lists",
+    "dependency": "show-by-category"
+  },
+  "heightCat": {
+    "type": "scale",
+    "default": 300,
+    "min": 100,
+    "max": 1000,
+    "step": 25,
+    "units": " px",
+    "description": "Height of these lists",
+    "dependency": "show-by-category"
   },
   "show-system-items": {
     "type": "switch",
@@ -2037,32 +2082,32 @@
     "tooltip": "By checking this box, the sound volume gradually increases."
   },
   "alarm-clock-volume-begin": {
-      "type": "spinbutton",
-      "dependency": "alarm-clock-wake-me-softly",
-      "default": 30,
-      "min": 25,
-      "max": 80,
-      "step": 1,
-      "description": "Initial volume (%)"
+    "type": "spinbutton",
+    "dependency": "alarm-clock-wake-me-softly",
+    "default": 30,
+    "min": 25,
+    "max": 80,
+    "step": 1,
+    "description": "Initial volume (%)"
   },
   "alarm-clock-volume-end": {
-      "type": "spinbutton",
-      "dependency": "alarm-clock-wake-me-softly",
-      "default": 60,
-      "min": 50,
-      "max": 100,
-      "step": 1,
-      "description": "Final volume (%)",
-      "tooltip": "The final volume must be greater than or equal to the initial volume."
+    "type": "spinbutton",
+    "dependency": "alarm-clock-wake-me-softly",
+    "default": 60,
+    "min": 50,
+    "max": 100,
+    "step": 1,
+    "description": "Final volume (%)",
+    "tooltip": "The final volume must be greater than or equal to the initial volume."
   },
   "alarm-clock-volume-transition": {
-      "type": "scale",
-      "dependency": "alarm-clock-wake-me-softly",
-      "default": 30,
-      "min": 10,
-      "max": 60,
-      "step": 1,
-      "description": "Transition duration (seconds)"
+    "type": "scale",
+    "dependency": "alarm-clock-wake-me-softly",
+    "default": 30,
+    "min": 10,
+    "max": 60,
+    "step": 1,
+    "description": "Transition duration (seconds)"
   },
   "alarm-clock-working-days": {
     "type": "list",
@@ -2120,15 +2165,15 @@
       }
     ],
     "default": [
-        {
-            "day0": false,
-            "day1": true,
-            "day2": true,
-            "day3": true,
-            "day4": true,
-            "day5": true,
-            "day6": false
-        }
+      {
+        "day0": false,
+        "day1": true,
+        "day2": true,
+        "day3": true,
+        "day4": true,
+        "day5": true,
+        "day6": false
+      }
     ]
   },
   "alarm-clock-workoff-days": {
@@ -2187,26 +2232,34 @@
       }
     ],
     "default": [
-        {
-            "day0": true,
-            "day1": false,
-            "day2": false,
-            "day3": false,
-            "day4": false,
-            "day5": false,
-            "day6": true
-        }
+      {
+        "day0": true,
+        "day1": false,
+        "day2": false,
+        "day3": false,
+        "day4": false,
+        "day5": false,
+        "day6": true
+      }
     ]
   },
   "alarm-clock-working-days-time": {
-      "type": "timechooser",
-      "description": "Wake-Up Time",
-      "default": {"h": 6, "m": 0, "s": 0}
+    "type": "timechooser",
+    "description": "Wake-Up Time",
+    "default": {
+      "h": 6,
+      "m": 0,
+      "s": 0
+    }
   },
   "alarm-clock-workoff-days-time": {
-      "type": "timechooser",
-      "description": "Wake-Up Time",
-      "default": {"h": 12, "m": 0, "s": 0}
+    "type": "timechooser",
+    "description": "Wake-Up Time",
+    "default": {
+      "h": 12,
+      "m": 0,
+      "s": 0
+    }
   },
   "alarm-clock-working-days-radio": {
     "type": "combobox",
@@ -2235,10 +2288,10 @@
     "callback": "_on_workoff_days_radio_button_clicked"
   },
   "alarm-clock-tink-on": {
-      "type": "switch",
-      "default": true,
-      "dependency": "alarm-clock-wake-me-up",
-      "description": "Activate tink to ensure speakers are awake"
+    "type": "switch",
+    "default": true,
+    "dependency": "alarm-clock-wake-me-up",
+    "description": "Activate tink to ensure speakers are awake"
   },
   "desklet-is-activated": {
     "type": "generic",

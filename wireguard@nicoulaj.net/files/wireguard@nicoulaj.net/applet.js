@@ -124,16 +124,13 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
                 Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_MERGE | GLib.SpawnFlags.SEARCH_PATH
             );
 
-            let out, self = this;
+            proc.communicate_utf8_async(null, null, (proc, res) => {
+                const [ok, stdout] = proc.communicate_utf8_finish(res);
 
-            proc.get_stdout_pipe().read_bytes_async(1048576, 0, null, Lang.bind(proc, function (o, result) {
-                out = o.read_bytes_finish(result).get_data().toString();
-            }));
-
-            proc.wait_async(null, Lang.bind(proc, function (o, result) {
-                if (proc.get_exit_status())
-                    self._handle_error(_("Failed toggling WireGuard interface"), out, false);
-            }));
+                if (!ok || proc.get_exit_status() !== 0) {
+                    this._handle_error(_("Failed toggling WireGuard interface"), stdout, false);
+                }
+            });
 
         } catch (e) {
             this._handle_error(_("Failed calling wg-quick, please make sure it is installed and accessible"), e, false);

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="22" height="22">
+  <!-- Solar panel (blue = neutral, neither significant export nor import) -->
+  <rect x="3" y="5" width="16" height="11" rx="1" ry="1" fill="#1976d2" stroke="#1565c0" stroke-width="1"/>
+  <!-- Grid lines on panel -->
+  <line x1="3" y1="8.5" x2="19" y2="8.5" stroke="#90caf9" stroke-width="0.5"/>
+  <line x1="3" y1="12.5" x2="19" y2="12.5" stroke="#90caf9" stroke-width="0.5"/>
+  <line x1="8" y1="5" x2="8" y2="16" stroke="#90caf9" stroke-width="0.5"/>
+  <line x1="14" y1="5" x2="14" y2="16" stroke="#90caf9" stroke-width="0.5"/>
+  <!-- Stand -->
+  <line x1="11" y1="16" x2="11" y2="19" stroke="#1565c0" stroke-width="1.5"/>
+  <line x1="7" y1="19" x2="15" y2="19" stroke="#1565c0" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- = neutral indicator -->
+  <line x1="7" y1="9" x2="15" y2="9" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="7" y1="12" x2="15" y2="12" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

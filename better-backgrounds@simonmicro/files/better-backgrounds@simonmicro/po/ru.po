@@ -2,8 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-07 19:16+0000\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-04-13 04:55+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: blogdron\n"
 "Language-Team: \n"
@@ -18,14 +19,13 @@ msgid "Better Backgrounds"
 msgstr "Лучшие Фоновые Обои (Better Backgrounds)"
 
 #. metadata.json->description
+#, fuzzy
 msgid ""
-"Apply new backgrounds from Bing, Himawari 8, Picsum Photos, PlaceKitten."
-"com, Unsplash.com or even whole websites - specify search tags, triggers "
-"and more!"
+"Apply new backgrounds from Bing, Himawari 8, Picsum Photos, or even whole "
+"websites"
 msgstr ""
 "Применяйте новые обои на рабочий стол из Bing, Himawari 8, Picsum Photos, "
-"PlaceKitten.com, Unsplash.com или других сайтов - используя теги и не "
-"только!"
+"PlaceKitten.com, Unsplash.com или других сайтов - используя теги и не только!"
 
 #. settings-schema.json->pageBehaviour->title
 msgid "Behaviour"
@@ -42,8 +42,6 @@ msgstr "Источник"
 
 #. settings-schema.json->pageResolution->title
 #. settings-schema.json->imageresbing->title
-#. settings-schema.json->imageresunsplash->title
-#. settings-schema.json->imageresplacekitten->title
 #. settings-schema.json->imageresplacecutycapt->title
 #. settings-schema.json->imagerespicsum->title
 #. settings-schema.json->imagereshimawari->title
@@ -66,10 +64,6 @@ msgstr "Эффекты Изображений"
 msgid "Triggers"
 msgstr "Триггеры"
 
-#. settings-schema.json->imagetags->title
-msgid "Tags"
-msgstr "Теги"
-
 #. settings-schema.json->imageapply->title
 msgid "Apply"
 msgstr "Применить"
@@ -89,15 +83,6 @@ msgstr "Показывать уведомления о проблемах"
 #. settings-schema.json->applet-show-notification->tooltip
 msgid "Bad network? Faulty setup? The applet will notify you. Every time."
 msgstr "Плохая сеть? Неправильная настройка? Апплет уведомит вас. Каждый раз."
-
-#. settings-schema.json->applet-info-issues->description
-msgid ""
-"You found a bug or want to suggest a missing feature? Just checkout the "
-"source code at https://github.com/simonmicro/better-backgrounds right over "
-"on Github!"
-msgstr ""
-"Вы нашли ошибку или хотите внести изменение? Просто исследуйте исходный код "
-"на https://github.com/simonmicro/better-backgrounds Github!"
 
 #. settings-schema.json->applet-store-location->description
 msgid "Picture save location"
@@ -183,7 +168,8 @@ msgid "None"
 msgstr ""
 
 #. settings-schema.json->image-source->description
-msgid "Image source"
+#, fuzzy
+msgid "Image Source"
 msgstr "Источник изображений"
 
 #. settings-schema.json->image-source->options
@@ -199,15 +185,7 @@ msgid "Himawari 8"
 msgstr ""
 
 #. settings-schema.json->image-source->options
-msgid "Placekitten"
-msgstr ""
-
-#. settings-schema.json->image-source->options
 msgid "Picsum Photos"
-msgstr ""
-
-#. settings-schema.json->image-source->options
-msgid "Unsplash"
 msgstr ""
 
 #. settings-schema.json->source-supports-info->description
@@ -232,16 +210,6 @@ msgstr ""
 "Эта функция требует установленного 'montage' из 'imagemagick'. Пожалуйста "
 "убедитесь что эта программа установлена."
 
-#. settings-schema.json->source-warn-unsplash->description
-msgid ""
-"This source is known to cause trouble, especially during times of high "
-"demand. Please be patient and try again later if you experience problems. "
-"More information can be found at: https://status.unsplash.com/"
-msgstr ""
-"Иногда с эти источником возникают проблемы, например из за загруженности "
-"сервиса, проявите терпение и попробуйте позже. Больше информации на https://"
-"status.unsplash.com/"
-
 #. settings-schema.json->image-res-manual->description
 msgid "Use custom resolution"
 msgstr "Выбрать своё разрешение"
@@ -255,8 +223,8 @@ msgid ""
 "Please make sure to choose a common resolution, otherwise the background "
 "can't be changed!"
 msgstr ""
-"Пожалуйста, убедитесь, что вы выбрали доступное разрешение, иначе вон "
-"нельзя будет менять!"
+"Пожалуйста, убедитесь, что вы выбрали доступное разрешение, иначе вон нельзя "
+"будет менять!"
 
 #. settings-schema.json->image-res-width->description
 msgid "Width"
@@ -271,23 +239,14 @@ msgstr "пикселей"
 msgid "Height"
 msgstr "Высота"
 
-#. settings-schema.json->image-tag->description
-msgid "Use own search tags"
-msgstr "Использовать свои теги поиска"
-
-#. settings-schema.json->image-tag->tooltip
-msgid "Specify own tags to look for..."
-msgstr "Укажите свои собственные теги для поиска..."
-
 #. settings-schema.json->image-res-himawari->description
 msgid ""
 "Image zoom factor - this factor times the tile size (550 pixels) equals the "
-"image resolution. So e.g. the factor '4x' would result in a 2200x2200 "
-"pixels image. Please note that factor² much tiles will be temporarly "
-"downloaded."
+"image resolution. So e.g. the factor '4x' would result in a 2200x2200 pixels "
+"image. Please note that factor² much tiles will be temporarly downloaded."
 msgstr ""
-"Коэффициент масштабирования изображения - этот значение умножается на "
-"размер изображения."
+"Коэффициент масштабирования изображения - этот значение умножается на размер "
+"изображения."
 
 #. settings-schema.json->image-res-himawari->options
 msgid "1x"
@@ -313,25 +272,6 @@ msgstr ""
 msgid "Sorry, the selected source does not support resolution modifiers."
 msgstr ""
 "Извините, выбранный источник не поддерживает смену на такое разрешения."
-
-#. settings-schema.json->image-tag-info->description
-msgid ""
-"Please make sure to choose an available tag, otherwise the background can't "
-"be changed! Make sure to seperate the tags by a ',' and not spaces, also "
-"the tags are understood as AND - not as OR! A valid search term could be "
-"'nature,water'..."
-msgstr ""
-"Выберите тег иначе фон не сможет меняться. Теги разделяются запятыми ',' "
-"вместе теги воспринимаются как И (это и это), а не как ИЛИ! Пример "
-"правильных тегов 'природа,вода'."
-
-#. settings-schema.json->image-tag-data->description
-msgid "Search tags"
-msgstr "Поисковые теги"
-
-#. settings-schema.json->image-tag-data->tooltip
-msgid "Enter your topic filters"
-msgstr "Введите ваш фильтр тем"
 
 #. settings-schema.json->image-align-info->description
 msgid ""
