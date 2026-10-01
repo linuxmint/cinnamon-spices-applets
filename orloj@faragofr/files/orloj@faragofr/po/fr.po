@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: orloj@faragofr 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-07-01 22:35+0200\n"
+"POT-Creation-Date: 2026-10-01 23:33+0200\n"
 "PO-Revision-Date: 2026-07-05 10:31+0200\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: none\n"
@@ -57,13 +57,34 @@ msgstr "Intervalle de rafraîchissement"
 msgid "Accent color"
 msgstr "Couleur d'accentuation"
 
+#. settings-schema.json->accent-color->tooltip
+msgid ""
+"Sun, time hand, equinox and LST stars, and the sunrise/sunset glow on the "
+"hour ring and sky band"
+msgstr ""
+
 #. settings-schema.json->foreground-color->description
-msgid "Foreground color (text, hands, glyphs)"
-msgstr "Couleur de premier plan (texte, aiguilles, glyphes)"
+#, fuzzy
+msgid "Foreground color"
+msgstr "Couleur d'arrière-plan"
+
+#. settings-schema.json->foreground-color->tooltip
+msgid ""
+"Hour numerals, LST readout, zodiac and planet glyphs, the moon, and the "
+"dial's rules and hairlines"
+msgstr ""
 
 #. settings-schema.json->background-color->description
 msgid "Background color"
 msgstr "Couleur d'arrière-plan"
+
+#. settings-schema.json->day-color->description
+msgid "Daylight color"
+msgstr ""
+
+#. settings-schema.json->day-color->tooltip
+msgid "Color of the fully-lit sky on the hour ring and sky band"
+msgstr ""
 
 #. settings-schema.json->dial-size->units
 msgid "pixels"
@@ -76,5 +97,5 @@ msgstr "Taille du cadran"
 #. settings-schema.json->dial-size->tooltip
 msgid "Diameter of the dial in the popup; larger values improve readability"
 msgstr ""
-"Diamètre du cadran dans la fenêtre contextuelle; "
-"des valeurs plus élevées améliorent la lisibilité."
+"Diamètre du cadran dans la fenêtre contextuelle; des valeurs plus élevées "
+"améliorent la lisibilité."
