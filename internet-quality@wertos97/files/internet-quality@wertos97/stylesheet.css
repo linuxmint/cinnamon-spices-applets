@@ -1,0 +1,33 @@
+.internet-quality-popup {
+    padding: 10px 14px;
+}
+
+.internet-quality-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    padding-bottom: 9px;
+}
+
+.internet-quality-summary {
+    font-size: 1.05em;
+    font-weight: bold;
+    padding-bottom: 8px;
+}
+
+.internet-quality-row {
+    padding: 2px 0;
+}
+
+.internet-quality-key {
+    opacity: 0.72;
+}
+
+.internet-quality-value {
+    font-weight: bold;
+}
+
+.internet-quality-status {
+    font-size: 0.85em;
+    opacity: 0.65;
+    padding-top: 7px;
+}
