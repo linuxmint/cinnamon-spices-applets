@@ -2,14 +2,13 @@ const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
-const Lang = imports.lang;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 const Gettext = imports.gettext;
 const Config = imports.misc.config;
 const UUID = "port-radar@pedropaulo";
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.build_filenamev([GLib.get_user_data_dir(), "locale"]));
 function _(text) {
     return Gettext.dgettext(UUID, text);
 }
@@ -45,11 +44,11 @@ var PortRadarApplet = class extends Applet.TextIconApplet {
         this.menuManager.addMenu(this.menu);
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
-        this.settings.bind("refresh-interval", "refreshInterval", Lang.bind(this, this._settingsChanged));
-        this.settings.bind("max-entries", "maxEntries", Lang.bind(this, this._settingsChanged));
-        this.settings.bind("show-count", "showCount", Lang.bind(this, this._settingsChanged));
-        this.settings.bind("show-udp", "showUdp", Lang.bind(this, this._settingsChanged));
-        this.settings.bind("show-ipv6", "showIpv6", Lang.bind(this, this._settingsChanged));
+        this.settings.bind("refresh-interval", "refreshInterval", this._settingsChanged.bind(this));
+        this.settings.bind("max-entries", "maxEntries", this._settingsChanged.bind(this));
+        this.settings.bind("show-count", "showCount", this._settingsChanged.bind(this));
+        this.settings.bind("show-udp", "showUdp", this._settingsChanged.bind(this));
+        this.settings.bind("show-ipv6", "showIpv6", this._settingsChanged.bind(this));
 
         this._scanner = new Scanner.TcpScanner();
         this._header = new PopupMenu.PopupMenuItem(_("Port Radar"), { reactive: false, style_class: "port-radar-title" });
@@ -64,7 +63,7 @@ var PortRadarApplet = class extends Applet.TextIconApplet {
             x_expand: true
         });
         searchRow.addActor(this._searchEntry, { expand: true, span: -1 });
-        this._searchEntry.clutter_text.connect("text-changed", Lang.bind(this, this._searchChanged));
+        this._searchEntry.clutter_text.connect("text-changed", this._searchChanged.bind(this));
         this.menu.addMenuItem(searchRow);
 
         this._filterItem = new PopupMenu.PopupSubMenuMenuItem(_("All ports"));
@@ -89,7 +88,7 @@ var PortRadarApplet = class extends Applet.TextIconApplet {
         this._updated.actor.hide();
         this.menu.addMenuItem(this._updated);
         this._refreshItem = new PopupMenu.PopupMenuItem(_("Refresh now"));
-        this._refreshItem.connect("activate", Lang.bind(this, this.refresh));
+        this._refreshItem.connect("activate", this.refresh.bind(this));
         this.menu.addMenuItem(this._refreshItem);
 
         let aboutItem = new PopupMenu.PopupMenuItem(_("About Port Radar"));
@@ -104,11 +103,11 @@ var PortRadarApplet = class extends Applet.TextIconApplet {
 
     _addFilterOption(value, label) {
         let option = new PopupMenu.PopupMenuItem(label);
-        option.connect("activate", Lang.bind(this, function () {
+        option.connect("activate", () => {
             this._filter = value;
             this._filterItem.label.set_text(label);
             this._render();
-        }));
+        });
         this._filterItem.menu.addMenuItem(option);
     }
 
@@ -127,10 +126,10 @@ var PortRadarApplet = class extends Applet.TextIconApplet {
         }
         let interval = Number(this.refreshInterval);
         if (this._compatible && interval > 0) {
-            this._scanTimer = Mainloop.timeout_add_seconds(interval, Lang.bind(this, function () {
+            this._scanTimer = Mainloop.timeout_add_seconds(interval, () => {
                 this.refresh();
                 return true;
-            }));
+            });
         }
     }
 
@@ -152,7 +151,7 @@ var PortRadarApplet = class extends Applet.TextIconApplet {
         this._scanInProgress = true;
         this._scanError = null;
         this._status.label.set_text(_("Scanning local sockets…"));
-        this._scanner.scan(Lang.bind(this, function (records, error) {
+        this._scanner.scan((records, error) => {
             if (this._destroyed)
                 return;
             this._scanInProgress = false;
@@ -171,7 +170,7 @@ var PortRadarApplet = class extends Applet.TextIconApplet {
                 this._refreshPending = false;
                 this.refresh();
             }
-        }));
+        });
     }
 
     _acceptSnapshot(records) {
@@ -220,7 +219,7 @@ var PortRadarApplet = class extends Applet.TextIconApplet {
 
     _filteredRecords() {
         let query = this._searchEntry.get_text().trim().toLowerCase();
-        return this._records.filter(Lang.bind(this, function (record) {
+        return this._records.filter(record => {
             if (!this._matchesFilter(record))
                 return false;
             if (!query)
@@ -228,7 +227,7 @@ var PortRadarApplet = class extends Applet.TextIconApplet {
             let searchable = [record.port, record.protocol, record.family, record.address,
                 this._processLabel(record), record.processes.map(process => process.pid).join(" ")].join(" ").toLowerCase();
             return searchable.indexOf(query) >= 0;
-        }));
+        });
     }
 
     // The panel count follows settings, not the search or temporary menu filter.
@@ -363,14 +362,14 @@ var PortRadarApplet = class extends Applet.TextIconApplet {
         if (!this._changes.length)
             return;
         this._changesItem.label.set_text(_("Recent changes (%d)").format(this._changes.length));
-        this._changes.forEach(Lang.bind(this, function (change) {
+        this._changes.forEach(change => {
             let record = change.record;
             let action = change.type === "opened" ? _("OPENED") :
                 change.type === "closed" ? _("CLOSED") :
                 change.type === "ownership-changed" ? _("PROCESS CHANGED") : _("BINDING CHANGED");
             let text = _("%s  %s %d  ·  %s").format(action, record.protocol, record.port, this._processLabel(record));
             this._changesSection.addMenuItem(new PopupMenu.PopupMenuItem(text, { reactive: false, style_class: change.type === "closed" ? "port-radar-change-closed" : "port-radar-change" }));
-        }));
+        });
     }
 
     _scanErrorMessage() {
