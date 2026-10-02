@@ -75,9 +75,27 @@ GradeEngine.prototype = {
         this._monitors = [];
         this._signals = [];
         this._shuttingDown = false;
+        this._shadersReady = false;
+        this._activateOnShaders = false;
+        this._shaderOp = 0;
+        this._presetOp = 0;
+        this._unredirectBusy = false;
+        this._unredirectPending = false;
+        this._reloadRunning = false;
+        this._reloadAgain = false;
 
         this._loadShadersInitial();
-        this._loadPresetsNow();
+        this._loadPresetsNow(() => {
+            if (this._shuttingDown || !this._active)
+                return;
+            if (!this._ensureEffects()) {
+                this._setActive(false);
+                return;
+            }
+            this._updateUniforms();
+            this._syncGrainClock();
+            this._emit();
+        });
         this._watchFiles();
         this._connectStage();
         /* Grade is off. If a previous session crashed, put the muffin key back. */
@@ -158,12 +176,15 @@ GradeEngine.prototype = {
     },
 
     reloadPresets: function() {
-        this._loadPresetsNow();
-        if (this._active) {
-            this._updateUniforms();
-            this._syncGrainClock();
-        }
-        this._emit();
+        this._loadPresetsNow(() => {
+            if (this._shuttingDown)
+                return;
+            if (this._active) {
+                this._updateUniforms();
+                this._syncGrainClock();
+            }
+            this._emit();
+        });
     },
 
     status: function() {
@@ -214,9 +235,17 @@ GradeEngine.prototype = {
 
     _setActive: function(active) {
         active = !!active;
+        if (!active)
+            this._activateOnShaders = false;
+        else if (this._shadersReady && this._gradeSource && this._sharpSource)
+            this._activateOnShaders = false;
         if (active === this._active)
             return true;
         if (active && (!this._gradeSource || !this._sharpSource)) {
+            if (!this._shadersReady) {
+                this._activateOnShaders = true;
+                return false;
+            }
             if (!this._error)
                 this._error = "shader source missing";
             this._active = false;
@@ -519,54 +548,88 @@ GradeEngine.prototype = {
     },
 
     _loadShadersInitial: function() {
-        let loaded = this._readShaderPair();
-        if (!loaded.ok) {
-            this._error = loaded.error;
-            this._gradeSource = null;
-            this._sharpSource = null;
-            return;
-        }
-        if (!this._shaderCompiles(loaded.grade) || !this._shaderCompiles(loaded.sharp)) {
-            this._error = "shader compile failed";
-            this._gradeSource = null;
-            this._sharpSource = null;
-            global.logError("[cinematic-grade] " + this._error);
-            return;
-        }
-        this._gradeSource = loaded.grade;
-        this._sharpSource = loaded.sharp;
-        this._shadersDirty = true;
+        let op = ++this._shaderOp;
+        this._readShaderPair((loaded) => {
+            if (op !== this._shaderOp || this._shuttingDown)
+                return;
+            if (!loaded.ok) {
+                this._failShaderLoad(loaded.error, false);
+                return;
+            }
+            if (!this._shaderCompiles(loaded.grade) || !this._shaderCompiles(loaded.sharp)) {
+                this._failShaderLoad("shader compile failed", true);
+                return;
+            }
+            this._gradeSource = loaded.grade;
+            this._sharpSource = loaded.sharp;
+            this._shadersDirty = true;
+            this._shadersReady = true;
+            if (this._error && this._error.indexOf("shader") === 0)
+                this._error = null;
+            if (this._activateOnShaders)
+                this._setActive(true);
+            else
+                this._emit();
+        });
     },
 
-    _reloadShaders: function() {
-        let loaded = this._readShaderPair();
-        if (!loaded.ok) {
-            this._error = loaded.error;
-            global.logError("[cinematic-grade] " + loaded.error);
-            return;
-        }
-        if (!this._shaderCompiles(loaded.grade) || !this._shaderCompiles(loaded.sharp)) {
-            this._error = "shader compile failed, keeping the previous shader";
-            global.logError("[cinematic-grade] " + this._error);
-            return;
-        }
-        this._gradeSource = loaded.grade;
-        this._sharpSource = loaded.sharp;
-        this._shadersDirty = true;
-        if (this._error && this._error.indexOf("shader") === 0)
-            this._error = null;
+    _failShaderLoad: function(message, logIt) {
+        this._error = message;
+        this._gradeSource = null;
+        this._sharpSource = null;
+        this._shadersReady = true;
+        this._activateOnShaders = false;
+        if (logIt)
+            global.logError("[cinematic-grade] " + message);
+        this._emit();
     },
 
-    _readShaderPair: function() {
-        try {
-            return {
-                ok: true,
-                grade: this._readText(this._shaderPath("grade.glsl")),
-                sharp: this._readText(this._shaderPath("sharpen.glsl"))
-            };
-        } catch (e) {
-            return { ok: false, error: "shader source missing" };
-        }
+    _reloadShaders: function(callback) {
+        let op = ++this._shaderOp;
+        this._readShaderPair((loaded) => {
+            if (op !== this._shaderOp || this._shuttingDown) {
+                if (callback)
+                    callback();
+                return;
+            }
+            if (!loaded.ok) {
+                this._error = loaded.error;
+                global.logError("[cinematic-grade] " + loaded.error);
+                if (callback)
+                    callback();
+                return;
+            }
+            if (!this._shaderCompiles(loaded.grade) || !this._shaderCompiles(loaded.sharp)) {
+                this._error = "shader compile failed, keeping the previous shader";
+                global.logError("[cinematic-grade] " + this._error);
+                if (callback)
+                    callback();
+                return;
+            }
+            this._gradeSource = loaded.grade;
+            this._sharpSource = loaded.sharp;
+            this._shadersDirty = true;
+            this._shadersReady = true;
+            if (this._error && this._error.indexOf("shader") === 0)
+                this._error = null;
+            if (callback)
+                callback();
+        });
+    },
+
+    _readShaderPair: function(callback) {
+        this._readTextAsync(this._shaderPath("grade.glsl"), (gradeErr, grade) => {
+            if (gradeErr) {
+                callback({ ok: false, error: "shader source missing" });
+                return;
+            }
+            this._readTextAsync(this._shaderPath("sharpen.glsl"), (sharpErr, sharp) => {
+                if (sharpErr)
+                    callback({ ok: false, error: "shader source missing" });
+                else
+                    callback({ ok: true, grade: grade, sharp: sharp });
+            });
+        });
     },
 
     _shaderCompiles: function(source) {
@@ -581,28 +644,39 @@ GradeEngine.prototype = {
         }
     },
 
-    _loadPresetsNow: function() {
-        let text;
-        try {
-            text = this._readText(this._presetsPath());
-        } catch (e) {
-            this._error = "presets.json: " + e;
-            if (!this._presets)
-                this._presets = { iron_within: Logic.FALLBACK_PRESET };
-            global.logError("[cinematic-grade] " + this._error);
-            return;
-        }
-        let decision = Logic.acceptPresetText(text, this._presets);
-        if (!decision.ok) {
-            this._error = decision.error;
-            if (!this._presets)
-                this._presets = { iron_within: Logic.FALLBACK_PRESET };
-            global.logError("[cinematic-grade] " + decision.error);
-            return;
-        }
-        this._presets = decision.presets;
-        if (this._error && this._error.indexOf("presets.json") === 0)
-            this._error = null;
+    _loadPresetsNow: function(callback) {
+        let op = ++this._presetOp;
+        this._readTextAsync(this._presetsPath(), (err, text) => {
+            if (op !== this._presetOp || this._shuttingDown) {
+                if (callback)
+                    callback();
+                return;
+            }
+            if (err) {
+                this._error = "presets.json: " + err;
+                if (!this._presets)
+                    this._presets = { iron_within: Logic.FALLBACK_PRESET };
+                global.logError("[cinematic-grade] " + this._error);
+                if (callback)
+                    callback();
+                return;
+            }
+            let decision = Logic.acceptPresetText(text, this._presets);
+            if (!decision.ok) {
+                this._error = decision.error;
+                if (!this._presets)
+                    this._presets = { iron_within: Logic.FALLBACK_PRESET };
+                global.logError("[cinematic-grade] " + decision.error);
+                if (callback)
+                    callback();
+                return;
+            }
+            this._presets = decision.presets;
+            if (this._error && this._error.indexOf("presets.json") === 0)
+                this._error = null;
+            if (callback)
+                callback();
+        });
     },
 
     _watchFiles: function() {
@@ -642,21 +716,46 @@ GradeEngine.prototype = {
     },
 
     _runReload: function() {
+        if (this._reloadRunning) {
+            this._reloadAgain = true;
+            return;
+        }
+        this._reloadRunning = true;
         let kinds = this._reloadKind;
         this._reloadKind = {};
-        if (kinds.presets)
-            this._loadPresetsNow();
-        if (kinds.shaders)
-            this._reloadShaders();
-        if (this._active) {
-            if (!this._ensureEffects()) {
-                this._setActive(false);
+        let finish = () => {
+            this._reloadRunning = false;
+            if (this._shuttingDown)
+                return;
+            if (this._reloadAgain) {
+                this._reloadAgain = false;
+                this._runReload();
                 return;
             }
-            this._updateUniforms();
-            this._syncGrainClock();
-        }
-        this._emit();
+            if (this._activateOnShaders && this._gradeSource && this._sharpSource) {
+                this._setActive(true);
+                return;
+            }
+            if (this._active) {
+                if (!this._ensureEffects()) {
+                    this._setActive(false);
+                    return;
+                }
+                this._updateUniforms();
+                this._syncGrainClock();
+            }
+            this._emit();
+        };
+        let afterPresets = () => {
+            if (kinds.shaders)
+                this._reloadShaders(finish);
+            else
+                finish();
+        };
+        if (kinds.presets)
+            this._loadPresetsNow(afterPresets);
+        else
+            afterPresets();
     },
 
     _connectStage: function() {
@@ -703,22 +802,84 @@ GradeEngine.prototype = {
     },
 
     _syncUnredirect: function() {
+        this._unredirectPending = true;
+        this._pumpUnredirect();
+    },
+
+    /* One transition at a time. The restore file is durable before the muffin
+     * key changes. A newer request discards a plan that has not written yet
+     * and runs again from disk. */
+    _pumpUnredirect: function() {
+        if (this._unredirectBusy || !this._unredirectPending)
+            return;
+        this._unredirectPending = false;
         let muffin = this._readMuffin();
         if (muffin === null)
             return;
-        let file = this._readRestore();
-        let plan = Logic.unredirectTransition(file, muffin, this._composite, this._active);
+        this._unredirectBusy = true;
+        this._readRestoreAsync((file) => {
+            if (this._unredirectPending) {
+                this._unredirectBusy = false;
+                this._pumpUnredirect();
+                return;
+            }
+            muffin = this._readMuffin();
+            if (muffin === null) {
+                this._unredirectBusy = false;
+                return;
+            }
+            let plan = Logic.unredirectTransition(file, muffin, this._composite, this._active);
+            if (!plan.writeFile) {
+                this._applyUnredirectPlan(plan, muffin);
+                return;
+            }
+            this._writeRestoreAsync(plan.writeFile, (err) => {
+                if (err) {
+                    this._unredirectError(err);
+                    this._unredirectBusy = false;
+                    if (this._unredirectPending)
+                        this._pumpUnredirect();
+                    return;
+                }
+                if (this._unredirectPending) {
+                    this._unredirectBusy = false;
+                    this._pumpUnredirect();
+                    return;
+                }
+                this._applyUnredirectPlan(plan, muffin);
+            });
+        });
+    },
+
+    _applyUnredirectPlan: function(plan, muffin) {
         try {
-            if (plan.writeFile)
-                this._writeRestore(plan.writeFile);
             if (plan.setMuffin !== null && plan.setMuffin !== muffin)
                 this._writeMuffin(plan.setMuffin);
-            if (plan.deleteFile)
-                this._deleteRestore();
         } catch (e) {
-            this._error = "could not update fullscreen compositing";
-            global.logError("[cinematic-grade] unredirect: " + e);
+            this._unredirectError(e);
+            this._unredirectBusy = false;
+            if (this._unredirectPending)
+                this._pumpUnredirect();
+            return;
         }
+        if (!plan.deleteFile) {
+            this._unredirectBusy = false;
+            if (this._unredirectPending)
+                this._pumpUnredirect();
+            return;
+        }
+        this._deleteRestoreAsync((err) => {
+            if (err)
+                this._unredirectError(err);
+            this._unredirectBusy = false;
+            if (this._unredirectPending)
+                this._pumpUnredirect();
+        });
+    },
+
+    _unredirectError: function(error) {
+        this._error = "could not update fullscreen compositing";
+        global.logError("[cinematic-grade] unredirect: " + error);
     },
 
     _muffinSettings: function() {
@@ -756,37 +917,67 @@ GradeEngine.prototype = {
         return GLib.build_filenamev([GLib.get_user_config_dir(), "iron-within", "unredirect.json"]);
     },
 
-    _readRestore: function() {
-        let path = this._restorePath();
-        let file = Gio.File.new_for_path(path);
-        if (!file.query_exists(null))
-            return null;
+    _readRestoreAsync: function(callback) {
+        this._readTextAsync(this._restorePath(), (err, text) => {
+            if (err) {
+                if (!Logic.isNotFound(err)) {
+                    this._error = "unredirect restore file is unreadable";
+                    global.logError("[cinematic-grade] unredirect.json: " + err);
+                }
+                callback(null);
+                return;
+            }
+            try {
+                let payload = Logic.readUnredirectPayload(text);
+                if (!payload)
+                    throw new Error("value is not a boolean");
+                callback(payload);
+            } catch (e) {
+                this._error = "unredirect restore file is unreadable";
+                global.logError("[cinematic-grade] unredirect.json: " + e);
+                callback(null);
+            }
+        });
+    },
+
+    _writeRestoreAsync: function(payload, callback) {
         try {
-            let payload = Logic.readUnredirectPayload(this._readText(path));
-            if (!payload)
-                throw new Error("value is not a boolean");
-            return payload;
+            let dir = GLib.build_filenamev([GLib.get_user_config_dir(), "iron-within"]);
+            if (GLib.mkdir_with_parents(dir, 0o700) !== 0)
+                throw new Error("could not create " + dir);
         } catch (e) {
-            this._error = "unredirect restore file is unreadable";
-            global.logError("[cinematic-grade] unredirect.json: " + e);
-            return null;
-        }
-    },
-
-    _writeRestore: function(payload) {
-        let dir = GLib.build_filenamev([GLib.get_user_config_dir(), "iron-within"]);
-        GLib.mkdir_with_parents(dir, 0o700);
-        let path = this._restorePath();
-        let tmp = Gio.File.new_for_path(path + ".tmp");
-        tmp.replace_contents(Logic.unredirectPayload(payload.value), null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
-        tmp.move(Gio.File.new_for_path(path), Gio.FileCopyFlags.OVERWRITE, null, null);
-    },
-
-    _deleteRestore: function() {
-        let file = Gio.File.new_for_path(this._restorePath());
-        if (!file.query_exists(null))
+            callback(e);
             return;
-        file["delete"](null);
+        }
+        let file = Gio.File.new_for_path(this._restorePath());
+        let bytes = new GLib.Bytes(ByteArray.fromString(Logic.unredirectPayload(payload.value)));
+        file.replace_contents_async(
+            bytes,
+            null,
+            false,
+            Gio.FileCreateFlags.REPLACE_DESTINATION,
+            null,
+            (obj, res) => {
+                try {
+                    obj.replace_contents_finish(res);
+                    callback(null);
+                } catch (e) {
+                    callback(e);
+                }
+            }
+        );
+    },
+
+    _deleteRestoreAsync: function(callback) {
+        let file = Gio.File.new_for_path(this._restorePath());
+        file.delete_async(GLib.PRIORITY_DEFAULT, null, (obj, res) => {
+            try {
+                obj.delete_finish(res);
+                callback(null);
+            } catch (e) {
+                callback(Logic.isNotFound(e) ? null : e);
+            }
+        });
     },
 
     _sessionKind: function() {
@@ -810,10 +1001,15 @@ GradeEngine.prototype = {
         return GLib.build_filenamev([this._root, "presets.json"]);
     },
 
-    _readText: function(path) {
-        let file = Gio.File.new_for_path(path);
-        let [, contents] = file.load_contents(null);
-        return ByteArray.toString(contents);
+    _readTextAsync: function(path, callback) {
+        Gio.File.new_for_path(path).load_contents_async(null, (file, result) => {
+            try {
+                let loaded = file.load_contents_finish(result);
+                callback(null, ByteArray.toString(loaded[1]));
+            } catch (e) {
+                callback(e, null);
+            }
+        });
     },
 
     _setFloat: function(effect, name, number) {

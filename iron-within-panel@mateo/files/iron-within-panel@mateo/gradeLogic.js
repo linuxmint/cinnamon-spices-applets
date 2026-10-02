@@ -132,37 +132,80 @@ var GradeLogic = {
         return { value: parsed.value };
     },
 
-    resolveProjectRoot: function(startPath) {
-        let file = Gio.File.new_for_path(startPath);
-        for (let hop = 0; hop < 8; hop++) {
-            let info = null;
-            try {
-                info = file.query_info(
-                    "standard::is-symlink,standard::symlink-target",
-                    Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
-                    null
-                );
-            } catch (e) {
-                break;
-            }
-            if (!info.get_is_symlink())
-                break;
-            let target = info.get_symlink_target();
-            if (!GLib.path_is_absolute(target)) {
-                let parent = file.get_parent();
-                target = GLib.build_filenamev([parent.get_path(), target]);
-            }
-            file = Gio.File.new_for_path(target);
-        }
-        if (this._dirHasShaders(file))
-            return file.get_path();
-        let parent = file.get_parent();
-        if (parent && this._dirHasShaders(parent))
-            return parent.get_path();
-        return parent ? parent.get_path() : file.get_path();
+    isNotFound: function(error) {
+        return !!(error && error.matches && error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND));
     },
 
-    _dirHasShaders: function(file) {
-        return file.get_child("shaders").get_child("grade.glsl").query_exists(null);
+    /* callback(path). At most eight symlink hops, then the directory that
+     * holds shaders/, or that directory's parent when the start path is the
+     * applet folder. */
+    resolveProjectRoot: function(startPath, callback) {
+        this._resolveHop(Gio.File.new_for_path(startPath), 0, callback);
+    },
+
+    _resolveHop: function(file, hop, callback) {
+        if (hop >= 8) {
+            this._finishRoot(file, callback);
+            return;
+        }
+        file.query_info_async(
+            "standard::is-symlink,standard::symlink-target",
+            Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
+            GLib.PRIORITY_DEFAULT,
+            null,
+            (obj, res) => {
+                let info = null;
+                try {
+                    info = obj.query_info_finish(res);
+                } catch (e) {
+                    this._finishRoot(file, callback);
+                    return;
+                }
+                if (!info.get_is_symlink()) {
+                    this._finishRoot(file, callback);
+                    return;
+                }
+                let target = info.get_symlink_target();
+                if (!target) {
+                    this._finishRoot(file, callback);
+                    return;
+                }
+                if (!GLib.path_is_absolute(target)) {
+                    let parent = file.get_parent();
+                    target = GLib.build_filenamev([parent.get_path(), target]);
+                }
+                this._resolveHop(Gio.File.new_for_path(target), hop + 1, callback);
+            }
+        );
+    },
+
+    _finishRoot: function(file, callback) {
+        this._dirHasShaders(file, (here) => {
+            if (here) {
+                callback(file.get_path());
+                return;
+            }
+            let parent = file.get_parent();
+            /* The applet directory is the child of the project. A start path
+             * with no shaders resolves to that parent. */
+            callback(parent ? parent.get_path() : file.get_path());
+        });
+    },
+
+    _dirHasShaders: function(file, callback) {
+        file.get_child("shaders").get_child("grade.glsl").query_info_async(
+            "standard::type",
+            Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT,
+            null,
+            (obj, res) => {
+                try {
+                    obj.query_info_finish(res);
+                    callback(true);
+                } catch (e) {
+                    callback(false);
+                }
+            }
+        );
     }
 };
