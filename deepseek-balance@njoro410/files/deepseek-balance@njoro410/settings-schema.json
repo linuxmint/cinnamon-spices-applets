@@ -1,0 +1,111 @@
+{
+    "header-api": {
+        "type": "header",
+        "description": "DeepSeek API"
+    },
+    "api-key": {
+        "type": "entry",
+        "default": "",
+        "description": "API key",
+        "tooltip": "From platform.deepseek.com → API keys. Stored in your Cinnamon settings as plain text, readable by processes running as you."
+    },
+    "currency": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Currency",
+        "tooltip": "Which balance to show when the account holds more than one currency.",
+        "options": {
+            "Auto (prefer non-zero)": "auto",
+            "CNY (¥)": "CNY",
+            "USD ($)": "USD"
+        }
+    },
+    "refresh-interval": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 240,
+        "step": 1,
+        "units": "minutes",
+        "description": "Refresh interval"
+    },
+    "header-display": {
+        "type": "header",
+        "description": "Panel display"
+    },
+    "display-mode": {
+        "type": "combobox",
+        "default": "percent",
+        "description": "Show in panel",
+        "options": {
+            "Percentage": "percent",
+            "Bar": "bar",
+            "Bar + percentage": "bar-percent",
+            "Balance amount": "balance"
+        }
+    },
+    "bar-color": {
+        "type": "combobox",
+        "default": "#4d6bfe",
+        "description": "Bar color",
+        "tooltip": "Color of the bar's filled part; it still turns red below the warning threshold.",
+        "options": {
+            "DeepSeek blue": "#4d6bfe",
+            "Blue": "#3584e4",
+            "Teal": "#009688",
+            "Green": "#33d17a",
+            "Yellow": "#f6d32d",
+            "Orange": "#ff7800",
+            "Red": "#e01b24",
+            "Pink": "#e91e63",
+            "Purple": "#9141ac",
+            "Gray": "#9a9996"
+        }
+    },
+    "reference-amount": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 0,
+        "max": 1000000,
+        "step": 1,
+        "description": "Reference amount (the 100% level)",
+        "tooltip": "DeepSeek has no quota, so the percentage is relative to an amount you choose — e.g. your last top-up. 0 disables the percentage."
+    },
+    "warn-threshold": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "Turn red below"
+    },
+    "header-peak": {
+        "type": "header",
+        "description": "Peak-hour pricing"
+    },
+    "peak-indicator": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Tint the logo during peak hours",
+        "tooltip": "DeepSeek charges 2× during peak hours: Mon–Fri 09:00–12:00 and 14:00–18:00 Beijing time. Weekends are always off-peak; Chinese public holidays are off-peak too, but the applet can't detect those."
+    },
+    "peak-logo-color": {
+        "type": "combobox",
+        "default": "#ff7800",
+        "description": "Peak logo color",
+        "tooltip": "The color the logo switches to while peak rates apply.",
+        "options": {
+            "Orange": "#ff7800",
+            "DeepSeek blue": "#4d6bfe",
+            "Blue": "#3584e4",
+            "Teal": "#009688",
+            "Green": "#33d17a",
+            "Yellow": "#f6d32d",
+            "Red": "#e01b24",
+            "Pink": "#e91e63",
+            "Purple": "#9141ac",
+            "Gray": "#9a9996"
+        }
+    }
+}
