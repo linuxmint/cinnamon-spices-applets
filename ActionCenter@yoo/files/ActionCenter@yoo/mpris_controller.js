@@ -14,6 +14,18 @@ const { MPRIS_STATE_FILE: STATE_FILE, MPRIS_CMD_FILE: CMD_FILE, CACHE_DIR } = C;
 // 与 scripts/_config.py DAEMON_VERSION 对齐，改 daemon 逻辑时两边一起 +1
 const EXPECTED_DAEMON_VERSION = 2;
 
+// 开关某 actor 上的单个 style class（动态 active 态用，不碰 inline 布局样式）
+function setCls(actor, cls, on) {
+    try {
+        if (!actor || !actor.has_style_class_name) return;
+        if (on) {
+            if (!actor.has_style_class_name(cls)) actor.add_style_class_name(cls);
+        } else if (actor.has_style_class_name(cls)) {
+            actor.remove_style_class_name(cls);
+        }
+    } catch (e) {}
+}
+
 function MprisController(applet) {
     this._applet = applet;
     // 状态来源：daemon 写的 players.json，本模块只读不写 D-Bus；
@@ -331,12 +343,14 @@ MprisController.prototype = {
 
         this._headerRow = new St.BoxLayout({
             vertical: false,
-            style: 'spacing: 6px; padding: 8px 12px; border-radius: 10px; background-color: rgba(255,255,255,0.08); width: ' + cw + 'px; max-width: ' + cw + 'px;'
+            style: 'spacing: 6px; padding: 8px 12px; border-radius: 10px; width: ' + cw + 'px; max-width: ' + cw + 'px;'
         });
+        this._headerRow.add_style_class_name('ac-box2');
 
         this._headerLabel = new St.Label({
             text: activePlayer ? activePlayer.name : '',
-            style: 'font-size: 13px; color: #ffffff; font-weight: bold;',
+            style: 'font-size: 13px; font-weight: bold;',
+            style_class: 'ac-text',
             x_align: Clutter.ActorAlign.START,
             x_expand: true
         });
@@ -345,7 +359,7 @@ MprisController.prototype = {
         this._arrowIcon = new St.Icon({
             icon_name: 'pan-down-symbolic',
             icon_size: 14,
-            style: 'color: rgba(255,255,255,0.6);'
+            style_class: 'ac-subtle'
         });
         this._headerRow.add_child(this._arrowIcon);
 
@@ -375,8 +389,9 @@ MprisController.prototype = {
 
         this._optionsBox = new St.BoxLayout({
             vertical: true,
-            style: 'spacing: 2px; margin-top: 4px; padding: 4px; border-radius: 10px; background-color: rgba(255,255,255,0.07);'
+            style: 'spacing: 2px; margin-top: 4px; padding: 4px; border-radius: 10px;'
         });
+        this._optionsBox.add_style_class_name('ac-box');
 
         for (let i = 0; i < this._players.length; i++) {
             let p = this._players[i];
@@ -384,21 +399,22 @@ MprisController.prototype = {
 
             let row = new St.BoxLayout({
                 vertical: false,
-                style: 'spacing: 6px; padding: 6px 12px; border-radius: 8px; width: ' + cw + 'px; max-width: ' + cw + 'px; ' +
-                       (active ? 'background-color: rgba(255,255,255,0.12);' : '')
+                style: 'spacing: 6px; padding: 6px 12px; border-radius: 8px; width: ' + cw + 'px; max-width: ' + cw + 'px;'
             });
+            if (active) row.add_style_class_name('ac-opt-active');
 
             let dot = new St.Icon({
                 icon_name: active ? 'radio-button-checked-symbolic' : 'radio-button-unchecked-symbolic',
                 icon_size: 14,
-                style: 'color: ' + (active ? '#4a9eff' : 'rgba(255,255,255,0.5)') + ';'
+                style_class: active ? 'ac-dot-active' : 'ac-faint'
             });
             row.add_child(dot);
 
             let statusIcon = p.status === 'Playing' ? ' \u25b6' : '';
             let lbl = new St.Label({
                 text: p.name + statusIcon,
-                style: 'font-size: 13px; color: ' + (active ? '#ffffff' : 'rgba(255,255,255,0.7)') + ';',
+                style: 'font-size: 13px;',
+                style_class: active ? 'ac-text' : 'ac-subtle',
                 x_align: Clutter.ActorAlign.START
             });
             row.add_child(lbl);
@@ -427,20 +443,18 @@ MprisController.prototype = {
         if (this._headerLabel && this._players[this._activeIdx]) {
             this._headerLabel.set_text(this._players[this._activeIdx].name);
         }
-        let cw = CHOOSER_CONTENT_WIDTH;
         for (let i = 0; i < this._chooserBtns.length; i++) {
             let b = this._chooserBtns[i];
             let active = (i === this._activeIdx);
             b.dot.set_icon_name(active ? 'radio-button-checked-symbolic' : 'radio-button-unchecked-symbolic');
-            b.dot.set_style('color: ' + (active ? '#4a9eff' : 'rgba(255,255,255,0.5)') + ';');
+            setCls(b.dot, 'ac-dot-active', active);
+            setCls(b.dot, 'ac-faint', !active);
             let p = this._players[i];
             let statusIcon = p && p.status === 'Playing' ? ' \u25b6' : '';
             b.label.set_text((p ? p.name : '') + statusIcon);
-            b.label.set_style('font-size: 13px; color: ' + (active ? '#ffffff' : 'rgba(255,255,255,0.7)') + ';');
-            b.btn.get_child().set_style(
-                'spacing: 6px; padding: 6px 12px; border-radius: 8px; width: ' + cw + 'px; max-width: ' + cw + 'px; ' +
-                (active ? 'background-color: rgba(255,255,255,0.12);' : '')
-            );
+            setCls(b.label, 'ac-text', active);
+            setCls(b.label, 'ac-subtle', !active);
+            setCls(b.btn.get_child(), 'ac-opt-active', active);
         }
     },
 
@@ -450,17 +464,19 @@ MprisController.prototype = {
 
         this._playerContainer = new St.BoxLayout({
             vertical: true,
-            style: 'padding: 8px; margin: 2px 6px; border-radius: 12px; background-color: rgba(255,255,255,0.06); width: ' + PLAYER_CONTENT_WIDTH + 'px; max-width: ' + PLAYER_CONTENT_WIDTH + 'px;'
+            style: 'padding: 8px; margin: 2px 6px; border-radius: 12px; width: ' + PLAYER_CONTENT_WIDTH + 'px; max-width: ' + PLAYER_CONTENT_WIDTH + 'px;'
         });
+        this._playerContainer.add_style_class_name('ac-player');
 
         let topRow = new St.BoxLayout({ vertical: false, style: 'spacing: 10px;' });
 
         this._coverBin = new St.Bin({
             x_align: Clutter.ActorAlign.CENTER,
             y_align: Clutter.ActorAlign.CENTER,
-            style: 'width: 70px; height: 70px; background-color: rgba(255,255,255,0.08);'
+            style: 'width: 70px; height: 70px;'
         });
-        this._coverIcon = new St.Icon({ icon_name: 'audio-x-generic-symbolic', icon_size: 40, style: 'color: rgba(255,255,255,0.6);' });
+        this._coverBin.add_style_class_name('ac-cover');
+        this._coverIcon = new St.Icon({ icon_name: 'audio-x-generic-symbolic', icon_size: 40, style_class: 'ac-faint' });
         this._coverBin.add_actor(this._coverIcon);
         this._lastCoverPath = player.coverPath || '';
         if (player.coverPath && player.coverPath.length > 0) {
@@ -488,7 +504,8 @@ MprisController.prototype = {
 
         this._titleLabel = new St.Label({
             text: player.title || _("No media"),
-            style: 'font-size: 14px; font-weight: bold; color: #ffffff;',
+            style: 'font-size: 14px; font-weight: bold;',
+            style_class: 'ac-text',
             x_align: Clutter.ActorAlign.START,
             x_expand: true
         });
@@ -498,7 +515,8 @@ MprisController.prototype = {
 
         this._artistLabel = new St.Label({
             text: player.artist || "",
-            style: 'font-size: 12px; color: rgba(255,255,255,0.7);',
+            style: 'font-size: 12px;',
+            style_class: 'ac-subtle',
             x_align: Clutter.ActorAlign.START,
             x_expand: true
         });
@@ -506,34 +524,24 @@ MprisController.prototype = {
         infoBox.add_child(this._artistLabel);
 
         let ctrlRow = new St.BoxLayout({ vertical: false, style: 'spacing: 6px; margin-top: 6px;' });
-        let btnStyle = 'padding: 4px 6px; border-radius: 6px; background-color: rgba(255,255,255,0.12);';
-        let btnHoverStyle = 'padding: 4px 6px; border-radius: 6px; background-color: rgba(255,255,255,0.28);';
-        let iconStyle = 'color: #ffffff;';
-        // 悬浮高亮（inline style 无 :hover，用 enter/leave 切换）
-        let addHover = function(btn) {
-            btn.connect('enter-event', function() { btn.set_style(btnHoverStyle); });
-            btn.connect('leave-event', function() { btn.set_style(btnStyle); });
-        };
+        let btnStyle = 'padding: 4px 6px; border-radius: 6px;';
 
-        let btnPrev = new St.Button({ reactive: true, style: btnStyle });
-        btnPrev.set_child(new St.Icon({ icon_name: 'media-skip-backward-symbolic', icon_size: 16, style: iconStyle }));
+        let btnPrev = new St.Button({ reactive: true, style: btnStyle, style_class: 'ac-btn' });
+        btnPrev.set_child(new St.Icon({ icon_name: 'media-skip-backward-symbolic', icon_size: 16, style_class: 'ac-icon' }));
         let self = this;
         btnPrev.connect('clicked', function() { self._sendCommand('prev', player.owner); });
-        addHover(btnPrev);
         ctrlRow.add_child(btnPrev);
 
         let iconName = player.status === 'Playing' ? 'media-playback-pause-symbolic' : 'media-playback-start-symbolic';
-        this._playBtn = new St.Button({ reactive: true, style: btnStyle });
-        this._playBtnIcon = new St.Icon({ icon_name: iconName, icon_size: 16, style: iconStyle });
+        this._playBtn = new St.Button({ reactive: true, style: btnStyle, style_class: 'ac-btn' });
+        this._playBtnIcon = new St.Icon({ icon_name: iconName, icon_size: 16, style_class: 'ac-icon' });
         this._playBtn.set_child(this._playBtnIcon);
         this._playBtn.connect('clicked', function() { self._sendCommand('play-pause', player.owner); });
-        addHover(this._playBtn);
         ctrlRow.add_child(this._playBtn);
 
-        let btnNext = new St.Button({ reactive: true, style: btnStyle });
-        btnNext.set_child(new St.Icon({ icon_name: 'media-skip-forward-symbolic', icon_size: 16, style: iconStyle }));
+        let btnNext = new St.Button({ reactive: true, style: btnStyle, style_class: 'ac-btn' });
+        btnNext.set_child(new St.Icon({ icon_name: 'media-skip-forward-symbolic', icon_size: 16, style_class: 'ac-icon' }));
         btnNext.connect('clicked', function() { self._sendCommand('next', player.owner); });
-        addHover(btnNext);
         ctrlRow.add_child(btnNext);
 
         infoBox.add_child(ctrlRow);
@@ -559,10 +567,9 @@ MprisController.prototype = {
                 });
             });
 
-            let timeStyle = 'font-size: 11px; color: rgba(255,255,255,0.6);';
             let timeBox = new St.BoxLayout({ vertical: false, style: 'spacing: 4px; margin-top: 2px;' });
-            this._curTimeLabel = new St.Label({ text: this._formatTime(player.position), style: timeStyle });
-            this._totalTimeLabel = new St.Label({ text: this._formatTime(player.length), style: timeStyle });
+            this._curTimeLabel = new St.Label({ text: this._formatTime(player.position), style: 'font-size: 11px;', style_class: 'ac-faint' });
+            this._totalTimeLabel = new St.Label({ text: this._formatTime(player.length), style: 'font-size: 11px;', style_class: 'ac-faint' });
             timeBox.add_child(this._curTimeLabel);
             timeBox.add_child(new St.Widget({ x_expand: true }));
             timeBox.add_child(this._totalTimeLabel);

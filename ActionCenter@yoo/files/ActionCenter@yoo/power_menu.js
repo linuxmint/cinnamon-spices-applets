@@ -25,8 +25,9 @@ PowerMenu.prototype = {
         // 外盒：圆角底色（对应原 .quick-settings-power-section）
         let box = new St.BoxLayout({
             vertical: true,
-            style: 'margin: 4px 6px; padding: 4px; border-radius: 10px; background-color: rgba(255,255,255,0.07); width: ' + POWER_BOX_WIDTH + 'px; max-width: ' + POWER_BOX_WIDTH + 'px;'
+            style: 'margin: 4px 6px; padding: 4px; border-radius: 10px; width: ' + POWER_BOX_WIDTH + 'px; max-width: ' + POWER_BOX_WIDTH + 'px;'
         });
+        box.add_style_class_name('ac-box');
 
         // 头部：透明底（对应原 .quick-settings-power-header）
         let headerBox = new St.BoxLayout({
@@ -36,12 +37,13 @@ PowerMenu.prototype = {
         headerBox.add_child(new St.Icon({
             icon_name: 'system-shutdown-symbolic',
             icon_size: 20,
-            style: 'color: #ffffff;',
+            style_class: 'ac-icon',
             y_align: Clutter.ActorAlign.CENTER
         }));
         headerBox.add_child(new St.Label({
             text: _("Power Off"),
-            style: 'font-weight: bold; font-size: 14px; color: #ffffff;',
+            style: 'font-weight: bold; font-size: 14px;',
+            style_class: 'ac-text',
             y_align: Clutter.ActorAlign.CENTER
         }));
         box.add_child(headerBox);
@@ -54,7 +56,8 @@ PowerMenu.prototype = {
                 Util.spawn(['cinnamon-session-quit', '--power-off']);
             });
             box.add_child(new St.Widget({
-                style: 'height: 1px; width: ' + (POWER_BTN_WIDTH - 24) + 'px; max-width: ' + (POWER_BTN_WIDTH - 24) + 'px; background-color: rgba(255,255,255,0.12); margin: 4px 12px;'
+                style: 'height: 1px; width: ' + (POWER_BTN_WIDTH - 24) + 'px; max-width: ' + (POWER_BTN_WIDTH - 24) + 'px; margin: 4px 12px;',
+                style_class: 'ac-sep'
             }));
             this._addRow(box, _("Log Out"), function() {
                 Util.spawn(['cinnamon-session-quit', '--logout']);
@@ -68,7 +71,8 @@ PowerMenu.prototype = {
             applet._powerItems.off = this._addRow(box, _("Power Off"), function() { Util.spawn(['systemctl', 'poweroff']); });
 
             box.add_child(new St.Widget({
-                style: 'height: 1px; width: ' + (POWER_BTN_WIDTH - 24) + 'px; max-width: ' + (POWER_BTN_WIDTH - 24) + 'px; background-color: rgba(255,255,255,0.12); margin: 4px 12px;'
+                style: 'height: 1px; width: ' + (POWER_BTN_WIDTH - 24) + 'px; max-width: ' + (POWER_BTN_WIDTH - 24) + 'px; margin: 4px 12px;',
+                style_class: 'ac-sep'
             }));
 
             applet._powerItems.logout = this._addRow(box, _("Log Out"), function() { Util.spawn(['cinnamon-session-quit', '--logout', '--no-prompt']); });
@@ -84,27 +88,26 @@ PowerMenu.prototype = {
         applet._powerBox = box; // 调试测量用
     },
 
-    // 内联行按钮（对应原 .popup-menu-item：320px / 8px 12px / 圆角6px + 悬浮高亮）
+    // 内联行按钮（对应原 .popup-menu-item：320px / 8px 12px / 圆角6px + 悬浮高亮走 CSS）
     _addRow: function(box, label, onActivate) {
         let applet = this._applet;
         let rowStyle = 'spacing: 6px; padding: 8px 12px; border-radius: 6px; width: ' + POWER_ROW_WIDTH + 'px; max-width: ' + POWER_ROW_WIDTH + 'px;';
-        let rowHoverStyle = rowStyle + ' background-color: rgba(255,255,255,0.12);';
 
         let row = new St.BoxLayout({
             vertical: false,
-            style: rowStyle
+            style: rowStyle,
+            style_class: 'ac-prow'
         });
         row.add_child(new St.Label({
             text: label,
-            style: 'font-size: 13px; color: #ffffff;',
+            style: 'font-size: 13px;',
+            style_class: 'ac-text',
             y_align: Clutter.ActorAlign.CENTER
         }));
 
         let btn = new St.Button({ reactive: true, can_focus: true, x_expand: true,
             style: 'padding: 0; border-width: 0; width: ' + POWER_BTN_WIDTH + 'px; max-width: ' + POWER_BTN_WIDTH + 'px;' });
         btn.set_child(row);
-        btn.connect('enter-event', function() { row.set_style(rowHoverStyle); });
-        btn.connect('leave-event', function() { row.set_style(rowStyle); });
         btn.connect('clicked', function() {
             applet._ignoreClose = false;
             applet.menu.close();

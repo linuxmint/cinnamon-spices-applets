@@ -286,6 +286,18 @@ msgstr "显示移动宽带开关"
 msgid "Show Printer Settings Item"
 msgstr "显示打印机设置项"
 
+msgid "Desktop Theme (dark mode)"
+msgstr "桌面主题（深色模式）"
+
+msgid "Cinnamon desktop theme when Dark Style is enabled"
+msgstr "深色样式启用时使用的 Cinnamon 桌面主题"
+
+msgid "Desktop Theme (light mode)"
+msgstr "桌面主题（浅色模式）"
+
+msgid "Cinnamon desktop theme when Dark Style is disabled"
+msgstr "深色样式关闭时使用的 Cinnamon 桌面主题"
+
 msgid "Built-in display brightness prefers the system backlight service (CSD Screen D-Bus, no extra package needed), falling back to brightnessctl. External monitors need ddcutil. If none is available, the brightness slider is hidden automatically.\n\nsudo apt install brightnessctl ddcutil\n\nNOTE: ddcutil needs i2c access. After installing, run: sudo usermod -aG i2c $USER\nand log out and back in."
 msgstr "内屏亮度优先使用系统背光服务（CSD Screen D-Bus，无需额外安装），失败回退到 brightnessctl；外接显示器需要 ddcutil。三者都不可用时亮度滑块会自动隐藏。\n\nsudo apt install brightnessctl ddcutil\n\n注意：ddcutil 需要 i2c 访问权限，安装后执行：sudo usermod -aG i2c $USER\n然后注销重进。"
 

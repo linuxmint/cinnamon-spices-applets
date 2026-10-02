@@ -7,6 +7,17 @@ function ThemeSwitcher(applet) {
     // Gio.Settings 建一次复用：创建背后是 D-Bus 开销，别每次现建
     this._desktopSettings = new Gio.Settings({ schema_id: 'org.cinnamon.desktop.interface' });
     this._colorSettings = new Gio.Settings({ schema_id: 'org.cinnamon.settings-daemon.plugins.color' });
+    try {
+        this._cinnamonSettings = new Gio.Settings({ schema_id: 'org.cinnamon.theme' });
+    } catch (e) {
+        this._cinnamonSettings = null;
+    }
+    // xapp 门户 Dark mode（系统设置→主题→设置里的同款开关，老系统可能没有该 schema）
+    try {
+        this._portalSettings = new Gio.Settings({ schema_id: 'org.x.apps.portal' });
+    } catch (e) {
+        this._portalSettings = null;
+    }
 }
 
 ThemeSwitcher.prototype = {
@@ -23,7 +34,14 @@ ThemeSwitcher.prototype = {
                 global.logError("QS theme watch: " + e.message);
             }
         };
-        watch(this._desktopSettings, 'gtk-theme', function() { self.updateDarkModeState(); });
+        watch(this._desktopSettings, 'gtk-theme', function() {
+            self.updateDarkModeState();
+            // 同 applet theme-set：延迟等新样式落定再实测
+            Mainloop.timeout_add(500, function() {
+                try { self._applet._applyMenuTheme(); } catch (e) {}
+                return false;
+            });
+        });
         watch(this._desktopSettings, 'icon-theme', function() { self.updateDarkModeState(); });
         watch(this._colorSettings, 'night-light-enabled', function() { self.updateNightLightState(); });
     },
@@ -86,20 +104,85 @@ ThemeSwitcher.prototype = {
         let prefix = isDark ? 'dark' : 'light';
         try {
             let s = this._desktopSettings;
-            let gtkTheme = appletSettings.getValue(prefix + '-gtk-theme');
+            let gtkTheme = appletSettings.getValue(prefix + '-gtk-theme')
+                        || this._guessVariant(s.get_string('gtk-theme'), isDark, 'gtk');
             if (gtkTheme) {
                 s.set_string('gtk-theme', gtkTheme);
             }
-            let iconTheme = appletSettings.getValue(prefix + '-icon-theme');
+            let iconTheme = appletSettings.getValue(prefix + '-icon-theme')
+                         || this._guessVariant(s.get_string('icon-theme'), isDark, 'icon');
             if (iconTheme) {
                 s.set_string('icon-theme', iconTheme);
             }
-            let cursorTheme = appletSettings.getValue(prefix + '-cursor-theme');
+            let cursorTheme = appletSettings.getValue(prefix + '-cursor-theme')
+                           || this._guessVariant(s.get_string('cursor-theme'), isDark, 'cursor');
             if (cursorTheme) {
                 s.set_string('cursor-theme', cursorTheme);
             }
+            // 桌面主题（系统设置→主题→桌面同款）：整桌深浅跟随，未配置按规则猜
+            try {
+                if (this._cinnamonSettings) {
+                    let curCinnamon = this._cinnamonSettings.get_string('name');
+                    let cinnamonTheme = appletSettings.getValue(prefix + '-cinnamon-theme')
+                                     || this._guessVariant(curCinnamon, isDark, 'cinnamon');
+                    if (cinnamonTheme) {
+                        this._cinnamonSettings.set_string('name', cinnamonTheme);
+                    }
+                }
+            } catch (e3) {
+                global.logError("QS cinnamon theme: " + e3.message);
+            }
+            // Libadwaita/xapp 类应用不跟 GTK 主题，只认门户 color-scheme：
+            // 深色→prefer-dark，浅色→恢复系统默认（let applications decide）
+            try {
+                if (this._portalSettings) {
+                    this._portalSettings.set_string('color-scheme', isDark ? 'prefer-dark' : 'default');
+                }
+            } catch (e2) {
+                global.logError("QS portal color-scheme: " + e2.message);
+            }
         } catch (e) {
             global.logError("QS _applyDarkStyleTheme: " + e.message);
+        }
+    },
+
+    // 未配置主题名时按规则猜变体：dark 加 -Dark/-dark 后缀找存在的，
+    // light 去后缀找存在的。存在性用各类型标志目录校验，找不到返回 ''。
+    // kind: gtk（gtk-3.0）/ icon（index.theme）/ cursor（cursors）/ cinnamon（cinnamon）
+    _guessVariant: function(cur, wantDark, kind) {
+        try {
+            if (!cur) return '';
+            let dirs = (kind === 'gtk' || kind === 'cinnamon')
+                ? ["/usr/share/themes", GLib.get_home_dir() + "/.themes"]
+                : ["/usr/share/icons", GLib.get_home_dir() + "/.icons"];
+            let ok = function(name) {
+                for (let i = 0; i < dirs.length; i++) {
+                    let base = dirs[i] + "/" + name;
+                    if (kind === 'gtk' && GLib.file_test(base + "/gtk-3.0", GLib.FileTest.IS_DIR)) return name;
+                    if (kind === 'icon' && GLib.file_test(base + "/index.theme", GLib.FileTest.EXISTS)) return name;
+                    if (kind === 'cursor' && GLib.file_test(base + "/cursors", GLib.FileTest.IS_DIR)) return name;
+                    if (kind === 'cinnamon' && GLib.file_test(base + "/cinnamon", GLib.FileTest.IS_DIR)) return name;
+                }
+                return '';
+            };
+            if (wantDark) {
+                // 已是深色直接用；Mint-Y-Blue → Mint-Y-Dark-Blue 这类中缀也试
+                if (/[Dd]ark/.test(cur)) return cur;
+                let infix = cur.replace(/^(Mint-Y)(?!-Dark)/, '$1-Dark');
+                if (infix !== cur) { let hit = ok(infix); if (hit) return hit; }
+                let hit = ok(cur + '-Dark') || ok(cur + '-dark');
+                if (hit) return hit;
+                return '';
+            }
+            let stripped = cur.replace(/-Dark$/, '').replace(/-dark$/, '')
+                              .replace(/^(Mint-Y)-Dark/, '$1');
+            if (stripped !== cur) {
+                let hit = ok(stripped);
+                if (hit) return hit;
+            }
+            return '';
+        } catch (e) {
+            return '';
         }
     },
 

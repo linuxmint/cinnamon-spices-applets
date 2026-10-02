@@ -108,7 +108,7 @@ ToggleManager.prototype = {
 
         let icon = new St.Icon({
             icon_name: config.iconName, icon_size: 16,
-            style: 'color: #ffffff;',
+            style_class: 'ac-icon',
             y_align: Clutter.ActorAlign.CENTER
         });
         hbox.add_child(icon);
@@ -156,7 +156,7 @@ ToggleManager.prototype = {
             arrowBtn.set_child(new St.Icon({
                 icon_name: 'pan-end-symbolic',
                 icon_size: 16,
-                style: 'color: rgba(255, 255, 255, 0.85);'
+                style_class: 'ac-faint'
             }));
             arrowBtn.connect('clicked', function() {
                 if (config.onSettings) {
@@ -190,6 +190,17 @@ ToggleManager.prototype = {
         }
     },
 
+    // 行上色：只写背景强调色，文字走 CSS 的深浅两套（不看强调色亮度）
+    _paintRow: function(row, accent) {
+        let actor = row.actor || row;
+        actor.set_style('spacing: 0; background-color: ' + accent + ';');
+    },
+
+    _clearRow: function(row) {
+        let actor = row.actor || row;
+        actor.set_style('spacing: 0;');
+    },
+
     setToggleState: function(id, active) {
         let b = this._applet._toggleButtons[id];
         if (!b) return;
@@ -197,8 +208,33 @@ ToggleManager.prototype = {
         if (!actor.has_style_class_name) return;
         if (active) {
             if (!actor.has_style_class_name('active')) actor.add_style_class_name('active');
+            // 激活背景用主题强调色（CSS 里的蓝只当回退，inline 优先）
+            try {
+                let accent = (this._applet._accentColor) ? this._applet._accentColor() : '#3584e4';
+                this._paintRow(b, accent);
+            } catch (e) {}
         } else {
             if (actor.has_style_class_name('active')) actor.remove_style_class_name('active');
+            try { this._clearRow(b); } catch (e) {}
+        }
+    },
+
+    // 主题切换后已激活的开关重刷强调色（_applyMenuTheme 里调）
+    refreshActiveBg: function() {
+        let btns = this._applet._toggleButtons;
+        if (!btns) return;
+        let accent = '#3584e4';
+        try {
+            accent = (this._applet._accentColor) ? this._applet._accentColor() : accent;
+        } catch (e) {}
+        for (let id in btns) {
+            try {
+                let b = btns[id];
+                let actor = b.actor || b;
+                if (actor && actor.has_style_class_name && actor.has_style_class_name('active')) {
+                    this._paintRow(b, accent);
+                }
+            } catch (e2) {}
         }
     },
 

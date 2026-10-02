@@ -62,9 +62,11 @@
 | 深色 GTK 主题 | 深色模式下使用的 GTK 主题 |
 | 深色图标主题 | 深色模式下使用的图标主题 |
 | 深色光标主题 | 深色模式下使用的光标主题 |
+| 深色桌面主题 | 深色模式下使用的 Cinnamon 桌面主题（开关跟随切换） |
 | 浅色 GTK 主题 | 浅色模式下使用的 GTK 主题 |
 | 浅色图标主题 | 浅色模式下使用的图标主题 |
 | 浅色光标主题 | 浅色模式下使用的光标主题 |
+| 浅色桌面主题 | 浅色模式下使用的 Cinnamon 桌面主题（开关跟随切换） |
 
 ### 右键菜单
 
@@ -209,9 +211,11 @@ Right-click the panel icon → **Settings** to configure four pages:
 | Dark GTK Theme | GTK theme used when dark mode is enabled |
 | Dark Icon Theme | Icon theme used when dark mode is enabled |
 | Dark Cursor Theme | Cursor theme used when dark mode is enabled |
+| Dark Desktop Theme | Cinnamon desktop theme used when dark mode is enabled (toggle follows) |
 | Light GTK Theme | GTK theme used when dark mode is disabled |
 | Light Icon Theme | Icon theme used when dark mode is disabled |
 | Light Cursor Theme | Cursor theme used when dark mode is disabled |
+| Light Desktop Theme | Cinnamon desktop theme used when dark mode is disabled (toggle follows) |
 
 ### Context Menu
 

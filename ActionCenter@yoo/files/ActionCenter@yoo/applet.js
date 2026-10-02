@@ -84,6 +84,23 @@ MyApplet.prototype = {
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
             this.menuManager.addMenu(this.menu);
+            // 主题变了重算菜单深浅（漏信号时开菜单也重算，双保险）
+            try {
+                this._menuThemeId = this.menu.connect('open-state-changed', function(m, open) {
+                    if (open) { try { self._applyMenuTheme(); } catch (e2) {} }
+                });
+            } catch (e2) {}
+            try {
+                if (Main.themeManager) {
+                    // 延迟一拍：theme-set 发出时新样式表未必加载完，立即实测会读到旧主题
+                    this._themeSetId = Main.themeManager.connect('theme-set', function() {
+                        Mainloop.timeout_add(500, function() {
+                            try { self._applyMenuTheme(); } catch (e3) {}
+                            return false;
+                        });
+                    });
+                }
+            } catch (e4) {}
         } catch (e) {
             global.logError("QS menu: " + e.message + "\n" + e.stack);
             return;
@@ -94,6 +111,7 @@ MyApplet.prototype = {
         try {
             this._settings = new Settings.AppletSettings(this, UUID, instanceId);
             this._bindSettings();
+            this._preloadPanelIcons();
             this._applyPanelIcon();
         } catch (e) {
             global.logError("QS settings: " + e.message);
@@ -161,6 +179,7 @@ MyApplet.prototype = {
         try { this._toggleMgr.applyToggleVisibility(); } catch (e) { global.logError("QS applyToggleVisibility: " + e.message); }
         try { this._sysState.initPolling(); } catch (e) { global.logError("QS _initStatePolling: " + e.message + "\n" + e.stack); }
         try { this._initMpris(); }      catch (e) { global.logError("QS _initMpris: " + e.message + "\n" + e.stack); }
+        try { this._applyMenuTheme(); } catch (e) { global.logError("QS _applyMenuTheme: " + e.message); }
 
         global.log("QS init done");
     },
@@ -191,7 +210,7 @@ MyApplet.prototype = {
             this._applyShowPlayer();
         }.bind(this));
 
-        let toggles = ['network', 'bluetooth', 'performance', 'nightlight', 'darkmode', 'airplane'];
+        let toggles = ['performance', 'nightlight', 'darkmode', 'airplane'];
         for (let i = 0; i < toggles.length; i++) {
             on('changed::show-toggle-' + toggles[i], function() {
                 this._toggleMgr.applyToggleVisibility();
@@ -199,7 +218,6 @@ MyApplet.prototype = {
         }
 
         on('changed::power-mode', function() {
-            let val = this._settings.getValue('power-mode');
             this._powerMenu.rebuildPowerMenu();
         }.bind(this));
 
@@ -281,6 +299,18 @@ MyApplet.prototype = {
                 return;
             }
             let themes = JSON.parse(ByteArray.toString(content));
+            // 老缓存没有 cinnamon 键：重扫一次再读，保证新下拉有数据
+            if (!themes.cinnamon) {
+                try {
+                    GLib.spawn_sync(null,
+                        ['python3', this._appletMetadata.path + '/scripts/scan_themes.py'],
+                        null, GLib.SpawnFlags.SEARCH_PATH, null);
+                    let [rok, rcontent] = themeFile.load_contents(null);
+                    if (rok && rcontent) themes = JSON.parse(ByteArray.toString(rcontent));
+                } catch (e) {
+                    global.logError("QS rescan themes: " + e.message);
+                }
+            }
 
             let schemaFile = Gio.File.new_for_path(this._appletMetadata.path + '/settings-schema.json');
             if (!schemaFile.query_exists(null)) {
@@ -300,14 +330,16 @@ MyApplet.prototype = {
                 'dark-icon-theme': themes.icon,
                 'light-icon-theme': themes.icon,
                 'dark-cursor-theme': themes.cursor,
-                'light-cursor-theme': themes.cursor
+                'light-cursor-theme': themes.cursor,
+                'dark-cinnamon-theme': themes.cinnamon,
+                'light-cinnamon-theme': themes.cinnamon
             };
 
             let changed = false;
             for (let key in themeKeys) {
                 if (schema[key] && schema[key].type === 'combobox') {
                     let opts = { '(None)': '' };
-                    let list = themeKeys[key];
+                    let list = themeKeys[key] || [];
                     for (let i = 0; i < list.length; i++) {
                         opts[list[i]] = list[i];
                     }
@@ -430,17 +462,56 @@ MyApplet.prototype = {
         this._customIconWidget.set_width(scaledW);
         this._customIconWidget.set_height(height);
 
-        let cache = St.TextureCache.get_default();
-        cache.load_image_from_file_async(path, scaledW, height, function(c, handle, actor) {
-            if (actor) {
-                actor.set_size(scaledW, height);
-                this._customIconWidget.set_child(actor);
-            }
-        }.bind(this));
+        // 自带两图标已预加载：同步换 child，即时生效且无新旧回调竞态；
+        // 用户自选的外部文件才走异步（加序号丢弃过期回调）。
+        let preloaded = this._panelIconActors ? this._panelIconActors[path] : null;
+        if (preloaded && !preloaded.is_finalized()) {
+            preloaded.set_size(scaledW, height);
+            this._customIconWidget.set_child(preloaded);
+        } else {
+            let cache = St.TextureCache.get_default();
+            this._iconLoadSeq = (this._iconLoadSeq || 0) + 1;
+            let mySeq = this._iconLoadSeq;
+            let self = this;
+            cache.load_image_from_file_async(path, scaledW, height, function(c, handle, actor) {
+                if (mySeq !== self._iconLoadSeq) return; // 被更新的请求超车，直接丢掉
+                if (actor) {
+                    actor.set_size(scaledW, height);
+                    self._customIconWidget.set_child(actor);
+                }
+            });
+        }
 
         this._applet_icon_box.set_child(this._customIconWidget);
         this._applet_icon_box.set_fill(false, false);
         this._applet_icon_box.set_alignment(St.Align.MIDDLE, St.Align.MIDDLE);
+    },
+
+    // 自带两套面板图标初始化时各加载一次存在 map 里，切换只换 child。
+    // 高度设置变化时换 child 前重设尺寸即可，不用重载文件。
+    _preloadPanelIcons: function() {
+        try {
+            let appletDir = (this._appletMetadata && this._appletMetadata.path)
+                ? this._appletMetadata.path
+                : GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
+            this._panelIconActors = this._panelIconActors || {};
+            let files = [appletDir + "/icons/panel-icon.png",
+                         appletDir + "/icons/panel-icon-dark.png"];
+            let cache = St.TextureCache.get_default();
+            for (let i = 0; i < files.length; i++) {
+                (function(path, self) {
+                    if (self._panelIconActors[path]) return;
+                    if (!GLib.file_test(path, GLib.FileTest.EXISTS)) return;
+                    try {
+                        cache.load_image_from_file_async(path, 96, 96, function(c, handle, actor) {
+                            if (actor) self._panelIconActors[path] = actor;
+                        });
+                    } catch (e) {}
+                })(files[i], this);
+            }
+        } catch (e) {
+            global.logError("QS _preloadPanelIcons: " + e.message);
+        }
     },
 
     // 若 settings 未存过图标或存的是相对路径，写入绝对路径。
@@ -457,10 +528,37 @@ MyApplet.prototype = {
             let defaultFile = appletDir + "/icons/panel-icon-dark.png";
             if (GLib.file_test(defaultFile, GLib.FileTest.EXISTS)) {
                 this._settings.setValue('panel-icon', defaultFile);
+                // setValue 不发射 changed 信号，显示侧必须手调一次
+                try { this._applyPanelIcon(); } catch (e2) {}
                 dbg("QS icon: ensured panel-icon default = " + defaultFile);
             }
         } catch (e) {
             global.logError("QS _ensurePanelIconDefault: " + e.message);
+        }
+    },
+
+    // 面板图标跟主题：当前值是自带两图标之一才算自动档，自动档按深浅切换；
+    // 用户自己选过的图一律不动。只在确实要换时写 settings，避免循环触发。
+    _applyThemedPanelIcon: function(light) {
+        try {
+            if (!this._settings) return;
+            let appletDir = (this._appletMetadata && this._appletMetadata.path)
+                ? this._appletMetadata.path
+                : GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
+            let lightFile = appletDir + "/icons/panel-icon.png";
+            let darkFile = appletDir + "/icons/panel-icon-dark.png";
+            let cur = this._settings.getValue('panel-icon') || '';
+            let curAbs = GLib.path_is_absolute(cur) ? cur : (appletDir + "/" + cur);
+            if (curAbs !== lightFile && curAbs !== darkFile) return; // 用户自定义，不动
+            let want = light ? lightFile : darkFile;
+            if (curAbs === want) return;
+            if (!GLib.file_test(want, GLib.FileTest.EXISTS)) return;
+            this._settings.setValue('panel-icon', want);
+            // setValue 不发射 changed 信号，显示侧必须手调一次（同步走预加载，无闪烁）
+            try { this._applyPanelIcon(); } catch (e2) {}
+            dbg("QS icon: auto-switched panel-icon to " + want);
+        } catch (e) {
+            global.logError("QS _applyThemedPanelIcon: " + e.message);
         }
     },
 
@@ -517,6 +615,78 @@ MyApplet.prototype = {
             // 动画失败就退回直接显隐（并复位透明度，防止半隐身）
             try { box.opacity = 255; box.translation_y = 0; show ? box.show() : box.hide(); } catch(e2) {}
         }
+    },
+
+    // 菜单跟主题（学 weather@mockturtl）：不猜主题名，直接实测菜单 actor
+    // 渲染后的文字色算亮度；theme-set 信号触发重算，漏信号时开菜单也重算。
+    // 深色不挂类（默认样式即深色），浅色挂 .actioncenter-light。
+    _applyMenuTheme: function() {
+        try {
+            if (!this.menu || !this.menu.actor || this.menu.actor.is_finalized()) return;
+            let light = null;
+            try {
+                let c = this.menu.actor.get_theme_node().get_color('color');
+                let lum = (2126 * c.red + 7152 * c.green + 722 * c.blue) / 10000 / 255;
+                light = Math.abs(1 - lum) > 0.5;
+            } catch (e) { light = null; }
+            if (light === null) {
+                // 实测失败才回退到名启发式
+                light = !(this._themeSwitcher && this._themeSwitcher._isDarkNow());
+            }
+            if (light) {
+                if (!this.menu.actor.has_style_class_name('actioncenter-light')) {
+                    this.menu.actor.add_style_class_name('actioncenter-light');
+                }
+            } else {
+                this.menu.actor.remove_style_class_name('actioncenter-light');
+            }
+            // 主题变了强调色也要重取，已激活的开关重刷背景
+            this._accentCache = null;
+            if (this._toggleMgr) {
+                try { this._toggleMgr.refreshActiveBg(); } catch (e2) {}
+            }
+            // 面板图标自动档跟主题切换
+            try { this._applyThemedPanelIcon(light); } catch (e4) {}
+        } catch (e) {}
+    },
+
+    // 主题强调色：依次实测几个“选中态即强调色”的标准类
+    //（calendar-today:selected 在 Nebula 类主题是实色，toggle-switch:checked
+    // 在 Mint-Y 类主题是实色），首个不透明的胜出，读不到回退 #3584e4。
+    // 开关激活背景用它，保证跟主题走。
+    _accentColor: function() {
+        if (this._accentCache) return this._accentCache;
+        let color = '#3584e4';
+        let targets = [
+            ['calendar-today', 'selected'],
+            ['toggle-switch', 'checked']
+        ];
+        try {
+            for (let i = 0; i < targets.length; i++) {
+                let tmp = null;
+                try {
+                    tmp = new St.Label({ text: 'x', style_class: targets[i][0] });
+                    tmp.add_style_pseudo_class(targets[i][1]);
+                    Main.uiGroup.add_child(tmp);
+                    let bg = tmp.get_theme_node().get_background_color();
+                    if (bg && bg.alpha > 100) {
+                        color = 'rgba(' + bg.red + ',' + bg.green + ',' + bg.blue + ',' + (bg.alpha / 255).toFixed(3) + ')';
+                        Main.uiGroup.remove_child(tmp);
+                        try { tmp.destroy(); } catch (e2) {}
+                        tmp = null;
+                        break;
+                    }
+                } catch (e3) {}
+                try {
+                    if (tmp) {
+                        Main.uiGroup.remove_child(tmp);
+                        tmp.destroy();
+                    }
+                } catch (e4) {}
+            }
+        } catch (e) {}
+        this._accentCache = color;
+        return color;
     },
 
     _wrapCentered: function(child) {
@@ -635,12 +805,13 @@ MyApplet.prototype = {
 
         this._batteryIcon = new St.Icon({
             icon_name: "battery-full-symbolic", icon_size: 16,
-            style: 'color: #ffffff;'
+            style_class: 'ac-icon'
         });
         batteryPill.add_child(this._batteryIcon);
 
         this._batteryLabel = new St.Label({
-            text: "...", y_align: Clutter.ActorAlign.CENTER
+            text: "...", y_align: Clutter.ActorAlign.CENTER,
+            style_class: 'ac-text'
         });
         batteryPill.add_child(this._batteryLabel);
         outer.add_child(batteryPill);
@@ -661,7 +832,7 @@ MyApplet.prototype = {
             });
             btn.set_child(new St.Icon({
                 icon_name: b.icon, icon_size: 16,
-                style: 'color: #ffffff;'
+                style_class: 'ac-icon'
             }));
             btn.connect('clicked', b.cb);
 
@@ -761,7 +932,7 @@ MyApplet.prototype = {
 
         this._volumeIcon = new St.Icon({
             icon_name: "audio-volume-medium-symbolic",
-            icon_size: 16, style: 'color: #ffffff;'
+            icon_size: 16, style_class: 'ac-icon'
         });
         this._volumeIconBtn = new St.Button({
             style_class: 'quick-settings-icon-inline-btn',
@@ -829,7 +1000,7 @@ MyApplet.prototype = {
         });
         this._brightnessIconBtn.set_child(new St.Icon({
             icon_name: "display-brightness-symbolic",
-            icon_size: 16, style: 'color: #ffffff;'
+            icon_size: 16, style_class: 'ac-icon'
         }));
         this._brightnessIconBtn.connect('clicked', function() { self._brightnessCtrl.toggleBrightnessMenu(); });
         briBox.add_child(this._brightnessIconBtn);
@@ -856,8 +1027,9 @@ MyApplet.prototype = {
         // 亮度二级菜单：内联盒子模式（同选择器/关机菜单，不撑主菜单）
         let briBox2 = new St.BoxLayout({
             vertical: true,
-            style: 'margin: 4px 6px; padding: 4px; border-radius: 10px; background-color: rgba(255,255,255,0.07); width: 336px; max-width: 336px;'
+            style: 'margin: 4px 6px; padding: 4px; border-radius: 10px; width: 336px; max-width: 336px;'
         });
+        briBox2.add_style_class_name('ac-box');
         this._brightnessBox = briBox2;
         for (let d of this._displays) {
             this._brightnessCtrl.buildDisplayRow(d);
@@ -1000,8 +1172,14 @@ MyApplet.prototype = {
         try {
             let [ok, argv] = GLib.shell_parse_argv(cmd);
             if (ok && argv.length > 0) {
-                GLib.spawn_async(null, argv, null,
+                let [started, pid] = GLib.spawn_async(null, argv, null,
                     GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD, null);
+                // DO_NOT_REAP_CHILD 必须配 child_watch，否则每次截图漏一个僵尸进程
+                if (started) {
+                    try {
+                        GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, function() { return false; });
+                    } catch (e2) {}
+                }
             }
         } catch (e) {
             global.logError("QS screenshot: " + e.message);
@@ -1063,6 +1241,14 @@ MyApplet.prototype = {
         if (this._contextMenu) {
             try { this._contextMenu.destroy(); } catch(e) {}
             this._contextMenu = null;
+        }
+        if (this._menuThemeId && this.menu) {
+            try { this.menu.disconnect(this._menuThemeId); } catch(e) {}
+            this._menuThemeId = 0;
+        }
+        if (this._themeSetId && Main.themeManager) {
+            try { Main.themeManager.disconnect(this._themeSetId); } catch(e) {}
+            this._themeSetId = 0;
         }
         // 断开本模块所有信号：settings 变更、panel 尺寸、Cvc，防重载累积
         if (this._settings && this._settingsIds) {

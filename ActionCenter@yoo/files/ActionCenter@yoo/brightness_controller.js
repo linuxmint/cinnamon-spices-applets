@@ -196,14 +196,14 @@ detectAllDisplays: function() {
         box.add_child(new St.Icon({
             icon_name: display.type === 'internal'
                 ? 'computer-symbolic' : 'video-display-symbolic',
-            icon_size: 14, style: 'color: #ffffff;',
+            icon_size: 14, style_class: 'ac-icon',
             y_align: Clutter.ActorAlign.CENTER
         }));
 
         let nameLabel = new St.Label({
             text: display.name,
             y_align: Clutter.ActorAlign.CENTER,
-            style: 'color: #ffffff;'
+            style_class: 'ac-text'
         });
         nameLabel.set_width(100);
         try {
@@ -313,28 +313,30 @@ detectAllDisplays: function() {
                     // CSD 写：回值即系统接受值，先比一次
                     let ret = self._csdSet(pct);
                     if (ret !== null && Math.abs(ret - pct) <= VERIFY_TOLERANCE) return GLib.SOURCE_REMOVE;
-                    if (ret === null || !display._csdFailed) {
-                        // 回值不符或写入失败：350ms 后重读确认，避免背光渐变中的误判
-                        Mainloop.timeout_add(350, function() {
-                            if (display._csdFailed) return false;
-                            let cur = self._csdGet();
-                            let ok = cur !== null && Math.abs(cur * 100 - pct) <= VERIFY_TOLERANCE;
-                            if (!ok) {
-                                display._csdFailed = true;
-                                display.backend = 'brightnessctl';
-                                global.log("QS brightness: CSD set unverified (want " + pct +
-                                    "%, got " + (cur === null ? "n/a" : Math.round(cur * 100) + "%") +
-                                    "), fallback to brightnessctl");
-                                GLib.spawn_command_line_async('brightnessctl set ' + pct + '%');
-                            }
-                            return false;
-                        });
-                        if (ret !== null) return GLib.SOURCE_REMOVE;
+                    if (ret === null) {
+                        // 写入异常：直接降级写一次，不再排回验（读也一定失败）
+                        display._csdFailed = true;
+                        global.log("QS brightness: CSD write failed, fallback to brightnessctl");
+                        GLib.spawn_command_line_async('brightnessctl set ' + pct + '%');
+                        return GLib.SOURCE_REMOVE;
                     }
-                    // CSD 彻底不可用（异常）：直接 brightnessctl
-                    display._csdFailed = true;
-                    display.backend = 'brightnessctl';
-                    GLib.spawn_command_line_async('brightnessctl set ' + pct + '%');
+                    // 回值不符：350ms 后重读确认，避免背光渐变中的误判。
+                    // 带写序号：快拖时新写会让旧回验直接过期，不拿旧目标判新状态
+                    display._writeSeq = (display._writeSeq || 0) + 1;
+                    let mySeq = display._writeSeq;
+                    Mainloop.timeout_add(350, function() {
+                        if (display._csdFailed || mySeq !== display._writeSeq) return false;
+                        let cur = self._csdGet();
+                        let ok = cur !== null && Math.abs(cur * 100 - pct) <= VERIFY_TOLERANCE;
+                        if (!ok) {
+                            display._csdFailed = true;
+                            global.log("QS brightness: CSD set unverified (want " + pct +
+                                "%, got " + (cur === null ? "n/a" : Math.round(cur * 100) + "%") +
+                                "), fallback to brightnessctl");
+                            GLib.spawn_command_line_async('brightnessctl set ' + pct + '%');
+                        }
+                        return false;
+                    });
                 } else if (display.type === 'internal') {
                     GLib.spawn_command_line_async('brightnessctl set ' + pct + '%');
                 } else {

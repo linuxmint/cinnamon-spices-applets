@@ -151,6 +151,15 @@ ContextMenu.prototype = {
         }
     },
 
+    // 高亮行文字色跟主题走：深色主题用白，浅色主题用深（右键菜单底是主题色的）
+    _highlightTextColor: function() {
+        try {
+            let ts = this._applet._themeSwitcher;
+            if (ts && !ts._isDarkNow()) return '#2e2e2e';
+        } catch (e) {}
+        return '#ffffff';
+    },
+
     _getShow: function(key, def) {
         try {
             let s = this._applet._settings;
@@ -269,9 +278,9 @@ ContextMenu.prototype = {
             (function(r) {
                 let label = r.desc + (r.muted ? "  ·  " + _("Muted") : "");
                 if (r.active) {
-                    // 当前默认：✓ 标识，不可点，白色字区别于置灰项
+                    // 当前默认：✓ 标识，不可点，高亮字区别于置灰项（颜色跟主题）
                     let it = new PopupMenu.PopupMenuItem("✓  " + label, { reactive: false });
-                    it.label.set_style('color: #ffffff;');
+                    it.label.set_style('color: ' + self._highlightTextColor() + ';');
                     self._sinkSubmenu.menu.addMenuItem(it);
                 } else {
                     let it = new PopupMenu.PopupMenuItem("     " + label);
@@ -522,9 +531,9 @@ ContextMenu.prototype = {
                 (function(r) {
                     let label = r.ssid + (r.signal >= 0 ? "  ·  " + r.signal + "%" : "");
                     if (r.inUse) {
-                        // 已连接：✓ + Connected 标识，不可点；文字保持白色（区别于置灰的禁用项）
+                        // 已连接：✓ + Connected 标识，不可点；高亮字区别于置灰项（颜色跟主题）
                         let it = new PopupMenu.PopupMenuItem("✓  " + label + "  ·  " + _("Connected"), { reactive: false });
-                        it.label.set_style('color: #ffffff;');
+                        it.label.set_style('color: ' + self._highlightTextColor() + ';');
                         self._wifiSection.addMenuItem(it);
                     } else {
                         let it = new PopupMenu.PopupMenuItem("     " + label);

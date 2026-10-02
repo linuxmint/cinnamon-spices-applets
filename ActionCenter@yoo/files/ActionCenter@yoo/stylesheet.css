@@ -100,3 +100,56 @@
     font-size: 10px;
     color: rgba(255, 255, 255, 0.75);
 }
+
+/* ============================================================
+   主菜单通用色板：深色为默认，浅色主题时菜单 actor 自带
+   .actioncenter-light 类，以下覆盖自动生效（JS 里不再写死颜色，
+   日历等官方 applet 同理：颜色全部跟主题走）。
+   ============================================================ */
+.ac-text { color: #ffffff; }
+.ac-icon { color: #ffffff; }
+.ac-subtle { color: rgba(255, 255, 255, 0.7); }
+.ac-faint { color: rgba(255, 255, 255, 0.55); }
+.ac-box { background-color: rgba(255, 255, 255, 0.07); }
+.ac-box2 { background-color: rgba(255, 255, 255, 0.08); }
+.ac-player { background-color: rgba(255, 255, 255, 0.06); }
+.ac-cover { background-color: rgba(255, 255, 255, 0.08); }
+.ac-btn { background-color: rgba(255, 255, 255, 0.12); }
+.ac-btn:hover { background-color: rgba(255, 255, 255, 0.28); }
+.ac-sep { background-color: rgba(255, 255, 255, 0.12); }
+.ac-opt-active { background-color: rgba(255, 255, 255, 0.12); }
+.ac-dot-active { color: #4a9eff; }
+.ac-prow:hover { background-color: rgba(255, 255, 255, 0.12); }
+.actioncenter-light .ac-prow:hover { background-color: rgba(0, 0, 0, 0.09); }
+
+.actioncenter-light .quick-settings-pill,
+.actioncenter-light .quick-settings-toggle { background-color: rgba(0, 0, 0, 0.07); }
+.actioncenter-light .quick-settings-toggle:hover { background-color: rgba(0, 0, 0, 0.12); }
+.actioncenter-light .quick-settings-toggle-main:hover { background-color: rgba(0, 0, 0, 0.06); }
+.actioncenter-light .quick-settings-toggle-main:active,
+.actioncenter-light .quick-settings-icon-inline-btn:active,
+.actioncenter-light .quick-settings-arrow-btn:active { background-color: rgba(0, 0, 0, 0.16); }
+.actioncenter-light .quick-settings-icon-button { background-color: rgba(0, 0, 0, 0.07); }
+.actioncenter-light .quick-settings-icon-button:hover { background-color: rgba(0, 0, 0, 0.13); }
+.actioncenter-light .quick-settings-icon-inline-btn:hover,
+.actioncenter-light .quick-settings-arrow-btn:hover { background-color: rgba(0, 0, 0, 0.10); }
+.actioncenter-light .quick-settings-toggle-label,
+.actioncenter-light .ac-text,
+.actioncenter-light .ac-icon { color: #2e2e2e; }
+.actioncenter-light .quick-settings-toggle-status { color: rgba(0, 0, 0, 0.6); }
+.actioncenter-light .ac-subtle { color: rgba(0, 0, 0, 0.6); }
+.actioncenter-light .ac-faint { color: rgba(0, 0, 0, 0.45); }
+.actioncenter-light .ac-box { background-color: rgba(0, 0, 0, 0.05); }
+.actioncenter-light .ac-box2,
+.actioncenter-light .ac-player,
+.actioncenter-light .ac-cover { background-color: rgba(0, 0, 0, 0.06); }
+.actioncenter-light .ac-btn { background-color: rgba(0, 0, 0, 0.07); }
+.actioncenter-light .ac-btn:hover { background-color: rgba(0, 0, 0, 0.14); }
+.actioncenter-light .ac-sep { background-color: rgba(0, 0, 0, 0.12); }
+.actioncenter-light .ac-opt-active { background-color: rgba(0, 0, 0, 0.09); }
+/* 激活态文字只跟深浅主题：深色白字，浅色深灰（不看强调色亮度） */
+.actioncenter-light .quick-settings-toggle.active .quick-settings-toggle-label,
+.actioncenter-light .quick-settings-toggle.active .quick-settings-toggle-status { color: #2e2e2e; }
+/* 浅色下激活态回退蓝（JS 会按主题强调色写 inline 覆盖它）；
+   放最后：优先级与 .actioncenter-light .quick-settings-toggle 持平，靠顺序赢 */
+.actioncenter-light .quick-settings-toggle.active { background-color: #3584e4; }
