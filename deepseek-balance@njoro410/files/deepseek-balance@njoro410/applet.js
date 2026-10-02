@@ -33,7 +33,7 @@ const HISTORY_PATH = GLib.build_filenamev([HISTORY_DIR, 'history.json']);
 // Pre-release builds kept the history under ~/.config/deepseek-balance; migrate it.
 const LEGACY_HISTORY_PATH = GLib.build_filenamev([GLib.get_user_config_dir(), 'deepseek-balance', 'history.json']);
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain(UUID, GLib.build_filenamev([GLib.get_user_data_dir(), 'locale']));
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
