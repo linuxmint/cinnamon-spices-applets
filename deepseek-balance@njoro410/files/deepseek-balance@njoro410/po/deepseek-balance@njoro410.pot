@@ -1,0 +1,340 @@
+# DEEPSEEK BALANCE
+# This file is put in the public domain.
+# njoro410, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deepseek-balance@njoro410 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-10-02 14:47+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:418
+msgid "Refresh now"
+msgstr ""
+
+#. applet.js:419
+msgid "Open DeepSeek platform"
+msgstr ""
+
+#. applet.js:484
+msgid "Peak hours — 2× the off-peak price"
+msgstr ""
+
+#. applet.js:485
+msgid "Off-peak — half price"
+msgstr ""
+
+#. applet.js:488
+#, javascript-format
+msgid "%s until %s (in %s)"
+msgstr ""
+
+#. applet.js:527
+msgid "No API key configured (right-click → Configure…)"
+msgstr ""
+
+#. applet.js:545
+#, javascript-format
+msgid "Network error: %s"
+msgstr ""
+
+#. applet.js:551
+#, javascript-format
+msgid "Invalid API key (HTTP %s)"
+msgstr ""
+
+#. applet.js:555
+msgid "Rate limited (HTTP 429) — try a longer refresh interval"
+msgstr ""
+
+#. applet.js:559
+#, javascript-format
+msgid "API error: HTTP %s"
+msgstr ""
+
+#. applet.js:567
+msgid "Could not parse the API response"
+msgstr ""
+
+#. applet.js:577
+msgid "Unexpected response from the balance endpoint"
+msgstr ""
+
+#. applet.js:648
+msgid "DeepSeek API balance"
+msgstr ""
+
+#. applet.js:654 applet.js:716
+#, javascript-format
+msgid "Balance: %s %s"
+msgstr ""
+
+#. applet.js:657
+#, javascript-format
+msgid "Of which paid: %s · granted: %s"
+msgstr ""
+
+#. applet.js:660
+msgid "Available for API calls: yes"
+msgstr ""
+
+#. applet.js:660
+msgid "Available for API calls: NO"
+msgstr ""
+
+#. applet.js:667
+#, javascript-format
+msgid "%s of %s reference remaining"
+msgstr ""
+
+#. applet.js:670
+msgid "Set a reference amount in Configure… to show a percentage."
+msgstr ""
+
+#. applet.js:679
+#, javascript-format
+msgid "Spent today: %s"
+msgstr ""
+
+#. applet.js:680
+#, javascript-format
+msgid "Spent last 7 days: %s"
+msgstr ""
+
+#. applet.js:681
+#, javascript-format
+msgid "Spent last 30 days: %s"
+msgstr ""
+
+#. applet.js:687
+msgid "More than a year of balance left at the last 7 days' rate"
+msgstr ""
+
+#. applet.js:689
+#, javascript-format
+msgid "≈ %s days left at the last 7 days' rate"
+msgstr ""
+
+#. applet.js:693
+msgid "No spend recorded in the last 7 days"
+msgstr ""
+
+#. applet.js:695
+msgid "(inferred from balance changes; the API does not expose token counts)"
+msgstr ""
+
+#. applet.js:698
+msgid "Spend tracking starts once a few balance samples are in."
+msgstr ""
+
+#. applet.js:701
+msgid "No data yet."
+msgstr ""
+
+#. applet.js:707
+msgid "never"
+msgstr ""
+
+#. applet.js:709
+#, javascript-format
+msgid "Updated %s · refreshes every %s min"
+msgstr ""
+
+#. applet.js:717
+msgid "Balance: —"
+msgstr ""
+
+#. applet.js:722
+#, javascript-format
+msgid "Spent today: %s   ·   7 days: %s"
+msgstr ""
+
+#. applet.js:726
+msgid "Gathering spend data…"
+msgstr ""
+
+#. metadata.json->name
+msgid "DeepSeek Balance"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"DeepSeek API account balance as a percentage or bar, with spend details on "
+"hover. Uses the official balance endpoint."
+msgstr ""
+
+#. settings-schema.json->header-api->description
+msgid "DeepSeek API"
+msgstr ""
+
+#. settings-schema.json->api-key->description
+msgid "API key"
+msgstr ""
+
+#. settings-schema.json->api-key->tooltip
+msgid ""
+"From platform.deepseek.com → API keys. Stored in your Cinnamon settings as "
+"plain text, readable by processes running as you."
+msgstr ""
+
+#. settings-schema.json->currency->description
+msgid "Currency"
+msgstr ""
+
+#. settings-schema.json->currency->tooltip
+msgid "Which balance to show when the account holds more than one currency."
+msgstr ""
+
+#. settings-schema.json->currency->options
+msgid "Auto (prefer non-zero)"
+msgstr ""
+
+#. settings-schema.json->currency->options
+msgid "CNY (¥)"
+msgstr ""
+
+#. settings-schema.json->currency->options
+msgid "USD ($)"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh interval"
+msgstr ""
+
+#. settings-schema.json->header-display->description
+msgid "Panel display"
+msgstr ""
+
+#. settings-schema.json->display-mode->description
+msgid "Show in panel"
+msgstr ""
+
+#. settings-schema.json->display-mode->options
+msgid "Percentage"
+msgstr ""
+
+#. settings-schema.json->display-mode->options
+msgid "Bar"
+msgstr ""
+
+#. settings-schema.json->display-mode->options
+msgid "Bar + percentage"
+msgstr ""
+
+#. settings-schema.json->display-mode->options
+msgid "Balance amount"
+msgstr ""
+
+#. settings-schema.json->bar-color->description
+msgid "Bar color"
+msgstr ""
+
+#. settings-schema.json->bar-color->tooltip
+msgid ""
+"Color of the bar's filled part; it still turns red below the warning "
+"threshold."
+msgstr ""
+
+#. settings-schema.json->bar-color->options
+#. settings-schema.json->peak-logo-color->options
+msgid "DeepSeek blue"
+msgstr ""
+
+#. settings-schema.json->bar-color->options
+#. settings-schema.json->peak-logo-color->options
+msgid "Blue"
+msgstr ""
+
+#. settings-schema.json->bar-color->options
+#. settings-schema.json->peak-logo-color->options
+msgid "Teal"
+msgstr ""
+
+#. settings-schema.json->bar-color->options
+#. settings-schema.json->peak-logo-color->options
+msgid "Green"
+msgstr ""
+
+#. settings-schema.json->bar-color->options
+#. settings-schema.json->peak-logo-color->options
+msgid "Yellow"
+msgstr ""
+
+#. settings-schema.json->bar-color->options
+#. settings-schema.json->peak-logo-color->options
+msgid "Orange"
+msgstr ""
+
+#. settings-schema.json->bar-color->options
+#. settings-schema.json->peak-logo-color->options
+msgid "Red"
+msgstr ""
+
+#. settings-schema.json->bar-color->options
+#. settings-schema.json->peak-logo-color->options
+msgid "Pink"
+msgstr ""
+
+#. settings-schema.json->bar-color->options
+#. settings-schema.json->peak-logo-color->options
+msgid "Purple"
+msgstr ""
+
+#. settings-schema.json->bar-color->options
+#. settings-schema.json->peak-logo-color->options
+msgid "Gray"
+msgstr ""
+
+#. settings-schema.json->reference-amount->description
+msgid "Reference amount (the 100% level)"
+msgstr ""
+
+#. settings-schema.json->reference-amount->tooltip
+msgid ""
+"DeepSeek has no quota, so the percentage is relative to an amount you choose "
+"— e.g. your last top-up. 0 disables the percentage."
+msgstr ""
+
+#. settings-schema.json->warn-threshold->units
+msgid "%"
+msgstr ""
+
+#. settings-schema.json->warn-threshold->description
+msgid "Turn red below"
+msgstr ""
+
+#. settings-schema.json->header-peak->description
+msgid "Peak-hour pricing"
+msgstr ""
+
+#. settings-schema.json->peak-indicator->description
+msgid "Tint the logo during peak hours"
+msgstr ""
+
+#. settings-schema.json->peak-indicator->tooltip
+msgid ""
+"DeepSeek charges 2× during peak hours: Mon–Fri 09:00–12:00 and 14:00–18:00 "
+"Beijing time. Weekends are always off-peak; Chinese public holidays are off-"
+"peak too, but the applet can't detect those."
+msgstr ""
+
+#. settings-schema.json->peak-logo-color->description
+msgid "Peak logo color"
+msgstr ""
+
+#. settings-schema.json->peak-logo-color->tooltip
+msgid "The color the logo switches to while peak rates apply."
+msgstr ""
