@@ -11,7 +11,8 @@ const ByteArray = imports.byteArray;
 const C = require('./constants');
 const { UUID, _, MPRIS_CONTENT_WIDTH, CHOOSER_CONTENT_WIDTH, PLAYER_CONTENT_WIDTH } = C;
 const { MPRIS_STATE_FILE: STATE_FILE, MPRIS_CMD_FILE: CMD_FILE, CACHE_DIR } = C;
-// 与 scripts/_config.py DAEMON_VERSION 对齐，改 daemon 逻辑时两边一起 +1
+// 本侧"当前版本"期望值：与状态文件里的 v 比对；
+// daemon 侧见 scripts/_config.py DAEMON_VERSION（两边随包一起发版）
 const EXPECTED_DAEMON_VERSION = 2;
 
 // 开关某 actor 上的单个 style class（动态 active 态用，不碰 inline 布局样式）
@@ -67,14 +68,26 @@ MprisController.prototype = {
         }
     },
 
-    // 驻留 daemon 的版本号（0=未知/旧版）；与 scripts/_config.py DAEMON_VERSION 对齐
+    // 状态文件两种格式都认：新 {"v":N,"players":[...]} / 旧 [...]（旧版 daemon 残留）。
+    // 旧格式视为版本 0，_ensureDaemon 会杀掉重拉一次完成升级。
+    _parseState: function(text) {
+        let data = JSON.parse(text);
+        if (data && !Array.isArray(data) && Array.isArray(data.players)) {
+            return { version: data.v || 0, players: data.players };
+        }
+        if (Array.isArray(data)) return { version: 0, players: data };
+        return { version: 0, players: [] };
+    },
+
+    // 驻留 daemon 的版本号（0=未知/旧版）：直接读状态文件里的版本戳，
+    // 不再依赖单独的 daemon.version 文件（双源合一）。
     _daemonVersion: function() {
         try {
-            let file = Gio.File.new_for_path(CACHE_DIR + "/daemon.version");
+            let file = Gio.File.new_for_path(STATE_FILE);
             if (!file.query_exists(null)) return 0;
             let [ok, content] = file.load_contents(null);
             if (!ok || !content) return 0;
-            return parseInt(ByteArray.toString(content).trim()) || 0;
+            return this._parseState(ByteArray.toString(content)).version;
         } catch(e) {
             return 0;
         }
@@ -90,13 +103,26 @@ MprisController.prototype = {
                 running = false;
             }
             if (!running) {
-                Util.spawnCommandLineAsync("python3 " + this._scriptPath);
+                this._daemonFailCount = 0;
+                this._daemonGiveUp = false;
+                Util.spawn(['python3', this._scriptPath]);
                 global.log("QS daemon: spawned");
             }
             this._daemonStarted = true;
         } catch(e) {
             global.logError("QS daemon start: " + e);
         }
+    },
+
+    // daemon 起不来（缺 python3-dbus 等）时别无限重拉：5 次停手并只打一次 log，
+    // 下次 applet 重载再试。成功一次就清零。
+    _noteDaemonSpawned: function() {
+        this._daemonFailCount = (this._daemonFailCount || 0) + 1;
+        if (this._daemonFailCount >= 5 && !this._daemonGiveUp) {
+            this._daemonGiveUp = true;
+            global.logError("QS daemon: failed 5 times, giving up until reload");
+        }
+        return !this._daemonGiveUp;
     },
 
     init: function() {
@@ -138,7 +164,7 @@ MprisController.prototype = {
         try {
             let file = Gio.File.new_for_path(STATE_FILE);
             if (!file.query_exists(null)) {
-                this._ensureDaemon();
+                if (this._noteDaemonSpawned()) this._ensureDaemon();
                 return;
             }
             // 状态文件过期（daemon 已死）→ 清空播放器（隐藏模块）并尝试拉起 daemon
@@ -148,7 +174,7 @@ MprisController.prototype = {
                 let mtime = info.get_modification_date_time().to_unix();
                 let now = GLib.get_real_time() / 1000000;
                 if (now - mtime > 6) {
-                    this._ensureDaemon();
+                    if (this._noteDaemonSpawned()) this._ensureDaemon();
                     if (this._players.length !== 0) {
                         this._players = [];
                         this._lastListSig = '';
@@ -160,7 +186,10 @@ MprisController.prototype = {
             let [ok, content] = file.load_contents(null);
             if (!ok || !content) return;
             let text = ByteArray.toString(content);
-            let players = JSON.parse(text);
+            let players = this._parseState(text).players;
+            // 文件新鲜 = daemon 活着，失败计数清零
+            this._daemonFailCount = 0;
+            this._daemonGiveUp = false;
 
             let listSig = players.map(function(p) { return p.owner + '|' + p.identity; }).join('\n');
             if (listSig !== this._lastListSig) {
@@ -198,7 +227,7 @@ MprisController.prototype = {
             if (!file.query_exists(null)) return;
             let [ok, content] = file.load_contents(null);
             if (!ok || !content) return;
-            let players = JSON.parse(ByteArray.toString(content));
+            let players = this._parseState(ByteArray.toString(content)).players;
             let listSig = players.map(function(p) { return p.owner + '|' + p.identity; }).join('\n');
             if (listSig !== this._pendingSig && this._pendingRearms < 4) {
                 // 仍在抖动：用最新信号重新防抖（最多延长 4 次，避免无限拖延）

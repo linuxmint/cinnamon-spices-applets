@@ -258,13 +258,15 @@ SystemState.prototype = {
 
     // D-Bus 读电池：先枚举确认有真电池（路径含 /battery_，沿用文本版语义，
     // 外设电池/UPS 不计入），再读 DisplayDevice 聚合值。返回 true = 已处理。
+    // 超时只给 500ms：UPower 本地调用正常几毫秒就回，daemon 真卡死就让文本回退接管，
+    // 不能冻面板（旧 2000ms 两次串行最坏冻 4 秒）。
     _updateBatteryFromDbus: function() {
         let conn = Gio.bus_get_sync(Gio.BusType.SYSTEM, null);
         let daemon = Gio.DBusProxy.new_sync(conn,
             Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES | Gio.DBusProxyFlags.DO_NOT_CONNECT_SIGNALS,
             null, UPOWER_BUS, UPOWER_PATH, UPOWER_IFACE, null);
         let devRes = daemon.call_sync('EnumerateDevices', null,
-            Gio.DBusCallFlags.NONE, 2000, null);
+            Gio.DBusCallFlags.NONE, 500, null);
         if (!devRes) return false;
         let paths = devRes.deep_unpack()[0] || [];
         let hasBattery = false;
@@ -280,7 +282,7 @@ SystemState.prototype = {
             null, UPOWER_BUS, UPOWER_DISPLAY_PATH, PROPS_IFACE, null);
         let res = propsProxy.call_sync('GetAll',
             new GLib.Variant('(s)', [UPOWER_DEVICE_IFACE]),
-            Gio.DBusCallFlags.NONE, 2000, null);
+            Gio.DBusCallFlags.NONE, 500, null);
         if (!res) return false;
         let props = res.deep_unpack()[0];
         if (!props) return false;
@@ -428,6 +430,11 @@ SystemState.prototype = {
 
     queryBluetoothAsync: function(callback) {
         let applet = this._applet;
+        // 命令缺失：普查已禁用，不再空跑子进程
+        if (applet._hasBtTool === false) {
+            if (callback) callback(applet._cachedBluetooth);
+            return;
+        }
         if (applet._bluetoothQueryInFlight) return;
         applet._bluetoothQueryInFlight = true;
         applet._runCmd(['bluetoothctl', 'show'], function(out1) {
@@ -456,6 +463,14 @@ SystemState.prototype = {
         if (!btn) return;
         let s = applet._cachedBluetooth;
 
+        if (applet._hasBtTool === false) {
+            // 无 bluetoothctl：禁用并提示缺工具（区别于无硬件的 No adapter）
+            if (btn._icon) btn._icon.set_icon_name('bluetooth-symbolic');
+            if (btn._nameLabel) btn._nameLabel.set_text(_("Bluetooth"));
+            applet._toggleMgr.setToggleState('bluetooth', false);
+            applet._toggleMgr.setRowEnabled('bluetooth', false, _("No tool"));
+            return;
+        }
         if (s.hasAdapter === false) {
             // 无蓝牙硬件：禁用开关并提示
             if (btn._icon) btn._icon.set_icon_name('bluetooth-symbolic');

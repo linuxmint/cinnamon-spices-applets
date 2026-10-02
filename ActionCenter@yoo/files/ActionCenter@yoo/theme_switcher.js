@@ -102,6 +102,15 @@ ThemeSwitcher.prototype = {
         let appletSettings = this._applet._settings;
         if (!appletSettings) return;
         let prefix = isDark ? 'dark' : 'light';
+        // 先备份，写一半抛异常就地回滚，不留"GTK 变了图标没变"的脏状态
+        let backup = {};
+        try {
+            backup.gtk = this._desktopSettings.get_string('gtk-theme');
+            backup.icon = this._desktopSettings.get_string('icon-theme');
+            backup.cursor = this._desktopSettings.get_string('cursor-theme');
+            if (this._cinnamonSettings) backup.cinnamon = this._cinnamonSettings.get_string('name');
+            if (this._portalSettings) backup.portal = this._portalSettings.get_string('color-scheme');
+        } catch (e0) {}
         try {
             let s = this._desktopSettings;
             let gtkTheme = appletSettings.getValue(prefix + '-gtk-theme')
@@ -143,6 +152,20 @@ ThemeSwitcher.prototype = {
             }
         } catch (e) {
             global.logError("QS _applyDarkStyleTheme: " + e.message);
+            // 回滚已写入的部分
+            try {
+                if (backup.gtk !== undefined) this._desktopSettings.set_string('gtk-theme', backup.gtk);
+                if (backup.icon !== undefined) this._desktopSettings.set_string('icon-theme', backup.icon);
+                if (backup.cursor !== undefined) this._desktopSettings.set_string('cursor-theme', backup.cursor);
+                if (backup.cinnamon !== undefined && this._cinnamonSettings) {
+                    this._cinnamonSettings.set_string('name', backup.cinnamon);
+                }
+                if (backup.portal !== undefined && this._portalSettings) {
+                    this._portalSettings.set_string('color-scheme', backup.portal);
+                }
+            } catch (e4) {
+                global.logError("QS theme rollback: " + e4.message);
+            }
         }
     },
 
@@ -201,6 +224,7 @@ ThemeSwitcher.prototype = {
 
     updateAirplaneStateAsync: function() {
         let applet = this._applet;
+        if (applet._hasRfkill === false) return;
         // rfkill list 格式：
         //   1: phy1: Wireless LAN
         //       Soft blocked: yes
@@ -266,6 +290,7 @@ ThemeSwitcher.prototype = {
     togglePerformanceMode: function() {
         let applet = this._applet;
         let self = this;
+        if (applet._hasPpTool === false) return;
         applet._runCmd(['powerprofilesctl', 'get'], function(out) {
             let cur = out.trim();
             let next = (cur === 'performance') ? 'balanced' : 'performance';
@@ -279,6 +304,10 @@ ThemeSwitcher.prototype = {
 
     updatePerformanceStateAsync: function() {
         let applet = this._applet;
+        if (applet._hasPpTool === false) {
+            applet._toggleMgr.setToggleState('performance', false);
+            return;
+        }
         applet._runCmd(['powerprofilesctl', 'get'], function(out) {
             let cur = out.trim();
             applet._toggleMgr.setToggleState('performance', cur === 'performance');

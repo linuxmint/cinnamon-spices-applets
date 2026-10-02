@@ -150,6 +150,6 @@
 /* 激活态文字只跟深浅主题：深色白字，浅色深灰（不看强调色亮度） */
 .actioncenter-light .quick-settings-toggle.active .quick-settings-toggle-label,
 .actioncenter-light .quick-settings-toggle.active .quick-settings-toggle-status { color: #2e2e2e; }
-/* 浅色下激活态回退蓝（JS 会按主题强调色写 inline 覆盖它）；
-   放最后：优先级与 .actioncenter-light .quick-settings-toggle 持平，靠顺序赢 */
+/* 浅色激活态回退蓝（JS 会按主题强调色写 inline 覆盖它）。
+   选择器已是 (0,3,0)，对普通态 (0,2,0) 是优先级碾压，与声明顺序无关。 */
 .actioncenter-light .quick-settings-toggle.active { background-color: #3584e4; }

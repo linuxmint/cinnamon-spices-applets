@@ -7,6 +7,7 @@ import hashlib
 import os
 import sys
 import json
+import time
 import subprocess
 import signal
 import dbus
@@ -17,11 +18,15 @@ from _config import CACHE_DIR, STATE_FILE, CMD_FILE, DAEMON_VERSION
 os.makedirs(CACHE_DIR, exist_ok=True)
 
 bus = None
-players = {}  # owner -> {bus_name, identity, status, metadata, owner}
+players = {}  # owner -> {bus_name, static, static_time, position}
+_last_state_hash = ""
+_last_state_write = 0
+HEARTBEAT_SEC = 4  # 心跳间隔：必须小于 applet 的 6 秒过期判定
+STATIC_TTL_SEC = 60  # 静态元数据最长缓存，超时强制重读（信号兜底）
 
 
-def get_metadata(bus_name):
-    """获取播放器的元数据"""
+def get_static_info(bus_name):
+    """静态元数据（状态/标题/艺人/专辑/封面/时长）：重 D-Bus 读，调用方负责缓存"""
     try:
         obj_path = "/org/mpris/MediaPlayer2"
         service_name = bus_name if bus_name.startswith("org.mpris.MediaPlayer2.") else \
@@ -47,12 +52,6 @@ def get_metadata(bus_name):
         except Exception:
             pass
 
-        position = 0
-        try:
-            position = int(props.Get("org.mpris.MediaPlayer2.Player", "Position"))
-        except Exception:
-            pass
-
         length = int(meta.get("mpris:length", 0))
 
         return {
@@ -62,7 +61,6 @@ def get_metadata(bus_name):
             "album": album,
             "artUrl": art_url,
             "identity": identity,
-            "position": position,
             "length": length,
         }
     except Exception as e:
@@ -73,9 +71,23 @@ def get_metadata(bus_name):
             "album": "",
             "artUrl": "",
             "identity": "",
-            "position": 0,
             "length": 0,
         }
+
+
+def get_position(bus_name):
+    """当前进度：轻量单次 Get，播放中才调"""
+    try:
+        obj_path = "/org/mpris/MediaPlayer2"
+        service_name = bus_name if bus_name.startswith("org.mpris.MediaPlayer2.") else \
+            "org.mpris.MediaPlayer2." + bus_name
+        props = dbus.Interface(
+            bus.get_object(service_name, obj_path),
+            "org.freedesktop.DBus.Properties"
+        )
+        return int(props.Get("org.mpris.MediaPlayer2.Player", "Position"))
+    except Exception:
+        return 0
 
 
 def get_cover_path(art_url):
@@ -101,26 +113,61 @@ def get_cover_path(art_url):
     return ""
 
 
-def write_state():
-    """写入播放器状态到 JSON"""
-    state = []
+def build_payload():
+    """组装播放器快照：静态元数据走缓存（信号失效/60 秒 TTL），进度播放中才读"""
+    now = time.time()
+    payload = []
     for owner, info in players.items():
-        data = get_metadata(info["bus_name"])
-        cover = get_cover_path(data["artUrl"])
-        state.append({
+        static = info.get("static")
+        if (not static or (now - info.get("static_time", 0)) > STATIC_TTL_SEC):
+            static = get_static_info(info["bus_name"])
+            info["static"] = static
+            info["static_time"] = now
+        position = info.get("position", 0)
+        if static.get("status") == "Playing":
+            try:
+                position = get_position(info["bus_name"])
+            except Exception:
+                pass
+        info["position"] = position
+        cover = get_cover_path(static.get("artUrl", ""))
+        payload.append({
             "owner": owner,
             "busName": info["bus_name"],
-            "identity": data["identity"],
-            "name": data["identity"] or info["bus_name"],
-            "status": data["status"],
-            "title": data["title"],
-            "artist": data["artist"],
-            "album": data["album"],
-            "artUrl": data["artUrl"],
+            "identity": static.get("identity", ""),
+            "name": static.get("identity") or info["bus_name"],
+            "status": static.get("status", "Stopped"),
+            "title": static.get("title", ""),
+            "artist": static.get("artist", ""),
+            "album": static.get("album", ""),
+            "artUrl": static.get("artUrl", ""),
             "coverPath": cover,
-            "position": data["position"],
-            "length": data["length"],
+            "position": position,
+            "length": static.get("length", 0),
         })
+    return payload
+
+
+def payload_hash(payload):
+    """变化指纹：进度不计入（播歌时每秒都变），只看元数据"""
+    slim = [{k: p[k] for k in ("owner", "busName", "identity", "name", "status",
+                               "title", "artist", "album", "coverPath", "length")
+             if k in p} for p in payload]
+    return hashlib.md5(json.dumps(slim, sort_keys=True).encode()).hexdigest()
+
+
+def write_state(force=False):
+    """写入播放器状态到 JSON（带版本号，供 applet 判断 daemon 新旧）。
+    元数据没变且心跳未到就跳过，笔记本省唤醒。"""
+    global _last_state_hash, _last_state_write
+    payload = build_payload()
+    h = payload_hash(payload)
+    now = time.time()
+    if not force and h == _last_state_hash and (now - _last_state_write) < HEARTBEAT_SEC:
+        return
+    _last_state_hash = h
+    _last_state_write = now
+    state = {"v": DAEMON_VERSION, "players": payload}
     try:
         tmp = STATE_FILE + ".tmp"
         with open(tmp, "w") as f:
@@ -151,17 +198,19 @@ def handle_name_owner_changed(name, old_owner, new_owner):
 
 
 def handle_properties_changed(interface, changed, invalidated, path=None):
-    """属性变化（播放状态、元数据等）"""
+    """属性变化（播放状态、元数据等）：失效静态缓存并即时写"""
     iface = str(interface)
     if iface != "org.mpris.MediaPlayer2.Player":
         return
     changed_keys = [str(k) for k in changed.keys()]
     if "PlaybackStatus" in changed_keys or "Metadata" in changed_keys:
-        write_state()
+        for info in players.values():
+            info.pop("static", None)
+        write_state(force=True)
 
 
 def poll_players():
-    """定期轮询所有播放器状态（兜底）"""
+    """心跳兜底（4 秒）：信号漏接时补写，平时靠信号即时写"""
     write_state()
     return True  # 继续定时器
 
@@ -180,13 +229,18 @@ def get_player_iface(owner):
 
 
 def check_commands():
-    """检查控制命令文件（原子读取，防止竞态）"""
+    """检查控制命令文件：先 rename 再读，读到写之间来的新命令不会被误删"""
     if not os.path.exists(CMD_FILE):
         return True
+    proc_file = CMD_FILE + ".proc"
     try:
-        with open(CMD_FILE, "r") as f:
+        try:
+            os.rename(CMD_FILE, proc_file)
+        except FileNotFoundError:
+            return True
+        with open(proc_file, "r") as f:
             content = f.read().strip()
-        os.remove(CMD_FILE)
+        os.remove(proc_file)
         if not content:
             return True
 
@@ -275,8 +329,8 @@ def main():
 
     write_state()
 
-    # 定时器：每 1 秒轮询状态 + 检查命令
-    GLib.timeout_add(1000, poll_players)
+    # 定时器：4 秒心跳写状态 + 每 0.5 秒检查命令
+    GLib.timeout_add(4000, poll_players)
     GLib.timeout_add(500, check_commands)
 
     signal.signal(signal.SIGTERM, lambda s, f: sys.exit(0))

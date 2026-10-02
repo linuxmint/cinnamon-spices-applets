@@ -114,7 +114,9 @@ detectAllDisplays: function() {
     } catch (e) { global.logError("QS detect internal display: " + e.message); }
 
         try {
-            let r = GLib.spawn_command_line_sync('ddcutil detect --brief');
+            // timeout 封顶：多屏/DP 菊花链上 detect 能跑几十秒，不能冻面板；
+            // 超时（exit 124）即当无外屏
+            let r = GLib.spawn_command_line_sync('timeout 8 ddcutil detect --brief');
             if (r[3] === 0 && r[1]) {
                 hasDdcutil = true;
                 let lines = r[1].toString().split('\n');
@@ -274,7 +276,7 @@ detectAllDisplays: function() {
         } else if (display.type === 'ddcutil') {
             try {
                 let r = GLib.spawn_command_line_sync(
-                    'ddcutil --display ' + display.num +
+                    'timeout 6 ddcutil --display ' + display.num +
                     ' --sleep-multiplier .1 getvcp 10');
                 if (r[1]) {
                     let m = r[1].toString().match(

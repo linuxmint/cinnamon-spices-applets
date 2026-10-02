@@ -177,6 +177,7 @@ MyApplet.prototype = {
         try { this._buildSliders(); }    catch (e) { global.logError("QS _buildSliders: " + e.message + "\n" + e.stack); }
         try { this._toggleMgr.buildToggleGrid(); } catch (e) { global.logError("QS _buildToggleGrid: " + e.message + "\n" + e.stack); }
         try { this._toggleMgr.applyToggleVisibility(); } catch (e) { global.logError("QS applyToggleVisibility: " + e.message); }
+        try { this._applyToolAvailability(); } catch (e) { global.logError("QS toolAvailability: " + e.message); }
         try { this._sysState.initPolling(); } catch (e) { global.logError("QS _initStatePolling: " + e.message + "\n" + e.stack); }
         try { this._initMpris(); }      catch (e) { global.logError("QS _initMpris: " + e.message + "\n" + e.stack); }
         try { this._applyMenuTheme(); } catch (e) { global.logError("QS _applyMenuTheme: " + e.message); }
@@ -863,6 +864,24 @@ MyApplet.prototype = {
     //   0 状态行 / 1 关机二级(隐藏) / 2 选择器 / 3 播放器 / 4 音量 / 5 亮度 / 6 亮度二级(隐藏) / 7 开关网格
     // 亮度和 MPRIS 都是异步后插的，必须按 rank 算位置显式插入，不能用 append
     // 碰运气（谁后初始化谁沉底），否则时序一变就错位、每次重建跳一次。
+    // 缺失的外部命令：初始化普查一次，缺谁禁谁（tooltip 写原因），
+    // 别等用户点了才静默失败。截图命令用户可配，不管。
+    _applyToolAvailability: function() {
+        let has = function(prog) {
+            try { return !!GLib.find_program_in_path(prog); } catch (e) { return false; }
+        };
+        this._hasPpTool = has('powerprofilesctl');
+        this._hasBtTool = has('bluetoothctl');
+        this._hasPrinterTool = has('system-config-printer');
+        this._hasRfkill = has('rfkill');
+        if (!this._hasPpTool && this._toggleMgr) {
+            try { this._toggleMgr.setRowEnabled('performance', false, _("No tool")); } catch (e) {}
+        }
+        if (!this._hasRfkill && this._toggleMgr) {
+            try { this._toggleMgr.setRowEnabled('airplane', false, _("No tool")); } catch (e) {}
+        }
+    },
+
     _menuPosOf: function(refItem) {
         try {
             if (!refItem) return -1;

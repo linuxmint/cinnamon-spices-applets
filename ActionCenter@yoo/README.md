@@ -174,7 +174,7 @@
 | Module | Description |
 |--------|-------------|
 | 🎵 Media Player Control | MPRIS protocol-based media player control — play/pause/next/previous/seek, album art display, track info |
-| 🔆 Brightness Control | Built-in display prefers the system backlight service (CSD Screen D-Bus, nothing to install), falls back to `brightnessctl`, external monitors use `ddcutil`; writes are verified by read-back with automatic backend fallback; slider auto-hides when nothing is available |
+| 🔆 Brightness Control | Built-in display prefers the system backlight service (CSD Screen D-Bus, nothing to install), falls back to `brightnessctl`, external monitors use `ddcutil` (write-only: no read-back for VCP writes); built-in writes are verified by read-back with automatic backend fallback; slider auto-hides when nothing is available |
 | 🔊 Volume Control | Volume adjustment and mute toggle via `Cvc MixerControl` |
 | 🔘 Quick Toggles | One-click toggles for network, Bluetooth, performance mode, night light, dark mode, airplane mode |
 | ⚡ Power Menu | Shutdown / reboot / logoff / suspend, with system dialog mode support |

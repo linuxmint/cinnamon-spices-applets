@@ -75,18 +75,25 @@ VolumeController.prototype = {
     updateVolumeSlider: function() {
         let applet = this._applet;
         if (!applet._output || !applet._volumeSlider) return;
-        let v = applet._output.is_muted ? 0 : applet._output.volume / applet._volumeMax;
+        let muted = false;
+        try { muted = applet._output.is_muted; } catch (e) {}
+        if (muted) {
+            // 静音只换图标不动滑块：重开菜单看到的仍是静音前音量，不误以为被拉到 0
+            this.updateVolumeIcon(0, true);
+            return;
+        }
+        let v = applet._output.volume / applet._volumeMax;
         applet._updatingVolume = true;
         try { applet._volumeSlider.setValue(v); } catch (e) {}
         applet._updatingVolume = false;
-        this.updateVolumeIcon(v);
+        this.updateVolumeIcon(v, false);
     },
 
-    updateVolumeIcon: function(v) {
+    updateVolumeIcon: function(v, muted) {
         let applet = this._applet;
         if (!applet._volumeIcon) return;
         let name;
-        if (v <= 0.001) name = "audio-volume-muted-symbolic";
+        if (muted || v <= 0.001) name = "audio-volume-muted-symbolic";
         else if (v < 0.33) name = "audio-volume-low-symbolic";
         else if (v < 0.66) name = "audio-volume-medium-symbolic";
         else name = "audio-volume-high-symbolic";

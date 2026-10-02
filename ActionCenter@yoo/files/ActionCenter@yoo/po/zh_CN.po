@@ -90,6 +90,9 @@ msgstr "无设备"
 msgid "No adapter"
 msgstr "无适配器"
 
+msgid "No tool"
+msgstr "缺少工具"
+
 msgid "Mute output"
 msgstr "输出静音"
 

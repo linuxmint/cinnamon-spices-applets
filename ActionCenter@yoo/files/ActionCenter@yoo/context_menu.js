@@ -180,7 +180,8 @@ ContextMenu.prototype = {
         let showWired = showNet && this._getShow('show-context-wired', true);
         let showWireless = showNet && this._getShow('show-context-wireless', true);
         let showWwan = showNet && this._getShow('show-context-wwan', false);
-        let showPrinter = this._getShow('show-context-printer', true);
+        let showPrinter = this._getShow('show-context-printer', true) &&
+                          this._applet._hasPrinterTool !== false;
 
         this._muteOutItem.actor.visible = showMuteOut;
         this._muteInItem.actor.visible = showMuteIn;
@@ -472,41 +473,48 @@ ContextMenu.prototype = {
     },
 
     // 活数据：当前扫描列表 + 独立查激活 WiFi 的 SSID（扫描的 * 标记不可靠）
-    // 读上次扫描缓存（--rescan no）：快且稳，重扫中的空表不会污染显示
+    // 读上次扫描缓存（--rescan no）：快且稳，重扫中的空表不会污染显示。
+    // 前两步无依赖，并发跑（原来串行最坏 30 秒超时叠加）
     _fetchWifiLive: function(callback) {
         let applet = this._applet;
         let self = this;
-        applet._runCmd(['nmcli', '-t', '-f', 'IN-USE,SSID,SIGNAL,SECURITY', 'device', 'wifi', 'list', '--rescan', 'no'], function(out) {
-            let rows = self._parseWifiList(out);
+        let listOut = null, activeOut = null, done = 0;
+        let join = function() {
+            if (++done < 2) return;
+            let rows = self._parseWifiList(listOut || '');
             // 独立查激活连接，避免扫描快照里的在用标记滞后/缺失
-            applet._runCmd(['nmcli', '-t', '-f', 'NAME,TYPE', 'connection', 'show', '--active'], function(activeOut) {
-                let profile = '';
-                let alines = activeOut.split('\n');
-                for (let i = 0; i < alines.length; i++) {
-                    let line = alines[i];
-                    if (!line.trim()) continue;
-                    let tmp = line.replace(/\\:/g, '\x00');
-                    let parts = tmp.split(':');
-                    if (parts.length < 2) continue;
-                    let type = parts[parts.length - 1].replace(/\x00/g, ':');
-                    if (type.indexOf('802-11-wireless') === 0) {
-                        profile = parts.slice(0, parts.length - 1).join(':').replace(/\x00/g, ':').trim();
-                        break;
+            let profile = '';
+            let alines = (activeOut || '').split('\n');
+            for (let i = 0; i < alines.length; i++) {
+                let line = alines[i];
+                if (!line.trim()) continue;
+                let tmp = line.replace(/\\:/g, '\x00');
+                let parts = tmp.split(':');
+                if (parts.length < 2) continue;
+                let type = parts[parts.length - 1].replace(/\x00/g, ':');
+                if (type.indexOf('802-11-wireless') === 0) {
+                    profile = parts.slice(0, parts.length - 1).join(':').replace(/\x00/g, ':').trim();
+                    break;
+                }
+            }
+            if (!profile) { callback(rows); return; }
+            applet._runCmd(['nmcli', '-t', '-f', '802-11-wireless.ssid', 'connection', 'show', profile], function(ssidOut) {
+                let m = ssidOut.match(/^802-11-wireless\.ssid:(.*)$/m);
+                let activeSsid = m ? m[1].trim() : '';
+                if (activeSsid) {
+                    // 以激活连接为准，覆盖扫描标记
+                    for (let i = 0; i < rows.length; i++) {
+                        rows[i].inUse = (rows[i].ssid === activeSsid);
                     }
                 }
-                if (!profile) { callback(rows); return; }
-                applet._runCmd(['nmcli', '-t', '-f', '802-11-wireless.ssid', 'connection', 'show', profile], function(ssidOut) {
-                    let m = ssidOut.match(/^802-11-wireless\.ssid:(.*)$/m);
-                    let activeSsid = m ? m[1].trim() : '';
-                    if (activeSsid) {
-                        // 以激活连接为准，覆盖扫描标记
-                        for (let i = 0; i < rows.length; i++) {
-                            rows[i].inUse = (rows[i].ssid === activeSsid);
-                        }
-                    }
-                    callback(rows);
-                });
+                callback(rows);
             });
+        };
+        applet._runCmd(['nmcli', '-t', '-f', 'IN-USE,SSID,SIGNAL,SECURITY', 'device', 'wifi', 'list', '--rescan', 'no'], function(out) {
+            listOut = out; join();
+        });
+        applet._runCmd(['nmcli', '-t', '-f', 'NAME,TYPE', 'connection', 'show', '--active'], function(out) {
+            activeOut = out; join();
         });
     },
 
