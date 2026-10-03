@@ -1,0 +1,991 @@
+# Swedish translation for crypto-tracker@danipin.
+# Copyright (C) 2025
+# This file is distributed under the same license as the crypto-tracker@danipin package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: crypto-tracker@danipin 1.1.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 22:08+0200\n"
+"PO-Revision-Date: 2025-01-24 22:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: Swedish\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Row 2: Total Value
+#: applet.js:442 applet.js:445 applet.js:789 portfolio.js:699 utils.js:106
+msgid "Loading..."
+msgstr "Laddar..."
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Price Alarm: %s"
+msgstr "Prislarm: "
+
+#: applet.js:730
+#, fuzzy, javascript-format
+msgid "Target %s reached! Price: %s"
+msgstr " uppnått! Pris: "
+
+#: applet.js:742 alarm.js:336
+msgid "risen"
+msgstr "stigit"
+
+#: applet.js:742 alarm.js:336
+msgid "fallen"
+msgstr "fallit"
+
+#: applet.js:743 alarm.js:337
+#, fuzzy, javascript-format
+msgid "Volatility Alarm: %s"
+msgstr "Volatilitetslarm: "
+
+#: applet.js:743 alarm.js:337
+#, javascript-format
+msgid "%s has %s by %s%%"
+msgstr ""
+
+#: applet.js:857
+msgid "Colors reset to default values."
+msgstr "Färger återställda till standardvärden."
+
+#: applet.js:917
+msgid "List updated! Please reopen settings."
+msgstr "Listan uppdaterad! Vänligen öppna inställningarna igen."
+
+#: applet.js:1468
+msgid "NEW ALL TIME HIGH 🚀"
+msgstr "NYTT ALL TIME HIGH 🚀"
+
+#: applet.js:1977
+msgid "API Limit Reached"
+msgstr "API-gräns uppnådd"
+
+#: applet.js:1977
+#, fuzzy, javascript-format
+msgid "You have used 100% of your monthly limit (10k)."
+msgstr "Du har använt 100% av din månatliga gräns (10k)."
+
+#: applet.js:1984
+msgid "Power Saving Enabled"
+msgstr "Energisparläge aktiverat"
+
+#: applet.js:1984
+msgid "Interval set to 5 min to avoid API ban."
+msgstr "Intervall inställt på 5 min för att undvika API-förbud."
+
+#: applet.js:1987
+msgid "API Limit Warning"
+msgstr "API-gränsvarning"
+
+#: applet.js:1987
+#, fuzzy, javascript-format
+msgid "You have reached 90% of your limit."
+msgstr "Du har nått 90% av din gräns."
+
+#: applet.js:1990
+msgid "API Limit Info"
+msgstr "API-gränsinfo"
+
+#: applet.js:1990
+#, fuzzy, javascript-format
+msgid "You have reached 80% of your limit."
+msgstr "Du har nått 80% av din gräns."
+
+#. Set base texts
+#: footer.js:94
+msgid "API: Active"
+msgstr "API: Aktiv"
+
+#: footer.js:94
+msgid "Basic Mode"
+msgstr "Grundläge"
+
+#: footer.js:98
+msgid "Source: CoinGecko"
+msgstr "Källa: CoinGecko"
+
+#: footer.js:101
+msgid "Get Free API Key"
+msgstr "Hämta gratis API-nyckel"
+
+#: footer.js:111
+#, fuzzy, javascript-format
+msgid "Month: %s"
+msgstr "Månad: "
+
+#: footer.js:112
+#, javascript-format
+msgid "Ø: %s"
+msgstr ""
+
+#: footer.js:115
+#, fuzzy, javascript-format
+msgid "Alarms: %s"
+msgstr "Larm: "
+
+#: header.js:117 header.js:275
+msgid "Portfolio Tracker"
+msgstr "Portföljspårare"
+
+#: header.js:119 header.js:276
+msgid "Alarm Management"
+msgstr "Larmhantering"
+
+#: header.js:121 header.js:278
+msgid "API Usage & Stats"
+msgstr "API-användning & Statistik"
+
+#: header.js:123
+msgid "Support Development"
+msgstr "Stöd utvecklingen"
+
+# Strings from JS files
+#. IMPORTANT: For the drawing loop we need the pure text without markup!
+#: header.js:128 header.js:274 header.js:641
+msgid "Market Dashboard"
+msgstr "Marknadsöversikt"
+
+#: header.js:130 header.js:642
+msgid "24H Price Change [%]"
+msgstr "24H Prisförändring [%]"
+
+#: header.js:280
+msgid "Support"
+msgstr "Support"
+
+#: header.js:284
+msgid "Settings"
+msgstr "Inställningar"
+
+#: alarm.js:242
+msgid "Alarm Archive Full"
+msgstr "Larmarkiv fullt"
+
+#: alarm.js:242
+#, fuzzy, javascript-format
+msgid "Oldest alarm for %s was deleted."
+msgstr "Äldsta larmet för "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Background Alarm: %s"
+msgstr "Bakgrundslarm: "
+
+#: alarm.js:324
+#, fuzzy, javascript-format
+msgid "Target price %s reached! Current: %s"
+msgstr " uppnått! Nuvarande: "
+
+#: alarm.js:469
+msgid "Alarm Settings"
+msgstr "Larminställningar"
+
+#: alarm.js:573
+#, fuzzy, javascript-format
+msgid "Target Price (%s):"
+msgstr "Målpris ("
+
+#: alarm.js:574
+msgid "Change (%):"
+msgstr "Förändring (%):"
+
+#: alarm.js:577
+msgid "Press ENTER to save."
+msgstr "Tryck ENTER för att spara."
+
+#: alarm.js:643 alarm.js:652
+msgid "Search alarms..."
+msgstr "Sök larm..."
+
+#: alarm.js:739 portfolio.js:1262
+msgid "No matches."
+msgstr "Inga träffar."
+
+#: alarm.js:739
+msgid "No alarms here yet."
+msgstr "Inga larm här ännu."
+
+#: alarm.js:856
+#, fuzzy, javascript-format
+msgid "Target: %s"
+msgstr "Mål:"
+
+#: alarm.js:857
+#, fuzzy, javascript-format
+msgid "Vol: %s%%"
+msgstr "24h Vol:"
+
+#: alarm.js:860
+#, fuzzy, javascript-format
+msgid "Current: %s"
+msgstr "Nuvarande: "
+
+#: alarm.js:865
+#, fuzzy, javascript-format
+msgid "Created: %s"
+msgstr "Skapad: "
+
+#. Price Input
+#: alarm.js:1023
+msgid "Target:"
+msgstr "Mål:"
+
+#. Vol Input
+#: alarm.js:1044
+msgid "Vol %:"
+msgstr "Vol %:"
+
+#: alarm.js:1058
+msgid "ENTER to save"
+msgstr "ENTER för att spara"
+
+#. Sort options
+#: alarm.js:1102 portfolio.js:1008
+msgid "Date"
+msgstr "Datum"
+
+#: alarm.js:1103
+msgid "Name"
+msgstr "Namn"
+
+#: alarm.js:1166 alarm.js:1218
+msgid "Delete all"
+msgstr "Radera alla"
+
+#: alarm.js:1174 alarm.js:1182 alarm.js:1190 alarm.js:1213 portfolio.js:1212
+#: portfolio.js:1219
+msgid "Sure?"
+msgstr "Säker?"
+
+#: alarm.js:1230
+#, fuzzy, javascript-format
+msgid "Alarms %s of %s"
+msgstr "Larm "
+
+#: donate.js:35
+msgid ""
+"If you like this applet, you can support\n"
+"its development with a donation."
+msgstr ""
+"Om du gillar denna applet kan du stödja\n"
+"dess utveckling med en donation."
+
+#: donate.js:181
+msgid "Address:"
+msgstr "Adress:"
+
+#: donate.js:212
+msgid "Copied"
+msgstr "Kopierad"
+
+#: donate.js:212
+#, fuzzy, javascript-format
+msgid "%s address copied."
+msgstr " adress kopierad."
+
+#: search.js:33
+msgid "Search..."
+msgstr "Sök..."
+
+#: search.js:172
+msgid "No results..."
+msgstr "Inga resultat..."
+
+#: portfolio.js:316
+msgid "Converting..."
+msgstr "Konverterar..."
+
+#: portfolio.js:365
+msgid "Error"
+msgstr "Fel"
+
+#: portfolio.js:365
+msgid "Currency conversion failed."
+msgstr "Valutakonvertering misslyckades."
+
+#: portfolio.js:603
+msgid "Total Balance"
+msgstr "Total balans"
+
+#. FIX: expand: false for label, insert spacer instead
+#: portfolio.js:720
+msgid "Select Currency"
+msgstr "Välj valuta"
+
+#: portfolio.js:790 portfolio.js:798
+msgid "Filter portfolio..."
+msgstr "Filtrera portfölj..."
+
+#: portfolio.js:1006
+msgid "Amount"
+msgstr "Belopp"
+
+#: portfolio.js:1007
+msgid "Buy Price"
+msgstr "Köp pris"
+
+#. Add TX Button
+#: portfolio.js:1199
+msgid "+ Transaction"
+msgstr "+ Transaktion"
+
+#. Delete Coin Button
+#: portfolio.js:1208 portfolio.js:1224
+msgid "Remove Position"
+msgstr "Ta bort position"
+
+#: portfolio.js:1262
+msgid "No positions here yet."
+msgstr "Inga positioner här ännu."
+
+#: portfolio.js:1288
+msgid "Add Coin"
+msgstr "Lägg till mynt"
+
+#: portfolio.js:1305 portfolio.js:1311
+msgid "Search (e.g. Bitcoin)..."
+msgstr "Sök (t.ex. Bitcoin)..."
+
+#: portfolio.js:1398
+msgid "No results"
+msgstr "Inga resultat"
+
+#: seasonal.js:80
+msgid "HAPPY HALLOWEEN !"
+msgstr "GLAD HALLOWEEN !"
+
+#: seasonal.js:378
+msgid "MERRY CHRISTMAS 🎄"
+msgstr "GOD JUL 🎄"
+
+#. Straighten up
+#: seasonal.js:486
+msgid "HAPPY BITCOIN PIZZA DAY 🍕"
+msgstr "GLAD BITCOIN PIZZA-DAG 🍕"
+
+#: charts.js:181
+msgid "?"
+msgstr ""
+
+#: charts.js:228
+msgid "Rank:"
+msgstr "Rank:"
+
+#: charts.js:228
+msgid "M.Cap:"
+msgstr "Marknadsvärde:"
+
+#: charts.js:229
+msgid "24h High:"
+msgstr "24h Hög:"
+
+#: charts.js:229
+msgid "24h Vol:"
+msgstr "24h Vol:"
+
+#: charts.js:230
+msgid "24h Low:"
+msgstr "24h Låg:"
+
+#: charts.js:230
+msgid "ATH:"
+msgstr "ATH:"
+
+#: utils.js:348
+msgid " (Rate Limit)"
+msgstr " (Hastighetsgräns)"
+
+#: utils.js:349
+msgid " (API Key invalid)"
+msgstr " (API-nyckel ogiltig)"
+
+#: utils.js:350
+msgid " (Network)"
+msgstr " (Nätverk)"
+
+#: utils.js:352
+msgid "Crypto-Tracker Error"
+msgstr "Crypto-Tracker Fel"
+
+#: utils.js:352
+#, fuzzy, javascript-format
+msgid "An error was intercepted%s. See log."
+msgstr "Ett fel fångades upp"
+
+#: api.js:67
+msgid "API successfully activated."
+msgstr "API aktiverades framgångsrikt."
+
+#: api.js:73
+msgid "No internet connection"
+msgstr "Ingen internetanslutning"
+
+#: api.js:75
+msgid "Key invalid"
+msgstr "Nyckel ogiltig"
+
+#: api.js:77
+msgid "Key blocked"
+msgstr "Nyckel blockerad"
+
+#: api.js:79
+msgid "Limit reached"
+msgstr "Gräns uppnådd"
+
+#: api.js:81
+msgid "Server error"
+msgstr "Serverfel"
+
+#: api.js:85
+#, fuzzy, javascript-format
+msgid "API Error: %s"
+msgstr "API-fel: "
+
+#: api.js:90
+msgid "System error"
+msgstr "Systemfel"
+
+#: api.js:131
+msgid "System Diagnosis"
+msgstr "Systemdiagnos"
+
+#: api.js:143
+msgid "API Connection: Active & Valid"
+msgstr "API-anslutning: Aktiv & Giltig"
+
+#: api.js:145
+msgid "Not configured"
+msgstr "Ej konfigurerad"
+
+#: api.js:146
+#, fuzzy, javascript-format
+msgid "API Status: %s"
+msgstr "API-status: "
+
+#: api.js:154
+#, fuzzy, javascript-format
+msgid "Quota critical: %s%% used"
+msgstr "Kvot kritisk: "
+
+#: api.js:156
+#, fuzzy, javascript-format
+msgid "Quota high: %s%% used"
+msgstr "Kvot hög: "
+
+#: api.js:158
+#, fuzzy, javascript-format
+msgid "Quota: %s%% (In the green)"
+msgstr "(I det gröna)"
+
+#: api.js:165
+#, fuzzy, javascript-format
+msgid "Period: %s days left in month."
+msgstr " dagar kvar i månaden."
+
+#: api.js:171
+#, fuzzy, javascript-format
+msgid "Tip: Interval (%ss) is aggressive for Free Tier."
+msgstr "s) är aggressivt för gratisnivån."
+
+#: api.js:178
+msgid "Note: Error log exists."
+msgstr "Obs: Fellogg finns."
+
+#: api.js:180
+msgid "System: No crashes logged."
+msgstr "System: Inga krascher loggade."
+
+#: api.js:202 api.js:397
+msgid "Free API (Basic)"
+msgstr "Gratis API (Grundläggande)"
+
+#: api.js:203 api.js:210
+msgid "Today:"
+msgstr "Idag:"
+
+#: api.js:204 api.js:211
+msgid "Month:"
+msgstr "Månad:"
+
+#: api.js:205 api.js:212
+msgid "Ø per Day:"
+msgstr "Ø per dag:"
+
+#: api.js:209 api.js:398
+msgid "Key API (Pro)"
+msgstr "Nyckel-API (Pro)"
+
+#: api.js:224
+msgid "Distribution (Key Calls)"
+msgstr "Fördelning (Nyckelanrop)"
+
+#: api.js:239
+msgid "Charts"
+msgstr "Diagram"
+
+#. Blue
+#: api.js:240
+msgid "Details"
+msgstr "Detaljer"
+
+#. Purple
+#: api.js:241
+msgid "Search"
+msgstr "Sök"
+
+#. Yellow
+#: api.js:242
+msgid "Portfolio"
+msgstr "Portfölj"
+
+#. Cyan
+#: api.js:243
+msgid "Alarms"
+msgstr "Larm"
+
+#. Red/Pink
+#: api.js:244
+msgid "Updates"
+msgstr "Uppdateringar"
+
+#: api.js:294
+msgid "History (Last 14 Days)"
+msgstr "Historik (Senaste 14 dagarna)"
+
+#: api.js:417
+#, fuzzy, javascript-format
+msgid "Error Log (%s KB)"
+msgstr "Fellogg ("
+
+#: api.js:420
+msgid "The system prevented and logged crashes."
+msgstr "Systemet förhindrade och loggade krascher."
+
+#: api.js:426
+msgid "Delete"
+msgstr "Radera"
+
+#: api.js:439
+msgid "Dismiss"
+msgstr "Avfärda"
+
+#, fuzzy
+#~ msgid "Ø:"
+#~ msgstr "Ø: "
+
+#~ msgid " was deleted."
+#~ msgstr " raderades."
+
+#~ msgid "Target price "
+#~ msgstr "Målpris "
+
+#, fuzzy
+#~ msgid " has "
+#~ msgstr "har "
+
+#~ msgid " by "
+#~ msgstr " med "
+
+#~ msgid " of "
+#~ msgstr " av "
+
+#~ msgid ". See log."
+#~ msgstr ". Se logg."
+
+#~ msgid "% used"
+#~ msgstr "% använd"
+
+#~ msgid "Quota: "
+#~ msgstr "Kvot: "
+
+#~ msgid "Period: "
+#~ msgstr "Period: "
+
+#~ msgid "Tip: Interval ("
+#~ msgstr "Tips: Intervall ("
+
+#~ msgid " KB)"
+#~ msgstr " KB)"
+
+#~ msgid "Crypto Tracker"
+#~ msgstr "Krypto-spårare"
+
+#~ msgid ""
+#~ "A comprehensive cryptocurrency dashboard providing real-time market data, "
+#~ "portfolio management, interactive charts, and advanced alerting "
+#~ "capabilities, enhanced with seasonal visual elements."
+#~ msgstr ""
+#~ "En omfattande kryptovaluta-instrumentpanel som tillhandahåller "
+#~ "marknadsdata i realtid, portföljhantering, interaktiva diagram och "
+#~ "avancerade varningsfunktioner, förbättrad med säsongsbetonade visuella "
+#~ "element."
+
+#~ msgid "Metric 1 (Primary)"
+#~ msgstr "Mätvärde 1 (Primär)"
+
+#~ msgid "Metric 2"
+#~ msgstr "Mätvärde 2"
+
+#~ msgid "Metric 3"
+#~ msgstr "Mätvärde 3"
+
+#~ msgid "General"
+#~ msgstr "Allmänt"
+
+#~ msgid "DevTools (Debug)"
+#~ msgstr "Utvecklarverktyg (Felsökning)"
+
+#~ msgid "Developer Options"
+#~ msgstr "Utvecklaralternativ"
+
+#~ msgid "Applet Settings"
+#~ msgstr "Applet-inställningar"
+
+#~ msgid "CoinGecko API Configuration"
+#~ msgstr "CoinGecko API-konfiguration"
+
+#~ msgid "Display and Activation"
+#~ msgstr "Visning och aktivering"
+
+#~ msgid "Data Source (API)"
+#~ msgstr "Datakälla (API)"
+
+#~ msgid "Color Settings"
+#~ msgstr "Färginställningar"
+
+#~ msgid "Changes will activate on the next API update interval."
+#~ msgstr "Ändringar aktiveras vid nästa API-uppdateringsintervall."
+
+#~ msgid "CoinGecko API Key (Demo or Pro)"
+#~ msgstr "CoinGecko API-nyckel (Demo eller Pro)"
+
+#~ msgid "Unlocks higher limits and more stable data queries."
+#~ msgstr "Låser upp högre gränser och stabilare datafrågor."
+
+#~ msgid ""
+#~ "CALL TRACKING OVERVIEW:\n"
+#~ "\n"
+#~ "• BASIC CALLS: Run via public servers (approx. 5-15 calls/min). \n"
+#~ "  Used for: Standard price queries (saves key quota).\n"
+#~ "\n"
+#~ "• KEY CALLS: Run via your Demo Key quota.\n"
+#~ "  Used for: Charts, coin details & more stable queries.\n"
+#~ "\n"
+#~ "LIMITS (DEMO KEY):\n"
+#~ "• Totalt: 10 000 anrop per månad\n"
+#~ "• Hastighet: Max 30 förfrågningar per minut\n"
+#~ "\n"
+#~ "Spårningen i sidfoten visar i realtid hur många förfrågningar som har "
+#~ "använts så att du kan hålla koll på din månatliga gräns på 10k."
+#~ msgstr ""
+#~ "ÖVERSIKT ÖVER ANROPSSPÅRNING:\n"
+#~ "\n"
+#~ "• GRUNDLÄGGANDE ANROP: Körs via offentliga servrar (ca 5-15 anrop/min). \n"
+#~ "  Används för: Standardprisfrågor (sparar nyckelkvot).\n"
+#~ "\n"
+#~ "• NYCKELANROP: Körs via din Demo-nyckelkvot.\n"
+#~ "  Används för: Diagram, myntdetaljer och stabilare frågor.\n"
+#~ "\n"
+#~ "GRÄNSER (DEMO-NYCKEL):\n"
+#~ "• Totalt: 10 000 anrop per månad\n"
+#~ "• Hastighet: Max 30 förfrågningar per minut\n"
+#~ "\n"
+#~ "Spårningen i sidfoten visar i realtid hur många förfrågningar som har "
+#~ "använts så att du kan hålla koll på din månatliga gräns på 10k."
+
+#~ msgid "Show Active Alarms"
+#~ msgstr "Visa aktiva larm"
+
+#~ msgid "Shows the count of active alarms in the footer."
+#~ msgstr "Visar antalet aktiva larm i sidfoten."
+
+#~ msgid "Show Monthly Statistics"
+#~ msgstr "Visa månadsstatistik"
+
+#~ msgid "Shows total API key calls this month."
+#~ msgstr "Visar totala API-nyckelanrop denna månad."
+
+#~ msgid "Show Daily Average"
+#~ msgstr "Visa dagligt genomsnitt"
+
+#~ msgid "Shows the calculated average per day."
+#~ msgstr "Visar det beräknade genomsnittet per dag."
+
+#~ msgid "Candle Charts as Default"
+#~ msgstr "Ljusdiagram som standard"
+
+#~ msgid "Shows charts as candlesticks by default where possible."
+#~ msgstr "Visar diagram som ljusstakar som standard där det är möjligt."
+
+#~ msgid "Chart: Bullish Candle Color (Up)"
+#~ msgstr "Diagram: Bullish ljusfärg (Upp)"
+
+#~ msgid "Color for rising candles."
+#~ msgstr "Färg för stigande ljus."
+
+#~ msgid "Chart: Bearish Candle Color (Down)"
+#~ msgstr "Diagram: Bearish ljusfärg (Ner)"
+
+#~ msgid "Color for falling candles."
+#~ msgstr "Färg för fallande ljus."
+
+#~ msgid "Price Alarm"
+#~ msgstr "Prislarm"
+
+#~ msgid "Notification when this price is reached."
+#~ msgstr "Avisering när detta pris uppnås."
+
+#~ msgid "Enter the target price e.g. 5 or 2598. 0 disables the alarm."
+#~ msgstr "Ange målpriset t.ex. 5 eller 2598. 0 inaktiverar larmet."
+
+#~ msgid "Percent Alarm"
+#~ msgstr "Procentlarm"
+
+#~ msgid "Alarm on percentage change (24h)."
+#~ msgstr "Larm vid procentuell förändring (24h)."
+
+#~ msgid "Enter a percentage value e.g. 5. 0 disables the alarm."
+#~ msgstr "Ange ett procentvärde t.ex. 5. 0 inaktiverar larmet."
+
+#~ msgid "Compact Mode"
+#~ msgstr "Kompakt läge"
+
+#~ msgid "Space-saving display in panel (BTC $85.5K)."
+#~ msgstr "Platsbesparande visning i panelen (BTC $85.5K)."
+
+#~ msgid "Enable Seasonal Theme"
+#~ msgstr "Aktivera säsongstema"
+
+#~ msgid ""
+#~ "Automatically activates festive designs (e.g. Christmas) at certain times."
+#~ msgstr "Aktiverar automatiskt festliga mönster (t.ex. jul) vid vissa tider."
+
+#~ msgid "Show Decimals"
+#~ msgstr "Visa decimaler"
+
+#~ msgid "Toggles the display of cent amounts on or off."
+#~ msgstr "Växlar visningen av öresbelopp på eller av."
+
+#~ msgid "Show Trend Arrows"
+#~ msgstr "Visa trendpilar"
+
+#~ msgid "Shows or hides trend arrows for price changes."
+#~ msgstr "Visar eller döljer trendpilar för prisförändringar."
+
+#~ msgid "Icon Opacity"
+#~ msgstr "Ikonopacitet"
+
+#~ msgid "Controls the visibility of crypto icons."
+#~ msgstr "Styr synligheten för kryptoikoner."
+
+#~ msgid "Update Interval"
+#~ msgstr "Uppdateringsintervall"
+
+#~ msgid "How often prices are fetched from CoinGecko."
+#~ msgstr "Hur ofta priser hämtas från CoinGecko."
+
+#~ msgid "Reset Colors"
+#~ msgstr "Återställ färger"
+
+#~ msgid "Resets all custom colors (charts & metrics) to default values."
+#~ msgstr ""
+#~ "Återställer alla anpassade färger (diagram och mätvärden) till "
+#~ "standardvärden."
+
+#~ msgid "Update Top Coins List"
+#~ msgstr "Uppdatera topplista över mynt"
+
+#~ msgid ""
+#~ "Loads the current top 50 coins from CoinGecko and updates the selection "
+#~ "lists (requires settings restart)."
+#~ msgstr ""
+#~ "Laddar de nuvarande topp 50-mynten från CoinGecko och uppdaterar "
+#~ "urvalslistorna (kräver omstart av inställningar)."
+
+#~ msgid "Force ATH Rocket"
+#~ msgstr "Tvinga ATH-raket"
+
+#~ msgid "Always show the rocket animation (for testing purposes)."
+#~ msgstr "Visa alltid raketanimationen (för teständamål)."
+
+#~ msgid "Force Seasonal Theme"
+#~ msgstr "Tvinga säsongstema"
+
+#~ msgid "Override the date-based theme selection."
+#~ msgstr "Åsidosätt det datumbaserade temavalet."
+
+#~ msgid "Debug Frames (Layout)"
+#~ msgstr "Felsökningsramar (Layout)"
+
+#~ msgid "Draws colorful frames around menu elements for layout inspection."
+#~ msgstr "Ritar färgglada ramar runt menyelement för layoutinspektion."
+
+#~ msgid "Show Error Notifications"
+#~ msgstr "Visa felmeddelanden"
+
+#~ msgid "Sends a desktop notification when an internal error is caught."
+#~ msgstr "Skickar en skrivbordsavisering när ett internt fel fångas."
+
+#~ msgid "Test Crash (Safe)"
+#~ msgstr "Testkrasch (Säker)"
+
+#~ msgid "Provokes an error to test logging and notifications."
+#~ msgstr "Provocerar ett fel för att testa loggning och aviseringar."
+
+#~ msgid "Show Icon"
+#~ msgstr "Visa ikon"
+
+#~ msgid "Shows the crypto icon next to the price."
+#~ msgstr "Visar kryptoikonen bredvid priset."
+
+#~ msgid "Toggles the display of decimal places on/off."
+#~ msgstr "Växlar visningen av decimaler på/av."
+
+#~ msgid "Number of Decimals"
+#~ msgstr "Antal decimaler"
+
+#~ msgid "Number of decimal places (2-8)."
+#~ msgstr "Antal decimaler (2-8)."
+
+#~ msgid "Color the Arrow Only"
+#~ msgstr "Färga endast pilen"
+
+#~ msgid "If active, the price text remains white."
+#~ msgstr "Om aktivt förblir pristexten vit."
+
+#~ msgid "Show Currency Symbol (e.g. $ or €)"
+#~ msgstr "Visa valutasymbol (t.ex. $ eller €)"
+
+#~ msgid "Replaces the currency code with the symbol."
+#~ msgstr "Ersätter valutakoden med symbolen."
+
+#~ msgid "Enabled"
+#~ msgstr "Aktiverad"
+
+#~ msgid "Toggles the display of this metric on/off."
+#~ msgstr "Växlar visningen av detta mätvärde på/av."
+
+#~ msgid "Currency ID (CoinGecko)"
+#~ msgstr "Valuta-ID (CoinGecko)"
+
+#~ msgid "Select the cryptocurrency from the top list."
+#~ msgstr "Välj kryptovalutan från topplistan."
+
+#~ msgid "Custom Currency ID"
+#~ msgstr "Anpassat valuta-ID"
+
+#~ msgid "CoinGecko ID (e.g. 'litecoin')"
+#~ msgstr "CoinGecko ID (t.ex. 'litecoin')"
+
+#~ msgid "Comparison Currency"
+#~ msgstr "Jämförelsevaluta"
+
+#~ msgid "Select the currency for the price comparison."
+#~ msgstr "Välj valutan för prisjämförelsen."
+
+#~ msgid "Display Symbol"
+#~ msgstr "Visningssymbol"
+
+#~ msgid "The symbol displayed on the panel (e.g. BTC)."
+#~ msgstr "Symbolen som visas på panelen (t.ex. BTC)."
+
+#~ msgid "Color for Rising Price (▲)"
+#~ msgstr "Färg för stigande pris (▲)"
+
+#~ msgid "Select the color for positive price movement."
+#~ msgstr "Välj färg för positiv prisrörelse."
+
+#~ msgid "Color for Falling Price (▼)"
+#~ msgstr "Färg för fallande pris (▼)"
+
+#~ msgid "Select the color for negative price movement."
+#~ msgstr "Välj färg för negativ prisrörelse."
+
+#~ msgid "15 Seconds (Minimum)"
+#~ msgstr "15 sekunder (Minsta)"
+
+#~ msgid "30 Seconds"
+#~ msgstr "30 sekunder"
+
+#~ msgid "60 Seconds (1 Minute)"
+#~ msgstr "60 sekunder (1 minut)"
+
+#~ msgid "120 Seconds (2 Minutes)"
+#~ msgstr "120 sekunder (2 minuter)"
+
+#~ msgid "300 Seconds (5 Minutes)"
+#~ msgstr "300 sekunder (5 minuter)"
+
+#~ msgid "Automatic (Date based)"
+#~ msgstr "Automatic (Date based)"
+
+#~ msgid "New Year"
+#~ msgstr "New Year"
+
+#~ msgid "Christmas (General)"
+#~ msgstr "Christmas (General)"
+
+#~ msgid "Christmas (Eve & Day)"
+#~ msgstr "Christmas (Eve & Day)"
+
+#~ msgid "Halloween"
+#~ msgstr "Halloween"
+
+#~ msgid "Valentine's Day"
+#~ msgstr "Valentine's Day"
+
+#~ msgid "Bitcoin Pizza Day"
+#~ msgstr "Bitcoin Pizza Day"
+
+#~ msgid "Easter"
+#~ msgstr "Easter"
+
+#~ msgid "Custom ID"
+#~ msgstr "Anpassat ID"
+
+#~ msgid "US Dollar (USD)"
+#~ msgstr "Amerikansk dollar (USD)"
+
+#~ msgid "Euro (EUR)"
+#~ msgstr "Euro (EUR)"
+
+#~ msgid "Canadian Dollar (CAD)"
+#~ msgstr "Kanadensisk dollar (CAD)"
+
+#~ msgid "British Pound (GBP)"
+#~ msgstr "Brittiskt pund (GBP)"
+
+#~ msgid "Japanese Yen (JPY)"
+#~ msgstr "Japansk yen (JPY)"
+
+#~ msgid "Swiss Franc (CHF)"
+#~ msgstr "Schweizisk franc (CHF)"
+
+#~ msgid "Australian Dollar (AUD)"
+#~ msgstr "Australisk dollar (AUD)"
+
+#~ msgid "Happy New Year"
+#~ msgstr "Gott Nytt År"
+
+#~ msgid " Loading..."
+#~ msgstr " Laddar..."
+
+#~ msgid "Target "
+#~ msgstr "Mål "
+
+#~ msgid "Search Coin"
+#~ msgstr "Sök mynt"
+
+#~ msgid "Loading market data..."
+#~ msgstr "Laddar marknadsdata..."
+
+#~ msgid "Power Saving Disabled"
+#~ msgstr "Energisparläge inaktiverat"
+
+#~ msgid "New month: Interval reset to 120s."
+#~ msgstr "Ny månad: Intervall återställt till 120s."
