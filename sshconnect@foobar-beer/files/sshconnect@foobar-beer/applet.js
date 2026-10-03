@@ -64,10 +64,17 @@ MyApplet.prototype = {
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
     let connections = this.settings.getValue('connections');
-    let groups = connections.reduce(function(r, c) {
-      r[c.group] = (r[c.group] || []).concat(c);
-      return r;
-    }, Object.create(null));
+    let ungrouped = [];
+    let groups = Object.create(null);
+
+    connections.forEach(function(c) {
+      let groupName = (c.group !== undefined && c.group !== null) ? c.group.trim() : '';
+      if (groupName === '' || groupName === '/') {
+        ungrouped.push(c);
+      } else {
+        groups[groupName] = (groups[groupName] || []).concat(c);
+      }
+    });
 
     for (let group in groups) {
       let subMenu = new PopupMenu.PopupSubMenuMenuItem(group);
@@ -81,6 +88,19 @@ MyApplet.prototype = {
       }.bind(this));
       this.menu.addMenuItem(subMenu);
     }
+
+    if (Object.keys(groups).length > 0 && ungrouped.length > 0) {
+      this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    }
+
+    ungrouped.forEach(function(entry) {
+      let label = entry.name;
+      let item = new PopupMenu.PopupMenuItem(label);
+      item.connect('activate', function() {
+        this.connectTo(label, entry.host, entry.flags, entry.profile);
+      }.bind(this));
+      this.menu.addMenuItem(item);
+    }.bind(this));
   },
 
   connectTo: function(name, host, flags, profile) {
