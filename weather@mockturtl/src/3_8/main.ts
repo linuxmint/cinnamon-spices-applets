@@ -218,7 +218,6 @@ export class WeatherApplet extends TextIconApplet {
 				}
 			}
 
-			this.ui.ShowRefreshIcon();
 			let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config, this.config.GetServiceConfig(this.provider.name));
 
 			if (weatherInfo == null) {
@@ -245,9 +244,6 @@ export class WeatherApplet extends TextIconApplet {
 				Logger.Error("Generic Error while refreshing Weather info: " + e.message + ", ", e);
 			this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
 			return RefreshState.Error;
-		}
-		finally {
-			this.ui.HideRefreshIcon();
 		}
 	}
 

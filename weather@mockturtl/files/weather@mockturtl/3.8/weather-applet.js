@@ -19067,7 +19067,6 @@ class WeatherLoop {
         this.appletRemoved = false;
         this.errorCount = 0;
         this.runningRefresh = null;
-        this.refreshingResolver = null;
         this.refreshing = null;
         this.NetworkMonitorUsed = null;
         this.OnNetworkConnectivityChanged = () => {
@@ -19088,25 +19087,29 @@ class WeatherLoop {
             }
         };
         this.DoCheck = async (options = {}) => {
-            var _a, _b, _c;
+            var _a;
             logger_Logger.Debug("Main loop check started.");
             if (this.IsStray())
                 return;
             const { rebuild = false, location = null, immediate = true } = options;
             if (!this.Online) {
                 logger_Logger.Info("No network connection, skipping this cycle.");
+                this.app.ui.ShowRefreshResult(false);
                 return;
             }
             if (this.runningRefresh && !immediate) {
                 logger_Logger.Debug("Refresh in progress and this request is not forced, skipping cycle.");
                 return;
             }
+            (_a = this.runningRefresh) === null || _a === void 0 ? void 0 : _a.cancel();
+            const refreshRequest = new imports.gi.Gio.Cancellable();
+            this.runningRefresh = refreshRequest;
+            let resolveRefreshing;
+            const refreshing = new Promise((resolve) => {
+                resolveRefreshing = () => resolve(undefined);
+            });
+            this.refreshing = refreshing;
             try {
-                (_a = this.runningRefresh) === null || _a === void 0 ? void 0 : _a.cancel();
-                this.runningRefresh = new imports.gi.Gio.Cancellable();
-                this.refreshing = new Promise((resolve) => {
-                    this.refreshingResolver = resolve;
-                });
                 this.ValidateLastUpdateTime();
                 if (this.pauseRefresh) {
                     logger_Logger.Debug("Configuration or network error, updating paused");
@@ -19117,13 +19120,18 @@ class WeatherLoop {
                     logger_Logger.Debug("No need to update yet, skipping.");
                     return;
                 }
+                this.app.ui.ShowRefreshProgress();
                 logger_Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + this.lastUpdated.toLocaleString()
                     + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
                     + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
                 const state = await Promise.race([
-                    this.app["RefreshWeather"](rebuild, location, this.runningRefresh),
+                    this.app["RefreshWeather"](rebuild, location, refreshRequest),
                     delay(30000).then(() => null)
                 ]);
+                if (this.runningRefresh !== refreshRequest) {
+                    logger_Logger.Debug("Refresh superseded by a newer request, ignoring result.");
+                    return;
+                }
                 switch (state) {
                     case null:
                         logger_Logger.Info("Refreshing timed out, skipping this cycle.");
@@ -19166,16 +19174,22 @@ class WeatherLoop {
                         });
                         break;
                 }
+                this.app.ui.ShowRefreshResult(state === RefreshState.Success);
             }
             catch (e) {
                 if (e instanceof Error)
                     logger_Logger.Error("Error in Main loop: " + e.message, e);
+                if (this.runningRefresh === refreshRequest)
+                    this.app.ui.ShowRefreshResult(false);
             }
             finally {
-                (_b = this.refreshingResolver) === null || _b === void 0 ? void 0 : _b.call(this);
-                this.refreshingResolver = null;
-                (_c = this.runningRefresh) === null || _c === void 0 ? void 0 : _c.cancel();
-                this.runningRefresh = null;
+                resolveRefreshing();
+                if (this.refreshing === refreshing)
+                    this.refreshing = null;
+                if (this.runningRefresh === refreshRequest) {
+                    refreshRequest.cancel();
+                    this.runningRefresh = null;
+                }
             }
         };
         this.app = app;
@@ -20469,7 +20483,7 @@ class UIHourlyForecasts {
 
 
 
-const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Bin: uiBar_Bin, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button, Side: uiBar_Side } = imports.gi.St;
+const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Bin: uiBar_Bin, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button, Side: uiBar_Side, Widget: uiBar_Widget } = imports.gi.St;
 const { Tooltip: uiBar_Tooltip } = imports.ui.tooltips;
 const STYLE_BAR = 'bottombar';
 class UIBar {
@@ -20485,7 +20499,10 @@ class UIBar {
         this.warningButtonIcon = null;
         this.warningButton = null;
         this.warningButtonTooltip = null;
-        this.refreshIcon = null;
+        this.refreshSuccess = null;
+        this.refreshProgress = null;
+        this.refreshError = null;
+        this.refreshStatus = "progress";
         this.WarningClicked = async () => {
             var _a;
             if (((_a = this.app.CurrentData) === null || _a === void 0 ? void 0 : _a.alerts) == null)
@@ -20494,6 +20511,7 @@ class UIBar {
         };
         this.app = app;
         this.actor = new uiBar_BoxLayout({ vertical: false, style_class: STYLE_BAR });
+        this.actor.get_layout_manager().set_homogeneous(true);
     }
     SwitchButtonToShow() {
         var _a;
@@ -20611,24 +20629,36 @@ class UIBar {
         }
         this.providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
         this.providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(this.providerCreditButton));
-        this.refreshIcon = new uiBar_Icon({
-            icon_name: "refresh-symbolic",
-            icon_type: uiBar_IconType.SYMBOLIC,
-            icon_size: 24,
+        const statusStyle = `font-size: ${config.CurrentFontSize + 6}px;`;
+        this.refreshSuccess = Label({
+            text: "✓",
+            style: statusStyle
         });
-        this.refreshIcon.hide();
-        this.actor.add(this.providerCreditButton.actor, {
+        this.refreshProgress = Label({
+            text: "⟳",
+            style: statusStyle
+        });
+        this.refreshError = Label({
+            text: "✕",
+            style: statusStyle
+        });
+        this.refreshError.translation_y = 1;
+        this.ApplyRefreshStatus();
+        const statusSlot = new uiBar_Widget({
+            layout_manager: new imports.gi.Clutter.BinLayout()
+        });
+        statusSlot.add_child(this.refreshSuccess);
+        statusSlot.add_child(this.refreshProgress);
+        statusSlot.add_child(this.refreshError);
+        const rightBox = new uiBar_BoxLayout({ vertical: false, y_align: uiBar_Align.MIDDLE });
+        rightBox.add_actor(this.providerCreditButton.actor);
+        rightBox.add_actor(statusSlot);
+        this.actor.add(rightBox, {
             x_fill: false,
             x_align: uiBar_Align.END,
             y_align: uiBar_Align.MIDDLE,
             y_fill: false,
             expand: true
-        });
-        this.actor.add(this.refreshIcon, {
-            x_fill: false,
-            x_align: uiBar_Align.END,
-            y_align: uiBar_Align.MIDDLE,
-            y_fill: false,
         });
     }
     BigDistanceUnitFor(unit) {
@@ -20636,13 +20666,20 @@ class UIBar {
             return _("mi");
         return _("km");
     }
-    ShowRefreshIcon() {
-        var _a;
-        (_a = this.refreshIcon) === null || _a === void 0 ? void 0 : _a.show();
+    ShowRefreshProgress() {
+        this.refreshStatus = "progress";
+        this.ApplyRefreshStatus();
     }
-    HideRefreshIcon() {
-        var _a;
-        (_a = this.refreshIcon) === null || _a === void 0 ? void 0 : _a.hide();
+    ShowRefreshResult(success) {
+        this.refreshStatus = success ? "success" : "error";
+        this.ApplyRefreshStatus();
+    }
+    ApplyRefreshStatus() {
+        if (this.refreshSuccess == null || this.refreshProgress == null || this.refreshError == null)
+            return;
+        this.refreshSuccess.opacity = this.refreshStatus == "success" ? 255 : 0;
+        this.refreshProgress.opacity = this.refreshStatus == "progress" ? 255 : 0;
+        this.refreshError.opacity = this.refreshStatus == "error" ? 255 : 0;
     }
     HideHourlyToggle() {
         var _a;
@@ -20790,11 +20827,11 @@ class UI {
         this.Bar.Display(weather, provider, config, shouldShowToggle);
         return true;
     }
-    ShowRefreshIcon() {
-        this.Bar.ShowRefreshIcon();
+    ShowRefreshProgress() {
+        this.Bar.ShowRefreshProgress();
     }
-    HideRefreshIcon() {
-        this.Bar.HideRefreshIcon();
+    ShowRefreshResult(success) {
+        this.Bar.ShowRefreshResult(success);
     }
     IsLightTheme() {
         const color = this.menu.actor.get_theme_node().get_color("color");
@@ -21086,7 +21123,6 @@ class WeatherApplet extends TextIconApplet {
                     return RefreshState.Error;
                 }
             }
-            this.ui.ShowRefreshIcon();
             let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config, this.config.GetServiceConfig(this.provider.name));
             if (weatherInfo == null) {
                 return RefreshState.NoWeather;
@@ -21108,9 +21144,6 @@ class WeatherApplet extends TextIconApplet {
                 logger_Logger.Error("Generic Error while refreshing Weather info: " + e.message + ", ", e);
             this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             return RefreshState.Error;
-        }
-        finally {
-            this.ui.HideRefreshIcon();
         }
     }
     DisplayWeather(weather) {
