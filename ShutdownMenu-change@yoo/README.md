@@ -59,6 +59,8 @@ In addition, it offers extra handy interactions:
   **Custom command**: Replace the default command to change behavior
 - 支持为关机项下方单独设置分隔线  
   Separately toggle a separator below the shutdown item
+- **隐藏内置菜单项**：隐藏关机/注销/锁屏，菜单变为纯启动器  
+  **Hide built-in menu items**: Hide Quit/Logout/Lock so the menu becomes a pure launcher
 
 ### 自定义菜单项 | Custom Menu Items
 
@@ -82,6 +84,8 @@ In addition, it offers extra handy interactions:
   **Position**: Choose whether custom items appear above or below built-in items
 - **分隔线可选**：可控制自定义项与内置项之间是否显示分隔线  
   **Separator between groups**: Toggle whether a separator is shown between custom and built-in items
+- **溢出滚动**：打开"自定义项过多时启用滚动"后，超高列表可滚动查看；滚动条悬浮于内容上层，不占位，静止时自动隐藏  
+  **Overflow scrolling**: Enable "Enable scrolling when custom items overflow" to scroll long lists; the scrollbar floats above content without taking space and auto-hides when idle
 - **首次运行时自动注入**：默认会添加一个 "Neofetch" 项作为示例，可以随时删除；删除后不会再次自动添加  
   **First-run injection**: A "Neofetch" item is added by default as a sample; it can be deleted and won't come back
 
@@ -89,8 +93,6 @@ In addition, it offers extra handy interactions:
 
 - **启用网格模式**：自定义项以图标网格形式显示  
   **Enable grid mode**: Display custom items as an icon grid
-- **隐藏内置项**：网格模式下可隐藏关机/注销/锁屏，让菜单成为纯启动器  
-  **Hide built-in items**: In grid mode, optionally hide Quit/Logout/Lock so the menu becomes a pure launcher
 - **网格列数**：2–8 列  
   **Grid columns**: 2–8
 - **单元格宽度 / 高度**：分别控制每格尺寸，0 表示自动  
@@ -173,7 +175,7 @@ Located on the **Scenes** page; used to save or switch the whole configuration (
 - **一键导入 + 勾选框工作流**：先点击全选按钮导入所有应用，再使用底部的「全选」/「取消全选」按钮批量管理勾选状态，未勾选的不会出现在菜单中，已勾选的自动置顶，非常方便管理大量应用。
 - **搜索过滤**：在自定义菜单项列表的搜索框中输入关键词，可按名称实时过滤，快速定位目标应用。
 - **场景胶囊导航栏**：在全局设置中将"场景快捷切换按钮数"设为 1–5，菜单顶部会显示胶囊导航栏，点击分段即可即时切换场景，菜单保持打开。
-- 网格模式下配合 `Hide built-in items`，可以将菜单变成类似 Dock 的应用启动器。
+- 网格模式下配合"隐藏内置菜单项"，可以将菜单变成类似 Dock 的应用启动器。
 - 图标输入框支持两种形式：
   - **系统图标名**（如 `firefox`、`system-shutdown`）
   - **图片绝对路径**（如 `/usr/share/icons/my-icon.png`）

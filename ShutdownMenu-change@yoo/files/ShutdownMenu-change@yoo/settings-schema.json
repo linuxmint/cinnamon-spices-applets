@@ -21,6 +21,7 @@
             "type": "page",
             "title": "System",
             "sections": [
+                "section-builtin",
                 "section-quit",
                 "section-logout",
                 "section-lock"
@@ -66,9 +67,17 @@
                 "dynamic_wallpaper_warning"
             ]
         },
+        "section-builtin": {
+            "type": "section",
+            "title": "Built-in Menu Items",
+            "keys": [
+                "custom_grid_hide_builtin"
+            ]
+        },
         "section-quit": {
             "type": "section",
             "title": "Quit",
+            "dependency": "!custom_grid_hide_builtin",
             "keys": [
                 "quit",
                 "quit_icon_widget",
@@ -79,6 +88,7 @@
         "section-logout": {
             "type": "section",
             "title": "Logout",
+            "dependency": "!custom_grid_hide_builtin",
             "keys": [
                 "log_out",
                 "log_out_icon_widget",
@@ -88,6 +98,7 @@
         "section-lock": {
             "type": "section",
             "title": "Screen Lock",
+            "dependency": "!custom_grid_hide_builtin",
             "keys": [
                 "screen_lock",
                 "screen_lock_icon_widget",
@@ -111,7 +122,6 @@
             "title": "Grid Layout",
             "keys": [
                 "custom_grid_mode",
-                "custom_grid_hide_builtin",
                 "custom_grid_columns",
                 "custom_grid_cell_width",
                 "custom_grid_cell_height",
@@ -382,8 +392,7 @@
     "custom_grid_hide_builtin": {
         "type": "checkbox",
         "default": false,
-        "description": "Hide built-in items in grid mode",
-        "dependency": "custom_grid_mode"
+        "description": "Hide built-in menu items"
     },
     "custom_grid_columns": {
         "type": "spinbutton",

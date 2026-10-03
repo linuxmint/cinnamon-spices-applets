@@ -727,8 +727,6 @@ class CustomAppList(SettingsWidget):
         child_path = self.filter_model.convert_path_to_child_path(
             Gtk.TreePath(path))
         iter = self.store.get_iter(child_path)
-        if self.store.get_value(iter, 1) == '-':
-            return
         current = self.store.get_value(iter, 4)
         self.store.set_value(iter, 4, not current)
         self._save()

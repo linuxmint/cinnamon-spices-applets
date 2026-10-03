@@ -119,8 +119,12 @@ msgid "Menu item icon size"
 msgstr "菜单项图标大小"
 
 #: settings-schema.json
-msgid "Hide built-in items in grid mode"
-msgstr "网格模式下隐藏内置菜单项"
+msgid "Built-in Menu Items"
+msgstr "内置菜单项"
+
+#: settings-schema.json
+msgid "Hide built-in menu items"
+msgstr "隐藏内置菜单项"
 
 #: .settings:quit_label/description
 msgid "Shutdown"

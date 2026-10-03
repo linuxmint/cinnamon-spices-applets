@@ -1,6 +1,6 @@
 // name： ShutdownMenu-change
 // description： Offers a shutdown menu with scroll workspace switching, middle-click actions, custom menu items, grid layout, and scene presets — unlocking more ways to play.
-// version: 1.5.4 (17-09-2026)
+// version: 1.5.3 (17-09-2026)
 // License: GPLv3
 // Copyright © 2026 yoo
 
@@ -125,6 +125,10 @@ MyApplet.prototype = {
             this._panelIconSizeCache = 0;
             // 当前激活的场景名称，用于胶囊高亮
             this._activeSceneName = null;
+            // 隐藏桌面图标前记住的 desktop-layout，恢复显示时用
+            this._savedDesktopLayout = null;
+            // 自定义项末尾分隔线的 actor（菜单末尾时隐藏）
+            this._trailingCustomSep = null;
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -712,57 +716,37 @@ MyApplet.prototype = {
     // ============================================================
 
     // 构建主菜单
-    // 结构： [胶囊导航栏] [自定义项 section] [分隔线] [内置项]
+    // 结构： [胶囊导航栏] [间距] [自定义项 section] [分隔线] [内置项 section] [分隔线]
     // 自定义项可在内置项之上或之下，由 custom_position 决定
-    // _customSection 存储引用，供 _updateCustomItems 局部重建
+    // section 存储引用，供 _updateMenuSections 局部重建
     createMenu: function() {
         if (!this.menu) return;
         this.menu.removeAll();
         // 菜单宽度始终大于胶囊，留出边距
         this.menu.actor.set_style('min-width: 320px;');
 
-        let hasCustom = this.custom_items && this.custom_items.some(
-            item => item && item.name && item.pinned !== false &&
-            (item.name === SEPARATOR_ROW_NAME ? !item.command : item.command)
-        );
-        let hideBuiltin = this.custom_grid_mode && this.custom_grid_hide_builtin;
-        let hasBuiltin = !hideBuiltin &&
-            (this.quit_enable || this.log_out_enable || this.screen_lock_enable);
-        let customAbove = (this.custom_position === 0);
-
         // 胶囊导航栏：始终在自定义项上方
         this._addSceneNavBar();
 
-        // 胶囊与自定义项之间的间距
-        if (this.scene_nav_count > 0 && (hasCustom || !hideBuiltin)) {
-            let spacer = new PopupMenu.PopupBaseMenuItem({ reactive: false });
-            spacer.actor.set_style('min-height: 4px; padding: 0;');
-            this.menu.addMenuItem(spacer);
-        }
+        // 胶囊与自定义项之间的间距（场景切换时仅显隐，不重建）
+        this._capsuleSpacer = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        this._capsuleSpacer.actor.set_style('min-height: 4px; padding: 0;');
+        this.menu.addMenuItem(this._capsuleSpacer);
 
-        // 创建自定义项 section（供局部重建）
+        // 自定义项 / 内置项 section（场景切换时局部重建，保持菜单打开）
         this._customSection = new PopupMenu.PopupMenuSection();
+        this._builtinSection = new PopupMenu.PopupMenuSection();
+        this.menu.addMenuItem(this._customSection);
+        this.menu.addMenuItem(this._builtinSection);
 
-        if (hasCustom && customAbove) {
-            this._addCustomItems(this._customSection);
-            this.menu.addMenuItem(this._customSection);
-            this._addSeparatorIf(this.show_custom_separator && hasBuiltin);
-        }
+        // 组间分隔线：用普通菜单项包裹，避免 Cinnamon 自动隐藏逻辑接管显隐
+        // 直接挂到 menu.box，不走 addMenuItem；顺序由 _updateMenuSections 维护
+        this._groupSepAbove = this._newSeparatorItem();
+        this._groupSepBelow = this._newSeparatorItem();
+        this.menu.box.add_child(this._groupSepAbove.actor);
+        this.menu.box.add_child(this._groupSepBelow.actor);
 
-        if (!hideBuiltin) {
-            this._addBuiltinItems();
-        }
-
-        if (hasCustom && !customAbove) {
-            this._addSeparatorIf(this.show_custom_separator && hasBuiltin);
-            this.menu.addMenuItem(this._customSection);
-            this._addCustomItems(this._customSection);
-        }
-
-        // 没有自定义项时也要加入（保持引用有效）
-        if (!hasCustom) {
-            this.menu.addMenuItem(this._customSection);
-        }
+        this._updateMenuSections();
     },
 
     _addSeparatorIf: function(condition, parent) {
@@ -771,20 +755,37 @@ MyApplet.prototype = {
         }
     },
 
-    _addBuiltinItems: function() {
+    // 自定义分隔线：把分隔线绘制区装进普通菜单项
+    // 不用 PopupSeparatorMenuItem：Cinnamon 会自动隐藏 section 首尾的分隔线
+    // 包裹层去内边距：线宽与原生分隔线一致
+    _newSeparatorItem: function() {
+        let holder = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        holder._isCustomSeparator = true;
+        holder.actor.set_style('padding: 0;');
+        let sep = new PopupMenu.PopupSeparatorMenuItem();
+        holder.addActor(sep.actor, { span: -1, expand: true });
+        return holder;
+    },
+
+    _addBuiltinItems: function(parent) {
         if (this.quit_enable) {
-            this._createMenuItem(_("Quit"), this.quit_icon, this.quit_cmd);
-            this._addSeparatorIf(this.show_separator);
+            this._createMenuItem(_("Quit"), this.quit_icon, this.quit_cmd, parent);
+            // 末尾不留线：只有后面还有内置项时才加分隔线
+            if (this.log_out_enable || this.screen_lock_enable) {
+                this._addSeparatorIf(this.show_separator, parent);
+            }
         }
         if (this.log_out_enable) {
-            this._createMenuItem(_("Log out"), this.log_out_icon, this.log_out_cmd);
+            this._createMenuItem(_("Log out"), this.log_out_icon, this.log_out_cmd, parent);
         }
         if (this.screen_lock_enable) {
-            this._createMenuItem(_("Screen Lock"), this.screen_lock_icon, this.screen_lock_cmd);
+            this._createMenuItem(_("Screen Lock"), this.screen_lock_icon, this.screen_lock_cmd, parent);
         }
     },
 
     _addCustomItems: function(parent) {
+        // 重置末尾分隔线追踪（各模式重建时更新）
+        this._trailingCustomSep = null;
         if (this.custom_grid_mode) {
             this._addCustomItemsGrid(parent);
         } else {
@@ -792,10 +793,9 @@ MyApplet.prototype = {
         }
     },
 
-    // 局部重建自定义项 section，不重建整个菜单
-    // 用于场景切换时保持菜单打开状态
-    _updateCustomItems: function() {
-        if (!this._customSection) return;
+    // 场景切换时局部重建菜单分区（自定义项 + 内置项 + 组间分隔线），保持菜单打开
+    _updateMenuSections: function() {
+        if (!this.menu || !this._customSection || !this._builtinSection) return;
 
         // 临时禁用菜单关闭：销毁子元素触发的 leave-event 会导致菜单收起
         // 覆盖 close 方法为空操作，重建后恢复
@@ -803,14 +803,99 @@ MyApplet.prototype = {
         this.menu.close = function() {};
 
         try {
-            // 清除 section 内所有子 actor
-            let children = this._customSection.actor.get_children();
-            for (let i = children.length - 1; i >= 0; i--) {
-                children[i].destroy();
+            let hasCustom = this.custom_items && this.custom_items.some(
+                item => item && item.name && item.pinned !== false &&
+                (item.name === SEPARATOR_ROW_NAME ? !item.command : item.command)
+            );
+            let hideBuiltin = this.custom_grid_hide_builtin;
+            let hasBuiltin = !hideBuiltin &&
+                (this.quit_enable || this.log_out_enable || this.screen_lock_enable);
+            let customAbove = (this.custom_position === 0);
+            let showSep = this.show_custom_separator && hasBuiltin;
+
+            // 重建两 section 内容
+            this._rebuildSection(this._customSection,
+                () => this._addCustomItems(this._customSection));
+            this._rebuildSection(this._builtinSection,
+                () => this._addBuiltinItems(this._builtinSection));
+
+            // 按自定义项位置重排（直接操作 box，不动 Length 和已连接信号）
+            // 注意：add_child 会把隐藏的 actor 重新显示，所以显隐必须在重排之后设置
+            let box = this.menu.box;
+            let actors = [
+                this._customSection.actor,
+                this._groupSepAbove.actor,
+                this._builtinSection.actor,
+                this._groupSepBelow.actor
+            ];
+            actors.forEach(a => { try { box.remove_child(a); } catch (e) {} });
+            let order = customAbove ? actors : [
+                this._builtinSection.actor,
+                this._groupSepBelow.actor,
+                this._customSection.actor,
+                this._groupSepAbove.actor
+            ];
+            order.forEach(a => { try { box.add_child(a); } catch (e) {} });
+
+            // 显隐（必须在重排之后：add_child 会重置 visible）
+            this._builtinSection.actor.visible = hasBuiltin;
+            this._groupSepAbove.actor.visible = !!(customAbove && hasCustom && showSep);
+            this._groupSepBelow.actor.visible = !!(!customAbove && hasCustom && showSep);
+
+            // 菜单末尾如果是分隔线则不显示
+            this._hideTrailingSeparator();
+
+            // 胶囊下间距
+            if (this._capsuleSpacer) {
+                this._capsuleSpacer.actor.visible =
+                    this.scene_nav_count > 0 && (hasCustom || !hideBuiltin);
             }
-            this._addCustomItems(this._customSection);
         } finally {
             this.menu.close = savedClose;
+        }
+    },
+
+    // 清空 section 内容并重填
+    _rebuildSection: function(section, fillFn) {
+        let children = section.actor.get_children();
+        for (let i = children.length - 1; i >= 0; i--) {
+            children[i].destroy();
+        }
+        fillFn();
+    },
+
+    // 整个菜单最下方一项如果是分隔线则隐藏
+    _hideTrailingSeparator: function() {
+        let kids = [];
+        try {
+            kids = this.menu.box.get_children();
+        } catch (e) {
+            return;
+        }
+        let last = null;
+        for (let i = kids.length - 1; i >= 0; i--) {
+            try {
+                if (kids[i].visible) {
+                    last = kids[i];
+                    break;
+                }
+            } catch (e) {}
+        }
+        if (!last) return;
+        let dlg = null;
+        try {
+            dlg = last._delegate;
+        } catch (e) {}
+        // 组分隔线 holder 兜底（正常不会出现在末尾）
+        if (dlg && dlg._isCustomSeparator) {
+            last.visible = false;
+            return;
+        }
+        // 自定义区在末尾且以分隔线结尾：隐藏该分隔线
+        if (last === this._customSection.actor && this._trailingCustomSep) {
+            try {
+                this._trailingCustomSep.visible = false;
+            } catch (e) {}
         }
     },
 
@@ -819,9 +904,11 @@ MyApplet.prototype = {
     // ============================================================
 
     // 将 actor 包装进 ScrollView，统一滚动条事件处理
+    // overlay-scrollbars：滚动条悬浮于内容上层，不占位，静止时自动隐藏
     _wrapInScrollView: function(actor, maxHeight) {
         let scrollView = new St.ScrollView({
-            style_class: 'vfade menu-applications-scrollbox'
+            style_class: 'vfade menu-applications-scrollbox',
+            overlay_scrollbars: true
         });
         scrollView.add_actor(actor);
         scrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
@@ -855,7 +942,7 @@ MyApplet.prototype = {
 
     // 普通列表：标准菜单项，支持键盘导航
     // 用 PopupMenuSection 包裹所有项，与网格模式一致
-    // _updateCustomItems 销毁 section.actor 时一次性销毁，不触发逐个 mouse-leave
+    // _updateMenuSections 销毁 section.actor 时一次性销毁，不触发逐个 mouse-leave
     _addCustomItemsListPlain: function(items, parent) {
         let section = new PopupMenu.PopupMenuSection();
 
@@ -867,18 +954,22 @@ MyApplet.prototype = {
             if (item.pinned === false) return;
 
             if (item.name === SEPARATOR_ROW_NAME && !item.command) {
-                this._addSeparatorIf(true, innerSection);
+                let holder = this._newSeparatorItem();
+                innerSection.addMenuItem(holder);
+                this._trailingCustomSep = holder.actor;
                 return;
             }
 
             if (item.command) {
                 this._createMenuItem(item.name, item.icon || DEFAULT_CUSTOM_ICON, item.command, innerSection);
+                this._trailingCustomSep = null;
             }
         });
 
-        // 应用自定义项最大高度：包 ScrollView
+        // 应用自定义项最大高度：仅在开启滚动时包 ScrollView
         let maxHeight = parseInt(this.custom_list_max_height, 10);
-        if (!isNaN(maxHeight) && maxHeight > 100) {
+        let enableScroll = this.custom_list_scroll_enable !== false;
+        if (enableScroll && !isNaN(maxHeight) && maxHeight > 100) {
             let scrollView = this._wrapInScrollView(innerSection.actor, maxHeight);
             section.actor.add_actor(scrollView);
         } else {
@@ -904,11 +995,9 @@ MyApplet.prototype = {
             items.forEach(item => {
                 // 分隔线
                 if (item.name === SEPARATOR_ROW_NAME && !item.command) {
-                    let sep = new St.Widget({
-                        style_class: 'popup-separator-menu-item',
-                        x_expand: true
-                    });
-                    innerBox.add(sep, { x_fill: true });
+                    let holder = this._newSeparatorItem();
+                    innerBox.add(holder.actor, { x_fill: true });
+                    this._trailingCustomSep = holder.actor;
                     return;
                 }
                 if (!item.command) return;
@@ -970,6 +1059,7 @@ MyApplet.prototype = {
 
                 // x_fill: true 让按钮撑满 innerBox 的整行宽度，左对齐
                 innerBox.add(button, { x_fill: true });
+                this._trailingCustomSep = null;
             });
 
             // ScrollView 包装
@@ -1196,14 +1286,35 @@ MyApplet.prototype = {
         if (fn) fn();
     },
 
-    // 通过 gsettings 切换 Nemo 桌面图标显示
+    // 通过 desktop-layout 切换桌面图标显示（保留右键菜单）
+    // 不用 show-desktop-icons：它会让 nemo-desktop 退出，连右键菜单一起消失
     _toggleDesktopIcons: function() {
         try {
-            let nemoSettings = new Gio.Settings({ schema_id: 'org.nemo.desktop' });
-            let current = nemoSettings.get_boolean('show-desktop-icons');
-            nemoSettings.set_boolean('show-desktop-icons', !current);
+            let nemoSettings = new Gio.Settings({ schema_id: "org.nemo.desktop" });
+            // 兼容之前版本把 show-desktop-icons 设成 false 的用户，先恢复桌面接管
+            try {
+                if (!nemoSettings.get_boolean("show-desktop-icons")) {
+                    nemoSettings.set_boolean("show-desktop-icons", true);
+                }
+            } catch (e) {}
+            let current = nemoSettings.get_string("desktop-layout");
+            let showing = (current === "false::false");
+            if (showing) {
+                let restore = this._savedDesktopLayout;
+                if (!restore || restore === "false::false") {
+                    restore = "true::false";
+                }
+                nemoSettings.set_string("desktop-layout", restore);
+                // nemo-desktop 可能已退出，尝试拉起；已在运行时它会自行退出，不影响
+                try {
+                    Util.spawnCommandLine("nemo-desktop");
+                } catch (e) {}
+            } else {
+                this._savedDesktopLayout = current;
+                nemoSettings.set_string("desktop-layout", "false::false");
+            }
         } catch (e) {
-            global.log('ShutdownMenu-change: failed to toggle desktop icons: ' + e.message);
+            global.log("ShutdownMenu-change: failed to toggle desktop icons: " + e.message);
         }
     },
 
@@ -1406,8 +1517,8 @@ MyApplet.prototype = {
             try {
                 this.settings.setValue('_active_scene_name', preset.name || '');
             } catch (e) {}
-            // 局部更新自定义项，不重建整个菜单，保持菜单打开
-            this._updateCustomItems();
+            // 局部更新菜单分区（自定义项 + 内置项），不重建整个菜单，保持菜单打开
+            this._updateMenuSections();
             // 显式刷新胶囊高亮（callback 可能有异步延迟，这里兜底）
             if (this._segScenes) {
                 this._updateCapsuleHighlight(this._segScenes);
