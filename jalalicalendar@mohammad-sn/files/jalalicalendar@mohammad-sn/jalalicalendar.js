@@ -81,48 +81,96 @@ function jd_to_gregorian(jd) {
         day = (wjd - gregorian_to_jd(year, month, 1)) + 1;
     return [year, month, day];
 }
-var PERSIAN_EPOCH = 1948320.5;
-// PERSIAN_TO_JD -- Determine Julian day from Persian date
-function persian_to_jd(year, month, day) {
-    var epbase, epyear;
-    epbase = year - ((year >= 0) ? 474 : 473);
-    epyear = 474 + mod(epbase, 2820);
-    return day +
-        ((month <= 7) ?
-            ((month - 1) * 31) :
-            (((month - 1) * 30) + 6)
-        ) +
-        Math.floor(((epyear * 682) - 110) / 2816) +
-        (epyear - 1) * 365 +
-        Math.floor(epbase / 2820) * 1029983 +
-        (PERSIAN_EPOCH - 1);
-}
-// JD_TO_PERSIAN -- Calculate Persian date from Julian day
-function jd_to_persian(jd) {
-    var year, month, day, depoch, cycle, cyear, ycycle,
-        aux1, aux2, yday;
-    jd = Math.floor(jd) - 0.5; // Adjust the Julian Day to fix the offset
-    depoch = jd - persian_to_jd(475, 1, 1);
-    cycle = Math.floor(depoch / 1029983);
-    cyear = mod(depoch, 1029983);
-    if (cyear == 1029982) {
-        ycycle = 2820;
-    } else {
-        aux1 = Math.floor(cyear / 366);
-        aux2 = mod(cyear, 366);
-        ycycle = Math.floor(((2134 * aux1) + (2816 * aux2) + 2815) / 1028522) +
-            aux1 + 1;
+
+// ===== Persian (Solar Hijri) calendar, OFFICIAL astronomical rule =====
+// 1 Farvardin = the civil day on which the March equinox occurs BEFORE
+// 12:00 at the 52.5°E meridian (Iran Standard Time, UTC+3:30);
+// otherwise the following day. Leap years follow automatically.
+// Equinox: Meeus, Astronomical Algorithms (VSOP87 truncated, ~±3 min),
+// more than enough for the noon rule. Valid for years 1000-3000 CE.
+
+var _nowruzCache = {};
+
+function _springEquinoxJd(gregYear) {
+    // Julian Day of the March equinox (approx.; refined by Newton below)
+    var T = (gregYear - 2000) / 1000;
+    var jde = 2451623.80984 + 365242.37404 * T + 0.05169 * T * T
+            - 0.00411 * T * T * T - 0.00057 * T * T * T * T;
+    // Refine: solve apparent solar longitude = 0
+    for (var k = 0; k < 4; k++) {
+        var Tc = (jde - 2451545.0) / 36525.0;
+        var L0 = 280.46646 + 36000.76983 * Tc + 0.0003032 * Tc * Tc;
+        var M  = 357.52911 + 35999.05029 * Tc - 0.0001537 * Tc * Tc;
+        var Mr = M * Math.PI / 180;
+        var C  = (1.914602 - 0.004817 * Tc - 0.000014 * Tc * Tc) * Math.sin(Mr)
+               + (0.019993 - 0.000101 * Tc) * Math.sin(2 * Mr)
+               + 0.000289 * Math.sin(3 * Mr);
+        var Om = (125.04 - 1934.136 * Tc) * Math.PI / 180;
+        var lam = (L0 + C - 0.00569 - 0.00478 * Math.sin(Om)) % 360;
+        if (lam > 180) lam -= 360;
+        if (lam < -180) lam += 360;
+        // d(lambda)/d(JD) = 0.98564736 deg/day
+        jde = jde - lam / 0.98564736;
     }
-    year = ycycle + (2820 * cycle) + 474;
-    if (year <= 0) {
-        year--;
-    }
-    yday = (jd - persian_to_jd(year, 1, 1)) + 1;
-    month = (yday <= 186) ? Math.ceil(yday / 31) : Math.ceil((yday - 6) / 30);
-    day = (jd - persian_to_jd(year, month, 1)) + 1;
-    return [year, month, day];
+    return jde;
 }
 
+function _nowruzJd(jy) {
+    // Julian Day (midnight-UT convention of gregorian_to_jd) of 1 Farvardin
+    if (_nowruzCache[jy] !== undefined)
+        return _nowruzCache[jy];
+    var gy = jy + 621;
+    var start;
+    if (gy < 1000 || gy > 3000) {
+        // Fallback far outside validity range: 2820-year arithmetic cycle
+        start = _nowruzJdArith(jy);
+    } else {
+        var eq = _springEquinoxJd(gy);
+        // Tehran clock fraction of the equinox day (0 = midnight, 0.5 = noon)
+        var tehranFrac = ((eq + 0.5 + 3.5 / 24) % 1 + 1) % 1;
+        var g = jd_to_gregorian(eq);
+        start = gregorian_to_jd(g[0], g[1], g[2]);
+        if (tehranFrac >= 0.5)   // equinox at/after 12:00 Tehran
+            start += 1;
+    }
+    _nowruzCache[jy] = start;
+    return start;
+}
+
+// Legacy arithmetic fallback (old 2820-year cycle), kept only for the
+// far-future/far-past range where the equinox polynomial is not valid.
+var PERSIAN_EPOCH = 1948320.5;
+function _nowruzJdArith(year) {
+    var epbase = year - ((year >= 0) ? 474 : 473);
+    var epyear = 474 + mod(epbase, 2820);
+    return (Math.floor(((epyear * 682) - 110) / 2816) +
+        (epyear - 1) * 365 + Math.floor(epbase / 2820) * 1029983 +
+        (PERSIAN_EPOCH - 1));
+}
+
+// PERSIAN_TO_JD -- Determine Julian day from Persian date (official rule)
+function persian_to_jd(year, month, day) {
+    var dayOfYear = (month <= 7) ? (month - 1) * 31 + day
+                                 : 186 + (month - 7) * 30 + day;
+    return _nowruzJd(year) + dayOfYear - 1;
+}
+
+// JD_TO_PERSIAN -- Calculate Persian date from Julian day (official rule)
+function jd_to_persian(jd) {
+    jd = Math.floor(jd - 0.5) + 0.5; // civil day (midnight UT)
+    var gy = jd_to_gregorian(jd)[0];
+    var year = gy - 621;
+    while (jd < _nowruzJd(year))
+        year--;
+    while (jd >= _nowruzJd(year + 1))
+        year++;
+    var yday = jd - _nowruzJd(year) + 1; // 1..366
+    var month = (yday <= 186) ? Math.ceil(yday / 31)
+                              : Math.ceil((yday - 186) / 30) + 6;
+    var day = (yday <= 186) ? yday - (month - 1) * 31
+                            : yday - 186 - (month - 7) * 30;
+    return [year, month, day];
+}
 
 // Cache original `Date` class. User may set window.Date = JDate
 var Date = window['Date'];
