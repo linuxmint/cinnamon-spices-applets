@@ -17,7 +17,7 @@ const Settings = imports.ui.settings;
 const UUID = 'sshconnect@foobar-beer';
 const AppletDir = imports.ui.appletManager.appletMeta[UUID].path;
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale')
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
   return Gettext.dgettext(UUID, str);
@@ -25,7 +25,7 @@ function _(str) {
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
   this._init(metadata, orientation, panel_height, instance_id);
-};
+}
 
 MyApplet.prototype = {
   __proto__: Applet.IconApplet.prototype,
@@ -73,7 +73,7 @@ MyApplet.prototype = {
         let label = entry.name;
         let item = new PopupMenu.PopupMenuItem(label);
         item.connect('activate', function() {
-          this.menu.close();
+          this.menu.close(false);
           this.connectTo(label, entry.host, entry.flags, entry.profile);
         }.bind(this));
         subMenu.menu.addMenuItem(item);
@@ -83,18 +83,40 @@ MyApplet.prototype = {
   },
 
   connectTo: function(name, host, flags, profile) {
-    let terminal = this.settings.getValue('terminal-exec');
+    let terminal = (this.settings.getValue('terminal-exec') || 'gnome-terminal').trim();
 
     let setTitle = this.settings.getValue('customize-title');
-    let addTitle = setTitle ? ' ' + this.settings.getValue('title-flag') + '"' + name + '"' : '';
+    let titleFlag = (this.settings.getValue('title-flag') || '-t').trim();
 
     let setProfile = this.settings.getValue('customize-profile');
-    let addProfile = (setProfile && profile !== undefined && profile !== '' ? ' ' + this.settings.getValue('profile-flag') + '"' + profile + '"' : '');
+    let profileFlag = (this.settings.getValue('profile-flag') || '--profile=').trim();
 
-    let addFlag = (flags !== undefined && flags !== '' ? flags : '');
-    let addExecStr = ' ' + this.settings.getValue('exec-flag') + '"ssh ' + addFlag + ' ' + host + '"';
-    
-    Main.Util.spawnCommandLine(terminal + addTitle + addProfile + addExecStr);
+    let execFlag = (this.settings.getValue('exec-flag') || '').trim();
+
+    let sshCmd = 'ssh';
+    if (flags && flags.trim() !== '') {
+      sshCmd += ' ' + flags.trim();
+    }
+    if (host && host.trim() !== '') {
+      sshCmd += ' ' + host.trim();
+    }
+
+    let cmd = terminal;
+    if (setTitle && titleFlag !== '') {
+      cmd += ' ' + titleFlag + ' "' + name.replace(/"/g, '\"') + '"';
+    }
+    if (setProfile && profile && profile.trim() !== '' && profileFlag !== '') {
+      cmd += ' ' + profileFlag + '"' + profile.replace(/"/g, '\"') + '"';
+    }
+
+    if (execFlag !== '') {
+      cmd += ' ' + execFlag + ' ' + sshCmd;
+    } else {
+      cmd += ' -- ' + sshCmd;
+    }
+
+    global.log('SSH Connect launching command: ' + cmd);
+    GLib.spawn_command_line_async(cmd);
 
     let notification = new MessageTray.Notification(this.msgSource, 'SSH Connect', _('Connection opened for ') + name);
     notification.setTransient(true);
