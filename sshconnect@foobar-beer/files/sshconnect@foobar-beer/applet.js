@@ -72,7 +72,10 @@ MyApplet.prototype = {
       groups[group].forEach(function(entry) {
         let label = entry.name;
         let item = new PopupMenu.PopupMenuItem(label);
-        item.connect('activate', function() { this.connectTo(label, entry.host, entry.flags, entry.profile); }.bind(this));
+        item.connect('activate', function() {
+          this.menu.close();
+          this.connectTo(label, entry.host, entry.flags, entry.profile);
+        }.bind(this));
         subMenu.menu.addMenuItem(item);
       }.bind(this));
       this.menu.addMenuItem(subMenu);
