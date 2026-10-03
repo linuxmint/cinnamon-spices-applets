@@ -280,8 +280,7 @@ MyApplet.prototype = {
             let themeFile = Gio.File.new_for_path(C.THEMES_CACHE_FILE);
             if (!themeFile.query_exists(null)) {
                 // 缓存缺失（如首次安装/手动清过）：当场扫一次再继续，
-                // 否则六个主题下拉永远停在 schema 静态值（深色项只有 None）。
-                // 只缺失时跑，平时不增加启动开销。
+                // 否则主题下拉永远停在 schema 静态值。只缺失时跑，平时不增加启动开销。
                 try {
                     GLib.spawn_sync(null,
                         ['python3', this._appletMetadata.path + '/scripts/scan_themes.py'],
@@ -349,6 +348,12 @@ MyApplet.prototype = {
                         schema[key].options = opts;
                         changed = true;
                     }
+                    // 只改 schema 文件不够：对话框读的是实例 json 里的 options，
+                    // 运行态 settingsData 也是初始化时定的，不调 setOptions 的话
+                    // 两边都要等重载（初始化 md5 升级）才生效
+                    try {
+                        if (this._settings) this._settings.setOptions(key, opts);
+                    } catch (e2) {}
                 }
             }
             if (!changed) return;
@@ -1208,8 +1213,7 @@ MyApplet.prototype = {
     _openSettings: function() {
         this._ignoreClose = false;
         try {
-            // 同步扫描主题列表：实测约 20ms，用户无感知；扫完再开设置，保证下拉项最新。
-            // argv 形式：applet 路径含空格也不会被 shell 切碎。
+            // 齿轮按钮：同步扫一次再开系统设置（几十毫秒），保证进去看到的就是最新
             GLib.spawn_sync(null,
                 ['python3', this._appletMetadata.path + '/scripts/scan_themes.py'],
                 null, GLib.SpawnFlags.SEARCH_PATH, null);
@@ -1233,6 +1237,25 @@ MyApplet.prototype = {
 
     on_panel_height_changed: function() {
         this._applyPanelIcon();
+    },
+
+    // 右键→配置：唯一的主题刷新入口。先同步扫推 schema，再调父类打开对话框。
+    // 面板右键菜单是 Cinnamon 拼的"配置…"项，点它必经这里，不存在收不到通知的问题。
+    configureApplet: function(tab) {
+        if (typeof tab !== "number") tab = 0;
+        try {
+            GLib.spawn_sync(null,
+                ['python3', this._appletMetadata.path + '/scripts/scan_themes.py'],
+                null, GLib.SpawnFlags.SEARCH_PATH, null);
+            this._updateSettingsSchema();
+        } catch (e) {
+            global.logError("QS configure scan: " + e.message);
+        }
+        try {
+            Applet.Applet.prototype.configureApplet.call(this, tab);
+        } catch (e2) {
+            global.logError("QS configure open: " + e2.message);
+        }
     },
 
     on_applet_clicked: function() {

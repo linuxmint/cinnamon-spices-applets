@@ -1,6 +1,7 @@
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
 const Cvc = imports.gi.Cvc;
@@ -134,6 +135,8 @@ ContextMenu.prototype = {
     refresh: function() {
         let applet = this._applet;
         let self = this;
+        // 主题刷新只在点"配置…"时做（configureApplet 重写里同步扫），
+        // 右键菜单打开不再扫
         this.applyVisibility();
         this._refreshSound();
         this._refreshNetSwitches(); // 先用缓存画，不空等

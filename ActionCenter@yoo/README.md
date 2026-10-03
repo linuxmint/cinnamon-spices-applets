@@ -128,7 +128,7 @@
 ### 运行时依赖
 
 - **Cinnamon 5.4+**
-- **Python 3**（用于 MPRIS 守护进程和主题扫描）
+- **Python 3**（用于 MPRIS 守护进程）
 - **brightnessctl** 或 **ddcutil**（内屏优先系统 CSD 背光服务，免安装；三者皆无则亮度滑块自动隐藏；ddcutil 还需 `sudo usermod -aG i2c $USER` 并重登）
 - **nmcli** / NM D-Bus（网络连接管理与事件）
 - **bluez / rfkill**（蓝牙）、**power-profiles-daemon**（性能模式）、UPower D-Bus（电池，均为事件驱动）
@@ -277,7 +277,7 @@ Two modes available:
 ### Runtime Dependencies
 
 - **Cinnamon 5.4+**
-- **Python 3** (for MPRIS daemon and theme scanning)
+- **Python 3** (for MPRIS daemon)
 - **brightnessctl** or **ddcutil** (built-in display prefers the system CSD backlight service, nothing to install; slider auto-hides when nothing is available; ddcutil also needs `sudo usermod -aG i2c $USER` + relogin)
 - **nmcli** / NM D-Bus (network management and events)
 - **bluez / rfkill** (Bluetooth), **power-profiles-daemon** (performance mode), UPower D-Bus (battery, all event-driven)
