@@ -1,0 +1,180 @@
+{
+	"layout": {
+		"type" : "layout",
+        "pages": ["appearance-page", "saving-page", "export-page"],
+
+        "appearance-page": {
+        	"type" : "page",
+            "title": "Appearance",
+            "sections": ["appearance-section", "app-sort-section"]
+        },
+        
+        "saving-page": {
+        	"type" : "page",
+            "title": "Saving",
+            "sections": ["saving-section", "monthly-report-section"]
+        },
+		
+		"export-page": {
+        	"type" : "page",
+            "title": "Export",
+            "sections": ["export-section"]
+        },
+
+        "appearance-section": {
+        	"type" : "section",
+            "title": "Appearance",
+            "keys": ["apps-visible", "max-char-for-app-label", "enable-app-icons", "default-icon-name"]
+        },
+		
+		"app-sort-section": {
+        	"type" : "section",
+            "title": "Sorting apps",
+            "keys": ["sort-apps-by", "sort-order"]
+        },
+        
+        "saving-section": {
+        	"type" : "section",
+            "title": "Saving",
+            "keys": ["enable-saving", "save-interval", "save-path", "save-now-btn"]
+        },
+        
+        "monthly-report-section": {
+        	"type" : "section",
+            "title": "Monthly report (Work in progress)",
+            "keys": ["enable-monthly-report"]
+        },
+		
+		"export-section": {
+        	"type" : "section",
+            "title": "Exporting data",
+            "keys": ["enable-export-dbus", "show-export-buttons", "export-path"]
+        }
+    },
+	
+	"apps-visible": {
+		"type": "scale",
+		"default": 5,
+		"min": 3,
+		"max": 10,
+		"step": 1,
+		"description": "App count before overflowing",
+		"tooltip": "Set how many apps should fit within the menu's height before a slider shows up.",
+        "callback": "AppsVisibleCountChanged"
+	},
+	
+    "max-char-for-app-label": {
+		"type": "spinbutton",
+        "default": 30,
+        "min": 20,
+		"max": 60,
+		"step": 1,
+        "callback": "AppLabelCharCountChanged",
+        "description": "Max characters for app label",
+        "tooltip": "How many characters an app selection allows before cutting the word and adding \"...\" at the end."
+    },
+	
+	"enable-app-icons": {
+		"type": "switch",
+		"default": false,
+		"description": "Enable Icons",
+		"tooltip": "Enable's displaying icons of apps on far left inside the list."	
+	},
+	
+	"default-icon-name": {
+		"type": "entry",
+        "default": "application-x-executable",
+        "description": "Fallback icon (Work in progress)",
+        "tooltip": "Choose what icon appears whenever none is found."
+	},
+	
+	"sort-apps-by": {
+		"type": "combobox",
+		"default": "first-added",
+		"description": "Sort by",
+		"tooltip": "Choose by what attribute should apps be sorted in the popup menu",
+		"options": {
+			"First Added": "first-added",
+			"Name": "name",
+			"Time": "time"
+		}
+	},
+	
+	"sort-order": {
+		"type": "combobox",
+		"default": "desc",
+		"description": "Order by",
+		"tooltip": "Sets the sort order, if sorting is set to be by \"Name\" and order is \"Descending\" apps will be sorted alphabetically from A to Z.\nReverse happens when order is \"Ascending\" names are sorted from Z to A.",
+		"options": {
+			"Descending": false,
+			"Ascending": true
+		}
+	},
+	
+	"enable-saving": {
+		"type": "switch",
+		"default": false,
+		"description": "Allow Saving progress",
+		"tooltip": "Turning this on allow's the applet to save it's progress during the day."
+  	},
+  	
+  	"save-interval": {
+		"type": "spinbutton",
+		"dependency": "enable-saving",
+		"default": 1,
+		"min": 1,
+		"max": 10,
+		"step": 1,
+		"units": "Hours",
+		"description": "Save interval",
+		"tooltip": "The amount of time in hours between saving."
+	},
+	
+	"save-path": {
+        "type": "filechooser",
+        "dependency": "enable-saving",
+        "default": "~/",
+        "description": "Progress Save File",
+        "tooltip": "This file is used to save app time in case you - (the user) were to shutdown and turn on the device later during the same day. \nWhen \"None\" is set, a default path is used \n\nDefault path: \"home/username/.cache/DailyAppUsage/save.json\""
+    }, 
+	
+	"save-now-btn": {
+		"type": "button",
+		"description": "Save now",
+		"callback": "SaveBtnPressed"
+	},
+	
+	"enable-monthly-report": {
+		"type": "switch",
+		"default": false,
+		"description": "Allow monthly reports",
+		"tooltip": "Turning this will enable monthly reports. This will gather data throughout the month into a single spreadsheet"
+  	},
+	
+	"enable-export-dbus": {
+		"type": "switch",
+		"default": false,
+		"description": "Enable export DBus",
+		"tooltip": "When on runs a dbus interface in the background, allowing other apps to retrive app data."
+  	},
+	
+	"show-export-buttons": {
+		"type": "combobox",
+		"default": "opNone",
+		"description": "Export buttons used",
+		"tooltip": "Select which buttons will be exported",
+		"options": {
+			"None": "opNone",
+			"CSV": "opCSV",
+			"JSON": "opJSON",
+			"Both": "opBoth"
+		}
+	},
+	
+	"export-path": {
+        "type": "entry",
+        "default": "",
+        "description": "Export Directory",
+        "tooltip": "Directory in which export files will be created. files will be named {datetime}.{extension}"
+    }
+}
