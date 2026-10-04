@@ -1,0 +1,161 @@
+# EasyEffects Preset Selector
+# Copyright (C) 2026 random.kiapps
+# SPDX-License-Identifier: GPL-3.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: easy-effects-selector@random.kiapps 1.4.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-10-04 01:05+0000\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, javascript-format
+msgid "%s (no longer available)"
+msgstr ""
+
+msgid "Applet"
+msgstr ""
+
+#, javascript-format
+msgid "Autostart could not be changed: %s"
+msgstr ""
+
+#, javascript-format
+msgid "Comparison unavailable: %s"
+msgstr ""
+
+msgid "Default preset"
+msgstr ""
+
+#, javascript-format
+msgid "Default preset: %s"
+msgstr ""
+
+msgid "Easy Effects"
+msgstr ""
+
+msgid "EasyEffects Preset Selector"
+msgstr ""
+
+msgid "EasyEffects did not load the output preset. Please check the preset file."
+msgstr ""
+
+msgid "EasyEffects output preset"
+msgstr ""
+
+#, javascript-format
+msgid "EasyEffects output preset: %s"
+msgstr ""
+
+msgid "EasyEffects: loading preset…"
+msgstr ""
+
+msgid "Effect settings changed"
+msgstr ""
+
+msgid "Global bypass enabled"
+msgstr ""
+
+msgid "Incomplete structure in the default preset."
+msgstr ""
+
+msgid "Invalid effect name in the default preset."
+msgstr ""
+
+msgid "Invalid structure in the default preset."
+msgstr ""
+
+msgid "Launch Service at System Startup"
+msgstr ""
+
+msgid "No default preset"
+msgstr ""
+
+msgid "No output presets saved"
+msgstr ""
+
+#, javascript-format
+msgid "Preset “%s” could not be loaded.\n%s"
+msgstr ""
+
+msgid "Presets could not be read"
+msgstr ""
+
+msgid "Quit EasyEffects when its window closes. This setting is synchronized in both directions with the EasyEffects settings window."
+msgstr ""
+
+msgid "Select EasyEffects 7.2.3 output presets from the panel"
+msgstr ""
+
+msgid "Shutdown on Window Closing"
+msgstr ""
+
+msgid "Start EasyEffects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
+msgstr ""
+
+msgid "The Cinnamon applet settings could not be initialized."
+msgstr ""
+
+msgid "The EasyEffects autostart path is not a regular file."
+msgstr ""
+
+msgid "The EasyEffects command failed."
+msgstr ""
+
+#, javascript-format
+msgid "The EasyEffects effect parameter is missing: %s"
+msgstr ""
+
+msgid "The EasyEffects setting could not be saved."
+msgstr ""
+
+msgid "The EasyEffects setting is not available."
+msgstr ""
+
+#, javascript-format
+msgid "The EasyEffects settings schema is missing: %s"
+msgstr ""
+
+msgid "The EasyEffects settings schema was not found."
+msgstr ""
+
+msgid "The autostart directory could not be created."
+msgstr ""
+
+#, javascript-format
+msgid "The default preset cannot be read: %s"
+msgstr ""
+
+msgid "The default preset could not be read."
+msgstr ""
+
+msgid "The default preset does not contain a valid output effect list."
+msgstr ""
+
+#, javascript-format
+msgid "The effect configuration is missing from the default preset: %s"
+msgstr ""
+
+msgid "The effect parameter map could not be read."
+msgstr ""
+
+msgid "The original preset name could not be restored."
+msgstr ""
+
+msgid "The preset file was moved or deleted."
+msgstr ""
+
+#, javascript-format
+msgid "Unknown EasyEffects effect: %s"
+msgstr ""
+
+msgid "Use as the reference for the blue dot and as the last entry in the preset menu. Selecting a default does not load a preset."
+msgstr ""
+
+msgid "When a default preset is selected, a blue dot indicates that the current overall settings differ from the default preset. This setting does not load anything at startup."
+msgstr ""
+
+msgid "random.kiapps"
+msgstr ""

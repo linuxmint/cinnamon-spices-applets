@@ -1,0 +1,39 @@
+{
+    "settings-header": {
+        "type": "header",
+        "description": "Applet"
+    },
+    "default-preset": {
+        "type": "combobox",
+        "default": "",
+        "description": "Default preset",
+        "options": {
+            "No default preset": ""
+        },
+        "tooltip": "Use as the reference for the blue dot and as the last entry in the preset menu. Selecting a default does not load a preset."
+    },
+    "reference-note": {
+        "type": "label",
+        "description": "When a default preset is selected, a blue dot indicates that the current overall settings differ from the default preset. This setting does not load anything at startup."
+    },
+    "selection-tracker": {
+        "type": "generic",
+        "default": ""
+    },
+    "easy-effects-header": {
+        "type": "header",
+        "description": "Easy Effects"
+    },
+    "ee-autostart": {
+        "type": "switch",
+        "default": false,
+        "description": "Launch Service at System Startup",
+        "tooltip": "Start EasyEffects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
+    },
+    "ee-shutdown-on-window-close": {
+        "type": "switch",
+        "default": false,
+        "description": "Shutdown on Window Closing",
+        "tooltip": "Quit EasyEffects when its window closes. This setting is synchronized in both directions with the EasyEffects settings window."
+    }
+}
