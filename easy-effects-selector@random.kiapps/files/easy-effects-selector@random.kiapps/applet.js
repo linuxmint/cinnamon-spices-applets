@@ -5,6 +5,7 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const Settings = imports.ui.settings;
+const Util = imports.misc.util;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
@@ -28,6 +29,7 @@ const DEFAULT_PRESET_KEY = "default-preset";
 const SHUTDOWN_KEY = "shutdown-on-window-close";
 const AUTOSTART_OPTION = "ee-autostart";
 const SHUTDOWN_OPTION = "ee-shutdown-on-window-close";
+const LAUNCH_FROM_TITLE_OPTION = "launch-from-menu-title";
 const STATE_UPDATE_DELAY = 180;
 const SELECTION_TRACKER_KEY = "selection-tracker";
 const AUTOSTART_CONTENT = "[Desktop Entry]\nName=Easy Effects\nComment=Easy Effects Service\n" +
@@ -326,6 +328,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._shutdownAvailable = false;
         this._appletSettings = null;
         this._defaultPreset = "";
+        this._launchFromMenuTitle = false;
         this._appletPath = metadata.path;
         this._fileCancellable = new Gio.Cancellable();
         this._parameterMap = null;
@@ -408,6 +411,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             if (!this._appletSettings.isReady)
                 throw new Error(_("The Cinnamon applet settings could not be initialized."));
             this._appletSettings.bind(DEFAULT_PRESET_KEY, "_defaultPreset", this._onDefaultPresetChanged);
+            this._appletSettings.bind(LAUNCH_FROM_TITLE_OPTION, "_launchFromMenuTitle", this._onMenuTitleLaunchChanged);
             this._appletSettings.bind(AUTOSTART_OPTION, "_startService", this._onAutostartChanged);
             this._appletSettings.bind(SHUTDOWN_OPTION, "_shutdownOnClose", this._onShutdownChanged);
             this._restoreSelectionTracker();
@@ -669,6 +673,11 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             this._updateSelection();
     }
 
+    _onMenuTitleLaunchChanged() {
+        if (!this._removed && this.menu.isOpen)
+            this._populateMenu();
+    }
+
     configureApplet(tab = 0) {
         this._syncDefaultOptions();
         this._monitorPresetDirectory();
@@ -724,7 +733,10 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         const revision = ++this._menuRevision;
         this.menu.removeAll();
         this._presetItems = [];
-        this.menu.addMenuItem(new PopupMenu.PopupMenuItem("Easy Effects", {reactive: false}));
+        const titleItem = new PopupMenu.PopupMenuItem("Easy Effects", {reactive: this._launchFromMenuTitle});
+        if (this._launchFromMenuTitle)
+            titleItem.connect("activate", () => Util.spawn(["easyeffects"]));
+        this.menu.addMenuItem(titleItem);
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         try {
             const names = await this._readPresets();

@@ -16,6 +16,12 @@
         "type": "label",
         "description": "When a default preset is selected, a blue dot indicates that the current overall settings differ from the default preset. This setting does not load anything at startup."
     },
+    "launch-from-menu-title": {
+        "type": "switch",
+        "default": false,
+        "description": "Launch EasyEffects from the menu title",
+        "tooltip": "Make the Easy Effects menu title clickable to launch EasyEffects."
+    },
     "selection-tracker": {
         "type": "generic",
         "default": ""

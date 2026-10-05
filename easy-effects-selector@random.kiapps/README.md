@@ -38,6 +38,11 @@ Right-click the icon and choose **Configure** to select a default preset.
 Selecting a default only sets a reference: it does not load anything, including
 at applet startup. To return to the default, select it in the left-click menu.
 
+The optional **Launch EasyEffects from the menu title** switch makes the
+**Easy Effects** title at the top of that menu clickable. Clicking it runs
+`easyeffects`, using the application's normal startup behavior. This switch
+is off by default.
+
 With a default selected, the **blue dot** appears if the loaded output preset
 name is different, the stored output configuration differs, or global bypass is
 enabled. Agreement requires the same name, ordered effect list and instances,

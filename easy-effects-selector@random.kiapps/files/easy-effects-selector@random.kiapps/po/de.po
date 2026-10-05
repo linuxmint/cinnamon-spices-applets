@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 msgid ""
 msgstr ""
-"Project-Id-Version: easy-effects-selector@random.kiapps 1.4.1\n"
+"Project-Id-Version: easy-effects-selector@random.kiapps 1.4.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2026-10-04 01:05+0000\n"
-"PO-Revision-Date: 2026-10-04 01:05+0000\n"
+"POT-Creation-Date: 2026-10-05 18:55+0000\n"
+"PO-Revision-Date: 2026-10-05 18:55+0000\n"
 "Last-Translator: random.kiapps\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -71,8 +71,14 @@ msgstr "Ungültiger Effektname im Standardpreset."
 msgid "Invalid structure in the default preset."
 msgstr "Ungültige Struktur im Standardpreset."
 
+msgid "Launch EasyEffects from the menu title"
+msgstr "EasyEffects über die Titelzeile starten"
+
 msgid "Launch Service at System Startup"
 msgstr "Dienst beim Systemstart starten"
+
+msgid "Make the Easy Effects menu title clickable to launch EasyEffects."
+msgstr "Die Titelzeile „Easy Effects“ im Menü anklickbar machen, um EasyEffects zu starten."
 
 msgid "No default preset"
 msgstr "Kein Standardpreset"
