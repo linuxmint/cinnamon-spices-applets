@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "es2022",
+        "lib": [
+            "ES2022",
+            "DOM" // For `console` in tests
+        ],
+        "module": "es2022",
+        "moduleResolution": "bundler",
+        "moduleDetection": "force",
+        "noEmit": true,
+        "allowImportingTsExtensions": true,
+        "checkJs":true,
+        "strict": true,
+		"types": [
+			"@ci-types/cjs",
+            "@girs/gio-2.0",
+            "@girs/gjs",
+            "@girs/glib-2.0",
+		],
+    },
+    "include": [
+        "files/**/*.ts",
+        "files/**/*.js",
+    ],
+    "exclude": [
+        "files/**/mobx.js", // Has its own d.ts
+    ],
+}

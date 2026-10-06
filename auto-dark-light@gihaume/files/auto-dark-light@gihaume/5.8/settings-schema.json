@@ -1,290 +1,447 @@
 {
     "layout": {
         "type": "layout",
-        "pages": ["settings", "light-mode", "dark-mode"],
-        "settings": {
-            "type": "page",
-            "title": "Settings",
-            "sections": [
-                "settings_state",
-                "settings_control",
-                "settings_location"
-            ]
-        },
-        "light-mode": {
-            "type": "page",
-            "title": "Light mode",
-            "sections": [
-                "light-mode_themes",
-                "light-mode_others",
-                "light-mode_background",
-                "light-mode_commands"
-            ]
-        },
-        "dark-mode": {
-            "type": "page",
-            "title": "Dark mode",
-            "sections": [
-                "dark-mode_themes",
-                "dark-mode_others",
-                "dark-mode_background",
-                "dark-mode_commands"
-            ]
-        },
-
-        "settings_state": {
-            "type": "section",
-            "title": "State",
-            "keys": ["settings_state_switch_dark-mode"]
-        },
-        "settings_control": {
-            "type": "section",
-            "title": "Control",
-            "keys": ["settings_control_switch_auto-mode"]
-        },
-        "settings_location": {
-            "dependency": "settings_control_switch_auto-mode=true",
-            "type": "section",
-            "title": "Location",
-            "keys": [
-                "settings_location_switch_sync-from-timezone",
-                "settings_location_button_open-os-settings",
-                "settings_location_entry_latitude",
-                "settings_location_entry_longitude",
-                "settings_location_button_show-twilight-times"
-            ]
-        },
-        "light-mode_themes": {
-            "type": "section",
-            "title": "Themes",
-            "keys": [
-                "light-mode_themes_button_open-os-settings",
-                "light-mode_themes_button_detect",
-                "light-mode_themes_entry_mouse-pointer",
-                "light-mode_themes_entry_applications",
-                "light-mode_themes_entry_icons",
-                "light-mode_themes_entry_desktop",
-                "light-mode_themes_button_apply"
-            ]
-        },
-        "light-mode_others": {
-            "type": "section",
-            "title": "Others",
-            "keys": [
-                "both-modes_background_switch_enable",
-                "light-mode_commands_switch_enable"
-            ]
-        },
-        "light-mode_background": {
-            "dependency": "both-modes_background_switch_enable=true",
-            "type": "section",
-            "title": "Desktop background",
-            "keys": [
-                "light-mode_background_button_open-os-settings",
-                "light-mode_background_button_detect",
-                "light-mode_background_switch_slideshow",
-                "light-mode_background_filechooser_file",
-                "light-mode_background_filechooser_folder",
-                "light-mode_background_button_apply"
-            ]
-        },
-        "light-mode_commands": {
-            "dependency": "light-mode_commands_switch_enable=true",
-            "type": "section",
-            "title": "Custom commands",
-            "keys": [
-                "light-mode_commands_list",
-                "light-mode_commands_button_launch"
-            ]
-        },
-        "dark-mode_themes": {
-            "type": "section",
-            "title": "Themes",
-            "keys": [
-                "dark-mode_themes_button_open-os-settings",
-                "dark-mode_themes_button_detect",
-                "dark-mode_themes_entry_mouse-pointer",
-                "dark-mode_themes_entry_applications",
-                "dark-mode_themes_entry_icons",
-                "dark-mode_themes_entry_desktop",
-                "dark-mode_themes_button_apply"
-            ]
-        },
-        "dark-mode_others": {
-            "type": "section",
-            "title": "Others",
-            "keys": [
-                "both-modes_background_switch_enable",
-                "dark-mode_commands_switch_enable"
-            ]
-        },
-        "dark-mode_background": {
-            "dependency": "both-modes_background_switch_enable=true",
-            "type": "section",
-            "title": "Desktop background",
-            "keys": [
-                "dark-mode_background_button_open-os-settings",
-                "dark-mode_background_button_detect",
-                "dark-mode_background_switch_slideshow",
-                "dark-mode_background_filechooser_file",
-                "dark-mode_background_filechooser_folder",
-                "dark-mode_background_button_apply"
-            ]
-        },
-        "dark-mode_commands": {
-            "dependency": "dark-mode_commands_switch_enable=true",
-            "type": "section",
-            "title": "Custom commands",
-            "keys": [
-                "dark-mode_commands_list",
-                "dark-mode_commands_button_launch"
-            ]
-        }
+        "pages": ["general_page", "light_page", "dark_page"],
+            "general_page": {
+                "type": "page",
+                "title": "General",
+                "sections": [
+                    "appearance_section",
+                    "light_schedule_section",
+                    "dark_schedule_section",
+                    "location_section"
+                ]
+            },
+                "appearance_section": {
+                    "type": "section",
+                    "title": "Appearance",
+                    "keys": [
+                        "is_appearance_dark",
+                        "appearance_keybinding",
+                        "is_appearance_auto",
+                        "is_appearance_unsynced",
+                        "next_update"
+                    ]
+                },
+                "light_schedule_section": {
+                    "dependency": "is_appearance_auto=true",
+                    "type": "section",
+                    "title": "Sunrise",
+                    "keys": [
+                        "is_sunrise_auto",
+                        "manual_sunrise",
+                        "auto_sunrise_offset",
+                        "auto_sunrise"
+                    ]
+                },
+                "dark_schedule_section": {
+                    "dependency": "is_appearance_auto=true",
+                    "type": "section",
+                    "title": "Sunset",
+                    "keys": [
+                        "is_sunset_auto",
+                        "manual_sunset",
+                        "auto_sunset_offset",
+                        "auto_sunset"
+                    ]
+                },
+                "location_section": {
+                    "dependency": "is_appearance_auto=true",
+                    "type": "section",
+                    "title": "Location",
+                    "keys": [
+                        "is_location_auto",
+                        "open_os_location_settings",
+                        "system_timezone",
+                        "auto_latitude",
+                        "auto_longitude",
+                        "manual_latitude",
+                        "manual_longitude"
+                    ]
+                },
+            "light_page": {
+                "type": "page",
+                "title": "Light",
+                "sections": [
+                    "light_themes_section",
+                    "light_background_section",
+                    "light_commands_section"
+                ]
+            },
+                "light_themes_section": {
+                    "type": "section",
+                    "title": "Themes",
+                    "keys": [
+                        "light_themes_open_os_settings_button",
+                        "light_themes_detect_button",
+                        "light_themes_mouse",
+                        "light_themes_apps",
+                        "light_themes_icons",
+                        "light_themes_desktop",
+                        "light_themes_apply_button",
+                        "enable_background"
+                    ]
+                },
+                "light_background_section": {
+                    "dependency": "enable_background=true",
+                    "type": "section",
+                    "title": "Desktop background",
+                    "keys": [
+                        "light_background_open_os_settings_button",
+                        "light_background_detect_button",
+                        "light_background_is_slideshow",
+                        "light_background_file",
+                        "light_background_slideshow_folder",
+                        "light_background_apply_button"
+                    ]
+                },
+                "light_commands_section": {
+                    "type": "section",
+                    "title": "Custom commands",
+                    "keys": [
+                        "light_commands_is_enabled",
+                        "light_commands_list",
+                        "light_commands_launch_button"
+                    ]
+                },
+            "dark_page": {
+                "type": "page",
+                "title": "Dark",
+                "sections": [
+                    "dark_themes_section",
+                    "dark_background_section",
+                    "dark_commands_section"
+                ]
+            },
+                "dark_themes_section": {
+                    "type": "section",
+                    "title": "Themes",
+                    "keys": [
+                        "dark_themes_open_os_settings_button",
+                        "dark_themes_detect_button",
+                        "dark_themes_mouse",
+                        "dark_themes_apps",
+                        "dark_themes_icons",
+                        "dark_themes_desktop",
+                        "dark_themes_apply_button",
+                        "enable_background"
+                    ]
+                },
+                "dark_background_section": {
+                    "dependency": "enable_background=true",
+                    "type": "section",
+                    "title": "Desktop background",
+                    "keys": [
+                        "dark_background_open_os_settings_button",
+                        "dark_background_detect_button",
+                        "dark_background_is_slideshow",
+                        "dark_background_file",
+                        "dark_background_slideshow_folder",
+                        "dark_background_apply_button"
+                    ]
+                },
+                "dark_commands_section": {
+                    "type": "section",
+                    "title": "Custom commands",
+                    "keys": [
+                        "dark_commands_is_enabled",
+                        "dark_commands_list",
+                        "dark_commands_launch_button"
+                    ]
+                }
     },
-
-    "settings_control_switch_auto-mode": {
+    "is_appearance_dark": {
         "type": "switch",
         "default": false,
-        "description": "Automatically switch modes",
-        "tooltip": "Automatically switch between light and dark modes based on the location and time of day"
+        "description": "Light/dark",
+        "tooltip": "Current appearance"
     },
-    "settings_state_switch_dark-mode": {
-        "type": "switch",
-        "default": false,
-        "description": "Light/dark mode",
-        "tooltip": "Toggle light or dark mode manually"
+    "appearance_keybinding": {
+        "type": "keybinding",
+        "default": "",
+        "description": "Manual toggle shortcut",
+        "tooltip": "Keyboard shortcut to manually toggle between light and dark appearances"
     },
-    "settings_state_is-auto-mode-inverted": {
-        "type": "generic",
-        "default": false
-    },
-    "settings_location_switch_sync-from-timezone": {
+    "is_appearance_auto": {
         "type": "switch",
         "default": true,
-        "description": "Sync from the system",
+        "description": "Switch automatically",
+        "tooltip": "Automatically switch between light and dark appearances based on twilight times"
+    },
+    "is_appearance_unsynced": {
+        "dependency": "is_appearance_auto=true",
+        "type": "custom",
+        "file": "./widgets/Switch_read_only.py",
+        "widget": "Switch",
+        "default": false,
+        "description": "Unsynced with time and twilights",
+        "tooltip": "Whether the current appearance is unsynced regarding the current time and twilight times"
+    },
+    "next_update": {
+        "dependency": "is_appearance_auto=true",
+        "type": "custom",
+        "file": "./widgets/Button_read_only.py",
+        "widget": "Button",
+        "default": "00:00",
+        "description": "Next update",
+        "tooltip": "Next time (HH:MM) when the automatic appearance switch will be evaluated"
+    },
+
+    "is_sunrise_auto": {
+        "type": "switch",
+        "default": true,
+        "description": "Sync from location",
+        "tooltip": "Dynamically sync the schedule from the location"
+    },
+    "manual_sunrise": {
+        "dependency": "is_sunrise_auto!=true",
+        "type": "timechooser",
+        "default": {
+            "h": 6,
+            "m": 0,
+            "s": 0
+        },
+        "description": "Light appearance start time",
+        "tooltip": "Time (HH:MM(:SS)) when to switch to light appearance"
+    },
+    "auto_sunrise_offset": {
+        "dependency": "is_sunrise_auto=true",
+        "type": "spinbutton",
+        "min": -120,
+        "max": 120,
+        "step": 1,
+        "units": "minutes",
+        "default": 0,
+        "wrap": false,
+        "description": "Offset",
+        "tooltip": "Offset in minutes to be added to the time calculated from the location"
+    },
+    "auto_sunrise": {
+        "dependency": "is_sunrise_auto=true",
+        "type": "custom",
+        "file": "./widgets/Button_read_only.py",
+        "widget": "Button",
+        "default": "06:00",
+        "description": "Light appearance start time",
+        "tooltip": "Time (HH:MM) when to switch to light appearance"
+    },
+
+    "is_sunset_auto": {
+        "type": "switch",
+        "default": true,
+        "description": "Sync from location",
+        "tooltip": "Dynamically sync the schedule from location"
+    },
+    "manual_sunset": {
+        "dependency": "is_sunset_auto!=true",
+        "type": "timechooser",
+        "default": {
+            "h": 18,
+            "m": 0,
+            "s": 0
+        },
+        "description": "Dark appearance start time",
+        "tooltip": "Time (HH:MM(:SS)) when to switch to dark appearance"
+    },
+    "auto_sunset_offset": {
+        "dependency": "is_sunset_auto=true",
+        "type": "spinbutton",
+        "min": -120,
+        "max": 120,
+        "step": 1,
+        "units": "minutes",
+        "default": 0,
+        "wrap": false,
+        "description": "Offset",
+        "tooltip": "Offset in minutes to be added to the time calculated from the location"
+    },
+    "auto_sunset": {
+        "dependency": "is_sunset_auto=true",
+        "type": "custom",
+        "file": "./widgets/Button_read_only.py",
+        "widget": "Button",
+        "default": "18:00",
+        "description": "Dark appearance start time",
+        "tooltip": "Time (HH:MM) when to switch to dark appearance"
+    },
+
+    "is_location_auto": {
+        "type": "switch",
+        "default": true,
+        "description": "Sync from system",
         "tooltip": "Dynamically sync the location coordinates from the region and city defined in the system using a local database"
     },
-    "settings_location_button_open-os-settings": {
-        "dependency": "settings_location_switch_sync-from-timezone=true",
+    "open_os_location_settings": {
+        "dependency": "is_location_auto=true",
         "type": "button",
-        "callback": "on_button_open_os_date_time_settings",
+        "callback": "on_button_open_os_timezone_settings",
         "description": "Open the system settings",
         "tooltip": "Open the system's settings window to select the region and city for the time zone"
     },
-    "settings_location_entry_latitude": {
-        "dependency": "settings_location_switch_sync-from-timezone!=true",
-        "type": "entry",
-        "default": "0.0",
+    "system_timezone": {
+        "dependency": "is_location_auto=true",
+        "type": "custom",
+        "file": "./widgets/Entry_read_only.py",
+        "widget": "Entry",
+        "default": "",
+        "description": "System timezone",
+        "tooltip": "The current timezone (region/city) set in the system"
+    },
+    "auto_latitude": {
+        "dependency": "is_location_auto=true",
+        "type": "custom",
+        "file": "./widgets/Spin_button_read_only.py",
+        "widget": "Spin_button",
+        "min": -90,
+        "max": 90,
+        "step": 0.001,
+        "default": 0,
+        "wrap": true,
         "description": "Latitude",
-        "tooltip": "Geographical latitude in decimal degrees"
+        "tooltip": "Geographical latitude in decimal degrees (°N)"
     },
-    "settings_location_entry_longitude": {
-        "dependency": "settings_location_switch_sync-from-timezone!=true",
-        "type": "entry",
-        "default": "0.0",
+    "auto_longitude": {
+        "dependency": "is_location_auto=true",
+        "type": "custom",
+        "file": "./widgets/Spin_button_read_only.py",
+        "widget": "Spin_button",
+        "min": -180,
+        "max": 180,
+        "step": 0.001,
+        "default": 0,
+        "wrap": true,
         "description": "Longitude",
-        "tooltip": "Geographical longitude in decimal degrees"
+        "tooltip": "Geographical longitude in decimal degrees (°E)"
     },
-    "settings_location_button_show-twilight-times": {
-        "type": "button",
-        "callback": "on_button_show_start_times",
-        "description": "Show switch times in a notification",
-        "tooltip": "Show today's switch times for light and dark modes based on the current location via a system notification message"
+    "manual_latitude": {
+        "dependency": "is_location_auto!=true",
+        "type": "spinbutton",
+        "min": -90,
+        "max": 90,
+        "step": 0.001,
+        "default": 0,
+        "wrap": true,
+        "description": "Latitude",
+        "tooltip": "Geographical latitude in decimal degrees (°N)"
     },
-    "light-mode_themes_button_open-os-settings": {
+    "manual_longitude": {
+        "dependency": "is_location_auto!=true",
+        "type": "spinbutton",
+        "min": -180,
+        "max": 180,
+        "step": 0.001,
+        "default": 0,
+        "wrap": true,
+        "description": "Longitude",
+        "tooltip": "Geographical longitude in decimal degrees (°E)"
+    },
+
+
+    "light_themes_open_os_settings_button": {
         "type": "button",
         "callback": "on_button_open_os_themes_settings",
         "description": "Open the system settings",
         "tooltip": "Open the system's settings window to select the themes"
     },
-    "light-mode_themes_button_detect": {
+    "light_themes_detect_button": {
         "type": "button",
         "callback": "on_button_detect_themes_light",
         "description": "Detect from the system",
-        "tooltip": "Detect the system's themes currently set and assign them to the light mode"
+        "tooltip": "Detect the current system's themes settings and save them as presets"
     },
-    "light-mode_themes_entry_mouse-pointer": {
-        "type": "entry",
-        "default": "",
+    "light_themes_mouse": {
+        "type": "custom",
+        "file": "./widgets/Entry_read_only.py",
+        "widget": "Entry",
+        "default": "Bibata-Modern-Classic",
         "description": "Mouse pointer",
         "tooltip": "Name of the mouse pointer theme"
     },
-    "light-mode_themes_entry_applications": {
-        "type": "entry",
-        "default": "",
+    "light_themes_apps": {
+        "type": "custom",
+        "file": "./widgets/Entry_read_only.py",
+        "widget": "Entry",
+        "default": "Mint-Y-Aqua",
         "description": "Applications",
         "tooltip": "Name of the applications theme (GTK theme)"
     },
-    "light-mode_themes_entry_icons": {
-        "type": "entry",
-        "default": "",
+    "light_themes_icons": {
+        "type": "custom",
+        "file": "./widgets/Entry_read_only.py",
+        "widget": "Entry",
+        "default": "Mint-Y-Sand",
         "description": "Icons",
         "tooltip": "Name of the icons theme"
     },
-    "light-mode_themes_entry_desktop": {
-        "type": "entry",
-        "default": "",
+    "light_themes_desktop": {
+        "type": "custom",
+        "file": "./widgets/Entry_read_only.py",
+        "widget": "Entry",
+        "default": "Mint-Y-Aqua",
         "description": "Desktop",
         "tooltip": "Name of the desktop theme (Cinnamon theme)"
     },
-    "light-mode_themes_button_apply": {
+    "light_themes_apply_button": {
         "type": "button",
         "callback": "on_button_apply_themes_light",
         "description": "Test applying to the system",
-        "tooltip": "Apply the light mode themes to the system manually"
+        "tooltip": "Apply the themes presets to the system manually"
     },
-    "both-modes_background_switch_enable": {
+    "enable_background": {
         "type": "switch",
         "default": false,
-        "description": "Set desktop background",
-        "tooltip": "Enable setting the desktop backgrounds for light and dark modes"
+        "description": "Set desktop backgrounds",
+        "tooltip": "Enable desktop background settings as being part of the themes presets"
     },
-    "light-mode_commands_switch_enable": {
-        "type": "switch",
-        "default": false,
-        "description": "Launch custom commands",
-        "tooltip": "Enable setting commands to be launched when switching to light mode"
-    },
-    "light-mode_background_button_open-os-settings": {
+
+    "light_background_open_os_settings_button": {
         "type": "button",
         "callback": "on_button_open_os_background_settings",
         "description": "Open the system settings",
         "tooltip": "Open the system's settings window to set the background settings"
     },
-    "light-mode_background_button_detect": {
+    "light_background_detect_button": {
         "type": "button",
         "callback": "on_button_detect_background_light",
         "description": "Detect from the system",
-        "tooltip": "Detect the system's background settings currently set and assign them to the light mode"
+        "tooltip": "Detect the system's background settings currently set and save them as presets"
     },
-    "light-mode_background_switch_slideshow": {
+    "light_background_is_slideshow": {
         "type": "switch",
         "default": false,
         "description": "Slideshow",
         "tooltip": "Set the desktop background to be a slideshow"
     },
-    "light-mode_background_filechooser_file": {
-        "dependency": "light-mode_background_switch_slideshow!=true",
+    "light_background_file": {
+        "dependency": "light_background_is_slideshow!=true",
         "type": "filechooser",
         "default": "",
         "description": "Image file",
         "tooltip": "Image file to be set as the desktop background"
     },
-    "light-mode_background_filechooser_folder": {
-        "dependency": "light-mode_background_switch_slideshow=true",
+    "light_background_slideshow_folder": {
+        "dependency": "light_background_is_slideshow=true",
         "type": "filechooser",
         "select-dir": true,
         "default": "",
         "description": "Images folder",
         "tooltip": "Folder containing images to be set for the desktop background slideshow"
     },
-    "light-mode_background_button_apply": {
+    "light_background_apply_button": {
         "type": "button",
         "callback": "on_button_apply_background_light",
         "description": "Test applying to the system",
-        "tooltip": "Apply the light mode background settings to the system manually"
+        "tooltip": "Apply the desktop background presets to the system manually"
     },
-    "light-mode_commands_list": {
+
+    "light_commands_is_enabled": {
+        "type": "switch",
+        "default": false,
+        "description": "Launch custom commands",
+        "tooltip": "Enable setting commands to be launched when switching to this appearance"
+    },
+    "light_commands_list": {
+        "dependency": "light_commands_is_enabled=true",
         "type" : "list",
         "columns" : [
             {"id": "name", "title": "Name", "type": "string", "default": "unnamed"},
@@ -293,102 +450,115 @@
             {"id": "command", "title": "Command", "type": "string"}
         ],
         "default" : [],
-        "tooltip" : "List of commands to be executed when switching to this mode\n\nNotes:\n- the name's purpose is for error messages\n- the expiry time terminates the command's process early\n- an expiry of 0 second means never\n- a process refusing to terminate 10 seconds after the expiry is killed\n- the path is in the user's home directory (~/)\n- the error messages are displayed in a notification and reports stderr"
+        "tooltip" : "List of commands to be executed when switching to this appearance\n\nNotes:\n- the name's purpose is for error messages\n- the expiry time terminates the command's process early\n- an expiry of 0 second means never\n- a process refusing to terminate 10 seconds after the expiry is killed\n- the path is in the user's home directory (~/)\n- the error messages are displayed in a notification and reports stderr"
     },
-    "light-mode_commands_button_launch": {
+    "light_commands_launch_button": {
+        "dependency": "light_commands_is_enabled=true",
         "type": "button",
         "callback": "on_button_launch_commands_light",
         "description": "Test commands launch",
-        "tooltip": "Test launching the commands set for the light mode"
+        "tooltip": "Launch the commands manually"
     },
-    "dark-mode_themes_button_open-os-settings": {
+
+
+    "dark_themes_open_os_settings_button": {
         "type": "button",
         "callback": "on_button_open_os_themes_settings",
         "description": "Open the system settings",
         "tooltip": "Open the system's settings window to select the themes"
     },
-    "dark-mode_themes_button_detect": {
+    "dark_themes_detect_button": {
         "type": "button",
         "callback": "on_button_detect_themes_dark",
         "description": "Detect from the system",
-        "tooltip": "Detect the system's themes currently set and assign them to the dark mode"
+        "tooltip": "Detect the current system's themes settings and save them as presets"
     },
-    "dark-mode_themes_entry_mouse-pointer": {
-        "type": "entry",
-        "default": "",
+    "dark_themes_mouse": {
+        "type": "custom",
+        "file": "./widgets/Entry_read_only.py",
+        "widget": "Entry",
+        "default": "Bibata-Modern-Classic",
         "description": "Mouse pointer",
         "tooltip": "Name of the mouse pointer theme"
     },
-    "dark-mode_themes_entry_applications": {
-        "type": "entry",
-        "default": "",
+    "dark_themes_apps": {
+        "type": "custom",
+        "file": "./widgets/Entry_read_only.py",
+        "widget": "Entry",
+        "default": "Mint-Y-Dark-Aqua",
         "description": "Applications",
         "tooltip": "Name of the applications theme (GTK theme)"
     },
-    "dark-mode_themes_entry_icons": {
-        "type": "entry",
-        "default": "",
+    "dark_themes_icons": {
+        "type": "custom",
+        "file": "./widgets/Entry_read_only.py",
+        "widget": "Entry",
+        "default": "Mint-Y-Sand",
         "description": "Icons",
         "tooltip": "Name of the icons theme"
     },
-    "dark-mode_themes_entry_desktop": {
-        "type": "entry",
-        "default": "",
+    "dark_themes_desktop": {
+        "type": "custom",
+        "file": "./widgets/Entry_read_only.py",
+        "widget": "Entry",
+        "default": "Mint-Y-Dark-Aqua",
         "description": "Desktop",
         "tooltip": "Name of the desktop theme (Cinnamon theme)"
     },
-    "dark-mode_themes_button_apply": {
+    "dark_themes_apply_button": {
         "type": "button",
         "callback": "on_button_apply_themes_dark",
         "description": "Test applying to the system",
-        "tooltip": "Apply the dark mode themes to the system manually"
+        "tooltip": "Apply the themes presets to the system manually"
     },
-    "dark-mode_commands_switch_enable": {
-        "type": "switch",
-        "default": false,
-        "description": "Launch custom commands",
-        "tooltip": "Enable setting commands to be launched when switching to dark mode"
-    },
-    "dark-mode_background_button_open-os-settings": {
+    "dark_background_open_os_settings_button": {
         "type": "button",
         "callback": "on_button_open_os_background_settings",
         "description": "Open the system settings",
         "tooltip": "Open the system's settings window to set the background settings"
     },
-    "dark-mode_background_button_detect": {
+    "dark_background_detect_button": {
         "type": "button",
         "callback": "on_button_detect_background_dark",
         "description": "Detect from the system",
-        "tooltip": "Detect the system's background settings currently set and assign them to the dark mode"
+        "tooltip": "Detect the system's background settings currently set and save them as presets"
     },
-    "dark-mode_background_switch_slideshow": {
+    "dark_background_is_slideshow": {
         "type": "switch",
         "default": false,
         "description": "Slideshow",
         "tooltip": "Set the desktop background to be a slideshow"
     },
-    "dark-mode_background_filechooser_file": {
-        "dependency": "dark-mode_background_switch_slideshow!=true",
+    "dark_background_file": {
+        "dependency": "dark_background_is_slideshow!=true",
         "type": "filechooser",
         "default": "",
         "description": "Image file",
         "tooltip": "Image file to be set as the desktop background"
     },
-    "dark-mode_background_filechooser_folder": {
-        "dependency": "dark-mode_background_switch_slideshow=true",
+    "dark_background_slideshow_folder": {
+        "dependency": "dark_background_is_slideshow=true",
         "type": "filechooser",
         "select-dir": true,
         "default": "",
         "description": "Images folder",
         "tooltip": "Folder containing images to be set for the desktop background slideshow"
     },
-    "dark-mode_background_button_apply": {
+    "dark_background_apply_button": {
         "type": "button",
         "callback": "on_button_apply_background_dark",
         "description": "Test applying to the system",
-        "tooltip": "Apply the dark mode background settings to the system manually"
+        "tooltip": "Apply the desktop background presets to the system manually"
     },
-    "dark-mode_commands_list": {
+
+    "dark_commands_is_enabled": {
+        "type": "switch",
+        "default": false,
+        "description": "Launch custom commands",
+        "tooltip": "Enable setting commands to be launched when switching to this appearance"
+    },
+    "dark_commands_list": {
+        "dependency": "dark_commands_is_enabled=true",
         "type" : "list",
         "columns" : [
             {"id": "name", "title": "Name", "type": "string", "default": "unnamed"},
@@ -397,25 +567,28 @@
             {"id": "command", "title": "Command", "type": "string"}
         ],
         "default" : [],
-        "tooltip" : "List of commands to be executed when switching to this mode\n\nNotes:\n- the name's purpose is for error messages\n- the expiry time kills the command's process\n- an expiry of 0 seconds means never\n- any child process won't be able to expire\n- the path is in the ~ directory\n- the error messages reports stderr when the return status is not 0 and will appear in a notification"
+        "tooltip" : "List of commands to be executed when switching to this appearance\n\nNotes:\n- the name's purpose is for error messages\n- the expiry time terminates the command's process early\n- an expiry of 0 second means never\n- a process refusing to terminate 10 seconds after the expiry is killed\n- the path is in the user's home directory (~/)\n- the error messages are displayed in a notification and reports stderr"
     },
-    "dark-mode_commands_button_launch": {
+    "dark_commands_launch_button": {
+        "dependency": "dark_commands_is_enabled=true",
         "type": "button",
         "callback": "on_button_launch_commands_dark",
         "description": "Test commands launch",
-        "tooltip": "Test launching the commands set for the dark mode"
+        "tooltip": "Launch the commands manually"
     },
 
-    "has-detected-themes-light": {
-        "type": "generic",
-        "default": false
-    },
-    "has-detected-themes-dark": {
-        "type": "generic",
-        "default": false
-    },
-    "timer-absolute-set-timeout": {
+
+    "scheduler_timer_absolute_time": {
         "type": "generic",
         "default": 0
+    },
+
+    "light_themes_have_been_detected": {
+        "type": "generic",
+        "default": false
+    },
+    "dark_themes_have_been_detected": {
+        "type": "generic",
+        "default": false
     }
 }

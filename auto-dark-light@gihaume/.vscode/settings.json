@@ -1,0 +1,7 @@
+{
+    "js/ts.preferences.quoteStyle": "single", // For imports autocompletion
+
+    "python.analysis.extraPaths": [
+        "/usr/share/cinnamon/cinnamon-settings/bin"
+    ],
+}
