@@ -1,0 +1,64 @@
+{
+  "head": {
+    "type": "header",
+    "description": "Settings for show-hide-applets@mohammad-sn"
+  },
+  "do_autohide": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Autohide",
+    "tooltip": "Check it if you want to hide applets automatically, unless you should click on applet to do so.\nIts status can be changed by middle-clicking on this applet."
+  },
+  "hidetime": {
+    "type": "spinbutton",
+    "default": 2,
+    "min": 0.25,
+    "max": 10,
+    "step": 0.25,
+    "units": "seconds",
+    "dependency": "do_autohide",
+    "description": "Autohide after ",
+    "tooltip": ""
+  },
+  "hoveractivates": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Show on hover",
+    "tooltip": "show applets on mouse hover"
+  },
+  "hoveractivateshide": {
+    "type": "checkbox",
+    "default": false,
+    "dependency": "hoveractivates",
+    "description": "Hide on hovering again",
+    "tooltip": "toggle visibility of applets on mouse hover"
+  },
+  "hovertime": {
+    "type": "spinbutton",
+    "default": 75,
+    "min": 10,
+    "max": 500,
+    "step": 5,
+    "units": "miliseconds",
+    "dependency": "hoveractivates",
+    "description": "Hover shows/hides after ",
+    "tooltip": ""
+  },
+  "autohiders": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Autohide reshowing applets",
+    "tooltip": ""
+  },
+  "hideuntilseparator": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Only hide until next separator",
+    "tooltip": "Only hide everything until the next separator element occurs."
+  },
+  "icons": {
+    "type": "generic",
+    "default": {},
+    "description": "Internal icons state"
+  }
+}
