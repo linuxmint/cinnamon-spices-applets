@@ -737,7 +737,6 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         if (this._launchFromMenuTitle)
             titleItem.connect("activate", () => Util.spawn(["easyeffects"]));
         this.menu.addMenuItem(titleItem);
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         try {
             const names = await this._readPresets();
             if (this._removed || revision !== this._menuRevision)
@@ -767,6 +766,8 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 _("Presets could not be read"), {reactive: false}
             ));
         }
+        // Insert after the async content exists: Cinnamon hides trailing separators.
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem(), 1);
         this._updateSelection();
     }
 
