@@ -2,7 +2,7 @@
     "uuid": "awake@enisn",
     "name": "Awake Timer",
     "description": "Keep the computer awake (no screen blank, no lock, no display sleep, no idle suspend) for a chosen number of hours, then automatically restore your normal power settings.",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "author": "enisn",
     "website": "https://github.com/enisn/cinnamon-awake-applet",
     "max-instances": 1

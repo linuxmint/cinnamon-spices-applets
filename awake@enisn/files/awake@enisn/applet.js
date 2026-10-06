@@ -19,7 +19,7 @@ const Mainloop = imports.mainloop;
 
 const UUID = "awake@enisn";
 
-const DIR = GLib.get_home_dir() + "/.cache/awake-override";
+const DIR = GLib.get_user_cache_dir() + "/awake-override";
 const STATE_FILE = DIR + "/state.json";
 const RESTORE_FILE = DIR + "/restore.sh";
 const TIMER_UNIT = "awake-restore";
@@ -56,6 +56,7 @@ class AwakeApplet extends Applet.TextIconApplet {
         this._buildMenu();
 
         this._state = null;
+        this._alive = true;
         this._loadState();
         this._sync();
 
@@ -203,25 +204,30 @@ class AwakeApplet extends Applet.TextIconApplet {
     }
 
     _loadState() {
-        try {
-            if (!GLib.file_test(STATE_FILE, GLib.FileTest.EXISTS)) return;
-            let [ok, contents] = GLib.file_get_contents(STATE_FILE);
-            if (!ok) return;
-            let text = typeof contents === "string" ? contents : imports.byteArray.toString(contents);
-            let state = JSON.parse(text);
-            if (!state.deadline || !state.saved) return;
+        // Async so a slow/home disk can't block the Cinnamon main loop at load
+        // time; a missing state file simply surfaces as an error here.
+        Gio.File.new_for_path(STATE_FILE).load_contents_async(null, (file, result) => {
+            if (!this._alive) return;
+            try {
+                let [ok, contents] = file.load_contents_finish(result);
+                if (!ok) return;
+                let text = typeof contents === "string" ? contents : imports.byteArray.toString(contents);
+                let state = JSON.parse(text);
+                if (!state.deadline || !state.saved) return;
 
-            let now = Math.floor(Date.now() / 1000);
-            if (state.deadline <= now) {
-                // Deadline passed while we weren't running — restore now
-                this._applySaved(state.saved);
-                this._cleanupTimerAndFiles();
-            } else {
-                this._state = state;
+                let now = Math.floor(Date.now() / 1000);
+                if (state.deadline <= now) {
+                    // Deadline passed while we weren't running — restore now
+                    this._applySaved(state.saved);
+                    this._cleanupTimerAndFiles();
+                } else {
+                    this._state = state;
+                }
+                this._sync();
+            } catch (e) {
+                log("[" + UUID + "] no state to resume: " + e);
             }
-        } catch (e) {
-            log("[" + UUID + "] could not read state: " + e);
-        }
+        });
     }
 
     _onTick() {
@@ -263,6 +269,7 @@ class AwakeApplet extends Applet.TextIconApplet {
 
     on_applet_removed_from_panel() {
         // Keep any active override running — the systemd timer still restores it.
+        this._alive = false;
         if (this._tick) {
             Mainloop.source_remove(this._tick);
             this._tick = null;
