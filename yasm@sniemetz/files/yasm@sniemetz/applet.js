@@ -5,12 +5,24 @@ const Settings   = imports.ui.settings;
 const St         = imports.gi.St;
 const Clutter    = imports.gi.Clutter;
 const GLib       = imports.gi.GLib;
+const Gio        = imports.gi.Gio;
 const Util       = imports.misc.util;
 const Pango      = imports.gi.Pango;
 const GdkPixbuf  = imports.gi.GdkPixbuf;
 const Cogl       = imports.gi.Cogl;
 
-const UUID       = 'yasm@sniemetz';
+// Derive AppletPath and UUID from this file's own location instead of
+// hardcoding them, so a checkout can be installed under any UUID (e.g.
+// yasm@local for local dev alongside the published yasm@sniemetz) without
+// editing the source. GJS exposes the current script's absolute path in
+// Error.stack as "@<path>:line:col"; the applet's directory name is its
+// UUID by Cinnamon convention.
+const AppletPath = (function() {
+  const m = (new Error()).stack.match(/@(.*)\/applet\.js:/);
+  return m ? m[1] : null;
+})();
+const UUID = AppletPath.split('/').pop();
+imports.searchPath.unshift(AppletPath);
 
 // Graph colors — edit here to retheme all canvas graphs at once.
 // Values are [red, green, blue, alpha] in 0-1 range for Cairo.
@@ -22,8 +34,6 @@ const C = {
   purple: [0.70, 0.50, 1.00, 0.85],  // RX
   draw:   [1.00, 0.40, 0.40, 0.85],  // battery draw / discharge
 };
-const AppletPath = imports.ui.appletManager.appletMeta[UUID].path;
-imports.searchPath.unshift(AppletPath);
 
 const { MetricsManager } = imports.lib.metricsManager;
 const { parseList } = imports.lib.util;
@@ -235,11 +245,30 @@ var LaptopTooltip = class LaptopTooltip {
   _show() {
     this._box.show();
     const [ox, oy] = this._owner.get_transformed_position();
-    const [, oh]   = this._owner.get_transformed_size();
+    const [ow, oh] = this._owner.get_transformed_size();
     const [bw, bh] = this._box.get_size();
     const monitor  = Main.layoutManager.primaryMonitor;
-    const x = Math.max(monitor.x, Math.min(ox, monitor.x + monitor.width - bw));
-    const y = this._orientation === St.Side.TOP ? oy + oh : oy - bh;
+
+    let x, y;
+    // Vertical panels: place the tooltip beside the tile so it doesn't
+    // cover the panel or the icons above/below.
+    //   LEFT panel  → tooltip to the right of the tile
+    //   RIGHT panel → tooltip to the left of the tile
+    // Horizontal panels: keep the existing top-vs-bottom logic.
+    if (this._orientation === St.Side.LEFT) {
+      x = ox + ow;
+      y = oy;
+    } else if (this._orientation === St.Side.RIGHT) {
+      x = ox - bw;
+      y = oy;
+    } else {
+      x = ox;
+      y = this._orientation === St.Side.TOP ? oy + oh : oy - bh;
+    }
+
+    // Clamp so the whole tooltip stays on the primary monitor.
+    x = Math.max(monitor.x, Math.min(x, monitor.x + monitor.width  - bw));
+    y = Math.max(monitor.y, Math.min(y, monitor.y + monitor.height - bh));
     this._box.set_position(Math.round(x), Math.round(y));
   }
 
@@ -296,10 +325,15 @@ function makeIconActor(path, size) {
 class YasmApplet extends Applet.Applet {
   constructor(metadata, orientation, panelHeight, instanceId) {
     super(orientation, panelHeight, instanceId);
+    // Advertise support for both horizontal and vertical panels — Cinnamon
+    // reads this via getAllowedLayout(), NOT via metadata.json's
+    // panel-orientation-support field (which is checked by nothing).
+    this.setAllowedLayout(Applet.AllowedLayout.BOTH);
     this._orientation = orientation;
 
     this._instanceId = instanceId;
-    this._tempAlertNotified = false;
+    this._cpuTempAlertLastMs = 0;
+    this._gpuTempAlertLastMs = 0;
     this._settings = new Settings.AppletSettings(this, UUID, instanceId);
     this._bindSettings();
     this._autoScanIfEmpty();
@@ -313,14 +347,18 @@ class YasmApplet extends Applet.Applet {
   }
 
   _getColoredIconSize() {
-    return Math.max(16, Math.round((this._panelHeight || 40) * 0.6));
+    // Icons in compact mode are load-bearing (no text alongside), so a
+    // 60% multiplier ends up dominating the panel. Shrink to 45% there.
+    const mult = this._useCompactMode() ? 0.45 : 0.6;
+    return Math.max(16, Math.round((this._panelHeight || 40) * mult));
   }
 
 
   _autoScanIfEmpty() {
     const empty = l => parseList(l).length === 0;
     if (empty(this._batteryList) || empty(this._netList) ||
-        empty(this._fanHwmonList) || empty(this._diskList))
+        empty(this._fanHwmonList) || empty(this._cpuHwmonList) ||
+        empty(this._diskList))
       this.refreshSources();
   }
 
@@ -328,18 +366,24 @@ class YasmApplet extends Applet.Applet {
     const bind = (key, prop, cb) => this._settings.bind(key, prop, cb || null);
     bind('refresh-interval', '_refreshInterval', () => this._restartPolling());
     bind('panel-separator',   '_separator');
+    bind('compact-mode',      '_compactMode', () => this._rebuildSections());
     bind('uptime-load-label', '_uptimeLoadLabel');
     bind('battery-list',      '_batteryList',    () => this._restartManager());
     bind('net-list',         '_netList');
     bind('disk-list',        '_diskList');
     bind('fan-hwmon-list',   '_fanHwmonList', () => this._restartManager());
+    bind('cpu-hwmon-list',   '_cpuHwmonList', () => this._restartManager());
 
     bind('load-warn',      '_loadWarn');
     bind('load-alert',     '_loadAlert');
     bind('cpu-temp-warn',  '_cpuTempWarn');
     bind('cpu-temp-alert', '_cpuTempAlert');
+    bind('cpu-temp-alert-notify', '_cpuTempAlertNotify');
     bind('cpu-use-warn',   '_cpuUseWarn');
     bind('cpu-use-alert',  '_cpuUseAlert');
+    bind('gpu-temp-warn',  '_gpuTempWarn');
+    bind('gpu-temp-alert', '_gpuTempAlert');
+    bind('gpu-temp-alert-notify', '_gpuTempAlertNotify');
     bind('bat-warn',       '_batWarn');
     bind('bat-alert',      '_batAlert');
 
@@ -370,6 +414,11 @@ class YasmApplet extends Applet.Applet {
     this._settings.setValue('fan-hwmon-list',
       Discover.mergeHwmonLists(newFans, parseList(this._fanHwmonList)));
 
+    const cpuChips = CpuMetric.findCpuTempChips(fileutil);
+    const newCpu   = cpuChips.map(c => ({ enabled: true, hwmon: String(c.hwmon), name: c.name }));
+    this._settings.setValue('cpu-hwmon-list',
+      Discover.mergeHwmonLists(newCpu, parseList(this._cpuHwmonList)));
+
     const diskDevs = Discover.discoverDiskDevices(fileutil);
     const newDisks = diskDevs.map(d => ({ enabled: true, device: d }));
     this._settings.setValue('disk-list',
@@ -380,12 +429,23 @@ class YasmApplet extends Applet.Applet {
     const script = `${AppletPath}/setup-rapl.sh`;
     fileutil.spawnAsync(['pkexec', 'bash', script], result => {
       // result is null on error, stdout string on success
-      Mainloop.timeout_add_seconds(1, () => { this._restartManager(); return GLib.SOURCE_REMOVE; });
+      this._restartTimeout = Mainloop.timeout_add_seconds(1, () => { this._restartTimeout = null; this._restartManager(); return GLib.SOURCE_REMOVE; });
     });
   }
 
   _isVertical() {
     return this._orientation === St.Side.LEFT || this._orientation === St.Side.RIGHT;
+  }
+
+  // Compact mode: icons only, no text labels. Triggers:
+  //   - Vertical panel (always) — narrow panels cannot fit tile text.
+  //   - compact-mode setting = 'icon' (user override on horizontal panels).
+  // In text mode the per-tile `<section>-display` switch chooses icon vs
+  // label; in compact mode the icon is forced on every tile regardless.
+  _useCompactMode() {
+    if (this._compactMode === 'text') return false;
+    if (this._compactMode === 'icon') return true;
+    return this._isVertical(); // 'auto'
   }
 
   on_orientation_changed(orientation) {
@@ -417,6 +477,7 @@ class YasmApplet extends Applet.Applet {
 
     this._sections = {};
     const vertical = this._isVertical();
+    const compact  = this._useCompactMode();
     this.actor.vertical = vertical;
     this.actor.add_style_class_name('yasm-box');
 
@@ -434,6 +495,7 @@ class YasmApplet extends Applet.Applet {
       tile.add_style_class_name('yasm-label');
       tile.add_style_class_name('threshold-ok');
       if (vertical) tile.add_style_class_name('yasm-label-vertical');
+      if (compact)  tile.add_style_class_name('yasm-label-compact');
       tile.set_y_align(Clutter.ActorAlign.CENTER);
 
       const iconSize = this._getColoredIconSize();
@@ -443,11 +505,16 @@ class YasmApplet extends Applet.Applet {
       tile.set_style(`padding: ${pad}px ${pad + 2}px; border-width: ${brd}px;`);
       tile.spacing = spc;
 
-      // Show icon or placeholder spacer based on display switch
-      const showIcon  = !!this[`_${key}Display`];
+      // Compact mode forces the icon on regardless of per-tile display switch,
+      // since hiding both icon and text would produce an empty tile.
+      const showIcon  = compact || !!this[`_${key}Display`];
       const iconPath  = showIcon ? `${AppletPath}/icons/${ICON_FILES[key]}` : null;
       const iconActor = iconPath ? makeIconActor(iconPath, iconSize) : null;
       if (iconActor) {
+        // In compact mode, the uptime tile drops its clock icon so only the
+        // load icon (added below) remains — clock face is redundant when the
+        // uptime text is hidden anyway.
+        if (compact && key === 'uptime') iconActor.hide();
         tile.add_actor(iconActor);
       } else {
         tile.add_actor(new St.Widget({ width: 0, height: iconSize }));
@@ -473,6 +540,7 @@ class YasmApplet extends Applet.Applet {
       label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
       label.add_style_class_name('yasm-tile-text');
       label.set_y_align(Clutter.ActorAlign.CENTER);
+      if (compact) label.hide();
       tile.add_actor(label);
 
       // Uptime tile: separator + load icon/spacer + load label after the time value
@@ -480,6 +548,7 @@ class YasmApplet extends Applet.Applet {
       if (key === 'uptime') {
         const sepActor = new St.Label({ text: ' | ' });
         sepActor.set_y_align(Clutter.ActorAlign.CENTER);
+        if (compact) sepActor.hide();
         tile.add_actor(sepActor);
 
         const showLoadIcon = !!this._loadDisplay;
@@ -494,6 +563,7 @@ class YasmApplet extends Applet.Applet {
 
         loadLabel = new St.Label({ text: '' });
         loadLabel.set_y_align(Clutter.ActorAlign.CENTER);
+        if (compact) loadLabel.hide();
         tile.add_actor(loadLabel);
       }
 
@@ -583,8 +653,8 @@ class YasmApplet extends Applet.Applet {
             if (data.uptime) {
               const numCores = this._manager.getNumCores();
               const normLoad = data.uptime.load.avg1 / numCores;
-              const loadLevel = normLoad >= (this._loadAlert || 0.9) ? 'alert'
-                              : normLoad >= (this._loadWarn  || 0.7) ? 'warn' : 'ok';
+              const loadLevel = normLoad >= ((this._loadAlert || 90) / 100) ? 'alert'
+                              : normLoad >= ((this._loadWarn  || 70) / 100) ? 'warn' : 'ok';
               this._applyThreshold(s.tile, loadLevel);
               s.label.set_text(this._buildText('uptime', UptimeMetric.formatUptimeOnly(data.uptime.uptime)));
               if (s.loadLabel)
@@ -611,8 +681,8 @@ class YasmApplet extends Applet.Applet {
                   height: 20, marginTop: 8, marginBottom: 12,
                   series: [{ vals: history.loadAvg.values(),
                     color: C.ok,
-                    thresholds: { warn: (this._loadWarn || 0.7) * numCores,
-                                  alert: (this._loadAlert || 0.9) * numCores } }] },
+                    thresholds: { warn: (this._loadWarn || 70) / 100 * numCores,
+                                  alert: (this._loadAlert || 90) / 100 * numCores } }] },
                 { type: 'text', html: procTxt },
               ]);
               hasData = true;
@@ -624,10 +694,13 @@ class YasmApplet extends Applet.Applet {
               const bat        = data.battery;
               const pct        = bat.capacityPct;
               const isCharging = bat.isCharging;
+              const isFull     = bat.isFull;
+              const isOnAC     = bat.isOnAC;
 
-              // Dynamic icon swap: AC icon when charging, battery icon when on battery
+              // Dynamic icon swap: AC icon whenever on AC (charging OR full),
+              // battery icon only while actually discharging.
               if (s.iconActor) {
-                const targetImg = isCharging ? s.acIconImage : s.batIconImage;
+                const targetImg = isOnAC ? s.acIconImage : s.batIconImage;
                 if (targetImg) s.iconActor.set_content(targetImg);
               }
 
@@ -636,11 +709,9 @@ class YasmApplet extends Applet.Applet {
                              : pct <= (this._batWarn  || 30) ? 'warn' : 'ok';
               this._applyThreshold(s.tile, batLevel);
               let tileWatt;
-              if (isCharging) {
-                tileWatt = bat.usageW != null ? `≈${Math.round(bat.usageW)}W` : `+${bat.powerW.toFixed(1)}W`;
-              } else {
-                tileWatt = `-${bat.powerW.toFixed(1)}W`;
-              }
+              if (isCharging)     tileWatt = bat.usageW != null ? `≈${Math.round(bat.usageW)}W` : `+${bat.powerW.toFixed(1)}W`;
+              else if (isFull)    tileWatt = bat.usageW != null ? `≈${Math.round(bat.usageW)}W` : `AC`;
+              else                tileWatt = `-${bat.powerW.toFixed(1)}W`;
               s.label.set_text(this._buildText('battery', `${pct}% | ${tileWatt}`));
 
               const { pctVals, currentDrawW, currentChargeW, avgDrawW,
@@ -648,17 +719,22 @@ class YasmApplet extends Applet.Applet {
               const pctToLbl = ` ${String(pct).padStart(3)}% `;
 
               // Watt graph right label
-              let wattRight = isCharging ? `+${bat.powerW.toFixed(1)}W`
-                                         : `-${bat.powerW.toFixed(1)}W`;
-              if (!isCharging && avgDrawW) {
-                wattRight += `\nø ${avgDrawW.toFixed(1)}W`;
-                const remH = bat.energyWh / avgDrawW;
-                if (remH > 0) wattRight += `\n~${BatteryMetric.formatTimeHours(remH)}`;
+              let wattRight;
+              if (isCharging)     wattRight = `+${bat.powerW.toFixed(1)}W`;
+              else if (isFull)    wattRight = `0.0W`;
+              else {
+                wattRight = `-${bat.powerW.toFixed(1)}W`;
+                if (avgDrawW) {
+                  wattRight += `\nø ${avgDrawW.toFixed(1)}W`;
+                  const remH = bat.energyWh / avgDrawW;
+                  if (remH > 0) wattRight += `\n~${BatteryMetric.formatTimeHours(remH)}`;
+                }
               }
 
-              // Usage breakdown for AC tooltip
+              // Usage breakdown for AC tooltip (both charging and full — the
+              // RAPL-based estimate is meaningful whenever we're on AC).
               const usageLines = [];
-              if (isCharging && bat.usageDetail) {
+              if (isOnAC && bat.usageDetail) {
                 const d = bat.usageDetail;
                 usageLines.push('');
                 usageLines.push('<b>≈ Usage</b>');
@@ -667,20 +743,27 @@ class YasmApplet extends Applet.Applet {
                 usageLines.push(`DRAM:     ~${d.dram}W`);
                 if (d.display)         usageLines.push(`Display:  ~${d.display}W`);
                 usageLines.push(`Total:    ≈${Math.round(bat.usageW)}W`);
-              } else if (isCharging && bat.raplAvail === false) {
+              } else if (isOnAC && bat.raplAvail === false) {
                 usageLines.push('');
                 usageLines.push('<i>CPU power unavailable — click\n"Enable CPU power monitoring"\nin Power settings</i>');
               }
 
+              const headerText = isCharging ? '<b>Power — AC</b>'
+                              : isFull     ? '<b>Power — AC (full)</b>'
+                              :              '<b>Power — Battery</b>';
+              const graphLeft  = isCharging ? 'AC↑\n(3hrs)\nDraw↓'
+                              : isFull     ? '(3hrs)'
+                              :              '(3hrs)\nDraw↓';
+              const graphSplit = isCharging ? 1/3 : isFull ? 0.5 : 0.05;
               const tooltipItems = [
-                { type: 'text', html: isCharging ? '<b>Power — AC</b>' : '<b>Power — Battery</b>' },
+                { type: 'text', html: headerText },
                 { type: 'graph', left: `${String(pctVals.find(v => v != null) ?? '').padStart(3)}%\n(6hrs)`, right: pctToLbl,
                   height: 20, marginBottom: 8, marginTop: 8,
                   series: [{ vals: pctVals, color: C.ok, maxV: 100,
                     thresholds: { warn: this._batWarn || 30, alert: this._batAlert || 15,
                                   inverted: true } }] },
-                { type: 'graph', left: isCharging ? 'AC↑\n(3hrs)\nDraw↓' : '(3hrs)\nDraw↓', right: wattRight,
-                  height: 30, splitFrac: isCharging ? 1/3 : 0.05, marginBottom: 12, mode: 'bidir',
+                { type: 'graph', left: graphLeft, right: wattRight,
+                  height: 30, splitFrac: graphSplit, marginBottom: 12, mode: 'bidir',
                   series: [
                     { vals: chargeVals, color: C.ok,   dir: 'up'   },
                     { vals: drawVals,   color: C.draw,  dir: 'down' },
@@ -698,14 +781,21 @@ class YasmApplet extends Applet.Applet {
               const tempLevel = data.cpu.packageC >= (this._cpuTempAlert || 85) ? 'alert'
                               : data.cpu.packageC >= (this._cpuTempWarn  || 70) ? 'warn' : 'ok';
               this._applyThreshold(s.tile, tempLevel);
-              if (tempLevel === 'alert' && !this._tempAlertNotified) {
-                this._tempAlertNotified = true;
-                GLib.spawn_command_line_async(
-                  `notify-send -u critical -i dialog-warning "CPU Temperature" "Your CPU temp reached ${Math.round(data.cpu.packageC)}°C"`
-                );
+              if (tempLevel === 'alert' && this._cpuTempAlertNotify !== false) {
+                const now = GLib.get_monotonic_time() / 1000;  // ms
+                if ((now - this._cpuTempAlertLastMs) > 30000) {
+                  this._cpuTempAlertLastMs = now;
+                  try {
+                    Gio.Subprocess.new(
+                      ['notify-send', '-u', 'critical', '-i', 'dialog-warning',
+                       'CPU Temperature', `CPU temp critical: ${Math.round(data.cpu.packageC)}\xb0C`],
+                      Gio.SubprocessFlags.NONE
+                    );
+                  } catch(e) {}
+                }
               } else if (tempLevel !== 'alert') {
-                this._tempAlertNotified = false;
-              }
+                this._cpuTempAlertLastMs = 0;
+              } 
               s.label.set_text(this._buildText('cpu', CpuMetric.formatPanel(data.cpu.cpuPct, data.cpu.packageC)));
               // Build core table inline so graphs can be placed above it
               const coreHdr  = `${'Core'.padEnd(6)} ${'%usr'.padStart(5)} ${'%sys'.padStart(5)} ${'%iowt'.padStart(6)} ${'temp'.padStart(6)}`;
@@ -795,6 +885,24 @@ class YasmApplet extends Applet.Applet {
           case 'gpu':
             if (data.gpu && data.gpu.length > 0) {
               const primary = data.gpu.find(g => g.type !== 'intel') || data.gpu[0];
+              const gpuTempC = primary.tempC;
+              const gpuTempLevel = gpuTempC != null && gpuTempC >= (this._gpuTempAlert || 85) ? 'alert'
+                                : gpuTempC != null && gpuTempC >= (this._gpuTempWarn  || 70) ? 'warn' : 'ok';
+              if (gpuTempLevel === 'alert' && this._gpuTempAlertNotify !== false) {
+                const now = GLib.get_monotonic_time() / 1000;  // ms
+                if ((now - this._gpuTempAlertLastMs) > 30000) {
+                  this._gpuTempAlertLastMs = now;
+                  try {
+                    Gio.Subprocess.new(
+                      ['notify-send', '-u', 'critical', '-i', 'dialog-warning',
+                       'GPU Temperature', `GPU temp critical: ${Math.round(gpuTempC)}\xb0C`],
+                      Gio.SubprocessFlags.NONE
+                    );
+                  } catch(e) {}
+                }
+              } else if (gpuTempLevel !== 'alert') {
+                this._gpuTempAlertLastMs = 0;
+              }
               s.label.set_text(this._buildText('gpu', GpuMetric.formatPanel(primary)));
               const hasDiscrete = data.gpu.some(g => g.type !== 'intel');
               const gpuItems = [];
@@ -853,8 +961,9 @@ class YasmApplet extends Applet.Applet {
   }
 
   on_applet_removed_from_panel() {
-    if (this._earlyTimeout) { Mainloop.source_remove(this._earlyTimeout); this._earlyTimeout = null; }
-    if (this._timeout) Mainloop.source_remove(this._timeout);
+    if (this._restartTimeout) { Mainloop.source_remove(this._restartTimeout); this._restartTimeout = null; }
+    if (this._earlyTimeout)   { Mainloop.source_remove(this._earlyTimeout);   this._earlyTimeout   = null; }
+    if (this._timeout)        { Mainloop.source_remove(this._timeout);         this._timeout        = null; }
     if (this._sections) {
       for (const { tooltip } of Object.values(this._sections))
         try { tooltip.destroy(); } catch(e) {}

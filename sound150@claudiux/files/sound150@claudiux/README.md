@@ -87,3 +87,5 @@ We welcome any new translations or updates.
 ## Contributors
 
 Many thanks to [Rodrigo-Barros](https://github.com/Rodrigo-Barros) for his patch allowing to show the Spotify-player album art!
+
+Thanks to [Erick (woodpile72)](https://github.com/woodpile72) for fixes to player controls, hidden seeker polling, cover image loading, menu sizing, and submenu registration.

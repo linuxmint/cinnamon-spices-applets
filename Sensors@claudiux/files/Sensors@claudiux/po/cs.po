@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux Czech 5.8.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-04-26 01:27+0200\n"
+"POT-Creation-Date: 2026-08-29 09:24-0400\n"
 "PO-Revision-Date: 2025-09-14 13:25+0200\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
@@ -20,118 +20,119 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Sledování senzorů"
 
-#. applet.js:594
+#. applet.js:599
 msgid "Suspended"
 msgstr "Zastaveno"
 
-#. applet.js:936 applet.js:978
+#. applet.js:941 applet.js:983
 msgid "high:"
 msgstr "vysoká:"
 
-#. applet.js:936 applet.js:939 applet.js:978 applet.js:980 applet.js:1021
+#. applet.js:941 applet.js:944 applet.js:983 applet.js:985 applet.js:1026
 msgid "n/a"
 msgstr "n/a"
 
-#. applet.js:939 applet.js:980
+#. applet.js:944 applet.js:985
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:1021 applet.js:1065
+#. applet.js:1026 applet.js:1070
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:1067
+#. applet.js:1072
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:1096
+#. applet.js:1101
 msgid "No intrusion detected"
 msgstr "Narušení nedetekováno"
 
-#. applet.js:1096
+#. applet.js:1101
 msgid "INTRUSION DETECTED!"
 msgstr "DETEKOVÁNO NARUŠENÍ!"
 
-#. applet.js:1116
+#. applet.js:1121
 msgid "Must be configured!"
 msgstr "Musí být nastaveno!"
 
-#. applet.js:1518
+#. applet.js:1523
 msgid "Settings"
 msgstr "Předvolby"
 
-#. applet.js:1518
+#. applet.js:1523
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1525
+#. applet.js:1530
 msgid "⚙ General"
 msgstr "⚙ Obecné"
 
-#. applet.js:1542
+#. applet.js:1547
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Teplotní senzory"
 
-#. applet.js:1559
+#. applet.js:1564
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Senzory větráků"
 
-#. applet.js:1576
+#. applet.js:1581
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Napěťové senzory"
 
-#. applet.js:1593
+#. applet.js:1598
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Senzory narušení"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1629
+#. applet.js:1634
 msgid "Run xsensors"
 msgstr "Spustit xsensors"
 
-#. applet.js:1638
+#. applet.js:1643
 msgid "Suspend Sensors"
 msgstr "Pozastavit Sledování senzorů"
 
-#. applet.js:1649
+#. applet.js:1654
 msgid "Reload this applet"
 msgstr "Znovunačíst tento applet"
 
-#. applet.js:2005
+#. applet.js:2010
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Opravdu odstranit '%s'?"
 
-#. lib/checkDependencies.js:371
+#. lib/checkDependencies.js:376
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Applet %s je plně funkční."
 
-#. lib/checkDependencies.js:372
+#. lib/checkDependencies.js:377
 msgid "All dependencies are installed"
 msgstr "Všechny závislosti jsou nainstalované"
 
-#. lib/checkDependencies.js:401
+#. lib/checkDependencies.js:407
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 "Zdá se, že chybí některé z programů vyžadovaných pro plnou funkčnost appletu."
 
-#. lib/checkDependencies.js:403
+#. lib/checkDependencies.js:409
 msgid "Please install these packages:"
 msgstr "Je nutné instalovat následující balíčky:"
 
-#. lib/checkDependencies.js:407 lib/checkDependencies.js:417
+#. lib/checkDependencies.js:413 lib/checkDependencies.js:423
+#. lib/checkDependencies.js:432
 msgid "Some dependencies are not installed!"
 msgstr "Některé závislosti nejsou nainstalované!"
 
-#. lib/checkDependencies.js:419
+#. lib/checkDependencies.js:425 lib/checkDependencies.js:434
 msgid "Install these packages now"
 msgstr "Balíčky nainstalovat nyní"
 
@@ -684,6 +685,19 @@ msgid ""
 msgstr ""
 "Pokud je tato volba aktivní, bude do systémového žurnálu zapsáno překročení "
 "teplotních limitů."
+
+#. settings-schema.json->no_check_gpu_if_d3cold->description
+msgid "Stop checking GPU temperature if in D3cold state"
+msgstr "Přestat kontrolovat teplotu GPU, pokud je ve stavu D3cold"
+
+#. settings-schema.json->no_check_gpu_if_d3cold->tooltip
+msgid ""
+"If this option is checked, to avoid waking up GPU card to check its "
+"temperature, don't check it's temperature if it's in powersave mode"
+msgstr ""
+"Pokud je tato možnost zaškrtnuta, aby se zabránilo probouzení grafické karty "
+"GPU kvůli kontrole její teploty, nekontrolujte její teplotu, pokud je v "
+"úsporném režimu."
 
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description

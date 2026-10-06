@@ -4,12 +4,12 @@
 
 .channel-label {
    font-size: 1em;
+   max-width: 160px;
 }
 
 .artist-label {
    text-align: center;
    font-size: 1.02em;
-   padding-left: 1em;
    padding-bottom: 0.6em;
 
 }
@@ -17,7 +17,6 @@
 .title-label {
    text-align: center;
    font-size: 1.07em;
-   padding-left: 1em;
 }
 
 .radio-label {
@@ -32,7 +31,6 @@
 .channel-icon {
    margin-top: 10px;
    margin-bottom: 5px;
-   margin-left: 20px;
    border: 2px solid transparent;
    padding: 2px;
 }

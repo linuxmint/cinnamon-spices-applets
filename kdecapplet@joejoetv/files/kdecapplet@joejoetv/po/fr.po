@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-08-22 18:28+0200\n"
-"PO-Revision-Date: 2026-08-22 06:43+0200\n"
+"PO-Revision-Date: 2026-08-23 10:08+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -535,11 +535,11 @@ msgstr "Icône personnalisée à utiliser"
 #. 5.8->settings-schema.json->switch_different-icon-no-connected-
 #. devices->description
 msgid "Display a different icon when no devices are connected"
-msgstr ""
+msgstr "Afficher une icône différente lorsqu'aucun appareil n'est connecté"
 
 #. 5.8->settings-schema.json->icon_no-connected-devices->description
 msgid "Icon to use when no devices are connected"
-msgstr ""
+msgstr "Icône à utiliser lorsqu'aucun appareil n'est connecté"
 
 #. 5.8->settings-schema.json->button_open-kdec-settings->description
 #. 4.8->settings-schema.json->button_open-kdec-settings->description
@@ -681,10 +681,8 @@ msgstr "Activer l'élément de menu pour envoyer des fichiers"
 
 #. 5.8->settings-schema.json->module_sftp_description->description
 #. 4.8->settings-schema.json->module_sftp_description->description
-#, fuzzy
 msgid "Lets you remotely browse the storage of the device"
-msgstr ""
-"Vous permet de parcourir à distance le stockage sélectionné sur l'appareil"
+msgstr "Vous permet de parcourir le stockage sur l'appareil distant"
 
 #. 5.8->settings-schema.json->module_sftp_selectFirstDirectory->description
 msgid "Select the first directory automatically"

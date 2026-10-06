@@ -53,6 +53,41 @@ function findCoretemPath(fileutil) {
   return null;
 }
 
+// Discover CPU-temperature hwmon chips. Returns [{hwmon, name, label}], each
+// with a plausible package/core temperature sensor. Priority rules:
+//   1. Known CPU chips by name: coretemp (Intel), k10temp / zenpower (AMD).
+//      Deterministic temp1=package layout, no label matching needed.
+//   2. Any other chip with a temp*_label matching /package|tctl|tccd/i.
+// Chips like acpitz, nvme, thinkpad_hwmon are excluded because they either
+// have no matching label or report non-CPU zones.
+function findCpuTempChips(fileutil) {
+  const CPU_NAMES = new Set(['coretemp', 'k10temp', 'zenpower']);
+  const CPU_LABEL_RE = /package|tctl|tccd/i;
+  const chips = [];
+  for (let i = 0; i < 20; i++) {
+    const base = `/sys/class/hwmon/hwmon${i}`;
+    const name = (fileutil.readFile(`${base}/name`) || '').trim();
+    if (!name) continue;
+    if (fileutil.readFile(`${base}/temp1_input`) === null) continue;
+
+    let label = '';
+    if (CPU_NAMES.has(name)) {
+      label = (fileutil.readFile(`${base}/temp1_label`) || name).trim();
+      chips.push({ hwmon: i, name, label });
+      continue;
+    }
+    // Fallback: label match
+    let matched = false;
+    for (let j = 1; j <= 20; j++) {
+      const lbl = (fileutil.readFile(`${base}/temp${j}_label`) || '').trim();
+      if (!lbl) break;
+      if (CPU_LABEL_RE.test(lbl)) { label = lbl; matched = true; break; }
+    }
+    if (matched) chips.push({ hwmon: i, name, label });
+  }
+  return chips;
+}
+
 function readHwmonTemps(fileutil, hwmonPath) {
   let packageC = null;
   const coresC = [];
@@ -135,5 +170,6 @@ function read(fileutil, prevStat, hwmonPath) {
 
 if (typeof module !== 'undefined') {
   module.exports = { parseStat, computeCpuPct, computeCpuBreakdown, validateHwmonPath,
-                     findCoretemPath, readHwmonTemps, formatPanel, formatTooltip, read };
+                     findCoretemPath, findCpuTempChips, readHwmonTemps,
+                     formatPanel, formatTooltip, read };
 }

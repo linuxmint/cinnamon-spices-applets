@@ -1,10 +1,10 @@
 # YASM — Yet Another System Monitor
 
-A compact Cinnamon panel applet that displays live system metrics with sparkline history graphs. Kudos to @Claudiux - his many applets inspired this :) 
+A compact Cinnamon panel applet that displays live system metrics with sparkline history graphs.
 
 ## Metrics
 
-- **Uptime** — system uptime + load average (click opens `top`)
+- **Uptime** — system uptime + load average (click to open `top`)
 - **CPU** — usage % + package temperature, with threshold colouring
 - **Battery** — charge %, charge/discharge rate in watts, with AC/battery icon swap
 - **Memory** — used % + total GB
@@ -21,20 +21,19 @@ YASM reads system metrics directly from Linux virtual filesystems (`/proc`, `/sy
 
 ### Data sources
 
-
-| Metric          | Source                                                    | Notes                                                    |
-| --------------- | --------------------------------------------------------- | -------------------------------------------------------- |
-| CPU usage       | `/proc/stat`                                              | Delta between two reads gives per-core usr/sys/iowait %  |
-| CPU temperature | `/sys/class/hwmon/*/temp*_input`                          | Auto-discovers`coretemp` / `k10temp` / `zenpower` chips  |
-| CPU power       | `/sys/class/powercap/intel-rapl:0/energy_uj`              | Intel RAPL; requires elevated permissions (see settings) |
-| Memory          | `/proc/meminfo`                                           |                                                          |
-| Disk space      | `df` (async subprocess)                                   | Runs at most once per 60 s                               |
-| Disk I/O        | `/proc/diskstats`                                         | Delta-based throughput calculation                       |
-| Network         | `/proc/net/dev`                                           | Delta-based TX/RX rate per interface                     |
-| Battery         | `/sys/class/power_supply/*/`                              | Charge %, voltage, current, status                       |
-| Fan             | `/sys/class/hwmon/*/fan*_input`                           | Auto-discovers fan-capable hwmon chips                   |
-| GPU             | `nvtop -s` (preferred), `nvidia-smi` (fallback), or sysfs | See GPU section below                                    |
-| Top processes   | `/proc/[pid]/stat`                                        | Sampled every 5 s; sorted by CPU delta                   |
+| Metric | Source | Notes |
+|--------|--------|-------|
+| CPU usage | `/proc/stat` | Delta between two reads gives per-core usr/sys/iowait % |
+| CPU temperature | `/sys/class/hwmon/*/temp*_input` | Auto-discovers `coretemp` / `k10temp` / `zenpower` chips |
+| CPU power | `/sys/class/powercap/intel-rapl:0/energy_uj` | Intel RAPL; requires elevated permissions (see settings) |
+| Memory | `/proc/meminfo` | |
+| Disk space | `df` (async subprocess) | Runs at most once per 60 s |
+| Disk I/O | `/proc/diskstats` | Delta-based throughput calculation |
+| Network | `/proc/net/dev` | Delta-based TX/RX rate per interface |
+| Battery | `/sys/class/power_supply/*/` | Charge %, voltage, current, status |
+| Fan | `/sys/class/hwmon/*/fan*_input` | Auto-discovers fan-capable hwmon chips |
+| GPU | `nvtop -s` (preferred), `nvidia-smi` (fallback), or sysfs | See GPU section below |
+| Top processes | `/proc/[pid]/stat` | Sampled every 5 s; sorted by CPU delta |
 
 ### Why no daemon?
 
@@ -45,7 +44,6 @@ A monitoring daemon would add a persistent process, IPC overhead, and a service 
 GPU utilisation cannot be read from sysfs alone on NVIDIA hardware (the kernel driver doesn't expose it). YASM uses **`nvtop -s`** (JSON snapshot mode) as the primary source — a single subprocess call that returns metrics for all GPUs at once: utilisation %, temperature, clock speed, power draw, and VRAM usage.
 
 If `nvtop` is not installed, YASM falls back to:
-
 - **NVIDIA**: `nvidia-smi` query (async subprocess)
 - **AMD**: sysfs (`gpu_busy_percent`, `mem_info_vram_*`, hwmon temperature)
 - **Intel**: sysfs (`gt_cur_freq_mhz` / `gt_max_freq_mhz`)
@@ -54,18 +52,17 @@ If `nvtop` is not installed, YASM falls back to:
 
 ### Polling cycle
 
-The refresh interval, the "tick", (default: **5 seconds**, configurable 3–30s in settings) drives the main loop. Not all metrics are read every tick — heavier or slower-changing data is rate-limited:
+The refresh interval (default: **5 seconds**, configurable 3–30 s in settings) drives the main loop. Not all metrics are read every tick — heavier or slower-changing data is rate-limited:
 
-
-| Data                     | Read frequency     |
-| ------------------------ | ------------------ |
-| CPU, network, disk I/O   | Every tick         |
+| Data | Read frequency |
+|------|---------------|
+| CPU, network, disk I/O | Every tick |
 | GPU (nvtop / nvidia-smi) | Every tick (async) |
-| Top processes            | Every 5 s          |
-| Memory, fan, battery log | Every 15 s         |
-| Disk space (df)          | Every 60 s         |
+| Top processes | Every 5 s |
+| Memory, fan, battery log | Every 15 s |
+| Disk space (df) | Every 60 s |
 
-**This is not a real-time monitor.** At the default 5s interval, you get a useful trend view with minimal overhead. Setting the interval below 3 seconds is not supported — at that point the subprocess spawns (nvtop, df) and UI repaints start to become visible in the very metrics you're trying to measure.
+**This is not a real-time monitor.** At the default 5 s interval, you get a useful trend view with minimal overhead. Setting the interval below 3 seconds is not supported — at that point the subprocess spawns (nvtop, df) and UI repaints start to become visible in the very metrics you're trying to measure.
 
 ### Battery log
 
@@ -75,7 +72,7 @@ No other data is written to disk.
 
 ## Requirements
 
-- Cinnamon 6.0+ (I don't have other versions)
+- Cinnamon 6.0+
 - `nvtop` (optional, for GPU metrics — provides the richest data across all GPU vendors)
 - Intel RAPL access (optional, for accurate CPU power on AC): run *Enable RAPL* from applet settings
 

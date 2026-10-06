@@ -27,14 +27,13 @@ function parseMeminfo(content) {
 }
 
 function formatPanel(data) {
-  return `${data.totalG.toFixed(1)}G | ${Math.round(data.usedPct)}%`;
+  return `${data.usedG.toFixed(1)}G | ${Math.round(data.usedPct)}%`;
 }
 
 function formatTooltip(data, history) {
-  const lines = [];
+  const lines = [`<b>Memory</b>   ${data.totalG.toFixed(1)} G`];
   if (history) { lines.push(`${'in Use'.padEnd(10)}${history}  ${Math.round(data.usedPct)}%`, ''); }
   lines.push(
-    `${'Total:'.padEnd(10)}${data.totalG.toFixed(1)} G`,
     `${'Used:'.padEnd(10)}${data.usedG.toFixed(1)} G`,
     `${'Free:'.padEnd(10)}${data.freeG.toFixed(1)} G`,
     `${'Avail.:'.padEnd(10)}${data.availableG.toFixed(1)} G`,

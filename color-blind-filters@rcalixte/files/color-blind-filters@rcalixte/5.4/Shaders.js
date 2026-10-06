@@ -2,7 +2,7 @@ const {Clutter, GObject} = imports.gi;
 
 var DesaturateEffect = GObject.registerClass(
     {
-      GTypeName : `Cjs_DesaturateEffect_${Math.random()}`,
+      GTypeName : `Cjs_DesaturateEffect_${Math.random().toString().slice(2)}`,
     },
     class DesaturateEffect extends Clutter.DesaturateEffect {
       _init(properties) {
@@ -18,7 +18,7 @@ var DesaturateEffect = GObject.registerClass(
 
 var InversionEffect =
     GObject.registerClass({
-      GTypeName : `Cjs_InversionEffect_${Math.random()}`,
+      GTypeName : `Cjs_InversionEffect_${Math.random().toString().slice(2)}`,
     },
                           class InversionEffect extends Clutter.ShaderEffect {
       _init(properties) {
@@ -45,7 +45,7 @@ var InversionEffect =
 
 var ColorMixerEffect =
     GObject.registerClass({
-      GTypeName : `Cjs_ColorMixerEffect_${Math.random()}`,
+      GTypeName : `Cjs_ColorMixerEffect_${Math.random().toString().slice(2)}`,
     },
                           class ColorMixerEffect extends Clutter.ShaderEffect {
       _init(properties) {
@@ -75,7 +75,7 @@ var ColorMixerEffect =
 
 var DaltonismEffect =
     GObject.registerClass({
-      GTypeName : `Cjs_DaltonismEffect_${Math.random()}`,
+      GTypeName : `Cjs_DaltonismEffect_${Math.random().toString().slice(2)}`,
     },
                           class DaltonismEffect extends Clutter.ShaderEffect {
       _init(properties) {
