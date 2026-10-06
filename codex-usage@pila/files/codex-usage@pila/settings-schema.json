@@ -1,0 +1,29 @@
+{
+  "display-mode": {
+    "type": "combobox",
+    "default": "limits",
+    "description": "Panel display",
+    "options": {
+      "Rate limits": "limits",
+      "Daily tokens": "tokens"
+    }
+  },
+  "refresh-seconds": {
+    "type": "spinbutton",
+    "default": 45,
+    "min": 30,
+    "max": 3600,
+    "step": 5,
+    "units": "seconds",
+    "description": "Refresh interval"
+  },
+  "stale-seconds": {
+    "type": "spinbutton",
+    "default": 300,
+    "min": 60,
+    "max": 3600,
+    "step": 60,
+    "units": "seconds",
+    "description": "Mark limit snapshots stale after"
+  }
+}

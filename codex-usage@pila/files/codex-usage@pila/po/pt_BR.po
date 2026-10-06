@@ -1,0 +1,146 @@
+# CODEX USAGE
+# Copyright (C) 2026 Pila Gonzalez
+# This file is distributed under the same license as the Codex Usage applet.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: codex-usage@pila 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-09-23 20:00+0200\n"
+"PO-Revision-Date: 2026-09-23 20:00+0200\n"
+"Last-Translator: Pila Gonzalez\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Codex Usage"
+msgstr "Uso do Codex"
+
+msgid "Display local Codex token statistics and current account rate limits"
+msgstr "Exibe estatísticas locais de tokens do Codex e os limites atuais de uso da conta"
+
+msgid "Panel display"
+msgstr "Exibição no painel"
+
+msgid "Rate limits"
+msgstr "Limites de uso"
+
+msgid "Daily tokens"
+msgstr "Tokens diários"
+
+msgid "seconds"
+msgstr "segundos"
+
+msgid "Refresh interval"
+msgstr "Intervalo de atualização"
+
+msgid "Mark limit snapshots stale after"
+msgstr "Marcar instantâneos de limites como desatualizados após"
+
+msgid "Reset time passed"
+msgstr "O horário de redefinição já passou"
+
+#, javascript-format
+msgid "Reset in %dd %dh"
+msgstr "Redefinição em %dd %dh"
+
+#, javascript-format
+msgid "Reset in %dh %dm"
+msgstr "Redefinição em %dh %dmin"
+
+msgid "Unavailable"
+msgstr "Indisponível"
+
+msgid "Local Codex usage · limit percentages used"
+msgstr "Uso local do Codex · percentuais dos limites utilizados"
+
+#, javascript-format
+msgid "%d%% used"
+msgstr "%d%% usado"
+
+#, javascript-format
+msgid "%d%% used · stale"
+msgstr "%d%% usado · desatualizado"
+
+msgid "CODEX USAGE"
+msgstr "USO DO CODEX"
+
+#, javascript-format
+msgid "%s today"
+msgstr "%s hoje"
+
+msgid "Local Codex daily tokens · * = cached statistics; refresh failed · — = unavailable"
+msgstr "Tokens diários locais do Codex · * = estatísticas em cache; falha na atualização · — = indisponível"
+
+#, javascript-format
+msgid "5h %s · W %s"
+msgstr "5h %s · S %s"
+
+msgid "Codex limit percentages used · * = last observed value, outdated or refresh failed · — = unavailable"
+msgstr "Percentuais dos limites do Codex utilizados · * = último valor observado, desatualizado ou falha na atualização · — = indisponível"
+
+msgid "Usage collector unavailable"
+msgstr "Coletor de uso indisponível"
+
+msgid "Loading…"
+msgstr "Carregando…"
+
+msgid "Refresh failed · showing cached statistics"
+msgstr "Falha na atualização · exibindo estatísticas em cache"
+
+msgid "Local Codex data not found"
+msgstr "Dados locais do Codex não encontrados"
+
+msgid "5-hour limit"
+msgstr "Limite de 5 horas"
+
+msgid "Weekly limit"
+msgstr "Limite semanal"
+
+msgid "Limits observed"
+msgstr "Limites observados"
+
+msgid "TODAY"
+msgstr "HOJE"
+
+msgid "Input"
+msgstr "Entrada"
+
+msgid "Cached input"
+msgstr "Entrada em cache"
+
+msgid "Output"
+msgstr "Saída"
+
+msgid "Reasoning output"
+msgstr "Saída de raciocínio"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Sessions"
+msgstr "Sessões"
+
+msgid "Cache share of input"
+msgstr "Percentual da entrada em cache"
+
+msgid "THIS WEEK"
+msgstr "ESTA SEMANA"
+
+msgid "THIS MONTH"
+msgstr "ESTE MÊS"
+
+msgid "Last model"
+msgstr "Último modelo"
+
+msgid "Last reasoning effort"
+msgstr "Último nível de raciocínio"
+
+msgid "Updated"
+msgstr "Atualizado"
+
+msgid "Some records could not be read"
+msgstr "Alguns registros não puderam ser lidos"
+
