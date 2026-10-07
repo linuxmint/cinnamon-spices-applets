@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mint-screenshot\n"
-"Report-Msgid-Bugs-To: khumnath@gmail.com\n"
-"POT-Creation-Date: 2026-04-23 19:12+0545\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-15 20:59+0545\n"
 "PO-Revision-Date: 2026-04-22 18:27+0545\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -24,15 +24,23 @@ msgstr "重置所有内容？"
 msgid "This will clear all annotations and return to the launcher."
 msgstr "这将清除所有标注并返回启动器。"
 
-#: app.py:191
+#: app.py:192
 msgid "Mint Screenshot — Wayland Error"
 msgstr "Mint 截图 — Wayland 错误"
 
-#: canvas.py:461
+#: canvas.py:95
+msgid "Click window to select"
+msgstr "点击窗口以选择"
+
+#: canvas.py:95
+msgid "Click and Drag to select area"
+msgstr "点击并拖动以选择区域"
+
+#: canvas.py:482
 msgid "Edit Text:"
 msgstr "编辑文本："
 
-#: canvas.py:461
+#: canvas.py:482
 msgid "Enter text to insert:"
 msgstr "请输入要插入的文本："
 
@@ -40,7 +48,7 @@ msgstr "请输入要插入的文本："
 msgid "D-Bus is required for Wayland support."
 msgstr "Wayland 支持需要 D-Bus。"
 
-#: capture.py:171
+#: capture.py:155
 msgid ""
 "Failed to load captured screenshot:\n"
 "{}"
@@ -136,7 +144,7 @@ msgstr "保存"
 msgid "Settings"
 msgstr "设置"
 
-#: editor.py:547 launcher.py:144
+#: editor.py:547 launcher.py:153
 msgid "Close"
 msgstr "关闭"
 
@@ -184,7 +192,7 @@ msgstr "选择默认保存文件夹"
 msgid "Select"
 msgstr "选择"
 
-#: editor.py:692 launcher.py:79 main.py:159
+#: editor.py:692 launcher.py:79 main.py:202
 msgid "Mint Screenshot"
 msgstr "Mint 截图"
 
@@ -260,15 +268,27 @@ msgstr "📸  全屏截图"
 msgid "✂️  Select Area"
 msgstr "✂️  选择区域"
 
+#: launcher.py:125
+msgid "🪟  Select Window"
+msgstr "🪟 选择窗口"
+
 #: launcher.py:127
+msgid "🪟  Select Window (Only X11)"
+msgstr "🪟 选择窗口 (仅限 X11)"
+
+#: launcher.py:129
+msgid "Window selection is not supported on this Wayland setup."
+msgstr "此 Wayland 设置不支持窗口选择。"
+
+#: launcher.py:136
 msgid "⏱  Timed Capture"
 msgstr "⏱  定时截图"
 
-#: launcher.py:134
+#: launcher.py:143
 msgid "sec"
 msgstr "秒"
 
-#: main.py:117
+#: main.py:118
 msgid ""
 "The following dependencies are missing:\n"
 "\n"
@@ -284,7 +304,7 @@ msgstr ""
 "请使用系统的包管理器安装。\n"
 "（显示的是 Debian/Ubuntu 包名，仅供参考）"
 
-#: main.py:120
+#: main.py:121
 msgid ""
 "The following dependencies are missing:\n"
 "\n"
@@ -300,12 +320,13 @@ msgstr ""
 "请使用包管理器安装：\n"
 "  {} {}"
 
-#: main.py:126
+#: main.py:127
 msgid "Mint Screenshot \\u2014 Missing Dependencies"
 msgstr "Mint 截图 \\u2014 缺少依赖项"
 
-#~ msgid "Mint Screenshot — Click to capture"
-#~ msgstr "Mint 截图 — 点击截图"
+#: applet.js:18
+msgid "Mint Screenshot — Click to capture"
+msgstr "Mint 截图 — 点击截图"
 
 #~ msgid ""
 #~ "Screenshot & annotation tool for Cinnamon. Timed capture, region "
