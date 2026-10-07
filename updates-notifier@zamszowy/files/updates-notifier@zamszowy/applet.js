@@ -122,7 +122,7 @@ UpdatesNotifier.prototype = {
         this.bus = Gio.bus_get_sync(Gio.BusType.SYSTEM, null);
 
         this._watch_dbus();
-        if (this.useTimer) {this._set_check_interval();}
+        if (this._set_check_interval.useTimer) {this._set_check_interval();}
         this._refreshUpdatesInfo();
     },
 
