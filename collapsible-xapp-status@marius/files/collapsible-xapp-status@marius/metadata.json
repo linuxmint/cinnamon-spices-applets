@@ -1,0 +1,8 @@
+{
+    "uuid": "collapsible-xapp-status@marius",
+    "name": "Collapsible XApp Status Applet",
+    "description": "XApp status tray with Windows-style hidden icons: pick icons to hide, expand them with a chevron button",
+    "max-instances": 1,
+    "role": "tray",
+    "version": "1.0"
+}
