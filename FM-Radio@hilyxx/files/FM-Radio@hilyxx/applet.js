@@ -31,6 +31,10 @@ const Data = imports.data;
 const Search = imports.search;
 const Mpris = imports.mpris;
 
+// === CUSTOM COVERS FOLDER ===
+const PICTURES_DIR = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES);
+const CUSTOM_IMAGE_DIR = PICTURES_DIR ? (PICTURES_DIR + "/fm-radio-covers") : null;
+
 // === CORE UI CONTROLLER ===
 class FMRadioApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -38,6 +42,8 @@ class FMRadioApplet extends Applet.IconApplet {
 
         this.uuid = metadata.uuid;
         this.extPath = metadata.path;
+
+        this._initCustomImageDir();
 
         this.settings = new Settings.AppletSettings(this, this.uuid, instance_id);
         this.settings.bind("custom_stations", "custom_stations", this._onSettingsChanged, this);
@@ -98,6 +104,24 @@ class FMRadioApplet extends Applet.IconApplet {
 
         this._bindKeyBindings();
         this._startHijackTimer();
+    }
+
+    _initCustomImageDir() {
+        if (!CUSTOM_IMAGE_DIR) {
+            global.logWarning("FM Radio: Cannot find standard Pictures directory.");
+            return;
+        }
+
+        let customDir = Gio.File.new_for_path(CUSTOM_IMAGE_DIR);
+        
+        try {
+            customDir.make_directory_with_parents(null);
+            global.log("FM Radio: Created custom covers directory at " + CUSTOM_IMAGE_DIR);
+        } catch (e) {
+            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+                global.logError("FM Radio: Failed to create custom covers directory: " + e.message);
+            }
+        }
     }
 
     _onSettingsChanged() {
