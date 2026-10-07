@@ -122,7 +122,7 @@ UpdatesNotifier.prototype = {
         this.bus = Gio.bus_get_sync(Gio.BusType.SYSTEM, null);
 
         this._watch_dbus();
-        this._set_check_interval();
+        if (this.useTimer) {this._set_check_interval();}
         this._refreshUpdatesInfo();
     },
 
@@ -196,21 +196,19 @@ UpdatesNotifier.prototype = {
     },
 
     _set_check_interval: function () {
-        if (this.useTimer) {
-            let parsedMinutes = parseInt(this.refreshTimeout);
-            if (isNaN(parsedMinutes) || parsedMinutes < 1) {
-                this.refreshTimeout = "60";
-                parsedMinutes = 60;
-            }
-            const milis = parsedMinutes * 60 * 1000;
-
-            if (this.interval) {
-                Util.clearInterval(this.interval);
-            }
-            this.interval = Util.setInterval(() => {
-                this._refreshUpdatesInfo();
-            }, milis);
+        let parsedMinutes = parseInt(this.refreshTimeout);
+        if (isNaN(parsedMinutes) || parsedMinutes < 1) {
+            this.refreshTimeout = "60";
+            parsedMinutes = 60;
         }
+        const milis = parsedMinutes * 60 * 1000;
+
+        if (this.interval) {
+            Util.clearInterval(this.interval);
+        }
+        this.interval = Util.setInterval(() => {
+            this._refreshUpdatesInfo();
+        }, milis);
     },
 
     _buildMenu: function (count) {
