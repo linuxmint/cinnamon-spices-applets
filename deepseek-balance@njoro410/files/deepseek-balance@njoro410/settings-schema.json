@@ -64,12 +64,12 @@
     },
     "reference-amount": {
         "type": "spinbutton",
-        "default": 100,
+        "default": 0,
         "min": 0,
         "max": 1000000,
         "step": 1,
-        "description": "Reference amount (the 100% level)",
-        "tooltip": "DeepSeek has no quota, so the percentage is relative to an amount you choose — e.g. your last top-up. 0 disables the percentage."
+        "description": "Reference amount (0 = automatic)",
+        "tooltip": "DeepSeek has no quota, so the percentage is relative to a 100% level. Left at 0, the applet uses the highest balance seen — the balance counts down from 100% after each top-up. Set an amount to fix the level yourself; the percentage can then go above 100%."
     },
     "warn-threshold": {
         "type": "spinbutton",

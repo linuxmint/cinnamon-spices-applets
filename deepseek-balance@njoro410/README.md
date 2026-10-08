@@ -23,7 +23,7 @@ Right-click the applet → **Configure…**
 | Bar color | The bar's fill color; still turns red below the warning threshold |
 | Peak-hours logo | Tint the panel logo while peak-rate hours apply |
 | Peak logo color | Color the logo switches to during peak hours |
-| Reference amount | The "100%" level — e.g. your last top-up |
+| Reference amount | The "100%" level; 0 = automatic (highest balance seen) |
 | Turn red below | Warning threshold, in % of the reference |
 
 ## What it shows
@@ -31,9 +31,9 @@ Right-click the applet → **Configure…**
 - **Panel** — the DeepSeek logo and the chosen display mode; turns red below
   the warning threshold, and the logo is tinted during peak-rate hours.
 - **Hover** — balance, paid/granted breakdown, whether the account can still
-  make API calls, peak/off-peak rate and when it flips, percent of reference
-  remaining, spend for today / last 7 days / last 30 days, and a rough
-  "days left" estimate at the current rate.
+  make API calls, peak/off-peak rate and when it flips, percent of the
+  reference remaining, spend for today / last 7 days / last 30 days, and a
+  rough "days left" estimate at the current rate.
 - **Click** — a menu with the same summary, "Refresh now", and a link to the
   DeepSeek platform dashboard.
 
@@ -47,8 +47,10 @@ applet records over time in
 
 - only decreases count as spend (top-ups are ignored);
 - the paid/granted split describes the *current* balance, not your original
-  top-up total — the API doesn't report how much was ever topped up, which is
-  why the percentage uses a reference amount you configure;
+  top-up total — the API doesn't report how much was ever topped up, so the
+  percentage is measured against a reference: by default the highest balance
+  the applet has seen (which is your balance right after a top-up), or a fixed
+  amount you configure;
 - coverage is limited to when the applet was running, so long gaps between
   refreshes can slightly under-count;
 - token counts are not available from the API — the platform dashboard shows

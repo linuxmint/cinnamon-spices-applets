@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: deepseek-balance@njoro410 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-10-02 14:47+0300\n"
+"POT-Creation-Date: 2026-10-08 07:26+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,148 +17,153 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:418
+#. applet.js:453
 msgid "Refresh now"
 msgstr ""
 
-#. applet.js:419
+#. applet.js:454
 msgid "Open DeepSeek platform"
 msgstr ""
 
-#. applet.js:484
+#. applet.js:519
 msgid "Peak hours — 2× the off-peak price"
 msgstr ""
 
-#. applet.js:485
+#. applet.js:520
 msgid "Off-peak — half price"
 msgstr ""
 
-#. applet.js:488
+#. applet.js:523
 #, javascript-format
 msgid "%s until %s (in %s)"
 msgstr ""
 
-#. applet.js:527
+#. applet.js:562
 msgid "No API key configured (right-click → Configure…)"
 msgstr ""
 
-#. applet.js:545
+#. applet.js:580
 #, javascript-format
 msgid "Network error: %s"
 msgstr ""
 
-#. applet.js:551
+#. applet.js:586
 #, javascript-format
 msgid "Invalid API key (HTTP %s)"
 msgstr ""
 
-#. applet.js:555
+#. applet.js:590
 msgid "Rate limited (HTTP 429) — try a longer refresh interval"
 msgstr ""
 
-#. applet.js:559
+#. applet.js:594
 #, javascript-format
 msgid "API error: HTTP %s"
 msgstr ""
 
-#. applet.js:567
+#. applet.js:602
 msgid "Could not parse the API response"
 msgstr ""
 
-#. applet.js:577
+#. applet.js:612
 msgid "Unexpected response from the balance endpoint"
 msgstr ""
 
-#. applet.js:648
+#. applet.js:692
 msgid "DeepSeek API balance"
 msgstr ""
 
-#. applet.js:654 applet.js:716
+#. applet.js:698 applet.js:764
 #, javascript-format
 msgid "Balance: %s %s"
 msgstr ""
 
-#. applet.js:657
+#. applet.js:701
 #, javascript-format
 msgid "Of which paid: %s · granted: %s"
 msgstr ""
 
-#. applet.js:660
+#. applet.js:704
 msgid "Available for API calls: yes"
 msgstr ""
 
-#. applet.js:660
+#. applet.js:704
 msgid "Available for API calls: NO"
 msgstr ""
 
-#. applet.js:667
+#. applet.js:713
 #, javascript-format
 msgid "%s of %s reference remaining"
 msgstr ""
 
-#. applet.js:670
+#. applet.js:715
+#, javascript-format
+msgid "%s of %s remaining (highest balance seen)"
+msgstr ""
+
+#. applet.js:718
 msgid "Set a reference amount in Configure… to show a percentage."
 msgstr ""
 
-#. applet.js:679
+#. applet.js:727
 #, javascript-format
 msgid "Spent today: %s"
 msgstr ""
 
-#. applet.js:680
+#. applet.js:728
 #, javascript-format
 msgid "Spent last 7 days: %s"
 msgstr ""
 
-#. applet.js:681
+#. applet.js:729
 #, javascript-format
 msgid "Spent last 30 days: %s"
 msgstr ""
 
-#. applet.js:687
+#. applet.js:735
 msgid "More than a year of balance left at the last 7 days' rate"
 msgstr ""
 
-#. applet.js:689
+#. applet.js:737
 #, javascript-format
 msgid "≈ %s days left at the last 7 days' rate"
 msgstr ""
 
-#. applet.js:693
+#. applet.js:741
 msgid "No spend recorded in the last 7 days"
 msgstr ""
 
-#. applet.js:695
+#. applet.js:743
 msgid "(inferred from balance changes; the API does not expose token counts)"
 msgstr ""
 
-#. applet.js:698
+#. applet.js:746
 msgid "Spend tracking starts once a few balance samples are in."
 msgstr ""
 
-#. applet.js:701
+#. applet.js:749
 msgid "No data yet."
 msgstr ""
 
-#. applet.js:707
+#. applet.js:755
 msgid "never"
 msgstr ""
 
-#. applet.js:709
+#. applet.js:757
 #, javascript-format
 msgid "Updated %s · refreshes every %s min"
 msgstr ""
 
-#. applet.js:717
+#. applet.js:765
 msgid "Balance: —"
 msgstr ""
 
-#. applet.js:722
+#. applet.js:770
 #, javascript-format
 msgid "Spent today: %s   ·   7 days: %s"
 msgstr ""
 
-#. applet.js:726
+#. applet.js:774
 msgid "Gathering spend data…"
 msgstr ""
 
@@ -299,13 +304,15 @@ msgid "Gray"
 msgstr ""
 
 #. settings-schema.json->reference-amount->description
-msgid "Reference amount (the 100% level)"
+msgid "Reference amount (0 = automatic)"
 msgstr ""
 
 #. settings-schema.json->reference-amount->tooltip
 msgid ""
-"DeepSeek has no quota, so the percentage is relative to an amount you choose "
-"— e.g. your last top-up. 0 disables the percentage."
+"DeepSeek has no quota, so the percentage is relative to a 100% level. Left "
+"at 0, the applet uses the highest balance seen — the balance counts down "
+"from 100% after each top-up. Set an amount to fix the level yourself; the "
+"percentage can then go above 100%."
 msgstr ""
 
 #. settings-schema.json->warn-threshold->units

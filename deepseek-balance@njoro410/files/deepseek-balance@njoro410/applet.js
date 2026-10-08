@@ -114,6 +114,41 @@ function pruneSamples(samples, nowSec) {
     return samples;
 }
 
+// The automatic 100% level is the highest balance ever seen for a currency.
+// It is stored in the history file under _peaks rather than recomputed from
+// the samples, so pruning old samples can never forget a top-up.
+function updatePeak(peaks, currency, balance) {
+    if (!(balance > (peaks[currency] || 0))) return false;
+    peaks[currency] = balance;
+    return true;
+}
+
+// Repairs a history object read from disk: guarantees a _peaks map and fills
+// in missing or stale peaks from the samples, for files written before _peaks
+// existed or edited by hand.
+function normalizeHistory(data) {
+    const history = data && typeof data === 'object' ? data : {};
+    if (!history._peaks || typeof history._peaks !== 'object') history._peaks = {};
+    for (const currency of Object.keys(history)) {
+        const series = history[currency];
+        if (currency === '_peaks' || !Array.isArray(series)) continue;
+        let peak = history._peaks[currency] || 0;
+        for (const sample of series) {
+            if (sample && sample.b > peak) peak = sample.b;
+        }
+        history._peaks[currency] = peak;
+    }
+    return history;
+}
+
+// The 100% level: the amount configured in settings when it is above zero,
+// otherwise the highest balance seen ("automatic"). 0 means neither is known.
+function effectiveReference(configured, peak) {
+    const manual = parseFloat(configured) || 0;
+    if (manual > 0) return manual;
+    return peak > 0 ? peak : 0;
+}
+
 // Sum of balance decreases whose end sample falls inside the window.
 function spentSince(samples, sinceSec) {
     let spend = 0;
@@ -348,7 +383,7 @@ DeepSeekBalanceApplet.prototype = {
         this._updated = null;  // Date of last successful fetch
         this._barPercent = 0;
         this._barLow = false;
-        this._history = {};
+        this._history = { _peaks: {} };
         this._historyLoaded = false;
         this._saveState = { inFlight: false, pending: null, dirReady: false };
 
@@ -587,7 +622,9 @@ DeepSeekBalanceApplet.prototype = {
         if (!Array.isArray(series)) series = [];
         const dirty = appendSample(series, nowSec, parsed.total);
         this._history[parsed.currency] = series;
-        if (dirty) {
+        // A top-up raises the peak, which re-bases the automatic percentage.
+        const peakDirty = updatePeak(this._history._peaks, parsed.currency, parsed.total);
+        if (dirty || peakDirty) {
             pruneSamples(series, nowSec);
             this._saveHistory();
         }
@@ -602,9 +639,16 @@ DeepSeekBalanceApplet.prototype = {
         this._render();
     },
 
+    // The 100% level for a currency: the configured amount, or the highest
+    // balance seen so far when the configured amount is 0 (automatic).
+    _reference: function (currency) {
+        return effectiveReference(this.referenceAmount, this._history._peaks[currency] || 0);
+    },
+
     _percentLeft: function () {
-        const reference = parseFloat(this.referenceAmount) || 0;
-        if (!this._result || reference <= 0) return null;
+        if (!this._result) return null;
+        const reference = this._reference(this._result.currency);
+        if (reference <= 0) return null;
         return (this._result.total / reference) * 100;
     },
 
@@ -660,12 +704,16 @@ DeepSeekBalanceApplet.prototype = {
             lines.push(result.available ? _('Available for API calls: yes') : _('Available for API calls: NO'));
             lines.push(this._pricingText());
 
-            const reference = parseFloat(this.referenceAmount) || 0;
+            const manual = (parseFloat(this.referenceAmount) || 0) > 0;
+            const reference = this._reference(result.currency);
             lines.push('');
             if (reference > 0) {
                 const percent = (result.total / reference) * 100;
-                lines.push(_('%s of %s reference remaining').format(
-                    percent.toFixed(1) + '%', formatAmount(reference, result.currency)));
+                lines.push(manual
+                    ? _('%s of %s reference remaining').format(
+                        percent.toFixed(1) + '%', formatAmount(reference, result.currency))
+                    : _('%s of %s remaining (highest balance seen)').format(
+                        percent.toFixed(1) + '%', formatAmount(reference, result.currency)));
             } else {
                 lines.push(_('Set a reference amount in Configure… to show a percentage.'));
             }
@@ -733,14 +781,14 @@ DeepSeekBalanceApplet.prototype = {
     _loadHistory: function (callback) {
         readJsonFile(HISTORY_PATH, (data) => {
             if (data) {
-                this._history = data;
+                this._history = normalizeHistory(data);
                 callback();
                 return;
             }
             readJsonFile(LEGACY_HISTORY_PATH, (legacy) => {
                 // Pre-release builds kept the history in the config dir; move it.
                 if (legacy) {
-                    this._history = legacy;
+                    this._history = normalizeHistory(legacy);
                     this._saveHistory();
                 }
                 callback();
