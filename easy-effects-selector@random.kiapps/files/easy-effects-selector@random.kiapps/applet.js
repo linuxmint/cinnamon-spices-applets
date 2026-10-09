@@ -26,7 +26,9 @@ function _(text) {
 
 const SCHEMA_ID = "com.github.wwmm.easyeffects";
 const OUTPUT_PRESET_KEY = "last-loaded-output-preset";
-const DEFAULT_PRESET_KEY = "default-preset";
+const LEGACY_DEFAULT_PRESET_KEY = "default-preset";
+const QUICK_PRESET_KEYS = ["quick-preset-top", "quick-preset-middle", "quick-preset-bottom"];
+const QUICK_PRESET_PROPERTIES = ["_quickPresetTop", "_quickPresetMiddle", "_quickPresetBottom"];
 const SHUTDOWN_KEY = "shutdown-on-window-close";
 const BYPASS_KEY = "bypass";
 const AUTOSTART_OPTION = "ee-autostart";
@@ -35,6 +37,12 @@ const LAUNCH_FROM_TITLE_OPTION = "launch-from-menu-title";
 // Retain the saved preference key while its control now governs menu operation.
 const BYPASS_CONTROL_OPTION = "show-bypass-button";
 const KEEP_MENU_OPEN_OPTION = "keep-menu-open-on-bypass";
+const MIDDLE_CLICK_BYPASS_OPTION = "toggle-bypass-on-middle-click";
+const SCROLL_PRESETS_OPTION = "switch-presets-with-scroll";
+const TOOLTIP_KEYS = ["show-tooltips", "tooltip-preset", "tooltip-quick-position",
+    "tooltip-settings-changed", "tooltip-bypass", "tooltip-comparison-error"];
+const TOOLTIP_PROPERTIES = ["_showTooltips", "_tooltipPreset", "_tooltipQuickPosition",
+    "_tooltipSettingsChanged", "_tooltipBypass", "_tooltipComparisonError"];
 const LEGACY_TITLE_MODE_KEY = "menu-title-mode";
 const STATE_UPDATE_DELAY = 180;
 // Match the 30% opacity of Blueman's bundled disabled symbolic status icon.
@@ -115,14 +123,19 @@ class PresetMenuItem extends PopupMenu.PopupMenuItem {
 
 class SelectorSettings extends Settings.AppletSettings {
     _doUpgrade(templateData) {
-        // Cinnamon validates combobox values against the new schema's options.
-        // Preserve the saved reference while its dynamic list is reconstructed.
-        const saved = this.settingsData[DEFAULT_PRESET_KEY];
-        if (saved && typeof saved.value === "string" && saved.value) {
-            const options = Object.assign(Object.create(null), templateData[DEFAULT_PRESET_KEY].options);
-            options[saved.value] = saved.value;
-            templateData[DEFAULT_PRESET_KEY].options = options;
-        }
+        // Preserve saved names while the dynamic dropdowns are reconstructed.
+        // A former default becomes the bottom entry without loading anything.
+        const savedNames = QUICK_PRESET_KEYS.map((key, index) => {
+            const saved = this.settingsData[key] || (index === 2 ?
+                this.settingsData[LEGACY_DEFAULT_PRESET_KEY] : null);
+            const value = saved && typeof saved.value === "string" ? saved.value : "";
+            if (value) {
+                const options = Object.assign(Object.create(null), templateData[key].options);
+                options[value] = value;
+                templateData[key].options = options;
+            }
+            return value;
+        });
         const savedLaunch = this.settingsData[LAUNCH_FROM_TITLE_OPTION];
         const savedBypass = this.settingsData[BYPASS_CONTROL_OPTION];
         const savedMode = this.settingsData[LEGACY_TITLE_MODE_KEY];
@@ -137,6 +150,7 @@ class SelectorSettings extends Settings.AppletSettings {
         if (savedBypass && typeof savedBypass.value === "boolean")
             bypass = savedBypass.value;
         super._doUpgrade(templateData);
+        QUICK_PRESET_KEYS.forEach((key, index) => { this.settingsData[key].value = savedNames[index]; });
         this.settingsData[LAUNCH_FROM_TITLE_OPTION].value = launch;
         this.settingsData[BYPASS_CONTROL_OPTION].value = bypass;
     }
@@ -261,10 +275,10 @@ class PresetStateReader {
         let value = object;
         for (let i = 1; i < field.length; i++) {
             if (value === null || typeof value !== "object" || Array.isArray(value))
-                throw new Error(_("Invalid structure in the default preset."));
+                throw new Error(_("Invalid structure in the assigned preset."));
             if (!Object.prototype.hasOwnProperty.call(value, field[i])) {
                 if (i !== field.length - 1)
-                    throw new Error(_("Incomplete structure in the default preset."));
+                    throw new Error(_("Incomplete structure in the assigned preset."));
                 value = undefined;
                 break;
             }
@@ -297,10 +311,10 @@ class PresetStateReader {
     matches(preset) {
         const section = preset && preset.output;
         if (!section || !Array.isArray(section.plugins_order))
-            throw new Error(_("The default preset does not contain a valid output effect list."));
+            throw new Error(_("The assigned preset does not contain a valid output effect list."));
         const order = section.plugins_order.map(name => {
             if (typeof name !== "string")
-                throw new Error(_("Invalid effect name in the default preset."));
+                throw new Error(_("Invalid effect name in the assigned preset."));
             return name.includes("#") ? name : name + "#0";
         });
         // The cheap pipeline comparison precedes all effect parameter reads.
@@ -319,7 +333,7 @@ class PresetStateReader {
             const object = Object.prototype.hasOwnProperty.call(section, name)
                 ? section[name] : section[plugin.base];
             if (!object || typeof object !== "object" || Array.isArray(object))
-                throw new Error(_("The effect configuration is missing from the default preset: %s").format(name));
+                throw new Error(_("The effect configuration is missing from the assigned preset: %s").format(name));
             const group = this._group(plugin.definition.schema, plugin.path);
             // Flags, number of bands and mode precede remaining main/band fields.
             if (!this._matchesFields(group, plugin.definition.fields, object))
@@ -365,21 +379,29 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._bypassTooltip = null;
         this._menuTitleItem = null;
         this._bypassSlot = null;
-        this._presetDeviates = false;
+        this._matchedQuickSlot = -1;
         this._markerName = "";
         this._shutdownAvailable = false;
         this._appletSettings = null;
-        this._defaultPreset = "";
+        this._quickPresetTop = "";
+        this._quickPresetMiddle = "";
+        this._quickPresetBottom = "";
+        this._availablePresetNames = null;
+        this._scrollTargetName = null;
+        this._scrollSignal = 0;
         this._launchFromMenuTitle = false;
         this._allowBypassControl = true;
         this._keepMenuOpenOnBypass = false;
+        this._middleClickBypass = false;
+        this._scrollPresets = true;
+        TOOLTIP_PROPERTIES.forEach(property => { this[property] = true; });
         this._appletPath = metadata.path;
         this._fileCancellable = new Gio.Cancellable();
         this._parameterMap = null;
         this._readerPromise = null;
         this._stateUpdateRevision = 0;
         this._menuRevision = 0;
-        this._defaultOptionsRevision = 0;
+        this._quickOptionsRevision = 0;
         this._nativeOptionsRevision = 0;
         this._autostartRevision = 0;
         this._autostartWrite = null;
@@ -388,10 +410,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._stateTimeout = 0;
         this._externalLoadPending = false;
         this._selectionDirty = false;
-        this._referencePreset = null;
-        this._referenceDirty = true;
-        this._referenceRevision = 0;
-        this._referenceRequest = null;
+        this._referenceCache = new Map();
         this._comparisonError = "";
         this._presetMonitor = null;
         this._presetMonitorSignal = 0;
@@ -410,6 +429,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
 
         this.set_applet_icon_symbolic_name("com.github.wwmm.easyeffects-symbolic");
         this._createIconOverlay(metadata.path);
+        this._scrollSignal = this.actor.connect("scroll-event", (actor, event) => this._onPresetScroll(event));
 
         // AppletPopupMenu passes this.actor to Cinnamon and follows panel orientation.
         // The context menu keeps its base-class manager. Sharing that manager
@@ -431,7 +451,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                     this._bypassSettingsSignal = this._settings.connect("changed::" + BYPASS_KEY, () => {
                         this._syncBypassButton();
                         // Global bypass changes status, not preset selection.
-                        this._syncDeviationState();
+                        this._syncQuickState();
                     });
                     // Gio requires a read with the handler already connected.
                     this._settings.get_boolean(BYPASS_KEY);
@@ -451,14 +471,21 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             this._appletSettings = new SelectorSettings(this, UUID, instanceId);
             if (!this._appletSettings.isReady)
                 throw new Error(_("The Cinnamon applet settings could not be initialized."));
-            this._appletSettings.bind(DEFAULT_PRESET_KEY, "_defaultPreset", this._onDefaultPresetChanged);
+            QUICK_PRESET_KEYS.forEach((key, index) => {
+                this._appletSettings.bind(key, QUICK_PRESET_PROPERTIES[index], this._onQuickPresetsChanged);
+            });
             this._appletSettings.bind(LAUNCH_FROM_TITLE_OPTION, "_launchFromMenuTitle", this._onMenuTitleModeChanged);
             this._appletSettings.bind(BYPASS_CONTROL_OPTION, "_allowBypassControl", this._onMenuTitleModeChanged);
             this._appletSettings.bind(KEEP_MENU_OPEN_OPTION, "_keepMenuOpenOnBypass");
+            this._appletSettings.bind(MIDDLE_CLICK_BYPASS_OPTION, "_middleClickBypass");
+            this._appletSettings.bind(SCROLL_PRESETS_OPTION, "_scrollPresets", this._onScrollOptionChanged);
+            TOOLTIP_KEYS.forEach((key, index) => {
+                this._appletSettings.bind(key, TOOLTIP_PROPERTIES[index], this._onTooltipOptionsChanged);
+            });
             this._appletSettings.bind(AUTOSTART_OPTION, "_startService", this._onAutostartChanged);
             this._appletSettings.bind(SHUTDOWN_OPTION, "_shutdownOnClose", this._onShutdownChanged);
             this._restoreSelectionTracker();
-            this._syncDefaultOptions();
+            this._syncQuickOptions();
             this._monitorPresetDirectory();
             this._syncEasyEffectsOptions();
             this._monitorAutostart();
@@ -477,7 +504,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             y_expand: false,
             reactive: false
         });
-        this._deviationDot = new St.Icon({
+        this._presetDot = new St.Icon({
             gicon: new Gio.FileIcon({file: Gio.File.new_for_path(
                 GLib.build_filenamev([appletPath, "deviation-dot.svg"])
             )}),
@@ -493,35 +520,61 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         });
         this._applet_icon_box.set_child(null);
         this._iconOverlay.add_child(this._applet_icon);
-        this._iconOverlay.add_child(this._deviationDot);
+        this._iconOverlay.add_child(this._presetDot);
         // Center the overlay at the icon's natural size rather than stretching
         // it to the full panel height. The badge stays inside the icon bounds.
         this._applet_icon_box.set_fill(false, false);
         this._applet_icon_box.set_child(this._iconOverlay);
     }
 
-    async _syncDefaultOptions(names = null) {
+    _quickEntries() {
+        const seen = new Set();
+        return QUICK_PRESET_PROPERTIES.flatMap((property, slot) => {
+            const name = this[property];
+            if (typeof name !== "string" || !name || seen.has(name))
+                return [];
+            seen.add(name);
+            return [{name, slot, key: QUICK_PRESET_KEYS[slot]}];
+        });
+    }
+
+    _hasQuickPresets() {
+        return this._quickEntries().length > 0;
+    }
+
+    _quickSignature() {
+        return JSON.stringify(QUICK_PRESET_PROPERTIES.map(property => this[property]));
+    }
+
+    async _syncQuickOptions(names = null) {
         if (this._removed || !this._appletSettings || !this._appletSettings.isReady)
             return;
-        const revision = ++this._defaultOptionsRevision;
+        const revision = ++this._quickOptionsRevision;
         try {
             const available = names || await this._readPresets();
-            if (this._removed || revision !== this._defaultOptionsRevision)
+            if (this._removed || revision !== this._quickOptionsRevision)
                 return;
-            const options = Object.create(null);
-            let emptyLabel = _("No default preset");
-            while (available.includes(emptyLabel) || this._defaultPreset === emptyLabel)
-                emptyLabel += " ";
-            options[emptyLabel] = "";
-            available.forEach(name => { options[name] = name; });
-            if (this._defaultPreset && !available.includes(this._defaultPreset)) {
-                let missingLabel = _("%s (no longer available)").format(this._defaultPreset);
-                while (Object.prototype.hasOwnProperty.call(options, missingLabel))
-                    missingLabel += " ";
-                options[missingLabel] = this._defaultPreset;
+            this._availablePresetNames = available;
+            for (let slot = 0; slot < QUICK_PRESET_KEYS.length; slot++) {
+                const current = this[QUICK_PRESET_PROPERTIES[slot]];
+                const options = Object.create(null);
+                let emptyLabel = _("No preset");
+                while (available.includes(emptyLabel) || current === emptyLabel)
+                    emptyLabel += " ";
+                options[emptyLabel] = "";
+                // Keep occupied names visible. The GTK dropdown disables choices
+                // assigned to another position instead of hiding those rows.
+                available.forEach(name => { options[name] = name; });
+                for (const entry of this._quickEntries().filter(entry => !available.includes(entry.name))) {
+                    let missingLabel = _("%s (no longer available)").format(entry.name);
+                    while (Object.prototype.hasOwnProperty.call(options, missingLabel))
+                        missingLabel += " ";
+                    options[missingLabel] = entry.name;
+                }
+                const key = QUICK_PRESET_KEYS[slot];
+                if (JSON.stringify(options) !== JSON.stringify(this._appletSettings.getOptions(key)))
+                    this._appletSettings.setOptions(key, options);
             }
-            if (JSON.stringify(options) !== JSON.stringify(this._appletSettings.getOptions(DEFAULT_PRESET_KEY)))
-                this._appletSettings.setOptions(DEFAULT_PRESET_KEY, options);
         } catch (error) {
             if (!this._removed)
                 global.logError(error, UUID);
@@ -678,17 +731,26 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             const directory = Gio.File.new_for_path(this._outputDirectory);
             this._presetMonitor = directory.monitor_directory(Gio.FileMonitorFlags.NONE, null);
             this._presetMonitorSignal = this._presetMonitor.connect("changed", (monitor, file, otherFile) => {
-                if (!this._removed) {
-                    const referencePath = GLib.build_filenamev([this._outputDirectory, this._defaultPreset + ".json"]);
-                    if (this._defaultPreset && (!file || file.get_path() === referencePath ||
-                        (otherFile && otherFile.get_path() === referencePath))) {
-                        this._invalidateReference();
-                        this._queueStateUpdate();
+                if (this._removed)
+                    return;
+                let affectsSelection = false;
+                for (const entry of this._quickEntries()) {
+                    const presetPath = GLib.build_filenamev([this._outputDirectory, entry.name + ".json"]);
+                    if (!file || file.get_path() === presetPath ||
+                        (otherFile && otherFile.get_path() === presetPath)) {
+                        this._invalidateQuickReference(entry.name);
+                        affectsSelection = true;
+                        if (entry.name === this._currentPresetName()) {
+                            this._matchedQuickSlot = -1;
+                            this._syncQuickState();
+                        }
                     }
-                    this._syncDefaultOptions();
-                    if (this.menu.isOpen)
-                        this._populateMenu();
                 }
+                if (affectsSelection)
+                    this._queueStateUpdate();
+                this._syncQuickOptions();
+                if (this.menu.isOpen)
+                    this._populateMenu();
             });
         } catch (error) {
             if (!ioError(error, Gio.IOErrorEnum.NOT_FOUND))
@@ -696,11 +758,13 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         }
     }
 
-    _onDefaultPresetChanged() {
+    _onQuickPresetsChanged() {
         if (this._removed)
             return;
-        this._invalidateReference();
-        if (!this._defaultPreset) {
+        this._invalidateQuickReference();
+        this._matchedQuickSlot = -1;
+        this._scrollTargetName = null;
+        if (!this._hasQuickPresets()) {
             this._cancelStateUpdate();
             this._externalLoadPending = false;
             this._selectionDirty = false;
@@ -709,7 +773,8 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 this._stateReader = null;
             }
         }
-        this._syncDefaultOptions();
+        this._syncQuickState();
+        this._syncQuickOptions();
         if (this.menu.isOpen)
             this._populateMenu();
         else
@@ -756,14 +821,15 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._bypassTooltip = new Tooltips.Tooltip(button);
     }
 
-    _canToggleBypass() {
+    _canToggleBypass(fromMiddleClick = false) {
         return !this._removed && Boolean(this._settings && this._bypassAvailable) &&
-            this._launchFromMenuTitle === true && this._allowBypassControl === true;
+            (fromMiddleClick ? this._middleClickBypass === true :
+                this._launchFromMenuTitle === true && this._allowBypassControl === true);
     }
 
     _shouldKeepPresetMenuOpen() {
-        return this._keepMenuOpenOnBypass === true && this._canToggleBypass() &&
-            this._settings.get_boolean(BYPASS_KEY);
+        return !this._removed && this._keepMenuOpenOnBypass === true &&
+            Boolean(this._settings && this._bypassAvailable && this._settings.get_boolean(BYPASS_KEY));
     }
 
     _syncBypassButton() {
@@ -794,11 +860,13 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             ? (enabled ? _("Global bypass: on") : _("Global bypass: off"))
             : _("Global bypass is unavailable");
         this._bypassButton.accessible_name = text;
-        this._bypassTooltip.set_text(text);
+        this._bypassTooltip.set_text(this._showTooltips ? text : "");
+        if (!this._showTooltips)
+            this._bypassTooltip.hide();
     }
 
-    _toggleBypass() {
-        if (!this._canToggleBypass())
+    _toggleBypass(fromMiddleClick = false) {
+        if (!this._canToggleBypass(fromMiddleClick))
             return;
         try {
             const enabled = this._settings.get_boolean(BYPASS_KEY);
@@ -810,12 +878,12 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         } finally {
             // Restore the real state if a write failed, rather than retaining the click's toggle.
             this._syncBypassButton();
-            this._syncDeviationState();
+            this._syncQuickState();
         }
     }
 
     configureApplet(tab = 0) {
-        this._syncDefaultOptions();
+        this._syncQuickOptions();
         this._monitorPresetDirectory();
         this._syncEasyEffectsOptions();
         this._monitorAutostart();
@@ -827,6 +895,49 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         if (!this.menu.isOpen)
             this._populateMenu();
         this.menu.toggle();
+    }
+
+    on_applet_middle_clicked() {
+        this._toggleBypass(true);
+    }
+
+    _onScrollOptionChanged() {
+        if (this._scrollPresets !== true)
+            this._scrollTargetName = null;
+    }
+
+    _onPresetScroll(event) {
+        if (this._removed || this._scrollPresets !== true || !this._applet_enabled || !this._draggable.inhibit)
+            return Clutter.EVENT_PROPAGATE;
+        const direction = event.get_scroll_direction();
+        if (direction !== Clutter.ScrollDirection.UP && direction !== Clutter.ScrollDirection.DOWN)
+            return Clutter.EVENT_PROPAGATE;
+        const entries = this._quickEntries().filter(entry =>
+            this._availablePresetNames && this._availablePresetNames.includes(entry.name));
+        if (!entries.length)
+            return Clutter.EVENT_PROPAGATE;
+        const current = this._scrollTargetName || this._requestedPresetName || this._currentPresetName();
+        const index = entries.findIndex(entry => entry.name === current);
+        const step = direction === Clutter.ScrollDirection.DOWN ? 1 : -1;
+        const next = index < 0 ? (step > 0 ? 0 : entries.length - 1)
+            : (index + step + entries.length) % entries.length;
+        this._scrollTargetName = entries[next].name;
+        this._loadNextScrolledPreset();
+        return Clutter.EVENT_STOP;
+    }
+
+    _loadNextScrolledPreset(completedName = null) {
+        if (this._removed || this._scrollPresets !== true || this._loading || !this._scrollTargetName)
+            return;
+        const name = this._scrollTargetName;
+        this._scrollTargetName = null;
+        const entry = this._quickEntries().find(candidate => candidate.name === name);
+        if (!entry || !this._availablePresetNames || !this._availablePresetNames.includes(name))
+            return;
+        if (name === completedName ||
+            (name === this._currentPresetName() && this._matchedQuickSlot === entry.slot))
+            return;
+        this._loadPreset(name);
     }
 
     async _readPresets() {
@@ -890,17 +1001,19 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             const names = await this._readPresets();
             if (this._removed || revision !== this._menuRevision)
                 return;
-            this._syncDefaultOptions(names);
+            this._syncQuickOptions(names);
             this._monitorPresetDirectory();
-            const ordered = names.filter(name => name !== this._defaultPreset);
-            if (names.includes(this._defaultPreset))
-                ordered.push(this._defaultPreset);
+            const quickNames = this._quickEntries().map(entry => entry.name).filter(name => names.includes(name));
+            const otherNames = names.filter(name => !quickNames.includes(name));
+            const ordered = otherNames.concat(quickNames);
             if (names.length === 0) {
                 this.menu.addMenuItem(new PopupMenu.PopupMenuItem(
                     _("No output presets saved"), {reactive: false}
                 ));
             }
-            ordered.forEach(name => {
+            ordered.forEach((name, index) => {
+                if (otherNames.length && quickNames.length && index === otherNames.length)
+                    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
                 const item = new PresetMenuItem(name, () => this._shouldKeepPresetMenuOpen());
                 item.setSensitive(!this._loading);
                 item.connect("activate", (item, event) => this._loadPreset(name, event));
@@ -946,10 +1059,12 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
     _onLoadedPresetChanged() {
         if (this._removed)
             return;
-        if (!this._defaultPreset) {
+        if (!this._hasQuickPresets()) {
             this._updateSelection();
             return;
         }
+        this._matchedQuickSlot = -1;
+        this._syncQuickState();
         // EasyEffects writes this key before applying the pipeline and its values.
         // Treat the following coalesced changes as loading, not manual editing.
         this._selectionDirty = false;
@@ -969,7 +1084,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
     }
 
     _restoreSelectionTracker() {
-        if (!this._defaultPreset || !this._appletSettings || !this._appletSettings.isReady)
+        if (!this._hasQuickPresets() || !this._appletSettings || !this._appletSettings.isReady)
             return;
         try {
             const saved = JSON.parse(this._appletSettings.getValue(SELECTION_TRACKER_KEY) || "null");
@@ -982,7 +1097,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
     }
 
     _saveSelectionTracker() {
-        if (this._removed || this._loading || !this._defaultPreset ||
+        if (this._removed || this._loading || !this._hasQuickPresets() ||
             !this._appletSettings || !this._appletSettings.isReady)
             return;
         try {
@@ -994,14 +1109,16 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         }
     }
 
-    _invalidateReference() {
-        this._referenceRevision++;
-        this._referenceDirty = true;
-        this._referencePreset = null;
-        this._referenceReadError = "";
+    _invalidateQuickReference(name = null) {
+        if (name === null)
+            this._referenceCache.clear();
+        else
+            this._referenceCache.delete(name);
     }
 
     _ensureStateReader() {
+        if (!this._hasQuickPresets())
+            return Promise.resolve(null);
         if (this._stateReader)
             return Promise.resolve(this._stateReader);
         if (this._readerPromise)
@@ -1016,7 +1133,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                     throw new Error(_("The effect parameter map could not be read."));
                 this._parameterMap = JSON.parse(ByteArray.toString(contents));
             }
-            if (this._removed || !this._defaultPreset)
+            if (this._removed || !this._hasQuickPresets())
                 return null;
             this._stateReader = new PresetStateReader(this._parameterMap, () => this._onEffectStateChanged());
             return this._stateReader;
@@ -1030,15 +1147,12 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         return operation;
     }
 
-    async _readReferencePreset() {
-        if (!this._referenceDirty)
-            return this._referencePreset;
-        const revision = this._referenceRevision;
-        let request = this._referenceRequest;
-        if (!request || request.revision !== revision) {
-            const name = this._defaultPreset;
-            request = {revision, promise: null};
-            request.promise = (async () => {
+    async _readQuickPreset(name) {
+        let reference = this._referenceCache.get(name);
+        if (!reference) {
+            reference = {preset: null, error: "", promise: null};
+            this._referenceCache.set(name, reference);
+            reference.promise = (async () => {
                 let preset = null;
                 let readError = "";
                 try {
@@ -1049,21 +1163,20 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                         this._fileCancellable
                     ]);
                     if (!ok)
-                        throw new Error(_("The default preset could not be read."));
+                        throw new Error(_("The assigned preset could not be read."));
                     preset = JSON.parse(ByteArray.toString(contents));
                 } catch (error) {
-                    readError = _("The default preset cannot be read: %s").format(error.message);
+                    readError = _("The assigned preset cannot be read: %s").format(error.message);
                 }
-                if (!this._removed && revision === this._referenceRevision && name === this._defaultPreset) {
-                    this._referencePreset = preset;
-                    this._referenceReadError = readError;
-                    this._referenceDirty = false;
+                // An invalidated, superseded or cancelled read cannot repopulate the cache.
+                if (!this._removed && this._referenceCache.get(name) === reference) {
+                    reference.preset = preset;
+                    reference.error = readError;
                 }
             })();
-            this._referenceRequest = request;
         }
-        await request.promise;
-        return revision === this._referenceRevision ? this._referencePreset : null;
+        await reference.promise;
+        return this._referenceCache.get(name) === reference ? reference : null;
     }
 
     _currentPresetName() {
@@ -1078,16 +1191,17 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             return;
         const revision = ++this._stateUpdateRevision;
         if (this._loading) {
-            this.set_applet_tooltip(_("EasyEffects: loading preset…"));
+            this._syncTooltip();
             return;
         }
         const name = this._currentPresetName();
-        const defaultName = this._defaultPreset;
+        const signature = this._quickSignature();
+        const entries = this._quickEntries();
+        const candidate = entries.find(entry => entry.name === name);
         let markerName = name;
-        let deviates = false;
+        let matchedSlot = -1;
         let comparisonError = "";
-        if (this._settings && defaultName) {
-            deviates = true;
+        if (this._settings && entries.length) {
             markerName = "";
             try {
                 const reader = await this._ensureStateReader();
@@ -1099,58 +1213,83 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                     reader.needsRefresh = true;
                     throw error;
                 }
-                // Other names are already deviations. Global bypass affects the
-                // blue dot, while the white marker still compares the preset.
-                if (name === defaultName) {
-                    const reference = await this._readReferencePreset();
-                    if (this._removed || revision !== this._stateUpdateRevision || this._referenceDirty)
+                // A name identifies at most one candidate. Never compare all three files.
+                if (candidate) {
+                    const reference = await this._readQuickPreset(name);
+                    if (this._removed || revision !== this._stateUpdateRevision || !reference)
                         return;
-                    if (!reference)
-                        throw new Error(this._referenceReadError);
+                    if (!reference.preset)
+                        throw new Error(reference.error);
                     reader.refresh();
-                    const matchesDefault = reader.matches(reference);
-                    deviates = !matchesDefault;
-                    if (matchesDefault)
-                        markerName = defaultName;
-                }
-                else if (!this._selectionDirty)
+                    if (reader.matches(reference.preset)) {
+                        matchedSlot = candidate.slot;
+                        markerName = name;
+                    }
+                } else if (!this._selectionDirty) {
                     markerName = name;
+                }
             } catch (error) {
                 comparisonError = error.message;
             }
         }
-        // A later menu/default change, load or removal supersedes an earlier read.
+        // Later assignments, loads, menu changes or removal supersede an earlier read.
         if (this._removed || revision !== this._stateUpdateRevision || this._loading ||
-            defaultName !== this._defaultPreset || name !== this._currentPresetName())
+            signature !== this._quickSignature() || name !== this._currentPresetName())
             return;
         this._comparisonError = comparisonError;
         this._presetItems.forEach(entry => entry.item.setShowDot(entry.name === markerName));
         this._markerName = markerName;
-        this._presetDeviates = deviates;
-        this._syncDeviationState();
+        this._matchedQuickSlot = matchedSlot;
+        this._syncQuickState();
     }
 
-    _syncDeviationState() {
+    _syncQuickState() {
         if (this._removed)
             return;
         const bypass = Boolean(this._settings && this._bypassAvailable &&
             this._settings.get_boolean(BYPASS_KEY));
         // Dim only the base icon; the full-color badge is a separate sibling.
         this._applet_icon.opacity = bypass ? BYPASS_ICON_OPACITY : 255;
-        this._deviationDot.visible = Boolean(this._defaultPreset && (this._presetDeviates || bypass));
-        if (this._loading)
+        const alignments = [Clutter.ActorAlign.START, Clutter.ActorAlign.CENTER, Clutter.ActorAlign.END];
+        if (this._matchedQuickSlot >= 0)
+            this._presetDot.y_align = alignments[this._matchedQuickSlot];
+        this._presetDot.visible = this._matchedQuickSlot >= 0;
+        this._syncTooltip();
+    }
+
+    _onTooltipOptionsChanged() {
+        if (this._removed)
             return;
+        this._syncTooltip();
+        this._syncBypassButton();
+    }
+
+    _syncTooltip() {
+        if (this._removed)
+            return;
+        if (!this._showTooltips) {
+            this.set_applet_tooltip("");
+            return;
+        }
+        if (this._loading) {
+            this.set_applet_tooltip(this._tooltipPreset ? _("Loading preset…") : "");
+            return;
+        }
         const name = this._currentPresetName();
-        const lines = [name
-            ? _("EasyEffects output preset: %s").format(name)
-            : _("EasyEffects output preset")];
-        if (this._defaultPreset)
-            lines.push(_("Default preset: %s").format(this._defaultPreset));
-        if (this._defaultPreset && this._selectionDirty && this._markerName !== this._defaultPreset)
+        const lines = [];
+        if (this._tooltipPreset)
+            lines.push(name ? _("Preset: %s").format(name) : _("Preset:"));
+        if (this._tooltipQuickPosition && this._matchedQuickSlot >= 0) {
+            const positions = [_("Top"), _("Middle"), _("Bottom")];
+            lines.push(_("Quick selection: %s").format(positions[this._matchedQuickSlot]));
+        }
+        if (this._tooltipSettingsChanged && this._hasQuickPresets() &&
+            this._selectionDirty && this._matchedQuickSlot < 0)
             lines.push(_("Effect settings changed"));
-        if (bypass)
+        if (this._tooltipBypass && this._settings && this._bypassAvailable &&
+            this._settings.get_boolean(BYPASS_KEY))
             lines.push(_("Global bypass enabled"));
-        if (this._comparisonError)
+        if (this._tooltipComparisonError && this._comparisonError)
             lines.push(_("Comparison unavailable: %s").format(this._comparisonError));
         this.set_applet_tooltip(lines.join("\n"));
     }
@@ -1182,12 +1321,15 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         if (this._loading || this._removed)
             return;
         this._loading = true;
+        this._matchedQuickSlot = -1;
+        this._presetDot.visible = false;
         this._requestedPresetName = name;
         const fromKeyboard = event && typeof event.type === "function" &&
             event.type() === Clutter.EventType.KEY_PRESS;
         const focusActor = global.stage.get_key_focus();
         const focusWasPreset = this.menu.isOpen && focusActor &&
             this._presetItems.some(entry => entry.item.actor.contains(focusActor));
+        const focusWasMenu = this.menu.isOpen && focusActor === this.menu.actor;
         // Disabling the focused row would make Cinnamon focus the title instead.
         if (focusWasPreset)
             this.menu.actor.grab_key_focus();
@@ -1214,7 +1356,9 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             this._selectionDirty = Boolean(error);
             this._saveSelectionTracker();
             if (!this._removed) {
-                const restoreFocus = focusWasPreset && this.menu.isOpen &&
+                // Re-enabling rows can also focus the first preset when the menu
+                // itself held focus, as when scrolling over the panel icon.
+                const restoreFocus = (focusWasPreset || focusWasMenu) && this.menu.isOpen &&
                     global.stage.get_key_focus() === this.menu.actor;
                 this._presetItems.forEach(entry => entry.item.setSensitive(true));
                 // Respect any navigation or dismissal that occurred while loading.
@@ -1236,6 +1380,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                     global.logError(error, UUID);
                     Main.notify("EasyEffects", _("Preset “%s” could not be loaded.\n%s").format(name, error.message));
                 }
+                this._loadNextScrolledPreset(error ? null : name);
             }
         };
 
@@ -1296,14 +1441,19 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
 
     on_applet_removed_from_panel() {
         this._removed = true;
+        this._scrollTargetName = null;
+        if (this._scrollSignal) {
+            this.actor.disconnect(this._scrollSignal);
+            this._scrollSignal = 0;
+        }
         this._fileCancellable.cancel();
         this._stateUpdateRevision++;
         this._menuRevision++;
-        this._defaultOptionsRevision++;
+        this._quickOptionsRevision++;
         this._nativeOptionsRevision++;
         this._autostartMonitorRevision++;
         this._autostartRevision++;
-        this._invalidateReference();
+        this._invalidateQuickReference();
         this._cancelStateUpdate();
         if (this._stateReader) {
             this._stateReader.destroy();

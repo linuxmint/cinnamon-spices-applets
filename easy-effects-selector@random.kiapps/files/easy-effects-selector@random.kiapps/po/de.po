@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 msgid ""
 msgstr ""
-"Project-Id-Version: easy-effects-selector@random.kiapps 1.4.14\n"
+"Project-Id-Version: easy-effects-selector@random.kiapps 1.5.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2026-10-09 03:15+0000\n"
-"PO-Revision-Date: 2026-10-09 03:15+0000\n"
+"POT-Creation-Date: 2026-10-09 22:15+0000\n"
+"PO-Revision-Date: 2026-10-09 22:15+0000\n"
 "Last-Translator: random.kiapps\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -19,30 +19,35 @@ msgstr ""
 msgid "%s (no longer available)"
 msgstr "%s (nicht mehr vorhanden)"
 
-msgid "Applet"
-msgstr "Applet"
+msgid "A blue dot shows a matching preset at its assigned position. Mouse-wheel selection can be enabled or disabled under Controls. Nothing is loaded at startup."
+msgstr "Ein blauer Punkt zeigt ein passendes Preset an der zugeordneten Position. Die Mausradwahl lässt sich unter „Bedienung“ ein- oder ausschalten. Beim Start wird nichts geladen."
 
 #, javascript-format
 msgid "Autostart could not be changed: %s"
 msgstr "Autostart konnte nicht geändert werden: %s"
 
+msgid "Bottom"
+msgstr "Unten"
+
 #, javascript-format
 msgid "Bypass could not be changed: %s"
 msgstr "Bypass konnte nicht geändert werden: %s"
 
-msgid "Clicking \"Easy Effects\" launches Easy Effects. Active bypass is always shown; it can be toggled when menu control is enabled."
-msgstr "Ein Klick auf \"Easy Effects\" startet Easy Effects. Aktiver Bypass wird immer angezeigt; mit aktivierter Menübedienung lässt er sich umschalten."
+msgid "Bypass status"
+msgstr "Bypass-Zustand"
+
+msgid "Changed settings"
+msgstr "Geänderte Einstellungen"
+
+msgid "Comparison errors"
+msgstr "Vergleichsfehler"
 
 #, javascript-format
 msgid "Comparison unavailable: %s"
 msgstr "Vergleich nicht möglich: %s"
 
-msgid "Default preset"
-msgstr "Standardpreset"
-
-#, javascript-format
-msgid "Default preset: %s"
-msgstr "Standardpreset: %s"
+msgid "Controls"
+msgstr "Bedienung"
 
 msgid "Easy Effects"
 msgstr "Easy Effects"
@@ -52,16 +57,6 @@ msgstr "EasyEffects Preset Selector"
 
 msgid "EasyEffects did not load the output preset. Please check the preset file."
 msgstr "EasyEffects hat das Ausgabe-Preset nicht übernommen. Bitte die Preset-Datei prüfen."
-
-msgid "EasyEffects output preset"
-msgstr "EasyEffects-Ausgabevoreinstellung"
-
-#, javascript-format
-msgid "EasyEffects output preset: %s"
-msgstr "EasyEffects-Ausgabevoreinstellung: %s"
-
-msgid "EasyEffects: loading preset…"
-msgstr "EasyEffects: Voreinstellung wird geladen …"
 
 msgid "Effect settings changed"
 msgstr "Effekteinstellungen verändert"
@@ -78,17 +73,14 @@ msgstr "Globaler Bypass: aus"
 msgid "Global bypass: on"
 msgstr "Globaler Bypass: an"
 
-msgid "Global bypass: on (status only)"
-msgstr "Globaler Bypass: an (nur Anzeige)"
+msgid "Incomplete structure in the assigned preset."
+msgstr "Unvollständige Struktur im zugeordneten Preset."
 
-msgid "Incomplete structure in the default preset."
-msgstr "Unvollständige Struktur im Standardpreset."
+msgid "Invalid effect name in the assigned preset."
+msgstr "Ungültiger Effektname im zugeordneten Preset."
 
-msgid "Invalid effect name in the default preset."
-msgstr "Ungültiger Effektname im Standardpreset."
-
-msgid "Invalid structure in the default preset."
-msgstr "Ungültige Struktur im Standardpreset."
+msgid "Invalid structure in the assigned preset."
+msgstr "Ungültige Struktur im zugeordneten Preset."
 
 msgid "Keep menu open after preset selection when bypass is active"
 msgstr "Menü nach Presetwahl bei aktivem Bypass offen halten"
@@ -99,18 +91,53 @@ msgstr "Easy Effects im Menü starten"
 msgid "Launch Service at System Startup"
 msgstr "Dienst beim Systemstart starten"
 
-msgid "No default preset"
-msgstr "Kein Standardpreset"
+msgid "Loading preset…"
+msgstr "Voreinstellung wird geladen …"
+
+msgid "Middle"
+msgstr "Mittig"
 
 msgid "No output presets saved"
 msgstr "Keine Ausgabevoreinstellungen gespeichert"
+
+msgid "No preset"
+msgstr "Kein Preset"
+
+msgid "Preset at bottom"
+msgstr "Preset unten"
+
+msgid "Preset at middle"
+msgstr "Preset mittig"
+
+msgid "Preset at top"
+msgstr "Preset oben"
+
+msgid "Preset name"
+msgstr "Voreinstellung"
 
 #, javascript-format
 msgid "Preset “%s” could not be loaded.\n%s"
 msgstr "Voreinstellung „%s“ konnte nicht geladen werden.\n%s"
 
+msgid "Preset:"
+msgstr "Voreinstellung:"
+
+#, javascript-format
+msgid "Preset: %s"
+msgstr "Voreinstellung: %s"
+
 msgid "Presets could not be read"
 msgstr "Voreinstellungen konnten nicht gelesen werden"
+
+msgid "Quick selection"
+msgstr "Schnellwahl"
+
+#, javascript-format
+msgid "Quick selection: %s"
+msgstr "Schnellwahl: %s"
+
+msgid "Quick-selection position"
+msgstr "Position in der Schnellwahl"
 
 msgid "Quit EasyEffects when its window closes. This setting is synchronized in both directions with the EasyEffects settings window."
 msgstr "EasyEffects beim Schließen seines Fensters vollständig beenden. Diese Einstellung ist mit dem EasyEffects-Einstellungsfenster in beide Richtungen synchronisiert."
@@ -124,11 +151,17 @@ msgstr "Am besten <b>einschalten</b>, damit der Dienst beim Anmelden im Hintergr
 msgid "Select EasyEffects 7.2.3 output presets from the panel"
 msgstr "Ausgabevoreinstellungen von EasyEffects 7.2.3 direkt aus der Leiste auswählen"
 
+msgid "Show tooltips"
+msgstr "Tooltips anzeigen"
+
 msgid "Shutdown on Window Closing"
 msgstr "Beim Schließen des Fensters beenden"
 
 msgid "Start EasyEffects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
 msgstr "EasyEffects beim Anmelden als Hintergrunddienst starten. Ein bereits geöffnetes EasyEffects-Einstellungsfenster zeigt externe Autostart-Änderungen erst nach erneutem Öffnen an."
+
+msgid "Switch presets with mouse wheel"
+msgstr "Presets mit dem Mausrad wechseln"
 
 msgid "The Cinnamon applet settings could not be initialized."
 msgstr "Die Cinnamon-Applet-Einstellungen konnten nicht initialisiert werden."
@@ -159,22 +192,22 @@ msgstr "EasyEffects-Einstellungsschema fehlt: %s"
 msgid "The EasyEffects settings schema was not found."
 msgstr "Das EasyEffects-Einstellungsschema wurde nicht gefunden."
 
+#, javascript-format
+msgid "The assigned preset cannot be read: %s"
+msgstr "Das zugeordnete Preset ist nicht lesbar: %s"
+
+msgid "The assigned preset could not be read."
+msgstr "Das zugeordnete Preset konnte nicht gelesen werden."
+
+msgid "The assigned preset does not contain a valid output effect list."
+msgstr "Das zugeordnete Preset enthält keine gültige Ausgabe-Effektliste."
+
 msgid "The autostart directory could not be created."
 msgstr "Das Autostart-Verzeichnis konnte nicht erstellt werden."
 
 #, javascript-format
-msgid "The default preset cannot be read: %s"
-msgstr "Standardpreset nicht lesbar: %s"
-
-msgid "The default preset could not be read."
-msgstr "Standardpreset konnte nicht gelesen werden."
-
-msgid "The default preset does not contain a valid output effect list."
-msgstr "Das Standardpreset enthält keine gültige Ausgabe-Effektliste."
-
-#, javascript-format
-msgid "The effect configuration is missing from the default preset: %s"
-msgstr "Effektkonfiguration fehlt im Standardpreset: %s"
+msgid "The effect configuration is missing from the assigned preset: %s"
+msgstr "Die Effektkonfiguration fehlt im zugeordneten Preset: %s"
 
 msgid "The effect parameter map could not be read."
 msgstr "Die Effektparameter-Zuordnung konnte nicht gelesen werden."
@@ -188,12 +221,16 @@ msgstr "Die Preset-Datei wurde verschoben oder gelöscht."
 msgid "Toggle bypass in menu"
 msgstr "Bypass im Menü umschalten"
 
+msgid "Toggle bypass with middle click"
+msgstr "Bypass mit Mittelklick umschalten"
+
+msgid "Tooltips"
+msgstr "Tooltips"
+
+msgid "Top"
+msgstr "Oben"
+
 #, javascript-format
 msgid "Unknown EasyEffects effect: %s"
 msgstr "Unbekannter EasyEffects-Effekt: %s"
 
-msgid "Use as the reference for the blue dot and as the last entry in the preset menu. Selecting a default does not load a preset."
-msgstr "Als Vergleichswert für den blauen Punkt und als letzten Eintrag im Preset-Menü speichern. Die Auswahl lädt kein Preset."
-
-msgid "When a default preset is selected, a blue dot indicates that the current overall settings differ from the default preset. This setting does not load anything at startup."
-msgstr "Bei Wahl eines Standardpresets zeigt ein blauer Punkt an, dass die aktuellen Gesamteinstellungen vom Standardpreset abweichen. Beim Start wird durch diese Einstellung nichts geladen."
