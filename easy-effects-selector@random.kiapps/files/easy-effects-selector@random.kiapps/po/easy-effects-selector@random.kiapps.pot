@@ -3,9 +3,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 msgid ""
 msgstr ""
-"Project-Id-Version: easy-effects-selector@random.kiapps 1.4.3\n"
+"Project-Id-Version: easy-effects-selector@random.kiapps 1.4.13\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2026-10-05 18:55+0000\n"
+"POT-Creation-Date: 2026-10-09 03:15+0000\n"
+"PO-Revision-Date: 2026-10-09 03:15+0000\n"
+"Last-Translator: random.kiapps\n"
+"Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,6 +23,13 @@ msgstr ""
 
 #, javascript-format
 msgid "Autostart could not be changed: %s"
+msgstr ""
+
+#, javascript-format
+msgid "Bypass could not be changed: %s"
+msgstr ""
+
+msgid "Clicking \"Easy Effects\" launches Easy Effects. Active bypass is always shown; it can be toggled when menu control is enabled."
 msgstr ""
 
 #, javascript-format
@@ -58,6 +68,18 @@ msgstr ""
 msgid "Global bypass enabled"
 msgstr ""
 
+msgid "Global bypass is unavailable"
+msgstr ""
+
+msgid "Global bypass: off"
+msgstr ""
+
+msgid "Global bypass: on"
+msgstr ""
+
+msgid "Global bypass: on (status only)"
+msgstr ""
+
 msgid "Incomplete structure in the default preset."
 msgstr ""
 
@@ -67,13 +89,13 @@ msgstr ""
 msgid "Invalid structure in the default preset."
 msgstr ""
 
-msgid "Launch EasyEffects from the menu title"
+msgid "Keep menu open after preset selection when bypass is active"
+msgstr ""
+
+msgid "Launch Easy Effects from the menu"
 msgstr ""
 
 msgid "Launch Service at System Startup"
-msgstr ""
-
-msgid "Make the Easy Effects menu title clickable to launch EasyEffects."
 msgstr ""
 
 msgid "No default preset"
@@ -92,6 +114,12 @@ msgstr ""
 msgid "Quit EasyEffects when its window closes. This setting is synchronized in both directions with the EasyEffects settings window."
 msgstr ""
 
+msgid "Recommended: <b>disable</b> this so the service keeps running when the window is closed."
+msgstr ""
+
+msgid "Recommended: <b>enable</b> this so the service is ready in the background when you log in."
+msgstr ""
+
 msgid "Select EasyEffects 7.2.3 output presets from the panel"
 msgstr ""
 
@@ -105,6 +133,9 @@ msgid "The Cinnamon applet settings could not be initialized."
 msgstr ""
 
 msgid "The EasyEffects autostart path is not a regular file."
+msgstr ""
+
+msgid "The EasyEffects bypass setting could not be changed."
 msgstr ""
 
 msgid "The EasyEffects command failed."
@@ -153,6 +184,9 @@ msgstr ""
 msgid "The preset file was moved or deleted."
 msgstr ""
 
+msgid "Toggle bypass in menu"
+msgstr ""
+
 #, javascript-format
 msgid "Unknown EasyEffects effect: %s"
 msgstr ""
@@ -161,7 +195,4 @@ msgid "Use as the reference for the blue dot and as the last entry in the preset
 msgstr ""
 
 msgid "When a default preset is selected, a blue dot indicates that the current overall settings differ from the default preset. This setting does not load anything at startup."
-msgstr ""
-
-msgid "random.kiapps"
 msgstr ""

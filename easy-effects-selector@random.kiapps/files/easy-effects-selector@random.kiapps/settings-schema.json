@@ -13,14 +13,31 @@
         "tooltip": "Use as the reference for the blue dot and as the last entry in the preset menu. Selecting a default does not load a preset."
     },
     "reference-note": {
-        "type": "label",
-        "description": "When a default preset is selected, a blue dot indicates that the current overall settings differ from the default preset. This setting does not load anything at startup."
+        "type": "custom",
+        "description": "When a default preset is selected, a blue dot indicates that the current overall settings differ from the default preset. This setting does not load anything at startup.",
+        "file": "title_mode.py",
+        "widget": "ReferenceNote"
     },
     "launch-from-menu-title": {
-        "type": "switch",
-        "default": false,
-        "description": "Launch EasyEffects from the menu title",
-        "tooltip": "Make the Easy Effects menu title clickable to launch EasyEffects."
+        "type": "generic",
+        "default": true
+    },
+    "show-bypass-button": {
+        "type": "generic",
+        "default": true
+    },
+    "keep-menu-open-on-bypass": {
+        "type": "generic",
+        "default": false
+    },
+    "menu-title-controls": {
+        "type": "custom",
+        "description": "Launch Easy Effects from the menu",
+        "file": "title_mode.py",
+        "widget": "MenuControls",
+        "launch-key": "launch-from-menu-title",
+        "bypass-key": "show-bypass-button",
+        "keep-open-key": "keep-menu-open-on-bypass"
     },
     "selection-tracker": {
         "type": "generic",
@@ -36,10 +53,24 @@
         "description": "Launch Service at System Startup",
         "tooltip": "Start EasyEffects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
     },
+    "ee-autostart-note": {
+        "type": "custom",
+        "description": "Recommended: <b>enable</b> this so the service is ready in the background when you log in.",
+        "file": "title_mode.py",
+        "widget": "ReferenceNote",
+        "emphasize-action": true
+    },
     "ee-shutdown-on-window-close": {
         "type": "switch",
         "default": false,
         "description": "Shutdown on Window Closing",
         "tooltip": "Quit EasyEffects when its window closes. This setting is synchronized in both directions with the EasyEffects settings window."
+    },
+    "ee-shutdown-on-window-close-note": {
+        "type": "custom",
+        "description": "Recommended: <b>disable</b> this so the service keeps running when the window is closed.",
+        "file": "title_mode.py",
+        "widget": "ReferenceNote",
+        "emphasize-action": true
     }
 }

@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 msgid ""
 msgstr ""
-"Project-Id-Version: easy-effects-selector@random.kiapps 1.4.3\n"
+"Project-Id-Version: easy-effects-selector@random.kiapps 1.4.13\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2026-10-05 18:55+0000\n"
-"PO-Revision-Date: 2026-10-05 18:55+0000\n"
+"POT-Creation-Date: 2026-10-09 03:15+0000\n"
+"PO-Revision-Date: 2026-10-09 03:15+0000\n"
 "Last-Translator: random.kiapps\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -25,6 +25,13 @@ msgstr "Applet"
 #, javascript-format
 msgid "Autostart could not be changed: %s"
 msgstr "Autostart konnte nicht geändert werden: %s"
+
+#, javascript-format
+msgid "Bypass could not be changed: %s"
+msgstr "Bypass konnte nicht geändert werden: %s"
+
+msgid "Clicking \"Easy Effects\" launches Easy Effects. Active bypass is always shown; it can be toggled when menu control is enabled."
+msgstr "Ein Klick auf \"Easy Effects\" startet Easy Effects. Aktiver Bypass wird immer angezeigt; mit aktivierter Menübedienung lässt er sich umschalten."
 
 #, javascript-format
 msgid "Comparison unavailable: %s"
@@ -62,6 +69,18 @@ msgstr "Effekteinstellungen verändert"
 msgid "Global bypass enabled"
 msgstr "Globaler Bypass eingeschaltet"
 
+msgid "Global bypass is unavailable"
+msgstr "Globaler Bypass ist nicht verfügbar"
+
+msgid "Global bypass: off"
+msgstr "Globaler Bypass: aus"
+
+msgid "Global bypass: on"
+msgstr "Globaler Bypass: an"
+
+msgid "Global bypass: on (status only)"
+msgstr "Globaler Bypass: an (nur Anzeige)"
+
 msgid "Incomplete structure in the default preset."
 msgstr "Unvollständige Struktur im Standardpreset."
 
@@ -71,14 +90,14 @@ msgstr "Ungültiger Effektname im Standardpreset."
 msgid "Invalid structure in the default preset."
 msgstr "Ungültige Struktur im Standardpreset."
 
-msgid "Launch EasyEffects from the menu title"
-msgstr "EasyEffects über die Titelzeile starten"
+msgid "Keep menu open after preset selection when bypass is active"
+msgstr "Menü nach Presetwahl bei aktivem Bypass offen halten"
+
+msgid "Launch Easy Effects from the menu"
+msgstr "Easy Effects im Menü starten"
 
 msgid "Launch Service at System Startup"
 msgstr "Dienst beim Systemstart starten"
-
-msgid "Make the Easy Effects menu title clickable to launch EasyEffects."
-msgstr "Die Titelzeile „Easy Effects“ im Menü anklickbar machen, um EasyEffects zu starten."
 
 msgid "No default preset"
 msgstr "Kein Standardpreset"
@@ -96,6 +115,12 @@ msgstr "Voreinstellungen konnten nicht gelesen werden"
 msgid "Quit EasyEffects when its window closes. This setting is synchronized in both directions with the EasyEffects settings window."
 msgstr "EasyEffects beim Schließen seines Fensters vollständig beenden. Diese Einstellung ist mit dem EasyEffects-Einstellungsfenster in beide Richtungen synchronisiert."
 
+msgid "Recommended: <b>disable</b> this so the service keeps running when the window is closed."
+msgstr "Am besten <b>ausschalten</b>, damit der Dienst auch bei geschlossenem Fenster weiterläuft."
+
+msgid "Recommended: <b>enable</b> this so the service is ready in the background when you log in."
+msgstr "Am besten <b>einschalten</b>, damit der Dienst beim Anmelden im Hintergrund bereitsteht."
+
 msgid "Select EasyEffects 7.2.3 output presets from the panel"
 msgstr "Ausgabevoreinstellungen von EasyEffects 7.2.3 direkt aus der Leiste auswählen"
 
@@ -110,6 +135,9 @@ msgstr "Die Cinnamon-Applet-Einstellungen konnten nicht initialisiert werden."
 
 msgid "The EasyEffects autostart path is not a regular file."
 msgstr "Der EasyEffects-Autostartpfad ist keine reguläre Datei."
+
+msgid "The EasyEffects bypass setting could not be changed."
+msgstr "Die Bypass-Einstellung von EasyEffects konnte nicht geändert werden."
 
 msgid "The EasyEffects command failed."
 msgstr "EasyEffects-Befehl fehlgeschlagen."
@@ -157,6 +185,9 @@ msgstr "Der ursprüngliche Preset-Name konnte nicht wiederhergestellt werden."
 msgid "The preset file was moved or deleted."
 msgstr "Die Preset-Datei wurde verschoben oder gelöscht."
 
+msgid "Toggle bypass in menu"
+msgstr "Bypass im Menü umschalten"
+
 #, javascript-format
 msgid "Unknown EasyEffects effect: %s"
 msgstr "Unbekannter EasyEffects-Effekt: %s"
@@ -166,6 +197,3 @@ msgstr "Als Vergleichswert für den blauen Punkt und als letzten Eintrag im Pres
 
 msgid "When a default preset is selected, a blue dot indicates that the current overall settings differ from the default preset. This setting does not load anything at startup."
 msgstr "Bei Wahl eines Standardpresets zeigt ein blauer Punkt an, dass die aktuellen Gesamteinstellungen vom Standardpreset abweichen. Beim Start wird durch diese Einstellung nichts geladen."
-
-msgid "random.kiapps"
-msgstr "random.kiapps"

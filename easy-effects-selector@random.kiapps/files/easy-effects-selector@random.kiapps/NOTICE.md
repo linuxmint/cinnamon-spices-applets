@@ -10,6 +10,13 @@ version 3 or later terms. Original source:
 
 https://github.com/wwmm/easyeffects/blob/v7.2.3/data/com.github.wwmm.easyeffects.svg
 
+`ee-bypass-symbolic.svg` is the unmodified EasyEffects 7.2.3 global-bypass
+symbol from its application resources, under the same GPL version 3 or later
+terms. It is bundled so that the menu button does not depend on the icon being
+available in the desktop's icon theme. Original source:
+
+https://github.com/wwmm/easyeffects/blob/v7.2.3/data/icons/scalable/emblems/ee-bypass-symbolic.svg
+
 `preset-map.json` maps the fields stored by the EasyEffects 7.2.3 preset
 serializers to their GSettings keys and paths. The mapping was generated from
 the original serializers and checked against the loader code and XML schemas.

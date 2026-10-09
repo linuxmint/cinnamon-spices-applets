@@ -5,6 +5,7 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const Settings = imports.ui.settings;
+const Tooltips = imports.ui.tooltips;
 const Util = imports.misc.util;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
@@ -27,9 +28,14 @@ const SCHEMA_ID = "com.github.wwmm.easyeffects";
 const OUTPUT_PRESET_KEY = "last-loaded-output-preset";
 const DEFAULT_PRESET_KEY = "default-preset";
 const SHUTDOWN_KEY = "shutdown-on-window-close";
+const BYPASS_KEY = "bypass";
 const AUTOSTART_OPTION = "ee-autostart";
 const SHUTDOWN_OPTION = "ee-shutdown-on-window-close";
 const LAUNCH_FROM_TITLE_OPTION = "launch-from-menu-title";
+// Retain the saved preference key while its control now governs menu operation.
+const BYPASS_CONTROL_OPTION = "show-bypass-button";
+const KEEP_MENU_OPEN_OPTION = "keep-menu-open-on-bypass";
+const LEGACY_TITLE_MODE_KEY = "menu-title-mode";
 const STATE_UPDATE_DELAY = 180;
 const SELECTION_TRACKER_KEY = "selection-tracker";
 const AUTOSTART_CONTENT = "[Desktop Entry]\nName=Easy Effects\nComment=Easy Effects Service\n" +
@@ -93,6 +99,18 @@ async function makeDirectory(file, cancellable) {
     }
 }
 
+class PresetMenuItem extends PopupMenu.PopupMenuItem {
+    constructor(name, keepMenuOpen) {
+        super(name);
+        this._keepMenuOpen = keepMenuOpen;
+    }
+
+    activate(event, keepMenu = false) {
+        // Decide before loading: EasyEffects may change bypass during the load.
+        super.activate(event, keepMenu || this._keepMenuOpen());
+    }
+}
+
 class SelectorSettings extends Settings.AppletSettings {
     _doUpgrade(templateData) {
         // Cinnamon validates combobox values against the new schema's options.
@@ -103,7 +121,22 @@ class SelectorSettings extends Settings.AppletSettings {
             options[saved.value] = saved.value;
             templateData[DEFAULT_PRESET_KEY].options = options;
         }
+        const savedLaunch = this.settingsData[LAUNCH_FROM_TITLE_OPTION];
+        const savedBypass = this.settingsData[BYPASS_CONTROL_OPTION];
+        const savedMode = this.settingsData[LEGACY_TITLE_MODE_KEY];
+        let launch = templateData[LAUNCH_FROM_TITLE_OPTION].default;
+        let bypass = templateData[BYPASS_CONTROL_OPTION].default;
+        if (savedMode && ["passive", "launch", "launch-and-bypass"].includes(savedMode.value)) {
+            launch = savedMode.value !== "passive";
+            bypass = savedMode.value !== "launch";
+        }
+        if (savedLaunch && typeof savedLaunch.value === "boolean")
+            launch = savedLaunch.value;
+        if (savedBypass && typeof savedBypass.value === "boolean")
+            bypass = savedBypass.value;
         super._doUpgrade(templateData);
+        this.settingsData[LAUNCH_FROM_TITLE_OPTION].value = launch;
+        this.settingsData[BYPASS_CONTROL_OPTION].value = bypass;
     }
 }
 
@@ -325,10 +358,19 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._settingsSignal = 0;
         this._shutdownSettingsSignal = 0;
         this._bypassSettingsSignal = 0;
+        this._bypassAvailable = false;
+        this._bypassButton = null;
+        this._bypassTooltip = null;
+        this._menuTitleItem = null;
+        this._bypassSlot = null;
+        this._presetDeviates = false;
+        this._markerName = "";
         this._shutdownAvailable = false;
         this._appletSettings = null;
         this._defaultPreset = "";
         this._launchFromMenuTitle = false;
+        this._allowBypassControl = true;
+        this._keepMenuOpenOnBypass = false;
         this._appletPath = metadata.path;
         this._fileCancellable = new Gio.Cancellable();
         this._parameterMap = null;
@@ -382,18 +424,15 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 this._settingsSignal = this._settings.connect(
                     "changed::" + OUTPUT_PRESET_KEY, () => this._onLoadedPresetChanged()
                 );
-                if (schema.has_key("bypass")) {
-                    this._lastBypass = this._settings.get_boolean("bypass");
-                    this._bypassSettingsSignal = this._settings.connect("changed::bypass", () => {
-                        const bypass = this._settings.get_boolean("bypass");
-                        if (this._defaultPreset && bypass !== this._lastBypass) {
-                            this._selectionDirty = true;
-                            this._saveSelectionTracker();
-                            this._queueStateUpdate();
-                        }
-                        this._lastBypass = bypass;
+                if (schema.has_key(BYPASS_KEY)) {
+                    this._bypassAvailable = true;
+                    this._bypassSettingsSignal = this._settings.connect("changed::" + BYPASS_KEY, () => {
+                        this._syncBypassButton();
+                        // Global bypass changes status, not preset selection.
+                        this._syncDeviationState();
                     });
-                    this._settings.get_boolean("bypass");
+                    // Gio requires a read with the handler already connected.
+                    this._settings.get_boolean(BYPASS_KEY);
                 }
                 this._shutdownAvailable = schema.has_key(SHUTDOWN_KEY);
                 if (this._shutdownAvailable) {
@@ -411,7 +450,9 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             if (!this._appletSettings.isReady)
                 throw new Error(_("The Cinnamon applet settings could not be initialized."));
             this._appletSettings.bind(DEFAULT_PRESET_KEY, "_defaultPreset", this._onDefaultPresetChanged);
-            this._appletSettings.bind(LAUNCH_FROM_TITLE_OPTION, "_launchFromMenuTitle", this._onMenuTitleLaunchChanged);
+            this._appletSettings.bind(LAUNCH_FROM_TITLE_OPTION, "_launchFromMenuTitle", this._onMenuTitleModeChanged);
+            this._appletSettings.bind(BYPASS_CONTROL_OPTION, "_allowBypassControl", this._onMenuTitleModeChanged);
+            this._appletSettings.bind(KEEP_MENU_OPEN_OPTION, "_keepMenuOpenOnBypass");
             this._appletSettings.bind(AUTOSTART_OPTION, "_startService", this._onAutostartChanged);
             this._appletSettings.bind(SHUTDOWN_OPTION, "_shutdownOnClose", this._onShutdownChanged);
             this._restoreSelectionTracker();
@@ -673,9 +714,103 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             this._updateSelection();
     }
 
-    _onMenuTitleLaunchChanged() {
+    _onMenuTitleModeChanged() {
         if (!this._removed && this.menu.isOpen)
             this._populateMenu();
+    }
+
+    _addBypassButton() {
+        const button = new St.Button({
+            style_class: "ee-bypass-button",
+            reactive: true,
+            can_focus: true,
+            track_hover: true,
+            toggle_mode: true,
+            child: new St.Icon({
+                gicon: new Gio.FileIcon({file: Gio.File.new_for_path(
+                    GLib.build_filenamev([this._appletPath, "ee-bypass-symbolic.svg"])
+                )}),
+                icon_type: St.IconType.SYMBOLIC,
+                icon_size: 16 * global.ui_scale
+            })
+        });
+        // Read-only status must still intercept pointer events, otherwise a click
+        // would reach the enclosing title's application-launch action.
+        const stopOtherButtons = (actor, event) => this._canToggleBypass() && event.get_button() === 1
+            ? Clutter.EVENT_PROPAGATE : Clutter.EVENT_STOP;
+        button.connect("button-press-event", stopOtherButtons);
+        button.connect("button-release-event", stopOtherButtons);
+        const stopStatusKeys = (actor, event) => !this._canToggleBypass() &&
+            [Clutter.KEY_space, Clutter.KEY_Return, Clutter.KEY_KP_Enter].includes(event.get_key_symbol())
+            ? Clutter.EVENT_STOP : Clutter.EVENT_PROPAGATE;
+        button.connect("key-press-event", stopStatusKeys);
+        button.connect("key-release-event", stopStatusKeys);
+        button.connect("clicked", () => this._toggleBypass());
+        // Keep PopupBaseMenuItem's columns stable when a status appears or leaves.
+        this._bypassSlot.set_child(button);
+        button.show();
+        this._bypassButton = button;
+        // Cinnamon destroys this tooltip when its button actor is destroyed.
+        this._bypassTooltip = new Tooltips.Tooltip(button);
+    }
+
+    _canToggleBypass() {
+        return !this._removed && Boolean(this._settings && this._bypassAvailable) &&
+            this._launchFromMenuTitle === true && this._allowBypassControl === true;
+    }
+
+    _shouldKeepPresetMenuOpen() {
+        return this._keepMenuOpenOnBypass === true && this._canToggleBypass() &&
+            this._settings.get_boolean(BYPASS_KEY);
+    }
+
+    _syncBypassButton() {
+        if (this._removed || !this._bypassSlot)
+            return;
+        const available = Boolean(this._settings && this._bypassAvailable);
+        const enabled = available && this._settings.get_boolean(BYPASS_KEY);
+        const controlSelected = this._launchFromMenuTitle === true && this._allowBypassControl === true;
+        if (!controlSelected && !enabled) {
+            if (this._bypassButton) {
+                this._bypassSlot.set_child(null);
+                this._bypassButton.destroy();
+                this._bypassButton = null;
+                this._bypassTooltip = null;
+            }
+            return;
+        }
+        if (!this._bypassButton)
+            this._addBypassButton();
+        const interactive = this._canToggleBypass();
+        this._bypassButton.can_focus = interactive;
+        this._bypassButton.track_hover = interactive;
+        this._bypassButton.toggle_mode = interactive;
+        this._bypassButton.checked = enabled;
+        this._bypassButton.change_style_pseudo_class("insensitive", !interactive);
+        this._bypassButton.show();
+        const text = available
+            ? (interactive ? (enabled ? _("Global bypass: on") : _("Global bypass: off"))
+                : _("Global bypass: on (status only)"))
+            : _("Global bypass is unavailable");
+        this._bypassButton.accessible_name = text;
+        this._bypassTooltip.set_text(text);
+    }
+
+    _toggleBypass() {
+        if (!this._canToggleBypass())
+            return;
+        try {
+            const enabled = this._settings.get_boolean(BYPASS_KEY);
+            if (!this._settings.set_boolean(BYPASS_KEY, !enabled))
+                throw new Error(_("The EasyEffects bypass setting could not be changed."));
+        } catch (error) {
+            global.logError(error, UUID);
+            Main.notify("EasyEffects", _("Bypass could not be changed: %s").format(error.message));
+        } finally {
+            // Restore the real state if a write failed, rather than retaining the click's toggle.
+            this._syncBypassButton();
+            this._syncDeviationState();
+        }
     }
 
     configureApplet(tab = 0) {
@@ -731,11 +866,24 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         if (this._removed)
             return;
         const revision = ++this._menuRevision;
+        this._bypassButton = null;
+        this._bypassTooltip = null;
+        this._menuTitleItem = null;
+        this._bypassSlot = null;
         this.menu.removeAll();
         this._presetItems = [];
-        const titleItem = new PopupMenu.PopupMenuItem("Easy Effects", {reactive: this._launchFromMenuTitle});
-        if (this._launchFromMenuTitle)
+        const launchFromTitle = this._launchFromMenuTitle === true;
+        // A header needs only a label and a status column, with no preset ornament.
+        const titleItem = new PopupMenu.PopupBaseMenuItem({reactive: launchFromTitle});
+        titleItem.label = new St.Label({text: "Easy Effects"});
+        titleItem.addActor(titleItem.label);
+        titleItem.actor.label_actor = titleItem.label;
+        this._bypassSlot = new St.Bin({x_align: St.Align.END});
+        titleItem.addActor(this._bypassSlot, {span: -1, expand: true, align: St.Align.END});
+        if (launchFromTitle)
             titleItem.connect("activate", () => Util.spawn(["easyeffects"]));
+        this._menuTitleItem = titleItem;
+        this._syncBypassButton();
         this.menu.addMenuItem(titleItem);
         try {
             const names = await this._readPresets();
@@ -752,9 +900,9 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 ));
             }
             ordered.forEach(name => {
-                const item = new PopupMenu.PopupMenuItem(name);
+                const item = new PresetMenuItem(name, () => this._shouldKeepPresetMenuOpen());
                 item.setSensitive(!this._loading);
-                item.connect("activate", () => this._loadPreset(name));
+                item.connect("activate", (item, event) => this._loadPreset(name, event));
                 this._presetItems.push({name, item});
                 this.menu.addMenuItem(item);
             });
@@ -936,12 +1084,10 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         const defaultName = this._defaultPreset;
         let markerName = name;
         let deviates = false;
-        let bypass = false;
         let comparisonError = "";
         if (this._settings && defaultName) {
             deviates = true;
             markerName = "";
-            bypass = this._settings.get_boolean("bypass");
             try {
                 const reader = await this._ensureStateReader();
                 if (this._removed || revision !== this._stateUpdateRevision || !reader)
@@ -952,19 +1098,21 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                     reader.needsRefresh = true;
                     throw error;
                 }
-                // Do not even read the reference file for another name or bypass.
-                if (name === defaultName && !bypass) {
+                // Other names are already deviations. Global bypass affects the
+                // blue dot, while the white marker still compares the preset.
+                if (name === defaultName) {
                     const reference = await this._readReferencePreset();
                     if (this._removed || revision !== this._stateUpdateRevision || this._referenceDirty)
                         return;
                     if (!reference)
                         throw new Error(this._referenceReadError);
                     reader.refresh();
-                    deviates = !reader.matches(reference);
+                    const matchesDefault = reader.matches(reference);
+                    deviates = !matchesDefault;
+                    if (matchesDefault)
+                        markerName = defaultName;
                 }
-                if (!deviates)
-                    markerName = defaultName;
-                else if (name !== defaultName && !bypass && !this._selectionDirty)
+                else if (!this._selectionDirty)
                     markerName = name;
             } catch (error) {
                 comparisonError = error.message;
@@ -972,18 +1120,30 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         }
         // A later menu/default change, load or removal supersedes an earlier read.
         if (this._removed || revision !== this._stateUpdateRevision || this._loading ||
-            defaultName !== this._defaultPreset || name !== this._currentPresetName() ||
-            (this._settings && defaultName && bypass !== this._settings.get_boolean("bypass")))
+            defaultName !== this._defaultPreset || name !== this._currentPresetName())
             return;
         this._comparisonError = comparisonError;
         this._presetItems.forEach(entry => entry.item.setShowDot(entry.name === markerName));
-        this._deviationDot.visible = deviates;
+        this._markerName = markerName;
+        this._presetDeviates = deviates;
+        this._syncDeviationState();
+    }
+
+    _syncDeviationState() {
+        if (this._removed)
+            return;
+        const bypass = Boolean(this._settings && this._bypassAvailable &&
+            this._settings.get_boolean(BYPASS_KEY));
+        this._deviationDot.visible = Boolean(this._defaultPreset && (this._presetDeviates || bypass));
+        if (this._loading)
+            return;
+        const name = this._currentPresetName();
         const lines = [name
             ? _("EasyEffects output preset: %s").format(name)
             : _("EasyEffects output preset")];
         if (this._defaultPreset)
             lines.push(_("Default preset: %s").format(this._defaultPreset));
-        if (this._defaultPreset && this._selectionDirty && markerName !== this._defaultPreset)
+        if (this._defaultPreset && this._selectionDirty && this._markerName !== this._defaultPreset)
             lines.push(_("Effect settings changed"));
         if (this._defaultPreset && bypass)
             lines.push(_("Global bypass enabled"));
@@ -1015,11 +1175,19 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         }
     }
 
-    async _loadPreset(name) {
+    async _loadPreset(name, event = null) {
         if (this._loading || this._removed)
             return;
         this._loading = true;
         this._requestedPresetName = name;
+        const fromKeyboard = event && typeof event.type === "function" &&
+            event.type() === Clutter.EventType.KEY_PRESS;
+        const focusActor = global.stage.get_key_focus();
+        const focusWasPreset = this.menu.isOpen && focusActor &&
+            this._presetItems.some(entry => entry.item.actor.contains(focusActor));
+        // Disabling the focused row would make Cinnamon focus the title instead.
+        if (focusWasPreset)
+            this.menu.actor.grab_key_focus();
         this._presetItems.forEach(entry => entry.item.setSensitive(false));
         this._updateSelection();
 
@@ -1043,7 +1211,23 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             this._selectionDirty = Boolean(error);
             this._saveSelectionTracker();
             if (!this._removed) {
+                const restoreFocus = focusWasPreset && this.menu.isOpen &&
+                    global.stage.get_key_focus() === this.menu.actor;
                 this._presetItems.forEach(entry => entry.item.setSensitive(true));
+                // Respect any navigation or dismissal that occurred while loading.
+                if (restoreFocus) {
+                    if (fromKeyboard) {
+                        const selected = this._presetItems.find(entry => entry.name === name);
+                        (selected ? selected.item.actor : this.menu.actor).grab_key_focus();
+                    } else {
+                        this.menu.actor.grab_key_focus();
+                        const items = [this._menuTitleItem, ...this._presetItems.map(entry => entry.item)];
+                        for (const item of items.filter(Boolean)) {
+                            item.actor.sync_hover();
+                            item.setActive(item.actor.hover);
+                        }
+                    }
+                }
                 this._updateSelection();
                 if (error) {
                     global.logError(error, UUID);
@@ -1143,6 +1327,10 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         }
         if (this._appletSettings && this._appletSettings.isReady)
             this._appletSettings.finalize();
+        this._bypassButton = null;
+        this._bypassTooltip = null;
+        this._menuTitleItem = null;
+        this._bypassSlot = null;
         this.menu.destroy();
     }
 }

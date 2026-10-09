@@ -38,10 +38,39 @@ Right-click the icon and choose **Configure** to select a default preset.
 Selecting a default only sets a reference: it does not load anything, including
 at applet startup. To return to the default, select it in the left-click menu.
 
-The optional **Launch EasyEffects from the menu title** switch makes the
-**Easy Effects** title at the top of that menu clickable. Clicking it runs
-`easyeffects`, using the application's normal startup behavior. This switch
-is off by default.
+The default-preset explanation uses the same dimmed style as the title controls'
+help text. There is no separator between the default selector and its explanation;
+the separator before the menu controls remains visible.
+
+The **Launch Easy Effects from the menu** switch makes the **Easy Effects** menu
+title clickable: clicking it runs `easyeffects`. With the switch off, the title
+is only a heading.
+
+The **Toggle bypass in menu** switch below it is available only with application
+launch enabled. It remains visible and dimmed when launch is disabled; its saved
+choice is retained, including across restarts. The native switches align with
+the switches in the EasyEffects section. The shared explanation follows them.
+
+The dependent **Keep menu open after preset selection when bypass is active**
+switch is available only when menu bypass control is enabled. It is off by
+default. When enabled, selecting a preset leaves the menu open if global bypass
+is active at the time of selection, so the bypass button remains accessible.
+This works with mouse and keyboard selection. Otherwise the menu closes as
+usual. The choice remains saved when either parent switch is disabled.
+
+A new installation enables application launch and menu bypass control. An upgrade
+preserves existing preferences, including the three choices from version 1.4.5.
+Changing these controls does not launch EasyEffects or change its bypass state.
+
+The **global bypass button** uses EasyEffects' normal global bypass. Its
+highlighted state means bypass is enabled. With menu control enabled, clicking
+it toggles bypass and keeps the menu open. Without menu control, active bypass
+still appears as a highlighted, insensitive status button; when bypass is off,
+that status button is absent. This also applies to a title without application
+launch. A status button cannot toggle bypass, launch EasyEffects, or close the
+menu. The button updates immediately when bypass changes in the EasyEffects
+window, with or without a default preset. The title separator appears in all
+title configurations.
 
 With a default selected, the **blue dot** appears if the loaded output preset
 name is different, the stored output configuration differs, or global bypass is
@@ -53,10 +82,10 @@ EasyEffects settings defaults. The comparison stops at the first difference.
 
 The menu marker follows these rules when a default is configured:
 
-- Blue dot off: the default preset is marked, including after an exact manual restoration.
-- Blue dot on: the default is not marked. An unchanged selection of another preset can be marked.
+- An exact default preset is marked, including after a manual restoration.
+- An unchanged selection of another preset can be marked, while the blue dot indicates deviation from the default.
 - Editing another selected preset removes its marker. Manually restoring its values does not restore that marker; selecting it again in the applet does.
-- Global bypass removes all menu markers.
+- Global bypass does not change preset markers or count as a preset edit. Its status updates independently of preset comparison and selection. It still lights the blue dot; an exact default can therefore show both dots at once.
 
 EasyEffects 7.2.3 has no separate preset-load completion event. Reloading the same
 other preset in the EasyEffects window after editing it can leave its menu marker
@@ -71,6 +100,10 @@ last loaded preset name. The additional effect observation is disabled.
 The settings window also provides **Launch Service at System Startup** and
 **Shutdown on Window Closing**, using EasyEffects' existing settings. Neither
 option is changed just by adding or starting the applet.
+
+The hints recommend enabling service autostart and disabling shutdown on window
+closing, so the service remains available in the background. The action words
+are bold in the theme's normal text color; the explanations are dimmed.
 
 Autostart uses `$XDG_CONFIG_HOME/autostart/easyeffects-service.desktop`, normally
 `~/.config/autostart/easyeffects-service.desktop`. EasyEffects only refreshes its
