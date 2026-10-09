@@ -1,6 +1,8 @@
 import importlib.util
 from pathlib import Path
 import unittest
+from unittest.mock import patch
+import runpy
 from types import SimpleNamespace
 
 path = Path(__file__).resolve().parents[1] / 'files/razer-battery@akasolace/battery.py'
@@ -22,6 +24,20 @@ class Device:
 class Tests(unittest.TestCase):
     def read(self, *devices):
         return battery.snapshot(lambda: SimpleNamespace(devices=devices))
+
+    def test_translation_directory(self):
+        default = str(Path.home() / '.local' / 'share' / 'locale')
+        for value, expected in [('/custom/data', '/custom/data/locale'),
+                                ('', default), ('relative/path', default)]:
+            with self.subTest(xdg_data_home=value):
+                with patch.dict('os.environ', {'XDG_DATA_HOME': value}):
+                    with patch('gettext.translation') as translation:
+                        runpy.run_path(str(path))
+                        self.assertEqual(translation.call_args.kwargs['localedir'], expected)
+        with patch.dict('os.environ', {}, clear=True):
+            with patch('gettext.translation') as translation:
+                runpy.run_path(str(path))
+                self.assertEqual(translation.call_args.kwargs['localedir'], default)
 
     def test_full_and_charging(self):
         d = Device()

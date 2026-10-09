@@ -6,7 +6,7 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const UUID = 'razer-battery@akasolace';
-Gettext.bindtextdomain(UUID, GLib.build_filenamev([GLib.get_home_dir(), '.local/share/locale']));
+Gettext.bindtextdomain(UUID, GLib.build_filenamev([GLib.get_user_data_dir(), 'locale']));
 
 function _(text) {
     return Gettext.dgettext(UUID, text);

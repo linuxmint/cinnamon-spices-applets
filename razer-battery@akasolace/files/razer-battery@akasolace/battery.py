@@ -3,12 +3,17 @@
 # SPDX-License-Identifier: MIT
 import gettext
 import json
+import math
+import os
 from pathlib import Path
 
+# XDG_DATA_HOME must be absolute; unset, empty or relative values use the default.
+_data_home = os.environ.get('XDG_DATA_HOME', '')
+_data_dir = Path(_data_home) if os.path.isabs(_data_home) else Path.home() / '.local' / 'share'
+
 _ = gettext.translation('razer-battery@akasolace',
-                        localedir=str(Path.home() / '.local/share/locale'),
+                        localedir=str(_data_dir / 'locale'),
                         fallback=True).gettext
-import math
 
 
 def snapshot(manager_factory):
