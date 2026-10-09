@@ -1,0 +1,96 @@
+# LOCK KEYS INDICATOR WITH NOTIFICATIONS
+# This file is put in the public domain.
+# entelechy, 2016
+#
+msgid ""
+msgstr ""
+
+#. applet.js:104
+msgid "Num Lock"
+msgstr ""
+
+#. applet.js:108
+msgid "Caps Lock"
+msgstr ""
+
+#. applet.js:112
+msgid "Scr Lock"
+msgstr ""
+
+#. applet.js:156
+msgid "Lock Keys"
+msgstr ""
+
+#. applet.js:231
+msgid "Num lock on"
+msgstr ""
+
+#. applet.js:233
+msgid "Num lock off"
+msgstr ""
+
+#. applet.js:239
+msgid "Caps lock on"
+msgstr ""
+
+#. applet.js:241
+msgid "Caps lock off"
+msgstr ""
+
+#. applet.js:247
+msgid "Scr lock on"
+msgstr ""
+
+#. applet.js:249
+msgid "Scr lock off"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification "
+"when these change."
+msgstr ""
+
+#. metadata.json->name
+msgid "Lock keys indicator with notifications"
+msgstr ""
+
+#. settings-schema.json->section1->description
+msgid "Indicators"
+msgstr ""
+
+#. settings-schema.json->show-num-lock-indicator->description
+msgid "Show num lock indicator"
+msgstr ""
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr ""
+
+#. settings-schema.json->show-scr-lock-indicator->description
+msgid "Show scr lock indicator"
+msgstr ""
+
+#. settings-schema.json->hide-inactive-indicators->description
+msgid "Hide inactive indicators"
+msgstr ""
+
+#. settings-schema.json->toggle-on-click->description
+msgid "Toggle state when clicked"
+msgstr ""
+
+#. settings-schema.json->section2->description
+msgid "Notifications"
+msgstr ""
+
+#. settings-schema.json->show-osd-notifications->description
+msgid "Show OSD notifications"
+msgstr ""
+
+#. settings-schema.json->show-toast-notifications->description
+msgid "Show toast notifications"
+msgstr ""
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
+msgstr ""

@@ -1,0 +1,116 @@
+# SCREENSHOT+RECORD DESKTOP
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# tech71, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-04 13:04-0400\n"
+"PO-Revision-Date: 2021-12-11 13:37-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:27
+msgid "ScreenShot"
+msgstr "Captura de pantalla"
+
+#. applet.js:32
+msgid "Current Window"
+msgstr "Ventana actual"
+
+#. applet.js:37
+msgid "Selected Area"
+msgstr "Área seleccionada"
+
+#. applet.js:43
+msgid "Whole Screen"
+msgstr "Toda la pantalla"
+
+#. applet.js:45
+msgid "1 Second Delay"
+msgstr "1 Segundo de retraso"
+
+#. applet.js:49
+msgid "3 Second Delay"
+msgstr "3 Segundos de retraso"
+
+#. applet.js:53
+msgid "5 Second Delay"
+msgstr "5 Segundos de retraso"
+
+#. applet.js:60
+msgid "Record Screencast"
+msgstr "Grabar screencast"
+
+#. applet.js:64
+msgid "Record Desktop With Audio"
+msgstr "Grabar el escritorio con audio"
+
+#. applet.js:67 applet.js:73 applet.js:80 applet.js:86
+msgid "Recording"
+msgstr "Grabando"
+
+#. applet.js:67 applet.js:80
+msgid "With-Audio"
+msgstr "Con audio"
+
+#. applet.js:70
+msgid "Record Desktop Without Audio"
+msgstr "Grabar el escritorio sin audio"
+
+#. applet.js:73 applet.js:86
+msgid "No-Audio"
+msgstr "Sin audio"
+
+#. applet.js:77
+msgid "Record Current Window With Audio"
+msgstr "Grabar la ventana actual con audio"
+
+#. applet.js:83
+msgid "Record Current Window Without Audio"
+msgstr "Grabar la ventana actual sin audio"
+
+#. applet.js:90
+msgid "Stop Recording"
+msgstr "Detener la grabación"
+
+#. applet.js:95
+msgid "Recording-Stopped"
+msgstr "Grabación-Detenida"
+
+#. applet.js:96
+msgid "Recording-Finished"
+msgstr "Grabación-Terminada"
+
+#. applet.js:106
+msgid "Take A Snapshot or Record Your Desktop"
+msgstr "Tome una instantánea o grabe su escritorio"
+
+#. applet.js:123
+msgid "Pictures Folder"
+msgstr "Carpeta de Imágenes"
+
+#. applet.js:129
+msgid "Videos Folder"
+msgstr "Carpeta de Videos"
+
+#. metadata.json->description
+msgid ""
+"Take A Snapshot Or Record Your Desktop (recording requires the packages "
+"ffmpeg, xdotool & x11-utils to be installed)"
+msgstr ""
+"Tome una instantánea o grabe su escritorio (la grabación requiere la "
+"instalación de los paquetes ffmpeg, xdotool y x11-utils)"
+
+#. metadata.json->name
+msgid "ScreenShot+Record Desktop"
+msgstr "Captura de pantalla+Grabación de escitorio"

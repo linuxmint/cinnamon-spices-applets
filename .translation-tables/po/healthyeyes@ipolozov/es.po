@@ -1,0 +1,32 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: healthyeyes@ipolozov 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-12 21:28-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->description
+msgid ""
+"Quiet reminder to take a break every half an hour. When the circle is red, "
+"give your eyes a rest by looking away from your monitor, then click the "
+"circle."
+msgstr ""
+"Recordatorio silencioso para hacer una pausa cada media hora. Cuando el "
+"círculo esté rojo, descansa la vista apartando la vista del monitor y haz "
+"clic en el círculo."
+
+#. metadata.json->name
+msgid "Healthy Eyes"
+msgstr "Ojos saludables"

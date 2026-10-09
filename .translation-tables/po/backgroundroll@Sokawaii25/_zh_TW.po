@@ -1,0 +1,23 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. metadata.json->name
+msgid "Background Roll"
+msgstr ""
+
+#. settings-schema.json->Settings->description
+msgid "Notifications"
+msgstr ""
+
+#. settings-schema.json->Notifications->description
+msgid "Send a notification when the background is changed"
+msgstr ""
+
+#. settings-schema.json->Notifications->tooltip
+msgid "Activate to see a notification when the background rolls"
+msgstr ""

@@ -1,0 +1,202 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: blogdron\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+#. applet.js:152
+msgid "Bumblebee program not installed"
+msgstr "Программа Bumblebee не установлена"
+
+#. applet.js:152
+msgid ""
+"You appear to be missing some of the required programs for 'bumblebee' to "
+"switch graphics processors using NVIDIA Optimus."
+msgstr ""
+"Не хватает необходимых программ для 'bumblebee', для переключения "
+"графических процессоров используя NVIDIA Optimus."
+
+#. applet.js:152
+msgid "Please read the help file."
+msgstr "Пожалуйста, прочтите файл справки."
+
+#. applet.js:172
+msgid "Waiting for Bumblebee"
+msgstr "Ожидание Bumblebee"
+
+#. applet.js:232
+msgid "Open nVidia Settings Program"
+msgstr "Открыть Настройки nVidia"
+
+#. applet.js:238
+msgid "Open Power Statistics"
+msgstr "Открыть Статистику Питания"
+
+#. applet.js:244
+msgid "Open System Monitor"
+msgstr "Открыть Системный Монитор"
+
+#. applet.js:253
+msgid "Housekeeping and System Sub Menu"
+msgstr "Справка и список изменений"
+
+#. applet.js:256
+msgid "View the Changelog"
+msgstr "Посмотреть список изменений"
+
+#. applet.js:262
+msgid "Open the Help file"
+msgstr "Открыть файл справки"
+
+#. applet.js:278
+msgid "Launch programs using the nVidia Graphics Processor"
+msgstr "Запуск программ, используя графический процессор nVidia"
+
+#. applet.js:359
+msgid "NVidia based GPU is Off"
+msgstr "Графические процессоры NVidia выключены"
+
+#. applet.js:384
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "Графические процессоры NVidia включены. Температура равна"
+
+#. applet.js:392
+msgid "Err"
+msgstr "Ошибка"
+
+#. applet.js:393
+msgid ""
+"Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
+"drivers installed?"
+msgstr ""
+"Bumblebee настроен не правильно. Установлены ли bbswitch, bumblebee и "
+"драйвера nvidia?"
+
+#. metadata.json->description
+msgid ""
+"Displays Status of Bumblebee and nVidia GPU Temperature with associated "
+"support functions including starting selected programs with optirun or "
+"primusrun"
+msgstr ""
+"Отображает состояние Bumblebee и температуру графического процессора nVidia, "
+"позволяет настроить запуск выбранных программ с помощью optirun или primusrun"
+
+#. metadata.json->name
+msgid "Bumblebee Status with NVidia Temperature Display"
+msgstr ""
+"Температура GPU NVidia и статус Bumblebee (Bumblebee Status with NVidia "
+"Temperature Display)"
+
+#. settings-schema.json->head->description
+msgid "General Settings for the nVidia Monitoring Applet"
+msgstr "Общие Настройки для nVidia Monitoring Applet"
+
+#. settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "секунд"
+
+#. settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Период обновления отображения:"
+
+#. settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"Период обновления информации. Задайте большой период если у вас слабый ПК"
+
+#. settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "Показывать значок и температуру GPU"
+
+#. settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr ""
+"Доступно при горизонтальных и вертикальных панелях. Используются градусы "
+"Цельсия."
+
+#. settings-schema.json->head2->description
+msgid "Programs settings for Optimus"
+msgstr "Настройки программ для Optimus"
+
+#. settings-schema.json->description1->description
+msgid "Display Name of Program 1 to be run using Optimus technology"
+msgstr "Отображаемое имя программы 1 для запуска с Optimus"
+
+#. settings-schema.json->description1->tooltip
+msgid ""
+"Put the name of the program here or null if you do not want it displayed"
+msgstr ""
+"Укажите здесь имя программы или не указывайте, если не хотите чтобы оно "
+"отображалось"
+
+#. settings-schema.json->commandString1->description
+msgid "Command String for Program 1"
+msgstr "Командная строка для программы 1"
+
+#. settings-schema.json->commandString1->tooltip
+#. settings-schema.json->commandString2->tooltip
+#. settings-schema.json->commandString3->tooltip
+#. settings-schema.json->commandString4->tooltip
+#. settings-schema.json->commandString5->tooltip
+msgid ""
+"Put the command string to run the program here starting with optirun or "
+"primusrun"
+msgstr ""
+"Введите здесь команду запуска приложения, начиная строку с optirun или "
+"primusrun"
+
+#. settings-schema.json->description2->description
+msgid "Display Name of Program 2 to be run using Optimus technology"
+msgstr "Отображаемое имя программы 2 для запуска с Optimus"
+
+#. settings-schema.json->description2->tooltip
+#. settings-schema.json->description3->tooltip
+#. settings-schema.json->description4->tooltip
+#. settings-schema.json->description5->tooltip
+msgid ""
+"Put the name of the program here or none if you do not want it displayed"
+msgstr ""
+"Укажите здесь имя программы или не указывайте, если не хотите чтобы оно "
+"отображалось"
+
+#. settings-schema.json->commandString2->description
+msgid "Command String for Program 2"
+msgstr "Командная строка для программы 2"
+
+#. settings-schema.json->description3->description
+msgid "Display Name of Program 3 to be run using Optimus technology"
+msgstr "Отображаемое имя программы 3 для запуска с Optimus"
+
+#. settings-schema.json->commandString3->description
+msgid "Command String for Program 3"
+msgstr "Командная строка для программы 3"
+
+#. settings-schema.json->description4->description
+msgid "Display Name of Program 4 to be run using Optimus technology"
+msgstr "Отображаемое имя программы 4 для запуска с Optimus"
+
+#. settings-schema.json->commandString4->description
+msgid "Command String for Program 4"
+msgstr "Командная строка для программы 4"
+
+#. settings-schema.json->description5->description
+msgid "Display Name of Program 5 to be run using Optimus technology"
+msgstr "Отображаемое имя программы 5 для запуска с Optimus"
+
+#. settings-schema.json->commandString5->description
+msgid "Command String for Program 5"
+msgstr "Командная строка для программы 5"

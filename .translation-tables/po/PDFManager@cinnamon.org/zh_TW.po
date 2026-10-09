@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-06-02 22:27+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:51
+msgid "Manage your PDF"
+msgstr "管理您的 PDF 檔案"
+
+#. applet.js:70
+msgid "Merge PDF"
+msgstr "合併 PDF"
+
+#. applet.js:75 pdf-manager.py:157
+msgid "Extract PDF"
+msgstr "擷取 PDF"
+
+#. applet.js:82
+msgid "Reduce size of PDF"
+msgstr "壓縮 PDF 檔案大小"
+
+#. applet.js:89
+msgid "Rotate left PDF"
+msgstr "將 PDF 向左旋轉"
+
+#. applet.js:94
+msgid "Rotate right PDF"
+msgstr "將 PDF 向右旋轉"
+
+#. applet.js:99
+msgid "Flip vertically PDF"
+msgstr "將 PDF 垂直翻轉"
+
+#. applet.js:107
+msgid "Open Document Viewer"
+msgstr "開啟文件檢視器"
+
+#. applet.js:114
+msgid "Open Evince"
+msgstr "開啟 Evince"
+
+#. applet.js:121
+msgid "Open PDF Mod"
+msgstr "開啟 PDF Mod"
+
+#. applet.js:128
+msgid "Open PDF Editor"
+msgstr "開啟 PDF 編輯器"
+
+#. pdf-manager.py:33
+msgid "Installation of PDF Toolkit necessary"
+msgstr "需要安裝 PDF 工具組"
+
+#. pdf-manager.py:35
+msgid ""
+"Do you want to install PDF toolkit? Your operations will be performed after "
+"the installation."
+msgstr "是否要安裝 PDF 工具組？安裝完成後將會繼續執行作業。"
+
+#. pdf-manager.py:37
+msgid ""
+"Installation failed. Do you want to try again? Your operations will be "
+"performed after the installation."
+msgstr "安裝失敗。是否要再試一次？安裝完成後會繼續執行作業。"
+
+#. pdf-manager.py:47 pdf-manager.py:88 pdf-manager.py:140 pdf-manager.py:205
+#. pdf-manager.py:225 pdf-manager.py:246
+msgid "Select your PDF..."
+msgstr "請選取 PDF 檔案..."
+
+#. pdf-manager.py:55 pdf-manager.py:96 pdf-manager.py:147 pdf-manager.py:213
+#. pdf-manager.py:233 pdf-manager.py:254
+msgid "PDF Files"
+msgstr "PDF 檔案"
+
+#. pdf-manager.py:67
+msgid "Reducing PDF"
+msgstr "正在壓縮 PDF"
+
+#. pdf-manager.py:69
+msgid "Your PDF are reducing... Don't manipulate selected files!"
+msgstr "PDF 檔案正在壓縮中...請勿操作所選取的檔案！"
+
+#. pdf-manager.py:106 pdf-manager.py:184
+msgid "Save as..."
+msgstr "另存新檔..."
+
+#. pdf-manager.py:162
+msgid "Extract following pages (example: 1-10 15-17):"
+msgstr "請輸入要擷取的頁面 (例如：1-10 15-17)："
+
+#. pdf-manager.py:164
+msgid "Extract even pages"
+msgstr "擷取偶數頁"
+
+#. pdf-manager.py:166
+msgid "Extract odd pages"
+msgstr "擷取奇數頁"
+
+#. metadata.json->name
+msgid "PDFManager"
+msgstr "PDFManager"
+
+#. metadata.json->description
+msgid "A handy applet for manipulating PDF"
+msgstr "方便實用的 PDF 管理小程式"

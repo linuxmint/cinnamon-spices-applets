@@ -1,0 +1,679 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: batterymonitor@pdcurtis 2.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"PO-Revision-Date: 2025-08-05 00:49+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 5.4/applet.js:300 3.2/applet.js:130
+msgid "--%"
+msgstr "--%"
+
+#: 5.4/applet.js:301 3.2/applet.js:131
+msgid "Waiting"
+msgstr "等待中"
+
+#: 5.4/applet.js:327
+msgid "Some dependencies not installed."
+msgstr "部分相依套件尚未安裝。"
+
+#: 5.4/applet.js:327
+msgid ""
+"Both 'sox' and 'zenity' are required for this applet to have all of its "
+"functionality including notifications and audible alerts.\n"
+"\n"
+"Please view the README for help on installing them.\n"
+msgstr ""
+"這個小程式需要安裝 'sox' 及 'zenity' 才能完整運作，包括通知與音效提示功能。\n"
+"\n"
+"請參閱 README 以取得安裝說明。\n"
+
+#: 5.4/applet.js:337 3.2/applet.js:193
+msgid "Battery Monitor Applet"
+msgstr "電池監控小程式"
+
+#: 5.4/applet.js:337
+msgid ""
+"A user-defined sound file has been specified for Low Battery.\n"
+"\n"
+"Please ensure the volume is set sensibly in public places,\n"
+"especially if a long or loud file is specified.\n"
+msgstr ""
+"已指定自訂音效檔作為低電量提示。\n"
+"\n"
+"在公共場所時，請務必將音量設定在適當的大小，\n"
+"特別是當指定的檔案播放時間較長或音量較大時。\n"
+
+#: 5.4/applet.js:399 3.2/applet.js:307
+msgid "Open Power Statistics"
+msgstr "開啟電源統計資料"
+
+#: 5.4/applet.js:405 3.2/applet.js:313
+msgid "Open System Monitor"
+msgstr "開啟系統監視器"
+
+#: 5.4/applet.js:414
+msgid "Housekeeping and System Submenu"
+msgstr "系統維護子選單"
+
+#: 5.4/applet.js:417 3.2/applet.js:325
+msgid "View the Changelog"
+msgstr "檢視更新紀錄"
+
+#: 5.4/applet.js:423
+msgid "Open the README"
+msgstr "開啟 README"
+
+#: 5.4/applet.js:439 3.2/applet.js:358
+msgid "Waiting for battery information"
+msgstr "正在取得電池資訊"
+
+#: 5.4/applet.js:444
+msgid "Alert/Suspend:"
+msgstr "警示／暫停："
+
+#: 5.4/applet.js:549
+msgid "Battery Low - turn off or connect to power supply"
+msgstr "電池電量過低，請關機或連接電源"
+
+#: 5.4/applet.js:555
+msgid ""
+"The battery level has fallen to your alert level.\n"
+"\n"
+"Either connect to a power source or save or close down\n"
+"your work and suspend or shutdown the machine.\n"
+msgstr ""
+"電池電量已降至警示等級。\n"
+"\n"
+"請連接電源，或儲存並關閉您的工作，然後將電腦暫停或關機。\n"
+
+#: 5.4/applet.js:570
+msgid "Battery Critical - will suspend unless connected to power supply"
+msgstr "電池電量嚴重不足，若未連接電源將自動暫停"
+
+#: 5.4/applet.js:589
+msgid "Time to Empty:"
+msgstr "預估可用時間："
+
+#: 5.4/applet.js:590
+msgid "Time to Full:"
+msgstr "預估充滿時間："
+
+#: 5.4/applet.js:593 5.4/applet.js:640
+msgid "Current Charge:"
+msgstr "目前電量："
+
+#: 5.4/applet.js:593 3.2/applet.js:474
+msgid "Alert:"
+msgstr "警示："
+
+#: 5.4/applet.js:593 3.2/applet.js:474
+msgid "Suspend:"
+msgstr "暫停："
+
+#: 5.4/applet.js:640 3.2/applet.js:522
+msgid "Alert at:"
+msgstr "警示於："
+
+#: 5.4/applet.js:640 3.2/applet.js:522
+msgid "Suspend at:"
+msgstr "暫停於："
+
+#: 5.4/applet.js:646
+msgid "The battery level has been recharged to"
+msgstr "電池電量已回充至"
+
+#: 3.2/applet.js:160
+msgid "Some Dependencies not Installed"
+msgstr "部分相依套件尚未安裝"
+
+#: 3.2/applet.js:160
+msgid ""
+"'upower', 'sox' and 'zenity' are required for this applet to have all its "
+"facilities including notifications and audible alerts .\n"
+"\n"
+"Please read the help file on how to install them."
+msgstr ""
+"這個小程式需要安裝 'upower'、'sox' 與 'zenity' 才能完整運作，"
+"包括通知與音效提示功能。\n"
+"\n"
+"請參閱說明文件以取得安裝協助。"
+
+#: 3.2/applet.js:193
+msgid ""
+"A User Defined Sound File has been Specified for Low Battery\n"
+"\n"
+"Please ensure the volume is set sensibly in public places\n"
+"especially if a long loud file is specifed\n"
+msgstr ""
+"已指定自訂音效檔作為低電量提示。\n"
+"\n"
+"在公共場所時，請務必將音量設定在適當的大小，\n"
+"特別是當指定的檔案播放時間較長或音量較大時。\n"
+
+#: 3.2/applet.js:322
+msgid "Housekeeping and System Sub Menu"
+msgstr "系統維護子選單"
+
+#: 3.2/applet.js:331
+msgid "Open the Help file"
+msgstr "開啟說明文件"
+
+#: 3.2/applet.js:337
+msgid "Open stylesheet.css (Advanced Function)"
+msgstr "開啟 stylesheet.css（進階功能）"
+
+#. metadata.json->name
+#: 3.2/applet.js:353
+msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
+msgstr "具備監控與關機功能的電池小程式 (BAMS)"
+
+#: 3.2/applet.js:433
+msgid "Battery Low - turn off or connect to mains"
+msgstr "電池電量過低，請關機或連接電源"
+
+#: 3.2/applet.js:441
+msgid "Battery Monitor Applet Alert"
+msgstr "電池監控小程式警示"
+
+#: 3.2/applet.js:441
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+"either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"電池電量已降至警示等級\n"
+"\n"
+"請重新連接電源，\n"
+"\n"
+"或儲存並關閉您的工作，然後將電腦暫停或關機\n"
+"\n"
+
+#: 3.2/applet.js:443
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"電池電量已降至警示等級\n"
+"\n"
+" 請重新連接電源，\n"
+"\n"
+"或儲存並關閉您的工作，然後將電腦暫停或關機\n"
+"\n"
+
+#: 3.2/applet.js:459
+msgid "Battery Critical will Suspend unless connected to mains"
+msgstr "電池電量嚴重不足，若未連接電源將自動暫停"
+
+#: 3.2/applet.js:474
+msgid "Charge:"
+msgstr "電量："
+
+#: 3.2/applet.js:522
+msgid "Percentage Charge:"
+msgstr "電量百分比："
+
+#. metadata.json->description
+msgid "Displays charge as percentage and allows alerts and actions"
+msgstr "顯示電量百分比，並可設定警示與動作"
+
+#. 5.4->settings-schema.json->General->title
+msgid "General"
+msgstr "一般"
+
+#. 5.4->settings-schema.json->Style->title
+msgid "Style"
+msgstr "樣式"
+
+#. 5.4->settings-schema.json->general->title
+msgid "General Settings"
+msgstr "一般設定"
+
+#. 5.4->settings-schema.json->display_mode->title
+msgid "Display Options"
+msgstr "顯示選項"
+
+#. 5.4->settings-schema.json->low_alert->title
+#. 3.2->settings-schema.json->head2->description
+msgid "Battery Low Alert Settings"
+msgstr "低電量警示設定"
+
+#. 5.4->settings-schema.json->advanced->title
+msgid "Advanced"
+msgstr "進階"
+
+#. 5.4->settings-schema.json->bam_normal->title
+msgid "Normal"
+msgstr "正常"
+
+#. 5.4->settings-schema.json->bam_discharging->title
+msgid "Discharging"
+msgstr "放電中"
+
+#. 5.4->settings-schema.json->bam_alert->title
+msgid "Alert"
+msgstr "警示"
+
+#. 5.4->settings-schema.json->bam_alert_discharging->title
+msgid "Alert Discharging"
+msgstr "放電警示"
+
+#. 5.4->settings-schema.json->bam_limit_exceeded->title
+msgid "Limit Exceeded"
+msgstr "超出限制"
+
+#. 5.4->settings-schema.json->bam_limit_exceeded2->title
+msgid "Limit Exceeded - Critical"
+msgstr "超出限制－嚴重警告"
+
+#. 5.4->settings-schema.json->refreshInterval-spinner->units
+#. 3.2->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "秒"
+
+#. 5.4->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display"
+msgstr "顯示更新間隔"
+
+#. 5.4->settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.2->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine. This also governs the flash speed."
+msgstr ""
+"調整此數值可變更顯示更新的間隔，若您的電腦效能較低，建議使用較長的間隔。"
+"此設定也會影響閃爍速度。"
+
+#. 5.4->settings-schema.json->alertPercentage->units
+#. 5.4->settings-schema.json->recharged_alert_percentage->units
+#. 5.4->settings-schema.json->normal_font_size->units
+#. 5.4->settings-schema.json->discharging_font_size->units
+#. 5.4->settings-schema.json->alert_font_size->units
+#. 5.4->settings-schema.json->alert_discharging_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->units
+msgid "%"
+msgstr "%"
+
+#. 5.4->settings-schema.json->alertPercentage->description
+#. 3.2->settings-schema.json->alertPercentage->description
+msgid "Percentage Battery Charge at which Alert Displayed"
+msgstr "顯示警示的電池百分比"
+
+#. 5.4->settings-schema.json->alertPercentage->tooltip
+#. 3.2->settings-schema.json->alertPercentage->tooltip
+msgid ""
+"Percentage of Battery Charge at which Orange Warning Background is displayed "
+"- It is also shown and can be adjusted in the Applet left click menu"
+msgstr ""
+"當電池電量低於此百分比時，背景會顯示為橘色警示。此數值亦可於小程式的左鍵選單"
+"中調整。"
+
+#. 5.4->settings-schema.json->recharged_alert->description
+msgid "Visible Alert when Recharging"
+msgstr "充電時顯示警示"
+
+#. 5.4->settings-schema.json->recharged_alert->tooltip
+msgid "Provide visible alert when battery is recharged to a certain threshold"
+msgstr "當電池回充至指定百分比時顯示警示"
+
+#. 5.4->settings-schema.json->recharged_alert_percentage->description
+msgid "Percentage threshold for visible recharged alert"
+msgstr "回充警示的百分比門檻"
+
+#. 5.4->settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Classic"
+msgstr "傳統"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Classic Plus"
+msgstr "傳統 Plus"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Compact"
+msgstr "精簡"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Compact Plus"
+msgstr "精簡 Plus"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Icon Only"
+msgstr "僅顯示圖示"
+
+#. 5.4->settings-schema.json->displayType->description
+msgid "Toolbar Display Type"
+msgstr "工具列顯示類型"
+
+#. 5.4->settings-schema.json->displayType->tooltip
+msgid ""
+"The following display options are available (including Compact, Compact "
+"Plus, and Icon Only for vertical panels):\n"
+"  Classic: Battery percentage with extended messages for horizontal panel\n"
+"  Classic Plus: Classic with the addition of a battery icon\n"
+"  Compact: Battery percentage without extended messages\n"
+"  Compact Plus: Compact with the addition of a battery icon\n"
+"  Icon Only: The battery icon on a colored background indicating the current "
+"status"
+msgstr ""
+"可用的顯示選項如下 (垂直面板支援精簡、精簡 Plus 及僅顯示圖示)：\n"
+"  傳統：橫向面板顯示電池百分比與詳細資訊\n"
+"  傳統 Plus：傳統模式加上電池圖示\n"
+"  精簡：僅顯示電池百分比，不含詳細資訊\n"
+"  精簡 Plus：精簡模式加上電池圖示\n"
+"  僅顯示圖示：以彩色背景的電池圖示呈現狀態"
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Light"
+msgstr "Yaru Light"
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Dark"
+msgstr "Yaru Dark"
+
+#. 5.4->settings-schema.json->iconTheme->description
+#. 5.4->settings-schema.json->iconTheme->tooltip
+msgid "Icon Theme"
+msgstr "圖示主題"
+
+#. 5.4->settings-schema.json->time_remaining_display->description
+msgid "Append estimated time remaining to chosen display type"
+msgstr "在選擇的顯示類型後方附加預估剩餘時間"
+
+#. 5.4->settings-schema.json->time_remaining_display->tooltip
+msgid ""
+"This will append an estimate to the above option for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+"此選項會根據剩餘電量，在上方顯示選項後方附加預估剩餘時間"
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->description
+msgid "Append estimated time remaining to toolbar menu"
+msgstr "在工具列選單附加預估剩餘時間"
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->tooltip
+msgid ""
+"This will append an estimate to the toolbar menu for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+"此選項會根據剩餘電量，在工具列選單中顯示預估可用時間"
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->description
+msgid "Append estimated time remaining to tooltip"
+msgstr "在工具提示附加預估剩餘時間"
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->tooltip
+msgid ""
+"This will append an estimate to the tooltip for time remaining based on the "
+"amount of remaining battery power"
+msgstr ""
+"此選項會根據剩餘電量，在工具提示中附加預估剩餘時間"
+
+#. 5.4->settings-schema.json->useBatteryLowSound->description
+#. 3.2->settings-schema.json->useBatteryLowSound->description
+msgid "Provide audible alerts when Battery Low and at Shutdown Level"
+msgstr "在電池電量低與達到關機等級時提供音效提示"
+
+#. 5.4->settings-schema.json->useBatteryLowSound->tooltip
+msgid ""
+"Must have `sox` installed. Limited number of sound file types supported (."
+"oga and .wav)"
+msgstr ""
+"需要安裝 `sox`。僅支援部分音效檔案類型 (.oga 與 .wav)"
+
+#. 5.4->settings-schema.json->chooseBatteryLowSound->description
+#. 3.2->settings-schema.json->chooseBatteryLowSound->description
+msgid ""
+"Allow choice of audible alert file when Battery Low and at Shutdown Level"
+msgstr ""
+"可自訂低電量與達到關機等級時的音效警示檔案"
+
+#. 5.4->settings-schema.json->chooseBatteryLowSound->tooltip
+msgid ""
+"Must have `sox` installed. Limited number of sound file types supported in "
+"versions < 4.2"
+msgstr ""
+"需安裝 `sox`。4.2 版以前僅支援部分音效檔案類型"
+
+#. 5.4->settings-schema.json->batteryLowSound->description
+#. 3.2->settings-schema.json->batteryLowSound->description
+msgid "Choose sound file to use when Battery is Low"
+msgstr "選擇低電量時要使用的音效檔案"
+
+#. 5.4->settings-schema.json->batteryLowSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places, especially if a "
+"long or loud file is specified"
+msgstr ""
+"在公共場所時，請務必將音量設定在適當的大小，特別是當指定的檔案播放時間較長或"
+"音量較大時"
+
+#. 5.4->settings-schema.json->batteryShutdownSound->description
+msgid "Sound file to use when Battery is at Shutdown Level"
+msgstr "電池達到關機等級時要使用的音效檔案"
+
+#. 5.4->settings-schema.json->batteryShutdownSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places - do not specify a "
+"long or loud file at Shutdown"
+msgstr ""
+"在公共場所時，請務必將音量設定在適當的大小，關機時請勿指定播放時間過長或音量"
+"過大的檔案"
+
+#. 5.4->settings-schema.json->notifyBatteryLowSound->description
+msgid ""
+"Provide notification when user specified sound file is in use (Recommended)"
+msgstr ""
+"當使用者指定音效檔案時提供通知（建議啟用）"
+
+#. 5.4->settings-schema.json->notifyBatteryLowSound->tooltip
+msgid "To remind that the volume may need to be set sensibly in public places"
+msgstr "提醒您在公共場所需將音量設定在適當的大小"
+
+#. 5.4->settings-schema.json->customBatteryPath->description
+msgid "Path to battery capacity directory (device path)"
+msgstr "電池容量目錄（裝置路徑）"
+
+#. 5.4->settings-schema.json->customBatteryPath->tooltip
+msgid ""
+"Choose your own power_supply object e.g. for monitoring your secondary "
+"battery.\n"
+"\n"
+"Default:\n"
+"/sys/class/power_supply/BAT0"
+msgstr ""
+"可自訂 power_supply 物件，例如監控第二顆電池。\n"
+"\n"
+"預設值：\n"
+"/sys/class/power_supply/BAT0"
+
+#. 5.4->settings-schema.json->normal_background_color->description
+#. 5.4->settings-schema.json->discharging_background_color->description
+#. 5.4->settings-schema.json->alert_background_color->description
+#. 5.4->settings-schema.json->alert_discharging_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->description
+msgid "Background Color"
+msgstr "背景顏色"
+
+#. 5.4->settings-schema.json->normal_background_color->tooltip
+#. 5.4->settings-schema.json->normal_border_color->tooltip
+#. 5.4->settings-schema.json->discharging_background_color->tooltip
+#. 5.4->settings-schema.json->discharging_border_color->tooltip
+#. 5.4->settings-schema.json->alert_background_color->tooltip
+#. 5.4->settings-schema.json->alert_border_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_background_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->tooltip
+msgid "RGB or RGBA"
+msgstr "RGB 或 RGBA"
+
+#. 5.4->settings-schema.json->normal_border_color->description
+#. 5.4->settings-schema.json->discharging_border_color->description
+#. 5.4->settings-schema.json->alert_border_color->description
+#. 5.4->settings-schema.json->alert_discharging_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->description
+msgid "Border Color"
+msgstr "邊框顏色"
+
+#. 5.4->settings-schema.json->normal_font_size->description
+#. 5.4->settings-schema.json->discharging_font_size->description
+#. 5.4->settings-schema.json->alert_font_size->description
+#. 5.4->settings-schema.json->alert_discharging_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->description
+msgid "Font Size"
+msgstr "字型大小"
+
+#. 3.2->settings-schema.json->head->description
+msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
+msgstr "具備監控與關機功能的電池小程式一般設定"
+
+#. 3.2->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "顯示更新間隔："
+
+#. 3.2->settings-schema.json->head1->description
+msgid "Display Mode"
+msgstr "顯示模式"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid ""
+"Classic - Battery Percentage with extended messages for horizontal panel"
+msgstr ""
+"傳統：橫向面板顯示電池百分比及詳細資訊"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Classic Plus - Classic with addition of Battery Icon"
+msgstr "傳統 Plus：傳統模式加上電池圖示"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Compact - Battery Percentage without extended messages"
+msgstr "精簡：僅顯示電池百分比，不含詳細資訊"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Compact Plus - Compact with addition of Battery Icon"
+msgstr "精簡 Plus：精簡模式加上電池圖示"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Icon Only on coloured background indicating status"
+msgstr "僅顯示圖示，以彩色背景的電池圖示呈現狀態"
+
+#. 3.2->settings-schema.json->displayType->description
+msgid "Type of Display in Toolbar"
+msgstr "工具列顯示類型"
+
+#. 3.2->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional battery "
+"icon and some more compact displays suitable for a vertical panel "
+"(CompactCompact Plus and Icon Only)"
+msgstr ""
+"此功能提供傳統（原始）顯示，可選擇是否顯示電池圖示，並有適合垂直面板的精簡顯"
+"示（精簡、精簡 Plus 及僅顯示圖示）"
+
+#. 3.2->settings-schema.json->useBatteryLowSound->tooltip
+msgid ""
+"Must have Sox installed. Limited number of sound file types supported (.oga "
+"and .wav)"
+msgstr "需安裝 Sox。僅支援部分音效檔案類型（.oga 與 .wav）"
+
+#. 3.2->settings-schema.json->chooseBatteryLowSound->tooltip
+msgid ""
+"Must have Sox installed. Limited number of sound file types supported in "
+"versions < 4.2"
+msgstr "需安裝 Sox。4.2 版以前僅支援部分音效檔案類型"
+
+#. 3.2->settings-schema.json->batteryLowSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places especially if a "
+"long loud file is specifed"
+msgstr ""
+"在公共場所時，請務必將音量設定在適當的大小，特別是當指定的檔案播放時間較長或"
+"音量較大時"
+
+#. 3.2->settings-schema.json->batteryShutdownSound->description
+msgid "Choose sound file to use when Battery is at Shutdown Level"
+msgstr "選擇電池達到關機等級時要使用的音效檔案"
+
+#. 3.2->settings-schema.json->batteryShutdownSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places - do not specify a "
+"long loud file at Shutdown"
+msgstr ""
+"在公共場所時，請務必將音量設定在適當的大小，關機時請勿指定播放時間過長或音量"
+"過大的檔案"
+
+#. 3.2->settings-schema.json->notifyBatteryLowSound->description
+msgid ""
+"Provide Notification when user specified sound file is in use - Recommended"
+msgstr ""
+"當使用者指定音效檔案時顯示通知（建議啟用）"
+
+#. 3.2->settings-schema.json->notifyBatteryLowSound->tooltip
+msgid ""
+"To remind users that the volume may need to be set sensibly in public places"
+msgstr ""
+"提醒使用者在公共場所需將音量設定在適當的大小"
+
+#. 3.2->settings-schema.json->head3->description
+msgid "Household Tasks"
+msgstr "管理任務"
+
+#. 3.2->settings-schema.json->deleteTempraryFiles->description
+msgid "Delete temporary files after upgrade to version 1.4"
+msgstr "升級至 1.4 版後刪除暫存檔"
+
+#. 3.2->settings-schema.json->deleteTempraryFiles->tooltip
+msgid ""
+"Versions prior to 1.4 used temporary files in the home directory. These are "
+"not needed any more and can be deleted."
+msgstr ""
+"1.4 之前的版本會在家目錄中建立暫存檔。這些檔案已不再需要，可以安心將其刪除。"
+
+#: 5.4/suspendScript.sh:22
+msgid "WARNING: SUSPENDING SOON"
+msgstr "警告：即將進入暫停狀態"
+
+#: 5.4/suspendScript.sh:23
+msgid "The battery level is critical. The machine will be suspended shortly."
+msgstr "電池電量嚴重不足，系統即將進入暫停狀態。"
+
+#: 5.4/suspendScript.sh:24
+msgid "Abort Suspension"
+msgstr "取消暫停"
+
+#: 5.4/suspendScript.sh:25
+msgid "Suspend Immediately"
+msgstr "立即暫停"
+
+#: 5.4/suspendScript.sh:26
+msgid "The machine was suspended as the battery level was critical."
+msgstr "因電池電量嚴重不足，系統已進入暫停狀態。"

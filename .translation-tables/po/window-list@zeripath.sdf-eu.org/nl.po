@@ -1,0 +1,161 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: window-list@zeripath.sdf-eu.org 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-22 10:28+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:826
+msgid "Move to the other monitor"
+msgstr "Verplaatsen naar het andere scherm"
+
+#: applet.js:836
+#, javascript-format
+msgid "Move to monitor %d"
+msgstr "Verplaatsen naar scherm %d"
+
+#: applet.js:847
+msgid "Only on this workspace"
+msgstr "Alleen op deze werkruimte"
+
+#: applet.js:853
+msgid "Visible on all workspaces"
+msgstr "Zichtbaar op alle werkruimten"
+
+#: applet.js:859
+msgid "Move to another workspace"
+msgstr "Verplaatsen naar een andere werkruimte"
+
+#: applet.js:882
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+#: applet.js:885
+msgid "About..."
+msgstr "Over..."
+
+#: applet.js:889
+msgid "Configure..."
+msgstr "Configureren..."
+
+#: applet.js:893
+msgid "Remove 'Window list'"
+msgstr "Verwijderen 'Vensterlijst'"
+
+#: applet.js:902
+msgid "Close all"
+msgstr "Alle sluiten"
+
+#: applet.js:911
+msgid "Close others"
+msgstr "Anderen sluiten"
+
+#: applet.js:925
+msgid "Restore to full opacity"
+msgstr "Terugzetten naar volledige opaciteit"
+
+#: applet.js:933
+msgid "Restore"
+msgstr "Terugzetten"
+
+#: applet.js:938
+msgid "Minimize"
+msgstr "Minimaliseren"
+
+#: applet.js:946
+msgid "Unmaximize"
+msgstr "Ontmaximaliseren"
+
+#: applet.js:951
+msgid "Maximize"
+msgstr "Maximaliseren"
+
+#: applet.js:958
+msgid "Close"
+msgstr "Sluiten"
+
+#. metadata.json->name
+msgid "Zeripaths Window list"
+msgstr "Zeripaths Vensterlijst"
+
+#. metadata.json->description
+msgid "Zeripaths variant of Cinnamon window list"
+msgstr "Zeripaths variant van de Cinnamon vensterlijst"
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr "Gedrag"
+
+#. settings-schema.json->show-all-workspaces->description
+msgid "Show windows from all workspaces"
+msgstr "Toon vensters van alle werkruimten"
+
+#. settings-schema.json->enable-alerts->description
+msgid ""
+"Show an alert in the window list when a window from another workspace "
+"requires attention"
+msgstr ""
+"Toon een waarschuwing in de vensterlijst wanneer een venster van een andere "
+"werkruimte aandacht vereist"
+
+#. settings-schema.json->enable-scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr "Activeer muiswielscrollen in de vensterlijst"
+
+#. settings-schema.json->reverse-scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr "Omdraaien van de richting van muiswielscrollen in de vensterlijst"
+
+#. settings-schema.json->middle-click-close->description
+msgid "Middle click to close window"
+msgstr "Middenklik om venster te sluiten"
+
+#. settings-schema.json->section2->description
+msgid "Display"
+msgstr "Weergave"
+
+#. settings-schema.json->buttons-use-entire-space->description
+msgid ""
+"Window buttons can have different sizes and use the entire space available"
+msgstr ""
+"Vensterknoppen kunnen verschillende maten hebben en de hele beschikbare "
+"ruimte gebruiken"
+
+#. settings-schema.json->window-preview->description
+msgid "Show window thumbnails on hover"
+msgstr "Toon vensterminiaturen bij zweven met de muis"
+
+#. settings-schema.json->window-preview-show-label->description
+msgid "Show title above thumbnail"
+msgstr "Toon titel boven miniaturen"
+
+#. settings-schema.json->window-preview-scale->description
+msgid "Thumbnail size"
+msgstr "Grootte van miniaturen"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Small"
+msgstr "Klein"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Medium"
+msgstr "Middelgroot"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Large"
+msgstr "Groot"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Largest"
+msgstr "Grootst"

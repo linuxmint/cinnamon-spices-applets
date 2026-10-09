@@ -1,0 +1,61 @@
+# Gnote Cinnamon Applet.
+# Copyright (C) 2019
+# This file is distributed under the same license as the Gnote package.
+# tanktarta@gmail.com, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2023-02-09 22:22+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: English <tanktarta@gmail.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. applet.js:278
+msgid "Gnote isn't running! Do you have it installed?"
+msgstr "Gnote 没有运行！ 您有安装它吗？"
+
+#. metadata.json->name
+#. applet.js:324
+msgid "Gnote"
+msgstr "Gnote"
+
+#. applet.js:339
+msgid "Error: "
+msgstr "错误： "
+
+#. applet.js:340
+msgid "Retry"
+msgstr "重试"
+
+#. applet.js:354
+msgid "New Note"
+msgstr "新笔记"
+
+#. applet.js:363
+msgid "Type to search..."
+msgstr "键入以搜索..."
+
+#. applet.js:436
+msgid "GNote DBus service not found. Is GNote installed?"
+msgstr "找不到 GNote DBus 服务。是否安装了 GNote？"
+
+#. applet.js:438
+msgid "Click to see error!"
+msgstr "单击以查看错误！"
+
+#. metadata.json->description
+#, fuzzy
+msgid "Lists notes, view notes, create notes and search notes."
+msgstr "列出、查看、创建和搜索笔记。"
+
+#~ msgid "Gnote stopped working!"
+#~ msgstr "Gnote 停止工作！"

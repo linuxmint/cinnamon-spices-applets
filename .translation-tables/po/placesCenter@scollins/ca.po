@@ -1,0 +1,338 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: placesCenter@scollins 2.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-15 02:01+0200\n"
+"PO-Revision-Date: 2024-07-13 03:16+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:150
+msgid "(Right click to open folder)"
+msgstr "(Clic dret per obrir la carpeta)"
+
+#: applet.js:172
+msgid "Places"
+msgstr "Llocs"
+
+#: applet.js:287
+msgid "Search Home Folder"
+msgstr "Buscar al directori Home"
+
+#: applet.js:310
+msgid "SYSTEM"
+msgstr "SISTEMA"
+
+#: applet.js:319
+msgid "Search File System"
+msgstr "Buscar al sistema de fitxers"
+
+#: applet.js:344
+msgid "RECENT DOCUMENTS"
+msgstr "DOCUMENTS RECENTS"
+
+#: applet.js:358
+msgid "Clear"
+msgstr "Netejar"
+
+#: applet.js:364
+msgid "Recent"
+msgstr "Recent"
+
+#: applet.js:407
+msgid "Computer"
+msgstr "Ordinador"
+
+#: applet.js:413
+msgid "File System"
+msgstr "Sistema de fitxers"
+
+#: applet.js:429
+msgid "Network"
+msgstr "Xarxa"
+
+#: applet.js:569
+msgid "Trash"
+msgstr "Paperera"
+
+#: search.py:43
+msgid "Open..."
+msgstr "Obrir..."
+
+#: search.py:48
+msgid "Open Containing Folder..."
+msgstr "Obrir la carpeta contenidora..."
+
+#: search.py:85
+msgid "Search"
+msgstr "Buscar"
+
+#: search.py:106
+msgid "Start in"
+msgstr "Començar a"
+
+#: search.py:107
+msgid "Select a folder"
+msgstr "Seleccioneu una carpeta"
+
+#: search.py:113
+msgid "Follow symlinks"
+msgstr "Seguir els enllaços simbòlics"
+
+#: search.py:117
+msgid "Search hidden"
+msgstr "Buscar ocults"
+
+#: search.py:121
+msgid "Use regular expressions"
+msgstr "Utilitzar expressions regulars"
+
+#: search.py:125
+msgid "Stop"
+msgstr "Aturar"
+
+#: search.py:140
+msgid "File"
+msgstr "Fitxer"
+
+#: search.py:156
+msgid "Path"
+msgstr "Ruta"
+
+#: search.py:184
+msgid "Searching..."
+msgstr "Buscant..."
+
+#: search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr "Cerca aturada"
+
+#: search.py:215
+msgid "Searching: "
+msgstr "Buscant: "
+
+#: search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Error: No hi ha permisos suficients per llegir la carpeta "
+
+#: search.py:252
+msgid "Search Completed"
+msgstr "Cerca completada"
+
+#: search.py:259
+msgid "Skipping"
+msgstr "Ignorant"
+
+#: search.py:259
+msgid " - directory already searched"
+msgstr " - directori ja cercat"
+
+#. metadata.json->name
+msgid "Places Center"
+msgstr "Centre de Llocs"
+
+#. metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr "Proveeix un disseny fàcil d'interpretar per accedir als vostres Llocs"
+
+#. metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+"El Centre de Llocs és una miniaplicació rica en funcionalitats i "
+"multiplataforma per a sistemes utilitzant Cinnamon que proveeix un accés "
+"fàcil als vostres Llocs més utilitzats. Si ho desitgeu, podeu contribuir "
+"mitjançant Pull Requests o incidències al meu repositori a Github."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Autor - Stephen Collins"
+
+#. metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr "kehugter - Va afegir la configuració per l'ús del botó del mig"
+
+#. metadata.json->contributors
+msgid "claudiux - Improvements to the 'Recent' section."
+msgstr "claudiux - Millores a la secció 'Recent'."
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr "General"
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr "Usuari"
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr "Sistema"
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr "Documents recents"
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Configuració del tauler"
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Configuració del menú"
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Secció de l'usuari"
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Secció del sistema"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Icona del tauler"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+"Accepta un nom d'icona o una ruta al fitxer (suporta icones simbòliques)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Text del tauler"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Drecera del menú"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Mida de la icona del menú"
+
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Obrir en fer clic del mig"
+
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Deixeu-ho buit per a desactivar-ho"
+
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Mostrar l'escriptori"
+
+#. settings-schema.json->userCustomPlaces->description
+#. settings-schema.json->systemCustomPlaces->description
+msgid "Custom places"
+msgstr "Llocs personalitzats"
+
+#. settings-schema.json->userCustomPlaces->tooltip
+#. settings-schema.json->systemCustomPlaces->tooltip
+msgid ""
+"List of uris/file paths to be included. Entries may be separated by either a "
+"comma(,) or by a new-line. You can set the name to be displayed by adding :"
+"customName after the location. You can likewise set an icon name by adding :"
+"iconName after the custom name."
+msgstr ""
+"Llista de rutes a incloure, separades per comes (,) o línies noves. Podeu "
+"afegir el nom a mostrar per cada ruta afegint :nomPersonalitzat al final de "
+"la ruta i afegir-hi una icona mitjançant :nomIcona."
+
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Mostrar la paperera"
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Mai"
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Sempre"
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Quan no sigui buida"
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Mostrar l'ordinador"
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Mostrar el sistema de fitxers"
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Mostrar els volums"
+
+#. settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Mostrar només dispositius muntats"
+
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Mostrar la xarxa"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Mostrar els documents recents"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr "Tots els documents recents"
+
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Número a mostrar"
+
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr "Mostrar la ruta completa als tooltips"
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr "Privacitat"

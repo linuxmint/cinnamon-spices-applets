@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-12-08 00:21+0000\n"
+"PO-Revision-Date: 2023-12-10 13:06+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4\n"
+
+#. metadata.json->name
+msgid "Mini-Calc Applet"
+msgstr "Mini Számológép kisalkalmazás"
+
+#. metadata.json->description
+msgid ""
+"Very simple and minimalistic but yet powerful calculator that evaluates "
+"JavaScript expressions."
+msgstr ""
+"Nagyon egyszerű és minimalista, de mégis hatékony számológép, amely "
+"kiértékeli a JavaScript kifejezéseket."
+
+#. settings-schema.json->panel-options->title
+msgid "Settings"
+msgstr "Beállítások"
+
+#. settings-schema.json->keyboard-section->title
+msgid "Keyboard"
+msgstr "Billentyűzet"
+
+#. settings-schema.json->input-section->title
+msgid "Number Format"
+msgstr "Számformátum"
+
+#. settings-schema.json->history-section->title
+msgid "Expression and Result History"
+msgstr "Kifejezés és eredményelőzmények"
+
+#. settings-schema.json->keyToggle->description
+msgid "Show / hide mini calculator"
+msgstr "Mini számológép megjelenítése / elrejtése"
+
+#. settings-schema.json->convertLocaleNumberSeparators->description
+msgid "Convert numbers in current locale's format to JS numbers"
+msgstr "Konvertálja az aktuális nyelvi formátumú számokat JS-számokká"
+
+#. settings-schema.json->convertLocaleNumberSeparatorsHelp->description
+msgid ""
+"e.g. for the German locale convert `1,2 + 3,4` to `1.2 + 3.4`. Makes pasting "
+"number easier."
+msgstr ""
+"Pl.: német nyelvi beállítások esetén konvertálja az \"1,2 + 3,4\" értékeket "
+"\"1.2 + 3.4\"-re. Megkönnyítheti egy szám beillesztését."
+
+#. settings-schema.json->recentHistoryMaxLength->description
+msgid "Max number of recent expressions"
+msgstr "Legutóbbi kifejezések maximális száma"
+
+#. settings-schema.json->historyMaxDisplayLength->description
+msgid "Max length of expression history"
+msgstr "A kifejezéselőzmény maximális hossza"

@@ -1,0 +1,105 @@
+# ANIME DESKTOP WALLPAPER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# fly206, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-20 15:57+0200\n"
+"PO-Revision-Date: 2026-06-07 21:36-0400\n"
+"Last-Translator: Grom-TS\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. settings-schema.json->saveImage->description
+#. settings-schema.json->saveImage->tooltip
+#: applet.js:89
+msgid "Automatically save background images"
+msgstr "Автоматически сохранять фоновые изображения"
+
+#. settings-schema.json->slideshow->description
+#. settings-schema.json->slideshow->tooltip
+#: applet.js:93
+msgid "Play backgrounds as a slideshow"
+msgstr "Показывать фоновые изображения в режиме слайд-шоу"
+
+#. settings-schema.json->click->description
+#. settings-schema.json->click->tooltip
+#: applet.js:97
+msgid "Enable click to switch images"
+msgstr "Включить переключение изображений по щелчку"
+
+#. metadata.json->name
+msgid "Anime Desktop Wallpaper"
+msgstr "Аниме-обои для рабочего стола"
+
+#. metadata.json->description
+msgid "Download and apply Anime Wallpaper to your desktop"
+msgstr "Загружать и устанавливать аниме-обои на рабочий стол"
+
+#. settings-schema.json->section1->description
+msgid "Configure"
+msgstr "Настройка"
+
+#. settings-schema.json->resource->description
+msgid "Wallpaper api resource"
+msgstr "Источник API обоев"
+
+#. settings-schema.json->resource->options
+msgid "loliapi.com"
+msgstr "loliapi.com"
+
+#. settings-schema.json->resource->options
+msgid "zichen.zone"
+msgstr "zichen.zone"
+
+#. settings-schema.json->resource->options
+msgid "moe.jitsu.top"
+msgstr "moe.jitsu.top"
+
+#. settings-schema.json->resource->options
+msgid "paugram.com"
+msgstr "paugram.com"
+
+#. settings-schema.json->resource->options
+msgid "t.mwm.moe"
+msgstr "t.mwm.moe"
+
+#. settings-schema.json->resource->options
+msgid "dmoe.cc"
+msgstr "dmoe.cc"
+
+#. settings-schema.json->resource->options
+msgid "api.vvhan.com"
+msgstr "api.vvhan.com"
+
+#. settings-schema.json->resource->options
+msgid "paulzzh.com"
+msgstr "paulzzh.com"
+
+#. settings-schema.json->resource->tooltip
+msgid "Select a wallpaper resource"
+msgstr "Выберите источник обоев"
+
+#. settings-schema.json->saveImagePath->description
+msgid "Save background images to"
+msgstr "Сохранять фоновые изображения в"
+
+#. settings-schema.json->saveImagePath->tooltip
+msgid "Automatically save background images to this directory"
+msgstr "Автоматически сохранять фоновые изображения в этот каталог"
+
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr "минут"
+
+#. settings-schema.json->delay->description
+#. settings-schema.json->delay->tooltip
+msgid "Delay"
+msgstr "Интервал"

@@ -1,0 +1,223 @@
+# German translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# jonny <jonny.mccullagh@gmail.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: meetingbar@redbranch.net 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-21 19:09+0100\n"
+"PO-Revision-Date: 2026-03-25 19:27+0000\n"
+"Last-Translator: jonny <jonny.mccullagh@gmail.com>\n"
+"Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:60
+msgid "Loading calendars..."
+msgstr "Kalender werden geladen ..."
+
+#. metadata.json->name
+#. applet.js:126
+msgid "Meeting Bar"
+msgstr "Meeting-Leiste"
+
+#. applet.js:126
+msgid "Refreshing calendars..."
+msgstr "Kalender werden aktualisiert ..."
+
+#. applet.js:135 applet.js:145
+msgid "No calendars configured"
+msgstr "Keine Kalender konfiguriert"
+
+#. applet.js:170 applet.js:328
+msgid "Loaded successfully"
+msgstr "Erfolgreich geladen"
+
+#. applet.js:175
+msgid "Failed to fetch"
+msgstr "Abruf fehlgeschlagen"
+
+#. applet.js:183 applet.js:192
+msgid "Error"
+msgstr "Fehler"
+
+#. applet.js:223
+#, javascript-format
+msgid "Refreshed %d calendar:"
+msgid_plural "Refreshed %d calendars:"
+msgstr[0] "%d Kalender aktualisiert:"
+msgstr[1] "%d Kalender aktualisiert:"
+
+#. applet.js:228
+#, javascript-format
+msgid "✓ %d successful, ✗ %d failed"
+msgstr "✓ %d erfolgreich, ✗ %d fehlgeschlagen"
+
+#. applet.js:233
+#, javascript-format
+msgid "Found %d event today"
+msgid_plural "Found %d events today"
+msgstr[0] "%d Termin heute gefunden"
+msgstr[1] "%d Termine heute gefunden"
+
+#. applet.js:249
+msgid "Meeting Bar Refresh Complete"
+msgstr "Aktualisierung der Meeting-Leiste abgeschlossen"
+
+#. applet.js:258
+msgid "local file"
+msgstr "lokale Datei"
+
+#. applet.js:328
+msgid "event"
+msgid_plural "events"
+msgstr[0] "Termin"
+msgstr[1] "Termine"
+
+#. applet.js:338
+msgid "Parse error"
+msgstr "Analysefehler"
+
+#. applet.js:485
+msgid "No upcoming meetings today"
+msgstr "Heute keine bevorstehenden Meetings"
+
+#. applet.js:497 applet.js:640
+msgid "No events today"
+msgstr "Heute keine Termine"
+
+#. applet.js:511 applet.js:654
+msgid "Today's Agenda"
+msgstr "Heutige Agenda"
+
+#. applet.js:522 applet.js:670
+msgid "Tomorrow's Agenda"
+msgstr "Agenda für morgen"
+
+#. applet.js:550 applet.js:702
+msgid "CANCELLED"
+msgstr "ABGESAGT"
+
+#. applet.js:552 applet.js:704
+msgid "TENTATIVE"
+msgstr "VORLÄUFIG"
+
+#. applet.js:594 applet.js:612
+msgid "now"
+msgstr "jetzt"
+
+#. applet.js:614
+#, javascript-format
+msgid "in %dm"
+msgstr "in %dm"
+
+#. applet.js:619
+#, javascript-format
+msgid "in %dh"
+msgstr "in %dh"
+
+#. applet.js:621
+#, javascript-format
+msgid "in %dh %dm"
+msgstr "in %dh %dm"
+
+#. metadata.json->description
+msgid "Display the next meeting from your calendar in the menu bar."
+msgstr "Zeigt das nächste Meeting aus Ihrem Kalender in der Menüleiste an."
+
+#. settings-schema.json->ical-urls->description
+msgid "iCal Calendar URLs"
+msgstr "iCal-Kalender-URLs"
+
+#. settings-schema.json->ical-urls->tooltip
+msgid "Enter one iCal (.ics) URL per line. You can add multiple calendars."
+msgstr ""
+"Geben Sie pro Zeile eine iCal-URL (.ics) ein. Sie können mehrere Kalender "
+"hinzufügen."
+
+#. settings-schema.json->refresh-rate->description
+msgid "Refresh Rate"
+msgstr "Aktualisierungsintervall"
+
+#. settings-schema.json->refresh-rate->units
+msgid "minutes"
+msgstr "Minuten"
+
+#. settings-schema.json->refresh-rate->tooltip
+msgid "How often to fetch calendar updates"
+msgstr "Wie oft Kalenderaktualisierungen abgerufen werden"
+
+#. settings-schema.json->padding->description
+msgid "Padding"
+msgstr "Innenabstand"
+
+#. settings-schema.json->padding->units
+msgid "pixels"
+msgstr "Pixel"
+
+#. settings-schema.json->padding->tooltip
+msgid "Padding around the text on all sides"
+msgstr "Innenabstand um den Text auf allen Seiten"
+
+#. settings-schema.json->max-text-length->description
+msgid "Max Text Length"
+msgstr "Maximale Textlänge"
+
+#. settings-schema.json->max-text-length->units
+msgid "characters"
+msgstr "Zeichen"
+
+#. settings-schema.json->max-text-length->tooltip
+msgid "Maximum event title length (truncated with ...)"
+msgstr "Maximale Länge des Ereignistitels (wird mit ... gekürzt)"
+
+#. settings-schema.json->show-tomorrow-events->description
+msgid "Show Tomorrow's Events"
+msgstr "Ereignisse von morgen anzeigen"
+
+#. settings-schema.json->show-tomorrow-events->tooltip
+msgid "Include events from tomorrow in addition to today's events"
+msgstr ""
+"Ereignisse von morgen zusätzlich zu den heutigen Ereignissen einschließen"
+
+#. settings-schema.json->refresh-calendars->description
+msgid "Refresh Calendars Now"
+msgstr "Kalender jetzt aktualisieren"
+
+#. settings-schema.json->refresh-calendars->tooltip
+msgid "Immediately refresh all calendars and show status"
+msgstr "Alle Kalender sofort aktualisieren und Status anzeigen"
+
+#. settings-schema.json->menu-colors-header->description
+msgid "Menu Event Colors"
+msgstr "Ereignisfarben im Menü"
+
+#. settings-schema.json->past-event-color->description
+msgid "Past Event Color"
+msgstr "Farbe vergangener Ereignisse"
+
+#. settings-schema.json->past-event-color->tooltip
+msgid "Color for events that have already happened"
+msgstr "Farbe für Ereignisse, die bereits stattgefunden haben"
+
+#. settings-schema.json->current-event-color->description
+msgid "Current Event Color"
+msgstr "Farbe des aktuellen Ereignisses"
+
+#. settings-schema.json->current-event-color->tooltip
+msgid "Color for the event happening now"
+msgstr "Farbe für das Ereignis, das gerade stattfindet"
+
+#. settings-schema.json->future-event-color->description
+msgid "Future Event Color"
+msgstr "Farbe zukünftiger Ereignisse"
+
+#. settings-schema.json->future-event-color->tooltip
+msgid "Color for upcoming events"
+msgstr "Farbe für bevorstehende Ereignisse"

@@ -1,0 +1,11 @@
+# CALENDAR WITH PUBLIC HOLIDAYS
+# This file is put in the public domain.
+# ccprog, 2020
+#
+msgid ""
+msgstr ""
+
+#. 3.8->settings-schema.json->country->options
+#. 5.2->settings-schema.json->country->options
+msgid "Italy"
+msgstr ""

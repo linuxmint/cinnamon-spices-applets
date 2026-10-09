@@ -1,0 +1,83 @@
+# MEDIA CONTROLS
+# This file is put in the public domain.
+# rbfraphael, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mediacontrols@rbfraphael 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-16 03:33-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+msgid "Media Controls"
+msgstr "Médiavezérlők"
+
+#. metadata.json->description
+msgid ""
+"Control your media players from your panel. Works with players that uses "
+"MPRIS2 protocol."
+msgstr ""
+"Irányítsd médialejátszóidat a paneledről. Működik az MPRIS2 protokollt "
+"használó lejátszókkal."
+
+#. settings-schema.json->section_display_options->description
+msgid "Display Options"
+msgstr "Megjelenítési beállítások"
+
+#. settings-schema.json->show_player_icon->description
+msgid "Show player icon?"
+msgstr "Mutassa a lejátszó ikont?"
+
+#. settings-schema.json->show_track_info->description
+msgid "Show track info?"
+msgstr "Mutassa a szám információit?"
+
+#. settings-schema.json->track_info->options
+msgid "Song Name and Artist"
+msgstr "Dal címe és előadója"
+
+#. settings-schema.json->track_info->options
+msgid "Song Name Only"
+msgstr "Csak a dal neve"
+
+#. settings-schema.json->track_info->options
+msgid "App Name"
+msgstr "Alkalmazás neve"
+
+#. settings-schema.json->track_info->description
+msgid "Track info to show on the panel"
+msgstr "A panelen megjelenítendő száminformációk"
+
+#. settings-schema.json->truncate_track_info->description
+msgid "Limit track info length"
+msgstr "Száminformációk hosszának korlátozása"
+
+#. settings-schema.json->truncate_length->units
+msgid "characters"
+msgstr "karakter"
+
+#. settings-schema.json->truncate_length->description
+msgid "Character limit"
+msgstr "Karakter limit"
+
+#. settings-schema.json->show_player_select_indicator->description
+msgid "Show icon to select player?"
+msgstr "Mutassa az ikont a játékos kiválasztásához?"
+
+#. settings-schema.json->show_hover_color->description
+msgid "Show hover color on buttons?"
+msgstr "Mutassa az egérmutató színét a gombokon?"
+
+#. settings-schema.json->hover_bg_color->description
+msgid "Button hover color"
+msgstr "Gombra mutatás színe"

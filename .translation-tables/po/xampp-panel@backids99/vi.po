@@ -1,0 +1,64 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xampp-panel@backids99 0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2017-04-20 23:15+0800\n"
+"PO-Revision-Date: 2025-10-12 21:34+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:40
+msgid "Xampp Panel"
+msgstr "Panel Xampp"
+
+#: applet.js:48
+msgid "Start XAMPP manager"
+msgstr "Khởi động trình quản lý XAMPP"
+
+#: applet.js:51
+msgid "XAMPP Start"
+msgstr "Bắt đầu XAMPP"
+
+#: applet.js:55
+msgid "XAMPP Stop"
+msgstr "Dừng XAMPP"
+
+#: applet.js:59
+msgid "XAMPP Restart"
+msgstr "Khởi động lại XAMPP"
+
+#: applet.js:66
+msgid "Open Web Dir"
+msgstr "Mở Thư mục Web"
+
+#: applet.js:70
+msgid "Launch Web Dir"
+msgstr "Khởi chạy Thư mục Web"
+
+#: applet.js:74
+msgid "Launch phpMyAdmin"
+msgstr "Khởi chạy phpMyAdmin"
+
+#: applet.js:78
+msgid "Edit default php.ini"
+msgstr "Chỉnh sửa php.ini mặc định"
+
+#. xampp-panel@backids99->metadata.json->description
+msgid "A Panel Menu for XAMPP Web Developers"
+msgstr "Một Menu Panel cho Nhà phát triển Web XAMPP"
+
+#. xampp-panel@backids99->metadata.json->name
+msgid "Xampp Panel Menu"
+msgstr "Menu Panel Xampp"

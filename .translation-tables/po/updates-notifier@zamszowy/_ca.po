@@ -1,0 +1,38 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+msgid ""
+msgstr ""
+
+#. applet.js:233
+msgid "View error details"
+msgstr ""
+
+#. applet.js:302
+msgid "Error checking for updates"
+msgstr ""
+
+#. error-window.js:39
+msgid "Error log file not found."
+msgstr ""
+
+#. settings-schema.json->use-timer->description
+msgid "Automatically check for updates"
+msgstr ""
+
+#. settings-schema.json->use-timer->tooltip
+msgid ""
+"When turned off, updates will still show when checked manually or refreshed "
+"by another process"
+msgstr ""
+
+#. settings-schema.json->update-refresh->description
+msgid "Active minutes to wait before refreshing updates"
+msgstr ""
+
+#. settings-schema.json->update-refresh->tooltip
+msgid ""
+"Refresh wait time is reset when applet or Cinnamon are reset and does not "
+"include inactive time (e.g. when computer is suspended)"
+msgstr ""

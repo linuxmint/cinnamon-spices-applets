@@ -1,0 +1,69 @@
+# RSS NEWSTICKER
+# This file is put in the public domain.
+# KopfDesDaemons, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rssNewsticker@KopfDesDaemons 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-11-17 20:28+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:20
+msgid "Loading Newsticker..."
+msgstr "Ladataan uutisia..."
+
+#. applet.js:89
+msgid "Could not load RSS-Feed"
+msgstr "RSS-syötettä ei voitu ladata"
+
+#. applet.js:94
+msgid "Error while loading RSS"
+msgstr "Virhe ladattaessa RSS:ää"
+
+#. metadata.json->name
+msgid "RSS Newsticker"
+msgstr "RSS Newsticker"
+
+#. metadata.json->description
+msgid "Displays the headlines of an RSS feed"
+msgstr ""
+"Näyttää RSS-syötteiden otsikoita. Painamalla tekstiä uutinen avautuu "
+"selaimeen"
+
+#. settings-schema.json->head0->description
+msgid "General"
+msgstr "Yleinen"
+
+#. settings-schema.json->rssURL->description
+msgid "URL of RSS feed"
+msgstr "RSS URL verkko-osoite"
+
+#. settings-schema.json->head1->description
+msgid "Ticker"
+msgstr "Lennätin"
+
+#. settings-schema.json->width->description
+msgid "Width of ticker in px"
+msgstr "Merkkileveys pikseleinä"
+
+#. settings-schema.json->tickerSeperator->description
+msgid "Separator between headlines"
+msgstr "Erotin otsikoiden välillä"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh interval in seconds"
+msgstr "Päivitysväli sekunneissa"
+
+#. settings-schema.json->tickerSpeed->description
+msgid "Speed of ticker in ms"
+msgstr "Vieritysnopeus ms"

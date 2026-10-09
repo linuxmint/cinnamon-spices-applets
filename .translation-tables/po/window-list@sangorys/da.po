@@ -1,0 +1,186 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2026-05-30 11:37+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:1273
+msgid "Window information"
+msgstr "Vinduesinformation"
+
+#: applet.js:1309
+msgid "Move to the other monitor"
+msgstr "Flyt til den anden skærm"
+
+#: applet.js:1319
+#, javascript-format
+msgid "Move to monitor %d"
+msgstr "Flyt til skærm %d"
+
+#: applet.js:1330
+msgid "Only on this workspace"
+msgstr "Kun på dette arbejdsområde"
+
+#: applet.js:1336
+msgid "Visible on all workspaces"
+msgstr "Synlig på alle arbejdsområder"
+
+#: applet.js:1342
+msgid "Move to another workspace"
+msgstr "Flyt til et andet arbejdsområde"
+
+#: applet.js:1365
+msgid "Preferences"
+msgstr "Indstillinger"
+
+#: applet.js:1368
+msgid "About..."
+msgstr "Om …"
+
+#: applet.js:1372
+msgid "Configure..."
+msgstr "Konfigurér …"
+
+#: applet.js:1376
+msgid "Remove 'Window list'"
+msgstr "Fjern “Vinduesliste”"
+
+#: applet.js:1383
+msgid "Close all"
+msgstr "Luk alle"
+
+#: applet.js:1392
+msgid "Close others"
+msgstr "Luk andre"
+
+#: applet.js:1406
+msgid "Restore to full opacity"
+msgstr "Gendan fuld uigennemsigtighed"
+
+#: applet.js:1414
+msgid "Restore"
+msgstr "Gendan"
+
+#: applet.js:1419
+msgid "Minimize"
+msgstr "Minimér"
+
+#: applet.js:1427
+msgid "Unmaximize"
+msgstr "Gendan"
+
+#: applet.js:1432
+msgid "Maximize"
+msgstr "Maksimér"
+
+#: applet.js:1440
+msgid "Close"
+msgstr "Luk"
+
+#. metadata.json->name
+msgid "My perfect window-list applet"
+msgstr "Min perfekte vinduesliste"
+
+#. metadata.json->description
+msgid ""
+"Based on the original Cinnamon window list, the window order is memorized "
+"and restored. The next huge feature is to also group window like Google "
+"Chrome groups tab. This is my definition of a perfect window list applet"
+msgstr ""
+"Baseret på den oprindelige Cinnamon-vinduesliste gemmes og gendannes "
+"vinduesrækkefølgen. Den næste store funktion er muligheden for at gruppere "
+"vinduer på samme måde, som Google Chrome grupperer faner. Det er min "
+"definition på et perfekt panelprogram til vindueslister"
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr "Opførsel"
+
+#. settings-schema.json->show-all-workspaces->description
+msgid "Show windows from all workspaces"
+msgstr "Vis vinduer fra alle arbejdsområder"
+
+#. settings-schema.json->enable-alerts->description
+msgid ""
+"Show an alert in the window list when a window from another workspace "
+"requires attention"
+msgstr ""
+"Vis en advarsel i vindueslisten, når et vindue fra et andet arbejdsområde "
+"kræver din opmærksomhed"
+
+#. settings-schema.json->enable-scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr "Aktivér rulning med musehjulet i vindueslisten"
+
+#. settings-schema.json->reverse-scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr "Vend om på retningen af rulning med musehjulet i vindueslisten"
+
+#. settings-schema.json->left-click-minimize->description
+msgid "Left click to minimize window"
+msgstr "Venstreklik for at minimere vindue"
+
+#. settings-schema.json->middle-click-close->description
+msgid "Middle click to close window"
+msgstr "Klik med midterste museknap for at lukke vindue"
+
+#. settings-schema.json->section2->description
+msgid "Display"
+msgstr "Visning"
+
+#. settings-schema.json->panel-show-label->description
+msgid "Show window names in the panel"
+msgstr "Vis vinduesnavne i panelet"
+
+#. settings-schema.json->button-width->units
+msgid "pixels"
+msgstr "pixels"
+
+#. settings-schema.json->button-width->description
+msgid "Window button width in the panel"
+msgstr "Bredde på vinduesknap i panelet"
+
+#. settings-schema.json->buttons-use-entire-space->description
+msgid ""
+"Window buttons can have different sizes and use the entire space available"
+msgstr ""
+"Vinduesknapper kan have forskellig størrelse og benytte al tilgængelig "
+"plads"
+
+#. settings-schema.json->window-preview->description
+msgid "Show window thumbnails on hover"
+msgstr "Vis vinduesminiaturer, når markøren føres hen over"
+
+#. settings-schema.json->window-preview-show-label->description
+msgid "Show title above thumbnail"
+msgstr "Vis titel over miniature"
+
+#. settings-schema.json->window-preview-scale->description
+msgid "Thumbnail size"
+msgstr "Miniaturestørrelse"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Small"
+msgstr "Lille"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Medium"
+msgstr "Mellem"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Large"
+msgstr "Stor"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Largest"
+msgstr "Størst"

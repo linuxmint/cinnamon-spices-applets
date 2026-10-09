@@ -1,0 +1,245 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-02 12:12+0300\n"
+"PO-Revision-Date: 2023-12-02 12:24+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+#: applet.js:32 applet.js:58
+msgid "Required GTop package missing!"
+msgstr "Необходимый пакет \"GTop\" не найден!"
+
+#: applet.js:56
+msgid "Error!"
+msgstr "Ошибка!"
+
+#: applet.js:61
+msgid "Reset Peak Temperature"
+msgstr "Сбросить пиковое значение температуры"
+
+#: applet.js:64
+msgid "Clear Cache"
+msgstr "Очистить кэш"
+
+#: applet.js:161
+msgid "CPUs"
+msgstr "ЦП"
+
+#: applet.js:161
+msgid "°C max; "
+msgstr "°C макс.; "
+
+#: applet.js:161
+msgid "°C peak"
+msgstr "°C пик"
+
+#: applet.js:164
+msgid "Memory"
+msgstr "Память"
+
+#: applet.js:164
+msgid "GB"
+msgstr "ГБ"
+
+#: applet.js:164
+msgid "GB swap"
+msgstr "ГБ виртуальная"
+
+#: applet.js:167
+msgid "Network"
+msgstr "Сеть"
+
+#: applet.js:321
+msgid "Core "
+msgstr "Ядро "
+
+#: applet.js:366
+msgid "Used:   "
+msgstr "Исп.:   "
+
+#: applet.js:367
+msgid "Cache:  "
+msgstr "Кэш:    "
+
+#: applet.js:368
+msgid "Buffer: "
+msgstr "Буф.:   "
+
+#: applet.js:372
+msgid "Swap:   "
+msgstr "Вирт.:  "
+
+#: applet.js:442
+msgid "Up:      "
+msgstr "Отдано:  "
+
+#: applet.js:442 applet.js:443
+msgid "B/s"
+msgstr "Б/с"
+
+#: applet.js:443
+msgid "Down:    "
+msgstr "Получ.:  "
+
+#: applet.js:444
+msgid "Data:    "
+msgstr "Объем:   "
+
+#: applet.js:444
+msgid "B"
+msgstr "Б"
+
+#: applet.js:448
+msgid "no interfaces to show"
+msgstr "интерфейсы отсутствуют"
+
+#: applet.js:453
+msgid "k"
+msgstr "к"
+
+#: applet.js:453
+msgid "M"
+msgstr "М"
+
+#: applet.js:453
+msgid "G"
+msgstr "Г"
+
+#: applet.js:453
+msgid "T"
+msgstr "Т"
+
+#. metadata.json->name
+msgid "Simplified System Monitor"
+msgstr "Simplified System Monitor"
+
+#. metadata.json->description
+msgid "Applet to show system load and state"
+msgstr "Утилита панели для отражения загрузки и состояния системы"
+
+#. settings-schema.json->common_label->description
+msgid "Common"
+msgstr "Общее"
+
+#. settings-schema.json->refresh->description
+msgid "Sections info refresh rate (seconds)"
+msgstr "Частота обновления информации (секунд)"
+
+#. settings-schema.json->refresh->tooltip
+msgid "CPUs, memory, network info refresh rate"
+msgstr "Частота обновления информации о ЦП, памяти, сети"
+
+#. settings-schema.json->cpu_label->description
+msgid "CPUs and memory sections"
+msgstr "Секции ЦП и памяти"
+
+#. settings-schema.json->size->description
+msgid "CPUs and memory panel sections widths (px)"
+msgstr "Ширина секций ЦП и памяти (пикселей)"
+
+#. settings-schema.json->size->tooltip
+msgid "CPUs and memory panel sections widths"
+msgstr "Ширина секций ЦП и памяти"
+
+#. settings-schema.json->temp_refresh->description
+msgid "CPUs temperature refresh rate (seconds)"
+msgstr "Частота обновления данных о температуре ЦП (секунд)"
+
+#. settings-schema.json->temp_refresh->tooltip
+msgid "CPUs temperature refresh rate"
+msgstr "Частота обновления данных о температуре ЦП"
+
+#. settings-schema.json->cold_temp->description
+msgid "CPU cold temperature (°C)"
+msgstr "Температура холодного ЦП (°C)"
+
+#. settings-schema.json->cold_temp->tooltip
+msgid ""
+"CPUs' temperature below which they are regarded as cold (for color "
+"representation in the panel)"
+msgstr ""
+"Температура ЦП, ниже которой температура считается холодной (для цветовой "
+"индикации на панели)"
+
+#. settings-schema.json->color_cold->description
+msgid "Color for CPU cold temperature"
+msgstr "Цвет для температуры холодного ЦП"
+
+#. settings-schema.json->hot_temp->description
+msgid "CPU hot temperature (°C)"
+msgstr "Температура горячего ЦП (°C)"
+
+#. settings-schema.json->hot_temp->tooltip
+msgid ""
+"CPUs' temperature above which they are regarded as hot (for color "
+"representation in the panel)"
+msgstr ""
+"Температура ЦП, выше которой температура считается горячей (для цветовой "
+"индикации на панели)"
+
+#. settings-schema.json->color_hot->description
+msgid "Color for CPU hot temperature"
+msgstr "Цвет для температуры горячего ЦП"
+
+#. settings-schema.json->sensors_cmd->description
+msgid "Command to start 'sensors'"
+msgstr "Путь к команде 'sensors'"
+
+#. settings-schema.json->sensors_cmd->tooltip
+msgid ""
+"Command to start 'sensors'. Use 'which sensors' command to find it. Install "
+"'lmsensors' package, if not found"
+msgstr ""
+"Путь к команде 'sensors'. Используйте команду 'which sensors', чтобы "
+"определить путь. Установите пакет 'lmsensors', если команда 'sensors' не "
+"найдена"
+
+#. settings-schema.json->net_label->description
+msgid "Network section"
+msgstr "Секция сети"
+
+#. settings-schema.json->net_size->description
+msgid "Network panel section width (px)"
+msgstr "Ширина секции сети (пикселей)"
+
+#. settings-schema.json->net_size->tooltip
+msgid "Network panel section width"
+msgstr "Ширина секции сети"
+
+#. settings-schema.json->net_style->description
+msgid "Network panel section style"
+msgstr "Стиль секции сети"
+
+#. settings-schema.json->net_style->tooltip
+msgid ""
+"Network panel section HTML style (e.g.: text-align: left; margin-left: 5px; "
+"font-size: 8pt;)"
+msgstr ""
+"HTML-стиль секции сети (например: text-align: left; margin-left: 5px; font-"
+"size: 8pt;)"
+
+#. settings-schema.json->net_black_list->description
+msgid "Network interfaces blacklist"
+msgstr "Черный список сетевых интерфейсов"
+
+#. settings-schema.json->net_black_list->tooltip
+msgid ""
+"Semicolon-separated network interfaces list not to consider for counting "
+"traffic"
+msgstr ""
+"Разделенный точкой с запятой список сетевых интерфейсов, которые не следует "
+"учитывать в трафике"

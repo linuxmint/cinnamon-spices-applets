@@ -1,0 +1,286 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-08-11 12:28+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:207 3.2/applet.js:218
+msgid "Change theme"
+msgstr "Téma váltás"
+
+#. applet.js:216 3.2/applet.js:229
+msgid "Edit title"
+msgstr "Cím szerkesztése"
+
+#. applet.js:216 3.2/applet.js:229
+msgid "Add title"
+msgstr "Cím hozzáadása"
+
+#. applet.js:222 3.2/applet.js:241
+msgid "Copy"
+msgstr "Másolás"
+
+#. applet.js:226 3.2/applet.js:245
+msgid "Paste"
+msgstr "Beillesztés"
+
+#. applet.js:232 3.2/applet.js:251
+msgid "About..."
+msgstr "Névjegy…"
+
+#. applet.js:236 3.2/applet.js:255
+msgid "Configure..."
+msgstr "Beállítások…"
+
+#. applet.js:242 3.2/applet.js:261
+msgid "Remove this note"
+msgstr "Jegyzet törlése"
+
+#. applet.js:408 3.2/applet.js:461
+msgid "Title"
+msgstr "Cím"
+
+#. applet.js:504 3.2/applet.js:572
+msgid "Switch to check list"
+msgstr "Váltás feladat listára"
+
+#. applet.js:712 3.2/applet.js:775
+msgid "Switch to regular note"
+msgstr "Váltás jegyzetekre"
+
+#. applet.js:716 3.2/applet.js:779
+msgid "Remove completed items"
+msgstr "Teljesített elemek eltávolítása"
+
+#. applet.js:1605 3.2/applet.js:1694
+msgid "New note"
+msgstr "Új jegyzet"
+
+#. applet.js:1609 3.2/applet.js:1698
+msgid "New check-list"
+msgstr "Új feladat lista"
+
+#. applet.js:1615 3.2/applet.js:1708
+msgid "Pin notes (keep on top)"
+msgstr "Jegyzetek kitűzése (mindig felül)"
+
+#. settings-schema.json->startState->options
+#. 3.2->settings-schema.json->startState->options
+#. applet.js:1622 3.2/applet.js:1715
+msgid "Hide notes"
+msgstr "Jegyzetek elrejtése"
+
+#. applet.js:1627 3.2/applet.js:1720
+msgid "Back up notes"
+msgstr "Jegyzetek biztonsági mentése"
+
+#. applet.js:1631 3.2/applet.js:1724
+msgid "Restore from backup"
+msgstr "Biztonsági mentésből helyreállítás"
+
+#. applet.js:1652 3.2/applet.js:1769
+msgid ""
+"This will permanently remove all existing notes. Are you sure you want to "
+"continue?"
+msgstr ""
+"Ez a művelet véglegesen törli az összes meglévő jegyzetet. Biztos benne, "
+"hogy folytatja?"
+
+#. 3.2/applet.js:78
+msgid "Cancel"
+msgstr "Mégse"
+
+#. 3.2/applet.js:83
+msgid "Ok"
+msgstr "Ok"
+
+#. 3.2/applet.js:235
+msgid "Save as template"
+msgstr "Mentés sablonként"
+
+#. 3.2/applet.js:512
+msgid "Enter a name for the template."
+msgstr "Adja meg a sablon nevét."
+
+#. 3.2/applet.js:783
+msgid "Unselect all items"
+msgstr "Kijelölés eltávolítása"
+
+#. 3.2/applet.js:1702
+msgid "New from template"
+msgstr "Új jegyzet létrehozása sablonból"
+
+#. metadata.json->name
+msgid "Sticky Notes"
+msgstr "Cetlik"
+
+#. metadata.json->description
+msgid "Applet that allows you to manage desktop notes"
+msgstr "Kisalkalmazás, amivel kezelhet asztali jegyzeteket"
+
+#. metadata.json->comments
+msgid ""
+"This applet is designed to be a simple, quick, and easy-to-use note utility. "
+"While there is some customization available, the emphasis is on making it "
+"feel as smooth and easy to use as possible."
+msgstr ""
+"Ezt az appletet úgy tervezték, hogy egy egyszerű, gyors és könnyen "
+"használható jegyzet segédprogram legyen. Bár van néhány testreszabási "
+"lehetőség, a hangsúly azon van, hogy a lehető legsimább és legkönnyebben "
+"használható legyen."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Szerző"
+
+#. settings-schema.json->appearanceHeader->description
+#. 3.2->settings-schema.json->appearance->description
+msgid "Appearance"
+msgstr "Megjelenés"
+
+#. settings-schema.json->height->description
+#. 3.2->settings-schema.json->height->description
+msgid "Default height"
+msgstr "Alapértelmezett magasság"
+
+#. settings-schema.json->width->description
+#. 3.2->settings-schema.json->width->description
+msgid "Default width"
+msgstr "Alapértelmezett szélesség"
+
+#. settings-schema.json->theme->description
+#. 3.2->settings-schema.json->theme->description
+msgid "Default theme"
+msgstr "Alapértelmezett téma"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Green"
+msgstr "Zöld"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Aqua"
+msgstr "Aqua"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Blue"
+msgstr "Kék"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Brown"
+msgstr "Barna"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Orange"
+msgstr "Narancs"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Pink"
+msgstr "Pink"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Purple"
+msgstr "Lila"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Red"
+msgstr "Piros"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Sand"
+msgstr "Homok"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Teal"
+msgstr "Zöldeskék"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Yellow"
+msgstr "Sárga"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Random"
+msgstr "Random"
+
+#. settings-schema.json->boxShadow->description
+#. 3.2->settings-schema.json->boxShadow->description
+msgid "Show shadow behind notes"
+msgstr "Árnyék mutatása jegyzetek mögött"
+
+#. settings-schema.json->boxShadow->tooltip
+#. 3.2->settings-schema.json->boxShadow->tooltip
+msgid ""
+"Warning: this has been known to slow down some computers - not recommended "
+"on older hardware"
+msgstr ""
+"Figyelmeztetés: ez ismerten lelassíthat egyes számítógépeket - nem ajánlott "
+"régebbi hardveren"
+
+#. settings-schema.json->behaviorHeader->description
+#. 3.2->settings-schema.json->behavior->description
+msgid "Behavior"
+msgstr "Viselkedés"
+
+#. settings-schema.json->startState->description
+#. 3.2->settings-schema.json->startState->description
+msgid "When Cinnamon starts"
+msgstr "Amikor Cinnamon környezet elindul"
+
+#. settings-schema.json->startState->options
+#. 3.2->settings-schema.json->startState->options
+msgid "Show notes on Desktop"
+msgstr "Jegyzetek mutatása az Asztalon"
+
+#. settings-schema.json->startState->options
+#. 3.2->settings-schema.json->startState->options
+msgid "Show notes above windows"
+msgstr "Jegyzetek mutatása ablakok felett"
+
+#. settings-schema.json->startState->options
+#. 3.2->settings-schema.json->startState->options
+msgid "Restore previous state"
+msgstr "Előző állapot helyreállítása"
+
+#. 3.2->settings-schema.json->font->description
+msgid "Font"
+msgstr "Betűtípus"
+
+#~ msgid ""
+#~ "This applet is designed to be a simple, quick, and easy-to-use note "
+#~ "utility. While there is some customization available, the emphasis is on "
+#~ "making it feel as smooth and easy to use as possible. Feel free to "
+#~ "contribute by submitting pull requests, bug reports and feature requests "
+#~ "to my github repo."
+#~ msgstr ""
+#~ "Dieses Applet wurde als ein simples, schnelles und einfach zu bedienendes "
+#~ "Notiz-Programm entwickelt. Während einige Anpassungen verfügbar sind, "
+#~ "liegt der Schwerpunkt jedoch auf einem reibungslosen Benutzergefühl und "
+#~ "einer möglichst einfachen Bedienung. Sie können gerne dazu beitragen, "
+#~ "indem Sie Pull-Requests, Fehlerberichte und Feature-Anfragen in meinem "
+#~ "Github-Repository erstellen."

@@ -1,0 +1,113 @@
+# Spanish translation for day-progress@chmodmasx.
+# Copyright (C) 2025
+# This file is distributed under the same license as the day-progress@chmodmasx package.
+# chmodmasx, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: day-progress@chmodmasx 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-01 12:24+0100\n"
+"PO-Revision-Date: 2026-01-11 22:07-0300\n"
+"Last-Translator: chmodmasx\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.8\n"
+
+#. applet.js:158 applet.js:293 applet.js:296
+msgid "Elapsed"
+msgstr "Transcurrido"
+
+#. applet.js:169 applet.js:294 applet.js:297
+msgid "Remaining"
+msgstr "Restante"
+
+#. applet.js:182
+msgid "Settings"
+msgstr "Configuración"
+
+#. metadata.json->name
+msgid "Day Progress"
+msgstr "Progreso del día"
+
+#. metadata.json->description
+msgid ""
+"Displays a customizable progress pie chart in the panel to help you track "
+"your day time."
+msgstr ""
+"Muestra un gráfico circular de progreso personalizable en el panel para "
+"ayudarte a rastrear tu tiempo del día."
+
+#. settings-schema.json->show-elapsed->description
+msgid "Show time elapsed"
+msgstr "Mostrar tiempo transcurrido"
+
+#. settings-schema.json->show-elapsed->tooltip
+msgid "Show time elapsed instead of remaining"
+msgstr "Mostrar tiempo transcurrido en lugar del restante"
+
+#. settings-schema.json->width->description
+msgid "Width"
+msgstr "Ancho"
+
+#. settings-schema.json->width->tooltip
+msgid "Width of the indicator"
+msgstr "Ancho del indicador"
+
+#. settings-schema.json->height->description
+msgid "Height"
+msgstr "Altura"
+
+#. settings-schema.json->height->tooltip
+msgid "Height of the indicator"
+msgstr "Altura del indicador"
+
+#. settings-schema.json->style->description
+msgid "Style"
+msgstr "Estilo"
+
+#. settings-schema.json->style->tooltip
+msgid "Visual style of the indicator"
+msgstr "Estilo visual del indicador"
+
+#. settings-schema.json->style->options
+msgid "Pie"
+msgstr "Circular"
+
+#. settings-schema.json->style->options
+msgid "Pie (no border)"
+msgstr "Circular (sin borde)"
+
+#. settings-schema.json->start-time-header->description
+msgid "Start time"
+msgstr "Hora de inicio"
+
+#. settings-schema.json->start-hour->units
+#. settings-schema.json->end-hour->units
+msgid "hours"
+msgstr "horas"
+
+#. settings-schema.json->start-hour->description
+msgid "Start hour"
+msgstr "Hora de inicio"
+
+#. settings-schema.json->start-hour->tooltip
+msgid "Hour at which the indicator starts"
+msgstr "Hora en la que comienza el indicador"
+
+#. settings-schema.json->end-time-header->description
+msgid "End time"
+msgstr "Hora de finalización"
+
+#. settings-schema.json->end-hour->description
+msgid "End hour"
+msgstr "Hora de finalización"
+
+#. settings-schema.json->end-hour->tooltip
+msgid "Hour at which the indicator ends"
+msgstr "Hora en la que finaliza el indicador"

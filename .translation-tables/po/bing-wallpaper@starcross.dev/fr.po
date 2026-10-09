@@ -1,0 +1,32 @@
+# BING DESKTOP WALLPAPER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Starcross, 2019
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-19 08:43-0500\n"
+"PO-Revision-Date: 2025-03-07 16:46+0100\n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:50
+msgid "Refresh Now"
+msgstr "Rafraîchir"
+
+#. metadata.json->name
+msgid "Bing Desktop Wallpaper"
+msgstr "Fond d'écran Bing"
+
+#. metadata.json->description
+msgid "Download and apply Today's Bing Wallpaper to your desktop"
+msgstr "Télécharge et applique le fond d'écran du jour de Bing"

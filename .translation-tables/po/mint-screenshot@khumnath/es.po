@@ -1,0 +1,307 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mint-screenshot@khumnath package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mint-screenshot@khumnath 1.2.0\n"
+"Report-Msgid-Bugs-To: khumnath@gmail.com\n"
+"POT-Creation-Date: 2026-04-23 19:12+0545\n"
+"PO-Revision-Date: 2026-05-22 10:29-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: app.py:49
+msgid "Reset Everything?"
+msgstr "¿Reiniciar todo?"
+
+#: app.py:51
+msgid "This will clear all annotations and return to the launcher."
+msgstr "Esto borrará todas las anotaciones y volverá al lanzador."
+
+#: app.py:191
+msgid "Mint Screenshot — Wayland Error"
+msgstr "Captura de pantalla de Mint — Error de Wayland"
+
+#: canvas.py:461
+msgid "Edit Text:"
+msgstr "Editar texto:"
+
+#: canvas.py:461
+msgid "Enter text to insert:"
+msgstr "Escriba el texto que desea insertar:"
+
+#: capture.py:53
+msgid "D-Bus is required for Wayland support."
+msgstr "D-Bus es necesario para que Wayland funcione."
+
+#: capture.py:171
+msgid ""
+"Failed to load captured screenshot:\n"
+"{}"
+msgstr ""
+"No se ha podido cargar la captura de pantalla:\n"
+"{}"
+
+#: editor.py:119
+msgid "Custom Timer"
+msgstr "Temporizador personalizado"
+
+#: editor.py:133
+msgid "Enter delay in seconds:"
+msgstr "Introduzca el retardo en segundos:"
+
+#: editor.py:338 editor.py:795
+msgid "Saving..."
+msgstr "Guardando..."
+
+#: editor.py:455
+msgid "Pointer"
+msgstr "Puntero"
+
+#: editor.py:456
+msgid "Rectangle"
+msgstr "Rectángulo"
+
+#: editor.py:457
+msgid "Ellipse"
+msgstr "Elipse"
+
+#: editor.py:458
+msgid "Arrow"
+msgstr "Flecha"
+
+#: editor.py:459
+msgid "Draw"
+msgstr "Dibujar"
+
+#: editor.py:460
+msgid "Highlight"
+msgstr "Destacar"
+
+#: editor.py:461
+msgid "Text Tool"
+msgstr "Herramienta de texto"
+
+#: editor.py:494
+msgid "Blue"
+msgstr "Azul"
+
+#: editor.py:495
+msgid "Red"
+msgstr "Rojo"
+
+#: editor.py:496
+msgid "Green"
+msgstr "Verde"
+
+#: editor.py:497
+msgid "Yellow"
+msgstr "Amarillo"
+
+#: editor.py:498
+msgid "White"
+msgstr "Blanco"
+
+#: editor.py:499
+msgid "Black"
+msgstr "Negro"
+
+#: editor.py:529
+msgid "Size"
+msgstr "Tamaño"
+
+#: editor.py:542
+msgid "Reset All"
+msgstr "Restablecer todo"
+
+#: editor.py:543
+msgid "Undo"
+msgstr "Deshacer"
+
+#: editor.py:544
+msgid "Copy"
+msgstr "Copiar"
+
+#: editor.py:545
+msgid "Save"
+msgstr "Guardar"
+
+#: editor.py:546
+msgid "Settings"
+msgstr "Configuración"
+
+#: editor.py:547 launcher.py:144
+msgid "Close"
+msgstr "Cerrar"
+
+#: editor.py:573
+msgid "Move Toolbar Top/Bottom"
+msgstr "Mover la barra de herramientas hacia arriba o hacia abajo"
+
+#: editor.py:596
+msgid "Save Format"
+msgstr "Formato de guardado"
+
+#: editor.py:609
+msgid "Image Quality"
+msgstr "Calidad de imagen"
+
+#: editor.py:614
+msgid "Space Saver (Small)"
+msgstr "Ahorrador de espacio (pequeña)"
+
+#: editor.py:616
+msgid "Medium"
+msgstr "Medio"
+
+#: editor.py:618
+msgid "Original"
+msgstr "Original"
+
+#: editor.py:629
+msgid "Save Folder: {}..."
+msgstr "Carpeta de guardado: {}..."
+
+#: editor.py:634
+msgid "Show Toolbar Labels"
+msgstr "Mostrar etiquetas de la barra de herramientas"
+
+#: editor.py:642
+msgid "About Mint Screenshot"
+msgstr "Acerca de captura de pantalla de Mint"
+
+#: editor.py:663
+msgid "Select Default Save Folder"
+msgstr "Seleccionar la carpeta de guardado predeterminada"
+
+#: editor.py:667
+msgid "Select"
+msgstr "Seleccionar"
+
+#: editor.py:692 launcher.py:79 main.py:159
+msgid "Mint Screenshot"
+msgstr "Captura de pantalla de Mint"
+
+#: editor.py:694
+msgid ""
+"Screenshot & Annotation Tool\n"
+"Capture, annotate, and share with ease."
+msgstr ""
+"Herramienta de captura de pantalla y anotación\n"
+"Captura, anota y comparte con facilidad."
+
+#: editor.py:696
+msgid "Project on GitHub"
+msgstr "Proyecto en GitHub"
+
+#: editor.py:718
+msgid "Open External Website?"
+msgstr "¿Abrir el sitio web externo?"
+
+#: editor.py:721
+msgid "This will exit the current screenshot process. Do you want to continue?"
+msgstr "Esto cerrará el proceso de captura de pantalla actual. ¿Deseas continuar?"
+
+#: editor.py:765
+msgid "Save Screenshot"
+msgstr "Guardar captura de pantalla"
+
+#: editor.py:795
+msgid "Copying..."
+msgstr "Copiando..."
+
+#: editor.py:855
+msgid "Copied"
+msgstr "Copiado"
+
+#: editor.py:864
+msgid "Screenshot Saved"
+msgstr "Captura de pantalla guardada"
+
+#: editor.py:865
+msgid "Saved to {}"
+msgstr "Guardado en {}"
+
+#: launcher.py:83
+msgid "Wayland Mode — Capture via Desktop Portal"
+msgstr "Modo Wayland: captura a través del portal de escritorio"
+
+#: launcher.py:83
+msgid "X11 Mode — Instant Pixel Capture"
+msgstr "Modo X11 — Captura instantánea de píxeles"
+
+#: launcher.py:92
+msgid "Hint: Pick 'Screen' in the portal to capture overlapping windows."
+msgstr "Consejo: Selecciona 'Pantalla' en el portal para capturar ventanas superpuestas."
+
+#: launcher.py:105
+msgid "Select Monitor:"
+msgstr "Seleccionar monitor:"
+
+#: launcher.py:107
+msgid "All Monitors"
+msgstr "Todos los monitores"
+
+#: launcher.py:109
+msgid "Monitor {}"
+msgstr "Monitor {}"
+
+#: launcher.py:115
+msgid "📸  Capture Fullscreen"
+msgstr "📸  Captura de pantalla completa"
+
+#: launcher.py:120
+msgid "✂️  Select Area"
+msgstr "✂️  Seleccionar área"
+
+#: launcher.py:127
+msgid "⏱  Timed Capture"
+msgstr "⏱  Captura temporizada"
+
+#: launcher.py:134
+msgid "sec"
+msgstr "seg"
+
+#: main.py:117
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your system's package manager.\n"
+"(Debian/Ubuntu package names shown as reference)"
+msgstr ""
+"Faltan las siguientes dependencias:\n"
+"\n"
+"{}\n"
+"\n"
+"Instálelas mediante el gestor de paquetes de su sistema.\n"
+"(Nombres de paquetes de Debian/Ubuntu a modo de referencia)"
+
+#: main.py:120
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your package manager:\n"
+"  {} {}"
+msgstr ""
+"Faltan las siguientes dependencias:\n"
+"\n"
+"{}\n"
+"\n"
+"Instálelas mediante su gestor de paquetes:\n"
+"  {} {}"
+
+#: main.py:126
+msgid "Mint Screenshot \\u2014 Missing Dependencies"
+msgstr "Captura de pantalla de Mint – Dependencias faltantes"

@@ -1,0 +1,130 @@
+# DRAWER (SHOW/HIDE APPLETS)
+# This file is put in the public domain.
+# mohammad-sn, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: show-hide-applets@mohammad-sn 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-11-20 06:07+0100\n"
+"PO-Revision-Date: 2025-09-28 16:55+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:60 applet.js:231
+msgid "Autohide ON"
+msgstr "Auto-amagar activat"
+
+#. applet.js:62 applet.js:233
+msgid "Autohide OFF"
+msgstr "Auto-amagar desactivat"
+
+#. applet.js:82
+msgid "Panel Edit mode"
+msgstr "Mode d'edició del tauler"
+
+#. applet.js:88
+msgid "Add applets to the panel"
+msgstr "Afegir miniaplicacions al tauler"
+
+#. settings-schema.json->autohide->description
+#. applet.js:96
+msgid "Autohide"
+msgstr "Auto-amagar"
+
+#. metadata.json->description
+msgid ""
+"hide a few applet to have a neater panel, and make them show up again by a "
+"click"
+msgstr ""
+"oculteu unes quantes miniaplicacions per a tenir un tauler més net, i feu "
+"que es mostri de nou en rebre un clic"
+
+#. metadata.json->name
+msgid "Drawer (show/hide applets)"
+msgstr "Calaix (mostra/amaga miniaplicacions)"
+
+#. settings-schema.json->head->description
+msgid "Settings for show-hide-applets@mohammad-sn"
+msgstr "Configuració de show-hide-applets@mohammad-sn"
+
+#. settings-schema.json->autohide->tooltip
+msgid ""
+"Check it if you want to hide applets automatically, unless you should click "
+"on applet to do so.\n"
+"Its status can be changed by middle-clicking on this applet."
+msgstr ""
+"Marqueu si voleu amagar miniaplicacions automàticament o si cal clicar-les "
+"d'una en una.\n"
+"El seu estat pot ser canviat utilitzant el clic del mig en aquesta "
+"miniaplicació."
+
+#. settings-schema.json->statusintooltip->description
+msgid "Show Autohide status in tooltip"
+msgstr "Mostra l'estat d'auto-amagar al consell informatiu"
+
+#. settings-schema.json->disablestarttimeautohide->description
+msgid "Disable start time autohide"
+msgstr "Desactivar l'auto-amagació a l'inici"
+
+#. settings-schema.json->disablestarttimeautohide->tooltip
+msgid "if not in autohide mode"
+msgstr "si no està en mode d'auto-amagació"
+
+#. settings-schema.json->hidetime->units
+#. settings-schema.json->autohiderstime->units
+msgid "seconds"
+msgstr "segons"
+
+#. settings-schema.json->hidetime->description
+msgid "Autohide after "
+msgstr "Auto-amagar després de "
+
+#. settings-schema.json->hoveractivates->description
+msgid "Activate on hover"
+msgstr "Auto-amagar en passar el cursor per sobre"
+
+#. settings-schema.json->hoveractivates->tooltip
+msgid "show applets on mouse hover"
+msgstr "mostrar miniaplicacions en passar el cursor per sobre"
+
+#. settings-schema.json->hoveractivateshide->description
+msgid "Hide on hovering again"
+msgstr "Ocultar de nou en passar el cursor per sobre"
+
+#. settings-schema.json->hoveractivateshide->tooltip
+msgid "toggle visibility of applets on mouse hover"
+msgstr ""
+"activar/desactivar visibilitat de les miniaplicacions en passar el cursor "
+"per sobre"
+
+#. settings-schema.json->hovertime->units
+msgid "miliseconds"
+msgstr "mil·lisegons"
+
+#. settings-schema.json->hovertime->description
+msgid "Hover activates/hides after "
+msgstr "El hover s'activa/desactiva després de "
+
+#. settings-schema.json->autohiders->description
+msgid "Autohide reshowing applets"
+msgstr "Auto-amagar la mostra consecutiva de miniaplicacions"
+
+#. settings-schema.json->autohiderstime->description
+msgid "Reshowers' autohide delay: "
+msgstr "Temps d'espera per auto-amagar la mostra consecutiva: "
+
+#. settings-schema.json->hideuntilseparator->description
+msgid "Only hide until next separator"
+msgstr "Amaga només fins al proper separador"
+
+#. settings-schema.json->hideuntilseparator->tooltip
+msgid "Only hide everything until the next separator element occurs."
+msgstr "Només ho amaga tot fins que arriba el següent element separador."

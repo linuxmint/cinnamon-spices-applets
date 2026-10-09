@@ -1,0 +1,82 @@
+# TIMER WITH NOTIFICATIONS
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# axos88, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-20 11:11-0400\n"
+"PO-Revision-Date: 2017-11-09 15:32+0200\n"
+"Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
+"Language-Team: \n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. 3.4->settings-schema.json->sound-volume->description
+#. 3.4->settings-schema.json->sound-volume->tooltip
+#. 6.4->settings-schema.json->sound-volume->description
+#. 6.4->settings-schema.json->sound-volume->tooltip
+msgid "Specify the playback volume"
+msgstr ""
+
+#. 3.4->settings-schema.json->alarmtime-display-enable->description
+#. 3.4->settings-schema.json->alarmtime-display-enable->tooltip
+#. 6.4->settings-schema.json->alarmtime-display-enable->description
+#. 6.4->settings-schema.json->alarmtime-display-enable->tooltip
+msgid "Display alarm time in panel"
+msgstr ""
+
+#. 3.4->settings-schema.json->alarmtime-format-small->description
+#. 6.4->settings-schema.json->alarmtime-format-small->description
+msgid "Format used to display alarm time in the near future"
+msgstr ""
+
+#. 3.4->settings-schema.json->alarmtime-format-small->tooltip
+#. 6.4->settings-schema.json->alarmtime-format-small->tooltip
+msgid ""
+"If the alarm time is less than the minutes specified below away,\n"
+"the alarm time can be displayed with more details\n"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
+msgstr ""
+
+#. 3.4->settings-schema.json->alarmtime-format-large->description
+#. 6.4->settings-schema.json->alarmtime-format-large->description
+msgid "Format used to display alarm time in the not so near future"
+msgstr ""
+
+#. 3.4->settings-schema.json->alarmtime-format-large->tooltip
+#. 6.4->settings-schema.json->alarmtime-format-large->tooltip
+msgid ""
+"If the alarm time is more than the minutes specified below away,\n"
+"the alarm time can be displayed with less details\n"
+"(see https://docs.gtk.org/glib/method.DateTime.format.html)"
+msgstr ""
+
+#. 3.4->settings-schema.json->alarmtime-format-switchover->units
+#. 6.4->settings-schema.json->alarmtime-format-switchover->units
+msgid "minutes"
+msgstr ""
+
+#. 3.4->settings-schema.json->alarmtime-format-switchover->description
+#. 6.4->settings-schema.json->alarmtime-format-switchover->description
+msgid "Time when switching from small to large time format"
+msgstr ""
+
+#. 3.4->settings-schema.json->alarmtime-format-switchover->tooltip
+#. 6.4->settings-schema.json->alarmtime-format-switchover->tooltip
+msgid "Switch over time between the two formats specified above"
+msgstr ""
+
+#. 3.4->settings-schema.json->auto-loop-enable->description
+#. 3.4->settings-schema.json->auto-loop-enable->tooltip
+#. 6.4->settings-schema.json->auto-loop-enable->description
+#. 6.4->settings-schema.json->auto-loop-enable->tooltip
+msgid "Restart the timer automatically when time is elapsed"
+msgstr ""

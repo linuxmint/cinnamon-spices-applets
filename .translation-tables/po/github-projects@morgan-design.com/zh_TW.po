@@ -1,0 +1,192 @@
+# GITHUB EXPLORER
+# This file is put in the public domain.
+# jamesmorgan, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: github-projects@morgan-design.com 1.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-08-01 03:25+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:45 applet.js:46
+msgid "GitHub Explorer"
+msgstr "GitHub 瀏覽器"
+
+#. applet.js:45
+msgid "Attempting to Load your GitHub Repos"
+msgstr "正在嘗試載入您的 GitHub 儲存庫"
+
+#. applet.js:46
+#, javascript-format
+msgid "Successfully Loaded GitHub Repos for user %s"
+msgstr "已成功載入 %s 的 GitHub 儲存庫"
+
+#. applet.js:47
+msgid "ERROR:: GitHub Explorer ::ERROR"
+msgstr "錯誤:: GitHub Explorer ::錯誤"
+
+#. applet.js:47
+msgid "Failed to load GitHub Repositories! Check applet Configuration"
+msgstr "無法載入 GitHub 儲存庫！請檢查小程式設定"
+
+#. applet.js:166
+msgid "Settings"
+msgstr "設定"
+
+#. applet.js:177 applet.js:270
+msgid "Check Applet Configuration"
+msgstr "檢查小程式設定"
+
+#. applet.js:266
+msgid "API Rate Exceeded will try again once we are allowed"
+msgstr "已超出 API 速率限制，系統將會在允許時重試"
+
+#. applet.js:281
+msgid "Click here to open GitHub"
+msgstr "請按此開啟 GitHub"
+
+#. applet.js:331
+msgid "Open Repo In Browser"
+msgstr "以瀏覽器開啟儲存庫"
+
+#. applet.js:339
+msgid "Project Home"
+msgstr "專案首頁"
+
+#. applet.js:346
+msgid "Details"
+msgstr "詳細資訊"
+
+#. applet.js:349
+msgid "Watchers"
+msgstr "關注者"
+
+#. applet.js:356
+msgid "Open Issues"
+msgstr "開放中的議題"
+
+#. applet.js:363
+msgid "Forks"
+msgstr "分叉"
+
+#. settings-schema.json->open-github-homepage-button->description
+#. applet.js:393
+msgid "Open GitHub Home"
+msgstr "開啟 GitHub 首頁"
+
+#. applet.js:401
+msgid "Create A Gist"
+msgstr "建立 Gist"
+
+#. metadata.json->name
+msgid "Github Explorer"
+msgstr "GitHub 瀏覽器"
+
+#. metadata.json->description
+msgid "Click on the applet to explore your Public Github repositories"
+msgstr "按一下小程式來瀏覽您的公開 GitHub 儲存庫"
+
+#. settings-schema.json->head->description
+msgid "User Settings"
+msgstr "使用者設定"
+
+#. settings-schema.json->username->description
+msgid "GitHub username:"
+msgstr "GitHub 使用者名稱："
+
+#. settings-schema.json->username->tooltip
+msgid "Set a username which you want to display public repositories for"
+msgstr "設定要顯示其公開儲存庫的 GitHub 使用者名稱"
+
+#. settings-schema.json->head1->description
+msgid "Usage Settings"
+msgstr "使用設定"
+
+#. settings-schema.json->enable-auto-refresh->description
+msgid "Check this to enable automatic refreshing"
+msgstr "勾選此選項以啟用自動重新整理"
+
+#. settings-schema.json->enable-auto-refresh->tooltip
+msgid ""
+"Checking this will mean the applet will update itself according to your "
+"refresh interval"
+msgstr ""
+"勾選後小程式會依照設定的間隔自動更新"
+
+#. settings-schema.json->enable-verbose-logging->description
+msgid "Check this to enable lots of logging in Looking Glass"
+msgstr "勾選此選項以在 Looking Glass 中啟用詳細日誌記錄"
+
+#. settings-schema.json->enable-verbose-logging->tooltip
+msgid "Checking this will enable lots of logging"
+msgstr "勾選後會啟用詳細日誌記錄"
+
+#. settings-schema.json->enable-github-change-notifications->description
+msgid ""
+"Check this to enable notifications about changes to Watchers, Forks and "
+"Issues"
+msgstr ""
+"勾選此選項以啟用關於關注者、分叉與議題變動的通知"
+
+#. settings-schema.json->enable-github-change-notifications->tooltip
+msgid "Checking this will enable more notification messages"
+msgstr "勾選後會收到更多通知訊息"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->description
+msgid "Check this show the number of open issues next to the repository"
+msgstr "勾選後會在儲存庫名稱旁顯示開放中議題的數量"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->tooltip
+msgid "Checking this show the number of issues next to each repository"
+msgstr "勾選後會在每個儲存庫名稱旁顯示議題的數量"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh Interval:"
+msgstr "重新整理間隔："
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid ""
+"Change the amount of time between checking GitHub for changes to your "
+"Repositories"
+msgstr ""
+"變更檢查 GitHub 儲存庫變動的時間間隔"
+
+#. settings-schema.json->head2->description
+msgid "Version Details"
+msgstr "版本資訊"
+
+#. settings-schema.json->applet-version->description
+msgid "Applet Version:"
+msgstr "小程式版本："
+
+#. settings-schema.json->applet-version->tooltip
+msgid "Current version installed"
+msgstr "目前安裝版本"
+
+#. settings-schema.json->open-cinnamon-homepage-button->description
+msgid "Visit Cinnamon Applet Home"
+msgstr "造訪 Cinnamon 小程式首頁"
+
+#. settings-schema.json->open-cinnamon-homepage-button->tooltip
+msgid "Open cinnamon.com - rate the application"
+msgstr "開啟 cinnamon.com - 為此應用程式評分"
+
+#. settings-schema.json->open-github-homepage-button->tooltip
+msgid "Open github.com - fork the code or add features"
+msgstr "開啟 github.com - 分叉程式碼或新增功能"
+
+#. settings-schema.json->open-developer-homepage-button->description
+msgid "Open Developer Home"
+msgstr "開啟開發者首頁"
+
+#. settings-schema.json->open-developer-homepage-button->tooltip
+msgid "Open morgan-design.com - my personal blog"
+msgstr "開啟 morgan-design.com - 我的個人部落格"

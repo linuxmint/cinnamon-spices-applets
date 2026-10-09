@@ -1,0 +1,2851 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pomodoro Timer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-27 03:33+0700\n"
+"PO-Revision-Date: 2017-02-24 23:32+0100\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: applet.js:614
+msgid "Strict focus is on"
+msgstr "Strogi fokus je uključen"
+
+#: applet.js:614
+msgid "Stay with it — finish the block, or reset to start over."
+msgstr "Ostanite uz njega — završite blok ili poništite za novi početak."
+
+#: applet.js:680
+#, javascript-format
+msgid "Focus length: %d min"
+msgstr "Trajanje fokusa: %d min"
+
+#: applet.js:973
+msgid "Focus session restored — resume when ready"
+msgstr "Sesija fokusa obnovljena — nastavite kad budete spremni"
+
+#: applet.js:1010
+msgid "FOCUS"
+msgstr "FOKUS"
+
+#: applet.js:1012
+msgid "PAUSED FOCUS"
+msgstr "FOKUS PAUZIRAN"
+
+#: applet.js:1015
+msgid "BREAK"
+msgstr "PREDAH"
+
+#: applet.js:1018
+msgid "PAUSED BREAK"
+msgstr "PREDAH PAUZIRAN"
+
+#: applet.js:1020
+msgid "BREAK OVER"
+msgstr "PREDAH ZAVRŠEN"
+
+#: applet.js:1023 applet.js:1083 menu.js:214 menu.js:738
+msgid "Ready to focus"
+msgstr "Spremni za fokus"
+
+#: applet.js:1041
+msgid "Short break running"
+msgstr "Kratki predah u tijeku"
+
+#: applet.js:1044
+msgid "Short break paused"
+msgstr "Kratki predah pauziran"
+
+#: applet.js:1047
+msgid "Long break running"
+msgstr "Duži predah u tijeku"
+
+#: applet.js:1050
+msgid "Long break paused"
+msgstr "Duži predah pauziran"
+
+#: applet.js:1053 applet.js:1568
+msgid "Break ended"
+msgstr "Predah završen"
+
+#: applet.js:1056
+#, javascript-format
+msgid "Pomodori %d, set %d running"
+msgstr "Pomodoro %d, zadatak %d je pokrenut"
+
+#: applet.js:1061 features.js:553 features.js:1790
+#, javascript-format
+msgid "≈ finish %s · %d 🍅 left"
+msgstr "≈ kraj %s · preostalo %d 🍅"
+
+#: applet.js:1066
+msgid "Pomodoro paused"
+msgstr "Pomodoro pauziran"
+
+#: applet.js:1069
+msgid "Ready to focus — scroll or middle-click to start"
+msgstr "Spremni za fokus — kotačićem ili srednjim klikom za početak"
+
+#: applet.js:1237
+msgid "Classic"
+msgstr "Klasični"
+
+#: applet.js:1238
+msgid "Long focus"
+msgstr "Dugi fokus"
+
+#: applet.js:1433
+msgid "Task complete"
+msgstr ""
+
+#. settings-schema.json->sec_preview->title
+#: applet.js:1534 visual.js:593
+msgid "Preview"
+msgstr "Pregled"
+
+#: applet.js:1548
+msgid "Pomodoro started"
+msgstr "Pomodoro je pokrenut"
+
+#: applet.js:1624
+msgid "Let's go to work!"
+msgstr "Idemo raditi!"
+
+#: applet.js:1651
+msgid "Pomodoro done"
+msgstr "Pomodoro gotov"
+
+#: applet.js:1653
+msgid "Take a short break"
+msgstr "Uzmite kratki predah"
+
+#: applet.js:1654 applet.js:1685
+#, javascript-format
+msgid "+%d min"
+msgstr "+%d min"
+
+#: applet.js:1655 applet.js:1686
+msgid "Skip break"
+msgstr "Preskoči predah"
+
+#: applet.js:1679
+msgid "Set complete!"
+msgstr "Set završen!"
+
+#: applet.js:1684
+msgid "Take a long break"
+msgstr "Uzmite duži predah"
+
+#: applet.js:1731
+msgid "Pomodoro ended"
+msgstr "Pomodoro je završio"
+
+#: applet.js:2017 features.js:3157
+msgid "Stop the timer before changing Pomodoro preset"
+msgstr "Zaustavite mjerač prije promjene Pomodoro predloška"
+
+#: applet.js:2035
+#, javascript-format
+msgid "Pomodoro preset %s applied"
+msgstr "Pomodoro predložak %s primijenjen"
+
+#: applet.js:2042 features.js:743 menu.js:456 menu.js:832 menu.js:1229
+msgid "Preset"
+msgstr "Predložak"
+
+#: applet.js:2068
+msgid "Keep at least one preset"
+msgstr "Zadrži barem jedan predložak"
+
+#: applet.js:2083
+#, javascript-format
+msgid "Break extended by %d min"
+msgstr "Predah produžen za %d min"
+
+#: dialogs.js:37 dialogs.js:147
+msgid "Focus task"
+msgstr "Zadatak fokusa"
+
+#: dialogs.js:38 dialogs.js:148
+msgid "What are you focusing on?"
+msgstr "Na što se fokusirate?"
+
+#: dialogs.js:42 features.js:720
+msgid "e.g. Write the report"
+msgstr "npr. napiši izvještaj"
+
+#: dialogs.js:61
+msgid "Choose or type a focus task"
+msgstr "Odaberite ili upišite zadatak fokusa"
+
+#: dialogs.js:94 dialogs.js:150 dialogs.js:284 features.js:3206
+msgid "Start"
+msgstr "Pokreni"
+
+#: dialogs.js:140 dialogs.js:591 features.js:828 features.js:891
+#: features.js:1930 features.js:3205
+msgid "Cancel"
+msgstr "Odustani"
+
+#: dialogs.js:147
+msgid "Current task"
+msgstr "Trenutni zadatak"
+
+#: dialogs.js:148
+msgid "Choose a task to focus on"
+msgstr "Odaberite zadatak za fokusiranje"
+
+#: dialogs.js:150
+msgid "Switch"
+msgstr "Promijeni"
+
+#: dialogs.js:150
+msgid "Select"
+msgstr "Odaberi"
+
+#: dialogs.js:394
+msgid "Hide"
+msgstr "Sakrij"
+
+#: dialogs.js:401
+msgid "Switch Off Pomodoro"
+msgstr "Isključi Pomodoro"
+
+#: dialogs.js:407
+msgid "Start a new Pomodoro"
+msgstr "Pokreni novi Pomodoro"
+
+#: dialogs.js:418
+msgid "Pomodoro set finished, you deserve a break!"
+msgstr "Pomodoro zadatak je završio, zaslužili ste predah!"
+
+#: dialogs.js:427
+msgid "Your break is over, start another pomodoro!"
+msgstr "Vaš predah je gotov, pokrenite novi pomodoro!"
+
+#: dialogs.js:433
+#, javascript-format
+msgid "A new pomodoro begins in %s."
+msgstr "Novi pomodoro počinje za %s."
+
+#: dialogs.js:445
+#, javascript-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minuta"
+msgstr[1] "%d minute"
+msgstr[2] "%d minuta"
+
+#: dialogs.js:446
+#, javascript-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d sekunda"
+msgstr[1] "%d sekunde"
+msgstr[2] "%d sekundi"
+
+#: dialogs.js:448
+#, javascript-format
+msgid "%s and %s"
+msgstr "%s i %s"
+
+#: dialogs.js:469 dialogs.js:521
+msgid "Pause Pomodoro"
+msgstr "Pauziraj Pomodoro"
+
+#: dialogs.js:475
+msgid "Continue Current Pomodoro"
+msgstr "Nastavi trenutni Pomodoro"
+
+#: dialogs.js:487
+msgid "Short break finished, ready to continue?"
+msgstr "Kratak predah je završio, spremni za nastavak?"
+
+#: dialogs.js:529
+#, javascript-format
+msgid "Extend +%d min"
+msgstr "Produži +%d min"
+
+#: dialogs.js:536
+msgid "Start break"
+msgstr "Započni predah"
+
+#: dialogs.js:546
+msgid "Pomodoro finished, ready to take a break?"
+msgstr "Pomodoro završen, spremni za predah?"
+
+#: dialogs.js:565 dialogs.js:599
+msgid "Reorder"
+msgstr ""
+
+#: dialogs.js:566
+msgid "Drag the rows to reorder, then press Done."
+msgstr ""
+
+#: dialogs.js:592
+msgid "Done"
+msgstr ""
+
+#: features.js:204
+#, javascript-format
+msgid "%d focus blocks today — great work!"
+msgstr "%d blokova fokusa danas — odličan rad!"
+
+#: features.js:206
+#, javascript-format
+msgid "🔥 %d-day streak"
+msgstr "🔥 niz od %d dana"
+
+#: features.js:208
+msgid "Daily goal reached 🍅"
+msgstr "Dnevni cilj postignut 🍅"
+
+#: features.js:495
+msgid "Reorder tasks"
+msgstr ""
+
+#: features.js:519
+msgid "Reorder presets"
+msgstr ""
+
+#: features.js:544
+#, javascript-format
+msgid "Hit your %d 🍅 estimate for: %s. Mark it done when ready."
+msgstr "Dostignuta procjena %d 🍅 za: %s. Označi kao gotovo kad budeš spreman."
+
+#: features.js:635
+msgid "Capture distraction"
+msgstr ""
+
+#: features.js:637
+msgid "Type it, press Enter — then back to work"
+msgstr ""
+
+#: features.js:690
+msgid "Look ~20 ft away for 20 seconds — rest your eyes."
+msgstr "Pogledajte u daljinu 20 sekundi — odmorite oči."
+
+#: features.js:691
+msgid "Stand up and stretch."
+msgstr "Ustanite i protegnite se."
+
+#: features.js:692
+msgid "Drink some water."
+msgstr "Popijte malo vode."
+
+#: features.js:693
+msgid "Look out a window and relax your shoulders."
+msgstr "Pogledajte kroz prozor i opustite ramena."
+
+#: features.js:694
+msgid "Close your eyes and take a few slow breaths."
+msgstr "Zatvorite oči i polako udahnite nekoliko puta."
+
+#: features.js:695
+msgid "Step away from screens — don't check your phone."
+msgstr ""
+
+#: features.js:696
+msgid "Unclench your jaw and drop your shoulders."
+msgstr ""
+
+#: features.js:699
+msgid "Take a short walk."
+msgstr "Prošećite malo."
+
+#: features.js:700
+msgid "Step outside for some fresh air."
+msgstr "Iziđite na svježi zrak."
+
+#: features.js:701
+msgid "Stretch and move around a little."
+msgstr "Protegnite se i malo prošećite."
+
+#: features.js:702
+msgid "Grab a snack and some water."
+msgstr "Uzmite zalogaj i malo vode."
+
+#: features.js:703
+msgid "Rest your eyes and look into the distance."
+msgstr "Odmorite oči i pogledajte u daljinu."
+
+#: features.js:704
+msgid "Rest away from screens — no phone, no feeds, no news."
+msgstr ""
+
+#: features.js:705
+msgid "Move your body and let your mind wander."
+msgstr ""
+
+#: features.js:716 menu.js:1099
+msgid "Edit task"
+msgstr "Uredi zadatak"
+
+#: features.js:716
+msgid "New task"
+msgstr "Novi zadatak"
+
+#: features.js:717
+msgid "What do you want to work on?"
+msgstr "Na čemu želite raditi?"
+
+#: features.js:733
+#, javascript-format
+msgid "%d h %d min"
+msgstr "%d h %d min"
+
+#: features.js:733
+#, javascript-format
+msgid "%d h"
+msgstr "%d h"
+
+#: features.js:734 features.js:858 features.js:1278 menu.js:304
+#, javascript-format
+msgid "%d min"
+msgstr "%d min"
+
+#: features.js:746
+msgid "Custom"
+msgstr "Prilagođeno"
+
+#: features.js:755
+#, javascript-format
+msgid "How many pomodoros? (1 🍅 = %d min)"
+msgstr "Koliko pomodora? (1 🍅 = %d min)"
+
+#: features.js:761
+msgid "No estimate — just counts your 🍅"
+msgstr "Bez procjene — samo broji 🍅"
+
+#: features.js:829 features.js:892
+msgid "Save"
+msgstr "Spremi"
+
+#: features.js:829 features.js:892
+msgid "Add"
+msgstr "Dodaj"
+
+#: features.js:839 menu.js:1203
+msgid "Edit preset"
+msgstr "Uredi predložak"
+
+#: features.js:839
+msgid "New preset"
+msgstr "Novi predložak"
+
+#: features.js:840
+msgid "Name it and set its rhythm."
+msgstr "Imenuj ga i postavi ritam."
+
+#: features.js:843
+msgid "e.g. Deep work"
+msgstr "npr. Duboki rad"
+
+#. settings-schema.json->custom_presets->columns->title
+#: features.js:871
+msgid "Focus (min)"
+msgstr "Fokus (min)"
+
+#. settings-schema.json->custom_presets->columns->title
+#: features.js:872
+msgid "Short break (min)"
+msgstr "Kratki predah (min)"
+
+#. settings-schema.json->custom_presets->columns->title
+#: features.js:873
+msgid "Long break (min)"
+msgstr "Duži predah (min)"
+
+#. settings-schema.json->custom_presets->columns->title
+#: features.js:874
+msgid "Pomodori"
+msgstr "Pomodori"
+
+#: features.js:930
+msgid "The Pomodoro technique 🍅"
+msgstr "Pomodoro tehnika 🍅"
+
+#: features.js:932
+msgid ""
+"In the late 1980s, university student Francesco Cirillo couldn't focus on "
+"his studies. He bet himself he could stay concentrated for just a few "
+"minutes and reached for the first timer he could find — a kitchen one shaped "
+"like a tomato. In Italian, a tomato is a “pomodoro”, and that's how the "
+"method got its name."
+msgstr ""
+"Krajem 1980-ih student Francesco Cirillo nije se mogao usredotočiti na "
+"studij. Okladio se sam sa sobom da može ostati usredotočen barem nekoliko "
+"minuta i zgrabio prvi mjerač vremena koji je našao — kuhinjski, u obliku "
+"rajčice. Na talijanskom rajčica je „pomodoro“ — i tako je metoda dobila ime."
+
+#: features.js:933
+msgid ""
+"The idea is simple: big tasks feel daunting, but a single pomodoro doesn't. "
+"Promise yourself just 25 minutes of focus on one task, and starting becomes "
+"easy."
+msgstr ""
+"Ideja je jednostavna: veliki zadaci djeluju zastrašujuće, ali jedan pomodoro "
+"ne. Obećaj si samo 25 minuta usredotočenosti na jedan zadatak i početak "
+"postaje lak."
+
+#: features.js:934
+msgid ""
+"The classic rhythm:\n"
+"• About 25 minutes — one task, nothing else.\n"
+"• A 5-minute breather — step away from the screen.\n"
+"• After four pomodoros, take a longer 15–30 minute break."
+msgstr ""
+"Klasični ritam:\n"
+"• Otprilike 25 minuta — samo jedan zadatak, ništa drugo.\n"
+"• Petominutni predah — odmakni se od ekrana.\n"
+"• Nakon četiri pomodora uzmi dulju pauzu od 15–30 minuta."
+
+#: features.js:935
+msgid ""
+"This is a starting point, not a rule — the applet lets you change any "
+"interval and save your own presets."
+msgstr ""
+"Ovo je polazišna točka, a ne pravilo — aplet ti omogućuje promjenu svakog "
+"intervala i spremanje vlastitih postavki."
+
+#: features.js:936
+msgid ""
+"And it's not just a productivity fad: the exact numbers are flexible, but "
+"the principles behind them are backed by attention research. Staying on one "
+"task without switching saves energy — getting back on track after an "
+"interruption takes about 23 minutes on average. And regular pauses help you "
+"hold focus for longer without burning out."
+msgstr ""
+"I nije riječ samo o pomodnom triku za produktivnost: točni su brojevi "
+"fleksibilni, ali načela iza njih potvrđuju istraživanja pažnje. Ostanak na "
+"jednom zadatku bez prebacivanja štedi energiju — nakon prekida za povratak "
+"je u prosjeku potrebno oko 23 minute. A redovite stanke pomažu ti dulje "
+"zadržati koncentraciju bez izgaranja."
+
+#: features.js:937
+msgid ""
+"Tip: when something distracts you, don't drop what you're doing — jot the "
+"thought down and come back to it on your break. Every finished pomodoro is a "
+"small win that keeps your momentum going."
+msgstr ""
+"Savjet: kad te nešto omete, nemoj odustati od onoga što radiš — zapiši misao "
+"i vrati joj se tijekom stanke. Svaki dovršeni pomodoro mala je pobjeda koja "
+"održava tvoj zamah."
+
+#: features.js:938 features.js:1942
+msgid "Close"
+msgstr "Zatvori"
+
+#: features.js:951
+msgid "OK"
+msgstr "U redu"
+
+#: features.js:964
+msgid "Nothing to undo"
+msgstr "Nema se što poništiti"
+
+#: features.js:965
+msgid "Apply a setup from the guide first — then you can undo it here."
+msgstr ""
+"Najprije primijeni postavku iz čarobnjaka — zatim je ovdje možeš poništiti."
+
+#: features.js:969
+msgid "Previous settings restored ✓"
+msgstr "Prethodne postavke vraćene ✓"
+
+#: features.js:970
+msgid "Your settings from just before the last setup have been put back."
+msgstr "Tvoje postavke od neposredno prije zadnjeg postavljanja su vraćene."
+
+#: features.js:1031
+#, javascript-format
+msgid "Selected %d of %d"
+msgstr "Odabrano %d od %d"
+
+#: features.js:1131
+msgid "Intro"
+msgstr "Uvod"
+
+#: features.js:1132
+#, javascript-format
+msgid "Step %d of %d"
+msgstr "Korak %d od %d"
+
+#: features.js:1133
+msgid "Review"
+msgstr "Pregled"
+
+#: features.js:1135
+msgid "Smart setup"
+msgstr "Pametno postavljanje"
+
+#: features.js:1139
+msgid "Skip"
+msgstr "Preskoči"
+
+#: features.js:1143
+msgid "What is the Pomodoro technique? 🍅"
+msgstr ""
+
+#: features.js:1144
+msgid ""
+"Focus in short sprints with deliberate rest: about 25 minutes on one task, "
+"then a 5-minute break; after four sprints, take a longer 15–30 minute break. "
+"The finite countdown keeps a task approachable and the regular breaks "
+"protect your attention."
+msgstr ""
+
+#: features.js:1145
+msgid ""
+"Let's tune it to how you work — a few quick questions, and you can change "
+"anything later in Settings."
+msgstr ""
+"Prilagodimo to tvom načinu rada — nekoliko brzih pitanja, a poslije sve "
+"možeš promijeniti u Postavkama."
+
+#. settings-schema.json->about_technique_button->description
+#: features.js:1147
+msgid "About the Pomodoro technique"
+msgstr ""
+
+#: features.js:1148
+msgid "Let's go"
+msgstr "Krenimo"
+
+#: features.js:1166
+#, javascript-format
+msgid "Space or 1–%d to toggle · ↑↓ to move · Enter for next"
+msgstr "Space ili 1–%d za uključivanje · ↑↓ pomak · Enter dalje"
+
+#: features.js:1167
+#, javascript-format
+msgid "Space or 1–%d to choose · ↑↓ to move · Enter for next"
+msgstr "Space ili 1–%d za odabir · ↑↓ pomak · Enter dalje"
+
+#: features.js:1179 features.js:1257
+msgid "Back"
+msgstr "Natrag"
+
+#: features.js:1180
+msgid "Next"
+msgstr "Dalje"
+
+#: features.js:1183
+msgid "Your tailored setup 🍅"
+msgstr "Vaša prilagođena postavka 🍅"
+
+#: features.js:1184
+msgid ""
+"Based on your answers, here's what I'll set up. Untick anything you'd rather "
+"skip, then apply."
+msgstr ""
+"Na temelju tvojih odgovora evo što ću postaviti. Odznači ono što želiš "
+"preskočiti i primijeni."
+
+#: features.js:1239
+msgid "Space to toggle · ↑↓ to move · Enter to apply"
+msgstr "Space uključi · ↑↓ pomak · Enter primijeni"
+
+#: features.js:1258
+msgid "Apply"
+msgstr "Primijeni"
+
+#: features.js:1259
+msgid "Apply & start"
+msgstr "Primijeni i pokreni"
+
+#: features.js:1282 menu.js:308
+#, javascript-format
+msgid "%dh %dm"
+msgstr "%d h %d m"
+
+#: features.js:1282 menu.js:308
+#, javascript-format
+msgid "%dh"
+msgstr "%d h"
+
+#: features.js:1464
+msgid "Statistics reset."
+msgstr "Statistika poništena."
+
+#: features.js:1486
+#, javascript-format
+msgid "%d to go today — at your pace, done by about %s."
+msgstr "Još %d danas — vašim tempom, gotovo oko %s."
+
+#: features.js:1487
+#, javascript-format
+msgid "%d more to reach today's goal of %d."
+msgstr "Još %d do današnjeg cilja od %d."
+
+#: features.js:1489
+#, javascript-format
+msgid "Daily goal reached — %d done today. Nice."
+msgstr "Dnevni cilj postignut — %d danas. Bravo."
+
+#: features.js:1492
+#, javascript-format
+msgid "%d interruptions this week — what keeps pulling you away?"
+msgstr "%d prekida ovaj tjedan — što vas stalno odvlači?"
+
+#: features.js:1495 features.js:1815
+#, javascript-format
+msgid "Most focused around %s — good time for deep work."
+msgstr "Najfokusiraniji oko %s — dobro vrijeme za dubok rad."
+
+#: features.js:1498
+#, javascript-format
+msgid "Most focus went to “%s”."
+msgstr "Najviše fokusa otišlo je na “%s”."
+
+#: features.js:1500
+#, javascript-format
+msgid "%d pomodoros this week. Keep it going."
+msgstr "%d pomodora ovaj tjedan. Samo tako nastavite."
+
+#: features.js:1501
+msgid "Start a focus session — your insights will appear here."
+msgstr "Pokrenite sesiju fokusa — vaši uvidi pojavit će se ovdje."
+
+#: features.js:1539
+msgid "%d.%m"
+msgstr ""
+
+#: features.js:1638
+#, javascript-format
+msgid "Saved ✓ — %s"
+msgstr ""
+
+#: features.js:1641
+msgid "Could not save statistics export."
+msgstr ""
+
+#: features.js:1673
+msgid "Could not open the folder."
+msgstr ""
+
+#: features.js:1698 features.js:1771
+msgid "Sun"
+msgstr "Ned"
+
+#: features.js:1698 features.js:1771
+msgid "Mon"
+msgstr "Pon"
+
+#: features.js:1698 features.js:1771
+msgid "Tue"
+msgstr "Uto"
+
+#: features.js:1698 features.js:1771
+msgid "Wed"
+msgstr "Sri"
+
+#: features.js:1698 features.js:1771
+msgid "Thu"
+msgstr "Čet"
+
+#: features.js:1698 features.js:1771
+msgid "Fri"
+msgstr "Pet"
+
+#: features.js:1698 features.js:1771
+msgid "Sat"
+msgstr "Sub"
+
+#: features.js:1745
+msgid "Focus statistics"
+msgstr "Statistika fokusa"
+
+#: features.js:1759
+#, javascript-format
+msgid "%d / %d goal"
+msgstr "%d / %d cilj"
+
+#: features.js:1760
+msgid "Today"
+msgstr "Danas"
+
+#: features.js:1761
+msgid "This week"
+msgstr "Ovaj tjedan"
+
+#: features.js:1762
+msgid "Streak"
+msgstr "Niz"
+
+#: features.js:1762
+#, javascript-format
+msgid "best %d"
+msgstr "rekord %d"
+
+#: features.js:1763
+msgid "All time"
+msgstr "Sveukupno"
+
+#: features.js:1772
+#, javascript-format
+msgid "This week: %d 🍅 · %s · best day %s"
+msgstr "Ovaj tjedan: %d 🍅 · %s · najbolji dan %s"
+
+#: features.js:1776
+#, fuzzy, javascript-format
+msgid "This month: %d 🍅 · %s · best day %d 🍅"
+msgstr "Ovaj tjedan: %d 🍅 · %s · najbolji dan %s"
+
+#: features.js:1782
+msgid "Nothing harvested yet today"
+msgstr "Danas još nema uroda"
+
+#: features.js:1784
+msgid "Today's harvest"
+msgstr "Današnji urod"
+
+#: features.js:1791
+#, javascript-format
+msgid "Interruptions: %d today · %d this week"
+msgstr "Prekidi: %d danas · %d ovaj tjedan"
+
+#: features.js:1797
+msgid "When you focus (by hour)"
+msgstr "Kada se fokusirate (po satu)"
+
+#: features.js:1806
+#, javascript-format
+msgid "Focus by hour; most focused around %s"
+msgstr ""
+
+#: features.js:1807
+msgid "Focus by hour; not enough data yet"
+msgstr ""
+
+#: features.js:1810
+msgid "night"
+msgstr "noć"
+
+#: features.js:1810
+msgid "morning"
+msgstr "jutro"
+
+#: features.js:1810
+msgid "afternoon"
+msgstr "popodne"
+
+#: features.js:1810
+msgid "evening"
+msgstr "večer"
+
+#: features.js:1816
+msgid "Not enough data yet to spot your best focus time."
+msgstr "Još nema dovoljno podataka za određivanje najboljeg vremena fokusa."
+
+#: features.js:1825
+msgid "Focus time — last 14 days"
+msgstr "Vrijeme fokusa — posljednjih 14 dana"
+
+#: features.js:1827
+#, fuzzy, javascript-format
+msgid "┄┄ daily goal (%d 🍅)"
+msgstr "Dnevni cilj postignut 🍅"
+
+#: features.js:1846
+#, javascript-format
+msgid "Last 14 days: %d 🍅 · best %s (%d 🍅)"
+msgstr ""
+
+#: features.js:1847
+msgid "Last 14 days: no focus yet"
+msgstr ""
+
+#: features.js:1850
+msgid "Activity — last 12 weeks"
+msgstr "Aktivnost — posljednjih 12 tjedana"
+
+#: features.js:1870
+msgid "Less"
+msgstr "Manje"
+
+#: features.js:1874
+msgid "More"
+msgstr "Više"
+
+#: features.js:1880
+#, javascript-format
+msgid "Last 12 weeks: %d active days · busiest %s (%d 🍅)"
+msgstr ""
+
+#: features.js:1881
+msgid "Last 12 weeks: no focus yet"
+msgstr ""
+
+#: features.js:1894
+msgid "By task"
+msgstr "Po zadatku"
+
+#: features.js:1905
+#, javascript-format
+msgid "%s: %d 🍅"
+msgstr ""
+
+#: features.js:1918 menu.js:734
+#, javascript-format
+msgid "Milestones: %s"
+msgstr "Prekretnice: %s"
+
+#: features.js:1931
+msgid "Delete all statistics"
+msgstr "Izbriši svu statistiku"
+
+#: features.js:1936
+msgid "Export…"
+msgstr ""
+
+#: features.js:1939
+msgid "Open folder"
+msgstr ""
+
+#: features.js:1941
+msgid "Reset statistics…"
+msgstr "Poništi statistiku…"
+
+#: features.js:2256
+msgid "No sound backend available for preview."
+msgstr ""
+
+#: features.js:2260
+msgid "Choose an ambient sound first (it's set to Off)."
+msgstr ""
+
+#: features.js:2513
+msgid "Break — locking the screen"
+msgstr ""
+
+#: features.js:2514
+msgid "Locking in a few seconds so you can step away."
+msgstr ""
+
+#: features.js:2515
+msgid "Don't lock now"
+msgstr ""
+
+#: features.js:2561
+msgid "Couldn't lock the screen"
+msgstr ""
+
+#: features.js:2561
+msgid "No screen locker was available."
+msgstr ""
+
+#: features.js:2581
+msgid "No task"
+msgstr "Bez zadatka"
+
+#: features.js:2618
+msgid "Push notifications need libsoup, which isn't available here."
+msgstr "Push obavijesti trebaju libsoup, koji ovdje nije dostupan."
+
+#: features.js:2624
+msgid "Enter your Pushover user key and app token first."
+msgstr "Najprije unesite svoj Pushover korisnički ključ i token aplikacije."
+
+#: features.js:2631
+msgid "Test notification from Zen Pomodoro 🍅"
+msgstr "Probna obavijest iz Zen Pomodoro 🍅"
+
+#: features.js:2653
+msgid "Pushover test sent ✓ — check your device."
+msgstr "Pushover test poslan ✓ — provjerite uređaj."
+
+#: features.js:2654 features.js:2658
+msgid "Pushover test failed. Double-check your user key and app token."
+msgstr ""
+"Pushover test nije uspio. Provjerite korisnički ključ i token aplikacije."
+
+#: features.js:2751
+#, javascript-format
+msgid "Blocking updated — %d site(s)."
+msgstr ""
+
+#: features.js:2758
+msgid "Site blocking cleared."
+msgstr ""
+
+#: features.js:2840
+msgid "Passwordless blocking enabled (no prompt)."
+msgstr "Blokiranje bez lozinke omogućeno (bez upita)."
+
+#: features.js:2844
+msgid "Passwordless blocking removed."
+msgstr "Blokiranje bez lozinke uklonjeno."
+
+#: features.js:2866
+msgid ""
+"Focus spotlight is on — every other window is dimmed so the one you're "
+"working in stands out. Click the on-screen pill (or switch Zen off) to exit."
+msgstr ""
+
+#: features.js:2867
+msgid ""
+"Focus spotlight is armed. When your next focus session starts, every window "
+"except the one you're working in dims, so your task stands out. Click the on-"
+"screen pill to exit."
+msgstr ""
+
+#. settings-schema.json->sec_zen->title
+#: features.js:2868 menu.js:468 menu.js:512
+msgid "Zen mode"
+msgstr "Zen način"
+
+#: features.js:3018
+msgid "Exit focus"
+msgstr ""
+
+#: features.js:3127
+msgid "Breathe in"
+msgstr "Udahnite"
+
+#: features.js:3130 features.js:3136
+msgid "Hold"
+msgstr "Zadržite"
+
+#: features.js:3133
+msgid "Breathe out"
+msgstr "Izdahnite"
+
+#: features.js:3163
+msgid "Focus until"
+msgstr "Fokus do"
+
+#: features.js:3164
+msgid "Enter a time (HH:MM)"
+msgstr "Unesite vrijeme (HH:MM)"
+
+#: menu.js:147
+msgid "Error: menu unavailable"
+msgstr "Greška: izbornik nedostupan"
+
+#: menu.js:231
+msgid "Ready to start"
+msgstr "Spremni za početak"
+
+#: menu.js:239 menu.js:812
+msgid "No task yet — tap to choose one"
+msgstr ""
+
+#: menu.js:246
+msgid "Change task"
+msgstr "Promijeni zadatak"
+
+#: menu.js:344
+#, javascript-format
+msgid "Pomodoro %d / %d"
+msgstr "Pomodoro %d / %d"
+
+#: menu.js:352 menu.js:882
+msgid "Start focus"
+msgstr "Pokreni fokus"
+
+#: menu.js:368
+msgid "Skip phase"
+msgstr "Preskoči fazu"
+
+#: menu.js:370
+msgid "Skip the current phase and move on to the next."
+msgstr ""
+
+#: menu.js:375
+msgid "Reset timer"
+msgstr "Poništi mjerač"
+
+#: menu.js:377
+msgid ""
+"Stop the current timer and return to the start. Your pomodoro count for this "
+"set is kept."
+msgstr ""
+
+#: menu.js:389
+#, fuzzy
+msgid "Reset timer & count"
+msgstr "Poništi mjerač i brojače"
+
+#: menu.js:390
+msgid ""
+"Reset the timer and clear this set's pomodoro count. Your saved statistics "
+"aren't affected."
+msgstr ""
+
+#: menu.js:391
+msgid "Confirm reset"
+msgstr ""
+
+#: menu.js:413 menu.js:1010
+msgid "Task list"
+msgstr "Popis zadataka"
+
+#: menu.js:434 menu.js:999
+msgid "Distractions"
+msgstr ""
+
+#: menu.js:464
+msgid "Focus until…"
+msgstr "Fokus do…"
+
+#: menu.js:470 menu.js:514
+msgid ""
+"Focus spotlight: while a focus session runs, every other window dims so the "
+"one you're working in stands out. Click the on-screen pill to exit."
+msgstr ""
+
+#. settings-schema.json->sec_ambient->title
+#: menu.js:473 menu.js:516
+msgid "Ambient sound"
+msgstr "Pozadinski zvuk"
+
+#: menu.js:478
+msgid "Site blocking"
+msgstr "Blokiranje stranica"
+
+#: menu.js:481 menu.js:822 menu.js:1236
+msgid "off"
+msgstr "isključeno"
+
+#: menu.js:484
+msgid "Manage blocked sites"
+msgstr ""
+
+#: menu.js:489
+msgid "Statistics"
+msgstr "Statistika"
+
+#: menu.js:495
+msgid "Open the statistics dashboard"
+msgstr ""
+
+#: menu.js:500
+msgid "Setup wizard…"
+msgstr "Čarobnjak za postavljanje…"
+
+#: menu.js:704
+#, javascript-format
+msgid "Last 7 days: %d"
+msgstr "Posljednjih 7 dana: %d"
+
+#: menu.js:713
+#, javascript-format
+msgid "Last 30 days: %d"
+msgstr "Posljednjih 30 dana: %d"
+
+#: menu.js:716
+#, javascript-format
+msgid "All time: %d"
+msgstr "Sveukupno: %d"
+
+#: menu.js:719
+#, javascript-format
+msgid "Focus time: %s today · %s total"
+msgstr "Vrijeme fokusa: %s danas · %s ukupno"
+
+#: menu.js:722
+#, javascript-format
+msgid "Best day: %d"
+msgstr "Najbolji dan: %d"
+
+#: menu.js:734
+msgid "none yet"
+msgstr "još nijedan"
+
+#: menu.js:744 menu.js:771
+#, javascript-format
+msgid "Finish your tasks by ~%s"
+msgstr "Završite zadatke do ~%s"
+
+#: menu.js:755
+#, javascript-format
+msgid "Pomodoro %d of %d"
+msgstr "Pomodoro %d od %d"
+
+#: menu.js:757
+msgid "Long break"
+msgstr "Duži predah"
+
+#: menu.js:759
+msgid "Short break"
+msgstr "Kratki predah"
+
+#: menu.js:762
+#, javascript-format
+msgid "until %s"
+msgstr "do %s"
+
+#: menu.js:765
+#, javascript-format
+msgid "≈ finish %s"
+msgstr "≈ kraj %s"
+
+#: menu.js:769
+msgid "Break finished — press Start for focus"
+msgstr "Predah završen — pritisnite Pokreni za fokus"
+
+#: menu.js:773
+#, javascript-format
+msgid "%d min focus — press Start"
+msgstr "%d min fokusa — pritisnite Pokreni"
+
+#: menu.js:815
+msgid "Task: none"
+msgstr "Zadatak: nijedan"
+
+#: menu.js:821 menu.js:1235
+#, javascript-format
+msgid "blocking %d"
+msgstr "blokira %d"
+
+#: menu.js:822 menu.js:1236
+#, javascript-format
+msgid "%d in list"
+msgstr "%d na popisu"
+
+#: menu.js:861
+msgid "Resume break"
+msgstr "Nastavi predah"
+
+#: menu.js:861
+msgid "Resume focus"
+msgstr "Nastavi fokus"
+
+#: menu.js:868
+msgid "Focusing — stay with it"
+msgstr "Fokusiranje — ostanite uz to"
+
+#: menu.js:873
+msgid "Pause focus"
+msgstr "Pauziraj fokus"
+
+#: menu.js:873
+msgid "Pause break"
+msgstr "Pauziraj predah"
+
+#: menu.js:878
+msgid "Start next focus"
+msgstr "Pokreni sljedeći fokus"
+
+#: menu.js:930
+msgid "Jot a distraction, press Enter"
+msgstr ""
+
+#: menu.js:976
+msgid "Delete"
+msgstr ""
+
+#: menu.js:993
+msgid "Clear all"
+msgstr ""
+
+#: menu.js:1025
+msgid "Add task…"
+msgstr "Dodaj zadatak…"
+
+#: menu.js:1029 menu.js:1164
+msgid "Reorder…"
+msgstr ""
+
+#: menu.js:1040
+msgid "No tasks yet — add what you'll focus on, with a 🍅 estimate."
+msgstr ""
+"Još nema zadataka — dodajte ono na što ćete se fokusirati, uz 🍅 procjenu."
+
+#: menu.js:1106
+msgid "Reopen task"
+msgstr "Ponovno otvori zadatak"
+
+#: menu.js:1106
+msgid "Mark done"
+msgstr "Označi gotovim"
+
+#: menu.js:1113
+msgid "Delete task"
+msgstr "Izbriši zadatak"
+
+#: menu.js:1160
+msgid "Add preset…"
+msgstr "Dodaj predložak…"
+
+#: menu.js:1210
+msgid "Delete preset"
+msgstr "Izbriši predložak"
+
+#: recommend.js:78
+msgid "Notifications are muted while you focus."
+msgstr "Obavijesti su utišane dok se fokusirate."
+
+#: recommend.js:82
+msgid "Distraction blocking is ready — add sites in Settings → Advanced."
+msgstr ""
+"Blokiranje ometanja je spremno — dodajte stranice u Postavke → Napredno."
+
+#: recommend.js:86
+msgid "One-click start and a calm start ritual make it easier to begin."
+msgstr "Pokretanje jednim klikom i smiren ritual početka olakšavaju početak."
+
+#: recommend.js:91
+msgid "Breaks start on their own so you don't overwork."
+msgstr "Predasi počinju sami da se ne biste preopteretili."
+
+#: recommend.js:96
+msgid "A calm theme, no ticking seconds and no end-of-timer rush."
+msgstr "Smirena tema, bez kucanja sekundi i bez žurbe na kraju mjerača."
+
+#: recommend.js:137
+msgid "longer focus blocks suit deep work"
+msgstr "duži blokovi fokusa pogoduju dubokom radu"
+
+#: recommend.js:138
+msgid "the classic rhythm suits studying"
+msgstr "klasični ritam pogoduje učenju"
+
+#: recommend.js:139
+msgid "a little more break time lets ideas settle"
+msgstr "malo više predaha pomaže idejama da se slegnu"
+
+#: recommend.js:140
+msgid "shorter cycles keep small tasks moving"
+msgstr "kraći ciklusi održavaju male zadatke u tijeku"
+
+#: recommend.js:141
+msgid "a balanced rhythm"
+msgstr "uravnotežen ritam"
+
+#: recommend.js:145
+#, javascript-format
+msgid "Focus rhythm %d / %d / %d min — %s."
+msgstr "Ritam fokusa %d / %d / %d min — %s."
+
+#: recommend.js:154
+#, javascript-format
+msgid "Daily goal: %d focus blocks."
+msgstr "Dnevni cilj: %d blokova fokusa."
+
+#: recommend.js:155
+msgid "No daily goal yet — just getting a feel for it."
+msgstr "Još bez dnevnog cilja — samo se privikavate."
+
+#: recommend.js:163
+msgid ""
+"Flow extend: keep going up to 10 min past the timer when you're in the zone."
+msgstr ""
+"Produljenje flowa: nastavi do 10 min nakon mjerača vremena kad si u zanosu."
+
+#: recommend.js:171
+msgid "Silent focus — no ticking or chimes."
+msgstr "Tihi fokus — bez kucanja i zvonjave."
+
+#: recommend.js:175
+msgid "Soft brown-noise ambience while you focus."
+msgstr "Mekani smeđi šum dok se fokusirate."
+
+#: recommend.js:181
+#, javascript-format
+msgid "A gentle chime every %d min to mark time."
+msgstr "Nježno zvonce svakih %d min za označavanje vremena."
+
+#: recommend.js:186
+msgid "Quiet, visual-only cues for a shared space."
+msgstr "Tihi, samo vizualni znakovi za zajednički prostor."
+
+#: recommend.js:205
+#, javascript-format
+msgid "Block %d distracting sites while you focus."
+msgstr "Blokiraj %d ometajućih stranica dok se fokusiraš."
+
+#: recommend.js:217
+msgid "Breaks start on their own so you don't overrun."
+msgstr "Pauze počinju same kako se ne bi pretjerao."
+
+#: recommend.js:242
+msgid "What will you mainly focus on?"
+msgstr "Na što ćete se uglavnom fokusirati?"
+
+#: recommend.js:243
+msgid "This shapes how long each focus block should be."
+msgstr "Ovo određuje koliko bi trebao trajati svaki blok fokusa."
+
+#: recommend.js:245
+msgid "Deep work or coding"
+msgstr "Dubok rad ili programiranje"
+
+#: recommend.js:246
+msgid "Studying or reading"
+msgstr "Učenje ili čitanje"
+
+#: recommend.js:247
+msgid "Writing or creative work"
+msgstr "Pisanje ili kreativni rad"
+
+#: recommend.js:248
+msgid "Lots of small tasks"
+msgstr "Mnogo malih zadataka"
+
+#: recommend.js:252
+msgid "How long can you usually concentrate?"
+msgstr "Koliko se obično možete koncentrirati?"
+
+#: recommend.js:253
+msgid "Pick a length you can actually keep — it beats an ideal one."
+msgstr "Odaberite trajanje koje stvarno možete održati — bolje je od idealnog."
+
+#: recommend.js:255
+msgid "About 15 minutes"
+msgstr "Oko 15 minuta"
+
+#: recommend.js:256
+msgid "About 25 minutes"
+msgstr "Oko 25 minuta"
+
+#: recommend.js:257
+msgid "45 minutes or more"
+msgstr "45 minuta ili više"
+
+#: recommend.js:258
+msgid "I lose track of time when I'm in flow"
+msgstr "Izgubim pojam o vremenu kad sam u zanosu"
+
+#: recommend.js:262
+msgid "What gets in your way most?"
+msgstr "Što vas najviše ometa?"
+
+#: recommend.js:263
+msgid "Pick up to 3 — I'll switch on the right help for each."
+msgstr "Odaberi do 3 — za svaku ću uključiti pravu pomoć."
+
+#: recommend.js:265
+msgid "Notifications and pings"
+msgstr "Obavijesti i signali"
+
+#: recommend.js:266
+msgid "Distracting websites"
+msgstr "Web-stranice koje ometaju"
+
+#: recommend.js:267
+msgid "It's hard to get started"
+msgstr "Teško je započeti"
+
+#: recommend.js:268
+msgid "I forget to take breaks"
+msgstr "Zaboravim na predahe"
+
+#: recommend.js:269
+msgid "Timers make me anxious"
+msgstr "Mjerači me čine tjeskobnim"
+
+#: recommend.js:275
+msgid "Which sites pull you away?"
+msgstr "Koje te stranice odvlače?"
+
+#: recommend.js:276
+msgid ""
+"I'll add these to the block list — edit it later in Settings → Advanced."
+msgstr ""
+"Dodat ću ih na popis blokiranja — uredi ga poslije u Postavke → Napredno."
+
+#: recommend.js:278
+msgid "Social media"
+msgstr "Društvene mreže"
+
+#: recommend.js:279
+msgid "Video & streaming"
+msgstr "Video i streaming"
+
+#: recommend.js:280
+msgid "News & forums"
+msgstr "Vijesti i forumi"
+
+#: recommend.js:281
+msgid "Shopping"
+msgstr "Kupnja"
+
+#: recommend.js:286
+msgid "What helps you concentrate?"
+msgstr "Što vam pomaže u koncentraciji?"
+
+#: recommend.js:287
+msgid "Sets the focus soundscape — change it anytime in Sounds."
+msgstr "Postavlja zvukove fokusa — promijenite ih bilo kada u Zvukovima."
+
+#: recommend.js:289
+msgid "Silence"
+msgstr "Tišina"
+
+#: recommend.js:290
+msgid "Soft background noise"
+msgstr "Mekani pozadinski šum"
+
+#: recommend.js:291
+msgid "A gentle chime to mark time"
+msgstr "Nježno zvonce za označavanje vremena"
+
+#: recommend.js:292
+msgid "I share my space — keep it quiet"
+msgstr "Dijelim prostor — neka bude tiho"
+
+#: recommend.js:298
+msgid "How often should the chime sound?"
+msgstr "Koliko često treba zazvoniti zvuk?"
+
+#: recommend.js:299
+msgid "A soft cue to check in with your focus."
+msgstr "Nježan znak da provjeriš svoj fokus."
+
+#: recommend.js:301
+msgid "Every 3 minutes"
+msgstr "Svake 3 minute"
+
+#: recommend.js:302
+msgid "Every 5 minutes"
+msgstr "Svakih 5 minuta"
+
+#: recommend.js:303
+msgid "Every 10 minutes"
+msgstr "Svakih 10 minuta"
+
+#: recommend.js:308
+msgid "How much do you want to get done today?"
+msgstr "Koliko želite obaviti danas?"
+
+#: recommend.js:309
+msgid "Sets your daily goal — no pressure, you can change it."
+msgstr "Postavlja vaš dnevni cilj — bez pritiska, možete ga promijeniti."
+
+#: recommend.js:311
+msgid "Just trying it out"
+msgstr "Samo isprobavam"
+
+#: recommend.js:312
+msgid "A light day (about 4)"
+msgstr "Lagan dan (oko 4)"
+
+#: recommend.js:313
+msgid "A full day (about 6)"
+msgstr "Pun dan (oko 6)"
+
+#: recommend.js:314
+msgid "A big push (about 8)"
+msgstr "Veliki iskorak (oko 8)"
+
+#: recommend.js:321
+msgid "Want breaks to start on their own?"
+msgstr "Želiš li da pauze počinju same?"
+
+#: recommend.js:322
+msgid "Helps you step away instead of pushing through."
+msgstr "Pomaže ti da se odmakneš umjesto da forsiraš."
+
+#: recommend.js:324
+msgid "Yes, start breaks automatically"
+msgstr "Da, pokreni pauze automatski"
+
+#: recommend.js:325
+msgid "No, I'll start them myself"
+msgstr "Ne, sam ću ih pokrenuti"
+
+#: visual.js:913
+#, javascript-format
+msgid "Focus: %s"
+msgstr "Fokus: %s"
+
+#. settings-schema.json->focus->title
+#: visual.js:914
+msgid "Focus"
+msgstr "Fokus"
+
+#. settings-schema.json->timer->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->panel->title
+#. settings-schema.json->sec_panel->title
+msgid "Panel"
+msgstr "Ploča"
+
+#. settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr "Izgled"
+
+#. settings-schema.json->sounds->title
+msgid "Sounds"
+msgstr "Zvukovi"
+
+#. settings-schema.json->notifications->title
+msgid "Push notifications"
+msgstr "Push obavijesti"
+
+#. settings-schema.json->advanced->title
+msgid "Advanced"
+msgstr "Napredno"
+
+#. settings-schema.json->sec_behavior->title
+msgid "Behavior"
+msgstr "Ponašanje"
+
+#. settings-schema.json->sec_hud->title
+msgid "On-screen focus cues"
+msgstr "Zaslonski znakovi fokusa"
+
+#. settings-schema.json->sec_theme->title
+msgid "Theme & frame"
+msgstr "Tema i okvir"
+
+#. settings-schema.json->sec_motion->title
+msgid "Motion & menu"
+msgstr "Pokret i izbornik"
+
+#. settings-schema.json->sec_goals->title
+msgid "Goals & flow"
+msgstr "Ciljevi i tok"
+
+#. settings-schema.json->sec_modes->title
+msgid "Modes"
+msgstr ""
+
+#. settings-schema.json->sec_sounds->title
+msgid "Alerts & effects"
+msgstr ""
+
+#. settings-schema.json->sec_tools->title
+msgid "Run a command"
+msgstr "Pokreni naredbu"
+
+#. settings-schema.json->sec_po->title
+msgid "Push notifications (Pushover)"
+msgstr "Push obavijesti (Pushover)"
+
+#. settings-schema.json->sec_po_messages->title
+msgid "Notification text"
+msgstr "Tekst obavijesti"
+
+#. settings-schema.json->sec_po_alerts->title
+msgid "Sound & priority"
+msgstr ""
+
+#. settings-schema.json->sec_blocking->title
+msgid "Distraction blocking (advanced)"
+msgstr "Blokiranje ometanja (napredno)"
+
+#. settings-schema.json->sec_shortcuts->title
+msgid "Keyboard shortcuts"
+msgstr "Tipkovnički prečaci"
+
+#. settings-schema.json->rhythm_hint_label->description
+msgid ""
+"Focus, break and cycle lengths come from presets — switch or edit them from "
+"the menu (Preset ▸)."
+msgstr ""
+
+#. settings-schema.json->pomodoro_duration->description
+msgid "Pomodoro Duration:"
+msgstr "Trajanje Pomodora:"
+
+#. settings-schema.json->pomodoro_duration->units
+#. settings-schema.json->short_break_duration->units
+#. settings-schema.json->long_break_duration->units
+msgid "minutes"
+msgstr "minuta"
+
+#. settings-schema.json->pomodoro_duration->tooltip
+msgid "Length of one focus block, in minutes (classic Pomodoro is 25)."
+msgstr "Trajanje jednog bloka fokusa, u minutama (klasični Pomodoro je 25)."
+
+#. settings-schema.json->short_break_duration->description
+msgid "Short Break Duration:"
+msgstr "Trajanje kratkog predaha:"
+
+#. settings-schema.json->short_break_duration->tooltip
+msgid "Length of the short break after each focus block (classic is 5)."
+msgstr "Trajanje kratkog predaha nakon svakog bloka fokusa (klasično je 5)."
+
+#. settings-schema.json->long_break_duration->description
+msgid "Long Break Duration:"
+msgstr "Trajanje dužeg predaha:"
+
+#. settings-schema.json->long_break_duration->tooltip
+msgid "Length of the longer break after a set of pomodoros (classic is 15–30)."
+msgstr "Trajanje dužeg predaha nakon seta pomodora (klasično 15–30)."
+
+#. settings-schema.json->pomodori_number->description
+msgid "Number of pomodori before long break:"
+msgstr "Broj pomodora prije dužeg predaha:"
+
+#. settings-schema.json->pomodori_number->tooltip
+msgid "How many focus blocks to complete before the long break (classic is 4)."
+msgstr "Koliko blokova fokusa završiti prije dužeg predaha (klasično je 4)."
+
+#. settings-schema.json->start_automatically_on_load->description
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "Pokreni pomodoro mjerač čim se aplet učita"
+
+#. settings-schema.json->start_automatically_on_load->tooltip
+msgid ""
+"Begin a focus session as soon as Cinnamon starts or the applet is added."
+msgstr "Započni sesiju fokusa čim se Cinnamon pokrene ili se aplet doda."
+
+#. settings-schema.json->session_recovery->description
+msgid ""
+"Recover an in-progress focus session after a Cinnamon restart (resume "
+"manually)"
+msgstr ""
+"Obnovi sesiju fokusa u tijeku nakon ponovnog pokretanja Cinnamona (nastavi "
+"ručno)"
+
+#. settings-schema.json->session_recovery->tooltip
+msgid ""
+"If Cinnamon restarts mid-focus, the session is remembered so you can resume "
+"it from the menu — it won't auto-start."
+msgstr ""
+"Ako se Cinnamon ponovno pokrene usred fokusa, sesija se pamti pa je možete "
+"nastaviti iz izbornika — neće se sama pokrenuti."
+
+#. settings-schema.json->show_dialog_messages->description
+msgid "Show a pop-up prompt at each phase change"
+msgstr ""
+
+#. settings-schema.json->show_dialog_messages->tooltip
+msgid ""
+"Show pop-up dialogs at the end of each phase (off keeps it quiet — only on-"
+"screen cues)."
+msgstr ""
+"Prikaži skočne dijaloge na kraju svake faze (isključeno je tiho — samo "
+"zaslonski znakovi)."
+
+#. settings-schema.json->auto_start_next->description
+msgid "Automatically start the next phase"
+msgstr ""
+
+#. settings-schema.json->auto_start_next->tooltip
+msgid ""
+"When a phase ends, start the next one (focus or break) automatically instead "
+"of waiting."
+msgstr ""
+
+#. settings-schema.json->panel_icon_style->description
+msgid "Panel icon"
+msgstr "Ikona na ploči"
+
+#. settings-schema.json->panel_icon_style->options
+msgid "Progress ring with icon"
+msgstr "Prsten napretka s ikonom"
+
+#. settings-schema.json->panel_icon_style->options
+msgid "Symbolic icon"
+msgstr "Simbolička ikona"
+
+#. settings-schema.json->panel_icon_style->options
+msgid "Custom icon"
+msgstr "Prilagođena ikona"
+
+#. settings-schema.json->panel_icon_style->options
+msgid "No icon (timer only)"
+msgstr "Bez ikone (samo mjerač vremena)"
+
+#. settings-schema.json->panel_icon_style->tooltip
+msgid ""
+"What to show in the panel: a progress ring with the state icon inside "
+"(recommended), a plain symbolic icon, your own custom icon, or no icon at "
+"all. The timer text is a separate option below."
+msgstr ""
+"Što prikazati na ploči: prsten napretka s ikonom stanja unutar njega "
+"(preporučeno), simboličku ikonu, vlastitu ikonu, ili bez ikone. Tekst "
+"mjerača vremena postavlja se zasebno ispod."
+
+#. settings-schema.json->panel_custom_icon->description
+msgid "Custom panel icon"
+msgstr "Prilagođena ikona ploče"
+
+#. settings-schema.json->panel_custom_icon->tooltip
+msgid ""
+"Pick your own panel icon — a theme icon name or an image file. Used when "
+"Panel icon is set to Custom icon."
+msgstr ""
+"Odaberite vlastitu ikonu ploče — naziv ikone teme ili slikovnu datoteku. "
+"Koristi se kada je Ikona ploče postavljena na Prilagođena ikona."
+
+#. settings-schema.json->show_timer->description
+msgid "Show the pomodoro timer in the applet panel"
+msgstr "Prikaži pomodoro odbrojavanje u panelu apleta"
+
+#. settings-schema.json->show_timer->tooltip
+msgid "Show the remaining time as text in the panel."
+msgstr "Prikaži preostalo vrijeme kao tekst u ploči."
+
+#. settings-schema.json->show_seconds->description
+msgid "Show seconds in the panel timer"
+msgstr "Prikaži sekunde u mjeraču na ploči"
+
+#. settings-schema.json->show_seconds->tooltip
+msgid "Off shows only the remaining minutes on the panel (less distracting)."
+msgstr "Isključeno prikazuje samo preostale minute na ploči (manje ometa)."
+
+#. settings-schema.json->hotkey->description
+msgid "Shortcut: open the applet menu"
+msgstr "Prečac: otvori izbornik apleta"
+
+#. settings-schema.json->hotkey->tooltip
+msgid "Keyboard shortcut to open or close the applet menu."
+msgstr "Tipkovnički prečac za otvaranje ili zatvaranje izbornika apleta."
+
+#. settings-schema.json->hotkey_toggle->description
+msgid "Shortcut: start / pause the timer"
+msgstr "Prečac: pokreni / pauziraj mjerač"
+
+#. settings-schema.json->hotkey_toggle->tooltip
+msgid "Keyboard shortcut to start or pause the timer."
+msgstr "Tipkovnički prečac za pokretanje ili pauziranje mjerača."
+
+#. settings-schema.json->hotkey_skip->description
+msgid "Shortcut: skip to the next step"
+msgstr "Prečac: preskoči na sljedeći korak"
+
+#. settings-schema.json->hotkey_skip->tooltip
+msgid "Keyboard shortcut to skip to the next phase (focus ↔ break)."
+msgstr "Tipkovnički prečac za prijelaz na sljedeću fazu (fokus ↔ predah)."
+
+#. settings-schema.json->hotkey_distraction->description
+msgid "Shortcut: capture a distraction"
+msgstr ""
+
+#. settings-schema.json->hotkey_distraction->tooltip
+msgid ""
+"Keyboard shortcut to pop up a quick note for a distracting thought, without "
+"opening the menu."
+msgstr ""
+
+#. settings-schema.json->start_on_click->description
+msgid "Start the timer with a single click when idle"
+msgstr "Pokreni mjerač jednim klikom kad miruje"
+
+#. settings-schema.json->start_on_click->tooltip
+msgid ""
+"When no timer is running, left-clicking the applet starts a focus session "
+"directly instead of opening the menu."
+msgstr ""
+"Kad mjerač ne radi, lijevi klik na aplet izravno pokreće sesiju fokusa "
+"umjesto otvaranja izbornika."
+
+#. settings-schema.json->panel_scroll_control->description
+msgid "Control the timer with the mouse on the panel"
+msgstr "Upravljaj mjeračem mišem na ploči"
+
+#. settings-schema.json->panel_scroll_control->tooltip
+msgid ""
+"Scroll up on the applet to start or resume, scroll down to pause, and middle-"
+"click to skip the phase. Turn this off if you sometimes scroll over the "
+"panel by accident."
+msgstr ""
+"Pomak kotačića prema gore pokreće ili nastavlja, prema dolje pauzira, a "
+"srednji klik preskače fazu. Isključite ako ponekad slučajno pomičete kotačić "
+"preko ploče."
+
+#. settings-schema.json->scroll_action->description
+msgid "Mouse-wheel action on the panel"
+msgstr "Radnja kotačića miša na ploči"
+
+#. settings-schema.json->scroll_action->options
+msgid "Start / pause the timer"
+msgstr "Pokreni / pauziraj mjerač"
+
+#. settings-schema.json->scroll_action->options
+msgid "Adjust the focus length"
+msgstr "Podesi trajanje fokusa"
+
+#. settings-schema.json->scroll_action->tooltip
+msgid ""
+"What the mouse wheel does on the applet: start/pause the timer, or change "
+"the focus length (when idle). Middle-click always skips to the next phase."
+msgstr ""
+"Što kotačić miša radi na apletu: pokreće/pauzira mjerač ili mijenja trajanje "
+"fokusa (kad miruje). Srednji klik uvijek preskače na sljedeću fazu."
+
+#. settings-schema.json->focus_show_task_chip->description
+msgid "Show the current task as an on-screen chip during focus"
+msgstr "Prikaži trenutni zadatak kao zaslonsku pločicu tijekom fokusa"
+
+#. settings-schema.json->focus_show_task_chip->tooltip
+msgid "Show the current task in a small on-screen chip while focusing."
+msgstr ""
+"Prikaži trenutni zadatak u maloj zaslonskoj pločici tijekom fokusiranja."
+
+#. settings-schema.json->focus_start_ritual->description
+msgid ""
+"Start ritual: brief centered 'Focus: <task>' and a smooth fade-in when focus "
+"begins"
+msgstr ""
+"Ritual početka: kratko centrirano 'Fokus: <task>' i glatko pojavljivanje na "
+"početku fokusa"
+
+#. settings-schema.json->focus_start_ritual->tooltip
+msgid "Briefly show 'Focus: <task>' with a smooth fade-in when focus begins."
+msgstr ""
+"Nakratko prikaži 'Fokus: <task>' uz glatko pojavljivanje na početku fokusa."
+
+#. settings-schema.json->prompt_focus_task->description
+msgid "Ask which task to focus on before starting"
+msgstr "Pitaj za zadatak fokusa prije početka"
+
+#. settings-schema.json->prompt_focus_task->tooltip
+msgid ""
+"When off, a focus session starts immediately with your current task instead "
+"of opening the task picker. If a task is required and none is set, the "
+"picker still appears."
+msgstr ""
+"Kada je isključeno, sesija fokusa počinje odmah s trenutačnim zadatkom "
+"umjesto otvaranja birača zadataka. Ako je zadatak obavezan, a nijedan nije "
+"postavljen, birač se ipak pojavljuje."
+
+#. settings-schema.json->require_focus_task->description
+msgid "Require a focus task before starting"
+msgstr "Zahtijevaj zadatak fokusa prije početka"
+
+#. settings-schema.json->require_focus_task->tooltip
+msgid "Ask for a task name before a focus session can start."
+msgstr "Pitaj za naziv zadatka prije nego što sesija fokusa može početi."
+
+#. settings-schema.json->theme_preset->description
+msgid "Color theme"
+msgstr "Tema boja"
+
+#. settings-schema.json->theme_preset->options
+msgid "Warm (amber / green)"
+msgstr "Topla (jantar / zelena)"
+
+#. settings-schema.json->theme_preset->options
+msgid "Cool (teal)"
+msgstr "Hladna (tirkizna)"
+
+#. settings-schema.json->theme_preset->options
+msgid "Monochrome"
+msgstr "Monokromatska"
+
+#. settings-schema.json->theme_preset->tooltip
+msgid ""
+"Color scheme for accents and on-screen cues. Choose Custom to set your own "
+"focus/break colors below."
+msgstr ""
+"Shema boja za naglaske i zaslonske znakove. Odaberite Custom za vlastite "
+"boje fokusa/predaha niže."
+
+#. settings-schema.json->accent_focus_color->description
+msgid "Custom focus accent color"
+msgstr "Prilagođena boja naglaska fokusa"
+
+#. settings-schema.json->accent_focus_color->tooltip
+msgid "Accent color during focus (used only when the theme is Custom)."
+msgstr "Boja naglaska tijekom fokusa (koristi se samo kada je tema Custom)."
+
+#. settings-schema.json->accent_break_color->description
+msgid "Custom break accent color"
+msgstr "Prilagođena boja naglaska predaha"
+
+#. settings-schema.json->accent_break_color->tooltip
+msgid "Accent color during breaks (used only when the theme is Custom)."
+msgstr "Boja naglaska tijekom predaha (koristi se samo kada je tema Custom)."
+
+#. settings-schema.json->frame_style->description
+msgid "On-screen focus frame style"
+msgstr "Stil zaslonskog okvira fokusa"
+
+#. settings-schema.json->frame_style->options
+msgid "Glow"
+msgstr "Sjaj"
+
+#. settings-schema.json->frame_style->options
+msgid "Classic border"
+msgstr "Klasičan rub"
+
+#. settings-schema.json->frame_style->options
+msgid "Corners only"
+msgstr "Samo kutovi"
+
+#. settings-schema.json->frame_style->options
+#. settings-schema.json->task_celebration->options
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Off"
+msgstr "Isključeno"
+
+#. settings-schema.json->frame_style->tooltip
+msgid ""
+"Style of the on-screen frame that traces focus progress: a soft Glow, a "
+"Classic border, just the Corners, or Off."
+msgstr ""
+"Stil zaslonskog okvira koji prati napredak fokusa: meki Sjaj, Klasičan rub, "
+"samo Kutovi ili Isključeno."
+
+#. settings-schema.json->glow_intensity->description
+msgid "Glow intensity"
+msgstr "Intenzitet sjaja"
+
+#. settings-schema.json->glow_intensity->tooltip
+msgid ""
+"How bright the on-screen edge glow is during focus — higher is more visible, "
+"lower is subtler."
+msgstr ""
+"Koliko jako svijetli rub zaslona tijekom fokusa — više je vidljivije, manje "
+"je suptilnije."
+
+#. settings-schema.json->breathing_pattern->description
+msgid "Breathing pattern"
+msgstr "Obrazac disanja"
+
+#. settings-schema.json->breathing_pattern->options
+msgid "Box 4-4-4-4"
+msgstr "Kutija 4-4-4-4"
+
+#. settings-schema.json->breathing_pattern->options
+msgid "4-7-8"
+msgstr "4-7-8"
+
+#. settings-schema.json->breathing_pattern->options
+msgid "Relaxing 4-6"
+msgstr "Opuštajuće 4-6"
+
+#. settings-schema.json->breathing_pattern->tooltip
+msgid ""
+"Breathing rhythm for the guide: Box (4-4-4-4), calming 4-7-8, or relaxed 4-6 "
+"— seconds per phase."
+msgstr ""
+"Ritam disanja za vodič: Kutija (4-4-4-4), umirujuće 4-7-8 ili opušteno 4-6 — "
+"sekunde po fazi."
+
+#. settings-schema.json->chip_position->description
+msgid "Task chip position"
+msgstr "Položaj pločice zadatka"
+
+#. settings-schema.json->chip_position->options
+msgid "Bottom-right"
+msgstr "Dolje desno"
+
+#. settings-schema.json->chip_position->options
+msgid "Bottom-left"
+msgstr "Dolje lijevo"
+
+#. settings-schema.json->chip_position->options
+msgid "Top-right"
+msgstr "Gore desno"
+
+#. settings-schema.json->chip_position->options
+msgid "Top-left"
+msgstr "Gore lijevo"
+
+#. settings-schema.json->chip_position->tooltip
+msgid "Which screen corner the on-screen task chip appears in."
+msgstr "U kojem se kutu zaslona pojavljuje pločica zadatka."
+
+#. settings-schema.json->reduce_motion->description
+msgid "Reduce motion (disable focus animations)"
+msgstr "Smanji pokret (onemogući animacije fokusa)"
+
+#. settings-schema.json->reduce_motion->tooltip
+msgid "Disable focus animations (fades, pulsing, breathing)."
+msgstr "Onemogući animacije fokusa (pojavljivanja, pulsiranje, disanje)."
+
+#. settings-schema.json->menu_font_scale->description
+msgid "Menu font scale (%)"
+msgstr "Mjerilo fonta izbornika (%)"
+
+#. settings-schema.json->menu_font_scale->tooltip
+msgid "Make the applet menu's text larger or smaller (100% = default size)."
+msgstr ""
+"Povećajte ili smanjite tekst izbornika apleta (100% = zadana veličina)."
+
+#. settings-schema.json->preview_appearance_button->description
+msgid "Preview focus frame"
+msgstr "Pregledaj okvir fokusa"
+
+#. settings-schema.json->preview_appearance_button->tooltip
+msgid ""
+"Briefly show the on-screen focus frame and task chip with the current colors "
+"and style (works when no timer is running)."
+msgstr ""
+"Nakratko prikaži zaslonski okvir fokusa i pločicu zadatka s trenutnim bojama "
+"i stilom (radi kad mjerač ne radi)."
+
+#. settings-schema.json->preview_breathing_button->description
+msgid "Preview breathing guide"
+msgstr "Pregledaj vodič disanja"
+
+#. settings-schema.json->preview_breathing_button->tooltip
+msgid "Briefly show the breathing guide with the selected pattern."
+msgstr "Nakratko prikaži vodič disanja s odabranim obrascem."
+
+#. settings-schema.json->daily_goal->description
+msgid "Daily focus goal (pomodori, 0 = off)"
+msgstr "Dnevni cilj fokusa (pomodori, 0 = isključeno)"
+
+#. settings-schema.json->daily_goal->tooltip
+msgid "Target pomodoros per day (0 turns off the goal and streak)."
+msgstr "Ciljani broj pomodora dnevno (0 isključuje cilj i niz)."
+
+#. settings-schema.json->task_celebration->description
+msgid "Celebrate when a task is completed"
+msgstr ""
+
+#. settings-schema.json->task_celebration->options
+msgid "Subtle (glow + check)"
+msgstr ""
+
+#. settings-schema.json->task_celebration->options
+msgid "Confetti"
+msgstr ""
+
+#. settings-schema.json->task_celebration->tooltip
+msgid ""
+"A short celebration when you complete a task that met its 🍅 estimate (or "
+"earned at least one). Confetti respects reduce-motion."
+msgstr ""
+
+#. settings-schema.json->task_celebration_preview_button->description
+msgid "Preview the celebration"
+msgstr ""
+
+#. settings-schema.json->task_celebration_preview_button->tooltip
+msgid "Play the task-completion celebration once to see how it looks."
+msgstr ""
+
+#. settings-schema.json->auto_pause_idle->description
+msgid "Auto-pause focus when you are away (idle)"
+msgstr "Automatski pauziraj fokus kad ste odsutni (neaktivni)"
+
+#. settings-schema.json->auto_pause_idle->tooltip
+msgid "Pause focus automatically when you step away from the computer."
+msgstr "Automatski pauziraj fokus kad se udaljite od računala."
+
+#. settings-schema.json->auto_pause_idle_minutes->description
+msgid "Idle minutes before auto-pause"
+msgstr "Minute neaktivnosti prije automatske pauze"
+
+#. settings-schema.json->auto_pause_idle_minutes->tooltip
+msgid "How long you can be away before focus auto-pauses, in minutes."
+msgstr ""
+"Koliko dugo možete biti odsutni prije nego se fokus automatski pauzira, u "
+"minutama."
+
+#. settings-schema.json->auto_resume_on_activity->description
+msgid "Resume automatically when you return"
+msgstr "Automatski nastavi kad se vratite"
+
+#. settings-schema.json->auto_resume_on_activity->tooltip
+msgid ""
+"Resume a paused focus session automatically when you return to the computer."
+msgstr "Automatski nastavi pauziranu sesiju fokusa kad se vratite računalu."
+
+#. settings-schema.json->flow_extend->description
+msgid "Offer to extend focus when a pomodoro ends (stay in flow)"
+msgstr "Ponudi produljenje fokusa kad pomodoro završi (ostanite u zanosu)"
+
+#. settings-schema.json->flow_extend->tooltip
+msgid "When a pomodoro ends, offer to extend it to stay in flow."
+msgstr "Kad pomodoro završi, ponudi produljenje da ostanete u zanosu."
+
+#. settings-schema.json->flow_extend_minutes->description
+msgid "Extend amount (minutes)"
+msgstr "Količina produljenja (minute)"
+
+#. settings-schema.json->flow_extend_minutes->tooltip
+msgid "How many extra minutes the 'extend focus' option adds."
+msgstr "Koliko dodatnih minuta dodaje opcija 'produlji fokus'."
+
+#. settings-schema.json->flow_soft_landing->description
+msgid "Soft landing: don't break focus while you're still working"
+msgstr "Meko slijetanje: ne prekidaj fokus dok još radiš"
+
+#. settings-schema.json->flow_soft_landing->tooltip
+msgid ""
+"When a focus pomodoro ends while you're actively working, hold the break "
+"until a natural pause instead of interrupting you. Off by default; only "
+"applies when 'auto-continue to break' is off."
+msgstr ""
+"Kad fokus-pomodoro završi dok aktivno radiš, pauza pričeka prirodni predah "
+"umjesto da te prekine. Isključeno prema zadanome; vrijedi samo kad je "
+"«automatski prijelaz na pauzu» isključen."
+
+#. settings-schema.json->flow_soft_landing_behavior->description
+msgid "When focus ends and you're still working"
+msgstr "Kad fokus završi, a ti još radiš"
+
+#. settings-schema.json->flow_soft_landing_behavior->options
+msgid "Wait for a natural pause"
+msgstr "Čekaj prirodni predah"
+
+#. settings-schema.json->flow_soft_landing_behavior->options
+msgid "Quietly extend focus"
+msgstr "Tiho produlji fokus"
+
+#. settings-schema.json->flow_soft_landing_behavior->tooltip
+msgid ""
+"Wait: hold quietly at the end until you pause, then offer the break. Quietly "
+"extend: silently add focus time (the 'Extend amount' above) and keep going, "
+"re-checking each time."
+msgstr ""
+"Čekaj: tiho pričekaj na kraju dok ne zastaneš, zatim ponudi pauzu. Tiho "
+"produlji: neprimjetno dodaj vrijeme fokusa («iznos produljenja» gore) i "
+"nastavi, provjeravajući svaki put."
+
+#. settings-schema.json->focus_ambient_choice->description
+msgid "Ambient sound during focus"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "White noise"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Pink noise"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Brown noise"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Rain"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Sea"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Fan"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Wind"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Stream"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->options
+msgid "Street"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_choice->tooltip
+msgid ""
+"Loop a calming sound during focus. White/pink/brown noise and rain/sea are "
+"built in; pick \"Custom file\" to use your own."
+msgstr ""
+
+#. settings-schema.json->focus_ambient_sound->description
+msgid "Play an ambient sound during focus"
+msgstr "Reproduciraj zvuk okoline tijekom fokusa"
+
+#. settings-schema.json->focus_ambient_sound->tooltip
+msgid ""
+"Loop a soft ambient sound during focus — the built-in brown noise, or your "
+"own file below."
+msgstr ""
+"Vrti meki zvuk okoline tijekom fokusa — ugrađeni smeđi šum ili vlastita "
+"datoteka ispod."
+
+#. settings-schema.json->focus_ambient_volume->description
+msgid "Ambient volume"
+msgstr "Glasnoća pozadine"
+
+#. settings-schema.json->focus_ambient_volume->tooltip
+msgid "Volume of the ambient sound (0 = silent)."
+msgstr "Glasnoća zvuka okoline (0 = tiho)."
+
+#. settings-schema.json->focus_ambient_preview_button->description
+msgid "▶ Preview"
+msgstr ""
+
+#. settings-schema.json->focus_ambient_preview_button->tooltip
+msgid "Play a short sample of the chosen ambient sound at the set volume."
+msgstr ""
+
+#. settings-schema.json->break_breathing->description
+msgid "Show a breathing guide during breaks"
+msgstr "Prikaži vodič disanja tijekom predaha"
+
+#. settings-schema.json->break_breathing->tooltip
+msgid ""
+"During breaks, show an expanding and contracting circle that paces your "
+"breathing to help you unwind."
+msgstr ""
+"Tijekom predaha prikazuje krug koji se širi i skuplja te zadaje ritam "
+"disanja da se opustite."
+
+#. settings-schema.json->break_lock_enabled->description
+msgid "Lock the screen during breaks"
+msgstr ""
+
+#. settings-schema.json->break_lock_enabled->tooltip
+msgid ""
+"When a break starts, show a brief warning and then lock the screen so you "
+"actually step away. Never locks during focus; off by default."
+msgstr ""
+
+#. settings-schema.json->break_lock_long_only->description
+msgid "Lock only on long breaks"
+msgstr ""
+
+#. settings-schema.json->break_lock_long_only->tooltip
+msgid "Only lock for the longer breaks, not every short break."
+msgstr ""
+
+#. settings-schema.json->zen_mode_enabled->description
+msgid ""
+"Enable Zen mode (focus spotlight — dims other windows, toggled from the menu)"
+msgstr ""
+
+#. settings-schema.json->zen_mode_enabled->tooltip
+msgid ""
+"Allow the focus spotlight, toggled from the menu: while focusing, the other "
+"windows dim so the one you're working in stands out."
+msgstr ""
+
+#. settings-schema.json->zen_dim_strength->units
+msgid "%"
+msgstr ""
+
+#. settings-schema.json->zen_dim_strength->description
+msgid "Zen spotlight: dim strength"
+msgstr ""
+
+#. settings-schema.json->zen_dim_strength->tooltip
+msgid ""
+"How much to darken the other windows while a focus session runs (higher = "
+"darker)."
+msgstr ""
+
+#. settings-schema.json->zen_dim_desktop->description
+msgid "Zen spotlight: also dim the desktop wallpaper"
+msgstr ""
+
+#. settings-schema.json->zen_dim_desktop->tooltip
+msgid "Darken the desktop background too, not just the other windows."
+msgstr ""
+
+#. settings-schema.json->strict_focus->description
+msgid "Strict focus: no pause or skip during a focus block"
+msgstr "Strogi fokus: bez pauze i preskakanja tijekom bloka fokusa"
+
+#. settings-schema.json->strict_focus->tooltip
+msgid ""
+"While a focus block is running, hide pause and skip so you commit to it. You "
+"can still Reset to abandon the session — it's never a hard lock."
+msgstr ""
+"Dok blok fokusa traje, sakrij pauzu i preskakanje da mu se posvetite. I "
+"dalje možete Poništiti za napuštanje sesije — nikad nije čvrsto zaključano."
+
+#. settings-schema.json->focus_dnd->description
+msgid "Mute notifications while focusing (Do Not Disturb)"
+msgstr "Utišaj obavijesti tijekom fokusiranja (Ne ometaj)"
+
+#. settings-schema.json->focus_dnd->tooltip
+msgid "Mute Cinnamon notifications while focusing; restored afterwards."
+msgstr "Utišaj Cinnamon obavijesti tijekom fokusiranja; poslije se vraćaju."
+
+#. settings-schema.json->pause_media->description
+msgid "Pause music & video on breaks and pauses"
+msgstr "Pauziraj glazbu i videozapise tijekom odmora i pauza"
+
+#. settings-schema.json->pause_media->tooltip
+msgid ""
+"Pauses any playing media (browser tab, music app via MPRIS) when a break or "
+"pause starts, and resumes the same players when focus continues."
+msgstr ""
+"Pauzira sve medije koji se reproduciraju (karticu preglednika, glazbenu "
+"aplikaciju putem MPRIS-a) kad započne odmor ili pauza i nastavlja iste "
+"reproduktore kad se fokus nastavi."
+
+#. settings-schema.json->run_command_enabled->description
+msgid "Run a command when focus or a break starts"
+msgstr "Pokreni naredbu kad fokus ili predah počne"
+
+#. settings-schema.json->run_command_enabled->tooltip
+msgid "Run a command of your choice when focus or a break starts."
+msgstr "Pokreni naredbu po izboru kad fokus ili predah počne."
+
+#. settings-schema.json->focus_start_command->description
+msgid "Command to run when focus starts"
+msgstr "Naredba za pokretanje na početku fokusa"
+
+#. settings-schema.json->focus_start_command->tooltip
+msgid ""
+"Pick a script to run when a focus block starts (e.g. enable Do Not Disturb). "
+"You can also type a command."
+msgstr ""
+
+#. settings-schema.json->break_start_command->description
+msgid "Command to run when a break starts"
+msgstr "Naredba za pokretanje na početku predaha"
+
+#. settings-schema.json->break_start_command->tooltip
+msgid ""
+"Pick a script to run when a break starts (e.g. clear your status). You can "
+"also type a command."
+msgstr ""
+
+#. settings-schema.json->goal_command->description
+msgid "Command to run when the daily goal is reached"
+msgstr ""
+
+#. settings-schema.json->goal_command->tooltip
+msgid ""
+"Pick a script to run when you reach your daily goal (e.g. a small "
+"celebration). You can also type a command."
+msgstr ""
+
+#. settings-schema.json->pushover_enabled->description
+msgid "Send push notifications to your phone (Pushover)"
+msgstr "Šalji push obavijesti na telefon (Pushover)"
+
+#. settings-schema.json->pushover_enabled->tooltip
+msgid ""
+"Send a push notification to your devices via Pushover when focus or breaks "
+"start."
+msgstr ""
+"Šalji push obavijest na uređaje putem Pushovera kad fokus ili predasi počnu."
+
+#. settings-schema.json->pushover_help->description
+msgid ""
+"Free phone/desktop alerts. Sign up at pushover.net and paste your keys below."
+msgstr ""
+"Besplatne obavijesti na telefon/računalo. Registrirajte se na pushover.net i "
+"zalijepite ključeve ispod."
+
+#. settings-schema.json->pushover_user_key->description
+msgid "Pushover user key"
+msgstr "Pushover korisnički ključ"
+
+#. settings-schema.json->pushover_user_key->tooltip
+msgid "Your Pushover user key (from your Pushover account)."
+msgstr "Vaš Pushover korisnički ključ (iz vašeg Pushover računa)."
+
+#. settings-schema.json->pushover_app_token->description
+msgid "Pushover application API token"
+msgstr "Pushover API token aplikacije"
+
+#. settings-schema.json->pushover_app_token->tooltip
+msgid "API token of your Pushover application (create one at pushover.net)."
+msgstr "API token vaše Pushover aplikacije (izradite ga na pushover.net)."
+
+#. settings-schema.json->pushover_test_button->description
+msgid "Send a test notification"
+msgstr "Pošalji probnu obavijest"
+
+#. settings-schema.json->pushover_test_button->tooltip
+msgid "Send a test message now to confirm your user key and app token work."
+msgstr ""
+"Pošalji probnu poruku sada da potvrdite da korisnički ključ i token "
+"aplikacije rade."
+
+#. settings-schema.json->pushover_customize->description
+msgid "Customize messages, sounds and priority"
+msgstr "Prilagodi poruke, zvukove i prioritet"
+
+#. settings-schema.json->pushover_customize->tooltip
+msgid ""
+"Show options to change the text, sound and priority for each event. Off uses "
+"sensible defaults."
+msgstr ""
+"Prikaži opcije za promjenu teksta, zvuka i prioriteta za svaki događaj. "
+"Isključeno koristi razumne zadane vrijednosti."
+
+#. settings-schema.json->pushover_title->description
+msgid "Notification title"
+msgstr "Naslov obavijesti"
+
+#. settings-schema.json->pushover_title->tooltip
+msgid "Title shown on the push notifications."
+msgstr "Naslov prikazan na push obavijestima."
+
+#. settings-schema.json->pushover_msg_focus->description
+msgid "Message when focus starts"
+msgstr "Poruka na početku fokusa"
+
+#. settings-schema.json->pushover_msg_focus->tooltip
+msgid ""
+"Sent when a focus session starts. {task} and {minutes} are substituted. "
+"Leave empty to send nothing."
+msgstr ""
+"Šalje se na početku sesije fokusa. {task} i {minutes} se zamjenjuju. "
+"Ostavite prazno da se ništa ne šalje."
+
+#. settings-schema.json->pushover_msg_resume->description
+msgid "Message when a break ends"
+msgstr "Poruka na kraju predaha"
+
+#. settings-schema.json->pushover_msg_resume->tooltip
+msgid "Sent when a break finishes. Leave empty to send no message."
+msgstr "Šalje se na kraju predaha. Ostavite prazno da se ne šalje poruka."
+
+#. settings-schema.json->enable_blocking->description
+msgid "Block distracting sites"
+msgstr ""
+
+#. settings-schema.json->enable_blocking->tooltip
+msgid ""
+"When on, the sites below are blocked right now and stay blocked until you "
+"turn this off. Run \"Set up passwordless blocking\" once so toggling doesn't "
+"ask for a password."
+msgstr ""
+
+#. settings-schema.json->block_domains->description
+msgid "Domains to block (e.g. youtube.com)"
+msgstr "Domene za blokiranje (npr. youtube.com)"
+
+#. settings-schema.json->block_domains->columns->title
+msgid "Domain"
+msgstr "Domena"
+
+#. settings-schema.json->block_domains->tooltip
+msgid ""
+"Domains to block while blocking is on, one per row (e.g. youtube.com, www."
+"youtube.com)."
+msgstr ""
+
+#. settings-schema.json->sox-info->description
+msgid ""
+"No sound backend found — install GSound or a player like pulseaudio-utils."
+msgstr ""
+"Zvučni pozadinski sustav nije pronađen — instalirajte GSound ili player "
+"poput pulseaudio-utils."
+
+#. settings-schema.json->timer_sound->description
+msgid "Play Timer Sound"
+msgstr "Reproduciraj zvuk odbrojavanja"
+
+#. settings-schema.json->timer_sound->tooltip
+msgid "Play a soft ticking sound while focusing."
+msgstr "Puštaj tiho kucanje tijekom fokusiranja."
+
+#. settings-schema.json->timer_sound_file->description
+msgid "Timer Sound File"
+msgstr "Datoteka zvuka odbrojavanja"
+
+#. settings-schema.json->timer_sound_file->tooltip
+msgid "Sound file for the ticking (leave empty for the built-in tone)."
+msgstr "Datoteka zvuka za kucanje (ostavite prazno za ugrađeni ton)."
+
+#. settings-schema.json->timer_sound_volume->description
+#. settings-schema.json->break_sound_volume->description
+#. settings-schema.json->warn_sound_volume->description
+#. settings-schema.json->start_sound_volume->description
+msgid "Sound volume:"
+msgstr "Glasnoća zvuka:"
+
+#. settings-schema.json->timer_sound_volume->tooltip
+msgid "Volume of the ticking sound (0 = silent)."
+msgstr "Glasnoća kucanja (0 = tiho)."
+
+#. settings-schema.json->break_sound->description
+msgid "Play Break Sound"
+msgstr "Reproduciraj zvuk predaha"
+
+#. settings-schema.json->break_sound->tooltip
+msgid "Play a sound when a break begins."
+msgstr "Puštaj zvuk na početku predaha."
+
+#. settings-schema.json->break_sound_file->description
+msgid "Break Sound File"
+msgstr "Datoteka zvuka predaha"
+
+#. settings-schema.json->break_sound_file->tooltip
+msgid "Sound file played when a break begins."
+msgstr "Datoteka zvuka koja se pušta na početku predaha."
+
+#. settings-schema.json->break_sound_volume->tooltip
+msgid "Volume of the break sound (0 = silent)."
+msgstr "Glasnoća zvuka predaha (0 = tiho)."
+
+#. settings-schema.json->warn_sound->description
+msgid "Play Warn Sound"
+msgstr "Reproduciraj zvuk upozorenja"
+
+#. settings-schema.json->warn_sound->tooltip
+msgid "Play a warning sound shortly before a focus block ends."
+msgstr "Puštaj zvuk upozorenja malo prije završetka bloka fokusa."
+
+#. settings-schema.json->warn_sound_delay->description
+msgid "Warn Delay (in secs):"
+msgstr "Odgoda upozorenja (u sekundama):"
+
+#. settings-schema.json->warn_sound_delay->tooltip
+msgid "How many seconds before the end the warning sound plays."
+msgstr "Koliko sekundi prije kraja se pušta zvuk upozorenja."
+
+#. settings-schema.json->warn_sound_file->description
+msgid "Warn Sound File"
+msgstr "Datoteka zvuka upozorenja"
+
+#. settings-schema.json->warn_sound_file->tooltip
+msgid "Sound file used for the warning."
+msgstr "Datoteka zvuka za upozorenje."
+
+#. settings-schema.json->warn_sound_volume->tooltip
+msgid "Volume of the warning sound (0 = silent)."
+msgstr "Glasnoća upozorenja (0 = tiho)."
+
+#. settings-schema.json->start_sound->description
+msgid "Play Start Sound"
+msgstr "Reproduciraj zvuk pokretanja"
+
+#. settings-schema.json->start_sound->tooltip
+msgid "Play a sound when a focus block starts."
+msgstr "Puštaj zvuk na početku bloka fokusa."
+
+#. settings-schema.json->start_sound_file->description
+msgid "Start Sound File"
+msgstr "Datoteka zvuka pokretanja"
+
+#. settings-schema.json->start_sound_file->tooltip
+msgid "Sound file played when focus starts."
+msgstr "Datoteka zvuka koja se pušta na početku fokusa."
+
+#. settings-schema.json->start_sound_volume->tooltip
+msgid "Volume of the start sound (0 = silent)."
+msgstr "Glasnoća zvuka pokretanja (0 = tiho)."
+
+#. settings-schema.json->interval_chime->description
+msgid "Play a chime at a regular interval during focus"
+msgstr "Puštaj zvonce u pravilnim razmacima tijekom fokusa"
+
+#. settings-schema.json->interval_chime->tooltip
+msgid "Play a sound at a fixed interval during focus to mark time passing."
+msgstr ""
+"Puštaj zvuk u fiksnim razmacima tijekom fokusa za označavanje protoka "
+"vremena."
+
+#. settings-schema.json->interval_chime_seconds->description
+msgid "Chime interval (seconds):"
+msgstr "Razmak zvonca (sekunde):"
+
+#. settings-schema.json->interval_chime_seconds->tooltip
+msgid "Seconds between chimes during focus."
+msgstr "Sekunde između zvonaca tijekom fokusa."
+
+#. settings-schema.json->interval_chime_file->description
+msgid "Chime sound file"
+msgstr "Datoteka zvuka zvonca"
+
+#. settings-schema.json->interval_chime_file->tooltip
+msgid "Sound file used for the interval chime."
+msgstr "Datoteka zvuka za intervalno zvonce."
+
+#. settings-schema.json->interval_chime_volume->description
+msgid "Chime volume:"
+msgstr "Glasnoća zvonca:"
+
+#. settings-schema.json->interval_chime_volume->tooltip
+msgid "Volume of the interval chime (0 = silent)."
+msgstr "Glasnoća intervalnog zvonca (0 = tiho)."
+
+#. settings-schema.json->timer_sound_test->description
+#. settings-schema.json->break_sound_test->description
+#. settings-schema.json->warn_sound_test->description
+#. settings-schema.json->start_sound_test->description
+#. settings-schema.json->interval_chime_test->description
+msgid "Listen"
+msgstr "Poslušaj"
+
+#. settings-schema.json->timer_sound_test->tooltip
+#. settings-schema.json->break_sound_test->tooltip
+#. settings-schema.json->warn_sound_test->tooltip
+#. settings-schema.json->start_sound_test->tooltip
+#. settings-schema.json->interval_chime_test->tooltip
+msgid "Play the selected sound now."
+msgstr "Reproduciraj odabrani zvuk sada."
+
+#. settings-schema.json->hdr_tick->description
+msgid "Ticking sound (during focus)"
+msgstr "Zvuk kucanja (tijekom fokusa)"
+
+#. settings-schema.json->hdr_alerts->description
+msgid "Alert sounds"
+msgstr "Zvukovi upozorenja"
+
+#. settings-schema.json->hdr_interval->description
+msgid "Interval chime"
+msgstr "Intervalno zvonce"
+
+#. settings-schema.json->custom_presets->description
+msgid ""
+"Your custom presets. Apply one from the Preset submenu in the applet menu."
+msgstr ""
+"Vaši prilagođeni predlošci. Primijenite jedan iz podizbornika Predložak u "
+"izborniku apleta."
+
+#. settings-schema.json->custom_presets->columns->title
+msgid "Name"
+msgstr "Naziv"
+
+#. settings-schema.json->custom_presets->columns->units
+msgid "min"
+msgstr "min"
+
+#. settings-schema.json->custom_presets->tooltip
+msgid ""
+"Your timer presets — name + focus / short / long minutes + pomodori. Apply "
+"them from the menu's Preset submenu."
+msgstr ""
+"Vaši predlošci mjerača — naziv + minute fokusa / kratkog / dugog + pomodori. "
+"Primijenite ih iz podizbornika Predložak u izborniku."
+
+#. settings-schema.json->setup_passwordless_button->description
+msgid "Set up passwordless blocking (one-time)"
+msgstr "Postavi blokiranje bez lozinke (jednokratno)"
+
+#. settings-schema.json->setup_passwordless_button->tooltip
+msgid ""
+"Asks for your password once and installs a small system policy so blocking "
+"no longer prompts during focus."
+msgstr ""
+"Jednom traži lozinku i instalira malo sustavsko pravilo da blokiranje više "
+"ne pita tijekom fokusa."
+
+#. settings-schema.json->remove_passwordless_button->description
+msgid "Remove passwordless setup"
+msgstr "Ukloni postavku bez lozinke"
+
+#. settings-schema.json->remove_passwordless_button->tooltip
+msgid ""
+"Removes the system policy and the root helper, so blocking asks for your "
+"password again each time."
+msgstr ""
+"Uklanja sistemsku politiku i root pomoćnik, pa blokiranje opet traži lozinku "
+"svaki put."
+
+#. settings-schema.json->onboarding_button->description
+msgid "Run the quick-start guide"
+msgstr "Pokreni vodič za brzi početak"
+
+#. settings-schema.json->onboarding_button->tooltip
+msgid "Re-open the step-by-step setup guide."
+msgstr "Ponovno otvori korak-po-korak vodič za postavljanje."
+
+#. settings-schema.json->about_technique_button->tooltip
+msgid "A short explanation of how the Pomodoro technique works."
+msgstr ""
+
+#. settings-schema.json->restore_onboarding_button->description
+msgid "Undo last setup"
+msgstr "Poništi zadnje postavljanje"
+
+#. settings-schema.json->restore_onboarding_button->tooltip
+msgid ""
+"Restore your settings from just before the last time you applied a setup "
+"from the guide."
+msgstr ""
+"Vraća tvoje postavke od neposredno prije zadnjeg puta kad si primijenio "
+"postavku iz čarobnjaka."
+
+#. settings-schema.json->pushover_msg_short_break->description
+msgid "Message when a short break starts"
+msgstr "Poruka na početku kratkog predaha"
+
+#. settings-schema.json->pushover_msg_short_break->tooltip
+msgid ""
+"Sent when a short break begins. {task} and {minutes} are substituted. Leave "
+"empty to send nothing."
+msgstr ""
+"Šalje se na početku kratkog predaha. {task} i {minutes} se zamjenjuju. "
+"Ostavite prazno da se ništa ne šalje."
+
+#. settings-schema.json->pushover_msg_long_break->description
+msgid "Message when a long break starts"
+msgstr "Poruka na početku dužeg predaha"
+
+#. settings-schema.json->pushover_msg_long_break->tooltip
+msgid ""
+"Sent when a long break begins. {task} and {minutes} are substituted. Leave "
+"empty to send nothing."
+msgstr ""
+"Šalje se na početku dužeg predaha. {task} i {minutes} se zamjenjuju. "
+"Ostavite prazno da se ništa ne šalje."
+
+#. settings-schema.json->pushover_msg_goal->description
+msgid "Message when the daily goal is reached"
+msgstr "Poruka kad se dosegne dnevni cilj"
+
+#. settings-schema.json->pushover_msg_goal->tooltip
+msgid ""
+"Sent once when you hit your daily pomodoro goal. {task} and {minutes} are "
+"substituted. Leave empty to send nothing."
+msgstr ""
+"Šalje se jednom kad dosegnete dnevni cilj pomodora. {task} i {minutes} se "
+"zamjenjuju. Ostavite prazno da se ništa ne šalje."
+
+#. settings-schema.json->pushover_sound->description
+msgid "Notification sound"
+msgstr ""
+
+#. settings-schema.json->pushover_sound->options
+msgid "Default"
+msgstr "Zadano"
+
+#. settings-schema.json->pushover_sound->options
+msgid "Magic"
+msgstr "Čarolija"
+
+#. settings-schema.json->pushover_sound->options
+msgid "Bike"
+msgstr "Bicikl"
+
+#. settings-schema.json->pushover_sound->options
+msgid "Cosmic"
+msgstr "Kozmički"
+
+#. settings-schema.json->pushover_sound->options
+msgid "Gamelan"
+msgstr "Gamelan"
+
+#. settings-schema.json->pushover_sound->options
+msgid "Incoming"
+msgstr "Dolazni"
+
+#. settings-schema.json->pushover_sound->options
+msgid "Intermission"
+msgstr "Stanka"
+
+#. settings-schema.json->pushover_sound->options
+msgid "None"
+msgstr "Nijedan"
+
+#. settings-schema.json->pushover_priority->description
+msgid "Priority"
+msgstr ""
+
+#. settings-schema.json->pushover_priority->options
+msgid "Low"
+msgstr "Nizak"
+
+#. settings-schema.json->pushover_priority->options
+msgid "Normal"
+msgstr "Normalan"
+
+#. settings-schema.json->pushover_priority->options
+msgid "High"
+msgstr "Visok"
+
+#. settings-schema.json->focus_ambient_file->description
+msgid "Ambient sound file"
+msgstr "Datoteka zvuka okoline"
+
+#. settings-schema.json->focus_ambient_file->tooltip
+msgid ""
+"Pick your own looping ambient sound. Leave empty for the built-in soft brown "
+"noise."
+msgstr ""
+"Odaberite vlastiti ponavljajući zvuk okoline. Ostavite prazno za ugrađeni "
+"meki smeđi šum."

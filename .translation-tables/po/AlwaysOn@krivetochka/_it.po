@@ -1,0 +1,14 @@
+# ALWAYSON
+# This file is put in the public domain.
+# Krivetochka, 2025
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->section-general->description
+msgid "Choose which parameters this applet affects"
+msgstr ""
+
+#. settings-schema.json->lid-close-action->description
+msgid "Do nothing when laptop lid is closed"
+msgstr ""

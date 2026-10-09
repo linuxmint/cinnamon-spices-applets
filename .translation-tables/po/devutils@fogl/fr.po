@@ -1,0 +1,223 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2017-04-21 00:29+0800\n"
+"PO-Revision-Date: 2023-05-06 15:28+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:38
+msgid "MySQL Browser"
+msgstr "Navigateur MySQL"
+
+#: applet.js:45 applet.js:211
+msgid "Open Project Directory"
+msgstr "Ouvrir le dossier du projet"
+
+#: applet.js:51
+msgid "Nginx Web Server"
+msgstr "Nginx (Serveur Web)"
+
+#: applet.js:52
+msgid "MySQL Server"
+msgstr "Serveur MySQL"
+
+#: applet.js:53
+msgid "PostgreSQL Server"
+msgstr "Serveur PostgreSQL"
+
+#: applet.js:55
+msgid "Apache Web Server"
+msgstr "Apache (Serveur Web)"
+
+#: applet.js:80
+msgid ""
+"ERROR: Could not execute command...\n"
+"Please check your configurations!\n"
+"\n"
+"Open applet configuration?\n"
+"\n"
+msgstr ""
+"ERREUR : Impossible d'exécuter la commande...\n"
+"Veuillez vérifier votre configuration !\n"
+"\n"
+"Ouvrir la configuration de l'applet ?\n"
+"\n"
+
+#: applet.js:85
+msgid "Open Applet Settings"
+msgstr "Ouvrir les paramètres de l'applet"
+
+#: applet.js:92
+msgid "Open Applet Source"
+msgstr "Ouvrir le code source de l'applet"
+
+#: applet.js:99
+msgid "Cancel"
+msgstr "Abandon"
+
+#. devutils@fogl->metadata.json->name
+#: applet.js:126
+msgid "Development Utils"
+msgstr "Outils de développement"
+
+#: applet.js:133
+msgid "Settings"
+msgstr "Paramètres"
+
+#: applet.js:138
+msgid "Looking Glass"
+msgstr "Looking Glass"
+
+#: applet.js:173
+msgid "Control "
+msgstr "Contrôle "
+
+#: applet.js:174
+msgid "  Service is up"
+msgstr "  Service démarré"
+
+#: applet.js:174
+msgid "  Start service"
+msgstr "  Démarrer le service"
+
+#: applet.js:175
+msgid "  Service is down"
+msgstr "  Service arrêté"
+
+#: applet.js:175
+msgid "  Stop service"
+msgstr "  Arrêter le service"
+
+#: applet.js:221
+msgid "Launch 127.0.0.1"
+msgstr "Lancer 127.0.0.1"
+
+#: applet.js:225
+msgid "Edit default nginx config"
+msgstr "Modifier la configuration nginx par défaut"
+
+#. devutils@fogl->metadata.json->description
+msgid "Development Utils Applet for Cinnamon"
+msgstr "Applet d'outils de développement pour Cinnamon"
+
+#. devutils@fogl->settings-schema.json->head_menu->description
+msgid "Menu Entries"
+msgstr "Entrées du menu"
+
+#. devutils@fogl->settings-schema.json->mysql_browser->description
+msgid "Show \"MySQL Browser\" Launcher in Menu"
+msgstr "Afficher le lanceur \"Navigateur MySQL\" dans le menu"
+
+#. devutils@fogl->settings-schema.json->open_project_dir->description
+msgid "Specify file browser and path to your project directory"
+msgstr ""
+"Spécifiez le navigateur de fichiers et le chemin d'accès au répertoire de "
+"votre projet"
+
+#. devutils@fogl->settings-schema.json->open_project_dir->tooltip
+msgid "For example: nemo /home/username/Projects"
+msgstr "Par exemple : nemo /home/utilisateur/Projets"
+
+#. devutils@fogl->settings-schema.json->select_mysql_browser->options
+msgid "HeidiSQL (requires installation of Wine)"
+msgstr "HeidiSQL (nécessite l'installation de Wine)"
+
+#. devutils@fogl->settings-schema.json->select_mysql_browser->options
+msgid "MySQL Workbench"
+msgstr "Atelier MySQL"
+
+#. devutils@fogl->settings-schema.json->select_mysql_browser->description
+msgid "Select MySQL Browser"
+msgstr "Choisir le navigateur MySQL"
+
+#. devutils@fogl->settings-schema.json->geany->description
+msgid "Show \"Geany\" Launcher in Menu"
+msgstr "Afficher le lanceur \"Geany\" dans le menu"
+
+#. devutils@fogl->settings-schema.json->eclipse->description
+msgid "Show \"Eclipse\" Launcher in Menu"
+msgstr "Afficher le lanceur \"Eclipse\" dans le menu"
+
+#. devutils@fogl->settings-schema.json->gedit->description
+msgid "Show \"Gedit\" Launcher in Menu"
+msgstr "Afficher le lanceur \"Gedit\" dans le menu"
+
+#. devutils@fogl->settings-schema.json->filezilla->description
+msgid "Show \"Filezilla\" Launcher in Menu"
+msgstr "Afficher le lanceur \"Filezilla\" dans le menu"
+
+#. devutils@fogl->settings-schema.json->terminal->description
+msgid "Show \"Terminal\" Launcher in Menu"
+msgstr "Afficher le lanceur \"Terminal\" dans le menu"
+
+#. devutils@fogl->settings-schema.json->path_heidi->description
+msgid "Specify path to HeidiSQL"
+msgstr "Spécifiez le chemin vers HeidiSQL"
+
+#. devutils@fogl->settings-schema.json->path_heidi->tooltip
+msgid ""
+"For example \"wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/YOUR "
+"USERNAME/.wine/dosdevices/c:/users/Public/Start\\ Menu/Programs/HeidiSQL/"
+"HeidiSQL.lnk\""
+msgstr ""
+"Par exemple \"wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/VOTRE "
+"NOM D'UTILISATEUR/.wine/dosdevices/c:/users/Public/Start\\ Menu/Programs/"
+"HeidiSQL/HeidiSQL.lnk\""
+
+#. devutils@fogl->settings-schema.json->head_services->description
+msgid "Services"
+msgstr "Services"
+
+#. devutils@fogl->settings-schema.json->config->description
+msgid "Show \"Configurations\" in Menu"
+msgstr "Afficher \"Configurations\" dans le menu"
+
+#. devutils@fogl->settings-schema.json->services->description
+msgid "Show \"Services\" in Menu"
+msgstr "Afficher \"Services\" dans le menu"
+
+#. devutils@fogl->settings-schema.json->select_terminal->options
+msgid "xterm"
+msgstr "xterm"
+
+#. devutils@fogl->settings-schema.json->select_terminal->options
+msgid "Gnome Terminal"
+msgstr "Terminal Gnome"
+
+#. devutils@fogl->settings-schema.json->select_terminal->description
+msgid "Select Terminal"
+msgstr "Choisir le terminal"
+
+#. devutils@fogl->settings-schema.json->services_type->options
+msgid "Submenu for each Service"
+msgstr "Sous-menu de chaque service"
+
+#. devutils@fogl->settings-schema.json->services_type->options
+msgid "Switch Buttons"
+msgstr "Boutons de bascule"
+
+#. devutils@fogl->settings-schema.json->services_type->description
+msgid "Select Services Type"
+msgstr "Choisir un type de service"
+
+#. devutils@fogl->settings-schema.json->head_config->description
+msgid "Configurations"
+msgstr "Configurations"
+
+#. devutils@fogl->settings-schema.json->head_mysql_browser->description
+msgid "MySQL Browser Settings"
+msgstr "Paramètres du navigateur MySQL"

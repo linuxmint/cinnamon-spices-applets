@@ -1,0 +1,196 @@
+# Danish translation for app-drawer
+# Copyright (C) 2025 mostlynick3
+# This file is distributed under the same license as the app-drawer package.
+# mostlynick3 <>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: app-drawer@mostlynick3 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-02 08:33+0100\n"
+"PO-Revision-Date: 2025-12-18 12:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "App Drawer"
+msgstr "Appskuffe"
+
+#. metadata.json->description
+msgid ""
+"Full-screen app launcher with animations, transparency, a search box, and "
+"more."
+msgstr ""
+"Fuldskærms appskuffe med animationer, gennemsigtighed, søgefelt og mere."
+
+#. settings-schema.json->navigation->description
+msgid "Navigation Settings"
+msgstr "Navigationsindstillinger"
+
+#. settings-schema.json->navigationMode->description
+msgid "Navigation mode"
+msgstr "Navigationstilstand"
+
+#. settings-schema.json->navigationMode->options
+msgid "Button Navigation"
+msgstr "Knapnavigation"
+
+#. settings-schema.json->navigationMode->options
+msgid "Scroll Horizontal"
+msgstr "Horisontal rulning"
+
+#. settings-schema.json->navigationMode->options
+msgid "Scroll Vertical"
+msgstr "Vertikal rulning"
+
+#. settings-schema.json->layout->description
+msgid "Layout Settings"
+msgstr "Layoutindstillinger"
+
+#. settings-schema.json->columns->description
+msgid "Columns per page"
+msgstr "Kolonner per side"
+
+#. settings-schema.json->rows->description
+msgid "Rows per page"
+msgstr "Rækker per side"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon size (px)"
+msgstr "Ikonstørrelse (px)"
+
+#. settings-schema.json->padding->description
+msgid "Padding (px)"
+msgstr "Mellemrum (px)"
+
+#. settings-schema.json->fontSize->description
+msgid "Label font size (pt)"
+msgstr "Skriftstørrelse (pt)"
+
+#. settings-schema.json->features->description
+msgid "Features"
+msgstr "Funktioner"
+
+#. settings-schema.json->enableSearch->description
+msgid "Enable search bar"
+msgstr "Aktivér søgefelt"
+
+#. settings-schema.json->autoFocusSearch->description
+msgid "Auto-focus search bar when opened"
+msgstr "Fokusér automatisk på søgefelt ved åbning"
+
+#. settings-schema.json->enableFavorites->description
+msgid "Enable favorites"
+msgstr "Aktivér favoritter"
+
+#. settings-schema.json->overlay-keybinding->description
+msgid "Keyboard shortcut to toggle overlay"
+msgstr "Tastaturgenvej til at slå overlay til/fra"
+
+#. settings-schema.json->appearance->description
+msgid "Appearance Settings"
+msgstr "Designindstillinger"
+
+#. settings-schema.json->bgColor->description
+msgid "Background color"
+msgstr "Baggrundsfarve"
+
+#. settings-schema.json->bgOpacity->units
+#. settings-schema.json->containerOpacity->units
+#. settings-schema.json->boxOpacity->units
+#. settings-schema.json->boxHoverOpacity->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->bgOpacity->description
+msgid "Background opacity"
+msgstr "Baggrundenes gennemsigtighed"
+
+#. settings-schema.json->containerColor->description
+msgid "Container color"
+msgstr "Containerfarve"
+
+#. settings-schema.json->containerOpacity->description
+msgid "Container opacity"
+msgstr "Containerens gennemsigtighed"
+
+#. settings-schema.json->boxColor->description
+msgid "Box color"
+msgstr "Boksfarve"
+
+#. settings-schema.json->boxOpacity->description
+msgid "Box opacity"
+msgstr "Boksens gennemsigtighed"
+
+#. settings-schema.json->boxHoverColor->description
+msgid "Box hover color"
+msgstr "Boksfarve ved aktivering"
+
+#. settings-schema.json->boxHoverOpacity->description
+msgid "Box hover opacity"
+msgstr "Boksens gennemsigtighed ved aktivering"
+
+#. settings-schema.json->animations->description
+msgid "Animation Settings"
+msgstr "Animationsindstillinger"
+
+#. settings-schema.json->enableAnimations->description
+msgid "Enable animations"
+msgstr "Aktivér animationer"
+
+#. settings-schema.json->animationDuration->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->animationDuration->description
+msgid "Animation duration"
+msgstr "Animationsvarighed"
+
+#. settings-schema.json->openAnimationType->description
+msgid "Open animation"
+msgstr "Åbningsanimation"
+
+#. settings-schema.json->openAnimationType->options
+#. settings-schema.json->closeAnimationType->options
+#. settings-schema.json->pageAnimationType->options
+msgid "Fade"
+msgstr "Tone"
+
+#. settings-schema.json->openAnimationType->options
+#. settings-schema.json->closeAnimationType->options
+msgid "Scale"
+msgstr "Skaler"
+
+#. settings-schema.json->openAnimationType->options
+msgid "Slide Up"
+msgstr "Gli op"
+
+#. settings-schema.json->openAnimationType->options
+#. settings-schema.json->closeAnimationType->options
+msgid "Zoom"
+msgstr "Zoom"
+
+#. settings-schema.json->closeAnimationType->description
+msgid "Close animation"
+msgstr "Lukningsanimation"
+
+#. settings-schema.json->closeAnimationType->options
+msgid "Slide Down"
+msgstr "Gli ned"
+
+#. settings-schema.json->pageAnimationType->description
+msgid "Button navigation page animation"
+msgstr "Knapnavigeringssideanimation"
+
+#. settings-schema.json->pageAnimationType->options
+msgid "Slide"
+msgstr "Gli"
+
+#. settings-schema.json->pageAnimationType->options
+msgid "Crossfade"
+msgstr "Krydstone"

@@ -1,0 +1,245 @@
+# CRYPTOCOIN
+# This file is put in the public domain.
+# imDeprecated, 2017
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: cryptocoin@guantanamoe 1.7\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-06-07 21:40-0400\n"
+"PO-Revision-Date: 2026-06-07 21:40-0400\n"
+"Last-Translator: Grom-TS\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "Cryptocoin"
+msgstr "Криптовалюта"
+
+#. metadata.json->description
+msgid "Monitor current price and trends of cryptocurrencies"
+msgstr "Отслеживайте текущие цены и тенденции криптовалют"
+
+#. settings-schema.json->general-page->title
+msgid "General"
+msgstr "Общие"
+
+#. settings-schema.json->graph-page->title
+#. settings-schema.json->graph-section->title
+msgid "Graph"
+msgstr "График"
+
+#. settings-schema.json->alerts-page->title
+#. settings-schema.json->alerts-section->title
+msgid "Alerts"
+msgstr "Оповещения"
+
+#. settings-schema.json->advanced-page->title
+msgid "Advanced"
+msgstr "Дополнительно"
+
+#. settings-schema.json->currency-section->title
+#. settings-schema.json->advanced-currency-section->title
+#. settings-schema.json->currency->description
+msgid "Currency"
+msgstr "Валюта"
+
+#. settings-schema.json->alerts-config->title
+msgid "Config"
+msgstr "Настройка"
+
+#. settings-schema.json->alerts-delta-section->title
+msgid "Delta Alerts"
+msgstr "Оповещения об изменениях"
+
+#. settings-schema.json->amount->description
+msgid "Amount"
+msgstr "Количество"
+
+#. settings-schema.json->amount->tooltip
+msgid "Set the balance to multiply the price"
+msgstr "Укажите баланс для умножения на цену"
+
+#. settings-schema.json->currency->tooltip
+msgid "Set the currency you want coin value to be set in"
+msgstr "Укажите валюту, в которой будет отображаться стоимость монеты"
+
+#. settings-schema.json->ticker->description
+msgid "Ticker"
+msgstr "Тикер"
+
+#. settings-schema.json->ticker->tooltip
+msgid "Set the crypto currency ticker"
+msgstr "Укажите тикер криптовалюты"
+
+#. settings-schema.json->show-ticker-icon->description
+msgid "Ticker Icon"
+msgstr "Значок тикера"
+
+#. settings-schema.json->show-ticker-name->description
+msgid "Ticker Name"
+msgstr "Название тикера"
+
+#. settings-schema.json->show-currency->description
+msgid "Show Currency"
+msgstr "Отображать валюту"
+
+#. settings-schema.json->show-currency->options
+msgid "Name"
+msgstr "Название"
+
+#. settings-schema.json->show-currency->options
+msgid "Symbol"
+msgstr "Символ"
+
+#. settings-schema.json->show-currency->options
+msgid "None"
+msgstr "Нет"
+
+#. settings-schema.json->rates-update-interval->description
+msgid "Rates update interval (in seconds)"
+msgstr "Интервал обновления курсов (в секундах)"
+
+#. settings-schema.json->rates-update-interval->tooltip
+msgid "Set the delay between each rates update."
+msgstr "Укажите задержку между обновлениями курсов"
+
+#. settings-schema.json->graph-type->description
+msgid "Graph Type"
+msgstr "Тип графика"
+
+#. settings-schema.json->graph-type->options
+msgid "Candlestick"
+msgstr "Свечной"
+
+#. settings-schema.json->graph-type->options
+msgid "Line"
+msgstr "Линейный"
+
+#. settings-schema.json->graph-unit->description
+msgid "Unit for Graph History"
+msgstr "Единица измерения истории графика"
+
+#. settings-schema.json->graph-unit->options
+#. settings-schema.json->alert-delta-unit->options
+msgid "Minutes"
+msgstr "Минуты"
+
+#. settings-schema.json->graph-unit->options
+#. settings-schema.json->alert-delta-unit->options
+msgid "Hours"
+msgstr "Часы"
+
+#. settings-schema.json->graph-unit->options
+#. settings-schema.json->alert-delta-unit->options
+msgid "Days"
+msgstr "Дни"
+
+#. settings-schema.json->graph-length->description
+msgid "Graph History Length"
+msgstr "Длина истории графика"
+
+#. settings-schema.json->graph-width->description
+msgid "Graph Popup Width"
+msgstr "Ширина всплывающего графика"
+
+#. settings-schema.json->graph-height->description
+msgid "Graph Popup Height"
+msgstr "Высота всплывающего графика"
+
+#. settings-schema.json->graph-color->description
+msgid "Graph Foreground Color"
+msgstr "Цвет графика"
+
+#. settings-schema.json->alert-enable->description
+msgid "Enable alerts"
+msgstr "Включить оповещения"
+
+#. settings-schema.json->alert-any-change->description
+msgid "Any change"
+msgstr "Любое изменение"
+
+#. settings-schema.json->alert-label-color->description
+msgid "Label color"
+msgstr "Цвет метки"
+
+#. settings-schema.json->alert-on-above->description
+msgid "Absolute maximum (money)"
+msgstr "Абсолютный максимум (сумма)"
+
+#. settings-schema.json->alert-on-above->tooltip
+msgid "Alert when current value is above this value"
+msgstr "Оповещать, когда текущее значение превышает это значение"
+
+#. settings-schema.json->alert-on-below->description
+msgid "Absolute minimum (money)"
+msgstr "Абсолютный минимум (сумма)"
+
+#. settings-schema.json->alert-on-below->tooltip
+msgid "Alert when current value is below this value"
+msgstr "Оповещать, когда текущее значение ниже этого значения"
+
+#. settings-schema.json->alert-on-delta-above->description
+msgid "Increase variation (%)"
+msgstr "Рост изменения (%)"
+
+#. settings-schema.json->alert-on-delta-above->tooltip
+msgid "Alert when value increase this delta %"
+msgstr "Оповещать, когда значение увеличится на этот процент"
+
+#. settings-schema.json->alert-on-delta-below->description
+msgid "Decrease variation (%)"
+msgstr "Падение изменения (%)"
+
+#. settings-schema.json->alert-on-delta-below->tooltip
+msgid "Alert when value decrease this delta %"
+msgstr "Оповещать, когда значение уменьшится на этот процент"
+
+#. settings-schema.json->alert-delta-length->description
+msgid "Delta interval"
+msgstr "Интервал изменения"
+
+#. settings-schema.json->alert-delta-unit->description
+msgid "Unit of interval"
+msgstr "Единица интервала"
+
+#. settings-schema.json->alert-delta-update-interval->units
+msgid "seconds"
+msgstr "секунд"
+
+#. settings-schema.json->alert-delta-update-interval->description
+msgid "Update interval"
+msgstr "Интервал обновления"
+
+#. settings-schema.json->currency-format-enable->description
+msgid "Custom format"
+msgstr "Пользовательский формат"
+
+#. settings-schema.json->currency-format-symbol->description
+msgid "Currency symbol"
+msgstr "Символ валюты"
+
+#. settings-schema.json->currency-format-name->description
+msgid "Currency name"
+msgstr "Название валюты"
+
+#. settings-schema.json->currency-format-precision->description
+msgid "Decimal places"
+msgstr "Количество знаков после запятой"
+
+#~ msgid "name"
+#~ msgstr "название"
+
+#~ msgid "symbol"
+#~ msgstr "символ"
+
+#~ msgid "none"
+#~ msgstr "не отображать"
+
+#~ msgid "The Graph Foreground Color"
+#~ msgstr "Цвет графика"
