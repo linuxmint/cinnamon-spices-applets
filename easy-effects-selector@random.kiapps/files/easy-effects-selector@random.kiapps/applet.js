@@ -1,0 +1,1493 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright (C) 2026 random.kiapps
+// Cinnamon applet for the native EasyEffects 7.2.3 package.
+const Applet = imports.ui.applet;
+const PopupMenu = imports.ui.popupMenu;
+const Main = imports.ui.main;
+const Settings = imports.ui.settings;
+const Tooltips = imports.ui.tooltips;
+const Util = imports.misc.util;
+const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
+const St = imports.gi.St;
+const Clutter = imports.gi.Clutter;
+const ByteArray = imports.byteArray;
+const Mainloop = imports.mainloop;
+const Gettext = imports.gettext;
+
+const UUID = "easy-effects-selector@random.kiapps";
+// Cinnamon's xlet installer and settings dialog use this locale directory.
+// Keep the domain aligned with cinnamon-xlet-makepot, including custom XDG paths.
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(text) {
+    return Gettext.dgettext(UUID, text);
+}
+
+const SCHEMA_ID = "com.github.wwmm.easyeffects";
+const OUTPUT_PRESET_KEY = "last-loaded-output-preset";
+const LEGACY_DEFAULT_PRESET_KEY = "default-preset";
+const QUICK_PRESET_KEYS = ["quick-preset-top", "quick-preset-middle", "quick-preset-bottom"];
+const QUICK_PRESET_PROPERTIES = ["_quickPresetTop", "_quickPresetMiddle", "_quickPresetBottom"];
+const SHUTDOWN_KEY = "shutdown-on-window-close";
+const BYPASS_KEY = "bypass";
+const AUTOSTART_OPTION = "ee-autostart";
+const SHUTDOWN_OPTION = "ee-shutdown-on-window-close";
+const LAUNCH_FROM_TITLE_OPTION = "launch-from-menu-title";
+// Retain the saved preference key while its control now governs menu operation.
+const BYPASS_CONTROL_OPTION = "show-bypass-button";
+const KEEP_MENU_OPEN_OPTION = "keep-menu-open-on-bypass";
+const MIDDLE_CLICK_BYPASS_OPTION = "toggle-bypass-on-middle-click";
+const SCROLL_PRESETS_OPTION = "switch-presets-with-scroll";
+const TOOLTIP_KEYS = ["show-tooltips", "tooltip-preset", "tooltip-quick-position",
+    "tooltip-settings-changed", "tooltip-bypass", "tooltip-comparison-error"];
+const TOOLTIP_PROPERTIES = ["_showTooltips", "_tooltipPreset", "_tooltipQuickPosition",
+    "_tooltipSettingsChanged", "_tooltipBypass", "_tooltipComparisonError"];
+const LEGACY_TITLE_MODE_KEY = "menu-title-mode";
+const STATE_UPDATE_DELAY = 180;
+// Match the 30% opacity of Blueman's bundled disabled symbolic status icon.
+const BYPASS_ICON_OPACITY = Math.round(255 * 0.3);
+const SELECTION_TRACKER_KEY = "selection-tracker";
+const AUTOSTART_CONTENT = "[Desktop Entry]\nName=Easy Effects\nComment=Easy Effects Service\n" +
+    "Exec=easyeffects --gapplication-service\nIcon=com.github.wwmm.easyeffects\n" +
+    "StartupNotify=false\nTerminal=false\nType=Application\n";
+
+// Wrap only our calls; do not change Gio prototypes shared by other applets.
+function fileOperation(object, start, finish, args) {
+    return new Promise((resolve, reject) => {
+        try {
+            object[start](...args, (source, result) => {
+                try {
+                    resolve(source[finish](result));
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+function ioError(error, code) {
+    return error.matches && error.matches(Gio.io_error_quark(), code);
+}
+
+async function fileInfo(file, cancellable) {
+    try {
+        return await fileOperation(file, "query_info_async", "query_info_finish", [
+            "standard::type", Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, cancellable
+        ]);
+    } catch (error) {
+        if (ioError(error, Gio.IOErrorEnum.NOT_FOUND))
+            return null;
+        throw error;
+    }
+}
+
+async function makeDirectory(file, cancellable) {
+    try {
+        await fileOperation(file, "make_directory_async", "make_directory_finish", [
+            GLib.PRIORITY_DEFAULT, cancellable
+        ]);
+        const permissions = new Gio.FileInfo();
+        permissions.set_attribute_uint32("unix::mode", 0o700);
+        await fileOperation(file, "set_attributes_async", "set_attributes_finish", [
+            permissions, Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, cancellable
+        ]);
+    } catch (error) {
+        if (ioError(error, Gio.IOErrorEnum.EXISTS)) {
+            const info = await fileInfo(file, cancellable);
+            if (info && info.get_file_type() === Gio.FileType.DIRECTORY)
+                return;
+        } else if (ioError(error, Gio.IOErrorEnum.NOT_FOUND) && file.get_parent()) {
+            await makeDirectory(file.get_parent(), cancellable);
+            await makeDirectory(file, cancellable);
+            return;
+        }
+        throw error;
+    }
+}
+
+class PresetMenuItem extends PopupMenu.PopupMenuItem {
+    constructor(name, keepMenuOpen) {
+        super(name);
+        this._keepMenuOpen = keepMenuOpen;
+    }
+
+    activate(event, keepMenu = false) {
+        // Decide before loading: EasyEffects may change bypass during the load.
+        super.activate(event, keepMenu || this._keepMenuOpen());
+    }
+}
+
+class SelectorSettings extends Settings.AppletSettings {
+    _doUpgrade(templateData) {
+        // Preserve saved names while the dynamic dropdowns are reconstructed.
+        // A former default becomes the bottom entry without loading anything.
+        const savedNames = QUICK_PRESET_KEYS.map((key, index) => {
+            const saved = this.settingsData[key] || (index === 2 ?
+                this.settingsData[LEGACY_DEFAULT_PRESET_KEY] : null);
+            const value = saved && typeof saved.value === "string" ? saved.value : "";
+            if (value) {
+                const options = Object.assign(Object.create(null), templateData[key].options);
+                options[value] = value;
+                templateData[key].options = options;
+            }
+            return value;
+        });
+        const savedLaunch = this.settingsData[LAUNCH_FROM_TITLE_OPTION];
+        const savedBypass = this.settingsData[BYPASS_CONTROL_OPTION];
+        const savedMode = this.settingsData[LEGACY_TITLE_MODE_KEY];
+        let launch = templateData[LAUNCH_FROM_TITLE_OPTION].default;
+        let bypass = templateData[BYPASS_CONTROL_OPTION].default;
+        if (savedMode && ["passive", "launch", "launch-and-bypass"].includes(savedMode.value)) {
+            launch = savedMode.value !== "passive";
+            bypass = savedMode.value !== "launch";
+        }
+        if (savedLaunch && typeof savedLaunch.value === "boolean")
+            launch = savedLaunch.value;
+        if (savedBypass && typeof savedBypass.value === "boolean")
+            bypass = savedBypass.value;
+        super._doUpgrade(templateData);
+        QUICK_PRESET_KEYS.forEach((key, index) => { this.settingsData[key].value = savedNames[index]; });
+        this.settingsData[LAUNCH_FROM_TITLE_OPTION].value = launch;
+        this.settingsData[BYPASS_CONTROL_OPTION].value = bypass;
+    }
+}
+
+// Read-only access to the same GSettings instances used by EasyEffects 7.2.3.
+// preset-map.json contains paths extracted from its original preset serializers.
+class PresetStateReader {
+    constructor(map, onChange) {
+        this.map = map;
+        this.source = Gio.SettingsSchemaSource.get_default();
+        this.onChange = onChange;
+        this.groups = new Map();
+        this.reference = null;
+        this.expected = new Map();
+        this.needsRefresh = true;
+        this.output = this._group(this.map.outputSchema, null);
+        try {
+            this.refresh();
+        } catch (error) {
+            this.destroy();
+            throw error;
+        }
+    }
+
+    static equal(a, b) {
+        if (Array.isArray(a) && Array.isArray(b))
+            return a.length === b.length && a.every((value, i) => PresetStateReader.equal(value, b[i]));
+        return a === b;
+    }
+
+    _group(schemaId, path) {
+        const id = schemaId + "|" + (path || "");
+        if (!this.groups.has(id)) {
+            const schema = this.source ? this.source.lookup(schemaId, true) : null;
+            if (!schema)
+                throw new Error(_("The EasyEffects settings schema is missing: %s").format(schemaId));
+            this.groups.set(id, {id, schema, settings: Gio.Settings.new_full(schema, null, path),
+                signal: 0, keys: new Set(), values: new Map()});
+        }
+        return this.groups.get(id);
+    }
+
+    _watch(group, keys) {
+        const previousKeys = group.keys;
+        group.keys = new Set(keys);
+        if (!group.signal) {
+            group.signal = group.settings.connect("changed", (settings, key) => {
+                if (!group.keys.has(key))
+                    return;
+                const value = settings.get_value(key).deep_unpack();
+                const old = group.values.get(key);
+                group.values.set(key, value);
+                // GSettings signals potentially changed values, including repeated writes.
+                if (!PresetStateReader.equal(old, value)) {
+                    if (key === "plugins" || key === "num-bands")
+                        this.needsRefresh = true;
+                    this.onChange();
+                }
+            });
+        }
+        for (const key of keys) {
+            if (!group.schema.has_key(key))
+                throw new Error(_("The EasyEffects effect parameter is missing: %s").format(key));
+            // Read after connecting: Gio only reports keys primed this way.
+            if (!previousKeys.has(key) || !group.values.has(key))
+                group.values.set(key, group.settings.get_value(key).deep_unpack());
+        }
+    }
+
+    _plugin(name) {
+        const match = /^(\w+)#(\d+)$/.exec(name);
+        if (!match || !Object.prototype.hasOwnProperty.call(this.map.plugins, match[1]))
+            throw new Error(_("Unknown EasyEffects effect: %s").format(name));
+        const definition = this.map.plugins[match[1]];
+        return {name, base: match[1], definition, path: definition.path + match[2] + "/"};
+    }
+
+    _channel(plugin, channel) {
+        return this._group(this.map.equalizerChannel.schema, plugin.path + channel + "channel/");
+    }
+
+    refresh() {
+        if (!this.needsRefresh)
+            return;
+        this.needsRefresh = false;
+        const used = new Set([this.output.id]);
+        this._watch(this.output, ["plugins", "blocklist"]);
+        const names = this.output.settings.get_strv("plugins");
+        for (const name of names) {
+            const plugin = this._plugin(name);
+            const group = this._group(plugin.definition.schema, plugin.path);
+            used.add(group.id);
+            this._watch(group, plugin.definition.fields.map(field => field[0]));
+            if (plugin.base === "equalizer") {
+                const bands = group.settings.get_int("num-bands");
+                const channelKeys = [];
+                for (let n = 0; n < bands; n++) {
+                    for (const key of this.map.equalizerChannel.fields)
+                        channelKeys.push("band" + n + "-" + key);
+                }
+                for (const side of ["left", "right"]) {
+                    const channel = this._channel(plugin, side);
+                    used.add(channel.id);
+                    this._watch(channel, channelKeys);
+                }
+            }
+        }
+        for (const [id, group] of this.groups) {
+            if (!used.has(id)) {
+                if (group.signal)
+                    group.settings.disconnect(group.signal);
+                this.groups.delete(id);
+            }
+        }
+    }
+
+    _wanted(group, field, object) {
+        const cacheKey = group.id + "|" + field[0];
+        if (this.expected.has(cacheKey))
+            return this.expected.get(cacheKey);
+        let value = object;
+        for (let i = 1; i < field.length; i++) {
+            if (value === null || typeof value !== "object" || Array.isArray(value))
+                throw new Error(_("Invalid structure in the assigned preset."));
+            if (!Object.prototype.hasOwnProperty.call(value, field[i])) {
+                if (i !== field.length - 1)
+                    throw new Error(_("Incomplete structure in the assigned preset."));
+                value = undefined;
+                break;
+            }
+            value = value[field[i]];
+        }
+        if (value === undefined)
+            value = group.settings.get_default_value(field[0]).deep_unpack();
+        // Match 7.2.3's compatibility handling for older IR/model presets.
+        const legacyKey = field[0] === "kernel-name" ? "kernel-path"
+            : field[0] === "model-name" ? "model-path" : null;
+        if (legacyKey && value === "" && typeof object[legacyKey] === "string" && object[legacyKey]) {
+            const filename = object[legacyKey].split("/").pop();
+            const dot = filename.lastIndexOf(".");
+            value = dot > 0 ? filename.slice(0, dot) : filename;
+        }
+        this.expected.set(cacheKey, value);
+        return value;
+    }
+
+    _matchesFields(group, fields, object) {
+        for (const field of fields) {
+            const wanted = this._wanted(group, field, object);
+            const actual = group.settings.get_value(field[0]).deep_unpack();
+            if (!PresetStateReader.equal(actual, wanted))
+                return false;
+        }
+        return true;
+    }
+
+    matches(preset) {
+        const section = preset && preset.output;
+        if (!section || !Array.isArray(section.plugins_order))
+            throw new Error(_("The assigned preset does not contain a valid output effect list."));
+        const order = section.plugins_order.map(name => {
+            if (typeof name !== "string")
+                throw new Error(_("Invalid effect name in the assigned preset."));
+            return name.includes("#") ? name : name + "#0";
+        });
+        // The cheap pipeline comparison precedes all effect parameter reads.
+        if (!PresetStateReader.equal(order, this.output.settings.get_strv("plugins")))
+            return false;
+        if (this.reference !== preset) {
+            this.reference = preset;
+            this.expected.clear();
+        }
+        const blocklist = section.blocklist === undefined
+            ? this.output.settings.get_default_value("blocklist").deep_unpack() : section.blocklist;
+        if (!PresetStateReader.equal(blocklist, this.output.settings.get_strv("blocklist")))
+            return false;
+        for (const name of order) {
+            const plugin = this._plugin(name);
+            const object = Object.prototype.hasOwnProperty.call(section, name)
+                ? section[name] : section[plugin.base];
+            if (!object || typeof object !== "object" || Array.isArray(object))
+                throw new Error(_("The effect configuration is missing from the assigned preset: %s").format(name));
+            const group = this._group(plugin.definition.schema, plugin.path);
+            // Flags, number of bands and mode precede remaining main/band fields.
+            if (!this._matchesFields(group, plugin.definition.fields, object))
+                return false;
+            if (plugin.base === "equalizer") {
+                const bands = group.settings.get_int("num-bands");
+                for (const side of ["left", "right"]) {
+                    const fields = [];
+                    for (let n = 0; n < bands; n++) {
+                        for (const key of this.map.equalizerChannel.fields)
+                            fields.push(["band" + n + "-" + key, side, "band" + n, key]);
+                    }
+                    if (!this._matchesFields(this._channel(plugin, side), fields, object))
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    destroy() {
+        for (const group of this.groups.values()) {
+            if (group.signal)
+                group.settings.disconnect(group.signal);
+        }
+        this.groups.clear();
+        this.expected.clear();
+    }
+}
+
+class EasyEffectsPresetSelector extends Applet.IconApplet {
+    constructor(metadata, orientation, panelHeight, instanceId) {
+        super(orientation, panelHeight, instanceId);
+        this._loading = false;
+        this._removed = false;
+        this._presetItems = [];
+        this._settings = null;
+        this._settingsSignal = 0;
+        this._shutdownSettingsSignal = 0;
+        this._bypassSettingsSignal = 0;
+        this._bypassAvailable = false;
+        this._bypassButton = null;
+        this._bypassTooltip = null;
+        this._menuTitleItem = null;
+        this._bypassSlot = null;
+        this._matchedQuickSlot = -1;
+        this._markerName = "";
+        this._shutdownAvailable = false;
+        this._appletSettings = null;
+        this._quickPresetTop = "";
+        this._quickPresetMiddle = "";
+        this._quickPresetBottom = "";
+        this._availablePresetNames = null;
+        this._scrollTargetName = null;
+        this._scrollSignal = 0;
+        this._launchFromMenuTitle = false;
+        this._allowBypassControl = true;
+        this._keepMenuOpenOnBypass = false;
+        this._middleClickBypass = false;
+        this._scrollPresets = true;
+        TOOLTIP_PROPERTIES.forEach(property => { this[property] = true; });
+        this._appletPath = metadata.path;
+        this._fileCancellable = new Gio.Cancellable();
+        this._parameterMap = null;
+        this._readerPromise = null;
+        this._stateUpdateRevision = 0;
+        this._menuRevision = 0;
+        this._quickOptionsRevision = 0;
+        this._nativeOptionsRevision = 0;
+        this._autostartRevision = 0;
+        this._autostartWrite = null;
+        this._autostartMonitorRevision = 0;
+        this._stateReader = null;
+        this._stateTimeout = 0;
+        this._externalLoadPending = false;
+        this._selectionDirty = false;
+        this._referenceCache = new Map();
+        this._comparisonError = "";
+        this._presetMonitor = null;
+        this._presetMonitorSignal = 0;
+        this._temporaryPresetName = null;
+        this._requestedPresetName = null;
+        this._autostartMonitor = null;
+        this._autostartMonitorSignal = 0;
+        this._autostartMonitorPath = null;
+        this._autostartDirectory = GLib.build_filenamev([GLib.get_user_config_dir(), "autostart"]);
+        this._autostartFile = Gio.File.new_for_path(
+            GLib.build_filenamev([this._autostartDirectory, "easyeffects-service.desktop"])
+        );
+        this._outputDirectory = GLib.build_filenamev([
+            GLib.get_user_config_dir(), "easyeffects", "output"
+        ]);
+
+        this.set_applet_icon_symbolic_name("com.github.wwmm.easyeffects-symbolic");
+        this._createIconOverlay(metadata.path);
+        this._scrollSignal = this.actor.connect("scroll-event", (actor, event) => this._onPresetScroll(event));
+
+        // AppletPopupMenu passes this.actor to Cinnamon and follows panel orientation.
+        // The context menu keeps its base-class manager. Sharing that manager
+        // would switch between both menus on hover over their common source actor.
+        this._presetMenuManager = new PopupMenu.PopupMenuManager(this);
+        this.menu = new Applet.AppletPopupMenu(this, orientation);
+        this._presetMenuManager.addMenu(this.menu);
+
+        try {
+            const source = Gio.SettingsSchemaSource.get_default();
+            const schema = source ? source.lookup(SCHEMA_ID, true) : null;
+            if (schema && schema.has_key(OUTPUT_PRESET_KEY)) {
+                this._settings = Gio.Settings.new_full(schema, null, null);
+                this._settingsSignal = this._settings.connect(
+                    "changed::" + OUTPUT_PRESET_KEY, () => this._onLoadedPresetChanged()
+                );
+                if (schema.has_key(BYPASS_KEY)) {
+                    this._bypassAvailable = true;
+                    this._bypassSettingsSignal = this._settings.connect("changed::" + BYPASS_KEY, () => {
+                        this._syncBypassButton();
+                        // Global bypass changes status, not preset selection.
+                        this._syncQuickState();
+                    });
+                    // Gio requires a read with the handler already connected.
+                    this._settings.get_boolean(BYPASS_KEY);
+                }
+                this._shutdownAvailable = schema.has_key(SHUTDOWN_KEY);
+                if (this._shutdownAvailable) {
+                    this._shutdownSettingsSignal = this._settings.connect(
+                        "changed::" + SHUTDOWN_KEY, () => this._syncEasyEffectsOptions()
+                    );
+                }
+            }
+        } catch (error) {
+            global.logError(error, UUID);
+        }
+
+        try {
+            this._appletSettings = new SelectorSettings(this, UUID, instanceId);
+            if (!this._appletSettings.isReady)
+                throw new Error(_("The Cinnamon applet settings could not be initialized."));
+            QUICK_PRESET_KEYS.forEach((key, index) => {
+                this._appletSettings.bind(key, QUICK_PRESET_PROPERTIES[index], this._onQuickPresetsChanged);
+            });
+            this._appletSettings.bind(LAUNCH_FROM_TITLE_OPTION, "_launchFromMenuTitle", this._onMenuTitleModeChanged);
+            this._appletSettings.bind(BYPASS_CONTROL_OPTION, "_allowBypassControl", this._onMenuTitleModeChanged);
+            this._appletSettings.bind(KEEP_MENU_OPEN_OPTION, "_keepMenuOpenOnBypass");
+            this._appletSettings.bind(MIDDLE_CLICK_BYPASS_OPTION, "_middleClickBypass");
+            this._appletSettings.bind(SCROLL_PRESETS_OPTION, "_scrollPresets", this._onScrollOptionChanged);
+            TOOLTIP_KEYS.forEach((key, index) => {
+                this._appletSettings.bind(key, TOOLTIP_PROPERTIES[index], this._onTooltipOptionsChanged);
+            });
+            this._appletSettings.bind(AUTOSTART_OPTION, "_startService", this._onAutostartChanged);
+            this._appletSettings.bind(SHUTDOWN_OPTION, "_shutdownOnClose", this._onShutdownChanged);
+            this._restoreSelectionTracker();
+            this._syncQuickOptions();
+            this._monitorPresetDirectory();
+            this._syncEasyEffectsOptions();
+            this._monitorAutostart();
+        } catch (error) {
+            global.logError(error, UUID);
+            Main.notify("EasyEffects", error.message);
+        }
+
+        this._updateSelection();
+    }
+
+    _createIconOverlay(appletPath) {
+        this._iconOverlay = new St.Widget({
+            layout_manager: new Clutter.BinLayout(),
+            x_expand: false,
+            y_expand: false,
+            reactive: false
+        });
+        this._presetDot = new St.Icon({
+            gicon: new Gio.FileIcon({file: Gio.File.new_for_path(
+                GLib.build_filenamev([appletPath, "deviation-dot.svg"])
+            )}),
+            icon_type: St.IconType.FULLCOLOR,
+            icon_size: 9 * global.ui_scale,
+            x_align: Clutter.ActorAlign.END,
+            y_align: Clutter.ActorAlign.END,
+            // BinLayout uses ActorAlign only for children marked as expanding.
+            x_expand: true,
+            y_expand: true,
+            reactive: false,
+            visible: false
+        });
+        this._applet_icon_box.set_child(null);
+        this._iconOverlay.add_child(this._applet_icon);
+        this._iconOverlay.add_child(this._presetDot);
+        // Center the overlay at the icon's natural size rather than stretching
+        // it to the full panel height. The badge stays inside the icon bounds.
+        this._applet_icon_box.set_fill(false, false);
+        this._applet_icon_box.set_child(this._iconOverlay);
+    }
+
+    _quickEntries() {
+        const seen = new Set();
+        return QUICK_PRESET_PROPERTIES.flatMap((property, slot) => {
+            const name = this[property];
+            if (typeof name !== "string" || !name || seen.has(name))
+                return [];
+            seen.add(name);
+            return [{name, slot, key: QUICK_PRESET_KEYS[slot]}];
+        });
+    }
+
+    _hasQuickPresets() {
+        return this._quickEntries().length > 0;
+    }
+
+    _quickSignature() {
+        return JSON.stringify(QUICK_PRESET_PROPERTIES.map(property => this[property]));
+    }
+
+    async _syncQuickOptions(names = null) {
+        if (this._removed || !this._appletSettings || !this._appletSettings.isReady)
+            return;
+        const revision = ++this._quickOptionsRevision;
+        try {
+            const available = names || await this._readPresets();
+            if (this._removed || revision !== this._quickOptionsRevision)
+                return;
+            this._availablePresetNames = available;
+            for (let slot = 0; slot < QUICK_PRESET_KEYS.length; slot++) {
+                const current = this[QUICK_PRESET_PROPERTIES[slot]];
+                const options = Object.create(null);
+                let emptyLabel = _("No preset");
+                while (available.includes(emptyLabel) || current === emptyLabel)
+                    emptyLabel += " ";
+                options[emptyLabel] = "";
+                // Keep occupied names visible. The GTK dropdown disables choices
+                // assigned to another position instead of hiding those rows.
+                available.forEach(name => { options[name] = name; });
+                for (const entry of this._quickEntries().filter(entry => !available.includes(entry.name))) {
+                    let missingLabel = _("%s (no longer available)").format(entry.name);
+                    while (Object.prototype.hasOwnProperty.call(options, missingLabel))
+                        missingLabel += " ";
+                    options[missingLabel] = entry.name;
+                }
+                const key = QUICK_PRESET_KEYS[slot];
+                if (JSON.stringify(options) !== JSON.stringify(this._appletSettings.getOptions(key)))
+                    this._appletSettings.setOptions(key, options);
+            }
+        } catch (error) {
+            if (!this._removed)
+                global.logError(error, UUID);
+        }
+    }
+
+    async _readAutostart() {
+        // Match the native EasyEffects 7.2.3 preferences, including symlinks to files.
+        const info = await fileInfo(this._autostartFile, this._fileCancellable);
+        return Boolean(info && info.get_file_type() === Gio.FileType.REGULAR);
+    }
+
+    async _syncEasyEffectsOptions() {
+        if (this._removed || !this._appletSettings || !this._appletSettings.isReady)
+            return;
+        const revision = ++this._nativeOptionsRevision;
+        const writeRevision = this._autostartRevision;
+        try {
+            // setValue updates Cinnamon's settings dialog without invoking the
+            // bound change callbacks. EasyEffects remains authoritative at startup.
+            this._appletSettings.setValue(SHUTDOWN_OPTION,
+                this._shutdownAvailable ? this._settings.get_boolean(SHUTDOWN_KEY) : false);
+            if (this._autostartWrite)
+                await this._autostartWrite;
+            const enabled = await this._readAutostart();
+            if (!this._removed && revision === this._nativeOptionsRevision &&
+                writeRevision === this._autostartRevision)
+                this._appletSettings.setValue(AUTOSTART_OPTION, enabled);
+        } catch (error) {
+            if (!this._removed)
+                global.logError(error, UUID);
+        }
+    }
+
+    _onAutostartChanged() {
+        if (this._removed)
+            return;
+        const enabled = Boolean(this._startService);
+        const revision = ++this._autostartRevision;
+        const previous = this._autostartWrite || Promise.resolve();
+        const operation = previous.then(async () => {
+            if (this._removed || revision !== this._autostartRevision)
+                return;
+            const info = await fileInfo(this._autostartFile, this._fileCancellable);
+            if (this._removed || revision !== this._autostartRevision)
+                return;
+            const actual = Boolean(info && info.get_file_type() === Gio.FileType.REGULAR);
+            if (enabled !== actual) {
+                if (enabled) {
+                    if (info)
+                        throw new Error(_("The EasyEffects autostart path is not a regular file."));
+                    try {
+                        await makeDirectory(Gio.File.new_for_path(this._autostartDirectory), this._fileCancellable);
+                    } catch (error) {
+                        throw new Error(_("The autostart directory could not be created."));
+                    }
+                    // GBytes owns its buffer for the full asynchronous write.
+                    await fileOperation(this._autostartFile, "replace_contents_bytes_async", "replace_contents_finish", [
+                        new GLib.Bytes(ByteArray.fromString(AUTOSTART_CONTENT)), null, false,
+                        Gio.FileCreateFlags.PRIVATE, this._fileCancellable
+                    ]);
+                } else {
+                    try {
+                        await fileOperation(this._autostartFile, "delete_async", "delete_finish", [
+                            GLib.PRIORITY_DEFAULT, this._fileCancellable
+                        ]);
+                    } catch (error) {
+                        if (!ioError(error, Gio.IOErrorEnum.NOT_FOUND))
+                            throw error;
+                    }
+                }
+            }
+        }).catch(error => {
+            if (!this._removed) {
+                global.logError(error, UUID);
+                Main.notify("EasyEffects", _("Autostart could not be changed: %s").format(error.message));
+            }
+        });
+        this._autostartWrite = operation;
+        operation.then(() => {
+            if (this._autostartWrite === operation) {
+                this._autostartWrite = null;
+                if (!this._removed) {
+                    this._monitorAutostart();
+                    this._syncEasyEffectsOptions();
+                }
+            }
+        });
+        return operation;
+    }
+
+    _onShutdownChanged() {
+        if (this._removed)
+            return;
+        try {
+            if (!this._shutdownAvailable)
+                throw new Error(_("The EasyEffects setting is not available."));
+            if (this._settings.get_boolean(SHUTDOWN_KEY) !== this._shutdownOnClose) {
+                if (!this._settings.set_boolean(SHUTDOWN_KEY, this._shutdownOnClose))
+                    throw new Error(_("The EasyEffects setting could not be saved."));
+                Gio.Settings.sync();
+            }
+        } catch (error) {
+            global.logError(error, UUID);
+            Main.notify("EasyEffects", error.message);
+        }
+        this._syncEasyEffectsOptions();
+    }
+
+    _clearAutostartMonitor() {
+        if (this._autostartMonitor) {
+            this._autostartMonitor.disconnect(this._autostartMonitorSignal);
+            this._autostartMonitor.cancel();
+            this._autostartMonitor = null;
+        }
+        this._autostartMonitorSignal = 0;
+        this._autostartMonitorPath = null;
+    }
+
+    async _monitorAutostart() {
+        if (this._removed)
+            return;
+        const revision = ++this._autostartMonitorRevision;
+        try {
+            // Watch the parent until EasyEffects (or the user) creates autostart.
+            const directory = Gio.File.new_for_path(this._autostartDirectory);
+            const info = await fileInfo(directory, this._fileCancellable);
+            if (this._removed || revision !== this._autostartMonitorRevision)
+                return;
+            const target = info && info.get_file_type() === Gio.FileType.DIRECTORY
+                ? directory : Gio.File.new_for_path(GLib.get_user_config_dir());
+            const path = target.get_path();
+            if (this._autostartMonitorPath === path)
+                return;
+            this._clearAutostartMonitor();
+            this._autostartMonitor = target.monitor_directory(Gio.FileMonitorFlags.NONE, null);
+            this._autostartMonitorPath = path;
+            this._autostartMonitorSignal = this._autostartMonitor.connect("changed", () => {
+                if (!this._removed) {
+                    this._syncEasyEffectsOptions();
+                    this._monitorAutostart();
+                }
+            });
+        } catch (error) {
+            if (!this._removed)
+                global.logError(error, UUID);
+        }
+    }
+
+    _monitorPresetDirectory() {
+        if (this._presetMonitor || !this._appletSettings || !this._appletSettings.isReady)
+            return;
+        try {
+            const directory = Gio.File.new_for_path(this._outputDirectory);
+            this._presetMonitor = directory.monitor_directory(Gio.FileMonitorFlags.NONE, null);
+            this._presetMonitorSignal = this._presetMonitor.connect("changed", (monitor, file, otherFile) => {
+                if (this._removed)
+                    return;
+                let affectsSelection = false;
+                for (const entry of this._quickEntries()) {
+                    const presetPath = GLib.build_filenamev([this._outputDirectory, entry.name + ".json"]);
+                    if (!file || file.get_path() === presetPath ||
+                        (otherFile && otherFile.get_path() === presetPath)) {
+                        this._invalidateQuickReference(entry.name);
+                        affectsSelection = true;
+                        if (entry.name === this._currentPresetName()) {
+                            this._matchedQuickSlot = -1;
+                            this._syncQuickState();
+                        }
+                    }
+                }
+                if (affectsSelection)
+                    this._queueStateUpdate();
+                this._syncQuickOptions();
+                if (this.menu.isOpen)
+                    this._populateMenu();
+            });
+        } catch (error) {
+            if (!ioError(error, Gio.IOErrorEnum.NOT_FOUND))
+                global.logError(error, UUID);
+        }
+    }
+
+    _onQuickPresetsChanged() {
+        if (this._removed)
+            return;
+        this._invalidateQuickReference();
+        this._matchedQuickSlot = -1;
+        this._scrollTargetName = null;
+        if (!this._hasQuickPresets()) {
+            this._cancelStateUpdate();
+            this._externalLoadPending = false;
+            this._selectionDirty = false;
+            if (this._stateReader) {
+                this._stateReader.destroy();
+                this._stateReader = null;
+            }
+        }
+        this._syncQuickState();
+        this._syncQuickOptions();
+        if (this.menu.isOpen)
+            this._populateMenu();
+        else
+            this._updateSelection();
+    }
+
+    _onMenuTitleModeChanged() {
+        if (!this._removed && this.menu.isOpen)
+            this._populateMenu();
+    }
+
+    _addBypassButton() {
+        const button = new St.Button({
+            style_class: "ee-bypass-button",
+            reactive: true,
+            can_focus: true,
+            track_hover: true,
+            toggle_mode: true,
+            child: new St.Icon({
+                gicon: new Gio.FileIcon({file: Gio.File.new_for_path(
+                    GLib.build_filenamev([this._appletPath, "ee-bypass-symbolic.svg"])
+                )}),
+                icon_type: St.IconType.SYMBOLIC,
+                icon_size: 16 * global.ui_scale
+            })
+        });
+        // An unavailable control must still intercept pointer events, otherwise a click
+        // would reach the enclosing title's application-launch action.
+        const stopOtherButtons = (actor, event) => this._canToggleBypass() && event.get_button() === 1
+            ? Clutter.EVENT_PROPAGATE : Clutter.EVENT_STOP;
+        button.connect("button-press-event", stopOtherButtons);
+        button.connect("button-release-event", stopOtherButtons);
+        const stopStatusKeys = (actor, event) => !this._canToggleBypass() &&
+            [Clutter.KEY_space, Clutter.KEY_Return, Clutter.KEY_KP_Enter].includes(event.get_key_symbol())
+            ? Clutter.EVENT_STOP : Clutter.EVENT_PROPAGATE;
+        button.connect("key-press-event", stopStatusKeys);
+        button.connect("key-release-event", stopStatusKeys);
+        button.connect("clicked", () => this._toggleBypass());
+        // Keep PopupBaseMenuItem's columns stable when the control appears or leaves.
+        this._bypassSlot.set_child(button);
+        button.show();
+        this._bypassButton = button;
+        // Cinnamon destroys this tooltip when its button actor is destroyed.
+        this._bypassTooltip = new Tooltips.Tooltip(button);
+    }
+
+    _canToggleBypass(fromMiddleClick = false) {
+        return !this._removed && Boolean(this._settings && this._bypassAvailable) &&
+            (fromMiddleClick ? this._middleClickBypass === true :
+                this._launchFromMenuTitle === true && this._allowBypassControl === true);
+    }
+
+    _shouldKeepPresetMenuOpen() {
+        return !this._removed && this._keepMenuOpenOnBypass === true &&
+            Boolean(this._settings && this._bypassAvailable && this._settings.get_boolean(BYPASS_KEY));
+    }
+
+    _syncBypassButton() {
+        if (this._removed || !this._bypassSlot)
+            return;
+        const available = Boolean(this._settings && this._bypassAvailable);
+        const enabled = available && this._settings.get_boolean(BYPASS_KEY);
+        const controlSelected = this._launchFromMenuTitle === true && this._allowBypassControl === true;
+        if (!controlSelected) {
+            if (this._bypassButton) {
+                this._bypassSlot.set_child(null);
+                this._bypassButton.destroy();
+                this._bypassButton = null;
+                this._bypassTooltip = null;
+            }
+            return;
+        }
+        if (!this._bypassButton)
+            this._addBypassButton();
+        const interactive = this._canToggleBypass();
+        this._bypassButton.can_focus = interactive;
+        this._bypassButton.track_hover = interactive;
+        this._bypassButton.toggle_mode = interactive;
+        this._bypassButton.checked = enabled;
+        this._bypassButton.change_style_pseudo_class("insensitive", !interactive);
+        this._bypassButton.show();
+        const text = available
+            ? (enabled ? _("Global bypass: on") : _("Global bypass: off"))
+            : _("Global bypass is unavailable");
+        this._bypassButton.accessible_name = text;
+        this._bypassTooltip.set_text(this._showTooltips ? text : "");
+        if (!this._showTooltips)
+            this._bypassTooltip.hide();
+    }
+
+    _toggleBypass(fromMiddleClick = false) {
+        if (!this._canToggleBypass(fromMiddleClick))
+            return;
+        try {
+            const enabled = this._settings.get_boolean(BYPASS_KEY);
+            if (!this._settings.set_boolean(BYPASS_KEY, !enabled))
+                throw new Error(_("The EasyEffects bypass setting could not be changed."));
+        } catch (error) {
+            global.logError(error, UUID);
+            Main.notify("EasyEffects", _("Bypass could not be changed: %s").format(error.message));
+        } finally {
+            // Restore the real state if a write failed, rather than retaining the click's toggle.
+            this._syncBypassButton();
+            this._syncQuickState();
+        }
+    }
+
+    configureApplet(tab = 0) {
+        this._syncQuickOptions();
+        this._monitorPresetDirectory();
+        this._syncEasyEffectsOptions();
+        this._monitorAutostart();
+        super.configureApplet(tab);
+    }
+
+    // Cinnamon's base class consumes the button event and invokes this hook.
+    on_applet_clicked() {
+        if (!this.menu.isOpen)
+            this._populateMenu();
+        this.menu.toggle();
+    }
+
+    on_applet_middle_clicked() {
+        this._toggleBypass(true);
+    }
+
+    _onScrollOptionChanged() {
+        if (this._scrollPresets !== true)
+            this._scrollTargetName = null;
+    }
+
+    _onPresetScroll(event) {
+        if (this._removed || this._scrollPresets !== true || !this._applet_enabled || !this._draggable.inhibit)
+            return Clutter.EVENT_PROPAGATE;
+        const direction = event.get_scroll_direction();
+        if (direction !== Clutter.ScrollDirection.UP && direction !== Clutter.ScrollDirection.DOWN)
+            return Clutter.EVENT_PROPAGATE;
+        const entries = this._quickEntries().filter(entry =>
+            this._availablePresetNames && this._availablePresetNames.includes(entry.name));
+        if (!entries.length)
+            return Clutter.EVENT_PROPAGATE;
+        const current = this._scrollTargetName || this._requestedPresetName || this._currentPresetName();
+        const index = entries.findIndex(entry => entry.name === current);
+        const step = direction === Clutter.ScrollDirection.DOWN ? 1 : -1;
+        const next = index < 0 ? (step > 0 ? 0 : entries.length - 1)
+            : (index + step + entries.length) % entries.length;
+        this._scrollTargetName = entries[next].name;
+        this._loadNextScrolledPreset();
+        return Clutter.EVENT_STOP;
+    }
+
+    _loadNextScrolledPreset(completedName = null) {
+        if (this._removed || this._scrollPresets !== true || this._loading || !this._scrollTargetName)
+            return;
+        const name = this._scrollTargetName;
+        this._scrollTargetName = null;
+        const entry = this._quickEntries().find(candidate => candidate.name === name);
+        if (!entry || !this._availablePresetNames || !this._availablePresetNames.includes(name))
+            return;
+        if (name === completedName ||
+            (name === this._currentPresetName() && this._matchedQuickSlot === entry.slot))
+            return;
+        this._loadPreset(name);
+    }
+
+    async _readPresets() {
+        const directory = Gio.File.new_for_path(this._outputDirectory);
+        let enumerator;
+        try {
+            enumerator = await fileOperation(directory, "enumerate_children_async", "enumerate_children_finish", [
+                "standard::name,standard::type", Gio.FileQueryInfoFlags.NONE,
+                GLib.PRIORITY_DEFAULT, this._fileCancellable
+            ]);
+        } catch (error) {
+            if (ioError(error, Gio.IOErrorEnum.NOT_FOUND))
+                return [];
+            throw error;
+        }
+        const names = [];
+        try {
+            while (true) {
+                const batch = await fileOperation(enumerator, "next_files_async", "next_files_finish", [
+                    64, GLib.PRIORITY_DEFAULT, this._fileCancellable
+                ]);
+                if (batch.length === 0)
+                    break;
+                for (const info of batch) {
+                    const filename = info.get_name();
+                    if (info.get_file_type() === Gio.FileType.REGULAR && filename.endsWith(".json") &&
+                        filename.slice(0, -5) !== this._temporaryPresetName)
+                        names.push(filename.slice(0, -5));
+                }
+            }
+        } finally {
+            await fileOperation(enumerator, "close_async", "close_finish", [GLib.PRIORITY_DEFAULT, null]);
+        }
+        return names.sort((a, b) => a.localeCompare(b));
+    }
+
+    async _populateMenu() {
+        if (this._removed)
+            return;
+        const revision = ++this._menuRevision;
+        this._bypassButton = null;
+        this._bypassTooltip = null;
+        this._menuTitleItem = null;
+        this._bypassSlot = null;
+        this.menu.removeAll();
+        this._presetItems = [];
+        const launchFromTitle = this._launchFromMenuTitle === true;
+        // A header needs only a label and a status column, with no preset ornament.
+        const titleItem = new PopupMenu.PopupBaseMenuItem({reactive: launchFromTitle});
+        titleItem.label = new St.Label({text: "Easy Effects"});
+        titleItem.addActor(titleItem.label);
+        titleItem.actor.label_actor = titleItem.label;
+        this._bypassSlot = new St.Bin({x_align: St.Align.END});
+        titleItem.addActor(this._bypassSlot, {span: -1, expand: true, align: St.Align.END});
+        if (launchFromTitle)
+            titleItem.connect("activate", () => Util.spawn(["easyeffects"]));
+        this._menuTitleItem = titleItem;
+        this._syncBypassButton();
+        this.menu.addMenuItem(titleItem);
+        try {
+            const names = await this._readPresets();
+            if (this._removed || revision !== this._menuRevision)
+                return;
+            this._syncQuickOptions(names);
+            this._monitorPresetDirectory();
+            const quickNames = this._quickEntries().map(entry => entry.name).filter(name => names.includes(name));
+            const otherNames = names.filter(name => !quickNames.includes(name));
+            const ordered = otherNames.concat(quickNames);
+            if (names.length === 0) {
+                this.menu.addMenuItem(new PopupMenu.PopupMenuItem(
+                    _("No output presets saved"), {reactive: false}
+                ));
+            }
+            ordered.forEach((name, index) => {
+                if (otherNames.length && quickNames.length && index === otherNames.length)
+                    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+                const item = new PresetMenuItem(name, () => this._shouldKeepPresetMenuOpen());
+                item.setSensitive(!this._loading);
+                item.connect("activate", (item, event) => this._loadPreset(name, event));
+                this._presetItems.push({name, item});
+                this.menu.addMenuItem(item);
+            });
+        } catch (error) {
+            if (this._removed || revision !== this._menuRevision)
+                return;
+            global.logError(error, UUID);
+            this.menu.addMenuItem(new PopupMenu.PopupMenuItem(
+                _("Presets could not be read"), {reactive: false}
+            ));
+        }
+        // Insert after the async content exists: Cinnamon hides trailing separators.
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem(), 1);
+        this._updateSelection();
+    }
+
+    _cancelStateUpdate() {
+        if (this._stateTimeout) {
+            Mainloop.source_remove(this._stateTimeout);
+            this._stateTimeout = 0;
+        }
+    }
+
+    _queueStateUpdate() {
+        if (this._removed)
+            return;
+        // Manual slider movement is sampled at most once per window, so the
+        // indicator updates even while dragging. Loads wait for a quiet window.
+        if (this._stateTimeout && !this._externalLoadPending && !this._loading)
+            return;
+        this._cancelStateUpdate();
+        this._stateTimeout = Mainloop.timeout_add(STATE_UPDATE_DELAY, () => {
+            this._stateTimeout = 0;
+            this._externalLoadPending = false;
+            this._updateSelection();
+            return GLib.SOURCE_REMOVE;
+        });
+    }
+
+    _onLoadedPresetChanged() {
+        if (this._removed)
+            return;
+        if (!this._hasQuickPresets()) {
+            this._updateSelection();
+            return;
+        }
+        this._matchedQuickSlot = -1;
+        this._syncQuickState();
+        // EasyEffects writes this key before applying the pipeline and its values.
+        // Treat the following coalesced changes as loading, not manual editing.
+        this._selectionDirty = false;
+        this._saveSelectionTracker();
+        this._externalLoadPending = true;
+        this._queueStateUpdate();
+    }
+
+    _onEffectStateChanged() {
+        if (this._removed)
+            return;
+        if (!this._loading && !this._externalLoadPending && !this._selectionDirty) {
+            this._selectionDirty = true;
+            this._saveSelectionTracker();
+        }
+        this._queueStateUpdate();
+    }
+
+    _restoreSelectionTracker() {
+        if (!this._hasQuickPresets() || !this._appletSettings || !this._appletSettings.isReady)
+            return;
+        try {
+            const saved = JSON.parse(this._appletSettings.getValue(SELECTION_TRACKER_KEY) || "null");
+            if (saved && saved.name === this._currentPresetName() && typeof saved.dirty === "boolean")
+                this._selectionDirty = saved.dirty;
+        } catch (error) {
+            // A damaged historical marker must not affect preset selection.
+            this._selectionDirty = true;
+        }
+    }
+
+    _saveSelectionTracker() {
+        if (this._removed || this._loading || !this._hasQuickPresets() ||
+            !this._appletSettings || !this._appletSettings.isReady)
+            return;
+        try {
+            const value = JSON.stringify({name: this._currentPresetName(), dirty: this._selectionDirty});
+            if (this._appletSettings.getValue(SELECTION_TRACKER_KEY) !== value)
+                this._appletSettings.setValue(SELECTION_TRACKER_KEY, value);
+        } catch (error) {
+            global.logError(error, UUID);
+        }
+    }
+
+    _invalidateQuickReference(name = null) {
+        if (name === null)
+            this._referenceCache.clear();
+        else
+            this._referenceCache.delete(name);
+    }
+
+    _ensureStateReader() {
+        if (!this._hasQuickPresets())
+            return Promise.resolve(null);
+        if (this._stateReader)
+            return Promise.resolve(this._stateReader);
+        if (this._readerPromise)
+            return this._readerPromise;
+        const operation = (async () => {
+            if (!this._parameterMap) {
+                const file = Gio.File.new_for_path(GLib.build_filenamev([this._appletPath, "preset-map.json"]));
+                const [ok, contents] = await fileOperation(file, "load_contents_async", "load_contents_finish", [
+                    this._fileCancellable
+                ]);
+                if (!ok)
+                    throw new Error(_("The effect parameter map could not be read."));
+                this._parameterMap = JSON.parse(ByteArray.toString(contents));
+            }
+            if (this._removed || !this._hasQuickPresets())
+                return null;
+            this._stateReader = new PresetStateReader(this._parameterMap, () => this._onEffectStateChanged());
+            return this._stateReader;
+        })();
+        this._readerPromise = operation;
+        const clear = () => {
+            if (this._readerPromise === operation)
+                this._readerPromise = null;
+        };
+        operation.then(clear, clear);
+        return operation;
+    }
+
+    async _readQuickPreset(name) {
+        let reference = this._referenceCache.get(name);
+        if (!reference) {
+            reference = {preset: null, error: "", promise: null};
+            this._referenceCache.set(name, reference);
+            reference.promise = (async () => {
+                let preset = null;
+                let readError = "";
+                try {
+                    const file = Gio.File.new_for_path(GLib.build_filenamev([
+                        this._outputDirectory, name + ".json"
+                    ]));
+                    const [ok, contents] = await fileOperation(file, "load_contents_async", "load_contents_finish", [
+                        this._fileCancellable
+                    ]);
+                    if (!ok)
+                        throw new Error(_("The assigned preset could not be read."));
+                    preset = JSON.parse(ByteArray.toString(contents));
+                } catch (error) {
+                    readError = _("The assigned preset cannot be read: %s").format(error.message);
+                }
+                // An invalidated, superseded or cancelled read cannot repopulate the cache.
+                if (!this._removed && this._referenceCache.get(name) === reference) {
+                    reference.preset = preset;
+                    reference.error = readError;
+                }
+            })();
+        }
+        await reference.promise;
+        return this._referenceCache.get(name) === reference ? reference : null;
+    }
+
+    _currentPresetName() {
+        let name = this._settings ? this._settings.get_string(OUTPUT_PRESET_KEY) : "";
+        if (this._temporaryPresetName && name === this._temporaryPresetName)
+            name = this._requestedPresetName;
+        return name;
+    }
+
+    async _updateSelection() {
+        if (this._removed)
+            return;
+        const revision = ++this._stateUpdateRevision;
+        if (this._loading) {
+            this._syncTooltip();
+            return;
+        }
+        const name = this._currentPresetName();
+        const signature = this._quickSignature();
+        const entries = this._quickEntries();
+        const candidate = entries.find(entry => entry.name === name);
+        let markerName = name;
+        let matchedSlot = -1;
+        let comparisonError = "";
+        if (this._settings && entries.length) {
+            markerName = "";
+            try {
+                const reader = await this._ensureStateReader();
+                if (this._removed || revision !== this._stateUpdateRevision || !reader)
+                    return;
+                try {
+                    reader.refresh();
+                } catch (error) {
+                    reader.needsRefresh = true;
+                    throw error;
+                }
+                // A name identifies at most one candidate. Never compare all three files.
+                if (candidate) {
+                    const reference = await this._readQuickPreset(name);
+                    if (this._removed || revision !== this._stateUpdateRevision || !reference)
+                        return;
+                    if (!reference.preset)
+                        throw new Error(reference.error);
+                    reader.refresh();
+                    if (reader.matches(reference.preset)) {
+                        matchedSlot = candidate.slot;
+                        markerName = name;
+                    }
+                } else if (!this._selectionDirty) {
+                    markerName = name;
+                }
+            } catch (error) {
+                comparisonError = error.message;
+            }
+        }
+        // Later assignments, loads, menu changes or removal supersede an earlier read.
+        if (this._removed || revision !== this._stateUpdateRevision || this._loading ||
+            signature !== this._quickSignature() || name !== this._currentPresetName())
+            return;
+        this._comparisonError = comparisonError;
+        this._presetItems.forEach(entry => entry.item.setShowDot(entry.name === markerName));
+        this._markerName = markerName;
+        this._matchedQuickSlot = matchedSlot;
+        this._syncQuickState();
+    }
+
+    _syncQuickState() {
+        if (this._removed)
+            return;
+        const bypass = Boolean(this._settings && this._bypassAvailable &&
+            this._settings.get_boolean(BYPASS_KEY));
+        // Dim only the base icon; the full-color badge is a separate sibling.
+        this._applet_icon.opacity = bypass ? BYPASS_ICON_OPACITY : 255;
+        const alignments = [Clutter.ActorAlign.START, Clutter.ActorAlign.CENTER, Clutter.ActorAlign.END];
+        if (this._matchedQuickSlot >= 0)
+            this._presetDot.y_align = alignments[this._matchedQuickSlot];
+        this._presetDot.visible = this._matchedQuickSlot >= 0;
+        this._syncTooltip();
+    }
+
+    _onTooltipOptionsChanged() {
+        if (this._removed)
+            return;
+        this._syncTooltip();
+        this._syncBypassButton();
+    }
+
+    _syncTooltip() {
+        if (this._removed)
+            return;
+        if (!this._showTooltips) {
+            this.set_applet_tooltip("");
+            return;
+        }
+        if (this._loading) {
+            this.set_applet_tooltip(this._tooltipPreset ? _("Loading preset…") : "");
+            return;
+        }
+        const name = this._currentPresetName();
+        const lines = [];
+        if (this._tooltipPreset)
+            lines.push(name ? _("Preset: %s").format(name) : _("Preset:"));
+        if (this._tooltipQuickPosition && this._matchedQuickSlot >= 0) {
+            const positions = [_("Top"), _("Middle"), _("Bottom")];
+            lines.push(_("Quick selection: %s").format(positions[this._matchedQuickSlot]));
+        }
+        if (this._tooltipSettingsChanged && this._hasQuickPresets() &&
+            this._selectionDirty && this._matchedQuickSlot < 0)
+            lines.push(_("Effect settings changed"));
+        if (this._tooltipBypass && this._settings && this._bypassAvailable &&
+            this._settings.get_boolean(BYPASS_KEY))
+            lines.push(_("Global bypass enabled"));
+        if (this._tooltipComparisonError && this._comparisonError)
+            lines.push(_("Comparison unavailable: %s").format(this._comparisonError));
+        this.set_applet_tooltip(lines.join("\n"));
+    }
+
+    _runCommand(argv, callback) {
+        try {
+            // argv avoids shell interpretation of preset names, including quotes and spaces.
+            const process = Gio.Subprocess.new(argv,
+                Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE);
+            process.communicate_utf8_async(null, null, (proc, result) => {
+                let output;
+                try {
+                    const [ok, stdout, stderr] = proc.communicate_utf8_finish(result);
+                    if (!ok || !proc.get_successful())
+                        throw new Error(stderr || _("The EasyEffects command failed."));
+                    output = stdout || "";
+                } catch (error) {
+                    callback(error, "");
+                    return;
+                }
+                callback(null, output);
+            });
+        } catch (error) {
+            callback(error, "");
+        }
+    }
+
+    async _loadPreset(name, event = null) {
+        if (this._loading || this._removed)
+            return;
+        this._loading = true;
+        this._matchedQuickSlot = -1;
+        this._presetDot.visible = false;
+        this._requestedPresetName = name;
+        const fromKeyboard = event && typeof event.type === "function" &&
+            event.type() === Clutter.EventType.KEY_PRESS;
+        const focusActor = global.stage.get_key_focus();
+        const focusWasPreset = this.menu.isOpen && focusActor &&
+            this._presetItems.some(entry => entry.item.actor.contains(focusActor));
+        const focusWasMenu = this.menu.isOpen && focusActor === this.menu.actor;
+        // Disabling the focused row would make Cinnamon focus the title instead.
+        if (focusWasPreset)
+            this.menu.actor.grab_key_focus();
+        this._presetItems.forEach(entry => entry.item.setSensitive(false));
+        this._updateSelection();
+
+        let commandName = name;
+        let temporaryFile = null;
+        const finish = async error => {
+            if (temporaryFile) {
+                try {
+                    // Cleanup must finish even if removing the applet cancelled its I/O.
+                    await fileOperation(temporaryFile, "delete_async", "delete_finish", [GLib.PRIORITY_DEFAULT, null]);
+                } catch (cleanupError) {
+                    if (!ioError(cleanupError, Gio.IOErrorEnum.NOT_FOUND))
+                        global.logError(cleanupError, UUID);
+                }
+            }
+            this._temporaryPresetName = null;
+            this._requestedPresetName = null;
+            this._loading = false;
+            this._cancelStateUpdate();
+            this._externalLoadPending = false;
+            this._selectionDirty = Boolean(error);
+            this._saveSelectionTracker();
+            if (!this._removed) {
+                // Re-enabling rows can also focus the first preset when the menu
+                // itself held focus, as when scrolling over the panel icon.
+                const restoreFocus = (focusWasPreset || focusWasMenu) && this.menu.isOpen &&
+                    global.stage.get_key_focus() === this.menu.actor;
+                this._presetItems.forEach(entry => entry.item.setSensitive(true));
+                // Respect any navigation or dismissal that occurred while loading.
+                if (restoreFocus) {
+                    if (fromKeyboard) {
+                        const selected = this._presetItems.find(entry => entry.name === name);
+                        (selected ? selected.item.actor : this.menu.actor).grab_key_focus();
+                    } else {
+                        this.menu.actor.grab_key_focus();
+                        const items = [this._menuTitleItem, ...this._presetItems.map(entry => entry.item)];
+                        for (const item of items.filter(Boolean)) {
+                            item.actor.sync_hover();
+                            item.setActive(item.actor.hover);
+                        }
+                    }
+                }
+                this._updateSelection();
+                if (error) {
+                    global.logError(error, UUID);
+                    Main.notify("EasyEffects", _("Preset “%s” could not be loaded.\n%s").format(name, error.message));
+                }
+                this._loadNextScrolledPreset(error ? null : name);
+            }
+        };
+
+        try {
+            const presetFile = Gio.File.new_for_path(GLib.build_filenamev([
+                this._outputDirectory, name + ".json"
+            ]));
+            if (!await fileInfo(presetFile, this._fileCancellable))
+                throw new Error(_("The preset file was moved or deleted."));
+
+            const inputFile = Gio.File.new_for_path(GLib.build_filenamev([
+                GLib.get_user_config_dir(), "easyeffects", "input", name + ".json"
+            ]));
+            // 7.2.3's -l tries input first. A unique temporary output alias ensures
+            // an identically named microphone preset cannot intercept the request.
+            if (await fileInfo(inputFile, this._fileCancellable)) {
+                if (!this._settings)
+                    throw new Error(_("The EasyEffects settings schema was not found."));
+                commandName = "__ee_panel_" + GLib.uuid_string_random();
+                const aliasFile = Gio.File.new_for_path(GLib.build_filenamev([
+                    this._outputDirectory, commandName + ".json"
+                ]));
+                temporaryFile = aliasFile;
+                this._temporaryPresetName = commandName;
+                try {
+                    await fileOperation(presetFile, "copy_async", "copy_finish", [
+                        aliasFile, Gio.FileCopyFlags.NONE, GLib.PRIORITY_DEFAULT, this._fileCancellable, null
+                    ]);
+                } catch (error) {
+                    if (ioError(error, Gio.IOErrorEnum.EXISTS))
+                        temporaryFile = null;
+                    throw error;
+                }
+            }
+            if (this._removed) {
+                await finish(null);
+                return;
+            }
+            const run = argv => new Promise((resolve, reject) => {
+                this._runCommand(argv, (error, output) => error ? reject(error) : resolve(output));
+            });
+            await run(["easyeffects", "--load-preset=" + commandName]);
+            // 7.2.3 can return success even for a malformed preset. Query a fresh
+            // process to verify output selection without relying on cached settings.
+            const output = await run(["easyeffects", "--active-preset=output"]);
+            if (output.replace(/\r?\n$/, "") !== commandName)
+                throw new Error(_("EasyEffects did not load the output preset. Please check the preset file."));
+            if (temporaryFile) {
+                if (!this._settings.set_string(OUTPUT_PRESET_KEY, name))
+                    throw new Error(_("The original preset name could not be restored."));
+                Gio.Settings.sync();
+            }
+            await finish(null);
+        } catch (error) {
+            await finish(error);
+        }
+    }
+
+    on_applet_removed_from_panel() {
+        this._removed = true;
+        this._scrollTargetName = null;
+        if (this._scrollSignal) {
+            this.actor.disconnect(this._scrollSignal);
+            this._scrollSignal = 0;
+        }
+        this._fileCancellable.cancel();
+        this._stateUpdateRevision++;
+        this._menuRevision++;
+        this._quickOptionsRevision++;
+        this._nativeOptionsRevision++;
+        this._autostartMonitorRevision++;
+        this._autostartRevision++;
+        this._invalidateQuickReference();
+        this._cancelStateUpdate();
+        if (this._stateReader) {
+            this._stateReader.destroy();
+            this._stateReader = null;
+        }
+        if (this._settingsSignal) {
+            this._settings.disconnect(this._settingsSignal);
+            this._settingsSignal = 0;
+        }
+        if (this._shutdownSettingsSignal) {
+            this._settings.disconnect(this._shutdownSettingsSignal);
+            this._shutdownSettingsSignal = 0;
+        }
+        if (this._bypassSettingsSignal) {
+            this._settings.disconnect(this._bypassSettingsSignal);
+            this._bypassSettingsSignal = 0;
+        }
+        this._clearAutostartMonitor();
+        if (this._presetMonitor) {
+            if (this._presetMonitorSignal)
+                this._presetMonitor.disconnect(this._presetMonitorSignal);
+            this._presetMonitor.cancel();
+            this._presetMonitor = null;
+        }
+        if (this._appletSettings && this._appletSettings.isReady)
+            this._appletSettings.finalize();
+        this._bypassButton = null;
+        this._bypassTooltip = null;
+        this._menuTitleItem = null;
+        this._bypassSlot = null;
+        this.menu.destroy();
+    }
+}
+
+function main(metadata, orientation, panelHeight, instanceId) {
+    return new EasyEffectsPresetSelector(metadata, orientation, panelHeight, instanceId);
+}

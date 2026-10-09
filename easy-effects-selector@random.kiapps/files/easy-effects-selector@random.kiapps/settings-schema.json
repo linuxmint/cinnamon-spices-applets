@@ -1,0 +1,173 @@
+{
+    "settings-header": {
+        "type": "header",
+        "description": "Quick selection"
+    },
+    "quick-preset-top": {
+        "type": "generic",
+        "default": "",
+        "options": {
+            "No preset": ""
+        }
+    },
+    "quick-preset-top-chooser": {
+        "type": "custom",
+        "description": "Preset at top",
+        "file": "title_mode.py",
+        "widget": "QuickPresetChooser",
+        "setting-key": "quick-preset-top",
+        "preset-keys": [
+            "quick-preset-top",
+            "quick-preset-middle",
+            "quick-preset-bottom"
+        ]
+    },
+    "quick-preset-middle": {
+        "type": "generic",
+        "default": "",
+        "options": {
+            "No preset": ""
+        }
+    },
+    "quick-preset-middle-chooser": {
+        "type": "custom",
+        "description": "Preset at middle",
+        "file": "title_mode.py",
+        "widget": "QuickPresetChooser",
+        "setting-key": "quick-preset-middle",
+        "preset-keys": [
+            "quick-preset-top",
+            "quick-preset-middle",
+            "quick-preset-bottom"
+        ]
+    },
+    "quick-preset-bottom": {
+        "type": "generic",
+        "default": "",
+        "options": {
+            "No preset": ""
+        }
+    },
+    "quick-preset-bottom-chooser": {
+        "type": "custom",
+        "description": "Preset at bottom",
+        "file": "title_mode.py",
+        "widget": "QuickPresetChooser",
+        "setting-key": "quick-preset-bottom",
+        "preset-keys": [
+            "quick-preset-top",
+            "quick-preset-middle",
+            "quick-preset-bottom"
+        ]
+    },
+    "reference-note": {
+        "type": "custom",
+        "description": "A blue dot shows a matching preset at its assigned position. Mouse-wheel selection can be enabled or disabled under Controls. Nothing is loaded at startup.",
+        "file": "title_mode.py",
+        "widget": "ReferenceNote"
+    },
+    "menu-controls-header": {
+        "type": "header",
+        "description": "Controls"
+    },
+    "launch-from-menu-title": {
+        "type": "generic",
+        "default": false
+    },
+    "show-bypass-button": {
+        "type": "generic",
+        "default": false
+    },
+    "toggle-bypass-on-middle-click": {
+        "type": "generic",
+        "default": true
+    },
+    "keep-menu-open-on-bypass": {
+        "type": "generic",
+        "default": true
+    },
+    "switch-presets-with-scroll": {
+        "type": "generic",
+        "default": false
+    },
+    "menu-title-controls": {
+        "type": "custom",
+        "description": "Launch Easy Effects from the menu",
+        "file": "title_mode.py",
+        "widget": "OperationControls",
+        "launch-key": "launch-from-menu-title",
+        "bypass-key": "show-bypass-button",
+        "middle-click-key": "toggle-bypass-on-middle-click",
+        "keep-open-key": "keep-menu-open-on-bypass",
+        "scroll-key": "switch-presets-with-scroll"
+    },
+    "tooltip-header": {
+        "type": "header",
+        "description": "Tooltips"
+    },
+    "show-tooltips": {
+        "type": "generic",
+        "default": true
+    },
+    "tooltip-preset": {
+        "type": "generic",
+        "default": true
+    },
+    "tooltip-quick-position": {
+        "type": "generic",
+        "default": false
+    },
+    "tooltip-settings-changed": {
+        "type": "generic",
+        "default": true
+    },
+    "tooltip-bypass": {
+        "type": "generic",
+        "default": false
+    },
+    "tooltip-comparison-error": {
+        "type": "generic",
+        "default": true
+    },
+    "tooltip-controls": {
+        "type": "custom",
+        "description": "Show tooltips",
+        "file": "title_mode.py",
+        "widget": "TooltipControls",
+        "toggle-key": "show-tooltips"
+    },
+    "selection-tracker": {
+        "type": "generic",
+        "default": ""
+    },
+    "easy-effects-header": {
+        "type": "header",
+        "description": "Easy Effects"
+    },
+    "ee-autostart": {
+        "type": "switch",
+        "default": false,
+        "description": "Launch Service at System Startup",
+        "tooltip": "Start EasyEffects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
+    },
+    "ee-autostart-note": {
+        "type": "custom",
+        "description": "Recommended: <b>enable</b> this so the service is ready in the background when you log in.",
+        "file": "title_mode.py",
+        "widget": "ReferenceNote",
+        "emphasize-action": true
+    },
+    "ee-shutdown-on-window-close": {
+        "type": "switch",
+        "default": false,
+        "description": "Shutdown on Window Closing",
+        "tooltip": "Quit EasyEffects when its window closes. This setting is synchronized in both directions with the EasyEffects settings window."
+    },
+    "ee-shutdown-on-window-close-note": {
+        "type": "custom",
+        "description": "Recommended: <b>disable</b> this so the service keeps running when the window is closed.",
+        "file": "title_mode.py",
+        "widget": "ReferenceNote",
+        "emphasize-action": true
+    }
+}
