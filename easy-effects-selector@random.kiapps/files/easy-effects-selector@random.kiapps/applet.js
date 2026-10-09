@@ -37,6 +37,8 @@ const BYPASS_CONTROL_OPTION = "show-bypass-button";
 const KEEP_MENU_OPEN_OPTION = "keep-menu-open-on-bypass";
 const LEGACY_TITLE_MODE_KEY = "menu-title-mode";
 const STATE_UPDATE_DELAY = 180;
+// Match the 30% opacity of Blueman's bundled disabled symbolic status icon.
+const BYPASS_ICON_OPACITY = Math.round(255 * 0.3);
 const SELECTION_TRACKER_KEY = "selection-tracker";
 const AUTOSTART_CONTENT = "[Desktop Entry]\nName=Easy Effects\nComment=Easy Effects Service\n" +
     "Exec=easyeffects --gapplication-service\nIcon=com.github.wwmm.easyeffects\n" +
@@ -734,7 +736,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 icon_size: 16 * global.ui_scale
             })
         });
-        // Read-only status must still intercept pointer events, otherwise a click
+        // An unavailable control must still intercept pointer events, otherwise a click
         // would reach the enclosing title's application-launch action.
         const stopOtherButtons = (actor, event) => this._canToggleBypass() && event.get_button() === 1
             ? Clutter.EVENT_PROPAGATE : Clutter.EVENT_STOP;
@@ -746,7 +748,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         button.connect("key-press-event", stopStatusKeys);
         button.connect("key-release-event", stopStatusKeys);
         button.connect("clicked", () => this._toggleBypass());
-        // Keep PopupBaseMenuItem's columns stable when a status appears or leaves.
+        // Keep PopupBaseMenuItem's columns stable when the control appears or leaves.
         this._bypassSlot.set_child(button);
         button.show();
         this._bypassButton = button;
@@ -770,7 +772,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         const available = Boolean(this._settings && this._bypassAvailable);
         const enabled = available && this._settings.get_boolean(BYPASS_KEY);
         const controlSelected = this._launchFromMenuTitle === true && this._allowBypassControl === true;
-        if (!controlSelected && !enabled) {
+        if (!controlSelected) {
             if (this._bypassButton) {
                 this._bypassSlot.set_child(null);
                 this._bypassButton.destroy();
@@ -789,8 +791,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._bypassButton.change_style_pseudo_class("insensitive", !interactive);
         this._bypassButton.show();
         const text = available
-            ? (interactive ? (enabled ? _("Global bypass: on") : _("Global bypass: off"))
-                : _("Global bypass: on (status only)"))
+            ? (enabled ? _("Global bypass: on") : _("Global bypass: off"))
             : _("Global bypass is unavailable");
         this._bypassButton.accessible_name = text;
         this._bypassTooltip.set_text(text);
@@ -1134,6 +1135,8 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             return;
         const bypass = Boolean(this._settings && this._bypassAvailable &&
             this._settings.get_boolean(BYPASS_KEY));
+        // Dim only the base icon; the full-color badge is a separate sibling.
+        this._applet_icon.opacity = bypass ? BYPASS_ICON_OPACITY : 255;
         this._deviationDot.visible = Boolean(this._defaultPreset && (this._presetDeviates || bypass));
         if (this._loading)
             return;
@@ -1145,7 +1148,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             lines.push(_("Default preset: %s").format(this._defaultPreset));
         if (this._defaultPreset && this._selectionDirty && this._markerName !== this._defaultPreset)
             lines.push(_("Effect settings changed"));
-        if (this._defaultPreset && bypass)
+        if (bypass)
             lines.push(_("Global bypass enabled"));
         if (this._comparisonError)
             lines.push(_("Comparison unavailable: %s").format(this._comparisonError));

@@ -62,15 +62,19 @@ A new installation enables application launch and menu bypass control. An upgrad
 preserves existing preferences, including the three choices from version 1.4.5.
 Changing these controls does not launch EasyEffects or change its bypass state.
 
-The **global bypass button** uses EasyEffects' normal global bypass. Its
-highlighted state means bypass is enabled. With menu control enabled, clicking
-it toggles bypass and keeps the menu open. Without menu control, active bypass
-still appears as a highlighted, insensitive status button; when bypass is off,
-that status button is absent. This also applies to a title without application
-launch. A status button cannot toggle bypass, launch EasyEffects, or close the
-menu. The button updates immediately when bypass changes in the EasyEffects
-window, with or without a default preset. The title separator appears in all
-title configurations.
+**Global bypass is visible directly in the panel.** When bypass is enabled, the
+EasyEffects icon is dimmed to 30% opacity, following Blueman's bundled disabled
+symbolic icon. With bypass off, it uses full opacity. The applet remains clickable,
+and the blue dot keeps its full color and opacity. The tooltip also reports active
+bypass, including without a default preset. The panel status updates immediately
+when bypass changes, even with the menu closed or while a preset is loading.
+
+The optional **global bypass button** uses EasyEffects' normal global bypass.
+Its highlighted state means bypass is enabled. With menu control enabled,
+clicking it toggles bypass and keeps the menu open. Without menu control, the
+title contains no bypass button. The button updates immediately when bypass
+changes in the EasyEffects window, with or without a default preset. The title
+separator appears in all title configurations.
 
 With a default selected, the **blue dot** appears if the loaded output preset
 name is different, the stored output configuration differs, or global bypass is

@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 msgid ""
 msgstr ""
-"Project-Id-Version: easy-effects-selector@random.kiapps 1.4.13\n"
+"Project-Id-Version: easy-effects-selector@random.kiapps 1.4.14\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2026-10-09 03:15+0000\n"
 "PO-Revision-Date: 2026-10-09 03:15+0000\n"
