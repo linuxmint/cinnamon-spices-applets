@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-07-13 15:48+0200\n"
-"PO-Revision-Date: 2026-04-23 13:11+0300\n"
+"PO-Revision-Date: 2026-10-09 16:37+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -25,7 +25,7 @@ msgstr "Seuraavia paketteja ei löytynyt:"
 
 #. applet.js:179 6.6/applet.js:297 6.4/applet.js:251
 msgid "Please install the above packages to use the applet"
-msgstr "Asenna seuraavat paketit käyttääksesi sovelmaa"
+msgstr "Asenna seuraavat ennen kuin voit käyttää sovelmaa"
 
 #. applet.js:564 6.6/applet.js:1061 6.4/applet.js:855
 msgid "Screen"
@@ -327,7 +327,7 @@ msgstr "Yleinen"
 
 #. 6.6->settings-schema.json->section_geoip->title
 msgid "Geolocation"
-msgstr ""
+msgstr "Paikannus"
 
 #. 6.6->settings-schema.json->section_presets->title
 #. 6.6->settings-schema.json->preset_list->description
@@ -590,11 +590,11 @@ msgstr "Käytä valittu menetelmä"
 
 #. 6.6->settings-schema.json->use_geoip_values->description
 msgid "Use your own values below"
-msgstr ""
+msgstr "Käytä omia arvojasi alla"
 
 #. 6.6->settings-schema.json->geolat->description
 msgid "Latitude"
-msgstr ""
+msgstr "Leveysaste"
 
 #. 6.6->settings-schema.json->geolat->tooltip
 #. 6.6->settings-schema.json->geolon->tooltip
@@ -603,11 +603,14 @@ msgid ""
 "startup.\n"
 "If the default value is valid, it means that this value has been calculated."
 msgstr ""
+"Oletusarvo on virheellinen. Varmistetaan sen päivittyvän aina käynnistyksen "
+"yhteydessä.\n"
+"Jos oletusarvo on kelvollinen, se tarkoittaa, että kyseinen arvo on laskettu."
 
 #. 6.6->settings-schema.json->geolon->description
 msgid "Longitude"
-msgstr ""
+msgstr "Pituusaste"
 
 #. 6.6->settings-schema.json->geoip_button->description
 msgid "Change these values by using geolocation by ip"
-msgstr ""
+msgstr "Muuta näitä arvoja käyttämällä IP-pohjaista paikannusta"

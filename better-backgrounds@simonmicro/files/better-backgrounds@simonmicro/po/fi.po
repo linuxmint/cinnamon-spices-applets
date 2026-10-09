@@ -9,29 +9,26 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-04-13 04:55+0100\n"
-"PO-Revision-Date: 2023-12-11 14:35+0200\n"
+"PO-Revision-Date: 2026-10-09 16:27+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 msgid "Better Backgrounds"
 msgstr "Better Backgrounds"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Apply new backgrounds from Bing, Himawari 8, Picsum Photos, or even whole "
 "websites"
 msgstr ""
-"Käytä uusia taustakuvia Bing, Himawari 8, Picsum Photos, PlaceKitten.com, "
-"Unsplash.com tai jopa verkkosivuilta – määritä hakuun tunnisteet, "
-"käynnistimet ja paljon muuta!"
+"Uusia taustakuvia Bing, Himawari 8, Picsum Photos tai tietyltä verkkosivulta"
 
 #. settings-schema.json->pageBehaviour->title
 msgid "Behaviour"
@@ -176,9 +173,8 @@ msgid "None"
 msgstr "Ei mitään"
 
 #. settings-schema.json->image-source->description
-#, fuzzy
 msgid "Image Source"
-msgstr "Kuva tulee lähteestä"
+msgstr "Kuvan lähde"
 
 #. settings-schema.json->image-source->options
 msgid "Bing"
