@@ -1,0 +1,56 @@
+Menu Eleven Reloaded
+====================
+
+Maintainer
+----------
+
+dshep79 maintains this Menu Eleven Reloaded fork.
+
+Upstream projects
+-----------------
+
+The immediate upstream project is MenuEleven/Cinnamenu11, created by
+David Banting:
+https://github.com/ForsetGump1952/Cinnamenu11
+
+That project is itself based on Cinnamenu, originally created by Jason Hicks:
+https://github.com/jaszhix/Cinnamenu
+
+David Banting updated the Cinnamon 5.8-era applet with a Windows 11-inspired
+layout, configurable theme spacing, and a mixed view for pinned applications
+and recent files. This Reloaded package keeps those credits intact, uses an
+independent UUID, and includes packaging and security hygiene changes.
+
+Fork artwork
+------------
+
+The white applet icon is an original generic menu mark made specifically for
+this fork. Branded search-provider logos have been removed. Search,
+calculator, and Wikipedia results use generic symbolic icons supplied by the
+desktop icon theme.
+
+search.py taken from placesCenter@scollins cinnamon applet https://github.com/linuxmint/cinnamon-spices-applets/tree/master/placesCenter%40scollins
+
+Additional keywords in emoji.js are from emojilib (https://github.com/muan/emojilib) License: MIT
+
+Web search suggestions provided by DuckDuckGo.
+
+---------------
+Forked from Gnomenu by The Panacea Projects - https://github.com/The-Panacea-Projects/Gnomenu.
+
+A large part of this code was copied from the Mint menu and Axe menu extensions. Many thanks to those developers for their great extensions and laying the foundation for Cinnamenu.
+
+Some parts of this code also come from:
+gnome-shell-extensions -  http://git.gnome.org/browse/gnome-shell-extensions/
+places status indicator extension - http://git.gnome.org/gnome-shell-extensions
+recent items extension - http://www.bananenfisch.net/gnome
+applications menu extension - https://extensions.gnome.org/extension/6/applications-menu/
+search bookmarks extension - https://extensions.gnome.org/extension/557/search-bookmarks/
+
+Translators (Cinnamon)
+NikoKrause
+aust30000
+giwhub
+muzena
+eson57
+Alan01
