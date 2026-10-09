@@ -1,0 +1,8 @@
+{
+  "uuid": "avathings@telosdevgroup",
+  "name": "Avathings",
+  "description": "Unified monitor and control center for changestate (compute tiers) and avabatt (battery thresholds)",
+  "version": "1.0.0",
+  "cinnamon-version": ["6.0", "6.2", "6.4", "6.6"],
+  "author": "Telos Dev Group"
+}
