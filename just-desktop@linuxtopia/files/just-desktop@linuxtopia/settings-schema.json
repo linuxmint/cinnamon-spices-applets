@@ -1,0 +1,133 @@
+{
+  "click-action": {
+    "type": "combobox",
+    "default": "show_desktop",
+    "description": "Click action",
+    "options": {
+      "Show Desktop": "show_desktop",
+      "Hide Icons + Show Desktop": "hide_icons_toggle",
+      "Only Toggle Icons": "hide_icons_only",
+      "Show Desklets": "show_desklets",
+      "Show Expo": "show_expo",
+      "Show Scale": "show_scale",
+      "Nothing": "nothing"
+    }
+  },
+  "shift-click-action": {
+    "type": "combobox",
+    "default": "hide_icons_toggle",
+    "description": "Shift+Click action",
+    "options": {
+      "Hide Icons + Show Desktop": "hide_icons_toggle",
+      "Show Desktop": "show_desktop",
+      "Only Toggle Icons": "hide_icons_only",
+      "Show Desklets": "show_desklets",
+      "Show Expo": "show_expo",
+      "Show Scale": "show_scale",
+      "Nothing": "nothing"
+    }
+  },
+  "middle-click-action": {
+    "type": "combobox",
+    "default": "show_desklets",
+    "description": "Middle-click action",
+    "options": {
+      "Show Desklets": "show_desklets",
+      "Show Desktop": "show_desktop",
+      "Hide Icons + Show Desktop": "hide_icons_toggle",
+      "Only Toggle Icons": "hide_icons_only",
+      "Show Expo": "show_expo",
+      "Show Scale": "show_scale",
+      "Nothing": "nothing"
+    }
+  },
+  "shift-middle-click-action": {
+    "type": "combobox",
+    "default": "show_expo",
+    "description": "Shift+Middle-click action",
+    "options": {
+      "Show Expo": "show_expo",
+      "Show Scale": "show_scale",
+      "Show Desklets": "show_desklets",
+      "Show Desktop": "show_desktop",
+      "Hide Icons + Show Desktop": "hide_icons_toggle",
+      "Only Toggle Icons": "hide_icons_only",
+      "Nothing": "nothing"
+    }
+  },
+  "hover-peek": {
+    "type": "switch",
+    "default": true,
+    "description": "Peek at desktop on hover"
+  },
+  "hover-delay": {
+    "type": "spinbutton",
+    "default": 300,
+    "min": 0,
+    "max": 2000,
+    "step": 50,
+    "units": "ms",
+    "dependency": "hover-peek",
+    "description": "Delay before desktop peek activates"
+  },
+  "peek-opacity": {
+    "type": "scale",
+    "default": 5,
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "units": "%",
+    "dependency": "hover-peek",
+    "description": "Window opacity when peeking"
+  },
+  "peek-blur": {
+    "type": "switch",
+    "default": false,
+    "dependency": "hover-peek",
+    "description": "Blur windows when peeking"
+  },
+  "show-indicator": {
+    "type": "switch",
+    "default": true,
+    "description": "Dim the bar when desktop icons are hidden"
+  },
+  "bar-width": {
+    "type": "spinbutton",
+    "default": 8,
+    "min": 2,
+    "max": 400,
+    "step": 1,
+    "units": "px",
+    "description": "Bar Width: left-right on horizontal panel, thickness on vertical"
+  },
+  "bar-height": {
+    "type": "spinbutton",
+    "default": 8,
+    "min": 2,
+    "max": 60,
+    "step": 1,
+    "units": "px",
+    "description": "Bar Height: up-down on horizontal panel (stock panels 20-60px)"
+  },
+  "use-custom-color": {
+    "type": "switch",
+    "default": false,
+    "description": "Use a custom bar color (otherwise theme default)"
+  },
+  "bar-color": {
+    "type": "colorchooser",
+    "default": "#454545",
+    "dependency": "use-custom-color",
+    "description": "Bar color (supports transparency via RGBA)"
+  },
+  "startup-mode": {
+    "type": "combobox",
+    "default": "remember",
+    "description": "Desktop icon visibility on startup",
+    "options": {
+      "Remember": "remember",
+      "Show Icons": "show",
+      "Hide Icons": "hide"
+    }
+  }
+}
