@@ -1,18 +1,33 @@
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
+const Settings = imports.ui.settings;
+const Util = imports.misc.util;
 const St = imports.gi.St;
 const Soup = imports.gi.Soup;
-const Util = imports.misc.util;
-const ByteArray = imports.byteArray;
-
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const ByteArray = imports.byteArray;
+
 const UUID = "duolingo-helper@nodeengineer.com";
-const Lang = imports.lang;
-
 const APPLET_PATH = global.userdatadir + "/applets/" + UUID;
+const UPDATE_INTERVAL_SECONDS = 300;
 
-var soupASyncSession;
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
+function formatString(template, values) {
+  let text = template;
+  for (let value of values) {
+    text = text.replace("%s", value);
+  }
+  return text;
+}
+
+let soupASyncSession;
 if (Soup.MAJOR_VERSION === 2) {
     soupASyncSession = new Soup.SessionAsync();
     Soup.Session.prototype.add_feature.call(soupASyncSession, new Soup.ProxyResolverDefault());
@@ -20,335 +35,303 @@ if (Soup.MAJOR_VERSION === 2) {
     soupASyncSession = new Soup.Session();
 }
 
-const Secret = imports.gi.Secret;
-const PASSWORD_SCHEMA = new Secret.Schema("org.freedesktop.Secret.Generic",
-    Secret.SchemaFlags.NONE,
-    {
-        "site": Secret.SchemaAttributeType.STRING
-    }
-);
-let credentials = "";
-this.token = "";
-
-function MyApplet(orientation, panelHeight, instanceId) {
-  this._init(orientation, panelHeight, instanceId);
+function MyApplet(metadata, orientation, panelHeight, instanceId) {
+  this._init(metadata, orientation, panelHeight, instanceId);
 }
 
 MyApplet.prototype = {
   __proto__: Applet.TextIconApplet.prototype,
 
-  _init: function(orientation, panelHeight, instanceId) {
+  _init: function(metadata, orientation, panelHeight, instanceId) {
     Applet.TextIconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
-    try {
-      this.set_applet_icon_name("duolingo");
-      this.set_applet_label("");
-      this.set_applet_tooltip("Practise with Duolingo");
+    this.metadata = metadata;
+    this.instanceId = instanceId;
+    this.usernames = [];
+    this.userData = [];
+    this.pendingRequests = 0;
+    this.refreshTimer = 0;
 
-      this.credentials_search();
+    this.settings = new Settings.AppletSettings(this, UUID, instanceId);
+    this.settings.bindProperty(
+      Settings.BindingDirection.IN,
+      "users",
+      "users",
+      this.onSettingsChanged,
+      null
+    );
 
-      this.menuManager = new PopupMenu.PopupMenuManager(this);
+    this.set_applet_icon_path(APPLET_PATH + "/icon.png");
+    this.set_applet_label("Duo");
+    this.set_applet_tooltip(_("Duolingo Helper"));
 
-      this.menu = new Applet.AppletPopupMenu(this, orientation);
-      this.menuManager.addMenu(this.menu);
-
-      this.box = new St.BoxLayout({ height: 30, width: 300 });
-      this.menu.addActor(this.box);
-
-      this.crownBox = new St.BoxLayout({ style_class: "top-box" });
-      this.crownIcon = new St.Icon({ gicon: Gio.icon_new_for_string(APPLET_PATH + "/crown.png"), style_class: "icon" });
-      this.crownLabel = new St.Label({ style_class: "label", y_align: 2 });
-      this.crownBox.add(this.crownIcon);
-      this.crownBox.add(this.crownLabel);
-      this.box.add(this.crownBox);
-
-      this.streakBox = new St.BoxLayout({ style_class: "top-box" });
-      this.streakIcon = new St.Icon({ gicon: Gio.icon_new_for_string(APPLET_PATH + "/flame.png"), style_class: "icon" });
-      this.streakLabel = new St.Label({ style_class: "label", y_align: 2 });
-      this.streakBox.add(this.streakIcon);
-      this.streakBox.add(this.streakLabel);
-      this.box.add(this.streakBox);
-
-      this.lingotBox = new St.BoxLayout({ style_class: "top-box" });
-      this.lingotIcon = new St.Icon({ gicon: Gio.icon_new_for_string(APPLET_PATH + "/diamond.png"), style_class: "icon" });
-      this.lingotLabel = new St.Label({ style_class: "label", y_align: 2 });
-      this.lingotBox.add(this.lingotIcon);
-      this.lingotBox.add(this.lingotLabel);
-      this.box.add(this.lingotBox);
-
-      this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-
-      this.bottomBox = new St.BoxLayout( { style_class: "bottom-box" } );
-      this.menu.addActor(this.bottomBox);
-
-      this.button = new St.Button({ style_class: "button", label: "Practise", hover: true});
-      this.button.connect('clicked', function() { GLib.spawn_command_line_async("xdg-open 'https://duolingo.com'"); } );
-      this.bottomBox.add(this.button);
-
-
-    }
-    catch (e) {
-      global.log("DUO error: " + e);
-    }
+    this.addSettingsMenuItem();
+    this.buildMenu(orientation);
+    this.refresh();
   },
 
-  on_applet_clicked: function(event) {
-    this.credentials_search();
+  addSettingsMenuItem: function() {
+    this.settingsMenuItem = new PopupMenu.PopupIconMenuItem(
+      _("Settings"),
+      "xsi-preferences",
+      St.IconType.SYMBOLIC
+    );
+    this.settingsMenuItem.connect("activate", () => this.configureApplet());
+    this._applet_context_menu.addMenuItem(this.settingsMenuItem);
+  },
+
+  buildMenu: function(orientation) {
+    this.menuManager = new PopupMenu.PopupMenuManager(this);
+    this.menu = new Applet.AppletPopupMenu(this, orientation);
+    this.menuManager.addMenu(this.menu);
+    this.rebuildMenu();
+  },
+
+  on_applet_clicked: function() {
     this.menu.toggle();
   },
 
-  credentials_search: function() {
-    let self = this;
-    Secret.password_lookup(PASSWORD_SCHEMA, { "site": "duolingo.com" },
-                       null, self.on_credentials_lookup.bind(self));
+  on_applet_removed_from_panel: function() {
+    if (this.refreshTimer > 0) {
+      GLib.source_remove(this.refreshTimer);
+      this.refreshTimer = 0;
+    }
   },
 
-  on_credentials_lookup: function (source, result) {
-    let self = this;
-    this.credentials = Secret.password_lookup_finish(result);
-    if (this.credentials == null){
-      self.set_applet_label("Unauthorized");
-      self.store_credentials();
-      this.credentials = Secret.password_lookup_finish(result);
-    }
-    this.login(self.credentials, self.getData.bind(self));
+  onSettingsChanged: function() {
+    this.refresh();
   },
 
-  store_credentials: function () {
+  getConfiguredUsers: function() {
+    let names = [];
+    let seen = {};
+    let rows = this.users || [];
 
-    let loop = GLib.MainLoop.new(null, false);
-
-    // A simple asynchronous read loop
-    function readOutput(stream, lineBuffer) {
-        stream.read_line_async(0, null, (stream, res) => {
-            try {
-                let line = stream.read_line_finish_utf8(res)[0];
-
-                if (line !== null) {
-                    lineBuffer.push(line);
-                    readOutput(stream, lineBuffer);
-                }
-            } catch (e) {
-                logError(e);
-            }
-        });
-    }
-
-    try {
-        let [, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
-            // Working directory, passing %null to use the parent's
-            null,
-            // An array of arguments
-            ["zenity", "--username", "--password", "--title=Please enter your Duolingo credentials"],
-            // Process ENV, passing %null to use the parent's
-            null,
-            // Flags; we need to use PATH so `ls` can be found and also need to know
-            // when the process has finished to check the output and status.
-            GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
-            // Child setup function
-            null
-        );
-
-        // Any unsused streams still have to be closed explicitly, otherwise the
-        // file descriptors may be left open
-        GLib.close(stdin);
-
-        // Okay, now let's get output stream for `stdout`
-        let stdoutStream = new Gio.DataInputStream({
-            base_stream: new Gio.UnixInputStream({
-                fd: stdout,
-                close_fd: true
-            }),
-            close_base_stream: true
-        });
-
-        // We'll read the output asynchronously to avoid blocking the main thread
-        let stdoutLines = [];
-        readOutput(stdoutStream, stdoutLines);
-
-        // We want the real error from `stderr`, so we'll have to do the same here
-        let stderrStream = new Gio.DataInputStream({
-            base_stream: new Gio.UnixInputStream({
-                fd: stderr,
-                close_fd: true
-            }),
-            close_base_stream: true
-        });
-
-        let stderrLines = [];
-        readOutput(stderrStream, stderrLines);
-
-        // Watch for the process to finish, being sure to set a lower priority than
-        // we set for the read loop, so we get all the output
-        GLib.child_watch_add(GLib.PRIORITY_DEFAULT_IDLE, pid, (pid, status) => {
-            if (status === 0) {
-                let self = this;
-                Secret.password_store(PASSWORD_SCHEMA, {"site": "duolingo.com"}, Secret.COLLECTION_DEFAULT,
-                  "Duolingo", stdoutLines.join('\n'), null, self.credentials_search.bind(self));
-
-            } else {
-                logError(new Error(stderrLines.join('\n')));
-            }
-
-            // Ensure we close the remaining streams and process
-            stdoutStream.close(null);
-            stderrStream.close(null);
-            GLib.spawn_close_pid(pid);
-
-            loop.quit();
-        });
-    } catch (e) {
-        logError(e);
-        loop.quit();
-    }
-
-    loop.run();
-  },
-
-  login: function (password, callback) {
-    let self = this;
-
-    if ( typeof self.token == 'undefined' || self.token == null ){
-      let request = Soup.Message.new("POST", "https://www.duolingo.com/login");
-    
-      let credentials_json = `{"login": "${self.credentials.split("|")[0]}", "password": "${self.credentials.split("|")[1]}"}`;
-
-      if (Soup.MAJOR_VERSION === 2) {
-        request.set_request("application/json", 2, credentials_json);
-
-        soupASyncSession.queue_message(request, function(soupASyncSession, message){
-          if (message.status_code !== 200) {
-            self.set_applet_label("Connerror");
-            return;
-          };
-          self.token = message.response_headers.get_one("jwt");
-          callback(self.token);
-        });
-      } else {
-        const bytes = GLib.Bytes.new(ByteArray.fromString(credentials_json));
-        request.set_request_body_from_bytes('application/json', bytes);
-
-        soupASyncSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (session, response) => {
-            if (request.get_status() !== 200) {
-                self.set_applet_label("Connerror");
-                return;
-            }
-
-            try {
-                session.send_and_read_finish(response);
-                self.token = message.response_headers.get_one("jwt");
-                callback(self.token);
-            } catch (err) {
-                self.set_applet_label("Connerror");
-                return;
-            }
-        });
+    for (let row of rows) {
+      if (row.enabled === false) {
+        continue;
       }
-    } else {
-      callback(self.token);
+
+      let username = (row.username || "").trim();
+      if (username.length === 0 || seen[username.toLowerCase()]) {
+        continue;
+      }
+
+      seen[username.toLowerCase()] = true;
+      names.push(username);
     }
+
+    return names;
   },
 
-  getData: function(token) {
+  refresh: function() {
+    if (this.refreshTimer > 0) {
+      GLib.source_remove(this.refreshTimer);
+      this.refreshTimer = 0;
+    }
 
-    let request = Soup.Message.new("GET", `https://www.duolingo.com/users/${this.credentials.split("|")[0]}`);
-    request.request_headers.append('Authorization', `Bearer ${token}`);
+    this.usernames = this.getConfiguredUsers();
+    this.userData = [];
+    this.pendingRequests = this.usernames.length;
+
+    if (this.usernames.length === 0) {
+      this.set_applet_label("Duo");
+      this.set_applet_tooltip(_("Duolingo Helper") + "\n" + _("Right-click -> Settings"));
+      this.rebuildMenu();
+      return;
+    }
+
+    this.set_applet_label("...");
+    for (let username of this.usernames) {
+      this.fetchUser(username);
+    }
+
+    this.refreshTimer = GLib.timeout_add_seconds(
+      GLib.PRIORITY_DEFAULT,
+      UPDATE_INTERVAL_SECONDS,
+      () => {
+        this.refresh();
+        return GLib.SOURCE_REMOVE;
+      }
+    );
+  },
+
+  fetchUser: function(username) {
+    let url = `https://www.duolingo.com/2017-06-30/users?username=${encodeURIComponent(username)}`;
+    let request = Soup.Message.new("GET", url);
     request.request_headers.set_content_type("application/json", null);
 
-    let self = this;
-    let responseParsed;
-
     if (Soup.MAJOR_VERSION === 2) {
-      soupASyncSession.queue_message(request, function(soupASyncSession, message) {
+      soupASyncSession.queue_message(request, (session, message) => {
         if (message.status_code !== 200) {
-          if (message.status_code == 401) {
-            self.set_applet_label("Unauthorized");
-            Secret.password_clear(PASSWORD_SCHEMA, { "site": "duolingo.com" },
-                                null, self.credentials_search.bind(self));
-            global.log("DUO 'unauthorized' error: " + message.status + " " + request.response_body.data);
-          }
-          return;
-        };
-
-        responseParsed = JSON.parse(request.response_body.data);
-        this.process_response(responseParsed);
-
-      });
-    } else {
-      soupASyncSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (session, response) => {
-        if (request.get_status() !== 200) {
-          if (request.get_status() === 401) {
-            self.set_applet_label("Unauthorized");
-            Secret.password_clear(PASSWORD_SCHEMA, { "site": "duolingo.com" },
-                                null, self.credentials_search.bind(self));
-            global.log("DUO 'unauthorized' error: " + message.status + " " + request.response_body.data);
-          }
+          this.recordError(username, message.status_code);
           return;
         }
 
         try {
-            const bytes = soupASyncSession.send_and_read_finish(response);
-            responseParsed = JSON.parse(ByteArray.toString(bytes.get_data()));
-            this.process_response(responseParsed);
+          this.recordResponse(username, JSON.parse(message.response_body.data));
         } catch (err) {
-            global.log("DUO: " + err);
+          this.recordError(username, "parse");
+        }
+      });
+    } else {
+      soupASyncSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (session, response) => {
+        if (request.get_status() !== 200) {
+          this.recordError(username, request.get_status());
+          return;
+        }
+
+        try {
+          let bytes = session.send_and_read_finish(response);
+          this.recordResponse(username, JSON.parse(ByteArray.toString(ByteArray.fromGBytes(bytes))));
+        } catch (err) {
+          this.recordError(username, "parse");
         }
       });
     }
   },
 
-  processResponse:  function(responseParsed) {
-    let language_one = Object.keys(responseParsed.language_data)[0];
-  
-    ////////// Crowns //////////
-    let skills = responseParsed.language_data[language_one].skills;
-  
-    let crowns = 0;
-    for (let skill of skills){
-      crowns += skill.skill_progress.level;
+  recordResponse: function(username, responseParsed) {
+    if (!responseParsed.users || responseParsed.users.length === 0) {
+      this.recordError(username, "not-found");
+      return;
     }
-    self.crownLabel.set_text(crowns.toString());
-  
-    ////////// Streak //////////
-    self.streakLabel.set_text((responseParsed.language_data[language_one].streak).toString());
-  
-    ////////// Lingots //////////
-    self.lingotLabel.set_text((responseParsed.rupees).toString());
-  
-    ////////// XP //////////
-    let daily_goal = responseParsed.daily_goal.toString();
-  
-    // calculate epoch of last midnight
-    let d = new Date();
-    let midnight = d.getTime() - (d.getHours() * 3600 * 1000) - (d.getMinutes() * 60 * 1000) - (d.getSeconds() * 1000);
-  
-    // collect exercises done since midnight into an array
-    let exercises_today = new Array();
-    for (let exercise of responseParsed.calendar) {
-      if (exercise.datetime > midnight) {
-        exercises_today.push(exercise);
-      };
-    };
-  
-    // calculate XP gained since midnight
-    let xp_today = 0;
-    for (let exercise of exercises_today){
-      xp_today += exercise.improvement;
-    };
-  
-    // set icon color, display XP values
-    if (xp_today < daily_goal) {
-      self.set_applet_icon_path(APPLET_PATH + "/icon_red.png");
-    } else {
-      self.set_applet_icon_path(APPLET_PATH + "/icon.png");
-    }
-    self.set_applet_label(xp_today + "/" + daily_goal);
 
-    setTimeout(self.credentials_search.bind(self), 30000);
+    this.userData.push(this.normalizeUser(responseParsed.users[0], username));
+    this.finishRequest();
+  },
+
+  recordError: function(username, status) {
+    this.userData.push({
+      username: username,
+      error: status === "not-found" ? _("not found") : formatString(_("Error %s"), [status])
+    });
+    this.finishRequest();
+  },
+
+  finishRequest: function() {
+    this.pendingRequests--;
+    if (this.pendingRequests <= 0) {
+      this.userData.sort((a, b) => a.username.localeCompare(b.username));
+      this.updateDisplay();
+    }
+  },
+
+  normalizeUser: function(user, fallbackUsername) {
+    let courses = user.courses || [];
+    let currentCourse = null;
+
+    for (let course of courses) {
+      if (course.id === user.currentCourseId) {
+        currentCourse = course;
+        break;
+      }
+    }
+
+    if (!currentCourse && courses.length > 0) {
+      currentCourse = courses[0];
+    }
+
+    currentCourse = currentCourse || {};
+
+    return {
+      username: user.username || fallbackUsername,
+      name: user.name || user.username || fallbackUsername,
+      streak: user.streak || 0,
+      totalXp: user.totalXp || 0,
+      courseTitle: currentCourse.title || user.learningLanguage || _("no course"),
+      courseXp: currentCourse.xp || 0,
+      hasPlus: user.hasPlus === true,
+      activeRecently: user.hasRecentActivity15 === true,
+      courseCount: courses.length
+    };
+  },
+
+  updateDisplay: function() {
+    let validUsers = this.userData.filter(user => !user.error);
+
+    if (validUsers.length === 0) {
+      this.set_applet_label("Duo");
+      this.set_applet_tooltip(this.buildTooltip());
+      this.rebuildMenu();
+      return;
+    }
+
+    let totalStreak = 0;
+    for (let user of validUsers) {
+      totalStreak += user.streak;
+    }
+
+    this.set_applet_label(validUsers.length + " | " + totalStreak);
+    this.set_applet_tooltip(this.buildTooltip());
+    this.rebuildMenu();
+  },
+
+  buildTooltip: function() {
+    if (this.userData.length === 0) {
+      return _("Duolingo Helper") + "\n" + _("No users configured");
+    }
+
+    let lines = [_("Duolingo Statistics")];
+    for (let user of this.userData) {
+      if (user.error) {
+        lines.push(user.username + ": " + user.error);
+        continue;
+      }
+
+      lines.push(
+        formatString(_("%s: %s days, %s total XP, %s XP in %s%s"), [
+          user.username,
+          user.streak,
+          user.totalXp,
+          user.courseXp,
+          user.courseTitle,
+          user.hasPlus ? ", Plus" : ""
+        ])
+      );
+    }
+
+    return lines.join("\n");
+  },
+
+  rebuildMenu: function() {
+    if (!this.menu) {
+      return;
+    }
+
+    this.menu.removeAll();
+
+    if (this.userData.length === 0) {
+      this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("No users configured")));
+    } else {
+      for (let user of this.userData) {
+        let text = user.error
+          ? user.username + ": " + user.error
+          : formatString(_("%s - %s days - %s XP"), [user.username, user.streak, user.totalXp]);
+        let item = new PopupMenu.PopupMenuItem(text);
+        if (!user.error) {
+          item.connect("activate", () => this.openProfile(user.username));
+        }
+        this.menu.addMenuItem(item);
+      }
+    }
+
+    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    let openDuolingo = new PopupMenu.PopupMenuItem(_("Open Duolingo"));
+    openDuolingo.connect("activate", () => Util.spawn(["xdg-open", "https://duolingo.com"]));
+    this.menu.addMenuItem(openDuolingo);
+
+    let refreshNow = new PopupMenu.PopupMenuItem(_("Refresh now"));
+    refreshNow.connect("activate", () => this.refresh());
+    this.menu.addMenuItem(refreshNow);
+  },
+
+  openProfile: function(username) {
+    let url = "https://www.duolingo.com/profile/" + encodeURIComponent(username);
+    Util.spawn(["xdg-open", url]);
   }
 };
 
 function main(metadata, orientation, panelHeight, instanceId) {
-  let myApplet = new MyApplet(orientation, panelHeight, instanceId);
-  return myApplet;
+  return new MyApplet(metadata, orientation, panelHeight, instanceId);
 }
