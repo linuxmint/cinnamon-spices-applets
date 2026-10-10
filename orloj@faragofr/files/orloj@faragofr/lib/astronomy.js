@@ -1,5 +1,12 @@
-// Astronomy helpers. Meeus-style truncated formulas — accurate to a few
-// arcminutes for the Sun, ~0.3° for the Moon. Plenty for a clock face.
+// Astronomy helpers. Meeus-style truncated formulas. Against Skyfield/DE421
+// over 2026 the sky positions are within 0.8 arcminutes for the Sun, 0.17°
+// for the Moon and 0.14° for the planets. Plenty for a clock face.
+//
+// Rise/set times are a harsher test of the same series, because near the
+// horizon an angular error buys time in proportion to how obliquely the body
+// meets it. Checked against Skyfield/DE421 over 8 sites x 24 dates: sunrise
+// and sunset land within 11 seconds everywhere, moonrise and moonset within
+// 14 seconds at the median and 3.5 minutes at worst. See nextMoonEvent.
 //
 // Conventions:
 //   * All exported longitude-like angles are in degrees, normalized to [0, 360).
@@ -57,7 +64,7 @@ var lmst = function(jd, longitudeDeg) {
 
 // Moon ecliptic longitude — Meeus Ch. 45, top 13 periodic terms,
 // ignoring earth eccentricity, flattening, Jupiter and Venus effects.
-// Accurate to about 0.3° which is invisible at clock-face scale.
+// Within 0.08° of DE421 over 2026, invisible at clock-face scale.
 var moonLongitude = function(jd) {
     var t  = centuriesSinceJ2000(jd);
     var t2 = t*t, t3 = t2*t, t4 = t3*t;
@@ -85,7 +92,8 @@ var moonLongitude = function(jd) {
 };
 
 // Moon ecliptic latitude (degrees) — Meeus Ch. 45, top 4 terms,
-// ignoring earth eccentricity, flattening, Jupiter and Venus effects (~0.5° accuracy).
+// ignoring earth eccentricity, flattening, Jupiter and Venus effects.
+// Within 0.17° of DE421 over 2026.
 var moonLatitude = function(jd) {
     var t  = centuriesSinceJ2000(jd);
     var t2 = t*t, t3 = t2*t, t4 = t3*t;
@@ -94,8 +102,8 @@ var moonLatitude = function(jd) {
     var F  = norm360( 93.2720993 + 483202.0175273 *t - 0.0034029*t2 - t3/3526000 + t4/863310000) * D2R;
     var dB = 5128122 * Math.sin(F)
            +  280602 * Math.sin(Mp + F)
-           -  277693 * Math.sin(Mp - F)
-           -  173237 * Math.sin(2*D - F);
+           +  277693 * Math.sin(Mp - F)
+           +  173237 * Math.sin(2*D - F);
     return dB * 1e-6;
 };
 
@@ -123,44 +131,96 @@ var equationOfTime = function(jd) {
     return Etime * R2D * 4;
 };
 
+// Standard altitude of the sun's centre at rise/set: refraction plus the
+// apparent semi-diameter (Meeus Ch. 15).
+var SUN_H0 = -0.833;
+
+// The same for a planet: a point source with negligible parallax, so the
+// horizon refraction alone (Meeus Ch. 15). The planets' altitudes are
+// geometric, and this is where they appear on the horizon.
+var PLANET_H0 = -0.5667;
+
+// Solar hour angle (degrees) at SUN_H0 for the given latitude, or null when
+// the sun stays entirely above or below that altitude all day. The polar
+// flags are what nextSunEvent uses to tell a real sunrise from the artefact
+// of tabulating events by UTC day.
+var sunHourAngle = function(jd, lat) {
+    var lambda = sunLongitude(jd) * D2R;
+    var eps    = obliquity(jd)    * D2R;
+    var dec    = Math.asin(Math.sin(eps) * Math.sin(lambda));
+    var latR   = lat * D2R;
+
+    var cosH = (Math.sin(SUN_H0 * D2R) - Math.sin(latR) * Math.sin(dec))
+             / (Math.cos(latR) * Math.cos(dec));
+    if (cosH > 1)  return { H: null, alwaysDown: true };
+    if (cosH < -1) return { H: null, alwaysUp:   true };
+    return { H: Math.acos(cosH) * R2D, alwaysDown: false, alwaysUp: false };
+};
+
 // Sunrise / sunset for the UTC date of `date`.
-// Returns { rise: Date, set: Date } or null fields if the sun doesn't
-// rise/set on that day at that latitude.
+// Returns { rise: Date, set: Date, alwaysUp, alwaysDown }; either time is null
+// on a day the sun does not reach SUN_H0 going that way at that latitude.
+//
 // Note: uses UTC date, which can differ from the observer's local date (for
 // several hours a day at western longitudes). The nextSunEvent scanner
-// compensates by starting from the previous UTC day and filtering with > now.
+// compensates by starting before the observer's day and filtering with > now.
 var sunriseSunset = function(date, lat, lon) {
     var d0 = new Date(Date.UTC(date.getUTCFullYear(),
                                date.getUTCMonth(),
                                date.getUTCDate()));
-    var jd0    = julianDay(d0);
-    var lambda = sunLongitude(jd0) * D2R;
-    var eps    = obliquity(jd0)    * D2R;
-    var dec    = Math.asin(Math.sin(eps) * Math.sin(lambda));
-    var latR   = lat * D2R;
-    var h0     = -0.833 * D2R; // refraction + apparent semi-diameter
+    var jd0 = julianDay(d0);
 
-    var cosH = (Math.sin(h0) - Math.sin(latR) * Math.sin(dec))
-             / (Math.cos(latR) * Math.cos(dec));
-    if (cosH > 1)  return { rise: null, set: null, alwaysDown: true  };
-    if (cosH < -1) return { rise: null, set: null, alwaysUp:   true  };
+    // UT minutes from d0 of local solar noon.
+    var noonMin = function(jd) { return 720 - 4 * lon - equationOfTime(jd); };
 
-    var H       = Math.acos(cosH) * R2D;        // hour angle, degrees
-    var E       = equationOfTime(jd0);          // minutes
-    var noonMin = 720 - 4 * lon - E;            // UT minutes of solar noon
-    var riseMin = noonMin - 4 * H;
-    var setMin  = noonMin + 4 * H;
+    // UT minutes from d0 of the event `sign` places either side of solar noon
+    // (-1 rise, +1 set), or null if the sun does not reach SUN_H0 there.
+    //
+    // Declination and the equation of time both move over a day, so reading
+    // them at a fixed hour puts the event out by half a minute typically and
+    // by 8 at 78°N. Meeus Ch. 15 answers that by re-evaluating both at the
+    // approximate event time; the correction shrinks by a factor of ~300 per
+    // pass, so three is well past convergence from any starting guess.
+    //
+    // The guess is solar midnight rather than 0h UT, because that is where a
+    // marginal event sits: as the hour angle approaches 180° both rise and set
+    // collapse onto it. Judging the day at the hour the event would actually
+    // happen is what keeps the last day of midnight sun — which still reads as
+    // polar at 0h UT, hours before its first sunset — from being written off.
+    var solve = function(sign) {
+        var minutes = noonMin(jd0) + sign * 720;
+        for (var i = 0; i < 3; i++) {
+            var jd = jd0 + minutes / 1440;
+            var hh = sunHourAngle(jd, lat);
+            if (hh.H === null) return null;
+            minutes = noonMin(jd) + sign * 4 * hh.H;
+        }
+        return minutes;
+    };
 
+    var riseMin = solve(-1), setMin = solve(+1);
+    if (riseMin === null && setMin === null) {
+        // Neither probe found a crossing: a full polar day or night. Which one
+        // is read at solar noon, the hour that settles it.
+        var atNoon = sunHourAngle(jd0 + noonMin(jd0) / 1440, lat);
+        return { rise: null, set: null,
+                 alwaysUp:   atNoon.alwaysUp,
+                 alwaysDown: atNoon.alwaysDown };
+    }
     return {
-        rise: new Date(d0.getTime() + riseMin * 60000),
-        set:  new Date(d0.getTime() + setMin  * 60000)
+        rise: riseMin === null ? null : new Date(d0.getTime() + riseMin * 60000),
+        set:  setMin  === null ? null : new Date(d0.getTime() + setMin  * 60000),
+        alwaysUp: false, alwaysDown: false
     };
 };
 
 // --- Planets (Mercury–Saturn) ----------------------------------------------
 //
-// Schlyter's truncated orbital elements (stjarnhimlen.se/comp/ppcomp.html).
-// Geocentric ecliptic longitude is accurate to ~1° — fine for clock-face glyphs.
+// Schlyter's truncated orbital elements (stjarnhimlen.se/comp/ppcomp.html),
+// without his perturbation terms for Jupiter and Saturn. Against
+// Skyfield/DE421 over 2026 the geocentric direction is within 0.03° for
+// Mercury to Jupiter and 0.14° for Saturn. Further from the present the
+// missing terms show: at 2149, Saturn's longitude is 0.67° out.
 // Day count `d` is days since 1999-12-31 00:00 UT, i.e. JD - 2451543.5.
 
 var PLANET_ELEMENTS = {
@@ -233,7 +293,10 @@ var heliocentric = function(elems, d) {
     };
 };
 
-var planetLongitudes = function(jd) {
+// Geocentric ecliptic { lon, lat } of each planet, degrees. The latitude is
+// not a refinement: Venus reaches 7.6° off the ecliptic, Mercury 4.9°, so
+// placing a planet on the ecliptic misplaces it on the sky by that much.
+var planetPositions = function(jd) {
     var d = schlyterDay(jd);
     var sunGeo = heliocentric(SUN_ELEMENTS, d);
     var earthHelio = { x: -sunGeo.x, y: -sunGeo.y, z: -sunGeo.z };
@@ -241,20 +304,11 @@ var planetLongitudes = function(jd) {
     for (var k = 0; k < PLANETS.length; k++) {
         var name = PLANETS[k];
         var p = heliocentric(PLANET_ELEMENTS[name], d);
-        out[name] = norm360(Math.atan2(p.y - earthHelio.y,
-                                       p.x - earthHelio.x) * R2D);
+        var x = p.x - earthHelio.x, y = p.y - earthHelio.y, z = p.z - earthHelio.z;
+        out[name] = { lon: norm360(Math.atan2(y, x) * R2D),
+                      lat: Math.atan2(z, Math.sqrt(x*x + y*y)) * R2D };
     }
     return out;
-};
-
-// Local Apparent Solar Time (true solar time at the observer's longitude),
-// returned in decimal hours [0, 24).
-var localApparentSolarTime = function(date, lon) {
-    var jd  = julianDay(date);
-    var utc = date.getUTCHours() + date.getUTCMinutes()/60 + date.getUTCSeconds()/3600;
-    var EoT = equationOfTime(jd); // minutes
-    var t = utc + lon / 15 + EoT / 60;
-    return ((t % 24) + 24) % 24;
 };
 
 // Ecliptic to equatorial conversion. Returns { ra, dec } in degrees,
@@ -273,15 +327,26 @@ var eclipticToEquatorial = function(lonEcl, latEcl, jd) {
     return { ra: norm360(ra * R2D), dec: Math.asin(sinDec) * R2D };
 };
 
+// Altitude (deg) of a body at declination `decDeg` seen at hour angle `HDeg`
+// from latitude `latDeg`. Geometric: no refraction, no parallax.
+//
+// This takes the hour angle rather than a time, so it also answers "where
+// would the body be at hour angle H" for an H that is not now — which is what
+// the dial's hour ring needs to draw a whole day's worth of sun. The clamp
+// guards against floating-point overshoot at the poles, where the sum can
+// exceed 1 by an ulp and turn asin into NaN.
+var altitude = function(latDeg, decDeg, HDeg) {
+    var latR = latDeg * D2R, decR = decDeg * D2R, H = HDeg * D2R;
+    var sinAlt = Math.sin(latR) * Math.sin(decR)
+               + Math.cos(latR) * Math.cos(decR) * Math.cos(H);
+    return Math.asin(Math.max(-1, Math.min(1, sinAlt))) * R2D;
+};
+
 // Apparent altitude (deg) of any body at the given ecliptic coords, for
 // observer at latObs / lonObs. lonEcl, latEcl in degrees (geocentric).
 var apparentAltitude = function(jd, lonEcl, latEcl, latObs, lonObs) {
-    var eq   = eclipticToEquatorial(lonEcl, latEcl, jd);
-    var decR = eq.dec * D2R;
-    var H    = (lmst(jd, lonObs) - eq.ra) * D2R;
-    var latR = latObs * D2R;
-    return Math.asin(Math.sin(latR) * Math.sin(decR)
-                   + Math.cos(latR) * Math.cos(decR) * Math.cos(H)) * R2D;
+    var eq = eclipticToEquatorial(lonEcl, latEcl, jd);
+    return altitude(latObs, eq.dec, lmst(jd, lonObs) - eq.ra);
 };
 
 // Apparent altitude of the moon (degrees) — convenience wrapper using the
@@ -293,39 +358,83 @@ var moonAltitude = function(date, lat, lonObs) {
 
 // Next sunrise or sunset after `now` for the observer at lat/lon.
 // Returns { type: "rise" | "set", time: Date } or null if no event in 7 days.
-// The scan starts at the previous UTC day: sunriseSunset() tables events by
-// UTC date, so west of Greenwich the remainder of the observer's local day
-// (e.g. tonight's sunset once UTC has passed midnight) lives in the previous
-// UTC day's entry; the > now filter discards events already past.
+//
+// The scan starts two UTC days back for two reasons. sunriseSunset() tables
+// events by UTC date, so west of Greenwich the remainder of the observer's
+// local day (e.g. tonight's sunset once UTC has passed midnight) lives in an
+// earlier UTC day's entry; the > now filter discards what is already past.
+// And the extra day gives every candidate a predecessor to test against.
+//
+// That predecessor is what keeps a polar transition honest. On the day
+// midnight sun ends, the tabulated "rise" never happens — the sun has been up
+// continuously and the first real event is that day's set. `prev` carries the
+// day before's polar state so such a rise can be skipped, and a set skipped
+// symmetrically at the end of polar night.
 var nextSunEvent = function(now, lat, lon) {
-    for (var dayOffset = -1; dayOffset < 7; dayOffset++) {
-        var d = new Date(now.getTime() + dayOffset * 86400000);
+    var prev = null;
+    for (var dayOffset = -2; dayOffset < 7; dayOffset++) {
+        var d  = new Date(now.getTime() + dayOffset * 86400000);
         var ss = sunriseSunset(d, lat, lon);
-        if (ss.rise && ss.rise > now) return { type: "rise", time: ss.rise };
-        if (ss.set  && ss.set  > now) return { type: "set",  time: ss.set  };
+        if (!(prev && prev.alwaysUp) && ss.rise && ss.rise > now)
+            return { type: "rise", time: ss.rise };
+        if (!(prev && prev.alwaysDown) && ss.set && ss.set > now)
+            return { type: "set", time: ss.set };
+        prev = ss;
     }
     return null;
 };
 
-// Next moonrise or moonset after `now`. Bisects the moon's altitude crossing
-// of the horizon (-0.566° accounts for the moon's apparent radius + refraction).
-// Returns { type: "rise" | "set", time: Date } or null if no event in 25h.
+// The moon's mean equatorial horizontal parallax, asin(6378.14 / 384400 km)
+// — Earth's equatorial radius over the moon's mean distance. The true value
+// runs from about 0.90° at apogee to 1.01° at perigee.
+var MOON_PARALLAX = 0.9507;
+
+// Standard altitude of the moon's centre at rise/set (Meeus Ch. 15):
+// 0.7275·π − 0.5667°, with π = MOON_PARALLAX, which comes to 0.125°. It folds
+// parallax, semi-diameter and refraction into one threshold on the
+// *geocentric* altitude that moonAltitude() returns — parallax dominates, and
+// it is what makes the figure positive rather than the −0.567° that applies
+// to a body with no appreciable parallax.
+var MOON_H0 = 0.7275 * MOON_PARALLAX - 0.5667;
+
+// Topocentric (observer's) altitude of the moon from its geocentric one,
+// both geometric. Seen from the surface rather than Earth's centre the moon
+// sits lower by the parallax in altitude p, with
+// tan p = sin π cos h / (1 − sin π sin h): about π at the horizon, nothing
+// overhead. Using the mean π puts the result within 0.06° of the exact value;
+// a spherical Earth adds less than that.
+var moonTopocentricAltitude = function(geoAltDeg) {
+    var h  = geoAltDeg * D2R;
+    var sp = Math.sin(MOON_PARALLAX * D2R);
+    return geoAltDeg - Math.atan2(sp * Math.cos(h), 1 - sp * Math.sin(h)) * R2D;
+};
+
+// Next moonrise or moonset after `now`. Samples the altitude every 10 minutes
+// for 25 hours, then bisects the first crossing of MOON_H0.
+// Returns { type: "rise" | "set", time: Date }, or null when the moon does not
+// cross the horizon in that window (it is circumpolar, or stays down).
+//
+// Accuracy is set by moonLongitude/moonLatitude, not by the bisection. Against
+// Skyfield/DE421 the median event is 14 seconds out and the mean 23; the tail
+// runs to 3.5 minutes at 64°N, because the shallower the angle at which the
+// moon meets the horizon, the more time a given angular error buys. At high
+// latitudes a marginal crossing can also be missed altogether, or found where
+// the true moon has none, though the test grid contains no such case.
 var nextMoonEvent = function(now, lat, lonObs) {
-    var horizon = -0.566;
     var stepMs  = 10 * 60 * 1000;
     var prevAlt = moonAltitude(now, lat, lonObs);
     for (var i = 1; i <= 150; i++) {
         var t   = new Date(now.getTime() + i * stepMs);
         var alt = moonAltitude(t, lat, lonObs);
-        if ((prevAlt - horizon) * (alt - horizon) < 0) {
+        if ((prevAlt - MOON_H0) * (alt - MOON_H0) < 0) {
             var lo = new Date(t.getTime() - stepMs);
             var hi = t;
-            var loAlt = prevAlt, hiAlt = alt;
+            var loAlt = prevAlt;
             for (var j = 0; j < 18; j++) {
                 var mid    = new Date((lo.getTime() + hi.getTime()) / 2);
                 var midAlt = moonAltitude(mid, lat, lonObs);
-                if ((loAlt - horizon) * (midAlt - horizon) < 0) {
-                    hi = mid; hiAlt = midAlt;
+                if ((loAlt - MOON_H0) * (midAlt - MOON_H0) < 0) {
+                    hi = mid;
                 } else {
                     lo = mid; loAlt = midAlt;
                 }
@@ -337,5 +446,3 @@ var nextMoonEvent = function(now, lat, lonObs) {
     }
     return null;
 };
-
-

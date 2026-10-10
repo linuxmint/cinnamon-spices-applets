@@ -8,7 +8,21 @@ const GLib       = imports.gi.GLib;
 const Clutter    = imports.gi.Clutter;
 let Astronomy, Dial, Theme;
 
-const DIAL_SIZE = 320;
+// Floor for the dial size, matching settings-schema.json's minimum; it only
+// bites on a hand-edited config.
+const MIN_DIAL_SIZE = 240;
+
+// Decimal degrees from a settings entry, or NaN. parseFloat alone would read
+// "50,0875" as 50 and "14.42 W" as +14.42: a silently wrong position, which
+// is worse than none. So the whole string must be a number, a decimal comma
+// is accepted for locales that write one, and the value must lie within
+// ±limit.
+function parseDegrees(text, limit) {
+    const str = String(text).trim().replace(",", ".");
+    if (!/^[+-]?(\d+\.?\d*|\.\d+)$/.test(str)) return NaN;
+    const value = parseFloat(str);
+    return Math.abs(value) <= limit ? value : NaN;
+}
 
 class OrlojApplet extends Applet.TextApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
@@ -22,11 +36,17 @@ class OrlojApplet extends Applet.TextApplet {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
+        // The dial is only computed while it can be seen: on opening, then at
+        // every tick until it closes. Opening never shows a stale dial, however
+        // long the refresh interval.
+        this.menu.connect("open-state-changed", (menu, open) => {
+            if (open) this._refresh();
+        });
 
         this._dialItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         this._drawingArea = new St.DrawingArea({
-            width:  DIAL_SIZE,
-            height: DIAL_SIZE,
+            width:  Dial.REFERENCE_SIZE,
+            height: Dial.REFERENCE_SIZE,
             reactive: true,
             track_hover: true
         });
@@ -41,6 +61,7 @@ class OrlojApplet extends Applet.TextApplet {
         this._lastHoverLabel = null;
 
         this._state = null;
+        this._timer = null;
         this._cachedSunEvent = null;
         this._cachedMoonEvent = null;
 
@@ -60,9 +81,10 @@ class OrlojApplet extends Applet.TextApplet {
         this._settings.bind("latitude",        "latitude",       () => this._invalidateEvents());
         this._settings.bind("longitude",       "longitude",      () => this._invalidateEvents());
         this._settings.bind("refresh-seconds", "refreshSeconds", () => this._scheduleRefresh());
-        this._settings.bind("accent-color",    "accentColor",    () => this._refresh());
+        this._settings.bind("accent-color",    "accentColor",    () => this._applyColors());
         this._settings.bind("foreground-color","foregroundColor",() => this._applyColors());
         this._settings.bind("background-color","backgroundColor",() => this._applyColors());
+        this._settings.bind("day-color",       "dayColor",       () => this._applyColors());
         this._settings.bind("dial-size",       "dialSize",       () => this._applySize());
 
         this._applyColors();
@@ -75,40 +97,64 @@ class OrlojApplet extends Applet.TextApplet {
         this._cachedSunEvent = null;
         this._cachedMoonEvent = null;
         this._refresh();
+        this._scheduleRefresh();
     }
 
+    // Colors are a property of this instance, not of the Theme module: several
+    // Orloj applets can share a panel, and they share one imported Theme. The
+    // palette therefore travels in the state object rather than in module
+    // globals, and changing a color needs no astronomy, only a repaint.
     _applyColors() {
-        Theme.setBaseColors(
-            Theme.parseColor(this.backgroundColor, Theme.BACKGROUND),
-            Theme.parseColor(this.foregroundColor, Theme.FOREGROUND));
+        this._palette = Theme.makePalette(
+            Theme.parseColor(this.backgroundColor, Theme.BACKGROUND_DEFAULT),
+            Theme.parseColor(this.foregroundColor, Theme.FOREGROUND_DEFAULT),
+            Theme.parseColor(this.dayColor, null));
+        this._accent = Theme.parseColor(this.accentColor, Theme.ACCENT_DEFAULT);
+        if (this._state) {
+            this._state.palette = this._palette;
+            this._state.accent  = this._accent;
+        }
         this._drawingArea.queue_repaint();
     }
 
     _applySize() {
-        const size = Math.max(160, parseInt(this.dialSize) || DIAL_SIZE);
+        const size = Math.max(MIN_DIAL_SIZE,
+                              parseInt(this.dialSize) || Dial.REFERENCE_SIZE);
         this._drawingArea.width = size;
         this._drawingArea.height = size;
         this._drawingArea.queue_repaint();
     }
 
+    // One-shot timer that re-arms itself. It fires at the refresh interval or
+    // at the next rise/set, whichever comes first: with the interval at its
+    // 600s maximum a periodic timer could otherwise sleep straight past an
+    // event and leave the panel showing it ten minutes after it happened.
     _scheduleRefresh() {
         if (this._timer) {
             Mainloop.source_remove(this._timer);
             this._timer = null;
         }
         const interval = Math.max(1, parseInt(this.refreshSeconds) || 30);
-        this._timer = Mainloop.timeout_add_seconds(interval, () => {
+        let delay = interval;
+        for (const cached of [this._cachedSunEvent, this._cachedMoonEvent]) {
+            if (!cached || !cached.event) continue;
+            const untilEvent = Math.ceil((cached.event.time - Date.now()) / 1000);
+            delay = Math.min(delay, Math.max(1, untilEvent));
+        }
+        this._timer = Mainloop.timeout_add_seconds(delay, () => {
+            this._timer = null;
             this._refresh();
-            return GLib.SOURCE_CONTINUE;
+            this._scheduleRefresh();
+            return GLib.SOURCE_REMOVE;
         });
     }
 
     _refresh() {
         const now = new Date();
 
-        const lat = parseFloat(this.latitude);
-        const lon = parseFloat(this.longitude);
-        if (!isFinite(lat) || !isFinite(lon)) {
+        const lat = parseDegrees(this.latitude,  90);
+        const lon = parseDegrees(this.longitude, 180);
+        if (isNaN(lat) || isNaN(lon)) {
             this.set_applet_label("set lat/lon");
             this._state = null;
             this._drawingArea.queue_repaint();
@@ -126,11 +172,18 @@ class OrlojApplet extends Applet.TextApplet {
             const retryAfter = ev ? ev.time : new Date(+now + 86400000);
             this._cachedMoonEvent = { event: ev, retryAfter: retryAfter };
         }
-        const sunEv  = this._cachedSunEvent.event;
-        const moonEv = this._cachedMoonEvent.event;
-        const fmtEv  = (ev) => {
-            if (!ev) return ">1d";
+        const fmtEv = (ev) => {
+            // Null means the scan found no event in its window — 7 days for
+            // the sun, 25 hours for the moon. That is polar day or night, or a
+            // circumpolar moon: not "soon", and not a time we can name.
+            if (!ev) return "—";
             const arrow = ev.type === "rise" ? "↑" : "↓";
+            // Whole 24-hour periods away, deliberately not calendar days. The
+            // label always names the *next* event, so a bare "00:22" can only
+            // be the coming one and needs no date to disambiguate it. The
+            // suffix exists to flag an event that is unusually far off — a
+            // polar sunrise, a circumpolar moon — which is a question about
+            // elapsed time, not about which date it lands on.
             const days = Math.floor((ev.time - now) / 86400000);
             if (days >= 7) return `${arrow}>1w`;
             const hh = String(ev.time.getHours()).padStart(2, "0");
@@ -138,59 +191,55 @@ class OrlojApplet extends Applet.TextApplet {
             const suffix = days >= 1 ? `+${days}d` : "";
             return `${arrow}${hh}:${mm}${suffix}`;
         };
-        this.set_applet_label(`☀${fmtEv(sunEv)} ☾${fmtEv(moonEv)}`);
+        this.set_applet_label(
+            `☀${fmtEv(this._cachedSunEvent.event)} ☾${fmtEv(this._cachedMoonEvent.event)}`);
+
+        // A closed dial keeps its last state; it is rebuilt when it opens.
+        if (!this.menu.isOpen) return;
 
         const jd      = Astronomy.julianDay(now);
         const sunLon  = Astronomy.sunLongitude(jd);
         const moonLon = Astronomy.moonLongitude(jd);
         const moonLat = Astronomy.moonLatitude(jd);
-        const moonPh  = Astronomy.moonPhase(jd);
-        const planets = Astronomy.planetLongitudes(jd);
-        const lstDeg  = Astronomy.lmst(jd, lon);
+        const planetPos = Astronomy.planetPositions(jd);
 
-        const sunRA  = Astronomy.eclipticToEquatorial(sunLon, 0, jd).ra;
-        const moonRA = Astronomy.eclipticToEquatorial(moonLon, moonLat, jd).ra;
+        const sunEq  = Astronomy.eclipticToEquatorial(sunLon, 0, jd);
+        const planets   = {};
         const planetRAs = {};
-        for (const name of ["Mercury", "Venus", "Mars", "Jupiter", "Saturn"])
-            planetRAs[name] = Astronomy.eclipticToEquatorial(planets[name], 0, jd).ra;
+        const altitudes = {
+            Sun:  Astronomy.apparentAltitude(jd, sunLon,  0,       lat, lon),
+            Moon: Astronomy.moonTopocentricAltitude(
+                      Astronomy.apparentAltitude(jd, moonLon, moonLat, lat, lon))
+        };
+        for (const name of Astronomy.PLANETS) {
+            const pos = planetPos[name];
+            planets[name]   = pos.lon;
+            planetRAs[name] = Astronomy.eclipticToEquatorial(pos.lon, pos.lat, jd).ra;
+            altitudes[name] = Astronomy.apparentAltitude(jd, pos.lon, pos.lat, lat, lon);
+        }
 
         const civilHour = now.getHours() + now.getMinutes() / 60
                         + now.getSeconds() / 3600;
 
-        const ss = Astronomy.sunriseSunset(now, lat, lon);
-        // Clock hour → dial degrees: noon = 0°, 15°/hr clockwise.
-        const dialFromCivil = (date) => {
-            if (!date) return null;
-            const h = date.getHours() + date.getMinutes() / 60;
-            return (h - 12) * 15;
-        };
-
-        const altitudes = {
-            Sun:     Astronomy.apparentAltitude(jd, sunLon,           0, lat, lon),
-            Moon:    Astronomy.apparentAltitude(jd, moonLon,    moonLat, lat, lon),
-            Mercury: Astronomy.apparentAltitude(jd, planets.Mercury, 0, lat, lon),
-            Venus:   Astronomy.apparentAltitude(jd, planets.Venus,   0, lat, lon),
-            Mars:    Astronomy.apparentAltitude(jd, planets.Mars,    0, lat, lon),
-            Jupiter: Astronomy.apparentAltitude(jd, planets.Jupiter, 0, lat, lon),
-            Saturn:  Astronomy.apparentAltitude(jd, planets.Saturn,  0, lat, lon)
-        };
-
         this._state = {
             now:               now,
+            latitude:          lat,        // the hour ring solves the day's
+                                           // solar altitudes from this plus
+                                           // sunDec
+            palette:           this._palette,
+            accent:            this._accent,
             sunLon:            sunLon,
             moonLon:           moonLon,
-            moonPhaseAngle:    moonPh,
+            moonPhaseAngle:    Astronomy.moonPhase(jd),
             planets:           planets,
-            sunRA:             sunRA,
-            moonRA:            moonRA,
+            sunRA:             sunEq.ra,
+            sunDec:            sunEq.dec,
+            moonRA:            Astronomy.eclipticToEquatorial(moonLon, moonLat, jd).ra,
             planetRAs:         planetRAs,
             zodiacBoundaryRAs: this._zodiacBoundaryRAs,
             zodiacMidRAs:      this._zodiacMidRAs,
             timeHandAngle:     (civilHour - 12) * 15, // civil time
-            sunriseDialAngle:  dialFromCivil(ss && ss.rise),
-            sunsetDialAngle:   dialFromCivil(ss && ss.set),
-            lstDeg:            lstDeg,
-            accent:            Theme.parseColor(this.accentColor, Theme.ACCENT_DEFAULT),
+            lstDeg:            Astronomy.lmst(jd, lon),
             altitudes:         altitudes
         };
 
@@ -198,7 +247,7 @@ class OrlojApplet extends Applet.TextApplet {
     }
 
     _onMotion(actor, event) {
-        if (!this._state) return false;
+        if (!this._state) return Clutter.EVENT_PROPAGATE;
         const [sx, sy] = event.get_coords();
         const [ax, ay] = actor.get_transformed_position();
         // Use the logical allocation, not get_surface_size(): the surface is
@@ -206,15 +255,16 @@ class OrlojApplet extends Applet.TextApplet {
         // pointer coords above are logical. hitTest must see the same space.
         const [w, h] = actor.get_size();
         const label = Dial.hitTest(w, h, this._state, sx - ax, sy - ay);
-        if (label === this._lastHoverLabel) return false;
-        this._lastHoverLabel = label;
-        if (label) {
-            this._tooltip.set_text(label);
-            this._tooltip.preventShow = false;
-            this._tooltip.show();
-        } else {
-            this._tooltip.preventShow = true;
-            this._tooltip.hide();
+        if (label !== this._lastHoverLabel) {
+            this._lastHoverLabel = label;
+            if (label) {
+                this._tooltip.set_text(label);
+                this._tooltip.preventShow = false;
+                this._tooltip.show();
+            } else {
+                this._tooltip.preventShow = true;
+                this._tooltip.hide();
+            }
         }
         return Clutter.EVENT_PROPAGATE;
     }
@@ -233,8 +283,8 @@ class OrlojApplet extends Applet.TextApplet {
             if (this._state) {
                 Dial.draw(cr, w, h, this._state);
             } else {
-                cr.setSourceRGBA(Theme.BACKGROUND[0], Theme.BACKGROUND[1],
-                                 Theme.BACKGROUND[2], Theme.BACKGROUND[3]);
+                const bg = this._palette.BACKGROUND;
+                cr.setSourceRGBA(bg[0], bg[1], bg[2], bg[3]);
                 cr.rectangle(0, 0, w, h);
                 cr.fill();
             }
@@ -253,12 +303,19 @@ class OrlojApplet extends Applet.TextApplet {
             this._timer = null;
         }
         if (this._tooltip) this._tooltip.destroy();
+        // AppletPopupMenu parents itself to Main.uiGroup, and nothing in
+        // Cinnamon's applet teardown removes it from there.
+        this.menu.destroy();
         if (this._settings) this._settings.finalize();
     }
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
-    imports.searchPath.unshift(metadata.path + "/lib");
+    // main() runs once per panel instance, but the search path is global and
+    // the modules it resolves are shared, so add the entry only once.
+    const libPath = metadata.path + "/lib";
+    if (imports.searchPath.indexOf(libPath) === -1)
+        imports.searchPath.unshift(libPath);
     Astronomy = imports.astronomy;
     Dial      = imports.dial;
     Theme     = imports.theme;
