@@ -56,13 +56,30 @@ ThemeSwitcher.prototype = {
     },
 
     _isDarkNow: function() {
-        // 已配置暗/亮主题时按配置判断，否则回退到名称启发式
+        // 深色整套含 gtk + cinnamon 两项，只看 gtk 会在两者配得不一样时误判
+        //（如 gtk=Nebula-Dark-Studio 而配置深色 GTK=Nebula-Dark）。
+        // 两项投票：深色命中多判暗，浅色命中多判亮，打平/都没命中回退名启发式。
         try {
             let appletSettings = this._applet._settings;
             let darkGtk = appletSettings ? appletSettings.getValue('dark-gtk-theme') : '';
-            let cur = this._desktopSettings.get_string('gtk-theme');
-            if (darkGtk) return cur === darkGtk;
-            return cur.indexOf('Dark') !== -1;
+            let lightGtk = appletSettings ? appletSettings.getValue('light-gtk-theme') : '';
+            let darkCin = appletSettings ? appletSettings.getValue('dark-cinnamon-theme') : '';
+            let lightCin = appletSettings ? appletSettings.getValue('light-cinnamon-theme') : '';
+            let curGtk = this._desktopSettings.get_string('gtk-theme');
+            let curCin = '';
+            try {
+                if (this._cinnamonSettings) curCin = this._cinnamonSettings.get_string('name');
+            } catch (e2) {}
+            let darkHit = 0, lightHit = 0;
+            if (darkGtk && curGtk === darkGtk) darkHit++;
+            if (darkCin && curCin === darkCin) darkHit++;
+            if (lightGtk && curGtk === lightGtk) lightHit++;
+            if (lightCin && curCin === lightCin) lightHit++;
+            if (darkHit !== lightHit) return darkHit > lightHit;
+            // 回退：名启发式，gtk 和 cinnamon 任一含 Dark 即判暗
+            if (/[Dd]ark/.test(curGtk || '')) return true;
+            if (/[Dd]ark/.test(curCin || '')) return true;
+            return false;
         } catch(e) {
             return false;
         }

@@ -258,7 +258,6 @@
             "Mint-L-Red": "Mint-L-Red",
             "Mint-L-Sand": "Mint-L-Sand",
             "Mint-L-Teal": "Mint-L-Teal",
-            "Mint-Niri": "Mint-Niri",
             "Mint-X": "Mint-X",
             "Mint-X-Aqua": "Mint-X-Aqua",
             "Mint-X-Blue": "Mint-X-Blue",
@@ -291,7 +290,9 @@
             "Mint-Y-Sand": "Mint-Y-Sand",
             "Mint-Y-Teal": "Mint-Y-Teal",
             "Nebula-Dark": "Nebula-Dark",
-            "Nebula-Dynamic": "Nebula-Dynamic"
+            "Nebula-Dark-Studio": "Nebula-Dark-Studio",
+            "Nebula-Light": "Nebula-Light",
+            "Nebula-Light-Studio": "Nebula-Light-Studio"
         }
     },
     "dark-icon-theme": {
@@ -443,7 +444,6 @@
             "Mint-L-Red": "Mint-L-Red",
             "Mint-L-Sand": "Mint-L-Sand",
             "Mint-L-Teal": "Mint-L-Teal",
-            "Mint-Niri": "Mint-Niri",
             "Mint-X": "Mint-X",
             "Mint-X-Aqua": "Mint-X-Aqua",
             "Mint-X-Blue": "Mint-X-Blue",
@@ -476,7 +476,9 @@
             "Mint-Y-Sand": "Mint-Y-Sand",
             "Mint-Y-Teal": "Mint-Y-Teal",
             "Nebula-Dark": "Nebula-Dark",
-            "Nebula-Dynamic": "Nebula-Dynamic",
+            "Nebula-Dark-Studio": "Nebula-Dark-Studio",
+            "Nebula-Light": "Nebula-Light",
+            "Nebula-Light-Studio": "Nebula-Light-Studio",
             "Numix-Cinnamon-Semi-Transparent": "Numix-Cinnamon-Semi-Transparent",
             "Numix-Cinnamon-Transparent": "Numix-Cinnamon-Transparent",
             "Orchidea": "Orchidea"
@@ -527,7 +529,6 @@
             "Mint-L-Red": "Mint-L-Red",
             "Mint-L-Sand": "Mint-L-Sand",
             "Mint-L-Teal": "Mint-L-Teal",
-            "Mint-Niri": "Mint-Niri",
             "Mint-X": "Mint-X",
             "Mint-X-Aqua": "Mint-X-Aqua",
             "Mint-X-Blue": "Mint-X-Blue",
@@ -560,7 +561,9 @@
             "Mint-Y-Sand": "Mint-Y-Sand",
             "Mint-Y-Teal": "Mint-Y-Teal",
             "Nebula-Dark": "Nebula-Dark",
-            "Nebula-Dynamic": "Nebula-Dynamic"
+            "Nebula-Dark-Studio": "Nebula-Dark-Studio",
+            "Nebula-Light": "Nebula-Light",
+            "Nebula-Light-Studio": "Nebula-Light-Studio"
         }
     },
     "light-icon-theme": {
@@ -712,7 +715,6 @@
             "Mint-L-Red": "Mint-L-Red",
             "Mint-L-Sand": "Mint-L-Sand",
             "Mint-L-Teal": "Mint-L-Teal",
-            "Mint-Niri": "Mint-Niri",
             "Mint-X": "Mint-X",
             "Mint-X-Aqua": "Mint-X-Aqua",
             "Mint-X-Blue": "Mint-X-Blue",
@@ -745,7 +747,9 @@
             "Mint-Y-Sand": "Mint-Y-Sand",
             "Mint-Y-Teal": "Mint-Y-Teal",
             "Nebula-Dark": "Nebula-Dark",
-            "Nebula-Dynamic": "Nebula-Dynamic",
+            "Nebula-Dark-Studio": "Nebula-Dark-Studio",
+            "Nebula-Light": "Nebula-Light",
+            "Nebula-Light-Studio": "Nebula-Light-Studio",
             "Numix-Cinnamon-Semi-Transparent": "Numix-Cinnamon-Semi-Transparent",
             "Numix-Cinnamon-Transparent": "Numix-Cinnamon-Transparent",
             "Orchidea": "Orchidea"
