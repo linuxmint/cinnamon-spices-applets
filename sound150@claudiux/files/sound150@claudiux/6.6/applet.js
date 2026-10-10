@@ -965,6 +965,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         this.isActorEntered = false;
 
         let _to = setTimeout( () => {
+            this.isActorEntered = false;
             if (_to && source_exists(_to))
                 clearTimeout(_to);
             if (this._applet_tooltip)
