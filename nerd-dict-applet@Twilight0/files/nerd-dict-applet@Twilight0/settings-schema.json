@@ -1,0 +1,130 @@
+{
+  "main-section": {
+    "type": "section",
+    "description": "Main Settings"
+  },
+  "directClick": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Direct Click Mode",
+    "tooltip": "Left-click toggles dictation directly; right-click opens the menu."
+  },
+  "modelRoot": {
+    "type": "filechooser",
+    "default": "~/.config/nerd-dictation/model",
+    "select-dir": true,
+    "description": "Model Root Directory",
+    "tooltip": "Folder containing your downloaded Vosk speech recognition models."
+  },
+  "model": {
+    "type": "combobox",
+    "default": "vosk-model-small-en-us-0.15",
+    "options": {
+      "vosk-model-el-gr-0.7": "vosk-model-el-gr-0.7",
+      "vosk-model-small-en-us-0.15": "vosk-model-small-en-us-0.15"
+    },
+    "description": "Active Model Folder",
+    "tooltip": "Name of the Vosk model directory in the Model Root Directory."
+  },
+  "audio-section": {
+    "type": "section",
+    "description": "Audio and Recognition Settings"
+  },
+  "sampleRate": {
+    "type": "combobox",
+    "default": "44100",
+    "options": {
+      "16000 Hz": "16000",
+      "44100 Hz": "44100",
+      "48000 Hz": "48000"
+    },
+    "description": "Audio Sample Rate",
+    "tooltip": "Sample rate for audio input recording."
+  },
+  "timeout": {
+    "type": "entry",
+    "default": "0",
+    "description": "Max Dictation Time (seconds)",
+    "tooltip": "Automatically stops dictation after this number of seconds of no voice input. Set to 0 to disable timeout."
+  },
+  "idleTime": {
+    "type": "entry",
+    "default": "100",
+    "description": "Idle Time (ms)",
+    "tooltip": "Minimum pause length in milliseconds before recognizing speech."
+  },
+  "punctuate": {
+    "type": "entry",
+    "default": "0",
+    "description": "Punctuate Previous Timeout",
+    "tooltip": "Max duration in seconds to preserve previous punctuation from last speech segment."
+  },
+  "fullSentence": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Format Full Sentence",
+    "tooltip": "Automatically formats speech to complete sentences (capitalization and final punctuation)."
+  },
+  "digits": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Write Numbers as Digits",
+    "tooltip": "Converts spoken numbers to digits instead of words."
+  },
+  "useSeparator": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use Digit Separators",
+    "tooltip": "Adds digit separator characters for numbers."
+  },
+  "input-section": {
+    "type": "section",
+    "description": "Input and Advanced Settings"
+  },
+  "tool": {
+    "type": "combobox",
+    "default": "",
+    "options": {
+      "Default (xdotool)": "",
+      "dotool (Wayland)": "DOTOOL"
+    },
+    "description": "Input Simulation Tool",
+    "tooltip": "Choose DOTOOL for Wayland, or leave blank to let nerd-dictation use xdotool."
+  },
+  "keyboard": {
+    "type": "entry",
+    "default": "",
+    "description": "Keyboard Layout (dotool)",
+    "tooltip": "xkb keyboard layout code to pass to dotool (e.g. us, gr)."
+  },
+  "deviceName": {
+    "type": "entry",
+    "default": "default",
+    "description": "PulseAudio Device Name",
+    "tooltip": "PulseAudio source device name to record from. Use 'default' unless you have a specific audio source."
+  },
+  "precommand": {
+    "type": "entry",
+    "default": "",
+    "description": "Pre-command",
+    "tooltip": "Shell command to run immediately before starting dictation."
+  },
+  "postcommand": {
+    "type": "entry",
+    "default": "",
+    "description": "Post-command",
+    "tooltip": "Shell command to run immediately after dictation ends."
+  },
+  "freeCommand": {
+    "type": "entry",
+    "default": "",
+    "description": "Extra Command Flags",
+    "tooltip": "Raw CLI arguments to append to nerd-dictation."
+  },
+  "env": {
+    "type": "entry",
+    "default": "",
+    "description": "Environment Variables",
+    "tooltip": "Environment variables to pass to the process, in KEY=VALUE space-separated format (e.g. PATH=/usr/bin MY_VAR=foo)."
+  }
+}
