@@ -65,7 +65,7 @@ export function createUpdateStationsMenuItem() {
       isLoading = true;
       self.setText("Updating Radio stations...");
 
-      notify("Upating Radio stations... \n\nThis can take several minutes!");
+      notify("Updating Radio stations... \n\nThis can take several minutes!");
 
       makeJsonHttpRequest<RadioStation[]>({
         url: "http://de1.api.radio-browser.info/json/stations?limit=100000&hidebroken=true",
