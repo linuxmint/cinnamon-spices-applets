@@ -1,0 +1,335 @@
+# German translations for AWS Cold Restore Monitor.
+# Copyright (C) 2026 paynalton
+# This file is distributed under the same license as the AWS Cold Restore Monitor package.
+# paynalton, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AWS Cold Restore Monitor 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-09-08 13:22-0600\n"
+"PO-Revision-Date: 2026-09-08 20:00+0000\n"
+"Last-Translator: paynalton\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:62
+#, javascript-format
+msgid "AWS · Configure"
+msgstr "AWS · Konfigurieren"
+
+#: applet.js:90
+#, javascript-format
+msgid "Refresh now"
+msgstr "Jetzt aktualisieren"
+
+#: applet.js:91
+#, javascript-format
+msgid "Configure…"
+msgstr "Konfigurieren…"
+
+#: applet.js:180
+#, javascript-format
+msgid "Could not send the system notification."
+msgstr "Die Systembenachrichtigung konnte nicht gesendet werden."
+
+#: applet.js:197
+#, javascript-format
+msgid "AWS · Internal error"
+msgstr "AWS · Interner Fehler"
+
+#: applet.js:210
+#, javascript-format
+msgid "no percentage"
+msgstr "keine Prozentangabe"
+
+#: applet.js:214
+#, javascript-format
+msgid "AWS · Error"
+msgstr "AWS · Fehler"
+
+#: applet.js:214
+#, javascript-format
+msgid "AWS · Retrying"
+msgstr "AWS · Erneuter Versuch"
+
+#: applet.js:214
+#, javascript-format
+msgid "AWS %s"
+msgstr "AWS %s"
+
+#: applet.js:214
+#, javascript-format
+msgid "AWS · %s"
+msgstr "AWS · %s"
+
+#: applet.js:218
+#, javascript-format
+msgid "AWS Cold Restore Monitor: %s"
+msgstr "AWS Cold Restore Monitor: %s"
+
+#: applet.js:219
+#, javascript-format
+msgid "%s · %s"
+msgstr "%s · %s"
+
+#: applet.js:220
+#, javascript-format
+msgid "Right-click and choose Configure to select a restore job."
+msgstr "Klicken Sie mit der rechten Maustaste und wählen Sie „Konfigurieren“, um einen Wiederherstellungsauftrag auszuwählen."
+
+#: applet.js:223
+#, javascript-format
+msgid ""
+"Automatic queries are paused. Fix the problem and click Refresh now or "
+"change the settings."
+msgstr "Automatische Abfragen sind angehalten. Beheben Sie das Problem und klicken Sie auf „Jetzt aktualisieren“ oder ändern Sie die Einstellungen."
+
+#: applet.js:224
+#, javascript-format
+msgid "AWS: %s"
+msgstr "AWS: %s"
+
+#: applet.js:226
+#, javascript-format
+msgid "Status: %s (previous result; query pending)"
+msgstr "Status: %s (vorheriges Ergebnis; Abfrage ausstehend)"
+
+#: applet.js:226
+#, javascript-format
+msgid "Status: %s"
+msgstr "Status: %s"
+
+#: applet.js:227
+#, javascript-format
+msgid "Estimated progress: %s"
+msgstr "Geschätzter Fortschritt: %s"
+
+#: applet.js:228
+#, javascript-format
+msgid "Job: %s"
+msgstr "Auftrag: %s"
+
+#: applet.js:228
+#, javascript-format
+msgid "not configured"
+msgstr "nicht konfiguriert"
+
+#: applet.js:229
+#, javascript-format
+msgid "Profile: %s · Region: %s"
+msgstr "Profil: %s · Region: %s"
+
+#: applet.js:230
+#, javascript-format
+msgid "Started: %s"
+msgstr "Beginn: %s"
+
+#: applet.js:231
+#, javascript-format
+msgid "Completed: %s"
+msgstr "Abschluss: %s"
+
+#: applet.js:232
+#, javascript-format
+msgid "Last successful query: %s"
+msgstr "Letzte erfolgreiche Abfrage: %s"
+
+#: applet.js:273
+#, javascript-format
+msgid "Configure"
+msgstr "Konfigurieren"
+
+#: applet.js:274
+#, javascript-format
+msgid ""
+"Enter the profile, region, restore job ID, and AWS CLI path in Configure."
+msgstr "Geben Sie unter „Konfigurieren“ das Profil, die Region, die ID des Wiederherstellungsauftrags und den Pfad zu AWS CLI ein."
+
+#: applet.js:278
+#, javascript-format
+msgid "The interval must be between 10 and 3600 seconds. Check the settings."
+msgstr "Das Intervall muss zwischen 10 und 3600 Sekunden liegen. Überprüfen Sie die Einstellungen."
+
+#: applet.js:281
+#, javascript-format
+msgid "Querying…"
+msgstr "Abfrage läuft…"
+
+#: applet.js:339
+#, javascript-format
+msgid "AWS reports that the restore failed. Review the job in AWS Backup."
+msgstr "AWS meldet, dass die Wiederherstellung fehlgeschlagen ist. Überprüfen Sie den Auftrag in AWS Backup."
+
+#: applet.js:339
+#, javascript-format
+msgid "AWS reports that the restore was aborted. Review the job in AWS Backup."
+msgstr "AWS meldet, dass die Wiederherstellung abgebrochen wurde. Überprüfen Sie den Auftrag in AWS Backup."
+
+#: applet.js:343
+#, javascript-format
+msgid "Query successful"
+msgstr "Abfrage erfolgreich"
+
+#: applet.js:345
+#, javascript-format
+msgid ""
+"AWS has not reported a valid percentage. The job status is still available."
+msgstr "AWS hat keine gültige Prozentangabe geliefert. Der Auftragsstatus ist weiterhin verfügbar."
+
+#: applet.js:348
+#, javascript-format
+msgid ""
+"The query succeeded, but AWS CLI issued a warning. Run the query in your "
+"terminal to review it."
+msgstr "Die Abfrage war erfolgreich, aber AWS CLI hat eine Warnung ausgegeben. Führen Sie die Abfrage im Terminal aus, um die Warnung anzuzeigen."
+
+#: applet.js:380
+#, javascript-format
+msgid "Could not load the applet. Check the installation and add it again."
+msgstr "Das Applet konnte nicht geladen werden. Überprüfen Sie die Installation und fügen Sie es erneut hinzu."
+
+#: errors.js:28
+#, javascript-format
+msgid "The query exceeded 60 seconds. It will be retried automatically."
+msgstr "Die Abfrage hat länger als 60 Sekunden gedauert. Sie wird automatisch wiederholt."
+
+#: errors.js:30
+#, javascript-format
+msgid ""
+"The monitor encountered an internal error. Remove the applet and add it "
+"again."
+msgstr "Im Monitor ist ein interner Fehler aufgetreten. Entfernen Sie das Applet und fügen Sie es erneut hinzu."
+
+#: errors.js:32
+#, javascript-format
+msgid ""
+"AWS returned an invalid response. Check the query with AWS CLI and click "
+"Refresh now."
+msgstr "AWS hat eine ungültige Antwort zurückgegeben. Überprüfen Sie die Abfrage mit AWS CLI und klicken Sie auf „Jetzt aktualisieren“."
+
+#: errors.js:34
+#, javascript-format
+msgid ""
+"Could not authenticate with AWS. Check your credentials or renew your SSO "
+"session, then click Refresh now."
+msgstr "Die Authentifizierung bei AWS ist fehlgeschlagen. Überprüfen Sie Ihre Anmeldedaten oder erneuern Sie Ihre SSO-Sitzung und klicken Sie anschließend auf „Jetzt aktualisieren“."
+
+#: errors.js:36
+#, javascript-format
+msgid ""
+"AWS denied access. Check the backup:DescribeRestoreJob permission for this "
+"profile."
+msgstr "AWS hat den Zugriff verweigert. Überprüfen Sie die Berechtigung backup:DescribeRestoreJob für dieses Profil."
+
+#: errors.js:38
+#, javascript-format
+msgid ""
+"The job or profile was not found. Check the profile, region, and restore job "
+"ID."
+msgstr "Der Auftrag oder das Profil wurde nicht gefunden. Überprüfen Sie das Profil, die Region und die ID des Wiederherstellungsauftrags."
+
+#: errors.js:40
+#, javascript-format
+msgid ""
+"The secure connection could not be verified. Check your certificates and "
+"network configuration."
+msgstr "Die sichere Verbindung konnte nicht verifiziert werden. Überprüfen Sie Ihre Zertifikate und die Netzwerkkonfiguration."
+
+#: errors.js:42
+#, javascript-format
+msgid ""
+"Could not start AWS CLI. Check that it is installed and that the executable "
+"path and permissions are correct."
+msgstr "AWS CLI konnte nicht gestartet werden. Überprüfen Sie, ob es installiert ist und ob der Pfad und die Berechtigungen der ausführbaren Datei korrekt sind."
+
+#: errors.js:44
+#, javascript-format
+msgid ""
+"The AWS CLI configuration or arguments are invalid. Check the applet "
+"settings."
+msgstr "Die Konfiguration oder die Argumente von AWS CLI sind ungültig. Überprüfen Sie die Einstellungen des Applets."
+
+#: errors.js:46
+#, javascript-format
+msgid ""
+"AWS is throttling requests. The query will be retried after a longer delay."
+msgstr "AWS begrenzt die Anfragerate. Die Abfrage wird nach einer längeren Wartezeit wiederholt."
+
+#: errors.js:48
+#, javascript-format
+msgid ""
+"AWS is unavailable or there is a network problem. The query will be retried "
+"automatically."
+msgstr "AWS ist nicht verfügbar oder es liegt ein Netzwerkproblem vor. Die Abfrage wird automatisch wiederholt."
+
+#: errors.js:50
+#, javascript-format
+msgid ""
+"Communication with AWS CLI was interrupted. The query will be retried "
+"automatically."
+msgstr "Die Kommunikation mit AWS CLI wurde unterbrochen. Die Abfrage wird automatisch wiederholt."
+
+#: errors.js:51
+#, javascript-format
+msgid ""
+"AWS CLI exited with an unrecognized error. Check the query in your terminal "
+"and click Refresh now."
+msgstr "AWS CLI wurde mit einem unbekannten Fehler beendet. Überprüfen Sie die Abfrage im Terminal und klicken Sie auf „Jetzt aktualisieren“."
+
+#: settings-schema.json
+#, javascript-format
+msgid "Restore job"
+msgstr "Wiederherstellungsauftrag"
+
+#: settings-schema.json
+#, javascript-format
+msgid "AWS profile (PROFILE)"
+msgstr "AWS-Profil (PROFILE)"
+
+#: settings-schema.json
+#, javascript-format
+msgid "Region (REGION)"
+msgstr "Region (REGION)"
+
+#: settings-schema.json
+#, javascript-format
+msgid "Restore job ID (RESTORE_JOB_ID)"
+msgstr "ID des Wiederherstellungsauftrags (RESTORE_JOB_ID)"
+
+#: settings-schema.json
+#, javascript-format
+msgid "seconds"
+msgstr "Sekunden"
+
+#: settings-schema.json
+#, javascript-format
+msgid "Polling interval"
+msgstr "Abfrageintervall"
+
+#: settings-schema.json
+#, javascript-format
+msgid "AWS CLI executable"
+msgstr "Ausführbare Datei von AWS CLI"
+
+#: settings-schema.json
+#, javascript-format
+msgid ""
+"Use aws or the absolute path returned by command -v aws in your terminal."
+msgstr "Verwenden Sie aws oder den absoluten Pfad, den command -v aws im Terminal ausgibt."
+
+#: metadata.json
+#, javascript-format
+msgid ""
+"Monitor the status and progress of cold storage restores through AWS Backup."
+msgstr "Überwachen Sie den Status und Fortschritt von Wiederherstellungen aus dem Cold Storage über AWS Backup."
+
+#: metadata.json
+#, javascript-format
+msgid "AWS Cold Restore Monitor"
+msgstr "AWS Cold Restore Monitor"
