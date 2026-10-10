@@ -1,3 +1,7 @@
+### v16.5.4~20261011
+  * Volume tooltip does not stay on screen while the pointer is elsewhere.
+  * Fixes [#9103](https://github.com/linuxmint/cinnamon-spices-applets/issues/9103)
+
 ### v16.5.3~20260915
   * Avoids adding the Applications submenu twice in Cinnamon 6.6 and 6.7.
 
