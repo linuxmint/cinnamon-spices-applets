@@ -6,7 +6,6 @@ const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const Meta = imports.gi.Meta;
-const Lang = imports.lang;
 const SignalManager = imports.misc.signalManager;
 const Cinnamon = imports.gi.Cinnamon;
 const Gio = imports.gi.Gio;
@@ -45,8 +44,8 @@ class DesktopPeekToggleApplet extends Applet.Applet {
         }
 
         this.signals = new SignalManager.SignalManager(null);
-        this.actor.connect("enter-event", Lang.bind(this, this._on_enter));
-        this.actor.connect("leave-event", Lang.bind(this, this._on_leave));
+        this.actor.connect("enter-event", () => this._on_enter());
+        this.actor.connect("leave-event", () => this._on_leave());
         this.signals.connect(global.stage, "notify::key-focus", this._on_leave, this);
 
         this._did_peek = false;
@@ -64,11 +63,11 @@ class DesktopPeekToggleApplet extends Applet.Applet {
         this._apply_bar_style();
         this._update_tooltip();
         this._build_context_menu();
-        this.settings.connect("settings-changed", Lang.bind(this, function () {
+        this.settings.connect("settings-changed", () => {
             this._update_indicator();
             this._apply_bar_style();
             this._update_tooltip();
-        }));
+        });
     }
 
     on_applet_removed_from_panel() {
@@ -202,7 +201,7 @@ class DesktopPeekToggleApplet extends Applet.Applet {
         if (!this.hover_peek)
             return;
         this._cancel_peek_timeout();
-        this._peek_timeout_id = Mainloop.timeout_add(this.hover_delay, Lang.bind(this, function () {
+        this._peek_timeout_id = Mainloop.timeout_add(this.hover_delay, () => {
             if (this.actor.hover &&
                 !this._applet_context_menu.isOpen &&
                 !global.settings.get_boolean("panel-edit-mode")) {
@@ -227,7 +226,7 @@ class DesktopPeekToggleApplet extends Applet.Applet {
             }
             this._peek_timeout_id = 0;
             return false;
-        }));
+        });
     }
 
     _on_leave() {
@@ -255,7 +254,7 @@ class DesktopPeekToggleApplet extends Applet.Applet {
     _build_context_menu() {
         const addItem = (label, action) => {
             const item = new PopupMenu.PopupMenuItem(_(label));
-            item.connect("activate", Lang.bind(this, () => this._perform_action(action)));
+            item.connect("activate", () => this._perform_action(action));
             this._applet_context_menu.addMenuItem(item);
         };
         addItem("Show Desktop", "show_desktop");
@@ -268,7 +267,7 @@ class DesktopPeekToggleApplet extends Applet.Applet {
         const settingsItem = new PopupMenu.PopupIconMenuItem(
             _("Applet Settings"), "emblem-system", St.IconType.SYMBOLIC
         );
-        settingsItem.connect("activate", Lang.bind(this, this._open_settings));
+        settingsItem.connect("activate", () => this._open_settings());
         this._applet_context_menu.addMenuItem(settingsItem);
     }
 
