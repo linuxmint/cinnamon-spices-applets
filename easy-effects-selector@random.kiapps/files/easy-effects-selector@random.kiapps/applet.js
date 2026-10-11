@@ -31,6 +31,9 @@ const QUICK_PRESET_KEYS = ["quick-preset-top", "quick-preset-middle", "quick-pre
 const QUICK_PRESET_PROPERTIES = ["_quickPresetTop", "_quickPresetMiddle", "_quickPresetBottom"];
 const SHUTDOWN_KEY = "shutdown-on-window-close";
 const BYPASS_KEY = "bypass";
+const BYPASS_TRACKER_KEY = "bypass-tracker";
+const BYPASS_STARTUP_CHECK_DELAY = 250;
+const BYPASS_STARTUP_DURATION = 8 * 1000000;
 const AUTOSTART_OPTION = "ee-autostart";
 const SHUTDOWN_OPTION = "ee-shutdown-on-window-close";
 const ROUTING_OPTION = "keep-bypass-on-device-change";
@@ -163,11 +166,10 @@ class SelectorSettings extends Settings.AppletSettings {
 // Read-only access to the same GSettings instances used by EasyEffects 7.2.3.
 // preset-map.json contains paths extracted from its original preset serializers.
 class PresetStateReader {
-    constructor(map, onChange, routingActive = () => false, routingStream = () => ROUTING_STREAM) {
+    constructor(map, onChange, routingStream = () => ROUTING_STREAM) {
         this.map = map;
         this.source = Gio.SettingsSchemaSource.get_default();
         this.onChange = onChange;
-        this.routingActive = routingActive;
         this.routingStream = routingStream;
         this.groups = new Map();
         this.reference = null;
@@ -237,7 +239,11 @@ class PresetStateReader {
     }
 
     _presetBlocklist(list) {
-        return this.routingActive() && Array.isArray(list)
+        // This entry belongs to the applet's infrastructure, not the preset.
+        // Presets may retain it after the forwarding route has been removed.
+        // Normalize it consistently in comparisons and change notifications,
+        // including notifications delivered after the routing transaction ends.
+        return Array.isArray(list)
             ? list.filter(name => !ROUTING_STREAM_NAMES.includes(name) && name !== this.routingStream()) : list;
     }
 
@@ -393,6 +399,13 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._shutdownSettingsSignal = 0;
         this._bypassSettingsSignal = 0;
         this._bypassAvailable = false;
+        this._bypassTracker = null;
+        this._bypassServiceOwner = null;
+        this._bypassBusGuid = "";
+        this._bypassRestoreTarget = null;
+        this._bypassRestoreTimeout = 0;
+        this._bypassRestoreDeadline = 0;
+        this._bypassRestoreWriting = false;
         this._bypassButton = null;
         this._bypassTooltip = null;
         this._menuTitleItem = null;
@@ -430,7 +443,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._routingFileMonitors = new Map();
         this._routingStatePresent = false;
         this._routingError = null;
-        this._routingBusWatch = 0;
+        this._serviceBusWatch = 0;
         this._routingOutputSettings = null;
         this._routingOutputSignal = 0;
         this._routingInputSettings = null;
@@ -488,6 +501,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 if (schema.has_key(BYPASS_KEY)) {
                     this._bypassAvailable = true;
                     this._bypassSettingsSignal = this._settings.connect("changed::" + BYPASS_KEY, () => {
+                        this._onBypassChanged();
                         this._syncBypassButton();
                         // Global bypass changes status, not preset selection.
                         this._syncQuickState();
@@ -525,6 +539,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             this._appletSettings.bind(SHUTDOWN_OPTION, "_shutdownOnClose", this._onShutdownChanged);
             this._appletSettings.bind(ROUTING_OPTION, "_preserveBypass", this._onRoutingChanged);
             this._restoreSelectionTracker();
+            this._monitorEasyEffectsService();
             this._syncQuickOptions();
             this._monitorPresetDirectory();
             this._syncEasyEffectsOptions();
@@ -536,6 +551,122 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         }
 
         this._updateSelection();
+    }
+
+    _monitorEasyEffectsService() {
+        if (this._removed || this._serviceBusWatch || !this._settings || !this._bypassAvailable ||
+            !this._appletSettings || !this._appletSettings.isReady)
+            return;
+        try {
+            const saved = this._appletSettings.getValue(BYPASS_TRACKER_KEY);
+            const tracker = saved ? JSON.parse(saved) : null;
+            if (tracker && typeof tracker.enabled === "boolean" &&
+                typeof tracker.bus === "string" && typeof tracker.owner === "string")
+                this._bypassTracker = tracker;
+        } catch (error) {
+            global.logError(error, UUID);
+        }
+        // An existing saved value must survive resets before the bus callback.
+        this._serviceBusWatch = Gio.bus_watch_name(Gio.BusType.SESSION, SCHEMA_ID,
+            Gio.BusNameWatcherFlags.NONE,
+            (connection, name, owner) => this._onEasyEffectsStarted(connection, owner),
+            () => {
+                if (this._removed)
+                    return;
+                this._stopBypassRestore();
+                if (!this._bypassTracker)
+                    this._saveBypassState(this._settings.get_boolean(BYPASS_KEY));
+                this._bypassServiceOwner = null;
+                this._bypassBusGuid = "";
+                this._queueRoutingCheck();
+            });
+    }
+
+    _saveBypassState(enabled) {
+        if (this._removed || !this._appletSettings || !this._appletSettings.isReady)
+            return;
+        const tracker = {enabled, bus: this._bypassBusGuid, owner: this._bypassServiceOwner || ""};
+        try {
+            const saved = JSON.stringify(tracker);
+            if (this._appletSettings.getValue(BYPASS_TRACKER_KEY) !== saved)
+                this._appletSettings.setValue(BYPASS_TRACKER_KEY, saved);
+            this._bypassTracker = tracker;
+        } catch (error) {
+            global.logError(error, UUID);
+        }
+    }
+
+    _onBypassChanged() {
+        if (this._removed || !this._bypassServiceOwner || this._routingBusy || this._bypassRestoreWriting)
+            return;
+        const enabled = this._settings.get_boolean(BYPASS_KEY);
+        if (this._bypassRestoreTarget !== null) {
+            // EE 7 clears bypass as startup devices arrive. Keep that temporary
+            // reset out of the saved state. Switching on is always intentional.
+            if (!enabled || this._bypassRestoreTarget)
+                return;
+            this._stopBypassRestore();
+        }
+        this._saveBypassState(enabled);
+    }
+
+    _onEasyEffectsStarted(connection, owner) {
+        if (this._removed)
+            return;
+        const previous = this._bypassTracker;
+        const bus = connection.get_guid();
+        const continuing = previous && previous.bus === bus && previous.owner === owner;
+        this._bypassServiceOwner = owner;
+        this._bypassBusGuid = bus;
+        this._queueRoutingCheck();
+        if (this._routingBusy)
+            return; // The routing transaction restores its own captured state.
+        this._stopBypassRestore();
+        if (continuing || !previous) {
+            // A Cinnamon reload keeps the live state of the same EE process.
+            this._saveBypassState(this._settings.get_boolean(BYPASS_KEY));
+            return;
+        }
+        this._bypassRestoreTarget = previous.enabled;
+        this._bypassRestoreDeadline = GLib.get_monotonic_time() + BYPASS_STARTUP_DURATION;
+        this._bypassRestoreTimeout = Mainloop.timeout_add(BYPASS_STARTUP_CHECK_DELAY, () => {
+            try {
+                if (this._removed || !this._bypassServiceOwner || this._routingBusy ||
+                    this._bypassRestoreTarget === null) {
+                    this._bypassRestoreTimeout = 0;
+                    return GLib.SOURCE_REMOVE;
+                }
+                if (this._settings.get_boolean(BYPASS_KEY) !== this._bypassRestoreTarget) {
+                    this._bypassRestoreWriting = true;
+                    if (!this._settings.set_boolean(BYPASS_KEY, this._bypassRestoreTarget))
+                        throw new Error(_("The EasyEffects bypass setting could not be changed."));
+                }
+                if (GLib.get_monotonic_time() >= this._bypassRestoreDeadline) {
+                    this._bypassRestoreTimeout = 0;
+                    this._bypassRestoreTarget = null;
+                    if (this._settings && this._bypassAvailable)
+                        this._saveBypassState(this._settings.get_boolean(BYPASS_KEY));
+                    return GLib.SOURCE_REMOVE;
+                }
+                return GLib.SOURCE_CONTINUE;
+            } catch (error) {
+                this._bypassRestoreTimeout = 0;
+                this._bypassRestoreTarget = null;
+                global.logError(error, UUID);
+                Main.notify("EasyEffects", _("Bypass could not be restored: %s").format(error.message));
+                return GLib.SOURCE_REMOVE;
+            } finally {
+                this._bypassRestoreWriting = false;
+            }
+        });
+    }
+
+    _stopBypassRestore() {
+        if (this._bypassRestoreTimeout) {
+            Mainloop.source_remove(this._bypassRestoreTimeout);
+            this._bypassRestoreTimeout = 0;
+        }
+        this._bypassRestoreTarget = null;
     }
 
     _createIconOverlay(appletPath) {
@@ -885,12 +1016,6 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
     async _monitorRoutingFiles() {
         if (this._removed)
             return;
-        if (!this._routingBusWatch) {
-            // Re-check the real package and preferences when EE is restarted,
-            // including after reinstalling or changing its supported version.
-            this._routingBusWatch = Gio.bus_watch_name(Gio.BusType.SESSION, SCHEMA_ID,
-                Gio.BusNameWatcherFlags.NONE, () => this._queueRoutingCheck(), () => this._queueRoutingCheck());
-        }
         const revision = ++this._routingMonitorRevision;
         const config = GLib.get_user_config_dir();
         for (const components of [[config, UUID], [config, "pipewire", "pipewire.conf.d"]]) {
@@ -936,6 +1061,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
     _onRoutingChanged() {
         if (this._removed)
             return;
+        this._stopBypassRestore();
         const enabled = Boolean(this._preserveBypass);
         const revision = ++this._routingRevision;
         this._routingStatusRevision++;
@@ -970,6 +1096,8 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 this._routingWrite = null;
                 this._routingBusy = false;
                 if (!this._removed) {
+                    if (this._settings && this._bypassAvailable)
+                        this._saveBypassState(this._settings.get_boolean(BYPASS_KEY));
                     this._routingReadAgain = false;
                     this._ensureRoutingExclusion();
                     if (this._routingStatePresent)
@@ -1167,8 +1295,10 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             return;
         try {
             const enabled = this._settings.get_boolean(BYPASS_KEY);
+            this._stopBypassRestore();
             if (!this._settings.set_boolean(BYPASS_KEY, !enabled))
                 throw new Error(_("The EasyEffects bypass setting could not be changed."));
+            this._saveBypassState(!enabled);
         } catch (error) {
             global.logError(error, UUID);
             Main.notify("EasyEffects", _("Bypass could not be changed: %s").format(error.message));
@@ -1433,7 +1563,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             if (this._removed || !this._hasQuickPresets())
                 return null;
             this._stateReader = new PresetStateReader(this._parameterMap, () => this._onEffectStateChanged(),
-                () => this._routingManaged || this._routingBusy, () => this._routingStream);
+                () => this._routingStream);
             return this._stateReader;
         })();
         this._readerPromise = operation;
@@ -1618,6 +1748,10 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
     _loadPreset(name, event = null) {
         if (this._loading || this._removed || this._routingBusy)
             return;
+        // An explicit selection takes precedence over startup restoration.
+        this._stopBypassRestore();
+        if (this._settings && this._bypassAvailable)
+            this._saveBypassState(this._settings.get_boolean(BYPASS_KEY));
         const operation = this._loadPresetNow(name, event);
         this._presetLoadPromise = operation;
         operation.then(() => {
@@ -1774,9 +1908,10 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             monitor.cancel();
         }
         this._routingFileMonitors.clear();
-        if (this._routingBusWatch) {
-            Gio.bus_unwatch_name(this._routingBusWatch);
-            this._routingBusWatch = 0;
+        this._stopBypassRestore();
+        if (this._serviceBusWatch) {
+            Gio.bus_unwatch_name(this._serviceBusWatch);
+            this._serviceBusWatch = 0;
         }
         this._invalidateQuickReference();
         this._cancelStateUpdate();

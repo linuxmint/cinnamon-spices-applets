@@ -84,7 +84,7 @@
     },
     "keep-menu-open-on-bypass": {
         "type": "generic",
-        "default": true
+        "default": false
     },
     "switch-presets-with-scroll": {
         "type": "generic",
@@ -180,5 +180,9 @@
         "description": "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects.",
         "file": "title_mode.py",
         "widget": "ReferenceNote"
+    },
+    "bypass-tracker": {
+        "type": "generic",
+        "default": ""
     }
 }

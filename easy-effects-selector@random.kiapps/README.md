@@ -2,7 +2,7 @@
 
 Select locally saved **EasyEffects 7.2.3 output presets** from the Cinnamon panel.
 Publisher: **random.kiapps**. Interface languages: English and German.
-Version: **1.5.2**.
+Version: **1.5.5**.
 
 ## Requirements
 
@@ -98,7 +98,8 @@ enabled, middle-clicking the panel icon toggles global bypass with menu controls
 enabled or disabled, without opening or closing the preset menu.
 
 The independent **Keep menu open after preset selection when bypass is active**
-option is on by default. When enabled, selecting a preset with active bypass
+option is off by default. Existing saved choices are retained on upgrade.
+When enabled, selecting a preset with active bypass
 leaves the menu open, for mouse and keyboard selection. It works with title launch,
 menu bypass control and middle-click control enabled or disabled. With bypass off,
 preset selection closes the menu normally.
@@ -114,6 +115,16 @@ its full color and opacity. Bypass does not affect the point position or either
 preset marker. The optional bypass tooltip detail reports active bypass, also
 without any assignments.
 The base icon updates immediately with the menu closed or during preset loading.
+
+The applet remembers the last global bypass state, including changes made in
+EasyEffects, and restores it when EasyEffects starts at login or is restarted.
+Delayed device discovery is covered by an eight-second startup check. This check
+then ends: later bypass changes remain unrestricted. An applet bypass toggle or
+explicit preset selection ends the check immediately. A Cinnamon reload with the
+same EasyEffects process keeps its live state. Without a saved state, the applet
+adopts the current value. A stopped service is never launched for restoration.
+The saved bypass state does not load a preset or change the blue and white
+preset markers.
 
 The optional menu bypass button appears only with title launch and menu bypass
 control enabled. Its highlighted state means bypass is on; clicking it toggles
@@ -186,9 +197,11 @@ Its actual saved identity is retained across session and language changes.
 The applet keeps exactly one forwarding entry in EasyEffects' output application
 blocklist, including after preset loads made in EasyEffects itself. Old entries
 for `ee_route_playback` are replaced on explicit activation. Manual exclusion is
-not required. Only the managed forwarding identities are ignored by preset
-comparison while the route is installed; other exclusions and effect settings
-still count. Preset files are not modified.
+not required. The applet's forwarding identities are ignored by preset
+comparison and change observation, including after the route is disabled.
+A preset saved while forwarding was active therefore keeps its blue point and
+menu marker after removal of the technical exclusion. Other application
+exclusions and all effect settings still count. Preset files are not modified.
 
 The switch reflects the current managed configuration and the actual EasyEffects
 device preferences, rather than only the last successful setup. It is updated

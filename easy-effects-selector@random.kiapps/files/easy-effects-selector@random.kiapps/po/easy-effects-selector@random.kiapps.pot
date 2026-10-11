@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 msgid ""
 msgstr ""
-"Project-Id-Version: easy-effects-selector@random.kiapps 1.5.2\n"
+"Project-Id-Version: easy-effects-selector@random.kiapps 1.5.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2026-10-11 13:26+0000\n"
-"PO-Revision-Date: 2026-10-11 13:26+0000\n"
+"POT-Creation-Date: 2026-10-11 18:09+0000\n"
+"PO-Revision-Date: 2026-10-11 18:09+0000\n"
 "Last-Translator: random.kiapps\n"
 "Language-Team: \n"
 "Language: \n"
@@ -49,6 +49,10 @@ msgstr ""
 
 #, javascript-format
 msgid "Bypass could not be changed: %s"
+msgstr ""
+
+#, javascript-format
+msgid "Bypass could not be restored: %s"
 msgstr ""
 
 #, javascript-format
