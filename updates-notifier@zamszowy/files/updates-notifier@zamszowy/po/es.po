@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #. applet.js:79
 msgid "missing dependencies"
@@ -150,26 +150,29 @@ msgid "Theme"
 msgstr "Tema"
 
 #. settings-schema.json->use-timer->description
-#, fuzzy
 msgid "Automatically check for updates"
-msgstr "Error al comprobar las actualizaciones"
+msgstr "Buscar actualizaciones automáticamente"
 
 #. settings-schema.json->use-timer->tooltip
 msgid ""
 "When turned off, updates will still show when checked manually or refreshed "
 "by another process"
 msgstr ""
+"Aunque esté desactivada, las actualizaciones seguirán apareciendo si se "
+"comprueban manualmente o si se actualizan mediante otro proceso"
 
 #. settings-schema.json->update-refresh->description
-#, fuzzy
 msgid "Active minutes to wait before refreshing updates"
-msgstr "Minutos de espera antes de actualizar"
+msgstr "Minutos de actividad que hay que esperar antes de actualizar los datos"
 
 #. settings-schema.json->update-refresh->tooltip
 msgid ""
 "Refresh wait time is reset when applet or Cinnamon are reset and does not "
 "include inactive time (e.g. when computer is suspended)"
 msgstr ""
+"El tiempo de espera de actualización se restablece cuando se reinician el "
+"applet o Cinnamon, y no incluye el tiempo de inactividad (por ejemplo, "
+"cuando el ordenador está en suspensión)"
 
 #. settings-schema.json->show-firmware->description
 msgid "Show firmware updates"
