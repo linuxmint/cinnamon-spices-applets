@@ -2,6 +2,7 @@
 
 Select locally saved **EasyEffects 7.2.3 output presets** from the Cinnamon panel.
 Publisher: **random.kiapps**. Interface languages: English and German.
+Version: **1.5.2**.
 
 ## Requirements
 
@@ -58,7 +59,7 @@ preset. There is no separate deviation indicator. The optional tooltip details
 show the current preset and, when it matches, its assigned position. The position
 detail starts disabled.
 
-With **Switch presets with mouse wheel** enabled under **Controls**, the mouse
+With **Switch quick-selection presets with mouse wheel** enabled under **Controls**, the mouse
 wheel over the panel icon cycles through the available assigned presets. This
 option starts disabled. Down advances Top → Middle → Bottom → Top; up reverses the
 order. Empty positions and missing files are skipped. From an unassigned preset,
@@ -159,6 +160,72 @@ Autostart uses `$XDG_CONFIG_HOME/autostart/easyeffects-service.desktop`, normall
 `~/.config/autostart/easyeffects-service.desktop`. EasyEffects only refreshes its
 own autostart switch when its settings window is reopened. Shutdown on window
 closing synchronizes in both directions immediately.
+
+### Keep bypass on output-device changes
+
+**Keep bypass when changing output devices** starts **disabled**. Installing,
+adding or starting the applet does not install a route or change device preferences.
+Enabling this option sets up a fixed stereo output for native EasyEffects 7.2.3,
+based on the route tested with PipeWire 1.4.2 and WirePlumber 0.5.8.
+It prevents output-device changes from making EasyEffects turn global bypass off.
+The current input device is kept fixed as in the tested setup: following default
+input changes could otherwise also reset global bypass, for example when a
+Bluetooth headset connects. The previous input preferences are saved as well.
+
+Switching the option briefly restarts the audio services and a running
+EasyEffects service; playback may be interrupted and the EasyEffects window
+closes. A stopped EasyEffects service remains stopped. The previous bypass state
+is retained. This option does not prevent EasyEffects from clearing bypass for
+other reasons, such as changing its effect list or input device.
+
+The virtual **Preset Selector – Fixed output** stays selected in EasyEffects.
+**Preset Selector – Forwarding** follows the system's selected output device.
+The forwarding stream uses the same readable name in the application list and
+in the exclusions; the German name is **Preset Selector – Weiterleitung**.
+Its actual saved identity is retained across session and language changes.
+The applet keeps exactly one forwarding entry in EasyEffects' output application
+blocklist, including after preset loads made in EasyEffects itself. Old entries
+for `ee_route_playback` are replaced on explicit activation. Manual exclusion is
+not required. Only the managed forwarding identities are ignored by preset
+comparison while the route is installed; other exclusions and effect settings
+still count. Preset files are not modified.
+
+The switch reflects the current managed configuration and the actual EasyEffects
+device preferences, rather than only the last successful setup. It is updated
+when those preferences or routing files change and when EasyEffects restarts.
+An unchanged reinstall of the supported native package retains the setup.
+Resetting EasyEffects to automatic device selection, deleting the managed route
+or installing an unsupported version is detected and shown as inactive. Status
+checks do not recreate files, change device preferences or restart audio.
+The forwarding stream remains excluded while an owned route still exists.
+Explicitly enabling the option again repairs a reset setup while retaining the
+original preferences needed for removal.
+
+Disabling restores the earlier EasyEffects output and input preferences unless
+a different device was selected in the meantime, removes the managed route,
+and removes the forwarding identities from the blocklist. Unrelated exclusions
+are retained. The exact previously tested manual `90-ee-route.conf` can be
+adopted; its original contents are saved for recovery. If EasyEffects already
+used that manual route, disabling returns it to the system's default output.
+Other configurations and externally edited route files are left unchanged,
+and a failed setup attempts to restore the previous state.
+
+Both enabling and disabling retain the bypass state immediately before the
+operation. Restoration waits for device discovery and checks for delayed bypass
+resets during EasyEffects startup. This bounded operation finishes with setup
+or removal; it does not continually override later bypass changes.
+
+The configuration lives in
+`$XDG_CONFIG_HOME/pipewire/pipewire.conf.d/90-ee-route.conf`. Recovery information
+is kept in `$XDG_CONFIG_HOME/easy-effects-selector@random.kiapps/`.
+The route persists across Cinnamon reloads and login sessions. When upgrading
+from the 1.5.1 test version, an active route is read without restarting audio. Switch the option
+off and on once to apply its new readable name. Disable this option before
+removing the applet if the route should also be removed.
+Select physical output devices through the desktop's sound controls while it
+is active; choosing another output directly in EasyEffects leaves the fixed
+route and is reflected in the option's status. Device-specific EasyEffects
+preset autoload rules for physical outputs do not apply to the fixed output.
 
 ## Local presets and input protection
 

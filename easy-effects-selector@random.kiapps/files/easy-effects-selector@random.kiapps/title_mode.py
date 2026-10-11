@@ -294,7 +294,7 @@ class OperationControls(SettingsWidget):
         self.content_widget.pack_start(self._keep_row, False, False, 0)
 
         self._scroll_row = Gtk.Box(spacing=20)
-        self._scroll_label = Gtk.Label(label=_("Switch presets with mouse wheel"), xalign=0)
+        self._scroll_label = Gtk.Label(label=_("Switch quick-selection presets with mouse wheel"), xalign=0)
         self._scroll_label.set_line_wrap(True)
         self._scroll_row.pack_start(self._scroll_label, True, True, 0)
         self._scroll_switch = Gtk.Switch(valign=Gtk.Align.CENTER)

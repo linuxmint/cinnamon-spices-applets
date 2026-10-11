@@ -33,6 +33,10 @@ const SHUTDOWN_KEY = "shutdown-on-window-close";
 const BYPASS_KEY = "bypass";
 const AUTOSTART_OPTION = "ee-autostart";
 const SHUTDOWN_OPTION = "ee-shutdown-on-window-close";
+const ROUTING_OPTION = "keep-bypass-on-device-change";
+const ROUTING_STREAM = _("Preset Selector – Forwarding");
+// Released identities may also occur in saved presets or an older locale.
+const ROUTING_STREAM_NAMES = ["ee_route_playback", "Preset Selector – Forwarding", "Preset Selector – Weiterleitung"];
 const LAUNCH_FROM_TITLE_OPTION = "launch-from-menu-title";
 // Retain the saved preference key while its control now governs menu operation.
 const BYPASS_CONTROL_OPTION = "show-bypass-button";
@@ -159,10 +163,12 @@ class SelectorSettings extends Settings.AppletSettings {
 // Read-only access to the same GSettings instances used by EasyEffects 7.2.3.
 // preset-map.json contains paths extracted from its original preset serializers.
 class PresetStateReader {
-    constructor(map, onChange) {
+    constructor(map, onChange, routingActive = () => false, routingStream = () => ROUTING_STREAM) {
         this.map = map;
         this.source = Gio.SettingsSchemaSource.get_default();
         this.onChange = onChange;
+        this.routingActive = routingActive;
+        this.routingStream = routingStream;
         this.groups = new Map();
         this.reference = null;
         this.expected = new Map();
@@ -205,7 +211,8 @@ class PresetStateReader {
                 const old = group.values.get(key);
                 group.values.set(key, value);
                 // GSettings signals potentially changed values, including repeated writes.
-                if (!PresetStateReader.equal(old, value)) {
+                const normalize = item => key === "blocklist" ? this._presetBlocklist(item) : item;
+                if (!PresetStateReader.equal(normalize(old), normalize(value))) {
                     if (key === "plugins" || key === "num-bands")
                         this.needsRefresh = true;
                     this.onChange();
@@ -227,6 +234,16 @@ class PresetStateReader {
             throw new Error(_("Unknown EasyEffects effect: %s").format(name));
         const definition = this.map.plugins[match[1]];
         return {name, base: match[1], definition, path: definition.path + match[2] + "/"};
+    }
+
+    _presetBlocklist(list) {
+        return this.routingActive() && Array.isArray(list)
+            ? list.filter(name => !ROUTING_STREAM_NAMES.includes(name) && name !== this.routingStream()) : list;
+    }
+
+    resetRoutingBlocklist() {
+        // A completed setup may have dconf notifications still queued.
+        this.output.values.set("blocklist", this.output.settings.get_strv("blocklist"));
     }
 
     _channel(plugin, channel) {
@@ -326,7 +343,8 @@ class PresetStateReader {
         }
         const blocklist = section.blocklist === undefined
             ? this.output.settings.get_default_value("blocklist").deep_unpack() : section.blocklist;
-        if (!PresetStateReader.equal(blocklist, this.output.settings.get_strv("blocklist")))
+        if (!PresetStateReader.equal(this._presetBlocklist(blocklist),
+            this._presetBlocklist(this.output.settings.get_strv("blocklist"))))
             return false;
         for (const name of order) {
             const plugin = this._plugin(name);
@@ -396,6 +414,27 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._scrollPresets = true;
         TOOLTIP_PROPERTIES.forEach(property => { this[property] = true; });
         this._appletPath = metadata.path;
+        this._preserveBypass = false;
+        this._routingActive = false;
+        this._routingManaged = false;
+        this._routingStream = ROUTING_STREAM;
+        this._routingBusy = false;
+        this._routingWrite = null;
+        this._presetLoadPromise = null;
+        this._routingRevision = 0;
+        this._routingStatusRevision = 0;
+        this._routingRead = null;
+        this._routingReadAgain = false;
+        this._routingCheckTimeout = 0;
+        this._routingMonitorRevision = 0;
+        this._routingFileMonitors = new Map();
+        this._routingStatePresent = false;
+        this._routingError = null;
+        this._routingBusWatch = 0;
+        this._routingOutputSettings = null;
+        this._routingOutputSignal = 0;
+        this._routingInputSettings = null;
+        this._routingDeviceSignals = [];
         this._fileCancellable = new Gio.Cancellable();
         this._parameterMap = null;
         this._readerPromise = null;
@@ -484,11 +523,13 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             });
             this._appletSettings.bind(AUTOSTART_OPTION, "_startService", this._onAutostartChanged);
             this._appletSettings.bind(SHUTDOWN_OPTION, "_shutdownOnClose", this._onShutdownChanged);
+            this._appletSettings.bind(ROUTING_OPTION, "_preserveBypass", this._onRoutingChanged);
             this._restoreSelectionTracker();
             this._syncQuickOptions();
             this._monitorPresetDirectory();
             this._syncEasyEffectsOptions();
             this._monitorAutostart();
+            this._syncRoutingOption();
         } catch (error) {
             global.logError(error, UUID);
             Main.notify("EasyEffects", error.message);
@@ -684,6 +725,262 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._syncEasyEffectsOptions();
     }
 
+    _routingCommand(action) {
+        const argv = ["python3", GLib.build_filenamev([this._appletPath, "bypass_route.py"]), action];
+        return new Promise((resolve, reject) => {
+            this._runCommand(argv, (error, output) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                try {
+                    resolve(JSON.parse(output));
+                } catch (parseError) {
+                    reject(parseError);
+                }
+            });
+        });
+    }
+
+    async _syncRoutingOption() {
+        if (this._removed || this._routingBusy)
+            return;
+        if (this._routingRead) {
+            this._routingReadAgain = true;
+            return this._routingRead;
+        }
+        const revision = this._routingRevision;
+        const statusRevision = this._routingStatusRevision;
+        const operation = (async () => { try {
+            const file = Gio.File.new_for_path(GLib.build_filenamev([
+                GLib.get_user_config_dir(), UUID, "bypass-route.json"
+            ]));
+            // A fresh install performs no commands, writes or audio changes.
+            const present = await fileInfo(file, this._fileCancellable);
+            if (this._removed || this._routingBusy || revision !== this._routingRevision || statusRevision !== this._routingStatusRevision)
+                return;
+            const result = present ? await this._routingCommand("status") : {enabled: false};
+            if (this._removed || this._routingBusy || revision !== this._routingRevision || statusRevision !== this._routingStatusRevision)
+                return;
+            this._routingStatePresent = Boolean(present);
+            this._setRoutingActive(Boolean(result.enabled), result);
+            const error = result["missing-exclusion"] && this._routingActive ? null : result.error;
+            if (error && error !== this._routingError)
+                Main.notify("EasyEffects", error);
+            this._routingError = error || null;
+            if (this._routingStatePresent)
+                await this._monitorRoutingFiles();
+        } catch (error) {
+            if (!this._removed) {
+                this._setRoutingActive(false);
+                global.logError(error, UUID);
+            }
+        } })();
+        this._routingRead = operation;
+        const finish = () => {
+            if (this._routingRead === operation)
+                this._routingRead = null;
+            if (this._routingReadAgain && !this._removed && !this._routingBusy) {
+                this._routingReadAgain = false;
+                this._queueRoutingCheck();
+            }
+        };
+        operation.then(finish, finish);
+        return operation;
+    }
+
+    _queueRoutingCheck() {
+        if (this._removed)
+            return;
+        this._routingStatusRevision++;
+        if (this._routingBusy) {
+            this._routingReadAgain = true;
+            return;
+        }
+        if (!this._routingCheckTimeout) {
+            this._routingCheckTimeout = Mainloop.timeout_add(STATE_UPDATE_DELAY, () => {
+                this._routingCheckTimeout = 0;
+                this._syncRoutingOption();
+                return false;
+            });
+        }
+    }
+
+    _clearRoutingObservers() {
+        if (this._routingOutputSettings)
+            this._routingOutputSettings.disconnect(this._routingOutputSignal);
+        for (const [settings, signal] of this._routingDeviceSignals)
+            settings.disconnect(signal);
+        this._routingDeviceSignals = [];
+        this._routingOutputSettings = null;
+        this._routingInputSettings = null;
+        this._routingOutputSignal = 0;
+    }
+
+    _setRoutingActive(enabled, details = {}) {
+        this._routingManaged = details.managed === undefined ? enabled : Boolean(details.managed);
+        this._routingStream = details.stream || ROUTING_STREAM;
+        if (this._routingManaged) {
+            this._routingStatePresent = true;
+            if (!this._routingOutputSettings) {
+                const source = Gio.SettingsSchemaSource.get_default();
+                const schema = source ? source.lookup(SCHEMA_ID + ".streamoutputs", true) : null;
+                if (!schema || !schema.has_key("blocklist"))
+                    throw new Error(_("The EasyEffects output settings are not available."));
+                this._routingOutputSettings = Gio.Settings.new_full(schema, null, null);
+                this._routingOutputSignal = this._routingOutputSettings.connect(
+                    "changed::blocklist", () => {
+                        this._ensureRoutingExclusion();
+                        this._queueRoutingCheck();
+                    }
+                );
+                const inputSchema = source.lookup(SCHEMA_ID + ".streaminputs", true);
+                if (!inputSchema)
+                    throw new Error(_("The EasyEffects settings schema is missing: %s").format(SCHEMA_ID + ".streaminputs"));
+                this._routingInputSettings = Gio.Settings.new_full(inputSchema, null, null);
+                for (const [settings, keys] of [
+                    [this._routingOutputSettings, ["use-default-output-device", "output-device"]],
+                    [this._routingInputSettings, ["use-default-input-device", "input-device"]]
+                ]) {
+                    for (const key of keys) {
+                        const signal = settings.connect("changed::" + key, () => this._queueRoutingCheck());
+                        this._routingDeviceSignals.push([settings, signal]);
+                        settings.get_value(key); // Prime each key after connecting.
+                    }
+                }
+                this._routingOutputSettings.get_strv("blocklist");
+            }
+            const excluded = this._ensureRoutingExclusion();
+            if (details["missing-exclusion"] && excluded)
+                enabled = true;
+        } else {
+            this._clearRoutingObservers();
+        }
+        this._routingActive = enabled;
+        this._appletSettings.setValue(ROUTING_OPTION, enabled);
+        if (this._stateReader)
+            this._stateReader.resetRoutingBlocklist();
+        this._queueStateUpdate();
+    }
+
+    _ensureRoutingExclusion() {
+        if (this._removed || !this._routingManaged || this._routingBusy || !this._routingOutputSettings)
+            return false;
+        try {
+            // Covers presets loaded in EE itself, including without quick assignments.
+            const names = this._routingOutputSettings.get_strv("blocklist");
+            const otherNames = names.filter(name => !ROUTING_STREAM_NAMES.includes(name) && name !== this._routingStream);
+            const expected = [...otherNames, this._routingStream];
+            if (!PresetStateReader.equal(names, expected) &&
+                !this._routingOutputSettings.set_strv("blocklist", expected))
+                throw new Error(_("The forwarding application could not be excluded."));
+            return true;
+        } catch (error) {
+            global.logError(error, UUID);
+            Main.notify("EasyEffects", error.message);
+            return false;
+        }
+    }
+
+    async _monitorRoutingFiles() {
+        if (this._removed)
+            return;
+        if (!this._routingBusWatch) {
+            // Re-check the real package and preferences when EE is restarted,
+            // including after reinstalling or changing its supported version.
+            this._routingBusWatch = Gio.bus_watch_name(Gio.BusType.SESSION, SCHEMA_ID,
+                Gio.BusNameWatcherFlags.NONE, () => this._queueRoutingCheck(), () => this._queueRoutingCheck());
+        }
+        const revision = ++this._routingMonitorRevision;
+        const config = GLib.get_user_config_dir();
+        for (const components of [[config, UUID], [config, "pipewire", "pipewire.conf.d"]]) {
+            try {
+                const directory = Gio.File.new_for_path(GLib.build_filenamev(components));
+                const key = directory.get_path();
+                let target = directory;
+                while (target && !await fileInfo(target, this._fileCancellable))
+                    target = target.get_parent();
+                if (this._removed || revision !== this._routingMonitorRevision || !target)
+                    return;
+                const path = target.get_path();
+                const old = this._routingFileMonitors.get(key);
+                if (old && old.path === path)
+                    continue;
+                if (old) {
+                    old.monitor.disconnect(old.signal);
+                    old.monitor.cancel();
+                }
+                const monitor = target.monitor_directory(Gio.FileMonitorFlags.NONE, null);
+                const signal = monitor.connect("changed", (object, file, otherFile) => {
+                    if (this._removed)
+                        return;
+                    const relevant = entry => {
+                        if (!entry)
+                            return true;
+                        const changed = entry.get_path();
+                        return changed === key || changed.startsWith(key + "/") || key.startsWith(changed + "/");
+                    };
+                    if (relevant(file) || (otherFile && relevant(otherFile))) {
+                        this._queueRoutingCheck();
+                        this._monitorRoutingFiles();
+                    }
+                });
+                this._routingFileMonitors.set(key, {path, monitor, signal});
+            } catch (error) {
+                if (!this._removed)
+                    global.logError(error, UUID);
+            }
+        }
+    }
+
+    _onRoutingChanged() {
+        if (this._removed)
+            return;
+        const enabled = Boolean(this._preserveBypass);
+        const revision = ++this._routingRevision;
+        this._routingStatusRevision++;
+        if (this._routingCheckTimeout) {
+            Mainloop.source_remove(this._routingCheckTimeout);
+            this._routingCheckTimeout = 0;
+        }
+        this._routingBusy = true;
+        const previous = this._routingWrite || Promise.resolve();
+        const pendingLoad = this._presetLoadPromise || Promise.resolve();
+        const operation = Promise.all([previous, pendingLoad]).then(async () => {
+            if (this._removed || revision !== this._routingRevision)
+                return;
+            // Stop maintaining the exclusion while the helper restores settings.
+            const result = await this._routingCommand(enabled ? "enable" : "disable");
+            if (!this._removed && revision === this._routingRevision) {
+                this._setRoutingActive(Boolean(result.enabled), result);
+                this._routingError = result.error || null;
+                if (result.error)
+                    Main.notify("EasyEffects", _("Bypass preservation could not be changed.\n%s").format(result.error));
+            }
+        }).catch(error => {
+            if (!this._removed && revision === this._routingRevision) {
+                global.logError(error, UUID);
+                this._appletSettings.setValue(ROUTING_OPTION, this._routingActive);
+                Main.notify("EasyEffects", _("Bypass preservation could not be changed.\n%s").format(error.message));
+            }
+        });
+        this._routingWrite = operation;
+        operation.then(() => {
+            if (this._routingWrite === operation) {
+                this._routingWrite = null;
+                this._routingBusy = false;
+                if (!this._removed) {
+                    this._routingReadAgain = false;
+                    this._ensureRoutingExclusion();
+                    if (this._routingStatePresent)
+                        this._monitorRoutingFiles();
+                    this._queueStateUpdate();
+                }
+            }
+        });
+        return operation;
+    }
+
     _clearAutostartMonitor() {
         if (this._autostartMonitor) {
             this._autostartMonitor.disconnect(this._autostartMonitorSignal);
@@ -866,7 +1163,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
     }
 
     _toggleBypass(fromMiddleClick = false) {
-        if (!this._canToggleBypass(fromMiddleClick))
+        if (this._routingBusy || !this._canToggleBypass(fromMiddleClick))
             return;
         try {
             const enabled = this._settings.get_boolean(BYPASS_KEY);
@@ -907,7 +1204,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
     }
 
     _onPresetScroll(event) {
-        if (this._removed || this._scrollPresets !== true || !this._applet_enabled || !this._draggable.inhibit)
+        if (this._removed || this._routingBusy || this._scrollPresets !== true || !this._applet_enabled || !this._draggable.inhibit)
             return Clutter.EVENT_PROPAGATE;
         const direction = event.get_scroll_direction();
         if (direction !== Clutter.ScrollDirection.UP && direction !== Clutter.ScrollDirection.DOWN)
@@ -1135,7 +1432,8 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             }
             if (this._removed || !this._hasQuickPresets())
                 return null;
-            this._stateReader = new PresetStateReader(this._parameterMap, () => this._onEffectStateChanged());
+            this._stateReader = new PresetStateReader(this._parameterMap, () => this._onEffectStateChanged(),
+                () => this._routingManaged || this._routingBusy, () => this._routingStream);
             return this._stateReader;
         })();
         this._readerPromise = operation;
@@ -1317,9 +1615,19 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         }
     }
 
-    async _loadPreset(name, event = null) {
-        if (this._loading || this._removed)
+    _loadPreset(name, event = null) {
+        if (this._loading || this._removed || this._routingBusy)
             return;
+        const operation = this._loadPresetNow(name, event);
+        this._presetLoadPromise = operation;
+        operation.then(() => {
+            if (this._presetLoadPromise === operation)
+                this._presetLoadPromise = null;
+        });
+        return operation;
+    }
+
+    async _loadPresetNow(name, event) {
         this._loading = true;
         this._matchedQuickSlot = -1;
         this._presetDot.visible = false;
@@ -1453,6 +1761,23 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._nativeOptionsRevision++;
         this._autostartMonitorRevision++;
         this._autostartRevision++;
+        this._routingRevision++;
+        this._routingStatusRevision++;
+        this._routingMonitorRevision++;
+        this._clearRoutingObservers();
+        if (this._routingCheckTimeout) {
+            Mainloop.source_remove(this._routingCheckTimeout);
+            this._routingCheckTimeout = 0;
+        }
+        for (const {monitor, signal} of this._routingFileMonitors.values()) {
+            monitor.disconnect(signal);
+            monitor.cancel();
+        }
+        this._routingFileMonitors.clear();
+        if (this._routingBusWatch) {
+            Gio.bus_unwatch_name(this._routingBusWatch);
+            this._routingBusWatch = 0;
+        }
         this._invalidateQuickReference();
         this._cancelStateUpdate();
         if (this._stateReader) {

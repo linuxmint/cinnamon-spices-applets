@@ -165,9 +165,20 @@
     },
     "ee-shutdown-on-window-close-note": {
         "type": "custom",
-        "description": "Recommended: <b>disable</b> this so the service keeps running when the window is closed.",
+        "description": "Recommended: <b>disable</b> this so the service keeps running when the application window is closed.",
         "file": "title_mode.py",
         "widget": "ReferenceNote",
         "emphasize-action": true
+    },
+    "keep-bypass-on-device-change": {
+        "type": "switch",
+        "default": false,
+        "description": "Keep bypass when changing output devices"
+    },
+    "keep-bypass-on-device-change-note": {
+        "type": "custom",
+        "description": "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects.",
+        "file": "title_mode.py",
+        "widget": "ReferenceNote"
     }
 }
