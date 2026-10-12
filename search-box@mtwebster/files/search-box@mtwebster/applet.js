@@ -1,5 +1,6 @@
 const Applet = imports.ui.applet;
 const Clutter = imports.gi.Clutter;
+const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
@@ -38,12 +39,21 @@ SearchBoxApplet.prototype = {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
             this.settings = new Settings.AppletSettings(this, UUID, instance_id);
-            this._searchInactiveIcon = new St.Icon({ style_class: "menu-search-entry-icon",
-                                               icon_name: "edit-find",
-                                               icon_type: St.IconType.SYMBOLIC });
-            this._searchActiveIcon = new St.Icon({ style_class: "menu-search-entry-icon",
-                                             icon_name: "edit-clear",
-                                             icon_type: St.IconType.SYMBOLIC });
+            if (Gtk.IconTheme.get_default().has_icon("xsi-edit-find")) {
+                this._searchInactiveIcon = new St.Icon({ style_class: "menu-search-entry-icon",
+                                                   icon_name: "xsi-edit-find",
+                                                   icon_type: St.IconType.SYMBOLIC });
+                this._searchActiveIcon = new St.Icon({ style_class: "menu-search-entry-icon",
+                                                 icon_name: "xsi-edit-clear",
+                                                 icon_type: St.IconType.SYMBOLIC });
+            } else {
+                this._searchInactiveIcon = new St.Icon({ style_class: "menu-search-entry-icon",
+                                                   icon_name: "edit-find",
+                                                   icon_type: St.IconType.SYMBOLIC });
+                this._searchActiveIcon = new St.Icon({ style_class: "menu-search-entry-icon",
+                                                 icon_name: "edit-clear",
+                                                 icon_type: St.IconType.SYMBOLIC });
+            }
             this.searchIcon = new St.Icon({icon_name: "edit-find", icon_size: 24, icon_type: St.IconType.FULLCOLOR});
             this._searchIconClickedId = 0;
 
@@ -290,10 +300,12 @@ SearchBoxApplet.prototype = {
     },
 
     update_label_visible: function () {
+        this.set_applet_label(this.selected_provider);
         if (this._orientation == St.Side.LEFT || this._orientation == St.Side.RIGHT)
             this.hide_applet_label(true);
         else
             this.hide_applet_label(false);
+        this._reload();
     }
 
 };
