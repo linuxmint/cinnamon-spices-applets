@@ -4,7 +4,7 @@ const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 
 const FLAG_INHIBIT_IDLE = 8;
-const POLL_INTERVAL_SECONDS = 3;
+const POLL_INTERVAL_SECONDS = 5;
 
 const ICON_SIZE = 16;
 const COLOR_ALLOWED = "color: #2ecc71;";   // Green
@@ -20,6 +20,8 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
+        this._lastInhibitorHash = "";
+
         this.set_applet_icon_symbolic_name("changes-allow-symbolic");
         if (this._applet_icon) {
             this._applet_icon.set_icon_size(ICON_SIZE);
@@ -31,6 +33,10 @@ MyApplet.prototype = {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
+
+        // Pre-populate empty menu state
+        let initialItem = new PopupMenu.PopupMenuItem("No active screensaver inhibitors", { reactive: false });
+        this.menu.addMenuItem(initialItem);
 
         this._sessionManager = new GnomeSession.SessionManager();
 
@@ -105,8 +111,25 @@ MyApplet.prototype = {
         });
     },
 
-    _renderInhibitors: function(inhibitors) {
+    _clearMenu: function() {
+        let items = this.menu._getMenuItems();
+        for (let i = 0; i < items.length; i++) {
+            items[i].destroy();
+        }
         this.menu.removeAll();
+    },
+
+    _renderInhibitors: function(inhibitors) {
+        // Compute state signature
+        let currentHash = inhibitors.map(i => `${i.appId}:${i.reason}`).sort().join("|");
+
+        // Guard: If state has not changed, do nothing
+        if (this._lastInhibitorHash === currentHash) {
+            return;
+        }
+        this._lastInhibitorHash = currentHash;
+
+        this._clearMenu();
 
         if (inhibitors.length === 0) {
             this.set_applet_icon_symbolic_name("changes-allow-symbolic");
@@ -144,6 +167,7 @@ MyApplet.prototype = {
             Mainloop.source_remove(this._timeoutId);
             this._timeoutId = null;
         }
+        this._clearMenu();
     }
 };
 
