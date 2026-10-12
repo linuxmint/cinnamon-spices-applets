@@ -39,7 +39,7 @@ SearchBoxApplet.prototype = {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
             this.settings = new Settings.AppletSettings(this, UUID, instance_id);
-            if (Gtk.IconTheme.get_default().lookup_icon("xsi-edit-find", 24, Gtk.IconLookupFlags.FORCE_SYMBOLIC)) {
+            if (Gtk.IconTheme.get_default().lookup_icon("xsi-edit-find", 24, 64)) {
                 this._searchInactiveIcon = new St.Icon({ style_class: "menu-search-entry-icon",
                                                    icon_name: "xsi-edit-find",
                                                    icon_type: St.IconType.SYMBOLIC });
