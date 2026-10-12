@@ -9,6 +9,7 @@
             "sections": [
                 "section_contextmenu",
                 "section_panel",
+                "section_device-icons",
                 "section_kdecsettings",
                 "section_devices"
             ]
@@ -50,6 +51,18 @@
                 "icon_custom-icon",
                 "switch_different-icon-no-connected-devices",
                 "icon_no-connected-devices"
+            ]
+        },
+        "section_device-icons": {
+            "type": "section",
+            "title": "Device Icons",
+            "keys": [
+                "switch_use-custom-device-icons",
+                "icon_custom-icon-phone",
+                "icon_custom-icon-tablet",
+                "icon_custom-icon-computer",
+                "icon_custom-icon-tv",
+                "icon_custom-icon-default"
             ]
         },
         "section_kdecsettings": {
@@ -211,6 +224,48 @@
         "description": "Icon to use when no devices are connected",
         "default": "emblem-important-symbolic",
         "dependency": "switch_different-icon-no-connected-devices"
+    },
+
+    "switch_use-custom-device-icons": {
+        "type": "switch",
+        "description": "Use custom icons for devices in the dropdown menu",
+        "tooltip": "Override the KDE Connect status icon with your own symbolic icon per device type",
+        "default": false
+    },
+    "icon_custom-icon-phone": {
+        "type": "iconfilechooser",
+        "description": "Icon for phones",
+        "tooltip": "e.g. phone-symbolic",
+        "default": "phone-symbolic",
+        "dependency": "switch_use-custom-device-icons"
+    },
+    "icon_custom-icon-tablet": {
+        "type": "iconfilechooser",
+        "description": "Icon for tablets",
+        "tooltip": "e.g. tablet-symbolic",
+        "default": "tablet-symbolic",
+        "dependency": "switch_use-custom-device-icons"
+    },
+    "icon_custom-icon-computer": {
+        "type": "iconfilechooser",
+        "description": "Icon for computers and laptops",
+        "tooltip": "e.g. computer-symbolic",
+        "default": "computer-symbolic",
+        "dependency": "switch_use-custom-device-icons"
+    },
+    "icon_custom-icon-tv": {
+        "type": "iconfilechooser",
+        "description": "Icon for TVs",
+        "tooltip": "e.g. tv-symbolic",
+        "default": "tv-symbolic",
+        "dependency": "switch_use-custom-device-icons"
+    },
+    "icon_custom-icon-default": {
+        "type": "iconfilechooser",
+        "description": "Fallback icon for unknown device types",
+        "tooltip": "Used when the device type doesn't match any of the icons above",
+        "default": "phone-symbolic",
+        "dependency": "switch_use-custom-device-icons"
     },
 
     "button_open-kdec-settings": {
