@@ -18,6 +18,8 @@ const DEBUG = _debug.query_exists(null);
 
 const sensorRegex = /^([\sA-z\w]+[\s|:|\d]{1,4})(?:\s+\+)(\d+\.\d+)°[FC]|(?:\s+\()([a-z]+)(?:[\s=+]+)(\d+\.\d)°[FC],\s([a-z]+)(?:[\s=+]+)(\d+\.\d)/gm;
 const cpuIdentifiers = ['Tctl', 'CPU Temperature'];
+// CPU hwmon drivers whose files give the panel value without running `sensors`.
+const cpuHwmonNames = ['coretemp', 'k10temp', 'zenpower'];
 
 const _ = function(str) {
   let translation = Gettext.gettext(str);
@@ -128,6 +130,10 @@ CPUTemperatureApplet.prototype = {
   on_applet_clicked: function() {
     this.buildMenu(this.menuItems);
     this.menu.toggle();
+    // While the menu is closed only the CPU value is read from sysfs; fetch the full list now.
+    if (this.menu.isOpen && this._cpuHwmonDir) {
+      this.updateTemperature();
+    }
   },
 
   on_applet_removed_from_panel: function() {
@@ -184,6 +190,17 @@ CPUTemperatureApplet.prototype = {
     this.actor.set_style_class_name(`${_monospace}`);
 
 
+    // Reading the CPU hwmon files is enough for the panel label. Spawning `sensors` every few
+    // seconds forks the whole Cinnamon process and also polls every other chip: NVMe drives and
+    // Wi-Fi adapters get woken up just to refresh a number nobody is looking at.
+    if (!this.menu.isOpen) {
+      let cpuTemps = this._readCpuHwmon();
+      if (cpuTemps) {
+        this._updateTemperature('', cpuTemps);
+        return true;
+      }
+    }
+
     if (this.sensorsPath && !this.waitForCmd) {
       this.waitForCmd = true;
       Util.spawn_async([this.sensorsPath], Lang.bind(this, this._updateTemperature));
@@ -192,12 +209,56 @@ CPUTemperatureApplet.prototype = {
     return true;
   },
 
-  _updateTemperature: function(sensorsOutput) {
+  _readHwmonFile: function(path) {
+    try {
+      let [ok, data] = GLib.file_get_contents(path);
+      return ok ? imports.byteArray.toString(data).trim() : null;
+    } catch (e) {
+      return null;
+    }
+  },
+
+  _readCpuHwmon: function() {
+    if (this._cpuHwmonDir === undefined) {
+      this._cpuHwmonDir = null;
+      for (let i = 0; i < 32; i++) {
+        let dir = '/sys/class/hwmon/hwmon' + i;
+        if (cpuHwmonNames.indexOf(this._readHwmonFile(dir + '/name')) > -1) {
+          this._cpuHwmonDir = dir;
+          break;
+        }
+      }
+    }
+    if (!this._cpuHwmonDir) {
+      return null;
+    }
+    let entries = [];
+    for (let i = 1; i < 64; i++) {
+      let base = this._cpuHwmonDir + '/temp' + i;
+      let input = this._readHwmonFile(base + '_input');
+      if (input === null) {
+        continue;
+      }
+      let entry = {label: this._readHwmonFile(base + '_label') || ('temp' + i), value: parseInt(input) / 1000};
+      let high = this._readHwmonFile(base + '_max');
+      let crit = this._readHwmonFile(base + '_crit');
+      if (high !== null) entry.high = parseInt(high) / 1000;
+      if (crit !== null) entry.crit = parseInt(crit) / 1000;
+      entries.push(entry);
+    }
+    if (entries.length === 0) {
+      this._cpuHwmonDir = undefined; // hwmon devices may be renumbered (driver reload); look again next time
+      return null;
+    }
+    return entries;
+  },
+
+  _updateTemperature: function(sensorsOutput, cpuTemps = null) {
     let items = [];
-    let tempInfo = null;
+    let tempInfo = cpuTemps;
     let temp = 0;
 
-    if (sensorsOutput != "") {
+    if (!tempInfo && sensorsOutput != "") {
       tempInfo = this._findTemperatureFromSensorsOutput(sensorsOutput.toString()); //get temperature from sensors
     }
 
