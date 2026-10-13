@@ -283,11 +283,53 @@ class Device {
     }
 
     /**
-     * @returns The icon name to use for this device's menu item,
-     * honouring the applet's custom icon settings if enabled.
+     * Resolves the icon name to use for a device's menu item.
+     * @returns {string} The icon name
      */
     getMenuIconName() {
-        return this.applet.getDeviceIconName(this);
+        let icon = this.statusIconName;
+        if (this.applet.options.useCustomDeviceIcons) {
+            switch (this.getType()) {
+                case "phone":
+                case "smartphone":
+                    icon = this.applet.options.customIconPhone || icon;
+                    break;
+                case "tablet":
+                    icon = this.applet.options.customIconTablet || icon;
+                    break;
+                case "desktop":
+                    // KDE Connect can report laptops as "desktop", so use the status icon name to distinguish them.
+                    if (this.statusIconName.startsWith("laptop")) {
+                        icon = this.applet.options.customIconLaptop || icon;
+                    } else {
+                        icon = this.applet.options.customIconDesktop || icon;
+                    }
+                    break;
+                case "laptop":
+                    icon = this.applet.options.customIconLaptop || icon;
+                    break;
+                case "tv":
+                    icon = this.applet.options.customIconTv || icon;
+                    break;
+                default:
+                    icon = this.applet.options.customIconFallback || icon;
+            }
+        }
+        return icon;
+    }
+
+    /**
+     * Refreshes the device menu icon for reachable and unreachable devices.
+     */
+    updateMenuItemIcon() {
+        const iconName = this.getMenuIconName();
+
+        if (this.menuItemIcon) {
+            this.menuItemIcon.set_icon_name(iconName);
+            this.menuItemIcon.set_icon_type(St.IconType.SYMBOLIC);
+        } else if (this.menuItem && typeof this.menuItem.setIconSymbolicName === "function") {
+            this.menuItem.setIconSymbolicName(iconName);
+        }
     }
 
     /**
@@ -343,10 +385,9 @@ class Device {
 
         this.type = type;
 
-        // Refresh the menu item icon in case the user uses custom device icons
-        if (this.menuItemIcon) {
-            this.menuItemIcon.set_icon_name(this.getMenuIconName());
-            this.menuItemIcon.set_icon_type(St.IconType.SYMBOLIC);
+        // Refresh the menu item icon, since custom icons depend on the device type
+        if (this.applet.options.useCustomDeviceIcons) {
+            this.updateMenuItemIcon();
         }
 
         this.emit("type-changed", type);
@@ -383,12 +424,8 @@ class Device {
         if (this.deviceProxy) {
             this.statusIconName = this.deviceProxy.statusIconName;
 
-            // Change icon name of the menu item icon, if it exists, skipping when
-            // custom device icons are enabled
-            if (this.menuItemIcon && this.applet.options.useCustomDeviceIcons != true) {
-                this.menuItemIcon.set_icon_name(this.statusIconName);
-                this.menuItemIcon.set_icon_type(St.IconType.SYMBOLIC);
-            }
+            // Refresh using the device type and current status icon.
+            this.updateMenuItemIcon();
 
             this.emit("statusiconname-changed");
         }
@@ -579,6 +616,7 @@ class Device {
 
                 this.menuItem.destroy();
                 this.menuItem = null;
+                this.menuItemIcon = null;
             }
 
         } catch (error) {
@@ -734,9 +772,10 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         this.settings.bind("switch_use-custom-device-icons", "useCustomDeviceIcons", this.onDeviceIconSettingsChanged.bind(this), "useCustomDeviceIcons");
         this.settings.bind("icon_custom-icon-phone", "customIconPhone", this.onDeviceIconSettingsChanged.bind(this), "customIconPhone");
         this.settings.bind("icon_custom-icon-tablet", "customIconTablet", this.onDeviceIconSettingsChanged.bind(this), "customIconTablet");
-        this.settings.bind("icon_custom-icon-computer", "customIconComputer", this.onDeviceIconSettingsChanged.bind(this), "customIconComputer");
+        this.settings.bind("icon_custom-icon-desktop", "customIconDesktop", this.onDeviceIconSettingsChanged.bind(this), "customIconDesktop");
+        this.settings.bind("icon_custom-icon-laptop", "customIconLaptop", this.onDeviceIconSettingsChanged.bind(this), "customIconLaptop");
         this.settings.bind("icon_custom-icon-tv", "customIconTv", this.onDeviceIconSettingsChanged.bind(this), "customIconTv");
-        this.settings.bind("icon_custom-icon-default", "customIconDefault", this.onDeviceIconSettingsChanged.bind(this), "customIconDefault");
+        this.settings.bind("icon_custom-icon-fallback", "customIconFallback", this.onDeviceIconSettingsChanged.bind(this), "customIconFallback");
 
         this.settings.bind("generic_device-order", "deviceOrder", this.onDeviceOrderChanged.bind(this), "deviceOrder");
         this.settings.bind("generic_info-modules", "infoModules", this.onModulesOrderChanged.bind(this), "infoModules");
@@ -1261,34 +1300,6 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         configureMenuItem._signals.connect(configureMenuItem, "activate", this.openKDECConfiguration.bind(this));
         let configureMenuItemTooltip = new Tooltips.Tooltip(configureMenuItem.actor, _("Click to open KDE Connect Configuration"));
         this.contextMenuSection.addMenuItem(configureMenuItem);
-    }
-
-    /**
-     * Resolves the icon name to use for a device's menu item.
-     * If custom device icons are enabled, returns the user-configured icon
-     * for the device's type. Otherwise returns the KDE Connect status icon.
-     * @param {Device} device
-     * @returns {string} The icon name
-     */
-    getDeviceIconName(device) {
-        if (this.options.useCustomDeviceIcons == true) {
-            let type = device.getType();
-            let iconMap = {
-                phone: this.options.customIconPhone,
-                tablet: this.options.customIconTablet,
-                desktop: this.options.customIconComputer,
-                laptop: this.options.customIconComputer,
-                tv: this.options.customIconTv,
-            };
-
-            let icon = iconMap[type];
-            if (icon && icon != '') {
-                return icon;
-            }
-            return this.options.customIconDefault;
-        }
-
-        return device.getStatusIconName();
     }
 
     /**

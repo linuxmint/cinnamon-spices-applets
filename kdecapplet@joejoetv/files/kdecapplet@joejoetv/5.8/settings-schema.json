@@ -60,9 +60,10 @@
                 "switch_use-custom-device-icons",
                 "icon_custom-icon-phone",
                 "icon_custom-icon-tablet",
-                "icon_custom-icon-computer",
+                "icon_custom-icon-desktop",
+                "icon_custom-icon-laptop",
                 "icon_custom-icon-tv",
-                "icon_custom-icon-default"
+                "icon_custom-icon-fallback"
             ]
         },
         "section_kdecsettings": {
@@ -228,7 +229,7 @@
 
     "switch_use-custom-device-icons": {
         "type": "switch",
-        "description": "Use custom icons for devices in the dropdown menu",
+        "description": "Use custom icons for device items in the popup menu",
         "tooltip": "Override the KDE Connect status icon with your own symbolic icon per device type",
         "default": false
     },
@@ -246,11 +247,18 @@
         "default": "tablet-symbolic",
         "dependency": "switch_use-custom-device-icons"
     },
-    "icon_custom-icon-computer": {
+    "icon_custom-icon-desktop": {
         "type": "iconfilechooser",
-        "description": "Icon for computers and laptops",
+        "description": "Icon for desktops",
         "tooltip": "e.g. computer-symbolic",
         "default": "computer-symbolic",
+        "dependency": "switch_use-custom-device-icons"
+    },
+    "icon_custom-icon-laptop": {
+        "type": "iconfilechooser",
+        "description": "Icon for laptops",
+        "tooltip": "e.g. laptop-symbolic",
+        "default": "laptop-symbolic",
         "dependency": "switch_use-custom-device-icons"
     },
     "icon_custom-icon-tv": {
@@ -260,11 +268,11 @@
         "default": "tv-symbolic",
         "dependency": "switch_use-custom-device-icons"
     },
-    "icon_custom-icon-default": {
+    "icon_custom-icon-fallback": {
         "type": "iconfilechooser",
-        "description": "Fallback icon for unknown device types",
-        "tooltip": "Used when the device type doesn't match any of the icons above",
-        "default": "phone-symbolic",
+        "description": "Fallback icon",
+        "tooltip": "Used for unknown device types or when no icon is provided",
+        "default": "dialog-question-symbolic",
         "dependency": "switch_use-custom-device-icons"
     },
 
