@@ -72,20 +72,19 @@ msgid "Power Off"
 msgstr "Sammuta"
 
 #. 6.4/applet.js:365 6.4/applet.js:367
-#, fuzzy
 msgid "Screen On/Off"
-msgstr "Näytönsäästäjä"
+msgstr "Pimennä"
 
 #. 6.4/applet.js:378 6.4/applet.js:380
 msgid "Screen On/Off with Lock feature"
-msgstr ""
+msgstr "Lukitse ja pimennä"
 
 #. metadata.json->description
 msgid ""
 "Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
 "out, suspend, hibernate, reboot or shut down the computer"
 msgstr ""
-"Valitse näytönsäästäjä, lukitse näyttö, vaihda käyttäjää, kirjaudu ulos, "
+"Valitse pikavalikosta; lukitse näyttö, vaihda käyttäjää, kirjaudu ulos, "
 "valmiustila, lepotila, käynnistä tai sammuta tietokone"
 
 #. metadata.json->name
@@ -100,12 +99,12 @@ msgstr "Käynnistä Cinnamon uudelleen"
 #. 5.4->settings-schema.json->showOSD->description
 #. 6.4->settings-schema.json->showOSD->description
 msgid "Show OSD while restarting Cinnamon"
-msgstr "Näytä ilmoitus kun Cinnamon käynnistyy uudelleen"
+msgstr "Ilmoituslaatikko kun Cinnamon käynnistetään uudelleen"
 
 #. 5.4->settings-schema.json->showOSD->tooltip
 #. 6.4->settings-schema.json->showOSD->tooltip
 msgid "OSD: On Screen Display"
-msgstr "OSD on lyhenne joka tarkoittaa: On Screen Display"
+msgstr "Ilmoituslaatikko"
 
 #. 5.4->settings-schema.json->sectionMenu->description
 #. 6.4->settings-schema.json->sectionMenu->title
@@ -148,13 +147,13 @@ msgid ""
 "All the menu options below may be managed by the system.\n"
 "If they are, you can't see them."
 msgstr ""
-"Järjestelmä hallinnoi kaikkia alla olevia kohteita.\n"
-"Et ehkä näe niitä kaikkia."
+"Systemd hallinnoi alla olevia kohteita, ehkä et näe niitä kaikkia.\n"
+"Esim. Wayland rajoittaa saataviitta."
 
 #. 5.4->settings-schema.json->showScreenOff->description
 #. 6.4->settings-schema.json->showScreenOff->description
 msgid "Show the Screen Off option"
-msgstr "Näytönsäästäjä"
+msgstr "Näytön pimentäjä"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->units
 #. 6.4->settings-schema.json->mouse-deactivation-duration->units
@@ -164,7 +163,7 @@ msgstr "sekuntia"
 #. 5.4->settings-schema.json->mouse-deactivation-duration->description
 #. 6.4->settings-schema.json->mouse-deactivation-duration->description
 msgid "Duration of deactivation of the mouse"
-msgstr "Aikamäärä jolloin hiiri on poistettu käytöstä"
+msgstr "Aika jolloin hiiri on poistettu käytöstä"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
 #. 6.4->settings-schema.json->mouse-deactivation-duration->tooltip
@@ -172,8 +171,8 @@ msgid ""
 "To prevent the monitor from turning on too soon after turning it off, the "
 "mouse will be disabled for the number of seconds set here."
 msgstr ""
-"Jotta näyttö ei palaudu liian aikaisin sammumisen jälkeen, voit määrittää "
-"hiiren poistoviiveen ajan."
+"Jotta näyttö ei palaudu liian aikaisin pimentämisen jälkeen, voit "
+"määrittää hiiren poistoviiveen."
 
 #. 5.4->settings-schema.json->showLockscreen->description
 #. 6.4->settings-schema.json->showLockscreen->description
@@ -187,7 +186,7 @@ msgstr "Lukitse näyttö"
 #. 6.4->settings-schema.json->showSwitchUser->tooltip
 #. 6.4->settings-schema.json->showLogout->tooltip
 msgid "Managed by system"
-msgstr "Hallinnoi järjestelmä"
+msgstr "Käyttöjärjestelmän hallitsema"
 
 #. 5.4->settings-schema.json->showSwitchUser->description
 #. 6.4->settings-schema.json->showSwitchUser->description
@@ -230,134 +229,136 @@ msgstr ""
 
 #. 6.4->settings-schema.json->page_General->title
 msgid "General"
-msgstr ""
+msgstr "Yleinen"
 
 #. 6.4->settings-schema.json->page_Shortcuts->title
 msgid "Shortcuts"
-msgstr ""
+msgstr "Pikanäppäimet"
 
 #. 6.4->settings-schema.json->page_Options->title
-#, fuzzy
 msgid "Options"
-msgstr "Valikon asetukset"
+msgstr "Valinnat"
 
 #. 6.4->settings-schema.json->sectionMaximize->title
 msgid "Vertical maximization"
-msgstr ""
+msgstr "Laajennetaan pystysuuntaan"
 
 #. 6.4->settings-schema.json->sectionMenuOthers->title
 msgid "System-managed menu options"
-msgstr ""
+msgstr "Käyttöjärjestelmä hallinnoi valikot"
 
 #. 6.4->settings-schema.json->section_DontShowShortcutsInMenu->title
 msgid "Menu appearance"
-msgstr ""
+msgstr "Valikon ulkoasu"
 
 #. 6.4->settings-schema.json->section_Shortcuts->title
 msgid "Keybindings"
-msgstr ""
+msgstr "Näppäinyhdistelmät"
 
 #. 6.4->settings-schema.json->section_MenuKeys->title
 msgid "Keys used to select certain options in the open menu."
-msgstr ""
+msgstr "Valikossa olevat kirjaimet joita painamalla valitaan toiminta."
 
 #. 6.4->settings-schema.json->lockOnSuspend->description
-#, fuzzy
 msgid "Lock On Suspend"
 msgstr "Valmiustila"
 
 #. 6.4->settings-schema.json->screenOffUsesXset->description
 msgid "Use the hardware method to turn On/Off the screen"
-msgstr ""
+msgstr "Käytä laitepohjaista menetelmää näytön pimentämiseksi"
 
 #. 6.4->settings-schema.json->screenOffUsesXset->tooltip
 msgid ""
 "The hardware method does not always work correctly.\n"
 "In this case, disable this option to use only a software method."
 msgstr ""
+"Laitepohjainen menetelmä ei aina toimi oikein.\n"
+"Siinä tapauksessa poista tämä vaihtoehto käytöstä ja käytä "
+"ohjelmistopohjaista menetelmää."
 
 #. 6.4->settings-schema.json->dontShowShortcutsInMenu->description
 msgid "Do not show any shortcut in the menu"
-msgstr ""
+msgstr "Älä näytä pikanäppäimiä valikossa"
 
 #. 6.4->settings-schema.json->kbToggleMenu->description
 msgid "Toggle menu"
-msgstr ""
+msgstr "Avaa valikko"
 
 #. 6.4->settings-schema.json->kbWakeUpMonitor->description
-#, fuzzy
 msgid "Turn screen On/Off"
-msgstr "Näytönsäästäjä"
+msgstr "Pimennä näyttö"
 
 #. 6.4->settings-schema.json->kbWakeUpMonitorWithLock->description
-#, fuzzy
 msgid "Turn screen On/Off with Lock feature"
-msgstr "Näytönsäästäjä"
+msgstr "Lukitse ja pimennä"
 
 #. 6.4->settings-schema.json->mkShutdown->description
 msgid "Key to select Power Off"
-msgstr ""
+msgstr "Virrankatkaisu"
 
 #. 6.4->settings-schema.json->mkShutdown->tooltip
 msgid "Single key. Default is U"
-msgstr ""
+msgstr "Oletusnäppäin on U"
 
 #. 6.4->settings-schema.json->mkRestart->description
 msgid "Key to select Restart"
-msgstr ""
+msgstr "Valitsee \"Käynnistä uudelleen\""
 
 #. 6.4->settings-schema.json->mkRestart->tooltip
 msgid "Single key. Default is R"
-msgstr ""
+msgstr "Oletusnäppäin on R"
 
 #. 6.4->settings-schema.json->mkHibernate->description
 msgid "Key to select Hibernate"
-msgstr ""
+msgstr "Valitsee \"Lepotila\""
 
 #. 6.4->settings-schema.json->mkHibernate->tooltip
 msgid "Single key. Default is H"
-msgstr ""
+msgstr "Oletusnäppäin on H"
 
 #. 6.4->settings-schema.json->mkSuspend->description
 msgid "Key to select Suspend"
-msgstr ""
+msgstr "Valitsee \"Valmiustilan\""
 
 #. 6.4->settings-schema.json->mkSuspend->tooltip
 msgid "Single key. Default is S"
-msgstr ""
+msgstr "Oletusnäppäin on S"
 
 #. 6.4->settings-schema.json->buttonApplyMenuKeys->description
 msgid "Apply these keys to the menu"
-msgstr ""
+msgstr "Lisää nämä näppäimet valikkoon"
 
 #. 6.4->settings-schema.json->buttonDefaultMenuKeys->description
 msgid "Reset to default keys"
-msgstr ""
+msgstr "Palauta oletusnäppäimet"
 
 #. 6.4->settings-schema.json->alertMenuKeys->description
 msgid ""
 "Several keys are identical.\n"
 "Please correct this and reapply the changes."
 msgstr ""
+"Useita samoja avaimia.\n"
+"Korjaa tämä ja ota muutokset käyttöön."
 
 #. 6.4->settings-schema.json->alreadyUsedKeys->description
 msgid "Already used keys (for your information only)"
-msgstr ""
+msgstr "Jo käytetyt avaimet (vain tiedoksi)"
 
 #. 6.4->settings-schema.json->alreadyUsedKeys->tooltip
 msgid "There is no point in changing this."
-msgstr ""
+msgstr "Tätä ei kannata muuttaa."
 
 #. 6.4->settings-schema.json->maximizeSettingsWindow->description
 msgid "Vertically maximize this Settings window"
-msgstr ""
+msgstr "Asetukset-ikkuna venytetään pystysuunnassa"
 
 #. 6.4->settings-schema.json->maximizeSettingsWindow->tooltip
 msgid ""
 "This option will only be taken into account the next times this Settings "
 "window is opened. "
 msgstr ""
+"Tämä otetaan käyttöön kun tämä Asetukset-ikkuna avataan seuraavan kerran. "
 
 #. 6.4->settings-schema.json->labelSeparator->description
 msgid "────────────────────────────────────────────────────────────────"
-msgstr ""
+msgstr "────────────────────────────────────────────────────────────────"
