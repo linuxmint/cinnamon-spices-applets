@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-08-22 18:28+0200\n"
-"PO-Revision-Date: 2023-12-09 16:03+0200\n"
+"PO-Revision-Date: 2026-10-13 12:58+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 5.8/applet.js:547 4.8/applet.js:574
 msgid "No Modules available"
@@ -94,23 +94,20 @@ msgid "{deviceCount} available devices"
 msgstr "{deviceCount} laitetta saatavilla"
 
 #. 5.8/js/modules.js:450
-#, fuzzy
 msgid "Module"
-msgstr "Moduulit"
+msgstr "Moduuli"
 
 #. 5.8/js/modules.js:597
-#, fuzzy
 msgid "Battery Module"
-msgstr "Akkutieto moduuli"
+msgstr "Akku-moduuli"
 
 #. 5.8/js/modules.js:646 4.8/js/modules.js:658
 msgid "Charging"
 msgstr "Latauksessa"
 
 #. 5.8/js/modules.js:682
-#, fuzzy
 msgid "Device-Info Module"
-msgstr "Laitetieto moduuli"
+msgstr "Laitetieto-moduuli"
 
 #. 5.8/js/modules.js:731 4.8/js/modules.js:741
 msgid "ID: {id}"
@@ -125,9 +122,8 @@ msgid "Click to copy ID"
 msgstr "Kopioi id painamalla"
 
 #. 5.8/js/modules.js:751
-#, fuzzy
 msgid "Connectivity Module"
-msgstr "Yhteystieto moduuli"
+msgstr "Yhteysmoduuli"
 
 #. 5.8/js/modules.js:813 4.8/js/modules.js:822
 msgid "No Signal"
@@ -154,9 +150,8 @@ msgid "Unknown"
 msgstr "Tuntematon"
 
 #. 5.8/js/modules.js:867
-#, fuzzy
 msgid "FindMyPhone Module"
-msgstr "Etsi puhelimeni moduuli"
+msgstr "EtsiPuhelimeni-moduuli"
 
 #. 5.8/js/modules.js:892 4.8/js/modules.js:900
 msgid "Ring device"
@@ -167,9 +162,8 @@ msgid "Click to ring the device"
 msgstr "Lähetä äänimerkki painamalla"
 
 #. 5.8/js/modules.js:907
-#, fuzzy
 msgid "Request Photo Module"
-msgstr "Pyydä kuvaa moduuli"
+msgstr "PyydäKuva-moduuli"
 
 #. 5.8/js/modules.js:973 4.8/js/modules.js:980
 msgid "Photo received from '{deviceName}'"
@@ -189,9 +183,8 @@ msgid "Click to request a photo from the device"
 msgstr "Pyydä laitteelta valokuvaa painamalla"
 
 #. 5.8/js/modules.js:1009
-#, fuzzy
 msgid "Ping Module"
-msgstr "Kilutus moduuli"
+msgstr "Kilauta-moduuli"
 
 #. 5.8/js/modules.js:1034 4.8/js/modules.js:1040
 msgid "Ping!"
@@ -210,9 +203,8 @@ msgid "Click to send a ping to the device"
 msgstr "Lähetä kilautus laitteeseen painamalla"
 
 #. 5.8/js/modules.js:1062
-#, fuzzy
 msgid "Share Module"
-msgstr "Jakaminen moduuli"
+msgstr "Jakaminen-moduuli"
 
 #. 5.8/js/modules.js:1151 4.8/js/modules.js:1156
 msgid "Share received from '{deviceName}'"
@@ -248,9 +240,8 @@ msgid "Click to send file(s) to the device"
 msgstr "Lähetä tiedostot laitteeseen painamalla"
 
 #. 5.8/js/modules.js:1243
-#, fuzzy
 msgid "SFTP Module"
-msgstr "SFTP moduuli"
+msgstr "SFTP-moduuli"
 
 #. 5.8/js/modules.js:1284 4.8/js/modules.js:1281
 msgid "Unmount"
@@ -273,9 +264,8 @@ msgid "Click to browse files"
 msgstr "Selaa tiedostoja painamalla"
 
 #. 5.8/js/modules.js:1463
-#, fuzzy
 msgid "SMS Module"
-msgstr "Tekstiviesti moduuli"
+msgstr "SMS-moduuli"
 
 #. 5.8/js/modules.js:1532 4.8/js/modules.js:1468
 msgid "SMS"
@@ -362,17 +352,17 @@ msgid "Text to send:"
 msgstr "Lähetettävä teksti:"
 
 #. 5.8/py/dialogs.py:271
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Open remote directory on '{device_name}'"
-msgstr "Lähetä teksti '{device_name}'"
+msgstr "Avaa hakemisto kohteessa '{device_name}'"
 
 #. 5.8/py/dialogs.py:290
 msgid "Open"
-msgstr ""
+msgstr "Avaa"
 
 #. 5.8/py/dialogs.py:300
 msgid "Directory to open:"
-msgstr ""
+msgstr "Avattava hakemisto:"
 
 #. 5.8/py/dialogs.py:375 4.8/py/dialogs.py:225
 #, python-brace-format
@@ -542,11 +532,11 @@ msgstr "Kuvake jota käytetään"
 #. 5.8->settings-schema.json->switch_different-icon-no-connected-
 #. devices->description
 msgid "Display a different icon when no devices are connected"
-msgstr ""
+msgstr "Näytä erilainen kuvake kun laitteita ei ole yhdistetty"
 
 #. 5.8->settings-schema.json->icon_no-connected-devices->description
 msgid "Icon to use when no devices are connected"
-msgstr ""
+msgstr "Kuvake kun laitteita ei ole yhdistetty"
 
 #. 5.8->settings-schema.json->button_open-kdec-settings->description
 #. 4.8->settings-schema.json->button_open-kdec-settings->description
@@ -681,13 +671,12 @@ msgstr "Ota käyttöön kohde tiedostojen lähettämiseksi"
 
 #. 5.8->settings-schema.json->module_sftp_description->description
 #. 4.8->settings-schema.json->module_sftp_description->description
-#, fuzzy
 msgid "Lets you remotely browse the storage of the device"
-msgstr "Voit selata laitteelle valittua tallennustilaa"
+msgstr "Mahdollistaa tallennustilan selaamisen"
 
 #. 5.8->settings-schema.json->module_sftp_selectFirstDirectory->description
 msgid "Select the first directory automatically"
-msgstr ""
+msgstr "Valitse ensimmäinen hakemisto automaattisesti"
 
 #. 5.8->settings-schema.json->module_sms_description->description
 #. 4.8->settings-schema.json->module_sms_description->description
