@@ -41,6 +41,16 @@
         "default":false,
         "description": "Show notification settings in the menu"
     },
+    "blinkDuration": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 0,
+        "max": 3600,
+        "step": 5,
+        "units": "seconds",
+        "description": "Stop blinking the icon after",
+        "tooltip": "How long the icon blinks after a new notification. 0 keeps blinking until the notifications are read."
+    },
     "section3": {
         "type": "section",
         "description": "Keyboard shortcuts"

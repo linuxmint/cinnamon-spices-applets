@@ -65,6 +65,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this.settings.bind("showNotificationCount", "showNotificationCount", this.update_list);
         this.settings.bind("showNotificationSettings", "showNotificationSettings", this._show_settings_action);
         this.settings.bind("showNewestFirst", "showNewestFirst", this.update_list);
+        this.settings.bind("blinkDuration", "blinkDuration");
         this._setKeybinding();
 
         this.notif_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.notifications" });
@@ -373,6 +374,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
                         this._blinking = false;
                         if (!this._normal_blinking) {
                             this._normal_blinking = true;
+                            this._normal_blink_left = this.blinkDuration > 0 ? this.blinkDuration : -1;
                             this.normal_blink();
                         }
                         break;
@@ -591,6 +593,18 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
             }
             return;
         }
+
+        // Each blink redraws the panel, i.e. a Cinnamon repaint every second for as long as any
+        // notification stays unread. Stop after blinkDuration seconds and leave the "new" icon on;
+        // the next notification starts blinking again. 0 keeps the previous endless blinking.
+        if (this._normal_blink_left === 0) {
+            this._applet_icon_box.child = this._new_icon;
+            this._normalBlinkTimeout = null;
+            this._normal_blinking = false;
+            return;
+        }
+        if (this._normal_blink_left > 0)
+            this._normal_blink_left--;
 
         if (this._normal_blink_toggle) {
             this._applet_icon_box.child = this._new_icon;
