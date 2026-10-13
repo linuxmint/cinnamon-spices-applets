@@ -1475,13 +1475,11 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      * Callback that gets called when any custom device icon setting changes
      */
     onDeviceIconSettingsChanged() {
-        KDEConnectApplet.LOGGER.debug("Device icon settings changed, rebuilding popup menu...");
+        KDEConnectApplet.LOGGER.debug("Device icon settings changed, refreshing device icons...");
 
-        for (let [deviceID, device] of Object.entries(this.devices)) {
-            device.rebuildMenuItem();
+        for (let device of Object.values(this.devices)) {
+            device.updateMenuItemIcon();
         }
-
-        this.rebuildPopupMenu();
     }
 
     onModulesOrderChanged(new_value, optionName) {
