@@ -1,0 +1,890 @@
+{
+  "layoutSettings": {
+    "type": "layout",
+    "pages": [
+      "pageCreature",
+      "pageAnimation",
+      "pageTamagotchi",
+      "pageCustomization",
+      "pageClipboard"
+    ],
+    "pageCreature": {
+      "type": "page",
+      "title": "Créature",
+      "sections": [
+        "sectionCreatureIdentity",
+        "sectionCreatureDetails",
+        "sectionLanguage"
+      ]
+    },
+    "pageAnimation": {
+      "type": "page",
+      "title": "Animation",
+      "sections": [
+        "sectionAnimation"
+      ]
+    },
+    "sectionCreatureIdentity": {
+      "type": "section",
+      "title": "Identité de la créature",
+      "keys": [
+        "keyCreatureSlug",
+        "keyCreatureName",
+        "keyProfileImagePath",
+        "keyProfileImageSize"
+      ]
+    },
+    "sectionCreatureDetails": {
+      "type": "section",
+      "title": "Préférences",
+      "keys": [
+        "keyFavoriteColor",
+        "keyCountry",
+        "keyBirthdayDay",
+        "keyBirthdayMonth"
+      ]
+    },
+    "sectionAnimation": {
+      "type": "section",
+      "title": "Sprite animé",
+      "keys": [
+        "keyPanelDisplayMode",
+        "keyEmbeddedAppletUuid",
+        "keyEmbeddedSlotWidth",
+        "keyEmbeddedClickPriority",
+        "keyImagePath",
+        "keyFrames",
+        "keyPausePerFrameInSeconds"
+      ]
+    },
+    "sectionBehaviour": {
+      "type": "section",
+      "title": "Mémoire affective",
+      "keys": [
+        "keyResetMemory"
+      ]
+    },
+    "pageClipboard": {
+      "type": "page",
+      "title": "Presse-papier",
+      "sections": [
+        "sectionClipboard"
+      ]
+    },
+    "sectionClipboard": {
+      "type": "section",
+      "title": "Historique du presse-papier",
+      "keys": [
+        "keyClipboardEnabled",
+        "keyClipboardLimit",
+        "keySmartClipboardDetection"
+      ]
+    },
+    "sectionProgression": {
+      "type": "section",
+      "title": "Progression de la créature",
+      "keys": [
+        "keyAchievementsEnabled",
+        "keyRpgEnabled"
+      ]
+    },
+    "sectionReactions": {
+      "type": "section",
+      "title": "Réactions intelligentes",
+      "keys": [
+        "keyMoodEnabled",
+        "keyContextualClipboardQuotes"
+      ]
+    },
+    "sectionSystem": {
+      "type": "section",
+      "title": "Réactions Linux/Cinnamon",
+      "keys": [
+        "keySystemReactionsEnabled",
+        "keySystemNotificationsEnabled"
+      ]
+    },
+    "sectionCare": {
+      "type": "section",
+      "title": "Faim et propreté",
+      "keys": [
+        "keyFeedCooldownEnabled",
+        "keyFeedCooldownHours",
+        "keyDailyCareMoodEnabled"
+      ]
+    },
+    "sectionMemory": {
+      "type": "section",
+      "title": "Souvenirs et dates spéciales",
+      "keys": [
+        "keyMemoryJournalEnabled",
+        "keyBirthdayDay",
+        "keyBirthdayMonth",
+        "keyHolidayMessagesEnabled"
+      ]
+    },
+    "pageTamagotchi": {
+      "type": "page",
+      "title": "Tamagotchi",
+      "sections": [
+        "sectionProgression",
+        "sectionReactions",
+        "sectionSystem",
+        "sectionCare",
+        "sectionMemory",
+        "sectionBehaviour"
+      ]
+    },
+    "sectionLanguage": {
+      "type": "section",
+      "title": "Langue",
+      "keys": [
+        "keyLanguage"
+      ]
+    },
+    "pageCustomization": {
+      "type": "page",
+      "title": "Personnalisation",
+      "sections": [
+        "sectionBanks",
+        "sectionFriendshipIcon"
+      ]
+    },
+    "sectionBanks": {
+      "type": "section",
+      "title": "Banques d’émojis et symboles",
+      "keys": [
+        "keyEmojiBankCount",
+        "keyEmojiBank1",
+        "keyEmojiBank2",
+        "keyEmojiBank3",
+        "keyEmojiBank4",
+        "keyEmojiBank5",
+        "keyEmojiBank6",
+        "keyEmojiBank7",
+        "keyEmojiBank8",
+        "keyEmojiBank9",
+        "keyEmojiBank10",
+        "keyEmojiBank11",
+        "keyEmojiBank12",
+        "keyEmojiBank13",
+        "keyEmojiBank14",
+        "keyEmojiBank15",
+        "keyEmojiBank16",
+        "keyEmojiBank17",
+        "keyEmojiBank18",
+        "keyEmojiBank19",
+        "keyEmojiBank20",
+        "keyEmojiBank21",
+        "keyEmojiBank22",
+        "keyEmojiBank23",
+        "keyEmojiBank24",
+        "keyEmojiBank25",
+        "keySymbolBankCount",
+        "keySymbolBank1",
+        "keySymbolBank2",
+        "keySymbolBank3",
+        "keySymbolBank4",
+        "keySymbolBank5",
+        "keySymbolBank6",
+        "keySymbolBank7",
+        "keySymbolBank8",
+        "keySymbolBank9",
+        "keySymbolBank10",
+        "keySymbolBank11",
+        "keySymbolBank12",
+        "keySymbolBank13",
+        "keySymbolBank14",
+        "keySymbolBank15",
+        "keySymbolBank16",
+        "keySymbolBank17",
+        "keySymbolBank18",
+        "keySymbolBank19",
+        "keySymbolBank20",
+        "keySymbolBank21",
+        "keySymbolBank22",
+        "keySymbolBank23",
+        "keySymbolBank24",
+        "keySymbolBank25"
+      ]
+    },
+    "sectionFriendshipIcon": {
+      "type": "section",
+      "title": "Icône d’amitié",
+      "keys": [
+        "keyFriendshipIcon"
+      ]
+    }
+  },
+  "keyCreatureSlug": {
+    "type": "custom",
+    "file": "CreatureChooser.py",
+    "widget": "CreatureChooser",
+    "default": "pigeon",
+    "tooltip": "Choisis la créature avec une logique catégorie → type → milieu → famille → créature."
+  },
+  "keyCreatureName": {
+    "type": "entry",
+    "default": "Roberto",
+    "description": "Nom de la créature",
+    "tooltip": "Nom affiché dans la popup et utilisé dans certaines citations."
+  },
+  "keyFavoriteColor": {
+    "type": "combobox",
+    "default": "vert",
+    "description": "Couleur préférée",
+    "options": {
+      "Vert": "vert",
+      "Bleu": "bleu",
+      "Rouge": "rouge",
+      "Jaune": "jaune",
+      "Violet": "violet",
+      "Rose": "rose",
+      "Orange": "orange",
+      "Turquoise": "turquoise",
+      "Blanc": "blanc",
+      "Noir": "noir",
+      "Gris": "gris",
+      "Marron": "marron"
+    },
+    "tooltip": "Couleur préférée de la créature."
+  },
+  "keyCountry": {
+    "type": "entry",
+    "default": "Italie",
+    "description": "Pays d'origine",
+    "tooltip": "Pays d'où vient la créature."
+  },
+  "keyImagePath": {
+    "type": "custom",
+    "file": "ImageChooser.py",
+    "widget": "ImageChooser",
+    "default": "~/.local/share/cinnamon/applets/creature@AIapplet/animations/roberto.png",
+    "tooltip": "Choisis l'image sprite horizontale utilisée pour l'animation."
+  },
+  "keyFrames": {
+    "type": "spinbutton",
+    "default": 9,
+    "min": 1,
+    "max": 120,
+    "step": 1,
+    "units": "frames",
+    "description": "Nombre de frames",
+    "tooltip": "Animation par défaut : 9 frames."
+  },
+  "keyPausePerFrameInSeconds": {
+    "type": "spinbutton",
+    "default": 0.2,
+    "min": 0.1,
+    "max": 10.0,
+    "step": 0.1,
+    "units": "secondes",
+    "description": "Pause par frame",
+    "tooltip": "Vitesse d'animation par défaut : 0.2 seconde."
+  },
+  "keyResetMemory": {
+    "type": "button",
+    "description": "Réinitialiser l'amitié et le stock de citations",
+    "callback": "resetFriendshipState"
+  },
+  "keyFriendshipLevel": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyFeedCount": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyUsedQuoteIds": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyFallbackRepeatsLeft": {
+    "type": "generic",
+    "default": 3
+  },
+  "keyLastMessage": {
+    "type": "generic",
+    "default": ""
+  },
+  "keyLastCreatureSlug": {
+    "type": "generic",
+    "default": "pigeon"
+  },
+  "keyClipboardEnabled": {
+    "type": "switch",
+    "default": false,
+    "description": "Activer le presse-papier",
+    "tooltip": "Garde en mémoire les derniers textes copiés et les affiche dans la popup de la créature."
+  },
+  "keyClipboardLimit": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 10,
+    "step": 1,
+    "units": "éléments",
+    "description": "Nombre d’éléments gardés",
+    "tooltip": "Choisis combien d’éléments copiés garder en mémoire, entre 1 et 10."
+  },
+  "keyClipboardHistory": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keySmartClipboardDetection": {
+    "type": "switch",
+    "default": true,
+    "description": "Détection intelligente du contenu",
+    "tooltip": "Ajoute des icônes selon le contenu copié : lien, texte, code, image ou chemin de fichier."
+  },
+  "keyAchievementsEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Activer les succès",
+    "tooltip": "Débloque des succès selon les citations vues, le niveau d’amitié, le nombre de copies et le niveau RPG."
+  },
+  "keyMoodEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Activer l’humeur dynamique",
+    "tooltip": "La créature change d’humeur selon l’heure, l’inactivité, le presse-papier et certains événements."
+  },
+  "keyContextualClipboardQuotes": {
+    "type": "switch",
+    "default": true,
+    "description": "Réactions aux éléments copiés",
+    "tooltip": "La créature commente certains contenus copiés : code, lien YouTube, long texte, chemin de fichier, image."
+  },
+  "keyRpgEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Activer le système RPG",
+    "tooltip": "Ajoute de l’XP avec les copies, la nourriture et l’usage, puis fait évoluer la créature."
+  },
+  "keySystemReactionsEnabled": {
+    "type": "switch",
+    "default": false,
+    "description": "Réactions aux événements système",
+    "tooltip": "Réagit à la batterie faible et à la connexion réseau. Désactivé par défaut pour rester léger."
+  },
+  "keySystemNotificationsEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Notifications de succès et système",
+    "tooltip": "Affiche des notifications Cinnamon pour les succès et les réactions système importantes."
+  },
+  "keyTotalCopies": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyXp": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyUnlockedAchievements": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyLastInteractionAt": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyLastSystemEvent": {
+    "type": "generic",
+    "default": ""
+  },
+  "keyFeedCooldownEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Limiter les nourrissages",
+    "tooltip": "Empêche de nourrir trop souvent la créature. Si elle n’a pas faim, elle répond sans consommer de citation."
+  },
+  "keyFeedCooldownHours": {
+    "type": "spinbutton",
+    "default": 2,
+    "min": 0,
+    "max": 24,
+    "step": 1,
+    "units": "heures",
+    "description": "Temps entre deux nourrissages",
+    "tooltip": "Durée minimale entre deux vrais nourrissages. 2 heures par défaut."
+  },
+  "keyDailyCareMoodEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Humeur liée au soin quotidien",
+    "tooltip": "L’humeur dépend du fait de nourrir la créature au moins une fois par jour, pas du presse-papier."
+  },
+  "keyMemoryJournalEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Activer le journal mémoire",
+    "tooltip": "Garde les souvenirs importants : première rencontre, anniversaires et fêtes."
+  },
+  "keyBirthdayDay": {
+    "type": "spinbutton",
+    "default": 21,
+    "min": 1,
+    "max": 31,
+    "step": 1,
+    "units": "jour",
+    "description": "Jour d’anniversaire",
+    "tooltip": "Jour du mois pour l’anniversaire de la créature."
+  },
+  "keyBirthdayMonth": {
+    "type": "combobox",
+    "default": "4",
+    "description": "Mois d’anniversaire",
+    "options": {
+      "Janvier": "1",
+      "Février": "2",
+      "Mars": "3",
+      "Avril": "4",
+      "Mai": "5",
+      "Juin": "6",
+      "Juillet": "7",
+      "Août": "8",
+      "Septembre": "9",
+      "Octobre": "10",
+      "Novembre": "11",
+      "Décembre": "12"
+    },
+    "tooltip": "Mois de l’anniversaire de la créature."
+  },
+  "keyHolidayMessagesEnabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Messages de fête",
+    "tooltip": "La créature peut souhaiter Noël, le Nouvel An, la Saint-Valentin et son anniversaire."
+  },
+  "keyLastFedAt": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyLastFedDay": {
+    "type": "generic",
+    "default": ""
+  },
+  "keyFirstEncounterAt": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyMemoryJournal": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyLastHolidayKey": {
+    "type": "generic",
+    "default": ""
+  },
+  "keyHunger": {
+    "type": "generic",
+    "default": 100
+  },
+  "keyCleanliness": {
+    "type": "generic",
+    "default": 100
+  },
+  "keyLastCareDecayAt": {
+    "type": "generic",
+    "default": 0
+  },
+  "keyTreasures": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyPlaylists": {
+    "type": "generic",
+    "default": "[]"
+  },
+  "keyProfileImagePath": {
+    "type": "custom",
+    "file": "ImageChooser.py",
+    "widget": "ImageChooser",
+    "default": "/home/manigael/.local/share/cinnamon/applets/creature@AIapplet/profil_picture/roberto.png",
+    "description": "Photo de profil de la créature",
+    "tooltip": "Image PNG/JPG affichée à gauche du nom de la créature dans la fenêtre de l’applet."
+  },
+  "keyLanguage": {
+    "type": "combobox",
+    "default": "fr",
+    "description": "Langue",
+    "options": {
+      "Français": "fr",
+      "English": "en",
+      "Automatique": "auto"
+    },
+    "tooltip": "Choisis la langue de l’interface. Français est la langue originale par défaut."
+  },
+  "keyProfileImageSize": {
+    "type": "spinbutton",
+    "default": 48,
+    "min": 24,
+    "max": 128,
+    "step": 1,
+    "units": "px",
+    "description": "Taille de la photo de profil",
+    "tooltip": "Taille du carré affiché à gauche du nom de la créature."
+  },
+  "keyPanelDisplayMode": {
+    "type": "combobox",
+    "default": "sprite",
+    "description": "Affichage sur le panneau",
+    "options": {
+      "Sprite animé normal": "sprite",
+      "Zone vide réservée": "empty",
+      "Adopter l’applet juste avant": "embed-previous",
+      "Adopter l’applet juste après": "embed-next",
+      "Adopter un applet par UUID": "embed-uuid"
+    },
+    "tooltip": "Permet à Créature de remplacer son sprite par une zone vide ou par l'acteur d'un autre applet déjà présent sur le panneau. Pour c-eyes, place c-eyes juste avant Créature puis choisis « Adopter l’applet juste avant »."
+  },
+  "keyEmbeddedAppletUuid": {
+    "type": "entry",
+    "default": "c-eyes@anaximeno",
+    "description": "UUID de l’applet à adopter",
+    "tooltip": "Utilisé seulement avec « Adopter un applet par UUID ». Exemple : c-eyes@anaximeno."
+  },
+  "keyEmbeddedSlotWidth": {
+    "type": "spinbutton",
+    "default": 48,
+    "min": 16,
+    "max": 300,
+    "step": 1,
+    "units": "px",
+    "description": "Largeur de la case d’affichage",
+    "tooltip": "Largeur réservée sur le panneau pour le sprite, la zone vide ou l’applet adopté."
+  },
+  "keyEmbeddedClickPriority": {
+    "type": "switch",
+    "default": true,
+    "description": "Clic prioritaire sur Créature",
+    "tooltip": "Met une couche transparente au-dessus de l’applet adopté : l’œil reste visible, mais le clic ouvre Créature."
+  },
+  "keyEmojiBankCount": {
+    "type": "spinbutton",
+    "default": 19,
+    "min": 5,
+    "max": 25,
+    "step": 1,
+    "units": "émojis",
+    "description": "Nombre d’émojis affichés",
+    "tooltip": "Entre 5 et 25. Modifie les cases ci-dessous pour changer les émojis."
+  },
+  "keySymbolBankCount": {
+    "type": "spinbutton",
+    "default": 25,
+    "min": 5,
+    "max": 25,
+    "step": 1,
+    "units": "symboles",
+    "description": "Nombre de symboles affichés",
+    "tooltip": "Entre 5 et 25. Modifie les cases ci-dessous pour changer les symboles."
+  },
+  "keyFriendshipIcon": {
+    "type": "entry",
+    "default": "❤",
+    "description": "Émoji/icône de niveau d’amitié",
+    "tooltip": "Colle ici le symbole utilisé pour les niveaux d’amitié."
+  },
+  "keyEmojiBank1": {
+    "type": "entry",
+    "default": "😀",
+    "description": "Émoji 01",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank2": {
+    "type": "entry",
+    "default": "😂",
+    "description": "Émoji 02",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank3": {
+    "type": "entry",
+    "default": "🥰",
+    "description": "Émoji 03",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank4": {
+    "type": "entry",
+    "default": "😴",
+    "description": "Émoji 04",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank5": {
+    "type": "entry",
+    "default": "🤔",
+    "description": "Émoji 05",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank6": {
+    "type": "entry",
+    "default": "😎",
+    "description": "Émoji 06",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank7": {
+    "type": "entry",
+    "default": "😭",
+    "description": "Émoji 07",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank8": {
+    "type": "entry",
+    "default": "😡",
+    "description": "Émoji 08",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank9": {
+    "type": "entry",
+    "default": "🫶",
+    "description": "Émoji 09",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank10": {
+    "type": "entry",
+    "default": "✨",
+    "description": "Émoji 10",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank11": {
+    "type": "entry",
+    "default": "🔥",
+    "description": "Émoji 11",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank12": {
+    "type": "entry",
+    "default": "💧",
+    "description": "Émoji 12",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank13": {
+    "type": "entry",
+    "default": "🌱",
+    "description": "Émoji 13",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank14": {
+    "type": "entry",
+    "default": "🍀",
+    "description": "Émoji 14",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank15": {
+    "type": "entry",
+    "default": "🌙",
+    "description": "Émoji 15",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank16": {
+    "type": "entry",
+    "default": "⭐",
+    "description": "Émoji 16",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank17": {
+    "type": "entry",
+    "default": "🎵",
+    "description": "Émoji 17",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank18": {
+    "type": "entry",
+    "default": "📚",
+    "description": "Émoji 18",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank19": {
+    "type": "entry",
+    "default": "🧠",
+    "description": "Émoji 19",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank20": {
+    "type": "entry",
+    "default": "👁",
+    "description": "Émoji 20",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank21": {
+    "type": "entry",
+    "default": "⚡",
+    "description": "Émoji 21",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank22": {
+    "type": "entry",
+    "default": "🔋",
+    "description": "Émoji 22",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank23": {
+    "type": "entry",
+    "default": "🧩",
+    "description": "Émoji 23",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank24": {
+    "type": "entry",
+    "default": "🪄",
+    "description": "Émoji 24",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keyEmojiBank25": {
+    "type": "entry",
+    "default": "💎",
+    "description": "Émoji 25",
+    "tooltip": "Remplace par l’émoji de ton choix."
+  },
+  "keySymbolBank1": {
+    "type": "entry",
+    "default": "α",
+    "description": "Symbole 01",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank2": {
+    "type": "entry",
+    "default": "β",
+    "description": "Symbole 02",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank3": {
+    "type": "entry",
+    "default": "γ",
+    "description": "Symbole 03",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank4": {
+    "type": "entry",
+    "default": "δ",
+    "description": "Symbole 04",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank5": {
+    "type": "entry",
+    "default": "θ",
+    "description": "Symbole 05",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank6": {
+    "type": "entry",
+    "default": "λ",
+    "description": "Symbole 06",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank7": {
+    "type": "entry",
+    "default": "μ",
+    "description": "Symbole 07",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank8": {
+    "type": "entry",
+    "default": "π",
+    "description": "Symbole 08",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank9": {
+    "type": "entry",
+    "default": "Σ",
+    "description": "Symbole 09",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank10": {
+    "type": "entry",
+    "default": "Δ",
+    "description": "Symbole 10",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank11": {
+    "type": "entry",
+    "default": "Ω",
+    "description": "Symbole 11",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank12": {
+    "type": "entry",
+    "default": "ω",
+    "description": "Symbole 12",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank13": {
+    "type": "entry",
+    "default": "∞",
+    "description": "Symbole 13",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank14": {
+    "type": "entry",
+    "default": "≈",
+    "description": "Symbole 14",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank15": {
+    "type": "entry",
+    "default": "≠",
+    "description": "Symbole 15",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank16": {
+    "type": "entry",
+    "default": "≤",
+    "description": "Symbole 16",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank17": {
+    "type": "entry",
+    "default": "≥",
+    "description": "Symbole 17",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank18": {
+    "type": "entry",
+    "default": "√",
+    "description": "Symbole 18",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank19": {
+    "type": "entry",
+    "default": "∫",
+    "description": "Symbole 19",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank20": {
+    "type": "entry",
+    "default": "∑",
+    "description": "Symbole 20",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank21": {
+    "type": "entry",
+    "default": "→",
+    "description": "Symbole 21",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank22": {
+    "type": "entry",
+    "default": "↔",
+    "description": "Symbole 22",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank23": {
+    "type": "entry",
+    "default": "±",
+    "description": "Symbole 23",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank24": {
+    "type": "entry",
+    "default": "×",
+    "description": "Symbole 24",
+    "tooltip": "Remplace par le symbole de ton choix."
+  },
+  "keySymbolBank25": {
+    "type": "entry",
+    "default": "÷",
+    "description": "Symbole 25",
+    "tooltip": "Remplace par le symbole de ton choix."
+  }
+}
