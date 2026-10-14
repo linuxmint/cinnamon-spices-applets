@@ -12,7 +12,7 @@ const Cairo      = imports.cairo;
 const Pango      = imports.gi.Pango;
 const PangoCairo = imports.gi.PangoCairo;
 
-const Theme = imports.theme;
+const Theme = require("./lib/theme");
 
 // U+FE0E (text presentation selector) forces monochrome rendering.
 const ZODIAC_GLYPHS = ["♈\uFE0E","♉\uFE0E","♊\uFE0E","♋\uFE0E","♌\uFE0E","♍\uFE0E",
