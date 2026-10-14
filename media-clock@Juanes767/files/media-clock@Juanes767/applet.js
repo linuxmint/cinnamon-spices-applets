@@ -169,10 +169,6 @@ class MediaClockApplet extends Applet.Applet {
 
     _showPopup() {
         // Limpieza previa por si quedó algo colgado
-        if (this._modalGrab) {
-            try { Main.popModal(this._modalGrab); } catch (e) {}
-            this._modalGrab = null;
-        }
         if (this._outsideClickId) {
             try { global.stage.disconnect(this._outsideClickId); } catch (e) {}
             this._outsideClickId = null;
@@ -184,28 +180,28 @@ class MediaClockApplet extends Applet.Applet {
 
         this._popup.show();
 
-        try {
-            this._modalGrab = Main.pushModal(this._popup);
-        } catch (e) {
-            this._modalGrab = null;
-        }
-
         this._outsideClickId = global.stage.connect('button-press-event', (actor, event) => {
             if (!this._popup.visible) return false;
+
+            // ¿El clic fue dentro del popup o sus hijos? → dejar pasar el evento
+            let source = event.get_source();
+            let a = source;
+            while (a) {
+                if (a === this._popup) return false;
+                a = a.get_parent ? a.get_parent() : null;
+            }
+
+            // Clic fuera del popup
             let [x, y] = event.get_coords();
-
-            let [px, py] = this._popup.get_transformed_position();
-            let pw = this._popup.width;
-            let ph = this._popup.height;
-            let insidePopup = x >= px && x <= px + pw && y >= py && y <= py + ph;
-            if (insidePopup) return false;
-
             let [ax, ay] = this.actor.get_transformed_position();
             let aw = this.actor.width;
             let ah = this.actor.height;
             let insideApplet = x >= ax && x <= ax + aw && y >= ay && y <= ay + ah;
 
             this._hidePopup();
+
+            // Consumir SOLO si el clic fue sobre el reloj (para no reabrir con el mismo clic)
+            // Si fue sobre otra app, dejar pasar el evento
             return insideApplet;
         });
 
@@ -262,10 +258,6 @@ class MediaClockApplet extends Applet.Applet {
         if (this._keyPressId) {
             try { global.stage.disconnect(this._keyPressId); } catch (e) {}
             this._keyPressId = null;
-        }
-        if (this._modalGrab) {
-            try { Main.popModal(this._modalGrab); } catch (e) {}
-            this._modalGrab = null;
         }
     }
 
@@ -647,10 +639,6 @@ class MediaClockApplet extends Applet.Applet {
         if (this._keyPressId) {
             try { global.stage.disconnect(this._keyPressId); } catch (e) {}
             this._keyPressId = null;
-        }
-        if (this._modalGrab) {
-            try { Main.popModal(this._modalGrab); } catch (e) {}
-            this._modalGrab = null;
         }
         this._stopPosPolling();
         if (this._popup) {
