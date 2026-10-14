@@ -126,7 +126,7 @@
     },
     "switch_users_cmd": {
         "type" : "entry",
-        "default" : "gdmflexiserver",
+        "default" : "dm-tool switch-to-greeter",
         "description" : "The switch users command",
         "dependency" : "switch_users"
     },
