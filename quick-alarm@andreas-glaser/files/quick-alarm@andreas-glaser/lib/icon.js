@@ -12,7 +12,7 @@
 function resolveIcon(useCustom, value, env) {
   var DEFAULT = { method: "symbolic_name", value: "alarm-symbolic" };
 
-  if (!useCustom || !value || value === "") return DEFAULT;
+  if (!useCustom || typeof value !== "string" || value === "") return DEFAULT;
 
   var isSymbolic = value.indexOf("-symbolic") !== -1;
 
