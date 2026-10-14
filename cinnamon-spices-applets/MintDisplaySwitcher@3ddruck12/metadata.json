@@ -1,0 +1,10 @@
+{
+    "uuid": "MintDisplaySwitcher@3ddruck12",
+    "name": "Display Switcher",
+    "description": "Win+P-style display mode switcher — laptop only, external only, mirror, extend. Auto-applies last mode on reconnect. Super+P shortcut.",
+    "icon": "display",
+    "author": "3ddruck12",
+    "website": "https://github.com/3ddruck12/MintDisplaySwitcher",
+    "max-instances": 1,
+    "cinnamon-version": ["6.0", "6.4", "6.6"]
+}
