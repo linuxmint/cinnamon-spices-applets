@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# SSH LAUNCHER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# sumo, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-24 12:01+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-06 20:34+0100\n"
 "PO-Revision-Date: 2025-05-19 22:59+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -17,35 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:51 applet.js:67 applet.js:110 applet.js:246 applet.js:260
+#. applet.js:51 applet.js:67 applet.js:114 applet.js:256 applet.js:271
 msgid "SSH Launcher"
 msgstr "SSH 啟動器"
 
-#: applet.js:110
+#. applet.js:114
 msgid "No suitable icon found, falling back to custom icon"
 msgstr "找不到適合的圖示，將改用自訂圖示"
 
-#: applet.js:116
+#. applet.js:126
 msgid "Force Update from SSH config"
 msgstr "強制重新載入 SSH 設定檔"
 
-#: applet.js:183
+#. applet.js:193
 msgid "Background (-fN)"
 msgstr "在背景執行 (-fN)"
 
-#: applet.js:186
+#. applet.js:196
 msgid "Forward X11 (-X)"
 msgstr "啟用 X11 轉發 (-X)"
 
-#: applet.js:227
+#. applet.js:237
 msgid "ERROR. "
 msgstr "錯誤。"
 
-#: applet.js:230
+#. applet.js:240
 msgid "Edit SSH config"
 msgstr "編輯 SSH 設定檔"
 
-#: applet.js:246
+#. applet.js:256
 msgid ""
 "Error: I can't open the terminal.\n"
 "You need to set a default terminal first in Preferred Applications!\n"
@@ -57,11 +58,11 @@ msgstr ""
 "\n"
 "（請按一下滑鼠右鍵 > [關於] > [更多資訊] 取得更多說明）"
 
-#: applet.js:260
+#. applet.js:271
 msgid "Connection opened to "
 msgstr "已連線至 "
 
-#: applet.js:260
+#. applet.js:271
 msgid " using "
 msgstr " 使用 "
 
@@ -104,3 +105,11 @@ msgstr "啟動 SSH 連線時顯示通知"
 #. settings-schema.json->showConnectionNotification->tooltip
 msgid "Display a notification message when SSH terminal is launched"
 msgstr "啟動 SSH 終端機時顯示通知訊息"
+
+#. settings-schema.json->openMenuKey->description
+msgid "Keyboard shortcut to open the SSH menu"
+msgstr "開啟 SSH 選單的鍵盤快速鍵"
+
+#. settings-schema.json->openMenuKey->tooltip
+msgid "Set a global keyboard shortcut to open the SSH launcher menu"
+msgstr "設定全域鍵盤快速鍵以開啟 SSH 選單"
