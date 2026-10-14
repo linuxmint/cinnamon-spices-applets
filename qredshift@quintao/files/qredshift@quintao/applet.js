@@ -898,9 +898,21 @@ class QRedshift extends Applet.TextIconApplet {
     doCommandAsync(command, prd) {
         // qLOG('QRedshift CMD',  command);
         // Asynchronous: a synchronous spawn blocks Cinnamon itself (panel and compositor)
-        // for as long as redshift runs.
-        Util.spawnCommandLineAsyncIO(command, (out) => this.onCommandDone(out || '', prd),
-            {argv: GLib.shell_parse_argv(command)[1]});
+        // for as long as redshift runs. The command is run as an argument vector, not through a shell.
+        let proc = new Gio.Subprocess({
+            argv: GLib.shell_parse_argv(command)[1],
+            flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
+        });
+        proc.init(null);
+        proc.communicate_utf8_async(null, null, (obj, res) => {
+            let out = '';
+            try {
+                out = obj.communicate_utf8_finish(res)[1] || '';
+            } catch (e) {
+                global.logError(UUID + ': ' + e);
+            }
+            this.onCommandDone(out, prd);
+        });
     }
     
     onCommandDone(resp, prd) {
