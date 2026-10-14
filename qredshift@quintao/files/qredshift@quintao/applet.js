@@ -897,8 +897,27 @@ class QRedshift extends Applet.TextIconApplet {
      */
     doCommandAsync(command, prd) {
         // qLOG('QRedshift CMD',  command);
-        // Asynchronous: a synchronous spawn blocks Cinnamon itself (panel and compositor)
-        // for as long as redshift runs. The command is run as an argument vector, not through a shell.
+        // Asynchronous: a synchronous spawn blocks Cinnamon itself (panel and compositor) for as
+        // long as the child runs. That includes Util.killall(): it runs `pkill -f` synchronously,
+        // and pkill reads the command line of every process (30-40 ms with 400 processes).
+        // So other redshift instances are stopped first and the new one starts when pkill is done;
+        // if a newer command came in meanwhile, only that one is run.
+        let seq = this.applySeq = (this.applySeq || 0) + 1;
+        let pkill = new Gio.Subprocess({
+            argv: ['pkill', '-f', '^([^ ]*/)?redshift($| )'],
+            flags: Gio.SubprocessFlags.NONE,
+        });
+        pkill.init(null);
+        pkill.wait_async(null, (obj, res) => {
+            obj.wait_finish(res);
+            if (seq === this.applySeq) {
+                this.runRedshift(command, prd);
+            }
+        });
+    }
+
+    runRedshift(command, prd) {
+        // The command is run as an argument vector, not through a shell.
         let proc = new Gio.Subprocess({
             argv: GLib.shell_parse_argv(command)[1],
             flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
@@ -978,14 +997,13 @@ class QRedshift extends Applet.TextIconApplet {
             
             this.set_applet_icon_symbolic_path(this.metadata.path + ICON_ON);
             // The auto update runs every autoUpdateInterval seconds, but outside transitions the
-            // gamma does not change: skip killall + redshift when nothing would change.
+            // gamma does not change: skip pkill + redshift when nothing would change.
             if (cmd === this.lastCommand && Date.now() - this.lastCommandTime < REAPPLY_SAME_MS) {
                 this.updateTooltip(prd);
                 return;
             }
             this.lastCommand = cmd;
             this.lastCommandTime = Date.now();
-            Util.killall('redshift');
             this.doCommandAsync(cmd, prd);
             
         } else {
