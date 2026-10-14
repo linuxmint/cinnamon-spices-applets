@@ -1,0 +1,68 @@
+# POINTTHAT (MOUSE BEAM)
+# This file is put in the public domain.
+# ozalpmurat, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pointthat@muratozalp 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-05 09:27+0300\n"
+"PO-Revision-Date: 2026-08-05 10:00+0300\n"
+"Last-Translator: ozalpmurat <muratozalp.software@gmail.com>\n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:29 applet.js:106
+msgid "Mouse Beam: Off"
+msgstr "Fare Işını: Kapalı"
+
+#. applet.js:79
+msgid "Mouse Beam: On"
+msgstr "Fare Işını: Açık"
+
+#. metadata.json->name
+msgid "PointThat (Mouse Beam)"
+msgstr "PointThat (Fare Işını)"
+
+#. metadata.json->description
+msgid ""
+"Draws beams around the mouse cursor. Useful while teaching, presenting or "
+"recording your screen."
+msgstr ""
+"Fare imlecinin çevresine ışın çizer. Ders verirken, sunum yaparken veya "
+"ekran kaydı alırken kullanışlıdır."
+
+#. settings-schema.json->general->description
+msgid "Beam Effect Settings"
+msgstr "Işın Efekti Ayarları"
+
+#. settings-schema.json->rayColor->description
+msgid "Beam color"
+msgstr "Işın rengi"
+
+#. settings-schema.json->rayCount->description
+msgid "Number of beams"
+msgstr "Işın sayısı"
+
+#. settings-schema.json->rayLength->description
+msgid "Beam length"
+msgstr "Işın uzunluğu"
+
+#. settings-schema.json->rayLength->units
+#. settings-schema.json->gap->units
+#. settings-schema.json->lineWidth->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->gap->description
+msgid "Center gap"
+msgstr "Merkez boşluğu"
+
+#. settings-schema.json->lineWidth->description
+msgid "Beam thickness"
+msgstr "Işın kalınlığı"
