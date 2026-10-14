@@ -1,0 +1,46 @@
+# Window Closer Applet Translation Template
+# Copyright (C) 2026 Stefan Schmidbauer
+# This file is distributed under the same license as the window-closer@stefan-schmidbauer package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: window-closer@stefan-schmidbauer 1.1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-12 20:12+0200\n"
+"PO-Revision-Date: 2026-08-20 21:05+0200\n"
+"Last-Translator: Stefan-Schmidbauer\n"
+"Language-Team: none\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. metadata.json->name
+#. applet.js:70 applet.js:368
+msgid "Window Closer"
+msgstr "Fenster schließen"
+
+#. applet.js:377
+msgid "Click a window to close it · Scroll for more · Esc to exit"
+msgstr ""
+"Fenster anklicken zum Schließen · Scrollen für weitere · Esc zum Beenden"
+
+#. applet.js:378
+msgid "Click a window to close it · Esc to exit"
+msgstr "Fenster anklicken zum Schließen · Esc zum Beenden"
+
+#. applet.js:506
+msgid "No windows open"
+msgstr "Keine Fenster geöffnet"
+
+#. applet.js:689
+msgid "All windows closed!"
+msgstr "Alle Fenster geschlossen!"
+
+#. metadata.json->description
+msgid "Click to see all open windows. Click a window to close it."
+msgstr ""
+"Klicken, um alle geöffneten Fenster zu sehen. Ein Fenster anklicken, um es "
+"zu schließen."
