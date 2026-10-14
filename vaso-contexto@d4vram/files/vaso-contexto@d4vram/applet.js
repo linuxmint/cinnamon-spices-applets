@@ -6,6 +6,8 @@ const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const Mainloop = imports.mainloop;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
+const ByteArray = imports.byteArray;
 
 const REFRESH_SECONDS = 10;
 // Mismos colores que las variables --ok/--watch/--compact/--new de index.html.
@@ -19,16 +21,14 @@ class VasoApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
 
-        // Instalado desde Cinnamon Spices, vaso.py viaja dentro de la carpeta del applet
-        // (lo copia cinnamon/empaquetar.sh). En desarrollo el applet es un enlace simbólico
-        // a esta carpeta del proyecto y vaso.py está dos niveles más arriba. Las comillas
-        // protegen los espacios de la ruta ("Vaso de contexto").
-        const bundled = GLib.build_filenamev([metadata.path, 'vaso.py']);
-        this.script = GLib.shell_quote(GLib.file_test(bundled, GLib.FileTest.EXISTS)
-            ? bundled : GLib.build_filenamev([metadata.path, '..', '..', 'vaso.py']));
+        // vaso.py está siempre dentro de la carpeta del applet: en el paquete de Cinnamon
+        // Spices es una copia (la hace cinnamon/empaquetar.sh) y en el proyecto es un enlace
+        // simbólico al vaso.py de la raíz.
+        this.script = GLib.build_filenamev([metadata.path, 'vaso.py']);
         this.iconDir = GLib.build_filenamev([GLib.get_user_cache_dir(), 'vaso-contexto']);
         GLib.mkdir_with_parents(this.iconDir, 0o755);
         this.level = null;
+        this.icons = new Set();  // iconos ya escritos en esta sesión de Cinnamon
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -46,7 +46,7 @@ class VasoApplet extends Applet.TextIconApplet {
             this.rows[key] = item;
         }
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        this.menu.addAction('Abrir página completa', () => Util.spawnCommandLine(`python3 ${this.script}`));
+        this.menu.addAction('Abrir página completa', () => Util.spawn(['python3', this.script]));
 
         this.set_applet_label('…');
         this.setIcon(0, 'ok');
@@ -67,29 +67,51 @@ class VasoApplet extends Applet.TextIconApplet {
     setIcon(pct, level) {
         const step = Math.min(20, Math.round(pct * 20));
         const path = GLib.build_filenamev([this.iconDir, `vaso-${level}-${step}.svg`]);
-        if (!GLib.file_test(path, GLib.FileTest.EXISTS)) {
-            GLib.file_set_contents(path,
-                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">` +
-                `<defs><clipPath id="c"><path d="${GLASS}"/></clipPath></defs>` +
-                `<rect clip-path="url(#c)" x="0" y="${15 - 14 * step / 20}" width="16" height="16" fill="${COLORS[level]}"/>` +
-                `<path d="${GLASS}" fill="none" stroke="#9aa7b5" stroke-width="1.2" stroke-linejoin="round"/></svg>`);
+        if (this.icons.has(path)) {
+            this.set_applet_icon_path(path);
+            return;
         }
-        this.set_applet_icon_path(path);
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">` +
+            `<defs><clipPath id="c"><path d="${GLASS}"/></clipPath></defs>` +
+            `<rect clip-path="url(#c)" x="0" y="${15 - 14 * step / 20}" width="16" height="16" fill="${COLORS[level]}"/>` +
+            `<path d="${GLASS}" fill="none" stroke="#9aa7b5" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
+        // Escritura asíncrona: el panel no espera al disco. El icono se pone al terminar.
+        Gio.File.new_for_path(path).replace_contents_bytes_async(
+            ByteArray.toGBytes(ByteArray.fromString(svg)), null, false, Gio.FileCreateFlags.NONE, null,
+            (file, res) => {
+                try {
+                    file.replace_contents_finish(res);
+                } catch (e) {
+                    global.logError(e);
+                    return;
+                }
+                this.icons.add(path);
+                this.set_applet_icon_path(path);
+            });
     }
 
     refresh() {
-        Util.spawnCommandLineAsyncIO(`python3 ${this.script} --json`, (stdout, stderr) => {
-            let s;
-            try {
-                s = JSON.parse(stdout);
-                if (s.error) throw new Error(s.error);
-            } catch (e) {
-                this.set_applet_label('–');
-                this.set_applet_tooltip('Vaso de contexto: ' + (stderr.trim() || e.message));
-                return;
-            }
-            this.render(s);
-        });
+        const fail = msg => {
+            this.set_applet_label('–');
+            this.set_applet_tooltip('Vaso de contexto: ' + msg);
+        };
+        // Con lista de argumentos (argv) no interviene ninguna shell: la ruta puede llevar
+        // espacios sin necesidad de comillas. Lanza una excepción si no existe python3.
+        try {
+            Util.spawnCommandLineAsyncIO(null, (stdout, stderr) => {
+                let s;
+                try {
+                    s = JSON.parse(stdout);
+                    if (s.error) throw new Error(s.error);
+                } catch (e) {
+                    fail((stderr || '').trim() || e.message);
+                    return;
+                }
+                this.render(s);
+            }, { argv: ['python3', this.script, '--json'] });
+        } catch (e) {
+            fail(e.message);
+        }
     }
 
     render(s) {
