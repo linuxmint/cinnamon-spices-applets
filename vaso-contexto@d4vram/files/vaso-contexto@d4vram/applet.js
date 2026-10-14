@@ -98,9 +98,13 @@ class VasoApplet extends Applet.TextIconApplet {
         // Con lista de argumentos (argv) no interviene ninguna shell: la ruta puede llevar
         // espacios sin necesidad de comillas. Lanza una excepción si no existe python3.
         try {
-            Util.spawnCommandLineAsyncIO(null, (stdout, stderr) => {
-                let s;
+            const proc = Gio.Subprocess.new(['python3', this.script, '--json'],
+                Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE);
+            proc.communicate_utf8_async(null, null, (obj, res) => {
+                let s, stderr = '';
                 try {
+                    let stdout;
+                    [, stdout, stderr] = obj.communicate_utf8_finish(res);
                     s = JSON.parse(stdout);
                     if (s.error) throw new Error(s.error);
                 } catch (e) {
@@ -108,7 +112,7 @@ class VasoApplet extends Applet.TextIconApplet {
                     return;
                 }
                 this.render(s);
-            }, { argv: ['python3', this.script, '--json'] });
+            });
         } catch (e) {
             fail(e.message);
         }
