@@ -178,8 +178,9 @@ export class UIBar {
 			this.HideHourlyToggle();
 		}
 
-		this.providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
-		this.providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(this.providerCreditButton!));
+		const providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
+		this.providerCreditButton = providerCreditButton;
+		providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(providerCreditButton));
 		this.refreshIcon = new Icon({
 			icon_name: "refresh-symbolic" as BuiltinIcons,
 			icon_type: IconType.SYMBOLIC,
