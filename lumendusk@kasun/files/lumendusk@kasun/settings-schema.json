@@ -1,0 +1,216 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["general", "screen"],
+
+        "general": {
+            "type": "page",
+            "title": "Mode",
+            "sections": ["section_control", "section_auto", "section_manual"]
+        },
+        "section_control": {
+            "type": "section",
+            "title": "Decide day and night",
+            "keys": ["control"]
+        },
+        "section_auto": {
+            "type": "section",
+            "title": "Automatic",
+            "dependency": "control=auto",
+            "keys": ["mode",
+                     "location_help", "latitude", "longitude", "detect_location",
+                     "fixed_help", "dark_start", "light_start"]
+        },
+        "section_manual": {
+            "type": "section",
+            "title": "Manual",
+            "dependency": "control=manual",
+            "keys": ["manual_help"]
+        },
+
+        "screen": {
+            "type": "page",
+            "title": "Screen",
+            "sections": ["section_appearance", "section_nightlight",
+                         "section_brightness"]
+        },
+        "section_appearance": {
+            "type": "section",
+            "title": "Appearance",
+            "dependency": "control=auto",
+            "keys": ["appearance_help", "theme_day", "theme_night"]
+        },
+        "section_nightlight": {
+            "type": "section",
+            "title": "Night light",
+            "keys": ["nightlight_help", "nightlight_enabled",
+                     "nightlight_temperature"]
+        },
+        "section_brightness": {
+            "type": "section",
+            "title": "Brightness",
+            "keys": ["brightness_help", "brightness_enabled",
+                     "brightness_day", "brightness_night"]
+        }
+    },
+
+    "control": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Lumendusk should",
+        "options": {
+            "Adjust my desktop automatically": "auto",
+            "Leave it to me — I'll pick dark or light": "manual"
+        },
+        "tooltip": "You can switch between these from the panel menu at any time."
+    },
+
+    "mode": {
+        "type": "combobox",
+        "default": "fixed",
+        "description": "Tell day from night by",
+        "options": {
+            "Fixed times": "fixed",
+            "Sunrise and sunset": "sun"
+        },
+        "tooltip": "Sunrise and sunset are worked out offline from the location below, and shift through the year."
+    },
+
+    "location_help": {
+        "type": "label",
+        "description": "Only used for sunrise and sunset. \"Detect\" reads your system timezone — accurate to the nearest major city, which is within a minute or two of the real sunset. Correct it by hand if you want it exact."
+    },
+
+    "latitude": {
+        "type": "spinbutton",
+        "default": 0.0,
+        "min": -90.0,
+        "max": 90.0,
+        "step": 0.0001,
+        "units": "°N",
+        "description": "Latitude",
+        "dependency": "mode=sun"
+    },
+
+    "longitude": {
+        "type": "spinbutton",
+        "default": 0.0,
+        "min": -180.0,
+        "max": 180.0,
+        "step": 0.0001,
+        "units": "°E",
+        "description": "Longitude",
+        "dependency": "mode=sun"
+    },
+
+    "detect_location": {
+        "type": "button",
+        "description": "Detect from my timezone",
+        "callback": "onDetectLocation",
+        "dependency": "mode=sun"
+    },
+
+    "fixed_help": {
+        "type": "label",
+        "description": "24-hour times, e.g. 18:00."
+    },
+
+    "dark_start": {
+        "type": "entry",
+        "default": "19:00",
+        "description": "Go dark at",
+        "dependency": "mode=fixed"
+    },
+
+    "light_start": {
+        "type": "entry",
+        "default": "07:00",
+        "description": "Go light at",
+        "dependency": "mode=fixed"
+    },
+
+    "manual_help": {
+        "type": "label",
+        "description": "Pick Light or Dark from the panel menu and it stays that way — nothing changes it on its own. The night light becomes a switch in that menu too, so you decide when the screen is warmed. Switch back to Automatic whenever you like."
+    },
+
+    "appearance_help": {
+        "type": "label",
+        "description": "Prefer dark all day? Set both to Dark — the night light and brightness still follow the time of day."
+    },
+
+    "theme_day": {
+        "type": "combobox",
+        "default": "light",
+        "description": "Daytime appearance",
+        "options": {
+            "Light": "light",
+            "Dark": "dark"
+        }
+    },
+
+    "theme_night": {
+        "type": "combobox",
+        "default": "dark",
+        "description": "Night-time appearance",
+        "options": {
+            "Light": "light",
+            "Dark": "dark"
+        }
+    },
+
+    "nightlight_help": {
+        "type": "label",
+        "description": "How yellow the screen goes when the night light is on. Drag left for a deeper yellow, right for closer to normal daylight. In Manual mode you switch the night light on and off from the panel menu; this sets the colour either way."
+    },
+
+    "nightlight_enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Warm the screen automatically at night"
+    },
+
+    "nightlight_temperature": {
+        "type": "scale",
+        "default": 4000,
+        "min": 1000,
+        "max": 6500,
+        "step": 100,
+        "units": "K",
+        "description": "Amount of yellow",
+        "tooltip": "1000 K is a deep amber; 6500 K is normal daylight (no tint)."
+    },
+
+    "brightness_help": {
+        "type": "label",
+        "description": "These levels are applied at each day/night transition, alongside the theme and night light. External monitors need ddcutil and DDC/CI; a monitor that doesn't respond is skipped and the rest still change."
+    },
+
+    "brightness_enabled": {
+        "type": "switch",
+        "default": false,
+        "description": "Change brightness with the time of day"
+    },
+
+    "brightness_day": {
+        "type": "scale",
+        "default": 80,
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "units": "%",
+        "description": "Daytime brightness",
+        "dependency": "brightness_enabled"
+    },
+
+    "brightness_night": {
+        "type": "scale",
+        "default": 35,
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "units": "%",
+        "description": "Night-time brightness",
+        "dependency": "brightness_enabled"
+    }
+}
