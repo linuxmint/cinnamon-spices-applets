@@ -1,0 +1,117 @@
+{
+    "headGeneral": {
+        "type": "header",
+        "description": "Watchlist"
+    },
+    "watchlist": {
+        "type": "list",
+        "description": "Stocks to track",
+        "tooltip": "Add the ticker symbols you want to follow. Use the symbol exactly as it appears on Yahoo Finance (e.g. AAPL, MSFT, SPY, BRK-B). The display name is optional and only used as a label.",
+        "columns": [
+            {
+                "id": "symbol",
+                "title": "Symbol",
+                "type": "string"
+            },
+            {
+                "id": "label",
+                "title": "Display name (optional)",
+                "type": "string"
+            }
+        ],
+        "default": [
+            { "symbol": "AAPL", "label": "Apple" },
+            { "symbol": "MSFT", "label": "Microsoft" },
+            { "symbol": "GOOGL", "label": "Alphabet" },
+            { "symbol": "SPY", "label": "S&P 500 ETF" }
+        ]
+    },
+
+    "headPanel": {
+        "type": "header",
+        "description": "Panel display"
+    },
+    "show-symbol-in-panel": {
+        "type": "switch",
+        "default": true,
+        "description": "Show the ticker symbol in the panel",
+        "tooltip": "When on, the panel shows e.g. 'AAPL 195.12 ▲0.74%'. When off, just the price and change."
+    },
+    "change-mode": {
+        "type": "combobox",
+        "default": "percent",
+        "description": "How to display the change",
+        "options": {
+            "Percent (▲0.74%)": "percent",
+            "Absolute (▲1.43)": "absolute",
+            "Both (▲1.43  0.74%)": "both"
+        }
+    },
+    "color-enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Color-code gains (green) and losses (red)"
+    },
+    "decimals": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0,
+        "max": 6,
+        "step": 1,
+        "units": "decimal places",
+        "description": "Decimal places for prices"
+    },
+    "rotation-interval": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 120,
+        "step": 1,
+        "units": "seconds",
+        "description": "Seconds each ticker is shown before rotating",
+        "tooltip": "Set to a high value if you only track one symbol, or if you prefer it not to rotate quickly."
+    },
+
+    "headData": {
+        "type": "header",
+        "description": "Data & charts"
+    },
+    "refresh-interval": {
+        "type": "spinbutton",
+        "default": 60,
+        "min": 15,
+        "max": 3600,
+        "step": 15,
+        "units": "seconds",
+        "description": "How often to fetch fresh prices",
+        "tooltip": "Lower values update more often but make more requests to Yahoo Finance. 60 seconds is a sensible default."
+    },
+    "chart-range": {
+        "type": "combobox",
+        "default": "1d",
+        "description": "Time range for the mini charts in the popup",
+        "options": {
+            "1 day": "1d",
+            "5 days": "5d",
+            "1 month": "1mo",
+            "6 months": "6mo",
+            "1 year": "1y"
+        }
+    },
+    "show-charts": {
+        "type": "switch",
+        "default": true,
+        "description": "Show a mini chart for each stock in the popup"
+    },
+
+    "headAdvanced": {
+        "type": "header",
+        "description": "Advanced"
+    },
+    "debug-logging": {
+        "type": "switch",
+        "default": false,
+        "description": "Enable debug logging",
+        "tooltip": "Writes detailed auth and fetch traces to the system log (Looking Glass / ~/.xsession-errors). Only needed when diagnosing data problems."
+    }
+}
