@@ -1,0 +1,114 @@
+.ow-workspace-switcher {
+    border-radius: 6px;
+    padding: 1px 3px;
+    spacing: 3px;
+}
+
+.ow-workspace-switcher-dark {
+    background-color: rgba(45, 48, 56, 0.85);
+    border: 1px solid rgba(20, 22, 26, 0.6);
+}
+
+.ow-workspace-switcher-light {
+    background-color: rgba(235, 238, 242, 0.85); 
+    border: 1px solid rgba(180, 185, 190, 0.5);
+}
+
+.ow-ws-wrapper {
+    spacing: 1px; 
+}
+
+.ow-ws-box {
+    width: 34px;
+    height: 18px; 
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition-duration: 200;
+}
+
+/* CLASS KHUSUS SAAT INDIKATOR OFF */
+.ow-ws-box-no-indicator {
+    height: 26px; /* Mengisi ruang kosong vertikal (panel 40px) */
+    width: 45px;  /* Lebarnya dilebarkan sedikit agar proporsi gambar tidak gepeng */
+}
+
+.ow-ws-box-dark {
+    background-color: rgba(90, 95, 105, 0.3);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.ow-ws-box-light {
+    background-color: rgba(210, 215, 220, 0.4); 
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+.ow-ws-box-active {
+    border: 2px solid #4B8AF3; 
+    background-color: rgba(75, 138, 243, 0.2);
+}
+
+.ow-ws-dimmer {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 3px; 
+}
+
+.ow-ws-label {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.ow-ws-label-dark {
+    color: #d5d8e0;
+}
+
+.ow-ws-label-light {
+    color: #4a4b50;
+}
+
+/* AREA INDIKATOR */
+.ow-ws-indicator-area {
+    height: 8px; /* Dinaikkan sedikit agar icon terlihat utuh */
+}
+
+/* BENTUK: SEGITIGA */
+.ow-ws-triangle-dark {
+    color: #d5d8e0;
+    font-size: 6px; /* Bisa dibesarkan/dikecilkan sesuai selera */
+    line-height: 8px; /* Menjaga agar ruang vertikalnya tidak terlalu memakan tempat */
+}
+
+.ow-ws-triangle-light {
+    color: #333333;
+    font-size: 6px;
+    line-height: 8px;
+}
+
+/* BENTUK: BULAT PENUH */
+.ow-ws-circle-filled-dark {
+    background-color: #d5d8e0;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+}
+.ow-ws-circle-filled-light {
+    background-color: #4a4b50;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+}
+
+/* BENTUK: BULAT TANPA ISI (OUTLINE) */
+.ow-ws-circle-empty-dark {
+    background-color: transparent;
+    border: 2px solid #d5d8e0;
+    width: 4px;
+    height: 4px;
+    border-radius: 4px;
+}
+.ow-ws-circle-empty-light {
+    background-color: transparent;
+    border: 2px solid #4a4b50;
+    width: 4px;
+    height: 4px;
+    border-radius: 4px;
+}
