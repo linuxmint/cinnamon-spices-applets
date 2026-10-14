@@ -20208,7 +20208,8 @@ class UIHourlyForecasts {
             ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation);
             ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
         }
-        this.AdjustHourlyBoxItemWidth();
+        if (this.hourlyToggled)
+            this.AdjustHourlyBoxItemWidth();
         return !(max <= 0);
     }
     ResetScroll() {
@@ -20217,6 +20218,8 @@ class UIHourlyForecasts {
     }
     async Show(width, animate = true) {
         var _a;
+        for (const element of this.hourlyContainers)
+            element.set_width(-1);
         this.actor.show();
         this.actor.hide();
         this.AdjustHourlyBoxItemWidth(width);
@@ -20319,9 +20322,7 @@ class UIHourlyForecasts {
             const percipVolumeWidth = ui.PrecipVolume.get_preferred_width(-1)[1];
             const percipChanceWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
             const temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
-            const precipitationWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
-            if (precipitationWidth == null || temperatureWidth == null ||
-                hourWidth == null || iconWidth == null ||
+            if (temperatureWidth == null || hourWidth == null || iconWidth == null ||
                 percipVolumeWidth == null || percipChanceWidth == null)
                 continue;
             if (requiredWidth < hourWidth)
@@ -20330,8 +20331,10 @@ class UIHourlyForecasts {
                 requiredWidth = iconWidth;
             if (requiredWidth < temperatureWidth)
                 requiredWidth = temperatureWidth;
-            if (requiredWidth < precipitationWidth)
-                requiredWidth = precipitationWidth;
+            if (requiredWidth < percipChanceWidth)
+                requiredWidth = percipChanceWidth;
+            if (requiredWidth < percipVolumeWidth)
+                requiredWidth = percipVolumeWidth;
         }
         return requiredWidth;
     }
