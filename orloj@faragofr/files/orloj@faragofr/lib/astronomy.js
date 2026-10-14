@@ -127,6 +127,11 @@ var equationOfTime = function(jd) {
 // apparent semi-diameter (Meeus Ch. 14).
 var SUN_H0 = -0.833;
 
+// The same for a planet: a point source with negligible parallax, so the
+// horizon refraction alone (Meeus Ch. 14). The planets' altitudes are
+// geometric, and this is where they appear on the horizon.
+var PLANET_H0 = -0.5667;
+
 // { H, alwaysUp, alwaysDown }: solar hour angle (degrees) at SUN_H0, with H
 // null when the sun stays above or below SUN_H0 at that declination.
 var sunHourAngle = function(jd, lat) {

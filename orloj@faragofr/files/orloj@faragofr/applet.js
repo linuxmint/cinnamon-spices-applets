@@ -10,8 +10,6 @@ const Astronomy  = require("./lib/astronomy");
 const Dial       = require("./lib/dial");
 const Theme      = require("./lib/theme");
 
-const DIAL_SIZE = 320;
-
 class OrlojApplet extends Applet.TextApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -31,8 +29,8 @@ class OrlojApplet extends Applet.TextApplet {
 
         this._dialItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         this._drawingArea = new St.DrawingArea({
-            width:  DIAL_SIZE,
-            height: DIAL_SIZE,
+            width:  Dial.REFERENCE_SIZE,
+            height: Dial.REFERENCE_SIZE,
             reactive: true,
             track_hover: true
         });
@@ -67,9 +65,10 @@ class OrlojApplet extends Applet.TextApplet {
         this._settings.bind("latitude",        "latitude",       () => this._invalidateEvents());
         this._settings.bind("longitude",       "longitude",      () => this._invalidateEvents());
         this._settings.bind("refresh-seconds", "refreshSeconds", () => this._scheduleRefresh());
-        this._settings.bind("accent-color",    "accentColor",    () => this._refresh());
+        this._settings.bind("accent-color",    "accentColor",    () => this._applyColors());
         this._settings.bind("foreground-color","foregroundColor",() => this._applyColors());
         this._settings.bind("background-color","backgroundColor",() => this._applyColors());
+        this._settings.bind("day-color",       "dayColor",       () => this._applyColors());
         this._settings.bind("dial-size",       "dialSize",       () => this._applySize());
 
         this._applyColors();
@@ -85,14 +84,20 @@ class OrlojApplet extends Applet.TextApplet {
     }
 
     _applyColors() {
-        Theme.setBaseColors(
-            Theme.parseColor(this.backgroundColor, Theme.BACKGROUND),
-            Theme.parseColor(this.foregroundColor, Theme.FOREGROUND));
+        this._palette = Theme.makePalette(
+            Theme.parseColor(this.backgroundColor, Theme.BACKGROUND_DEFAULT),
+            Theme.parseColor(this.foregroundColor, Theme.FOREGROUND_DEFAULT),
+            Theme.parseColor(this.dayColor, null));
+        this._accent = Theme.parseColor(this.accentColor, Theme.ACCENT_DEFAULT);
+        if (this._state) {
+            this._state.palette = this._palette;
+            this._state.accent  = this._accent;
+        }
         this._drawingArea.queue_repaint();
     }
 
     _applySize() {
-        const size = Math.max(160, parseInt(this.dialSize) || DIAL_SIZE);
+        const size = Math.max(240, parseInt(this.dialSize) || Dial.REFERENCE_SIZE);
         this._drawingArea.width = size;
         this._drawingArea.height = size;
         this._drawingArea.queue_repaint();
@@ -158,7 +163,7 @@ class OrlojApplet extends Applet.TextApplet {
         const planetPos = Astronomy.planetPositions(jd);
         const lstDeg  = Astronomy.lmst(jd, lon);
 
-        const sunRA  = Astronomy.eclipticToEquatorial(sunLon, 0, jd).ra;
+        const sunEq  = Astronomy.eclipticToEquatorial(sunLon, 0, jd);
         const moonRA = Astronomy.eclipticToEquatorial(moonLon, moonLat, jd).ra;
         const planets   = {};
         const planetRAs = {};
@@ -176,30 +181,23 @@ class OrlojApplet extends Applet.TextApplet {
         const civilHour = now.getHours() + now.getMinutes() / 60
                         + now.getSeconds() / 3600;
 
-        const ss = Astronomy.sunriseSunset(now, lat, lon);
-        // Clock hour → dial degrees: noon = 0°, 15°/hr clockwise.
-        const dialFromCivil = (date) => {
-            if (!date) return null;
-            const h = date.getHours() + date.getMinutes() / 60;
-            return (h - 12) * 15;
-        };
-
         this._state = {
             now:               now,
+            latitude:          lat,
             sunLon:            sunLon,
             moonLon:           moonLon,
             moonPhaseAngle:    moonPh,
             planets:           planets,
-            sunRA:             sunRA,
+            sunRA:             sunEq.ra,
+            sunDec:            sunEq.dec,
             moonRA:            moonRA,
             planetRAs:         planetRAs,
             zodiacBoundaryRAs: this._zodiacBoundaryRAs,
             zodiacMidRAs:      this._zodiacMidRAs,
             timeHandAngle:     (civilHour - 12) * 15, // civil time
-            sunriseDialAngle:  dialFromCivil(ss && ss.rise),
-            sunsetDialAngle:   dialFromCivil(ss && ss.set),
             lstDeg:            lstDeg,
-            accent:            Theme.parseColor(this.accentColor, Theme.ACCENT_DEFAULT),
+            palette:           this._palette,
+            accent:            this._accent,
             altitudes:         altitudes
         };
 
@@ -242,8 +240,8 @@ class OrlojApplet extends Applet.TextApplet {
             if (this._state) {
                 Dial.draw(cr, w, h, this._state);
             } else {
-                cr.setSourceRGBA(Theme.BACKGROUND[0], Theme.BACKGROUND[1],
-                                 Theme.BACKGROUND[2], Theme.BACKGROUND[3]);
+                const bg = this._palette.BACKGROUND;
+                cr.setSourceRGBA(bg[0], bg[1], bg[2], bg[3]);
                 cr.rectangle(0, 0, w, h);
                 cr.fill();
             }

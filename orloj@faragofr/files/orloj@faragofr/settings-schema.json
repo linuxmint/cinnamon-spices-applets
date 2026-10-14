@@ -23,17 +23,25 @@
     "accent-color": {
         "type": "colorchooser",
         "default": "rgb(245,158,11)",
-        "description": "Accent color"
+        "description": "Accent color",
+        "tooltip": "Sun, time hand, equinox and LST stars, and the sunrise/sunset glow on the hour ring and sky band"
     },
     "foreground-color": {
         "type": "colorchooser",
         "default": "rgb(190,164,110)",
-        "description": "Foreground color (text, hands, glyphs)"
+        "description": "Foreground color",
+        "tooltip": "Hour numerals, LST readout, zodiac and planet glyphs, the moon, and the dial's rules and hairlines"
     },
     "background-color": {
         "type": "colorchooser",
         "default": "rgb(15,17,22)",
         "description": "Background color"
+    },
+    "day-color": {
+        "type": "colorchooser",
+        "default": "rgb(51,56,74)",
+        "description": "Daylight color",
+        "tooltip": "Color of the fully-lit sky on the hour ring and sky band"
     },
     "dial-size": {
         "type": "spinbutton",
