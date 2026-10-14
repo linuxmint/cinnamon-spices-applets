@@ -1,0 +1,47 @@
+.focal-entry {
+    min-width: 220px;
+    padding: 6px;
+    margin: 6px;
+    color: white;
+}
+
+.focal-swatch-row {
+    spacing: 6px;
+    padding: 4px 6px 8px 6px;
+}
+
+.focal-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.15);
+}
+
+.focal-swatch:selected {
+    border: 2px solid white;
+}
+
+.focal-swatch-transparent {
+    background-color: rgba(0,0,0,0);
+    color: white;
+    font-size: 12px;
+}
+
+.focal-section-label {
+    padding: 4px 6px 0 6px;
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+}
+
+.focal-confirm-button {
+    padding: 6px;
+    margin: 4px 6px 6px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.15);
+    text-align: center;
+    color: white;
+}
+
+.focal-confirm-button:hover {
+    background-color: rgba(255,255,255,0.1);
+}

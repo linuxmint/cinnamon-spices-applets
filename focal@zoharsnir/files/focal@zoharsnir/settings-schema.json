@@ -1,0 +1,149 @@
+{
+  "mode-section": {
+    "type": "header",
+    "description": "Mode"
+  },
+  "mode": {
+    "type": "combobox",
+    "default": "direct",
+    "options": {
+      "Direct": "direct",
+      "Calendar": "calendar"
+    },
+    "description": "Source of the panel text: Direct or Calendar",
+    "tooltip": "Direct: you type and set the text yourself.\nCalendar: shows the active event from your selected calendar(s)."
+  },
+
+  "display-section": {
+    "type": "header",
+    "description": "Display"
+  },
+  "max-text-length": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 200,
+    "step": 1,
+    "units": "characters",
+    "description": "Truncate panel text to this length (0 = no limit)",
+    "tooltip": "Applies to the final text, including any \"Until\"/\"Remaining\" suffixes in Calendar mode. Hovering the panel always shows the full untruncated text."
+  },
+  "show-icon": {
+    "type": "switch",
+    "default": true,
+    "description": "Show an icon to the left of the panel text"
+  },
+
+  "hotkey-section": {
+    "type": "header",
+    "description": "Keyboard Shortcut"
+  },
+  "hotkey": {
+    "type": "keybinding",
+    "default": "<Shift><Super>f",
+    "description": "Open the edit popup"
+  },
+
+  "custom-section": {
+    "type": "header",
+    "description": "Direct Mode Settings",
+    "dependency": "mode",
+    "dependency-value": "direct"
+  },
+  "custom-text": {
+    "type": "entry",
+    "default": "Focal - click to edit",
+    "description": "Current text",
+    "dependency": "mode",
+    "dependency-value": "direct"
+  },
+  "custom-color": {
+    "type": "colorchooser",
+    "default": "rgb(255,255,255)",
+    "description": "Text color",
+    "dependency": "mode",
+    "dependency-value": "direct"
+  },
+  "custom-bg-color": {
+    "type": "colorchooser",
+    "default": "rgba(0,0,0,0)",
+    "description": "Background color",
+    "dependency": "mode",
+    "dependency-value": "direct"
+  },
+
+  "calendar-section": {
+    "type": "header",
+    "description": "Calendar Mode Settings",
+    "dependency": "mode",
+    "dependency-value": "calendar"
+  },
+  "selected-calendar": {
+    "type": "combobox",
+    "default": "",
+    "options": {
+      "System Default": ""
+    },
+    "description": "Calendar to use",
+    "tooltip": "\"System Default\" always tracks whatever calendar your system currently considers the default (shown in parentheses) - if that changes, this follows automatically, no need to re-pick anything. The list is fetched once each time Focal (re)loads and appears here automatically - no need to reopen or reload Settings. If listing fails, an error entry appears here instead, with System Default kept as a working fallback.",
+    "dependency": "mode",
+    "dependency-value": "calendar"
+  },
+  "poll-interval-seconds": {
+    "type": "spinbutton",
+    "default": 60,
+    "min": 15,
+    "max": 600,
+    "step": 5,
+    "units": "seconds",
+    "description": "How often to re-check the calendar",
+    "dependency": "mode",
+    "dependency-value": "calendar"
+  },
+  "show-upcoming-fallback": {
+    "type": "switch",
+    "default": false,
+    "description": "When not currently in an event, show the next upcoming one (dimmed)",
+    "tooltip": "Only looks ahead until the end of today - an upcoming event tomorrow or later won't show, even with this on.",
+    "dependency": "mode",
+    "dependency-value": "calendar"
+  },
+  "default-event-color": {
+    "type": "colorchooser",
+    "default": "rgb(255,255,255)",
+    "description": "Text color for events with no color of their own",
+    "dependency": "mode",
+    "dependency-value": "calendar"
+  },
+  "override-event-color": {
+    "type": "switch",
+    "default": false,
+    "description": "Always use the color above, even for events with their own color",
+    "tooltip": "Off (default): an event's own calendar color wins when it has one, falling back to the color above otherwise. On: always use the color above, ignoring the event's own color.",
+    "dependency": "mode",
+    "dependency-value": "calendar"
+  },
+  "show-event-end-time": {
+    "type": "switch",
+    "default": false,
+    "description": "Show when the current event ends",
+    "tooltip": "Adds \"Until 5:00 PM\" after the event text. Time format (12h/24h) follows your system's setting. Only applies to the current event, not the upcoming-event preview.",
+    "dependency": "mode",
+    "dependency-value": "calendar"
+  },
+  "show-time-remaining": {
+    "type": "switch",
+    "default": false,
+    "description": "Show how much time is left in the current event",
+    "tooltip": "Adds \"Remaining 1h, 7m\" after the event text. Only applies to the current event, not the upcoming-event preview.",
+    "dependency": "mode",
+    "dependency-value": "calendar"
+  },
+  "upcoming-color": {
+    "type": "colorchooser",
+    "default": "rgb(150,150,150)",
+    "description": "Text color for the dimmed upcoming-event fallback",
+    "dependency": "mode",
+    "dependency-value": "calendar"
+  }
+}
