@@ -1,0 +1,9 @@
+{
+    "uuid": "xstatus-applet-reloaded@dshep79",
+    "name": "XApp Status Applet Reloaded",
+    "description": "Hosts XApp status icons and lets you drag them into a persistent custom order.",
+    "max-instances": -1,
+    "version": "1.0.0",
+    "author": "dshep79",
+    "website": "https://github.com/dshep79/xstatus-applet-reloaded"
+}
