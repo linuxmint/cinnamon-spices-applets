@@ -204,10 +204,10 @@ MyApplet.prototype = {
         });
 
         //thevoice
-        var tvstation11 = _("The Voice");
+        var tvstation11 = _("The Voice TV");
         this.TvItem.menu.addAction(tvstation11, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='The Voice' https://bss1.neterra.tv/thevoice/stream_0.m3u8");
+            Util.spawnCommandLine("mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='The Voice TV' https://bss1.neterra.tv/thevoice/stream_0.m3u8");
             Main.notify(_("Watching %s").format(tvstation11));
         });
 
@@ -219,11 +219,11 @@ MyApplet.prototype = {
             Main.notify(_("Watching %s").format(tvstation12));
         });
 
-        //EuronewsBG
-        var tvstation13 = _("Euronews Bulgaria");
+        //ThisIsBulgariaHD
+        var tvstation13 = _("This is Bulgaria HD");
         this.TvItem.menu.addAction(tvstation13, () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='Euronews Bulgaria' 'https://e102-ts.cdn.bg/euronews/fls/euronews.stream/at=O0M9MjEzLjkxLjE5OS4yMjU7RT0xNzc3Njc2OTIyO0E9MTtLPTM7UD0wMTExMDtTPTI3ZDMwYzUwNjNjNmIzYmM1MTJlZDg3NzgxNjliNzc2MWNhYTM4YzE=/chunklist.m3u8'");
+            Util.spawnCommandLine("mpv --config-dir=/home/$USER/.local/share/cinnamon/applets/BgRadio@spacy01/mpv --title='This is Bulgaria HD' 'https://streamer103.neterra.tv/thisisbulgaria/thisisbulgaria_HD.m3u8'");
             Main.notify(_("Watching %s").format(tvstation));
         });
 
@@ -233,7 +233,6 @@ MyApplet.prototype = {
         //kill
         this.menu.addAction(_("Stop"), () => {
             Util.spawnCommandLine("killall -9 mpv");
-            Util.spawnCommandLine("killall -9 rtmpdump");
             Main.notify(_("All Stop"));
         });
     },
