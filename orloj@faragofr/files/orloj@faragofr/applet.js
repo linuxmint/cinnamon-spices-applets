@@ -136,7 +136,8 @@ class OrlojApplet extends Applet.TextApplet {
         const sunEv  = this._cachedSunEvent.event;
         const moonEv = this._cachedMoonEvent.event;
         const fmtEv  = (ev) => {
-            if (!ev) return ">1d";
+            // Null: no rise or set in the scan window.
+            if (!ev) return "—";
             const arrow = ev.type === "rise" ? "↑" : "↓";
             const days = Math.floor((ev.time - now) / 86400000);
             if (days >= 7) return `${arrow}>1w`;
@@ -154,14 +155,23 @@ class OrlojApplet extends Applet.TextApplet {
         const moonLon = Astronomy.moonLongitude(jd);
         const moonLat = Astronomy.moonLatitude(jd);
         const moonPh  = Astronomy.moonPhase(jd);
-        const planets = Astronomy.planetLongitudes(jd);
+        const planetPos = Astronomy.planetPositions(jd);
         const lstDeg  = Astronomy.lmst(jd, lon);
 
         const sunRA  = Astronomy.eclipticToEquatorial(sunLon, 0, jd).ra;
         const moonRA = Astronomy.eclipticToEquatorial(moonLon, moonLat, jd).ra;
+        const planets   = {};
         const planetRAs = {};
-        for (const name of ["Mercury", "Venus", "Mars", "Jupiter", "Saturn"])
-            planetRAs[name] = Astronomy.eclipticToEquatorial(planets[name], 0, jd).ra;
+        const altitudes = {
+            Sun:  Astronomy.apparentAltitude(jd, sunLon,  0,       lat, lon),
+            Moon: Astronomy.apparentAltitude(jd, moonLon, moonLat, lat, lon)
+        };
+        for (const name of Astronomy.PLANETS) {
+            const pos = planetPos[name];
+            planets[name]   = pos.lon;
+            planetRAs[name] = Astronomy.eclipticToEquatorial(pos.lon, pos.lat, jd).ra;
+            altitudes[name] = Astronomy.apparentAltitude(jd, pos.lon, pos.lat, lat, lon);
+        }
 
         const civilHour = now.getHours() + now.getMinutes() / 60
                         + now.getSeconds() / 3600;
@@ -172,16 +182,6 @@ class OrlojApplet extends Applet.TextApplet {
             if (!date) return null;
             const h = date.getHours() + date.getMinutes() / 60;
             return (h - 12) * 15;
-        };
-
-        const altitudes = {
-            Sun:     Astronomy.apparentAltitude(jd, sunLon,           0, lat, lon),
-            Moon:    Astronomy.apparentAltitude(jd, moonLon,    moonLat, lat, lon),
-            Mercury: Astronomy.apparentAltitude(jd, planets.Mercury, 0, lat, lon),
-            Venus:   Astronomy.apparentAltitude(jd, planets.Venus,   0, lat, lon),
-            Mars:    Astronomy.apparentAltitude(jd, planets.Mars,    0, lat, lon),
-            Jupiter: Astronomy.apparentAltitude(jd, planets.Jupiter, 0, lat, lon),
-            Saturn:  Astronomy.apparentAltitude(jd, planets.Saturn,  0, lat, lon)
         };
 
         this._state = {
