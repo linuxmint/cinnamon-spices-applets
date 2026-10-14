@@ -1,0 +1,499 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Combined Monitor Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-14 22:09+0300\n"
+"PO-Revision-Date: 2026-05-14 23:50+0300\n"
+"Last-Translator: Gemini Code Assist\n"
+"Language-Team: Indonesian\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "Slot 1 (Standar)"
+
+msgid "Slot 2 (Empty)"
+msgstr "Slot 2 (Kosong)"
+
+msgid "Slot 3 (Empty)"
+msgstr "Slot 3 (Kosong)"
+
+msgid "Separator"
+msgstr "Pemisah"
+
+msgid "Space"
+msgstr "Spasi"
+
+msgid "No Separator"
+msgstr "Tanpa Pemisah"
+
+msgid "Symbols"
+msgstr "Simbol"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "Icon-White"
+msgstr "Ikon-Putih"
+
+msgid "Icon-Dark"
+msgstr "Ikon-Gelap"
+
+msgid "No Symbol (Text Label)"
+msgstr "Tanpa Simbol (Label Teks)"
+
+msgid "TEMP"
+msgstr "SUHU"
+
+msgid "RAM"
+msgstr "RAM"
+
+msgid "SWAP"
+msgstr "SWAP"
+
+msgid "Profile Management"
+msgstr "Manajemen Profil"
+
+msgid "Activate (Load)"
+msgstr "Aktifkan (Muat)"
+
+msgid "Save Current Settings"
+msgstr "Simpan Pengaturan Saat Ini"
+
+msgid "System Monitor"
+msgstr "Monitor Sistem"
+
+msgid "Restart Cinnamon"
+msgstr "Mulai Ulang Cinnamon"
+
+msgid "Slot is empty - Ready to save"
+msgstr "Slot kosong - Siap untuk disimpan"
+
+msgid "N/A"
+msgstr "T/A"
+
+# settings-schema.json strings
+msgid "Decimal places for temperature"
+msgstr "Tempat desimal untuk suhu"
+
+msgid ""
+"Number of decimal places to display for temperature. Set to 0 for whole "
+"numbers."
+msgstr ""
+"Jumlah tempat desimal untuk ditampilkan untuk suhu. Atur ke 0 untuk angka "
+"bulat."
+
+msgid "decimal places"
+msgstr "tempat desimal"
+
+msgid "Profile Saved: %s"
+msgstr "Profil Disimpan: %s"
+
+msgid "Active: %s"
+msgstr "Aktif: %s"
+
+# Page Titles
+msgid "CPU Temperature"
+msgstr "Suhu CPU"
+
+msgid "Profiles"
+msgstr "Profil"
+
+msgid "General"
+msgstr "Umum"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "Urutan Metrik"
+
+msgid "Display"
+msgstr "Tampilan"
+
+msgid "Thresholds"
+msgstr "Ambang Batas"
+
+msgid "Colors"
+msgstr "Warna"
+
+msgid "Thresholds (in °C)"
+msgstr "Ambang Batas (dalam °C)"
+
+msgid "Settings"
+msgstr "Pengaturan"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "Profil (Slot 1 sampai 3)"
+
+msgid "Global"
+msgstr "Global"
+
+# CPU
+msgid "Show CPU"
+msgstr "Tampilkan CPU"
+
+msgid "Text for CPU"
+msgstr "Teks untuk CPU"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "Simbol/ikon khusus untuk CPU. Biarkan kosong untuk label teks."
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "Tampilkan tanda persentase (%) untuk CPU"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed without the percentage "
+"sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in "
+"the 'General' tab acts as a master switch."
+msgstr ""
+"Jika dinonaktifkan, hanya nilainya (misal, '45') yang ditampilkan tanpa "
+"tanda persentase (misal, '45%'). Opsi 'Tampilkan tanda persentase (%) "
+"(Saklar Utama)' di tab 'Umum' bertindak sebagai saklar utama."
+
+msgid "Threshold LOW"
+msgstr "Ambang RENDAH"
+
+msgid "The LOW color is used below this value"
+msgstr "Warna RENDAH digunakan di bawah nilai ini"
+
+msgid "Threshold MED"
+msgstr "Ambang SEDANG"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "Warna SEDANG digunakan antara RENDAH dan SEDANG"
+
+msgid "Threshold HIGH"
+msgstr "Ambang TINGGI"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "Warna TINGGI digunakan antara SEDANG dan TINGGI"
+
+msgid "Enable color change for CPU"
+msgstr "Aktifkan perubahan warna untuk CPU"
+
+msgid "Color LOW"
+msgstr "Warna RENDAH"
+
+msgid "Color MED"
+msgstr "Warna SEDANG"
+
+msgid "Color HIGH"
+msgstr "Warna TINGGI"
+
+msgid "Color CRITICAL"
+msgstr "Warna KRITIS"
+
+msgid "Used above the HIGH threshold"
+msgstr "Digunakan di atas ambang batas TINGGI"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "Tampilkan Suhu"
+
+msgid ""
+"Enables the display of CPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Please refer to the "
+"instructions in the README.md."
+msgstr ""
+"Mengaktifkan tampilan suhu CPU. **Penting:** Pada banyak sistem, menginstal "
+"paket 'lm-sensors' dan menjalankan 'sudo sensors-detect' diperlukan agar "
+"fungsi ini bekerja dengan benar. Silakan merujuk ke instruksi di README.md."
+
+msgid "Show °C symbol"
+msgstr "Tampilkan simbol °C"
+
+msgid ""
+"Controls whether the Celsius symbol (°C or °F) should be displayed after the "
+"value."
+msgstr ""
+"Mengontrol apakah simbol Celsius (°C atau °F) harus ditampilkan setelah "
+"nilai."
+
+msgid "Text for Temperature"
+msgstr "Teks untuk Suhu"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr "Simbol/ikon khusus untuk Suhu. Biarkan kosong untuk label teks."
+
+msgid "Unit of Measurement"
+msgstr "Satuan Pengukuran"
+
+msgid "Celsius (°C)"
+msgstr "Celsius (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "Fahrenheit (°F)"
+
+msgid ""
+"Choose whether the temperature should be displayed in Celsius or Fahrenheit. "
+"Threshold values must be adjusted accordingly."
+msgstr ""
+"Pilih apakah suhu harus ditampilkan dalam Celsius atau Fahrenheit. Nilai "
+"ambang batas harus disesuaikan."
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr "Warna RENDAH digunakan di bawah nilai ini (berlaku untuk °C dan °F)"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr ""
+"Warna SEDANG digunakan antara RENDAH dan SEDANG (berlaku untuk °C dan °F)"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr ""
+"Warna TINGGI digunakan antara SEDANG dan TINGGI (berlaku untuk °C dan °F)"
+
+msgid "Enable color change for TEMP"
+msgstr "Aktifkan perubahan warna untuk TEMP"
+
+msgid "Color LOW (Green)"
+msgstr "Warna RENDAH (Hijau)"
+
+msgid "Color MED (Orange)"
+msgstr "Warna SEDANG (Oranye)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "Warna TINGGI (Merah-Oranye)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "Warna KRITIS (Merah)"
+
+# RAM
+msgid "Show RAM"
+msgstr "Tampilkan RAM"
+
+msgid "Text for RAM"
+msgstr "Teks untuk RAM"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "Simbol/ikon khusus untuk RAM. Biarkan kosong untuk label teks."
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "Tampilkan tanda persentase (%) untuk RAM"
+
+msgid "Display Mode"
+msgstr "Mode Tampilan"
+
+msgid "Percentage Usage (%)"
+msgstr "Persentase Penggunaan (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "Memori Digunakan (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "Memori Bebas (MB/GB)"
+
+msgid ""
+"Choose whether percentage usage or used/free memory in MB/GB should be "
+"displayed."
+msgstr ""
+"Pilih apakah persentase penggunaan atau memori digunakan/bebas dalam MB/GB "
+"harus ditampilkan."
+
+msgid "Enable color change for RAM"
+msgstr "Aktifkan perubahan warna untuk RAM"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "Tampilkan SWAP"
+
+msgid "Text for SWAP"
+msgstr "Teks untuk SWAP"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr "Simbol/ikon khusus untuk SWAP. Biarkan kosong untuk label teks."
+
+msgid "Only show SWAP when used"
+msgstr "Hanya tampilkan SWAP saat digunakan"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr ""
+"Jika aktif, SWAP hanya ditampilkan saat penggunaan lebih besar dari 0%."
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "Tampilkan tanda persentase (%) untuk SWAP"
+
+msgid "Enable color change for SWAP"
+msgstr "Aktifkan perubahan warna untuk SWAP"
+
+msgid ""
+"If the value is less than or equal to the LOW threshold, the LOW color is "
+"used."
+msgstr ""
+"Jika nilainya kurang dari atau sama dengan ambang RENDAH, warna RENDAH "
+"digunakan."
+
+msgid ""
+"If the value is greater than LOW and less than or equal to the MED "
+"threshold, the MED color is used."
+msgstr ""
+"Jika nilainya lebih besar dari RENDAH dan kurang dari atau sama dengan "
+"ambang SEDANG, warna SEDANG digunakan."
+
+msgid ""
+"If the value is greater than MED and less than or equal to the HIGH "
+"threshold, the HIGH color is used."
+msgstr ""
+"Jika nilainya lebih besar dari SEDANG dan kurang dari atau sama dengan "
+"ambang TINGGI, warna TINGGI digunakan."
+
+# Order
+msgid "CPU Position"
+msgstr "Posisi CPU"
+
+msgid "Position 1 (Left)"
+msgstr "Posisi 1 (Kiri)"
+
+msgid "Position 2"
+msgstr "Posisi 2"
+
+msgid "Position 3"
+msgstr "Posisi 3"
+
+msgid "Position 4 (Right)"
+msgstr "Posisi 4 (Kanan)"
+
+msgid "Position 5"
+msgstr "Posisi 5"
+
+msgid ""
+"Defines the display position of CPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"Menentukan posisi tampilan CPU. Posisi secara otomatis ditukar dengan metrik "
+"pada posisi yang sama."
+
+msgid "TEMP Position"
+msgstr "Posisi TEMP"
+
+msgid "RAM Position"
+msgstr "Posisi RAM"
+
+msgid "SWAP Position"
+msgstr "Posisi SWAP"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "Interval Pembaruan (ms)"
+
+msgid "Show separator between metrics"
+msgstr "Tampilkan pemisah antar metrik"
+
+msgid "Separator Text"
+msgstr "Teks Pemisah"
+
+msgid "Separator Color"
+msgstr "Warna Pemisah"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "Tampilkan tanda persentase (%) (Saklar Utama)"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed for all percentage "
+"displays without the percentage sign (e.g., '45%'). Individual switches for "
+"CPU/RAM/SWAP must also be active."
+msgstr ""
+"Jika dinonaktifkan, hanya nilainya (misal, '45') yang ditampilkan untuk "
+"semua tampilan persentase tanpa tanda persentase (misal, '45%'). Saklar "
+"individual untuk CPU/RAM/SWAP juga harus aktif."
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "Durasi Pesan Profil (Detik)"
+
+msgid ""
+"How long should the message ('Profile saved', 'Profile active') be displayed "
+"in the panel."
+msgstr ""
+"Berapa lama pesan ('Profil disimpan', 'Profil aktif') harus ditampilkan di "
+"panel."
+
+msgid "Profile 1 Name"
+msgstr "Nama Profil 1"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "Masukkan nama profil khusus di kolom teks!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr "Klik 'Aktifkan' atau 'Simpan' untuk Profil 1 di menu pop-up."
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "Data tersimpan untuk Profil 1 (internal)"
+
+msgid "Profile 2 Name"
+msgstr "Nama Profil 2"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr "Klik 'Aktifkan' atau 'Simpan' untuk Profil 2 di menu pop-up."
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "Data tersimpan untuk Profil 2 (internal)"
+
+msgid "Profile 3 Name"
+msgstr "Nama Profil 3"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr "Klik 'Aktifkan' atau 'Simpan' untuk Profil 3 di menu pop-up."
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "Data tersimpan untuk Profil 3 (internal)"
+
+# metadata.json strings
+msgid "Combined Monitor"
+msgstr "Monitor Gabungan"
+
+msgid ""
+"A compact and comprehensive system monitor for Cinnamon. Displays CPU, RAM, "
+"and SWAP usage in a single panel element. Configure colors, thresholds, "
+"separators, and the order of metrics. Supports displaying text, theme icons, "
+"or custom symbols for perfect integration into your panel."
+msgstr ""
+"Monitor sistem yang ringkas dan komprehensif untuk Cinnamon. Menampilkan "
+"penggunaan CPU, RAM, dan SWAP dalam satu elemen panel. Konfigurasikan warna, "
+"ambang batas, pemisah, dan urutan metrik. Mendukung tampilan teks, ikon "
+"tema, atau simbol khusus untuk integrasi sempurna ke panel Anda."
+
+# Page Titles
+msgid "GPU Temperature"
+msgstr "Suhu GPU"
+
+# GPU
+msgid "Show GPU Temperature"
+msgstr "Tampilkan Suhu GPU"
+
+msgid ""
+"Enables the display of GPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Integrated GPUs (iGPUs) may "
+"report their temperature as part of the CPU temperature."
+msgstr ""
+"Mengaktifkan tampilan suhu GPU. **Penting:** Pada banyak sistem, menginstal "
+"paket 'lm-sensors' dan menjalankan 'sudo sensors-detect' diperlukan agar "
+"fungsi ini bekerja dengan benar. GPU terintegrasi (iGPU) mungkin melaporkan "
+"suhunya sebagai bagian dari suhu CPU."
+
+msgid "Text for GPU"
+msgstr "Teks untuk GPU"
+
+msgid "Custom symbol/icon for GPU. Leave empty for text label."
+msgstr "Simbol/ikon khusus untuk GPU. Biarkan kosong untuk label teks."
+
+msgid "Decimal places for GPU temperature"
+msgstr "Tempat desimal untuk suhu GPU"
+
+msgid "Enable color change for GPU"
+msgstr "Aktifkan perubahan warna untuk GPU"
+
+# Order
+msgid "GPU Position"
+msgstr "Posisi GPU"
+
+msgid ""
+"Defines the display position of GPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"Menentukan posisi tampilan GPU. Posisi secara otomatis ditukar dengan metrik "
+"pada posisi yang sama."
