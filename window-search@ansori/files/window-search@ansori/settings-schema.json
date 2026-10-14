@@ -1,0 +1,68 @@
+{
+    "header_1": {
+        "type": "header",
+        "description": "General Settings"
+    },
+    "use_custom_icon": {
+        "type": "switch",
+        "default": false,
+        "description": "Enable Custom Icon (Overrides preset)"
+    },
+    "icon_preset": {
+        "type": "combobox",
+        "default": "system-search-symbolic",
+        "description": "Preset Icon",
+        "options": {
+            "Search Icon": "system-search-symbolic",
+            "OS Logo": "start-here-symbolic",
+            "Binoculars": "edit-find-symbolic"
+        }
+    },
+    "custom_icon": {
+        "type": "entry",
+        "default": "folder",
+        "description": "Custom Icon Name (e.g., folder, terminal)"
+    },
+    "custom_placeholder": {
+        "type": "entry",
+        "default": "Search app / calc / run script...",
+        "description": "Placeholder Text"
+    },
+    "header_2": {
+        "type": "header",
+        "description": "Search Settings"
+    },
+    "max_results": {
+        "type": "spinbutton",
+        "default": 7,
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "units": "items",
+        "description": "Maximum number of results to display"
+    },
+    "keybinding": {
+        "type": "keybinding",
+        "default": "<Super>q",
+        "description": "Global keyboard shortcut"
+    },
+    "header_3": {
+        "type": "header",
+        "description": "Script Runner Settings"
+    },
+    "script_prefix": {
+        "type": "entry",
+        "default": "sh",
+        "description": "Trigger word for script runner (e.g., sh, run)"
+    },
+    "script_paths": {
+        "type": "entry",
+        "default": "~/scripts, /usr/local/bin",
+        "description": "Directories to search for scripts (comma-separated)"
+    },
+    "terminal_app": {
+        "type": "entry",
+        "default": "x-terminal-emulator -e",
+        "description": "Terminal execution command"
+    }
+}
