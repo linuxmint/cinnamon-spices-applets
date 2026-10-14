@@ -8,6 +8,7 @@ const Mainloop = imports.mainloop;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
+const { readFileAsync } = require('./lib/readFileAsync');
 
 const UUID = "temperature@fevimu";
 
@@ -131,7 +132,7 @@ CPUTemperatureApplet.prototype = {
     this.buildMenu(this.menuItems);
     this.menu.toggle();
     // While the menu is closed only the CPU value is read from sysfs; fetch the full list now.
-    if (this.menu.isOpen && this._cpuHwmonDir) {
+    if (this.menu.isOpen && this._cpuHwmon) {
       this.updateTemperature();
     }
   },
@@ -193,12 +194,25 @@ CPUTemperatureApplet.prototype = {
     // Reading the CPU hwmon files is enough for the panel label. Spawning `sensors` every few
     // seconds forks the whole Cinnamon process and also polls every other chip: NVMe drives and
     // Wi-Fi adapters get woken up just to refresh a number nobody is looking at.
-    if (!this.menu.isOpen) {
-      let cpuTemps = this._readCpuHwmon();
-      if (cpuTemps) {
-        this._updateTemperature('', cpuTemps);
-        return true;
+    if (!this.menu.isOpen && this._cpuHwmon !== null) {
+      if (!this.waitForHwmon) {
+        this.waitForHwmon = true;
+        this._readCpuHwmon().then((cpuTemps) => {
+          this.waitForHwmon = false;
+          if (!this.isLooping) {
+            return;
+          }
+          if (cpuTemps) {
+            this._updateTemperature('', cpuTemps);
+          } else if (this._cpuHwmon === null) {
+            this.updateTemperature(); // no CPU hwmon device: use sensors from now on
+          }
+        }).catch((e) => {
+          this.waitForHwmon = false;
+          global.logError(UUID + ': ' + e);
+        });
       }
+      return true;
     }
 
     if (this.sensorsPath && !this.waitForCmd) {
@@ -209,48 +223,70 @@ CPUTemperatureApplet.prototype = {
     return true;
   },
 
+  // Resolves to the trimmed contents, or null if the file can't be read.
   _readHwmonFile: function(path) {
-    try {
-      let [ok, data] = GLib.file_get_contents(path);
-      return ok ? imports.byteArray.toString(data).trim() : null;
-    } catch (e) {
-      return null;
-    }
+    return readFileAsync(path).then((data) => data.trim(), () => null);
   },
 
+  // Finds the CPU hwmon device and its temperature inputs. Labels and limits don't change,
+  // so they are read here once; afterwards each update only reads the tempN_input files.
+  _findCpuHwmon: function() {
+    let dirs = [];
+    for (let i = 0; i < 32; i++) {
+      dirs.push('/sys/class/hwmon/hwmon' + i);
+    }
+    return Promise.all(dirs.map((dir) => this._readHwmonFile(dir + '/name'))).then((names) => {
+      let dir = dirs.find((d, i) => cpuHwmonNames.indexOf(names[i]) > -1);
+      if (!dir) {
+        return null;
+      }
+      let ids = [];
+      for (let i = 1; i < 64; i++) {
+        ids.push(i);
+      }
+      return Promise.all(ids.map((i) => this._readHwmonFile(dir + '/temp' + i + '_input'))).then((inputs) => {
+        let found = ids.filter((i, k) => inputs[k] !== null);
+        return Promise.all(found.map((i) => Promise.all(['label', 'max', 'crit'].map(
+          (file) => this._readHwmonFile(dir + '/temp' + i + '_' + file))))).then((infos) => {
+          let temps = found.map((i, k) => {
+            let [label, high, crit] = infos[k];
+            let temp = {input: dir + '/temp' + i + '_input', label: label || ('temp' + i)};
+            if (high !== null) temp.high = parseInt(high) / 1000;
+            if (crit !== null) temp.crit = parseInt(crit) / 1000;
+            return temp;
+          });
+          return temps.length > 0 ? temps : null;
+        });
+      });
+    });
+  },
+
+  // Resolves to the CPU temperatures read from hwmon, or null (no such device, or it went away).
   _readCpuHwmon: function() {
-    if (this._cpuHwmonDir === undefined) {
-      this._cpuHwmonDir = null;
-      for (let i = 0; i < 32; i++) {
-        let dir = '/sys/class/hwmon/hwmon' + i;
-        if (cpuHwmonNames.indexOf(this._readHwmonFile(dir + '/name')) > -1) {
-          this._cpuHwmonDir = dir;
-          break;
+    let found = this._cpuHwmon ? Promise.resolve(this._cpuHwmon) : this._findCpuHwmon();
+    return found.then((temps) => {
+      this._cpuHwmon = temps;
+      if (!temps) {
+        return null;
+      }
+      return Promise.all(temps.map((temp) => this._readHwmonFile(temp.input))).then((inputs) => {
+        let entries = [];
+        temps.forEach((temp, k) => {
+          if (inputs[k] === null) {
+            return;
+          }
+          let entry = {label: temp.label, value: parseInt(inputs[k]) / 1000};
+          if (temp.high !== undefined) entry.high = temp.high;
+          if (temp.crit !== undefined) entry.crit = temp.crit;
+          entries.push(entry);
+        });
+        if (entries.length === 0) {
+          this._cpuHwmon = undefined; // hwmon devices may be renumbered (driver reload); look again next time
+          return null;
         }
-      }
-    }
-    if (!this._cpuHwmonDir) {
-      return null;
-    }
-    let entries = [];
-    for (let i = 1; i < 64; i++) {
-      let base = this._cpuHwmonDir + '/temp' + i;
-      let input = this._readHwmonFile(base + '_input');
-      if (input === null) {
-        continue;
-      }
-      let entry = {label: this._readHwmonFile(base + '_label') || ('temp' + i), value: parseInt(input) / 1000};
-      let high = this._readHwmonFile(base + '_max');
-      let crit = this._readHwmonFile(base + '_crit');
-      if (high !== null) entry.high = parseInt(high) / 1000;
-      if (crit !== null) entry.crit = parseInt(crit) / 1000;
-      entries.push(entry);
-    }
-    if (entries.length === 0) {
-      this._cpuHwmonDir = undefined; // hwmon devices may be renumbered (driver reload); look again next time
-      return null;
-    }
-    return entries;
+        return entries;
+      });
+    });
   },
 
   _updateTemperature: function(sensorsOutput, cpuTemps = null) {
