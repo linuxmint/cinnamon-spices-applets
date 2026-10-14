@@ -6,7 +6,9 @@ const Mainloop   = imports.mainloop;
 const St         = imports.gi.St;
 const GLib       = imports.gi.GLib;
 const Clutter    = imports.gi.Clutter;
-let Astronomy, Dial, Theme;
+const Astronomy  = require("./lib/astronomy");
+const Dial       = require("./lib/dial");
+const Theme      = require("./lib/theme");
 
 const DIAL_SIZE = 320;
 
@@ -22,6 +24,10 @@ class OrlojApplet extends Applet.TextApplet {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
+        // The dial is only computed while it can be seen.
+        this.menu.connect("open-state-changed", (menu, open) => {
+            if (open) this._refresh();
+        });
 
         this._dialItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         this._drawingArea = new St.DrawingArea({
@@ -41,6 +47,7 @@ class OrlojApplet extends Applet.TextApplet {
         this._lastHoverLabel = null;
 
         this._state = null;
+        this._timer = null;
         this._cachedSunEvent = null;
         this._cachedMoonEvent = null;
 
@@ -140,6 +147,8 @@ class OrlojApplet extends Applet.TextApplet {
         };
         this.set_applet_label(`☀${fmtEv(sunEv)} ☾${fmtEv(moonEv)}`);
 
+        if (!this.menu.isOpen) return;
+
         const jd      = Astronomy.julianDay(now);
         const sunLon  = Astronomy.sunLongitude(jd);
         const moonLon = Astronomy.moonLongitude(jd);
@@ -198,7 +207,7 @@ class OrlojApplet extends Applet.TextApplet {
     }
 
     _onMotion(actor, event) {
-        if (!this._state) return false;
+        if (!this._state) return Clutter.EVENT_PROPAGATE;
         const [sx, sy] = event.get_coords();
         const [ax, ay] = actor.get_transformed_position();
         // Use the logical allocation, not get_surface_size(): the surface is
@@ -206,7 +215,7 @@ class OrlojApplet extends Applet.TextApplet {
         // pointer coords above are logical. hitTest must see the same space.
         const [w, h] = actor.get_size();
         const label = Dial.hitTest(w, h, this._state, sx - ax, sy - ay);
-        if (label === this._lastHoverLabel) return false;
+        if (label === this._lastHoverLabel) return Clutter.EVENT_PROPAGATE;
         this._lastHoverLabel = label;
         if (label) {
             this._tooltip.set_text(label);
@@ -253,14 +262,11 @@ class OrlojApplet extends Applet.TextApplet {
             this._timer = null;
         }
         if (this._tooltip) this._tooltip.destroy();
+        this.menu.destroy();
         if (this._settings) this._settings.finalize();
     }
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
-    imports.searchPath.unshift(metadata.path + "/lib");
-    Astronomy = imports.astronomy;
-    Dial      = imports.dial;
-    Theme     = imports.theme;
     return new OrlojApplet(metadata, orientation, panelHeight, instanceId);
 }
