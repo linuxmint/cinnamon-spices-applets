@@ -134,19 +134,7 @@
           <option value="1000000">1M tokens</option>
         </select>
       </label>
-      <label>Proveedor de consejos con IA
-        <select id="prov">
-          <option value="gemini">Google Gemini (aistudio.google.com)</option>
-          <option value="groq">Groq (console.groq.com)</option>
-          <option value="openrouter">OpenRouter (openrouter.ai)</option>
-        </select>
-      </label>
-      <label>API key <input id="key" type="password" autocomplete="off" placeholder="Pega tu key gratuita"></label>
-      <label>Modelo <input id="model" autocomplete="off"></label>
-      <label>&nbsp;<button id="ask">Pedir consejo con IA</button></label>
     </div>
-    <p class="note">La key se guarda solo en este navegador. Al pedir consejo, las métricas y tus últimos 6 mensajes
-      (recortados) se envían al proveedor elegido. Sin key, los consejos salen de reglas locales y no sale nada de tu equipo.</p>
   </details>
 </main>
 
@@ -157,8 +145,6 @@ const store = {
   get: k => { try { return localStorage.getItem('vaso.' + k) || ''; } catch { return ''; } },
   set: (k, v) => { try { localStorage.setItem('vaso.' + k, v); } catch {} },
 };
-const MODELS = { gemini: 'gemini-2.5-flash', groq: 'llama-3.3-70b-versatile',
-                 openrouter: 'meta-llama/llama-3.3-70b-instruct:free' };
 const fmt = n => n >= 1e6 ? (n / 1e6).toFixed(2) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(1) + 'k' : String(n);
 const color = level => getComputedStyle(document.documentElement).getPropertyValue('--' + level).trim();
 
@@ -226,31 +212,7 @@ async function loadSessions() {
   } catch {}
 }
 
-$('ask').onclick = async () => {
-  $('ask').disabled = true;
-  $('ai').textContent = 'Consultando…';
-  try {
-    const r = await fetch('/api/advice', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ provider: $('prov').value, key: $('key').value, model: $('model').value,
-                             s: $('sel').value, limit: $('limit').value }) });
-    const j = await r.json();
-    $('ai').textContent = r.ok ? '🤖 ' + j.text : '⚠️ ' + j.error;
-  } catch (e) { $('ai').textContent = '⚠️ ' + e.message; }
-  $('ask').disabled = false;
-};
-
-// Cada proveedor recuerda su propia key y su modelo.
-function loadProvider() {
-  const p = $('prov').value;
-  $('key').value = store.get('key.' + p);
-  $('model').value = store.get('model.' + p) || MODELS[p];
-}
-$('prov').value = store.get('prov') || 'gemini';
 $('limit').value = store.get('limit') || '0';
-loadProvider();
-$('prov').onchange = () => { store.set('prov', $('prov').value); loadProvider(); };
-$('key').onchange = () => store.set('key.' + $('prov').value, $('key').value.trim());
-$('model').onchange = () => store.set('model.' + $('prov').value, $('model').value.trim());
 $('limit').onchange = () => { store.set('limit', $('limit').value); refresh(); };
 $('sel').onchange = () => { $('ai').textContent = ''; refresh(); };
 

@@ -20,7 +20,7 @@ The interface is in Spanish.
 
 Everything runs locally. The applet reads the session transcripts Claude Code already keeps in `~/.claude/projects` and only extracts the session title and token counts from them. Nothing is sent anywhere.
 
-The optional full page listens on `127.0.0.1` only. Its "ask an AI" button is off until you paste your own API key, and only then sends the session figures and your latest messages to the provider you chose.
+The optional full page is served on `127.0.0.1` only. This applet makes no network connections to the outside.
 
 ## Configuration
 
