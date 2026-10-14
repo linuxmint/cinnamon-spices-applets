@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vaso de contexto</title>
+<style>
+  :root {
+    --bg: #f3f0e8; --card: #fffdf8; --ink: #1d2733; --mute: #6b7684; --line: #ddd6c8;
+    --glass: #9aa7b5; --water: #3a9fe0;
+    --ok: #3a9fe0; --watch: #1fa896; --compact: #d9932a; --new: #d8503f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0e1620; --card: #16212e; --ink: #e8edf2; --mute: #8b98a8; --line: #26354a; --glass: #5d6f84; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 900px; margin: 0 auto; padding: 24px 16px 48px; }
+  header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; margin-bottom: 20px; }
+  h1 { font-size: 20px; margin: 0; letter-spacing: -0.01em; }
+  #session { color: var(--mute); font-size: 13px; overflow-wrap: anywhere; }
+  .grid { display: grid; grid-template-columns: minmax(200px, 280px) 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } .cup { max-width: 240px; margin: 0 auto; } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* El vaso */
+  .cup svg { width: 100%; height: auto; display: block; }
+  #water { transition: transform 1.2s cubic-bezier(.3, 1.3, .5, 1), fill .6s; fill: var(--water); }
+  #wave { animation: slosh 3.2s linear infinite; }
+  @keyframes slosh { to { transform: translateX(-100px); } }
+  @media (prefers-reduced-motion: reduce) { #wave { animation: none; } #water { transition: none; } }
+  .tick { stroke: var(--glass); stroke-width: 1; stroke-dasharray: 3 3; }
+  .tickl { fill: var(--mute); font-size: 9px; }
+  .big { font-size: 44px; font-weight: 700; line-height: 1; text-align: center; margin-top: 8px; }
+  .sub { text-align: center; color: var(--mute); font-size: 13px; }
+
+  /* Indicadores */
+  .advice { border-left: 5px solid var(--water); }
+  .advice h2 { margin: 0 0 4px; font-size: 17px; }
+  .advice p { margin: 0; }
+  .advice ul { margin: 8px 0 0; padding-left: 18px; color: var(--mute); font-size: 14px; }
+  #ai { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); white-space: pre-wrap; }
+  #ai:empty { display: none; }
+  .bars { display: grid; gap: 12px; margin-top: 16px; }
+  .bar label { display: flex; justify-content: space-between; font-size: 13px; color: var(--mute); }
+  .bar label b { color: var(--ink); font-weight: 600; }
+  .track { height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; margin-top: 4px; }
+  .track i { display: block; height: 100%; width: 0; border-radius: 4px; background: var(--water); transition: width .8s; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; margin-top: 16px; }
+  .stats div { font-size: 12px; color: var(--mute); }
+  .stats b { display: block; font-size: 18px; color: var(--ink); }
+  #spark { width: 100%; height: 48px; margin-top: 12px; display: block; }
+  #spark polyline { fill: none; stroke: var(--water); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+
+  /* Ajustes */
+  details { margin-top: 24px; }
+  summary { cursor: pointer; font-weight: 600; }
+  .form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 12px; }
+  .form label { font-size: 13px; color: var(--mute); display: grid; gap: 4px; }
+  input, select, button { font: inherit; color: var(--ink); background: var(--bg);
+                          border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; width: 100%; }
+  button { cursor: pointer; background: var(--water); color: #fff; border-color: transparent; font-weight: 600; }
+  button:disabled { opacity: .6; cursor: wait; }
+  .note { font-size: 12px; color: var(--mute); margin: 12px 0 0; }
+  #err { color: var(--new); font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Vaso de contexto</h1>
+    <span id="session">Buscando sesión…</span>
+  </header>
+
+  <div class="grid">
+    <section class="card cup">
+      <svg viewBox="0 0 230 285" role="img" aria-labelledby="cupt">
+        <title id="cupt">Vaso que representa el contexto usado</title>
+        <defs>
+          <clipPath id="inside"><path d="M30 20 L170 20 L153 260 Q152 270 142 270 L58 270 Q48 270 47 260 Z"/></clipPath>
+        </defs>
+        <g clip-path="url(#inside)">
+          <!-- El agua es una sola forma: la ola arriba y el cuerpo debajo. Subir el nivel = moverla en Y. -->
+          <g id="water" style="transform: translateY(260px)">
+            <path id="wave" d="M0 10 Q25 2 50 10 T100 10 T150 10 T200 10 T250 10 T300 10 T350 10 T400 10 V300 H0 Z" opacity=".85"/>
+          </g>
+        </g>
+        <g id="ticks"></g>
+        <path d="M30 20 L170 20 L153 260 Q152 270 142 270 L58 270 Q48 270 47 260 Z"
+              fill="none" stroke="var(--glass)" stroke-width="3" stroke-linejoin="round"/>
+      </svg>
+      <div class="big num" id="pct">–</div>
+      <div class="sub num" id="tokens">&nbsp;</div>
+    </section>
+
+    <section>
+      <div class="card advice" id="advice">
+        <h2 id="atitle">Esperando datos…</h2>
+        <p id="atext"></p>
+        <ul id="aextra"></ul>
+        <div id="ai"></div>
+      </div>
+
+      <div class="bars">
+        <div class="bar"><label>Contexto usado <b class="num" id="b1v"></b></label><div class="track"><i id="b1"></i></div></div>
+        <div class="bar"><label>Caché leída en el último turno <b class="num" id="b2v"></b></label><div class="track"><i id="b2"></i></div></div>
+        <div class="bar"><label>Margen hasta sesión nueva <b class="num" id="b3v"></b></label><div class="track"><i id="b3"></i></div></div>
+      </div>
+
+      <div class="stats num">
+        <div><b id="s-turns">–</b>turnos</div>
+        <div><b id="s-growth">–</b>crecen por turno</div>
+        <div><b id="s-comp">–</b>compactaciones</div>
+        <div><b id="s-idle">–</b>caché</div>
+        <div><b id="s-model">–</b>modelo</div>
+      </div>
+      <svg id="spark" viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="Evolución del contexto por turno"><polyline/></svg>
+      <div id="err"></div>
+    </section>
+  </div>
+
+  <details class="card">
+    <summary>Ajustes</summary>
+    <div class="form">
+      <label>Sesión vinculada
+        <select id="sel"><option value="">Automática: la más reciente</option></select>
+      </label>
+      <label>Tamaño del vaso (límite de contexto)
+        <select id="limit">
+          <option value="0">Automático</option>
+          <option value="200000">200k tokens</option>
+          <option value="1000000">1M tokens</option>
+        </select>
+      </label>
+      <label>Proveedor de consejos con IA
+        <select id="prov">
+          <option value="gemini">Google Gemini (aistudio.google.com)</option>
+          <option value="groq">Groq (console.groq.com)</option>
+          <option value="openrouter">OpenRouter (openrouter.ai)</option>
+        </select>
+      </label>
+      <label>API key <input id="key" type="password" autocomplete="off" placeholder="Pega tu key gratuita"></label>
+      <label>Modelo <input id="model" autocomplete="off"></label>
+      <label>&nbsp;<button id="ask">Pedir consejo con IA</button></label>
+    </div>
+    <p class="note">La key se guarda solo en este navegador. Al pedir consejo, las métricas y tus últimos 6 mensajes
+      (recortados) se envían al proveedor elegido. Sin key, los consejos salen de reglas locales y no sale nada de tu equipo.</p>
+  </details>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+// localStorage puede fallar en ventanas privadas: la página debe funcionar igual sin él.
+const store = {
+  get: k => { try { return localStorage.getItem('vaso.' + k) || ''; } catch { return ''; } },
+  set: (k, v) => { try { localStorage.setItem('vaso.' + k, v); } catch {} },
+};
+const MODELS = { gemini: 'gemini-2.5-flash', groq: 'llama-3.3-70b-versatile',
+                 openrouter: 'meta-llama/llama-3.3-70b-instruct:free' };
+const fmt = n => n >= 1e6 ? (n / 1e6).toFixed(2) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(1) + 'k' : String(n);
+const color = level => getComputedStyle(document.documentElement).getPropertyValue('--' + level).trim();
+
+// Interior del vaso: fondo en y=270, borde en y=20 → 250 px de recorrido.
+const levelY = f => 270 - Math.min(f, 1) * 250;
+
+function drawTicks(ts) {
+  $('ticks').innerHTML = ts.map(t => {
+    const y = levelY(t);
+    return `<line class="tick" x1="34" x2="182" y1="${y}" y2="${y}"/>` +
+           `<text class="tickl" x="186" y="${y + 3}">${Math.round(t * 100)}%</text>`;
+  }).join('');
+}
+
+function render(s) {
+  const pct = Math.round(s.pct * 100);
+  document.documentElement.style.setProperty('--water', color(s.advice.level));
+  $('water').style.transform = `translateY(${levelY(s.pct) - 10}px)`;
+  drawTicks(s.thresholds);
+
+  $('session').textContent = `${s.title} · ${s.cwd}`;
+  $('pct').textContent = pct + '%';
+  $('tokens').textContent = `${fmt(s.used)} de ${fmt(s.limit)} tokens`;
+  $('atitle').textContent = s.advice.title;
+  $('atext').textContent = s.advice.text;
+  $('aextra').replaceChildren(...s.advice.extras.map(t => Object.assign(document.createElement('li'), { textContent: t })));
+
+  const newAt = s.thresholds[2];
+  const margin = Math.max(0, 1 - s.pct / newAt);
+  $('b1').style.width = Math.min(pct, 100) + '%';              $('b1v').textContent = pct + '%';
+  $('b2').style.width = s.cache_pct + '%';                     $('b2v').textContent = s.cache_pct + '%';
+  $('b3').style.width = margin * 100 + '%';
+  $('b3v').textContent = s.turns_left == null ? '–' : `≈ ${s.turns_left} ${s.turns_left === 1 ? 'turno' : 'turnos'}`;
+
+  $('s-turns').textContent = s.turns;
+  $('s-growth').textContent = '+' + fmt(s.growth);
+  $('s-comp').textContent = s.compactions;
+  $('s-idle').textContent = s.idle_min < 5 ? 'caliente' : s.idle_min < 60 ? `${s.idle_min} min` : 'frío';
+  $('s-model').textContent = s.model.replace('claude-', '');
+
+  const h = s.history, top = Math.max(s.limit, ...h);
+  $('spark').firstElementChild.setAttribute('points',
+    h.map((v, i) => `${h.length > 1 ? i / (h.length - 1) * 100 : 0},${100 - v / top * 100}`).join(' '));
+}
+
+async function refresh() {
+  try {
+    const r = await fetch(`/api/state?s=${encodeURIComponent($('sel').value)}&limit=${$('limit').value}`);
+    const s = await r.json();
+    if (!r.ok) throw new Error(s.error);
+    render(s);
+    $('err').textContent = '';
+  } catch (e) {
+    $('err').textContent = e.message === 'Failed to fetch' ? 'Sin conexión con vaso.py. ¿Sigue en marcha?' : e.message;
+  }
+}
+
+async function loadSessions() {
+  try {
+    const list = await (await fetch('/api/sessions')).json();
+    const keep = $('sel').value;
+    $('sel').replaceChildren($('sel').options[0], ...list.map(x =>
+      Object.assign(document.createElement('option'), { value: x.id, textContent: `${x.title} — ${x.cwd.split(/[\\/]/).pop()}` })));
+    $('sel').value = keep;
+  } catch {}
+}
+
+$('ask').onclick = async () => {
+  $('ask').disabled = true;
+  $('ai').textContent = 'Consultando…';
+  try {
+    const r = await fetch('/api/advice', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ provider: $('prov').value, key: $('key').value, model: $('model').value,
+                             s: $('sel').value, limit: $('limit').value }) });
+    const j = await r.json();
+    $('ai').textContent = r.ok ? '🤖 ' + j.text : '⚠️ ' + j.error;
+  } catch (e) { $('ai').textContent = '⚠️ ' + e.message; }
+  $('ask').disabled = false;
+};
+
+// Cada proveedor recuerda su propia key y su modelo.
+function loadProvider() {
+  const p = $('prov').value;
+  $('key').value = store.get('key.' + p);
+  $('model').value = store.get('model.' + p) || MODELS[p];
+}
+$('prov').value = store.get('prov') || 'gemini';
+$('limit').value = store.get('limit') || '0';
+loadProvider();
+$('prov').onchange = () => { store.set('prov', $('prov').value); loadProvider(); };
+$('key').onchange = () => store.set('key.' + $('prov').value, $('key').value.trim());
+$('model').onchange = () => store.set('model.' + $('prov').value, $('model').value.trim());
+$('limit').onchange = () => { store.set('limit', $('limit').value); refresh(); };
+$('sel').onchange = () => { $('ai').textContent = ''; refresh(); };
+
+loadSessions(); refresh();
+setInterval(refresh, 3000);
+setInterval(loadSessions, 30000);
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "uuid": "vaso-contexto@d4vram",
+  "name": "Vaso de contexto",
+  "description": "Shows how much context your Claude Code session has used and tells you when to compact",
+  "version": "1.0.0",
+  "max-instances": 1
+}
