@@ -339,6 +339,146 @@ class BatteryProvider {
     }
 }
 
+// Shared GPU poller used by both GPU providers. Supports:
+//  - AMD (amdgpu driver): instant sysfs reads, no subprocess
+//  - NVIDIA: async nvidia-smi, one subprocess per refresh tick no matter
+//    how many GPU graphs are enabled; getData() returns the previous
+//    sample so the UI thread never blocks on the subprocess
+// Intel GPUs are not supported: the i915/xe drivers do not expose a
+// utilization counter that is readable without elevated permissions.
+var GpuPoller = {
+    backend: null,     // "amd" | "nvidia" | null (no supported GPU)
+    detected: false,
+    amdPath: null,
+    util: 0,           // 0..1
+    memUsed: 0,        // MiB
+    memTotal: 0,       // MiB
+    pending: false,
+    failed: true,
+
+    detect: function() {
+        this.detected = true;
+        for (let i = 0; i < 10; i++) {
+            let path = "/sys/class/drm/card" + i + "/device";
+            if (GLib.file_test(path + "/gpu_busy_percent", GLib.FileTest.EXISTS)) {
+                this.backend = "amd";
+                this.amdPath = path;
+                return;
+            }
+        }
+        if (GLib.find_program_in_path("nvidia-smi")) {
+            this.backend = "nvidia";
+            return;
+        }
+        this.backend = null;
+    },
+
+    readSysfsNumber: function(path) {
+        try {
+            let [success, contents] = GLib.file_get_contents(path);
+            if (!success)
+                return NaN;
+            return parseFloat(contents.toString().trim());
+        } catch (e) {
+            return NaN;
+        }
+    },
+
+    poll: function() {
+        if (!this.detected)
+            this.detect();
+
+        if (this.backend == "amd") {
+            let busy = this.readSysfsNumber(this.amdPath + "/gpu_busy_percent");
+            let used = this.readSysfsNumber(this.amdPath + "/mem_info_vram_used");
+            let total = this.readSysfsNumber(this.amdPath + "/mem_info_vram_total");
+            if (!isNaN(busy)) {
+                this.util = busy / 100;
+                this.memUsed = isNaN(used) ? 0 : used / 1048576;
+                this.memTotal = isNaN(total) ? 0 : total / 1048576;
+                this.failed = false;
+            } else {
+                this.failed = true;
+            }
+        } else if (this.backend == "nvidia") {
+            this.pollNvidia();
+        } else {
+            this.failed = true;
+        }
+    },
+
+    pollNvidia: function() {
+        if (this.pending)
+            return;
+        this.pending = true;
+        try {
+            let proc = new Gio.Subprocess({
+                argv: ["nvidia-smi",
+                       "--query-gpu=utilization.gpu,memory.used,memory.total",
+                       "--format=csv,noheader,nounits"],
+                flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+            });
+            proc.init(null);
+            proc.communicate_utf8_async(null, null, (p, res) => {
+                try {
+                    let [, stdout] = p.communicate_utf8_finish(res);
+                    let parts = stdout.trim().split("\n")[0].split(",").map(x => parseFloat(x));
+                    if (parts.length >= 3 && !isNaN(parts[0])) {
+                        this.util = parts[0] / 100;
+                        this.memUsed = parts[1];
+                        this.memTotal = parts[2];
+                        this.failed = false;
+                    }
+                } catch (e) {
+                    this.failed = true;
+                }
+                this.pending = false;
+            });
+        } catch (e) {
+            this.failed = true;
+            this.pending = false;
+        }
+    }
+};
+
+// Class responsible for getting GPU utilization data (via nvidia-smi)
+class GpuUtilDataProvider {
+    constructor() {
+        this.name = "GPU";
+        this.type = "GPU";
+    }
+
+    getData() {
+        GpuPoller.poll();
+        if (GpuPoller.failed) {
+            this.text = "n/a";
+            return 0;
+        }
+        this.text = (GpuPoller.util * 100).toFixed(1) + "%";
+        let tools = new Tools();
+        return tools.limit(GpuPoller.util, 0, 1);
+    }
+}
+
+// Class responsible for getting GPU memory data (via nvidia-smi)
+class GpuMemDataProvider {
+    constructor() {
+        this.name = "GMEM";
+        this.type = "GPUMEM";
+    }
+
+    getData() {
+        GpuPoller.poll();
+        let tools = new Tools();
+        if (GpuPoller.failed || GpuPoller.memTotal <= 0) {
+            this.text = "n/a";
+            return 0;
+        }
+        this.text = tools.formatBytes(GpuPoller.memUsed * 1024 * 1024);
+        return tools.limit(GpuPoller.memUsed / GpuPoller.memTotal, 0, 1);
+    }
+}
+
 class Tools {
     //https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
     formatBytes(bytes) {

@@ -94,3 +94,12 @@ Vertical pane examples:
 *  andreevlex
 *  clefebvre
 *  jacobwills
+## GPU graphs
+
+Since v1.4.0 the applet can optionally show GPU utilization and GPU memory graphs. They are disabled by default; enable them in the applet settings under "GPU".
+
+Supported hardware:
+- NVIDIA: requires the `nvidia-smi` tool (included with the NVIDIA driver)
+- AMD: read directly from sysfs (`amdgpu` driver), no extra tools needed
+
+Intel GPUs are currently not supported, because the i915/xe drivers do not expose a utilization counter that can be read without elevated permissions.
