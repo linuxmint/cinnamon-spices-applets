@@ -1,0 +1,197 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["behavior", "appearance", "icons"],
+
+        "behavior": {
+            "type": "page",
+            "title": "Behavior",
+            "sections": ["behavior-section", "overflow-section"]
+        },
+        "appearance": {
+            "type": "page",
+            "title": "Appearance",
+            "sections": ["appearance-section", "popup-section"]
+        },
+        "icons": {
+            "type": "page",
+            "title": "Icons",
+            "sections": ["icons-section"]
+        },
+
+        "behavior-section": {
+            "type": "section",
+            "title": "Defaults",
+            "keys": ["default-visibility"]
+        },
+        "overflow-section": {
+            "type": "section",
+            "title": "Overflow popup",
+            "keys": [
+                "open-on-click",
+                "open-on-hover",
+                "hover-open-delay",
+                "close-on-leave",
+                "leave-close-delay",
+                "always-show-chevron"
+            ]
+        },
+        "appearance-section": {
+            "type": "section",
+            "title": "Panel",
+            "keys": [
+                "panel-icon-padding",
+                "chevron-icon",
+                "sort-icons"
+            ]
+        },
+        "popup-section": {
+            "type": "section",
+            "title": "Popup",
+            "keys": [
+                "popup-columns",
+                "popup-icon-size",
+                "popup-padding",
+                "popup-spacing"
+            ]
+        },
+        "icons-section": {
+            "type": "section",
+            "title": "Per-icon visibility",
+            "keys": ["icon-states", "reset-icon-states"]
+        }
+    },
+
+    "default-visibility": {
+        "type": "combobox",
+        "default": "overflow",
+        "description": "New icons appear as",
+        "options": {
+            "Overflow (Windows 11 style)": "overflow",
+            "Pinned to panel": "pinned",
+            "Hidden": "hidden"
+        },
+        "tooltip": "Default for icons you have not configured yet."
+    },
+
+    "open-on-click": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Open overflow on chevron click"
+    },
+
+    "open-on-hover": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Open overflow on hover"
+    },
+
+    "hover-open-delay": {
+        "type": "spinbutton",
+        "default": 300,
+        "min": 0,
+        "max": 5000,
+        "step": 50,
+        "units": "ms",
+        "description": "Hover open delay",
+        "dependency": "open-on-hover",
+        "indent": true
+    },
+
+    "close-on-leave": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Close overflow when the pointer leaves (Windows 11 style)"
+    },
+
+    "leave-close-delay": {
+        "type": "spinbutton",
+        "default": 2000,
+        "min": 0,
+        "max": 8000,
+        "step": 100,
+        "units": "ms",
+        "description": "Keep open after the pointer leaves",
+        "dependency": "close-on-leave",
+        "indent": true
+    },
+
+    "always-show-chevron": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Always show chevron (even if overflow is empty)"
+    },
+
+    "panel-icon-padding": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0,
+        "max": 16,
+        "step": 1,
+        "units": "px",
+        "description": "Panel icon padding"
+    },
+
+    "chevron-icon": {
+        "type": "iconfilechooser",
+        "default": "pan-up-symbolic",
+        "description": "Chevron icon"
+    },
+
+    "sort-icons": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Sort icons by name"
+    },
+
+    "popup-columns": {
+        "type": "spinbutton",
+        "default": 6,
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "description": "Icons per row",
+        "tooltip": "Overflow icons wrap onto a new row after this many columns. The popup shrinks if there are fewer icons."
+    },
+
+    "popup-icon-size": {
+        "type": "spinbutton",
+        "default": 18,
+        "min": 16,
+        "max": 64,
+        "step": 2,
+        "units": "px",
+        "description": "Popup icon size"
+    },
+
+    "popup-padding": {
+        "type": "spinbutton",
+        "default": 8,
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "units": "px",
+        "description": "Popup padding"
+    },
+
+    "popup-spacing": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "units": "px",
+        "description": "Popup icon spacing"
+    },
+
+    "icon-states": {
+        "type": "generic",
+        "default": {}
+    },
+
+    "reset-icon-states": {
+        "type": "button",
+        "description": "Reset all icon pin/hide settings",
+        "callback": "on_reset_icon_states"
+    }
+}
