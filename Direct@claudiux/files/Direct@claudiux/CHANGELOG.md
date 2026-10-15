@@ -1,3 +1,6 @@
+### v1.6.5~20261015
+* Avoid clutter_actor_insert_child_at_index error messages.
+
 ### v1.6.4~20260618
 * Changes in Custom Places section. Better take into account of flatpak applications. Fixes a typo.
 * Fixes [#8792](https://github.com/linuxmint/cinnamon-spices-applets/issues/8792).
