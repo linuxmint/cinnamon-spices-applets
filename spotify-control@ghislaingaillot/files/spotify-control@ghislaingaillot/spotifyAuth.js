@@ -147,8 +147,9 @@ class SpotifyFavorites {
                 cb(null);
                 return;
             }
+            let uri = `spotify:track:${trackId}`;
             let args = ['curl', '-s', '-H', `Authorization: Bearer ${this._accessToken}`,
-                `${API_BASE}/me/tracks/contains?ids=${encodeURIComponent(trackId)}`];
+                `${API_BASE}/me/library/contains?uris=${encodeURIComponent(uri)}`];
             this._runCommand(args, (ok2, text) => {
                 if (!ok2) {
                     cb(null);
@@ -167,11 +168,12 @@ class SpotifyFavorites {
                 cb(false, "auth");
                 return;
             }
+            let uri = `spotify:track:${trackId}`;
             let method = liked ? 'PUT' : 'DELETE';
             let args = ['curl', '-s', '-o', '/dev/null', '-w', '%{http_code}', '-X', method,
                 '-H', `Authorization: Bearer ${this._accessToken}`,
                 '-H', 'Content-Length: 0',
-                `${API_BASE}/me/tracks?ids=${encodeURIComponent(trackId)}`];
+                `${API_BASE}/me/library?uris=${encodeURIComponent(uri)}`];
             this._runCommand(args, (ok2, text) => {
                 let code = parseInt(text, 10);
                 cb(ok2 && code >= 200 && code < 300, code);
