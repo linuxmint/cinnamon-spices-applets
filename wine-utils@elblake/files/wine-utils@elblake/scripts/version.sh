@@ -14,9 +14,8 @@ get_wine_version ()
     wine_version=$($wine_cmd --version)
     if [ "$?" -ne 0 ]
     then
-        zenity --info --text="${WINE_ERROR_MSG}" \
-                      --title="${WINE_ERROR_TITLE}" \
-                      --width="380"
+        $DIALOG error "${WINE_ERROR_MSG}" \
+                      "${WINE_ERROR_TITLE}"
         exit 1
     fi
 }
