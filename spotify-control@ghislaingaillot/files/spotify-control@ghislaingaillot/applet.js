@@ -426,7 +426,7 @@ class SpotifyControlApplet extends Applet.Applet {
         let newLiked = !this._liked;
 
         this._starButton.reactive = false;
-        this._favorites.setLiked(trackId, newLiked, (ok) => {
+        this._favorites.setLiked(trackId, newLiked, (ok, code) => {
             this._starButton.reactive = true;
             if (trackUri !== this._currentTrackUri)
                 return;
@@ -434,6 +434,9 @@ class SpotifyControlApplet extends Applet.Applet {
                 this._setLikedState(newLiked);
                 Main.notify(_("Spotify"), newLiked ?
                     _("Added to Liked Songs") : _("Removed from Liked Songs"));
+            } else if (code === 403) {
+                Main.notify(_("Spotify"),
+                    _("Could not update favorites (403). Add your Spotify account under User Management in your app's dashboard settings."));
             } else {
                 Main.notify(_("Spotify"), _("Could not update favorites."));
             }
