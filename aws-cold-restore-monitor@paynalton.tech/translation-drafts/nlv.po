@@ -1,0 +1,393 @@
+# UNTRANSLATED DRAFT: Orizaba Nahuatl (Sierra de Zongolica).
+# Requires translation; this file is not an available applet language.
+# Copyright (C) 2026 paynalton
+# This file is distributed under the same license as the AWS Cold Restore Monitor package.
+# Source scaffolding only; no translator has supplied target-language text.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AWS Cold Restore Monitor 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-09-08 13:22-0600\n"
+"PO-Revision-Date: 2026-09-08 12:00+0000\n"
+"Last-Translator: Not assigned\n"
+"Language-Team: Orizaba Nahuatl (Sierra de Zongolica)\n"
+"Language: nlv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+#. Spanish reference: AWS · Configurar
+#: applet.js:62
+#, javascript-format
+msgid "AWS · Configure"
+msgstr ""
+
+#. Spanish reference: Actualizar ahora
+#: applet.js:90
+#, javascript-format
+msgid "Refresh now"
+msgstr ""
+
+#. Spanish reference: Configurar…
+#: applet.js:91
+#, javascript-format
+msgid "Configure…"
+msgstr ""
+
+#. Spanish reference: No se pudo emitir la notificación del sistema.
+#: applet.js:180
+#, javascript-format
+msgid "Could not send the system notification."
+msgstr ""
+
+#. Spanish reference: AWS · Error interno
+#: applet.js:197
+#, javascript-format
+msgid "AWS · Internal error"
+msgstr ""
+
+#. Spanish reference: sin porcentaje
+#: applet.js:210
+#, javascript-format
+msgid "no percentage"
+msgstr ""
+
+#. Spanish reference: AWS · Error
+#: applet.js:214
+#, javascript-format
+msgid "AWS · Error"
+msgstr ""
+
+#. Spanish reference: AWS · Reintentando
+#: applet.js:214
+#, javascript-format
+msgid "AWS · Retrying"
+msgstr ""
+
+#. Spanish reference: AWS %s
+#: applet.js:214
+#, javascript-format
+msgid "AWS %s"
+msgstr ""
+
+#. Spanish reference: AWS · %s
+#: applet.js:214
+#, javascript-format
+msgid "AWS · %s"
+msgstr ""
+
+#. Spanish reference: AWS Cold Restore Monitor: %s
+#: applet.js:218
+#, javascript-format
+msgid "AWS Cold Restore Monitor: %s"
+msgstr ""
+
+#. Spanish reference: %s · %s
+#: applet.js:219
+#, javascript-format
+msgid "%s · %s"
+msgstr ""
+
+#. Spanish reference: Haz clic derecho y elige Configurar para seleccionar un trabajo de restauración.
+#: applet.js:220
+#, javascript-format
+msgid "Right-click and choose Configure to select a restore job."
+msgstr ""
+
+#. Spanish reference: Las consultas automáticas están pausadas. Corrige el problema y pulsa Actualizar ahora o cambia la configuración.
+#: applet.js:223
+#, javascript-format
+msgid ""
+"Automatic queries are paused. Fix the problem and click Refresh now or "
+"change the settings."
+msgstr ""
+
+#. Spanish reference: AWS: %s
+#: applet.js:224
+#, javascript-format
+msgid "AWS: %s"
+msgstr ""
+
+#. Spanish reference: Estado: %s (último dato; consulta pendiente)
+#: applet.js:226
+#, javascript-format
+msgid "Status: %s (previous result; query pending)"
+msgstr ""
+
+#. Spanish reference: Estado: %s
+#: applet.js:226
+#, javascript-format
+msgid "Status: %s"
+msgstr ""
+
+#. Spanish reference: Avance estimado: %s
+#: applet.js:227
+#, javascript-format
+msgid "Estimated progress: %s"
+msgstr ""
+
+#. Spanish reference: Trabajo: %s
+#: applet.js:228
+#, javascript-format
+msgid "Job: %s"
+msgstr ""
+
+#. Spanish reference: sin configurar
+#: applet.js:228
+#, javascript-format
+msgid "not configured"
+msgstr ""
+
+#. Spanish reference: Perfil: %s · Región: %s
+#: applet.js:229
+#, javascript-format
+msgid "Profile: %s · Region: %s"
+msgstr ""
+
+#. Spanish reference: Inicio: %s
+#: applet.js:230
+#, javascript-format
+msgid "Started: %s"
+msgstr ""
+
+#. Spanish reference: Finalización: %s
+#: applet.js:231
+#, javascript-format
+msgid "Completed: %s"
+msgstr ""
+
+#. Spanish reference: Última consulta correcta: %s
+#: applet.js:232
+#, javascript-format
+msgid "Last successful query: %s"
+msgstr ""
+
+#. Spanish reference: Configurar
+#: applet.js:273
+#, javascript-format
+msgid "Configure"
+msgstr ""
+
+#. Spanish reference: Completa el perfil, la región, el ID de restauración y la ruta de AWS CLI en Configurar.
+#: applet.js:274
+#, javascript-format
+msgid ""
+"Enter the profile, region, restore job ID, and AWS CLI path in Configure."
+msgstr ""
+
+#. Spanish reference: El intervalo debe estar entre 10 y 3600 segundos. Revisa la configuración.
+#: applet.js:278
+#, javascript-format
+msgid "The interval must be between 10 and 3600 seconds. Check the settings."
+msgstr ""
+
+#. Spanish reference: Consultando…
+#: applet.js:281
+#, javascript-format
+msgid "Querying…"
+msgstr ""
+
+#. Spanish reference: AWS informa que la restauración falló. Revisa el trabajo en AWS Backup.
+#: applet.js:339
+#, javascript-format
+msgid "AWS reports that the restore failed. Review the job in AWS Backup."
+msgstr ""
+
+#. Spanish reference: AWS informa que la restauración fue abortada. Revisa el trabajo en AWS Backup.
+#: applet.js:339
+#, javascript-format
+msgid "AWS reports that the restore was aborted. Review the job in AWS Backup."
+msgstr ""
+
+#. Spanish reference: Consulta correcta
+#: applet.js:343
+#, javascript-format
+msgid "Query successful"
+msgstr ""
+
+#. Spanish reference: AWS no ha informado un porcentaje válido. El estado del trabajo sigue disponible.
+#: applet.js:345
+#, javascript-format
+msgid ""
+"AWS has not reported a valid percentage. The job status is still available."
+msgstr ""
+
+#. Spanish reference: La consulta terminó correctamente, pero AWS CLI emitió una advertencia. Puedes revisarla ejecutando la consulta en tu terminal.
+#: applet.js:348
+#, javascript-format
+msgid ""
+"The query succeeded, but AWS CLI issued a warning. Run the query in your "
+"terminal to review it."
+msgstr ""
+
+#. Spanish reference: No se pudo cargar el applet. Revisa la instalación y vuelve a añadirlo.
+#: applet.js:380
+#, javascript-format
+msgid "Could not load the applet. Check the installation and add it again."
+msgstr ""
+
+#. Spanish reference: La consulta superó los 60 segundos. Se reintentará automáticamente.
+#: errors.js:28
+#, javascript-format
+msgid "The query exceeded 60 seconds. It will be retried automatically."
+msgstr ""
+
+#. Spanish reference: El monitor encontró un error interno. Retira y vuelve a añadir el applet.
+#: errors.js:30
+#, javascript-format
+msgid ""
+"The monitor encountered an internal error. Remove the applet and add it "
+"again."
+msgstr ""
+
+#. Spanish reference: AWS devolvió una respuesta no válida. Comprueba la consulta con AWS CLI y pulsa Actualizar ahora.
+#: errors.js:32
+#, javascript-format
+msgid ""
+"AWS returned an invalid response. Check the query with AWS CLI and click "
+"Refresh now."
+msgstr ""
+
+#. Spanish reference: No se pudo autenticar con AWS. Revisa las credenciales o renueva la sesión SSO y pulsa Actualizar ahora.
+#: errors.js:34
+#, javascript-format
+msgid ""
+"Could not authenticate with AWS. Check your credentials or renew your SSO "
+"session, then click Refresh now."
+msgstr ""
+
+#. Spanish reference: AWS denegó el acceso. Revisa el permiso backup:DescribeRestoreJob del perfil.
+#: errors.js:36
+#, javascript-format
+msgid ""
+"AWS denied access. Check the backup:DescribeRestoreJob permission for this "
+"profile."
+msgstr ""
+
+#. Spanish reference: No se encontró el trabajo o el perfil. Comprueba el perfil, la región y el ID de restauración.
+#: errors.js:38
+#, javascript-format
+msgid ""
+"The job or profile was not found. Check the profile, region, and restore job "
+"ID."
+msgstr ""
+
+#. Spanish reference: No se pudo verificar la conexión segura. Revisa los certificados y la configuración de red.
+#: errors.js:40
+#, javascript-format
+msgid ""
+"The secure connection could not be verified. Check your certificates and "
+"network configuration."
+msgstr ""
+
+#. Spanish reference: No se pudo iniciar AWS CLI. Comprueba que esté instalado y que la ruta del ejecutable y sus permisos sean correctos.
+#: errors.js:42
+#, javascript-format
+msgid ""
+"Could not start AWS CLI. Check that it is installed and that the executable "
+"path and permissions are correct."
+msgstr ""
+
+#. Spanish reference: La configuración o los argumentos de AWS CLI no son válidos. Revisa los ajustes del applet.
+#: errors.js:44
+#, javascript-format
+msgid ""
+"The AWS CLI configuration or arguments are invalid. Check the applet "
+"settings."
+msgstr ""
+
+#. Spanish reference: AWS está limitando las consultas. Se reintentará con una espera mayor.
+#: errors.js:46
+#, javascript-format
+msgid ""
+"AWS is throttling requests. The query will be retried after a longer delay."
+msgstr ""
+
+#. Spanish reference: AWS no está disponible o hay un problema de red. Se reintentará automáticamente.
+#: errors.js:48
+#, javascript-format
+msgid ""
+"AWS is unavailable or there is a network problem. The query will be retried "
+"automatically."
+msgstr ""
+
+#. Spanish reference: La comunicación con AWS CLI se interrumpió. Se reintentará automáticamente.
+#: errors.js:50
+#, javascript-format
+msgid ""
+"Communication with AWS CLI was interrupted. The query will be retried "
+"automatically."
+msgstr ""
+
+#. Spanish reference: AWS CLI terminó con un error no reconocido. Revisa la consulta en tu terminal y pulsa Actualizar ahora.
+#: errors.js:51
+#, javascript-format
+msgid ""
+"AWS CLI exited with an unrecognized error. Check the query in your terminal "
+"and click Refresh now."
+msgstr ""
+
+#. Spanish reference: Trabajo de restauración
+#: settings-schema.json
+#, javascript-format
+msgid "Restore job"
+msgstr ""
+
+#. Spanish reference: Perfil de AWS (PROFILE)
+#: settings-schema.json
+#, javascript-format
+msgid "AWS profile (PROFILE)"
+msgstr ""
+
+#. Spanish reference: Región (REGION)
+#: settings-schema.json
+#, javascript-format
+msgid "Region (REGION)"
+msgstr ""
+
+#. Spanish reference: ID de restauración (RESTORE_JOB_ID)
+#: settings-schema.json
+#, javascript-format
+msgid "Restore job ID (RESTORE_JOB_ID)"
+msgstr ""
+
+#. Spanish reference: segundos
+#: settings-schema.json
+#, javascript-format
+msgid "seconds"
+msgstr ""
+
+#. Spanish reference: Intervalo entre consultas
+#: settings-schema.json
+#, javascript-format
+msgid "Polling interval"
+msgstr ""
+
+#. Spanish reference: Ejecutable de AWS CLI
+#: settings-schema.json
+#, javascript-format
+msgid "AWS CLI executable"
+msgstr ""
+
+#. Spanish reference: Usa aws o la ruta absoluta que devuelve command -v aws en tu terminal.
+#: settings-schema.json
+#, javascript-format
+msgid ""
+"Use aws or the absolute path returned by command -v aws in your terminal."
+msgstr ""
+
+#. Spanish reference: Monitor de estado y avance de restauraciones desde almacenamiento frío mediante AWS Backup.
+#: metadata.json
+#, javascript-format
+msgid ""
+"Monitor the status and progress of cold storage restores through AWS Backup."
+msgstr ""
+
+#. Spanish reference: AWS Cold Restore Monitor
+#: metadata.json
+#, javascript-format
+msgid "AWS Cold Restore Monitor"
+msgstr ""
