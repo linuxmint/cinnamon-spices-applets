@@ -6,6 +6,7 @@
     "options": {
       "Show Desktop": "show_desktop",
       "Hide Icons + Show Desktop": "hide_icons_toggle",
+      "Hide Icons + Desklets + Show Desktop": "hide_all_toggle",
       "Only Toggle Icons": "hide_icons_only",
       "Show Desklets": "show_desklets",
       "Show Expo": "show_expo",
@@ -19,6 +20,7 @@
     "description": "Shift+Click action",
     "options": {
       "Hide Icons + Show Desktop": "hide_icons_toggle",
+      "Hide Icons + Desklets + Show Desktop": "hide_all_toggle",
       "Show Desktop": "show_desktop",
       "Only Toggle Icons": "hide_icons_only",
       "Show Desklets": "show_desklets",
@@ -35,6 +37,7 @@
       "Show Desklets": "show_desklets",
       "Show Desktop": "show_desktop",
       "Hide Icons + Show Desktop": "hide_icons_toggle",
+      "Hide Icons + Desklets + Show Desktop": "hide_all_toggle",
       "Only Toggle Icons": "hide_icons_only",
       "Show Expo": "show_expo",
       "Show Scale": "show_scale",
@@ -51,6 +54,7 @@
       "Show Desklets": "show_desklets",
       "Show Desktop": "show_desktop",
       "Hide Icons + Show Desktop": "hide_icons_toggle",
+      "Hide Icons + Desklets + Show Desktop": "hide_all_toggle",
       "Only Toggle Icons": "hide_icons_only",
       "Nothing": "nothing"
     }

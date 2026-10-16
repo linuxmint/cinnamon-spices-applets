@@ -157,6 +157,23 @@ class DesktopPeekToggleApplet extends Applet.Applet {
             this._set_icons_hidden(true);
     }
 
+    // ---------- desklets ----------
+
+    _desklets_hidden() {
+        try { return !Main.deskletContainer.actor.visible; } catch (e) { return false; }
+    }
+
+    _set_desklets_hidden(hidden) {
+        try {
+            if (hidden)
+                Main.deskletContainer.actor.hide();
+            else
+                Main.deskletContainer.actor.show();
+        } catch (e) {
+            global.logError("just-desktop: cannot toggle desklets: " + e);
+        }
+    }
+
     _update_indicator() {
         if (!this._line)
             return;
@@ -259,6 +276,7 @@ class DesktopPeekToggleApplet extends Applet.Applet {
         };
         addItem("Show Desktop", "show_desktop");
         addItem("Toggle Icons + Desktop", "hide_icons_toggle");
+        addItem("Toggle Icons + Desklets + Desktop", "hide_all_toggle");
         addItem("Only Toggle Icons", "hide_icons_only");
         addItem("Show Desklets", "show_desklets");
         addItem("Show Expo", "show_expo");
@@ -290,6 +308,8 @@ class DesktopPeekToggleApplet extends Applet.Applet {
             this._show_desktop();
         else if (action === "hide_icons_toggle")
             this._toggle_icons_and_desktop();
+        else if (action === "hide_all_toggle")
+            this._toggle_icons_desklets_and_desktop();
         else if (action === "hide_icons_only")
             this._set_icons_hidden(!this._icons_hidden());
         else if (action === "show_desklets")
@@ -376,6 +396,21 @@ class DesktopPeekToggleApplet extends Applet.Applet {
     _show_scale() {
         if (!Main.overview.animationInProgress)
             Main.overview.toggle();
+    }
+
+    _toggle_icons_desklets_and_desktop() {
+        const nowHidden = this._icons_hidden();
+        this._set_icons_hidden(!nowHidden);
+        this._set_desklets_hidden(!nowHidden);
+        if (!nowHidden)
+            this._minimize_windows(this._normal_windows().filter(w => {
+                try { return !w.minimized; } catch (e) { return false; }
+            }));
+        else
+            this._restore_windows();
+        this._show_all_windows(0);
+        this._cancel_peek_timeout();
+        this._did_peek = false;
     }
 
     _toggle_icons_and_desktop() {

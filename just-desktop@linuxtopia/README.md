@@ -4,7 +4,7 @@ A Cinnamon panel applet to show the desktop your way: plain click for the classi
 
 ## Features
 
-- **Click action** — Show Desktop (classic), Hide Icons + Show Desktop, Only Toggle Icons, Desklets, Expo, Scale, or Nothing
+- **Click action** — Show Desktop (classic), Hide Icons + Show Desktop, Hide Icons + Desklets + Show Desktop, Only Toggle Icons, Desklets, Expo, Scale, or Nothing
 - **Reliable restore** — unlike the stock cornerbar applet, clicking the applet always brings your windows back, even if you clicked the desktop in between (state-based, not toggle-based)
 - **Shift+Click action** — same choices, independently configurable
 - **Middle-click / Shift+Middle-click** — same choices, independently configurable
