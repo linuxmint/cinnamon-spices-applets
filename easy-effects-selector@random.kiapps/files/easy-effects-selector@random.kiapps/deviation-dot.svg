@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9">
+  <defs>
+    <!-- Original EasyEffects 7.2.3 gradient colors, scaled to this circle. -->
+    <linearGradient id="blue" gradientUnits="userSpaceOnUse"
+                    x1="1.49480" y1="1.49480" x2="7.50520" y2="7.50520">
+      <stop offset="0" stop-color="#59cde7"/>
+      <stop offset="1" stop-color="#1c71d8"/>
+    </linearGradient>
+  </defs>
+  <circle cx="4.5" cy="4.5" r="4.25" fill="url(#blue)"
+          stroke="#1a5fb4" stroke-width="0.5"/>
+</svg>

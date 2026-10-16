@@ -1,0 +1,34 @@
+.ee-bypass-button {
+    padding: 4px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.ee-bypass-button:hover {
+    background-color: rgba(128, 128, 128, 0.18);
+}
+
+.ee-bypass-button:checked {
+    background-color: rgba(128, 128, 128, 0.35);
+    border-color: rgba(128, 128, 128, 0.65);
+}
+
+.ee-bypass-button:checked:hover {
+    background-color: rgba(128, 128, 128, 0.45);
+}
+
+.ee-bypass-button:focus {
+    border-color: rgba(128, 128, 128, 0.9);
+}
+
+.ee-bypass-button:insensitive {
+    color: rgba(128, 128, 128, 0.65);
+}
+
+.ee-bypass-button:insensitive:hover {
+    background-color: transparent;
+}
+
+.ee-bypass-button:checked:insensitive:hover {
+    background-color: rgba(128, 128, 128, 0.35);
+}
