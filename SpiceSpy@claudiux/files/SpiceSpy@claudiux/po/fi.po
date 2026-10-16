@@ -35,35 +35,36 @@ msgid "translations"
 msgstr "käännökset"
 
 #. applet.js:308
-#, fuzzy
 msgid "Reload icons"
-msgstr "Virkistä tämä sovelma"
+msgstr "Lataa kuvakkeet"
 
 #. applet.js:314
 msgid "Visit website"
-msgstr ""
+msgstr "Verkkosivulle"
 
 #. applet.js:417
 msgid ""
 "Check in progress.\n"
 "Time remaining:"
 msgstr ""
+"Tarkistetaan.\n"
+"Kesto:"
 
 #. applet.js:420
 msgid "Ends around:"
-msgstr ""
+msgstr "Päättyy noin:"
 
 #. applet.js:437
 msgid "Time remaining until the next check:"
-msgstr ""
+msgstr "Seuraavaan tarkistukseen:"
 
 #. applet.js:439 applet.js:741
 msgid "Next check at:"
-msgstr ""
+msgstr "Seuraava tarkistus:"
 
 #. applet.js:444
 msgid "Getting Started. Please wait..."
-msgstr ""
+msgstr "Aloitetaan. Odota hetki..."
 
 #. applet.js:893
 msgid "Spices"
@@ -79,11 +80,11 @@ msgstr "Päivitä"
 
 #. applet.js:1009
 msgid "Refreshing in progress - Click to stop"
-msgstr ""
+msgstr "Päivitetään - pysäytä painamalla"
 
 #. applet.js:1023
 msgid "Refreshing in progress"
-msgstr ""
+msgstr "Päivitetään"
 
 #. applet.js:1035
 msgid "Configure..."
@@ -97,8 +98,8 @@ msgstr "SpiceSpy"
 msgid ""
 "Notifies you when there's a change to your favorite Spices on the website."
 msgstr ""
-"Ilmoittaa kun verkossa tapahtuu muutoksia sinun suosimalle sovelmalle. "
-"Laajat mahdollisuudet seurata eri asioita."
+"Ilmoittaa kun tapahtuu muutoksia sinun suosikki Cinnamon Spices sovelmille "
+"(todella informatiivinen)."
 
 #. settings-schema.json->pageGeneral->title
 msgid "General"
@@ -119,15 +120,15 @@ msgstr "Luettelo sovelmista jotka kiinnostaa sinua"
 
 #. settings-schema.json->update-interval-hours->description
 msgid "Update interval"
-msgstr "Päivitysväli"
+msgstr "Päivitystiheys"
 
 #. settings-schema.json->update-interval-hours->units
 msgid "hours"
-msgstr "tuntia"
+msgstr " tuntia"
 
 #. settings-schema.json->update-interruptible->description
 msgid "The update can be interrupted by the user"
-msgstr ""
+msgstr "Käyttäjä voi keskeyttää päivityksen"
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
@@ -135,11 +136,11 @@ msgstr "Peittävyys muutoksen puuttuessa"
 
 #. settings-schema.json->color-on-change->description
 msgid "Color on change"
-msgstr "Värin vaihtuessa"
+msgstr "Väri muutoksessa"
 
 #. settings-schema.json->show-icon-in-menu->description
 msgid "Show each Spice icon in the menu"
-msgstr "Näytä sovelman kuvake valikossa"
+msgstr "Näytä kukin Spice-kuvake"
 
 #. settings-schema.json->icon-size->description
 msgid "Icon size"
@@ -147,48 +148,47 @@ msgstr "Kuvakekoko"
 
 #. settings-schema.json->icon-size->options
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #. settings-schema.json->icon-size->options
 msgid "22"
-msgstr ""
+msgstr "22"
 
 #. settings-schema.json->icon-size->options
 msgid "24"
-msgstr ""
+msgstr "24"
 
 #. settings-schema.json->icon-size->options
 msgid "32"
-msgstr ""
+msgstr "32"
 
 #. settings-schema.json->icon-size->options
 msgid "48"
-msgstr ""
+msgstr "48"
 
 #. settings-schema.json->icon-size->options
 msgid "64"
-msgstr ""
+msgstr "64"
 
 #. settings-schema.json->icon-size->options
 msgid "96"
-msgstr ""
+msgstr "96"
 
 #. settings-schema.json->icon-size->options
 msgid "128"
-msgstr ""
+msgstr "128"
 
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"
-msgstr "Näytä kielipakettien määrä valikossa"
+msgstr "Näytä kielipakettien määrä"
 
 #. settings-schema.json->show-commits->description
-#, fuzzy
 msgid "Show available updates in the menu"
-msgstr "Näytä ongelmien määrä valikossa"
+msgstr "Näytä saatavilla olevat päivitykset"
 
 #. settings-schema.json->show-issues->description
 msgid "Show number of issues in the menu"
-msgstr "Näytä ongelmien määrä valikossa"
+msgstr "Näytä ongelmien määrä"
 
 #. settings-schema.json->sort-by->description
 msgid "Sort by"
@@ -224,9 +224,8 @@ msgid "Number of comments (top-down)"
 msgstr "Kommentit (eniten)"
 
 #. settings-schema.json->sort-by->options
-#, fuzzy
 msgid "Number of issues"
-msgstr "Näytä ongelmien määrä valikossa"
+msgstr "Ongelmien määrä"
 
 #. settings-schema.json->show-uuid->description
 msgid "Show UUID instead of name"
@@ -254,11 +253,11 @@ msgstr "Älä näytä mitään"
 
 #. settings-schema.json->useful-only->description
 msgid "Show only non-zero values in panel"
-msgstr "Näytä vain nollasta poikkeavat arvot paneelissa"
+msgstr "Näytä vain nollasta poikkeavat arvot"
 
 #. settings-schema.json->colorWhileRefreshing->description
 msgid "Icon color while refreshing"
-msgstr ""
+msgstr "Kuvakeväri päivityksen aikana"
 
 #. settings-schema.json->author-list->columns->title
 msgid "GitHub user name"
@@ -266,7 +265,7 @@ msgstr "GitHub käyttäjänimi"
 
 #. settings-schema.json->button-my-spices->description
 msgid "Add all the Spices I use"
-msgstr "Lisää kaikki mausteet joita käytän"
+msgstr "Lisää kaikki sovellukset joita käytän"
 
 #. settings-schema.json->label-reload->description
 msgid ""
@@ -276,10 +275,9 @@ msgid ""
 "process.\n"
 "Just don't do it too often."
 msgstr ""
-"Tekijät-luettelon jäsenten ylläpitämiä mausteita ei tarvitse lisätä UUID-"
-"luetteloon.\n"
-"Kun luettelosi on oikein, nopeuta prosessia virkistämällä sovelma "
-"uudelleen.\n"
+"UUID-luetteloon ei tarvitse lisätä sovelluksia jotka ovat jo ohjelmoijat "
+"luettelossa.\n"
+"Kun luettelo on oikein, nopeuta prosessia virkistämällä sovelma uudelleen.\n"
 "Älä tee sitä liian usein."
 
 #. settings-schema.json->button-reload->description
