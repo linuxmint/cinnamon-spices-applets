@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-10-12 18:05+0200\n"
-"PO-Revision-Date: 2025-04-04 17:05+0300\n"
+"PO-Revision-Date: 2026-10-16 20:05+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -2375,7 +2375,7 @@ msgstr ""
 #. 6.4->settings-schema.json->btn_tickallthenrefresh_themes->description
 #. 6.4->settings-schema.json->btn_tickallthenrefresh_actions->description
 msgid "Tick all the first boxes then refresh"
-msgstr ""
+msgstr "Valitse kaikki laatikot ja päivitä sitten sivu"
 
 #. 6.0->settings-schema.json->check_actions->description
 #. 6.4->settings-schema.json->check_actions->description
@@ -2471,20 +2471,17 @@ msgstr ""
 "päivämäärän mukaan."
 
 #. 6.4->settings-schema.json->section_general5->title
-#, fuzzy
 msgid "Dependencies"
-msgstr "Tarkistetaan riippuvuuksia"
+msgstr "Riippuvuudet"
 
 #. 6.4->settings-schema.json->btn_apply_applets->description
 #. 6.4->settings-schema.json->btn_apply_desklets->description
 #. 6.4->settings-schema.json->btn_apply_extensions->description
 #. 6.4->settings-schema.json->btn_apply_themes->description
 #. 6.4->settings-schema.json->btn_apply_actions->description
-#, fuzzy
 msgid "Apply"
-msgstr "Paneeli"
+msgstr "Käytä"
 
 #. 6.4->settings-schema.json->dont_check_dependencies->description
-#, fuzzy
 msgid "Do not check dependencies"
-msgstr "Tarkistetaan riippuvuuksia"
+msgstr "Älä tarkista riippuvuuksia"
