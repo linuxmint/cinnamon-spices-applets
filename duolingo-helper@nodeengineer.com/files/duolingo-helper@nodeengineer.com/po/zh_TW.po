@@ -1,17 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# Duolingo Helper Cinnamon applet translations.
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: duolingo-helper@nodeengineer.com 1.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2024-04-09 14:22-0400\n"
-"PO-Revision-Date: 2025-04-25 00:36+0800\n"
-"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
-"Language-Team: \n"
+"Project-Id-Version: duolingo-helper@nodeengineer.com 2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/H234598/duolingo-helper-cinnamon/issues\n"
+"POT-Creation-Date: 2026-05-23 00:00+0000\n"
+"PO-Revision-Date: 2026-05-23 00:00+0000\n"
+"Last-Translator: Codex <noreply@example.com>\n"
+"Language-Team: zh_TW\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,8 +16,64 @@ msgstr ""
 
 #. metadata.json->name
 msgid "Duolingo Helper"
-msgstr "Duolingo Helper"
+msgstr "Duolingo 小幫手"
 
 #. metadata.json->description
 msgid "Handy app to help practise with Duolingo."
-msgstr "方便的小工具，協助您在 Duolingo 上練習。"
+msgstr "協助使用 Duolingo 練習的實用小程式。"
+
+#. applet.js
+msgid "Settings"
+msgstr "設定"
+
+#. applet.js
+msgid "Right-click -> Settings"
+msgstr "右鍵 -> 設定"
+
+#. applet.js
+msgid "not found"
+msgstr "找不到"
+
+#. applet.js
+msgid "Error %s"
+msgstr "錯誤 %s"
+
+#. applet.js
+msgid "no course"
+msgstr "沒有課程"
+
+#. applet.js
+msgid "No users configured"
+msgstr "尚未設定使用者"
+
+#. applet.js
+msgid "Duolingo Statistics"
+msgstr "Duolingo 統計"
+
+#. applet.js
+msgid "%s: %s days, %s total XP, %s XP in %s%s"
+msgstr "%s：%s 天，總計 %s XP，%s 中有 %s XP%s"
+
+#. applet.js
+msgid "%s - %s days - %s XP"
+msgstr "%s - %s 天 - %s XP"
+
+#. applet.js
+msgid "Open Duolingo"
+msgstr "開啟 Duolingo"
+
+#. applet.js
+msgid "Refresh now"
+msgstr "立即重新整理"
+
+#. settings-schema.json->users->description
+msgid "Duolingo users"
+msgstr "Duolingo 使用者"
+
+#. settings-schema.json->users->columns->enabled->title
+msgid "Enabled"
+msgstr "啟用"
+
+#. settings-schema.json->users->columns->username->title
+msgid "Username"
+msgstr "使用者名稱"
