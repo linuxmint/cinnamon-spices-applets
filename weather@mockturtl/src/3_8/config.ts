@@ -30,6 +30,7 @@ import { soupLib } from "./lib/soupLib";
 import { GeoTimezone } from "./location_services/tz_lookup";
 import { SwissMeteo } from "./providers/swiss-meteo/provider";
 import { MetUk } from "./providers/met_uk/provider";
+import { HeFeng } from "./providers/hefeng/provider";
 import { IpApi } from "./location_services/geoip_services/ipApi";
 import { GeoJS } from "./location_services/geoip_services/geojs.io";
 import { GeoIPLookupIO } from "./location_services/geoip_services/geoiplookup.io";
@@ -74,7 +75,9 @@ export enum Services {
 	PirateWeather = "PirateWeather",
 	OpenMeteo = "OpenMeteo",
 	OpenWeatherMap_OneCall = "OpenWeatherMap_OneCall",
-	SwissMeteo = "Swiss Meteo"
+	SwissMeteo = "Swiss Meteo",
+	/** 和风天气(QWeather)，面向中国及全球的天气数据服务 */
+	QWeather = "QWeather"
 }
 
 export enum LocationProvider {
@@ -101,6 +104,7 @@ export const ServiceClassMapping = {
 	[Services.PirateWeather]: () => new PirateWeather(),
 	[Services.OpenMeteo]: () => new OpenMeteo(),
 	[Services.SwissMeteo]: () => new SwissMeteo(),
+	[Services.QWeather]: () => new HeFeng(),
 } satisfies ServiceClassMappingType;
 
 type ServiceImplementation<T extends Services> = ReturnType<typeof ServiceClassMapping[T]>;
@@ -128,6 +132,10 @@ export class Config {
 	private readonly _tomorrowio_apikey!: string;
 	private readonly _accuweather_apikey!: string;
 	private readonly _weatherunderground_apikey!: string;
+	/** 和风天气 API Key */
+	private readonly _qweather_apikey!: string;
+	/** 和风天气专属 API Host */
+	private readonly _qweather_host!: string;
 	private readonly _useSymbolicIcons!: boolean;
 	public readonly keybinding!: string;
 
@@ -187,6 +195,10 @@ export class Config {
 	public readonly TomorrowIOApiKeyChanged = new Event<Config, string>();
 	public readonly AccuWeatherApiKeyChanged = new Event<Config, string>();
 	public readonly WeatherUndergroundApiKeyChanged = new Event<Config, string>();
+	/** 和风天气 API Key 变更事件 */
+	public readonly QWeatherApiKeyChanged = new Event<Config, string>();
+	/** 和风天气 API Host 变更事件 */
+	public readonly QWeatherHostChanged = new Event<Config, string>();
 	public readonly TemperatureUnitChanged = new Event<Config, WeatherUnits>();
 	public readonly TemperatureHighFirstChanged = new Event<Config, boolean>();
 	public readonly WindSpeedUnitChanged = new Event<Config, WeatherWindSpeedUnits>();
@@ -446,6 +458,12 @@ export class Config {
 				return {
 					apiKey: this._pirateweather_apikey.trim() || oldApiKey
 				} satisfies ServiceOption<Services.PirateWeather> as ServiceOption<T>;
+			}
+			case Services.QWeather: {
+				return {
+					apiKey: this._qweather_apikey.trim(),
+					host: this._qweather_host.trim()
+				} satisfies ServiceOption<Services.QWeather> as ServiceOption<T>;
 			}
 			case Services.OpenWeatherMap_Open:
 			case Services.DeutscherWetterdienst:
@@ -838,6 +856,14 @@ const Keys = {
 	WEATHER_UNDERGROUND_APIKEY: {
 		key: "weatherunderground_apikey",
 		prop: "WeatherUndergroundApiKey"
+	},
+	QWEATHER_APIKEY: {
+		key: "qweather_apikey",
+		prop: "QWeatherApiKey"
+	},
+	QWEATHER_HOST: {
+		key: "qweather_host",
+		prop: "QWeatherHost"
 	},
 	TEMPERATURE_UNIT_KEY: {
 		key: "temperatureUnit",
