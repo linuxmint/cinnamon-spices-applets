@@ -1,0 +1,57 @@
+.chatgpt-limits-pad {
+    padding: 10px 14px;
+}
+
+.chatgpt-limits-title {
+    font-size: 1.15em;
+    font-weight: bold;
+    padding-bottom: 8px;
+}
+
+.chatgpt-limits-panel-gauge {
+    margin: 0px 2px;
+}
+
+.chatgpt-limits-message {
+    padding: 4px 0px 8px 0px;
+}
+
+.chatgpt-limits-card {
+    background-color: rgba(128, 138, 150, 0.14);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+.chatgpt-limits-card-header {
+    padding-bottom: 7px;
+}
+
+.chatgpt-limits-card-name {
+    font-weight: bold;
+}
+
+.chatgpt-limits-card-percent {
+    font-size: 1.05em;
+    font-weight: bold;
+}
+
+.chatgpt-limits-progress {
+    height: 7px;
+    margin-bottom: 7px;
+}
+
+.chatgpt-limits-card-reset {
+    font-size: 0.9em;
+    opacity: 0.72;
+}
+
+.chatgpt-limits-card-exact {
+    font-size: 0.85em;
+    opacity: 0.6;
+}
+
+.chatgpt-limits-status {
+    font-size: 0.85em;
+    opacity: 0.65;
+}
