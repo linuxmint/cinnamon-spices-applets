@@ -48,6 +48,7 @@ const NetworkMetric = imports.lib.metrics.network;
 const FanMetric     = imports.lib.metrics.fan;
 const ProcessMetric = imports.lib.metrics.processes;
 const GpuMetric     = imports.lib.metrics.gpu;
+const StripModule   = imports.lib.strip;
 
 var LaptopTooltip = class LaptopTooltip {
   constructor(owner, orientation) {
@@ -89,6 +90,28 @@ var LaptopTooltip = class LaptopTooltip {
   }
 
   set_text(text) { this.setContent([{ type: 'text', html: text || '' }]); }
+
+  // Disable the hover-to-show behaviour without destroying the tooltip.
+  // Used by single-tile-mode: the collapsed source tile should surface
+  // the strip overlay instead of its own tooltip, but setContent() calls
+  // from the polling loop must still succeed on an inert tooltip.
+  disableHover() {
+    if (this._hoverDisabled) return;
+    this._hoverDisabled = true;
+    try { this._owner.disconnect(this._eSig); } catch(e) {}
+    try { this._owner.disconnect(this._lSig); } catch(e) {}
+    try { this._box.hide(); } catch(e) {}
+  }
+
+  // Imperative hide — called by SingleTileStrip when it closes, so inner
+  // tile tooltips don't linger past the strip they belong to.
+  hide() { try { this._box.hide(); } catch(e) {} }
+
+  // Reposition relative to a different anchor rect than the owner tile's
+  // own geometry. Used by single-tile-mode to place inner-tile tooltips
+  // on the free side of the strip overlay rather than overlapping it.
+  // Pass null to clear the override.
+  setAnchor(anchor) { this._anchor = anchor; }
 
   _createRow(item) {
     if (item.type === 'text') {
@@ -250,12 +273,21 @@ var LaptopTooltip = class LaptopTooltip {
     const monitor  = Main.layoutManager.primaryMonitor;
 
     let x, y;
-    // Vertical panels: place the tooltip beside the tile so it doesn't
-    // cover the panel or the icons above/below.
-    //   LEFT panel  → tooltip to the right of the tile
-    //   RIGHT panel → tooltip to the left of the tile
-    // Horizontal panels: keep the existing top-vs-bottom logic.
-    if (this._orientation === St.Side.LEFT) {
+    const anchorRect = typeof this._anchor === 'function' ? this._anchor() : this._anchor;
+    if (anchorRect) {
+      // Single-tile-mode: anchor is the strip overlay. Place the tooltip on
+      // whichever horizontal side has more room so it never covers the strip.
+      const spaceRight = (monitor.x + monitor.width)  - (anchorRect.x + anchorRect.w);
+      const spaceLeft  = anchorRect.x - monitor.x;
+      if (spaceRight >= bw || spaceRight >= spaceLeft) {
+        x = anchorRect.x + anchorRect.w;
+      } else {
+        x = anchorRect.x - bw;
+      }
+      y = oy; // align vertically with the hovered tile, not the strip
+    } else if (this._orientation === St.Side.LEFT) {
+      // Vertical panels: place the tooltip beside the tile so it doesn't
+      // cover the panel or the icons above/below.
       x = ox + ow;
       y = oy;
     } else if (this._orientation === St.Side.RIGHT) {
@@ -270,6 +302,15 @@ var LaptopTooltip = class LaptopTooltip {
     x = Math.max(monitor.x, Math.min(x, monitor.x + monitor.width  - bw));
     y = Math.max(monitor.y, Math.min(y, monitor.y + monitor.height - bh));
     this._box.set_position(Math.round(x), Math.round(y));
+    // Keep the tooltip above any later-added stage siblings (notably the
+    // single-tile-mode strip overlay, which otherwise obscures the tooltip
+    // for a tile that lives inside the strip).
+    try {
+      const parent = this._box.get_parent();
+      if (parent && parent.set_child_above_sibling) {
+        parent.set_child_above_sibling(this._box, null);
+      }
+    } catch(e) {}
   }
 
   destroy() {
@@ -334,6 +375,7 @@ class YasmApplet extends Applet.Applet {
     this._instanceId = instanceId;
     this._cpuTempAlertLastMs = 0;
     this._gpuTempAlertLastMs = 0;
+    this._launchHandles = new Set();
     this._settings = new Settings.AppletSettings(this, UUID, instanceId);
     this._bindSettings();
     this._autoScanIfEmpty();
@@ -367,6 +409,9 @@ class YasmApplet extends Applet.Applet {
     bind('refresh-interval', '_refreshInterval', () => this._restartPolling());
     bind('panel-separator',   '_separator');
     bind('compact-mode',      '_compactMode', () => this._rebuildSections());
+    bind('single-tile-mode',        '_singleTileMode',       () => this._onSingleTileModeChanged());
+    bind('single-tile-pick',        '_singleTileSource',     () => this._rebuildSections());
+    bind('single-tile-custom-text', '_singleTileCustomText', () => this._rebuildSections());
     bind('uptime-load-label', '_uptimeLoadLabel');
     bind('battery-list',      '_batteryList',    () => this._restartManager());
     bind('net-list',         '_netList');
@@ -458,6 +503,7 @@ class YasmApplet extends Applet.Applet {
   }
 
   _rebuildSections() {
+    this._destroyStrip();
     if (this._sections) {
       for (const { tooltip } of Object.values(this._sections))
         try { tooltip.destroy(); } catch(e) {}
@@ -469,6 +515,7 @@ class YasmApplet extends Applet.Applet {
 
   _buildSections() {
     // Always clean up first — constructor callbacks may have already built sections
+    this._destroyStrip();
     if (this._sections) {
       for (const { tooltip } of Object.values(this._sections))
         try { tooltip.destroy(); } catch(e) {}
@@ -476,9 +523,16 @@ class YasmApplet extends Applet.Applet {
     this.actor.get_children().forEach(c => this.actor.remove_actor(c));
 
     this._sections = {};
-    const vertical = this._isVertical();
-    const compact  = this._useCompactMode();
-    this.actor.vertical = vertical;
+    const vertical       = this._isVertical();
+    const compactUser    = this._useCompactMode();
+    // In single-tile-mode the strip's inner tiles should always show both
+    // icon and text — the strip is a floating overlay that's never
+    // space-constrained, so forcing compact there would hide the labels
+    // the user came to see. Compact styling then applies only to the
+    // trigger tile built later in _applySingleTileMode().
+    const willHaveStrip  = !!this._singleTileMode && this._enabledKeys().length > 1;
+    const compact        = willHaveStrip ? false : compactUser;
+    this.actor.vertical  = vertical;
     this.actor.add_style_class_name('yasm-box');
 
     for (const { key } of SECTIONS) {
@@ -574,7 +628,14 @@ class YasmApplet extends Applet.Applet {
         tile.connect('button-press-event', (actor, event) => {
           if (event.get_button() !== 1) return Clutter.EVENT_PROPAGATE;
           if (global.settings.get_boolean('panel-edit-mode')) return Clutter.EVENT_PROPAGATE;
-          Util.spawn(['x-terminal-emulator', '-e', 'top']);
+          // In single-tile-mode the strip is a Cinnamon chrome actor that
+          // currently holds the pointer context; spawning a new window
+          // while it's up triggers Mutter's focus-steal prevention and
+          // the terminal opens behind the foreground app. Close the
+          // strip first so the terminal gets focus.
+          if (this._strip) this._strip.close();
+          this._launchAndRaise(['x-terminal-emulator', '-e', 'top'],
+            /terminal|xterm|alacritty|konsole|kitty|tilix|wezterm/);
           return Clutter.EVENT_STOP;
         });
       }
@@ -583,6 +644,236 @@ class YasmApplet extends Applet.Applet {
       this._sections[key] = { sep, tile, label, tooltip, loadLabel, iconActor, acIconImage, batIconImage };
     }
 
+    this._applySingleTileMode();
+  }
+
+  // When the user turns off single-tile mode, reset the trigger-icon
+  // dropdown back to 'auto'. This also hides the Custom-text entry
+  // (which depends on single-tile-pick=custom-text) — otherwise it
+  // would linger visible after mode is switched off, because Cinnamon's
+  // schema dependency is single-condition only.
+  _onSingleTileModeChanged() {
+    if (!this._singleTileMode && this._singleTileSource !== 'auto') {
+      // setValue triggers the single-tile-pick callback → rebuild runs
+      // through that path; no explicit rebuild needed here.
+      this._settings.setValue('single-tile-pick', 'auto');
+      return;
+    }
+    this._rebuildSections();
+  }
+
+  _enabledKeys() {
+    return SECTIONS.filter(({ key }) => !!this[`_${key}Enabled`]).map(({ key }) => key);
+  }
+
+  // Resolve the single-tile-source setting against the currently enabled
+  // monitors. 'custom-text' is a sentinel for a static emoji/icon trigger that
+  // doesn't mirror any section. 'auto', an unknown value, or a disabled
+  // selection all fall back to the first enabled key. Returns null only
+  // if nothing is enabled and 'custom-text' isn't chosen.
+  _resolveSingleTileSource() {
+    const choice = this._singleTileSource;
+    if (choice === 'custom-text') return 'custom-text';
+    const enabled = this._enabledKeys();
+    if (enabled.length === 0) return null;
+    if (choice && choice !== 'auto' && enabled.includes(choice)) return choice;
+    return enabled[0];
+  }
+
+  _applySingleTileMode() {
+    if (!this._singleTileMode) return;
+    const enabled = this._enabledKeys();
+    const source  = this._resolveSingleTileSource();
+    if (!source) return;
+    // In 'custom-text' mode the trigger is independent of the sections, so
+    // one tile in the strip is still useful. For section-sourced mode
+    // the trigger IS the one section, so a single enabled monitor
+    // means nothing worth collapsing.
+    if (source === 'custom-text' ? enabled.length === 0 : enabled.length <= 1) return;
+
+    this._strip = new StripModule.SingleTileStrip(this);
+
+    // Reparent every enabled tile (including the source) into the strip.
+    // Separators are deliberately NOT reparented — a vertical overlay
+    // doesn't need the per-tile text separators the horizontal panel uses.
+    // The sep actors stay in the panel and are kept hidden via the
+    // s.inStrip flag below. The tooltip ref lets the strip hide it on
+    // close and reposition it on the free side of the strip.
+    for (const key of enabled) {
+      const s = this._sections[key];
+      try { this.actor.remove_actor(s.tile); } catch(e) {}
+      this._strip.addTile(null, s.tile, s.tooltip);
+      s.inStrip = true;
+    }
+
+    // Build a lightweight trigger proxy that mirrors the source section's
+    // icon + text each poll. Lives in the panel; hover + click wire into
+    // the strip. Respects compact-mode independently of strip tiles.
+    this._trigger = this._buildTriggerTile(source);
+    this.actor.add_actor(this._trigger.tile);
+    this._strip.attachTo(this._trigger.tile);
+  }
+
+  // Build the collapsed-view proxy tile. Mirrors the structural styling of
+  // a normal section tile so the panel looks consistent, but holds no
+  // metric logic — _syncTriggerTile() copies live state from the source
+  // section each polling cycle.
+  _buildTriggerTile(sourceKey) {
+    const compact  = this._useCompactMode();
+    const iconMult = compact ? 0.45 : 0.6;
+    const iconSize = Math.max(16, Math.round((this._panelHeight || 40) * iconMult));
+
+    const tile = new St.BoxLayout({ reactive: true, track_hover: true });
+    tile.add_style_class_name('yasm-label');
+    tile.add_style_class_name('threshold-ok');
+    if (this._isVertical()) tile.add_style_class_name('yasm-label-vertical');
+    if (compact)            tile.add_style_class_name('yasm-label-compact');
+    tile.set_y_align(Clutter.ActorAlign.CENTER);
+
+    const pad = Math.max(1, Math.round(iconSize * 0.12));
+    const brd = Math.max(1, Math.round(iconSize * 0.06));
+    const spc = Math.max(2, Math.round(iconSize * 0.12));
+    tile.set_style(`padding: ${pad}px ${pad + 2}px; border-width: ${brd}px;`);
+    tile.spacing = spc;
+
+    // Custom source: user supplied emoji/text, or fall back to the YASM
+    // icon. No per-poll mirroring happens in this mode.
+    let iconActor = null;
+    let emojiLabel = null;
+    if (sourceKey === 'custom-text') {
+      const custom = (this._singleTileCustomText || '').trim();
+      if (custom) {
+        emojiLabel = new St.Label({ text: custom });
+        emojiLabel.add_style_class_name('yasm-tile-emoji');
+        emojiLabel.set_y_align(Clutter.ActorAlign.CENTER);
+        // Request an emoji-capable font explicitly — themes often default
+        // to a Latin-only font, which renders emoji as .notdef boxes.
+        emojiLabel.set_style(
+          `font-size: ${iconSize}px; ` +
+          `font-family: "Noto Color Emoji", "Twemoji Mozilla", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;`
+        );
+        tile.add_actor(emojiLabel);
+      } else {
+        iconActor = makeIconActor(`${AppletPath}/icon.png`, iconSize);
+        if (iconActor) tile.add_actor(iconActor);
+        else           tile.add_actor(new St.Widget({ width: 0, height: iconSize }));
+      }
+    } else {
+      iconActor = makeIconActor(`${AppletPath}/icons/${ICON_FILES[sourceKey]}`, iconSize);
+      if (iconActor) tile.add_actor(iconActor);
+      else           tile.add_actor(new St.Widget({ width: 0, height: iconSize }));
+    }
+
+    // Section-sourced trigger carries a text label that mirrors the
+    // source each poll. Custom mode has no section to mirror, so no
+    // label is added (the emoji / icon stands alone).
+    let label = null;
+    if (sourceKey !== 'custom-text') {
+      label = new St.Label({ text: '' });
+      label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
+      label.add_style_class_name('yasm-tile-text');
+      label.set_y_align(Clutter.ActorAlign.CENTER);
+      if (compact) label.hide();
+      tile.add_actor(label);
+    }
+
+    return { tile, iconActor, emojiLabel, label, sourceKey, compact };
+  }
+
+  // Copy icon content, label text, and threshold class from the source
+  // section onto the trigger tile. Called each poll from _updateSections.
+  // No-op for custom trigger (nothing to mirror).
+  _syncTriggerTile() {
+    if (!this._trigger) return;
+    if (this._trigger.sourceKey === 'custom-text') return;
+    const src = this._sections[this._trigger.sourceKey];
+    if (!src) return;
+    if (this._trigger.iconActor && src.iconActor) {
+      try {
+        const content = src.iconActor.get_content();
+        if (content) this._trigger.iconActor.set_content(content);
+      } catch(e) {}
+    }
+    if (!this._trigger.compact && this._trigger.label) {
+      try { this._trigger.label.set_text(src.label.get_text() || ''); } catch(e) {}
+    }
+    // Mirror threshold-* class from source tile
+    const tt = this._trigger.tile;
+    tt.remove_style_class_name('threshold-ok');
+    tt.remove_style_class_name('threshold-warn');
+    tt.remove_style_class_name('threshold-alert');
+    for (const lvl of ['ok', 'warn', 'alert']) {
+      if (src.tile.has_style_class_name(`threshold-${lvl}`)) {
+        tt.add_style_class_name(`threshold-${lvl}`);
+        break;
+      }
+    }
+  }
+
+  // Spawn argv and raise the next matching window ourselves. Needed in
+  // single-tile-mode because clicking a strip tile sinks spawn-launched
+  // windows to the back of the Mutter stack (focus-steal prevention
+  // doesn't see the strip chrome as a legitimate user-action source).
+  // Simpler to just raise it after the fact than fight focus-steal.
+  // reClass: RegExp matched (case-insensitive) against wm_class.
+  _launchAndRaise(argv, reClass) {
+    const display = global.display;
+    const handle = { sigId: 0, timeoutId: 0, raiseTimeoutId: 0 };
+    const cleanup = () => {
+      if (handle.sigId)          { try { display.disconnect(handle.sigId); }          catch(e) {} handle.sigId = 0; }
+      if (handle.timeoutId)      { try { Mainloop.source_remove(handle.timeoutId); } catch(e) {} handle.timeoutId = 0; }
+      if (handle.raiseTimeoutId) { try { Mainloop.source_remove(handle.raiseTimeoutId); } catch(e) {} handle.raiseTimeoutId = 0; }
+      this._launchHandles.delete(handle);
+    };
+    handle.sigId = display.connect('window-created', (d, win) => {
+      const cls = (win.get_wm_class() || '').toLowerCase();
+      if (!reClass.test(cls)) return;
+      // Disconnect + cancel the fallback timeout now; the raise is still in
+      // flight on its own timer which cleanup() also cancels on removal.
+      try { display.disconnect(handle.sigId); } catch(e) {}
+      handle.sigId = 0;
+      if (handle.timeoutId) { try { Mainloop.source_remove(handle.timeoutId); } catch(e) {} handle.timeoutId = 0; }
+      // Defer activation one tick so the window is fully registered
+      // before we touch it; activate() on a brand-new window can race.
+      handle.raiseTimeoutId = Mainloop.timeout_add(50, () => {
+        handle.raiseTimeoutId = 0;
+        this._launchHandles.delete(handle);
+        try {
+          win.raise();
+          win.activate(global.get_current_time());
+        } catch(e) { log(`[yasm] raise/activate failed: ${e}`); }
+        return false;
+      });
+    });
+    handle.timeoutId = Mainloop.timeout_add(3000, () => {
+      handle.timeoutId = 0;
+      cleanup();
+      return false;
+    });
+    this._launchHandles.add(handle);
+    try { Util.spawn(argv); }
+    catch(e) { cleanup(); log(`[yasm] spawn failed: ${e}`); }
+  }
+
+  _destroyStrip() {
+    if (this._trigger) {
+      try { this._trigger.tile.destroy(); } catch(e) {}
+      this._trigger = null;
+    }
+    if (!this._strip) return;
+    try {
+      // Pull tiles out of the strip and destroy them explicitly. _buildSections
+      // creates fresh tile actors into a new _sections map, so these pulled
+      // tiles are orphaned once we return. Without an explicit destroy they
+      // leak St actors + inner St.Labels / icons on every rebuild (orientation
+      // change, panel-height change, settings edit).
+      const pulled = this._strip.takeTiles();
+      for (const { tile } of pulled) {
+        if (tile) { try { tile.destroy(); } catch(e) {} }
+      }
+    } catch(e) {}
+    try { this._strip.destroy(); } catch(e) {}
+    this._strip = null;
   }
 
   _startPolling() {
@@ -954,16 +1245,34 @@ class YasmApplet extends Applet.Applet {
       const show = enabled && hasData;
       if (show) { s.tile.show(); } else { s.tile.hide(); }
 
-      // Separators: between sections horizontally; above sections vertically; hidden when empty
-      if (show && prevVisible && sepStr) { s.sep.show(); } else { s.sep.hide(); }
-      if (show) prevVisible = true;
+      // Separators: between sections horizontally; above sections vertically; hidden when empty.
+      // In single-tile-mode the tile has been reparented into the strip and
+      // its orphaned sep stays in the panel; force-hide it there.
+      if (s.inStrip) {
+        s.sep.hide();
+      } else if (show && prevVisible && sepStr) {
+        s.sep.show();
+      } else {
+        s.sep.hide();
+      }
+      if (show && !s.inStrip) prevVisible = true;
     }
+    this._syncTriggerTile();
   }
 
   on_applet_removed_from_panel() {
     if (this._restartTimeout) { Mainloop.source_remove(this._restartTimeout); this._restartTimeout = null; }
     if (this._earlyTimeout)   { Mainloop.source_remove(this._earlyTimeout);   this._earlyTimeout   = null; }
     if (this._timeout)        { Mainloop.source_remove(this._timeout);         this._timeout        = null; }
+    // Cancel any pending _launchAndRaise watchers so their window-created
+    // signal and timeouts don't fire against a torn-down applet instance.
+    for (const handle of this._launchHandles) {
+      if (handle.sigId)          { try { global.display.disconnect(handle.sigId); }    catch(e) {} }
+      if (handle.timeoutId)      { try { Mainloop.source_remove(handle.timeoutId); }   catch(e) {} }
+      if (handle.raiseTimeoutId) { try { Mainloop.source_remove(handle.raiseTimeoutId); } catch(e) {} }
+    }
+    this._launchHandles.clear();
+    this._destroyStrip();
     if (this._sections) {
       for (const { tooltip } of Object.values(this._sections))
         try { tooltip.destroy(); } catch(e) {}
