@@ -1,0 +1,39 @@
+.port-radar-title {
+    font-weight: bold;
+}
+
+.port-radar-error {
+    font-weight: bold;
+}
+
+.port-radar-socket {
+    font-size: 0.95em;
+    font-weight: bold;
+}
+
+.port-radar-summary {
+    font-weight: bold;
+}
+
+.port-radar-section-title {
+    font-size: 0.82em;
+    font-weight: bold;
+}
+
+.port-radar-detail,
+.port-radar-empty {
+    font-size: 0.85em;
+    opacity: 0.78;
+}
+
+.port-radar-change {
+    font-weight: bold;
+}
+
+.port-radar-change-closed {
+    opacity: 0.78;
+}
+
+.port-radar-search {
+    min-width: 22em;
+}
