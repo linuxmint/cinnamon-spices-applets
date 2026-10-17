@@ -36,7 +36,7 @@ const C = {
 };
 
 const { MetricsManager } = imports.lib.metricsManager;
-const { parseList } = imports.lib.util;
+const { parseList, _ } = imports.lib.util;
 const fileutil      = imports.lib.fileutil;
 const Discover      = imports.lib.discover;
 const UptimeMetric  = imports.lib.metrics.uptime;
@@ -673,7 +673,7 @@ class YasmApplet extends Applet.Applet {
                 `        ${numCores} cores`,
               ].join('\n');
               const procTxt = (typeof ProcessMetric !== 'undefined'
-                ? ProcessMetric.formatTooltip(data.processes) : '') + '\n\n<i>Click to open top</i>';
+                ? ProcessMetric.formatTooltip(data.processes) : '') + `\n\n<i>${_("Click to open top")}</i>`;
               // Structure: [uptime text] [load graph, no labels] [processes]
               s.tooltip.setContent([
                 { type: 'text', html: uptimeTxt },
@@ -737,23 +737,23 @@ class YasmApplet extends Applet.Applet {
               if (isOnAC && bat.usageDetail) {
                 const d = bat.usageDetail;
                 usageLines.push('');
-                usageLines.push('<b>≈ Usage</b>');
-                if (d.pkgWatt != null) usageLines.push(`CPU pkg:  ${d.pkgWatt.toFixed(1)}W`);
-                if (d.gpuWatt)         usageLines.push(`GPU:      ${d.gpuWatt.toFixed(1)}W`);
-                usageLines.push(`DRAM:     ~${d.dram}W`);
-                if (d.display)         usageLines.push(`Display:  ~${d.display}W`);
-                usageLines.push(`Total:    ≈${Math.round(bat.usageW)}W`);
+                usageLines.push(`<b>≈ ${_("Usage")}</b>`);
+                if (d.pkgWatt != null) usageLines.push(`${_("CPU pkg:").padEnd(10)}${d.pkgWatt.toFixed(1)}W`);
+                if (d.gpuWatt)         usageLines.push(`${_("GPU:").padEnd(10)}${d.gpuWatt.toFixed(1)}W`);
+                usageLines.push(`${_("DRAM:").padEnd(10)}~${d.dram}W`);
+                if (d.display)         usageLines.push(`${_("Display:").padEnd(10)}~${d.display}W`);
+                usageLines.push(`${_("Total:").padEnd(10)}≈${Math.round(bat.usageW)}W`);
               } else if (isOnAC && bat.raplAvail === false) {
                 usageLines.push('');
-                usageLines.push('<i>CPU power unavailable — click\n"Enable CPU power monitoring"\nin Power settings</i>');
+                usageLines.push(`<i>${_("CPU power unavailable — click\n\"Enable CPU power monitoring\"\nin Power settings")}</i>`);
               }
 
-              const headerText = isCharging ? '<b>Power — AC</b>'
-                              : isFull     ? '<b>Power — AC (full)</b>'
-                              :              '<b>Power — Battery</b>';
-              const graphLeft  = isCharging ? 'AC↑\n(3hrs)\nDraw↓'
-                              : isFull     ? '(3hrs)'
-                              :              '(3hrs)\nDraw↓';
+              const headerText = isCharging ? `<b>${_("Power — AC")}</b>`
+                              : isFull     ? `<b>${_("Power — AC (full)")}</b>`
+                              :              `<b>${_("Power — Battery")}</b>`;
+              const graphLeft  = isCharging ? `${_("AC↑")}\n${_("(3hrs)")}\n${_("Draw↓")}`
+                              : isFull     ? _("(3hrs)")
+                              :              `${_("(3hrs)")}\n${_("Draw↓")}`;
               const graphSplit = isCharging ? 1/3 : isFull ? 0.5 : 0.05;
               const tooltipItems = [
                 { type: 'text', html: headerText },
@@ -788,7 +788,7 @@ class YasmApplet extends Applet.Applet {
                   try {
                     Gio.Subprocess.new(
                       ['notify-send', '-u', 'critical', '-i', 'dialog-warning',
-                       'CPU Temperature', `CPU temp critical: ${Math.round(data.cpu.packageC)}\xb0C`],
+                       _("CPU Temperature"), _("CPU temp critical: %d°C").replace('%d', Math.round(data.cpu.packageC))],
                       Gio.SubprocessFlags.NONE
                     );
                   } catch(e) {}
@@ -798,7 +798,7 @@ class YasmApplet extends Applet.Applet {
               } 
               s.label.set_text(this._buildText('cpu', CpuMetric.formatPanel(data.cpu.cpuPct, data.cpu.packageC)));
               // Build core table inline so graphs can be placed above it
-              const coreHdr  = `${'Core'.padEnd(6)} ${'%usr'.padStart(5)} ${'%sys'.padStart(5)} ${'%iowt'.padStart(6)} ${'temp'.padStart(6)}`;
+              const coreHdr  = CpuMetric.coreHeader();
               const nTemps   = (data.cpu.coresC || []).length;
               const coreRows = (data.cpu.coreBreakdowns || []).map((b, i) => {
                 const pt   = nTemps > 0 ? data.cpu.coresC[i % nTemps] : undefined;
@@ -807,14 +807,14 @@ class YasmApplet extends Applet.Applet {
               });
               // Structure: [Package heading] [temp graph] [usage% graph] [core table]
               s.tooltip.setContent([
-                { type: 'text', html: '<b>Package</b>' },
-                { type: 'graph', marginTop: 8, 
-                  left: `Temp:`, right: `${String(Math.round(data.cpu.packageC)).padStart(3)}°C`, height: 20,
+                { type: 'text', html: `<b>${_("Package")}</b>` },
+                { type: 'graph', marginTop: 8,
+                  left: `${_("Temp:")}`, right: `${String(Math.round(data.cpu.packageC)).padStart(3)}°C`, height: 20,
                   series: [{ vals: history.cpuPackageC.values(),
                     color: C.ok, maxV: 100,
                     thresholds: { warn: this._cpuTempWarn || 70, alert: this._cpuTempAlert || 85 } }] },
                 { type: 'graph', marginTop: 8,marginBottom: 12,
-                  left: `CPU: `, right: `${String(Math.round(data.cpu.cpuPct)).padStart(3)}%`, height: 20,
+                  left: `${_("CPU:")} `, right: `${String(Math.round(data.cpu.cpuPct)).padStart(3)}%`, height: 20,
                   series: [{ vals: history.cpuPct.values(),
                     color: C.ok,
                     thresholds: { warn: this._cpuUseWarn || 50, alert: this._cpuUseAlert || 80 } }] },
@@ -831,10 +831,10 @@ class YasmApplet extends Applet.Applet {
               const freeVals = usedVals.map(v => 100 - v);
               // Structure: [stacked graph] [memory text]
               s.tooltip.setContent([
-                { type: 'text',html: '<b>Memory</b>'},
+                { type: 'text',html: `<b>${_("Memory")}</b>`},
                 { type: 'graph',
-                  left:  `${Math.round(data.memory.usedPct)}%\nused`,
-                  right: `${data.memory.availableG.toFixed(1)}G\nfree`,
+                  left:  `${Math.round(data.memory.usedPct)}%\n${_("used")}`,
+                  right: `${data.memory.availableG.toFixed(1)}G\n${_("free")}`,
                   height: 20, mode: 'stacked', marginBottom: 12, marginTop: 9,
                   series: [
                     { vals: usedVals, color: [1,    0.4, 0.4,  0.85] },
@@ -861,9 +861,9 @@ class YasmApplet extends Applet.Applet {
                 s.label.set_text(this._buildText('disk', DiskMetric.formatPanel(dfDisks, diskRates)));
                 // Structure: [I/O graph] [disk text]
                 s.tooltip.setContent([
-                  { type: 'text', html: '<b>Disks</b>'},
+                  { type: 'text', html: `<b>${_("Disks")}</b>`},
                   { type: 'graph', marginBottom: 12, marginTop: 8,
-                    left: 'I/O', right: DiskMetric.humanBps(totalBps), height: 20,
+                    left: _("I/O"), right: DiskMetric.humanBps(totalBps), height: 20,
                     series: [{ vals: history.diskIo.values(), color: C.blue }] },
                   { type: 'text', html: DiskMetric.formatTooltip(dfDisks, diskRates, null, nvmeTemps) },
                 ]);
@@ -895,7 +895,7 @@ class YasmApplet extends Applet.Applet {
                   try {
                     Gio.Subprocess.new(
                       ['notify-send', '-u', 'critical', '-i', 'dialog-warning',
-                       'GPU Temperature', `GPU temp critical: ${Math.round(gpuTempC)}\xb0C`],
+                       _("GPU Temperature"), _("GPU temp critical: %d°C").replace('%d', Math.round(gpuTempC))],
                       Gio.SubprocessFlags.NONE
                     );
                   } catch(e) {}
@@ -909,7 +909,7 @@ class YasmApplet extends Applet.Applet {
               if (hasDiscrete) {
                 const busyPct = primary.busyPct != null ? primary.busyPct : 0;
                 gpuItems.push({
-                  type: 'graph', left: 'Busy', right: `${busyPct}%`,
+                  type: 'graph', left: _("Busy"), right: `${busyPct}%`,
                   height: 20, marginTop: 8, marginBottom: 8,
                   series: [{ vals: history.gpuPct.values(), color: C.ok,
                     thresholds: { warn: 50, alert: 80 } }]
@@ -934,11 +934,11 @@ class YasmApplet extends Applet.Applet {
                 s.label.set_text(this._buildText('network', NetworkMetric.formatPanel(rates)));
                 // Structure: [TX↑/RX↓ bidir graph] [per-interface text]
                 s.tooltip.setContent([
-                  { type: 'text', html: '<b>Network</b>'},
-                  { type: 'graph', left: 'TX↑', right: NetworkMetric.humanRate(totalTx),
+                  { type: 'text', html: `<b>${_("Network")}</b>`},
+                  { type: 'graph', left: _("TX↑"), right: NetworkMetric.humanRate(totalTx),
                     height: 20,marginTop: 8,
                     series: [{ vals: history.netTx.values(), color: C.blue }] },
-                  { type: 'graph', left: 'RX↓', right: NetworkMetric.humanRate(totalRx),
+                  { type: 'graph', left: _("RX↓"), right: NetworkMetric.humanRate(totalRx),
                     height: 20, dir: "down", marginBottom: 12,
                     series: [{ vals: history.netRx.values(), color: C.purple, dir: 'down' }] },
                   { type: 'text', html: NetworkMetric.formatTooltip(rates, null, null) },
