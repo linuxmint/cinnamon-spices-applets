@@ -1,43 +1,114 @@
+# VERTICAL SPEEDMETER
+# This file is put in the public domain.
+# 2u841r, 2026
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: vertical-speedmeter@2u841r\n"
-"POT-Creation-Date: 2026-04-10 00:00+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: vertical-speedmeter@2u841r 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-10-17 07:29+0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:29
+#. applet.js:43
 msgid "Detecting active interface..."
 msgstr ""
 
-#: applet.js:82
-msgid "No active network interface detected."
-msgstr ""
-
-#: applet.js:93
-msgid "Failed to read network counters."
-msgstr ""
-
-#: applet.js:217
-msgid "Monitoring %s"
-msgstr ""
-
-#: applet.js:219
-#: applet.js:238
-msgid "Top line is upload. Bottom line is download."
-msgstr ""
-
-#: applet.js:236
+#. applet.js:96 applet.js:405 applet.js:449
+#, javascript-format
 msgid "Interface: %s"
 msgstr ""
 
-#: applet.js:240
+#. applet.js:97 applet.js:128
+msgid "Interface: Auto"
+msgstr ""
+
+#. applet.js:111
+msgid "Interface: detecting..."
+msgstr ""
+
+#. applet.js:116
+msgid "Session: ↑0 B ↓0 B"
+msgstr ""
+
+#. applet.js:121
+msgid "Today: ↑0 B ↓0 B"
+msgstr ""
+
+#. applet.js:134
+msgid "Reset Session Stats"
+msgstr ""
+
+#. applet.js:180
+msgid "Auto-detect"
+msgstr ""
+
+#. applet.js:237
+msgid "No active network interface detected."
+msgstr ""
+
+#. applet.js:253
+msgid "Failed to read network counters."
+msgstr ""
+
+#. applet.js:404
+msgid "detecting..."
+msgstr ""
+
+#. applet.js:406
+#, javascript-format
+msgid "Session: ↑%s ↓%s"
+msgstr ""
+
+#. applet.js:410
+#, javascript-format
+msgid "Today: ↑%s ↓%s"
+msgstr ""
+
+#. applet.js:421
+#, javascript-format
+msgid "Monitoring %s"
+msgstr ""
+
+#. applet.js:423 applet.js:451
+msgid "Top line is upload. Bottom line is download."
+msgstr ""
+
+#. applet.js:453
+#, javascript-format
 msgid "Upload: %s/s"
 msgstr ""
 
-#: applet.js:242
+#. applet.js:455
+#, javascript-format
 msgid "Download: %s/s"
+msgstr ""
+
+#. metadata.json->name
+msgid "Vertical Speedmeter"
+msgstr ""
+
+#. metadata.json->description
+msgid "A minimal vertical panel applet with stacked upload and download rates."
+msgstr ""
+
+#. settings-schema.json->network-header->description
+msgid "Network Interface"
+msgstr ""
+
+#. settings-schema.json->preferred-interface->description
+msgid "Preferred interface (e.g. eno1, eth0, wlan0)"
+msgstr ""
+
+#. settings-schema.json->preferred-interface->tooltip
+msgid ""
+"Leave blank to auto-detect. If set, this interface is used directly and auto-"
+"detection is skipped."
 msgstr ""
