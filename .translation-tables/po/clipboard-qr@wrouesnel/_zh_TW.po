@@ -1,0 +1,27 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: QRLib.js:682
+msgid "Invalid or unsupported mode."
+msgstr ""
+
+#: QRLib.js:686
+msgid "Invalid data format."
+msgstr ""
+
+#: QRLib.js:694
+msgid "Too much data."
+msgstr ""
+
+#: QRLib.js:696
+msgid "Invalid version."
+msgstr ""
+
+#: QRLib.js:699
+msgid "Invalid mask."
+msgstr ""

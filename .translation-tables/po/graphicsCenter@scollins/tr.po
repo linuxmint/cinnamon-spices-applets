@@ -1,0 +1,129 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Gökhan GÖKKAYA <gokhanlnx@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2018-11-10 14:45+0300\n"
+"Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
+"Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:125
+msgid "Clear"
+msgstr "Temizle"
+
+#. applet.js:158
+msgid "Graphics"
+msgstr "Grafikler"
+
+#. applet.js:237
+msgid "LAUNCHERS"
+msgstr "BAŞLATICILAR"
+
+#. applet.js:262
+msgid "PICTURES"
+msgstr "RESİMLER"
+
+#. applet.js:273
+msgid "Open folder"
+msgstr "Dizin aç"
+
+#. applet.js:300
+msgid "RECENT DOCUMENTS"
+msgstr "SON BELGELER"
+
+#. metadata.json->name
+msgid "Graphics Center"
+msgstr "Grafik Merkezi"
+
+#. metadata.json->description
+msgid "Provides an easy and fast resource for all your picture needs"
+msgstr "Tüm fotoğraf ihtiyaçlarınız için kolay ve hızlı bir kaynak sağlar"
+
+#. metadata.json->comments
+msgid ""
+"Graphics Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy aceess to all of your graphics programs and pictures. Feel "
+"free to contribute by submitting pull requests, bug reports and feature "
+"requests to my github repo."
+msgstr ""
+"Grafik Merkezi, tüm grafik programlarınıza ve resimlerinize kolay erişim "
+"sağlayan, zengin özelliklere sahip, çapraz platformlu bir Cinnamon "
+"uygulamasıdır. Github deposundan işleme isteği, hata raporları ve özellik "
+"istekleri göndererek katkıda bulunmaktan çekinmeyin."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Yazar"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Genel Ayarlar"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Panel simgesi"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+"Simge adını veya doğrudan yolu kabul eder (sembolik simgeleri destekler)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Panel metni"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shorcut key"
+msgstr "Menü kısayol tuşu"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "piksel"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Menü simge boyutu"
+
+#. settings-schema.json->pictures->description
+msgid "Pictures"
+msgstr "Resimler"
+
+#. settings-schema.json->showPictures->description
+msgid "Show contents of pictures directory"
+msgstr "Resimler dizininin içeriğini göster"
+
+#. settings-schema.json->recursePictures->description
+msgid "Show contents of subfolders"
+msgstr "Alt dizinlerin içeriğini göster"
+
+#. settings-schema.json->altDir->description
+msgid "Use alternate directory"
+msgstr "Alternatif dizin kullan"
+
+#. settings-schema.json->pictureSize->description
+msgid "Thumbnail size"
+msgstr "Önizleme boyutu"
+
+#. settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "Son Belgeler"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Son belgeleri göster"
+
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Sayı göster"

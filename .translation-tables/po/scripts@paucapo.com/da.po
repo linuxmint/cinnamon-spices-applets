@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: scripts@paucapo.com\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2022-10-30 15:54+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:24
+msgid ""
+"No terminals are found. Switch the setting <Find automatically a terminal> "
+"off to fix this."
+msgstr ""
+"Der blev ikke fundet nogen terminaler. Slå indstillingen <Find automatisk en "
+"terminal> fra for at løse det."
+
+#: applet.js:64
+msgid "Desktop env default terminal: "
+msgstr "Standardterminal for skrivebordsmiljøet: "
+
+#: applet.js:65 applet.js:90 applet.js:115
+msgid "Command to execute a script: "
+msgstr "Kommando for at køre et script"
+
+#: applet.js:89
+msgid "Sym-link of x-terminal-emulator: "
+msgstr "Sym-link af x-terminal-emulator: "
+
+#: applet.js:172
+#, javascript-format
+msgid "The script: <%s> doesn't exist"
+msgstr "Scriptet <%s> findes ikke"
+
+#. settings-schema.json->leftClickBehavior->options
+#. settings-schema.json->rightClickBehavior->options
+#: applet.js:211
+msgid "Execute silently"
+msgstr "Kør uovervåget"
+
+#. settings-schema.json->leftClickBehavior->options
+#. settings-schema.json->rightClickBehavior->options
+#: applet.js:216
+msgid "Execute in terminal"
+msgstr "Kør i terminal"
+
+#. settings-schema.json->leftClickBehavior->options
+#. settings-schema.json->rightClickBehavior->options
+#: applet.js:221
+msgid "Edit the script"
+msgstr "Redigér scriptet"
+
+#: applet.js:227
+msgid "Open the document"
+msgstr "Åbn dokumentet"
+
+#: applet.js:360
+msgid "Scripts"
+msgstr "Scripter"
+
+#: applet.js:425
+msgid ""
+"The applet Script Menu cant run due to missing dependencies. The missing "
+"dependencies are:"
+msgstr ""
+"Panelprogrammet Scriptmenu kan ikke køre pga. manglende afhængigheder. De "
+"manglende afhængigheder er:"
+
+#: applet.js:433
+msgid ""
+"Terminal emulator. Switch the setting <Find automatically a terminal> off to "
+"fix this."
+msgstr ""
+"Terminalemulator. Slå indstillingen <Find automatisk en terminal> fra for at "
+"løse det."
+
+#: applet.js:470
+msgid "Open scripts folder"
+msgstr "Åbn scriptmappen"
+
+#: applet.js:475
+msgid "Update menu"
+msgstr "Opdatér menu"
+
+#: applet.js:482
+msgid "Applet 'Script Menu'"
+msgstr "Scriptmenu"
+
+#. metadata.json->name
+msgid "Scripts Menu"
+msgstr "Scriptmenu"
+
+#. metadata.json->description
+msgid "Menu applet for starting scripts"
+msgstr "Kør scripter fra statusfeltet"
+
+#. settings-schema.json->autoupdate->description
+msgid "Autoupdate. Update scripts list when the applet is opened."
+msgstr ""
+"Automatisk opdatering. Opdatér listen over scripter, når panelprogrammet "
+"åbnes."
+
+#. settings-schema.json->directory->description
+msgid "Scripts directory"
+msgstr "Scriptmappe"
+
+#. settings-schema.json->head_icon->description
+msgid "Icon"
+msgstr "Ikon"
+
+#. settings-schema.json->customicon->description
+msgid "Custom icon"
+msgstr "Tilpasset ikon"
+
+#. settings-schema.json->icon->description
+msgid "Icon (empty to hide the icon)"
+msgstr "Ikon (tom for at skjule ikonet)"
+
+#. settings-schema.json->showtitle->description
+msgid "Show title"
+msgstr "Vis titel"
+
+#. settings-schema.json->paneltitle->description
+msgid "Title"
+msgstr "Titel"
+
+#. settings-schema.json->head_scriptExecution->description
+msgid "Script execution"
+msgstr "Scriptkørsel"
+
+#. settings-schema.json->leftClickBehavior->description
+msgid "Script execution method on left click"
+msgstr "Metode til scriptkørsel ved venstreklik"
+
+#. settings-schema.json->leftClickBehavior->tooltip
+msgid "How the scripts are processed when you left click on them."
+msgstr "Hvordan scripterne behandles, når du venstreklikker dem."
+
+#. settings-schema.json->leftClickBehavior->options
+#. settings-schema.json->rightClickBehavior->options
+msgid "Ask what to do"
+msgstr "Spørg hvad der skal gøres"
+
+#. settings-schema.json->rightClickBehavior->description
+msgid "Script execution method on right click"
+msgstr "Metode til scriptkørsel ved højreklik"
+
+#. settings-schema.json->rightClickBehavior->tooltip
+msgid "How the scripts are processed when you right click on them."
+msgstr "Hvordan scripterne behandles, når du højreklikker dem."
+
+#. settings-schema.json->findTerminalAutomatically->description
+msgid "Find automatically a terminal? (To execute the scripts in a terminal)"
+msgstr "Find automatisk en terminal? (For at køre scripterne i en terminal)"
+
+#. settings-schema.json->foundTerminalDescription->description
+msgid "The found terminal is:"
+msgstr "Den fundne terminal er:"
+
+#. settings-schema.json->overrideCommandToExecuteInTerminal->description
+msgid "Prepended command to execute the scripts in the terminal"
+msgstr "Foranstillet kommando til kørsel af scripter i terminalen"
+
+#. settings-schema.json->overrideCommandToExecuteInTerminal->tooltip
+msgid ""
+"To execute the scripts 'in terminal', the scripts are executed with this "
+"command prepended.\n"
+"Some potential valid commands are:\n"
+"    gnome-terminal --\n"
+"    nxterm -e\n"
+"    rxvt -e\n"
+"    xterm -e"
+msgstr ""
+"For at køre scripter \"i terminalen\" udføres de med denne kommando "
+"foranstillet.\n"
+"Nogle mulige gyldige kommandoer er:\n"
+"    gnome-terminal --\n"
+"    nxterm -e\n"
+"    rxvt -e\n"
+"    xterm -e"
+
+#. settings-schema.json->useDefaultTextEditorWithScripts->description
+msgid "Use the default editor to edit scripts?"
+msgstr "Brug standardredigeringsprogrammet til redigering af scripter?"
+
+#. settings-schema.json->overrideCommandToEditScripts->description
+msgid "Prepended command to edit the scripts"
+msgstr "Foranstillet kommando til redigering af scripter"
+
+#. settings-schema.json->overrideCommandToEditScripts->tooltip
+msgid ""
+"To edit the scripts, the scripts are executed with this command prepended."
+msgstr "For at redigere scripter udføres de med denne kommando foranstillet."

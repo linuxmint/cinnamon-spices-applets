@@ -1,0 +1,127 @@
+# CINNAMON VANTAGE
+# This file is put in the public domain.
+# Garlayntoji, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: cinnamonvantage@garlayntoji 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-08 17:23-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#: applet.js:66
+msgid "Cinnamon Vantage"
+msgstr "Cinnamon Vantage"
+
+#. settings-schema.json->fnLock-section->title
+#: applet.js:77
+msgid "Fn Lock"
+msgstr "Fn Lock"
+
+#: applet.js:81
+msgid "Super/Windows key"
+msgstr "Phím Super/Windows"
+
+#. settings-schema.json->touchpad-section->title
+#: applet.js:85
+msgid "Touchpad"
+msgstr "Touchpad"
+
+#. settings-schema.json->conservationMode-section->title
+#: applet.js:89
+msgid "Battery conservation mode"
+msgstr "Chế độ tiết kiệm pin"
+
+#. settings-schema.json->rapidCharge-section->title
+#: applet.js:93
+msgid "Battery fast charge mode"
+msgstr "Chế độ sạc pin nhanh"
+
+#: applet.js:97
+msgid "Always On USB"
+msgstr "Luôn bật USB"
+
+#. settings-schema.json->overdrive-section->title
+#: applet.js:101
+msgid "Display Overdrive"
+msgstr "Hiển thị Overdrive"
+
+#. settings-schema.json->gsync-section->title
+#: applet.js:105
+msgid "Hybrid graphics mode"
+msgstr "Chế độ đồ họa lai"
+
+#: applet.js:248
+msgid "CinnamonVantage"
+msgstr "CinnamonVantage"
+
+#: applet.js:249
+msgid "System reboot required"
+msgstr "Cần khởi động lại hệ thống"
+
+#: applet.js:250
+msgid "A system reboot is required for this change to take effect."
+msgstr "Cần phải khởi động lại hệ thống để thay đổi này có hiệu lực."
+
+#. metadata.json->description
+msgid "Displays information and togglables about Lenovo Legion hardware"
+msgstr ""
+"Hiển thị thông tin và các tùy chọn chuyển đổi về phần cứng Lenovo Legion"
+
+#. settings-schema.json->panel->title
+msgid "Cinnamon Vantage settings"
+msgstr "Cài đặt Cinnamon Vantage"
+
+#. settings-schema.json->winkey-section->title
+msgid "Super key"
+msgstr "Phím Super"
+
+#. settings-schema.json->usbCharging-section->title
+msgid "Alway On USB"
+msgstr "Luôn luôn trên USB"
+
+#. settings-schema.json->fnLock->description
+msgid "Access multimedia keys without holding Fn"
+msgstr "Truy cập các phím đa phương tiện mà không cần giữ phím Fn"
+
+#. settings-schema.json->winkey->description
+msgid "Enables the Super/Windows key"
+msgstr "Kích hoạt phím Super/Windows"
+
+#. settings-schema.json->touchpad->description
+msgid "Enables the laptop's touchpad"
+msgstr "Kích hoạt touchpad của laptop"
+
+#. settings-schema.json->conservationMode->description
+msgid "Limits the charge of the battery to extend its lifespan"
+msgstr "Giới hạn mức sạc của pin để kéo dài tuổi thọ của pin"
+
+#. settings-schema.json->rapidCharge->description
+msgid "Allow the battery to charge faster"
+msgstr "Cho phép pin sạc nhanh hơn"
+
+#. settings-schema.json->usbCharging->description
+msgid "Keeps the USB ports always powered on"
+msgstr "Giữ cho các cổng USB luôn được bật"
+
+#. settings-schema.json->overdrive->description
+msgid "Reduces the laptop's display latency"
+msgstr "Giảm độ trễ hiển thị của máy tính xách tay"
+
+#. settings-schema.json->gsync->description
+msgid ""
+"Enables the laptop's integrated graphics.\n"
+" This setting requires a reboot to take effect."
+msgstr ""
+"Bật đồ họa tích hợp của máy tính xách tay.\n"
+"Cài đặt này yêu cầu khởi động lại để có hiệu lực."

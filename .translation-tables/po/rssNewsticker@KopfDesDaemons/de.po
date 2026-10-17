@@ -1,0 +1,67 @@
+# RSS NEWSTICKER
+# This file is put in the public domain.
+# KopfDesDaemons, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rssNewsticker@KopfDesDaemons 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-11-17 20:28+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. applet.js:20
+msgid "Loading Newsticker..."
+msgstr "Lade Newsticker..."
+
+#. applet.js:89
+msgid "Could not load RSS-Feed"
+msgstr "RSS-Feed konnte nicht geladen werden"
+
+#. applet.js:94
+msgid "Error while loading RSS"
+msgstr "Fehler beim RSS Laden"
+
+#. metadata.json->name
+msgid "RSS Newsticker"
+msgstr "RSS Newsticker"
+
+#. metadata.json->description
+msgid "Displays the headlines of an RSS feed"
+msgstr "Zeigt die Schlagzeilen eines RSS-Feeds"
+
+#. settings-schema.json->head0->description
+msgid "General"
+msgstr "Allgemein"
+
+#. settings-schema.json->rssURL->description
+msgid "URL of RSS feed"
+msgstr "URL des RSS-Feeds"
+
+#. settings-schema.json->head1->description
+msgid "Ticker"
+msgstr "Ticker"
+
+#. settings-schema.json->width->description
+msgid "Width of ticker in px"
+msgstr "Breite des Tickers in px"
+
+#. settings-schema.json->tickerSeperator->description
+msgid "Separator between headlines"
+msgstr "Trenner zwischen den Schlagzeilen"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh interval in seconds"
+msgstr "Aktualisierungsintervall in Sekunden"
+
+#. settings-schema.json->tickerSpeed->description
+msgid "Speed of ticker in ms"
+msgstr "Geschwindigkeit des Tickers in ms"

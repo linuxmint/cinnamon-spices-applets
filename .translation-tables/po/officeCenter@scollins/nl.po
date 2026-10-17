@@ -1,0 +1,128 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2024-04-21 14:08+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:127
+msgid "Clear"
+msgstr "Wissen"
+
+#. applet.js:162
+msgid "Office"
+msgstr "Kantoor"
+
+#. applet.js:241
+msgid "LAUNCHERS"
+msgstr "STARTERS"
+
+#. applet.js:257
+msgid "DOCUMENTS"
+msgstr "DOCUMENTEN"
+
+#. applet.js:268
+msgid "Open folder"
+msgstr "Map openen"
+
+#. applet.js:294
+msgid "RECENT DOCUMENTS"
+msgstr "RECENTE DOCUMENTEN"
+
+#. metadata.json->name
+msgid "Office Center"
+msgstr "Kantoorcentrum"
+
+#. metadata.json->description
+msgid "Provides an easy and fast resource for all your office needs"
+msgstr "Biedt een eenvoudige en snelle bron voor al uw kantoorbehoeften"
+
+#. metadata.json->comments
+msgid ""
+"Office Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy aceess to all of your office programs and documents. Feel free "
+"to contribute by submitting pull requests, bug reports and feature requests "
+"to my github repo."
+msgstr ""
+"Kantoorcenter is een functierijke, platformonafhankelijke Cinnamon-applet "
+"die gemakkelijke toegang biedt tot al uw kantoorprogramma's en documenten. "
+"Voel je vrij om bij te dragen door pull-aanvragen, bugrapporten en "
+"functieverzoeken in te dienen bij mijn GitHub-repo."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Auteur"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Algemene instellingen"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Paneelpictogram"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+"Accepteert pictogramnaam of rechtstreeks pad (ondersteunt symbolische "
+"pictogrammen)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Paneeltekst"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shorcut key"
+msgstr "Sneltoets voor menu"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon size"
+msgstr "Pictogramgrootte"
+
+#. settings-schema.json->documents->description
+msgid "Documents"
+msgstr "Documenten"
+
+#. settings-schema.json->showDocuments->description
+msgid "Show contents of documents folder"
+msgstr "Toon inhoud van documentenmap"
+
+#. settings-schema.json->recurseDocuments->description
+msgid "Include subfolders"
+msgstr "Inclusief submappen"
+
+#. settings-schema.json->altDir->description
+msgid "Use alternate directory"
+msgstr "Gebruik alternatieve map"
+
+#. settings-schema.json->docMax->description
+msgid "Limit number of documents shown to"
+msgstr "Beperk aantal te tonen documenten tot"
+
+#. settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "Recente documenten"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Toon recente documenten"
+
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Aantal te tonen"

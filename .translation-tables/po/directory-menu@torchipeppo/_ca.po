@@ -1,0 +1,43 @@
+# DIRECTORY MENU
+# This file is put in the public domain.
+# torchipeppo, 2024
+#
+msgid ""
+msgstr ""
+
+#. 6.6/cassettoneNative.js:540
+msgid "Empty or Access Denied"
+msgstr ""
+
+#. 6.6/cassettoneNative.js:602
+msgid "Empty"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-type->options
+msgid "Classic"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-type->options
+msgid "Native"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-type->description
+msgid "Menu type"
+msgstr ""
+
+#. 6.6->settings-schema.json->menu-type->tooltip
+msgid ""
+"Classic uses a GTK-based menu, while Native uses Cinnamon's native popup "
+"menu."
+msgstr ""
+
+#. 6.6->settings-schema.json->prefer-native-wayland->description
+msgid "Prefer native menu type on Wayland"
+msgstr ""
+
+#. 6.6->settings-schema.json->prefer-native-wayland->tooltip
+msgid ""
+"Automatically use the native menu implementation when running under Wayland. "
+"The classic GTK-based menu has limitations on Wayland sessions due to "
+"restricted window positioning and focus handling in the protocol."
+msgstr ""

@@ -1,0 +1,157 @@
+# Swedish translation for sessionManager@scollins.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sessionManager@scollins\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-27 10:12+0200\n"
+"PO-Revision-Date: 2017-05-11 21:10+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:154
+msgid "Session"
+msgstr "Session"
+
+#. applet.js:240
+msgid "Lock Screen"
+msgstr "Lås skärmen"
+
+#. applet.js:246
+msgid "Switch User"
+msgstr "Växla användare"
+
+#. applet.js:252
+msgid "Guest Session"
+msgstr "Gästsession"
+
+#. applet.js:258
+msgid "Log Off"
+msgstr "Logga ut"
+
+#. applet.js:269
+msgid "Suspend"
+msgstr "Vänteläge"
+
+#. applet.js:275
+msgid "Sleep"
+msgstr "Strömsparläge"
+
+#. applet.js:281
+msgid "Hibernate"
+msgstr "Viloläge"
+
+#. applet.js:292
+msgid "Restart"
+msgstr "Starta om"
+
+#. applet.js:298
+msgid "Shut Down"
+msgstr "Stäng av"
+
+#. metadata.json->name
+msgid "Session Manager"
+msgstr "Sessionshanterare"
+
+#. metadata.json->description
+msgid "Provides easy access to shut down, restart, etc"
+msgstr "Tillhandahåller enkel åtkomst till Stäng av och Starta om etc."
+
+#. metadata.json->comments
+msgid ""
+"Session Manager is an applet that provides easy access to session controls "
+"such as shut down, restart, log off, switch user, etc. It has been tested in "
+"Arch, Fedora and Linux Mint, and supports a wide variety of software "
+"configurations. If your particular configuration is not supported, please "
+"submit a feature request on github, and I will add it at my earliest "
+"convenience."
+msgstr ""
+"Sessionshanteraren är ett panelprogram som tillhandahåller enkel åtkomst "
+"till sessionskontroller som Stäng av, Starta om, Logga ut, Växla användare "
+"etc. Det har testats i Arch, Fedora och Linux Mint, och stödjer en stor "
+"variation mjukvarukonfigurationer. Om din specifika konfiguration inte "
+"stöds, kan du posta en funktionsbegäran så lägger jag till den så snart som "
+"möjligt."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Author"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Allmänna inställningar"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Panelikon"
+
+#. settings-schema.json->panelText->description
+msgid "Panel Text"
+msgstr "Paneltext"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon Size"
+msgstr "Ikonstorlek"
+
+#. settings-schema.json->symbolicMenuIcons->description
+msgid "Symbolic icons in menu"
+msgstr "Symboliska ikoner i menyn"
+
+#. settings-schema.json->menuOptions->description
+msgid "Menu Options"
+msgstr ""
+
+#. settings-schema.json->showLockScreen->description
+#, fuzzy
+msgid "Show Lock Screen option"
+msgstr "Lås skärmen"
+
+#. settings-schema.json->showSwitchUser->description
+#, fuzzy
+msgid "Show Switch User option"
+msgstr "Växla användare"
+
+#. settings-schema.json->showGuestSession->description
+#, fuzzy
+msgid "Show Guest Session option"
+msgstr "Gästsession"
+
+#. settings-schema.json->showLogOff->description
+msgid "Show Log Off option"
+msgstr ""
+
+#. settings-schema.json->showSuspend->description
+msgid "Show Suspend option"
+msgstr ""
+
+#. settings-schema.json->showSleep->description
+msgid "Show Sleep option"
+msgstr ""
+
+#. settings-schema.json->showHibernate->description
+#, fuzzy
+msgid "Show Hibernate option"
+msgstr "Viloläge"
+
+#. settings-schema.json->showRestart->description
+msgid "Show Restart option"
+msgstr ""
+
+#. settings-schema.json->showShutDown->description
+#, fuzzy
+msgid "Show Shut Down option"
+msgstr "Stäng av"

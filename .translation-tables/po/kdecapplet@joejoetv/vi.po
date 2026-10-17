@@ -1,0 +1,702 @@
+# KDE CONNECT APPLET
+# This file is put in the public domain.
+# JoeJoeTV, 2020
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: kdecapplet@joejoetv 2.1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-08-22 18:28+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.8/applet.js:547 4.8/applet.js:574
+msgid "No Modules available"
+msgstr "Không có mô-đun nào khả dụng"
+
+#. 5.8/applet.js:1021 5.8/applet.js:1024 4.8/applet.js:1065 4.8/applet.js:1068
+msgid "KDE Connect not available, make sure it's installed and running."
+msgstr ""
+"KDE Connect không khả dụng, hãy chắc chắn rằng nó đã được cài đặt và đang "
+"chạy."
+
+#. 5.8/applet.js:1028 5.8/applet.js:1041 5.8/applet.js:1230 4.8/applet.js:1072
+#. 4.8/applet.js:1085 4.8/applet.js:1270
+msgid "Reload Applet"
+msgstr "Tải lại Applet"
+
+#. 5.8/applet.js:1033 4.8/applet.js:1077
+msgid "Invalid KDE Connect version returned!"
+msgstr "Phiên bản KDE Connect trả về không hợp lệ!"
+
+#. 5.8/applet.js:1034 5.8/applet.js:1037 4.8/applet.js:1078 4.8/applet.js:1081
+msgid ""
+"The KDE Connect DBus service returned an invalid version, please try "
+"reloading the Applet!"
+msgstr ""
+"Dịch vụ DBus của KDE Connect trả về phiên bản không hợp lệ, hãy thử tải lại "
+"Applet!"
+
+#. 5.8/applet.js:1075 4.8/applet.js:1120
+msgid "No connected Devices!"
+msgstr "Không có thiết bị kết nối!"
+
+#. 5.8/applet.js:1075 4.8/applet.js:1120
+msgid "Add them in the KDE Connect settings"
+msgstr "Thêm chúng trong cài đặt KDE Connect"
+
+#. 5.8/applet.js:1120 4.8/applet.js:1165
+msgid "Debug Stuff, don't touch!"
+msgstr "Thông tin gỡ lỗi, đừng chạm!"
+
+#. 5.8/applet.js:1209 4.8/applet.js:1254
+msgid "KDE Connect Version: {version}"
+msgstr "Phiên bản KDE Connect: {version}"
+
+#. 5.8/applet.js:1221 4.8/applet.js:1261
+msgid "Own ID: {own_id}"
+msgstr "ID của bạn: {own_id}"
+
+#. 5.8/applet.js:1223 4.8/applet.js:1263
+msgid "own ID"
+msgstr "ID của bạn"
+
+#. 5.8/applet.js:1225 4.8/applet.js:1265
+msgid "Click to copy own ID"
+msgstr "Nhấn để sao chép ID của bạn"
+
+#. 5.8/applet.js:1235 4.8/applet.js:1275
+msgid "Configure KDE Connect"
+msgstr "Cấu hình KDE Connect"
+
+#. 5.8/applet.js:1237 4.8/applet.js:1277
+msgid "Click to open KDE Connect Configuration"
+msgstr "Nhấn để mở Cấu hình KDE Connect"
+
+#. 5.8/applet.js:1283 4.8/applet.js:1321
+msgid "No available devices"
+msgstr "Không có thiết bị khả dụng"
+
+#. 5.8/applet.js:1285 4.8/applet.js:1323
+msgid "{deviceCount} available device"
+msgstr "{deviceCount} thiết bị khả dụng"
+
+#. 5.8/applet.js:1287 4.8/applet.js:1325
+msgid "{deviceCount} available devices"
+msgstr "{deviceCount} thiết bị khả dụng"
+
+#. 5.8/js/modules.js:450
+#, fuzzy
+msgid "Module"
+msgstr "Module"
+
+#. 5.8/js/modules.js:597
+#, fuzzy
+msgid "Battery Module"
+msgstr "Module thông tin pin"
+
+#. 5.8/js/modules.js:646 4.8/js/modules.js:658
+msgid "Charging"
+msgstr "Đang sạc"
+
+#. 5.8/js/modules.js:682
+#, fuzzy
+msgid "Device-Info Module"
+msgstr "Module thông tin thiết bị"
+
+#. 5.8/js/modules.js:731 4.8/js/modules.js:741
+msgid "ID: {id}"
+msgstr "ID: {id}"
+
+#. 5.8/js/modules.js:735 4.8/js/modules.js:745
+msgid "Device ID"
+msgstr "ID thiết bị"
+
+#. 5.8/js/modules.js:739 4.8/js/modules.js:749
+msgid "Click to copy ID"
+msgstr "Nhấn để sao chép ID"
+
+#. 5.8/js/modules.js:751
+#, fuzzy
+msgid "Connectivity Module"
+msgstr "Module thông tin kết nối"
+
+#. 5.8/js/modules.js:813 4.8/js/modules.js:822
+msgid "No Signal"
+msgstr "Không có tín hiệu"
+
+#. 5.8/js/modules.js:816 4.8/js/modules.js:825
+msgid "Low"
+msgstr "Thấp"
+
+#. 5.8/js/modules.js:819 4.8/js/modules.js:828
+msgid "Ok"
+msgstr "Ổn"
+
+#. 5.8/js/modules.js:822 4.8/js/modules.js:831
+msgid "Good"
+msgstr "Tốt"
+
+#. 5.8/js/modules.js:825 4.8/js/modules.js:834
+msgid "Excellent"
+msgstr "Xuất sắc"
+
+#. 5.8/js/modules.js:837 4.8/js/modules.js:846
+msgid "Unknown"
+msgstr "Không xác định"
+
+#. 5.8/js/modules.js:867
+#, fuzzy
+msgid "FindMyPhone Module"
+msgstr "Module hành động Tìm điện thoại"
+
+#. 5.8/js/modules.js:892 4.8/js/modules.js:900
+msgid "Ring device"
+msgstr "Gọi thiết bị"
+
+#. 5.8/js/modules.js:893 4.8/js/modules.js:901
+msgid "Click to ring the device"
+msgstr "Nhấn để gọi thiết bị"
+
+#. 5.8/js/modules.js:907
+#, fuzzy
+msgid "Request Photo Module"
+msgstr "Module hành động Yêu cầu ảnh"
+
+#. 5.8/js/modules.js:973 4.8/js/modules.js:980
+msgid "Photo received from '{deviceName}'"
+msgstr "Đã nhận ảnh từ '{deviceName}'"
+
+#. 5.8/js/modules.js:973 5.8/js/modules.js:1151 4.8/js/modules.js:980
+#. 4.8/js/modules.js:1156
+msgid "Click to open in default application"
+msgstr "Nhấn để mở trong ứng dụng mặc định"
+
+#. 5.8/js/modules.js:982 4.8/js/modules.js:989
+msgid "Request Photo"
+msgstr "Yêu cầu ảnh"
+
+#. 5.8/js/modules.js:983 4.8/js/modules.js:990
+msgid "Click to request a photo from the device"
+msgstr "Nhấn để yêu cầu ảnh từ thiết bị"
+
+#. 5.8/js/modules.js:1009
+#, fuzzy
+msgid "Ping Module"
+msgstr "Module hành động Ping"
+
+#. 5.8/js/modules.js:1034 4.8/js/modules.js:1040
+msgid "Ping!"
+msgstr "Ping!"
+
+#. 5.8/js/modules.js:1041 4.8/js/modules.js:1047
+msgid "Sent ping to device '{deviceName}'"
+msgstr "Đã gửi ping đến thiết bị '{deviceName}'"
+
+#. 5.8/js/modules.js:1047 4.8/js/modules.js:1053
+msgid "Ping Device"
+msgstr "Ping thiết bị"
+
+#. 5.8/js/modules.js:1048 4.8/js/modules.js:1054
+msgid "Click to send a ping to the device"
+msgstr "Nhấn để gửi ping đến thiết bị"
+
+#. 5.8/js/modules.js:1062
+#, fuzzy
+msgid "Share Module"
+msgstr "Module hành động Chia sẻ"
+
+#. 5.8/js/modules.js:1151 4.8/js/modules.js:1156
+msgid "Share received from '{deviceName}'"
+msgstr "Đã nhận chia sẻ từ '{deviceName}'"
+
+#. 5.8/js/modules.js:1186 4.8/js/modules.js:1191
+msgid "Share"
+msgstr "Chia sẻ"
+
+#. 5.8/js/modules.js:1198 4.8/js/modules.js:1204
+msgid "Send URL"
+msgstr "Gửi URL"
+
+#. 5.8/js/modules.js:1199 4.8/js/modules.js:1205
+msgid "Click to send a URL to the device"
+msgstr "Nhấn để gửi URL đến thiết bị"
+
+#. 5.8/js/modules.js:1208 4.8/js/modules.js:1214
+msgid "Send Text"
+msgstr "Gửi văn bản"
+
+#. 5.8/js/modules.js:1209 5.8/js/modules.js:1553 4.8/js/modules.js:1215
+#. 4.8/js/modules.js:1490
+msgid "Click to send text to the device"
+msgstr "Nhấn để gửi văn bản đến thiết bị"
+
+#. 5.8/js/modules.js:1218 4.8/js/modules.js:1224
+msgid "Send File(s)"
+msgstr "Gửi tập tin"
+
+#. 5.8/js/modules.js:1219 4.8/js/modules.js:1225
+msgid "Click to send file(s) to the device"
+msgstr "Nhấn để gửi tập tin đến thiết bị"
+
+#. 5.8/js/modules.js:1243
+#, fuzzy
+msgid "SFTP Module"
+msgstr "Module hành động SFTP"
+
+#. 5.8/js/modules.js:1284 4.8/js/modules.js:1281
+msgid "Unmount"
+msgstr "Ngắt kết nối"
+
+#. 5.8/js/modules.js:1286 4.8/js/modules.js:1283
+msgid "Mount"
+msgstr "Kết nối"
+
+#. 5.8/js/modules.js:1292 4.8/js/modules.js:1289
+msgid "Click to unmount"
+msgstr "Nhấn để ngắt kết nối"
+
+#. 5.8/js/modules.js:1294 4.8/js/modules.js:1291
+msgid "Click to mount"
+msgstr "Nhấn để kết nối"
+
+#. 5.8/js/modules.js:1424 4.8/js/modules.js:1364
+msgid "Click to browse files"
+msgstr "Nhấn để duyệt tập tin"
+
+#. 5.8/js/modules.js:1463
+#, fuzzy
+msgid "SMS Module"
+msgstr "Module hành động SMS"
+
+#. 5.8/js/modules.js:1532 4.8/js/modules.js:1468
+msgid "SMS"
+msgstr "SMS"
+
+#. 5.8/js/modules.js:1544 4.8/js/modules.js:1481
+msgid "Launch SMS App"
+msgstr "Mở ứng dụng SMS"
+
+#. 5.8/js/modules.js:1545 4.8/js/modules.js:1482
+msgid "Click to open the KDE Connect SMS App"
+msgstr "Nhấn để mở ứng dụng SMS của KDE Connect"
+
+#. 5.8/js/modules.js:1552 4.8/js/modules.js:1489
+msgid "Send SMS"
+msgstr "Gửi SMS"
+
+#. metadata.json->name
+#. 5.8/js/utils.js:24
+msgid "KDE Connect Applet"
+msgstr "Applet KDE Connect"
+
+#. 5.8/js/utils.js:126 4.8/js/commonUtils.js:223
+msgid "Copied {typestring} to the clipboard"
+msgstr "Đã sao chép {typestring} vào clipboard"
+
+#. 5.8/settingsWidgets.py:153 4.8/settingsWidgets.py:153
+msgid "Move selected entry up"
+msgstr "Di chuyển mục đã chọn lên trên"
+
+#. 5.8/settingsWidgets.py:160 4.8/settingsWidgets.py:160
+msgid "Move selected entry down"
+msgstr "Di chuyển mục đã chọn xuống dưới"
+
+#. 5.8/py/dialogs.py:50 4.8/py/dialogs.py:43
+#, python-brace-format
+msgid "Send URL to '{device_name}'"
+msgstr "Gửi URL đến '{device_name}'"
+
+#. 5.8/py/dialogs.py:60 5.8/py/dialogs.py:132 5.8/py/dialogs.py:207
+#. 5.8/py/dialogs.py:285 4.8/py/dialogs.py:50 4.8/py/dialogs.py:106
+#. 4.8/py/dialogs.py:169
+msgid "Cancel"
+msgstr "Hủy"
+
+#. 5.8/py/dialogs.py:65 5.8/py/dialogs.py:137 5.8/py/dialogs.py:212
+#. 4.8/py/dialogs.py:53 4.8/py/dialogs.py:109 4.8/py/dialogs.py:172
+msgid "Send"
+msgstr "Gửi"
+
+#. 5.8/py/dialogs.py:76 4.8/py/dialogs.py:60
+#, python-brace-format
+msgid "Enter a URL to send to '{device_name}'"
+msgstr "Nhập URL để gửi đến '{device_name}'"
+
+#. 5.8/py/dialogs.py:83 4.8/py/dialogs.py:64
+msgid "URL"
+msgstr "URL"
+
+#. 5.8/py/dialogs.py:122 4.8/py/dialogs.py:99
+#, python-brace-format
+msgid "Send SMS using '{device_name}'"
+msgstr "Gửi SMS qua '{device_name}'"
+
+#. 5.8/py/dialogs.py:147 4.8/py/dialogs.py:116
+msgid "Phone Number:"
+msgstr "Số điện thoại:"
+
+#. 5.8/py/dialogs.py:151 4.8/py/dialogs.py:120
+msgid "Phone Number"
+msgstr "Số điện thoại"
+
+#. 5.8/py/dialogs.py:154 4.8/py/dialogs.py:122
+msgid "Message:"
+msgstr "Tin nhắn:"
+
+#. 5.8/py/dialogs.py:197 4.8/py/dialogs.py:162
+#, python-brace-format
+msgid "Send text to '{device_name}'"
+msgstr "Gửi văn bản đến '{device_name}'"
+
+#. 5.8/py/dialogs.py:222 4.8/py/dialogs.py:179
+msgid "Text to send:"
+msgstr "Văn bản gửi:"
+
+#. 5.8/py/dialogs.py:271
+#, fuzzy, python-brace-format
+msgid "Open remote directory on '{device_name}'"
+msgstr "Gửi văn bản đến '{device_name}'"
+
+#. 5.8/py/dialogs.py:290
+msgid "Open"
+msgstr ""
+
+#. 5.8/py/dialogs.py:300
+msgid "Directory to open:"
+msgstr ""
+
+#. 5.8/py/dialogs.py:375 4.8/py/dialogs.py:225
+#, python-brace-format
+msgid "Select files to send to '{deviceName}'"
+msgstr "Chọn tập tin để gửi đến '{deviceName}'"
+
+#. 5.8/py/dialogs.py:442 4.8/py/dialogs.py:286
+#, python-brace-format
+msgid "Select where to save photo received from '{deviceName}'"
+msgstr "Chọn nơi lưu ảnh nhận từ '{deviceName}'"
+
+#. 5.8/py/dialogs.py:449 4.8/py/dialogs.py:290
+msgid "photo.jpg"
+msgstr "anh.jpg"
+
+#. 5.8/py/dialogs.py:452 4.8/py/dialogs.py:293
+msgid "JPEG Photo"
+msgstr "Ảnh JPEG"
+
+#. metadata.json->description
+msgid "Enables interacting with devices connected via KDE Connect"
+msgstr "Cho phép tương tác với các thiết bị kết nối qua KDE Connect"
+
+#. metadata.json->comments
+msgid ""
+"KDE Connect Applet makes it easy to use the various features provided by KDE "
+"Connect to interact with connected devices, like sending files, sending SMS "
+"messages, browsing the storage of the device and more"
+msgstr ""
+"Applet KDE Connect giúp dễ dàng sử dụng các tính năng của KDE Connect để "
+"tương tác với thiết bị, như gửi tập tin, gửi SMS, duyệt bộ nhớ thiết bị và "
+"nhiều hơn nữa"
+
+#. metadata.json->contributors
+msgid "Johannes Schoeneberger - Author"
+msgstr "Johannes Schoeneberger - Tác giả"
+
+#. metadata.json->contributors
+msgid "Severga - Inspiration for the Applet"
+msgstr "Severga - Nguồn cảm hứng cho Applet"
+
+#. 5.8->settings-schema.json->page_general->title
+#. 4.8->settings-schema.json->page_general->title
+msgid "General"
+msgstr "Chung"
+
+#. 5.8->settings-schema.json->page_modules->title
+#. 4.8->settings-schema.json->page_modules->title
+msgid "Modules"
+msgstr "Module"
+
+#. 5.8->settings-schema.json->section_contextmenu->title
+#. 4.8->settings-schema.json->section_contextmenu->title
+msgid "Context Menu"
+msgstr "Menu ngữ cảnh"
+
+#. 5.8->settings-schema.json->section_panel->title
+#. 4.8->settings-schema.json->section_panel->title
+msgid "Panel"
+msgstr "Thanh panel"
+
+#. 5.8->settings-schema.json->section_devices->title
+#. 4.8->settings-schema.json->section_devices->title
+msgid "Devices"
+msgstr "Thiết bị"
+
+#. 5.8->settings-schema.json->section_info-modules->title
+#. 4.8->settings-schema.json->section_info-modules->title
+msgid "Info Modules"
+msgstr "Module thông tin"
+
+#. 5.8->settings-schema.json->section_action-modules->title
+#. 4.8->settings-schema.json->section_action-modules->title
+msgid "Action Modules"
+msgstr "Module hành động"
+
+#. 5.8->settings-schema.json->section_module_battery->title
+#. 4.8->settings-schema.json->section_module_battery->title
+msgid "Battery Info Module"
+msgstr "Module thông tin pin"
+
+#. 5.8->settings-schema.json->section_module_deviceinfo->title
+#. 4.8->settings-schema.json->section_module_deviceinfo->title
+msgid "Device-Info Info Module"
+msgstr "Module thông tin thiết bị"
+
+#. 5.8->settings-schema.json->section_module_connectivity->title
+#. 4.8->settings-schema.json->section_module_connectivity->title
+msgid "Connectivity Info Module"
+msgstr "Module thông tin kết nối"
+
+#. 5.8->settings-schema.json->section_module_findmyphone->title
+#. 4.8->settings-schema.json->section_module_findmyphone->title
+msgid "FindMyPhone Action Module"
+msgstr "Module hành động Tìm điện thoại"
+
+#. 5.8->settings-schema.json->section_module_requestphoto->title
+#. 4.8->settings-schema.json->section_module_requestphoto->title
+msgid "Request-Photo Action Module"
+msgstr "Module hành động Yêu cầu ảnh"
+
+#. 5.8->settings-schema.json->section_module_ping->title
+#. 4.8->settings-schema.json->section_module_ping->title
+msgid "Ping Action Module"
+msgstr "Module hành động Ping"
+
+#. 5.8->settings-schema.json->section_module_share->title
+#. 4.8->settings-schema.json->section_module_share->title
+msgid "Share Action Module"
+msgstr "Module hành động Chia sẻ"
+
+#. 5.8->settings-schema.json->section_module_sftp->title
+#. 4.8->settings-schema.json->section_module_sftp->title
+msgid "SFTP Action Module"
+msgstr "Module hành động SFTP"
+
+#. 5.8->settings-schema.json->section_module_sms->title
+#. 4.8->settings-schema.json->section_module_sms->title
+msgid "SMS Action Module"
+msgstr "Module hành động SMS"
+
+#. 5.8->settings-schema.json->switch_show-own-id->description
+#. 4.8->settings-schema.json->switch_show-own-id->description
+msgid "Show own ID in the context menu of the applet"
+msgstr "Hiển thị ID của bản thân trong menu ngữ cảnh của applet"
+
+#. 5.8->settings-schema.json->switch_show-kdec-version->description
+#. 4.8->settings-schema.json->switch_show-kdec-version->description
+msgid "Show KDE Connect version in the context menu of the applet"
+msgstr "Hiển thị phiên bản KDE Connect trong menu ngữ cảnh của applet"
+
+#. 5.8->settings-schema.json->switch_show-device-count->description
+#. 4.8->settings-schema.json->switch_show-device-count->description
+msgid "Show the number of connected devices next to the icon in the panel"
+msgstr "Hiển thị số thiết bị kết nối bên cạnh biểu tượng trên thanh panel"
+
+#. 5.8->settings-schema.json->switch_show-device-count-tooltip->description
+#. 4.8->settings-schema.json->switch_show-device-count-tooltip->description
+msgid "Show the device count in the tooltip of the applet"
+msgstr "Hiển thị số thiết bị trong tooltip của applet"
+
+#. 5.8->settings-schema.json->combobox_icon-type->description
+#. 4.8->settings-schema.json->combobox_icon-type->description
+msgid "Icon type"
+msgstr "Loại biểu tượng"
+
+#. 5.8->settings-schema.json->combobox_icon-type->options
+#. 4.8->settings-schema.json->combobox_icon-type->options
+msgid "Symbolic"
+msgstr "Biểu tượng ký hiệu"
+
+#. 5.8->settings-schema.json->combobox_icon-type->options
+#. 4.8->settings-schema.json->combobox_icon-type->options
+msgid "Color"
+msgstr "Màu sắc"
+
+#. 5.8->settings-schema.json->switch_use-custom-icon->description
+#. 4.8->settings-schema.json->switch_use-custom-icon->description
+msgid "Use custom icon"
+msgstr "Sử dụng biểu tượng tùy chỉnh"
+
+#. 5.8->settings-schema.json->icon_custom-icon->description
+#. 4.8->settings-schema.json->icon_custom-icon->description
+msgid "Custom icon to use"
+msgstr "Biểu tượng tùy chỉnh để sử dụng"
+
+#. 5.8->settings-schema.json->switch_different-icon-no-connected-
+#. devices->description
+msgid "Display a different icon when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_no-connected-devices->description
+msgid "Icon to use when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->button_open-kdec-settings->description
+#. 4.8->settings-schema.json->button_open-kdec-settings->description
+msgid "Open KDE Connect Configuration"
+msgstr "Mở Cấu hình KDE Connect"
+
+#. 5.8->settings-schema.json->switch_expand-only-device->description
+#. 4.8->settings-schema.json->switch_expand-only-device->description
+msgid ""
+"Expand the device sub menu automatically, if only one device is available"
+msgstr "Tự động mở rộng menu phụ của thiết bị nếu chỉ có một thiết bị có sẵn"
+
+#. 5.8->settings-schema.json->orderlist_device-order->columns->title
+#. 5.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 5.8->settings-schema.json->oderlist_action-modules->columns->title
+#. 4.8->settings-schema.json->orderlist_device-order->columns->title
+#. 4.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_action-modules->columns->title
+msgid "Name"
+msgstr "Tên"
+
+#. 5.8->settings-schema.json->orderlist_device-order->columns->title
+#. 4.8->settings-schema.json->orderlist_device-order->columns->title
+msgid "Expand"
+msgstr "Mở rộng"
+
+#. 5.8->settings-schema.json->orderlist_device-order->columns->title
+#. 4.8->settings-schema.json->orderlist_device-order->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. 5.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 5.8->settings-schema.json->oderlist_action-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_action-modules->columns->title
+msgid "Enabled"
+msgstr "Bật"
+
+#. 5.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 5.8->settings-schema.json->oderlist_action-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_info-modules->columns->title
+#. 4.8->settings-schema.json->oderlist_action-modules->columns->title
+msgid "ID"
+msgstr "ID"
+
+#. 5.8->settings-schema.json->module_battery_description->description
+#. 4.8->settings-schema.json->module_battery_description->description
+msgid "Shows the current battery charge and charging status of the device"
+msgstr "Hiển thị dung lượng pin hiện tại và trạng thái sạc của thiết bị"
+
+#. 5.8->settings-schema.json->module_deviceinfo_description->description
+#. 4.8->settings-schema.json->module_deviceinfo_description->description
+msgid "Shows the device icon along with its ID"
+msgstr "Hiển thị biểu tượng thiết bị cùng với ID của nó"
+
+#. 5.8->settings-schema.json->module_connectivity_description->description
+#. 4.8->settings-schema.json->module_connectivity_description->description
+msgid "Shows the current connectivity status and network type of the device"
+msgstr "Hiển thị trạng thái kết nối hiện tại và loại mạng của thiết bị"
+
+#. 5.8->settings-schema.json->module_connectivity_showNetworkType->description
+#. 4.8->settings-schema.json->module_connectivity_showNetworkType->description
+msgid "Show the mobile network type"
+msgstr "Hiển thị loại mạng di động"
+
+#. 5.8->settings-schema.json->module_findmyphone_description->description
+#. 4.8->settings-schema.json->module_findmyphone_description->description
+msgid ""
+"Lets you make the device ring, so you can find it, if you have misplaced it"
+msgstr "Cho phép thiết bị đổ chuông để bạn có thể tìm thấy nếu bị thất lạc"
+
+#. 5.8->settings-schema.json->module_requestphoto_description->description
+#. 4.8->settings-schema.json->module_requestphoto_description->description
+msgid ""
+"Lets you request a photo from the remote device and save it on this device"
+msgstr "Cho phép yêu cầu ảnh từ thiết bị từ xa và lưu trên thiết bị này"
+
+#. 5.8->settings-schema.json->module_requestphoto_saveToDir->description
+#. 4.8->settings-schema.json->module_requestphoto_saveToDir->description
+msgid "Save received photos directly to directory"
+msgstr "Lưu ảnh nhận được trực tiếp vào thư mục"
+
+#. 5.8->settings-schema.json->module_requestphoto_saveDirectory->description
+#. 4.8->settings-schema.json->module_requestphoto_saveDirectory->description
+msgid "The directory to save received photos to"
+msgstr "Thư mục để lưu các ảnh nhận được"
+
+#. 5.8->settings-schema.json->module_ping_description->description
+#. 4.8->settings-schema.json->module_ping_description->description
+msgid "Lets you ping the the device to make sure it's connected"
+msgstr "Cho phép gửi ping đến thiết bị để đảm bảo nó đang kết nối"
+
+#. 5.8->settings-schema.json->module_ping_useCustomMessage->description
+#. 4.8->settings-schema.json->module_ping_useCustomMessage->description
+msgid "Use custom message for ping"
+msgstr "Sử dụng thông điệp tùy chỉnh cho ping"
+
+#. 5.8->settings-schema.json->module_ping_customMessage->description
+#. 4.8->settings-schema.json->module_ping_customMessage->description
+msgid "Custom message"
+msgstr "Thông điệp tùy chỉnh"
+
+#. 5.8->settings-schema.json->module_share_description->description
+#. 4.8->settings-schema.json->module_share_description->description
+msgid "Lets you share URLs, files or text to the device"
+msgstr "Cho phép chia sẻ URL, tập tin hoặc văn bản đến thiết bị"
+
+#. 5.8->settings-schema.json->module_share_useSubMenu->description
+#. 5.8->settings-schema.json->module_sms_useSubMenu->description
+#. 4.8->settings-schema.json->module_share_useSubMenu->description
+#. 4.8->settings-schema.json->module_sms_useSubMenu->description
+msgid "Show menu items in sub menu"
+msgstr "Hiển thị mục menu trong menu phụ"
+
+#. 5.8->settings-schema.json->module_share_enableSendURL->description
+#. 4.8->settings-schema.json->module_share_enableSendURL->description
+msgid "Enable the menu item to send a URL"
+msgstr "Bật mục menu để gửi URL"
+
+#. 5.8->settings-schema.json->module_share_enableSendText->description
+#. 4.8->settings-schema.json->module_share_enableSendText->description
+msgid "Enable the menu item to send some text"
+msgstr "Bật mục menu để gửi văn bản"
+
+#. 5.8->settings-schema.json->module_share_enableSendFiles->description
+#. 4.8->settings-schema.json->module_share_enableSendFiles->description
+msgid "Enable the menu item to send file(s)"
+msgstr "Bật mục menu để gửi tập tin"
+
+#. 5.8->settings-schema.json->module_sftp_description->description
+#. 4.8->settings-schema.json->module_sftp_description->description
+#, fuzzy
+msgid "Lets you remotely browse the storage of the device"
+msgstr "Cho phép duyệt bộ nhớ đã chọn trên thiết bị từ xa"
+
+#. 5.8->settings-schema.json->module_sftp_selectFirstDirectory->description
+msgid "Select the first directory automatically"
+msgstr ""
+
+#. 5.8->settings-schema.json->module_sms_description->description
+#. 4.8->settings-schema.json->module_sms_description->description
+msgid "Lets you remotely send SMS messages from the device"
+msgstr "Cho phép gửi SMS từ xa từ thiết bị"
+
+#. 5.8->settings-schema.json->module_sms_enableSendSMS->description
+#. 4.8->settings-schema.json->module_sms_enableSendSMS->description
+msgid "Enable the menu item to send an SMS message"
+msgstr "Bật mục menu để gửi tin nhắn SMS"
+
+#. 5.8->settings-schema.json->module_sms_enableLaunchSMSApp->description
+#. 4.8->settings-schema.json->module_sms_enableLaunchSMSApp->description
+msgid "Enable the menu item to launch the KDE Connect SMS app"
+msgstr "Bật mục menu để mở ứng dụng SMS của KDE Connect"

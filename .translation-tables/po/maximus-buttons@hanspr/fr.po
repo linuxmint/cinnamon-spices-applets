@@ -1,0 +1,85 @@
+# MAXIMUS BUTTONS
+# This file is put in the public domain.
+# hanspr, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: maximus-buttons@hanspr 0.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-01-11 16:54-0500\n"
+"PO-Revision-Date: 2026-01-12 14:47+0100\n"
+"Last-Translator: FabRCT\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. metadata.json->description
+msgid "Maximus buttons"
+msgstr "Boutons Maximus"
+
+#. metadata.json->name
+msgid "Maximus Buttons"
+msgstr "Boutons Maximus"
+
+#. metadata.json->contributors
+msgid "Hans Peyrot"
+msgstr "Hans Peyrot"
+
+#. settings-schema.json->head->description
+msgid "Window Buttons Settings"
+msgstr "Paramètres des boutons de fenêtre"
+
+#. settings-schema.json->buttons-style->description
+msgid "Window Buttons Style  (Example: minimize:maximize:close:icon)"
+msgstr ""
+"Style des boutons de fenêtre\n"
+"(Exemple : minimiser:agrandir:fermer:icône)"
+
+#. settings-schema.json->buttons-theme->description
+msgid "Buttons Theme  (Needs Restart Cinnamon)"
+msgstr "Thème des boutons (Nécessite un redémarrage de Cinnamon)"
+
+#. settings-schema.json->buttons-theme->options
+msgid "Default"
+msgstr "Défaut"
+
+#. settings-schema.json->buttons-theme->options
+msgid "Mac-OS-X"
+msgstr "Mac-OS-X"
+
+#. settings-schema.json->buttons-theme->options
+msgid "Mint-X"
+msgstr "Mint-X"
+
+#. settings-schema.json->buttons-theme->options
+msgid "Radiance"
+msgstr "Radiance"
+
+#. settings-schema.json->buttons-theme->options
+msgid "UniMetro"
+msgstr "UniMetro"
+
+#. settings-schema.json->buttons-theme->options
+msgid "UniMetro-Black"
+msgstr "UniMetro-Black"
+
+#. settings-schema.json->buttons-theme->options
+msgid "Vimix"
+msgstr "Vimix"
+
+#. settings-schema.json->buttons-theme->tooltip
+msgid "Please select a theme for window buttons"
+msgstr "Veuillez sélectionner un thème pour les boutons de fenêtre."
+
+#. settings-schema.json->hide-buttons->description
+msgid "Hide buttons: instead of removing (no applets jump left right)"
+msgstr ""
+"Masquer les boutons : au lieu de les supprimer\n"
+"(aucun saut à gauche ou à droite des applets)"
+
+#. settings-schema.json->only-maximized->description
+msgid "Show buttons: only when focused window is maximized"
+msgstr "Afficher les boutons : uniquement lorsque la fenêtre active est maximisée"

@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-08 19:11+0530\n"
+"PO-Revision-Date: 2023-10-30 12:47+0100\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->name
+#: applet.js:81
+msgid "Wallpaper Slideshow"
+msgstr "Slideshow di Sfondi"
+
+#: applet.js:207
+msgid "The wallpaper path does not exists!"
+msgstr "Il percorso allo sfondo indicato non esiste!"
+
+#. settings-schema.json->head_delay->description
+#: applet.js:220
+msgid "Delay"
+msgstr "Ritardo"
+
+#: applet.js:238
+msgid "Open wallpapers directory"
+msgstr "Apri cartella degli sfondi"
+
+#: applet.js:251
+msgid "Next"
+msgstr "Successivo"
+
+#: applet.js:260
+msgid "Previous"
+msgstr "Precedente"
+
+#. settings-schema.json->head_paused->description
+#: applet.js:273
+msgid "Paused"
+msgstr "In pausa"
+
+#: applet.js:287
+msgid "Preferences"
+msgstr "Preferenze"
+
+#. metadata.json->description
+msgid "Starts a wallpaper slideshow persisting across reboots"
+msgstr "Avvia una slideshow di sfondi che persiste dopo i riavvii"
+
+#. settings-schema.json->head_path->description
+msgid "Wallpaper path"
+msgstr "Percorso sfondo"
+
+#. settings-schema.json->wallpaper_path->description
+msgid "Specify path of the wallpaper directory"
+msgstr "Specifica il percorso alla cartella dello sfondo"
+
+#. settings-schema.json->wallpaper_path->tooltip
+msgid "For example: /home/username/Pictures/wallpapers"
+msgstr "Per esempio: /home/nomeutente/Immagini/sfondi"
+
+#. settings-schema.json->wallpaper_delay->description
+msgid "Specify the delay to change the wallpaper (in seconds)"
+msgstr "Specifica il ritardo per il cambio di sfondo (in secondi)"
+
+#. settings-schema.json->wallpaper_delay->tooltip
+msgid "For example: 86400 for 24hrs"
+msgstr "Per esempio: 86400 per 24 ore"
+
+#. settings-schema.json->head_timer->description
+msgid "Custom interval"
+msgstr "Intervallo personalizzato"
+
+#. settings-schema.json->wallpaper_custom_timer->description
+msgid "Specify a custom interval to check for updates"
+msgstr "Specifica un intervallo personalizzato per controllare gli aggiornamenti"
+
+#. settings-schema.json->wallpaper_custom_timer->tooltip
+msgid "Default: 1hr"
+msgstr "Predefinito: 1 ora"
+
+#. settings-schema.json->wallpaper_timer->description
+msgid "Specify the interval (in seconds) to check for updates"
+msgstr "Specifica l'intervallo (in secondi) per controllare gli aggiornamenti"
+
+#. settings-schema.json->wallpaper_timer->tooltip
+msgid "For example: 3600 for 1hr"
+msgstr "Per esempio: 3600 per 1 ora"
+
+#. settings-schema.json->wallpaper_paused->description
+msgid "Pause the wallpaper slideshow"
+msgstr "Metti in pausa la slideshow di sfondi"

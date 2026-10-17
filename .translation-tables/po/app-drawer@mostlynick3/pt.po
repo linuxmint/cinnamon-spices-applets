@@ -1,0 +1,197 @@
+# Portuguese translation for app-drawer
+# Copyright (C) 2025 mostlynick3
+# This file is distributed under the same license as the app-drawer package.
+# mostlynick3 <>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: app-drawer@mostlynick3 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-02 08:33+0100\n"
+"PO-Revision-Date: 2025-12-18 12:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "App Drawer"
+msgstr "Gaveta de aplicações"
+
+#. metadata.json->description
+msgid ""
+"Full-screen app launcher with animations, transparency, a search box, and "
+"more."
+msgstr ""
+"Lançador de aplicações em ecrã inteiro com animações, transparência, caixa "
+"de pesquisa e mais."
+
+#. settings-schema.json->navigation->description
+msgid "Navigation Settings"
+msgstr "Definições de navegação"
+
+#. settings-schema.json->navigationMode->description
+msgid "Navigation mode"
+msgstr "Modo de navegação"
+
+#. settings-schema.json->navigationMode->options
+msgid "Button Navigation"
+msgstr "Navegação por botões"
+
+#. settings-schema.json->navigationMode->options
+msgid "Scroll Horizontal"
+msgstr "Deslocamento horizontal"
+
+#. settings-schema.json->navigationMode->options
+msgid "Scroll Vertical"
+msgstr "Deslocamento vertical"
+
+#. settings-schema.json->layout->description
+msgid "Layout Settings"
+msgstr "Definições de disposição"
+
+#. settings-schema.json->columns->description
+msgid "Columns per page"
+msgstr "Colunas por página"
+
+#. settings-schema.json->rows->description
+msgid "Rows per page"
+msgstr "Linhas por página"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon size (px)"
+msgstr "Tamanho do ícone (px)"
+
+#. settings-schema.json->padding->description
+msgid "Padding (px)"
+msgstr "Espaçamento (px)"
+
+#. settings-schema.json->fontSize->description
+msgid "Label font size (pt)"
+msgstr "Tamanho da fonte da etiqueta (pt)"
+
+#. settings-schema.json->features->description
+msgid "Features"
+msgstr "Funcionalidades"
+
+#. settings-schema.json->enableSearch->description
+msgid "Enable search bar"
+msgstr "Ativar barra de pesquisa"
+
+#. settings-schema.json->autoFocusSearch->description
+msgid "Auto-focus search bar when opened"
+msgstr "Focar automaticamente a barra de pesquisa ao abrir"
+
+#. settings-schema.json->enableFavorites->description
+msgid "Enable favorites"
+msgstr "Ativar favoritos"
+
+#. settings-schema.json->overlay-keybinding->description
+msgid "Keyboard shortcut to toggle overlay"
+msgstr "Atalho de teclado para alternar sobreposição"
+
+#. settings-schema.json->appearance->description
+msgid "Appearance Settings"
+msgstr "Definições de aparência"
+
+#. settings-schema.json->bgColor->description
+msgid "Background color"
+msgstr "Cor de fundo"
+
+#. settings-schema.json->bgOpacity->units
+#. settings-schema.json->containerOpacity->units
+#. settings-schema.json->boxOpacity->units
+#. settings-schema.json->boxHoverOpacity->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->bgOpacity->description
+msgid "Background opacity"
+msgstr "Opacidade de fundo"
+
+#. settings-schema.json->containerColor->description
+msgid "Container color"
+msgstr "Cor do contentor"
+
+#. settings-schema.json->containerOpacity->description
+msgid "Container opacity"
+msgstr "Opacidade do contentor"
+
+#. settings-schema.json->boxColor->description
+msgid "Box color"
+msgstr "Cor da caixa"
+
+#. settings-schema.json->boxOpacity->description
+msgid "Box opacity"
+msgstr "Opacidade da caixa"
+
+#. settings-schema.json->boxHoverColor->description
+msgid "Box hover color"
+msgstr "Cor da caixa ao passar"
+
+#. settings-schema.json->boxHoverOpacity->description
+msgid "Box hover opacity"
+msgstr "Opacidade da caixa ao passar"
+
+#. settings-schema.json->animations->description
+msgid "Animation Settings"
+msgstr "Definições de animação"
+
+#. settings-schema.json->enableAnimations->description
+msgid "Enable animations"
+msgstr "Ativar animações"
+
+#. settings-schema.json->animationDuration->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->animationDuration->description
+msgid "Animation duration"
+msgstr "Duração da animação"
+
+#. settings-schema.json->openAnimationType->description
+msgid "Open animation"
+msgstr "Animação de abertura"
+
+#. settings-schema.json->openAnimationType->options
+#. settings-schema.json->closeAnimationType->options
+#. settings-schema.json->pageAnimationType->options
+msgid "Fade"
+msgstr "Desvanecer"
+
+#. settings-schema.json->openAnimationType->options
+#. settings-schema.json->closeAnimationType->options
+msgid "Scale"
+msgstr "Escalar"
+
+#. settings-schema.json->openAnimationType->options
+msgid "Slide Up"
+msgstr "Deslizar para cima"
+
+#. settings-schema.json->openAnimationType->options
+#. settings-schema.json->closeAnimationType->options
+msgid "Zoom"
+msgstr "Ampliar"
+
+#. settings-schema.json->closeAnimationType->description
+msgid "Close animation"
+msgstr "Animação de fecho"
+
+#. settings-schema.json->closeAnimationType->options
+msgid "Slide Down"
+msgstr "Deslizar para baixo"
+
+#. settings-schema.json->pageAnimationType->description
+msgid "Button navigation page animation"
+msgstr "Animação de página de navegação por botões"
+
+#. settings-schema.json->pageAnimationType->options
+msgid "Slide"
+msgstr "Deslizar"
+
+#. settings-schema.json->pageAnimationType->options
+msgid "Crossfade"
+msgstr "Transição cruzada"
