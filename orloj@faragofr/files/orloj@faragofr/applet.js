@@ -6,9 +6,9 @@ const Mainloop   = imports.mainloop;
 const St         = imports.gi.St;
 const GLib       = imports.gi.GLib;
 const Clutter    = imports.gi.Clutter;
-let Astronomy, Dial, Theme;
-
-const DIAL_SIZE = 320;
+const Astronomy  = require("./lib/astronomy");
+const Dial       = require("./lib/dial");
+const Theme      = require("./lib/theme");
 
 class OrlojApplet extends Applet.TextApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
@@ -22,11 +22,15 @@ class OrlojApplet extends Applet.TextApplet {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
+        // The dial is only computed while it can be seen.
+        this.menu.connect("open-state-changed", (menu, open) => {
+            if (open) this._refresh();
+        });
 
         this._dialItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         this._drawingArea = new St.DrawingArea({
-            width:  DIAL_SIZE,
-            height: DIAL_SIZE,
+            width:  Dial.REFERENCE_SIZE,
+            height: Dial.REFERENCE_SIZE,
             reactive: true,
             track_hover: true
         });
@@ -41,6 +45,7 @@ class OrlojApplet extends Applet.TextApplet {
         this._lastHoverLabel = null;
 
         this._state = null;
+        this._timer = null;
         this._cachedSunEvent = null;
         this._cachedMoonEvent = null;
 
@@ -60,9 +65,10 @@ class OrlojApplet extends Applet.TextApplet {
         this._settings.bind("latitude",        "latitude",       () => this._invalidateEvents());
         this._settings.bind("longitude",       "longitude",      () => this._invalidateEvents());
         this._settings.bind("refresh-seconds", "refreshSeconds", () => this._scheduleRefresh());
-        this._settings.bind("accent-color",    "accentColor",    () => this._refresh());
+        this._settings.bind("accent-color",    "accentColor",    () => this._applyColors());
         this._settings.bind("foreground-color","foregroundColor",() => this._applyColors());
         this._settings.bind("background-color","backgroundColor",() => this._applyColors());
+        this._settings.bind("day-color",       "dayColor",       () => this._applyColors());
         this._settings.bind("dial-size",       "dialSize",       () => this._applySize());
 
         this._applyColors();
@@ -78,14 +84,20 @@ class OrlojApplet extends Applet.TextApplet {
     }
 
     _applyColors() {
-        Theme.setBaseColors(
-            Theme.parseColor(this.backgroundColor, Theme.BACKGROUND),
-            Theme.parseColor(this.foregroundColor, Theme.FOREGROUND));
+        this._palette = Theme.makePalette(
+            Theme.parseColor(this.backgroundColor, Theme.BACKGROUND_DEFAULT),
+            Theme.parseColor(this.foregroundColor, Theme.FOREGROUND_DEFAULT),
+            Theme.parseColor(this.dayColor, null));
+        this._accent = Theme.parseColor(this.accentColor, Theme.ACCENT_DEFAULT);
+        if (this._state) {
+            this._state.palette = this._palette;
+            this._state.accent  = this._accent;
+        }
         this._drawingArea.queue_repaint();
     }
 
     _applySize() {
-        const size = Math.max(160, parseInt(this.dialSize) || DIAL_SIZE);
+        const size = Math.max(240, parseInt(this.dialSize) || Dial.REFERENCE_SIZE);
         this._drawingArea.width = size;
         this._drawingArea.height = size;
         this._drawingArea.queue_repaint();
@@ -129,7 +141,8 @@ class OrlojApplet extends Applet.TextApplet {
         const sunEv  = this._cachedSunEvent.event;
         const moonEv = this._cachedMoonEvent.event;
         const fmtEv  = (ev) => {
-            if (!ev) return ">1d";
+            // Null: no rise or set in the scan window.
+            if (!ev) return "—";
             const arrow = ev.type === "rise" ? "↑" : "↓";
             const days = Math.floor((ev.time - now) / 86400000);
             if (days >= 7) return `${arrow}>1w`;
@@ -140,57 +153,51 @@ class OrlojApplet extends Applet.TextApplet {
         };
         this.set_applet_label(`☀${fmtEv(sunEv)} ☾${fmtEv(moonEv)}`);
 
+        if (!this.menu.isOpen) return;
+
         const jd      = Astronomy.julianDay(now);
         const sunLon  = Astronomy.sunLongitude(jd);
         const moonLon = Astronomy.moonLongitude(jd);
         const moonLat = Astronomy.moonLatitude(jd);
         const moonPh  = Astronomy.moonPhase(jd);
-        const planets = Astronomy.planetLongitudes(jd);
+        const planetPos = Astronomy.planetPositions(jd);
         const lstDeg  = Astronomy.lmst(jd, lon);
 
-        const sunRA  = Astronomy.eclipticToEquatorial(sunLon, 0, jd).ra;
+        const sunEq  = Astronomy.eclipticToEquatorial(sunLon, 0, jd);
         const moonRA = Astronomy.eclipticToEquatorial(moonLon, moonLat, jd).ra;
+        const planets   = {};
         const planetRAs = {};
-        for (const name of ["Mercury", "Venus", "Mars", "Jupiter", "Saturn"])
-            planetRAs[name] = Astronomy.eclipticToEquatorial(planets[name], 0, jd).ra;
+        const altitudes = {
+            Sun:  Astronomy.apparentAltitude(jd, sunLon,  0,       lat, lon),
+            Moon: Astronomy.apparentAltitude(jd, moonLon, moonLat, lat, lon)
+        };
+        for (const name of Astronomy.PLANETS) {
+            const pos = planetPos[name];
+            planets[name]   = pos.lon;
+            planetRAs[name] = Astronomy.eclipticToEquatorial(pos.lon, pos.lat, jd).ra;
+            altitudes[name] = Astronomy.apparentAltitude(jd, pos.lon, pos.lat, lat, lon);
+        }
 
         const civilHour = now.getHours() + now.getMinutes() / 60
                         + now.getSeconds() / 3600;
 
-        const ss = Astronomy.sunriseSunset(now, lat, lon);
-        // Clock hour → dial degrees: noon = 0°, 15°/hr clockwise.
-        const dialFromCivil = (date) => {
-            if (!date) return null;
-            const h = date.getHours() + date.getMinutes() / 60;
-            return (h - 12) * 15;
-        };
-
-        const altitudes = {
-            Sun:     Astronomy.apparentAltitude(jd, sunLon,           0, lat, lon),
-            Moon:    Astronomy.apparentAltitude(jd, moonLon,    moonLat, lat, lon),
-            Mercury: Astronomy.apparentAltitude(jd, planets.Mercury, 0, lat, lon),
-            Venus:   Astronomy.apparentAltitude(jd, planets.Venus,   0, lat, lon),
-            Mars:    Astronomy.apparentAltitude(jd, planets.Mars,    0, lat, lon),
-            Jupiter: Astronomy.apparentAltitude(jd, planets.Jupiter, 0, lat, lon),
-            Saturn:  Astronomy.apparentAltitude(jd, planets.Saturn,  0, lat, lon)
-        };
-
         this._state = {
             now:               now,
+            latitude:          lat,
             sunLon:            sunLon,
             moonLon:           moonLon,
             moonPhaseAngle:    moonPh,
             planets:           planets,
-            sunRA:             sunRA,
+            sunRA:             sunEq.ra,
+            sunDec:            sunEq.dec,
             moonRA:            moonRA,
             planetRAs:         planetRAs,
             zodiacBoundaryRAs: this._zodiacBoundaryRAs,
             zodiacMidRAs:      this._zodiacMidRAs,
             timeHandAngle:     (civilHour - 12) * 15, // civil time
-            sunriseDialAngle:  dialFromCivil(ss && ss.rise),
-            sunsetDialAngle:   dialFromCivil(ss && ss.set),
             lstDeg:            lstDeg,
-            accent:            Theme.parseColor(this.accentColor, Theme.ACCENT_DEFAULT),
+            palette:           this._palette,
+            accent:            this._accent,
             altitudes:         altitudes
         };
 
@@ -198,7 +205,7 @@ class OrlojApplet extends Applet.TextApplet {
     }
 
     _onMotion(actor, event) {
-        if (!this._state) return false;
+        if (!this._state) return Clutter.EVENT_PROPAGATE;
         const [sx, sy] = event.get_coords();
         const [ax, ay] = actor.get_transformed_position();
         // Use the logical allocation, not get_surface_size(): the surface is
@@ -206,7 +213,7 @@ class OrlojApplet extends Applet.TextApplet {
         // pointer coords above are logical. hitTest must see the same space.
         const [w, h] = actor.get_size();
         const label = Dial.hitTest(w, h, this._state, sx - ax, sy - ay);
-        if (label === this._lastHoverLabel) return false;
+        if (label === this._lastHoverLabel) return Clutter.EVENT_PROPAGATE;
         this._lastHoverLabel = label;
         if (label) {
             this._tooltip.set_text(label);
@@ -233,8 +240,8 @@ class OrlojApplet extends Applet.TextApplet {
             if (this._state) {
                 Dial.draw(cr, w, h, this._state);
             } else {
-                cr.setSourceRGBA(Theme.BACKGROUND[0], Theme.BACKGROUND[1],
-                                 Theme.BACKGROUND[2], Theme.BACKGROUND[3]);
+                const bg = this._palette.BACKGROUND;
+                cr.setSourceRGBA(bg[0], bg[1], bg[2], bg[3]);
                 cr.rectangle(0, 0, w, h);
                 cr.fill();
             }
@@ -253,14 +260,11 @@ class OrlojApplet extends Applet.TextApplet {
             this._timer = null;
         }
         if (this._tooltip) this._tooltip.destroy();
+        this.menu.destroy();
         if (this._settings) this._settings.finalize();
     }
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
-    imports.searchPath.unshift(metadata.path + "/lib");
-    Astronomy = imports.astronomy;
-    Dial      = imports.dial;
-    Theme     = imports.theme;
     return new OrlojApplet(metadata, orientation, panelHeight, instanceId);
 }
