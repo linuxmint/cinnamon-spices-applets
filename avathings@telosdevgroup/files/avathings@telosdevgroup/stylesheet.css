@@ -1,0 +1,23 @@
+.avathings-menu-header {
+    font-weight: bold;
+    padding: 6px 12px;
+    color: #88c0d0;
+}
+
+.avathings-status-box {
+    padding: 6px 14px;
+    spacing: 6px;
+}
+
+.avathings-badge {
+    font-size: 0.9em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.avathings-active-badge {
+    font-weight: bold;
+    color: #a3be8c;
+}
+
