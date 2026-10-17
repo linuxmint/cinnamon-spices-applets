@@ -1,0 +1,8 @@
+{
+  "uuid": "razer-battery@akasolace",
+  "name": "Razer Battery",
+  "description": "Battery percentages and charging status from OpenRazer",
+  "version": "1.0.0",
+  "cinnamon-version": ["6.6"],
+  "max-instances": 1
+}

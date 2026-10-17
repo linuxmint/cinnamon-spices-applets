@@ -1,0 +1,77 @@
+# Razer Battery translation template.
+# Copyright (c) 2026 akasolace
+# This file is distributed under the MIT license.
+# akasolace, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: razer-battery@akasolace 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-10-09 19:11+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:26
+msgid "Reading OpenRazer…"
+msgstr ""
+
+#: applet.js:55
+msgid "OpenRazer query failed or timed out."
+msgstr ""
+
+#: applet.js:57
+msgid "Invalid OpenRazer response."
+msgstr ""
+
+#: applet.js:64
+#, javascript-format
+msgid "Cannot start battery helper: %s"
+msgstr ""
+
+#: applet.js:80
+#, javascript-format
+msgid "%s: unavailable"
+msgstr ""
+
+#: applet.js:81
+#, javascript-format
+msgid "%s: %d%% (charging)"
+msgstr ""
+
+#: applet.js:82
+#, javascript-format
+msgid "%s: %d%% (charging status unknown)"
+msgstr ""
+
+#: applet.js:83
+#, javascript-format
+msgid "%s: %d%%"
+msgstr ""
+
+#: applet.js:85
+#: applet.js:87
+msgid "No battery-capable Razer devices connected."
+msgstr ""
+
+#: applet.js:94
+msgid "Refresh now"
+msgstr ""
+
+#: battery.py:18
+msgid "OpenRazer unavailable. Check the user daemon and session bus."
+msgstr ""
+
+#: battery.py:36
+msgid "Battery unavailable (device disconnected or asleep)."
+msgstr ""
+
+#: battery.py:50
+msgid ""
+"OpenRazer Python API missing. Install python3-openrazer for /usr/bin/python3."
+msgstr ""
