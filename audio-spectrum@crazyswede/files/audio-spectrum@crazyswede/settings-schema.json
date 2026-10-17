@@ -1,0 +1,153 @@
+{
+    "appearance": {
+        "type": "section",
+        "title": "Appearance",
+        "keys": [
+            "bar_count",
+            "sensitivity",
+            "bar_width",
+            "height_mode",
+            "height",
+            "vertical_alignment",
+            "separator",
+            "skin"
+        ],
+        "description": "Appearance"
+    },
+    "bar_count": {
+        "type": "spinbutton",
+        "default": 60,
+        "min": 20,
+        "max": 200,
+        "step": 10,
+        "units": "bars",
+        "description": "Number of EQ bars"
+    },
+    "sensitivity": {
+        "type": "spinbutton",
+        "default": 650,
+        "min": 5,
+        "max": 1000,
+        "step": 1,
+        "units": "%",
+        "description": "Audio sensitivity"
+    },
+    "bar_width": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 1,
+        "max": 10,
+        "step": 0.5,
+        "units": "px",
+        "description": "Bar width"
+    },
+    "height_mode": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Visualizer height",
+        "options": {
+            "Fit panel automatically": "auto",
+            "Set height manually": "manual"
+        }
+    },
+    "height": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 10,
+        "max": 60,
+        "step": 1,
+        "units": "px",
+        "description": "Manual visualizer height",
+        "dependency": "height_mode=manual"
+    },
+    "vertical_alignment": {
+        "type": "combobox",
+        "default": "center",
+        "description": "Vertical alignment",
+        "options": {
+            "Top": "top",
+            "Center": "center",
+            "Bottom": "bottom"
+        },
+        "dependency": "height_mode=manual"
+    },
+    "separator": {
+        "type": "spinbutton",
+        "default": 0.8,
+        "min": 0,
+        "max": 3,
+        "step": 0.1,
+        "units": "px",
+        "description": "Spacing / separator"
+    },
+    "skin": {
+        "type": "combobox",
+        "default": "classic",
+        "description": "Visualization",
+        "options": {
+            "Classic LED": "classic",
+            "80s Car Stereo": "stereo80",
+            "Dot Matrix": "dotmatrix",
+            "Classic Spectrum": "spectrum",
+            "Fire": "fire",
+            "Neon Line": "neon",
+            "VU Meter": "vu",
+            "1980s Digital": "digital80",
+            "Oscilloscope": "oscilloscope",
+            "Classic Neon": "classicneon"
+        }
+    },
+    "animation": {
+        "type": "section",
+        "title": "Animation",
+        "keys": [
+            "fps",
+            "gravity",
+            "peak_hold"
+        ],
+        "description": "Animation"
+    },
+    "fps": {
+        "type": "combobox",
+        "default": "25",
+        "description": "FPS",
+        "options": {
+            "20 FPS": "20",
+            "25 FPS": "25",
+            "30 FPS": "30",
+            "60 FPS": "60"
+        }
+    },
+    "gravity": {
+        "type": "spinbutton",
+        "default": 400,
+        "min": 50,
+        "max": 600,
+        "step": 25,
+        "units": "%",
+        "description": "Fall speed (higher = faster)"
+    },
+    "peak_hold": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 2000,
+        "step": 50,
+        "units": "ms",
+        "description": "Peak hold (0 = off)"
+    },
+    "reset": {
+        "type": "section",
+        "title": "Reset",
+        "keys": [
+            "restore_defaults"
+        ],
+        "description": "Reset"
+    },
+    "restore_defaults": {
+        "type": "button",
+        "description": "Restore default settings",
+        "callback": "_restoreDefaultSettings",
+        "tooltip": "Restore all Audio Spectrum settings to their default values"
+    }
+}
