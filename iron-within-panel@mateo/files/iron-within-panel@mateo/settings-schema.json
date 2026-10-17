@@ -1,0 +1,37 @@
+{
+    "preset": {
+        "type": "combobox",
+        "default": "iron_within",
+        "description": "Preset",
+        "options": {
+            "Subtle": "subtle",
+            "Cinematic": "cinematic",
+            "Iron Within": "iron_within",
+            "Extreme": "extreme"
+        },
+        "tooltip": "The values are in presets.json, next to the shaders."
+    },
+    "intensity": {
+        "type": "scale",
+        "default": 1.0,
+        "min": 0.0,
+        "max": 1.0,
+        "step": 0.05,
+        "digits": 2,
+        "show-value": true,
+        "description": "Intensity",
+        "tooltip": "0 is the original image. 1 is the full preset."
+    },
+    "keybinding": {
+        "type": "keybinding",
+        "default": "<Super>g",
+        "description": "Shortcut to toggle the grade",
+        "tooltip": "A click on the icon also turns the effect on or off. An empty value turns the shortcut off."
+    },
+    "composite-fullscreen": {
+        "type": "switch",
+        "default": true,
+        "description": "Keep fullscreen windows composited while the grade is on",
+        "tooltip": "If fullscreen windows bypass the compositor, those windows skip the shader. While the grade is on, the applet forces compositing. When the grade turns off, the applet restores the previous value. ICC profiles stay unchanged."
+    }
+}
