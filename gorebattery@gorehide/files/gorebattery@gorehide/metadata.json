@@ -1,0 +1,8 @@
+{
+    "uuid": "gorebattery@gorehide",
+    "name": "GoreBattery",
+    "description": "Low battery alert: shows a glow around the screen (soft, gradient or fire) when the battery drops below a chosen level while unplugged",
+    "version": "1.0",
+    "max-instances": 1,
+    "author": "gorehide"
+}
