@@ -2,7 +2,7 @@ const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 const UUID = "volumio@amystikis";
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(str) {
     let translated = Gettext.dgettext(UUID, str);
