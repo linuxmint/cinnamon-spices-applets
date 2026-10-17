@@ -1,0 +1,42 @@
+.spotify-control-applet {
+    spacing: 0px;
+}
+
+.spotify-control-button {
+    padding: 0 2px;
+    border-radius: 4px;
+}
+
+.spotify-control-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spotify-control-button:active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.spotify-star-active {
+    color: #eab308;
+    icon-shadow: 0 0 2px rgba(234, 179, 8, 0.6);
+}
+
+.spotify-tooltip {
+    spacing: 8px;
+    padding: 6px;
+}
+
+.spotify-tooltip-art {
+    border-radius: 3px;
+}
+
+.spotify-tooltip-text {
+    spacing: 2px;
+}
+
+.spotify-tooltip-title {
+    font-weight: bold;
+}
+
+.spotify-tooltip-artist {
+    opacity: 180;
+}
