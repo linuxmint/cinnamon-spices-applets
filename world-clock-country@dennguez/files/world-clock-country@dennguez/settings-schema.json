@@ -1,0 +1,91 @@
+{
+  "general-header": {
+    "type": "header",
+    "description": "Country Clock"
+  },
+  "timezone-preset": {
+    "type": "combobox",
+    "default": "UTC",
+    "description": "Time zone",
+    "options": {
+      "UTC": "UTC",
+      "Bolivia - La Paz": "BO_LPB",
+      "Mexico - Mexico City": "MX_MEX",
+      "United States - New York": "US_NYC",
+      "United States - Los Angeles": "US_LAX",
+      "Colombia - Bogota": "CO_BOG",
+      "Peru - Lima": "PE_LIM",
+      "Ecuador - Quito": "EC_UIO",
+      "Chile - Santiago": "CL_SCL",
+      "Argentina - Buenos Aires": "AR_BUE",
+      "Uruguay - Montevideo": "UY_MVD",
+      "Brazil - Sao Paulo": "BR_SAO",
+      "United Kingdom - London": "GB_LON",
+      "Spain - Madrid": "ES_MAD",
+      "France - Paris": "FR_PAR",
+      "Germany - Berlin": "DE_BER",
+      "Italy - Rome": "IT_ROM",
+      "Portugal - Lisbon": "PT_LIS",
+      "India - Kolkata": "IN_CCU",
+      "Thailand - Bangkok": "TH_BKK",
+      "Japan - Tokyo": "JP_TYO",
+      "China - Shanghai": "CN_SHA",
+      "South Korea - Seoul": "KR_SEL",
+      "Australia - Sydney": "AU_SYD",
+      "New Zealand - Auckland": "NZ_AKL",
+      "Custom": "CUSTOM"
+    },
+    "tooltip": "Choose the country or time zone shown in the panel."
+  },
+  "custom-timezone": {
+    "type": "entry",
+    "default": "",
+    "description": "Custom time zone",
+    "dependency": "timezone-preset=CUSTOM",
+    "tooltip": "Use an IANA time zone such as America/La_Paz, Europe/Madrid, or Asia/Tokyo."
+  },
+  "custom-flag-image": {
+    "type": "iconfilechooser",
+    "default": "",
+    "description": "Custom flag image",
+    "dependency": "timezone-preset=CUSTOM",
+    "tooltip": "Choose a local SVG or PNG image for the custom time zone. Leave empty to use the UTC icon."
+  },
+  "custom-country-code": {
+    "type": "entry",
+    "default": "",
+    "description": "Custom country code",
+    "dependency": "timezone-preset=CUSTOM",
+    "tooltip": "Short text shown when the country indicator is set to Country code. Leave empty to use TZ."
+  },
+  "display-header": {
+    "type": "header",
+    "description": "Display"
+  },
+  "country-indicator": {
+    "type": "combobox",
+    "default": "flag",
+    "description": "Country indicator",
+    "options": {
+      "Flag": "flag",
+      "Country code": "code"
+    },
+    "tooltip": "Choose whether the panel shows the country flag icon or the country code next to the time."
+  },
+  "time-format": {
+    "type": "combobox",
+    "default": "24",
+    "description": "Time format",
+    "options": {
+      "24-hour": "24",
+      "AM/PM": "ampm"
+    },
+    "tooltip": "Choose how the time is displayed in the panel."
+  },
+  "show-timezone-tooltip": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show time zone in tooltip",
+    "tooltip": "Show the active country/city and IANA time zone when hovering over the applet."
+  }
+}
