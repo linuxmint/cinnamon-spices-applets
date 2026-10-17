@@ -33,6 +33,7 @@ class VerticalPanelDownloadAndUploadSpeedApplet extends Applet.TextIconApplet {
         this.loopId = 0;
         this.refreshInFlight = false;
         this.refreshGeneration = 0;
+        this.preferredUnavailable = false;
         this.nmClient = null;
         this.sessionRX = 0;
         this.sessionTX = 0;
@@ -208,6 +209,7 @@ class VerticalPanelDownloadAndUploadSpeedApplet extends Applet.TextIconApplet {
         if (forceDetect) {
             this.iface = null;
             this.lastSample = null;
+            this.preferredUnavailable = false;
             this.refreshGeneration++;
         }
 
@@ -249,6 +251,14 @@ class VerticalPanelDownloadAndUploadSpeedApplet extends Applet.TextIconApplet {
                 if (!stats) {
                     this.iface = null;
                     this.lastSample = null;
+
+                    // Preferred interface absent (e.g. unplugged): auto-detect on the next tick
+                    if (iface === this._getPreferredInterface() && !this.preferredUnavailable) {
+                        this.preferredUnavailable = true;
+                        this.refreshInFlight = false;
+                        return;
+                    }
+
                     this.set_applet_label("-\n-");
                     this.set_applet_tooltip(_("Failed to read network counters."));
                     this.updateMenuStats();
@@ -269,9 +279,8 @@ class VerticalPanelDownloadAndUploadSpeedApplet extends Applet.TextIconApplet {
     }
 
     detectPrimaryInterface(callback) {
-        // Fall back to auto-detect while the preferred interface is absent (e.g. unplugged)
         let preferred = this._getPreferredInterface();
-        if (preferred && GLib.file_test(`/sys/class/net/${preferred}`, GLib.FileTest.EXISTS)) {
+        if (preferred && !this.preferredUnavailable) {
             callback(preferred);
             return;
         }
