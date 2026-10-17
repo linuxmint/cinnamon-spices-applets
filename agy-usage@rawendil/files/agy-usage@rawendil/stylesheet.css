@@ -1,0 +1,18 @@
+/* Colour classes taken from claude-usage@mtwebster by Michael Webster (GPL-3.0),
+ * renamed so both applets can share a panel without clashing. */
+
+.agy-usage-label {
+    font-weight: bold;
+}
+
+.agy-usage-green {
+    color: #5da271;
+}
+
+.agy-usage-yellow {
+    color: #ffaa00;
+}
+
+.agy-usage-red {
+    color: #ff0000;
+}
