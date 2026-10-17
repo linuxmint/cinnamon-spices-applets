@@ -1,0 +1,631 @@
+# INTERNET QUALITY
+# This file is put in the public domain.
+# wertos97, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: internet-quality@wertos97 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-09-09 16:07+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:140
+msgid "Internet quality"
+msgstr ""
+
+#. applet.js:141
+msgid "Measuring..."
+msgstr ""
+
+#. applet.js:147
+msgid "Latency"
+msgstr ""
+
+#. applet.js:147
+msgid "Jitter"
+msgstr ""
+
+#. applet.js:148
+msgid "Packet loss"
+msgstr ""
+
+#. applet.js:148
+msgid "DNS"
+msgstr ""
+
+#. applet.js:149
+msgid "Probe"
+msgstr ""
+
+#. applet.js:166
+msgid "Test now"
+msgstr ""
+
+#. settings-schema.json->color_offline->description
+#. applet.js:501
+msgid "Offline"
+msgstr ""
+
+#. applet.js:501
+msgid "Very poor"
+msgstr ""
+
+#. applet.js:501
+msgid "Poor"
+msgstr ""
+
+#. applet.js:501
+msgid "Fair"
+msgstr ""
+
+#. applet.js:502
+msgid "Good"
+msgstr ""
+
+#. applet.js:502
+msgid "Excellent"
+msgstr ""
+
+#. applet.js:743
+#, javascript-format
+msgid "Internet quality: %s (%d/5)"
+msgstr ""
+
+#. applet.js:748
+msgid "Failed"
+msgstr ""
+
+#. applet.js:753
+#, javascript-format
+msgid "Last check: %s"
+msgstr ""
+
+#. applet.js:757
+msgid "Waiting for the first measurement..."
+msgstr ""
+
+#. metadata.json->description
+msgid "A compact dot or bar indicator of real Internet connection quality"
+msgstr ""
+
+#. metadata.json->name
+msgid "Internet Quality"
+msgstr ""
+
+#. settings-schema.json->page_connection->title
+msgid "Connection"
+msgstr ""
+
+#. settings-schema.json->page_indicator->title
+msgid "Indicator"
+msgstr ""
+
+#. settings-schema.json->page_colors->title
+#. settings-schema.json->section_popup_colors->title
+msgid "Colors"
+msgstr ""
+
+#. settings-schema.json->page_popup->title
+msgid "Popup"
+msgstr ""
+
+#. settings-schema.json->section_measurement->title
+msgid "Measurement schedule"
+msgstr ""
+
+#. settings-schema.json->section_targets->title
+msgid "Probe targets"
+msgstr ""
+
+#. settings-schema.json->section_thresholds->title
+msgid "Latency thresholds"
+msgstr ""
+
+#. settings-schema.json->section_indicator_mode->title
+msgid "Mode and direction"
+msgstr ""
+
+#. settings-schema.json->section_dots->title
+msgid "Dot mode"
+msgstr ""
+
+#. settings-schema.json->section_bar->title
+msgid "Bar mode"
+msgstr ""
+
+#. settings-schema.json->section_effects->title
+msgid "Fill and effects"
+msgstr ""
+
+#. settings-schema.json->section_position->title
+msgid "Spacing and position"
+msgstr ""
+
+#. settings-schema.json->section_theme->title
+msgid "Theme and coloring"
+msgstr ""
+
+#. settings-schema.json->section_quality_colors->title
+msgid "Quality colors"
+msgstr ""
+
+#. settings-schema.json->section_decoration_colors->title
+msgid "Decoration colors"
+msgstr ""
+
+#. settings-schema.json->section_popup_content->title
+msgid "Visible content"
+msgstr ""
+
+#. settings-schema.json->section_popup_geometry->title
+msgid "Geometry"
+msgstr ""
+
+#. settings-schema.json->section_popup_typography->title
+msgid "Typography"
+msgstr ""
+
+#. settings-schema.json->probe_interval->units
+#. settings-schema.json->probe_timeout->units
+msgid "sec"
+msgstr ""
+
+#. settings-schema.json->probe_interval->description
+msgid "Measurement interval"
+msgstr ""
+
+#. settings-schema.json->probe_timeout->description
+msgid "Probe timeout"
+msgstr ""
+
+#. settings-schema.json->sample_window->description
+msgid "Samples used for smoothing"
+msgstr ""
+
+#. settings-schema.json->probe_host->description
+msgid "Ping target"
+msgstr ""
+
+#. settings-schema.json->tcp_host->description
+msgid "TCP fallback target"
+msgstr ""
+
+#. settings-schema.json->dns_host->description
+msgid "DNS test hostname"
+msgstr ""
+
+#. settings-schema.json->excellent_latency->units
+#. settings-schema.json->good_latency->units
+#. settings-schema.json->fair_latency->units
+#. settings-schema.json->poor_latency->units
+msgid "ms"
+msgstr ""
+
+#. settings-schema.json->excellent_latency->description
+msgid "Five dots up to"
+msgstr ""
+
+#. settings-schema.json->good_latency->description
+msgid "Four dots up to"
+msgstr ""
+
+#. settings-schema.json->fair_latency->description
+msgid "Three dots up to"
+msgstr ""
+
+#. settings-schema.json->poor_latency->description
+msgid "Two dots up to"
+msgstr ""
+
+#. settings-schema.json->theme_preset->description
+msgid "Theme"
+msgstr ""
+
+#. settings-schema.json->theme_preset->tooltip
+msgid ""
+"A preset overrides the panel and popup colors below. Select Custom to use "
+"individual colors."
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "Traffic Dark"
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "Ocean Dark"
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "Violet Dark"
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "Graphite Light"
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "Pastel Light"
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "High Contrast"
+msgstr ""
+
+#. settings-schema.json->theme_preset->options
+msgid "Monochrome"
+msgstr ""
+
+#. settings-schema.json->indicator_style->description
+msgid "Indicator appearance"
+msgstr ""
+
+#. settings-schema.json->indicator_style->options
+msgid "Five dots"
+msgstr ""
+
+#. settings-schema.json->indicator_style->options
+msgid "Continuous bar"
+msgstr ""
+
+#. settings-schema.json->dot_orientation->description
+msgid "Layout"
+msgstr ""
+
+#. settings-schema.json->dot_orientation->options
+msgid "Vertical"
+msgstr ""
+
+#. settings-schema.json->dot_orientation->options
+msgid "Horizontal"
+msgstr ""
+
+#. settings-schema.json->active_direction->description
+msgid "Fill direction"
+msgstr ""
+
+#. settings-schema.json->active_direction->options
+msgid "Bottom or right first"
+msgstr ""
+
+#. settings-schema.json->active_direction->options
+msgid "Top or left first"
+msgstr ""
+
+#. settings-schema.json->dot_shape->description
+msgid "Dot shape"
+msgstr ""
+
+#. settings-schema.json->dot_shape->options
+msgid "Circle / ellipse"
+msgstr ""
+
+#. settings-schema.json->dot_shape->options
+msgid "Rounded rectangle"
+msgstr ""
+
+#. settings-schema.json->dot_shape->options
+msgid "Capsule"
+msgstr ""
+
+#. settings-schema.json->dot_shape->options
+msgid "Square"
+msgstr ""
+
+#. settings-schema.json->dot_shape->options
+msgid "Diamond"
+msgstr ""
+
+#. settings-schema.json->dot_width->units
+#. settings-schema.json->dot_height->units
+#. settings-schema.json->dot_gap->units
+#. settings-schema.json->horizontal_margin->units
+#. settings-schema.json->vertical_margin->units
+#. settings-schema.json->panel_outer_margin->units
+#. settings-schema.json->dot_offset_x->units
+#. settings-schema.json->dot_offset_y->units
+#. settings-schema.json->dot_corner_radius->units
+#. settings-schema.json->bar_length->units
+#. settings-schema.json->bar_thickness->units
+#. settings-schema.json->bar_corner_radius->units
+#. settings-schema.json->bar_border_width->units
+#. settings-schema.json->bar_segment_width->units
+#. settings-schema.json->dot_border_width->units
+#. settings-schema.json->dot_glow_width->units
+#. settings-schema.json->panel_background_radius->units
+#. settings-schema.json->popup_width->units
+#. settings-schema.json->popup_padding_x->units
+#. settings-schema.json->popup_padding_y->units
+#. settings-schema.json->popup_row_gap->units
+#. settings-schema.json->popup_corner_radius->units
+msgid "px"
+msgstr ""
+
+#. settings-schema.json->dot_width->description
+msgid "Dot width"
+msgstr ""
+
+#. settings-schema.json->dot_height->description
+msgid "Dot height"
+msgstr ""
+
+#. settings-schema.json->dot_gap->description
+msgid "Gap between dots"
+msgstr ""
+
+#. settings-schema.json->horizontal_margin->description
+msgid "Horizontal inner margin"
+msgstr ""
+
+#. settings-schema.json->vertical_margin->description
+msgid "Vertical inner margin"
+msgstr ""
+
+#. settings-schema.json->panel_outer_margin->description
+msgid "Margin around the applet"
+msgstr ""
+
+#. settings-schema.json->dot_offset_x->description
+msgid "Horizontal dot offset"
+msgstr ""
+
+#. settings-schema.json->dot_offset_y->description
+msgid "Vertical dot offset"
+msgstr ""
+
+#. settings-schema.json->dot_corner_radius->description
+msgid "Rounded rectangle radius"
+msgstr ""
+
+#. settings-schema.json->bar_length->description
+msgid "Bar length"
+msgstr ""
+
+#. settings-schema.json->bar_thickness->description
+msgid "Bar thickness"
+msgstr ""
+
+#. settings-schema.json->bar_corner_radius->description
+msgid "Bar corner radius"
+msgstr ""
+
+#. settings-schema.json->bar_border_width->description
+msgid "Bar border width"
+msgstr ""
+
+#. settings-schema.json->bar_segment_lines->description
+msgid "Show five level markers"
+msgstr ""
+
+#. settings-schema.json->bar_segment_width->description
+msgid "Level marker width"
+msgstr ""
+
+#. settings-schema.json->color_mode->description
+msgid "Active dot coloring"
+msgstr ""
+
+#. settings-schema.json->color_mode->options
+msgid "Current quality color"
+msgstr ""
+
+#. settings-schema.json->color_mode->options
+msgid "Different color per level"
+msgstr ""
+
+#. settings-schema.json->color_mode->options
+msgid "Single custom color"
+msgstr ""
+
+#. settings-schema.json->inactive_style->description
+#. settings-schema.json->color_inactive->description
+msgid "Inactive dots"
+msgstr ""
+
+#. settings-schema.json->inactive_style->options
+msgid "Filled"
+msgstr ""
+
+#. settings-schema.json->inactive_style->options
+msgid "Outline"
+msgstr ""
+
+#. settings-schema.json->inactive_style->options
+msgid "Hidden"
+msgstr ""
+
+#. settings-schema.json->offline_style->description
+msgid "Offline appearance"
+msgstr ""
+
+#. settings-schema.json->offline_style->options
+msgid "All dots inactive"
+msgstr ""
+
+#. settings-schema.json->offline_style->options
+msgid "One offline-colored dot"
+msgstr ""
+
+#. settings-schema.json->offline_style->options
+msgid "All dots offline-colored"
+msgstr ""
+
+#. settings-schema.json->dot_border_width->description
+msgid "Border width"
+msgstr ""
+
+#. settings-schema.json->dot_glow_width->description
+msgid "Glow size"
+msgstr ""
+
+#. settings-schema.json->dot_glow_opacity->units
+#. settings-schema.json->active_opacity->units
+#. settings-schema.json->inactive_opacity->units
+#. settings-schema.json->panel_background_opacity->units
+msgid "%"
+msgstr ""
+
+#. settings-schema.json->dot_glow_opacity->description
+msgid "Glow opacity"
+msgstr ""
+
+#. settings-schema.json->active_opacity->description
+msgid "Active dot opacity"
+msgstr ""
+
+#. settings-schema.json->inactive_opacity->description
+msgid "Inactive dot opacity"
+msgstr ""
+
+#. settings-schema.json->panel_background->description
+msgid "Show a background behind dots"
+msgstr ""
+
+#. settings-schema.json->panel_background_opacity->description
+msgid "Panel background opacity"
+msgstr ""
+
+#. settings-schema.json->panel_background_radius->description
+msgid "Panel background corner radius"
+msgstr ""
+
+#. settings-schema.json->color_active->description
+msgid "Single active color"
+msgstr ""
+
+#. settings-schema.json->color_excellent->description
+msgid "Level 5 / excellent"
+msgstr ""
+
+#. settings-schema.json->color_good->description
+msgid "Level 4 / good"
+msgstr ""
+
+#. settings-schema.json->color_fair->description
+msgid "Level 3 / fair"
+msgstr ""
+
+#. settings-schema.json->color_poor->description
+msgid "Level 2 / poor"
+msgstr ""
+
+#. settings-schema.json->color_very_poor->description
+msgid "Level 1 / very poor"
+msgstr ""
+
+#. settings-schema.json->color_border->description
+msgid "Dot border"
+msgstr ""
+
+#. settings-schema.json->color_glow->description
+msgid "Dot glow"
+msgstr ""
+
+#. settings-schema.json->bar_segment_color->description
+msgid "Bar level markers"
+msgstr ""
+
+#. settings-schema.json->panel_background_color->description
+msgid "Panel background"
+msgstr ""
+
+#. settings-schema.json->popup_show_title->description
+msgid "Show title"
+msgstr ""
+
+#. settings-schema.json->popup_show_summary->description
+msgid "Show quality summary"
+msgstr ""
+
+#. settings-schema.json->popup_show_latency->description
+msgid "Show latency"
+msgstr ""
+
+#. settings-schema.json->popup_show_jitter->description
+msgid "Show jitter"
+msgstr ""
+
+#. settings-schema.json->popup_show_loss->description
+msgid "Show packet loss"
+msgstr ""
+
+#. settings-schema.json->popup_show_dns->description
+msgid "Show DNS result"
+msgstr ""
+
+#. settings-schema.json->popup_show_method->description
+msgid "Show probe method"
+msgstr ""
+
+#. settings-schema.json->popup_show_status->description
+msgid "Show last check time"
+msgstr ""
+
+#. settings-schema.json->popup_show_test->description
+msgid "Show Test now action"
+msgstr ""
+
+#. settings-schema.json->popup_width->description
+msgid "Width"
+msgstr ""
+
+#. settings-schema.json->popup_padding_x->description
+msgid "Horizontal padding"
+msgstr ""
+
+#. settings-schema.json->popup_padding_y->description
+msgid "Vertical padding"
+msgstr ""
+
+#. settings-schema.json->popup_row_gap->description
+msgid "Row spacing"
+msgstr ""
+
+#. settings-schema.json->popup_corner_radius->description
+msgid "Background corner radius"
+msgstr ""
+
+#. settings-schema.json->popup_title_size->units
+#. settings-schema.json->popup_summary_size->units
+#. settings-schema.json->popup_text_size->units
+msgid "pt"
+msgstr ""
+
+#. settings-schema.json->popup_title_size->description
+msgid "Title size"
+msgstr ""
+
+#. settings-schema.json->popup_summary_size->description
+msgid "Summary size"
+msgstr ""
+
+#. settings-schema.json->popup_text_size->description
+msgid "Details size"
+msgstr ""
+
+#. settings-schema.json->popup_bold_values->description
+msgid "Bold metric values"
+msgstr ""
+
+#. settings-schema.json->popup_background->description
+msgid "Background"
+msgstr ""
+
+#. settings-schema.json->popup_text->description
+msgid "Main text"
+msgstr ""
+
+#. settings-schema.json->popup_muted->description
+msgid "Secondary text"
+msgstr ""
+
+#. settings-schema.json->popup_accent->description
+msgid "Summary accent"
+msgstr ""

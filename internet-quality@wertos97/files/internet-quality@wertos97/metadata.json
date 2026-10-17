@@ -1,0 +1,7 @@
+{
+    "max-instances": "1",
+    "description": "A compact dot or bar indicator of real Internet connection quality",
+    "name": "Internet Quality",
+    "version": "1.0",
+    "uuid": "internet-quality@wertos97"
+}

@@ -1,0 +1,675 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page_connection", "page_indicator", "page_colors", "page_popup"],
+        "page_connection": {
+            "type": "page",
+            "title": "Connection",
+            "sections": ["section_measurement", "section_targets", "section_thresholds"]
+        },
+        "page_indicator": {
+            "type": "page",
+            "title": "Indicator",
+            "sections": ["section_indicator_mode", "section_dots", "section_bar", "section_effects", "section_position"]
+        },
+        "page_colors": {
+            "type": "page",
+            "title": "Colors",
+            "sections": ["section_theme", "section_quality_colors", "section_decoration_colors"]
+        },
+        "page_popup": {
+            "type": "page",
+            "title": "Popup",
+            "sections": ["section_popup_content", "section_popup_geometry", "section_popup_typography", "section_popup_colors"]
+        },
+        "section_measurement": {
+            "type": "section",
+            "title": "Measurement schedule",
+            "keys": ["probe_interval", "probe_timeout", "sample_window"]
+        },
+        "section_targets": {
+            "type": "section",
+            "title": "Probe targets",
+            "keys": ["probe_host", "tcp_host", "dns_host"]
+        },
+        "section_thresholds": {
+            "type": "section",
+            "title": "Latency thresholds",
+            "keys": ["excellent_latency", "good_latency", "fair_latency", "poor_latency"]
+        },
+        "section_indicator_mode": {
+            "type": "section",
+            "title": "Mode and direction",
+            "keys": ["indicator_style", "dot_orientation", "active_direction"]
+        },
+        "section_dots": {
+            "type": "section",
+            "title": "Dot mode",
+            "dependency": "indicator_style=dots",
+            "keys": ["dot_shape", "dot_width", "dot_height", "dot_gap", "dot_corner_radius"]
+        },
+        "section_bar": {
+            "type": "section",
+            "title": "Bar mode",
+            "dependency": "indicator_style=bar",
+            "keys": ["bar_length", "bar_thickness", "bar_corner_radius", "bar_border_width", "bar_segment_lines", "bar_segment_width"]
+        },
+        "section_effects": {
+            "type": "section",
+            "title": "Fill and effects",
+            "keys": ["inactive_style", "offline_style", "dot_border_width", "dot_glow_width", "dot_glow_opacity", "active_opacity", "inactive_opacity", "panel_background", "panel_background_opacity", "panel_background_radius"]
+        },
+        "section_position": {
+            "type": "section",
+            "title": "Spacing and position",
+            "keys": ["horizontal_margin", "vertical_margin", "panel_outer_margin", "dot_offset_x", "dot_offset_y"]
+        },
+        "section_theme": {
+            "type": "section",
+            "title": "Theme and coloring",
+            "keys": ["theme_preset", "color_mode"]
+        },
+        "section_quality_colors": {
+            "type": "section",
+            "title": "Quality colors",
+            "keys": ["color_active", "color_excellent", "color_good", "color_fair", "color_poor", "color_very_poor", "color_offline", "color_inactive"]
+        },
+        "section_decoration_colors": {
+            "type": "section",
+            "title": "Decoration colors",
+            "keys": ["color_border", "color_glow", "bar_segment_color", "panel_background_color"]
+        },
+        "section_popup_content": {
+            "type": "section",
+            "title": "Visible content",
+            "keys": ["popup_show_title", "popup_show_summary", "popup_show_latency", "popup_show_jitter", "popup_show_loss", "popup_show_dns", "popup_show_method", "popup_show_status", "popup_show_test"]
+        },
+        "section_popup_geometry": {
+            "type": "section",
+            "title": "Geometry",
+            "keys": ["popup_width", "popup_padding_x", "popup_padding_y", "popup_row_gap", "popup_corner_radius"]
+        },
+        "section_popup_typography": {
+            "type": "section",
+            "title": "Typography",
+            "keys": ["popup_title_size", "popup_summary_size", "popup_text_size", "popup_bold_values"]
+        },
+        "section_popup_colors": {
+            "type": "section",
+            "title": "Colors",
+            "keys": ["popup_background", "popup_text", "popup_muted", "popup_accent"]
+        }
+    },
+    "probe_interval": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 2,
+        "max": 60,
+        "step": 1,
+        "units": "sec",
+        "description": "Measurement interval"
+    },
+    "probe_timeout": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "units": "sec",
+        "description": "Probe timeout"
+    },
+    "sample_window": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 3,
+        "max": 30,
+        "step": 1,
+        "description": "Samples used for smoothing"
+    },
+    "probe_host": {
+        "type": "entry",
+        "default": "8.8.8.8",
+        "description": "Ping target"
+    },
+    "tcp_host": {
+        "type": "entry",
+        "default": "1.1.1.1",
+        "description": "TCP fallback target"
+    },
+    "dns_host": {
+        "type": "entry",
+        "default": "example.com",
+        "description": "DNS test hostname"
+    },
+    "excellent_latency": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 200,
+        "step": 5,
+        "units": "ms",
+        "description": "Five dots up to"
+    },
+    "good_latency": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 20,
+        "max": 400,
+        "step": 5,
+        "units": "ms",
+        "description": "Four dots up to"
+    },
+    "fair_latency": {
+        "type": "spinbutton",
+        "default": 200,
+        "min": 50,
+        "max": 800,
+        "step": 10,
+        "units": "ms",
+        "description": "Three dots up to"
+    },
+    "poor_latency": {
+        "type": "spinbutton",
+        "default": 500,
+        "min": 100,
+        "max": 2000,
+        "step": 25,
+        "units": "ms",
+        "description": "Two dots up to"
+    },
+    "theme_preset": {
+        "type": "combobox",
+        "default": "custom",
+        "description": "Theme",
+        "tooltip": "A preset overrides the panel and popup colors below. Select Custom to use individual colors.",
+        "options": {
+            "Custom": "custom",
+            "Traffic Dark": "traffic_dark",
+            "Ocean Dark": "ocean_dark",
+            "Violet Dark": "violet_dark",
+            "Graphite Light": "graphite_light",
+            "Pastel Light": "pastel_light",
+            "High Contrast": "high_contrast",
+            "Monochrome": "monochrome"
+        }
+    },
+    "indicator_style": {
+        "type": "combobox",
+        "default": "dots",
+        "description": "Indicator appearance",
+        "options": {
+            "Five dots": "dots",
+            "Continuous bar": "bar"
+        }
+    },
+    "dot_orientation": {
+        "type": "combobox",
+        "default": "vertical",
+        "description": "Layout",
+        "options": {
+            "Vertical": "vertical",
+            "Horizontal": "horizontal"
+        }
+    },
+    "active_direction": {
+        "type": "combobox",
+        "default": "end",
+        "description": "Fill direction",
+        "options": {
+            "Bottom or right first": "end",
+            "Top or left first": "start"
+        }
+    },
+    "dot_shape": {
+        "type": "combobox",
+        "default": "circle",
+        "description": "Dot shape",
+        "options": {
+            "Circle / ellipse": "circle",
+            "Rounded rectangle": "rounded",
+            "Capsule": "capsule",
+            "Square": "square",
+            "Diamond": "diamond"
+        }
+    },
+    "dot_width": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 2,
+        "max": 16,
+        "step": 1,
+        "units": "px",
+        "description": "Dot width"
+    },
+    "dot_height": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 2,
+        "max": 16,
+        "step": 1,
+        "units": "px",
+        "description": "Dot height"
+    },
+    "dot_gap": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0,
+        "max": 6,
+        "step": 1,
+        "units": "px",
+        "description": "Gap between dots"
+    },
+    "horizontal_margin": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "units": "px",
+        "description": "Horizontal inner margin"
+    },
+    "vertical_margin": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "units": "px",
+        "description": "Vertical inner margin"
+    },
+    "panel_outer_margin": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "units": "px",
+        "description": "Margin around the applet"
+    },
+    "dot_offset_x": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": -10,
+        "max": 10,
+        "step": 1,
+        "units": "px",
+        "description": "Horizontal dot offset"
+    },
+    "dot_offset_y": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": -10,
+        "max": 10,
+        "step": 1,
+        "units": "px",
+        "description": "Vertical dot offset"
+    },
+    "dot_corner_radius": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "units": "px",
+        "description": "Rounded rectangle radius",
+        "dependency": "dot_shape=rounded"
+    },
+    "bar_length": {
+        "type": "spinbutton",
+        "default": 28,
+        "min": 10,
+        "max": 100,
+        "step": 1,
+        "units": "px",
+        "description": "Bar length"
+    },
+    "bar_thickness": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 2,
+        "max": 20,
+        "step": 1,
+        "units": "px",
+        "description": "Bar thickness"
+    },
+    "bar_corner_radius": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "units": "px",
+        "description": "Bar corner radius"
+    },
+    "bar_border_width": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 4,
+        "step": 1,
+        "units": "px",
+        "description": "Bar border width"
+    },
+    "bar_segment_lines": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Show five level markers"
+    },
+    "bar_segment_width": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "units": "px",
+        "description": "Level marker width",
+        "dependency": "bar_segment_lines"
+    },
+    "color_mode": {
+        "type": "combobox",
+        "default": "quality",
+        "description": "Active dot coloring",
+        "options": {
+            "Current quality color": "quality",
+            "Different color per level": "level",
+            "Single custom color": "single"
+        }
+    },
+    "inactive_style": {
+        "type": "combobox",
+        "default": "filled",
+        "description": "Inactive dots",
+        "options": {
+            "Filled": "filled",
+            "Outline": "outline",
+            "Hidden": "hidden"
+        }
+    },
+    "offline_style": {
+        "type": "combobox",
+        "default": "inactive",
+        "description": "Offline appearance",
+        "options": {
+            "All dots inactive": "inactive",
+            "One offline-colored dot": "one",
+            "All dots offline-colored": "all"
+        }
+    },
+    "dot_border_width": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 4,
+        "step": 1,
+        "units": "px",
+        "description": "Border width"
+    },
+    "dot_glow_width": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 6,
+        "step": 1,
+        "units": "px",
+        "description": "Glow size"
+    },
+    "dot_glow_opacity": {
+        "type": "spinbutton",
+        "default": 28,
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "units": "%",
+        "description": "Glow opacity",
+        "dependency": "dot_glow_width>0"
+    },
+    "active_opacity": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 10,
+        "max": 100,
+        "step": 5,
+        "units": "%",
+        "description": "Active dot opacity"
+    },
+    "inactive_opacity": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "units": "%",
+        "description": "Inactive dot opacity"
+    },
+    "panel_background": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Show a background behind dots"
+    },
+    "panel_background_opacity": {
+        "type": "spinbutton",
+        "default": 60,
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "units": "%",
+        "description": "Panel background opacity",
+        "dependency": "panel_background"
+    },
+    "panel_background_radius": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 0,
+        "max": 16,
+        "step": 1,
+        "units": "px",
+        "description": "Panel background corner radius",
+        "dependency": "panel_background"
+    },
+    "color_active": {
+        "type": "colorchooser",
+        "default": "#35a854",
+        "description": "Single active color",
+        "dependency": "color_mode=single"
+    },
+    "color_excellent": {
+        "type": "colorchooser",
+        "default": "#35a854",
+        "description": "Level 5 / excellent"
+    },
+    "color_good": {
+        "type": "colorchooser",
+        "default": "#76b947",
+        "description": "Level 4 / good"
+    },
+    "color_fair": {
+        "type": "colorchooser",
+        "default": "#d29a2e",
+        "description": "Level 3 / fair"
+    },
+    "color_poor": {
+        "type": "colorchooser",
+        "default": "#d16b32",
+        "description": "Level 2 / poor"
+    },
+    "color_very_poor": {
+        "type": "colorchooser",
+        "default": "#c84b50",
+        "description": "Level 1 / very poor"
+    },
+    "color_offline": {
+        "type": "colorchooser",
+        "default": "#8f3338",
+        "description": "Offline"
+    },
+    "color_inactive": {
+        "type": "colorchooser",
+        "default": "#5e5e5e",
+        "description": "Inactive dots"
+    },
+    "color_border": {
+        "type": "colorchooser",
+        "default": "#202020",
+        "description": "Dot border"
+    },
+    "color_glow": {
+        "type": "colorchooser",
+        "default": "#ffffff",
+        "description": "Dot glow",
+        "dependency": "dot_glow_width>0"
+    },
+    "bar_segment_color": {
+        "type": "colorchooser",
+        "default": "#202020",
+        "description": "Bar level markers",
+        "dependency": "bar_segment_lines"
+    },
+    "panel_background_color": {
+        "type": "colorchooser",
+        "default": "#202020",
+        "description": "Panel background",
+        "dependency": "panel_background"
+    },
+    "popup_show_title": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show title"
+    },
+    "popup_show_summary": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show quality summary"
+    },
+    "popup_show_latency": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show latency"
+    },
+    "popup_show_jitter": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show jitter"
+    },
+    "popup_show_loss": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show packet loss"
+    },
+    "popup_show_dns": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show DNS result"
+    },
+    "popup_show_method": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show probe method"
+    },
+    "popup_show_status": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show last check time"
+    },
+    "popup_show_test": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show Test now action"
+    },
+    "popup_width": {
+        "type": "spinbutton",
+        "default": 230,
+        "min": 180,
+        "max": 400,
+        "step": 10,
+        "units": "px",
+        "description": "Width"
+    },
+    "popup_padding_x": {
+        "type": "spinbutton",
+        "default": 14,
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "units": "px",
+        "description": "Horizontal padding"
+    },
+    "popup_padding_y": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "units": "px",
+        "description": "Vertical padding"
+    },
+    "popup_row_gap": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "units": "px",
+        "description": "Row spacing"
+    },
+    "popup_corner_radius": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "units": "px",
+        "description": "Background corner radius"
+    },
+    "popup_title_size": {
+        "type": "spinbutton",
+        "default": 11,
+        "min": 7,
+        "max": 24,
+        "step": 1,
+        "units": "pt",
+        "description": "Title size"
+    },
+    "popup_summary_size": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 7,
+        "max": 24,
+        "step": 1,
+        "units": "pt",
+        "description": "Summary size"
+    },
+    "popup_text_size": {
+        "type": "spinbutton",
+        "default": 9,
+        "min": 7,
+        "max": 20,
+        "step": 1,
+        "units": "pt",
+        "description": "Details size"
+    },
+    "popup_bold_values": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Bold metric values"
+    },
+    "popup_background": {
+        "type": "colorchooser",
+        "default": "#303030",
+        "description": "Background"
+    },
+    "popup_text": {
+        "type": "colorchooser",
+        "default": "#f5f5f5",
+        "description": "Main text"
+    },
+    "popup_muted": {
+        "type": "colorchooser",
+        "default": "#b8b8b8",
+        "description": "Secondary text"
+    },
+    "popup_accent": {
+        "type": "colorchooser",
+        "default": "#35a854",
+        "description": "Summary accent"
+    }
+}
