@@ -28,7 +28,7 @@ The panel display is kept to a compact 3-character style:
 - Left click opens a popup menu with:
   - Active interface name and live rates
   - Session totals and today totals
-  - **Interface selector** — pick any detected interface or revert to auto-detect
+  - **Interface selector**: pick any detected interface or revert to auto-detect
   - `Reset Session Stats`
 - Right click → **Configure** allows typing an interface name manually (useful for VPNs or bridges not listed automatically).
 - Right click opens the standard Cinnamon context menu.
