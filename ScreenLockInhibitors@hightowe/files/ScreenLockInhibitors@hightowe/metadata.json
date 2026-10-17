@@ -1,0 +1,14 @@
+{
+  "uuid": "ScreenLockInhibitors@hightowe",
+  "name": "Screen Lock Inhibitors",
+  "description": "Displays an indicator when screensaver or idle sleep is inhibited.",
+  "author": "hightowe",
+  "version": "1.0.0",
+  "cinnamon-version": [
+    "5.4",
+    "5.6",
+    "5.8",
+    "6.0",
+    "6.2"
+  ]
+}
