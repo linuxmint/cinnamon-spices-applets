@@ -2,27 +2,31 @@ const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Main = imports.ui.main;
 const St = imports.gi.St;
-const Tweener = imports.ui.tweener;
+const Clutter = imports.gi.Clutter;
+const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop;
-
 const Gettext = imports.gettext;
 
 const UUID = "gorebattery@gorehide";
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(str) {
     let translated = Gettext.dgettext(UUID, str);
     return translated !== str ? translated : Gettext.gettext(str);
 }
 
+Gio._promisify(Gio.File.prototype, "load_contents_async", "load_contents_finish");
+Gio._promisify(Gio.File.prototype, "replace_contents_async", "replace_contents_finish");
+
 const POWER_DIR = "/sys/class/power_supply";
 const decoder = new TextDecoder();
+const encoder = new TextEncoder();
 
-function readFile(path) {
+async function readFile(path) {
     try {
-        let [ok, bytes] = GLib.file_get_contents(path);
-        return ok ? decoder.decode(bytes).trim() : null;
+        let [bytes] = await Gio.File.new_for_path(path).load_contents_async(null);
+        return decoder.decode(bytes).trim();
     } catch (e) {
         return null;
     }
@@ -39,43 +43,54 @@ function listSupplies() {
     return names.sort();
 }
 
-function listBatteries() {
-    return listSupplies()
-        .filter(n => readFile(`${POWER_DIR}/${n}/type`) === "Battery")
-        .map(n => {
-            let model = readFile(`${POWER_DIR}/${n}/model_name`);
-            return { name: n, label: model ? `${n} · ${model}` : n };
-        });
+async function listBatteries() {
+    let batteries = [];
+    for (let name of listSupplies()) {
+        if (await readFile(`${POWER_DIR}/${name}/type`) !== "Battery")
+            continue;
+        let model = await readFile(`${POWER_DIR}/${name}/model_name`);
+        batteries.push({ name, label: model ? `${name} · ${model}` : name });
+    }
+    return batteries;
 }
 
-function onAcPower(status) {
-    let adapters = listSupplies().filter(n => readFile(`${POWER_DIR}/${n}/type`) === "Mains");
-    if (adapters.length > 0)
-        return adapters.some(n => readFile(`${POWER_DIR}/${n}/online`) === "1");
+async function onAcPower(status) {
+    let adapters = [];
+    for (let name of listSupplies()) {
+        if (await readFile(`${POWER_DIR}/${name}/type`) === "Mains")
+            adapters.push(name);
+    }
+    if (adapters.length > 0) {
+        for (let name of adapters) {
+            if (await readFile(`${POWER_DIR}/${name}/online`) === "1")
+                return true;
+        }
+        return false;
+    }
     return status === "Charging" || status === "Full";
 }
 
-// Las opciones de un combobox son estáticas, así que se regeneran con las
-// baterías detectadas antes de cargar los ajustes.
-function updateSchema(metadata) {
+// The options of a combobox are static, so they are regenerated with the
+// detected batteries before the settings are loaded.
+async function updateSchema(metadata) {
     try {
         let path = `${metadata.path}/settings-schema.json`;
-        let schema = JSON.parse(readFile(path));
+        let schema = JSON.parse(await readFile(path));
         let options = { "Automatic (first battery)": "auto" };
-        for (let b of listBatteries())
+        for (let b of await listBatteries())
             options[b.label] = b.name;
         if (JSON.stringify(schema.battery.options) !== JSON.stringify(options)) {
             schema.battery.options = options;
-            GLib.file_set_contents(path, JSON.stringify(schema, null, 4));
+            let bytes = encoder.encode(JSON.stringify(schema, null, 4));
+            await Gio.File.new_for_path(path).replace_contents_async(
+                bytes, null, false, Gio.FileCreateFlags.NONE, null);
         }
     } catch (e) {
         global.logError(`GoreBattery: could not update the schema: ${e}`);
     }
 }
 
-// Halo rojo pulsante alrededor de cada monitor. No es reactivo, así que no
-// intercepta el ratón ni el teclado.
-// Acepta "rgb(r,g,b)", "rgba(r,g,b,a)" y "#rrggbb". Devuelve [r, g, b] de 0 a 1.
+// Accepts "rgb(r,g,b)", "rgba(r,g,b,a)" and "#rrggbb". Returns [r, g, b] from 0 to 1.
 function parseColor(text) {
     let m = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/.exec(text || "");
     if (m)
@@ -86,6 +101,8 @@ function parseColor(text) {
     return [1, 0, 0];
 }
 
+// Glow around the edges of every monitor. The actors are not reactive, so
+// they never intercept the mouse or the keyboard.
 class RedGlow {
     constructor() {
         this.actors = [];
@@ -138,8 +155,8 @@ class RedGlow {
         cr.$dispose();
     }
 
-    // Cada borde se dibuja en coordenadas locales: x a lo largo del borde,
-    // y negativa hacia el interior de la pantalla.
+    // Every edge is drawn in local coordinates: x along the edge and
+    // negative y towards the inside of the screen.
     forEachEdge(cr, w, h, draw) {
         let edges = [
             [() => cr.translate(0, h), w],
@@ -192,10 +209,10 @@ class RedGlow {
     }
 
     pulse(actor, up) {
-        Tweener.addTween(actor, {
+        actor.ease({
             opacity: up ? 255 : 90,
-            time: 0.9,
-            transition: "easeInOutSine",
+            duration: 900,
+            mode: Clutter.AnimationMode.EASE_IN_OUT_SINE,
             onComplete: () => {
                 if (this.actors.includes(actor))
                     this.pulse(actor, !up);
@@ -211,7 +228,7 @@ class RedGlow {
         this.hideTimeoutId = null;
         this.frameTimeoutId = null;
         for (let actor of this.actors) {
-            Tweener.removeTweens(actor);
+            actor.remove_all_transitions();
             Main.uiGroup.remove_child(actor);
             actor.destroy();
         }
@@ -219,7 +236,7 @@ class RedGlow {
     }
 }
 
-class BatteryAlertApplet extends Applet.TextIconApplet {
+class GoreBatteryApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
         this.warned = false;
@@ -228,19 +245,28 @@ class BatteryAlertApplet extends Applet.TextIconApplet {
         this.appletName = metadata.name;
         this.previewing = false;
         this.previewKey = null;
-
-        updateSchema(metadata);
-        this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
-        this.settings.bind("battery", "battery", this.onSettingsChanged.bind(this));
-        this.settings.bind("threshold", "threshold", this.onSettingsChanged.bind(this));
-        this.settings.bind("glowDuration", "glowDuration", this.onSettingsChanged.bind(this));
-        this.settings.bind("glowStyle", "glowStyle", this.onSettingsChanged.bind(this));
-        this.settings.bind("glowColor2", "glowColor2", this.onSettingsChanged.bind(this));
-        this.settings.bind("glowColor", "glowColor", this.onSettingsChanged.bind(this));
-        this.settings.bind("checkInterval", "checkInterval", this.startTimer.bind(this));
-        this.settings.bind("showPercent", "showPercent", this.onSettingsChanged.bind(this));
+        this.settings = null;
+        this.removed = false;
+        this.checking = false;
+        this.pendingCheck = false;
 
         this.set_applet_tooltip("GoreBattery");
+        this.initialize(metadata, instanceId).catch(e =>
+            global.logError(`GoreBattery: ${e}`));
+    }
+
+    async initialize(metadata, instanceId) {
+        await updateSchema(metadata);
+        if (this.removed)
+            return;
+
+        this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
+        let changed = this.onSettingsChanged.bind(this);
+        for (let key of ["battery", "threshold", "glowDuration", "glowStyle",
+                         "glowColor", "glowColor2", "showPercent"])
+            this.settings.bind(key, key, changed);
+        this.settings.bind("checkInterval", "checkInterval", this.startTimer.bind(this));
+
         this.check();
         this.startTimer();
         this.previewTimeoutId = Mainloop.timeout_add(500, () => {
@@ -256,8 +282,8 @@ class BatteryAlertApplet extends Applet.TextIconApplet {
         });
     }
 
-    // Mientras la ventana de configuración está abierta, el halo se muestra
-    // siempre (sin límite de tiempo) para ver los cambios en vivo.
+    // While the settings window is open the glow is always shown (without a
+    // time limit) so the changes can be seen live.
     syncPreview() {
         try {
             if (this.settingsWindowOpen()) {
@@ -299,8 +325,8 @@ class BatteryAlertApplet extends Applet.TextIconApplet {
         this.check();
     }
 
-    selectedBattery() {
-        let names = listBatteries().map(b => b.name);
+    async selectedBattery() {
+        let names = (await listBatteries()).map(b => b.name);
         if (names.includes(this.battery))
             return this.battery;
         return names.length > 0 ? names[0] : null;
@@ -312,18 +338,35 @@ class BatteryAlertApplet extends Applet.TextIconApplet {
         return `${this.iconDir}/level-${name}${plugged ? "-charging" : ""}.svg`;
     }
 
-    check() {
+    // Checks never overlap: if one is requested while another is running,
+    // it runs once more right after the current one finishes.
+    async check() {
+        if (this.checking) {
+            this.pendingCheck = true;
+            return;
+        }
+        this.checking = true;
         try {
-            this.doCheck();
+            do {
+                this.pendingCheck = false;
+                await this.doCheck();
+            } while (this.pendingCheck && !this.removed);
         } catch (e) {
             global.logError(`GoreBattery: ${e}`);
+        } finally {
+            this.checking = false;
         }
     }
 
-    doCheck() {
+    async doCheck() {
         this.syncPreview();
-        let name = this.selectedBattery();
-        let level = name ? parseInt(readFile(`${POWER_DIR}/${name}/capacity`)) : NaN;
+        let name = await this.selectedBattery();
+        let level = name ? parseInt(await readFile(`${POWER_DIR}/${name}/capacity`)) : NaN;
+        let status = isNaN(level) ? null : await readFile(`${POWER_DIR}/${name}/status`);
+        let plugged = isNaN(level) ? false : await onAcPower(status);
+        if (this.removed)
+            return;
+
         if (isNaN(level)) {
             this.set_applet_icon_symbolic_name("battery-missing-symbolic");
             this.set_applet_label("");
@@ -331,8 +374,6 @@ class BatteryAlertApplet extends Applet.TextIconApplet {
             return;
         }
 
-        let status = readFile(`${POWER_DIR}/${name}/status`);
-        let plugged = onAcPower(status);
         this.set_applet_icon_path(this.iconFor(level, plugged));
         this.set_applet_label(this.showPercent ? `${level}%` : "");
         this.set_applet_tooltip(
@@ -355,6 +396,7 @@ class BatteryAlertApplet extends Applet.TextIconApplet {
     }
 
     on_applet_removed_from_panel() {
+        this.removed = true;
         this.glow.hide();
         if (this.previewTimeoutId) {
             Mainloop.source_remove(this.previewTimeoutId);
@@ -364,10 +406,11 @@ class BatteryAlertApplet extends Applet.TextIconApplet {
             Mainloop.source_remove(this.timeoutId);
             this.timeoutId = null;
         }
-        this.settings.finalize();
+        if (this.settings)
+            this.settings.finalize();
     }
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
-    return new BatteryAlertApplet(metadata, orientation, panelHeight, instanceId);
+    return new GoreBatteryApplet(metadata, orientation, panelHeight, instanceId);
 }
