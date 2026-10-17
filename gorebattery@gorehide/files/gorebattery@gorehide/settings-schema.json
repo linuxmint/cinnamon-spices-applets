@@ -20,6 +20,12 @@
         "step": 1,
         "default": 20
     },
+    "showGlow": {
+        "type": "switch",
+        "description": "Show the glow when the battery is low",
+        "tooltip": "Turn it off if you only want the thin border",
+        "default": true
+    },
     "glowDuration": {
         "type": "spinbutton",
         "description": "Glow duration (seconds, 0 = until the charger is plugged in)",
@@ -48,6 +54,26 @@
         "type": "colorchooser",
         "description": "Second color (Two-color gradient only)",
         "default": "rgb(255,165,0)"
+    },
+    "showBorder": {
+        "type": "switch",
+        "description": "Show a thin border while unplugged",
+        "tooltip": "A thin border around the screen is shown whenever the computer is not plugged in, whatever the charge level",
+        "default": true
+    },
+    "borderWidth": {
+        "type": "spinbutton",
+        "description": "Border width (pixels)",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "default": 2,
+        "units": "px"
+    },
+    "borderColor": {
+        "type": "colorchooser",
+        "description": "Border color",
+        "default": "rgb(255,0,0)"
     },
     "checkInterval": {
         "type": "spinbutton",

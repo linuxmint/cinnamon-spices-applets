@@ -90,15 +90,17 @@ async function updateSchema(metadata) {
     }
 }
 
-// Accepts "rgb(r,g,b)", "rgba(r,g,b,a)" and "#rrggbb". Returns [r, g, b] from 0 to 1.
+// Accepts "rgb(r,g,b)", "rgba(r,g,b,a)" and "#rrggbb". Returns [r, g, b, a] from 0 to 1.
 function parseColor(text) {
-    let m = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/.exec(text || "");
-    if (m)
-        return [m[1] / 255, m[2] / 255, m[3] / 255];
+    let m = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?/.exec(text || "");
+    if (m) {
+        let alpha = m[4] === undefined ? 1 : Math.min(1, Math.max(0, parseFloat(m[4])));
+        return [m[1] / 255, m[2] / 255, m[3] / 255, alpha];
+    }
     m = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i.exec(text || "");
     if (m)
-        return [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255];
-    return [1, 0, 0];
+        return [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255, 1];
+    return [1, 0, 0, 1];
 }
 
 // Glow around the edges of every monitor. The actors are not reactive, so
@@ -173,12 +175,12 @@ class RedGlow {
     }
 
     paintGradient(cr, w, h, size) {
-        let [r1, g1, b1] = this.color;
-        let [r2, g2, b2] = this.style === "gradient" ? this.color2 : this.color;
+        let [r1, g1, b1, a1] = this.color;
+        let [r2, g2, b2, a2] = this.style === "gradient" ? this.color2 : this.color;
         this.forEachEdge(cr, w, h, length => {
             let gradient = new imports.cairo.LinearGradient(0, 0, 0, -size);
-            gradient.addColorStopRGBA(0, r1, g1, b1, 0.9);
-            gradient.addColorStopRGBA(0.5, r2, g2, b2, 0.5);
+            gradient.addColorStopRGBA(0, r1, g1, b1, 0.9 * a1);
+            gradient.addColorStopRGBA(0.5, r2, g2, b2, 0.5 * a2);
             gradient.addColorStopRGBA(1, r2, g2, b2, 0);
             cr.setSource(gradient);
             cr.rectangle(0, -size, length, size);
@@ -236,11 +238,59 @@ class RedGlow {
     }
 }
 
+// Thin static border around every monitor, shown while the computer is
+// running on battery. Like the glow, it never captures input.
+class ScreenBorder {
+    constructor() {
+        this.actors = [];
+        this.key = null;
+    }
+
+    // Re-creates the actors only when something that affects them changed.
+    show(color, width) {
+        let key = JSON.stringify([color, width, Main.layoutManager.monitors.map(
+            m => [m.x, m.y, m.width, m.height])]);
+        if (key === this.key)
+            return;
+        this.hide();
+        this.key = key;
+        let [r, g, b, a] = parseColor(color);
+        for (let m of Main.layoutManager.monitors) {
+            let actor = new St.DrawingArea({
+                reactive: false,
+                x: m.x, y: m.y, width: m.width, height: m.height,
+            });
+            actor.connect("repaint", area => {
+                let [w, h] = area.get_surface_size();
+                let cr = area.get_context();
+                cr.setSourceRGBA(r, g, b, a);
+                cr.setLineWidth(width);
+                cr.rectangle(width / 2, width / 2, w - width, h - width);
+                cr.stroke();
+                cr.$dispose();
+            });
+            Main.uiGroup.add_child(actor);
+            this.actors.push(actor);
+        }
+    }
+
+    hide() {
+        this.key = null;
+        for (let actor of this.actors) {
+            Main.uiGroup.remove_child(actor);
+            actor.destroy();
+        }
+        this.actors = [];
+    }
+}
+
 class GoreBatteryApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
         this.warned = false;
         this.glow = new RedGlow();
+        this.border = new ScreenBorder();
+        this.unplugged = false;
         this.iconDir = `${metadata.path}/icons`;
         this.appletName = metadata.name;
         this.previewing = false;
@@ -263,7 +313,7 @@ class GoreBatteryApplet extends Applet.TextIconApplet {
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         let changed = this.onSettingsChanged.bind(this);
         for (let key of ["battery", "threshold", "glowDuration", "glowStyle",
-                         "glowColor", "glowColor2", "showPercent"])
+                         "glowColor", "glowColor2", "showGlow", "showPercent", "showBorder", "borderWidth", "borderColor"])
             this.settings.bind(key, key, changed);
         this.settings.bind("checkInterval", "checkInterval", this.startTimer.bind(this));
 
@@ -292,11 +342,14 @@ class GoreBatteryApplet extends Applet.TextIconApplet {
                     color: this.glowColor,
                     color2: this.glowColor2,
                 };
-                let key = JSON.stringify(options);
+                let key = JSON.stringify([options, this.showGlow]);
                 if (!this.previewing || key !== this.previewKey) {
                     this.previewing = true;
                     this.previewKey = key;
-                    this.glow.show(0, options);
+                    if (this.showGlow)
+                        this.glow.show(0, options);
+                    else
+                        this.glow.hide();
                 }
             } else if (this.previewing) {
                 this.previewing = false;
@@ -305,9 +358,19 @@ class GoreBatteryApplet extends Applet.TextIconApplet {
                 this.warned = false;
                 this.check();
             }
+            this.updateBorder();
         } catch (e) {
             global.logError(`GoreBattery: ${e}`);
         }
+    }
+
+    // The border is shown while unplugged (whatever the charge level) and
+    // also during the settings preview, so its color and width can be seen.
+    updateBorder() {
+        if (this.showBorder && (this.previewing || this.unplugged))
+            this.border.show(this.borderColor, Math.max(1, parseInt(this.borderWidth) || 2));
+        else
+            this.border.hide();
     }
 
     startTimer() {
@@ -367,6 +430,9 @@ class GoreBatteryApplet extends Applet.TextIconApplet {
         if (this.removed)
             return;
 
+        this.unplugged = !isNaN(level) && !plugged;
+        this.updateBorder();
+
         if (isNaN(level)) {
             this.set_applet_icon_symbolic_name("battery-missing-symbolic");
             this.set_applet_label("");
@@ -382,7 +448,7 @@ class GoreBatteryApplet extends Applet.TextIconApplet {
 
         if (this.previewing) {
             return;
-        } else if (plugged || level > this.threshold) {
+        } else if (plugged || level > this.threshold || !this.showGlow) {
             this.warned = false;
             this.glow.hide();
         } else if (!this.warned) {
@@ -398,6 +464,7 @@ class GoreBatteryApplet extends Applet.TextIconApplet {
     on_applet_removed_from_panel() {
         this.removed = true;
         this.glow.hide();
+        this.border.hide();
         if (this.previewTimeoutId) {
             Mainloop.source_remove(this.previewTimeoutId);
             this.previewTimeoutId = null;
