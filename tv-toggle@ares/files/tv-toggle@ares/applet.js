@@ -1,6 +1,7 @@
 const Applet = imports.ui.applet;
-const GLib = imports.gi.GLib;
+const Util = imports.misc.util;
 const Settings = imports.ui.settings;
+const Gio = imports.gi.Gio;
 
 const UUID = "tv-toggle@ares";
 
@@ -22,36 +23,61 @@ TVToggleApplet.prototype = {
 
         this.set_applet_icon_name("video-display");
         this.set_applet_tooltip(_("TV Toggle: click to switch displays"));
+
+        // Assume external is off until we detect the real state (async, non-blocking)
+        this._external_on = false;
+        this._detect_initial_state();
     },
 
-    _is_external_on: function() {
+    // Detect whether the external display is currently active.
+    // Runs once at startup, asynchronously, so it never blocks the panel.
+    // Parses `xrandr` output directly — no shell involved.
+    _detect_initial_state: function() {
         try {
-            let cmd = 'sh -c \'xrandr | grep "^' + this.external_output + ' connected" | grep -q "+" && echo "on" || echo "off"\'';
-            let [ok, stdout] = GLib.spawn_command_line_sync(cmd);
-            let state = String.fromCharCode.apply(null, stdout).trim();
-            return state === "on";
+            let proc = new Gio.Subprocess({
+                argv: ['xrandr'],
+                flags: Gio.SubprocessFlags.STDOUT_PIPE
+            });
+            proc.init(null);
+            let self = this;
+            proc.communicate_utf8_async(null, null, function(proc, res) {
+                try {
+                    let [, stdout] = proc.communicate_utf8_finish(res);
+                    let lines = stdout.split('\n');
+                    for (let i = 0; i < lines.length; i++) {
+                        // e.g. "HDMI-1 connected 1920x1080+1366+0 ..."
+                        // Active outputs have a resolution with a +X+Y offset.
+                        if (lines[i].indexOf(self.external_output + ' connected') === 0) {
+                            self._external_on = /\d+x\d+\+\d+\+\d+/.test(lines[i]);
+                            break;
+                        }
+                    }
+                } catch (e) {
+                    global.logError("TV Toggle init: " + e);
+                }
+            });
         } catch (e) {
-            global.logError("TV Toggle: " + e);
-            return false;
+            global.logError("TV Toggle init: " + e);
         }
     },
 
     on_applet_clicked: function() {
         try {
-            if (this._is_external_on()) {
+            if (this._external_on) {
                 // External is on — go back to internal only
-                GLib.spawn_command_line_async(
-                    'xrandr --output ' + this.external_output + ' --off' +
-                    ' --output ' + this.internal_output + ' --auto'
-                );
+                Util.spawn(["xrandr",
+                    "--output", this.external_output, "--off",
+                    "--output", this.internal_output, "--auto"
+                ]);
             } else {
                 // External is off — extend desktop to it
-                GLib.spawn_command_line_async(
-                    'xrandr --output ' + this.external_output + ' --mode ' + this.external_mode +
-                    ' --output ' + this.internal_output + ' --auto' +
-                    ' --' + this.external_position + ' ' + this.external_output
-                );
+                Util.spawn(["xrandr",
+                    "--output", this.external_output, "--mode", this.external_mode,
+                    "--output", this.internal_output, "--auto",
+                    "--" + this.external_position, this.external_output
+                ]);
             }
+            this._external_on = !this._external_on;
         } catch (e) {
             global.logError("TV Toggle: " + e);
         }
