@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: DailyAppUsage@ghostypixel 1.0.0\n"
+"Project-Id-Version: DailyAppUsage@ghostypixel 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-09-01 13:23+0200\n"
+"POT-Creation-Date: 2026-10-18 12:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,58 +17,61 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:215
+#. applet.js:166
 msgid "App Usage"
 msgstr ""
 
-#. applet.js:216
-msgid "Displays apps and how long they were running."
-msgstr ""
-
-#. applet.js:359
+#. applet.js:339
 msgid "Unknown"
 msgstr ""
 
-#. applet.js:385
+#. applet.js:362
 #, javascript-format
 msgid "App opened: %s"
 msgstr ""
 
-#. applet.js:407
+#. applet.js:386
 #, javascript-format
 msgid "App closed: %s"
 msgstr ""
 
-#. applet.js:422
-#, javascript-format
-msgid "Failed timer for %s"
-msgstr ""
-
-#. applet.js:496
+#. applet.js:413
 msgid "No apps were opened."
 msgstr ""
 
-#. applet.js:610
+#. applet.js:544
 #, javascript-format
 msgid "Failed to read save file. %s"
 msgstr ""
 
-#. applet.js:728
+#. applet.js:647
 msgid "Export Successful"
 msgstr ""
 
-#. applet.js:728
+#. applet.js:647
 msgid "Export Unsuccesful"
 msgstr ""
 
-#. applet.js:733
+#. applet.js:652
 #, javascript-format
 msgid "coudnt save json %s"
 msgstr ""
 
-#. applet.js:801
+#. applet.js:720
 #, javascript-format
 msgid "Failed to Create/Overwrite file: %s"
+msgstr ""
+
+#. applet.js:884
+#, javascript-format
+msgid ""
+"Active apps: %s\n"
+"Next save in %s"
+msgstr ""
+
+#. applet.js:1527
+#, javascript-format
+msgid "Failed timer for %s"
 msgstr ""
 
 #. metadata.json->name
@@ -139,6 +142,16 @@ msgstr ""
 
 #. settings-schema.json->default-icon-name->tooltip
 msgid "Choose what icon appears whenever none is found."
+msgstr ""
+
+#. settings-schema.json->scroll-bar-visible->description
+msgid "Visible Scrollbar"
+msgstr ""
+
+#. settings-schema.json->scroll-bar-visible->tooltip
+msgid ""
+"This is disabled by default to prevent adding an uneccesary margin where the "
+"scrollbar is located when the menu's height is not overarching."
 msgstr ""
 
 #. settings-schema.json->sort-apps-by->description

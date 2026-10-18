@@ -24,7 +24,7 @@
         "appearance-section": {
         	"type" : "section",
             "title": "Appearance",
-            "keys": ["apps-visible", "max-char-for-app-label", "enable-app-icons", "default-icon-name"]
+            "keys": ["apps-visible", "max-char-for-app-label", "default-icon-name", "enable-app-icons", "scroll-bar-visible"]
         },
 		
 		"app-sort-section": {
@@ -87,6 +87,13 @@
         "description": "Fallback icon (Work in progress)",
         "tooltip": "Choose what icon appears whenever none is found."
 	},
+
+    "scroll-bar-visible": {
+        "type": "switch",
+		"default": false,
+		"description": "Visible Scrollbar",
+		"tooltip": "This is disabled by default to prevent adding an uneccesary margin where the scrollbar is located when the menu's height is not overarching." 
+    },
 	
 	"sort-apps-by": {
 		"type": "combobox",

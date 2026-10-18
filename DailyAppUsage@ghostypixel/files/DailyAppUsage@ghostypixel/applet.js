@@ -9,17 +9,11 @@ const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
 const Clutter = imports.gi.Clutter;
 const Gtk = imports.gi.Gtk;
-// const Meta = imports.gi.Meta;
 const GObject = imports.gi.GObject
 const GdkPixbuf = imports.gi.GdkPixbuf;
 const Cogl = imports.gi.Cogl;
 const Gettext = imports.gettext;
 const UUID = "DailyAppUsage@ghostypixel"
-
-const AppletDir = imports.ui.appletManager.applets[UUID];
-const Misc = AppletDir.misc
-
-let FALLBACK_ICON_NAME = "application-x-executable" // Will be customizable later, incase you got a cooler looking icon to use.
 
 Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
@@ -28,52 +22,57 @@ Gio._promisify(Gio.File.prototype, 'query_info_async', 'query_info_finish');
 Gio._promisify(Gio.File.prototype, 'replace_contents_async', 'replace_contents_finish');
 
 function _(text) { return Gettext.dgettext(UUID, text); }
+function MinutesToMs(intMinutes) { return 1000 * 60 * intMinutes }
 
-class AppData {
-    constructor(name, icon = null, startingTime = 0, attr) {
+function toCSV(table) {
+    const lines = [
+        table.columns.join(","),
+        ...table.rows.map(row => row.join(","))
+    ];
+
+    return lines.join("\n");
+}
+
+function connectOnce(obj, signal, callback) {
+    let id = obj.connect(signal, (...args) => {
+        obj.disconnect(id);
+        callback(...args);
+    });
+
+    return id;
+}
+
+class AppMetadata {
+    constructor(name, startingTime = 0, attr) {
         this.name = name
-        this.icon = icon
         this.time = startingTime
         this.attr = attr
     }
     
-    static IsSteamApp(name) { return name.startsWith("steam_app_") }
+    static IsSteamName(name) { return name.startsWith("steam_app_") }
     
-    static EvalAppForName(app) {
+    static GetNameFromApp(app) {
         let name = app.get_name()
         
         // Steam apps use proton for compatibility, using desktop id to categorize them is unreliable and their name always sounds technical (steam_app_{steam app id})
-        if(this.IsSteamApp(name)) return app.get_windows()[0].get_title()
+        if(this.IsSteamName(name)) return app.get_windows()[0].get_title()
         
         return name
     }
     
     static FromApp(app) {
-        let iconData = AppData.ExtractIconImg(app.create_icon_texture(24))
-        let attributes = AppData.GenerateAttributes(app)
-        
-        if(iconData[1] != null) attributes["icon-path"] = iconData[1]
-        
-        return new AppData(AppData.EvalAppForName(app), iconData[0], 0, attributes)
+        let attributes = AppMetadata.GenerateAttributes(app)
+        return new AppMetadata(AppMetadata.GetNameFromApp(app), 0, attributes)
     }
     
-    static FromSavedEntry([name, data], icon) {
-        return new AppData(name, icon, data[0], data[1])
+    static FromSavedEntry(entry) {
+        return new AppMetadata(entry[0], entry[1], entry[2])
     }
     
     static FromSavedEntries(entries, activeApps) {
-        let dataDict = {}
-        
-        Object.entries(entries).forEach(([key, val]) => {
-            let icon;
-            
-            if(activeApps[key] != null) icon = activeApps[key].icon;
-            else icon = AppData.TryResolveIconFromAttr(val[1])
-            
-            dataDict[key] = AppData.FromSavedEntry([key, val], icon)
-        })
-        
-        return dataDict
+        return Object.fromEntries(
+            Object.entries(entries).map(([key, val]) => [key, AppMetadata.FromSavedEntry(val)])
+        );
     }
     
     static FromWindows(windows) {
@@ -82,203 +81,187 @@ class AppData {
         
         windows.forEach(window => {
             let app = tracker.get_window_app(window);
-            dataDict[AppData.EvalAppForName(app)] = AppData.FromApp(app)
+            dataDict[window.get_wm_class()] = AppMetadata.FromApp(app)
         })
         
         return dataDict
-    }
-    
-    static ClutterImgFromPixBuff(buff) {
-        const content = new Clutter.Image();
-        
-        content.set_data(
-            buff.get_pixels(),
-            buff.get_has_alpha()
-                ? Cogl.PixelFormat.RGBA_8888
-                : Cogl.PixelFormat.RGB_888,
-            buff.get_width(),
-            buff.get_height(),
-            buff.get_rowstride()
-        );
-        
-        return content
-    }
-    
-    // Extracts both Image and path or name if possible
-    static ExtractIconImg(icon) {
-        let pixbuf;
-        let iconPath = null; // or iconName if were nitpicky.
-        
-        if(icon.gicon != null) {        
-            if(icon.gicon.names != null) {
-                const theme = Gtk.IconTheme.get_default();
-                const info = theme.lookup_by_gicon(icon.gicon, 24, 0);
-                iconPath = icon.gicon.get_names()[0]
-                pixbuf = info.load_icon();
-            }
-            else {
-                const file = icon.gicon.get_file();
-                iconPath = file.get_path()
-                pixbuf = GdkPixbuf.Pixbuf.new_from_file(iconPath);
-            }
-        }
-        else if(icon.child != null) return [icon.get_child().get_content(), iconPath] // i think i can later extract a name here!
-        else if(icon["icon-name"] != null) {
-            const theme = Gtk.IconTheme.get_default();
-            iconPath = icon["icon-name"]
-            pixbuf = theme.load_icon(iconPath, 26, 0);
-        }
-        
-        return [AppData.ClutterImgFromPixBuff(pixbuf), iconPath]
     }
     
     static GenerateAttributes(app) {
         let attr = {}
         let name = app.get_name()
         
-        if(this.IsSteamApp(name)) attr["SteamId"] = parseInt(name.match(/\d+$/)[0]); // that gets the id
+        if(this.IsSteamName(name)) attr["SteamId"] = parseInt(name.match(/\d+$/)[0]); // that gets the id
             
         return attr
     } 
     
-    static TryResolveIconFromAttr(attributes) {
-        if(attributes == null) return AppData.ImgBuffFromSystemIconName(FALLBACK_ICON_NAME)
-        
-        if(attributes["icon-path"] != null && Misc.IsPath(attributes["icon-path"])) {
-            let pixbuf = GdkPixbuf.Pixbuf.new_from_file(attributes["icon-path"]);
-            return AppData.ClutterImgFromPixBuff(pixbuf)
-        }
-        else if(attributes["icon-path"] != null && !Misc.IsPath(attributes["icon-path"])) {
-            return AppData.ImgBuffFromSystemIconName(attributes["icon-path"])
-        }
-        else if(attributes["SteamId"] != null) {
-            return AppData.ImgBuffFromSystemIconName(`steam_icon_${attributes["SteamId"]}`)
-        }  
-        else return AppData.ImgBuffFromSystemIconName(FALLBACK_ICON_NAME)
-    }
-    
-    static ImgBuffFromSystemIconName(name) {
-        let theme = Gtk.IconTheme.get_default();
-        let info;
-        let pixbuf;
-        try {
-            info = theme.lookup_icon(name, 26, 0);
-            pixbuf = info.load_icon();
-        }
-        catch(err) {
-            // global.logError(`${name}`, err)
-            info = theme.lookup_icon(FALLBACK_ICON_NAME, 26, 0);
-            pixbuf = info.load_icon();
-        }
-        finally { return AppData.ClutterImgFromPixBuff(pixbuf) }
-    }
+    static GetWindowId(window) { return window.get_wm_class() }
 }
 
 class AppUsageMeter extends Applet.TextApplet {
     // UI ELEMENTS
     menuManager = new PopupMenu.PopupMenuManager(this);
     settingsMenu;
-    menu; // applet menu
+    popupMenu;
     scrollView // scrollview when too many apps are present on the list
-    scrollViewItemBox // container inside scrollview
-    exportContainer // a container for export buttons present right below the scrollView
+    innerScrollViewBox // container inside scrollview
+    exportButtonsContainer // a container for export buttons present right below the scrollView
 
     // APPDATA RELATED
-    apps; // dictionary { key: Apps PID, value: AppData structure }
-    appSections = []; // array of AppSection from top to bottom
-    appToSection; // a dict that maps an AppData using its pid to an AppSection, useful when sorting
+    appsMeta; // dictionary { key: Apps PID, value: AppMetadata structure }
+    appSections; // AppSectionList
+    appToSection; // a dict that maps an AppMetadata using its pid to an AppSection, useful when sorting
     activeApps = new Set(); // Set of active apps pid's
     inactiveApps = new Set(); // Set for inactive pid's
     sortService // Object responsible for sorting apps
+    appIcons; // Holds icon images, is responsible for asynchronous extraction, provides a signal for when an icon appears or is updated.
 
     // SIGNAL ID'S
-    mainTimer; // updates every active apps timer
-    saveInterval // saves in an interval of hours specified in settings
-    appOpeningSignalId; 
+    timerIntervalId; // updates every active apps timer
+    saveIntervalId // saves in an interval of hours specified in settings
+    appOpeningSignalId; // fires when an app is opened
+    
+    // OTHER
+    isMouseHovering = false
+    updateLastSaveTime
+    timerIntervalUpdateFunctions = {}
 
-    // D-BUS RELATED
-    exportedObject; // exported service.
-    dBusId; // dbus owns name
-
+    /*
+        D-BUS RELATED
+    
+        To Inspect the dbus service use:
+        busctl --user introspect   info.DAU   /info/dau
+        
+        To Call a method:
+        busctl --user call \
+        info.DAU \
+        /info/dau \
+        info.DAU \
+        <METHODNAME>
+        
+        To Call a property:
+        busctl --user get-property \
+        info.DAU \
+        /info/dau \
+        info.DAU \
+        <PROPERTYNAME>
+    */
+    dBus; // exported service.
+    dBusId;
+    
+    // Subscriptions for unsubing
+    iconAddedUnsub;
+    iconUpdatedUnsub;
+    
     constructor(orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
         
-        this.menu = new Applet.AppletPopupMenu(this, orientation);
-        this.menuManager.addMenu(this.menu);
+        this.popupMenu = new Applet.AppletPopupMenu(this, orientation);
+        this.menuManager.addMenu(this.popupMenu);
         this.settingsMenu = this.HandleSettings(instanceId)
         
         let windows = this.GetUniqueAppWindows();
-
-        if(this.settingsMenu.getValue("enable-saving")) this.SetupAppsWithSaveFile(windows)
-        else this.SetupAppsFromRunningWindows(windows)
         
         this.set_applet_label(_("App Usage"));
-        this.set_applet_tooltip(_("Displays apps and how long they were running."));
-    }
-    
-    AppSetupFinished() {
-        this.appToSection = this.sortService.GetSort(this.apps);
-        this.appOpeningSignalId = !this._buildUI()
-            ? global.window_manager.connect("map", (wm, actor) => this.OnAppOpeningNoUI(wm, actor))
-            : global.window_manager.connect("map", (wm, actor) => this.OnAppOpening(wm, actor))
-            
-        global.window_manager.connect("destroy", (wm, actor) => this.OnAppClosing(wm, actor))
         
-        this.SetMainLoop()
+        this.appSections = this.settingsMenu.getValue("enable-app-icons") ? new IconedAppSectionsList() : new AppSectionsList()
+        
+        if(this.settingsMenu.getValue("enable-saving")) this.SetupAppsWithSaveFile(windows)
+        else this.SetupAppsFromRunningWindows(windows)
     }
 
     SetupAppsFromRunningWindows(runningWindows) {
-        this.apps = AppData.FromWindows(runningWindows)
-        let appKeys = Object.keys(this.apps)
+        this.appsMeta = AppMetadata.FromWindows(runningWindows)
+        let appKeys = Object.keys(this.appsMeta)
+        
+        this.appIcons = new AppIconManager()
+        this.iconAddedUnsub = this.appIcons.iconLoaded.subscribe(this.OnIconAdded.bind(this))
 
         if(appKeys.length < 1) { this.AppSetupFinished(); return }
 
-        AppSection.GenerateEmpty(appKeys.length).forEach(section => this.appSections.push(section))
+        this.appSections.PushEmptyAppSections(appKeys.length)
         appKeys.forEach(key => this.activeApps.add(key))
         
+        this.appIcons.AddWithWindows(runningWindows)
         this.AppSetupFinished()
     }
 
     async SetupAppsWithSaveFile(runningWindows) {
-        let activeAppsData = AppData.FromWindows(runningWindows)
+        let activeAppsData = AppMetadata.FromWindows(runningWindows)
 
         try {
             let saveOutdated = await this.IsSaveOutdated() 
            
             if(saveOutdated != null) {
                 let saveFile = await this.LoadState(saveOutdated)
-                this.apps = AppData.FromSavedEntries(saveFile, activeAppsData)
+
+                this.appsMeta = AppMetadata.FromSavedEntries(saveFile["AppMetadata"], activeAppsData)
                 
                 Object.keys(activeAppsData).forEach(id => this.activeApps.add(id))
-                Object.keys(this.apps).forEach(key => {
+                Object.keys(this.appsMeta).forEach(key => {
                     if(!this.activeApps.has(key)) this.inactiveApps.add(key)
                 })
                 Object.entries(activeAppsData).forEach(([key, val]) => {
-                    if(this.apps[key] == null) this.apps[key] = val
+                    if(this.appsMeta[key] == null) this.appsMeta[key] = val
                     delete activeAppsData[key]
                 })
                 
-                AppSection.GenerateEmpty(this.activeApps.size + this.inactiveApps.size).forEach(section => this.appSections.push(section))
+                this.appSections.PushEmptyAppSections(this.activeApps.size + this.inactiveApps.size)
+                
+                this.appIcons = AppIconManager.FromSavedData(saveFile["AppIconManager"], runningWindows)
+                this.iconAddedUnsub = this.appIcons.iconLoaded.subscribe(this.OnIconAdded.bind(this))
+                
                 this.AppSetupFinished()
             }
             else this.SetupAppsFromRunningWindows(runningWindows)
         }
         catch (error) {
             global.logError(error)
+            this.Clear()
             this.SetupAppsFromRunningWindows(runningWindows)
         }
     }
+    
+    AppSetupFinished() {
+        this.appToSection = this.sortService.GetSort(this.appsMeta);
+        let uiBuilt = this._buildUI()
+        
+        const onMapEvent = (wm, actor) => {
+            if (!uiBuilt) return this.OnAppOpeningNoUI(wm, actor);
+            else return this.OnAppOpening(wm, actor);
+        };
 
-    on_applet_clicked() { this.menu.toggle() }
+        this.appOpeningSignalId = global.window_manager.connect("map", (wm, actor) => this.GetAppOpeningCallback(wm, actor, uiBuilt));
+            
+        global.window_manager.connect("destroy", (wm, actor) => this.OnAppClosing(wm, actor))
+        
+        this.actor.connect("enter-event", () => this.OnMouseEnter())
+        this.actor.connect("leave-event", () => this.OnMouseLeave())
+        
+        this.iconUpdatedUnsub = this.appIcons.iconUpdated.subscribe(this.OnIconUpdated.bind(this))
+        
+        this.timerIntervalUpdateFunctions["TimerUpdate"] = this.GetTimerUpdateFunction()
+
+        this.SetMainLoop()
+        this.UpdateTooltipText()
+    }
+    
+    GetAppOpeningCallback(wm, actor, uiBuilt) {
+        if(!uiBuilt) return this.OnAppOpeningNoUI(wm, actor);
+        else return this.OnAppOpening(wm, actor);
+    }
+
+    on_applet_clicked() { this.popupMenu.toggle() }
     on_applet_reloaded(deleteConfig) { this.OnBeingClosed() }
     on_applet_removed_from_panel() { this.OnBeingClosed() }
     
     onBusAcquired(connection, name) {      
         let serviceInstance = new DBusService(this);
-        this.exportedObject = Gio.DBusExportedObject.wrapJSObject(DBusService.interface, serviceInstance);
+        this.dBus = Gio.DBusExportedObject.wrapJSObject(DBusService.interface, serviceInstance);
 
-        serviceInstance._impl = this.exportedObject;
-        this.exportedObject.export(connection, '/info/dau');
+        serviceInstance._impl = this.dBus;
+        this.dBus.export(connection, '/info/dau');
         
         // global.log(_(`%s connection acquired`).format(name));
     }
@@ -303,43 +286,40 @@ class AppUsageMeter extends Applet.TextApplet {
         );
     }
     
+    AddTimerInterval() { 
+        this.timerIntervalId = Mainloop.timeout_add(1000, () => this.CallIntervalUpdateFunctions()); 
+    }
+    
     AddSaveInterval() {
-        // + 1 so it has time to update timers, ill probably increase it
         if(this.settingsMenu.getValue("enable-saving")) {
-            let time = Misc.MinutesToMs(parseInt(this.settingsMenu.getValue("save-interval")) * 60) + 1
-            this.saveInterval = Mainloop.timeout_add(time, () => this.SaveState())
+            let time = MinutesToMs(parseInt(this.settingsMenu.getValue("save-interval")) * 60)
+            this.saveIntervalId = Mainloop.timeout_add(time, () => this.SaveState())
+            this.updateLastSaveTime = new Date()
         }
     }
 
-    SetMainLoop() {
-        if(this.sortService.constructor.name == "TimeSorting" && !this.sortService.ascendingOrder) {
-            this.mainTimer = Mainloop.timeout_add(1000, () => this.UpdateTimersTimeSort())
-        }
-        else if(this.sortService.constructor.name == "TimeSorting" && this.sortService.ascendingOrder) {
-            this.mainTimer = Mainloop.timeout_add(1000, () => this.UpdateTimersTimeSortAsc())
-        }
-        else this.mainTimer = Mainloop.timeout_add(1000, () => this.UpdateActiveTimers())
-        
+    SetMainLoop() {        
         this.AddSaveInterval()
+        this.AddTimerInterval()
     }
     
     CloseMainLoop() {
-        if(this.mainTimer != null) { Mainloop.source_remove(this.mainTimer); this.mainTimer = null}
-        if(this.saveInterval != null) { Mainloop.source_remove(this.saveInterval); this.saveInterval = null}
+        if(this.timerIntervalId != null) { Mainloop.source_remove(this.timerIntervalId); this.timerIntervalId = null}
+        if(this.saveIntervalId != null) { Mainloop.source_remove(this.saveIntervalId); this.saveIntervalId = null}
     }
 
     RestartSaveInterval() {
-        if(this.saveInterval != null) { Mainloop.source_remove(this.saveInterval); this.saveInterval = null}
+        if(this.saveIntervalId != null) { Mainloop.source_remove(this.saveIntervalId); this.saveIntervalId = null}
         this.AddSaveInterval()
     }
 
     TryDeleteNoAppsLabel() {
         if(!this.IsUIEmpty()) return
-        this.menu.actor.get_children()[0].get_children()[0].get_children()[0].destroy()
+        this.popupMenu.actor.get_children()[0].get_children()[0].get_children()[0].destroy()
     }
     
     OnAppOpeningNoUI(wm, actor) {
-        [this.scrollView, this.scrollViewItemBox, this.exportContainer] = this.buildBaseUI()
+        [this.scrollView, this.innerScrollViewBox, this.exportButtonsContainer] = this.buildBaseUI()
         this.TryDeleteNoAppsLabel()        
         this.OnAppOpening(wm, actor)
         
@@ -357,49 +337,48 @@ class AppUsageMeter extends Applet.TextApplet {
         let app = tracker.get_window_app(actor.meta_window)
         
         if(app == null || app.get_name() == _("Unknown")) return
-        this.AddApp(app)
+        
+        this.AddApp(actor.meta_window.get_wm_class(), app)
     }
     
-    AddApp(app) {
-        let appId = AppData.EvalAppForName(app)
-        
+    AddApp(wmClass, app) {        
         // makes app actve again
-        if(this.inactiveApps.has(appId)) {
-            this.activeApps.add(appId)
-            this.inactiveApps.delete(appId)
+        if(this.inactiveApps.has(wmClass)) {
+            this.activeApps.add(wmClass)
+            this.inactiveApps.delete(wmClass)
         }
         // adds the app section the the ui
-        else if(!this.activeApps.has(appId)) {
+        else if(!this.activeApps.has(wmClass)) {
             try {
-                let newAppData = AppData.FromApp(app)
-                this.apps[newAppData.name] = newAppData
-                this.appSections.push(AppSection.GenerateEmpty()[0])
-                this.scrollViewItemBox.add_child(this.appSections.at(-1).ui)
-                this.activeApps.add(newAppData.name)
-                
-                if(!this.settingsMenu.getValue("enable-app-icons")) this.appSections.at(-1).icon.hide()
+                let newAppMetadata = AppMetadata.FromApp(app)
+                this.appsMeta[wmClass] = newAppMetadata
+                this.appSections.PushEmptyAppSections(1)
+                this.innerScrollViewBox.add_child(this.appSections.At(-1))
+                this.activeApps.add(wmClass)
                 
                 this.QueueSort()
                 this.RecalcScrollViewHeight()
             } catch (error) {
-                global.logError(_("App opened: %s").format(app.get_name()))
+                global.logError(_("App opened: %s").format(newAppMetadata.name))
                 global.logError(error)
             }
         }
 
-        if(this.mainTimer == null) this.AppOpeningWhileLoopDeactivated()
+        this.appIcons.AddWithApp(wmClass, app)
+        if(this.timerIntervalId == null) this.AppOpeningWhileLoopDeactivated()
+            
     }
     
     OnAppClosing(wm, actor) {
         try {
             let tracker = Cinnamon.WindowTracker.get_default();
+            let wmClass = actor.meta_window.get_wm_class()
             let app = tracker.get_window_app(actor.meta_window)
-            let appName = AppData.EvalAppForName(app)
             
             if(app == null || app.get_windows().length - 1 > 0) return
             
-            this.inactiveApps.add(appName)
-            this.activeApps.delete(appName)
+            this.inactiveApps.add(wmClass)
+            this.activeApps.delete(wmClass)
 
             if(this.activeApps.size == 0) this.OnLastActiveAppClosing()
         } 
@@ -414,64 +393,6 @@ class AppUsageMeter extends Applet.TextApplet {
         // global.log(_("Loop removed"))
     }
     
-    UpdateActiveTimers() {
-        this.activeApps.forEach(id => {
-            try {
-                this.appSections[this.appToSection[id]].SetTimer(++this.apps[id].time);
-            } catch (e) {
-                global.logError(_("Failed timer for %s").format(id));
-                global.logError(e);
-                return false
-            }
-        });
-        
-        return true; // Is here so that Mainloop recognizes its an interval. Might edit this to add an override to stop
-    }
-    
-    // Same as UpdateActiveTimers except checks if time sort is required every tick. desc order
-    UpdateTimersTimeSort() {
-        let appTimersUpdated = []
-        
-        this.activeApps.forEach(id => {
-            this.appSections[this.appToSection[id]].SetTimer(++this.apps[id].time);
-            appTimersUpdated.push([this.apps[id].time, this.appToSection[id]])
-        });
-        
-        for(let i = 0; i < appTimersUpdated.length; ++i) {
-            let section = this.appSections[appTimersUpdated[i][1] - 1]
-            if(section == null) continue
-            
-            try {
-                let nextAppSectionTime = AppSection.TimeToInt(section.timeLabel.text)
-                if(appTimersUpdated[i][0] > nextAppSectionTime) { this.QueueSort(); break; }
-                
-            } catch (error) {
-                global.logError(error)
-            }
-        }
-        
-        return true;
-    }
-    
-    UpdateTimersTimeSortAsc() {
-        let appTimersUpdated = []
-        
-        this.activeApps.forEach(id => {
-            this.appSections[this.appToSection[id]].SetTimer(++this.apps[id].time);
-            appTimersUpdated.push([this.apps[id].time, this.appToSection[id]])
-        })
-        
-        for(let i = 0; i < appTimersUpdated.length; ++i) {
-            let section = this.appSections[appTimersUpdated[i][1] + 1]
-            if(section == null) continue
-            
-            let nextAppSectionTime = AppSection.TimeToInt(section.timeLabel.text)
-            if(appTimersUpdated[i][0] > nextAppSectionTime) { this.QueueSort(); break; }
-        }
-        
-        return true;
-    }
-    
     /**
      * Builds the UI on startup
      * @returns {boolean} bool weather the list had any apps
@@ -479,30 +400,33 @@ class AppUsageMeter extends Applet.TextApplet {
     _buildUI() {    
         if(this.activeApps.size + this.inactiveApps.size < 1) { this.buildUIEmpty(); return false }
         
-        [this.scrollView, this.scrollViewItemBox, this.exportContainer] = this.buildBaseUI()
+        [this.scrollView, this.innerScrollViewBox, this.exportButtonsContainer] = this.buildBaseUI()
         
-        this.FillAppSections()
+        this.appSections.FillAppSections(this)
+        this.appSections.AddToInnerScrollView(this.innerScrollViewBox)
         
-        this.appSections.forEach(section => {
-            this.scrollViewItemBox.add_child(section.ui)
-        })
-        
-        this.ToogleIcons(this.settingsMenu.getValue("enable-app-icons"))
         return true
     }
     
     buildUIEmpty() {
-        this.menu.addActor(new St.Label({
+        this.popupMenu.addActor(new St.Label({
             text: _("No apps were opened."),
             style: "color: white;"
         }))
     }
     
+    // TODO: check if scrollbar should be visible
     buildBaseUI() {
         let scrollView = new St.ScrollView({
-            style_class: 'popup-scroll-view',
             hscrollbar_policy: St.PolicyType.NEVER,
-            vscrollbar_policy: St.PolicyType.AUTOMATIC,
+            vscrollbar_policy: St.PolicyType.NEVER,
+        });
+        
+        scrollView.set_overlay_scrollbars(true);
+        
+        const adjustment = scrollView.vscroll.adjustment;
+        adjustment.connect("notify::value", () => {
+            this.onScrollChanged(adjustment.value).bind(this);
         });
         
         let insideScrollView = new St.BoxLayout({
@@ -515,17 +439,15 @@ class AppUsageMeter extends Applet.TextApplet {
             y_expand: true, 
             x_align: Clutter.ActorAlign.CENTER
         })
-        let exportOpt = this.settingsMenu.getValue("show-export-buttons")
         
-        this.menu.addActor(scrollView)
+        this.popupMenu.addActor(scrollView)
         scrollView.add_actor(insideScrollView)
-        this.menu.addActor(container)
-   
+        this.popupMenu.addActor(container)
+        
+        let exportOpt = this.settingsMenu.getValue("show-export-buttons")
         if(exportOpt != "opNone") this.buildExportButtons(exportOpt, container)
         
-        Misc.connectOnce(this.menu, "open-state-changed", () => {
-            this.RecalcScrollViewHeight()
-        })
+        this.QueueScrollViewHeightRecalc()
         
         return [scrollView, insideScrollView, container]
     }
@@ -585,18 +507,30 @@ class AppUsageMeter extends Applet.TextApplet {
     }
     
     async SaveState() {
-        if(this.appSections.length < 1) return false;
-        const data = {};
-
-        for(const [id, appdata] of Object.entries(this.apps)) {            
-            data[id] = [appdata.time];
+        if(this.appSections.IsEmpty()) return false;
+        
+        try {
+            const data = {
+                "AppMetadata" : {},
+                "AppIconManager" : this.appIcons.GetState()
+            };
             
-            // optional data that may not be present but is helpful
-            if(appdata.attr != null && Object.keys(appdata.attr).length > 0) data[id].push(appdata.attr);
-        }
+            let saveAppMetadata = data["AppMetadata"]
 
-        const bytes = new TextEncoder().encode(JSON.stringify(data));
-        return await this.CreateFile(this.savePath, bytes)
+            for(const [id, appMeta] of Object.entries(this.appsMeta)) {            
+                saveAppMetadata[id] = [appMeta.name, appMeta.time];
+                
+                // optional data that may not be present but is helpful
+                if(appMeta.attr != null && Object.keys(appMeta.attr).length > 0) saveAppMetadata[id].push(appMeta.attr);
+            }
+
+            const bytes = new TextEncoder().encode(JSON.stringify(data));
+            await this.CreateFile(this.savePath, bytes)
+            
+            this.updateLastSaveTime = new Date()
+            return true
+        }
+        catch { return false }
     }
     
     async LoadState() {
@@ -617,19 +551,19 @@ class AppUsageMeter extends Applet.TextApplet {
      * @returns {Gio.File}  if file is not outdated
      * @returns {null} null if file is outdated
     */
-    async IsSaveOutdated() {   
-        let file = Gio.File.new_for_commandline_arg(this.savePath);
-        let parent = file.get_parent();
-        
-        if(parent != null) {
-            try { parent.make_directory_with_parents(null); } 
-            catch (e) {
-                if(!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
-                    throw e;
+    async IsSaveOutdated() { 
+        try {  
+            let file = Gio.File.new_for_commandline_arg(this.savePath);
+            let parent = file.get_parent();
+            
+            if(parent != null) {
+                try { parent.make_directory_with_parents(null); } 
+                catch (e) {
+                    if(!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+                        throw e;
+                }
             }
-        }
         
-        try {
             let info = await file.query_info_async(
                 "time::modified",
                 Gio.FileQueryInfoFlags.NONE,
@@ -643,8 +577,8 @@ class AppUsageMeter extends Applet.TextApplet {
             else return file
         }
         catch(err) {
-            global.logError(err)
-            return null
+            if(err.constructor.name == "Gio_IOErrorEnum") return null
+            throw new Error("Couldn't indicate save data: ", err)
         }
     }
     
@@ -661,9 +595,10 @@ class AppUsageMeter extends Applet.TextApplet {
         
         if(menu.getValue("enable-export-dbus")) this.dBusId = this.TrySetupDBus()
         
-        menu.connect("changed::enable-app-icons", ((menu, settingKey, oldValue, newValue) => this.ToogleIcons(newValue)))
         menu.connect("changed::apps-visible", () => this.AppsVisibleCountChanged())
-        menu.connect("changed::max-char-for-app-label", () => this.AppLabelCharCountChanged())
+        menu.connect("changed::max-char-for-app-label", (menu, settingKey, oldValue, newValue) => this.AppLabelCharCountChanged(newValue))
+        menu.connect("changed::enable-app-icons", ((menu, settingKey, oldValue, newValue) => this.ToogleIcons(newValue)))
+        menu.connect("changed::scroll-bar-visible", ((menu, settingKey, oldValue, newValue) => this.ToogleScrollBarVisibility(newValue)))
         
         menu.connect("changed::sort-apps-by", (menu, settingKey, oldValue, newValue) => this.SortServiceChanged(newValue, this.sortService.ascendingOrder))
         menu.connect("changed::sort-order", (menu, settingKey, oldValue, newValue) => this.SortOrderChanged(newValue))
@@ -678,52 +613,36 @@ class AppUsageMeter extends Applet.TextApplet {
         return menu
     }
     
+    // TODO: Find out if it is possible to remove the if check on RecalcScrollViewHeight()
     RecalcScrollViewHeight() {
-        if(this.appSections.length < 1) return
+        if(this.appSections.IsEmpty()) return
 
-        let sectionHeight = this.appSections[0].GetSectionFullHeight()
-        this.scrollView.height = sectionHeight * Math.min(this.appSections.length, this.settingsMenu.getValue("apps-visible"))
+        let sectionHeight = this.appSections.GetFirstSectionFullHeight()
+        
+        this.scrollView.height = sectionHeight * Math.min(this.appSections.Length(), this.settingsMenu.getValue("apps-visible"))
     }
 
     AppsVisibleCountChanged() { this.RecalcScrollViewHeight() }
-    AppLabelCharCountChanged() { this.ResetAppLabelCharWidth() }
-
-    ResetAppLabelCharWidth() {
-        let maxWidth = this.settingsMenu.getValue("max-char-for-app-label")
-
-        Object.entries(this.appToSection).forEach(([appId, sectionIdx]) => {
-            this.appSections[sectionIdx].nameLabel.set_text(Misc.truncate(this.apps[appId].name, maxWidth))
-        })
+    
+    AppLabelCharCountChanged(newCharCount) { 
+        this.appSections.SetCharCount(newCharCount); 
+        this.appSections.FillAppSections(this) // fires because when increasing the value, appsections need to be refilled
     }
 
     ToogleEnablingSaving() {
         if(this.settingsMenu.getValue("enable-saving")) {
-            this.saveInterval = Mainloop.timeout_add(Misc.MinutesToMs(parseInt(this.settingsMenu.getValue("save-interval")) * 60) + 1, () => this.SaveState())
+            this.saveIntervalId = Mainloop.timeout_add(MinutesToMs(parseInt(this.settingsMenu.getValue("save-interval")) * 60) + 1, () => this.SaveState())
+            this.updateLastSaveTime = new Date()
         }
-        else if(this.saveInterval != null) { Mainloop.source_remove(this.saveInterval); this.saveInterval = null}
+        else if(this.saveIntervalId != null) { Mainloop.source_remove(this.saveIntervalId); this.saveIntervalId = null}
     }
     
     AppsAsCSV() {
-        const data = { columns: ["Name", "Time"], rows: [] }
-        
-        this.appSections.forEach(section => {
-            data.rows.push([section.nameLabel.text, section.timeLabel.text])
-        })
-        
-        return Misc.toCSV(data)
+        const data = { columns: ["Name", "Time"], rows: this.appSections.AsArrayOfPairs() }
+        return toCSV(data)
     }
     
-    AppsAsJSON() {
-        const data = {}
-        
-        this.appSections.forEach(section => {
-            let key = section.nameLabel.text
-            data[key] = {}
-            data[key]["time"] = section.timeLabel.text
-        })
-        
-        return JSON.stringify(data)
-    }
+    AppsAsJSON() { return JSON.stringify(this.appSections.AsJson()) }
     
     ExportBtnPressed(strData, extension, defaultMsg = _("Export Successful"), errorMsg = _("Export Unsuccesful")) {
         let message = defaultMsg
@@ -746,19 +665,19 @@ class AppUsageMeter extends Applet.TextApplet {
             container.set_style("")
         }
         
-        let children = this.exportContainer.get_children()
+        let children = this.exportButtonsContainer.get_children()
         let length = children.length
         
         switch(exportOpt) {  
             case "opNone":
-                ContainerSweep(children, this.exportContainer)
+                ContainerSweep(children, this.exportButtonsContainer)
             break;
             
             case "opCSV":
-                if(length == 0) this.buildExportButtons(exportOpt, this.exportContainer)
+                if(length == 0) this.buildExportButtons(exportOpt, this.exportButtonsContainer)
                 else if(length == 1) {
                     children[children.length - 1].destroy()
-                    this.buildExportButtons(exportOpt, this.exportContainer)
+                    this.buildExportButtons(exportOpt, this.exportButtonsContainer)
                 }
                 else if(length == 2) children[children.length - 1].destroy()
             break;
@@ -770,7 +689,7 @@ class AppUsageMeter extends Applet.TextApplet {
                 }
                 else if(children.length == 1) children[0].destroy()
                 
-                this.buildExportButtons(exportOpt, this.exportContainer)
+                this.buildExportButtons(exportOpt, this.exportButtonsContainer)
             break;
             
             case "opBoth":
@@ -779,7 +698,7 @@ class AppUsageMeter extends Applet.TextApplet {
                     else if(children[0].label == "JSON") ClearContainer(children)
                 }
                     
-                this.buildExportButtons(exportOpt, this.exportContainer)
+                this.buildExportButtons(exportOpt, this.exportButtonsContainer)
             break;
         }
     }
@@ -809,9 +728,9 @@ class AppUsageMeter extends Applet.TextApplet {
     }
     
     DisableDBus() {
-        if(this.exportedObject != null) this.exportedObject.unexport()
+        if(this.dBus != null) this.dBus.unexport()
         Gio.bus_unown_name(this.dBusId);
-        this.dBusId = this.exportedObject = null
+        this.dBusId = this.dBus = null
     }
     
     async SaveBtnPressed() {
@@ -823,14 +742,6 @@ class AppUsageMeter extends Applet.TextApplet {
         catch(err) {
             global.logError(err)
         }
-    }
-    
-    FillAppSections() {
-        let maxLabelChar = this.settingsMenu.getValue("max-char-for-app-label")
-        
-        Object.keys(this.appToSection).forEach(key => {
-            this.appSections[this.appToSection[key]].Fill(this.apps[key], maxLabelChar)
-        })
     }
     
     GetSortingService(sortingOption, isAscending) {
@@ -846,8 +757,8 @@ class AppUsageMeter extends Applet.TextApplet {
     }
     
     QueueSort() {
-        this.appToSection = this.sortService.GetSort(this.apps)
-        this.FillAppSections()
+        this.appToSection = this.sortService.GetSort(this.appsMeta)
+        this.appSections.FillAppSections(this)
     }
     
     SortServiceChanged(newSortMethod, order) {
@@ -855,41 +766,505 @@ class AppUsageMeter extends Applet.TextApplet {
         this.sortService = this.GetSortingService(newSortMethod, order)
         this.QueueSort()
         
-        // this is a lazy way to set a new increment function. There are three. a base one
-        // and two others: UpdateTimersTimeSortAsc and UpdateTimersTimeSort. 
-        // difference is the two other timers track if the list should be resorted
-        if(previousServiceName == "TimeSorting" || this.sortService.constructor.name == "TimeSorting") {
-            this.CloseMainLoop()
-            this.SetMainLoop()
-        }
+        this.timerIntervalUpdateFunctions["TimerUpdate"] = this.GetTimerUpdateFunction()
     }
     
     SortOrderChanged(newOrder) {
         this.sortService.ascendingOrder = newOrder
         this.QueueSort()
         
-        if(this.sortService.constructor.name == "TimeSorting") {
-            this.CloseMainLoop()
-            this.SetMainLoop()
-        }
+        this.timerIntervalUpdateFunctions["TimerUpdate"] = this.GetTimerUpdateFunction()
     }
+
     
     ToogleIcons(value) {
-        if(!value) this.appSections.forEach(section => { section.icon.hide() })
-        else this.appSections.forEach(section => { section.icon.show() })
+        try {
+            if(value) this.EnableIcons()
+            else this.DisableIcons()
+        
+            this.QueueScrollViewHeightRecalc() 
+            // global.log("icons toogled")
+        } catch (error) {
+            global.logError(error)
+        }
+        
+    }
     
-        this.RecalcScrollViewHeight()
+    OnIconAdded(data) {
+        if(this.appToSection == null) return
+        this.appSections.SectionsIconLoaded(this.appToSection[data["appId"]], this.appIcons.GetIcon(data["iconId"]))
+    }
+    
+    OnIconUpdated(data) { 
+        if(this.appToSection == null) return
+        this.appSections.SectionsIconUpdated(this.appToSection[data["appId"]], this.appIcons.GetIcon(data["iconId"]))
+    }
+    
+    UpdateTooltipText() { this.set_applet_tooltip(this.GenerateToolTip()) }
+    
+    OnMouseEnter() {
+        this.timerIntervalUpdateFunctions["ToolTipUpdate"] = new UpdateTooltipText()
+        this.isMouseHovering = true
+        
+        this.timerIntervalUpdateFunctions["ToolTipUpdate"].Call(this)
+        return Clutter.EVENT_PROPAGATE;
+    }
+    
+    OnMouseLeave() {
+        this.timerIntervalUpdateFunctions["ConfirmHoverEnd"] = new ConfirmNoHover()
+        this.isMouseHovering = false
+        
+        return Clutter.EVENT_PROPAGATE;
+    }
+    
+    // NOTE: TEST THIS
+    Clear() {
+        this.activeApps = new Set()
+        this.inactiveApps = new Set()
+        this.appsMeta = {}
+        this.appToSection = {}
+        this.appIcons = null
+
+        this.appSections.DestroySections()
+        this.appSections = null
+    }
+    
+    // *** these two methods relay on the fact there's only two section types.
+    EnableIcons() {
+        let iconedAppSections = IconedAppSectionsList.FromAppSectionsList(this.appSections)
+        
+        this.appSections.DestroySections()
+        
+        this.appSections = iconedAppSections
+        this.appSections.AddToInnerScrollView(this.innerScrollViewBox)
+        this.iconAddedUnsub = this.appIcons.iconLoaded.subscribe(this.OnIconAdded.bind(this))
+        this.iconUpdatedUnsub = this.appIcons.iconUpdated.subscribe(this.OnIconUpdated.bind(this))
+        this.appSections.FillAppSections(this)  
+    }
+    
+    DisableIcons() {
+        let appSections = AppSectionsList.FromIconedAppSectionsList(this.appSections)
+        
+        this.iconAddedUnsub()
+        this.iconUpdatedUnsub()
+        
+        this.appSections.DestroySections()
+        this.appSections = appSections
+        this.appSections.AddToInnerScrollView(this.innerScrollViewBox)
+        this.appSections.FillAppSections(this)     
+    }
+    // ***
+    
+    QueueScrollViewHeightRecalc() {
+        connectOnce(this.popupMenu, "open-state-changed", () => {
+            this.RecalcScrollViewHeight().bind(this)
+        })
+    }
+    
+    onScrollChanged(value) {
+        let adjustment = this.scrollView.vscroll.adjustment;
+        let itemHeight = this.appSections.GetFirstSectionFullHeight();
+        let current = adjustment.value;
+
+        adjustment.value = Math.round(current / itemHeight) * itemHeight;
+    }
+
+    ToogleScrollBarVisibility(value) {
+        if(value) {
+            this.scrollView.vscrollbar_policy = St.PolicyType.AUTOMATIC
+            return
+        }
+
+        this.scrollView.vscrollbar_policy = St.PolicyType.NEVER
+    }
+
+    GetActiveAppCount() { return this.activeApps.size }
+
+    GenerateToolTip() {
+        return _("Active apps: %s\nNext save in %s").format(String(this.GetActiveAppCount()), this.GetTimeToNextSave());
+    }
+
+    GetTimeToNextSave() {
+        let intervalTime = MinutesToMs(parseInt(this.settingsMenu.getValue("save-interval")) * 60)
+        return AppUsageMeter.GetTimeLeft(this.updateLastSaveTime, intervalTime)
+    }
+    
+    CallIntervalUpdateFunctions() {
+        Object.values(this.timerIntervalUpdateFunctions).forEach(updateFunction => updateFunction.Call(this))
+        return true // MainLoop Lib needs to know weather to keep the interval alive
+    }
+
+    GetTimerUpdateFunction() {
+        if(this.sortService.constructor.name === "TimeSorting") {
+            if(!this.sortService.ascendingOrder) return new UpdateTimersTimeSort();
+            else return new UpdateTimersTimeSortAsc();
+        }
+        else return new UpdateActiveTimers();
+    }
+    
+    // TODO: make saving modular and modify tooltip generation to support multiple cases
+    static GetTimeLeft(targetDate, timeInMilliseconds) {
+        try {
+            const target = new Date(targetDate.getTime() + timeInMilliseconds);
+            const timeDifference = target - new Date();
+
+            const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            return formattedTime;
+        }
+        catch { return "{ Couldn't get time }" } // When saves are disabled this is what will be displayed.
     }
 }
 
-class AppSection {
-    // appDataId // id used to identify what app this appsection represents
-    ui = new St.BoxLayout({
-        style_class: "popup-menu-item",
-        style: "padding-top: 3px; padding-bottom: 3px; padding-left: 8px;", // TODO: clean this style when no icons are allowed
-        y_align: Clutter.ActorAlign.CENTER
+class AppIconManager extends Map {
+    iconLoaded = new Observer()
+    iconUpdated = new Observer()
+    #iconExists = new Set() // holds icon names/paths
+    #iconNameToIcon = {} // returns icon id | Replace this with something better
+    #appIdToIcon = {} // returns icon id
+    #iconCount = 0;
+    
+    static IconIdentifierType = Object.freeze({
+        NONE: 0,
+        GICON_THEME: 1,
+        GICON_FILEPATH: 2,
+        THEMED_ICON_NAME: 3,
     });
     
+    // mapArg is the array used to create the Map object.
+    constructor(mapArg, defaultIconName = "application-x-executable") {
+        super(mapArg);
+        
+        let id = this.ReserveId();
+        
+        this.set(id, [AppIconManager.ImgBuffFromSystemIconName(defaultIconName), defaultIconName, AppIconManager.IconIdentifierType.THEMED_ICON_NAME]);
+        this.#iconNameToIcon[defaultIconName] = id;        
+    }
+    
+    // NOTE: extracionType returned by saveData is a string!
+    static FromSavedData(saveData, runningWindows, defaultIconName = "application-x-executable") {
+        function AddFromWindows(windows, manager, appIdToIconId) {
+            let tracker = Cinnamon.WindowTracker.get_default();
+            let idsTracked = []
+        
+            windows.forEach(window => {
+                let app = tracker.get_window_app(window)
+                let wmClass = window.get_wm_class()
+                let slot = appIdToIconId[wmClass]
+                
+                if(slot == null || slot == 0) slot = manager.ReserveId()
+                else idsTracked.push(wmClass)
+                
+                manager.AddFromStIcon(wmClass, slot, app.create_icon_texture(24))
+            })
+            
+            return idsTracked
+        }
+        
+        try {
+            let iconIdToAppId = Object.entries(saveData["AppIdToIconId"])
+                .reduce((acc, [key, val]) => { acc[val] = key; return acc; }, {});
+            let manager = new AppIconManager(null, defaultIconName)
+            
+            manager.#iconCount = saveData["Count"]
+            
+            // Load icons from existing windows and see if some of them belong to previously opened apps
+            AddFromWindows(runningWindows, manager, saveData["AppIdToIconId"]).forEach(appId => {
+                delete saveData["AppIdToIconId"][appId]
+            })
+            
+            for(const [key, val] of Object.entries(saveData["Icons"])) {
+                let AssignIconFunc = AppIconManager.GetExtractionMethodForSaveEntry(Number(key))
+                
+                // key, val 2 are just pairs inside the icon bucket. buckets are icons of certain type like IconIdentifierType.GICON_THEME
+                for(const [key2, val2] of Object.entries(val)) {
+                    AssignIconFunc(manager, iconIdToAppId[key2], key2, val2)
+                    delete saveData["AppIdToIconId"][iconIdToAppId[key2]]
+                }
+            }
+            
+            for(const key of Object.keys(saveData["AppIdToIconId"])) {
+                manager.#appIdToIcon[key] = 0
+            }
+            
+            return manager
+        } catch (error) {
+            // global.logError(error)
+            return new AppIconManager()
+        }
+    }
+    
+    GetIcon(id = 0) { return this.get(id)[0] }
+    GetIconWithAppId(name) { return this.GetIcon(this.#appIdToIcon[name])}
+    
+    SetIcon(appId, iconId, iconName, extractionType, img) { 
+        try {            
+            let isNew = this.#appIdToIcon[appId] == null || this.#appIdToIcon[appId] == 0
+            let message = { "appId": appId, "iconId": iconId }
+            
+            this.set(iconId, [img, iconName, extractionType])
+            this.#appIdToIcon[appId] = iconId
+            this.#iconNameToIcon[iconName] = iconId
+            if(iconName != null) this.#iconExists.add(iconName)
+            
+            if(isNew) this.iconLoaded.notify(message)
+            else this.iconUpdated.notify(message)
+        } catch (error) {
+            global.logError(error)
+        }
+    }
+    
+    // icon name is different from appId or app name, its the icon.gicon path or themed icon name
+    // multiple apps can request the same icon, different app names, same icon name
+    AppHasIcon(appId) { 
+        let iconId = this.#appIdToIcon[appId]
+        
+        if(iconId == null) return false
+        
+        return this.#iconExists.has(this.get(iconId)[1]) 
+    }
+    
+    ReserveId() { return this.#iconCount++ }
+    
+    async AddFromStIcon(appId, iconId, stIcon) { 
+        let [img, iconName, extractionType] = await this.ExtractIconFromStIcon(stIcon)
+        
+        this.SetIcon(appId, iconId, iconName, extractionType, img)
+    }
+    
+    AddWithApp(wmClass, app, slot = this.ReserveId()) {        
+        if(this.AppHasIcon(wmClass)) { /* global.log(wmClass); */ return }
+        this.AddFromStIcon(wmClass, slot, app.create_icon_texture(24))
+    }
+    
+    AddWithWindow(window, tracker) {
+        let slot = this.ReserveId()
+        let app = tracker.get_window_app(window)
+        let wmClass = window.get_wm_class()
+        
+        this.AddWithApp(wmClass, app, slot)
+    }
+    
+    AddWithWindows(windows) {
+        let tracker = Cinnamon.WindowTracker.get_default();
+        
+        windows.forEach(window => {
+            this.AddWithWindow(window, tracker)
+        })
+    }
+    
+    GetState() {
+        // The reason some are wrapped with Object.fromEntries is to create a copy of the object and not just pass refs
+        let savedappIdToIcon = Object.fromEntries(Object.entries(this.#appIdToIcon)) 
+        let iconIdentifierSet = new Set(Object.values(AppIconManager.IconIdentifierType));
+        let iconPaths = Object.fromEntries(
+            Object.entries(AppIconManager.IconIdentifierType).map(([key, value]) => [value, {}])
+        );
+        let iconData = Object.fromEntries(this.entries()) // local copy for editing.
+        let emptyAppNames = []
+        
+        for(const [key, val] of Object.entries(savedappIdToIcon)) {
+            if(iconData[val][2] == AppIconManager.IconIdentifierType.NONE) {
+                emptyAppNames.push(key)
+                delete iconData[val]
+            }
+        }
+        
+        for(const [key, val] of Object.entries(iconData)) {
+            iconPaths[val[2]][key] = val[1]
+            iconIdentifierSet.delete(val[2])
+        }
+        
+        emptyAppNames.forEach(name => savedappIdToIcon[name] = 0)
+        
+        delete iconPaths[AppIconManager.IconIdentifierType.THEMED_ICON_NAME][0]
+        if(Object.keys(iconPaths[AppIconManager.IconIdentifierType.THEMED_ICON_NAME]) < 1) iconIdentifierSet.add(AppIconManager.IconIdentifierType.THEMED_ICON_NAME)
+        
+        delete iconPaths[AppIconManager.IconIdentifierType.NONE]
+        iconIdentifierSet.forEach(type => delete iconPaths[type] )
+        
+        let state = {
+            "Icons" : iconPaths,
+            "AppIdToIconId" : savedappIdToIcon,
+            "Count" : this.size
+        }
+        
+        return state
+    }
+    
+    GetAppsAndIcons() {
+        return Object.fromEntries(
+            Object.entries(this.#appIdToIcon).map(([key, val]) => [key, this.GetIcon(val)])
+        );
+    }
+    
+    static ClutterImgFromPixBuff(buff) {
+        const content = new Clutter.Image();
+        
+        content.set_data(
+            buff.get_pixels(),
+            Cogl.PixelFormat.RGBA_8888,
+            buff.get_width(),
+            buff.get_height(),
+            buff.get_rowstride()
+        );
+        
+        return content
+    }
+    
+    static async GetImgFromGIconFile(gicon) {
+        return new Promise((resolve, reject) => {
+            const iconTheme = Gtk.IconTheme.get_default();
+            const iconInfo = iconTheme.lookup_by_gicon(gicon, 24, 0);
+            
+            iconInfo.load_icon_async(null, (source, result) => {
+                try {
+                    resolve(AppIconManager.ClutterImgFromPixBuff(source.load_icon_finish(result)));
+                } 
+                catch (e) { reject(e); }
+            });
+        }) 
+        
+    }
+    
+    static ImgBuffFromSystemIconName(name) {
+        let theme = Gtk.IconTheme.get_default();
+        
+        try {
+            let info = theme.lookup_icon(name, 24, 0);
+            let pixbuf = info.load_icon();
+            return AppIconManager.ClutterImgFromPixBuff(pixbuf)
+        }
+        catch(err) {
+            // global.logError(`${name}`, err)
+            return this.GetIcon()
+        }
+    }
+    
+    static ExtractGiconThemed(gicon) { 
+        const theme = Gtk.IconTheme.get_default();
+        const info = theme.lookup_by_gicon(gicon, 24, 0);
+        let name = gicon.get_names()[0]
+        
+        return [AppIconManager.ClutterImgFromPixBuff(info.load_icon()), name, AppIconManager.IconIdentifierType.GICON_THEME]
+    }
+    static async ExtractGiconFilePath(gicon) { 
+        const file = gicon.get_file();
+        let path = file.get_path()
+        
+        return [await AppIconManager.GetImgFromGIconFile(gicon), path, AppIconManager.IconIdentifierType.GICON_FILEPATH]
+    }
+    static ExtractIconThemed(iconName) { return [AppIconManager.ImgBuffFromSystemIconName(iconName), iconName, AppIconManager.IconIdentifierType.THEMED_ICON_NAME] }
+    
+    static ExtractChildContent(childObj) { return [childObj.get_content(), null, AppIconManager.IconIdentifierType.NONE] }
+    
+    async ExtractIconFromStIcon(stIcon) {
+        let iconContent;
+        let iconIdentifierName = null;
+        let iconIdentifierType = null;
+        let giconExists = stIcon.gicon != null
+        
+        try {
+            if(giconExists && stIcon.gicon.names != null) {        
+                return AppIconManager.ExtractGiconThemed(stIcon.gicon)
+            }
+            else if(giconExists && stIcon.gicon.names == null) {
+                return await AppIconManager.ExtractGiconFilePath(stIcon.gicon)
+            }
+            else if(stIcon["icon-name"] != null) {
+                return AppIconManager.ExtractIconThemed(stIcon["icon-name"])
+            }
+            else if(stIcon.child != null) {
+                return AppIconManager.ExtractChildContent(stIcon.get_child())
+            }
+            else this.GetIcon()
+        } 
+        catch (error) {
+            global.logError(error)
+        }
+    }
+    
+    static GetExtractionMethodForSaveEntry(iconExtractionType) {
+        switch(iconExtractionType) {
+            case AppIconManager.IconIdentifierType.GICON_FILEPATH:
+                return async (iconManager, appId, iconId, name) => {
+                    try {
+                        let img = await AppIconManager.GetIconFromPath(name, 24) 
+                        iconManager.SetIcon(appId, iconId, name, iconExtractionType, AppIconManager.ClutterImgFromPixBuff(img))
+                    } catch (error) {
+                        global.logError(error)
+                    }
+                }
+            
+            case AppIconManager.IconIdentifierType.THEMED_ICON_NAME:
+            case AppIconManager.IconIdentifierType.GICON_THEME:
+                return (iconManager, appId, iconId, name) => {
+                    iconManager.SetIcon(appId, iconId, name, iconExtractionType, AppIconManager.ImgBuffFromSystemIconName(name))
+                }
+                
+            default: 
+                throw new Exception("Invalid extraction type value: " + iconExtractionType + "Type of: " + typeof iconExtractionType)
+        }
+    }
+    
+    static async GetIconFromPath(filePath, size) {
+        const file = Gio.File.new_for_path(filePath);
+
+        const stream = await new Promise((resolve, reject) => {
+            file.read_async(
+                GLib.PRIORITY_DEFAULT,
+                null,
+                (file, result) => {
+                    try {
+                        resolve(file.read_finish(result));
+                    } catch (e) {
+                        reject(e);
+                    }
+                }
+            );
+        });
+
+        try {
+            const pixbuf = await new Promise((resolve, reject) => {
+                GdkPixbuf.Pixbuf.new_from_stream_async(
+                    stream,
+                    null,
+                    (source, result) => {
+                        try {
+                            resolve(
+                                GdkPixbuf.Pixbuf.new_from_stream_finish(result)
+                            );
+                        } catch (e) {
+                            reject(e);
+                        }
+                    }
+                );
+            });
+
+            stream.close(null);
+
+            return pixbuf;
+        } catch (e) {
+            stream.close(null);
+            throw e;
+        }
+    }
+    
+    logMap() {
+        for(const [key, val] of this.entries()) {
+            global.log(`${key}: ${val}`);
+        }
+    }
+    
+    AddEmpty(appIds) { appIds.forEach(id => this.#appIdToIcon[id] = 0) }
+}
+
+const AppSection = GObject.registerClass(
+    
+class AppSection extends St.BoxLayout {    
     nameLabel = new St.Label({
         style: "color: white;",
         y_align: Clutter.ActorAlign.CENTER
@@ -899,18 +1274,28 @@ class AppSection {
         y_align: Clutter.ActorAlign.CENTER
     })
     
-    icon = new St.Widget({ width: 24,  height: 24 })
-    
-    constructor() {
-        this.ui.add_actor(this.icon)
-        this.ui.add_actor(this.nameLabel)
-        this.ui.add_actor(this.timeLabel)
+    constructor(params = {}) {
+        super(params)
+        
+        this.style_class = "popup-menu-item",
+        this.style = "padding-top: 3px; padding-bottom: 3px; padding-left: 8px;",
+        this.y_align = Clutter.ActorAlign.CENTER
+        
+        this.add_actor(this.nameLabel)
+        this.add_actor(this.timeLabel)
     }
     
-    Fill(appData, maxLabelChar = 30) {
-        this.nameLabel.set_text(Misc.truncate(appData.name, maxLabelChar))
+    static FromIconedSection(section) {
+        let newSection = new AppSection()
+        newSection.nameLabel.set_text(section.nameLabel.text)
+        newSection.timeLabel.set_text(section.timeLabel.text)
+        
+        return newSection
+    }
+    
+    Fill(appData) {
+        this.nameLabel.set_text(appData.name)
         this.timeLabel.set_text(AppSection.IntToTime(appData.time))
-        this.ReplaceIcon(appData.icon)
         
         return this;
     }
@@ -933,17 +1318,38 @@ class AppSection {
         return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
     }
 
-    GetSectionFullHeight() { return this.ui.get_preferred_height(-1)[1]; }
+    GetSectionFullHeight() { return this.get_preferred_height(-1)[1]; }
+    
+    SetTimer(int) { this.timeLabel.set_text(AppSection.IntToTime(int)) }
+})
 
-    // Gio.icon_new_for_string( // creates a gicon from string, a desktop id or a unique icon name
-    ReplaceIcon(iconContent) {    
-        this.icon.set_content(iconContent);
+const IconedAppSection = GObject.registerClass(
+    
+class IconedAppSection extends AppSection {
+    icon = new St.Widget({ width: 24, height: 24 })
+    
+    constructor(params = {}) {
+        super(params)
+        this.insert_child_at_index(this.icon, 0)
     }
     
-    SetTimer(int) {
-        this.timeLabel.set_text(AppSection.IntToTime(int))
+    static FromAppSection(section) {
+        let newSection = new IconedAppSection()
+        newSection.nameLabel.set_text(section.nameLabel.text)
+        newSection.timeLabel.set_text(section.timeLabel.text)
+        
+        return newSection
     }
+    
+    static GenerateEmpty(amount = 1) {
+        return Array.from({ length: amount }, () => new IconedAppSection());
+    }
+    
+    // Gio.icon_new_for_string( // creates a gicon from string, a desktop id or a unique icon name
+    ReplaceIcon(iconContent) { this.icon.set_content(iconContent); }
 }
+
+)
 
 class AppSorting {
     ascendingOrder; // true - ascending, false - descending
@@ -954,68 +1360,140 @@ class AppSorting {
     }
     
     // returns a dict {key:appDatas id, value: appsection index}
-    GetSort(appDataDict) {
-        return null
-    }
+    GetSort(appDataDict) { return null }
 }
 
 class NameSorting extends AppSorting {
     GetSort(appDataDict) {
-        const size = Object.keys(appDataDict).length
-        let appNames = Object.fromEntries(Object.entries(appDataDict).map(([key, val]) => [key, val.name]))
-        appNames = Object.fromEntries(
-            Object.entries(appNames).sort(([, a], [, b]) => a.localeCompare(b))
-        );
-        
-        if(this.ascendingOrder) {
-            Object.entries(appNames).forEach((key, i) => {
-                appNames[key[0]] = size - 1 - i
-            })
-        }
-        else {
-            Object.entries(appNames).forEach((key, i) => {
-                appNames[key[0]] = i
-            }) 
-        }
-        
-        return appNames
+        const appNames = Object.entries(appDataDict)
+            .map(([key, val]) => [key, val.name])
+            .sort(([, a], [, b]) => a.localeCompare(b));
+            
+        return Object.fromEntries(appNames.map(([name, key], index) => [name, this.ascendingOrder ? index : appNames.length - 1 - index]));
     }
 }
 
 class TimeSorting extends AppSorting {
     GetSort(appDataDict) {
-        const size = Object.keys(appDataDict).length
-        let appTimes = Object.fromEntries(Object.entries(appDataDict).map(([key, val]) => [key, val.time]))
-        appTimes = Object.fromEntries(
-            Object.entries(appTimes).sort(([, a], [, b]) => a - b)
-        );
-        
-        if(this.ascendingOrder) {
-            Object.entries(appTimes).forEach((key, i) => {
-                appTimes[key[0]] = i
-            }) 
-        }
-        else {
-            Object.entries(appTimes).forEach((key, i) => {
-                appTimes[key[0]] = size - 1 - i
-            })
-        }
-        
-        return appTimes
+        const appTimes = Object.entries(appDataDict)
+            .map(([key, val]) => [key, val.time])
+            .sort(([, a], [, b]) => a - b);
+
+        return Object.fromEntries(appTimes.map(([time, key], index) => [time, this.ascendingOrder ? index : appTimes.length - 1 - index]));
     }
 }
 
-// remember! this.apps does not preserve insertion order when dealing with integer keys.
+// remember! this.appsMeta does not preserve insertion order when dealing with integer keys.
 // this works assuming insertion order is present
 class SortingRecentAdded extends AppSorting {
     GetSort(appDataDict) {
-        let dict = {}
-        let pids = Object.keys(appDataDict)
-
-        if(this.ascendingOrder) for(let i = pids.length - 1; i >= 0; i--) dict[pids[i]] = pids.length - 1 - i
-        else for(let i = 0; i < pids.length; i++) dict[pids[i]] = i
-        return dict
+        const pids = Object.keys(appDataDict);
+        return Object.fromEntries(pids.map((pid, index) => [pid, this.ascendingOrder ? index : pids.length - 1 - index]));
     }
+}
+
+// base class with logic responsible for filling appsections.
+class BaseAppSectionsList {
+    appSections = [];
+
+    constructor() {
+        if(new.target === BaseAppSectionsList) throw new Error("BaseAppSectionsList is an abstract class");
+    }
+
+    FillAppSections(applet) { }
+    
+    PushEmptyAppSections(count) { }
+    
+    Length() { return this.appSections.length }
+    
+    IsEmpty() { return this.Length() < 1 }
+    
+    At(idx) { return this.appSections.at(idx) }
+    
+    AddToInnerScrollView(scrollView) {
+        this.appSections.forEach(section => scrollView.add_child(section))
+    }
+    
+    GetFirstSectionFullHeight() { return this.appSections[0].GetSectionFullHeight() }
+    
+    AsArrayOfPairs() { 
+        let rows = []
+        
+        this.appSections.forEach(section => {
+            rows.push([section.nameLabel.text, section.timeLabel.text])
+        })
+        
+        return rows
+    }
+    
+    AsJson() { 
+        let data = {}
+        
+        this.appSections.forEach(section => {
+            let key = section.nameLabel.text
+            data[key] = {}
+            data[key]["time"] = section.timeLabel.text
+        })
+        
+        return data
+    }
+    
+    DestroySections() { this.appSections.forEach(section => section.destroy()) }
+    
+    SectionsIconLoaded(idx, icon) { }
+    SectionsIconUpdated(idx, icon) { }
+    
+    SetCharCount(charCount) {
+        this.appSections.forEach(section => {
+            section.nameLabel.get_clutter_text().set_max_length(charCount) 
+        })
+    }
+}
+
+class AppSectionsList extends BaseAppSectionsList {
+    static FromIconedAppSectionsList(sectionList) {
+        let newList = new AppSectionsList()
+        newList.PushEmptyAppSections(sectionList.appSections.length) 
+        
+        return newList
+    }
+    
+    FillAppSections(applet) {
+        Object.keys(applet.appToSection).forEach(key => {
+            this.appSections[applet.appToSection[key]].Fill(applet.appsMeta[key]);
+        });
+    }
+    
+    PushEmptyAppSections(count) { 
+        AppSection.GenerateEmpty(count).forEach(section => this.appSections.push(section))   
+    }
+}
+
+class IconedAppSectionsList extends AppSectionsList {
+    static FromAppSectionsList(sectionList) {
+        let newList = new IconedAppSectionsList()
+        newList.PushEmptyAppSections(sectionList.appSections.length) 
+        
+        return newList
+    }
+    
+    FillAppSections(applet) {
+        super.FillAppSections(applet);
+
+        Object.entries(applet.appIcons.GetAppsAndIcons()).forEach(([key, val]) => {
+            this.appSections[applet.appToSection[key]].ReplaceIcon(val);
+        });
+    }
+    
+    PushEmptyAppSections(count) { 
+        IconedAppSection.GenerateEmpty(count).forEach(section => this.appSections.push(section))  
+    }
+    
+    SectionsIconLoaded(idx, icon) {
+        this.appSections[idx].ReplaceIcon(icon)
+    }
+    
+    SectionsIconUpdated(idx, icon) { this.SectionsIconLoaded(idx, icon) }
 }
 
 class DBusService {
@@ -1034,6 +1512,100 @@ class DBusService {
     
     get ReadCSV() { return this.applet.AppsAsCSV(); }
     get ReadJSON() { return this.applet.AppsAsJSON(); }
+}
+
+class AppletIntervalFunction {
+    Call(applet) { }
+}
+
+class UpdateActiveTimers extends AppletIntervalFunction {
+    Call(applet) {
+        applet.activeApps.forEach(id => {
+            try {
+                applet.appSections.At(applet.appToSection[id]).SetTimer(++applet.appsMeta[id].time);
+            } catch (e) {
+                global.logError(_("Failed timer for %s").format(id));
+                global.logError(e);
+            }
+        });
+    }
+}
+
+class UpdateTimersTimeSort extends AppletIntervalFunction {
+    Call(applet) {
+        let appTimersUpdated = []
+        
+        applet.activeApps.forEach(id => {
+            applet.appSections.At(applet.appToSection[id]).SetTimer(++applet.appsMeta[id].time);
+            appTimersUpdated.push([applet.appsMeta[id].time, applet.appToSection[id]])
+        });
+        
+        for(let i = 0; i < appTimersUpdated.length; ++i) {
+            let section = applet.appSections.At(appTimersUpdated[i][1] - 1)
+            if(section == null) continue
+            
+            try {
+                let nextAppSectionTime = AppSection.TimeToInt(section.timeLabel.text)
+                if(appTimersUpdated[i][0] > nextAppSectionTime) { applet.QueueSort(); break; }
+                
+            } catch (error) {
+                global.logError(error)
+            }
+        }
+    }
+}
+
+class UpdateTimersTimeSortAsc extends AppletIntervalFunction {
+    Call(applet) {
+        let appTimersUpdated = []
+        
+        applet.activeApps.forEach(id => {
+            applet.appSections.At(applet.appToSection[id]).SetTimer(++applet.appsMeta[id].time);
+            appTimersUpdated.push([applet.appsMeta[id].time, applet.appToSection[id]])
+        })
+        
+        for(let i = 0; i < appTimersUpdated.length; ++i) {
+            let section = applet.appSections.At(appTimersUpdated[i][1] + 1)
+            if(section == null) continue
+            
+            let nextAppSectionTime = AppSection.TimeToInt(section.timeLabel.text)
+            if(appTimersUpdated[i][0] > nextAppSectionTime) { applet.QueueSort(); break; }
+        }
+    }
+}
+
+class UpdateTooltipText extends AppletIntervalFunction {
+    Call(applet) { applet.UpdateTooltipText() }
+}
+
+class ConfirmNoHover extends AppletIntervalFunction {
+    Call(applet) {
+        delete applet.timerIntervalUpdateFunctions["ConfirmHoverEnd"]
+        
+        if(applet.isMouseHovering) return
+        delete applet.timerIntervalUpdateFunctions["ToolTipUpdate"]
+    }
+}
+
+class Observer { 
+    #subscribers = new Set(); 
+    
+    get size() { return this.#subscribers.size; }
+    
+    subscribe(callback) { 
+        if(typeof callback !== "function") { 
+            throw new TypeError("Subscriber must be a function"); 
+        } 
+        
+        this.#subscribers.add(callback);
+        return () => { this.#subscribers.delete(callback); }; 
+    }
+    
+    notify(data) { 
+        for(const subscriber of this.#subscribers) subscriber(data); 
+    } 
+    
+    clear() { this.#subscribers.clear(); } 
 }
 
 function main(metadata, orientation, panel_height, instance_id) {
