@@ -26,18 +26,20 @@ function artNorm(x) {
 
 // Possible (artist, song) readings of the playing text. Web radio often sends "Artist - Song" as the title.
 function artCandidates(artist, title, badArtist) {
-    if (!badArtist) return [{ artist: artist, song: title }];
-    let parts = title.split(/\s+[-\u2013\u2014]\s+/);
     let out = [];
-    if (parts.length < 2) return out;
-    let n = parts.length;
     let add = (a, s) => { if (a && s && !out.some(o => o.artist === a && o.song === s)) out.push({ artist: a, song: s }); };
-    add(parts[0], parts.slice(1).join(" - "));
-    if (n > 2) {
-        add(parts[n - 2], parts[n - 1]);
-        add(parts.slice(0, n - 1).join(" - "), parts[n - 1]);
+    // the artist field is tried first; the title is only read as "Artist - Song" when that finds nothing
+    if (!badArtist) add(artist, title);
+    let parts = title.split(/\s+[-\u2013\u2014]\s+/);
+    let n = parts.length;
+    if (n >= 2) {
+        add(parts[0], parts.slice(1).join(" - "));
+        if (n > 2) {
+            add(parts[n - 2], parts[n - 1]);
+            add(parts.slice(0, n - 1).join(" - "), parts[n - 1]);
+        }
     }
-    return out.slice(0, 3);
+    return out.slice(0, 4);
 }
 
 // Returns the first cover-art-archive URL (of up to 5 release groups) that really has a front cover.
@@ -91,7 +93,9 @@ function artMusicBrainz(cands, alive, cb) {
     next();
 }
 
-function artItunes(term, alive, cb) {
+function artItunes(terms, alive, cb) {
+    if (!terms.length) { cb(""); return; }
+    let term = terms[0];
     let nterm = " " + artNorm(term) + " ";
     Util.spawn_async(["curl", "-s", "-m", "6", "-G", "--data-urlencode", "term=" + term,
                       "https://itunes.apple.com/search?entity=song&limit=10"], (out) => {
@@ -108,7 +112,7 @@ function artItunes(term, alive, cb) {
                 }
             }
         } catch (e) {}
-        cb(url);
+        if (url) cb(url); else artItunes(terms.slice(1), alive, cb);
     });
 }
 
@@ -318,7 +322,7 @@ class VolumioApplet extends Applet.TextIconApplet {
             if (!alive()) return;
             if (k >= sources.length) { this.updateArt(fallback); return; }
             let done = (url) => { if (!alive()) return; if (url) this.updateArt(url); else run(k + 1); };
-            if (sources[k] === "mb") artMusicBrainz(cands, alive, done); else artItunes(term, alive, done);
+            if (sources[k] === "mb") artMusicBrainz(cands, alive, done); else artItunes(badArtist || artist === title ? [term] : [term, title], alive, done);
         };
         run(0);
     }
