@@ -11,7 +11,7 @@ This applet works out of the box; so you can ignore the settings. But there are 
 
   * Select the icons.
   * Reset to default icons.
-  * Keybinding.
+  * Keybinding (default: `<Primary><Super>i`).
   * Whether or not to inhibit the screensaver at startup.
 
 ### Translations

@@ -113,7 +113,7 @@
   "keybinding": {
     "type": "keybinding",
     "description": "Set the keybinding for screensaver inhibit",
-    "default": "<Control>i",
+    "default": "<Primary><Super>i",
     "indent": true
   },
   "inhibit-at-startup": {
