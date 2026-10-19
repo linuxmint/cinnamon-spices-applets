@@ -1,0 +1,18 @@
+.overflow-tray-grid {
+    padding: 6px;
+}
+
+/* Icons in the popup: no panel colors, so symbolic icons follow the menu's text color. */
+.overflow-tray-icon {
+    padding: 6px;
+    border-radius: 4px;
+    spacing: 4px;
+}
+
+.overflow-tray-icon:hover {
+    background-color: rgba(128, 128, 128, 0.25);
+}
+
+.overflow-tray-empty {
+    padding: 6px 12px;
+}
