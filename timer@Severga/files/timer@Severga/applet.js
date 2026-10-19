@@ -645,7 +645,7 @@ TimerApplet.prototype = {
           }
         }
         if (this.showNotifications) {
-          //Util.spawnCommandLine('zenity --notification --text=\"Timer:  Time\'s up!\" --window-icon=clock');
+          //Util.spawnCommandLine('xenity --notification --text=\"Timer:  Time\'s up!\" --window-icon=clock');
           let source = new MessageTray.SystemNotificationSource();
           Main.messageTray.add(source);
           let notification = new MessageTray.Notification(source, _("Timer"), (this.customText.trim() == "" ? _("Time's up!") : this.customText));

@@ -315,8 +315,8 @@ MyApplet.prototype = {
             // Set text editor
             this.textEd = '/usr/bin/open';
 
-            // Check that all Dependencies Met by presence of sox and zenity
-            if (GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity")) {
+            // Check that all Dependencies Met by presence of sox and xenity
+            if (GLib.find_program_in_path("sox") && GLib.find_program_in_path("xenity")) {
                 this.dependenciesMet = true;
             } else {
                 let icon = new St.Icon({
@@ -324,7 +324,7 @@ MyApplet.prototype = {
                     icon_type: St.IconType.FULLCOLOR,
                     icon_size: 36
                 });
-                Main.criticalNotify(_("Some dependencies not installed."), _("Both 'sox' and 'zenity' are required for this applet to have all of its functionality including notifications and audible alerts.\n\nPlease view the README for help on installing them.\n"), icon);
+                Main.criticalNotify(_("Some dependencies not installed."), _("Both 'sox' and 'xenity' are required for this applet to have all of its functionality including notifications and audible alerts.\n\nPlease view the README for help on installing them.\n"), icon);
                 this.dependenciesMet = false;
             }
 
