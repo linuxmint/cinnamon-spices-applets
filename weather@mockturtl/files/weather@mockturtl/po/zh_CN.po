@@ -2059,23 +2059,23 @@ msgstr "降水将在 {precipStart} 分钟内开始"
 
 #. 3.8/weather-applet.js:19791
 msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "阳光暴晒造成伤害的风险较低，紫外线指数：{uvIndex}"
 
 #. 3.8/weather-applet.js:19795
 msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "阳光暴晒造成伤害的风险中等，紫外线指数：{uvIndex}"
 
 #. 3.8/weather-applet.js:19799
 msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "阳光暴晒造成伤害的风险较高，紫外线指数：{uvIndex}"
 
 #. 3.8/weather-applet.js:19803
 msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
-msgstr ""
+msgstr "阳光暴晒造成伤害的风险很高，紫外线指数：{uvIndex}"
 
 #. 3.8/weather-applet.js:19807
 msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "阳光暴晒造成伤害的风险极高，紫外线指数：{uvIndex}"
 
 #. 3.8/weather-applet.js:19925
 msgid "Forecast parsing failed, see logs for more details."
