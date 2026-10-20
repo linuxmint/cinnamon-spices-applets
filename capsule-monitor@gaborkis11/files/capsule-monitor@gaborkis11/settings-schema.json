@@ -1,0 +1,288 @@
+{
+    "head_elements": {
+        "type": "header",
+        "description": "Elements"
+    },
+    "elements": {
+        "type": "list",
+        "description": "Elements and order",
+        "tooltip": "Use the arrow buttons to reorder. Click the checkbox to show or hide.",
+        "columns": [
+            {
+                "id": "id",
+                "title": "Element",
+                "type": "string",
+                "options": {
+                    "Memory": "mem",
+                    "CPU": "cpu",
+                    "Video memory": "gpu",
+                    "Disk": "ssd",
+                    "Network": "net",
+                    "Swap": "swp",
+                    "GPU load": "gfx",
+                    "CPU temperature": "tmp"
+                }
+            },
+            {
+                "id": "show",
+                "title": "Show",
+                "type": "boolean"
+            }
+        ],
+        "hidden-buttons": ["+", "-", "edit"],
+        "height": 260,
+        "default": [
+            { "id": "mem", "show": true },
+            { "id": "cpu", "show": true },
+            { "id": "gpu", "show": true },
+            { "id": "ssd", "show": true },
+            { "id": "net", "show": true },
+            { "id": "swp", "show": false },
+            { "id": "gfx", "show": false },
+            { "id": "tmp", "show": false }
+        ]
+    },
+
+    "sep_appearance": {
+        "type": "separator"
+    },
+    "head_appearance": {
+        "type": "header",
+        "description": "Appearance"
+    },
+    "show_labels": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show captions above the values",
+        "tooltip": "The caption is the small MEM, CPU, GPU text above each value. Turning it off does not make the capsule narrower, because the value and its unit need the same width either way; the space goes into the fill bar instead, which grows from 3 to 12 pixels and reads from further away. If the panel is too short for a caption, captions are turned off automatically and the first line of the tooltip says so."
+    },
+    "fixed_width": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Reserve a fixed amount of space",
+        "tooltip": "When on, the capsule always takes up the same amount of panel space and centers itself inside it, so showing or hiding an element does not push the rest of the panel around, the clock for example. The capsule never resizes on a data change either way."
+    },
+    "fixed_width_px": {
+        "type": "spinbutton",
+        "default": 200,
+        "min": 100,
+        "max": 400,
+        "step": 1,
+        "units": "px",
+        "description": "Width of the reserved space",
+        "tooltip": "The capsule itself may be narrower than this, in which case it is centered inside the reserved space. If you set it smaller than the elements you have enabled need, the capsule will overflow it.",
+        "dependency": "fixed_width"
+    },
+
+    "sep_display": {
+        "type": "separator"
+    },
+    "head_display": {
+        "type": "header",
+        "description": "Display"
+    },
+    "mode_mem": {
+        "type": "combobox",
+        "default": "pct",
+        "description": "Memory shows",
+        "options": {
+            "Percentage used": "pct",
+            "Amount used": "abs"
+        },
+        "tooltip": "Picks what the number says: how full memory is, or how many gigabytes of it are in use right now. The fill bar shows utilization in BOTH modes, so the proportion is never lost in amount mode, the number just becomes more informative. The alert threshold is decided on the percentage in either mode."
+    },
+    "mode_swp": {
+        "type": "combobox",
+        "default": "pct",
+        "description": "Swap shows",
+        "options": {
+            "Percentage used": "pct",
+            "Amount used": "abs"
+        },
+        "tooltip": "Picks what the number says: how full the swap file is, or how many gigabytes of it are in use right now. The fill bar shows utilization in BOTH modes, so the proportion is never lost in amount mode, the number just becomes more informative. The alert threshold is decided on the percentage in either mode."
+    },
+    "mode_gpu": {
+        "type": "combobox",
+        "default": "pct",
+        "description": "Video memory shows",
+        "options": {
+            "Percentage used": "pct",
+            "Amount used": "abs"
+        },
+        "tooltip": "Picks what the number says: how full the video memory is, or how many gigabytes of it a loaded model is holding right now. The fill bar shows utilization in BOTH modes, so the proportion is never lost in amount mode, the number just becomes more informative. The alert threshold is decided on the percentage in either mode."
+    },
+    "mode_ssd": {
+        "type": "combobox",
+        "default": "pct",
+        "description": "Disk shows",
+        "options": {
+            "Percentage used": "pct",
+            "Amount used": "abs"
+        },
+        "tooltip": "Picks what the number says: how full the monitored volume is, or how much of it is used, in gigabytes up to 1000 and in terabytes above that. The fill bar shows utilization in BOTH modes, so the proportion is never lost in amount mode, the number just becomes more informative. The alert threshold is decided on the percentage in either mode."
+    },
+
+    "sep_network": {
+        "type": "separator"
+    },
+    "head_network": {
+        "type": "header",
+        "description": "Network"
+    },
+    "net_color_up": {
+        "type": "colorchooser",
+        "default": "#E5484D",
+        "description": "Upload color",
+        "tooltip": "Color of the bars above the center line of the network graph, of the upload arrow and of the upload number. This is direction marking, not an alert: the network never alerts. The default red sits close to the orange alert color, so if that bothers you, pick something further away here, blue for instance."
+    },
+    "net_color_down": {
+        "type": "colorchooser",
+        "default": "#46A758",
+        "description": "Download color",
+        "tooltip": "Color of the bars below the center line of the network graph, of the download arrow and of the download number. Both directions are scaled to the same peak, so the up and down bars stay honest against each other whatever colors you choose."
+    },
+
+    "sep_click": {
+        "type": "separator"
+    },
+    "head_click": {
+        "type": "header",
+        "description": "Click"
+    },
+    "click_command": {
+        "type": "entry",
+        "default": "gnome-system-monitor",
+        "description": "Command to run on left click",
+        "tooltip": "Meant for starting a system monitor. The settings and the usual menu are NOT here, they are on right click. Leave it empty and left click does nothing."
+    },
+
+    "sep_disk": {
+        "type": "separator"
+    },
+    "head_disk": {
+        "type": "header",
+        "description": "Disk"
+    },
+    "disk_mount": {
+        "type": "entry",
+        "default": "/",
+        "description": "Monitored mount point",
+        "tooltip": "The mount point of a fixed volume, / or /home for example. Removable and pseudo volumes (tmpfs, devtmpfs, squashfs, efivarfs, and anything under /media, /run/media or /mnt) cannot be monitored. The tooltip lists every fixed volume even when only one of them is shown here."
+    },
+
+    "sep_thresholds": {
+        "type": "separator"
+    },
+    "head_thresholds": {
+        "type": "header",
+        "description": "Alert thresholds"
+    },
+    "th_mem": {
+        "type": "spinbutton",
+        "default": 85,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "Memory threshold",
+        "tooltip": "The element turns orange when memory use reaches this value. 85% is early enough, because above it swap still buys some time."
+    },
+    "th_cpu": {
+        "type": "spinbutton",
+        "default": 90,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "CPU threshold",
+        "tooltip": "The CPU is not judged on its instantaneous value but on a rolling average over the sustain time set below, so a short spike from a compile does not make the panel flicker."
+    },
+    "th_gpu": {
+        "type": "spinbutton",
+        "default": 90,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "Video memory threshold",
+        "tooltip": "Deliberately 90 and not 85. With a model loaded, high VRAM use is the NORMAL working state, not an emergency: it sits around 67% even at rest. At 85% the capsule would be orange almost all the time, and the very thing this applet exists for would be lost."
+    },
+    "th_ssd": {
+        "type": "spinbutton",
+        "default": 80,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "Disk threshold",
+        "tooltip": "The disk deliberately speaks up earlier than memory, because both swap and elbow room need free space."
+    },
+    "th_swp": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "Swap threshold",
+        "tooltip": "If the system leans on the swap file this hard, that already means a real shortage of memory."
+    },
+    "th_gfx": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "GPU load threshold",
+        "tooltip": "100% effectively switches this alert off, and that is the default: while computing, full GPU utilization is the desired state, not a fault."
+    },
+    "th_tmp": {
+        "type": "spinbutton",
+        "default": 85,
+        "min": 1,
+        "max": 110,
+        "step": 1,
+        "units": "°C",
+        "description": "CPU temperature threshold",
+        "tooltip": "Temperature is a sustained element as well: short warm-ups do not alert, only a lasting high reading does."
+    },
+    "cpu_sustain_sec": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 0,
+        "max": 60,
+        "step": 1,
+        "units": "seconds",
+        "description": "Sustain time for CPU and temperature",
+        "tooltip": "The threshold looks at a rolling average over this many seconds. With 0 the instantaneous value decides. 10 seconds is a good default because the machine spins up many times a day for short tasks, and if every spike blinked, you would soon stop looking at it."
+    },
+
+    "sep_refresh": {
+        "type": "separator"
+    },
+    "head_refresh": {
+        "type": "header",
+        "description": "Refresh"
+    },
+    "refresh_fast_ms": {
+        "type": "spinbutton",
+        "default": 1000,
+        "min": 250,
+        "max": 10000,
+        "step": 250,
+        "units": "ms",
+        "description": "Fast cycle: CPU, memory, swap, network, temperature",
+        "tooltip": "These readings come from inside the process, so they are cheap. The network graph keeps 20 samples, so this value also rescales its time window: at 1000 ms the graph covers the last 20 seconds."
+    },
+    "refresh_gpu_ms": {
+        "type": "spinbutton",
+        "default": 5000,
+        "min": 1000,
+        "max": 60000,
+        "step": 1000,
+        "units": "ms",
+        "description": "GPU cycle: video memory and GPU load",
+        "tooltip": "nvidia-smi starts a separate process for every query, which costs 50 to 150 ms, so it runs less often than the fast cycle. If neither video memory nor GPU load is shown, this cycle does not start at all. The disk is checked once a minute regardless."
+    }
+}
