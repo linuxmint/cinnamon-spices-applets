@@ -401,6 +401,9 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("truncatetext", "truncatetext", () => {
             this.on_settings_changed()
         });
+        this.settings.bind("singleline", "singleline", () => {
+            this.on_settings_changed()
+        });
         this.settings.bind("toolongchars", "toolongchars", () => {
             this.on_settings_changed()
         });
@@ -2184,7 +2187,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             if (_playerArtist == _("Unknown Artist")) {
                 this.title_text = this._truncate(_playerTitle);
             } else {
-                if (this._panelHeight >= 40)
+                if (this._panelHeight >= 40 && !this.singleline)
                     this.title_text = this._truncate(_playerArtist) + "\n" + this._truncate(_playerTitle);
                 else
                     this.title_text = this._truncate(_playerTitle + ' - ' + _playerArtist);

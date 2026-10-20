@@ -1,3 +1,7 @@
+### v16.5.5~20261020
+  * Adds ability to display title and artist on a single line.
+  * Fixes [#9143](https://github.com/linuxmint/cinnamon-spices-applets/issues/9143)
+
 ### v16.5.4~20261011
   * Volume tooltip does not stay on screen while the pointer is elsewhere.
   * Fixes [#9103](https://github.com/linuxmint/cinnamon-spices-applets/issues/9103)
