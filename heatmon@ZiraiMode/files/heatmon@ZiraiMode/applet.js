@@ -8,7 +8,7 @@ const St = imports.gi.St;
 const Gettext = imports.gettext;
 
 const UUID = __meta.uuid;
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain(UUID, GLib.build_filenamev([GLib.get_user_data_dir(), 'locale']));
 const _ = s => Gettext.dgettext(UUID, s);
 
 const M = require('./metrics');
