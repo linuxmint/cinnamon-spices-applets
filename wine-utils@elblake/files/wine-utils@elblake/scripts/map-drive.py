@@ -148,19 +148,7 @@ def link_unc_path(prefix, unc_server, unc_folder, path):
 ## Get the default file manager
 ##
 def get_file_manager():
-    found = 'nemo' ## Default to nemo
-    try:
-        desktopfile = subprocess.check_output(["xdg-mime","query","default","inode/directory"]).decode()
-        desktopfile = desktopfile.strip()
-        print(desktopfile)
-        app_info = Gio.DesktopAppInfo.new(desktopfile)
-        if app_info != None:
-            found_app = app_info.get_string("Exec")
-            if found_app != None:
-                found = found_app
-        return found
-    except subprocess.CalledProcessError:
-        return found
+    return Gio.AppInfo.get_default_for_type("inode/directory", True)
 
 
 ##
@@ -693,7 +681,7 @@ class MapDriveDialog(Gtk.Window):
         ## Launch file manager
         url = self.task_opts["urlshare"]
         filemanager = get_file_manager()
-        subprocess.call(filemanager.replace("%U", "'" + url + "'") + " &", shell=True)
+        filemanager.launch_uris([url], None)
 
     def dialog_mount_step (self):
         
@@ -1065,7 +1053,7 @@ class MapDriveDialog(Gtk.Window):
                             
                             if (val == dav_prefix) or (val == (dav_prefix + '/')):
                                 found_options[key] = 1
-                                extrafolders = '/' + extrafolders_list.join('/')
+                                extrafolders = '/' + '/'.join(extrafolders_list)
                                 break
                             
                 if (found_options['host'] == 1) and (found_options['ssl'] == 1) and (found_options['prefix'] == 1):
@@ -1092,7 +1080,7 @@ class MapDriveDialog(Gtk.Window):
         else:
             self.map_drive_update_share_not_found(
                 "dav host=" + host +
-                " path=" + dav_prefix_list.join('/'))
+                " path=" + '/'.join(dav_prefix_list))
         
     def dialog_complete (self):
         
