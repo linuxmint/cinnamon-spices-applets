@@ -53,23 +53,7 @@ class CaptureMixin:
             self._show_wayland_error(_("D-Bus is required for Wayland support."))
             return False
 
-        # Try the GNOME/Cinnamon Shell API first (no portal dialog needed)
-        try:
-            bus = dbus.SessionBus()
-            obj = bus.get_object("org.gnome.Shell.Screenshot", "/org/gnome/Shell/Screenshot")
-            iface = dbus.Interface(obj, "org.gnome.Shell.Screenshot")
-            
-            fd, temp_path = tempfile.mkstemp(prefix='mint-screenshot-', suffix='.png')
-            os.close(fd)
-            # Screenshot(include_frame, flash, filename)
-            iface.Screenshot(True, False, temp_path)
-            
-            GLib.timeout_add(300, self._load_from_path, temp_path)
-            return False
-        except Exception:
-            pass # Fallback to Portal
-
-        # Fall back to XDG Desktop Portal
+        # Use XDG Desktop Portal exclusively on Wayland
         try:
             bus = dbus.SessionBus()
             token = secrets.token_hex(8)

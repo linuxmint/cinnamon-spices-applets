@@ -122,6 +122,15 @@ class LauncherMixin:
         btn_area.connect("clicked", lambda b: self._capture(interactive=True))
         vbox.pack_start(btn_area, False, False, 0)
 
+        btn_window = Gtk.Button(label=_("🪟  Select Window"))
+        if self.is_wayland:
+            btn_window.set_label(_("🪟  Select Window (Only X11)"))
+            btn_window.set_sensitive(False)
+            btn_window.set_tooltip_text(_("Window selection is not supported on this Wayland setup."))
+        btn_window.get_style_context().add_class("launcher-btn")
+        btn_window.connect("clicked", lambda b: self._capture(interactive=True, window_mode=True))
+        vbox.pack_start(btn_window, False, False, 0)
+
         # Timer row
         timer_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         btn_timer = Gtk.Button(label=_("⏱  Timed Capture"))
@@ -152,7 +161,7 @@ class LauncherMixin:
 
     # --- Capture backends ---
 
-    def _capture(self, interactive=False):
+    def _capture(self, interactive=False, window_mode=False):
         """Dispatch to the right capture backend (Wayland portal or X11)."""
         selected_monitor = -1 # Default to 'All'
         if hasattr(self, 'monitor_combo'):
@@ -161,12 +170,14 @@ class LauncherMixin:
         if hasattr(self, 'launcher') and self.launcher:
             self.launcher.hide()
             
-        self._wants_selection = interactive
+        self.is_window_mode = window_mode
+        self._wants_selection = interactive and not (self.is_wayland and window_mode)
         self.is_full_capture = not interactive
         self._target_monitor = selected_monitor
         
         if self.is_wayland:
-            GLib.timeout_add(200, lambda: self._portal_screenshot(interactive=False))
+            # On Wayland, we must use the portal's native window selector.
+            GLib.timeout_add(200, lambda: self._portal_screenshot(interactive=window_mode))
         else:
             GLib.timeout_add(200, self._x11_screenshot)
 
