@@ -186,8 +186,8 @@ class MyApplet extends Applet.TextIconApplet {
 
         //check display manager
         if ( GLib.getenv("MDMSESSION") ) display_manager = "mdm";
-        else if ( GLib.getenv("GDMSESSION") ) display_manager = "gdm";
         else if ( GLib.getenv("XDG_SEAT_PATH") ) display_manager = "lightdm";
+        else if ( GLib.getenv("GDMSESSION") ) display_manager = "gdm";
         else {
             if ( GLib.file_test("/etc/X11/default-display-manager", GLib.FileTest.EXISTS) ) {
                 Util.spawn_async(["grep", "-oE", "\"[^/]+$\"", "/etc/X11/default-display-manager"], Lang.bind(this, function (output) {
