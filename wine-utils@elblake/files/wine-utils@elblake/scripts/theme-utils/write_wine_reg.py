@@ -41,7 +41,7 @@ class WriteWineReg:
 
     def add_to_registry(self, regfile):
         env = os.environ
-        env["WINE_PREFIX"] = self.prefix
+        env["WINEPREFIX"] = self.prefix
         ret = subprocess.call([self.wine_cmd, "reg", "import", regfile], env=env)
         if ret == 0:
             return True

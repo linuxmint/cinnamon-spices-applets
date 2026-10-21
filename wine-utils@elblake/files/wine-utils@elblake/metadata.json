@@ -1,7 +1,7 @@
 {
     "uuid":"wine-utils@elblake",
     "name":"Wine Utils",
-    "version":"1.2.0",
+    "version":"1.2.1",
     "description":"Easy access to Wine's utilities"
 }
 
