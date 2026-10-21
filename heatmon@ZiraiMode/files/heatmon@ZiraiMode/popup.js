@@ -4,7 +4,8 @@ const GLib = imports.gi.GLib;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
 
-Gettext.bindtextdomain(__meta.uuid, GLib.build_filenamev([GLib.get_user_data_dir(), 'locale']));
+// Same directory as applet.js: where Spices installs the .mo files.
+Gettext.bindtextdomain(__meta.uuid, GLib.build_filenamev([GLib.get_home_dir(), '.local', 'share', 'locale']));
 const _ = s => Gettext.dgettext(__meta.uuid, s);
 
 const M = require('./metrics');

@@ -8,7 +8,9 @@ const St = imports.gi.St;
 const Gettext = imports.gettext;
 
 const UUID = __meta.uuid;
-Gettext.bindtextdomain(UUID, GLib.build_filenamev([GLib.get_user_data_dir(), 'locale']));
+// Spices installs .mo files into ~/.local/share/locale regardless of XDG_DATA_HOME
+// (cinnamon-settings Spices.py: locale_inst), so bind exactly that directory.
+Gettext.bindtextdomain(UUID, GLib.build_filenamev([GLib.get_home_dir(), '.local', 'share', 'locale']));
 const _ = s => Gettext.dgettext(UUID, s);
 
 const M = require('./metrics');
