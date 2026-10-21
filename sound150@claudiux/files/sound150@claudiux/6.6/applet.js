@@ -3074,7 +3074,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             if (this._seeker && this._seeker.status == "Paused") label = "⏸ " + this.volume;
             if (this.isHorizontal) {
                 if (this.title_text.length > 0) {
-                    if (this._panelHeight >= 60)
+                    if (this._panelHeight >= 60 && !this.singleline)
                         label += "\n" + this.title_text;
                     else
                         label += " - " + this.title_text;
