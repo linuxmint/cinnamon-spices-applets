@@ -1,0 +1,4 @@
+/* The bar itself is Cairo-drawn in applet.js; this only positions it. */
+.ds-bar {
+    margin-left: 4px;
+}
