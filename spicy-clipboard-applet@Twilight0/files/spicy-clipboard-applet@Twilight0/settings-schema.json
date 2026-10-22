@@ -3,6 +3,12 @@
     "type": "section",
     "description": "General Settings"
   },
+  "openShortcut": {
+    "type": "keybinding",
+    "default": "",
+    "description": "Keyboard Shortcut",
+    "tooltip": "Press this shortcut to quickly open the clipboard menu."
+  },
   "historySize": {
     "type": "spinbutton",
     "default": 20,
