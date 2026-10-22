@@ -1,0 +1,129 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidiaprime@pdcurtis 3.3.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-11-16 12:40+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:123 3.8/applet.js:123
+msgid "Waiting for nvidia"
+msgstr "Nvidiaa odotetaan"
+
+#: applet.js:183 3.8/applet.js:183
+msgid "Open Power Statistics"
+msgstr "Avaa virtatiedot"
+
+#: applet.js:189 3.8/applet.js:189
+msgid "Open System Monitor"
+msgstr "Avaa valvonta"
+
+#: applet.js:207 3.8/applet.js:207
+msgid "Housekeeping and System Sub Menu"
+msgstr "Siivous ja alivalikko"
+
+#: applet.js:210 3.8/applet.js:210
+msgid "View the Changelog"
+msgstr "Näytä muutosloki"
+
+#: applet.js:216 3.8/applet.js:216
+msgid "Open the Help file"
+msgstr "Avaa ohjeet"
+
+#: applet.js:258 3.8/applet.js:258
+msgid "NVidia based GPU is Off"
+msgstr "NVidia pois päältä"
+
+#: applet.js:281 3.8/applet.js:281
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "NVidia päällä ja lämpötila on"
+
+#: applet.js:289 3.8/applet.js:289
+msgid "Err"
+msgstr "Virhe"
+
+#: applet.js:290 3.8/applet.js:290
+msgid ""
+"Nvidia Prime is not set up correctly - are the nvidia drivers and nvidia-"
+"prime  installed?"
+msgstr ""
+"Nvidia Prime ei ole oikein asetettu. Onko nvidia-ajurit ja nvidia-prime "
+"asennettuna?"
+
+#. metadata.json->description
+msgid ""
+"Displays which Graphics processor is active and nVidia GPU Temperature when "
+"active and in a horizontal panel"
+msgstr "Näyttää aktiivisen nvidian ja lämpötilan paneelissa"
+
+#. metadata.json->name
+msgid "nVidia Prime GPU Display"
+msgstr "nVidia Prime GPU Display"
+
+#. settings-schema.json->head->description
+#. 3.8->settings-schema.json->head->description
+msgid "General Settings for the nVidia Prime Monitoring Applet"
+msgstr "Asetukset nVidia Prime Monitoring"
+
+#. settings-schema.json->refreshInterval-spinner->units
+#. 3.8->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "sekuntia"
+
+#. settings-schema.json->refreshInterval-spinner->description
+#. 3.8->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Virkistystaajuus:"
+
+#. settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.8->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"Suurenna tai pienennä spinner-arvoa ja muuta tietojen päivitysväliä. Pitkä "
+"päivitysväli mikäli sinulla on hidas tietokone"
+
+#. settings-schema.json->showGpuTemp->description
+#. 3.8->settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "Näytä lämpötila sekä kuvake"
+
+#. settings-schema.json->showGpuTemp->tooltip
+#. 3.8->settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr "Vaaka tai pystypaneeli. Lämpötila celsius °C asteina."
+
+#. settings-schema.json->head2->description
+#. 3.8->settings-schema.json->head2->description
+msgid "Additional Functionality"
+msgstr "Lisäominaisuudet"
+
+#. settings-schema.json->displayExtra->description
+#. 3.8->settings-schema.json->displayExtra->description
+msgid ""
+"Access enhanced functionality through Context Menu - needs Cinnamon Restart"
+msgstr "Lisää toimintoja pudotusvalikon kautta - käynnistä Cinnamon uudelleen"
+
+#. settings-schema.json->displayExtra->tooltip
+#. 3.8->settings-schema.json->displayExtra->tooltip
+msgid ""
+"Currently  adds glxspheres64 Graphics Processor Test - VirtualGL needs to be "
+"installed"
+msgstr ""
+"Lisäosat glxspheres64 \"Graphics Processor Test\" ja virtualgl on myös "
+"asennettava"

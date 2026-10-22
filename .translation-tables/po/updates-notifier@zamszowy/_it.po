@@ -1,0 +1,140 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+msgid ""
+msgstr ""
+
+#. applet.js:233
+msgid "View error details"
+msgstr ""
+
+#. applet.js:302
+msgid "Error checking for updates"
+msgstr ""
+
+#. error-window.js:16
+msgid "Error"
+msgstr ""
+
+#. error-window.js:39
+msgid "Error log file not found."
+msgstr ""
+
+#. info-window.js:75 info-window.js:94
+msgid "No details available."
+msgstr ""
+
+#. info-window.js:77 info-window.js:96
+msgid ""
+"Error:\n"
+"{0}"
+msgstr ""
+
+#. info-window.js:81 info-window.js:100
+msgid ""
+"Failed to run command:\n"
+"{0}"
+msgstr ""
+
+#. info-window.js:117
+msgid "Loading update details"
+msgstr ""
+
+#. info-window.js:182
+msgid "Updates"
+msgstr ""
+
+#. info-window.js:197
+msgid "Search updates"
+msgstr ""
+
+#. info-window.js:232
+msgid "{0} updates"
+msgstr ""
+
+#. info-window.js:260
+msgid ""
+"Failed to read updates file:\n"
+"{0}"
+msgstr ""
+
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->pageAppearance->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->sectionIconLabel->title
+msgid "Icon/Label"
+msgstr ""
+
+#. settings-schema.json->sectionClick->title
+msgid "Applet click"
+msgstr ""
+
+#. settings-schema.json->sectionMenu->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->use-timer->description
+msgid "Automatically check for updates"
+msgstr ""
+
+#. settings-schema.json->use-timer->tooltip
+msgid ""
+"When turned off, updates will still show when checked manually or refreshed "
+"by another process"
+msgstr ""
+
+#. settings-schema.json->update-refresh->description
+msgid "Active minutes to wait before refreshing updates"
+msgstr ""
+
+#. settings-schema.json->update-refresh->tooltip
+msgid ""
+"Refresh wait time is reset when applet or Cinnamon are reset and does not "
+"include inactive time (e.g. when computer is suspended)"
+msgstr ""
+
+#. settings-schema.json->show-firmware->description
+msgid "Show firmware updates"
+msgstr ""
+
+#. settings-schema.json->show-label->description
+msgid "Show label with updates count"
+msgstr ""
+
+#. settings-schema.json->label-font-size->description
+msgid "Label font size"
+msgstr ""
+
+#. settings-schema.json->label-font-weight->description
+msgid "Label font weight"
+msgstr ""
+
+#. settings-schema.json->label-vertical-position->description
+msgid "Label vertical position"
+msgstr ""
+
+#. settings-schema.json->show-window-on-click->description
+msgid "Show updates window on left click and menu entries on right click"
+msgstr ""
+
+#. settings-schema.json->refresh-when-no-updates->description
+msgid "Refresh updates list on left click if there are no updates"
+msgstr ""
+
+#. settings-schema.json->commandUpdate-show->description
+msgid "Show \"Check for new updates\" command"
+msgstr ""
+
+#. settings-schema.json->commandUpgrade-show->description
+msgid "Show \"Upgrade packages\" command"
+msgstr ""
+
+#. settings-schema.json->commandUpgrade->description
+msgid "Upgrade packages command:"
+msgstr ""

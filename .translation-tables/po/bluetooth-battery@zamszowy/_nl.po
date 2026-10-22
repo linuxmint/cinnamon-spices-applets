@@ -1,0 +1,38 @@
+# BLUETOOTH BATTERY
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# zamszowy, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 21:28+0200\n"
+"PO-Revision-Date: 2024-04-20 16:24+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:161 applet.js:166 applet.js:257 applet.js:267
+msgid "Battery dropped below %d%"
+msgstr ""
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr ""

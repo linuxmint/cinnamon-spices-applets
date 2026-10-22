@@ -1,0 +1,261 @@
+# PANEL TRANSLATOR
+# This file is distributed under the same license as the PACKAGE package.
+# klangman, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PanelTranslator@klangman 1.2.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-06-15 11:09-0400\n"
+"PO-Revision-Date: 2025-06-14 23:00+0300\n"
+"Last-Translator: Skullckoor\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:108 applet.js:345 applet.js:347
+msgid "Translator"
+msgstr "Переводчик"
+
+#. applet.js:273
+msgid "Unable to query available languages from translate-shell"
+msgstr "Невозможно запросить доступные языки из translate-shell"
+
+#. applet.js:284
+msgid "Required \"trans\" command not found, please install translate-shell"
+msgstr "Требуемая команда \"trans\" не найдена, установите translate-shell"
+
+#. applet.js:288
+msgid "Error, the \"trans\" command returned an exit code of "
+msgstr "Ошибка! Команда \"trans\" вернула код ошибки "
+
+#. applet.js:368
+msgid "Swap Languages"
+msgstr "Поменять языки местами"
+
+#. applet.js:411
+msgid "{Text to translate}"
+msgstr "{Текст для перевода}"
+
+#. applet.js:422
+msgid "{Translated text}"
+msgstr "{Переведенный текст}"
+
+#. applet.js:436
+msgid "Configure"
+msgstr "Настройки"
+
+#. applet.js:437
+msgid "Help"
+msgstr "Помощь"
+
+#. applet.js:441
+msgid "Play"
+msgstr "Воспроизвести"
+
+#. applet.js:445
+msgid "Paste"
+msgstr "Вставить"
+
+#. applet.js:449
+msgid "Clear"
+msgstr "Очистить"
+
+#. applet.js:453
+msgid "Translate"
+msgstr "Перевести"
+
+#. applet.js:458
+msgid "Copy"
+msgstr "Копировать"
+
+#. applet.js:464
+msgid "Play Translation"
+msgstr "Воспроизвести перевод"
+
+#. metadata.json->name
+msgid "Panel Translator"
+msgstr "Panel Translator"
+
+#. metadata.json->description
+msgid ""
+"Translate text to other languages from the Cinnamon panel using Google, Bing "
+"and other translators"
+msgstr ""
+"Перевод текста на другие языки из панели Cinnamon с помощью Google, Bing и "
+"других переводчиков"
+
+#. settings-schema.json->general-page->title
+msgid "General"
+msgstr "Общие"
+
+#. settings-schema.json->hotkey-page->title
+msgid "Hotkeys"
+msgstr "Горячие клавиши"
+
+#. settings-schema.json->engine-settings->title
+msgid "Translation Engine"
+msgstr "Переводчик"
+
+#. settings-schema.json->action-settings->title
+msgid "Panel Button Actions"
+msgstr "Действия кнопок панели"
+
+#. settings-schema.json->hotkey-settings->title
+msgid "Translation action hotkeys"
+msgstr "Горячие клавиши для переводчика"
+
+#. settings-schema.json->translate-engine->options
+msgid "Apertium"
+msgstr "Apertium"
+
+#. settings-schema.json->translate-engine->options
+msgid "Aspell"
+msgstr "Aspell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Auto"
+msgstr "Auto"
+
+#. settings-schema.json->translate-engine->options
+msgid "Bing"
+msgstr "Bing"
+
+#. settings-schema.json->translate-engine->options
+msgid "Google"
+msgstr "Google"
+
+#. settings-schema.json->translate-engine->options
+msgid "Hunspell"
+msgstr "Hunspell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Spell"
+msgstr "Spell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Yandex"
+msgstr "Yandex"
+
+#. settings-schema.json->translate-engine->description
+msgid "Engine (Auto/Google recommended!)"
+msgstr "Движок (Auto/Google рекомендуется!)"
+
+#. settings-schema.json->translate-engine->tooltip
+msgid ""
+"Most engines don't support play back and some don't even translate, others "
+"just report HTTP errors. So it's best to use \"Auto\" and let translate-"
+"shell decide what translator to use."
+msgstr ""
+"Многие движки не поддерживают воспроизведение, а какие то даже не переводят, "
+"другие просто сообщают об ошибках HTTP. Поэтому лучше всего использовать "
+"\"Auto\" и позволить translate-shell решать, какой переводчик использовать."
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Disabled"
+msgstr "Отключить"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Selection"
+msgstr "Выделенное"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Clipboard"
+msgstr "Буфер обмена"
+
+#. settings-schema.json->left-auto-paste->description
+msgid "Automatically translate on left click"
+msgstr "Автоматический перевод по щелчку левой кнопкой мыши"
+
+#. settings-schema.json->left-auto-paste->tooltip
+msgid ""
+"Automatically translate the selection/clipboard contents when opening the "
+"Panel Translator popup window using a left click on the Panel Translator "
+"button"
+msgstr ""
+"Автоматически переводить содержимое выделения/буфера обмена при открытии "
+"Panel Translator левой кнопкой мыши"
+
+#. settings-schema.json->left-auto-play->description
+msgid "Automatically play the translation on left click"
+msgstr "Автоматически воспроизвести перевод при щелчке левой кнопкой мыши"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Do nothing"
+msgstr "Ничего не делать"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-selection->description
+msgid "Show popup dialog and translate Selection"
+msgstr "Показать окно и перевести выделенное"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-clipboard->description
+msgid "Show popup dialog and translate Clipboard"
+msgstr "Показать окно и перевести буфер обмена"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-play-selection->description
+msgid "Show popup dialog, translate Selection and play"
+msgstr "Показать окно, перевести выделенное и воспроизвести"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-play-clipboard->description
+msgid "Show popup dialog, translate Clipboard and play"
+msgstr "Показать окно, перевести из буфер обмена и воспроизвести"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-play-selection->description
+msgid "Play translation of Selection"
+msgstr "Воспроизвести перевод выделенного"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-play-clipboard->description
+msgid "Play translation of Clipboard"
+msgstr "Воспроизвести перевод из буфер обмена"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-copy-selection->description
+msgid "Translate Selection and copy the translation"
+msgstr "Перевести выделенное и скопировать перевод"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey-trans-copy-clipboard->description
+msgid "Translate Clipboard and copy the translation"
+msgstr "Перевести буфер обмена и скопировать перевод"
+
+#. settings-schema.json->middle-button-action->description
+msgid "Middle button action"
+msgstr "Средняя кнопка"
+
+#. settings-schema.json->middle-button-action->tooltip
+msgid ""
+"Select the action to take when using the middle mouse button to click on the "
+"translator panel button"
+msgstr ""
+"Выберите действие, которое будет выполняться при нажатии средней кнопки мыши "
+"на кнопку переводчика в панели."
+
+#. settings-schema.json->ctrl-middle-button-action->description
+msgid "Ctrl + Middle button action"
+msgstr "Ctrl + Средняя кнопка мыши"
+
+#. settings-schema.json->ctrl-middle-button-action->tooltip
+msgid ""
+"Select the action to take when holding the Ctrl key and using the middle "
+"mouse button to click on the translator panel button"
+msgstr ""
+"Выберите действие, которое будет выполняться при удерживании клавиши Ctrl и "
+"нажатии средней кнопки мыши на кнопку панели переводчика"

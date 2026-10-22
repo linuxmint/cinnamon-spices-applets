@@ -1,0 +1,99 @@
+# French translations for nightscout@ranneft package
+# Traductions françaises du paquet nightscout@ranneft.
+# This file is put in the public domain.
+# Fabien <fab.rct@gmail.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nightscout@ranneft 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-14 13:49+0200\n"
+"Last-Translator: FabRCT\n"
+"Language-Team:\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. metadata.json->description
+msgid "Fetches API from your Nightscout site and showing BG"
+msgstr "Récupère l'API de votre site Nightscout et affiche la glycémie"
+
+#. metadata.json->name
+msgid "Nightscout"
+msgstr "Nightscout"
+
+#. settings-schema.json->head->description
+msgid "General Settings for the Nighscout Applet"
+msgstr "Paramètres généraux de l'applet Nightscout"
+
+#. settings-schema.json->refreshInterval->units
+#. settings-schema.json->showMissingInterval->units
+msgid "minutes"
+msgstr "minutes"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh Interval for your Nightscout applet:"
+msgstr "Intervalle de rafraîchissement pour votre applet Nightscout :"
+
+#. settings-schema.json->refreshInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine."
+msgstr ""
+"Augmentez ou diminuez la valeur pour modifier l'intervalle d'actualisation.\n"
+"Utilisez une actualisation lente si votre ordinateur est lent."
+
+#. settings-schema.json->head1->description
+msgid "Nightscout host"
+msgstr "Hôte Nightscout"
+
+#. settings-schema.json->host->description
+msgid "Nighscout host (including http(s))"
+msgstr "Hôte Nightscout (incluant http(s))"
+
+#. settings-schema.json->host->tooltip
+msgid "A host where your CGM information gonna be queried"
+msgstr "Hôte où les informations de votre glucomètre seront interrogées"
+
+#. settings-schema.json->head2->description
+msgid "Various settings"
+msgstr "Réglages divers"
+
+#. settings-schema.json->showMissing->description
+msgid "Show missing readings"
+msgstr "Afficher les lectures manquantes"
+
+#. settings-schema.json->showMissing->tooltip
+msgid "Add information about missing readings in the text"
+msgstr "Ajouter des informations sur les lectures manquantes dans le texte"
+
+#. settings-schema.json->showMissingInterval->description
+msgid "When start to show missing readings alert"
+msgstr "Quand commencer à afficher l'alerte de lectures manquantes"
+
+#. settings-schema.json->showMissingInterval->tooltip
+msgid ""
+"Time which is taken to decide when to show alert of missing readings. Will "
+"apply only if above checkbox is enabled"
+msgstr ""
+"Temps nécessaire pour décider quand afficher l'alerte en cas de lecture\n"
+"manquante. Cette option s'applique uniquement si la case ci-dessus est cochée."
+
+#. settings-schema.json->showiob->description
+msgid "Show IoB"
+msgstr "Montre l'insuline active"
+
+#. settings-schema.json->showiob->tooltip
+msgid "Enable/disable IoB (insulin on board) in the text"
+msgstr "Activer/désactiver l'insuline active dans le texte"
+
+#. settings-schema.json->usemmol->description
+msgid "Use mmol/l"
+msgstr "Utiliser mmol/l"
+
+#. settings-schema.json->usemmol->tooltip
+msgid "Use mmol/l instead of mg/dl"
+msgstr "Utiliser mmol/l au lieu de mg/dl"

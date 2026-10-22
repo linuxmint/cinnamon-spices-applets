@@ -1,0 +1,53 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 12:38+0800\n"
+"PO-Revision-Date: 2025-09-15 01:26+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:52
+msgid "Apache Web Server"
+msgstr "Apache 網頁伺服器"
+
+#: applet.js:53
+msgid "MySQL Server"
+msgstr "MySQL 伺服器"
+
+#: applet.js:61
+msgid "Open Web Dir"
+msgstr "開啟網站目錄"
+
+#: applet.js:66
+msgid "Launch Web Dir"
+msgstr "以瀏覽器開啟網頁目錄"
+
+#: applet.js:70
+msgid "Launch phpMyAdmin"
+msgstr "開啟 phpMyAdmin"
+
+#: applet.js:75
+msgid "Edit default php.ini"
+msgstr "編輯預設 php.ini"
+
+#: applet.js:79
+msgid "Edit Apache Conf"
+msgstr "編輯 Apache 設定"
+
+#. web-developer-menu@infiniteshroom->metadata.json->description
+msgid "A Menu for PHP/MySQL Web Developers"
+msgstr "PHP/MySQL 網頁開發者選單"
+
+#. web-developer-menu@infiniteshroom->metadata.json->name
+msgid "Web Developer Menu"
+msgstr "網頁開發者選單"

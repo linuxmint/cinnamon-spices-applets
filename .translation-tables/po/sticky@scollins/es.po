@@ -1,0 +1,271 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2021-12-13 11:25-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. applet.js:207 3.2/applet.js:218
+msgid "Change theme"
+msgstr "Cambiar el tema"
+
+#. applet.js:216 3.2/applet.js:229
+msgid "Edit title"
+msgstr "Cambiar el título"
+
+#. applet.js:216 3.2/applet.js:229
+msgid "Add title"
+msgstr "Añadir el título"
+
+#. applet.js:222 3.2/applet.js:241
+msgid "Copy"
+msgstr "Copiar"
+
+#. applet.js:226 3.2/applet.js:245
+msgid "Paste"
+msgstr "Pegar"
+
+#. applet.js:232 3.2/applet.js:251
+msgid "About..."
+msgstr "Acerca de..."
+
+#. applet.js:236 3.2/applet.js:255
+msgid "Configure..."
+msgstr "Configurar..."
+
+#. applet.js:242 3.2/applet.js:261
+msgid "Remove this note"
+msgstr "Eliminar esta nota"
+
+#. applet.js:408 3.2/applet.js:461
+msgid "Title"
+msgstr "Título"
+
+#. applet.js:504 3.2/applet.js:572
+msgid "Switch to check list"
+msgstr "Cambiar a lista de verificación"
+
+#. applet.js:712 3.2/applet.js:775
+msgid "Switch to regular note"
+msgstr "Cambiar a nota regular"
+
+#. applet.js:716 3.2/applet.js:779
+msgid "Remove completed items"
+msgstr "Retirar elementos completados"
+
+#. applet.js:1605 3.2/applet.js:1694
+msgid "New note"
+msgstr "Nueva Nota"
+
+#. applet.js:1609 3.2/applet.js:1698
+msgid "New check-list"
+msgstr "Nueva lista de verificación"
+
+#. applet.js:1615 3.2/applet.js:1708
+msgid "Pin notes (keep on top)"
+msgstr "Anclar notas (hacer que se queden arriba de todo)"
+
+#. settings-schema.json->startState->options
+#. 3.2->settings-schema.json->startState->options
+#. applet.js:1622 3.2/applet.js:1715
+msgid "Hide notes"
+msgstr "Esconder las notas"
+
+#. applet.js:1627 3.2/applet.js:1720
+msgid "Back up notes"
+msgstr "Hacer una copia de seguridad"
+
+#. applet.js:1631 3.2/applet.js:1724
+msgid "Restore from backup"
+msgstr "Restaurar desde la copia de seguridad"
+
+#. applet.js:1652 3.2/applet.js:1769
+msgid ""
+"This will permanently remove all existing notes. Are you sure you want to "
+"continue?"
+msgstr ""
+"Esto eliminará permanentemente todas las notas existentes. Estás seguro de "
+"que quieres continuar?"
+
+#. 3.2/applet.js:78
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. 3.2/applet.js:83
+msgid "Ok"
+msgstr "Ok"
+
+#. 3.2/applet.js:235
+msgid "Save as template"
+msgstr "Guardar como plantilla"
+
+#. 3.2/applet.js:512
+msgid "Enter a name for the template."
+msgstr "Ingresar nombre para la plantilla."
+
+#. 3.2/applet.js:783
+msgid "Unselect all items"
+msgstr "Deseleccionar todos los elementos"
+
+#. 3.2/applet.js:1702
+msgid "New from template"
+msgstr "Crear una nueva nota a partir de una plantilla"
+
+#. metadata.json->name
+msgid "Sticky Notes"
+msgstr "Notas adhesivas"
+
+#. metadata.json->description
+msgid "Applet that allows you to manage desktop notes"
+msgstr "Es un Applet que se permite administrar notas de escritorio"
+
+#. metadata.json->comments
+msgid ""
+"This applet is designed to be a simple, quick, and easy-to-use note utility. "
+"While there is some customization available, the emphasis is on making it "
+"feel as smooth and easy to use as possible."
+msgstr ""
+"Este applet está diseñado para ser una utilidad de notas sencilla, rápida y "
+"fácil de usar. Si bien hay algunas personalizaciones disponibles, el énfasis "
+"está en hacer que se sienta tan suave y fácil de usar como sea posible."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Autor"
+
+#. settings-schema.json->appearanceHeader->description
+#. 3.2->settings-schema.json->appearance->description
+msgid "Appearance"
+msgstr "Apariencia"
+
+#. settings-schema.json->height->description
+#. 3.2->settings-schema.json->height->description
+msgid "Default height"
+msgstr "Altura inicial"
+
+#. settings-schema.json->width->description
+#. 3.2->settings-schema.json->width->description
+msgid "Default width"
+msgstr "Anchura inicial"
+
+#. settings-schema.json->theme->description
+#. 3.2->settings-schema.json->theme->description
+msgid "Default theme"
+msgstr "Color inicial"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Green"
+msgstr "Verde"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Aqua"
+msgstr "Turquesa"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Blue"
+msgstr "Azul"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Brown"
+msgstr "Marrón"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Orange"
+msgstr "Anaranjado"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Pink"
+msgstr "Rosado"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Purple"
+msgstr "Púrpura"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Red"
+msgstr "Rojo"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Sand"
+msgstr "Tostado"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Teal"
+msgstr "Verde azulado"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Yellow"
+msgstr "Amarillo"
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Random"
+msgstr "Al azar"
+
+#. settings-schema.json->boxShadow->description
+#. 3.2->settings-schema.json->boxShadow->description
+msgid "Show shadow behind notes"
+msgstr "Dibujar una sombra abajo de las notas"
+
+#. settings-schema.json->boxShadow->tooltip
+#. 3.2->settings-schema.json->boxShadow->tooltip
+msgid ""
+"Warning: this has been known to slow down some computers - not recommended "
+"on older hardware"
+msgstr ""
+"Advertencia: la computadora puede funcionar mas despacio - no se recomienda "
+"en hardware antiguo"
+
+#. settings-schema.json->behaviorHeader->description
+#. 3.2->settings-schema.json->behavior->description
+msgid "Behavior"
+msgstr "Comportamiento"
+
+#. settings-schema.json->startState->description
+#. 3.2->settings-schema.json->startState->description
+msgid "When Cinnamon starts"
+msgstr "Cuando inicia Cinnamon"
+
+#. settings-schema.json->startState->options
+#. 3.2->settings-schema.json->startState->options
+msgid "Show notes on Desktop"
+msgstr "Colocar las notas encima del escritorio"
+
+#. settings-schema.json->startState->options
+#. 3.2->settings-schema.json->startState->options
+msgid "Show notes above windows"
+msgstr "Colocar las notas encima de las ventanas"
+
+#. settings-schema.json->startState->options
+#. 3.2->settings-schema.json->startState->options
+msgid "Restore previous state"
+msgstr "Recordar el estado anterior"
+
+#. 3.2->settings-schema.json->font->description
+msgid "Font"
+msgstr "Fuente"

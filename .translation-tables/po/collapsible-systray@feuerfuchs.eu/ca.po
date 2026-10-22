@@ -1,0 +1,195 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2024-07-22 01:24+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 4.0/CSCollapseBtn.js:98 3.2/CSCollapseBtn.js:104
+msgid "Collapse"
+msgstr "Plegar"
+
+#. 4.0/CSCollapseBtn.js:104 3.2/CSCollapseBtn.js:110
+msgid "Expand"
+msgstr "Expandir"
+
+#. 4.0/CSCollapseBtn.js:110 3.2/CSCollapseBtn.js:116
+msgid "No icons to hide/reveal"
+msgstr "No hi ha icones per mostrar/amagar"
+
+#. 4.0/applet.js:133 3.2/applet.js:143
+msgid "Active applications"
+msgstr "Aplicacions actives"
+
+#. 4.0/applet.js:134 3.2/applet.js:144
+msgid "Inactive applications"
+msgstr "Aplicacions inactives"
+
+#. metadata.json->description
+msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
+msgstr ""
+"Un reemplaçament per la miniaplicació abandonada de la Safata del sistema "
+"plegable de Cinnamon"
+
+#. metadata.json->name
+msgid "Collapsible Systray"
+msgstr "Safata del sistema plegable"
+
+#. 4.0->settings-schema.json->behavior->title
+#. 4.0->settings-schema.json->behavior-section->title
+#. 3.2->settings-schema.json->behavior->title
+#. 3.2->settings-schema.json->behavior-section->title
+msgid "Behavior"
+msgstr "Comportament"
+
+#. 4.0->settings-schema.json->appearance->title
+#. 4.0->settings-schema.json->appearance-section->title
+#. 3.2->settings-schema.json->appearance->title
+#. 3.2->settings-schema.json->appearance-section->title
+msgid "Appearance"
+msgstr "Aparença"
+
+#. 4.0->settings-schema.json->animation-support->description
+#. 3.2->settings-schema.json->animation-support->description
+msgid "Animation support (disable if icons stop updating)"
+msgstr "Animació (desactiveu-ho si les icones deixen d'actualitzar-se)"
+
+#. 4.0->settings-schema.json->animation-support->tooltip
+#. 3.2->settings-schema.json->animation-support->tooltip
+msgid "Disable if you have issues with icons not updating themselves."
+msgstr "Desactiveu-ho si teniu problemes d'actualització de les icones."
+
+#. 4.0->settings-schema.json->animation-duration->units
+#. 4.0->settings-schema.json->expand-on-hover-delay->units
+#. 4.0->settings-schema.json->collapse-on-leave-delay->units
+#. 3.2->settings-schema.json->animation-duration->units
+#. 3.2->settings-schema.json->expand-on-hover-delay->units
+#. 3.2->settings-schema.json->collapse-on-leave-delay->units
+msgid "milliseconds"
+msgstr "mil·lisegons"
+
+#. 4.0->settings-schema.json->animation-duration->description
+#. 3.2->settings-schema.json->animation-duration->description
+msgid "Animation duration"
+msgstr "Duració de l'animació"
+
+#. 4.0->settings-schema.json->expand-on-hover->description
+#. 3.2->settings-schema.json->expand-on-hover->description
+msgid "Expand on hover"
+msgstr "Expandir en passar el cursor per sobre"
+
+#. 4.0->settings-schema.json->expand-on-hover-delay->description
+#. 3.2->settings-schema.json->expand-on-hover-delay->description
+msgid "Expand on hover delay"
+msgstr "Retard de l'expansió en passar el cursor per sobre"
+
+#. 4.0->settings-schema.json->collapse-on-leave->description
+#. 3.2->settings-schema.json->collapse-on-leave->description
+msgid "Collapse on un-hover"
+msgstr "Col·lapsa quan el cursor surti de sobre"
+
+#. 4.0->settings-schema.json->collapse-on-leave-delay->description
+#. 3.2->settings-schema.json->collapse-on-leave-delay->description
+msgid "Collapse on un-hover delay"
+msgstr "Retard abans de l'expansió en sortir el cursor de sobre"
+
+#. 4.0->settings-schema.json->init-delay->units
+#. 3.2->settings-schema.json->init-delay->units
+msgid "seconds"
+msgstr "segons"
+
+#. 4.0->settings-schema.json->init-delay->description
+#. 3.2->settings-schema.json->init-delay->description
+msgid "Startup collapse delay"
+msgstr "Retard del col·lapse a l'inici"
+
+#. 4.0->settings-schema.json->init-delay->tooltip
+#. 3.2->settings-schema.json->init-delay->tooltip
+msgid "The delay until the applet automatically collapses upon startup"
+msgstr "Retard abans que la miniaplicació es plegui en iniciar-se"
+
+#. 4.0->settings-schema.json->sort-icons->description
+#. 3.2->settings-schema.json->sort-icons->description
+msgid "Sort icons by name"
+msgstr "Ordenar les icones per nom"
+
+#. 4.0->settings-schema.json->sort-icons->tooltip
+#. 3.2->settings-schema.json->sort-icons->tooltip
+msgid "If unchecked, the order of the icons will be pretty much random"
+msgstr "Si no s'activa, l'ordre de les icones serà aleatori"
+
+#. 4.0->settings-schema.json->no-hover-for-tray-icons->description
+#. 3.2->settings-schema.json->no-hover-for-tray-icons->description
+msgid "Disable hover effect for tray icons"
+msgstr ""
+"Desactivar els efectes de passar el cursor per sobre de les icones de la "
+"safata"
+
+#. 4.0->settings-schema.json->no-hover-for-tray-icons->tooltip
+#. 3.2->settings-schema.json->no-hover-for-tray-icons->tooltip
+msgid ""
+"If you have problems with the hover effect or it simply doesn't look good, "
+"you should enable this setting"
+msgstr ""
+"Activeu aquesta opció si experimenteu problemes amb els efectes de passar el "
+"cursor per sobre"
+
+#. 4.0->settings-schema.json->horizontal-expand-icon-name->description
+#. 3.2->settings-schema.json->horizontal-expand-icon-name->description
+msgid "Horizontal expand icon"
+msgstr "Icona d'expansió horitzontal"
+
+#. 4.0->settings-schema.json->horizontal-expand-icon-name->tooltip
+#. 4.0->settings-schema.json->horizontal-collapse-icon-name->tooltip
+#. 4.0->settings-schema.json->vertical-expand-icon-name->tooltip
+#. 4.0->settings-schema.json->vertical-collapse-icon-name->tooltip
+#. 3.2->settings-schema.json->horizontal-expand-icon-name->tooltip
+#. 3.2->settings-schema.json->horizontal-collapse-icon-name->tooltip
+#. 3.2->settings-schema.json->vertical-expand-icon-name->tooltip
+#. 3.2->settings-schema.json->vertical-collapse-icon-name->tooltip
+msgid "Enter either the icon's qualified name or it's full path"
+msgstr "Introduïu el nom de la icona o la ruta completa la fitxer"
+
+#. 4.0->settings-schema.json->horizontal-collapse-icon-name->description
+#. 3.2->settings-schema.json->horizontal-collapse-icon-name->description
+msgid "Horizontal collapse icon"
+msgstr "Icona de col·lapse horitzonal"
+
+#. 4.0->settings-schema.json->vertical-expand-icon-name->description
+#. 3.2->settings-schema.json->vertical-expand-icon-name->description
+msgid "Vertical expand icon"
+msgstr "Icona d'expansió vertical"
+
+#. 4.0->settings-schema.json->vertical-collapse-icon-name->description
+#. 3.2->settings-schema.json->vertical-collapse-icon-name->description
+msgid "Vertical collapse icon"
+msgstr "Icona de col·lapse vertical"
+
+#. 4.0->settings-schema.json->tray-icon-padding->units
+#. 3.2->settings-schema.json->tray-icon-padding->units
+msgid "px"
+msgstr "px"
+
+#. 4.0->settings-schema.json->tray-icon-padding->description
+#. 3.2->settings-schema.json->tray-icon-padding->description
+msgid "Padding of tray icons"
+msgstr "Espaiat entre les icones de la safata"
+
+#. 4.0->settings-schema.json->icon-visibility-list->description
+#. 3.2->settings-schema.json->icon-visibility-list->description
+msgid "Internal use"
+msgstr "Ús intern"

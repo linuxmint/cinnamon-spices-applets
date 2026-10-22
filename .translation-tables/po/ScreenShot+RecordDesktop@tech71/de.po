@@ -1,0 +1,116 @@
+# SCREENSHOT+RECORD DESKTOP
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# tech71, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-04 13:04-0400\n"
+"PO-Revision-Date: 2021-02-18 00:48+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:27
+msgid "ScreenShot"
+msgstr "Bildschirmfoto"
+
+#. applet.js:32
+msgid "Current Window"
+msgstr "Aktuelles Fenster"
+
+#. applet.js:37
+msgid "Selected Area"
+msgstr "Aufnahmebereich"
+
+#. applet.js:43
+msgid "Whole Screen"
+msgstr "Gesamter Bildschirm"
+
+#. applet.js:45
+msgid "1 Second Delay"
+msgstr "1 Sekunde Verzögerung"
+
+#. applet.js:49
+msgid "3 Second Delay"
+msgstr "3 Sekunden Verzögerung"
+
+#. applet.js:53
+msgid "5 Second Delay"
+msgstr "5 Sekunden Verzögerung"
+
+#. applet.js:60
+msgid "Record Screencast"
+msgstr "Screencast aufnehmen"
+
+#. applet.js:64
+msgid "Record Desktop With Audio"
+msgstr "Bildschirm mit Ton aufnehmen"
+
+#. applet.js:67 applet.js:73 applet.js:80 applet.js:86
+msgid "Recording"
+msgstr "Aufnahme läuft"
+
+#. applet.js:67 applet.js:80
+msgid "With-Audio"
+msgstr "Mit Ton"
+
+#. applet.js:70
+msgid "Record Desktop Without Audio"
+msgstr "Bildschirm ohne Ton aufnehmen"
+
+#. applet.js:73 applet.js:86
+msgid "No-Audio"
+msgstr "Ohne Ton"
+
+#. applet.js:77
+msgid "Record Current Window With Audio"
+msgstr "Aktuelles Fenster mit Ton aufnehmen"
+
+#. applet.js:83
+msgid "Record Current Window Without Audio"
+msgstr "Aktuelles Fenster ohne Ton aufnehmen"
+
+#. applet.js:90
+msgid "Stop Recording"
+msgstr "Aufnahme beenden"
+
+#. applet.js:95
+msgid "Recording-Stopped"
+msgstr "Aufnahme angehalten"
+
+#. applet.js:96
+msgid "Recording-Finished"
+msgstr "Aufnahme beendet"
+
+#. applet.js:106
+msgid "Take A Snapshot or Record Your Desktop"
+msgstr "Schnappschuss oder Videoaufnahme des Bildschirms machen"
+
+#. applet.js:123
+msgid "Pictures Folder"
+msgstr "Bilder-Ordner"
+
+#. applet.js:129
+msgid "Videos Folder"
+msgstr "Videos-Ordner"
+
+#. metadata.json->description
+msgid ""
+"Take A Snapshot Or Record Your Desktop (recording requires the packages "
+"ffmpeg, xdotool & x11-utils to be installed)"
+msgstr ""
+"Ein Bildschirmfoto machen oder den Bildschirm aufzeichnen (Aufnahme-Funktion "
+"erfordert die Pakete »ffmpeg«, »xdotool« und »x11-utils«)"
+
+#. metadata.json->name
+msgid "ScreenShot+Record Desktop"
+msgstr "ScreenShot+Record Desktop"

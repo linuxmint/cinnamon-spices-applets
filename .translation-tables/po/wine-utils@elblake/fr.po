@@ -1,0 +1,751 @@
+# WINE UTILS
+# This file is put in the public domain.
+# elblake, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wine-utils@elblake 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-09-22 23:27-0400\n"
+"PO-Revision-Date: 2026-10-16 16:19+0200\n"
+"Last-Translator: FabRCT\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:59
+msgid "Config"
+msgstr "Config"
+
+#. applet.js:60
+msgid "Control Panel"
+msgstr "Panneau de contrôle"
+
+#. applet.js:61
+msgid "Files"
+msgstr "Fichiers"
+
+#. applet.js:62
+msgid "Files (winefile)"
+msgstr "Fichiers (de Wine)"
+
+#. applet.js:63
+msgid "Registry Editor"
+msgstr "Éditeur de registre"
+
+#. applet.js:64
+msgid "Task Manager"
+msgstr "Gestionnaire de tâches"
+
+#. applet.js:67
+msgid "Bottles"
+msgstr "Flacons"
+
+#. applet.js:68
+msgid "Lutris"
+msgstr "Lutris"
+
+#. applet.js:69
+msgid "PlayOnLinux"
+msgstr "PlayOnLinux"
+
+#. applet.js:70
+msgid "Q4Wine"
+msgstr "Q4Wine"
+
+#. metadata.json->name
+#. applet.js:232
+msgid "Wine Utils"
+msgstr "Utilitaires de Wine"
+
+#. applet.js:497
+msgid "Prefixes"
+msgstr "Préfixes"
+
+#. applet.js:506
+msgid "Run Command..."
+msgstr "Exécuter la commande..."
+
+#. applet.js:517 applet.js:704
+msgid "Command Prompt"
+msgstr "Invite de commande"
+
+#. applet.js:527 applet.js:714
+msgid "Terminal"
+msgstr "Terminal"
+
+#. settings-schema.json->run-terminal-folder->options
+#. applet.js:537 applet.js:723
+msgid "Drive C"
+msgstr "Lecteur C"
+
+#. settings-schema.json->run-terminal-folder->options
+#. applet.js:547 applet.js:732
+msgid "Home Folder"
+msgstr "Dossier personnel"
+
+#. applet.js:553
+msgid "Tools"
+msgstr "Outils"
+
+#. applet.js:554 scripts/theme-utils/color_edit.py:45
+msgid "Edit Colors"
+msgstr "Modifier les couleurs"
+
+#. applet.js:555 scripts/theme-utils/customize_font.py:47
+msgid "Customize Fonts"
+msgstr "Polices personnalisée"
+
+#. applet.js:556
+msgid "Map Drive"
+msgstr "Mapper un lecteur"
+
+#. applet.js:561
+msgid "Configuration"
+msgstr "Configuration"
+
+#. applet.js:565
+msgid "Programs"
+msgstr "Programmes"
+
+#. applet.js:993 scripts/auto-prefix.py:99
+msgid "Default"
+msgstr "Par défaut"
+
+#. scripts/auto-prefix.py:97
+msgid "Unknown"
+msgstr "Inconnu"
+
+#. scripts/auto-prefix.py:106
+msgid "{} + {:d} more"
+msgstr "{} + {:d} plus"
+
+#. scripts/dialog.py:60
+msgid "Run in Console Window"
+msgstr "Exécuter dans une fenêtre de terminal"
+
+#. scripts/dialog.py:135 scripts/dialog.py:222
+msgid "Okay"
+msgstr "D'accord"
+
+#. scripts/dialog.py:136 scripts/map-drive.py:236
+msgid "Cancel"
+msgstr "Annuler"
+
+#. scripts/dialog.py:137
+msgid "Browse Files..."
+msgstr "Parcourir les fichiers..."
+
+#. scripts/dialog.py:155
+msgid "Choose Program"
+msgstr "Choisir un programme"
+
+#. scripts/dialog.py:223
+msgid "Copy to clipboard"
+msgstr "Copier dans le presse-papiers"
+
+#. scripts/map-drive.py:179
+msgid "Create Drive Mapping"
+msgstr "Créer un mappage de lecteur"
+
+#. scripts/map-drive.py:234
+msgid "Next"
+msgstr "Suivant"
+
+#. scripts/map-drive.py:235
+msgid "Back"
+msgstr "Précédent"
+
+#. scripts/map-drive.py:275
+msgid "Close"
+msgstr "Fermer"
+
+#. scripts/map-drive.py:521
+msgid "Mounting SFTP (SSH) share."
+msgstr "Montage d’un partage SFTP (SSH)."
+
+#. scripts/map-drive.py:572
+msgid "Mounting FTP share."
+msgstr "Montage d’un partage FTP."
+
+#. scripts/map-drive.py:608
+msgid "Mounting network share."
+msgstr "Montage d’un partage réseau."
+
+#. scripts/map-drive.py:645
+msgid "Mounting WebDAV share."
+msgstr "Montage d’un partage WebDAV."
+
+#. scripts/map-drive.py:664
+msgid "Could not find folder."
+msgstr "Impossible de trouver le dossier."
+
+#. scripts/map-drive.py:673
+msgid "Could not find mounted share, make sure to mount the file system first."
+msgstr ""
+"Impossible de trouver le partage monté, assurez-vous de monter "
+"le système de fichiers au préalable."
+
+#. scripts/map-drive.py:682
+msgid "Winepath error."
+msgstr "Erreur du chemin Wine."
+
+#. scripts/map-drive.py:700
+msgid "Mounting:"
+msgstr "Montage:"
+
+#. scripts/map-drive.py:701
+msgid ""
+"To mount the file system, the file manager will be launched, and if the file "
+"system is not yet mounted, the file manager will mount it for you. After "
+"mounting the share, return back to this window. Don't unmount until after "
+"the drive letter is mapped."
+msgstr ""
+"Pour monter le système de fichiers, le gestionnaire de fichiers sera lancé."
+"Si le système de fichiers n'est pas encore monté, le gestionnaire de "
+"fichiers s'en chargera pour vous. Une fois le partage monté, revenez "
+"à cette fenêtre. Ne procédez au démontage qu'une fois la lettre "
+"de lecteur attribuée."
+
+#. scripts/map-drive.py:706
+msgid "Launch file manager"
+msgstr "Lancer le gestionnaire de fichiers"
+
+#. scripts/map-drive.py:707
+msgid ""
+"After launching the file manager and having mounted the share, proceed to "
+"the next step."
+msgstr ""
+"Après avoir lancé le gestionnaire de fichiers et monté le "
+"partage, passez à l’étape suivante."
+
+#. scripts/map-drive.py:731
+msgid "Also link UNC path for applications to use."
+msgstr ""
+"Créez également un lien vers le chemin UNC, "
+"afin que les applications puissent l'utiliser."
+
+#. scripts/map-drive.py:742
+msgid "Choose Folder"
+msgstr "Choisir un dossier"
+
+#. scripts/map-drive.py:778
+msgid ""
+"Examples:\n"
+"\n"
+"\\\\Computer\\SharedFolder\n"
+"smb://Server.local/SharedFolder/\n"
+"https://127.0.0.1/webdav/\n"
+"sftp://user@127.0.0.1/ (SSH SFTP)\n"
+"/path/to/file/\n"
+"~/folder/"
+msgstr ""
+"Exemples:\n"
+"\n"
+"\\\\Ordianteur\\DossierPartagé\\\n"
+"smb://Serveur.local/DossierPartagé/\n"
+"https://127.0.0.1/webdav/\n"
+"sftp://utilisateur@127.0.0.1/ (SSH SFTP)\n"
+"/chemin/vres/fichier/\n"
+"~/dossier/"
+
+#. scripts/map-drive.py:789
+msgid "Path:"
+msgstr "Chemin:"
+
+#. scripts/map-drive.py:790
+msgid "Path can be a local file path, network share, WebDAV, SSH SFTP, or FTP."
+msgstr ""
+"Le chemin peut correspondre à un chemin de fichier "
+"local, un partage réseau, WebDAV, SSH SFTP ou FTP."
+
+#. scripts/map-drive.py:791
+msgid "Map to drive letter:"
+msgstr "Mapper à la lettre de lecteur :"
+
+#. scripts/map-drive.py:806
+msgid "Browse Folder..."
+msgstr "Parcourir le dossier..."
+
+#. scripts/map-drive.py:1099
+msgid "Drive mapping complete"
+msgstr "Mappage des lecteurs terminé"
+
+#. scripts/map-drive.py:1111
+msgid ""
+"The share was mounted successfully, but the specified subfolder was not "
+"found, you might need to create it:"
+msgstr ""
+"Le partage a été monté avec succès, mais le sous-dossier spécifié "
+"est introuvable, il est possible que vous deviez le créer :"
+
+#. scripts/map-drive.py:1123
+msgid "Could not use drive letter."
+msgstr "Impossible d’utiliser la lettre de lecteur."
+
+#. scripts/map-drive.py:1130
+msgid "Could not create link."
+msgstr "Impossible de créer le lien."
+
+#. scripts/map-drive.py:1138
+msgid "Could not create link for UNC path."
+msgstr "Impossible de créer un lien pour le chemin UNC."
+
+#. scripts/map-drive.py:1193
+msgid "No drives are available to map."
+msgstr "Aucun lecteur n’est disponible pour être mappé."
+
+#. scripts/theme-utils/color_edit.py:70 scripts/theme-utils/draw_gui.py:39
+msgid "Menu"
+msgstr "Menu"
+
+#. scripts/theme-utils/color_edit.py:71 scripts/theme-utils/draw_gui.py:41
+msgid "Button"
+msgstr "Bouton"
+
+#. scripts/theme-utils/color_edit.py:72
+msgid "Window"
+msgstr "Fenêtre"
+
+#. scripts/theme-utils/color_edit.py:73
+msgid "Misc"
+msgstr "Divers"
+
+#. scripts/theme-utils/color_edit.py:85
+msgid "Colors From Theme"
+msgstr "Couleurs issues de Cinnamon"
+
+#. scripts/theme-utils/color_edit.py:124
+msgid "Controls Alternate Background"
+msgstr "Arrière-plan alternatif des contrôles"
+
+#. scripts/theme-utils/color_edit.py:132
+msgid "Active Border"
+msgstr "Bordure active"
+
+#. scripts/theme-utils/color_edit.py:140
+msgid "Inactive Title Text"
+msgstr "Texte de titre inactif"
+
+#. scripts/theme-utils/color_edit.py:148
+msgid "Window Frame"
+msgstr "Cadre de fenêtre"
+
+#. scripts/theme-utils/color_edit.py:161
+msgid "Controls Dark Shadow"
+msgstr "Ombre foncée des contrôles"
+
+#. scripts/theme-utils/color_edit.py:169
+msgid "Controls Background"
+msgstr "Arrière-plan des contrôles"
+
+#. scripts/theme-utils/color_edit.py:177
+msgid "Controls Highlight"
+msgstr "Accentuation des contrôles"
+
+#. scripts/theme-utils/color_edit.py:185
+msgid "Controls Light"
+msgstr "Couleur des contrôles"
+
+#. scripts/theme-utils/color_edit.py:193
+msgid "Controls Shadow"
+msgstr "Ombre des contrôles"
+
+#. scripts/theme-utils/color_edit.py:201
+msgid "Controls Text"
+msgstr "Texte des contrôles"
+
+#. scripts/theme-utils/color_edit.py:209
+msgid "Gray Text"
+msgstr "Texte grisé"
+
+#. scripts/theme-utils/color_edit.py:224
+msgid "Menu Background"
+msgstr "Arrière-plan du menu"
+
+#. scripts/theme-utils/color_edit.py:232
+msgid "Menu Bar"
+msgstr "Barre de menu"
+
+#. scripts/theme-utils/color_edit.py:240
+msgid "Selection Highlight"
+msgstr "Surbrillance de sélection"
+
+#. scripts/theme-utils/color_edit.py:248
+#. scripts/theme-utils/customize_font.py:114
+msgid "Menu Text"
+msgstr "Texte de menu"
+
+#. scripts/theme-utils/color_edit.py:257
+msgid "Menu Height"
+msgstr "Taille du menu"
+
+#. scripts/theme-utils/color_edit.py:270
+msgid "Scrollbar"
+msgstr "Barre de défilement"
+
+#. scripts/theme-utils/color_edit.py:278
+msgid "Window Background"
+msgstr "Arrière-plan de fenêtre"
+
+#. scripts/theme-utils/color_edit.py:286
+msgid "Window Text"
+msgstr "Texte de fenêtre"
+
+#. scripts/theme-utils/color_edit.py:294
+#. scripts/theme-utils/customize_font.py:138
+msgid "Tooltip Text"
+msgstr "Texte d'infobulle"
+
+#. scripts/theme-utils/color_edit.py:302
+msgid "Tooltip Background"
+msgstr "Arrière-plan d'infobulle"
+
+#. scripts/theme-utils/color_edit.py:311
+msgid "Scrollbar Height"
+msgstr "Taille de la barre de défilement"
+
+#. scripts/theme-utils/color_from_theme.py:48
+msgid "Color From Theme"
+msgstr "Couleur issue de Cinnamon"
+
+#. scripts/theme-utils/color_from_theme.py:86
+msgid "Accent"
+msgstr "Accentuation"
+
+#. scripts/theme-utils/color_from_theme.py:94
+msgid "Emboss Amount"
+msgstr "Taille de relief"
+
+#. scripts/theme-utils/customize_font.py:81
+msgid "Use Desktop Font"
+msgstr "Utiliser la police de Cinnamon"
+
+#. scripts/theme-utils/customize_font.py:122
+msgid "Window Title"
+msgstr "Titre de fenêtre"
+
+#. scripts/theme-utils/customize_font.py:130
+msgid "Message Box Text"
+msgstr "Texte de boîte de message"
+
+#. scripts/theme-utils/draw_gui.py:36
+msgid "Tooltip"
+msgstr "Infobulle"
+
+#. scripts/theme-utils/draw_gui.py:37
+msgid "Menu Item Grayed"
+msgstr "Élément de menu grisé"
+
+#. scripts/theme-utils/draw_gui.py:38
+msgid "File"
+msgstr "Fichier"
+
+#. scripts/theme-utils/draw_gui.py:40
+msgid "Menu Item"
+msgstr "Élément de menu"
+
+#. metadata.json->description
+msgid "Easy access to Wine's utilities"
+msgstr "Accès facile aux services de Wine"
+
+#. settings-schema.json->head0->description
+msgid "Settings for wine-utils@elblake"
+msgstr "Préférences pour wine-utils@elblake"
+
+#. settings-schema.json->head1->description
+msgid "General"
+msgstr "Général"
+
+#. settings-schema.json->show-launchers->description
+msgid "Show Launchers"
+msgstr "Afficher les lanceurs"
+
+#. settings-schema.json->show-launchers->tooltip
+msgid "Show some of the Wine launchers if they are installed."
+msgstr "Afficher les lanceurs Wine installés."
+
+#. settings-schema.json->launchers-style->description
+msgid "Launcher list style"
+msgstr "Style de la liste des lanceurs"
+
+#. settings-schema.json->launchers-style->options
+#. settings-schema.json->run-command-prompt-style->options
+#. settings-schema.json->run-terminal-style->options
+#. settings-schema.json->browse-drive-c-style->options
+#. settings-schema.json->browse-home-folder-style->options
+msgid "Text Menu"
+msgstr "Texte"
+
+#. settings-schema.json->launchers-style->options
+msgid "Icons"
+msgstr "Icônes"
+
+#. settings-schema.json->launchers-style->options
+#. settings-schema.json->run-command-prompt-style->options
+#. settings-schema.json->run-terminal-style->options
+#. settings-schema.json->browse-drive-c-style->options
+#. settings-schema.json->browse-home-folder-style->options
+msgid "Both"
+msgstr "Les deux"
+
+#. settings-schema.json->show-run-command->description
+msgid "Show 'Run Command...'"
+msgstr "Afficher « Exécuter la commande... »"
+
+#. settings-schema.json->show-run-command->tooltip
+msgid "For running a Wine command."
+msgstr "Pour exécuter une commande Wine."
+
+#. settings-schema.json->show-cmd->description
+msgid "Show 'Command Prompt'"
+msgstr "Afficher « Invite de commande »"
+
+#. settings-schema.json->show-cmd->tooltip
+msgid "For easy access to the Wine command prompt."
+msgstr "Pour un accès facile à l'invite de commande de Wine."
+
+#. settings-schema.json->run-command-prompt-style->description
+msgid "Command Prompt item style"
+msgstr "Style de l'élément Invite de commande"
+
+#. settings-schema.json->run-command-prompt-style->options
+#. settings-schema.json->run-terminal-style->options
+#. settings-schema.json->browse-drive-c-style->options
+#. settings-schema.json->browse-home-folder-style->options
+msgid "Icon"
+msgstr "Icône"
+
+#. settings-schema.json->show-terminal->description
+msgid "Show 'Terminal'"
+msgstr "Afficher « Terminal »"
+
+#. settings-schema.json->show-terminal->tooltip
+msgid "Open terminal on Wine prefixes"
+msgstr "Ouvrir un terminal dans les préfixes Wine"
+
+#. settings-schema.json->run-terminal-style->description
+msgid "Terminal item style"
+msgstr "Style de l'élément Terminal"
+
+#. settings-schema.json->run-terminal-folder->description
+msgid "Terminal working folder"
+msgstr "Dossier de travail du terminal"
+
+#. settings-schema.json->show-browse-drive-c->description
+msgid "Show 'Browse Drive C'"
+msgstr "Afficher « Parcourir le disque C »"
+
+#. settings-schema.json->show-browse-drive-c->tooltip
+msgid "For easy access to drive C of wine prefixes."
+msgstr "Pour un accès facile aux préfixes Wine du disque C."
+
+#. settings-schema.json->browse-drive-c-style->description
+msgid "Browse Drive C item style"
+msgstr "Style de l'élément Parcourir le disque C"
+
+#. settings-schema.json->browse-drive-c-icon->description
+msgid "Icon for Drive C"
+msgstr "Icône pour le lecteur C"
+
+#. settings-schema.json->show-browse-home-folder->description
+msgid "Show 'Browse Home Folder'"
+msgstr "Afficher « Parcourir le dossier personnel »"
+
+#. settings-schema.json->show-browse-home-folder->tooltip
+msgid "For easy access to the user folder of wine prefixes."
+msgstr "Pour un accès facile aux préfixes Wine du dossier personnel."
+
+#. settings-schema.json->browse-home-folder-style->description
+msgid "Browse Home Folder item style"
+msgstr "Style de l'élément Dossier personnel"
+
+#. settings-schema.json->browse-home-folder-icon->description
+msgid "Icon for Home Folder"
+msgstr "Icône pour Dossier personnel"
+
+#. settings-schema.json->show-tools-menu->description
+msgid "Show Tools menu"
+msgstr "Afficher le menu Outils"
+
+#. settings-schema.json->show-tools-menu->tooltip
+msgid "Show the tools menu."
+msgstr "Afficher le menu Outils"
+
+#. settings-schema.json->show-admin-programs-menu->description
+msgid "Show the Configuration menu"
+msgstr "Afficher le menu Configuration"
+
+#. settings-schema.json->show-admin-programs-menu->tooltip
+msgid ""
+"Show a menu of useful Wine utilities that typically need to be accessed by "
+"CLI."
+msgstr ""
+"Affiche un menu d'utilitaires Wine qui doivent généralement être accessibles "
+"via Wine."
+
+#. settings-schema.json->show-programs-menu->description
+msgid "Show the Programs menu"
+msgstr "Afficher le menu Programmes"
+
+#. settings-schema.json->show-programs-menu->tooltip
+msgid ""
+"Show a menu to access programs directly from Wine's installed program "
+"shortcuts."
+msgstr ""
+"Afficher un menu permettant d'accéder aux programmes directement à partir "
+"des raccourcis installés dans Wine."
+
+#. settings-schema.json->use-dark-theme-icons->description
+msgid "Use dark theme icons when available."
+msgstr "Utiliser des icônes sombres lorsqu'elles sont disponibles."
+
+#. settings-schema.json->icon-style->description
+msgid "Panel Icon Style"
+msgstr "Style d'icône du panneau"
+
+#. settings-schema.json->icon-style->options
+msgid "default"
+msgstr "par défaut"
+
+#. settings-schema.json->icon-style->options
+msgid "style 1"
+msgstr "style 1"
+
+#. settings-schema.json->icon-style->options
+msgid "style 2"
+msgstr "style 2"
+
+#. settings-schema.json->icon-style->options
+msgid "style 3"
+msgstr "style 3"
+
+#. settings-schema.json->specify-custom-icon->description
+msgid "Use custom panel icon"
+msgstr "Utiliser une icône de panneau personnalisée"
+
+#. settings-schema.json->specify-custom-icon->tooltip
+msgid "Use a custom icon for the applet."
+msgstr "Utiliser un icône personnalisé pour l'applet."
+
+#. settings-schema.json->custom-icon->description
+msgid "Custom icon"
+msgstr "Icône personnalisée"
+
+#. settings-schema.json->head2->description
+msgid "Advanced"
+msgstr "Paramètres avancés"
+
+#. settings-schema.json->automatically-find-prefixes->description
+msgid "Automatically Find Wine Prefixes"
+msgstr "Détecter automatiquement les préfixes Wine"
+
+#. settings-schema.json->automatically-find-prefixes->tooltip
+msgid "Automatically find Wine prefixes."
+msgstr "Détecter automatiquement les préfixes Wine"
+
+#. settings-schema.json->prefix-file-list->description
+msgid "Path to prefix list"
+msgstr "Chemin d'accès à la liste des préfixes"
+
+#. settings-schema.json->prefix-file-list->tooltip
+msgid ""
+"Select a text file, each line in the file should contain the full path of a "
+"wine prefix directory. You can add a name followed by a colon at the "
+"beginning of each line to give that prefix path a label."
+msgstr ""
+"Sélectionnez un fichier texte, chaque ligne du fichier doit contenir le "
+"chemin complet d'un répertoire préfixe de Wine. Vous pouvez ajouter un nom "
+"suivi de deux points au début de chaque ligne pour donner une étiquette à ce "
+"chemin de préfixe."
+
+#. settings-schema.json->specify-wine-exec->description
+msgid "Specify the wine executable"
+msgstr "Indiquer l'exécutable de Wine"
+
+#. settings-schema.json->specify-wine-exec->tooltip
+msgid "Specify the wine executable, by default 'wine' is used."
+msgstr "Indiquer l'exécutable de Wine, par défaut \"wine\" est utilisé."
+
+#. settings-schema.json->wine-exec->description
+msgid "Wine executable"
+msgstr "Exécutable de Wine"
+
+#. settings-schema.json->wine-exec->tooltip
+msgid "The wine executable to use."
+msgstr "Exécutable de Wine à utiliser."
+
+#. settings-schema.json->wineconsole-exec->description
+msgid "Wine console executable"
+msgstr "Exécutable de la console Wine"
+
+#. settings-schema.json->wineconsole-exec->tooltip
+msgid "The wine console executable to use."
+msgstr "Exécutable de la console Wine à utiliser."
+
+#. settings-schema.json->specify-terminal-exec->description
+msgid "Specify the terminal"
+msgstr "Indiquer le terminal"
+
+#. settings-schema.json->specify-terminal-exec->tooltip
+msgid ""
+"Specify the terminal executable when launching a terminal, by default 'gnome-"
+"terminal' is used."
+msgstr ""
+"Indiquez l’exécutable du terminal à utiliser lors du lancement d’un terminal."
+"Par défaut, \"gnome-terminal\" est utilisé."
+
+#. settings-schema.json->terminal-exec->description
+msgid "Terminal executable"
+msgstr "Exécutable du terminal"
+
+#. settings-schema.json->terminal-exec->tooltip
+msgid "The terminal executable to use when launching a terminal."
+msgstr "L’exécutable de terminal à utiliser lors du lancement d’un terminal."
+
+#. scripts/run-wine.sh:6
+msgid "Error running program:"
+msgstr "Erreur lors de l'exécution du programme :"
+
+#. scripts/run-wine.sh:7 scripts/run-wine-start.sh:7
+msgid "Run Program Error"
+msgstr "Exécution de programme : Erreur"
+
+#. scripts/run-wine-start.sh:6
+msgid "Error starting"
+msgstr "Erreur lors du démarrage"
+
+#. scripts/run-command.sh:6
+msgid "Command to run:"
+msgstr "Commande à exécuter :"
+
+#. scripts/run-command.sh:7
+msgid "Run Command"
+msgstr "Exécuter la commande"
+
+#. scripts/run-command.sh:8
+msgid "Error running command:"
+msgstr "Erreur lors de l'exécution de la commande :"
+
+#. scripts/run-command.sh:9
+msgid "Run Command Error"
+msgstr "Exécution de commande : Erreur"
+
+#. scripts/use-cmd.sh:6
+msgid "Command Prompt Error"
+msgstr "Invite de commande : Erreur"
+
+#. scripts/version.sh:3
+msgid "Wine could not be found, make sure Wine is installed correctly."
+msgstr ""
+"Wine n'a pas pu être trouvé, assurez-vous que Wine est installé correctement."
+
+#. scripts/version.sh:4
+msgid "Wine Not Found"
+msgstr "Wine non trouvé"
+
+#. scripts/version.sh:5
+msgid "Wine version: "
+msgstr "Version de Wine : "

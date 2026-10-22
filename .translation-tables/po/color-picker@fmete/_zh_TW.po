@@ -1,0 +1,51 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:80
+msgid "Click here to pick a color"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->pick-notification->description
+msgid "Show picked color code in a popup notification"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->pick-notification->tooltip
+msgid ""
+"Show the picked color code, which has been copied to the clipboard, in a "
+"popup notification."
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->head->description
+msgid "Color Pick Settings"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->head1->description
+msgid "Applet Settings"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->combo-selection->description
+msgid "Color code format"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->combo-selection->tooltip
+msgid ""
+"Select the format of the color code, which will be copied to the clipboard "
+"by the color picker."
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->icon-name->description
+msgid "The icon to use in the panel"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->icon-name->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->keybinding-test->description
+msgid "Keybinding, which activates the color picker"
+msgstr ""
