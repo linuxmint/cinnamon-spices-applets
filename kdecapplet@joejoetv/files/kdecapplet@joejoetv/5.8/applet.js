@@ -283,6 +283,56 @@ class Device {
     }
 
     /**
+     * Resolves the icon name to use for a device's menu item.
+     * @returns {string} The icon name
+     */
+    getMenuIconName() {
+        let icon = this.statusIconName;
+        if (this.applet.options.useCustomDeviceIcons) {
+            switch (this.getType()) {
+                case "phone":
+                case "smartphone":
+                    icon = this.applet.options.customIconPhone || icon;
+                    break;
+                case "tablet":
+                    icon = this.applet.options.customIconTablet || icon;
+                    break;
+                case "desktop":
+                    // KDE Connect can report laptops as "desktop", so use the status icon name to distinguish them.
+                    if (this.statusIconName.startsWith("laptop")) {
+                        icon = this.applet.options.customIconLaptop || icon;
+                    } else {
+                        icon = this.applet.options.customIconDesktop || icon;
+                    }
+                    break;
+                case "laptop":
+                    icon = this.applet.options.customIconLaptop || icon;
+                    break;
+                case "tv":
+                    icon = this.applet.options.customIconTv || icon;
+                    break;
+                default:
+                    icon = this.applet.options.customIconFallback || icon;
+            }
+        }
+        return icon;
+    }
+
+    /**
+     * Refreshes the device menu icon for reachable and unreachable devices.
+     */
+    updateMenuItemIcon() {
+        const iconName = this.getMenuIconName();
+
+        if (this.menuItemIcon) {
+            this.menuItemIcon.set_icon_name(iconName);
+            this.menuItemIcon.set_icon_type(St.IconType.SYMBOLIC);
+        } else if (this.menuItem && typeof this.menuItem.setIconSymbolicName === "function") {
+            this.menuItem.setIconSymbolicName(iconName);
+        }
+    }
+
+    /**
      * DBus Callbacks
      */
 
@@ -335,6 +385,11 @@ class Device {
 
         this.type = type;
 
+        // Refresh the menu item icon, since custom icons depend on the device type
+        if (this.applet.options.useCustomDeviceIcons) {
+            this.updateMenuItemIcon();
+        }
+
         this.emit("type-changed", type);
     }
 
@@ -369,11 +424,8 @@ class Device {
         if (this.deviceProxy) {
             this.statusIconName = this.deviceProxy.statusIconName;
 
-            // Change icon name of the menu item icon, if it exists
-            if (this.menuItemIcon) {
-                this.menuItemIcon.set_icon_name(this.statusIconName);
-                this.menuItemIcon.set_icon_type(St.IconType.SYMBOLIC);
-            }
+            // Refresh using the device type and current status icon.
+            this.updateMenuItemIcon();
 
             this.emit("statusiconname-changed");
         }
@@ -519,7 +571,7 @@ class Device {
             this.menuItem = new PopupMenu.PopupSubMenuMenuItem(this.name);
 
             // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
-            this.menuItemIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: this.statusIconName, icon_type: St.IconType.SYMBOLIC });
+            this.menuItemIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: this.getMenuIconName(), icon_type: St.IconType.SYMBOLIC });
 
             this.menuItem.addActor(this.menuItemIcon, {span: 0, position: 0});
 
@@ -550,7 +602,7 @@ class Device {
             }
         } else {
             // Create inactive menu item
-            this.menuItem = new PopupMenu.PopupIconMenuItem(this.name, this.statusIconName, St.IconType.SYMBOLIC, { reactive: false });
+            this.menuItem = new PopupMenu.PopupIconMenuItem(this.name, this.getMenuIconName(), St.IconType.SYMBOLIC, { reactive: false });
             this.menuItem.actor.add_style_pseudo_class("insensitive");
         }
     }
@@ -564,6 +616,7 @@ class Device {
 
                 this.menuItem.destroy();
                 this.menuItem = null;
+                this.menuItemIcon = null;
             }
 
         } catch (error) {
@@ -612,6 +665,9 @@ class Device {
             }
             if (this._onNameChanged) {
                 this.deviceProxy.disconnectSignal(this._onNameChanged)
+            }
+            if (this._onStatusIconNameChanged) {
+                this.deviceProxy.disconnectSignal(this._onStatusIconNameChanged)
             }
         }
 
@@ -712,6 +768,14 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         this.settings.bind("switch_different-icon-no-connected-devices", "differentIconNoDevices", this.onPanelSettingsChanged.bind(this), "differentIconNoDevices");
         this.settings.bind("icon_no-connected-devices", "noDevicesIcon", this.onPanelSettingsChanged.bind(this), "noDevicesIcon");
         this.settings.bind("switch_expand-only-device", "expandOnlyDevice", function () { });
+
+        this.settings.bind("switch_use-custom-device-icons", "useCustomDeviceIcons", this.onDeviceIconSettingsChanged.bind(this), "useCustomDeviceIcons");
+        this.settings.bind("icon_custom-icon-phone", "customIconPhone", this.onDeviceIconSettingsChanged.bind(this), "customIconPhone");
+        this.settings.bind("icon_custom-icon-tablet", "customIconTablet", this.onDeviceIconSettingsChanged.bind(this), "customIconTablet");
+        this.settings.bind("icon_custom-icon-desktop", "customIconDesktop", this.onDeviceIconSettingsChanged.bind(this), "customIconDesktop");
+        this.settings.bind("icon_custom-icon-laptop", "customIconLaptop", this.onDeviceIconSettingsChanged.bind(this), "customIconLaptop");
+        this.settings.bind("icon_custom-icon-tv", "customIconTv", this.onDeviceIconSettingsChanged.bind(this), "customIconTv");
+        this.settings.bind("icon_custom-icon-fallback", "customIconFallback", this.onDeviceIconSettingsChanged.bind(this), "customIconFallback");
 
         this.settings.bind("generic_device-order", "deviceOrder", this.onDeviceOrderChanged.bind(this), "deviceOrder");
         this.settings.bind("generic_info-modules", "infoModules", this.onModulesOrderChanged.bind(this), "infoModules");
@@ -1405,6 +1469,17 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         }
 
         this.updatePanel();
+    }
+
+    /**
+     * Callback that gets called when any custom device icon setting changes
+     */
+    onDeviceIconSettingsChanged() {
+        KDEConnectApplet.LOGGER.debug("Device icon settings changed, refreshing device icons...");
+
+        for (let device of Object.values(this.devices)) {
+            device.updateMenuItemIcon();
+        }
     }
 
     onModulesOrderChanged(new_value, optionName) {
