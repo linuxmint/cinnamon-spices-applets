@@ -1,0 +1,13 @@
+{
+    "uuid": "port-radar@pedropaulo",
+    "name": "Port Radar",
+    "description": "See which local ports are in use and which processes own them.",
+    "version": "0.4.1",
+    "author": "Pedro Paulo",
+    "license": "GPL-3.0-or-later",
+    "cinnamon-version": [
+        "6.0"
+    ],
+    "contributors": "Pedro Paulo",
+    "comments": "By Pedro Paulo - GPL-3.0-or-later\nRequires Cinnamon 6.0 or later and iproute2.\nGitHub: https://github.com/pedropaulonet\nSupport the project on Ko-fi: https://ko-fi.com/pedropaulo"
+}
