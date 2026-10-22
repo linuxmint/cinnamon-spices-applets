@@ -1,0 +1,323 @@
+# Russian translation for heatmon@ZiraiMode.
+msgid ""
+msgstr ""
+"Project-Id-Version: heatmon@ZiraiMode 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Last-Translator: ZiraiMode\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. metadata.json->name
+#: applet.js:59
+msgid "Heat & Load Monitor"
+msgstr "Монитор нагрева и нагрузки"
+
+#: applet.js:449
+#, javascript-format
+msgid "%s (not found)"
+msgstr "%s (не найден)"
+
+#: popup.js:19
+msgid "bit/s"
+msgstr "бит/с"
+
+#: popup.js:19
+msgid "kbit/s"
+msgstr "кбит/с"
+
+#. settings-schema.json->net-warn->units
+#. settings-schema.json->net-crit->units
+#: popup.js:19
+msgid "Mbit/s"
+msgstr "Мбит/с"
+
+#: popup.js:19
+msgid "Gbit/s"
+msgstr "Гбит/с"
+
+#: popup.js:20
+msgid "KiB"
+msgstr "КиБ"
+
+#: popup.js:20
+msgid "MiB"
+msgstr "МиБ"
+
+#: popup.js:20
+msgid "GiB"
+msgstr "ГиБ"
+
+#: popup.js:141 popup.js:153
+msgid "Load"
+msgstr "Загрузка"
+
+#: popup.js:142 popup.js:154
+msgid "Temperature"
+msgstr "Температура"
+
+#: popup.js:159
+msgid "nvidia-smi not found"
+msgstr "nvidia-smi не найден"
+
+#. settings-schema.json->sec-th-mem->title
+#: popup.js:163
+msgid "Memory"
+msgstr "Память"
+
+#. settings-schema.json->sec-th-storage->title
+#: popup.js:167
+msgid "Storage"
+msgstr "Накопители"
+
+#. settings-schema.json->sec-net->title
+#. settings-schema.json->sec-th-net->title
+#: popup.js:171
+msgid "Network"
+msgstr "Сеть"
+
+#: popup.js:182
+msgid "Open System Monitor"
+msgstr "Открыть системный монитор"
+
+#: popup.js:205 popup.js:230
+#, javascript-format
+msgid "Temperature %s     Load %s"
+msgstr "Температура %s     Загрузка %s"
+
+#: popup.js:209
+#, javascript-format
+msgid "Frequency %s GHz avg · %s GHz max"
+msgstr "Частота %s ГГц средн. · %s ГГц макс."
+
+#: popup.js:210
+#, javascript-format
+msgid "Frequency %s"
+msgstr "Частота %s"
+
+#: popup.js:235
+#, javascript-format
+msgid "Power %s / %s W     Fan %s"
+msgstr "Мощность %s / %s Вт     Вентилятор %s"
+
+#: popup.js:237
+#, javascript-format
+msgid "Clocks: core %s MHz · memory %s MHz"
+msgstr "Частоты: ядро %s МГц · память %s МГц"
+
+#: popup.js:249
+#, javascript-format
+msgid "Swap %s / %s (%s)"
+msgstr "Подкачка %s / %s (%s)"
+
+#: popup.js:261
+msgid "No active connection"
+msgstr "Нет активного подключения"
+
+#: popup.js:263
+#, javascript-format
+msgid "Interface %s (pinned)"
+msgstr "Интерфейс %s (закреплён)"
+
+#: popup.js:265
+#, javascript-format
+msgid "Interface %s (automatic)"
+msgstr "Интерфейс %s (автоматически)"
+
+#: popup.js:270
+#, javascript-format
+msgid "Received %s · Sent %s"
+msgstr "Получено %s · Отправлено %s"
+
+#: popup.js:274
+#, javascript-format
+msgid "↓ / ↑ · peak %s"
+msgstr "↓ / ↑ · пик %s"
+
+#. metadata.json->description
+msgid "CPU, GPU, memory and network load with color-coded thresholds"
+msgstr "Загрузка ЦП, GPU, памяти и сети с цветовыми порогами"
+
+#. settings-schema.json->page-general->title
+msgid "General"
+msgstr "Общие"
+
+#. settings-schema.json->page-thresholds->title
+msgid "Thresholds"
+msgstr "Пороги"
+
+#. settings-schema.json->page-colors->title
+#. settings-schema.json->sec-colors->title
+msgid "Colors"
+msgstr "Цвета"
+
+#. settings-schema.json->sec-panel->title
+msgid "Panel"
+msgstr "Панель"
+
+#. settings-schema.json->sec-extra->title
+msgid "Extra metrics on panel"
+msgstr "Дополнительные метрики на панели"
+
+#. settings-schema.json->sec-th-cpu->title
+msgid "CPU"
+msgstr "ЦП"
+
+#. settings-schema.json->sec-th-gpu->title
+msgid "GPU"
+msgstr "GPU"
+
+#. settings-schema.json->update-interval->units
+msgid "seconds"
+msgstr "секунд"
+
+#. settings-schema.json->update-interval->description
+msgid "Update interval"
+msgstr "Интервал обновления"
+
+#. settings-schema.json->show-cpu->description
+msgid "Show CPU temperature and load"
+msgstr "Показывать температуру и загрузку ЦП"
+
+#. settings-schema.json->show-gpu->description
+msgid "Show GPU temperature, load and VRAM"
+msgstr "Показывать температуру, загрузку и видеопамять GPU"
+
+#. settings-schema.json->show-ram->description
+msgid "Show RAM usage"
+msgstr "Показывать использование ОЗУ"
+
+#. settings-schema.json->show-net->description
+msgid "Show network speed"
+msgstr "Показывать скорость сети"
+
+#. settings-schema.json->show-gpu-power->description
+msgid "Show GPU power draw"
+msgstr "Показывать потребление GPU"
+
+#. settings-schema.json->show-gpu-fan->description
+msgid "Show GPU fan speed"
+msgstr "Показывать обороты вентилятора GPU"
+
+#. settings-schema.json->show-swap->description
+msgid "Show swap usage"
+msgstr "Показывать использование подкачки"
+
+#. settings-schema.json->show-nvme->description
+msgid "Show hottest NVMe drive temperature"
+msgstr "Показывать температуру самого горячего NVMe"
+
+#. settings-schema.json->net-interface->description
+msgid "Network interface"
+msgstr "Сетевой интерфейс"
+
+#. settings-schema.json->net-interface->options
+msgid "Automatic (default route)"
+msgstr "Автоматически (маршрут по умолчанию)"
+
+#. settings-schema.json->net-interface->tooltip
+msgid "Interface used for network speed. Automatic follows the default route."
+msgstr ""
+"Интерфейс для измерения скорости сети. «Автоматически» — интерфейс маршрута "
+"по умолчанию."
+
+#. settings-schema.json->cpu-temp-warn->units
+#. settings-schema.json->cpu-temp-crit->units
+#. settings-schema.json->gpu-temp-warn->units
+#. settings-schema.json->gpu-temp-crit->units
+#. settings-schema.json->nvme-temp-warn->units
+#. settings-schema.json->nvme-temp-crit->units
+msgid "°C"
+msgstr "°C"
+
+#. settings-schema.json->cpu-temp-warn->description
+msgid "CPU temperature: warning"
+msgstr "Температура ЦП: предупреждение"
+
+#. settings-schema.json->cpu-temp-crit->description
+msgid "CPU temperature: critical"
+msgstr "Температура ЦП: критично"
+
+#. settings-schema.json->gpu-temp-warn->description
+msgid "GPU temperature: warning"
+msgstr "Температура GPU: предупреждение"
+
+#. settings-schema.json->gpu-temp-crit->description
+msgid "GPU temperature: critical"
+msgstr "Температура GPU: критично"
+
+#. settings-schema.json->nvme-temp-warn->description
+msgid "NVMe temperature: warning"
+msgstr "Температура NVMe: предупреждение"
+
+#. settings-schema.json->nvme-temp-crit->description
+msgid "NVMe temperature: critical"
+msgstr "Температура NVMe: критично"
+
+#. settings-schema.json->cpu-load-warn->units
+#. settings-schema.json->cpu-load-crit->units
+#. settings-schema.json->gpu-load-warn->units
+#. settings-schema.json->gpu-load-crit->units
+#. settings-schema.json->vram-warn->units
+#. settings-schema.json->vram-crit->units
+#. settings-schema.json->ram-warn->units
+#. settings-schema.json->ram-crit->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->cpu-load-warn->description
+msgid "CPU load: warning"
+msgstr "Загрузка ЦП: предупреждение"
+
+#. settings-schema.json->cpu-load-crit->description
+msgid "CPU load: critical"
+msgstr "Загрузка ЦП: критично"
+
+#. settings-schema.json->gpu-load-warn->description
+msgid "GPU load: warning"
+msgstr "Загрузка GPU: предупреждение"
+
+#. settings-schema.json->gpu-load-crit->description
+msgid "GPU load: critical"
+msgstr "Загрузка GPU: критично"
+
+#. settings-schema.json->vram-warn->description
+msgid "VRAM usage: warning"
+msgstr "Видеопамять: предупреждение"
+
+#. settings-schema.json->vram-crit->description
+msgid "VRAM usage: critical"
+msgstr "Видеопамять: критично"
+
+#. settings-schema.json->ram-warn->description
+msgid "RAM usage: warning"
+msgstr "ОЗУ: предупреждение"
+
+#. settings-schema.json->ram-crit->description
+msgid "RAM usage: critical"
+msgstr "ОЗУ: критично"
+
+#. settings-schema.json->net-warn->description
+msgid "Network speed: warning"
+msgstr "Скорость сети: предупреждение"
+
+#. settings-schema.json->net-crit->description
+msgid "Network speed: critical"
+msgstr "Скорость сети: критично"
+
+#. settings-schema.json->color-normal->description
+msgid "Normal"
+msgstr "Норма"
+
+#. settings-schema.json->color-warn->description
+msgid "Hot (warning)"
+msgstr "Горячо (предупреждение)"
+
+#. settings-schema.json->color-crit->description
+msgid "Critical"
+msgstr "Критично"
