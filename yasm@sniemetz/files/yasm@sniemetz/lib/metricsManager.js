@@ -171,6 +171,7 @@ var MetricsManager = class MetricsManager {
   }
 
   collect() {
+    if (this._destroyed) return;
     const now     = Date.now() / 1000;
     const elapsed = this._prevTimestamp
       ? (now - this._prevTimestamp)
@@ -367,6 +368,18 @@ var MetricsManager = class MetricsManager {
     if (this._onUpdate) this._onUpdate(this._data, this._history);
 
     this._fetchAsync();
+  }
+
+  // Mark the manager as abandoned. In-flight subprocess callbacks (df,
+  // nvtop, nvidia-smi) still fire against this instance's _sub dict,
+  // but their results will no longer reach the UI because collect() and
+  // the onUpdate callback both short-circuit on _destroyed. The orphan
+  // is GC'd once all pending async callbacks have completed (a few
+  // seconds at most). Call this before replacing a manager — see
+  // applet.js _restartManager.
+  finalize() {
+    this._destroyed = true;
+    this._onUpdate  = null;
   }
 
   getNumCores() { return this._numCores || 1; }

@@ -131,3 +131,17 @@
   padding: 2px 8px 2px 1px;
   min-width: 0;
 }
+
+/* ─── Single-tile-mode strip overlay ─────────────────────── */
+/* Floating vertical container shown when single-tile-mode is on and the
+   collapsed source tile is hovered or clicked. Padding doubles as the
+   forgiving hover halo so the pointer can drift between source tile and
+   strip without triggering an unintended close. */
+.yasm-strip {
+  spacing: 2px;
+  padding: 8px 10px;
+  border: 1px solid rgba(200, 200, 200, 0.25);
+  border-radius: 6px;
+  background-color: rgba(45, 45, 45, 0.92);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
