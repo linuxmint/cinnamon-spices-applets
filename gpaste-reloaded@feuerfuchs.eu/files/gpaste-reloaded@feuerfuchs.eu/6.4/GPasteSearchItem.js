@@ -44,7 +44,8 @@ GPasteSearchItem.prototype = {
         // Search icon
 
         this.iconSearch = new St.Icon({
-            icon_name: 'edit-find-symbolic'
+            style_class: 'menu-search-entry-icon',
+            icon_name:   'edit-find-symbolic'
         });
         this.entry.set_secondary_icon(this.iconSearch);
 
