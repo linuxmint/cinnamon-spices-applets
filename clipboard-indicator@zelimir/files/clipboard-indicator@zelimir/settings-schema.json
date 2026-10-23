@@ -1,0 +1,362 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page-general", "page-look", "page-notifications", "page-shortcuts", "page-exclusions"],
+        "page-general": {
+            "type": "page",
+            "title": "General",
+            "sections": ["sec-history", "sec-behavior", "sec-search", "sec-clearing"]
+        },
+        "page-look": {
+            "type": "page",
+            "title": "Appearance",
+            "sections": ["sec-panel", "sec-menu", "sec-buttons"]
+        },
+        "page-notifications": {
+            "type": "page",
+            "title": "Notifications",
+            "sections": ["sec-notifications"]
+        },
+        "page-shortcuts": {
+            "type": "page",
+            "title": "Shortcuts",
+            "sections": ["sec-shortcuts", "sec-menu-keys"]
+        },
+        "page-exclusions": {
+            "type": "page",
+            "title": "Applications",
+            "sections": ["sec-excluded", "sec-terminals"]
+        },
+        "sec-history": {
+            "type": "section",
+            "title": "History",
+            "keys": ["history-size", "preview-size", "cache-size", "cache-only-favorites", "cache-images"]
+        },
+        "sec-behavior": {
+            "type": "section",
+            "title": "Behavior",
+            "keys": ["strip-text", "move-item-first", "paste-on-select", "pinned-on-bottom"]
+        },
+        "sec-search": {
+            "type": "section",
+            "title": "Search",
+            "keys": ["case-sensitive-search", "regex-search"]
+        },
+        "sec-clearing": {
+            "type": "section",
+            "title": "Clearing",
+            "keys": ["confirm-clear", "confirm-pinned-delete", "keep-selected-on-clear", "clear-on-boot", "clear-history-on-interval", "clear-history-interval"]
+        },
+        "sec-panel": {
+            "type": "section",
+            "title": "Panel",
+            "keys": ["display-mode", "topbar-preview-size", "blink-icon-on-copy", "open-at-cursor"]
+        },
+        "sec-menu": {
+            "type": "section",
+            "title": "Menu",
+            "keys": ["show-search-bar", "show-private-mode", "show-clear-history-button", "show-settings-button"]
+        },
+        "sec-buttons": {
+            "type": "section",
+            "title": "Item buttons",
+            "keys": ["paste-button", "show-pin-button", "show-tag-button", "show-edit-button", "show-preview-button", "show-delete-button"]
+        },
+        "sec-notifications": {
+            "type": "section",
+            "title": "Notifications",
+            "keys": ["notify-on-copy", "notify-on-cycle", "notify-on-clear"]
+        },
+        "sec-shortcuts": {
+            "type": "section",
+            "title": "Global shortcuts",
+            "keys": ["enable-keybindings", "toggle-menu", "clear-history", "prev-entry", "next-entry", "private-mode-binding"]
+        },
+        "sec-menu-keys": {
+            "type": "section",
+            "title": "Keys in the menu",
+            "keys": ["menu-keys-help"]
+        },
+        "sec-excluded": {
+            "type": "section",
+            "title": "Excluded applications",
+            "keys": ["excluded-apps-help", "excluded-apps"]
+        },
+        "sec-terminals": {
+            "type": "section",
+            "title": "Terminals",
+            "keys": ["terminal-apps"]
+        }
+    },
+
+    "history-size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 1,
+        "max": 1000,
+        "step": 1,
+        "description": "Number of items in history",
+        "tooltip": "Pinned items are not counted."
+    },
+    "preview-size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 300,
+        "step": 1,
+        "units": "characters",
+        "description": "Item preview length in the menu"
+    },
+    "cache-size": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 256,
+        "step": 1,
+        "units": "MB",
+        "description": "Maximum size of the history file",
+        "tooltip": "When exceeded, the oldest unpinned items are not written to disk."
+    },
+    "cache-only-favorites": {
+        "type": "switch",
+        "default": false,
+        "description": "Only save pinned items to disk",
+        "tooltip": "The rest of the history lives only in memory and is lost on logout."
+    },
+    "cache-images": {
+        "type": "switch",
+        "default": true,
+        "description": "Record images"
+    },
+    "strip-text": {
+        "type": "switch",
+        "default": false,
+        "description": "Remove whitespace around text"
+    },
+    "move-item-first": {
+        "type": "switch",
+        "default": false,
+        "description": "Move the selected item to the top of the list"
+    },
+    "paste-on-select": {
+        "type": "switch",
+        "default": false,
+        "description": "Paste immediately when an item is selected"
+    },
+    "pinned-on-bottom": {
+        "type": "switch",
+        "default": false,
+        "description": "Show pinned items below the history"
+    },
+    "case-sensitive-search": {
+        "type": "switch",
+        "default": false,
+        "description": "Case-sensitive search"
+    },
+    "regex-search": {
+        "type": "switch",
+        "default": false,
+        "description": "Regular expression search"
+    },
+    "confirm-clear": {
+        "type": "switch",
+        "default": true,
+        "description": "Ask for confirmation before clearing the history"
+    },
+    "confirm-pinned-delete": {
+        "type": "switch",
+        "default": false,
+        "description": "Ask for confirmation before deleting a pinned item"
+    },
+    "keep-selected-on-clear": {
+        "type": "switch",
+        "default": false,
+        "description": "Keep the current item when clearing the history"
+    },
+    "clear-on-boot": {
+        "type": "switch",
+        "default": false,
+        "description": "Clear the history after every reboot",
+        "tooltip": "Pinned items are kept."
+    },
+    "clear-history-on-interval": {
+        "type": "switch",
+        "default": false,
+        "description": "Clear the history periodically"
+    },
+    "clear-history-interval": {
+        "type": "spinbutton",
+        "default": 60,
+        "min": 1,
+        "max": 10080,
+        "step": 1,
+        "units": "min",
+        "description": "Automatic clearing interval",
+        "dependency": "clear-history-on-interval"
+    },
+
+    "display-mode": {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "Icon": 0,
+            "Clipboard content": 1,
+            "Icon and content": 2,
+            "Hidden (shortcut only)": 3
+        },
+        "description": "What to show in the panel"
+    },
+    "topbar-preview-size": {
+        "type": "spinbutton",
+        "default": 15,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "characters",
+        "description": "Preview length in the panel"
+    },
+    "blink-icon-on-copy": {
+        "type": "switch",
+        "default": false,
+        "description": "Blink the icon on copy"
+    },
+    "open-at-cursor": {
+        "type": "switch",
+        "default": false,
+        "description": "The shortcut opens the menu at the mouse cursor"
+    },
+    "show-search-bar": {
+        "type": "switch",
+        "default": true,
+        "description": "Show the search field"
+    },
+    "show-private-mode": {
+        "type": "switch",
+        "default": true,
+        "description": "Show the private mode switch"
+    },
+    "show-clear-history-button": {
+        "type": "switch",
+        "default": true,
+        "description": "Show \"Clear history\""
+    },
+    "show-settings-button": {
+        "type": "switch",
+        "default": true,
+        "description": "Show \"Settings\""
+    },
+    "paste-button": {
+        "type": "switch",
+        "default": true,
+        "description": "Paste button"
+    },
+    "show-pin-button": {
+        "type": "switch",
+        "default": true,
+        "description": "Pin button"
+    },
+    "show-tag-button": {
+        "type": "switch",
+        "default": true,
+        "description": "Tag button"
+    },
+    "show-edit-button": {
+        "type": "switch",
+        "default": true,
+        "description": "Edit text button"
+    },
+    "show-preview-button": {
+        "type": "switch",
+        "default": true,
+        "description": "Image preview button"
+    },
+    "show-delete-button": {
+        "type": "switch",
+        "default": true,
+        "description": "Delete button"
+    },
+
+    "notify-on-copy": {
+        "type": "switch",
+        "default": false,
+        "description": "Notify on copy (with an \"Undo\" action)"
+    },
+    "notify-on-cycle": {
+        "type": "switch",
+        "default": true,
+        "description": "Notify when cycling through the history with shortcuts"
+    },
+    "notify-on-clear": {
+        "type": "switch",
+        "default": true,
+        "description": "Notify when the history is cleared"
+    },
+
+    "enable-keybindings": {
+        "type": "switch",
+        "default": true,
+        "description": "Enable global shortcuts"
+    },
+    "toggle-menu": {
+        "type": "keybinding",
+        "default": "<Control>F9",
+        "description": "Open / close the menu",
+        "dependency": "enable-keybindings"
+    },
+    "clear-history": {
+        "type": "keybinding",
+        "default": "<Control>F10",
+        "description": "Clear history",
+        "dependency": "enable-keybindings"
+    },
+    "prev-entry": {
+        "type": "keybinding",
+        "default": "<Control>F11",
+        "description": "Previous item",
+        "dependency": "enable-keybindings"
+    },
+    "next-entry": {
+        "type": "keybinding",
+        "default": "<Control>F12",
+        "description": "Next item",
+        "dependency": "enable-keybindings"
+    },
+    "private-mode-binding": {
+        "type": "keybinding",
+        "default": "<Control>F8",
+        "description": "Toggle private mode",
+        "dependency": "enable-keybindings"
+    },
+    "menu-keys-help": {
+        "type": "label",
+        "description": "Arrows – move   Enter – select   Delete – delete\nv – paste   p – pin   t – tag   e – edit text   h – preview image"
+    },
+
+    "excluded-apps-help": {
+        "type": "label",
+        "description": "Copies are not recorded while one of these applications has focus (e.g. a password manager).\nThe easiest way to add the active window's WM_CLASS is right-clicking the applet → \"Don't record from this app\"."
+    },
+    "excluded-apps": {
+        "type": "list",
+        "description": "Excluded applications",
+        "columns": [
+            {"id": "wmclass", "title": "WM_CLASS", "type": "string"}
+        ],
+        "default": []
+    },
+    "terminal-apps": {
+        "type": "entry",
+        "default": "org.x.velocitty, gnome-terminal-server, Gnome-terminal, kitty, Alacritty, org.wezfurlong.wezterm, foot, com.mitchellh.ghostty, Xfce4-terminal, Tilix, konsole, terminator, Mate-terminal, XTerm, URxvt, Guake, tilda",
+        "description": "Terminal WM_CLASS names (pasted into with Ctrl+Shift+V)",
+        "tooltip": "Other applications get Shift+Insert. Separate with commas."
+    },
+
+    "next-history-clear": {
+        "type": "generic",
+        "default": -1
+    },
+    "last-boot-id": {
+        "type": "generic",
+        "default": ""
+    }
+}
