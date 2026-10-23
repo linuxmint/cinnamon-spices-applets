@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <requires lib="gtk+" version="3.0"/>
+
+    <object class="GtkListStore" id="scheduleStore">
+        <columns>
+            <column type="gchararray"/>
+        </columns>
+    </object>
+    <object class="GtkListStore" id="eventStore">
+        <columns>
+            <column type="gchararray"/>
+            <column type="gchararray"/>
+            <column type="gchararray"/>
+        </columns>
+    </object>
+    <object class="GtkListStore" id="variantStore">
+        <columns>
+            <column type="gchararray"/>
+            <column type="gchararray"/>
+            <column type="gchararray"/>
+        </columns>
+    </object>
+
+    <object class="GtkWindow" id="window">
+        <property name="title">Schedule Editor</property>
+        <child>
+            <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="spacing">12</property>
+                <property name="border-width">6</property>
+                <child>
+                    <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">24</property>
+                        <child>
+                            <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                    <object class="GtkLabel">
+                                        <property name="label">&lt;b&gt;Schedules&lt;/b&gt;</property>
+                                        <property name="use_markup">true</property>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkFrame">
+                                        <property name="width-request">200</property>
+                                        <property name="height-request">300</property>
+                                        <child>
+                                            <object class="GtkScrolledWindow">
+                                                <child>
+                                                    <object class="GtkTreeView" id="scheduleView">
+                                                        <property name="model">scheduleStore</property>
+                                                        <property name="headers-visible">false</property>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkBox">
+                                        <property name="orientation">horizontal</property>
+                                        <child>
+                                            <object class="GtkButton" id="scheduleAddButton">
+                                                <property name="label">+</property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkButton" id="scheduleRemoveButton">
+                                                <property name="label">-</property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkEntry" id="scheduleNameEntry"></object>
+                                        </child>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkBox">
+                                    <property name="orientation">vertical</property>
+                                        <child>
+                                            <object class="GtkLabel">
+                                                <property name="label">&lt;b&gt;Begin&lt;/b&gt;</property>
+                                                <property name="use_markup">true</property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkEntry" id="beginEntry"></object>
+                                        </child>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                    <object class="GtkLabel">
+                                        <property name="label">&lt;b&gt;Events&lt;/b&gt;</property>
+                                        <property name="use_markup">true</property>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkFrame">
+                                        <property name="width-request">300</property>
+                                        <property name="height-request">300</property>
+                                        <child>
+                                            <object class="GtkScrolledWindow">
+                                                <child>
+                                                    <object class="GtkTreeView" id="eventView">
+                                                        <property name="model">eventStore</property>
+                                                        <property name="headers-visible">true</property>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkBox">
+                                        <property name="orientation">horizontal</property>
+                                        <child>
+                                            <object class="GtkButton" id="eventAddButton">
+                                                <property name="label">+</property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkButton" id="variantEventAddButton">
+                                                <property name="label">+(ab)</property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkButton" id="eventRemoveButton">
+                                                <property name="label">-</property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkEntry" id="eventNameEntry"></object>
+                                        </child>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkBox">
+                                        <property name="orientation">horizontal</property>
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="orientation">vertical</property>
+                                                <child>
+                                                    <object class="GtkLabel">
+                                                        <property name="label">&lt;b&gt;Start&lt;/b&gt;</property>
+                                                        <property name="use_markup">true</property>
+                                                    </object>
+                                                    </child>
+                                                <child>
+                                                    <object class="GtkEntry" id="eventStartEntry"></object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="orientation">vertical</property>
+                                                <child>
+                                                    <object class="GtkLabel">
+                                                        <property name="label">&lt;b&gt;End&lt;/b&gt;</property>
+                                                        <property name="use_markup">true</property>
+                                                    </object>
+                                                    </child>
+                                                <child>
+                                                    <object class="GtkEntry" id="eventEndEntry"></object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                    <object class="GtkLabel">
+                                        <property name="label">&lt;b&gt;Variants&lt;/b&gt;</property>
+                                        <property name="use_markup">true</property>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkFrame">
+                                        <property name="width-request">300</property>
+                                        <property name="height-request">300</property>
+                                        <child>
+                                            <object class="GtkScrolledWindow">
+                                                <child>
+                                                    <object class="GtkTreeView" id="variantView">
+                                                        <property name="model">variantStore</property>
+                                                        <property name="headers-visible">true</property>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkBox">
+                                        <property name="orientation">horizontal</property>
+                                        <child>
+                                            <object class="GtkButton" id="variantAddButton">
+                                                <property name="label">+</property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkButton" id="variantRemoveButton">
+                                                <property name="label">-</property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkEntry" id="variantNameEntry"></object>
+                                        </child>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkBox">
+                                        <property name="orientation">horizontal</property>
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="orientation">vertical</property>
+                                                <child>
+                                                    <object class="GtkLabel">
+                                                        <property name="label">&lt;b&gt;Start&lt;/b&gt;</property>
+                                                        <property name="use_markup">true</property>
+                                                    </object>
+                                                    </child>
+                                                <child>
+                                                    <object class="GtkEntry" id="variantStartEntry"></object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="orientation">vertical</property>
+                                                <child>
+                                                    <object class="GtkLabel">
+                                                        <property name="label">&lt;b&gt;End&lt;/b&gt;</property>
+                                                        <property name="use_markup">true</property>
+                                                    </object>
+                                                    </child>
+                                                <child>
+                                                    <object class="GtkEntry" id="variantEndEntry"></object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+                <child>
+                    <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <child>
+                            <object class="GtkButton" id="cancelBtn">
+                                <property name="label">Cancel</property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkButton" id="okBtn">
+                                <property name="label">OK</property>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+            </object>
+        </child>
+    </object>
+</interface>
