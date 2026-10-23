@@ -20,15 +20,42 @@ class RazerBatteryApplet extends Applet.TextIconApplet {
         this._removed = false;
         this._process = null;
         this._timeout = 0;
+        this._wakeTimer = 0;
+        this._refreshPending = false;
+        this._screenSaverSignal = Gio.DBus.session.signal_subscribe(
+            'org.cinnamon.ScreenSaver', 'org.cinnamon.ScreenSaver', 'ActiveChanged',
+            '/org/cinnamon/ScreenSaver', null, Gio.DBusSignalFlags.NONE,
+            (connection, sender, path, iface, signal, parameters) => {
+                const [active] = parameters.deep_unpack();
+                if (!active) this._onSessionActivated();
+            });
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
         this._render({devices: [], error: _('Reading OpenRazer…')});
-        this._refresh();
+        this._onSessionActivated();
         this._timer = Mainloop.timeout_add_seconds(60, () => {
             this._refresh();
             return GLib.SOURCE_CONTINUE;
         });
+    }
+
+    _onSessionActivated() {
+        if (this._removed) return;
+        this._requestFreshReading();
+        // OpenRazer or the wireless receiver may still be waking up.
+        if (this._wakeTimer) Mainloop.source_remove(this._wakeTimer);
+        this._wakeTimer = Mainloop.timeout_add_seconds(3, () => {
+            this._wakeTimer = 0;
+            this._requestFreshReading();
+            return GLib.SOURCE_REMOVE;
+        });
+    }
+
+    _requestFreshReading() {
+        if (this._removed) return;
+        if (this._process) this._refreshPending = true;
+        else this._refresh();
     }
 
     _refresh() {
@@ -58,6 +85,11 @@ class RazerBatteryApplet extends Applet.TextIconApplet {
                     this._render(data);
                 } catch (error) {
                     if (!this._removed) this._render({devices: [], error: String(error.message)});
+                } finally {
+                    if (this._refreshPending && !this._removed) {
+                        this._refreshPending = false;
+                        this._refresh();
+                    }
                 }
             });
         } catch (error) {
@@ -100,6 +132,11 @@ class RazerBatteryApplet extends Applet.TextIconApplet {
 
     on_applet_removed_from_panel() {
         this._removed = true;
+        Gio.DBus.session.signal_unsubscribe(this._screenSaverSignal);
+        this._screenSaverSignal = 0;
+        this._refreshPending = false;
+        if (this._wakeTimer) Mainloop.source_remove(this._wakeTimer);
+        this._wakeTimer = 0;
         if (this._timer) Mainloop.source_remove(this._timer);
         if (this._timeout) Mainloop.source_remove(this._timeout);
         this._timer = 0;

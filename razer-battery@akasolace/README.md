@@ -16,7 +16,8 @@ applet cannot provide battery readings without an existing OpenRazer setup.
 ## Usage
 
 Add **Razer Battery** through System Settings → Applets. It refreshes every
-60 seconds. Click it to see device names, charging status, and **Refresh now**.
+60 seconds and when the Cinnamon lock screen closes. Login and unlock also
+trigger a retry after three seconds to allow the receiver/daemon to wake. Click it to see device names, charging status, and **Refresh now**.
 
 All battery-capable devices are included automatically, sorted by name and
 serial. The panel shows percentages such as `100% / 55%`. The icon represents
@@ -46,3 +47,7 @@ physical devices have not yet been verified.
 
 The included screenshot is a crop of the running panel applet. The square icon
 is original artwork. MIT licensed; independent of Razer and Linux Mint.
+
+The login/unlock refresh, delayed retry, in-flight query handling, and cleanup
+are covered by automated tests. A physical lock/unlock cycle with this update
+still needs user verification.
