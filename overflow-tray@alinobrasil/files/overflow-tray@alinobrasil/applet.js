@@ -50,29 +50,44 @@ function isStableText(text) {
     return !!text && !text.includes("\n") && !/\b\d+\b/.test(text);
 }
 
-// Returns [id, stable]. Once an icon gets a stable id it keeps it for its lifetime.
-function computeIconId(proxy) {
+// Every key an icon can be remembered by right now, most specific first. An app can
+// report different ones over time (Betterbird is "betterbird" with no new mail, but
+// "2 unread messages" with some), so placement is saved under all of them.
+function computeIconKeys(proxy) {
+    let keys = [];
+
     let name = (proxy.name || "").replace("org.x.StatusIcon.", "").trim();
     if (isStableText(name)) {
-        return [name, true];
+        keys.push(name);
     }
 
     let tooltip = firstLine(proxy.tooltip_text);
     if (isStableText(tooltip)) {
-        return ["tooltip:" + tooltip, true];
+        keys.push("tooltip:" + tooltip);
+    }
+
+    // Icons written to temp locations get a new filename every run.
+    let iconName = (proxy.icon_name || "").trim();
+    if (iconName.startsWith("/") && !/^\/(dev\/shm|tmp|run)\//.test(iconName)) {
+        keys.push("path:" + GLib.path_get_dirname(iconName));
+    }
+
+    return keys;
+}
+
+// Returns [id, stable]. Once an icon gets a stable id it keeps it for its lifetime.
+function computeIconId(proxy) {
+    let keys = computeIconKeys(proxy);
+    if (keys.length > 0) {
+        return [keys[0], true];
     }
 
     let iconName = (proxy.icon_name || "").trim();
-    if (iconName.startsWith("/")) {
-        // Icons written to temp locations get a new filename every run.
-        if (!/^\/(dev\/shm|tmp|run)\//.test(iconName)) {
-            return ["path:" + GLib.path_get_dirname(iconName), true];
-        }
-    } else if (iconName) {
+    if (iconName && !iconName.startsWith("/")) {
         return ["icon:" + iconName, false];
     }
 
-    return ["name:" + name, false];
+    return ["name:" + (proxy.name || "").trim(), false];
 }
 
 
@@ -171,6 +186,7 @@ class XAppStatusIcon {
         this.iconName = null;
         this.inOverflow = false;
         [this.id, this.idStable] = computeIconId(proxy);
+        this.keys = computeIconKeys(proxy);
 
         this.actor = new St.BoxLayout({
             style_class: "applet-box",
@@ -242,17 +258,24 @@ class XAppStatusIcon {
         return;
     }
 
-    // Returns true if the id changed.
+    // Returns true if the id changed or the icon gained a key.
     updateId() {
-        if (this.idStable) {
-            return false;
+        let changed = false;
+
+        for (let key of computeIconKeys(this.proxy)) {
+            if (!this.keys.includes(key)) {
+                this.keys.push(key);
+                changed = true;
+            }
         }
 
-        let [id, stable] = computeIconId(this.proxy);
-        let changed = id !== this.id;
+        if (!this.idStable) {
+            let [id, stable] = computeIconId(this.proxy);
+            changed = changed || id !== this.id;
 
-        this.id = id;
-        this.idStable = stable;
+            this.id = id;
+            this.idStable = stable;
+        }
 
         return changed;
     }
@@ -798,16 +821,22 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
     isPinned(icon) {
         let placement = this.settings.getValue("placement") || {};
 
-        if (icon.id in placement) {
-            return placement[icon.id];
+        for (let key of [icon.id, ...icon.keys]) {
+            if (key in placement) {
+                return placement[key];
+            }
         }
 
         return this.newIconsOnPanel;
     }
 
-    setPinned(id, pinned) {
+    setPinned(icon, pinned) {
         let placement = Object.assign({}, this.settings.getValue("placement") || {});
-        placement[id] = pinned;
+
+        for (let key of [icon.id, ...icon.keys]) {
+            placement[key] = pinned;
+        }
+
         this.settings.setValue("placement", placement);
 
         this.arrangeIcons();
@@ -952,11 +981,10 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
 
             seen[icon.id] = true;
 
-            let id = icon.id;
             let [name, detail] = icon.getLabels();
             let item = new PopupMenu.PopupSwitchMenuItem(name, this.isPinned(icon));
             item.setStatus(detail);
-            item.connect("toggled", (item, state) => this.setPinned(id, state));
+            item.connect("toggled", (item, state) => this.setPinned(icon, state));
             this._placementSection.addMenuItem(item);
 
             count++;
