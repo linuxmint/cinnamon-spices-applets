@@ -1,18 +1,18 @@
-# EasyEffects Preset Selector
+# Easy Effects Preset Selector
 
-Select locally saved **EasyEffects 7.2.3 output presets** from the Cinnamon panel.
+Select locally saved **Easy Effects 7.2.3 output presets** from the Cinnamon panel.
 Publisher: **random.kiapps**. Interface languages: English and German.
-Version: **1.5.5**.
+Version: **1.5.6**.
 
 ## Requirements
 
 - Cinnamon. The applet uses the Cinnamon 6.4 API and has been developed for LMDE 7.
-- The distribution's native EasyEffects **7.2.3** package, with its GSettings schemas and `easyeffects` command.
-- Local output presets saved in EasyEffects.
+- The distribution's native Easy Effects **7.2.3** package, with its GSettings schemas and `easyeffects` command.
+- Local output presets saved in Easy Effects.
 
-This applet is specifically for that EasyEffects version. Flatpak and Libportal
+This applet is specifically for that Easy Effects version. Flatpak and Libportal
 builds use a different autostart mechanism and are not supported. Compatibility
-with EasyEffects 8 or later has not been established.
+with Easy Effects 8 or later has not been established.
 
 ## Manual installation and translations
 
@@ -31,8 +31,11 @@ tooltip. English is the fallback when a translation catalog is not installed.
 
 ## Using the applet
 
-Left-click the EasyEffects icon to select an output preset. The list refreshes
-each time the menu opens. Names remain unchanged. Unassigned presets are sorted
+Left-click the Easy Effects icon to select an output preset. The list is prepared
+in the background and kept current through file changes,
+including while the menu is closed. Opening the menu reuses its complete rows
+without waiting for disk I/O or rebuilding the menu. Names remain unchanged.
+Unassigned presets are sorted
 alphabetically; presets assigned to quick selection follow at the bottom in
 Top, Middle, Bottom order. A separator divides the groups when both contain
 available presets.
@@ -50,7 +53,7 @@ of the icon, at the assigned top, middle or bottom position. Agreement requires
 the loaded preset name and its saved output configuration to match: ordered
 effect instances, stored effect parameters and the output application blocklist.
 Parameters of disabled effects are included; extra disabled or neutral effects
-still prevent agreement. Missing individual values use EasyEffects' defaults.
+still prevent agreement. Missing individual values use Easy Effects' defaults.
 The comparison stops at the first difference.
 
 The dot disappears after a relevant edit and returns after exact restoration.
@@ -91,7 +94,7 @@ is retained while the control is disabled.
 
 A new installation disables title launch and menu bypass control. Upgrades
 preserve existing preferences. Changing these controls does not launch
-EasyEffects or change its bypass state.
+Easy Effects or change its bypass state.
 
 **Toggle bypass with middle click** is independent and on by default. When
 enabled, middle-clicking the panel icon toggles global bypass with menu controls
@@ -117,11 +120,11 @@ without any assignments.
 The base icon updates immediately with the menu closed or during preset loading.
 
 The applet remembers the last global bypass state, including changes made in
-EasyEffects, and restores it when EasyEffects starts at login or is restarted.
+Easy Effects, and restores it when Easy Effects starts at login or is restarted.
 Delayed device discovery is covered by an eight-second startup check. This check
 then ends: later bypass changes remain unrestricted. An applet bypass toggle or
 explicit preset selection ends the check immediately. A Cinnamon reload with the
-same EasyEffects process keeps its live state. Without a saved state, the applet
+same Easy Effects process keeps its live state. Without a saved state, the applet
 adopts the current value. A stopped service is never launched for restoration.
 The saved bypass state does not load a preset or change the blue and white
 preset markers.
@@ -136,7 +139,7 @@ unassigned preset removes its marker; manually restoring it does not bring that
 marker back. Selecting it again in this applet does. With no assignments, the
 menu retains name-based selection without additional effect observation.
 
-EasyEffects 7.2.3 has no separate preset-load completion event. Reloading the same
+Easy Effects 7.2.3 has no separate preset-load completion event. Reloading the same
 unassigned preset externally after editing can leave its menu marker absent:
 unchanged preset-name writes do not emit a cross-process dconf event. Selecting
 it in the applet restores its marker; assigned-preset comparison is unaffected.
@@ -157,10 +160,10 @@ only when relevant. With every panel detail disabled, the panel has no tooltip.
 Loading status belongs to the preset-name detail and also respects the main
 switch. These preferences change only the hints.
 
-## EasyEffects options
+## Easy Effects options
 
 The settings window also provides **Launch Service at System Startup** and
-**Shutdown on Window Closing**, using EasyEffects' existing settings. Neither
+**Shutdown on Window Closing**, using Easy Effects' existing settings. Neither
 option is changed just by adding or starting the applet.
 
 The hints recommend enabling service autostart and disabling shutdown on window
@@ -168,7 +171,7 @@ closing, so the service remains available in the background. The action words
 are bold in the theme's normal text color; the explanations are dimmed.
 
 Autostart uses `$XDG_CONFIG_HOME/autostart/easyeffects-service.desktop`, normally
-`~/.config/autostart/easyeffects-service.desktop`. EasyEffects only refreshes its
+`~/.config/autostart/easyeffects-service.desktop`. Easy Effects only refreshes its
 own autostart switch when its settings window is reopened. Shutdown on window
 closing synchronizes in both directions immediately.
 
@@ -176,26 +179,26 @@ closing synchronizes in both directions immediately.
 
 **Keep bypass when changing output devices** starts **disabled**. Installing,
 adding or starting the applet does not install a route or change device preferences.
-Enabling this option sets up a fixed stereo output for native EasyEffects 7.2.3,
+Enabling this option sets up a fixed stereo output for native Easy Effects 7.2.3,
 based on the route tested with PipeWire 1.4.2 and WirePlumber 0.5.8.
-It prevents output-device changes from making EasyEffects turn global bypass off.
+It prevents output-device changes from making Easy Effects turn global bypass off.
 The current input device is kept fixed as in the tested setup: following default
 input changes could otherwise also reset global bypass, for example when a
 Bluetooth headset connects. The previous input preferences are saved as well.
 
 Switching the option briefly restarts the audio services and a running
-EasyEffects service; playback may be interrupted and the EasyEffects window
-closes. A stopped EasyEffects service remains stopped. The previous bypass state
-is retained. This option does not prevent EasyEffects from clearing bypass for
+Easy Effects service; playback may be interrupted and the Easy Effects window
+closes. A stopped Easy Effects service remains stopped. The previous bypass state
+is retained. This option does not prevent Easy Effects from clearing bypass for
 other reasons, such as changing its effect list or input device.
 
-The virtual **Preset Selector – Fixed output** stays selected in EasyEffects.
+The virtual **Preset Selector – Fixed output** stays selected in Easy Effects.
 **Preset Selector – Forwarding** follows the system's selected output device.
 The forwarding stream uses the same readable name in the application list and
 in the exclusions; the German name is **Preset Selector – Weiterleitung**.
 Its actual saved identity is retained across session and language changes.
-The applet keeps exactly one forwarding entry in EasyEffects' output application
-blocklist, including after preset loads made in EasyEffects itself. Old entries
+The applet keeps exactly one forwarding entry in Easy Effects' output application
+blocklist, including after preset loads made in Easy Effects itself. Old entries
 for `ee_route_playback` are replaced on explicit activation. Manual exclusion is
 not required. The applet's forwarding identities are ignored by preset
 comparison and change observation, including after the route is disabled.
@@ -203,29 +206,29 @@ A preset saved while forwarding was active therefore keeps its blue point and
 menu marker after removal of the technical exclusion. Other application
 exclusions and all effect settings still count. Preset files are not modified.
 
-The switch reflects the current managed configuration and the actual EasyEffects
+The switch reflects the current managed configuration and the actual Easy Effects
 device preferences, rather than only the last successful setup. It is updated
-when those preferences or routing files change and when EasyEffects restarts.
+when those preferences or routing files change and when Easy Effects restarts.
 An unchanged reinstall of the supported native package retains the setup.
-Resetting EasyEffects to automatic device selection, deleting the managed route
+Resetting Easy Effects to automatic device selection, deleting the managed route
 or installing an unsupported version is detected and shown as inactive. Status
 checks do not recreate files, change device preferences or restart audio.
 The forwarding stream remains excluded while an owned route still exists.
 Explicitly enabling the option again repairs a reset setup while retaining the
 original preferences needed for removal.
 
-Disabling restores the earlier EasyEffects output and input preferences unless
+Disabling restores the earlier Easy Effects output and input preferences unless
 a different device was selected in the meantime, removes the managed route,
 and removes the forwarding identities from the blocklist. Unrelated exclusions
 are retained. The exact previously tested manual `90-ee-route.conf` can be
-adopted; its original contents are saved for recovery. If EasyEffects already
+adopted; its original contents are saved for recovery. If Easy Effects already
 used that manual route, disabling returns it to the system's default output.
 Other configurations and externally edited route files are left unchanged,
 and a failed setup attempts to restore the previous state.
 
 Both enabling and disabling retain the bypass state immediately before the
 operation. Restoration waits for device discovery and checks for delayed bypass
-resets during EasyEffects startup. This bounded operation finishes with setup
+resets during Easy Effects startup. This bounded operation finishes with setup
 or removal; it does not continually override later bypass changes.
 
 The configuration lives in
@@ -236,19 +239,19 @@ from the 1.5.1 test version, an active route is read without restarting audio. S
 off and on once to apply its new readable name. Disable this option before
 removing the applet if the route should also be removed.
 Select physical output devices through the desktop's sound controls while it
-is active; choosing another output directly in EasyEffects leaves the fixed
-route and is reflected in the option's status. Device-specific EasyEffects
+is active; choosing another output directly in Easy Effects leaves the fixed
+route and is reflected in the option's status. Device-specific Easy Effects
 preset autoload rules for physical outputs do not apply to the fixed output.
 
 ## Local presets and input protection
 
 The menu reads `$XDG_CONFIG_HOME/easyeffects/output`, normally
-`~/.config/easyeffects/output`. Import community presets into EasyEffects first.
+`~/.config/easyeffects/output`. Import community presets into Easy Effects first.
 Only JSON files directly inside the local output directory appear.
 
-The applet uses EasyEffects' native preset-loading command and checks the active
+The applet uses Easy Effects' native preset-loading command and checks the active
 output preset afterward. When an input preset has the same name, a temporary
-unique output copy prevents the EasyEffects 7.2.3 command from loading the input
+unique output copy prevents the Easy Effects 7.2.3 command from loading the input
 preset instead. The temporary copy is removed afterward. Original presets are
 not rewritten.
 
@@ -261,16 +264,16 @@ separate applet.
 Before switching, use Cinnamon's **Export to a file** in the old applet's settings
 menu. Remove the old applet from the panel, add the new one, and use **Import from
 a file** in its settings menu. After importing older settings, assign the desired
-presets under **Quick selection**. EasyEffects' presets and application settings
+presets under **Quick selection**. Easy Effects' presets and application settings
 are independent of the applet identifier.
 
 ## License and support
 
 GNU General Public License, version 3 or later. See the bundled `LICENSE` and
-`NOTICE.md` for the EasyEffects icon and parameter-map attribution.
+`NOTICE.md` for the Easy Effects icon and parameter-map attribution.
 
 Report problems in the Cinnamon Spices applets repository with a title starting
-with `EasyEffects Preset Selector:`. Include your Cinnamon and EasyEffects
+with `Easy Effects Preset Selector:`. Include your Cinnamon and Easy Effects
 versions, distribution, reproduction steps, and the expected result.
 
-This applet is maintained independently of the EasyEffects project.
+This applet is maintained independently of the Easy Effects project.

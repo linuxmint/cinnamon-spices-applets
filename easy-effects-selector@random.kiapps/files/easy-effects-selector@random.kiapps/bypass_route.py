@@ -127,7 +127,7 @@ class Routing:
             output, input_settings = current["output"], current["input"]
             if output["use-default-output-device"] or output["output-device"] != SINK \
                     or input_settings["use-default-input-device"]:
-                return {**result, "error": _("The EasyEffects device settings no longer match the bypass-preserving route. Enable this option again to restore it.")}
+                return {**result, "error": _("The Easy Effects device settings no longer match the bypass-preserving route. Enable this option again to restore it.")}
             if stream not in output["blocklist"]:
                 return {**result, "missing-exclusion": True,
                         "error": _("The forwarding application could not be excluded.")}
@@ -147,7 +147,7 @@ class Routing:
     def check_version(self):
         version = self.run(["easyeffects", "--version"]).stdout.strip().split()
         if not version or version[-1] != "7.2.3":
-            raise RuntimeError(_("This routing option requires the native EasyEffects 7.2.3 package."))
+            raise RuntimeError(_("This routing option requires the native Easy Effects 7.2.3 package."))
 
     def owns_file(self, state):
         return self.file.is_file() and not self.file.is_symlink() and digest(self.file.read_bytes()) == state.get("sha256")
@@ -187,9 +187,9 @@ class Routing:
                              (INPUT, ("use-default-input-device", "input-device"))):
             for key in keys:
                 if self.run(["gsettings", "writable", schema, key]).stdout.strip() != "true":
-                    raise RuntimeError(_("The EasyEffects device settings are not writable."))
+                    raise RuntimeError(_("The Easy Effects device settings are not writable."))
         if self.run(["gsettings", "writable", SCHEMA, "bypass"]).stdout.strip() != "true":
-            raise RuntimeError(_("The EasyEffects bypass setting is not writable."))
+            raise RuntimeError(_("The Easy Effects bypass setting is not writable."))
         return services
 
     def snapshot(self):
@@ -264,7 +264,7 @@ class Routing:
             elif now - stable_since >= 2:
                 return
             time.sleep(0.1)
-        raise RuntimeError(_("The bypass state did not settle after restarting EasyEffects."))
+        raise RuntimeError(_("The bypass state did not settle after restarting Easy Effects."))
 
     def change(self, enabled):
         state = self.state()
@@ -305,7 +305,7 @@ class Routing:
                     raise RuntimeError(_("An existing routing configuration was left unchanged."))
             for path in self.file.parent.glob("*.conf"):
                 if path != self.file and (SINK in path.read_text() or any(name in path.read_text() for name in reserved)):
-                    raise RuntimeError(_("Another configuration already defines the EasyEffects route."))
+                    raise RuntimeError(_("Another configuration already defines the Easy Effects route."))
             backup = state["previous"] if installed else {"output": dict(output), "input": dict(input_settings)}
             if backup["output"]["output-device"] == SINK:
                 backup["output"]["use-default-output-device"] = True

@@ -1,12 +1,12 @@
-# EasyEffects Preset Selector
+# Easy Effects Preset Selector
 # Copyright (C) 2026 random.kiapps
 # SPDX-License-Identifier: GPL-3.0-or-later
 msgid ""
 msgstr ""
-"Project-Id-Version: easy-effects-selector@random.kiapps 1.5.5\n"
+"Project-Id-Version: easy-effects-selector@random.kiapps 1.5.6\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2026-10-11 18:09+0000\n"
-"PO-Revision-Date: 2026-10-11 18:09+0000\n"
+"POT-Creation-Date: 2026-10-23 12:00+0000\n"
+"PO-Revision-Date: 2026-10-23 12:00+0000\n"
 "Last-Translator: random.kiapps\n"
 "Language-Team: \n"
 "Language: \n"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "An existing routing configuration was left unchanged."
 msgstr ""
 
-msgid "Another configuration already defines the EasyEffects route."
+msgid "Another configuration already defines the Easy Effects route."
 msgstr ""
 
 #, javascript-format
@@ -78,10 +78,10 @@ msgstr ""
 msgid "Easy Effects"
 msgstr ""
 
-msgid "EasyEffects Preset Selector"
+msgid "Easy Effects Preset Selector"
 msgstr ""
 
-msgid "EasyEffects did not load the output preset. Please check the preset file."
+msgid "Easy Effects did not load the output preset. Please check the preset file."
 msgstr ""
 
 msgid "Effect settings changed"
@@ -177,7 +177,7 @@ msgstr ""
 msgid "Quick-selection position"
 msgstr ""
 
-msgid "Quit EasyEffects when its window closes. This setting is synchronized in both directions with the EasyEffects settings window."
+msgid "Quit Easy Effects when its window closes. This setting is synchronized in both directions with the Easy Effects settings window."
 msgstr ""
 
 msgid "Recommended: <b>disable</b> this so the service keeps running when the application window is closed."
@@ -186,7 +186,7 @@ msgstr ""
 msgid "Recommended: <b>enable</b> this so the service is ready in the background when you log in."
 msgstr ""
 
-msgid "Select EasyEffects 7.2.3 output presets from the panel"
+msgid "Select Easy Effects 7.2.3 output presets from the panel"
 msgstr ""
 
 #, python-format
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Shutdown on Window Closing"
 msgstr ""
 
-msgid "Start EasyEffects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
+msgid "Start Easy Effects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
 msgstr ""
 
 msgid "Switch quick-selection presets with mouse wheel"
@@ -212,42 +212,42 @@ msgstr ""
 msgid "The Cinnamon applet settings could not be initialized."
 msgstr ""
 
-msgid "The EasyEffects autostart path is not a regular file."
+msgid "The Easy Effects autostart path is not a regular file."
 msgstr ""
 
-msgid "The EasyEffects bypass setting could not be changed."
+msgid "The Easy Effects bypass setting could not be changed."
 msgstr ""
 
-msgid "The EasyEffects bypass setting is not writable."
+msgid "The Easy Effects bypass setting is not writable."
 msgstr ""
 
-msgid "The EasyEffects command failed."
+msgid "The Easy Effects command failed."
 msgstr ""
 
-msgid "The EasyEffects device settings are not writable."
+msgid "The Easy Effects device settings are not writable."
 msgstr ""
 
-msgid "The EasyEffects device settings no longer match the bypass-preserving route. Enable this option again to restore it."
-msgstr ""
-
-#, javascript-format
-msgid "The EasyEffects effect parameter is missing: %s"
-msgstr ""
-
-msgid "The EasyEffects output settings are not available."
-msgstr ""
-
-msgid "The EasyEffects setting could not be saved."
-msgstr ""
-
-msgid "The EasyEffects setting is not available."
+msgid "The Easy Effects device settings no longer match the bypass-preserving route. Enable this option again to restore it."
 msgstr ""
 
 #, javascript-format
-msgid "The EasyEffects settings schema is missing: %s"
+msgid "The Easy Effects effect parameter is missing: %s"
 msgstr ""
 
-msgid "The EasyEffects settings schema was not found."
+msgid "The Easy Effects output settings are not available."
+msgstr ""
+
+msgid "The Easy Effects setting could not be saved."
+msgstr ""
+
+msgid "The Easy Effects setting is not available."
+msgstr ""
+
+#, javascript-format
+msgid "The Easy Effects settings schema is missing: %s"
+msgstr ""
+
+msgid "The Easy Effects settings schema was not found."
 msgstr ""
 
 #, javascript-format
@@ -269,7 +269,7 @@ msgstr ""
 msgid "The autostart directory could not be created."
 msgstr ""
 
-msgid "The bypass state did not settle after restarting EasyEffects."
+msgid "The bypass state did not settle after restarting Easy Effects."
 msgstr ""
 
 #, javascript-format
@@ -297,7 +297,7 @@ msgstr ""
 msgid "The saved routing information is invalid."
 msgstr ""
 
-msgid "This routing option requires the native EasyEffects 7.2.3 package."
+msgid "This routing option requires the native Easy Effects 7.2.3 package."
 msgstr ""
 
 msgid "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects."
@@ -316,5 +316,8 @@ msgid "Top"
 msgstr ""
 
 #, javascript-format
-msgid "Unknown EasyEffects effect: %s"
+msgid "Unknown Easy Effects effect: %s"
+msgstr ""
+
+msgid "Loading presets…"
 msgstr ""

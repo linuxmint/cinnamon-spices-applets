@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 random.kiapps
-// Cinnamon applet for the native EasyEffects 7.2.3 package.
+// Cinnamon applet for the native Easy Effects 7.2.3 package.
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
@@ -123,7 +123,7 @@ class PresetMenuItem extends PopupMenu.PopupMenuItem {
     }
 
     activate(event, keepMenu = false) {
-        // Decide before loading: EasyEffects may change bypass during the load.
+        // Decide before loading: Easy Effects may change bypass during the load.
         super.activate(event, keepMenu || this._keepMenuOpen());
     }
 }
@@ -163,7 +163,7 @@ class SelectorSettings extends Settings.AppletSettings {
     }
 }
 
-// Read-only access to the same GSettings instances used by EasyEffects 7.2.3.
+// Read-only access to the same GSettings instances used by Easy Effects 7.2.3.
 // preset-map.json contains paths extracted from its original preset serializers.
 class PresetStateReader {
     constructor(map, onChange, routingStream = () => ROUTING_STREAM) {
@@ -195,7 +195,7 @@ class PresetStateReader {
         if (!this.groups.has(id)) {
             const schema = this.source ? this.source.lookup(schemaId, true) : null;
             if (!schema)
-                throw new Error(_("The EasyEffects settings schema is missing: %s").format(schemaId));
+                throw new Error(_("The Easy Effects settings schema is missing: %s").format(schemaId));
             this.groups.set(id, {id, schema, settings: Gio.Settings.new_full(schema, null, path),
                 signal: 0, keys: new Set(), values: new Map()});
         }
@@ -223,7 +223,7 @@ class PresetStateReader {
         }
         for (const key of keys) {
             if (!group.schema.has_key(key))
-                throw new Error(_("The EasyEffects effect parameter is missing: %s").format(key));
+                throw new Error(_("The Easy Effects effect parameter is missing: %s").format(key));
             // Read after connecting: Gio only reports keys primed this way.
             if (!previousKeys.has(key) || !group.values.has(key))
                 group.values.set(key, group.settings.get_value(key).deep_unpack());
@@ -233,7 +233,7 @@ class PresetStateReader {
     _plugin(name) {
         const match = /^(\w+)#(\d+)$/.exec(name);
         if (!match || !Object.prototype.hasOwnProperty.call(this.map.plugins, match[1]))
-            throw new Error(_("Unknown EasyEffects effect: %s").format(name));
+            throw new Error(_("Unknown Easy Effects effect: %s").format(name));
         const definition = this.map.plugins[match[1]];
         return {name, base: match[1], definition, path: definition.path + match[2] + "/"};
     }
@@ -418,6 +418,8 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._quickPresetMiddle = "";
         this._quickPresetBottom = "";
         this._availablePresetNames = null;
+        this._presetListError = null;
+        this._menuSignature = null;
         this._scrollTargetName = null;
         this._scrollSignal = 0;
         this._launchFromMenuTitle = false;
@@ -466,6 +468,9 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._comparisonError = "";
         this._presetMonitor = null;
         this._presetMonitorSignal = 0;
+        this._presetParentMonitor = null;
+        this._presetParentMonitorSignal = 0;
+        this._presetParentMonitorRevision = 0;
         this._temporaryPresetName = null;
         this._requestedPresetName = null;
         this._autostartMonitor = null;
@@ -540,16 +545,18 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             this._appletSettings.bind(ROUTING_OPTION, "_preserveBypass", this._onRoutingChanged);
             this._restoreSelectionTracker();
             this._monitorEasyEffectsService();
-            this._syncQuickOptions();
             this._monitorPresetDirectory();
             this._syncEasyEffectsOptions();
             this._monitorAutostart();
             this._syncRoutingOption();
         } catch (error) {
             global.logError(error, UUID);
-            Main.notify("EasyEffects", error.message);
+            Main.notify("Easy Effects", error.message);
         }
 
+        // Prepare the complete menu before a click, including its initial status.
+        this._renderPresetMenu();
+        this._populateMenu();
         this._updateSelection();
     }
 
@@ -639,7 +646,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 if (this._settings.get_boolean(BYPASS_KEY) !== this._bypassRestoreTarget) {
                     this._bypassRestoreWriting = true;
                     if (!this._settings.set_boolean(BYPASS_KEY, this._bypassRestoreTarget))
-                        throw new Error(_("The EasyEffects bypass setting could not be changed."));
+                        throw new Error(_("The Easy Effects bypass setting could not be changed."));
                 }
                 if (GLib.get_monotonic_time() >= this._bypassRestoreDeadline) {
                     this._bypassRestoreTimeout = 0;
@@ -653,7 +660,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 this._bypassRestoreTimeout = 0;
                 this._bypassRestoreTarget = null;
                 global.logError(error, UUID);
-                Main.notify("EasyEffects", _("Bypass could not be restored: %s").format(error.message));
+                Main.notify("Easy Effects", _("Bypass could not be restored: %s").format(error.message));
                 return GLib.SOURCE_REMOVE;
             } finally {
                 this._bypassRestoreWriting = false;
@@ -719,14 +726,15 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
     }
 
     async _syncQuickOptions(names = null) {
+        if (names === null)
+            return this._populateMenu();
         if (this._removed || !this._appletSettings || !this._appletSettings.isReady)
             return;
         const revision = ++this._quickOptionsRevision;
         try {
-            const available = names || await this._readPresets();
+            const available = names;
             if (this._removed || revision !== this._quickOptionsRevision)
                 return;
-            this._availablePresetNames = available;
             for (let slot = 0; slot < QUICK_PRESET_KEYS.length; slot++) {
                 const current = this[QUICK_PRESET_PROPERTIES[slot]];
                 const options = Object.create(null);
@@ -754,7 +762,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
     }
 
     async _readAutostart() {
-        // Match the native EasyEffects 7.2.3 preferences, including symlinks to files.
+        // Match the native Easy Effects 7.2.3 preferences, including symlinks to files.
         const info = await fileInfo(this._autostartFile, this._fileCancellable);
         return Boolean(info && info.get_file_type() === Gio.FileType.REGULAR);
     }
@@ -766,7 +774,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         const writeRevision = this._autostartRevision;
         try {
             // setValue updates Cinnamon's settings dialog without invoking the
-            // bound change callbacks. EasyEffects remains authoritative at startup.
+            // bound change callbacks. Easy Effects remains authoritative at startup.
             this._appletSettings.setValue(SHUTDOWN_OPTION,
                 this._shutdownAvailable ? this._settings.get_boolean(SHUTDOWN_KEY) : false);
             if (this._autostartWrite)
@@ -797,7 +805,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             if (enabled !== actual) {
                 if (enabled) {
                     if (info)
-                        throw new Error(_("The EasyEffects autostart path is not a regular file."));
+                        throw new Error(_("The Easy Effects autostart path is not a regular file."));
                     try {
                         await makeDirectory(Gio.File.new_for_path(this._autostartDirectory), this._fileCancellable);
                     } catch (error) {
@@ -822,7 +830,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         }).catch(error => {
             if (!this._removed) {
                 global.logError(error, UUID);
-                Main.notify("EasyEffects", _("Autostart could not be changed: %s").format(error.message));
+                Main.notify("Easy Effects", _("Autostart could not be changed: %s").format(error.message));
             }
         });
         this._autostartWrite = operation;
@@ -843,15 +851,15 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             return;
         try {
             if (!this._shutdownAvailable)
-                throw new Error(_("The EasyEffects setting is not available."));
+                throw new Error(_("The Easy Effects setting is not available."));
             if (this._settings.get_boolean(SHUTDOWN_KEY) !== this._shutdownOnClose) {
                 if (!this._settings.set_boolean(SHUTDOWN_KEY, this._shutdownOnClose))
-                    throw new Error(_("The EasyEffects setting could not be saved."));
+                    throw new Error(_("The Easy Effects setting could not be saved."));
                 Gio.Settings.sync();
             }
         } catch (error) {
             global.logError(error, UUID);
-            Main.notify("EasyEffects", error.message);
+            Main.notify("Easy Effects", error.message);
         }
         this._syncEasyEffectsOptions();
     }
@@ -897,7 +905,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             this._setRoutingActive(Boolean(result.enabled), result);
             const error = result["missing-exclusion"] && this._routingActive ? null : result.error;
             if (error && error !== this._routingError)
-                Main.notify("EasyEffects", error);
+                Main.notify("Easy Effects", error);
             this._routingError = error || null;
             if (this._routingStatePresent)
                 await this._monitorRoutingFiles();
@@ -957,7 +965,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 const source = Gio.SettingsSchemaSource.get_default();
                 const schema = source ? source.lookup(SCHEMA_ID + ".streamoutputs", true) : null;
                 if (!schema || !schema.has_key("blocklist"))
-                    throw new Error(_("The EasyEffects output settings are not available."));
+                    throw new Error(_("The Easy Effects output settings are not available."));
                 this._routingOutputSettings = Gio.Settings.new_full(schema, null, null);
                 this._routingOutputSignal = this._routingOutputSettings.connect(
                     "changed::blocklist", () => {
@@ -967,7 +975,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 );
                 const inputSchema = source.lookup(SCHEMA_ID + ".streaminputs", true);
                 if (!inputSchema)
-                    throw new Error(_("The EasyEffects settings schema is missing: %s").format(SCHEMA_ID + ".streaminputs"));
+                    throw new Error(_("The Easy Effects settings schema is missing: %s").format(SCHEMA_ID + ".streaminputs"));
                 this._routingInputSettings = Gio.Settings.new_full(inputSchema, null, null);
                 for (const [settings, keys] of [
                     [this._routingOutputSettings, ["use-default-output-device", "output-device"]],
@@ -1008,7 +1016,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             return true;
         } catch (error) {
             global.logError(error, UUID);
-            Main.notify("EasyEffects", error.message);
+            Main.notify("Easy Effects", error.message);
             return false;
         }
     }
@@ -1081,13 +1089,13 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 this._setRoutingActive(Boolean(result.enabled), result);
                 this._routingError = result.error || null;
                 if (result.error)
-                    Main.notify("EasyEffects", _("Bypass preservation could not be changed.\n%s").format(result.error));
+                    Main.notify("Easy Effects", _("Bypass preservation could not be changed.\n%s").format(result.error));
             }
         }).catch(error => {
             if (!this._removed && revision === this._routingRevision) {
                 global.logError(error, UUID);
                 this._appletSettings.setValue(ROUTING_OPTION, this._routingActive);
-                Main.notify("EasyEffects", _("Bypass preservation could not be changed.\n%s").format(error.message));
+                Main.notify("Easy Effects", _("Bypass preservation could not be changed.\n%s").format(error.message));
             }
         });
         this._routingWrite = operation;
@@ -1124,7 +1132,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             return;
         const revision = ++this._autostartMonitorRevision;
         try {
-            // Watch the parent until EasyEffects (or the user) creates autostart.
+            // Watch the parent until Easy Effects (or the user) creates autostart.
             const directory = Gio.File.new_for_path(this._autostartDirectory);
             const info = await fileInfo(directory, this._fileCancellable);
             if (this._removed || revision !== this._autostartMonitorRevision)
@@ -1150,37 +1158,110 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
     }
 
     _monitorPresetDirectory() {
-        if (this._presetMonitor || !this._appletSettings || !this._appletSettings.isReady)
+        if (this._removed || this._presetMonitor)
             return;
         try {
             const directory = Gio.File.new_for_path(this._outputDirectory);
             this._presetMonitor = directory.monitor_directory(Gio.FileMonitorFlags.NONE, null);
             this._presetMonitorSignal = this._presetMonitor.connect("changed", (monitor, file, otherFile) => {
-                if (this._removed)
-                    return;
-                let affectsSelection = false;
-                for (const entry of this._quickEntries()) {
-                    const presetPath = GLib.build_filenamev([this._outputDirectory, entry.name + ".json"]);
-                    if (!file || file.get_path() === presetPath ||
-                        (otherFile && otherFile.get_path() === presetPath)) {
-                        this._invalidateQuickReference(entry.name);
-                        affectsSelection = true;
-                        if (entry.name === this._currentPresetName()) {
-                            this._matchedQuickSlot = -1;
-                            this._syncQuickState();
-                        }
-                    }
-                }
-                if (affectsSelection)
-                    this._queueStateUpdate();
-                this._syncQuickOptions();
-                if (this.menu.isOpen)
-                    this._populateMenu();
+                this._onPresetFilesChanged(file, otherFile);
             });
         } catch (error) {
             if (!ioError(error, Gio.IOErrorEnum.NOT_FOUND))
                 global.logError(error, UUID);
         }
+        this._monitorPresetParentDirectory();
+    }
+
+    async _monitorPresetParentDirectory() {
+        if (this._removed || this._presetParentMonitor)
+            return;
+        const revision = ++this._presetParentMonitorRevision;
+        try {
+            // GIO can return a silent monitor for a path with missing parents.
+            // Watch the nearest existing parent too, then reattach after changes.
+            let child = Gio.File.new_for_path(this._outputDirectory);
+            let parent = child.get_parent();
+            while (parent) {
+                const info = await fileInfo(parent, this._fileCancellable);
+                if (info && info.get_file_type() === Gio.FileType.DIRECTORY)
+                    break;
+                child = parent;
+                parent = parent.get_parent();
+            }
+            if (this._removed || revision !== this._presetParentMonitorRevision || !parent)
+                return;
+            const childPath = child.get_path();
+            const parentPath = parent.get_path();
+            this._presetParentMonitor = parent.monitor_directory(Gio.FileMonitorFlags.NONE, null);
+            this._presetParentMonitorSignal = this._presetParentMonitor.connect("changed", (monitor, file, otherFile) => {
+                const relevant = target => target &&
+                    [childPath, parentPath].includes(target.get_path());
+                if (this._removed || (file && !relevant(file) && !relevant(otherFile)))
+                    return;
+                this._clearPresetMonitors();
+                this._monitorPresetDirectory();
+                this._onPresetFilesChanged(null, null);
+            });
+            // The target may have appeared while the parent was being located.
+            // Reattach with the parent observer already in place, then rescan.
+            if (this._presetMonitor) {
+                this._presetMonitor.disconnect(this._presetMonitorSignal);
+                this._presetMonitor.cancel();
+                this._presetMonitor = null;
+                this._presetMonitorSignal = 0;
+            }
+            this._monitorPresetDirectory();
+            this._populateMenu();
+            const parentInfo = await fileInfo(parent, this._fileCancellable);
+            const childInfo = parentPath !== Gio.File.new_for_path(this._outputDirectory).get_parent().get_path()
+                ? await fileInfo(child, this._fileCancellable) : null;
+            if (!this._removed && revision === this._presetParentMonitorRevision &&
+                ((!parentInfo || parentInfo.get_file_type() !== Gio.FileType.DIRECTORY) ||
+                (childInfo && childInfo.get_file_type() === Gio.FileType.DIRECTORY))) {
+                this._clearPresetMonitors();
+                this._monitorPresetDirectory();
+            }
+        } catch (error) {
+            if (!this._removed)
+                global.logError(error, UUID);
+        }
+    }
+
+    _clearPresetMonitors() {
+        this._presetParentMonitorRevision++;
+        for (const [monitor, signal] of [[this._presetMonitor, this._presetMonitorSignal],
+            [this._presetParentMonitor, this._presetParentMonitorSignal]]) {
+            if (monitor) {
+                monitor.disconnect(signal);
+                monitor.cancel();
+            }
+        }
+        this._presetMonitor = null;
+        this._presetMonitorSignal = 0;
+        this._presetParentMonitor = null;
+        this._presetParentMonitorSignal = 0;
+    }
+
+    _onPresetFilesChanged(file, otherFile) {
+        if (this._removed)
+            return;
+        let affectsSelection = false;
+        for (const entry of this._quickEntries()) {
+            const presetPath = GLib.build_filenamev([this._outputDirectory, entry.name + ".json"]);
+            if (!file || file.get_path() === presetPath ||
+                (otherFile && otherFile.get_path() === presetPath)) {
+                this._invalidateQuickReference(entry.name);
+                affectsSelection = true;
+                if (entry.name === this._currentPresetName()) {
+                    this._matchedQuickSlot = -1;
+                    this._syncQuickState();
+                }
+            }
+        }
+        if (affectsSelection)
+            this._queueStateUpdate();
+        this._populateMenu();
     }
 
     _onQuickPresetsChanged() {
@@ -1199,16 +1280,14 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             }
         }
         this._syncQuickState();
-        this._syncQuickOptions();
-        if (this.menu.isOpen)
-            this._populateMenu();
-        else
-            this._updateSelection();
+        this._syncQuickOptions(this._availablePresetNames || []);
+        this._renderPresetMenu();
+        this._updateSelection();
     }
 
     _onMenuTitleModeChanged() {
-        if (!this._removed && this.menu.isOpen)
-            this._populateMenu();
+        if (!this._removed)
+            this._renderPresetMenu();
     }
 
     _addBypassButton() {
@@ -1297,11 +1376,11 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             const enabled = this._settings.get_boolean(BYPASS_KEY);
             this._stopBypassRestore();
             if (!this._settings.set_boolean(BYPASS_KEY, !enabled))
-                throw new Error(_("The EasyEffects bypass setting could not be changed."));
+                throw new Error(_("The Easy Effects bypass setting could not be changed."));
             this._saveBypassState(!enabled);
         } catch (error) {
             global.logError(error, UUID);
-            Main.notify("EasyEffects", _("Bypass could not be changed: %s").format(error.message));
+            Main.notify("Easy Effects", _("Bypass could not be changed: %s").format(error.message));
         } finally {
             // Restore the real state if a write failed, rather than retaining the click's toggle.
             this._syncBypassButton();
@@ -1319,8 +1398,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
 
     // Cinnamon's base class consumes the button event and invokes this hook.
     on_applet_clicked() {
-        if (!this.menu.isOpen)
-            this._populateMenu();
+        // File monitoring keeps this ready even while the menu is closed.
         this.menu.toggle();
     }
 
@@ -1405,13 +1483,48 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         if (this._removed)
             return;
         const revision = ++this._menuRevision;
+        let names = null;
+        let readError = null;
+        try {
+            names = await this._readPresets();
+        } catch (error) {
+            readError = error;
+        }
+        if (this._removed || revision !== this._menuRevision)
+            return;
+        this._presetListError = readError;
+        if (readError) {
+            global.logError(readError, UUID);
+        } else {
+            this._availablePresetNames = names;
+            this._syncQuickOptions(names);
+        }
+        this._monitorPresetDirectory();
+        this._renderPresetMenu();
+    }
+
+    _renderPresetMenu() {
+        if (this._removed)
+            return;
+        const names = this._availablePresetNames;
+        const status = this._presetListError ? "error" : names === null ? "loading" : "ready";
+        const quickNames = (names ? this._quickEntries() : [])
+            .map(entry => entry.name).filter(name => names.includes(name));
+        const otherNames = names ? names.filter(name => !quickNames.includes(name)) : [];
+        const ordered = otherNames.concat(quickNames);
+        const launchFromTitle = this._launchFromMenuTitle === true;
+        const signature = JSON.stringify([status, ordered, quickNames.length,
+            launchFromTitle, this._allowBypassControl === true]);
+        // A saved parameter or reopening the menu does not recreate any actors.
+        if (signature === this._menuSignature)
+            return;
+        this._menuSignature = signature;
         this._bypassButton = null;
         this._bypassTooltip = null;
         this._menuTitleItem = null;
         this._bypassSlot = null;
         this.menu.removeAll();
         this._presetItems = [];
-        const launchFromTitle = this._launchFromMenuTitle === true;
         // A header needs only a label and a status column, with no preset ornament.
         const titleItem = new PopupMenu.PopupBaseMenuItem({reactive: launchFromTitle});
         titleItem.label = new St.Label({text: "Easy Effects"});
@@ -1424,38 +1537,24 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         this._menuTitleItem = titleItem;
         this._syncBypassButton();
         this.menu.addMenuItem(titleItem);
-        try {
-            const names = await this._readPresets();
-            if (this._removed || revision !== this._menuRevision)
-                return;
-            this._syncQuickOptions(names);
-            this._monitorPresetDirectory();
-            const quickNames = this._quickEntries().map(entry => entry.name).filter(name => names.includes(name));
-            const otherNames = names.filter(name => !quickNames.includes(name));
-            const ordered = otherNames.concat(quickNames);
-            if (names.length === 0) {
-                this.menu.addMenuItem(new PopupMenu.PopupMenuItem(
-                    _("No output presets saved"), {reactive: false}
-                ));
-            }
+        // No asynchronous operation may split this title and its content.
+        if (status !== "ready" || names.length === 0) {
+            const text = status === "error" ? _("Presets could not be read") :
+                status === "loading" ? _("Loading presets…") : _("No output presets saved");
+            this.menu.addMenuItem(new PopupMenu.PopupMenuItem(text, {reactive: false}));
+        } else {
             ordered.forEach((name, index) => {
                 if (otherNames.length && quickNames.length && index === otherNames.length)
                     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
                 const item = new PresetMenuItem(name, () => this._shouldKeepPresetMenuOpen());
                 item.setSensitive(!this._loading);
+                item.setShowDot(!this._loading && name === this._markerName);
                 item.connect("activate", (item, event) => this._loadPreset(name, event));
                 this._presetItems.push({name, item});
                 this.menu.addMenuItem(item);
             });
-        } catch (error) {
-            if (this._removed || revision !== this._menuRevision)
-                return;
-            global.logError(error, UUID);
-            this.menu.addMenuItem(new PopupMenu.PopupMenuItem(
-                _("Presets could not be read"), {reactive: false}
-            ));
         }
-        // Insert after the async content exists: Cinnamon hides trailing separators.
+        // Insert after the content exists: Cinnamon hides trailing separators.
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem(), 1);
         this._updateSelection();
     }
@@ -1492,7 +1591,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
         }
         this._matchedQuickSlot = -1;
         this._syncQuickState();
-        // EasyEffects writes this key before applying the pipeline and its values.
+        // Easy Effects writes this key before applying the pipeline and its values.
         // Treat the following coalesced changes as loading, not manual editing.
         this._selectionDirty = false;
         this._saveSelectionTracker();
@@ -1732,7 +1831,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 try {
                     const [ok, stdout, stderr] = proc.communicate_utf8_finish(result);
                     if (!ok || !proc.get_successful())
-                        throw new Error(stderr || _("The EasyEffects command failed."));
+                        throw new Error(stderr || _("The Easy Effects command failed."));
                     output = stdout || "";
                 } catch (error) {
                     callback(error, "");
@@ -1820,7 +1919,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 this._updateSelection();
                 if (error) {
                     global.logError(error, UUID);
-                    Main.notify("EasyEffects", _("Preset “%s” could not be loaded.\n%s").format(name, error.message));
+                    Main.notify("Easy Effects", _("Preset “%s” could not be loaded.\n%s").format(name, error.message));
                 }
                 this._loadNextScrolledPreset(error ? null : name);
             }
@@ -1840,7 +1939,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             // an identically named microphone preset cannot intercept the request.
             if (await fileInfo(inputFile, this._fileCancellable)) {
                 if (!this._settings)
-                    throw new Error(_("The EasyEffects settings schema was not found."));
+                    throw new Error(_("The Easy Effects settings schema was not found."));
                 commandName = "__ee_panel_" + GLib.uuid_string_random();
                 const aliasFile = Gio.File.new_for_path(GLib.build_filenamev([
                     this._outputDirectory, commandName + ".json"
@@ -1869,7 +1968,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             // process to verify output selection without relying on cached settings.
             const output = await run(["easyeffects", "--active-preset=output"]);
             if (output.replace(/\r?\n$/, "") !== commandName)
-                throw new Error(_("EasyEffects did not load the output preset. Please check the preset file."));
+                throw new Error(_("Easy Effects did not load the output preset. Please check the preset file."));
             if (temporaryFile) {
                 if (!this._settings.set_string(OUTPUT_PRESET_KEY, name))
                     throw new Error(_("The original preset name could not be restored."));
@@ -1932,12 +2031,7 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
             this._bypassSettingsSignal = 0;
         }
         this._clearAutostartMonitor();
-        if (this._presetMonitor) {
-            if (this._presetMonitorSignal)
-                this._presetMonitor.disconnect(this._presetMonitorSignal);
-            this._presetMonitor.cancel();
-            this._presetMonitor = null;
-        }
+        this._clearPresetMonitors();
         if (this._appletSettings && this._appletSettings.isReady)
             this._appletSettings.finalize();
         this._bypassButton = null;

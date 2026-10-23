@@ -148,7 +148,7 @@
         "type": "switch",
         "default": false,
         "description": "Launch Service at System Startup",
-        "tooltip": "Start EasyEffects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
+        "tooltip": "Start Easy Effects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
     },
     "ee-autostart-note": {
         "type": "custom",
@@ -161,7 +161,7 @@
         "type": "switch",
         "default": false,
         "description": "Shutdown on Window Closing",
-        "tooltip": "Quit EasyEffects when its window closes. This setting is synchronized in both directions with the EasyEffects settings window."
+        "tooltip": "Quit Easy Effects when its window closes. This setting is synchronized in both directions with the Easy Effects settings window."
     },
     "ee-shutdown-on-window-close-note": {
         "type": "custom",
