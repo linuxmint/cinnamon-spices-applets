@@ -2,9 +2,9 @@
 const fs = require('fs');
 const vm = require('vm');
 const assert = require('assert/strict');
-let callback, timeoutCallback, processCount = 0, exited = 0;
+let callback, processCount = 0, exited = 0;
 const removed = [];
-let localeDir, sessionSignal, subscription, unsubscribed;
+let localeDir, sessionSignal, signalName, disconnected, disposed = false, proxyCreated = 0;
 let nextTimer = 1;
 const timers = new Map();
 function fireTimer(seconds) {
@@ -14,7 +14,7 @@ function fireTimer(seconds) {
     if (!timer.cb()) timers.delete(id);
 }
 function screenSaver(active) {
-    sessionSignal(null, null, null, null, null, {deep_unpack: () => [active]});
+    sessionSignal(screenSaverProxy, null, [active]);
 }
 class Base {
     setAllowedLayout() {}
@@ -40,23 +40,25 @@ const process = {
     get_successful() { return true; },
     force_exit() { exited++; }
 };
+const screenSaverProxy = {
+    connectSignal(name, handler) { signalName = name; sessionSignal = handler; return 42; },
+    disconnectSignal(id) { disconnected = id; },
+    run_dispose() { disposed = true; }
+};
 const context = {imports: {
+    misc: {screenSaver: {ScreenSaverProxy() { proxyCreated++; return screenSaverProxy; }}},
     gettext: {bindtextdomain(uuid, directory) { localeDir = directory; }, dgettext(uuid, text) {return text;}},
     ui: {applet: {TextIconApplet:Base, AllowedLayout:{BOTH:0}, AppletPopupMenu:Menu},
         popupMenu: {PopupMenuManager:class {addMenu() {}}, PopupMenuItem:Item, PopupSeparatorMenuItem:Item}},
     mainloop: {
         timeout_add_seconds(seconds, cb) {
-            if (seconds === 15) timeoutCallback = cb;
             const id = nextTimer++;
             timers.set(id, {seconds, cb});
             return id;
         },
         source_remove(id) { removed.push(id); timers.delete(id); }
     },
-    gi: {GLib:{build_filenamev:parts=>parts.join('/'), get_user_data_dir:()=>'/custom/data', SOURCE_REMOVE:false, SOURCE_CONTINUE:true}, Gio:{DBusSignalFlags:{NONE:0}, DBus:{session:{
-        signal_subscribe(...args) { subscription = args.slice(0, 4); sessionSignal = args[6]; return 42; },
-        signal_unsubscribe(id) { unsubscribed = id; }
-    }}, SubprocessFlags:{STDOUT_PIPE:1, STDERR_PIPE:2},
+    gi: {GLib:{build_filenamev:parts=>parts.join('/'), get_user_data_dir:()=>'/custom/data', SOURCE_REMOVE:false, SOURCE_CONTINUE:true}, Gio:{SubprocessFlags:{STDOUT_PIPE:1, STDERR_PIPE:2},
         Subprocess:{new() {processCount++; return process;}}}}
 }};
 vm.createContext(context);
@@ -71,8 +73,8 @@ applet._refresh();
 assert.equal(processCount, 1, 'overlapping queries must be suppressed');
 callback(process, {});
 assert.equal(applet.label, '100%');
-assert.deepEqual(subscription, ['org.cinnamon.ScreenSaver', 'org.cinnamon.ScreenSaver',
-    'ActiveChanged', '/org/cinnamon/ScreenSaver']);
+assert.equal(proxyCreated, 1, 'use the Cinnamon screensaver proxy');
+assert.equal(signalName, 'ActiveChanged');
 fireTimer(3);
 assert.equal(processCount, 2, 'login must retry after hardware settles');
 callback(process, {});
@@ -103,7 +105,8 @@ applet.on_applet_removed_from_panel();
 callback(process, {});
 assert.equal(applet.label, '—', 'late callbacks must not update removed applet');
 assert.equal(timers.size, 0, 'all timers must be removed');
-assert.equal(unsubscribed, 42, 'screensaver subscription must be removed');
+assert.equal(disconnected, 42, 'screensaver signal must be disconnected');
+assert.ok(disposed, 'proxy must be disposed to release its internal handlers');
 const countAfterRemoval = processCount;
 screenSaver(false);
 assert.equal(processCount, countAfterRemoval, 'late unlock must not query after removal');

@@ -2,6 +2,7 @@
 const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
+const ScreenSaver = imports.misc.screenSaver;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
@@ -22,11 +23,9 @@ class RazerBatteryApplet extends Applet.TextIconApplet {
         this._timeout = 0;
         this._wakeTimer = 0;
         this._refreshPending = false;
-        this._screenSaverSignal = Gio.DBus.session.signal_subscribe(
-            'org.cinnamon.ScreenSaver', 'org.cinnamon.ScreenSaver', 'ActiveChanged',
-            '/org/cinnamon/ScreenSaver', null, Gio.DBusSignalFlags.NONE,
-            (connection, sender, path, iface, signal, parameters) => {
-                const [active] = parameters.deep_unpack();
+        this._screenSaverProxy = ScreenSaver.ScreenSaverProxy();
+        this._screenSaverSignal = this._screenSaverProxy.connectSignal(
+            'ActiveChanged', (proxy, sender, [active]) => {
                 if (!active) this._onSessionActivated();
             });
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -132,7 +131,9 @@ class RazerBatteryApplet extends Applet.TextIconApplet {
 
     on_applet_removed_from_panel() {
         this._removed = true;
-        Gio.DBus.session.signal_unsubscribe(this._screenSaverSignal);
+        this._screenSaverProxy.disconnectSignal(this._screenSaverSignal);
+        this._screenSaverProxy.run_dispose();
+        this._screenSaverProxy = null;
         this._screenSaverSignal = 0;
         this._refreshPending = false;
         if (this._wakeTimer) Mainloop.source_remove(this._wakeTimer);
