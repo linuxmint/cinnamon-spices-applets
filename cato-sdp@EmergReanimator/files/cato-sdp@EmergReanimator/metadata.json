@@ -1,0 +1,9 @@
+{
+  "uuid": "cato-sdp@EmergReanimator",
+  "max-instances": "1",
+  "name": "Cato SDP",
+  "version": "1.3.0",
+  "hide-configuration": false,
+  "description": "Cato SDP shows the connection status of the Cato SDP (Software Defined Perimeter) client in the panel, and lets you connect or disconnect it from a popup menu.",
+  "author": "EmergReanimator"
+}
