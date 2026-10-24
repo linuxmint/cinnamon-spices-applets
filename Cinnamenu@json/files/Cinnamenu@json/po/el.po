@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-11-30 00:16-0500\n"
-"PO-Revision-Date: 2022-05-31 17:58+0100\n"
-"Last-Translator: Google translate\n"
+"PO-Revision-Date: 2026-10-24 19:45+0300\n"
+"Last-Translator: Thanos D (alfa3delta)\n"
 "Language-Team: \n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 5.8/applet.js:59 4.0/applet.js:60 3.2/applet.js:157
 msgid "Initializing"
@@ -37,7 +37,7 @@ msgstr "Εφαρμογές"
 
 #. 5.8/applet.js:914 4.0/applet.js:888
 msgid "Documents"
-msgstr "Εγγραφα"
+msgstr "Έγγραφα"
 
 #. 5.8/applet.js:918 4.0/applet.js:892
 msgid "Videos"
@@ -45,11 +45,11 @@ msgstr "Βίντεο"
 
 #. 5.8/applet.js:922 4.0/applet.js:896
 msgid "Images"
-msgstr "εικόνες"
+msgstr "Εικόνες"
 
 #. 5.8/applet.js:926 4.0/applet.js:900
 msgid "Music"
-msgstr "ΜΟΥΣΙΚΗ"
+msgstr "Μουσική"
 
 #. 5.8/applet.js:935 4.0/applet.js:909
 msgid "No recent Items"
@@ -57,11 +57,11 @@ msgstr "Δεν υπάρχουν πρόσφατα στοιχεία"
 
 #. 5.8/applet.js:982 4.0/applet.js:956
 msgid "Settings"
-msgstr ""
+msgstr "Ρυθμίσεις"
 
 #. 5.8/applet.js:1128
 msgid "files"
-msgstr ""
+msgstr "αρχεία"
 
 #. 5.8/applet.js:1131 4.0/applet.js:1097
 msgid "Other search results"
@@ -87,16 +87,16 @@ msgstr "Κάντε κλικ για αντιγραφή"
 
 #. 5.8/applet.js:1636 4.0/applet.js:1600 3.2/applet.js:1416
 msgid "Clear List"
-msgstr "Σαφή κατάλογο"
+msgstr "Εκκαθάριση καταλόγου"
 
 #. 5.8/applet.js:1670 5.8/applet.js:1671 4.0/applet.js:1634 4.0/applet.js:1635
 msgid "Trash"
-msgstr "Σκουπίδια"
+msgstr "Κάδος απορριμάτων"
 
 #. 5.8/applet.js:1680 5.8/applet.js:1681 4.0/applet.js:1644 4.0/applet.js:1645
 #. 3.2/placeDisplay.js:220
 msgid "Computer"
-msgstr "Υπολογιστή"
+msgstr "Υπολογιστής"
 
 #. 5.8/appsview.js:295 5.8/sidebar.js:111 4.0/appsview.js:295
 #. 4.0/sidebar.js:111
@@ -122,13 +122,13 @@ msgstr "Αγαπημένα"
 #. 4.0->settings-schema.json->open-on-category->options
 #. 5.8/categoriesview.js:303 4.0/categoriesview.js:302 3.2/applet.js:1016
 msgid "Places"
-msgstr "Μέρη"
+msgstr "Τοποθεσίες"
 
 #. 5.8->settings-schema.json->open-on-category->options
 #. 4.0->settings-schema.json->open-on-category->options
 #. 5.8/categoriesview.js:304 4.0/categoriesview.js:303
 msgid "Recent"
-msgstr "Πρόσφατος"
+msgstr "Πρόσφατα"
 
 #. 5.8->settings-schema.json->open-on-category->options
 #. 4.0->settings-schema.json->open-on-category->options
@@ -138,28 +138,27 @@ msgstr "Αγαπημένες εφαρμογές"
 
 #. 5.8/contextmenu.js:111 4.0/contextmenu.js:111
 msgid "light skin tone"
-msgstr "ανοιχτόχρωμο δέρμα"
+msgstr "ανοιχτόχρωμου τόνου εμφάνιση"
 
 #. 5.8/contextmenu.js:112 4.0/contextmenu.js:112
 msgid "medium-light skin tone"
-msgstr "μεσαίου ανοιχτού τόνου δέρματος"
+msgstr "μεσαίου-ανοιχτού τόνου εμφάνιση"
 
 #. 5.8/contextmenu.js:113 4.0/contextmenu.js:113
 msgid "medium skin tone"
-msgstr "μεσαίου τόνου δέρματος"
+msgstr "μεσαίου τόνου εμφάνιση"
 
 #. 5.8/contextmenu.js:114 4.0/contextmenu.js:114
 msgid "medium-dark skin tone"
-msgstr "μεσαίου-σκούρου τόνου δέρματος"
+msgstr "μεσαίου-σκούρου τόνου εμφάνιση"
 
 #. 5.8/contextmenu.js:115 4.0/contextmenu.js:115
 msgid "dark skin tone"
-msgstr "σκούρο τόνο δέρματος"
+msgstr "σκουρόχρωμου τόνου εμφάνιση"
 
 #. 5.8/contextmenu.js:134 4.0/contextmenu.js:134
-#, fuzzy
 msgid "Remove category"
-msgstr "Επαναφορά σειράς κατηγορίας"
+msgstr "Αφαίρεση κατηγορίας"
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 5.8/contextmenu.js:147 4.0/contextmenu.js:147
@@ -168,16 +167,15 @@ msgstr "Επαναφορά σειράς κατηγορίας"
 
 #. 5.8/contextmenu.js:167 4.0/contextmenu.js:167
 msgid "List settings apps separately"
-msgstr ""
+msgstr "Διαχωρισμένη κατηγοριοποίηση ρυθμίσεων εφαρμογών"
 
 #. 5.8/contextmenu.js:174 4.0/contextmenu.js:174
 msgid "Single list style"
-msgstr ""
+msgstr "Εμφάνιση μονού καταλόγου"
 
 #. 5.8/contextmenu.js:183 4.0/contextmenu.js:183
-#, fuzzy
 msgid "Hide hidden files"
-msgstr "Εμφάνιση κρυφών αρχείων"
+msgstr "Απόκρυψη κρυφών αρχείων"
 
 #. 5.8->settings-schema.json->show-hidden-files->description
 #. 4.0->settings-schema.json->show-hidden-files->description
@@ -188,7 +186,7 @@ msgstr "Εμφάνιση κρυφών αρχείων"
 #. 5.8/contextmenu.js:246 4.0/contextmenu.js:246 4.0/contextmenu.js:254
 #. 3.2/buttons.js:1045 3.2/buttons.js:1047
 msgid "Run with NVIDIA GPU"
-msgstr "Εκτέλεση με GPU NVIDIA"
+msgstr "Εκτέλεση με κάρτα γραφικών NVIDIA"
 
 #. 5.8/contextmenu.js:256 4.0/contextmenu.js:260 3.2/buttons.js:1049
 msgid "Add to panel"
@@ -214,7 +212,7 @@ msgstr "Απεγκατάσταση"
 
 #. 5.8/contextmenu.js:308 4.0/contextmenu.js:312
 msgid "App Info"
-msgstr ""
+msgstr "Πληροφορίες εφαρμογής"
 
 #. 5.8/contextmenu.js:324 4.0/contextmenu.js:328
 msgid "This file is no longer available"
@@ -222,21 +220,20 @@ msgstr "Αυτό το αρχείο δεν είναι πλέον διαθέσιμ
 
 #. 5.8/contextmenu.js:332 4.0/contextmenu.js:336
 msgid "Open with"
-msgstr "Ανοιγμα με"
+msgstr "Άνοιγμα με"
 
 #. 5.8/contextmenu.js:347 4.0/contextmenu.js:351
 msgid "Other application..."
 msgstr "Άλλη εφαρμογή..."
 
 #. 5.8/contextmenu.js:384 4.0/contextmenu.js:390
-#, fuzzy
 msgid "Add folder as category"
-msgstr "Εμφάνιση κατηγορίας αγαπημένων εφαρμογών"
+msgstr "Προσθήκη φακέλου ως κατηγορία"
 
 #. 5.8/contextmenu.js:400 4.0/contextmenu.js:406 5.8/search.py:48
 #. 4.0/search.py:48
 msgid "Open containing folder"
-msgstr "Άνοιγμα φακέλου που περιέχει"
+msgstr "Άνοιγμα περιέχοντος φακέλου"
 
 #. 5.8/contextmenu.js:415 5.8/contextmenu.js:427 4.0/contextmenu.js:421
 #. 4.0/contextmenu.js:433
@@ -249,39 +246,39 @@ msgstr "Σφάλμα κατά τη μεταφορά του αρχείου στο
 
 #. 5.8/emoji.js:8 4.0/emoji.js:7739
 msgid "Smileys & Emotion"
-msgstr ""
+msgstr "Smileys & Emotion"
 
 #. 5.8/emoji.js:685 4.0/emoji.js:7740
 msgid "People & Body"
-msgstr ""
+msgstr "Άνθρωποι & Σώμα"
 
 #. 5.8/emoji.js:2245 4.0/emoji.js:7741
 msgid "Animals & Nature"
-msgstr ""
+msgstr "Ζώα & Φύση"
 
 #. 5.8/emoji.js:2861 4.0/emoji.js:7742
 msgid "Food & Drink"
-msgstr ""
+msgstr "Τροφές & Ποτά"
 
 #. 5.8/emoji.js:3405 4.0/emoji.js:7743
 msgid "Travel & Places"
-msgstr ""
+msgstr "Ταξίδια & Τοποθεσίες"
 
 #. 5.8/emoji.js:4281 4.0/emoji.js:7744
 msgid "Activities"
-msgstr ""
+msgstr "Δραστηριότητες"
 
 #. 5.8/emoji.js:4625 4.0/emoji.js:7745
 msgid "Objects"
-msgstr ""
+msgstr "Αντικείμενα"
 
 #. 5.8/emoji.js:5677 4.0/emoji.js:7746
 msgid "Symbols"
-msgstr ""
+msgstr "Σύμβολα"
 
 #. 5.8/emoji.js:6573 4.0/emoji.js:7747
 msgid "Flags"
-msgstr ""
+msgstr "Σημαίες"
 
 #. 5.8/sidebar.js:252 4.0/sidebar.js:251 3.2/applet.js:2323
 msgid "Quit"
@@ -297,7 +294,7 @@ msgstr "Αποσύνδεση"
 
 #. 5.8/sidebar.js:262 4.0/sidebar.js:261 3.2/applet.js:2316
 msgid "Leave the session"
-msgstr "Αφήστε τη συνεδρία"
+msgstr "Αποχώρηση από τη συνεδρία"
 
 #. 5.8/sidebar.js:270 4.0/sidebar.js:269 3.2/applet.js:2293
 msgid "Lock screen"
@@ -329,7 +326,8 @@ msgstr "Σελιδοδείκτες"
 
 #. 3.2/applet.js:1352
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "Απαιτείται πακέτο gir1.2-gda-5.0 για σελιδοδείκτες Firefox και Midori."
+msgstr ""
+"Απαιτείται το πακέτο gir1.2-gda-5.0 για σελιδοδείκτες Firefox και Midori."
 
 #. 3.2/applet.js:1427
 msgid "No recent files"
@@ -357,7 +355,7 @@ msgstr "Μετάβαση σε προβολή λίστας"
 
 #. 3.2/placeDisplay.js:146
 msgid "Home"
-msgstr "Σπίτι"
+msgstr "Αρχικός κατάλογος"
 
 #. 3.2/placeDisplay.js:224
 msgid "Browse network"
@@ -365,7 +363,7 @@ msgstr "Περιήγηση στο δίκτυο"
 
 #. 5.8/search.py:43 4.0/search.py:43
 msgid "Open"
-msgstr "Ανοιξε"
+msgstr "Άνοιγμα"
 
 #. 5.8->settings-schema.json->search->title
 #. 5.8->settings-schema.json->search-search->title
@@ -397,7 +395,7 @@ msgstr "Χρησιμοποιήστε κανονικές εκφράσεις"
 
 #. 5.8/search.py:125 4.0/search.py:125
 msgid "Stop"
-msgstr "Να σταματήσει"
+msgstr "Τερματισμός"
 
 #. 5.8/search.py:140 4.0/search.py:140
 msgid "File"
@@ -405,19 +403,19 @@ msgstr "Αρχείο"
 
 #. 5.8/search.py:156 4.0/search.py:156
 msgid "Path"
-msgstr "Μονοπάτι"
+msgstr "Διαδρομή"
 
 #. 5.8/search.py:184 4.0/search.py:184
 msgid "Searching..."
-msgstr "Ερευνητικός..."
+msgstr "Αναζήτηση..."
 
 #. 5.8/search.py:198 5.8/search.py:199 4.0/search.py:198 4.0/search.py:199
 msgid "Search Stopped"
-msgstr "Η αναζήτηση σταμάτησε"
+msgstr "Η αναζήτηση τερματίστηκε"
 
 #. 5.8/search.py:215 4.0/search.py:215
 msgid "Searching: "
-msgstr "Ερευνητικός: "
+msgstr "Αναζήτηση: "
 
 #. 5.8/search.py:220 4.0/search.py:220
 msgid "Error: insufficient permissions to read folder "
@@ -440,8 +438,8 @@ msgid ""
 "This menu item is not associated to any package. Do you want to remove it "
 "from the menu anyway?"
 msgstr ""
-"Αυτό το στοιχείο μενού δεν σχετίζεται με κανένα πακέτο. Θέλετε να το "
-"αφαιρέσετε από το μενού ούτως ή άλλως;"
+"Αυτό το στοιχείο καταλόγου δεν σχετίζεται με κανένα πακέτο. Θέλετε να το "
+"αφαιρέσετε από τον κατάλογο ούτως ή άλλως;"
 
 #. 4.0/mint-remove-application.py:75
 msgid "The following packages will be removed:"
@@ -488,7 +486,7 @@ msgstr "Διάταξη"
 #. 4.0->settings-schema.json->behaviour->title
 #. 3.2->settings-schema.json->panel->title
 msgid "Behavior"
-msgstr "η ΣΥΜΠΕΡΙΦΟΡΑ"
+msgstr "Συμπεριφορά"
 
 #. 5.8->settings-schema.json->appearance->title
 #. 4.0->settings-schema.json->appearance->title
@@ -501,7 +499,7 @@ msgstr "Εμφάνιση"
 #. 4.0->settings-schema.json->tips->title
 #. 4.0->settings-schema.json->tips-section->title
 msgid "Tips"
-msgstr ""
+msgstr "Συμβουλές"
 
 #. 5.8->settings-schema.json->menu-content->title
 #. 4.0->settings-schema.json->menu-content->title
@@ -525,7 +523,7 @@ msgstr "Πίνακας"
 #. 3.2->settings-schema.json->menu-behave->title
 #. 3.2->settings-schema.json->menu-icons->title
 msgid "Menu"
-msgstr "Μενού"
+msgstr "Κατάλογος"
 
 #. 5.8->settings-schema.json->applications-view-mode->description
 #. 4.0->settings-schema.json->applications-view-mode->description
@@ -551,30 +549,28 @@ msgstr "Προβολή εφαρμογών ως λίστα ή πλέγμα"
 
 #. 5.8->settings-schema.json->show-sidebar->description
 #. 4.0->settings-schema.json->show-sidebar->description
-#, fuzzy
 msgid "Show sidebar"
-msgstr "Εμφάνιση αγαπημένων στην πλαϊνή γραμμή"
+msgstr "Εμφάνιση πλευρικής στήλης"
 
 #. 5.8->settings-schema.json->show-sidebar->tooltip
 #. 4.0->settings-schema.json->show-sidebar->tooltip
-#, fuzzy
 msgid "Show the sidebar in the menu"
-msgstr "Εμφάνιση κατηγορίας αρχικού φακέλου στο μενού"
+msgstr "Εμφάνιση πλευρικής στήλης στον κατάλογο"
 
 #. 5.8->settings-schema.json->sidebar-placement->description
 #. 4.0->settings-schema.json->sidebar-placement->description
 msgid "Sidebar location"
-msgstr "Τοποθεσία πλευρικής γραμμής"
+msgstr "Τοποθεσία πλευρικής στήλης"
 
 #. 5.8->settings-schema.json->sidebar-placement->options
 #. 4.0->settings-schema.json->sidebar-placement->options
 msgid "Top"
-msgstr "Μπλουζα"
+msgstr "Άνω"
 
 #. 5.8->settings-schema.json->sidebar-placement->options
 #. 4.0->settings-schema.json->sidebar-placement->options
 msgid "Bottom"
-msgstr "Κάτω μέρος"
+msgstr "Κάτω"
 
 #. 5.8->settings-schema.json->sidebar-placement->options
 #. 4.0->settings-schema.json->sidebar-placement->options
@@ -584,17 +580,17 @@ msgstr "Αριστερά"
 #. 5.8->settings-schema.json->sidebar-placement->options
 #. 4.0->settings-schema.json->sidebar-placement->options
 msgid "Right"
-msgstr "δεξιά"
+msgstr "Δεξιά"
 
 #. 5.8->settings-schema.json->sidebar-placement->tooltip
 #. 4.0->settings-schema.json->sidebar-placement->tooltip
 msgid "Choose where to show the sidebar"
-msgstr "Επιλέξτε πού θα εμφανίζεται η πλαϊνή γραμμή"
+msgstr "Επιλέξτε πού θα εμφανίζεται η πλευρική στήλη"
 
 #. 5.8->settings-schema.json->sidebar-favorites->description
 #. 4.0->settings-schema.json->sidebar-favorites->description
 msgid "Show favorites on sidebar"
-msgstr "Εμφάνιση αγαπημένων στην πλαϊνή γραμμή"
+msgstr "Εμφάνιση αγαπημένων στην πλευρική στήλη"
 
 #. 5.8->settings-schema.json->sidebar-favorites->options
 #. 5.8->settings-schema.json->description-placement->options
@@ -603,21 +599,20 @@ msgstr "Εμφάνιση αγαπημένων στην πλαϊνή γραμμή
 #. 4.0->settings-schema.json->description-placement->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "None"
-msgstr "Κανένας"
+msgstr "Κανένα"
 
 #. 5.8->settings-schema.json->sidebar-favorites->options
 #. 4.0->settings-schema.json->sidebar-favorites->options
 msgid "Apps only"
-msgstr ""
+msgstr "Μόνο εφαρμογές"
 
 #. 5.8->settings-schema.json->sidebar-favorites->options
 #. 4.0->settings-schema.json->sidebar-favorites->options
 msgid "Files only"
-msgstr ""
+msgstr "Μόνο αρχεία"
 
 #. 5.8->settings-schema.json->sidebar-favorites->options
 #. 4.0->settings-schema.json->sidebar-favorites->options
-#, fuzzy
 msgid "Apps and files"
 msgstr "Εφαρμογές και αρχεία"
 
@@ -625,8 +620,8 @@ msgstr "Εφαρμογές και αρχεία"
 #. 4.0->settings-schema.json->sidebar-favorites->tooltip
 msgid "Show your favorite apps and file icons on the sidebar"
 msgstr ""
-"Εμφάνιση των αγαπημένων σας εφαρμογών και εικονιδίων αρχείων στην πλαϊνή "
-"γραμμή"
+"Εμφάνιση των αγαπημένων σας εφαρμογών και εικονιδίων αρχείων στην πλευρική "
+"στήλη"
 
 #. 5.8->settings-schema.json->description-placement->description
 #. 4.0->settings-schema.json->description-placement->description
@@ -641,24 +636,22 @@ msgstr "Συμβουλές εργαλείων"
 #. 5.8->settings-schema.json->description-placement->options
 #. 4.0->settings-schema.json->description-placement->options
 msgid "Under titles"
-msgstr "Κάτω από τίτλους"
+msgstr "Κάτω από τους τίτλους"
 
 #. 5.8->settings-schema.json->description-placement->tooltip
 #. 4.0->settings-schema.json->description-placement->tooltip
 msgid "Choose where to show application descriptions"
-msgstr "Επιλέξτε πού θα εμφανίζονται οι περιγραφές εφαρμογών"
+msgstr "Επιλέξτε πού θα εμφανίζονται οι περιγραφές των εφαρμογών"
 
 #. 5.8->settings-schema.json->show-categories->description
 #. 4.0->settings-schema.json->show-categories->description
-#, fuzzy
 msgid "Show categories"
-msgstr "Εμφάνιση εικονιδίων κατηγορίας"
+msgstr "Εμφάνιση κατηγοριών"
 
 #. 5.8->settings-schema.json->show-categories->tooltip
 #. 4.0->settings-schema.json->show-categories->tooltip
-#, fuzzy
 msgid "Show list of application categories"
-msgstr "Εμφάνιση εικονιδίων εφαρμογών"
+msgstr "Εμφάνιση λίστας κατηγοριών εφαρμογών"
 
 #. 5.8->settings-schema.json->show-places-category->description
 #. 4.0->settings-schema.json->show-places-category->description
@@ -670,7 +663,7 @@ msgstr "Εμφάνιση σελιδοδεικτών και τοποθεσιών"
 #. 4.0->settings-schema.json->show-places-category->tooltip
 #. 3.2->settings-schema.json->show-places->tooltip
 msgid "Show bookmarks and places category in the menu"
-msgstr "Εμφάνιση σελιδοδεικτών και κατηγορίας τοποθεσιών στο μενού"
+msgstr "Εμφάνιση κατηγορίας σελιδοδεικτών και τοποθεσιών στον κατάλογο"
 
 #. 5.8->settings-schema.json->show-recents-category->description
 #. 4.0->settings-schema.json->show-recents-category->description
@@ -680,7 +673,7 @@ msgstr "Εμφάνιση πρόσφατων στοιχείων"
 #. 5.8->settings-schema.json->show-recents-category->tooltip
 #. 4.0->settings-schema.json->show-recents-category->tooltip
 msgid "Show recent items category in the menu"
-msgstr "Εμφάνιση της κατηγορίας πρόσφατων στοιχείων στο μενού"
+msgstr "Εμφάνιση της κατηγορίας πρόσφατων στοιχείων στον κατάλογο"
 
 #. 5.8->settings-schema.json->show-favorite-apps-category->description
 #. 4.0->settings-schema.json->show-favorite-apps-category->description
@@ -690,7 +683,7 @@ msgstr "Εμφάνιση κατηγορίας αγαπημένων εφαρμο�
 #. 5.8->settings-schema.json->show-favorite-apps-category->tooltip
 #. 4.0->settings-schema.json->show-favorite-apps-category->tooltip
 msgid "Show your favorite apps category in the menu"
-msgstr "Εμφάνιση της κατηγορίας των αγαπημένων σας εφαρμογών στο μενού"
+msgstr "Εμφάνιση της κατηγορίας των αγαπημένων σας εφαρμογών στον κατάλογο"
 
 #. 5.8->settings-schema.json->show-home-folder-category->description
 #. 4.0->settings-schema.json->show-home-folder-category->description
@@ -700,44 +693,42 @@ msgstr "Εμφάνιση αρχικού φακέλου"
 #. 5.8->settings-schema.json->show-home-folder-category->tooltip
 #. 4.0->settings-schema.json->show-home-folder-category->tooltip
 msgid "Show home folder category in the menu"
-msgstr "Εμφάνιση κατηγορίας αρχικού φακέλου στο μενού"
+msgstr "Εμφάνιση κατηγορίας αρχικού φακέλου στον κατάλογο"
 
 #. 5.8->settings-schema.json->show-emoji-category->description
 #. 4.0->settings-schema.json->show-emoji-category->description
-#, fuzzy
 msgid "Show emoji category"
-msgstr "Εμφάνιση κατηγορίας αγαπημένων εφαρμογών"
+msgstr "Εμφάνιση κατηγορίας emoji"
 
 #. 5.8->settings-schema.json->show-emoji-category->tooltip
 #. 4.0->settings-schema.json->show-emoji-category->tooltip
-#, fuzzy
 msgid "Show emoji category in the menu"
-msgstr "Εμφάνιση κατηγορίας αρχικού φακέλου στο μενού"
+msgstr "Εμφάνιση κατηγορίας emoji στον κατάλογο"
 
 #. 5.8->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 #. 3.2->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
-msgstr "Ανοίξτε το πρόγραμμα επεξεργασίας μενού"
+msgstr "Ανοίξτε το πρόγραμμα επεξεργασίας καταλόγου"
 
 #. 5.8->settings-schema.json->overlay-key->description
 #. 4.0->settings-schema.json->overlay-key->description
 #. 3.2->settings-schema.json->overlay-key->description
 msgid "Keyboard shortcut to open and close the menu"
-msgstr "Συντόμευση πληκτρολογίου για άνοιγμα και κλείσιμο του μενού"
+msgstr "Συντόμευση πληκτρολογίου για άνοιγμα και κλείσιμο του καταλόγου"
 
 #. 5.8->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
 #. 3.2->settings-schema.json->activate-on-hover->description
 msgid "Open menu on hover"
-msgstr "Άνοιγμα μενού κατά την τοποθέτηση του δείκτη"
+msgstr "Άνοιγμα καταλόγου κατά την τοποθέτηση του δείκτη"
 
 #. 5.8->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr ""
-"Ανοίξτε το μενού όταν μετακινώ το ποντίκι μου πάνω από το εικονίδιο του "
+"Ανοίξτε του καταλόγου όταν μετακινώ το ποντίκι μου πάνω από το εικονίδιο του "
 "πίνακα"
 
 #. 5.8->settings-schema.json->hover-delay->units
@@ -751,19 +742,19 @@ msgstr "χιλιοστά του δευτερολέπτου"
 #. 4.0->settings-schema.json->hover-delay->description
 #. 3.2->settings-schema.json->hover-delay->description
 msgid "Menu hover delay"
-msgstr "Καθυστέρηση αιωρημάτων μενού"
+msgstr "Καθυστέρηση αιωρημάτων καταλόγου"
 
 #. 5.8->settings-schema.json->enable-animation->description
 #. 4.0->settings-schema.json->enable-animation->description
 #. 3.2->settings-schema.json->enable-animation->description
 msgid "Use menu animations"
-msgstr "Χρησιμοποιήστε κινούμενα σχέδια μενού"
+msgstr "Χρησιμοποιήστε κινούμενα σχέδια καταλόγου"
 
 #. 5.8->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
 #. 3.2->settings-schema.json->enable-animation->tooltip
 msgid "Animate the menu on open and close"
-msgstr "Κινούμενη κίνηση του μενού στο άνοιγμα και κλείσιμο"
+msgstr "Κινούμενη εμφάνιση του καταλόγου στο άνοιγμα και κλείσιμο"
 
 #. 5.8->settings-schema.json->category-click->description
 #. 4.0->settings-schema.json->category-click->description
@@ -775,19 +766,21 @@ msgstr "Ενεργοποίηση κατηγοριών με κλικ"
 #. 4.0->settings-schema.json->category-click->tooltip
 #. 3.2->settings-schema.json->category-click->tooltip
 msgid "Activate categories on click instead of on hover"
-msgstr "Ενεργοποιήστε τις κατηγορίες στο κλικ αντί για το δείκτη του ποντικιού"
+msgstr ""
+"Ενεργοποιήστε τις κατηγορίες με κλικ αντί για την αιώρηση δείκτη του "
+"ποντικιού"
 
 #. 5.8->settings-schema.json->open-on-category->description
 #. 4.0->settings-schema.json->open-on-category->description
 #. 3.2->settings-schema.json->startup-view-mode->description
 msgid "Open menu on category:"
-msgstr "Άνοιγμα μενού στην κατηγορία:"
+msgstr "Άνοιγμα καταλόγου στην κατηγορία:"
 
 #. 5.8->settings-schema.json->open-on-category->tooltip
 #. 4.0->settings-schema.json->open-on-category->tooltip
 #. 3.2->settings-schema.json->startup-view-mode->tooltip
 msgid "Always open the menu with this category selected"
-msgstr "Να ανοίγετε πάντα το μενού με επιλεγμένη αυτή την κατηγορία"
+msgstr "Να ανοίγετε πάντα τον κατάλογο με επιλεγμένη αυτή την κατηγορία"
 
 #. 5.8->settings-schema.json->open-on-category->options
 #. 4.0->settings-schema.json->open-on-category->options
@@ -823,71 +816,71 @@ msgstr "Εμφάνιση emojis στα αποτελέσματα αναζήτησ
 #. 5.8->settings-schema.json->web-search-option->description
 #. 4.0->settings-schema.json->web-search-option->description
 msgid "Web search option"
-msgstr "Επιλογή αναζήτησης στο Web"
+msgstr "Επιλογή αναζήτησης στο διαδίκτυο"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Google"
-msgstr ""
+msgstr "Google"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Bing"
-msgstr ""
+msgstr "Bing"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Baidu"
-msgstr ""
+msgstr "Baidu"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Yahoo"
-msgstr ""
+msgstr "Yahoo"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Yandex"
-msgstr ""
+msgstr "Yandex"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "DuckDuckGo"
-msgstr ""
+msgstr "DuckDuckGo"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Ask"
-msgstr ""
+msgstr "Ask"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Ecosia"
-msgstr ""
+msgstr "Ecosia"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "AOL"
-msgstr ""
+msgstr "AOL"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Startpage"
-msgstr ""
+msgstr "Startpage"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Brave"
-msgstr ""
+msgstr "Brave"
 
 #. 5.8->settings-schema.json->web-search-option->options
 #. 4.0->settings-schema.json->web-search-option->options
 msgid "Qwant"
-msgstr ""
+msgstr "Qwant"
 
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Custom"
-msgstr ""
+msgstr "Προσαρμοσμένη"
 
 #. 5.8->settings-schema.json->web-search-option->tooltip
 #. 4.0->settings-schema.json->web-search-option->tooltip
@@ -897,17 +890,16 @@ msgstr ""
 
 #. 5.8->settings-schema.json->web-search-custom-url->description
 msgid "URL for custom search"
-msgstr ""
+msgstr "Διεύθυνση URL για προσαρμοσμένη αναζήτηση"
 
 #. 5.8->settings-schema.json->web-search-custom-url->tooltip
 msgid "Enter the URL that is prepended to the search query."
-msgstr ""
+msgstr "Εισάγετε την προαπαιτούμενη για το αίτημα αναζήτησης διεύθυνση URL."
 
 #. 5.8->settings-schema.json->web-suggestions->description
 #. 4.0->settings-schema.json->web-suggestions->description
-#, fuzzy
 msgid "Web search suggestions"
-msgstr "Επιλογή αναζήτησης στο Web"
+msgstr "Προτάσεις αναζήτησης στο διαδίκτυο"
 
 #. 5.8->settings-schema.json->web-suggestions->tooltip
 #. 4.0->settings-schema.json->web-suggestions->tooltip
@@ -915,6 +907,8 @@ msgid ""
 "With web search option, also show search suggestions. (Note: Search "
 "suggestions are provided by DuckDuckGo)"
 msgstr ""
+"Ταυτόχρονη εμφάνιση υποδείξεων αναζήτησης, με την επιλογή διαδικτυακής "
+"αναζήτησης. (Σημ. Οι υποδείξεις αναζήτησης παρέχονται από την DuckDuckGo)"
 
 #. 5.8->settings-schema.json->enable-home-folder-search->description
 #. 4.0->settings-schema.json->enable-home-folder-search->description
@@ -963,12 +957,12 @@ msgstr ""
 "Σημείωση: Για να πραγματοποιήσετε αναζήτηση σε σελιδοδείκτες Firefox, θα "
 "χρειαστεί να εγκαταστήσετε το πακέτο gir1.2-gda-5.0 (διανομές που βασίζονται "
 "στο Debian συμπεριλαμβανομένου του Ubuntu & Linux Mint) ή πακέτο libgda "
-"(διανομές βασισμένες στο Arch) και επανεκκινήστε τον υπολογιστή σας."
+"(διανομές βασισμένες στο Arch) και να επανεκκινήσετε τον υπολογιστή σας."
 
 #. 5.8->settings-schema.json->enable-wikipedia-search->description
 #. 4.0->settings-schema.json->enable-wikipedia-search->description
 msgid "Wikipedia search"
-msgstr "Αναζήτηση Wikipedia"
+msgstr "Αναζήτηση στην Wikipedia"
 
 #. 5.8->settings-schema.json->enable-wikipedia-search->tooltip
 #. 4.0->settings-schema.json->enable-wikipedia-search->tooltip
@@ -1343,7 +1337,7 @@ msgid ""
 "for web bookmarks search.\n"
 msgstr ""
 "\n"
-"Σημείωση: Ορισμένες επιλογές αναζήτησης μπορούν ακόμα να χρησιμοποιηθούν "
+"Σημείωση: Ορισμένες επιλογές αναζήτησης μπορούν επίσης να χρησιμοποιηθούν "
 "ακόμα κι αν δεν τις έχετε ενεργοποιήσει εδώ, θέτοντας πρόθεμα τον όρο "
 "αναζήτησής σας.\n"
 "Για παράδειγμα: για να αναζητήσετε ένα emoji, πληκτρολογήστε \"e heart\" για "
@@ -1436,22 +1430,22 @@ msgstr "Μέγεθος εικονιδίου πλέγματος εφαρμογώ�
 #. 4.0->settings-schema.json->sidebar-icon-size->description
 #. 4.0->settings-schema.json->sidebar-icon-size->tooltip
 msgid "Sidebar icon size (pixels)"
-msgstr "Μέγεθος εικονιδίου πλευρικής γραμμής (pixel)"
+msgstr "Μέγεθος εικονιδίου πλευρικής στήλης (pixel)"
 
 #. 5.8->settings-schema.json->use-box-style->description
 #. 4.0->settings-schema.json->use-box-style->description
 msgid "Use sidebar box style"
-msgstr "Χρησιμοποιήστε το στυλ πλαισίου πλαϊνής γραμμής"
+msgstr "Χρησιμοποιήστε εμφάνιση πλαισίου πλευρικής στήλης"
 
 #. 5.8->settings-schema.json->use-box-style->tooltip
 #. 4.0->settings-schema.json->use-box-style->tooltip
 msgid "Use a sidebar box style"
-msgstr "Χρησιμοποιήστε ένα στυλ πλαισίου πλαϊνής γραμμής"
+msgstr "Χρησιμοποιήστε εμφάνιση πλαισίου πλευρικής στήλης"
 
 #. 5.8->settings-schema.json->use-tile-style->description
 #. 4.0->settings-schema.json->use-tile-style->description
 msgid "Use tile style"
-msgstr "Χρησιμοποιήστε στυλ πλακιδίων"
+msgstr "Χρησιμοποιήστε εμφάνιση πλακιδίων"
 
 #. 5.8->settings-schema.json->use-tile-style->tooltip
 #. 4.0->settings-schema.json->use-tile-style->tooltip
@@ -1459,30 +1453,27 @@ msgid ""
 "Use a tile style for the application buttons (Note: may not work on some "
 "themes)"
 msgstr ""
-"Χρησιμοποιήστε ένα στυλ πλακιδίων για τα κουμπιά της εφαρμογής (Σημείωση: "
+"Χρησιμοποιήστε εμφάνιση πλακιδίων για τα κουμπιά εφαρμογών (Σημείωση: "
 "ενδέχεται να μην λειτουργεί σε ορισμένα θέματα)"
 
 #. 5.8->settings-schema.json->info1->description
 #. 4.0->settings-schema.json->info1->description
-#, fuzzy
 msgid ""
 "\n"
 "• Drag on the menu edge to change the menu size."
 msgstr ""
 "\n"
-"Πληροφορίες/συμβουλή: Σύρετε στην άκρη του μενού για να αλλάξετε το μέγεθος "
-"του μενού.\n"
+" • Σύρετε την άκρη του καταλόγου για να αλλάξετε το μέγεθός του."
 
 #. 5.8->settings-schema.json->info2->description
 #. 4.0->settings-schema.json->info2->description
-#, fuzzy
 msgid ""
 "\n"
 "• Drag and drop menu categories to change their order."
 msgstr ""
 "\n"
-"Πληροφορίες/συμβουλή: Σύρετε στην άκρη του μενού για να αλλάξετε το μέγεθος "
-"του μενού.\n"
+"• Κρατήστε και σύρετε τις κατηγορίες του καταλόγου για να προσαρμόσετε την "
+"σειρά εμφάνισής τους."
 
 #. 5.8->settings-schema.json->info3->description
 #. 4.0->settings-schema.json->info3->description
@@ -1491,6 +1482,9 @@ msgid ""
 "• Folders can be set up and removed as menu categories by right-clicking on "
 "them."
 msgstr ""
+"\n"
+"• Οι φάκελοι μπορούν να προστεθούν και να αφαιρεθούν από τον κατάλογο "
+"κατηγοριών με δεξί κλικ πάνω τους."
 
 #. 5.8->settings-schema.json->info4->description
 #. 4.0->settings-schema.json->info4->description
@@ -1502,10 +1496,16 @@ msgid ""
 "ctrl-d — Open .desktop file of currently highlighted app in default text "
 "editor.\n"
 msgstr ""
+"\n"
+"• Επιπρόσθετες επιλογές πλήκτρων:\n"
+"ctrl-p — Άνοιγμα του εκκινητή διαλόγου ιδιοτήτων της τρέχουσας σκιασμένης "
+"εφαρμογής.\n"
+"ctrl-d — Άνοιγμα του φακέλου .desktop της τρέχουσας σκιασμένης εφαρμογής "
+"στον προεπιλεγμάνο επεξεργαστή κειμένου.\n"
 
 #. 3.2->settings-schema.json->providers->title
 msgid "Search Providers"
-msgstr "Αναζήτηση παρόχων"
+msgstr "Πάροχοι αναζήτησης"
 
 #. 3.2->settings-schema.json->extensionProvidersSection->title
 msgid "No search provider extensions found"
@@ -1528,7 +1528,7 @@ msgid ""
 "Show your browser's web bookmarks in the menu.\n"
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
-"Εμφάνιση των σελιδοδεικτών web του προγράμματος περιήγησής σας στο μενού.\n"
+"Εμφάνιση των σελιδοδεικτών ιστού του προγράμματος περιήγησής σας στο μενού.\n"
 "Σημείωση: Εγκαταστήστε το πακέτο gir1.2-gda-5.0 για να διαβάσετε τους "
 "σελιδοδείκτες του firefox."
 
@@ -1580,14 +1580,14 @@ msgstr "Εμφάνιση συμβουλών εργαλείων"
 #. 3.2->settings-schema.json->tooltip-delay->description
 #. 3.2->settings-schema.json->tooltip-delay->tooltip
 msgid "Tooltip delay"
-msgstr "Καθυστέρηση επεξήγησης εργαλείου"
+msgstr "Καθυστέρηση συμβουλών εργαλείων"
 
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
 #. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
 msgid "Use a custom menu height"
-msgstr "Χρησιμοποιήστε ένα προσαρμοσμένο ύψος μενού"
+msgstr "Χρησιμοποιήστε ένα προσαρμοσμένο ύψος καταλόγου"
 
 #. 3.2->settings-schema.json->custom-menu-height->description
 #. 3.2->settings-schema.json->custom-menu-height->tooltip
 msgid "Custom menu height (pixels)"
-msgstr "Προσαρμοσμένο ύψος μενού (pixel)"
+msgstr "Προσαρμοσμένο ύψος καταλόγου (pixel)"
