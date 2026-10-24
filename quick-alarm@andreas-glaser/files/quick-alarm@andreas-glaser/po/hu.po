@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: quick-alarm@andreas-glaser\n"
 "Report-Msgid-Bugs-To: https://github.com/andreas-glaser/quick-alarm-cinnamon/"
 "issues\n"
-"POT-Creation-Date: 2026-01-26\n"
+"POT-Creation-Date: 2026-08-28\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,6 +19,9 @@ msgstr ""
 
 msgid "Quick Alarm"
 msgstr "Gyors riasztás"
+
+msgid "Type: in 10m tea  •  11am standup  •  Ctrl+Enter adds another"
+msgstr ""
 
 msgid "Alarm"
 msgstr "Riasztás"
@@ -34,6 +37,15 @@ msgstr "Adjon meg egy időpontot."
 
 msgid "Could not parse that."
 msgstr "Nem sikerült elemezni."
+
+msgid "Input is too long."
+msgstr ""
+
+msgid "Duration is too large."
+msgstr ""
+
+msgid "Too many alarms queued."
+msgstr ""
 
 msgid "That time already passed today."
 msgstr "Ez az idő mára elmúlt."
@@ -64,3 +76,9 @@ msgstr "%d órával ezelőtt"
 
 msgid "Missed alarm"
 msgstr "Elmulasztott riasztás"
+
+msgid "Missed alarms"
+msgstr ""
+
+msgid "%d alarms were missed."
+msgstr ""

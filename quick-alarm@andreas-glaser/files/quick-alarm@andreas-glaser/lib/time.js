@@ -1,3 +1,5 @@
+const Limits = imports.lib.alarmLimits;
+
 function _pad2(n) {
   return String(n).padStart(2, "0");
 }
@@ -88,12 +90,14 @@ function _parseRelative(spec) {
     matchedAny = true;
     const value = Number(r[1]);
     const unit = r[2];
-    if (!Number.isFinite(value) || value < 0) return null;
-    if (unit.startsWith("h")) totalMs += value * 60 * 60 * 1000;
-    else if (unit.startsWith("m")) totalMs += value * 60 * 1000;
-    else {
-      totalMs += value * 1000;
-    }
+    if (!Number.isSafeInteger(value) || value < 0) return null;
+    let unitMs = 1000;
+    if (unit.startsWith("h")) unitMs = 60 * 60 * 1000;
+    else if (unit.startsWith("m")) unitMs = 60 * 1000;
+
+    const incrementMs = value * unitMs;
+    if (!Number.isSafeInteger(incrementMs) || !Number.isSafeInteger(totalMs + incrementMs)) return null;
+    totalMs += incrementMs;
     rest = rest.slice(r[0].length);
     restOrig = restOrig.slice(r[0].length);
   }
@@ -120,6 +124,10 @@ function parseAlarmSpec(input, now = new Date(), t = null) {
     ].join("\n");
   }
   if (!raw) return { ok: false, error: errorWithExamples("Enter a time.") };
+  if (raw.length > Limits.MAX_TEXT_LENGTH)
+    return { ok: false, error: errorWithExamples("Input is too long.") };
+  if (!now || typeof now.getTime !== "function" || !Number.isFinite(now.getTime()))
+    return { ok: false, error: errorWithExamples("Could not parse that.") };
 
   const split = _splitLabel(raw);
   let spec = _normalizeSpec(split.spec);
@@ -161,9 +169,12 @@ function parseAlarmSpec(input, now = new Date(), t = null) {
     rel = _tryRelativeWithLabelFirst(spec);
   }
   if (rel) {
+    const dueMs = now.getTime() + rel.delayMs;
+    if (!Number.isSafeInteger(dueMs) || dueMs > 8640000000000000)
+      return { ok: false, error: errorWithExamples("Duration is too large.") };
     return {
       ok: true,
-      due: new Date(now.getTime() + rel.delayMs),
+      due: new Date(dueMs),
       label: split.label || rel.label || "",
       showSeconds: !!rel.showSeconds,
     };
