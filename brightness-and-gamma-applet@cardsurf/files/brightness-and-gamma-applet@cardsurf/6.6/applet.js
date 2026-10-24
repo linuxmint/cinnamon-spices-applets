@@ -183,8 +183,8 @@ class BrightnessAndGamma extends Applet.IconApplet {
             lon = lon.unpack(); // type (d)
         }
 
-        global.log("lat: " + lat);
-        global.log("lon: " + lon);
+        //~ global.log("lat: " + lat);
+        //~ global.log("lon: " + lon);
 
         if (  Math.round(lat) == 91 || Math.round(lon) == 181 ) {
           this.sunrise = 6;

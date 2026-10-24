@@ -9,7 +9,7 @@ var readFileAsync = function(file, opts = {utf8: true}) {
         if (typeof file === 'string' || file instanceof String) {
             file = Gio.File.new_for_path(file);
         }
-        if (!file.query_exists(null)) reject(new Error('File does not exist.'));
+        // A missing file makes load_contents_finish() throw NOT_FOUND, which rejects below.
         file.load_contents_async(null, function(object, result) {
             try {
                 let [success, data] = file.load_contents_finish(result);
