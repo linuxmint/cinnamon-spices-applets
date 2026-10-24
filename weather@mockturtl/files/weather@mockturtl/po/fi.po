@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-14 14:22+0000\n"
-"PO-Revision-Date: 2024-11-23 00:55+0200\n"
+"PO-Revision-Date: 2026-10-18 09:46+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: suomi <>\n"
 "Language: fi\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #. 3.8/weather-applet.js:20974
@@ -1526,7 +1526,7 @@ msgstr ""
 
 #. 3.8/weather-applet.js:9462
 msgid "Low"
-msgstr ""
+msgstr "Matala"
 
 #. 3.8/weather-applet.js:9465
 msgid "Moderate"
@@ -1534,17 +1534,15 @@ msgstr "Kohtalainen"
 
 #. 3.8/weather-applet.js:9468
 msgid "High"
-msgstr ""
+msgstr "Korkea"
 
 #. 3.8/weather-applet.js:9471
-#, fuzzy
 msgid "Very High"
-msgstr "Todella hyvä"
+msgstr "Erittäin korkea"
 
 #. 3.8/weather-applet.js:9474
-#, fuzzy
 msgid "Extreme"
-msgstr "Kovaa sadetta"
+msgstr "Rankka"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
@@ -1555,10 +1553,9 @@ msgstr "mph"
 #. 3.8->settings-schema.json->windSpeedUnit->options
 #. 3.8/weather-applet.js:9607
 msgid "km/h"
-msgstr ""
+msgstr "km/h"
 
 #. 3.8/weather-applet.js:9609
-#, fuzzy
 msgid "Knots"
 msgstr "solmua"
 
@@ -2023,9 +2020,8 @@ msgid "Met Office UK"
 msgstr "Met Office UK"
 
 #. 3.8/weather-applet.js:18216 3.8/weather-applet.js:18276
-#, fuzzy
 msgid "Could not obtain location, please see the logs in Looking Glass"
-msgstr "Sijaintipalvelu ei löytänyt sinun sijaintia, katso Looking Glass loki"
+msgstr "Sijaintia ei voitu hakea; katso lokit Looking Glassista"
 
 #. 3.8/weather-applet.js:18821
 msgid ""
@@ -2070,26 +2066,30 @@ msgstr "Sade alkaa {precipStart} minuutissa"
 #. 3.8/weather-applet.js:19791
 msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Auringolle altistumisesta aiheutuva haitta on pieni, UV-indeksi: {uvIndex}"
 
 #. 3.8/weather-applet.js:19795
 msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Auringolle altistumisesta aiheutuva haitta on kohtalainen, UV-indeksi: "
+"{uvIndex}"
 
 #. 3.8/weather-applet.js:19799
 msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Auringolle altistumisesta aiheutuva haitta on suuri, UV-indeksi:: {uvIndex}"
 
 #. 3.8/weather-applet.js:19803
 msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
-msgstr ""
+msgstr "Erittäin suuri haitta auringolle altistumisesta, UV-indeksi: {uvIndex}"
 
 #. 3.8/weather-applet.js:19807
 msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Suurin haittariski auringolle altistumisesta, UV-indeksi: {uvIndex}"
 
 #. 3.8/weather-applet.js:19925
 msgid "Forecast parsing failed, see logs for more details."
-msgstr "Ennusteen tekeminen epäonnistui. Katso lisätietoja lokeista."
+msgstr "Ennusteen käsittely epäonnistui. Katso lokista lisätietoja."
 
 #. 3.8/weather-applet.js:20518 3.8/weather-applet.js:21145
 msgid "As of {lastUpdatedTime}"
@@ -2343,7 +2343,7 @@ msgstr ""
 #. 3.0->settings-schema.json->windSpeedUnit->description
 #. 3.8->settings-schema.json->windSpeedUnit->description
 msgid "Wind speed unit"
-msgstr "Tuulen nopeus"
+msgstr "Tuulennopeus"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 msgid "kph"
@@ -2421,12 +2421,12 @@ msgstr "Paneelin asetukset"
 #. 3.0->settings-schema.json->showTextInPanel->description
 #. 3.8->settings-schema.json->showTextInPanel->description
 msgid "Display current temperature in panel"
-msgstr "Näytä lämpötila paneelissa"
+msgstr "Lämpötila paneelissa"
 
 #. 3.0->settings-schema.json->showCommentInPanel->description
 #. 3.8->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr "Näytä sään sanallinen kuvaus (esim. \"Tuulista\", \"Selkeää\")"
+msgstr "Sään sanallinen kuvaus kuten \"Selkeää\""
 
 #. 3.0->settings-schema.json->showCommentInPanel->tooltip
 #. 3.8->settings-schema.json->showCommentInPanel->tooltip
@@ -2436,7 +2436,7 @@ msgstr "Toimii vain vaakapaneelin kanssa"
 #. 3.0->settings-schema.json->tempTextOverride->description
 #. 3.8->settings-schema.json->tempTextOverride->description
 msgid "Override label on panel"
-msgstr "Korvaa nimi säätiedoilla paneelissa"
+msgstr "Korvaa nimi säätiedoilla"
 
 #. 3.0->settings-schema.json->tempTextOverride->tooltip
 msgid ""
@@ -2469,7 +2469,7 @@ msgstr "Näkymä"
 #. 3.0->settings-schema.json->verticalOrientation->description
 #. 3.8->settings-schema.json->verticalOrientation->description
 msgid "Show forecast vertically"
-msgstr "Näytä ennuste pystysuuntaisesti"
+msgstr "Sääennuste pystyyn"
 
 #. 3.0->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right"
@@ -2478,37 +2478,37 @@ msgstr "Näyttää ennusteet ylhäältä alas vasemmalta oikealle"
 #. 3.0->settings-schema.json->forecastColumns->units
 #. 3.8->settings-schema.json->forecastColumns->units
 msgid "columns"
-msgstr "sarakkeet"
+msgstr "sarakkeita"
 
 #. 3.0->settings-schema.json->forecastColumns->description
 #. 3.8->settings-schema.json->forecastColumns->description
 msgid "Maximum number of columns for forecast"
-msgstr "Ennusteen sarakkeiden enimmäismäärä"
+msgstr "Ennusteessa"
 
 #. 3.0->settings-schema.json->forecastRows->units
 #. 3.8->settings-schema.json->forecastRows->units
 msgid "rows"
-msgstr "riviä"
+msgstr "rivejä"
 
 #. 3.0->settings-schema.json->forecastRows->description
 #. 3.8->settings-schema.json->forecastRows->description
 msgid "Maximum number of rows for forecast"
-msgstr "Ennusteen rivien enimmäismäärä"
+msgstr "Ennusteessa"
 
 #. 3.0->settings-schema.json->showSunrise->description
 #. 3.8->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
-msgstr "Näytä auringonousu ja laskuaika"
+msgstr "Auringonnousu ja -lasku"
 
 #. 3.0->settings-schema.json->show24Hours->description
 #. 3.8->settings-schema.json->show24Hours->description
 msgid "Display time in 24 hour format"
-msgstr "Näytä aika 24 tunnin muodossa"
+msgstr "Käytä 24 tunnin kelloa"
 
 #. 3.0->settings-schema.json->shortHourlyTime->description
 #. 3.8->settings-schema.json->shortHourlyTime->description
 msgid "Only display hours for hourly forecast time"
-msgstr "Näytä ennusteen täydet tunnit"
+msgstr "Tuntiennusteen tunnit"
 
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 #. 3.8->settings-schema.json->shortHourlyTime->tooltip
@@ -2518,7 +2518,7 @@ msgstr "Klo 15:00 tai 3:00 pm, sen sijaan näkyy 15 tai 3 pm"
 #. 3.0->settings-schema.json->showForecastDates->description
 #. 3.8->settings-schema.json->showForecastDates->description
 msgid "Display date for daily forecasts"
-msgstr "Näytä ennusteen päivämäärä"
+msgstr "Ennusteen päivämäärä"
 
 #. 3.0->settings-schema.json->showForecastDates->tooltip
 #. 3.8->settings-schema.json->showForecastDates->tooltip
@@ -2528,17 +2528,17 @@ msgstr "Kuten \"Perjantai 15\""
 #. 3.0->settings-schema.json->temperatureHighFirst->description
 #. 3.8->settings-schema.json->temperatureHighFirst->description
 msgid "Show high temperature first in forecast"
-msgstr "Näytä ylin lämpötila ensin"
+msgstr "Ylin lämpötila ensin"
 
 #. 3.0->settings-schema.json->tempRussianStyle->description
 #. 3.8->settings-schema.json->tempRussianStyle->description
 msgid "Show temperature Russian style"
-msgstr "Näytä venäläiset lämpötilat"
+msgstr "Venäläinen lämpötilan etumerkki (+/-)"
 
 #. 3.0->settings-schema.json->locationLabelOverride->description
 #. 3.8->settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
-msgstr "Korvaa sijaintisi nimi"
+msgstr "Korvaa sijaintisi nimellä"
 
 #. 3.0->settings-schema.json->conditionSettings->description
 #. 3.8->settings-schema.json->weather-conditions->title
@@ -2552,7 +2552,7 @@ msgstr "Käännä olosuhteet suomeksi"
 #. 3.0->settings-schema.json->shortConditions->description
 #. 3.8->settings-schema.json->shortConditions->description
 msgid "Less verbose conditions"
-msgstr "Vähemmän sanallisia olosuhteita"
+msgstr "Lyhyemmät sääkuvaukset"
 
 #. 3.0->settings-schema.json->iconSettings->description
 #. 3.8->settings-schema.json->icons->title
@@ -2561,7 +2561,7 @@ msgstr "Kuvakkeet"
 
 #. 3.0->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons in the applet"
-msgstr "Käytä symbolisia kuvakkeita"
+msgstr "Symboliset kuvakkeet"
 
 #. 3.0->settings-schema.json->useCustomMenuIcons->description
 #. 3.8->settings-schema.json->useCustomMenuIcons->description
@@ -2653,9 +2653,8 @@ msgid "Swiss Météo (Switzerland only)"
 msgstr "Swiss Météo (vain Sveitsi)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "Met Office UK (key needed)"
-msgstr "Met Office UK (vain UK)"
+msgstr "Met Office UK (avain tarvitaan)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "OpenWeatherMap OneCall (key needed)"
@@ -2687,12 +2686,17 @@ msgid ""
 "provides global weather data with various parameters and forecast lengths. "
 "More information can be found at open-meteo.com."
 msgstr ""
+"Open-Meteo on ilmainen palvelu, joka ei vaadi API-avainta. Tarjoaa "
+"säätietoja maailmanlaajuisesti, joihin sisältyy ​​parametreja ja "
+"ennustepituuksia. Lisätietoja open-meteo.com."
 
 #. 3.8->settings-schema.json->openweathermap_label->description
 msgid ""
 "Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with "
 "headquarters in London UK. Read more about the service at openweathermap.org."
 msgstr ""
+"OpenWeather Ltd on maailmanlaajuinen sääpalvelu. Yritys perustettiin vuonna "
+"2012 ja pääkonttori sijaitsee Lontoossa. Lue lisää openweathermap.org."
 
 #. 3.8->settings-schema.json->metnorway_label->description
 msgid ""
@@ -2706,6 +2710,16 @@ msgid ""
 "there is a possibility that they are inaccurate sometimes.\n"
 " - Alerts are only available in Norway"
 msgstr ""
+"Ilmaisia ​​säähavaintoja ja ennusteita Norjan ilmatieteen laitokselta "
+"(Norwegian Meteorological Institute). Perustettu vuonna 1866. Lue lisää www."
+"met.no/en.\n"
+"\n"
+"- Lyhyen aikavälin ennusteet (sadetta ja muita sääilmiöitä koskevat "
+"välittömät havainnot) eivät ole saatavilla Norjan ulkopuolella. Havainnot "
+"näytetään seuraavalle tunnille.\n"
+"- Päiväennusteet muodostetaan 6 tunnin ennusteiden pohjalta "
+"(tuntikohtaisesti), joten ne voivat olla toisinaan epätarkkoja. \n"
+"- Varoitukset saatavilla vain Norjassa"
 
 #. 3.8->settings-schema.json->dmidenmark_label->description
 msgid ""
@@ -2713,12 +2727,14 @@ msgid ""
 "forecasts and observations for Denmark, Greenland, and the Faroe Islands. "
 "Read more about the institute at www.dmi.dk."
 msgstr ""
+"Tanskan ilmatieteen laitos perustettiin vuonna 1872. Laatii sääennusteita ja "
+"säähavaintoja Tanskassa, Grönlannissa ja Färsaarilla. Lue lisää www.dmi.dk."
 
 #. 3.8->settings-schema.json->deutscherwetterdienst_label->description
 msgid ""
-"German National Weather Provider. Read more about the institute at "
-"www.dwd.de."
-msgstr ""
+"German National Weather Provider. Read more about the institute at www.dwd."
+"de."
+msgstr "Saksan kansallinen sääpalvelu. Lue lisää www.dwd.de."
 
 #. 3.8->settings-schema.json->usweather_label->description
 msgid ""
@@ -2731,26 +2747,44 @@ msgid ""
 " - Observations are quite spotty so it combines multiple observation "
 "stations if needed in a 50km area"
 msgstr ""
+"Yhdysvaltain kansallinen sääpalvelu (National Weather Service). Vuonna 1861 "
+"perustettu liittovaltion virasto. Lue lisää www.weather.gov. \n"
+"\n"
+"- Kattaa vain Yhdysvallat\n"
+"- Säätietojen latautuminen voi kestää 10-15 sekuntia (ole kärsivällinen) kun "
+"palvelu latautuu ensimmäistä kertaa\n"
+"- Havaintoja on melko harvassa, joten tarvittaessa ohjelma yhdistää tietoja "
+"useilta havaintoasemilta 50 kilometrin säteellä"
 
 #. 3.8->settings-schema.json->swissmeteo_label->description
 msgid ""
-"Swiss national weather service. Read more about the service at "
-"www.meteoswiss.admin.ch.\n"
+"Swiss national weather service. Read more about the service at www."
+"meteoswiss.admin.ch.\n"
 "\n"
 " - Only covers Switzerland\n"
 " - You need to use your post code instead of coordinates"
 msgstr ""
+"Sveitsin kansallinen sääpalvelu. Lue lisää www.meteoswiss.admin.ch.\n"
+"\n"
+"- Kattaa vain Sveitsin\n"
+"- Koordinaattien sijaan on käytettävä postinumeroa"
 
 #. 3.8->settings-schema.json->metoffice_label->description
 msgid ""
 "The Meteorological Office, abbreviated as the Met Office, is the UK's "
-"national weather service founded in 1854. Read more about the service at "
-"www.metoffice.gov.uk.\n"
+"national weather service founded in 1854. Read more about the service at www."
+"metoffice.gov.uk.\n"
 "\n"
 " - You only have 360 calls a day free, the applet uses 2 at a time so "
 "minimum of 15 minutes refresh time is recommended.\n"
 " - To get API keys, register at datahub.metoffice.gov.uk"
 msgstr ""
+"Meteorological Office (lyhenne Met Office). Vuonna 1854 perustettu UK "
+"kansallinen sääpalvelu. Lue lisää www.metoffice.gov.uk.\n"
+"\n"
+"- Vain 360 ilmaista kutsua päivässä. Koska sovellus tekee kerralla 2 kutsua, "
+"suositeltu päivitysväli on 15 minuuttia.\n"
+"- Saat API-avaimet rekisteröitymällä datahub.metoffice.gov.uk"
 
 #. 3.8->settings-schema.json->openweathermap_onecall_label->description
 msgid ""
@@ -2758,6 +2792,9 @@ msgid ""
 "an API key. Make sure your call limit is 1000 calls/day to avoid charges. "
 "Read more about the service at openweathermap.org/api/one-call-api."
 msgstr ""
+"OpenWeatherMap-versio tukee ominaisuuksia (kuten aiemminkin), mutta vaatii "
+"API-avaimen. Varmista, että kutsurajasi on 1000 kutsua päivässä, jotta "
+"vältyt lisäkuluilta. Lue lisää openweathermap.org/api/one-call-api."
 
 #. 3.8->settings-schema.json->pirateweather_label->description
 msgid ""
@@ -2765,6 +2802,8 @@ msgid ""
 "data that is compatible with the Dark Sky API. Read more about the service "
 "at pirateweather.net."
 msgstr ""
+"Pirate Weather on ilmainen, avoimen lähdekoodin sääpalvelu. Tarjoaa Dark Sky "
+"API:n kanssa säätietoja. Lue lisää pirateweather.net."
 
 #. 3.8->settings-schema.json->visualcrossing_label->description
 msgid ""
@@ -2775,6 +2814,12 @@ msgid ""
 " - Provides 1000 Free calls a day\n"
 " - Needs an API key"
 msgstr ""
+"Visual Crossing Corporation sääpalvelu. Yritys on perustettu vuonna 2003 ja "
+"sen toimipaikat sijaitsevat Yhdysvalloissa ja Saksassa. Lue lisää "
+"visualcrossing.com.\n"
+"\n"
+"- Tarjoaa 1000 ilmaista kutsua päivässä\n"
+"- Vaatii API-avaimen"
 
 #. 3.8->settings-schema.json->weatherbit_label->description
 msgid ""
@@ -2787,16 +2832,29 @@ msgid ""
 " - Using alerts will increase call usage by 33%\n"
 " - Hourly Weather forecast is supported but requires a non-free account."
 msgstr ""
+"Weatherbit LLC USA tarjoama sääpalvelu. Sisältää historiallisia tietoja sekä "
+"sääennusteita. Lue lisää weatherbit.io.\n"
+"\n"
+"- Suositeltu päivitysväli on yksi tunti; muutoin päivittäinen kiintiö "
+"saattaa ylittyä. Ilmainen API-tilaus on rajoitettu 50 pyyntöön päivässä.\n"
+"- Edellyttää API-avainta.\n"
+"- Säähälytysten käyttö lisää API-kutsujen määrää 33%.\n"
+"- Tuntikohtaiset ennusteet, mutta ne edellyttävät maksullista tiliä."
 
 #. 3.8->settings-schema.json->tomorrowio_label->description
 msgid ""
 "Meteorological data from American weather technology company with "
-"headquarters in Boston since 2016. Read more about the service at "
-"tomorrow.io.\n"
+"headquarters in Boston since 2016. Read more about the service at tomorrow."
+"io.\n"
 "\n"
 " - Free plan includes 1000 calls per day\n"
 " - Needs an API key"
 msgstr ""
+"Meteorologisia tietoja tarjoava yhdysvaltalainen sääteknologiayritys. "
+"Pääkonttori on Bostonissa vuodesta 2016 lähtien. Lue lisää tomorrow.io.\n"
+"\n"
+"- Ilmainen tilaus sisältää 1000 kutsua päivässä\n"
+"- Edellyttää API-avainta"
 
 #. 3.8->settings-schema.json->accuweather_label->description
 msgid ""
@@ -2808,6 +2866,12 @@ msgid ""
 "day, remaining number of calls are shown in the applet tooltip\n"
 " - Needs an API key"
 msgstr ""
+"Vuonna 1962 perustettu AccuWeather Inc. tarjoaa maailmanlaajuisen "
+"sääpalvelun. Lue lisää accuweather.com.\n"
+"\n"
+"- Ilmaisversiossa päivittäisten kutsujen määrä on rajoitettu; jäljellä "
+"olevien kutsujen määrä näkyy sovelluksen vihjeessä.\n"
+"- Vaatii API-avaimen"
 
 #. 3.8->settings-schema.json->weatherunderground_label->description
 msgid ""
@@ -2820,106 +2884,104 @@ msgid ""
 " - Needs an API key\n"
 " - Current weather condition come from forecast"
 msgstr ""
+"Weather Underground on verkkopohjainen säätietopalvelu. Tarjoaa "
+"säähavaintoja ja ennusteita lukuisista kohteista ympäri maailmaa. "
+"Pääkonttori sijaitsee Ann Arbor USA. Lue lisää wunderground.com.\n"
+"\n"
+"- Sallii vain 1500 kutsua päivässä, joten suositeltava päivitysväli on 15 "
+"minuuttia\n"
+"- Vaatii API-avaimen.\n"
+"- Sääolosuhteet saadaan ennusteesta"
 
 #. 3.8->settings-schema.json->metoffice_forecast_apikey->description
-#, fuzzy
 msgid "Forecasts API Key"
-msgstr "Väärä APIAVAIN"
+msgstr "Forecasts API-avain"
 
 #. 3.8->settings-schema.json->metoffice_forecast_apikey->tooltip
 msgid ""
 "Subscribe to 'Site Specific' -> 'Global Spot' Free plan to get this key."
 msgstr ""
+"Tilaa \"Site Specific\" -> \"Global Spot\" -ilmaispaketti saadaksesi tämän "
+"avaimen."
 
 #. 3.8->settings-schema.json->metoffice_observations_apikey->description
 msgid "Observations API Key"
-msgstr ""
+msgstr "Observations API-avain"
 
 #. 3.8->settings-schema.json->metoffice_observations_apikey->tooltip
 msgid ""
 "Subscribe to 'Observations' -> 'Land Observations' Free plan to get this key."
 msgstr ""
+"Tilaa \"Observations\" -> \"Land Observations\" ilmaispaketti saadaksesi "
+"tämän avaimen."
 
 #. 3.8->settings-schema.json->openweathermap_onecall_apikey->description
-#, fuzzy
 msgid "OpenWeatherMap OneCall API Key"
-msgstr "OpenWeatherMap OneCall (avain tarvitaan)"
+msgstr "OpenWeatherMap OneCall API-avain"
 
 #. 3.8->settings-schema.json->openweathermap_onecall_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at openweathermap.org and paste it here."
-msgstr "Kopioi käyttämäsi palvelun tililtä koodi ja liitä se tähän."
+msgstr "Kopioi tämä openweathermap.org tililtäsi ja liitä se tähän."
 
 #. 3.8->settings-schema.json->pirateweather_apikey->description
-#, fuzzy
 msgid "Pirate Weather API Key"
-msgstr "Pirate Weather"
+msgstr "Pirate Weather API-avain"
 
 #. 3.8->settings-schema.json->pirateweather_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at pirateweather.net and paste it here."
-msgstr "Kopioi käyttämäsi palvelun tililtä koodi ja liitä se tähän."
+msgstr "Kopioi tämä pirateweather.net tililtäsi ja liitä se tähän."
 
 #. 3.8->settings-schema.json->visualcrossing_apikey->description
-#, fuzzy
 msgid "Visual Crossing API Key"
-msgstr "Visual Crossing"
+msgstr "Visual Crossing API-avain"
 
 #. 3.8->settings-schema.json->visualcrossing_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at visualcrossing.com and paste it here."
-msgstr "Kopioi käyttämäsi palvelun tililtä koodi ja liitä se tähän."
+msgstr "Kopioi tämä visualcrossing.com tililtäsi ja liitä se tähän."
 
 #. 3.8->settings-schema.json->weatherbit_apikey->description
-#, fuzzy
 msgid "Weatherbit API Key"
-msgstr "WeatherBit"
+msgstr "Weatherbit API-avain"
 
 #. 3.8->settings-schema.json->weatherbit_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at weatherbit.io and paste it here."
-msgstr "Kopioi käyttämäsi palvelun tililtä koodi ja liitä se tähän."
+msgstr "Kopioi tämä weatherbit.io tililtäsi ja liitä se tähän."
 
 #. 3.8->settings-schema.json->tomorrowio_apikey->description
-#, fuzzy
 msgid "Tomorrow.io API Key"
-msgstr "Tomorrow.io"
+msgstr "Tomorrow.io API-avain"
 
 #. 3.8->settings-schema.json->tomorrowio_apikey->tooltip
-#, fuzzy
 msgid "Copy this from your account at tomorrow.io and paste it here."
-msgstr "Kopioi käyttämäsi palvelun tililtä koodi ja liitä se tähän."
+msgstr "Kopioi tämä tomorrow.io tililtäsi ja liitä se tähän."
 
 #. 3.8->settings-schema.json->accuweather_apikey->description
-#, fuzzy
 msgid "AccuWeather API Key"
-msgstr "AccuWeather"
+msgstr "AccuWeather API-avain"
 
 #. 3.8->settings-schema.json->accuweather_apikey->tooltip
-#, fuzzy
 msgid ""
 "Copy this from your account at developer.accuweather.com and paste it here."
-msgstr "Kopioi käyttämäsi palvelun tililtä koodi ja liitä se tähän."
+msgstr "Kopioi tämä developer.accuweather.com tililtäsi ja liitä se tähän."
 
 #. 3.8->settings-schema.json->weatherunderground_apikey->description
-#, fuzzy
 msgid "Weather Underground API Key"
-msgstr "Weather Underground"
+msgstr "Weather Underground API-avain"
 
 #. 3.8->settings-schema.json->weatherunderground_apikey->tooltip
-#, fuzzy
 msgid ""
 "Copy this from your account at www.wunderground.com/weather/api and paste it "
 "here."
-msgstr "Kopioi käyttämäsi palvelun tililtä koodi ja liitä se tähän."
+msgstr ""
+"Kopioi tämä www.wunderground.com/weather/api tililtäsi ja liitä se tähän."
 
 #. 3.8->settings-schema.json->apiKey->description
 msgid "API Key - Hidden, only for backwards compatibility"
-msgstr ""
+msgstr "API-avain on piilotettu, vain taaksepäin yhteensopiva"
 
 #. 3.8->settings-schema.json->geoclue->description
 msgid "Prioritize GeoClue for location detection"
-msgstr ""
+msgstr "Aseta GeoClue ensin sijainnin määrityksessä"
 
 #. 3.8->settings-schema.json->geoclue->tooltip
 msgid ""
@@ -2929,32 +2991,39 @@ msgid ""
 "fall back to IP-based location detection if GeoClue is not available or "
 "fails to provide location information."
 msgstr ""
+"Jos haluat käyttää ensisijaisesti GeoClue-palvelua automaattiseen sijainnin "
+"määritykseen (mikäli se on saatavilla). Jos laite tukee tätä, sijaintitieto "
+"voi olla tarkempi; ilman laittetukea tulos voi olla hyvinkin epätarkka. Jos "
+"GeoClue ei ole käytettävissä tai se ei onnistu saamaan sijaintia, käytetään "
+"IP-pohjaista sijainnin määritystä."
 
 #. 3.8->settings-schema.json->autoloc_provider->description
 msgid "IP-based automatic location provider"
-msgstr ""
+msgstr "IP-paikannuspalvelu"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geoip.fedoraproject.org"
-msgstr ""
+msgstr "geoip.fedoraproject.org"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "ipapi.com"
-msgstr ""
+msgstr "ipapi.com"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geojs.io"
-msgstr ""
+msgstr "geojs.io"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geoiplookup.io"
-msgstr ""
+msgstr "geoiplookup.io"
 
 #. 3.8->settings-schema.json->autoloc_provider->tooltip
 msgid ""
 "Usually this doesn't need changed, some users have reported better accuracy, "
 "corporate network support or various country-wide bans with one or other."
 msgstr ""
+"Yleensä ei tarvitse muuttaa. Käyttäjäkokemusten mukaan palveluiden välillä "
+"on eroja tarkkuudessa, sekä maakohtaisten estojen toimivuudessa."
 
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
@@ -2962,14 +3031,15 @@ msgid ""
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
 "{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
 "the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice. Powered by "
-"nominatim.openstreetmap.org."
+"replaced automatically for validating your choice. Powered by nominatim."
+"openstreetmap.org."
 msgstr ""
-"Voit antaa koodinaatit \"leveysaste,pituusaste\" (esim. 51.5085,-0.1257) tai "
-"käytä \"kaupunki,maakoodi\" (esim. Tampere,FI) tai osoitteella {talon "
-"numero} {katu} {kaupunki/pitäjä} {postinumero} {maa}.  Hakualgoritmi on "
-"erittäin joustava. Kolmen sekunnin kuluttua kirjoittamastasi osoitteesta, "
-"tulos tulee automaattisesti. Palvelun tarjoaa nominatim.openstreetmap.org."
+"Voit antaa gps-koodinaatit \"leveysaste,pituusaste\" (esim. 51.5085,-0.1257) "
+"tai käytä \"kaupunki,maakoodi\" (esim. tampere,fI) tai osoitteella \"1,"
+"hämeenkatu,tampere,33100,finland\" {House number}  {Street} {City/Town} "
+"{Postcode} {Country}. Haku on hyvin joustava. Kun olet kirjoittanut odota 3 "
+"sekuntia niin arvot ilmestyvät automaattisesti valintasi mukaan. Palvelun "
+"tarjoaa nominatim.openstreetmap.org."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
@@ -2981,7 +3051,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
-msgstr "Tallenna nykyinen sijainti varastoon"
+msgstr "Tallenna sijainti luetteloon"
 
 #. 3.8->settings-schema.json->saveLocation->tooltip
 msgid ""
@@ -3048,10 +3118,9 @@ msgstr ""
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
-msgstr "Näytä molemmat lämpötilayksiköt samanaikaisesti"
+msgstr "Näytä Celsius ja Fahrenheit"
 
 #. 3.8->settings-schema.json->tempTextOverride->tooltip
-#, fuzzy
 msgid ""
 "Some of the available values are: {c} is condition, {t} is temperature and "
 "{u} is unit. Full list of values are available on the Cinnamon spices "
@@ -3059,9 +3128,9 @@ msgid ""
 "Can be used if label does not fit on vertical panel, among other smart "
 "things."
 msgstr ""
-"Käytettävät arvot ovat: {c} on olusuhde, {t} on lämpötila ja {u} on "
-"yksikkö.\n"
-"Käytetään, jos nimi ei mahdu pystysuoraan paneeliin, muiden asioiden lisäksi."
+"Käytettävät arvot ovat: {c} on olusuhde, {t} on lämpötila ja {u} on yksikkö. "
+"Täydellinen arvoista löytyy Cinnamon Spices -sivustolta.\n"
+"Käytetään, jos nimi ei mahdu pystypaneeliin, muiden asioiden lisäksi."
 
 #. 3.8->settings-schema.json->tooltipTextOverride->description
 msgid "Override tooltip on panel"
@@ -3074,7 +3143,7 @@ msgstr "Sama toiminta ja arvot kuin \"Korvaa paneelin nimi säätiedoilla\"."
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
 msgid "Always show Hourly Weather"
-msgstr "Näytä aina tunnin sää"
+msgstr "Tuntiennuste näytetään"
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->tooltip
 msgid ""
@@ -3125,7 +3194,7 @@ msgstr "Hakutulos"
 
 #. 3.8->settings-schema.json->displayWindAsText->description
 msgid "Display wind direction as text"
-msgstr "Näytä tuulen suunta tekstinä"
+msgstr "Tuulen suunta tekstinä"
 
 #. 3.8->settings-schema.json->displayWindAsText->tooltip
 msgid "Like SE, N instead of direction icons."
@@ -3179,9 +3248,8 @@ msgstr ""
 "  Varmista ensin, että ongelmaa ei ole vielä ilmoitettu."
 
 #. 3.8->settings-schema.json->maintainer->description
-#, fuzzy
 msgid "Current maintainer: ---"
-msgstr "Nykyinen kehittäjä: Gr3q"
+msgstr "Kehittäjä: Gr3q"
 
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
@@ -3207,18 +3275,18 @@ msgstr ""
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
 "Your location in most cases work automatically but you can enter it manually "
-"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
-"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
-"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
-"the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice."
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,"
+"Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/"
+"Town} {Postcode} {Country}. The search algorithm is very flexible with the "
+"format. After 3 seconds without typing the address you entered is replaced "
+"automatically for validating your choice."
 msgstr ""
-"Sinun sijainti saadaan usein automaattisesti, mutta voit antaa sen myös itse "
-"\"leveysaste,pituusaste\" (esim. 51.5085,-0.1257) tai käytämällä "
-"\"kaupunki,maakoodi\" (esim. tampere,fI) tai osoitteella {talon numero} "
-"{katuosoite} {kaupunki/kunta} {postinumero} {maa}. Haku on hyvin joustava. "
-"Kun olet kirjoittanut odota 3 sekuntia niin arvot ilmestyvät automaattisesti "
-"valintasi mukaan."
+"Sijaintisi saadaan usein automaattisesti. Voit antaa gps-koodinaatit "
+"\"leveysaste,pituusaste\" (esim. 51.5085,-0.1257) tai muodossa \"kaupunki,"
+"maakoodi\" (esim. tampere,fI) tai osoitteella \"1,hämeenkatu,tampere,33100,"
+"finland\" {House number}  {Street} {City/Town} {Postcode} {Country}. Haku on "
+"hyvin joustava. Kun olet kirjoittanut odota 3 sekuntia niin arvot ilmestyvät "
+"automaattisesti valintasi mukaan."
 
 #. 3.8->settings-schema.json->logLevel->description
 msgid "Log Level"
@@ -3290,15 +3358,28 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"Sovellus suorittaa antamasi komennon aina, kun säätiedot päivittyvät. "
+"Komentoon sijoitetaan arvot samassa formaatissa kuin muissakin. Lisäksi on "
+"{full_data}, joka sisältää kaikki ajantasaiset säätiedot. Yksinkertaisilla "
+"aaltosulkeilla {xxx} merkityt kohdat sijoitetaan sellaisenaan, kun taas "
+"kaksinkertaisilla {{xxxx}} merkityt kohdat ympäröidään heittomerkeillä ('), "
+"jolloin muut heittomerkit niiden sisällä suojataan (escaped). Tätä voi "
+"hyödyntää säätietojen integroimiseksi järjestelmän muihin osiin. Säätietojen "
+"koko rakenteen voi tarkistaa README-tiedostossa olevan linkin kautta.\n"
+"\n"
+"Esimerkki: 'notify-send \"The weather is {c} and the temperature is {t}"
+"{u}\"' näyttää ilmoituksen, jossa kerrotaan vallitseva sää ja lämpötila.\n"
+"\n"
+"Esimerkki: 'echo {{full_data}} > /tmp/weather_data' tallentaa kaikki "
+"säätiedot tiedostoon /tmp-hakemistossa."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
 msgstr "Testaa komentoa"
 
 #. 3.8->settings-schema.json->uvIndex->description
-#, fuzzy
 msgid "Enable displaying UV Index"
-msgstr "Säävaroitukset näytetään"
+msgstr "Näytä UV-indeksi"
 
 #. 3.8->settings-schema.json->uvIndex->tooltip
 msgid ""
@@ -3306,3 +3387,6 @@ msgid ""
 "next to sunrise/sunset times. It will not show if the UV index is low risk "
 "(0-2)."
 msgstr ""
+"Jos palveluntarjoaja tukee toimintoa, UV-indeksi näytetään valikossa "
+"auringonnousun ja -laskun vieressä. Indeksiä ei näytetä, jos UV-säteily on "
+"alhaista (0–2)."

@@ -9,8 +9,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-06-24 18:54+0200\n"
-"PO-Revision-Date: 2025-10-11 12:36+0200\n"
-"Last-Translator: claudiux\n"
+"PO-Revision-Date: 2026-10-16 12:07+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -230,12 +230,12 @@ msgstr "la"
 #. settings-schema.json->alarm-clock-workoff-days-radio->options
 #. applet.js:608 applet.js:626 applet.js:5664 applet.js:5680
 msgid "(Undefined)"
-msgstr "(ei valintaa)"
+msgstr "(Määrittämätön)"
 
 #. settings-schema.json->category-to-move->options
 #. applet.js:609 applet.js:5681
 msgid "(Blacklist)"
-msgstr ""
+msgstr "(Estolista)"
 
 #. applet.js:2319
 msgid "Start"
@@ -379,11 +379,11 @@ msgstr "Asetamasi raja on saavutettu."
 
 #. applet.js:4168
 msgid "Temporary Mute"
-msgstr ""
+msgstr "Väliaikainen mykistys"
 
 #. applet.js:4169
 msgid "Turn the sound back on"
-msgstr ""
+msgstr "Laita ääni päälle"
 
 #. applet.js:4278
 msgid "Please Log Out then Log In"
@@ -664,7 +664,7 @@ msgstr "Viimeistele käynnistämällä Cinnamon uudelleen"
 
 #. lib/messageTray.js:1136
 msgid "System Information"
-msgstr ""
+msgstr "Järjestelmän tiedot"
 
 #. lib/util.js:245
 #, javascript-format
@@ -724,28 +724,25 @@ msgid "Select a JSON file to import"
 msgstr "Valitse tuotava JSON-tiedosto"
 
 #. xs/bin/R3SettingsWidgets.py:174
-#, fuzzy
 msgid "Checking dependencies"
-msgstr "Riippuvuuksia ei tarkisteta"
+msgstr "Tarkistetaan riippuvuuksia"
 
 #. xs/bin/R3SettingsWidgets.py:175
 #, python-format
 msgid "Please install: %s"
-msgstr ""
+msgstr "Asennus tarvitaan: %s"
 
 #. xs/bin/R3SettingsWidgets.py:374
-#, fuzzy
 msgid "_Cancel"
-msgstr "Peru"
+msgstr "_Peru"
 
 #. xs/bin/R3SettingsWidgets.py:375
 msgid "_Open"
-msgstr ""
+msgstr "_Avaa"
 
 #. xs/bin/R3SettingsWidgets.py:388
-#, fuzzy
 msgid "Sound files"
-msgstr "JSON-tiedostot"
+msgstr "Musiikkitiedostot"
 
 #. xs/bin/R3TreeListWidgets.py:279 xs/bin/R3TreeListWidgets.py:502
 msgid "Add new entry"
@@ -869,7 +866,7 @@ msgstr "Päivitä tämä asemalista"
 
 #. settings-schema.json->sectionBlacklist->title
 msgid "Unwanted (blacklist)"
-msgstr ""
+msgstr "Tarpeettomat (estolista)"
 
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
@@ -980,7 +977,7 @@ msgstr "Kiintolevyllä säilyttäminen"
 
 #. settings-schema.json->sectionYTIgnore->title
 msgid "Ignore YT"
-msgstr ""
+msgstr "Ohita YT"
 
 #. settings-schema.json->sectionYTExtract->title
 msgid "Extract soundtrack from YouTube video"
@@ -1064,7 +1061,7 @@ msgid ""
 "Seconds\n"
 "While\n"
 "Muted"
-msgstr ""
+msgstr "Mykistettynä"
 
 #. settings-schema.json->radios->columns->title
 msgid "Streaming URL (empty for a category)"
@@ -1138,7 +1135,7 @@ msgstr "Päivitä minun asemat radiotietokannan tiedoilla"
 
 #. settings-schema.json->blacklist->columns->title
 msgid "Blacklisted URL"
-msgstr ""
+msgstr "Estolistalle merkitty osoite"
 
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
@@ -1182,9 +1179,8 @@ msgid "Remove selected items from this list"
 msgstr "Poista valitut kohteet tästä listasta"
 
 #. settings-schema.json->import-blacklist-button->description
-#, fuzzy
 msgid "Blacklist selected items from this list"
-msgstr "Poista valitut kohteet tästä listasta"
+msgstr "Lisää valitut kohteet luettelosta estolistalle"
 
 #. settings-schema.json->import-select-all->description
 #. settings-schema.json->search-select-all->description
@@ -1230,57 +1226,59 @@ msgstr ""
 
 #. settings-schema.json->window-width->description
 msgid "Width (in pixels)"
-msgstr ""
+msgstr "Leveys (pikseleinä)"
 
 #. settings-schema.json->window-width->tooltip
 msgid ""
 "Limited by the width of the screen.\n"
 "Will only be valid from the next time this window is opened."
 msgstr ""
+"Rajoittuu näytön leveyteen.\n"
+"Tulee voimaan kun tämä ikkuna avataan seuraavan kerran."
 
 #. settings-schema.json->waiting-time->description
 msgid "Waiting time before a new radio turns on"
-msgstr ""
+msgstr "Odotusaika ennen uuden radion käynnistymistä"
 
 #. settings-schema.json->waiting-time->options
 msgid "none"
-msgstr ""
+msgstr "ei mitään"
 
 #. settings-schema.json->waiting-time->options
 msgid "300 ms"
-msgstr ""
+msgstr "300 ms"
 
 #. settings-schema.json->waiting-time->options
 msgid "500 ms"
-msgstr ""
+msgstr "500 ms"
 
 #. settings-schema.json->waiting-time->options
 msgid "800 ms"
-msgstr ""
+msgstr "800 ms"
 
 #. settings-schema.json->waiting-time->options
 msgid "1 s"
-msgstr ""
+msgstr "1 s"
 
 #. settings-schema.json->waiting-time->options
 msgid "1.5 s"
-msgstr ""
+msgstr "1.5 s"
 
 #. settings-schema.json->waiting-time->options
 msgid "2 s"
-msgstr ""
+msgstr "2 s"
 
 #. settings-schema.json->waiting-time->options
 msgid "3 s"
-msgstr ""
+msgstr "3 s"
 
 #. settings-schema.json->waiting-time->options
 msgid "4 s"
-msgstr ""
+msgstr "4 s"
 
 #. settings-schema.json->waiting-time->options
 msgid "5 s"
-msgstr ""
+msgstr "5 s"
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
@@ -1546,15 +1544,15 @@ msgstr ""
 
 #. settings-schema.json->fixHeightCat->description
 msgid "Fix the height of these lists"
-msgstr ""
+msgstr "Korjaa listauksen korkeus"
 
 #. settings-schema.json->heightCat->units
 msgid " px"
-msgstr ""
+msgstr " px"
 
 #. settings-schema.json->heightCat->description
 msgid "Height of these lists"
-msgstr ""
+msgstr "Näiden listarivien korkeus"
 
 #. settings-schema.json->show-system-items->description
 msgid "Show system items in the menu"
@@ -1736,7 +1734,7 @@ msgstr "Normaali"
 
 #. settings-schema.json->image-resolution->options
 msgid "Fastest"
-msgstr ""
+msgstr "Nopein"
 
 #. settings-schema.json->image-resolution->tooltip
 msgid ""
@@ -1999,13 +1997,15 @@ msgstr "Korosta sovelman kuvake kun tallennetaan"
 
 #. settings-schema.json->ignoreYT->description
 msgid "Ignore Youtube features"
-msgstr ""
+msgstr "Poista käytöstä YouTubeen liittyvät erikoistoiminnot"
 
 #. settings-schema.json->ignoreYT->tooltip
 msgid ""
 "Ignoring Youtube features reduces CPU load. But loading album art becomes "
 "impossible."
 msgstr ""
+"YouTube-erikoistoimintojen ohittaminen vähentää suorittimen kuormitusta. "
+"Kansikuvien lataaminen tällöin ei onnistu."
 
 #. settings-schema.json->yt-cookies-from->description
 msgid "Use cookies from"

@@ -66,12 +66,13 @@ class MyApplet extends Applet.TextIconApplet {
         const panelMonitorIndex = this.panel.monitorIndex
         const windows = global.get_window_actors();
         for (let i = windows.length - 1; i > 0; i--) {
-            if (panelMonitorIndex != windows[i].metaWindow.get_monitor() || windows[i].metaWindow.get_window_type() > 10) {
+            if (panelMonitorIndex != windows[i].metaWindow.get_monitor() || windows[i].metaWindow.get_window_type() > 10 || windows[i].metaWindow.get_window_type() == 1 || windows[i].metaWindow.minimized) {
                 continue
             }
             //console.log("pass :", i)
             //console.log("title:", windows[i].metaWindow.title)
             //console.log("type :", windows[i].metaWindow.get_window_type())
+            //console.log("minim:", windows[i].metaWindow.minimized)
             return windows[i].metaWindow.title
         }
         return ""
@@ -90,6 +91,9 @@ class MyApplet extends Applet.TextIconApplet {
         if (w.get_monitor() != this.panel.monitorIndex) {
             let title = this._getTopWindowFromMonitor(w.get_monitor())
             this._setTitle(title, "")
+            return
+        } else if (w.get_window_type() == 1) {
+            this._setTitle("", "")
             return
         }
         this._setTitle(w.get_title(), this.cssFocus)

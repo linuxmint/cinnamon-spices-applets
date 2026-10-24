@@ -31,11 +31,11 @@ msgstr "Một số phụ thuộc chưa được cài đặt."
 
 #: 5.4/applet.js:327
 msgid ""
-"Both 'sox' and 'zenity' are required for this applet to have all of its functionality including notifications and audible alerts.\n"
+"Both 'sox' and 'xenity' are required for this applet to have all of its functionality including notifications and audible alerts.\n"
 "\n"
 "Please view the README for help on installing them.\n"
 msgstr ""
-"Cả 'sox' và 'zenity' đều cần thiết để applet này có đầy đủ chức năng, bao gồm thông báo và cảnh báo bằng âm thanh.\n"
+"Cả 'sox' và 'xenity' đều cần thiết để applet này có đầy đủ chức năng, bao gồm thông báo và cảnh báo bằng âm thanh.\n"
 "\n"
 "Vui lòng xem tệp README để được hướng dẫn cài đặt.\n"
 
@@ -140,11 +140,11 @@ msgstr "Một số phụ thuộc chưa được cài đặt"
 
 #: 3.2/applet.js:160
 msgid ""
-"'upower', 'sox' and 'zenity' are required for this applet to have all its facilities including notifications and audible alerts .\n"
+"'upower', 'sox' and 'xenity' are required for this applet to have all its facilities including notifications and audible alerts .\n"
 "\n"
 "Please read the help file on how to install them."
 msgstr ""
-"'upower', 'sox' và 'zenity' là bắt buộc để applet này có đầy đủ các tính năng, bao gồm thông báo và cảnh báo bằng âm thanh.\n"
+"'upower', 'sox' và 'xenity' là bắt buộc để applet này có đầy đủ các tính năng, bao gồm thông báo và cảnh báo bằng âm thanh.\n"
 "\n"
 "Vui lòng đọc tệp trợ giúp để biết cách cài đặt chúng."
 

@@ -50,6 +50,9 @@ TimerApplet.prototype = {
     this.periodS = 0;
     this.endTime = new Date();
 
+    this.paused = false;
+    this.periodForResume = 0;
+
     this.timeout = null;
     this.timeTimeout = null;
     this.flashTimeout = null;
@@ -135,74 +138,94 @@ TimerApplet.prototype = {
     });
     // Hours
     let h = new St.BoxLayout({
-      vertical: true
+      vertical: true,
+      reactive: true
     });
     let hplus = new St.Button({
+      style: "font-family: monospace; font-size: 12pt; font-weight: bold",
       label: _("  +  ")
     });
     hplus.connect("clicked", Lang.bind(this, this.on_hplus_clicked));
     this.hSpin = new St.Label({
       text: _("00"),
-      x_align: 2,
+      style: "font-family: monospace; font-size: 12pt; font-weight: bold",
+      x_align: 2
     });
     this.hSpin.value = 0;
     let hminus = new St.Button({
+      style: "font-family: monospace; font-size: 12pt; font-weight: bold",
       label: _("  -  ")
     });
     hminus.connect("clicked", Lang.bind(this, this.on_hminus_clicked));
     h.add_actor(hplus);
     h.add_actor(this.hSpin);
     h.add_actor(hminus);
+    h.connect("scroll-event", (...args) => this.on_h_scroll(...args));
+    h.connect("button-press-event", (...args) => this.on_h_press(...args));
     // Separator
     let c1 = new St.Label({
       text: _("  :  "),
+      style: "font-size: 12pt; font-weight: bold",
       y_align: 2
     });
     // Minutes
     let m = new St.BoxLayout({
-      vertical: true
+      vertical: true,
+      reactive: true
     });
     let mplus = new St.Button({
+      style: "font-family: monospace; font-size: 12pt; font-weight: bold",
       label: _("  +  ")
     });
     mplus.connect("clicked", Lang.bind(this, this.on_mplus_clicked));
     this.mSpin = new St.Label({
       text: _("00"),
+      style: "font-family: monospace; font-size: 12pt; font-weight: bold",
       x_align: 2
     });
     this.mSpin.value = 0;
     let mminus = new St.Button({
+      style: "font-family: monospace; font-size: 12pt; font-weight: bold",
       label: _("  -  ")
     });
     mminus.connect("clicked", Lang.bind(this, this.on_mminus_clicked));
     m.add_actor(mplus);
     m.add_actor(this.mSpin);
     m.add_actor(mminus);
+    m.connect("scroll-event", (...args) => this.on_m_scroll(...args));
+    m.connect("button-press-event", (...args) => this.on_m_press(...args));
     // Separator
     let c2 = new St.Label({
       text: _("  :  "),
+      style: "font-size: 12pt; font-weight: bold",
       y_align: 2
     });
     // Seconds
     let s = new St.BoxLayout({
-      vertical: true
+      vertical: true,
+      reactive: true
     });
     let splus = new St.Button({
+      style: "font-family: monospace; font-size: 12pt; font-weight: bold",
       label: _("  +  ")
     });
     splus.connect("clicked", Lang.bind(this, this.on_splus_clicked));
     this.sSpin = new St.Label({
       text: _("00"),
+      style: "font-family: monospace; font-size: 12pt; font-weight: bold",
       x_align: 2
     });
     this.sSpin.value = 0;
     let sminus = new St.Button({
+      style: "font-family: monospace; font-size: 12pt; font-weight: bold",
       label: _("  -  ")
     });
     sminus.connect("clicked", Lang.bind(this, this.on_sminus_clicked));
     s.add_actor(splus);
     s.add_actor(this.sSpin);
     s.add_actor(sminus);
+    s.connect("scroll-event", (...args) => this.on_s_scroll(...args));
+    s.connect("button-press-event", (...args) => this.on_s_press(...args));
     spinsMenuItem.add(h);
     spinsMenuItem.add(c1);
     spinsMenuItem.add(m);
@@ -398,6 +421,48 @@ TimerApplet.prototype = {
     this.sSpin.text = (this.sSpin.value < 10 ? "0" : "") + this.sSpin.value;
   },
 
+  on_h_scroll(actor, event) {
+      let direction = event.get_scroll_direction();
+      if (direction == Clutter.ScrollDirection.DOWN) this.on_hminus_clicked();
+      else if (direction == Clutter.ScrollDirection.UP) this.on_hplus_clicked();
+  },
+
+  on_m_scroll(actor, event) {
+      let direction = event.get_scroll_direction();
+      if (direction == Clutter.ScrollDirection.DOWN) this.on_mminus_clicked();
+      else if (direction == Clutter.ScrollDirection.UP) this.on_mplus_clicked();
+  },
+
+  on_s_scroll(actor, event) {
+      let direction = event.get_scroll_direction();
+      if (direction == Clutter.ScrollDirection.DOWN) this.on_sminus_clicked();
+      else if (direction == Clutter.ScrollDirection.UP) this.on_splus_clicked();
+  },
+
+  on_h_press(actor, event) {
+      let button = event.get_button();
+      if (button === 2) {
+        this.hSpin.value = 0;
+        this.hSpin.text = "00";
+      }
+  },
+
+  on_m_press(actor, event) {
+      let button = event.get_button();
+      if (button === 2) {
+        this.mSpin.value = 0;
+        this.mSpin.text = "00";
+      }
+  },
+
+  on_s_press(actor, event) {
+      let button = event.get_button();
+      if (button === 2) {
+        this.sSpin.value = 0;
+        this.sSpin.text = "00";
+      }
+  },
+
   on_applet_clicked: function(event) {
     this._remove_flashTimeout();
     this.actor.set_style("");
@@ -405,6 +470,24 @@ TimerApplet.prototype = {
     else if (this.openSubmenu == "Precise setup") this.preciseMenuItem.menu.open();
     else this.presetsMenuItem.menu.open();
     this.menu.toggle();
+  },
+
+  on_applet_middle_clicked: function(event) {
+    if (this.paused) {
+      this.endTime = new Date(Date.now() + this.periodForResume * 1000);
+      this.saved_endTime = this.endTime.getTime();
+      this.paused = false;
+      this._tick();
+    }
+    else {
+      if (this.period > 0) {
+        this.paused = true;
+        this.periodForResume = this.period;
+        this.on_slider_drag_begin();
+        this.sliderMenuItem.setValue(0);
+        this.on_slider_drag_end();
+      }
+    }
   },
 
   on_applet_added_to_panel: function() {
@@ -503,7 +586,7 @@ TimerApplet.prototype = {
       let m = this.endTime.getMinutes();
       let s = this.endTime.getSeconds();
       let today = new Date(); today.setHours(0); today.setMinutes(0); today.setSeconds(0);
-      this.timeMenuItem.setLabel(_("At:  ") + (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s + (this.endTime.getTime() > today.getTime() + 86400000 ? " (tomorrow)" : ""));
+      this.timeMenuItem.setLabel(_("At:  ") + (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s + (this.endTime.getTime() >= today.getTime() + 86400000 ? " (" + this.endTime.toDateString() + ")" : ""));
       if (!this.sliderDragging) this._tick();
     }
     else {
@@ -513,6 +596,7 @@ TimerApplet.prototype = {
 
   _tick: function () {
     this._remove_timeout();
+    this.paused = false;
     this.period = Math.floor((this.endTime.getTime() - Date.now()) / 1000);
     if (this.period >= 0) {
       this.periodH = Math.floor(this.period / 3600);
@@ -523,11 +607,8 @@ TimerApplet.prototype = {
       let h = this.endTime.getHours();
       let m = this.endTime.getMinutes();
       let s = this.endTime.getSeconds();
-      let today = new Date();
-      today.setHours(0);
-      today.setMinutes(0);
-      today.setSeconds(0);
-      this.timeMenuItem.setLabel(_("At:  ") + (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s + (this.endTime.getTime() > today.getTime() + 86400000 ? " (tomorrow)" : ""));
+      let today = new Date(); today.setHours(0); today.setMinutes(0); today.setSeconds(0);
+      this.timeMenuItem.setLabel(_("At:  ") + (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s + (this.endTime.getTime() >= today.getTime() + 86400000 ? " (" + this.endTime.toDateString() + ")" : ""));
       this._moveSlider();
       if (this.turnOffSwitchMenuItem.state && this.customCommand.trim() == "" && this.period < 10) this.set_applet_label(_("Turn off in ") + this.periodS + _("s"));
       else this.set_applet_label(label);
@@ -564,7 +645,7 @@ TimerApplet.prototype = {
           }
         }
         if (this.showNotifications) {
-          //Util.spawnCommandLine('zenity --notification --text=\"Timer:  Time\'s up!\" --window-icon=clock');
+          //Util.spawnCommandLine('xenity --notification --text=\"Timer:  Time\'s up!\" --window-icon=clock');
           let source = new MessageTray.SystemNotificationSource();
           Main.messageTray.add(source);
           let notification = new MessageTray.Notification(source, _("Timer"), (this.customText.trim() == "" ? _("Time's up!") : this.customText));

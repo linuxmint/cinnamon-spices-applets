@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 5.8/applet.js:33
 msgid "Click: toggle dark/light mode"
@@ -58,15 +58,14 @@ msgid "Critical error"
 msgstr "Kriittinen virhe"
 
 #. 5.8/lib/time_change_listener/time_change_listener.js:28
-#, fuzzy
 msgid ""
 "Missing dependencies `make` and/or `g++`. Install them, in e.g. on Debian-"
 "based system with `sudo apt install make g++`, then reload the applet in "
 "restarting Cinnamon."
 msgstr ""
-"Puuttuvat riippuvuudet \"make\" ja \"gcc\". Asenna komennolla \"sudo apt "
-"install build-essential\", lataa sovelma sitten uudelleen (tai "
-"käyttöjärjestelmä uudelleen)."
+"Puuttuvat riippuvuudet \"make\" ja \"g++\". Asennuskomento \"sudo apt "
+"install make g++\". Tämän jälkeen voit ladata tämän sovelman ja käynnistää "
+"Cinnamonin uudelleen."
 
 #. 5.8/lib/time_change_listener/time_change_listener.js:41
 msgid "Compilation of"
@@ -103,20 +102,19 @@ msgstr "väärän formaatin takia"
 #. 5.8/lib/commands_launcher/commands_launcher.js:44
 #. 5.8/lib/commands_launcher/commands_launcher.js:50
 msgid "Detail"
-msgstr ""
+msgstr "Tiedot"
 
 #. 5.8/lib/commands_launcher/commands_launcher.js:42
 msgid "due to time expiration"
 msgstr "ajan erääntymisen takia"
 
 #. 5.8/lib/commands_launcher/commands_launcher.js:48
-#, fuzzy
 msgid "due to an error"
-msgstr "väärän formaatin takia"
+msgstr "virheen vuoksi"
 
 #. 2.2/applet.js:20
 msgid "this applet is only supported by"
-msgstr ""
+msgstr "tätä sovelmaa tukevat vain"
 
 #. metadata.json->name
 msgid "Automatic dark/light themes"
@@ -234,9 +232,8 @@ msgstr "Maantieteellinen pituusaste desimaaleina"
 
 #. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->description
-#, fuzzy
 msgid "Show switch times in a notification"
-msgstr "Tarkista tämän päivän vaihtoajat ilmoituksesta"
+msgstr "Näytä vaihtoaika ilmoituksissa"
 
 #. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->tooltip
@@ -313,9 +310,8 @@ msgstr "Pödän teeman nimi (Cinnamon teema)"
 #. 5.8->settings-schema.json->light-mode_background_button_apply->description
 #. 5.8->settings-schema.json->dark-mode_themes_button_apply->description
 #. 5.8->settings-schema.json->dark-mode_background_button_apply->description
-#, fuzzy
 msgid "Test applying to the system"
-msgstr "Hyväksy nämä asetukset"
+msgstr "Sovellettava testi"
 
 #. 5.8->settings-schema.json->light-mode_themes_button_apply->tooltip
 msgid "Apply the light mode themes to the system manually"
@@ -415,7 +411,6 @@ msgid "Command"
 msgstr "Komento"
 
 #. 5.8->settings-schema.json->light-mode_commands_list->tooltip
-#, fuzzy
 msgid ""
 "List of commands to be executed when switching to this mode\n"
 "\n"
@@ -430,24 +425,21 @@ msgstr ""
 "Luettelo komennoista, jotka suoritetaan, kun vaihdat tähän tilaan\n"
 "\n"
 "Huomaa:\n"
-"- nimen on virheilmoituksia varten\n"
-"- erääntymisaika tappaa komennon prosessin\n"
-"- 0 sekunnin erääntyminen tarkoittaa ei koskaan\n"
-"- mikään aliprosessi ei voi erääntyä\n"
-"- polku on ~-hakemistoon\n"
-"- Virheilmoitukset raportoi stderr, kun paluutila ei ole 0 ja ne näkyvät "
-"ilmoituksena"
+"- nimi on tarkoitettu virheilmoituksia varten\n"
+"- vanhenemisaika lopettaa komennon prosessin ennenaikaisesti\n"
+"- 0 sekunnin aika tarkoittaa, ettei prosessia lopeteta automaattisesti\n"
+"- prosessi, joka ei lopu 10 sekunnin kuluessa lopetetaan\n"
+"- polku viittaa käyttäjän kotihakemistoon (~/)\n"
+"- Virheilmoitukset raportoi stderr ja ne tulostetaan ja ilmoitetaan"
 
 #. 5.8->settings-schema.json->light-mode_commands_button_launch->description
 #. 5.8->settings-schema.json->dark-mode_commands_button_launch->description
-#, fuzzy
 msgid "Test commands launch"
-msgstr "Mukautetut komennot"
+msgstr "Testikomentojen käynnistys"
 
 #. 5.8->settings-schema.json->light-mode_commands_button_launch->tooltip
-#, fuzzy
 msgid "Test launching the commands set for the light mode"
-msgstr "Käynnistää vaalealle tilalle asetetut komennot"
+msgstr "Testaa vaalean tilan komentojen käynnistämisen jälkeen"
 
 #. 5.8->settings-schema.json->dark-mode_themes_button_detect->tooltip
 msgid ""
@@ -498,6 +490,5 @@ msgstr ""
 "ilmoituksena"
 
 #. 5.8->settings-schema.json->dark-mode_commands_button_launch->tooltip
-#, fuzzy
 msgid "Test launching the commands set for the dark mode"
-msgstr "Käynnistää tummalle tilalle asetetut komennot"
+msgstr "Testaa tumman tilan komentojen käynnistämisen jälkeen"

@@ -139,7 +139,7 @@ MyApplet.prototype = {
             // Working directory, passing %null to use the parent's
             null,
             // An array of arguments
-            ["zenity", "--username", "--password", "--title=Please enter your Duolingo credentials"],
+            ["xenity", "--username", "--password", "--title=Please enter your Duolingo credentials"],
             // Process ENV, passing %null to use the parent's
             null,
             // Flags; we need to use PATH so `ls` can be found and also need to know

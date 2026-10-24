@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: hamster@projecthamster.wordpress.com 0.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2026-10-13 12:19+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:103
+msgid "What are you doing?"
+msgstr "Mitä sinä teet?"
+
+#: applet.js:109
+msgid "Enter activity..."
+msgstr "Anna toiminto..."
+
+#: applet.js:125
+msgid "Todays activities"
+msgstr "Tämän päivän aktiivisuus"
+
+#: applet.js:293
+msgid "Loading..."
+msgstr "Ladataan..."
+
+#: applet.js:317
+msgid "Show Overview"
+msgstr "Näytä yleiskatsaus"
+
+#: applet.js:322
+msgid "Stop Tracking"
+msgstr "Lopeta seuranta"
+
+#: applet.js:327
+msgid "Add Earlier Activity"
+msgstr "Lisää aiempaa aktiivisuutta"
+
+#: applet.js:333
+msgid "Tracking Settings"
+msgstr "Seuranta-asetukset"
+
+#: applet.js:516
+msgid "No Activity"
+msgstr "Ei aktiivisuutta"
+
+#. metadata.json->description
+msgid "Cinnamon applet for project hamster - the GNOME time tracker"
+msgstr "Cinnamon Project Hamster - GNOME time tracker"
+
+#. metadata.json->name
+msgid "Project Hamster Applet"
+msgstr "Project Hamster Applet"
+
+#. settings-schema.json->head->description
+msgid "Settings"
+msgstr "Asetukset"
+
+#. settings-schema.json->panel-appearance->description
+msgid "Appearance in the panel"
+msgstr "Näkyvyys paneelissa"
+
+#. settings-schema.json->panel-appearance->options
+msgid "Label only"
+msgstr "Vain nimi"
+
+#. settings-schema.json->panel-appearance->options
+msgid "Icon only"
+msgstr "Vain kuvake"
+
+#. settings-schema.json->panel-appearance->options
+msgid "Label and icon"
+msgstr "Nimi ja kuvake"
+
+#. settings-schema.json->show-hamster-dropdown->description
+msgid "Shortcut to show the menu"
+msgstr "Pikanäppäin valikolle"

@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-07 14:33-0400\n"
-"PO-Revision-Date: 2022-12-01 13:10+0200\n"
+"PO-Revision-Date: 2026-10-17 10:31+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:45
 msgid "Turn off monitor"
@@ -29,7 +29,7 @@ msgstr "Turn Off Monitor"
 
 #. metadata.json->description
 msgid "Click on the applet to turn off monitor"
-msgstr "Napsauta sovelmaa ja näyttö sammuu"
+msgstr "Paina sovelman kuvaketta ja näyttö sammuu heti"
 
 #. settings-schema.json->General->title
 msgid "General"
@@ -49,7 +49,7 @@ msgstr "Kuvake"
 
 #. settings-schema.json->section-lock->title
 msgid "Screen lock"
-msgstr ""
+msgstr "Lukitse näyttö"
 
 #. settings-schema.json->mouse-deactivation-duration->units
 msgid "seconds"
@@ -57,19 +57,19 @@ msgstr "sekuntia"
 
 #. settings-schema.json->mouse-deactivation-duration->description
 msgid "Duration of deactivation of the mouse"
-msgstr "Hiiren käytöstä poistamisen kesto"
+msgstr "Aika jolloin hiiri on poistettu käytöstä"
 
 #. settings-schema.json->mouse-deactivation-duration->tooltip
 msgid ""
 "To prevent the monitor from turning on too soon after turning it off, the "
 "mouse will be disabled for the number of seconds set here."
 msgstr ""
-"Jotta näyttö ei käynnisty liian aikaisin sammuttamisen jälkeen, hiiri "
-"poistetaan käytöstä tässä määritetyksi ajaksi."
+"Jotta näyttö ei palaudu liian aikaisin pimentämisen jälkeen, voit "
+"määrittää hiiren poistoviiveen."
 
 #. settings-schema.json->keybinding->description
 msgid "Keyboard shortcut to turn off your monitor"
-msgstr "Pikanäppäin näytön sammuttamiseksi"
+msgstr "Näytön sammuttamiseen"
 
 #. settings-schema.json->use-symbolic-icon->description
 msgid "Use a symbolic icon"
@@ -81,4 +81,4 @@ msgstr "Symbolisen kuvakkeen väri"
 
 #. settings-schema.json->screenlock->description
 msgid "Lock also cinnamon session"
-msgstr ""
+msgstr "Lukitse myös istunto"
