@@ -331,8 +331,8 @@ MyApplet.prototype = {
             return;
         }
 
-        const config_dir = Gio.File.new_for_path(HOME_DIR + "/.config");
-        const link = Gio.File.new_for_path(HOME_DIR + "/.config/gtk-4.0");
+        const config_dir = Gio.File.new_for_path(GLib.get_user_config_dir());
+        const link = config_dir.get_child("gtk-4.0");
 
         let target;
 
@@ -372,13 +372,11 @@ MyApplet.prototype = {
 
             // Nothing to change if the link already points to the requested directory.
             if (info && info.get_file_type() === Gio.FileType.SYMBOLIC_LINK) {
-               // let current_target = link.get_path();
-               // let resolved_target = Gio.File.new_for_path(target_path).get_path();
-
                 try {
                     const link_target = link.read_link(null);
-                    const parent = link.get_parent();
-                    const resolved_link = parent.resolve_relative_path(link_target);
+                    const resolved_link = GLib.path_is_absolute(link_target)
+                        ? Gio.File.new_for_path(link_target)
+                        : link.get_parent().resolve_relative_path(link_target);
 
                     if (resolved_link.equal(target)) {
                         return;
@@ -398,7 +396,7 @@ MyApplet.prototype = {
                     name += "." + suffix;
                 }
 
-                temp_link = Gio.File.new_for_path(HOME_DIR + "/.config/" + name);
+                temp_link = config_dir.get_child(name);
 
                 try {
                     temp_link.make_symbolic_link(target_path, null);
@@ -423,13 +421,13 @@ MyApplet.prototype = {
                     let backup_suffix = 0;
 
                     while (true) {
-                        let name = HOME_DIR + "/.config/gtk-4.0.back";
+                        let name = "gtk-4.0.back";
 
                         if (backup_suffix > 0) {
                             name += "." + backup_suffix;
                         }
 
-                        backup = Gio.File.new_for_path(name);
+                        backup = config_dir.get_child(name);
 
                         try {
                             backup.query_info(
