@@ -1,0 +1,291 @@
+# CLOCKOO
+# This file is put in the public domain.
+# FranzBias, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: clockoo@FranzBias 0.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-10-24 08:45+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:157
+msgid "Install missing packages…"
+msgstr ""
+
+#. settings-schema.json->section-cuckoo->title
+#. settings-schema.json->cuckoo-enabled->description
+#. applet.js:166
+msgid "Hourly cuckoo"
+msgstr ""
+
+#. applet.js:174
+msgid "Start a timer"
+msgstr ""
+
+#. applet.js:176 applet.js:224
+#, javascript-format
+msgid "%d min"
+msgstr ""
+
+#. applet.js:189
+msgid "Settings"
+msgstr ""
+
+#. applet.js:198
+#, javascript-format
+msgid "Next alarm: %s"
+msgstr ""
+
+#. applet.js:203
+msgid "No alarm set"
+msgstr ""
+
+#. applet.js:209
+#, javascript-format
+msgid "Missing packages: %s"
+msgstr ""
+
+#. applet.js:211
+msgid "The Clockoo app runs its own cuckoo too: you will hear it twice."
+msgstr ""
+
+#. applet.js:225
+msgid "custom"
+msgstr ""
+
+#. applet.js:234
+msgid "today"
+msgstr ""
+
+#. applet.js:236
+msgid "tomorrow"
+msgstr ""
+
+#. settings-schema.json->page-timer->title
+#. applet.js:264 clockoo_ring.py:148
+msgid "Timer"
+msgstr ""
+
+#. applet.js:265
+msgid "Cancel"
+msgstr ""
+
+#. applet.js:294
+msgid "Could not start the timer"
+msgstr ""
+
+#. applet.js:417
+msgid "systemd reported a problem"
+msgstr ""
+
+#. applet.js:494
+#, javascript-format
+msgid "Please install with your package manager: %s"
+msgstr ""
+
+#. clockoo_ring.py:127
+msgid "Alarm"
+msgstr ""
+
+#. clockoo_ring.py:136
+msgid "Timer finished"
+msgstr ""
+
+#. clockoo_ring.py:186
+#, python-format
+msgid "Snoozed until %s"
+msgstr ""
+
+#. clockoo_ring.py:193
+msgid "Stop"
+msgstr ""
+
+#. clockoo_ring.py:195
+#, python-format
+msgid "Snooze %d min"
+msgstr ""
+
+#. metadata.json->name
+msgid "Clockoo"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Hourly cuckoo, named alarms read aloud and countdown timers that keep "
+"ringing even if Cinnamon restarts"
+msgstr ""
+
+#. settings-schema.json->page-cuckoo->title
+msgid "Cuckoo"
+msgstr ""
+
+#. settings-schema.json->page-alarms->title
+#. settings-schema.json->section-alarms->title
+#. settings-schema.json->alarms->description
+msgid "Alarms"
+msgstr ""
+
+#. settings-schema.json->page-general->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->section-timer->title
+msgid "Countdown timer"
+msgstr ""
+
+#. settings-schema.json->section-voice->title
+msgid "Voice and snooze"
+msgstr ""
+
+#. settings-schema.json->section-panel->title
+msgid "Panel"
+msgstr ""
+
+#. settings-schema.json->cuckoo-hours->description
+msgid "Hours"
+msgstr ""
+
+#. settings-schema.json->cuckoo-hours->tooltip
+msgid "Hours when the cuckoo calls, e.g. 7-21, or 8,12,18, or 0-23"
+msgstr ""
+
+#. settings-schema.json->cuckoo-minute->units
+msgid "minutes past the hour"
+msgstr ""
+
+#. settings-schema.json->cuckoo-minute->description
+msgid "Minute"
+msgstr ""
+
+#. settings-schema.json->cuckoo-sound->description
+#. settings-schema.json->alarms->columns->title
+#. settings-schema.json->timer-sound->description
+msgid "Sound"
+msgstr ""
+
+#. settings-schema.json->cuckoo-sound->tooltip
+msgid "Leave empty for the bundled cuckoo"
+msgstr ""
+
+#. settings-schema.json->cuckoo-count-hours->description
+msgid "Call as many times as the hour"
+msgstr ""
+
+#. settings-schema.json->cuckoo-count-hours->tooltip
+msgid "Like a real cuckoo clock: 3 calls at 3 o'clock, 12 at noon"
+msgstr ""
+
+#. settings-schema.json->alarms-help->description
+msgid ""
+"Time as HH:MM. An alarm set to \"Once\" switches itself off after ringing. "
+"The text is read aloud in the chosen language."
+msgstr ""
+
+#. settings-schema.json->alarms->columns->title
+msgid "On"
+msgstr ""
+
+#. settings-schema.json->alarms->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->alarms->columns->title
+msgid "Time"
+msgstr ""
+
+#. settings-schema.json->alarms->columns->title
+msgid "Days"
+msgstr ""
+
+#. settings-schema.json->alarms->columns->title
+msgid "Text to read aloud"
+msgstr ""
+
+#. settings-schema.json->alarms->columns->title
+#. settings-schema.json->timer-voice->description
+msgid "Voice"
+msgstr ""
+
+#. settings-schema.json->alarms->columns->title
+#. settings-schema.json->timer-repeat->description
+msgid "Repeat"
+msgstr ""
+
+#. settings-schema.json->timer-sound->tooltip
+msgid "Leave empty for the bundled kitchen timer"
+msgstr ""
+
+#. settings-schema.json->timer-text->description
+msgid "Text to read aloud (optional)"
+msgstr ""
+
+#. settings-schema.json->timer-voice->options
+msgid "Automatic"
+msgstr ""
+
+#. settings-schema.json->timer-voice->options
+msgid "English"
+msgstr ""
+
+#. settings-schema.json->timer-voice->options
+msgid "Italiano"
+msgstr ""
+
+#. settings-schema.json->timer-voice->options
+msgid "Deutsch"
+msgstr ""
+
+#. settings-schema.json->timer-voice->options
+msgid "Español"
+msgstr ""
+
+#. settings-schema.json->timer-voice->options
+msgid "Français"
+msgstr ""
+
+#. settings-schema.json->timer-repeat->units
+msgid "times"
+msgstr ""
+
+#. settings-schema.json->timer-custom-minutes->units
+#. settings-schema.json->snooze-minutes->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->timer-custom-minutes->description
+msgid "Custom timer in the menu"
+msgstr ""
+
+#. settings-schema.json->snooze-minutes->description
+msgid "Snooze"
+msgstr ""
+
+#. settings-schema.json->piper-dir->description
+msgid "Piper folder (optional)"
+msgstr ""
+
+#. settings-schema.json->piper-dir->tooltip
+msgid ""
+"Only if piper is already installed on this computer: the folder that "
+"contains piper/piper and voices/. Leave empty to use speech-dispatcher (spd-"
+"say)."
+msgstr ""
+
+#. settings-schema.json->piper-help->description
+msgid ""
+"Text is spoken with speech-dispatcher. If you already have piper, choose its "
+"folder for more natural voices."
+msgstr ""
+
+#. settings-schema.json->show-countdown->description
+msgid "Show the running timer in the panel"
+msgstr ""
