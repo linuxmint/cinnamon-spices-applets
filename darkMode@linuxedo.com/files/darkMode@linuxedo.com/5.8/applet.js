@@ -325,7 +325,7 @@ MyApplet.prototype = {
             this.set_random_light_wallpaper();
         }
     },
-        switch_gtk4_theme: function (theme_dir) {
+    switch_gtk4_theme: function (theme_dir) {
         // An empty setting means GTK4 configuration must not be changed.
         if (!theme_dir) {
             return;
@@ -335,6 +335,8 @@ MyApplet.prototype = {
         const link = config_dir.get_child("gtk-4.0");
 
         let target;
+        let backup = null;
+        let backup_moved = false;
 
         try {
             // The file chooser may return a file:// URI.
@@ -352,9 +354,13 @@ MyApplet.prototype = {
                 return;
             }
 
-            // Create the configuration directory if it does not exist.
-            if (!config_dir.query_exists(null)) {
+            // Create the configuration directory if necessary.
+            try {
                 config_dir.make_directory_with_parents(null);
+            } catch (e) {
+                if (!e.matches(Gio.io_error_quark(), Gio.IOErrorEnum.EXISTS)) {
+                    throw e;
+                }
             }
 
             // Inspect the existing path without following symbolic links.
@@ -367,7 +373,9 @@ MyApplet.prototype = {
                     null
                 );
             } catch (e) {
-                // The path does not exist.
+                if (!e.matches(Gio.io_error_quark(), Gio.IOErrorEnum.NOT_FOUND)) {
+                    throw e;
+                }
             }
 
             // Nothing to change if the link already points to the requested directory.
@@ -386,89 +394,71 @@ MyApplet.prototype = {
                 }
             }
 
-            // Prepare a temporary symbolic link before changing the current path.
-            let temp_link = null;
-            let suffix = 0;
+            // Preserve an existing file or directory under a free backup name.
+            if (info && info.get_file_type() !== Gio.FileType.SYMBOLIC_LINK) {
+                let backup_suffix = 0;
 
-            while (true) {
-                let name = ".gtk-4.0.new";
-                if (suffix > 0) {
-                    name += "." + suffix;
-                }
+                while (true) {
+                    let name = "gtk-4.0.back";
 
-                temp_link = config_dir.get_child(name);
-
-                try {
-                    temp_link.make_symbolic_link(target_path, null);
-                    break;
-                } catch (e) {
-                    if (e.matches(Gio.io_error_quark(), Gio.IOErrorEnum.EXISTS)) {
-                        suffix++;
-                        continue;
+                    if (backup_suffix > 0) {
+                        name += "." + backup_suffix;
                     }
 
-                    throw e;
-                }
-            }
+                    backup = config_dir.get_child(name);
 
-            if (info) {
-                if (info.get_file_type() === Gio.FileType.SYMBOLIC_LINK) {
-                    // Remove the link itself, not its target.
-                    link.delete(null);
-                } else {
-                    // Preserve an existing directory or file under a free backup name.
-                    let backup = null;
-                    let backup_suffix = 0;
-
-                    while (true) {
-                        let name = "gtk-4.0.back";
-
-                        if (backup_suffix > 0) {
-                            name += "." + backup_suffix;
-                        }
-
-                        backup = config_dir.get_child(name);
-
-                        try {
-                            backup.query_info(
-                                "standard::type",
-                                Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
-                                null
-                            );
-                            backup_suffix++;
-                        } catch (e) {
+                    try {
+                        backup.query_info(
+                            "standard::type",
+                            Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
+                            null
+                        );
+                        backup_suffix++;
+                    } catch (e) {
+                        if (e.matches(Gio.io_error_quark(), Gio.IOErrorEnum.NOT_FOUND)) {
                             break;
                         }
-                    }
 
-                    link.move(
-                        backup,
+                        throw e;
+                    }
+                }
+
+                link.move(
+                    backup,
+                    Gio.FileCopyFlags.NONE,
+                    null,
+                    null,
+                    null
+                );
+
+                backup_moved = true;
+            } else if (info) {
+                // Remove the old symbolic link itself, not its target.
+                link.delete(null);
+            }
+
+            // Install the new symbolic link.
+            link.make_symbolic_link(target_path, null);
+
+        } catch (e) {
+            global.logError("Dark Mode: failed to switch GTK4 theme: " + e);
+
+            // If installation failed after moving the original path, restore it.
+            if (backup_moved && backup) {
+                try {
+                    backup.move(
+                        link,
                         Gio.FileCopyFlags.NONE,
                         null,
                         null,
                         null
                     );
-                }
-            }
-
-            // Install the prepared symbolic link.
-            temp_link.move(
-                link,
-                Gio.FileCopyFlags.NONE,
-                null,
-                null,
-                null
-            );
-
-        } catch (e) {
-            global.logError("Dark Mode: failed to switch GTK4 theme: " + e);
-
-            // Clean up a temporary link if it still exists.
-            if (typeof temp_link !== "undefined" && temp_link) {
-                try {
-                    temp_link.delete(null);
-                } catch (cleanup_error) {
-                    // Nothing to clean up.
+                    backup_moved = false;
+                } catch (restore_error) {
+                    global.logError(
+                        "Dark Mode: failed to restore GTK4 configuration from " +
+                        backup.get_path() + ": " + restore_error
+                    );
                 }
             }
         }
