@@ -254,7 +254,7 @@ msgstr "Montar"
 
 #. 5.8/js/modules.js:1292 4.8/js/modules.js:1289
 msgid "Click to unmount"
-msgstr "Haga clic para desmontar"
+msgstr "Clique para desmontar"
 
 #. 5.8/js/modules.js:1294 4.8/js/modules.js:1291
 msgid "Click to mount"
