@@ -141,6 +141,16 @@ MyApplet.prototype = {
             this.on_settings_changed,
             null);
         this.settings.bindProperty(Settings.BindingDirection.IN,
+            "light_gtk4_dir",
+            "light_gtk4_dir",
+            this.on_settings_changed,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "dark_gtk4_dir",
+            "dark_gtk4_dir",
+            this.on_settings_changed,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
             "enable_auto_mode_switch",
             "enable_auto_mode_switch",
             this.on_settings_changed,
@@ -240,6 +250,8 @@ MyApplet.prototype = {
         this.enable_dark_background_switch = this.settings.getValue("enable_dark_background_switch");
         this.light_background_dir = this.settings.getValue("light_background_dir");
         this.dark_background_dir = this.settings.getValue("dark_background_dir");
+        this.light_gtk4_dir = this.settings.getValue("light_gtk4_dir");
+        this.dark_gtk4_dir = this.settings.getValue("dark_gtk4_dir");
         this.enable_auto_mode_switch = this.settings.getValue("enable_auto_mode_switch");
         this.postpone_auto_mode_until = this.settings.getValue("postpone_auto_mode_until");
 
@@ -265,6 +277,7 @@ MyApplet.prototype = {
 
     set_dark_mode: function (dark_mode) {
         let prefer_scheme = 'default';
+        let gtk4_dir = null;
         let win_border_theme = null;
         let gtk_theme = null;
         let cinnamon_theme = null;
@@ -278,6 +291,7 @@ MyApplet.prototype = {
             gtk_theme = this.dark_gtk_theme;
             cinnamon_theme = this.dark_cinnamon_theme;
             icon_theme = this.dark_icon_theme;
+            gtk4_dir = this.dark_gtk4_dir;
             prefer_scheme = 'prefer-dark';
             this.set_applet_icon_symbolic_path(ICON_MOON);
         }
@@ -286,9 +300,10 @@ MyApplet.prototype = {
             gtk_theme = this.light_gtk_theme;
             cinnamon_theme = this.light_cinnamon_theme;
             icon_theme = this.light_icon_theme;
+            gtk4_dir = this.light_gtk4_dir;
             this.set_applet_icon_symbolic_path(ICON_SUN);
         }
-
+        this.switch_gtk4_theme(gtk4_dir);
         this.set_gsettings("org.x.apps.portal", "color-scheme", prefer_scheme);
 
         if (this.is_valid_theme_name(win_border_theme)) {
@@ -310,7 +325,156 @@ MyApplet.prototype = {
             this.set_random_light_wallpaper();
         }
     },
+        switch_gtk4_theme: function (theme_dir) {
+        // An empty setting means GTK4 configuration must not be changed.
+        if (!theme_dir) {
+            return;
+        }
 
+        const config_dir = Gio.File.new_for_path(HOME_DIR + "/.config");
+        const link = Gio.File.new_for_path(HOME_DIR + "/.config/gtk-4.0");
+
+        let target;
+
+        try {
+            // The file chooser may return a file:// URI.
+            if (theme_dir.indexOf("file://") === 0) {
+                target = Gio.File.new_for_uri(theme_dir);
+            } else {
+                target = Gio.File.new_for_path(theme_dir);
+            }
+
+            const target_path = target.get_path();
+
+            if (!target_path ||
+                target.query_file_type(Gio.FileQueryInfoFlags.NONE, null) !== Gio.FileType.DIRECTORY) {
+                global.logError("Dark Mode: GTK4 theme directory does not exist: " + theme_dir);
+                return;
+            }
+
+            // Create the configuration directory if it does not exist.
+            if (!config_dir.query_exists(null)) {
+                config_dir.make_directory_with_parents(null);
+            }
+
+            // Inspect the existing path without following symbolic links.
+            let info = null;
+
+            try {
+                info = link.query_info(
+                    "standard::type",
+                    Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
+                    null
+                );
+            } catch (e) {
+                // The path does not exist.
+            }
+
+            // Nothing to change if the link already points to the requested directory.
+            if (info && info.get_file_type() === Gio.FileType.SYMBOLIC_LINK) {
+               // let current_target = link.get_path();
+               // let resolved_target = Gio.File.new_for_path(target_path).get_path();
+
+                try {
+                    const link_target = link.read_link(null);
+                    const parent = link.get_parent();
+                    const resolved_link = parent.resolve_relative_path(link_target);
+
+                    if (resolved_link.equal(target)) {
+                        return;
+                    }
+                } catch (e) {
+                    // Replace a broken or unreadable symbolic link.
+                }
+            }
+
+            // Prepare a temporary symbolic link before changing the current path.
+            let temp_link = null;
+            let suffix = 0;
+
+            while (true) {
+                let name = ".gtk-4.0.new";
+                if (suffix > 0) {
+                    name += "." + suffix;
+                }
+
+                temp_link = Gio.File.new_for_path(HOME_DIR + "/.config/" + name);
+
+                try {
+                    temp_link.make_symbolic_link(target_path, null);
+                    break;
+                } catch (e) {
+                    if (e.matches(Gio.io_error_quark(), Gio.IOErrorEnum.EXISTS)) {
+                        suffix++;
+                        continue;
+                    }
+
+                    throw e;
+                }
+            }
+
+            if (info) {
+                if (info.get_file_type() === Gio.FileType.SYMBOLIC_LINK) {
+                    // Remove the link itself, not its target.
+                    link.delete(null);
+                } else {
+                    // Preserve an existing directory or file under a free backup name.
+                    let backup = null;
+                    let backup_suffix = 0;
+
+                    while (true) {
+                        let name = HOME_DIR + "/.config/gtk-4.0.back";
+
+                        if (backup_suffix > 0) {
+                            name += "." + backup_suffix;
+                        }
+
+                        backup = Gio.File.new_for_path(name);
+
+                        try {
+                            backup.query_info(
+                                "standard::type",
+                                Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
+                                null
+                            );
+                            backup_suffix++;
+                        } catch (e) {
+                            break;
+                        }
+                    }
+
+                    link.move(
+                        backup,
+                        Gio.FileCopyFlags.NONE,
+                        null,
+                        null,
+                        null
+                    );
+                }
+            }
+
+            // Install the prepared symbolic link.
+            temp_link.move(
+                link,
+                Gio.FileCopyFlags.NONE,
+                null,
+                null,
+                null
+            );
+
+        } catch (e) {
+            global.logError("Dark Mode: failed to switch GTK4 theme: " + e);
+
+            // Clean up a temporary link if it still exists.
+            if (typeof temp_link !== "undefined" && temp_link) {
+                try {
+                    temp_link.delete(null);
+                } catch (cleanup_error) {
+                    // Nothing to clean up.
+                }
+            }
+        }
+    },
     is_valid_theme_name: function (theme) {
         return theme != "" && theme != null && theme != "none";
     },
