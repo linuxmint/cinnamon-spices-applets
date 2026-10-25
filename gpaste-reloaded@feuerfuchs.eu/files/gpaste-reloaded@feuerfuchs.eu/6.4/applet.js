@@ -178,21 +178,23 @@ class GPasteApplet extends Applet.IconApplet {
                 this._signalManager.connect(this._clientSettings, maxSizeChanged, this._createHistoryItems.bind(this));
 
                 //
-                // Init
+                // Init, once the daemon is ready
 
-                // Get tracking status
-                this.mitemTrack.setToggleState(this._client.isActive());
+                this._client.whenReady(this._signalManager, () => {
+                    // Get tracking status
+                    this.mitemTrack.setToggleState(this._client.isActive());
 
-                // Get current history name
-                this._client.getHistoryName(name => {
-                    this._historyName = name;
+                    // Get current history name
+                    this._client.getHistoryName(name => {
+                        this._historyName = name;
 
-                    // Get history list
-                    this._client.listHistories(this._onClientHistoriesListed.bind(this));
+                        // Get history list
+                        this._client.listHistories(this._onClientHistoriesListed.bind(this));
 
-                    // Load history and populate applet
-                    this._createHistoryItems();
-                    this._populateMenus();
+                        // Load history and populate applet
+                        this._createHistoryItems();
+                        this._populateMenus();
+                    });
                 });
             });
 
@@ -591,6 +593,10 @@ class GPasteApplet extends Applet.IconApplet {
         debugLog("GPaste applet was removed from panel");
 
         this._signalManager.disconnectAllSignals();
+
+        if (this._client) {
+            this._client.destroy();
+        }
     }
 
     /*

@@ -40,7 +40,52 @@ var Client = class Client {
         if (!this._legacy && signal in SIGNALS) {
             signal = SIGNALS[signal];
         }
+        if (signal == 'notify::history') {
+            // GPaste 51 also clears the history name while no daemon serves it, which is no switch
+            const onSwitch = callback;
+            callback = (...args) => {
+                if (this._client.get_history_name() != null) {
+                    onSwitch(...args);
+                }
+            };
+        }
         signalManager.connect(this._client, signal, callback);
+    }
+
+    /*
+     * Call the callback once the daemon serves a history. Until then, GPaste 51 has neither version
+     * nor history name to give and its D-Bus calls fail. The old API has no way to tell, the daemon
+     * is considered ready straight away.
+     */
+    whenReady(signalManager, callback) {
+        if (this._legacy) {
+            callback();
+            return;
+        }
+
+        const READY = imports.gi.GPaste.DaemonPresence.READY;
+        let done = false;
+        const onPresenceChanged = () => {
+            if (!done && this._client.get_daemon_presence() == READY) {
+                done = true;
+                callback();
+            }
+        };
+
+        // Connected before reading the presence, so that no change is missed
+        signalManager.connect(this._client, 'notify::daemon-presence', onPresenceChanged);
+        // Start the daemon if needed, as the calls of the old API did
+        this._client.follow_daemon(true);
+        onPresenceChanged();
+    }
+
+    /*
+     * Stop waiting for the daemon, when the applet goes away
+     */
+    destroy() {
+        if (!this._legacy) {
+            this._client.unfollow_daemon();
+        }
     }
 
     getVersion() {
