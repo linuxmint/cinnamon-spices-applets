@@ -1,0 +1,43 @@
+{
+    "account-header": {
+        "type": "header",
+        "description": "Asyntai account"
+    },
+    "api-key": {
+        "type": "entry",
+        "default": "",
+        "description": "API key",
+        "tooltip": "Sign in to Asyntai, open Settings, then API, and copy your key. The Asyntai API needs the Starter plan or higher."
+    },
+    "panel-header": {
+        "type": "header",
+        "description": "Panel"
+    },
+    "refresh-minutes": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "units": "minutes",
+        "description": "Check for new chats every"
+    },
+    "show-count": {
+        "type": "switch",
+        "default": true,
+        "description": "Show the number of new chats on the panel"
+    },
+    "notify": {
+        "type": "switch",
+        "default": true,
+        "description": "Show a notification for new chats and leads"
+    },
+    "seen-chats": {
+        "type": "generic",
+        "default": ""
+    },
+    "seen-leads": {
+        "type": "generic",
+        "default": ""
+    }
+}
