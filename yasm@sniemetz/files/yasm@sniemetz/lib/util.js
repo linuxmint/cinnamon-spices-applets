@@ -1,3 +1,12 @@
+// Hardcoded on purpose: the .mo files cinnamon-spices-makepot installs
+// live under ~/.local/share/locale/<lang>/LC_MESSAGES/yasm@sniemetz.mo,
+// so dgettext() must query the "yasm@sniemetz" domain regardless of the
+// UUID the applet is currently running under. This keeps translations
+// working for dev-toggle (yasm@local) and for anyone running the
+// published package. If YASM is ever forked under a different UUID AND
+// that fork ships its own translations, update this constant to match
+// — self-deriving from AppletPath would break the dev-toggle case where
+// no yasm@local.mo exists.
 const UUID = 'yasm@sniemetz';
 
 // Gettext binding — GJS at runtime, no-op passthrough in Node tests.
@@ -7,6 +16,7 @@ if (typeof imports !== 'undefined') {
     const Gettext = imports.gettext;
     const GLib    = imports.gi.GLib;
     Gettext.bindtextdomain(UUID, GLib.get_user_data_dir()  + '/locale');
+
     _translator = (s) => Gettext.dgettext(UUID, s);
   } catch(e) {}
 }

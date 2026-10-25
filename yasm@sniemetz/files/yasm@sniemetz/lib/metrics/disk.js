@@ -67,6 +67,8 @@ function humanG(g) {
 }
 
 const { _ } = typeof imports !== 'undefined' ? imports.lib.util : require('../util.js');
+// GJS runtime only — null in Node test harness
+const GLib = typeof imports !== 'undefined' ? imports.gi.GLib : null;
 
 function formatPanel(dfDisks, diskRates) {
   if (!dfDisks || dfDisks.length === 0) return _("no disk");
@@ -95,7 +97,6 @@ function readNvmeTemps(fileutil) {
     let dev = null;
     try {
       // Symlink target is like "../../devices/.../nvme/nvme0/hwmon2"
-      const GLib = typeof imports !== 'undefined' ? imports.gi.GLib : null;
       const link = GLib && GLib.file_read_link(base);
       const m = link && link.match(/nvme(\d+)/);
       if (m) dev = `nvme${m[1]}n1`;
