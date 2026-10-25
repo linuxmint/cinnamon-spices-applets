@@ -43,8 +43,7 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
         this._orientation = orientation;
         this._menu_manager = null;
         this._menu = null;
-        this._net_monitor = null;
-        this._net_monitor_id = null;
+        this._nm_signal_id = null;
         this._net_interfaces = null;
         this._wg_monitor = null;
         this._wg_monitor_id = null;
@@ -56,9 +55,9 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
 
     on_applet_added_to_panel(userEnabled) {
 
-        if (!this._net_monitor) {
-            this._net_monitor = Gio.network_monitor_get_default();
-            this._net_monitor_id = this._net_monitor.connect('network-changed', (monitor, network_available, user_data) => this._on_net_changed());
+        if (!this._nm_signal_id) {
+            // GNetworkMonitor ignores tunnels since GLib 2.90, unlike NetworkManager
+            this._nm_signal_id = Gio.DBus.system.signal_subscribe("org.freedesktop.NetworkManager", "org.freedesktop.NetworkManager", null, "/org/freedesktop/NetworkManager", null, Gio.DBusSignalFlags.NONE, () => this._on_net_changed());
         }
 
         if (!this._wg_monitor) {
@@ -87,9 +86,9 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
     }
 
     on_applet_removed_from_panel(deleteConfig) {
-        if (this._net_monitor) {
-            this._net_monitor.disconnect(this._net_monitor_id);
-            this._net_monitor = null;
+        if (this._nm_signal_id) {
+            Gio.DBus.system.signal_unsubscribe(this._nm_signal_id);
+            this._nm_signal_id = null;
         }
 
         if (this._wg_monitor) {
