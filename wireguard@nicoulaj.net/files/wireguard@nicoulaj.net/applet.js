@@ -129,6 +129,8 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
                 if (!ok || proc.get_exit_status() !== 0) {
                     this._handle_error(_("Failed toggling WireGuard interface"), stdout, false);
                 }
+
+                this._on_net_changed();
             });
 
         } catch (e) {
