@@ -80,10 +80,9 @@ var MpvPlayer = class MpvPlayer {
         this._killOldMpvProcesses();
         this._cleanSocketFile();
 
-        // Inicialização blindada do MPV daemon:
-        // --no-config: Impede carregamento de configs não controladas do usuário
-        // --load-scripts=no: Impede execução de plugins Lua de terceiros
-        // --ytdl=no: Impede chamada a python youtube-dl para streams de rádio
+        // Inicialização ultra-otimizada e blindada do MPV daemon:
+        // Desativa completamente qualquer decodificação ou renderização de vídeo/capas de álbuns,
+        // OSD e bindings para consumo mínimo absoluto de CPU e bateria.
         const argv = [
             "/usr/bin/mpv",
             "--no-config",
@@ -91,11 +90,18 @@ var MpvPlayer = class MpvPlayer {
             "--ytdl=no",
             "--idle=yes",
             "--no-video",
+            "--audio-display=no",
+            "--vid=no",
+            "--vo=null",
             "--no-terminal",
             "--gapless-audio=yes",
+            "--no-osc",
+            "--no-osd-bar",
+            "--input-default-bindings=no",
+            "--no-input-builtin-bindings",
             `--input-ipc-server=${this.sockPath}`,
             `--volume=${this.currentVolume}`,
-            "--demuxer-max-bytes=4096KiB",
+            "--demuxer-max-bytes=2048KiB",
             "--force-media-title=RadioViva",
             "--title=RadioViva"
         ];
@@ -168,12 +174,20 @@ var MpvPlayer = class MpvPlayer {
         this.inStream.read_line_async(GLib.PRIORITY_DEFAULT, this.cancellable, (stream, res) => {
             try {
                 const [line] = stream.read_line_finish_utf8(res);
-                if (line) {
-                    this._handleIpcMessage(line);
+                if (line !== null) {
+                    const trimmed = line.trim();
+                    if (trimmed.length > 0) {
+                        this._handleIpcMessage(trimmed);
+                    }
+                    this._startListening();
+                } else {
+                    // EOF: Conexão fechada pelo MPV (encerra a escuta para não travar o loop de eventos)
+                    this.socketConn = null;
+                    this.inStream = null;
+                    this.outStream = null;
                 }
-                this._startListening();
             } catch (e) {
-                // Socket fechado ou erro de leitura
+                // Erro de socket ou desconexão
                 this.socketConn = null;
                 this.inStream = null;
                 this.outStream = null;
