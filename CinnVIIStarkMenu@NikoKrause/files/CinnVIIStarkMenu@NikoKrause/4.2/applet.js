@@ -672,7 +672,7 @@ class WebSearchButton extends SimpleMenuItem {
     }
 
     activate() {
-        Main.Util.spawnCommandLine("xdg-open " + this.searchEngineURL + encodeURIComponent(this.name));
+        Util.spawnCommandLine("xdg-open " + this.searchEngineURL + encodeURIComponent(this.name));
         this.applet.menu.close();
     }
 }
