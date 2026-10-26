@@ -1,7 +1,7 @@
 /**
  * RadioViva - MPV Audio Engine & IPC Controller
  * Controla o processo MPV via Unix Domain Socket (JSON IPC)
- * 100% assíncrono, sem travamento de interface no Cinnamon.
+ * 100% assíncrono, sem processos órfãos, sem processos zumbis (<defunct>) e consumo zero em idle.
  */
 
 const Gio = imports.gi.Gio;
@@ -33,6 +33,13 @@ var MpvPlayer = class MpvPlayer {
         this.outStream = null;
         this.cancellable = new Gio.Cancellable();
 
+        this._isConnecting = false;
+        this._cleaningUpOrphans = false;
+        this._afterCleanupCallback = null;
+        this._pendingPlayCallback = null;
+        this._connectTimeoutId = 0;
+        this._reconnectTimeoutId = 0;
+
         this.status = PlaybackStatus.STOPPED;
         this.currentStation = null;
         this.currentTitle = "";
@@ -46,19 +53,38 @@ var MpvPlayer = class MpvPlayer {
         this.reconnectAttempts = 0;
         this.maxReconnectAttempts = 3;
 
-        // Limpeza imediata no início para evitar processos órfãos de sessões anteriores
-        this._killOldMpvProcesses();
+        // Limpa processos órfãos de sessões anteriores do Cinnamon apenas na inicialização
+        this._killOrphanMpvProcesses();
         this._cleanSocketFile();
     }
 
-    _killOldMpvProcesses() {
+    _killOrphanMpvProcesses() {
         try {
+            this._cleaningUpOrphans = true;
             const launcher = new Gio.SubprocessLauncher({
-                flags: Gio.SubprocessFlags.NONE
+                flags: Gio.SubprocessFlags.STDERR_SILENCE | Gio.SubprocessFlags.STDOUT_SILENCE
             });
-            launcher.spawnv(["/usr/bin/pkill", "-9", "-u", String(GLib.get_user_name()), "-f", "mpv.*radioviva"]);
+            const proc = launcher.spawnv([
+                "/usr/bin/pkill",
+                "-9",
+                "-u",
+                String(GLib.get_user_name()),
+                "-f",
+                "mpv.*--title=RadioViva"
+            ]);
+            proc.wait_async(null, (p, res) => {
+                try {
+                    p.wait_finish(res);
+                } catch (e) {}
+                this._cleaningUpOrphans = false;
+                if (this._afterCleanupCallback) {
+                    const cb = this._afterCleanupCallback;
+                    this._afterCleanupCallback = null;
+                    cb();
+                }
+            });
         } catch (e) {
-            // Ignora se não existir
+            this._cleaningUpOrphans = false;
         }
     }
 
@@ -71,18 +97,59 @@ var MpvPlayer = class MpvPlayer {
         }
     }
 
+    _clearTimers() {
+        if (this._connectTimeoutId > 0) {
+            GLib.source_remove(this._connectTimeoutId);
+            this._connectTimeoutId = 0;
+        }
+        if (this._reconnectTimeoutId > 0) {
+            GLib.source_remove(this._reconnectTimeoutId);
+            this._reconnectTimeoutId = 0;
+        }
+    }
+
+    _closeSocket() {
+        this._isConnecting = false;
+        this.pendingRequests.clear();
+
+        if (this.cancellable && !this.cancellable.is_cancelled()) {
+            this.cancellable.cancel();
+        }
+        this.cancellable = new Gio.Cancellable();
+
+        if (this.socketConn) {
+            try {
+                this.socketConn.close(null);
+            } catch (e) {}
+        }
+        this.socketConn = null;
+        this.inStream = null;
+        this.outStream = null;
+    }
+
+    _terminateMpvProcess() {
+        this._closeSocket();
+
+        if (this.mpvProcess) {
+            const proc = this.mpvProcess;
+            this.mpvProcess = null;
+            try {
+                proc.force_exit();
+            } catch (e) {}
+        }
+
+        this._cleanSocketFile();
+    }
+
     _spawnMpv() {
-        if (this.mpvProcess && !this.mpvProcess.get_if_exited()) {
+        if (this.mpvProcess) {
             return true;
         }
 
-        // Antes de criar o novo daemon, garante que nenhum MPV anterior persista
-        this._killOldMpvProcesses();
-        this._cleanSocketFile();
+        this._terminateMpvProcess();
 
-        // Inicialização ultra-otimizada e blindada do MPV daemon:
-        // Desativa completamente qualquer decodificação ou renderização de vídeo/capas de álbuns,
-        // OSD e bindings para consumo mínimo absoluto de CPU e bateria.
+        // Inicialização ultra-otimizada e blindada do MPV:
+        // Desativa vídeo, capas de álbuns, OSD, scripts e bindings para uso mínimo de CPU e RAM.
         const argv = [
             "/usr/bin/mpv",
             "--no-config",
@@ -102,15 +169,30 @@ var MpvPlayer = class MpvPlayer {
             `--input-ipc-server=${this.sockPath}`,
             `--volume=${this.currentVolume}`,
             "--demuxer-max-bytes=2048KiB",
-            "--force-media-title=RadioViva",
             "--title=RadioViva"
         ];
 
         try {
             const launcher = new Gio.SubprocessLauncher({
-                flags: Gio.SubprocessFlags.NONE
+                flags: Gio.SubprocessFlags.STDERR_SILENCE | Gio.SubprocessFlags.STDOUT_SILENCE
             });
-            this.mpvProcess = launcher.spawnv(argv);
+            const proc = launcher.spawnv(argv);
+            this.mpvProcess = proc;
+
+            // Colhe o status de saída assincronamente para nunca gerar processos <defunct> (zumbis)
+            proc.wait_async(null, (p, res) => {
+                try {
+                    p.wait_finish(res);
+                } catch (e) {}
+                if (this.mpvProcess === proc) {
+                    this.mpvProcess = null;
+                    this._closeSocket();
+                    if (this.status !== PlaybackStatus.STOPPED && this.status !== PlaybackStatus.ERROR) {
+                        this._setStatus(PlaybackStatus.STOPPED);
+                    }
+                }
+            });
+
             return true;
         } catch (e) {
             global.logError(`[RadioViva] Falha ao iniciar MPV: ${e.message}`);
@@ -120,35 +202,69 @@ var MpvPlayer = class MpvPlayer {
     }
 
     _connectSocket(onConnected) {
-        if (this.socketConn && this.socketConn.is_connected()) {
+        if (this.socketConn && this.socketConn.is_connected() && this.outStream && !this.outStream.is_closed()) {
             if (onConnected) onConnected();
             return;
         }
 
+        this._pendingPlayCallback = onConnected;
+
+        // Evita múltiplas tentativas paralelas de conexão se o usuário clicar rápido
+        if (this._isConnecting) {
+            return;
+        }
+
+        this._isConnecting = true;
+        const currentCancellable = this.cancellable;
         const address = Gio.UnixSocketAddress.new(this.sockPath);
         let attempts = 0;
-        const maxWaitAttempts = 25; // 25 * 100ms = 2.5s max
+        const maxWaitAttempts = 25; // 25 * 80ms = 2.0s max
 
         const tryConnect = () => {
+            if (currentCancellable.is_cancelled() || this.status === PlaybackStatus.STOPPED) {
+                this._isConnecting = false;
+                return;
+            }
+
             const client = new Gio.SocketClient();
-            client.connect_async(address, this.cancellable, (cli, res) => {
+            client.connect_async(address, currentCancellable, (cli, res) => {
                 try {
-                    this.socketConn = cli.connect_finish(res);
+                    const conn = cli.connect_finish(res);
+                    if (currentCancellable.is_cancelled() || this.status === PlaybackStatus.STOPPED) {
+                        try { conn.close(null); } catch (e) {}
+                        this._isConnecting = false;
+                        return;
+                    }
+
+                    this.socketConn = conn;
                     this.inStream = Gio.DataInputStream.new(this.socketConn.get_input_stream());
-                    this.outStream = this.socketConn.get_output_stream();
+                    this.outStream = Gio.DataOutputStream.new(this.socketConn.get_output_stream());
+                    this._isConnecting = false;
 
                     this._setupPropertyObservers();
-                    this._startListening();
+                    this._startListening(currentCancellable);
 
-                    if (onConnected) onConnected();
+                    if (this._pendingPlayCallback) {
+                        const cb = this._pendingPlayCallback;
+                        this._pendingPlayCallback = null;
+                        cb();
+                    }
                 } catch (err) {
+                    if (currentCancellable.is_cancelled() || this.status === PlaybackStatus.STOPPED) {
+                        this._isConnecting = false;
+                        return;
+                    }
+
                     attempts++;
                     if (attempts < maxWaitAttempts) {
-                        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
+                        this._connectTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 80, () => {
+                            this._connectTimeoutId = 0;
                             tryConnect();
                             return GLib.SOURCE_REMOVE;
                         });
                     } else {
+                        this._isConnecting = false;
+                        this._pendingPlayCallback = null;
                         global.logError(`[RadioViva] Erro de conexão socket IPC após ${attempts} tentativas: ${err.message}`);
                         this._setStatus(PlaybackStatus.ERROR);
                     }
@@ -164,14 +280,13 @@ var MpvPlayer = class MpvPlayer {
         this.sendCommand(["observe_property", 2, "pause"]);
         this.sendCommand(["observe_property", 3, "idle-active"]);
         this.sendCommand(["observe_property", 4, "volume"]);
-        this.sendCommand(["observe_property", 5, "audio-codec-name"]);
-        this.sendCommand(["observe_property", 6, "audio-bitrate"]);
+        this.sendCommand(["observe_property", 5, "metadata/by-key/icy-title"]);
     }
 
-    _startListening() {
-        if (!this.inStream || this.cancellable.is_cancelled()) return;
+    _startListening(listenCancellable) {
+        if (!this.inStream || !listenCancellable || listenCancellable.is_cancelled()) return;
 
-        this.inStream.read_line_async(GLib.PRIORITY_DEFAULT, this.cancellable, (stream, res) => {
+        this.inStream.read_line_async(GLib.PRIORITY_DEFAULT, listenCancellable, (stream, res) => {
             try {
                 const [line] = stream.read_line_finish_utf8(res);
                 if (line !== null) {
@@ -179,18 +294,17 @@ var MpvPlayer = class MpvPlayer {
                     if (trimmed.length > 0) {
                         this._handleIpcMessage(trimmed);
                     }
-                    this._startListening();
+                    this._startListening(listenCancellable);
                 } else {
-                    // EOF: Conexão fechada pelo MPV (encerra a escuta para não travar o loop de eventos)
-                    this.socketConn = null;
-                    this.inStream = null;
-                    this.outStream = null;
+                    // EOF: Conexão encerrada pelo MPV (para imediatamente o loop para não consumir CPU)
+                    if (!listenCancellable.is_cancelled()) {
+                        this._closeSocket();
+                    }
                 }
             } catch (e) {
-                // Erro de socket ou desconexão
-                this.socketConn = null;
-                this.inStream = null;
-                this.outStream = null;
+                if (!listenCancellable.is_cancelled()) {
+                    this._closeSocket();
+                }
             }
         });
     }
@@ -203,7 +317,6 @@ var MpvPlayer = class MpvPlayer {
             return;
         }
 
-        // Respostas de comandos
         if (msg.request_id && this.pendingRequests.has(msg.request_id)) {
             const cb = this.pendingRequests.get(msg.request_id);
             this.pendingRequests.delete(msg.request_id);
@@ -211,56 +324,68 @@ var MpvPlayer = class MpvPlayer {
             return;
         }
 
-        // Eventos
         if (msg.event === "property-change") {
             this._handlePropertyChange(msg.name, msg.data);
         } else if (msg.event === "playback-restart") {
-            if (this.status !== PlaybackStatus.STOPPED) {
+            if (this.status !== PlaybackStatus.STOPPED && this.status !== PlaybackStatus.PAUSED) {
                 this._setStatus(PlaybackStatus.PLAYING);
             }
         } else if (msg.event === "end-file") {
             if (msg.reason === "error") {
                 this._handlePlaybackError();
             } else if (msg.reason === "stop" || msg.reason === "eof") {
-                this._setStatus(PlaybackStatus.STOPPED);
+                if (this.status !== PlaybackStatus.LOADING) {
+                    this._setStatus(PlaybackStatus.STOPPED);
+                }
             }
         }
     }
 
     _handlePropertyChange(name, value) {
-        if (name === "media-title") {
-            this.currentTitle = (value || "").trim();
-            this.callbacks.onMetadataChange({
-                title: this.currentTitle,
-                station: this.currentStation
-            });
+        if (name === "media-title" || name === "metadata/by-key/icy-title") {
+            const newTitle = (value || "").trim();
+            if (newTitle && newTitle !== this.currentTitle && newTitle !== "RadioViva") {
+                this.currentTitle = newTitle;
+                this.callbacks.onMetadataChange({
+                    title: this.currentTitle,
+                    station: this.currentStation
+                });
+            }
         } else if (name === "pause") {
-            if (value && this.status === PlaybackStatus.PLAYING) {
+            if (value === true && this.status === PlaybackStatus.PLAYING) {
                 this._setStatus(PlaybackStatus.PAUSED);
-            } else if (!value && this.status === PlaybackStatus.PAUSED) {
+            } else if (value === false && this.status === PlaybackStatus.PAUSED) {
                 this._setStatus(PlaybackStatus.PLAYING);
             }
         } else if (name === "idle-active") {
-            if (value && this.status !== PlaybackStatus.LOADING) {
+            if (value === true && this.status !== PlaybackStatus.LOADING && this.status !== PlaybackStatus.STOPPED) {
                 this._setStatus(PlaybackStatus.STOPPED);
             }
         } else if (name === "volume" && typeof value === "number") {
-            this.currentVolume = Math.round(value);
-            this.callbacks.onVolumeChange(this.currentVolume);
+            const rounded = Math.round(value);
+            if (rounded !== this.currentVolume) {
+                this.currentVolume = rounded;
+                this.callbacks.onVolumeChange(this.currentVolume);
+            }
         }
     }
 
     _handlePlaybackError() {
+        if (this.status === PlaybackStatus.STOPPED) return;
+
         if (this.currentStation && this.reconnectAttempts < this.maxReconnectAttempts) {
             this.reconnectAttempts++;
             this._setStatus(PlaybackStatus.LOADING);
-            GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 2, () => {
-                if (this.currentStation) {
-                    this.play(this.currentStation);
+            this._clearTimers();
+            this._reconnectTimeoutId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 2, () => {
+                this._reconnectTimeoutId = 0;
+                if (this.currentStation && this.status !== PlaybackStatus.STOPPED) {
+                    this._startPlayback(this.currentStation, false);
                 }
                 return GLib.SOURCE_REMOVE;
             });
         } else {
+            this._terminateMpvProcess();
             this._setStatus(PlaybackStatus.ERROR);
         }
     }
@@ -269,14 +394,17 @@ var MpvPlayer = class MpvPlayer {
         this.status = newStatus;
         if (newStatus === PlaybackStatus.STOPPED || newStatus === PlaybackStatus.ERROR) {
             this.currentTitle = "";
-            if (this.isRecording) {
-                this.stopRecording();
-            }
+            this.isRecording = false;
+            this.recordingPath = "";
         }
         this.callbacks.onStatusChange(this.status);
     }
 
     sendCommand(args, callback) {
+        if (!this.outStream || this.outStream.is_closed()) {
+            return;
+        }
+
         const reqId = this.nextRequestId++;
         if (callback) {
             this.pendingRequests.set(reqId, callback);
@@ -287,20 +415,25 @@ var MpvPlayer = class MpvPlayer {
             request_id: reqId
         }) + "\n";
 
-        if (this.outStream && !this.outStream.is_closed()) {
-            try {
-                this.outStream.write(payload, this.cancellable);
-            } catch (e) {
-                global.logError(`[RadioViva] Erro ao enviar comando IPC: ${e.message}`);
-                this.socketConn = null;
-                this.inStream = null;
-                this.outStream = null;
-            }
+        try {
+            this.outStream.put_string(payload, this.cancellable);
+        } catch (e) {
+            global.logError(`[RadioViva] Erro ao enviar comando IPC: ${e.message}`);
+            this._closeSocket();
         }
     }
 
     play(station) {
+        this._startPlayback(station, true);
+    }
+
+    _startPlayback(station, resetRetries = true) {
         if (!station || !station.url) return;
+
+        if (this._cleaningUpOrphans) {
+            this._afterCleanupCallback = () => this._startPlayback(station, resetRetries);
+            return;
+        }
 
         // Validação estrita de URL (Apenas protocolos remotos permitidos para streaming de rádio)
         const trimmedUrl = String(station.url).trim();
@@ -311,21 +444,29 @@ var MpvPlayer = class MpvPlayer {
             return;
         }
 
+        this._clearTimers();
         this.currentStation = station;
-        this.reconnectAttempts = 0;
+        this.currentTitle = "";
+        if (resetRetries) {
+            this.reconnectAttempts = 0;
+        }
         this._setStatus(PlaybackStatus.LOADING);
 
         const doPlay = () => {
             if (this.status === PlaybackStatus.STOPPED) return;
             this.sendCommand(["loadfile", trimmedUrl, "replace"]);
             this.sendCommand(["set_property", "pause", false]);
+            this.sendCommand(["set_property", "volume", this.currentVolume]);
         };
 
-        if (!this.mpvProcess || !this.socketConn || !this.socketConn.is_connected()) {
-            this._spawnMpv();
-            this._connectSocket(() => {
-                doPlay();
-            });
+        const isAlive = Boolean(this.mpvProcess);
+        const isSocketReady = this.socketConn && this.socketConn.is_connected() && this.outStream && !this.outStream.is_closed();
+
+        if (!isAlive) {
+            if (!this._spawnMpv()) return;
+            this._connectSocket(doPlay);
+        } else if (!isSocketReady) {
+            this._connectSocket(doPlay);
         } else {
             doPlay();
         }
@@ -344,25 +485,27 @@ var MpvPlayer = class MpvPlayer {
     }
 
     stop() {
+        this._clearTimers();
+        this._afterCleanupCallback = null;
+        this._pendingPlayCallback = null;
         this.reconnectAttempts = this.maxReconnectAttempts;
-        this.sendCommand(["stop"]);
-        this.sendCommand(["set_property", "pause", true]);
-        this._setStatus(PlaybackStatus.STOPPED);
 
-        // Se o processo ou socket estiverem inconsistentes, garante que nenhum áudio persista
-        if (!this.socketConn || !this.outStream || this.outStream.is_closed()) {
-            if (this.mpvProcess) {
-                try {
-                    this.mpvProcess.force_exit();
-                } catch (e) {}
-            }
-            this._killOldMpvProcesses();
-            this._cleanSocketFile();
+        // Envia quit e encerra o processo MPV completamente ao parar:
+        // Garante 0% de CPU, 0MB de RAM e impossibilidade de áudio fantasma em segundo plano.
+        if (this.outStream && !this.outStream.is_closed()) {
+            try {
+                this.sendCommand(["quit"]);
+            } catch (e) {}
         }
+
+        this._terminateMpvProcess();
+        this._setStatus(PlaybackStatus.STOPPED);
     }
 
     setVolume(volumePercent) {
         const vol = Math.max(0, Math.min(100, Math.round(volumePercent)));
+        if (vol === this.currentVolume) return;
+
         this.currentVolume = vol;
         this.sendCommand(["set_property", "volume", vol]);
         this.callbacks.onVolumeChange(this.currentVolume);
@@ -419,22 +562,6 @@ var MpvPlayer = class MpvPlayer {
     }
 
     destroy() {
-        this.cancellable.cancel();
-        if (this.isRecording) {
-            this.stopRecording();
-        }
-        if (this.socketConn) {
-            try {
-                this.sendCommand(["quit"]);
-                this.socketConn.close(null);
-            } catch (e) {}
-        }
-        if (this.mpvProcess) {
-            try {
-                this.mpvProcess.force_exit();
-            } catch (e) {}
-        }
-        this._killOldMpvProcesses();
-        this._cleanSocketFile();
+        this.stop();
     }
 };

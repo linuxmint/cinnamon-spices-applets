@@ -20,8 +20,12 @@ class RadioVivaApplet extends Applet.TextIconApplet {
         this.metadata = metadata;
         this.instanceId = instance_id;
         this.orientation = orientation;
+        this._updatingSlider = false;
+        this._volumeSaveTimeoutId = 0;
 
-        imports.searchPath.unshift(metadata.path);
+        if (!imports.searchPath.includes(metadata.path)) {
+            imports.searchPath.unshift(metadata.path);
+        }
 
         const { MpvPlayer, PlaybackStatus } = imports.core.mpv_player;
         this.PlaybackStatus = PlaybackStatus;
@@ -162,11 +166,9 @@ class RadioVivaApplet extends Applet.TextIconApplet {
         // 2. Slider de Volume
         this.volumeSlider = new PopupMenu.PopupSliderMenuItem(this.player.currentVolume / 100);
         this.volumeSlider.connect("value-changed", (slider, val) => {
+            if (this._updatingSlider) return;
             const vol = Math.round(val * 100);
             this.player.setVolume(vol);
-            if (this.keepVolume) {
-                this.initialVolume = vol;
-            }
         });
         this.menu.addMenuItem(this.volumeSlider);
 
@@ -424,9 +426,22 @@ class RadioVivaApplet extends Applet.TextIconApplet {
 
     _onPlayerVolumeChange(volume) {
         if (this.volumeSlider) {
+            this._updatingSlider = true;
             this.volumeSlider.setValue(volume / 100);
+            this._updatingSlider = false;
         }
         this._updateTooltip();
+
+        if (this.keepVolume) {
+            if (this._volumeSaveTimeoutId > 0) {
+                GLib.source_remove(this._volumeSaveTimeoutId);
+            }
+            this._volumeSaveTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 400, () => {
+                this._volumeSaveTimeoutId = 0;
+                this.initialVolume = volume;
+                return GLib.SOURCE_REMOVE;
+            });
+        }
     }
 
     _updateTooltip() {
@@ -442,6 +457,10 @@ class RadioVivaApplet extends Applet.TextIconApplet {
     }
 
     on_applet_removed_from_panel() {
+        if (this._volumeSaveTimeoutId > 0) {
+            GLib.source_remove(this._volumeSaveTimeoutId);
+            this._volumeSaveTimeoutId = 0;
+        }
         if (this.player) {
             this.player.destroy();
         }
