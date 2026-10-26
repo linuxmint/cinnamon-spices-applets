@@ -70,7 +70,7 @@ var MpvPlayer = class MpvPlayer {
                 "-u",
                 String(GLib.get_user_name()),
                 "-f",
-                "mpv.*--title=RadioViva"
+                "^/usr/bin/mpv .*--title=RadioViva$"
             ]);
             proc.wait_async(null, (p, res) => {
                 try {
