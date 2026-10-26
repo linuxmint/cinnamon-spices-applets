@@ -4,14 +4,14 @@
 # George Pantsis <gpantsis@gmail.com>, 2012.
 # George Boumis <developer.george.boumis@gmail.com>, 2014.
 # Vasilis Kosmidis <skyhirules@gmail.com>, 2021.
-#
+# Thanos D (alfa3delta), 2026
 msgid ""
 msgstr ""
 "Project-Id-Version: 3.0.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-02-14 14:22+0000\n"
-"PO-Revision-Date: 2021-04-14 15:52+0200\n"
+"PO-Revision-Date: 2026-10-26 08:43+0200\n"
 "Last-Translator: Vasilis Kosmidis <skyhirules@gmail.com>\n"
 "Language-Team: Ελληνικά <>\n"
 "Language: el\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #. 3.8/weather-applet.js:20974
 msgid "Error"
-msgstr ""
+msgstr "Σφάλμα"
 
 #. 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
 #. 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
@@ -33,44 +33,43 @@ msgstr ""
 #. 3.8/weather-applet.js:20985 3.8/weather-applet.js:20986
 #. 3.8/weather-applet.js:20987 3.8/weather-applet.js:20988
 msgid "Service Error"
-msgstr ""
+msgstr "Σφάλμα υπηρεσίας"
 
 #. 3.0/applet.js:168 3.8/weather-applet.js:20976
 msgid "Incorrect API Key"
-msgstr ""
+msgstr "Εσφαλμένο κλειδί API"
 
 #. 3.0/applet.js:170 3.8/weather-applet.js:20978
 msgid "Incorrect Location Format"
-msgstr ""
+msgstr "Εσφαλμένη μορφή τοποθεσίας"
 
 #. 3.0/applet.js:172 3.8/weather-applet.js:20980
 msgid "Key Blocked"
-msgstr ""
+msgstr "Αποκλεισμένο κλειδί"
 
 #. 3.0/applet.js:173 3.8/weather-applet.js:20981
 msgid "Can't find location"
-msgstr ""
+msgstr "Αδυναμία εύρεσης τοποθεσίας"
 
 #. 3.0/applet.js:175 3.8/weather-applet.js:20983
 msgid "No Api Key"
-msgstr ""
+msgstr "Απουσία κλειδιού API"
 
 #. 3.0/applet.js:176 3.8/weather-applet.js:20984
 msgid "No Location"
-msgstr ""
+msgstr "Απουσία τοποθεσίας"
 
 #. 3.0/applet.js:181 3.8/weather-applet.js:20989
 msgid "Missing Packages"
-msgstr ""
+msgstr "Ελλειπή πακέτα"
 
 #. 3.0/applet.js:182 3.8/weather-applet.js:20990
 msgid "Location not covered"
-msgstr ""
+msgstr "Η τοποθεσία δεν καλύπτεται"
 
 #. 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:10100
-#, fuzzy
 msgid "Weather Applet"
-msgstr "Καιρός"
+msgstr "Μικροεφαρμογή καιρού"
 
 #. 3.0/applet.js:217 3.8/weather-applet.js:21269
 msgid "..."
@@ -87,65 +86,73 @@ msgstr "Ανανέωση"
 
 #. 3.0/applet.js:272
 msgid "API returned status code between 400 and 500"
-msgstr ""
+msgstr "Το API επέστρεψε κωδικό κατάστασης μεταξύ 400 και 500"
 
 #. 3.0/applet.js:426 3.0/applet.js:2032 3.0/applet.js:2036 3.0/applet.js:2040
 #. 3.0/applet.js:2049 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
 #. 3.0/applet.js:2083 3.0/applet.js:2131 3.8/weather-applet.js:10272
 #. 3.8/weather-applet.js:10276
 msgid "Location Store"
-msgstr ""
+msgstr "Αποθήκευση τοποθεσίας"
 
 #. 3.0/applet.js:426
 msgid "You can't save a location obtained automatically, sorry"
 msgstr ""
+"Συγνώμη, αλλά δεν μπορείτε να αποθηκεύσετε μια τοποθεσία που ανακτήθηκε "
+"αυτόματα"
 
 #. 3.0/applet.js:601
 msgid "Could not get weather information"
-msgstr ""
+msgstr "Αδυναμία ανάκτησης πληροφοριών καιρού"
 
 #. 3.0/applet.js:624 3.8/weather-applet.js:21101
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
+"Απρόσμενο σφάλμα κατά την ανανέωση καιρού, παρακαλώ συμβουλευτείτε τα αρχεία "
+"καταγραφής  αναφορών σφαλμάτων (Looking Glass)"
 
 #. 3.0/applet.js:670 3.8/weather-applet.js:21352
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
 msgstr ""
+"Προσωρινή αδυναμία ενημέρωσης καιρού...\n"
+"είστε συνδεδεμένοι στο διαδίκτυο;"
 
 #. 3.0/applet.js:684
 msgid "Network Error, please check logs in Looking Glass"
 msgstr ""
+"Σφάλμα δικτύου, παρακαλώ συμβουλευτείτε τα αρχεία καταγραφής  αναφορών "
+"σφαλμάτων (Looking Glass)"
 
 #. 3.0/applet.js:969 3.0/applet.js:1110
 msgid "As of"
-msgstr ""
+msgstr "Στις"
 
 #. 3.0/applet.js:1108 3.8/weather-applet.js:20511
 msgid "Powered by"
-msgstr ""
+msgstr "Υποστηρίζεται από"
 
 #. 3.0/applet.js:1113
 msgid "from you"
-msgstr ""
+msgstr "από εσάς"
 
 #. 3.0/applet.js:1132 3.8/weather-applet.js:20411
 msgid "mm"
-msgstr ""
+msgstr "χιλιοστά"
 
 #. 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:20411
 msgid "in"
-msgstr ""
+msgstr "ίντσες"
 
 #. 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:20628
 msgid "mi"
-msgstr ""
+msgstr "μίλια"
 
 #. 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:20629
 msgid "km"
-msgstr ""
+msgstr "χιλιόμετρα"
 
 #. 3.0/applet.js:1227 3.8/weather-applet.js:20832
 msgid "Loading current weather ..."
@@ -160,91 +167,97 @@ msgid "Loading ..."
 msgstr "Φόρτωση ..."
 
 #. 3.0/applet.js:1329 3.8/weather-applet.js:19590
-#, fuzzy
 msgid "Temperature"
-msgstr "Θερμοκρασία:"
+msgstr "Θερμοκρασία"
 
 #. 3.0/applet.js:1330 3.8/weather-applet.js:19595
-#, fuzzy
 msgid "Humidity"
-msgstr "Υγρασία:"
+msgstr "Υγρασία"
 
 #. 3.0/applet.js:1331 3.8/weather-applet.js:19600
-#, fuzzy
 msgid "Pressure"
-msgstr "Πίεση:"
+msgstr "Πίεση"
 
 #. 3.0/applet.js:1332 3.8/weather-applet.js:12924 3.8/weather-applet.js:12931
 #. 3.8/weather-applet.js:12932 3.8/weather-applet.js:12938
 #. 3.8/weather-applet.js:15311 3.8/weather-applet.js:15312
 #. 3.8/weather-applet.js:19411
-#, fuzzy
 msgid "Wind"
-msgstr "Άνεμος:"
+msgstr "Άνεμος"
 
 #. 3.0/applet.js:1639
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr ""
+"Βεβαιωθείτε πως έχετε εισάγει μια τοποθεσία ή χρησιμοποιείστε την αυτόματη "
+"τοποθεσία αντ' αυτής"
 
 #. 3.0/applet.js:1877 3.8/weather-applet.js:10739
 msgid "Could not find location based on address, please check if it's right"
 msgstr ""
+"Αδυναμία εύρεσης τοποθεσίας με βάση τη διεύθυνση, παρακαλώ ελέγξτε αν είναι "
+"σωστή"
 
 #. 3.0/applet.js:1901 3.8/weather-applet.js:10759
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
 msgstr ""
+"Αποτυχία κλήσης API Γεωεντοπισμού, δείτε τα αρχεία αναφοράς σφαλμάτων "
+"(Looking Glass)"
 
 #. 3.0/applet.js:2032 3.0/applet.js:2036 3.8/weather-applet.js:10272
 msgid "Warning"
-msgstr ""
+msgstr "Προειδοποίηση"
 
 #. 3.0/applet.js:2032
 msgid "You can only save correct locations when the applet is not refreshing"
 msgstr ""
+"Μπορείτε μόνο να αποθηκεύσετε σωστές τοποθεσίες όταν η εφαρμογή δεν "
+"ανανεώνεται"
 
 #. 3.0/applet.js:2036 3.8/weather-applet.js:10272
 msgid "You can't save an incorrect location"
-msgstr ""
+msgstr "Δεν μπορείτε να αποθηκεύσετε μια εσφαλμένη τοποθεσία"
 
 #. 3.8->settings-schema.json->logLevel->options
 #. 3.0/applet.js:2040 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
 #. 3.8/weather-applet.js:10276
 msgid "Info"
-msgstr ""
+msgstr "Πληροφορίες"
 
 #. 3.0/applet.js:2040 3.8/weather-applet.js:10276
 msgid "Location is already saved"
-msgstr ""
+msgstr "Η τοποθεσία είναι ήδη αποθηκευμένη"
 
 #. 3.0/applet.js:2049 3.0/applet.js:2083
 msgid "Success"
-msgstr ""
+msgstr "Επιτυχία"
 
 #. 3.0/applet.js:2049
 msgid "Location is saved to library"
-msgstr ""
+msgstr "Η τοποθεσία αποθηκεύτηκε στη βιβλιοθήκη"
 
 #. 3.0/applet.js:2062
 msgid "You can't remove a location while the applet is refreshing"
-msgstr ""
+msgstr "Δεν μπορείτε να αφαιρέσετε μια τοποθεσία όταν η εφαρμογή ανανεώνεται"
 
 #. 3.0/applet.js:2066
 msgid "You can't remove an incorrect location"
-msgstr ""
+msgstr "Δεν μπορείτε να αφαιρέσετε μια εσφαλμένη τοποθεσία"
 
 #. 3.0/applet.js:2070
 msgid "Location is not in storage, can't delete"
-msgstr ""
+msgstr "Η τοποθεσία δεν έχει αποθηκευτεί, δεν μπορεί να διαγραφεί"
 
 #. 3.0/applet.js:2083
 msgid "Location is deleted from library"
-msgstr ""
+msgstr "Η τοποθεσία διεγράφη από τη βιβλιοθήκη"
 
 #. 3.0/applet.js:2131
 msgid ""
 "Failed to load in data from location storage, please see the logs for more "
 "information"
 msgstr ""
+"Αποτυχία λήψης δεδομένων από τον αποθηκευτικό χώρο τοποθεσίας, παρακαλώ "
+"συμβουλευτείτε τα αρχεία καταγραφής σφαλμάτων για περισσότερες πληροφορίες"
 
 #. 3.0/climacell.js:163 3.0/darkSky.js:143 3.0/openWeatherMap.js:129
 #. 3.0/us_weather.js:322 3.0/weatherbit.js:202 3.0/yahoo.js:141
@@ -253,18 +266,20 @@ msgstr ""
 #. 3.8/weather-applet.js:13942 3.8/weather-applet.js:15499
 #. 3.8/weather-applet.js:16126 3.8/weather-applet.js:17829
 msgid "Feels Like"
-msgstr ""
+msgstr "Αίσθηση σαν"
 
 #. 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
 #. 3.8/weather-applet.js:16202
 msgid "Failed to Process Weather Info"
-msgstr ""
+msgstr "Αποτυχία επεξεργασίας πληροφοριών καιρού"
 
 #. 3.0/climacell.js:224
 msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://developer.climacell.co/sign-up"
 msgstr ""
+"Παρακαλώ εισάγετε ένα κλειδί API στις ρυθμίσεις,\n"
+"ή λάβετε πρώτα ένα από το https://developer.climacell.co/sign-up"
 
 #. 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
 #. 3.8/weather-applet.js:12358 3.8/weather-applet.js:15992
@@ -272,12 +287,16 @@ msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
 msgstr ""
+"Παρακαλώ βεβαιωθείτε πως\n"
+"εισαγάγατε ορθά το κλειδί API και ο λογαριασμός σας δεν είναι κλειδωμένος"
 
 #. 3.0/climacell.js:248 3.8/weather-applet.js:12786
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Climacell"
 msgstr ""
+"Παρακαλώ βεβαιωθείτε πως\n"
+"εισαγάγατε το κλειδί API που λάβατε από την Climacell"
 
 #. 3.0/climacell.js:259 3.0/climacell.js:260 3.0/met_norway.js:308
 #. 3.0/met_norway.js:309 3.0/met_norway.js:315 3.0/met_norway.js:322
@@ -289,9 +308,8 @@ msgstr ""
 #. 3.8/weather-applet.js:16579 3.8/weather-applet.js:17976
 #. 3.8/weather-applet.js:17983 3.8/weather-applet.js:17990
 #. 3.8/weather-applet.js:17991
-#, fuzzy
 msgid "Heavy rain"
-msgstr "Ισχυρή χιονόπτωση"
+msgstr "Ισχυρή βροχόπτωση"
 
 #. 3.0/climacell.js:266 3.0/climacell.js:267 3.0/met_norway.js:483
 #. 3.0/met_norway.js:484 3.0/met_norway.js:490 3.0/us_weather.js:484
@@ -313,7 +331,7 @@ msgstr "Ισχυρή χιονόπτωση"
 #. 3.8/weather-applet.js:16585 3.8/weather-applet.js:16592
 #. 3.8/weather-applet.js:17200 3.8/weather-applet.js:17201
 msgid "Rain"
-msgstr ""
+msgstr "Βροχόπτωση"
 
 #. 3.0/climacell.js:273 3.0/climacell.js:274 3.0/met_norway.js:392
 #. 3.0/met_norway.js:393 3.0/met_norway.js:399 3.0/met_norway.js:406
@@ -326,14 +344,12 @@ msgstr ""
 #. 3.8/weather-applet.js:16565 3.8/weather-applet.js:17948
 #. 3.8/weather-applet.js:17955 3.8/weather-applet.js:17969
 #. 3.8/weather-applet.js:17970
-#, fuzzy
 msgid "Light rain"
-msgstr "Παγωμένη βροχή"
+msgstr "Ελαφρά βροχόπτωση"
 
 #. 3.0/climacell.js:280 3.8/weather-applet.js:13023 3.8/weather-applet.js:14097
-#, fuzzy
 msgid "Heavy freezing rain"
-msgstr "Παγωμένη βροχή"
+msgstr "Ισχυρή παγωμένη βροχόπτωση"
 
 #. 3.0/climacell.js:281 3.0/climacell.js:287 3.0/climacell.js:288
 #. 3.0/climacell.js:295 3.0/openWeatherMap.js:386 3.0/us_weather.js:505
@@ -344,18 +360,16 @@ msgstr "Παγωμένη βροχή"
 #. 3.8/weather-applet.js:13736 3.8/weather-applet.js:13737
 #. 3.8/weather-applet.js:13743 3.8/weather-applet.js:16593
 msgid "Freezing rain"
-msgstr "Παγωμένη βροχή"
+msgstr "Παγωμένη βροχόπτωση"
 
 #. 3.0/climacell.js:294 3.8/weather-applet.js:13016 3.8/weather-applet.js:14099
 #. 3.8/weather-applet.js:16586
-#, fuzzy
 msgid "Light freezing rain"
-msgstr "Παγωμένη βροχή"
+msgstr "Ελαφρά παγωμένη βροχόπτωση"
 
 #. 3.0/climacell.js:301 3.8/weather-applet.js:16551
-#, fuzzy
 msgid "Light freezing drizzle"
-msgstr "Παγωμένο ψιλόβροχο"
+msgstr "Ελαφρά παγωμένο ψιλόβροχο"
 
 #. 3.0/climacell.js:302 3.8/weather-applet.js:13002 3.8/weather-applet.js:16558
 msgid "Freezing drizzle"
@@ -363,23 +377,22 @@ msgstr "Παγωμένο ψιλόβροχο"
 
 #. 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:12448
 #. 3.8/weather-applet.js:14079 3.8/weather-applet.js:16530
-#, fuzzy
 msgid "Light drizzle"
-msgstr "Παγωμένο ψιλόβροχο"
+msgstr "Ελαφρύ ψιλόβροχο"
 
 #. 3.0/climacell.js:315 3.8/weather-applet.js:13037
 msgid "Heavy ice pellets"
-msgstr ""
+msgstr "Ισχυροί παγωμένοι κρύσταλλοι βροχής"
 
 #. 3.0/climacell.js:316 3.0/climacell.js:322 3.0/climacell.js:323
 #. 3.0/climacell.js:330 3.8/weather-applet.js:13029 3.8/weather-applet.js:13030
 #. 3.8/weather-applet.js:13036 3.8/weather-applet.js:13043
 msgid "Ice pellets"
-msgstr ""
+msgstr "Παγωμένοι κρύσταλλοι βροχής"
 
 #. 3.0/climacell.js:329 3.8/weather-applet.js:13044
 msgid "Light ice pellets"
-msgstr ""
+msgstr "Ελαφροί παγωμένοι κρύσταλλοι βροχής"
 
 #. 3.0/climacell.js:336 3.0/climacell.js:337 3.0/met_norway.js:364
 #. 3.0/met_norway.js:365 3.0/met_norway.js:371 3.0/met_norway.js:378
@@ -413,7 +426,7 @@ msgstr "Ισχυρή χιονόπτωση"
 #. 3.8/weather-applet.js:16620 3.8/weather-applet.js:17216
 #. 3.8/weather-applet.js:17217
 msgid "Snow"
-msgstr "Χιόνι"
+msgstr "Χιονόπτωση"
 
 #. 3.0/climacell.js:350 3.0/climacell.js:351 3.0/met_norway.js:448
 #. 3.0/met_norway.js:449 3.0/met_norway.js:455 3.0/met_norway.js:462
@@ -426,16 +439,14 @@ msgstr "Χιόνι"
 #. 3.8/weather-applet.js:16600 3.8/weather-applet.js:18039
 #. 3.8/weather-applet.js:18046 3.8/weather-applet.js:18053
 #. 3.8/weather-applet.js:18054
-#, fuzzy
 msgid "Light snow"
 msgstr "Ελαφριά χιονόπτωση"
 
 #. 3.0/climacell.js:357 3.0/climacell.js:358 3.8/weather-applet.js:12480
 #. 3.8/weather-applet.js:12980 3.8/weather-applet.js:12981
 #. 3.8/weather-applet.js:15674 3.8/weather-applet.js:15675
-#, fuzzy
 msgid "Flurries"
-msgstr "Νυφάδες χιονιού"
+msgstr "Ασθενείς νυφάδες χιονιού"
 
 #. 3.0/climacell.js:364 3.0/climacell.js:365 3.0/openWeatherMap.js:366
 #. 3.0/us_weather.js:550 3.0/us_weather.js:551 3.8/weather-applet.js:10838
@@ -447,13 +458,12 @@ msgstr "Νυφάδες χιονιού"
 #. 3.8/weather-applet.js:15304 3.8/weather-applet.js:15305
 #. 3.8/weather-applet.js:16662 3.8/weather-applet.js:16663
 #. 3.8/weather-applet.js:16669 3.8/weather-applet.js:16676
-#, fuzzy
 msgid "Thunderstorm"
-msgstr "Καταιγίδες"
+msgstr "Καταιγίδα"
 
 #. 3.0/climacell.js:371 3.0/climacell.js:372 3.8/weather-applet.js:12918
 msgid "Light fog"
-msgstr ""
+msgstr "Ασθενής ομίχλη"
 
 #. 3.0/climacell.js:378 3.0/climacell.js:379 3.0/met_norway.js:301
 #. 3.0/met_norway.js:302 3.0/met_uk.js:568 3.0/met_uk.js:569
@@ -469,9 +479,8 @@ msgstr ""
 #. 3.8/weather-applet.js:16522 3.8/weather-applet.js:16523
 #. 3.8/weather-applet.js:17269 3.8/weather-applet.js:17270
 #. 3.8/weather-applet.js:17927 3.8/weather-applet.js:17928
-#, fuzzy
 msgid "Fog"
-msgstr "Ομιχλώδης"
+msgstr "Ομίχλη"
 
 #. 3.0/climacell.js:385 3.0/climacell.js:386 3.0/met_norway.js:287
 #. 3.0/met_norway.js:288 3.0/met_uk.js:575 3.0/met_uk.js:576 3.0/yahoo.js:462
@@ -483,7 +492,7 @@ msgstr "Ομιχλώδης"
 #. 3.8/weather-applet.js:17032 3.8/weather-applet.js:17033
 #. 3.8/weather-applet.js:17934 3.8/weather-applet.js:17935
 msgid "Cloudy"
-msgstr "Συννεφιασμένος"
+msgstr "Νεφελώδης"
 
 #. 3.0/climacell.js:392 3.0/climacell.js:393 3.0/us_weather.js:428
 #. 3.0/us_weather.js:429 3.0/us_weather.js:463 3.8/weather-applet.js:12903
@@ -508,9 +517,8 @@ msgstr "Μερικώς νεφελώδης"
 
 #. 3.0/climacell.js:406 3.0/climacell.js:407 3.8/weather-applet.js:12889
 #. 3.8/weather-applet.js:12890
-#, fuzzy
 msgid "Mostly clear"
-msgstr "Κυρίως νεφελώδης"
+msgstr "Κυρίως αίθριος"
 
 #. 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:526
 #. 3.0/met_uk.js:527 3.0/openWeatherMap.js:411 3.0/us_weather.js:407
@@ -556,54 +564,58 @@ msgstr "Ηλιόλουστος"
 #. 3.8/weather-applet.js:17914 3.8/weather-applet.js:18102
 #. 3.8/weather-applet.js:18103
 msgid "Unknown"
-msgstr ""
+msgstr "Ακαθόριστος"
 
 #. 3.0/darkSky.js:71
 msgid "and"
-msgstr ""
+msgstr "και"
 
 #. 3.0/darkSky.js:71
 msgid "until"
-msgstr ""
+msgstr "έως"
 
 #. 3.0/darkSky.js:71
 msgid "Possible"
-msgstr ""
+msgstr "Πιθανώς"
 
 #. 3.0/darkSky.js:211
 msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://darksky.net/dev/register"
 msgstr ""
+"Παρακαλώ εισαγάγετε το κλειδί API στις ρυθμίσεις,\n"
+"ή λάβετε ένα από το https://darksky.net/dev/register"
 
 #. 3.0/darkSky.js:238
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from DarkSky"
 msgstr ""
+"Παρακαλώ βεβαιωθείτε πως\n"
+"εισαγάγατε το κλειδί API που λάβατε από το DarkSky"
 
 #. 3.0/ipApi.js:89 3.8/weather-applet.js:16478 3.8/weather-applet.js:18153
 msgid "Could not obtain location"
-msgstr ""
+msgstr "Αδυναμία λήψης τοποθεσίας"
 
 #. 3.0/ipApi.js:95 3.8/weather-applet.js:18163 3.8/weather-applet.js:18226
 #. 3.8/weather-applet.js:18286
 msgid ""
 "Location Service responded with errors, please see the logs in Looking Glass"
 msgstr ""
+"Η υπηρεσία τοποθεσίας ανταποκρίθηκε εσφαλμένα, παρακαλώ ελέγξτε τα αρχεία "
+"καταγραφής σφαλμάτων (Looking Glass)"
 
 #. 3.0/met_norway.js:131 3.8/weather-applet.js:11621
-#, fuzzy
 msgid "Cloudiness"
-msgstr "Συννεφιασμένος"
+msgstr "Νεφελώδης"
 
 #. 3.0/met_norway.js:280 3.0/met_norway.js:281 3.0/openWeatherMap.js:412
 #. 3.8/weather-applet.js:10976 3.8/weather-applet.js:11772
 #. 3.8/weather-applet.js:11773 3.8/weather-applet.js:16494
 #. 3.8/weather-applet.js:16976 3.8/weather-applet.js:16983
-#, fuzzy
 msgid "Clear sky"
-msgstr "Αίθριος"
+msgstr "Ξαστεριά"
 
 #. 3.0/met_norway.js:294 3.0/met_norway.js:295 3.0/yahoo.js:468
 #. 3.8/weather-applet.js:11786 3.8/weather-applet.js:11787
@@ -612,120 +624,108 @@ msgstr "Αίθριος"
 
 #. 3.0/met_norway.js:316 3.8/weather-applet.js:11808
 msgid "Heavy rain and thunder"
-msgstr ""
+msgstr "Ισχυρή βροχόπτωση με κεραυνούς"
 
 #. 3.0/met_norway.js:323 3.8/weather-applet.js:11815
-#, fuzzy
 msgid "Heavy rain showers"
-msgstr "Ισχυρή χιονόπτωση"
+msgstr "Ισχυρές μπόρες"
 
 #. 3.0/met_norway.js:330 3.8/weather-applet.js:11822
 msgid "Heavy rain showers and thunder"
-msgstr ""
+msgstr "Ισχυρές μπόρες με κεραυνούς"
 
 #. 3.0/met_norway.js:336 3.0/met_norway.js:337 3.0/met_norway.js:343
 #. 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/weather-applet.js:11828
 #. 3.8/weather-applet.js:11829 3.8/weather-applet.js:11835
 #. 3.8/weather-applet.js:11842 3.8/weather-applet.js:11849
 #. 3.8/weather-applet.js:12484
-#, fuzzy
 msgid "Heavy sleet"
-msgstr "Ισχυρή χιονόπτωση"
+msgstr "Έντονο χιονόνερο"
 
 #. 3.0/met_norway.js:344 3.8/weather-applet.js:11836
 msgid "Heavy sleet and thunder"
-msgstr ""
+msgstr "Έντονο χιονόνερο με κεραυνούς"
 
 #. 3.0/met_norway.js:351 3.8/weather-applet.js:11843
-#, fuzzy
 msgid "Heavy sleet showers"
-msgstr "Ισχυρή χιονόπτωση"
+msgstr "Ισχυρές μπόρες χιονόνερου"
 
 #. 3.0/met_norway.js:358 3.8/weather-applet.js:11850
 msgid "Heavy sleet showers and thunder"
-msgstr ""
+msgstr "Ισχυρές μπόρες χιονόνερου με κεραυνούς"
 
 #. 3.0/met_norway.js:372 3.8/weather-applet.js:11864
-#, fuzzy
 msgid "Heavy snow and thunder"
-msgstr "Ισχυρή χιονόπτωση"
+msgstr "Ισχυρή χιονόπτωση με κεραυνούς"
 
 #. 3.0/met_norway.js:379 3.8/weather-applet.js:11871
 #. 3.8/weather-applet.js:14475
-#, fuzzy
 msgid "Heavy snow showers"
-msgstr "Χιονοπτώσεις"
+msgstr "Ισχυρές μπόρες χιονοπτώσεων"
 
 #. 3.0/met_norway.js:386 3.8/weather-applet.js:11878
 msgid "Heavy snow showers and thunder"
-msgstr ""
+msgstr "Ισχυρές μπόρες χιονοπτώσεων με κεραυνούς"
 
 #. 3.0/met_norway.js:400 3.8/weather-applet.js:11892
 msgid "Light rain and thunder"
-msgstr ""
+msgstr "Ελαφρά βροχόπτωση με κεραυνούς"
 
 #. 3.0/met_norway.js:407 3.8/weather-applet.js:11899
-#, fuzzy
 msgid "Light rain showers"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρές μπόρες"
 
 #. 3.0/met_norway.js:414 3.8/weather-applet.js:11906
-#, fuzzy
 msgid "Light rain showers and thunder"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρές μπόρες με κεραυνούς"
 
 #. 3.0/met_norway.js:420 3.0/met_norway.js:421 3.0/met_norway.js:427
 #. 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/weather-applet.js:11912
 #. 3.8/weather-applet.js:11913 3.8/weather-applet.js:11919
 #. 3.8/weather-applet.js:11926 3.8/weather-applet.js:11933
 msgid "Light sleet"
-msgstr ""
+msgstr "Ελαφρύ χιονόνερο"
 
 #. 3.0/met_norway.js:428 3.8/weather-applet.js:11920
 msgid "Light sleet and thunder"
-msgstr ""
+msgstr "Ελαφρύ χιονόνερο με κεραυνούς"
 
 #. 3.0/met_norway.js:435 3.8/weather-applet.js:11927
-#, fuzzy
 msgid "Light sleet showers"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρές μπόρες χιονόνερου"
 
 #. 3.0/met_norway.js:442 3.8/weather-applet.js:11934
-#, fuzzy
 msgid "Light sleet showers and thunder"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρές μπόρες χιονόνερου με κεραυνούς"
 
 #. 3.0/met_norway.js:456 3.8/weather-applet.js:11948
-#, fuzzy
 msgid "Light snow and thunder"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφριά χιονόπτωση με κεραυνούς"
 
 #. 3.0/met_norway.js:463 3.8/weather-applet.js:11955
 #. 3.8/weather-applet.js:16649
 msgid "Light snow showers"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρές μπόρες χιονοπτώσεων"
 
 #. 3.0/met_norway.js:470 3.8/weather-applet.js:11962
-#, fuzzy
 msgid "Light snow showers and thunder"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρές ριπές χιονοπτώσεων με κεραυνούς"
 
 #. 3.0/met_norway.js:491 3.8/weather-applet.js:11983
 msgid "Rain and thunder"
-msgstr ""
+msgstr "Βροχόπτωση με κεραυνούς"
 
 #. 3.0/met_norway.js:497 3.0/met_norway.js:498 3.0/met_norway.js:504
 #. 3.0/us_weather.js:542 3.8/weather-applet.js:11989
 #. 3.8/weather-applet.js:11990 3.8/weather-applet.js:11996
 #. 3.8/weather-applet.js:13766 3.8/weather-applet.js:14119
 #. 3.8/weather-applet.js:14440 3.8/weather-applet.js:14446
-#, fuzzy
 msgid "Rain showers"
-msgstr "Χιονοπτώσεις"
+msgstr "Μπόρες"
 
 #. 3.0/met_norway.js:505 3.8/weather-applet.js:11997
 msgid "Rain showers and thunder"
-msgstr ""
+msgstr "Μπόρες με κεραυνούς"
 
 #. 3.0/met_norway.js:511 3.0/met_norway.js:512 3.0/met_norway.js:518
 #. 3.0/met_norway.js:525 3.0/met_norway.js:532 3.0/met_uk.js:638
@@ -751,22 +751,20 @@ msgid "Sleet"
 msgstr "Χιονόνερο"
 
 #. 3.0/met_norway.js:519 3.8/weather-applet.js:12011
-#, fuzzy
 msgid "Sleet and thunder"
-msgstr "Διάσπαρτες καταιγίδες"
+msgstr "Χιονόνερο με κεραυνούς"
 
 #. 3.0/met_norway.js:526 3.8/weather-applet.js:12018
-#, fuzzy
 msgid "Sleet showers"
-msgstr "Διάσπαρτες βροχοπτώσεις"
+msgstr "Μπόρες χιονόνερου"
 
 #. 3.0/met_norway.js:533 3.8/weather-applet.js:12025
 msgid "Sleet showers and thunder"
-msgstr ""
+msgstr "Μπόρες χιονόνερου με κεραυνούς"
 
 #. 3.0/met_norway.js:547 3.8/weather-applet.js:12039
 msgid "Snow and thunder"
-msgstr ""
+msgstr "Χιονόπτωση με κεραυνούς"
 
 #. 3.0/met_norway.js:553 3.0/met_norway.js:554 3.0/met_norway.js:560
 #. 3.8/weather-applet.js:12045 3.8/weather-applet.js:12046
@@ -774,57 +772,56 @@ msgstr ""
 #. 3.8/weather-applet.js:14468 3.8/weather-applet.js:16648
 #. 3.8/weather-applet.js:16655 3.8/weather-applet.js:16656
 msgid "Snow showers"
-msgstr "Χιονοπτώσεις"
+msgstr "Μπόρες χιονοπτώσεων"
 
 #. 3.0/met_norway.js:561 3.8/weather-applet.js:12053
-#, fuzzy
 msgid "Snow showers and thunder"
-msgstr "Χιονοπτώσεις"
+msgstr "Μπόρες με κεραυνούς"
 
 #. 3.0/met_uk.js:162 3.0/met_uk.js:192 3.0/met_uk.js:239 3.0/us_weather.js:151
 #. 3.0/us_weather.js:179
 msgid "Unexpected response from API"
-msgstr ""
+msgstr "Απρόσμενη ανταπόκριση από το API"
 
 #. 3.0/met_uk.js:316
 msgid "Visibility"
-msgstr ""
+msgstr "Ορατότητα"
 
 #. 3.0/met_uk.js:340 3.0/openWeatherMap.js:190 3.0/us_weather.js:334
 #. 3.0/weatherbit.js:212 3.8/weather-applet.js:12172
 #. 3.8/weather-applet.js:13579
 msgid "Failed to Process Current Weather Info"
-msgstr ""
+msgstr "Αποτυχία επεξεργασίας τρεχουσών πληροφοριών καιρού"
 
 #. 3.0/met_uk.js:364 3.0/met_uk.js:400 3.0/us_weather.js:371
 #. 3.0/weatherbit.js:239 3.0/weatherbit.js:274 3.8/weather-applet.js:12198
 #. 3.8/weather-applet.js:12232 3.8/weather-applet.js:13354
 msgid "Failed to Process Forecast Info"
-msgstr ""
+msgstr "Αποτυχία επεξεργασίας πληροφοριών δελτίου καιρού"
 
 #. 3.0/met_uk.js:408
 msgid "Very poor - Less than"
-msgstr ""
+msgstr "Πολύ ασθενής - Λιγότερο από"
 
 #. 3.0/met_uk.js:410
 msgid "Poor - Between"
-msgstr ""
+msgstr "Ασθενής - Μεταξύ"
 
 #. 3.0/met_uk.js:412
 msgid "Moderate - Between"
-msgstr ""
+msgstr "Μέτριος - Μεταξύ"
 
 #. 3.0/met_uk.js:414
 msgid "Good - Between"
-msgstr ""
+msgstr "Καλός - Μεταξύ"
 
 #. 3.0/met_uk.js:416
 msgid "Very good - Between"
-msgstr ""
+msgstr "Πολύ καλός - Μεταξύ"
 
 #. 3.0/met_uk.js:417
 msgid "Excellent - More than"
-msgstr ""
+msgstr "Εξαιρετικός - Περισσότερο από"
 
 #. 3.0/met_uk.js:561 3.0/met_uk.js:562 3.0/openWeatherMap.js:401
 #. 3.8/weather-applet.js:10850 3.8/weather-applet.js:10955
@@ -832,7 +829,7 @@ msgstr ""
 #. 3.8/weather-applet.js:14109 3.8/weather-applet.js:17920
 #. 3.8/weather-applet.js:17921
 msgid "Mist"
-msgstr ""
+msgstr "Ομίχλη"
 
 #. 3.0/met_uk.js:582 3.0/met_uk.js:583 3.0/us_weather.js:435
 #. 3.0/us_weather.js:436 3.0/us_weather.js:470 3.8/weather-applet.js:12425
@@ -844,13 +841,12 @@ msgstr ""
 #. 3.8/weather-applet.js:17025 3.8/weather-applet.js:17941
 #. 3.8/weather-applet.js:17942
 msgid "Overcast"
-msgstr ""
+msgstr "Νεφελώδης"
 
 #. 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:17949
 #. 3.8/weather-applet.js:17956
-#, fuzzy
 msgid "Light rain shower"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρές μπόρες βροχοπτώσεων"
 
 #. 3.0/met_uk.js:603 3.0/met_uk.js:604 3.0/openWeatherMap.js:373
 #. 3.0/yahoo.js:445 3.8/weather-applet.js:10840 3.8/weather-applet.js:10897
@@ -867,15 +863,13 @@ msgstr "Ψιλόβροχο"
 
 #. 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/weather-applet.js:17977
 #. 3.8/weather-applet.js:17984
-#, fuzzy
 msgid "Heavy rain shower"
-msgstr "Ισχυρή χιονόπτωση"
+msgstr "Ισχυρές μπόρες βροχοπτώσεων"
 
 #. 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/weather-applet.js:17998
 #. 3.8/weather-applet.js:18005
-#, fuzzy
 msgid "Sleet shower"
-msgstr "Διάσπαρτες βροχοπτώσεις"
+msgstr "Μπόρες χιονόνερου"
 
 #. 3.0/met_uk.js:659 3.0/met_uk.js:666 3.0/met_uk.js:673 3.0/met_uk.js:674
 #. 3.0/yahoo.js:453 3.8/weather-applet.js:14151 3.8/weather-applet.js:15262
@@ -884,46 +878,42 @@ msgstr "Διάσπαρτες βροχοπτώσεις"
 #. 3.8/weather-applet.js:18025 3.8/weather-applet.js:18032
 #. 3.8/weather-applet.js:18033
 msgid "Hail"
-msgstr "Χαλάζι"
+msgstr "Χαλαζόπτωση"
 
 #. 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/weather-applet.js:18019
 #. 3.8/weather-applet.js:18026
-#, fuzzy
 msgid "Hail shower"
-msgstr "Χιονοπτώσεις"
+msgstr "Μπόρες χαλαζοπτώσεων"
 
 #. 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/weather-applet.js:18040
 #. 3.8/weather-applet.js:18047
-#, fuzzy
 msgid "Light snow shower"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρές μπόρες χιονοπτώσεων"
 
 #. 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/weather-applet.js:12478
 #. 3.8/weather-applet.js:18061 3.8/weather-applet.js:18068
-#, fuzzy
 msgid "Heavy snow shower"
-msgstr "Ισχυρή χιονόπτωση"
+msgstr "Ισχυρές μπόρες χιονοπτώσεων"
 
 #. 3.0/met_uk.js:722 3.0/met_uk.js:729 3.0/met_uk.js:736 3.0/met_uk.js:737
 #. 3.8/weather-applet.js:18081 3.8/weather-applet.js:18088
 #. 3.8/weather-applet.js:18095 3.8/weather-applet.js:18096
-#, fuzzy
 msgid "Thunder"
-msgstr "Καταιγίδες"
+msgstr "Βροντές"
 
 #. 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/weather-applet.js:18082
 #. 3.8/weather-applet.js:18089
-#, fuzzy
 msgid "Thunder shower"
-msgstr "Βροχοπτώσεις με κεραυνούς"
+msgstr "Διάσπαρτες βροντές"
 
 #. 3.0/openWeatherMap.js:238 3.8/weather-applet.js:11237
 msgid "Please make sure Location is in the correct format in the Settings"
 msgstr ""
+"Παρακαλώ βεβαιωθείτε πως η τοποθεσία είναι σε σωστή μορφή στις ρυθμίσεις"
 
 #. 3.0/openWeatherMap.js:242 3.8/weather-applet.js:11241
 msgid "Make sure you entered the correct key in settings"
-msgstr ""
+msgstr "Βεβαιωθείτε πως έχετε εισαγάγει το σωστό κλειδί στις ρυθμίσεις"
 
 #. 3.0/openWeatherMap.js:246 3.0/openWeatherMap.js:266
 #. 3.8/weather-applet.js:11245
@@ -931,45 +921,47 @@ msgid ""
 "Location not found, make sure location is available or it is in the correct "
 "format"
 msgstr ""
+"Αδυναμία εύρεσης τοποθεσίας, βεβαιωθείτε πως είναι διαθέσιμη ή είναι στη "
+"σωστή μορφή"
 
 #. 3.0/openWeatherMap.js:250 3.8/weather-applet.js:11249
 msgid "If this problem persists, please contact the Author of this applet"
 msgstr ""
+"Αν το πρόβλημα επιμένει, παρακαλώ επικοινωνήστε με τον δημιουργό αυτής της "
+"εφαρμογής"
 
 #. 3.0/openWeatherMap.js:254 3.8/weather-applet.js:11253
 msgid "Unknown Error, please see the logs in Looking Glass"
 msgstr ""
+"Άγνωστο σφάλμα, παρακαλώ ελέγξτε τα αρχεία καταγραφής σφαλμάτων ( Looking "
+"Glass )"
 
 #. 3.0/openWeatherMap.js:362 3.8/weather-applet.js:10875
 #. 3.8/weather-applet.js:12434
 msgid "Thunderstorm with light rain"
-msgstr ""
+msgstr "Καταιγίδα με ελαφρά βροχόπτωση"
 
 #. 3.0/openWeatherMap.js:363 3.8/weather-applet.js:10877
 #. 3.8/weather-applet.js:12436
-#, fuzzy
 msgid "Thunderstorm with rain"
-msgstr "Καταιγίδες"
+msgstr "Καταιγίδα με βροχόπτωση"
 
 #. 3.0/openWeatherMap.js:364 3.8/weather-applet.js:10879
 #. 3.8/weather-applet.js:12438
 msgid "Thunderstorm with heavy rain"
-msgstr ""
+msgstr "Καταιγίδα με βαριά βροχόπτωση"
 
 #. 3.0/openWeatherMap.js:365 3.8/weather-applet.js:10881
-#, fuzzy
 msgid "Light thunderstorm"
-msgstr "Καταιγίδες"
+msgstr "Ελαφρά καταιγίδα"
 
 #. 3.0/openWeatherMap.js:367 3.8/weather-applet.js:10885
-#, fuzzy
 msgid "Heavy thunderstorm"
-msgstr "Ισχυρές καταιγίδες"
+msgstr "Ισχυρή καταιγίδα"
 
 #. 3.0/openWeatherMap.js:368 3.8/weather-applet.js:10887
-#, fuzzy
 msgid "Ragged thunderstorm"
-msgstr "Μεμονωμένες καταιγίδες"
+msgstr "Διάσπαρτες καταιγίδες"
 
 #. 3.0/openWeatherMap.js:369 3.8/weather-applet.js:10889
 #. 3.8/weather-applet.js:12440
@@ -978,129 +970,115 @@ msgstr ""
 
 #. 3.0/openWeatherMap.js:370 3.8/weather-applet.js:10891
 #. 3.8/weather-applet.js:12442
-#, fuzzy
 msgid "Thunderstorm with drizzle"
-msgstr "Καταιγίδες"
+msgstr "Καταιγίδα με ψιλόβροχο"
 
 #. 3.0/openWeatherMap.js:371 3.8/weather-applet.js:10893
 #. 3.8/weather-applet.js:12444
 msgid "Thunderstorm with heavy drizzle"
-msgstr ""
+msgstr "Καταιγίδα με βαρύ ψιλόβροχο"
 
 #. 3.0/openWeatherMap.js:372 3.8/weather-applet.js:10895
 msgid "Light intensity drizzle"
-msgstr ""
+msgstr "Ελαφράς πυκνότητας ψιλόβροχο"
 
 #. 3.0/openWeatherMap.js:374 3.8/weather-applet.js:10899
 msgid "Heavy intensity drizzle"
-msgstr ""
+msgstr "Ισχυρής πυκνότητας ψιλόβροχο"
 
 #. 3.0/openWeatherMap.js:375 3.8/weather-applet.js:10901
 msgid "Light intensity drizzle rain"
-msgstr ""
+msgstr "Ψιλόβροχο μικρής έντασης"
 
 #. 3.0/openWeatherMap.js:376 3.8/weather-applet.js:10903
-#, fuzzy
 msgid "Drizzle rain"
 msgstr "Ψιλόβροχο"
 
 #. 3.0/openWeatherMap.js:377 3.8/weather-applet.js:10905
 msgid "Heavy intensity drizzle rain"
-msgstr ""
+msgstr "Ψιλόβροχο ισχυρής έντασης"
 
 #. 3.0/openWeatherMap.js:378 3.8/weather-applet.js:10907
-#, fuzzy
 msgid "Shower rain and drizzle"
-msgstr "Βροχή και χαλάζι"
+msgstr "Ριπές βροχόπτωσης και ψιλόβροχου"
 
 #. 3.0/openWeatherMap.js:379 3.8/weather-applet.js:10909
 msgid "Heavy shower rain and drizzle"
-msgstr ""
+msgstr "Ισχυρές ριπές βροχόπτωσης και ψιλόβροχου"
 
 #. 3.0/openWeatherMap.js:380 3.8/weather-applet.js:10911
-#, fuzzy
 msgid "Shower drizzle"
-msgstr "Παγωμένο ψιλόβροχο"
+msgstr "Μπόρες ψιλόβροχου"
 
 #. 3.0/openWeatherMap.js:382 3.8/weather-applet.js:10915
 #. 3.8/weather-applet.js:12456 3.8/weather-applet.js:14404
 #. 3.8/weather-applet.js:14405
 msgid "Moderate rain"
-msgstr ""
+msgstr "Μέτρια βροχόπτωση"
 
 #. 3.0/openWeatherMap.js:383 3.8/weather-applet.js:10917
 msgid "Heavy intensity rain"
-msgstr ""
+msgstr "Βροχόπτωση ισχυρής έντασης"
 
 #. 3.0/openWeatherMap.js:384 3.8/weather-applet.js:10919
 msgid "Very heavy rain"
-msgstr ""
+msgstr "Πολύ ισχυρή βροχόπτωση"
 
 #. 3.0/openWeatherMap.js:385 3.8/weather-applet.js:10921
-#, fuzzy
 msgid "Extreme rain"
-msgstr "Παγωμένη βροχή"
+msgstr "Ακραία βροχόπτωση"
 
 #. 3.0/openWeatherMap.js:387 3.8/weather-applet.js:10925
-#, fuzzy
 msgid "Light intensity shower rain"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφράς έντασης μπόρες βροχοπτώσεων"
 
 #. 3.0/openWeatherMap.js:388 3.8/weather-applet.js:10927
 #. 3.8/weather-applet.js:12464
-#, fuzzy
 msgid "Shower rain"
-msgstr "Ισχυρές βροχοπτώσεις"
+msgstr "Μπόρες"
 
 #. 3.0/openWeatherMap.js:389 3.8/weather-applet.js:10929
 msgid "Heavy intensity shower rain"
-msgstr ""
+msgstr "Ισχυρής έντασης μπόρες"
 
 #. 3.0/openWeatherMap.js:390 3.8/weather-applet.js:10931
 msgid "Ragged shower rain"
-msgstr ""
+msgstr "Διάσπαρτες μπόρες"
 
 #. 3.0/openWeatherMap.js:395 3.8/weather-applet.js:10943
-#, fuzzy
 msgid "Shower sleet"
-msgstr "Ισχυρές βροχοπτώσεις"
+msgstr "Μπόρες χιονόνερου"
 
 #. 3.0/openWeatherMap.js:396 3.8/weather-applet.js:10945
-#, fuzzy
 msgid "Light rain and snow"
-msgstr "Βροχή και χιόνι"
+msgstr "Ελαφρά βροχόπτωση και χιονόπτωση"
 
 #. 3.0/openWeatherMap.js:397 3.8/weather-applet.js:10947
 #. 3.8/weather-applet.js:14411 3.8/weather-applet.js:14412
 #. 3.8/weather-applet.js:14418 3.8/weather-applet.js:14453
 #. 3.8/weather-applet.js:14460
-#, fuzzy
 msgid "Rain and snow"
-msgstr "Βροχή και χιόνι"
+msgstr "Βροχόπτωση και χιονόπτωση"
 
 #. 3.0/openWeatherMap.js:398 3.8/weather-applet.js:10949
-#, fuzzy
 msgid "Light shower snow"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρές μπόρες χιονοπτώσεων"
 
 #. 3.0/openWeatherMap.js:399 3.8/weather-applet.js:10951
-#, fuzzy
 msgid "Shower snow"
-msgstr "Ισχυρές βροχοπτώσεις"
+msgstr "Μπόρες χιονοπτώσεων"
 
 #. 3.0/openWeatherMap.js:400 3.8/weather-applet.js:10953
-#, fuzzy
 msgid "Heavy shower snow"
-msgstr "Ισχυρή χιονόπτωση"
+msgstr "Ισχυρές μπόρες χιονοπτώσεων"
 
 #. 3.0/openWeatherMap.js:402 3.0/us_weather.js:585 3.0/us_weather.js:586
 #. 3.8/weather-applet.js:10852 3.8/weather-applet.js:10957
 #. 3.8/weather-applet.js:12408 3.8/weather-applet.js:12488
 #. 3.8/weather-applet.js:13809 3.8/weather-applet.js:13810
 #. 3.8/weather-applet.js:15737 3.8/weather-applet.js:15738
-#, fuzzy
 msgid "Smoke"
-msgstr "Καπνώδης"
+msgstr "Αιθαλώδης ατμόσφαιρα"
 
 #. 3.0/openWeatherMap.js:403 3.0/us_weather.js:592 3.0/us_weather.js:593
 #. 3.0/yahoo.js:457 3.8/weather-applet.js:10854 3.8/weather-applet.js:10959
@@ -1108,16 +1086,16 @@ msgstr "Καπνώδης"
 #. 3.8/weather-applet.js:13816 3.8/weather-applet.js:13817
 #. 3.8/weather-applet.js:15730 3.8/weather-applet.js:15731
 msgid "Haze"
-msgstr "Ομίχλη"
+msgstr "Καταχνιά"
 
 #. 3.0/openWeatherMap.js:404 3.8/weather-applet.js:10961
 msgid "Sand, dust whirls"
-msgstr ""
+msgstr "Αμμώδης ατμόσφαιρα με δίνες σκόνης"
 
 #. 3.0/openWeatherMap.js:406 3.8/weather-applet.js:10860
 #. 3.8/weather-applet.js:10965
 msgid "Sand"
-msgstr ""
+msgstr "Αμμώδης ατμόσφαιρα"
 
 #. 3.0/openWeatherMap.js:407 3.0/us_weather.js:578 3.0/us_weather.js:579
 #. 3.0/yahoo.js:455 3.8/weather-applet.js:10856 3.8/weather-applet.js:10967
@@ -1129,12 +1107,12 @@ msgstr "Σκόνη"
 
 #. 3.0/openWeatherMap.js:408 3.8/weather-applet.js:10969
 msgid "Volcanic ash"
-msgstr ""
+msgstr "Ηφαιστειακή στάχτη"
 
 #. 3.0/openWeatherMap.js:409 3.8/weather-applet.js:10971
 #. 3.8/weather-applet.js:14143
 msgid "Squalls"
-msgstr ""
+msgstr "Ριπές ανέμου"
 
 #. 3.0/openWeatherMap.js:410 3.0/us_weather.js:557 3.0/us_weather.js:558
 #. 3.0/yahoo.js:436 3.8/weather-applet.js:10866 3.8/weather-applet.js:10973
@@ -1145,12 +1123,11 @@ msgstr "Ανεμοστρόβιλος"
 
 #. 3.0/openWeatherMap.js:413
 msgid "Sky is clear"
-msgstr ""
+msgstr "Καθαρός ουρανός"
 
 #. 3.0/openWeatherMap.js:414 3.8/weather-applet.js:10848
-#, fuzzy
 msgid "Clouds"
-msgstr "Συννεφιασμένος"
+msgstr "Νεφελώδης"
 
 #. 3.0/openWeatherMap.js:415 3.0/us_weather.js:414 3.0/us_weather.js:415
 #. 3.0/us_weather.js:449 3.8/weather-applet.js:10978
@@ -1159,66 +1136,63 @@ msgstr "Συννεφιασμένος"
 #. 3.8/weather-applet.js:13673 3.8/weather-applet.js:16500
 #. 3.8/weather-applet.js:16501
 msgid "Few clouds"
-msgstr ""
+msgstr "Ελαφρώς νεφαλώδης"
 
 #. 3.0/openWeatherMap.js:416 3.8/weather-applet.js:10980
 #. 3.8/weather-applet.js:12421 3.8/weather-applet.js:12502
-#, fuzzy
 msgid "Scattered clouds"
-msgstr "Διάσπαρτες βροχοπτώσεις"
+msgstr "Διάσπαρτα νέφη"
 
 #. 3.0/openWeatherMap.js:417 3.8/weather-applet.js:10982
 #. 3.8/weather-applet.js:12423 3.8/weather-applet.js:12504
 msgid "Broken clouds"
-msgstr ""
+msgstr "Διασκορπισμένα σύννεφα"
 
 #. 3.0/openWeatherMap.js:418 3.8/weather-applet.js:10984
 msgid "Overcast clouds"
-msgstr ""
+msgstr "Πυκνή νέφωση"
 
 #. 3.0/us_weather.js:120
 msgid "Could not get forecast for your area"
-msgstr ""
+msgstr "Αδυναμία εύρεσης πληροφοριών καιρού για την περιοχή σας"
 
 #. 3.0/us_weather.js:231 3.8/weather-applet.js:13311
 msgid "Location is outside US, please use a different provider."
 msgstr ""
+"Η περιοχή βρίσκεται εκτός Η.Π.Α., παρακαλώ χρησιμοποιείστε διαφορετικό "
+"πάροχο."
 
 #. 3.0/us_weather.js:394 3.8/weather-applet.js:13375
 msgid "Failed to Process Hourly Forecast Info"
-msgstr ""
+msgstr "Αποτυχία επεξεργασίας πληροφοριών ωριαίου δελτίου καιρού"
 
 #. 3.0/us_weather.js:443 3.8/weather-applet.js:13667
 msgid "Clear and windy"
-msgstr ""
+msgstr "Αίθριος ανεμώδης"
 
 #. 3.0/us_weather.js:450 3.8/weather-applet.js:13674
 msgid "Few clouds and windy"
-msgstr ""
+msgstr "Ελαφρά νεφελώδης ανεμώδης"
 
 #. 3.0/us_weather.js:457 3.8/weather-applet.js:13681
-#, fuzzy
 msgid "Partly cloudy and windy"
-msgstr "Μερικώς νεφελώδης"
+msgstr "Μερικώς νεφελώδης ανεμώδης"
 
 #. 3.0/us_weather.js:464 3.8/weather-applet.js:13688
-#, fuzzy
 msgid "Mostly cloudy and windy"
-msgstr "Κυρίως νεφελώδης"
+msgstr "Κυρίως νεφελώδης ανεμώδης"
 
 #. 3.0/us_weather.js:471 3.8/weather-applet.js:13695
 msgid "Overcast and windy"
-msgstr ""
+msgstr "Πυκνή νέφωση με ανέμους"
 
 #. 3.0/us_weather.js:485 3.8/weather-applet.js:13709
-#, fuzzy
 msgid "Snowy rain"
-msgstr "Νυφάδες χιονιού"
+msgstr "Βροχόπτωση με χιονόνερο"
 
 #. 3.0/us_weather.js:520 3.8/weather-applet.js:13744
-#, fuzzy
 msgid "Freezing rain and snow"
-msgstr "Παγωμένη βροχή"
+msgstr "Παγωμένη βροχόπτωση με χιονόπτωση"
 
 #. 3.0/us_weather.js:564 3.0/us_weather.js:565 3.0/utils.js:336
 #. 3.0/yahoo.js:438 3.8/weather-applet.js:9661 3.8/weather-applet.js:13788
@@ -1230,7 +1204,7 @@ msgstr "Τυφώνας"
 #. 3.0/us_weather.js:571 3.0/utils.js:331 3.8/weather-applet.js:9656
 #. 3.8/weather-applet.js:13795
 msgid "Storm"
-msgstr ""
+msgstr "Καταιγίδα"
 
 #. 3.0/us_weather.js:572 3.8/weather-applet.js:13796
 msgid "Tropical storm"
@@ -1245,13 +1219,13 @@ msgstr "Καυτός"
 #. 3.0/us_weather.js:606 3.0/us_weather.js:607 3.0/yahoo.js:461
 #. 3.8/weather-applet.js:13830 3.8/weather-applet.js:13831
 msgid "Cold"
-msgstr "Κρύο"
+msgstr "Κρύος"
 
 #. 3.0/us_weather.js:613 3.0/us_weather.js:614 3.0/yahoo.js:477
 #. 3.8/weather-applet.js:13837 3.8/weather-applet.js:13838
 #. 3.8/weather-applet.js:15884 3.8/weather-applet.js:15885
 msgid "Blizzard"
-msgstr ""
+msgstr "Χιονοθύελλα"
 
 #. 3.0/utils.js:146 3.8/weather-applet.js:9526
 msgid "Today"
@@ -1291,47 +1265,47 @@ msgstr "Σάββατο"
 
 #. 3.0/utils.js:301 3.8/weather-applet.js:9626
 msgid "Calm"
-msgstr ""
+msgstr "Ήπιος"
 
 #. 3.0/utils.js:304 3.8/weather-applet.js:9629
 msgid "Light air"
-msgstr ""
+msgstr "Ελαφρύς άνεμος"
 
 #. 3.0/utils.js:307 3.8/weather-applet.js:9632
 msgid "Light breeze"
-msgstr ""
+msgstr "Ελαφρύ αεράκι"
 
 #. 3.0/utils.js:310 3.8/weather-applet.js:9635
 msgid "Gentle breeze"
-msgstr ""
+msgstr "Απαλό αεράκι"
 
 #. 3.0/utils.js:313 3.8/weather-applet.js:9638
 msgid "Moderate breeze"
-msgstr ""
+msgstr "Μέτριο αεράκι"
 
 #. 3.0/utils.js:316 3.8/weather-applet.js:9641
 msgid "Fresh breeze"
-msgstr ""
+msgstr "Φρέσκο ​​αεράκι"
 
 #. 3.0/utils.js:319 3.8/weather-applet.js:9644
 msgid "Strong breeze"
-msgstr ""
+msgstr "Ισχυρό αεράκι"
 
 #. 3.0/utils.js:322 3.8/weather-applet.js:9647
 msgid "Near gale"
-msgstr ""
+msgstr "Επερχόμενη θύελλα"
 
 #. 3.0/utils.js:325 3.8/weather-applet.js:9650
 msgid "Gale"
-msgstr ""
+msgstr "Θύελλα"
 
 #. 3.0/utils.js:328 3.8/weather-applet.js:9653
 msgid "Strong gale"
-msgstr ""
+msgstr "Ισχυρή θύελλα"
 
 #. 3.0/utils.js:334 3.8/weather-applet.js:9659
 msgid "Violent storm"
-msgstr ""
+msgstr "Σφοδρή καταιγίδα"
 
 #. 3.0/utils.js:429 3.8/weather-applet.js:9809
 msgid "N"
@@ -1370,51 +1344,56 @@ msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://www.weatherbit.io/account/create"
 msgstr ""
+"Παρακαλώ εισαγάγετε ένα κλειδί API στις ρυθμίσεις\n"
+"ή λάβετε πρώτα ένα από το https://www.weatherbit.io/account/create"
 
 #. 3.0/yahoo.js:78
 msgid ""
 "Unknown Error happened while calling Yahoo bridge,\n"
 " see Looking Glass log for errors"
 msgstr ""
+"Προέκυψε άγνωστο σφάλμα κατά την ενδιάμεση κλήση  Yahoo,\n"
+" ελέγξτε το αρχείο αναφοράς σφαλμάτων ( Looking Glass )"
 
 #. 3.0/yahoo.js:91
 msgid ""
 "Yahoo bridge responded in bad format,\n"
 " see Looking Glass log for errors"
 msgstr ""
+"Η ενδιάμεση κλήση Yahoo ανταποκρίθηκε εσφαλμένα, \n"
+"ελέγξτε το αρχείο αναφοράς σφαλμάτων ( Looking Glass )"
 
 #. 3.0/yahoo.js:177
 msgid "Missing package"
-msgstr ""
+msgstr "Απουσία πακέτου"
 
 #. 3.0/yahoo.js:177 3.0/yahoo.js:179
-#, fuzzy
 msgid "Please install '"
-msgstr "Παρακαλώ περιμένετε"
+msgstr "Παρακαλώ εγκαταστήστε '"
 
 #. 3.0/yahoo.js:177 3.0/yahoo.js:179
 msgid "', then refresh manually."
-msgstr ""
+msgstr "', κατόπιν ανανεώστε χειροκίνητα."
 
 #. 3.0/yahoo.js:182
 msgid "Could not connect to Yahoo API."
-msgstr ""
+msgstr "Αδυναμία σύνδεσης στο Yahoo API."
 
 #. 3.0/yahoo.js:186
 msgid ""
 "Unknown error happened while obtaining weather, see Looking Glass logs for "
 "more information"
 msgstr ""
+"Προέκυψε άγνωστο σφάλμα κατά την λήψη καιρού,  ελέγξτε το αρχείο αναφοράς "
+"σφαλμάτων ( Looking Glass )"
 
 #. 3.0/yahoo.js:437 3.8/weather-applet.js:15596 3.8/weather-applet.js:15597
-#, fuzzy
 msgid "Tropical Storm"
 msgstr "Τροπική καταιγίδα"
 
 #. 3.0/yahoo.js:439
-#, fuzzy
 msgid "Severe Thunderstorms"
-msgstr "Ισχυρές καταιγίδες"
+msgstr "Σφοδρές καταιγίδες"
 
 #. 3.0/yahoo.js:440 3.8/weather-applet.js:15617 3.8/weather-applet.js:15618
 #. 3.8/weather-applet.js:17137 3.8/weather-applet.js:17138
@@ -1424,27 +1403,22 @@ msgid "Thunderstorms"
 msgstr "Καταιγίδες"
 
 #. 3.0/yahoo.js:441
-#, fuzzy
 msgid "Mixed Rain and Snow"
-msgstr "Βροχή και χιόνι"
+msgstr "Ανάμεικτες βροχοπτώσεις και χιονοπτώσεις"
 
 #. 3.0/yahoo.js:442
-#, fuzzy
 msgid "Mixed Rain and Sleet"
-msgstr "Βροχή και χιονόνερο"
+msgstr "Ανάμεικτες βροχοπτώσεις και χιονόνερο"
 
 #. 3.0/yahoo.js:443
-#, fuzzy
 msgid "Mixed Snow and Sleet"
-msgstr "Χιόνι και χιονόνερο"
+msgstr "Ανάμεικτες χιονοπτώσεις και χιονόνερο"
 
 #. 3.0/yahoo.js:444 3.8/weather-applet.js:15639 3.8/weather-applet.js:15640
-#, fuzzy
 msgid "Freezing Drizzle"
 msgstr "Παγωμένο ψιλόβροχο"
 
 #. 3.0/yahoo.js:446 3.8/weather-applet.js:15653 3.8/weather-applet.js:15654
-#, fuzzy
 msgid "Freezing Rain"
 msgstr "Παγωμένη βροχή"
 
@@ -1456,20 +1430,17 @@ msgstr "Παγωμένη βροχή"
 #. 3.8/weather-applet.js:17318 3.8/weather-applet.js:17319
 #. 3.8/weather-applet.js:17325 3.8/weather-applet.js:17326
 msgid "Showers"
-msgstr "Ισχυρές βροχοπτώσεις"
+msgstr "Μπόρες"
 
 #. 3.0/yahoo.js:449
-#, fuzzy
 msgid "Snow Flurries"
-msgstr "Νυφάδες χιονιού"
+msgstr "Ασθενείς χιονοπτώσεις"
 
 #. 3.0/yahoo.js:450 3.8/weather-applet.js:17168 3.8/weather-applet.js:17169
-#, fuzzy
 msgid "Light Snow Showers"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρές μπόρες χιονοπτώσεων"
 
 #. 3.0/yahoo.js:451 3.8/weather-applet.js:15688 3.8/weather-applet.js:15689
-#, fuzzy
 msgid "Blowing Snow"
 msgstr "Χιονοθύελλες"
 
@@ -1479,7 +1450,7 @@ msgstr "Ομιχλώδης"
 
 #. 3.0/yahoo.js:458
 msgid "Smoky"
-msgstr "Καπνώδης"
+msgstr "Αιθαλώδης"
 
 #. 3.0/yahoo.js:459
 msgid "Blustery"
@@ -1493,7 +1464,6 @@ msgstr "Ανεμώδης"
 #. 3.8/weather-applet.js:15779 3.8/weather-applet.js:15780
 #. 3.8/weather-applet.js:17003 3.8/weather-applet.js:17004
 #. 3.8/weather-applet.js:17010 3.8/weather-applet.js:17011
-#, fuzzy
 msgid "Mostly Cloudy"
 msgstr "Κυρίως νεφελώδης"
 
@@ -1503,28 +1473,23 @@ msgstr "Κυρίως νεφελώδης"
 #. 3.8/weather-applet.js:15793 3.8/weather-applet.js:15794
 #. 3.8/weather-applet.js:16989 3.8/weather-applet.js:16990
 #. 3.8/weather-applet.js:16996 3.8/weather-applet.js:16997
-#, fuzzy
 msgid "Partly Cloudy"
 msgstr "Μερικώς νεφελώδης"
 
 #. 3.0/yahoo.js:467 3.8/weather-applet.js:15821 3.8/weather-applet.js:15822
-#, fuzzy
 msgid "Mostly Sunny"
-msgstr "Κυρίως νεφελώδης"
+msgstr "Κυρίως ηλιοφάνεια"
 
 #. 3.0/yahoo.js:469 3.8/weather-applet.js:15828 3.8/weather-applet.js:15829
-#, fuzzy
 msgid "Mixed Rain and Hail"
-msgstr "Βροχή και χαλάζι"
+msgstr "Ανάμικτη βροχόπτωση και χαλαζόπτωση"
 
 #. 3.0/yahoo.js:471 3.8/weather-applet.js:15842 3.8/weather-applet.js:15843
-#, fuzzy
 msgid "Isolated Thunderstorms"
 msgstr "Μεμονωμένες καταιγίδες"
 
 #. 3.0/yahoo.js:472 3.8/weather-applet.js:15849 3.8/weather-applet.js:15850
 #. 3.8/weather-applet.js:15905 3.8/weather-applet.js:15906
-#, fuzzy
 msgid "Scattered Thunderstorms"
 msgstr "Διάσπαρτες καταιγίδες"
 
@@ -1534,122 +1499,119 @@ msgstr "Διάσπαρτες καταιγίδες"
 #. 3.8/weather-applet.js:17046 3.8/weather-applet.js:17047
 #. 3.8/weather-applet.js:17276 3.8/weather-applet.js:17277
 #. 3.8/weather-applet.js:17283 3.8/weather-applet.js:17284
-#, fuzzy
 msgid "Scattered Showers"
-msgstr "Διάσπαρτες βροχοπτώσεις"
+msgstr "Διάσπαρτες βροχοπτώσεις κατά διαστήματα"
 
 #. 3.0/yahoo.js:474 3.8/weather-applet.js:15863 3.8/weather-applet.js:15864
 #. 3.8/weather-applet.js:17332 3.8/weather-applet.js:17333
 #. 3.8/weather-applet.js:17339 3.8/weather-applet.js:17340
-#, fuzzy
 msgid "Heavy Rain"
-msgstr "Ισχυρή χιονόπτωση"
+msgstr "Ισχυρή βροχόπτωση"
 
 #. 3.0/yahoo.js:475 3.8/weather-applet.js:15870 3.8/weather-applet.js:15871
 #. 3.8/weather-applet.js:15898 3.8/weather-applet.js:15899
 #. 3.8/weather-applet.js:17290 3.8/weather-applet.js:17291
 #. 3.8/weather-applet.js:17297 3.8/weather-applet.js:17298
-#, fuzzy
 msgid "Scattered Snow Showers"
-msgstr "Διάσπαρτες χιονοπτώσεις"
+msgstr "Διάσπαρτες μπόρες χιονοπτώσεων"
 
 #. 3.0/yahoo.js:476 3.8/weather-applet.js:15877 3.8/weather-applet.js:15878
 #. 3.8/weather-applet.js:17346 3.8/weather-applet.js:17347
 #. 3.8/weather-applet.js:17353 3.8/weather-applet.js:17354
-#, fuzzy
 msgid "Heavy Snow"
 msgstr "Ισχυρή χιονόπτωση"
 
 #. 3.0/yahoo.js:478
-#, fuzzy
 msgid "Not Available"
 msgstr "Μη διαθέσιμο"
 
 #. 3.0/yahoo.js:479
-#, fuzzy
 msgid "Scattered Thundershowers"
-msgstr "Διάσπαρτες καταιγίδες"
+msgstr "Διάσπαρτες καταιγίδες κατά διαστήματα"
 
 #. 3.8/weather-applet.js:768
 msgid ""
 "Could not retrieve logs, log file was not found under path\n"
 " {logFilePath}"
 msgstr ""
+"Αδυναμία ανάκτησης αρχείου καταγραφής, δεν βρέθηκε στη διαδρομή \n"
+" {logFilePath}"
 
 #. 3.8/weather-applet.js:772
 msgid ""
 "Could not get contents of log file under path\n"
 " {logFilePath}"
 msgstr ""
+"Αδυναμία εύρεσης περιεχομένου αρχείου καταγραφής στη διαδρομή\n"
+" {logFilePath}"
 
 #. 3.8/weather-applet.js:9462
 msgid "Low"
-msgstr ""
+msgstr "Χαμηλό"
 
 #. 3.8/weather-applet.js:9465
 msgid "Moderate"
-msgstr ""
+msgstr "Μέτριο"
 
 #. 3.8/weather-applet.js:9468
 msgid "High"
-msgstr ""
+msgstr "Υψηλό"
 
 #. 3.8/weather-applet.js:9471
 msgid "Very High"
-msgstr ""
+msgstr "Πολύ υψηλό"
 
 #. 3.8/weather-applet.js:9474
-#, fuzzy
 msgid "Extreme"
-msgstr "Παγωμένη βροχή"
+msgstr "Ακραίο"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 #. 3.8/weather-applet.js:9605
 msgid "mph"
-msgstr "μιλ./ώρα"
+msgstr "μίλια/ώρα"
 
 #. 3.8->settings-schema.json->windSpeedUnit->options
 #. 3.8/weather-applet.js:9607
 msgid "km/h"
-msgstr ""
+msgstr "χλμ/ώρα"
 
 #. 3.8/weather-applet.js:9609
-#, fuzzy
 msgid "Knots"
-msgstr "κόμβοι"
+msgstr "Κόμβοι"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 #. 3.8/weather-applet.js:9611
 msgid "m/s"
-msgstr "μ./δεύτ"
+msgstr "μέτρα/δευτερόλεπτο"
 
 #. 3.8/weather-applet.js:10712
 msgid ""
 "Address to location lookup service is blocked. You can try to change your "
 "User-Agent in help to see if it resolves the issue."
 msgstr ""
+"Η διεύθυνση προς την υπηρεσία αναζήτησης τοποθεσίας είναι αποκλεισμένη. "
+"Μπορείτε να δοκιμάσετε να αλλάξετε το User-Agent σας, για να δείτε αν αυτό "
+"επιλύει το πρόβλημα."
 
 #. 3.8/weather-applet.js:10862
 msgid "Ash"
-msgstr ""
+msgstr "Στάχτη"
 
 #. 3.8/weather-applet.js:10864
 msgid "Squall"
-msgstr ""
+msgstr "Καταιγίδα"
 
 #. 3.8/weather-applet.js:10941
-#, fuzzy
 msgid "Light shower sleet"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρύ χιονόνερο κατά διαστήματα"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
 #. 3.8/weather-applet.js:11213 3.8/weather-applet.js:16887
-#, fuzzy
 msgid "OpenWeatherMap"
-msgstr "Καιρός"
+msgstr ""
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1658,161 +1620,145 @@ msgid "MET Norway"
 msgstr ""
 
 #. 3.8/weather-applet.js:12078
-#, fuzzy
 msgid "WeatherBit"
-msgstr "Καιρός"
+msgstr ""
 
 #. 3.8/weather-applet.js:12452 3.8/weather-applet.js:14077
 #. 3.8/weather-applet.js:16544
-#, fuzzy
 msgid "Heavy drizzle"
-msgstr "Παγωμένο ψιλόβροχο"
+msgstr "Πυκνό ψιλόβροχο"
 
 #. 3.8/weather-applet.js:12462
-#, fuzzy
 msgid "Light shower rain"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφριά βροχόπτωση κατά διαστήματα"
 
 #. 3.8/weather-applet.js:12466
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr "Ισχυρή χιονόπτωση"
+msgstr "Ισχυρή βροχόπτωση κατά διαστήματα"
 
 #. 3.8/weather-applet.js:12474
-#, fuzzy
 msgid "Mix snow/rain"
-msgstr "Νυφάδες χιονιού"
+msgstr "Ανάμικτη Χιονόπτωση/Βροχόπτωση"
 
 #. 3.8/weather-applet.js:12476
-#, fuzzy
 msgid "Snow shower"
-msgstr "Χιονοπτώσεις"
+msgstr "Μπόρες χιονοπτώσεων"
 
 #. 3.8/weather-applet.js:12496 3.8/weather-applet.js:14095
-#, fuzzy
 msgid "Freezing fog"
-msgstr "Παγωμένη βροχή"
+msgstr "Παγωμένη ομίχλη"
 
 #. 3.8/weather-applet.js:12705
-#, fuzzy
 msgid "Tomorrow.io"
-msgstr "Αύριο"
+msgstr ""
 
 #. 3.8/weather-applet.js:12925
 msgid "Light wind"
-msgstr ""
+msgstr "Ελαφρύς άνεμος"
 
 #. 3.8/weather-applet.js:12939
 msgid "Strong wind"
-msgstr ""
+msgstr "Ισχυρός άνεμος"
 
 #. 3.8/weather-applet.js:13290
-#, fuzzy
 msgid "US Weather"
-msgstr "Καιρός"
+msgstr ""
 
 #. 3.8/weather-applet.js:13871
 msgid "Visual Crossing"
-msgstr ""
+msgstr "Οπτική διέλευση"
 
 #. 3.8/weather-applet.js:14073
-#, fuzzy
 msgid "Blowing or drifting snow"
 msgstr "Χιονοθύελλες"
 
 #. 3.8/weather-applet.js:14081
 msgid "Heavy drizzle/rain"
-msgstr ""
+msgstr "Ισχυρή ψιχάλα/βροχόπτωση"
 
 #. 3.8/weather-applet.js:14083
 msgid "Light drizzle/rain"
-msgstr ""
+msgstr "Ελαφριά ψιχάλα/βροχόπτωση"
 
 #. 3.8/weather-applet.js:14085
 msgid "Dust Storm"
-msgstr ""
+msgstr "Καταιγίδα σκόνης"
 
 #. 3.8/weather-applet.js:14089
-#, fuzzy
 msgid "Freezing drizzle/freezing rain"
-msgstr "Παγωμένο ψιλόβροχο"
+msgstr "Παγωμένη ψιχάλα/βροχόπτωση"
 
 #. 3.8/weather-applet.js:14091
 msgid "Heavy freezing drizzle/freezing rain"
-msgstr ""
+msgstr "Ισχυρή παγωμένη ψιχάλα/βροχόπτωση"
 
 #. 3.8/weather-applet.js:14093
 msgid "Light freezing drizzle/freezing rain"
-msgstr ""
+msgstr "Ελαφριά παγωμένη ψιχάλα/βροχόπτωση"
 
 #. 3.8/weather-applet.js:14101
 msgid "Funnel cloud/tornado"
-msgstr ""
+msgstr "Κωνικό νέφος/ανεμοστρόβιλος"
 
 #. 3.8/weather-applet.js:14103
-#, fuzzy
 msgid "Hail showers"
-msgstr "Χιονοπτώσεις"
+msgstr "Μπόρες χαλαζιού"
 
 #. 3.8/weather-applet.js:14105
 msgid "Ice"
-msgstr ""
+msgstr "Πάγος"
 
 #. 3.8/weather-applet.js:14107
 msgid "Lightning without thunder"
-msgstr ""
+msgstr "Αστραπές χωρίς βροντές"
 
 #. 3.8/weather-applet.js:14111
 msgid "Precipitation in vicinity"
-msgstr ""
+msgstr "Υετός στην περιοχή"
 
 #. 3.8/weather-applet.js:14115 3.8/weather-applet.js:14419
-#, fuzzy
 msgid "Heavy rain and snow"
-msgstr "Βροχή και χιόνι"
+msgstr "Ισχυρές βροχοπτώσεις και χιονοπτώσεις"
 
 #. 3.8/weather-applet.js:14117
-#, fuzzy
 msgid "Light rain And snow"
-msgstr "Βροχή και χιόνι"
+msgstr "Ελαφρές βροχοπτώσεις και χιονοπτώσεις"
 
 #. 3.8/weather-applet.js:14125
 msgid "Sky coverage decreasing"
-msgstr ""
+msgstr "Μείωση της νεφοκάλυψης"
 
 #. 3.8/weather-applet.js:14127
 msgid "Sky coverage increasing"
-msgstr ""
+msgstr "Αύξηση της νεφοκάλυψης"
 
 #. 3.8/weather-applet.js:14129
 msgid "Sky unchanged"
-msgstr ""
+msgstr "Αμετάβλητος ουρανός"
 
 #. 3.8/weather-applet.js:14131
 msgid "Smoke or haze"
-msgstr ""
+msgstr "Αιθάλη ή ομίχλη"
 
 #. 3.8/weather-applet.js:14135
-#, fuzzy
 msgid "Snow and rain showers"
-msgstr "Χιονοπτώσεις"
+msgstr "Μπόρες χιονοπτώσεων και βροχοπτώσεων"
 
 #. 3.8/weather-applet.js:14147
 msgid "Thunderstorm without precipitation"
-msgstr ""
+msgstr "Καταιγίδα χωρίς υετό"
 
 #. 3.8/weather-applet.js:14149
 msgid "Diamond dust"
-msgstr ""
+msgstr "Διαμαντόσκονη"
 
 #. 3.8/weather-applet.js:14155
-#, fuzzy
 msgid "Partially cloudy"
 msgstr "Μερικώς νεφελώδης"
 
 #. 3.8/weather-applet.js:14177
 msgid "Please make sure you entered the API key correctly"
-msgstr ""
+msgstr "Παρακαλώ βεβαιωθείτε για την ορθή εισαγωγή κλειδιού API"
 
 #. 3.8->settings-schema.json->dataService->options
 #. 3.8/weather-applet.js:14194
@@ -1822,40 +1768,35 @@ msgstr ""
 #. 3.8/weather-applet.js:14351 3.8/weather-applet.js:14352
 #. 3.8/weather-applet.js:14488 3.8/weather-applet.js:14489
 msgid "NOT FOUND"
-msgstr ""
+msgstr "ΔΕΝ ΒΡΕΘΗΚΕ"
 
 #. 3.8/weather-applet.js:14384
 msgid "Blowing snow"
 msgstr "Χιονοθύελλες"
 
 #. 3.8/weather-applet.js:14425 3.8/weather-applet.js:14426
-#, fuzzy
 msgid "Slight snow"
-msgstr "Χιονοθύελλες"
+msgstr "Ελαφριά χιονόπτωση"
 
 #. 3.8/weather-applet.js:14432 3.8/weather-applet.js:14433
-#, fuzzy
 msgid "Moderate snow"
-msgstr "Ισχυρή χιονόπτωση"
+msgstr "Μέτρια χιονόπτωση"
 
 #. 3.8/weather-applet.js:14447
-#, fuzzy
 msgid "Moderate rain showers"
-msgstr "Διάσπαρτες βροχοπτώσεις"
+msgstr "Μέτριες μπόρες βροχοπτώσεων"
 
 #. 3.8/weather-applet.js:14454
 msgid "Mixed rain and snow"
-msgstr "Βροχή και χιόνι"
+msgstr "Ανάμικτες βροχοπτώσεις/χιονοπτώσεις"
 
 #. 3.8/weather-applet.js:14461
-#, fuzzy
 msgid "Heavy mixed rain and snow"
-msgstr "Βροχή και χιόνι"
+msgstr "Ισχυρές ανάμικτες βροχοπτώσεις/χιονοπτώσεις"
 
 #. 3.8/weather-applet.js:14560
-#, fuzzy
 msgid "AccuWeather"
-msgstr "Καιρός"
+msgstr ""
 
 #. 3.8/weather-applet.js:15024
 msgid "Deutscher Wetterdienst"
@@ -1863,7 +1804,7 @@ msgstr ""
 
 #. 3.8/weather-applet.js:15038
 msgid "Please select a different provider or location"
-msgstr ""
+msgstr "Παρακαλώ επιλέξτε ένα διαφορετικό πάροχο ή τοποθεσία"
 
 #. 3.8/weather-applet.js:15359
 msgid "Weather Underground"
@@ -1871,93 +1812,87 @@ msgstr ""
 
 #. 3.8/weather-applet.js:15567
 msgid "The API key you provided is invalid."
-msgstr ""
+msgstr "Το παρεχόμενο κλειδί API είναι άκυρο."
 
 #. 3.8/weather-applet.js:15574
 msgid "The location you provided was not found."
-msgstr ""
+msgstr "Η τοποθεσία που παρείχατε δεν βρέθηκε."
 
 #. 3.8/weather-applet.js:15610 3.8/weather-applet.js:15611
 msgid "Strong Storm"
-msgstr ""
+msgstr "Ισχυρή καταιγίδα"
 
 #. 3.8/weather-applet.js:15625 3.8/weather-applet.js:15626
-#, fuzzy
 msgid "Rain and Snow"
-msgstr "Βροχή και χιόνι"
+msgstr "Βροχόπτωση και χιονόπτωση"
 
 #. 3.8/weather-applet.js:15632 3.8/weather-applet.js:15633
-#, fuzzy
 msgid "Rain and Sleet"
-msgstr "Βροχή και χιονόνερο"
+msgstr "Βροχόπτωση και χιονόνερο"
 
 #. 3.8/weather-applet.js:15681 3.8/weather-applet.js:15682
 #. 3.8/weather-applet.js:17067 3.8/weather-applet.js:17068
 #. 3.8/weather-applet.js:17074 3.8/weather-applet.js:17075
 #. 3.8/weather-applet.js:17109 3.8/weather-applet.js:17110
 #. 3.8/weather-applet.js:17116 3.8/weather-applet.js:17117
-#, fuzzy
 msgid "Snow Showers"
-msgstr "Χιονοπτώσεις"
+msgstr "Μπόρες χιονοπτώσεων"
 
 #. 3.8/weather-applet.js:15744 3.8/weather-applet.js:15745
 msgid "Breezy"
-msgstr ""
+msgstr "Δροσερός"
 
 #. 3.8/weather-applet.js:15758 3.8/weather-applet.js:15759
 msgid "Frigid"
-msgstr ""
+msgstr "Ψυχρός"
 
 #. 3.8/weather-applet.js:15814 3.8/weather-applet.js:15815
-#, fuzzy
 msgid "Mostly Clear"
-msgstr "Κυρίως νεφελώδης"
+msgstr "Κυρίως αίθριος"
 
 #. 3.8/weather-applet.js:15974
-#, fuzzy
 msgid "Pirate Weather"
-msgstr "Καιρός"
+msgstr ""
 
 #. 3.8/weather-applet.js:16002
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
+"Παρακαλώ βεβαιωθείτε πως\n"
+"εισαγάγατε το κλειδί API που έχετε από το Pirate Weather"
 
 #. 3.8/weather-applet.js:16458
 msgid ""
 "Location Service couldn't find your location, please see the logs in Looking "
 "Glass"
 msgstr ""
+"Η υπηρεσία τοποθεσίας δεν μπόρεσε να καθορίσει την τοποθεσία σας, παρακαλώ "
+"ελέγξτε το αρχείο καταγραφής σφαλμάτων ( Looking Glass )"
 
 #. 3.8/weather-applet.js:16621
-#, fuzzy
 msgid "Snow grains"
-msgstr "Νυφάδες χιονιού"
+msgstr "Νιφάδες χιονιού"
 
 #. 3.8/weather-applet.js:16628
-#, fuzzy
 msgid "Light showers"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρές μπόρες"
 
 #. 3.8/weather-applet.js:16642
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Ισχυρή χιονόπτωση"
+msgstr "Ισχυρές μπόρες"
 
 #. 3.8/weather-applet.js:16670
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Καταιγίδες"
+msgstr "Καταιγίδα με ελαφρύ χαλάζι"
 
 #. 3.8/weather-applet.js:16677
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Καταιγίδες"
+msgstr "Καταιγίδα με χαλάζι"
 
 #. 3.8/weather-applet.js:16704 3.8/weather-applet.js:16870
 msgid "Feels like"
-msgstr ""
+msgstr "Αίσθηση σαν"
 
 #. 3.8->settings-schema.json->dataService->options
 #. 3.8/weather-applet.js:16773
@@ -1968,136 +1903,122 @@ msgstr ""
 #. 3.8/weather-applet.js:17060 3.8/weather-applet.js:17061
 #. 3.8/weather-applet.js:17304 3.8/weather-applet.js:17305
 #. 3.8/weather-applet.js:17311 3.8/weather-applet.js:17312
-#, fuzzy
 msgid "Scattered Sleet"
-msgstr "Διάσπαρτες βροχοπτώσεις"
+msgstr "Σποραδικό χιονόνερο"
 
 #. 3.8/weather-applet.js:17123 3.8/weather-applet.js:17124
 #. 3.8/weather-applet.js:17130 3.8/weather-applet.js:17131
 #. 3.8/weather-applet.js:17224 3.8/weather-applet.js:17225
-#, fuzzy
 msgid "Chance of Thunderstorms"
-msgstr "Καταιγίδες"
+msgstr "Πιθανότητα καταιγίδων"
 
 #. 3.8/weather-applet.js:17152 3.8/weather-applet.js:17153
-#, fuzzy
 msgid "Light Rain"
-msgstr "Παγωμένη βροχή"
+msgstr "Ελαφρά βροχόπτωση"
 
 #. 3.8/weather-applet.js:17160 3.8/weather-applet.js:17161
-#, fuzzy
 msgid "Light Sleet"
-msgstr "Ελαφριά χιονόπτωση"
+msgstr "Ελαφρύ χιονόνερο"
 
 #. 3.8/weather-applet.js:17176 3.8/weather-applet.js:17177
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "Βροχοπτώσεις κατά διαστήματα"
 
 #. 3.8/weather-applet.js:17184 3.8/weather-applet.js:17185
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "Χιονόνερο κατά διαστήματα"
 
 #. 3.8/weather-applet.js:17192 3.8/weather-applet.js:17193
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "Χιονοπτώσεις κατά διαστήματα"
 
 #. 3.8/weather-applet.js:17240 3.8/weather-applet.js:17241
-#, fuzzy
 msgid "Frequent Thunderstorms"
-msgstr "Ισχυρές καταιγίδες"
+msgstr "Συχνές καταιγίδες"
 
 #. 3.8/weather-applet.js:17247 3.8/weather-applet.js:17248
 #. 3.8/weather-applet.js:17254 3.8/weather-applet.js:17255
-#, fuzzy
 msgid "High Clouds"
-msgstr "Συννεφιασμένος"
+msgstr "Υψηλές νεφώσεις"
 
 #. 3.8/weather-applet.js:17262 3.8/weather-applet.js:17263
-#, fuzzy
 msgid "Low Clouds"
-msgstr "Συννεφιασμένος"
+msgstr "Χαμηλές νεφώσεις"
 
 #. 3.8/weather-applet.js:17361 3.8/weather-applet.js:17362
 msgid "Overcast and Dry"
-msgstr ""
+msgstr "Νεφελώδης και ξηρός καιρός"
 
 #. 3.8/weather-applet.js:17368 3.8/weather-applet.js:17369
 #. 3.8/weather-applet.js:17375 3.8/weather-applet.js:17376
 #. 3.8/weather-applet.js:17425 3.8/weather-applet.js:17426
 #. 3.8/weather-applet.js:17433 3.8/weather-applet.js:17434
-#, fuzzy
 msgid "Slightly Stormy"
-msgstr "Χιονοθύελλες"
+msgstr "Ελαφρώς θυελλώδης"
 
 #. 3.8/weather-applet.js:17382 3.8/weather-applet.js:17383
 #. 3.8/weather-applet.js:17389 3.8/weather-applet.js:17390
-#, fuzzy
 msgid "Stormy Snow Showers"
-msgstr "Διάσπαρτες χιονοπτώσεις"
+msgstr "Μπόρες θυελλωδών χιονοπτώσεων"
 
 #. 3.8/weather-applet.js:17396 3.8/weather-applet.js:17397
 #. 3.8/weather-applet.js:17403 3.8/weather-applet.js:17404
-#, fuzzy
 msgid "Thundery Showers"
-msgstr "Βροχοπτώσεις με κεραυνούς"
+msgstr "Μπόρες με κεραυνούς"
 
 #. 3.8/weather-applet.js:17410 3.8/weather-applet.js:17411
 #. 3.8/weather-applet.js:17417 3.8/weather-applet.js:17418
 #. 3.8/weather-applet.js:17441 3.8/weather-applet.js:17442
-#, fuzzy
 msgid "Thundery Snow Showers"
-msgstr "Βροχοπτώσεις με κεραυνούς"
+msgstr "Μπόρες χιονοπτώσεων με κεραυνούς"
 
 #. 3.8/weather-applet.js:17530
 msgid "Wind Warning"
-msgstr ""
+msgstr "Προειδοποίηση για ανέμους"
 
 #. 3.8/weather-applet.js:17532
-#, fuzzy
 msgid "Thunderstorm Warning"
-msgstr "Καταιγίδες"
+msgstr "Προειδοποίηση για καταιγίδες"
 
 #. 3.8/weather-applet.js:17534
-#, fuzzy
 msgid "Rain Warning"
-msgstr "Βροχή και χιόνι"
+msgstr "Προειδοποίηση για βροχοπτώσεις"
 
 #. 3.8/weather-applet.js:17536
-#, fuzzy
 msgid "Snow Warning"
-msgstr "Νυφάδες χιονιού"
+msgstr "Προειδοποίηση για χιονοπτώσεις"
 
 #. 3.8/weather-applet.js:17538
 msgid "Slippery Roads Warning"
-msgstr ""
+msgstr "Προειδοποίηση ολισθηρών οδοστρωμάτων"
 
 #. 3.8/weather-applet.js:17540
 msgid "Frost Warning"
-msgstr ""
+msgstr "Προειδοποίηση παγετού"
 
 #. 3.8/weather-applet.js:17542
 msgid "Mass Movements Warning"
-msgstr ""
+msgstr "Προειδοποίηση μαζικών μετακινήσεων"
 
 #. 3.8/weather-applet.js:17544
 msgid "Heat Warning"
-msgstr ""
+msgstr "Προειδοποίηση καύσωνα"
 
 #. 3.8/weather-applet.js:17546
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "Προειδοποίηση χιονοστιβάδων"
 
 #. 3.8/weather-applet.js:17548
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "Προειδοποίηση σεισμού"
 
 #. 3.8/weather-applet.js:17550
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "Προειδοποίηση κινδύνου δασικών πυρκαγιών"
 
 #. 3.8/weather-applet.js:17552
 msgid "Flood Warning"
-msgstr ""
+msgstr "Προειδοποίηση πλημμυρικών φαινομένων"
 
 #. 3.8/weather-applet.js:17572
 msgid "Swiss Météo"
@@ -2105,11 +2026,13 @@ msgstr ""
 
 #. 3.8/weather-applet.js:17591
 msgid "For this provider, you need to use a postcode."
-msgstr ""
+msgstr "Απαιτείται χρήση ταχυδρομικού κώδικα γι' αυτό τον πάροχο."
 
 #. 3.8/weather-applet.js:17603
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
 msgstr ""
+"Απαιτείται χρήση Ελβετικού ταχυδρομικού κώδικα, από 1000-9999, γι' αυτό τον "
+"πάροχο."
 
 #. 3.8/weather-applet.js:17625
 msgid "Switzerland"
@@ -2123,153 +2046,168 @@ msgstr ""
 #. 3.8/weather-applet.js:18216 3.8/weather-applet.js:18276
 msgid "Could not obtain location, please see the logs in Looking Glass"
 msgstr ""
+"Αδυναμία ανάκτησης τοποθεσίας, παρακαλώ ελέγξτε τα αρχεία καταγραφής "
+"σφαλμάτων ( Looking Glass )"
 
 #. 3.8/weather-applet.js:18821
 msgid ""
 "Could not retrieve config, file was not found under paths\n"
 " {configFilePath}"
 msgstr ""
+"Αδυναμία ανάκτησης διαμόρφωσης, το αρχείο δεν βρέθηκε στη διαδρομή\n"
+" {configFilePath}"
 
 #. 3.8/weather-applet.js:18828
 msgid ""
 "Could not get contents of config file under path\n"
 " {configFilePath}"
 msgstr ""
+"Αδυναμία λήψης περιεχομένων διαμόρφωσης στη διαδρομή\n"
+" {configFilePath}"
 
 #. 3.8/weather-applet.js:19146
 msgid "Make sure you entered a location or use Automatic location instead."
 msgstr ""
+"Βεβαιωθείτε πως εισαγάγατε μια τοποθεσία ή αλλιώς κάνετε χρήση της αυτόματης "
+"τοποθεσίας."
 
 #. 3.8/weather-applet.js:19164
 msgid "This provider requires an API key to operate"
-msgstr ""
+msgstr "Αυτός ο πάροχος απαιτεί ένα κλειδί API για να λειτουργήσει"
 
 #. 3.8/weather-applet.js:19605
 msgid "Dew Point"
-msgstr ""
+msgstr "Σημείο δρόσου"
 
 #. 3.8/weather-applet.js:19688
 msgid "Precipitation will end in {precipEnd} minutes"
-msgstr ""
+msgstr "Οι βροχοπτώσεις θα σταματήσουν σε {precipEnd} λεπτά"
 
 #. 3.8/weather-applet.js:19690
 msgid "Precipitation won't end in within an hour"
-msgstr ""
+msgstr "Οι βροχοπτώσεις δεν αναμένεται να τερματιστούν μέσα στην επόμενη ώρα"
 
 #. 3.8/weather-applet.js:19693
 msgid "Precipitation will start within {precipStart} minutes"
-msgstr ""
+msgstr "Οι βροχοπτώσεις θα ξεκινήσουν σε {precipStart} λεπτά"
 
 #. 3.8/weather-applet.js:19791
 msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Χαμηλός κίνδυνος βλάβης από την έκθεση στον ήλιο, Δείκτης UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:19795
 msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Μέτριος κίνδυνος βλάβης από την έκθεση στον ήλιο, Δείκτης UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:19799
 msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Υψηλός κίνδυνος βλάβης από την έκθεση στον ήλιο, Δείκτης UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:19803
 msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
 msgstr ""
+"Πολύ υψηλός κίνδυνος βλάβης από την έκθεση στον ήλιο, Δείκτης UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:19807
 msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Εξαιρετικά υψηλός κίνδυνος βλάβης από την έκθεση στον ήλιο, Δείκτης UV: "
+"{uvIndex}"
 
 #. 3.8/weather-applet.js:19925
 msgid "Forecast parsing failed, see logs for more details."
 msgstr ""
+"Η ανάλυση της πρόγνωσης απέτυχε, δείτε τα αρχεία καταγραφής για περισσότερες "
+"λεπτομέρειες."
 
 #. 3.8/weather-applet.js:20518 3.8/weather-applet.js:21145
 msgid "As of {lastUpdatedTime}"
-msgstr ""
+msgstr "Από τις {lastUpdatedTime}"
 
 #. 3.8/weather-applet.js:20524
 msgid "{distance} {distanceUnit} from you"
-msgstr ""
+msgstr "{distance} {distanceUnit} από εσάς"
 
 #. 3.8/weather-applet.js:20528
 msgid "Station Name: {stationName}"
-msgstr ""
+msgstr "Ονομασία σταθμού: {stationName}"
 
 #. 3.8/weather-applet.js:20531
 msgid "Area: {stationArea}"
-msgstr ""
+msgstr "Περιοχή: {stationArea}"
 
 #. 3.8/weather-applet.js:20541
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} καιρική(-ές) προειδοποίηση(-εις)"
 
 #. 3.8/weather-applet.js:20936 3.8/weather-applet.js:20946
 #. 3.8/weather-applet.js:20953
 msgid "Error Saving Debug Information"
-msgstr ""
+msgstr "Σφάλμα κατά την αποθήκευση πληροφοριών αποσφαλμάτωσης"
 
 #. 3.8/weather-applet.js:20953
 msgid "Could not open file {filePath} for writing"
-msgstr ""
+msgstr "Δεν ήταν δυνατό το άνοιγμα του αρχείου {filePath} για εγγραφή"
 
 #. 3.8/weather-applet.js:20962
 msgid "Debug Information saved successfully"
-msgstr ""
+msgstr "Οι πληροφορίες αποσφαλμάτωσης αποθηκεύτηκαν με επιτυχία"
 
 #. 3.8/weather-applet.js:20962
 msgid "Saved to {filePath}"
-msgstr ""
+msgstr "Αποθηκεύτηκε σε {filePath}"
 
 #. 3.8/weather-applet.js:20991
 msgid "Location Service Blocked"
-msgstr ""
+msgstr "Η υπηρεσία τοποθεσίας έχει αποκλειστεί"
 
 #. 3.8/weather-applet.js:21185
 msgid "No Script Provided"
-msgstr ""
+msgstr "Δεν παρέχεται σενάριο"
 
 #. 3.8/weather-applet.js:21185
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Πρέπει πρώτα να προσθέσετε ένα σενάριο."
 
 #. 3.8/weather-applet.js:21189
-#, fuzzy
 msgid "No Weather Data"
-msgstr "Καιρός"
+msgstr "Απουσία καιρικών δεδομένων"
 
 #. 3.8/weather-applet.js:21189
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Δεν υπάρχουν καιρικά δεδομένα για την εκτέλεση του σεναρίου"
 
 #. 3.8/weather-applet.js:21197
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "Επιτυχής εκτέλεση σεναρίου"
 
 #. 3.8/weather-applet.js:21197
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Το σενάριό σας εκτελέστηκε επιτυχώς."
 
 #. 3.8/weather-applet.js:21200
 msgid "Error Running Script"
-msgstr ""
+msgstr "Σφάλμα εκτέλεσης σεναρίου"
 
 #. 3.8/weather-applet.js:21200
 msgid "Script returned error, see logs for more information"
 msgstr ""
+"Το σενάριο επέστρεψε σφάλμα, δείτε τα αρχεία καταγραφής για περισσότερες "
+"πληροφορίες"
 
 #. 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Καιρός"
+msgstr "Ειδοποιήσεις εφαρμογής καιρού"
 
 #. 3.8/LogSaver.py:16
 msgid "Save to File"
-msgstr ""
+msgstr "Αποθήκευση σε φάκελο"
 
 #. 3.8/LogSaver.py:29
 msgid "Select a destination"
-msgstr ""
+msgstr "Επιλέξτε ένα προορισμό"
 
 #. metadata.json->name
 #. 3.8->settings-schema.json->providers->title
@@ -2278,20 +2216,20 @@ msgstr "Καιρός"
 
 #. metadata.json->description
 msgid "View your local weather forecast"
-msgstr "Εμφάνιση της τοπικής πρόβλεψης"
+msgstr "Εμφάνιση της τοπικής πρόβλεψης καιρού"
 
 #. 3.0->settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 3.0+"
-msgstr ""
+msgstr "Ρυθμίσεις weather@mockturtl 3.0+"
 
 #. 3.0->settings-schema.json->keybinding->description
 #. 3.8->settings-schema.json->keybinding->description
 msgid "Set the keybinding to call the menu"
-msgstr ""
+msgstr "Ορίστε τον συνδυασμό πλήκτρων για την εμφάνιση του μενού"
 
 #. 3.0->settings-schema.json->descriptions->description
 msgid "Weather service information"
-msgstr ""
+msgstr "Πληροφορίες μετεωρολογικής υπηρεσίας"
 
 #. 3.0->settings-schema.json->moreInfo->description
 msgid "Click here for detailed description"
@@ -2301,26 +2239,26 @@ msgstr ""
 #. 3.0->settings-schema.json->getLocation->tooltip
 #. 3.8->settings-schema.json->getLocation->tooltip
 msgid "Opens webpage guide"
-msgstr ""
+msgstr "Ανοίγει τον οδηγό στην ιστοσελίδα"
 
 #. 3.0->settings-schema.json->providerSettings->description
 #. 3.8->settings-schema.json->provider-options->title
 msgid "Weather Provider Options"
-msgstr ""
+msgstr "Επιλογές παρόχου καιρού"
 
 #. 3.0->settings-schema.json->dataService->description
 #. 3.8->settings-schema.json->dataService->description
 msgid "Data service"
-msgstr ""
+msgstr "Υπηρεσία δεδομένων"
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "DarkSky (key needed)"
-msgstr ""
+msgstr "DarkSky (απαιτείται κλειδί)"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
 msgid "Weatherbit (key needed)"
-msgstr ""
+msgstr "Weatherbit (απαιτείται κλειδί)"
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "Yahoo"
@@ -2328,29 +2266,31 @@ msgstr ""
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "Climacell (key needed)"
-msgstr ""
+msgstr "Climacell (απαιτείται κλειδί)"
 
 #. 3.0->settings-schema.json->apiKey->description
 msgid "API Key"
-msgstr ""
+msgstr "Κλειδί API"
 
 #. 3.0->settings-schema.json->apiKey->tooltip
 msgid "Copy this from your account of the used Data service and paste it here."
 msgstr ""
+"Αντιγράψτε το από τον λογαριασμό σας στη χρησιμοποιημένη υπηρεσία δεδομένων "
+"και επικολλήστε το εδώ."
 
 #. 3.0->settings-schema.json->manualLocation->description
 #. 3.8->settings-schema.json->manualLocation->description
 msgid "Manual Location"
-msgstr ""
+msgstr "Χειροκίνητη τοποθεσία"
 
 #. 3.0->settings-schema.json->manualLocation->tooltip
 #. 3.8->settings-schema.json->manualLocation->tooltip
 msgid "Enable this if your location is not accurate"
-msgstr ""
+msgstr "Ενεργοποιήστε το αν η τοποθεσία σας δεν είναι ακριβής"
 
 #. 3.0->settings-schema.json->location->description
 msgid "Location - Coordinates"
-msgstr ""
+msgstr "Τοποθεσία - Συντεταγμένες"
 
 #. 3.0->settings-schema.json->location->tooltip
 msgid ""
@@ -2358,10 +2298,14 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing before refreshes the weather."
 msgstr ""
+"Ως είσοδοι γίνονται δεκτά το γεωγραφικό πλάτος και το γεωγραφικό μήκος (π.χ. "
+"68.1932,17.1426) ή μια διεύθυνση.\n"
+"Η εφαρμογή αναμένει 3 δευτερόλεπτα αφότου σταματήσετε να πληκτρολογείτε, "
+"προτού ανανεώσει τις πληροφορίες για τον καιρό."
 
 #. 3.0->settings-schema.json->getLocation->description
 msgid "Setup API Key and Location"
-msgstr ""
+msgstr "Ρύθμιση κλειδιού API και τοποθεσίας"
 
 #. 3.0->settings-schema.json->refreshInterval->units
 #. 3.8->settings-schema.json->refreshInterval->units
@@ -2370,9 +2314,8 @@ msgstr "λεπτά"
 
 #. 3.0->settings-schema.json->refreshInterval->description
 #. 3.8->settings-schema.json->refreshInterval->description
-#, fuzzy
 msgid "Update interval"
-msgstr "Διάστημα ενημέρωσης (λεπτά)"
+msgstr "Διάστημα ενημέρωσης"
 
 #. 3.0->settings-schema.json->forecastDays->units
 #. 3.8->settings-schema.json->forecastDays->units
@@ -2382,27 +2325,26 @@ msgstr "ημέρες"
 #. 3.0->settings-schema.json->forecastDays->description
 #. 3.8->settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr "Εύρος πρόβλεψης"
+msgstr "Διάρκεια πρόγνωσης"
 
 #. 3.0->settings-schema.json->forecastHours->units
 #. 3.8->settings-schema.json->forecastHours->units
 msgid "hours"
-msgstr ""
+msgstr "ώρες"
 
 #. 3.0->settings-schema.json->forecastHours->description
 #. 3.8->settings-schema.json->forecastHours->description
-#, fuzzy
 msgid "Hourly Forecast length"
-msgstr "Εύρος πρόβλεψης"
+msgstr "Διάρκεια ωριαίας πρόγνωσης"
 
 #. 3.0->settings-schema.json->unitSettings->description
 msgid "Units"
-msgstr ""
+msgstr "Μονάδες"
 
 #. 3.0->settings-schema.json->temperatureUnit->description
 #. 3.8->settings-schema.json->temperatureUnit->description
 msgid "Temperature unit"
-msgstr "Μονάδα θερμοκρασίας:"
+msgstr "Μονάδα θερμοκρασίας"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.0->settings-schema.json->windSpeedUnit->options
@@ -2411,17 +2353,15 @@ msgstr "Μονάδα θερμοκρασίας:"
 #. 3.8->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->distanceUnit->options
 msgid "Automatic"
-msgstr ""
+msgstr "Αυτόματο"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
-#, fuzzy
 msgid "Celsius"
 msgstr "Κελσίου"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
-#, fuzzy
 msgid "Fahrenheit"
 msgstr "Φαρενάιτ"
 
@@ -2433,6 +2373,8 @@ msgid ""
 "Automatic will try to guess your preference based your current display "
 "language."
 msgstr ""
+"Η επιλογή «Αυτόματα» θα προσπαθήσει να μαντέψει την προτίμησή σας με βάση "
+"την τρέχουσα γλώσσα εμφάνισης."
 
 #. 3.0->settings-schema.json->windSpeedUnit->description
 #. 3.8->settings-schema.json->windSpeedUnit->description
@@ -2451,7 +2393,7 @@ msgstr "κόμβοι"
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "Beaufort"
-msgstr ""
+msgstr "Μποφόρ"
 
 #. 3.0->settings-schema.json->pressureUnit->description
 #. 3.8->settings-schema.json->pressureUnit->description
@@ -2496,43 +2438,42 @@ msgstr ""
 #. 3.0->settings-schema.json->distanceUnit->description
 #. 3.8->settings-schema.json->distanceUnit->description
 msgid "Distance unit"
-msgstr ""
+msgstr "Μονάδα απόστασης"
 
 #. 3.0->settings-schema.json->distanceUnit->options
 #. 3.8->settings-schema.json->distanceUnit->options
 msgid "Metric"
-msgstr ""
+msgstr "Μετρικό"
 
 #. 3.0->settings-schema.json->distanceUnit->options
 #. 3.8->settings-schema.json->distanceUnit->options
 msgid "Imperial"
-msgstr ""
+msgstr "Αυτοκρατορικό"
 
 #. 3.0->settings-schema.json->panelSettings->description
 msgid "Panel options"
-msgstr ""
+msgstr "Επιλογές πίνακα"
 
 #. 3.0->settings-schema.json->showTextInPanel->description
 #. 3.8->settings-schema.json->showTextInPanel->description
 msgid "Display current temperature in panel"
-msgstr "Εμφάνιση της τρέχουσας θερμοκρασίας στο πάνελ"
+msgstr "Εμφάνιση της τρέχουσας θερμοκρασίας στον πίνακα"
 
 #. 3.0->settings-schema.json->showCommentInPanel->description
 #. 3.8->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
 msgstr ""
-"Εμφάνιση των καιρικών συνθηκών (π.χ.  \"Ανεμώδης\", \"Αίθριος\") στο πάνελ"
+"Εμφάνιση των καιρικών συνθηκών (π.χ.  \"Ανεμώδης\", \"Αίθριος\") στον πίνακα"
 
 #. 3.0->settings-schema.json->showCommentInPanel->tooltip
 #. 3.8->settings-schema.json->showCommentInPanel->tooltip
 msgid "Only works with horizontal panels"
-msgstr ""
+msgstr "Λειτουργεί μόνο με οριζόντιους πίνακες"
 
 #. 3.0->settings-schema.json->tempTextOverride->description
 #. 3.8->settings-schema.json->tempTextOverride->description
-#, fuzzy
 msgid "Override label on panel"
-msgstr "Παράκαμψη ετικέτας τοποθεσίας"
+msgstr "Παράκαμψη ετικέτας τοποθεσίας στον πίνακα"
 
 #. 3.0->settings-schema.json->tempTextOverride->tooltip
 msgid ""
@@ -2540,53 +2481,57 @@ msgid ""
 "Can be used if label does not fit on vertical panel, among other smart "
 "things."
 msgstr ""
+"Οι διαθέσιμες τιμές είναι: {c} για την κατάσταση, {t} για τη θερμοκρασία και "
+"{u} για τη μονάδα μέτρησης.\n"
+"Μπορεί να χρησιμοποιηθεί, στην περίπτωση που η ετικέτα δεν χωράει μεταξύ "
+"άλλων έξυπνων εφαρμογών στον κατακόρυφο πίνακα."
 
 #. 3.0->settings-schema.json->useCustomAppletIcons->tooltip
 #. 3.0->settings-schema.json->useCustomMenuIcons->tooltip
 #. 3.8->settings-schema.json->useCustomAppletIcons->tooltip
 #. 3.8->settings-schema.json->useCustomMenuIcons->tooltip
 msgid "Iconset is weather-icons by Erik Flowers"
-msgstr ""
+msgstr "Το σετ εικονιδίων είναι το weather-icons του Erik Flowers"
 
 #. 3.0->settings-schema.json->useCustomAppletIcons->description
 #. 3.8->settings-schema.json->useCustomAppletIcons->description
 msgid "Use custom icons on the panel"
-msgstr ""
+msgstr "Χρήση προσαρμοσμένων εικονιδίων στον πίνακα"
 
 #. 3.0->settings-schema.json->displaySettings->description
 #. 3.8->settings-schema.json->presentation-section->title
 msgid "Presentation"
-msgstr ""
+msgstr "Παρουσίαση"
 
 #. 3.0->settings-schema.json->verticalOrientation->description
 #. 3.8->settings-schema.json->verticalOrientation->description
-#, fuzzy
 msgid "Show forecast vertically"
-msgstr "Εμφάνιση 5-ήμερης πρόβλεψης"
+msgstr "Εμφάνιση πρόγνωσης κατακόρυφα"
 
 #. 3.0->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right"
 msgstr ""
+"Εμφάνιση προβλέψεων από πάνω προς τα κάτω αντί από αριστερά προς τα δεξιά"
 
 #. 3.0->settings-schema.json->forecastColumns->units
 #. 3.8->settings-schema.json->forecastColumns->units
 msgid "columns"
-msgstr ""
+msgstr "στήλες"
 
 #. 3.0->settings-schema.json->forecastColumns->description
 #. 3.8->settings-schema.json->forecastColumns->description
 msgid "Maximum number of columns for forecast"
-msgstr ""
+msgstr "Μέγιστος αριθμός στηλών για την πρόγνωση καιρού"
 
 #. 3.0->settings-schema.json->forecastRows->units
 #. 3.8->settings-schema.json->forecastRows->units
 msgid "rows"
-msgstr ""
+msgstr "σειρές"
 
 #. 3.0->settings-schema.json->forecastRows->description
 #. 3.8->settings-schema.json->forecastRows->description
 msgid "Maximum number of rows for forecast"
-msgstr ""
+msgstr "Μέγιστος αριθμός σειρών για την πρόβλεψη καιρού"
 
 #. 3.0->settings-schema.json->showSunrise->description
 #. 3.8->settings-schema.json->showSunrise->description
@@ -2601,34 +2546,33 @@ msgstr "Εμφάνιση ώρας σε 24ωρη μορφή"
 #. 3.0->settings-schema.json->shortHourlyTime->description
 #. 3.8->settings-schema.json->shortHourlyTime->description
 msgid "Only display hours for hourly forecast time"
-msgstr ""
+msgstr "Εμφάνιση μόνο των ωρών για τον ωριαίο χρόνο πρόγνωσης καιρού"
 
+# Είναι εντάξει.
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 #. 3.8->settings-schema.json->shortHourlyTime->tooltip
 msgid "Instead of 15:00 or 3:00 pm it will show up as 15 or 3 pm"
-msgstr ""
+msgstr "Αντί για 15:00 ή 3:00 μ.μ., θα εμφανίζεται ως 15 ή 3 μ.μ."
 
 #. 3.0->settings-schema.json->showForecastDates->description
 #. 3.8->settings-schema.json->showForecastDates->description
-#, fuzzy
 msgid "Display date for daily forecasts"
-msgstr "Εμφάνιση ώρας σε 24ωρη μορφή"
+msgstr "Εμφάνιση ημερομηνίας για τις ημερήσιες προγνώσεις καιρού"
 
 #. 3.0->settings-schema.json->showForecastDates->tooltip
 #. 3.8->settings-schema.json->showForecastDates->tooltip
 msgid "Like \"Friday 15\""
-msgstr ""
+msgstr "Όπως «Παρασκευή 15»"
 
 #. 3.0->settings-schema.json->temperatureHighFirst->description
 #. 3.8->settings-schema.json->temperatureHighFirst->description
 msgid "Show high temperature first in forecast"
-msgstr ""
+msgstr "Εμφάνιση της υψηλής θερμοκρασίας πρώτα στην πρόγνωση καιρού"
 
 #. 3.0->settings-schema.json->tempRussianStyle->description
 #. 3.8->settings-schema.json->tempRussianStyle->description
-#, fuzzy
 msgid "Show temperature Russian style"
-msgstr "Μονάδα θερμοκρασίας:"
+msgstr "Εμφάνιση θερμοκρασίας με ρωσικό στυλ"
 
 #. 3.0->settings-schema.json->locationLabelOverride->description
 #. 3.8->settings-schema.json->locationLabelOverride->description
@@ -2637,93 +2581,89 @@ msgstr "Παράκαμψη ετικέτας τοποθεσίας"
 
 #. 3.0->settings-schema.json->conditionSettings->description
 #. 3.8->settings-schema.json->weather-conditions->title
-#, fuzzy
 msgid "Weather conditions"
-msgstr "Μετάφραση καιρικών συνθηκών"
+msgstr "Καιρικές συνθήκες"
 
 #. 3.0->settings-schema.json->translateCondition->description
-#, fuzzy
 msgid "Translate conditions"
 msgstr "Μετάφραση καιρικών συνθηκών"
 
 #. 3.0->settings-schema.json->shortConditions->description
 #. 3.8->settings-schema.json->shortConditions->description
-#, fuzzy
 msgid "Less verbose conditions"
-msgstr "Μετάφραση καιρικών συνθηκών"
+msgstr "Λιγότερο λεπτομερής μετάφραση καιρικών συνθηκών"
 
 #. 3.0->settings-schema.json->iconSettings->description
 #. 3.8->settings-schema.json->icons->title
 msgid "Icons"
-msgstr ""
+msgstr "Εικονίδια"
 
 #. 3.0->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons in the applet"
-msgstr ""
+msgstr "Χρήση συμβολικών εικονιδίων στην εφαρμογή"
 
 #. 3.0->settings-schema.json->useCustomMenuIcons->description
 #. 3.8->settings-schema.json->useCustomMenuIcons->description
 msgid "Use custom icons in the popup menu"
-msgstr ""
+msgstr "Χρησιμοποιήστε προσαρμοσμένα εικονίδια στο αναδυόμενο μενού"
 
 #. 3.8->settings-schema.json->locations-page->title
 #. 3.8->settings-schema.json->location->description
 msgid "Location"
-msgstr ""
+msgstr "Τοποθεσία"
 
 #. 3.8->settings-schema.json->units-page->title
 msgid "Other options"
-msgstr ""
+msgstr "Λοιπές επιλογές"
 
 #. 3.8->settings-schema.json->info-section->title
 msgid "Help"
-msgstr ""
+msgstr "Βοήθεια"
 
 #. 3.8->settings-schema.json->location-section->title
 msgid "Location settings"
-msgstr ""
+msgstr "Ρυθμίσεις τοποθεσίας"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Τεχνικά θέματα και αυτοματισμοί"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
-msgstr ""
+msgstr "Αποθηκευμένες τοποθεσίες"
 
 #. 3.8->settings-schema.json->panel-options->title
 msgid "Panel (Taskbar)"
-msgstr ""
+msgstr "Πίνακας (Γραμμή εργασιών)"
 
 #. 3.8->settings-schema.json->presentation->title
 msgid "Popup menu"
-msgstr ""
+msgstr "Αναδυόμενο μενού"
 
 #. 3.8->settings-schema.json->units-section->title
 msgid "Other Units"
-msgstr ""
+msgstr "Λοιπές μονάδες"
 
 #. 3.8->settings-schema.json->temp-unit-section->title
-#, fuzzy
 msgid "Temperature Unit"
-msgstr "Μονάδα θερμοκρασίας:"
+msgstr "Μονάδα θερμοκρασίας"
 
 #. 3.8->settings-schema.json->keybindings->title
 msgid "Keybindings"
-msgstr ""
+msgstr "Συντομεύσεις πλήκτρων"
 
 #. 3.8->settings-schema.json->more-info->title
 msgid "More about the Weather applet"
-msgstr ""
+msgstr "Περισσότερα για την εφαρμογή καιρού"
 
 #. 3.8->settings-schema.json->submit-issue->title
 msgid "Report an issue"
-msgstr ""
+msgstr "Αναφορά προβλήματος"
 
 #. 3.8->settings-schema.json->debug-options->title
 #. 3.8->settings-schema.json->logLevel->options
 msgid "Debug"
-msgstr ""
+msgstr "Αποσφαλμάτωση"
 
 #. 3.8->settings-schema.json->dataService->tooltip
 msgid ""
@@ -2733,46 +2673,53 @@ msgid ""
 "The options are described in detail on the Cinnamon Spices Website which you "
 "can access with the button on the Help tab."
 msgstr ""
+"Μπορείτε να επιλέξετε ανάμεσα σε διάφορους παρόχους πρόγνωσης καιρού. "
+"Ορισμένοι πάροχοι απαιτούν ένα κλειδί API για να λειτουργήσουν, άλλοι έχουν "
+"γεωγραφικούς περιορισμούς, διαφέρουν ως προς το χρονικό εύρος της πρόγνωσης, "
+"ενώ όλοι απαιτούν μια λειτουργική σύνδεση στο διαδίκτυο για να "
+"λειτουργήσουν. Οι επιλογές περιγράφονται αναλυτικά στον ιστότοπο Cinnamon "
+"Spices, στον οποίο μπορείτε να μεταβείτε μέσω του κουμπιού που βρίσκεται "
+"στην καρτέλα «Βοήθεια» (Help)."
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
-msgstr ""
+msgstr "Deutscher Wetterdienst (μόνο για Γερμανία)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "US National Weather (US only)"
-msgstr ""
+msgstr "US National Weather (μόνο για Η.Π.Α.)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Swiss Météo (Switzerland only)"
-msgstr ""
+msgstr "Swiss Météo (μόνο για Ελβετία)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (key needed)"
-msgstr ""
+msgstr "Met Office UK (απαιτείται κλειδί)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr ""
+msgstr "OpenWeatherMap OneCall (απαιτείται κλειδί)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Pirate Weather (key needed)"
-msgstr ""
+msgstr "Pirate Weather (απαιτείται κλειδί)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Visual Crossing (key needed)"
-msgstr ""
+msgstr "Visual Crossing (απαιτείται κλειδί)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Tomorrow.io (key needed)"
-msgstr ""
+msgstr "Tomorrow.io (απαιτείται κλειδί)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "AccuWeather (key needed)"
-msgstr ""
+msgstr "AccuWeather (απαιτείται κλειδί)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Weather Underground (key needed)"
-msgstr ""
+msgstr "Weather Underground (απαιτείται κλειδί)"
 
 #. 3.8->settings-schema.json->openmeteo_label->description
 msgid ""
@@ -2780,12 +2727,19 @@ msgid ""
 "provides global weather data with various parameters and forecast lengths. "
 "More information can be found at open-meteo.com."
 msgstr ""
+"Το Open-Meteo είναι μια δωρεάν υπηρεσία καιρού που δεν απαιτεί κλειδί API. "
+"Παρέχει παγκόσμια δεδομένα καιρού με διάφορες παραμέτρους και χρονικούς "
+"ορίζοντες πρόγνωσης. Περισσότερες πληροφορίες μπορείτε να βρείτε στη "
+"διεύθυνση open-meteo.com."
 
 #. 3.8->settings-schema.json->openweathermap_label->description
 msgid ""
 "Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with "
 "headquarters in London UK. Read more about the service at openweathermap.org."
 msgstr ""
+"Παγκόσμια διαδικτυακή υπηρεσία καιρού από την OpenWeather Ltd, η οποία "
+"ιδρύθηκε το 2012 και εδρεύει στο Λονδίνο του Ηνωμένου Βασιλείου. Μάθετε "
+"περισσότερα για την υπηρεσία στη διεύθυνση openweathermap.org."
 
 #. 3.8->settings-schema.json->metnorway_label->description
 msgid ""
@@ -2799,6 +2753,16 @@ msgid ""
 "there is a possibility that they are inaccurate sometimes.\n"
 " - Alerts are only available in Norway"
 msgstr ""
+"Δωρεάν μετεωρολογικά δεδομένα και προγνώσεις από το Νορβηγικό Μετεωρολογικό "
+"Ινστιτούτο, το οποίο ιδρύθηκε το 1866. Μάθετε περισσότερα για την υπηρεσία "
+"στη διεύθυνση www.met.no/en. \n"
+"\n"
+"- Η υπηρεσία «Nowcast» (άμεση ενημέρωση για υετό και παρατηρήσεις ανά ώρα) "
+"δεν είναι διαθέσιμη εκτός Νορβηγίας. Σε αυτή την περίπτωση, εμφανίζονται "
+"παρατηρήσεις για την επόμενη ώρα. \n"
+"- Οι ημερήσιες προγνώσεις προκύπτουν από προγνώσεις 6ώρου (για κάθε ώρα), "
+"επομένως ενδέχεται ορισμένες φορές να μην είναι ακριβείς. \n"
+"- Οι ειδοποιήσεις είναι διαθέσιμες μόνο για τη Νορβηγία"
 
 #. 3.8->settings-schema.json->dmidenmark_label->description
 msgid ""
@@ -2806,12 +2770,18 @@ msgid ""
 "forecasts and observations for Denmark, Greenland, and the Faroe Islands. "
 "Read more about the institute at www.dmi.dk."
 msgstr ""
+"Το Δανικό Μετεωρολογικό Ινστιτούτο ιδρύθηκε το 1872 και πραγματοποιεί "
+"μετεωρολογικές προβλέψεις και παρατηρήσεις για τη Δανία, τη Γροιλανδία και "
+"τις Νήσους Φερόες. Διαβάστε περισσότερα για το ινστιτούτο στη διεύθυνση www."
+"dmi.dk."
 
 #. 3.8->settings-schema.json->deutscherwetterdienst_label->description
 msgid ""
-"German National Weather Provider. Read more about the institute at "
-"www.dwd.de."
+"German National Weather Provider. Read more about the institute at www.dwd."
+"de."
 msgstr ""
+"Γερμανικός Εθνικός Μετεωρολογικός Φορέας. Διαβάστε περισσότερα για το "
+"ινστιτούτο στη διεύθυνση www.dwd.de."
 
 #. 3.8->settings-schema.json->usweather_label->description
 msgid ""
@@ -2824,26 +2794,52 @@ msgid ""
 " - Observations are quite spotty so it combines multiple observation "
 "stations if needed in a 50km area"
 msgstr ""
+"Η Εθνική Μετεωρολογική Υπηρεσία (National Weather Service) των ΗΠΑ είναι "
+"ένας ομοσπονδιακός κυβερνητικός φορέας που ιδρύθηκε το 1861. Μπορείτε να "
+"βρείτε περισσότερες πληροφορίες για την υπηρεσία στη διεύθυνση www.weather."
+"gov. \n"
+"\n"
+"- Καλύπτει μόνο τις ΗΠΑ\n"
+"- Μερικές φορές απαιτούνται 10-15 δευτερόλεπτα για τη λήψη των καιρικών "
+"δεδομένων· παρακαλούμε κάντε υπομονή κατά την πρώτη φόρτωση\n"
+"- Τα δεδομένα παρατήρησης είναι αρκετά αραιά, επομένως, εάν χρειαστεί, "
+"συνδυάζονται πληροφορίες από πολλαπλούς σταθμούς παρατήρησης εντός ακτίνας "
+"50 χλμ"
 
 #. 3.8->settings-schema.json->swissmeteo_label->description
 msgid ""
-"Swiss national weather service. Read more about the service at "
-"www.meteoswiss.admin.ch.\n"
+"Swiss national weather service. Read more about the service at www."
+"meteoswiss.admin.ch.\n"
 "\n"
 " - Only covers Switzerland\n"
 " - You need to use your post code instead of coordinates"
 msgstr ""
+"Ελβετική εθνική μετεωρολογική υπηρεσία. Διαβάστε περισσότερα για την "
+"υπηρεσία στη διεύθυνση www.meteoswiss.admin.ch. \n"
+"\n"
+"- Καλύπτει μόνο την Ελβετία\n"
+"- Πρέπει να χρησιμοποιήσετε τον ταχυδρομικό κώδικα αντί για συντεταγμένες"
 
 #. 3.8->settings-schema.json->metoffice_label->description
 msgid ""
 "The Meteorological Office, abbreviated as the Met Office, is the UK's "
-"national weather service founded in 1854. Read more about the service at "
-"www.metoffice.gov.uk.\n"
+"national weather service founded in 1854. Read more about the service at www."
+"metoffice.gov.uk.\n"
 "\n"
 " - You only have 360 calls a day free, the applet uses 2 at a time so "
 "minimum of 15 minutes refresh time is recommended.\n"
 " - To get API keys, register at datahub.metoffice.gov.uk"
 msgstr ""
+"Το Meteorological Office, γνωστό και ως Met Office, είναι η εθνική "
+"μετεωρολογική υπηρεσία του Ηνωμένου Βασιλείου, η οποία ιδρύθηκε το 1854. "
+"Μπορείτε να βρείτε περισσότερες πληροφορίες για την υπηρεσία στη διεύθυνση "
+"www.metoffice.gov.uk. \n"
+"\n"
+"- Έχετε στη διάθεσή σας μόνο 360 δωρεάν κλήσεις ανά ημέρα. Δεδομένου ότι η "
+"εφαρμογή πραγματοποιεί 2 κλήσεις ταυτόχρονα, συνιστάται ένα διάστημα "
+"ανανέωσης τουλάχιστον 15 λεπτών. \n"
+"- Για να αποκτήσετε κλειδιά API, εγγραφείτε στη διεύθυνση datahub.metoffice."
+"gov.uk"
 
 #. 3.8->settings-schema.json->openweathermap_onecall_label->description
 msgid ""
@@ -2851,6 +2847,10 @@ msgid ""
 "an API key. Make sure your call limit is 1000 calls/day to avoid charges. "
 "Read more about the service at openweathermap.org/api/one-call-api."
 msgstr ""
+"Μια έκδοση του OpenWeatherMap που υποστηρίζει περισσότερες λειτουργίες (όπως "
+"και πριν), αλλά απαιτεί κλειδί API. Βεβαιωθείτε ότι το όριο κλήσεών σας "
+"είναι 1000 κλήσεις/ημέρα, ώστε να αποφύγετε χρεώσεις. Διαβάστε περισσότερα "
+"για την υπηρεσία στη διεύθυνση openweathermap.org/api/one-call-api."
 
 #. 3.8->settings-schema.json->pirateweather_label->description
 msgid ""
@@ -2858,6 +2858,9 @@ msgid ""
 "data that is compatible with the Dark Sky API. Read more about the service "
 "at pirateweather.net."
 msgstr ""
+"Το Pirate Weather είναι μια δωρεάν υπηρεσία καιρού ανοιχτού κώδικα, η οποία "
+"παρέχει δεδομένα καιρού συμβατά με το API του Dark Sky. Διαβάστε περισσότερα "
+"για την υπηρεσία στη διεύθυνση pirateweather.net."
 
 #. 3.8->settings-schema.json->visualcrossing_label->description
 msgid ""
@@ -2868,6 +2871,12 @@ msgid ""
 " - Provides 1000 Free calls a day\n"
 " - Needs an API key"
 msgstr ""
+"Υπηρεσία καιρού από τη Visual Crossing Corporation, η οποία ιδρύθηκε το 2003 "
+"και διαθέτει έδρα στις ΗΠΑ και τη Γερμανία. Μάθετε περισσότερα για την "
+"υπηρεσία στο visualcrossing.com. \n"
+"\n"
+"- Παρέχει 1000 δωρεάν κλήσεις την ημέρα\n"
+"- Απαιτεί κλειδί API (API key)"
 
 #. 3.8->settings-schema.json->weatherbit_label->description
 msgid ""
@@ -2880,16 +2889,33 @@ msgid ""
 " - Using alerts will increase call usage by 33%\n"
 " - Hourly Weather forecast is supported but requires a non-free account."
 msgstr ""
+"Υπηρεσία ιστορικών και προβλεπόμενων καιρικών δεδομένων, η οποία παρέχεται "
+"από την Weatherbit LLC στις ΗΠΑ. Μάθετε περισσότερα για την υπηρεσία στο "
+"weatherbit.io. \n"
+"\n"
+"- Συνιστάται συχνότητα ανανέωσης τουλάχιστον 1 ώρας, διαφορετικά ενδέχεται "
+"να υπερβείτε το ημερήσιο όριό σας. Η δωρεάν συνδρομή API περιορίζεται σε 50 "
+"κλήσεις ανά ημέρα. \n"
+"- Απαιτείται κλειδί API (API key).\n"
+"- Η χρήση ειδοποιήσεων αυξάνει τον αριθμό των κλήσεων κατά 33%.\n"
+"- Υποστηρίζεται ωριαία πρόγνωση καιρού, αλλά απαιτείται συνδρομητικός (επί "
+"πληρωμή) λογαριασμός."
 
 #. 3.8->settings-schema.json->tomorrowio_label->description
 msgid ""
 "Meteorological data from American weather technology company with "
-"headquarters in Boston since 2016. Read more about the service at "
-"tomorrow.io.\n"
+"headquarters in Boston since 2016. Read more about the service at tomorrow."
+"io.\n"
 "\n"
 " - Free plan includes 1000 calls per day\n"
 " - Needs an API key"
 msgstr ""
+"Μετεωρολογικά δεδομένα από αμερικανική εταιρεία τεχνολογίας καιρού με έδρα "
+"τη Βοστώνη από το 2016. Μάθετε περισσότερα για την υπηρεσία στο tomorrow."
+"io. \n"
+"\n"
+"- Το δωρεάν πρόγραμμα περιλαμβάνει 1.000 κλήσεις ανά ημέρα\n"
+"- Απαιτείται κλειδί API (API key)"
 
 #. 3.8->settings-schema.json->accuweather_label->description
 msgid ""
@@ -2901,6 +2927,14 @@ msgid ""
 "day, remaining number of calls are shown in the applet tooltip\n"
 " - Needs an API key"
 msgstr ""
+"Η διαδικτυακή υπηρεσία της εταιρείας AccuWeather Inc. —η οποία ιδρύθηκε το "
+"1962 και εδρεύει στις ΗΠΑ— παρέχει παγκόσμια μετεωρολογικά δεδομένα. Μάθετε "
+"περισσότερα για την υπηρεσία στη διεύθυνση accuweather.com. \n"
+"\n"
+"- Στο δωρεάν πρόγραμμα, ο αριθμός των κλήσεων ανά ημέρα είναι πολύ "
+"περιορισμένος. Ο εναπομένων αριθμός κλήσεων εμφανίζεται στην επεξηγηματική "
+"ένδειξη (tooltip) της εφαρμογής.\n"
+"- Απαιτείται κλειδί API (API key)"
 
 #. 3.8->settings-schema.json->weatherunderground_label->description
 msgid ""
@@ -2913,97 +2947,120 @@ msgid ""
 " - Needs an API key\n"
 " - Current weather condition come from forecast"
 msgstr ""
+"Το Weather Underground είναι μια ιδιωτική εταιρεία παροχής μετεωρολογικών "
+"πληροφοριών μέσω διαδικτύου. Παρέχει μετεωρολογικές παρατηρήσεις και "
+"προγνώσεις για μεγάλο αριθμό τοποθεσιών ανά τον κόσμο. Η έδρα της βρίσκεται "
+"στο Ann Arbor των Ηνωμένων Πολιτειών. Μπορείτε να βρείτε περισσότερες "
+"πληροφορίες για την υπηρεσία στη διεύθυνση wunderground.com. \n"
+"\n"
+"- Επιτρέπει μόνο 1500 κλήσεις (αιτήματα) ανά ημέρα, επομένως συνιστάται "
+"κύκλος ανανέωσης 15 λεπτών.\n"
+"- Απαιτείται κλειδί API (API key).\n"
+"- Οι τρέχουσες καιρικές συνθήκες προέρχονται από την πρόγνωση."
 
 #. 3.8->settings-schema.json->metoffice_forecast_apikey->description
-#, fuzzy
 msgid "Forecasts API Key"
-msgstr "Εύρος πρόβλεψης"
+msgstr "Κλειδί προβλέψεων API"
 
 #. 3.8->settings-schema.json->metoffice_forecast_apikey->tooltip
 msgid ""
 "Subscribe to 'Site Specific' -> 'Global Spot' Free plan to get this key."
 msgstr ""
+"Εγγραφείτε στο δωρεάν πρόγραμμα «Site Specific» -> «Global Spot» για να "
+"λάβετε αυτό το κλειδί."
 
 #. 3.8->settings-schema.json->metoffice_observations_apikey->description
 msgid "Observations API Key"
-msgstr ""
+msgstr "Κλειδί παρατηρήσεων API"
 
 #. 3.8->settings-schema.json->metoffice_observations_apikey->tooltip
 msgid ""
 "Subscribe to 'Observations' -> 'Land Observations' Free plan to get this key."
 msgstr ""
+"Εγγραφείτε στο «Observations» -> «Land Observations» (Δωρεάν πρόγραμμα) για "
+"να αποκτήσετε αυτό το κλειδί."
 
 #. 3.8->settings-schema.json->openweathermap_onecall_apikey->description
-#, fuzzy
 msgid "OpenWeatherMap OneCall API Key"
-msgstr "Καιρός"
+msgstr "OpenWeatherMap OneCall κλειδί API"
 
 #. 3.8->settings-schema.json->openweathermap_onecall_apikey->tooltip
 msgid "Copy this from your account at openweathermap.org and paste it here."
 msgstr ""
+"Αντιγράψτε το από τον λογαριασμό σας στο openweathermap.org και επικολλήστε "
+"το εδώ."
 
 #. 3.8->settings-schema.json->pirateweather_apikey->description
-#, fuzzy
 msgid "Pirate Weather API Key"
-msgstr "Καιρός"
+msgstr "Pirate Weather κλειδί API"
 
 #. 3.8->settings-schema.json->pirateweather_apikey->tooltip
 msgid "Copy this from your account at pirateweather.net and paste it here."
 msgstr ""
+"Αντιγράψτε αυτό από τον λογαριασμό σας στο pirateweather.net και επικολλήστε "
+"το εδώ."
 
 #. 3.8->settings-schema.json->visualcrossing_apikey->description
 msgid "Visual Crossing API Key"
-msgstr ""
+msgstr "Κλειδί API Visual Crossing"
 
 #. 3.8->settings-schema.json->visualcrossing_apikey->tooltip
 msgid "Copy this from your account at visualcrossing.com and paste it here."
 msgstr ""
+"Αντιγράψτε το από τον λογαριασμό σας στο visualcrossing.com και επικολλήστε "
+"το εδώ."
 
 #. 3.8->settings-schema.json->weatherbit_apikey->description
-#, fuzzy
 msgid "Weatherbit API Key"
-msgstr "Καιρός"
+msgstr "Κλειδί API Weatherbit"
 
 #. 3.8->settings-schema.json->weatherbit_apikey->tooltip
 msgid "Copy this from your account at weatherbit.io and paste it here."
 msgstr ""
+"Αντιγράψτε το από τον λογαριασμό σας στο weatherbit.io και επικολλήστε το "
+"εδώ."
 
 #. 3.8->settings-schema.json->tomorrowio_apikey->description
-#, fuzzy
 msgid "Tomorrow.io API Key"
-msgstr "Αύριο"
+msgstr "Κλειδί API του Tomorrow.io"
 
 #. 3.8->settings-schema.json->tomorrowio_apikey->tooltip
 msgid "Copy this from your account at tomorrow.io and paste it here."
 msgstr ""
+"Αντιγράψτε αυτό από τον λογαριασμό σας στο tomorrow.io και επικολλήστε το "
+"εδώ."
 
 #. 3.8->settings-schema.json->accuweather_apikey->description
-#, fuzzy
 msgid "AccuWeather API Key"
-msgstr "Καιρός"
+msgstr "Κλειδί API AccuWeather"
 
 #. 3.8->settings-schema.json->accuweather_apikey->tooltip
 msgid ""
 "Copy this from your account at developer.accuweather.com and paste it here."
 msgstr ""
+"Αντιγράψτε το από τον λογαριασμό σας στο developer.accuweather.com και "
+"επικολλήστε το εδώ."
 
 #. 3.8->settings-schema.json->weatherunderground_apikey->description
 msgid "Weather Underground API Key"
-msgstr ""
+msgstr "Κλειδί API του Weather Underground"
 
 #. 3.8->settings-schema.json->weatherunderground_apikey->tooltip
 msgid ""
 "Copy this from your account at www.wunderground.com/weather/api and paste it "
 "here."
 msgstr ""
+"Αντιγράψτε αυτό από τον λογαριασμό σας στη διεύθυνση www.wunderground.com/"
+"weather/api και επικολλήστε το εδώ."
 
 #. 3.8->settings-schema.json->apiKey->description
 msgid "API Key - Hidden, only for backwards compatibility"
 msgstr ""
+"Κλειδί API – Κρυφό, μόνο για λόγους συμβατότητας με προηγούμενες εκδόσεις"
 
 #. 3.8->settings-schema.json->geoclue->description
 msgid "Prioritize GeoClue for location detection"
-msgstr ""
+msgstr "Δώστε προτεραιότητα στο GeoClue για τον εντοπισμό τοποθεσίας"
 
 #. 3.8->settings-schema.json->geoclue->tooltip
 msgid ""
@@ -3013,10 +3070,17 @@ msgid ""
 "fall back to IP-based location detection if GeoClue is not available or "
 "fails to provide location information."
 msgstr ""
+"Ενεργοποιήστε αυτή την επιλογή για να επιχειρήσετε, κατά προτεραιότητα, τη "
+"χρήση του GeoClue για τον αυτόματο εντοπισμό τοποθεσίας, εφόσον είναι "
+"διαθέσιμο. Αυτό μπορεί να παρέχει ακριβέστερες πληροφορίες τοποθεσίας σε "
+"συσκευές που διαθέτουν τον κατάλληλο εξοπλισμό, αλλά σε αντίθετη περίπτωση "
+"ενδέχεται να παρουσιάζει μεγάλες αποκλίσεις. Εάν το GeoClue δεν είναι "
+"διαθέσιμο ή αποτύχει να παρέχει πληροφορίες τοποθεσίας, το σύστημα θα "
+"καταφύγει σε εναλλακτική μέθοδο εντοπισμού βάσει της διεύθυνσης IP."
 
 #. 3.8->settings-schema.json->autoloc_provider->description
 msgid "IP-based automatic location provider"
-msgstr ""
+msgstr "Πάροχος αυτόματου εντοπισμού θέσης βάσει IP"
 
 #. 3.8->settings-schema.json->autoloc_provider->options
 msgid "geoip.fedoraproject.org"
@@ -3039,43 +3103,62 @@ msgid ""
 "Usually this doesn't need changed, some users have reported better accuracy, "
 "corporate network support or various country-wide bans with one or other."
 msgstr ""
+"Συνήθως δεν χρειάζεται αλλαγή, ορισμένοι χρήστες έχουν αναφέρει καλύτερη "
+"ακρίβεια, υποστήριξη για εταιρικά δίκτυα ή διάφορους περιορισμούς ανά χώρα, "
+"ανάλογα με την επιλογή."
 
+# Δεν λείπει
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
 "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
 "{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
 "the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice. Powered by "
-"nominatim.openstreetmap.org."
+"replaced automatically for validating your choice. Powered by nominatim."
+"openstreetmap.org."
 msgstr ""
+"Μπορείτε να εισαγάγετε συντεταγμένες «Γεωγραφικό πλάτος,Γεωγραφικό μήκος» (π."
+"χ. 51.5085,-0.1257), να χρησιμοποιήσετε τη μορφή «Πόλη,Κωδικός χώρας» (π.χ. "
+"Λονδίνο,ΗΒ) ή να εισαγάγετε τα στοιχεία με τη σειρά: {Αριθμός κτιρίου} "
+"{Οδός} {Πόλη} {Ταχυδρομικός κώδικας} {Χώρα}. Ο αλγόριθμος αναζήτησης είναι "
+"πολύ ευέλικτος ως προς τη μορφή των δεδομένων. Εάν παρέλθουν 3 δευτερόλεπτα "
+"χωρίς πληκτρολόγηση, η διεύθυνση που εισαγάγατε αντικαθίσταται αυτόματα, "
+"προκειμένου να επιβεβαιωθεί η επιλογή σας. Υποστηρίζεται από το nominatim."
+"openstreetmap.org"
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
 "If the location field matches a saved location's 'Search Entry' field, the "
 "saved location will be used instead."
 msgstr ""
+"Εάν το πεδίο τοποθεσίας αντιστοιχεί στο πεδίο «Καταχώριση αναζήτησης» μιας "
+"αποθηκευμένης τοποθεσίας, θα χρησιμοποιηθεί αντ' αυτού η αποθηκευμένη "
+"τοποθεσία."
 
 #. 3.8->settings-schema.json->saveLocation->description
-#, fuzzy
 msgid "Save current location to storage"
-msgstr "Παράκαμψη ετικέτας τοποθεσίας"
+msgstr "Αποθήκευση τρέχουσας τοποθεσίας στον αποθηκευτικό χώρο"
 
 #. 3.8->settings-schema.json->saveLocation->tooltip
 msgid ""
 "Saves location information to file so you can switch between them with "
 "buttons in the applet, which will appear if you have more than one."
 msgstr ""
+"Αποθηκεύει πληροφορίες τοποθεσίας σε αρχείο, ώστε να μπορείτε να "
+"εναλλάσσεστε μεταξύ τους μέσω κουμπιών στην εφαρμογή, τα οποία θα "
+"εμφανιστούν εφόσον έχετε περισσότερες από μία."
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
-msgstr ""
+msgstr "Μικροεφαρμογή καιρού στον ιστότοπο Cinnamon Spices"
 
 #. 3.8->settings-schema.json->refreshInterval->tooltip
 msgid ""
 "If you are using a provider with API keys set it to an interval you won't "
 "run out of your quota with."
 msgstr ""
+"Εάν χρησιμοποιείτε κάποιον πάροχο με κλειδιά API, ορίστε ένα διάστημα τέτοιο "
+"ώστε να μην εξαντλήσετε το όριο χρήσης σας."
 
 #. 3.8->settings-schema.json->forecastDays->tooltip
 msgid ""
@@ -3083,16 +3166,21 @@ msgid ""
 "maximum rows and columns setting in the Presentation tab will affect the "
 "final number."
 msgstr ""
+"Ο μέγιστος αριθμός ημερών που μπορούν να εμφανιστούν, ο διαθέσιμος αριθμός "
+"δεδομένων, καθώς και η ρύθμιση για τον μέγιστο αριθμό γραμμών και στηλών "
+"στην καρτέλα «Παρουσίαση», θα επηρεάσουν τον τελικό αριθμό."
 
 #. 3.8->settings-schema.json->forecastHours->tooltip
 msgid ""
 "Maximum number of hours that can be displayed, available numbers of data "
 "will affect the final number."
 msgstr ""
+"Ο μέγιστος αριθμός ωρών που μπορούν να εμφανιστούν, καθώς και ο διαθέσιμος "
+"όγκος δεδομένων, θα επηρεάσουν τον τελικό αριθμό."
 
 #. 3.8->settings-schema.json->immediatePrecip->description
 msgid "Enable minutely precipitation forecast"
-msgstr ""
+msgstr "Ενεργοποίηση πρόγνωσης υετού ανά λεπτό"
 
 #. 3.8->settings-schema.json->immediatePrecip->tooltip
 msgid ""
@@ -3100,20 +3188,26 @@ msgid ""
 "as location to help its accuracy. See Feature map on website on support for "
 "your provider"
 msgstr ""
+"Αν θέλετε να το χρησιμοποιήσετε, φροντίστε να εισαγάγετε τις ακριβείς "
+"συντεταγμένες ή τη διεύθυνσή σας ως τοποθεσία, ώστε να διασφαλιστεί η "
+"ακρίβεια. Δείτε τον χάρτη δυνατοτήτων στον ιστότοπο για πληροφορίες σχετικά "
+"με την υποστήριξη για τον πάροχό σας"
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Ενεργοποίηση εμφάνισης ειδοποιήσεων καιρού"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Το κουμπί ειδοποιήσεων θα είναι ορατό στο αναδυόμενο μενού, εάν υπάρχουν "
+"ενεργές ειδοποιήσεις για την τοποθεσία σας."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
-msgstr ""
+msgstr "Εμφάνιση και των δύο μονάδων θερμοκρασίας ταυτόχρονα"
 
 #. 3.8->settings-schema.json->tempTextOverride->tooltip
 msgid ""
@@ -3123,76 +3217,88 @@ msgid ""
 "Can be used if label does not fit on vertical panel, among other smart "
 "things."
 msgstr ""
+"Μερικές από τις διαθέσιμες τιμές είναι: {c} για την κατάσταση, {t} για τη "
+"θερμοκρασία και {u} για τη μονάδα μέτρησης. Η πλήρης λίστα των τιμών "
+"διατίθεται στον ιστότοπο της Cinnamon Spices.\n"
+"Μπορεί να χρησιμοποιηθεί, μεταξύ άλλων έξυπνων εφαρμογών, στις περιπτώσεις "
+"όπου η ετικέτα δεν χωράει στον κάθετο πίνακα."
 
 #. 3.8->settings-schema.json->tooltipTextOverride->description
-#, fuzzy
 msgid "Override tooltip on panel"
-msgstr "Παράκαμψη ετικέτας τοποθεσίας"
+msgstr "Παράκαμψη εργαλείου συμβουλών στον πίνακα"
 
 #. 3.8->settings-schema.json->tooltipTextOverride->tooltip
 msgid ""
 "Has the same behavior and available values as 'Override label on panel'."
 msgstr ""
+"Έχει την ίδια συμπεριφορά και τις ίδιες διαθέσιμες τιμές με το «Παράκαμψη "
+"ετικέτας στον πίνακα»."
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
 msgid "Always show Hourly Weather"
-msgstr ""
+msgstr "Να εμφανίζεται πάντα ο ωριαίος καιρός"
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->tooltip
 msgid ""
 "Hide/Show button will be hidden and Hourly weather will be permanently "
 "visible."
 msgstr ""
+"Το κουμπί Απόκρυψης/Εμφάνισης θα κρυφτεί και ο ωριαίος καιρός θα είναι "
+"μόνιμα ορατός."
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
 msgstr ""
+"Εμφάνιση των προβλέψεων από πάνω προς τα κάτω, αντί από αριστερά προς τα "
+"δεξιά."
 
 #. 3.8->settings-schema.json->locationList->description
 msgid "Your saved locations"
-msgstr ""
+msgstr "Οι αποθηκευμένες τοποθεσίες σας"
 
 #. 3.8->settings-schema.json->locationList->tooltip
 msgid ""
 "You have to make sure the Search entry field is unique and your Timezone is "
 "in the IANA time zone format (e.g. 'Europe/London')"
 msgstr ""
+"Πρέπει να βεβαιωθείτε ότι το πεδίο αναζήτησης είναι μοναδικό και ότι η ζώνη "
+"ώρας σας είναι στη μορφή ζωνών ώρας IANA (π.χ. 'Europe/London')."
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Latitude"
-msgstr ""
+msgstr "Γεωγραφικό πλάτος"
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Longitude"
-msgstr ""
+msgstr "Γεωγραφικό μήκος"
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "City"
-msgstr ""
+msgstr "Πόλη"
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Country"
-msgstr ""
+msgstr "Χώρα"
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Timezone"
-msgstr ""
+msgstr "Ζώνη ώρας"
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Search entry"
-msgstr ""
+msgstr "Καταχώριση αναζήτησης"
 
 #. 3.8->settings-schema.json->displayWindAsText->description
 msgid "Display wind direction as text"
-msgstr ""
+msgstr "Εμφάνιση της κατεύθυνσης του ανέμου ως κείμενο"
 
 #. 3.8->settings-schema.json->displayWindAsText->tooltip
 msgid "Like SE, N instead of direction icons."
-msgstr ""
+msgstr "Όπως το ΝΑ, Β αντί για εικονίδια κατεύθυνσης."
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "Ο πάροχος θα πρέπει να μεταφράσει τους όρους, εφόσον είναι διαθέσιμοι"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -3200,14 +3306,19 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Ο πάροχός σας θα πρέπει να μεταφράσει τους όρους στη γλώσσα σας, εφόσον η "
+"τοπική σας ρύθμιση υποστηρίζεται από αυτόν. Διαφορετικά, η εφαρμογή θα "
+"χρησιμοποιήσει το δικό της σύστημα μετάφρασης."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
 msgstr ""
+"Δεν ισχύει για προσαρμοσμένο σύνολο εικονιδίων, το οποίο είναι εξ ορισμού "
+"συμβολικό"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
-msgstr ""
+msgstr "Χρήση συμβολικών εικονιδίων σε όλη την μικροεφαρμογή"
 
 #. 3.8->settings-schema.json->more-info-label->description
 msgid ""
@@ -3216,10 +3327,15 @@ msgid ""
 "clicking the button below. Here you can ask questions etc in the comment "
 "section by logging in with your Github account."
 msgstr ""
+"Για αναλυτικές πληροφορίες σχετικά με τη μικροεφαρμογή, επισκεφθείτε τον "
+"ιστότοπο του Spices, όπου θα βρείτε στοιχεία για γνωστά ζητήματα, "
+"αντιμετώπιση προβλημάτων, ιστορικό αλλαγών και άλλα, κάνοντας κλικ στο "
+"παρακάτω κουμπί. Εκεί μπορείτε επίσης να υποβάλετε ερωτήσεις ή να κάνετε "
+"σχόλια, αφού συνδεθείτε με τον λογαριασμό σας στο GitHub."
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
-msgstr ""
+msgstr "Υποβολή ζητήματος"
 
 #. 3.8->settings-schema.json->submitIssue->tooltip
 msgid ""
@@ -3227,10 +3343,13 @@ msgid ""
 "GitHub account.\n"
 " Please make sure that the issue is not already submitted."
 msgstr ""
+"Ανοίγει μια ιστοσελίδα όπου μπορείτε να καταχωρίσετε ένα νέο ζήτημα για τη "
+"μικροεφαρμογή. Απαιτείται λογαριασμός στο GitHub.\n"
+"Βεβαιωθείτε ότι το ζήτημα δεν έχει ήδη υποβληθεί."
 
 #. 3.8->settings-schema.json->maintainer->description
 msgid "Current maintainer: ---"
-msgstr ""
+msgstr "Τρέχων συντηρητής: ---"
 
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
@@ -3244,20 +3363,40 @@ msgid ""
 "the issue is about. Logs with Debug level (which can be saved to a file "
 "below) are also appreciated."
 msgstr ""
+"Εάν εντοπίσετε κάποιο πρόβλημα με αυτή την μικροεφαρμογή, παρακαλούμε "
+"υποβάλετε μια αναφορά κάνοντας κλικ στο παρακάτω κουμπί και συνδεθείτε με "
+"τον λογαριασμό σας στο GitHub.\n"
+"\n"
+"Πριν ξεκινήσετε τη σύνταξη της αναφοράς, βεβαιωθείτε ότι το ζήτημα δεν έχει "
+"ήδη καταχωρηθεί στην ενότητα των ζητημάτων (issues) και ελέγξτε τα προ-"
+"συμπληρωμένα στοιχεία στην περιγραφή. Μην ξεχάσετε να προσθέσετε μια σύντομη "
+"περιγραφή στο πεδίο «Τίτλος» (Title) στο επάνω μέρος, δίπλα στο όνομα της "
+"εφαρμογής, ώστε να είναι σαφές σε όλους ποιο είναι το πρόβλημα. Επίσης, θα "
+"ήταν χρήσιμο να επισυνάψετε αρχεία καταγραφής (logs) επιπέδου Debug (τα "
+"οποία μπορείτε να αποθηκεύσετε σε αρχείο μέσω της παρακάτω επιλογής)."
 
+# Δεν λείπει
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
 "Your location in most cases work automatically but you can enter it manually "
-"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
-"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
-"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
-"the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice."
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,"
+"Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/"
+"Town} {Postcode} {Country}. The search algorithm is very flexible with the "
+"format. After 3 seconds without typing the address you entered is replaced "
+"automatically for validating your choice."
 msgstr ""
+"Η τοποθεσία σας εντοπίζεται συνήθως αυτόματα, αλλά μπορείτε επίσης να την "
+"εισαγάγετε χειροκίνητα χρησιμοποιώντας συντεταγμένες «Γεωγραφικό πλάτος,"
+"Γεωγραφικό μήκος» (π.χ. 51.5085,-0.1257), τη μορφή «Πόλη,Κωδικός χώρας» (π."
+"χ. London,UK) ή συμπληρώνοντας τα στοιχεία: {Αριθμός} {Οδός} {Πόλη} "
+"{Ταχυδρομικός κώδικας} {Χώρα}. Ο αλγόριθμος αναζήτησης είναι πολύ ευέλικτος "
+"ως προς τη μορφή των δεδομένων. Εάν παρέλθουν 3 δευτερόλεπτα χωρίς "
+"πληκτρολόγηση, η διεύθυνση που εισαγάγατε αντικαθίσταται αυτόματα, "
+"προκειμένου να επιβεβαιωθεί η επιλογή σας."
 
 #. 3.8->settings-schema.json->logLevel->description
 msgid "Log Level"
-msgstr ""
+msgstr "Επίπεδο καταγραφής"
 
 #. 3.8->settings-schema.json->logLevel->tooltip
 msgid ""
@@ -3265,28 +3404,37 @@ msgid ""
 "request payloads. Changing this will only be effective on future logs. Only "
 "change it you are instructed or you know what you are doing."
 msgstr ""
+"Το «Info» αντιστοιχεί στην τυπική καταγραφή, το «Debug» αφορά τον εντοπισμό "
+"σφαλμάτων, ενώ το «Verbose» καταγράφει επιπλέον τα δεδομένα (payloads) των "
+"αιτημάτων δικτύου. Η αλλαγή αυτής της ρύθμισης θα επηρεάσει μόνο τις "
+"μελλοντικές καταγραφές. Προχωρήστε σε αλλαγή μόνο εάν σας έχει δοθεί σχετική "
+"οδηγία ή εάν γνωρίζετε ακριβώς τι κάνετε."
 
 #. 3.8->settings-schema.json->logLevel->options
 msgid "Verbose"
-msgstr ""
+msgstr "Λεπτομερής"
 
 #. 3.8->settings-schema.json->fileSelect->description
 msgid "Click Save to save debug information to a file"
 msgstr ""
+"Κάντε κλικ στο «Αποθήκευση» για να αποθηκεύσετε τις πληροφορίες "
+"αποσφαλμάτωσης σε ένα αρχείο"
 
 #. 3.8->settings-schema.json->fileSelect->tooltip
 msgid ""
 "This includes logs for the applet and the current settings with your API key "
 "redacted."
 msgstr ""
+"Αυτό περιλαμβάνει αρχεία καταγραφής (logs) για τη μικροεφαρμογή και τις "
+"τρέχουσες ρυθμίσεις, με το κλειδί API σας να έχει αφαιρεθεί/αποκρυφθεί."
 
 #. 3.8->settings-schema.json->selectedLogPath->description
 msgid "Selected path to save Logs"
-msgstr ""
+msgstr "Επιλεγμένη διαδρομή για την αποθήκευση των αρχείων καταγραφής"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Παράκαμψη συμβολοσειράς User Agent"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -3295,10 +3443,16 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Αν αντιμετωπίζετε προβλήματα με τη σωστή λειτουργία της μικροεφαρμογής και "
+"γνωρίζετε ότι το πρόβλημα εντοπίζεται στη συμβολοσειρά User Agent, μπορείτε "
+"να δοκιμάσετε να την αντικαταστήσετε. Προχωρήστε σε αλλαγή μόνο εάν "
+"γνωρίζετε ακριβώς τι κάνετε. Πρόκειται για μια συμβολοσειρά που αποστέλλεται "
+"στον διακομιστή (server) όταν η μικροεφαρμογή επιχειρεί να λάβει τα δεδομένα "
+"καιρού."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Εκτέλεση εντολής όταν αλλάζουν οι πληροφορίες καιρού"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -3318,14 +3472,33 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"Η μικροεφαρμογή θα εκτελεί την εντολή που ορίζετε κάθε φορά που "
+"ενημερώνονται τα καιρικά δεδομένα. Στην εντολή θα ενσωματώνονται τιμές με "
+"την ίδια μορφή που διατίθεται στις επιλογές παραμετροποίησης (overrides). "
+"Επιπλέον, παρέχεται η παράμετρος {full_data}, η οποία περιλαμβάνει το σύνολο "
+"των τρεχόντων καιρικών δεδομένων. Κατά την ενσωμάτωση, οι τιμές που "
+"περικλείονται σε μονές αγκύλες {xxx} παραμένουν ως έχουν, ενώ όσες "
+"περικλείονται σε διπλές αγκύλες {{xxxx}} τοποθετούνται εντός μονών "
+"εισαγωγικών ('), με τα τυχόν υπάρχοντα μονά εισαγωγικά στο εσωτερικό τους να "
+"διαφεύγονται (escaped). Μπορείτε να αξιοποιήσετε αυτή τη δυνατότητα για να "
+"ενσωματώσετε τα καιρικά δεδομένα σε άλλα τμήματα του συστήματός σας. "
+"Μπορείτε να δείτε την πλήρη δομή των καιρικών δεδομένων μέσω του συνδέσμου "
+"που περιλαμβάνεται στο αρχείο README.\n"
+"\n"
+"Παράδειγμα: Η εντολή 'notify-send \"The weather is {c} and the temperature "
+"is {t}{u}\"' θα εμφανίσει μια ειδοποίηση με τις τρέχουσες καιρικές συνθήκες "
+"και τη θερμοκρασία.\n"
+"\n"
+"Παράδειγμα: Η εντολή 'echo {{full_data}} > /tmp/weather_data' θα αποθηκεύσει "
+"το σύνολο των καιρικών δεδομένων σε ένα αρχείο στον κατάλογο /tmp."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Δοκιμάστε την εντολή σας"
 
 #. 3.8->settings-schema.json->uvIndex->description
 msgid "Enable displaying UV Index"
-msgstr ""
+msgstr "Ενεργοποίηση εμφάνισης του Δείκτη UV"
 
 #. 3.8->settings-schema.json->uvIndex->tooltip
 msgid ""
@@ -3333,3 +3506,6 @@ msgid ""
 "next to sunrise/sunset times. It will not show if the UV index is low risk "
 "(0-2)."
 msgstr ""
+"Εάν ο πάροχός σας το υποστηρίζει, ο δείκτης UV θα εμφανίζεται στο αναδυόμενο "
+"μενού, δίπλα στις ώρες ανατολής/δύσης του ηλίου. Δεν θα εμφανίζεται εάν ο "
+"δείκτης UV υποδηλώνει χαμηλό κίνδυνο (0-2)."
