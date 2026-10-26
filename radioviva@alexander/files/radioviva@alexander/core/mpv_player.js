@@ -45,6 +45,21 @@ var MpvPlayer = class MpvPlayer {
         this.pendingRequests = new Map();
         this.reconnectAttempts = 0;
         this.maxReconnectAttempts = 3;
+
+        // Limpeza imediata no início para evitar processos órfãos de sessões anteriores
+        this._killOldMpvProcesses();
+        this._cleanSocketFile();
+    }
+
+    _killOldMpvProcesses() {
+        try {
+            const launcher = new Gio.SubprocessLauncher({
+                flags: Gio.SubprocessFlags.NONE
+            });
+            launcher.spawnv(["/usr/bin/pkill", "-9", "-u", String(GLib.get_user_name()), "-f", "mpv.*radioviva"]);
+        } catch (e) {
+            // Ignora se não existir
+        }
     }
 
     _cleanSocketFile() {
@@ -61,6 +76,8 @@ var MpvPlayer = class MpvPlayer {
             return true;
         }
 
+        // Antes de criar o novo daemon, garante que nenhum MPV anterior persista
+        this._killOldMpvProcesses();
         this._cleanSocketFile();
 
         // Inicialização blindada do MPV daemon:
@@ -102,13 +119,12 @@ var MpvPlayer = class MpvPlayer {
             return;
         }
 
-        const client = new Gio.SocketClient();
         const address = Gio.UnixSocketAddress.new(this.sockPath);
-
         let attempts = 0;
-        const maxWaitAttempts = 15; // 15 * 100ms = 1.5s max
+        const maxWaitAttempts = 25; // 25 * 100ms = 2.5s max
 
         const tryConnect = () => {
+            const client = new Gio.SocketClient();
             client.connect_async(address, this.cancellable, (cli, res) => {
                 try {
                     this.socketConn = cli.connect_finish(res);
@@ -127,7 +143,8 @@ var MpvPlayer = class MpvPlayer {
                             return GLib.SOURCE_REMOVE;
                         });
                     } else {
-                        global.logError(`[RadioViva] Erro de conexão socket IPC: ${err.message}`);
+                        global.logError(`[RadioViva] Erro de conexão socket IPC após ${attempts} tentativas: ${err.message}`);
+                        this._setStatus(PlaybackStatus.ERROR);
                     }
                 }
             });
@@ -156,7 +173,10 @@ var MpvPlayer = class MpvPlayer {
                 }
                 this._startListening();
             } catch (e) {
-                // Socket fechado ou cancelado
+                // Socket fechado ou erro de leitura
+                this.socketConn = null;
+                this.inStream = null;
+                this.outStream = null;
             }
         });
     }
@@ -258,6 +278,9 @@ var MpvPlayer = class MpvPlayer {
                 this.outStream.write(payload, this.cancellable);
             } catch (e) {
                 global.logError(`[RadioViva] Erro ao enviar comando IPC: ${e.message}`);
+                this.socketConn = null;
+                this.inStream = null;
+                this.outStream = null;
             }
         }
     }
@@ -311,6 +334,17 @@ var MpvPlayer = class MpvPlayer {
         this.sendCommand(["stop"]);
         this.sendCommand(["set_property", "pause", true]);
         this._setStatus(PlaybackStatus.STOPPED);
+
+        // Se o processo ou socket estiverem inconsistentes, garante que nenhum áudio persista
+        if (!this.socketConn || !this.outStream || this.outStream.is_closed()) {
+            if (this.mpvProcess) {
+                try {
+                    this.mpvProcess.force_exit();
+                } catch (e) {}
+            }
+            this._killOldMpvProcesses();
+            this._cleanSocketFile();
+        }
     }
 
     setVolume(volumePercent) {
@@ -386,6 +420,7 @@ var MpvPlayer = class MpvPlayer {
                 this.mpvProcess.force_exit();
             } catch (e) {}
         }
+        this._killOldMpvProcesses();
         this._cleanSocketFile();
     }
 };
