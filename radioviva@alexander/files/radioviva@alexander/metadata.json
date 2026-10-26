@@ -2,7 +2,7 @@
   "uuid": "radioviva@alexander",
   "name": "RadioViva",
   "description": "Modern applet to listen to radio stations from all over Brazil directly from the Cinnamon panel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "max-instances": 1,
   "cinnamon-version": [
     "5.4",

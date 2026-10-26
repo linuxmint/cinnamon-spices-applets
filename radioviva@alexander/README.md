@@ -97,6 +97,39 @@ Este projeto foi desenhado de acordo com as diretrizes oficiais de desenvolvimen
 
 ---
 
+## 📋 Notas de Versão & Relatório de Correções (Changelog)
+
+### Versão 1.0.1 — *Hardening, Estabilidade e Otimização Térmica/CPU*
+- **🔥 Correção Crítica de CPU e Ventoinha (100% de carga em 1 núcleo)**:
+  - Resolvido loop infinito de EOF (`line === null`) na escuta assíncrona do socket IPC (`MpvPlayer._startListening`). Quando o MPV fechava o socket, o fluxo caía em leitura recursiva descontrolada. Agora encerra imediatamente e libera os recursos.
+  - Perfil de execução do MPV otimizado para consumo nulo em idle: flags `--no-video`, `--audio-display=no`, `--vid=no`, `--vo=null`, `--no-osc`, `--no-osd-bar`, `--input-default-bindings=no`, `--no-input-builtin-bindings`, `--gapless-audio=yes` e buffer restrito com `--demuxer-max-bytes=2048KiB`.
+- **🛑 Desligamento Real e Prevenção de Múltiplos Áudios Simultâneos**:
+  - `stop()` agora envia comando `quit` e encerra o processo via `_terminateMpvProcess()`, garantindo 0% de CPU, 0 MB de RAM e impossibilidade de áudio fantasma após parar.
+  - Cancelamento automático de timers pendentes de reconexão (`_clearTimers()`) ao solicitar parada ou troca rápida de rádio.
+  - Implementado mutex `_isConnecting` e fila de callback único (`_pendingPlayCallback`) para evitar colisões e aberturas simultâneas ao trocar de estação rapidamente.
+  - Regex de limpeza de processos órfãos (`_killOrphanMpvProcesses`) ancorada estritamente ao executável (`^/usr/bin/mpv .*--title=RadioViva$`).
+- **🧟 Prevenção de Processos Zumbis (`<defunct>`) e `GLib-GIO-CRITICAL`**:
+  - Implementado `wait_async()` em todos os subprocessos (`mpv` e `pkill`), garantindo a colheita imediata de códigos de saída pelo kernel.
+  - Eliminadas chamadas a `g_subprocess_get_if_exited()` em instâncias em execução, prevenindo avisos críticos no log do Cinnamon.
+- **🎚️ Interface & I/O em Disco Otimizados**:
+  - Adicionada trava anti-reentrância (`this._updatingSlider`) no controle deslizante de volume.
+  - Adicionado debounce de 400ms na gravação de preferências de volume (`_scheduleSaveVolume`), eliminando gravações desnecessárias em disco a cada pixel arrastado.
+  - Removido `--force-media-title=RadioViva` e adicionada escuta de `metadata/by-key/icy-title` para correta exibição dos títulos das faixas transmitidas ao vivo.
+- **🛡️ Auditoria de Segurança & Boas Práticas Linux Mint**:
+  - Validação estrita de protocolos de streaming permitidos (`http`, `https`, `mms`, `rtmp`, `rtmps`).
+  - Higienização e escape de metadados ICY (`GLib.markup_escape_text`) contra injeção de tags em notificações.
+  - Substituição de chamadas síncronas de sistema de arquivos GIO (`query_exists`, `query_info`, `file_test`) por métodos assíncronos não bloqueantes para 100% de conformidade com o scanner do Cinnamon Spices.
+  - Atualização do `scripts/install.sh` para recarga limpa via DBus (`org.Cinnamon.LookingGlass.ReloadExtension`).
+
+### Versão 1.0.0 — *Lançamento Inicial*
+- Catálogo estruturado com mais de 1.300 emissoras de rádio de todo o Brasil (26 Estados + DF).
+- Widget de busca instantânea integrado às configurações nativas do Cinnamon em GTK3.
+- Player card com botões de controle, exibição de status e slider de volume.
+- Suporte a ícones monocromáticos simbólicos e coloridos.
+- Gravação direta de streams de rádio em MP3.
+
+---
+
 ## 📄 Licença
 
 Distribuído sob a licença **GPL-3.0**. Consulte o arquivo [LICENSE](file:///home/alexander/Documentos/RadioViva/LICENSE) para mais detalhes.
