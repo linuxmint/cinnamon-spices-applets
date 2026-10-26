@@ -24,14 +24,8 @@ var MpvPlayer = class MpvPlayer {
             onRecordingChange: (isRec, path) => {}
         }, callbacks);
 
-        const runtimeDir = GLib.get_user_runtime_dir();
-        if (runtimeDir && GLib.file_test(runtimeDir, GLib.FileTest.IS_DIR)) {
-            this.sockPath = `${runtimeDir}/radioviva-${GLib.get_user_name()}.sock`;
-        } else {
-            const fallbackDir = `/tmp/radioviva-${GLib.get_user_name()}`;
-            GLib.mkdir_with_parents(fallbackDir, 0o700);
-            this.sockPath = `${fallbackDir}/radioviva.sock`;
-        }
+        const runtimeDir = GLib.get_user_runtime_dir() || "/tmp";
+        this.sockPath = `${runtimeDir}/radioviva-${GLib.get_user_name()}.sock`;
 
         this.mpvProcess = null;
         this.socketConn = null;
@@ -56,12 +50,9 @@ var MpvPlayer = class MpvPlayer {
     _cleanSocketFile() {
         try {
             const file = Gio.File.new_for_path(this.sockPath);
-            const fileInfo = file.query_info("standard::type", Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
-            if (fileInfo) {
-                file.delete(null);
-            }
+            file.delete(null);
         } catch (e) {
-            // Ignora se não existir
+            // Ignora se o arquivo não existir
         }
     }
 
@@ -118,18 +109,6 @@ var MpvPlayer = class MpvPlayer {
         const maxWaitAttempts = 15; // 15 * 100ms = 1.5s max
 
         const tryConnect = () => {
-            const file = Gio.File.new_for_path(this.sockPath);
-            if (!file.query_exists(null)) {
-                attempts++;
-                if (attempts < maxWaitAttempts) {
-                    GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
-                        tryConnect();
-                        return GLib.SOURCE_REMOVE;
-                    });
-                    return;
-                }
-            }
-
             client.connect_async(address, this.cancellable, (cli, res) => {
                 try {
                     this.socketConn = cli.connect_finish(res);
@@ -361,12 +340,10 @@ var MpvPlayer = class MpvPlayer {
 
         const baseDir = customDir || `${GLib.get_home_dir()}/Música/RadioViva`;
         const dirFile = Gio.File.new_for_path(baseDir);
-        if (!dirFile.query_exists(null)) {
-            try {
-                dirFile.make_directory_with_parents(null);
-            } catch (e) {
-                // Diretório falhou
-            }
+        try {
+            dirFile.make_directory_with_parents(null);
+        } catch (e) {
+            // Diretório já existe ou falha na criação
         }
 
         const now = new Date();

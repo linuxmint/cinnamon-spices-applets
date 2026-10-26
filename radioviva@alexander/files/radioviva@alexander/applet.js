@@ -74,10 +74,11 @@ class RadioVivaApplet extends Applet.TextIconApplet {
         const isPlaying = (this.player.status === this.PlaybackStatus.PLAYING);
 
         if (style === "color") {
-            const iconFile = Gio.File.new_for_path(this.iconPath);
-            if (iconFile.query_exists(null)) {
+            try {
                 this.set_applet_icon_path(this.iconPath);
                 return;
+            } catch (e) {
+                // Se falhar ao carregar colorido, faz fallback para o simbólico
             }
         }
 
@@ -86,10 +87,9 @@ class RadioVivaApplet extends Applet.TextIconApplet {
             ? `${this.metadata.path}/icons/radioviva-playing-symbolic.svg`
             : `${this.metadata.path}/icons/radioviva-symbolic.svg`;
 
-        const symFile = Gio.File.new_for_path(symIconPath);
-        if (symFile.query_exists(null)) {
+        try {
             this.set_applet_icon_path(symIconPath);
-        } else {
+        } catch (e) {
             this.set_applet_icon_symbolic_name(isPlaying ? "media-playback-start-symbolic" : "audio-x-generic-symbolic");
         }
     }
