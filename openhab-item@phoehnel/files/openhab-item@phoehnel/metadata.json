@@ -1,0 +1,9 @@
+{
+  "uuid": "openhab-item@phoehnel",
+  "name": "OpenHAB Item",
+  "description": "Display and control OpenHAB smart home items on the Cinnamon panel",
+  "version": "1.1.0",
+  "max-instances": -1,
+  "cinnamon-version": ["5.4", "5.6", "5.8", "6.0", "6.2", "6.4", "6.6"],
+  "author": "phoehnel"
+}
