@@ -126,7 +126,7 @@ export class WeatherUnderground implements WeatherProvider<Services.WeatherUnder
 			const tempmin = forecast.temperatureMin[index];
 			const data: ForecastData = {
 				date: DateTime.fromSeconds(forecast.validTimeUtc[index]).setZone(loc.timeZone),
-				condition: this.IconToCondition(icons[0] ?? icons[1]!),
+				condition: this.IconToCondition(icons[0] ?? icons[1]),
 				temp_max: tempMax == null ? null : this.ToKelvin(tempMax, config),
 				temp_min: tempmin == null ? null : this.ToKelvin(tempmin, config),
 			}
@@ -195,7 +195,9 @@ export class WeatherUnderground implements WeatherProvider<Services.WeatherUnder
 		};
 
 		for (const observations of observationData) {
-			const station = stations.find(v => v.stationId == observations.stationID)!;
+			const station = stations.find(v => v.stationId == observations.stationID);
+			if (station == null)
+				continue;
 			if (result.date == null && observations.obsTimeUtc != null)
 				result.date = DateTime.fromISO(observations.obsTimeUtc).setZone(tz);
 			if (result.location.city == null && observations.neighborhood != null)
@@ -318,7 +320,7 @@ export class WeatherUnderground implements WeatherProvider<Services.WeatherUnder
 		}
 	}
 
-	private IconToCondition = (icon: number): Condition => {
+	private IconToCondition = (icon: number | null | undefined): Condition => {
 		switch (icon) {
 			case 0:
 				return {
