@@ -127,7 +127,8 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
             proc.communicate_utf8_async(null, null, (proc, res) => {
                 const [ok, stdout] = proc.communicate_utf8_finish(res);
 
-                if (!ok || proc.get_exit_status() !== 0) {
+                // pkexec exits with 126 when the authentication dialog is dismissed
+                if (!ok || ![0, 126].includes(proc.get_exit_status())) {
                     this._handle_error(_("Failed toggling WireGuard interface"), stdout, false);
                 }
             });
