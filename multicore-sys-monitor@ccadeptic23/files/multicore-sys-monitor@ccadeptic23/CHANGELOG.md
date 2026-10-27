@@ -1,4 +1,4 @@
-### v3.18.1
+### v3.18.1~20261027
   * Adds the ability to alert the user when a process is stuck e.g:
     * when a core's load exceeds a specified limit for a specified duration
     * or when kernel detects at least one stuck process.
