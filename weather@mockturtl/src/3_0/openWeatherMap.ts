@@ -37,7 +37,7 @@ class OpenWeatherMap implements WeatherProvider {
         "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
     ];
 
-    private base_url = "https://api.openweathermap.org/data/2.5/onecall?" //lat=51.5085&lon=-0.1257&appid={YOUR API KEY}"
+    private base_url = "https://api.openweathermap.org/data/3.0/onecall?" //lat=51.5085&lon=-0.1257&appid={YOUR API KEY}"
 
     private app: WeatherApplet
     constructor(_app: WeatherApplet) {

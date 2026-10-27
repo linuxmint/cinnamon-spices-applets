@@ -60,7 +60,7 @@ var OpenWeatherMap = (function () {
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
         ];
-        this.base_url = "https://api.openweathermap.org/data/2.5/onecall?";
+        this.base_url = "https://api.openweathermap.org/data/3.0/onecall?";
         this.app = _app;
     }
     OpenWeatherMap.prototype.GetWeather = function (loc) {
