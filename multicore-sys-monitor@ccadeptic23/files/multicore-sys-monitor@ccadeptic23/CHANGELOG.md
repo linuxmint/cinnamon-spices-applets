@@ -1,3 +1,17 @@
+### v3.18.1~20261027
+  * Adds the ability to alert the user when a process is stuck e.g:
+    * when a core's load exceeds a specified limit for a specified duration
+    * or when kernel detects at least one stuck process.
+
+  * Adds the ability to change of System Monitor and select which mouse button (left, middle or both) is used to open your System Monitor.
+
+  * Fixes [#8807](https://github.com/linuxmint/cinnamon-spices-applets/issues/8807)
+  * Fixes [#9013](https://github.com/linuxmint/cinnamon-spices-applets/issues/9013)
+
+### v3.18.0~20260701
+  * Changing display order also changes tooltip order.
+  * Fixes [#8913](https://github.com/linuxmint/cinnamon-spices-applets/issues/8913)
+
 ### v3.17.0~20260630
   * Memory: The “Swap” graph can now take up 50% of the space.
   * Fixes [#8822](https://github.com/linuxmint/cinnamon-spices-applets/issues/8822)
