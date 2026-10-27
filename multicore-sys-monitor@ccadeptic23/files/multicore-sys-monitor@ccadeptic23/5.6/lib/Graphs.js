@@ -149,6 +149,21 @@ var GraphVBars = class GraphVBars {
     }
 
     bgColor = RGBa2rgba(bgColor);
+    if ( providerName == 'CPU' && this.applet.CPU_alertWhenStuckProcess ) {
+      if (this.applet.CPU_stuckMethod != "cpu" && this.applet.procs_blocked > 0) {
+        bgColor = RGBa2rgba(this.applet.CPU_bgColorStuckProcess);
+      }
+      if (this.applet.CPU_stuckMethod != "kernel") {
+        let _now = Date.now();
+        let maxDuration = 1000 * this.applet.CPU_durationStuckProcess;
+        for (let i=0; i<this.applet.CPU_stuckFromDate.length; i++) {
+          if ( _now - this.applet.CPU_stuckFromDate[i] >= maxDuration ) {
+            bgColor = RGBa2rgba(this.applet.CPU_bgColorStuckProcess);
+            break;
+          }
+        }
+      }
+    }
 
     if (typeof colorsList == "object") {
         for (let i=0, len=colorsList.length; i<len; i++)

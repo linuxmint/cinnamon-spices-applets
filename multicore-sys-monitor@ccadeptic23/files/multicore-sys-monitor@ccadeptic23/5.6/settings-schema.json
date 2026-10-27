@@ -19,7 +19,8 @@
         "sectionGeneralOrder",
         "sectionGeneralColors",
         "sectionTooltip",
-        "sectionTooltipCustomTranslations"
+        "sectionTooltipCustomTranslations",
+        "sectionSystemMonitor"
       ]
     },
     "pageCPU": {
@@ -31,7 +32,8 @@
         "sectionCPUColors",
         "sectionCPUColorsByActivity",
         "sectionCPUTemperature",
-        "sectionCPULoadAverage"
+        "sectionCPULoadAverage",
+        "sectionCPUStuckProcess"
       ]
     },
     "pageMem": {
@@ -165,6 +167,15 @@
         "emojidb_btn"
       ]
     },
+    "sectionSystemMonitor": {
+      "type": "section",
+      "title": "System Monitor",
+      "keys": [
+        "SysMonWhichOne",
+        "SysMonPath",
+        "SysMonMouseButton"
+      ]
+    },
     "sectionCPUOptions": {
       "type": "section",
       "title": "Options",
@@ -213,6 +224,17 @@
         "CPU_loadAverageColorCrit",
         "CPU_loadAverageCorner",
         "CPU_loadAverageFontFactor"
+      ]
+    },
+    "sectionCPUStuckProcess": {
+      "type": "section",
+      "title": "Detection of Stuck Processes",
+      "keys": [
+        "CPU_alertWhenStuckProcess",
+        "CPU_stuckMethod",
+        "CPU_minLoadStuckProcess",
+        "CPU_durationStuckProcess",
+        "CPU_bgColorStuckProcess"
       ]
     },
     "sectionCPULabel": {
@@ -1063,6 +1085,44 @@
     "step": 1,
     "units": "%",
     "description": "Font size: percentage of the box height"
+  },
+  "CPU_alertWhenStuckProcess": {
+    "type": "switch",
+    "default": false,
+    "description": "Change the background color when at least one process is stuck"
+  },
+  "CPU_stuckMethod": {
+    "type": "combobox",
+    "default": "kernel",
+    "description": "Method used to detect stuck processes",
+    "options": {
+      "From kernel only": "kernel",
+      "Check the activity of each CPU": "cpu",
+      "In either case": "both"
+    }
+  },
+  "CPU_minLoadStuckProcess": {
+    "type": "scale",
+    "units": "%",
+    "min": 95,
+    "max": 100,
+    "step": 1,
+    "default": 98,
+    "description": "Consider a process to be stuck when core's load exceeds (%)"
+  },
+  "CPU_durationStuckProcess": {
+    "type": "scale",
+    "units": " seconds",
+    "min": 1,
+    "max": 60,
+    "step": 1,
+    "default": 10,
+    "description": "Consider a process to be stuck after (seconds)"
+  },
+  "CPU_bgColorStuckProcess": {
+    "type": "colorchooser",
+    "default": "rgba(238,0,0,1)",
+    "description": "Background Color when a process is stuck"
   },
   "CPU_tempColor": {
     "type": "colorchooser",
@@ -2383,6 +2443,34 @@
     "type": "button",
     "description": "Refresh All",
     "callback": "refreshAll"
+  },
+  "SysMonWhichOne": {
+    "type": "combobox",
+    "default": "gnome",
+    "description": "Which System Monitor",
+    "options": {
+      "System Default": "sysdefault",
+      "Gnome System Monitor": "gnome",
+      "Custom": "customized"
+    }
+  },
+  "SysMonPath": {
+    "type": "entry",
+    "default": "gnome-system-monitor.desktop",
+    "description": "Complete name of a .desktop file or a flatpak id",
+    "dependency": "SysMonWhichOne=customized",
+    "expand-width": true,
+    "tooltip": "EXAMPLES:\ngnome-system-monitor.desktop\norg.gnome.SystemMonitor.desktop\nio.github.hakandundar34coding.system-monitoring-center"
+  },
+  "SysMonMouseButton": {
+    "type": "combobox",
+    "default": "left",
+    "description": "Which mouse button opens your System Monitor",
+    "options": {
+      "Left": "left",
+      "Middle": "middle",
+      "Both": "both"
+    }
   },
   "isHighlighted": {
     "type": "generic",

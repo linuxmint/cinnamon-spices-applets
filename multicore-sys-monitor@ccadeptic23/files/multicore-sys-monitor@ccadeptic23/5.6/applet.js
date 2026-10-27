@@ -190,6 +190,7 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         this.metadata = metadata;
         this.instance_id = instance_id;
 
+        this.procs_blocked = 0;
         this.CPU_loadAverage = 0;
         this.hyperThreadingIsOn = false;
         readFileAsync("/sys/devices/system/cpu/smt/control").then( (status) => {
@@ -197,6 +198,7 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
             // _status yields: on|off|forceoff|notsupported|notimplemented
             this.hyperThreadingIsOn = _status.includes("on");
         });
+        this.CPU_stuckFromDate = [];
 
         Util.spawnCommandLineAsync("/usr/bin/env bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
 
@@ -298,6 +300,11 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         this.settings.bind("CPU_loadAverageColorCrit", "CPU_loadAverageColorCrit");
         this.settings.bind("CPU_loadAverageCorner", "CPU_loadAverageCorner");
         this.settings.bind("CPU_loadAverageFontFactor", "CPU_loadAverageFontFactor");
+        this.settings.bind("CPU_alertWhenStuckProcess", "CPU_alertWhenStuckProcess");
+        this.settings.bind("CPU_stuckMethod", "CPU_stuckMethod");
+        this.settings.bind("CPU_minLoadStuckProcess", "CPU_minLoadStuckProcess");
+        this.settings.bind("CPU_durationStuckProcess", "CPU_durationStuckProcess");
+        this.settings.bind("CPU_bgColorStuckProcess", "CPU_bgColorStuckProcess");
 
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
         this.settings.bind("CPU_mergeAll", "CPU_mergeAll", (value) => {
@@ -420,6 +427,9 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Battery_colorUnload", "Battery_colorUnload");
         this.settings.bind("Battery_colorAlert", "Battery_colorAlert");
         this.settings.bind("Battery_devicesList", "Battery_devicesList");
+        this.settings.bind("SysMonWhichOne", "SysMonWhichOne");
+        this.settings.bind("SysMonPath", "SysMonPath");
+        this.settings.bind("SysMonMouseButton", "SysMonMouseButton");
 
         for (let i=0; i<nb_colors; i++)
             this.settings.bind(`color${i}`, `color${i}`, () => { this.on_color_changed() });
@@ -1200,24 +1210,49 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
     }
 
     _runSysMon() {
-        let systemMonitoringCenter = appSystem.lookup_flatpak_app_id("io.github.hakandundar34coding.system-monitoring-center");
-        if (systemMonitoringCenter) {
-            systemMonitoringCenter.activate();
-            return
-        }
-        systemMonitoringCenter = appSystem.lookup_app("io.github.hakandundar34coding.system-monitoring-center.desktop");
-        if (systemMonitoringCenter) {
-            systemMonitoringCenter.activate();
-            return
-        }
-        let gnomeSystemMonitor = appSystem.lookup_app("gnome-system-monitor.desktop");
-        if (gnomeSystemMonitor) {
-            gnomeSystemMonitor.activate();
-            return
-        }
-        gnomeSystemMonitor = appSystem.lookup_app("org.gnome.SystemMonitor.desktop");
-        if (gnomeSystemMonitor) {
-            gnomeSystemMonitor.activate();
+        let systemMonitoringCenter, gnomeSystemMonitor, customSystemMonitor;
+        if (this.SysMonWhichOne === "sysdefault") {
+            systemMonitoringCenter = appSystem.lookup_flatpak_app_id("io.github.hakandundar34coding.system-monitoring-center");
+            if (systemMonitoringCenter) {
+                systemMonitoringCenter.activate();
+                return
+            }
+            systemMonitoringCenter = appSystem.lookup_app("io.github.hakandundar34coding.system-monitoring-center.desktop");
+            if (systemMonitoringCenter) {
+                systemMonitoringCenter.activate();
+                return
+            }
+            gnomeSystemMonitor = appSystem.lookup_app("gnome-system-monitor.desktop");
+            if (gnomeSystemMonitor) {
+                gnomeSystemMonitor.activate();
+                return
+            }
+            gnomeSystemMonitor = appSystem.lookup_app("org.gnome.SystemMonitor.desktop");
+            if (gnomeSystemMonitor) {
+                gnomeSystemMonitor.activate();
+                return
+            }
+        } else if (this.SysMonWhichOne === "gnome") {
+            gnomeSystemMonitor = appSystem.lookup_app("gnome-system-monitor.desktop");
+            if (gnomeSystemMonitor) {
+                gnomeSystemMonitor.activate();
+                return
+            }
+            gnomeSystemMonitor = appSystem.lookup_app("org.gnome.SystemMonitor.desktop");
+            if (gnomeSystemMonitor) {
+                gnomeSystemMonitor.activate();
+                return
+            }
+        } else if (this.SysMonWhichOne === "customized" && this.SysMonPath.length != 0) {
+            customSystemMonitor = appSystem.lookup_app(this.SysMonPath);
+            if (customSystemMonitor) {
+                customSystemMonitor.activate();
+                return
+            }
+            customSystemMonitor = appSystem.lookup_flatpak_app_id(this.SysMonPath);
+            if (customSystemMonitor) {
+                customSystemMonitor.activate();
+            }
         }
     }
 
@@ -1315,6 +1350,35 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         }).catch(() => this.zramProvider.setData(null));
     }
 
+    cpu_check_stuck_processes(values) {
+        let _now = Date.now();
+        if (this.oldCPU_Total_Values.length === 0) {
+            this.CPU_stuckFromDate = [];
+            this.oldCPU_Stuck_Total_Values = [];
+            this.oldCPU_Stuck_Idle_Values = [];
+            for (let i=0; i<values.length; i++) {
+                this.CPU_stuckFromDate.push(_now);
+                this.oldCPU_Stuck_Total_Values.push(0);
+                this.oldCPU_Stuck_Idle_Values.push(0);
+            }
+        } else {
+            let i = 0;
+            for (let v of values) {
+                let [totalValue, idleValue] = v.split(",");
+                totalValue = 1 * totalValue;
+                idleValue = 1 * idleValue;
+                let total = totalValue - this.oldCPU_Total_Values[i];
+                let idle = idleValue - this.oldCPU_Idle_Values[i];
+                this.oldCPU_Stuck_Total_Values[i] = totalValue;
+                this.oldCPU_Stuck_Idle_Values[i] = idleValue;
+
+                if ( total != 0 && ( (100 * (total - idle) / total) < this.CPU_minLoadStuckProcess ) )
+                    this.CPU_stuckFromDate[i] = _now;
+                i++;
+            }
+        }
+    }
+
     get_cpu_info() {
         if (!this.isRunning) return;
         if (!this.CPU_enabled && !this.CPU_enabledTooltip) return;
@@ -1351,14 +1415,18 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
                     let NonIdle = 1 * user + 1 * nice + 1 * system + 1 * irq + 1 * softirq + 1 * steal;
                     let Total = Idle + NonIdle;
                     ret = ret + ` ${Total},${Idle}`;
+                } else if (line.startsWith("procs_blocked")) {
+                    this.procs_blocked = 1 * line.split(" ")[1];
                 } else {
-                    break
+                    continue
                 }
             }
             let cpuString = ret.trim();
             let values = cpuString.split(" ");
+            this.cpu_check_stuck_processes(values);
+
             if (this.oldCPU_Total_Values.length === 0) { // first execution
-                if (this.CPU_mergeAll) {
+                if (this.CPU_mergeAll) { // Merge all CPUs
                     if (this.CPU_showLoadOverTime) {
                         for (let i=0; i<this.CPU_showLoadOverTimeHowManyBars; i++) {
                             data.push(0);
@@ -1375,7 +1443,7 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
                             this.oldCPU_Idle_Values.push(1 * idle);
                         }
                     }
-                } else {
+                } else { // Don't merge all CPUs
                     for (let i=0, len=values.length; i<len; i++) {
                         data.push(0);
                         let [total, idle] = values[i].split(",");
@@ -1386,7 +1454,7 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
                     }
                 }
             } else { // next executions
-                if (this.CPU_mergeAll) {
+                if (this.CPU_mergeAll) { // Merge all CPUs
                     if (this.CPU_showLoadOverTime) {
                         data = this.multiCpuProvider.getData();
                         let [totalValue, idleValue] = values[0].split(",");
@@ -1425,7 +1493,7 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
                             this.oldCPU_Idle_Values[i] = 1 * idleValue;
                         }
                     }
-                } else {
+                } else { // Do not merge all CPUs:
                     let i = 0;
                     for (let v of values) {
                         let [totalValue, idleValue] = v.split(",");
@@ -1762,19 +1830,36 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
             return;
         }
         var appletTooltipString = "";
-        for (let provider of [
-            "multiCpuProvider",
-            "memoryProvider",
-            "swapProvider",
-            "zramProvider",
-            "buffcachesharedProvider",
-            "networkProvider",
-            "diskProvider",
-            "diskUsageProvider",
-            "batteryProvider"
-        ]) {
+        var providers = [];
+        for (let o of this.displayOrder) {
+            let id = o["id"];
+            switch (id) {
+                case _("CPU"):
+                    providers = providers.concat(["multiCpuProvider"]);
+                    break;
+                case _("MEM"):
+                    providers = providers.concat([  "memoryProvider",
+                                                    "swapProvider",
+                                                    "zramProvider",
+                                                    "buffcachesharedProvider"]);
+                    break;
+                case _("NET"):
+                    providers = providers.concat(["networkProvider"]);
+                    break;
+                case _("DISK"):
+                    providers = providers.concat(["diskProvider"]);
+                    break;
+                case _("DISK USAGE"):
+                    providers = providers.concat(["diskUsageProvider"]);
+                    break;
+                case _("BATTERY"):
+                    providers = providers.concat(["batteryProvider"]);
+            }
+        }
+        for (let provider of providers) {
             appletTooltipString += this[provider].getTooltipString();
         }
+
         if (this.hovered)
             this.set_applet_tooltip(appletTooltipString.trimEnd(), true);
     }
@@ -1820,11 +1905,13 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
     }
 
     on_applet_clicked(event) {
-        this._runSysMon();
+        if (this.SysMonMouseButton === "left" || this.SysMonMouseButton === "both")
+            this._runSysMon();
     }
 
     on_applet_middle_clicked(event) {
-        this.configureApplet(0);
+        if (this.SysMonMouseButton === "middle" || this.SysMonMouseButton === "both")
+            this._runSysMon();
     }
 
     _onButtonPressEvent (actor, event) {
