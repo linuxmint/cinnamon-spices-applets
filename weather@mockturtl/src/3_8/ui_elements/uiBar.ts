@@ -3,14 +3,14 @@ import type { Config, DistanceUnits } from "../config";
 import { SIGNAL_CLICKED, ELLIPSIS } from "../consts";
 import { Event } from "../lib/events";
 import type { WeatherApplet } from "../main";
-import type { CustomIcons, WeatherData, AlertData, AlertLevel, BuiltinIcons } from "../weather-data";
+import type { CustomIcons, WeatherData, AlertData, AlertLevel } from "../weather-data";
 import type { WeatherProvider } from "../types";
-import { _, AwareDateString, GetAlertColor, MetreToUserUnits } from "../utils";
+import { _, AwareDateString, GetAlertColor, Label, MetreToUserUnits } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { DateTime } from "luxon";
 import { Logger } from "../lib/services/logger";
 
-const { BoxLayout, IconType, Bin, Icon, Align, Button, Side } = imports.gi.St;
+const { BoxLayout, IconType, Bin, Icon, Align, Button, Side, Widget } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
 
 const STYLE_BAR = 'bottombar'
@@ -36,13 +36,17 @@ export class UIBar {
 	private warningButtonIcon: imports.gi.St.Icon | null = null;
 	private warningButton: WeatherButton | null = null;
 	private warningButtonTooltip: imports.ui.tooltips.Tooltip<imports.gi.St.Button> | null = null;
-	private refreshIcon: imports.gi.St.Icon | null = null;
+	private refreshSuccess: imports.gi.St.Label | null = null;
+	private refreshProgress: imports.gi.St.Label | null = null;
+	private refreshError: imports.gi.St.Label | null = null;
+	private refreshStatus: "progress" | "success" | "error" = "progress";
 
 	private app: WeatherApplet;
 
 	constructor(app: WeatherApplet) {
 		this.app = app;
 		this.actor = new BoxLayout({ vertical: false, style_class: STYLE_BAR });
+		(this.actor.get_layout_manager() as imports.gi.Clutter.BoxLayout).set_homogeneous(true);
 	}
 
 	public SwitchButtonToShow(): void {
@@ -180,26 +184,45 @@ export class UIBar {
 
 		this.providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
 		this.providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(this.providerCreditButton!));
-		this.refreshIcon = new Icon({
-			icon_name: "refresh-symbolic" as BuiltinIcons,
-			icon_type: IconType.SYMBOLIC,
-			icon_size: 24,
-		});
-		this.refreshIcon.hide();
 
-		this.actor.add(this.providerCreditButton.actor, {
+		const statusStyle = `font-size: ${config.CurrentFontSize + 6}px;`;
+
+		this.refreshSuccess = Label({
+			text: "✓",
+			style: statusStyle
+		});
+		this.refreshProgress = Label({
+			text: "⟳",
+			style: statusStyle
+		});
+		this.refreshError = Label({
+			text: "✕",
+			style: statusStyle
+		});
+		this.refreshError.translation_y = 1;
+
+		// Keep all states in the layout so its preferred width never
+		// changes when the refresh state changes.
+		this.ApplyRefreshStatus();
+
+		const statusSlot = new Widget({
+			layout_manager: new imports.gi.Clutter.BinLayout()
+		});
+		statusSlot.add_child(this.refreshSuccess);
+		statusSlot.add_child(this.refreshProgress);
+		statusSlot.add_child(this.refreshError);
+
+		const rightBox = new BoxLayout({ vertical: false, y_align: Align.MIDDLE });
+		rightBox.add_actor(this.providerCreditButton.actor);
+		rightBox.add_actor(statusSlot);
+
+		this.actor.add(rightBox, {
 			x_fill: false,
 			x_align: Align.END,
 			y_align: Align.MIDDLE,
 			y_fill: false,
 			expand: true
 		});
-		this.actor.add(this.refreshIcon, {
-			x_fill: false,
-			x_align: Align.END,
-			y_align: Align.MIDDLE,
-			y_fill: false,
-		})
 	}
 
 	/**
@@ -212,12 +235,23 @@ export class UIBar {
 		return _("km");
 	}
 
-	public ShowRefreshIcon(): void {
-		this.refreshIcon?.show();
+	public ShowRefreshProgress(): void {
+		this.refreshStatus = "progress";
+		this.ApplyRefreshStatus();
 	}
 
-	public HideRefreshIcon(): void {
-		this.refreshIcon?.hide();
+	public ShowRefreshResult(success: boolean): void {
+		this.refreshStatus = success ? "success" : "error";
+		this.ApplyRefreshStatus();
+	}
+
+	private ApplyRefreshStatus(): void {
+		if (this.refreshSuccess == null || this.refreshProgress == null || this.refreshError == null)
+			return;
+
+		this.refreshSuccess.opacity = this.refreshStatus == "success" ? 255 : 0;
+		this.refreshProgress.opacity = this.refreshStatus == "progress" ? 255 : 0;
+		this.refreshError.opacity = this.refreshStatus == "error" ? 255 : 0;
 	}
 
 	private HideHourlyToggle() {
