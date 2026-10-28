@@ -1,0 +1,47 @@
+# Translation template for the Darker applet (darker@chris-lep).
+# Copyright (C) 2026 chris-lep
+# This file is distributed under the same license as the darker@chris-lep package.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: darker@chris-lep\n"
+"Report-Msgid-Bugs-To: https://github.com/chris-lep/darker/issues\n"
+"POT-Creation-Date: 2026-10-28 22:17+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Translators: panel label, %d is the screen brightness in percent ("60%")
+#: lib/darkness.js:103
+#, javascript-format
+msgid "%d%%"
+msgstr ""
+
+#: lib/darkness.js:114
+msgid "Darker: off"
+msgstr ""
+
+#. Translators: tooltip, %d is the screen brightness in percent
+#: lib/darkness.js:116
+#, javascript-format
+msgid "Darker: %d%% brightness"
+msgstr ""
+
+#. Translators: menu item that turns darkening off, %d is 100 (full brightness)
+#: lib/darkness.js:126
+#, javascript-format
+msgid "Reset to %d%%"
+msgstr ""
+
+#. metadata.json->name
+msgid "Darker"
+msgstr ""
+
+#. metadata.json->description
+msgid "Darken the screen beyond the minimum backlight brightness with a slider (software overlay, works with Night Light)."
+msgstr ""
