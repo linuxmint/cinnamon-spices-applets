@@ -1,3 +1,6 @@
+### v5.3.2~20261028
+  * Use the first one available among xenity, zenity, or yad.
+
 ### v5.3.1~20260528
   * Ready for Linux Mint 23 with some improvements.
 

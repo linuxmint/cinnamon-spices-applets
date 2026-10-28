@@ -1,3 +1,9 @@
+### v5.11.7~20261028
+  * Use the first one available among xenity, zenity, or yad.
+
+### v5.11.6~20261027
+  * Add xenity as dependency.
+
 ### v5.11.5~20260825
   * Add Nvidia D3cold support.
 
