@@ -1,0 +1,488 @@
+# German translation for clockoo@FranzBias
+# FranzBias, 2026
+msgid ""
+msgstr ""
+"Project-Id-Version: clockoo@FranzBias 0.7.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-10-27 21:08+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: FranzBias\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:247
+msgid "Install missing packages…"
+msgstr "Fehlende Pakete installieren…"
+
+#. settings-schema.json->section-cuckoo->title
+#. settings-schema.json->cuckoo-enabled->description
+#. applet.js:256
+msgid "Hourly cuckoo"
+msgstr "Stündlicher Kuckuck"
+
+#. applet.js:264
+msgid "Start a timer"
+msgstr "Timer starten"
+
+#. applet.js:266 applet.js:350
+#, javascript-format
+msgid "%d min"
+msgstr "%d Min."
+
+#. applet.js:282
+msgid "Start pomodoro"
+msgstr "Pomodoro starten"
+
+#. applet.js:293
+msgid "Lap"
+msgstr "Runde"
+
+#. applet.js:295
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#. applet.js:312
+msgid "Settings"
+msgstr "Einstellungen"
+
+#. applet.js:321
+#, javascript-format
+msgid "Next alarm: %s"
+msgstr "Nächster Wecker: %s"
+
+#. applet.js:326
+msgid "No alarm set"
+msgstr "Kein Wecker aktiv"
+
+#. applet.js:332
+#, javascript-format
+msgid "Missing packages: %s"
+msgstr "Fehlende Pakete: %s"
+
+#. applet.js:334
+msgid "The Clockoo app runs its own cuckoo too: you will hear it twice."
+msgstr ""
+"Die Clockoo-App hat ihren eigenen Kuckuck ebenfalls aktiv: Du hörst ihn "
+"doppelt."
+
+#. applet.js:348
+msgid "Today"
+msgstr "Heute"
+
+#. applet.js:349
+msgid "This week"
+msgstr "Diese Woche"
+
+#. applet.js:351
+msgid "custom"
+msgstr "eigene Dauer"
+
+#. applet.js:360
+msgid "today"
+msgstr "heute"
+
+#. applet.js:362
+msgid "tomorrow"
+msgstr "morgen"
+
+#. settings-schema.json->page-timer->title
+#. applet.js:402 clockoo_ring.py:190
+msgid "Timer"
+msgstr "Timer"
+
+#. applet.js:407
+msgid "Resume"
+msgstr "Fortsetzen"
+
+#. applet.js:407 applet.js:519
+msgid "Pause"
+msgstr "Pause"
+
+#. applet.js:412
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. applet.js:517
+msgid "Stopwatch"
+msgstr "Stoppuhr"
+
+#. applet.js:520
+msgid "Start"
+msgstr "Starten"
+
+#. applet.js:572 applet.js:580
+msgid "Could not start the timer"
+msgstr "Timer konnte nicht gestartet werden"
+
+#. applet.js:727
+msgid "systemd reported a problem"
+msgstr "systemd hat ein Problem gemeldet"
+
+#. applet.js:799
+#, javascript-format
+msgid "Please install with your package manager: %s"
+msgstr "Bitte mit der Paketverwaltung installieren: %s"
+
+#. settings-schema.json->pomodoro-work->description
+#. clockoo_core.py:555
+msgid "Work"
+msgstr "Arbeit"
+
+#. settings-schema.json->pomodoro-long->description
+#. clockoo_core.py:556
+msgid "Long break"
+msgstr "Lange Pause"
+
+#. settings-schema.json->pomodoro-short->description
+#. clockoo_core.py:556
+msgid "Break"
+msgstr "Pause"
+
+#. clockoo_ring.py:139 clockoo_ring.py:152
+msgid "Alarm"
+msgstr "Wecker"
+
+#. clockoo_ring.py:151
+#, python-format
+msgid "In %d min"
+msgstr "In %d Min."
+
+#. clockoo_ring.py:153
+#, python-format
+msgid "Alarm at %s"
+msgstr "Wecker um %s"
+
+#. clockoo_ring.py:178
+msgid "Timer finished"
+msgstr "Timer abgelaufen"
+
+#. clockoo_ring.py:204
+#, python-format
+msgid "Now: %s, %s"
+msgstr "Jetzt: %s, %s"
+
+#. clockoo_ring.py:207
+msgid "Pomodoro finished"
+msgstr "Pomodoro beendet"
+
+#. clockoo_ring.py:216
+msgid "Stop pomodoro"
+msgstr "Pomodoro beenden"
+
+#. clockoo_ring.py:257
+#, python-format
+msgid "Snoozed until %s"
+msgstr "Geschlummert bis %s"
+
+#. clockoo_ring.py:264
+msgid "Stop"
+msgstr "Stopp"
+
+#. clockoo_ring.py:266
+#, python-format
+msgid "Snooze %d min"
+msgstr "Schlummern %d Min."
+
+#. metadata.json->name
+msgid "Clockoo"
+msgstr "Clockoo"
+
+#. metadata.json->description
+msgid ""
+"Hourly cuckoo, named alarms read aloud and countdown timers that keep "
+"ringing even if Cinnamon restarts"
+msgstr ""
+"Stündlicher Kuckuck, benannte Wecker mit Vorlesefunktion und Timer, die auch"
+" nach einem Neustart von Cinnamon klingeln"
+
+#. settings-schema.json->page-cuckoo->title
+msgid "Cuckoo"
+msgstr "Kuckuck"
+
+#. settings-schema.json->page-alarms->title
+#. settings-schema.json->section-alarms->title
+#. settings-schema.json->alarms->description
+msgid "Alarms"
+msgstr "Wecker"
+
+#. settings-schema.json->page-general->title
+msgid "General"
+msgstr "Allgemein"
+
+#. settings-schema.json->section-timer->title
+msgid "Countdown timer"
+msgstr "Countdown-Timer"
+
+#. settings-schema.json->section-saved-timers->title
+#. settings-schema.json->saved-timers->description
+msgid "Saved timers"
+msgstr "Gespeicherte Timer"
+
+#. settings-schema.json->section-pomodoro->title
+msgid "Pomodoro"
+msgstr "Pomodoro"
+
+#. settings-schema.json->section-voice->title
+msgid "Voice and snooze"
+msgstr "Stimme und Schlummern"
+
+#. settings-schema.json->section-panel->title
+msgid "Panel"
+msgstr "Leiste"
+
+#. settings-schema.json->cuckoo-hours->description
+msgid "Hours"
+msgstr "Stunden"
+
+#. settings-schema.json->cuckoo-hours->tooltip
+msgid "Hours when the cuckoo calls, e.g. 7-21, or 8,12,18, or 0-23"
+msgstr "Stunden, in denen der Kuckuck ruft, z. B. 7-21 oder 8,12,18 oder 0-23"
+
+#. settings-schema.json->cuckoo-minute->units
+msgid "minutes past the hour"
+msgstr "Minuten nach der vollen Stunde"
+
+#. settings-schema.json->cuckoo-minute->description
+msgid "Minute"
+msgstr "Minute"
+
+#. settings-schema.json->cuckoo-sound->description
+#. settings-schema.json->alarms->columns->title
+#. settings-schema.json->timer-sound->description
+msgid "Sound"
+msgstr "Klang"
+
+#. settings-schema.json->cuckoo-sound->tooltip
+msgid "Leave empty for the bundled cuckoo"
+msgstr "Leer lassen für den mitgelieferten Kuckuck"
+
+#. settings-schema.json->cuckoo-count-hours->description
+msgid "Call as many times as the hour"
+msgstr "So oft rufen, wie es Uhr ist"
+
+#. settings-schema.json->cuckoo-count-hours->tooltip
+msgid "Like a real cuckoo clock: 3 calls at 3 o'clock, 12 at noon"
+msgstr "Wie eine echte Kuckucksuhr: 3 Rufe um 3 Uhr, 12 am Mittag"
+
+#. settings-schema.json->cuckoo-quiet->description
+msgid "Quiet night"
+msgstr "Ruhige Nacht"
+
+#. settings-schema.json->cuckoo-quiet->tooltip
+msgid "No cuckoo between these two hours, whatever the hours above say"
+msgstr ""
+"Kein Kuckuck zwischen diesen beiden Stunden, egal was oben eingestellt ist"
+
+#. settings-schema.json->cuckoo-quiet-from->units
+#. settings-schema.json->cuckoo-quiet-to->units
+msgid "h"
+msgstr "h"
+
+#. settings-schema.json->cuckoo-quiet-from->description
+msgid "Quiet from"
+msgstr "Ruhe ab"
+
+#. settings-schema.json->cuckoo-quiet-to->description
+msgid "Quiet until"
+msgstr "Ruhe bis"
+
+#. settings-schema.json->alarms-help->description
+msgid ""
+"Time as HH:MM. An alarm set to \"Once\" switches itself off after ringing. "
+"The text is spoken in the chosen language. Crescendo: the volume grows from "
+"soft to full. Warn before: a heads-up that many minutes earlier."
+msgstr ""
+"Uhrzeit als HH:MM. Ein Wecker auf „Einmal“ schaltet sich nach dem Klingeln "
+"selbst aus. Der Text wird in der gewählten Sprache gesprochen. Crescendo: "
+"die Lautstärke steigt von leise bis voll. Vorher erinnern: ein Hinweis so "
+"viele Minuten früher."
+
+#. settings-schema.json->alarms->columns->title
+msgid "On"
+msgstr "An"
+
+#. settings-schema.json->alarms->columns->title
+#. settings-schema.json->saved-timers->columns->title
+msgid "Name"
+msgstr "Name"
+
+#. settings-schema.json->alarms->columns->title
+msgid "Time"
+msgstr "Uhrzeit"
+
+#. settings-schema.json->alarms->columns->title
+msgid "Days"
+msgstr "Tage"
+
+#. settings-schema.json->alarms->columns->title
+#. settings-schema.json->saved-timers->columns->title
+msgid "Text to read"
+msgstr "Vorzulesender Text"
+
+#. settings-schema.json->alarms->columns->title
+#. settings-schema.json->timer-voice->description
+msgid "Voice"
+msgstr "Stimme"
+
+#. settings-schema.json->alarms->columns->title
+#. settings-schema.json->timer-repeat->description
+msgid "Repeat"
+msgstr "Wiederholen"
+
+#. settings-schema.json->alarms->columns->title
+msgid "Crescendo"
+msgstr "Crescendo"
+
+#. settings-schema.json->alarms->columns->title
+msgid "Warn before (min, 0 = off)"
+msgstr "Vorher erinnern (Min., 0 = aus)"
+
+#. settings-schema.json->alarms->columns->title
+msgid "Snooze (min, 0 = general)"
+msgstr "Schlummern (Min., 0 = allgemein)"
+
+#. settings-schema.json->timer-sound->tooltip
+msgid "Leave empty for the bundled kitchen timer"
+msgstr "Leer lassen für den mitgelieferten Küchenwecker"
+
+#. settings-schema.json->timer-text->description
+msgid "Text to read (optional)"
+msgstr "Vorzulesender Text (optional)"
+
+#. settings-schema.json->timer-voice->options
+msgid "Automatic"
+msgstr "Automatisch"
+
+#. settings-schema.json->timer-voice->options
+msgid "English"
+msgstr "English"
+
+#. settings-schema.json->timer-voice->options
+msgid "Italiano"
+msgstr "Italiano"
+
+#. settings-schema.json->timer-voice->options
+msgid "Deutsch"
+msgstr "Deutsch"
+
+#. settings-schema.json->timer-voice->options
+msgid "Español"
+msgstr "Español"
+
+#. settings-schema.json->timer-voice->options
+msgid "Français"
+msgstr "Français"
+
+#. settings-schema.json->timer-repeat->units
+msgid "times"
+msgstr "mal"
+
+#. settings-schema.json->timer-custom-minutes->units
+#. settings-schema.json->pomodoro-work->units
+#. settings-schema.json->pomodoro-short->units
+#. settings-schema.json->pomodoro-long->units
+#. settings-schema.json->snooze-minutes->units
+msgid "minutes"
+msgstr "Minuten"
+
+#. settings-schema.json->timer-custom-minutes->description
+msgid "Custom timer in the menu"
+msgstr "Eigener Timer im Menü"
+
+#. settings-schema.json->saved-timers-help->description
+msgid ""
+"Your own timers, ready in the menu under \"Start a timer\". Use the arrows "
+"of the list to move them, or sort them with the buttons below."
+msgstr ""
+"Deine eigenen Timer, bereit im Menü unter „Timer starten“. Mit den Pfeilen "
+"der Liste verschieben oder mit den Knöpfen unten sortieren."
+
+#. settings-schema.json->saved-timers->columns->title
+msgid "Minutes"
+msgstr "Minuten"
+
+#. settings-schema.json->saved-timers->columns->title
+msgid "Seconds"
+msgstr "Sekunden"
+
+#. settings-schema.json->pomodoro-every->units
+msgid "works"
+msgstr "Arbeitsphasen"
+
+#. settings-schema.json->pomodoro-every->description
+msgid "Long break every"
+msgstr "Lange Pause nach"
+
+#. settings-schema.json->pomodoro-rounds->units
+msgid "(0 = no end)"
+msgstr "(0 = ohne Ende)"
+
+#. settings-schema.json->pomodoro-rounds->description
+msgid "Works in all"
+msgstr "Arbeitsphasen insgesamt"
+
+#. settings-schema.json->sort-by-duration->description
+msgid "Sort by duration"
+msgstr "Nach Dauer sortieren"
+
+#. settings-schema.json->sort-by-name->description
+msgid "Sort by name"
+msgstr "Nach Name sortieren"
+
+#. settings-schema.json->snooze-minutes->description
+msgid "Snooze"
+msgstr "Schlummern"
+
+#. settings-schema.json->piper-dir->description
+msgid "Piper folder (optional)"
+msgstr "Piper-Ordner (optional)"
+
+#. settings-schema.json->piper-dir->tooltip
+msgid ""
+"Only if piper is already installed on this computer: the folder that "
+"contains piper/piper and voices/. Leave empty to use speech-dispatcher (spd-"
+"say)."
+msgstr ""
+"Nur wenn piper auf diesem Rechner bereits installiert ist: der Ordner mit "
+"piper/piper und voices/. Leer lassen, um speech-dispatcher (spd-say) zu "
+"verwenden."
+
+#. settings-schema.json->piper-help->description
+msgid ""
+"Text is spoken with speech-dispatcher. If you already have piper, choose its"
+" folder for more natural voices."
+msgstr ""
+"Der Text wird mit speech-dispatcher gesprochen. Wenn du piper schon hast, "
+"wähle seinen Ordner für natürlichere Stimmen."
+
+#. settings-schema.json->icon-style->description
+msgid "Panel icon"
+msgstr "Symbol in der Leiste"
+
+#. settings-schema.json->icon-style->options
+msgid "Follow the panel colour"
+msgstr "Der Leistenfarbe folgen"
+
+#. settings-schema.json->icon-style->options
+msgid "Wood (light panels)"
+msgstr "Holz (helle Leisten)"
+
+#. settings-schema.json->icon-style->options
+msgid "Brass (dark panels)"
+msgstr "Messing (dunkle Leisten)"
+
+#. settings-schema.json->icon-style->options
+msgid "Symbolic"
+msgstr "Symbolisch"
+
+#. settings-schema.json->show-stopwatch->description
+msgid "Show the running stopwatch in the panel"
+msgstr "Laufende Stoppuhr in der Leiste anzeigen"
+
+#. settings-schema.json->show-countdown->description
+msgid "Show the running timer in the panel"
+msgstr "Laufenden Timer in der Leiste anzeigen"

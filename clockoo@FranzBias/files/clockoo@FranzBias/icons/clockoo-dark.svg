@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Clockoo icon: brass mantel clock with scrolled feet, original design by Franz & Aldus, MIT -->
+  <defs>
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe9a3"/><stop offset="0.55" stop-color="#e0a93a"/><stop offset="1" stop-color="#9c6a14"/>
+    </linearGradient>
+  </defs>
+  <!-- feet -->
+  <path d="M14 54 Q10 60 6 59 M50 54 Q54 60 58 59" stroke="#5c3d08" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- body: wide arched case -->
+  <path d="M8 54 V36 Q8 12 32 10 Q56 12 56 36 V54 Z" fill="url(#brass)" stroke="#5c3d08" stroke-width="2.6" stroke-linejoin="round"/>
+  <rect x="8" y="50" width="48" height="5" fill="#b8841f" stroke="#5c3d08" stroke-width="2"/>
+  <!-- top ornament -->
+  <path d="M27 10.5 Q32 2 37 10.5 Z" fill="url(#brass)" stroke="#5c3d08" stroke-width="1.8" stroke-linejoin="round"/>
+  <!-- face -->
+  <circle cx="32" cy="32" r="15" fill="#fffaf0" stroke="#5c3d08" stroke-width="2.2"/>
+  <g stroke="#3a3a3a" stroke-width="2" stroke-linecap="round">
+    <path d="M32 19.5 V22.3 M32 41.7 V44.5 M19.5 32 H22.3 M41.7 32 H44.5"/>
+  </g>
+  <path d="M32 32 L25.8 27.5 M32 32 L39.3 25.8" stroke="#222" stroke-width="2.7" stroke-linecap="round"/>
+  <circle cx="32" cy="32" r="2.1" fill="#c8161d" stroke="#222" stroke-width="1"/>
+</svg>
