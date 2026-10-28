@@ -395,6 +395,9 @@ class ApplicationContextMenuItem extends PopupMenu.PopupBaseMenuItem {
             case "uninstall":
                 Util.spawnCommandLine("/usr/bin/cinnamon-remove-application '" + this._appButton.app.get_app_info().get_filename() + "'");
                 break;
+            case "app_properties":
+                Util.spawn(["cinnamon-desktop-editor", "-mlauncher", "-o" + this._appButton.app.get_app_info().get_filename()]);
+                break;
             case "run_with_nvidia_gpu":
                 Util.spawnCommandLine("optirun gtk-launch " + this._appButton.app.get_id());
                 break;
@@ -471,6 +474,12 @@ class GenericApplicationButton extends SimpleMenuItem {
             menu.addMenuItem(menuItem);
         } else {
             menuItem = new ApplicationContextMenuItem(this, _("Add to favorites"), "add_to_favorites", "non-starred");
+            menu.addMenuItem(menuItem);
+        }
+
+        let appInfo = this.app.get_app_info ? this.app.get_app_info() : null;
+        if (appInfo && appInfo.get_filename()) {
+            menuItem = new ApplicationContextMenuItem(this, _("Properties"), "app_properties", "document-properties");
             menu.addMenuItem(menuItem);
         }
 
