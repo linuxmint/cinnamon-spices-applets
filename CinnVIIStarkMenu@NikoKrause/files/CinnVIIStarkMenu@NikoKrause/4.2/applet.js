@@ -47,7 +47,6 @@ const REMEMBER_RECENT_KEY = "remember-recent-files";
 const AppUtils = require('./appUtils');
 
 let appsys = Cinnamon.AppSystem.get_default();
-let visiblePane = "favs";
 const RefreshFlags = Object.freeze({
     APP:    0b00001,
     FAV:    0b00010,
@@ -1878,6 +1877,9 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     constructor(orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
+        // Kept per instance - each menu (e.g. one per panel) has its own panes.
+        this.visiblePane = "favs";
+
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.set_applet_tooltip(_("Menu"));
@@ -2354,7 +2356,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             this.lastSelectedCategory = null;
 
             if(this.menuLayout == "stark-menu" || this.quicklinksupdated) {
-                if (visiblePane == "apps")
+                if (this.visiblePane == "apps")
                     this.switchPanes("favs");
                 this.quicklinksupdated = false;
             }
@@ -2475,7 +2477,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             this.rightButtonsBox.shutdown.label.set_text("");
             this.rightButtonsBox.shutdown2.label.set_text("");
         }
-        if (visiblePane == "apps") {
+        if (this.visiblePane == "apps") {
             if (this.favoritesLabel != "")
                 this.appsButton.label.set_text(_(this.favoritesLabel));
             else
@@ -2703,7 +2705,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                 case null:
                     switch (whichWay) {
                         case "up":
-                            if(visiblePane == "favs") {
+                            if(this.visiblePane == "favs") {
                                 this._activeContainer = this.favoritesBox;
                                 item_actor = this.favBoxIter.getLastVisible();
                             } else {
@@ -2713,7 +2715,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                             }
                             break;
                         case "down":
-                            if(visiblePane == "favs") {
+                            if(this.visiblePane == "favs") {
                                 this._activeContainer = this.favoritesBox;
                                 item_actor = this.favBoxIter.getFirstVisible();
                             } else {
@@ -2724,7 +2726,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                             }
                             break;
                         case "right":
-                            if(visiblePane == "favs") {
+                            if(this.visiblePane == "favs") {
                                 this._activeContainer = this.categoriesBox;
                                 item_actor = this.catBoxIter.getFirstVisible();
                                 this.switchPanes("apps");
@@ -2737,11 +2739,11 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                         case "left":
                             this._activeContainer = this.favoritesBox;
                             item_actor = this.favBoxIter.getFirstVisible();
-                            if(visiblePane == "apps")
+                            if(this.visiblePane == "apps")
                                 this.switchPanes("favs");
                             break;
                         case "top":
-                            if(visiblePane == "favs") {
+                            if(this.visiblePane == "favs") {
                                 this._activeContainer = this.favoritesBox;
                                 item_actor = this.favBoxIter.getFirstVisible();
                             } else {
@@ -2751,7 +2753,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                             }
                             break;
                         case "bottom":
-                            if(visiblePane == "favs") {
+                            if(this.visiblePane == "favs") {
                                 this._activeContainer = this.favoritesBox;
                                 item_actor = this.favBoxIter.getLastVisible();
                             } else {
@@ -3543,7 +3545,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                 this._appsBoxWidthResized = true;
             }
             this._resizeAppsBoxHeight();
-            visiblePane = "apps";
+            this.visiblePane = "apps";
             if (this._previousTreeSelectedActor == null)
                 this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
         } else {
@@ -3558,7 +3560,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                 this.rightButtonsBox.actor.show();
             }
             this._resizeAppsBoxHeight();
-            visiblePane = "favs";
+            this.visiblePane = "favs";
             if (this._previousTreeSelectedActor == null)
                 this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
         }
