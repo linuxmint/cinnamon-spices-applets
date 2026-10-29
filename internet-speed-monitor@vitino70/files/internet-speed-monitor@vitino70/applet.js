@@ -13,10 +13,11 @@ const Util = imports.misc.util;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Clutter = imports.gi.Clutter;
+const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
 
 const UUID = 'internet-speed-monitor@vitino70';
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + '/locale');
 
 function _(str) {
     let t = Gettext.dgettext(UUID, str);
@@ -29,24 +30,35 @@ const SYS = '/sys/class/net/';
 
 const decoder = new TextDecoder();
 
+// Reads a whole file asynchronously; resolves to its text, or null if it can't be read
 function readFile(path) {
-    try {
-        let [ok, data] = GLib.file_get_contents(path);
-        return ok ? decoder.decode(data) : null;
-    } catch (e) {
-        return null;
-    }
+    return new Promise(resolve => {
+        Gio.File.new_for_path(path).load_contents_async(null, (file, res) => {
+            try {
+                let [ok, data] = file.load_contents_finish(res);
+                resolve(ok ? decoder.decode(data) : null);
+            } catch (e) {
+                resolve(null);
+            }
+        });
+    });
 }
 
-function exists(path) {
-    return GLib.file_test(path, GLib.FileTest.EXISTS);
+// Parses KEY=VALUE lines (sysfs uevent files)
+function parseUevent(txt) {
+    let out = {};
+    for (let line of (txt || '').split('\n')) {
+        let i = line.indexOf('=');
+        if (i > 0) out[line.slice(0, i)] = line.slice(i + 1);
+    }
+    return out;
 }
 
 // --- Kernel data -----------------------------------------------------------
 
-function readNetDev() {
+async function readNetDev() {
     let out = {};
-    let txt = readFile('/proc/net/dev');
+    let txt = await readFile('/proc/net/dev');
     if (!txt) return out;
     for (let line of txt.split('\n').slice(2)) {
         let i = line.indexOf(':');
@@ -59,9 +71,9 @@ function readNetDev() {
 }
 
 // Interfaces holding a default route (IPv4 or IPv6), i.e. going to the Internet
-function defaultRouteIfaces() {
+async function defaultRouteIfaces() {
     let set = new Set();
-    let v4 = readFile('/proc/net/route');
+    let [v4, v6] = await Promise.all([readFile('/proc/net/route'), readFile('/proc/net/ipv6_route')]);
     if (v4) {
         for (let line of v4.split('\n').slice(1)) {
             let f = line.trim().split(/\s+/);
@@ -71,7 +83,6 @@ function defaultRouteIfaces() {
                 set.add(f[0]);
         }
     }
-    let v6 = readFile('/proc/net/ipv6_route');
     if (v6) {
         for (let line of v6.split('\n')) {
             let f = line.trim().split(/\s+/);
@@ -85,37 +96,33 @@ function defaultRouteIfaces() {
     return set;
 }
 
-function isPhysical(name) {
-    return exists(SYS + name + '/device');
-}
-
-function isUp(name) {
-    let s = readFile(SYS + name + '/operstate');
+async function isUp(name) {
+    let s = await readFile(SYS + name + '/operstate');
     s = s ? s.trim() : '';
     return s === 'up' || s === 'unknown';
 }
 
-function ifaceKind(name) {
-    if (exists(SYS + name + '/wireless') || exists(SYS + name + '/phy80211'))
-        return 'wifi';
-    if (/^(ppp|wwan|wwp)/.test(name))
-        return 'mobile';
-    if (/^(tun|tap|wg|vpn|tailscale|zt)/.test(name))
-        return 'vpn';
-    if (isPhysical(name)) {
-        let driver = '';
-        try {
-            driver = GLib.path_get_basename(GLib.file_read_link(SYS + name + '/device/driver'));
-        } catch (e) { }
-        if (/^(qmi_wwan|cdc_mbim)$/.test(driver)) return 'mobile';
-        if (/^(rndis_host|cdc_ether|cdc_ncm|ipheth|r8152_usb_tether)$/.test(driver)) return 'usb';
-        try {
-            let real = GLib.file_read_link(SYS + name);
-            if (real.indexOf('/usb') >= 0 && /^(usb|enx)/.test(name)) return 'usb';
-        } catch (e) { }
-        return 'ethernet';
-    }
-    return 'other';
+// Returns { physical, kind } for an interface, from its sysfs uevent files
+async function probeIface(name) {
+    let [netTxt, devTxt] = await Promise.all([
+        readFile(SYS + name + '/uevent'),
+        readFile(SYS + name + '/device/uevent')
+    ]);
+    let net = parseUevent(netTxt), dev = parseUevent(devTxt);
+    let physical = devTxt !== null;
+    let driver = dev.DRIVER || '';
+    let kind;
+    if (net.DEVTYPE === 'wlan')
+        kind = 'wifi';
+    else if (net.DEVTYPE === 'wwan' || /^(ppp|wwan|wwp)/.test(name) || /^(qmi_wwan|cdc_mbim)$/.test(driver))
+        kind = 'mobile';
+    else if (/^(tun|tap|wg|vpn|tailscale|zt)/.test(name) || net.DEVTYPE === 'wireguard')
+        kind = 'vpn';
+    else if (/^(rndis_host|cdc_ether|cdc_ncm|ipheth)$/.test(driver) || (dev.DEVTYPE === 'usb_interface' && /^(usb|enx)/.test(name)))
+        kind = 'usb';
+    else
+        kind = physical ? 'ethernet' : 'other';
+    return { physical, kind };
 }
 
 const KIND_INFO = {
@@ -196,6 +203,7 @@ class InternetSpeedMonitor extends Applet.Applet {
         this._peakDown = 0;
         this._peakUp = 0;
         this._ips = {};
+        this._probes = {};       // cached probeIface() results
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         let rebuild = () => this._buildPanel();
@@ -369,30 +377,49 @@ class InternetSpeedMonitor extends Applet.Applet {
         this._tick();
     }
 
-    _selectIfaces(stats) {
+    async _probe(name) {
+        if (!this._probes[name]) this._probes[name] = await probeIface(name);
+        return this._probes[name];
+    }
+
+    async _selectIfaces(stats) {
         let names = Object.keys(stats).filter(n => n !== 'lo');
         if (this.ifaceMode === 'manual') {
             let wanted = (this.manualIfaces || '').split(',').map(s => s.trim()).filter(s => s);
             return wanted.filter(n => n in stats);
         }
-        if (this.ifaceMode === 'physical')
-            return names.filter(n => isPhysical(n) && isUp(n));
+        if (this.ifaceMode === 'physical') {
+            let res = [];
+            for (let n of names)
+                if ((await this._probe(n)).physical && await isUp(n)) res.push(n);
+            return res;
+        }
 
         // auto: interfaces with a default route; if some of them are physical,
         // count only those (avoids counting VPN traffic twice)
-        let routes = defaultRouteIfaces();
+        let routes = await defaultRouteIfaces();
         let def = names.filter(n => routes.has(n));
-        let phys = def.filter(n => isPhysical(n));
+        let phys = [];
+        for (let n of def)
+            if ((await this._probe(n)).physical) phys.push(n);
         return phys.length ? phys : def;
     }
 
     _tick() {
+        if (this._busy) return;
+        this._busy = true;
+        this._sample().catch(e => global.logError(e)).finally(() => { this._busy = false; });
+    }
+
+    async _sample() {
+        let stats = await readNetDev();
+        let names = await this._selectIfaces(stats);
+        if (this._removed) return;
+
         let now = GLib.get_monotonic_time();
-        let stats = readNetDev();
         let dt = this._lastTime ? (now - this._lastTime) / 1e6 : 0;
         this._lastTime = now;
 
-        let names = this._selectIfaces(stats);
         let down = 0, up = 0, list = [];
         for (let name of names) {
             let cur = stats[name], prev = this._prev[name];
@@ -409,12 +436,12 @@ class InternetSpeedMonitor extends Applet.Applet {
         let key = names.join(',');
         if (key !== this._ifaceKey) {
             this._ifaceKey = key;
-            this._kinds = {};
-            for (let n of names) this._kinds[n] = ifaceKind(n);
+            this._probes = {};      // interfaces changed: probe them again
+            for (let n of names) await this._probe(n);
             if (this.menu.isOpen) this._fetchIps();
             this._rebuildIfaceItems = true;
         }
-        for (let it of list) it.kind = this._kinds[it.name];
+        for (let it of list) it.kind = this._probes[it.name].kind;
         this._ifaces = list;
 
         this._down = down; this._up = up;
@@ -470,11 +497,11 @@ class InternetSpeedMonitor extends Applet.Applet {
         reset.connect('activate', () => { this._peakDown = this._peakUp = 0; });
         this.menu.addMenuItem(reset);
         let netSettings = new PopupMenu.PopupIconMenuItem(_("Network settings"), 'preferences-system-network-symbolic', St.IconType.SYMBOLIC);
-        netSettings.connect('activate', () => Util.spawnCommandLine('cinnamon-settings network'));
+        netSettings.connect('activate', () => Util.spawn(['cinnamon-settings', 'network']));
         this.menu.addMenuItem(netSettings);
         if (GLib.find_program_in_path('gnome-system-monitor')) {
             let sysmon = new PopupMenu.PopupIconMenuItem(_("System monitor"), 'utilities-system-monitor-symbolic', St.IconType.SYMBOLIC);
-            sysmon.connect('activate', () => Util.spawnCommandLine('gnome-system-monitor -r'));
+            sysmon.connect('activate', () => Util.spawn(['gnome-system-monitor', '-r']));
             this.menu.addMenuItem(sysmon);
         }
     }
@@ -522,7 +549,19 @@ class InternetSpeedMonitor extends Applet.Applet {
     }
 
     _fetchIps() {
-        Util.spawnCommandLineAsyncIO('ip -o -4 addr show', (stdout) => {
+        let proc;
+        try {
+            proc = Gio.Subprocess.new(['ip', '-o', '-4', 'addr', 'show'], Gio.SubprocessFlags.STDOUT_PIPE);
+        } catch (e) {
+            return;
+        }
+        proc.communicate_utf8_async(null, null, (p, res) => {
+            let stdout = '';
+            try {
+                [, stdout] = p.communicate_utf8_finish(res);
+            } catch (e) {
+                return;
+            }
             let ips = {};
             for (let line of (stdout || '').split('\n')) {
                 let m = /^\d+:\s+(\S+)\s+inet\s+([\d.]+)/.exec(line);
@@ -549,6 +588,7 @@ class InternetSpeedMonitor extends Applet.Applet {
     }
 
     on_applet_removed_from_panel() {
+        this._removed = true;
         if (this._timerId) GLib.source_remove(this._timerId);
         this._timerId = 0;
         this.settings.finalize();
