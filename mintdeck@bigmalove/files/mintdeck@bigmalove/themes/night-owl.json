@@ -1,0 +1,68 @@
+{
+  // Colors from Night Owl for Visual Studio Code (sdras/night-owl-vscode-theme, MIT License).
+  "formatVersion": 1,
+  "id": "night-owl",
+  "name": "Night Owl",
+  "description": "Night Owl：为深夜编码设计的深海蓝底色，柔和不刺眼。",
+  "descriptionEn": "Night Owl: a deep-sea blue made for coding late at night, easy on the eyes.",
+  "author": "Sarah Drasner",
+  "license": "MIT",
+  "homepage": "https://github.com/sdras/night-owl-vscode-theme",
+  "base": "dark",
+  "colors": {
+    "surface": "#011627",
+    "textPrimary": "#D6DEEB",
+    "textSecondary": "#A1B3C8",
+    "textTertiary": "#6C8BA6",
+    "accent": "#82AAFF",
+    "onAccent": "#011627",
+    "danger": "#F25A57",
+    "liked": "#EF5350",
+    "clock": "#D6DEEB",
+    "equalizer": "#7FDBCA",
+    "hairline": "#122D42",
+    "track": "#122D42",
+    "ringTrack": "#1D3B53",
+    "fill": "#0B2942",
+    "fillSelected": "#1D3B53",
+    "hover": "#0B2942",
+    "pressed": "#1D3B53",
+    "outline": "#1D3B53",
+    "popup": "#0B253A",
+    "popupBorder": "#1D3B53",
+    "input": "#01111D",
+    "rangeFill": "#4082AAFF",
+    "coverPlaceholder": "#0B2942",
+    "coverOutline": "#1D3B53",
+    "scrollThumb": "#2E4F6B",
+    "rim": "#1D3B53",
+    "shadow": "#000000",
+    "indicator": "#5F7E97",
+    "indicatorProgress": "#D6DEEB",
+    "switchFill": "#0B2942",
+    "seekRail": "#1D3B53",
+    "rowDivider": "#122D42",
+    "rowHover": "#0B2942",
+    "menuDetail": "#A1B3C8",
+    "tooltip": "#0B253A",
+    "tooltipBorder": "#1D3B53",
+    "bubble": "#0B253A",
+    "bubbleBorder": "#1D3B53"
+  },
+  "apps": {
+    "claude": "#F78C6C", "codex": "#ADDB67", "antigravity": "#82AAFF", "cursor": "#A1B3C8", "zcode": "#7FDBCA",
+    "dsh": "#82AAFF", "grokBot": "#A1B3C8", "kimi": "#68CDEB", "manual": "#C792EA", "other": "#A1B3C8", "warning": "#ECC48D", "critical": "#EF5350"
+  },
+  "clock": {
+    "style": "minimal", "color": "default",
+    "palette": { "amber": "#F78C6C", "cyan": "#7FDBCA", "pink": "#FF5874", "lime": "#ADDB67" },
+    "gradients": [
+      { "name": "日落", "nameEn": "Sunset", "stops": ["#ECC48D", "#F78C6C", "#FF5874"] },
+      { "name": "海洋", "nameEn": "Ocean", "stops": ["#7FDBCA", "#82AAFF", "#C792EA"] },
+      { "name": "极光", "nameEn": "Aurora", "stops": ["#ADDB67", "#7FDBCA", "#82AAFF"] },
+      { "name": "火焰", "nameEn": "Ember", "stops": ["#FFCB8B", "#F78C6C", "#EF5350"] },
+      { "name": "霓虹", "nameEn": "Neon", "stops": ["#C792EA", "#82AAFF", "#7FDBCA"] }
+    ]
+  },
+  "effects": { "shadowOpacity": 0.4 }
+}

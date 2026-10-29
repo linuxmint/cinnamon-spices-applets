@@ -1,0 +1,412 @@
+# 日本語 翻译（ja）。msgid 是简体中文原文，msgstr 填这门语言。
+# 由 tools/i18n-build.py --init 生成；改完跑 tools/i18n-build.py 生成 .mo 与 i18nData.js。
+msgid ""
+msgstr ""
+"Project-Id-Version: mintdeck@bigmalove\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-10-29 13:20+0800\n"
+"Last-Translator: bigmalove <125801848+bigmalove@users.noreply.github.com>\n"
+"Language-Team: MintDeck translators\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: mintdeck@bigmalove/applet.js:397
+msgid "设置…"
+msgstr "設定…"
+
+#: mintdeck@bigmalove/applet.js:398
+msgid "重新读取数据"
+msgstr "データを再読み込み"
+
+#: mintdeck@bigmalove/applet.js:400
+msgid "关于 MintDeck"
+msgstr "MintDeck について"
+
+#: mintdeck@bigmalove/applet.js:401
+msgid "基于 BrimDeck（Apache-2.0）的 Cinnamon 复刻。"
+msgstr "BrimDeck（Apache-2.0）をベースにした Cinnamon 向けの再実装です。"
+
+#: mintdeck@bigmalove/applet.js:441
+msgid "读取失败：%s"
+msgstr "読み込み失敗：%s"
+
+#: mintdeck@bigmalove/lib/deck/data.js:271
+msgid "%s 天前"
+msgid_plural "%s 天前"
+msgstr[0] "%s 日前"
+
+#: mintdeck@bigmalove/lib/deck/data.js:272
+msgid "%s 个月前"
+msgid_plural "%s 个月前"
+msgstr[0] "%s か月前"
+
+#: mintdeck@bigmalove/lib/deck/data.js:233
+msgid "上下文"
+msgstr "コンテキスト"
+
+#: mintdeck@bigmalove/lib/deck/data.js:236
+msgid "最近：%s"
+msgstr "最終更新：%s"
+
+#: mintdeck@bigmalove/lib/deck/data.js:236 mintdeck@bigmalove/lib/deck/data.js:299
+msgid "无"
+msgstr "なし"
+
+#: mintdeck@bigmalove/lib/deck/data.js:239 mintdeck@bigmalove/lib/deck/data.js:240
+msgid "%s 积分"
+msgstr "%s ポイント"
+
+#: mintdeck@bigmalove/lib/deck/data.js:243
+msgid "%s 个会话 · 累计 %s 积分"
+msgstr "%s セッション · 累計 %s ポイント"
+
+#: mintdeck@bigmalove/lib/deck/data.js:269
+msgid "今天"
+msgstr "今日"
+
+#: mintdeck@bigmalove/lib/deck/data.js:270
+msgid "昨天"
+msgstr "昨日"
+
+#: mintdeck@bigmalove/lib/deck/data.js:291
+msgid "5 小时"
+msgstr "5 時間"
+
+#: mintdeck@bigmalove/lib/deck/data.js:292
+msgid "每周"
+msgstr "毎週"
+
+#: mintdeck@bigmalove/lib/deck/data.js:294
+msgid "未登录 · 仅本机用量"
+msgstr "未ログイン · ローカル使用量のみ"
+
+#: mintdeck@bigmalove/lib/deck/data.js:299
+msgid "最近记录 %s"
+msgstr "直近の記録 %s"
+
+#: mintdeck@bigmalove/lib/deck/data.js:299 mintdeck@bigmalove/lib/deck/data.js:314
+msgid "本机会话"
+msgstr "ローカルセッション"
+
+#: mintdeck@bigmalove/lib/deck/data.js:314
+msgid "%s/%s 个会话"
+msgstr "%s/%s セッション"
+
+#: mintdeck@bigmalove/lib/deck/data.js:344 mintdeck@bigmalove/lib/deck/data.js:355
+#: mintdeck@bigmalove/lib/deck/data.js:366
+msgid "读取失败"
+msgstr "読み込み失敗"
+
+#: mintdeck@bigmalove/lib/deck/data.js:348
+msgid "读取中…"
+msgstr "読み込み中…"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:25 settings-schema.json
+msgid "AI 用量"
+msgstr "AI 使用量"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:26 settings-schema.json
+msgid "音乐"
+msgstr "音楽"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:27 settings-schema.json
+msgid "系统监控"
+msgstr "システム監視"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:381
+msgid "没有可显示的来源"
+msgstr "表示できるソースがありません"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:450
+msgid "used"
+msgstr "使用"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:471
+msgid "今日"
+msgstr "今日"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:472
+msgid "七日"
+msgstr "7 日"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:500
+msgid "未检测到播放器"
+msgstr "プレーヤーが見つかりません"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:589
+msgid "采样未接入"
+msgstr "サンプリング未接続"
+
+#: settings-schema.json
+msgid "外观"
+msgstr "外観"
+
+#: settings-schema.json
+msgid "收起形态"
+msgstr "折りたたみ形状"
+
+#: settings-schema.json
+msgid "配额与统计"
+msgstr "クォータと統計"
+
+#: settings-schema.json
+msgid "行为"
+msgstr "動作"
+
+#: settings-schema.json
+msgid "形态"
+msgstr "形状"
+
+#: settings-schema.json
+msgid "主题"
+msgstr "テーマ"
+
+#: settings-schema.json
+msgid "界面语言"
+msgstr "表示言語"
+
+#: settings-schema.json
+msgid "收起时显示"
+msgstr "折りたたみ時の表示"
+
+#: settings-schema.json
+msgid "尺寸"
+msgstr "サイズ"
+
+#: settings-schema.json
+msgid "数据源"
+msgstr "データソース"
+
+#: settings-schema.json
+msgid "提醒"
+msgstr "通知"
+
+#: settings-schema.json
+msgid "交互"
+msgstr "操作性"
+
+#: settings-schema.json
+msgid "显示"
+msgstr "表示"
+
+#: settings-schema.json
+msgid "刘海"
+msgstr "ノッチ"
+
+#: settings-schema.json
+msgid "胶囊"
+msgstr "カプセル"
+
+#: settings-schema.json
+msgid "指示条"
+msgstr "インジケーターバー"
+
+#: settings-schema.json
+msgid "启用动画"
+msgstr "アニメーションを有効化"
+
+#: settings-schema.json
+msgid "毫秒"
+msgstr "ミリ秒"
+
+#: settings-schema.json
+msgid "动画时长"
+msgstr "アニメーション時間"
+
+#: settings-schema.json
+msgid "面板主题"
+msgstr "パネルテーマ"
+
+#: settings-schema.json
+msgid "深色"
+msgstr "ダーク"
+
+#: settings-schema.json
+msgid "浅色"
+msgstr "ライト"
+
+#: settings-schema.json
+msgid "One Dark Pro"
+msgstr "One Dark Pro"
+
+#: settings-schema.json
+msgid "GitHub Dark"
+msgstr "GitHub Dark"
+
+#: settings-schema.json
+msgid "GitHub Light"
+msgstr "GitHub Light"
+
+#: settings-schema.json
+msgid "Dracula"
+msgstr "Dracula"
+
+#: settings-schema.json
+msgid "Night Owl"
+msgstr "Night Owl"
+
+#: settings-schema.json
+msgid "赛博朋克：边缘行者"
+msgstr "サイバーパンク：エッジランナーズ"
+
+#: settings-schema.json
+msgid "界面语言（悬浮岛与面板；设置窗口跟随系统语言）"
+msgstr ""
+"表示言語（フローティングアイランドとパネル。設定画面はシステム言語に従いま"
+"す）"
+
+#: settings-schema.json
+msgid "自动（跟随系统）"
+msgstr "自動（システムに従う）"
+
+#: settings-schema.json
+msgid "简体中文"
+msgstr "简体中文"
+
+#: settings-schema.json
+msgid "English"
+msgstr "English"
+
+#: settings-schema.json
+msgid "繁體中文"
+msgstr "繁體中文"
+
+#: settings-schema.json
+msgid "日本語"
+msgstr "日本語"
+
+#: settings-schema.json
+msgid "时间样式"
+msgstr "時刻スタイル"
+
+#: settings-schema.json
+msgid "简约"
+msgstr "シンプル"
+
+#: settings-schema.json
+msgid "数码管"
+msgstr "デジタル"
+
+#: settings-schema.json
+msgid "衬线"
+msgstr "セリフ"
+
+#: settings-schema.json
+msgid "宽体"
+msgstr "ワイド"
+
+#: settings-schema.json
+msgid "窄体"
+msgstr "ナロー"
+
+#: settings-schema.json
+msgid "24 小时制"
+msgstr "24 時間制"
+
+#: settings-schema.json
+msgid "显示配额环"
+msgstr "クォータリングを表示"
+
+#: settings-schema.json
+msgid "显示时间"
+msgstr "時刻を表示"
+
+#: settings-schema.json
+msgid "显示系统读数"
+msgstr "システム値を表示"
+
+#: settings-schema.json
+msgid "收起尺寸（自动 = 随显示的内容多少缩放）"
+msgstr "折りたたみサイズ（自動 = 表示内容の量に合わせて拡縮）"
+
+#: settings-schema.json
+msgid "自动"
+msgstr "自動"
+
+#: settings-schema.json
+msgid "小"
+msgstr "小"
+
+#: settings-schema.json
+msgid "标准"
+msgstr "標準"
+
+#: settings-schema.json
+msgid "大"
+msgstr "大"
+
+#: settings-schema.json
+msgid "显示 Claude Code"
+msgstr "Claude Code を表示"
+
+#: settings-schema.json
+msgid "显示 DeepSeek Harness"
+msgstr "DeepSeek Harness を表示"
+
+#: settings-schema.json
+msgid "显示 WorkBuddy"
+msgstr "WorkBuddy を表示"
+
+#: settings-schema.json
+msgid "统计本机会话的 Token 与费用"
+msgstr "ローカルセッションの Token と費用を集計"
+
+#: settings-schema.json
+msgid "配额到预警线时提醒"
+msgstr "クォータが警告ラインに達したら通知"
+
+#: settings-schema.json
+msgid "%"
+msgstr "%"
+
+#: settings-schema.json
+msgid "预警线"
+msgstr "警告ライン"
+
+#: settings-schema.json
+msgid "告警线"
+msgstr "アラートライン"
+
+#: settings-schema.json
+msgid "展开延迟"
+msgstr "展開の遅延"
+
+#: settings-schema.json
+msgid "收起延迟"
+msgstr "折りたたみの遅延"
+
+#: settings-schema.json
+msgid "默认页"
+msgstr "既定のページ"
+
+#: settings-schema.json
+msgid "展开或收起面板"
+msgstr "パネルを展開／折りたたみ"
+
+#: settings-schema.json
+msgid "显示在"
+msgstr "表示先"
+
+#: settings-schema.json
+msgid "主显示器"
+msgstr "メインディスプレイ"
+
+#: settings-schema.json
+msgid "光标所在显示器"
+msgstr "カーソルのあるディスプレイ"
+
+#: settings-schema.json
+msgid "在面板上显示图标（隐藏后右键悬浮岛可进入设置）"
+msgstr ""
+"パネルにアイコンを表示（非表示にした場合、フローティングアイランドを右クリッ"
+"クすると設定を開けます）"
+
+#: settings-schema.json
+msgid "全屏时隐藏（全屏下鼠标唤出将不可用）"
+msgstr "全画面時に非表示（全画面ではマウスでの呼び出しは使えません）"
+
+#~ msgid "最近 %s"
+#~ msgstr "直近 %s"
