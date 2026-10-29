@@ -134,7 +134,8 @@ function findLocalLrc(dir, meta) {
   let files = [];
   try {
     const folder = Gio.File.new_for_path(String(dir));
-    if (!folder.query_exists(null)) return null;
+    // 目录不存在时 enumerate_children 会抛 NOT_FOUND，由下面的 catch 兜住：
+    // 多一次 query_exists 只是多一次同步 syscall，没有信息量。
     const children = folder.enumerate_children('standard::name,standard::type', 0, null);
     let info = children.next_file(null);
     while (info) {

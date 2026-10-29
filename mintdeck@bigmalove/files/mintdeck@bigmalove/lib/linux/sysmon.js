@@ -10,7 +10,7 @@
 
 // user nice system idle iowait irq softirq steal 共 8 个；guest/guest_nice 已包含在 user/nice 里，不重复计。
 const CPU_FIELDS = 8;
-// 实测 getconf CLK_TCK = 100。GTop 的 glibtop_proc_time.utime/stime 也是这个单位（见 topProcesses 处实测）。
+// 实测 getconf CLK_TCK = 100。libgtop 的 glibtop_proc_time.utime/stime 也是这个单位（见 topProcesses 处实测）。
 const CLK_TCK = 100;
 
 // 实测：本机 Meta tun(198.18.0.1/30) 的 rx/tx 与 wlp5s0 完全重复（8134690754 vs 9631352104 同一批流量），
@@ -36,6 +36,16 @@ function gi() {
 function gLib() {
   const g = gi();
   return g && g.GLib ? g.GLib : null;
+}
+
+// 子进程统一走 lib/linux/exec（异步）。这里惰性取，node 侧 require 本文件时 imports 不存在也不炸。
+function execModule() {
+  if (typeof imports === 'undefined' || !imports.lib) return null;
+  try {
+    return imports.lib.linux && imports.lib.linux.exec ? imports.lib.linux.exec : null;
+  } catch (e) {
+    return null;
+  }
 }
 
 function decode(bytes) {

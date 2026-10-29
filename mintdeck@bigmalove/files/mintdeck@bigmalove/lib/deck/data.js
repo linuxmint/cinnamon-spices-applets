@@ -105,6 +105,9 @@ function listFiles(dirPath, suffix, out) {
 // 外部命令一律走 argv 形式（GLib.spawn_sync），不拼 shell 字符串：
 //   · 路径里出现空格、引号、$ 也不用转义，不会被 shell 解释；
 //   · SEARCH_PATH 让 'zstd' / 'python3' 按 PATH 解析，找不到时 spawn 直接抛，调用方按「不可用」处理。
+// 注：spawn_sync 的阻塞被两条限制夹住 —— 一次 refresh 只对新增/变更的文件调用，
+// 调用点本身跑在 30ms 一片的 idle 回调里（见 collectDshAsync），超出的部分留给下一帧。
+// argv 形式 + SEARCH_PATH：不拼 shell 字符串，路径里有空格/引号也不会被解释。
 function spawnCapture(argv) {
     try {
         const res = GLib.spawn_sync(null, argv, null, GLib.SpawnFlags.SEARCH_PATH, null);
@@ -115,6 +118,7 @@ function spawnCapture(argv) {
     }
 }
 
+// 单文件同步读的上限由调用方控制：解析按 (path, mtime) 缓存，只在新文件出现时才真的读盘。
 function readText(path) {
     try {
         const [ok, bytes] = GLib.file_get_contents(path);
