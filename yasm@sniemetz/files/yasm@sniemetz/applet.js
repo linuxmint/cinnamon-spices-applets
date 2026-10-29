@@ -5,7 +5,6 @@ const Settings   = imports.ui.settings;
 const St         = imports.gi.St;
 const Clutter    = imports.gi.Clutter;
 const GLib       = imports.gi.GLib;
-const Gio        = imports.gi.Gio;
 const Util       = imports.misc.util;
 const Pango      = imports.gi.Pango;
 const GdkPixbuf  = imports.gi.GdkPixbuf;
@@ -36,7 +35,7 @@ const C = {
 };
 
 const { MetricsManager } = imports.lib.metricsManager;
-const { parseList } = imports.lib.util;
+const { parseList, _ } = imports.lib.util;
 const fileutil      = imports.lib.fileutil;
 const Discover      = imports.lib.discover;
 const UptimeMetric  = imports.lib.metrics.uptime;
@@ -48,6 +47,7 @@ const NetworkMetric = imports.lib.metrics.network;
 const FanMetric     = imports.lib.metrics.fan;
 const ProcessMetric = imports.lib.metrics.processes;
 const GpuMetric     = imports.lib.metrics.gpu;
+const StripModule   = imports.lib.strip;
 
 var LaptopTooltip = class LaptopTooltip {
   constructor(owner, orientation) {
@@ -89,6 +89,28 @@ var LaptopTooltip = class LaptopTooltip {
   }
 
   set_text(text) { this.setContent([{ type: 'text', html: text || '' }]); }
+
+  // Disable the hover-to-show behaviour without destroying the tooltip.
+  // Used by single-tile-mode: the collapsed source tile should surface
+  // the strip overlay instead of its own tooltip, but setContent() calls
+  // from the polling loop must still succeed on an inert tooltip.
+  disableHover() {
+    if (this._hoverDisabled) return;
+    this._hoverDisabled = true;
+    try { this._owner.disconnect(this._eSig); } catch(e) {}
+    try { this._owner.disconnect(this._lSig); } catch(e) {}
+    try { this._box.hide(); } catch(e) {}
+  }
+
+  // Imperative hide — called by SingleTileStrip when it closes, so inner
+  // tile tooltips don't linger past the strip they belong to.
+  hide() { try { this._box.hide(); } catch(e) {} }
+
+  // Reposition relative to a different anchor rect than the owner tile's
+  // own geometry. Used by single-tile-mode to place inner-tile tooltips
+  // on the free side of the strip overlay rather than overlapping it.
+  // Pass null to clear the override.
+  setAnchor(anchor) { this._anchor = anchor; }
 
   _createRow(item) {
     if (item.type === 'text') {
@@ -250,12 +272,21 @@ var LaptopTooltip = class LaptopTooltip {
     const monitor  = Main.layoutManager.primaryMonitor;
 
     let x, y;
-    // Vertical panels: place the tooltip beside the tile so it doesn't
-    // cover the panel or the icons above/below.
-    //   LEFT panel  → tooltip to the right of the tile
-    //   RIGHT panel → tooltip to the left of the tile
-    // Horizontal panels: keep the existing top-vs-bottom logic.
-    if (this._orientation === St.Side.LEFT) {
+    const anchorRect = typeof this._anchor === 'function' ? this._anchor() : this._anchor;
+    if (anchorRect) {
+      // Single-tile-mode: anchor is the strip overlay. Place the tooltip on
+      // whichever horizontal side has more room so it never covers the strip.
+      const spaceRight = (monitor.x + monitor.width)  - (anchorRect.x + anchorRect.w);
+      const spaceLeft  = anchorRect.x - monitor.x;
+      if (spaceRight >= bw || spaceRight >= spaceLeft) {
+        x = anchorRect.x + anchorRect.w;
+      } else {
+        x = anchorRect.x - bw;
+      }
+      y = oy; // align vertically with the hovered tile, not the strip
+    } else if (this._orientation === St.Side.LEFT) {
+      // Vertical panels: place the tooltip beside the tile so it doesn't
+      // cover the panel or the icons above/below.
       x = ox + ow;
       y = oy;
     } else if (this._orientation === St.Side.RIGHT) {
@@ -270,6 +301,15 @@ var LaptopTooltip = class LaptopTooltip {
     x = Math.max(monitor.x, Math.min(x, monitor.x + monitor.width  - bw));
     y = Math.max(monitor.y, Math.min(y, monitor.y + monitor.height - bh));
     this._box.set_position(Math.round(x), Math.round(y));
+    // Keep the tooltip above any later-added stage siblings (notably the
+    // single-tile-mode strip overlay, which otherwise obscures the tooltip
+    // for a tile that lives inside the strip).
+    try {
+      const parent = this._box.get_parent();
+      if (parent && parent.set_child_above_sibling) {
+        parent.set_child_above_sibling(this._box, null);
+      }
+    } catch(e) {}
   }
 
   destroy() {
@@ -332,8 +372,8 @@ class YasmApplet extends Applet.Applet {
     this._orientation = orientation;
 
     this._instanceId = instanceId;
-    this._cpuTempAlertLastMs = 0;
-    this._gpuTempAlertLastMs = 0;
+    this._rateLimits   = {};  // key → last-fire monotonic ms (see _rateLimit)
+    this._launchHandles = new Set();
     this._settings = new Settings.AppletSettings(this, UUID, instanceId);
     this._bindSettings();
     this._autoScanIfEmpty();
@@ -345,6 +385,19 @@ class YasmApplet extends Applet.Applet {
 
     this._startPolling();
   }
+
+  // Cooldown-style rate limiter. Returns true (and starts the cooldown)
+  // if `cooldownMs` has elapsed since the last successful fire for `key`;
+  // returns false otherwise. Use _rateLimitReset(key) when the triggering
+  // condition clears so the next re-entry can fire immediately.
+  _rateLimit(key, cooldownMs) {
+    const now = GLib.get_monotonic_time() / 1000;  // ms
+    if ((now - (this._rateLimits[key] || 0)) <= cooldownMs) return false;
+    this._rateLimits[key] = now;
+    return true;
+  }
+
+  _rateLimitReset(key) { this._rateLimits[key] = 0; }
 
   _getColoredIconSize() {
     // Icons in compact mode are load-bearing (no text alongside), so a
@@ -367,6 +420,9 @@ class YasmApplet extends Applet.Applet {
     bind('refresh-interval', '_refreshInterval', () => this._restartPolling());
     bind('panel-separator',   '_separator');
     bind('compact-mode',      '_compactMode', () => this._rebuildSections());
+    bind('single-tile-mode',        '_singleTileMode',       () => this._onSingleTileModeChanged());
+    bind('single-tile-pick',        '_singleTileSource',     () => this._rebuildSections());
+    bind('single-tile-custom-text', '_singleTileCustomText', () => this._rebuildSections());
     bind('uptime-load-label', '_uptimeLoadLabel');
     bind('battery-list',      '_batteryList',    () => this._restartManager());
     bind('net-list',         '_netList');
@@ -458,6 +514,7 @@ class YasmApplet extends Applet.Applet {
   }
 
   _rebuildSections() {
+    this._destroyStrip();
     if (this._sections) {
       for (const { tooltip } of Object.values(this._sections))
         try { tooltip.destroy(); } catch(e) {}
@@ -469,6 +526,7 @@ class YasmApplet extends Applet.Applet {
 
   _buildSections() {
     // Always clean up first — constructor callbacks may have already built sections
+    this._destroyStrip();
     if (this._sections) {
       for (const { tooltip } of Object.values(this._sections))
         try { tooltip.destroy(); } catch(e) {}
@@ -476,9 +534,16 @@ class YasmApplet extends Applet.Applet {
     this.actor.get_children().forEach(c => this.actor.remove_actor(c));
 
     this._sections = {};
-    const vertical = this._isVertical();
-    const compact  = this._useCompactMode();
-    this.actor.vertical = vertical;
+    const vertical       = this._isVertical();
+    const compactUser    = this._useCompactMode();
+    // In single-tile-mode the strip's inner tiles should always show both
+    // icon and text — the strip is a floating overlay that's never
+    // space-constrained, so forcing compact there would hide the labels
+    // the user came to see. Compact styling then applies only to the
+    // trigger tile built later in _applySingleTileMode().
+    const willHaveStrip  = !!this._singleTileMode && this._enabledKeys().length > 1;
+    const compact        = willHaveStrip ? false : compactUser;
+    this.actor.vertical  = vertical;
     this.actor.add_style_class_name('yasm-box');
 
     for (const { key } of SECTIONS) {
@@ -574,7 +639,14 @@ class YasmApplet extends Applet.Applet {
         tile.connect('button-press-event', (actor, event) => {
           if (event.get_button() !== 1) return Clutter.EVENT_PROPAGATE;
           if (global.settings.get_boolean('panel-edit-mode')) return Clutter.EVENT_PROPAGATE;
-          Util.spawn(['x-terminal-emulator', '-e', 'top']);
+          // In single-tile-mode the strip is a Cinnamon chrome actor that
+          // currently holds the pointer context; spawning a new window
+          // while it's up triggers Mutter's focus-steal prevention and
+          // the terminal opens behind the foreground app. Close the
+          // strip first so the terminal gets focus.
+          if (this._strip) this._strip.close();
+          this._launchAndRaise(['x-terminal-emulator', '-e', 'top'],
+            /terminal|xterm|alacritty|konsole|kitty|tilix|wezterm/);
           return Clutter.EVENT_STOP;
         });
       }
@@ -583,6 +655,236 @@ class YasmApplet extends Applet.Applet {
       this._sections[key] = { sep, tile, label, tooltip, loadLabel, iconActor, acIconImage, batIconImage };
     }
 
+    this._applySingleTileMode();
+  }
+
+  // When the user turns off single-tile mode, reset the trigger-icon
+  // dropdown back to 'auto'. This also hides the Custom-text entry
+  // (which depends on single-tile-pick=custom-text) — otherwise it
+  // would linger visible after mode is switched off, because Cinnamon's
+  // schema dependency is single-condition only.
+  _onSingleTileModeChanged() {
+    if (!this._singleTileMode && this._singleTileSource !== 'auto') {
+      // setValue triggers the single-tile-pick callback → rebuild runs
+      // through that path; no explicit rebuild needed here.
+      this._settings.setValue('single-tile-pick', 'auto');
+      return;
+    }
+    this._rebuildSections();
+  }
+
+  _enabledKeys() {
+    return SECTIONS.filter(({ key }) => !!this[`_${key}Enabled`]).map(({ key }) => key);
+  }
+
+  // Resolve the single-tile-source setting against the currently enabled
+  // monitors. 'custom-text' is a sentinel for a static emoji/icon trigger that
+  // doesn't mirror any section. 'auto', an unknown value, or a disabled
+  // selection all fall back to the first enabled key. Returns null only
+  // if nothing is enabled and 'custom-text' isn't chosen.
+  _resolveSingleTileSource() {
+    const choice = this._singleTileSource;
+    if (choice === 'custom-text') return 'custom-text';
+    const enabled = this._enabledKeys();
+    if (enabled.length === 0) return null;
+    if (choice && choice !== 'auto' && enabled.includes(choice)) return choice;
+    return enabled[0];
+  }
+
+  _applySingleTileMode() {
+    if (!this._singleTileMode) return;
+    const enabled = this._enabledKeys();
+    const source  = this._resolveSingleTileSource();
+    if (!source) return;
+    // In 'custom-text' mode the trigger is independent of the sections, so
+    // one tile in the strip is still useful. For section-sourced mode
+    // the trigger IS the one section, so a single enabled monitor
+    // means nothing worth collapsing.
+    if (source === 'custom-text' ? enabled.length === 0 : enabled.length <= 1) return;
+
+    this._strip = new StripModule.SingleTileStrip(this);
+
+    // Reparent every enabled tile (including the source) into the strip.
+    // Separators are deliberately NOT reparented — a vertical overlay
+    // doesn't need the per-tile text separators the horizontal panel uses.
+    // The sep actors stay in the panel and are kept hidden via the
+    // s.inStrip flag below. The tooltip ref lets the strip hide it on
+    // close and reposition it on the free side of the strip.
+    for (const key of enabled) {
+      const s = this._sections[key];
+      try { this.actor.remove_actor(s.tile); } catch(e) {}
+      this._strip.addTile(null, s.tile, s.tooltip);
+      s.inStrip = true;
+    }
+
+    // Build a lightweight trigger proxy that mirrors the source section's
+    // icon + text each poll. Lives in the panel; hover + click wire into
+    // the strip. Respects compact-mode independently of strip tiles.
+    this._trigger = this._buildTriggerTile(source);
+    this.actor.add_actor(this._trigger.tile);
+    this._strip.attachTo(this._trigger.tile);
+  }
+
+  // Build the collapsed-view proxy tile. Mirrors the structural styling of
+  // a normal section tile so the panel looks consistent, but holds no
+  // metric logic — _syncTriggerTile() copies live state from the source
+  // section each polling cycle.
+  _buildTriggerTile(sourceKey) {
+    const compact  = this._useCompactMode();
+    const iconMult = compact ? 0.45 : 0.6;
+    const iconSize = Math.max(16, Math.round((this._panelHeight || 40) * iconMult));
+
+    const tile = new St.BoxLayout({ reactive: true, track_hover: true });
+    tile.add_style_class_name('yasm-label');
+    tile.add_style_class_name('threshold-ok');
+    if (this._isVertical()) tile.add_style_class_name('yasm-label-vertical');
+    if (compact)            tile.add_style_class_name('yasm-label-compact');
+    tile.set_y_align(Clutter.ActorAlign.CENTER);
+
+    const pad = Math.max(1, Math.round(iconSize * 0.12));
+    const brd = Math.max(1, Math.round(iconSize * 0.06));
+    const spc = Math.max(2, Math.round(iconSize * 0.12));
+    tile.set_style(`padding: ${pad}px ${pad + 2}px; border-width: ${brd}px;`);
+    tile.spacing = spc;
+
+    // Custom source: user supplied emoji/text, or fall back to the YASM
+    // icon. No per-poll mirroring happens in this mode.
+    let iconActor = null;
+    let emojiLabel = null;
+    if (sourceKey === 'custom-text') {
+      const custom = (this._singleTileCustomText || '').trim();
+      if (custom) {
+        emojiLabel = new St.Label({ text: custom });
+        emojiLabel.add_style_class_name('yasm-tile-emoji');
+        emojiLabel.set_y_align(Clutter.ActorAlign.CENTER);
+        // Request an emoji-capable font explicitly — themes often default
+        // to a Latin-only font, which renders emoji as .notdef boxes.
+        emojiLabel.set_style(
+          `font-size: ${iconSize}px; ` +
+          `font-family: "Noto Color Emoji", "Twemoji Mozilla", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;`
+        );
+        tile.add_actor(emojiLabel);
+      } else {
+        iconActor = makeIconActor(`${AppletPath}/icon.png`, iconSize);
+        if (iconActor) tile.add_actor(iconActor);
+        else           tile.add_actor(new St.Widget({ width: 0, height: iconSize }));
+      }
+    } else {
+      iconActor = makeIconActor(`${AppletPath}/icons/${ICON_FILES[sourceKey]}`, iconSize);
+      if (iconActor) tile.add_actor(iconActor);
+      else           tile.add_actor(new St.Widget({ width: 0, height: iconSize }));
+    }
+
+    // Section-sourced trigger carries a text label that mirrors the
+    // source each poll. Custom mode has no section to mirror, so no
+    // label is added (the emoji / icon stands alone).
+    let label = null;
+    if (sourceKey !== 'custom-text') {
+      label = new St.Label({ text: '' });
+      label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
+      label.add_style_class_name('yasm-tile-text');
+      label.set_y_align(Clutter.ActorAlign.CENTER);
+      if (compact) label.hide();
+      tile.add_actor(label);
+    }
+
+    return { tile, iconActor, emojiLabel, label, sourceKey, compact };
+  }
+
+  // Copy icon content, label text, and threshold class from the source
+  // section onto the trigger tile. Called each poll from _updateSections.
+  // No-op for custom trigger (nothing to mirror).
+  _syncTriggerTile() {
+    if (!this._trigger) return;
+    if (this._trigger.sourceKey === 'custom-text') return;
+    const src = this._sections[this._trigger.sourceKey];
+    if (!src) return;
+    if (this._trigger.iconActor && src.iconActor) {
+      try {
+        const content = src.iconActor.get_content();
+        if (content) this._trigger.iconActor.set_content(content);
+      } catch(e) {}
+    }
+    if (!this._trigger.compact && this._trigger.label) {
+      try { this._trigger.label.set_text(src.label.get_text() || ''); } catch(e) {}
+    }
+    // Mirror threshold-* class from source tile
+    const tt = this._trigger.tile;
+    tt.remove_style_class_name('threshold-ok');
+    tt.remove_style_class_name('threshold-warn');
+    tt.remove_style_class_name('threshold-alert');
+    for (const lvl of ['ok', 'warn', 'alert']) {
+      if (src.tile.has_style_class_name(`threshold-${lvl}`)) {
+        tt.add_style_class_name(`threshold-${lvl}`);
+        break;
+      }
+    }
+  }
+
+  // Spawn argv and raise the next matching window ourselves. Needed in
+  // single-tile-mode because clicking a strip tile sinks spawn-launched
+  // windows to the back of the Mutter stack (focus-steal prevention
+  // doesn't see the strip chrome as a legitimate user-action source).
+  // Simpler to just raise it after the fact than fight focus-steal.
+  // reClass: RegExp matched (case-insensitive) against wm_class.
+  _launchAndRaise(argv, reClass) {
+    const display = global.display;
+    const handle = { sigId: 0, timeoutId: 0, raiseTimeoutId: 0 };
+    const cleanup = () => {
+      if (handle.sigId)          { try { display.disconnect(handle.sigId); }          catch(e) {} handle.sigId = 0; }
+      if (handle.timeoutId)      { try { Mainloop.source_remove(handle.timeoutId); } catch(e) {} handle.timeoutId = 0; }
+      if (handle.raiseTimeoutId) { try { Mainloop.source_remove(handle.raiseTimeoutId); } catch(e) {} handle.raiseTimeoutId = 0; }
+      this._launchHandles.delete(handle);
+    };
+    handle.sigId = display.connect('window-created', (d, win) => {
+      const cls = (win.get_wm_class() || '').toLowerCase();
+      if (!reClass.test(cls)) return;
+      // Disconnect + cancel the fallback timeout now; the raise is still in
+      // flight on its own timer which cleanup() also cancels on removal.
+      try { display.disconnect(handle.sigId); } catch(e) {}
+      handle.sigId = 0;
+      if (handle.timeoutId) { try { Mainloop.source_remove(handle.timeoutId); } catch(e) {} handle.timeoutId = 0; }
+      // Defer activation one tick so the window is fully registered
+      // before we touch it; activate() on a brand-new window can race.
+      handle.raiseTimeoutId = Mainloop.timeout_add(50, () => {
+        handle.raiseTimeoutId = 0;
+        this._launchHandles.delete(handle);
+        try {
+          win.raise();
+          win.activate(global.get_current_time());
+        } catch(e) { log(`[yasm] raise/activate failed: ${e}`); }
+        return false;
+      });
+    });
+    handle.timeoutId = Mainloop.timeout_add(3000, () => {
+      handle.timeoutId = 0;
+      cleanup();
+      return false;
+    });
+    this._launchHandles.add(handle);
+    try { Util.spawn(argv); }
+    catch(e) { cleanup(); log(`[yasm] spawn failed: ${e}`); }
+  }
+
+  _destroyStrip() {
+    if (this._trigger) {
+      try { this._trigger.tile.destroy(); } catch(e) {}
+      this._trigger = null;
+    }
+    if (!this._strip) return;
+    try {
+      // Pull tiles out of the strip and destroy them explicitly. _buildSections
+      // creates fresh tile actors into a new _sections map, so these pulled
+      // tiles are orphaned once we return. Without an explicit destroy they
+      // leak St actors + inner St.Labels / icons on every rebuild (orientation
+      // change, panel-height change, settings edit).
+      const pulled = this._strip.takeTiles();
+      for (const { tile } of pulled) {
+        if (tile) { try { tile.destroy(); } catch(e) {} }
+      }
+    } catch(e) {}
+    try { this._strip.destroy(); } catch(e) {}
+    this._strip = null;
   }
 
   _startPolling() {
@@ -606,11 +908,19 @@ class YasmApplet extends Applet.Applet {
   }
 
   _restartPolling() {
-    if (this._timeout) Mainloop.source_remove(this._timeout);
+    if (this._timeout)      { Mainloop.source_remove(this._timeout);      this._timeout      = null; }
+    if (this._earlyTimeout) { Mainloop.source_remove(this._earlyTimeout); this._earlyTimeout = null; }
     this._startPolling();
   }
 
   _restartManager() {
+    // Abandon the old manager cleanly: its in-flight async subprocess
+    // callbacks (df / nvtop / nvidia-smi) still fire, but they can no
+    // longer trigger UI updates against the live applet. Without this,
+    // every battery/hwmon/net-list edit leaks a MetricsManager instance
+    // + its circular buffers + any pending subprocess closures until
+    // the callbacks drain.
+    if (this._manager) { try { this._manager.finalize(); } catch(e) {} }
     this._manager = new MetricsManager(this, (data, history) => {
       this._updateSections(data, history);
     });
@@ -636,9 +946,8 @@ class YasmApplet extends Applet.Applet {
   }
 
   _updateSections(data, history) {
-    const sepStr  = this._separator || '';
+    const sepStr = this._separator || '';
     let prevVisible = false;
-    const graphColor = lvl => lvl === 'alert' ? C.alert : lvl === 'warn' ? C.warn : null;
 
     for (const { key } of SECTIONS) {
       const enabled = !!this[`_${key}Enabled`];
@@ -646,324 +955,328 @@ class YasmApplet extends Applet.Applet {
       s.sep.set_text(sepStr);
 
       let hasData = false;
-
       if (enabled) {
         switch (key) {
-          case 'uptime':
-            if (data.uptime) {
-              const numCores = this._manager.getNumCores();
-              const normLoad = data.uptime.load.avg1 / numCores;
-              const loadLevel = normLoad >= ((this._loadAlert || 90) / 100) ? 'alert'
-                              : normLoad >= ((this._loadWarn  || 70) / 100) ? 'warn' : 'ok';
-              this._applyThreshold(s.tile, loadLevel);
-              s.label.set_text(this._buildText('uptime', UptimeMetric.formatUptimeOnly(data.uptime.uptime)));
-              if (s.loadLabel)
-                s.loadLabel.set_text(UptimeMetric.formatLoadOnly(
-                  data.uptime.load, this._loadDisplay ? '' : this._uptimeLoadLabel));
-              // Build uptime+load text manually so numCores sits right under Load:
-              const up = data.uptime.uptime;
-              const upParts = [];
-              if (up.days > 0) upParts.push(`${up.days}d`);
-              upParts.push(`${String(up.hours).padStart(2,'0')}h`);
-              upParts.push(`${String(up.minutes).padStart(2,'0')}m`);
-              const ld = data.uptime.load;
-              const uptimeTxt = [
-                `<b>Uptime</b>  ${upParts.join(' ')}`,
-                `<b>Load:</b>   ${ld.avg1.toFixed(2)} / ${ld.avg5.toFixed(2)} / ${ld.avg15.toFixed(2)}`,
-                `        ${numCores} cores`,
-              ].join('\n');
-              const procTxt = (typeof ProcessMetric !== 'undefined'
-                ? ProcessMetric.formatTooltip(data.processes) : '') + '\n\n<i>Click to open top</i>';
-              // Structure: [uptime text] [load graph, no labels] [processes]
-              s.tooltip.setContent([
-                { type: 'text', html: uptimeTxt },
-                { type: 'graph', left: '1min\navg', right: `${ld.avg1.toFixed(2)}`, 
-                  height: 20, marginTop: 8, marginBottom: 12,
-                  series: [{ vals: history.loadAvg.values(),
-                    color: C.ok,
-                    thresholds: { warn: (this._loadWarn || 70) / 100 * numCores,
-                                  alert: (this._loadAlert || 90) / 100 * numCores } }] },
-                { type: 'text', html: procTxt },
-              ]);
-              hasData = true;
-            }
-            break;
-
-          case 'battery':
-            if (data.battery) {
-              const bat        = data.battery;
-              const pct        = bat.capacityPct;
-              const isCharging = bat.isCharging;
-              const isFull     = bat.isFull;
-              const isOnAC     = bat.isOnAC;
-
-              // Dynamic icon swap: AC icon whenever on AC (charging OR full),
-              // battery icon only while actually discharging.
-              if (s.iconActor) {
-                const targetImg = isOnAC ? s.acIconImage : s.batIconImage;
-                if (targetImg) s.iconActor.set_content(targetImg);
-              }
-
-              // Tile text: pct% + context-specific watt value
-              const batLevel = pct <= (this._batAlert || 15) ? 'alert'
-                             : pct <= (this._batWarn  || 30) ? 'warn' : 'ok';
-              this._applyThreshold(s.tile, batLevel);
-              let tileWatt;
-              if (isCharging)     tileWatt = bat.usageW != null ? `≈${Math.round(bat.usageW)}W` : `+${bat.powerW.toFixed(1)}W`;
-              else if (isFull)    tileWatt = bat.usageW != null ? `≈${Math.round(bat.usageW)}W` : `AC`;
-              else                tileWatt = `-${bat.powerW.toFixed(1)}W`;
-              s.label.set_text(this._buildText('battery', `${pct}% | ${tileWatt}`));
-
-              const { pctVals, currentDrawW, currentChargeW, avgDrawW,
-                      drawVals, chargeVals } = this._manager.getBatSparklines();
-              const pctToLbl = ` ${String(pct).padStart(3)}% `;
-
-              // Watt graph right label
-              let wattRight;
-              if (isCharging)     wattRight = `+${bat.powerW.toFixed(1)}W`;
-              else if (isFull)    wattRight = `0.0W`;
-              else {
-                wattRight = `-${bat.powerW.toFixed(1)}W`;
-                if (avgDrawW) {
-                  wattRight += `\nø ${avgDrawW.toFixed(1)}W`;
-                  const remH = bat.energyWh / avgDrawW;
-                  if (remH > 0) wattRight += `\n~${BatteryMetric.formatTimeHours(remH)}`;
-                }
-              }
-
-              // Usage breakdown for AC tooltip (both charging and full — the
-              // RAPL-based estimate is meaningful whenever we're on AC).
-              const usageLines = [];
-              if (isOnAC && bat.usageDetail) {
-                const d = bat.usageDetail;
-                usageLines.push('');
-                usageLines.push('<b>≈ Usage</b>');
-                if (d.pkgWatt != null) usageLines.push(`CPU pkg:  ${d.pkgWatt.toFixed(1)}W`);
-                if (d.gpuWatt)         usageLines.push(`GPU:      ${d.gpuWatt.toFixed(1)}W`);
-                usageLines.push(`DRAM:     ~${d.dram}W`);
-                if (d.display)         usageLines.push(`Display:  ~${d.display}W`);
-                usageLines.push(`Total:    ≈${Math.round(bat.usageW)}W`);
-              } else if (isOnAC && bat.raplAvail === false) {
-                usageLines.push('');
-                usageLines.push('<i>CPU power unavailable — click\n"Enable CPU power monitoring"\nin Power settings</i>');
-              }
-
-              const headerText = isCharging ? '<b>Power — AC</b>'
-                              : isFull     ? '<b>Power — AC (full)</b>'
-                              :              '<b>Power — Battery</b>';
-              const graphLeft  = isCharging ? 'AC↑\n(3hrs)\nDraw↓'
-                              : isFull     ? '(3hrs)'
-                              :              '(3hrs)\nDraw↓';
-              const graphSplit = isCharging ? 1/3 : isFull ? 0.5 : 0.05;
-              const tooltipItems = [
-                { type: 'text', html: headerText },
-                { type: 'graph', left: `${String(pctVals.find(v => v != null) ?? '').padStart(3)}%\n(6hrs)`, right: pctToLbl,
-                  height: 20, marginBottom: 8, marginTop: 8,
-                  series: [{ vals: pctVals, color: C.ok, maxV: 100,
-                    thresholds: { warn: this._batWarn || 30, alert: this._batAlert || 15,
-                                  inverted: true } }] },
-                { type: 'graph', left: graphLeft, right: wattRight,
-                  height: 30, splitFrac: graphSplit, marginBottom: 12, mode: 'bidir',
-                  series: [
-                    { vals: chargeVals, color: C.ok,   dir: 'up'   },
-                    { vals: drawVals,   color: C.draw,  dir: 'down' },
-                  ] },
-                { type: 'text',
-                  html: BatteryMetric.formatTooltip(bat, bat.tempC) + usageLines.join('\n') },
-              ];
-              s.tooltip.setContent(tooltipItems);
-              hasData = true;
-            }
-            break;
-
-          case 'cpu':
-            if (data.cpu) {
-              const tempLevel = data.cpu.packageC >= (this._cpuTempAlert || 85) ? 'alert'
-                              : data.cpu.packageC >= (this._cpuTempWarn  || 70) ? 'warn' : 'ok';
-              this._applyThreshold(s.tile, tempLevel);
-              if (tempLevel === 'alert' && this._cpuTempAlertNotify !== false) {
-                const now = GLib.get_monotonic_time() / 1000;  // ms
-                if ((now - this._cpuTempAlertLastMs) > 30000) {
-                  this._cpuTempAlertLastMs = now;
-                  try {
-                    Gio.Subprocess.new(
-                      ['notify-send', '-u', 'critical', '-i', 'dialog-warning',
-                       'CPU Temperature', `CPU temp critical: ${Math.round(data.cpu.packageC)}\xb0C`],
-                      Gio.SubprocessFlags.NONE
-                    );
-                  } catch(e) {}
-                }
-              } else if (tempLevel !== 'alert') {
-                this._cpuTempAlertLastMs = 0;
-              } 
-              s.label.set_text(this._buildText('cpu', CpuMetric.formatPanel(data.cpu.cpuPct, data.cpu.packageC)));
-              // Build core table inline so graphs can be placed above it
-              const coreHdr  = `${'Core'.padEnd(6)} ${'%usr'.padStart(5)} ${'%sys'.padStart(5)} ${'%iowt'.padStart(6)} ${'temp'.padStart(6)}`;
-              const nTemps   = (data.cpu.coresC || []).length;
-              const coreRows = (data.cpu.coreBreakdowns || []).map((b, i) => {
-                const pt   = nTemps > 0 ? data.cpu.coresC[i % nTemps] : undefined;
-                const temp = pt != null ? `${Math.round(pt)}°C`.padStart(6) : '     —';
-                return `${('C' + i).padEnd(6)} ${(b.usr + '%').padStart(5)} ${(b.sys + '%').padStart(5)} ${(b.iowt + '%').padStart(6)} ${temp}`;
-              });
-              // Structure: [Package heading] [temp graph] [usage% graph] [core table]
-              s.tooltip.setContent([
-                { type: 'text', html: '<b>Package</b>' },
-                { type: 'graph', marginTop: 8, 
-                  left: `Temp:`, right: `${String(Math.round(data.cpu.packageC)).padStart(3)}°C`, height: 20,
-                  series: [{ vals: history.cpuPackageC.values(),
-                    color: C.ok, maxV: 100,
-                    thresholds: { warn: this._cpuTempWarn || 70, alert: this._cpuTempAlert || 85 } }] },
-                { type: 'graph', marginTop: 8,marginBottom: 12,
-                  left: `CPU: `, right: `${String(Math.round(data.cpu.cpuPct)).padStart(3)}%`, height: 20,
-                  series: [{ vals: history.cpuPct.values(),
-                    color: C.ok,
-                    thresholds: { warn: this._cpuUseWarn || 50, alert: this._cpuUseAlert || 80 } }] },
-                { type: 'text', html: [coreHdr, ...coreRows].join('\n') },
-              ]);
-              hasData = true;
-            }
-            break;
-
-          case 'memory':
-            if (data.memory) {
-              s.label.set_text(this._buildText('memory', MemoryMetric.formatPanel(data.memory)));
-              const usedVals = history.memPct.values();
-              const freeVals = usedVals.map(v => 100 - v);
-              // Structure: [stacked graph] [memory text]
-              s.tooltip.setContent([
-                { type: 'text',html: '<b>Memory</b>'},
-                { type: 'graph',
-                  left:  `${Math.round(data.memory.usedPct)}%\nused`,
-                  right: `${data.memory.availableG.toFixed(1)}G\nfree`,
-                  height: 20, mode: 'stacked', marginBottom: 12, marginTop: 9,
-                  series: [
-                    { vals: usedVals, color: [1,    0.4, 0.4,  0.85] },
-                    { vals: freeVals, color: C.ok },
-                  ] },
-                { type: 'text', html: MemoryMetric.formatTooltip(data.memory, null) },
-              ]);
-              hasData = true;
-            }
-            break;
-
-          case 'disk':
-            if (data.disk) {
-              const enabledDevs = parseList(this._diskList)
-                .filter(d => d.enabled).map(d => d.device);
-              const dfDisks = enabledDevs.length > 0
-                ? data.disk.dfDisks.filter(d => enabledDevs.includes(DiskMetric.parentDevice(d.name)))
-                : data.disk.dfDisks;
-              if (dfDisks.length > 0) {
-                const diskRates   = data.diskRates || [];
-                const nvmeTemps   = DiskMetric.readNvmeTemps(fileutil);
-                const parentRates = diskRates.filter(r => DiskMetric.parentDevice(r.name) === r.name);
-                const totalBps    = parentRates.reduce((sum, r) => sum + r.readBytesPerSec + r.writeBytesPerSec, 0);
-                s.label.set_text(this._buildText('disk', DiskMetric.formatPanel(dfDisks, diskRates)));
-                // Structure: [I/O graph] [disk text]
-                s.tooltip.setContent([
-                  { type: 'text', html: '<b>Disks</b>'},
-                  { type: 'graph', marginBottom: 12, marginTop: 8,
-                    left: 'I/O', right: DiskMetric.humanBps(totalBps), height: 20,
-                    series: [{ vals: history.diskIo.values(), color: C.blue }] },
-                  { type: 'text', html: DiskMetric.formatTooltip(dfDisks, diskRates, null, nvmeTemps) },
-                ]);
-                hasData = true;
-              }
-            }
-            break;
-
-          case 'fan':
-            if (data.fan) {
-              s.label.set_text(this._buildText('fan', FanMetric.formatPanel(data.fan)));
-              s.tooltip.setContent([
-                { type: 'text', html: FanMetric.formatTooltip(data.fan) },
-              ]);
-              hasData = true;
-            }
-            break;
-
-          case 'gpu':
-            if (data.gpu && data.gpu.length > 0) {
-              const primary = data.gpu.find(g => g.type !== 'intel') || data.gpu[0];
-              const gpuTempC = primary.tempC;
-              const gpuTempLevel = gpuTempC != null && gpuTempC >= (this._gpuTempAlert || 85) ? 'alert'
-                                : gpuTempC != null && gpuTempC >= (this._gpuTempWarn  || 70) ? 'warn' : 'ok';
-              if (gpuTempLevel === 'alert' && this._gpuTempAlertNotify !== false) {
-                const now = GLib.get_monotonic_time() / 1000;  // ms
-                if ((now - this._gpuTempAlertLastMs) > 30000) {
-                  this._gpuTempAlertLastMs = now;
-                  try {
-                    Gio.Subprocess.new(
-                      ['notify-send', '-u', 'critical', '-i', 'dialog-warning',
-                       'GPU Temperature', `GPU temp critical: ${Math.round(gpuTempC)}\xb0C`],
-                      Gio.SubprocessFlags.NONE
-                    );
-                  } catch(e) {}
-                }
-              } else if (gpuTempLevel !== 'alert') {
-                this._gpuTempAlertLastMs = 0;
-              }
-              s.label.set_text(this._buildText('gpu', GpuMetric.formatPanel(primary)));
-              const hasDiscrete = data.gpu.some(g => g.type !== 'intel');
-              const gpuItems = [];
-              if (hasDiscrete) {
-                const busyPct = primary.busyPct != null ? primary.busyPct : 0;
-                gpuItems.push({
-                  type: 'graph', left: 'Busy', right: `${busyPct}%`,
-                  height: 20, marginTop: 8, marginBottom: 8,
-                  series: [{ vals: history.gpuPct.values(), color: C.ok,
-                    thresholds: { warn: 50, alert: 80 } }]
-                });
-              }
-              gpuItems.push({ type: 'text', html: GpuMetric.formatTooltip(data.gpu) });
-              s.tooltip.setContent(gpuItems);
-              hasData = true;
-            }
-            break;
-
-          case 'network': {
-            if (data.netRates) {
-              const enabledIfaces = parseList(this._netList)
-                .filter(n => n.enabled).map(n => n.iface);
-              const rates = enabledIfaces.length > 0
-                ? data.netRates.filter(r => enabledIfaces.includes(r.name))
-                : data.netRates;
-              if (rates.length > 0) {
-                const totalTx = rates.reduce((sum, r) => sum + r.txBytesPerSec, 0);
-                const totalRx = rates.reduce((sum, r) => sum + r.rxBytesPerSec, 0);
-                s.label.set_text(this._buildText('network', NetworkMetric.formatPanel(rates)));
-                // Structure: [TX↑/RX↓ bidir graph] [per-interface text]
-                s.tooltip.setContent([
-                  { type: 'text', html: '<b>Network</b>'},
-                  { type: 'graph', left: 'TX↑', right: NetworkMetric.humanRate(totalTx),
-                    height: 20,marginTop: 8,
-                    series: [{ vals: history.netTx.values(), color: C.blue }] },
-                  { type: 'graph', left: 'RX↓', right: NetworkMetric.humanRate(totalRx),
-                    height: 20, dir: "down", marginBottom: 12,
-                    series: [{ vals: history.netRx.values(), color: C.purple, dir: 'down' }] },
-                  { type: 'text', html: NetworkMetric.formatTooltip(rates, null, null) },
-                ]);
-                hasData = true;
-              }
-            }
-            break;
-          }
+          case 'uptime':  hasData = this._updateUptimeSection(s, data, history);  break;
+          case 'battery': hasData = this._updateBatterySection(s, data, history); break;
+          case 'cpu':     hasData = this._updateCpuSection(s, data, history);     break;
+          case 'memory':  hasData = this._updateMemorySection(s, data, history);  break;
+          case 'disk':    hasData = this._updateDiskSection(s, data, history);    break;
+          case 'fan':     hasData = this._updateFanSection(s, data, history);     break;
+          case 'gpu':     hasData = this._updateGpuSection(s, data, history);     break;
+          case 'network': hasData = this._updateNetworkSection(s, data, history); break;
         }
       }
 
       const show = enabled && hasData;
       if (show) { s.tile.show(); } else { s.tile.hide(); }
 
-      // Separators: between sections horizontally; above sections vertically; hidden when empty
-      if (show && prevVisible && sepStr) { s.sep.show(); } else { s.sep.hide(); }
-      if (show) prevVisible = true;
+      // Separators: between sections horizontally; above sections vertically; hidden when empty.
+      // In single-tile-mode the tile has been reparented into the strip and
+      // its orphaned sep stays in the panel; force-hide it there.
+      if (s.inStrip) {
+        s.sep.hide();
+      } else if (show && prevVisible && sepStr) {
+        s.sep.show();
+      } else {
+        s.sep.hide();
+      }
+      if (show && !s.inStrip) prevVisible = true;
     }
+    this._syncTriggerTile();
+  }
+
+  _updateUptimeSection(s, data, history) {
+    if (!data.uptime) return false;
+    const numCores = this._manager.getNumCores();
+    const normLoad = data.uptime.load.avg1 / numCores;
+    const loadLevel = normLoad >= ((this._loadAlert || 90) / 100) ? 'alert'
+                    : normLoad >= ((this._loadWarn  || 70) / 100) ? 'warn' : 'ok';
+    this._applyThreshold(s.tile, loadLevel);
+    s.label.set_text(this._buildText('uptime', UptimeMetric.formatUptimeOnly(data.uptime.uptime)));
+    if (s.loadLabel)
+      s.loadLabel.set_text(UptimeMetric.formatLoadOnly(
+        data.uptime.load, this._loadDisplay ? '' : this._uptimeLoadLabel));
+    // Build uptime+load text manually so numCores sits right under Load:
+    const up = data.uptime.uptime;
+    const upParts = [];
+    if (up.days > 0) upParts.push(`${up.days}d`);
+    upParts.push(`${String(up.hours).padStart(2,'0')}h`);
+    upParts.push(`${String(up.minutes).padStart(2,'0')}m`);
+    const ld = data.uptime.load;
+    const uptimeTxt = [
+      `<b>Uptime</b>  ${upParts.join(' ')}`,
+      `<b>Load:</b>   ${ld.avg1.toFixed(2)} / ${ld.avg5.toFixed(2)} / ${ld.avg15.toFixed(2)}`,
+      `        ${numCores} cores`,
+    ].join('\n');
+    const procTxt = (typeof ProcessMetric !== 'undefined'
+      ? ProcessMetric.formatTooltip(data.processes) : '') + `\n\n<i>${_("Click to open top")}</i>`;
+    // Structure: [uptime text] [load graph, no labels] [processes]
+    s.tooltip.setContent([
+      { type: 'text', html: uptimeTxt },
+      { type: 'graph', left: '1min\navg', right: `${ld.avg1.toFixed(2)}`,
+        height: 20, marginTop: 8, marginBottom: 12,
+        series: [{ vals: history.loadAvg.values(),
+          color: C.ok,
+          thresholds: { warn: (this._loadWarn || 70) / 100 * numCores,
+                        alert: (this._loadAlert || 90) / 100 * numCores } }] },
+      { type: 'text', html: procTxt },
+    ]);
+    return true;
+  }
+
+  _updateBatterySection(s, data, history) {
+    if (!data.battery) return false;
+    const bat        = data.battery;
+    const pct        = bat.capacityPct;
+    const isCharging = bat.isCharging;
+    const isFull     = bat.isFull;
+    const isOnAC     = bat.isOnAC;
+
+    // Dynamic icon swap: AC icon whenever on AC (charging OR full),
+    // battery icon only while actually discharging.
+    if (s.iconActor) {
+      const targetImg = isOnAC ? s.acIconImage : s.batIconImage;
+      if (targetImg) s.iconActor.set_content(targetImg);
+    }
+
+    // Tile text: pct% + context-specific watt value
+    const batLevel = pct <= (this._batAlert || 15) ? 'alert'
+                   : pct <= (this._batWarn  || 30) ? 'warn' : 'ok';
+    this._applyThreshold(s.tile, batLevel);
+    let tileWatt;
+    if (isCharging)     tileWatt = bat.usageW != null ? `≈${Math.round(bat.usageW)}W` : `+${bat.powerW.toFixed(1)}W`;
+    else if (isFull)    tileWatt = bat.usageW != null ? `≈${Math.round(bat.usageW)}W` : `AC`;
+    else                tileWatt = `-${bat.powerW.toFixed(1)}W`;
+    s.label.set_text(this._buildText('battery', `${pct}% | ${tileWatt}`));
+
+    const { pctVals, avgDrawW, drawVals, chargeVals } = this._manager.getBatSparklines();
+    const pctToLbl = ` ${String(pct).padStart(3)}% `;
+
+    // Watt graph right label
+    let wattRight;
+    if (isCharging)     wattRight = `+${bat.powerW.toFixed(1)}W`;
+    else if (isFull)    wattRight = `0.0W`;
+    else {
+      wattRight = `-${bat.powerW.toFixed(1)}W`;
+      if (avgDrawW) {
+        wattRight += `\nø ${avgDrawW.toFixed(1)}W`;
+        const remH = bat.energyWh / avgDrawW;
+        if (remH > 0) wattRight += `\n~${BatteryMetric.formatTimeHours(remH)}`;
+      }
+    }
+
+    // Usage breakdown for AC tooltip (both charging and full — the
+    // RAPL-based estimate is meaningful whenever we're on AC).
+    const usageLines = [];
+    if (isOnAC && bat.usageDetail) {
+      const d = bat.usageDetail;
+      usageLines.push('');
+      usageLines.push(`<b>≈ ${_("Usage")}</b>`);
+      if (d.pkgWatt != null) usageLines.push(`${_("CPU pkg:").padEnd(10)}${d.pkgWatt.toFixed(1)}W`);
+      if (d.gpuWatt)         usageLines.push(`${_("GPU:").padEnd(10)}${d.gpuWatt.toFixed(1)}W`);
+      usageLines.push(`${_("DRAM:").padEnd(10)}~${d.dram}W`);
+      if (d.display)         usageLines.push(`${_("Display:").padEnd(10)}~${d.display}W`);
+      usageLines.push(`${_("Total:").padEnd(10)}≈${Math.round(bat.usageW)}W`);
+    } else if (isOnAC && bat.raplAvail === false) {
+      usageLines.push('');
+      usageLines.push(`<i>${_("CPU power unavailable — click\n\"Enable CPU power monitoring\"\nin Power settings")}</i>`);
+    }
+
+    const headerText = isCharging ? `<b>${_("Power — AC")}</b>`
+                    : isFull     ? `<b>${_("Power — AC (full)")}</b>`
+                    :              `<b>${_("Power — Battery")}</b>`;
+    const graphLeft  = isCharging ? `${_("AC↑")}\n${_("(3hrs)")}\n${_("Draw↓")}`
+                    : isFull     ? _("(3hrs)")
+                    :              `${_("(3hrs)")}\n${_("Draw↓")}`;
+    const graphSplit = isCharging ? 1/3 : isFull ? 0.5 : 0.05;
+    s.tooltip.setContent([
+      { type: 'text', html: headerText },
+      { type: 'graph', left: `${String(pctVals.find(v => v != null) ?? '').padStart(3)}%\n(6hrs)`, right: pctToLbl,
+        height: 20, marginBottom: 8, marginTop: 8,
+        series: [{ vals: pctVals, color: C.ok, maxV: 100,
+          thresholds: { warn: this._batWarn || 30, alert: this._batAlert || 15,
+                        inverted: true } }] },
+      { type: 'graph', left: graphLeft, right: wattRight,
+        height: 30, splitFrac: graphSplit, marginBottom: 12, mode: 'bidir',
+        series: [
+          { vals: chargeVals, color: C.ok,   dir: 'up'   },
+          { vals: drawVals,   color: C.draw, dir: 'down' },
+        ] },
+      { type: 'text',
+        html: BatteryMetric.formatTooltip(bat, bat.tempC) + usageLines.join('\n') },
+    ]);
+    return true;
+  }
+
+  _updateCpuSection(s, data, history) {
+    if (!data.cpu) return false;
+    const tempLevel = data.cpu.packageC >= (this._cpuTempAlert || 85) ? 'alert'
+                    : data.cpu.packageC >= (this._cpuTempWarn  || 70) ? 'warn' : 'ok';
+    this._applyThreshold(s.tile, tempLevel);
+    if (tempLevel === 'alert' && this._cpuTempAlertNotify !== false) {
+      if (this._rateLimit('cpuTempAlert', 30000)) {
+        try {
+          Util.spawn(['notify-send', '-u', 'critical', '-i', 'dialog-warning',
+             _("CPU Temperature"), _("CPU temp critical: %d°C").replace('%d', Math.round(data.cpu.packageC))]);
+        } catch(e) {}
+      }
+    } else if (tempLevel !== 'alert') {
+      this._rateLimitReset('cpuTempAlert');
+    }
+    s.label.set_text(this._buildText('cpu', CpuMetric.formatPanel(data.cpu.cpuPct, data.cpu.packageC)));
+    // Build core table inline so graphs can be placed above it
+    const coreHdr = CpuMetric.coreHeader();
+    const nTemps  = (data.cpu.coresC || []).length;
+    const coreRows = (data.cpu.coreBreakdowns || []).map((b, i) => {
+      const pt   = nTemps > 0 ? data.cpu.coresC[i % nTemps] : undefined;
+      const temp = pt != null ? `${Math.round(pt)}°C`.padStart(6) : '     —';
+      return `${('C' + i).padEnd(6)} ${(b.usr + '%').padStart(5)} ${(b.sys + '%').padStart(5)} ${(b.iowt + '%').padStart(6)} ${temp}`;
+    });
+    // Structure: [Package heading] [temp graph] [usage% graph] [core table]
+    s.tooltip.setContent([
+      { type: 'text', html: `<b>${_("Package")}</b>` },
+      { type: 'graph', marginTop: 8,
+        left: `${_("Temp:")}`, right: `${String(Math.round(data.cpu.packageC)).padStart(3)}°C`, height: 20,
+        series: [{ vals: history.cpuPackageC.values(),
+          color: C.ok, maxV: 100,
+          thresholds: { warn: this._cpuTempWarn || 70, alert: this._cpuTempAlert || 85 } }] },
+      { type: 'graph', marginTop: 8, marginBottom: 12,
+        left: `${_("CPU:")} `, right: `${String(Math.round(data.cpu.cpuPct)).padStart(3)}%`, height: 20,
+        series: [{ vals: history.cpuPct.values(),
+          color: C.ok,
+          thresholds: { warn: this._cpuUseWarn || 50, alert: this._cpuUseAlert || 80 } }] },
+      { type: 'text', html: [coreHdr, ...coreRows].join('\n') },
+    ]);
+    return true;
+  }
+
+  _updateMemorySection(s, data, history) {
+    if (!data.memory) return false;
+    s.label.set_text(this._buildText('memory', MemoryMetric.formatPanel(data.memory)));
+    const usedVals = history.memPct.values();
+    const freeVals = usedVals.map(v => 100 - v);
+    // Structure: [stacked graph] [memory text]
+    s.tooltip.setContent([
+      { type: 'text', html: `<b>${_("Memory")}</b>` },
+      { type: 'graph',
+        left:  `${Math.round(data.memory.usedPct)}%\n${_("used")}`,
+        right: `${data.memory.availableG.toFixed(1)}G\n${_("free")}`,
+        height: 20, mode: 'stacked', marginBottom: 12, marginTop: 9,
+        series: [
+          { vals: usedVals, color: [1, 0.4, 0.4, 0.85] },
+          { vals: freeVals, color: C.ok },
+        ] },
+      { type: 'text', html: MemoryMetric.formatTooltip(data.memory, null) },
+    ]);
+    return true;
+  }
+
+  _updateDiskSection(s, data, history) {
+    if (!data.disk) return false;
+    const enabledDevs = parseList(this._diskList)
+      .filter(d => d.enabled).map(d => d.device);
+    const dfDisks = enabledDevs.length > 0
+      ? data.disk.dfDisks.filter(d => enabledDevs.includes(DiskMetric.parentDevice(d.name)))
+      : data.disk.dfDisks;
+    if (dfDisks.length === 0) return false;
+    const diskRates   = data.diskRates || [];
+    const nvmeTemps   = DiskMetric.readNvmeTemps(fileutil);
+    const parentRates = diskRates.filter(r => DiskMetric.parentDevice(r.name) === r.name);
+    const totalBps    = parentRates.reduce((sum, r) => sum + r.readBytesPerSec + r.writeBytesPerSec, 0);
+    s.label.set_text(this._buildText('disk', DiskMetric.formatPanel(dfDisks, diskRates)));
+    // Structure: [I/O graph] [disk text]
+    s.tooltip.setContent([
+      { type: 'text', html: `<b>${_("Disks")}</b>` },
+      { type: 'graph', marginBottom: 12, marginTop: 8,
+        left: _("I/O"), right: DiskMetric.humanBps(totalBps), height: 20,
+        series: [{ vals: history.diskIo.values(), color: C.blue }] },
+      { type: 'text', html: DiskMetric.formatTooltip(dfDisks, diskRates, null, nvmeTemps) },
+    ]);
+    return true;
+  }
+
+  _updateFanSection(s, data, _history) {
+    if (!data.fan) return false;
+    s.label.set_text(this._buildText('fan', FanMetric.formatPanel(data.fan)));
+    s.tooltip.setContent([
+      { type: 'text', html: FanMetric.formatTooltip(data.fan) },
+    ]);
+    return true;
+  }
+
+  _updateGpuSection(s, data, history) {
+    if (!data.gpu || data.gpu.length === 0) return false;
+    const primary = data.gpu.find(g => g.type !== 'intel') || data.gpu[0];
+    const gpuTempC = primary.tempC;
+    const gpuTempLevel = gpuTempC != null && gpuTempC >= (this._gpuTempAlert || 85) ? 'alert'
+                      : gpuTempC != null && gpuTempC >= (this._gpuTempWarn  || 70) ? 'warn' : 'ok';
+    if (gpuTempLevel === 'alert' && this._gpuTempAlertNotify !== false) {
+      if (this._rateLimit('gpuTempAlert', 30000)) {
+        try {
+          Util.spawn(['notify-send', '-u', 'critical', '-i', 'dialog-warning',
+             _("GPU Temperature"), _("GPU temp critical: %d°C").replace('%d', Math.round(gpuTempC))]);
+        } catch(e) {}
+      }
+    } else if (gpuTempLevel !== 'alert') {
+      this._rateLimitReset('gpuTempAlert');
+    }
+    s.label.set_text(this._buildText('gpu', GpuMetric.formatPanel(primary)));
+    const hasDiscrete = data.gpu.some(g => g.type !== 'intel');
+    const gpuItems = [];
+    if (hasDiscrete) {
+      const busyPct = primary.busyPct != null ? primary.busyPct : 0;
+      gpuItems.push({
+        type: 'graph', left: _("Busy"), right: `${busyPct}%`,
+        height: 20, marginTop: 8, marginBottom: 8,
+        series: [{ vals: history.gpuPct.values(), color: C.ok,
+          thresholds: { warn: 50, alert: 80 } }]
+      });
+    }
+    gpuItems.push({ type: 'text', html: GpuMetric.formatTooltip(data.gpu) });
+    s.tooltip.setContent(gpuItems);
+    return true;
+  }
+
+  _updateNetworkSection(s, data, history) {
+    if (!data.netRates) return false;
+    const enabledIfaces = parseList(this._netList)
+      .filter(n => n.enabled).map(n => n.iface);
+    const rates = enabledIfaces.length > 0
+      ? data.netRates.filter(r => enabledIfaces.includes(r.name))
+      : data.netRates;
+    if (rates.length === 0) return false;
+    const totalTx = rates.reduce((sum, r) => sum + r.txBytesPerSec, 0);
+    const totalRx = rates.reduce((sum, r) => sum + r.rxBytesPerSec, 0);
+    s.label.set_text(this._buildText('network', NetworkMetric.formatPanel(rates)));
+    // Structure: [TX↑/RX↓ bidir graph] [per-interface text]
+    s.tooltip.setContent([
+      { type: 'text', html: `<b>${_("Network")}</b>` },
+      { type: 'graph', left: _("TX↑"), right: NetworkMetric.humanRate(totalTx),
+        height: 20, marginTop: 8,
+        series: [{ vals: history.netTx.values(), color: C.blue }] },
+      { type: 'graph', left: _("RX↓"), right: NetworkMetric.humanRate(totalRx),
+        height: 20, dir: "down", marginBottom: 12,
+        series: [{ vals: history.netRx.values(), color: C.purple, dir: 'down' }] },
+      { type: 'text', html: NetworkMetric.formatTooltip(rates, null, null) },
+    ]);
+    return true;
   }
 
   on_applet_removed_from_panel() {
     if (this._restartTimeout) { Mainloop.source_remove(this._restartTimeout); this._restartTimeout = null; }
     if (this._earlyTimeout)   { Mainloop.source_remove(this._earlyTimeout);   this._earlyTimeout   = null; }
     if (this._timeout)        { Mainloop.source_remove(this._timeout);         this._timeout        = null; }
+    // Cancel any pending _launchAndRaise watchers so their window-created
+    // signal and timeouts don't fire against a torn-down applet instance.
+    for (const handle of this._launchHandles) {
+      if (handle.sigId)          { try { global.display.disconnect(handle.sigId); }    catch(e) {} }
+      if (handle.timeoutId)      { try { Mainloop.source_remove(handle.timeoutId); }   catch(e) {} }
+      if (handle.raiseTimeoutId) { try { Mainloop.source_remove(handle.raiseTimeoutId); } catch(e) {} }
+    }
+    this._launchHandles.clear();
+    if (this._manager) { try { this._manager.finalize(); } catch(e) {} }
+    this._destroyStrip();
     if (this._sections) {
       for (const { tooltip } of Object.values(this._sections))
         try { tooltip.destroy(); } catch(e) {}

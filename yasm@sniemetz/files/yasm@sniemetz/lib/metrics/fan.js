@@ -10,21 +10,22 @@ function parseFanInputs(fileutil, hwmonPath) {
   return fans;
 }
 
+const { _, padColumn } = typeof imports !== 'undefined' ? imports.lib.util : require('../util.js');
+
 function formatPanel(fans) {
-  if (!fans || fans.length === 0) return 'no fans';
+  if (!fans || fans.length === 0) return _("no fans");
   const maxRpm = Math.max(...fans.map(f => f.rpm));
   // Every fan reporting 0 rpm means the fan curve has spun them down —
   // '0rpm' reads as a broken sensor, 'off' reads as the actual state.
-  if (maxRpm === 0) return 'off';
+  if (maxRpm === 0) return _("off");
   return `${maxRpm}rpm`;
 }
 
 function formatTooltip(fans) {
-  if (!fans || fans.length === 0) return 'No fans detected';
-  const lines = ['<b>Fans</b>'];
-  fans.forEach(f => {
-    lines.push(`${f.label.padEnd(14)}${f.rpm} rpm`);
-  });
+  if (!fans || fans.length === 0) return _("No fans detected");
+  const lines = [`<b>${_("Fans")}</b>`];
+  const pairs = fans.map(f => [f.label, `${f.rpm} rpm`]);
+  lines.push(...padColumn(pairs));
   return lines.join('\n');
 }
 
