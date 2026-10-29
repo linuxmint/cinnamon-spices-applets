@@ -1,0 +1,31 @@
+{
+  "update-interval": {
+    "type": "spinbutton",
+    "default": 5000,
+    "min": 2000,
+    "max": 60000,
+    "step": 500,
+    "units": "ms",
+    "description": "Status check interval"
+  },
+
+  "binary-path": {
+    "type": "entry",
+    "default": "cato-sdp",
+    "description": "Path to the cato-sdp executable",
+    "tooltip": "Only change this if 'cato-sdp' is not in your PATH, e.g. /opt/catonetworks/cato_client/cato-sdp"
+  },
+
+  "show-notifications": {
+    "type": "switch",
+    "default": true,
+    "description": "Show a desktop notification when the connection status changes"
+  },
+
+  "debug-mode": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable debug logging",
+    "tooltip": "Logs every cato-sdp invocation (command, exit code, stdout/stderr) to Cinnamon's log. View it with 'journalctl --user -f /usr/bin/cinnamon' or Looking Glass (Alt+F2, lg). Also adds a 'Copy Debug Info' menu entry."
+  }
+}
