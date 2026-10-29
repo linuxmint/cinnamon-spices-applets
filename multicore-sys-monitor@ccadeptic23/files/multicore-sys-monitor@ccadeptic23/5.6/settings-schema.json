@@ -234,6 +234,7 @@
         "CPU_stuckMethod",
         "CPU_minLoadStuckProcess",
         "CPU_durationStuckProcess",
+        "CPU_unitStuckProcess",
         "CPU_bgColorStuckProcess"
       ]
     },
@@ -1104,7 +1105,7 @@
   "CPU_minLoadStuckProcess": {
     "type": "scale",
     "units": "%",
-    "min": 95,
+    "min": 10,
     "max": 100,
     "step": 1,
     "default": 98,
@@ -1112,12 +1113,21 @@
   },
   "CPU_durationStuckProcess": {
     "type": "scale",
-    "units": " seconds",
     "min": 1,
     "max": 60,
     "step": 1,
     "default": 10,
-    "description": "Consider a process to be stuck after (seconds)"
+    "description": "Consider a process to be stuck after (in Selected Unit)"
+  },
+  "CPU_unitStuckProcess": {
+    "type": "combobox",
+    "default": "s",
+    "description": "Selected Unit",
+    "options": {
+      "seconds": "s",
+      "minutes": "m",
+      "hours": "h"
+    }
   },
   "CPU_bgColorStuckProcess": {
     "type": "colorchooser",

@@ -304,6 +304,7 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         this.settings.bind("CPU_stuckMethod", "CPU_stuckMethod");
         this.settings.bind("CPU_minLoadStuckProcess", "CPU_minLoadStuckProcess");
         this.settings.bind("CPU_durationStuckProcess", "CPU_durationStuckProcess");
+        this.settings.bind("CPU_unitStuckProcess", "CPU_unitStuckProcess");
         this.settings.bind("CPU_bgColorStuckProcess", "CPU_bgColorStuckProcess");
 
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
