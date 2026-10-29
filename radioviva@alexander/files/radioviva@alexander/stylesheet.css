@@ -1,0 +1,57 @@
+/**
+ * RadioViva - Estilos do Player Card e Toolbar
+ */
+
+.radioviva-player-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 6px 10px 4px 10px;
+}
+
+.radioviva-station-name {
+    font-weight: bold;
+    font-size: 1.15em;
+    color: #ffffff;
+    text-align: center;
+}
+
+.radioviva-track-title {
+    font-size: 0.9em;
+    color: #94a3b8;
+    text-align: center;
+    padding-bottom: 6px;
+}
+
+.radioviva-btn {
+    padding: 8px 14px;
+    margin: 0 3px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    transition-duration: 150ms;
+}
+
+.radioviva-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.radioviva-btn-play {
+    background-color: rgba(34, 197, 94, 0.35);
+    border-color: rgba(34, 197, 94, 0.6);
+}
+
+.radioviva-btn-play:hover {
+    background-color: rgba(34, 197, 94, 0.55);
+}
+
+.radioviva-btn-stop {
+    background-color: rgba(239, 68, 68, 0.30);
+    border-color: rgba(239, 68, 68, 0.55);
+}
+
+.radioviva-btn-stop:hover {
+    background-color: rgba(239, 68, 68, 0.55);
+}
