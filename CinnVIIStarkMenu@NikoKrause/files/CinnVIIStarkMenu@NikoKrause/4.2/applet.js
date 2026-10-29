@@ -47,6 +47,7 @@ const REMEMBER_RECENT_KEY = "remember-recent-files";
 const AppUtils = require('./appUtils');
 
 let appsys = Cinnamon.AppSystem.get_default();
+
 const RefreshFlags = Object.freeze({
     APP:    0b00001,
     FAV:    0b00010,
@@ -1877,9 +1878,6 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     constructor(orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
-        // Kept per instance - each menu (e.g. one per panel) has its own panes.
-        this.visiblePane = "favs";
-
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.set_applet_tooltip(_("Menu"));
@@ -1930,6 +1928,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this._searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon',
             icon_name: 'edit-clear',
             icon_type: St.IconType.SYMBOLIC });
+        this.visiblePane = "favs";
         this._searchIconClickedId = 0;
         this._applicationsButtons = [];
         this._applicationsButtonFromApp = {};
@@ -2505,7 +2504,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     toggleContextMenu(button) {
         if (!button.withMenu)
             return;
-        
+
         if (!this.contextMenu) {
             let menu = new PopupMenu.PopupSubMenu(null); // hack: creating without actor
             menu.actor.set_style_class_name('menu-context-menu');
