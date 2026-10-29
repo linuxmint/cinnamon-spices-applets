@@ -1,0 +1,222 @@
+{
+    "layout1": {
+        "type": "layout",
+        "pages": [
+            "page-switches",
+            "page-panel",
+            "page-behavior"
+        ],
+        "page-switches": {
+            "type": "page",
+            "title": "Switches",
+            "sections": [
+                "section-info",
+                "section-switches",
+                "section-groups"
+            ]
+        },
+        "page-panel": {
+            "type": "page",
+            "title": "Panel",
+            "sections": [
+                "section-panel",
+                "section-click"
+            ]
+        },
+        "page-behavior": {
+            "type": "page",
+            "title": "Behavior",
+            "sections": [
+                "section-status",
+                "section-network"
+            ]
+        },
+        "section-info": {
+            "type": "section",
+            "title": "How it works",
+            "keys": [
+                "info-label"
+            ]
+        },
+        "section-switches": {
+            "type": "section",
+            "title": "Relays / sockets",
+            "keys": [
+                "switches"
+            ]
+        },
+        "section-groups": {
+            "type": "section",
+            "title": "Groups",
+            "keys": [
+                "groups"
+            ]
+        },
+        "section-panel": {
+            "type": "section",
+            "title": "Panel appearance",
+            "keys": [
+                "panel-display",
+                "panel-icon",
+                "panel-icon-on"
+            ]
+        },
+        "section-click": {
+            "type": "section",
+            "title": "Middle mouse button",
+            "keys": [
+                "middle-click"
+            ]
+        },
+        "section-status": {
+            "type": "section",
+            "title": "Status display",
+            "keys": [
+                "poll-interval",
+                "notify-errors",
+                "show-all-items"
+            ]
+        },
+        "section-network": {
+            "type": "section",
+            "title": "Network",
+            "keys": [
+                "timeout"
+            ]
+        }
+    },
+    "info-label": {
+        "type": "label",
+        "description": "One row per switch in the menu. Several hosts (comma separated) are switched together; the status is read back from the board after every action."
+    },
+    "switches": {
+        "type": "list",
+        "description": "Switches",
+        "tooltip": "Order of the rows is the order in the menu, names must be unique.\nHost(s): 192.168.1.50 or http://board.local:8080 - separate several with commas.\nOn/Off/Status are paths appended to the host; leave empty for the defaults (/relay?state=1, /relay?state=0, /relay).",
+        "columns": [
+            {
+                "id": "name",
+                "title": "Name",
+                "type": "string"
+            },
+            {
+                "id": "icon",
+                "title": "Icon",
+                "type": "icon"
+            },
+            {
+                "id": "hosts",
+                "title": "Host(s)",
+                "type": "string"
+            },
+            {
+                "id": "on_path",
+                "title": "On",
+                "type": "string",
+                "default": "/relay?state=1"
+            },
+            {
+                "id": "off_path",
+                "title": "Off",
+                "type": "string",
+                "default": "/relay?state=0"
+            },
+            {
+                "id": "status_path",
+                "title": "Status",
+                "type": "string",
+                "default": "/relay"
+            }
+        ],
+        "default": [],
+        "height": 165
+    },
+    "groups": {
+        "type": "list",
+        "description": "Groups",
+        "tooltip": "Optional: combine several switches into one additional switch. Member names must match the switch list exactly, separated by commas.",
+        "columns": [
+            {
+                "id": "name",
+                "title": "Name",
+                "type": "string"
+            },
+            {
+                "id": "icon",
+                "title": "Icon",
+                "type": "icon"
+            },
+            {
+                "id": "members",
+                "title": "Switches",
+                "type": "string"
+            }
+        ],
+        "default": [],
+        "height": 95
+    },
+    "panel-display": {
+        "type": "combobox",
+        "description": "Text next to the icon",
+        "tooltip": "The text only appears while at least one switch is on.",
+        "default": "count",
+        "options": {
+            "Nothing": "none",
+            "Count (2/4)": "count",
+            "Names of the active switches": "names"
+        }
+    },
+    "panel-icon": {
+        "type": "iconfilechooser",
+        "description": "Icon",
+        "tooltip": "Icon name (e.g. network-server-symbolic) or a file. Symbolic icons follow the panel color.",
+        "default": "network-server-symbolic"
+    },
+    "panel-icon-on": {
+        "type": "iconfilechooser",
+        "description": "Icon while something is on",
+        "tooltip": "Leave empty to keep the same icon. A colored icon makes the active state visible at a glance.",
+        "default": ""
+    },
+    "middle-click": {
+        "type": "combobox",
+        "description": "Action on middle click",
+        "default": "refresh",
+        "options": {
+            "Nothing": "nothing",
+            "Switch everything on": "all-on",
+            "Switch everything off": "all-off",
+            "Refresh status": "refresh",
+            "Open menu": "menu"
+        }
+    },
+    "poll-interval": {
+        "type": "spinbutton",
+        "description": "Status check interval",
+        "tooltip": "0 = no automatic polling (status is read when the menu opens).",
+        "default": 30,
+        "min": 0,
+        "max": 600,
+        "step": 5,
+        "units": "seconds"
+    },
+    "notify-errors": {
+        "type": "switch",
+        "description": "Notify when a device does not respond",
+        "default": true
+    },
+    "show-all-items": {
+        "type": "switch",
+        "description": "Show 'All on' / 'All off' in the menu",
+        "default": true
+    },
+    "timeout": {
+        "type": "spinbutton",
+        "description": "HTTP timeout",
+        "default": 5,
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "units": "seconds"
+    }
+}
