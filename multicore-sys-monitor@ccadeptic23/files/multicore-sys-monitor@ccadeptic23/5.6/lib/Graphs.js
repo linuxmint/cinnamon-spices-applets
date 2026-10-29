@@ -156,6 +156,11 @@ var GraphVBars = class GraphVBars {
       if (this.applet.CPU_stuckMethod != "kernel") {
         let _now = Date.now();
         let maxDuration = 1000 * this.applet.CPU_durationStuckProcess;
+        let _unit = this.applet.CPU_unitStuckProcess;
+        if (_unit === "m")
+          maxDuration = 60 * maxDuration;
+        else if (_unit === "h")
+          maxDuration = 3600 * maxDuration;
         for (let i=0; i<this.applet.CPU_stuckFromDate.length; i++) {
           if ( _now - this.applet.CPU_stuckFromDate[i] >= maxDuration ) {
             bgColor = RGBa2rgba(this.applet.CPU_bgColorStuckProcess);
