@@ -1,0 +1,454 @@
+{
+    "kopf-anzeige": {
+        "type": "header",
+        "description": "Hover display"
+    },
+    "refresh-interval": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "units": "seconds",
+        "description": "Update interval",
+        "tooltip": "The interval follows the system clock. With applet and desklet set to the same interval, both measure and update at the same moment."
+    },
+    "popup-height-ratio": {
+        "type": "scale",
+        "default": 70,
+        "min": 40,
+        "max": 90,
+        "step": 5,
+        "digits": 0,
+        "units": "%",
+        "description": "Display size",
+        "tooltip": "How much of the screen height the hover display takes up. Font size and column widths are derived from this and from the number of values shown."
+    },
+    "popup-opacity": {
+        "type": "scale",
+        "default": 35,
+        "min": 0,
+        "max": 55,
+        "step": 5,
+        "digits": 0,
+        "units": "%",
+        "description": "Background panel",
+        "tooltip": "Opacity of the panel behind the display. At 0 per cent the display has no panel at all. Higher values darken it. Over light screen content it turns mid-grey, which costs the warning colours contrast; at high opacity the muted colour set works better."
+    },
+    "linksklick-aktion": {
+        "type": "combobox",
+        "default": "anzeige",
+        "description": "Left-click action",
+        "options": {
+            "Toggle the display": "anzeige",
+            "Open the system monitor": "systemueberwachung",
+            "Nothing": "nichts"
+        },
+        "tooltip": "“Toggle the display” keeps the values on screen after a click until you click again, click elsewhere or press Esc. This mainly helps on a touchscreen, where there is no hovering. It does not start the speed test — that lives in the right-click menu."
+    },
+    "kopf-panel": {
+        "type": "header",
+        "description": "Panel"
+    },
+    "panel-symbol": {
+        "type": "combobox",
+        "default": "icon",
+        "description": "Panel icon",
+        "tooltip": "The colour logo suits dark panels. The single-colour variants take the colour of the panel theme and work on light panels too. Status icon size lines the logo up with Wi-Fi, volume and battery instead of making it stand out like an application icon.",
+        "options": {
+            "Logo, in colour": "icon",
+            "Logo, single colour": "symbolic",
+            "Logo, single colour, status icon size": "symbolic-status",
+            "Text, “aVP”": "text"
+        }
+    },
+    "kopf-messwerte": {
+        "type": "header",
+        "description": "Displayed values"
+    },
+    "hinweis-messwerte": {
+        "type": "label",
+        "description": "Shown: tick or untick. Order: select a row and move it with the arrows. Custom label: double-click the row; leave empty for the default. Values without a sensor are not displayed on this machine."
+    },
+    "messwert-liste": {
+        "type": "list",
+        "description": "Values",
+        "height": 430,
+        "hidden-buttons": [
+            "+",
+            "-"
+        ],
+        "columns": [
+            {
+                "id": "messwert",
+                "title": "Value",
+                "type": "string",
+                "options": {
+                    "CPU temperature  (default: CPU)": "cpu_temp",
+                    "CPU load  (default: LOAD)": "cpu_load",
+                    "Memory use  (default: RAM)": "ram_load",
+                    "Drive temperature  (default: SSD)": "storage_temp",
+                    "Free disk space  (default: FREE ⛁)": "storage_free",
+                    "Fan speed  (default: FAN)": "fan_speed",
+                    "Battery charge  (default: BATT)": "battery_charge",
+                    "Power supply  (default: STATUS)": "psu_state",
+                    "Network download  (default: DOWN)": "net_down",
+                    "Network upload  (default: UP)": "net_up",
+                    "Speed test download  (default: SPEED ↓)": "speed_down",
+                    "Speed test upload  (default: SPEED ↑)": "speed_up",
+                    "Ping  (default: PING)": "ping",
+                    "Jitter  (default: JITTER)": "jitter",
+                    "Age of the speed test  (default: LAST ◷)": "speed_age"
+                }
+            },
+            {
+                "id": "bezeichnung",
+                "title": "Custom label",
+                "type": "string",
+                "default": "",
+                "align": 0.5
+            },
+            {
+                "id": "sichtbar",
+                "title": "Shown",
+                "type": "boolean",
+                "default": true,
+                "align": 0.5
+            }
+        ],
+        "default": [
+            {
+                "messwert": "cpu_temp",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "cpu_load",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "ram_load",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "storage_temp",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "storage_free",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "fan_speed",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "battery_charge",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "psu_state",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "net_down",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "net_up",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "speed_down",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "speed_up",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "ping",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "jitter",
+                "bezeichnung": "",
+                "sichtbar": true
+            },
+            {
+                "messwert": "speed_age",
+                "bezeichnung": "",
+                "sichtbar": true
+            }
+        ]
+    },
+    "kopf-sensoren": {
+        "type": "header",
+        "description": "Sensors"
+    },
+    "hinweis-sensoren": {
+        "type": "label",
+        "description": "“Automatic” picks a suitable sensor by itself. The list shows every sensor on this machine with its reading at the time of detection. It is refreshed after “Detect hardware again”."
+    },
+    "sensor-cpu": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "CPU temperature",
+        "options": {
+            "Automatic": "auto"
+        }
+    },
+    "sensor-storage": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Drive temperature",
+        "options": {
+            "Automatic": "auto"
+        }
+    },
+    "sensor-fan": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Fan",
+        "options": {
+            "Automatic": "auto"
+        }
+    },
+    "kopf-quellen": {
+        "type": "header",
+        "description": "Network and disk space"
+    },
+    "hinweis-quellen": {
+        "type": "label",
+        "description": "Sets which network interface DOWN/UP reports and which drive FREE reports. Only local drives are offered — a network share that cannot be reached could block the interface. A USB stick plugged in later appears after “Detect hardware again”."
+    },
+    "netz-schnittstelle": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Network interface",
+        "options": {
+            "Automatic": "auto"
+        }
+    },
+    "laufwerk-free": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Drive for FREE",
+        "options": {
+            "Automatic": "auto"
+        }
+    },
+    "kopf-warnschwellen": {
+        "type": "header",
+        "description": "Warning thresholds"
+    },
+    "warnschwellen-aktiv": {
+        "type": "switch",
+        "default": true,
+        "description": "Show warning colours"
+    },
+    "warnfarben-satz": {
+        "type": "combobox",
+        "default": "dunkel",
+        "dependency": "warnschwellen-aktiv",
+        "description": "Warning colours",
+        "options": {
+            "For dark backgrounds (bright)": "dunkel",
+            "For light backgrounds (muted)": "hell"
+        },
+        "tooltip": "Which colours read better depends on what is behind the display. Bright suits dark wallpapers, muted suits light ones."
+    },
+    "hinweis-warnschwellen": {
+        "type": "label",
+        "dependency": "warnschwellen-aktiv",
+        "description": "Orange means warning, red means critical; value and unit are coloured. Temperatures and load warn at or above the threshold, free disk space and battery below it. The battery is only judged on battery power, disk space as a percentage of the selected drive. The colour only clears once the value has left the threshold by 2. To change a row: double-click it, or select it and use the pencil."
+    },
+    "warnschwellen-liste": {
+        "type": "list",
+        "dependency": "warnschwellen-aktiv",
+        "description": "Warning thresholds",
+        "height": 230,
+        "hidden-buttons": [
+            "+",
+            "-",
+            "up",
+            "down"
+        ],
+        "columns": [
+            {
+                "id": "messwert",
+                "title": "Value",
+                "type": "string",
+                "options": {
+                    "CPU temperature  (°C, warns at or above)": "cpu_temp",
+                    "Drive temperature  (°C, warns at or above)": "storage_temp",
+                    "CPU load  (%, warns at or above)": "cpu_load",
+                    "Memory use  (%, warns at or above)": "ram_load",
+                    "Free disk space  (% free, warns below)": "storage_free",
+                    "Battery charge  (%, warns below, on battery only)": "battery_charge"
+                }
+            },
+            {
+                "id": "warnung",
+                "title": "Warning",
+                "type": "integer",
+                "min": 0,
+                "max": 150,
+                "step": 1,
+                "default": 0,
+                "align": 0.5
+            },
+            {
+                "id": "kritisch",
+                "title": "Critical",
+                "type": "integer",
+                "min": 0,
+                "max": 150,
+                "step": 1,
+                "default": 0,
+                "align": 0.5
+            },
+            {
+                "id": "aktiv",
+                "title": "Active",
+                "type": "boolean",
+                "default": true,
+                "align": 0.5
+            }
+        ],
+        "default": [
+            {
+                "messwert": "cpu_temp",
+                "warnung": 80,
+                "kritisch": 90,
+                "aktiv": true
+            },
+            {
+                "messwert": "storage_temp",
+                "warnung": 70,
+                "kritisch": 80,
+                "aktiv": true
+            },
+            {
+                "messwert": "cpu_load",
+                "warnung": 85,
+                "kritisch": 95,
+                "aktiv": true
+            },
+            {
+                "messwert": "ram_load",
+                "warnung": 85,
+                "kritisch": 95,
+                "aktiv": true
+            },
+            {
+                "messwert": "storage_free",
+                "warnung": 10,
+                "kritisch": 5,
+                "aktiv": true
+            },
+            {
+                "messwert": "battery_charge",
+                "warnung": 20,
+                "kritisch": 10,
+                "aktiv": true
+            }
+        ]
+    },
+    "kopf-speedtest": {
+        "type": "header",
+        "description": "Internet speed test"
+    },
+    "hinweis-speedtest": {
+        "type": "label",
+        "description": "Right-click the panel icon to open the menu with “Run a speed test now”.",
+        "dependency": "speedtest-vorhanden"
+    },
+    "speedtest-vorhanden": {
+        "type": "generic",
+        "default": true
+    },
+    "speedtest-programm": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Speed test program",
+        "options": {
+            "Automatic": "auto"
+        },
+        "tooltip": "What measures. “Automatic” picks the best program present. A program you selected that later goes missing shows up as “Not found”; measuring falls back to automatic, and your choice applies again once the program is back.",
+        "dependency": "speedtest-vorhanden"
+    },
+    "hinweis-speedtest-programm": {
+        "type": "label",
+        "description": "aVincePulse can measure with librespeed-cli or with speedtest-cli. “Automatic” takes librespeed-cli where present: it measures against the free LibreSpeed servers and is the only one of the two that reports jitter. With speedtest-cli the jitter row therefore stays at “--”. Only what is installed on this machine is offered.",
+        "dependency": "speedtest-vorhanden"
+    },
+    "hinweis-kein-speedtest": {
+        "type": "label",
+        "description": "The internet speed test needs either librespeed-cli or speedtest-cli. Neither was found on this machine, so the SPEED, PING, JITTER and LAST rows stay at “--”. Every other value is unaffected.",
+        "dependency": "!speedtest-vorhanden"
+    },
+    "btn-speedtest": {
+        "type": "button",
+        "description": "Run a speed test now",
+        "callback": "on_speedtest_starten",
+        "dependency": "speedtest-vorhanden"
+    },
+    "btn-berichte-speedtest": {
+        "type": "button",
+        "description": "Open the speed test reports",
+        "callback": "on_berichte_speedtest_oeffnen"
+    },
+    "kopf-hardware": {
+        "type": "header",
+        "description": "Hardware detection"
+    },
+    "btn-hardware-neu": {
+        "type": "button",
+        "description": "Detect hardware again",
+        "callback": "on_hardware_neu_erkennen"
+    },
+    "hinweis-hardware-neu": {
+        "type": "label",
+        "description": "If the detection finds sensors, interfaces or drives that are new or gone, you are asked whether this window may briefly close and reopen in the same place to refresh the lists. No window is closed without your consent."
+    },
+    "btn-berichte-hardware": {
+        "type": "button",
+        "description": "Open the hardware reports",
+        "callback": "on_berichte_hardware_oeffnen"
+    },
+    "kopf-zuruecksetzen": {
+        "type": "header",
+        "description": "Reset"
+    },
+    "btn-standardwerte": {
+        "type": "button",
+        "description": "Restore the defaults",
+        "callback": "on_standardwerte_zuruecksetzen"
+    },
+    "kopf-unterstuetzung": {
+        "type": "header",
+        "description": "Support"
+    },
+    "hinweis-unterstuetzung": {
+        "type": "label",
+        "description": "aVincePulse is free and complete — there is no paid version and nothing is held back. If it is useful to you, you are welcome to support its further development. The button opens the support page in your browser; nothing else happens."
+    },
+    "btn-unterstuetzen": {
+        "type": "button",
+        "description": "Support aVincePulse …",
+        "callback": "on_unterstuetzen"
+    }
+}
