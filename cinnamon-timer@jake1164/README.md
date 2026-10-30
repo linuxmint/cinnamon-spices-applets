@@ -6,7 +6,17 @@ All settings can be changed by right clicking on the icon and selecting configur
 
 ## Installing
 
-0) Add sox play if you want sound capability: sudo apt-get install sox
+0) If you want sound capability:
+
+  * Add sox play: `sudo apt-get install sox`
+
+or
+
+  * Add ffmpeg ffplay: `sudo apt-get install ffmpeg`
+
+or
+
+  * Add mplayer: `sudo apt-get install mplayer`
 
 1) Extract to ~/.local/share/cinnamon/applets
 
