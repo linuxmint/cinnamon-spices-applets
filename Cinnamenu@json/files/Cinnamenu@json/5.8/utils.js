@@ -296,7 +296,7 @@ var scrollToButton = (button, enableAnimation) => {
 }
 
 function _launchPamac(pkgName) {
-    GLib.spawn_command_line_async(`pamac-manager --details=${pkgName}`);
+    Util.spawn(['pamac-manager', '--details=' + pkgName]);
 }
 
 // launch pamac-manager on app page
