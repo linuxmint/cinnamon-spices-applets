@@ -1,5 +1,4 @@
 const Cinnamon = imports.gi.Cinnamon;
-const Lang = imports.lang;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const Clutter = imports.gi.Clutter;
@@ -20,7 +19,7 @@ const AppletManager = imports.ui.appletManager;
 const Gettext = imports.gettext;
 
 const UUID = "xapp-status-collapsible@paradoxxx";
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -231,12 +230,12 @@ class XAppStatusIcon {
 
         this._tooltip = new Tooltips.PanelItemTooltip(this, "", applet.orientation);
 
-        this.actor.connect('button-press-event', Lang.bind(this, this.onButtonPressEvent));
-        this.actor.connect('button-release-event', Lang.bind(this, this.onButtonReleaseEvent));
+        this.actor.connect('button-press-event', (actor, event) => this.onButtonPressEvent(actor, event));
+        this.actor.connect('button-release-event', (actor, event) => this.onButtonReleaseEvent(actor, event));
         this.actor.connect('scroll-event', (...args) => this.onScrollEvent(...args));
-        this.actor.connect('enter-event', Lang.bind(this, this.onEnterEvent));
+        this.actor.connect('enter-event', (actor, event) => this.onEnterEvent(actor, event));
 
-        this._proxy_prop_change_id = this.proxy.connect('g-properties-changed', Lang.bind(this, this.on_properties_changed))
+        this._proxy_prop_change_id = this.proxy.connect('g-properties-changed', (...args) => this.on_properties_changed(...args));
 
         this.refresh();
     }
@@ -1220,26 +1219,34 @@ class CinnamonXAppStatusApplet extends Applet.Applet {
         const button = icon.get_parent();
 
         if (button == null) {
-            return GLib.SOURCE_REMOVE;
+            return Clutter.EVENT_PROPAGATE;
         }
 
-        if (etype === Clutter.EventType.BUTTON_PRESS) {
-            global.begin_modal(Meta.ModalOptions.POINTER_ALREADY_GRABBED, event.time);
-        }
-        else if (etype === Clutter.EventType.ENTER) {
+        if (etype === Clutter.EventType.ENTER) {
             button.add_style_pseudo_class("hover");
         }
         else if (etype === Clutter.EventType.LEAVE) {
             button.remove_style_pseudo_class("hover");
         }
 
-        let ret = icon.handle_event(etype, event);
-
-        if (etype === Clutter.EventType.BUTTON_PRESS) {
-            global.end_modal(event.time);
+        if (etype !== Clutter.EventType.BUTTON_PRESS) {
+            return icon.handle_event(etype, event);
         }
 
-        return ret;
+        // Same as the stock systray@cinnamon.org applet: XEmbed clients (GtkStatusIcon
+        // and friends) grab the pointer to show their context menu, which fails while
+        // Clutter holds it. Without this, right-click menus of legacy tray icons never
+        // appear. The modal is released synchronously in this same handler, even on
+        // error, and only if it was actually acquired, so it can never be left active.
+        let modal = global.begin_modal(event.get_time(), Meta.ModalOptions.POINTER_ALREADY_GRABBED);
+
+        try {
+            return icon.handle_event(etype, event);
+        } finally {
+            if (modal) {
+                global.end_modal(event.get_time());
+            }
+        }
     }
 
     _onTrayIconRemoved(o, icon) {
