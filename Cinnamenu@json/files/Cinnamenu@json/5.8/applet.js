@@ -10,7 +10,6 @@ const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
 const GnomeSession = imports.misc.gnomeSession;
-const AppletManager = imports.ui.appletManager;
 const {ScreenSaverProxy} = imports.misc.screenSaver;
 const {PopupMenuManager, PopupIconMenuItem} = imports.ui.popupMenu;
 const {getAppFavorites} = imports.ui.appFavorites;
@@ -18,11 +17,11 @@ const {TextIconApplet, AllowedLayout, AppletPopupMenu, PopupResizeHandler} = imp
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
 const {AppletSettings} = imports.ui.settings;
+const Mainloop = imports.mainloop;
 
 const {_, graphemeBaseChars, searchStr} = require('./utils');
 const {Display} = require('./display');
 const {getWebBookmarksAsync} = require('./browserBookmarks');
-const {wikiSearch, clearWikiSearchCache} = require('./wikipediaSearch');
 const {searchBrowserHistory} = require('./browserHistory');
 const {EMOJI, EMOJI_CATEGORIES} = require('./emoji');
 const {searchSuggestions} = require('./suggestions');
@@ -32,7 +31,10 @@ const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const SEARCH_THRESHOLD = 0.45;
 const SidebarPlacement = Object.freeze({TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
 
-/*This graph shows the classes in which other classes are instantiated.
+/* This graph shows the classes in which other classes are instantiated and how they are
+ * acessed. e.g. to call the update() method in categoriesView from contextMenu class use:
+ * this.applet.display.categoriesView.update()
+
                                         ┌── class AppsView ───────┬── class AppButton
                                         │                         └── class Subheading
                                         │
@@ -55,33 +57,33 @@ class CinnamenuApplet extends TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
         this.setAllowedLayout(AllowedLayout.BOTH);
-        if (orientation === St.Side.BOTTOM || orientation === St.Side.TOP) {
-            this.set_applet_label(_('Initializing'));
-        }
         this.privacy_settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.privacy'});
         this.appFavorites = getAppFavorites();
         this.currentCategory = 'all';
+        this.calculatorHistory = [];
         this.recentManagerDefault = Gtk.RecentManager.get_default();
         this.orientation = orientation;
+        this.metadata = metadata;
         this.menuManager = new PopupMenuManager(this);
         this.menu = new AppletPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
-        this.menu.setCustomStyleClass('menu-background cinnamenu');//starkmenu-background');
         this.signals = new SignalManager(null);
         this.appSystem = Cinnamon.AppSystem.get_default();
-        this._canUninstallApps = GLib.file_test("/usr/bin/cinnamon-remove-application",
-                                                GLib.FileTest.EXISTS);
-        this._pamacManagerAvailable = GLib.file_test("/usr/bin/pamac-manager", GLib.FileTest.EXISTS);
+        this._canUninstallApps = GLib.find_program_in_path("cinnamon-remove-application");
+        this._pamacManagerAvailable = GLib.find_program_in_path("pamac-manager");
         const searchFilesMenuItem = new PopupIconMenuItem(_('Find files...'), 'system-search',
                                                                         St.IconType.SYMBOLIC, false);
         this._applet_context_menu.addMenuItem(searchFilesMenuItem);
         searchFilesMenuItem.connect('activate', () => {
-                        Util.spawnCommandLine(__meta.path + '/search.py ' + GLib.get_home_dir()); });
-        this.resizer = new PopupResizeHandler(this.menu.actor,
-                                              () => this.orientation,
-                                              (w,h) => this.display.onMenuResized(w,h),
-                                              () => this.settings.customMenuWidth * global.ui_scale,
-                                              () => this.settings.customMenuHeight * global.ui_scale);
+            Util.spawn([this.metadata.path + '/search.py', GLib.get_home_dir()]);
+        });
+        this.resizer = new PopupResizeHandler(
+            this.menu.actor,
+            () => this.orientation,
+            (w,h) => this.display.onMenuResized(w,h),
+            () => this.settings.customMenuWidth * global.ui_scale,
+            () => this.settings.customMenuHeight * global.ui_scale
+        );
         this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY,
                                                         () => this._onEnableRecentsChange());
 
@@ -95,37 +97,51 @@ class CinnamenuApplet extends TextIconApplet {
                 return;
             }
             this.lastRenderTime = now;
-    
+
             this.display.destroy();
             this.menu.removeAll();
-            this.display = new Display(this);
+            this.display = new Display(this)
+            this.display.sidebar.populate();
+            this.display.categoriesView.update();
             this.display.clearFocusedActors();
         }
-        
+
         this.signals.connect(Main.themeManager, 'theme-set', () => {
-                                                    this._updateIconAndLabel();
-                                                    setTimeout(() => refreshDisplay());
-                                                });
+            this._updateIconAndLabel();
+            GLib.timeout_add(GLib.PRIORITY_DEFAULT, 0.0, () => {
+                refreshDisplay();
+                return GLib.SOURCE_REMOVE;
+            });
+        });
         this.iconTheme = Gtk.IconTheme.get_default();
         this.signals.connect(this.iconTheme, 'changed', () => this._updateIconAndLabel());
         this.signals.connect(this.appSystem, 'installed-changed', () => {
-                                                    this.apps.installedChanged();
-                                                    refreshDisplay();
-                                                });
+            this.apps.installedChanged();
+            GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000.0, () => {
+                refreshDisplay();
+                return GLib.SOURCE_REMOVE;
+            });
+        });
         this.signals.connect(this.appFavorites, 'changed', () => {
-                        if (this.display) {// Check if display is initialised
-                            this.display.sidebar.populate();
-                            this.display.updateMenuSize();
-                            if (this.currentCategory === 'favorite_apps' && !this.searchActive) {
-                                this.setActiveCategory(this.currentCategory);
-                            }
-                        } });
-        this.signals.connect(   this.menu,
-                                'open-state-changed',
-                                (...args) => this._onOpenStateToggled(...args));
-        //this.signals.connect(global, 'scale-changed', () => refreshDisplay() );
+            if (this.display) { // Check if display is initialised.
+                this.display.sidebar.populate();
+                this.display.updateMenuSize();
+                if (this.currentCategory === 'favorite_apps' && !this.searchActive) {
+                    this.setActiveCategory(this.currentCategory);
+                }
+            }
+        });
+        this.signals.connect(
+            this.menu,
+            'open-state-changed',
+            this._onOpenStateToggled.bind(this)
+        );
+        this.signals.connect(this.menu,
+            'menu-animated-closed',
+            this._onMenuClosed.bind(this)
+        );
+        this.signals.connect(XApp.Favorites.get_default(), 'changed', () => this._onXappFavoritesChange());
         this.apps = new Apps(this.appSystem);
-        //this.session = new SessionManager();
         this.screenSaverProxy = new ScreenSaverProxy();
         this.sessionManager = new GnomeSession.SessionManager();
 
@@ -133,32 +149,23 @@ class CinnamenuApplet extends TextIconApplet {
             Main.keybindingManager.addHotKey(
                 'overlay-key-' + this.instance_id,
                 this.settings.overlayKey,
-                () => {                    
+                () => {
                     if (Main.overview.visible || Main.expo.visible) return;
-                    if (!this.getOtherInstance ||
-                                    global.screen.get_current_monitor() === this.panel.monitorIndex) {
-                        //if (!this.isOpen) {
-                        //    this.panel.peekPanel();
-                        //}
-                        this.menu.toggle_with_options(this.settings.enableAnimation);
-                    } else if (typeof this.getOtherInstance === 'function') {
-                        const instance = this.getOtherInstance();
-                        //if (!instance.menu.isOpen) {
-                        //    instance.panel.peekPanel();
-                        //}
-                        instance.menu.toggle_with_options.call( instance.menu,
-                                                                instance.settings.enableAnimation);
+                    if (!this.menu.isOpen) {
+                        this.panel.peekPanel();
                     }
+                    this.menu.toggle_with_options(this.settings.enableAnimation);
                 }
             );
         };
+
         const updateActivateOnHover = () => {
             const openMenu = () => {
                 if (!this._applet_context_menu.isOpen) {
                     this.menu.open(this.settings.enableAnimation);
                 }
             };
-            
+
             if (this.signals.isConnected('enter-event', this.actor)) {
                 this.signals.disconnect('enter-event', this.actor);
                 this.signals.disconnect('leave-event', this.actor);
@@ -166,21 +173,20 @@ class CinnamenuApplet extends TextIconApplet {
             if (this.settings.activateOnHover) {
                 this.signals.connect(this.actor, 'enter-event', () => {
                     if (!this.menu.isOpen && !this.openMenuTimeoutId) {
-                        this.openMenuTimeoutId = setTimeout(() =>
-                                                openMenu(), this.settings.hoverDelayMs);
+                        this.openMenuTimeoutId = Mainloop.timeout_add(this.settings.hoverDelayMs, () => openMenu());
                     }
                 });
                 this.signals.connect(this.actor, 'leave-event', () => {
-                                if (this.openMenuTimeoutId) {
-                                    clearTimeout(this.openMenuTimeoutId);
-                                    this.openMenuTimeoutId = null;
-                                }
+                    if (this.openMenuTimeoutId) {
+                        Mainloop.source_remove(this.openMenuTimeoutId);
+                        this.openMenuTimeoutId = null;
+                    }
                 });
             }
         };
 
         this.settings = {};
-        this.appletSettings = new AppletSettings(this.settings, __meta.uuid, this.instance_id);
+        this.appletSettings = new AppletSettings(this.settings, this.metadata.uuid, this.instance_id);
         [
         { key: 'categories',                value: 'categories',            cb: null },
         { key: 'custom-menu-height',        value: 'customMenuHeight',      cb: null },
@@ -192,20 +198,20 @@ class CinnamenuApplet extends TextIconApplet {
 
         { key: 'applications-view-mode',    value: 'applicationsViewMode',  cb: refreshDisplay },
         { key: 'description-placement',     value: 'descriptionPlacement',  cb: refreshDisplay },
-        { key: 'show-sidebar',              value: 'showSidebar',           cb: refreshDisplay},
+        { key: 'show-sidebar',              value: 'showSidebar',           cb: refreshDisplay },
         { key: 'sidebar-placement',         value: 'sidebarPlacement',      cb: refreshDisplay },
         { key: 'sidebar-favorites',         value: 'sidebarFavorites',      cb: refreshDisplay },
-        
+
         { key: 'show-categories',           value: 'showCategories',        cb: refreshDisplay},
-        { key: 'show-places-category',      value: 'showPlaces',            cb: null},
-        { key: 'show-recents-category',     value: 'showRecents',     cb: this._onEnableRecentsChange },
-        { key: 'show-favorite-apps-category', value: 'showFavAppsCategory', cb: null },
+        { key: 'show-places-category',      value: 'showPlaces',            cb: () => this.display.categoriesView.update() },
+        { key: 'show-recents-category',     value: 'showRecents',           cb: this._onEnableRecentsChange },
+        { key: 'show-favorite-apps-category', value: 'showFavAppsCategory', cb: () => this.display.categoriesView.update() },
         { key: 'show-home-folder-category', value: 'showHomeFolder',        cb: this._onShowHomeFolderChange},
-        { key: 'show-emoji-category',       value: 'showEmojiCategory',     cb: null},
+        { key: 'show-emoji-category',       value: 'showEmojiCategory',     cb: () => this.display.categoriesView.update() },
 
         { key: 'overlay-key',               value: 'overlayKey',            cb: updateKeybinding },
-        { key: 'activate-on-hover',         value: 'activateOnHover',     cb: updateActivateOnHover },
-        { key: 'hover-delay',               value: 'hoverDelayMs',        cb: updateActivateOnHover },
+        { key: 'activate-on-hover',         value: 'activateOnHover',       cb: updateActivateOnHover },
+        { key: 'hover-delay',               value: 'hoverDelayMs',          cb: updateActivateOnHover },
         { key: 'enable-animation',          value: 'enableAnimation',       cb: null },
         { key: 'open-on-category',          value: 'openOnCategory',        cb: null },
 
@@ -220,14 +226,12 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'enable-home-folder-search', value: 'searchHomeFolder',      cb: null },
         { key: 'enable-web-history-search', value: 'enableWebHistorySearch', cb: null },
         { key: 'enable-web-bookmarks-search', value: 'enableWebBookmarksSearch', cb: null },
-        { key: 'enable-wikipedia-search',   value: 'enableWikipediaSearch', cb: null },
-        { key: 'wikipedia-language',      value: 'wikipediaLanguage',     cb: clearWikiSearchCache },
 
-        { key: 'menu-icon-custom',        value: 'menuIconCustom',     cb: this._updateIconAndLabel },
-        { key: 'menu-icon',               value: 'menuIcon',           cb: this._updateIconAndLabel },
-        { key: 'menu-icon-size-custom',   value: 'menuIconSizeCustom', cb: this._updateIconAndLabel },
-        { key: 'menu-icon-size',          value: 'menuIconSize',       cb: this._updateIconAndLabel },
-        { key: 'menu-label',              value: 'menuLabel',          cb: this._updateIconAndLabel },
+        { key: 'menu-icon-custom',          value: 'menuIconCustom',        cb: this._updateIconAndLabel },
+        { key: 'menu-icon',                 value: 'menuIcon',              cb: this._updateIconAndLabel },
+        { key: 'menu-icon-size-custom',     value: 'menuIconSizeCustom',    cb: this._updateIconAndLabel },
+        { key: 'menu-icon-size',            value: 'menuIconSize',          cb: this._updateIconAndLabel },
+        { key: 'menu-label',                value: 'menuLabel',             cb: this._updateIconAndLabel },
 
         { key: 'category-icon-size',        value: 'categoryIconSize',      cb: refreshDisplay },
         { key: 'apps-list-icon-size',       value: 'appsListIconSize',      cb: refreshDisplay },
@@ -236,9 +240,10 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'use-box-style',             value: 'useBoxStyle',           cb: refreshDisplay },
         { key: 'use-tile-style',            value: 'useTileStyle',          cb: refreshDisplay }
         ].forEach(setting => this.appletSettings.bind(
-                          setting.key,
-                          setting.value,
-                          setting.cb ? (...args) => setting.cb.call(this, ...args) : null ) );
+            setting.key,
+            setting.value,
+            setting.cb ? setting.cb.bind(this) : null )
+        );
 
         if (!this.settings.searchStartFolder) {
             //This is a hidden config option.
@@ -249,7 +254,8 @@ class CinnamenuApplet extends TextIconApplet {
         updateActivateOnHover();
         updateKeybinding();
         this.display = new Display(this);
-        this.initialised = true;
+        this.display.sidebar.populate();
+        this.display.categoriesView.update();
         this._updateIconAndLabel();
     }
 //----------------TextIconApplet callbacks----------------
@@ -268,7 +274,6 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     on_applet_removed_from_panel() {
-        this.willUnmount = true;
         Main.keybindingManager.removeHotKey('overlay-key-' + this.instance_id);
         if (!this.appletSettings) {
             return;
@@ -280,21 +285,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     on_applet_clicked() {
-        if (!this.initialised) {
-            this.set_applet_label(_('Please wait...'));
-            return;
-        }
-
         this.menu.toggle_with_options(this.settings.enableAnimation);
-    }
-
-    on_applet_instances_changed(instance) {
-        if (instance && instance.instance_id !== this.instance_id) {
-            this.getOtherInstance = () => instance;
-            instance.getOtherInstance = () => this;
-        } else if (!instance && !this.willUnmount) {
-            this.getOtherInstance = null;
-        }
     }
 
     _setStyle() {
@@ -306,7 +297,7 @@ class CinnamenuApplet extends TextIconApplet {
         let size;
 
         if (this.settings.menuIconSizeCustom) {
-            size = Math.max(Math.min(this.settings.menuIconSize, this.panel.height), 1);
+            size = Math.max(Math.min(this.settings.menuIconSize, this._panelHeight), 1);
         } else {
             size = this.getPanelIconSize(icon_type);
         }
@@ -321,12 +312,15 @@ class CinnamenuApplet extends TextIconApplet {
     }
 //------------settings callbacks-------------
     launchEditor() {
-        Util.spawnCommandLine('cinnamon-menu-editor');
+        Util.spawn(['cinnamon-menu-editor']);
     }
 
-    _onEnableRecentsChange () {
+    _onEnableRecentsChange() {
         const recentFilesEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
         this.recentsEnabled = this.settings.showRecents && recentFilesEnabled;
+        if (this.display) {
+            this.display.categoriesView.update();
+        }
     };
 
     _updateIconAndLabel() {
@@ -334,12 +328,14 @@ class CinnamenuApplet extends TextIconApplet {
             if (this.settings.menuIconCustom) {
                 if (this.settings.menuIcon === '') {
                     this.set_applet_icon_name('');
-                } else if (GLib.path_is_absolute(this.settings.menuIcon) &&
-                                    GLib.file_test(this.settings.menuIcon, GLib.FileTest.EXISTS)) {
-                    if (this.settings.menuIcon.includes('-symbolic')) {
-                        this.set_applet_icon_symbolic_path(this.settings.menuIcon);
-                    } else {
-                        this.set_applet_icon_path(this.settings.menuIcon);
+                } else if (GLib.path_is_absolute(this.settings.menuIcon)) {
+                    const file = Gio.File.new_for_path(this.settings.menuIcon);
+                    if (file.query_exists(null)) {
+                        if (this.settings.menuIcon.includes('-symbolic')) {
+                            this.set_applet_icon_symbolic_path(this.settings.menuIcon);
+                        } else {
+                            this.set_applet_icon_path(this.settings.menuIcon);
+                        }
                     }
                 } else if (this.iconTheme.has_icon(this.settings.menuIcon)) {
                     if (this.settings.menuIcon.includes('-symbolic')) {
@@ -349,12 +345,10 @@ class CinnamenuApplet extends TextIconApplet {
                     }
                 }
             } else {
-                this.set_applet_icon_path(__meta.path + '/icon.png');
-                /*let iconName = global.settings.get_string('app-menu-icon-name');*/
+                this.set_applet_icon_path(this.metadata.path + '/icon.png');
             }
-        } catch(e) {
-            global.logWarning('Cinnamenu: Could not load icon file ' + this.settings.menuIcon +
-                                                                            ' for menu button');
+        } catch (e) {
+            global.logWarning('Cinnamenu: Could not load icon: ' + e.message);
         }
         if (this.settings.menuIconCustom && this.settings.menuIcon === '' ||
                             this.settings.menuIconSizeCustom && this.settings.menuIconSize === 0) {
@@ -380,10 +374,12 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.settings.showHomeFolder) {
             if (!this.getIsFolderCategory(homePath)) {
                 this.addFolderCategory(homePath);
+                this.display.categoriesView.update();
             }
         } else {
             if (this.getIsFolderCategory(homePath)) {
                 this.removeFolderCategory(homePath);
+                this.display.categoriesView.update();
             }
         }
     }
@@ -396,12 +392,44 @@ class CinnamenuApplet extends TextIconApplet {
         }
     }
 
+    getAppIcon(app, size) {
+        let icon = app.create_icon_texture(size);
+        if (icon instanceof St.Icon) {
+            const gicon = icon.get_gicon();
+            if (gicon?.get_names) {
+                const iconTheme = Gtk.IconTheme.get_default();
+                const hasAnyIcon = gicon.get_names()
+                    .some(name => iconTheme.lookup_icon(name, icon.icon_size, 0));
+                if (!hasAnyIcon) {
+                    icon = new St.Icon({
+                        icon_name: 'application-x-executable',
+                        icon_size: size,
+                        icon_type: St.IconType.FULLCOLOR
+                    });
+                }
+            }
+        }
+        return icon;
+    }
+
     addFavoriteAppToPos(add_id, pos_id) {
         const pos = this.appFavorites._getIds().indexOf(pos_id);
         if (pos >= 0) { //move
             this.appFavorites.moveFavoriteToPos(add_id, pos);
         } else {
             this.appFavorites.addFavoriteAtPos(add_id, pos);
+        }
+    }
+
+    _onXappFavoritesChange() {
+        this.display.sidebar.populate();
+        this.display.categoriesView.update(); //in case fav files category needs adding/removing
+
+        if (this.menu.isOpen) {
+            this.display.updateMenuSize();
+            if (this.currentCategory === 'favorite_files') {
+                this.setActiveCategory(this.currentCategory);
+            }
         }
     }
 
@@ -427,64 +455,74 @@ class CinnamenuApplet extends TextIconApplet {
 
     _onOpenStateToggled(menu, open) {
         if (global.settings.get_boolean('panel-edit-mode')) {
-            return false;
+            return;
         }
-        if (open) {
-            if (this.openMenuTimeoutId) {
-                clearTimeout(this.openMenuTimeoutId);
-                this.openMenuTimeoutId = null;
-            }
+        if (!open) {
+            return; // this._onMenuClosed() is called on 'menu-animated-closed' signal to handle closing.
+        }
 
-            this.display.searchView.tweakTheme();
-            this.display.categoriesView.update();//in case menu editor or enabled category changes.
-            this.display.sidebar.populate();//in case fav files changed
-            this.display.sidebar.scrollToQuitButton();//ensure quit button is visible
+        if (this.openMenuTimeoutId) {
+            Mainloop.source_remove(this.openMenuTimeoutId);
+            this.openMenuTimeoutId = null;
+        }
 
-            global.stage.set_key_focus(this.display.searchView.searchEntry);
-            if (this.currentCategory === 'places' && !this.settings.showPlaces ||
-                    this.currentCategory === 'recents' && !this.recentsEnabled ||
-                    this.currentCategory === 'favorite_apps' && !this.settings.showFavAppsCategory ||
-                    this.currentCategory.startsWith('emoji:') && !this.settings.showEmojiCategory) {
-                this.currentCategory = 'all';
-            }
-            let openOnCategory = this.currentCategory;
-            if (this.settings.openOnCategory === 4 || !this.settings.showCategories) {
-                openOnCategory = 'all';
-            } else if (this.settings.openOnCategory === 1 && this.settings.showFavAppsCategory) {
-                openOnCategory = 'favorite_apps';
-            } else if (this.settings.openOnCategory === 2 && this.recentsEnabled) {
-                openOnCategory = 'recents';
-            } else if (this.settings.openOnCategory === 3 && this.settings.showPlaces) {
-                openOnCategory = 'places';
-            }
+        this.display.searchView.tweakTheme();
 
+        if (this.settings.showSidebar) {
+            this.display.sidebar.scrollToQuitButton(); // Ensure quit button is visible.
+        }
+
+        global.stage.set_key_focus(this.display.searchView.searchEntry);
+        if (this.currentCategory === 'places' && !this.settings.showPlaces ||
+                this.currentCategory === 'recents' && !this.recentsEnabled ||
+                this.currentCategory === 'favorite_apps' && !this.settings.showFavAppsCategory ||
+                this.currentCategory.startsWith('emoji:') && !this.settings.showEmojiCategory) {
+            this.currentCategory = 'all';
+        }
+        let openOnCategory = this.currentCategory;
+        if (this.settings.openOnCategory === 4 || !this.settings.showCategories) {
+            openOnCategory = 'all';
+        } else if (this.settings.openOnCategory === 1 && this.settings.showFavAppsCategory) {
+            openOnCategory = 'favorite_apps';
+        } else if (this.settings.openOnCategory === 2 && this.recentsEnabled) {
+            openOnCategory = 'recents';
+        } else if (this.settings.openOnCategory === 3 && this.settings.showPlaces) {
+            openOnCategory = 'places';
+        }
+
+        if (!this.resizer._size_restricted) {
             this.display.updateMenuSize();
-            this.setActiveCategory(openOnCategory);
-
-            //Show panel when auto hide is on.
-            //this.panel.peekPanel(); //no longer works on cinnamon 5.4.x
-
-            //center menu if applet in center zone of top or bottom panel
-            const appletDefinition = AppletManager.getAppletDefinition({applet_id: this.instance_id});
-            if ((this.orientation === St.Side.BOTTOM || this.orientation === St.Side.TOP) &&
-                                                        appletDefinition.location_label === 'center') {
-                const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
-                this.menu.shiftToPosition(Math.floor(monitor.width / 2) + monitor.x);
-            }
-
-            //By default, current active category button will have focus. If categories are
-            //hidden, give focus to first app item.
-            if (!this.settings.showCategories) {
-                this.display.appsView.focusFirstItem();
-            }
-        } else {
-            if (this.searchActive) {
-                this._endSearchMode();
-            }
-            this.display.clearFocusedActors();
-            this.display.appsView.clearApps();//for quicker opening of menu
         }
-        return true;
+        this.setActiveCategory(openOnCategory);
+
+        // Show panel when auto hide is on.
+        // this.panel.peekPanel(); //no longer works on cinnamon 5.4.x
+
+        // Center menu if applet in center zone of top or bottom panel.
+        const appletDefinition = Main.AppletManager.getAppletDefinition({applet_id: this.instance_id});
+        if ((this.orientation === St.Side.BOTTOM || this.orientation === St.Side.TOP) &&
+                                                    appletDefinition.location_label === 'center') {
+            const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
+            this.menu.shiftToPosition(Math.floor(monitor.width / 2) + monitor.x);
+        } else {
+            this.menu.shiftToPosition(-1);
+        }
+
+        // By default, current active category button will have focus. If categories are
+        // hidden, give focus to first app item.
+        if (!this.settings.showCategories) {
+            this.display.appsView.focusFirstItem();
+        }
+
+        return;
+    }
+
+    _onMenuClosed() {
+        if (this.searchActive) {
+            this._endSearchMode();
+        }
+        this.display.clearFocusedActors();
+        this.display.appsView.clearAppsView(); // For quicker reopening of menu.
     }
 
     _onMenuKeyPress(actor, event) {
@@ -543,16 +581,6 @@ class CinnamenuApplet extends TextIconApplet {
         const focusedSidebarItemExists = focusedSidebarItemIndex > -1;
         const focusedCategoryExists = focusedCategoryIndex > -1;
 
-        if (!focusedContextMenuItemExists && !focusedAppItemExists &&
-            !focusedSidebarItemExists && !focusedCategoryExists) {
-            //todo: No focused item, ideally this shouldn't happen
-            if (appButtons[0]) {
-                appButtons[0].handleEnter();
-                focusedAppItemIndex = 0;
-                focusedAppItemExists = true;
-            }
-        }
-
         const leaveCurrentlyFocusedItem = () => {
             if (focusedContextMenuItemExists) {
                 contextMenuButtons[focusedContextMenuItemIndex].handleLeave();
@@ -569,7 +597,7 @@ class CinnamenuApplet extends TextIconApplet {
             if (focusedContextMenuItemExists) {
                 //effectively ignore keypress
                 contextMenuButtons[focusedContextMenuItemIndex].handleEnter();
-            } else if (!this.searchActive && this.settings.showCategories && 
+            } else if (!this.searchActive && this.settings.showCategories &&
                 (focusedSidebarItemExists ||
                 focusedAppItemExists && !this.settings.showSidebar)) {
                 categoryButtons[currentlyActiveCategoryIndex].handleEnter();
@@ -579,7 +607,7 @@ class CinnamenuApplet extends TextIconApplet {
                 appButtons[0].handleEnter();
             }
         }
-        
+
         let tabLeft = () => {
             if (focusedContextMenuItemExists) {
                 //effectively ignore keypress
@@ -609,7 +637,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         const getPreviousSidebarItemIndex = () => {
             if (focusedSidebarItemIndex === 0) {
-                return sidebarButtons.length -1;
+                return sidebarButtons.length - 1;
             } else {
                 return focusedSidebarItemIndex - 1;
             }
@@ -617,15 +645,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         const leftNavigation = () => {
             if (focusedContextMenuItemExists) {
-                contextMenuButtons[focusedContextMenuItemIndex].handleEnter();//effectively ignore
-            } else if (focusedAppItemExists) {
-                if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
-                    tabLeft();
-                } else if (focusedAppItemIndex > 0) {
-                    appButtons[focusedAppItemIndex - 1].handleEnter();
-                } else {
-                    appButtons[appButtons.length - 1].handleEnter();
-                }
+                contextMenuButtons[focusedContextMenuItemIndex].handleEnter(); // Effectively ignore.
             } else if (focusedSidebarItemExists) {
                 if (this.settings.sidebarPlacement === SidebarPlacement.LEFT ||
                                         this.settings.sidebarPlacement === SidebarPlacement.RIGHT) {
@@ -635,13 +655,30 @@ class CinnamenuApplet extends TextIconApplet {
                 }
             } else if (focusedCategoryExists) {
                 tabLeft();
+            } else { // focusedAppItemExists or no focused item exists
+                if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
+                    tabLeft();
+                } else if (focusedAppItemIndex > 0) {
+                    appButtons[focusedAppItemIndex - 1].handleEnter();
+                } else {
+                    appButtons[appButtons.length - 1].handleEnter();
+                }
             }
         };
 
         const rightNavigation = () => {
             if (focusedContextMenuItemExists) {
-                contextMenuButtons[focusedContextMenuItemIndex].handleEnter();//effectively ignore keypress
-            } else if (focusedAppItemExists) {
+                contextMenuButtons[focusedContextMenuItemIndex].handleEnter(); // Effectively ignore keypress
+            } else if (focusedSidebarItemExists) {
+                if (this.settings.sidebarPlacement === SidebarPlacement.LEFT ||
+                    this.settings.sidebarPlacement === SidebarPlacement.RIGHT) {
+                    tabRight();;
+                } else {
+                    sidebarButtons[getNextSidebarItemIndex()].handleEnter();
+                }
+            } else if (focusedCategoryExists) {
+                tabRight();
+            } else { // focusedAppItemExists or no focused item exists
                 if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                     tabRight();
                 } else if (appButtons[focusedAppItemIndex + 1]) {
@@ -649,15 +686,6 @@ class CinnamenuApplet extends TextIconApplet {
                 } else {
                     appButtons[0].handleEnter();
                 }
-            } else if (focusedSidebarItemExists) {
-                if (this.settings.sidebarPlacement === SidebarPlacement.LEFT ||
-                                this.settings.sidebarPlacement === SidebarPlacement.RIGHT) {
-                    tabRight();;
-                } else {
-                    sidebarButtons[getNextSidebarItemIndex()].handleEnter();
-                }
-            } else if (focusedCategoryExists) {
-                tabRight();
             }
         };
 
@@ -679,7 +707,7 @@ class CinnamenuApplet extends TextIconApplet {
                     } else {
                         appButtons[0].handleEnter();
                     }
-                } else {//grid view
+                } else { // grid view
                     if (appButtons[focusedAppItemIndex + 1]) {
                         const column = appButtons[focusedAppItemIndex].actor.layout_column;
                         let next = focusedAppItemIndex + 1;
@@ -688,13 +716,14 @@ class CinnamenuApplet extends TextIconApplet {
                         }
                         appButtons[next].handleEnter();
                     } else {
-                        appButtons[focusedAppItemIndex].handleEnter();//effectively no change
+                        appButtons[focusedAppItemIndex].handleEnter(); // Effectively no change
                     }
                 }
             } else if (focusedSidebarItemExists) {
-                if (this.settings.sidebarPlacement === SidebarPlacement.TOP ||
-                                this.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
+                if (this.settings.sidebarPlacement === SidebarPlacement.TOP) {
                     tabRight();
+                } else if (this.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
+                    tabLeft();
                 } else {
                     sidebarButtons[getNextSidebarItemIndex()].handleEnter();
                 }
@@ -704,6 +733,8 @@ class CinnamenuApplet extends TextIconApplet {
                 } else {
                     categoryButtons[0].handleEnter();
                 }
+            } else { // No focused item exists
+                appButtons[0].handleEnter();
             }
         };
 
@@ -714,7 +745,7 @@ class CinnamenuApplet extends TextIconApplet {
                                     contextMenuButtons[previousContextMenuItem].action === null) {
                     previousContextMenuItem--;
                     if (previousContextMenuItem < 0) {
-                        previousContextMenuItem = contextMenuButtons.length -1;
+                        previousContextMenuItem = contextMenuButtons.length - 1;
                     }
                 }
                 contextMenuButtons[previousContextMenuItem].handleEnter();
@@ -734,13 +765,14 @@ class CinnamenuApplet extends TextIconApplet {
                         }
                         appButtons[previous].handleEnter();
                     } else {
-                        appButtons[0].handleEnter();//effectively no change
+                        appButtons[0].handleEnter(); // Effectively no change
                     }
                 }
             } else if (focusedSidebarItemExists) {
-                if (this.settings.sidebarPlacement === SidebarPlacement.TOP ||
-                    this.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
+                if (this.settings.sidebarPlacement === SidebarPlacement.TOP) {
                     tabLeft();
+                } else if (this.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
+                    tabRight();
                 } else {
                     sidebarButtons[getPreviousSidebarItemIndex()].handleEnter();
                 }
@@ -750,6 +782,8 @@ class CinnamenuApplet extends TextIconApplet {
                 } else {
                     categoryButtons[categoryButtons.length - 1].handleEnter();
                 }
+            } else { // No focused item exists
+                appButtons[0].handleEnter();
             }
         };
 
@@ -779,14 +813,6 @@ class CinnamenuApplet extends TextIconApplet {
                 categoryButtons[focusedCategoryIndex].selectCategory();
             }
             return Clutter.EVENT_STOP;
-        case symbol === Clutter.unicode_to_keysym("p".charCodeAt(0)) && ctrlKey:
-            if (focusedAppItemExists && appButtons[focusedAppItemIndex].app.isApplication) {
-                const desktop_file_path = appButtons[focusedAppItemIndex].app.desktop_file_path;
-                Util.spawn(['cinnamon-desktop-editor', '-mlauncher', '-o' + desktop_file_path]);
-                this.menu.close();
-                return Clutter.EVENT_STOP;
-            }
-            return Clutter.EVENT_PROPAGATE
         case symbol === Clutter.unicode_to_keysym("d".charCodeAt(0)) && ctrlKey:
             if (focusedAppItemExists && appButtons[focusedAppItemIndex].app.isApplication) {
                 const desktop_file_path = appButtons[focusedAppItemIndex].app.desktop_file_path;
@@ -824,9 +850,9 @@ class CinnamenuApplet extends TextIconApplet {
         case (symbol === Clutter.Tab || symbol === Clutter.KEY_Tab) && noModifiers:
             leaveCurrentlyFocusedItem();
             if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
-                //If direction is RTL then tabLeft() and tabRight() have already been swapped to
-                //account for layout change and so that arrow keys work correctly. But tab key is
-                //expected move to the left in RTL languages so swap again here.
+                // If direction is RTL then tabLeft() and tabRight() have already been swapped to
+                // account for layout change and so that arrow keys work correctly. But tab key is
+                // expected move to the left in RTL languages so swap again here.
                 tabLeft();
             } else {
                 tabRight();
@@ -842,7 +868,7 @@ class CinnamenuApplet extends TextIconApplet {
             }
             return Clutter.EVENT_STOP;
         case symbol === Clutter.Tab && altKey:
-            this.menu.close();//Close menu as alt-tab is used for app-switcher in cinnamon
+            this.menu.close(); // Close menu as alt-tab is used for app-switcher in cinnamon
             return Clutter.EVENT_STOP;
         case (symbol === Clutter.Escape || symbol === Clutter.KEY_Escape) && noModifiers:
             if (this.display.contextMenu.isOpen) {
@@ -877,7 +903,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     getNumberOfItemsToFitColumns(minimumItems) {
-        //adjust number of items according to number of columns in grid view to make
+        //adjust number of items according to number of columns to make
         //best use of available space.
         if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
             return minimumItems;
@@ -885,7 +911,7 @@ class CinnamenuApplet extends TextIconApplet {
         const columns = this.display.appsView.getGridValues().columns;
         return Math.ceil(minimumItems / columns) * columns;
     }
-    
+
     setActiveCategory(categoryId) {
         // categoryId is one of 4 things: a special category (one of 'places', 'recents',
         // 'favorite_files' or 'favorite_apps'), an application category id, an emoji category
@@ -903,7 +929,7 @@ class CinnamenuApplet extends TextIconApplet {
         case 'recents':
             const maxItems = this.getNumberOfItemsToFitColumns(6);
             const maxRecentApps = this.getNumberOfItemsToFitColumns(4);
-            
+
             this.display.appsView.populate_init();
             const recentApps = this.listRecent_apps(maxRecentApps);
             if (recentApps.length > 0) {
@@ -949,9 +975,10 @@ class CinnamenuApplet extends TextIconApplet {
                 EMOJI_CATEGORIES.forEach(category => {
                     if (category.name == emojiCategory) {
                         this.display.appsView.populate_add(
-                                                this.listEmojiByRange(category.start, category.end),
-                                                category.name + ' ▽',//🞃⏷▽⯆
-                                                () => this.setActiveCategory('emoji:'));
+                            this.listEmojiByRange(category.start, category.end),
+                            category.name + ' ▽',//🞃⏷▽⯆
+                            () => this.setActiveCategory('emoji:')
+                        );
                     } else {
                         this.display.appsView.populate_add([], category.name + ' ▷',//🞂⏵▷⯈
                             () => {
@@ -962,19 +989,31 @@ class CinnamenuApplet extends TextIconApplet {
                                 this.setActiveCategory('emoji:');
                                 Meta.later_add(Meta.LaterType.IDLE,
                                     () => {
-                                        setTimeout(
-                                            () => this.setActiveCategory('emoji:' + category.name),
-                                            100);
-                                    });
-                            });
+                                        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100.0, () => {
+                                            this.setActiveCategory('emoji:' + category.name);
+                                            return GLib.SOURCE_REMOVE;
+                                        });
+                                    }
+                                );
+                            }
+                        );
                     }
                 });
 
                 this.display.appsView.populate_finish();
             } else if (categoryId.startsWith('/')) {//folder view
-                const folderContents = this.listFolder(categoryId);
-                const headerText = folderContents.errorMsg? folderContents.errorMsg : categoryId;
-                this.display.appsView.populate(folderContents.results, headerText);
+                const currentFolderLoading = this.currentCategory;
+                this.display.appsView.populate([], _("Loading..."));
+
+                this.listFolderAsync(categoryId).then((folderContents) => {
+                    // If the user has navigated away from this folder since we started, abort.
+                    if (currentFolderLoading !== this.currentCategory || this.searchActive) {
+                        return;
+                    }
+
+                    const headerText = folderContents.errorMsg ? folderContents.errorMsg : categoryId;
+                    this.display.appsView.populate(folderContents.results, headerText);
+                });
             } else if (categoryId === 'all' && !this.settings.allAppsOldStyle) {
                 this.display.appsView.populate_init();
                 this.display.appsView.populate_add(this.apps.listApplications('allApps'));
@@ -990,31 +1029,31 @@ class CinnamenuApplet extends TextIconApplet {
     _onSearchTextChanged() {
         const searchText = this.display.searchView.searchEntryText.get_text();
 
-        if (searchText.length === 0) {//search text deleted, cancel search mode
-            if (!this.searchActive) {//search mode already ended
+        if (searchText.length === 0) { // search text deleted, cancel search mode
+            if (!this.searchActive) { // search mode already ended
                 return;
             }
             this._endSearchMode();
             this.setActiveCategory(this.currentCategory);
 
-            //By default, current active category button will have focus. If categories are
-            //hidden, give focus to first app item.
+            // By default, current active category button will have focus. If categories are
+            // hidden, give focus to first app item.
             if (!this.settings.showCategories) {
                 this.display.appsView.focusFirstItem();
             }
             return;
         }
+
         //---start search---
-        this.currentSearchStr = searchText;
 
         //Set a new search ID so that async search functions
         //from a previous search can be aborted.
         this.currentSearchId = Math.floor(Math.random() * 100000000);
 
         this.display.clearFocusedActors();
-        if (!this.searchActive) {//set search mode
+        if (!this.searchActive) { // set search mode
             this.searchActive = true;
-            this.display.searchView.showAndConnectSecondaryIcon();//show edit-delete icon
+            this.display.searchView.showAndConnectSecondaryIcon(); // show edit-delete icon
             this.display.categoriesView.buttons.forEach(button => button.disable());
         }
 
@@ -1026,22 +1065,21 @@ class CinnamenuApplet extends TextIconApplet {
 
     _endSearchMode() {
         this.searchActive = false;
-        this.display.searchView.hideAndDisconnectSecondaryIcon();//hide edit-delete icon
+        this.display.searchView.hideAndDisconnectSecondaryIcon(); // hide edit-delete icon
         this.display.categoriesView.buttons.forEach(button => button.enable());
         this.display.searchView.searchEntry.set_text('');
         this.previousSearchPattern = '';
     }
 
     _doSearch(pattern_raw, thisSearchId) {
-        //this fuction has been called asynchronously meaning that a keypress may have changed the
+        //this function has been called asynchronously meaning that a keypress may have changed the
         //search query before this function is called. Check that this search is still valid.
         if (!this.searchActive || thisSearchId !== this.currentSearchId) {
             return;
         }
-        //if (!text || !text.trim()) return;
 
         const pattern = graphemeBaseChars(pattern_raw).toLocaleUpperCase().trim();
-        
+
         //Don't repeat the same search. This can happen if a key and backspace are pressed in quick
         //succession while a previous search is being carried out.
         if (pattern_raw === this.previousSearchPattern) {
@@ -1070,6 +1108,8 @@ class CinnamenuApplet extends TextIconApplet {
         const PREFIX_USED = BOOKMARKS_PREFIX || HISTORY_PREFIX || EMOJI_PREFIX || FILE_PREFIX;
 
         //======Begin search===========
+        let previousResultsStr = "";
+        let calculatorMode = false;
         let applicationResults = [];
         let fileResults = [];
         let otherResults = [];
@@ -1084,23 +1124,25 @@ class CinnamenuApplet extends TextIconApplet {
         let webHistoryResults = [];
 
         //-----
-        
-        const showResults = () => {//sort and display all search results
-            if (!this.searchActive || thisSearchId != this.currentSearchId){
-                return; //Search mode has ended or search string has changed
+
+        const showResults = () => { // Sort and display all search results.
+            if (!this.searchActive || thisSearchId != this.currentSearchId) {
+                return; // Search mode has ended or search string has changed.
             }
 
-            //sort applicationResults[]
-            applicationResults.sort((a, b) =>  b.score - a.score);
-            
-            //sort fileResults[]
-            fileResults.sort((a, b) =>  b.score - a.score);//items with equal score are left in
-                                                              //existing order
-            
-            //Remove duplicate fileResults[]. eg. a fav file, a recent file and a folderfile might all
-            //be the same file. Prefer from highest to lowest: isFavoriteFile, isRecentFile,
-            //isFolderviewFile which is easy because fileResults[] should already be in this order.
-            for (let i = 0; i < fileResults.length -1; i++) {
+            // sort applicationResults[]
+            applicationResults.sort((a, b) => b.score - a.score);
+
+            // sort fileResults[]
+            fileResults.sort((a, b) => b.score - a.score); // Items with equal score are left in existing order.
+
+            if (fileResults.length > 25) { // Remove poor results to save time.
+                fileResults.length = 25;
+            }
+            // Remove duplicate fileResults[]. eg. a fav file, a recent file and a folderfile might all
+            // be the same file. Prefer from highest to lowest: isFavoriteFile, isRecentFile,
+            // isFolderviewFile which is easy because fileResults[] should already be in this order.
+            for (let i = 0; i < fileResults.length - 1; i++) {
                 const app = fileResults[i];
                 if (app.isFavoriteFile || app.isRecentFile) {
                     for (let r = i + 1; r < fileResults.length; r++) {
@@ -1114,18 +1156,40 @@ class CinnamenuApplet extends TextIconApplet {
                 }
             }
 
-            //Limit applicationResults to 6
+            // Limit applicationResults to 6
             applicationResults.length = Math.min(applicationResults.length, this.getNumberOfItemsToFitColumns(6));
-            //Limit fileResults to 10
+            // Limit fileResults to 10
             fileResults.length = Math.min(fileResults.length, this.getNumberOfItemsToFitColumns(10));
-            
-            //Display results
+
+            let resultsStr = "";
+            applicationResults.forEach(result => resultsStr += result.name);
+            fileResults.forEach(result => resultsStr += result.name);
+            otherResults.forEach(result => resultsStr += result.name);
+            webBookmarksResults.forEach(result => resultsStr += result.name);
+            webHistoryResults.forEach(result => resultsStr += result.name);
+            emojiResults.forEach(result => resultsStr += result.name);
+            resultsStr += calculatorResult;
+            if (resultsStr === previousResultsStr) {
+                // Don't update results if nothing has changed.
+                return;
+            }
+            previousResultsStr = resultsStr;
+
+
+            // Display results
             this.display.appsView.populate_init(calculatorResult);
+            if (calculatorMode) {
+                this.calculatorHistory.forEach(result => {
+                    this.display.appsView.populate_add([], `${result.sum} = ${result.result}`,
+                                        () => this.display.searchView.searchEntry.set_text(result.sum));
+                });
+            }
+
             if (applicationResults.length > 0) {
                 this.display.appsView.populate_add(applicationResults, _('Applications'));
             }
             if (fileResults.length > 0) {
-                this.display.appsView.populate_add(fileResults, _('files'));
+                this.display.appsView.populate_add(fileResults, _('Files'));
             }
             if (otherResults.length > 0) {
                 this.display.appsView.populate_add(otherResults, _('Other search results'));
@@ -1149,33 +1213,26 @@ class CinnamenuApplet extends TextIconApplet {
         //=======search providers==========
         //---calculator---
         let calculatorResult = null;
-        const replacefn = (match) => {//Replace eg. "sqrt" with "Math.sqrt"
-            if (['E','LN10','LN2','LOG10E','LOG2E','PI','SQRT1_2','SQRT2','PI','abs',
-                'acos','acosh','asin','asinh','atan','atanh','cbrt','ceil','clz32','cos',
-                'cosh','exp','expm1','floor','fround','hypot','imul','log','log10','log1p',
-                'log2','max','min','pow','random','round','sign','sin','sinh','sqrt',
-                'tan','tanh','trunc'].includes(match)) {
-                return 'Math.' + match;
-            } else {
-                return match;
-            }
-        };
         let ans = null;
-        const exp = pattern_raw.replace(/([a-zA-Z0-9_]+)/g, replacefn);
-        
+        const exp = pattern_raw.replace(/([a-zA-Z][a-zA-Z0-9_]*)/g, (match) => `Math.${match}`);
+
         try {
-            ans = eval(exp);
-        } catch(e) {
-            const r = /[\(\)\+=/\*\.;,]/
-            const probablyMath = r.test(exp);
+            ans = eval?.(`"use strict"; ${exp}`);
+            if (Number.isNaN(ans)) {
+                calculatorResult = _("Calculator: ") + ans;
+                calculatorMode = true;
+            }
+        } catch (e) {
+            const probablyMath = /[\(\)\+=/\*]/.test(exp);
             if (probablyMath) {
-                calculatorResult = e.message;
+                calculatorResult = _("Calculator: ") + e.message;
+                calculatorMode = true;
             }
         }
 
-        if ((typeof ans === 'number' || typeof ans === 'boolean' || typeof ans === 'bigint')
-                                                                    && ans != pattern_raw ) {
-            
+        if (((typeof ans === 'number' && !Number.isNaN(ans)) || typeof ans === 'boolean' ||
+                                            typeof ans === 'bigint') && ans != pattern_raw) {
+
             let ans_str = ans.toString();
             //remove rounding error
             if (typeof ans === 'number') {
@@ -1187,27 +1244,40 @@ class CinnamenuApplet extends TextIconApplet {
                     ans_str = Number(ans.toPrecision(16)).toString();
                 }
             }
-            
-            if (!this.calcGIcon) {
-                this.calcGIcon = new Gio.FileIcon(
-                        { file: Gio.file_new_for_path(__meta.path + '/../icons/calc.png')});
-            }
+
             otherResults.push({
-                            isSearchResult: true,
-                            name: ans_str,//('Solution:') + ' ' + ans,
-                            description: _('Click to copy'),
-                            deleteAfterUse: true,
-                            icon: new St.Icon({ gicon: this.calcGIcon,
-                                                icon_size: this.getAppIconSize() }),
-                            activate: () => {
-                                    const clipboard = St.Clipboard.get_default();
-                                    clipboard.set_text(St.ClipboardType.CLIPBOARD, ans_str);}
-                         });
+                isSearchResult: true,
+                name: ans_str,
+                description: _('Click to copy'),
+                deleteAfterUse: true,
+                icon: new St.Icon({
+                    icon_name: 'accessories-calculator',
+                    icon_type: St.IconType.FULLCOLOR,
+                    icon_size: this.getAppIconSize()
+                }),
+                activate: () => {
+                    const clipboard = St.Clipboard.get_default();
+                    clipboard.set_text(St.ClipboardType.CLIPBOARD, ans_str);
+                }
+            });
             calculatorResult = pattern_raw + " = " + ans_str;
+            const sumSignature = pattern_raw.replace(/[\d\.]+/g, 'd').replace(/\s+/g, '');
+            const histItem = {
+                sum: pattern_raw,
+                result: ans_str,
+                signature: sumSignature
+            };
+            if (this.calculatorHistory.length > 0 && this.calculatorHistory[this.calculatorHistory.length - 1].signature === sumSignature) {
+                this.calculatorHistory[this.calculatorHistory.length - 1] = histItem;
+            } else {
+                this.calculatorHistory.push(histItem);
+            }
+            if (this.calculatorHistory.length > 18) this.calculatorHistory.shift();
+            calculatorMode = true;
         }
 
         //---web search option and search suggestions---
-        if (this.settings.webSearchOption != 0 && !PREFIX_USED) {//0==none
+        if (this.settings.webSearchOption != 0 && !PREFIX_USED) { // 0==none
             const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
                             'search.png', 'duckgo_icon.png', 'ask.png', 'ecosia.png', 'search.png',
                             'startpage.png', 'brave.png', 'qwant.png', 'search.png'][this.settings.webSearchOption - 1];
@@ -1225,26 +1295,34 @@ class CinnamenuApplet extends TextIconApplet {
                             'https://www.qwant.com/?q=',
                             this.settings.webSearchCustomURL][this.settings.webSearchOption - 1];
 
-            const gicon = new Gio.FileIcon(
-                                {file: Gio.file_new_for_path(__meta.path + '/../icons/' + iconName)});
+            const gicon = new Gio.FileIcon({
+                file: Gio.file_new_for_path(this.metadata.path + '/../icons/' + iconName)
+            });
 
             otherResults.push({
-                        isSearchResult: true,
-                        name: pattern_raw,
-                        description: '',
-                        deleteAfterUse: true,
-                        icon: new St.Icon({ gicon: gicon, icon_size: this.getAppIconSize()}),
-                        activate: () => Util.spawn(['xdg-open', url + encodeURIComponent(pattern_raw)]) });
+                isSearchResult: true,
+                name: pattern_raw,
+                description: '',
+                deleteAfterUse: true,
+                icon: new St.Icon({
+                    gicon: gicon,
+                    icon_size: this.getAppIconSize()
+                }),
+                activate: () => Util.spawn(['xdg-open', url + encodeURIComponent(pattern_raw)])
+            });
             if (this.settings.webSuggestionsOption) {
                 searchSuggestions(pattern_raw, (results) => {
                     if (results.length > 0 && this.searchActive && thisSearchId === this.currentSearchId) {
-                        results.forEach( suggestion => {
+                        results.forEach(suggestion => {
                             otherResults.push({
                                 isSearchResult: true,
                                 name: suggestion,
                                 description: '',
                                 deleteAfterUse: true,
-                                icon: new St.Icon({ gicon: gicon, icon_size: this.getAppIconSize()}),
+                                icon: new St.Icon({
+                                    gicon: gicon,
+                                    icon_size: this.getAppIconSize()
+                                }),
                                 activate: () =>
                                         Util.spawn(['xdg-open', url + encodeURIComponent(suggestion)])
                             });
@@ -1263,27 +1341,26 @@ class CinnamenuApplet extends TextIconApplet {
                 bpattern = pattern.substring(2);
             }
 
-            getWebBookmarksAsync().then( bookmarks => {
+            getWebBookmarksAsync(this.metadata.path).then(bookmarks => {
                 if (!this.searchActive || thisSearchId !== this.currentSearchId) {
                     return;
                 }
                 bookmarks.forEach(bookmark => {
                     if (bookmark.name) {
-                        const match = searchStr(bpattern, bookmark.name);
-                        if (match.score > SEARCH_THRESHOLD) {
-                            bookmark.score = match.score;
-                            bookmark.nameWithSearchMarkup = match.result;
+                        const score = searchStr(bpattern, bookmark.name);
+                        if (score > SEARCH_THRESHOLD) {
+                            bookmark.score = score;
                             webBookmarksResults.push(bookmark);
                         }
                     }
                 });
-                webBookmarksResults.sort((a, b) =>  a.score < b.score);
+                webBookmarksResults.sort((a, b) => a.score < b.score);
                 webBookmarksResults.length = Math.min(webBookmarksResults.length,
                                                 this.getNumberOfItemsToFitColumns(10));
                 showResults();
             });
         }
-        
+
         //---web history search---
         if (this.settings.enableWebHistorySearch && pattern.length > 1 && !PREFIX_USED ||
                                                         HISTORY_PREFIX && pattern.length >= 3) {
@@ -1306,15 +1383,6 @@ class CinnamenuApplet extends TextIconApplet {
             });
         }
 
-        //---Wikipedia search----
-        if (this.settings.enableWikipediaSearch && pattern_raw.length > 1 && !PREFIX_USED) {
-            wikiSearch(pattern_raw, this.settings.wikipediaLanguage, (wikiResults) => {
-                if (this.searchActive && thisSearchId === this.currentSearchId && wikiResults.length > 0) {
-                    otherResults = otherResults.concat(wikiResults);
-                    showResults();
-                } });
-        }
-
         //---emoji search------
         if (pattern.length > 2 && this.settings.enableEmojiSearch && !PREFIX_USED ||
                                                     EMOJI_PREFIX && pattern.length >= 4) {
@@ -1324,27 +1392,23 @@ class CinnamenuApplet extends TextIconApplet {
             }
 
             EMOJI.forEach(emoji => {
-                const match1 = searchStr(epattern, emoji[EMOJI_NAME], true);
-                const match2 = searchStr(epattern, emoji[EMOJI_KEYWORDS], true);
-                match2.score *= 0.95; //slightly lower priority for keyword match
-                const bestMatchScore = Math.max(match1.score, match2.score);
-                if (bestMatchScore > SEARCH_THRESHOLD) {
+                const nameScore = searchStr(epattern, emoji[EMOJI_NAME], true);
+                let keywordScore = searchStr(epattern, emoji[EMOJI_KEYWORDS], true);
+                keywordScore *= 0.95; //slightly lower priority for keyword match
+                const bestScore = Math.max(nameScore, keywordScore);
+                if (bestScore > SEARCH_THRESHOLD) {
                     emojiResults.push({
                         name: emoji[EMOJI_NAME],
-                        score: bestMatchScore,
-                        description: _('Click to copy'),
-                        nameWithSearchMarkup: match1.result,
+                        score: bestScore,
+                        description: _('Click to insert emoji'),
                         isSearchResult: true,
                         deleteAfterUse: true,
-                        emoji: emoji[EMOJI_CODE],
-                        activate: () => {
-                                const clipboard = St.Clipboard.get_default();
-                                clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji[EMOJI_CODE]); }
+                        emoji: emoji[EMOJI_CODE]
                     });
                 }
             });
 
-            emojiResults.sort((a, b) =>  a.score < b.score);
+            emojiResults.sort((a, b) => a.score < b.score);
             if (emojiResults.length > 36) {
                 emojiResults.length = 36;
             }
@@ -1364,28 +1428,33 @@ class CinnamenuApplet extends TextIconApplet {
             if (FILE_PREFIX) {
                 fpattern = pattern.substring(2);
             }
-            //Call function searchNextDir() consecutively and asynchronously on each folder to be searched so
-            //that search can be interupted at any time. Starting with home folder, all folders to be
-            //searched are added to foldersToDo[] with currentFolderIndex being the folder currently
-            //being searched. Searching is cancelled when the search string has changed (thisSearchId !==
-            //this.currentSearchId). Searching is completed when all folders have been searched
-            //(currentFolderIndex === foldersToDo.length - 1)
+            // Call function searchNextDir() consecutively and asynchronously on each folder to be searched so
+            // that search can be interupted at any time. Starting with home folder, all folders to be
+            // searched are added to foldersToDo[]. Searching is cancelled when the search string has
+            // changed (thisSearchId !== this.currentSearchId).
 
-            let updateInterval = 100;//update the results after the first 100ms even if search hasn't finished
-            const MAX_FOLDERS_TODO = 200;
+            let updateInterval = 100; // Update the results after the first 100ms even if search hasn't finished
+            const MAX_FOLDERS_TO_SEARCH = 50000;
+            const FOLLOW_SYMLINKS = false;
+            const FILE_SEARCH_DEBUG = false;
             const results = [];
             const foldersToDo = [];
-            foldersToDo.push(this.settings.searchStartFolder);//start search in (default value) home directory
-            let currentFolderIndex = 0;
+            foldersToDo.push(this.settings.searchStartFolder); // Start search in (default value) home directory
+            let foldersSearched = 0;
             let lastUpdateTime = Date.now();
+            const total_timer = Date.now();
 
             const searchNextDir = (thisSearchId) => {
-                const folder = foldersToDo[currentFolderIndex];
+                const folder = foldersToDo.pop();
+
                 const dir = Gio.file_new_for_path(folder);
                 let enumerator;
-                dir.enumerate_children_async(
-                            'standard::name,standard::type,standard::icon,standard::content-type,' +
-                            'standard::is-hidden,standard::is-symlink',
+                let timer = Date.now();
+                if (FILE_SEARCH_DEBUG) {
+                    log("searching: " + folder);
+                }
+
+                dir.enumerate_children_async('standard::name,standard::type,standard::is-symlink',
                             Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (source, result) => {
                     try {
                         enumerator = source.enumerate_children_finish(result);
@@ -1400,82 +1469,87 @@ class CinnamenuApplet extends TextIconApplet {
                     }
 
                     //find matching files and folders in directory
-                    let next;
                     if (enumerator) {
-                        next = enumerator.next_file(null);
-                    }
-
-                    let searchTimeLimit = Date.now() + 200; // allow max 200ms to search each folder to
-                    //prevent freezing if a folder has a large number of files.
-                    while (next && Date.now() < searchTimeLimit) {
-                        if (next.get_is_hidden()) {
-                            next = enumerator.next_file(null);
-                            continue;
-                        }
-                        const filename = next.get_name();
-                        const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
-                        const filePath = folder + (folder === '/' ? '' : '/') + filename;
-                        const match = searchStr(fpattern, filename, true, true);
-                        if (match.score > 1) { //any word boundary match
-                            const file = Gio.file_new_for_path(filePath);
-                            match.score -= 0.01;
-                            //if file then treat as isFolderviewFile and if directory then treat as isPlace
-                            const foundFile = {
-                                        name: filename,
-                                        score: match.score * (fpattern.length > 2 ? 1 : 0.9),
-                                        nameWithSearchMarkup: match.result,
-                                        gicon: next.get_icon(),
-                                        uri: file.get_uri(),
-                                        mimeType: next.get_content_type(),
-                                        description: filePath,
-                                        isPlace: isDirectory,
-                                        isDirectory: isDirectory,
-                                        isFolderviewFile: !isDirectory,
-                                        deleteAfterUse: true };
-                            if (isDirectory) {
-                                const defaultInfo =
-                                            Gio.AppInfo.get_default_for_type('inode/directory', false);
-                                if (defaultInfo) {
-                                    foundFile.activate = () => { defaultInfo.launch([file], null); };
-                                }
+                        enumerator.next_files_async(1000, GLib.PRIORITY_DEFAULT, null, (source, result) => {
+                            let fileInfos;
+                            try {
+                                fileInfos = source.next_files_finish(result);
+                            } catch(e) {
+                                global.logWarning('Cinnamenu file search:' + e.message);
                             }
-                            results.push(foundFile);
-                        }
+                            if (!this.searchActive || thisSearchId !== this.currentSearchId) return;
+                            if (fileInfos) {
+                                fileInfos.forEach((fileInfo) => {
+                                    const filename = fileInfo.get_name();
+                                    if (filename.startsWith(".")) {
+                                        return; // skip hidden files
+                                    }
+                                    const isDirectory = fileInfo.get_file_type() === Gio.FileType.DIRECTORY;
+                                    const filePath = folder + (folder === '/' ? '' : '/') + filename;
+                                    let matchScore = searchStr(fpattern, filename, true, true);
+                                    if (matchScore > 1) { //any word boundary match
+                                        const file = Gio.file_new_for_path(filePath);
+                                        const extraFileInfo = file.query_info('standard::icon,standard::content-type',
+                                                                            Gio.FileQueryInfoFlags.NONE, null);
+                                        matchScore -= 0.01;
+                                        //if file then treat as isFolderviewFile and if directory then treat as isPlace
+                                        const foundFile = {
+                                            name: filename,
+                                            score: matchScore * (fpattern.length > 2 ? 1 : 0.9),
+                                            gicon: extraFileInfo.get_icon(),
+                                            uri: file.get_uri(),
+                                            mimeType: extraFileInfo.get_content_type(),
+                                            description: filePath,
+                                            isPlace: isDirectory,
+                                            isDirectory: isDirectory,
+                                            isFolderviewFile: !isDirectory,
+                                            deleteAfterUse: true
+                                        };
+                                        if (isDirectory) {
+                                            const defaultInfo =
+                                                        Gio.AppInfo.get_default_for_type('inode/directory', false);
+                                            if (defaultInfo) {
+                                                foundFile.activate = () => { defaultInfo.launch([file], null); };
+                                            }
+                                        }
+                                        results.push(foundFile);
+                                    }
 
-                        //Add subdirectories to foldersToDo[]
-                        if (isDirectory && !next.get_is_symlink() &&
-                                                            foldersToDo.length < MAX_FOLDERS_TODO) {
-                            foldersToDo.push(filePath);
-                        }
-                        
-                        next = enumerator.next_file(null);
-                    }//end while
+                                    // Add subdirectories to foldersToDo[]
+                                    if (isDirectory && (!fileInfo.get_is_symlink() || FOLLOW_SYMLINKS) &&
+                                                                foldersSearched < MAX_FOLDERS_TO_SEARCH) {
+                                        foldersToDo.push(filePath);
+                                    }
+                                }); // end forEach
+                            } // end if
 
-                    if (enumerator) {
-                        enumerator.close(null);
-                    }
+                            if (FILE_SEARCH_DEBUG) {
+                                log("todo: " + foldersToDo.length + " done: " + foldersSearched + " time: " + (Date.now() - timer) + " : total " + (Date.now() - total_timer));
+                            }
+                            // Update display of results at intervals or when search completed.
+                            if (foldersToDo.length === 0 || Date.now() - lastUpdateTime > updateInterval) {
+                                if (results.length > 0 && this.searchActive &&
+                                                                        thisSearchId === this.currentSearchId) {
+                                    fileResults = fileResults.concat(results);
+                                    showResults();
+                                    results.length = 0;
+                                }
+                                lastUpdateTime = Date.now();
+                                updateInterval *= 2; // Progressively longer update intervals.
+                            }
 
-                    //update display of results at intervals or when search completed
-                    if (currentFolderIndex === foldersToDo.length - 1 ||
-                                                    Date.now() - lastUpdateTime > updateInterval) {
-                        if (results.length > 0 && this.searchActive &&
-                                                                thisSearchId === this.currentSearchId) {
-                            fileResults = fileResults.concat(results);
-                            showResults();
-                            results.length = 0;
-                        }
-                        lastUpdateTime = Date.now();
-                        updateInterval *= 2;//progressively longer update intervals
-                    }
-
-                    //continue search if not completed
-                    if (currentFolderIndex < foldersToDo.length - 1) {
-                        currentFolderIndex++;
-                        searchNextDir(thisSearchId);
-                    }
-
-                });//end of enumerate_children_async
-            };
+                            // Continue search if not completed.
+                            if (foldersToDo.length > 0) {
+                                foldersSearched++;
+                                Meta.later_add(Meta.LaterType.IDLE, () => { searchNextDir(thisSearchId); });
+                            }
+                            if (enumerator) {
+                                enumerator.close(null);
+                            }
+                        }); // end of next_files_async
+                    } // end if
+                }); // end of enumerate_children_async
+            }; // end searchNextDir()
 
             searchNextDir(this.currentSearchId);
         });
@@ -1499,12 +1573,13 @@ class CinnamenuApplet extends TextIconApplet {
                         providerResult.icon.icon_size = this.getAppIconSize();
                     } else if (providerResult.icon_app) {
                         providerResult.icon = providerResult.icon_app.create_icon_texture(
-                                                                            this.getAppIconSize());
+                                                                        this.getAppIconSize());
                     } else if (providerResult.icon_filename) {
                         providerResult.icon = new St.Icon({
-                                gicon: new Gio.FileIcon({
+                            gicon: new Gio.FileIcon({
                                     file: Gio.file_new_for_path(providerResult.icon_filename)}),
-                                icon_size: this.getAppIconSize() });
+                            icon_size: this.getAppIconSize()
+                        });
                     }
                 });
                 if (!this.searchActive || thisSearchId !== this.currentSearchId ||
@@ -1520,43 +1595,45 @@ class CinnamenuApplet extends TextIconApplet {
         return;
     }
 
-/* Below are all functions creating arrays of app objects excluding _doSearch() and
- * listApplications() which is in Apps class. Arrays of app objs are then passed
- * to AppsView.populate() which creates AppButtons with .app as a property.
- * 
- * app obj properties used:
- *  .name
- *  .description
- *  .id
- *  .uri
- *  .mimeType
- *  .icon
- *  .gicon
- *  .iconFactory()
- *  .score
- *  .nameWithSearchMarkup
- *  .descriptionWithSearchMarkup
- *  .desktop_file_path
- *  .isApplication
- *  .isPlace
- *  .isRecentFile
- *  .isClearRecentsButton
- *  .isFavoriteFile             //Nemo favorites
- *  .isFolderviewFile
- *  .isDirectory
- *  .isBackButton
- *  .isSearchResult
- *  .deleteAfterUse
- *  .emoji
- *  .activate()
- */
+    /* Below are all functions creating arrays of app objects excluding _doSearch() and
+     * listApplications() which is in Apps class. Arrays of app objs are then passed
+     * to AppsView.populate() which creates AppButtons with .app as a property.
+     *
+     * app obj properties used:
+     *  .name
+     *  .description
+     *  .id
+     *  .uri
+     *  .mimeType
+     *  .icon
+     *  .gicon
+     *  .iconFactory()
+     *  .score
+     *  .desktop_file_path
+     *  .isApplication
+     *  .isPlace
+     *  .isRecentFile
+     *  .isClearRecentsButton
+     *  .isFavoriteFile             //Nemo favorites
+     *  .isFolderviewFile
+     *  .isDirectory
+     *  .isBackButton
+     *  .isSearchResult
+     *  .deleteAfterUse
+     *  .emoji
+     *  .activate()
+     */
 
     listFavoriteApps() {
-        const res = this.appFavorites.getFavorites();
-        res.forEach(favApp => {
-            favApp.name = favApp.get_name();
-            favApp.description = favApp.get_description();
-            favApp.isApplication = true;
+        const res = [];
+        const favApps = this.appFavorites.getFavorites();
+        favApps.forEach(favApp => {
+            if (favApp && this.appSystem.lookup_app(favApp.get_id())) {
+                favApp.name = favApp.get_name();
+                favApp.description = favApp.get_description();
+                favApp.isApplication = true;
+                res.push(favApp);
+            }
         });
         return res;
     }
@@ -1565,10 +1642,9 @@ class CinnamenuApplet extends TextIconApplet {
         const res = [];
 
         this.listRecentByType('all', 100).forEach(recentItem => {
-            const match = searchStr(pattern, recentItem.name);
-            if (recentItem.name && match.score > SEARCH_THRESHOLD) {
-                recentItem.score = match.score;
-                recentItem.nameWithSearchMarkup = match.result;
+            const score = searchStr(pattern, recentItem.name);
+            if (recentItem.name && score > SEARCH_THRESHOLD) {
+                recentItem.score = score;
                 res.push(recentItem);
             }
         });
@@ -1581,7 +1657,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         this.recentApps.getApps(maxRecentItems).forEach(recentId => {
             const app = this.apps.listApplications('all').find(app => app.id === recentId);
-            if (app) {//Check because app may have been uninstalled
+            if (app) { // Check because app may have been uninstalled
                 res.push(app);
             }
         });
@@ -1590,19 +1666,15 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     listRecentByType(type, maxItems) {
-        //param "type" is one of all|documents|video|image|audio.
+        // Param "type" is one of all|documents|video|image|audio.
         const res = [];
         this.recentManagerDefault.get_items().forEach(recentInfo => {
             if (type === 'documents' && (   recentInfo.get_mime_type().startsWith('video') ||
                                             recentInfo.get_mime_type().startsWith('image') ||
                                             recentInfo.get_mime_type().startsWith('audio') )) {
                 return;
-            }
-            if ((type === 'video' || type === 'image' || type === 'audio') &&
+            } else if ((type === 'video' || type === 'image' || type === 'audio') &&
                                                     !recentInfo.get_mime_type().startsWith(type)) {
-                return;
-            }
-            if (!recentInfo.exists()) {
                 return;
             }
 
@@ -1612,13 +1684,13 @@ class CinnamenuApplet extends TextIconApplet {
                 uri: recentInfo.get_uri(),
                 mimeType: recentInfo.get_mime_type(),
                 description: recentInfo.get_uri_display(),
-                modifiedTime: recentInfo.get_modified(),//only used for sorting below
+                modifiedTime: recentInfo.get_modified(), // Only used for sorting below.
                 isRecentFile: true,
                 deleteAfterUse: true
             };
             res.push(new_recent);
         });
-        res.sort((a, b) =>  a.modifiedTime < b.modifiedTime);
+        res.sort((a, b) => a.modifiedTime < b.modifiedTime);
         if (res.length > maxItems) {
             res.length = maxItems;
         }
@@ -1633,12 +1705,16 @@ class CinnamenuApplet extends TextIconApplet {
         if (clearRecentsButton) {
             res.push(clearRecentsButton.app);
         } else {
-            res.push( { name: _('Clear List'),
-                        description: '',
-                        icon: new St.Icon({ icon_name: 'edit-clear',
-                                            icon_type: St.IconType.SYMBOLIC,
-                                            icon_size: this.getAppIconSize()}),
-                                            isClearRecentsButton: true });
+            res.push({
+                name: _('Clear List'),
+                description: '',
+                icon: new St.Icon({
+                    icon_name: 'edit-clear',
+                    icon_type: St.IconType.SYMBOLIC,
+                    icon_size: this.getAppIconSize()
+                }),
+                isClearRecentsButton: true
+            });
         }
 
         return res;
@@ -1657,7 +1733,7 @@ class CinnamenuApplet extends TextIconApplet {
             }
             place.isPlace = true;
             place.description = selectedAppId;
-            place.activate = () => place.launch();//don't pass any params to launch()
+            place.activate = () => place.launch(); // Don't pass any params to launch()
             if (place.id.startsWith('bookmark:')) {
                 place.uri = place.id.substr(9);
                 place.mimeType = 'inode/directory';
@@ -1666,37 +1742,40 @@ class CinnamenuApplet extends TextIconApplet {
             res.push(place);
         });
         res.splice(2, 0, {
-                id: 'special:trash',
-                name: _('Trash'),
-                description: _('Trash'),
-                isPlace: true,
-                activate: () => Util.spawnCommandLine('xdg-open trash:'),
-                iconFactory: (size) => new St.Icon({icon_name: 'user-trash',
-                                                    icon_type: St.IconType.FULLCOLOR,
-                                                    icon_size: size })
-                        });
+            id: 'special:trash',
+            name: _('Trash'),
+            description: _('Trash'),
+            isPlace: true,
+            activate: () => Util.spawn(['xdg-open', 'trash:']),
+            iconFactory: (size) => new St.Icon({
+                icon_name: 'user-trash',
+                icon_type: St.IconType.FULLCOLOR,
+                icon_size: size
+            })
+        });
         res.splice(2, 0, {
-                id: 'special:computer',
-                name: _('Computer'),
-                description: _('Computer'),
-                isPlace: true,
-                activate: () => Util.spawnCommandLine('xdg-open computer:'),
-                iconFactory: (size) => new St.Icon({icon_name: 'computer',
-                                                    icon_type: St.IconType.FULLCOLOR,
-                                                    icon_size: size })
-                        });
+            id: 'special:computer',
+            name: _('Computer'),
+            description: _('Computer'),
+            isPlace: true,
+            activate: () => Util.spawn(['xdg-open', 'computer:']),
+            iconFactory: (size) => new St.Icon({
+                icon_name: 'computer',
+                icon_type: St.IconType.FULLCOLOR,
+                icon_size: size
+            })
+        });
 
         return res;
     }
 
-    searchPlaces(pattern){
+    searchPlaces(pattern) {
         const places = this.listPlaces();
         const res = [];
         places.forEach(place => {
-            const match = searchStr(pattern, place.name);
-            if (match.score > SEARCH_THRESHOLD) {
-                place.nameWithSearchMarkup = match.result;
-                place.score = match.score;
+            const score = searchStr(pattern, place.name);
+            if (score > SEARCH_THRESHOLD) {
+                place.score = score;
                 res.push(place);
             }
         });
@@ -1713,16 +1792,18 @@ class CinnamenuApplet extends TextIconApplet {
             if (found) {
                 res.push(found.app);
             } else {
-                res.push({  name: info.display_name,
-                            description: Gio.File.new_for_uri(info.uri).get_path(),
-                            gicon: Gio.content_type_get_icon(info.cached_mimetype),
-                            isFavoriteFile: true,
-                            mimeType: info.cached_mimetype,
-                            uri: info.uri });
+                res.push({
+                    name: info.display_name,
+                    description: Gio.File.new_for_uri(info.uri).get_path(),
+                    gicon: Gio.content_type_get_icon(info.cached_mimetype),
+                    isFavoriteFile: true,
+                    mimeType: info.cached_mimetype,
+                    uri: info.uri
+                });
             }
         });
 
-        res.sort( (a, b) => a.name.localeCompare(b.name,
+        res.sort((a, b) => a.name.localeCompare(b.name,
                                                  undefined,
                                                  {sensitivity: "base", ignorePunctuation: true}));
         return res;
@@ -1733,10 +1814,9 @@ class CinnamenuApplet extends TextIconApplet {
         const res = [];
 
         favs.forEach(item => {
-            const match = searchStr(pattern, item.name);
-            if (item.name && match.score > SEARCH_THRESHOLD) {
-                item.score = match.score;
-                item.nameWithSearchMarkup = match.result;
+            const score = searchStr(pattern, item.name);
+            if (item.name && score > SEARCH_THRESHOLD) {
+                item.score = score;
                 res.push(item);
             }
         });
@@ -1744,71 +1824,102 @@ class CinnamenuApplet extends TextIconApplet {
         return res;
     }
 
-    listFolder(folder) {
-        const res = [];
-        const dir = Gio.file_new_for_path(folder);
-        let enumerator;
-        let errorMsg = null;
-        try {
-            enumerator = dir.enumerate_children(
+    listFolderAsync(folder) {
+        return new Promise((resolve) => {
+            const res = [];
+            const dir = Gio.file_new_for_path(folder);
+
+            dir.enumerate_children_async(
                 'standard::name,standard::type,standard::icon,standard::content-type,standard::is-hidden',
-                                                                            0, null);
-        } catch(e) {//folder access permission denied probably
-            errorMsg = e.message;
-        }
-        let next;
-        if (enumerator) {
-            next = enumerator.next_file(null);
-        }
-        while (next) {
-            const filename = next.get_name();
-            if (this.settings.showHiddenFiles || !next.get_is_hidden()) {
-                let file = Gio.file_new_for_path(folder + (folder === '/' ? '' : '/') + filename);
-                const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
-                res.push({  name: next.get_name(),
-                            gicon: next.get_icon(),
-                            uri: file.get_uri(),
-                            mimeType: next.get_content_type(),
-                            isDirectory: isDirectory,
-                            description: '',
-                            isFolderviewFile: !isDirectory,
-                            deleteAfterUse: true });
-                file = null;
-            }
-            next = enumerator.next_file(null);
-        }
-        if (enumerator) {
-            enumerator.close(null);
-        }
+                Gio.FileQueryInfoFlags.NONE,
+                GLib.PRIORITY_DEFAULT,
+                null,
+                (source, result) => {
+                    let enumerator;
+                    try {
+                        enumerator = source.enumerate_children_finish(result);
+                    } catch (e) {
+                        resolve({ results: [], errorMsg: e.message });
+                        return;
+                    }
 
-        res.sort((a, b) => {    
-                        if (!a.isDirectory && b.isDirectory) return 1;
-                        else if (a.isDirectory && !b.isDirectory) return -1;
-                        else if (a.isDirectory && b.isDirectory &&
-                                    a.name.startsWith('.') && !b.name.startsWith('.')) return 1;
-                        else if (a.isDirectory && b.isDirectory &&
-                                    !a.name.startsWith('.') && b.name.startsWith('.')) return -1;
-                        else {
-                            const nameA = a.name.toUpperCase();
-                            const nameB = b.name.toUpperCase();
-                            return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 );
-                        }
-                    });
-        const parent = dir.get_parent();
-        if (parent) {// Add back button
-            res.unshift({   name: 'Back',
-                            uri: parent.get_uri(),
-                            icon: new St.Icon({ icon_name: 'edit-undo-symbolic',
-                                                icon_type: St.IconType.SYMBOLIC,
-                                                icon_size: this.getAppIconSize() }),
-                            mimeType: 'inode/directory',
-                            isBackButton: true,
-                            description: '',
-                            deleteAfterUse: true
+                    const getAllFiles = (en) => {
+                        en.next_files_async(100, GLib.PRIORITY_DEFAULT, null, (source, result) => {
+                            // Quit early if category has changed.
+                            if (folder !== this.currentCategory || this.searchActive) {
+                                resolve({ results: [], errorMsg: null });
+                                return;
+                            }
+
+                            let fileInfos;
+                            try {
+                                fileInfos = source.next_files_finish(result);
+                            } catch (e) {
+                                resolve({ results: res, errorMsg: e.message });
+                                return;
+                            }
+
+                            if (fileInfos && fileInfos.length > 0) {
+                                fileInfos.forEach((next) => {
+                                    const filename = next.get_name();
+                                    if (this.settings.showHiddenFiles || !next.get_is_hidden()) {
+                                        const filePath = folder + (folder === '/' ? '' : '/') + filename;
+                                        const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
+                                        res.push({
+                                            name: filename,
+                                            gicon: next.get_icon(),
+                                            uri: Gio.file_new_for_path(filePath).get_uri(),
+                                            mimeType: next.get_content_type(),
+                                            isDirectory: isDirectory,
+                                            description: '',
+                                            isFolderviewFile: !isDirectory,
+                                            deleteAfterUse: true
+                                        });
+                                    }
+                                });
+                                getAllFiles(en); // Get next batch of 100
+                            } else {
+                                // Sort results
+                                res.sort((a, b) => {
+                                    if (!a.isDirectory && b.isDirectory) return 1;
+                                    else if (a.isDirectory && !b.isDirectory) return -1;
+                                    else if (a.isDirectory && b.isDirectory &&
+                                        a.name.startsWith('.') && !b.name.startsWith('.')) return 1;
+                                    else if (a.isDirectory && b.isDirectory &&
+                                        !a.name.startsWith('.') && b.name.startsWith('.')) return -1;
+                                    else {
+                                        const nameA = a.name.toUpperCase();
+                                        const nameB = b.name.toUpperCase();
+                                        return (nameA > nameB) ? 1 : ((nameA < nameB) ? -1 : 0);
+                                    }
+                                });
+                                // Add back button
+                                const parent = dir.get_parent();
+                                if (parent) {
+                                    res.unshift({
+                                        name: _('Back'),
+                                        uri: parent.get_uri(),
+                                        icon: new St.Icon({
+                                            icon_name: 'edit-undo-symbolic',
+                                            icon_type: St.IconType.SYMBOLIC,
+                                            icon_size: this.getAppIconSize()
+                                        }),
+                                        mimeType: 'inode/directory',
+                                        isBackButton: true,
+                                        description: '',
+                                        deleteAfterUse: true
+                                    });
+                                }
+
+                                en.close(null);
+                                resolve({ results: res, errorMsg: null });
+                            }
                         });
-        }
-
-        return {results: res, errorMsg: errorMsg};
+                    };
+                    getAllFiles(enumerator);
+                }
+            );
+        });
     }
 
     listEmojiByRange(rangeStart, rangeEnd) {
@@ -1816,7 +1927,7 @@ class CinnamenuApplet extends TextIconApplet {
         for (let i = rangeStart; i < rangeEnd; i++) {
             results.push({
                 name: EMOJI[i][EMOJI_NAME],
-                description: _('Click to copy'),
+                description: _('Click to insert emoji'),
                 isSearchResult: true,
                 deleteAfterUse: true,
                 emoji: EMOJI[i][EMOJI_CODE],
@@ -1831,29 +1942,27 @@ class CinnamenuApplet extends TextIconApplet {
     }
 }
 
-class Apps {//This obj provides the .app objects for all the applications categories
-    #appsByCategory = {};
-    #appSystem;
-    #dirs = [];
-    #knownApps = [];
-    #appsNeedRefresh = false;
-    #newInstance = true;
-    
+class Apps { // This obj provides the .app objects for all the applications categories.
     constructor(appSystem) {
-        this.#appSystem = appSystem;
-        this.#initAppCategories();
+        this._appsByCategory = {};
+        this._dirs = [];
+        this._knownApps = [];
+        this._appsNeedRefresh = false;
+        this._newInstance = true;
+        this.appSystem = appSystem;
+        this._initAppCategories();
     }
 
     installedChanged() {
-        this.#appsNeedRefresh = true;
+        this._appsNeedRefresh = true;
     }
 
-    #initAppCategories() {
+    _initAppCategories() {
         const apps_sort = arr => arr.sort((a, b) => a.name.localeCompare(b.name, undefined,
                                                 {sensitivity: "base", ignorePunctuation: true}));
-        this.#dirs = [];
-        this.#appsByCategory = {};
-        const iter = this.#appSystem.get_tree().get_root_directory().iter();
+        this._dirs = [];
+        this._appsByCategory = {};
+        const iter = this.appSystem.get_tree().get_root_directory().iter();
         let nextType;
         while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
             if (nextType === CMenu.TreeItemType.DIRECTORY) {
@@ -1862,19 +1971,20 @@ class Apps {//This obj provides the .app objects for all the applications catego
                     continue;
                 }
                 const dirId = dir.get_menu_id();
-                const foundApps = this.#loadDirectory(dir);
+                const foundApps = this._loadDirectory(dir);
                 if (foundApps.length > 0) {
                     apps_sort(foundApps);
-                    this.#appsByCategory[dirId] = foundApps;
-                    this.#dirs.push(dir);
+                    this._appsByCategory[dirId] = foundApps;
+                    dir.dirId = dirId;
+                    this._dirs.push(dir);
                 }
             }
         }
 
-        this.#dirs.sort((a, b) => {
+        this._dirs.sort((a, b) => {
             const prefCats = ['ADMINISTRATION', 'PREFERENCES'];
-            const prefIdA = prefCats.indexOf(a.get_menu_id().toUpperCase());
-            const prefIdB = prefCats.indexOf(b.get_menu_id().toUpperCase());
+            const prefIdA = prefCats.indexOf(a.dirId.toUpperCase());
+            const prefIdB = prefCats.indexOf(b.dirId.toUpperCase());
             if (prefIdA < 0 && prefIdB >= 0) return -1;
             if (prefIdA >= 0 && prefIdB < 0) return 1;
             return a.get_name().localeCompare(b.get_name(), undefined,
@@ -1885,33 +1995,33 @@ class Apps {//This obj provides the .app objects for all the applications catego
         let all = [];
         let allApps = [];
         let allSettings = [];
-        Object.keys(this.#appsByCategory).forEach(key => {
-                    all = all.concat(this.#appsByCategory[key]);
-                    if (['Preferences','Administration'].includes(key)) {
-                        allSettings = allSettings.concat(this.#appsByCategory[key]);
-                    } else {
-                        allApps = allApps.concat(this.#appsByCategory[key]);
-                    }
+        Object.keys(this._appsByCategory).forEach(key => {
+            all = all.concat(this._appsByCategory[key]);
+            if (['Preferences', 'Administration'].includes(key)) {
+                allSettings = allSettings.concat(this._appsByCategory[key]);
+            } else {
+                allApps = allApps.concat(this._appsByCategory[key]);
+            }
         });
-        this.#appsByCategory.all = Array.from(new Set(all));//remove duplicates
-        apps_sort(this.#appsByCategory.all);
-        this.#appsByCategory.allApps = Array.from(new Set(allApps));//remove duplicates
-        apps_sort(this.#appsByCategory.allApps);
-        this.#appsByCategory.allSettings = Array.from(new Set(allSettings));//remove duplicates
-        apps_sort(this.#appsByCategory.allSettings);
-        //remove apps from allSettings if they're also in allApps
-        this.#appsByCategory.allApps.forEach( app => {
-            const i = this.#appsByCategory.allSettings.findIndex( a => a === app );
+        this._appsByCategory.all = Array.from(new Set(all)); // remove duplicates
+        apps_sort(this._appsByCategory.all);
+        this._appsByCategory.allApps = Array.from(new Set(allApps)); // remove duplicates
+        apps_sort(this._appsByCategory.allApps);
+        this._appsByCategory.allSettings = Array.from(new Set(allSettings)); // remove duplicates
+        apps_sort(this._appsByCategory.allSettings);
+        // Remove apps from allSettings if they're also in allApps.
+        this._appsByCategory.allApps.forEach(app => {
+            const i = this._appsByCategory.allSettings.findIndex(a => a === app);
             if (i > -1) {
-                this.#appsByCategory.allSettings.splice(i, 1);
+                this._appsByCategory.allSettings.splice(i, 1);
             }
         })
-        
-        this.#appsNeedRefresh = false;
-        this.#newInstance = false;
+
+        this._appsNeedRefresh = false;
+        this._newInstance = false;
     }
 
-    #loadDirectory(dir) {
+    _loadDirectory(dir) {
         let foundApps = [];
         const iter = dir.iter();
         let nextType;
@@ -1919,8 +2029,8 @@ class Apps {//This obj provides the .app objects for all the applications catego
             if (nextType === CMenu.TreeItemType.ENTRY) {
                 const entry = iter.get_entry();
                 const id = entry.get_desktop_file_id();
-                const app = this.#appSystem.lookup_app(id);
-                if  (!app || app.get_nodisplay()) {
+                const app = this.appSystem.lookup_app(id);
+                if (!app || app.get_nodisplay()) {
                     continue;
                 }
 
@@ -1931,16 +2041,16 @@ class Apps {//This obj provides the .app objects for all the applications catego
                 app.id = id;
                 app.desktop_file_path = entry.get_desktop_file_path();
 
-                if (this.#knownApps.indexOf(id) < 0) {//unknown app
-                    if (!this.#newInstance) {
+                if (this._knownApps.indexOf(id) < 0) { // unknown app
+                    if (!this._newInstance) {
                         app.newAppShouldHighlight = true;
                     }
-                    this.#knownApps.push(id);
+                    this._knownApps.push(id);
                 }
             } else if (nextType === CMenu.TreeItemType.DIRECTORY) {
                 const subDir = iter.get_directory();
                 if (!subDir.get_is_nodisplay()) {
-                    foundApps = foundApps.concat(this.#loadDirectory(subDir));
+                    foundApps = foundApps.concat(this._loadDirectory(subDir));
                 }
             }
         }
@@ -1948,11 +2058,11 @@ class Apps {//This obj provides the .app objects for all the applications catego
     }
 
     getDirs() {
-        if (this.#appsNeedRefresh) {
-            this.#initAppCategories();
+        if (this._appsNeedRefresh) {
+            this._initAppCategories();
         }
 
-        return this.#dirs;
+        return this._dirs;
     }
 
     dirHasNewApp(dirId) {
@@ -1962,11 +2072,12 @@ class Apps {//This obj provides the .app objects for all the applications catego
     }
 
     listApplications(categoryMenuId) {
-        if (this.#appsNeedRefresh) {
-            this.#initAppCategories();
+        if (this._appsNeedRefresh) {
+            this._initAppCategories();
         }
 
-        return this.#appsByCategory[categoryMenuId];
+        const apps = this._appsByCategory[categoryMenuId];
+        return apps ? apps : [];
     }
 
     searchApplications(pattern) {
@@ -1985,17 +2096,15 @@ class Apps {//This obj provides the .app objects for all the applications catego
             }
             id = id.replace('cinnamon-settings-', '');
 
-            const match1 = searchStr(pattern, app.name);
-            const match2 = searchStr(pattern, app.description);
-            match2.score *= 0.95; //slightly lower priority for description match
-            const match3 = searchStr(pattern, keywords);
-            match3.score *= 0.8; //lower priority for keyword match
-            const match4 = searchStr(pattern, id);
-            const bestMatchScore = Math.max(match1.score, match2.score, match3.score, match4.score);
+            const nameScore = searchStr(pattern, app.name);
+            let desScore = searchStr(pattern, app.description);
+            desScore *= 0.95; //slightly lower priority for description match
+            let keywordScore = searchStr(pattern, keywords);
+            keywordScore *= 0.8; //lower priority for keyword match
+            const idScore = searchStr(pattern, id);
+            const bestMatchScore = Math.max(nameScore, desScore, keywordScore, idScore);
             if (bestMatchScore > SEARCH_THRESHOLD) {
                 app.score = bestMatchScore;
-                app.nameWithSearchMarkup = match1.result;
-                app.descriptionWithSearchMarkup = match2.result;
                 res.push(app);
             }
         });
@@ -2004,14 +2113,13 @@ class Apps {//This obj provides the .app objects for all the applications catego
     }
 }
 
-class RecentApps {// Simple class to remember the last 20 used apps which are shown in the
-                  // "recent" category
-    constructor(appThis) {
-        this.appThis = appThis;
+class RecentApps { // Simple class to remember the last 20 used apps which are shown in the recent category
+    constructor(applet) {
+        this.applet = applet;
     }
 
     add(appId) {
-        const recentApps = this.appThis.settings.recentApps.slice();
+        const recentApps = this.applet.settings.recentApps.slice();
         const duplicate = recentApps.indexOf(appId);
         if (duplicate > -1) {
             recentApps.splice(duplicate, 1);
@@ -2020,15 +2128,15 @@ class RecentApps {// Simple class to remember the last 20 used apps which are sh
         if (recentApps.length > 20) {
             recentApps.length = 20;
         }
-        this.appThis.settings.recentApps = recentApps;
+        this.applet.settings.recentApps = recentApps;
     }
 
     clear() {
-        this.appThis.settings.recentApps = [];
+        this.applet.settings.recentApps = [];
     }
 
     getApps(max_count) {
-        return this.appThis.settings.recentApps.slice(0, max_count);
+        return this.applet.settings.recentApps.slice(0, max_count);
     }
 }
 

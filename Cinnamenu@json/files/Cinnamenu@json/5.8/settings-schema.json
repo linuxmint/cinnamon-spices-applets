@@ -101,8 +101,6 @@
                 "enable-home-folder-search",
                 "enable-web-history-search",
                 "enable-web-bookmarks-search",
-                "enable-wikipedia-search",
-                "wikipedia-language",
                 "search-help"
             ]
         },
@@ -136,7 +134,8 @@
                 "info1",
                 "info2",
                 "info3",
-                "info4"
+                "info4",
+                "info5"
             ]
         }
     },
@@ -370,6 +369,7 @@
         "tooltip":"Enter the URL that is prepended to the search query."
     },
     "web-suggestions":{
+        "dependency":"web-search-option!=0",
         "type":"checkbox",
         "default":false,
         "description":"Web search suggestions",
@@ -385,98 +385,13 @@
         "type":"checkbox",
         "default":false,
         "description":"Web history search",
-        "tooltip":"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\nNote: Firefox history is not currently supported."
+        "tooltip":"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\nNote: Firefox/LibreWolf history is not currently supported."
     },
     "enable-web-bookmarks-search":{
         "type":"checkbox",
         "default":false,
         "description":"Web bookmarks search",
-        "tooltip":"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\nNote: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
-    },
-    "enable-wikipedia-search":{
-        "type":"checkbox",
-        "default":false,
-        "description":"Wikipedia search",
-        "tooltip":"Show some Wikipedia results"
-    },
-    "wikipedia-language":{
-        "type":"combobox",
-        "default":"en",
-        "description":"Wikipedia language",
-        "dependency":"enable-wikipedia-search",
-        "options":{
-            "English":"en",
-            "Sinugboanong Binisaya":"ceb",
-            "Svenska":"sv",
-            "Deutsch":"de",
-            "Français":"fr",
-            "Nederlands":"nl",
-            "Русский":"ru",
-            "Italiano":"it",
-            "Español":"es",
-            "Polski":"pl",
-            "مصرى (Maṣri)":"arz",
-            "日本語":"ja",
-            "Tiếng Việt":"vi",
-            "Winaray":"war",
-            "中文":"zh",
-            "العربية":"ar",
-            "Українська":"uk",
-            "Português":"pt",
-            "فارسی":"fa",
-            "Català":"ca",
-            "Српски / Srpski":"sr",
-            "Bahasa Indonesia":"id",
-            "Norsk (Bokmål)":"no",
-            "한국어":"ko",
-            "Suomi":"fi",
-            "Magyar":"hu",
-            "Čeština":"cs",
-            "Srpskohrvatski / Српскохрватски":"sh",
-            "Bân-lâm-gú":"zh-min-nan",
-            "Türkçe":"tr",
-            "Română":"ro",
-            "Нохчийн":"ce",
-            "Euskara":"eu",
-            "Bahasa Melayu":"ms",
-            "Tatarça / Татарча":"tt",
-            "Esperanto":"eo",
-            "עברית":"he",
-            "Հայերեն":"hy",
-            "Български":"bg",
-            "Dansk":"da",
-            "تۆرکجه":"azb",
-            "Slovenčina":"sk",
-            "Қазақша":"kk",
-            "Minangkabau":"min",
-            "Eesti":"et",
-            "Hrvatski":"hr",
-            "Беларуская":"be",
-            "Lietuvių":"lt",
-            "Ελληνικά":"el",
-            "Simple English":"simple",
-            "Azərbaycanca":"az",
-            "Galego":"gl",
-            "Slovenščina":"sl",
-            "اردو":"ur",
-            "Nynorsk":"nn",
-            "ქართული":"ka",
-            "हिन्दी":"hi",
-            "தமிழ்":"ta",
-            "ไทย":"th",
-            "O‘zbek":"uz",
-            "Latina":"la",
-            "Cymraeg":"cy",
-            "Asturianu":"ast",
-            "Volapük":"vo",
-            "粵語":"zh-yue",
-            "Македонски":"mk",
-            "বাংলা":"bn",
-            "Latviešu":"lv",
-            "Тоҷикӣ":"tg",
-            "မြန်မာဘာသာ":"my"
-        },
-        "tooltip":"Wikipedia language"
+        "tooltip":"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave, LibreWolf)\nNote: To search Firefox/LibreWolf bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda6 (Arch based distributions) and restart your computer."
     },
     "search-help":{
         "type":"label",
@@ -629,14 +544,18 @@
     },
     "info2":{
         "type":"label",
-        "description":"\n• Drag and drop menu categories to change their order."
+        "description":"\n• Drag and drop apps, files, and folders onto the sidebar."
     },
     "info3":{
         "type":"label",
-        "description":"\n• Folders can be set up and removed as menu categories by right-clicking on them."
+        "description":"\n• Drag and drop menu categories to change their order."
     },
     "info4":{
         "type":"label",
-        "description":"\n• Additional key options:\nctrl-p — Open launcher properties dialogue of currently highlighted application.\nctrl-d — Open .desktop file of currently highlighted app in default text editor.\n"
+        "description":"\n• Folders can be set up and removed as menu categories by right-clicking on them."
+    },
+    "info5":{
+        "type":"label",
+        "description":"\n• Additional key option:\nctrl-d — Open .desktop file of currently highlighted app in default text editor.\n"
     }
 }
