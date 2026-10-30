@@ -1,0 +1,7 @@
+{
+    "uuid": "xapp-status-collapsible@paradoxxx",
+    "name": "Collapsible Status Area",
+    "description": "Status icons (XApp and legacy tray) where the applications you choose are tucked behind an arrow, like on Windows. Replaces both the XApp Status and System Tray applets.",
+    "max-instances": 1,
+    "version": "1.3"
+}

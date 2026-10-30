@@ -1,0 +1,84 @@
+# COLLAPSIBLE STATUS AREA
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the xapp-status-collapsible@paradoxxx package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xapp-status-collapsible@paradoxxx 1.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-10-30 12:50+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:35
+msgid "Mint process monitor"
+msgstr ""
+
+#: applet.js:980
+msgid "Hide icons"
+msgstr ""
+
+#: applet.js:981
+#, javascript-format
+msgid "Show hidden icons (%d)"
+msgstr ""
+
+#: applet.js:1035
+msgid "Add to the collapsible area"
+msgstr ""
+
+#: applet.js:1041
+msgid "No icons"
+msgstr ""
+
+#. metadata.json->name
+msgid "Collapsible Status Area"
+msgstr ""
+
+#. metadata.json->description
+msgid "Status icons (XApp and legacy tray) where the applications you choose are tucked behind an arrow, like on Windows. Replaces both the XApp Status and System Tray applets."
+msgstr ""
+
+#. settings-schema.json->head-icons->description
+msgid "Applications"
+msgstr ""
+
+#. settings-schema.json->icons->description
+msgid "Check \"Add\" to move an application into the collapsible area, behind the arrow. Unchecked applications stay on the panel. Double-click a row to rename it, use \"-\" to remove an application that is no longer installed."
+msgstr ""
+
+#. settings-schema.json->icons->columns->title
+msgid "Application"
+msgstr ""
+
+#. settings-schema.json->icons->columns->title
+msgid "Add"
+msgstr ""
+
+#. settings-schema.json->icons->columns->title
+msgid "Identifier"
+msgstr ""
+
+#. settings-schema.json->head-behavior->description
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->auto-collapse->description
+msgid "Collapse automatically after"
+msgstr ""
+
+#. settings-schema.json->auto-collapse->tooltip
+msgid "0 = never collapse automatically"
+msgstr ""
+
+#. settings-schema.json->auto-collapse->units
+msgid "seconds"
+msgstr ""
