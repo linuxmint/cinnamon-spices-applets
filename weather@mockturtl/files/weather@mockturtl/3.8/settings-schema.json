@@ -100,6 +100,7 @@
 				"tomorrowio_label",
 				"accuweather_label",
 				"weatherunderground_label",
+				"qweather_label",
 				"openweathermap_onecall_apikey",
 				"metoffice_forecast_apikey",
 				"metoffice_observations_apikey",
@@ -109,6 +110,8 @@
 				"tomorrowio_apikey",
 				"accuweather_apikey",
 				"weatherunderground_apikey",
+				"qweather_apikey",
+				"qweather_host",
 				"refreshInterval",
 				"forecastDays",
 				"forecastHours",
@@ -237,7 +240,8 @@
 			"Weatherbit (key needed)": "Weatherbit",
 			"Tomorrow.io (key needed)": "Tomorrow.io",
 			"AccuWeather (key needed)": "AccuWeather",
-			"Weather Underground (key needed)": "WeatherUnderground"
+			"Weather Underground (key needed)": "WeatherUnderground",
+			"QWeather (key needed)": "QWeather"
 		}
 	},
 	"openmeteo_label": {
@@ -377,6 +381,25 @@
 		"description": "Weather Underground API Key",
 		"dependency": "dataService=WeatherUnderground",
 		"tooltip": "Copy this from your account at www.wunderground.com/weather/api and paste it here."
+	},
+	"qweather_label": {
+		"type": "label",
+		"description": "QWeather (HeFeng) provides weather data for China and worldwide, see qweather.com.\n\n - Requires an API Key: create a project and a credential in the QWeather developer console (dev.qweather.com) to obtain one\n - Requires your dedicated API Host (find it in the console Settings page); the legacy public domain devapi.qweather.com is being phased out since 2026\n - The free subscription has a limited number of daily calls, so a refresh interval of 15 minutes or more is recommended",
+		"dependency": "dataService=QWeather"
+	},
+	"qweather_apikey": {
+		"type": "entry",
+		"default": "",
+		"description": "QWeather API Key",
+		"dependency": "dataService=QWeather",
+		"tooltip": "Copy this from your credentials at the dev.qweather.com console and paste it here."
+	},
+	"qweather_host": {
+		"type": "entry",
+		"default": "devapi.qweather.com",
+		"description": "QWeather API Host",
+		"dependency": "dataService=QWeather",
+		"tooltip": "Your dedicated API Host (e.g. abcxyz.qweatherapi.com), find it in the QWeather console Settings page. The legacy public domain devapi.qweather.com is being phased out."
 	},
 	"apiKey": {
 		"type": "entry",
