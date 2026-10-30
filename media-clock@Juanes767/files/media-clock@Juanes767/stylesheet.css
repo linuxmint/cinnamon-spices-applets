@@ -1,0 +1,133 @@
+/* ============================================================
+   Media Clock — Dynamic Island horizontal (iPhone style)
+   ============================================================ */
+
+/* Píldora principal */
+.di-pill {
+    background-color: rgba(0, 0, 0, 0.92);
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 10px 14px;
+    spacing: 12px;
+}
+
+/* Portada a la izquierda */
+.di-art {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+}
+
+/* Columna central */
+.di-center {
+    spacing: 2px;
+}
+
+/* Título */
+.di-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    padding: 0;
+}
+
+/* Artista */
+.di-artist {
+    font-size: 10px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.55);
+    padding: 0 0 4px 0;
+}
+
+/* Filas de sliders */
+.di-progress-row,
+.di-volume-row {
+    spacing: 6px;
+}
+
+/* Tiempos */
+.di-time {
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.4);
+    padding: 0 2px;
+}
+
+/* ---- Slider de progreso ---- */
+.di-progress-slider .popup-slider-menu-item {
+    -slider-height: 3px;
+    -slider-background-color: rgba(255, 255, 255, 0.15);
+    -slider-border-color: transparent;
+    -slider-active-background-color: #ffffff;
+    -slider-active-border-color: transparent;
+    -slider-border-width: 0px;
+    -slider-handle-radius: 4px;
+    color: #ffffff;
+    height: 12px;
+}
+
+/* ---- Slider de volumen ---- */
+.di-volume-slider .popup-slider-menu-item {
+    -slider-height: 3px;
+    -slider-background-color: rgba(255, 255, 255, 0.12);
+    -slider-border-color: transparent;
+    -slider-active-background-color: rgba(255, 255, 255, 0.7);
+    -slider-active-border-color: transparent;
+    -slider-border-width: 0px;
+    -slider-handle-radius: 4px;
+    color: rgba(255, 255, 255, 0.7);
+    height: 12px;
+}
+
+/* Icono de volumen */
+.di-vol-btn {
+    padding: 2px;
+    border-radius: 6px;
+    background-color: transparent;
+    border: none;
+}
+
+.di-vol-btn:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+.di-vol-icon {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Controles a la derecha */
+.di-controls {
+    spacing: 6px;
+}
+
+/* Botones laterales */
+.di-btn {
+    border-radius: 50%;
+    padding: 6px;
+    background-color: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.di-btn:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+.di-btn:active {
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Botón central play/pausa */
+.di-btn-main {
+    border-radius: 50%;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.14);
+    border: none;
+    color: #ffffff;
+}
+
+.di-btn-main:hover {
+    background-color: rgba(255, 255, 255, 0.24);
+}
+
+.di-btn-main:active {
+    background-color: rgba(255, 255, 255, 0.35);
+}
