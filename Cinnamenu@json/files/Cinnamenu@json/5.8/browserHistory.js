@@ -3,9 +3,9 @@ const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
 const {getChromiumProfileDirs} = require('./utils');
 
-function searchBrowserProfile(appThis, currentSearchId, path, appInfo, pattern) {
+function searchBrowserProfile(applet, currentSearchId, path, appInfo, pattern) {
     return new Promise(function(resolve, reject) {
-        if (currentSearchId != appThis.currentSearchId) {
+        if (currentSearchId != applet.currentSearchId) {
             resolve([]);
             return;
         }
@@ -16,8 +16,8 @@ function searchBrowserProfile(appThis, currentSearchId, path, appInfo, pattern) 
             return;
         }
 
-        Util.spawn_async([__meta.path + '/searchHistory.py', full_path, pattern], (results) => {
-            if (currentSearchId != appThis.currentSearchId) {
+        Util.spawn_async([applet.metadata.path + '/searchHistory.py', full_path, pattern], (results) => {
+            if (currentSearchId != applet.currentSearchId) {
                 resolve([]);
                 return;
             }
@@ -37,8 +37,8 @@ function searchBrowserProfile(appThis, currentSearchId, path, appInfo, pattern) 
     });
 }
 
-function searchBrowserHistory(appThis, currentSearchId, pattern, callback) {
-    if (currentSearchId != appThis.currentSearchId) {
+function searchBrowserHistory(applet, currentSearchId, pattern, callback) {
+    if (currentSearchId != applet.currentSearchId) {
         return;
     }
 
@@ -53,7 +53,7 @@ function searchBrowserHistory(appThis, currentSearchId, pattern, callback) {
         if (!GLib.file_test(full_path + '/History', GLib.FileTest.EXISTS)) {
             return;
         }
-        promises.push(searchBrowserProfile(appThis, currentSearchId, path, appInfo, pattern));
+        promises.push(searchBrowserProfile(applet, currentSearchId, path, appInfo, pattern));
     });
 
     Promise.all(promises).then( results => {

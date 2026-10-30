@@ -9,12 +9,14 @@ const {SignalManager} = imports.misc.signalManager;
 const {EllipsizeMode} = imports.gi.Pango;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 
-const { _,
-        wordWrap,
-        getThumbnail_gicon,
-        showTooltip,
-        hideTooltipIfVisible,
-        scrollToButton} = require('./utils');
+const {
+    _,
+    wordWrap,
+    getThumbnail_gicon,
+    showTooltip,
+    hideTooltipIfVisible,
+    scrollToButton
+} = require('./utils');
 const ApplicationsViewMode = Object.freeze({LIST: 0, GRID: 1});
 const DescriptionPlacement = Object.freeze({TOOLTIP: 0, UNDER: 1, NONE: 2});
 
@@ -26,18 +28,18 @@ class AppButton {
         this.signals = new SignalManager(null);
 
         //----------ICON---------------------------------------------
-        if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton, isBackButton
+        if (this.app.icon) { // isSearchResult(excl. emoji), isClearRecentsButton, isBackButton
             this.icon = this.app.icon;
-        } else if (this.app.icon_filename) { //some of isSearchResult
+        } else if (this.app.icon_filename) { // some of isSearchResult
             const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(this.app.icon_filename)});
-            this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
-        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile,
-                                    //isFolderviewFile/Directory, some of isSearchResult
+            this.icon = new St.Icon({gicon: gicon, icon_size: this.appThis.getAppIconSize()});
+        } else if (this.app.gicon) { // isRecentFile, isFavoriteFile,
+                                     // isFolderviewFile/Directory, some of isSearchResult
             let gicon = this.app.gicon;
             if (!this.app.isSearchResult) {
                 gicon = getThumbnail_gicon(this.app.uri, this.app.mimeType) || gicon;
             }
-            this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
+            this.icon = new St.Icon({gicon: gicon, icon_size: this.appThis.getAppIconSize()});
         } else if (this.app.emoji) {//emoji search result
             this.icon = new St.Label({ style: 'color: white; font-size: ' +
                                             (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
@@ -47,7 +49,7 @@ class AppButton {
         } else if (this.app.iconFactory) {//isPlace
             this.icon = this.app.iconFactory(this.appThis.getAppIconSize());
             if (!this.icon) {
-                this.icon = new St.Icon({ icon_name: 'folder', icon_size: this.appThis.getAppIconSize()});
+                this.icon = new St.Icon({icon_name: 'folder', icon_size: this.appThis.getAppIconSize()});
             }
         }
         if (!this.icon) {
@@ -73,8 +75,11 @@ class AppButton {
         clutterText.ellipsize = EllipsizeMode.END;
 
         //-------------actor---------------------
-        this.actor = new St.BoxLayout({ vertical: !isListView, reactive: true,
-                                            accessible_role: Atk.Role.MENU_ITEM});
+        this.actor = new St.BoxLayout({
+            vertical: !isListView,
+            reactive: true,
+            accessible_role: Atk.Role.MENU_ITEM
+        });
 
         if (!isListView) {
             this.setGridButtonWidth();
@@ -93,6 +98,7 @@ class AppButton {
         this._setNewAppHighlightClass();
 
         //----------dnd--------------
+        
         if (this.app.isApplication) {
             this.actor._delegate = {
                 handleDragOver: (source) => {
@@ -205,7 +211,7 @@ class AppButton {
 
         if (event) {//mouse
             this.appThis.display.clearFocusedActors();
-        } else {//keyboard navigation
+        } else { // Keyboard navigation
             scrollToButton(this, this.appThis.settings.enableAnimation);
         }
         this._setButtonStyleSelected();
@@ -215,22 +221,24 @@ class AppButton {
             return Clutter.EVENT_STOP;
         }  
         const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
-        let tooltipMarkup = '<span>' + wordWrap((this.app.nameWithSearchMarkup &&
-                                        SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
-                                        this.app.nameWithSearchMarkup : this.app.name) + '</span>';
+        const name = (this.app.nameWithSearchMarkup && SHOW_SEARCH_MARKUP_IN_TOOLTIP &&
+            this.appThis.searchActive) ? this.app.nameWithSearchMarkup : this.app.name;
+        let tooltipMarkup = '<span>' + wordWrap(name) + '</span>';
         if (this.app.description) {
-            tooltipMarkup += '\n<span size="small">' + wordWrap((this.app.descriptionWithSearchMarkup &&
-                                SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
-                                this.app.descriptionWithSearchMarkup : this.app.description) + '</span>';
+            const des = (this.app.descriptionWithSearchMarkup && SHOW_SEARCH_MARKUP_IN_TOOLTIP &&
+                this.appThis.searchActive) ? this.app.descriptionWithSearchMarkup :
+                this.app.description;
+            tooltipMarkup += '\n<span size="small">' + wordWrap(des) + '</span>';
         }
         tooltipMarkup = tooltipMarkup.replace(/&/g, '&amp;');
+        
         let [x, y] = this.actor.get_transformed_position();
         let {width, height} = this.actor;
         let center_x = false; //should tooltip x pos. be centered on x
         if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
             x += 175 * global.ui_scale;
             y += height + 8 * global.ui_scale;
-        } else {//grid view
+        } else { // grid view
             x += Math.floor(width / 2);
             y += height + 8 * global.ui_scale;
             center_x = true;
@@ -293,13 +301,13 @@ class AppButton {
                 this.appThis.menu.close();
             } catch (e) {
                 Main.notify(_('Error while opening file:'), e.message);
-                //don't menu.close()
+                // don't menu.close()
             }
         } else if (this.app.isClearRecentsButton) {
             this.appThis.recentApps.clear();
             this.appThis.recentManagerDefault.purge_items();
             this.appThis.setActiveCategory('recents');
-            //don't menu.close
+            // don't menu.close
         } else if (this.app.isSearchResult || this.app.isPlace) {
             this.app.activate(this.app);
             this.appThis.menu.close();
@@ -395,8 +403,11 @@ class AppsView {
         this.appsViewSignals = new SignalManager(null);
 
         this.applicationsListBox = new St.BoxLayout({ vertical: true });
-        this.applicationsGridBox = new St.Bin({ style_class: 'menu-applications-grid-box',
-                                                                x_fill: true, y_fill: true });
+        this.applicationsGridBox = new St.Bin({
+            style_class: 'menu-applications-grid-box',
+            x_fill: true,
+            y_fill: true
+        });
         this.applicationsGridLayout = new Clutter.Actor({ layout_manager: new Clutter.GridLayout() });
         this.applicationsGridBox.set_child(this.applicationsGridLayout);
         this.headerText = new St.Label({ style_class: 'menu-applications-header-text' });

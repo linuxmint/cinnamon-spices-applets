@@ -2,13 +2,12 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
 const Mainloop = imports.mainloop;
-const Lang = imports.lang;
 const St = imports.gi.St;
 const Main = imports.ui.main;
 const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
 const {addTween} = imports.ui.tweener;
-Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain('Cinnamenu@json', GLib.get_user_data_dir() + '/locale');
 
 function _(str) {
     let cinnamonTranslation = Gettext.gettext(str);
@@ -47,18 +46,9 @@ const getThumbnail_gicon = (uri, mimeType) => {
     if (!(isImage && fileSize < 50000)) {//Don't bother with thumbnail cache if file is a
                             //small image, quicker to just create icon from file itself and avoids
                             //possible out of date cached thumbnail.
-        const ba = ByteArray.fromString(uri, 'UTF-8');
-        const md5 = GLib.Checksum.new(GLib.ChecksumType.MD5);
-        md5.update(ba);
-        const thumbDir = GLib.get_user_cache_dir() + '/thumbnails/';
-        const thumbName = md5.get_string() + '.png';
-        const thumbPathNormal = thumbDir + 'normal/' + thumbName;
-        const thumbPathLarge = thumbDir + 'large/' + thumbName;
-        if (GLib.file_test(thumbPathNormal, GLib.FileTest.EXISTS)) {
-            return new Gio.FileIcon({ file: Gio.file_new_for_path(thumbPathNormal) });
-        }
-        if (GLib.file_test(thumbPathLarge, GLib.FileTest.EXISTS)) {
-            return new Gio.FileIcon({ file: Gio.file_new_for_path(thumbPathLarge) });
+        const thumbnailPath = file.query_info('thumbnail::path', Gio.FileQueryInfoFlags.NONE, null).get_attribute_byte_string('thumbnail::path');
+        if (thumbnailPath && GLib.file_test(thumbnailPath, GLib.FileTest.EXISTS)) {
+            return new Gio.FileIcon({ file: Gio.file_new_for_path(thumbnailPath) });
         }
     }
 
@@ -74,13 +64,13 @@ const getThumbnail_gicon = (uri, mimeType) => {
 //============================================================
 
 let onlyOneTooltip = null;
-const showTooltip = (actor, xpos, ypos, center_x, text) => {
+const showTooltip = (actor, xpos, ypos, center_on_xpos, text) => {
     if (onlyOneTooltip) {
         global.logWarning("Cinnamenu: Previous tooltip still exists...removing...");
         onlyOneTooltip.destroy();
         onlyOneTooltip = null;
     }
-    onlyOneTooltip = new NewTooltip (actor, xpos, ypos, center_x, text);
+    onlyOneTooltip = new NewTooltip (actor, xpos, ypos, center_on_xpos, text);
 };
 
 const hideTooltipIfVisible = () => {
@@ -91,15 +81,14 @@ const hideTooltipIfVisible = () => {
 };
 
 class NewTooltip {
-    constructor(actor, xpos, ypos, center_x /*boolean*/, text) {
-        //if center_x then tooltip should be centered on xpos
+    constructor(actor, xpos, ypos, center_on_xpos /*boolean*/, text) {
         this.actor = actor;
         this.xpos = xpos;
         this.ypos = ypos;
-        this.center_x = center_x;
+        this.center_on_xpos = center_on_xpos;
         this.text = text;
         if (this.text && this.text !== '') {
-            this.showTimer = Mainloop.timeout_add(250, Lang.bind(this, this.show));
+            this.showTimer = Mainloop.timeout_add(250, () => this.show());
         }
     }
 
@@ -119,7 +108,7 @@ class NewTooltip {
         let monitor = Main.layoutManager.findMonitorForActor(this.actor);
         let tooltipLeft = this.xpos;
         let tooltipTop = this.ypos;
-        if (this.center_x) {
+        if (this.center_on_xpos) {
             tooltipLeft -= Math.floor(tooltipWidth / 3);
         }
         tooltipLeft = Math.max(tooltipLeft, monitor.x);
@@ -147,24 +136,18 @@ class NewTooltip {
 //===================================================
 const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
     if (!str || !q) {
-        return { score: 0, result: str };
+        return 0; //match score = 0
     }
 
-    const HIGHTLIGHT_MATCH = true;
-    let foundPosition = 0;
-    let foundLength = 0;
     const str2 = graphemeBaseChars(str).toLocaleUpperCase();
     //q is already graphemeBaseChars().toLocaleUpperCase() in _doSearch()
     let score = 0, bigrams_score = 0;
 
     if (new RegExp('\\b'+escapeRegExp(q)).test(str2)) { //match substring from beginning of words
-        foundPosition = str2.indexOf(q);
+        const foundPosition = str2.indexOf(q);
         score = (foundPosition === 0) ? 1.21 : 1.2;//slightly higher score if from beginning
-        foundLength = q.length;
     } else if (!noSubStringSearch && str2.indexOf(q) !== -1) { //else match substring
         score = 1.1;
-        foundPosition = str2.indexOf(q);
-        foundLength = q.length;
     } else if (!noFuzzySearch){ //else fuzzy match
         //find longest substring of str2 made up of letters from q
         const found = str2.match(new RegExp('[' + escapeRegExp(q) + ']+','g'));
@@ -193,26 +176,12 @@ const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
                 bigrams_score = 1;
             }
 
-            foundPosition = str2.indexOf(longest);
-            foundLength = longest.length;
             //return a fuzzy match score of between 0 and 1.
             score = Math.min(longest.length / q.length, 1.0) * bigrams_score;
         }
     }
-    
-    //reduce score if q is short
-    //if (q.length === 1) score *= 0.5;
-    //if (q.length === 2) score *= 0.75;
-    //return result of match
-    
-    if (HIGHTLIGHT_MATCH && score > 0) {
-        let markup = str.slice(0, foundPosition) + '<b>' +
-                                    str.slice(foundPosition, foundPosition + foundLength) + '</b>' +
-                                                    str.slice(foundPosition + foundLength, str.length);
-        return {score: score, result: markup};
-    } else {
-        return {score: score, result: str};
-    }
+
+    return score;
 };
 
 const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => {
@@ -222,12 +191,11 @@ const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => 
     }
 
     //There are two search terms separated by a space.
-    const part1 = searchStrPart(q.slice(0, separatorIndex), str, noFuzzySearch, noSubStringSearch);
-    const part2 = searchStrPart(q.slice(separatorIndex + 1), str, noFuzzySearch, noSubStringSearch);
-    const avgScore = (part1.score + part2.score) / 2.0;
-    const markup = (part1.score >= part2.score) ? part1.result : part2.result;
-    
-    return {score: avgScore, result: markup};
+    const part1Score = searchStrPart(q.slice(0, separatorIndex), str, noFuzzySearch, noSubStringSearch);
+    const part2Score = searchStrPart(q.slice(separatorIndex + 1), str, noFuzzySearch, noSubStringSearch);
+    const avgScore = (part1Score + part2Score) / 2.0;
+
+    return avgScore;
 };
 
 var chromiumProfileDirs = null;
@@ -321,13 +289,49 @@ var scrollToButton = (button, enableAnimation) => {
     }
 }
 
-module.exports = {  _,
-                    wordWrap,
-                    graphemeBaseChars,
-                    getThumbnail_gicon,
-                    showTooltip,
-                    hideTooltipIfVisible,
-                    searchStr,
-                    getChromiumProfileDirs,
-                    scrollToButton
-                 };
+function _launchPamac(pkgName) {
+    GLib.spawn_command_line_async(`pamac-manager --details=${pkgName}`);
+}
+
+// launch pamac-manager on app page
+function launchPamacForApp(app) {
+    if (app.get_is_flatpak()) {
+        // pamac-manager doesn't open on page of flatpak apps even if flatpak
+        // is enabled but let's launch it anyway so user can search for it.
+        const pkgName = app.get_flatpak_app_id();
+        _launchPamac(pkgName);
+    } else {
+        const filePath = app.desktop_file_path;
+        if (!filePath) return;
+
+        const proc = Gio.Subprocess.new(
+            ['pacman', '-Qqo', filePath],
+            Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+        );
+        proc.communicate_utf8_async(null, null, (obj, res) => {
+            try {
+                let [success, stdout, stderr] = obj.communicate_utf8_finish(res);
+                if (success && stdout) {
+                    const foundPkg = stdout.trim();
+                    _launchPamac(foundPkg);
+                }
+            } catch (e) {
+                global.logError("pacman check failed: " + e.message);
+            }
+        });
+    }
+}
+
+
+module.exports = {
+    _,
+    wordWrap,
+    graphemeBaseChars,
+    getThumbnail_gicon,
+    showTooltip,
+    hideTooltipIfVisible,
+    searchStr,
+    getChromiumProfileDirs,
+    scrollToButton,
+    launchPamacForApp
+};
