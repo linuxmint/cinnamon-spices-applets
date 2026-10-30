@@ -1,0 +1,25 @@
+{
+    "head": {
+        "type": "header",
+        "description": "Hidden icons"
+    },
+    "new-icons-on-panel": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Show new icons on the panel",
+        "tooltip": "When off, icons you haven't placed yet go behind the arrow (like Windows). Right-click the arrow to choose which icons are shown on the panel."
+    },
+    "columns": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "units": "icons",
+        "description": "Icons per row in the popup"
+    },
+    "placement": {
+        "type": "generic",
+        "default": {}
+    }
+}
