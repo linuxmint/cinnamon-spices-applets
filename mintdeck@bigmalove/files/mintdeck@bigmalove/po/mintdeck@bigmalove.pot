@@ -1,0 +1,409 @@
+# MintDeck 界面文案。由 tools/i18n-extract.py 生成，不要手改；改源码后重新生成。
+msgid ""
+msgstr ""
+"Project-Id-Version: mintdeck@bigmalove\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-10-29 13:20+0800\n"
+"Last-Translator: bigmalove <125801848+bigmalove@users.noreply.github.com>\n"
+"Language-Team: MintDeck translators\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Source-Language: zh_CN\n"
+
+#: mintdeck@bigmalove/applet.js:412
+msgid "设置…"
+msgstr ""
+
+#: mintdeck@bigmalove/applet.js:413
+msgid "重新读取数据"
+msgstr ""
+
+#: mintdeck@bigmalove/applet.js:415
+msgid "关于 MintDeck"
+msgstr ""
+
+#: mintdeck@bigmalove/applet.js:416
+msgid "基于 BrimDeck（Apache-2.0）的 Cinnamon 复刻。"
+msgstr ""
+
+#: mintdeck@bigmalove/applet.js:456
+msgid "读取失败：%s"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:285
+msgid "%s 天前"
+msgid_plural "%s 天前"
+msgstr[0] ""
+msgstr[1] ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:286
+msgid "%s 个月前"
+msgid_plural "%s 个月前"
+msgstr[0] ""
+msgstr[1] ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:247
+msgid "上下文"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:250
+msgid "最近：%s"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:250
+#: mintdeck@bigmalove/lib/deck/data.js:313
+msgid "无"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:253
+#: mintdeck@bigmalove/lib/deck/data.js:254
+msgid "%s 积分"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:257
+msgid "%s 个会话 · 累计 %s 积分"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:283
+msgid "今天"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:284
+msgid "昨天"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:305
+msgid "5 小时"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:306
+msgid "每周"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:308
+msgid "未登录 · 仅本机用量"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:313
+msgid "最近记录 %s"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:313
+#: mintdeck@bigmalove/lib/deck/data.js:327
+msgid "本机会话"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:327
+msgid "%s/%s 个会话"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:358
+#: mintdeck@bigmalove/lib/deck/data.js:369
+#: mintdeck@bigmalove/lib/deck/data.js:380
+msgid "读取失败"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/data.js:362
+msgid "读取中…"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/panel.js:378
+msgid "没有可显示的来源"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/panel.js:447
+msgid "used"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/panel.js:468
+msgid "今日"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/panel.js:469
+msgid "七日"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/panel.js:497
+msgid "未检测到播放器"
+msgstr ""
+
+#: mintdeck@bigmalove/lib/deck/panel.js:586
+msgid "采样未接入"
+msgstr ""
+
+#: settings-schema.json
+msgid "外观"
+msgstr ""
+
+#: settings-schema.json
+msgid "收起形态"
+msgstr ""
+
+#: settings-schema.json
+msgid "配额与统计"
+msgstr ""
+
+#: settings-schema.json
+msgid "行为"
+msgstr ""
+
+#: settings-schema.json
+msgid "形态"
+msgstr ""
+
+#: settings-schema.json
+msgid "主题"
+msgstr ""
+
+#: settings-schema.json
+msgid "界面语言"
+msgstr ""
+
+#: settings-schema.json
+msgid "收起时显示"
+msgstr ""
+
+#: settings-schema.json
+msgid "尺寸"
+msgstr ""
+
+#: settings-schema.json
+msgid "数据源"
+msgstr ""
+
+#: settings-schema.json
+msgid "提醒"
+msgstr ""
+
+#: settings-schema.json
+msgid "交互"
+msgstr ""
+
+#: settings-schema.json
+msgid "显示"
+msgstr ""
+
+#: settings-schema.json
+msgid "刘海"
+msgstr ""
+
+#: settings-schema.json
+msgid "胶囊"
+msgstr ""
+
+#: settings-schema.json
+msgid "指示条"
+msgstr ""
+
+#: settings-schema.json
+msgid "启用动画"
+msgstr ""
+
+#: settings-schema.json
+msgid "毫秒"
+msgstr ""
+
+#: settings-schema.json
+msgid "动画时长"
+msgstr ""
+
+#: settings-schema.json
+msgid "面板主题"
+msgstr ""
+
+#: settings-schema.json
+msgid "深色"
+msgstr ""
+
+#: settings-schema.json
+msgid "浅色"
+msgstr ""
+
+#: settings-schema.json
+msgid "One Dark Pro"
+msgstr ""
+
+#: settings-schema.json
+msgid "GitHub Dark"
+msgstr ""
+
+#: settings-schema.json
+msgid "GitHub Light"
+msgstr ""
+
+#: settings-schema.json
+msgid "Dracula"
+msgstr ""
+
+#: settings-schema.json
+msgid "Night Owl"
+msgstr ""
+
+#: settings-schema.json
+msgid "赛博朋克：边缘行者"
+msgstr ""
+
+#: settings-schema.json
+msgid "界面语言（悬浮岛与面板；设置窗口跟随系统语言）"
+msgstr ""
+
+#: settings-schema.json
+msgid "自动（跟随系统）"
+msgstr ""
+
+#: settings-schema.json
+msgid "简体中文"
+msgstr ""
+
+#: settings-schema.json
+msgid "English"
+msgstr ""
+
+#: settings-schema.json
+msgid "繁體中文"
+msgstr ""
+
+#: settings-schema.json
+msgid "日本語"
+msgstr ""
+
+#: settings-schema.json
+msgid "时间样式"
+msgstr ""
+
+#: settings-schema.json
+msgid "简约"
+msgstr ""
+
+#: settings-schema.json
+msgid "数码管"
+msgstr ""
+
+#: settings-schema.json
+msgid "衬线"
+msgstr ""
+
+#: settings-schema.json
+msgid "宽体"
+msgstr ""
+
+#: settings-schema.json
+msgid "窄体"
+msgstr ""
+
+#: settings-schema.json
+msgid "24 小时制"
+msgstr ""
+
+#: settings-schema.json
+msgid "显示配额环"
+msgstr ""
+
+#: settings-schema.json
+msgid "显示时间"
+msgstr ""
+
+#: settings-schema.json
+msgid "显示系统读数"
+msgstr ""
+
+#: settings-schema.json
+msgid "收起尺寸（自动 = 随显示的内容多少缩放）"
+msgstr ""
+
+#: settings-schema.json
+msgid "自动"
+msgstr ""
+
+#: settings-schema.json
+msgid "小"
+msgstr ""
+
+#: settings-schema.json
+msgid "标准"
+msgstr ""
+
+#: settings-schema.json
+msgid "大"
+msgstr ""
+
+#: settings-schema.json
+msgid "显示 Claude Code"
+msgstr ""
+
+#: settings-schema.json
+msgid "显示 DeepSeek Harness"
+msgstr ""
+
+#: settings-schema.json
+msgid "显示 WorkBuddy"
+msgstr ""
+
+#: settings-schema.json
+msgid "统计本机会话的 Token 与费用"
+msgstr ""
+
+#: settings-schema.json
+msgid "配额到预警线时提醒"
+msgstr ""
+
+#: settings-schema.json
+msgid "%"
+msgstr ""
+
+#: settings-schema.json
+msgid "预警线"
+msgstr ""
+
+#: settings-schema.json
+msgid "告警线"
+msgstr ""
+
+#: settings-schema.json
+msgid "展开延迟"
+msgstr ""
+
+#: settings-schema.json
+msgid "收起延迟"
+msgstr ""
+
+#: settings-schema.json
+msgid "默认页"
+msgstr ""
+
+#: settings-schema.json
+msgid "AI 用量"
+msgstr ""
+
+#: settings-schema.json
+msgid "音乐"
+msgstr ""
+
+#: settings-schema.json
+msgid "系统监控"
+msgstr ""
+
+#: settings-schema.json
+msgid "展开或收起面板"
+msgstr ""
+
+#: settings-schema.json
+msgid "显示在"
+msgstr ""
+
+#: settings-schema.json
+msgid "主显示器"
+msgstr ""
+
+#: settings-schema.json
+msgid "光标所在显示器"
+msgstr ""
+
+#: settings-schema.json
+msgid "在面板上显示图标（隐藏后右键悬浮岛可进入设置）"
+msgstr ""
+
+#: settings-schema.json
+msgid "全屏时隐藏（全屏下鼠标唤出将不可用）"
+msgstr ""

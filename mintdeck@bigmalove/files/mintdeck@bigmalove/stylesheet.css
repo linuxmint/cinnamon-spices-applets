@@ -1,0 +1,80 @@
+/* MintDeck — 基础样式。
+ *
+ * 颜色不写死在这里：面板主题（40+ 颜色键）由 JS 通过 actor 的 inline style 注入，
+ * 因为 Cinnamon 的 St CSS 没有 CSS 变量，主题切换时重建样式比换 stylesheet 便宜。
+ * 这里只放与主题无关的排版、圆角、间距。
+ */
+
+/* 收起态：字体与文字栅格。字体在安装时放进 ~/.local/share/fonts，见 tools/install.sh */
+.mintdeck-island {
+    font-family: "Noto Sans", "Noto Sans CJK SC", sans-serif;
+    color: #F5F5F7;
+}
+
+/* 收起态内容行：与上游一致，内容盒高 24px（CollapsedGeometry.cs: 内容高 24、上下各 1） */
+.mintdeck-island-content {
+    spacing: 8px;
+}
+
+.mintdeck-island-label {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* 时钟：九种样式的差异化字体族，由 clockStyle 决定挂哪个类 */
+.mintdeck-clock-minimal   { font-family: "Noto Sans", "Noto Sans CJK SC", sans-serif; font-size: 15px; font-weight: 600; }
+.mintdeck-clock-segment   { font-family: "Orbitron", "Noto Sans", sans-serif;  font-size: 15px; font-weight: 600; letter-spacing: 1px; }
+.mintdeck-clock-serif     { font-family: "Instrument Serif", serif;            font-size: 17px; font-style: italic; }
+.mintdeck-clock-wide      { font-family: "Unbounded", "Noto Sans", sans-serif; font-size: 13px; font-weight: 600; }
+.mintdeck-clock-condensed { font-family: "Bebas Neue", "Noto Sans", sans-serif; font-size: 18px; letter-spacing: 1px; }
+
+/* 展开面板 */
+.mintdeck-panel {
+    padding: 6px 12px 10px 12px;
+    spacing: 4px;
+}
+
+.mintdeck-header {
+    spacing: 4px;
+}
+
+.mintdeck-tab {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 7px;
+    color: #9EEBEBF5;
+}
+
+.mintdeck-tab-selected {
+    color: #F5F5F7;
+}
+
+.mintdeck-page {
+    spacing: 2px;
+}
+
+.mintdeck-row {
+    spacing: 2px;
+    padding: 2px 2px;
+}
+
+.mintdeck-title {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.mintdeck-caption {
+    font-size: 11px;
+    color: #61EBEBF5;
+}
+
+.mintdeck-value {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.mintdeck-empty {
+    font-size: 12px;
+    color: #61EBEBF5;
+    padding: 10px 4px;
+}
