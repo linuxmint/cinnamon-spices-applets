@@ -1,0 +1,123 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page-general", "page-appearance", "page-alerts"],
+        "page-general": {
+            "type": "page",
+            "title": "Compatibilidade & Painel",
+            "sections": ["section-panel", "section-devices"]
+        },
+        "page-appearance": {
+            "type": "page",
+            "title": "Visual (Estilo iOS / macOS)",
+            "sections": ["section-style"]
+        },
+        "page-alerts": {
+            "type": "page",
+            "title": "Alertas de Bateria",
+            "sections": ["section-notifications"]
+        },
+        "section-panel": {
+            "type": "section",
+            "title": "Comportamento na Barra (Panel)",
+            "keys": ["panel-display-mode", "hide-when-empty", "update-interval"]
+        },
+        "section-devices": {
+            "type": "section",
+            "title": "Fontes de Dispositivos",
+            "keys": ["show-disconnected-paired", "show-wireless-hid", "show-laptop-battery"]
+        },
+        "section-style": {
+            "type": "section",
+            "title": "Layout do Menu Popover",
+            "keys": ["popover-layout", "theme-mode", "accent-style"]
+        },
+        "section-notifications": {
+            "type": "section",
+            "title": "Notificações de Bateria Fraca",
+            "keys": ["enable-low-battery-notify", "low-battery-threshold"]
+        }
+    },
+    "panel-display-mode": {
+        "type": "combobox",
+        "default": "rings_bt",
+        "description": "Estilo do indicador na barra (Panel)",
+        "options": {
+            "Mini-Anéis iOS com símbolo Bluetooth no centro (Padrão)": "rings_bt",
+            "Mini-Anéis iOS + Porcentagem ao lado": "rings_pct",
+            "Mini-Anéis iOS com ícone do dispositivo no centro": "rings_device"
+        }
+    },
+    "hide-when-empty": {
+        "type": "switch",
+        "default": false,
+        "description": "Ocultar ícone do painel quando nenhum dispositivo estiver conectado"
+    },
+    "update-interval": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 2,
+        "max": 60,
+        "step": 1,
+        "units": "segundos",
+        "description": "Intervalo de sincronização de fallback"
+    },
+    "show-disconnected-paired": {
+        "type": "switch",
+        "default": true,
+        "description": "Mostrar dispositivos Bluetooth pareados desconectados (com botão de conectar em 1 clique)"
+    },
+    "show-wireless-hid": {
+        "type": "switch",
+        "default": true,
+        "description": "Incluir periféricos sem fio via Dongle 2.4GHz / UPower HID (Logitech, Razer, Keychron, etc.)"
+    },
+    "show-laptop-battery": {
+        "type": "switch",
+        "default": false,
+        "description": "Incluir também a bateria interna do Notebook no card iOS"
+    },
+    "popover-layout": {
+        "type": "combobox",
+        "default": "both",
+        "description": "Estilo visual do Popover",
+        "options": {
+            "Híbrido iOS: Grade de Anéis no topo + Lista detalhada com botão Conectar/Desconectar": "both",
+            "Compacto: Somente Grade de Anéis Circulares (Estilo Widget iOS)": "rings",
+            "Lista: Barras horizontais detalhadas (Estilo macOS Control Center)": "list"
+        }
+    },
+    "theme-mode": {
+        "type": "combobox",
+        "default": "dark",
+        "description": "Tema do Card iOS",
+        "options": {
+            "Escuro Translúcido (macOS Dark Glass)": "dark",
+            "Claro Translúcido (iOS Light Frosted)": "light",
+            "Automático (Seguir Tema do Sistema)": "auto"
+        }
+    },
+    "accent-style": {
+        "type": "combobox",
+        "default": "ios",
+        "description": "Cores dos Anéis de Bateria",
+        "options": {
+            "Semafórico Nativo iOS (Verde / Amarelo ≤ 25% / Vermelho ≤ 15%)": "ios",
+            "Azul Sistema iOS (#0A84FF)": "blue"
+        }
+    },
+    "enable-low-battery-notify": {
+        "type": "switch",
+        "default": true,
+        "description": "Enviar notificação quando a bateria de um dispositivo Bluetooth estiver baixa"
+    },
+    "low-battery-threshold": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 5,
+        "max": 50,
+        "step": 5,
+        "units": "%",
+        "description": "Nível de alerta de bateria fraca"
+    }
+}
