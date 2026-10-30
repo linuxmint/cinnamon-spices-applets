@@ -331,15 +331,22 @@ class Sidebar {
                 if (!this.separator2Position) {
                     this.separator2Position = this.items.length;
                 }
-                let gicon = getThumbnail_gicon(fav.uri, fav.mimeType) || fav.gicon;
-                this.items.push(new SidebarButton(
+                const icon = new St.Icon({ gicon: fav.gicon, icon_size: this.applet.settings.sidebarIconSize });
+                const sidebarButton = new SidebarButton(
                     this.applet,
-                    new St.Icon({ gicon: gicon, icon_size: this.applet.settings.sidebarIconSize}),
+                    icon,
                     fav,
                     fav.name,
                     fav.description,
                     null
-                ));
+                );
+                this.items.push(sidebarButton);
+
+                getThumbnail_gicon(fav.uri, fav.mimeType, (thumbnailGicon) => {
+                    if (thumbnailGicon && icon) {
+                        icon.gicon = thumbnailGicon;
+                    }
+                });
             });
         }
         //----change order of all items depending on buttons placement

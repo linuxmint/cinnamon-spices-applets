@@ -4,7 +4,7 @@ const Gettext = imports.gettext;
 const Mainloop = imports.mainloop;
 const St = imports.gi.St;
 const Main = imports.ui.main;
-const ByteArray = imports.byteArray;
+const Util = imports.misc.util;
 const Cinnamon = imports.gi.Cinnamon;
 const {addTween} = imports.ui.tweener;
 Gettext.bindtextdomain('Cinnamenu@json', GLib.get_user_data_dir() + '/locale');
@@ -31,34 +31,40 @@ function escapeRegExp(str) {
 
 //===========================================================
 
-const getThumbnail_gicon = (uri, mimeType) => {
+const getThumbnail_gicon = (uri, mimeType, callback) => {
     //Note: this function doesn't check if thumbnail is up to date.
     const file = Gio.File.new_for_uri(uri);
-    if (!file.query_exists(null)) {//check because it's possible for isFavoriteFile's to not exist.
-        return null;
-    }
-    //
+
     const isImage = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/tiff', 'image/bmp',
                                                                 'image/gif'].includes(mimeType);
-    const fileSize = file.query_info('standard::size', Gio.FileQueryInfoFlags.NONE, null).get_size();
-
+    file.query_info_async('standard::size,thumbnail::path', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (obj, res) => {
+        try {
+            const info = obj.query_info_finish(res);
+            const fileSize = info.get_size();
     //----Get thumbnail from cache
     if (!(isImage && fileSize < 50000)) {//Don't bother with thumbnail cache if file is a
                             //small image, quicker to just create icon from file itself and avoids
                             //possible out of date cached thumbnail.
-        const thumbnailPath = file.query_info('thumbnail::path', Gio.FileQueryInfoFlags.NONE, null).get_attribute_byte_string('thumbnail::path');
+                const thumbnailPath = info.get_attribute_byte_string('thumbnail::path');
         if (thumbnailPath && GLib.file_test(thumbnailPath, GLib.FileTest.EXISTS)) {
-            return new Gio.FileIcon({ file: Gio.file_new_for_path(thumbnailPath) });
+                    callback(new Gio.FileIcon({ file: Gio.file_new_for_path(thumbnailPath) }));
+                    return;
         }
     }
 
     //----No cached thumbnail available so make icon from image.
     if (isImage && fileSize < 30000000) {//don't read image files > 30MB
-        return new Gio.FileIcon({ file: file });
+                callback(new Gio.FileIcon({ file: file }));
+                return;
     }
 
     //----No thumbnail
-    return null;
+            callback(null);
+        } catch (e) {
+            // Catch errors because it's possible for isFavoriteFile's to no longer exist.
+            callback(null);
+        }
+    });
 };
 
 //============================================================

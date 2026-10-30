@@ -37,10 +37,14 @@ class AppButton {
         } else if (this.app.gicon) { // isRecentFile, isFavoriteFile,
                                      // isFolderviewFile/Directory, some of isSearchResult
             let gicon = this.app.gicon;
-            if (!this.app.isSearchResult) {
-                gicon = getThumbnail_gicon(this.app.uri, this.app.mimeType) || gicon;
-            }
             this.icon = new St.Icon({gicon: gicon, icon_size: this.applet.getAppIconSize()});
+            if (!this.app.isSearchResult) {
+                getThumbnail_gicon(this.app.uri, this.app.mimeType, (thumbnailGicon) => {
+                    if (thumbnailGicon && this.icon) {
+                        this.icon.gicon = thumbnailGicon;
+            }
+                });
+            }
         } else if (this.app.emoji) {//emoji search result
             this.icon = new St.Label({ style: 'color: white; font-size: ' +
                                             (Math.round(this.applet.getAppIconSize() * 0.85)) + 'px;'});

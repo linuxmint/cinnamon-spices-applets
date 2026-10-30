@@ -258,7 +258,7 @@ class ContextMenu {
         } else if (this.appThis.isBumblebeeInstalled) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Run with NVIDIA GPU'), 'cpu',
                 () => {
-                    Util.spawnCommandLine('optirun gtk-launch ' + app.id);
+                    Util.spawn(['optirun', 'gtk-launch', app.id]);
                     this.appThis.menu.close();
                 }
             ));
@@ -321,7 +321,7 @@ class ContextMenu {
         if (this.appThis._pamacManagerAvailable) {
             addMenuItem( new ContextMenuItem(this.appThis, _('App Info'), 'dialog-information',
                 () => {
-                    Util.spawnCommandLine("/usr/bin/pamac-manager --details-id=" + app.id);
+                    Util.spawn(['/usr/bin/pamac-manager', '--details-id=' + app.id]);
                     this.appThis.menu.close();
                 }
             ));
