@@ -1,9 +1,8 @@
 {
-    "uuid": "easy-effects-selector@random.kiapps",
+    "uuid": "easy-effects-selector@randomkiapps",
     "name": "Easy Effects Preset Selector",
     "description": "Select Easy Effects 7.2.3 output presets from the panel",
-    "version": "1.5.6",
-    "author": "random.kiapps",
-    "contributors": "random.kiapps",
+    "version": "1.5.7",
+    "author": "randomkiapps",
     "max-instances": 1
 }

@@ -1,8 +1,8 @@
 # Easy Effects Preset Selector
 
 Select locally saved **Easy Effects 7.2.3 output presets** from the Cinnamon panel.
-Publisher: **random.kiapps**. Interface languages: English and German.
-Version: **1.5.6**.
+Publisher: **randomkiapps**. Interface languages: English and German.
+Version: **1.5.7**.
 
 ## Requirements
 
@@ -16,12 +16,12 @@ with Easy Effects 8 or later has not been established.
 
 ## Manual installation and translations
 
-Copy the complete `files/easy-effects-selector@random.kiapps` directory to
+Copy the complete `files/easy-effects-selector@randomkiapps` directory to
 `~/.local/share/cinnamon/applets/`. For a manual installation, compile and install
 the translation catalogs as well:
 
 ```bash
-cinnamon-xlet-makepot --install "$HOME/.local/share/cinnamon/applets/easy-effects-selector@random.kiapps"
+cinnamon-xlet-makepot --install "$HOME/.local/share/cinnamon/applets/easy-effects-selector@randomkiapps"
 ```
 
 Close the applet settings window and restart Cinnamon after installing the
@@ -40,13 +40,18 @@ alphabetically; presets assigned to quick selection follow at the bottom in
 Top, Middle, Bottom order. A separator divides the groups when both contain
 available presets.
 
+### About dialog
+
+The existing **About** action opens Cinnamon's native dialog with a 48-pixel symbolic logo.
+The complete logo follows the GTK theme's text color, including after theme changes.
+The applet logo combines two faders with three preset-choice positions.
+
 ### Quick selection
 
 Right-click the icon and choose **Configure**. Under **Quick selection**, assign
 up to three presets with **Preset at top**, **Preset at middle** and **Preset at
 bottom**. Any position can remain empty. Assigning presets does not load them or
-change audio settings, including at applet startup. A previous default-preset
-setting is retained as the bottom assignment when upgrading.
+change audio settings, including at applet startup.
 
 The **single blue dot confirms a matching preset**. It appears at the right edge
 of the icon, at the assigned top, middle or bottom position. Agreement requires
@@ -233,10 +238,8 @@ or removal; it does not continually override later bypass changes.
 
 The configuration lives in
 `$XDG_CONFIG_HOME/pipewire/pipewire.conf.d/90-ee-route.conf`. Recovery information
-is kept in `$XDG_CONFIG_HOME/easy-effects-selector@random.kiapps/`.
-The route persists across Cinnamon reloads and login sessions. When upgrading
-from the 1.5.1 test version, an active route is read without restarting audio. Switch the option
-off and on once to apply its new readable name. Disable this option before
+is kept in `$XDG_CONFIG_HOME/easy-effects-selector@randomkiapps/`.
+The route persists across Cinnamon reloads and login sessions. Disable this option before
 removing the applet if the route should also be removed.
 Select physical output devices through the desktop's sound controls while it
 is active; choosing another output directly in Easy Effects leaves the fixed
@@ -254,18 +257,6 @@ output preset afterward. When an input preset has the same name, a temporary
 unique output copy prevents the Easy Effects 7.2.3 command from loading the input
 preset instead. The temporary copy is removed afterward. Original presets are
 not rewritten.
-
-## Upgrading the earlier local applet
-
-The earlier test version used `easy-effects-selector@local`. The published
-identifier is `easy-effects-selector@random.kiapps`, so Cinnamon treats it as a
-separate applet.
-
-Before switching, use Cinnamon's **Export to a file** in the old applet's settings
-menu. Remove the old applet from the panel, add the new one, and use **Import from
-a file** in its settings menu. After importing older settings, assign the desired
-presets under **Quick selection**. Easy Effects' presets and application settings
-are independent of the applet identifier.
 
 ## License and support
 

@@ -1,14 +1,19 @@
 # License and attribution
 
 Easy Effects Preset Selector is distributed under **GPL-3.0-or-later**.
-Copyright (C) 2026 random.kiapps. The full GPL version 3 text is in `LICENSE`.
+Copyright (C) 2026 randomkiapps. The full GPL version 3 text is in `LICENSE`.
 
-`icon.svg` is the unmodified Easy Effects 7.2.3 application icon from
-`data/com.github.wwmm.easyeffects.svg`. `icon.png` is its 64-pixel rendering for
-Cinnamon Spices. The icon is included under the Easy Effects project's GPL
-version 3 or later terms. Original source:
+`easy-effects-selector-logo-template.svg` is the neutral monochrome form for the
+applet logo. Its two faders are based on the Easy Effects 7.2.3 symbolic icon;
+the three preset-choice positions and revised layout form the applet's own logo.
+`easy-effects-selector-logo-about-symbolic.svg`, `icon.svg` and its 256-pixel
+`icon.png` rendering are derived from that form under GPL-3.0-or-later.
+Original fader reference:
 
-https://github.com/wwmm/easyeffects/blob/v7.2.3/data/com.github.wwmm.easyeffects.svg
+https://github.com/wwmm/easyeffects/blob/v7.2.3/data/com.github.wwmm.easyeffects-symbolic.svg
+
+`about.py` uses the installed Cinnamon About dialog for metadata and translations.
+Its adapter displays the named symbolic logo in the actual GTK text color at 48 px.
 
 `ee-bypass-symbolic.svg` is the unmodified Easy Effects 7.2.3 global-bypass
 symbol from its application resources, under the same GPL version 3 or later

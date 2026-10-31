@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright (C) 2026 random.kiapps
+// Copyright (C) 2026 randomkiapps
 // Cinnamon applet for the native Easy Effects 7.2.3 package.
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
@@ -15,7 +15,7 @@ const ByteArray = imports.byteArray;
 const Mainloop = imports.mainloop;
 const Gettext = imports.gettext;
 
-const UUID = "easy-effects-selector@random.kiapps";
+const UUID = "easy-effects-selector@randomkiapps";
 // Cinnamon's xlet installer and settings dialog use this locale directory.
 // Keep the domain aligned with cinnamon-xlet-makepot, including custom XDG paths.
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
@@ -587,6 +587,11 @@ class EasyEffectsPresetSelector extends Applet.IconApplet {
                 this._bypassBusGuid = "";
                 this._queueRoutingCheck();
             });
+    }
+
+    openAbout() {
+        Gio.Subprocess.new(["python3", GLib.build_filenamev([this._appletPath, "about.py"])],
+            Gio.SubprocessFlags.NONE);
     }
 
     _saveBypassState(enabled) {

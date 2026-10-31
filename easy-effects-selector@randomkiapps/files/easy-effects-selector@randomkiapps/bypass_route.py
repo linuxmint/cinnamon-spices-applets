@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (C) 2026 random.kiapps
+# Copyright (C) 2026 randomkiapps
 """Opt-in setup of the tested EE 7.2.3 / PipeWire / WirePlumber stereo route.
 
 The read-only status command is safe at applet startup. Only enable/disable
@@ -19,7 +19,7 @@ import sys
 import tempfile
 import time
 
-UUID = "easy-effects-selector@random.kiapps"
+UUID = "easy-effects-selector@randomkiapps"
 SCHEMA = "com.github.wwmm.easyeffects"
 OUTPUT = SCHEMA + ".streamoutputs"
 INPUT = SCHEMA + ".streaminputs"

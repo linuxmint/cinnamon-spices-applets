@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (C) 2026 random.kiapps
+# Copyright (C) 2026 randomkiapps
 """Native applet settings controls and explanatory notes."""
 
 import gettext
@@ -10,7 +10,7 @@ from gi.repository import Gio, GLib, Gtk
 from JsonSettingsWidgets import SettingsWidget
 
 
-DOMAIN = "easy-effects-selector@random.kiapps"
+DOMAIN = "easy-effects-selector@randomkiapps"
 gettext.bindtextdomain(DOMAIN, os.path.expanduser("~/.local/share/locale"))
 
 
