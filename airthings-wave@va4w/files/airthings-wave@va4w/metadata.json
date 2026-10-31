@@ -1,0 +1,7 @@
+{
+    "uuid": "airthings-wave@va4w",
+    "name": "Airthings Wave",
+    "description": "Radon, CO2, VOC, temperature and humidity from an Airthings Wave over Bluetooth, with history graphs",
+    "version": "1.0",
+    "max-instances": -1
+}
