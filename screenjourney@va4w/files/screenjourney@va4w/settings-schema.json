@@ -1,0 +1,107 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page-general"],
+        "page-general": {
+            "type": "page",
+            "title": "General",
+            "sections": ["section-general", "section-screenshots", "section-recordings"]
+        },
+        "section-general": {
+            "type": "section",
+            "title": "General",
+            "keys": ["keybinding", "delay", "remember_region", "notify"]
+        },
+        "section-screenshots": {
+            "type": "section",
+            "title": "Screenshots",
+            "keys": ["image_dir", "clipboard"]
+        },
+        "section-recordings": {
+            "type": "section",
+            "title": "Recordings",
+            "keys": ["video_dir", "video_format", "fps", "audio", "pointer", "border"]
+        }
+    },
+    "keybinding": {
+        "type": "keybinding",
+        "default": "<Super><Shift>s",
+        "description": "Open the overlay / stop recording"
+    },
+    "delay": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "units": "seconds",
+        "description": "Default delay before capturing"
+    },
+    "remember_region": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Preselect the last used area"
+    },
+    "notify": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show a notification after capturing"
+    },
+    "image_dir": {
+        "type": "filechooser",
+        "select-dir": true,
+        "default": "",
+        "description": "Screenshot folder",
+        "tooltip": "Empty means Pictures/Screenshots"
+    },
+    "clipboard": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Copy screenshots to the clipboard"
+    },
+    "video_dir": {
+        "type": "filechooser",
+        "select-dir": true,
+        "default": "",
+        "description": "Recording folder",
+        "tooltip": "Empty means Videos/Screencasts"
+    },
+    "video_format": {
+        "type": "combobox",
+        "default": "mp4",
+        "options": {
+            "MP4 (H.264)": "mp4",
+            "WebM (VP9)": "webm"
+        },
+        "description": "Video format"
+    },
+    "fps": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 5,
+        "max": 60,
+        "step": 5,
+        "units": "fps",
+        "description": "Frame rate"
+    },
+    "audio": {
+        "type": "combobox",
+        "default": "none",
+        "options": {
+            "No audio": "none",
+            "Microphone": "mic",
+            "Desktop audio": "desktop"
+        },
+        "description": "Default audio source"
+    },
+    "pointer": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show the mouse pointer in recordings"
+    },
+    "border": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Frame the recorded area while recording"
+    }
+}
