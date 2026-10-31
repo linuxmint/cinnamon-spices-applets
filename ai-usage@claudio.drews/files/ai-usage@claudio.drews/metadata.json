@@ -1,0 +1,7 @@
+{
+  "uuid": "ai-usage@claudio.drews",
+  "name": "AI usage",
+  "description": "Recent usage of the configured AI services, right in the Cinnamon panel",
+  "max-instances": 1,
+  "version": "0.2.1"
+}
