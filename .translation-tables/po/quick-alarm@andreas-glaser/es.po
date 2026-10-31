@@ -1,0 +1,64 @@
+# Quick Alarm - Spanish translation
+# Copyright (C) 2025 Andreas Glaser
+# This file is distributed under the MIT license.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: quick-alarm@andreas-glaser\n"
+"Report-Msgid-Bugs-To: https://github.com/andreas-glaser/quick-alarm-cinnamon/issues\n"
+"POT-Creation-Date: 2026-01-26\n"
+"PO-Revision-Date: 2026-01-26\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Quick Alarm"
+msgstr "Quick Alarm"
+
+msgid "Alarm"
+msgstr "Alarma"
+
+msgid "No alarms queued"
+msgstr "No hay alarmas en cola"
+
+msgid "Something went wrong. Check Looking Glass logs."
+msgstr "Algo salió mal. Revisa los registros de Looking Glass."
+
+msgid "Enter a time."
+msgstr "Introduce una hora."
+
+msgid "Could not parse that."
+msgstr "No se pudo interpretar."
+
+msgid "That time already passed today."
+msgstr "Esa hora ya pasó hoy."
+
+msgid "Try one of these:"
+msgstr "Prueba uno de estos:"
+
+msgid "Dismiss"
+msgstr "Cerrar"
+
+msgid "just now"
+msgstr "ahora mismo"
+
+msgid "%d seconds ago"
+msgstr "hace %d segundos"
+
+msgid "1 minute ago"
+msgstr "hace 1 minuto"
+
+msgid "%d minutes ago"
+msgstr "hace %d minutos"
+
+msgid "1 hour ago"
+msgstr "hace 1 hora"
+
+msgid "%d hours ago"
+msgstr "hace %d horas"
+
+msgid "Missed alarm"
+msgstr "Alarma perdida"

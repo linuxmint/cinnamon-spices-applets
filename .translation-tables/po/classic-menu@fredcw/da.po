@@ -1,0 +1,324 @@
+# CLASSIC MENU
+# This file is put in the public domain.
+# fredcw, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: classic-menu@fredcw 1.0.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-25 03:37+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 6.6/applet.js:397 6.6/applet.js:486
+msgid "Remove from favorites"
+msgstr "Fjern fra favoritter"
+
+#. 6.6/applet.js:404 6.6/applet.js:489
+msgid "Add to favorites"
+msgstr "Tilføj til favoritter"
+
+#. 6.6/applet.js:473
+msgid "Run with dedicated GPU"
+msgstr "Kør med dedikeret GPU"
+
+#. 6.6/applet.js:477
+msgid "Add to panel"
+msgstr "Tilføj til panel"
+
+#. 6.6/applet.js:481
+msgid "Add to desktop"
+msgstr "Tilføj til skrivebord"
+
+#. 6.6/applet.js:496
+msgid "Properties"
+msgstr "Egenskaber"
+
+#. 6.6/applet.js:501
+msgid "Uninstall"
+msgstr "Afinstallér"
+
+#. 6.6/applet.js:743
+msgid "This file is no longer available"
+msgstr "Filen er ikke længere tilgængelig"
+
+#. 6.6/applet.js:753
+msgid "Open with"
+msgstr "Åbn med"
+
+#. 6.6/applet.js:806
+msgid "Other application..."
+msgstr "Andet program …"
+
+#. 6.6/applet.js:822
+msgid "Open containing folder"
+msgstr "Åbn indeholdende mappe"
+
+#. 6.6->settings-schema.json->menu->title
+#. 6.6/applet.js:1178
+msgid "Menu"
+msgstr "Menu"
+
+#. 6.6/applet.js:1183
+msgid "Edit menu"
+msgstr "Redigér menu"
+
+#. 6.6/applet.js:2444
+msgid "Places"
+msgstr "Steder"
+
+#. 6.6/applet.js:2482
+msgid "Recent Files"
+msgstr "Seneste filer"
+
+#. 6.6/applet.js:2497
+msgid "Clear list"
+msgstr "Ryd liste"
+
+#. 6.6/applet.js:2498
+msgid "Clear all recent documents"
+msgstr "Ryd alle seneste dokumenter"
+
+#. 6.6/applet.js:2517
+msgid "No recent documents"
+msgstr "Ingen seneste dokumenter"
+
+#. 6.6/applet.js:2552
+msgid "Favorites"
+msgstr "Favoritter"
+
+#. 6.6/applet.js:2581
+msgid "All Applications"
+msgstr "Alle programmer"
+
+#. 6.6/applet.js:2649
+msgid "Lock Screen"
+msgstr "Lås skærm"
+
+#. 6.6/applet.js:2650
+msgid "Lock the screen"
+msgstr "Lås skærmen"
+
+#. 6.6/applet.js:2674
+msgid "Log Out"
+msgstr "Log ud"
+
+#. 6.6/applet.js:2675
+msgid "Leave the session"
+msgstr "Forlad sessionen"
+
+#. 6.6/applet.js:2686
+msgid "Shut Down"
+msgstr "Sluk"
+
+#. 6.6/applet.js:2687
+msgid "Shut down the computer"
+msgstr "Sluk computeren"
+
+#. metadata.json->name
+msgid "Classic Menu"
+msgstr "Klassisk menu"
+
+#. metadata.json->description
+msgid "The classic Cinnamon menu for cinnamon 6.6 and later"
+msgstr "Den klassiske Cinnamon-menu til Cinnamon 6.6 og senere"
+
+#. 6.6->settings-schema.json->panel->title
+msgid "Panel"
+msgstr "Panel"
+
+#. 6.6->settings-schema.json->panel-appear->title
+msgid "Appearance"
+msgstr "Udseende"
+
+#. 6.6->settings-schema.json->panel-behave->title
+#. 6.6->settings-schema.json->menu-behave->title
+msgid "Behavior"
+msgstr "Opførsel"
+
+#. 6.6->settings-schema.json->menu-layout->title
+msgid "Layout and content"
+msgstr "Layout og indhold"
+
+#. 6.6->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Tastaturgenvej til åbning og lukning af menuen"
+
+#. 6.6->settings-schema.json->menu-custom->description
+msgid "Use a custom icon and label"
+msgstr "Anvend et brugerdefineret ikon og mærkat"
+
+#. 6.6->settings-schema.json->menu-custom->tooltip
+msgid "Check this to specify a custom icon and label"
+msgstr "Aktivér denne for at angive et brugerdefineret ikon og mærkat"
+
+#. 6.6->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Ikon"
+
+#. 6.6->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Vælg et ikon, der skal vises i panelet."
+
+#. 6.6->settings-schema.json->menu-icon-size->units
+#. 6.6->settings-schema.json->category-icon-size->units
+#. 6.6->settings-schema.json->application-icon-size->units
+#. 6.6->settings-schema.json->fav-icon-size->units
+msgid "px"
+msgstr "px"
+
+#. 6.6->settings-schema.json->menu-icon-size->description
+msgid "Icon size"
+msgstr "Ikonstørrelse"
+
+#. 6.6->settings-schema.json->menu-label->description
+msgid "Text"
+msgstr "Tekst"
+
+#. 6.6->settings-schema.json->menu-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "Indtast tekst, der skal vises i panelet."
+
+#. 6.6->settings-schema.json->show-category-icons->description
+msgid "Show category icons"
+msgstr "Vis kategoriikoner"
+
+#. 6.6->settings-schema.json->show-category-icons->tooltip
+msgid "Choose whether or not to show icons on categories."
+msgstr "Vælg, om kategorier skal vises med ikoner."
+
+#. 6.6->settings-schema.json->category-icon-size->description
+msgid "Categories icon size"
+msgstr "Ikonstørrelse for kategorier"
+
+#. 6.6->settings-schema.json->show-application-icons->description
+msgid "Show application icons"
+msgstr "Vis programikoner"
+
+#. 6.6->settings-schema.json->show-application-icons->tooltip
+msgid "Choose whether or not to show icons on applications."
+msgstr "Vælg, om programmer skal vises med ikoner."
+
+#. 6.6->settings-schema.json->application-icon-size->description
+msgid "Applications icon size"
+msgstr "Ikonstørrelse for programmer"
+
+#. 6.6->settings-schema.json->favbox-show->description
+msgid "Show favorites and session buttons"
+msgstr "Vis knapper for favoritter og session"
+
+#. 6.6->settings-schema.json->favbox-show->tooltip
+msgid "Choose whether or not to show the left pane of the menu."
+msgstr "Vælg, om venstre side af menuen skal vises eller ej."
+
+#. 6.6->settings-schema.json->fav-icon-size->description
+msgid "Favorites icon size"
+msgstr "Ikonstørrelse for favoritter"
+
+#. 6.6->settings-schema.json->show-favorites->description
+msgid "Show favorites"
+msgstr "Vis favoritter"
+
+#. 6.6->settings-schema.json->show-favorites->tooltip
+msgid "Choose whether or not to show favorite files in the menu."
+msgstr "Vælg, om favoritfiler skal vises i menuen eller ej."
+
+#. 6.6->settings-schema.json->show-places->description
+msgid "Show bookmarks and places"
+msgstr "Vis bogmærker og steder"
+
+#. 6.6->settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Vælg, om bogmærker og steder skal vises i menuen."
+
+#. 6.6->settings-schema.json->show-recents->description
+msgid "Show recents"
+msgstr "Vis seneste"
+
+#. 6.6->settings-schema.json->show-recents->tooltip
+msgid "Choose whether or not to show recents in the menu."
+msgstr "Vælg, om seneste skal vises i menuen eller ej."
+
+#. 6.6->settings-schema.json->category-hover->description
+msgid "Change categories on hover"
+msgstr "Skift kategorier, når markøren føres hen over"
+
+#. 6.6->settings-schema.json->category-hover->tooltip
+msgid "Choose whether or not to change categories by hovering."
+msgstr "Vælg, om der skal skiftes kategorier, når markøren føres hen over."
+
+#. 6.6->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Aktivér automatisk rulning i programlisten"
+
+#. 6.6->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+"Vælg, om automatisk rulning i programlisten er aktiveret eller deaktiveret."
+
+#. 6.6->settings-schema.json->search-filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr "Aktivér filsystemsti i søgefeltet"
+
+#. 6.6->settings-schema.json->search-filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr "Tillader indtastning af stien i menuens søgefelt."
+
+#. 6.6->settings-schema.json->force-show-panel->description
+msgid "Force the panel to be visible when opening the menu"
+msgstr "Tving panelet til at være synligt, når menuen åbnes"
+
+#. 6.6->settings-schema.json->force-show-panel->tooltip
+msgid ""
+"Opening the menu will also show the main panel (which may be auto-hidden)."
+msgstr ""
+"Åbnes menuen, vises hovedpanelet (som kan være skjult automatisk) også."
+
+#. 6.6->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Åbn menuen, når musen føres hen over"
+
+#. 6.6->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Aktivér åbning af menuen, når musen føres hen over panelprogrammet."
+
+#. 6.6->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "millisekunder"
+
+#. 6.6->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Forsinkelse når markøren føres hen over menuen"
+
+#. 6.6->settings-schema.json->hover-delay->tooltip
+msgid "Delay before the menu opens when hovered"
+msgstr "Forsinkelse før menuen åbnes, når markøren føres hen over."
+
+#. 6.6->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Anvend menuanimationer"
+
+#. 6.6->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "Tillad menuanimation ved åbning og lukning."
+
+#. 6.6->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Åbn redigering af menuen"
+
+#. 6.6->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Tryk på denne knap for at tilpasse dine menupunkter."
+
+#. 6.6->settings-schema.json->reset-menu-size-button->description
+msgid "Restore the menu to its original size"
+msgstr "Gendan menuens oprindelige størrelse"

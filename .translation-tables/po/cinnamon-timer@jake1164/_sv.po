@@ -1,0 +1,35 @@
+# Swedish localisation for cinnamon-timer@jake1164.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cinnamon-timer@jake1164\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-20 11:11-0400\n"
+"PO-Revision-Date: 2023-05-30 08:41+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#. metadata.json->name
+msgid "Timer with notifications"
+msgstr ""
+
+#. 3.4->settings-schema.json->sound-file->tooltip
+#. 2.6->settings-schema.json->sound-file->tooltip
+#. 6.4->settings-schema.json->sound-file->tooltip
+msgid "Must have Sox installed. Most sound file types supported"
+msgstr ""
+
+#. 2.6->settings-schema.json->display-message->description
+#. 2.6->settings-schema.json->display-message->tooltip
+msgid "Message displayed in notification windows"
+msgstr ""

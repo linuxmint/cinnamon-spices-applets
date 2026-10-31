@@ -1,0 +1,148 @@
+# CINNAMENU
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Caldas Lopes <joao.caldas.lopes@gmail.com>, 2018.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2021, 2022, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cinnamenu applet\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-10-30 03:10+0000\n"
+"PO-Revision-Date: 2023-07-31 13:31+0100\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. 4.0/applet.js:962 5.8/applet.js:1047
+msgid "Settings"
+msgstr ""
+
+#. 4.0/contextmenu.js:171 5.8/contextmenu.js:214
+msgid "List settings apps separately"
+msgstr ""
+
+#. 4.0/contextmenu.js:178 5.8/contextmenu.js:221
+msgid "Single list style"
+msgstr ""
+
+#. 4.0/contextmenu.js:187 5.8/contextmenu.js:230
+msgid "Hide hidden files"
+msgstr ""
+
+#. 4.0/contextmenu.js:331 5.8/contextmenu.js:377
+msgid "Properties"
+msgstr ""
+
+#. 5.8/applet.js:1032
+msgid "Loading..."
+msgstr ""
+
+#. 5.8/applet.js:1218
+msgid "Files"
+msgstr ""
+
+#. 5.8/applet.js:1248 5.8/applet.js:1254
+msgid "Calculator: "
+msgstr ""
+
+#. 5.8/applet.js:1429 5.8/applet.js:1956
+msgid "Click to insert emoji"
+msgstr ""
+
+#. 5.8/applet.js:1926
+msgid "Back"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Google"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Bing"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Baidu"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Yahoo"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Yandex"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "DuckDuckGo"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Ask"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Ecosia"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "AOL"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Startpage"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Brave"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Qwant"
+msgstr ""
+
+#. 4.0->settings-schema.json->info4->description
+#. 5.8->settings-schema.json->info5->description
+msgid ""
+"\n"
+"• Additional key option:\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Custom"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-custom-url->description
+msgid "URL for custom search"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-custom-url->tooltip
+msgid "Enter the URL that is prepended to the search query."
+msgstr ""
+
+#. 5.8->settings-schema.json->info2->description
+msgid ""
+"\n"
+"• Drag and drop apps, files, and folders onto the sidebar."
+msgstr ""

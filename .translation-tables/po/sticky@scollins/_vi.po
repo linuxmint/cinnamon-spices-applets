@@ -1,0 +1,11 @@
+# STICKY NOTES
+# This file is put in the public domain.
+# collinss, 2016
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->theme->options
+#. 3.2->settings-schema.json->theme->options
+msgid "Red"
+msgstr ""

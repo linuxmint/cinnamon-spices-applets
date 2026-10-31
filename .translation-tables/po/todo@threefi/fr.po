@@ -1,0 +1,47 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-24 19:36+0800\n"
+"PO-Revision-Date: 2023-05-16 19:40+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:77
+msgid "Click to edit the list"
+msgstr "Cliquez pour modifier la liste"
+
+#. todo@threefi->metadata.json->description
+msgid "a simple todo list ticker for cinammon"
+msgstr "un simple métronome de liste de tâches pour Cinnamon"
+
+#. todo@threefi->metadata.json->name
+msgid "Todo"
+msgstr "À faire (Todo)"
+
+#. todo@threefi->settings-schema.json->important_color->description
+msgid "The color used to highlight important items"
+msgstr "Couleur utilisée pour mettre en évidence les éléments importants"
+
+#. todo@threefi->settings-schema.json->list_editor->description
+msgid "The editor that should be used to edit the list"
+msgstr "Éditeur à utiliser pour modifier la liste"
+
+#. todo@threefi->settings-schema.json->lead_trail_time->description
+msgid "The time before/after scrolling that long items will be fixed"
+msgstr "Le temps avant/après le défilement pendant lequel les éléments longs seront corrigés"
+
+#. todo@threefi->settings-schema.json->text_width->description
+msgid "The width of text in characters"
+msgstr "Largeur du texte en caractères"

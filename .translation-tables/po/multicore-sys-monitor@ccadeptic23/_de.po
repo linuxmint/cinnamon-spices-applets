@@ -1,0 +1,305 @@
+# MULTI-CORE SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-10-29 04:39+0100\n"
+"PO-Revision-Date: 2026-09-17 07:52+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.6/applet.js:1089 5.6/applet.js:1132 5.6/applet.js:1146
+msgid "root"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_colorCache->description
+#. 5.6/applet.js:2122
+msgid "Cache"
+msgstr ""
+
+#. 5.6/applet.js:2272
+msgid "Disk size"
+msgstr ""
+
+#. 4.0/prefs.js:335
+msgid "00-20"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_activity_20_40->description
+#. 4.0/prefs.js:335
+msgid "20-40"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_activity_40_60->description
+#. 4.0/prefs.js:335
+msgid "40-60"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_activity_60_80->description
+#. 4.0/prefs.js:335
+msgid "60-80"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_activity_80_100->description
+#. 4.0/prefs.js:335
+msgid "80-100"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionSystemMonitor->title
+msgid "System Monitor"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionCPUStuckProcess->title
+msgid "Detection of Stuck Processes"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "1px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "2px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "4px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "8px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "16px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "32px"
+msgstr ""
+
+#. 5.6->settings-schema.json->graphStep->options
+msgid "64px"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "●"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "⬤"
+msgstr ""
+
+#. 5.6->settings-schema.json->ledForCurves->options
+msgid "◉"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "1"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "2"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "3"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_labelZoom->options
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+#. 5.6->settings-schema.json->Mem_labelZoom->options
+#. 5.6->settings-schema.json->Net_labelZoom->options
+#. 5.6->settings-schema.json->Disk_labelZoom->options
+#. 5.6->settings-schema.json->DiskUsage_labelZoom->options
+#. 5.6->settings-schema.json->Battery_labelZoom->options
+msgid "4"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "8"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "16"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "32"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
+msgid "64"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_tempFontFactor->units
+#. 5.6->settings-schema.json->CPU_loadAverageFontFactor->units
+#. 5.6->settings-schema.json->CPU_minLoadStuckProcess->units
+#. 5.6->settings-schema.json->percentFontFactor->units
+#. 5.6->settings-schema.json->flowFontFactor->units
+msgid "%"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_alertWhenStuckProcess->description
+msgid "Change the background color when at least one process is stuck"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->description
+msgid "Method used to detect stuck processes"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->options
+msgid "From kernel only"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->options
+msgid "Check the activity of each CPU"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->options
+msgid "In either case"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_minLoadStuckProcess->description
+msgid "Consider a process to be stuck when core's load exceeds (%)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_durationStuckProcess->description
+msgid "Consider a process to be stuck after (in Selected Unit)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->description
+msgid "Selected Unit"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->options
+msgid "seconds"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->options
+msgid "minutes"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->options
+msgid "hours"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_bgColorStuckProcess->description
+msgid "Background Color when a process is stuck"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_activity_0_20->description
+msgid "0-20"
+msgstr ""
+
+#. 5.6->settings-schema.json->Mem_colorBuffers->description
+msgid "Buffers"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Byte"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "kilo"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Mega"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Giga"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Tera"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Peta"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Exa"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Zetta"
+msgstr ""
+
+#. 5.6->settings-schema.json->Net_minPrefix->options
+#. 5.6->settings-schema.json->Disk_minPrefix->options
+msgid "Yotta"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonWhichOne->description
+msgid "Which System Monitor"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonWhichOne->options
+msgid "System Default"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonWhichOne->options
+msgid "Custom"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonPath->description
+msgid "Complete name of a .desktop file or a flatpak id"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonPath->tooltip
+msgid ""
+"EXAMPLES:\n"
+"gnome-system-monitor.desktop\n"
+"org.gnome.SystemMonitor.desktop\n"
+"io.github.hakandundar34coding.system-monitoring-center"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonMouseButton->description
+msgid "Which mouse button opens your System Monitor"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonMouseButton->options
+msgid "Middle"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonMouseButton->options
+msgid "Both"
+msgstr ""

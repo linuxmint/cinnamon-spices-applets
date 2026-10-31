@@ -1,0 +1,124 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tor-button@shatur 1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2017-11-09 13:47+0200\n"
+"PO-Revision-Date: 2026-10-17 10:19+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:46
+msgid "Tor network"
+msgstr "Tor-verkko"
+
+#: applet.js:50
+msgid "Rebuild chain"
+msgstr "Rakenna ketju"
+
+#: applet.js:82 applet.js:143
+msgid "Tor disabled"
+msgstr "Tor pois"
+
+#: applet.js:88 applet.js:107 applet.js:126 applet.js:154
+msgid "Error"
+msgstr "Virhe"
+
+#: applet.js:88
+msgid "Unable to parse "
+msgstr "Ei voitu käsitellä "
+
+#: applet.js:107
+msgid "Unable to open configuration file "
+msgstr "Määrityksiä ei voitu avata "
+
+#: applet.js:121
+msgid "Process launched."
+msgstr "Prosessi käynnistetty."
+
+#: applet.js:122
+msgid "Tor enabled"
+msgstr "Tor käytössä"
+
+#: applet.js:126
+msgid "Unable to start Tor: "
+msgstr "Tor aloitus epäonnistui: "
+
+#: applet.js:142
+msgid "Process closed."
+msgstr "Prosessi suljettu."
+
+#: applet.js:154
+msgid "Tor is not running."
+msgstr "Tor ei ole käynnissä."
+
+#. tor-button@shatur->settings-schema.json->showNotifications->description
+msgid "Show notifications"
+msgstr "Näytä ilmoitukset"
+
+#. tor-button@shatur->settings-schema.json->showNotifications->tooltip
+msgid "Show notifications when the Tor network is turned on/off."
+msgstr "Näytä ilmoitus kun Tor otetaan käyttöön tai poistetaan."
+
+#. tor-button@shatur->settings-schema.json->torPath->description
+msgid "Tor location path"
+msgstr "Tor-polku"
+
+#. tor-button@shatur->settings-schema.json->torPath->tooltip
+msgid "Specify the command to launch Tor."
+msgstr "Komento Torin käynnistämiseksi."
+
+#. tor-button@shatur->settings-schema.json->torrc-page->title
+msgid "Tor settings"
+msgstr "Tor-asetukset"
+
+#. tor-button@shatur->settings-schema.json->applet-section->title
+msgid "Settings for applet"
+msgstr "Sovelluksen asetukset"
+
+#. tor-button@shatur->settings-schema.json->applet-page->title
+msgid "Applet settings"
+msgstr "Asetukset"
+
+#. tor-button@shatur->settings-schema.json->torrc-section->title
+msgid "Settings for Tor"
+msgstr "Asetukset"
+
+#. tor-button@shatur->settings-schema.json->configPath->description
+msgid "Tor config path"
+msgstr "Tor-määrityksen (torrc) polku"
+
+#. tor-button@shatur->settings-schema.json->configPath->tooltip
+msgid "Specify the path to torrc file."
+msgstr "Määritä torrc-tiedoston polku."
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->description
+msgid "Launch Tor as tor user"
+msgstr "Käynnistä Tor tor-käyttäjänä"
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->tooltip
+msgid ""
+"Launch Tor with polkit as tor user. Needed if you don't have permissions to "
+"launch Tor as normal user."
+msgstr ""
+"Käynnistä Tor polkit avulla tor-käyttäjänä. Tarpeellinen, jos sinulla ei "
+"ole oikeuksia käynnistää Toria tavallisena käyttäjänä."
+
+#. tor-button@shatur->metadata.json->description
+msgid "Applet for Tor network management"
+msgstr "Sovellus liittymiseksi Tor-verkkoon ja hallintaan"
+
+#. tor-button@shatur->metadata.json->name
+msgid "Tor Button"
+msgstr "Tor-painike"

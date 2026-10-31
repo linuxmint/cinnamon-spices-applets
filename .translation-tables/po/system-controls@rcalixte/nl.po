@@ -1,0 +1,65 @@
+# System Controls Applet
+# Copyright (C) 2022
+# Rick Calixte <10281587+rcalixte@users.noreply.github.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.2.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-07 16:57-0500\n"
+"PO-Revision-Date: 2024-04-21 20:50+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. metadata.json->name
+#: 5.4/applet.js:29
+msgid "System Controls"
+msgstr "Systeemknoppen"
+
+#: 5.4/applet.js:64
+msgid "Restart Cinnamon"
+msgstr "Cinnamon herstarten"
+
+#: 5.4/applet.js:72
+msgid "Lock Screen"
+msgstr "Scherm vergrendelen"
+
+#: 5.4/applet.js:94 5.4/applet.js:103 5.4/applet.js:111
+msgid "Switch User"
+msgstr "Gebruiker wisselen"
+
+#: 5.4/applet.js:121
+msgid "Log Out"
+msgstr "Afmelden"
+
+#: 5.4/applet.js:129
+msgid "Suspend"
+msgstr "Slaapstand"
+
+#: 5.4/applet.js:135
+msgid "Hibernate"
+msgstr "Slaapstand naar schijf"
+
+#: 5.4/applet.js:143
+msgid "Restart"
+msgstr "Opnieuw opstarten"
+
+#: 5.4/applet.js:149
+msgid "Power Off"
+msgstr "Uitschakelen"
+
+#. metadata.json->description
+msgid ""
+"A simple system controls applet to restart Cinnamon, lock the screen, switch "
+"users, log off, suspend, hibernate, reboot, or power off the computer"
+msgstr ""
+"Een eenvoudig systeembedieningsapplet om Cinnamon te herstarten, het scherm "
+"te vergrendelen, van gebruiker te wisselen, uit te loggen, de computer in "
+"slaapstand te zetten (al dan niet slaapstand naar schijf), opnieuw op te "
+"starten of uit te schakelen."

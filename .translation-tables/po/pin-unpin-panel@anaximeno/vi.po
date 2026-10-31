@@ -1,0 +1,105 @@
+# PIN-UNPIN THE PANEL
+# This file is put in the public domain.
+# anaximeno, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pin-unpin-panel@anaximeno 0.2.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-10-13 14:05+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.4/applet.js:155
+msgid "Click to Unpin the Panel"
+msgstr "Nhấn để bỏ ghim thanh panel"
+
+#. 5.4/applet.js:155
+msgid "Click to Pin the Panel"
+msgstr "Nhấn để ghim thanh panel"
+
+#. metadata.json->name
+msgid "Pin-Unpin the Panel"
+msgstr "Ghim/Bỏ ghim Panel"
+
+#. metadata.json->description
+msgid ""
+"An applet that lets you pin or unpin the panel, making it fixed or "
+"collapsible."
+msgstr "Applet cho phép bạn ghim hoặc bỏ ghim panel, giúp panel cố định hoặc có thể thu gọn."
+
+#. 5.4->settings-schema.json->general->description
+msgid "General"
+msgstr "Chung"
+
+#. 5.4->settings-schema.json->unpin-autohide-type->description
+msgid "Hide Type on Unpin"
+msgstr "Loại ẩn khi bỏ ghim"
+
+#. 5.4->settings-schema.json->unpin-autohide-type->options
+msgid "Auto Hide"
+msgstr "Tự động ẩn"
+
+#. 5.4->settings-schema.json->unpin-autohide-type->options
+msgid "Intelligent Hide"
+msgstr "Ẩn thông minh"
+
+#. 5.4->settings-schema.json->pinned-at-startup->description
+msgid "At Startup"
+msgstr "Khi khởi động"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Leave the panel as it is"
+msgstr "Giữ nguyên panel"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Pin the panel"
+msgstr "Ghim panel"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Unpin the panel"
+msgstr "Bỏ ghim panel"
+
+#. 5.4->settings-schema.json->style->description
+msgid "Style"
+msgstr "Kiểu"
+
+#. 5.4->settings-schema.json->use-custom-icons->description
+msgid "Use Custom Icons"
+msgstr "Sử dụng biểu tượng tùy chỉnh"
+
+#. 5.4->settings-schema.json->pin-icon->description
+msgid "Pin Icon"
+msgstr "Biểu tượng ghim"
+
+#. 5.4->settings-schema.json->unpin-icon->description
+msgid "Unpin Icon"
+msgstr "Biểu tượng bỏ ghim"
+
+#. 5.4->settings-schema.json->key-bindings->description
+msgid "Key Bindings"
+msgstr "Phím tắt"
+
+#. 5.4->settings-schema.json->toggle-panel-pin-binding-keys->description
+msgid "Toggle Panel Pin State"
+msgstr "Chuyển trạng thái ghim panel"
+
+#. 5.4->settings-schema.json->toggle-panel-pin-binding-keys->tooltip
+msgid "Set keybinding to pin the panel"
+msgstr "Thiết lập phím tắt để ghim panel"
+
+#. 5.4->settings-schema.json->peek-panel-bindind-keys->description
+msgid "Peek Hidden Panel"
+msgstr "Xem nhanh panel ẩn"
+
+#. 5.4->settings-schema.json->peek-panel-bindind-keys->tooltip
+msgid "Set keybinding to temporarily show the panel"
+msgstr "Thiết lập phím tắt để tạm thời hiện panel"

@@ -1,0 +1,25 @@
+# CSKMENU
+# This file is put in the public domain.
+# csknet.org, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: menu@csknet.org 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-09-08 03:19+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "CskMenu"
+msgstr "CskMenu"
+
+#. metadata.json->description
+msgid "A simple command launcher menu"
+msgstr "簡易的指令啟動選單"

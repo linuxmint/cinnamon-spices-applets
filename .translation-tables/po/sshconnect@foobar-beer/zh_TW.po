@@ -1,0 +1,144 @@
+# SSH CONNECT
+# This file is put in the public domain.
+# foobar-beer, 2019
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sshconnect@foobar-beer 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-09-10 23:58+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:58
+msgid "Reload Config"
+msgstr "重新載入設定"
+
+#. applet.js:96
+msgid "Connection opened for "
+msgstr "已開啟連線至 "
+
+#. metadata.json->name
+msgid "SSH Connect"
+msgstr "SSH 連線"
+
+#. metadata.json->description
+msgid ""
+"Open SSH shell based on applet configuration table with optional "
+"configuration of console profile and flags per each connection."
+msgstr ""
+"根據小程式設定表開啟 SSH shell，可選擇為每個連線設定終端機設定檔和"
+"參數。"
+
+#. settings-schema.json->page-connections-list->title
+msgid "SSH Connections"
+msgstr "SSH 連線"
+
+#. settings-schema.json->page-terminal-settings->title
+#. settings-schema.json->section-terminal-app->title
+msgid "Terminal Application"
+msgstr "終端機應用程式"
+
+#. settings-schema.json->section-connections-list->title
+msgid "SSH Connections List"
+msgstr "SSH 連線清單"
+
+#. settings-schema.json->section-setup-title-flag->title
+msgid "Terminal Title"
+msgstr "終端機標題"
+
+#. settings-schema.json->section-setup-profile-flag->title
+#. settings-schema.json->connections->columns->title
+msgid "Terminal Profile"
+msgstr "終端機設定檔"
+
+#. settings-schema.json->connections->description
+msgid "Connections List"
+msgstr "連線清單"
+
+#. settings-schema.json->connections->columns->title
+msgid "Connection Name"
+msgstr "連線名稱"
+
+#. settings-schema.json->connections->columns->title
+msgid "Group Name"
+msgstr "群組名稱"
+
+#. settings-schema.json->connections->columns->title
+msgid "Host"
+msgstr "主機"
+
+#. settings-schema.json->connections->columns->title
+msgid "SSH Flags"
+msgstr "SSH 參數"
+
+#. settings-schema.json->terminal-exec->description
+msgid "Set terminal application executable"
+msgstr "設定終端機應用程式執行檔"
+
+#. settings-schema.json->terminal-exec->tooltip
+msgid ""
+"Configure the command that will be used for launching the SSH connection."
+msgstr ""
+"設定用於啟動 SSH 連線的命令。"
+
+#. settings-schema.json->exec-flag->description
+msgid "Set terminal application execution flag"
+msgstr "設定終端機應用程式執行參數"
+
+#. settings-schema.json->exec-flag->tooltip
+msgid ""
+"Configure the application execution option flag used for passing through the "
+"command that should be executed."
+msgstr ""
+"設定應用程式執行選項參數，用於傳遞應執行的命令。"
+
+#. settings-schema.json->customize-title->description
+msgid "Customize teminal window title"
+msgstr "自訂終端機視窗標題"
+
+#. settings-schema.json->customize-title->tooltip
+msgid ""
+"Set this switch to configure the execution option flag for setting window "
+"title."
+msgstr ""
+"啟用此開關以設定用於指定視窗標題的執行選項參數。"
+
+#. settings-schema.json->title-flag->description
+msgid "Set terminal application title flag"
+msgstr "設定終端機應用程式標題參數"
+
+#. settings-schema.json->title-flag->tooltip
+msgid ""
+"Configure the application execution option flag used for setting window "
+"title."
+msgstr ""
+"設定用於指定視窗標題的應用程式執行選項參數。"
+
+#. settings-schema.json->customize-profile->description
+msgid "Customize teminal window profile"
+msgstr "自訂終端機視窗設定檔"
+
+#. settings-schema.json->customize-profile->tooltip
+msgid ""
+"Set this switch to configure the execution option flag for setting terminal "
+"window profile."
+msgstr ""
+"啟用此開關以設定用於指定終端機視窗設定檔的執行選項參數。"
+
+#. settings-schema.json->profile-flag->description
+msgid "Set Terminal application profile flag"
+msgstr "設定終端機應用程式設定檔參數"
+
+#. settings-schema.json->profile-flag->tooltip
+msgid ""
+"Configure the application execution option flag used for setting window "
+"profile"
+msgstr ""
+"設定用於指定視窗設定檔的應用程式執行選項參數"

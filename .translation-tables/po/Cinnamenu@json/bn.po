@@ -1,0 +1,1054 @@
+# CINNAMENU
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# jaszhix, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-10-30 03:10+0000\n"
+"PO-Revision-Date: 2022-05-31 17:43+0100\n"
+"Last-Translator: Google translate\n"
+"Language-Team: \n"
+"Language: bn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. 4.0/applet.js:62
+msgid "Initializing"
+msgstr "শুরু করা হচ্ছে"
+
+#. 4.0/applet.js:79 5.8/applet.js:100
+msgid "Find files..."
+msgstr "ফাইল খুঁজুন..."
+
+#. 4.0/applet.js:294
+msgid "Please wait..."
+msgstr "অনুগ্রহপূর্বক অপেক্ষা করুন..."
+
+#. 4.0/applet.js:889 5.8/applet.js:962 5.8/applet.js:1215
+msgid "Applications"
+msgstr "অ্যাপ্লিকেশন"
+
+#. 4.0/applet.js:893 5.8/applet.js:966
+msgid "Documents"
+msgstr "নথিপত্র"
+
+#. 4.0/applet.js:897 5.8/applet.js:970
+msgid "Videos"
+msgstr "ভিডিও"
+
+#. 4.0/applet.js:901 5.8/applet.js:974
+msgid "Images"
+msgstr "ছবি"
+
+#. 4.0/applet.js:905 5.8/applet.js:978
+msgid "Music"
+msgstr "সঙ্গীত"
+
+#. 4.0/applet.js:914 5.8/applet.js:987
+msgid "No recent Items"
+msgstr "কোনো সাম্প্রতিক আইটেম নেই"
+
+#. 4.0/applet.js:962 5.8/applet.js:1047
+msgid "Settings"
+msgstr ""
+
+#. 4.0/applet.js:1100
+msgid "Applications and files"
+msgstr "অ্যাপ্লিকেশন এবং ফাইল"
+
+#. 4.0/applet.js:1103 5.8/applet.js:1221
+msgid "Other search results"
+msgstr "অন্যান্য অনুসন্ধান ফলাফল"
+
+#. 4.0/applet.js:1106 5.8/applet.js:1224
+msgid "Browser bookmarks"
+msgstr "ব্রাউজার বুকমার্ক"
+
+#. 4.0/applet.js:1109 5.8/applet.js:1227
+msgid "Browser history"
+msgstr "ব্রাউজার ইতিহাস"
+
+#. 4.0/applet.js:1112 4.0/categoriesview.js:305 5.8/applet.js:1230
+#. 5.8/categoriesview.js:321
+msgid "Emoji"
+msgstr "ইমোজি"
+
+#. 4.0/applet.js:1166 4.0/applet.js:1305 4.0/applet.js:1808 5.8/applet.js:1277
+msgid "Click to copy"
+msgstr "কপি করতে ক্লিক করুন"
+
+#. 4.0/applet.js:1608 5.8/applet.js:1735
+msgid "Clear List"
+msgstr "লিস্ট পরিষ্কার করো"
+
+#. 4.0/applet.js:1645 4.0/applet.js:1646 5.8/applet.js:1772 5.8/applet.js:1773
+msgid "Trash"
+msgstr "আবর্জনা"
+
+#. 4.0/applet.js:1657 4.0/applet.js:1658 5.8/applet.js:1784 5.8/applet.js:1785
+msgid "Computer"
+msgstr "কম্পিউটার"
+
+#. 4.0/appsview.js:303 4.0/sidebar.js:111 5.8/appsview.js:329
+#. 5.8/sidebar.js:133
+msgid "Error while opening file:"
+msgstr "ফাইল খোলার সময় ত্রুটি:"
+
+#. 4.0/appsview.js:451 5.8/appsview.js:532
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "অনেকগুলি এন্ট্রি - শুধুমাত্র প্রথম 1000টি এন্ট্রি দেখাচ্ছে৷"
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0/categoriesview.js:283 5.8/categoriesview.js:299
+msgid "All applications"
+msgstr "সমস্ত অ্যাপ্লিকেশন"
+
+#. 4.0/categoriesview.js:301 5.8/categoriesview.js:317
+msgid "Favorites"
+msgstr "প্রিয়"
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0/categoriesview.js:302 5.8/categoriesview.js:318
+msgid "Places"
+msgstr "জায়গা"
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0/categoriesview.js:303 5.8/categoriesview.js:319
+msgid "Recent"
+msgstr "সাম্প্রতিক"
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0/categoriesview.js:304 5.8/categoriesview.js:320
+msgid "Favorite apps"
+msgstr "প্রিয় অ্যাপস"
+
+#. 4.0/contextmenu.js:111 5.8/contextmenu.js:154
+msgid "light skin tone"
+msgstr "হালকা ত্বকের স্বর"
+
+#. 4.0/contextmenu.js:112 5.8/contextmenu.js:155
+msgid "medium-light skin tone"
+msgstr "মাঝারি-হালকা ত্বকের স্বর"
+
+#. 4.0/contextmenu.js:113 5.8/contextmenu.js:156
+msgid "medium skin tone"
+msgstr "মাঝারি ত্বকের স্বর"
+
+#. 4.0/contextmenu.js:114 5.8/contextmenu.js:157
+msgid "medium-dark skin tone"
+msgstr "মাঝারি-গাঢ় ত্বকের স্বর"
+
+#. 4.0/contextmenu.js:115 5.8/contextmenu.js:158
+msgid "dark skin tone"
+msgstr "গাঢ় ত্বক টোন"
+
+#. 4.0/contextmenu.js:134 5.8/contextmenu.js:177
+#, fuzzy
+msgid "Remove category"
+msgstr "বিভাগ অর্ডার রিসেট করুন"
+
+#. 4.0/contextmenu.js:148 5.8/contextmenu.js:191
+msgid "Reset category order"
+msgstr "বিভাগ অর্ডার রিসেট করুন"
+
+#. 4.0/contextmenu.js:171 5.8/contextmenu.js:214
+msgid "List settings apps separately"
+msgstr ""
+
+#. 4.0/contextmenu.js:178 5.8/contextmenu.js:221
+msgid "Single list style"
+msgstr ""
+
+#. 4.0/contextmenu.js:187 5.8/contextmenu.js:230
+#, fuzzy
+msgid "Hide hidden files"
+msgstr "গোপন ফাইলগুলো দেখুন"
+
+#. 4.0->settings-schema.json->show-hidden-files->description
+#. 5.8->settings-schema.json->show-hidden-files->description
+#. 4.0/contextmenu.js:194 5.8/contextmenu.js:237
+msgid "Show hidden files"
+msgstr "গোপন ফাইলগুলো দেখুন"
+
+#. 4.0/contextmenu.js:250 4.0/contextmenu.js:259 5.8/contextmenu.js:290
+msgid "Run with NVIDIA GPU"
+msgstr "NVIDIA GPU দিয়ে চালান"
+
+#. 4.0/contextmenu.js:268 5.8/contextmenu.js:303
+msgid "Add to panel"
+msgstr "প্যানেলে যোগ করুন"
+
+#. 4.0/contextmenu.js:287 5.8/contextmenu.js:324
+msgid "Add to desktop"
+msgstr "ডেস্কটপে যোগ করুন"
+
+#. 4.0/contextmenu.js:301 4.0/contextmenu.js:399 5.8/contextmenu.js:341
+#. 5.8/contextmenu.js:490
+msgid "Remove from favorites"
+msgstr "পছন্দের তালিকা থেকে অপসারণ"
+
+#. 4.0/contextmenu.js:305 4.0/contextmenu.js:404 5.8/contextmenu.js:348
+#. 5.8/contextmenu.js:497
+msgid "Add to favorites"
+msgstr "ফেভারিটে যোগ করুন"
+
+#. 4.0/contextmenu.js:312 5.8/contextmenu.js:358
+msgid "Uninstall"
+msgstr "আনইনস্টল করুন"
+
+#. 4.0/contextmenu.js:322 5.8/contextmenu.js:368
+msgid "App Info"
+msgstr ""
+
+#. 4.0/contextmenu.js:331 5.8/contextmenu.js:377
+msgid "Properties"
+msgstr ""
+
+#. 4.0/contextmenu.js:349 5.8/contextmenu.js:450
+msgid "This file is no longer available"
+msgstr "এই ফাইলটি আর উপলব্ধ নেই৷"
+
+#. 4.0/contextmenu.js:357 5.8/contextmenu.js:458
+msgid "Open with"
+msgstr "সঙ্গে খোলা"
+
+#. 4.0/contextmenu.js:378 5.8/contextmenu.js:479
+msgid "Other application..."
+msgstr "অন্য আবেদন..."
+
+#. 4.0/contextmenu.js:420 5.8/contextmenu.js:510
+#, fuzzy
+msgid "Add folder as category"
+msgstr "প্রিয় অ্যাপ্লিকেশন বিভাগ দেখান"
+
+#. 4.0/contextmenu.js:437 5.8/contextmenu.js:527 4.0/search.py:48
+#. 5.8/search.py:48
+msgid "Open containing folder"
+msgstr "ফোল্ডার খুলুন"
+
+#. 4.0/contextmenu.js:453 4.0/contextmenu.js:466 5.8/contextmenu.js:547
+#. 5.8/contextmenu.js:560
+msgid "Move to trash"
+msgstr "আবর্জনা সরান"
+
+#. 4.0/contextmenu.js:459 5.8/contextmenu.js:553
+msgid "Error while moving file to trash:"
+msgstr "ট্র্যাশে ফাইল সরানোর সময় ত্রুটি:"
+
+#. 4.0/emoji.js:7739 5.8/emoji.js:8
+msgid "Smileys & Emotion"
+msgstr ""
+
+#. 4.0/emoji.js:7740 5.8/emoji.js:689
+msgid "People & Body"
+msgstr ""
+
+#. 4.0/emoji.js:7741 5.8/emoji.js:2253
+msgid "Animals & Nature"
+msgstr ""
+
+#. 4.0/emoji.js:7742 5.8/emoji.js:2873
+msgid "Food & Drink"
+msgstr ""
+
+#. 4.0/emoji.js:7743 5.8/emoji.js:3421
+msgid "Travel & Places"
+msgstr ""
+
+#. 4.0/emoji.js:7744 5.8/emoji.js:4297
+msgid "Activities"
+msgstr ""
+
+#. 4.0/emoji.js:7745 5.8/emoji.js:4641
+msgid "Objects"
+msgstr ""
+
+#. 4.0/emoji.js:7746 5.8/emoji.js:5701
+msgid "Symbols"
+msgstr ""
+
+#. 4.0/emoji.js:7747 5.8/emoji.js:6601
+msgid "Flags"
+msgstr ""
+
+#. 4.0/sidebar.js:251 5.8/sidebar.js:266
+msgid "Quit"
+msgstr "প্রস্থান করুন"
+
+#. 4.0/sidebar.js:252 5.8/sidebar.js:267
+msgid "Shutdown the computer"
+msgstr "কম্পিউটার বন্ধ করুন"
+
+#. 4.0/sidebar.js:260 5.8/sidebar.js:277
+msgid "Logout"
+msgstr "প্রস্থান"
+
+#. 4.0/sidebar.js:261 5.8/sidebar.js:278
+msgid "Leave the session"
+msgstr "অধিবেশন ছেড়ে দিন"
+
+#. 4.0/sidebar.js:269 5.8/sidebar.js:287
+msgid "Lock screen"
+msgstr "বন্ধ পর্দা"
+
+#. 4.0/sidebar.js:270 5.8/sidebar.js:288
+msgid "Lock the screen"
+msgstr "স্ক্রীন লক করুন"
+
+#. 5.8/applet.js:1032
+#, fuzzy
+msgid "Loading..."
+msgstr "অনুসন্ধান করা হচ্ছে..."
+
+#. 5.8/applet.js:1218
+msgid "Files"
+msgstr ""
+
+#. 5.8/applet.js:1248 5.8/applet.js:1254
+msgid "Calculator: "
+msgstr ""
+
+#. 5.8/applet.js:1429 5.8/applet.js:1956
+msgid "Click to insert emoji"
+msgstr ""
+
+#. 5.8/applet.js:1926
+msgid "Back"
+msgstr ""
+
+#. 4.0/mint-remove-application.py:34
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"এই মেনু আইটেমটি কোনো প্যাকেজের সাথে যুক্ত নয়। আপনি যেভাবেই মেনু থেকে এটি সরাতে "
+"চান?"
+
+#. 4.0/mint-remove-application.py:75
+msgid "The following packages will be removed:"
+msgstr "নিম্নলিখিত প্যাকেজগুলি সরানো হবে:"
+
+#. 4.0/mint-remove-application.py:82
+msgid "Packages to be removed"
+msgstr "প্যাকেজ অপসারণ করা হবে"
+
+#. 4.0/mint-remove-application.py:143
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "প্যাকেজ %s অপসারণ করা যাবে না কারণ এটি অন্যান্য প্যাকেজের জন্য প্রয়োজন।"
+
+#. 4.0/mint-remove-application.py:149
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "প্যাকেজ %s হল নিম্নলিখিত প্যাকেজের নির্ভরতা:"
+
+#. 4.0/search.py:43 5.8/search.py:43
+msgid "Open"
+msgstr "খোলা"
+
+#. 4.0->settings-schema.json->search->title
+#. 4.0->settings-schema.json->search-search->title
+#. 5.8->settings-schema.json->search->title
+#. 5.8->settings-schema.json->search-search->title
+#. 4.0/search.py:85 5.8/search.py:85
+msgid "Search"
+msgstr "অনুসন্ধান করুন"
+
+#. 4.0/search.py:106 5.8/search.py:106
+msgid "Start in"
+msgstr "আপনি উত্তর দিবেন না"
+
+#. 4.0/search.py:107 5.8/search.py:107
+msgid "Select a folder"
+msgstr "একটি ফোল্ডার নির্বাচন করুন"
+
+#. 4.0/search.py:113 5.8/search.py:113
+msgid "Follow symlinks"
+msgstr "সিমলিংক অনুসরণ করুন"
+
+#. 4.0/search.py:117 5.8/search.py:117
+msgid "Search hidden"
+msgstr "লুকানো অনুসন্ধান"
+
+#. 4.0/search.py:121 5.8/search.py:121
+msgid "Use regular expressions"
+msgstr "রেগুলার এক্সপ্রেশন ব্যবহার করুন"
+
+#. 4.0/search.py:125 5.8/search.py:125
+msgid "Stop"
+msgstr "থামো"
+
+#. 4.0/search.py:140 5.8/search.py:140
+msgid "File"
+msgstr "ফাইল"
+
+#. 4.0/search.py:156 5.8/search.py:156
+msgid "Path"
+msgstr "পথ"
+
+#. 4.0/search.py:184 5.8/search.py:184
+msgid "Searching..."
+msgstr "অনুসন্ধান করা হচ্ছে..."
+
+#. 4.0/search.py:198 4.0/search.py:199 5.8/search.py:198 5.8/search.py:199
+msgid "Search Stopped"
+msgstr "অনুসন্ধান বন্ধ"
+
+#. 4.0/search.py:215 5.8/search.py:215
+msgid "Searching: "
+msgstr "অনুসন্ধান করা হচ্ছে:"
+
+#. 4.0/search.py:220 5.8/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "ত্রুটি: ফোল্ডার পড়ার জন্য অপর্যাপ্ত অনুমতি"
+
+#. 4.0/search.py:252 5.8/search.py:252
+msgid "Search Completed"
+msgstr "অনুসন্ধান সম্পূর্ণ হয়েছে৷"
+
+#. 4.0/search.py:259 5.8/search.py:259
+msgid "Skipping"
+msgstr "স্কিপিং"
+
+#. 4.0/search.py:259 5.8/search.py:259
+msgid " - directory already searched"
+msgstr " - ডিরেক্টরি ইতিমধ্যে অনুসন্ধান করা হয়েছে"
+
+#. metadata.json->name
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"গ্রিড বা তালিকা লেআউট বিকল্প, ফাইল ব্রাউজার এবং ইমোজি অনুসন্ধান সহ একটি নমনীয় মেনু।"
+
+#. 4.0->settings-schema.json->layout->title
+#. 4.0->settings-schema.json->menu-layout->title
+#. 5.8->settings-schema.json->layout->title
+#. 5.8->settings-schema.json->menu-layout->title
+msgid "Layout"
+msgstr "লেআউট"
+
+#. 4.0->settings-schema.json->behaviour->title
+#. 5.8->settings-schema.json->behaviour->title
+msgid "Behavior"
+msgstr "আচরণ"
+
+#. 4.0->settings-schema.json->appearance->title
+#. 5.8->settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr "চেহারা"
+
+#. 4.0->settings-schema.json->tips->title
+#. 4.0->settings-schema.json->tips-section->title
+#. 5.8->settings-schema.json->tips->title
+#. 5.8->settings-schema.json->tips-section->title
+msgid "Tips"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-content->title
+#. 5.8->settings-schema.json->menu-content->title
+msgid "Content"
+msgstr "বিষয়বস্তু"
+
+#. 4.0->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-appear->title
+#. 5.8->settings-schema.json->panel-behave->title
+#. 5.8->settings-schema.json->panel-appear->title
+msgid "Panel"
+msgstr "প্যানেল"
+
+#. 4.0->settings-schema.json->menu-behave->title
+#. 4.0->settings-schema.json->menu-icons->title
+#. 5.8->settings-schema.json->menu-behave->title
+#. 5.8->settings-schema.json->menu-icons->title
+msgid "Menu"
+msgstr "তালিকা"
+
+#. 4.0->settings-schema.json->applications-view-mode->description
+#. 5.8->settings-schema.json->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "অ্যাপ্লিকেশন ভিউ মোড"
+
+#. 4.0->settings-schema.json->applications-view-mode->options
+#. 5.8->settings-schema.json->applications-view-mode->options
+msgid "List"
+msgstr "তালিকা"
+
+#. 4.0->settings-schema.json->applications-view-mode->options
+#. 5.8->settings-schema.json->applications-view-mode->options
+msgid "Grid"
+msgstr "গ্রিড"
+
+#. 4.0->settings-schema.json->applications-view-mode->tooltip
+#. 5.8->settings-schema.json->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "তালিকা বা গ্রিড হিসাবে অ্যাপ্লিকেশন দেখুন"
+
+#. 4.0->settings-schema.json->show-sidebar->description
+#. 5.8->settings-schema.json->show-sidebar->description
+#, fuzzy
+msgid "Show sidebar"
+msgstr "সাইডবারে ফেভারিট দেখান"
+
+#. 4.0->settings-schema.json->show-sidebar->tooltip
+#. 5.8->settings-schema.json->show-sidebar->tooltip
+#, fuzzy
+msgid "Show the sidebar in the menu"
+msgstr "মেনুতে হোম ফোল্ডার বিভাগ দেখান"
+
+#. 4.0->settings-schema.json->sidebar-placement->description
+#. 5.8->settings-schema.json->sidebar-placement->description
+msgid "Sidebar location"
+msgstr "সাইডবার অবস্থান"
+
+#. 4.0->settings-schema.json->sidebar-placement->options
+#. 5.8->settings-schema.json->sidebar-placement->options
+msgid "Top"
+msgstr "শীর্ষ"
+
+#. 4.0->settings-schema.json->sidebar-placement->options
+#. 5.8->settings-schema.json->sidebar-placement->options
+msgid "Bottom"
+msgstr "নীচে"
+
+#. 4.0->settings-schema.json->sidebar-placement->options
+#. 5.8->settings-schema.json->sidebar-placement->options
+msgid "Left"
+msgstr "বাম"
+
+#. 4.0->settings-schema.json->sidebar-placement->options
+#. 5.8->settings-schema.json->sidebar-placement->options
+msgid "Right"
+msgstr "ডানদিকে"
+
+#. 4.0->settings-schema.json->sidebar-placement->tooltip
+#. 5.8->settings-schema.json->sidebar-placement->tooltip
+msgid "Choose where to show the sidebar"
+msgstr "সাইডবার কোথায় দেখাতে হবে তা বেছে নিন"
+
+#. 4.0->settings-schema.json->sidebar-favorites->description
+#. 5.8->settings-schema.json->sidebar-favorites->description
+msgid "Show favorites on sidebar"
+msgstr "সাইডবারে ফেভারিট দেখান"
+
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "None"
+msgstr "কোনোটিই নয়"
+
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->sidebar-favorites->options
+msgid "Apps only"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->sidebar-favorites->options
+msgid "Files only"
+msgstr ""
+
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#, fuzzy
+msgid "Apps and files"
+msgstr "অ্যাপ্লিকেশন এবং ফাইল"
+
+#. 4.0->settings-schema.json->sidebar-favorites->tooltip
+#. 5.8->settings-schema.json->sidebar-favorites->tooltip
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "সাইডবারে আপনার প্রিয় অ্যাপ এবং ফাইল আইকন দেখান"
+
+#. 4.0->settings-schema.json->description-placement->description
+#. 5.8->settings-schema.json->description-placement->description
+msgid "Application description placement"
+msgstr "আবেদন বিবরণ বসানো"
+
+#. 4.0->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->description-placement->options
+msgid "Tooltips"
+msgstr "টুলটিপস"
+
+#. 4.0->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->description-placement->options
+msgid "Under titles"
+msgstr "শিরোনাম অধীনে"
+
+#. 4.0->settings-schema.json->description-placement->tooltip
+#. 5.8->settings-schema.json->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "আবেদনের বিবরণ কোথায় দেখাতে হবে তা বেছে নিন"
+
+#. 4.0->settings-schema.json->show-categories->description
+#. 5.8->settings-schema.json->show-categories->description
+#, fuzzy
+msgid "Show categories"
+msgstr "বিভাগ আইকন দেখান"
+
+#. 4.0->settings-schema.json->show-categories->tooltip
+#. 5.8->settings-schema.json->show-categories->tooltip
+#, fuzzy
+msgid "Show list of application categories"
+msgstr "অ্যাপ্লিকেশন আইকন দেখান"
+
+#. 4.0->settings-schema.json->show-places-category->description
+#. 5.8->settings-schema.json->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "বুকমার্ক এবং স্থান দেখান"
+
+#. 4.0->settings-schema.json->show-places-category->tooltip
+#. 5.8->settings-schema.json->show-places-category->tooltip
+msgid "Show bookmarks and places category in the menu"
+msgstr "মেনুতে বুকমার্ক এবং স্থানের বিভাগ দেখান"
+
+#. 4.0->settings-schema.json->show-recents-category->description
+#. 5.8->settings-schema.json->show-recents-category->description
+msgid "Show recent items"
+msgstr "সাম্প্রতিক আইটেম দেখান"
+
+#. 4.0->settings-schema.json->show-recents-category->tooltip
+#. 5.8->settings-schema.json->show-recents-category->tooltip
+msgid "Show recent items category in the menu"
+msgstr "মেনুতে সাম্প্রতিক আইটেম বিভাগ দেখান"
+
+#. 4.0->settings-schema.json->show-favorite-apps-category->description
+#. 5.8->settings-schema.json->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr "প্রিয় অ্যাপ্লিকেশন বিভাগ দেখান"
+
+#. 4.0->settings-schema.json->show-favorite-apps-category->tooltip
+#. 5.8->settings-schema.json->show-favorite-apps-category->tooltip
+msgid "Show your favorite apps category in the menu"
+msgstr "মেনুতে আপনার প্রিয় অ্যাপের বিভাগ দেখান"
+
+#. 4.0->settings-schema.json->show-home-folder-category->description
+#. 5.8->settings-schema.json->show-home-folder-category->description
+msgid "Show home folder"
+msgstr "হোম ফোল্ডার দেখান"
+
+#. 4.0->settings-schema.json->show-home-folder-category->tooltip
+#. 5.8->settings-schema.json->show-home-folder-category->tooltip
+msgid "Show home folder category in the menu"
+msgstr "মেনুতে হোম ফোল্ডার বিভাগ দেখান"
+
+#. 4.0->settings-schema.json->show-emoji-category->description
+#. 5.8->settings-schema.json->show-emoji-category->description
+#, fuzzy
+msgid "Show emoji category"
+msgstr "প্রিয় অ্যাপ্লিকেশন বিভাগ দেখান"
+
+#. 4.0->settings-schema.json->show-emoji-category->tooltip
+#. 5.8->settings-schema.json->show-emoji-category->tooltip
+#, fuzzy
+msgid "Show emoji category in the menu"
+msgstr "মেনুতে হোম ফোল্ডার বিভাগ দেখান"
+
+#. 4.0->settings-schema.json->menu-editor-button->description
+#. 5.8->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "মেনু এডিটর খুলুন"
+
+#. 4.0->settings-schema.json->overlay-key->description
+#. 5.8->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "মেনু খুলতে এবং বন্ধ করতে কীবোর্ড শর্টকাট"
+
+#. 4.0->settings-schema.json->activate-on-hover->description
+#. 5.8->settings-schema.json->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "হোভারে মেনু খুলুন"
+
+#. 4.0->settings-schema.json->activate-on-hover->tooltip
+#. 5.8->settings-schema.json->activate-on-hover->tooltip
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "যখন আমি প্যানেল আইকনের উপর আমার মাউস নিয়ে যাই তখন মেনু খুলুন"
+
+#. 4.0->settings-schema.json->hover-delay->units
+#. 5.8->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "মিলিসেকেন্ড"
+
+#. 4.0->settings-schema.json->hover-delay->description
+#. 5.8->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr "মেনু হোভার বিলম্ব"
+
+#. 4.0->settings-schema.json->enable-animation->description
+#. 5.8->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "মেনু অ্যানিমেশন ব্যবহার করুন"
+
+#. 4.0->settings-schema.json->enable-animation->tooltip
+#. 5.8->settings-schema.json->enable-animation->tooltip
+msgid "Animate the menu on open and close"
+msgstr "খোলা এবং বন্ধ মেনু অ্যানিমেট"
+
+#. 4.0->settings-schema.json->category-click->description
+#. 5.8->settings-schema.json->category-click->description
+msgid "Activate categories on click"
+msgstr "ক্লিকে বিভাগ সক্রিয় করুন"
+
+#. 4.0->settings-schema.json->category-click->tooltip
+#. 5.8->settings-schema.json->category-click->tooltip
+msgid "Activate categories on click instead of on hover"
+msgstr "হোভারের পরিবর্তে ক্লিকে বিভাগগুলি সক্রিয় করুন"
+
+#. 4.0->settings-schema.json->open-on-category->description
+#. 5.8->settings-schema.json->open-on-category->description
+msgid "Open menu on category:"
+msgstr "বিভাগে মেনু খুলুন:"
+
+#. 4.0->settings-schema.json->open-on-category->tooltip
+#. 5.8->settings-schema.json->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr "এই বিভাগটি নির্বাচন করে সর্বদা মেনু খুলুন"
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+msgid "Last used category"
+msgstr "সর্বশেষ ব্যবহৃত বিভাগ"
+
+#. 4.0->settings-schema.json->enable-autoscroll->description
+#. 5.8->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "অটোস্ক্রলিং সক্ষম করুন"
+
+#. 4.0->settings-schema.json->enable-autoscroll->tooltip
+#. 5.8->settings-schema.json->enable-autoscroll->tooltip
+msgid "Autoscroll the application list on mouse hover"
+msgstr "মাউস হোভারে অ্যাপ্লিকেশন তালিকা অটোস্ক্রোল করুন"
+
+#. 4.0->settings-schema.json->show-hidden-files->tooltip
+#. 5.8->settings-schema.json->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr "ফোল্ডার ভিউতে লুকানো ফাইল দেখান"
+
+#. 4.0->settings-schema.json->enable-emoji-search->description
+#. 5.8->settings-schema.json->enable-emoji-search->description
+msgid "Emoji search"
+msgstr "ইমোজি অনুসন্ধান"
+
+#. 4.0->settings-schema.json->enable-emoji-search->tooltip
+#. 5.8->settings-schema.json->enable-emoji-search->tooltip
+msgid "Show emojis in search results"
+msgstr "অনুসন্ধান ফলাফলে ইমোজি দেখান"
+
+#. 4.0->settings-schema.json->web-search-option->description
+#. 5.8->settings-schema.json->web-search-option->description
+msgid "Web search option"
+msgstr "ওয়েব অনুসন্ধান বিকল্প"
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Google"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Bing"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Baidu"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Yahoo"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Yandex"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "DuckDuckGo"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Ask"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Ecosia"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "AOL"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Startpage"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Brave"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Qwant"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->tooltip
+#. 5.8->settings-schema.json->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr "অনুসন্ধান ফলাফলে একটি ইন্টারনেট অনুসন্ধান বিকল্প দেখান"
+
+#. 4.0->settings-schema.json->web-suggestions->description
+#. 5.8->settings-schema.json->web-suggestions->description
+#, fuzzy
+msgid "Web search suggestions"
+msgstr "ওয়েব অনুসন্ধান বিকল্প"
+
+#. 4.0->settings-schema.json->web-suggestions->tooltip
+#. 5.8->settings-schema.json->web-suggestions->tooltip
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+
+#. 4.0->settings-schema.json->enable-home-folder-search->description
+#. 5.8->settings-schema.json->enable-home-folder-search->description
+msgid "Search home folder"
+msgstr "হোম ফোল্ডার অনুসন্ধান করুন"
+
+#. 4.0->settings-schema.json->enable-home-folder-search->tooltip
+#. 5.8->settings-schema.json->enable-home-folder-search->tooltip
+msgid "When searching, also search my home folder for files"
+msgstr "অনুসন্ধান করার সময়, ফাইলগুলির জন্য আমার হোম ফোল্ডারটিও অনুসন্ধান করুন"
+
+#. 4.0->settings-schema.json->enable-web-history-search->description
+#. 5.8->settings-schema.json->enable-web-history-search->description
+msgid "Web history search"
+msgstr "ওয়েব ইতিহাস অনুসন্ধান"
+
+#. 4.0->settings-schema.json->enable-web-history-search->tooltip
+#. 5.8->settings-schema.json->enable-web-history-search->tooltip
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox/LibreWolf history is not currently supported."
+msgstr ""
+"অনুসন্ধান করার সময়, আমার ব্রাউজারের ইতিহাসও অনুসন্ধান করুন (Google Chrome, "
+"Chromium, Opera, Vivaldi, Brave)\n"
+"দ্রষ্টব্য: ফায়ারফক্স ইতিহাস বর্তমানে সমর্থিত নয়।"
+
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->description
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->description
+msgid "Web bookmarks search"
+msgstr "ওয়েব বুকমার্ক অনুসন্ধান"
+
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->tooltip
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->tooltip
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave, LibreWolf)\n"
+"Note: To search Firefox/LibreWolf bookmarks you will need to install package "
+"gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or "
+"package libgda6 (Arch based distributions) and restart your computer."
+msgstr ""
+"অনুসন্ধান করার সময়, আমার ব্রাউজারের ওয়েব বুকমার্কগুলিও অনুসন্ধান করুন (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave, LibreWolf)\n"
+"দ্রষ্টব্য: ফায়ারফক্স বুকমার্কগুলি অনুসন্ধান করতে আপনাকে প্যাকেজ gir1.2-gda-5.0 "
+"(ডেবিয়ান ভিত্তিক বিতরণ inc. উবুন্টু) ইনস্টল করতে হবে এবং লিনাক্স মিন্ট) বা প্যাকেজ "
+"libgda6 (আর্ক ভিত্তিক বিতরণ) এবং আপনার কম্পিউটার পুনরায় চালু করুন।"
+
+#. 4.0->settings-schema.json->search-help->description
+#. 5.8->settings-schema.json->search-help->description
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"দ্রষ্টব্য: কিছু অনুসন্ধান বিকল্প এখনও ব্যবহার করা যেতে পারে যদি আপনি এখানে আপনার "
+"অনুসন্ধান শব্দের উপসর্গ দিয়ে সেগুলি সক্রিয় না করে থাকেন৷\n"
+"উদাহরণস্বরূপ: একটি ইমোজি অনুসন্ধান করতে, হার্ট ইমোজিগুলি খুঁজতে 'ই হার্ট' টাইপ করুন৷ "
+"একইভাবে, ফাইল অনুসন্ধানের জন্য 'f', ওয়েব ইতিহাসের জন্য 'h' এবং ওয়েব বুকমার্ক "
+"অনুসন্ধানের জন্য 'b' উপসর্গ ব্যবহার করুন।\n"
+
+#. 4.0->settings-schema.json->menu-icon-custom->description
+#. 5.8->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "একটি কাস্টম আইকন ব্যবহার করুন"
+
+#. 4.0->settings-schema.json->menu-icon-custom->tooltip
+#. 5.8->settings-schema.json->menu-icon-custom->tooltip
+msgid "Use a custom icon in the panel"
+msgstr "প্যানেলে একটি কাস্টম আইকন ব্যবহার করুন"
+
+#. 4.0->settings-schema.json->menu-icon->description
+#. 4.0->settings-schema.json->menu-icon->tooltip
+#. 5.8->settings-schema.json->menu-icon->description
+#. 5.8->settings-schema.json->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "প্যানেল আইকন"
+
+#. 4.0->settings-schema.json->menu-icon-size-custom->description
+#. 5.8->settings-schema.json->menu-icon-size-custom->description
+msgid "Use a custom icon size"
+msgstr "একটি কাস্টম আইকন আকার ব্যবহার করুন"
+
+#. 4.0->settings-schema.json->menu-icon-size-custom->tooltip
+#. 5.8->settings-schema.json->menu-icon-size-custom->tooltip
+msgid "Use a custom size for the panel icon"
+msgstr "প্যানেল আইকনের জন্য একটি কাস্টম আকার ব্যবহার করুন"
+
+#. 4.0->settings-schema.json->menu-icon-size->description
+#. 5.8->settings-schema.json->menu-icon-size->description
+msgid "Panel icon size (pixels)"
+msgstr "প্যানেল আইকনের আকার (পিক্সেল)"
+
+#. 4.0->settings-schema.json->menu-icon-size->tooltip
+#. 5.8->settings-schema.json->menu-icon-size->tooltip
+msgid "Choose a custom size for the panel icon"
+msgstr "প্যানেল আইকনের জন্য একটি কাস্টম আকার চয়ন করুন৷"
+
+#. 4.0->settings-schema.json->menu-label->description
+#. 5.8->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr "প্যানেল পাঠ্য"
+
+#. 4.0->settings-schema.json->menu-label->tooltip
+#. 5.8->settings-schema.json->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "প্যানেল আইকনের পাশে দেখানোর জন্য পাঠ্য"
+
+#. 4.0->settings-schema.json->category-icon-size->description
+#. 4.0->settings-schema.json->category-icon-size->tooltip
+#. 5.8->settings-schema.json->category-icon-size->description
+#. 5.8->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size (pixels)"
+msgstr "বিভাগ আইকন আকার (পিক্সেল)"
+
+#. 4.0->settings-schema.json->apps-list-icon-size->description
+#. 4.0->settings-schema.json->apps-list-icon-size->tooltip
+#. 5.8->settings-schema.json->apps-list-icon-size->description
+#. 5.8->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size (pixels)"
+msgstr "অ্যাপ্লিকেশন তালিকা আইকন আকার (পিক্সেল)"
+
+#. 4.0->settings-schema.json->apps-grid-icon-size->description
+#. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
+#. 5.8->settings-schema.json->apps-grid-icon-size->description
+#. 5.8->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size (pixels)"
+msgstr "অ্যাপ্লিকেশন গ্রিড আইকন আকার (পিক্সেল)"
+
+#. 4.0->settings-schema.json->sidebar-icon-size->description
+#. 4.0->settings-schema.json->sidebar-icon-size->tooltip
+#. 5.8->settings-schema.json->sidebar-icon-size->description
+#. 5.8->settings-schema.json->sidebar-icon-size->tooltip
+msgid "Sidebar icon size (pixels)"
+msgstr "সাইডবার আইকনের আকার (পিক্সেল)"
+
+#. 4.0->settings-schema.json->use-box-style->description
+#. 5.8->settings-schema.json->use-box-style->description
+msgid "Use sidebar box style"
+msgstr "সাইডবার বক্স শৈলী ব্যবহার করুন"
+
+#. 4.0->settings-schema.json->use-box-style->tooltip
+#. 5.8->settings-schema.json->use-box-style->tooltip
+msgid "Use a sidebar box style"
+msgstr "একটি সাইডবার বক্স শৈলী ব্যবহার করুন"
+
+#. 4.0->settings-schema.json->use-tile-style->description
+#. 5.8->settings-schema.json->use-tile-style->description
+msgid "Use tile style"
+msgstr "টাইল শৈলী ব্যবহার করুন"
+
+#. 4.0->settings-schema.json->use-tile-style->tooltip
+#. 5.8->settings-schema.json->use-tile-style->tooltip
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"অ্যাপ্লিকেশন বোতামগুলির জন্য একটি টাইল শৈলী ব্যবহার করুন (দ্রষ্টব্য: কিছুতে কাজ নাও "
+"করতে পারে"
+
+#. 4.0->settings-schema.json->info1->description
+#. 5.8->settings-schema.json->info1->description
+#, fuzzy
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"তথ্য/টিপ: মেনুর আকার পরিবর্তন করতে মেনু প্রান্তে টেনে আনুন।\n"
+
+#. 4.0->settings-schema.json->info2->description
+#. 5.8->settings-schema.json->info3->description
+#, fuzzy
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"তথ্য/টিপ: মেনুর আকার পরিবর্তন করতে মেনু প্রান্তে টেনে আনুন।\n"
+
+#. 4.0->settings-schema.json->info3->description
+#. 5.8->settings-schema.json->info4->description
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+
+#. 4.0->settings-schema.json->info4->description
+#. 5.8->settings-schema.json->info5->description
+msgid ""
+"\n"
+"• Additional key option:\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Custom"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-custom-url->description
+msgid "URL for custom search"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-custom-url->tooltip
+msgid "Enter the URL that is prepended to the search query."
+msgstr ""
+
+#. 5.8->settings-schema.json->info2->description
+#, fuzzy
+msgid ""
+"\n"
+"• Drag and drop apps, files, and folders onto the sidebar."
+msgstr ""
+"\n"
+"তথ্য/টিপ: মেনুর আকার পরিবর্তন করতে মেনু প্রান্তে টেনে আনুন।\n"

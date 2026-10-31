@@ -1,0 +1,162 @@
+# MAILNAG
+# This file is put in the public domain.
+# hyOzd, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mailnagapplet@ozderya.net 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-26 12:36-0500\n"
+"PO-Revision-Date: 2025-06-16 23:50+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:169
+msgid "just now"
+msgstr "剛剛"
+
+#. applet.js:177
+msgid " minutes ago"
+msgstr " 分鐘前"
+
+#. applet.js:185
+msgid " hours ago"
+msgstr " 小時前"
+
+#. applet.js:192
+msgid "yesterday"
+msgstr "昨天"
+
+#. applet.js:196
+msgid " days ago"
+msgstr " 天前"
+
+#. applet.js:200
+msgid " weeks ago"
+msgstr " 週前"
+
+#. applet.js:285
+msgid "Configure Mailnag"
+msgstr "設定 Mailnag"
+
+#. applet.js:370
+msgid "Mailnag daemon stopped working!"
+msgstr "Mailnag 背景程式已停止運作！"
+
+#. applet.js:374
+msgid "Mailnag daemon isn't running! Do you have it installed?"
+msgstr "Mailnag 背景程式未執行！請確認是否已安裝。"
+
+#. applet.js:607
+#, javascript-format
+msgid "You have %d new mails!"
+msgstr "您有 %d 封新郵件！"
+
+#. applet.js:608 applet.js:653
+msgid "Mark All Read"
+msgstr "全部標示為已讀"
+
+#. applet.js:616
+msgid "You have new mail!"
+msgstr "您有新郵件！"
+
+#. applet.js:618
+msgid "Mark Read"
+msgstr "標示為已讀"
+
+#. applet.js:701 applet.js:763
+msgid "No unread mails."
+msgstr "沒有未讀郵件。"
+
+#. applet.js:739
+msgid "Mailnag daemon is not running!"
+msgstr "Mailnag 背景程式未執行！"
+
+#. applet.js:752
+#, javascript-format
+msgid "You have a mail from %s!"
+msgstr "您有一封來自 %s 的郵件！"
+
+#. applet.js:758
+#, javascript-format
+msgid "You have %d unread mails!"
+msgstr "您有 %d 封未讀郵件！"
+
+#. applet.js:774
+msgid "Click to see error!"
+msgstr "點選以檢視錯誤！"
+
+#. applet.js:775
+msgid "Error: "
+msgstr "錯誤："
+
+#. metadata.json->name
+msgid "Mailnag"
+msgstr "Mailnag"
+
+#. metadata.json->description
+msgid "Mailnag mail notifier applet"
+msgstr "Mailnag 郵件通知小程式"
+
+#. settings-schema.json->notifications->description
+msgid "Show notifications"
+msgstr "顯示通知"
+
+#. settings-schema.json->notifications->tooltip
+msgid ""
+"Enables display of mail arrived notifications by applet. Make sure you "
+"disable mailnag notification plugin, otherwise you will have duplicates."
+msgstr ""
+"啟用小程式顯示新郵件通知。請務必停用 Mailnag 通知外掛程式，以避免重複通知。"
+
+#. settings-schema.json->launch_client_on_click->description
+msgid "Launch mail client on click"
+msgstr "點選時啟動電子郵件應用程式"
+
+#. settings-schema.json->launch_client_on_click->tooltip
+msgid "Mail client is launched when clicked on a menu item."
+msgstr "點選選單選項時會啟動電子郵件應用程式。"
+
+#. settings-schema.json->middle_click->description
+msgid "On middle click:"
+msgstr "滑鼠中鍵點選時："
+
+#. settings-schema.json->middle_click->tooltip
+msgid "What to do when middle clicked on applet icon"
+msgstr "滑鼠中鍵點選小程式圖示時的動作"
+
+#. settings-schema.json->middle_click->options
+msgid "Mark all read"
+msgstr "全部標示為已讀"
+
+#. settings-schema.json->middle_click->options
+msgid "Launch mail client"
+msgstr "啟動電子郵件應用程式"
+
+#. settings-schema.json->middle_click->options
+msgid "Do nothing"
+msgstr "不執行任何動作"
+
+#. settings-schema.json->max_length->description
+msgid "Max sender / subject display length"
+msgstr "寄件者／主旨顯示最大長度"
+
+#. settings-schema.json->max_length->tooltip
+msgid "Sender or subject lines longer than this will be cropped"
+msgstr "寄件者或主旨超過此長度將會被截斷"
+
+#. settings-schema.json->client->description
+msgid "Mail client to launch (or webpage)"
+msgstr "要啟動的電子郵件應用程式（或網頁）"
+
+#. settings-schema.json->client->tooltip
+msgid ""
+"Enter the command to launch your mail client here. You can also enter a web "
+"address that starts with 'http'."
+msgstr ""
+"請在此輸入啟動電子郵件應用程式的指令，也可輸入以 'http' 開頭的網頁網址。"

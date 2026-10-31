@@ -1,0 +1,30 @@
+# POWER PROFILES
+# This file is put in the public domain.
+# rcalixte, 2023
+#
+msgid ""
+msgstr ""
+
+#. 5.4->settings-schema.json->section0->description
+msgid "General"
+msgstr ""
+
+#. 5.4->settings-schema.json->cycleProfiles->description
+msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->description
+msgid "Scroll wheel behavior"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Nothing"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles"
+msgstr ""
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles (reversed)"
+msgstr ""

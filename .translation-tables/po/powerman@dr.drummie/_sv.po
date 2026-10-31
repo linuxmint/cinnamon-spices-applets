@@ -1,0 +1,33 @@
+# Swedish translations for powerman@dr.drummie package.
+# Copyright (C) 2025 THE powerman@dr.drummie'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the powerman@dr.drummie package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: powerman@dr.drummie 1.9.10\n"
+"Report-Msgid-Bugs-To: https://github.com/drdrummie/powerman-dr.drummie\n"
+"POT-Creation-Date: 2026-04-25 10:21+0200\n"
+"PO-Revision-Date: 2025-09-06 22:34+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid ""
+"Automatically update AC/Battery brightness settings when user manually "
+"changes brightness"
+msgstr ""
+
+msgid "List of original power applets that were disabled"
+msgstr ""
+
+msgid "Remember user brightness changes"
+msgstr ""
+
+msgid ""
+"Replaced by remove button in applet menu (kept for schema compatibility)"
+msgstr ""

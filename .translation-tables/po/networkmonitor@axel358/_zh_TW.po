@@ -1,0 +1,77 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:32
+msgid "Open System Monitor"
+msgstr ""
+
+#. metadata.json->description
+msgid "Monitor network traffic"
+msgstr ""
+
+#. settings-schema.json->head->description
+msgid "Settings"
+msgstr ""
+
+#. settings-schema.json->display-style->description
+msgid "Speed display style"
+msgstr ""
+
+#. settings-schema.json->display-style->options
+msgid "Combined"
+msgstr ""
+
+#. settings-schema.json->display-style->options
+msgid "Column"
+msgstr ""
+
+#. settings-schema.json->display-style->options
+msgid "Side by side"
+msgstr ""
+
+#. settings-schema.json->display-style->options
+msgid "Download only"
+msgstr ""
+
+#. settings-schema.json->display-style->options
+msgid "Upload only"
+msgstr ""
+
+#. settings-schema.json->display-style->tooltip
+msgid "Whether to show download and upload speeds separately or combined"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->units
+msgid "milliseconds"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh interval"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid "Time between data refeshes"
+msgstr ""
+
+#. settings-schema.json->decimal-places->description
+msgid "Decimal places"
+msgstr ""
+
+#. settings-schema.json->decimal-places->tooltip
+msgid "Number of decimal places to show"
+msgstr ""
+
+#. settings-schema.json->hide-umbral->description
+msgid "Hide speed if network traffic is less than"
+msgstr ""
+
+#. settings-schema.json->hide-umbral->tooltip
+msgid ""
+"Use a compact display style if network traffic is less than the specified "
+"amount"
+msgstr ""

@@ -1,0 +1,24 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1440@jvlianodorneles\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-25 10:46-0300\n"
+"PO-Revision-Date: 2025-10-26 11:32-0300\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#: applet.js:24
+msgid "Time remaining until the end of the day"
+msgstr "Tiempo restante hasta el final del día"
+
+#: applet.js:53
+msgid "min"
+msgstr "min"
+
+#~ msgid "Keep a constant track of how many minutes you have left until the day is over, especially if you're someone striving to improve productivity — like students, professionals working with tight deadlines, or anyone trying to organize their daily routine more efficiently."
+#~ msgstr "Mantenga un seguimiento constante de cuántos minutos le quedan hasta que termine el día, especialmente si es alguien que se esfuerza por mejorar la productividad, como estudiantes, profesionales que trabajan con plazos ajustados o cualquiera que intente organizar su rutina diaria de manera más eficiente."

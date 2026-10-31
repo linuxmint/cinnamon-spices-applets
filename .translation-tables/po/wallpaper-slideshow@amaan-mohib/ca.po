@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-08 19:11+0530\n"
+"PO-Revision-Date: 2024-07-06 02:41+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#: applet.js:81
+msgid "Wallpaper Slideshow"
+msgstr "Canviador de fons de pantalla"
+
+#: applet.js:207
+msgid "The wallpaper path does not exists!"
+msgstr "La ruta del fons de pantalla no existeix!"
+
+#. settings-schema.json->head_delay->description
+#: applet.js:220
+msgid "Delay"
+msgstr "Temps d'espera"
+
+#: applet.js:238
+msgid "Open wallpapers directory"
+msgstr "Obrir el directori dels fons de pantalla"
+
+#: applet.js:251
+msgid "Next"
+msgstr "Següent"
+
+#: applet.js:260
+msgid "Previous"
+msgstr "Anterior"
+
+#. settings-schema.json->head_paused->description
+#: applet.js:273
+msgid "Paused"
+msgstr "Aturat"
+
+#: applet.js:287
+msgid "Preferences"
+msgstr "Preferències"
+
+#. metadata.json->description
+msgid "Starts a wallpaper slideshow persisting across reboots"
+msgstr "Comença una presentació de dispositives de fons de pantalla persistent entre reinicis"
+
+#. settings-schema.json->head_path->description
+msgid "Wallpaper path"
+msgstr "Ruta del fons de pantalla"
+
+#. settings-schema.json->wallpaper_path->description
+msgid "Specify path of the wallpaper directory"
+msgstr "Especifiqueu la ruta del directori de fons de pantalla"
+
+#. settings-schema.json->wallpaper_path->tooltip
+msgid "For example: /home/username/Pictures/wallpapers"
+msgstr "Per exemple: /home/usuari/Imatges/fons"
+
+#. settings-schema.json->wallpaper_delay->description
+msgid "Specify the delay to change the wallpaper (in seconds)"
+msgstr "Especifiqueu el temps d'espera entre canvis de fons de pantalla (en segons)"
+
+#. settings-schema.json->wallpaper_delay->tooltip
+msgid "For example: 86400 for 24hrs"
+msgstr "Per exemple: 86400 per 24h"
+
+#. settings-schema.json->head_timer->description
+msgid "Custom interval"
+msgstr "Interval personalitzat"
+
+#. settings-schema.json->wallpaper_custom_timer->description
+msgid "Specify a custom interval to check for updates"
+msgstr "Especifiqueu un interval de temps personalitzat per a actualitzacions"
+
+#. settings-schema.json->wallpaper_custom_timer->tooltip
+msgid "Default: 1hr"
+msgstr "Per defecte: 1h"
+
+#. settings-schema.json->wallpaper_timer->description
+msgid "Specify the interval (in seconds) to check for updates"
+msgstr "Especifiqueu l'interval en segons entre cerques d'actualitzacions"
+
+#. settings-schema.json->wallpaper_timer->tooltip
+msgid "For example: 3600 for 1hr"
+msgstr "Per exemple: 3600 per 1h"
+
+#. settings-schema.json->wallpaper_paused->description
+msgid "Pause the wallpaper slideshow"
+msgstr "Aturar el canviador de fons de pantalla"

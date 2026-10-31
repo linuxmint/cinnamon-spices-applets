@@ -1,0 +1,152 @@
+# Czech translation of redshift@marvel4u.
+# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the redshift@marvel4u applet.
+# Pavel Rehak <pavel-rehak@email.cz>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-28 05:35-0400\n"
+"PO-Revision-Date: 2018-05-07 10:10+0200\n"
+"Last-Translator: Pavel Rehak <pavel-rehak@email.cz>\n"
+"Language-Team: \n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. settings-schema.json->brightness->description
+#. applet.js:65 applet.js:235 applet.js:340
+msgid "Brightness"
+msgstr "Jas"
+
+#. metadata.json->name
+#. applet.js:84 applet.js:341
+msgid "Redshift"
+msgstr "Redshift"
+
+#. applet.js:103
+msgid "Transition on night"
+msgstr "Přechod na noc"
+
+#. applet.js:214
+msgid "Redshift day colour"
+msgstr "Redshift denní barva"
+
+#. applet.js:219
+msgid "Redshift day brightness"
+msgstr "Redshift denní jas"
+
+#. applet.js:224
+msgid "Redshift night colour"
+msgstr "Redshift noční barva"
+
+#. applet.js:229
+msgid "Redshift night brightness"
+msgstr "Redshift noční jas"
+
+#. applet.js:341
+msgid "On"
+msgstr "Zapnuto"
+
+#. applet.js:345
+msgid "Day colour temperature"
+msgstr "Denní barevná teplota"
+
+#. applet.js:346
+msgid "Night colour temperature"
+msgstr "Noční barevná teplota"
+
+#. applet.js:347
+msgid "Day Redshift brightness"
+msgstr "Denní Redshift jas"
+
+#. applet.js:348
+msgid "Night Redshift brightness"
+msgstr "Noční Redshift jas"
+
+#. applet.js:350
+#, fuzzy
+msgid "Colour temperature"
+msgstr "Denní barevná teplota"
+
+#. applet.js:351
+#, fuzzy
+msgid "Redshift brightness"
+msgstr "Denní Redshift jas"
+
+#. metadata.json->description
+msgid ""
+"An app to change the red filter level for late night screen time. Requires "
+"redshift: sudo apt-get install redshift"
+msgstr ""
+"Aplikace, která mění úroveň červeného filtru obrazovky v době pozdní noci. "
+"Vyžaduje redshift: sudo apt-get install redshift"
+
+#. settings-schema.json->panel->title
+msgid "Redshift settings"
+msgstr "Nastavení Redshift"
+
+#. settings-schema.json->brightness-section->title
+msgid "Brightness level"
+msgstr "Úroveň jasu"
+
+#. settings-schema.json->redshift-section->title
+msgid "Redshift configuration"
+msgstr "Konfigurace Redshift"
+
+#. settings-schema.json->redshift-transition-section->title
+msgid "Transition between day and night configuration"
+msgstr "Nastavení přechodu mezi dnem a nocí"
+
+#. settings-schema.json->brightness->units
+#. settings-schema.json->redshiftDayBrightness->units
+#. settings-schema.json->redshiftNightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->enabledOnStartup->description
+msgid "Redshift Enabled"
+msgstr "Redshift povolen"
+
+#. settings-schema.json->dayColour->units
+#. settings-schema.json->nightColour->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayColour->description
+msgid "Redshift Day colour temperature"
+msgstr "Redshift denní barevná teplota"
+
+#. settings-schema.json->redshiftDayBrightness->description
+msgid "Redshift Day Brightness"
+msgstr "Redshift denní jas"
+
+#. settings-schema.json->changeOnNight->description
+msgid "Change temperature colour and Redshift brightness between day and night"
+msgstr "Změnit barvu teploty a Redshift jas mezi dnem a nocí"
+
+#. settings-schema.json->nightColour->description
+msgid "Redshift Night colour temperature"
+msgstr "Redshift noční barevná teplota"
+
+#. settings-schema.json->redshiftNightBrightness->description
+msgid "Redshift Night Brightness"
+msgstr "Redshift noční jas"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "Zeměpisná šířka"
+
+#. settings-schema.json->latitude->tooltip
+#. settings-schema.json->longitude->tooltip
+msgid "If not entered Redshift would use GeoClue2 provider"
+msgstr "Není-li zadáno, Redshift použije poskytovatele GeoClue2"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "Zeměpisná délka"

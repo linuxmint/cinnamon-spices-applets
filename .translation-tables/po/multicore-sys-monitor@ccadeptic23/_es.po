@@ -1,0 +1,112 @@
+# MULTI-CORE SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-10-29 04:39+0100\n"
+"PO-Revision-Date: 2026-06-30 12:19-0400\n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
+
+#. 5.6->settings-schema.json->sectionSystemMonitor->title
+msgid "System Monitor"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionCPUStuckProcess->title
+msgid "Detection of Stuck Processes"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_alertWhenStuckProcess->description
+msgid "Change the background color when at least one process is stuck"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->description
+msgid "Method used to detect stuck processes"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->options
+msgid "From kernel only"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->options
+msgid "Check the activity of each CPU"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->options
+msgid "In either case"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_minLoadStuckProcess->description
+msgid "Consider a process to be stuck when core's load exceeds (%)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_durationStuckProcess->description
+msgid "Consider a process to be stuck after (in Selected Unit)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->description
+msgid "Selected Unit"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->options
+msgid "seconds"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->options
+msgid "minutes"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->options
+msgid "hours"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_bgColorStuckProcess->description
+msgid "Background Color when a process is stuck"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonWhichOne->description
+msgid "Which System Monitor"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonWhichOne->options
+msgid "System Default"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonWhichOne->options
+msgid "Custom"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonPath->description
+msgid "Complete name of a .desktop file or a flatpak id"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonPath->tooltip
+msgid ""
+"EXAMPLES:\n"
+"gnome-system-monitor.desktop\n"
+"org.gnome.SystemMonitor.desktop\n"
+"io.github.hakandundar34coding.system-monitoring-center"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonMouseButton->description
+msgid "Which mouse button opens your System Monitor"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonMouseButton->options
+msgid "Middle"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonMouseButton->options
+msgid "Both"
+msgstr ""

@@ -1,0 +1,19 @@
+# BING DESKTOP WALLPAPER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Starcross, 2019
+#
+msgid ""
+msgstr ""
+
+#. applet.js:50
+msgid "Refresh Now"
+msgstr ""
+
+#. metadata.json->name
+msgid "Bing Desktop Wallpaper"
+msgstr ""
+
+#. metadata.json->description
+msgid "Download and apply Today's Bing Wallpaper to your desktop"
+msgstr ""
