@@ -1,0 +1,7 @@
+.nsm-box { padding: 0 3px; spacing: 4px; }
+.nsm-text-box { spacing: 0; }
+.nsm-label { font-family: "DejaVu Sans Mono", monospace; font-size: 8.5pt; }
+.nsm-label-inline { font-family: "DejaVu Sans Mono", monospace; font-size: 9pt; }
+.nsm-menu-title { font-weight: bold; }
+.nsm-menu-mono { font-family: "DejaVu Sans Mono", monospace; font-size: 9pt; }
+.nsm-menu-dim { font-size: 8.5pt; color: rgba(160,160,160,1); }
