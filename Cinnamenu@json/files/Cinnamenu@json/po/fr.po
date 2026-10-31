@@ -5,11 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Project-Id-Version: Cinnamenu@json 5.7\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2026-10-30 03:10+0000\n"
-"PO-Revision-Date: 2025-11-30 12:50+0100\n"
+"PO-Revision-Date: 2026-10-31 07:58+0100\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -210,7 +209,7 @@ msgstr "Info App"
 
 #. 4.0/contextmenu.js:331 5.8/contextmenu.js:377
 msgid "Properties"
-msgstr ""
+msgstr "Propriétés"
 
 #. 4.0/contextmenu.js:349 5.8/contextmenu.js:450
 msgid "This file is no longer available"
@@ -303,9 +302,8 @@ msgid "Lock the screen"
 msgstr "Verrouille l'écran"
 
 #. 5.8/applet.js:1032
-#, fuzzy
 msgid "Loading..."
-msgstr "Recherche en cours..."
+msgstr "Chargement..."
 
 #. 5.8/applet.js:1218
 msgid "Files"
@@ -313,15 +311,15 @@ msgstr "Fichiers"
 
 #. 5.8/applet.js:1248 5.8/applet.js:1254
 msgid "Calculator: "
-msgstr ""
+msgstr "Calculatrice : "
 
 #. 5.8/applet.js:1429 5.8/applet.js:1956
 msgid "Click to insert emoji"
-msgstr ""
+msgstr "Cliquez pour insérer un émoji"
 
 #. 5.8/applet.js:1926
 msgid "Back"
-msgstr ""
+msgstr "Précédent"
 
 #. 4.0/mint-remove-application.py:34
 msgid ""
@@ -755,62 +753,62 @@ msgstr "Option de recherche sur le Web"
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Google"
-msgstr ""
+msgstr "Google"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Bing"
-msgstr ""
+msgstr "Bing"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Baidu"
-msgstr ""
+msgstr "Baidu"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Yahoo"
-msgstr ""
+msgstr "Yahoo"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Yandex"
-msgstr ""
+msgstr "Yandex"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "DuckDuckGo"
-msgstr ""
+msgstr "DuckDuckGo"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Ask"
-msgstr ""
+msgstr "Ask"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Ecosia"
-msgstr ""
+msgstr "Ecosia"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "AOL"
-msgstr ""
+msgstr "AOL"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Startpage"
-msgstr ""
+msgstr "Startpage"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Brave"
-msgstr ""
+msgstr "Brave"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Qwant"
-msgstr ""
+msgstr "Qwant"
 
 #. 4.0->settings-schema.json->web-search-option->tooltip
 #. 5.8->settings-schema.json->web-search-option->tooltip
@@ -1031,7 +1029,6 @@ msgstr ""
 
 #. 4.0->settings-schema.json->info4->description
 #. 5.8->settings-schema.json->info5->description
-#, fuzzy
 msgid ""
 "\n"
 "• Additional key option:\n"
@@ -1040,14 +1037,12 @@ msgid ""
 msgstr ""
 "\n"
 "• Raccourcis supplémentaires :\n"
-"Ctrl-P - Ouvrir la boîte de dialogue des propriétés du lanceur de "
-"l'application sélectionnée.\n"
 "Ctrl-D - Ouvrir le fichier .desktop de l'application sélectionnée dans "
 "l'éditeur de texte par défaut.\n"
 
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Custom"
-msgstr ""
+msgstr "Personnalisé"
 
 #. 5.8->settings-schema.json->web-search-custom-url->description
 msgid "URL for custom search"
@@ -1058,10 +1053,9 @@ msgid "Enter the URL that is prepended to the search query."
 msgstr "Saisissez l'URL à ajouter en tête de la requête de recherche."
 
 #. 5.8->settings-schema.json->info2->description
-#, fuzzy
 msgid ""
 "\n"
 "• Drag and drop apps, files, and folders onto the sidebar."
 msgstr ""
 "\n"
-"• Faites glisser les catégories pour modifier leur ordre."
+"• Faites glisser applications, fichiers et dossiers vers la barre latérale."
