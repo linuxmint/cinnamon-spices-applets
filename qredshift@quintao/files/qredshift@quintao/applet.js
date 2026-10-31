@@ -15,6 +15,8 @@ const Meta = imports.gi.Meta;
 
 const Gettext = imports.gettext;
 const UUID = "qredshift@quintao";
+// The same one-shot gamma is not re-applied more often than this (see redShiftUpdate).
+const REAPPLY_SAME_MS = 10 * 60 * 1000;
 
 const HOME = GLib.get_home_dir();
 
@@ -320,6 +322,12 @@ class QRedshift extends Applet.TextIconApplet {
             // Load Information
             this.set_adjustment_methods(false);
             this.set_location(false);
+            
+            // A mode change or a new monitor resets the gamma ramps: apply right away.
+            this.monitorsChangedId = Main.layoutManager.connect('monitors-changed', () => {
+                this.lastCommand = null;
+                this.doUpdate();
+            });
             
             this.doUpdate();
             
@@ -852,6 +860,10 @@ class QRedshift extends Applet.TextIconApplet {
             Mainloop.source_remove(this.timeout);
             this.timeout = undefined;
         }
+        if (this.monitorsChangedId) {
+            Main.layoutManager.disconnect(this.monitorsChangedId);
+            this.monitorsChangedId = 0;
+        }
         
         Util.killall('redshift');
         Util.spawnCommandLine(`redshift -x`);
@@ -883,13 +895,46 @@ class QRedshift extends Applet.TextIconApplet {
      * @param {string} command
      * @param {check_period_return | null} prd
      */
-    doCommandSync(command, prd) {
+    doCommandAsync(command, prd) {
         // qLOG('QRedshift CMD',  command);
-        
-        let [success, out] = GLib.spawn_command_line_sync(command);
-        if (!success || out == null) return;
-        let resp = QUtils.byte_array_to_string(out);
-        
+        // Asynchronous: a synchronous spawn blocks Cinnamon itself (panel and compositor) for as
+        // long as the child runs. That includes Util.killall(): it runs `pkill -f` synchronously,
+        // and pkill reads the command line of every process (30-40 ms with 400 processes).
+        // So other redshift instances are stopped first and the new one starts when pkill is done;
+        // if a newer command came in meanwhile, only that one is run.
+        let seq = this.applySeq = (this.applySeq || 0) + 1;
+        let pkill = new Gio.Subprocess({
+            argv: ['pkill', '-f', '^([^ ]*/)?redshift($| )'],
+            flags: Gio.SubprocessFlags.NONE,
+        });
+        pkill.init(null);
+        pkill.wait_async(null, (obj, res) => {
+            obj.wait_finish(res);
+            if (seq === this.applySeq) {
+                this.runRedshift(command, prd);
+            }
+        });
+    }
+
+    runRedshift(command, prd) {
+        // The command is run as an argument vector, not through a shell.
+        let proc = new Gio.Subprocess({
+            argv: GLib.shell_parse_argv(command)[1],
+            flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
+        });
+        proc.init(null);
+        proc.communicate_utf8_async(null, null, (obj, res) => {
+            let out = '';
+            try {
+                out = obj.communicate_utf8_finish(res)[1] || '';
+            } catch (e) {
+                global.logError(UUID + ': ' + e);
+            }
+            this.onCommandDone(out, prd);
+        });
+    }
+    
+    onCommandDone(resp, prd) {
         try {
             let resp_array = resp.trim().split('\n');
             
@@ -907,7 +952,6 @@ class QRedshift extends Applet.TextIconApplet {
     }
     
     redShiftUpdate() {
-        Util.killall('redshift');
         if (this.opt.enabled) {
             let cmd = `redshift `;
             // cmd += `-c ${this.metadata.path + BASE_CONF}  `;
@@ -952,9 +996,19 @@ class QRedshift extends Applet.TextIconApplet {
             if (this.opt.gammaMix) cmd += `-g ${this.opt.gammaMix} `;
             
             this.set_applet_icon_symbolic_path(this.metadata.path + ICON_ON);
-            this.doCommandSync(cmd, prd);
+            // The auto update runs every autoUpdateInterval seconds, but outside transitions the
+            // gamma does not change: skip pkill + redshift when nothing would change.
+            if (cmd === this.lastCommand && Date.now() - this.lastCommandTime < REAPPLY_SAME_MS) {
+                this.updateTooltip(prd);
+                return;
+            }
+            this.lastCommand = cmd;
+            this.lastCommandTime = Date.now();
+            this.doCommandAsync(cmd, prd);
             
         } else {
+            this.lastCommand = null;
+            Util.killall('redshift');
             Util.spawnCommandLine(`redshift -x`);
             this.set_applet_icon_symbolic_path(this.metadata.path + ICON_OFF);
             this.opt.period = '-';
