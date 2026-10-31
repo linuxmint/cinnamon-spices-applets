@@ -1,0 +1,192 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "page-general"
+        ],
+        "page-general": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "section-device",
+                "section-panel",
+                "section-units",
+                "section-history",
+                "section-co2",
+                "section-outdoor"
+            ]
+        },
+        "section-device": {
+            "type": "section",
+            "title": "Device",
+            "keys": [
+                "address",
+                "interval"
+            ]
+        },
+        "section-panel": {
+            "type": "section",
+            "title": "Panel",
+            "keys": [
+                "panel_metric",
+                "show_icon",
+                "colorize"
+            ]
+        },
+        "section-units": {
+            "type": "section",
+            "title": "Units",
+            "keys": [
+                "radon_unit",
+                "temp_unit"
+            ]
+        },
+        "section-history": {
+            "type": "section",
+            "title": "History",
+            "keys": [
+                "graph_range",
+                "retention_days"
+            ]
+        },
+        "section-outdoor": {
+            "type": "section",
+            "title": "Outdoor pressure",
+            "keys": [
+                "location",
+                "outdoor_overlay"
+            ]
+        },
+        "section-co2": {
+            "type": "section",
+            "title": "Fresh air",
+            "keys": [
+                "co2_target",
+                "fast_poll"
+            ]
+        }
+    },
+    "address": {
+        "type": "entry",
+        "default": "",
+        "description": "Bluetooth address",
+        "tooltip": "For example 58:93:D8:12:34:56. Leave empty to use the nearest Airthings device; it is filled in after the first successful reading."
+    },
+    "interval": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 5,
+        "max": 120,
+        "step": 1,
+        "units": "minutes",
+        "description": "Read the sensor every",
+        "tooltip": "The Wave updates its values about every 5 minutes (radon hourly). Longer intervals save battery."
+    },
+    "panel_metric": {
+        "type": "combobox",
+        "default": "radon_st",
+        "description": "Value shown in the panel",
+        "options": {
+            "Radon (24 h average)": "radon_st",
+            "Radon (long-term)": "radon_lt",
+            "CO₂": "co2",
+            "VOC": "voc",
+            "Temperature": "temperature",
+            "Humidity": "humidity",
+            "Pressure": "pressure",
+            "Nothing (icon only)": "none"
+        }
+    },
+    "show_icon": {
+        "type": "switch",
+        "default": true,
+        "description": "Show icon"
+    },
+    "colorize": {
+        "type": "switch",
+        "default": true,
+        "description": "Colour the panel value by air quality level"
+    },
+    "radon_unit": {
+        "type": "combobox",
+        "default": "bq",
+        "description": "Radon unit",
+        "options": {
+            "Bq/m³": "bq",
+            "pCi/L": "pci"
+        }
+    },
+    "temp_unit": {
+        "type": "combobox",
+        "default": "c",
+        "description": "Temperature unit",
+        "options": {
+            "°C": "c",
+            "°F": "f"
+        }
+    },
+    "graph_range": {
+        "type": "combobox",
+        "default": "24",
+        "description": "Default graph range",
+        "options": {
+            "6 hours": "6",
+            "24 hours": "24",
+            "7 days": "168",
+            "30 days": "720",
+            "1 year": "8760"
+        }
+    },
+    "retention_days": {
+        "type": "spinbutton",
+        "default": 365,
+        "min": 7,
+        "max": 3650,
+        "step": 1,
+        "units": "days",
+        "description": "Keep history for"
+    },
+    "location": {
+        "type": "entry",
+        "default": "",
+        "description": "Location",
+        "tooltip": "Place name, e.g. \"Oslo\" or \"Oslo, NO\", or coordinates like \"59.91, 10.75\". Looked up with Open-Meteo; outdoor pressure for this place is drawn on the pressure graph."
+    },
+    "outdoor_overlay": {
+        "type": "switch",
+        "default": true,
+        "description": "Show outdoor pressure on the pressure graph"
+    },
+    "location_query": {
+        "type": "generic",
+        "default": null
+    },
+    "location_label": {
+        "type": "generic",
+        "default": null
+    },
+    "location_lat": {
+        "type": "generic",
+        "default": null
+    },
+    "location_lon": {
+        "type": "generic",
+        "default": null
+    },
+    "co2_target": {
+        "type": "spinbutton",
+        "default": 800,
+        "min": 500,
+        "max": 1500,
+        "step": 50,
+        "units": "ppm",
+        "description": "CO₂ level that counts as fresh air",
+        "tooltip": "Past airings are measured down to this level, and the estimate tells you when it will be reached again. Airthings rates CO₂ below 800 ppm as good."
+    },
+    "fast_poll": {
+        "type": "switch",
+        "default": true,
+        "description": "Read every 5 minutes while CO₂ is above that level",
+        "tooltip": "Gives a more accurate airing estimate. Uses a little more battery."
+    }
+}
