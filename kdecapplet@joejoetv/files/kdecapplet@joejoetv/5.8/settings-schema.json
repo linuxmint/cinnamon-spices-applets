@@ -60,8 +60,7 @@
                 "switch_use-custom-device-icons",
                 "icon_custom-icon-phone",
                 "icon_custom-icon-tablet",
-                "icon_custom-icon-desktop",
-                "icon_custom-icon-laptop",
+                "icon_custom-icon-computer",
                 "icon_custom-icon-tv",
                 "icon_custom-icon-fallback"
             ]
@@ -230,7 +229,7 @@
     "switch_use-custom-device-icons": {
         "type": "switch",
         "description": "Use custom icons for device items in the popup menu",
-        "tooltip": "Override the KDE Connect status icon with your own symbolic icon per device type",
+        "tooltip": "Override the KDE Connect icon with your own symbolic icon per device type",
         "default": false
     },
     "icon_custom-icon-phone": {
@@ -247,18 +246,11 @@
         "default": "tablet-symbolic",
         "dependency": "switch_use-custom-device-icons"
     },
-    "icon_custom-icon-desktop": {
+    "icon_custom-icon-computer": {
         "type": "iconfilechooser",
-        "description": "Icon for desktops",
+        "description": "Icon for desktops and laptops",
         "tooltip": "e.g. computer-symbolic",
         "default": "computer-symbolic",
-        "dependency": "switch_use-custom-device-icons"
-    },
-    "icon_custom-icon-laptop": {
-        "type": "iconfilechooser",
-        "description": "Icon for laptops",
-        "tooltip": "e.g. laptop-symbolic",
-        "default": "laptop-symbolic",
         "dependency": "switch_use-custom-device-icons"
     },
     "icon_custom-icon-tv": {

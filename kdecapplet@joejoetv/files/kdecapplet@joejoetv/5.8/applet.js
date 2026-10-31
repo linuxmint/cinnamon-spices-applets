@@ -108,7 +108,6 @@ const KDEConnectDeviceInterface = '\
         <property name="type" type="s" access="read" /> \
         <property name="name" type="s" access="read" /> \
         <property name="iconName" type="s" access="read" /> \
-        <property name="statusIconName" type="s" access="read" /> \
         <property name="isReachable" type="b" access="read" /> \
         <property name="supportedPlugins" type="as" access="read" /> \
         <signal name="pluginsChanged"> \
@@ -121,8 +120,6 @@ const KDEConnectDeviceInterface = '\
         </signal> \
         <signal name="typeChanged"> \
             <arg name="type" type="s" direction="out" /> \
-        </signal> \
-        <signal name="statusIconNameChanged"> \
         </signal> \
         <method name="reloadPlugins"> \
         </method> \
@@ -180,7 +177,7 @@ class Device {
         this.type = "none"
         this.plugins = [];
         this.isReachable = false;
-        this.statusIconName = ""
+        this.iconName = ""
 
         // Setup logging
         this.#logger = new Logging.Logger(Utils.UUID, `dev:${id}`);
@@ -193,7 +190,7 @@ class Device {
             this.type = this.deviceProxy.type;
             this.isReachable = this.deviceProxy.isReachable;
             this.plugins = this.deviceProxy.loadedPluginsSync()[0];
-            this.statusIconName = this.deviceProxy.statusIconName;
+            this.iconName = this.deviceProxy.iconName;
         } catch (error) {
             this.#logger.error("Error while getting device parameters, falling back to default parameters", error);
         }
@@ -205,7 +202,6 @@ class Device {
                 this._onReachableChanged = this.deviceProxy.connectSignal("reachableChanged", this.onReachableChanged.bind(this));
                 this._onTypeChanged = this.deviceProxy.connectSignal("typeChanged", this.onTypeChanged.bind(this));
                 this._onNameChanged = this.deviceProxy.connectSignal("nameChanged", this.onNameChanged.bind(this));
-                this._onStatusIconNameChanged = this.deviceProxy.connectSignal("statusIconNameChanged", this.onStatusIconNameChanged.bind(this));
             } catch (error) {
                 this.#logger.error("Error while connecting DBus signal callbacks", error);
             }
@@ -276,18 +272,11 @@ class Device {
     }
 
     /**
-     * @returns The current status icon name
-     */
-    getStatusIconName() {
-        return this.statusIconName;
-    }
-
-    /**
-     * Resolves the icon name to use for a device's menu item.
+     * Resolves the icon name to use for a device's menu item
      * @returns {string} The icon name
      */
     getMenuIconName() {
-        let icon = this.statusIconName;
+        let icon = this.iconName;
         if (this.applet.options.useCustomDeviceIcons) {
             switch (this.getType()) {
                 case "phone":
@@ -298,15 +287,8 @@ class Device {
                     icon = this.applet.options.customIconTablet || icon;
                     break;
                 case "desktop":
-                    // KDE Connect can report laptops as "desktop", so use the status icon name to distinguish them.
-                    if (this.statusIconName.startsWith("laptop")) {
-                        icon = this.applet.options.customIconLaptop || icon;
-                    } else {
-                        icon = this.applet.options.customIconDesktop || icon;
-                    }
-                    break;
                 case "laptop":
-                    icon = this.applet.options.customIconLaptop || icon;
+                    icon = this.applet.options.customIconComputer || icon;
                     break;
                 case "tv":
                     icon = this.applet.options.customIconTv || icon;
@@ -319,7 +301,7 @@ class Device {
     }
 
     /**
-     * Refreshes the device menu icon for reachable and unreachable devices.
+     * Refreshes the device menu icon for reachable and unreachable devices
      */
     updateMenuItemIcon() {
         const iconName = this.getMenuIconName();
@@ -385,10 +367,12 @@ class Device {
 
         this.type = type;
 
-        // Refresh the menu item icon, since custom icons depend on the device type
-        if (this.applet.options.useCustomDeviceIcons) {
-            this.updateMenuItemIcon();
+        if (this.deviceProxy) {
+            this.iconName = this.deviceProxy.iconName;
         }
+
+        // Both the custom icon and the default icon change with the device type
+        this.updateMenuItemIcon();
 
         this.emit("type-changed", type);
     }
@@ -411,24 +395,6 @@ class Device {
         }
 
         this.emit("name-changed", name);
-    }
-
-    /**
-     * Callback for the DBus 'statusIconNameChanged' signal
-     * @param {Gio.DBusProxy} proxy 
-     * @param {*} sender 
-     */
-    onStatusIconNameChanged(proxy, sender) {
-        this.#logger.debug(`Status icon changed! New icon: ${this.statusIconName}`);
-
-        if (this.deviceProxy) {
-            this.statusIconName = this.deviceProxy.statusIconName;
-
-            // Refresh using the device type and current status icon.
-            this.updateMenuItemIcon();
-
-            this.emit("statusiconname-changed");
-        }
     }
 
     /**
@@ -666,9 +632,6 @@ class Device {
             if (this._onNameChanged) {
                 this.deviceProxy.disconnectSignal(this._onNameChanged)
             }
-            if (this._onStatusIconNameChanged) {
-                this.deviceProxy.disconnectSignal(this._onStatusIconNameChanged)
-            }
         }
 
         this.#logger.debug("Destroyed!");
@@ -772,8 +735,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         this.settings.bind("switch_use-custom-device-icons", "useCustomDeviceIcons", this.onDeviceIconSettingsChanged.bind(this), "useCustomDeviceIcons");
         this.settings.bind("icon_custom-icon-phone", "customIconPhone", this.onDeviceIconSettingsChanged.bind(this), "customIconPhone");
         this.settings.bind("icon_custom-icon-tablet", "customIconTablet", this.onDeviceIconSettingsChanged.bind(this), "customIconTablet");
-        this.settings.bind("icon_custom-icon-desktop", "customIconDesktop", this.onDeviceIconSettingsChanged.bind(this), "customIconDesktop");
-        this.settings.bind("icon_custom-icon-laptop", "customIconLaptop", this.onDeviceIconSettingsChanged.bind(this), "customIconLaptop");
+        this.settings.bind("icon_custom-icon-computer", "customIconComputer", this.onDeviceIconSettingsChanged.bind(this), "customIconComputer");
         this.settings.bind("icon_custom-icon-tv", "customIconTv", this.onDeviceIconSettingsChanged.bind(this), "customIconTv");
         this.settings.bind("icon_custom-icon-fallback", "customIconFallback", this.onDeviceIconSettingsChanged.bind(this), "customIconFallback");
 
