@@ -13,17 +13,37 @@ const LAST = GLib.build_filenamev([RUNTIME, "last.json"]);
 const IDLE_ICON = "camera-photo-symbolic";
 const RECORDING_ICON = "media-record-symbolic";
 
-function readJson(path) {
-    try {
-        let [ok, bytes] = GLib.file_get_contents(path);
-        return ok ? JSON.parse(new TextDecoder().decode(bytes)) : null;
-    } catch (e) {
-        return null;
-    }
+// Resolves to the parsed JSON file, or null if it is missing or invalid.
+function loadJson(path) {
+    return new Promise(resolve => {
+        Gio.File.new_for_path(path).load_contents_async(null, (file, result) => {
+            try {
+                let [, bytes] = file.load_contents_finish(result);
+                resolve(JSON.parse(new TextDecoder().decode(bytes)));
+            } catch (e) {
+                resolve(null);
+            }
+        });
+    });
+}
+
+// Resolves to true if the path exists; a NOT_FOUND (or any other) error means false.
+function exists(path) {
+    return new Promise(resolve => {
+        Gio.File.new_for_path(path).query_info_async("standard::type", Gio.FileQueryInfoFlags.NONE,
+                                                     GLib.PRIORITY_DEFAULT, null, (file, result) => {
+            try {
+                file.query_info_finish(result);
+                resolve(true);
+            } catch (e) {
+                resolve(false);
+            }
+        });
+    });
 }
 
 function pidAlive(pid) {
-    return Number.isInteger(pid) && GLib.file_test(`/proc/${pid}`, GLib.FileTest.EXISTS);
+    return Number.isInteger(pid) ? exists(`/proc/${pid}`) : Promise.resolve(false);
 }
 
 function elapsed(seconds) {
@@ -59,6 +79,8 @@ class ScreenJourneyApplet extends Applet.TextIconApplet {
         this.hotkeyId = `${metadata.uuid}-${instanceId}`;
         this.recording = null;
         this.timer = 0;
+        this.refreshId = 0;
+        this.removed = false;
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         for (let key of ["image_dir", "video_dir", "clipboard", "video_format", "fps", "audio", "pointer",
@@ -91,9 +113,10 @@ class ScreenJourneyApplet extends Applet.TextIconApplet {
         this.itemStop = add("Stop recording", "media-playback-stop-symbolic", () => this.stopRecording());
         items.push(new PopupMenu.PopupSeparatorMenuItem());
         this.itemLast = add("Open last capture", "document-open-symbolic", () => {
-            let last = readJson(LAST);
-            if (last && last.file)
-                openPath(last.file);
+            loadJson(LAST).then(last => {
+                if (last && last.file)
+                    openPath(last.file);
+            });
         });
         add("Open screenshots folder", "folder-pictures-symbolic", () => this._openFolder("image"));
         add("Open recordings folder", "folder-videos-symbolic", () => this._openFolder("video"));
@@ -162,15 +185,22 @@ class ScreenJourneyApplet extends Applet.TextIconApplet {
             this.openOverlay();
     }
 
-    _refresh() {
-        let rec = readJson(RECORDING);
-        this.recording = rec && pidAlive(rec.pid) ? rec : null;
+    async _refresh() {
+        // The directory monitor can fire several times in a row; only the newest refresh applies.
+        let id = ++this.refreshId;
+        let [rec, last] = await Promise.all([loadJson(RECORDING), loadJson(LAST)]);
+        let [alive, lastExists] = await Promise.all([
+            rec ? pidAlive(rec.pid) : false,
+            last && last.file ? exists(last.file) : false,
+        ]);
+        if (id !== this.refreshId || this.removed)
+            return;
+        this.recording = alive ? rec : null;
 
         this.itemStop.actor.visible = !!this.recording;
         for (let item of [this.itemOverlay, this.itemShot, this.itemRecord])
             item.setSensitive(!this.recording);
-        let last = readJson(LAST);
-        this.itemLast.setSensitive(!!(last && last.file && GLib.file_test(last.file, GLib.FileTest.EXISTS)));
+        this.itemLast.setSensitive(lastExists);
 
         if (this.recording) {
             this.set_applet_icon_symbolic_name(RECORDING_ICON);
@@ -191,14 +221,20 @@ class ScreenJourneyApplet extends Applet.TextIconApplet {
     }
 
     _tick() {
-        if (!this.recording || !pidAlive(this.recording.pid)) {
+        if (!this.recording) {
             this.timer = 0;
             this._refresh();
             return GLib.SOURCE_REMOVE;
         }
-        let time = elapsed(Date.now() / 1000 - this.recording.started);
+        let rec = this.recording;
+        let time = elapsed(Date.now() / 1000 - rec.started);
         this.set_applet_label(time);
         this.set_applet_tooltip(`Recording ${time} — click to stop`);
+        // Catch a recorder that died without updating its state file.
+        pidAlive(rec.pid).then(alive => {
+            if (!alive && this.recording === rec && !this.removed)
+                this._refresh();
+        });
         return GLib.SOURCE_CONTINUE;
     }
 
@@ -212,6 +248,7 @@ class ScreenJourneyApplet extends Applet.TextIconApplet {
     }
 
     on_applet_removed_from_panel() {
+        this.removed = true;
         Main.keybindingManager.removeHotKey(this.hotkeyId);
         if (this.timer)
             GLib.source_remove(this.timer);
