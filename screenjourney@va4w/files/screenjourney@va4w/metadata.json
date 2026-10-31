@@ -1,0 +1,7 @@
+{
+    "uuid": "screenjourney@va4w",
+    "name": "ScreenJourney",
+    "description": "Screenshots and screen recordings of a selected area or the whole screen, from an on-screen overlay",
+    "version": "1.0",
+    "max-instances": 1
+}
