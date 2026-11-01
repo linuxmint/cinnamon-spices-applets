@@ -2,17 +2,24 @@
 
 # ADB TV Brightness
 
+Ive a PC attached to the lounge rooms TV (via a Samsung soundbar). Its GLORIOUS for doing programming, browsing and watching movies... and techno!
+
+BUT the brightness at night is a PITA to control via the TVs remote. That also reeks of effort. 
+
+Inspired by the other brightness Spices, I developed this to have a simple mouse-scrollable icon to increase/decrease the brightness of the TV easily :-)
+
+## HOW TO USE IT
+
 Scroll over the panel icon to adjust a compatible TV's brightness; click for a slider.
 
 ![screenshot](screenshot.png)
 
-Requires an authorised ADB connection.
-
-Tested with Cinnamon 6.6.9 and a TV exposing `global/picture_backlight` (range 0-100).
+- Requires an authorised ADB connection.
+- Tested with Cinnamon 6.6.9 and a TV exposing `global/picture_backlight` (range 0-100).
+- Android TVs differ by manufacturer.
 
 Support for other controllers must be confirmed interactively - there is a script that tests for the possible targets. Run it.
 
-Android TVs differ by manufacturer.
 
 ## ADB setup
 
@@ -33,7 +40,7 @@ Accept the authorisation prompt on the TV. The device must show `device`, not `u
 
 Devices with Wireless debugging pairing instead use `adb pair TV_IP:PAIRING_PORT` and `adb connect TV_IP:CONNECTION_PORT` with the ports shown on the TV. Some TVs do not offer either connection method. Use network debugging only on a trusted LAN.
 
-[Official Android ADB documentation](https://developer.android.com/tools/adb) (credibility: 10/10; platform-maintainer documentation).
+[Official Android ADB documentation](https://developer.android.com/tools/adb)
 
 ## Configure the applet
 
@@ -64,7 +71,7 @@ python3 discover_brightness.py
 python3 discover_brightness.py --device TV_IP:5555
 ```
 
-The inventory script reads global/system/secure settings, device properties, display/power/lights diagnostics, service names and exposed sysfs backlights. It lists matching names and current values. Modes, automatic controls, colour tuning and non-integer settings are diagnostic only.  I’ve attempted to show useful values and marked less useful ones accordingly (every TV will be different).
+The inventory script reads global/system/secure settings, device properties, display/power/lights diagnostics, service names and exposed sysfs backlights. It lists matching names and their current values. Modes, automatic controls, colour tuning and non-integer settings are diagnostic only.  I’ve attempted to show useful values and marked less useful ones accordingly (every TV will be different).
 
 <!-- -->
 **No root access or undocumented vendor service calls are attempted.**
