@@ -1,0 +1,136 @@
+# ADB TV BRIGHTNESS
+# This file is put in the public domain.
+# Evan Mcbeth, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: adb-tv-brightness@AtomicRobotMan0101 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-02 00:28+1100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:44
+msgid "Reading TV brightness…"
+msgstr ""
+
+#. applet.js:101
+msgid "TV brightness unavailable"
+msgstr ""
+
+#. applet.js:102
+#, javascript-format
+msgid "TV brightness: %s"
+msgstr ""
+
+#. applet.js:108
+msgid "Set an ADB device in Configure."
+msgstr ""
+
+#. applet.js:150
+msgid "ADB command timed out."
+msgstr ""
+
+#. applet.js:151
+msgid "Unable to run the brightness helper."
+msgstr ""
+
+#. applet.js:155
+msgid "The TV returned an invalid brightness value."
+msgstr ""
+
+#. applet.js:158
+#, javascript-format
+msgid "TV brightness: %d%%"
+msgstr ""
+
+#. applet.js:159
+#, javascript-format
+msgid "TV brightness: %d%% — scroll to adjust"
+msgstr ""
+
+#. metadata.json->name
+msgid "ADB TV Brightness"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Control a compatible ADB-connected TV backlight with panel scrolling and a "
+"slider. Includes interactive controller discovery."
+msgstr ""
+
+#. settings-schema.json->connection-header->description
+msgid "ADB connection"
+msgstr ""
+
+#. settings-schema.json->device->description
+msgid "ADB serial or TV address:port"
+msgstr ""
+
+#. settings-schema.json->device->tooltip
+msgid ""
+"Set up and authorise ADB on the TV first. Leave blank to disable "
+"communication."
+msgstr ""
+
+#. settings-schema.json->controller-header->description
+msgid "Brightness controller"
+msgstr ""
+
+#. settings-schema.json->kind->description
+msgid "Controller type"
+msgstr ""
+
+#. settings-schema.json->kind->options
+msgid "Android setting"
+msgstr ""
+
+#. settings-schema.json->kind->options
+msgid "Sysfs backlight"
+msgstr ""
+
+#. settings-schema.json->namespace->description
+msgid "Android settings namespace"
+msgstr ""
+
+#. settings-schema.json->namespace->options
+msgid "Global"
+msgstr ""
+
+#. settings-schema.json->namespace->options
+msgid "System"
+msgstr ""
+
+#. settings-schema.json->namespace->options
+msgid "Secure"
+msgstr ""
+
+#. settings-schema.json->key->description
+msgid "Setting name or sysfs brightness path"
+msgstr ""
+
+#. settings-schema.json->minimum->description
+msgid "Native minimum value"
+msgstr ""
+
+#. settings-schema.json->maximum->description
+msgid "Native maximum value"
+msgstr ""
+
+#. settings-schema.json->step->description
+msgid "Scroll step (percentage points)"
+msgstr ""
+
+#. settings-schema.json->help->description
+msgid ""
+"Use the bundled discover_brightness.py tool to identify and test a "
+"controller. Copy the confirmed values into these settings. See the bundled "
+"README.md for ADB setup."
+msgstr ""
