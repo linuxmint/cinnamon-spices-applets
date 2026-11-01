@@ -2,7 +2,7 @@
 
 Scroll over the panel icon to adjust a compatible TV's brightness; click for a
 slider. Requires Python 3 and an authorised ADB connection. Tested with Cinnamon
-6.6.9 and a TV exposing `global/picture_backlight` (range 0–100). Support for other
+6.6.9 and a TV exposing `global/picture_backlight` (range 0-100). Support for other
 controllers must be confirmed interactively; Android TVs differ by manufacturer.
 
 ## ADB setup
@@ -48,7 +48,7 @@ For the originally tested TV:
 - Name: `picture_backlight`
 - Minimum: 0; maximum: 100; scroll step: 5 percentage points
 
-The slider maps 0–100% to the native range. The applet refreshes every ten seconds,
+The slider maps 0-100% to the native range. The applet refreshes every ten seconds,
 including changes made by other tools. Existing keyboard shortcuts are untouched.
 
 ## Discover a controller
@@ -121,8 +121,8 @@ python3 -m unittest discover -s adb-tv-brightness@AtomicRobotMan0101/tests -v
 node --check adb-tv-brightness@AtomicRobotMan0101/files/adb-tv-brightness@AtomicRobotMan0101/applet.js
 ```
 
-`test-spice` installs a separate `devtest-` copy; the working applet is unaffected.
-Add that copy through Cinnamon Applets for desktop testing. Its installed folder
-has the same `devtest-` prefix when invoking discovery.
+`test-spice` installs a separate development copy; the working applet is unaffected.
+Add that copy through Cinnamon Applets for desktop testing. Run discovery from
+that copy’s installed directory.
 
 Developed by Evan Mcbeth. MIT licensed. The icon is original artwork included under the same licence.

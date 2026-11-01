@@ -81,7 +81,7 @@ def main(args):
         raise ValueError('Unknown operation')
     value = int(args[1]) if operation != 'get' else None
     if operation == 'set' and not 0 <= value <= 100:
-        raise ValueError('Brightness must be 0–100')
+        raise ValueError('Brightness must be 0-100')
     if operation == 'step' and not -100 <= value <= 100:
         raise ValueError('Too many scroll steps')
     config = validate_config(json.loads(args[2] if len(args) > 2 else '{}'))

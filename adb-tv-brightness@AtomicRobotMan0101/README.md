@@ -14,7 +14,7 @@ Scroll over the panel icon to adjust a compatible TV's brightness; click for a s
 
 Requires Python 3 and an authorised ADB connection.
 
-Tested with Cinnamon 6.6.9 and a TV exposing `global/picture_backlight` (range 0–100). Support for other controllers must be confirmed interactively; Android TVs differ by manufacturer.
+Tested with Cinnamon 6.6.9 and a TV exposing `global/picture_backlight` (range 0-100). Support for other controllers must be confirmed interactively; Android TVs differ by manufacturer.
 
 ## ADB setup
 
@@ -48,7 +48,7 @@ For the originally tested TV:
 - Name: `picture_backlight`
 - Minimum: 0; maximum: 100; scroll step: 5 percentage points
 
-The slider maps 0–100% to the native range. The applet refreshes every ten seconds, including changes made by other tools. Existing keyboard shortcuts are untouched.
+The slider maps 0-100% to the native range. The applet refreshes every ten seconds, including changes made by other tools. Existing keyboard shortcuts are untouched.
 
 ## Discover a controller
 

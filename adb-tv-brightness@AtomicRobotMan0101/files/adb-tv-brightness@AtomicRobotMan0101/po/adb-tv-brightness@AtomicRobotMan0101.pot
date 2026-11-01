@@ -53,7 +53,7 @@ msgstr ""
 
 #. applet.js:159
 #, javascript-format
-msgid "TV brightness: %d%% — scroll to adjust"
+msgid "TV brightness: %d%% - scroll to adjust"
 msgstr ""
 
 #. metadata.json->name

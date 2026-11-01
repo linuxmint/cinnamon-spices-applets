@@ -162,7 +162,7 @@ class TVBrightness extends Applet.IconApplet {
                     this._available = true;
                     this._slider.actor.reactive = true;
                     this._label.label.text = _('TV brightness: %d%%').format(response.brightness);
-                    this.set_applet_tooltip(_('TV brightness: %d%% — scroll to adjust').format(response.brightness));
+                    this.set_applet_tooltip(_('TV brightness: %d%% - scroll to adjust').format(response.brightness));
                     if (this._desired === null && !this._debounce)
                         this._slider.setValue(response.brightness / 100);
                 } catch (error) {
