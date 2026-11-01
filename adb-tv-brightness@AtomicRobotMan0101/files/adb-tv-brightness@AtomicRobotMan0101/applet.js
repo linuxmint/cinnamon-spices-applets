@@ -17,8 +17,14 @@ const ICON = 'display-brightness-symbolic';
 const PYTHON = 'python3';
 const CONFIG_KEYS = ['device', 'kind', 'namespace', 'key', 'minimum', 'maximum', 'step'];
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+const LOCALE_DIR = GLib.build_filenamev([GLib.get_user_data_dir(), 'locale']);
+const LEGACY_LOCALE_DIR = GLib.build_filenamev([GLib.get_home_dir(), '.local', 'share', 'locale']);
+
 function _(text) {
+    Gettext.bindtextdomain(UUID, LOCALE_DIR);
+    const translated = Gettext.dgettext(UUID, text);
+    if (translated !== text || LOCALE_DIR === LEGACY_LOCALE_DIR) return translated;
+    Gettext.bindtextdomain(UUID, LEGACY_LOCALE_DIR);
     return Gettext.dgettext(UUID, text);
 }
 

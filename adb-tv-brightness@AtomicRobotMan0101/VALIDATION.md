@@ -40,3 +40,8 @@ Translation generation needed polib; it was installed only into a temporary vali
 - [Submission workflow](https://github.com/linuxmint/cinnamon-spices-applets#additions)
 - [Review instructions](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/copilot-instructions.md)
 - [Contribution rules](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CONTRIBUTING.md)
+
+## Translation path fix
+
+XDG translation lookup with legacy fallback: four real CJS/gettext tests passed.
+All 12 tests, applet validation and JavaScript syntax checks passed.
