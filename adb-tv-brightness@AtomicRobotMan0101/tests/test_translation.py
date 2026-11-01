@@ -15,8 +15,7 @@ JS = '''
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 Gettext.setlocale(Gettext.LocaleCategory.ALL, '');
-const [, bytes] = GLib.file_get_contents(ARGV[0]);
-const source = imports.byteArray.toString(bytes);
+const source = ARGV[0];
 const preamble = source.slice(source.indexOf('// Editable'), source.indexOf('class TVBrightness'));
 const translate = new Function('GLib', 'Gettext', preamble + '\\nreturn _;')(GLib, Gettext);
 print(JSON.stringify(['Shared', 'Legacy only', 'XDG only', 'Missing', 'Shared'].map(translate)));
@@ -55,7 +54,7 @@ class TranslationTests(unittest.TestCase):
                 env['XDG_DATA_HOME'] = str(data)
             script = Path(temp) / 'test.js'
             script.write_text(JS)
-            result = subprocess.run([CJS, str(script), str(APPLET)], env=env, text=True, capture_output=True, check=True)
+            result = subprocess.run([CJS, str(script), APPLET.read_text()], env=env, text=True, capture_output=True, check=True)
             return json.loads(result.stdout)
 
     def test_xdg_priority_and_per_message_legacy_fallback(self):
