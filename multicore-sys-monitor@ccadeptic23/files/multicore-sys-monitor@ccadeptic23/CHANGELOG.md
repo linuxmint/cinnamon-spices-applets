@@ -1,3 +1,6 @@
+### v3.18.3~20261101
+  * Stuck processes: more information.
+
 ### v3.18.2~20261029
   * Stuck processes: some improvements.
 

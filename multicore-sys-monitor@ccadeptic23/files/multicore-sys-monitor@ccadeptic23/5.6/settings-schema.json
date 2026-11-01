@@ -230,6 +230,7 @@
       "type": "section",
       "title": "Detection of Stuck Processes",
       "keys": [
+        "CPU_explanationStuckProcess",
         "CPU_alertWhenStuckProcess",
         "CPU_stuckMethod",
         "CPU_minLoadStuckProcess",
@@ -1087,6 +1088,10 @@
     "units": "%",
     "description": "Font size: percentage of the box height"
   },
+  "CPU_explanationStuckProcess":{
+    "type": "label",
+    "description": "There are several ways to detect stuck processes:\n- through the kernel; this is reported immediately.\n- through analyzis of each CPU's activity; this is reported when at least one CPU exceeds the specified activity threshold for the set time limit.\n- through either method; the response time depends on how the stuck process was detected."
+  },
   "CPU_alertWhenStuckProcess": {
     "type": "switch",
     "default": false,
@@ -1097,8 +1102,8 @@
     "default": "kernel",
     "description": "Method used to detect stuck processes",
     "options": {
-      "From kernel only": "kernel",
-      "Check the activity of each CPU": "cpu",
+      "Only from the kernel": "kernel",
+      "Only by checking the activity of each processor": "cpu",
       "In either case": "both"
     }
   },
@@ -1109,7 +1114,9 @@
     "max": 100,
     "step": 1,
     "default": 98,
-    "description": "Consider a process to be stuck when core's load exceeds (%)"
+    "description": "Consider a process to be stuck when core's load exceeds (%)",
+    "dependency": "CPU_stuckMethod!=kernel",
+    "tooltip": "Does not concern stuck processes detected by the kernel."
   },
   "CPU_durationStuckProcess": {
     "type": "scale",
@@ -1117,7 +1124,9 @@
     "max": 60,
     "step": 1,
     "default": 10,
-    "description": "Consider a process to be stuck after (in Selected Unit)"
+    "description": "Consider a process to be stuck after (in Selected Unit)",
+    "dependency": "CPU_stuckMethod!=kernel",
+    "tooltip": "Does not concern stuck processes detected by the kernel."
   },
   "CPU_unitStuckProcess": {
     "type": "combobox",
@@ -1127,7 +1136,9 @@
       "seconds": "s",
       "minutes": "m",
       "hours": "h"
-    }
+    },
+    "dependency": "CPU_stuckMethod!=kernel",
+    "tooltip": "Does not concern stuck processes detected by the kernel."
   },
   "CPU_bgColorStuckProcess": {
     "type": "colorchooser",

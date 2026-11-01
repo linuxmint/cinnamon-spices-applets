@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-10-29 04:39+0100\n"
+"POT-Creation-Date: 2026-11-01 11:27+0100\n"
 "PO-Revision-Date: 2026-06-30 12:19-0400\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
@@ -1125,6 +1125,16 @@ msgstr "Color de Carga media crítica"
 msgid "Corner in which to display the average load"
 msgstr "Esquina en la que se muestra la Carga media"
 
+#. 5.6->settings-schema.json->CPU_explanationStuckProcess->description
+msgid ""
+"There are several ways to detect stuck processes:\n"
+"- through the kernel; this is reported immediately.\n"
+"- through analyzis of each CPU's activity; this is reported when at least "
+"one CPU exceeds the specified activity threshold for the set time limit.\n"
+"- through either method; the response time depends on how the stuck process "
+"was detected."
+msgstr ""
+
 #. 5.6->settings-schema.json->CPU_alertWhenStuckProcess->description
 msgid "Change the background color when at least one process is stuck"
 msgstr ""
@@ -1134,11 +1144,11 @@ msgid "Method used to detect stuck processes"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_stuckMethod->options
-msgid "From kernel only"
+msgid "Only from the kernel"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_stuckMethod->options
-msgid "Check the activity of each CPU"
+msgid "Only by checking the activity of each processor"
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_stuckMethod->options
@@ -1147,6 +1157,12 @@ msgstr ""
 
 #. 5.6->settings-schema.json->CPU_minLoadStuckProcess->description
 msgid "Consider a process to be stuck when core's load exceeds (%)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_minLoadStuckProcess->tooltip
+#. 5.6->settings-schema.json->CPU_durationStuckProcess->tooltip
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->tooltip
+msgid "Does not concern stuck processes detected by the kernel."
 msgstr ""
 
 #. 5.6->settings-schema.json->CPU_durationStuckProcess->description
