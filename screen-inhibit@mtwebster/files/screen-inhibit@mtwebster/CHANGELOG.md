@@ -1,3 +1,7 @@
+### v2.3.3~20261019
+  * Change default keybind: from `<control>i` to `<Primary><Super>i`.
+  * Fixes [#9139](https://github.com/linuxmint/cinnamon-spices-applets/issues/9139)
+
 ### v2.3.2~20260331
   * Works well for all versions of Cinnamon.
   * Definitely fixes [#8464](https://github.com/linuxmint/cinnamon-spices-applets/issues/8464)

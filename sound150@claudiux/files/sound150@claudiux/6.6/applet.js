@@ -398,6 +398,9 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("truncatetext", "truncatetext", () => {
             this.on_settings_changed()
         });
+        this.settings.bind("singleline", "singleline", () => {
+            this.on_settings_changed()
+        });
         this.settings.bind("toolongchars", "toolongchars", () => {
             this.on_settings_changed()
         });
@@ -937,13 +940,26 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             else
                 this._selectInputDeviceItem.menu.close();
         }
-
+        if (this.onEnterEventInterval) {
+            clearInterval(this.onEnterEventInterval);
+            this.onEnterEventInterval = null;
+        }
         this.onEnterEventInterval = setInterval( () => {
-            this.setAppletTooltip();
-            //~ this.setAppletTooltip();
-            this._applet_tooltip.show();
-
-            return this.isActorEntered;
+                // The leave-event is lost while another applet's menu holds the grab,
+                // so check where the pointer really is.
+                let [x, y] = global.get_pointer();
+                let [ax, ay] = this.actor.get_transformed_position();
+                let [w, h] = this.actor.get_transformed_size();
+                if (x < ax || x >= ax + w || y < ay || y >= ay + h) {
+                    clearInterval(this.onEnterEventInterval);
+                    this.onEnterEventInterval = null;
+                    this.isActorEntered = false;
+                    if (this._applet_tooltip)
+                        this._applet_tooltip.hide();
+                    return;
+                }
+                this.setAppletTooltip();
+                this._applet_tooltip.show();
             },
             3000
         );
@@ -951,7 +967,6 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
 
     on_leave_event(actor, event) {
         this.isActorEntered = false;
-        //~ if (this.playerControl && this._activePlayer)
         if (this._activePlayer && this._players[this._activePlayer])
             this.setAppletTextIcon(this._players[this._activePlayer], true);
         else
@@ -965,11 +980,11 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
         this.isActorEntered = false;
 
         let _to = setTimeout( () => {
+            this.isActorEntered = false;
             if (_to && source_exists(_to))
                 clearTimeout(_to);
             if (this._applet_tooltip)
                 this._applet_tooltip.hide();
-            //~ this.set_applet_tooltip("");
         }, 3000);
     }
 
@@ -2168,7 +2183,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             if (_playerArtist == _("Unknown Artist")) {
                 this.title_text = this._truncate(_playerTitle);
             } else {
-                if (this._panelHeight >= 40)
+                if (this._panelHeight >= 40 && !this.singleline)
                     this.title_text = this._truncate(_playerArtist) + "\n" + this._truncate(_playerTitle);
                 else
                     this.title_text = this._truncate(_playerTitle + ' - ' + _playerArtist);
@@ -3059,7 +3074,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
             if (this._seeker && this._seeker.status == "Paused") label = "⏸ " + this.volume;
             if (this.isHorizontal) {
                 if (this.title_text.length > 0) {
-                    if (this._panelHeight >= 60)
+                    if (this._panelHeight >= 60 && !this.singleline)
                         label += "\n" + this.title_text;
                     else
                         label += " - " + this.title_text;

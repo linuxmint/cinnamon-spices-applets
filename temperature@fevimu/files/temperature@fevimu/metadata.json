@@ -3,7 +3,6 @@
     "name": "CPU Temperature Indicator",
     "description": "Shows CPU Temperature",
     "cinnamon-version": [
-        "3.6",
         "3.8",
         "4.0",
         "4.2",

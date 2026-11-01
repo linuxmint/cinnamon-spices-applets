@@ -1,3 +1,7 @@
+### v3.3.1~20261022
+* Solves problem to access to `Configure...` option with Cinnamon 6.4.
+* Fixes [#9132](https://github.com/linuxmint/cinnamon-spices-applets/issues/9132)
+
 ### v3.3.0~20260711
 * User can set its own location (latitude and longitude).
 * This location can be calculated using geolocation by IP.

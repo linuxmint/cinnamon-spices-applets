@@ -1,0 +1,130 @@
+# DRAWER (SHOW/HIDE APPLETS)
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# mohammad-sn, 2016
+# mluna81 <lunamarcus@proton.me>, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-10-21 06:07+0100\n"
+"PO-Revision-Date: 2026-10-21 20:43-0400\n"
+"Last-Translator: mluna81\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:60 applet.js:231
+msgid "Autohide ON"
+msgstr "Ocultação automática ATIVADA"
+
+#. applet.js:62 applet.js:233
+msgid "Autohide OFF"
+msgstr "Ocultação automática DESATIVADA"
+
+#. applet.js:82
+msgid "Panel Edit mode"
+msgstr "Modo de edição do painel"
+
+#. applet.js:88
+msgid "Add applets to the panel"
+msgstr "Adicionar applets ao painel"
+
+#. settings-schema.json->autohide->description
+#. applet.js:96
+msgid "Autohide"
+msgstr "Ocultação automática"
+
+#. metadata.json->description
+msgid ""
+"hide a few applet to have a neater panel, and make them show up again by a "
+"click"
+msgstr ""
+"ocultar alguns applets para ter um painel mais organizado, e fazer com que "
+"apareçam de novo com um clique"
+
+#. metadata.json->name
+msgid "Drawer (show/hide applets)"
+msgstr "Drawer (mostrar/ocultar applets)"
+
+#. settings-schema.json->head->description
+msgid "Settings for show-hide-applets@mohammad-sn"
+msgstr "Configurações de show-hide-applets@mohammad-sn"
+
+#. settings-schema.json->autohide->tooltip
+msgid ""
+"Check it if you want to hide applets automatically, unless you should click "
+"on applet to do so.\n"
+"Its status can be changed by middle-clicking on this applet."
+msgstr ""
+"Marque se deseja ocultar os applets automaticamente, a menos que precise "
+"clicar no applet para fazê-lo.\n"
+"Seu status pode ser mudado clicando com o botão do meio do mouse neste applet."
+
+#. settings-schema.json->statusintooltip->description
+msgid "Show Autohide status in tooltip"
+msgstr ""
+"Mostrar o status de Ocultação automática nas dicas"
+
+#. settings-schema.json->disablestarttimeautohide->description
+msgid "Disable start time autohide"
+msgstr "Desativar a ocultação automática ao iniciar"
+
+#. settings-schema.json->disablestarttimeautohide->tooltip
+msgid "if not in autohide mode"
+msgstr "se não está em modo de ocultação automática"
+
+#. settings-schema.json->hidetime->units
+#. settings-schema.json->autohiderstime->units
+msgid "seconds"
+msgstr "segundos"
+
+#. settings-schema.json->hidetime->description
+msgid "Autohide after "
+msgstr "Ocultar automaticamente depois de"
+
+#. settings-schema.json->hoveractivates->description
+msgid "Activate on hover"
+msgstr "Ativar ao passar o mouse por cima"
+
+#. settings-schema.json->hoveractivates->tooltip
+msgid "show applets on mouse hover"
+msgstr "mostrar applets ao passar o mouse por cima"
+
+#. settings-schema.json->hoveractivateshide->description
+msgid "Hide on hovering again"
+msgstr "Voltar a ocultar ao passar o mouse"
+
+#. settings-schema.json->hoveractivateshide->tooltip
+msgid "toggle visibility of applets on mouse hover"
+msgstr "mudar a visibilidade dos applets ao passar o mouse por cima"
+
+#. settings-schema.json->hovertime->units
+msgid "miliseconds"
+msgstr "milissegundos"
+
+#. settings-schema.json->hovertime->description
+msgid "Hover activates/hides after "
+msgstr "Passar o mouse por cima ativa/oculta após "
+
+#. settings-schema.json->autohiders->description
+msgid "Autohide reshowing applets"
+msgstr "Ocultar automaticamente os applets reapresentados"
+
+#. settings-schema.json->autohiderstime->description
+msgid "Reshowers' autohide delay: "
+msgstr "Atraso de reativação da ocultação automática: "
+
+#. settings-schema.json->hideuntilseparator->description
+msgid "Only hide until next separator"
+msgstr "Ocultar apenas até o separador seguinte"
+
+#. settings-schema.json->hideuntilseparator->tooltip
+msgid "Only hide everything until the next separator element occurs."
+msgstr "Ocultar tudo apenas até que o elemento separador seguinte apareça."

@@ -33,7 +33,7 @@ msgstr ""
 
 #: 5.4/applet.js:327
 msgid ""
-"Both 'sox' and 'zenity' are required for this applet to have all of its "
+"Both 'sox' and 'xenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts.\n"
 "\n"
 "Please view the README for help on installing them.\n"
@@ -143,7 +143,7 @@ msgstr ""
 
 #: 3.2/applet.js:160
 msgid ""
-"'upower', 'sox' and 'zenity' are required for this applet to have all its "
+"'upower', 'sox' and 'xenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
 "\n"
 "Please read the help file on how to install them."

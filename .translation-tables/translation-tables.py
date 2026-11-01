@@ -91,8 +91,7 @@ def str2html_href(link, text):
     return '<a href="' + link + '">' + text + '</a>'
 
 def value2html_progress_image(percentage):
-    """ Creates a HTML code snippet, which links to a progress bar image to a given percentage. """
-    return '<img src="https://progress-bar.dev/' + percentage + '" alt="' + percentage + '%" />'
+    return f'<img src="../assets/progress-{percentage}.svg" alt="{percentage}%" /> {percentage}%'
 
 def progress(untranslated, translated):
     """ Calculates percentage for translation progress. """
@@ -377,9 +376,37 @@ def create_readme_locale_tables():
         language_table_file.write(get_table_close())
     language_table_file.close()
 
+def generate_progress_svg(percentage, output_path):
+    """Generates a static SVG file for a given percentage."""
+    width = 100
+    height = 16
+    filled_width = int(percentage)
+    
+    # Choose color based on progress
+    color = "#e05d44" # Red
+    if filled_width > 50: color = "#dfb317" # Yellow/Orange
+    if filled_width > 80: color = "#a4a61d" # Yellow-Green
+    if filled_width >= 100: color = "#4c1" # Bright Green
+
+    svg_content = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">
+  <rect width="{width}" height="{height}" fill="#eee"/>
+  <rect width="{filled_width}" height="{height}" fill="{color}"/>
+</svg>'''
+
+    with open(output_path, "w") as f:
+        f.write(svg_content)
 
 
 if __name__ == "__main__":
+    # Create an assets folder for the images
+    ASSETS_DIR = os.path.join(REPO_FOLDER, ".translation-tables", "assets")
+    if not os.path.isdir(ASSETS_DIR):
+        os.makedirs(ASSETS_DIR)
+
+    # Generate SVGs for 0% through 100%
+    for i in range(101):
+        generate_progress_svg(i, os.path.join(ASSETS_DIR, f"progress-{i}.svg"))
+
     #% get known lang_id and lang_name from LINGUAS
     ID2NAME = {}
     populate_id2name()

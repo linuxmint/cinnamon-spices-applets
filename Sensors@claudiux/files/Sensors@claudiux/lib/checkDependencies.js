@@ -85,6 +85,7 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
+    ["xenity", "/usr/bin/xenity", "xenity"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
@@ -92,6 +93,7 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/bin/hddtemp", "hddtemp"],
+    ["xenity", "/usr/bin/xenity", "xenity"],
     ["smartctl", "/usr/bin/smartctl", "smartmontools"]
   ],
   "debian": [
@@ -99,12 +101,14 @@ var DEPENDENCIES = {
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
+    ["xenity", "/usr/bin/xenity", "xenity"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
   "devuan": [
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
+    ["yad", "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
@@ -112,11 +116,13 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
+    ["yad", "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/fontconfig/conf.avail/66-google-noto-sans-bamum.conf", "google-noto-sans-bamum-fonts"]
   ],
   "openSUSE": [
     ["sensors", "/usr/bin/sensors",  "sensors"],
+    ["yad", "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
   ],
   "gentoo": []
@@ -142,7 +148,7 @@ if (NEEDS_FONTS_SYMBOLA) {
 
 const UPDATE = {
   "default": "sudo apt-get update",
-  "arch": "sudo pacman -Syu",
+  "arch": GLib.find_program_in_path("yay") != null ? "yay -Syu" : "sudo pacman -Syu",
   "debian": "apt-get update",
   "devuan": "apt-get update",
   "fedora": "sudo dnf update",
@@ -152,7 +158,7 @@ const UPDATE = {
 
 const INSTALL = {
   "default": "sudo apt-get install",
-  "arch": "sudo pacman -S",
+  "arch": GLib.find_program_in_path("yay") != null ? "yay -S" : "sudo pacman -S",
   "debian": "apt-get install",
   "devuan": "apt-get install",
   "fedora": "sudo dnf install",
@@ -260,7 +266,7 @@ function isOpenSUSE() {
 
 function isGentoo() {
   return Gio.file_new_for_path("/etc/gentoo-release").query_exists(null)
-} // End of isArchLinux
+} // End of isGentoo
 
 
 function is_pkexec_present() {
