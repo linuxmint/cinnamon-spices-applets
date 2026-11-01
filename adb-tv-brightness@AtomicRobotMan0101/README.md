@@ -1,12 +1,7 @@
----
-id: 6d2206ef-bbf2-48d5-b54e-9951ce827ec7
-title: README
-tags: []
-pinned: false
-created: 2026-11-01T13:37:12.238251807+00:00
-modified: 2026-11-01T13:44:08.208013022+00:00
----
 # README
+
+
+
 
 # ADB TV Brightness
 
@@ -39,7 +34,7 @@ Devices with Wireless debugging pairing instead use `adb pair TV_IP:PAIRING_PORT
 
 ## Configure the applet
 
-Right-click the icon → Configure. Enter the authorised ADB serial or TV address:port, controller type, setting name/path and verified native range. A blank device disables communication. No personal address is shipped.
+Right-click the icon --> Configure. Enter the authorised ADB serial or TV address:port, controller type, setting name/path and verified native range. A blank device disables communication. No personal address is shipped.
 
 For the originally tested TV:
 
