@@ -4,10 +4,9 @@
 
 Scroll over the panel icon to adjust a compatible TV's brightness; click for a slider.
 
-<!-- -->![TV brightness applet](screenshot.png)
+![screenshot](screenshot.png)
 
-<!-- -->
-Requires Python 3 and an authorised ADB connection.
+Requires an authorised ADB connection.
 
 Tested with Cinnamon 6.6.9 and a TV exposing `global/picture_backlight` (range 0-100).
 
