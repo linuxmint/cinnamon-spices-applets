@@ -1,8 +1,14 @@
 # Changelog
 
+
+## 1.3.4
+
+Add persistent storage for custom station icons
+Fix radio label issues when scaling is enabled
+
 ## 1.3.3
 
-* Add try/catch fallback for Gst.init to fix GJS strict type crashes
+Fix Gst.init crash
 
 ## 1.3.1 - 1.3.2
 

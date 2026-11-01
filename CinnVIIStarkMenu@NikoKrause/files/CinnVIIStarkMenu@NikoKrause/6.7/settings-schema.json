@@ -1,0 +1,360 @@
+{
+    "layout" : {
+        "type" : "layout",
+        "pages" : ["menu", "panel", "sidebar", "quicklauncher", "websearch"],
+
+        "panel" : {
+            "type" : "page",
+            "title" : "Panel",
+            "sections" : ["panel-appear", "panel-behave"]
+        },
+        "menu" : {
+            "type" : "page",
+            "title" : "Menu",
+            "sections" : ["menu-appear", "menu-icons", "menu-behave"]
+        },
+        "sidebar" : {
+            "type" : "page",
+            "title" : "Sidebar",
+            "sections" : ["sidebar-layout", "quitmenu-layout", "quicklauncher-separator-layout"]
+        },
+        "quicklauncher" : {
+            "type" : "page",
+            "title" : "Quicklauncher",
+            "sections" : ["custom-quicklauncher-places", "custom-quicklauncher-apps"]
+        },
+        "websearch" : {
+            "type" : "page",
+            "title" : "Web Search",
+            "sections" : ["web-search-engine"]
+        },
+        "panel-appear" : {
+            "type" : "section",
+            "title" : "Appearance",
+            "keys" : ["menu-custom", "menu-icon", "menu-label"]
+        },
+        "panel-behave" : {
+            "type" : "section",
+            "title" : "Behavior",
+            "keys" : ["overlay-key", "activate-on-hover", "hover-delay", "enable-animation"]
+        },
+        "menu-appear" : {
+            "type" : "section",
+            "title" : "Layout and content",
+            "keys" : ["menu-layout", "show-apps-description-on-buttons", "show-places", "menu-editor-button"]
+        },
+        "menu-icons" : {
+            "type" : "section",
+            "title" : "Icons and Labels",
+            "keys" : ["show-category-icons", "show-application-icons", "show-favorite-icons", "favorite-button-size", "all-programs-label", "favorites-label"]
+        },
+        "menu-behave" : {
+            "type" : "section",
+            "title" : "Behavior",
+            "keys" : ["enable-autoscroll", "search-filesystem"]
+        },
+        "sidebar-layout" : {
+            "type" : "section",
+            "title" : "Sidebar Layout",
+            "keys" : ["show-sidebar", "user-box-layout", "quicklauncher-layout"]
+        },
+        "quitmenu-layout" : {
+            "type" : "section",
+            "title" : "Quit Menu Layout",
+            "keys" : ["show-shutdown-menu", "shutdown-menu-reverse-order", "shutdown-menu-layout", "shutdown-label"]
+        },
+        "quicklauncher-separator-layout" : {
+            "type" : "section",
+            "title" : "Quicklauncher Separators",
+            "keys" : ["quicklauncher-separator1", "quicklauncher-separator2", "quicklauncher-separator3"]
+        },
+        "custom-quicklauncher-places" : {
+            "type" : "section",
+            "title" : "Quicklauncher Places",
+            "keys" : ["quicklauncher-places"]
+        },
+        "custom-quicklauncher-apps" : {
+            "type" : "section",
+            "title" : "Quicklauncher Applications",
+            "keys" : ["quicklauncher-apps"]
+        },
+        "web-search-engine" : {
+            "type" : "section",
+            "title" : "Web Search Engine",
+            "keys" : ["web-search"]
+        }
+    },
+ "menu-layout" : {
+    "type": "combobox",
+    "default": "stark-menu",
+    "options": {
+        "Stark-Menu": "stark-menu",
+        "MATE-Menu": "mate-menu"
+     },
+    "description" : "Menu layout",
+    "tooltip" : "Choose between Stark-Menu and MATE-Menu layout"
+ },
+ "overlay-key" : {
+    "type" : "keybinding",
+    "description" : "Keyboard shortcut to open and close the menu",
+    "default" : "Super_L::Super_R"
+ },
+ "menu-custom" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Use a custom icon and label",
+    "tooltip" : "Check this to specify a custom icon and label"
+ },
+ "menu-icon" : {
+    "type" : "iconfilechooser",
+    "default" : "cinnamon-symbolic",
+    "description" : "Icon",
+    "tooltip" : "Select an icon to show in the panel.",
+    "dependency" : "menu-custom",
+    "indent" : true
+ },
+ "menu-label" : {
+    "type" : "entry",
+    "default" : "Menu",
+    "description" : "Text",
+    "tooltip" : "Enter custom text to show in the panel.",
+    "dependency" : "menu-custom",
+    "indent": true
+ },
+ "all-programs-label" : {
+    "type" : "entry",
+    "default" : "All Programs",
+    "description" : "'All Programs'-Button label",
+    "tooltip" : "Enter custom text for the 'All Programs' button."
+ },
+ "favorites-label" : {
+    "type" : "entry",
+    "default" : "Favorites",
+    "description" : "'Favorites'-Button label",
+    "tooltip" : "Enter custom text for the 'Favorites' button."
+ },
+ "show-apps-description-on-buttons" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Show application's description under their titles",
+    "tooltip" : "Choose whether or not to show the application description on the application buttons."
+ },
+ "show-places" : {
+    "type" : "switch",
+    "default" : false,
+    "description": "Show bookmarks and places",
+    "tooltip": "Choose whether or not to show bookmarks and places in the menu."
+ },
+ "enable-autoscroll" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Enable autoscrolling in application list",
+    "tooltip": "Choose whether or not to enable smooth autoscrolling in the application list."
+ },
+ "search-filesystem" : {
+    "type" : "switch",
+    "default" : false,
+    "description": "Enable filesystem path entry in search box",
+    "tooltip": "Allows path entry in the menu search box."
+ },
+ "activate-on-hover" : {
+    "type" : "switch",
+    "default" : false,
+    "description": "Open the menu when I move my mouse over it",
+    "tooltip": "Enable opening the menu when the mouse enters the applet"
+ },
+ "hover-delay" : {
+    "type": "spinbutton",
+    "default" : 0,
+    "min" : 0,
+    "max" : 1000,
+    "step" : 50,
+    "units" : "milliseconds",
+    "dependency" : "activate-on-hover",
+    "description" : "Menu hover delay",
+    "tooltip" : "Delay before the menu opens when hovered"
+ },
+ "enable-animation" : {
+    "type": "switch",
+    "default": false,
+    "description": "Use menu animations",
+    "tooltip": "Allow the menu to animate on open and close"
+ },
+ "menu-editor-button" : {
+    "type" : "button",
+    "description" : "Open the menu editor",
+    "callback" : "_launch_editor",
+    "tooltip" : "Press this button to customize your menu entries."
+ },
+ "show-category-icons" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Show category icons",
+    "tooltip" : "Choose whether or not to show icons on categories."
+ },
+ "show-application-icons" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Show application icons",
+    "tooltip" : "Choose whether or not to show icons on applications."
+ },
+ "show-favorite-icons" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Show favorite icons",
+    "tooltip" : "Choose whether or not to show icons on favorites."
+ },
+ "favorite-button-size" : {
+    "type": "spinbutton",
+    "default" : 32,
+    "min" : 12,
+    "max" : 64,
+    "step" : 1,
+    "units" : "pixels",
+    "description" : "Size of the favorite buttons",
+    "tooltip" : "Change the size of the favorite buttons"
+ },
+ "show-sidebar" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Show sidebar on menu",
+    "tooltip": "Choose whether or not to show the sidebar."
+ },
+ "user-box-layout" : {
+    "type" : "combobox",
+    "default" : "userIcon",
+    "options" : {
+        "User picture and user name": "userNameAndIcon",
+        "User picture only": "userIcon",
+        "Hide": "userHide"
+    },
+    "description" : "User account info box style",
+    "tooltip" : "Choose whether to show the user name and/or user picture.",
+    "dependency" : "show-sidebar",
+    "indent" : true
+ },
+ "quicklauncher-layout" : {
+    "type": "combobox",
+    "default": "both",
+    "options": {
+         "Icons and Labels": "both",
+         "Icons only": "icons",
+         "Labels only": "labels"
+     },
+    "description": "Quicklauncher button style",
+    "tooltip": "Choose whether to show icons and/or labels on the quicklauncher buttons.",
+    "dependency" : "show-sidebar",
+    "indent" : true
+ },
+ "show-shutdown-menu" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Show quit buttons",
+    "tooltip": "Choose whether or not to show the quit buttons."
+ },
+ "shutdown-menu-reverse-order" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Reverse quit button order",
+    "tooltip": "Choose whether to display the 'Quit' button first or last. (Has no effect on 'DropDown' layout.)",
+    "dependency" : "show-shutdown-menu",
+    "indent" : true
+ },
+ "shutdown-menu-layout" : {
+    "type": "combobox",
+    "default": "vertical",
+    "options": {
+        "DropDown": "dropdown",
+        "Vertical": "vertical",
+        "Horizontal": "horizontal"
+     },
+    "description": "Quit buttons layout",
+    "tooltip": "Choose the layout of the quit options.",
+    "dependency" : "show-shutdown-menu",
+    "indent" : true
+ },
+ "shutdown-label" : {
+    "type" : "entry",
+    "default" : "Quit",
+    "description" : "'Quit'-Button label",
+    "tooltip" : "Enter custom text for the 'Quit' button.",
+    "dependency" : "show-shutdown-menu",
+    "indent" : true
+ },
+ "quicklauncher-separator1" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Separator below user account info box",
+    "tooltip" : "Choose whether or not to show this separator."
+ },
+ "quicklauncher-places" : {
+    "type" : "list",
+    "description" : "Custom Quicklauncher Places",
+    "columns" : [
+        {"id": "checkbox",  "title": "Visible",      "type": "boolean", "default": true},
+        {"id": "directory", "title": "Directory",    "type": "file", "select-dir": true},
+        {"id": "label",     "title": "Custom Label", "type": "string"},
+        {"id": "icon",      "title": "Custom Icon",  "type": "icon"}
+    ],
+    "default" : [
+        {"checkbox": true, "directory": "~/",          "label": "Home", "icon": "user-home"},
+        {"checkbox": true, "directory": "~/Documents", "label": "",     "icon": "folder-documents"},
+        {"checkbox": true, "directory": "~/Pictures",  "label": "",     "icon": "folder-pictures"},
+        {"checkbox": true, "directory": "~/Music",     "label": "",     "icon": "folder-music"},
+        {"checkbox": true, "directory": "~/Videos",    "label": "",     "icon": "folder-videos"},
+        {"checkbox": true, "directory": "~/Downloads", "label": "",     "icon": "folder-download"}
+    ]
+ },
+ "quicklauncher-separator2" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Separator below quicklauncher places",
+    "tooltip" : "Choose whether or not to show this separator."
+ },
+ "quicklauncher-apps" : {
+    "type" : "list",
+    "description" : "Custom Quicklauncher Applications",
+    "columns" : [
+        {"id": "checkbox",  "title": "Visible",  "type": "boolean", "default": true},
+        {"id": "command",   "title": "Command", "type": "string"},
+        {"id": "label",     "title": "Custom Label",   "type": "string"},
+        {"id": "icon",      "title": "Custom Icon",    "type": "icon"}
+    ],
+    "default" : [
+        {"checkbox": true, "command": "xdg-open computer:///",  "label": "Computer", "icon": "computer"},
+        {"checkbox": true, "command": "cinnamon-settings",      "label": "System Settings", "icon": "preferences-system"},
+        {"checkbox": true, "command": "system-config-printer",  "label": "Printers", "icon": "printer"},
+        {"checkbox": true, "command": "gnome-terminal",         "label": "Terminal", "icon": "utilities-terminal"},
+        {"checkbox": true, "command": "cinnamon-settings info", "label": "System Info", "icon": "cs-details"}
+    ]
+ },
+ "quicklauncher-separator3" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Separator above quit buttons",
+    "tooltip" : "Choose whether or not to show this separator."
+ },
+ "web-search" : {
+    "type" : "list",
+    "description" : "Web Search Engine",
+    "columns" : [
+        {"id": "checkbox", "title": "Use",  "type": "boolean", "default": true},
+        {"id": "icon",     "title": "Icon", "type": "icon", "default": "web-browser"},
+        {"id": "engine",   "title": "Name", "type": "string"},
+        {"id": "url",      "title": "URL",  "type": "string"}
+    ],
+    "default" : [
+        {"checkbox": false, "icon": "web-browser", "engine": "Ask",        "url": "http://www.ask.com/web?q="},
+        {"checkbox": false, "icon": "web-browser", "engine": "Bing",       "url": "http://www.bing.com/search?q="},
+        {"checkbox": false, "icon": "web-browser", "engine": "DuckDuckGo", "url": "https://duckduckgo.com/?q="},
+        {"checkbox": false, "icon": "web-browser", "engine": "Ecosia",     "url": "https://www.ecosia.org/search?q="},
+        {"checkbox": false, "icon": "web-browser", "engine": "Google",     "url": "http://google.com/search?q="},
+        {"checkbox": false, "icon": "web-browser", "engine": "LMGTFY",     "url": "http://letmegooglethat.com/?q="},
+        {"checkbox": true,  "icon": "web-browser", "engine": "Startpage",  "url": "https://www.startpage.com/search?q="},
+        {"checkbox": false, "icon": "web-browser", "engine": "Wikipedia",  "url": "https://wikipedia.org/wiki/?search="},
+        {"checkbox": false, "icon": "web-browser", "engine": "Yahoo!",     "url": "https://search.yahoo.com/search?p="},
+        {"checkbox": false, "icon": "web-browser", "engine": "YouTube",    "url": "https://www.youtube.com/results?search_query="},
+        {"checkbox": false, "icon": "web-browser", "engine": "zbMATH",     "url": "https://zbmath.org/?q="}
+    ]
+ }
+}

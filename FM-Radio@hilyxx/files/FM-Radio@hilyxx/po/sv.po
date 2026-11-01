@@ -6,10 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FM-Radio@hilyxx 1.3.1\n"
+"Project-Id-Version: FM-Radio@hilyxx 1.3.4\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-09-09 11:13+0200\n"
+"POT-Creation-Date: 2026-09-27 15:29+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <eson@svenskasprakfiler.se>\n"
@@ -21,65 +21,65 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 
 #. metadata.json->name
-#. applet.js:68 applet.js:140 applet.js:172 applet.js:211 applet.js:214
-#. applet.js:220 applet.js:242 applet.js:244 applet.js:249 applet.js:489
-#. applet.js:541 applet.js:557 applet.js:583 applet.js:609 applet.js:630
+#. applet.js:74 applet.js:164 applet.js:196 applet.js:235 applet.js:238
+#. applet.js:244 applet.js:266 applet.js:268 applet.js:273 applet.js:513
+#. applet.js:565 applet.js:581 applet.js:607 applet.js:633 applet.js:654
 msgid "FM Radio"
 msgstr "FM Radio"
 
-#. applet.js:81
+#. applet.js:87
 msgid "Reload applet"
 msgstr "Uppdatera panelprogrammet"
 
-#. applet.js:140
+#. applet.js:164
 msgid "Please select a station."
 msgstr "Välj en station."
 
-#. applet.js:169
+#. applet.js:193
 msgid "station added successfully!"
 msgstr "stationen har lagts till!"
 
-#. applet.js:170
+#. applet.js:194
 msgid "stations added successfully!"
 msgstr "stationerna har lagts till!"
 
-#. applet.js:185
+#. applet.js:209
 msgid "Music"
 msgstr "Musik"
 
-#. applet.js:211
+#. applet.js:235
 msgid "Stations successfully saved to:\n"
 msgstr "Stationerna har sparats till:\n"
 
-#. applet.js:214
+#. applet.js:238
 msgid "Error saving backup."
 msgstr "Ett fel uppstod när säkerhetskopian skulle sparas."
 
-#. applet.js:220
+#. applet.js:244
 msgid "Please select a backup file to import first."
 msgstr "Välj en säkerhetskopia att importera först."
 
-#. applet.js:242
+#. applet.js:266
 msgid "Stations successfully restored!"
 msgstr "Stationerna har återställts!"
 
-#. applet.js:244
+#. applet.js:268
 msgid "Invalid JSON file format."
 msgstr "Ogiltigt JSON-filformat."
 
-#. applet.js:249
+#. applet.js:273
 msgid "Error reading the backup file."
 msgstr "Ett fel uppstod vid läsning av säkerhetskopian."
 
-#. applet.js:373
+#. applet.js:397
 msgid "All stations"
 msgstr "Alla radiostationer"
 
-#. applet.js:386
+#. applet.js:410
 msgid "Reconnecting..."
 msgstr "Återansluter..."
 
-#. applet.js:403
+#. applet.js:427
 msgid ""
 "Multimedia codecs are missing.\n"
 "\n"
@@ -91,39 +91,39 @@ msgstr ""
 "Vänligen installera GStreamer-plugins (good, base, bad, ugly) för din "
 "distribution för att använda radion."
 
-#. applet.js:404
+#. applet.js:428
 msgid "FM Radio Error"
 msgstr "FM-radiofel"
 
-#. applet.js:407
+#. applet.js:431
 msgid "Missing Codecs"
 msgstr "Saknade codecs"
 
-#. applet.js:429 applet.js:480
+#. applet.js:453 applet.js:504
 msgid "Waiting..."
 msgstr "Väntar..."
 
-#. applet.js:489
+#. applet.js:513
 msgid "Please start a radio station first to record it."
 msgstr "Starta en radiostation först, för att spela in den."
 
-#. applet.js:541
+#. applet.js:565
 msgid "Cannot record: This station has no valid URL."
 msgstr "Kan inte spela in: Den här stationen har ingen giltig URL."
 
-#. applet.js:557
+#. applet.js:581
 msgid "Recording started: "
 msgstr "Inspelning startad: "
 
-#. applet.js:583
+#. applet.js:607
 msgid "Error starting recording."
 msgstr "Kunde inte starta inspelning."
 
-#. applet.js:609
+#. applet.js:633
 msgid "Recording finished and saved to the /FM-Radio folder."
 msgstr "Inspelning slutförd och sparad i mappen /FM-Radio."
 
-#. channels.js:39
+#. channels.js:42
 msgid "Error"
 msgstr "Fel"
 
@@ -226,8 +226,8 @@ msgid "Stream URL"
 msgstr "Strömnings-URL"
 
 #. settings-schema.json->custom_stations->columns->title
-msgid "Image path (e.g., /home/user/logo.png)"
-msgstr "Bildsökväg (t.ex. /home/användare/logo.png"
+msgid "Image name (e.g., cover.png)"
+msgstr "Bildnamn (t.ex. cover.png)"
 
 #. settings-schema.json->info1->description
 msgid ""
@@ -237,12 +237,13 @@ msgid ""
 "• Create an image of any format (png, jpeg, or svg) with a square 'cover' "
 "style size (e.g., 300x300).\n"
 "\n"
-"• Station images are stored by default in the applet's image folder, and the "
-"path is /images/yourcover.png. For images located in another folder, apply "
-"the same process and adapt the path accordingly.\n"
+"• A folder named 'fm-radio-covers' is created in the Pictures directory to "
+"securely store your custom covers. It is not recommended to place your "
+"images directly in the applet folder, as they will be overwritten with every "
+"update.\n"
 "\n"
-"• The easiest way is to copy the desired image and paste it into the "
-"provided field; this will directly paste the image path.\n"
+"• Then simply copy the name of the image and paste it into the field "
+"provided (e.g., cover.png).\n"
 msgstr ""
 "\n"
 "För att skapa en anpassad bild för en radiostation:\n"
@@ -250,12 +251,13 @@ msgstr ""
 "• Skapa en bild i valfritt format (png, jpeg eller svg) med en kvadratisk "
 "\"miniatyrstorlek\" (t.ex. 300x300).\n"
 "\n"
-"• Stationsbilder sparas som standard i panelprogrammets bildmapp, och "
-"sökvägen är /images/dinbild.png. För bilder som ligger i en annan mapp, "
-"använd samma process och anpassa sökvägen därefter.\n"
+"• En mapp med namnet 'fm-radio-covers' skapas i bildmappen för att lagra "
+"dina anpassade omslag på ett säkert sätt. Det rekommenderas inte att placera "
+"dina bilder direkt i applet-mappen, eftersom de kommer att skrivas över vid "
+"varje uppdatering.\n"
 "\n"
-"• Det enklaste sättet är att kopiera önskad bild och klistra in den i det "
-"angivna fältet, detta klistrar direkt in bildens sökväg.\n"
+"• Kopiera sedan bara bildens namn och klistra in det i det avsedda fältet "
+"(t.ex. cover.png).\n"
 
 #. settings-schema.json->info2->description
 msgid ""

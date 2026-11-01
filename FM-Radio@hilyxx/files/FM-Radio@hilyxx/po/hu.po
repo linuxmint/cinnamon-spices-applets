@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FM-Radio@hilyxx 1.3.2\n"
+"Project-Id-Version: FM-Radio@hilyxx 1.3.4\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-09-09 11:13+0200\n"
+"POT-Creation-Date: 2026-09-27 15:29+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,69 +16,69 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. metadata.json->name
-#. applet.js:68 applet.js:140 applet.js:172 applet.js:211 applet.js:214
-#. applet.js:220 applet.js:242 applet.js:244 applet.js:249 applet.js:489
-#. applet.js:541 applet.js:557 applet.js:583 applet.js:609 applet.js:630
+#. applet.js:74 applet.js:164 applet.js:196 applet.js:235 applet.js:238
+#. applet.js:244 applet.js:266 applet.js:268 applet.js:273 applet.js:513
+#. applet.js:565 applet.js:581 applet.js:607 applet.js:633 applet.js:654
 msgid "FM Radio"
 msgstr "FM Rádió"
 
-#. applet.js:81
+#. applet.js:87
 msgid "Reload applet"
 msgstr "Kisalkalmazás ujratöltése"
 
-#. applet.js:140
+#. applet.js:164
 msgid "Please select a station."
 msgstr "Kérjük, válasszon egy állomást."
 
-#. applet.js:169
+#. applet.js:193
 msgid "station added successfully!"
 msgstr "Az állomás sikeresen hozzáadva!"
 
-#. applet.js:170
+#. applet.js:194
 msgid "stations added successfully!"
 msgstr "Az állomások sikeresen hozzáadva!"
 
-#. applet.js:185
+#. applet.js:209
 msgid "Music"
 msgstr "Zene"
 
-#. applet.js:211
+#. applet.js:235
 msgid "Stations successfully saved to:\n"
 msgstr "Az állomások mentése sikeresen megtörtént ide:\n"
 
-#. applet.js:214
+#. applet.js:238
 msgid "Error saving backup."
 msgstr "Hiba a biztonsági mentés mentése közben."
 
-#. applet.js:220
+#. applet.js:244
 msgid "Please select a backup file to import first."
 msgstr ""
 "Kérjük, először válasszon ki egy biztonsági mentési fájlt az importáláshoz."
 
-#. applet.js:242
+#. applet.js:266
 msgid "Stations successfully restored!"
 msgstr "Az állomások sikeresen visszaállítva!"
 
-#. applet.js:244
+#. applet.js:268
 msgid "Invalid JSON file format."
 msgstr "Érvénytelen JSON fájlformátum."
 
-#. applet.js:249
+#. applet.js:273
 msgid "Error reading the backup file."
 msgstr "Hiba a biztonsági mentés fájl olvasása közben."
 
-#. applet.js:373
+#. applet.js:397
 msgid "All stations"
 msgstr "Minden állomás"
 
-#. applet.js:386
+#. applet.js:410
 msgid "Reconnecting..."
 msgstr "Újracsatlakozás..."
 
-#. applet.js:403
+#. applet.js:427
 msgid ""
 "Multimedia codecs are missing.\n"
 "\n"
@@ -90,39 +90,39 @@ msgstr ""
 "Kérjük, telepítse a GStreamer beépülő modulokat (jó, alap, rossz, csúnya) a "
 "rádió használatához."
 
-#. applet.js:404
+#. applet.js:428
 msgid "FM Radio Error"
 msgstr "FM Rádió hiba"
 
-#. applet.js:407
+#. applet.js:431
 msgid "Missing Codecs"
 msgstr "Hiányzó kodekek"
 
-#. applet.js:429 applet.js:480
+#. applet.js:453 applet.js:504
 msgid "Waiting..."
 msgstr "Várakozik..."
 
-#. applet.js:489
+#. applet.js:513
 msgid "Please start a radio station first to record it."
 msgstr "Először indítson el egy rádióállomást a felvételhez."
 
-#. applet.js:541
+#. applet.js:565
 msgid "Cannot record: This station has no valid URL."
 msgstr "Nem lehet rögzíteni: Ennek az állomásnak nincs érvényes URL-címe."
 
-#. applet.js:557
+#. applet.js:581
 msgid "Recording started: "
 msgstr "Felvétel elkezdődött: "
 
-#. applet.js:583
+#. applet.js:607
 msgid "Error starting recording."
 msgstr "Hiba a felvétel indításakor."
 
-#. applet.js:609
+#. applet.js:633
 msgid "Recording finished and saved to the /FM-Radio folder."
 msgstr "A felvétel befejeződött és mentésre került a /FM-Radio mappába."
 
-#. channels.js:39
+#. channels.js:42
 msgid "Error"
 msgstr "Hiba"
 
@@ -225,8 +225,8 @@ msgid "Stream URL"
 msgstr "Stream URL"
 
 #. settings-schema.json->custom_stations->columns->title
-msgid "Image path (e.g., /home/user/logo.png)"
-msgstr "Kép elérési útja (pl. /home/user/logo.png)"
+msgid "Image name (e.g., cover.png)"
+msgstr "Kép neve (pl. cover.png)"
 
 #. settings-schema.json->info1->description
 msgid ""
@@ -236,12 +236,13 @@ msgid ""
 "• Create an image of any format (png, jpeg, or svg) with a square 'cover' "
 "style size (e.g., 300x300).\n"
 "\n"
-"• Station images are stored by default in the applet's image folder, and the "
-"path is /images/yourcover.png. For images located in another folder, apply "
-"the same process and adapt the path accordingly.\n"
+"• A folder named 'fm-radio-covers' is created in the Pictures directory to "
+"securely store your custom covers. It is not recommended to place your "
+"images directly in the applet folder, as they will be overwritten with every "
+"update.\n"
 "\n"
-"• The easiest way is to copy the desired image and paste it into the "
-"provided field; this will directly paste the image path.\n"
+"• Then simply copy the name of the image and paste it into the field "
+"provided (e.g., cover.png).\n"
 msgstr ""
 "\n"
 "Egyéni kép létrehozása egy rádióállomáshoz:\n"
@@ -249,13 +250,13 @@ msgstr ""
 "• Hozzon létre egy képet bármilyen formátumban (png, jpeg vagy svg) négyzet "
 "alakú „borító” stílusú mérettel (pl. 300x300).\n"
 "\n"
-"• Az állomások képei alapértelmezés szerint az applet képmappájában "
-"tárolódnak, az elérési út /images/yourcover.png. Más mappában található "
-"képek esetén alkalmazza ugyanezt a folyamatot, és ennek megfelelően "
-"módosítsa az elérési utat.\n"
+"• A Képek könyvtárban létrejön egy „fm-radio-covers” nevű mappa, amely "
+"biztonságosan tárolja az egyéni borítóképeket. Nem ajánlott közvetlenül az "
+"alkalmazás mappájába helyezni a képeket, mivel minden frissítéskor "
+"felülíródnak.\n"
 "\n"
-"• A legegyszerűbb módja, ha a kívánt képet másolja, és beilleszti a megadott "
-"mezőbe; ez közvetlenül beilleszti a kép elérési útját.\n"
+"• Ezután egyszerűen másolja ki a kép nevét, és illessze be a megadott mezőbe "
+"(pl. cover.png).\n"
 
 #. settings-schema.json->info2->description
 msgid ""

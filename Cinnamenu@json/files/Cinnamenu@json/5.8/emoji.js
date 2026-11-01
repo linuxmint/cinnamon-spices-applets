@@ -1,6 +1,6 @@
 const {_} = require('./utils');
 //This list is taken from https://unicode.org/emoji/charts/emoji-list.html
-//Emoji List, v15.1
+//Emoji List, v16.0
 
 //Additional keywords are from emojilib (https://github.com/muan/emojilib) License: MIT
 
@@ -83,7 +83,7 @@ const EMOJI = [
 'kissing face',
 'face kiss love like 3 valentines infatuation'
 ],[
-'☺',
+'☺️',
 'smiling face',
 'face outlined relaxed smile blush massage happiness'
 ],[
@@ -233,7 +233,11 @@ const EMOJI = [
 ],[
 '😴',
 'sleeping face',
-'face sleep zzz tired sleepy night'
+'bed bedtime face good goodnight nap night sleep sleeping tired whatever yawn zzz'
+],[
+'🫩',
+'face with bags under eyes',
+'bags bored exhausted eyes face fatigued late sleepy tired weary'
 ],[
 '😷',
 'face with medical mask',
@@ -323,7 +327,7 @@ const EMOJI = [
 'slightly frowning face',
 'face frown frowning disappointed sad upset'
 ],[
-'☹',
+'☹️',
 'frowning face',
 'face frown sad upset'
 ],[
@@ -439,7 +443,7 @@ const EMOJI = [
 'skull',
 'death face fairy tale monster dead skeleton creepy'
 ],[
-'☠',
+'☠️',
 'skull and crossbones',
 'crossbones death face monster skull poison danger deadly scary pirate evil'
 ],[
@@ -559,7 +563,7 @@ const EMOJI = [
 'heart decoration',
 'heart purple-square love like'
 ],[
-'❣',
+'❣️',
 'heart exclamation',
 'exclamation mark punctuation decoration love'
 ],[
@@ -651,7 +655,7 @@ const EMOJI = [
 'dashing away',
 'comic dash running wind air fast shoo fart smoke puff'
 ],[
-'🕳',
+'🕳️',
 'hole',
 'embarrassing'
 ],[
@@ -663,11 +667,11 @@ const EMOJI = [
 'eye in speech bubble',
 'eye speech bubble witness info'
 ],[
-'🗨',
+'🗨️',
 'left speech bubble',
 'dialog speech words message talk chatting'
 ],[
-'🗯',
+'🗯️',
 'right anger bubble',
 'angry balloon bubble mad caption speech thinking'
 ],[
@@ -911,7 +915,7 @@ const EMOJI = [
 'eyes',
 'eye face look watch stalk peek see'
 ],[
-'👁',
+'👁️',
 'eye',
 'body face look see watch stare'
 ],[
@@ -1137,15 +1141,15 @@ const EMOJI = [
 ],[
 '🤦',
 'person facepalming',
-'disbelief exasperation face palm disappointed'
+'disbelief exasperation face palm facepalm disappointed slap hand forehead'
 ],[
 '🤦‍♂️',
 'man facepalming',
-'disbelief exasperation facepalm man male boy'
+'disbelief exasperation face palm facepalm disappointed slap hand forehead man male boy'
 ],[
 '🤦‍♀️',
 'woman facepalming',
-'disbelief exasperation facepalm woman female girl'
+'disbelief exasperation face palm facepalm disappointed slap hand forehead woman female girl'
 ],[
 '🤷',
 'person shrugging',
@@ -1851,7 +1855,7 @@ const EMOJI = [
 'horse racing',
 'horse jockey racehorse racing animal betting competition gambling luck'
 ],[
-'⛷',
+'⛷️',
 'skier',
 'ski snow sports winter'
 ],[
@@ -2183,7 +2187,7 @@ const EMOJI = [
 'family: woman, girl, girl',
 'home parents children mom mother women girl people human'
 ],[
-'🗣',
+'🗣️',
 'speaking head',
 'face head silhouette speak speaking user person human sing say talk'
 ],[
@@ -2221,7 +2225,11 @@ const EMOJI = [
 ],[
 '👣',
 'footprints',
-'clothing footprint print feet tracking walking beach'
+'barefoot clothing footprint print feet tracking walking beach'
+],[
+'🫆',
+'fingerprint',
+'clue crime detective fingerprint forensics identity mystery print safety trace'
 ],[
 '🦰',
 'red hair',
@@ -2451,7 +2459,7 @@ const EMOJI = [
 'rabbit',
 'bunny pet animal nature magic spring'
 ],[
-'🐿',
+'🐿️',
 'chipmunk',
 'squirrel animal nature rodent'
 ],[
@@ -2539,7 +2547,7 @@ const EMOJI = [
 'penguin',
 'bird animal nature'
 ],[
-'🕊',
+'🕊️',
 'dove',
 'bird fly peace animal'
 ],[
@@ -2715,11 +2723,11 @@ const EMOJI = [
 'cockroach',
 'insect pest roach pests'
 ],[
-'🕷',
+'🕷️',
 'spider',
 'insect animal arachnid'
 ],[
-'🕸',
+'🕸️',
 'spider web',
 'spider web animal insect arachnid silk'
 ],[
@@ -2759,7 +2767,7 @@ const EMOJI = [
 'lotus',
 'Buddhism flower Hinduism India purity Vietnam'
 ],[
-'🏵',
+'🏵️',
 'rosette',
 'plant flower decoration military'
 ],[
@@ -2823,7 +2831,7 @@ const EMOJI = [
 'herb',
 'leaf vegetable plant medicine weed grass lawn'
 ],[
-'☘',
+'☘️',
 'shamrock',
 'plant vegetable nature irish clover'
 ],[
@@ -2854,6 +2862,10 @@ const EMOJI = [
 '🍄',
 'mushroom',
 'mushroom toadstool fungus'
+],[
+'🪾',
+'leafless tree',
+'bare barren branches dead drought leafless tree trunk winter wood'
 ],
 
 
@@ -2959,7 +2971,7 @@ const EMOJI = [
 'ear of corn',
 'corn ear maize maze food vegetable plant'
 ],[
-'🌶',
+'🌶️',
 'hot pepper',
 'hot pepper food spicy chilli chili'
 ],[
@@ -3009,7 +3021,11 @@ const EMOJI = [
 ],[
 '🍄‍🟫',
 'brown mushroom',
-'brown mushroom food fungus nature vegetable'
+'brown food fungi fungus mushroom nature pizza portobello shiitake shroom spore sprout toppings truffle vegetable vegetarian veggie'
+],[
+'🫜',
+'root vegetable',
+'beet food garden radish root salad turnip vegetable vegetarian'
 ],[
 '🍞',
 'bread',
@@ -3375,7 +3391,7 @@ const EMOJI = [
 'chopsticks',
 'hashi jeotgarak kuaizi food'
 ],[
-'🍽',
+'🍽️',
 'fork and knife with plate',
 'cooking fork knife plate food eat meal lunch dinner restaurant'
 ],[
@@ -3419,7 +3435,7 @@ const EMOJI = [
 'globe with meridians',
 'earth globe meridians world international internet interweb i18n'
 ],[
-'🗺',
+'🗺️',
 'world map',
 'map world location direction'
 ],[
@@ -3431,11 +3447,11 @@ const EMOJI = [
 'compass',
 'magnetic navigation orienteering'
 ],[
-'🏔',
+'🏔️',
 'snow-capped mountain',
 'cold mountain snow snow capped mountain photo nature environment winter'
 ],[
-'⛰',
+'⛰️',
 'mountain',
 'photo nature environment'
 ],[
@@ -3447,35 +3463,35 @@ const EMOJI = [
 'mount fuji',
 'fuji mountain photo nature japanese'
 ],[
-'🏕',
+'🏕️',
 'camping',
 'photo outdoors tent'
 ],[
-'🏖',
+'☂️',
 'beach with umbrella',
 'beach umbrella weather summer sunny sand mojito'
 ],[
-'🏜',
+'🏜️',
 'desert',
 'photo warm saharah'
 ],[
-'🏝',
+'🏝️',
 'desert island',
 'desert island photo tropical mojito'
 ],[
-'🏞',
+'🏞️',
 'national park',
 'park photo environment nature'
 ],[
-'🏟',
+'🏟️',
 'stadium',
 'photo place sports concert venue'
 ],[
-'🏛',
+'🏛️',
 'classical building',
 'classical art culture history'
 ],[
-'🏗',
+'🏗️',
 'building construction',
 'construction wip working progress'
 ],[
@@ -3495,11 +3511,11 @@ const EMOJI = [
 'hut',
 'house roundhouse yurt structure'
 ],[
-'🏘',
+'🏘️',
 'houses',
 'buildings photo'
 ],[
-'🏚',
+'🏚️',
 'derelict house',
 'derelict house abandon evict broken building'
 ],[
@@ -3591,7 +3607,7 @@ const EMOJI = [
 'synagogue',
 'Jew Jewish religion temple judaism worship jewish'
 ],[
-'⛩',
+'⛩️',
 'shinto shrine',
 'religion shinto shrine temple japan kyoto'
 ],[
@@ -3615,7 +3631,7 @@ const EMOJI = [
 'night with stars',
 'night star evening city downtown'
 ],[
-'🏙',
+'🏙️',
 'cityscape',
 'city photo night life urban'
 ],[
@@ -3639,7 +3655,7 @@ const EMOJI = [
 'bridge at night',
 'bridge night photo sanfrancisco'
 ],[
-'♨',
+'♨️',
 'hot springs',
 'hot hotsprings springs steaming bath warm relax'
 ],[
@@ -3783,11 +3799,11 @@ const EMOJI = [
 'tractor',
 'vehicle car farming agriculture'
 ],[
-'🏎',
+'🏎️',
 'racing car',
 'car racing sports race fast formula f1'
 ],[
-'🏍',
+'🏍️',
 'motorcycle',
 'racing race sports fast'
 ],[
@@ -3827,15 +3843,15 @@ const EMOJI = [
 'bus stop',
 'bus busstop stop transportation wait'
 ],[
-'🛣',
+'🛣️',
 'motorway',
 'highway road cupertino interstate'
 ],[
-'🛤',
+'🛤️',
 'railway track',
 'railway train transportation'
 ],[
-'🛢',
+'🛢️',
 'oil drum',
 'drum oil barrell'
 ],[
@@ -3887,15 +3903,15 @@ const EMOJI = [
 'speedboat',
 'boat ship transportation vehicle summer'
 ],[
-'🛳',
+'🛳️',
 'passenger ship',
 'passenger ship yacht cruise ferry'
 ],[
-'⛴',
+'⛴️',
 'ferry',
 'boat passenger ship yacht'
 ],[
-'🛥',
+'🛥️',
 'motor boat',
 'boat motorboat ship'
 ],[
@@ -3903,11 +3919,11 @@ const EMOJI = [
 'ship',
 'boat passenger transportation titanic deploy'
 ],[
-'✈',
+'✈️',
 'airplane',
 'aeroplane vehicle transportation flight fly'
 ],[
-'🛩',
+'🛩️',
 'small airplane',
 'aeroplane airplane flight transportation fly vehicle'
 ],[
@@ -3943,7 +3959,7 @@ const EMOJI = [
 'aerial tramway',
 'aerial cable car gondola tramway transportation vehicle ski'
 ],[
-'🛰',
+'🛰️',
 'satellite',
 'space communication gps orbit spaceflight NASA ISS'
 ],[
@@ -3955,7 +3971,7 @@ const EMOJI = [
 'flying saucer',
 'UFO transportation vehicle ufo'
 ],[
-'🛎',
+'🛎️',
 'bellhop bell',
 'bell bellhop hotel service'
 ],[
@@ -3979,15 +3995,15 @@ const EMOJI = [
 'alarm clock',
 'alarm clock time wake'
 ],[
-'⏱',
+'⏱️',
 'stopwatch',
 'clock time deadline'
 ],[
-'⏲',
+'⏲️',
 'timer clock',
 'clock timer alarm'
 ],[
-'🕰',
+'🕰️',
 'mantelpiece clock',
 'clock time'
 ],[
@@ -4135,11 +4151,11 @@ const EMOJI = [
 'last quarter moon face',
 'face moon quarter nature twilight planet space night evening sleep'
 ],[
-'🌡',
+'🌡️',
 'thermometer',
 'weather temperature hot cold'
 ],[
-'☀',
+'☀️',
 'sun',
 'bright rays sunny weather nature brightness summer beach spring'
 ],[
@@ -4171,7 +4187,7 @@ const EMOJI = [
 'milky way',
 'space photo stars'
 ],[
-'☁',
+'☁️',
 'cloud',
 'weather sky'
 ],[
@@ -4179,43 +4195,43 @@ const EMOJI = [
 'sun behind cloud',
 'cloud sun weather nature cloudy morning fall spring'
 ],[
-'⛈',
+'⛈️',
 'cloud with lightning and rain',
 'cloud rain thunder weather lightning'
 ],[
-'🌤',
+'🌤️',
 'sun behind small cloud',
 'cloud sun weather'
 ],[
-'🌥',
+'🌥️',
 'sun behind large cloud',
 'cloud sun weather'
 ],[
-'🌦',
+'🌦️',
 'sun behind rain cloud',
 'cloud rain sun weather'
 ],[
-'🌧',
+'🌧️',
 'cloud with rain',
 'cloud rain weather'
 ],[
-'🌨',
+'🌨️',
 'cloud with snow',
 'cloud cold snow weather'
 ],[
-'🌩',
+'🌩️',
 'cloud with lightning',
 'cloud lightning weather thunder'
 ],[
-'🌪',
+'🌪️',
 'tornado',
 'cloud whirlwind weather cyclone twister'
 ],[
-'🌫',
+'🌫️',
 'fog',
 'cloud weather'
 ],[
-'🌬',
+'🌫️',
 'wind face',
 'blow cloud face wind gust air'
 ],[
@@ -4231,7 +4247,7 @@ const EMOJI = [
 'closed umbrella',
 'clothing rain umbrella weather drizzle'
 ],[
-'☂',
+'☂️',
 'umbrella',
 'clothing rain weather spring'
 ],[
@@ -4239,7 +4255,7 @@ const EMOJI = [
 'umbrella with rain drops',
 'clothing drop rain umbrella rainy weather spring'
 ],[
-'⛱',
+'⛱️',
 'umbrella on ground',
 'rain sun umbrella weather summer'
 ],[
@@ -4247,11 +4263,11 @@ const EMOJI = [
 'high voltage',
 'danger electric lightning voltage zap thunder weather lightning bolt fast'
 ],[
-'❄',
+'❄️',
 'snowflake',
 'cold snow winter season weather christmas xmas'
 ],[
-'☃',
+'☃️',
 'snowman',
 'cold snow winter season weather christmas xmas frozen'
 ],[
@@ -4259,7 +4275,7 @@ const EMOJI = [
 'snowman without snow',
 'cold snow snowman winter season weather christmas xmas frozen without snow'
 ],[
-'☄',
+'☄️',
 'comet',
 'space'
 ],[
@@ -4351,11 +4367,11 @@ const EMOJI = [
 'wrapped gift',
 'box celebration gift present wrapped birthday christmas xmas'
 ],[
-'🎗',
+'🎗️',
 'reminder ribbon',
 'celebration reminder ribbon sports cause support awareness'
 ],[
-'🎟',
+'🎟️',
 'admission tickets',
 'admission ticket sports concert entrance'
 ],[
@@ -4363,7 +4379,7 @@ const EMOJI = [
 'ticket',
 'admission event concert pass'
 ],[
-'🎖',
+'🎖️',
 'military medal',
 'celebration medal military award winning army'
 ],[
@@ -4467,7 +4483,7 @@ const EMOJI = [
 'flag in hole',
 'golf hole sports business flag summer'
 ],[
-'⛸',
+'⛸️',
 'ice skate',
 'ice skate sports'
 ],[
@@ -4527,7 +4543,7 @@ const EMOJI = [
 'video game',
 'controller game play console PS4'
 ],[
-'🕹',
+'🕹️',
 'joystick',
 'game video game play'
 ],[
@@ -4559,23 +4575,23 @@ const EMOJI = [
 'nesting dolls',
 'doll nesting russia matryoshka toy'
 ],[
-'♠',
+'♠️',
 'spade suit',
 'card game poker cards suits magic'
 ],[
-'♥',
+'♥️',
 'heart suit',
 'card game poker cards magic suits'
 ],[
-'♦',
+'♦️',
 'diamond suit',
 'card game poker cards magic suits'
 ],[
-'♣',
+'♣️',
 'club suit',
 'card game poker cards magic suits'
 ],[
-'♟',
+'♟️',
 'chess pawn',
 'chess dupe expendable'
 ],[
@@ -4595,7 +4611,7 @@ const EMOJI = [
 'performing arts',
 'art mask performing theater theatre acting drama'
 ],[
-'🖼',
+'🖼️',
 'framed picture',
 'art frame museum painting picture photography'
 ],[
@@ -4627,7 +4643,7 @@ const EMOJI = [
 'glasses',
 'clothing eye eyeglasses eyewear fashion accessories eyesight nerdy dork geek'
 ],[
-'🕶',
+'🕶️',
 'sunglasses',
 'dark eye eyewear glasses face cool accessories'
 ],[
@@ -4719,7 +4735,7 @@ const EMOJI = [
 'clutch bag',
 'bag clothing pouch accessories shopping'
 ],[
-'🛍',
+'🛍️',
 'shopping bags',
 'bag hotel shopping mall buy purchase'
 ],[
@@ -4791,7 +4807,7 @@ const EMOJI = [
 'military helmet',
 'army helmet military soldier warrior protection'
 ],[
-'⛑',
+'⛑️',
 'rescue worker’s helmet',
 'aid cross face hat helmet rescue worker s helmet construction build'
 ],[
@@ -4859,15 +4875,15 @@ const EMOJI = [
 'musical notes',
 'music note notes score'
 ],[
-'🎙',
+'🎙️',
 'studio microphone',
 'mic microphone music studio sing recording artist talkshow'
 ],[
-'🎚',
+'🎚️',
 'level slider',
 'level music slider scale'
 ],[
-'🎛',
+'🎛️',
 'control knobs',
 'control knobs music dial'
 ],[
@@ -4927,6 +4943,10 @@ const EMOJI = [
 'flute',
 'fife flute music pipe recorder woodwind'
 ],[
+'🪉',
+'harp',
+'cupid harp instrument love music orchestra'
+],[
 '📱',
 'mobile phone',
 'cell mobile phone telephone technology apple gadgets dial'
@@ -4935,7 +4955,7 @@ const EMOJI = [
 'mobile phone with arrow',
 'arrow cell mobile phone receive iphone incoming'
 ],[
-'☎',
+'☎️',
 'telephone',
 'phone technology communication dial'
 ],[
@@ -4967,23 +4987,23 @@ const EMOJI = [
 'laptop',
 'computer pc personal technology screen display monitor'
 ],[
-'🖥',
+'🖥️',
 'desktop computer',
 'computer desktop technology computing screen'
 ],[
-'🖨',
+'🖨️',
 'printer',
 'computer paper ink'
 ],[
-'⌨',
+'⌨️',
 'keyboard',
 'computer technology type input text'
 ],[
-'🖱',
+'🖱️',
 'computer mouse',
 'computer click'
 ],[
-'🖲',
+'🖲️',
 'trackball',
 'computer technology trackpad'
 ],[
@@ -5011,11 +5031,11 @@ const EMOJI = [
 'movie camera',
 'camera cinema movie film record'
 ],[
-'🎞',
+'🎞️',
 'film frames',
 'cinema film frames movie'
 ],[
-'📽',
+'📽️',
 'film projector',
 'cinema film movie projector video tape record'
 ],[
@@ -5051,7 +5071,7 @@ const EMOJI = [
 'magnifying glass tilted right',
 'glass magnifying search tool zoom find detective'
 ],[
-'🕯',
+'🕯️',
 'candle',
 'light fire wax'
 ],[
@@ -5123,7 +5143,7 @@ const EMOJI = [
 'newspaper',
 'news paper press headline'
 ],[
-'🗞',
+'🗞️',
 'rolled-up newspaper',
 'news newspaper paper rolled rolled up newspaper press headline'
 ],[
@@ -5135,7 +5155,7 @@ const EMOJI = [
 'bookmark',
 'mark favorite label save'
 ],[
-'🏷',
+'🏷️',
 'label',
 'sale tag'
 ],[
@@ -5179,7 +5199,7 @@ const EMOJI = [
 'chart increasing with yen',
 'chart graph growth money yen green-square presentation stats'
 ],[
-'✉',
+'✉️',
 'envelope',
 'email letter postal inbox communication'
 ],[
@@ -5227,31 +5247,31 @@ const EMOJI = [
 'postbox',
 'mail mailbox email letter envelope'
 ],[
-'🗳',
+'🗳️',
 'ballot box with ballot',
 'ballot box election vote'
 ],[
-'✏',
+'✏️',
 'pencil',
 'stationery write paper writing school study'
 ],[
-'✒',
+'✒️',
 'black nib',
 'nib pen stationery writing write'
 ],[
-'🖋',
+'🖋️',
 'fountain pen',
 'fountain pen stationery writing write'
 ],[
-'🖊',
+'🖊️',
 'pen',
 'ballpoint stationery writing write'
 ],[
-'🖌',
+'🖌️',
 'paintbrush',
 'painting drawing creativity art'
 ],[
-'🖍',
+'🖍️',
 'crayon',
 'drawing creativity'
 ],[
@@ -5271,7 +5291,7 @@ const EMOJI = [
 'open file folder',
 'file folder open documents load'
 ],[
-'🗂',
+'🗂️',
 'card index dividers',
 'card dividers index organizing business stationery'
 ],[
@@ -5283,11 +5303,11 @@ const EMOJI = [
 'tear-off calendar',
 'calendar tear off calendar schedule date planning'
 ],[
-'🗒',
+'🗒️',
 'spiral notepad',
 'note pad spiral memo stationery'
 ],[
-'🗓',
+'🗓️',
 'spiral calendar',
 'calendar pad spiral date schedule planning'
 ],[
@@ -5323,7 +5343,7 @@ const EMOJI = [
 'paperclip',
 'documents stationery'
 ],[
-'🖇',
+'🖇️',
 'linked paperclips',
 'link paperclip documents stationery'
 ],[
@@ -5335,19 +5355,19 @@ const EMOJI = [
 'triangular ruler',
 'ruler set triangle stationery math architect sketch'
 ],[
-'✂',
+'✂️',
 'scissors',
 'cutting tool stationery cut'
 ],[
-'🗃',
+'🗃️',
 'card file box',
 'box card file business stationery'
 ],[
-'🗄',
+'🗄️',
 'file cabinet',
 'cabinet file filing organizing'
 ],[
-'🗑',
+'🗑️',
 'wastebasket',
 'bin trash rubbish garbage toss'
 ],[
@@ -5371,7 +5391,7 @@ const EMOJI = [
 'key',
 'lock password door'
 ],[
-'🗝',
+'🗝️',
 'old key',
 'clue key lock old door password'
 ],[
@@ -5383,23 +5403,23 @@ const EMOJI = [
 'axe',
 'chop hatchet split wood tool cut'
 ],[
-'⛏',
+'⛏️',
 'pick',
 'mining tool tools dig'
 ],[
-'⚒',
+'⚒️',
 'hammer and pick',
 'hammer pick tool tools build create'
 ],[
-'🛠',
+'🛠️',
 'hammer and wrench',
 'hammer spanner tool wrench tools build create'
 ],[
-'🗡',
+'🗡️',
 'dagger',
 'knife weapon'
 ],[
-'⚔',
+'⚔️',
 'crossed swords',
 'crossed swords weapon'
 ],[
@@ -5415,7 +5435,7 @@ const EMOJI = [
 'bow and arrow',
 'archer arrow bow Sagittarius zodiac sports'
 ],[
-'🛡',
+'🛡️',
 'shield',
 'weapon protection security'
 ],[
@@ -5435,15 +5455,15 @@ const EMOJI = [
 'nut and bolt',
 'bolt nut tool handy tools fix'
 ],[
-'⚙',
+'⚙️',
 'gear',
 'cog cogwheel tool'
 ],[
-'🗜',
+'🗜️',
 'clamp',
 'compress tool vice'
 ],[
-'⚖',
+'⚖️',
 'balance scale',
 'balance justice Libra scale zodiac law fairness weight'
 ],[
@@ -5459,7 +5479,7 @@ const EMOJI = [
 'broken chain',
 'breaking broken chain cuffs freedom'
 ],[
-'⛓',
+'⛓️',
 'chains',
 'chain lock arrest'
 ],[
@@ -5479,7 +5499,11 @@ const EMOJI = [
 'ladder',
 'climb rung step tools'
 ],[
-'⚗',
+'🪏',
+'shovel',
+'bury dig garden hole plant scoop shovel snow spade'
+],[
+'⚗️',
 'alembic',
 'chemistry tool distilling science experiment'
 ],[
@@ -5551,11 +5575,11 @@ const EMOJI = [
 'window',
 'frame fresh air opening transparent view scenery'
 ],[
-'🛏',
+'🛏️',
 'bed',
 'hotel sleep rest'
 ],[
-'🛋',
+'🛋️',
 'couch and lamp',
 'couch hotel lamp read chill'
 ],[
@@ -5639,7 +5663,7 @@ const EMOJI = [
 'cigarette',
 'smoking kills tobacco joint smoke'
 ],[
-'⚰',
+'⚰️',
 'coffin',
 'death vampire dead die rip graveyard cemetery casket funeral box'
 ],[
@@ -5647,7 +5671,7 @@ const EMOJI = [
 'headstone',
 'cemetery grave graveyard tombstone death rip'
 ],[
-'⚱',
+'⚱️',
 'funeral urn',
 'ashes death funeral urn dead die rip'
 ],[
@@ -5727,7 +5751,7 @@ const EMOJI = [
 'left luggage',
 'baggage locker luggage blue-square travel'
 ],[
-'⚠',
+'⚠️',
 'warning',
 'exclamation wip alert error problem issue'
 ],[
@@ -5771,67 +5795,67 @@ const EMOJI = [
 'no one under eighteen',
 '18 age restriction eighteen prohibited underage drink pub night minor circle'
 ],[
-'☢',
+'☢️',
 'radioactive',
 'sign nuclear danger'
 ],[
-'☣',
+'☣️',
 'biohazard',
 'sign danger'
 ],[
-'⬆',
+'⬆️',
 'up arrow',
 'arrow cardinal direction north blue-square continue top'
 ],[
-'↗',
+'↗️',
 'up-right arrow',
 'arrow direction intercardinal northeast up right arrow blue-square point diagonal'
 ],[
-'➡',
+'➡️',
 'right arrow',
 'arrow cardinal direction east blue-square next'
 ],[
-'↘',
+'↘️',
 'down-right arrow',
 'arrow direction intercardinal southeast down right arrow blue-square diagonal'
 ],[
-'⬇',
+'⬇️',
 'down arrow',
 'arrow cardinal direction down south blue-square bottom'
 ],[
-'↙',
+'↙️',
 'down-left arrow',
 'arrow direction intercardinal southwest down left arrow blue-square diagonal'
 ],[
-'⬅',
+'⬅️',
 'left arrow',
 'arrow cardinal direction west blue-square previous back'
 ],[
-'↖',
+'↖️',
 'up-left arrow',
 'arrow direction intercardinal northwest up left arrow blue-square point diagonal'
 ],[
-'↕',
+'↕️',
 'up-down arrow',
 'arrow up down arrow blue-square direction way vertical'
 ],[
-'↔',
+'↔️',
 'left-right arrow',
 'arrow left right arrow shape direction horizontal sideways'
 ],[
-'↩',
+'↩️',
 'right arrow curving left',
 'arrow back return blue-square undo enter'
 ],[
-'↪',
+'↪️',
 'left arrow curving right',
 'arrow blue-square return rotate direction'
 ],[
-'⤴',
+'⤴️',
 'right arrow curving up',
 'arrow blue-square direction top'
 ],[
-'⤵',
+'⤵️',
 'right arrow curving down',
 'arrow down blue-square direction bottom'
 ],[
@@ -5867,39 +5891,39 @@ const EMOJI = [
 'place of worship',
 'religion worship church temple prayer'
 ],[
-'⚛',
+'⚛️',
 'atom symbol',
 'atheist atom science physics chemistry'
 ],[
-'🕉',
+'🕉️',
 'om',
 'Hindu religion hinduism buddhism sikhism jainism'
 ],[
-'✡',
+'✡️',
 'star of David',
 'David Jew Jewish religion star star of david judaism'
 ],[
-'☸',
+'☸️',
 'wheel of dharma',
 'Buddhist dharma religion wheel hinduism buddhism sikhism jainism'
 ],[
-'☯',
+'☯️',
 'yin yang',
 'religion tao taoist yang yin balance'
 ],[
-'✝',
+'✝️',
 'latin cross',
 'Christian cross religion christianity'
 ],[
-'☦',
+'☦️',
 'orthodox cross',
 'Christian cross religion suppedaneum'
 ],[
-'☪',
+'☪️',
 'star and crescent',
 'islam Muslim religion'
 ],[
-'☮',
+'☮️',
 'peace symbol',
 'peace hippie'
 ],[
@@ -5979,7 +6003,7 @@ const EMOJI = [
 'repeat single button',
 'arrow clockwise once blue-square loop'
 ],[
-'▶',
+'▶️',
 'play button',
 'arrow play right triangle blue-square direction'
 ],[
@@ -5987,15 +6011,15 @@ const EMOJI = [
 'fast-forward button',
 'arrow double fast forward fast forward button blue-square play speed continue'
 ],[
-'⏭',
+'⏭️',
 'next track button',
 'arrow next scene next track triangle forward next blue-square'
 ],[
-'⏯',
+'⏭️',
 'play or pause button',
 'arrow pause play right triangle blue-square'
 ],[
-'◀',
+'◀️',
 'reverse button',
 'arrow left reverse triangle blue-square direction'
 ],[
@@ -6003,7 +6027,7 @@ const EMOJI = [
 'fast reverse button',
 'arrow double rewind play blue-square'
 ],[
-'⏮',
+'⏮️',
 'last track button',
 'arrow previous scene previous track triangle backward'
 ],[
@@ -6023,19 +6047,19 @@ const EMOJI = [
 'fast down button',
 'arrow double down blue-square direction bottom'
 ],[
-'⏸',
+'⏸️',
 'pause button',
 'bar double pause vertical blue-square'
 ],[
-'⏹',
+'⏹️',
 'stop button',
 'square stop blue-square'
 ],[
-'⏺',
+'⏺️',
 'record button',
 'circle record blue-square'
 ],[
-'⏏',
+'⏏️',
 'eject button',
 'eject blue-square'
 ],[
@@ -6067,19 +6091,19 @@ const EMOJI = [
 'mobile phone off',
 'cell mobile off phone telephone mute orange-square silence quiet'
 ],[
-'♀',
+'♀️',
 'female sign',
 'woman women lady girl'
 ],[
-'♂',
+'♂️',
 'male sign',
 'man boy men'
 ],[
-'⚧',
+'⚧️',
 'transgender symbol',
 'transgender lgbtq'
 ],[
-'✖',
+'✖️',
 'multiply',
 '× cancel multiplication sign x multiplication sign math calculation'
 ],[
@@ -6099,15 +6123,15 @@ const EMOJI = [
 'heavy equals sign',
 'equality math equation'
 ],[
-'♾',
+'♾️',
 'infinity',
 'forever unbounded universal'
 ],[
-'‼',
+'‼️',
 'double exclamation mark',
 '! !! bangbang exclamation mark surprise'
 ],[
-'⁉',
+'⁉️',
 'exclamation question mark',
 '! !? ? exclamation interrobang mark punctuation question wat surprise'
 ],[
@@ -6127,7 +6151,7 @@ const EMOJI = [
 'red exclamation mark',
 '! exclamation mark punctuation exclamation mark heavy exclamation mark danger surprise wow warning'
 ],[
-'〰',
+'〰️',
 'wavy dash',
 'dash punctuation wavy draw line moustache mustache squiggle scribble'
 ],[
@@ -6139,15 +6163,15 @@ const EMOJI = [
 'heavy dollar sign',
 'currency dollar money sales payment buck'
 ],[
-'⚕',
+'⚕️',
 'medical symbol',
 'aesculapius medicine staff health hospital'
 ],[
-'♻',
+'♻️',
 'recycling symbol',
 'recycle arrow environment garbage trash'
 ],[
-'⚜',
+'⚜️',
 'fleur-de-lis',
 'fleur de lis decorative scout'
 ],[
@@ -6171,11 +6195,11 @@ const EMOJI = [
 'check mark button',
 '✓ button check mark green-square ok agree vote election answer tick'
 ],[
-'☑',
+'☑️',
 'check box with check',
 '✓ box check ok agree confirm black-square vote election yes tick'
 ],[
-'✔',
+'✔️',
 'check mark',
 '✓ check mark ok nike answer yes tick'
 ],[
@@ -6195,33 +6219,37 @@ const EMOJI = [
 'double curly loop',
 'curl double loop tape cassette'
 ],[
-'〽',
+'〽️',
 'part alternation mark',
 'mark part graph presentation stats business economics bad'
 ],[
-'✳',
+'✳️',
 'eight-spoked asterisk',
 '* asterisk eight spoked asterisk star sparkle green-square'
 ],[
-'✴',
+'✴️',
 'eight-pointed star',
 '* star eight pointed star orange-square shape polygon'
 ],[
-'❇',
+'❇️',
 'sparkle',
 '* stars green-square awesome good fireworks'
 ],[
-'©',
+'©️',
 'copyright',
 'c ip license circle law legal'
 ],[
-'®',
+'®️',
 'registered',
 'r alphabet circle'
 ],[
-'™',
+'™️',
 'trade mark',
 'mark tm trademark brand law legal'
+],[
+'🫟',
+'splatter',
+'drip holi ink liquid mess paint spill stain'
 ],[
 '#️⃣',
 'keycap: #',
@@ -6295,7 +6323,7 @@ const EMOJI = [
 'input latin letters',
 'abc alphabet input latin letters blue-square'
 ],[
-'🅰',
+'🅰️',
 'A button (blood type)',
 'a blood type a button red-square alphabet letter'
 ],[
@@ -6303,7 +6331,7 @@ const EMOJI = [
 'AB button (blood type)',
 'ab blood type ab button red-square alphabet'
 ],[
-'🅱',
+'🅱️',
 'B button (blood type)',
 'b blood type b button red-square alphabet letter'
 ],[
@@ -6319,7 +6347,7 @@ const EMOJI = [
 'FREE button',
 'free free button blue-square words'
 ],[
-'ℹ',
+'ℹ️',
 'information',
 'i blue-square alphabet letter'
 ],[
@@ -6327,7 +6355,7 @@ const EMOJI = [
 'ID button',
 'id identity id button purple-square words'
 ],[
-'Ⓜ',
+'Ⓜ️',
 'circled M',
 'circle m circled m alphabet blue-circle letter'
 ],[
@@ -6339,7 +6367,7 @@ const EMOJI = [
 'NG button',
 'ng ng button blue-square words shape icon'
 ],[
-'🅾',
+'🅾️',
 'O button (blood type)',
 'blood type o o button alphabet red-square letter'
 ],[
@@ -6347,7 +6375,7 @@ const EMOJI = [
 'OK button',
 'OK ok button good agree yes blue-square'
 ],[
-'🅿',
+'🅿️',
 'P button',
 'parking p button cars blue-square alphabet letter'
 ],[
@@ -6367,11 +6395,11 @@ const EMOJI = [
 'Japanese “here” button',
 '“here” Japanese katakana ココ japanese here button blue-square here japanese destination'
 ],[
-'🈂',
+'🈂️',
 'Japanese “service charge” button',
 '“service charge” Japanese katakana サ japanese service charge button japanese blue-square'
 ],[
-'🈷',
+'🈷️',
 'Japanese “monthly amount” button',
 '“monthly amount” ideograph Japanese 月 japanese monthly amount button chinese month moon japanese orange-square kanji'
 ],[
@@ -6415,11 +6443,11 @@ const EMOJI = [
 'Japanese “vacancy” button',
 '“vacancy” ideograph Japanese 空 japanese vacancy button kanji japanese chinese empty sky blue-square'
 ],[
-'㊗',
+'㊗️',
 'Japanese “congratulations” button',
 '“congratulations” ideograph Japanese 祝 japanese congratulations button chinese kanji japanese red-circle'
 ],[
-'㊙',
+'㊙️',
 'Japanese “secret” button',
 '“secret” ideograph Japanese 秘 japanese secret button privacy chinese sshh kanji red-circle'
 ],[
@@ -6503,11 +6531,11 @@ const EMOJI = [
 'white large square',
 'geometric square shape icon stone button'
 ],[
-'◼',
+'◼️',
 'black medium square',
 'geometric square shape button icon'
 ],[
-'◻',
+'◻️',
 'white medium square',
 'geometric square shape stone icon'
 ],[
@@ -6519,11 +6547,11 @@ const EMOJI = [
 'white medium-small square',
 'geometric square white medium small square shape stone icon button'
 ],[
-'▪',
+'▪️',
 'black small square',
 'geometric square shape icon'
 ],[
-'▫',
+'▫️',
 'white small square',
 'geometric square shape icon'
 ],[
@@ -6587,7 +6615,7 @@ const EMOJI = [
 'black flag',
 'waving pirate'
 ],[
-'🏳',
+'🏳️',
 'white flag',
 'waving losing loser lost surrender give up fail'
 ],[
@@ -6806,6 +6834,10 @@ const EMOJI = [
 '🇨🇵',
 'flag: Clipperton Island',
 'flag flag clipperton island'
+],[
+'🇨🇶',
+'flag: Sark',
+'flag flag sark'
 ],[
 '🇨🇷',
 'flag: Costa Rica',

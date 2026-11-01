@@ -31,7 +31,9 @@ const {getChromiumProfileDirs} = require('./utils');
 let Gda = null;
 try {
     Gda = imports.gi.Gda;
-} catch(e) {}
+} catch(e) {
+    log("Cinnamenu: Can't read firefox bookmarks, libgda not installed");
+}
 
 const readFileAsync = function(file, opts = {utf8: true}) {
     const {utf8} = opts;
@@ -82,42 +84,49 @@ const readFirefoxBookmarks = function(appInfo, profileDir) {
             'WHERE moz_bookmarks.fk NOT NULL AND moz_bookmarks.title NOT ' +
             'NULL AND moz_bookmarks.type = 1'
         );
-    } catch(e) {}
 
-    // Gda binding seems buggy on Ubuntu 18.04 with error:
-    // "Unsupported type void, deriving from fundamental void"
-    if (!result) return [];
+        // Gda binding seems buggy on Ubuntu 18.04 with error:
+        // "Unsupported type void, deriving from fundamental void"
+        if (!result) return [];
 
-    let nRows = result.get_n_rows();
+        let nRows = result.get_n_rows();
 
-    const handleMeta = function(result, row) {
-        try {
-            return [result.get_value_at(0, row),
-                    result.get_value_at(1, row)];
-        } catch(e) {
-            return [null, null];
+        const handleMeta = function(result, row) {
+            try {
+                return [result.get_value_at(0, row),
+                        result.get_value_at(1, row)];
+            } catch(e) {
+                return [null, null];
+            }
+        };
+
+        for (let row = 0; row < nRows; row++) {
+            let [name, uri] = handleMeta(result, row);
+
+            bookmarks.push({
+                app: appInfo,
+                name: name.replace(/\//g, '|'),
+                uri: uri
+            });
         }
-    };
-
-    for (let row = 0; row < nRows; row++) {
-        let [name, uri] = handleMeta(result, row);
-
-        bookmarks.push({
-            app: appInfo,
-            name: name.replace(/\//g, '|'),
-            uri: uri
-        });
+    } catch(e) {
+        log("Cinnamenu: error reading firefox/librewolf bookmarks file: " + e.message);
     }
     return bookmarks;
 };
 
-function readFirefoxProfiles() {
+function readFirefoxProfiles(browser) {
     if (!Gda) return [];
 
     let profilesFile, profileDir, bookmarksFile;
-    let foundApps = Cinnamon.AppSystem.get_default().lookup_desktop_wmclass('firefox');
+    let foundApps = Cinnamon.AppSystem.get_default().lookup_desktop_wmclass(browser);
     let appInfo = foundApps.get_app_info();
-    let firefoxDir = GLib.build_filenamev([GLib.get_home_dir(), '.mozilla', 'firefox']);
+    let firefoxDir;
+    if (browser === 'firefox') {
+        firefoxDir = GLib.build_filenamev([GLib.get_home_dir(), '.mozilla', 'firefox']);
+    } else { //librewolf
+        firefoxDir = GLib.build_filenamev([GLib.get_home_dir(), '.librewolf']);
+    }
     if (!foundApps || foundApps.length === 0) {
         return [];
     }
@@ -149,7 +158,7 @@ function readFirefoxProfiles() {
             continue;
         }
 
-        if (profileName === 'default' || profileName === 'default-release') {
+        if (['default','default-release', 'default-default'].includes(profileName)) {
             if (relative) {
                 profileDir = GLib.build_filenamev([firefoxDir, path]);
             } else {
@@ -269,11 +278,13 @@ const getWebBookmarksAsync = function() {
 
             promises.push(readChromiumBookmarksFile(path, appInfo));
         });
+        
         Promise.all(promises).then((results) => {
             bookmarks = [];
             results.forEach( result => bookmarks = bookmarks.concat(result));
 
-            bookmarks = bookmarks.concat(readFirefoxProfiles());
+            bookmarks = bookmarks.concat(readFirefoxProfiles('firefox'));
+            bookmarks = bookmarks.concat(readFirefoxProfiles('librewolf'));
 
             bookmarks.forEach( bookmark => {
                 if (!bookmark.icon_filename){
@@ -299,7 +310,7 @@ const getWebBookmarksAsync = function() {
                                                 1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;  });
             resolve(bookmarks);
         }).catch( e => {
-            global.logError(e.message, e.stack);
+            global.logError(e);
             resolve([]);
         });
     });

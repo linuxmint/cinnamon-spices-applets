@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-12-01 10:57+0100\n"
+"POT-Creation-Date: 2026-09-22 14:37-0400\n"
 "PO-Revision-Date: 2025-09-16 02:23+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -20,42 +20,42 @@ msgstr ""
 msgid "missing dependencies"
 msgstr "缺少相依套件"
 
-#. applet.js:230
+#. applet.js:233
 msgid "View error details"
 msgstr ""
 
-#. applet.js:244
+#. applet.js:247
 msgid "Check for new updates"
 msgstr "檢查更新"
 
-#. applet.js:258
+#. applet.js:261
 #, javascript-format
 msgid "View %s updates"
 msgstr "檢視 %s 個更新"
 
-#. applet.js:258
+#. applet.js:261
 msgid "No updates to view"
 msgstr "沒有可檢視的更新"
 
-#. applet.js:273
+#. applet.js:276
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "升級 %s 個套件"
 
-#. applet.js:273
+#. applet.js:276
 msgid "No packages to upgrade"
 msgstr "沒有要升級的套件"
 
-#. applet.js:299
+#. applet.js:302
 msgid "Error checking for updates"
 msgstr ""
 
-#. applet.js:307
+#. applet.js:310
 #, javascript-format
 msgid "%s updates available"
 msgstr "有 %s 個可用的更新"
 
-#. applet.js:308
+#. applet.js:311
 msgid "No updates available"
 msgstr "沒有可用的更新"
 
@@ -67,11 +67,11 @@ msgstr "錯誤"
 msgid "Error log file not found."
 msgstr ""
 
-#. info-window.js:66 info-window.js:85
+#. info-window.js:75 info-window.js:94
 msgid "No details available."
 msgstr "沒有可用的詳細資訊。"
 
-#. info-window.js:68 info-window.js:87
+#. info-window.js:77 info-window.js:96
 msgid ""
 "Error:\n"
 "{0}"
@@ -79,7 +79,7 @@ msgstr ""
 "錯誤：\n"
 "{0}"
 
-#. info-window.js:72 info-window.js:91
+#. info-window.js:81 info-window.js:100
 msgid ""
 "Failed to run command:\n"
 "{0}"
@@ -87,23 +87,23 @@ msgstr ""
 "執行指令失敗：\n"
 "{0}"
 
-#. info-window.js:108
+#. info-window.js:117
 msgid "Loading update details…"
 msgstr "正在載入更新的詳細資訊…"
 
-#. info-window.js:173
+#. info-window.js:182
 msgid "Updates"
 msgstr "更新"
 
-#. info-window.js:188
+#. info-window.js:197
 msgid "Search updates…"
 msgstr "搜尋更新…"
 
-#. info-window.js:223
+#. info-window.js:232
 msgid "{0} updates"
 msgstr "{0} 個更新"
 
-#. info-window.js:251
+#. info-window.js:260
 msgid ""
 "Failed to read updates file:\n"
 "{0}"
@@ -145,8 +145,25 @@ msgstr ""
 msgid "Theme"
 msgstr "佈景主題"
 
+#. settings-schema.json->use-timer->description
+#, fuzzy
+msgid "Automatically check for updates"
+msgstr "檢查更新"
+
+#. settings-schema.json->use-timer->tooltip
+msgid ""
+"When turned off, updates will still show when checked manually or refreshed "
+"by another process"
+msgstr ""
+
 #. settings-schema.json->update-refresh->description
-msgid "Minutes to wait before refreshing updates"
+msgid "Active minutes to wait before refreshing updates"
+msgstr ""
+
+#. settings-schema.json->update-refresh->tooltip
+msgid ""
+"Refresh wait time is reset when applet or Cinnamon are reset and does not "
+"include inactive time (e.g. when computer is suspended)"
 msgstr ""
 
 #. settings-schema.json->show-firmware->description

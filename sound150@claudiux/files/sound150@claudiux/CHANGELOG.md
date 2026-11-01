@@ -1,3 +1,15 @@
+### v16.5.6~20261021
+  * Display sound volume, title and artist on a single line.
+  * Definitely fixes [#9143](https://github.com/linuxmint/cinnamon-spices-applets/issues/9143)
+
+### v16.5.5~20261020
+  * Adds ability to display title and artist on a single line.
+  * Fixes [#9143](https://github.com/linuxmint/cinnamon-spices-applets/issues/9143)
+
+### v16.5.4~20261011
+  * Volume tooltip does not stay on screen while the pointer is elsewhere.
+  * Fixes [#9103](https://github.com/linuxmint/cinnamon-spices-applets/issues/9103)
+
 ### v16.5.3~20260915
   * Avoids adding the Applications submenu twice in Cinnamon 6.6 and 6.7.
 

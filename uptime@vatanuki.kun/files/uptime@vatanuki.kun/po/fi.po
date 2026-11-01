@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-22 18:51+0200\n"
-"PO-Revision-Date: 2024-11-22 19:08+0200\n"
+"PO-Revision-Date: 2026-10-17 10:52+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: applet.js:73
 msgid "Uptime : Shows the time that have passed since last reboot."
@@ -127,7 +127,7 @@ msgstr "Ennen aikaa teksti, esimerkiksi \"Käyttöaika :\"."
 
 #. settings-schema.json->pattern->description
 msgid "Pattern (complex mode)"
-msgstr ""
+msgstr "Toimintamalli (monimutkainen)"
 
 #. settings-schema.json->pattern->tooltip
 msgid ""
