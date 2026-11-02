@@ -62,9 +62,10 @@ class AppStreamItem extends StreamVolumeItem {
         });
         ellipsizeLabel(this._nameLabel, 88);
 
+        this.removeActor(this._slider);
         this.addActor(this._icon, { span: 0 });
         this.addActor(this._nameLabel, { span: 0 });
-        this.addActor(this._slider.actor, { span: 1, expand: true });
+        this.addActor(this._slider, { span: 1, expand: true });
         this.addActor(this._percentLabel, { span: 0 });
     }
 }
