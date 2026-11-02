@@ -287,8 +287,10 @@ class Device {
                     icon = this.applet.options.customIconTablet || icon;
                     break;
                 case "desktop":
+                    icon = this.applet.options.customIconDesktop || icon;
+                    break;
                 case "laptop":
-                    icon = this.applet.options.customIconComputer || icon;
+                    icon = this.applet.options.customIconLaptop || icon;
                     break;
                 case "tv":
                     icon = this.applet.options.customIconTv || icon;
@@ -735,7 +737,8 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         this.settings.bind("switch_use-custom-device-icons", "useCustomDeviceIcons", this.onDeviceIconSettingsChanged.bind(this), "useCustomDeviceIcons");
         this.settings.bind("icon_custom-icon-phone", "customIconPhone", this.onDeviceIconSettingsChanged.bind(this), "customIconPhone");
         this.settings.bind("icon_custom-icon-tablet", "customIconTablet", this.onDeviceIconSettingsChanged.bind(this), "customIconTablet");
-        this.settings.bind("icon_custom-icon-computer", "customIconComputer", this.onDeviceIconSettingsChanged.bind(this), "customIconComputer");
+        this.settings.bind("icon_custom-icon-desktop", "customIconDesktop", this.onDeviceIconSettingsChanged.bind(this), "customIconDesktop");
+        this.settings.bind("icon_custom-icon-laptop", "customIconLaptop", this.onDeviceIconSettingsChanged.bind(this), "customIconLaptop");
         this.settings.bind("icon_custom-icon-tv", "customIconTv", this.onDeviceIconSettingsChanged.bind(this), "customIconTv");
         this.settings.bind("icon_custom-icon-fallback", "customIconFallback", this.onDeviceIconSettingsChanged.bind(this), "customIconFallback");
 
