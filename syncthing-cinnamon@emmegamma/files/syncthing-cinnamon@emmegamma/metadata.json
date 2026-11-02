@@ -1,0 +1,7 @@
+{
+    "uuid": "syncthing-cinnamon@emmegamma",
+    "name": "Syncthing Cinnamon",
+    "description": "A simple applet to control Syncthing's status",
+    "author": "emmegamma",
+    "max-instances": "1"
+}
