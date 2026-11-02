@@ -1,0 +1,8 @@
+{
+    "uuid": "spotify-control@ghislaingaillot",
+    "name": "Spotify Control",
+    "description": "Control Spotify playback (previous/play-pause/next, favorites) with cover art, title and artist shown on hover",
+    "max-instances": 1,
+    "version": "1.0",
+    "author": "Ghislain Gaillot"
+}
