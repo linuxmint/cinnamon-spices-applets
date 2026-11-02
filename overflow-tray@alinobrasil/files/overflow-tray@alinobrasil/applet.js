@@ -34,6 +34,9 @@ const VERTICAL_STYLE = 'padding-left: 0; padding-right: 0; padding-top: 2px; pad
 // so Cinnamon's modal grab is gone before the app tries to open its own menu.
 const FORWARD_CLICK_DELAY_MS = 50;
 
+// How long the popup stays up after a forwarded click if the app opens no menu.
+const APP_MENU_TIMEOUT_MS = 500;
+
 function firstLine(text) {
     if (!text) {
         return "";
@@ -185,6 +188,7 @@ class XAppStatusIcon {
 
         this.iconName = null;
         this.inOverflow = false;
+        this._overflowPressButton = 0;
         [this.id, this.idStable] = computeIconId(proxy);
         this.keys = computeIconKeys(proxy);
 
@@ -244,11 +248,13 @@ class XAppStatusIcon {
             if (!proxy.primary_menu_is_open) {
                 this.actor.sync_hover();
             }
+            this.applet.onIconMenuOpenChanged(this, proxy.primary_menu_is_open);
         }
         if ('SecondaryMenuIsOpen' in prop_names) {
             if (!proxy.secondary_menu_is_open) {
                 this.actor.sync_hover();
             }
+            this.applet.onIconMenuOpenChanged(this, proxy.secondary_menu_is_open);
         }
         if ('Name' in prop_names || 'TooltipText' in prop_names || 'IconName' in prop_names) {
             if (this.updateId()) {
@@ -493,8 +499,11 @@ class XAppStatusIcon {
             return Clutter.EVENT_PROPAGATE;
         }
 
+        // In the popup, act on release instead: closing the popup while the button is
+        // still held would send the release to whatever is underneath (e.g. the desktop,
+        // which then opens its own menu), and the app couldn't open its menu either.
         if (this.inOverflow) {
-            this.applet.forwardClickFromOverflow(this, event);
+            this._overflowPressButton = event.get_button();
             return Clutter.EVENT_STOP;
         }
 
@@ -506,8 +515,12 @@ class XAppStatusIcon {
     }
 
     onButtonReleaseEvent(actor, event) {
-        // Overflow clicks are forwarded as press + release in one go.
+        // Overflow clicks are forwarded as press + release in one go, once the button is up.
         if (this.inOverflow) {
+            if (this._overflowPressButton === event.get_button()) {
+                this._overflowPressButton = 0;
+                this.applet.forwardClickFromOverflow(this, event);
+            }
             return Clutter.EVENT_STOP;
         }
 
@@ -588,8 +601,11 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
         this.manager_container.add_actor(this._recording_indicator.actor);
 
         // Left-click popup holding the hidden icons.
+        // It has its own manager so its grab can be released while it stays up
+        // (see forwardClickFromOverflow).
         this._overflowMenu = new Applet.AppletPopupMenu(this, orientation);
-        this._menuManager.addMenu(this._overflowMenu);
+        this._overflowMenuManager = new PopupMenu.PopupMenuManager(this);
+        this._overflowMenuManager.addMenu(this._overflowMenu);
 
         this._overflowLayout = new Clutter.GridLayout();
         this._overflowGrid = new St.Widget({ style_class: "overflow-tray-grid", layout_manager: this._overflowLayout });
@@ -601,7 +617,16 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
             this._arrowTooltip.hide();
             this._arrowTooltip.preventShow = open;
             this._updateArrow();
+
+            if (!open) {
+                this._stopWaitingForAppMenu();
+            }
         });
+
+        // Set while an app's menu, opened from the popup, keeps the popup up.
+        this._appMenuIcon = null;
+        this._appMenuOpened = false;
+        this._appMenuTimeoutId = 0;
 
         // Right-click menu: one switch per icon, "Show on panel".
         this._placementSection = new PopupMenu.PopupMenuSection();
@@ -611,6 +636,10 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
         this._forwardClickId = 0;
 
         this._applet_context_menu.connect("open-state-changed", (menu, open) => {
+            if (open) {
+                this._overflowMenu.close();
+            }
+
             if (!open && this._placementMenuDirty) {
                 this._rebuildPlacementMenu();
             }
@@ -903,10 +932,15 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
         let time = event.get_time();
         let key = this.getKey(icon.proxy);
 
-        // Open the app's menu next to the arrow, as if the icon were there.
-        let [x, y, o] = icon.getEventPositionInfo(this._arrowBox);
+        // Open the app's menu at the icon, like on Windows.
+        let [x, y, o] = icon.getEventPositionInfo(icon.actor);
 
-        this._overflowMenu.close();
+        // Cinnamon's grab would keep the app's menu from taking input, so release it
+        // but leave the popup up. It closes when the app's menu does, or shortly after
+        // the click if it didn't open a menu (e.g. it just showed the app's window).
+        this._overflowMenuManager._ungrab();
+        this._stopWaitingForAppMenu();
+        this._appMenuIcon = icon;
 
         if (this._forwardClickId > 0) {
             Mainloop.source_remove(this._forwardClickId);
@@ -920,8 +954,41 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
                 icon.proxy.call_button_release(x, y, button, time, o, null, null);
             }
 
+            this._appMenuTimeoutId = Mainloop.timeout_add(APP_MENU_TIMEOUT_MS, () => {
+                this._appMenuTimeoutId = 0;
+
+                if (!this._appMenuOpened) {
+                    this._overflowMenu.close();
+                }
+
+                return GLib.SOURCE_REMOVE;
+            });
+
             return GLib.SOURCE_REMOVE;
         });
+    }
+
+    onIconMenuOpenChanged(icon, open) {
+        if (icon !== this._appMenuIcon) {
+            return;
+        }
+
+        if (open) {
+            this._appMenuOpened = true;
+        } else if (this._appMenuOpened) {
+            // An item was picked, or the user clicked elsewhere.
+            this._overflowMenu.close();
+        }
+    }
+
+    _stopWaitingForAppMenu() {
+        if (this._appMenuTimeoutId > 0) {
+            Mainloop.source_remove(this._appMenuTimeoutId);
+            this._appMenuTimeoutId = 0;
+        }
+
+        this._appMenuIcon = null;
+        this._appMenuOpened = false;
     }
 
     onIconVisibilityChanged(icon) {
@@ -1038,6 +1105,8 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
             Mainloop.source_remove(this._forwardClickId);
             this._forwardClickId = 0;
         }
+
+        this._stopWaitingForAppMenu();
 
         if (this._scaleUpdateId > 0) {
             Mainloop.source_remove(this._scaleUpdateId);
