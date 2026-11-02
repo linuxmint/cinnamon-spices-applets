@@ -1,0 +1,107 @@
+/* Session section layout */
+.session-container {
+    padding: 0.45em; /* 6pt para em */
+    spacing: 0.45em; /* 2pt para em */
+}
+
+.session-spacer {
+    min-width: 0;
+    min-height: 0;
+}
+
+.session-buttons-box {
+    spacing: 0.3em; /* 4pt para em */
+}
+
+/* User box styles */
+.user-box {
+    spacing: 0.45em; /* 4pt para em */
+}
+
+.user-icon {
+    border-radius: 50%; /* Mais semântico do que 999px */
+    border: 0;
+}
+
+.user-label {
+    font-size: 1em; /* 9pt para em */
+    font-weight: bold;
+}
+
+.host-label {
+    font-size: 0.8em; /* 8pt para em */
+    color: rgb(150, 150, 150);
+}
+
+/* Session button styles */
+.system-button {
+    border-radius: 7.5em; /* 100pt para em */
+    padding: 0.75em; /* 6pt para em */
+    background-color: rgba(160, 160, 160, 0.08);
+    transition: background-color 150ms ease;
+}
+
+.system-button:hover {
+    background-color: rgba(160, 160, 160, 0.18);
+}
+
+.system-button:active {
+    background-color: rgba(160, 160, 160, 0.28);
+}
+
+.system-button .system-status-icon {
+    icon-size: 0.9em; /* 10pt para em */
+}
+
+/* Grid Layout */
+.prefs-grid-container {
+    padding: 1.1em 0.45em; /* 10pt e 0.375pt para em */
+}
+
+.settings-toggle-box {
+    spacing: 0.5em; /* 5pt para em */
+}
+
+.settings-toggle-button {
+    background-color: rgba(160, 160, 160, 0.1);
+    padding: 1em; /* 10pt para em */
+    border-radius: 1em; /* 10pt para em */
+}
+
+.settings-toggle-button.active {
+    background-color: #1c71d8;
+}
+
+.settings-toggle-icon {
+    icon-size: 1.5em; /* 20px já em px */
+}
+
+.settings-toggle-label {
+    font-size: 0.85em; /* 9pt para em */
+    max-width: 80px; /* 80px para em */
+}
+
+/* Scaling slider */
+.scaling-container {
+    spacing: 0.35em; /* 5pt para em */
+    margin: 0.15em 0.45em; /* 2pt e 6pt para em */
+}
+
+/* CSS */
+.fake-slider-track {
+    background-color: rgba(100, 100, 100, 0.3);
+    border-radius: 0.45em; /* 5pt para em */
+    height: 0.45em; /* 5pt para em */
+}
+
+.fake-slider-fill {
+    background-color: #5a9bd5;
+    border-radius: 0.45em; /* 5pt para em */
+    height: 0.45em; /* 5pt para em */
+}
+
+.fake-slider-marker {
+    background-color: #ddffff;
+    width: 0.075em; /* 1pt para em */
+    border-radius: 0.075em; /* 1pt para em */
+}
