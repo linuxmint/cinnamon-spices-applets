@@ -1,0 +1,26 @@
+{
+  "head": {
+    "type": "header",
+    "description": "Settings"
+  },
+  "update-interval": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 60,
+    "step": 1,
+    "units": "seconds",
+    "description": "Update interval",
+    "tooltip": "How often to update GPU information (in seconds)"
+  },
+  "temperature-unit": {
+    "type": "combobox",
+    "default": "celsius",
+    "options": {
+      "celsius": "Celsius (°C)",
+      "fahrenheit": "Fahrenheit (°F)"
+    },
+    "description": "Temperature unit",
+    "tooltip": "Choose temperature display unit"
+  }
+}
