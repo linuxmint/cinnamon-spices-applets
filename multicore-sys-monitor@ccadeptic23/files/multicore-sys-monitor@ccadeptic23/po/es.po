@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-11-01 11:27+0100\n"
-"PO-Revision-Date: 2026-06-30 12:19-0400\n"
+"PO-Revision-Date: 2026-11-02 11:57-0300\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -474,9 +474,8 @@ msgid "Custom translations in tooltip"
 msgstr "Traducciones personalizadas en las descripciones emergentes"
 
 #. 5.6->settings-schema.json->sectionSystemMonitor->title
-#, fuzzy
 msgid "System Monitor"
-msgstr "Monitor del sistema de Gnome"
+msgstr "Monitor del sistema"
 
 #. 5.6->settings-schema.json->sectionCPUTemperature->title
 msgid "CPU Temperature"
@@ -488,7 +487,7 @@ msgstr "Carga media"
 
 #. 5.6->settings-schema.json->sectionCPUStuckProcess->title
 msgid "Detection of Stuck Processes"
-msgstr ""
+msgstr "Detección de procesos bloqueados"
 
 #. 5.6->settings-schema.json->sectionCPULabel->title
 #. 5.6->settings-schema.json->sectionMemoryLabel->title
@@ -1134,60 +1133,71 @@ msgid ""
 "- through either method; the response time depends on how the stuck process "
 "was detected."
 msgstr ""
+"Existen varias formas de detectar procesos bloqueados:\n"
+"- a través del kernel; esto se notifica de inmediato.\n"
+"- mediante el análisis de la actividad de cada CPU; esto se notifica cuando "
+"al menos una CPU supera el umbral de actividad especificado durante el "
+"límite de tiempo establecido.\n"
+"- mediante cualquiera de los dos métodos; el tiempo de respuesta depende de "
+"cómo se haya detectado el proceso bloqueado."
 
 #. 5.6->settings-schema.json->CPU_alertWhenStuckProcess->description
 msgid "Change the background color when at least one process is stuck"
-msgstr ""
+msgstr "Cambiar el color de fondo cuando haya al menos un proceso bloqueado"
 
 #. 5.6->settings-schema.json->CPU_stuckMethod->description
 msgid "Method used to detect stuck processes"
-msgstr ""
+msgstr "Método utilizado para detectar procesos bloqueados"
 
 #. 5.6->settings-schema.json->CPU_stuckMethod->options
 msgid "Only from the kernel"
-msgstr ""
+msgstr "Solo desde el kernel"
 
 #. 5.6->settings-schema.json->CPU_stuckMethod->options
 msgid "Only by checking the activity of each processor"
-msgstr ""
+msgstr "Solo comprobando la actividad de cada procesador"
 
 #. 5.6->settings-schema.json->CPU_stuckMethod->options
 msgid "In either case"
-msgstr ""
+msgstr "En cualquier caso"
 
 #. 5.6->settings-schema.json->CPU_minLoadStuckProcess->description
 msgid "Consider a process to be stuck when core's load exceeds (%)"
 msgstr ""
+"Se considerará que un proceso está bloqueado cuando la carga del núcleo "
+"supere el (%)"
 
 #. 5.6->settings-schema.json->CPU_minLoadStuckProcess->tooltip
 #. 5.6->settings-schema.json->CPU_durationStuckProcess->tooltip
 #. 5.6->settings-schema.json->CPU_unitStuckProcess->tooltip
 msgid "Does not concern stuck processes detected by the kernel."
-msgstr ""
+msgstr "No se refiere a los procesos bloqueados detectados por el kernel."
 
 #. 5.6->settings-schema.json->CPU_durationStuckProcess->description
 msgid "Consider a process to be stuck after (in Selected Unit)"
 msgstr ""
+"Se considera que un proceso se ha bloqueado después de (en la unidad "
+"seleccionada)"
 
 #. 5.6->settings-schema.json->CPU_unitStuckProcess->description
 msgid "Selected Unit"
-msgstr ""
+msgstr "Unidad seleccionada"
 
 #. 5.6->settings-schema.json->CPU_unitStuckProcess->options
 msgid "seconds"
-msgstr ""
+msgstr "segundos"
 
 #. 5.6->settings-schema.json->CPU_unitStuckProcess->options
 msgid "minutes"
-msgstr ""
+msgstr "minutos"
 
 #. 5.6->settings-schema.json->CPU_unitStuckProcess->options
 msgid "hours"
-msgstr ""
+msgstr "horas"
 
 #. 5.6->settings-schema.json->CPU_bgColorStuckProcess->description
 msgid "Background Color when a process is stuck"
-msgstr ""
+msgstr "Color de fondo cuando un proceso se bloquea"
 
 #. 5.6->settings-schema.json->CPU_tempColor->description
 msgid "Normal Temperature Color"
@@ -1765,22 +1775,20 @@ msgid "Data marked with ⚠️ must not be changed!"
 msgstr "¡Los datos marcados con ⚠️ no deben modificarse!"
 
 #. 5.6->settings-schema.json->SysMonWhichOne->description
-#, fuzzy
 msgid "Which System Monitor"
-msgstr "Monitor del sistema de Gnome"
+msgstr "Qué monitor del sistema"
 
 #. 5.6->settings-schema.json->SysMonWhichOne->options
 msgid "System Default"
-msgstr ""
+msgstr "Configuración predeterminada del sistema"
 
 #. 5.6->settings-schema.json->SysMonWhichOne->options
-#, fuzzy
 msgid "Custom"
-msgstr "Etiqueta personalizada"
+msgstr "Personalizado"
 
 #. 5.6->settings-schema.json->SysMonPath->description
 msgid "Complete name of a .desktop file or a flatpak id"
-msgstr ""
+msgstr "Nombre completo de un archivo .desktop o un identificador Flatpak"
 
 #. 5.6->settings-schema.json->SysMonPath->tooltip
 msgid ""
@@ -1789,18 +1797,22 @@ msgid ""
 "org.gnome.SystemMonitor.desktop\n"
 "io.github.hakandundar34coding.system-monitoring-center"
 msgstr ""
+"EJEMPLOS:\n"
+"gnome-system-monitor.desktop\n"
+"org.gnome.SystemMonitor.desktop\n"
+"io.github.hakandundar34coding.system-monitoring-center"
 
 #. 5.6->settings-schema.json->SysMonMouseButton->description
 msgid "Which mouse button opens your System Monitor"
-msgstr ""
+msgstr "Qué botón del ratón abre el Monitor del sistema"
 
 #. 5.6->settings-schema.json->SysMonMouseButton->options
 msgid "Middle"
-msgstr ""
+msgstr "Medio"
 
 #. 5.6->settings-schema.json->SysMonMouseButton->options
 msgid "Both"
-msgstr ""
+msgstr "Ambos"
 
 #. 3.0/prefsui.glade:49 3.2/prefsui.glade:49 3.4/prefsui.glade:49
 #. 4.0/prefsui.glade:56
