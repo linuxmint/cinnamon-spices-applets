@@ -1,0 +1,8 @@
+{
+    "uuid": "mouse-power-saver@doctorshoe",
+    "name": "Mouse Power Saver",
+    "description": "Control USB mouse autosuspend and touchpad behavior from the Cinnamon panel",
+    "max-instances": "1",
+    "version": "1.0.0",
+    "author": "DoctorShoeDev"
+}
