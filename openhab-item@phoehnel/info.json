@@ -1,0 +1,8 @@
+{
+  "uuid": "openhab-item@phoehnel",
+  "name": "OpenHAB Item",
+  "description": "Display and control OpenHAB smart home items directly from the Cinnamon panel. Supports Switch, Dimmer, Number, Contact, Rollershutter, Color, Player, and more. Add multiple instances for different items.",
+  "author": "phoehnel",
+  "website": "https://github.com/cinnamon-spice-openhab",
+  "comments": ""
+}
