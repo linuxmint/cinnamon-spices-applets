@@ -2618,6 +2618,10 @@ msgstr ""
 msgid "Weather Underground (key needed)"
 msgstr ""
 
+#. 3.8->settings-schema.json->dataService->options
+msgid "QWeather (key needed)"
+msgstr ""
+
 #. 3.8->settings-schema.json->openmeteo_label->description
 msgid ""
 "Open-Meteo is a free weather service that does not require an API key. It "
@@ -2833,6 +2837,40 @@ msgstr ""
 msgid ""
 "Copy this from your account at www.wunderground.com/weather/api and paste it "
 "here."
+msgstr ""
+
+#. 3.8->settings-schema.json->qweather_label->description
+msgid ""
+"QWeather (HeFeng) provides weather data for China and worldwide, see "
+"qweather.com.\n"
+"\n"
+" - Requires an API Key: create a project and a credential in the QWeather "
+"developer console (dev.qweather.com) to obtain one\n"
+" - Requires your dedicated API Host (find it in the console Settings page); "
+"the legacy public domain devapi.qweather.com is being phased out since 2026\n"
+" - The free subscription has a limited number of daily calls, so a refresh "
+"interval of 15 minutes or more is recommended"
+msgstr ""
+
+#. 3.8->settings-schema.json->qweather_apikey->description
+msgid "QWeather API Key"
+msgstr ""
+
+#. 3.8->settings-schema.json->qweather_apikey->tooltip
+msgid ""
+"Copy this from your credentials at the dev.qweather.com console and paste it "
+"here."
+msgstr ""
+
+#. 3.8->settings-schema.json->qweather_host->description
+msgid "QWeather API Host"
+msgstr ""
+
+#. 3.8->settings-schema.json->qweather_host->tooltip
+msgid ""
+"Your dedicated API Host (e.g. abcxyz.qweatherapi.com), find it in the "
+"QWeather console Settings page. The legacy public domain devapi.qweather.com "
+"is being phased out."
 msgstr ""
 
 #. 3.8->settings-schema.json->apiKey->description
