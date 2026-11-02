@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <!-- Batería con escudo - Modo conservación activo -->
+  <defs>
+    <linearGradient id="batteryGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#388E3C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Cuerpo de la batería -->
+  <rect x="1" y="4" width="12" height="8" rx="1" ry="1" 
+        fill="none" stroke="#4CAF50" stroke-width="1.2"/>
+  
+  <!-- Terminal de la batería -->
+  <rect x="13" y="6" width="2" height="4" rx="0.5" ry="0.5" 
+        fill="#4CAF50"/>
+  
+  <!-- Nivel de carga (80%) -->
+  <rect x="2" y="5" width="8" height="6" rx="0.5" ry="0.5" 
+        fill="url(#batteryGradient)" opacity="0.9"/>
+  
+  <!-- Escudo de protección -->
+  <path d="M7 2 L10 3.5 L10 6 C10 8 8.5 9.5 7 10 C5.5 9.5 4 8 4 6 L4 3.5 Z" 
+        fill="#4CAF50" stroke="#2E7D32" stroke-width="0.5"/>
+  
+  <!-- Checkmark en el escudo -->
+  <path d="M5.5 5.5 L6.5 6.5 L8.5 4.5" 
+        fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
