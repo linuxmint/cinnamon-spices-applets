@@ -1,0 +1,47 @@
+{
+    "general": {
+        "type": "header",
+        "description": "Beam Effect Settings"
+    },
+    "rayColor": {
+        "type": "colorchooser",
+        "default": "rgb(255, 204, 0)",
+        "description": "Beam color"
+    },
+    "rayCount": {
+        "type": "spinbutton",
+        "default": 12,
+        "min": 4,
+        "max": 36,
+        "step": 1,
+        "description": "Number of beams",
+        "units": ""
+    },
+    "rayLength": {
+        "type": "spinbutton",
+        "default": 35,
+        "min": 10,
+        "max": 80,
+        "step": 1,
+        "description": "Beam length",
+        "units": "px"
+    },
+    "gap": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "description": "Center gap",
+        "units": "px"
+    },
+    "lineWidth": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "description": "Beam thickness",
+        "units": "px"
+    }
+}
