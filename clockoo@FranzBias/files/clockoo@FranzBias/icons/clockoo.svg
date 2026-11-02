@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Clockoo icon: mantel clock, wooden dome case, original design by Franz & Aldus, MIT -->
+  <defs>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c47a3a"/><stop offset="1" stop-color="#7a3f17"/>
+    </linearGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#c9922b"/>
+    </linearGradient>
+  </defs>
+  <!-- base -->
+  <rect x="6" y="52" width="52" height="7" rx="2.5" fill="url(#wood)" stroke="#3d1d08" stroke-width="2.5"/>
+  <!-- dome case -->
+  <path d="M10 52 V34 A22 22 0 0 1 54 34 V52 Z" fill="url(#wood)" stroke="#3d1d08" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- finial -->
+  <circle cx="32" cy="8.5" r="3" fill="url(#brass)" stroke="#3d1d08" stroke-width="1.8"/>
+  <!-- bezel + face -->
+  <circle cx="32" cy="33" r="16" fill="url(#brass)" stroke="#3d1d08" stroke-width="2"/>
+  <circle cx="32" cy="33" r="12.5" fill="#fffaf0" stroke="#3d1d08" stroke-width="1.2"/>
+  <g stroke="#3a3a3a" stroke-width="2" stroke-linecap="round">
+    <path d="M32 21.8 V24.3 M32 41.7 V44.2 M20.8 33 H23.3 M40.7 33 H43.2"/>
+  </g>
+  <!-- hands at 10:10 -->
+  <path d="M32 33 L26.5 29 M32 33 L38.5 27.5" stroke="#222" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="32" cy="33" r="2" fill="#c9922b" stroke="#222" stroke-width="1"/>
+</svg>
