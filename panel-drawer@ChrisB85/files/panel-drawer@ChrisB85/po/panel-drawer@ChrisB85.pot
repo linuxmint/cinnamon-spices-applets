@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-13 07:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:365
+msgid "Keep in the drawer:"
+msgstr ""
+
+#: applet.js:577
+msgid "Drawer is empty - right click to pick icons"
+msgstr ""
+
+#: applet.js:579
+msgid "Show hidden icons"
+msgstr ""
+
+#: applet.js:579
+msgid "Hide icons"
+msgstr ""
+
+#. metadata.json->name
+msgid "Panel Drawer"
+msgstr ""
+
+#. metadata.json->description
+msgid "Hides tray icons and applets behind an arrow, Windows style"
+msgstr ""
+
+#. settings-schema.json->head->description
+msgid ""
+"Panel drawer - pick the tray icons and applets to hide with a right click on"
+" the arrow"
+msgstr ""
+
+#. settings-schema.json->hoveropens->description
+msgid "Expand on hover"
+msgstr ""
+
+#. settings-schema.json->hoveropens->tooltip
+msgid "Reveal the hidden icons when the pointer rests on the arrow."
+msgstr ""
+
+#. settings-schema.json->hovertime->units
+#. settings-schema.json->animationtime->units
+msgid "miliseconds"
+msgstr ""
+
+#. settings-schema.json->hovertime->description
+msgid "Hover delay"
+msgstr ""
+
+#. settings-schema.json->autocollapsetime->units
+msgid "seconds"
+msgstr ""
+
+#. settings-schema.json->autocollapsetime->description
+msgid "Collapse again after"
+msgstr ""
+
+#. settings-schema.json->autocollapsetime->tooltip
+msgid ""
+"0 disables it - the drawer then stays open until you click the arrow again.\n"
+"The countdown only starts once the pointer has left the panel and the icons' menus are closed."
+msgstr ""
+
+#. settings-schema.json->animationtime->description
+msgid "Slide animation"
+msgstr ""
+
+#. settings-schema.json->animationtime->tooltip
+msgid ""
+"How long icons take to slide in and out. 0 makes them appear instantly."
+msgstr ""

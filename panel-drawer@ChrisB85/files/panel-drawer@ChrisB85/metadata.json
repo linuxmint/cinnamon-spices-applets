@@ -1,0 +1,7 @@
+{
+    "uuid": "panel-drawer@ChrisB85",
+    "name": "Panel Drawer",
+    "description": "Hides tray icons and applets behind an arrow, Windows style",
+    "author": "ChrisB85, based on show-hide-applets@mohammad-sn",
+    "max-instances": "-1"
+}
