@@ -1,0 +1,72 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["general-page", "appearance-page"],
+        "general-page": {
+            "type": "page",
+            "title": "General",
+            "sections": ["general-section"]
+        },
+        "appearance-page": {
+            "type": "page",
+            "title": "Appearance",
+            "sections": ["appearance-section"]
+        },
+        "general-section": {
+            "type": "section",
+            "title": "",
+            "keys": ["refresh-interval", "show-bits", "default-interface", "decimal-places"]
+        },
+        "appearance-section": {
+            "type": "section",
+            "title": "",
+            "keys": ["display-mode", "font-size"]
+        }
+    },
+    "refresh-interval": {
+        "type": "spinbutton",
+        "default": 2.0,
+        "min": 0.5,
+        "max": 10.0,
+        "step": 0.5,
+        "units": "seconds",
+        "description": "Update interval"
+    },
+    "show-bits": {
+        "type": "switch",
+        "default": false,
+        "description": "Show speed in bits (bps) instead of bytes (B/s)"
+    },
+    "default-interface": {
+        "type": "entry",
+        "default": "",
+        "description": "Network interface (leave empty for auto-detect)",
+        "tooltip": "e.g. eth0, wlan0, wlp2s0"
+    },
+    "decimal-places": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 3,
+        "step": 1,
+        "description": "Decimal places"
+    },
+    "display-mode": {
+        "type": "combobox",
+        "default": "compact",
+        "description": "Layout",
+        "options": {
+            "Compact (single line)": "compact",
+            "Stacked (DL / UL)": "stacked"
+        }
+    },
+    "font-size": {
+        "type": "spinbutton",
+        "default": 13,
+        "min": 8,
+        "max": 24,
+        "step": 1,
+        "units": "px",
+        "description": "Font size"
+    }
+}
