@@ -1,0 +1,9 @@
+{
+    "uuid": "asyntai-ai-chatbot@asyntai",
+    "name": "Asyntai AI Chatbot",
+    "description": "See new chats and leads from your Asyntai website chatbot, and ask it questions from the panel.",
+    "version": "1.0.0",
+    "max-instances": 1,
+    "author": "Asyntai",
+    "website": "https://asyntai.com/documentation/integrations/cinnamon/"
+}
