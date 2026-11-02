@@ -1,3 +1,8 @@
+v2.3.1 - 07-08-2026
+========
+Fix the default "Switch users" command (gdmflexiserver -> dm-tool switch-to-greeter)
+Remove the bundled README.txt, "Help" now opens the Cinnamon Spices page
+
 v2.3 - 08-02-2024
 ========
 Fix the "Main.Util is undefined" error

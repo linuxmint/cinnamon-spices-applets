@@ -1,8 +1,8 @@
 // Shutdown Menu With Icons Cinnamon Applet
 // Developed by Nicolas LLOBERA from the System Shutdown and Restart Applet by Shelley
-// version: 2.3 (08-02-2024)
+// version: 2.3.1 (07-08-2026)
 // License: GPLv3
-// Copyright © 2024 Nicolas LLOBERA
+// Copyright © 2026 Nicolas LLOBERA
 
 const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
@@ -167,10 +167,10 @@ MyApplet.prototype = {
     },
     
     createMenuItem: function(displayName, iconName, command) {
-        var menuItem = new PopupMenuExtension.PopupImageLeftMenuItem(displayName, iconName, command);
+        let menuItem = new PopupMenuExtension.PopupImageLeftMenuItem(displayName, iconName, command);
         menuItem.connect("activate", function(actor, event) {
-            // As application variable is not accessible here, 
-            // the application variable is passed to the PopupImageLeftMenuItem ctor to be accessible throw the actor argument
+            // As application variable is not accessible here,
+            // the application variable is passed to the PopupImageLeftMenuItem ctor to be accessible through the actor argument
             // which is the menuItem itself
             Util.trySpawnCommandLine(actor.command);
         });
@@ -188,7 +188,7 @@ MyApplet.prototype = {
         this._applet_context_menu.addMenuItem(this.settings_menu_item);
         
         this.help_menu_item = new Applet.MenuItem(_("Help"), Gtk.STOCK_HELP, function() {
-            Util.spawnCommandLine("xdg-open " + AppletDirectory + "/README.txt");
+            Util.spawn(["xdg-open", "https://cinnamon-spices.linuxmint.com/applets/view/114"]);
         });
         this._applet_context_menu.addMenuItem(this.help_menu_item);
         
@@ -205,6 +205,6 @@ MyApplet.prototype = {
 };
 
 function main(metadata, orientation, panel_height, instanceId) {
-    var myApplet = new MyApplet(metadata, orientation, panel_height, instanceId);
-    return myApplet;      
+    let myApplet = new MyApplet(metadata, orientation, panel_height, instanceId);
+    return myApplet;
 }
