@@ -62,9 +62,16 @@ NvGpuTempApplet.prototype = {
 
     updateTemperature: function() {
         let [result, stdout, stderr] = GLib.spawn_command_line_sync('nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits');
-        let value = stdout.toString().trim();
-        if (this.state.useFahrenheit) value = Math.round((value * 1.8) + 32);
-        this.set_applet_label(value + this.tempUnit); 
+        let lines = stdout.toString().trim().split('\n').filter(l => l.trim() !== '');
+        for (let i = 0; i < lines.length; i++) {
+            let temp = parseInt(lines[i], 10);
+            if (this.state.useFahrenheit) temp = Math.round((temp * 1.8) + 32);
+            lines[i] = temp.toString();
+        }
+        for (let i = 0; i < lines.length; i++) {
+            lines[i] += this.tempUnit;
+        }
+        this.set_applet_label(lines.join('\n'));
         return true;
     },
 
