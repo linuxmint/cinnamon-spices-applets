@@ -13,10 +13,7 @@ const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
 const AppletManager = imports.ui.appletManager;
 const Extension = imports.ui.extension;
-// Sibling modules are loaded through Cinnamon's per-applet importer, which
-// works on Cinnamon 6.6 and later; exported are top-level `var` and `function`.
-const Me = imports.ui.appletManager.applets["PocketTray@spex"];
-const { _ } = Me.lib.i18n;
+const { _ } = require('./lib/i18n');
 
 // Tray applets matched by UUID, as they don't declare "role": "tray". The
 // names are used in the notification when the applet isn't loaded yet.
@@ -101,3 +98,5 @@ function handOverIcons(rivals) {
         return GLib.SOURCE_CONTINUE;
     });
 }
+
+module.exports = { findRivalTrays, retire, handOverIcons };

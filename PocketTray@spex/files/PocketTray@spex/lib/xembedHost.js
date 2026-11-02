@@ -18,13 +18,10 @@ const GLib = imports.gi.GLib;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const SignalManager = imports.misc.signalManager;
-// Sibling modules are loaded through Cinnamon's per-applet importer, which
-// works on Cinnamon 6.6 and later; exported are top-level `var` and `function`.
-const Me = imports.ui.appletManager.applets["PocketTray@spex"];
-const { normalizeId } = Me.lib.hiddenList;
-const { makeAppIcon } = Me.lib.iconMenu;
+const { normalizeId } = require('./lib/hiddenList');
+const { makeAppIcon } = require('./lib/iconMenu');
 
-var XEmbedHost = class XEmbedHost {
+class XEmbedHost {
     constructor(owner) {
         this._owner = owner;
         this._signals = new SignalManager.SignalManager(null);
@@ -218,4 +215,6 @@ var XEmbedHost = class XEmbedHost {
         }
         button.destroy();
     }
-};
+}
+
+module.exports = { XEmbedHost };

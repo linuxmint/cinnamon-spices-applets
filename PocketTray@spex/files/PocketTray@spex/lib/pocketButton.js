@@ -28,7 +28,7 @@ const BUNDLED_ICONS = {
 const THEME_ARROW = "theme";    // arrow from the user's icon theme
 const CUSTOM_ICON = "custom";   // icon name or file from "custom-icon"
 
-var PocketButton = class PocketButton {
+class PocketButton {
     // applet: provides orientation and getPanelIconSize()
     // config: settings object with pocketIcon and customIcon
     constructor(applet, config) {
@@ -107,4 +107,6 @@ var PocketButton = class PocketButton {
             default:            return 0;     // bottom panel: upwards
         }
     }
-};
+}
+
+module.exports = { PocketButton };

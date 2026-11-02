@@ -13,10 +13,7 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Cinnamon = imports.gi.Cinnamon;
 const PopupMenu = imports.ui.popupMenu;
-// Sibling modules are loaded through Cinnamon's per-applet importer, which
-// works on Cinnamon 6.6 and later; exported are top-level `var` and `function`.
-const Me = imports.ui.appletManager.applets["PocketTray@spex"];
-const { _ } = Me.lib.i18n;
+const { _ } = require('./lib/i18n');
 
 const MENU_ICON_SIZE = 16;
 
@@ -87,7 +84,7 @@ class IconSwitchMenuItem extends PopupMenu.PopupSwitchMenuItem {
     }
 }
 
-var IconMenuSection = class IconMenuSection {
+class IconMenuSection {
     // contextMenu: the applet's context menu (_applet_context_menu)
     // sources:     objects with menuEntries()
     // hiddenList:  HiddenList
@@ -132,4 +129,6 @@ var IconMenuSection = class IconMenuSection {
         return [...byId.values()].sort(
             (a, b) => GLib.utf8_collate(a.label.toLowerCase(), b.label.toLowerCase()));
     }
-};
+}
+
+module.exports = { IconMenuSection, makeAppIcon, makeIconFromName };

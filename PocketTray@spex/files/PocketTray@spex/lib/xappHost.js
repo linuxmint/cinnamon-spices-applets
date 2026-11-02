@@ -20,13 +20,10 @@ const Gtk = imports.gi.Gtk;
 const XApp = imports.gi.XApp;
 const Main = imports.ui.main;
 const SignalManager = imports.misc.signalManager;
-// Sibling modules are loaded through Cinnamon's per-applet importer, which
-// works on Cinnamon 6.6 and later; exported are top-level `var` and `function`.
-const Me = imports.ui.appletManager.applets["PocketTray@spex"];
-const { XAppStatusIcon, RecorderIcon } = Me.lib.xappStatusIcon;
-const { makeIconFromName } = Me.lib.iconMenu;
+const { XAppStatusIcon, RecorderIcon } = require('./lib/xappStatusIcon');
+const { makeIconFromName } = require('./lib/iconMenu');
 
-var XAppHost = class XAppHost {
+class XAppHost {
     constructor(owner) {
         this._owner = owner;
         this._signals = new SignalManager.SignalManager(null);
@@ -209,4 +206,6 @@ var XAppHost = class XAppHost {
             .split(/\n|\\n/)[0].trim().slice(0, 40);
         return (tip && tip.toLowerCase() !== icon.id) ? tip + "  (" + icon.id + ")" : icon.id;
     }
-};
+}
+
+module.exports = { XAppHost };

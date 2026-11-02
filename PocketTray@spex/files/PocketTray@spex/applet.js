@@ -30,17 +30,18 @@ const Settings = imports.ui.settings;
 const Mainloop = imports.mainloop;
 const SignalManager = imports.misc.signalManager;
 
-// Modules in lib/ are loaded through Cinnamon's per-applet importer, which
-// works on Cinnamon 6.6 and later. Cinnamon drops this importer cache when the
-// applet is unloaded, so a reload picks up edited modules.
-const Me = imports.ui.appletManager.applets["PocketTray@spex"];
-const { HiddenList } = Me.lib.hiddenList;
-const { PocketButton } = Me.lib.pocketButton;
-const { Pocket } = Me.lib.pocket;
-const { XEmbedHost } = Me.lib.xembedHost;
-const { XAppHost } = Me.lib.xappHost;
-const { IconMenuSection } = Me.lib.iconMenu;
-const RivalGuard = Me.lib.rivalGuard;
+// Modules in lib/ are loaded with Cinnamon's require(). Unlike the classic
+// per-applet importer (imports.ui.appletManager.applets[uuid]), whose modules
+// stay cached until Cinnamon restarts, require() notices changed files, so an
+// applet update takes effect on reload. require() is deprecated as of
+// Cinnamon 6.8; switch to its replacement once that version can be tested.
+const { HiddenList } = require('./lib/hiddenList');
+const { PocketButton } = require('./lib/pocketButton');
+const { Pocket } = require('./lib/pocket');
+const { XEmbedHost } = require('./lib/xembedHost');
+const { XAppHost } = require('./lib/xappHost');
+const { IconMenuSection } = require('./lib/iconMenu');
+const RivalGuard = require('./lib/rivalGuard');
 
 // Value of the "pocket-position" setting that puts the button first.
 const BUTTON_BEFORE_ICONS = "left";

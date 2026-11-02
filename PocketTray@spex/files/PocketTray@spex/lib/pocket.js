@@ -14,7 +14,7 @@ const PopupMenu = imports.ui.popupMenu;
 // Value of the "open-trigger" setting that enables hover mode.
 const OPEN_ON_HOVER = "hover";
 
-var Pocket = class Pocket {
+class Pocket {
     // applet: the PocketTrayApplet (owner of the popup, orientation)
     // config: settings object with openTrigger, hoverDelay, closeDelay
     // button: the PocketButton the popup is anchored to
@@ -132,4 +132,6 @@ var Pocket = class Pocket {
             this._hoverCloseId = 0;
         }
     }
-};
+}
+
+module.exports = { Pocket };
