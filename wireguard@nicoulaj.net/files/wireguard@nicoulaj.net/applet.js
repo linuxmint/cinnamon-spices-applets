@@ -178,7 +178,7 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
             for (let file, enumerator = Gio.file_new_for_path("/etc/wireguard").enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null); (file = enumerator.next_file(null)) !== null;)
                 if (file.get_file_type() == Gio.FileType.REGULAR && file.get_name().endsWith(".conf"))
                     interfaces.push(file.get_name().slice(0, -5));
-            return interfaces;
+            return interfaces.sort((a, b) => a.localeCompare(b, undefined, {numeric: true}));
         } catch (e) {
             this._handle_error(_("Failed accessing WireGuard configs directory, please make sure it is accessible\nsudo chmod o+r /etc/wireguard or sudo setfacl -m u:$username:rx /etc/wireguard"), e);
         }
