@@ -19,6 +19,7 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const St = imports.gi.St;
 const Gettext = imports.gettext;
 const Lang = imports.lang;
 const ModalDialog = imports.ui.modalDialog;
@@ -42,6 +43,7 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
 
         this._orientation = orientation;
         this._menu_manager = null;
+        this._menu_section = null;
         this._menu = null;
         this._net_monitor = null;
         this._net_monitor_id = null;
@@ -75,6 +77,17 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
             this._menu_manager = new PopupMenu.PopupMenuManager(this);
             this._menu = new Applet.AppletPopupMenu(this, this._orientation);
             this._menu_manager.addMenu(this._menu);
+
+            this._menu_section = new PopupMenu.PopupMenuSection();
+            const scroll_view = new St.ScrollView({hscrollbar_policy: St.PolicyType.NEVER, vscrollbar_policy: St.PolicyType.NEVER});
+            scroll_view.add_actor(this._menu_section.actor);
+            this._menu.addActor(scroll_view);
+
+            // AUTOMATIC reserves room for the scrollbar even when hidden, so only use it when the tunnels do not fit
+            this._menu.connect('open-state-changed', (menu, open) => {
+                if (open)
+                    scroll_view.vscrollbar_policy = menu.actor.get_preferred_height(-1)[1] >= menu.actor.get_theme_node().get_max_height() ? St.PolicyType.AUTOMATIC : St.PolicyType.NEVER;
+            });
         }
 
         if (!this._net_interfaces)
@@ -100,6 +113,7 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
         if (this._menu_manager) {
             this._menu_manager.removeMenu(this._menu);
             this._menu = null;
+            this._menu_section = null;
             this._menu_manager = null;
         }
 
@@ -189,7 +203,7 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
         if (!this._menu)
             return;
 
-        this._menu.removeAll();
+        this._menu_section.removeAll();
 
         let active_ifaces = 0;
 
@@ -202,7 +216,7 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
 
             const item = new PopupMenu.PopupSwitchMenuItem(iface, enabled);
             item.connect('toggled', (object, value) => this.on_item_toggled(iface, object, value));
-            this._menu.addMenuItem(item);
+            this._menu_section.addMenuItem(item);
         }
 
         this.set_applet_icon_name(active_ifaces > 0 ? "on" : "off");
