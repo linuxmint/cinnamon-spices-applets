@@ -117,6 +117,8 @@ MyApplet.prototype = {
                 ["mem_graph_width", this.on_cfg_changed_graph_width],
                 ["mem_color_0", this.on_cfg_changed_color, 1],
                 ["mem_color_1", this.on_cfg_changed_color, 1],
+                ["mem_color_2", this.on_cfg_changed_color, 1],
+                ["mem_color_3", this.on_cfg_changed_color, 1],
                 ["swap_enabled", this.on_cfg_changed_graph_enabled, 2],
                 ["swap_override_graph_width", this.on_cfg_changed_graph_width, 2],
                 ["swap_graph_width", this.on_cfg_changed_graph_width],
