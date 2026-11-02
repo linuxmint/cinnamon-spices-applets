@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- SPDX-License-Identifier: GPL-3.0-or-later; original OSS Singularity artwork. -->
+  <defs>
+    <linearGradient id="back" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#1d2548"/><stop offset="1" stop-color="#14203a"/>
+    </linearGradient>
+    <linearGradient id="bubble" x1="0" y1="0" x2="0.9" y2="1">
+      <stop stop-color="#7ee2a8"/><stop offset="1" stop-color="#2e9e6b"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#65b1eb"/><stop offset="1" stop-color="#716bd8"/>
+    </linearGradient>
+  </defs>
+  <path d="M14 8h36a8 8 0 0 1 8 8v32a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8V16a8 8 0 0 1 8-8Z" fill="url(#back)" stroke="url(#edge)" stroke-width="2.5"/>
+  <path d="M14 8h36a8 8 0 0 1 8 8v4a6 6 0 0 1-6 4H12a6 6 0 0 1-6-4v-4a8 8 0 0 1 8-8Z" fill="#65b1eb" opacity="0.18"/>
+  <path d="M20 17h24a8 8 0 0 1 8 8v11a8 8 0 0 1-8 8H32l-8 7v-7h-4a8 8 0 0 1-8-8V25a8 8 0 0 1 8-8Z" fill="url(#bubble)"/>
+  <path d="M25 23h14l-14 12h14" fill="none" stroke="#14203a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="42.5" cy="35" r="2.2" fill="#14203a"/>
+</svg>
