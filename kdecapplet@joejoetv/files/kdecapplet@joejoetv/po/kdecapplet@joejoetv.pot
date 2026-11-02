@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdecapplet@joejoetv 2.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-08-22 18:28+0200\n"
+"POT-Creation-Date: 2026-11-02 17:12+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,74 +17,74 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. 5.8/applet.js:547 4.8/applet.js:574
+#. 5.8/applet.js:567 4.8/applet.js:574
 msgid "No Modules available"
 msgstr ""
 
-#. 5.8/applet.js:1021 5.8/applet.js:1024 4.8/applet.js:1065 4.8/applet.js:1068
+#. 5.8/applet.js:1050 5.8/applet.js:1053 4.8/applet.js:1065 4.8/applet.js:1068
 msgid "KDE Connect not available, make sure it's installed and running."
 msgstr ""
 
-#. 5.8/applet.js:1028 5.8/applet.js:1041 5.8/applet.js:1230 4.8/applet.js:1072
+#. 5.8/applet.js:1057 5.8/applet.js:1070 5.8/applet.js:1259 4.8/applet.js:1072
 #. 4.8/applet.js:1085 4.8/applet.js:1270
 msgid "Reload Applet"
 msgstr ""
 
-#. 5.8/applet.js:1033 4.8/applet.js:1077
+#. 5.8/applet.js:1062 4.8/applet.js:1077
 msgid "Invalid KDE Connect version returned!"
 msgstr ""
 
-#. 5.8/applet.js:1034 5.8/applet.js:1037 4.8/applet.js:1078 4.8/applet.js:1081
+#. 5.8/applet.js:1063 5.8/applet.js:1066 4.8/applet.js:1078 4.8/applet.js:1081
 msgid ""
 "The KDE Connect DBus service returned an invalid version, please try "
 "reloading the Applet!"
 msgstr ""
 
-#. 5.8/applet.js:1075 4.8/applet.js:1120
+#. 5.8/applet.js:1104 4.8/applet.js:1120
 msgid "No connected Devices!"
 msgstr ""
 
-#. 5.8/applet.js:1075 4.8/applet.js:1120
+#. 5.8/applet.js:1104 4.8/applet.js:1120
 msgid "Add them in the KDE Connect settings"
 msgstr ""
 
-#. 5.8/applet.js:1120 4.8/applet.js:1165
+#. 5.8/applet.js:1149 4.8/applet.js:1165
 msgid "Debug Stuff, don't touch!"
 msgstr ""
 
-#. 5.8/applet.js:1209 4.8/applet.js:1254
+#. 5.8/applet.js:1238 4.8/applet.js:1254
 msgid "KDE Connect Version: {version}"
 msgstr ""
 
-#. 5.8/applet.js:1221 4.8/applet.js:1261
+#. 5.8/applet.js:1250 4.8/applet.js:1261
 msgid "Own ID: {own_id}"
 msgstr ""
 
-#. 5.8/applet.js:1223 4.8/applet.js:1263
+#. 5.8/applet.js:1252 4.8/applet.js:1263
 msgid "own ID"
 msgstr ""
 
-#. 5.8/applet.js:1225 4.8/applet.js:1265
+#. 5.8/applet.js:1254 4.8/applet.js:1265
 msgid "Click to copy own ID"
 msgstr ""
 
-#. 5.8/applet.js:1235 4.8/applet.js:1275
+#. 5.8/applet.js:1264 4.8/applet.js:1275
 msgid "Configure KDE Connect"
 msgstr ""
 
-#. 5.8/applet.js:1237 4.8/applet.js:1277
+#. 5.8/applet.js:1266 4.8/applet.js:1277
 msgid "Click to open KDE Connect Configuration"
 msgstr ""
 
-#. 5.8/applet.js:1283 4.8/applet.js:1321
+#. 5.8/applet.js:1312 4.8/applet.js:1321
 msgid "No available devices"
 msgstr ""
 
-#. 5.8/applet.js:1285 4.8/applet.js:1323
+#. 5.8/applet.js:1314 4.8/applet.js:1323
 msgid "{deviceCount} available device"
 msgstr ""
 
-#. 5.8/applet.js:1287 4.8/applet.js:1325
+#. 5.8/applet.js:1316 4.8/applet.js:1325
 msgid "{deviceCount} available devices"
 msgstr ""
 
@@ -416,6 +416,10 @@ msgstr ""
 msgid "Panel"
 msgstr ""
 
+#. 5.8->settings-schema.json->section_device-icons->title
+msgid "Device Icons"
+msgstr ""
+
 #. 5.8->settings-schema.json->section_devices->title
 #. 4.8->settings-schema.json->section_devices->title
 msgid "Devices"
@@ -528,6 +532,64 @@ msgstr ""
 
 #. 5.8->settings-schema.json->icon_no-connected-devices->description
 msgid "Icon to use when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->switch_use-custom-device-icons->description
+msgid "Use custom icons for device items in the popup menu"
+msgstr ""
+
+#. 5.8->settings-schema.json->switch_use-custom-device-icons->tooltip
+msgid ""
+"Override the KDE Connect status icon with your own symbolic icon per device "
+"type"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-phone->description
+msgid "Icon for phones"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-phone->tooltip
+msgid "e.g. phone-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-tablet->description
+msgid "Icon for tablets"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-tablet->tooltip
+msgid "e.g. tablet-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-desktop->description
+msgid "Icon for desktops"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-desktop->tooltip
+msgid "e.g. computer-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-laptop->description
+msgid "Icon for laptops"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-laptop->tooltip
+msgid "e.g. laptop-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-tv->description
+msgid "Icon for TVs"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-tv->tooltip
+msgid "e.g. tv-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-fallback->description
+msgid "Fallback icon"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-fallback->tooltip
+msgid "Used for unknown device types or when no icon is provided"
 msgstr ""
 
 #. 5.8->settings-schema.json->button_open-kdec-settings->description
