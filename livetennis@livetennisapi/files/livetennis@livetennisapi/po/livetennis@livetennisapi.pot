@@ -1,0 +1,225 @@
+# LIVE TENNIS SCORES
+# This file is put in the public domain.
+# livetennisapi, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: livetennis@livetennisapi 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-09-12 17:10+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#. applet.js:297
+msgid "Tennis: rate limited"
+msgstr ""
+
+#. applet.js:300
+msgid "Tennis: key rejected"
+msgstr ""
+
+#. applet.js:303
+#, javascript-format
+msgid "Tennis: service error (%d)"
+msgstr ""
+
+#. applet.js:306
+msgid "Tennis: bad response"
+msgstr ""
+
+#. applet.js:309
+msgid "Tennis: offline"
+msgstr ""
+
+#. applet.js:418
+msgid "No live tennis in this selection"
+msgstr ""
+
+#. applet.js:505
+msgid "Tennis: set API key"
+msgstr ""
+
+#. applet.js:514
+msgid "Tennis: loading"
+msgstr ""
+
+#. applet.js:589 applet.js:630 applet.js:685
+msgid "No live tennis"
+msgstr ""
+
+#. applet.js:653
+msgid "Break point"
+msgstr ""
+
+#. applet.js:655
+#, javascript-format
+msgid "%d match in play. Click for the full list."
+msgid_plural "%d matches in play. Click for the full list."
+msgstr[0] ""
+msgstr[1] ""
+
+#. applet.js:675
+#, javascript-format
+msgid "Next update at %s."
+msgstr ""
+
+#. applet.js:684
+msgid "Enter your Live Tennis API key in this applet's settings."
+msgstr ""
+
+#. applet.js:701
+#, javascript-format
+msgid "%d more match in play."
+msgid_plural "%d more matches in play."
+msgstr[0] ""
+msgstr[1] ""
+
+#. metadata.json->name
+msgid "Live Tennis Scores"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Live ATP, WTA, Challenger and ITF scores on the panel, with serve and break-"
+"point markers"
+msgstr ""
+
+#. settings-schema.json->account-page->title
+msgid "Account"
+msgstr ""
+
+#. settings-schema.json->display-page->title
+msgid "Display"
+msgstr ""
+
+#. settings-schema.json->credentials-section->title
+msgid "Live Tennis API key"
+msgstr ""
+
+#. settings-schema.json->cadence-section->title
+msgid "Updates"
+msgstr ""
+
+#. settings-schema.json->filter-section->title
+msgid "Which matches"
+msgstr ""
+
+#. settings-schema.json->panel-section->title
+msgid "Panel"
+msgstr ""
+
+#. settings-schema.json->credentials-label->description
+msgid ""
+"This applet reads live scores from the Live Tennis API, a third-party "
+"service. A free key (no card) is issued at livetennisapi.com and is enough "
+"for everything this applet does. Until a key is entered the applet makes no "
+"network requests at all."
+msgstr ""
+
+#. settings-schema.json->api-key->description
+msgid "API key"
+msgstr ""
+
+#. settings-schema.json->api-key->tooltip
+msgid ""
+"Paste the key from your Live Tennis API account. It is sent only to "
+"api.livetennisapi.com, in a request header, and is never written to the "
+"Cinnamon log."
+msgstr ""
+
+#. settings-schema.json->cadence-label->description
+msgid ""
+"A free key allows 100 requests a day. This applet spends one request per "
+"update, so 15 minutes (96 a day) is the fastest cadence a free key can "
+"sustain for a whole day. Shorter intervals are not offered, and the applet "
+"enforces the 15-minute floor itself."
+msgstr ""
+
+#. settings-schema.json->refresh-minutes->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->refresh-minutes->description
+msgid "Fetch new scores every"
+msgstr ""
+
+#. settings-schema.json->tour->description
+msgid "Tour"
+msgstr ""
+
+#. settings-schema.json->tour->options
+msgid "All tours"
+msgstr ""
+
+#. settings-schema.json->tour->options
+msgid "ATP"
+msgstr ""
+
+#. settings-schema.json->tour->options
+msgid "WTA"
+msgstr ""
+
+#. settings-schema.json->tour->options
+msgid "Challenger"
+msgstr ""
+
+#. settings-schema.json->tour->options
+msgid "ITF"
+msgstr ""
+
+#. settings-schema.json->draw->description
+msgid "Draw"
+msgstr ""
+
+#. settings-schema.json->draw->options
+msgid "Singles and doubles"
+msgstr ""
+
+#. settings-schema.json->draw->options
+msgid "Singles only"
+msgstr ""
+
+#. settings-schema.json->draw->options
+msgid "Doubles only"
+msgstr ""
+
+#. settings-schema.json->draw->tooltip
+msgid ""
+"Team ties, where the feed does not say which rubber a match belongs to, are "
+"left out by either of the narrower choices. This choice is applied to scores "
+"already fetched, so changing it costs no requests."
+msgstr ""
+
+#. settings-schema.json->menu-limit->units
+msgid "matches"
+msgstr ""
+
+#. settings-schema.json->menu-limit->description
+msgid "List at most"
+msgstr ""
+
+#. settings-schema.json->show-icon->description
+msgid "Show an icon on the panel"
+msgstr ""
+
+#. settings-schema.json->cycle-seconds->units
+msgid "seconds"
+msgstr ""
+
+#. settings-schema.json->cycle-seconds->description
+msgid "Show the next match every"
+msgstr ""
+
+#. settings-schema.json->cycle-seconds->tooltip
+msgid ""
+"How long each match stays on the panel. This only rotates scores already "
+"fetched, so it costs no requests and does not affect your daily allowance."
+msgstr ""
