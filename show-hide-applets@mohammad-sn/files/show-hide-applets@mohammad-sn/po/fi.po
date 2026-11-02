@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-20 06:07+0100\n"
+"POT-Creation-Date: 2026-07-30 15:05+0000\n"
 "PO-Revision-Date: 2025-04-04 16:15+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -19,44 +19,52 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:60 applet.js:231
+#. 3.0/applet.js:74 3.0/applet.js:336 6.6/applet.js:563
 msgid "Autohide ON"
 msgstr "Piilotus ON"
 
-#. applet.js:62 applet.js:233
+#. 3.0/applet.js:75 3.0/applet.js:337 6.6/applet.js:565
 msgid "Autohide OFF"
 msgstr "Piilotus POIS"
 
-#. applet.js:82
+#. 3.0/applet.js:145 6.6/applet.js:598
 msgid "Panel Edit mode"
 msgstr "Paneelin muokkaustila"
 
-#. applet.js:88
+#. 3.0/applet.js:154
 msgid "Add applets to the panel"
 msgstr "Lisää sovelmia paneeliin"
 
-#. settings-schema.json->autohide->description
-#. applet.js:96
+#. 3.0->settings-schema.json->autohide->description
+#. 6.6->settings-schema.json->do_autohide->description
+#. 3.0/applet.js:173 6.6/applet.js:609
 msgid "Autohide"
 msgstr "Piilota automaattisesti"
 
-#. metadata.json->description
-msgid ""
-"hide a few applet to have a neater panel, and make them show up again by a "
-"click"
+#. 6.6/applet.js:591
+msgid "Reset icons list"
 msgstr ""
-"Piilottaa osan paneelin sovelmista riippuen mistä kohdasta haluat kuvakkeet "
-"piilottaa"
 
 #. metadata.json->name
 msgid "Drawer (show/hide applets)"
 msgstr "Drawer"
 
-#. settings-schema.json->head->description
+#. metadata.json->description
+#, fuzzy
+msgid ""
+"Hide a few applets to have a neater panel, and make them show up again by a "
+"click"
+msgstr ""
+"Piilottaa osan paneelin sovelmista riippuen mistä kohdasta haluat kuvakkeet "
+"piilottaa"
+
+#. 3.0->settings-schema.json->head->description
+#. 6.6->settings-schema.json->head->description
 msgid "Settings for show-hide-applets@mohammad-sn"
 msgstr "Asetukset: show-hide-applets@mohammad-sn"
 
-#. settings-schema.json->autohide->tooltip
+#. 3.0->settings-schema.json->autohide->tooltip
+#. 6.6->settings-schema.json->do_autohide->tooltip
 msgid ""
 "Check it if you want to hide applets automatically, unless you should click "
 "on applet to do so.\n"
@@ -66,55 +74,86 @@ msgstr ""
 "napsauttaa hiirellä,\n"
 "Tilaa voidaan muuttaa painamalla hiiren keskipainikkeella."
 
-#. settings-schema.json->statusintooltip->description
+#. 3.0->settings-schema.json->statusintooltip->description
 msgid "Show Autohide status in tooltip"
 msgstr "Näytä piilotuksen tila vihjeessä"
 
-#. settings-schema.json->disablestarttimeautohide->description
+#. 3.0->settings-schema.json->disablestarttimeautohide->description
 msgid "Disable start time autohide"
 msgstr "Poista käynnistyksessä piilotus käytöstä"
 
-#. settings-schema.json->disablestarttimeautohide->tooltip
+#. 3.0->settings-schema.json->disablestarttimeautohide->tooltip
 msgid "if not in autohide mode"
 msgstr "Jos ei niin piilotustila on automaattinen"
 
-#. settings-schema.json->hidetime->units
-#. settings-schema.json->autohiderstime->units
+#. 3.0->settings-schema.json->hidetime->units
+#. 3.0->settings-schema.json->autohiderstime->units
+#. 6.6->settings-schema.json->hidetime->units
 msgid "seconds"
 msgstr "sekuntia"
 
-#. settings-schema.json->hidetime->description
+#. 3.0->settings-schema.json->hidetime->description
+#. 6.6->settings-schema.json->hidetime->description
 msgid "Autohide after "
 msgstr "Piilota automaattisesti "
 
-#. settings-schema.json->hoveractivates->description
+#. 3.0->settings-schema.json->hoveractivates->description
 msgid "Activate on hover"
 msgstr "Osoittaminen"
 
-#. settings-schema.json->hoveractivates->tooltip
+#. 3.0->settings-schema.json->hoveractivates->tooltip
+#. 6.6->settings-schema.json->hoveractivates->tooltip
 msgid "show applets on mouse hover"
 msgstr "Näyttää sovelmat hiiren osoituksella"
 
-#. settings-schema.json->hoveractivateshide->description
+#. 3.0->settings-schema.json->hoveractivateshide->description
+#. 6.6->settings-schema.json->hoveractivateshide->description
 msgid "Hide on hovering again"
 msgstr "Piilota kun osoitat sovelmaa"
 
-#. settings-schema.json->hoveractivateshide->tooltip
+#. 3.0->settings-schema.json->hoveractivateshide->tooltip
+#. 6.6->settings-schema.json->hoveractivateshide->tooltip
 msgid "toggle visibility of applets on mouse hover"
 msgstr "Vaihtaa sovelmien näkyvyyttä osoittamalla hiirellä"
 
-#. settings-schema.json->hovertime->units
+#. 3.0->settings-schema.json->hovertime->units
+#. 6.6->settings-schema.json->hovertime->units
 msgid "miliseconds"
 msgstr "millisekuntia"
 
-#. settings-schema.json->hovertime->description
+#. 3.0->settings-schema.json->hovertime->description
 msgid "Hover activates/hides after "
 msgstr "Osoitus piilottaa "
 
-#. settings-schema.json->autohiders->description
+#. 3.0->settings-schema.json->autohiders->description
+#. 6.6->settings-schema.json->autohiders->description
 msgid "Autohide reshowing applets"
 msgstr "Piilota uudelleen automaattisesti"
 
-#. settings-schema.json->autohiderstime->description
+#. 3.0->settings-schema.json->autohiderstime->description
 msgid "Reshowers' autohide delay: "
 msgstr "Piilotuksen viive: "
+
+#. 3.0->settings-schema.json->hideuntilseparator->description
+#. 6.6->settings-schema.json->hideuntilseparator->description
+msgid "Only hide until next separator"
+msgstr ""
+
+#. 3.0->settings-schema.json->hideuntilseparator->tooltip
+#. 6.6->settings-schema.json->hideuntilseparator->tooltip
+msgid "Only hide everything until the next separator element occurs."
+msgstr ""
+
+#. 6.6->settings-schema.json->hoveractivates->description
+#, fuzzy
+msgid "Show on hover"
+msgstr "Osoittaminen"
+
+#. 6.6->settings-schema.json->hovertime->description
+#, fuzzy
+msgid "Hover shows/hides after "
+msgstr "Osoitus piilottaa "
+
+#. 6.6->settings-schema.json->icons->description
+msgid "Internal icons state"
+msgstr ""

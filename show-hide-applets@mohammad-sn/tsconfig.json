@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+
+    // Cinnamon TypeScript declarations
+    "types": ["@ci-types/cjs"],
+
+    "strict": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}

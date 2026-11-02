@@ -1,0 +1,2 @@
+cd show-hide-applets@mohammad-sn
+pnpm lint-staged
