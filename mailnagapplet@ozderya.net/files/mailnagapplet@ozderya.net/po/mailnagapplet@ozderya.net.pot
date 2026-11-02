@@ -104,6 +104,16 @@ msgstr ""
 msgid "Mailnag mail notifier applet"
 msgstr ""
 
+#. settings-schema.json->hide_on_zero->description
+msgid "Hide icon when no unread emails"
+msgstr ""
+
+#. settings-schema.json->hide_on_zero->tooltip
+msgid ""
+"If enabled, the applet icon will disappear from the panel when the "
+"unread email count is zero."
+msgstr ""
+
 #. settings-schema.json->notifications->description
 msgid "Show notifications"
 msgstr ""
