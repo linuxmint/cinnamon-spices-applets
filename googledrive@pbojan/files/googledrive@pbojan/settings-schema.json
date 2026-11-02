@@ -10,6 +10,7 @@
       "title": "Configuration",
       "sections": [
         "sectionGeneralOptions",
+        "sectionRcloneConfig",
         "sectionWhitelist"
       ]
     },
@@ -17,7 +18,7 @@
       "type": "page",
       "title": "Help",
       "sections": [
-        "sectionNote",
+        "sectionRcloneDocs",
         "sectionHelp",
         "sectionIssues"
       ]
@@ -29,6 +30,14 @@
         "location"
       ]
     },
+    "sectionRcloneConfig": {
+      "type": "section",
+      "title": "rclone Remote",
+      "keys": [
+        "remote",
+        "remoteHelp"
+      ]
+    },
     "sectionWhitelist": {
       "type": "section",
       "title": "Whitelisted Folders",
@@ -37,11 +46,12 @@
         "whitelistHelp"
       ]
     },
-    "sectionNote": {
+    "sectionRcloneDocs": {
       "type": "section",
-      "title": "Important Message",
+      "title": "rclone Setup",
       "keys": [
-        "note"
+        "rcloneDocs",
+        "rcloneDocsButton"
       ]
     },
     "sectionHelp": {
@@ -70,6 +80,16 @@
     "select-dir": true,
     "default": ""
   },
+  "remote": {
+    "type": "entry",
+    "description": "rclone Remote Name",
+    "tooltip": "The name of your rclone Google Drive remote, without the trailing colon (e.g. gdrive). Run 'rclone listremotes' in a terminal to see your configured remotes.",
+    "default": ""
+  },
+  "remoteHelp": {
+    "type": "label",
+    "description": "Enter the rclone remote name configured for Google Drive (run 'rclone listremotes' in a terminal to see your remotes, without the trailing colon e.g. gdrive)."
+  },
   "whitelistHelp": {
     "type": "label",
     "description": "Note: If you want to sync only specific folders please make sure to add them on the list above. Please enter the names exactly as they are named in your Drive! It is also possible to add subfolders e.g. Documents/Work/Projects."
@@ -84,12 +104,19 @@
       }
     ],
     "description": "Whitelist Folders",
-    "tooltip": "Whitelist folders that will be sycned from Google Drive e.g. Documents, Photos",
+    "tooltip": "Whitelist folders that will be synced from Google Drive e.g. Documents, Photos",
     "default": []
   },
-  "note": {
+  "rcloneDocs": {
     "type": "label",
-    "description": "Note: This is a new release of this Applet, so your feedback and ideas are very important to make this applet better in the future. Please consider reporting any issues, bugs, instabilities, or ideas for general improvements on the links below! Thank you!"
+    "description": "To configure rclone with Google Drive, click the button below to open the official rclone Google Drive documentation."
+  },
+  "rcloneDocsButton": {
+    "type": "button",
+    "description": "Open rclone Google Drive Docs",
+    "callback": "openRcloneDocs",
+    "tooltip": "Opens the rclone Google Drive setup documentation in a browser.",
+    "indent": true
   },
   "website": {
     "type": "label",
