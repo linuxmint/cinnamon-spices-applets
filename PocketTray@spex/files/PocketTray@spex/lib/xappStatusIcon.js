@@ -1,12 +1,18 @@
-// XApp status icons for PocketTray.
-// Adapted from xapp-status@cinnamon.org (linuxmint/cinnamon, GPL-2.0+).
+// One XApp status icon in the panel or pocket, plus the screen-recording
+// indicator. Adapted from xapp-status@cinnamon.org (linuxmint/cinnamon,
+// GPL-2.0-or-later).
 //
 // Differences to the original:
-//  - the owning applet decides which container (panel or pocket) an icon
-//    lives in; the icon only reports changes back via applet callbacks
-//  - clicks on an icon inside the pocket close the pocket before the
-//    application opens its own menu, so Cinnamon's modal grab is gone
-//  - getId() gives a stable identifier for the hidden-apps list
+//  - the icon does not place itself: XAppHost decides between panel and
+//    pocket and is told about changes through host.onIconChanged()
+//  - `id` identifies the icon in the hidden list: the proxy name, or the
+//    process name for unnamed StatusNotifierItems (resolved asynchronously)
+//  - before a click reaches the application, host.onIconActivated() lets
+//    the pocket close, so its modal grab can't block the application's menu
+//
+// Host interface (implemented by XAppHost):
+//   host.orientation, host.getPanelIconSize(type), host.isVertical()
+//   host.onIconChanged(icon), host.onIconActivated(icon)
 
 const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St;
@@ -29,9 +35,9 @@ function getProxyId(proxy) {
 }
 
 // Red dot while Cinnamon's screen recorder is running (part of xapp-status).
-class RecorderIcon {
-    constructor(applet) {
-        this.applet = applet;
+var RecorderIcon = class RecorderIcon {
+    constructor(host) {
+        this._host = host;
         this.actor = new St.BoxLayout({
             style_class: "applet-box",
             reactive: false,
@@ -73,8 +79,8 @@ class RecorderIcon {
     }
 
     refresh() {
-        const size = this.applet.getPanelIconSize(St.IconType.FULLCOLOR);
-        this.actor.vertical = this.applet.isVertical();
+        const size = this._host.getPanelIconSize(St.IconType.FULLCOLOR);
+        this.actor.vertical = this._host.isVertical();
         this._indicator.set_size(size, size);
         this._indicator.queue_repaint();
     }
@@ -86,19 +92,17 @@ class RecorderIcon {
         }
         this.actor.destroy();
     }
-}
+};
 
-class XAppStatusIcon {
-    constructor(applet, proxy) {
-        this.applet = applet;
+var XAppStatusIcon = class XAppStatusIcon {
+    constructor(host, proxy) {
+        this._host = host;
         this.proxy = proxy;
-        this.name = proxy.get_name();
         this.id = getProxyId(proxy);
-        // Anonymous StatusNotifierItem: id comes from the process name
+        // Unnamed StatusNotifierItem: id becomes the process name
         this.anonymous = SNI_NAME.test(proxy.name || "");
         this._cancellable = new Gio.Cancellable();
         this._resolveProcessName();
-        this.iconName = null;
         this.icon_loader_handle = null;
 
         this.actor = new St.BoxLayout({
@@ -108,10 +112,9 @@ class XAppStatusIcon {
             x_expand: true,
             y_expand: true
         });
-        this.actor._pocketTrayXApp = this;   // lets the applet tell XApp actors apart
 
         this.icon_holder = new St.Bin();
-        this.iconSize = this.applet.getPanelIconSize(St.IconType.FULLCOLOR);
+        this.iconSize = this._host.getPanelIconSize(St.IconType.FULLCOLOR);
         this.proxy.icon_size = this.iconSize;
 
         this.label = new St.Label({ 'y-align': St.Align.END });
@@ -119,7 +122,7 @@ class XAppStatusIcon {
         this.actor.add_actor(this.icon_holder);
         this.actor.add_actor(this.label);
 
-        this._tooltip = new Tooltips.PanelItemTooltip(this, "", applet.orientation);
+        this._tooltip = new Tooltips.PanelItemTooltip(this, "", host.orientation);
 
         this.actor.connect('button-press-event', (a, e) => this.onButtonPressEvent(a, e));
         this.actor.connect('button-release-event', (a, e) => this.onButtonReleaseEvent(a, e));
@@ -140,21 +143,20 @@ class XAppStatusIcon {
         if ('Label' in prop_names) this.setLabel(proxy.label);
         if ('Visible' in prop_names) {
             this.setVisible(proxy.visible);
-            this.applet.onXAppIconChanged(this);
+            this._host.onIconChanged(this);
         }
         if ('Name' in prop_names) {
-            this.name = proxy.get_name();
             this.id = getProxyId(proxy);
             this.anonymous = SNI_NAME.test(proxy.name || "");
             this._resolveProcessName();
-            this.applet.onXAppIconChanged(this);
+            this._host.onIconChanged(this);
         }
         if ('PrimaryMenuIsOpen' in prop_names && !proxy.primary_menu_is_open) this.actor.sync_hover();
         if ('SecondaryMenuIsOpen' in prop_names && !proxy.secondary_menu_is_open) this.actor.sync_hover();
     }
 
-    // For anonymous StatusNotifierItems read /proc/<pid>/comm without
-    // blocking, then let the applet re-sort the icon under its new id.
+    // For unnamed StatusNotifierItems read /proc/<pid>/comm without
+    // blocking, then let the host re-sort the icon under its new id.
     _resolveProcessName() {
         const m = (this.proxy.name || "").match(SNI_NAME);
         if (!m) return;
@@ -165,7 +167,7 @@ class XAppStatusIcon {
                 const comm = ok ? new TextDecoder().decode(bytes).trim().toLowerCase() : "";
                 if (comm && this.proxy && comm !== this.id) {
                     this.id = comm;
-                    this.applet.onXAppIconChanged(this);
+                    this._host.onIconChanged(this);
                 }
             } catch (e) {
                 // cancelled or process already gone: keep the raw name
@@ -178,7 +180,7 @@ class XAppStatusIcon {
         this.setLabel(this.proxy.label);
         this.setTooltipText(this.proxy.tooltip_text);
         this.setVisible(this.proxy.visible);
-        this.setOrientation(this.applet.orientation);
+        this.setOrientation(this._host.orientation);
         this.actor.queue_relayout();
     }
 
@@ -195,15 +197,13 @@ class XAppStatusIcon {
 
     setIconName(iconName) {
         if (!iconName || !iconName.trim()) {
-            this.iconName = null;
             this.icon_holder.hide();
             return;
         }
 
         const type = iconName.match(/symbolic/) ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR;
 
-        this.iconName = iconName;
-        this.iconSize = this.applet.getPanelIconSize(type);
+        this.iconSize = this._host.getPanelIconSize(type);
         this.proxy.icon_size = this.iconSize;
 
         // Assume symbolic icons are always square/suitable for an StIcon.
@@ -247,7 +247,7 @@ class XAppStatusIcon {
 
     setLabel(label) {
         this.label.set_text(label || "");
-        this.label.visible = !this.applet.isVertical() && !!label && label.length > 0;
+        this.label.visible = !this._host.isVertical() && !!label && label.length > 0;
     }
 
     setVisible(visible) {
@@ -264,7 +264,7 @@ class XAppStatusIcon {
         let w = Math.round((allocation.x2 - allocation.x1) / global.ui_scale);
         let h = Math.round((allocation.y2 - allocation.y1) / global.ui_scale);
 
-        switch (this.applet.orientation) {
+        switch (this._host.orientation) {
             case St.Side.TOP:   return [x, y + h, Gtk.PositionType.TOP];
             case St.Side.LEFT:  return [x + w, y, Gtk.PositionType.LEFT];
             case St.Side.RIGHT: return [x, y, Gtk.PositionType.RIGHT];
@@ -295,7 +295,7 @@ class XAppStatusIcon {
 
         // Close the pocket first: its modal grab would block the menu the
         // application is about to open.
-        this.applet.onXAppIconActivated(this);
+        this._host.onIconActivated(this);
 
         this.proxy.call_button_release(x, y, event.get_button(), event.get_time(), o, null, null);
 
@@ -335,4 +335,4 @@ class XAppStatusIcon {
         this.actor.destroy();
         this.proxy = null;
     }
-}
+};
