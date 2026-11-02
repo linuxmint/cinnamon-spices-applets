@@ -1,0 +1,73 @@
+.display-switcher-info {
+    font-size: 0.85em;
+    opacity: 0.75;
+    padding: 0.4em 1em;
+}
+
+.display-switcher-info-label {
+    font-weight: normal;
+}
+
+/* === Win+P-Stil Band-Overlay === */
+
+.display-switcher-modal {
+    padding: 16px 20px 20px 20px;
+}
+
+.display-switcher-band-title {
+    font-size: 1.05em;
+    font-weight: bold;
+    padding-bottom: 12px;
+}
+
+.display-switcher-band {
+    spacing: 10px;
+}
+
+.display-switcher-tile {
+    border-radius: 6px;
+    padding: 10px 8px;
+    border: 2px solid transparent;
+    background-color: rgba(127, 127, 127, 0.08);
+    transition-duration: 120ms;
+}
+
+.display-switcher-tile:hover,
+.display-switcher-tile:focus {
+    background-color: rgba(127, 127, 127, 0.20);
+    border: 2px solid rgba(127, 127, 127, 0.35);
+}
+
+.display-switcher-tile-focused {
+    background-color: rgba(127, 127, 127, 0.22);
+    border: 2px solid rgba(127, 127, 127, 0.50);
+}
+
+.display-switcher-tile-selected {
+    border: 2px solid #4a90d9;
+    background-color: rgba(74, 144, 217, 0.15);
+}
+
+.display-switcher-tile-selected.display-switcher-tile-focused {
+    border: 2px solid #4a90d9;
+    background-color: rgba(74, 144, 217, 0.28);
+}
+
+.display-switcher-tile-disabled {
+    opacity: 0.35;
+}
+
+.display-switcher-tile-box {
+    spacing: 8px;
+    width: 96px;
+}
+
+.display-switcher-tile-icon {
+    icon-size: 40px;
+}
+
+.display-switcher-tile-label {
+    font-size: 0.82em;
+    text-align: center;
+    max-width: 92px;
+}
