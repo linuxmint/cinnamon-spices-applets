@@ -1,0 +1,63 @@
+.battery-plus-box {
+    spacing: 6px;
+}
+
+.battery-plus-labels {
+    spacing: 0px;
+}
+
+.battery-plus-top {
+    font-size: 1em;
+    font-weight: bold;
+    padding: 0px;
+}
+
+.battery-plus-bottom {
+    font-size: 0.78em;
+    opacity: 0.75;
+    padding: 0px;
+}
+
+.battery-plus-info {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.battery-plus-sub {
+    opacity: 0.75;
+}
+
+.battery-plus-graph-note {
+    font-size: 0.85em;
+    opacity: 0.6;
+}
+
+.battery-plus-pad {
+    padding: 8px 14px;
+}
+
+.battery-plus-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.battery-plus-stat-name {
+    opacity: 0.65;
+    padding-right: 18px;
+}
+
+.battery-plus-stat-value {
+    font-weight: bold;
+}
+
+.battery-plus-section-label {
+    font-size: 0.85em;
+    opacity: 0.6;
+    padding-top: 4px;
+}
+
+.battery-plus-graph-box {
+    border-radius: 6px;
+    padding: 6px;
+    margin: 0px 14px;
+}
