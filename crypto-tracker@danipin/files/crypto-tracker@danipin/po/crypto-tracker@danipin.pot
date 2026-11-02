@@ -1,0 +1,573 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 23:49+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Row 2: Total Value
+#: applet.js:442 applet.js:445 applet.js:789 portfolio.js:699 utils.js:106
+msgid "Loading..."
+msgstr ""
+
+#: applet.js:730
+#, javascript-format
+msgid "Price Alarm: %s"
+msgstr ""
+
+#: applet.js:730
+#, javascript-format
+msgid "Target %s reached! Price: %s"
+msgstr ""
+
+#: applet.js:742 alarm.js:336
+msgid "risen"
+msgstr ""
+
+#: applet.js:742 alarm.js:336
+msgid "fallen"
+msgstr ""
+
+#: applet.js:743 alarm.js:337
+#, javascript-format
+msgid "Volatility Alarm: %s"
+msgstr ""
+
+#: applet.js:743 alarm.js:337
+#, javascript-format
+msgid "%s has %s by %s%%"
+msgstr ""
+
+#: applet.js:857
+msgid "Colors reset to default values."
+msgstr ""
+
+#: applet.js:917
+msgid "List updated! Please reopen settings."
+msgstr ""
+
+#: applet.js:1468
+msgid "NEW ALL TIME HIGH 🚀"
+msgstr ""
+
+#: applet.js:1977
+msgid "API Limit Reached"
+msgstr ""
+
+#: applet.js:1977
+#, javascript-format
+msgid "You have used 100% of your monthly limit (10k)."
+msgstr ""
+
+#: applet.js:1984
+msgid "Power Saving Enabled"
+msgstr ""
+
+#: applet.js:1984
+msgid "Interval set to 5 min to avoid API ban."
+msgstr ""
+
+#: applet.js:1987
+msgid "API Limit Warning"
+msgstr ""
+
+#: applet.js:1987
+#, javascript-format
+msgid "You have reached 90% of your limit."
+msgstr ""
+
+#: applet.js:1990
+msgid "API Limit Info"
+msgstr ""
+
+#: applet.js:1990
+#, javascript-format
+msgid "You have reached 80% of your limit."
+msgstr ""
+
+#. Set base texts
+#: footer.js:94
+msgid "API: Active"
+msgstr ""
+
+#: footer.js:94
+msgid "Basic Mode"
+msgstr ""
+
+#: footer.js:98
+msgid "Source: CoinGecko"
+msgstr ""
+
+#: footer.js:101
+msgid "Get Free API Key"
+msgstr ""
+
+#: footer.js:111
+#, javascript-format
+msgid "Month: %s"
+msgstr ""
+
+#: footer.js:112
+#, javascript-format
+msgid "Ø: %s"
+msgstr ""
+
+#: footer.js:115
+#, javascript-format
+msgid "Alarms: %s"
+msgstr ""
+
+#: header.js:117 header.js:275
+msgid "Portfolio Tracker"
+msgstr ""
+
+#: header.js:119 header.js:276
+msgid "Alarm Management"
+msgstr ""
+
+#: header.js:121 header.js:278
+msgid "API Usage & Stats"
+msgstr ""
+
+#: header.js:123
+msgid "Support Development"
+msgstr ""
+
+#. IMPORTANT: For the drawing loop we need the pure text without markup!
+#: header.js:128 header.js:274 header.js:641
+msgid "Market Dashboard"
+msgstr ""
+
+#: header.js:130 header.js:642
+msgid "24H Price Change [%]"
+msgstr ""
+
+#: header.js:280
+msgid "Support"
+msgstr ""
+
+#: header.js:284
+msgid "Settings"
+msgstr ""
+
+#: alarm.js:242
+msgid "Alarm Archive Full"
+msgstr ""
+
+#: alarm.js:242
+#, javascript-format
+msgid "Oldest alarm for %s was deleted."
+msgstr ""
+
+#: alarm.js:324
+#, javascript-format
+msgid "Background Alarm: %s"
+msgstr ""
+
+#: alarm.js:324
+#, javascript-format
+msgid "Target price %s reached! Current: %s"
+msgstr ""
+
+#: alarm.js:469
+msgid "Alarm Settings"
+msgstr ""
+
+#: alarm.js:573
+#, javascript-format
+msgid "Target Price (%s):"
+msgstr ""
+
+#: alarm.js:574
+msgid "Change (%):"
+msgstr ""
+
+#: alarm.js:577
+msgid "Press ENTER to save."
+msgstr ""
+
+#: alarm.js:643 alarm.js:652
+msgid "Search alarms..."
+msgstr ""
+
+#: alarm.js:739 portfolio.js:1262
+msgid "No matches."
+msgstr ""
+
+#: alarm.js:739
+msgid "No alarms here yet."
+msgstr ""
+
+#: alarm.js:856
+#, javascript-format
+msgid "Target: %s"
+msgstr ""
+
+#: alarm.js:857
+#, javascript-format
+msgid "Vol: %s%%"
+msgstr ""
+
+#: alarm.js:860
+#, javascript-format
+msgid "Current: %s"
+msgstr ""
+
+#: alarm.js:865
+#, javascript-format
+msgid "Created: %s"
+msgstr ""
+
+#. Price Input
+#: alarm.js:1023
+msgid "Target:"
+msgstr ""
+
+#. Vol Input
+#: alarm.js:1044
+msgid "Vol %:"
+msgstr ""
+
+#: alarm.js:1058
+msgid "ENTER to save"
+msgstr ""
+
+#. Sort options
+#: alarm.js:1102 portfolio.js:1008
+msgid "Date"
+msgstr ""
+
+#: alarm.js:1103
+msgid "Name"
+msgstr ""
+
+#: alarm.js:1166 alarm.js:1218
+msgid "Delete all"
+msgstr ""
+
+#: alarm.js:1174 alarm.js:1182 alarm.js:1190 alarm.js:1213 portfolio.js:1212
+#: portfolio.js:1219
+msgid "Sure?"
+msgstr ""
+
+#: alarm.js:1230
+#, javascript-format
+msgid "Alarms %s of %s"
+msgstr ""
+
+#: donate.js:35
+msgid ""
+"If you like this applet, you can support\n"
+"its development with a donation."
+msgstr ""
+
+#: donate.js:181
+msgid "Address:"
+msgstr ""
+
+#: donate.js:212
+msgid "Copied"
+msgstr ""
+
+#: donate.js:212
+#, javascript-format
+msgid "%s address copied."
+msgstr ""
+
+#: search.js:33
+msgid "Search..."
+msgstr ""
+
+#: search.js:172
+msgid "No results..."
+msgstr ""
+
+#: portfolio.js:316
+msgid "Converting..."
+msgstr ""
+
+#: portfolio.js:365
+msgid "Error"
+msgstr ""
+
+#: portfolio.js:365
+msgid "Currency conversion failed."
+msgstr ""
+
+#: portfolio.js:603
+msgid "Total Balance"
+msgstr ""
+
+#. FIX: expand: false for label, insert spacer instead
+#: portfolio.js:720
+msgid "Select Currency"
+msgstr ""
+
+#: portfolio.js:790 portfolio.js:798
+msgid "Filter portfolio..."
+msgstr ""
+
+#: portfolio.js:1006
+msgid "Amount"
+msgstr ""
+
+#: portfolio.js:1007
+msgid "Buy Price"
+msgstr ""
+
+#. Add TX Button
+#: portfolio.js:1199
+msgid "+ Transaction"
+msgstr ""
+
+#. Delete Coin Button
+#: portfolio.js:1208 portfolio.js:1224
+msgid "Remove Position"
+msgstr ""
+
+#: portfolio.js:1262
+msgid "No positions here yet."
+msgstr ""
+
+#: portfolio.js:1288
+msgid "Add Coin"
+msgstr ""
+
+#: portfolio.js:1305 portfolio.js:1311
+msgid "Search (e.g. Bitcoin)..."
+msgstr ""
+
+#: portfolio.js:1398
+msgid "No results"
+msgstr ""
+
+#: seasonal.js:80
+msgid "HAPPY HALLOWEEN !"
+msgstr ""
+
+#: seasonal.js:378
+msgid "MERRY CHRISTMAS 🎄"
+msgstr ""
+
+#. Straighten up
+#: seasonal.js:486
+msgid "HAPPY BITCOIN PIZZA DAY 🍕"
+msgstr ""
+
+#: charts.js:181
+msgid "?"
+msgstr ""
+
+#: charts.js:228
+msgid "Rank:"
+msgstr ""
+
+#: charts.js:228
+msgid "M.Cap:"
+msgstr ""
+
+#: charts.js:229
+msgid "24h High:"
+msgstr ""
+
+#: charts.js:229
+msgid "24h Vol:"
+msgstr ""
+
+#: charts.js:230
+msgid "24h Low:"
+msgstr ""
+
+#: charts.js:230
+msgid "ATH:"
+msgstr ""
+
+#: utils.js:348
+msgid " (Rate Limit)"
+msgstr ""
+
+#: utils.js:349
+msgid " (API Key invalid)"
+msgstr ""
+
+#: utils.js:350
+msgid " (Network)"
+msgstr ""
+
+#: utils.js:352
+msgid "Crypto-Tracker Error"
+msgstr ""
+
+#: utils.js:352
+#, javascript-format
+msgid "An error was intercepted%s. See log."
+msgstr ""
+
+#: api.js:67
+msgid "API successfully activated."
+msgstr ""
+
+#: api.js:73
+msgid "No internet connection"
+msgstr ""
+
+#: api.js:75
+msgid "Key invalid"
+msgstr ""
+
+#: api.js:77
+msgid "Key blocked"
+msgstr ""
+
+#: api.js:79
+msgid "Limit reached"
+msgstr ""
+
+#: api.js:81
+msgid "Server error"
+msgstr ""
+
+#: api.js:85
+#, javascript-format
+msgid "API Error: %s"
+msgstr ""
+
+#: api.js:90
+msgid "System error"
+msgstr ""
+
+#: api.js:131
+msgid "System Diagnosis"
+msgstr ""
+
+#: api.js:143
+msgid "API Connection: Active & Valid"
+msgstr ""
+
+#: api.js:145
+msgid "Not configured"
+msgstr ""
+
+#: api.js:146
+#, javascript-format
+msgid "API Status: %s"
+msgstr ""
+
+#: api.js:154
+#, javascript-format
+msgid "Quota critical: %s%% used"
+msgstr ""
+
+#: api.js:156
+#, javascript-format
+msgid "Quota high: %s%% used"
+msgstr ""
+
+#: api.js:158
+#, javascript-format
+msgid "Quota: %s%% (In the green)"
+msgstr ""
+
+#: api.js:165
+#, javascript-format
+msgid "Period: %s days left in month."
+msgstr ""
+
+#: api.js:171
+#, javascript-format
+msgid "Tip: Interval (%ss) is aggressive for Free Tier."
+msgstr ""
+
+#: api.js:178
+msgid "Note: Error log exists."
+msgstr ""
+
+#: api.js:180
+msgid "System: No crashes logged."
+msgstr ""
+
+#: api.js:202 api.js:397
+msgid "Free API (Basic)"
+msgstr ""
+
+#: api.js:203 api.js:210
+msgid "Today:"
+msgstr ""
+
+#: api.js:204 api.js:211
+msgid "Month:"
+msgstr ""
+
+#: api.js:205 api.js:212
+msgid "Ø per Day:"
+msgstr ""
+
+#: api.js:209 api.js:398
+msgid "Key API (Pro)"
+msgstr ""
+
+#: api.js:224
+msgid "Distribution (Key Calls)"
+msgstr ""
+
+#: api.js:239
+msgid "Charts"
+msgstr ""
+
+#. Blue
+#: api.js:240
+msgid "Details"
+msgstr ""
+
+#. Purple
+#: api.js:241
+msgid "Search"
+msgstr ""
+
+#. Yellow
+#: api.js:242
+msgid "Portfolio"
+msgstr ""
+
+#. Cyan
+#: api.js:243
+msgid "Alarms"
+msgstr ""
+
+#. Red/Pink
+#: api.js:244
+msgid "Updates"
+msgstr ""
+
+#: api.js:294
+msgid "History (Last 14 Days)"
+msgstr ""
+
+#: api.js:417
+#, javascript-format
+msgid "Error Log (%s KB)"
+msgstr ""
+
+#: api.js:420
+msgid "The system prevented and logged crashes."
+msgstr ""
+
+#: api.js:426
+msgid "Delete"
+msgstr ""
+
+#: api.js:439
+msgid "Dismiss"
+msgstr ""
