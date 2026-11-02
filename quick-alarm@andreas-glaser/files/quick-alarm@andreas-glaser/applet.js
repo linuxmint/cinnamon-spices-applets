@@ -4,7 +4,6 @@ const MessageTray = imports.ui.messageTray;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const St = imports.gi.St;
-const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const AppletManager = imports.ui.appletManager;
 const Clutter = imports.gi.Clutter;
@@ -20,34 +19,29 @@ let AlarmText = null;
 let EntryKeys = null;
 let Hotkeys = null;
 let Icon = null;
+let AlarmPersistence = null;
+let SoundSchedule = null;
 
 function _spawnWithExitCallback(argv, onExit) {
-  const pid = Util.spawn(argv);
-  if (!pid) return 0;
-
-  if (onExit) {
+  const process = Gio.Subprocess.new(argv, Gio.SubprocessFlags.NONE);
+  process.wait_async(null, (proc, result) => {
+    let successful = false;
     try {
-      GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, (childPid) => {
-        try {
-          GLib.spawn_close_pid(childPid);
-        } catch (e) {
-          // ignore
-        }
-        try {
-          onExit(childPid);
-        } catch (e) {
-          // ignore
-        }
-      });
+      proc.wait_finish(result);
+      successful = proc.get_successful();
     } catch (e) {
-      // ignore
+      // Treat failed waits as unsuccessful exits.
     }
-  }
-
-  return pid;
+    try {
+      if (onExit) onExit(proc, successful);
+    } catch (e) {
+      // ignore callback failures
+    }
+  });
+  return process;
 }
 
-function _playChime({ onPid, onExit } = {}) {
+function _playChime({ onProcess, onExit, excludedCommands = null } = {}) {
   const candidates = [
     {
       cmd: "paplay",
@@ -68,19 +62,22 @@ function _playChime({ onPid, onExit } = {}) {
 
   for (const candidate of candidates) {
     try {
+      if (excludedCommands && excludedCommands.has(candidate.cmd)) continue;
       if (!GLib.find_program_in_path(candidate.cmd)) continue;
       const argv = candidate.argv();
       if (!argv) continue;
 
-      const pid = _spawnWithExitCallback(argv, (childPid) => onExit && onExit(childPid));
-      if (onPid && pid) onPid(pid);
-      return pid;
+      const process = _spawnWithExitCallback(argv, (proc, successful) => {
+        if (onExit) onExit(proc, successful, candidate.cmd);
+      });
+      if (onProcess) onProcess(process);
+      return process;
     } catch (e) {
       // try next candidate
     }
   }
 
-  return 0;
+  return null;
 }
 
 function QuickAlarmApplet(metadata, orientation, panelHeight, instanceId) {
@@ -119,11 +116,11 @@ QuickAlarmApplet.prototype = {
   },
 
   _updateIcon() {
-    const resolved = Icon.resolveIcon(this._useCustomIcon, this._customIcon, {
-      isAbsolutePath: (p) => GLib.path_is_absolute(p),
-      themeLookupIcon: (n) => Gtk.IconTheme.get_default().lookup_icon(n, 16, 0),
-    });
     try {
+      const resolved = Icon.resolveIcon(this._useCustomIcon, this._customIcon, {
+        isAbsolutePath: (p) => GLib.path_is_absolute(p),
+        themeLookupIcon: (n) => Gtk.IconTheme.get_default().lookup_icon(n, 16, 0),
+      });
       const methods = {
         symbolic_name: "set_applet_icon_symbolic_name",
         name: "set_applet_icon_name",
@@ -223,6 +220,16 @@ QuickAlarmApplet.prototype = {
     return "";
   },
 
+  _persistAlarms() {
+    if (this._suppressAlarmPersistence || !this.settings || !this._service) return;
+    try {
+      const stored = AlarmPersistence.serializeAlarms(this._service.list());
+      this.settings.setValue("savedAlarms", stored);
+    } catch (e) {
+      global.logWarning("quick-alarm: could not save alarms: " + e);
+    }
+  },
+
   _setEntryText(text) {
     if (this._entry.set_text) return this._entry.set_text(text);
     if (this._entry.clutter_text && this._entry.clutter_text.set_text)
@@ -239,17 +246,26 @@ QuickAlarmApplet.prototype = {
     this._openShortcut = "";
     this._openHotkeyName = `${metadata.uuid}-open-${instanceId}`;
     this._activeSoundTimers = new Set();
-    this._activeAudioPids = new Set();
+    this._activeAudioProcesses = new Set();
     this._blinkTimerId = 0;
     this._ringEndTimerId = 0;
     this._countdownTimerId = 0;
+    this._fullscreenAgoTimerId = 0;
+    this._fullscreenLayoutIdleId = 0;
+    this._nextAlarmIdleId = 0;
+    this._missedAlarmIdleId = 0;
     this._isRinging = false;
     this._ringToken = 0;
     this._panelState = "idle";
     this._fullscreenOverlay = null;
+    this._pendingFullscreenAlarms = [];
+    this._pendingMissedAlarms = [];
+    this._previousKeyFocus = null;
     this._useCustomIcon = false;
     this._customIcon = "alarm-symbolic";
     this._iconIsSymbolic = true;
+    this._suppressAlarmPersistence = true;
+    this._isShuttingDown = false;
 
     this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
     this.settings.bind("soundMode", "_soundMode");
@@ -276,7 +292,9 @@ QuickAlarmApplet.prototype = {
     this.menu.actor.add_style_class_name("qa-menu");
 
     this._cinnamonThemeSettings = new Gio.Settings({ schema_id: "org.cinnamon.theme" });
-    this._cinnamonThemeSettings.connect("changed::name", () => this._applyThemeClass());
+    this._cinnamonThemeChangedId = this._cinnamonThemeSettings.connect("changed::name", () =>
+      this._applyThemeClass(),
+    );
     this._applyThemeClass();
 
     const gearIcon = new St.Icon({
@@ -325,7 +343,7 @@ QuickAlarmApplet.prototype = {
 
     this._entry = new St.Entry({
       style_class: "qa-entry",
-      hint_text: "Type: in 10m tea  •  11am standup  •  Ctrl+Enter adds another",
+      hint_text: this._("Type: in 10m tea  •  11am standup  •  Ctrl+Enter adds another"),
       track_hover: true,
       can_focus: true,
     });
@@ -363,10 +381,23 @@ QuickAlarmApplet.prototype = {
     this.menu.addMenuItem(this._listSection);
 
     this._service = new AlarmService(
-      () => this._render(),
+      () => {
+        if (this._isShuttingDown) return;
+        this._persistAlarms();
+        this._render();
+      },
       (alarm) => this._fire(alarm),
-      { onMissed: (alarm) => this._missed(alarm) },
+      { onMissed: (alarm) => this._queueMissedAlarm(alarm) },
     );
+
+    try {
+      const restored = AlarmPersistence.deserializeAlarms(this.settings.getValue("savedAlarms"));
+      this._service.restore(restored);
+    } catch (e) {
+      global.logWarning("quick-alarm: could not restore alarms: " + e);
+    }
+    this._suppressAlarmPersistence = false;
+    this._persistAlarms();
 
     this._entryText = this._entry.clutter_text;
     this._entryText.connect("key-press-event", (_actor, event) => {
@@ -418,6 +449,16 @@ QuickAlarmApplet.prototype = {
   },
 
   on_applet_removed_from_panel() {
+    // The queue has already been persisted. Do not overwrite it with the
+    // service's empty shutdown state during logout or a Cinnamon restart.
+    this._suppressAlarmPersistence = true;
+    this._isShuttingDown = true;
+    this._pendingFullscreenAlarms = [];
+    this._pendingMissedAlarms = [];
+    if (this._nextAlarmIdleId) GLib.source_remove(this._nextAlarmIdleId);
+    this._nextAlarmIdleId = 0;
+    if (this._missedAlarmIdleId) GLib.source_remove(this._missedAlarmIdleId);
+    this._missedAlarmIdleId = 0;
     this._stopAllSounds();
     this._hideFullscreenOverlay();
     this._service.destroy();
@@ -426,6 +467,13 @@ QuickAlarmApplet.prototype = {
     } catch (e) {
       // ignore
     }
+    try {
+      if (this._cinnamonThemeSettings && this._cinnamonThemeChangedId)
+        this._cinnamonThemeSettings.disconnect(this._cinnamonThemeChangedId);
+    } catch (e) {
+      // ignore
+    }
+    this._cinnamonThemeChangedId = 0;
     try {
       if (Main.keybindingManager && this._openHotkeyName)
         Main.keybindingManager.removeHotKey(this._openHotkeyName);
@@ -450,10 +498,13 @@ QuickAlarmApplet.prototype = {
       }
 
       const label = AlarmText.getStoredLabel(parsed.label);
-      this._service.add(parsed.due, label, parsed.showSeconds);
+      const id = this._service.add(parsed.due, label, parsed.showSeconds);
+      if (!id) {
+        this._errorLabel.text = this._("Too many alarms queued.");
+        return;
+      }
       this._setEntryText("");
       this._errorLabel.text = "";
-      this._render();
       if (closeMenu) {
         this.menu.close();
       } else {
@@ -466,6 +517,12 @@ QuickAlarmApplet.prototype = {
   },
 
   _fire(alarm) {
+    if (this._isShuttingDown) return;
+    if (this._fullscreenOverlay || this._nextAlarmIdleId) {
+      this._pendingFullscreenAlarms.push(alarm);
+      return;
+    }
+
     this._stopAllSounds();
     this._playAlarmSound();
 
@@ -499,19 +556,44 @@ QuickAlarmApplet.prototype = {
     this._notificationSource.notify(notification);
   },
 
+  _queueMissedAlarm(alarm) {
+    if (this._isShuttingDown) return;
+    this._pendingMissedAlarms.push(alarm);
+    if (this._missedAlarmIdleId) return;
+
+    this._missedAlarmIdleId = GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+      this._missedAlarmIdleId = 0;
+      if (this._isShuttingDown) return GLib.SOURCE_REMOVE;
+
+      const missed = this._pendingMissedAlarms.splice(0);
+      if (missed.length === 1) {
+        this._missed(missed[0]);
+      } else if (missed.length > 1) {
+        const notification = new MessageTray.Notification(
+          this._notificationSource,
+          this._("Missed alarms"),
+          this._("%d alarms were missed.").replace("%d", missed.length),
+        );
+        notification.setTransient(true);
+        this._notificationSource.notify(notification);
+      }
+      return GLib.SOURCE_REMOVE;
+    });
+  },
+
   _stopAllSounds() {
     this._ringToken++;
     for (const id of this._activeSoundTimers) GLib.source_remove(id);
     this._activeSoundTimers.clear();
 
-    for (const pid of this._activeAudioPids) {
+    for (const process of this._activeAudioProcesses) {
       try {
-        Util.spawn(["kill", "-TERM", String(pid)]);
+        process.force_exit();
       } catch (e) {
         // ignore
       }
     }
-    this._activeAudioPids.clear();
+    this._activeAudioProcesses.clear();
 
     this._isRinging = false;
     if (this._ringEndTimerId) GLib.source_remove(this._ringEndTimerId);
@@ -522,17 +604,48 @@ QuickAlarmApplet.prototype = {
 
   _playAlarmSound() {
     if (this._soundMode !== "ring") {
-      _playChime({
-        onPid: (pid) => this._activeAudioPids.add(pid),
-        onExit: (pid) => this._activeAudioPids.delete(pid),
-      });
+      const endAt = Date.now() + 2000;
+      const token = ++this._ringToken;
+      const failedCommands = new Set();
+
       this._startRingingWindow(2000);
+
+      const playFallback = () => {
+        if (token !== this._ringToken || !this._isRinging || Date.now() >= endAt) return;
+
+        const startedAt = Date.now();
+        const process = _playChime({
+          onProcess: (proc) => this._activeAudioProcesses.add(proc),
+          onExit: (proc, successful, command) => {
+            this._activeAudioProcesses.delete(proc);
+            if (successful || token !== this._ringToken || !this._isRinging) return;
+
+            failedCommands.add(command);
+            const delayMs = SoundSchedule.getRingRetryDelay(startedAt, Date.now());
+            if (Date.now() + delayMs >= endAt) return;
+
+            let timerId = 0;
+            timerId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, delayMs, () => {
+              this._activeSoundTimers.delete(timerId);
+              playFallback();
+              return GLib.SOURCE_REMOVE;
+            });
+            this._activeSoundTimers.add(timerId);
+          },
+          excludedCommands: failedCommands,
+        });
+        if (!process) global.logWarning("quick-alarm: no alarm sound player is available");
+      };
+
+      playFallback();
       return;
     }
 
-    const seconds = Math.max(1, Number(this._ringSeconds) || 1);
+    const configuredSeconds = Number(this._ringSeconds);
+    const seconds = Math.min(120, Math.max(1, Number.isFinite(configuredSeconds) ? configuredSeconds : 1));
     const endAt = Date.now() + seconds * 1000;
     const token = ++this._ringToken;
+    const failedCommands = new Set();
 
     this._startRingingWindow(seconds * 1000);
 
@@ -541,13 +654,28 @@ QuickAlarmApplet.prototype = {
       if (!this._isRinging) return;
       if (Date.now() >= endAt) return;
 
-      _playChime({
-        onPid: (pid) => this._activeAudioPids.add(pid),
-        onExit: (pid) => {
-          this._activeAudioPids.delete(pid);
-          playNext();
+      const startedAt = Date.now();
+      const process = _playChime({
+        onProcess: (proc) => this._activeAudioProcesses.add(proc),
+        onExit: (proc, successful, command) => {
+          this._activeAudioProcesses.delete(proc);
+          if (!successful) failedCommands.add(command);
+          if (token !== this._ringToken || !this._isRinging) return;
+
+          const delayMs = SoundSchedule.getRingRetryDelay(startedAt, Date.now());
+          if (Date.now() + delayMs >= endAt) return;
+
+          let timerId = 0;
+          timerId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, delayMs, () => {
+            this._activeSoundTimers.delete(timerId);
+            playNext();
+            return GLib.SOURCE_REMOVE;
+          });
+          this._activeSoundTimers.add(timerId);
         },
+        excludedCommands: failedCommands,
       });
+      if (!process) global.logWarning("quick-alarm: no alarm sound player is available");
     };
 
     playNext();
@@ -557,24 +685,46 @@ QuickAlarmApplet.prototype = {
     return TimeAgo.formatTimeAgo(dueDate, Date.now(), (s) => this._(s));
   },
 
-  _showFullscreenOverlay(alarm) {
+  _dismissFullscreenAlarm() {
+    this._stopAllSounds();
     this._hideFullscreenOverlay();
 
+    if (this._isShuttingDown || this._pendingFullscreenAlarms.length === 0) return;
+    const nextAlarm = this._pendingFullscreenAlarms.shift();
+    this._nextAlarmIdleId = GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+      this._nextAlarmIdleId = 0;
+      this._fire(nextAlarm);
+      return GLib.SOURCE_REMOVE;
+    });
+  },
+
+  _showFullscreenOverlay(alarm) {
     const monitor = Main.layoutManager.primaryMonitor;
+    const monitors =
+      Main.layoutManager.monitors && Main.layoutManager.monitors.length > 0
+        ? Main.layoutManager.monitors
+        : [monitor];
+    const minX = Math.min(...monitors.map((m) => m.x));
+    const minY = Math.min(...monitors.map((m) => m.y));
+    const maxX = Math.max(...monitors.map((m) => m.x + m.width));
+    const maxY = Math.max(...monitors.map((m) => m.y + m.height));
+    this._previousKeyFocus = global.stage.get_key_focus();
 
     // Create fullscreen overlay container
     this._fullscreenOverlay = new St.Widget({
       reactive: true,
-      x: monitor.x,
-      y: monitor.y,
-      width: monitor.width,
-      height: monitor.height,
+      can_focus: true,
+      x: minX,
+      y: minY,
+      width: maxX - minX,
+      height: maxY - minY,
       style_class: "qa-fullscreen-overlay",
     });
 
     // Central card
     const card = new St.BoxLayout({
       vertical: true,
+      opacity: 0,
       style_class: "qa-fullscreen-card",
     });
 
@@ -628,8 +778,7 @@ QuickAlarmApplet.prototype = {
       can_focus: true,
     });
     dismissBtn.connect("clicked", () => {
-      this._stopAllSounds();
-      this._hideFullscreenOverlay();
+      this._dismissFullscreenAlarm();
     });
 
     card.add_child(icon);
@@ -638,18 +787,11 @@ QuickAlarmApplet.prototype = {
     card.add_child(agoLabel);
     card.add_child(dismissBtn);
 
-    // Center the card
-    card.set_position(
-      Math.floor((monitor.width - card.width) / 2),
-      Math.floor((monitor.height - card.height) / 2),
-    );
-
     this._fullscreenOverlay.add_child(card);
 
     // Dismiss on background click
     this._fullscreenOverlay.connect("button-press-event", () => {
-      this._stopAllSounds();
-      this._hideFullscreenOverlay();
+      this._dismissFullscreenAlarm();
       return Clutter.EVENT_STOP;
     });
 
@@ -657,8 +799,7 @@ QuickAlarmApplet.prototype = {
     this._fullscreenKeyHandler = this._fullscreenOverlay.connect("key-press-event", (_actor, event) => {
       const symbol = event.get_key_symbol();
       if (symbol === Clutter.KEY_Escape || symbol === Clutter.KEY_Return || symbol === Clutter.KEY_space) {
-        this._stopAllSounds();
-        this._hideFullscreenOverlay();
+        this._dismissFullscreenAlarm();
         return Clutter.EVENT_STOP;
       }
       return Clutter.EVENT_PROPAGATE;
@@ -667,27 +808,45 @@ QuickAlarmApplet.prototype = {
     Main.layoutManager.addChrome(this._fullscreenOverlay, { visibleInFullscreen: true });
     global.stage.set_key_focus(this._fullscreenOverlay);
 
-    // Re-center after card gets its natural size
-    GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
-      if (this._fullscreenOverlay && card) {
-        card.set_position(
-          Math.floor((monitor.width - card.width) / 2),
-          Math.floor((monitor.height - card.height) / 2),
-        );
-      }
+    // Wait until Cinnamon has attached and laid out the card before reading
+    // its dimensions. The captured overlay identity prevents a dismissed
+    // alarm's callback from touching a newer overlay or a destroyed card.
+    const overlay = this._fullscreenOverlay;
+    this._fullscreenLayoutIdleId = GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+      this._fullscreenLayoutIdleId = 0;
+      if (this._fullscreenOverlay !== overlay || !card.get_stage()) return GLib.SOURCE_REMOVE;
+
+      card.set_position(
+        monitor.x - minX + Math.floor((monitor.width - card.width) / 2),
+        monitor.y - minY + Math.floor((monitor.height - card.height) / 2),
+      );
+      card.opacity = 255;
       return GLib.SOURCE_REMOVE;
     });
   },
 
   _hideFullscreenOverlay() {
+    if (this._fullscreenLayoutIdleId) {
+      GLib.source_remove(this._fullscreenLayoutIdleId);
+      this._fullscreenLayoutIdleId = 0;
+    }
     if (this._fullscreenAgoTimerId) {
       GLib.source_remove(this._fullscreenAgoTimerId);
       this._fullscreenAgoTimerId = 0;
     }
     if (this._fullscreenOverlay) {
+      const previousFocus = this._previousKeyFocus;
       Main.layoutManager.removeChrome(this._fullscreenOverlay);
       this._fullscreenOverlay.destroy();
       this._fullscreenOverlay = null;
+      this._previousKeyFocus = null;
+      if (!this._isShuttingDown && previousFocus) {
+        try {
+          global.stage.set_key_focus(previousFocus);
+        } catch (e) {
+          // The previously focused actor may have been destroyed.
+        }
+      }
     }
   },
 
@@ -796,5 +955,7 @@ function main(metadata, orientation, panelHeight, instanceId) {
   EntryKeys = imports.lib.entryKeys;
   Hotkeys = imports.lib.hotkeys;
   Icon = imports.lib.icon;
+  AlarmPersistence = imports.lib.alarmPersistence;
+  SoundSchedule = imports.lib.soundSchedule;
   return new QuickAlarmApplet(metadata, orientation, panelHeight, instanceId);
 }
