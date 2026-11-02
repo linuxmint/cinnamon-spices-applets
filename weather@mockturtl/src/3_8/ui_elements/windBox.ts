@@ -28,7 +28,7 @@ export class WindBox {
 		this._label.remove_all_children();
 
 		if (!displayWindAsText)
-			this._label.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
+			this._label.add(this.windDirectionIcon, { x_fill: false, y_fill: false, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
 
 		this._label.add(this.labelText);
 
@@ -36,9 +36,10 @@ export class WindBox {
 	}
 
 	public Rebuild(config: Config, textColorStyle: string): [caption: imports.gi.St.Label, label: imports.gi.St.BoxLayout] {
+		const captionStyle = "min-height: " + Math.ceil(config.CurrentFontSize * 2) + "px;";
 		this._caption = Label({
 			text: _('Wind') + LocalizedColon(config.currentLocale),
-			style: textColorStyle,
+			style: textColorStyle + "; " + captionStyle,
 			x_align: imports.gi.Clutter.ActorAlign.END,
 		});
 		this._label = this.BuildLabel(config);
@@ -47,23 +48,22 @@ export class WindBox {
 	}
 
 	private BuildLabel(config: Config) {
-		const windBox = new BoxLayout({ vertical: false });
+		const minRowHeight = Math.ceil(config.CurrentFontSize * 2);
+		const windBox = new BoxLayout({ vertical: false, style: "min-height: " + minRowHeight + "px;" });
 
-		// We try to make sure that icon doesn't take up more vertical space than text
-		// Also we position it close to the bottom to be perceived vertically centered
-		const iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
-		const iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
+		// Keep the icon at or below the text line height so the wind row stays
+		// aligned with the other metric rows in the right column.
 		const iconSize = Math.round(config.CurrentFontSize * 0.8);
 
-		this.labelText = Label({ text: ELLIPSIS, x_expand: true, x_align: ActorAlign.FILL });
+		this.labelText = Label({ text: ELLIPSIS, x_expand: true, x_align: ActorAlign.FILL, style: "font-family: 'Noto Sans CJK SC', sans-serif;" });
 		this.windDirectionIcon = new Icon({
 			icon_type: IconType.SYMBOLIC,
 			icon_name: APPLET_ICON,
 			icon_size: iconSize,
-			style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"
+			style: "padding-right: 5px;"
 		});
 		if (!config._displayWindAsText)
-			windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
+			windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: false, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
 		windBox.add_actor(this.labelText);
 
 		return windBox;

@@ -109,6 +109,8 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.TomorrowIOApiKeyChanged.Subscribe(() => this.loop.Refresh())
 		this.config.AccuWeatherApiKeyChanged.Subscribe(() => this.loop.Refresh())
 		this.config.WeatherUndergroundApiKeyChanged.Subscribe(() => this.loop.Refresh())
+		this.config.QWeatherApiHostChanged.Subscribe(() => this.loop.Refresh())
+		this.config.QWeatherApiKeyChanged.Subscribe(() => this.loop.Refresh())
 		// We change how we process data when this is changed
 		this.config.ShortConditionsChanged.Subscribe(() => this.loop.Refresh());
 		// Some translations come from the API we need a refresh
