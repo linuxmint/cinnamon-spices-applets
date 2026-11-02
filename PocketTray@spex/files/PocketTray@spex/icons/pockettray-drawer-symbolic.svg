@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Schublade / Leisten-Basis -->
+  <path d="M 6 24 L 6 28 L 26 28 L 26 24 L 23 24 L 23 25.5 L 9 25.5 L 9 24 Z" fill="currentColor" />
+  
+  <!-- Aufwärts-Chevron (Pfeil) -->
+  <path d="M 16 10 L 24 18 L 21.5 20.5 L 16 15 L 10.5 20.5 L 8 18 Z" fill="currentColor" />
+</svg>
