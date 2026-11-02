@@ -1,11 +1,4 @@
----
-id: 28b6b67c-afd2-445e-b199-1888518aaf0c
-title: README
-tags: []
-pinned: false
-created: 2026-11-02T09:36:51.071585996+00:00
-modified: 2026-11-02T09:39:16.517930870+00:00
----
+
 # README
 
 # ADB TV Brightness
@@ -20,7 +13,8 @@ Inspired by the other brightness Spices, I developed this to have a simple mouse
 
 Scroll over the panel icon to adjust a compatible TV's brightness; click for a slider.
 
-<!-- -->![screenshot|size=small](screenshot.png)
+![screenshot|size=small](screenshot.png)
+
 ![screenshot|size=medium](screenshot2.png)
 
 <!-- -->
