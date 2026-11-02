@@ -1,0 +1,190 @@
+# EMOJI KEYBOARD
+# This file is put in the public domain.
+# rubberband75, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: emoji-keyboard@rubberband75 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-27 15:25-0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:46
+msgid "Recent"
+msgstr "Berrienak"
+
+#. applet.js:47
+msgid "Smileys & Emotions"
+msgstr "Aurpegierak eta emozioak"
+
+#. applet.js:48
+msgid "People"
+msgstr "Pertsonak"
+
+#. applet.js:49
+msgid "Animals & Nature"
+msgstr "Animaliak eta natura"
+
+#. applet.js:50
+msgid "Food & Drink"
+msgstr "Janaria eta edaria"
+
+#. applet.js:51
+msgid "Travel & Places"
+msgstr "Bidaiak eta lekuak"
+
+#. applet.js:52
+msgid "Activities & Events"
+msgstr "Jarduerak eta ekitaldiak"
+
+#. applet.js:53
+msgid "Objects"
+msgstr "Objektuak"
+
+#. applet.js:54
+msgid "Symbols"
+msgstr "Ikurrak"
+
+#. applet.js:55
+msgid "Flags"
+msgstr "Banderak"
+
+#. metadata.json->name
+#. applet.js:142
+msgid "Emoji Keyboard"
+msgstr "Emoji-teklatua"
+
+#. applet.js:167
+msgid "Search emoji"
+msgstr "Bilatu emojiak"
+
+#. applet.js:206
+msgid "Loading emoji…"
+msgstr "Emojiak kargatzen…"
+
+#. applet.js:415
+msgid "Unable to load the emoji catalog"
+msgstr "Ezin izan da emoji-katalogoa kargatu"
+
+#. applet.js:492
+#, javascript-format
+msgid "%d search result"
+msgid_plural "%d search results"
+msgstr[0] "Bilaketa-emaitza %d"
+msgstr[1] "%d bilaketa-emaitza"
+
+#. applet.js:519
+msgid "Your recently used emoji will appear here"
+msgstr "Erabili berri dituzun emojiak hemen agertuko dira"
+
+#. applet.js:520
+msgid "No emoji found"
+msgstr "Ez da emojirik aurkitu"
+
+#. metadata.json->description
+msgid "Search, copy, and insert emoji from a native Cinnamon panel popup."
+msgstr ""
+"Bilatu, kopiatu eta txertatu emojiak Cinnamon panelaren jatorrizko laster-"
+"leiho batetik."
+
+#. settings-schema.json->copy-to-clipboard->description
+msgid "Copy emoji to clipboard"
+msgstr "Kopiatu emojia arbelera"
+
+#. settings-schema.json->copy-to-clipboard->tooltip
+msgid ""
+"When enabled, the selected emoji stays on the clipboard after it is "
+"inserted. When disabled, the clipboard is restored to its previous contents "
+"after insertion."
+msgstr ""
+"Gaituta dagoenean, hautatutako emojia arbelean gelditzen da txertatu "
+"ondoren. Desgaituta dagoenean, arbelaren aurreko edukia leheneratzen da "
+"txertatu bezain laster."
+
+#. settings-schema.json->category-icon-size->description
+msgid "Category icon size"
+msgstr "Kategoriaren ikonoaren tamaina"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Colored Icon Size"
+msgstr "Parekatu panelaren ikono koloredunaren tamainarekin"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Symbolic Icon Size"
+msgstr "Parekatu panelaren ikono sinbolikoaren tamainarekin"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "16px"
+msgstr "16px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "22px"
+msgstr "22px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "24px"
+msgstr "24px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "32px"
+msgstr "32px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "48px"
+msgstr "48px"
+
+#. settings-schema.json->emoji-size->description
+msgid "Emoji size"
+msgstr "Emojiaren tamaina"
+
+#. settings-schema.json->default-skin-tone->description
+msgid "Default skin tone"
+msgstr "Larruazalaren tonu lehenetsia"
+
+#. settings-schema.json->default-skin-tone->tooltip
+msgid ""
+"Emoji that support skin tones show this tone by default. Emoji without skin "
+"tone variants are unaffected."
+msgstr ""
+"Larruazal-tonuak onartzen dituzten emojiek tonu hori erakusten dute "
+"lehenetsi gisa. Larruazal-tonu aldaerarik ez duten emojiek ez dute eraginik "
+"jasotzen."
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍"
+msgstr "👍"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏻"
+msgstr "👍🏻"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏼"
+msgstr "👍🏼"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏽"
+msgstr "👍🏽"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏾"
+msgstr "👍🏾"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏿"
+msgstr "👍🏿"
