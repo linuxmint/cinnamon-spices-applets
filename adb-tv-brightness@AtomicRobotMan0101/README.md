@@ -1,10 +1,18 @@
+---
+id: 28b6b67c-afd2-445e-b199-1888518aaf0c
+title: README
+tags: []
+pinned: false
+created: 2026-11-02T09:36:51.071585996+00:00
+modified: 2026-11-02T09:39:16.517930870+00:00
+---
 # README
 
 # ADB TV Brightness
 
 Ive a PC attached to the lounge rooms TV (via a Samsung soundbar). Its GLORIOUS for doing programming, browsing and watching movies... and techno!
 
-BUT the brightness at night is a PITA to control via the TVs remote. That also reeks of effort. 
+BUT the brightness at night is a PITA to control via the TVs remote. That also reeks of effort.
 
 Inspired by the other brightness Spices, I developed this to have a simple mouse-scrollable icon to increase/decrease the brightness of the TV easily :-)
 
@@ -12,14 +20,15 @@ Inspired by the other brightness Spices, I developed this to have a simple mouse
 
 Scroll over the panel icon to adjust a compatible TV's brightness; click for a slider.
 
-![screenshot](screenshot.png)
+<!-- -->![screenshot|size=small](screenshot.png)
+![screenshot|size=medium](screenshot2.png)
 
+<!-- -->
 - Requires an authorised ADB connection.
 - Tested with Cinnamon 6.6.9 and a TV exposing `global/picture_backlight` (range 0-100).
 - Android TVs differ by manufacturer.
 
 Support for other controllers must be confirmed interactively - there is a script that tests for the possible targets. Run it.
-
 
 ## ADB setup
 
@@ -71,7 +80,7 @@ python3 discover_brightness.py
 python3 discover_brightness.py --device TV_IP:5555
 ```
 
-The inventory script reads global/system/secure settings, device properties, display/power/lights diagnostics, service names and exposed sysfs backlights. It lists matching names and their current values. Modes, automatic controls, colour tuning and non-integer settings are diagnostic only.  I’ve attempted to show useful values and marked less useful ones accordingly (every TV will be different).
+The inventory script reads global/system/secure settings, device properties, display/power/lights diagnostics, service names and exposed sysfs backlights. It lists matching names and their current values. Modes, automatic controls, colour tuning and non-integer settings are diagnostic only. I’ve attempted to show useful values and marked less useful ones accordingly (every TV will be different).
 
 <!-- -->
 **No root access or undocumented vendor service calls are attempted.**
