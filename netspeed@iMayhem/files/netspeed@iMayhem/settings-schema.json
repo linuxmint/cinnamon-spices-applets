@@ -3,6 +3,18 @@
     "type": "section",
     "description": "Appearance"
   },
+  "appletLanguage": {
+    "type": "combobox",
+    "default": "SYSTEM",
+    "description": "Applet Language",
+    "options": {
+      "System Default": "SYSTEM",
+      "English": "en",
+      "Spanish": "es",
+      "French": "fr",
+      "Hungarian": "hu"
+    }
+  },
   "iconTheme": {
     "type": "combobox",
     "default": "arrows",
@@ -22,7 +34,7 @@
   },
   "compactMode": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Compact Mode (e.g. 1.2M instead of 1.2 MB/s)"
   },
   "section2": {
@@ -47,6 +59,25 @@
     "default": true,
     "description": "Ignore Local Loopback Traffic"
   },
+  "enablePerAppMonitor": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable Per-App Network Monitoring (Tooltip)"
+  },
+  "enableHighUsageAlerts": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable High-Usage App Notifications"
+  },
+  "highUsageThreshold": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "units": "MB/s",
+    "description": "High-Usage Threshold"
+  },
   "showSessionStats": {
     "type": "switch",
     "default": true,
@@ -59,6 +90,11 @@
     "max": 90,
     "step": 1,
     "description": "Daily Usage Log Retention (Days)"
+  },
+  "enableDailyLogging": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable Daily Network Usage Logging"
   },
   "section3": {
     "type": "section",
