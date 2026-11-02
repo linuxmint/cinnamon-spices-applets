@@ -1,0 +1,68 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["page-general"],
+    "page-general": {
+      "type": "page",
+      "title": "General",
+      "sections": ["section-update", "section-display"]
+    },
+    "section-update": {
+      "type": "section",
+      "title": "Automatic Updates",
+      "keys": ["auto_update", "frequency", "update_time"]
+    },
+    "section-display": {
+      "type": "section",
+      "title": "Display",
+      "keys": ["region", "history_limit"]
+    }
+  },
+  "auto_update": {
+    "type": "switch",
+    "default": true,
+    "description": "Automatically update wallpaper daily"
+  },
+  "frequency": {
+    "type": "combobox",
+    "default": "daily",
+    "options": {
+      "Daily": "daily",
+      "Weekly": "weekly",
+      "Monthly": "monthly"
+    },
+    "description": "How often to fetch a new wallpaper"
+  },
+  "update_time": {
+    "type": "timechooser",
+    "default": {"h": 8, "m": 0, "s": 0},
+    "description": "Time to fetch new wallpaper each day"
+  },
+  "region": {
+    "type": "combobox",
+    "default": "",
+    "options": {
+      "Global": "",
+      "United States": "us",
+      "United Kingdom": "gb",
+      "Canada": "ca",
+      "Australia": "au",
+      "Germany": "de",
+      "France": "fr",
+      "Japan": "ja",
+      "India": "in",
+      "China": "cn",
+      "Brazil": "br"
+    },
+    "description": "Region for Bing Image of the Day"
+  },
+  "history_limit": {
+    "type": "spinbutton",
+    "default": 30,
+    "min": 7,
+    "max": 90,
+    "step": 7,
+    "units": "images",
+    "description": "How many wallpapers to keep on disk"
+  }
+}
