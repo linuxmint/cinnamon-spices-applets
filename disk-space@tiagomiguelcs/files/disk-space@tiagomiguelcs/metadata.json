@@ -1,0 +1,8 @@
+{
+ "uuid": "disk-space@tiagomiguelcs",
+ "name": "Disk Space",
+ "description": "Displays the remaining disk space.",
+ "version": "0.1.0",
+ "author": "tiagomiguelcs",
+ "max-instances": -1
+}
