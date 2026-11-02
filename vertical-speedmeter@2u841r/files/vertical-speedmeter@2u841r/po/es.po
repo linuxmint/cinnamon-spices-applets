@@ -29,7 +29,9 @@ msgstr "Monitoreo %s"
 
 #: applet.js:219 applet.js:238
 msgid "Top line is upload. Bottom line is download."
-msgstr "La línea superior corresponde a la subida. La línea inferior corresponde a la descarga."
+msgstr ""
+"La línea superior corresponde a la subida. La línea inferior corresponde a "
+"la descarga."
 
 #: applet.js:236
 msgid "Interface: %s"
@@ -42,4 +44,3 @@ msgstr "Subida: %s"
 #: applet.js:242
 msgid "Download: %s/s"
 msgstr "Descarga: %s"
-
