@@ -1,0 +1,485 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Combined Monitor Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-14 22:09+0300\n"
+"PO-Revision-Date: 2026-05-14 23:30+0300\n"
+"Last-Translator: Gemini Code Assist\n"
+"Language-Team: Czech\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "Slot 1 (Standardní)"
+
+msgid "Slot 2 (Empty)"
+msgstr "Slot 2 (Prázdný)"
+
+msgid "Slot 3 (Empty)"
+msgstr "Slot 3 (Prázdný)"
+
+msgid "Separator"
+msgstr "Oddělovač"
+
+msgid "Space"
+msgstr "Mezera"
+
+msgid "No Separator"
+msgstr "Bez oddělovače"
+
+msgid "Symbols"
+msgstr "Symboly"
+
+msgid "Icon-White"
+msgstr "Ikona-Bílá"
+
+msgid "Icon-Dark"
+msgstr "Ikona-Tmavá"
+
+msgid "No Symbol (Text Label)"
+msgstr "Bez symbolu (Textový popisek)"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "TEMP"
+msgstr "TEPLOTA"
+
+msgid "RAM"
+msgstr "RAM"
+
+msgid "SWAP"
+msgstr "SWAP"
+
+msgid "Profile Management"
+msgstr "Správa profilů"
+
+msgid "Activate (Load)"
+msgstr "Aktivovat (Načíst)"
+
+msgid "Save Current Settings"
+msgstr "Uložit aktuální nastavení"
+
+msgid "System Monitor"
+msgstr "Sledování systému"
+
+msgid "Restart Cinnamon"
+msgstr "Restartovat Cinnamon"
+
+msgid "Slot is empty - Ready to save"
+msgstr "Slot je prázdný - připraven k uložení"
+
+msgid "N/A"
+msgstr "N/A"
+
+# settings-schema.json strings
+msgid "Decimal places for temperature"
+msgstr "Desetinná místa pro teplotu"
+
+msgid ""
+"Number of decimal places to display for temperature. Set to 0 for whole "
+"numbers."
+msgstr ""
+"Počet desetinných míst pro zobrazení teploty. Pro celá čísla nastavte 0."
+
+msgid "decimal places"
+msgstr "desetinná místa"
+
+msgid "Profile Saved: %s"
+msgstr "Profil uložen: %s"
+
+msgid "Active: %s"
+msgstr "Aktivní: %s"
+
+# Page Titles
+msgid "CPU Temperature"
+msgstr "Teplota CPU"
+
+msgid "Profiles"
+msgstr "Profily"
+
+msgid "General"
+msgstr "Obecné"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "Pořadí metrik"
+
+msgid "Display"
+msgstr "Zobrazení"
+
+msgid "Thresholds"
+msgstr "Prahy"
+
+msgid "Colors"
+msgstr "Barvy"
+
+msgid "Thresholds (in °C)"
+msgstr "Prahy (v °C)"
+
+msgid "Settings"
+msgstr "Nastavení"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "Profily (Sloty 1 až 3)"
+
+msgid "Global"
+msgstr "Globální"
+
+# CPU
+msgid "Show CPU"
+msgstr "Zobrazit CPU"
+
+msgid "Text for CPU"
+msgstr "Text pro CPU"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "Vlastní symbol/ikona pro CPU. Pro textový popisek nechte prázdné."
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "Zobrazit znak procent (%) pro CPU"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed without the percentage "
+"sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in "
+"the 'General' tab acts as a master switch."
+msgstr ""
+"Pokud je tato možnost zakázána, zobrazí se u všech procentuálních údajů "
+"pouze hodnota (např. '45') bez znaku procent (např. '45%'). Možnost "
+"'Zobrazit znak procent (%) (Hlavní přepínač)' na kartě 'Obecné' funguje jako "
+"hlavní přepínač."
+
+msgid "Threshold LOW"
+msgstr "Práh NÍZKÝ"
+
+msgid "The LOW color is used below this value"
+msgstr "NÍZKÁ barva se použije pod touto hodnotou"
+
+msgid "Threshold MED"
+msgstr "Práh STŘEDNÍ"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "STŘEDNÍ barva se použije mezi NÍZKÝM a STŘEDNÍM prahem"
+
+msgid "Threshold HIGH"
+msgstr "Práh VYSOKÝ"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "VYSOKÁ barva se použije mezi STŘEDNÍM a VYSOKÝM prahem"
+
+msgid "Enable color change for CPU"
+msgstr "Povolit změnu barvy pro CPU"
+
+msgid "Color LOW"
+msgstr "Barva NÍZKÁ"
+
+msgid "Color MED"
+msgstr "Barva STŘEDNÍ"
+
+msgid "Color HIGH"
+msgstr "Barva VYSOKÁ"
+
+msgid "Color CRITICAL"
+msgstr "Barva KRITICKÁ"
+
+msgid "Used above the HIGH threshold"
+msgstr "Používá se nad VYSOKÝM prahem"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "Zobrazit teplotu"
+
+msgid ""
+"Enables the display of CPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Please refer to the "
+"instructions in the README.md."
+msgstr ""
+"Povolí zobrazení teploty procesoru. **Důležité:** Na mnoha systémech je pro "
+"správnou funkci nutná instalace balíčku 'lm-sensors' a spuštění příkazu "
+"'sudo sensors-detect'. Přečtěte si prosím pokyny v souboru README.md."
+
+msgid "Show °C symbol"
+msgstr "Zobrazit symbol °C"
+
+msgid ""
+"Controls whether the Celsius symbol (°C or °F) should be displayed after the "
+"value."
+msgstr "Určuje, zda se má za hodnotou zobrazovat symbol Celsia (°C nebo °F)."
+
+msgid "Text for Temperature"
+msgstr "Text pro teplotu"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr "Vlastní symbol/ikona pro teplotu. Pro textový popisek nechte prázdné."
+
+msgid "Unit of Measurement"
+msgstr "Jednotka měření"
+
+msgid "Celsius (°C)"
+msgstr "Celsius (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "Fahrenheit (°F)"
+
+msgid ""
+"Choose whether the temperature should be displayed in Celsius or Fahrenheit. "
+"Threshold values must be adjusted accordingly."
+msgstr ""
+"Zvolte, zda se má teplota zobrazovat ve stupních Celsia nebo Fahrenheita. "
+"Hodnoty prahů je třeba odpovídajícím způsobem upravit."
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr "NÍZKÁ barva se použije pod touto hodnotou (platí pro °C i °F)"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr ""
+"STŘEDNÍ barva se použije mezi NÍZKÝM a STŘEDNÍM prahem (platí pro °C i °F)"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr ""
+"VYSOKÁ barva se použije mezi STŘEDNÍM a VYSOKÝM prahem (platí pro °C i °F)"
+
+msgid "Enable color change for TEMP"
+msgstr "Povolit změnu barvy pro TEMP"
+
+msgid "Color LOW (Green)"
+msgstr "Barva NÍZKÁ (Zelená)"
+
+msgid "Color MED (Orange)"
+msgstr "Barva STŘEDNÍ (Oranžová)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "Barva VYSOKÁ (Červeno-oranžová)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "Barva KRITICKÁ (Červená)"
+
+# RAM
+msgid "Show RAM"
+msgstr "Zobrazit RAM"
+
+msgid "Text for RAM"
+msgstr "Text pro RAM"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "Vlastní symbol/ikona pro RAM. Pro textový popisek nechte prázdné."
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "Zobrazit znak procent (%) pro RAM"
+
+msgid "Display Mode"
+msgstr "Režim zobrazení"
+
+msgid "Percentage Usage (%)"
+msgstr "Procentuální využití (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "Využitá paměť (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "Volná paměť (MB/GB)"
+
+msgid ""
+"Choose whether percentage usage or used/free memory in MB/GB should be "
+"displayed."
+msgstr ""
+"Zvolte, zda se má zobrazovat procentuální využití nebo využitá/volná paměť v "
+"MB/GB."
+
+msgid "Enable color change for RAM"
+msgstr "Povolit změnu barvy pro RAM"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "Zobrazit SWAP"
+
+msgid "Text for SWAP"
+msgstr "Text pro SWAP"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr "Vlastní symbol/ikona pro SWAP. Pro textový popisek nechte prázdné."
+
+msgid "Only show SWAP when used"
+msgstr "Zobrazit SWAP pouze při využití"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr ""
+"Pokud je aktivní, zobrazuje SWAP pouze tehdy, když je využití vyšší než 0 %."
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "Zobrazit znak procent (%) pro SWAP"
+
+msgid "Enable color change for SWAP"
+msgstr "Povolit změnu barvy pro SWAP"
+
+msgid ""
+"If the value is less than or equal to the LOW threshold, the LOW color is "
+"used."
+msgstr ""
+"Pokud je hodnota menší nebo rovna NÍZKÉMU prahu, použije se NÍZKÁ barva."
+
+msgid ""
+"If the value is greater than LOW and less than or equal to the MED "
+"threshold, the MED color is used."
+msgstr ""
+"Pokud je hodnota větší než NÍZKÁ a menší nebo rovna STŘEDNÍMU prahu, použije "
+"se STŘEDNÍ barva."
+
+msgid ""
+"If the value is greater than MED and less than or equal to the HIGH "
+"threshold, the HIGH color is used."
+msgstr ""
+"Pokud je hodnota větší než STŘEDNÍ a menší nebo rovna VYSOKÉMU prahu, "
+"použije se VYSOKÁ barva."
+
+# Order
+msgid "CPU Position"
+msgstr "Pozice CPU"
+
+msgid "Position 1 (Left)"
+msgstr "Pozice 1 (Vlevo)"
+
+msgid "Position 2"
+msgstr "Pozice 2"
+
+msgid "Position 3"
+msgstr "Pozice 3"
+
+msgid "Position 4 (Right)"
+msgstr "Pozice 4 (Vpravo)"
+
+msgid ""
+"Defines the display position of CPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"Definuje pozici zobrazení CPU. Pozice se automaticky zamění s metrikou na "
+"stejné pozici."
+
+msgid "TEMP Position"
+msgstr "Pozice TEMP"
+
+msgid "RAM Position"
+msgstr "Pozice RAM"
+
+msgid "SWAP Position"
+msgstr "Pozice SWAP"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "Interval aktualizace (ms)"
+
+msgid "Show separator between metrics"
+msgstr "Zobrazit oddělovač mezi metrikami"
+
+msgid "Separator Text"
+msgstr "Text oddělovače"
+
+msgid "Separator Color"
+msgstr "Barva oddělovače"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "Zobrazit znak procent (%) (Hlavní přepínač)"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed for all percentage "
+"displays without the percentage sign (e.g., '45%'). Individual switches for "
+"CPU/RAM/SWAP must also be active."
+msgstr ""
+"Pokud je tato možnost zakázána, zobrazí se u všech procentuálních údajů "
+"pouze hodnota (např. '45') bez znaku procent (např. '45%'). Individuální "
+"přepínače pro CPU/RAM/SWAP musí být rovněž aktivní."
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "Doba trvání zprávy profilu (sekundy)"
+
+msgid ""
+"How long should the message ('Profile saved', 'Profile active') be displayed "
+"in the panel."
+msgstr ""
+"Jak dlouho se má na panelu zobrazovat zpráva ('Profil uložen', 'Profil "
+"aktivní')."
+
+msgid "Profile 1 Name"
+msgstr "Název profilu 1"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "Zadejte vlastní název profilu do textového pole!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr ""
+"V rozbalovací nabídce klikněte na 'Aktivovat' nebo 'Uložit' u profilu 1."
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "Uložená data pro profil 1 (interní)"
+
+msgid "Profile 2 Name"
+msgstr "Název profilu 2"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr ""
+"V rozbalovací nabídce klikněte na 'Aktivovat' oder 'Uložit' u profilu 2."
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "Uložená data pro profil 2 (interní)"
+
+msgid "Profile 3 Name"
+msgstr "Název profilu 3"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr ""
+"V rozbalovací nabídce klikněte na 'Aktivovat' oder 'Uložit' u profilu 3."
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "Uložená data pro profil 3 (interní)"
+
+# metadata.json strings
+msgid "Combined Monitor"
+msgstr "Kombinovaný monitor"
+
+msgid ""
+"A compact and comprehensive system monitor for Cinnamon. Displays CPU, RAM, "
+"and SWAP usage in a single panel element. Configure colors, thresholds, "
+"separators, and the order of metrics. Supports displaying text, theme icons, "
+"or custom symbols for perfect integration into your panel."
+msgstr ""
+"Kompaktní a komplexní monitor systému pro Cinnamon. Zobrazuje využití CPU, "
+"RAM a SWAP v jediném prvku panelu. Konfigurujte barvy, prahy, oddělovače a "
+"pořadí metrik. Podporuje zobrazení textu, ikon motivu nebo vlastních symbolů "
+"pro dokonalou integraci do vašeho panelu."
+
+# GPU
+msgid "Show GPU Temperature"
+msgstr "Zobrazit teplotu GPU"
+
+msgid ""
+"Enables the display of GPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Integrated GPUs (iGPUs) may "
+"report their temperature as part of the CPU temperature."
+msgstr ""
+"Povolí zobrazení teploty GPU. **Důležité:** Na mnoha systémech je pro "
+"správnou funkci nutná instalace balíčku 'lm-sensors' a spuštění příkazu "
+"'sudo sensors-detect'. Integrované GPU (iGPU) mohou hlásit svou teplotu jako "
+"součást teploty CPU."
+
+msgid "Text for GPU"
+msgstr "Text pro GPU"
+
+msgid "Custom symbol/icon for GPU. Leave empty for text label."
+msgstr "Vlastní symbol/ikona pro GPU. Pro textový popisek nechte prázdné."
+
+msgid "Decimal places for GPU temperature"
+msgstr "Desetinná místa pro teplotu GPU"
+
+msgid "Enable color change for GPU"
+msgstr "Povolit změnu barvy pro GPU"
+
+# Order
+msgid "GPU Position"
+msgstr "Pozice GPU"

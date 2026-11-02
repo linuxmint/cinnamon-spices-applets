@@ -6,14 +6,18 @@
 This applet offers a comprehensive overview of system usage directly in your Cinnamon panel.
 
 * **Compact Display:** Shows CPU, RAM, SWAP, and CPU temperature usage in one element.
-* **CPU Temperature (TEMP):** Displays the CPU temperature with configurable thresholds in Celsius or Fahrenheit. The function searches for the most reliable kernel sensors (`/sys/class/hwmon` or `/sys/class/thermal`).
-* **Profile Management:** Quickly save and load up to three complete configurations via the context menu.
+* **CPU Temperature (TEMP):** Displays the CPU temperature with configurable thresholds. Advanced logic filters out non-CPU sensors (like NVMe SSDs, WiFi, or GPUs) to ensure the most accurate reading.
+* **Advanced Profile Management:** Save and load up to three complete snapshots of your settings. Supports focus-switching even to empty slots for easier configuration.
 * **Visual Thresholds:** Freely configurable color rules (LOW, MED, HIGH, CRITICAL) for visual warning for all metrics.
 * **Customizable Layout:** The order of metrics (e.g., CPU | TEMP | RAM | SWAP) can be changed via settings or by scrolling the mouse wheel over the applet.
+* **Modern & Stable:** Fully compliant with modern GJS (JavaScript) standards using `TextDecoder`, ensuring a clean system log without decoding warnings.
 * **Flexible Design:** Supports text labels, theme icons, or the use of custom SVG/PNG symbols.
 * **Configurable Separator:** Configure the separator and its color (default is `|`).
 * **SWAP Option:** Can be set so that SWAP is only displayed when actually in use (> 0%).
 
+## ⚠️ Important System Requirement for Temperature Display
+
+Since the temperature function reads sensor data directly from the Linux kernel, it relies on the correct detection of compatible thermal or hwmon sensors. In rare cases, the applet may not find the correct sensor path for your CPU/system, causing the temperature display to not work. This is a system-side issue that is typically only resolved by manually specifying the sensor path in the advanced settings.
 
 ## ⬇️ Installation
 
@@ -40,30 +44,12 @@ Once the applet is approved by Cinnamon, you can install it directly via the App
 
 ## 🛠️ Usage & Configuration
 
+### 📂 Profile Management (Snapshot Model)
+The applet uses a **Snapshot Model** for its 3 profile slots:
+1. **Switch Focus:** You can select a slot (even an empty one) via "Activate (Load)". If it's empty, the applet stays ready for your configuration.
+2. **Configure:** Change your colors, thresholds, symbols, or the order of metrics in the applet settings.
+3. **Save:** Use "Save Current Settings" on your active slot to store the current design.
+4. **Quick Toggle:** Switch between different visual designs instantly by loading another saved slot.
+
 * **Left-click on the Applet:** Opens a context menu for quick selection of **Separator** presets, **Symbol** icons (including preview), and **Profile Management** (Loading/Saving configurations).
 * **Mouse wheel over the Applet:** Quickly changes the **Layout Variant** (CPU, TEMP, RAM, SWAP) if multiple metrics are displayed.
-
-
-## ⚠️ Important System Requirement for Temperature Display
-
-Since the temperature function reads sensor data directly from the Linux kernel, it relies on the correct detection of compatible thermal or hwmon sensors. In rare cases, the applet may not find the correct sensor path for your CPU/system, causing the temperature display to not work. This is a system-side issue that is typically only resolved by manually specifying the sensor path in the advanced settings.
-
-
-### 🔧 Troubleshooting: Temperature not displayed?
-
-If the temperature does not appear, the corresponding kernel modules often need to be loaded first.
-
-**Step 1: Install lm-sensors**
-```bash
-sudo apt install lm-sensors
-```
-**Step 2: Configure Sensors Run the detection process and confirm the prompts:**
-
-```bash
-sudo sensors-detect
-```
-**Step 3: Verify Functionality Type sensors in the terminal. If a CPU temperature is listed there, the applet can now read it as well.**
-
-```bash
-sensors
-```

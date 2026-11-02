@@ -1,0 +1,461 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Combined Monitor Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-14 22:09+0300\n"
+"PO-Revision-Date: 2026-05-14 23:30+0300\n"
+"Last-Translator: Gemini Code Assist\n"
+"Language-Team: Chinese (Traditional)\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "插槽 1 (標準)"
+
+msgid "Slot 2 (Empty)"
+msgstr "插槽 2 (空白)"
+
+msgid "Slot 3 (Empty)"
+msgstr "插槽 3 (空白)"
+
+msgid "Separator"
+msgstr "分隔符"
+
+msgid "Space"
+msgstr "空格"
+
+msgid "No Separator"
+msgstr "無分隔符"
+
+msgid "Symbols"
+msgstr "符號"
+
+msgid "Icon-White"
+msgstr "圖示-白色"
+
+msgid "Icon-Dark"
+msgstr "圖示-深色"
+
+msgid "No Symbol (Text Label)"
+msgstr "無符號 (文字標籤)"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "TEMP"
+msgstr "溫度"
+
+msgid "RAM"
+msgstr "記憶體"
+
+msgid "SWAP"
+msgstr "置換空間"
+
+msgid "Profile Management"
+msgstr "設定檔管理"
+
+msgid "Activate (Load)"
+msgstr "啟用 (載入)"
+
+msgid "Save Current Settings"
+msgstr "儲存目前設定"
+
+msgid "System Monitor"
+msgstr "系統監控"
+
+msgid "Restart Cinnamon"
+msgstr "重新啟動 Cinnamon"
+
+msgid "Slot is empty - Ready to save"
+msgstr "插槽為空 - 準備儲存"
+
+msgid "N/A"
+msgstr "不適用"
+
+# settings-schema.json strings
+msgid "Decimal places for temperature"
+msgstr "溫度顯示小數位數"
+
+msgid ""
+"Number of decimal places to display for temperature. Set to 0 for whole "
+"numbers."
+msgstr "溫度顯示的小數位數。設定為 0 則顯示整數。"
+
+msgid "decimal places"
+msgstr "小數位數"
+
+msgid "Profile Saved: %s"
+msgstr "設定檔已儲存：%s"
+
+msgid "Active: %s"
+msgstr "作用中：%s"
+
+# Page Titles
+msgid "CPU Temperature"
+msgstr "CPU 溫度"
+
+msgid "Profiles"
+msgstr "設定檔"
+
+msgid "General"
+msgstr "一般"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "指標順序"
+
+msgid "Display"
+msgstr "顯示"
+
+msgid "Thresholds"
+msgstr "閾值"
+
+msgid "Colors"
+msgstr "顏色"
+
+msgid "Thresholds (in °C)"
+msgstr "閾值 (單位為 °C)"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "設定檔 (插槽 1 到 3)"
+
+msgid "Global"
+msgstr "全域"
+
+# CPU
+msgid "Show CPU"
+msgstr "顯示 CPU"
+
+msgid "Text for CPU"
+msgstr "CPU 文字"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "CPU 自訂符號/圖示。留空則使用文字標籤。"
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "顯示 CPU 百分比符號 (%)"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed without the percentage "
+"sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in "
+"the 'General' tab acts as a master switch."
+msgstr ""
+"若停用，則僅顯示數值（例如 '45'）而不含百分比符號（例如 '45%'）。「一般」索引"
+"標籤中的「顯示百分比符號 (%) (總開關)」選項將作為總控制。"
+
+msgid "Threshold LOW"
+msgstr "低閾值"
+
+msgid "The LOW color is used below this value"
+msgstr "低於此值時使用「低」顏色"
+
+msgid "Threshold MED"
+msgstr "中閾值"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "介於「低」與「中」閾值之間時使用「中」顏色"
+
+msgid "Threshold HIGH"
+msgstr "高閾值"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "介於「中」與「高」閾值之間時使用「高」顏色"
+
+msgid "Enable color change for CPU"
+msgstr "啟用 CPU 顏色變化"
+
+msgid "Color LOW"
+msgstr "顏色：低"
+
+msgid "Color MED"
+msgstr "顏色：中"
+
+msgid "Color HIGH"
+msgstr "顏色：高"
+
+msgid "Color CRITICAL"
+msgstr "顏色：緊急"
+
+msgid "Used above the HIGH threshold"
+msgstr "高於「高」閾值時使用"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "顯示溫度"
+
+msgid ""
+"Enables the display of CPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Please refer to the "
+"instructions in the README.md."
+msgstr ""
+"啟用 CPU 溫度顯示。**重要：** 在許多系統上，需要安裝 'lm-sensors' 套件並執行 "
+"'sudo sensors-detect' 才能使此功能正常運作。請參閱 README.md 中的說明。"
+
+msgid "Show °C symbol"
+msgstr "顯示 °C 符號"
+
+msgid ""
+"Controls whether the Celsius symbol (°C or °F) should be displayed after the "
+"value."
+msgstr "控制是否在數值後顯示攝氏符號（°C 或 °F）。"
+
+msgid "Text for Temperature"
+msgstr "溫度文字"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr "溫度自訂符號/圖示。留空則使用文字標籤。"
+
+msgid "Unit of Measurement"
+msgstr "測量單位"
+
+msgid "Celsius (°C)"
+msgstr "攝氏 (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "華氏 (°F)"
+
+msgid ""
+"Choose whether the temperature should be displayed in Celsius or Fahrenheit. "
+"Threshold values must be adjusted accordingly."
+msgstr "選擇溫度應以攝氏還是華氏顯示。閾值必須相應調整。"
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr "低於此值時使用「低」顏色（適用於 °C 和 °F）"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr "介於「低」與「中」閾值之間時使用「中」顏色（適用於 °C 和 °F）"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr "介於「中」與「高」閾值之間時使用「高」顏色（適用於 °C 和 °F）"
+
+msgid "Enable color change for TEMP"
+msgstr "啟用溫度顏色變化"
+
+msgid "Color LOW (Green)"
+msgstr "顏色：低 (綠色)"
+
+msgid "Color MED (Orange)"
+msgstr "顏色：中 (橘色)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "顏色：高 (紅橘色)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "顏色：緊急 (紅色)"
+
+# RAM
+msgid "Show RAM"
+msgstr "顯示記憶體"
+
+msgid "Text for RAM"
+msgstr "記憶體文字"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "記憶體自訂符號/圖示。留空則使用文字標籤。"
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "顯示記憶體百分比符號 (%)"
+
+msgid "Display Mode"
+msgstr "顯示模式"
+
+msgid "Percentage Usage (%)"
+msgstr "使用百分比 (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "已用記憶體 (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "可用記憶體 (MB/GB)"
+
+msgid ""
+"Choose whether percentage usage or used/free memory in MB/GB should be "
+"displayed."
+msgstr "選擇顯示百分比使用率或是以 MB/GB 為單位的已用/可用記憶體。"
+
+msgid "Enable color change for RAM"
+msgstr "啟用記憶體顏色變化"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "顯示置換空間"
+
+msgid "Text for SWAP"
+msgstr "置換空間文字"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr "置換空間自訂符號/圖示。留空則使用文字標籤。"
+
+msgid "Only show SWAP when used"
+msgstr "僅在已使用時顯示置換空間"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr "若啟用，則僅在置換空間使用率大於 0% 時顯示。"
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "顯示置換空間百分比符號 (%)"
+
+msgid "Enable color change for SWAP"
+msgstr "啟用置換空間顏色變化"
+
+msgid ""
+"If the value is less than or equal to the LOW threshold, the LOW color is "
+"used."
+msgstr "若數值小於或等於「低」閾值，則使用「低」顏色。"
+
+msgid ""
+"If the value is greater than LOW and less than or equal to the MED "
+"threshold, the MED color is used."
+msgstr "若數值大於「低」且小於或等於「中」閾值，則使用「中」顏色。"
+
+msgid ""
+"If the value is greater than MED and less than or equal to the HIGH "
+"threshold, the HIGH color is used."
+msgstr "若數值大於「中」且小於或等於「高」閾值，則使用「高」顏色。"
+
+# Order
+msgid "CPU Position"
+msgstr "CPU 位置"
+
+msgid "Position 1 (Left)"
+msgstr "位置 1 (左側)"
+
+msgid "Position 2"
+msgstr "位置 2"
+
+msgid "Position 3"
+msgstr "位置 3"
+
+msgid "Position 4 (Right)"
+msgstr "位置 4 (右側)"
+
+msgid ""
+"Defines the display position of CPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr "定義 CPU 的顯示位置。該位置將會與位於相同位置的指標自動互換。"
+
+msgid "TEMP Position"
+msgstr "溫度位置"
+
+msgid "RAM Position"
+msgstr "記憶體位置"
+
+msgid "SWAP Position"
+msgstr "置換空間位置"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "更新間隔 (毫秒)"
+
+msgid "Show separator between metrics"
+msgstr "顯示指標間的分隔符"
+
+msgid "Separator Text"
+msgstr "分隔符文字"
+
+msgid "Separator Color"
+msgstr "分隔符顏色"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "顯示百分比符號 (%) (總開關)"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed for all percentage "
+"displays without the percentage sign (e.g., '45%'). Individual switches for "
+"CPU/RAM/SWAP must also be active."
+msgstr ""
+"若停用，所有百分比顯示均僅顯示數值（例如 '45'）而不含百分比符號（例如 "
+"'45%'）。CPU/記憶體/置換空間的各別開關也必須處於啟用狀態。"
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "設定檔訊息持續時間 (秒)"
+
+msgid ""
+"How long should the message ('Profile saved', 'Profile active') be displayed "
+"in the panel."
+msgstr "訊息（「設定檔已儲存」、「設定檔已啟用」）應在面板中顯示多久。"
+
+msgid "Profile 1 Name"
+msgstr "設定檔 1 名稱"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "在文字欄位中輸入自訂設定檔名稱！"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr "在彈出式選單中點擊設定檔 1 的「啟用」或「儲存」。"
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "設定檔 1 的儲存數據（內部）"
+
+msgid "Profile 2 Name"
+msgstr "設定檔 2 名稱"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr "在彈出式選單中點擊設定檔 2 的「啟用」或「儲存」。"
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "設定檔 2 的儲存數據（內部）"
+
+msgid "Profile 3 Name"
+msgstr "設定檔 3 名稱"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr "在彈出式選單中點擊設定檔 3 的「啟用」或「儲存」。"
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "設定檔 3 的儲存數據（內部）"
+
+# metadata.json strings
+msgid "Combined Monitor"
+msgstr "組合監控器"
+
+msgid ""
+"A compact and comprehensive system monitor for Cinnamon. Displays CPU, RAM, "
+"and SWAP usage in a single panel element. Configure colors, thresholds, "
+"separators, and the order of metrics. Supports displaying text, theme icons, "
+"or custom symbols for perfect integration into your panel."
+msgstr ""
+"Cinnamon 的緊湊型綜合系統監控器。在單個面板元素中顯示 CPU、RAM 和 SWAP 使用情"
+"況。配置顏色、閾值、分隔符和指標順序。支持顯示文本、主題圖標或自定義符號，以"
+"完美集成到您的面板中。"
+
+# GPU
+msgid "Show GPU Temperature"
+msgstr "顯示 GPU 溫度"
+
+msgid ""
+"Enables the display of GPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Integrated GPUs (iGPUs) may "
+"report their temperature as part of the CPU temperature."
+msgstr ""
+"啟用 GPU 溫度顯示。**重要：** 在許多系統上，需要安裝 'lm-sensors' 套件並執行 "
+"'sudo sensors-detect' 才能使此功能正常運作。整合式 GPU (iGPU) 可能會將其溫度"
+"報告為 CPU 溫度的一部分。"
+
+msgid "Text for GPU"
+msgstr "GPU 文字"
+
+msgid "Custom symbol/icon for GPU. Leave empty for text label."
+msgstr "GPU 自訂符號/圖示。留空則使用文字標籤。"
+
+msgid "Decimal places for GPU temperature"
+msgstr "GPU 溫度顯示小數位數"
+
+msgid "Enable color change for GPU"
+msgstr "啟用 GPU 顏色變化"
+
+# Order
+msgid ""
+"Defines the display position of GPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr "定義 GPU 的顯示位置。該位置將會與位於相同位置的指標自動互換。"
