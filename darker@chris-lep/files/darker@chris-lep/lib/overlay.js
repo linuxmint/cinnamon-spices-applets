@@ -6,19 +6,56 @@
  * enable "Disable compositing for full-screen windows" opt out of that, and we respect it: the
  * Meta unredirect override is forbidden for third-party code on Spices.
  *
- * Cinnamon dependencies (Clutter, global) are injected so this class can be unit-tested in
- * Node with fakes.
+ * The actor paints but is never picked (see overlayActorClass), so it is invisible to both
+ * input and drag and drop.
+ *
+ * Cinnamon dependencies (Clutter, GObject, global) are injected so this class can be
+ * unit-tested in Node with fakes.
  */
+
+// Keyed by the Clutter namespace, so each set of test fakes gets its own class.
+const actorClasses = new WeakMap();
+
+/**
+ * Returns the overlay's actor class, registering it on first use.
+ *
+ * `reactive: false` only keeps an actor out of event picking (Clutter.PickMode.REACTIVE).
+ * Cinnamon's drag and drop finds drop targets with Clutter.PickMode.ALL (js/ui/dnd.js), which
+ * also returns non-reactive actors, so a plain fullscreen actor swallows every drop. Doing
+ * nothing in vfunc_pick (and not chaining up) leaves the actor out of picking entirely.
+ *
+ * GType names must be unique per process, and reloading the applet re-evaluates this module,
+ * so the name gets a per-evaluation suffix.
+ *
+ * @param {object} Clutter - imports.gi.Clutter
+ * @param {object} GObject - imports.gi.GObject
+ */
+function overlayActorClass(Clutter, GObject) {
+    let Actor = actorClasses.get(Clutter);
+    if (!Actor) {
+        Actor = GObject.registerClass(
+            { GTypeName: `DarkerOverlayActor_${Date.now()}` },
+            class extends Clutter.Actor {
+                vfunc_pick(_context) {}
+            },
+        );
+        actorClasses.set(Clutter, Actor);
+    }
+    return Actor;
+}
+
 class DarkOverlay {
     /**
      * @param {object} deps
      * @param {object} deps.Clutter - imports.gi.Clutter
+     * @param {object} deps.GObject - imports.gi.GObject
      * @param {object} deps.global - Cinnamon's global object
      */
-    constructor({ Clutter, global }) {
+    constructor({ Clutter, GObject, global }) {
         this._stage = global.stage;
 
-        this._actor = new Clutter.Actor({
+        const Actor = overlayActorClass(Clutter, GObject);
+        this._actor = new Actor({
             name: 'darker-overlay',
             reactive: false,
             visible: false,

@@ -1,7 +1,7 @@
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
-const { Clutter, GLib } = imports.gi;
+const { Clutter, GLib, GObject } = imports.gi;
 
 // Cinnamon resolves xlet require() paths relative to the applet root, not the calling file.
 const Darkness = require('./lib/darkness.js');
@@ -36,7 +36,7 @@ class DarkerApplet extends Applet.TextIconApplet {
         super(orientation, panelHeight, instanceId);
 
         this.set_applet_icon_symbolic_name(ICON_NAME);
-        this._overlay = new DarkOverlay({ Clutter, global });
+        this._overlay = new DarkOverlay({ Clutter, GObject, global });
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
