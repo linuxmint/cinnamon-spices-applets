@@ -1104,7 +1104,7 @@
     "options": {
       "Only from the kernel": "kernel",
       "Only by checking the activity of each processor": "cpu",
-      "In either case": "both"
+      "Both methods": "both"
     }
   },
   "CPU_minLoadStuckProcess": {
@@ -2289,9 +2289,9 @@
   },
   "flowFontFactor": {
     "type": "scale",
-    "default": 40,
+    "default": 33,
     "min": 20,
-    "max": 50,
+    "max": 60,
     "step": 1,
     "units": "%",
     "description": "Font size: percentage of the box height"
