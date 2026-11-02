@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-10-30 03:10+0000\n"
-"PO-Revision-Date: 2025-12-03 19:15-0300\n"
+"PO-Revision-Date: 2026-11-02 11:36-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.10\n"
 
 #. 4.0/applet.js:62
 msgid "Initializing"
@@ -210,7 +210,7 @@ msgstr "Informacion de la applicacion"
 
 #. 4.0/contextmenu.js:331 5.8/contextmenu.js:377
 msgid "Properties"
-msgstr ""
+msgstr "Propiedades"
 
 #. 4.0/contextmenu.js:349 5.8/contextmenu.js:450
 msgid "This file is no longer available"
@@ -303,9 +303,8 @@ msgid "Lock the screen"
 msgstr "Bloquea la pantalla"
 
 #. 5.8/applet.js:1032
-#, fuzzy
 msgid "Loading..."
-msgstr "Buscando..."
+msgstr "Cargando..."
 
 #. 5.8/applet.js:1218
 msgid "Files"
@@ -313,15 +312,15 @@ msgstr "Archivos"
 
 #. 5.8/applet.js:1248 5.8/applet.js:1254
 msgid "Calculator: "
-msgstr ""
+msgstr "Calculadora:"
 
 #. 5.8/applet.js:1429 5.8/applet.js:1956
 msgid "Click to insert emoji"
-msgstr ""
+msgstr "Haz clic para insertar un emoji"
 
 #. 5.8/applet.js:1926
 msgid "Back"
-msgstr ""
+msgstr "Atrás"
 
 #. 4.0/mint-remove-application.py:34
 msgid ""
@@ -500,7 +499,7 @@ msgstr "Ver aplicaciones como lista o cuadrícula"
 #. 4.0->settings-schema.json->show-sidebar->description
 #. 5.8->settings-schema.json->show-sidebar->description
 msgid "Show sidebar"
-msgstr "Mostrar categoría de aplicaciones favoritas en el menú"
+msgstr "Mostrar barra lateral"
 
 #. 4.0->settings-schema.json->show-sidebar->tooltip
 #. 5.8->settings-schema.json->show-sidebar->tooltip
@@ -750,62 +749,62 @@ msgstr "Opción de búsqueda web"
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Google"
-msgstr ""
+msgstr "Google"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Bing"
-msgstr ""
+msgstr "Bing"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Baidu"
-msgstr ""
+msgstr "Baidu"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Yahoo"
-msgstr ""
+msgstr "Yahoo"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Yandex"
-msgstr ""
+msgstr "Yandex"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "DuckDuckGo"
-msgstr ""
+msgstr "DuckDuckGo"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Ask"
-msgstr ""
+msgstr "Ask"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Ecosia"
-msgstr ""
+msgstr "Ecosia"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "AOL"
-msgstr ""
+msgstr "AOL"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Startpage"
-msgstr ""
+msgstr "Startpage"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Brave"
-msgstr ""
+msgstr "Brave"
 
 #. 4.0->settings-schema.json->web-search-option->options
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Qwant"
-msgstr ""
+msgstr "Qwant"
 
 #. 4.0->settings-schema.json->web-search-option->tooltip
 #. 5.8->settings-schema.json->web-search-option->tooltip
@@ -1023,7 +1022,6 @@ msgstr ""
 
 #. 4.0->settings-schema.json->info4->description
 #. 5.8->settings-schema.json->info5->description
-#, fuzzy
 msgid ""
 "\n"
 "• Additional key option:\n"
@@ -1031,11 +1029,9 @@ msgid ""
 "editor.\n"
 msgstr ""
 "\n"
-"• Opciones de teclas adicionales:\n"
-"ctrl-p — Abrir el diálogo de propiedades del lanzador de la aplicación "
-"seleccionada.\n"
-"ctrl-d — Abrir el archivo .desktop de la aplicación seleccionada en el "
-"editor de texto predeterminado.\n"
+"• Opción de teclado adicional:\n"
+"Ctrl+D: abre el archivo .desktop de la aplicación seleccionada actualmente "
+"en el editor de texto predeterminado.\n"
 
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Custom"
@@ -1050,10 +1046,9 @@ msgid "Enter the URL that is prepended to the search query."
 msgstr "Introduzca la URL que se antepone a la consulta de búsqueda."
 
 #. 5.8->settings-schema.json->info2->description
-#, fuzzy
 msgid ""
 "\n"
 "• Drag and drop apps, files, and folders onto the sidebar."
 msgstr ""
 "\n"
-"• Arrastre y suelte las categorías del menú para cambiar su orden."
+"• Arrastra y suelta aplicaciones, archivos y carpetas en la barra lateral."
