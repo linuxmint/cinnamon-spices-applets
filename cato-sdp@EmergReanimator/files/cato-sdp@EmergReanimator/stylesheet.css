@@ -1,0 +1,15 @@
+.cato-sdp-connected {
+  color: rgb(83,199,160);
+}
+
+.cato-sdp-disconnected {
+  color: rgb(245,121,0);
+}
+
+.cato-sdp-connecting {
+  color: rgb(66,139,202);
+}
+
+.cato-sdp-unknown {
+  color: rgb(127,127,127);
+}
