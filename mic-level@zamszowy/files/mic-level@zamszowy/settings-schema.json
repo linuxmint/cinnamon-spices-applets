@@ -44,7 +44,7 @@
         "max" : 1,
         "step" : 0.01,
         "show-value" : true,
-        "description" : "How long to wait before recoring another sample"
+        "description" : "How long to wait before recording another sample"
     },
 
     "enable-bt-only": {
