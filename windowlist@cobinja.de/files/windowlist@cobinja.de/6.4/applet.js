@@ -2217,6 +2217,7 @@ class CobiWindowList extends Applet.Applet {
     this._signalManager.connect(global.screen, "window-removed", this._windowRemoved, this);
     this._signalManager.connect(global.screen.get_display(), "window-monitor-changed", this.windowMonitorChanged, this);
     this._signalManager.connect(Main.layoutManager, "monitors-changed", this._updateMonitor, this);
+    this._signalManager.connect(Main.panelManager, "monitors-changed", this._onPanelMonitorsChanged, this);
   }
   
   on_applet_removed_from_panel() {
@@ -2255,6 +2256,13 @@ class CobiWindowList extends Applet.Applet {
   
   _updateMonitor() {
     this._monitor = Main.layoutManager.findMonitorForActor(this.actor);
+  }
+  
+  _onPanelMonitorsChanged() {
+    // window-monitor-changed fires before the panel gets its new monitor index
+    for (let i = 0; i < this._workspaces.length; i++) {
+      this._workspaces[i]._updateAllWindowsForMonitor();
+    }
   }
   
   _onWorkspaceAdded(screen, wsNum) {
