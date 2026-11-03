@@ -1,3 +1,7 @@
+### v3.3.2~20261103
+* Restart this applet after suspend or hibernation.
+* Definitely fixes [#9175](https://github.com/linuxmint/cinnamon-spices-applets/issues/9175)
+
 ### v3.3.1~20261022
 * Solves problem to access to `Configure...` option with Cinnamon 6.4.
 * Fixes [#9132](https://github.com/linuxmint/cinnamon-spices-applets/issues/9132)
