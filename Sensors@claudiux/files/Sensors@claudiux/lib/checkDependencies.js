@@ -13,8 +13,7 @@ function _require(relPath) {
 }
 
 const MessageTray = imports.ui.messageTray; // ++ Needed for the criticalNotify() function in this script
-//~ const Util = imports.misc.util; // Needed for spawnCommandLine()
-const Util = _require("./lib/util"); // Needed for spawnCommandLine()
+const Util = _require("./lib/util");
 const Main = imports.ui.main; // ++ Needed for notify()
 const Gettext = imports.gettext;
 
