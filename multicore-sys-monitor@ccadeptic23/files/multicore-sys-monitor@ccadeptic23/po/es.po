@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-11-02 15:56+0100\n"
-"PO-Revision-Date: 2026-11-02 17:15+0100\n"
+"PO-Revision-Date: 2026-11-03 14:53-0300\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.10\n"
 
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -1159,7 +1159,7 @@ msgstr "Solo comprobando la actividad de cada procesador"
 
 #. 5.6->settings-schema.json->CPU_stuckMethod->options
 msgid "Both methods"
-msgstr ""
+msgstr "Ambos métodos"
 
 #. 5.6->settings-schema.json->CPU_minLoadStuckProcess->description
 msgid "Consider a process to be stuck when core's load exceeds (%)"
