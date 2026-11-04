@@ -1,3 +1,6 @@
+### v3.3.3~20261104
+* Improves the resume-detect.sh script. Use it every 20 seconds instead of 30.
+
 ### v3.3.2~20261103
 * Restart this applet after suspend or hibernation.
 * Definitely fixes [#9175](https://github.com/linuxmint/cinnamon-spices-applets/issues/9175)
