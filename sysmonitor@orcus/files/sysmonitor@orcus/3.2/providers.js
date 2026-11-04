@@ -198,7 +198,16 @@ NetData.prototype = {
             //Skip interfaces that have been removed since they were discovered (deleted Docker bridge,
             //unplugged USB NIC, ...). Querying libgtop for a missing interface fails and logs several
             //warnings per call, which floods ~/.xsession-errors at every refresh.
-            if (!Gio.File.new_for_path(SYSFS_NET_PATH + "/" + this.devices[i]).query_exists(null))
+            let exists = true;
+            try {
+                Gio.File.new_for_path(SYSFS_NET_PATH + "/" + this.devices[i]).query_info("standard::name", Gio.FileQueryInfoFlags.NONE, null);
+            }
+            catch (e) {
+                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
+                    throw e;
+                exists = false;
+            }
+            if (!exists)
                 continue;
             present.push(this.devices[i]);
             GTop.glibtop.get_netload(this.gtop, this.devices[i]);
