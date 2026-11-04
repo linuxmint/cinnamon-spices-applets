@@ -1,3 +1,7 @@
+### v3.18.6~20261104
+  * Increases the maximum font size for tooltips.
+  * Fixes [#9230](https://github.com/linuxmint/cinnamon-spices-applets/issues/9230)
+
 ### v3.18.5~20261102
   * Some changes in settings schema.
 
