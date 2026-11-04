@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-11-02 15:56+0100\n"
-"PO-Revision-Date: 2026-09-12 08:04+0200\n"
+"PO-Revision-Date: 2026-11-04 10:16+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.10\n"
 
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -475,9 +475,8 @@ msgid "Custom translations in tooltip"
 msgstr "Egyéni fordítások az eszköztippben"
 
 #. 5.6->settings-schema.json->sectionSystemMonitor->title
-#, fuzzy
 msgid "System Monitor"
-msgstr "Gnome Rendszerfigyelő"
+msgstr "Rendszerfigyelő"
 
 #. 5.6->settings-schema.json->sectionCPUTemperature->title
 msgid "CPU Temperature"
@@ -489,7 +488,7 @@ msgstr "Átlagos terhelés"
 
 #. 5.6->settings-schema.json->sectionCPUStuckProcess->title
 msgid "Detection of Stuck Processes"
-msgstr ""
+msgstr "Megakadt folyamatok észlelése"
 
 #. 5.6->settings-schema.json->sectionCPULabel->title
 #. 5.6->settings-schema.json->sectionMemoryLabel->title
@@ -1134,60 +1133,71 @@ msgid ""
 "- through either method; the response time depends on how the stuck process "
 "was detected."
 msgstr ""
+"Az elakadt folyamatok észlelésére többféle módszer létezik:\n"
+"- a kernelen keresztül; ez azonnali jelzést eredményez.\n"
+"- az egyes CPU-k aktivitásának elemzésével; ez akkor vált ki jelzést, ha "
+"legalább egy CPU a megadott időkereten belül túllépi a meghatározott "
+"aktivitási küszöbértéket.\n"
+"- bármelyik módszer alkalmazásával; a válaszidő attól függ, hogy az elakadt "
+"folyamatot melyik módszerrel észlelték."
 
 #. 5.6->settings-schema.json->CPU_alertWhenStuckProcess->description
 msgid "Change the background color when at least one process is stuck"
-msgstr ""
+msgstr "Változtassa meg a háttérszínt, ha legalább egy folyamat elakadt"
 
 #. 5.6->settings-schema.json->CPU_stuckMethod->description
 msgid "Method used to detect stuck processes"
-msgstr ""
+msgstr "Az elakadt folyamatok észlelésére használt módszer"
 
 #. 5.6->settings-schema.json->CPU_stuckMethod->options
 msgid "Only from the kernel"
-msgstr ""
+msgstr "Csak a kernelből"
 
 #. 5.6->settings-schema.json->CPU_stuckMethod->options
 msgid "Only by checking the activity of each processor"
-msgstr ""
+msgstr "Csak az egyes processzorok tevékenységének ellenőrzésével"
 
 #. 5.6->settings-schema.json->CPU_stuckMethod->options
 msgid "Both methods"
-msgstr ""
+msgstr "Mindkét módszer"
 
 #. 5.6->settings-schema.json->CPU_minLoadStuckProcess->description
 msgid "Consider a process to be stuck when core's load exceeds (%)"
 msgstr ""
+"Tekintsünk egy folyamatot elakadtnak, ha a mag terhelése meghaladja a "
+"megadott értéket (%)"
 
 #. 5.6->settings-schema.json->CPU_minLoadStuckProcess->tooltip
 #. 5.6->settings-schema.json->CPU_durationStuckProcess->tooltip
 #. 5.6->settings-schema.json->CPU_unitStuckProcess->tooltip
 msgid "Does not concern stuck processes detected by the kernel."
-msgstr ""
+msgstr "Nem vonatkozik a kernel által észlelt, elakadt folyamatokra."
 
 #. 5.6->settings-schema.json->CPU_durationStuckProcess->description
 msgid "Consider a process to be stuck after (in Selected Unit)"
 msgstr ""
+"Tekintsünk egy folyamatot elakadtnak, ha (a kiválasztott egységben) eltelt "
+"ennyi idő:"
 
 #. 5.6->settings-schema.json->CPU_unitStuckProcess->description
 msgid "Selected Unit"
-msgstr ""
+msgstr "Kiválasztott egység"
 
 #. 5.6->settings-schema.json->CPU_unitStuckProcess->options
 msgid "seconds"
-msgstr ""
+msgstr "másodperc"
 
 #. 5.6->settings-schema.json->CPU_unitStuckProcess->options
 msgid "minutes"
-msgstr ""
+msgstr "perc"
 
 #. 5.6->settings-schema.json->CPU_unitStuckProcess->options
 msgid "hours"
-msgstr ""
+msgstr "óra"
 
 #. 5.6->settings-schema.json->CPU_bgColorStuckProcess->description
 msgid "Background Color when a process is stuck"
-msgstr ""
+msgstr "Háttérszín, amikor egy folyamat elakad"
 
 #. 5.6->settings-schema.json->CPU_tempColor->description
 msgid "Normal Temperature Color"
@@ -1764,22 +1774,20 @@ msgid "Data marked with ⚠️ must not be changed!"
 msgstr "A ⚠️-gal jelölt adatokat tilos megváltoztatni!"
 
 #. 5.6->settings-schema.json->SysMonWhichOne->description
-#, fuzzy
 msgid "Which System Monitor"
-msgstr "Gnome Rendszerfigyelő"
+msgstr "Melyik rendszerfigyelő"
 
 #. 5.6->settings-schema.json->SysMonWhichOne->options
 msgid "System Default"
-msgstr ""
+msgstr "Rendszer-alapértelmezés"
 
 #. 5.6->settings-schema.json->SysMonWhichOne->options
-#, fuzzy
 msgid "Custom"
-msgstr "Egyéni címke"
+msgstr "Egyéni"
 
 #. 5.6->settings-schema.json->SysMonPath->description
 msgid "Complete name of a .desktop file or a flatpak id"
-msgstr ""
+msgstr "Egy .desktop fájl teljes neve vagy egy flatpak azonosító"
 
 #. 5.6->settings-schema.json->SysMonPath->tooltip
 msgid ""
@@ -1788,18 +1796,22 @@ msgid ""
 "org.gnome.SystemMonitor.desktop\n"
 "io.github.hakandundar34coding.system-monitoring-center"
 msgstr ""
+"PÉLDÁK:\n"
+"gnome-system-monitor.desktop\n"
+"org.gnome.SystemMonitor.desktop\n"
+"io.github.hakandundar34coding.system-monitoring-center"
 
 #. 5.6->settings-schema.json->SysMonMouseButton->description
 msgid "Which mouse button opens your System Monitor"
-msgstr ""
+msgstr "Melyik egérgomb nyitja meg a Rendszerfigyelőt?"
 
 #. 5.6->settings-schema.json->SysMonMouseButton->options
 msgid "Middle"
-msgstr ""
+msgstr "Közép"
 
 #. 5.6->settings-schema.json->SysMonMouseButton->options
 msgid "Both"
-msgstr ""
+msgstr "Mindkettő"
 
 #. 3.0/prefsui.glade:49 3.2/prefsui.glade:49 3.4/prefsui.glade:49
 #. 4.0/prefsui.glade:56
