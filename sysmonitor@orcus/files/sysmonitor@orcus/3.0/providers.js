@@ -1,4 +1,7 @@
 const Gio = imports.gi.Gio;
+
+const SYSFS_NET_PATH = "/sys/class/net";
+const MS_PER_SECOND = 1000;
 const AppletDir = imports.ui.appletManager.applets['sysmonitor@orcus'];
 const GTop = AppletDir.__init__.GTop;
 const _ = AppletDir.__init__._;
@@ -114,13 +117,23 @@ function NetData() {
 NetData.prototype = {
     _init: function () {
         this.gtop = new GTop.glibtop_netload();
+        this.rescan_interval = 0; //seconds, 0 = never rescan. Set by the applet from the "Rescan interval" setting
+        this.last_scan = Date.now();
+        this.scanDevices();
+        [this.down_last, this.up_last] = this.getNetLoad();
+    },
+
+    //Builds this.devices from the interfaces that exist right now. Called once at startup and, if
+    //enabled, periodically afterwards so interfaces added later (USB NICs, Docker bridges, VPNs)
+    //are picked up. Interfaces that disappear are handled separately in getNetLoad().
+    scanDevices: function () {
         try {
             let nl = new GTop.glibtop_netlist();
             this.devices = GTop.glibtop.get_netlist(nl);
         }
         catch(e) {
             this.devices = [];
-            let d = Gio.File.new_for_path("/sys/class/net");
+            let d = Gio.File.new_for_path(SYSFS_NET_PATH);
             let en = d.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
             while ((info = en.next_file(null)))
                 this.devices.push(info.get_name())
@@ -136,7 +149,6 @@ NetData.prototype = {
         catch (e) {
         }
         
-        [this.down_last, this.up_last] = this.getNetLoad();
     },
     
     getDim: function() {
@@ -144,9 +156,21 @@ NetData.prototype = {
     },
     
     getData: function() {
+        if (this.rescan_interval > 0 && Date.now() - this.last_scan >= this.rescan_interval * MS_PER_SECOND) {
+            this.scanDevices();
+            this.last_scan = Date.now();
+        }
+        let prev_present = this.present_devices;
         let [down, up] = this.getNetLoad();
         let down_delta = (down - this.down_last) * 1000 / this.refresh_rate;
         let up_delta = (up - this.up_last) * 1000 / this.refresh_rate;
+        //The totals are summed over all devices. If a device appeared or vanished since the last tick,
+        //the sum jumps by that device's whole counter, which would show up as a bogus spike (or a
+        //negative value). Report zero for this tick and re-baseline below instead.
+        if (this.present_devices !== prev_present) {
+            down_delta = 0;
+            up_delta = 0;
+        }
         this.down_last = down;
         this.up_last = up;
         this.text = Math.round(down_delta/1024) + " / " + Math.round(up_delta/1024) + _(" KB/s");
@@ -160,12 +184,20 @@ NetData.prototype = {
     getNetLoad: function() {
         let down = 0;
         let up = 0;
+        let present = [];
         for (let i = 0; i < this.devices.length; ++i)
         {
+            //Skip interfaces that have been removed since they were discovered (deleted Docker bridge,
+            //unplugged USB NIC, ...). Querying libgtop for a missing interface fails and logs several
+            //warnings per call, which floods ~/.xsession-errors at every refresh.
+            if (!Gio.File.new_for_path(SYSFS_NET_PATH + "/" + this.devices[i]).query_exists(null))
+                continue;
+            present.push(this.devices[i]);
             GTop.glibtop.get_netload(this.gtop, this.devices[i]);
             down += this.gtop.bytes_in;
             up += this.gtop.bytes_out;
         }
+        this.present_devices = present.join(" "); //used by getData() to detect a changed device set
         return [down, up];
     }
 };
