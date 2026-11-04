@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.10\n"
 
 #. applet.js:79
 msgid "missing dependencies"
@@ -150,26 +150,29 @@ msgid "Theme"
 msgstr "Téma"
 
 #. settings-schema.json->use-timer->description
-#, fuzzy
 msgid "Automatically check for updates"
-msgstr "Hiba a frissítések ellenőrzésekor"
+msgstr "Frissítések automatikus keresése"
 
 #. settings-schema.json->use-timer->tooltip
 msgid ""
 "When turned off, updates will still show when checked manually or refreshed "
 "by another process"
 msgstr ""
+"Kikapcsolt állapotban a frissítések továbbra is megjelennek, ha manuálisan "
+"ellenőrzi őket, vagy ha egy másik folyamat frissíti azokat."
 
 #. settings-schema.json->update-refresh->description
-#, fuzzy
 msgid "Active minutes to wait before refreshing updates"
-msgstr "Várakozási idő a frissítések ellenőrzése előtt (perc)"
+msgstr "Frissítések lekérése előtt várakozással töltött aktív percek"
 
 #. settings-schema.json->update-refresh->tooltip
 msgid ""
 "Refresh wait time is reset when applet or Cinnamon are reset and does not "
 "include inactive time (e.g. when computer is suspended)"
 msgstr ""
+"A frissítési várakozási idő az applet vagy a Cinnamon újraindításakor "
+"alaphelyzetbe áll, és nem foglalja magában az inaktív időszakokat (például "
+"amikor a számítógép felfüggesztett állapotban van)."
 
 #. settings-schema.json->show-firmware->description
 msgid "Show firmware updates"

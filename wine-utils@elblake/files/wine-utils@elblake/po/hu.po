@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.10\n"
 
 #. applet.js:59
 msgid "Config"
@@ -77,34 +77,33 @@ msgstr "Parancssor"
 
 #. applet.js:527 applet.js:714
 msgid "Terminal"
-msgstr ""
+msgstr "Terminál"
 
 #. settings-schema.json->run-terminal-folder->options
 #. applet.js:537 applet.js:723
 msgid "Drive C"
-msgstr ""
+msgstr "C meghajtó"
 
 #. settings-schema.json->run-terminal-folder->options
 #. applet.js:547 applet.js:732
 msgid "Home Folder"
-msgstr ""
+msgstr "Saját mappa"
 
 #. applet.js:553
 msgid "Tools"
-msgstr ""
+msgstr "Eszközök"
 
 #. applet.js:554 scripts/theme-utils/color_edit.py:45
 msgid "Edit Colors"
-msgstr ""
+msgstr "Színek szerkesztése"
 
 #. applet.js:555 scripts/theme-utils/customize_font.py:47
-#, fuzzy
 msgid "Customize Fonts"
-msgstr "Egyéni ikon"
+msgstr "Betűtípusok testreszabása"
 
 #. applet.js:556
 msgid "Map Drive"
-msgstr ""
+msgstr "Meghajtó hozzárendelése"
 
 #. applet.js:561
 msgid "Configuration"
@@ -120,84 +119,85 @@ msgstr "Alapértelmezett"
 
 #. scripts/auto-prefix.py:97
 msgid "Unknown"
-msgstr ""
+msgstr "Ismeretlen"
 
 #. scripts/auto-prefix.py:106
 msgid "{} + {:d} more"
-msgstr ""
+msgstr "{} + {:d} több"
 
 #. scripts/dialog.py:60
 msgid "Run in Console Window"
-msgstr ""
+msgstr "Futtatás konzolablakban"
 
 #. scripts/dialog.py:135 scripts/dialog.py:222
 msgid "Okay"
-msgstr ""
+msgstr "Ok"
 
 #. scripts/dialog.py:136 scripts/map-drive.py:236
 msgid "Cancel"
-msgstr ""
+msgstr "Mégse"
 
 #. scripts/dialog.py:137
 msgid "Browse Files..."
-msgstr ""
+msgstr "Fájlok tallózása..."
 
 #. scripts/dialog.py:155
-#, fuzzy
 msgid "Choose Program"
-msgstr "Programok"
+msgstr "Program kiválasztása"
 
 #. scripts/dialog.py:223
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Másolás a vágólapra"
 
 #. scripts/map-drive.py:179
 msgid "Create Drive Mapping"
-msgstr ""
+msgstr "Meghajtó-hozzárendelés létrehozása"
 
 #. scripts/map-drive.py:234
 msgid "Next"
-msgstr ""
+msgstr "Következő"
 
 #. scripts/map-drive.py:235
 msgid "Back"
-msgstr ""
+msgstr "Vissza"
 
 #. scripts/map-drive.py:275
 msgid "Close"
-msgstr ""
+msgstr "Bezár"
 
 #. scripts/map-drive.py:521
 msgid "Mounting SFTP (SSH) share."
-msgstr ""
+msgstr "SFTP (SSH) megosztás csatlakoztatása."
 
 #. scripts/map-drive.py:572
 msgid "Mounting FTP share."
-msgstr ""
+msgstr "FTP-megosztás csatlakoztatása."
 
 #. scripts/map-drive.py:608
 msgid "Mounting network share."
-msgstr ""
+msgstr "Hálózati megosztás csatlakoztatása."
 
 #. scripts/map-drive.py:645
 msgid "Mounting WebDAV share."
-msgstr ""
+msgstr "WebDAV-megosztás csatlakoztatása."
 
 #. scripts/map-drive.py:664
 msgid "Could not find folder."
-msgstr ""
+msgstr "A mappa nem található."
 
 #. scripts/map-drive.py:673
 msgid "Could not find mounted share, make sure to mount the file system first."
 msgstr ""
+"Nem található csatlakoztatott megosztás; győződjön meg arról, hogy először "
+"csatlakoztatja a fájlrendszert."
 
 #. scripts/map-drive.py:682
 msgid "Winepath error."
-msgstr ""
+msgstr "Winepath-hiba."
 
 #. scripts/map-drive.py:700
 msgid "Mounting:"
-msgstr ""
+msgstr "Csatolás:"
 
 #. scripts/map-drive.py:701
 msgid ""
@@ -206,24 +206,32 @@ msgid ""
 "mounting the share, return back to this window. Don't unmount until after "
 "the drive letter is mapped."
 msgstr ""
+"A fájlrendszer csatlakoztatásához elindul a fájlkezelő; ha a fájlrendszer "
+"még nincs csatlakoztatva, a fájlkezelő elvégzi a csatolást. A megosztás "
+"csatlakoztatása után térjen vissza ebbe az ablakba. Ne válassza le a "
+"fájlrendszert addig, amíg a meghajtóbetűjel hozzárendelése meg nem történt."
 
 #. scripts/map-drive.py:706
 msgid "Launch file manager"
-msgstr ""
+msgstr "Fájlkezelő indítása"
 
 #. scripts/map-drive.py:707
 msgid ""
 "After launching the file manager and having mounted the share, proceed to "
 "the next step."
 msgstr ""
+"A fájlkezelő elindítása és a megosztás csatlakoztatása után lépjen tovább a "
+"következő szakaszra."
 
 #. scripts/map-drive.py:731
 msgid "Also link UNC path for applications to use."
 msgstr ""
+"Emellett hozzon létre UNC-elérési utat is, amelyet az alkalmazások "
+"használhatnak."
 
 #. scripts/map-drive.py:742
 msgid "Choose Folder"
-msgstr ""
+msgstr "Mappa kiválasztása"
 
 #. scripts/map-drive.py:778
 msgid ""
@@ -236,202 +244,210 @@ msgid ""
 "/path/to/file/\n"
 "~/folder/"
 msgstr ""
+"Példák:\n"
+"\n"
+"\\\\Számítógép\\MegosztottMappa\n"
+"smb://Kiszolgáló.local/MegosztottMappa/\n"
+"https://127.0.0.1/webdav/\n"
+"sftp://felhasználó@127.0.0.1/ (SSH SFTP)\n"
+"/fájl/elérési_út/\n"
+"~/mappa/"
 
 #. scripts/map-drive.py:789
 msgid "Path:"
-msgstr ""
+msgstr "Útvonal:"
 
 #. scripts/map-drive.py:790
 msgid "Path can be a local file path, network share, WebDAV, SSH SFTP, or FTP."
 msgstr ""
+"Az útvonal lehet helyi fájlútvonal, hálózati megosztás, WebDAV, SSH SFTP "
+"vagy FTP."
 
 #. scripts/map-drive.py:791
 msgid "Map to drive letter:"
-msgstr ""
+msgstr "Hozzárendelés meghajtóbetűjelhez:"
 
 #. scripts/map-drive.py:806
 msgid "Browse Folder..."
-msgstr ""
+msgstr "Mappa tallózása..."
 
 #. scripts/map-drive.py:1099
 msgid "Drive mapping complete"
-msgstr ""
+msgstr "Meghajtó-hozzárendelés kész"
 
 #. scripts/map-drive.py:1111
 msgid ""
 "The share was mounted successfully, but the specified subfolder was not "
 "found, you might need to create it:"
 msgstr ""
+"A megosztás sikeresen csatlakoztatva lett, de a megadott almappa nem "
+"található; lehet, hogy létre kell hoznia:"
 
 #. scripts/map-drive.py:1123
 msgid "Could not use drive letter."
-msgstr ""
+msgstr "Nem sikerült használni a meghajtóbetűjelet."
 
 #. scripts/map-drive.py:1130
 msgid "Could not create link."
-msgstr ""
+msgstr "Nem sikerült létrehozni a hivatkozást."
 
 #. scripts/map-drive.py:1138
 msgid "Could not create link for UNC path."
-msgstr ""
+msgstr "Nem sikerült hivatkozást létrehozni az UNC-útvonalhoz."
 
 #. scripts/map-drive.py:1193
 msgid "No drives are available to map."
-msgstr ""
+msgstr "Nincs elérhető meghajtó a csatlakoztatáshoz."
 
 #. scripts/theme-utils/color_edit.py:70 scripts/theme-utils/draw_gui.py:39
 msgid "Menu"
-msgstr ""
+msgstr "Menü"
 
 #. scripts/theme-utils/color_edit.py:71 scripts/theme-utils/draw_gui.py:41
 msgid "Button"
-msgstr ""
+msgstr "Gomb"
 
 #. scripts/theme-utils/color_edit.py:72
 msgid "Window"
-msgstr ""
+msgstr "Ablak"
 
 #. scripts/theme-utils/color_edit.py:73
 msgid "Misc"
-msgstr ""
+msgstr "Egyéb"
 
 #. scripts/theme-utils/color_edit.py:85
 msgid "Colors From Theme"
-msgstr ""
+msgstr "Színek a témából"
 
 #. scripts/theme-utils/color_edit.py:124
 msgid "Controls Alternate Background"
-msgstr ""
+msgstr "Vezérlők váltakozó háttere"
 
 #. scripts/theme-utils/color_edit.py:132
 msgid "Active Border"
-msgstr ""
+msgstr "Aktív szegély"
 
 #. scripts/theme-utils/color_edit.py:140
 msgid "Inactive Title Text"
-msgstr ""
+msgstr "Inaktív címszöveg"
 
 #. scripts/theme-utils/color_edit.py:148
 msgid "Window Frame"
-msgstr ""
+msgstr "Ablakkeret"
 
 #. scripts/theme-utils/color_edit.py:161
 msgid "Controls Dark Shadow"
-msgstr ""
+msgstr "Vezérlők sötét árnyék"
 
 #. scripts/theme-utils/color_edit.py:169
-#, fuzzy
 msgid "Controls Background"
-msgstr "Vezérlőpult"
+msgstr "Vezérlők háttér"
 
 #. scripts/theme-utils/color_edit.py:177
 msgid "Controls Highlight"
-msgstr ""
+msgstr "Vezérlők kiemelés"
 
 #. scripts/theme-utils/color_edit.py:185
 msgid "Controls Light"
-msgstr ""
+msgstr "Vezérlők világos"
 
 #. scripts/theme-utils/color_edit.py:193
-#, fuzzy
 msgid "Controls Shadow"
-msgstr "Vezérlőpult"
+msgstr "Vezérlők árnyék"
 
 #. scripts/theme-utils/color_edit.py:201
-#, fuzzy
 msgid "Controls Text"
-msgstr "Vezérlőpult"
+msgstr "Vezérlők szöveg"
 
 #. scripts/theme-utils/color_edit.py:209
 msgid "Gray Text"
-msgstr ""
+msgstr "Szürke szöveg"
 
 #. scripts/theme-utils/color_edit.py:224
 msgid "Menu Background"
-msgstr ""
+msgstr "Menü háttere"
 
 #. scripts/theme-utils/color_edit.py:232
 msgid "Menu Bar"
-msgstr ""
+msgstr "Menüsáv"
 
 #. scripts/theme-utils/color_edit.py:240
 msgid "Selection Highlight"
-msgstr ""
+msgstr "Kijelölés kiemelése"
 
 #. scripts/theme-utils/color_edit.py:248
 #. scripts/theme-utils/customize_font.py:114
 msgid "Menu Text"
-msgstr ""
+msgstr "Menüszöveg"
 
 #. scripts/theme-utils/color_edit.py:257
 msgid "Menu Height"
-msgstr ""
+msgstr "Menümagasság"
 
 #. scripts/theme-utils/color_edit.py:270
 msgid "Scrollbar"
-msgstr ""
+msgstr "Görgetősáv"
 
 #. scripts/theme-utils/color_edit.py:278
 msgid "Window Background"
-msgstr ""
+msgstr "Ablakháttér"
 
 #. scripts/theme-utils/color_edit.py:286
 msgid "Window Text"
-msgstr ""
+msgstr "Ablakszöveg"
 
 #. scripts/theme-utils/color_edit.py:294
 #. scripts/theme-utils/customize_font.py:138
 msgid "Tooltip Text"
-msgstr ""
+msgstr "Eszköztipp szövege"
 
 #. scripts/theme-utils/color_edit.py:302
 msgid "Tooltip Background"
-msgstr ""
+msgstr "Eszköztipp háttere"
 
 #. scripts/theme-utils/color_edit.py:311
 msgid "Scrollbar Height"
-msgstr ""
+msgstr "Görgetősáv magassága"
 
 #. scripts/theme-utils/color_from_theme.py:48
 msgid "Color From Theme"
-msgstr ""
+msgstr "Szín a témából"
 
 #. scripts/theme-utils/color_from_theme.py:86
 msgid "Accent"
-msgstr ""
+msgstr "Hangsúly"
 
 #. scripts/theme-utils/color_from_theme.py:94
 msgid "Emboss Amount"
-msgstr ""
+msgstr "Domborítás mértéke"
 
 #. scripts/theme-utils/customize_font.py:81
 msgid "Use Desktop Font"
-msgstr ""
+msgstr "Asztali betűtípus használata"
 
 #. scripts/theme-utils/customize_font.py:122
 msgid "Window Title"
-msgstr ""
+msgstr "Ablakcím"
 
 #. scripts/theme-utils/customize_font.py:130
 msgid "Message Box Text"
-msgstr ""
+msgstr "Üzenetablak szövege"
 
 #. scripts/theme-utils/draw_gui.py:36
 msgid "Tooltip"
-msgstr ""
+msgstr "Eszköztipp"
 
 #. scripts/theme-utils/draw_gui.py:37
 msgid "Menu Item Grayed"
-msgstr ""
+msgstr "Kiszürkézett menüelem"
 
 #. scripts/theme-utils/draw_gui.py:38
-#, fuzzy
 msgid "File"
-msgstr "Fájlok"
+msgstr "Fájl"
 
 #. scripts/theme-utils/draw_gui.py:40
 msgid "Menu Item"
-msgstr ""
+msgstr "Menüelem"
 
 #. metadata.json->description
 msgid "Easy access to Wine's utilities"
@@ -455,7 +471,7 @@ msgstr "Jelenítsen meg néhány telepített Wine indítót."
 
 #. settings-schema.json->launchers-style->description
 msgid "Launcher list style"
-msgstr ""
+msgstr "Indítólista stílusa"
 
 #. settings-schema.json->launchers-style->options
 #. settings-schema.json->run-command-prompt-style->options
@@ -463,11 +479,11 @@ msgstr ""
 #. settings-schema.json->browse-drive-c-style->options
 #. settings-schema.json->browse-home-folder-style->options
 msgid "Text Menu"
-msgstr ""
+msgstr "Szövegmenü"
 
 #. settings-schema.json->launchers-style->options
 msgid "Icons"
-msgstr ""
+msgstr "Ikonok"
 
 #. settings-schema.json->launchers-style->options
 #. settings-schema.json->run-command-prompt-style->options
@@ -475,7 +491,7 @@ msgstr ""
 #. settings-schema.json->browse-drive-c-style->options
 #. settings-schema.json->browse-home-folder-style->options
 msgid "Both"
-msgstr ""
+msgstr "Mindkettő"
 
 #. settings-schema.json->show-run-command->description
 msgid "Show 'Run Command...'"
@@ -494,76 +510,71 @@ msgid "For easy access to the Wine command prompt."
 msgstr "A Wine parancssor könnyű eléréséhez."
 
 #. settings-schema.json->run-command-prompt-style->description
-#, fuzzy
 msgid "Command Prompt item style"
-msgstr "Parancssor"
+msgstr "Parancssor elemstílus"
 
 #. settings-schema.json->run-command-prompt-style->options
 #. settings-schema.json->run-terminal-style->options
 #. settings-schema.json->browse-drive-c-style->options
 #. settings-schema.json->browse-home-folder-style->options
 msgid "Icon"
-msgstr ""
+msgstr "Ikon"
 
 #. settings-schema.json->show-terminal->description
 msgid "Show 'Terminal'"
-msgstr ""
+msgstr "„Terminál” megjelenítése"
 
 #. settings-schema.json->show-terminal->tooltip
 msgid "Open terminal on Wine prefixes"
-msgstr ""
+msgstr "Terminál megnyitása Wine-prefixekben"
 
 #. settings-schema.json->run-terminal-style->description
 msgid "Terminal item style"
-msgstr ""
+msgstr "Végpont-elem stílusa"
 
 #. settings-schema.json->run-terminal-folder->description
 msgid "Terminal working folder"
-msgstr ""
+msgstr "Terminál munkamappa"
 
 #. settings-schema.json->show-browse-drive-c->description
 msgid "Show 'Browse Drive C'"
-msgstr ""
+msgstr "A „C: meghajtó böngészése” megjelenítése"
 
 #. settings-schema.json->show-browse-drive-c->tooltip
-#, fuzzy
 msgid "For easy access to drive C of wine prefixes."
-msgstr "A Wine parancssor könnyű eléréséhez."
+msgstr "A Wine-prefixek C meghajtójának könnyű eléréséhez."
 
 #. settings-schema.json->browse-drive-c-style->description
 msgid "Browse Drive C item style"
-msgstr ""
+msgstr "A C: meghajtó elemeinek böngészése"
 
 #. settings-schema.json->browse-drive-c-icon->description
 msgid "Icon for Drive C"
-msgstr ""
+msgstr "A C: meghajtó ikonja"
 
 #. settings-schema.json->show-browse-home-folder->description
 msgid "Show 'Browse Home Folder'"
-msgstr ""
+msgstr "„Saját mappa tallózása” megjelenítése"
 
 #. settings-schema.json->show-browse-home-folder->tooltip
-#, fuzzy
 msgid "For easy access to the user folder of wine prefixes."
-msgstr "A Wine parancssor könnyű eléréséhez."
+msgstr "A Wine-prefixek felhasználói mappájának könnyű eléréséhez."
 
 #. settings-schema.json->browse-home-folder-style->description
 msgid "Browse Home Folder item style"
-msgstr ""
+msgstr "Böngészés Kezdőlap mappa elemstílusa"
 
 #. settings-schema.json->browse-home-folder-icon->description
 msgid "Icon for Home Folder"
-msgstr ""
+msgstr "A saját mappa ikonja"
 
 #. settings-schema.json->show-tools-menu->description
-#, fuzzy
 msgid "Show Tools menu"
-msgstr "Jelenítse meg a Programok menüt"
+msgstr "Eszközök menü megjelenítése"
 
 #. settings-schema.json->show-tools-menu->tooltip
-#, fuzzy
 msgid "Show the tools menu."
-msgstr "Jelenítse meg a Programok menüt"
+msgstr "Jelenítse meg az Eszközök menüt."
 
 #. settings-schema.json->show-admin-programs-menu->description
 msgid "Show the Configuration menu"
@@ -631,11 +642,11 @@ msgstr "Fejlett"
 
 #. settings-schema.json->automatically-find-prefixes->description
 msgid "Automatically Find Wine Prefixes"
-msgstr ""
+msgstr "Wine-prefixek automatikus keresése"
 
 #. settings-schema.json->automatically-find-prefixes->tooltip
 msgid "Automatically find Wine prefixes."
-msgstr ""
+msgstr "Wine-prefixek automatikus megkeresése."
 
 #. settings-schema.json->prefix-file-list->description
 msgid "Path to prefix list"
@@ -679,27 +690,24 @@ msgid "The wine console executable to use."
 msgstr "A használandó wine konzol futtatható fájl."
 
 #. settings-schema.json->specify-terminal-exec->description
-#, fuzzy
 msgid "Specify the terminal"
-msgstr "Adja meg a wine végrehajtható fájlját"
+msgstr "Adja meg a terminált"
 
 #. settings-schema.json->specify-terminal-exec->tooltip
-#, fuzzy
 msgid ""
 "Specify the terminal executable when launching a terminal, by default 'gnome-"
 "terminal' is used."
 msgstr ""
-"Adja meg a wine futtatható fájlját, alapértelmezés szerint a „wine” kerül "
-"felhasználásra."
+"Terminál indításakor adja meg a terminál végrehajtható fájlját; "
+"alapértelmezés szerint a „gnome-terminal” kerül felhasználásra."
 
 #. settings-schema.json->terminal-exec->description
-#, fuzzy
 msgid "Terminal executable"
-msgstr "Wine futtatható fájl"
+msgstr "Terminál-végrehajtható fájl"
 
 #. settings-schema.json->terminal-exec->tooltip
 msgid "The terminal executable to use when launching a terminal."
-msgstr ""
+msgstr "A terminál indításakor használandó terminál-végrehajtó fájl."
 
 #. scripts/run-wine.sh:6
 msgid "Error running program:"
