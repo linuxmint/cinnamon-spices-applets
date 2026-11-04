@@ -1,4 +1,5 @@
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 
 const SYSFS_NET_PATH = "/sys/class/net";
 const MS_PER_SECOND = 1000;
@@ -126,6 +127,8 @@ NetData.prototype = {
         this.gtop = new GTop.glibtop_netload();
         this.rescan_interval = 0; //seconds, 0 = never rescan. Set by the applet from the "Rescan interval" setting
         this.last_scan = Date.now();
+        this.device_exists = {}; //device name -> false once /sys/class/net/<device> is gone
+        this.exists_pending = {}; //device name -> true while an async check is running
         this.scanDevices();
         [this.down_last, this.up_last] = this.getNetLoad();
     },
@@ -189,6 +192,29 @@ NetData.prototype = {
         return [_("Network D/U:"), this.text];
     },
 
+    //Starts an asynchronous check whether the interface still exists and stores the result in
+    //this.device_exists. Does nothing if the previous check for this device has not finished yet.
+    checkDeviceExists: function(device) {
+        if (this.exists_pending[device])
+            return;
+        this.exists_pending[device] = true;
+        Gio.File.new_for_path(SYSFS_NET_PATH + "/" + device).query_info_async(
+            "standard::name", Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null,
+            (file, result) => {
+                this.exists_pending[device] = false;
+                try {
+                    file.query_info_finish(result);
+                    this.device_exists[device] = true;
+                }
+                catch (e) {
+                    if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
+                        this.device_exists[device] = false;
+                    else
+                        global.logWarning("sysmonitor: cannot check network device " + device + ": " + e.message);
+                }
+            });
+    },
+
     getNetLoad: function() {
         let down = 0;
         let up = 0;
@@ -198,16 +224,11 @@ NetData.prototype = {
             //Skip interfaces that have been removed since they were discovered (deleted Docker bridge,
             //unplugged USB NIC, ...). Querying libgtop for a missing interface fails and logs several
             //warnings per call, which floods ~/.xsession-errors at every refresh.
-            let exists = true;
-            try {
-                Gio.File.new_for_path(SYSFS_NET_PATH + "/" + this.devices[i]).query_info("standard::name", Gio.FileQueryInfoFlags.NONE, null);
-            }
-            catch (e) {
-                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
-                    throw e;
-                exists = false;
-            }
-            if (!exists)
+            //The check is asynchronous (a synchronous call would block the main loop), so a removal
+            //is noticed one refresh late. Devices are re-checked every refresh, so a device that comes
+            //back is picked up again.
+            this.checkDeviceExists(this.devices[i]);
+            if (this.device_exists[this.devices[i]] === false)
                 continue;
             present.push(this.devices[i]);
             GTop.glibtop.get_netload(this.gtop, this.devices[i]);
