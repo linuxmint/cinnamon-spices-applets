@@ -733,7 +733,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this._check_sunrise_sunset(true);
         this.update_tooltip();
         timeout_add_seconds(5, () => { this._check_fullscreen_mode(); return this.is_running; });
-        timeout_add_seconds(30, () => { this.detect_resume(); return this.is_running; });
+        timeout_add_seconds(20, () => { this.detect_resume(); return this.is_running; });
         timeout_add_seconds(900, () => { this._check_sunrise_sunset(); return this.is_running; });
         Main.layoutManager.connect('monitors-changed', () => { if (this.apply_changing_monitors) this.on_preset_reload_button_clicked(); });
     }
