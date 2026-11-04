@@ -714,7 +714,7 @@
     "type": "scale",
     "default": 16,
     "min": 8,
-    "max": 35,
+    "max": 128,
     "step": 1,
     "description": "Font size (px)"
   },
