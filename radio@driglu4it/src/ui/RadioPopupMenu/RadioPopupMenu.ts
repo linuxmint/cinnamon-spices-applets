@@ -12,6 +12,11 @@ const { BoxLayout } = imports.gi.St
 
 export let radioPopupMenu: PopupMenu
 
+export const destroyRadioPopupMenu = () => {
+    radioPopupMenu?.destroyMenu()
+    radioPopupMenu = undefined as unknown as PopupMenu
+}
+
 export const initRadioPopupMenu = (props: { launcher: imports.gi.St.BoxLayout }) => {
     if (radioPopupMenu) {
         global.logWarning('radioPopupMenu already initiallized')
