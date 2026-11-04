@@ -3,10 +3,21 @@ const Gio = imports.gi.Gio; // Needed for file infos
 //const Util = imports.misc.util;
 const Signals = imports.signals;
 const Cinnamon = imports.gi.Cinnamon;
-const Util = require("./lib/util");
+const Extension = imports.ui.extension;
 
-const {to_string} = require("./lib/to-string");
-const {readFileAsync} = require("./lib/readFileAsync");
+function _require(relPath) {
+    if (Extension.getCurrentExtension) {
+        var Me = Extension.getCurrentExtension();
+        return Me.imports[relPath];
+    } else {
+        return require(relPath);
+    }
+}
+
+const Util = _require("./lib/util");
+
+const {to_string} = _require("./lib/to-string");
+const {readFileAsync} = _require("./lib/readFileAsync");
 
 // A default low temperature to return when in d3cold
 const d3cold_temperature = "35";
@@ -28,7 +39,7 @@ const {
   log,
   logError,
   versionCompare
-} = require("./lib/constants");
+} = _require("./lib/constants");
 
 var LOCAL_DATA = {
       "temps": {},
@@ -50,7 +61,7 @@ class SensorsReaper {
     this.sensors_json_data = {};
     this.sensors_program = ""+GLib.find_program_in_path("sensors");
     this.get_sensors_command();
-   
+
     // Support for the Nvidia System Management Interface (nvidia-smi)
     // The Nvidia System Management Interface docs are at
     //   https://developer.nvidia.com/system-management-interface
@@ -155,7 +166,7 @@ class SensorsReaper {
                   lines.forEach((element) => {
                     if(element.indexOf(",") > -1) {
                       try {
-                        
+
                         const nvidia_information = element.split(', ');
                         const nvidia_bus_id = nvidia_information[1];
                         const nvidia_sysfs_path = `${sysfs_mount_point}/bus/pci/devices/${nvidia_bus_id.replace(/^0{8}/, "0000").toLowerCase()}/power_state`;
@@ -171,7 +182,7 @@ class SensorsReaper {
                         // Check if we can find the power_state interface for the card
                         if (GLib.file_test(nvidia_sysfs_path, GLib.FileTest.EXISTS)) {
                           global.log(`Found Nvidia power state on ${nvidia_sysfs_path}, device name ${nvidia_device_name}, bus id ${nvidia_bus_id}`)
-                          this.nvidia_cards[nvidia_device_id]["sysfs"] = Gio.File.new_for_path(nvidia_sysfs_path)                        
+                          this.nvidia_cards[nvidia_device_id]["sysfs"] = Gio.File.new_for_path(nvidia_sysfs_path)
                         }
                         else {
                           global.logError(`Could not find power_state handle or information for Nvidia card at ${nvidia_sysfs_path}, is sysfs mounted on ${sysfs_mount_point}?`)
@@ -275,7 +286,7 @@ class SensorsReaper {
 
   reap_nvidia_smi(no_check_gpu_if_d3cold=0) {
     let results = {};
-   
+
     if (this.nvidia_smi_command != undefined) {
 
       if (this.nvidia_cards != null) {
@@ -303,19 +314,19 @@ class SensorsReaper {
                     this.get_nvidia_smi_data(id, results).then(() => {
                       resolve();
                     }).catch((error) => {
-                      reject(`Error ${error} while retrieving data from adapter ${this.nvidia_cards[id].name}`);                      
+                      reject(`Error ${error} while retrieving data from adapter ${this.nvidia_cards[id].name}`);
                     });
                   }
                 }).catch((error) => {
                   reject(`Error ${error} while reading sysfs for adapter ${this.nvidia_cards[id].name}`);
-                })              
+                })
               }
               else {
                 // Just retrieve data from card
                 this.get_nvidia_smi_data(id, results).then(() => {
                   resolve();
                 }).catch((error) => {
-                  reject(`Error ${error} while retrieving data from adapter ${this.nvidia_cards[id].name}`);                      
+                  reject(`Error ${error} while retrieving data from adapter ${this.nvidia_cards[id].name}`);
                 });
               }
             });
@@ -327,7 +338,7 @@ class SensorsReaper {
 
         }
 
-      }    
+      }
   }
 
   async _sensors_reaped(output) {
@@ -559,5 +570,6 @@ function convert_to_json(raw) {
 }
 
 Signals.addSignalMethods(SensorsReaper.prototype);
-
-module.exports = {SensorsReaper}
+if (!Extension.getCurrentExtension) {
+  module.exports = {SensorsReaper}
+}

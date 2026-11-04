@@ -301,10 +301,10 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         this.settings.bind("CPU_loadAverageCorner", "CPU_loadAverageCorner");
         this.settings.bind("CPU_loadAverageFontFactor", "CPU_loadAverageFontFactor");
         this.settings.bind("CPU_alertWhenStuckProcess", "CPU_alertWhenStuckProcess");
-        this.settings.bind("CPU_stuckMethod", "CPU_stuckMethod");
-        this.settings.bind("CPU_minLoadStuckProcess", "CPU_minLoadStuckProcess");
-        this.settings.bind("CPU_durationStuckProcess", "CPU_durationStuckProcess");
-        this.settings.bind("CPU_unitStuckProcess", "CPU_unitStuckProcess");
+        this.settings.bind("CPU_stuckMethod", "CPU_stuckMethod", () => { this.init_cpu_check_stuck_processes() });
+        this.settings.bind("CPU_minLoadStuckProcess", "CPU_minLoadStuckProcess", () => { this.init_cpu_check_stuck_processes() });
+        this.settings.bind("CPU_durationStuckProcess", "CPU_durationStuckProcess", () => { this.init_cpu_check_stuck_processes() });
+        this.settings.bind("CPU_unitStuckProcess", "CPU_unitStuckProcess", () => { this.init_cpu_check_stuck_processes() });
         this.settings.bind("CPU_bgColorStuckProcess", "CPU_bgColorStuckProcess");
 
         this.settings.bind("CPU_width", "CPU_width", () => { this.adjust_CPU_width() });
@@ -1349,6 +1349,26 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
                 mountpoint: isSwap ? "[SWAP]" : "-"
             });
         }).catch(() => this.zramProvider.setData(null));
+    }
+
+    init_cpu_check_stuck_processes() {
+        if (this.oldCPU_Total_Values.length === 0) {
+            let sto = setTimeout( () => {
+                clearTimeout(sto);
+                this.init_cpu_check_stuck_processes();
+            },
+            250);
+            return;
+        }
+        let _now = Date.now();
+        this.CPU_stuckFromDate = [];
+        this.oldCPU_Stuck_Total_Values = [];
+        this.oldCPU_Stuck_Idle_Values = [];
+        for (let i=0; i<this.oldCPU_Total_Values.length; i++) {
+            this.CPU_stuckFromDate.push(_now);
+            this.oldCPU_Stuck_Total_Values.push(0);
+            this.oldCPU_Stuck_Idle_Values.push(0);
+        }
     }
 
     cpu_check_stuck_processes(values) {

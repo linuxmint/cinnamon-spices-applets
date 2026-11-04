@@ -1,6 +1,7 @@
 const Gettext = imports.gettext; // Needed for translations
 const GLib = imports.gi.GLib; // Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
+const Extension = imports.ui.extension;
 
 const UUID="Sensors@claudiux";
 
@@ -119,19 +120,21 @@ function logError(error) {
   global.logError("\n[" + UUID + "]: " + error + "\n")
 }
 
-module.exports = {
-  UUID,
-  HOME_DIR,
-  APPLET_DIR,
-  SCRIPTS_DIR,
-  ICONS_DIR,
-  XS_PATH,
-  NVIDIA_SMI_VERSION_REGEX,
-  _,
-  DEBUG,
-  RELOAD,
-  QUICK,
-  log,
-  logError,
-  versionCompare
-};
+if (!Extension.getCurrentExtension) {
+  module.exports = {
+    UUID,
+    HOME_DIR,
+    APPLET_DIR,
+    SCRIPTS_DIR,
+    ICONS_DIR,
+    XS_PATH,
+    NVIDIA_SMI_VERSION_REGEX,
+    _,
+    DEBUG,
+    RELOAD,
+    QUICK,
+    log,
+    logError,
+    versionCompare
+  }
+}

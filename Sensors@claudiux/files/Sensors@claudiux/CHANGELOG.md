@@ -1,3 +1,8 @@
+### v5.11.8~20261103
+  * Avoid nvidia-smi process storm and desktop stutter.
+  * Ready for Linux Mint 23.
+  * Fixes [#9220](https://github.com/linuxmint/cinnamon-spices-applets/issues/9220)
+
 ### v5.11.7~20261028
   * Use the first one available among xenity, zenity, or yad.
 

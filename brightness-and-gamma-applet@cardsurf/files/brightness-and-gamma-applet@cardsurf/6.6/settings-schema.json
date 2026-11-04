@@ -464,5 +464,10 @@
     "screen_temp": {
         "type": "generic",
         "default" : 6500
+    },
+
+    "last_resume_date": {
+        "type": "generic",
+        "default" : ""
     }
 }
