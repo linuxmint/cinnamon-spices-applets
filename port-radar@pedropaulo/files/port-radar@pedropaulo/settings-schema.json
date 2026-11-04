@@ -1,0 +1,56 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["general"],
+        "general": {
+            "type": "page",
+            "title": "General",
+            "sections": ["monitoring", "display"]
+        },
+        "monitoring": {
+            "type": "section",
+            "title": "Monitoring",
+            "keys": ["refresh-interval", "max-entries", "show-udp", "show-ipv6"]
+        },
+        "display": {
+            "type": "section",
+            "title": "Panel display",
+            "keys": ["show-count"]
+        }
+    },
+    "refresh-interval": {
+        "type": "combobox",
+        "default": 10,
+        "options": {
+            "Manual": 0,
+            "5 seconds": 5,
+            "10 seconds": 10,
+            "30 seconds": 30,
+            "60 seconds": 60
+        },
+        "description": "How often to refresh the socket list"
+    },
+    "max-entries": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 1,
+        "max": 500,
+        "step": 1,
+        "description": "Maximum number of ports shown in the menu"
+    },
+    "show-count": {
+        "type": "switch",
+        "default": false,
+        "description": "Show the number of ports in use in the panel"
+    },
+    "show-udp": {
+        "type": "switch",
+        "default": true,
+        "description": "Include locally bound UDP sockets"
+    },
+    "show-ipv6": {
+        "type": "switch",
+        "default": true,
+        "description": "Include IPv6 sockets"
+    }
+}

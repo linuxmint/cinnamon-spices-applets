@@ -1,0 +1,240 @@
+# PORT RADAR
+# This file is put in the public domain.
+# pedropaulonet, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: port-radar@pedropaulo 0.4.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-10-01 09:10-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:42
+msgid "Port Radar — local sockets"
+msgstr ""
+
+#. metadata.json->name
+#. applet.js:55 applet.js:389
+msgid "Port Radar"
+msgstr ""
+
+#. applet.js:56
+msgid "Scanning…"
+msgstr ""
+
+#. applet.js:61
+msgid "Search port, process, address or PID"
+msgstr ""
+
+#. applet.js:70 applet.js:71
+msgid "All ports"
+msgstr ""
+
+#. applet.js:72
+msgid "TCP"
+msgstr ""
+
+#. applet.js:73
+msgid "UDP"
+msgstr ""
+
+#. applet.js:74
+msgid "IPv4"
+msgstr ""
+
+#. applet.js:75
+msgid "IPv6"
+msgstr ""
+
+#. applet.js:76
+msgid "Loopback only"
+msgstr ""
+
+#. applet.js:77
+msgid "Non-loopback"
+msgstr ""
+
+#. applet.js:84
+msgid "Recent changes"
+msgstr ""
+
+#. applet.js:91
+msgid "Refresh now"
+msgstr ""
+
+#. applet.js:95
+msgid "About Port Radar"
+msgstr ""
+
+#. applet.js:154
+msgid "Scanning local sockets…"
+msgstr ""
+
+#. applet.js:262 applet.js:392
+#, javascript-format
+msgid "Last successful update: %s"
+msgstr ""
+
+#. applet.js:262
+#, javascript-format
+msgid "Updated at %s"
+msgstr ""
+
+#. applet.js:278
+#, javascript-format
+msgid "%d ports in use"
+msgstr ""
+
+#. applet.js:279
+#, javascript-format
+msgid "%d of %d ports"
+msgstr ""
+
+#. applet.js:300
+msgid "No local sockets detected"
+msgstr ""
+
+#. applet.js:300
+msgid "No sockets match this search and filter"
+msgstr ""
+
+#. applet.js:313
+msgid "Copy port"
+msgstr ""
+
+#. applet.js:319
+#, javascript-format
+msgid "Copy address: %s"
+msgstr ""
+
+#. applet.js:327
+#, javascript-format
+msgid "Copy PID: %d"
+msgstr ""
+
+#. applet.js:338
+#, javascript-format
+msgid "Showing %d of %d ports"
+msgstr ""
+
+#. applet.js:365
+#, javascript-format
+msgid "Recent changes (%d)"
+msgstr ""
+
+#. applet.js:368
+msgid "OPENED"
+msgstr ""
+
+#. applet.js:369
+msgid "CLOSED"
+msgstr ""
+
+#. applet.js:370
+msgid "PROCESS CHANGED"
+msgstr ""
+
+#. applet.js:370
+msgid "BINDING CHANGED"
+msgstr ""
+
+#. applet.js:371
+#, javascript-format
+msgid "%s  %s %d  ·  %s"
+msgstr ""
+
+#. applet.js:378
+msgid "Install iproute2 to read local ports, then refresh."
+msgstr ""
+
+#. applet.js:379
+msgid "Port Radar requires Cinnamon 6.0 or later."
+msgstr ""
+
+#. applet.js:380
+msgid "Reading ports took too long. Try refreshing."
+msgstr ""
+
+#. applet.js:381
+msgid "Could not read local ports. Try running ss -lntup in a terminal."
+msgstr ""
+
+#. applet.js:390
+#, javascript-format
+msgid "Port Radar · %d ports in use"
+msgstr ""
+
+#. metadata.json->description
+msgid "See which local ports are in use and which processes own them."
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Pedro Paulo"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"By Pedro Paulo - GPL-3.0-or-later\n"
+"Requires Cinnamon 6.0 or later and iproute2.\n"
+"GitHub: https://github.com/pedropaulonet\n"
+"Support the project on Ko-fi: https://ko-fi.com/pedropaulo"
+msgstr ""
+
+#. settings-schema.json->general->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->monitoring->title
+msgid "Monitoring"
+msgstr ""
+
+#. settings-schema.json->display->title
+msgid "Panel display"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->options
+msgid "Manual"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->options
+msgid "5 seconds"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->options
+msgid "10 seconds"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->options
+msgid "30 seconds"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->options
+msgid "60 seconds"
+msgstr ""
+
+#. settings-schema.json->refresh-interval->description
+msgid "How often to refresh the socket list"
+msgstr ""
+
+#. settings-schema.json->max-entries->description
+msgid "Maximum number of ports shown in the menu"
+msgstr ""
+
+#. settings-schema.json->show-count->description
+msgid "Show the number of ports in use in the panel"
+msgstr ""
+
+#. settings-schema.json->show-udp->description
+msgid "Include locally bound UDP sockets"
+msgstr ""
+
+#. settings-schema.json->show-ipv6->description
+msgid "Include IPv6 sockets"
+msgstr ""
