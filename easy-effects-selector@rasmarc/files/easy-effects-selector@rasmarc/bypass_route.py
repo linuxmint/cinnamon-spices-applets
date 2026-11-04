@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (C) 2026 randomkiapps
+# Copyright (C) 2026 rasmarc
 """Opt-in setup of the tested EE 7.2.3 / PipeWire / WirePlumber stereo route.
 
 The read-only status command is safe at applet startup. Only enable/disable
@@ -19,7 +19,7 @@ import sys
 import tempfile
 import time
 
-UUID = "easy-effects-selector@randomkiapps"
+UUID = "easy-effects-selector@rasmarc"
 SCHEMA = "com.github.wwmm.easyeffects"
 OUTPUT = SCHEMA + ".streamoutputs"
 INPUT = SCHEMA + ".streaminputs"
@@ -29,7 +29,24 @@ LEGACY_STREAM = "ee_route_playback"
 # EE 7 displays this node name verbatim in its exclusions. Keep the actual
 # translated identity in the saved state, including across language changes.
 STREAM = _("Preset Selector – Forwarding")
-STREAM_NAMES = {LEGACY_STREAM, "Preset Selector – Forwarding", "Preset Selector – Weiterleitung", STREAM}
+STREAM_NAMES = {
+    "Preset Selector – Doorsturing",
+    "Preset Selector – Encaminhamento",
+    "Preset Selector – Forwarding",
+    "Preset Selector – Inoltro",
+    "Preset Selector – Przekierowanie",
+    "Preset Selector – Přesměrování",
+    "Preset Selector – Redirection",
+    "Preset Selector – Reenvío",
+    "Preset Selector – Weiterleitung",
+    "Preset Selector – Yönlendirme",
+    "Preset Selector – Перенаправление",
+    "Preset Selector – Переспрямування",
+    "Preset Selector – 転送",
+    "Preset Selector – 转发",
+    "Preset Selector – 전달",
+    LEGACY_STREAM, STREAM,
+}
 
 
 def route_config(pretty=True):

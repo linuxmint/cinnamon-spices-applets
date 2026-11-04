@@ -1,8 +1,10 @@
 # Easy Effects Preset Selector
 
 Select locally saved **Easy Effects 7.2.3 output presets** from the Cinnamon panel.
-Publisher: **randomkiapps**. Interface languages: English and German.
-Version: **1.5.7**.
+Publisher: **rasmarc**. The interface supports 16 languages: English, German,
+French, Spanish, Italian, Dutch, Portuguese (Portugal and Brazil), Polish, Czech,
+Turkish, Russian, Ukrainian, Simplified Chinese, Japanese and Korean.
+Version: **1.5.11**.
 
 ## Requirements
 
@@ -16,18 +18,18 @@ with Easy Effects 8 or later has not been established.
 
 ## Manual installation and translations
 
-Copy the complete `files/easy-effects-selector@randomkiapps` directory to
+Copy the complete `files/easy-effects-selector@rasmarc` directory to
 `~/.local/share/cinnamon/applets/`. For a manual installation, compile and install
 the translation catalogs as well:
 
 ```bash
-cinnamon-xlet-makepot --install "$HOME/.local/share/cinnamon/applets/easy-effects-selector@randomkiapps"
+cinnamon-xlet-makepot --install "$HOME/.local/share/cinnamon/applets/easy-effects-selector@rasmarc"
 ```
 
 Close the applet settings window and restart Cinnamon after installing the
-catalog. In an X11 session, press `Alt+F2`, type `r`, and press Enter; otherwise
-log out and back in. German sessions then show the translated settings and
-tooltip. English is the fallback when a translation catalog is not installed.
+catalogs. In an X11 session, press `Alt+F2`, type `r`, and press Enter; otherwise
+log out and back in. The applet follows the session language, including settings and tooltips. English
+is the fallback when a translation catalog is not installed.
 
 ## Using the applet
 
@@ -82,7 +84,10 @@ available with wheel selection disabled.
 
 The three dropdowns keep names already chosen in another position visible but
 disabled. Reassigning or clearing a position makes its previous preset available
-again. The current position's own choice remains available.
+again. The current position's own choice remains available. Scrolling over a closed
+dropdown scrolls the settings page without changing its value, even with keyboard
+focus. An open list retains native scrolling; selection still requires a click
+or keyboard confirmation.
 Unavailable saved names remain visible in settings so they can be reassigned.
 If imported settings contain duplicate assignments, the first position takes
 precedence. Without assignments, scrolling does nothing and the additional
@@ -238,9 +243,10 @@ or removal; it does not continually override later bypass changes.
 
 The configuration lives in
 `$XDG_CONFIG_HOME/pipewire/pipewire.conf.d/90-ee-route.conf`. Recovery information
-is kept in `$XDG_CONFIG_HOME/easy-effects-selector@randomkiapps/`.
-The route persists across Cinnamon reloads and login sessions. Disable this option before
-removing the applet if the route should also be removed.
+is kept in `$XDG_CONFIG_HOME/easy-effects-selector@rasmarc/`.
+The route persists across Cinnamon reloads and login sessions. Before removing
+the applet from the panel or uninstalling it, turn this option off to remove the
+forwarding route and restore the previous device settings.
 Select physical output devices through the desktop's sound controls while it
 is active; choosing another output directly in Easy Effects leaves the fixed
 route and is reflected in the option's status. Device-specific Easy Effects

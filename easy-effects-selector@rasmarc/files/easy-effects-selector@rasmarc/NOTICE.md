@@ -1,7 +1,7 @@
 # License and attribution
 
 Easy Effects Preset Selector is distributed under **GPL-3.0-or-later**.
-Copyright (C) 2026 randomkiapps. The full GPL version 3 text is in `LICENSE`.
+Copyright (C) 2026 rasmarc. The full GPL version 3 text is in `LICENSE`.
 
 `easy-effects-selector-logo-template.svg` is the neutral monochrome form for the
 applet logo. Its two faders are based on the Easy Effects 7.2.3 symbolic icon;

@@ -1,0 +1,324 @@
+# Easy Effects Preset Selector
+# Copyright (C) 2026 rasmarc
+# SPDX-License-Identifier: GPL-3.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: easy-effects-selector@rasmarc 1.5.11\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-11-04 12:00+0000\n"
+"PO-Revision-Date: 2026-11-04 12:00+0000\n"
+"Last-Translator: rasmarc\n"
+"Language-Team: Korean\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, python-format
+msgid "%s (no longer available)"
+msgstr "%s (더 이상 사용할 수 없음)"
+
+msgid "A blue dot shows a matching preset at its assigned position. Mouse-wheel selection can be enabled or disabled under Controls. Nothing is loaded at startup."
+msgstr "파란 점은 지정된 위치의 프리셋이 현재 설정과 일치함을 나타냅니다. 마우스 휠 선택은 조작에서 켜거나 끌 수 있습니다. 시작할 때는 아무것도 불러오지 않습니다."
+
+msgid "A custom PipeWire configuration is in use; it was left unchanged."
+msgstr "사용자 지정 PipeWire 설정을 사용 중이므로 변경하지 않았습니다."
+
+msgid "A physical default output device could not be found."
+msgstr "기본 물리 출력 장치를 찾을 수 없습니다."
+
+#, python-format
+msgid "A required command is missing: %s"
+msgstr "필요한 명령이 없습니다: %s"
+
+msgid "A routing file is a symbolic link; it was left unchanged."
+msgstr "라우팅 파일이 심볼릭 링크이므로 변경하지 않았습니다."
+
+msgid "An existing routing configuration was left unchanged."
+msgstr "기존 라우팅 설정을 변경하지 않았습니다."
+
+msgid "Another configuration already defines the Easy Effects route."
+msgstr "다른 설정에서 Easy Effects 라우팅을 이미 정의하고 있습니다."
+
+#, javascript-format
+msgid "Autostart could not be changed: %s"
+msgstr "자동 시작을 변경할 수 없습니다: %s"
+
+msgid "Bottom"
+msgstr "아래"
+
+#, javascript-format
+msgid "Bypass could not be changed: %s"
+msgstr "바이패스를 변경할 수 없습니다: %s"
+
+#, javascript-format
+msgid "Bypass could not be restored: %s"
+msgstr "바이패스를 복원할 수 없습니다: %s"
+
+#, javascript-format
+msgid "Bypass preservation could not be changed.\n%s"
+msgstr "바이패스 유지 설정을 변경할 수 없습니다.\n%s"
+
+msgid "Bypass status"
+msgstr "바이패스 상태"
+
+msgid "Changed settings"
+msgstr "변경된 설정"
+
+msgid "Comparison errors"
+msgstr "비교 오류"
+
+#, javascript-format
+msgid "Comparison unavailable: %s"
+msgstr "비교할 수 없음: %s"
+
+msgid "Controls"
+msgstr "조작"
+
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+msgid "Easy Effects Preset Selector"
+msgstr "Easy Effects Preset Selector"
+
+msgid "Easy Effects did not load the output preset. Please check the preset file."
+msgstr "Easy Effects가 출력 프리셋을 불러오지 않았습니다. 프리셋 파일을 확인하세요."
+
+msgid "Effect settings changed"
+msgstr "효과 설정이 변경됨"
+
+msgid "Global bypass enabled"
+msgstr "전역 바이패스 켜짐"
+
+msgid "Global bypass is unavailable"
+msgstr "전역 바이패스를 사용할 수 없음"
+
+msgid "Global bypass: off"
+msgstr "전역 바이패스: 꺼짐"
+
+msgid "Global bypass: on"
+msgstr "전역 바이패스: 켜짐"
+
+msgid "Incomplete structure in the assigned preset."
+msgstr "지정된 프리셋의 구조가 불완전합니다."
+
+msgid "Invalid effect name in the assigned preset."
+msgstr "지정된 프리셋의 효과 이름이 올바르지 않습니다."
+
+msgid "Invalid structure in the assigned preset."
+msgstr "지정된 프리셋의 구조가 올바르지 않습니다."
+
+msgid "Keep bypass when changing output devices"
+msgstr "출력 장치를 바꿀 때 바이패스 유지"
+
+msgid "Keep menu open after preset selection when bypass is active"
+msgstr "바이패스가 켜져 있으면 프리셋 선택 후 메뉴를 열린 상태로 유지"
+
+msgid "Launch Easy Effects from the menu"
+msgstr "메뉴에서 Easy Effects 실행"
+
+msgid "Launch Service at System Startup"
+msgstr "시스템 시작 시 서비스 실행"
+
+msgid "Loading preset…"
+msgstr "프리셋 불러오는 중…"
+
+msgid "Middle"
+msgstr "가운데"
+
+msgid "No output presets saved"
+msgstr "저장된 출력 프리셋 없음"
+
+msgid "No preset"
+msgstr "프리셋 없음"
+
+msgid "PipeWire and WirePlumber must be running."
+msgstr "PipeWire와 WirePlumber가 실행 중이어야 합니다."
+
+msgid "Preset Selector – Fixed output"
+msgstr "Preset Selector – 고정 출력"
+
+msgid "Preset Selector – Forwarding"
+msgstr "Preset Selector – 전달"
+
+msgid "Preset at bottom"
+msgstr "아래쪽 프리셋"
+
+msgid "Preset at middle"
+msgstr "가운데 프리셋"
+
+msgid "Preset at top"
+msgstr "위쪽 프리셋"
+
+msgid "Preset name"
+msgstr "프리셋 이름"
+
+#, javascript-format
+msgid "Preset “%s” could not be loaded.\n%s"
+msgstr "“%s” 프리셋을 불러올 수 없습니다.\n%s"
+
+msgid "Preset:"
+msgstr "프리셋:"
+
+#, javascript-format
+msgid "Preset: %s"
+msgstr "프리셋: %s"
+
+msgid "Presets could not be read"
+msgstr "프리셋을 읽을 수 없습니다"
+
+msgid "Quick selection"
+msgstr "빠른 선택"
+
+#, javascript-format
+msgid "Quick selection: %s"
+msgstr "빠른 선택: %s"
+
+msgid "Quick-selection position"
+msgstr "빠른 선택 위치"
+
+msgid "Quit Easy Effects when its window closes. This setting is synchronized in both directions with the Easy Effects settings window."
+msgstr "창을 닫으면 Easy Effects를 종료합니다. 이 설정은 Easy Effects 설정 창과 양방향으로 동기화됩니다."
+
+msgid "Recommended: <b>disable</b> this so the service keeps running when the application window is closed."
+msgstr "응용 프로그램 창을 닫아도 서비스가 계속 실행되도록 이 옵션을 <b>끄는 것</b>을 권장합니다."
+
+msgid "Recommended: <b>enable</b> this so the service is ready in the background when you log in."
+msgstr "로그인할 때 서비스가 백그라운드에서 준비되도록 이 옵션을 <b>켜는 것</b>을 권장합니다."
+
+msgid "Select Easy Effects 7.2.3 output presets from the panel"
+msgstr "패널에서 Easy Effects 7.2.3 출력 프리셋 선택"
+
+#, python-format
+msgid "Setup failed: %s\nRecovery also failed: %s"
+msgstr "설정 실패: %s\n복구도 실패했습니다: %s"
+
+#, python-format
+msgid "Setup failed; the previous configuration was restored: %s"
+msgstr "설정 실패. 이전 설정을 복원했습니다: %s"
+
+msgid "Show tooltips"
+msgstr "도구 설명 표시"
+
+msgid "Shutdown on Window Closing"
+msgstr "창을 닫을 때 종료"
+
+msgid "Start Easy Effects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
+msgstr "로그인할 때 Easy Effects를 백그라운드 서비스로 실행합니다. 설정 창이 이미 열려 있다면 다시 열어 외부에서 변경한 자동 시작 설정을 확인하세요."
+
+msgid "Switch quick-selection presets with mouse wheel"
+msgstr "마우스 휠로 빠른 선택 프리셋 전환"
+
+msgid "The Cinnamon applet settings could not be initialized."
+msgstr "Cinnamon 애플릿 설정을 초기화할 수 없습니다."
+
+msgid "The Easy Effects autostart path is not a regular file."
+msgstr "Easy Effects 자동 시작 경로가 일반 파일이 아닙니다."
+
+msgid "The Easy Effects bypass setting could not be changed."
+msgstr "Easy Effects 바이패스 설정을 변경할 수 없습니다."
+
+msgid "The Easy Effects bypass setting is not writable."
+msgstr "Easy Effects 바이패스 설정에 쓸 수 없습니다."
+
+msgid "The Easy Effects command failed."
+msgstr "Easy Effects 명령이 실패했습니다."
+
+msgid "The Easy Effects device settings are not writable."
+msgstr "Easy Effects 장치 설정에 쓸 수 없습니다."
+
+msgid "The Easy Effects device settings no longer match the bypass-preserving route. Enable this option again to restore it."
+msgstr "Easy Effects 장치 설정이 바이패스를 유지하는 라우팅과 더 이상 일치하지 않습니다. 복원하려면 이 옵션을 다시 켜세요."
+
+#, javascript-format
+msgid "The Easy Effects effect parameter is missing: %s"
+msgstr "Easy Effects 효과 매개변수가 없습니다: %s"
+
+msgid "The Easy Effects output settings are not available."
+msgstr "Easy Effects 출력 설정을 사용할 수 없습니다."
+
+msgid "The Easy Effects setting could not be saved."
+msgstr "Easy Effects 설정을 저장할 수 없습니다."
+
+msgid "The Easy Effects setting is not available."
+msgstr "Easy Effects 설정을 사용할 수 없습니다."
+
+#, javascript-format
+msgid "The Easy Effects settings schema is missing: %s"
+msgstr "Easy Effects 설정 스키마가 없습니다: %s"
+
+msgid "The Easy Effects settings schema was not found."
+msgstr "Easy Effects 설정 스키마를 찾을 수 없습니다."
+
+#, javascript-format
+msgid "The assigned preset cannot be read: %s"
+msgstr "지정된 프리셋을 읽을 수 없습니다: %s"
+
+msgid "The assigned preset could not be read."
+msgstr "지정된 프리셋을 읽을 수 없습니다."
+
+msgid "The assigned preset does not contain a valid output effect list."
+msgstr "지정된 프리셋에 유효한 출력 효과 목록이 없습니다."
+
+msgid "The audio command failed."
+msgstr "오디오 명령이 실패했습니다."
+
+msgid "The audio service did not become ready in time."
+msgstr "오디오 서비스가 제시간에 준비되지 않았습니다."
+
+msgid "The autostart directory could not be created."
+msgstr "자동 시작 디렉터리를 만들 수 없습니다."
+
+msgid "The bypass state did not settle after restarting Easy Effects."
+msgstr "Easy Effects를 다시 시작한 후 바이패스 상태가 안정되지 않았습니다."
+
+#, javascript-format
+msgid "The effect configuration is missing from the assigned preset: %s"
+msgstr "지정된 프리셋에 효과 설정이 없습니다: %s"
+
+msgid "The effect parameter map could not be read."
+msgstr "효과 매개변수 매핑을 읽을 수 없습니다."
+
+msgid "The forwarding application could not be excluded."
+msgstr "전달 응용 프로그램을 제외할 수 없습니다."
+
+msgid "The managed routing file is missing or has been replaced."
+msgstr "애플릿이 관리하는 라우팅 파일이 없거나 교체되었습니다."
+
+msgid "The original preset name could not be restored."
+msgstr "원래 프리셋 이름을 복원할 수 없습니다."
+
+msgid "The preset file was moved or deleted."
+msgstr "프리셋 파일이 이동되었거나 삭제되었습니다."
+
+msgid "The routing configuration was changed outside the applet; it was left unchanged."
+msgstr "라우팅 설정이 애플릿 외부에서 변경되어 그대로 두었습니다."
+
+msgid "The saved routing information is invalid."
+msgstr "저장된 라우팅 정보가 올바르지 않습니다."
+
+msgid "This routing option requires the native Easy Effects 7.2.3 package."
+msgstr "이 라우팅 옵션에는 네이티브 Easy Effects 7.2.3 패키지가 필요합니다."
+
+msgid "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects.\n\n<b>Before removing the applet from the panel or uninstalling it, turn this option off to remove the forwarding route.</b>"
+msgstr "Easy Effects 7이 전역 바이패스를 자동으로 끄는 것을 막기 위해 애플릿은 시스템에서 선택한 출력 장치로 오디오 전달 경로를 만듭니다. 이를 위해 Easy Effects는 입력을 포함하여 고정된 장치 선택을 사용합니다.\n\n전달 경로는 제외된 응용 프로그램에 “Preset Selector – 전달”로 표시됩니다. 이 옵션을 켜거나 끄면 오디오 서비스와 실행 중인 Easy Effects가 잠시 다시 시작됩니다.\n\n<b>애플릿을 패널에서 제거하거나 설치 제거하기 전에 이 옵션을 꺼서 전달 경로를 제거하세요.</b>"
+
+msgid "Toggle bypass in menu"
+msgstr "메뉴에서 바이패스 전환"
+
+msgid "Toggle bypass with middle click"
+msgstr "가운데 클릭으로 바이패스 전환"
+
+msgid "Tooltips"
+msgstr "도구 설명"
+
+msgid "Top"
+msgstr "위"
+
+#, javascript-format
+msgid "Unknown Easy Effects effect: %s"
+msgstr "알 수 없는 Easy Effects 효과: %s"
+
+msgid "Loading presets…"
+msgstr "프리셋 목록 읽는 중…"

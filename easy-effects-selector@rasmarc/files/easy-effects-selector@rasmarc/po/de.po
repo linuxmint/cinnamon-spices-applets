@@ -1,13 +1,13 @@
 # Easy Effects Preset Selector
-# Copyright (C) 2026 randomkiapps
+# Copyright (C) 2026 rasmarc
 # SPDX-License-Identifier: GPL-3.0-or-later
 msgid ""
 msgstr ""
-"Project-Id-Version: easy-effects-selector@randomkiapps 1.5.7\n"
+"Project-Id-Version: easy-effects-selector@rasmarc 1.5.11\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2026-10-23 12:00+0000\n"
-"PO-Revision-Date: 2026-10-23 12:00+0000\n"
-"Last-Translator: randomkiapps\n"
+"POT-Creation-Date: 2026-11-04 12:00+0000\n"
+"PO-Revision-Date: 2026-11-04 12:00+0000\n"
+"Last-Translator: rasmarc\n"
 "Language-Team: German\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -301,8 +301,8 @@ msgstr "Die gespeicherten Angaben zur Weiterleitung sind ungültig."
 msgid "This routing option requires the native Easy Effects 7.2.3 package."
 msgstr "Diese Weiterleitung benötigt das native Paket Easy Effects 7.2.3."
 
-msgid "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects."
-msgstr "Um das automatische Ausschalten des globalen Bypasses durch Easy Effects 7 zu umgehen, richtet das Applet eine Audio-Weiterleitung zu dem im System gewählten Ausgabegerät ein. Die Gerätewahl in Easy Effects wird dafür fest eingestellt, auch für den Eingang.\n\nDie Weiterleitung erscheint als „Preset Selector – Weiterleitung“ unter den ausgeschlossenen Anwendungen. Beim Ein- oder Ausschalten dieser Option werden die Audiodienste und ein laufendes Easy Effects kurz neu gestartet."
+msgid "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects.\n\n<b>Before removing the applet from the panel or uninstalling it, turn this option off to remove the forwarding route.</b>"
+msgstr "Um das automatische Ausschalten des globalen Bypasses durch Easy Effects 7 zu umgehen, richtet das Applet eine Audio-Weiterleitung zu dem im System gewählten Ausgabegerät ein. Die Gerätewahl in Easy Effects wird dafür fest eingestellt, auch für den Eingang.\n\nDie Weiterleitung erscheint als „Preset Selector – Weiterleitung“ unter den ausgeschlossenen Anwendungen. Beim Ein- oder Ausschalten dieser Option werden die Audiodienste und ein laufendes Easy Effects kurz neu gestartet.\n\n<b>Vor dem Entfernen aus der Leiste oder Deinstallieren des Applets diese Option ausschalten, damit die Weiterleitung entfernt wird.</b>"
 
 msgid "Toggle bypass in menu"
 msgstr "Bypass im Menü umschalten"

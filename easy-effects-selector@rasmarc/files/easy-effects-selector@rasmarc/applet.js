@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright (C) 2026 randomkiapps
+// Copyright (C) 2026 rasmarc
 // Cinnamon applet for the native Easy Effects 7.2.3 package.
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
@@ -15,7 +15,7 @@ const ByteArray = imports.byteArray;
 const Mainloop = imports.mainloop;
 const Gettext = imports.gettext;
 
-const UUID = "easy-effects-selector@randomkiapps";
+const UUID = "easy-effects-selector@rasmarc";
 // Cinnamon's xlet installer and settings dialog use this locale directory.
 // Keep the domain aligned with cinnamon-xlet-makepot, including custom XDG paths.
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
@@ -38,8 +38,25 @@ const AUTOSTART_OPTION = "ee-autostart";
 const SHUTDOWN_OPTION = "ee-shutdown-on-window-close";
 const ROUTING_OPTION = "keep-bypass-on-device-change";
 const ROUTING_STREAM = _("Preset Selector – Forwarding");
-// Released identities may also occur in saved presets or an older locale.
-const ROUTING_STREAM_NAMES = ["ee_route_playback", "Preset Selector – Forwarding", "Preset Selector – Weiterleitung"];
+// Managed forwarding identities may occur in saved presets from any supported locale.
+const ROUTING_STREAM_NAMES = [
+    "Preset Selector – Doorsturing",
+    "Preset Selector – Encaminhamento",
+    "Preset Selector – Forwarding",
+    "Preset Selector – Inoltro",
+    "Preset Selector – Przekierowanie",
+    "Preset Selector – Přesměrování",
+    "Preset Selector – Redirection",
+    "Preset Selector – Reenvío",
+    "Preset Selector – Weiterleitung",
+    "Preset Selector – Yönlendirme",
+    "Preset Selector – Перенаправление",
+    "Preset Selector – Переспрямування",
+    "Preset Selector – 転送",
+    "Preset Selector – 转发",
+    "Preset Selector – 전달",
+    "ee_route_playback"
+];
 const LAUNCH_FROM_TITLE_OPTION = "launch-from-menu-title";
 // Retain the saved preference key while its control now governs menu operation.
 const BYPASS_CONTROL_OPTION = "show-bypass-button";

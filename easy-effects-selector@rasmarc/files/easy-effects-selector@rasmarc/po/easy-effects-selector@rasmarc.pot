@@ -1,13 +1,13 @@
 # Easy Effects Preset Selector
-# Copyright (C) 2026 randomkiapps
+# Copyright (C) 2026 rasmarc
 # SPDX-License-Identifier: GPL-3.0-or-later
 msgid ""
 msgstr ""
-"Project-Id-Version: easy-effects-selector@randomkiapps 1.5.7\n"
+"Project-Id-Version: easy-effects-selector@rasmarc 1.5.11\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2026-10-23 12:00+0000\n"
-"PO-Revision-Date: 2026-10-23 12:00+0000\n"
-"Last-Translator: randomkiapps\n"
+"POT-Creation-Date: 2026-11-04 12:00+0000\n"
+"PO-Revision-Date: 2026-11-04 12:00+0000\n"
+"Last-Translator: rasmarc\n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -300,7 +300,7 @@ msgstr ""
 msgid "This routing option requires the native Easy Effects 7.2.3 package."
 msgstr ""
 
-msgid "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects."
+msgid "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects.\n\n<b>Before removing the applet from the panel or uninstalling it, turn this option off to remove the forwarding route.</b>"
 msgstr ""
 
 msgid "Toggle bypass in menu"

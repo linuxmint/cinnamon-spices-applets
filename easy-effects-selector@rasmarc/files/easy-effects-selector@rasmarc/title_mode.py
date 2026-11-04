@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (C) 2026 randomkiapps
+# Copyright (C) 2026 rasmarc
 """Native applet settings controls and explanatory notes."""
 
 import gettext
@@ -10,12 +10,19 @@ from gi.repository import Gio, GLib, Gtk
 from JsonSettingsWidgets import SettingsWidget
 
 
-DOMAIN = "easy-effects-selector@randomkiapps"
+DOMAIN = "easy-effects-selector@rasmarc"
 gettext.bindtextdomain(DOMAIN, os.path.expanduser("~/.local/share/locale"))
 
 
 def _(text):
     return gettext.dgettext(DOMAIN, text)
+
+
+class QuickPresetComboBox(Gtk.ComboBox):
+    def do_scroll_event(self, event):
+        # Replace GTK's value-changing default handler. Propagate scrolling to
+        # the settings page; the popup keeps its own native list scrolling.
+        return False
 
 
 class QuickPresetChooser(SettingsWidget):
@@ -34,7 +41,7 @@ class QuickPresetChooser(SettingsWidget):
         self.label = Gtk.Label(label=_(info["description"]), xalign=0)
         self.label.set_line_wrap(True)
         self.pack_start(self.label, False, False, 0)
-        self.content_widget = Gtk.ComboBox(valign=Gtk.Align.CENTER)
+        self.content_widget = QuickPresetComboBox(valign=Gtk.Align.CENTER)
         renderer = Gtk.CellRendererText()
         self.content_widget.pack_start(renderer, True)
         self.content_widget.add_attribute(renderer, "text", 1)
@@ -153,7 +160,7 @@ class TooltipControls(SettingsWidget):
         for index, (setting_key, label) in enumerate(entries):
             row = Gtk.Box(spacing=20)
             if index:
-                row.set_margin_start(28)
+                row.set_margin_start(18)
                 self._detail_rows.append(row)
             text = Gtk.Label(label=label, xalign=0)
             text.set_line_wrap(True)
@@ -266,7 +273,7 @@ class OperationControls(SettingsWidget):
         self.content_widget.pack_start(self._launch_row, False, False, 0)
 
         self._bypass_row = Gtk.Box(spacing=20)
-        self._bypass_row.set_margin_start(28)
+        self._bypass_row.set_margin_start(18)
         self._bypass_label = Gtk.Label(label=_("Toggle bypass in menu"), xalign=0)
         self._bypass_label.set_line_wrap(True)
         self._bypass_row.pack_start(self._bypass_label, True, True, 0)
