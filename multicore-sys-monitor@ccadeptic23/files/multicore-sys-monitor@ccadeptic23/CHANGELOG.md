@@ -1,3 +1,7 @@
+### v3.18.7~20261105
+  * Displays solid lines instead of dashed lines in the tooltip.
+  * Fixes [#9234](https://github.com/linuxmint/cinnamon-spices-applets/issues/9234)
+
 ### v3.18.6~20261104
   * Increases the maximum font size for tooltips.
   * Fixes [#9230](https://github.com/linuxmint/cinnamon-spices-applets/issues/9230)

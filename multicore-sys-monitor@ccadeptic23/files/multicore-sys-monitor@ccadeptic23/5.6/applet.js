@@ -2067,7 +2067,7 @@ var MemDataProvider = class MemDataProvider {
         // Show the used percentage in the header, mirroring the Swap section.
         trans += " (" + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(5, " ") + " %)";
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
+        let toolTipString = "―".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "―".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         if (showAmounts) {
             let [strMemUsed, unitMemUsed] = formatBytesValueUnit(this.memTotal * this.currentReadings[0], 2, false, forceBinary);
             let [strMemAvail, unitMemAvail] = formatBytesValueUnit(this.memTotal * (1.0 - this.currentReadings[0]), 2, false, forceBinary);
@@ -2135,7 +2135,7 @@ var BufferCacheSharedDataProvider = class BufferCacheSharedDataProvider {
         else
             trans = this.name;
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
+        let toolTipString = "―".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "―".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
 
         let colon = _(":");
         let lenColon = Math.max(colon.length - 1, 0);
@@ -2214,7 +2214,7 @@ var SwapDataProvider = class SwapDataProvider {
         }
         trans2 += " (" + formatNumber(parseFloat((Math.round(10000 * this.currentReadings[0]) / 100)).toFixed(2), 2).padStart(5, " ") + " %)"
         let len = trans2.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans2 + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
+        let toolTipString = "―".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans2 + " " + "―".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         if (showAmounts) {
             let [swapUsedAmount, swapUsedUnit] = formatBytesValueUnit(this.swapTotal * this.currentReadings[0], 2, false, forceBinary);
             if (isNaN(parseFloat(swapUsedAmount))) swapUsedAmount = "0";
@@ -2287,7 +2287,7 @@ var ZramDataProvider = class ZramDataProvider {
             trans += ", " + formatNumber(parseFloat(this.data.ratio.toFixed(2)), 2) + "x";
         trans += ")";
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
+        let toolTipString = "―".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "―".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
 
         toolTipString += bytesRow(_("Disk size"), this.data.disksize);
         toolTipString += bytesRow(_("Data"), this.data.orig);
@@ -2358,7 +2358,7 @@ var MultiCpuDataProvider = class MultiCpuDataProvider {
             trans += " " + temperature;
         }
         let len = trans.length - 2;
-        var toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
+        var toolTipString = "―".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "―".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
 
         let colon = _(":");
         let lenColon = Math.max(colon.length - 1, 0);
@@ -2548,7 +2548,7 @@ var NetDataProvider = class NetDataProvider {
         else
             trans = _("Networks");
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
+        let toolTipString = "―".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "―".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
 
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             if (!this.currentReadings[i].tooltipDown) {
@@ -2727,7 +2727,7 @@ var DiskDataProvider = class DiskDataProvider {
         else
             trans = _("Disks");
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
+        let toolTipString = "―".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "―".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         let title = "" + toolTipString;
 
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
@@ -2825,7 +2825,7 @@ var DiskUsageDataProvider = class DiskUsageDataProvider {
         else
             trans = _("Usage");
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
+        let toolTipString = "―".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "―".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         let title = "" + toolTipString;
 
         let colon = _(":");
@@ -2911,7 +2911,7 @@ var BatteryDataProvider = class BatteryDataProvider {
         else
             trans = _("Battery");
         let len = trans.length - 2;
-        let toolTipString = "-".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
+        let toolTipString = "―".repeat(Math.trunc((2*(spaces + 1) - len)/2)) + " " + trans + " " + "―".repeat(Math.round((2*(spaces + 1) - len)/2)) + "\n";
         let title = "" + toolTipString;
 
         let colon = _(":");
