@@ -1,0 +1,58 @@
+{
+    "head-icons": {
+        "type": "header",
+        "description": "Applications"
+    },
+    "icons": {
+        "type": "list",
+        "description": "Check \"Add\" to move an application into the collapsible area, behind the arrow. Unchecked applications stay on the panel. Double-click a row to rename it, use \"-\" to remove an application that is no longer installed.",
+        "columns": [
+            {
+                "id": "name",
+                "title": "Application",
+                "type": "string"
+            },
+            {
+                "id": "collapse",
+                "title": "Add",
+                "type": "boolean",
+                "default": true
+            },
+            {
+                "id": "id",
+                "title": "Identifier",
+                "type": "string"
+            }
+        ],
+        "default": [],
+        "show-buttons": true,
+        "hidden-buttons": [
+            "+",
+            "up",
+            "down"
+        ],
+        "height": 300
+    },
+    "head-behavior": {
+        "type": "header",
+        "description": "Behavior"
+    },
+    "auto-collapse": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 0,
+        "max": 300,
+        "step": 1,
+        "units": "seconds",
+        "description": "Collapse automatically after",
+        "tooltip": "0 = never collapse automatically"
+    },
+    "pinned": {
+        "type": "generic",
+        "default": []
+    },
+    "names-version": {
+        "type": "generic",
+        "default": 0
+    }
+}
