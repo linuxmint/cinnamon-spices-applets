@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-11-05 22:42+0100\n"
-"PO-Revision-Date: 2026-11-03 14:53-0300\n"
+"PO-Revision-Date: 2026-11-05 20:00-0300\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -667,17 +667,16 @@ msgstr "Tamaño de la fuente (px)"
 
 #. 5.6->settings-schema.json->tooltipBorderRadiusTopLeft->units
 #. 5.6->settings-schema.json->tooltipBorderRadiusTopRight->units
-#, fuzzy
 msgid "px"
-msgstr "1px"
+msgstr "px"
 
 #. 5.6->settings-schema.json->tooltipBorderRadiusTopLeft->description
 msgid "Border Radius Top-Left and Bottom-Right"
-msgstr ""
+msgstr "Radio del borde superior izquierdo e inferior derecho"
 
 #. 5.6->settings-schema.json->tooltipBorderRadiusTopRight->description
 msgid "Border Radius Top-Right and Bottom-Left"
-msgstr ""
+msgstr "Radio del borde superior derecho e inferior izquierdo"
 
 #. 5.6->settings-schema.json->tooltipChangeBackgroundColor->description
 msgid "Change Tooltip Background Color"
