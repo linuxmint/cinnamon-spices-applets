@@ -2,10 +2,19 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
 const { Clutter, GLib, GObject } = imports.gi;
+const Extension = imports.ui.extension;
 
-// Cinnamon resolves xlet require() paths relative to the applet root, not the calling file.
-const Darkness = require('./lib/darkness.js');
-const { DarkOverlay } = require('./lib/overlay.js');
+// Loads lib/<name>.js. Cinnamon 6.8+ has a native importer for xlets and deprecates `require`;
+// 6.6 only has `require`, whose paths resolve relative to the applet root.
+function requireLib(name) {
+    if (Extension.getCurrentExtension) {
+        return Extension.getCurrentExtension().imports.lib[name];
+    }
+    return require(`./lib/${name}.js`);
+}
+
+const Darkness = requireLib('darkness');
+const { DarkOverlay } = requireLib('overlay');
 
 const UUID = 'darker@chris-lep';
 const ICON_NAME = 'xsi-display-brightness-symbolic';

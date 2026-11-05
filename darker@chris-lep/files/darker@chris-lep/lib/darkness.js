@@ -9,13 +9,13 @@
  */
 
 /** Hard cap so the screen can never be blacked out completely. */
-const MAX_LEVEL = 0.9;
+var MAX_LEVEL = 0.9;
 
 /** Clutter opacity of a fully opaque actor. */
-const MAX_OPACITY = 255;
+var MAX_OPACITY = 255;
 
 /** Darkness change per mouse-wheel step, in percent. Scrolling snaps to multiples of it. */
-const SCROLL_STEP_PERCENT = 5;
+var SCROLL_STEP_PERCENT = 5;
 
 /**
  * Clamps a level to [0, MAX_LEVEL]. Anything that is not a finite number becomes 0.
@@ -153,20 +153,25 @@ function scrollSteps(direction, ScrollDirection) {
     return 0;
 }
 
-module.exports = {
-    MAX_LEVEL,
-    MAX_OPACITY,
-    SCROLL_STEP_PERCENT,
-    clampLevel,
-    stepLevel,
-    scrollSteps,
-    sliderToLevel,
-    levelToSlider,
-    levelToOpacity,
-    toPercent,
-    brightnessPercent,
-    formatPercent,
-    panelLabel,
-    tooltipText,
-    resetLabel,
-};
+// Cinnamon 6.8+ imports this file natively and exports its top-level `var` and `function`
+// declarations; there, `module` is undefined. Node (tests) and Cinnamon 6.6's `require` use the
+// CommonJS exports below.
+if (typeof module === 'object' && module) {
+    module.exports = {
+        MAX_LEVEL,
+        MAX_OPACITY,
+        SCROLL_STEP_PERCENT,
+        clampLevel,
+        stepLevel,
+        scrollSteps,
+        sliderToLevel,
+        levelToSlider,
+        levelToOpacity,
+        toPercent,
+        brightnessPercent,
+        formatPercent,
+        panelLabel,
+        tooltipText,
+        resetLabel,
+    };
+}

@@ -2,7 +2,7 @@
     "uuid": "darker@chris-lep",
     "name": "Darker",
     "description": "Darken the screen beyond the minimum backlight brightness with a slider (software overlay, works with Night Light).",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "max-instances": 1,
     "cinnamon-version": ["6.6"]
 }

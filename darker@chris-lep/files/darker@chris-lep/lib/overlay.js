@@ -44,7 +44,7 @@ function overlayActorClass(Clutter, GObject) {
     return Actor;
 }
 
-class DarkOverlay {
+var DarkOverlay = class DarkOverlay {
     /**
      * @param {object} deps
      * @param {object} deps.Clutter - imports.gi.Clutter
@@ -105,6 +105,11 @@ class DarkOverlay {
     _raise() {
         this._stage.set_child_above_sibling(this._actor, null);
     }
-}
+};
 
-module.exports = { DarkOverlay };
+// Cinnamon 6.8+ imports this file natively and exports its top-level `var` and `function`
+// declarations; there, `module` is undefined. Node (tests) and Cinnamon 6.6's `require` use the
+// CommonJS exports below.
+if (typeof module === 'object' && module) {
+    module.exports = { DarkOverlay };
+}
