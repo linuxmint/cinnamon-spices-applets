@@ -1,0 +1,46 @@
+{
+  "host": {
+    "type": "entry",
+    "default": "volumio.local",
+    "description": "Volumio host / IP"
+  },
+  "interval": {
+    "type": "spinbutton",
+    "default": 2,
+    "min": 1,
+    "max": 30,
+    "step": 1,
+    "units": "seconds",
+    "description": "Refresh interval"
+  },
+  "show-title": {
+    "type": "switch",
+    "default": true,
+    "description": "Show track title in panel"
+  },
+  "title-width": {
+    "type": "spinbutton",
+    "default": 25,
+    "min": 5,
+    "max": 80,
+    "step": 1,
+    "units": "chars",
+    "description": "Max title length"
+  },
+  "art-source": {
+    "type": "combobox",
+    "default": "mb-itunes",
+    "description": "Artwork lookup (when Volumio has no cover)",
+    "options": {
+      "MusicBrainz / Cover Art Archive first, iTunes as backup": "mb-itunes",
+      "MusicBrainz / Cover Art Archive only (open source)": "mb",
+      "iTunes only": "itunes",
+      "Don't look up artwork": "off"
+    }
+  },
+  "radio-uri": {
+    "type": "entry",
+    "default": "radio/myWebRadio",
+    "description": "Radio browse URI (radio/myWebRadio = My Web Radios, radio = all categories)"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "uuid": "volumio@amystikis",
+  "name": "Volumio Remote",
+  "description": "Control a remote Volumio instance from the panel",
+  "version": "1.0",
+  "max-instances": 1,
+  "author": "amystikis"
+}
