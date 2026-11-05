@@ -234,6 +234,8 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
         this.settings.bind("quickTooltip", "quickTooltip");
         this.settings.bind("percentAtEndOfLine", "percentAtEndOfLine");
         this.settings.bind("tooltipFontSize", "tooltipFontSize", () => { this.setTooltipStyle(); });
+        this.settings.bind("tooltipBorderRadiusTopLeft", "tooltipBorderRadiusTopLeft", () => { this.setTooltipStyle(); });
+        this.settings.bind("tooltipBorderRadiusTopRight", "tooltipBorderRadiusTopRight", () => { this.setTooltipStyle(); });
         this.settings.bind("tooltipChangeBackgroundColor", "tooltipChangeBackgroundColor", () => { this.setTooltipStyle(); });
         this.settings.bind("tooltipBackgroundColor", "tooltipBackgroundColor", () => { this.setTooltipStyle(); });
         this.setTooltipStyle();
@@ -640,9 +642,9 @@ var MCSM = class MCSM extends Applet.TextIconApplet {
             bgColor = ` background-color: ${this.tooltipBackgroundColor};`;
         const fontSize = (this.tooltipFontSize != null) ? this.tooltipFontSize : 16;
         if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
-            this._applet_tooltip._tooltip.set_style(`text-align: right; font-family: monospace; font-size: ${fontSize}px;${bgColor}`);
+            this._applet_tooltip._tooltip.style = `border-radius: ${this.tooltipBorderRadiusTopLeft}px ${this.tooltipBorderRadiusTopRight}px; text-align: right; font-family: monospace; font-size: ${fontSize}px;${bgColor}`;
         } else {
-            this._applet_tooltip._tooltip.set_style(`text-align: left; font-family: monospace; font-size: ${fontSize}px;${bgColor}`);
+            this._applet_tooltip._tooltip.style = `border-radius: ${this.tooltipBorderRadiusTopLeft}px ${this.tooltipBorderRadiusTopRight}px; text-align: left; font-family: monospace; font-size: ${fontSize}px;${bgColor}`;
         }
     }
 

@@ -1,3 +1,7 @@
+### v3.19.0~20261105
+  * User can set the tooltip Border Radius.
+  * Definitely fixes [#9234](https://github.com/linuxmint/cinnamon-spices-applets/issues/9234)
+
 ### v3.18.7~20261105
   * Displays solid lines instead of dashed lines in the tooltip.
   * Fixes [#9234](https://github.com/linuxmint/cinnamon-spices-applets/issues/9234)
