@@ -30,8 +30,17 @@
 const Pango      = imports.gi.Pango;
 const PangoCairo = imports.gi.PangoCairo;
 
-const Theme     = require("./lib/theme");
-const Astronomy = require("./lib/astronomy");
+const Extension = imports.ui.extension;
+
+// require is deprecated since Cinnamon 6.8
+function _require(name) {
+    if (Extension.getCurrentExtension)
+        return Extension.getCurrentExtension().imports.lib[name];
+    return require("./lib/" + name);
+}
+
+const Theme     = _require("theme");
+const Astronomy = _require("astronomy");
 
 // U+FE0E (text presentation selector) forces monochrome rendering.
 const ZODIAC_GLYPHS = ["♈\uFE0E","♉\uFE0E","♊\uFE0E","♋\uFE0E","♌\uFE0E","♍\uFE0E",

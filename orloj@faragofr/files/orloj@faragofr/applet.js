@@ -6,9 +6,18 @@ const Mainloop   = imports.mainloop;
 const St         = imports.gi.St;
 const GLib       = imports.gi.GLib;
 const Clutter    = imports.gi.Clutter;
-const Astronomy  = require("./lib/astronomy");
-const Dial       = require("./lib/dial");
-const Theme      = require("./lib/theme");
+const Extension  = imports.ui.extension;
+
+// require is deprecated since Cinnamon 6.8
+function _require(name) {
+    if (Extension.getCurrentExtension)
+        return Extension.getCurrentExtension().imports.lib[name];
+    return require("./lib/" + name);
+}
+
+const Astronomy  = _require("astronomy");
+const Dial       = _require("dial");
+const Theme      = _require("theme");
 
 class OrlojApplet extends Applet.TextApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
