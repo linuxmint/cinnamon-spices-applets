@@ -30,6 +30,12 @@ function _(text) {
 const HORIZONTAL_STYLE = 'padding-left: 2px; padding-right: 2px; padding-top: 0; padding-bottom: 0';
 const VERTICAL_STYLE = 'padding-left: 0; padding-right: 0; padding-top: 2px; padding-bottom: 2px';
 
+// Space kept around each icon when several share a row on a vertical panel.
+const COLUMN_GAP = 3;
+
+// With "Automatic" icons per row, vertical panels at least this wide get two.
+const AUTO_TWO_COLUMNS_MIN_WIDTH = 45;
+
 // Delay between closing the overflow popup and forwarding a click to the app,
 // so Cinnamon's modal grab is gone before the app tries to open its own menu.
 const FORWARD_CLICK_DELAY_MS = 50;
@@ -106,7 +112,7 @@ class RecorderIcon {
         });
 
         this.icon_holder = new St.Bin();
-        this.iconSize = this.applet.getPanelIconSize(St.IconType.FULLCOLOR);
+        this.iconSize = this.applet.getTrayIconSize(St.IconType.FULLCOLOR);
 
         this.actor.add_actor(this.icon_holder);
 
@@ -152,6 +158,7 @@ class RecorderIcon {
 
     refresh() {
         this.setOrientation(this.applet.orientation);
+        this.iconSize = this.applet.getTrayIconSize(St.IconType.FULLCOLOR);
         this._indicator.set_size(this.iconSize, this.iconSize);
         this._indicator.queue_repaint();
     }
@@ -203,7 +210,7 @@ class XAppStatusIcon {
         });
 
         this.icon_holder = new St.Bin();
-        this.iconSize = this.applet.getPanelIconSize(St.IconType.FULLCOLOR);
+        this.iconSize = this.applet.getTrayIconSize(St.IconType.FULLCOLOR);
 
         this.proxy.icon_size = this.iconSize;
 
@@ -338,6 +345,9 @@ class XAppStatusIcon {
         }
 
         this.setOrientation(this.applet.orientation);
+
+        // Image icons are kept square on a vertical panel but not in the popup.
+        this.setIconName(this.proxy.icon_name);
     }
 
     setOrientation(orientation) {
@@ -372,7 +382,7 @@ class XAppStatusIcon {
             }
 
             this.iconName = iconName;
-            this.iconSize = this.applet.getPanelIconSize(type);
+            this.iconSize = this.applet.getTrayIconSize(type);
             this.proxy.icon_size = this.iconSize;
 
             // Assume symbolic icons would always be square/suitable for an StIcon.
@@ -401,8 +411,9 @@ class XAppStatusIcon {
     }
 
     _onImageLoaded(cache, handle, actor, data=null) {
+        // A newer load replaced this one, e.g. the icon moved between the panel and the
+        // popup, which lay out images differently.
         if (handle !== this.icon_loader_handle) {
-            global.logError(`${UUID}: Icon or image seems out of sync (${this.name})`);
             return;
         }
 
@@ -461,6 +472,15 @@ class XAppStatusIcon {
         let y = Math.round(allocation.y1 / global.ui_scale);
         let w = Math.round((allocation.x2 - allocation.x1) / global.ui_scale)
         let h = Math.round((allocation.y2 - allocation.y1) / global.ui_scale)
+
+        // With several icons per row on a vertical panel, open menus at the panel's
+        // edge rather than the icon's, so they don't cover the neighbouring column.
+        let vertical = this.applet.orientation == St.Side.LEFT || this.applet.orientation == St.Side.RIGHT;
+        if (vertical && !this.inOverflow) {
+            let panelAllocation = Cinnamon.util_get_transformed_allocation(this.applet.actor);
+            x = Math.round(panelAllocation.x1 / global.ui_scale);
+            w = Math.round((panelAllocation.x2 - panelAllocation.x1) / global.ui_scale);
+        }
 
         let final_x, final_y, final_o;
 
@@ -579,6 +599,7 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.settings.bind("new-icons-on-panel", "newIconsOnPanel", () => this.onPlacementSettingsChanged());
         this.settings.bind("columns", "columns", () => this.layoutOverflow());
+        this.settings.bind("panel-columns", "panelColumns", () => this.onPanelColumnsChanged());
 
         // The arrow sits to the left of (or above) the pinned icons, like on Windows.
         this._arrowBox = new St.Bin({ style_class: "applet-box", reactive: true, track_hover: true });
@@ -588,11 +609,10 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
 
         this._arrowTooltip = new Tooltips.PanelItemTooltip({ actor: this._arrowBox, _applet: this }, _("Show hidden icons"), orientation);
 
-        if (this.orientation == St.Side.TOP || this.orientation == St.Side.BOTTOM) {
-            this.manager_container = new St.BoxLayout( { vertical: false, style: HORIZONTAL_STYLE });
-        } else {
-            this.manager_container = new St.BoxLayout( { vertical: true, style: VERTICAL_STYLE });
-        }
+        // A grid, so a vertical panel can fit several icons per row.
+        this._panelLayout = new Clutter.GridLayout();
+        this.manager_container = new St.Widget({ layout_manager: this._panelLayout });
+        this._updatePanelLayout();
 
         this.actor.add_actor (this.manager_container);
         this.manager_container.show();
@@ -871,9 +891,69 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
         this.arrangeIcons();
     }
 
+    isVertical() {
+        return this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT;
+    }
+
+    getPanelWidth() {
+        return this.panel ? this.panel.height / global.ui_scale : 0;
+    }
+
+    // Icons per row on the panel: always one row on a horizontal panel.
+    getPanelColumns() {
+        if (!this.isVertical()) {
+            return 0;
+        }
+
+        if (this.panelColumns > 0) {
+            return this.panelColumns;
+        }
+
+        return this.getPanelWidth() >= AUTO_TWO_COLUMNS_MIN_WIDTH ? 2 : 1;
+    }
+
+    // Icon size, shrunk if needed so a row of them fits across a vertical panel.
+    // The popup uses the same size so icons look the same in both places.
+    getTrayIconSize(iconType) {
+        let size = this.getPanelIconSize(iconType);
+        let columns = this.getPanelColumns();
+
+        if (columns > 1) {
+            let width = this.getPanelWidth();
+            let fit = Math.floor((width - COLUMN_GAP * (columns + 1)) / columns);
+            // Odd sizes scale less cleanly.
+            fit -= fit % 2;
+            size = Math.max(1, Math.min(size, fit));
+        }
+
+        return size;
+    }
+
+    _updatePanelLayout() {
+        let vertical = this.isVertical();
+
+        this.manager_container.style = vertical ? VERTICAL_STYLE : HORIZONTAL_STYLE;
+        // Equal columns keep the grid lined up; on a horizontal panel icons with labels are wider.
+        this._panelLayout.column_homogeneous = vertical;
+    }
+
     // Puts each icon either on the panel or in the overflow popup, in sorted order.
     arrangeIcons() {
+        for (let child of this.manager_container.get_children()) {
+            this.manager_container.remove_child(child);
+        }
+
+        let columns = this.getPanelColumns();
         let index = 0;
+
+        let place = (actor) => {
+            if (columns > 0) {
+                this._panelLayout.attach(actor, index % columns, Math.floor(index / columns), 1, 1);
+            } else {
+                this._panelLayout.attach(actor, index, 0, 1, 1);
+            }
+            index++;
+        };
 
         for (let icon of this.sortedIcons()) {
             let inOverflow = !this.isPinned(icon);
@@ -882,28 +962,27 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
                 icon.setInOverflow(inOverflow);
             }
 
-            let parent = icon.actor.get_parent();
-
-            if (inOverflow) {
-                if (parent === this.manager_container) {
-                    this.manager_container.remove_child(icon.actor);
-                }
+            // Hidden icons would leave a gap in the grid.
+            if (inOverflow || !icon.proxy.visible) {
                 continue;
             }
 
-            if (parent !== this.manager_container) {
-                if (parent) {
-                    parent.remove_child(icon.actor);
-                }
-                this.manager_container.add_actor(icon.actor);
+            let parent = icon.actor.get_parent();
+            if (parent) {
+                parent.remove_child(icon.actor);
             }
 
-            this.manager_container.set_child_at_index(icon.actor, index++);
+            place(icon.actor);
         }
 
-        this.manager_container.set_child_at_index(this._recording_indicator.actor, -1);
+        place(this._recording_indicator.actor);
 
         this.layoutOverflow();
+    }
+
+    onPanelColumnsChanged() {
+        this.arrangeIcons();
+        this.refreshIcons();
     }
 
     layoutOverflow() {
@@ -998,6 +1077,8 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
 
         if (icon.inOverflow) {
             this.layoutOverflow();
+        } else {
+            this.arrangeIcons();
         }
 
         this.queuePlacementMenuRebuild();
@@ -1076,6 +1157,12 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
         this.refreshIcons();
     }
 
+    on_panel_height_changed() {
+        // A wider or narrower vertical panel changes how many icons fit in a row, and how big.
+        this.arrangeIcons();
+        this.refreshIcons();
+    }
+
     on_icon_theme_changed() {
         this.refreshIcons();
     }
@@ -1143,14 +1230,8 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
     on_orientation_changed(newOrientation) {
         this.orientation = newOrientation;
 
-        if (newOrientation == St.Side.TOP || newOrientation == St.Side.BOTTOM) {
-            this.manager_container.vertical = false;
-            this.manager_container.style = HORIZONTAL_STYLE;
-        } else {
-            this.manager_container.vertical = true;
-            this.manager_container.style = VERTICAL_STYLE;
-        }
-
+        this._updatePanelLayout();
+        this.arrangeIcons();
         this.refreshIcons();
     }
 }

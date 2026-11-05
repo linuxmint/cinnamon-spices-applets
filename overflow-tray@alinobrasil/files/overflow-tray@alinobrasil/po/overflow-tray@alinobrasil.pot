@@ -18,19 +18,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:589
+#: applet.js:610
 msgid "Show hidden icons"
 msgstr ""
 
-#: applet.js:612
+#: applet.js:632
 msgid "No hidden icons"
 msgstr ""
 
-#: applet.js:1039
+#: applet.js:1120
 msgid "Show on panel"
 msgstr ""
 
-#: applet.js:1061
+#: applet.js:1142
 msgid "No tray icons"
 msgstr ""
 
@@ -60,4 +60,36 @@ msgstr ""
 
 #. settings-schema.json->columns->units
 msgid "icons"
+msgstr ""
+
+#. settings-schema.json->panel-head->description
+msgid "Panel"
+msgstr ""
+
+#. settings-schema.json->panel-columns->options
+msgid "Automatic"
+msgstr ""
+
+#. settings-schema.json->panel-columns->options
+msgid "1"
+msgstr ""
+
+#. settings-schema.json->panel-columns->options
+msgid "2"
+msgstr ""
+
+#. settings-schema.json->panel-columns->options
+msgid "3"
+msgstr ""
+
+#. settings-schema.json->panel-columns->options
+msgid "4"
+msgstr ""
+
+#. settings-schema.json->panel-columns->description
+msgid "Icons per row on a vertical panel"
+msgstr ""
+
+#. settings-schema.json->panel-columns->tooltip
+msgid "Automatic shows 2 per row on panels 45 pixels or wider, otherwise 1. Icons are made smaller if needed so they fit across the panel."
 msgstr ""

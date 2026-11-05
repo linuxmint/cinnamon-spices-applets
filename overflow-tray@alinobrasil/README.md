@@ -16,7 +16,10 @@ behind an arrow, in a popup you open with a click.
 - **Right-click the arrow** for a "Show on panel" switch for each icon. Your choices are
   remembered, including across app and desktop restarts.
 - **Configure…** in the same menu: whether new icons start on the panel or hidden (hidden by
-  default, like Windows), and how many icons per row the popup shows.
+  default, like Windows), how many icons per row the popup shows, and how many per row a
+  vertical panel shows. Automatic (the default) shows 2 per row on vertical panels 45 pixels
+  or wider and 1 on narrower ones, and follows the panel as you resize it. Icons get smaller
+  if needed to fit across the panel, and the popup uses the same size.
 
 Ctrl+right-click on an icon on the panel opens the applet's own menu, as with the XApp Status Applet.
 

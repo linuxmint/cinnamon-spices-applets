@@ -18,6 +18,23 @@
         "units": "icons",
         "description": "Icons per row in the popup"
     },
+    "panel-head": {
+        "type": "header",
+        "description": "Panel"
+    },
+    "panel-columns": {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "Automatic": 0,
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4
+        },
+        "description": "Icons per row on a vertical panel",
+        "tooltip": "Automatic shows 2 per row on panels 45 pixels or wider, otherwise 1. Icons are made smaller if needed so they fit across the panel."
+    },
     "placement": {
         "type": "generic",
         "default": {}
