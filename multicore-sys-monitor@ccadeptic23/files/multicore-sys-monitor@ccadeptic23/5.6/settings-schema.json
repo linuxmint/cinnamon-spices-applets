@@ -140,6 +140,8 @@
         "quickTooltip",
         "percentAtEndOfLine",
         "tooltipFontSize",
+        "tooltipBorderRadiusTopLeft",
+        "tooltipBorderRadiusTopRight",
         "tooltipChangeBackgroundColor",
         "tooltipBackgroundColor",
         "RefreshAll_btn"
@@ -717,6 +719,24 @@
     "max": 128,
     "step": 1,
     "description": "Font size (px)"
+  },
+  "tooltipBorderRadiusTopLeft": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 0,
+    "max": 25,
+    "step": 1,
+    "units": "px",
+    "description": "Border Radius Top-Left and Bottom-Right"
+  },
+  "tooltipBorderRadiusTopRight": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 0,
+    "max": 25,
+    "step": 1,
+    "units": "px",
+    "description": "Border Radius Top-Right and Bottom-Left"
   },
   "tooltipChangeBackgroundColor": {
     "type": "switch",
