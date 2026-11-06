@@ -1,0 +1,40 @@
+.trayflow {
+    spacing: 0;
+}
+
+.trayflow-pinned {
+    spacing: 0;
+}
+
+.trayflow-chevron {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.trayflow-popup {
+    padding: 6px;
+}
+
+.trayflow-popup-grid {
+    spacing: 2px;
+}
+
+.trayflow-popup-row {
+    spacing: 2px;
+}
+
+.trayflow-cell {
+    border-radius: 6px;
+    padding: 3px;
+    background-color: transparent;
+}
+
+.trayflow-cell:hover,
+.trayflow-cell:active {
+    background-color: rgba(128, 128, 128, 0.22);
+}
+
+.trayflow-empty {
+    padding: 10px 14px;
+    font-size: 0.9em;
+}
