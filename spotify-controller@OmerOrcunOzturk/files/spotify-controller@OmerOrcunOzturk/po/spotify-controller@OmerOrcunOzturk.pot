@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the spotify-controller@OmerOrcunOzturk package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: spotify-controller@OmerOrcunOzturk 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-09-30 20:34+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:100
+msgid "Play / Pause"
+msgstr ""
+
+#: applet.js:102
+msgid "Previous"
+msgstr ""
+
+#: applet.js:104
+msgid "Next"
+msgstr ""
+
+#: applet.js:107
+msgid "Open / Show Spotify"
+msgstr ""
+
+#: applet.js:109
+msgid "Quit Spotify"
+msgstr ""
+
+#: applet.js:134
+msgid "Spotify — Closed"
+msgstr ""
+
+#: applet.js:134
+msgid "Spotify — Not installed"
+msgstr ""
+
+#. metadata.json->name
+msgid "Spotify Controller"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Launch, show and control Spotify from the panel. Shows the current song in "
+"the tooltip."
+msgstr ""
