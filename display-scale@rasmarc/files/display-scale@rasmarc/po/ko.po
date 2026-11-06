@@ -1,0 +1,484 @@
+# Korean translation of Display Scale.
+# Copyright (C) 2026 rasmarc
+# SPDX-License-Identifier: GPL-2.0-or-later
+# AI-assisted translation; native-speaker review is welcome.
+msgid ""
+msgstr "Project-Id-Version: Display Scale 1.0.4\nReport-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\nPO-Revision-Date: 2026-11-01 21:10+0100\nLast-Translator: rasmarc\nLanguage-Team: Korean\nLanguage: ko\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\n"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "10 percentage points"
+msgstr "10 퍼센트포인트"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "25 percentage points"
+msgstr "25 퍼센트포인트"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "5 percentage points"
+msgstr "5 퍼센트포인트"
+
+#: display-scale@rasmarc/native-scale.py:329
+msgid "A previous change is incomplete. Run native-scale.py restore first."
+msgstr "이전 변경이 완료되지 않았습니다. 먼저 native-scale.py restore를 실행하세요."
+
+#: display-scale@rasmarc/scale-slider.js:283
+msgid "A quarter step earlier"
+msgstr "1/4단계 일찍"
+
+#: display-scale@rasmarc/scale-slider.js:284
+msgid "A quarter step later"
+msgstr "1/4단계 늦게"
+
+#: display-scale@rasmarc/native-scale.py:399
+msgid "A scaling change is already in progress."
+msgstr "배율 변경이 이미 진행 중입니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adapt scaling to keyboard size"
+msgstr "키보드 크기에 맞춰 배율 조정"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adapt the OSD150 offset to the available space between its default position and the screen edge. This preserves the chosen placement as the OSD grows. Saved OSD150 offsets are unchanged. Requires both OSD150 and Display Scale - Additional Features to be enabled."
+msgstr "OSD150의 기본 위치와 화면 가장자리 사이의 여유 공간에 맞춰 위치 오프셋을 조정합니다. OSD가 커져도 선택한 배치를 유지합니다. 저장된 OSD150 오프셋은 바뀌지 않습니다. OSD150과 Display Scale – 추가 기능을 모두 사용해야 합니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Additional Features"
+msgstr "추가 기능"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjust a running, freely positioned Onboard keyboard to screen scaling. When disabled, the keyboard follows normal screen scaling. The selected adjustment method is retained."
+msgstr "실행 중이며 자유롭게 배치된 Onboard 키보드를 화면 배율에 맞춰 조정합니다. 끄면 키보드는 일반적인 화면 배율을 따릅니다. 선택한 조정 방식은 유지됩니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjust desklet positions during screen scaling"
+msgstr "화면 확대 시 데스크릿 위치 조정"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjust the OSD150 position during screen scaling"
+msgstr "화면 확대 시 OSD150 위치 조정"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjust the Onboard keyboard during screen scaling"
+msgstr "화면 확대 시 Onboard 키보드 조정"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjustment method"
+msgstr "조정 방식"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Also show scale marks to the left of the slider. Applies to both text scaling and screen scaling."
+msgstr "슬라이더 왼쪽에도 눈금을 표시합니다. 텍스트 확대와 화면 확대 모두에 적용됩니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Background picture layout"
+msgstr "배경 이미지 배치"
+
+#: install.py:103
+msgid "Backup of the previous program files:"
+msgstr "이전 프로그램 파일의 백업:"
+
+#: display-scale@rasmarc/settings_widgets.py:420
+msgid "Centered"
+msgstr "가운데"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Cinnamon"
+msgstr "Cinnamon"
+
+#: display-scale@rasmarc/native-scale.py:137
+msgid "Cinnamon does not offer a suitable scale for this monitor mode."
+msgstr "Cinnamon에서 이 모니터 모드에 적합한 배율을 제공하지 않습니다."
+
+#: display-scale@rasmarc/native-scale.py:270
+msgid "Cinnamon reported an invalid UI scaling factor."
+msgstr "Cinnamon이 잘못된 UI 배율을 반환했습니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Custom"
+msgstr "사용자 지정"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Custom level 1 (%)"
+msgstr "사용자 지정 단계 1 (%)"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Custom level 2 (%)"
+msgstr "사용자 지정 단계 2 (%)"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Custom level 3 (%)"
+msgstr "사용자 지정 단계 3 (%)"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Desklets grow with screen scaling while their geometric centers stay at the same screen positions. The adjustment is temporary and does not change saved desklet positions."
+msgstr "데스크릿은 화면 배율에 따라 커지지만 기하학적 중심은 화면의 같은 위치에 유지됩니다. 이 조정은 일시적이며 저장된 데스크릿 위치를 바꾸지 않습니다."
+
+#: display-scale@rasmarc/applet.js:707
+#: display-scale@rasmarc/applet.js:715
+msgid "Display Scale"
+msgstr "Display Scale"
+
+#: install.py:101
+#, python-format
+msgid "Display Scale %s and its optional additional features are installed."
+msgstr "Display Scale %s 및 선택적 추가 기능이 설치되었습니다."
+
+#: display-scale@rasmarc/settings_widgets.py:340
+msgid "Display Scale - Additional Features"
+msgstr "Display Scale – 추가 기능"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:143
+msgid "Display Scale: Onboard scaling"
+msgstr "Display Scale: Onboard 배율 조정"
+
+#: install.py:105
+msgid "Enable “Display Scale - Additional Features” in System Settings → Extensions."
+msgstr "시스템 설정 → 확장 프로그램에서 “Display Scale – 추가 기능”을 켜세요."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Five positions: the middle uses the regular switch point at the next screen scaling level; the ends switch half a step earlier or later. The two intermediate marks halve these distances. Text compensation preserves the selected text size. With a later switch point, screen scaling can remain below 200% even at 200% text size."
+msgstr "위치는 다섯 개입니다. 가운데는 다음 화면 확대 단계에 도달할 때 기본 전환점을 사용하며, 양 끝은 반 단계 일찍 또는 늦게 전환합니다. 두 중간 눈금은 이 간격을 절반으로 나눕니다. 텍스트 보정으로 선택한 텍스트 크기를 유지합니다. 전환점을 늦추면 텍스트 크기가 200%여도 화면 배율은 200% 미만으로 유지될 수 있습니다."
+
+#: display-scale@rasmarc/scale-slider.js:283
+msgid "Half a step earlier"
+msgstr "반 단계 일찍"
+
+#: display-scale@rasmarc/scale-slider.js:284
+msgid "Half a step later"
+msgstr "반 단계 늦게"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Increment"
+msgstr "조절 간격"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:568
+msgid "Invalid Onboard geometry."
+msgstr "Onboard의 위치와 크기가 잘못되었습니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep all panels approximately unchanged in both modes. Screen scaling adjusts panel height (width for vertical panels), icons and text; text scaling adjusts text and font-dependent spacing."
+msgstr "두 모드 모두에서 모든 패널을 거의 그대로 유지합니다. 화면 확대는 패널 높이(세로 패널은 너비), 아이콘, 텍스트를 조정하고, 텍스트 확대는 텍스트와 글꼴에 따른 간격을 조정합니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep panel size when scaling"
+msgstr "확대 시 패널 크기 유지"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep size and position"
+msgstr "크기와 위치 유지"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep size and position: Compensate for screen scaling so the keyboard keeps its visible size and position.\nAdapt scaling to keyboard size: Small keyboards grow more; keyboards spanning the screen width or height keep their screen coverage. The larger width or height share determines the adjustment; the ratio of opposite edge distances is preserved.\nManual size and position changes become the new reference. At 100%, the corresponding reference geometry is restored."
+msgstr "크기와 위치 유지: 화면 확대를 보정하여 키보드의 보이는 크기와 위치를 유지합니다.\n키보드 크기에 맞춰 배율 조정: 작은 키보드는 더 많이 커지고, 화면 너비나 높이를 가득 채우는 키보드는 화면 점유율을 유지합니다. 너비와 높이 점유율 중 더 큰 값으로 조정하며, 마주 보는 가장자리까지의 거리 비율을 유지합니다.\n크기와 위치를 수동으로 바꾸면 새 기준이 됩니다. 100%에서는 해당 기준 위치와 크기가 복원됩니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep the current mode"
+msgstr "현재 모드 유지"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep the menu open"
+msgstr "메뉴를 열린 상태로 유지"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep the menu open after moving the switch point, including when the screen scaling level changes. When disabled, the menu closes after each successfully applied move."
+msgstr "전환점을 옮긴 뒤 화면 확대 단계가 바뀌더라도 메뉴를 열린 상태로 유지합니다. 끄면 이동이 성공적으로 적용될 때마다 메뉴가 닫힙니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Let panel text grow with the selected scaling mode. Text scaling does not reduce panel dimensions or pixel-based icons; spacing protection remains active during screen scaling."
+msgstr "선택한 확대 모드에 따라 패널 텍스트가 커지도록 합니다. 텍스트 확대는 패널 치수나 픽셀 단위 아이콘을 줄이지 않으며, 화면 확대 중에도 간격 보호가 유지됩니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Menu"
+msgstr "메뉴"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Move the switch point in the menu"
+msgstr "메뉴에서 전환점 이동"
+
+#: display-scale@rasmarc/settings_widgets.py:419
+msgid "No picture"
+msgstr "이미지 없음"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:411
+msgid "Onboard could not be restarted."
+msgstr "Onboard를 다시 시작할 수 없습니다."
+
+#: display-scale@rasmarc/onboard-process.py:117
+msgid "Onboard did not exit normally. The screen scaling change has been stopped."
+msgstr "Onboard가 정상적으로 종료되지 않았습니다. 화면 배율 변경을 중단했습니다."
+
+#: display-scale@rasmarc/onboard-process.py:87
+msgid "Onboard does not belong to the current user session."
+msgstr "Onboard가 현재 사용자 세션에 속하지 않습니다."
+
+#: display-scale@rasmarc/onboard-process.py:174
+msgid "Onboard exited during restart (status {})."
+msgstr "다시 시작하는 중 Onboard가 종료되었습니다(상태 {})."
+
+#: display-scale@rasmarc/onboard-position-compensation.js:426
+msgid "Onboard is already being restarted."
+msgstr "Onboard를 이미 다시 시작하는 중입니다."
+
+#: display-scale@rasmarc/onboard-process.py:177
+msgid "Onboard started but has not yet registered with the session."
+msgstr "Onboard가 시작되었지만 아직 세션에 등록되지 않았습니다."
+
+#: display-scale@rasmarc/onboard-position-compensation.js:463
+msgid "Onboard's final saved geometry could not be read."
+msgstr "Onboard가 마지막으로 저장한 위치와 크기를 읽을 수 없습니다."
+
+#: display-scale@rasmarc/onboard-position-compensation.js:454
+msgid "Onboard's final saved geometry is invalid."
+msgstr "Onboard가 마지막으로 저장한 위치와 크기가 잘못되었습니다."
+
+#: display-scale@rasmarc/onboard-position-compensation.js:558
+msgid "Onboard's geometry could not be applied."
+msgstr "Onboard의 위치와 크기를 적용할 수 없습니다."
+
+#: display-scale@rasmarc/onboard-position-compensation.js:553
+msgid "Onboard's geometry settings are read-only."
+msgstr "Onboard의 위치와 크기 설정이 읽기 전용입니다."
+
+#: display-scale@rasmarc/onboard-position-compensation.js:575
+msgid "Onboard's reference geometry could not be saved."
+msgstr "Onboard의 기준 위치와 크기를 저장할 수 없습니다."
+
+#: display-scale@rasmarc/onboard-process.py:102
+msgid "Onboard's relative executable path could not be resolved for restart."
+msgstr "다시 시작하는 데 필요한 Onboard 실행 파일의 상대 경로를 확인할 수 없습니다."
+
+#: display-scale@rasmarc/onboard-process.py:150
+msgid "Onboard's restart data is invalid."
+msgstr "Onboard의 다시 시작 데이터가 잘못되었습니다."
+
+#: display-scale@rasmarc/onboard-position-compensation.js:488
+msgid "Onboard's target geometry could not be calculated."
+msgstr "Onboard의 목표 위치와 크기를 계산할 수 없습니다."
+
+#: display-scale@rasmarc/settings_widgets.py:332
+msgid "Open Extensions"
+msgstr "확장 프로그램 열기"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Press directly on the shaded band and drag it. Five positions range from half a step earlier to half a step later, with the regular switch point in the middle. The band moves one quarter of the pointer distance. Release to apply; Escape cancels. In text mode, the switch point is saved for the next use of screen scaling. The settings slider remains available."
+msgstr "음영 띠를 직접 누른 채 드래그하세요. 다섯 위치는 반 단계 일찍부터 반 단계 늦게까지이며, 가운데가 기본 전환점입니다. 띠는 포인터 이동 거리의 1/4만큼 움직입니다. 놓으면 적용하고 Escape를 누르면 취소합니다. 텍스트 모드에서는 다음에 화면 확대를 사용할 때를 위해 전환점을 저장합니다. 설정의 슬라이더도 계속 사용할 수 있습니다."
+
+#: display-scale@rasmarc/scale-slider.js:66
+msgid "Press on the band and drag it. Five positions range from half a step earlier to half a step later, with the regular switch point in the middle. The band moves one quarter of the pointer distance. Release to apply; Escape cancels."
+msgstr "띠를 누른 채 드래그하세요. 다섯 위치는 반 단계 일찍부터 반 단계 늦게까지이며, 가운데가 기본 전환점입니다. 띠는 포인터 이동 거리의 1/4만큼 움직입니다. 놓으면 적용하고 Escape를 누르면 취소합니다."
+
+#: display-scale@rasmarc/scale-slider.js:283
+msgid "Regular"
+msgstr "기본"
+
+#: install.py:104
+msgid "Reload the applet or restart Cinnamon."
+msgstr "애플릿을 다시 불러오거나 Cinnamon을 다시 시작하세요."
+
+#: display-scale@rasmarc/settings_widgets.py:342
+#, python-format
+msgid "Requires the enabled extension “%s”. It is currently disabled."
+msgstr "확장 프로그램 “%s”이 켜져 있어야 합니다. 현재 꺼져 있습니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Scale panel text"
+msgstr "패널 텍스트 확대"
+
+#: display-scale@rasmarc/settings_widgets.py:420
+msgid "Scaled"
+msgstr "비율에 맞게 조정"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Scaling"
+msgstr "배율"
+
+#: display-scale@rasmarc/scale-slider.js:59
+msgid "Scaling from 100 to 200 percent"
+msgstr "100%에서 200%까지 배율 조정"
+
+#: display-scale@rasmarc/mode-selector.js:17
+msgid "Scaling method"
+msgstr "확대 방식"
+
+#: display-scale@rasmarc/applet.js:228
+#: display-scale@rasmarc/scale-slider.js:228
+#, javascript-format
+msgid "Scaling: %s"
+msgstr "배율: %s"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Screen scaling"
+msgstr "화면 확대"
+
+#: display-scale@rasmarc/native-scale.py:76
+msgid "Screen scaling currently requires exactly one active monitor."
+msgstr "현재 화면 확대에는 활성 모니터가 정확히 하나 필요합니다."
+
+#: display-scale@rasmarc/native-scale.py:79
+msgid "Screen scaling requires an unrotated monitor at the desktop origin."
+msgstr "화면 확대에는 회전하지 않고 바탕화면 좌표 원점에 배치된 모니터가 필요합니다."
+
+#: display-scale@rasmarc/mode-selector.js:26
+msgid "Screen scaling with text compensation"
+msgstr "텍스트 보정을 포함한 화면 확대"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Select text scaling or screen scaling when the applet starts. “Keep the current mode” uses the mode already in effect. Starting the applet does not change the current scaling."
+msgstr "애플릿을 시작할 때 텍스트 확대 또는 화면 확대를 선택합니다. “현재 모드 유지”는 이미 적용 중인 모드를 사용합니다. 애플릿을 시작해도 현재 배율은 바뀌지 않습니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Shade screen scaling levels"
+msgstr "화면 확대 단계에 음영 표시"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Show hints on the panel icon and the two mode buttons."
+msgstr "패널 아이콘과 두 모드 버튼에 안내를 표시합니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Show the ranges of the screen scaling levels behind the percentage labels on the right. The shading follows the switch point and remains visible in text mode."
+msgstr "오른쪽 백분율 레이블 뒤에 화면 확대 단계의 범위를 표시합니다. 음영은 전환점에 맞춰 움직이며 텍스트 모드에서도 표시됩니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Show the scale on both sides"
+msgstr "양쪽에 눈금 표시"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Show tooltips"
+msgstr "도구 설명 표시"
+
+#: display-scale@rasmarc/metadata.json
+msgid "Size slider for font and layout scaling, optionally combined with variable screen scaling"
+msgstr "글꼴과 레이아웃 크기를 조절하고 가변 화면 확대를 선택적으로 결합할 수 있는 슬라이더"
+
+#: display-scale@rasmarc/settings_widgets.py:422
+msgid "Spanned across screens"
+msgstr "여러 화면에 걸쳐 표시"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Startup mode"
+msgstr "시작 모드"
+
+#: display-scale@rasmarc/settings_widgets.py:421
+msgid "Stretched"
+msgstr "늘이기"
+
+#: display-scale@rasmarc/scale-slider.js:285
+#, javascript-format
+msgid "Switch point: %s. Drag the band up or down. Space or Enter selects the next position."
+msgstr "전환점: %s. 띠를 위아래로 드래그하세요. 스페이스 또는 Enter로 다음 위치를 선택합니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Switch to the next screen scaling level"
+msgstr "다음 화면 확대 단계로 전환"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Text scaling"
+msgstr "텍스트 확대"
+
+#: display-scale@rasmarc/mode-selector.js:25
+msgid "Text scaling: fonts and layout"
+msgstr "텍스트 확대: 글꼴과 레이아웃"
+
+#: display-scale@rasmarc/applet.js:226
+#, javascript-format
+msgid "Text: %s · Screen: %s"
+msgstr "텍스트: %s · 화면: %s"
+
+#: display-scale@rasmarc/native-scale.py:58
+msgid "The current monitor mode is ambiguous."
+msgstr "현재 모니터 모드를 명확히 구분할 수 없습니다."
+
+#: display-scale@rasmarc/native-scale.py:351
+msgid "The display configuration changed during the switch."
+msgstr "전환 중 디스플레이 구성이 바뀌었습니다."
+
+#: display-scale@rasmarc/native-scale.py:188
+msgid "The display mode has changed in the meantime."
+msgstr "그사이에 디스플레이 모드가 바뀌었습니다."
+
+#: display-scale@rasmarc/native-scale.py:320
+msgid "The display or font setting was changed outside the applet; it will not be overwritten automatically."
+msgstr "애플릿 외부에서 디스플레이 또는 글꼴 설정이 바뀌었으므로 자동으로 덮어쓰지 않습니다."
+
+#: display-scale@rasmarc/native-scale.py:381
+msgid "The display or font setting was changed outside the applet; it will not be overwritten."
+msgstr "애플릿 외부에서 디스플레이 또는 글꼴 설정이 바뀌었으므로 덮어쓰지 않습니다."
+
+#: display-scale@rasmarc/native-scale.py:208
+#: display-scale@rasmarc/native-scale.py:336
+msgid "The font setting is not writable."
+msgstr "글꼴 설정에 쓸 수 없습니다."
+
+#: display-scale@rasmarc/onboard-process.py:100
+msgid "The identified process is not an Onboard keyboard."
+msgstr "확인된 프로세스는 Onboard 키보드가 아닙니다."
+
+#: install.py:60 install.py:63
+msgid "The installation package is incomplete or contains mismatched components."
+msgstr "설치 패키지가 불완전하거나 구성 요소가 서로 일치하지 않습니다."
+
+#: display-scale@rasmarc/native-scale.py:314
+msgid "The requested Cinnamon scale was not applied, or the display configuration changed."
+msgstr "요청한 Cinnamon 배율이 적용되지 않았거나 디스플레이 구성이 바뀌었습니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "The same setting as in System Settings → Backgrounds. Changes are synchronized in both directions."
+msgstr "시스템 설정 → 배경과 같은 설정입니다. 변경 사항은 양방향으로 동기화됩니다."
+
+#: display-scale@rasmarc/native-scale.py:426
+msgid "The scaling value is missing."
+msgstr "배율 값이 없습니다."
+
+#: display-scale@rasmarc/native-scale.py:126
+msgid "The scaling value must be between 100 and 200 percent."
+msgstr "배율 값은 100%에서 200% 사이여야 합니다."
+
+#: display-scale@rasmarc/applet.js:483
+msgid "The screen scaling could not be changed."
+msgstr "화면 배율을 변경할 수 없습니다."
+
+#: display-scale@rasmarc/native-scale.py:129
+msgid "The switch point must be 50, 75, 100, 125 or 150."
+msgstr "전환점은 50, 75, 100, 125 또는 150이어야 합니다."
+
+#: display-scale@rasmarc/native-scale.py:211
+msgid "The text scaling factor was not applied."
+msgstr "텍스트 배율이 적용되지 않았습니다."
+
+#: display-scale@rasmarc/native-scale.py:416
+msgid "This applet requires an X11 session."
+msgstr "이 애플릿에는 X11 세션이 필요합니다."
+
+#: display-scale@rasmarc/settings_widgets.py:419
+msgid "Tiled"
+msgstr "바둑판식 배치"
+
+#: display-scale@rasmarc/onboard-process.py:191
+msgid "Unknown Onboard action."
+msgstr "알 수 없는 Onboard 작업입니다."
+
+#: display-scale@rasmarc/onboard-process.py:64
+msgid "Unknown Onboard geometry section."
+msgstr "알 수 없는 Onboard 위치 및 크기 설정 구역입니다."
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Whole numbers from 101 to 199 only. Leave the field empty to omit this level. Incomplete entries are not applied; invalid characters are rejected."
+msgstr "101에서 199 사이의 정수만 입력하세요. 비워 두면 이 단계를 생략합니다. 불완전한 입력은 적용하지 않으며 잘못된 문자는 거부합니다."
+
+#: install.py:106
+msgid "Without the extension enabled, scaling works with the adjustment options grayed out."
+msgstr "확장 프로그램이 꺼져 있어도 배율 조절은 작동하며, 조정 옵션은 회색으로 표시됩니다."
+
+#: display-scale@rasmarc/settings_widgets.py:421
+msgid "Zoom"
+msgstr "확대하여 채우기"
+
+#: display-scale@rasmarc/native-scale.py:367
+#, python-brace-format
+msgid "{error}\nReset failed: {recovery_error}"
+msgstr "{error}\n초기화 실패: {recovery_error}"
+
+#: display-scale@rasmarc/settings_widgets.py:341
+#, python-format
+msgid "“%s” is enabled."
+msgstr "“%s”이 켜져 있습니다."

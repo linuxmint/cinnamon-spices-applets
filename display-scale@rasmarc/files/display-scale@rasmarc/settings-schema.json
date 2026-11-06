@@ -1,0 +1,288 @@
+{
+    "__layout__": {
+        "type": "layout",
+        "pages": [
+            "scaling-page",
+            "menu-page",
+            "cinnamon-page"
+        ],
+        "scaling-page": {
+            "type": "page",
+            "title": "Scaling",
+            "sections": [
+                "scaling-section"
+            ]
+        },
+        "scaling-section": {
+            "type": "section",
+            "title": "Scaling",
+            "keys": [
+                "slider-step-control",
+                "custom-stage-1-control",
+                "custom-stage-2-control",
+                "custom-stage-3-control",
+                "start-mode-control",
+                "screen-switch-point-control",
+                "onboard-adjustment-enabled",
+                "onboard-keyboard-control",
+                "extension-status",
+                "keep-panel-control",
+                "grow-panel-text-control",
+                "keep-desklet-control",
+                "osd150-offset-control"
+            ]
+        },
+        "menu-page": {
+            "type": "page",
+            "title": "Menu",
+            "sections": [
+                "menu-section"
+            ]
+        },
+        "menu-section": {
+            "type": "section",
+            "title": "Menu",
+            "keys": [
+                "shade-screen-stages",
+                "switch-point-in-menu-control",
+                "keep-switch-point-menu-open-control",
+                "scale-both-sides",
+                "show-tooltips"
+            ]
+        },
+        "cinnamon-page": {
+            "type": "page",
+            "title": "Cinnamon",
+            "sections": [
+                "cinnamon-section"
+            ]
+        },
+        "cinnamon-section": {
+            "type": "section",
+            "title": "Cinnamon",
+            "keys": [
+                "background-style"
+            ]
+        }
+    },
+    "slider-step": {
+        "type": "generic",
+        "default": 5
+    },
+    "slider-step-control": {
+        "type": "custom",
+        "description": "Increment",
+        "options": {
+            "5 percentage points": 5,
+            "10 percentage points": 10,
+            "25 percentage points": 25,
+            "Custom": 0
+        },
+        "file": "settings_widgets.py",
+        "widget": "WheelSafeComboBox",
+        "setting-key": "slider-step"
+    },
+    "custom-stage-1": {
+        "type": "generic",
+        "default": "125"
+    },
+    "custom-stage-1-control": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "CustomStageEntry",
+        "setting-key": "custom-stage-1",
+        "description": "Custom level 1 (%)",
+        "dependency": "slider-step=0",
+        "tooltip": "Whole numbers from 101 to 199 only. Leave the field empty to omit this level. Incomplete entries are not applied; invalid characters are rejected."
+    },
+    "custom-stage-2": {
+        "type": "generic",
+        "default": "150"
+    },
+    "custom-stage-2-control": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "CustomStageEntry",
+        "setting-key": "custom-stage-2",
+        "description": "Custom level 2 (%)",
+        "dependency": "slider-step=0",
+        "tooltip": "Whole numbers from 101 to 199 only. Leave the field empty to omit this level. Incomplete entries are not applied; invalid characters are rejected."
+    },
+    "custom-stage-3": {
+        "type": "generic",
+        "default": "175"
+    },
+    "custom-stage-3-control": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "CustomStageEntry",
+        "setting-key": "custom-stage-3",
+        "description": "Custom level 3 (%)",
+        "dependency": "slider-step=0",
+        "tooltip": "Whole numbers from 101 to 199 only. Leave the field empty to omit this level. Incomplete entries are not applied; invalid characters are rejected."
+    },
+    "start-mode": {
+        "type": "generic",
+        "default": "unchanged"
+    },
+    "start-mode-control": {
+        "type": "custom",
+        "description": "Startup mode",
+        "options": {
+            "Text scaling": "text",
+            "Screen scaling": "screen",
+            "Keep the current mode": "unchanged"
+        },
+        "tooltip": "Select text scaling or screen scaling when the applet starts. “Keep the current mode” uses the mode already in effect. Starting the applet does not change the current scaling.",
+        "file": "settings_widgets.py",
+        "widget": "WheelSafeComboBox",
+        "setting-key": "start-mode"
+    },
+    "keep-panel-height": {
+        "type": "generic",
+        "default": true
+    },
+    "grow-panel-text": {
+        "type": "generic",
+        "default": false
+    },
+    "grow-panel-text-control": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "PanelTextSwitch",
+        "description": "Scale panel text",
+        "tooltip": "Let panel text grow with the selected scaling mode. Text scaling does not reduce panel dimensions or pixel-based icons; spacing protection remains active during screen scaling.",
+        "indent": 36
+    },
+    "keep-desklet-centers": {
+        "type": "generic",
+        "default": true
+    },
+    "onboard-adjustment-enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Adjust the Onboard keyboard during screen scaling",
+        "tooltip": "Adjust a running, freely positioned Onboard keyboard to screen scaling. When disabled, the keyboard follows normal screen scaling. The selected adjustment method is retained."
+    },
+    "onboard-adjustment-method": {
+        "type": "generic",
+        "default": "smart"
+    },
+    "onboard-keyboard-control": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "OnboardKeyboardMode",
+        "description": "Adjustment method",
+        "options": {
+            "Keep size and position": "fixed",
+            "Adapt scaling to keyboard size": "smart"
+        },
+        "tooltip": "Keep size and position: Compensate for screen scaling so the keyboard keeps its visible size and position.\nAdapt scaling to keyboard size: Small keyboards grow more; keyboards spanning the screen width or height keep their screen coverage. The larger width or height share determines the adjustment; the ratio of opposite edge distances is preserved.\nManual size and position changes become the new reference. At 100%, the corresponding reference geometry is restored.",
+        "indent": 18
+    },
+    "screen-switch-point": {
+        "type": "generic",
+        "default": 100,
+        "min": 50,
+        "max": 150,
+        "round": 0
+    },
+    "screen-switch-point-control": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "ScreenSwitchPoint",
+        "description": "Switch to the next screen scaling level",
+        "min": 50,
+        "max": 150,
+        "step": 25,
+        "round": 0,
+        "show-value": false,
+        "tooltip": "Five positions: the middle uses the regular switch point at the next screen scaling level; the ends switch half a step earlier or later. The two intermediate marks halve these distances. Text compensation preserves the selected text size. With a later switch point, screen scaling can remain below 200% even at 200% text size."
+    },
+    "shade-screen-stages": {
+        "type": "switch",
+        "default": true,
+        "description": "Shade screen scaling levels",
+        "tooltip": "Show the ranges of the screen scaling levels behind the percentage labels on the right. The shading follows the switch point and remains visible in text mode."
+    },
+    "switch-point-in-menu": {
+        "type": "generic",
+        "default": true
+    },
+    "switch-point-in-menu-control": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "SwitchPointMenuSwitch",
+        "description": "Move the switch point in the menu",
+        "tooltip": "Press directly on the shaded band and drag it. Five positions range from half a step earlier to half a step later, with the regular switch point in the middle. The band moves one quarter of the pointer distance. Release to apply; Escape cancels. In text mode, the switch point is saved for the next use of screen scaling. The settings slider remains available.",
+        "indent": 18
+    },
+    "keep-switch-point-menu-open": {
+        "type": "generic",
+        "default": true
+    },
+    "keep-switch-point-menu-open-control": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "KeepSwitchPointMenuOpenSwitch",
+        "description": "Keep the menu open",
+        "tooltip": "Keep the menu open after moving the switch point, including when the screen scaling level changes. When disabled, the menu closes after each successfully applied move.",
+        "indent": 36
+    },
+    "scale-both-sides": {
+        "type": "switch",
+        "default": true,
+        "description": "Show the scale on both sides",
+        "tooltip": "Also show scale marks to the left of the slider. Applies to both text scaling and screen scaling."
+    },
+    "show-tooltips": {
+        "type": "switch",
+        "default": true,
+        "description": "Show tooltips",
+        "tooltip": "Show hints on the panel icon and the two mode buttons."
+    },
+    "background-style": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "BackgroundStyleChooser",
+        "description": "Background picture layout",
+        "tooltip": "The same setting as in System Settings → Backgrounds. Changes are synchronized in both directions."
+    },
+    "extension-status": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "ExtensionNotice",
+        "description": "Additional Features"
+    },
+    "keep-panel-control": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "ExtensionSwitch",
+        "setting-key": "keep-panel-height",
+        "description": "Keep panel size when scaling",
+        "tooltip": "Keep all panels approximately unchanged in both modes. Screen scaling adjusts panel height (width for vertical panels), icons and text; text scaling adjusts text and font-dependent spacing.",
+        "indent": 18
+    },
+    "keep-desklet-control": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "ExtensionSwitch",
+        "setting-key": "keep-desklet-centers",
+        "description": "Adjust desklet positions during screen scaling",
+        "tooltip": "Desklets grow with screen scaling while their geometric centers stay at the same screen positions. The adjustment is temporary and does not change saved desklet positions.",
+        "indent": 18
+    },
+    "osd150-offset-enabled": {
+        "type": "generic",
+        "default": true
+    },
+    "osd150-offset-control": {
+        "type": "custom",
+        "file": "settings_widgets.py",
+        "widget": "ExtensionSwitch",
+        "setting-key": "osd150-offset-enabled",
+        "description": "Adjust the OSD150 position during screen scaling",
+        "tooltip": "Adapt the OSD150 offset to the available space between its default position and the screen edge. This preserves the chosen placement as the OSD grows. Saved OSD150 offsets are unchanged. Requires both OSD150 and Display Scale - Additional Features to be enabled.",
+        "indent": 18
+    }
+}

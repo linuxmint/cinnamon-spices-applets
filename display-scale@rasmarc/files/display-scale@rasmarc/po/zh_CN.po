@@ -1,0 +1,484 @@
+# Simplified Chinese translation of Display Scale.
+# Copyright (C) 2026 rasmarc
+# SPDX-License-Identifier: GPL-2.0-or-later
+# AI-assisted translation; native-speaker review is welcome.
+msgid ""
+msgstr "Project-Id-Version: Display Scale 1.0.4\nReport-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\nPO-Revision-Date: 2026-11-01 21:10+0100\nLast-Translator: rasmarc\nLanguage-Team: Simplified Chinese\nLanguage: zh_CN\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\n"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "10 percentage points"
+msgstr "10 个百分点"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "25 percentage points"
+msgstr "25 个百分点"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "5 percentage points"
+msgstr "5 个百分点"
+
+#: display-scale@rasmarc/native-scale.py:329
+msgid "A previous change is incomplete. Run native-scale.py restore first."
+msgstr "上一次更改尚未完成。请先运行 native-scale.py restore。"
+
+#: display-scale@rasmarc/scale-slider.js:283
+msgid "A quarter step earlier"
+msgstr "提前 1/4 级"
+
+#: display-scale@rasmarc/scale-slider.js:284
+msgid "A quarter step later"
+msgstr "延后 1/4 级"
+
+#: display-scale@rasmarc/native-scale.py:399
+msgid "A scaling change is already in progress."
+msgstr "缩放更改正在进行中。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adapt scaling to keyboard size"
+msgstr "根据键盘大小调整缩放"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adapt the OSD150 offset to the available space between its default position and the screen edge. This preserves the chosen placement as the OSD grows. Saved OSD150 offsets are unchanged. Requires both OSD150 and Display Scale - Additional Features to be enabled."
+msgstr "根据 OSD150 默认位置与屏幕边缘之间的可用空间调整其偏移量，使 OSD 放大后仍保持所选位置。已保存的 OSD150 偏移量不会更改。需要同时启用 OSD150 和 Display Scale – 附加功能。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Additional Features"
+msgstr "附加功能"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjust a running, freely positioned Onboard keyboard to screen scaling. When disabled, the keyboard follows normal screen scaling. The selected adjustment method is retained."
+msgstr "使正在运行且自由放置的 Onboard 键盘适应屏幕缩放。禁用时，键盘遵循正常的屏幕缩放。所选调整方式会保留。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjust desklet positions during screen scaling"
+msgstr "屏幕缩放时调整桌面小工具的位置"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjust the OSD150 position during screen scaling"
+msgstr "屏幕缩放时调整 OSD150 的位置"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjust the Onboard keyboard during screen scaling"
+msgstr "屏幕缩放时调整 Onboard 键盘"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjustment method"
+msgstr "调整方式"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Also show scale marks to the left of the slider. Applies to both text scaling and screen scaling."
+msgstr "也在滑块左侧显示刻度线。适用于文字缩放和屏幕缩放。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Background picture layout"
+msgstr "背景图片布局"
+
+#: install.py:103
+msgid "Backup of the previous program files:"
+msgstr "原程序文件的备份："
+
+#: display-scale@rasmarc/settings_widgets.py:420
+msgid "Centered"
+msgstr "居中"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Cinnamon"
+msgstr "Cinnamon"
+
+#: display-scale@rasmarc/native-scale.py:137
+msgid "Cinnamon does not offer a suitable scale for this monitor mode."
+msgstr "Cinnamon 未为此显示器模式提供合适的缩放比例。"
+
+#: display-scale@rasmarc/native-scale.py:270
+msgid "Cinnamon reported an invalid UI scaling factor."
+msgstr "Cinnamon 返回了无效的界面缩放系数。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Custom"
+msgstr "自定义"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Custom level 1 (%)"
+msgstr "自定义级别 1 (%)"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Custom level 2 (%)"
+msgstr "自定义级别 2 (%)"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Custom level 3 (%)"
+msgstr "自定义级别 3 (%)"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Desklets grow with screen scaling while their geometric centers stay at the same screen positions. The adjustment is temporary and does not change saved desklet positions."
+msgstr "桌面小工具随屏幕缩放而放大，其几何中心保持在屏幕上的原位置。此调整是临时的，不会更改已保存的桌面小工具位置。"
+
+#: display-scale@rasmarc/applet.js:707
+#: display-scale@rasmarc/applet.js:715
+msgid "Display Scale"
+msgstr "Display Scale"
+
+#: install.py:101
+#, python-format
+msgid "Display Scale %s and its optional additional features are installed."
+msgstr "已安装 Display Scale %s 及其可选附加功能。"
+
+#: display-scale@rasmarc/settings_widgets.py:340
+msgid "Display Scale - Additional Features"
+msgstr "Display Scale – 附加功能"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:143
+msgid "Display Scale: Onboard scaling"
+msgstr "Display Scale：Onboard 缩放"
+
+#: install.py:105
+msgid "Enable “Display Scale - Additional Features” in System Settings → Extensions."
+msgstr "请在系统设置 → 扩展中启用“Display Scale – 附加功能”。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Five positions: the middle uses the regular switch point at the next screen scaling level; the ends switch half a step earlier or later. The two intermediate marks halve these distances. Text compensation preserves the selected text size. With a later switch point, screen scaling can remain below 200% even at 200% text size."
+msgstr "共有五个位置：中间位置在达到下一级屏幕缩放比例时常规切换；两端分别提前或延后半级切换。两个中间刻度将这些间隔再平分。文字补偿会保持所选文字大小。若延后切换点，即使文字大小为 200%，屏幕缩放也可低于 200%。"
+
+#: display-scale@rasmarc/scale-slider.js:283
+msgid "Half a step earlier"
+msgstr "提前半级"
+
+#: display-scale@rasmarc/scale-slider.js:284
+msgid "Half a step later"
+msgstr "延后半级"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Increment"
+msgstr "步长"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:568
+msgid "Invalid Onboard geometry."
+msgstr "Onboard 的位置和尺寸无效。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep all panels approximately unchanged in both modes. Screen scaling adjusts panel height (width for vertical panels), icons and text; text scaling adjusts text and font-dependent spacing."
+msgstr "使所有面板在两种模式下均基本保持不变。屏幕缩放会调整面板高度（垂直面板为宽度）、图标和文字；文字缩放会调整文字及依赖字体大小的间距。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep panel size when scaling"
+msgstr "缩放时保持面板大小"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep size and position"
+msgstr "保持大小和位置"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep size and position: Compensate for screen scaling so the keyboard keeps its visible size and position.\nAdapt scaling to keyboard size: Small keyboards grow more; keyboards spanning the screen width or height keep their screen coverage. The larger width or height share determines the adjustment; the ratio of opposite edge distances is preserved.\nManual size and position changes become the new reference. At 100%, the corresponding reference geometry is restored."
+msgstr "保持大小和位置：补偿屏幕缩放，使键盘保持可见大小和位置。\n根据键盘大小调整缩放：较小的键盘放大得更多；占满屏幕宽度或高度的键盘保持屏幕占比。宽度占比和高度占比中较大者决定调整幅度；到相对两边的距离之比保持不变。\n手动更改的大小和位置会成为新的参考值。回到 100% 时会恢复相应的参考位置和尺寸。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep the current mode"
+msgstr "保持当前模式"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep the menu open"
+msgstr "保持菜单打开"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep the menu open after moving the switch point, including when the screen scaling level changes. When disabled, the menu closes after each successfully applied move."
+msgstr "移动切换点后保持菜单打开，即使屏幕缩放级别发生变化也一样。禁用时，每次成功应用移动后都会关闭菜单。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Let panel text grow with the selected scaling mode. Text scaling does not reduce panel dimensions or pixel-based icons; spacing protection remains active during screen scaling."
+msgstr "让面板文字随所选缩放模式放大。文字缩放不会缩小面板尺寸或以像素定义大小的图标；屏幕缩放时仍会保护间距。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Menu"
+msgstr "菜单"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Move the switch point in the menu"
+msgstr "在菜单中移动切换点"
+
+#: display-scale@rasmarc/settings_widgets.py:419
+msgid "No picture"
+msgstr "无图片"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:411
+msgid "Onboard could not be restarted."
+msgstr "无法重新启动 Onboard。"
+
+#: display-scale@rasmarc/onboard-process.py:117
+msgid "Onboard did not exit normally. The screen scaling change has been stopped."
+msgstr "Onboard 未正常退出。屏幕缩放更改已停止。"
+
+#: display-scale@rasmarc/onboard-process.py:87
+msgid "Onboard does not belong to the current user session."
+msgstr "Onboard 不属于当前用户会话。"
+
+#: display-scale@rasmarc/onboard-process.py:174
+msgid "Onboard exited during restart (status {})."
+msgstr "Onboard 在重新启动时退出（状态 {}）。"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:426
+msgid "Onboard is already being restarted."
+msgstr "Onboard 正在重新启动。"
+
+#: display-scale@rasmarc/onboard-process.py:177
+msgid "Onboard started but has not yet registered with the session."
+msgstr "Onboard 已启动，但尚未向会话注册。"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:463
+msgid "Onboard's final saved geometry could not be read."
+msgstr "无法读取 Onboard 最后保存的位置和尺寸。"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:454
+msgid "Onboard's final saved geometry is invalid."
+msgstr "Onboard 最后保存的位置和尺寸无效。"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:558
+msgid "Onboard's geometry could not be applied."
+msgstr "无法应用 Onboard 的位置和尺寸。"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:553
+msgid "Onboard's geometry settings are read-only."
+msgstr "Onboard 的位置和尺寸设置为只读。"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:575
+msgid "Onboard's reference geometry could not be saved."
+msgstr "无法保存 Onboard 的参考位置和尺寸。"
+
+#: display-scale@rasmarc/onboard-process.py:102
+msgid "Onboard's relative executable path could not be resolved for restart."
+msgstr "无法解析 Onboard 可执行文件的相对路径以重新启动。"
+
+#: display-scale@rasmarc/onboard-process.py:150
+msgid "Onboard's restart data is invalid."
+msgstr "Onboard 的重新启动数据无效。"
+
+#: display-scale@rasmarc/onboard-position-compensation.js:488
+msgid "Onboard's target geometry could not be calculated."
+msgstr "无法计算 Onboard 的目标位置和尺寸。"
+
+#: display-scale@rasmarc/settings_widgets.py:332
+msgid "Open Extensions"
+msgstr "打开扩展"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Press directly on the shaded band and drag it. Five positions range from half a step earlier to half a step later, with the regular switch point in the middle. The band moves one quarter of the pointer distance. Release to apply; Escape cancels. In text mode, the switch point is saved for the next use of screen scaling. The settings slider remains available."
+msgstr "直接按住阴影带并拖动。五个位置从提前半级到延后半级，中间为常规切换点。阴影带的移动距离是指针移动距离的四分之一。松开即可应用；Escape 取消。在文字模式下，切换点会保存，供下次使用屏幕缩放时生效。设置中的滑块仍可使用。"
+
+#: display-scale@rasmarc/scale-slider.js:66
+msgid "Press on the band and drag it. Five positions range from half a step earlier to half a step later, with the regular switch point in the middle. The band moves one quarter of the pointer distance. Release to apply; Escape cancels."
+msgstr "按住阴影带并拖动。五个位置从提前半级到延后半级，中间为常规切换点。阴影带的移动距离是指针移动距离的四分之一。松开即可应用；Escape 取消。"
+
+#: display-scale@rasmarc/scale-slider.js:283
+msgid "Regular"
+msgstr "常规"
+
+#: install.py:104
+msgid "Reload the applet or restart Cinnamon."
+msgstr "请重新加载小程序或重新启动 Cinnamon。"
+
+#: display-scale@rasmarc/settings_widgets.py:342
+#, python-format
+msgid "Requires the enabled extension “%s”. It is currently disabled."
+msgstr "需要启用扩展“%s”。该扩展当前已禁用。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Scale panel text"
+msgstr "放大面板文字"
+
+#: display-scale@rasmarc/settings_widgets.py:420
+msgid "Scaled"
+msgstr "等比缩放"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Scaling"
+msgstr "缩放"
+
+#: display-scale@rasmarc/scale-slider.js:59
+msgid "Scaling from 100 to 200 percent"
+msgstr "从 100% 到 200% 缩放"
+
+#: display-scale@rasmarc/mode-selector.js:17
+msgid "Scaling method"
+msgstr "缩放方式"
+
+#: display-scale@rasmarc/applet.js:228
+#: display-scale@rasmarc/scale-slider.js:228
+#, javascript-format
+msgid "Scaling: %s"
+msgstr "缩放：%s"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Screen scaling"
+msgstr "屏幕缩放"
+
+#: display-scale@rasmarc/native-scale.py:76
+msgid "Screen scaling currently requires exactly one active monitor."
+msgstr "屏幕缩放目前要求恰好只有一个活动显示器。"
+
+#: display-scale@rasmarc/native-scale.py:79
+msgid "Screen scaling requires an unrotated monitor at the desktop origin."
+msgstr "屏幕缩放要求显示器未旋转且位于桌面坐标原点。"
+
+#: display-scale@rasmarc/mode-selector.js:26
+msgid "Screen scaling with text compensation"
+msgstr "带文字补偿的屏幕缩放"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Select text scaling or screen scaling when the applet starts. “Keep the current mode” uses the mode already in effect. Starting the applet does not change the current scaling."
+msgstr "选择小程序启动时使用文字缩放还是屏幕缩放。“保持当前模式”会沿用已生效的模式。启动小程序不会更改当前缩放。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Shade screen scaling levels"
+msgstr "用阴影标示屏幕缩放级别"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Show hints on the panel icon and the two mode buttons."
+msgstr "在面板图标和两个模式按钮上显示提示。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Show the ranges of the screen scaling levels behind the percentage labels on the right. The shading follows the switch point and remains visible in text mode."
+msgstr "在右侧百分比标签后方显示屏幕缩放级别的范围。阴影会跟随切换点移动，并在文字模式下保持可见。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Show the scale on both sides"
+msgstr "两侧均显示刻度"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Show tooltips"
+msgstr "显示工具提示"
+
+#: display-scale@rasmarc/metadata.json
+msgid "Size slider for font and layout scaling, optionally combined with variable screen scaling"
+msgstr "用于调整字体和布局大小的滑块，可选配可变屏幕缩放"
+
+#: display-scale@rasmarc/settings_widgets.py:422
+msgid "Spanned across screens"
+msgstr "跨屏显示"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Startup mode"
+msgstr "启动模式"
+
+#: display-scale@rasmarc/settings_widgets.py:421
+msgid "Stretched"
+msgstr "拉伸"
+
+#: display-scale@rasmarc/scale-slider.js:285
+#, javascript-format
+msgid "Switch point: %s. Drag the band up or down. Space or Enter selects the next position."
+msgstr "切换点：%s。向上或向下拖动阴影带。空格或 Enter 选择下一个位置。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Switch to the next screen scaling level"
+msgstr "切换到下一级屏幕缩放"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Text scaling"
+msgstr "文字缩放"
+
+#: display-scale@rasmarc/mode-selector.js:25
+msgid "Text scaling: fonts and layout"
+msgstr "文字缩放：字体和布局"
+
+#: display-scale@rasmarc/applet.js:226
+#, javascript-format
+msgid "Text: %s · Screen: %s"
+msgstr "文字：%s · 屏幕：%s"
+
+#: display-scale@rasmarc/native-scale.py:58
+msgid "The current monitor mode is ambiguous."
+msgstr "当前显示器模式不明确。"
+
+#: display-scale@rasmarc/native-scale.py:351
+msgid "The display configuration changed during the switch."
+msgstr "切换期间显示配置发生了变化。"
+
+#: display-scale@rasmarc/native-scale.py:188
+msgid "The display mode has changed in the meantime."
+msgstr "显示模式已在此期间发生变化。"
+
+#: display-scale@rasmarc/native-scale.py:320
+msgid "The display or font setting was changed outside the applet; it will not be overwritten automatically."
+msgstr "显示或字体设置已在小程序之外更改；不会自动覆盖。"
+
+#: display-scale@rasmarc/native-scale.py:381
+msgid "The display or font setting was changed outside the applet; it will not be overwritten."
+msgstr "显示或字体设置已在小程序之外更改；不会覆盖。"
+
+#: display-scale@rasmarc/native-scale.py:208
+#: display-scale@rasmarc/native-scale.py:336
+msgid "The font setting is not writable."
+msgstr "字体设置不可写。"
+
+#: display-scale@rasmarc/onboard-process.py:100
+msgid "The identified process is not an Onboard keyboard."
+msgstr "识别到的进程不是 Onboard 键盘。"
+
+#: install.py:60 install.py:63
+msgid "The installation package is incomplete or contains mismatched components."
+msgstr "安装包不完整或包含不匹配的组件。"
+
+#: display-scale@rasmarc/native-scale.py:314
+msgid "The requested Cinnamon scale was not applied, or the display configuration changed."
+msgstr "未应用所请求的 Cinnamon 缩放，或显示配置发生了变化。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "The same setting as in System Settings → Backgrounds. Changes are synchronized in both directions."
+msgstr "与系统设置 → 背景中的设置相同。更改会双向同步。"
+
+#: display-scale@rasmarc/native-scale.py:426
+msgid "The scaling value is missing."
+msgstr "缺少缩放值。"
+
+#: display-scale@rasmarc/native-scale.py:126
+msgid "The scaling value must be between 100 and 200 percent."
+msgstr "缩放值必须在 100% 到 200% 之间。"
+
+#: display-scale@rasmarc/applet.js:483
+msgid "The screen scaling could not be changed."
+msgstr "无法更改屏幕缩放。"
+
+#: display-scale@rasmarc/native-scale.py:129
+msgid "The switch point must be 50, 75, 100, 125 or 150."
+msgstr "切换点必须为 50、75、100、125 或 150。"
+
+#: display-scale@rasmarc/native-scale.py:211
+msgid "The text scaling factor was not applied."
+msgstr "未应用文字缩放系数。"
+
+#: display-scale@rasmarc/native-scale.py:416
+msgid "This applet requires an X11 session."
+msgstr "此小程序需要 X11 会话。"
+
+#: display-scale@rasmarc/settings_widgets.py:419
+msgid "Tiled"
+msgstr "平铺"
+
+#: display-scale@rasmarc/onboard-process.py:191
+msgid "Unknown Onboard action."
+msgstr "未知的 Onboard 操作。"
+
+#: display-scale@rasmarc/onboard-process.py:64
+msgid "Unknown Onboard geometry section."
+msgstr "未知的 Onboard 位置和尺寸配置分区。"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Whole numbers from 101 to 199 only. Leave the field empty to omit this level. Incomplete entries are not applied; invalid characters are rejected."
+msgstr "仅限 101 到 199 的整数。留空可省略此级别。不完整的输入不会应用；无效字符会被拒绝。"
+
+#: install.py:106
+msgid "Without the extension enabled, scaling works with the adjustment options grayed out."
+msgstr "未启用扩展时，缩放仍可使用，调整选项显示为灰色。"
+
+#: display-scale@rasmarc/settings_widgets.py:421
+msgid "Zoom"
+msgstr "缩放填充"
+
+#: display-scale@rasmarc/native-scale.py:367
+#, python-brace-format
+msgid "{error}\nReset failed: {recovery_error}"
+msgstr "{error}\n重置失败：{recovery_error}"
+
+#: display-scale@rasmarc/settings_widgets.py:341
+#, python-format
+msgid "“%s” is enabled."
+msgstr "“%s”已启用。"
