@@ -2,7 +2,7 @@
 // this subclass adds vertical drawing and a strict percentage grid.
 const PopupMenu = imports.ui.popupMenu;
 const Clutter = imports.gi.Clutter;
-const Cinnamon = imports.gi.Cinnamon;
+const GObject = imports.gi.GObject;
 const St = imports.gi.St;
 const Tooltips = imports.ui.tooltips;
 const Cairo = imports.cairo;
@@ -11,6 +11,36 @@ const Mainloop = imports.mainloop;
 const { _, formatPercent } = require("./i18n");
 
 const ACTIVE_SCALE_OPACITY = 0.50;
+
+// A reloaded module needs a fresh name because its previous GType still exists.
+const ScaleSliderLayout = GObject.registerClass({
+    GTypeName: `DisplayScaleSliderLayout${GLib.get_monotonic_time()}`,
+}, class ScaleSliderLayout extends Clutter.LayoutManager {
+    _init(owner) {
+        super._init();
+        this._owner = owner;
+    }
+
+    vfunc_get_preferred_width(_container, _forHeight) {
+        const width = this._owner?._measure().width ?? 0;
+        return [width, width];
+    }
+
+    vfunc_get_preferred_height(_container, _forWidth) {
+        const m = this._owner?._measure();
+        const height = m ? m.trackHeight + 2 * m.padding : 0;
+        return [height, height];
+    }
+
+    vfunc_allocate(_container, box, ...flags) {
+        // St.Widget supplies the themed content box. Newer Clutter omits flags.
+        this._owner?._allocateContent(box, ...flags);
+    }
+
+    detach() {
+        this._owner = null;
+    }
+});
 
 function switchPointColor(earlier, theme) {
     let background = null;
@@ -57,7 +87,8 @@ class ScaleSlider extends PopupMenu.PopupSliderMenuItem {
         this._feedbackSensitive = true;
         this.actor.accessible_name = _("Scaling from 100 to 200 percent");
         this.removeActor(this._slider);
-        this._content = new Cinnamon.GenericContainer();
+        this._layout = new ScaleSliderLayout(this);
+        this._content = new St.Widget({ layout_manager: this._layout });
         // A separate, passive surface keeps the shading behind the right-hand
         // captions and entirely outside the reactive slider column.
         this._stageShading = new St.DrawingArea({ reactive: false, visible: false });
@@ -106,14 +137,6 @@ class ScaleSlider extends PopupMenu.PopupSliderMenuItem {
             if (this._shadeEnabled)
                 this._stageShading.queue_repaint();
         });
-        this._signals.connect(this._content, "get-preferred-width", (actor, forHeight, alloc) => {
-            alloc.min_size = alloc.natural_size = this._measure().width;
-        });
-        this._signals.connect(this._content, "get-preferred-height", (actor, forWidth, alloc) => {
-            const m = this._measure();
-            alloc.min_size = alloc.natural_size = m.trackHeight + 2 * m.padding;
-        });
-        this._signals.connect(this._content, "allocate", (actor, box, flags) => this._allocateContent(box, flags));
         this.addActor(this._content, { span: -1, expand: true });
     }
 
@@ -169,7 +192,7 @@ class ScaleSlider extends PopupMenu.PopupSliderMenuItem {
         return groups;
     }
 
-    _allocateContent(box, flags) {
+    _allocateContent(box, ...flags) {
         const m = this._measure();
         const trackWidth = (box.x2 - box.x1) / 3;
         const trackX = box.x1 + trackWidth;
@@ -183,7 +206,7 @@ class ScaleSlider extends PopupMenu.PopupSliderMenuItem {
         const allocate = (child, x, y, width, childHeight) => {
             const childBox = new Clutter.ActorBox();
             Object.assign(childBox, { x1: x, y1: y, x2: x + width, y2: y + childHeight });
-            child.allocate(childBox, flags);
+            child.allocate(childBox, ...flags);
         };
         allocate(this._slider, trackX, top, trackWidth, height);
         const shadePadding = Math.min(2 * Math.max(1, global.ui_scale), m.gap / 2);
@@ -678,6 +701,7 @@ class ScaleSlider extends PopupMenu.PopupSliderMenuItem {
     destroy() {
         this._bandDestroyed = true;
         this.cancelDrag();
+        this._layout.detach();
         super.destroy();
     }
 }

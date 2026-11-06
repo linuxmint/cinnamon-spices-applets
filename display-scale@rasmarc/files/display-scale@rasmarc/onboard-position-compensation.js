@@ -280,7 +280,7 @@ class OnboardPositionCompensation {
         if (!window || window.minimized || typeof window.get_frame_rect !== "function" ||
             typeof window.frame_rect_to_client_rect !== "function")
             return null;
-        // Gtk.Window stores frame position but client size. Server-side
+        // Onboard saves the frame position and client size. Server-side
         // decorations therefore must not become extra keyboard width/height.
         const frame = window.get_frame_rect();
         const client = window.frame_rect_to_client_rect(frame);

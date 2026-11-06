@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # AI-assisted translation; native-speaker review is welcome.
 msgid ""
-msgstr "Project-Id-Version: Display Scale 1.0.4\nReport-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\nPO-Revision-Date: 2026-11-01 21:10+0100\nLast-Translator: rasmarc\nLanguage-Team: Czech\nLanguage: cs\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+msgstr "Project-Id-Version: Display Scale 1.0.5\nReport-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\nPO-Revision-Date: 2026-11-01 21:10+0100\nLast-Translator: rasmarc\nLanguage-Team: Czech\nLanguage: cs\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: display-scale@rasmarc/settings-schema.json
 msgid "10 percentage points"
