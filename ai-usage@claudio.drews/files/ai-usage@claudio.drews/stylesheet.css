@@ -1,0 +1,42 @@
+/* applet/stylesheet.css — barra do applet AI Usage.
+ * Só cores, tamanho e espaçamento: as cores seguem o tema nativo do Cinnamon.
+ */
+
+.ai-usage-bar-track {
+    background-color: rgba(160, 160, 160, 0.35);
+    border-radius: 3px;
+}
+
+.ai-usage-bar-fill {
+    background-color: #3584e4;
+    border-radius: 3px;
+}
+
+.ai-usage-bar-fill-warning {
+    background-color: #e5a50a;
+}
+
+.ai-usage-bar-fill-critical {
+    background-color: #e01b24;
+}
+
+.ai-usage-service {
+    padding: 2px 4px;
+}
+
+.ai-usage-service-note {
+    font-size: 0.85em;
+    color: rgba(160, 160, 160, 1);
+    padding-top: 1px;
+}
+
+.ai-usage-menu-note {
+    font-size: 0.9em;
+    color: rgba(160, 160, 160, 1);
+}
+
+.ai-usage-menu-error {
+    font-size: 0.9em;
+    color: #e01b24;
+    font-weight: bold;
+}
