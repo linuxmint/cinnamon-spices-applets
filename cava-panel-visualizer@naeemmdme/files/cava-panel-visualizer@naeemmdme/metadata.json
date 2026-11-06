@@ -1,0 +1,6 @@
+{
+    "uuid": "cava-panel-visualizer@naeemmdme",
+    "name": "CAVA Panel Visualizer",
+    "description": "Compact live audio spectrum visualizer for the Cinnamon panel",
+    "version": 2.0
+}
