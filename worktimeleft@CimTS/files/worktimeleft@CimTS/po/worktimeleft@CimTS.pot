@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the worktimeleft@CimTS package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: worktimeleft@CimTS\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: files/worktimeleft@CimTS/applet.js:47
+msgid "Check times"
+msgstr ""
+
+#: files/worktimeleft@CimTS/applet.js:47
+msgid "Use HH:MM, e.g. 09:00"
+msgstr ""
+
+#: files/worktimeleft@CimTS/applet.js:61
+msgid "No work today"
+msgstr ""
+
+#: files/worktimeleft@CimTS/applet.js:61
+msgid "Enjoy your day off"
+msgstr ""
+
+#: files/worktimeleft@CimTS/applet.js:63
+msgid "Starts in"
+msgstr ""
+
+#: files/worktimeleft@CimTS/applet.js:64
+msgid "Shift length"
+msgstr ""
+
+#: files/worktimeleft@CimTS/applet.js:66
+msgid "Workday over"
+msgstr ""
+
+#: files/worktimeleft@CimTS/applet.js:66
+msgid "See you next shift"
+msgstr ""
+
+#: files/worktimeleft@CimTS/applet.js:68
+msgid "left"
+msgstr ""
+
+#: files/worktimeleft@CimTS/applet.js:71
+msgid "worked of"
+msgstr ""
+
+#. settings-schema.json->head->description
+msgid "Work schedule"
+msgstr ""
+
+#. settings-schema.json->start-time->description
+msgid "Workday start (HH:MM, 24h)"
+msgstr ""
+
+#. settings-schema.json->end-time->description
+msgid "Workday end (HH:MM, 24h; earlier than start = overnight shift)"
+msgstr ""
+
+#. settings-schema.json->show-percent->description
+msgid "Show percent of the day completed"
+msgstr ""
+
+#. settings-schema.json->dayshead->description
+msgid "Workdays"
+msgstr ""
+
+#. settings-schema.json->workday-0->description
+msgid "Monday"
+msgstr ""
+
+#. settings-schema.json->workday-1->description
+msgid "Tuesday"
+msgstr ""
+
+#. settings-schema.json->workday-2->description
+msgid "Wednesday"
+msgstr ""
+
+#. settings-schema.json->workday-3->description
+msgid "Thursday"
+msgstr ""
+
+#. settings-schema.json->workday-4->description
+msgid "Friday"
+msgstr ""
+
+#. settings-schema.json->workday-5->description
+msgid "Saturday"
+msgstr ""
+
+#. settings-schema.json->workday-6->description
+msgid "Sunday"
+msgstr ""
