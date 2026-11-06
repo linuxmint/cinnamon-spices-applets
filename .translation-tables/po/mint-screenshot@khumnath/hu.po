@@ -1,0 +1,307 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mint-screenshot@khumnath package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mint-screenshot@khumnath 1.2.0\n"
+"Report-Msgid-Bugs-To: khumnath@gmail.com\n"
+"POT-Creation-Date: 2026-04-23 19:12+0545\n"
+"PO-Revision-Date: 2026-06-01 16:04+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: app.py:49
+msgid "Reset Everything?"
+msgstr "Minden visszaállítása?"
+
+#: app.py:51
+msgid "This will clear all annotations and return to the launcher."
+msgstr "Ez törli az összes megjegyzést, és visszatér az indítóhoz."
+
+#: app.py:191
+msgid "Mint Screenshot — Wayland Error"
+msgstr "Mint Képernyőkép — Wayland hiba"
+
+#: canvas.py:461
+msgid "Edit Text:"
+msgstr "Szöveg szerkesztése:"
+
+#: canvas.py:461
+msgid "Enter text to insert:"
+msgstr "Írja be a beszúrandó szöveget:"
+
+#: capture.py:53
+msgid "D-Bus is required for Wayland support."
+msgstr "A Wayland támogatásához D-Bus szükséges."
+
+#: capture.py:171
+msgid ""
+"Failed to load captured screenshot:\n"
+"{}"
+msgstr ""
+"Nem sikerült betölteni a rögzített képernyőképet:\n"
+"{}"
+
+#: editor.py:119
+msgid "Custom Timer"
+msgstr "Egyéni időzítő"
+
+#: editor.py:133
+msgid "Enter delay in seconds:"
+msgstr "Adja meg a késleltetést másodpercben:"
+
+#: editor.py:338 editor.py:795
+msgid "Saving..."
+msgstr "Mentés..."
+
+#: editor.py:455
+msgid "Pointer"
+msgstr "Mutató"
+
+#: editor.py:456
+msgid "Rectangle"
+msgstr "Téglalap"
+
+#: editor.py:457
+msgid "Ellipse"
+msgstr "Elipszis"
+
+#: editor.py:458
+msgid "Arrow"
+msgstr "Nyíl"
+
+#: editor.py:459
+msgid "Draw"
+msgstr "Rajzolás"
+
+#: editor.py:460
+msgid "Highlight"
+msgstr "Kiemelés"
+
+#: editor.py:461
+msgid "Text Tool"
+msgstr "Szöveg eszköz"
+
+#: editor.py:494
+msgid "Blue"
+msgstr "Kék"
+
+#: editor.py:495
+msgid "Red"
+msgstr "Piros"
+
+#: editor.py:496
+msgid "Green"
+msgstr "Zöld"
+
+#: editor.py:497
+msgid "Yellow"
+msgstr "Sárga"
+
+#: editor.py:498
+msgid "White"
+msgstr "Fehér"
+
+#: editor.py:499
+msgid "Black"
+msgstr "Fekete"
+
+#: editor.py:529
+msgid "Size"
+msgstr "Méret"
+
+#: editor.py:542
+msgid "Reset All"
+msgstr "Összes visszaállítása"
+
+#: editor.py:543
+msgid "Undo"
+msgstr "Vissza"
+
+#: editor.py:544
+msgid "Copy"
+msgstr "Másolás"
+
+#: editor.py:545
+msgid "Save"
+msgstr "Mentés"
+
+#: editor.py:546
+msgid "Settings"
+msgstr "Beálítások"
+
+#: editor.py:547 launcher.py:144
+msgid "Close"
+msgstr "Bezár"
+
+#: editor.py:573
+msgid "Move Toolbar Top/Bottom"
+msgstr "Eszköztár mozgatása Fent/Lent"
+
+#: editor.py:596
+msgid "Save Format"
+msgstr "Mentési formátum"
+
+#: editor.py:609
+msgid "Image Quality"
+msgstr "Képminőség"
+
+#: editor.py:614
+msgid "Space Saver (Small)"
+msgstr "Helytakarékos (Kicsi)"
+
+#: editor.py:616
+msgid "Medium"
+msgstr "Közepes"
+
+#: editor.py:618
+msgid "Original"
+msgstr "Eredeti"
+
+#: editor.py:629
+msgid "Save Folder: {}..."
+msgstr "Mappa mentése: {}..."
+
+#: editor.py:634
+msgid "Show Toolbar Labels"
+msgstr "Eszköztár címkéinek megjelenítése"
+
+#: editor.py:642
+msgid "About Mint Screenshot"
+msgstr "Mint Képernyőkép névjegye"
+
+#: editor.py:663
+msgid "Select Default Save Folder"
+msgstr "Alapértelmezett mentési mappa kiválasztása"
+
+#: editor.py:667
+msgid "Select"
+msgstr "Kiválasztás"
+
+#: editor.py:692 launcher.py:79 main.py:159
+msgid "Mint Screenshot"
+msgstr "Mint Képernyőkép"
+
+#: editor.py:694
+msgid ""
+"Screenshot & Annotation Tool\n"
+"Capture, annotate, and share with ease."
+msgstr ""
+"Képernyőkép- és jegyzetkészítő eszköz\n"
+"Könnyedén rögzíthet, jegyzetelhet és megoszthat."
+
+#: editor.py:696
+msgid "Project on GitHub"
+msgstr "Projekt a GitHubon"
+
+#: editor.py:718
+msgid "Open External Website?"
+msgstr "Külső weboldal megnyitása?"
+
+#: editor.py:721
+msgid "This will exit the current screenshot process. Do you want to continue?"
+msgstr "Ezzel kilép a jelenlegi képernyőkép-készítési folyamatból. Folytatja?"
+
+#: editor.py:765
+msgid "Save Screenshot"
+msgstr "Képernyőkép mentése"
+
+#: editor.py:795
+msgid "Copying..."
+msgstr "Másolás...."
+
+#: editor.py:855
+msgid "Copied"
+msgstr "Másolva"
+
+#: editor.py:864
+msgid "Screenshot Saved"
+msgstr "Képernyőkép mentve"
+
+#: editor.py:865
+msgid "Saved to {}"
+msgstr "Mentve ide: {}"
+
+#: launcher.py:83
+msgid "Wayland Mode — Capture via Desktop Portal"
+msgstr "Wayland mód – Rögzítés asztali portálon keresztül"
+
+#: launcher.py:83
+msgid "X11 Mode — Instant Pixel Capture"
+msgstr "X11 mód — Azonnali pixelrögzítés"
+
+#: launcher.py:92
+msgid "Hint: Pick 'Screen' in the portal to capture overlapping windows."
+msgstr "Tipp: Válassza a „Képernyő” lehetőséget a portálon az átfedő ablakok rögzítéséhez."
+
+#: launcher.py:105
+msgid "Select Monitor:"
+msgstr "Monitor kiválasztása:"
+
+#: launcher.py:107
+msgid "All Monitors"
+msgstr "Minden monitor"
+
+#: launcher.py:109
+msgid "Monitor {}"
+msgstr "Monitor {}"
+
+#: launcher.py:115
+msgid "📸  Capture Fullscreen"
+msgstr "📸  Teljes képernyő rögzítése"
+
+#: launcher.py:120
+msgid "✂️  Select Area"
+msgstr "✂️  Terültet kiválasztása"
+
+#: launcher.py:127
+msgid "⏱  Timed Capture"
+msgstr "⏱  Időzített rögzítés"
+
+#: launcher.py:134
+msgid "sec"
+msgstr "sec"
+
+#: main.py:117
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your system's package manager.\n"
+"(Debian/Ubuntu package names shown as reference)"
+msgstr ""
+"A következő függőségek hiányoznak:\n"
+"\n"
+"{}\n"
+"\n"
+"Kérjük, telepítse őket a rendszer csomagkezelőjével.\n"
+"(A Debian/Ubuntu csomagnevek referenciaként jelennek meg)"
+
+#: main.py:120
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your package manager:\n"
+"  {} {}"
+msgstr ""
+"A következő függőségek hiányoznak:\n"
+"\n"
+"{}\n"
+"\n"
+"Kérjük, telepítse őket a csomagkezelőjével:\n"
+"{} {}"
+
+#: main.py:126
+msgid "Mint Screenshot \\u2014 Missing Dependencies"
+msgstr "Mint képernyőkép \\u2014 Hiányzó függőségek"

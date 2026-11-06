@@ -1,0 +1,118 @@
+# GEARS
+# This file is put in the public domain.
+# claudiux, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Gears@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-17 20:31+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:71
+msgid "Refresh"
+msgstr "Ricarica"
+
+#. settings-schema.json->alwaysOnTop->description
+#. applet.js:74
+msgid "Always on top"
+msgstr "Sempre in primo piano"
+
+#. applet.js:85
+msgid "View logs"
+msgstr "Visualizza log"
+
+#. metadata.json->description
+msgid "Runs glxgears with options"
+msgstr "Esegue glxgears con opzioni"
+
+#. metadata.json->name
+msgid "Gears"
+msgstr "Gears"
+
+#. settings-schema.json->pageGeneral->title
+msgid "glxgears"
+msgstr "glxgears"
+
+#. settings-schema.json->sectionOptions->title
+msgid "Options"
+msgstr "Opzioni"
+
+#. settings-schema.json->sectionLogging->title
+msgid "Logging"
+msgstr "Logging"
+
+#. settings-schema.json->useSymbolicIcon->description
+msgid "Use a symbolic icon"
+msgstr "Usa un'icona simbolica"
+
+#. settings-schema.json->activeColor->description
+msgid "Icon color while glxgears is running"
+msgstr "Colore dell'icona mentre glxgears è in esecuzione"
+
+#. settings-schema.json->fullscreenMode->description
+msgid "Fullscreen Mode"
+msgstr "Modalità a schermo intero"
+
+#. settings-schema.json->fullscreenMode->tooltip
+msgid "Once in fullscreen mode, press the Esc key to quit glxgears."
+msgstr ""
+"Una volta in modalità a schermo intero, premere il tasto Esc per uscire da "
+"glxgears."
+
+#. settings-schema.json->loopEvery->description
+msgid "Check glxgears status every (seconds)"
+msgstr "Controlla lo stato di glxgears ogni (secondi)"
+
+#. settings-schema.json->loopEvery->options
+msgid "Never"
+msgstr "Mai"
+
+#. settings-schema.json->loopEvery->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->loopEvery->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->loopEvery->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->loopEvery->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->loopEvery->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->loopEvery->options
+msgid "60"
+msgstr "60"
+
+#. settings-schema.json->typeOfLogging->description
+msgid "Type of logging"
+msgstr "Tipo di logging"
+
+#. settings-schema.json->typeOfLogging->options
+msgid "None"
+msgstr "Nessuno"
+
+#. settings-schema.json->typeOfLogging->options
+msgid "On hard disk"
+msgstr "Su disco rigido"
+
+#. settings-schema.json->typeOfLogging->options
+msgid "On RAM disk"
+msgstr "Su disco RAM"

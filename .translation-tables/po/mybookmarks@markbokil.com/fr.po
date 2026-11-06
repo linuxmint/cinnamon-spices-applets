@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 11:14+0800\n"
+"PO-Revision-Date: 2023-05-09 21:45+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. mybookmarks@markbokil.com->metadata.json->name
+#: applet.js:60
+msgid "My Bookmarks"
+msgstr "Mes signets web"
+
+#: applet.js:142
+msgid "Edit bookmarks menu"
+msgstr "Modifier le menu des signets web"
+
+#: applet.js:149 mybookmarks.properties:44
+msgid "Help"
+msgstr "Aide"
+
+#: applet.js:153
+msgid "About"
+msgstr "À propos"
+
+#: mybookmarks.properties:6
+msgid "Blogger"
+msgstr "Blogueur/Blogueuse"
+
+#: mybookmarks.properties:7
+msgid "Talk"
+msgstr "Discussion"
+
+#: mybookmarks.properties:8
+msgid "Voice"
+msgstr "Voix"
+
+#: mybookmarks.properties:9
+msgid "Translate"
+msgstr "Traduction"
+
+#: mybookmarks.properties:10
+msgid "Play"
+msgstr "Jeux"
+
+#: mybookmarks.properties:11
+msgid "Books"
+msgstr "Livres"
+
+#: mybookmarks.properties:12
+msgid "Reader"
+msgstr "Lecteur"
+
+#: mybookmarks.properties:13
+msgid "Maps"
+msgstr "Maps"
+
+#: mybookmarks.properties:14
+msgid "Youtube"
+msgstr "Youtube"
+
+#: mybookmarks.properties:15
+msgid "iGoogle"
+msgstr "iGoogle"
+
+#: mybookmarks.properties:17
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#: mybookmarks.properties:18
+msgid "Google Search"
+msgstr "Recherche Google"
+
+#: mybookmarks.properties:19
+msgid "Advanced Search"
+msgstr "Recherche avancée"
+
+#: mybookmarks.properties:22
+msgid "Computer"
+msgstr "Ordinateur"
+
+#: mybookmarks.properties:23
+msgid "Trash"
+msgstr "Corbeille"
+
+#: mybookmarks.properties:24
+msgid "Home"
+msgstr "Dossier personnel"
+
+#: mybookmarks.properties:25
+msgid "Dropbox"
+msgstr "Dropbox"
+
+#: mybookmarks.properties:26
+msgid "Documents"
+msgstr "Documents"
+
+#: mybookmarks.properties:27
+msgid "Music"
+msgstr "Musique"
+
+#: mybookmarks.properties:28
+msgid "Videos"
+msgstr "Vidéos"
+
+#: mybookmarks.properties:29
+msgid "Pictures"
+msgstr "Images"
+
+#: mybookmarks.properties:30
+msgid "Applets"
+msgstr "Applets"
+
+#: mybookmarks.properties:31
+msgid "Themes"
+msgstr "Thèmes"
+
+#: mybookmarks.properties:33
+msgid "Cinnamon Applets"
+msgstr "Applets Cinnamon"
+
+#: mybookmarks.properties:34
+msgid "Cinnamon Forum"
+msgstr "Forum Cinnamon"
+
+#: mybookmarks.properties:36
+msgid "News"
+msgstr "Nouvelles"
+
+#: mybookmarks.properties:37
+msgid "Google+"
+msgstr "Google+"
+
+#: mybookmarks.properties:38
+msgid "Cloud Storage"
+msgstr "Stockage en ligne"
+
+#: mybookmarks.properties:39
+msgid "Calendar"
+msgstr "Agenda"
+
+#: mybookmarks.properties:40
+msgid "Mail"
+msgstr "Mail"
+
+#: mybookmarks.properties:41
+msgid "Yahoo Mail"
+msgstr "Yahoo Mail"
+
+#: mybookmarks.properties:42
+msgid "Hotmail"
+msgstr "Hotmail"
+
+#. mybookmarks@markbokil.com->metadata.json->description
+msgid "Web apps launcher"
+msgstr "Lanceur d'applications web"

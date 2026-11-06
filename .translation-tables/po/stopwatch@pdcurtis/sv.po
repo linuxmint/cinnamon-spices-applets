@@ -1,0 +1,220 @@
+# Swedish translation for stopwatch@pdcurtis.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: stopwatch@pdcurtis\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2017-05-11 06:36+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: 3.8/applet.js:205
+msgid "Name"
+msgstr ""
+
+#: 3.8/applet.js:225
+#, fuzzy
+msgid "Start   "
+msgstr "Starta"
+
+#: 3.8/applet.js:233
+#, fuzzy
+msgid "Pause   "
+msgstr "Pausa"
+
+#: 3.8/applet.js:241
+msgid "Reset   "
+msgstr ""
+
+#: 3.8/applet.js:249
+msgid "Continue  "
+msgstr ""
+
+#: 3.8/applet.js:261
+msgid "Continue from Start"
+msgstr ""
+
+#: 3.8/applet.js:337 3.0/applet.js:205
+msgid "Housekeeping and System Sub Menu"
+msgstr "Underhåll och systemfunktioner"
+
+#: 3.8/applet.js:340 3.0/applet.js:208
+msgid "View the Changelog"
+msgstr "Visa ändringsloggen"
+
+#: 3.8/applet.js:346 3.0/applet.js:214
+msgid "Open the Help file"
+msgstr "Öppna hjälpfilen"
+
+#: 3.8/applet.js:353 3.0/applet.js:221
+msgid "Open stylesheet.css  (Advanced Function)"
+msgstr "Öppna stylesheet.css  (avancerad funktion)"
+
+#: 3.8/applet.js:359 3.0/applet.js:227
+msgid "Open the gnome system monitor (Advanced testing function)"
+msgstr "Öppna Systemövervakaren (systemmätverktyg)"
+
+#: 3.8/applet.js:368 3.0/applet.js:236
+msgid "Configure..."
+msgstr "Konfigurera..."
+
+#: 3.8/applet.js:413 3.0/applet.js:282
+msgid "days"
+msgstr "dagar"
+
+#: 3.8/applet.js:416 3.0/applet.js:285
+msgid "hours"
+msgstr "timmar"
+
+#: 3.8/applet.js:482 3.0/applet.js:340
+msgid "Running for"
+msgstr "Räknar"
+
+#: 3.8/applet.js:482 3.0/applet.js:340
+msgid "Click to Pause"
+msgstr "Klicka för att pausa"
+
+#: 3.8/applet.js:495 3.8/applet.js:497 3.0/applet.js:350 3.0/applet.js:352
+msgid "Paused at"
+msgstr "Pausad på"
+
+#: 3.8/applet.js:495 3.0/applet.js:350
+msgid "Click to Continue Counting"
+msgstr "Klicka för att återuppta tidräkning"
+
+#: 3.8/applet.js:497 3.0/applet.js:352
+msgid "Click to Reset"
+msgstr "Klicka för att återställa"
+
+#: 3.8/applet.js:508 3.0/applet.js:362
+msgid "Ready - Click to Start"
+msgstr "Klar - Klicka för att starta"
+
+#: 3.0/applet.js:159
+msgid "Start"
+msgstr "Starta"
+
+#: 3.0/applet.js:167
+msgid "Pause"
+msgstr "Pausa"
+
+#: 3.0/applet.js:175
+msgid "Reset counter"
+msgstr "Återställ räknaren"
+
+#: 3.0/applet.js:182
+msgid "If paused, continue counting from now"
+msgstr "Om pausad, fortsätt räkna från nu"
+
+#: 3.0/applet.js:193
+msgid "If paused, continue counting from original start time"
+msgstr "Om pausad, fortsätt räkna från ursprunglig starttid"
+
+#. metadata.json->description
+msgid ""
+"Allows one to time activities such as the time online with multiple "
+"instances possible"
+msgstr ""
+"Låter dig klocka aktiviteter såsom online-tid, med möjlighet till flera "
+"instanser"
+
+#. metadata.json->name
+#, fuzzy
+msgid "Stopwatch for Cinnamon"
+msgstr "Stoppur för Cinnamon 1.8+"
+
+#. 3.8->settings-schema.json->head->description
+#. 3.0->settings-schema.json->head->description
+msgid "General Settings for the Stopwatch Applet"
+msgstr "Allmänna inställningar för stoppursprogrammet"
+
+#. 3.8->settings-schema.json->refreshInterval-spinner->units
+#. 3.0->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "sekunder"
+
+#. 3.8->settings-schema.json->refreshInterval-spinner->description
+#. 3.0->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Uppdateringsintervall för panelvisning:"
+
+#. 3.8->settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.0->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have multiple active counters and/or a slow machine"
+msgstr ""
+"Öka eller minska tiden mellan uppdateringarna - Använd långsam uppdatering "
+"om du har flera räknare igång och/eller en långsam dator."
+
+#. 3.8->settings-schema.json->counterTitle->description
+#. 3.0->settings-schema.json->counterTitle->description
+msgid "Provide a meaningful title to the counter"
+msgstr "Ange ett meningsfullt namn på den här räknaren"
+
+#. 3.8->settings-schema.json->counterTitle->tooltip
+#. 3.0->settings-schema.json->counterTitle->tooltip
+msgid ""
+"This forms the first part of the tooltip and is useful for identification if "
+"you have multiple instances of counters - default is Stopwatch"
+msgstr ""
+"Det här anger första delen i verktygsbeskrivningen (mus över) och är "
+"användbart för identifiering om du har flera räknarinstanser igång. "
+"Standardnamn är Stopwatch."
+
+#. 3.8->settings-schema.json->modeContinueCounting->description
+#. 3.0->settings-schema.json->modeContinueCounting->description
+msgid "Check box to continue counting on clicking applet when paused"
+msgstr "Aktivera återupptagen tidräkning vid klick på panelikonen, om pausad"
+
+#. 3.8->settings-schema.json->modeContinueCounting->tooltip
+#. 3.0->settings-schema.json->modeContinueCounting->tooltip
+msgid ""
+"Normal sequence on clicking is 'start -> pause -> reset' this changes to "
+"'start -> pause -> continue -> pause -> continue etc'. In this mode one has "
+"to use the Right Click (Context) Menu to reset the counter"
+msgstr ""
+"Normal sekvens för klick på räknaren är: Starta -> Pausa -> Återställ. Vid "
+"aktivering ändras detta till: Starta -> Pausa -> Återuppta -> Pausa -> "
+"Återuppta ...etc. I detta läge används högerklick (kontextmenyn) för att "
+"återställa räknaren."
+
+#. 3.8->settings-schema.json->displayFullPanel->description
+msgid "Check box to Display Title in Panel"
+msgstr ""
+
+#. 3.8->settings-schema.json->displayFullPanel->tooltip
+msgid ""
+"This provides a more comprehensive panel display but may use more panel space"
+msgstr ""
+
+#. 3.8->settings-schema.json->enableExperimentalFunctions->description
+msgid "Check box to enable some extra functions - Needs Cinnamon Restart"
+msgstr ""
+
+#. 3.8->settings-schema.json->enableExperimentalFunctions->tooltip
+msgid "Provides extra functions requested by users"
+msgstr ""
+
+#. 3.8->settings-schema.json->counterStatus->description
+#. 3.0->settings-schema.json->counterStatus->description
+msgid "Should not be changed"
+msgstr "Bör inte ändras"
+
+#. 3.8->settings-schema.json->startTime->description
+#. 3.8->settings-schema.json->pausedAt->description
+#. 3.0->settings-schema.json->startTime->description
+#. 3.0->settings-schema.json->pausedAt->description
+msgid "Must not be changed"
+msgstr "Får inte ändras"

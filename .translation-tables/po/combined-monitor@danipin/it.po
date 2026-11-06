@@ -1,0 +1,367 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Combined Monitor Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 21:36+0100\n"
+"PO-Revision-Date: 2025-12-15 21:44+0100\n"
+"Last-Translator: Automated Translator <example@example.com>\n"
+"Language-Team: Italian <it@li.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "Slot 1 (Standard)"
+
+msgid "Slot 2 (Empty)"
+msgstr "Slot 2 (Vuoto)"
+
+msgid "Slot 3 (Empty)"
+msgstr "Slot 3 (Vuoto)"
+
+msgid "Separator"
+msgstr "Separatore"
+
+msgid "No Separator"
+msgstr "Nessun Separatore"
+
+msgid "Symbols"
+msgstr "Simboli"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "Icon-White"
+msgstr "Icona-Bianca"
+
+msgid "Icon-Dark"
+msgstr "Icona-Scura"
+
+msgid "No Symbol (Text Label)"
+msgstr "Nessun Simbolo (Etichetta di Testo)"
+
+msgid "TEMP"
+msgstr "TEMP"
+
+msgid "RAM"
+msgstr "RAM"
+
+msgid "SWAP"
+msgstr "SWAP"
+
+msgid "Profile Management"
+msgstr "Gestione Profili"
+
+msgid "Activate (Load)"
+msgstr "Attiva (Carica)"
+
+msgid "Save Current Settings"
+msgstr "Salva Impostazioni Correnti"
+
+msgid "System Monitor"
+msgstr "Monitor di Sistema"
+
+msgid "Restart Cinnamon"
+msgstr "Riavvia Cinnamon"
+
+msgid "Profile Saved: %s"
+msgstr "Profilo Salvato: %s"
+
+msgid "Active: %s"
+msgstr "Attivo: %s"
+
+msgid "N/A"
+msgstr "N/D"
+
+# settings-schema.json strings (Descriptions, Tooltips, Options)
+
+# Page Titles
+msgid "CPU Temperature"
+msgstr "Temperatura CPU"
+
+msgid "Profiles"
+msgstr "Profili"
+
+msgid "General"
+msgstr "Generale"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "Ordine delle Metriche"
+
+msgid "Display"
+msgstr "Visualizzazione"
+
+msgid "Thresholds"
+msgstr "Soglie"
+
+msgid "Colors"
+msgstr "Colori"
+
+msgid "Thresholds (in °C)"
+msgstr "Soglie (in °C)"
+
+msgid "Settings"
+msgstr "Impostazioni"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "Profili (Slot da 1 a 3)"
+
+msgid "Global"
+msgstr "Globale"
+
+# CPU
+msgid "Show CPU"
+msgstr "Mostra CPU"
+
+msgid "Text for CPU"
+msgstr "Testo per CPU"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "Simbolo/icona personalizzata per CPU. Lasciare vuoto per l'etichetta di testo."
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "Mostra il segno di percentuale (%) per CPU"
+
+msgid "If disabled, only the value (e.g., '45') is displayed without the percentage sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in the 'General' tab acts as a master switch."
+msgstr "Se disabilitato, viene visualizzato solo il valore (ad esempio, '45') senza il segno di percentuale (ad esempio, '45%'). L'opzione 'Mostra il segno di percentuale (%) (Interruttore Principale)' nella scheda 'Generale' funge da interruttore principale."
+
+msgid "Threshold LOW"
+msgstr "Soglia BASSA"
+
+msgid "The LOW color is used below this value"
+msgstr "Il colore BASSO viene utilizzato al di sotto di questo valore"
+
+msgid "Threshold MED"
+msgstr "Soglia MEDIA"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "Il colore MEDIO viene utilizzato tra BASSO e MEDIO"
+
+msgid "Threshold HIGH"
+msgstr "Soglia ALTA"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "Il colore ALTO viene utilizzato tra MEDIO e ALTO"
+
+msgid "Enable color change for CPU"
+msgstr "Abilita cambio colore per CPU"
+
+msgid "Color LOW"
+msgstr "Colore BASSO"
+
+msgid "Color MED"
+msgstr "Colore MEDIO"
+
+msgid "Color HIGH"
+msgstr "Colore ALTO"
+
+msgid "Color CRITICAL"
+msgstr "Colore CRITICO"
+
+msgid "Used above the HIGH threshold"
+msgstr "Usato sopra la soglia ALTA"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "Mostra Temperatura"
+
+msgid "Enables the display of CPU temperature. **Important:** On many systems, installing the 'lm-sensors' package and running 'sudo sensors-detect' is necessary for this function to work correctly. Please refer to the instructions in the README.md."
+msgstr "Abilita la visualizzazione della temperatura della CPU. **Importante:** Su molti sistemi, è necessario installare il pacchetto 'lm-sensors' ed eseguire 'sudo sensors-detect' affinché questa funzione funzioni correttamente. Si prega di consultare le istruzioni nel README.md."
+
+msgid "Show °C symbol"
+msgstr "Mostra simbolo °C"
+
+msgid "Controls whether the Celsius symbol (°C or °F) should be displayed after the value."
+msgstr "Controlla se il simbolo Celsius (°C o °F) deve essere visualizzato dopo il valore."
+
+msgid "Text for Temperature"
+msgstr "Testo per Temperatura"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr "Simbolo/icona personalizzata per la Temperatura. Lasciare vuoto per l'etichetta di testo."
+
+msgid "Unit of Measurement"
+msgstr "Unità di Misura"
+
+msgid "Celsius (°C)"
+msgstr "Celsius (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "Fahrenheit (°F)"
+
+msgid "Choose whether the temperature should be displayed in Celsius or Fahrenheit. Threshold values must be adjusted accordingly."
+msgstr "Scegliere se la temperatura deve essere visualizzata in Celsius o Fahrenheit. I valori di soglia devono essere regolati di conseguenza."
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr "Il colore BASSO viene utilizzato al di sotto di questo valore (si applica a °C e °F)"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr "Il colore MEDIO viene utilizzato tra BASSO e MEDIO (si applica a °C e °F)"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr "Il colore ALTO viene utilizzato tra MEDIO e ALTO (si applica a °C e °F)"
+
+msgid "Enable color change for TEMP"
+msgstr "Abilita cambio colore per TEMP"
+
+msgid "Color LOW (Green)"
+msgstr "Colore BASSO (Verde)"
+
+msgid "Color MED (Orange)"
+msgstr "Colore MEDIO (Arancione)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "Colore ALTO (Rosso-Arancione)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "Colore CRITICO (Rosso)"
+
+# RAM
+msgid "Show RAM"
+msgstr "Mostra RAM"
+
+msgid "Text for RAM"
+msgstr "Testo per RAM"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "Simbolo/icona personalizzata per RAM. Lasciare vuoto per l'etichetta di testo."
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "Mostra il segno di percentuale (%) per RAM"
+
+msgid "Display Mode"
+msgstr "Modalità di Visualizzazione"
+
+msgid "Percentage Usage (%)"
+msgstr "Utilizzo Percentuale (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "Memoria Utilizzata (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "Memoria Libera (MB/GB)"
+
+msgid "Choose whether percentage usage or used/free memory in MB/GB should be displayed."
+msgstr "Scegliere se visualizzare l'utilizzo percentuale o la memoria utilizzata/libera in MB/GB."
+
+msgid "Enable color change for RAM"
+msgstr "Abilita cambio colore per RAM"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "Mostra SWAP"
+
+msgid "Text for SWAP"
+msgstr "Testo per SWAP"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr "Simbolo/icona personalizzata per SWAP. Lasciare vuoto per l'etichetta di testo."
+
+msgid "Only show SWAP when used"
+msgstr "Mostra SWAP solo quando è in uso"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr "Se attivo, mostra SWAP solo quando l'utilizzo è maggiore dello 0%."
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "Mostra il segno di percentuale (%) per SWAP"
+
+msgid "Enable color change for SWAP"
+msgstr "Abilita cambio colore per SWAP"
+
+msgid "If the value is less than or equal to the LOW threshold, the LOW color is used."
+msgstr "Se il valore è inferiore o uguale alla soglia BASSA, viene utilizzato il colore BASSO."
+
+msgid "If the value is greater than LOW and less than or equal to the MED threshold, the MED color is used."
+msgstr "Se il valore è maggiore di BASSA e inferiore o uguale alla soglia MEDIA, viene utilizzato il colore MEDIO."
+
+msgid "If the value is greater than MED and less than or equal to the HIGH threshold, the HIGH color is used."
+msgstr "Se il valore è maggiore di MEDIA e inferiore o uguale alla soglia ALTA, viene utilizzato il colore ALTO."
+
+# Order
+msgid "CPU Position"
+msgstr "Posizione CPU"
+
+msgid "Position 1 (Left)"
+msgstr "Posizione 1 (Sinistra)"
+
+msgid "Position 2"
+msgstr "Posizione 2"
+
+msgid "Position 3"
+msgstr "Posizione 3"
+
+msgid "Position 4 (Right)"
+msgstr "Posizione 4 (Destra)"
+
+msgid "Defines the display position of CPU. The position is automatically swapped with the metric at the same position."
+msgstr "Definisce la posizione di visualizzazione della CPU. La posizione viene scambiata automaticamente con la metrica nella stessa posizione."
+
+msgid "TEMP Position"
+msgstr "Posizione TEMP"
+
+msgid "RAM Position"
+msgstr "Posizione RAM"
+
+msgid "SWAP Position"
+msgstr "Posizione SWAP"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "Intervallo di Aggiornamento (ms)"
+
+msgid "Show separator between metrics"
+msgstr "Mostra separatore tra le metriche"
+
+msgid "Separator Text"
+msgstr "Testo del Separatore"
+
+msgid "Separator Color"
+msgstr "Colore del Separatore"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "Mostra il segno di percentuale (%) (Interruttore Principale)"
+
+msgid "If disabled, only the value (e.g., '45') is displayed for all percentage displays without the percentage sign (e.g., '45%'). Individual switches for CPU/RAM/SWAP must also be active."
+msgstr "Se disabilitato, viene visualizzato solo il valore (ad esempio, '45') per tutte le visualizzazioni in percentuale senza il segno di percentuale (ad esempio, '45%'). Anche gli interruttori individuali per CPU/RAM/SWAP devono essere attivi."
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "Durata del Messaggio del Profilo (Secondi)"
+
+msgid "How long should the message ('Profile saved', 'Profile active') be displayed in the panel."
+msgstr "Per quanto tempo il messaggio ('Profilo salvato', 'Profilo attivo') deve essere visualizzato nel pannello."
+
+msgid "Profile 1 Name"
+msgstr "Nome Profilo 1"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "Inserisci un nome profilo personalizzato nel campo di testo!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr "Fare clic su 'Attiva' o 'Salva' per il Profilo 1 nel menu a comparsa."
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "Dati salvati per il Profilo 1 (interno)"
+
+msgid "Profile 2 Name"
+msgstr "Nome Profilo 2"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr "Fare clic su 'Attiva' o 'Salva' per il Profilo 2 nel menu a comparsa."
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "Dati salvati per il Profilo 2 (interno)"
+
+msgid "Profile 3 Name"
+msgstr "Nome Profilo 3"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr "Fare clic su 'Attiva' o 'Salva' per il Profilo 3 nel menu a comparsa."
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "Dati salvati per il Profilo 3 (interno)"

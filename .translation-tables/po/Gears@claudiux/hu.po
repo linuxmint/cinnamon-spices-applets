@@ -1,0 +1,117 @@
+# GEARS
+# This file is put in the public domain.
+# claudiux, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Gears@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-17 20:31+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#. applet.js:71
+msgid "Refresh"
+msgstr "Frissítés"
+
+#. settings-schema.json->alwaysOnTop->description
+#. applet.js:74
+msgid "Always on top"
+msgstr "Mindig felül"
+
+#. applet.js:85
+msgid "View logs"
+msgstr "Naplók megtekintése"
+
+#. metadata.json->description
+msgid "Runs glxgears with options"
+msgstr "Futtatja a glxgears-t opciókkal"
+
+#. metadata.json->name
+msgid "Gears"
+msgstr "Gears"
+
+#. settings-schema.json->pageGeneral->title
+msgid "glxgears"
+msgstr "glxgears"
+
+#. settings-schema.json->sectionOptions->title
+msgid "Options"
+msgstr "Beállítások"
+
+#. settings-schema.json->sectionLogging->title
+msgid "Logging"
+msgstr "Naplózás"
+
+#. settings-schema.json->useSymbolicIcon->description
+msgid "Use a symbolic icon"
+msgstr "Használjon szimbolikus ikont"
+
+#. settings-schema.json->activeColor->description
+msgid "Icon color while glxgears is running"
+msgstr "Ikon színe a glxgears futása közben"
+
+#. settings-schema.json->fullscreenMode->description
+msgid "Fullscreen Mode"
+msgstr "Teljes képernyős mód"
+
+#. settings-schema.json->fullscreenMode->tooltip
+msgid "Once in fullscreen mode, press the Esc key to quit glxgears."
+msgstr ""
+"Teljes képernyős módban nyomd meg az Esc billentyűt a glxgears bezárásához."
+
+#. settings-schema.json->loopEvery->description
+msgid "Check glxgears status every (seconds)"
+msgstr "A glxgears állapotának ellenőrzése (másodpercenként)"
+
+#. settings-schema.json->loopEvery->options
+msgid "Never"
+msgstr "Sose"
+
+#. settings-schema.json->loopEvery->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->loopEvery->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->loopEvery->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->loopEvery->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->loopEvery->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->loopEvery->options
+msgid "60"
+msgstr "60"
+
+#. settings-schema.json->typeOfLogging->description
+msgid "Type of logging"
+msgstr "Naplózás típusa"
+
+#. settings-schema.json->typeOfLogging->options
+msgid "None"
+msgstr "Semmi"
+
+#. settings-schema.json->typeOfLogging->options
+msgid "On hard disk"
+msgstr "A merevlemezen"
+
+#. settings-schema.json->typeOfLogging->options
+msgid "On RAM disk"
+msgstr "A RAM lemezen"

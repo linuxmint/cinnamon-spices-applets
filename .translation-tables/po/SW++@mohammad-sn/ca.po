@@ -1,0 +1,130 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2024-07-10 01:52+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:102
+msgid "desktop"
+msgstr "escriptori"
+
+#. applet.js:316
+msgid "No open windows"
+msgstr "No hi ha finestres obertes"
+
+#. applet.js:326
+msgid "Expo"
+msgstr "Expo"
+
+#. metadata.json->description
+msgid ""
+"click to show/hide desktop, scroll to switch workspace and windows quick "
+"list by right click"
+msgstr ""
+"clic per a mostrar/amagar l'escriptori, roda del ratolí per a canviar espai "
+"de treball, clic dret per mostrar llista de finestes"
+
+#. metadata.json->name
+msgid "Show desktop ++"
+msgstr "Mostrar Escriptori++"
+
+#. settings-schema.json->head->description
+msgid "Appearance"
+msgstr "Aparença"
+
+#. settings-schema.json->icon-name->description
+msgid "The icon to use in the panel:"
+msgstr "Icona a utilitzar al tauler:"
+
+#. settings-schema.json->icon-name->tooltip
+msgid ""
+"Select an icon file, or you can type an icon name into the entry box, for "
+"example: desktop"
+msgstr "Seleccioneu un fitxer d'icona o escriviu-ne el nom"
+
+#. settings-schema.json->width->units
+msgid "pixels"
+msgstr "píxels"
+
+#. settings-schema.json->width->description
+msgid "Applet width in the panel:"
+msgstr "Amplada de la miniaplicació al tauler:"
+
+#. settings-schema.json->width->tooltip
+msgid ""
+"Increase or decrease this spinner value to make the applet wider or narrower "
+"in the panel"
+msgstr "Incrementeu o reduïu l'amplada de la miniaplicació al tauler"
+
+#. settings-schema.json->color->description
+msgid "The background color for the applet hover:"
+msgstr "Color de fons en passar el ratolí per la miniaplicació:"
+
+#. settings-schema.json->color->tooltip
+msgid "Click the button to select a new background color for applet"
+msgstr ""
+"Cliqueu el botó per seleccionar un nou color de fons per a la miniaplicació"
+
+#. settings-schema.json->highlight->description
+msgid "Highlight applet next time it is added to the panel"
+msgstr ""
+"Ressaltar la miniaplicació la propera vegada que sigui afegida al tauler"
+
+#. settings-schema.json->head1->description
+msgid "Menu options"
+msgstr "Opcions del menú"
+
+#. settings-schema.json->closebuttons->description
+msgid "Show close buttons"
+msgstr "Mostrar botons de tancar"
+
+#. settings-schema.json->closeallbuttons->description
+msgid "Show close all windows buttons for workspaces"
+msgstr "Mostra botons per tancar totes les finestres dels espais de treball"
+
+#. settings-schema.json->SHOW-MENU-ON-CLOSE->description
+msgid "Keep menu open while closing windows"
+msgstr "Mantenir el menú obert mentre es tanquin les finestres"
+
+#. settings-schema.json->head2->description
+msgid "Peek at desktop"
+msgstr "Efectes en mostrar l'escriptori"
+
+#. settings-schema.json->peekatdesktop->description
+msgid "Opacify windows on hover"
+msgstr "Aplicar opacitat a les finestres en passar-hi el cursor per sobre"
+
+#. settings-schema.json->peekatdesktop->tooltip
+msgid "Take a glance at your desktop and desklets."
+msgstr "Donar una ollada al vostre escriptori i les vostres miniaplicacions."
+
+#. settings-schema.json->alsoopacifyskiptaskbar->description
+msgid "Opacify the icons on the desktop"
+msgstr "Aplicar opacitat a les icones de l'escriptori"
+
+#. settings-schema.json->alsoopacifydesklets->description
+msgid "Opacify desklets"
+msgstr "Aplicar opacitat a les miniaplicacions d'escriptori"
+
+#. settings-schema.json->peekopacity->description
+msgid "Opacity on hover:"
+msgstr "Opacitat en passar el ratolí per sobre:"
+
+#. settings-schema.json->blur->description
+msgid "Blur windows on hover"
+msgstr "Difumina les finestres en passar-hi el ratolí per sobre"

@@ -1,0 +1,282 @@
+# PROCESS MEMORY MONITOR
+# This file is put in the public domain.
+# claudiux, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ProcessMemoryMonitor@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-29 14:35+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:58
+msgid "Click to reset or reconnect to the process"
+msgstr "Nhấn để đặt lại hoặc kết nối lại với tiến trình"
+
+#. applet.js:62
+msgid "Variation:"
+msgstr "Biến thể:"
+
+#. applet.js:63
+msgid "Process:"
+msgstr "Tiến trình:"
+
+#. applet.js:64
+msgid "PID:"
+msgstr "PID:"
+
+#. applet.js:65
+msgid "Elapsed:"
+msgstr "Đã trôi qua:"
+
+#. applet.js:66
+msgid "Start:"
+msgstr "Bắt đầu:"
+
+#. applet.js:67
+msgid "Diff:"
+msgstr "Chênh lệch:"
+
+#. applet.js:68
+msgid "Max:"
+msgstr "Tối đa:"
+
+#. applet.js:69
+msgid "Value:"
+msgstr "Giá trị:"
+
+#. applet.js:70
+msgid "Min:"
+msgstr "Tối thiểu:"
+
+#. applet.js:71
+msgid "Refresh interval:"
+msgstr "Khoảng thời gian làm mới:"
+
+#. applet.js:204
+msgid "MiB"
+msgstr "MiB"
+
+#. applet.js:206
+msgid "kiB/min"
+msgstr "kiB/phút"
+
+#. applet.js:431
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Xóa '%s'"
+
+#. applet.js:439
+msgid "About..."
+msgstr "Thông tin..."
+
+#. applet.js:458
+msgid "Configure..."
+msgstr "Cấu hình..."
+
+#. applet.js:475 applet.js:503
+#, javascript-format
+msgid "Refresh interval: %s seconds"
+msgstr "Khoảng thời gian làm mới: %s giây"
+
+#. settings-schema.json->sysmon-button->description
+#. applet.js:480
+msgid "Open System Monitor"
+msgstr "Mở Trình Giám Sát Hệ Thống"
+
+#. metadata.json->description
+msgid "Monitors memory usage of Cinnamon or any other process"
+msgstr "Theo dõi mức sử dụng bộ nhớ của Cinnamon hoặc bất kỳ tiến trình nào khác"
+
+#. metadata.json->name
+msgid "Process Memory Monitor"
+msgstr "Trình Giám Sát Bộ Nhớ Tiến Trình"
+
+#. settings-schema.json->page-process->title
+msgid "Process"
+msgstr "Tiến trình"
+
+#. settings-schema.json->page-characters->title
+msgid "Characters"
+msgstr "Ký tự"
+
+#. settings-schema.json->page-abbrev->title
+#. settings-schema.json->section-abbrev->title
+msgid "Abbreviations"
+msgstr "Viết tắt"
+
+#. settings-schema.json->page-style->title
+#. settings-schema.json->section-style->title
+msgid "Style"
+msgstr "Phong cách"
+
+#. settings-schema.json->section-process->title
+msgid "Process to monitor"
+msgstr "Tiến trình cần giám sát"
+
+#. settings-schema.json->section-sysmon->title
+msgid "System Monitor"
+msgstr "Trình Giám Sát Hệ Thống"
+
+#. settings-schema.json->section-char-var->title
+msgid "Variation characters"
+msgstr "Ký tự biến thể"
+
+#. settings-schema.json->process-name->description
+msgid ""
+"Name of process or PID to be monitored (by default, the Cinnamon process is "
+"used)"
+msgstr "Tên tiến trình hoặc PID cần giám sát (mặc định là tiến trình Cinnamon)"
+
+#. settings-schema.json->process-name->tooltip
+msgid ""
+"Set the name of the process or PID you want to monitor here.\n"
+"Note that, for the moment, no consideration is given to multiple instances "
+"of the same program (undefined behavior).\n"
+"Open the system monitor to see all running processes."
+msgstr "Đặt tên tiến trình hoặc PID bạn muốn giám sát tại đây.\nHiện tại chưa hỗ trợ nhiều phiên bản cùng một chương trình (hành vi không xác định).\nMở trình giám sát hệ thống để xem tất cả tiến trình đang chạy."
+
+#. settings-schema.json->pn-button->description
+msgid "Apply"
+msgstr "Áp dụng"
+
+#. settings-schema.json->reset-pn-button->description
+msgid "Reset to Cinnamon"
+msgstr "Đặt lại về Cinnamon"
+
+#. settings-schema.json->char-max->description
+msgid "Max value exceeded ⬆"
+msgstr "Vượt giá trị tối đa ⬆"
+
+#. settings-schema.json->char-max->tooltip
+#. settings-schema.json->char-up->tooltip
+#. settings-schema.json->char-flat->tooltip
+#. settings-schema.json->char-down->tooltip
+#. settings-schema.json->char-min->tooltip
+msgid "Emoji accepted. Empty to return to the default value."
+msgstr "Cho phép emoji. Để trống để về giá trị mặc định."
+
+#. settings-schema.json->char-up->description
+msgid "Increasing ↗"
+msgstr "Tăng ↗"
+
+#. settings-schema.json->char-flat->description
+msgid "Staying constant ➡"
+msgstr "Không đổi ➡"
+
+#. settings-schema.json->char-down->description
+msgid "Decreasing ↘"
+msgstr "Giảm ↘"
+
+#. settings-schema.json->char-min->description
+msgid "Min value exceeded ⬇"
+msgstr "Vượt giá trị tối thiểu ⬇"
+
+#. settings-schema.json->no-char-var->description
+msgid "Do not display any Variation character"
+msgstr "Không hiển thị ký tự biến thể nào"
+
+#. settings-schema.json->abbrev-MiB->description
+msgid "Abbreviation for mebibyte (default: MiB)"
+msgstr "Viết tắt cho mebibyte (mặc định: MiB)"
+
+#. settings-schema.json->abbrev-MiB->tooltip
+msgid "1 MiB = 1024 kiB"
+msgstr "1 MiB = 1024 kiB"
+
+#. settings-schema.json->abbrev-kpm->description
+msgid "Abbreviation for kibibyte per minute (default: kiB/min)"
+msgstr "Viết tắt cho kibibyte mỗi phút (mặc định: kiB/phút)"
+
+#. settings-schema.json->abbrev-kpm->tooltip
+msgid "1 kiB = 1024 B"
+msgstr "1 kiB = 1024 B"
+
+#. settings-schema.json->style-font-weight->description
+msgid "Font weight"
+msgstr "Độ đậm chữ"
+
+#. settings-schema.json->style-font-weight->options
+msgid "normal"
+msgstr "Bình thường"
+
+#. settings-schema.json->style-font-weight->options
+msgid "bold"
+msgstr "Đậm"
+
+#. settings-schema.json->style-font-family->description
+msgid "Font family"
+msgstr "Kiểu chữ"
+
+#. settings-schema.json->style-font-family->options
+msgid "monospace"
+msgstr "Đơn cách"
+
+#. settings-schema.json->style-font-family->options
+msgid "sans-serif"
+msgstr "Sans-serif"
+
+#. settings-schema.json->style-font-family->options
+msgid "serif"
+msgstr "Serif"
+
+#. settings-schema.json->style-font-family->options
+msgid "cursive"
+msgstr "Cursive"
+
+#. settings-schema.json->style-font-family->options
+msgid "fantasy"
+msgstr "Fantasy"
+
+#. settings-schema.json->style-font-family->tooltip
+msgid "Select monospace to ensure display stability."
+msgstr "Chọn đơn cách để đảm bảo hiển thị ổn định."
+
+#. settings-schema.json->style-font-size->description
+msgid "Font size"
+msgstr "Cỡ chữ"
+
+#. settings-schema.json->style-font-size->options
+msgid "xx-small"
+msgstr "Rất nhỏ"
+
+#. settings-schema.json->style-font-size->options
+msgid "x-small"
+msgstr "Nhỏ"
+
+#. settings-schema.json->style-font-size->options
+msgid "small"
+msgstr "Nhỏ vừa"
+
+#. settings-schema.json->style-font-size->options
+msgid "medium"
+msgstr "Trung bình"
+
+#. settings-schema.json->style-font-size->options
+msgid "large"
+msgstr "Lớn"
+
+#. settings-schema.json->style-font-size->options
+msgid "x-large"
+msgstr "Rất lớn"
+
+#. settings-schema.json->style-font-size->options
+msgid "xx-large"
+msgstr "Cực lớn"
+
+#. settings-schema.json->style-customized-width->description
+msgid "Custom width"
+msgstr "Chiều rộng tùy chỉnh"
+
+#. settings-schema.json->style-label-width->description
+msgid "Label's width (pixels)"
+msgstr "Chiều rộng nhãn (pixel)"

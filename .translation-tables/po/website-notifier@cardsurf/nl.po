@@ -1,0 +1,213 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: website-notifier@cardsurf 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-22 10:06+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->description
+msgid "Shows a notification when a website updates"
+msgstr "Toon een notificatie wanneer een website wordt bijgewerkt"
+
+#. metadata.json->name
+msgid "Website notifier"
+msgstr "Website melder"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Configuratie"
+
+#. settings-schema.json->update_every->units
+msgid "minutes"
+msgstr "minuten"
+
+#. settings-schema.json->update_every->description
+msgid "Refresh every"
+msgstr "Ververs elke"
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to refresh a website. 0 means no refreshing."
+msgstr "Hoe vaak een website wordt vernieuwd. 0 betekent geen vernieuwing."
+
+#. settings-schema.json->notification_type->description
+msgid "Notification type"
+msgstr "Notificatietype"
+
+#. settings-schema.json->notification_type->options
+msgid "System popup"
+msgstr "Systeempopup"
+
+#. settings-schema.json->notification_type->options
+msgid "Applet popup"
+msgstr "Appletpopup"
+
+#. settings-schema.json->notification_type->tooltip
+msgid "A user interface that shows notficiation text"
+msgstr "Een gebruikersinterface die notificatietekst toont"
+
+#. settings-schema.json->tooltip_type->description
+msgid "Tooltip text"
+msgstr "Tooltip-tekst"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Time left next refresh"
+msgstr "Tijd over tot volgende vernieuwing"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Next refresh time"
+msgstr "Tijd van volgende vernieuwing"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last refresh time"
+msgstr "Laatste vernieuwingstijd"
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last notification time"
+msgstr "Laatste notificatietijd"
+
+#. settings-schema.json->tooltip_type->options
+msgid "None"
+msgstr "Geen"
+
+#. settings-schema.json->tooltip_type->tooltip
+msgid "Text shown in an applet tooltip"
+msgstr "Tekst getoond in een applet-tooltiptekst"
+
+#. settings-schema.json->primary_button_type->description
+msgid "Primary button"
+msgstr "Primaire knop"
+
+#. settings-schema.json->primary_button_type->options
+msgid "Left"
+msgstr "Links"
+
+#. settings-schema.json->primary_button_type->options
+msgid "Middle"
+msgstr "Midden"
+
+#. settings-schema.json->primary_button_type->tooltip
+msgid ""
+"A mouse button used to perform main actions.\n"
+"The primary button refreshes a website on demand.\n"
+"The secondary button toggles an applet popup."
+msgstr ""
+"Een muisknop gebruikt om hoofdacties uit te voeren.\n"
+"De primaire knop vernieuwt een website op verzoek.\n"
+"De secundaire knop schakelt een applet-popup in en uit."
+
+#. settings-schema.json->applet_popup_click_type->description
+msgid "On popup clicked"
+msgstr "Bij klikken op popup"
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup and open browser"
+msgstr "Sluit popup en open browser"
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup"
+msgstr "Sluit popup"
+
+#. settings-schema.json->applet_popup_click_type->tooltip
+msgid "An action to perform when an applet popup is clicked"
+msgstr "Een actie om uit te voeren wanneer op een applet-popup wordt geklikt"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Grafische gebruikersinterface"
+
+#. settings-schema.json->max_title_length->units
+#. settings-schema.json->max_message_length->units
+msgid "characters"
+msgstr "karakters"
+
+#. settings-schema.json->max_title_length->description
+msgid "Title length"
+msgstr "Titellengte"
+
+#. settings-schema.json->max_title_length->tooltip
+msgid "A maximum number of characters in a notification title"
+msgstr "Het maximum aantal tekens in een notificatietitel"
+
+#. settings-schema.json->max_message_length->description
+msgid "Message length"
+msgstr "Berichtlengte"
+
+#. settings-schema.json->max_message_length->tooltip
+msgid "A maximum number of characters in a notification message"
+msgstr "Het maximum aantal tekens in een notificatiebericht"
+
+#. settings-schema.json->applet_popup_width->units
+#. settings-schema.json->applet_popup_height->units
+msgid "pixels"
+msgstr "pixels"
+
+#. settings-schema.json->applet_popup_width->description
+msgid "Popup width"
+msgstr "Popup-breedte"
+
+#. settings-schema.json->applet_popup_width->tooltip
+msgid "A width of an applet popup"
+msgstr "Breedte van een applet-popup"
+
+#. settings-schema.json->applet_popup_height->description
+msgid "Popup height"
+msgstr "Popup-hoogte"
+
+#. settings-schema.json->applet_popup_height->tooltip
+msgid "A height of an applet popup"
+msgstr "Hoogte van een applet-popup"
+
+#. settings-schema.json->applet_popup_title_css->description
+msgid "Popup title CSS"
+msgstr "Popup-titel CSS"
+
+#. settings-schema.json->applet_popup_title_css->tooltip
+msgid "A CSS style applied to a notification title in an applet popup"
+msgstr "CSS-stijl toegepast op een notificatietitel in een applet-popup"
+
+#. settings-schema.json->applet_popup_message_css->description
+msgid "Popup message CSS"
+msgstr "Popup-bericht CSS"
+
+#. settings-schema.json->applet_popup_message_css->tooltip
+msgid "A CSS style applied to a notification message in an applet popup"
+msgstr "CSS-stijl toegepast op een notificatiebericht in een applet-popup"
+
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Icon"
+msgstr "Pictogram"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "An icon displayed in a panel"
+msgstr "Pictogram weergegeven in een paneel"
+
+#. settings-schema.json->scripts_start->description
+msgid "Scripts"
+msgstr "Scripts"
+
+#. settings-schema.json->script_filepath->description
+msgid "Script"
+msgstr "Script"
+
+#. settings-schema.json->script_filepath->tooltip
+msgid "A path to a script that refeshes a website"
+msgstr "Pad naar een script dat een website vernieuwt"
+
+#. settings-schema.json->script_separator->description
+msgid "Separator "
+msgstr "Scheidingsteken "
+
+#. settings-schema.json->script_separator->tooltip
+msgid "A string that seperates values returned from the script"
+msgstr "Een teken dat waarden scheidt die worden geretourneerd door het script"

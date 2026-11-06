@@ -1,0 +1,126 @@
+# DIRECT
+# This file is put in the public domain.
+# claudiux, 2025
+#
+msgid ""
+msgstr ""
+
+#. applet.js:638 applet.js:678 applet.js:709 applet.js:740 applet.js:771
+#. applet.js:815
+msgid "Configure"
+msgstr ""
+
+#. applet.js:661
+msgid "SYSTEM"
+msgstr ""
+
+#. applet.js:701
+msgid "FAVORITES"
+msgstr ""
+
+#. applet.js:732
+msgid "APPLICATIONS"
+msgstr ""
+
+#. applet.js:785
+msgid "Clear"
+msgstr ""
+
+#. applet.js:792
+msgid "Recent"
+msgstr ""
+
+#. applet.js:807
+msgid "CUSTOM"
+msgstr ""
+
+#. applet.js:869
+msgid "Computer"
+msgstr ""
+
+#. applet.js:892
+msgid "Network"
+msgstr ""
+
+#. applet.js:908
+msgid "Logout"
+msgstr ""
+
+#. applet.js:915
+msgid "Quit"
+msgstr ""
+
+#. applet.js:1224
+msgid "Trash"
+msgstr ""
+
+#. search.py:85
+msgid "Search"
+msgstr ""
+
+#. search.py:125
+msgid "Stop"
+msgstr ""
+
+#. search.py:140
+msgid "File"
+msgstr ""
+
+#. settings-schema.json->favoriteSortingMethod->options
+#. search.py:156
+msgid "Path"
+msgstr ""
+
+#. search.py:259
+msgid "Skipping"
+msgstr ""
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr ""
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr ""
+
+#. settings-schema.json->favoritesPage->title
+msgid "Favorites"
+msgstr ""
+
+#. settings-schema.json->customPage->title
+msgid "Custom"
+msgstr ""
+
+#. settings-schema.json->displayOrder->columns->title
+#. settings-schema.json->listUserCustomPlaces->columns->title
+#. settings-schema.json->listSystemCustomPlaces->columns->title
+#. settings-schema.json->favoriteSortingMethod->options
+#. settings-schema.json->favApps->columns->title
+#. settings-schema.json->listCustomDocuments->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->displayOrderApply->description
+msgid "Apply"
+msgstr ""
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr ""
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr ""
+
+#. settings-schema.json->favoriteCustomList->columns->title
+#. settings-schema.json->favApps->columns->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr ""

@@ -1,0 +1,160 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: window-list@zeripath.sdf-eu.org 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-09-15 01:24+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:826
+msgid "Move to the other monitor"
+msgstr "移至其他螢幕"
+
+#: applet.js:836
+#, javascript-format
+msgid "Move to monitor %d"
+msgstr "移至第 %d 個螢幕"
+
+#: applet.js:847
+msgid "Only on this workspace"
+msgstr "僅在此工作區"
+
+#: applet.js:853
+msgid "Visible on all workspaces"
+msgstr "在所有工作區顯示"
+
+#: applet.js:859
+msgid "Move to another workspace"
+msgstr "移至其他工作區"
+
+#: applet.js:882
+msgid "Preferences"
+msgstr "偏好設定"
+
+#: applet.js:885
+msgid "About..."
+msgstr "關於…"
+
+#: applet.js:889
+msgid "Configure..."
+msgstr "設定…"
+
+#: applet.js:893
+msgid "Remove 'Window list'"
+msgstr "移除「視窗清單」"
+
+#: applet.js:902
+msgid "Close all"
+msgstr "全部關閉"
+
+#: applet.js:911
+msgid "Close others"
+msgstr "關閉其他"
+
+#: applet.js:925
+msgid "Restore to full opacity"
+msgstr "恢復為完全不透明"
+
+#: applet.js:933
+msgid "Restore"
+msgstr "還原"
+
+#: applet.js:938
+msgid "Minimize"
+msgstr "最小化"
+
+#: applet.js:946
+msgid "Unmaximize"
+msgstr "取消最大化"
+
+#: applet.js:951
+msgid "Maximize"
+msgstr "最大化"
+
+#: applet.js:958
+msgid "Close"
+msgstr "關閉"
+
+#. metadata.json->name
+msgid "Zeripaths Window list"
+msgstr "Zeripath 視窗清單"
+
+#. metadata.json->description
+msgid "Zeripaths variant of Cinnamon window list"
+msgstr "Zeripath 版本的 Cinnamon 視窗清單"
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr "行為"
+
+#. settings-schema.json->show-all-workspaces->description
+msgid "Show windows from all workspaces"
+msgstr "顯示所有工作區的視窗"
+
+#. settings-schema.json->enable-alerts->description
+msgid ""
+"Show an alert in the window list when a window from another workspace "
+"requires attention"
+msgstr ""
+"當其他工作區的視窗需要注意時，"
+"在視窗清單中顯示警示"
+
+#. settings-schema.json->enable-scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr "在視窗清單中啟用滑鼠滾輪捲動"
+
+#. settings-schema.json->reverse-scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr "反轉視窗清單中滑鼠滾輪捲動的方向"
+
+#. settings-schema.json->middle-click-close->description
+msgid "Middle click to close window"
+msgstr "按下滑鼠中鍵關閉視窗"
+
+#. settings-schema.json->section2->description
+msgid "Display"
+msgstr "顯示"
+
+#. settings-schema.json->buttons-use-entire-space->description
+msgid ""
+"Window buttons can have different sizes and use the entire space available"
+msgstr ""
+"視窗按鈕可以有不同大小並使用所有可用空間"
+
+#. settings-schema.json->window-preview->description
+msgid "Show window thumbnails on hover"
+msgstr "滑鼠游標停留時顯示視窗縮圖"
+
+#. settings-schema.json->window-preview-show-label->description
+msgid "Show title above thumbnail"
+msgstr "在縮圖上方顯示標題"
+
+#. settings-schema.json->window-preview-scale->description
+msgid "Thumbnail size"
+msgstr "縮圖大小"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Small"
+msgstr "小"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Medium"
+msgstr "中"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Large"
+msgstr "大"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Largest"
+msgstr "最大"

@@ -1,0 +1,279 @@
+# APP LAUNCHER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# mchilli, 2021
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-06-11 16:17+0200\n"
+"PO-Revision-Date: 2025-06-11 11:48-0400\n"
+"Last-Translator: haggen88\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:122
+msgid "All workspaces"
+msgstr "Todos los espacios de trabajo"
+
+#. applet.js:150
+msgid "Edit Applications"
+msgstr "Editar aplicaciones"
+
+#. applet.js:886 applet.js:1199
+msgid "Delete"
+msgstr "Borrar"
+
+#. applet.js:887 applet.js:1200
+msgid "Edit"
+msgstr "Editar"
+
+#. applet.js:888 applet.js:1201 dialogs.py:111 dialogs.py:262 dialogs.py:327
+#. dialogs.py:416 widgets.py:73
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. dialogs.py:109 dialogs.py:261 dialogs.py:325 dialogs.py:415
+msgid "OK"
+msgstr "OK"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. dialogs.py:112 dialogs.py:263 widgets.py:47 ui/widget.glade:40
+msgid "Name"
+msgstr "Nombre"
+
+#. settings-schema.json->list-applications->columns->title
+#. dialogs.py:113 dialogs.py:328
+msgid "Group"
+msgstr "Grupo"
+
+#. settings-schema.json->list-applications->columns->title
+#. dialogs.py:114 widgets.py:48 ui/widget.glade:51
+msgid "Command"
+msgstr "Comando"
+
+#. dialogs.py:214 dialogs.py:305
+msgid "Valid name"
+msgstr "Nombre válido"
+
+#. dialogs.py:217 dialogs.py:295
+msgid "The name cannot be empty"
+msgstr "El nombre no puede estar vacío"
+
+#. dialogs.py:222
+msgid "Valid command"
+msgstr "Comando válido"
+
+#. dialogs.py:225
+msgid "The command is not valid"
+msgstr "El comando no es válido"
+
+#. dialogs.py:299
+msgid "The name is already used"
+msgstr "El nombre ya está siendo utilizado"
+
+#. dialogs.py:414
+msgid "Which data should be replaced from *.desktop file?"
+msgstr "¿Qué datos deben reemplazarse del archivo * .desktop?"
+
+#. dialogs.py:458
+msgid "really delete?"
+msgstr "¿realmente lo desea borrar?"
+
+#. dialogs.py:459
+msgid "No"
+msgstr "No"
+
+#. dialogs.py:460
+msgid "Yes"
+msgstr "Sí"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+#. widgets.py:46 ui/widget.glade:29
+msgid "Icon"
+msgstr "Icono"
+
+#. widgets.py:51
+msgid "Add application"
+msgstr "Añadir aplicación"
+
+#. widgets.py:52
+msgid "Add new entry"
+msgstr "Añadir una nueva entrada"
+
+#. widgets.py:55
+msgid "Add separator"
+msgstr "Añadir un separador"
+
+#. widgets.py:58
+msgid "Edit selected entry"
+msgstr "Editar la entrada seleccionada"
+
+#. widgets.py:61
+msgid "Duplicate selected entry"
+msgstr "Duplicar entrada seleccionada"
+
+#. widgets.py:64
+msgid "Move selected entry up"
+msgstr "Mover la entrada seleccionada hacia arriba"
+
+#. widgets.py:67
+msgid "Move selected entry down"
+msgstr "Mover la entrada seleccionada hacia abajo"
+
+#. widgets.py:70
+msgid "Remove selected entry"
+msgstr "Eliminar la entrada seleccionada"
+
+#. widgets.py:76
+msgid "Save?"
+msgstr "¿Guardar?"
+
+#. widgets.py:77
+msgid "Save the current configuration"
+msgstr "Guardar la configuración actual"
+
+#. widgets.py:230
+msgid "Separator"
+msgstr "Separador"
+
+#. metadata.json->name
+msgid "App Launcher"
+msgstr "Lanzador de aplicaciones"
+
+#. metadata.json->description
+msgid "A simple App Launcher"
+msgstr "Un sencillo lanzador de aplicaciones"
+
+#. settings-schema.json->page-applications->title
+#. settings-schema.json->section-applications->title
+msgid "Applications"
+msgstr "Aplicaciones"
+
+#. settings-schema.json->page-settings-global->title
+#. settings-schema.json->section-settings-global->title
+msgid "Global Settings"
+msgstr "Configuración global"
+
+#. settings-schema.json->page-settings-application->title
+#. settings-schema.json->section-settings-applications->title
+msgid "Application Settings"
+msgstr "Configuraciones de la aplicación"
+
+#. settings-schema.json->visible-launcher-label->description
+msgid "Show Label"
+msgstr "Mostrar etiqueta"
+
+#. settings-schema.json->launcher-label->description
+msgid "Label"
+msgstr "Etiqueta"
+
+#. settings-schema.json->custom-launcher-icon->description
+msgid "Custom Icon"
+msgstr "Ícono personalizado"
+
+#. settings-schema.json->notification-enabled->description
+msgid "Show Notifications"
+msgstr "Mostrar notificaciones"
+
+#. settings-schema.json->notification-enabled->tooltip
+msgid "Show notification on application launch"
+msgstr "Mostrar notificación al iniciar la aplicación"
+
+#. settings-schema.json->notification-text->description
+msgid "Notification Text"
+msgstr "Texto de notificación"
+
+#. settings-schema.json->notification-text->tooltip
+msgid "%s will be your application name"
+msgstr "%s será el nombre de su aplicación"
+
+#. settings-schema.json->hotkeys-enabled->description
+msgid "Enable Hotkeys"
+msgstr "Habilitar teclas de acceso rápido"
+
+#. settings-schema.json->hotkey-bindings->description
+msgid "Show menu"
+msgstr "Mostrar menú"
+
+#. settings-schema.json->hotkey-bindings->tooltip
+msgid "Set keybinding(s) to show the menu"
+msgstr "Establecer atajos de teclado para mostrar el menú"
+
+#. settings-schema.json->menu-at-pointer->description
+msgid "Menu at mouse position"
+msgstr "Menú en la posición del ratón"
+
+#. settings-schema.json->menu-at-pointer->tooltip
+msgid "Show the menu next to the cursor when triggered by hotkey"
+msgstr ""
+"Mostrar el menú junto al cursor cuando se activa mediante una tecla de "
+"acceso directo"
+
+#. settings-schema.json->open-by-hover->description
+msgid "Open menus by hovering over them"
+msgstr "Abrir los menús pasando el ratón por encima"
+
+#. settings-schema.json->open-by-hover->tooltip
+msgid "Open all menus when you move the mouse pointer over them"
+msgstr "Abrir todos los menús al situar el puntero del ratón sobre ellos"
+
+#. settings-schema.json->open-by-hover-delay->description
+msgid "Hover delay"
+msgstr "Retraso al pasar por encima"
+
+#. settings-schema.json->open-by-hover-delay->units
+msgid "milliseconds"
+msgstr "milisegundos"
+
+#. settings-schema.json->bind-to-workspace->description
+msgid "Bind to workspace"
+msgstr "Vincular al espacio de trabajo"
+
+#. settings-schema.json->bind-to-workspace->tooltip
+msgid "Show the applet only on the selected workspace"
+msgstr "Mostrar el applet sólo en el espacio de trabajo seleccionado"
+
+#. settings-schema.json->fixed-menu-width->description
+msgid "Fixed Menu Width"
+msgstr "Ancho fijo del menú"
+
+#. settings-schema.json->fixed-menu-width->tooltip
+msgid "Based on the largest submenu item, to prevent menu width flickering"
+msgstr ""
+"Basado en el elemento más grande del submenú, para evitar que el ancho del "
+"menú parpadee"
+
+#. settings-schema.json->visible-app-icons->description
+msgid "Show Application Icons"
+msgstr "Mostrar iconos de aplicaciones"
+
+#. settings-schema.json->visible-app-icons->tooltip
+msgid "Show Application Icons in Popup-Menu"
+msgstr "Mostrar los iconos de la aplicación en el menú emergente"
+
+#. settings-schema.json->use-symbolic-icons->description
+msgid "Use Symbolic Application Icons"
+msgstr "Utilice iconos de aplicaciones simbólicas"
+
+#. settings-schema.json->use-symbolic-icons->tooltip
+msgid "Use Symbolic Application Icons, where it's possible"
+msgstr "Utilice iconos de aplicaciones simbólicas, siempre que sea posible"
+
+#. settings-schema.json->app-icon-size->description
+msgid "Application Icon Size"
+msgstr "Tamaño del icono de la aplicación"
+
+#. settings-schema.json->app-icon-size->tooltip
+msgid "Set Icon size"
+msgstr "Establecer el tamaño del icono"

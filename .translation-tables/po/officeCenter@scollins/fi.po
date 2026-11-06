@@ -1,0 +1,127 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2024-11-16 13:14+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:127
+msgid "Clear"
+msgstr "Tyhjennä"
+
+#. applet.js:162
+msgid "Office"
+msgstr "Toimisto"
+
+#. applet.js:241
+msgid "LAUNCHERS"
+msgstr "OHJELMAT"
+
+#. applet.js:257
+msgid "DOCUMENTS"
+msgstr "ASIAKIRJAT"
+
+#. applet.js:268
+msgid "Open folder"
+msgstr "Avaa kansio"
+
+#. applet.js:294
+msgid "RECENT DOCUMENTS"
+msgstr "VIIMEAIKAISET"
+
+#. metadata.json->name
+msgid "Office Center"
+msgstr ""
+
+#. metadata.json->description
+msgid "Provides an easy and fast resource for all your office needs"
+msgstr "Tarjoaa helpon ja nopean tavan kaikkiin toimistosi tarpeisiin"
+
+#. metadata.json->comments
+msgid ""
+"Office Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy aceess to all of your office programs and documents. Feel free "
+"to contribute by submitting pull requests, bug reports and feature requests "
+"to my github repo."
+msgstr ""
+"Office Center on monipuolinen sovelma, joka tarjoaa helpon pääsyn kaikkiin "
+"toimiston ohjelmiin ja asiakirjoihin. Voit vapaasti osallistua kehitykseen "
+"github:ssa."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Tekijä - Stephen Collins"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Yleiset asetukset"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Paneelin kuvake"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "Hyväksyy kuvakkeen nimen tai polun (tukee symbolisia kuvakkeita)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Teksti paneelissa"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shorcut key"
+msgstr "Valikon pikanäppäin"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon size"
+msgstr "Kuvakkeen koko"
+
+#. settings-schema.json->documents->description
+msgid "Documents"
+msgstr "Asiakirjat"
+
+#. settings-schema.json->showDocuments->description
+msgid "Show contents of documents folder"
+msgstr "Näytä asiakirjat kansion sisältö"
+
+#. settings-schema.json->recurseDocuments->description
+msgid "Include subfolders"
+msgstr "Sisällytä alikansiot"
+
+#. settings-schema.json->altDir->description
+msgid "Use alternate directory"
+msgstr "Käytä toista hakemistoa"
+
+#. settings-schema.json->docMax->description
+msgid "Limit number of documents shown to"
+msgstr "Rajoita näytettävien asiakirjojen määrää"
+
+#. settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "Viimeaikaiset asiakirjat"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Näytä viimeisimmät asiakirjat"
+
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Näytettävä määrä"

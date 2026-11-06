@@ -1,0 +1,229 @@
+# ENVYCONTROL GUI
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: envycontrol@zamszowy 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-30 22:00+0200\n"
+"PO-Revision-Date: 2025-08-26 09:08+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:40
+msgid "missing dependencies"
+msgstr "ontbrekende afhankelijkheden"
+
+#. applet.js:70
+#, javascript-format
+msgid "Switch to %s"
+msgstr "Overschakelen naar %s"
+
+#. applet.js:72
+#, javascript-format
+msgid "Switched to %s (pending reboot)"
+msgstr "Overgeschakeld naar %s (in afwachting van herstart)"
+
+#. applet.js:74
+#, javascript-format
+msgid "Switch back to %s"
+msgstr "Schakel terug naar %s"
+
+#. applet.js:100
+#, javascript-format
+msgid "Changing mode to %s"
+msgstr "Modus wijzigen naar %s"
+
+#. applet.js:102
+#, javascript-format
+msgid "Switching to %s mode in progress..."
+msgstr "Overschakelen naar %s-modus bezig..."
+
+#. applet.js:106
+#, javascript-format
+msgid "Switched to %s mode"
+msgstr "Overgeschakeld naar %s-modus"
+
+#. applet.js:135
+msgid "Configuring..."
+msgstr "Configureren..."
+
+#. applet.js:146
+#, fuzzy
+msgid "Hybrid settings"
+msgstr "Hybride instellingen:"
+
+#. applet.js:149
+msgid "  Create cache"
+msgstr "  Cache aanmaken"
+
+#. applet.js:151
+msgid "successfully created cache"
+msgstr "cache succesvol aangemaakt"
+
+#. applet.js:155
+msgid "  Delete cache"
+msgstr "  Cache verwijderen"
+
+#. applet.js:157
+msgid "successfully deleted cache"
+msgstr "cache succesvol verwijderd"
+
+#. applet.js:161
+msgid "  Show cache"
+msgstr "  Cache tonen"
+
+#. applet.js:169
+msgid "Show last switch log"
+msgstr "Toon laatste overschakel-log"
+
+#. applet.js:179
+#, javascript-format
+msgid "Current mode: %s"
+msgstr "Huidige modus: %s"
+
+#. applet.js:179
+#, javascript-format
+msgid "(pending switch to %s)"
+msgstr "(in afwachting van overschakeling naar %s)"
+
+#. metadata.json->name
+msgid "EnvyControl GUI"
+msgstr "EnvyControl GUI"
+
+#. metadata.json->description
+msgid "Switches between between GPU modes on Nvidia Optimus systems."
+msgstr "Schakelt tussen GPU-modi op Nvidia Optimus-systemen."
+
+#. settings-schema.json->section1->description
+msgid "Nvidia Settings"
+msgstr "Nvidia-instellingen"
+
+#. settings-schema.json->enable-coolbits->description
+msgid "Enable coolbits"
+msgstr "Coolbits inschakelen"
+
+#. settings-schema.json->enable-coolbits->tooltip
+msgid "Allows overclocking (not recommended)"
+msgstr "Staat overklokken toe (niet aanbevolen)"
+
+#. settings-schema.json->coolbits->description
+msgid "Coolbits"
+msgstr "Coolbits"
+
+#. settings-schema.json->enable-forcecompositionpipeline->description
+msgid "Enable ForceCompositionPipeline"
+msgstr "ForceCompositionPipeline inschakelen"
+
+#. settings-schema.json->enable-forcecompositionpipeline->tooltip
+msgid "Enable if facing screen tearing"
+msgstr "Inschakelen bij screen tearing"
+
+#. settings-schema.json->override-dm->description
+msgid "Manually specify your Display Manager"
+msgstr "Geef je Display Manager handmatig op"
+
+#. settings-schema.json->dm->description
+msgid "Display manager"
+msgstr "Display manager"
+
+#. settings-schema.json->dm->options
+msgid "gdm"
+msgstr "gdm"
+
+#. settings-schema.json->dm->options
+msgid "gdm3"
+msgstr "gdm3"
+
+#. settings-schema.json->dm->options
+msgid "sddm"
+msgstr "sddm"
+
+#. settings-schema.json->dm->options
+msgid "lightdm"
+msgstr "lightdm"
+
+#. settings-schema.json->use-nvidia-current->description
+msgid "Use nvidia-current instead of nvidia for kernel modules"
+msgstr "Gebruik nvidia-current in plaats van nvidia voor kernelmodules"
+
+#. settings-schema.json->use-nvidia-current->tooltip
+msgid ""
+"If nvidia kernel module is named nvidia-current on Debian, use this flag to "
+"make EnvyControl use the correct module name"
+msgstr ""
+"Als de nvidia-kernelmodule op Debian nvidia-current heet, gebruik dan deze "
+"optie om EnvyControl de juiste modulenaam te laten gebruiken"
+
+#. settings-schema.json->section2->description
+msgid "Hybrid Settings"
+msgstr "Hybride instellingen"
+
+#. settings-schema.json->enable-rtd3->description
+msgid "Setup PCI-Express Runtime D3 (RTD3) Power Management"
+msgstr "Stel PCI-Express Runtime D3 (RTD3) Energiebeheer in"
+
+#. settings-schema.json->enable-rtd3->tooltip
+msgid "RTD3 allows the dGPU to be dynamically turned off when not in use"
+msgstr ""
+"RTD3 maakt het mogelijk de dGPU dynamisch uit te schakelen wanneer deze niet "
+"in gebruik is"
+
+#. settings-schema.json->rtd3->description
+msgid "RTD3"
+msgstr "RTD3"
+
+#. settings-schema.json->rtd3->options
+msgid "0"
+msgstr "0"
+
+#. settings-schema.json->rtd3->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->rtd3->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->rtd3->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->rtd3->tooltip
+msgid ""
+"0 - disabled\n"
+"1 - coarse-grained\n"
+"2 - fine-grained\n"
+"3 - fine-grained for Ampere and later"
+msgstr ""
+"0 - uitgeschakeld\n"
+"1 - grofmazig\n"
+"2 - fijnmazig\n"
+"3 - fijnmazig voor Ampere en later"
+
+#. settings-schema.json->section3->description
+msgid "Theme"
+msgstr ""
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+#, fuzzy
+msgid "light"
+msgstr "lightdm"
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr ""

@@ -1,0 +1,71 @@
+# ANY ALARM
+# This file is put in the public domain.
+# sophie-la-li, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: any-alarm@sophie-la-li 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-06-11 00:38+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:17 applet.js:56
+msgid "AnyAlarm"
+msgstr "AnyAlarm"
+
+#. metadata.json->name
+msgid "Any Alarm"
+msgstr "Any Alarm"
+
+#. metadata.json->description
+msgid "Will remind you regularly about something"
+msgstr "Minder dig regelmæssigt om noget"
+
+#. settings-schema.json->enabled->description
+msgid "Alarm enabled"
+msgstr "Alarm aktiveret"
+
+#. settings-schema.json->mode->description
+msgid "When to trigger the alarm"
+msgstr "Hvornår alarmen skal udløses"
+
+#. settings-schema.json->mode->options
+msgid "every # seconds (see option below)"
+msgstr "hvert #. sekund (se muligheder nedenfor)"
+
+#. settings-schema.json->mode->options
+msgid "every full minute"
+msgstr "hvert minut"
+
+#. settings-schema.json->mode->options
+msgid "every quarter hour"
+msgstr "hvert kvarter"
+
+#. settings-schema.json->mode->options
+msgid "every half hour"
+msgstr "hver halve time"
+
+#. settings-schema.json->mode->options
+msgid "every full hour"
+msgstr "hver time"
+
+#. settings-schema.json->xs-mode-seconds->units
+msgid "seconds"
+msgstr "sekunder"
+
+#. settings-schema.json->xs-mode-seconds->description
+msgid "Seconds for the \"every # seconds\" mode"
+msgstr "Sekunder for tilstanden “hvert #. sekund”"
+
+#. settings-schema.json->alarm-text->description
+msgid "Alarm Text"
+msgstr "Alarmtekst"

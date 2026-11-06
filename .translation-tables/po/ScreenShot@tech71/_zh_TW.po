@@ -1,0 +1,27 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. applet.js:34
+msgid "Take A Screen Shot"
+msgstr ""
+
+#. applet.js:50
+msgid "Whole Screen"
+msgstr ""
+
+#. applet.js:69
+msgid "Current Window"
+msgstr ""
+
+#. applet.js:74
+msgid "Selected Area"
+msgstr ""
+
+#. metadata.json->description
+msgid "Take a snapshot of your desktop or individual windows"
+msgstr ""

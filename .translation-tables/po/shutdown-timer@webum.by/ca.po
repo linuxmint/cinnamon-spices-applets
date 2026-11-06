@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: shutdown-timer@webum.by 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-10 00:13+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:71 applet.js:200
+msgid "Shutdown-timer"
+msgstr "Temporitzador d'Aturada"
+
+#: applet.js:77 applet.js:204 applet.js:293
+msgid "Minutes"
+msgstr "Minuts"
+
+#: applet.js:98
+msgid "Timer"
+msgstr "Temporitzador"
+
+#: applet.js:128
+msgid "Show time on panel"
+msgstr "Mostrar el temps al tauler"
+
+#: applet.js:290
+msgid "Minutes to <click action>"
+msgstr "Minuts per <click action>"
+
+#. metadata.json->name
+msgid "Shutdown timer"
+msgstr "Temporitzador d'aturada"
+
+#. metadata.json->description
+msgid "Applet to help you shutdown, restart and suspend your system with timer"
+msgstr ""
+"Miniaplicació que us ajuda a apagar, reiniciar i suspendre el vostre sistema "
+"a través d'un temporitzador"
+
+#. settings-schema.json->shutdown->description
+msgid "Shutdown event on menu"
+msgstr "Acció d'aturada al menú"
+
+#. settings-schema.json->restart->description
+msgid "Restart event on menu"
+msgstr "Acció de reinici al menú"
+
+#. settings-schema.json->log-out->description
+msgid "Log out event on menu"
+msgstr "Acció de tancament de sessió al menú"
+
+#. settings-schema.json->hibernate->description
+msgid "Hibernate event on menu"
+msgstr "Acció d'hivernar al menú"
+
+#. settings-schema.json->suspend->description
+msgid "Suspend event on menu"
+msgstr "Acció de suspensió al menú"
+
+#. settings-schema.json->lock-screen->description
+msgid "Lock screen event on menu"
+msgstr "Acció de bloqueig de pantalla al menú"
+
+#. settings-schema.json->restart-cinnamon->description
+msgid "Restart Cinnamon event on menu"
+msgstr "Acció de reiniciar Cinnamon al menú"
+
+#. settings-schema.json->show-time-on-panel->description
+msgid "Show timer in panel"
+msgstr "Mostrar el temporitzador al tauler"

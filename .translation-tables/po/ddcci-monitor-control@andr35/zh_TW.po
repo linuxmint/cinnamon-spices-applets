@@ -1,0 +1,69 @@
+# DDC/CI MONITOR BRIGHTNESS
+# This file is put in the public domain.
+# andr35, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ddcci-monitor-control@andr35 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-09-06 16:25+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->description
+#. applet.js:41
+msgid "Adjust external monitor brightness and contrast"
+msgstr "調整外接螢幕的亮度與對比度"
+
+#. metadata.json->name
+msgid "DDC/CI Monitor Brightness"
+msgstr "DDC/CI 螢幕亮度"
+
+#. settings-schema.json->brightness-default-label-1->description
+msgid "\"Default brightness 1\" button label"
+msgstr "「預設亮度 1」按鈕標籤"
+
+#. settings-schema.json->brightness-default-label-1->tooltip
+msgid "For example \"Daily Brightness\""
+msgstr "例如：「日間亮度」"
+
+#. settings-schema.json->brightness-default-value-1->description
+msgid "\"Default brightness 1\" value"
+msgstr "「預設亮度 1」的數值"
+
+#. settings-schema.json->brightness-default-value-1->tooltip
+msgid ""
+"Set the brightness level that will be applied when the \"Default brightness "
+"1\" button is clicked"
+msgstr ""
+"設定點選 「預設亮度 1」 按鈕時要套用的亮度"
+
+#. settings-schema.json->brightness-default-value-1->units
+#. settings-schema.json->brightness-default-value-2->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->brightness-default-label-2->description
+msgid "\"Default brightness 2\" button label"
+msgstr "「預設亮度 2」按鈕標籤"
+
+#. settings-schema.json->brightness-default-label-2->tooltip
+msgid "For example \"Night Brightness\""
+msgstr "例如：「夜間亮度」"
+
+#. settings-schema.json->brightness-default-value-2->description
+msgid "\"Default brightness 2\" value"
+msgstr "「預設亮度 2」的數值"
+
+#. settings-schema.json->brightness-default-value-2->tooltip
+msgid ""
+"Set the brightness level that will be applied when the \"Default brightness "
+"2\" button is clicked"
+msgstr ""
+"設定點選 「預設亮度 2」 按鈕時要套用的亮度"

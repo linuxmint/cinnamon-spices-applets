@@ -1,0 +1,135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-04-25 16:57+1000\n"
+"PO-Revision-Date: 2023-11-21 01:44+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:147
+msgid "Settings"
+msgstr "Paramètres"
+
+#: applet.js:236 applet.js:346 applet.js:355
+msgid "Refresh this menu"
+msgstr "Actualiser ce menu"
+
+#: applet.js:265
+msgid "Docker Compose: Bringing Stack up, please wait..."
+msgstr "Docker Compose : Mise en place de la pile, veuillez patienter..."
+
+#: applet.js:267
+msgid "Bringing Stack up..."
+msgstr "Remonter la pile..."
+
+#: applet.js:271
+msgid "Docker Compose: Taking Stack down, please wait..."
+msgstr ""
+"Docker Compose : La pile est en cours de démontage, veuillez patienter..."
+
+#: applet.js:273
+msgid "Taking Stack down..."
+msgstr "Démontage de la pile..."
+
+#: applet.js:282
+msgid "Editing docker-compose.yml"
+msgstr "Modification de docker-compose.yml"
+
+#: applet.js:291
+msgid "Opening logs..."
+msgstr "Ouverture des logs..."
+
+#: applet.js:333 applet.js:337
+msgid "Status"
+msgstr "État"
+
+#: applet.js:334 applet.js:338
+msgid "Edit..."
+msgstr "Modifier..."
+
+#: applet.js:335
+msgid "Logs..."
+msgstr "Logs..."
+
+#: applet.js:349
+msgid ""
+"Stacks: Docker compose missing or not configured. Right click to configure."
+msgstr ""
+"Piles : Docker compose manquant ou non configuré. Clic-droit pour configurer."
+
+#: applet.js:350
+msgid "Docker compose missing or not configured. Right click to configure."
+msgstr ""
+"Docker-compose manquant ou non configuré. Cliquer sur le bouton droit de la "
+"souris pour configurer."
+
+#: applet.js:353
+msgid "Docker-compose not installed"
+msgstr "Docker-compose n'est pas installé"
+
+#: applet.js:354
+msgid "Click here for installation instructions"
+msgstr "Cliquez ici pour les instructions d'installation"
+
+#. metadata.json->description
+msgid "An applet to manage docker-compose stacks."
+msgstr "Une applet pour gérer les piles docker-compose."
+
+#. metadata.json->name
+msgid "Docker compose manager"
+msgstr "Manager Docker-compose"
+
+#. settings-schema.json->dockerComposeProjectFolder->description
+msgid ""
+"Docker Compose base project folder. This is the base folder for your docker-"
+"compose YAML files. This applet will scan through each sub-folder looking "
+"for configuration files."
+msgstr ""
+"Dossier du projet de base de Docker Compose. Il s'agit du dossier de base "
+"pour vos fichiers YAML docker-compose. Cette applet va parcourir chaque sous-"
+"dossier à la recherche de fichiers de configuration."
+
+#. settings-schema.json->dockerComposeCmd->description
+msgid ""
+"Docker Compose command location. Leave this blank to automatically search "
+"for docker-compose."
+msgstr ""
+"Emplacement de la commande Docker Compose. Laisser ce champ vide pour "
+"rechercher automatiquement docker-compose."
+
+#. settings-schema.json->dockerComposeCmd->tooltip
+msgid "This is the command that is run to start Docker Compose."
+msgstr "Commande qui sera exécutée pour démarrer Docker Compose."
+
+#. settings-schema.json->dockerCmd->description
+msgid ""
+"Docker command location. Leave this blank to automatically search for docker."
+msgstr ""
+"Emplacement de la commande Docker. Laisser ce champ vide pour rechercher "
+"automatiquement Docker."
+
+#. settings-schema.json->dockerCmd->tooltip
+msgid "This is the command that is run to start Docker."
+msgstr "Commande qui sera exécutée pour démarrer Docker."
+
+#. settings-schema.json->editor->description
+msgid "Default text editor. Leave this blank to use xed."
+msgstr "Editeur de texte par défaut. Laisser ce champ vide pour utiliser xed."
+
+#. settings-schema.json->editor->tooltip
+msgid "This is the default text editor for editing configuration files."
+msgstr ""
+"Éditeur de texte par défaut pour modifier les fichiers de configuration."

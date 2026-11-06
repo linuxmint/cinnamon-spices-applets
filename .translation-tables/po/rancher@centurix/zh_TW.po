@@ -1,0 +1,257 @@
+# HOMESTEAD MANAGER
+# This file is put in the public domain.
+# centurix, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rancher@centurix 0.1.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-08-20 04:01+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:172
+msgid "Settings"
+msgstr "設定"
+
+#. applet.js:184
+msgid "Editing Homestead configuration..."
+msgstr "正在編輯 Homestead 設定..."
+
+#. applet.js:190
+msgid "Rancher: Bringing Homestead up, please wait..."
+msgstr "Rancher: 正在啟動 Homestead，請稍候..."
+
+#. applet.js:192
+msgid "Bringing Homestead up..."
+msgstr "正在啟動 Homestead..."
+
+#. applet.js:195
+msgid "Rancher: Taking Homestead down, please wait..."
+msgstr "Rancher: 正在關閉 Homestead，請稍候..."
+
+#. applet.js:197
+msgid "Taking Homestead down..."
+msgstr "正在關閉 Homestead..."
+
+#. applet.js:204
+msgid "Rancher: Provisioning Homestead, please wait..."
+msgstr "Rancher: 正在佈建 Homestead，請稍候..."
+
+#. applet.js:206
+msgid "Provisioning Homestead..."
+msgstr "正在佈建 Homestead..."
+
+#. applet.js:210
+msgid "Rancher: Destroying Homestead, please wait..."
+msgstr "Rancher: 正在銷毀 Homestead，請稍候..."
+
+#. applet.js:212
+msgid "Destroying Homestead..."
+msgstr "正在銷毀 Homestead..."
+
+#. applet.js:216
+msgid "Rancher: Suspending Homestead, please wait..."
+msgstr "Rancher: 正在暫停 Homestead，請稍候..."
+
+#. applet.js:218
+msgid "Suspending Homestead..."
+msgstr "正在暫停 Homestead..."
+
+#. applet.js:223
+msgid "Homestead SSH Terminal opened"
+msgstr "Homestead SSH 終端機已開啟"
+
+#. applet.js:227
+msgid "Rancher: Recompiling Kernel, please wait..."
+msgstr "Rancher: 正在重新編譯核心，請稍候..."
+
+#. applet.js:229
+msgid "Recompiling Kernel..."
+msgstr "正在重新編譯核心..."
+
+#. applet.js:248 applet.js:327 applet.js:330 applet.js:343 applet.js:397
+msgid "Refresh this menu"
+msgstr "重新整理此選單"
+
+#. applet.js:276
+msgid "Rancher: Homestead missing or not configured."
+msgstr "Rancher: 找不到或尚未設定 Homestead。"
+
+#. applet.js:277
+msgid "Homestead missing or not configured."
+msgstr "找不到或尚未設定 Homestead。"
+
+#. applet.js:284 applet.js:285
+msgid "Vagrant is out of date, please update."
+msgstr "Vagrant 版本過舊，請更新。"
+
+#. applet.js:290 applet.js:291 applet.js:335
+msgid "Kernel Module not loaded. Needs recompilation."
+msgstr "核心模組未載入，需要重新編譯。"
+
+#. applet.js:296
+msgid "Rancher: Homestead up."
+msgstr "Rancher: Homestead 已啟動。"
+
+#. applet.js:297
+msgid "Homestead up."
+msgstr "Homestead 已啟動。"
+
+#. applet.js:298
+msgid " (Running)"
+msgstr "（執行中）"
+
+#. applet.js:302
+msgid "Rancher: Homestead suspended."
+msgstr "Rancher: Homestead 已暫停。"
+
+#. applet.js:303
+msgid "Homestead suspended."
+msgstr "Homestead 已暫停。"
+
+#. applet.js:304
+msgid " (Suspended)"
+msgstr "（已暫停）"
+
+#. applet.js:307
+msgid "Rancher: Homestead down."
+msgstr "Rancher: Homestead 已關閉。"
+
+#. applet.js:308
+msgid "Homestead down."
+msgstr "Homestead 已關閉。"
+
+#. applet.js:309
+msgid " (Down)"
+msgstr "（已關閉）"
+
+#. applet.js:312
+msgid "Rancher: Homestead not created."
+msgstr "Rancher: 尚未建立 Homestead。"
+
+#. applet.js:313
+msgid "Homestead not created"
+msgstr "尚未建立 Homestead"
+
+#. applet.js:314 applet.js:319
+msgid " (Not created/Destroyed)"
+msgstr "（未建立／已銷毀）"
+
+#. applet.js:317
+msgid "Rancher: Homestead not installed."
+msgstr "Rancher: 尚未安裝 Homestead。"
+
+#. applet.js:318 applet.js:325
+msgid "Homestead not installed"
+msgstr "尚未安裝 Homestead"
+
+#. applet.js:326
+msgid "Click here for installation instructions"
+msgstr "點此檢視安裝說明"
+
+#. applet.js:329
+msgid "Homestead missing or not configured"
+msgstr "找不到或尚未設定 Homestead"
+
+#. applet.js:336
+msgid "Recompile Kernel Module."
+msgstr "重新編譯核心模組。"
+
+#. applet.js:341
+msgid "Vagrant is out of date for this version of Homestead, please update."
+msgstr "此 Homestead 版本需要較新的 Vagrant，請更新。"
+
+#. applet.js:342
+msgid "Click here for the Vagrant download page."
+msgstr "點此前往 Vagrant 下載頁面。"
+
+#. applet.js:347
+msgid "Status"
+msgstr "狀態"
+
+#. applet.js:350
+msgid "Run provisioning"
+msgstr "執行佈建"
+
+#. applet.js:351
+msgid "Suspend Homestead"
+msgstr "暫停 Homestead"
+
+#. applet.js:352
+msgid "SSH Terminal..."
+msgstr "SSH 終端機..."
+
+#. applet.js:356
+msgid "Destroy Homestead"
+msgstr "銷毀 Homestead"
+
+#. applet.js:363
+msgid "Configuration"
+msgstr "設定"
+
+#. applet.js:364
+msgid "IP: "
+msgstr "IP: "
+
+#. applet.js:365
+msgid "Memory: "
+msgstr "記憶體： "
+
+#. applet.js:366
+msgid "CPU: "
+msgstr "CPU: "
+
+#. applet.js:367
+msgid "Provider: "
+msgstr "提供者： "
+
+#. applet.js:369
+msgid "Edit Homestead configuration..."
+msgstr "編輯 Homestead 設定..."
+
+#. applet.js:372
+msgid "Hosted Sites"
+msgstr "託管的網站"
+
+#. applet.js:382
+msgid "Edit hosts file..."
+msgstr "編輯 hosts 檔案..."
+
+#. applet.js:385
+msgid "Hosted Databases"
+msgstr "託管的資料庫"
+
+#. terminal_reader.js:58
+msgid "Command not found."
+msgstr "找不到指令。"
+
+#. metadata.json->description
+msgid "An applet to manage Homestead."
+msgstr "一款用於管理 Homestead 的小程式。"
+
+#. metadata.json->name
+msgid "Homestead manager"
+msgstr "Homestead 管理員"
+
+#. settings-schema.json->homesteadProjectFolder->description
+msgid "Homestead project folder"
+msgstr "Homestead 專案資料夾"
+
+#. settings-schema.json->homesteadConfigFolder->description
+msgid "Homestead config folder"
+msgstr "Homestead 設定資料夾"
+
+#. settings-schema.json->vagrantCmd->description
+msgid "Vagrant command"
+msgstr "Vagrant 指令"
+
+#. settings-schema.json->editor->description
+msgid "Default text editor"
+msgstr "預設文字編輯器"

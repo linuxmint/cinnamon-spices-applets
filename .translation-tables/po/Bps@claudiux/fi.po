@@ -1,0 +1,204 @@
+# DOWNLOAD AND UPLOAD SPEED
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# cardsurf, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Bps@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-28 17:40+0100\n"
+"PO-Revision-Date: 2025-04-03 19:05+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:77
+msgid "Does not work on vertical panel!"
+msgstr "Ei toimi pystypaneelissa!"
+
+#. applet.js:244 applet.js:304 applet.js:318
+msgid "   B"
+msgstr "   B"
+
+#. applet.js:247 applet.js:293
+msgid " TiB"
+msgstr " TiB"
+
+#. applet.js:249 applet.js:296
+msgid " GiB"
+msgstr " GiB"
+
+#. applet.js:251 applet.js:299
+msgid " MiB"
+msgstr " MiB"
+
+#. applet.js:253 applet.js:302
+msgid " kiB"
+msgstr " kiB"
+
+#. applet.js:256 applet.js:307
+msgid " TB"
+msgstr " TB"
+
+#. applet.js:258 applet.js:310
+msgid " GB"
+msgstr " GB"
+
+#. applet.js:260 applet.js:313
+msgid " MB"
+msgstr " MB"
+
+#. applet.js:262 applet.js:316
+msgid " kB"
+msgstr " kB"
+
+#. applet.js:265 applet.js:335 applet.js:349
+msgid "   b"
+msgstr "   b"
+
+#. applet.js:269 applet.js:324
+msgid " Tib"
+msgstr " Tib"
+
+#. applet.js:271 applet.js:327
+msgid " Gib"
+msgstr " Gib"
+
+#. applet.js:273 applet.js:330
+msgid " Mib"
+msgstr " Mib"
+
+#. applet.js:275 applet.js:333
+msgid " kib"
+msgstr " kib"
+
+#. applet.js:278 applet.js:338
+msgid " Tb"
+msgstr " Tb"
+
+#. applet.js:280 applet.js:341
+msgid " Gb"
+msgstr " Gb"
+
+#. applet.js:282 applet.js:344
+msgid " Mb"
+msgstr " Mb"
+
+#. applet.js:284 applet.js:347
+msgid " kb"
+msgstr " kb"
+
+#. metadata.json->description
+msgid "Instant Network Speed is a simple network monitor"
+msgstr "Instant Network Speed is a simple network monitor"
+
+#. metadata.json->name
+msgid "Bps: Instant Network Speed"
+msgstr "Bps: Instant Network Speed"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Asetukset"
+
+#. settings-schema.json->unit_type->description
+msgid "Unit"
+msgstr "Yksikkö"
+
+#. settings-schema.json->unit_type->options
+msgid "Bytes"
+msgstr "Tavua"
+
+#. settings-schema.json->unit_type->options
+msgid "Bits"
+msgstr "Bittiä"
+
+#. settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr "Tietoyksikkö näkyy paneelissa"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr "Tavua tai bittiä"
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr "Kymmenluku"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr "Binaarinen"
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+"Kymmenluku: k, M, G, T\n"
+"Binaarinen: ki, Mi, Gi, Ti"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Käyttöliittymä"
+
+#. settings-schema.json->gui_value_order->description
+msgid "Value order"
+msgstr "Arvojen järjestys"
+
+#. settings-schema.json->gui_value_order->options
+msgid "Download first"
+msgstr "Lataus ensin"
+
+#. settings-schema.json->gui_value_order->options
+msgid "Upload first"
+msgstr "Lähetys ensin"
+
+#. settings-schema.json->gui_value_order->tooltip
+msgid "An order of values shown in the panel"
+msgstr "Paneelin arvojärjestys"
+
+#. settings-schema.json->minimum_start->description
+msgid "Minimum displayed value"
+msgstr "Pienin näytettävä arvo"
+
+#. settings-schema.json->display_minimum_quantity->description
+msgid "Value"
+msgstr "Arvo"
+
+#. settings-schema.json->display_minimum_quantity->tooltip
+msgid "Value between 0 and 999 (decimal) or 1023 (binary)."
+msgstr "Arvo välillä 0–999 (kymmenluku) tai 1023 (binääri)."
+
+#. settings-schema.json->display_minimum_unit_multiple->description
+msgid "Multiple"
+msgstr "Useita"
+
+#. settings-schema.json->display_minimum_unit_multiple->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->display_minimum_unit_multiple->options
+msgid "k"
+msgstr "k"
+
+#. settings-schema.json->display_minimum_unit_multiple->options
+msgid "M"
+msgstr "M"
+
+#. settings-schema.json->display_minimum_unit_multiple->options
+msgid "G"
+msgstr "G"
+
+#. settings-schema.json->display_minimum_unit_multiple->options
+msgid "T"
+msgstr "T"
+
+#. settings-schema.json->display_minimum_button->description
+msgid "Apply"
+msgstr "Käytä"

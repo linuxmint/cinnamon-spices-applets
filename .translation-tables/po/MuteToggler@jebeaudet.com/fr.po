@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-16 18:41+0100\n"
+"PO-Revision-Date: 2023-11-16 18:44+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:55
+msgid "Click to mute/unmute microphone"
+msgstr "Clique pour ouvrir/fermer le micro"
+
+#. metadata.json->name
+msgid "Mic mute toggler"
+msgstr "Commutateur de coupure du micro"
+
+#. metadata.json->description
+msgid "Quickly toggle global microphone mute on and off."
+msgstr "Permet d'ouvrir ou fermer instantanément le microphone."
+
+#. settings-schema.json->section_keybinding->description
+msgid "Keyboard shortcuts"
+msgstr "Raccourcis clavier"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding for toggling microphone mute"
+msgstr "Raccourci clavier pour ouvrir ou fermer le microphone"
+
+#. settings-schema.json->section_icons->description
+msgid "Icons"
+msgstr "Icônes"
+
+#. settings-schema.json->use_symbolic_icon->description
+msgid "Use symbolic icons"
+msgstr "Utiliser des icônes symboliques"
+
+#. settings-schema.json->tint_symbolic_icon->description
+msgid "Tint symbolic icons"
+msgstr "Colorer les icônes symboliques"
+
+#. settings-schema.json->muted_color->description
+msgid "Icon color when microphone is muted"
+msgstr "Couleur de l'icône quand le micro est coupé"
+
+#. settings-schema.json->unmuted_color->description
+msgid "Icon color when microphone is unmuted"
+msgstr "Couleur de l'icône quand le micro est ouvert"
+
+#. settings-schema.json->section_debug_messages->description
+msgid "Debug messages"
+msgstr "Messages de débogage"
+
+#. settings-schema.json->verbose->description
+msgid "Make it verbose in ~/.xsession-errors"
+msgstr "Rendre verbeux dans ~/.xsession-errors"

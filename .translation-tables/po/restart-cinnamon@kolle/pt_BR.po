@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Marcelo Aof, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2021-11-06 14:54-0300\n"
+"Last-Translator: Marcelo Aof\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. applet.js:35
+msgid "Click here to restart Cinnamon"
+msgstr "Clique aqui para reiniciar o Cinnamon"
+
+#. metadata.json->name
+msgid "Restart Cinnamon"
+msgstr "Reiniciar o Cinnamon"
+
+#. metadata.json->description
+msgid "Click on the applet to restart Cinnamon"
+msgstr "Clique no applet para reiniciar o Cinnamon"
+
+#. metadata.json->contributors
+msgid "bimsebasse: added symbolic icon"
+msgstr "bimsebasse: o ícone monocromático foi adicionado"
+
+#. metadata.json->contributors
+msgid "claudiux: OSD option"
+msgstr ""
+
+#. settings-schema.json->header-settings->description
+msgid "General Settings"
+msgstr "Configurações gerais"
+
+#. settings-schema.json->use-symbolic-icon->description
+msgid "Use symbolic icon"
+msgstr "Usar ícone monocromático"
+
+#. settings-schema.json->show-osd->description
+msgid "Show OSD"
+msgstr ""

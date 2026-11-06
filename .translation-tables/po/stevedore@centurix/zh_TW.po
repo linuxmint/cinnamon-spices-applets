@@ -1,0 +1,263 @@
+# Traditional Chinese (Taiwan) translation for stevedore@centurix.
+# This file is put in the public domain.
+# Peter Dave Hello <hsu@peterdavehello.org>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: stevedore@centurix 0.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-09-11 00:05+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:84
+msgid "Create a container from an image"
+msgstr "從映像檔建立容器"
+
+#: applet.js:94
+msgid "Mount location:"
+msgstr "掛載位置："
+
+#: applet.js:116
+msgid "Destination location:"
+msgstr "目標位置："
+
+#: applet.js:138
+msgid "Working directory:"
+msgstr "工作目錄："
+
+#: applet.js:160
+msgid "Memory:"
+msgstr "記憶體："
+
+#: applet.js:182
+msgid "Swap size:"
+msgstr "交換區大小："
+
+#: applet.js:204
+msgid "Entry point:"
+msgstr "進入點："
+
+#: applet.js:226
+msgid "Extra parameters:"
+msgstr "額外參數："
+
+#: applet.js:248
+msgid "Start"
+msgstr "啟動"
+
+#: applet.js:263 applet.js:342
+msgid "Cancel"
+msgstr "取消"
+
+#: applet.js:312
+msgid "Search for a Docker image:"
+msgstr "搜尋 Docker 映像檔："
+
+#: applet.js:397
+msgid "Select"
+msgstr "選取"
+
+#: applet.js:424
+msgid "Searching..."
+msgstr "搜尋中..."
+
+#: applet.js:468
+msgid "Stevedore: Docker controller"
+msgstr "Stevedore：Docker 控制器"
+
+#: applet.js:481
+msgid "Stevedor: Cannot locate Docker, is it installed?"
+msgstr "Stevedor：找不到 Docker，是否已安裝？"
+
+#: applet.js:482
+msgid "Cannot locate Docker, is it installed?"
+msgstr "找不到 Docker，是否已安裝？"
+
+#: applet.js:485 applet.js:497
+msgid "Get Docker"
+msgstr "取得 Docker"
+
+#: applet.js:493 applet.js:494
+msgid ""
+"Stevedor: Docker is out of date, please install version 17.03.0-ce or higher."
+msgstr ""
+"Stevedor：Docker 版本過舊，請安裝 17.03.0-ce 或更新版本。"
+
+#: applet.js:513
+msgid "Create a new image"
+msgstr "建立新映像檔"
+
+#: applet.js:516
+msgid "Images"
+msgstr "映像檔"
+
+#: applet.js:522
+msgid "No Images Installed"
+msgstr "未安裝映像檔"
+
+#: applet.js:532
+msgid "Start a new container from this image"
+msgstr "從此映像檔啟動新容器"
+
+#: applet.js:539
+msgid "Image Home Page"
+msgstr "映像檔首頁"
+
+#: applet.js:546
+msgid "Remove this image"
+msgstr "移除此映像檔"
+
+#: applet.js:555
+msgid "Containers"
+msgstr "容器"
+
+#: applet.js:560
+msgid "No Containers Created"
+msgstr "未建立容器"
+
+#: applet.js:568 applet.js:571
+msgid "Running"
+msgstr "執行中"
+
+#: applet.js:568 applet.js:571
+msgid "Stopped"
+msgstr "已停止"
+
+#: applet.js:578
+msgid "Memory: "
+msgstr "記憶體："
+
+#: applet.js:584
+msgid "Entry point: "
+msgstr "進入點："
+
+#: applet.js:592
+msgid "Mount: "
+msgstr "掛載："
+
+#: applet.js:603
+msgid "IP Address: "
+msgstr "IP 位址："
+
+#: applet.js:615
+msgid "Open a terminal"
+msgstr "開啟終端機"
+
+#: applet.js:627
+msgid "Show TTY Session"
+msgstr "顯示 TTY 工作階段"
+
+#: applet.js:640
+msgid "Open a browser"
+msgstr "開啟瀏覽器"
+
+#: applet.js:651
+msgid "Delete this container"
+msgstr "刪除此容器"
+
+#: applet.js:660
+msgid "Docker Version"
+msgstr "Docker 版本"
+
+#: applet.js:661
+msgid "Docker Version: "
+msgstr "Docker 版本："
+
+#: applet.js:662
+msgid "API Version: "
+msgstr "API 版本："
+
+#: applet.js:663
+msgid "Go Version: "
+msgstr "Go 版本："
+
+#: applet.js:664
+msgid "Git Commit: "
+msgstr "Git 提交："
+
+#: applet.js:665
+msgid "Build Date: "
+msgstr "建置日期："
+
+#: applet.js:666
+msgid "OS/Arch: "
+msgstr "作業系統/架構："
+
+#: applet.js:670
+msgid "Refresh this menu"
+msgstr "重新整理此選單"
+
+#: applet.js:681
+msgid "Installing image"
+msgstr "正在安裝映像檔"
+
+#: applet.js:681 applet.js:797 applet.js:828
+msgid "please wait..."
+msgstr "請稍候..."
+
+#: applet.js:691 applet.js:716
+msgid "Image"
+msgstr "映像檔"
+
+#: applet.js:691
+msgid "installed, ready to run."
+msgstr "已安裝，準備執行。"
+
+#: applet.js:716
+msgid "removed."
+msgstr "已移除。"
+
+#: applet.js:780
+msgid "Starting container"
+msgstr "正在啟動容器"
+
+#: applet.js:782
+msgid "Container up"
+msgstr "容器已啟動"
+
+#: applet.js:784
+msgid "Stopping container"
+msgstr "正在停止容器"
+
+#: applet.js:786
+msgid "Container down"
+msgstr "容器已停止"
+
+#: applet.js:797
+msgid "Creating container from"
+msgstr "正在建立容器，使用"
+
+#: applet.js:800
+msgid "Image created."
+msgstr "映像檔已建立。"
+
+#: applet.js:828
+msgid "Removing container"
+msgstr "正在移除容器"
+
+#: applet.js:831
+msgid "Container removed"
+msgstr "容器已移除"
+
+#: applet.js:838
+msgid "Copied to the clipboard"
+msgstr "已複製到剪貼簿"
+
+#: terminal_reader.js:60
+msgid "Command not found."
+msgstr "找不到指令。"
+
+#. metadata.json->description
+msgid "Docker controlling applet."
+msgstr "Docker 控制小程式。"
+
+#. metadata.json->name
+msgid "Stevedor - Docker controller"
+msgstr "Stevedor - Docker 控制器"
