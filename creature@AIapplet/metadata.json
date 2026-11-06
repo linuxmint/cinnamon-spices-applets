@@ -1,0 +1,10 @@
+{
+  "uuid": "creature@AIapplet",
+  "name": "Créature",
+  "description": "Un presse-papiers, un Tamagotchi personnalisable, ainsi qu’un raccourci vers des émojis et symboles simples et utiles. Mode adoption d’applet avec priorité de clic Créature. Banques personnalisables, bouton bombe presse-papier, humeurs/réactions enrichies.",
+  "version": "1.6.2-custom-banks-clipboard-moods",
+  "max-instances": -1,
+  "author": "Okai",
+  "last-edited": 1784208000,
+  "license": "Okai-NC"
+}
