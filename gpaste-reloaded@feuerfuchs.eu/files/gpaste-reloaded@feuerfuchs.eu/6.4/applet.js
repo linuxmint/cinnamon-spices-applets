@@ -12,6 +12,7 @@ const SignalManager = imports.misc.signalManager;
 let GPaste; // Will be assigned in entry point
 
 const _                        = require('./__init__')._;
+const GPasteCompat             = require('./GPasteCompat');
 const GPasteSearchItem         = require('./GPasteSearchItem');
 const GPasteHistoryItem        = require('./GPasteHistoryItem');
 const GPasteHistoryListItem    = require('./GPasteHistoryListItem');
@@ -130,9 +131,7 @@ class GPasteApplet extends Applet.IconApplet {
             // Dialogs
 
             this.dNewItem             = new GPasteNewItemDialog.GPasteNewItemDialog(text => {
-                this._client.add(text, (client, result) => {
-                    this._client.add_finish(result);
-                });
+                this._client.add(text);
             });
 
             //
@@ -162,37 +161,40 @@ class GPasteApplet extends Applet.IconApplet {
             this._signalManager    = new SignalManager.SignalManager(null);
 
             GPaste.Client.new( (obj, result) => {
-                this._client = GPaste.Client.new_finish(result);
+                this._client = new GPasteCompat.Client(GPaste.Client.new_finish(result));
 
                 //
                 // Watch client signals
 
                 // Client
-                this._signalManager.connect(this._client, 'update',         this._onClientUpdate.bind(this));
-                this._signalManager.connect(this._client, 'show-history',   this._onClientShowHistory.bind(this));
-                this._signalManager.connect(this._client, 'switch-history', this._onClientSwitchHistory.bind(this));
-                this._signalManager.connect(this._client, 'tracking',       this._onClientTracking.bind(this));
-                this._signalManager.connect(this._client, 'delete-history', this._onClientDeleteHistory.bind(this));
+                this._client.connectSignal(this._signalManager, 'update',         this._onClientUpdate.bind(this));
+                this._client.connectSignal(this._signalManager, 'show-history',   this._onClientShowHistory.bind(this));
+                this._client.connectSignal(this._signalManager, 'switch-history', this._onClientSwitchHistory.bind(this));
+                this._client.connectSignal(this._signalManager, 'tracking',       this._onClientTracking.bind(this));
+                this._client.connectSignal(this._signalManager, 'delete-history', this._onClientDeleteHistory.bind(this));
 
                 // Client settings
-                this._signalManager.connect(this._clientSettings, 'changed::max-displayed-history-size', this._createHistoryItems.bind(this));
+                const maxSizeChanged = GPasteCompat.settingsChangedSignal(this._clientSettings, 'max-displayed-history-size');
+                this._signalManager.connect(this._clientSettings, maxSizeChanged, this._createHistoryItems.bind(this));
 
                 //
-                // Init
+                // Init, once the daemon is ready
 
-                // Get tracking status
-                this.mitemTrack.setToggleState(this._client.is_active());
+                this._client.whenReady(this._signalManager, () => {
+                    // Get tracking status
+                    this.mitemTrack.setToggleState(this._client.isActive());
 
-                // Get current history name
-                this._client.get_history_name( (client, result) => {
-                    this._historyName = this._client.get_history_name_finish(result);
+                    // Get current history name
+                    this._client.getHistoryName(name => {
+                        this._historyName = name;
 
-                    // Get history list
-                    this._client.list_histories(this._onClientHistoriesListed.bind(this));
+                        // Get history list
+                        this._client.listHistories(this._onClientHistoriesListed.bind(this));
 
-                    // Load history and populate applet
-                    this._createHistoryItems();
-                    this._populateMenus();
+                        // Load history and populate applet
+                        this._createHistoryItems();
+                        this._populateMenus();
+                    });
                 });
             });
 
@@ -224,7 +226,7 @@ class GPasteApplet extends Applet.IconApplet {
      */
     _compareVersion(version) {
         version          = version.split(".");
-        const curVersion = this._client.get_version().split(".");
+        const curVersion = this._client.getVersion().split(".");
         const maxLen     = Math.min(curVersion.length, version.length);
 
         for (let i = 0; i < maxLen; ++i) {
@@ -260,11 +262,22 @@ class GPasteApplet extends Applet.IconApplet {
     }
 
     /*
+     * Number of history items to display. GPaste 51 dropped its own setting for this, its former
+     * default value is used instead.
+     */
+    _getMaxDisplayedHistorySize() {
+        if (typeof this._clientSettings.get_max_displayed_history_size === 'function') {
+            return this._clientSettings.get_max_displayed_history_size();
+        }
+        return 20;
+    }
+
+    /*
      * Generate the required number of history items (or delete excessive ones)
      */
     _createHistoryItems() {
         const oldSize = this._historyItems.length;
-        const newSize = this._clientSettings.get_max_displayed_history_size();
+        const newSize = this._getMaxDisplayedHistorySize();
 
         if (newSize > oldSize) {
             for (let i = oldSize; i < newSize; ++i) {
@@ -356,8 +369,7 @@ class GPasteApplet extends Applet.IconApplet {
         if (this._searchResults.length > 0) { // Search field isn't empty
             this.search(this.mitemSearch.getText());
         } else {
-            this._client.get_history_size(this._historyName, (client, result) => {
-                let   size    = client.get_history_size_finish(result);
+            this._client.getHistorySize(this._historyName, size => {
                 const maxSize = this._historyItems.length;
 
                 if (size > maxSize) {
@@ -393,8 +405,8 @@ class GPasteApplet extends Applet.IconApplet {
         if (searchStr.length > 0) {
             this.mitemHistoryIsEmpty.actor.hide();
 
-            this._client.search(searchStr, (client, result) => {
-                this._searchResults = client.search_finish(result);
+            this._client.search(searchStr, uuids => {
+                this._searchResults = uuids;
                 let   results = this._searchResults.length;
                 const maxSize = this._historyItems.length;
 
@@ -431,16 +443,14 @@ class GPasteApplet extends Applet.IconApplet {
      * Toggle GPaste's tracking status
      */
     toggleDaemon () {
-        this._client.track(this.mitemTrack.state, null);
+        this._client.track(this.mitemTrack.state);
     }
 
     /*
      * Select another history
      */
     selectHistory(name) {
-        this._client.switch_history(name, (client, result) => {
-            this._client.switch_history_finish(result);
-        });
+        this._client.switchHistory(name);
     }
 
     /*
@@ -448,7 +458,7 @@ class GPasteApplet extends Applet.IconApplet {
      */
     emptyHistory() {
         new ModalDialog.ConfirmDialog(_("Do you really want to empty the current history?"), () => {
-            this._client.empty_history(this._historyName, null);
+            this._client.emptyHistory(this._historyName);
         }).open(global.get_current_time());
     }
 
@@ -487,10 +497,8 @@ class GPasteApplet extends Applet.IconApplet {
     /*
      * GPaste returned the list of histories
      */
-    _onClientHistoriesListed(client, result) {
+    _onClientHistoriesListed(histories) {
         debugLog("[" + uuid + "] Client event: _onClientHistoriesListed");
-
-        const histories = this._client.list_histories_finish(result);
 
         for (let n in this._historyListItems) {
             this._historyListItems[n].destroy();
@@ -540,10 +548,10 @@ class GPasteApplet extends Applet.IconApplet {
     _onClientSwitchHistory() {
         debugLog("[" + uuid + "] Client event: _onClientSwitchHistory");
 
-        this._client.list_histories(this._onClientHistoriesListed.bind(this));
+        this._client.listHistories(this._onClientHistoriesListed.bind(this));
 
-        this._client.get_history_name((client, result) => {
-            this._historyName = this._client.get_history_name_finish(result);
+        this._client.getHistoryName(name => {
+            this._historyName = name;
 
             this.refresh();
 
@@ -585,6 +593,10 @@ class GPasteApplet extends Applet.IconApplet {
         debugLog("GPaste applet was removed from panel");
 
         this._signalManager.disconnectAllSignals();
+
+        if (this._client) {
+            this._client.destroy();
+        }
     }
 
     /*
