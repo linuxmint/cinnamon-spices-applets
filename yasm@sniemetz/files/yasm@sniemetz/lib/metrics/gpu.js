@@ -120,9 +120,11 @@ function readNvtopAsync(fileutil, cb) {
   });
 }
 
+const { _, padColumn } = typeof imports !== 'undefined' ? imports.lib.util : require('../util.js');
+
 function formatPanel(g) {
   if (!g) return '—';
-  if (!g.active) return 'susp.';
+  if (!g.active) return _("susp.");
   // Keep the panel tile compact: only usage % + temperature.
   // VRAM and clock stay in the tooltip.
   const parts = [];
@@ -132,17 +134,19 @@ function formatPanel(g) {
 }
 
 function formatTooltip(gpus) {
-  const lines = ['<b>GPU</b>'];
+  const lines = [`<b>${_("GPU")}</b>`];
   (gpus || []).forEach((g, idx) => {
     if (idx > 0) lines.push('');
-    if (g.deviceName) lines.push(`Name:     ${g.deviceName}`);
-    else              lines.push(`Type:     ${g.type.toUpperCase()}`);
-    lines.push(`Status:   ${g.active ? 'active' : 'suspended'}`);
-    if (g.tempC      != null) lines.push(`Temp:     ${g.tempC.toFixed ? g.tempC.toFixed(1) : g.tempC}°C`);
-    if (g.busyPct    != null) lines.push(`Busy:     ${g.busyPct}%`);
-    if (g.powerW     != null) lines.push(`Power:    ${g.powerW}W`);
-    if (g.vramUsedMB != null) lines.push(`VRAM:     ${g.vramUsedMB} / ${g.vramTotalMB} MB`);
-    if (g.clockMhz)            lines.push(`Clock:    ${g.clockMhz}${g.maxMhz ? ' / ' + g.maxMhz : ''} MHz`);
+    const pairs = [];
+    if (g.deviceName) pairs.push([_("Name:"),   g.deviceName]);
+    else              pairs.push([_("Type:"),   g.type.toUpperCase()]);
+    pairs.push([_("Status:"), g.active ? _("active") : _("suspended")]);
+    if (g.tempC      != null) pairs.push([_("Temp:"),  `${g.tempC.toFixed ? g.tempC.toFixed(1) : g.tempC}°C`]);
+    if (g.busyPct    != null) pairs.push([_("Busy:"),  `${g.busyPct}%`]);
+    if (g.powerW     != null) pairs.push([_("Power:"), `${g.powerW}W`]);
+    if (g.vramUsedMB != null) pairs.push([_("VRAM:"),  `${g.vramUsedMB} / ${g.vramTotalMB} MB`]);
+    if (g.clockMhz)           pairs.push([_("Clock:"), `${g.clockMhz}${g.maxMhz ? ' / ' + g.maxMhz : ''} MHz`]);
+    lines.push(...padColumn(pairs));
   });
   return lines.join('\n');
 }

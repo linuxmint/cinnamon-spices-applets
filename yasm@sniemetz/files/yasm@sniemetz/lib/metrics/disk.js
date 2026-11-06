@@ -66,8 +66,12 @@ function humanG(g) {
   return g >= 1024 ? `${(g/1024).toFixed(1)}T` : `${g}G`;
 }
 
+const { _ } = typeof imports !== 'undefined' ? imports.lib.util : require('../util.js');
+// GJS runtime only — null in Node test harness
+const GLib = typeof imports !== 'undefined' ? imports.gi.GLib : null;
+
 function formatPanel(dfDisks, diskRates) {
-  if (!dfDisks || dfDisks.length === 0) return 'no disk';
+  if (!dfDisks || dfDisks.length === 0) return _("no disk");
   // Cumulative %free across every enabled device and mount. The tooltip
   // breaks the same figure out per device (and per partition inside each).
   const totalG   = dfDisks.reduce((s, d) => s + d.totalG, 0);
@@ -93,7 +97,6 @@ function readNvmeTemps(fileutil) {
     let dev = null;
     try {
       // Symlink target is like "../../devices/.../nvme/nvme0/hwmon2"
-      const GLib = typeof imports !== 'undefined' ? imports.gi.GLib : null;
       const link = GLib && GLib.file_read_link(base);
       const m = link && link.match(/nvme(\d+)/);
       if (m) dev = `nvme${m[1]}n1`;
@@ -107,7 +110,7 @@ function readNvmeTemps(fileutil) {
 const COL_NAME = 16, COL_SIZE = 5, COL_PCT = 4;
 function _diskRow(name, totalG, freePct, suffix) {
   const pct = (String(freePct)+'%').padStart(COL_PCT);
-  return `${name.padEnd(COL_NAME)} ${humanG(totalG).padStart(COL_SIZE)}  ${pct}free  ${suffix}`;
+  return `${name.padEnd(COL_NAME)} ${humanG(totalG).padStart(COL_SIZE)}  ${pct}${_("free")}  ${suffix}`;
 }
 
 // nvmeTemps: {blockDevice: tempC} map from readNvmeTemps(), or null
@@ -116,7 +119,7 @@ function formatTooltip(dfDisks, diskRates, history, nvmeTemps) {
   if (history) {
     const totalBps = (diskRates || []).filter(r => parentDevice(r.name) === r.name)
       .reduce((s, r) => s + r.readBytesPerSec + r.writeBytesPerSec, 0);
-    lines.push(`${'I/O'.padEnd(10)}${history}  ${humanBps(totalBps)}`, '');
+    lines.push(`${_("I/O").padEnd(10)}${history}  ${humanBps(totalBps)}`, '');
   }
   groupDisksByDevice(dfDisks).forEach(({ device, partitions }) => {
     const devTotalG = partitions.reduce((s, p) => s + p.totalG, 0);
@@ -129,7 +132,7 @@ function formatTooltip(dfDisks, diskRates, history, nvmeTemps) {
     lines.push(_diskRow(device, devTotalG, devFreeP, suffix));
     partitions.forEach(p => {
       const prefix = `  └─ ${p.name.padEnd(COL_NAME - 5)}`;
-      lines.push(`${prefix} ${humanG(p.totalG).padStart(COL_SIZE)}  ${(String(p.freePct)+'%').padStart(COL_PCT)}free  ${p.mount}`);
+      lines.push(`${prefix} ${humanG(p.totalG).padStart(COL_SIZE)}  ${(String(p.freePct)+'%').padStart(COL_PCT)}${_("free")}  ${p.mount}`);
     });
   });
   return lines.join('\n');
