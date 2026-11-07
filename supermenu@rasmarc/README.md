@@ -18,3 +18,7 @@ menu does not use that key. You can change the shortcuts in the settings.
 Requires Cinnamon 6.6. Tested on Cinnamon 6.6.9 with X11. The applet is based
 on Cinnamon's standard applications menu. See the packaged `NOTICE.md` and
 `COPYING` for credits and license terms.
+
+## Donation
+
+[https://buymeacoffee.com/rasmarc](https://buymeacoffee.com/rasmarc)
