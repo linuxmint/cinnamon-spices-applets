@@ -1,0 +1,68 @@
+{
+    "connection-header": {
+        "type": "header",
+        "description": "ADB connection"
+    },
+    "device": {
+        "type": "entry",
+        "default": "",
+        "description": "ADB serial or TV address:port",
+        "tooltip": "Set up and authorise ADB on the TV first. Leave blank to disable communication."
+    },
+    "controller-header": {
+        "type": "header",
+        "description": "Brightness controller"
+    },
+    "kind": {
+        "type": "combobox",
+        "default": "settings",
+        "description": "Controller type",
+        "options": {
+            "Android setting": "settings",
+            "Sysfs backlight": "sysfs"
+        }
+    },
+    "namespace": {
+        "type": "combobox",
+        "default": "global",
+        "description": "Android settings namespace",
+        "options": {
+            "Global": "global",
+            "System": "system",
+            "Secure": "secure"
+        }
+    },
+    "key": {
+        "type": "entry",
+        "default": "picture_backlight",
+        "description": "Setting name or sysfs brightness path"
+    },
+    "minimum": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 65535,
+        "step": 1,
+        "description": "Native minimum value"
+    },
+    "maximum": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 1,
+        "max": 65535,
+        "step": 1,
+        "description": "Native maximum value"
+    },
+    "step": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "description": "Scroll step (percentage points)"
+    },
+    "help": {
+        "type": "label",
+        "description": "Use the bundled discover_brightness.py tool to identify and test a controller. Copy the confirmed values into these settings. See the bundled README.md for ADB setup."
+    }
+}
