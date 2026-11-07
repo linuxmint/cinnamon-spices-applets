@@ -1,0 +1,8 @@
+{
+    "uuid": "easy-effects-selector@rasmarc",
+    "name": "Easy Effects Preset Selector",
+    "description": "Select Easy Effects 7.2.3 output presets from the panel",
+    "version": "1.5.11",
+    "author": "rasmarc",
+    "max-instances": 1
+}

@@ -1,0 +1,324 @@
+# Easy Effects Preset Selector
+# Copyright (C) 2026 rasmarc
+# SPDX-License-Identifier: GPL-3.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: easy-effects-selector@rasmarc 1.5.11\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-11-04 12:00+0000\n"
+"PO-Revision-Date: 2026-11-04 12:00+0000\n"
+"Last-Translator: rasmarc\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+#, python-format
+msgid "%s (no longer available)"
+msgstr "%s (больше недоступен)"
+
+msgid "A blue dot shows a matching preset at its assigned position. Mouse-wheel selection can be enabled or disabled under Controls. Nothing is loaded at startup."
+msgstr "Синяя точка обозначает совпадающий пресет в назначенной позиции. Выбор колёсиком мыши можно включить или выключить в разделе «Управление». При запуске ничего не загружается."
+
+msgid "A custom PipeWire configuration is in use; it was left unchanged."
+msgstr "Используется собственная конфигурация PipeWire; она оставлена без изменений."
+
+msgid "A physical default output device could not be found."
+msgstr "Физическое устройство вывода по умолчанию не найдено."
+
+#, python-format
+msgid "A required command is missing: %s"
+msgstr "Отсутствует необходимая команда: %s"
+
+msgid "A routing file is a symbolic link; it was left unchanged."
+msgstr "Файл маршрутизации является символической ссылкой; он оставлен без изменений."
+
+msgid "An existing routing configuration was left unchanged."
+msgstr "Существующая конфигурация маршрутизации оставлена без изменений."
+
+msgid "Another configuration already defines the Easy Effects route."
+msgstr "Маршрут Easy Effects уже задан другой конфигурацией."
+
+#, javascript-format
+msgid "Autostart could not be changed: %s"
+msgstr "Не удалось изменить автозапуск: %s"
+
+msgid "Bottom"
+msgstr "Внизу"
+
+#, javascript-format
+msgid "Bypass could not be changed: %s"
+msgstr "Не удалось изменить состояние обхода: %s"
+
+#, javascript-format
+msgid "Bypass could not be restored: %s"
+msgstr "Не удалось восстановить состояние обхода: %s"
+
+#, javascript-format
+msgid "Bypass preservation could not be changed.\n%s"
+msgstr "Не удалось изменить сохранение состояния обхода.\n%s"
+
+msgid "Bypass status"
+msgstr "Состояние обхода"
+
+msgid "Changed settings"
+msgstr "Изменённые настройки"
+
+msgid "Comparison errors"
+msgstr "Ошибки сравнения"
+
+#, javascript-format
+msgid "Comparison unavailable: %s"
+msgstr "Сравнение недоступно: %s"
+
+msgid "Controls"
+msgstr "Управление"
+
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+msgid "Easy Effects Preset Selector"
+msgstr "Easy Effects Preset Selector"
+
+msgid "Easy Effects did not load the output preset. Please check the preset file."
+msgstr "Easy Effects не загрузил пресет вывода. Проверьте файл пресета."
+
+msgid "Effect settings changed"
+msgstr "Настройки эффектов изменены"
+
+msgid "Global bypass enabled"
+msgstr "Глобальный обход включён"
+
+msgid "Global bypass is unavailable"
+msgstr "Глобальный обход недоступен"
+
+msgid "Global bypass: off"
+msgstr "Глобальный обход: выключен"
+
+msgid "Global bypass: on"
+msgstr "Глобальный обход: включён"
+
+msgid "Incomplete structure in the assigned preset."
+msgstr "Неполная структура в назначенном пресете."
+
+msgid "Invalid effect name in the assigned preset."
+msgstr "Недопустимое имя эффекта в назначенном пресете."
+
+msgid "Invalid structure in the assigned preset."
+msgstr "Недопустимая структура в назначенном пресете."
+
+msgid "Keep bypass when changing output devices"
+msgstr "Сохранять обход при смене устройства вывода"
+
+msgid "Keep menu open after preset selection when bypass is active"
+msgstr "Не закрывать меню после выбора пресета, если обход включён"
+
+msgid "Launch Easy Effects from the menu"
+msgstr "Запускать Easy Effects из меню"
+
+msgid "Launch Service at System Startup"
+msgstr "Запускать службу при старте системы"
+
+msgid "Loading preset…"
+msgstr "Загрузка пресета…"
+
+msgid "Middle"
+msgstr "Посередине"
+
+msgid "No output presets saved"
+msgstr "Нет сохранённых пресетов вывода"
+
+msgid "No preset"
+msgstr "Нет пресета"
+
+msgid "PipeWire and WirePlumber must be running."
+msgstr "PipeWire и WirePlumber должны быть запущены."
+
+msgid "Preset Selector – Fixed output"
+msgstr "Preset Selector – Фиксированный выход"
+
+msgid "Preset Selector – Forwarding"
+msgstr "Preset Selector – Перенаправление"
+
+msgid "Preset at bottom"
+msgstr "Пресет внизу"
+
+msgid "Preset at middle"
+msgstr "Пресет посередине"
+
+msgid "Preset at top"
+msgstr "Пресет вверху"
+
+msgid "Preset name"
+msgstr "Имя пресета"
+
+#, javascript-format
+msgid "Preset “%s” could not be loaded.\n%s"
+msgstr "Не удалось загрузить пресет «%s».\n%s"
+
+msgid "Preset:"
+msgstr "Пресет:"
+
+#, javascript-format
+msgid "Preset: %s"
+msgstr "Пресет: %s"
+
+msgid "Presets could not be read"
+msgstr "Не удалось прочитать пресеты"
+
+msgid "Quick selection"
+msgstr "Быстрый выбор"
+
+#, javascript-format
+msgid "Quick selection: %s"
+msgstr "Быстрый выбор: %s"
+
+msgid "Quick-selection position"
+msgstr "Позиция быстрого выбора"
+
+msgid "Quit Easy Effects when its window closes. This setting is synchronized in both directions with the Easy Effects settings window."
+msgstr "Завершать Easy Effects при закрытии его окна. Этот параметр синхронизируется в обоих направлениях с окном настроек Easy Effects."
+
+msgid "Recommended: <b>disable</b> this so the service keeps running when the application window is closed."
+msgstr "Рекомендуется <b>выключить</b> этот параметр, чтобы служба продолжала работать при закрытом окне приложения."
+
+msgid "Recommended: <b>enable</b> this so the service is ready in the background when you log in."
+msgstr "Рекомендуется <b>включить</b> этот параметр, чтобы служба была готова в фоновом режиме при входе в систему."
+
+msgid "Select Easy Effects 7.2.3 output presets from the panel"
+msgstr "Выбор пресетов вывода Easy Effects 7.2.3 с панели"
+
+#, python-format
+msgid "Setup failed: %s\nRecovery also failed: %s"
+msgstr "Ошибка настройки: %s\nВосстановление также не удалось: %s"
+
+#, python-format
+msgid "Setup failed; the previous configuration was restored: %s"
+msgstr "Ошибка настройки; предыдущая конфигурация восстановлена: %s"
+
+msgid "Show tooltips"
+msgstr "Показывать подсказки"
+
+msgid "Shutdown on Window Closing"
+msgstr "Завершать работу при закрытии окна"
+
+msgid "Start Easy Effects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
+msgstr "Запускать Easy Effects как фоновую службу при входе в систему. Если окно настроек уже открыто, откройте его заново, чтобы увидеть внешние изменения автозапуска."
+
+msgid "Switch quick-selection presets with mouse wheel"
+msgstr "Переключать пресеты быстрого выбора колёсиком мыши"
+
+msgid "The Cinnamon applet settings could not be initialized."
+msgstr "Не удалось инициализировать настройки апплета Cinnamon."
+
+msgid "The Easy Effects autostart path is not a regular file."
+msgstr "Путь автозапуска Easy Effects не является обычным файлом."
+
+msgid "The Easy Effects bypass setting could not be changed."
+msgstr "Не удалось изменить параметр обхода Easy Effects."
+
+msgid "The Easy Effects bypass setting is not writable."
+msgstr "Параметр обхода Easy Effects недоступен для записи."
+
+msgid "The Easy Effects command failed."
+msgstr "Команда Easy Effects завершилась с ошибкой."
+
+msgid "The Easy Effects device settings are not writable."
+msgstr "Настройки устройств Easy Effects недоступны для записи."
+
+msgid "The Easy Effects device settings no longer match the bypass-preserving route. Enable this option again to restore it."
+msgstr "Настройки устройств Easy Effects больше не соответствуют маршруту, сохраняющему обход. Включите этот параметр повторно для восстановления."
+
+#, javascript-format
+msgid "The Easy Effects effect parameter is missing: %s"
+msgstr "Отсутствует параметр эффекта Easy Effects: %s"
+
+msgid "The Easy Effects output settings are not available."
+msgstr "Настройки вывода Easy Effects недоступны."
+
+msgid "The Easy Effects setting could not be saved."
+msgstr "Не удалось сохранить параметр Easy Effects."
+
+msgid "The Easy Effects setting is not available."
+msgstr "Параметр Easy Effects недоступен."
+
+#, javascript-format
+msgid "The Easy Effects settings schema is missing: %s"
+msgstr "Отсутствует схема настроек Easy Effects: %s"
+
+msgid "The Easy Effects settings schema was not found."
+msgstr "Схема настроек Easy Effects не найдена."
+
+#, javascript-format
+msgid "The assigned preset cannot be read: %s"
+msgstr "Не удаётся прочитать назначенный пресет: %s"
+
+msgid "The assigned preset could not be read."
+msgstr "Не удалось прочитать назначенный пресет."
+
+msgid "The assigned preset does not contain a valid output effect list."
+msgstr "Назначенный пресет не содержит допустимого списка эффектов вывода."
+
+msgid "The audio command failed."
+msgstr "Звуковая команда завершилась с ошибкой."
+
+msgid "The audio service did not become ready in time."
+msgstr "Звуковая служба не успела запуститься вовремя."
+
+msgid "The autostart directory could not be created."
+msgstr "Не удалось создать каталог автозапуска."
+
+msgid "The bypass state did not settle after restarting Easy Effects."
+msgstr "Состояние обхода не стабилизировалось после перезапуска Easy Effects."
+
+#, javascript-format
+msgid "The effect configuration is missing from the assigned preset: %s"
+msgstr "В назначенном пресете отсутствует конфигурация эффекта: %s"
+
+msgid "The effect parameter map could not be read."
+msgstr "Не удалось прочитать таблицу параметров эффектов."
+
+msgid "The forwarding application could not be excluded."
+msgstr "Не удалось исключить приложение перенаправления."
+
+msgid "The managed routing file is missing or has been replaced."
+msgstr "Управляемый апплетом файл маршрутизации отсутствует или был заменён."
+
+msgid "The original preset name could not be restored."
+msgstr "Не удалось восстановить исходное имя пресета."
+
+msgid "The preset file was moved or deleted."
+msgstr "Файл пресета перемещён или удалён."
+
+msgid "The routing configuration was changed outside the applet; it was left unchanged."
+msgstr "Конфигурация маршрутизации изменена вне апплета; она оставлена без изменений."
+
+msgid "The saved routing information is invalid."
+msgstr "Сохранённые сведения о маршрутизации недопустимы."
+
+msgid "This routing option requires the native Easy Effects 7.2.3 package."
+msgstr "Для этого варианта маршрутизации требуется нативный пакет Easy Effects 7.2.3."
+
+msgid "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects.\n\n<b>Before removing the applet from the panel or uninstalling it, turn this option off to remove the forwarding route.</b>"
+msgstr "Чтобы обойти автоматическое выключение глобального обхода в Easy Effects 7, апплет создаёт перенаправление звука на устройство вывода, выбранное в системе. Для этого Easy Effects использует фиксированный выбор устройств, включая устройство ввода.\n\nПеренаправление отображается как «Preset Selector – Перенаправление» среди исключённых приложений. Включение или выключение этого параметра ненадолго перезапускает звуковые службы и работающий Easy Effects.\n\n<b>Перед удалением апплета с панели или его деинсталляцией выключите этот параметр, чтобы убрать перенаправление.</b>"
+
+msgid "Toggle bypass in menu"
+msgstr "Переключать обход в меню"
+
+msgid "Toggle bypass with middle click"
+msgstr "Переключать обход средней кнопкой мыши"
+
+msgid "Tooltips"
+msgstr "Подсказки"
+
+msgid "Top"
+msgstr "Вверху"
+
+#, javascript-format
+msgid "Unknown Easy Effects effect: %s"
+msgstr "Неизвестный эффект Easy Effects: %s"
+
+msgid "Loading presets…"
+msgstr "Чтение пресетов…"

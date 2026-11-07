@@ -1,0 +1,324 @@
+# Easy Effects Preset Selector
+# Copyright (C) 2026 rasmarc
+# SPDX-License-Identifier: GPL-3.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: easy-effects-selector@rasmarc 1.5.11\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-11-04 12:00+0000\n"
+"PO-Revision-Date: 2026-11-04 12:00+0000\n"
+"Last-Translator: rasmarc\n"
+"Language-Team: Czech\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+
+#, python-format
+msgid "%s (no longer available)"
+msgstr "%s (již není k dispozici)"
+
+msgid "A blue dot shows a matching preset at its assigned position. Mouse-wheel selection can be enabled or disabled under Controls. Nothing is loaded at startup."
+msgstr "Modrá tečka označuje odpovídající předvolbu na přiřazené pozici. Výběr kolečkem myši lze zapnout nebo vypnout v části Ovládání. Při spuštění se nic nenačítá."
+
+msgid "A custom PipeWire configuration is in use; it was left unchanged."
+msgstr "Používá se vlastní konfigurace PipeWire; nebyla změněna."
+
+msgid "A physical default output device could not be found."
+msgstr "Nepodařilo se najít fyzické výchozí výstupní zařízení."
+
+#, python-format
+msgid "A required command is missing: %s"
+msgstr "Chybí požadovaný příkaz: %s"
+
+msgid "A routing file is a symbolic link; it was left unchanged."
+msgstr "Soubor přesměrování je symbolický odkaz; nebyl změněn."
+
+msgid "An existing routing configuration was left unchanged."
+msgstr "Stávající konfigurace přesměrování nebyla změněna."
+
+msgid "Another configuration already defines the Easy Effects route."
+msgstr "Jiná konfigurace již definuje přesměrování Easy Effects."
+
+#, javascript-format
+msgid "Autostart could not be changed: %s"
+msgstr "Automatické spouštění se nepodařilo změnit: %s"
+
+msgid "Bottom"
+msgstr "Dole"
+
+#, javascript-format
+msgid "Bypass could not be changed: %s"
+msgstr "Bypass se nepodařilo změnit: %s"
+
+#, javascript-format
+msgid "Bypass could not be restored: %s"
+msgstr "Bypass se nepodařilo obnovit: %s"
+
+#, javascript-format
+msgid "Bypass preservation could not be changed.\n%s"
+msgstr "Zachování bypassu se nepodařilo změnit.\n%s"
+
+msgid "Bypass status"
+msgstr "Stav bypassu"
+
+msgid "Changed settings"
+msgstr "Změněná nastavení"
+
+msgid "Comparison errors"
+msgstr "Chyby porovnání"
+
+#, javascript-format
+msgid "Comparison unavailable: %s"
+msgstr "Porovnání není k dispozici: %s"
+
+msgid "Controls"
+msgstr "Ovládání"
+
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+msgid "Easy Effects Preset Selector"
+msgstr "Easy Effects Preset Selector"
+
+msgid "Easy Effects did not load the output preset. Please check the preset file."
+msgstr "Easy Effects nenačetl výstupní předvolbu. Zkontrolujte její soubor."
+
+msgid "Effect settings changed"
+msgstr "Nastavení efektů změněno"
+
+msgid "Global bypass enabled"
+msgstr "Globální bypass zapnut"
+
+msgid "Global bypass is unavailable"
+msgstr "Globální bypass není k dispozici"
+
+msgid "Global bypass: off"
+msgstr "Globální bypass: vypnut"
+
+msgid "Global bypass: on"
+msgstr "Globální bypass: zapnut"
+
+msgid "Incomplete structure in the assigned preset."
+msgstr "Neúplná struktura v přiřazené předvolbě."
+
+msgid "Invalid effect name in the assigned preset."
+msgstr "Neplatný název efektu v přiřazené předvolbě."
+
+msgid "Invalid structure in the assigned preset."
+msgstr "Neplatná struktura v přiřazené předvolbě."
+
+msgid "Keep bypass when changing output devices"
+msgstr "Zachovat bypass při změně výstupního zařízení"
+
+msgid "Keep menu open after preset selection when bypass is active"
+msgstr "Ponechat nabídku po výběru předvolby otevřenou, pokud je zapnutý bypass"
+
+msgid "Launch Easy Effects from the menu"
+msgstr "Spouštět Easy Effects z nabídky"
+
+msgid "Launch Service at System Startup"
+msgstr "Spouštět službu při startu systému"
+
+msgid "Loading preset…"
+msgstr "Načítání předvolby…"
+
+msgid "Middle"
+msgstr "Uprostřed"
+
+msgid "No output presets saved"
+msgstr "Nejsou uloženy žádné výstupní předvolby"
+
+msgid "No preset"
+msgstr "Žádná předvolba"
+
+msgid "PipeWire and WirePlumber must be running."
+msgstr "PipeWire a WirePlumber musí být spuštěny."
+
+msgid "Preset Selector – Fixed output"
+msgstr "Preset Selector – Pevný výstup"
+
+msgid "Preset Selector – Forwarding"
+msgstr "Preset Selector – Přesměrování"
+
+msgid "Preset at bottom"
+msgstr "Předvolba dole"
+
+msgid "Preset at middle"
+msgstr "Předvolba uprostřed"
+
+msgid "Preset at top"
+msgstr "Předvolba nahoře"
+
+msgid "Preset name"
+msgstr "Název předvolby"
+
+#, javascript-format
+msgid "Preset “%s” could not be loaded.\n%s"
+msgstr "Předvolbu „%s“ se nepodařilo načíst.\n%s"
+
+msgid "Preset:"
+msgstr "Předvolba:"
+
+#, javascript-format
+msgid "Preset: %s"
+msgstr "Předvolba: %s"
+
+msgid "Presets could not be read"
+msgstr "Předvolby se nepodařilo přečíst"
+
+msgid "Quick selection"
+msgstr "Rychlý výběr"
+
+#, javascript-format
+msgid "Quick selection: %s"
+msgstr "Rychlý výběr: %s"
+
+msgid "Quick-selection position"
+msgstr "Pozice rychlého výběru"
+
+msgid "Quit Easy Effects when its window closes. This setting is synchronized in both directions with the Easy Effects settings window."
+msgstr "Ukončit Easy Effects při zavření jeho okna. Toto nastavení se obousměrně synchronizuje s oknem nastavení Easy Effects."
+
+msgid "Recommended: <b>disable</b> this so the service keeps running when the application window is closed."
+msgstr "Doporučeno: <b>vypnout</b> tuto možnost, aby služba běžela i při zavřeném okně aplikace."
+
+msgid "Recommended: <b>enable</b> this so the service is ready in the background when you log in."
+msgstr "Doporučeno: <b>zapnout</b> tuto možnost, aby byla služba po přihlášení připravena na pozadí."
+
+msgid "Select Easy Effects 7.2.3 output presets from the panel"
+msgstr "Vybírejte výstupní předvolby Easy Effects 7.2.3 z panelu"
+
+#, python-format
+msgid "Setup failed: %s\nRecovery also failed: %s"
+msgstr "Nastavení selhalo: %s\nObnovení také selhalo: %s"
+
+#, python-format
+msgid "Setup failed; the previous configuration was restored: %s"
+msgstr "Nastavení selhalo; předchozí konfigurace byla obnovena: %s"
+
+msgid "Show tooltips"
+msgstr "Zobrazovat popisky"
+
+msgid "Shutdown on Window Closing"
+msgstr "Ukončit při zavření okna"
+
+msgid "Start Easy Effects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
+msgstr "Spustit Easy Effects jako službu na pozadí při přihlášení. Pokud je okno nastavení již otevřené, otevřete je znovu, aby se zobrazily externí změny automatického spouštění."
+
+msgid "Switch quick-selection presets with mouse wheel"
+msgstr "Měnit předvolby rychlého výběru kolečkem myši"
+
+msgid "The Cinnamon applet settings could not be initialized."
+msgstr "Nastavení apletu Cinnamon se nepodařilo inicializovat."
+
+msgid "The Easy Effects autostart path is not a regular file."
+msgstr "Cesta automatického spouštění Easy Effects není běžný soubor."
+
+msgid "The Easy Effects bypass setting could not be changed."
+msgstr "Nastavení bypassu Easy Effects se nepodařilo změnit."
+
+msgid "The Easy Effects bypass setting is not writable."
+msgstr "Do nastavení bypassu Easy Effects nelze zapisovat."
+
+msgid "The Easy Effects command failed."
+msgstr "Příkaz Easy Effects selhal."
+
+msgid "The Easy Effects device settings are not writable."
+msgstr "Do nastavení zařízení Easy Effects nelze zapisovat."
+
+msgid "The Easy Effects device settings no longer match the bypass-preserving route. Enable this option again to restore it."
+msgstr "Nastavení zařízení Easy Effects již neodpovídá přesměrování zachovávajícímu bypass. Pro obnovení tuto možnost znovu zapněte."
+
+#, javascript-format
+msgid "The Easy Effects effect parameter is missing: %s"
+msgstr "Chybí parametr efektu Easy Effects: %s"
+
+msgid "The Easy Effects output settings are not available."
+msgstr "Nastavení výstupu Easy Effects není k dispozici."
+
+msgid "The Easy Effects setting could not be saved."
+msgstr "Nastavení Easy Effects se nepodařilo uložit."
+
+msgid "The Easy Effects setting is not available."
+msgstr "Nastavení Easy Effects není k dispozici."
+
+#, javascript-format
+msgid "The Easy Effects settings schema is missing: %s"
+msgstr "Chybí schéma nastavení Easy Effects: %s"
+
+msgid "The Easy Effects settings schema was not found."
+msgstr "Schéma nastavení Easy Effects nebylo nalezeno."
+
+#, javascript-format
+msgid "The assigned preset cannot be read: %s"
+msgstr "Přiřazenou předvolbu nelze přečíst: %s"
+
+msgid "The assigned preset could not be read."
+msgstr "Přiřazenou předvolbu se nepodařilo přečíst."
+
+msgid "The assigned preset does not contain a valid output effect list."
+msgstr "Přiřazená předvolba neobsahuje platný seznam výstupních efektů."
+
+msgid "The audio command failed."
+msgstr "Zvukový příkaz selhal."
+
+msgid "The audio service did not become ready in time."
+msgstr "Zvuková služba nebyla včas připravena."
+
+msgid "The autostart directory could not be created."
+msgstr "Adresář automatického spouštění se nepodařilo vytvořit."
+
+msgid "The bypass state did not settle after restarting Easy Effects."
+msgstr "Stav bypassu se po restartování Easy Effects neustálil."
+
+#, javascript-format
+msgid "The effect configuration is missing from the assigned preset: %s"
+msgstr "V přiřazené předvolbě chybí konfigurace efektu: %s"
+
+msgid "The effect parameter map could not be read."
+msgstr "Mapu parametrů efektů se nepodařilo přečíst."
+
+msgid "The forwarding application could not be excluded."
+msgstr "Aplikaci přesměrování se nepodařilo vyloučit."
+
+msgid "The managed routing file is missing or has been replaced."
+msgstr "Soubor přesměrování spravovaný apletem chybí nebo byl nahrazen."
+
+msgid "The original preset name could not be restored."
+msgstr "Původní název předvolby se nepodařilo obnovit."
+
+msgid "The preset file was moved or deleted."
+msgstr "Soubor předvolby byl přesunut nebo odstraněn."
+
+msgid "The routing configuration was changed outside the applet; it was left unchanged."
+msgstr "Konfigurace přesměrování byla změněna mimo aplet; byla ponechána beze změn."
+
+msgid "The saved routing information is invalid."
+msgstr "Uložené informace o přesměrování jsou neplatné."
+
+msgid "This routing option requires the native Easy Effects 7.2.3 package."
+msgstr "Tato možnost přesměrování vyžaduje nativní balíček Easy Effects 7.2.3."
+
+msgid "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects.\n\n<b>Before removing the applet from the panel or uninstalling it, turn this option off to remove the forwarding route.</b>"
+msgstr "Aby Easy Effects 7 automaticky nevypínal globální bypass, vytvoří aplet přesměrování zvuku na výstupní zařízení vybrané v systému. Easy Effects k tomu používá pevný výběr zařízení, včetně vstupního.\n\nPřesměrování se zobrazuje jako „Preset Selector – Přesměrování“ mezi vyloučenými aplikacemi. Zapnutí nebo vypnutí této možnosti krátce restartuje zvukové služby a spuštěný Easy Effects.\n\n<b>Před odebráním apletu z panelu nebo jeho odinstalováním tuto možnost vypněte, aby se přesměrování odstranilo.</b>"
+
+msgid "Toggle bypass in menu"
+msgstr "Přepínat bypass v nabídce"
+
+msgid "Toggle bypass with middle click"
+msgstr "Přepínat bypass prostředním tlačítkem myši"
+
+msgid "Tooltips"
+msgstr "Popisky"
+
+msgid "Top"
+msgstr "Nahoře"
+
+#, javascript-format
+msgid "Unknown Easy Effects effect: %s"
+msgstr "Neznámý efekt Easy Effects: %s"
+
+msgid "Loading presets…"
+msgstr "Načítání předvoleb…"

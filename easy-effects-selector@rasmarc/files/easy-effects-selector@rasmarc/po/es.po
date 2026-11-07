@@ -1,0 +1,324 @@
+# Easy Effects Preset Selector
+# Copyright (C) 2026 rasmarc
+# SPDX-License-Identifier: GPL-3.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: easy-effects-selector@rasmarc 1.5.11\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-11-04 12:00+0000\n"
+"PO-Revision-Date: 2026-11-04 12:00+0000\n"
+"Last-Translator: rasmarc\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%s (no longer available)"
+msgstr "%s (ya no está disponible)"
+
+msgid "A blue dot shows a matching preset at its assigned position. Mouse-wheel selection can be enabled or disabled under Controls. Nothing is loaded at startup."
+msgstr "Un punto azul indica un preajuste coincidente en la posición asignada. La selección con la rueda del ratón se puede activar o desactivar en Controles. No se carga nada al iniciar."
+
+msgid "A custom PipeWire configuration is in use; it was left unchanged."
+msgstr "Se está usando una configuración personalizada de PipeWire; no se ha modificado."
+
+msgid "A physical default output device could not be found."
+msgstr "No se ha encontrado un dispositivo físico de salida predeterminado."
+
+#, python-format
+msgid "A required command is missing: %s"
+msgstr "Falta un comando necesario: %s"
+
+msgid "A routing file is a symbolic link; it was left unchanged."
+msgstr "Un archivo de enrutamiento es un enlace simbólico; no se ha modificado."
+
+msgid "An existing routing configuration was left unchanged."
+msgstr "No se ha modificado una configuración de enrutamiento existente."
+
+msgid "Another configuration already defines the Easy Effects route."
+msgstr "Otra configuración ya define la ruta de Easy Effects."
+
+#, javascript-format
+msgid "Autostart could not be changed: %s"
+msgstr "No se ha podido cambiar el inicio automático: %s"
+
+msgid "Bottom"
+msgstr "Abajo"
+
+#, javascript-format
+msgid "Bypass could not be changed: %s"
+msgstr "No se ha podido cambiar el bypass: %s"
+
+#, javascript-format
+msgid "Bypass could not be restored: %s"
+msgstr "No se ha podido restaurar el bypass: %s"
+
+#, javascript-format
+msgid "Bypass preservation could not be changed.\n%s"
+msgstr "No se ha podido cambiar la conservación del bypass.\n%s"
+
+msgid "Bypass status"
+msgstr "Estado del bypass"
+
+msgid "Changed settings"
+msgstr "Ajustes modificados"
+
+msgid "Comparison errors"
+msgstr "Errores de comparación"
+
+#, javascript-format
+msgid "Comparison unavailable: %s"
+msgstr "Comparación no disponible: %s"
+
+msgid "Controls"
+msgstr "Controles"
+
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+msgid "Easy Effects Preset Selector"
+msgstr "Easy Effects Preset Selector"
+
+msgid "Easy Effects did not load the output preset. Please check the preset file."
+msgstr "Easy Effects no ha cargado el preajuste de salida. Compruebe el archivo del preajuste."
+
+msgid "Effect settings changed"
+msgstr "Ajustes de efectos modificados"
+
+msgid "Global bypass enabled"
+msgstr "Bypass global activado"
+
+msgid "Global bypass is unavailable"
+msgstr "El bypass global no está disponible"
+
+msgid "Global bypass: off"
+msgstr "Bypass global: desactivado"
+
+msgid "Global bypass: on"
+msgstr "Bypass global: activado"
+
+msgid "Incomplete structure in the assigned preset."
+msgstr "Estructura incompleta en el preajuste asignado."
+
+msgid "Invalid effect name in the assigned preset."
+msgstr "Nombre de efecto no válido en el preajuste asignado."
+
+msgid "Invalid structure in the assigned preset."
+msgstr "Estructura no válida en el preajuste asignado."
+
+msgid "Keep bypass when changing output devices"
+msgstr "Mantener el bypass al cambiar de dispositivo de salida"
+
+msgid "Keep menu open after preset selection when bypass is active"
+msgstr "Mantener el menú abierto tras seleccionar un preajuste si el bypass está activo"
+
+msgid "Launch Easy Effects from the menu"
+msgstr "Iniciar Easy Effects desde el menú"
+
+msgid "Launch Service at System Startup"
+msgstr "Iniciar el servicio al arrancar el sistema"
+
+msgid "Loading preset…"
+msgstr "Cargando preajuste…"
+
+msgid "Middle"
+msgstr "Centro"
+
+msgid "No output presets saved"
+msgstr "No hay preajustes de salida guardados"
+
+msgid "No preset"
+msgstr "Ningún preajuste"
+
+msgid "PipeWire and WirePlumber must be running."
+msgstr "PipeWire y WirePlumber deben estar en ejecución."
+
+msgid "Preset Selector – Fixed output"
+msgstr "Preset Selector – Salida fija"
+
+msgid "Preset Selector – Forwarding"
+msgstr "Preset Selector – Reenvío"
+
+msgid "Preset at bottom"
+msgstr "Preajuste de abajo"
+
+msgid "Preset at middle"
+msgstr "Preajuste del centro"
+
+msgid "Preset at top"
+msgstr "Preajuste de arriba"
+
+msgid "Preset name"
+msgstr "Nombre del preajuste"
+
+#, javascript-format
+msgid "Preset “%s” could not be loaded.\n%s"
+msgstr "No se ha podido cargar el preajuste «%s».\n%s"
+
+msgid "Preset:"
+msgstr "Preajuste:"
+
+#, javascript-format
+msgid "Preset: %s"
+msgstr "Preajuste: %s"
+
+msgid "Presets could not be read"
+msgstr "No se han podido leer los preajustes"
+
+msgid "Quick selection"
+msgstr "Selección rápida"
+
+#, javascript-format
+msgid "Quick selection: %s"
+msgstr "Selección rápida: %s"
+
+msgid "Quick-selection position"
+msgstr "Posición de selección rápida"
+
+msgid "Quit Easy Effects when its window closes. This setting is synchronized in both directions with the Easy Effects settings window."
+msgstr "Cerrar Easy Effects al cerrar su ventana. Este ajuste se sincroniza en ambos sentidos con la ventana de ajustes de Easy Effects."
+
+msgid "Recommended: <b>disable</b> this so the service keeps running when the application window is closed."
+msgstr "Se recomienda <b>desactivar</b> esta opción para que el servicio siga funcionando al cerrar la ventana de la aplicación."
+
+msgid "Recommended: <b>enable</b> this so the service is ready in the background when you log in."
+msgstr "Se recomienda <b>activar</b> esta opción para que el servicio esté listo en segundo plano al iniciar sesión."
+
+msgid "Select Easy Effects 7.2.3 output presets from the panel"
+msgstr "Seleccionar preajustes de salida de Easy Effects 7.2.3 desde el panel"
+
+#, python-format
+msgid "Setup failed: %s\nRecovery also failed: %s"
+msgstr "La configuración ha fallado: %s\nLa recuperación también ha fallado: %s"
+
+#, python-format
+msgid "Setup failed; the previous configuration was restored: %s"
+msgstr "La configuración ha fallado; se ha restaurado la configuración anterior: %s"
+
+msgid "Show tooltips"
+msgstr "Mostrar información emergente"
+
+msgid "Shutdown on Window Closing"
+msgstr "Cerrar al cerrar la ventana"
+
+msgid "Start Easy Effects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
+msgstr "Iniciar Easy Effects como servicio en segundo plano al iniciar sesión. Si su ventana de ajustes ya está abierta, vuelva a abrirla para ver los cambios externos del inicio automático."
+
+msgid "Switch quick-selection presets with mouse wheel"
+msgstr "Cambiar los preajustes de selección rápida con la rueda del ratón"
+
+msgid "The Cinnamon applet settings could not be initialized."
+msgstr "No se han podido inicializar los ajustes del applet de Cinnamon."
+
+msgid "The Easy Effects autostart path is not a regular file."
+msgstr "La ruta de inicio automático de Easy Effects no es un archivo normal."
+
+msgid "The Easy Effects bypass setting could not be changed."
+msgstr "No se ha podido cambiar el ajuste de bypass de Easy Effects."
+
+msgid "The Easy Effects bypass setting is not writable."
+msgstr "No se puede escribir el ajuste de bypass de Easy Effects."
+
+msgid "The Easy Effects command failed."
+msgstr "El comando de Easy Effects ha fallado."
+
+msgid "The Easy Effects device settings are not writable."
+msgstr "No se pueden escribir los ajustes de dispositivos de Easy Effects."
+
+msgid "The Easy Effects device settings no longer match the bypass-preserving route. Enable this option again to restore it."
+msgstr "Los ajustes de dispositivos de Easy Effects ya no coinciden con la ruta que conserva el bypass. Vuelva a activar esta opción para restaurarla."
+
+#, javascript-format
+msgid "The Easy Effects effect parameter is missing: %s"
+msgstr "Falta un parámetro de efecto de Easy Effects: %s"
+
+msgid "The Easy Effects output settings are not available."
+msgstr "Los ajustes de salida de Easy Effects no están disponibles."
+
+msgid "The Easy Effects setting could not be saved."
+msgstr "No se ha podido guardar el ajuste de Easy Effects."
+
+msgid "The Easy Effects setting is not available."
+msgstr "El ajuste de Easy Effects no está disponible."
+
+#, javascript-format
+msgid "The Easy Effects settings schema is missing: %s"
+msgstr "Falta un esquema de ajustes de Easy Effects: %s"
+
+msgid "The Easy Effects settings schema was not found."
+msgstr "No se ha encontrado el esquema de ajustes de Easy Effects."
+
+#, javascript-format
+msgid "The assigned preset cannot be read: %s"
+msgstr "No se puede leer el preajuste asignado: %s"
+
+msgid "The assigned preset could not be read."
+msgstr "No se ha podido leer el preajuste asignado."
+
+msgid "The assigned preset does not contain a valid output effect list."
+msgstr "El preajuste asignado no contiene una lista válida de efectos de salida."
+
+msgid "The audio command failed."
+msgstr "El comando de audio ha fallado."
+
+msgid "The audio service did not become ready in time."
+msgstr "El servicio de audio no ha estado listo a tiempo."
+
+msgid "The autostart directory could not be created."
+msgstr "No se ha podido crear el directorio de inicio automático."
+
+msgid "The bypass state did not settle after restarting Easy Effects."
+msgstr "El estado del bypass no se ha estabilizado tras reiniciar Easy Effects."
+
+#, javascript-format
+msgid "The effect configuration is missing from the assigned preset: %s"
+msgstr "Falta la configuración del efecto en el preajuste asignado: %s"
+
+msgid "The effect parameter map could not be read."
+msgstr "No se ha podido leer la tabla de parámetros de efectos."
+
+msgid "The forwarding application could not be excluded."
+msgstr "No se ha podido excluir la aplicación de reenvío."
+
+msgid "The managed routing file is missing or has been replaced."
+msgstr "El archivo de enrutamiento gestionado por el applet no existe o ha sido sustituido."
+
+msgid "The original preset name could not be restored."
+msgstr "No se ha podido restaurar el nombre original del preajuste."
+
+msgid "The preset file was moved or deleted."
+msgstr "El archivo del preajuste se ha movido o eliminado."
+
+msgid "The routing configuration was changed outside the applet; it was left unchanged."
+msgstr "La configuración de enrutamiento se ha cambiado fuera del applet; no se ha modificado."
+
+msgid "The saved routing information is invalid."
+msgstr "La información de enrutamiento guardada no es válida."
+
+msgid "This routing option requires the native Easy Effects 7.2.3 package."
+msgstr "Esta opción de enrutamiento requiere el paquete nativo de Easy Effects 7.2.3."
+
+msgid "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects.\n\n<b>Before removing the applet from the panel or uninstalling it, turn this option off to remove the forwarding route.</b>"
+msgstr "Para evitar que Easy Effects 7 desactive automáticamente el bypass global, el applet crea una ruta de reenvío de audio hacia el dispositivo de salida seleccionado en el sistema. Easy Effects utiliza para ello una selección fija de dispositivos, incluida la entrada.\n\nEl reenvío aparece como «Preset Selector – Reenvío» entre las aplicaciones excluidas. Al activar o desactivar esta opción se reinician brevemente los servicios de audio y Easy Effects, si está en ejecución.\n\n<b>Antes de quitar el applet del panel o desinstalarlo, desactive esta opción para eliminar la ruta de reenvío.</b>"
+
+msgid "Toggle bypass in menu"
+msgstr "Alternar el bypass en el menú"
+
+msgid "Toggle bypass with middle click"
+msgstr "Alternar el bypass con el clic central"
+
+msgid "Tooltips"
+msgstr "Información emergente"
+
+msgid "Top"
+msgstr "Arriba"
+
+#, javascript-format
+msgid "Unknown Easy Effects effect: %s"
+msgstr "Efecto de Easy Effects desconocido: %s"
+
+msgid "Loading presets…"
+msgstr "Leyendo preajustes…"
