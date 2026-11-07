@@ -274,3 +274,7 @@ with `Easy Effects Preset Selector:`. Include your Cinnamon and Easy Effects
 versions, distribution, reproduction steps, and the expected result.
 
 This applet is maintained independently of the Easy Effects project.
+
+## Donation
+
+[https://buymeacoffee.com/rasmarc](https://buymeacoffee.com/rasmarc)
