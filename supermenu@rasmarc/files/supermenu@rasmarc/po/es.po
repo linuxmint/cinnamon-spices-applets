@@ -1,0 +1,839 @@
+# SuperMenu translations. Copyright (C) 2026 rasmarc.
+# This file is distributed under the GPL-2.0-or-later license.
+# Generated translation draft; no native-speaker approval claimed.
+msgid ""
+msgstr "Project-Id-Version: SuperMenu 1.0.8\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-11-04 12:00+0100\nPO-Revision-Date: 2026-11-06 04:56+0100\nLast-Translator: SuperMenu translation draft\nLanguage-Team: Translation draft; native review pending\nLanguage: es\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "A command is empty."
+msgstr "Una orden está vacía."
+
+msgid "A submenu does not contain a valid list."
+msgstr "Un submenú no contiene una lista válida."
+
+msgid "Accessories"
+msgstr "Accesorios"
+
+msgid "Actions: right-click"
+msgstr "Acciones: clic derecho"
+
+msgid "Add separator"
+msgstr "Añadir separador"
+
+msgid "Add to custom menu"
+msgstr "Añadir al menú personalizado"
+
+msgid "Add to custom menu…"
+msgstr "Añadir al menú personalizado…"
+
+#, python-format
+msgid "Added to: %s"
+msgstr "Añadido a: %s"
+
+msgid "Administration"
+msgstr "Administración"
+
+msgid "All applications"
+msgstr "Todas las aplicaciones"
+
+msgid "All files (*)"
+msgstr "Todos los archivos (*)"
+
+msgid "All programs"
+msgstr "Todos los programas"
+
+msgid "Alphabetically"
+msgstr "Alfabéticamente"
+
+msgid "Alternative source for development tests; the bundled template is the default."
+msgstr "Fuente alternativa para pruebas de desarrollo; la plantilla incluida es la predeterminada."
+
+msgid "An entry has neither an application ID nor a command."
+msgstr "Una entrada no tiene identificador de aplicación ni orden."
+
+msgid "Animate menus when opening and closing"
+msgstr "Animar los menús al abrir y cerrar"
+
+msgid "Appearance"
+msgstr "Apariencia"
+
+msgid "Applications menu"
+msgstr "Menú de aplicaciones"
+
+msgid "Applications menu icon"
+msgstr "Icono del menú de aplicaciones"
+
+msgid "Applications menu with drawers or classic view; custom menu with drawers, list or grid and direct editing."
+msgstr "Menú de aplicaciones con cajones o vista clásica; menú personalizado con cajones, lista o cuadrícula y edición directa."
+
+msgid "Apply"
+msgstr "Aplicar"
+
+msgid "Back up content"
+msgstr "Guardar copia del contenido"
+
+msgid "Back up custom menu content"
+msgstr "Guardar copia del contenido del menú personalizado"
+
+msgid "Backup"
+msgstr "Copia de seguridad"
+
+msgid "Backup Tool"
+msgstr "Copias de seguridad"
+
+msgid "Based on the bundled, adapted Cinnamon menu"
+msgstr "Basado en el menú de Cinnamon incluido y adaptado"
+
+msgid "Behavior"
+msgstr "Comportamiento"
+
+msgid "Blink three times at the start"
+msgstr "Parpadear tres veces al inicio"
+
+msgid "Both sides"
+msgstr "Ambos lados"
+
+msgid "By category"
+msgstr "Por categoría"
+
+msgid "Calculator"
+msgstr "Calculadora"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Category name"
+msgstr "Nombre de la categoría"
+
+#, python-format
+msgid "Category: %s"
+msgstr "Categoría: %s"
+
+msgid "Celluloid"
+msgstr "Celluloid"
+
+msgid "Change icon…"
+msgstr "Cambiar icono…"
+
+msgid "Change launch command"
+msgstr "Cambiar orden de ejecución"
+
+msgid "Change launch command…"
+msgstr "Cambiar orden de ejecución…"
+
+msgid "Choose a custom icon or image"
+msgstr "Elegir un icono o imagen personalizados"
+
+msgid "Choose an icon – SuperMenu"
+msgstr "Elegir un icono – SuperMenu"
+
+msgid "Classic"
+msgstr "Clásica"
+
+msgid "Content"
+msgstr "Contenido"
+
+#, python-format
+msgid "Content replaced — entries: %d; categories: %d."
+msgstr "Contenido sustituido — entradas: %d; categorías: %d."
+
+#, python-format
+msgid "Copied to: %s"
+msgstr "Copiado a: %s"
+
+msgid "Copy from applications menu"
+msgstr "Copiar desde el menú de aplicaciones"
+
+msgid "Copy to"
+msgstr "Copiar a"
+
+msgid "Could not add the category to the custom menu."
+msgstr "No se pudo añadir la categoría al menú personalizado."
+
+msgid "Could not copy the entry."
+msgstr "No se pudo copiar la entrada."
+
+msgid "Could not create a unique category ID."
+msgstr "No se pudo crear un identificador de categoría único."
+
+msgid "Could not create the storage directory"
+msgstr "No se pudo crear la carpeta de almacenamiento"
+
+#, python-format
+msgid "Could not launch the entry: %s"
+msgstr "No se pudo ejecutar la entrada: %s"
+
+#, python-format
+msgid "Could not load content: %s"
+msgstr "No se pudo cargar el contenido: %s"
+
+#, python-format
+msgid "Could not open the file: %s"
+msgstr "No se pudo abrir el archivo: %s"
+
+#, python-format
+msgid "Could not open the icon chooser: %s"
+msgstr "No se pudo abrir el selector de iconos: %s"
+
+#, python-format
+msgid "Could not open the place: %s"
+msgstr "No se pudo abrir el lugar: %s"
+
+msgid "Could not read the custom menu"
+msgstr "No se pudo leer el menú personalizado"
+
+msgid "Could not read the file."
+msgstr "No se pudo leer el archivo."
+
+msgid "Could not remove the separator."
+msgstr "No se pudo eliminar el separador."
+
+msgid "Could not save the change."
+msgstr "No se pudo guardar el cambio."
+
+msgid "Could not save the custom menu."
+msgstr "No se pudo guardar el menú personalizado."
+
+msgid "Could not save the icon."
+msgstr "No se pudo guardar el icono."
+
+msgid "Could not save the order."
+msgstr "No se pudo guardar el orden."
+
+msgid "Could not save the separator."
+msgstr "No se pudo guardar el separador."
+
+msgid "Could not uniquely adapt the menu entry point."
+msgstr "No se pudo adaptar de forma inequívoca el punto de entrada del menú."
+
+msgid "Could not uniquely adapt the native keyboard shortcut."
+msgstr "No se pudo adaptar de forma inequívoca el atajo de teclado nativo."
+
+msgid "Could not uniquely identify the applications menu editing action."
+msgstr "No se pudo identificar de forma inequívoca la acción de edición del menú de aplicaciones."
+
+msgid "Could not uniquely identify the three session actions."
+msgstr "No se pudieron identificar de forma inequívoca las tres acciones de sesión."
+
+msgid "Create"
+msgstr "Crear"
+
+msgid "Create category…"
+msgstr "Crear categoría…"
+
+msgid "Create entry…"
+msgstr "Crear entrada…"
+
+msgid "Custom entries"
+msgstr "Entradas personalizadas"
+
+msgid "Custom icon or image"
+msgstr "Icono o imagen personalizados"
+
+msgid "Custom menu"
+msgstr "Menú personalizado"
+
+msgid "Custom menu icon"
+msgstr "Icono del menú personalizado"
+
+msgid "Desktop"
+msgstr "Escritorio"
+
+msgid "Document Scanner"
+msgstr "Escáner de documentos"
+
+msgid "Documents"
+msgstr "Documentos"
+
+msgid "Downloads"
+msgstr "Descargas"
+
+msgid "Drawers"
+msgstr "Cajones"
+
+msgid "Drawing"
+msgstr "Dibujo"
+
+msgid "Duplicate custom menu category ID"
+msgstr "Identificador de categoría duplicado en el menú personalizado"
+
+msgid "Edit applications menu"
+msgstr "Editar menú de aplicaciones"
+
+msgid "Edit custom menu"
+msgstr "Editar menú personalizado"
+
+msgid "Editing mode"
+msgstr "Modo de edición"
+
+msgid "End editing mode"
+msgstr "Finalizar modo de edición"
+
+#, python-format
+msgid "Entries: %d"
+msgstr "Entradas: %d"
+
+msgid "Entry name"
+msgstr "Nombre de la entrada"
+
+msgid "Expand in the menu"
+msgstr "Desplegar en el menú"
+
+msgid "Expansion arrow"
+msgstr "Flecha de expansión"
+
+#, python-format
+msgid "Export failed: %s"
+msgstr "Error al exportar: %s"
+
+#, python-format
+msgid "Exported — entries: %d; categories: %d."
+msgstr "Exportado — entradas: %d; categorías: %d."
+
+msgid "Export…"
+msgstr "Exportar…"
+
+msgid "Extended context menu"
+msgstr "Menú contextual ampliado"
+
+msgid "File Renamer"
+msgstr "Renombrar archivos"
+
+msgid "File history is disabled"
+msgstr "El historial de archivos está desactivado"
+
+msgid "Files"
+msgstr "Archivos"
+
+msgid "Five-pointed star with Super-S in text color"
+msgstr "Estrella de cinco puntas con Super-S en el color del texto"
+
+msgid "Five-pointed star with transparent Super-S"
+msgstr "Estrella de cinco puntas con Super-S transparente"
+
+msgid "Four-pointed star with Super-S in text color"
+msgstr "Estrella de cuatro puntas con Super-S en el color del texto"
+
+msgid "Four-pointed star with transparent Super-S"
+msgstr "Estrella de cuatro puntas con Super-S transparente"
+
+msgid "Fully expand the drawer"
+msgstr "Desplegar el cajón por completo"
+
+msgid "General"
+msgstr "General"
+
+msgid "Graphics"
+msgstr "Gráficos"
+
+msgid "Grid"
+msgstr "Cuadrícula"
+
+msgid "Group system buttons"
+msgstr "Agrupar botones del sistema"
+
+msgid "Hide when an action list opens"
+msgstr "Ocultar al abrir una lista de acciones"
+
+msgid "Home folder"
+msgstr "Carpeta personal"
+
+msgid "Hover delay"
+msgstr "Retardo al pasar el puntero"
+
+msgid "Hypnotix"
+msgstr "Hypnotix"
+
+msgid "Icon size for categories and applications (px)"
+msgstr "Tamaño de iconos para categorías y aplicaciones (px)"
+
+msgid "Icons per row"
+msgstr "Iconos por fila"
+
+msgid "Import"
+msgstr "Importar"
+
+#, python-format
+msgid "Import failed: %s"
+msgstr "Error al importar: %s"
+
+#, python-format
+msgid "Imported — entries: %d; new categories: %d."
+msgstr "Importado — entradas: %d; categorías nuevas: %d."
+
+msgid "Import…"
+msgstr "Importar…"
+
+#, python-format
+msgid "Inactive entries or separators skipped: %d."
+msgstr "Entradas inactivas o separadores omitidos: %d."
+
+msgid "Install SuperMenu from the bundled menu template."
+msgstr "Instalar SuperMenu desde la plantilla de menú incluida."
+
+#, python-format
+msgid "Installation stopped: %s"
+msgstr "Instalación detenida: %s"
+
+#, python-format
+msgid "Installed: %s"
+msgstr "Instalado: %s"
+
+msgid "Internet"
+msgstr "Internet"
+
+msgid "Invalid application entry"
+msgstr "Entrada de aplicación no válida"
+
+msgid "Invalid custom application entry"
+msgstr "Entrada de aplicación personalizada no válida"
+
+msgid "Invalid custom menu category"
+msgstr "Categoría del menú personalizado no válida"
+
+msgid "Invalid enabled value."
+msgstr "Valor de activación no válido."
+
+msgid "Invalid entry ID"
+msgstr "Identificador de entrada no válido"
+
+msgid "Invalid file selection."
+msgstr "Selección de archivo no válida."
+
+msgid "Invalid icon assignment"
+msgstr "Asignación de icono no válida"
+
+msgid "Invalid icon selection."
+msgstr "Selección de icono no válida."
+
+msgid "Invalid import assignment"
+msgstr "Asignación de importación no válida"
+
+msgid "Invalid menu entry."
+msgstr "Entrada de menú no válida."
+
+#, python-format
+msgid "Invalid override for %s in settings-override.json."
+msgstr "Valor de reemplazo no válido para %s en settings-override.json."
+
+#, python-format
+msgid "Invalid text field: %s"
+msgstr "Campo de texto no válido: %s"
+
+msgid "Keyboard shortcuts"
+msgstr "Atajos de teclado"
+
+msgid "Launch command"
+msgstr "Orden de ejecución"
+
+msgid "Left only"
+msgstr "Solo a la izquierda"
+
+msgid "LibreOffice"
+msgstr "LibreOffice"
+
+msgid "LibreOffice Calc"
+msgstr "LibreOffice Calc"
+
+msgid "LibreOffice Draw"
+msgstr "LibreOffice Draw"
+
+msgid "LibreOffice Impress"
+msgstr "LibreOffice Impress"
+
+msgid "LibreOffice Writer"
+msgstr "LibreOffice Writer"
+
+msgid "Limit the number of recent files to"
+msgstr "Limitar el número de archivos recientes a"
+
+msgid "List"
+msgstr "Lista"
+
+msgid "Load"
+msgstr "Cargar"
+
+msgid "Load content"
+msgstr "Cargar contenido"
+
+msgid "Load content into the custom menu"
+msgstr "Cargar contenido en el menú personalizado"
+
+msgid "Load template…"
+msgstr "Cargar plantilla…"
+
+msgid "Minimum grid entry width"
+msgstr "Anchura mínima de las entradas de la cuadrícula"
+
+msgid "Miscellaneous"
+msgstr "Varios"
+
+msgid "Move down"
+msgstr "Bajar"
+
+msgid "Move up"
+msgstr "Subir"
+
+msgid "Music"
+msgstr "Música"
+
+msgid "My menu"
+msgstr "Mi menú"
+
+msgid "Name in the applet manager: SuperMenu"
+msgstr "Nombre en el gestor de applets: SuperMenu"
+
+msgid "New category"
+msgstr "Categoría nueva"
+
+msgid "New entry"
+msgstr "Entrada nueva"
+
+msgid "No applications available"
+msgstr "No hay aplicaciones disponibles"
+
+msgid "No applications found"
+msgstr "No se encontraron aplicaciones"
+
+msgid "No available entries"
+msgstr "No hay entradas disponibles"
+
+msgid "No entries yet"
+msgstr "Aún no hay entradas"
+
+msgid "No icon selected."
+msgstr "No se ha elegido ningún icono."
+
+msgid "No places selected or available"
+msgstr "No hay lugares seleccionados o disponibles"
+
+msgid "No recent files"
+msgstr "No hay archivos recientes"
+
+msgid "No valid import file selected."
+msgstr "No se ha elegido un archivo de importación válido."
+
+msgid "None"
+msgstr "Ninguna"
+
+msgid "Office"
+msgstr "Oficina"
+
+msgid "On first installation, add SuperMenu to the panel using the applet manager."
+msgstr "En la primera instalación, añadir SuperMenu al panel con el gestor de applets."
+
+msgid "Onboard"
+msgstr "Onboard"
+
+msgid "Open all drawers"
+msgstr "Abrir todos los cajones"
+
+msgid "Open and close the applications menu"
+msgstr "Abrir y cerrar el menú de aplicaciones"
+
+msgid "Open and close the custom menu"
+msgstr "Abrir y cerrar el menú personalizado"
+
+msgid "Open categories"
+msgstr "Abrir categorías"
+
+msgid "Open centered over the panel icon (or at the screen edge)"
+msgstr "Abrir centrado sobre el icono del panel (o en el borde de la pantalla)"
+
+msgid "Open menus when hovering over their panel icons"
+msgstr "Abrir los menús al pasar el puntero por sus iconos del panel"
+
+msgid "Other"
+msgstr "Otros"
+
+msgid "Other bookmarks"
+msgstr "Otros marcadores"
+
+msgid "Padding size (100% equals panel height)"
+msgstr "Tamaño del espacio (100% equivale a la altura del panel)"
+
+msgid "Panel"
+msgstr "Panel"
+
+msgid "Panel icon padding"
+msgstr "Espacio del icono del panel"
+
+msgid "Pictures"
+msgstr "Imágenes"
+
+msgid "Pix"
+msgstr "Pix"
+
+msgid "Places"
+msgstr "Lugares"
+
+msgid "Please choose a backup file."
+msgstr "Elija un archivo de copia de seguridad."
+
+msgid "Please choose a file other than the active menu data."
+msgstr "Elija un archivo distinto de los datos del menú en uso."
+
+msgid "Please choose a file to import."
+msgstr "Elija un archivo para importar."
+
+msgid "Please install as a regular user without sudo."
+msgstr "Instale como usuario normal sin sudo."
+
+msgid "Position of search bar and system buttons"
+msgstr "Posición de la barra de búsqueda y los botones del sistema"
+
+msgid "Preselected category"
+msgstr "Categoría preseleccionada"
+
+msgid "Prevent launching in editing mode"
+msgstr "Impedir la ejecución en modo de edición"
+
+msgid "Quit"
+msgstr "Salir"
+
+msgid "Reading import…"
+msgstr "Leyendo importación…"
+
+msgid "Recently used"
+msgstr "Usados recientemente"
+
+msgid "Remove"
+msgstr "Eliminar"
+
+msgid "Remove category?"
+msgstr "¿Eliminar categoría?"
+
+msgid "Remove entry?"
+msgstr "¿Eliminar entrada?"
+
+msgid "Remove…"
+msgstr "Eliminar…"
+
+msgid "Rename"
+msgstr "Renombrar"
+
+msgid "Rename…"
+msgstr "Renombrar…"
+
+msgid "Replace"
+msgstr "Reemplazar"
+
+msgid "Replace existing content when importing"
+msgstr "Reemplazar el contenido existente al importar"
+
+msgid "Reset"
+msgstr "Restablecer"
+
+msgid "Restore default settings"
+msgstr "Restaurar los ajustes predeterminados"
+
+msgid "Right only"
+msgstr "Solo a la derecha"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Save failed."
+msgstr "No se pudo guardar."
+
+msgid "Saving backup…"
+msgstr "Guardando copia de seguridad…"
+
+msgid "Screenshot"
+msgstr "Captura de pantalla"
+
+msgid "Scroll the application list on hover"
+msgstr "Desplazar la lista de aplicaciones al pasar el puntero"
+
+#, python-format
+msgid "Separators included: %d."
+msgstr "Separadores incluidos: %d."
+
+msgid "Settings"
+msgstr "Ajustes"
+
+msgid "Show a hint in editing mode"
+msgstr "Mostrar una indicación en modo de edición"
+
+msgid "Show application descriptions"
+msgstr "Mostrar descripciones de aplicaciones"
+
+msgid "Show custom menu"
+msgstr "Mostrar menú personalizado"
+
+msgid "Show flat system buttons"
+msgstr "Mostrar botones planos del sistema"
+
+msgid "Show icons only"
+msgstr "Mostrar solo iconos"
+
+msgid "Show lock button"
+msgstr "Mostrar botón de bloqueo"
+
+msgid "Show logout button"
+msgstr "Mostrar botón de cierre de sesión"
+
+msgid "Show only the selected category"
+msgstr "Mostrar solo la categoría seleccionada"
+
+msgid "Show places"
+msgstr "Mostrar lugares"
+
+msgid "Show recent files"
+msgstr "Mostrar archivos recientes"
+
+msgid "Show shutdown button"
+msgstr "Mostrar botón de apagado"
+
+msgid "Show shutdown in red"
+msgstr "Mostrar apagado en rojo"
+
+msgid "Software Manager"
+msgstr "Gestor de software"
+
+msgid "Sorting"
+msgstr "Ordenación"
+
+msgid "Sound & Video"
+msgstr "Sonido y vídeo"
+
+msgid "Start and end editing mode"
+msgstr "Iniciar y finalizar el modo de edición"
+
+msgid "Submenu"
+msgstr "Submenú"
+
+msgid "Supported files (*.json)"
+msgstr "Archivos compatibles (*.json)"
+
+msgid "Switch categories on hover in classic view"
+msgstr "Cambiar de categoría al pasar el puntero en la vista clásica"
+
+msgid "Symbolic five-pointed star"
+msgstr "Estrella simbólica de cinco puntas"
+
+msgid "Symbolic four-pointed star"
+msgstr "Estrella simbólica de cuatro puntas"
+
+msgid "System Monitor"
+msgstr "Monitor del sistema"
+
+msgid "System menu icon"
+msgstr "Icono del menú del sistema"
+
+msgid "Terminal"
+msgstr "Terminal"
+
+msgid "The CustomApplicationsMenu file exceeds 2 MB."
+msgstr "El archivo de CustomApplicationsMenu supera los 2 MB."
+
+msgid "The arrow opens all programs; the second button opens the custom menu."
+msgstr "La flecha abre todos los programas; el segundo botón abre el menú personalizado."
+
+msgid "The backup exceeds 32 MB."
+msgstr "La copia de seguridad supera los 32 MB."
+
+msgid "The custom menu changed. Open the template chooser again."
+msgstr "El menú personalizado ha cambiado. Vuelva a abrir el selector de plantillas."
+
+msgid "The disabled lock action is not supported."
+msgstr "La acción de bloqueo desactivada no es compatible."
+
+msgid "The file chooser closed unexpectedly."
+msgstr "El selector de archivos se cerró inesperadamente."
+
+msgid "The file does not contain a supported menu format."
+msgstr "El archivo no contiene un formato de menú compatible."
+
+msgid "The file must contain a list of menu entries."
+msgstr "El archivo debe contener una lista de entradas de menú."
+
+msgid "The icon chooser closed unexpectedly."
+msgstr "El selector de iconos se cerró inesperadamente."
+
+msgid "The import file contains too many entries."
+msgstr "El archivo de importación contiene demasiadas entradas."
+
+msgid "The import file exceeds 32 MB."
+msgstr "El archivo de importación supera los 32 MB."
+
+msgid "The import file is too large."
+msgstr "El archivo de importación es demasiado grande."
+
+#, python-format
+msgid "The menu layout requires the native function %s."
+msgstr "La disposición del menú requiere la función nativa %s."
+
+msgid "The menu nesting is too deep."
+msgstr "El anidamiento del menú es demasiado profundo."
+
+#, python-format
+msgid "The override %s is not part of the settings schema."
+msgstr "El valor de reemplazo %s no forma parte del esquema de ajustes."
+
+msgid "The session buttons in this Cinnamon menu version are not supported."
+msgstr "Los botones de sesión de esta versión del menú de Cinnamon no son compatibles."
+
+msgid "The target directory does not belong to SuperMenu; no files were changed."
+msgstr "La carpeta de destino no pertenece a SuperMenu; no se ha modificado ningún archivo."
+
+msgid "The target is a symbolic link; use --target-dir to specify the actual directory."
+msgstr "El destino es un enlace simbólico; use --target-dir para indicar la carpeta real."
+
+msgid "Then restart Cinnamon or log out and back in."
+msgstr "Después, reinicie Cinnamon o cierre la sesión y vuelva a iniciarla."
+
+msgid "This Cinnamon menu arrangement is not supported."
+msgstr "Esta disposición del menú de Cinnamon no es compatible."
+
+msgid "This Cinnamon menu entry point is not supported; nothing was installed."
+msgstr "Este punto de entrada del menú de Cinnamon no es compatible; no se ha instalado nada."
+
+msgid "This Cinnamon menu version has no supported settings layout."
+msgstr "Esta versión del menú de Cinnamon no tiene una disposición de ajustes compatible."
+
+#, python-format
+msgid "This Cinnamon menu version lacks the required function %s."
+msgstr "Esta versión del menú de Cinnamon carece de la función necesaria %s."
+
+msgid "This category…"
+msgstr "Esta categoría…"
+
+msgid "Too many custom entries"
+msgstr "Demasiadas entradas personalizadas"
+
+msgid "Transmission"
+msgstr "Transmission"
+
+msgid "USB Image Writer"
+msgstr "Grabador de imágenes USB"
+
+msgid "USB Stick Formatter"
+msgstr "Formateador de memorias USB"
+
+#, python-format
+msgid "Unavailable applications: %d. Their entries remain saved."
+msgstr "Aplicaciones no disponibles: %d. Sus entradas permanecen guardadas."
+
+msgid "Unknown custom menu format"
+msgstr "Formato de menú personalizado desconocido"
+
+msgid "Unknown error"
+msgstr "Error desconocido"
+
+msgid "Use the panel icon size"
+msgstr "Usar el tamaño de icono del panel"
+
+msgid "Videos"
+msgstr "Vídeos"
+
+msgid "View"
+msgstr "Vista"
+
+msgid "Virtual keyboard"
+msgstr "Teclado virtual"
+
+msgid "Web Apps"
+msgstr "Aplicaciones web"
+
+msgid "not detected"
+msgstr "no detectado"
