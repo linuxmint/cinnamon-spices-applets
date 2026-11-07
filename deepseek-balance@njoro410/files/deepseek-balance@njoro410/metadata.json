@@ -1,0 +1,8 @@
+{
+    "uuid": "deepseek-balance@njoro410",
+    "name": "DeepSeek Balance",
+    "description": "DeepSeek API account balance as a percentage or bar, with spend details on hover. Uses the official balance endpoint.",
+    "author": "njoro410",
+    "version": "1.0.0",
+    "max-instances": "1"
+}
