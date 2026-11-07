@@ -39,3 +39,7 @@ Getestet auf LMDE 7 mit Cinnamon 6.6.9 unter X11. Die Bildschirmvergrößerung s
 ---
 
 By rasmarc. Based on **uiscaler** by joka42, originally based on **Resolution Switcher** by dennis@nixdev.com. GPL-2.0-or-later. Interface available in 16 languages.
+
+## Donation
+
+[https://buymeacoffee.com/rasmarc](https://buymeacoffee.com/rasmarc)
