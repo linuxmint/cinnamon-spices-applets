@@ -1,0 +1,7 @@
+{
+    "uuid": "overflow-tray@alinobrasil",
+    "name": "Overflow Tray",
+    "description": "Windows-style system tray: pick which tray icons stay on the panel, the rest go behind an arrow. Replaces the XApp Status Applet.",
+    "max-instances": -1,
+    "version": "1.0"
+}
