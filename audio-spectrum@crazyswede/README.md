@@ -53,6 +53,14 @@ Some older distribution releases provide an older CAVA version. The separately a
 
 The applet settings allow you to select the visualization style and configure the number of bars, sensitivity, bar geometry, height, alignment, animation speed, fall speed and peak hold.
 
+### Audio level and visualization height
+
+Audio Spectrum analyzes the audio level produced by the playing application. For the strongest response and full use of the available visualization height, set the volume inside the application—such as YouTube or a media player—to 100%.
+
+Use the system volume to control the actual listening level. Changing or even muting the system volume does not affect the visualization. Lowering the volume inside the playing application, however, reduces the signal received by Audio Spectrum and results in shorter bars.
+
+The **Audio sensitivity** setting can be used to fine-tune the visual response for different applications and audio sources.
+
 ## Bug reports and feature requests
 
 Report bugs or request features through [GitHub Issues](https://github.com/CrazySwede87/audio-spectrum-cinnamon/issues).
