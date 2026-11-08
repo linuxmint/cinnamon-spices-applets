@@ -406,9 +406,12 @@ AudioSpectrum.prototype = {
                 'cava'
             ]);
 
-            let subprocessFlags = Gio.SubprocessFlags.STDOUT_PIPE |
+            let subprocessFlags =
+                Gio.SubprocessFlags.STDOUT_PIPE |
                 Gio.SubprocessFlags.STDERR_PIPE;
 
+            // Try the private CAVA binary directly. Falling back after a
+            // NOT_FOUND error avoids a synchronous filesystem stat call.
             try {
                 this._process = Gio.Subprocess.new(
                     [localCava, '-p', config],
@@ -744,6 +747,255 @@ AudioSpectrum.prototype = {
 
             let y =
                 height - barHeight;
+
+            // Vacuum Fluorescent: turquoise VFD segments with a soft glow,
+            // dim inactive cells and an amber peak marker.
+            if (this._skin === "vacuumfluorescent") {
+                let segmentHeight = 2;
+                let pitch = 4;
+                let rows = Math.max(1, Math.floor(height / pitch));
+                let litRows = Math.ceil(value * rows);
+
+                for (let s = 0; s < rows; s++) {
+                    let sy = height - (s + 1) * pitch + 1;
+
+                    if (s < litRows) {
+                        cr.setSourceRGBA(0.14, 1.0, 0.84, 0.18);
+                        cr.rectangle(x - 1, sy - 1, barWidth + 2, segmentHeight + 2);
+                        cr.fill();
+
+                        cr.setSourceRGBA(0.36, 1.0, 0.88, 1.0);
+                    } else {
+                        cr.setSourceRGBA(0.04, 0.18, 0.17, 0.38);
+                    }
+
+                    cr.rectangle(x, sy, barWidth, segmentHeight);
+                    cr.fill();
+                }
+
+                if (this._peaks[i] > 0) {
+                    let peakRow = Math.max(1, Math.ceil((this._peaks[i] / 100) * rows));
+                    let peakY = Math.max(0, height - peakRow * pitch + 1);
+                    cr.setSourceRGBA(1.0, 0.55, 0.16, 1.0);
+                    cr.rectangle(x, peakY, barWidth, 2);
+                    cr.fill();
+                }
+
+                continue;
+            }
+
+            // Amber Analyzer: warm segmented display with a subtle raster.
+            if (this._skin === "amberanalyzer") {
+                if (i === 0) {
+                    cr.setSourceRGBA(0.43, 0.18, 0.02, 0.12);
+                    cr.setLineWidth(1);
+                    for (let gy = 2; gy < height; gy += 4) {
+                        cr.moveTo(0, gy + 0.5);
+                        cr.lineTo(width, gy + 0.5);
+                    }
+                    cr.stroke();
+                }
+
+                let pitch = 3;
+                let rows = Math.max(1, Math.floor(height / pitch));
+                let litRows = Math.ceil(value * rows);
+
+                for (let s = 0; s < rows; s++) {
+                    let sy = height - (s + 1) * pitch + 1;
+
+                    if (s < litRows) {
+                        let level = s / Math.max(1, rows - 1);
+                        cr.setSourceRGBA(1.0, 0.41 + 0.43 * level, 0.03 + 0.12 * level, 1.0);
+                    } else {
+                        cr.setSourceRGBA(0.22, 0.09, 0.01, 0.26);
+                    }
+
+                    cr.rectangle(x, sy, barWidth, 2);
+                    cr.fill();
+                }
+
+                if (this._peaks[i] > 0) {
+                    let peakRow = Math.max(1, Math.ceil((this._peaks[i] / 100) * rows));
+                    let peakY = Math.max(0, height - peakRow * pitch + 1);
+                    cr.setSourceRGBA(1.0, 0.16, 0.07, 1.0);
+                    cr.rectangle(x, peakY, barWidth, 1);
+                    cr.fill();
+                }
+
+                continue;
+            }
+
+            // LED Tower: individual green, yellow and red LED cells.
+            if (this._skin === "ledtower") {
+                let dotWidth = Math.max(1, Math.min(barWidth, 3));
+                let pitch = 3;
+                let rows = Math.max(1, Math.floor(height / pitch));
+                let litRows = Math.ceil(value * rows);
+
+                for (let s = 0; s < rows; s++) {
+                    let sy = height - (s + 1) * pitch + 1;
+                    let level = (s + 1) / rows;
+
+                    if (s >= litRows)
+                        cr.setSourceRGBA(0.08, 0.11, 0.08, 0.30);
+                    else if (level > 0.75)
+                        cr.setSourceRGBA(1.0, 0.18, 0.12, 1.0);
+                    else if (level > 0.50)
+                        cr.setSourceRGBA(1.0, 0.80, 0.10, 1.0);
+                    else
+                        cr.setSourceRGBA(0.16, 0.88, 0.29, 1.0);
+
+                    cr.rectangle(x, sy, dotWidth, 2);
+                    cr.fill();
+                }
+
+                if (this._peaks[i] > 0) {
+                    let peakRow = Math.max(1, Math.ceil((this._peaks[i] / 100) * rows));
+                    let peakY = Math.max(0, height - peakRow * pitch + 1);
+                    cr.setSourceRGBA(1.0, 0.96, 0.82, 1.0);
+                    cr.rectangle(x, peakY, dotWidth, 2);
+                    cr.fill();
+                }
+
+                continue;
+            }
+
+            // Futuristic Dashboard: outlined cyan columns and panel guides.
+            if (this._skin === "futuristicdashboard") {
+                if (i === 0) {
+                    cr.setSourceRGBA(0.22, 0.47, 0.61, 0.18);
+                    cr.setLineWidth(1);
+                    for (let gy = 6; gy < height; gy += 6) {
+                        cr.moveTo(0, gy + 0.5);
+                        cr.lineTo(width, gy + 0.5);
+                    }
+                    cr.stroke();
+                }
+
+                let dashboardHeight = Math.max(2, value * (height - 1));
+                let dashboardY = height - dashboardHeight;
+                cr.setSourceRGBA(0.18 + value * 0.33, 0.82 - value * 0.18, 1.0, 0.92);
+                cr.setLineWidth(1);
+                cr.moveTo(x + 0.5, height);
+                cr.lineTo(x + 0.5, dashboardY + 0.5);
+                cr.lineTo(x + barWidth, dashboardY + 0.5);
+                cr.stroke();
+
+                cr.setSourceRGBA(0.66, 0.96, 1.0, 0.82);
+                cr.rectangle(x + barWidth - 1, height - 1, 1, 1);
+                cr.fill();
+
+                if (this._peaks[i] > 0) {
+                    let peakY = height - (this._peaks[i] / 100) * height;
+                    cr.setSourceRGBA(1.0, 1.0, 1.0, 1.0);
+                    cr.rectangle(x + 1, Math.max(0, peakY - 2), 1, 1);
+                    cr.fill();
+                }
+
+                continue;
+            }
+
+            // Oscilloscope Blocks: monochrome phosphor blocks with a short
+            // glow and a faint laboratory-display grid.
+            if (this._skin === "oscilloscopeblocks") {
+                if (i === 0) {
+                    cr.setSourceRGBA(0.18, 0.61, 0.25, 0.12);
+                    cr.setLineWidth(1);
+                    for (let gy = 3; gy < height; gy += 4) {
+                        cr.moveTo(0, gy + 0.5);
+                        cr.lineTo(width, gy + 0.5);
+                    }
+                    cr.stroke();
+                }
+
+                let pitch = 4;
+                let rows = Math.max(1, Math.floor(height / pitch));
+                let litRows = Math.ceil(value * rows);
+
+                for (let s = 0; s < litRows; s++) {
+                    let sy = height - (s + 1) * pitch + 1;
+                    let alpha = 0.58 + 0.40 * ((s + 1) / rows);
+
+                    cr.setSourceRGBA(0.20, 1.0, 0.39, 0.16);
+                    cr.rectangle(x - 1, sy - 1, barWidth + 2, 4);
+                    cr.fill();
+
+                    cr.setSourceRGBA(0.29, 1.0, 0.47, alpha);
+                    cr.rectangle(x, sy, barWidth, 2);
+                    cr.fill();
+                }
+
+                continue;
+            }
+
+            // Cassette Deck: warm Hi-Fi segments with red overload cells.
+            if (this._skin === "cassettedeck") {
+                let pitch = 3;
+                let rows = Math.max(1, Math.floor(height / pitch));
+                let litRows = Math.ceil(value * rows);
+
+                for (let s = 0; s < rows; s++) {
+                    let sy = height - (s + 1) * pitch + 1;
+                    let level = (s + 1) / rows;
+
+                    if (s >= litRows)
+                        cr.setSourceRGBA(0.20, 0.18, 0.14, 0.22);
+                    else if (level > 0.75)
+                        cr.setSourceRGBA(1.0, 0.24, 0.14, 1.0);
+                    else
+                        cr.setSourceRGBA(1.0, 0.90, 0.59, 0.96);
+
+                    cr.rectangle(x, sy, barWidth, 2);
+                    cr.fill();
+                }
+
+                if (this._peaks[i] > 0) {
+                    let peakRow = Math.max(1, Math.ceil((this._peaks[i] / 100) * rows));
+                    let peakY = Math.max(0, height - peakRow * pitch + 1);
+                    cr.setSourceRGBA(1.0, 0.18, 0.12, 1.0);
+                    cr.rectangle(x + 1, peakY, Math.max(1, barWidth - 2), 2);
+                    cr.fill();
+                }
+
+                continue;
+            }
+
+            // Pixel Plasma: fixed cyan, blue, violet and magenta pixel bands.
+            if (this._skin === "pixelplasma") {
+                let dotWidth = Math.max(1, Math.min(barWidth, 3));
+                let pitch = 3;
+                let rows = Math.max(1, Math.floor(height / pitch));
+                let litRows = Math.ceil(value * rows);
+
+                for (let s = 0; s < rows; s++) {
+                    let sy = height - (s + 1) * pitch + 1;
+                    let level = (s + 1) / rows;
+
+                    if (s >= litRows)
+                        cr.setSourceRGBA(0.14, 0.06, 0.19, 0.26);
+                    else if (level > 0.75)
+                        cr.setSourceRGBA(1.0, 0.22, 0.80, 1.0);
+                    else if (level > 0.50)
+                        cr.setSourceRGBA(0.61, 0.29, 1.0, 1.0);
+                    else if (level > 0.25)
+                        cr.setSourceRGBA(0.31, 0.59, 1.0, 1.0);
+                    else
+                        cr.setSourceRGBA(0.13, 0.82, 1.0, 1.0);
+
+                    cr.rectangle(x, sy, dotWidth, 2);
+                    cr.fill();
+                }
+
+                if (this._peaks[i] > 0) {
+                    let peakRow = Math.max(1, Math.ceil((this._peaks[i] / 100) * rows));
+                    let peakY = Math.max(0, height - peakRow * pitch + 1);
+                    cr.setSourceRGBA(1.0, 1.0, 1.0, 1.0);
+                    cr.rectangle(x, peakY, dotWidth, 1);
+                    cr.fill();
+                }
+
+                continue;
+            }
 
             // Oscilloscope-skin
             if (this._skin === "oscilloscope") {

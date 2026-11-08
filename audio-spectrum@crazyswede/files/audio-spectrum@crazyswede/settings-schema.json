@@ -1,7 +1,7 @@
 {
     "appearance": {
         "type": "section",
-        "title": "Appearance",
+        "title": "Audio Spectrum — Display",
         "keys": [
             "bar_count",
             "sensitivity",
@@ -12,7 +12,7 @@
             "separator",
             "skin"
         ],
-        "description": "Appearance"
+        "description": "Audio Spectrum display settings"
     },
     "bar_count": {
         "type": "spinbutton",
@@ -20,8 +20,8 @@
         "min": 20,
         "max": 200,
         "step": 10,
-        "units": "bars",
-        "description": "Number of EQ bars"
+        "units": "EQ bars",
+        "description": "Visible spectrum bar count"
     },
     "sensitivity": {
         "type": "spinbutton",
@@ -30,7 +30,7 @@
         "max": 1000,
         "step": 1,
         "units": "%",
-        "description": "Audio sensitivity"
+        "description": "Audio Spectrum input sensitivity"
     },
     "bar_width": {
         "type": "spinbutton",
@@ -38,16 +38,16 @@
         "min": 1,
         "max": 10,
         "step": 0.5,
-        "units": "px",
-        "description": "Bar width"
+        "units": "PX",
+        "description": "Spectrum bar thickness"
     },
     "height_mode": {
         "type": "combobox",
         "default": "auto",
-        "description": "Visualizer height",
+        "description": "Spectrum height mode",
         "options": {
-            "Fit panel automatically": "auto",
-            "Set height manually": "manual"
+            "Use full panel height": "auto",
+            "Use custom height": "manual"
         }
     },
     "height": {
@@ -56,18 +56,18 @@
         "min": 10,
         "max": 60,
         "step": 1,
-        "units": "px",
-        "description": "Manual visualizer height",
+        "units": "PX",
+        "description": "Custom spectrum height",
         "dependency": "height_mode=manual"
     },
     "vertical_alignment": {
         "type": "combobox",
         "default": "center",
-        "description": "Vertical alignment",
+        "description": "Spectrum vertical position",
         "options": {
-            "Top": "top",
-            "Center": "center",
-            "Bottom": "bottom"
+            "Align to panel top": "top",
+            "Center in panel": "center",
+            "Align to panel bottom": "bottom"
         },
         "dependency": "height_mode=manual"
     },
@@ -77,13 +77,13 @@
         "min": 0,
         "max": 3,
         "step": 0.1,
-        "units": "px",
-        "description": "Spacing / separator"
+        "units": "PX",
+        "description": "Gap between spectrum bars"
     },
     "skin": {
         "type": "combobox",
         "default": "classic",
-        "description": "Visualization",
+        "description": "Spectrum design",
         "options": {
             "Classic LED": "classic",
             "80s Car Stereo": "stereo80",
@@ -94,18 +94,25 @@
             "VU Meter": "vu",
             "1980s Digital": "digital80",
             "Oscilloscope": "oscilloscope",
-            "Classic Neon": "classicneon"
+            "Classic Neon": "classicneon",
+            "Vacuum Fluorescent": "vacuumfluorescent",
+            "Amber Analyzer": "amberanalyzer",
+            "LED Tower": "ledtower",
+            "Futuristic Dashboard": "futuristicdashboard",
+            "Oscilloscope Blocks": "oscilloscopeblocks",
+            "Cassette Deck": "cassettedeck",
+            "Pixel Plasma": "pixelplasma"
         }
     },
     "animation": {
         "type": "section",
-        "title": "Animation",
+        "title": "Audio Spectrum — Motion",
         "keys": [
             "fps",
             "gravity",
             "peak_hold"
         ],
-        "description": "Animation"
+        "description": "Audio Spectrum motion settings"
     },
     "fps": {
         "type": "combobox",
@@ -125,7 +132,7 @@
         "max": 600,
         "step": 25,
         "units": "%",
-        "description": "Fall speed (higher = faster)"
+        "description": "Spectrum fall speed (higher is faster)"
     },
     "peak_hold": {
         "type": "spinbutton",
@@ -134,20 +141,20 @@
         "max": 2000,
         "step": 50,
         "units": "ms",
-        "description": "Peak hold (0 = off)"
+        "description": "Peak marker hold time (0 disables it)"
     },
     "reset": {
         "type": "section",
-        "title": "Reset",
+        "title": "Audio Spectrum — Reset",
         "keys": [
             "restore_defaults"
         ],
-        "description": "Reset"
+        "description": "Audio Spectrum reset controls"
     },
     "restore_defaults": {
         "type": "button",
-        "description": "Restore default settings",
+        "description": "Reset Audio Spectrum settings",
         "callback": "_restoreDefaultSettings",
-        "tooltip": "Restore all Audio Spectrum settings to their default values"
+        "tooltip": "Reset every Audio Spectrum option to its original value"
     }
 }
