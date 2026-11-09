@@ -63,6 +63,21 @@ _lower_priority() {
 	return 0
 }
 
+# GitHub's REST API allows 60 requests an hour without a token, and asking for
+# the remaining quota does not count against it. Prints "REMAINING RESET"
+# (RESET = Unix time), or nothing when the quota is unknown (offline, bad token).
+_gh_quota() {
+	local auth=() json rem reset
+	[ -n "$GH_AUTH" ] && auth=(-H "Authorization: token $GH_AUTH")
+	json=$(curl -fsS --max-time 10 "${auth[@]}" https://api.github.com/rate_limit 2>/dev/null |
+		tr -d ' \t\r\n' | grep -o '"core":{[^}]*}')
+	rem=$(printf '%s' "$json" | grep -o '"remaining":[0-9]*' | cut -d: -f2)
+	reset=$(printf '%s' "$json" | grep -o '"reset":[0-9]*' | cut -d: -f2)
+	[ -n "$rem" ] && [ -n "$reset" ] && printf '%s %s\n' "$rem" "$reset"
+}
+
+_uses_github_api() { grep -q 'api\.github\.com' "$APPSPATH/$1/AM-updater" 2>/dev/null; }
+
 # Same version extraction as appman's _check_version_filters (AM 10.x),
 # so versions shown in the applet match `appman -f`.
 _version_filter() {
@@ -202,9 +217,27 @@ cmd_check() {
 	GH_AUTH=""
 	[ -f "$AMDATADIR/ghapikey.txt" ] && GH_AUTH=$(head -n1 "$AMDATADIR/ghapikey.txt")
 
-	local running=0
+	# Apps that query the GitHub API. With the quota known, check only as
+	# many as it allows; the others would fail anyway.
+	local gh=() budget=-1 reset="" quota limited=0
+	for n in "${apps[@]}"; do _uses_github_api "$n" && gh+=("$n"); done
+	if [ ${#gh[@]} -gt 0 ]; then
+		quota=$(_gh_quota)
+		[ -n "$quota" ] && { budget=${quota% *}; reset=${quota#* }; }
+	fi
+
+	local out="$WORKDIR/results.tsv" running=0
+	: > "$out"
 	for n in "${apps[@]}"; do
-		_check_one "$n" &
+		if [ "$budget" -ge 0 ] && _uses_github_api "$n"; then
+			if [ "$budget" -le 0 ]; then
+				_out "$n" error "" ratelimit >> "$out"
+				limited=1
+				continue
+			fi
+			budget=$((budget - 1))
+		fi
+		_check_one "$n" >> "$out" &
 		running=$((running + 1))
 		if [ "$running" -ge "$JOBS" ]; then
 			wait -n
@@ -212,6 +245,26 @@ cmd_check() {
 		fi
 	done
 	wait
+
+	# Lookups can still run out of quota midway (or another program used it):
+	# if GitHub lookups failed and the quota is now 0, say so.
+	local failed_gh
+	failed_gh=$(awk -F'\t' 'NR == FNR { gh[$0] = 1; next }
+		($1 in gh) && $2 == "error" && ($4 == "failed" || $4 == "empty") { print $1 }' \
+		<(printf '%s\n' "${gh[@]}") "$out")
+	if [ -n "$failed_gh" ]; then
+		quota=$(_gh_quota)
+		if [ -n "$quota" ] && [ "${quota% *}" -eq 0 ]; then
+			reset=${quota#* }
+			limited=1
+			awk -F'\t' -v OFS='\t' 'NR == FNR { f[$0] = 1; next } ($1 in f) { $4 = "ratelimit" } 1' \
+				<(printf '%s\n' "$failed_gh") "$out" > "$out.tmp" && mv "$out.tmp" "$out"
+		fi
+	fi
+
+	# Header line for the applet: when the GitHub quota resets.
+	[ "$limited" -eq 1 ] && printf '#ratelimit\t%s\n' "$reset"
+	cat "$out"
 }
 
 # Background operations: lower priority (idle I/O for automatic ones), then

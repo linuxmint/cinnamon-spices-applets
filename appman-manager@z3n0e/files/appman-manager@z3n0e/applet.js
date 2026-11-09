@@ -38,6 +38,9 @@ const OP_WATCHDOG_SECS = 4 * 3600;
 const MAX_UPDATE_ROWS = 6;
 const ANSI_RE = /\x1b\[[0-9;?]*[A-Za-z]|\x1b\][^\x07]*\x07/g;
 const DB_ARCHES = ['x86_64', 'aarch64', 'i686', 'armv7l'];
+// Panel icon frames while an operation runs: top, right, left face lit.
+const BUSY_FRAMES = ['appman-busy-1-symbolic', 'appman-busy-2-symbolic', 'appman-busy-3-symbolic'];
+const BUSY_FRAME_MS = 400;
 
 const decoder = new TextDecoder('utf-8');
 const encoder = new TextEncoder();
@@ -130,6 +133,7 @@ function detailText(code) {
     case 'unsafe': return _("updater script does more than a version lookup");
     case 'failed': return _("lookup failed or timed out");
     case 'empty': return _("empty response");
+    case 'ratelimit': return _("GitHub API limit reached");
     default: return code || '';
     }
 }
@@ -271,6 +275,7 @@ class AppManApplet extends Applet.TextIconApplet {
         this._listTime = 0;
         this._results = {};       // name -> {status, latest, detail}
         this._lastCheck = 0;
+        this._rateLimitReset = 0;  // when GitHub's API quota resets (Unix time)
         this._notified = [];
         this._nextDue = 0;
         this._lastAttempt = 0;
@@ -351,6 +356,7 @@ class AppManApplet extends Applet.TextIconApplet {
                     this._notified = s.notified || [];
                     this._lastOp = s.lastOp || null;
                     this._lastOpSeen = s.lastOpSeen !== false;
+                    this._rateLimitReset = s.rateLimitReset || 0;
                 } catch (e) {
                     global.logWarning(`${UUID}: ignoring a corrupt state file`);
                 }
@@ -373,6 +379,7 @@ class AppManApplet extends Applet.TextIconApplet {
                 notified: this._notified,
                 lastOp: this._lastOp,
                 lastOpSeen: this._lastOpSeen,
+                rateLimitReset: this._rateLimitReset,
             }));
             return GLib.SOURCE_REMOVE;
         });
@@ -649,6 +656,17 @@ class AppManApplet extends Applet.TextIconApplet {
             this._results[a.name] && this._results[a.name].status === 'error');
     }
 
+    // Apps not checked because the GitHub API quota was used up.
+    _rateLimited() {
+        return this._errors().filter(a => this._results[a.name].detail === 'ratelimit');
+    }
+
+    _rateLimitText() {
+        let reset = this._rateLimitReset > nowSecs() ? fmtTime(this._rateLimitReset) : '';
+        return reset ? _("GitHub API limit reached (resets at %s)").format(reset)
+            : _("GitHub API limit was reached");
+    }
+
     /* ---------------- update check ---------------- */
 
     runCheck(opts = {}) {
@@ -669,9 +687,15 @@ class AppManApplet extends Applet.TextIconApplet {
                 return;
             if (out !== null) {
                 let fresh = {};
+                if (!opts.apps)
+                    this._rateLimitReset = 0;
                 for (let line of out.split('\n')) {
                     let f = line.split('\t');
-                    if (f.length >= 2 && f[0])
+                    if (f[0] === '#ratelimit') {
+                        this._rateLimitReset = parseInt(f[1]) || 0;
+                        continue;
+                    }
+                    if (f.length >= 2 && f[0] && f[0][0] !== '#')
                         fresh[f[0]] = { status: f[1], latest: f[2] || '', detail: f[3] || '' };
                 }
                 if (opts.apps) {
@@ -700,6 +724,13 @@ class AppManApplet extends Applet.TextIconApplet {
         this._notified = updates;
         this._saveState();
 
+        if (opts.manual && this._rateLimited().length) {
+            this._notify(this._rateLimitText(),
+                _("Could not check %d apps. Set a GitHub token (AppMan tools → Set GitHub token) to raise the limit.")
+                    .format(this._rateLimited().length));
+            if (updates.length === 0)
+                return;
+        }
         if (opts.manual && updates.length === 0) {
             let errs = this._errors().length;
             this._notify(_("All AppImages are up to date"), errs
@@ -780,7 +811,8 @@ class AppManApplet extends Applet.TextIconApplet {
             this._notify(_("AppMan not found"), _("Set the path to appman in the applet settings."));
             return;
         }
-        let background = opts.background || !this.useTerminal;
+        // opts.terminal: the command is interactive and always needs a terminal.
+        let background = !opts.terminal && (opts.background || !this.useTerminal);
         let op = Object.assign({ id: String(Date.now()), started: false, background, startedAt: nowSecs(), args }, opts);
         this._op = op;
         this._updatePanel();
@@ -887,9 +919,18 @@ class AppManApplet extends Applet.TextIconApplet {
         this._refreshList(() => {
             this._rebuildDynamic();
             this._saveState();
-            if (this._pendingAuto)
+            let limited = this._rateLimited().map(a => a.name);
+            if (op.kind === 'apikey' && !failed && limited.length)
+                this.runCheck({ apps: limited });
+            else if (this._pendingAuto)
                 this._autoCheck();
         });
+    }
+
+    // `appman apikey` asks for the token (hidden input), so it runs in a terminal.
+    // With a token GitHub allows 5000 requests an hour instead of 60.
+    setGithubToken() {
+        this._runAppman(['apikey'], { title: _("Set GitHub token"), kind: 'apikey', terminal: true });
     }
 
     updateApps(names, opts = {}) {
@@ -993,16 +1034,18 @@ class AppManApplet extends Applet.TextIconApplet {
         if (this._destroyed)
             return;
         let count = this._updates().length;
-        let icon = 'appman-symbolic';
-        if (this._checking || this._op)
-            icon = 'appman-busy-symbolic';
-        else if (this._lastOp && !this._lastOp.ok && !this._lastOpSeen)
-            icon = 'appman-error-symbolic';
-        else if (count > 0)
-            icon = 'appman-update-symbolic';
-        if (icon !== this._iconName) {
-            this._iconName = icon;
-            this.set_applet_icon_symbolic_path(GLib.build_filenamev([this._dir, 'icons', `${icon}.svg`]));
+        if (this._op) {
+            this._startBusyAnimation();
+        } else {
+            this._clearTimer('busyAnim');
+            let icon = 'appman-symbolic';
+            if (this._checking)
+                icon = 'appman-busy-symbolic';
+            else if (this._lastOp && !this._lastOp.ok && !this._lastOpSeen)
+                icon = 'appman-error-symbolic';
+            else if (count > 0)
+                icon = 'appman-update-symbolic';
+            this._setPanelIcon(icon);
         }
         this.set_applet_label(this.showCount && count > 0 ? String(count) : '');
 
@@ -1025,6 +1068,31 @@ class AppManApplet extends Applet.TextIconApplet {
         else if (this._nextDue)
             tip.push(_("Next check: %s").format(fmtTime(this._nextDue)));
         this.set_applet_tooltip(tip.join('\n'));
+    }
+
+    _setPanelIcon(icon) {
+        if (icon !== this._iconName) {
+            this._iconName = icon;
+            this.set_applet_icon_symbolic_path(GLib.build_filenamev([this._dir, 'icons', `${icon}.svg`]));
+        }
+    }
+
+    // While AppMan installs, updates or removes something, a solid face moves
+    // around the box (top → right → left). Stopped by _updatePanel() when the
+    // operation ends, and by on_applet_removed_from_panel() with the other timers.
+    _startBusyAnimation() {
+        if (this._timers.busyAnim)
+            return;
+        let frame = 0;
+        let step = () => {
+            this._setPanelIcon(BUSY_FRAMES[frame]);
+            frame = (frame + 1) % BUSY_FRAMES.length;
+        };
+        step();
+        this._timers.busyAnim = GLib.timeout_add(GLib.PRIORITY_LOW, BUSY_FRAME_MS, () => {
+            step();
+            return GLib.SOURCE_CONTINUE;
+        });
     }
 
     /* ---------------- menu ---------------- */
@@ -1113,6 +1181,7 @@ class AppManApplet extends Applet.TextIconApplet {
             () => this._runAppman(['-s'], { title: _("Update AppMan"), kind: 'sync' }));
         addTool(_("Clean up leftovers (appman -c)"), 'xsi-user-trash',
             () => this._runAppman(['-c'], { title: _("Clean up"), kind: 'clean' }));
+        addTool(_("Set GitHub token (appman apikey)"), 'xsi-dialog-password', () => this.setGithubToken());
         addTool(_("Open the apps folder"), 'xsi-folder-open', () => {
             if (this._appsPath)
                 this._openUri(this._appsPath);
@@ -1198,12 +1267,24 @@ class AppManApplet extends Applet.TextIconApplet {
             more.label.add_style_class_name('appman-dim');
             this._updatesSection.addMenuItem(more);
         }
-        let errs = this._errors();
+        let limited = this._rateLimited();
+        let errs = this._errors().filter(a => !limited.includes(a));
         if (errs.length) {
             let it = new PopupMenu.PopupMenuItem(
                 _("Could not check: %s").format(errs.map(a => a.name).join(', ')), { reactive: false });
             it.label.add_style_class_name('appman-dim');
             this._updatesSection.addMenuItem(it);
+        }
+        if (limited.length) {
+            let it = new PopupMenu.PopupIconMenuItem(
+                _("%s: %d apps not checked").format(this._rateLimitText(), limited.length),
+                'xsi-dialog-warning', St.IconType.SYMBOLIC, { reactive: false });
+            this._updatesSection.addMenuItem(it);
+            let tok = new PopupMenu.PopupIconMenuItem(_("Set a GitHub token to raise the limit (appman apikey)…"),
+                'xsi-dialog-password', St.IconType.SYMBOLIC);
+            tok.label.add_style_class_name('appman-dim');
+            tok.connect('activate', () => this.setGithubToken());
+            this._updatesSection.addMenuItem(tok);
         }
 
         this._installedItem.label.set_text(_("Installed apps (%d)").format(this._apps.length));
