@@ -1,0 +1,216 @@
+#!/usr/bin/env bash
+# AppMan Manager — helper for the Cinnamon applet.
+#
+# Designed to be cheap: it reads AppMan's app folders directly instead of
+# calling `appman -f` (which runs `du` over every app), and update checks run
+# niced, with limited parallelism and hard timeouts.
+#
+#   helper.sh list                    installed apps (TSV)
+#   helper.sh check [APP...]          check for updates without applying them (TSV)
+#   helper.sh run STAMP ID CMD [ARGS...] run an AppMan command inside a terminal
+#
+# How "check" works: every AM-updater script made from the AM templates looks like
+#     version0=$(cat .../version)        <- installed version/URL
+#     version=$(curl ... | grep ...)     <- latest version/URL online
+#     if command -v appimageupdatetool ... / if [ "$version" != "$version0" ]; then <download>
+# We copy only the part before the first download/compare block into a temp
+# file and run that. It does the same online lookup that `appman -u` does, but
+# never downloads or changes anything.
+
+set -u
+export LC_ALL=C
+
+CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+AMDATADIR="$DATA_HOME/AM"
+JOBS="${APPMAN_APPLET_JOBS:-4}"
+CHECK_TIMEOUT="${APPMAN_APPLET_TIMEOUT:-45}"
+
+_appspath() {
+	local cfg="$CONFIG_HOME/appman/appman-config" p=""
+	[ -f "$cfg" ] && p=$(head -n1 "$cfg")
+	p="${p/#\~/$HOME}"
+	printf '%s' "${p%/}"
+}
+
+APPSPATH="$(_appspath)"
+
+# Same version extraction as appman's _check_version_filters (AM 10.x),
+# so versions shown in the applet match `appman -f`.
+_version_filter() {
+	sed "s/x86_64\|x64\.\|amd64\|aarch64\|i686\|i386/XXXX/gi" | awk '
+	{
+		count = 0; pos5 = 0; posL = 0
+		for (i = 1; i <= length($0); i++) {
+			if (substr($0, i, 1) == "/") {
+				posL = i; count++
+				if ((match($0, /github.com|codeberg.org|gitlab.com/)) && (count == 5)) pos5 = i
+			}
+		}
+		for (i = 0; i <= 1; i++) {
+			type[i] = ""; version[i] = ""
+			if (i == 0) vstr = substr($0, pos5, length($0))
+			if (i == 1) vstr = substr($0, posL, length($0))
+			if (match(vstr, /r[0-9]+\.[0-9a-f]+-[0-9]+/)) { version[i] = substr(vstr, RSTART, RLENGTH); type[i] = 0 }
+			else if (match(vstr, /v?[0-9]+(\.[0-9]+)+(rc|r|alpha|beta|pre|patch|rev|final|release)?[0-9]*([._-](rc|r|alpha|beta|pre|patch|rev|final|release)?[0-9]+)?/)) { version[i] = substr(vstr, RSTART, RLENGTH); type[i] = 1 }
+			else if (match(vstr, /[0-9]+-[0-9a-f]{7,}/)) { version[i] = substr(vstr, RSTART, RLENGTH); type[i] = 2 }
+			else if (match(vstr, /[0-9]+[a-z0-9]*/)) { if ((RLENGTH > 1) && (RLENGTH < 8)) { version[i] = substr(vstr, RSTART, RLENGTH); type[i] = 3 } }
+			if (((type[i] == "") || (type[i] == 3)) && match(vstr, /[\/_%\-][0-9a-f]{7,40}/)) { version[i] = substr(vstr, RSTART+1, RLENGTH-1); type[i] = 4 }
+			if (type[i] == "") { version[i] = "-"; type[i] = 5 }
+		}
+		if (type[0] == type[1]) { if (length(version[0]) > length(version[1])) print version[0]; else print version[1] }
+		else if (type[0] < 4) print version[0]
+		else if (type[1] < 4) print version[1]
+		else if (type[0] < type[1]) print version[0]
+		else print version[1]
+	}' | sed 's/^v//'
+}
+
+_human_version() { # $1 = app, stdin = raw version string/URL
+	head -n1 | _version_filter | tr '[:upper:]' '[:lower:]' | sed "s/$1//g"
+}
+
+_app_dirs() {
+	[ -d "$APPSPATH" ] || return 0
+	local d
+	for d in "$APPSPATH"/*/; do
+		d="${d%/}"
+		# AppMan treats a folder as an app when it holds an executable "remove"
+		# script ("appman hide" clears that bit).
+		[ -x "$d/remove" ] && printf '%s\n' "$d"
+	done
+}
+
+cmd_list() {
+	local amver="?"
+	[ -n "${APPMAN_BIN:-}" ] && amver=$(grep -m1 -oE '^AMVERSION="[^"]+"' "$APPMAN_BIN" 2>/dev/null | cut -d'"' -f2)
+	printf '#\t%s\t%s\n' "${amver:-?}" "$APPSPATH"
+	local d name ver state icon
+	while IFS= read -r d; do
+		name="${d##*/}"
+		if [ -f "$d/version" ]; then
+			ver=$(sort "$d/version" | _human_version "$name")
+		elif [ -f "$d/$name" ]; then
+			ver=$(date -r "$d/$name" "+%Y.%m.%d")
+		else
+			ver="?"
+		fi
+		if [ -f "$d/AM-updater" ]; then state=updatable
+		elif [ -f "$d/AM-LOCK" ]; then state=locked
+		else state=self
+		fi
+		icon=""
+		for f in "$d"/icons/*; do [ -f "$f" ] && { icon="$f"; break; }; done
+		printf '%s\t%s\t%s\t%s\t%s\n' "$name" "${ver:--}" "$state" "$icon" "$d"
+	done < <(_app_dirs)
+}
+
+# Print one TSV line: app, status, latest (human), detail code.
+# Detail codes (translated by the applet): no-updater, nonstandard, unsafe,
+# failed, empty, checksum.
+_out() { printf '%s\t%s\t%s\t%s\n' "$1" "$2" "${3:-}" "${4:-}"; }
+
+_check_one() {
+	local app="$1" dir="$APPSPATH/$1" upd cut tmp res status raw
+	case "$app" in ''|.*|*/*) return ;; esac
+	upd="$dir/AM-updater"
+	[ -f "$upd" ] || { _out "$app" unsupported "" no-updater; return; }
+
+	cut=$(grep -n -m1 -E '^[[:space:]]*if[[:space:]]+(command -v appimageupdatetool|\[ "\$version" != "\$version0" \])' "$upd" | cut -d: -f1)
+	if [ -z "$cut" ] || ! grep -q '^version0=' "$upd" || ! grep -qE '(^|[[:space:];)])version=' "$upd"; then
+		_out "$app" unsupported "" nonstandard; return
+	fi
+
+	tmp="$WORKDIR/$app"
+	mkdir -p "$tmp"
+	head -n $((cut - 1)) "$upd" > "$tmp/check.sh"
+
+	# Refuse anything that is more than an online lookup.
+	if grep -qE '(^|[;&|(`]|then|do|else)[[:space:]]*(wget|curl[^|]*[[:space:]]-[oO]|mv|cp|rm|mkdir|chmod|ln|tar|unzip|7z|notify-send|appimageupdatetool|sudo|doas)([[:space:]]|$)' "$tmp/check.sh"; then
+		_out "$app" unsupported "" unsafe; return
+	fi
+
+	# Use the user's own GitHub token (set with "appman apikey"), like appman does.
+	if [ -n "$GH_AUTH" ] && grep -q "https://api.github.com" "$tmp/check.sh" &&
+		! grep -qE 'gh[ps]_[A-Za-z0-9]{36}|github_pat_' "$tmp/check.sh"; then
+		sed -i "s#https://api.github.com#--header \"Authorization: token $GH_AUTH\" https://api.github.com#g" "$tmp/check.sh"
+	fi
+
+	cat >> "$tmp/check.sh" <<'EOF'
+
+[ "$version" != "$version0" ] && __s=update || __s=current
+printf 'AMCHK\t%s\t%s\n' "$__s" "$(printf '%s\n' "$version" | head -n1)"
+EOF
+
+	res=$(cd "$tmp" && timeout "$CHECK_TIMEOUT" sh ./check.sh 2>/dev/null | grep -m1 '^AMCHK')
+	if [ -z "$res" ]; then
+		_out "$app" error "" failed; return
+	fi
+	status=$(printf '%s' "$res" | cut -f2)
+	raw=$(printf '%s' "$res" | cut -f3)
+	if [ -z "$raw" ]; then
+		_out "$app" error "" empty; return
+	fi
+	# A failed checksum makes `appman -u` re-download the app anyway.
+	if [ "$status" = current ] && grep -sq "Checksum failure" "$dir/AM-VERIFIED"; then
+		_out "$app" update "$(printf '%s\n' "$raw" | _human_version "$app")" checksum; return
+	fi
+	_out "$app" "$status" "$(printf '%s\n' "$raw" | _human_version "$app")" ""
+}
+
+cmd_check() {
+	local apps=() d n
+	if [ $# -gt 0 ]; then
+		apps=("$@")
+	else
+		while IFS= read -r d; do apps+=("${d##*/}"); done < <(_app_dirs)
+	fi
+
+	WORKDIR=$(mktemp -d "${XDG_RUNTIME_DIR:-/tmp}/appman-applet.XXXXXX") || exit 1
+	trap 'rm -rf "$WORKDIR"' EXIT
+
+	GH_AUTH=""
+	[ -f "$AMDATADIR/ghapikey.txt" ] && GH_AUTH=$(head -n1 "$AMDATADIR/ghapikey.txt")
+
+	local running=0
+	for n in "${apps[@]}"; do
+		_check_one "$n" &
+		running=$((running + 1))
+		if [ "$running" -ge "$JOBS" ]; then
+			wait -n
+			running=$((running - 1))
+		fi
+	done
+	wait
+}
+
+# The applet watches STAMP (inotify, no polling): "start <id>" when the
+# command begins, "done <id> <rc>" when it ends or the window is closed.
+cmd_run() {
+	local stamp="$1" id="$2"; shift 2
+	RUN_RC=130
+	_finish() { printf 'done %s %s\n' "$id" "$RUN_RC" > "$stamp" 2>/dev/null; }
+	trap _finish EXIT
+	trap 'exit 130' HUP INT TERM
+	printf 'start %s\n' "$id" > "$stamp" 2>/dev/null
+	printf '\033[1;34m:: %s\033[0m\n\n' "${*##*/}"
+	"$@"
+	RUN_RC=$?
+	echo
+	if [ "$RUN_RC" -eq 0 ]; then
+		printf '\033[1;32m:: Done.\033[0m '
+	else
+		printf '\033[1;31m:: Finished with exit code %s.\033[0m ' "$RUN_RC"
+	fi
+	_finish
+	trap - EXIT
+	read -r -p "Press Enter to close…" _ || true
+	exit "$RUN_RC"
+}
+
+case "${1:-}" in
+	list) shift; cmd_list "$@" ;;
+	check) shift; cmd_check "$@" ;;
+	run) shift; cmd_run "$@" ;;
+	*) echo "usage: $0 {list|check [APP...]|run STAMP ID CMD...}" >&2; exit 2 ;;
+esac
