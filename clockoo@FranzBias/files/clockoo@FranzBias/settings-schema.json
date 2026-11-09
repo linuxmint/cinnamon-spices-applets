@@ -1,0 +1,338 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page-cuckoo", "page-alarms", "page-timer", "page-general"],
+        "page-cuckoo": {
+            "type": "page",
+            "title": "Cuckoo",
+            "sections": ["section-cuckoo"]
+        },
+        "page-alarms": {
+            "type": "page",
+            "title": "Alarms",
+            "sections": ["section-alarms"]
+        },
+        "page-timer": {
+            "type": "page",
+            "title": "Timer",
+            "sections": ["section-timer", "section-saved-timers", "section-pomodoro"]
+        },
+        "page-general": {
+            "type": "page",
+            "title": "General",
+            "sections": ["section-voice", "section-panel"]
+        },
+        "section-cuckoo": {
+            "type": "section",
+            "title": "Hourly cuckoo",
+            "keys": ["cuckoo-enabled", "cuckoo-hours", "cuckoo-minute", "cuckoo-sound", "cuckoo-count-hours",
+                     "cuckoo-quiet", "cuckoo-quiet-from", "cuckoo-quiet-to"]
+        },
+        "section-alarms": {
+            "type": "section",
+            "title": "Alarms",
+            "keys": ["alarms-help", "alarms"]
+        },
+        "section-timer": {
+            "type": "section",
+            "title": "Countdown timer",
+            "keys": ["timer-sound", "timer-text", "timer-voice", "timer-repeat", "timer-custom-minutes"]
+        },
+        "section-saved-timers": {
+            "type": "section",
+            "title": "Saved timers",
+            "keys": ["saved-timers-help", "saved-timers", "sort-by-duration", "sort-by-name"]
+        },
+        "section-pomodoro": {
+            "type": "section",
+            "title": "Pomodoro",
+            "keys": ["pomodoro-work", "pomodoro-short", "pomodoro-long", "pomodoro-every", "pomodoro-rounds"]
+        },
+        "section-voice": {
+            "type": "section",
+            "title": "Voice and snooze",
+            "keys": ["snooze-minutes", "piper-dir", "piper-help"]
+        },
+        "section-panel": {
+            "type": "section",
+            "title": "Panel",
+            "keys": ["icon-style", "show-countdown", "show-stopwatch"]
+        }
+    },
+
+    "cuckoo-enabled": {
+        "type": "switch",
+        "default": false,
+        "description": "Hourly cuckoo"
+    },
+    "cuckoo-hours": {
+        "type": "entry",
+        "default": "7-21",
+        "description": "Hours",
+        "tooltip": "Hours when the cuckoo calls, e.g. 7-21, or 8,12,18, or 0-23",
+        "dependency": "cuckoo-enabled"
+    },
+    "cuckoo-minute": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 59,
+        "step": 1,
+        "units": "minutes past the hour",
+        "description": "Minute",
+        "dependency": "cuckoo-enabled"
+    },
+    "cuckoo-sound": {
+        "type": "soundfilechooser",
+        "default": "",
+        "description": "Sound",
+        "tooltip": "Leave empty for the bundled cuckoo",
+        "dependency": "cuckoo-enabled"
+    },
+    "cuckoo-count-hours": {
+        "type": "switch",
+        "default": false,
+        "description": "Call as many times as the hour",
+        "tooltip": "Like a real cuckoo clock: 3 calls at 3 o'clock, 12 at noon",
+        "dependency": "cuckoo-enabled"
+    },
+    "cuckoo-quiet": {
+        "type": "switch",
+        "default": false,
+        "description": "Quiet night",
+        "tooltip": "No cuckoo between these two hours, whatever the hours above say",
+        "dependency": "cuckoo-enabled"
+    },
+    "cuckoo-quiet-from": {
+        "type": "spinbutton",
+        "default": 22,
+        "min": 0,
+        "max": 23,
+        "step": 1,
+        "units": "h",
+        "description": "Quiet from",
+        "dependency": "cuckoo-quiet"
+    },
+    "cuckoo-quiet-to": {
+        "type": "spinbutton",
+        "default": 7,
+        "min": 0,
+        "max": 23,
+        "step": 1,
+        "units": "h",
+        "description": "Quiet until",
+        "dependency": "cuckoo-quiet"
+    },
+
+    "alarms-help": {
+        "type": "label",
+        "description": "Time as HH:MM. An alarm set to \"Once\" switches itself off after ringing. The text is spoken in the chosen language. Crescendo: the volume grows from soft to full. Warn before: a heads-up that many minutes earlier."
+    },
+    "alarms": {
+        "type": "list",
+        "description": "Alarms",
+        "height": 300,
+        "columns": [
+            {"id": "enabled", "title": "On", "type": "boolean", "default": true},
+            {"id": "name", "title": "Name", "type": "string", "default": ""},
+            {"id": "time", "title": "Time", "type": "string", "default": "07:00"},
+            {"id": "days", "title": "Days", "type": "string", "default": "01234",
+             "options": {
+                 "Every day": "0123456",
+                 "Monday to Friday": "01234",
+                 "Saturday and Sunday": "56",
+                 "Once": "",
+                 "Monday": "0",
+                 "Tuesday": "1",
+                 "Wednesday": "2",
+                 "Thursday": "3",
+                 "Friday": "4",
+                 "Saturday": "5",
+                 "Sunday": "6"
+             }},
+            {"id": "sound", "title": "Sound", "type": "sound", "default": ""},
+            {"id": "text", "title": "Text to read", "type": "string", "default": ""},
+            {"id": "voice", "title": "Voice", "type": "string", "default": "",
+             "options": {
+                 "Automatic": "",
+                 "English": "en",
+                 "Italiano": "it",
+                 "Deutsch": "de",
+                 "Español": "es",
+                 "Français": "fr"
+             }},
+            {"id": "repeat", "title": "Repeat", "type": "integer", "default": 3, "min": 1, "max": 20},
+            {"id": "crescendo", "title": "Crescendo", "type": "boolean", "default": false},
+            {"id": "warn", "title": "Warn before (min, 0 = off)", "type": "integer", "default": 0, "min": 0, "max": 120},
+            {"id": "snooze", "title": "Snooze (min, 0 = general)", "type": "integer", "default": 0, "min": 0, "max": 60}
+        ],
+        "default": []
+    },
+
+    "timer-sound": {
+        "type": "soundfilechooser",
+        "default": "",
+        "description": "Sound",
+        "tooltip": "Leave empty for the bundled kitchen timer"
+    },
+    "timer-text": {
+        "type": "entry",
+        "default": "",
+        "description": "Text to read (optional)"
+    },
+    "timer-voice": {
+        "type": "combobox",
+        "default": "",
+        "description": "Voice",
+        "options": {
+            "Automatic": "",
+            "English": "en",
+            "Italiano": "it",
+            "Deutsch": "de",
+            "Español": "es",
+            "Français": "fr"
+        }
+    },
+    "timer-repeat": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "units": "times",
+        "description": "Repeat"
+    },
+    "timer-custom-minutes": {
+        "type": "spinbutton",
+        "default": 25,
+        "min": 1,
+        "max": 1440,
+        "step": 1,
+        "units": "minutes",
+        "description": "Custom timer in the menu"
+    },
+
+    "saved-timers-help": {
+        "type": "label",
+        "description": "Your own timers, ready in the menu under \"Start a timer\". Use the arrows of the list to move them, or sort them with the buttons below."
+    },
+    "saved-timers": {
+        "type": "list",
+        "description": "Saved timers",
+        "height": 220,
+        "columns": [
+            {"id": "name", "title": "Name", "type": "string", "default": ""},
+            {"id": "minutes", "title": "Minutes", "type": "integer", "default": 25, "min": 0, "max": 1440},
+            {"id": "seconds", "title": "Seconds", "type": "integer", "default": 0, "min": 0, "max": 59},
+            {"id": "text", "title": "Text to read", "type": "string", "default": ""}
+        ],
+        "default": []
+    },
+    "pomodoro-work": {
+        "type": "spinbutton",
+        "default": 25,
+        "min": 1,
+        "max": 180,
+        "step": 1,
+        "units": "minutes",
+        "description": "Work"
+    },
+    "pomodoro-short": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "units": "minutes",
+        "description": "Break"
+    },
+    "pomodoro-long": {
+        "type": "spinbutton",
+        "default": 15,
+        "min": 1,
+        "max": 120,
+        "step": 1,
+        "units": "minutes",
+        "description": "Long break"
+    },
+    "pomodoro-every": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "units": "works",
+        "description": "Long break every"
+    },
+    "pomodoro-rounds": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 0,
+        "max": 99,
+        "step": 1,
+        "units": "(0 = no end)",
+        "description": "Works in all"
+    },
+    "sort-by-duration": {
+        "type": "button",
+        "description": "Sort by duration",
+        "callback": "sortSavedByDuration"
+    },
+    "sort-by-name": {
+        "type": "button",
+        "description": "Sort by name",
+        "callback": "sortSavedByName"
+    },
+
+    "snooze-minutes": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "units": "minutes",
+        "description": "Snooze"
+    },
+    "piper-dir": {
+        "type": "filechooser",
+        "select-dir": true,
+        "default": "",
+        "description": "Piper folder (optional)",
+        "tooltip": "Only if piper is already installed on this computer: the folder that contains piper/piper and voices/. Leave empty to use speech-dispatcher (spd-say)."
+    },
+    "piper-help": {
+        "type": "label",
+        "description": "Text is spoken with speech-dispatcher. If you already have piper, choose its folder for more natural voices."
+    },
+
+    "icon-style": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Panel icon",
+        "options": {
+            "Follow the panel colour": "auto",
+            "Wood (light panels)": "wood",
+            "Brass (dark panels)": "brass",
+            "Symbolic": "symbolic"
+        }
+    },
+    "show-stopwatch": {
+        "type": "switch",
+        "default": true,
+        "description": "Show the running stopwatch in the panel"
+    },
+    "show-countdown": {
+        "type": "switch",
+        "default": true,
+        "description": "Show the running timer in the panel"
+    },
+
+    "once-dates": {
+        "type": "generic",
+        "default": {}
+    },
+    "stopwatch-state": {
+        "type": "generic",
+        "default": {}
+    }
+}
