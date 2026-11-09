@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: appman-manager@z3n0e 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-11-09 11:57+0100\n"
+"POT-Creation-Date: 2026-11-09 12:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,407 +17,407 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: files/appman-manager@z3n0e/applet.js:107
+#: files/appman-manager@z3n0e/applet.js:108
 msgid "never"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:116
+#: files/appman-manager@z3n0e/applet.js:117
 #, javascript-format
 msgid "tomorrow %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:118
+#: files/appman-manager@z3n0e/applet.js:119
 #, javascript-format
 msgid "yesterday %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:126
+#: files/appman-manager@z3n0e/applet.js:127
 msgid "checksum failed, will be downloaded again"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:127
+#: files/appman-manager@z3n0e/applet.js:128
 msgid "no AM-updater script"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:128
+#: files/appman-manager@z3n0e/applet.js:129
 msgid "non-standard updater script"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:129
+#: files/appman-manager@z3n0e/applet.js:130
 msgid "updater script does more than a version lookup"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:130
+#: files/appman-manager@z3n0e/applet.js:131
 msgid "lookup failed or timed out"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:131
+#: files/appman-manager@z3n0e/applet.js:132
 msgid "empty response"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:194
+#: files/appman-manager@z3n0e/applet.js:195
 msgid "locked"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:196
+#: files/appman-manager@z3n0e/applet.js:197
 msgid "self-updating"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:210
+#: files/appman-manager@z3n0e/applet.js:211
 msgid "Keep the current version (lock)"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:213
-#: files/appman-manager@z3n0e/applet.js:742
+#: files/appman-manager@z3n0e/applet.js:214
+#: files/appman-manager@z3n0e/applet.js:721
 msgid "Update now"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:214
+#: files/appman-manager@z3n0e/applet.js:215
 msgid "Reinstall"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:216
+#: files/appman-manager@z3n0e/applet.js:217
 msgid "Unlock updates"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:218
+#: files/appman-manager@z3n0e/applet.js:219
 msgid "Lock at the current version"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:219
+#: files/appman-manager@z3n0e/applet.js:220
 msgid "Remove"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:240
+#: files/appman-manager@z3n0e/applet.js:241
 msgid "installed"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:513
+#: files/appman-manager@z3n0e/applet.js:515
 msgid "offline"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:515
+#: files/appman-manager@z3n0e/applet.js:517
 msgid "metered connection"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:517
+#: files/appman-manager@z3n0e/applet.js:519
 msgid "on battery"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:726
+#: files/appman-manager@z3n0e/applet.js:705
 msgid "All AppImages are up to date"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:727
+#: files/appman-manager@z3n0e/applet.js:706
 #, javascript-format
 msgid "Apps checked: %d. Could not check: %d."
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:728
+#: files/appman-manager@z3n0e/applet.js:707
 #, javascript-format
 msgid "Apps checked: %d."
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:740
+#: files/appman-manager@z3n0e/applet.js:719
 #, javascript-format
 msgid "… and %d more"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:741
+#: files/appman-manager@z3n0e/applet.js:720
 #, javascript-format
 msgid "AppImage updates available: %d"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:794
+#: files/appman-manager@z3n0e/applet.js:767
 msgid "AppMan is busy"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:794
+#: files/appman-manager@z3n0e/applet.js:767
 #, javascript-format
 msgid "Wait for \"%s\" to finish."
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:799
+#: files/appman-manager@z3n0e/applet.js:780
 msgid "AppMan not found"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:799
+#: files/appman-manager@z3n0e/applet.js:780
 msgid "Set the path to appman in the applet settings."
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:831
+#: files/appman-manager@z3n0e/applet.js:812
 msgid "Could not open a terminal"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:832
+#: files/appman-manager@z3n0e/applet.js:813
 msgid ""
 "Check the terminal setting, or turn off \"Run menu actions in a terminal "
 "window\"."
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:839
+#: files/appman-manager@z3n0e/applet.js:820
 msgid "The terminal did not start the command"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:840
+#: files/appman-manager@z3n0e/applet.js:821
 msgid ""
 "Check \"Terminal command\" in the applet settings (for example \"gnome-"
 "terminal --\" or \"ghostty -e\")."
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:899
+#: files/appman-manager@z3n0e/applet.js:880
 #, javascript-format
 msgid "%s: finished with problems"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:900
+#: files/appman-manager@z3n0e/applet.js:881
 #, javascript-format
 msgid "%s: done"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:918
+#: files/appman-manager@z3n0e/applet.js:899
 #, javascript-format
 msgid "Update %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:918
+#: files/appman-manager@z3n0e/applet.js:899
 #, javascript-format
 msgid "Update %d apps"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:925
+#: files/appman-manager@z3n0e/applet.js:906
 msgid "Full update"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:929
+#: files/appman-manager@z3n0e/applet.js:910
 #, javascript-format
 msgid "Install \"%s\"?"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:930
+#: files/appman-manager@z3n0e/applet.js:911
 #, javascript-format
 msgid "Install %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:934
+#: files/appman-manager@z3n0e/applet.js:915
 #, javascript-format
 msgid ""
 "Reinstall \"%s\"?\n"
 "AppMan removes it and installs it again from its database."
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:935
+#: files/appman-manager@z3n0e/applet.js:916
 #, javascript-format
 msgid "Reinstall %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:939
+#: files/appman-manager@z3n0e/applet.js:920
 #, javascript-format
 msgid ""
 "Remove \"%s\"?\n"
 "The app and its launcher will be deleted."
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:941
+#: files/appman-manager@z3n0e/applet.js:922
 #, javascript-format
 msgid "Remove %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:946
+#: files/appman-manager@z3n0e/applet.js:927
 #, javascript-format
 msgid "Lock %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:946
+#: files/appman-manager@z3n0e/applet.js:927
 #, javascript-format
 msgid "Unlock %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:962
+#: files/appman-manager@z3n0e/applet.js:943
 #, javascript-format
 msgid "Could not launch %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1030
+#: files/appman-manager@z3n0e/applet.js:1011
 #, javascript-format
 msgid "Running: %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1032
-#: files/appman-manager@z3n0e/applet.js:1178
+#: files/appman-manager@z3n0e/applet.js:1013
+#: files/appman-manager@z3n0e/applet.js:1159
 msgid "Checking for updates…"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1034
+#: files/appman-manager@z3n0e/applet.js:1015
 #, javascript-format
 msgid "Updates available: %d"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1034
+#: files/appman-manager@z3n0e/applet.js:1015
 msgid "All apps are up to date"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1035
+#: files/appman-manager@z3n0e/applet.js:1016
 #, javascript-format
 msgid "Last check: %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1037
+#: files/appman-manager@z3n0e/applet.js:1018
 #, javascript-format
 msgid "Last operation: %s (done)"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1038
+#: files/appman-manager@z3n0e/applet.js:1019
 #, javascript-format
 msgid "Last operation: %s (problems)"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1041
+#: files/appman-manager@z3n0e/applet.js:1022
 #, javascript-format
 msgid "Check postponed (%s)"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1043
+#: files/appman-manager@z3n0e/applet.js:1024
 msgid "Automatic checks are off"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1045
+#: files/appman-manager@z3n0e/applet.js:1026
 #, javascript-format
 msgid "Next check: %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1068
-#: files/appman-manager@z3n0e/applet.js:1197
+#: files/appman-manager@z3n0e/applet.js:1049
+#: files/appman-manager@z3n0e/applet.js:1178
 msgid "Check for updates"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1072
+#: files/appman-manager@z3n0e/applet.js:1053
 msgid "Update all"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1089
+#: files/appman-manager@z3n0e/applet.js:1070
 msgid "Installed apps"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1106
+#: files/appman-manager@z3n0e/applet.js:1087
 msgid "Search the AppMan database to install…"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1122
+#: files/appman-manager@z3n0e/applet.js:1103
 msgid "AppMan tools"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1128
+#: files/appman-manager@z3n0e/applet.js:1109
 msgid "Full update (appman -u)"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1129
+#: files/appman-manager@z3n0e/applet.js:1110
 msgid "Reinstall apps whose install script changed"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1130
+#: files/appman-manager@z3n0e/applet.js:1111
 msgid "Reinstall changed apps"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1131
+#: files/appman-manager@z3n0e/applet.js:1112
 msgid "Update AppMan itself (appman -s)"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1132
+#: files/appman-manager@z3n0e/applet.js:1113
 msgid "Update AppMan"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1133
+#: files/appman-manager@z3n0e/applet.js:1114
 msgid "Clean up leftovers (appman -c)"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1134
+#: files/appman-manager@z3n0e/applet.js:1115
 msgid "Clean up"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1135
+#: files/appman-manager@z3n0e/applet.js:1116
 msgid "Open the apps folder"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1139
+#: files/appman-manager@z3n0e/applet.js:1120
 msgid "Applet settings"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1176
+#: files/appman-manager@z3n0e/applet.js:1157
 #, javascript-format
 msgid "Running: %s (since %s)"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1180
+#: files/appman-manager@z3n0e/applet.js:1161
 #, javascript-format
 msgid "Apps: %d"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1181
+#: files/appman-manager@z3n0e/applet.js:1162
 #, javascript-format
 msgid "Updates: %d"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1181
+#: files/appman-manager@z3n0e/applet.js:1162
 msgid "up to date"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1182
+#: files/appman-manager@z3n0e/applet.js:1163
 #, javascript-format
 msgid "checked %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1189
+#: files/appman-manager@z3n0e/applet.js:1170
 #, javascript-format
 msgid "%s: done at %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1190
+#: files/appman-manager@z3n0e/applet.js:1171
 #, javascript-format
 msgid "%s: problems at %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1192
+#: files/appman-manager@z3n0e/applet.js:1173
 msgid "show log"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1197
+#: files/appman-manager@z3n0e/applet.js:1178
 msgid "Checking…"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1199
+#: files/appman-manager@z3n0e/applet.js:1180
 #, javascript-format
 msgid "Update all (%d)"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1199
+#: files/appman-manager@z3n0e/applet.js:1180
 msgid "Update"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1216
+#: files/appman-manager@z3n0e/applet.js:1197
 #, javascript-format
 msgid "… and %d more (see Installed apps)"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1223
+#: files/appman-manager@z3n0e/applet.js:1204
 #, javascript-format
 msgid "Could not check: %s"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1228
+#: files/appman-manager@z3n0e/applet.js:1209
 #, javascript-format
 msgid "Installed apps (%d)"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1243
+#: files/appman-manager@z3n0e/applet.js:1224
 msgid "No apps installed with AppMan"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1303
+#: files/appman-manager@z3n0e/applet.js:1284
 msgid "AppMan database not found: run \"appman -l\" once"
 msgstr ""
 
-#: files/appman-manager@z3n0e/applet.js:1323
+#: files/appman-manager@z3n0e/applet.js:1304
 msgid "No matches"
 msgstr ""
 

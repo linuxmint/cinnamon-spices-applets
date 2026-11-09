@@ -5,9 +5,14 @@
 # calling `appman -f` (which runs `du` over every app), and update checks run
 # niced, with limited parallelism and hard timeouts.
 #
-#   helper.sh list                    installed apps (TSV)
+#   helper.sh list                    installed apps (TSV); the header line also
+#                                     carries the resolved path of appman
 #   helper.sh check [APP...]          check for updates without applying them (TSV)
+#   helper.sh bg auto|user CMD...     run CMD at lowered priority (background ops)
 #   helper.sh run STAMP ID CMD [ARGS...] run an AppMan command inside a terminal
+#
+# Program lookups (appman, nice, ionice) happen here, in a separate process,
+# so the applet never blocks Cinnamon with synchronous PATH walks.
 #
 # How "check" works: every AM-updater script made from the AM templates looks like
 #     version0=$(cat .../version)        <- installed version/URL
@@ -34,6 +39,29 @@ _appspath() {
 }
 
 APPSPATH="$(_appspath)"
+
+# appman from the applet setting (APPMAN_SETTING), else PATH, else ~/.local/bin.
+_appman_bin() {
+	local p="${APPMAN_SETTING:-}"
+	p="${p/#\~/$HOME}"
+	if [ -n "$p" ]; then
+		case "$p" in
+			*/*) [ -x "$p" ] && printf '%s' "$p" ;;
+			*) command -v -- "$p" ;;
+		esac
+		return
+	fi
+	command -v appman 2>/dev/null && return
+	[ -x "$HOME/.local/bin/appman" ] && printf '%s' "$HOME/.local/bin/appman"
+}
+
+# Lower this process' priority; children inherit it.
+#   $1 = nice level, $2 = "idle" to also use the idle I/O class
+_lower_priority() {
+	renice -n "$1" -p $$ >/dev/null 2>&1
+	[ "${2:-}" = idle ] && ionice -c 3 -p $$ >/dev/null 2>&1
+	return 0
+}
 
 # Same version extraction as appman's _check_version_filters (AM 10.x),
 # so versions shown in the applet match `appman -f`.
@@ -82,9 +110,10 @@ _app_dirs() {
 }
 
 cmd_list() {
-	local amver="?"
-	[ -n "${APPMAN_BIN:-}" ] && amver=$(grep -m1 -oE '^AMVERSION="[^"]+"' "$APPMAN_BIN" 2>/dev/null | cut -d'"' -f2)
-	printf '#\t%s\t%s\n' "${amver:-?}" "$APPSPATH"
+	local amver="?" bin
+	bin=$(_appman_bin)
+	[ -n "$bin" ] && amver=$(grep -m1 -oE '^AMVERSION="[^"]+"' "$bin" 2>/dev/null | cut -d'"' -f2)
+	printf '#\t%s\t%s\t%s\n' "${amver:-?}" "$APPSPATH" "$bin"
 	local d name ver state icon
 	while IFS= read -r d; do
 		name="${d##*/}"
@@ -160,6 +189,7 @@ EOF
 
 cmd_check() {
 	local apps=() d n
+	_lower_priority 15 idle
 	if [ $# -gt 0 ]; then
 		apps=("$@")
 	else
@@ -182,6 +212,14 @@ cmd_check() {
 		fi
 	done
 	wait
+}
+
+# Background operations: lower priority (idle I/O for automatic ones), then
+# replace this shell with the command.
+cmd_bg() {
+	if [ "$1" = auto ]; then _lower_priority 15 idle; else _lower_priority 10; fi
+	shift
+	exec "$@"
 }
 
 # The applet watches STAMP (inotify, no polling): "start <id>" when the
@@ -211,6 +249,7 @@ cmd_run() {
 case "${1:-}" in
 	list) shift; cmd_list "$@" ;;
 	check) shift; cmd_check "$@" ;;
+	bg) shift; cmd_bg "$@" ;;
 	run) shift; cmd_run "$@" ;;
-	*) echo "usage: $0 {list|check [APP...]|run STAMP ID CMD...}" >&2; exit 2 ;;
+	*) echo "usage: $0 {list|check [APP...]|bg auto|user CMD...|run STAMP ID CMD...}" >&2; exit 2 ;;
 esac

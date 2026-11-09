@@ -14,7 +14,8 @@
  *    inotify only while the operation runs.
  *  - The search database loads on first keystroke and is freed when the menu
  *    closes. The installed-app rows are built only when that submenu opens.
- *  - All file I/O is asynchronous.
+ *  - All file I/O is asynchronous, and the applet does no synchronous PATH
+ *    lookups: helper.sh resolves appman and applies nice/ionice itself.
  */
 
 const Applet = imports.ui.applet;
@@ -25,7 +26,7 @@ const MessageTray = imports.ui.messageTray;
 const ModalDialog = imports.ui.modalDialog;
 const Tooltips = imports.ui.tooltips;
 const Gettext = imports.gettext;
-const { Gio, GLib, St, Clutter, Pango } = imports.gi;
+const { Gio, GLib, St, Clutter, Pango, Cinnamon } = imports.gi;
 
 let UUID = 'appman-manager@z3n0e';   // replaced by metadata.uuid in main()
 let CACHE_DIR, STATE_FILE, STAMP_FILE, LOG_FILE;
@@ -266,6 +267,7 @@ class AppManApplet extends Applet.TextIconApplet {
         this._apps = [];          // [{name, version, state, icon, path}]
         this._amVersion = '';
         this._appsPath = '';
+        this._appmanPath = '';    // resolved by helper.sh (list header)
         this._listTime = 0;
         this._results = {};       // name -> {status, latest, detail}
         this._lastCheck = 0;
@@ -326,7 +328,7 @@ class AppManApplet extends Applet.TextIconApplet {
         bind('update-all-syncs', 'updateAllSyncs');
         bind('use-terminal', 'useTerminal');
         bind('terminal-command', 'terminalCommand');
-        bind('appman-path', 'appmanPath');
+        bind('appman-path', 'appmanPath', () => this._refreshList(() => this._rebuildDynamic()));
         bind('check-jobs', 'checkJobs');
         bind('check-timeout', 'checkTimeout');
         bind('show-count', 'showCount', panel);
@@ -546,20 +548,6 @@ class AppManApplet extends Applet.TextIconApplet {
 
     /* ---------------- processes ---------------- */
 
-    _appmanBin() {
-        let p = (this.appmanPath || '').trim().replace(/^~(?=\/|$)/, HOME);
-        if (p) {
-            if (p.includes('/'))
-                return GLib.file_test(p, GLib.FileTest.IS_EXECUTABLE) ? p : null;
-            return GLib.find_program_in_path(p);
-        }
-        let found = GLib.find_program_in_path('appman');
-        if (found)
-            return found;
-        let local = GLib.build_filenamev([HOME, '.local', 'bin', 'appman']);
-        return GLib.file_test(local, GLib.FileTest.IS_EXECUTABLE) ? local : null;
-    }
-
     _launcher(flags) {
         let l = new Gio.SubprocessLauncher({ flags });
         l.set_cwd(HOME);
@@ -567,21 +555,10 @@ class AppManApplet extends Applet.TextIconApplet {
         let path = GLib.getenv('PATH') || '/usr/bin:/bin';
         if (!path.split(':').includes(localBin))
             l.setenv('PATH', `${localBin}:${path}`, true);
-        let bin = this._appmanBin();
-        if (bin)
-            l.setenv('APPMAN_BIN', bin, true);
+        l.setenv('APPMAN_SETTING', (this.appmanPath || '').trim(), true);
         l.setenv('APPMAN_APPLET_JOBS', String(this.checkJobs || 4), true);
         l.setenv('APPMAN_APPLET_TIMEOUT', String(this.checkTimeout || 45), true);
         return l;
-    }
-
-    _lowPriority(argv, idleIo = true) {
-        let pre = [];
-        if (GLib.find_program_in_path('nice'))
-            pre.push('nice', '-n', idleIo ? '15' : '10');
-        if (idleIo && GLib.find_program_in_path('ionice'))
-            pre.push('ionice', '-c', '3');
-        return pre.concat(argv);
     }
 
     // Run argv asynchronously, collect stdout+stderr, call cb(output, exitStatus).
@@ -629,6 +606,7 @@ class AppManApplet extends Applet.TextIconApplet {
                     if (f[0] === '#') {
                         this._amVersion = f[1] || '';
                         this._appsPath = f[2] || '';
+                        this._appmanPath = f[3] || '';
                         continue;
                     }
                     if (f.length >= 5)
@@ -681,7 +659,8 @@ class AppManApplet extends Applet.TextIconApplet {
         this._updatePanel();
         this._updateHeader();
 
-        let argv = this._lowPriority(['bash', this._helper, 'check'].concat(opts.apps || []));
+        // helper.sh lowers its own CPU and I/O priority.
+        let argv = ['bash', this._helper, 'check'].concat(opts.apps || []);
         this._checkCancel = new Gio.Cancellable();
         this._checkProc = this._capture(argv, (out) => {
             this._checking = false;
@@ -763,21 +742,15 @@ class AppManApplet extends Applet.TextIconApplet {
             // keep the defaults
         }
 
-        let execPath = GLib.find_program_in_path(exec) || exec;
-        let base = GLib.path_get_basename(execPath);
-        if (base === 'x-terminal-emulator') {
-            try {
-                base = GLib.path_get_basename(GLib.file_read_link('/etc/alternatives/x-terminal-emulator'))
-                    .replace(/\.wrapper$/, '');
-                execPath = GLib.find_program_in_path(base) || execPath;
-            } catch (e) {
-                // keep x-terminal-emulator -e
-            }
-        }
+        // Program names are resolved by GSubprocess at spawn time.
+        let base = GLib.path_get_basename(exec);
+        // Ghostty wrappers (e.g. "ghostty-here") may not forward -e: call ghostty itself.
         if (/ghostty/.test(base))
-            return [GLib.find_program_in_path('ghostty') || execPath, '-e'];
+            return ['ghostty', '-e'];
 
         const table = {
+            // Debian policy: x-terminal-emulator must accept "-e command args".
+            'x-terminal-emulator': ['-e'],
             'gnome-terminal': ['--'], 'kgx': ['--'], 'ptyxis': ['--'],
             'xfce4-terminal': ['-x'], 'mate-terminal': ['-x'], 'terminator': ['-x'],
             'kitty': [], 'foot': [], 'footclient': [],
@@ -785,7 +758,7 @@ class AppManApplet extends Applet.TextIconApplet {
             'konsole': ['-e'], 'tilix': ['-e'], 'alacritty': ['-e'], 'xterm': ['-e'],
             'uxterm': ['-e'], 'lxterminal': ['-e'], 'qterminal': ['-e'], 'terminology': ['-e'],
         };
-        return [execPath].concat(table[base] || [arg]);
+        return [exec].concat(table[base] || [arg]);
     }
 
     // args: appman arguments (without -y). opts: {title, background, apps, kind, auto, quiet}
@@ -794,7 +767,15 @@ class AppManApplet extends Applet.TextIconApplet {
             this._notify(_("AppMan is busy"), _("Wait for \"%s\" to finish.").format(this._op.title));
             return;
         }
-        let bin = this._appmanBin();
+        if (!this._appmanPath && !this._listTime) {
+            // Called before the first list refresh: resolve appman, then retry.
+            this._refreshList(() => {
+                if (this._listTime)
+                    this._runAppman(args, opts);
+            });
+            return;
+        }
+        let bin = this._appmanPath;
         if (!bin) {
             this._notify(_("AppMan not found"), _("Set the path to appman in the applet settings."));
             return;
@@ -808,7 +789,8 @@ class AppManApplet extends Applet.TextIconApplet {
 
         if (background) {
             // No tty: give appman's tput/fold a terminal type and a width.
-            this._capture(this._lowPriority([bin, '-y'].concat(args), !!op.auto),
+            // helper.sh lowers the priority (idle I/O for automatic updates), then execs appman.
+            this._capture(['bash', this._helper, 'bg', op.auto ? 'auto' : 'user', bin, '-y'].concat(args),
                 (out, status) => this._finishOp(op, out, status), null, { TERM: 'dumb', COLUMNS: '100' });
             return;
         }
@@ -822,8 +804,7 @@ class AppManApplet extends Applet.TextIconApplet {
             });
             // "env bash" rather than "bash": some terminals (e.g. Ghostty)
             // inject shell integration flags when the command is bash itself.
-            let env = GLib.find_program_in_path('env') || '/usr/bin/env';
-            let argv = this._terminalArgv().concat([env, 'bash', this._helper, 'run', STAMP_FILE, op.id, bin]).concat(args);
+            let argv = this._terminalArgv().concat(['env', 'bash', this._helper, 'run', STAMP_FILE, op.id, bin]).concat(args);
             // GSubprocess reaps the child by itself; nothing to wait for.
             this._launcher(Gio.SubprocessFlags.STDOUT_SILENCE | Gio.SubprocessFlags.STDERR_SILENCE).spawnv(argv);
         } catch (e) {
@@ -949,13 +930,13 @@ class AppManApplet extends Applet.TextIconApplet {
     }
 
     launchApp(app) {
-        let desktop = GLib.build_filenamev([GLib.get_user_data_dir(), 'applications', `${app.name}-AM.desktop`]);
+        // AppMan installs launchers as "<app>-AM.desktop"; Cinnamon already has them cached.
+        let cinnamonApp = Cinnamon.AppSystem.get_default().lookup_app(`${app.name}-AM.desktop`);
+        if (cinnamonApp) {
+            cinnamonApp.activate();
+            return;
+        }
         try {
-            let info = GLib.file_test(desktop, GLib.FileTest.EXISTS) ? Gio.DesktopAppInfo.new_from_filename(desktop) : null;
-            if (info) {
-                info.launch([], global.create_app_launch_context());
-                return;
-            }
             let exe = GLib.build_filenamev([app.path, app.name]);
             this._launcher(Gio.SubprocessFlags.STDOUT_SILENCE | Gio.SubprocessFlags.STDERR_SILENCE).spawnv([exe]);
         } catch (e) {
@@ -1251,7 +1232,7 @@ class AppManApplet extends Applet.TextIconApplet {
 
     /* ---------------- search ---------------- */
 
-    // Loads "~/.local/share/AM/<arch>-apps" asynchronously, then calls done().
+    // Loads AppMan's app list (<user data dir>/AM/<arch>-apps) asynchronously, then calls done().
     _loadDb(done, i = 0) {
         if (i >= DB_ARCHES.length) {
             this._db = [];
