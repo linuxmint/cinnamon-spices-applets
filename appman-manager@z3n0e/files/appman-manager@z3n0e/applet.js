@@ -578,16 +578,27 @@ class AppManApplet extends Applet.TextIconApplet {
                 l.setenv(k, v, true);
             proc = l.spawnv(argv);
         } catch (e) {
+            global.logError(`${UUID}: cannot run ${argv.join(' ')}: ${e.message}`);
             cb(null, -1);
             return null;
         }
-        proc.communicate_utf8_async(null, cancellable, (p, res) => {
+        // Read raw bytes and decode leniently: communicate_utf8 throws on any
+        // invalid UTF-8 (AppMan can print some), which would lose the output
+        // and the exit status of a command that did run.
+        // With STDIN_PIPE the stdin buffer must not be null: GLib aborts the
+        // whole process (Cinnamon) on that assertion. Empty bytes = EOF.
+        proc.communicate_async(new GLib.Bytes(new Uint8Array(0)), cancellable, (p, res) => {
+            let out;
             try {
-                let [, out] = p.communicate_utf8_finish(res);
-                cb(out || '', p.get_if_exited() ? p.get_exit_status() : -1);
+                let [, bytes] = p.communicate_finish(res);
+                out = bytes ? new TextDecoder('utf-8').decode(bytes.toArray()) : '';
             } catch (e) {
+                if (!e.matches || !e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED))
+                    global.logError(`${UUID}: reading output of ${argv.join(' ')}: ${e.message}`);
                 cb(null, -1);
+                return;
             }
+            cb(out, p.get_if_exited() ? p.get_exit_status() : -1);
         });
         return proc;
     }
@@ -897,8 +908,10 @@ class AppManApplet extends Applet.TextIconApplet {
         if (op.background && output !== null) {
             let clean = output.replace(ANSI_RE, '').replace(/\r/g, '\n').split('\n')
                 .map(l => l.trimEnd()).filter(l => l.trim() && !/^\s*[-─━=]{6,}\s*$/.test(l));
-            // appman exits 0 even on errors, so read its messages.
-            failed = failed || clean.some(l => /✖|💀|\bERROR\b|cannot be|cannot manage/i.test(l));
+            // appman exits 0 even on errors, so read its messages. Its errors
+            // carry ✖, 💀 or an upper-case ERROR; plain "cannot be" also
+            // matches warnings ("⚠️ Checksum cannot be verified").
+            failed = failed || clean.some(l => /✖|💀|\bERROR\b/.test(l));
             let started = GLib.DateTime.new_from_unix_local(op.startedAt).format('%Y-%m-%d %H:%M:%S');
             saveText(LOG_FILE, [
                 `# ${op.title}`,

@@ -23,7 +23,11 @@
 # never downloads or changes anything.
 
 set -u
-export LC_ALL=C
+# LC_ALL=C (predictable parsing) is set only for "list" and "check". AppMan
+# itself must not run under plain C: it inserts spaces with sed, and under C
+# [✖✓🔒] matches single bytes, which splits UTF-8 characters. So "bg" uses
+# C.UTF-8 (English messages, which the applet parses, but UTF-8 aware) and
+# "run" (a terminal a person reads) keeps the user's locale.
 
 CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
@@ -300,9 +304,9 @@ cmd_run() {
 }
 
 case "${1:-}" in
-	list) shift; cmd_list "$@" ;;
-	check) shift; cmd_check "$@" ;;
-	bg) shift; cmd_bg "$@" ;;
+	list) shift; export LC_ALL=C; cmd_list "$@" ;;
+	check) shift; export LC_ALL=C; cmd_check "$@" ;;
+	bg) shift; export LC_ALL=C.UTF-8; cmd_bg "$@" ;;
 	run) shift; cmd_run "$@" ;;
 	*) echo "usage: $0 {list|check [APP...]|bg auto|user CMD...|run STAMP ID CMD...}" >&2; exit 2 ;;
 esac
