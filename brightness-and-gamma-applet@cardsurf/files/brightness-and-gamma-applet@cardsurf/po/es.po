@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-11-09 16:19+0100\n"
-"PO-Revision-Date: 2026-07-13 15:57+0200\n"
+"PO-Revision-Date: 2026-11-09 14:30-0300\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.10\n"
 
 #. applet.js:178 6.6/applet.js:312 6.4/applet.js:250
 msgid "The following packages were not found:"
@@ -204,7 +204,7 @@ msgstr "%"
 #. 6.6->settings-schema.json->scroll_step->description
 #. 6.4->settings-schema.json->scroll_step->description
 msgid "Scroll step"
-msgstr "Velocidad de desplazamiento con la rueda del mouse"
+msgstr "Velocidad de desplazamiento"
 
 #. settings-schema.json->scroll_step->tooltip
 #. 6.6->settings-schema.json->scroll_step->tooltip
@@ -331,7 +331,7 @@ msgstr "Geolocalización"
 
 #. 6.6->settings-schema.json->section_resume_detect->title
 msgid "Resume Detection"
-msgstr ""
+msgstr "Reanudar la detección"
 
 #. 6.6->settings-schema.json->section_presets->title
 #. 6.6->settings-schema.json->preset_list->description
@@ -572,27 +572,38 @@ msgid ""
 "Any method other than “Simple” may cause slight flickering, especially "
 "during startup."
 msgstr ""
+"Cómo detectar cuándo el sistema sale del modo de reposo, hibernación o "
+"suspensión.\n"
+"- Simple: No se detectará ninguna actividad gráfica ni cambios en el estado "
+"del salvapantallas.\n"
+"- Gráficos: Se detectará la actividad gráfica.\n"
+"- Salvapantallas: Se detectarán los cambios en el estado del "
+"salvapantallas.\n"
+" - Ambos: Se detectará tanto la actividad gráfica como los cambios en el "
+"estado del salvapantallas.\n"
+"\n"
+"Cualquier método distinto de \"Simple\" puede provocar un ligero parpadeo, "
+"especialmente durante el arranque."
 
 #. 6.6->settings-schema.json->resume_detect_method->description
 msgid "Method for detecting when the display exits standby mode"
-msgstr ""
+msgstr "Método para detectar cuándo la pantalla sale del modo de espera"
 
 #. 6.6->settings-schema.json->resume_detect_method->options
 msgid "Simple"
-msgstr ""
+msgstr "Simple"
 
 #. 6.6->settings-schema.json->resume_detect_method->options
 msgid "Graphical"
-msgstr ""
+msgstr "Gráficos"
 
 #. 6.6->settings-schema.json->resume_detect_method->options
-#, fuzzy
 msgid "Screen saver"
-msgstr "Pantalla"
+msgstr "Salvapantallas"
 
 #. 6.6->settings-schema.json->resume_detect_method->options
 msgid "Both"
-msgstr ""
+msgstr "Ambos"
 
 #. 6.6->settings-schema.json->show_shortcuts_in_menu->description
 msgid "Show shortcuts in the menu"
