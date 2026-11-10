@@ -1,0 +1,6 @@
+{
+  "name": "Codex Quota Meter",
+  "author": "Icators",
+  "description": "Monitor OpenAI Codex 5-hour and weekly usage quotas from the Cinnamon panel. Requires separately installed official Codex CLI.",
+  "version": "1.5.0"
+}
