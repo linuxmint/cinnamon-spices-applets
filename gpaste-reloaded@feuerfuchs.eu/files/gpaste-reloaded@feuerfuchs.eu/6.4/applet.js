@@ -170,9 +170,9 @@ class GPasteApplet extends Applet.IconApplet {
                 // Client
                 this._signalManager.connect(this._client, 'update',         this._onClientUpdate.bind(this));
                 this._signalManager.connect(this._client, 'show-history',   this._onClientShowHistory.bind(this));
-                this._signalManager.connect(this._client, 'switch-history', this._onClientSwitchHistory.bind(this));
+                this._signalManager.connect(this._client, 'notify::history', this._onClientSwitchHistory.bind(this));
                 this._signalManager.connect(this._client, 'tracking',       this._onClientTracking.bind(this));
-                this._signalManager.connect(this._client, 'delete-history', this._onClientDeleteHistory.bind(this));
+                this._signalManager.connect(this._client, 'history-deleted', this._onClientDeleteHistory.bind(this));
 
                 // Client settings
                 this._signalManager.connect(this._clientSettings, 'changed::max-displayed-history-size', this._createHistoryItems.bind(this));
