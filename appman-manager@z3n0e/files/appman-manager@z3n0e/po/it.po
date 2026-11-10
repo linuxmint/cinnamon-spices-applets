@@ -1,0 +1,723 @@
+# Italian translation for appman-manager@z3n0e.
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: appman-manager@z3n0e 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-09 12:44+0100\n"
+"PO-Revision-Date: 2026-11-09 11:58+0100\n"
+"Last-Translator: z3n0e\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: files/appman-manager@z3n0e/applet.js:111
+msgid "never"
+msgstr "mai"
+
+#: files/appman-manager@z3n0e/applet.js:120
+#, javascript-format
+msgid "tomorrow %s"
+msgstr "domani %s"
+
+#: files/appman-manager@z3n0e/applet.js:122
+#, javascript-format
+msgid "yesterday %s"
+msgstr "ieri %s"
+
+#: files/appman-manager@z3n0e/applet.js:130
+msgid "checksum failed, will be downloaded again"
+msgstr "checksum non valido, verrà riscaricata"
+
+#: files/appman-manager@z3n0e/applet.js:131
+msgid "no AM-updater script"
+msgstr "nessuno script AM-updater"
+
+#: files/appman-manager@z3n0e/applet.js:132
+msgid "non-standard updater script"
+msgstr "script di aggiornamento non standard"
+
+#: files/appman-manager@z3n0e/applet.js:133
+msgid "updater script does more than a version lookup"
+msgstr "lo script di aggiornamento fa più di un controllo della versione"
+
+#: files/appman-manager@z3n0e/applet.js:134
+msgid "lookup failed or timed out"
+msgstr "controllo non riuscito o scaduto"
+
+#: files/appman-manager@z3n0e/applet.js:135
+msgid "empty response"
+msgstr "risposta vuota"
+
+#: files/appman-manager@z3n0e/applet.js:136
+msgid "GitHub API limit reached"
+msgstr "Limite delle API di GitHub raggiunto"
+
+#: files/appman-manager@z3n0e/applet.js:199
+msgid "locked"
+msgstr "bloccata"
+
+#: files/appman-manager@z3n0e/applet.js:201
+msgid "self-updating"
+msgstr "si aggiorna da sola"
+
+#: files/appman-manager@z3n0e/applet.js:215
+msgid "Keep the current version (lock)"
+msgstr "Mantieni la versione attuale (blocca)"
+
+#: files/appman-manager@z3n0e/applet.js:218
+#: files/appman-manager@z3n0e/applet.js:752
+msgid "Update now"
+msgstr "Aggiorna ora"
+
+#: files/appman-manager@z3n0e/applet.js:219
+msgid "Reinstall"
+msgstr "Reinstalla"
+
+#: files/appman-manager@z3n0e/applet.js:221
+msgid "Unlock updates"
+msgstr "Sblocca gli aggiornamenti"
+
+#: files/appman-manager@z3n0e/applet.js:223
+msgid "Lock at the current version"
+msgstr "Blocca alla versione attuale"
+
+#: files/appman-manager@z3n0e/applet.js:224
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: files/appman-manager@z3n0e/applet.js:245
+msgid "installed"
+msgstr "installata"
+
+#: files/appman-manager@z3n0e/applet.js:522
+msgid "offline"
+msgstr "offline"
+
+#: files/appman-manager@z3n0e/applet.js:524
+msgid "metered connection"
+msgstr "connessione a consumo"
+
+#: files/appman-manager@z3n0e/applet.js:526
+msgid "on battery"
+msgstr "a batteria"
+
+#: files/appman-manager@z3n0e/applet.js:666
+#, javascript-format
+msgid "GitHub API limit reached (resets at %s)"
+msgstr "Limite delle API di GitHub raggiunto (si azzera alle %s)"
+
+#: files/appman-manager@z3n0e/applet.js:667
+msgid "GitHub API limit was reached"
+msgstr "È stato raggiunto il limite delle API di GitHub"
+
+#: files/appman-manager@z3n0e/applet.js:729
+#, javascript-format
+msgid ""
+"Could not check %d apps. Set a GitHub token (AppMan tools → Set GitHub "
+"token) to raise the limit."
+msgstr ""
+"Impossibile controllare %d app. Imposta un token GitHub (Strumenti di "
+"AppMan → Imposta token GitHub) per alzare il limite."
+
+#: files/appman-manager@z3n0e/applet.js:736
+msgid "All AppImages are up to date"
+msgstr "Tutte le AppImage sono aggiornate"
+
+#: files/appman-manager@z3n0e/applet.js:737
+#, javascript-format
+msgid "Apps checked: %d. Could not check: %d."
+msgstr "App controllate: %d. Impossibile controllare: %d."
+
+#: files/appman-manager@z3n0e/applet.js:738
+#, javascript-format
+msgid "Apps checked: %d."
+msgstr "App controllate: %d."
+
+#: files/appman-manager@z3n0e/applet.js:750
+#, javascript-format
+msgid "… and %d more"
+msgstr "… e altre %d"
+
+#: files/appman-manager@z3n0e/applet.js:751
+#, javascript-format
+msgid "AppImage updates available: %d"
+msgstr "Aggiornamenti AppImage disponibili: %d"
+
+#: files/appman-manager@z3n0e/applet.js:798
+msgid "AppMan is busy"
+msgstr "AppMan è occupato"
+
+#: files/appman-manager@z3n0e/applet.js:798
+#, javascript-format
+msgid "Wait for \"%s\" to finish."
+msgstr "Attendi che \"%s\" finisca."
+
+#: files/appman-manager@z3n0e/applet.js:811
+msgid "AppMan not found"
+msgstr "AppMan non trovato"
+
+#: files/appman-manager@z3n0e/applet.js:811
+msgid "Set the path to appman in the applet settings."
+msgstr "Imposta il percorso di appman nelle impostazioni dell'applet."
+
+#: files/appman-manager@z3n0e/applet.js:844
+msgid "Could not open a terminal"
+msgstr "Impossibile aprire un terminale"
+
+#: files/appman-manager@z3n0e/applet.js:845
+msgid ""
+"Check the terminal setting, or turn off \"Run menu actions in a terminal "
+"window\"."
+msgstr ""
+"Controlla l'impostazione del terminale, oppure disattiva \"Esegui le azioni "
+"del menu in una finestra di terminale\"."
+
+#: files/appman-manager@z3n0e/applet.js:852
+msgid "The terminal did not start the command"
+msgstr "Il terminale non ha avviato il comando"
+
+#: files/appman-manager@z3n0e/applet.js:853
+msgid ""
+"Check \"Terminal command\" in the applet settings (for example \"gnome-"
+"terminal --\" or \"ghostty -e\")."
+msgstr ""
+"Controlla \"Comando del terminale\" nelle impostazioni dell'applet (per "
+"esempio \"gnome-terminal --\" o \"ghostty -e\")."
+
+#: files/appman-manager@z3n0e/applet.js:912
+#, javascript-format
+msgid "%s: finished with problems"
+msgstr "%s: terminata con problemi"
+
+#: files/appman-manager@z3n0e/applet.js:913
+#, javascript-format
+msgid "%s: done"
+msgstr "%s: completata"
+
+#: files/appman-manager@z3n0e/applet.js:933
+msgid "Set GitHub token"
+msgstr "Imposta token GitHub"
+
+#: files/appman-manager@z3n0e/applet.js:940
+#, javascript-format
+msgid "Update %s"
+msgstr "Aggiorna %s"
+
+#: files/appman-manager@z3n0e/applet.js:940
+#, javascript-format
+msgid "Update %d apps"
+msgstr "Aggiorna %d app"
+
+#: files/appman-manager@z3n0e/applet.js:947
+msgid "Full update"
+msgstr "Aggiornamento completo"
+
+#: files/appman-manager@z3n0e/applet.js:951
+#, javascript-format
+msgid "Install \"%s\"?"
+msgstr "Installare \"%s\"?"
+
+#: files/appman-manager@z3n0e/applet.js:952
+#, javascript-format
+msgid "Install %s"
+msgstr "Installa %s"
+
+#: files/appman-manager@z3n0e/applet.js:956
+#, javascript-format
+msgid ""
+"Reinstall \"%s\"?\n"
+"AppMan removes it and installs it again from its database."
+msgstr ""
+"Reinstallare \"%s\"?\n"
+"AppMan la rimuove e la reinstalla dal suo database."
+
+#: files/appman-manager@z3n0e/applet.js:957
+#, javascript-format
+msgid "Reinstall %s"
+msgstr "Reinstalla %s"
+
+#: files/appman-manager@z3n0e/applet.js:961
+#, javascript-format
+msgid ""
+"Remove \"%s\"?\n"
+"The app and its launcher will be deleted."
+msgstr ""
+"Rimuovere \"%s\"?\n"
+"L'app e il suo avviatore verranno eliminati."
+
+#: files/appman-manager@z3n0e/applet.js:963
+#, javascript-format
+msgid "Remove %s"
+msgstr "Rimuovi %s"
+
+#: files/appman-manager@z3n0e/applet.js:968
+#, javascript-format
+msgid "Lock %s"
+msgstr "Blocca %s"
+
+#: files/appman-manager@z3n0e/applet.js:968
+#, javascript-format
+msgid "Unlock %s"
+msgstr "Sblocca %s"
+
+#: files/appman-manager@z3n0e/applet.js:984
+#, javascript-format
+msgid "Could not launch %s"
+msgstr "Impossibile avviare %s"
+
+#: files/appman-manager@z3n0e/applet.js:1054
+#, javascript-format
+msgid "Running: %s"
+msgstr "In corso: %s"
+
+#: files/appman-manager@z3n0e/applet.js:1056
+#: files/appman-manager@z3n0e/applet.js:1228
+msgid "Checking for updates…"
+msgstr "Controllo degli aggiornamenti…"
+
+#: files/appman-manager@z3n0e/applet.js:1058
+#, javascript-format
+msgid "Updates available: %d"
+msgstr "Aggiornamenti disponibili: %d"
+
+#: files/appman-manager@z3n0e/applet.js:1058
+msgid "All apps are up to date"
+msgstr "Tutte le app sono aggiornate"
+
+#: files/appman-manager@z3n0e/applet.js:1059
+#, javascript-format
+msgid "Last check: %s"
+msgstr "Ultimo controllo: %s"
+
+#: files/appman-manager@z3n0e/applet.js:1061
+#, javascript-format
+msgid "Last operation: %s (done)"
+msgstr "Ultima operazione: %s (completata)"
+
+#: files/appman-manager@z3n0e/applet.js:1062
+#, javascript-format
+msgid "Last operation: %s (problems)"
+msgstr "Ultima operazione: %s (problemi)"
+
+#: files/appman-manager@z3n0e/applet.js:1065
+#, javascript-format
+msgid "Check postponed (%s)"
+msgstr "Controllo rimandato (%s)"
+
+#: files/appman-manager@z3n0e/applet.js:1067
+msgid "Automatic checks are off"
+msgstr "Controlli automatici disattivati"
+
+#: files/appman-manager@z3n0e/applet.js:1069
+#, javascript-format
+msgid "Next check: %s"
+msgstr "Prossimo controllo: %s"
+
+#: files/appman-manager@z3n0e/applet.js:1117
+#: files/appman-manager@z3n0e/applet.js:1247
+msgid "Check for updates"
+msgstr "Controlla aggiornamenti"
+
+#: files/appman-manager@z3n0e/applet.js:1121
+msgid "Update all"
+msgstr "Aggiorna tutto"
+
+#: files/appman-manager@z3n0e/applet.js:1138
+msgid "Installed apps"
+msgstr "App installate"
+
+#: files/appman-manager@z3n0e/applet.js:1155
+msgid "Search the AppMan database to install…"
+msgstr "Cerca nel database di AppMan per installare…"
+
+#: files/appman-manager@z3n0e/applet.js:1171
+msgid "AppMan tools"
+msgstr "Strumenti di AppMan"
+
+#: files/appman-manager@z3n0e/applet.js:1177
+msgid "Full update (appman -u)"
+msgstr "Aggiornamento completo (appman -u)"
+
+#: files/appman-manager@z3n0e/applet.js:1178
+msgid "Reinstall apps whose install script changed"
+msgstr "Reinstalla le app con lo script di installazione modificato"
+
+#: files/appman-manager@z3n0e/applet.js:1179
+msgid "Reinstall changed apps"
+msgstr "Reinstalla le app modificate"
+
+#: files/appman-manager@z3n0e/applet.js:1180
+msgid "Update AppMan itself (appman -s)"
+msgstr "Aggiorna AppMan stesso (appman -s)"
+
+#: files/appman-manager@z3n0e/applet.js:1181
+msgid "Update AppMan"
+msgstr "Aggiorna AppMan"
+
+#: files/appman-manager@z3n0e/applet.js:1182
+msgid "Clean up leftovers (appman -c)"
+msgstr "Pulisci i residui (appman -c)"
+
+#: files/appman-manager@z3n0e/applet.js:1183
+msgid "Clean up"
+msgstr "Pulizia"
+
+#: files/appman-manager@z3n0e/applet.js:1184
+msgid "Set GitHub token (appman apikey)"
+msgstr "Imposta token GitHub (appman apikey)"
+
+#: files/appman-manager@z3n0e/applet.js:1185
+msgid "Open the apps folder"
+msgstr "Apri la cartella delle app"
+
+#: files/appman-manager@z3n0e/applet.js:1189
+msgid "Applet settings"
+msgstr "Impostazioni dell'applet"
+
+#: files/appman-manager@z3n0e/applet.js:1226
+#, javascript-format
+msgid "Running: %s (since %s)"
+msgstr "In corso: %s (dalle %s)"
+
+#: files/appman-manager@z3n0e/applet.js:1230
+#, javascript-format
+msgid "Apps: %d"
+msgstr "App: %d"
+
+#: files/appman-manager@z3n0e/applet.js:1231
+#, javascript-format
+msgid "Updates: %d"
+msgstr "Aggiornamenti: %d"
+
+#: files/appman-manager@z3n0e/applet.js:1231
+msgid "up to date"
+msgstr "tutto aggiornato"
+
+#: files/appman-manager@z3n0e/applet.js:1232
+#, javascript-format
+msgid "checked %s"
+msgstr "ultimo controllo %s"
+
+#: files/appman-manager@z3n0e/applet.js:1239
+#, javascript-format
+msgid "%s: done at %s"
+msgstr "%s: completata (%s)"
+
+#: files/appman-manager@z3n0e/applet.js:1240
+#, javascript-format
+msgid "%s: problems at %s"
+msgstr "%s: problemi (%s)"
+
+#: files/appman-manager@z3n0e/applet.js:1242
+msgid "show log"
+msgstr "mostra il log"
+
+#: files/appman-manager@z3n0e/applet.js:1247
+msgid "Checking…"
+msgstr "Controllo in corso…"
+
+#: files/appman-manager@z3n0e/applet.js:1249
+#, javascript-format
+msgid "Update all (%d)"
+msgstr "Aggiorna tutto (%d)"
+
+#: files/appman-manager@z3n0e/applet.js:1249
+msgid "Update"
+msgstr "Aggiorna"
+
+#: files/appman-manager@z3n0e/applet.js:1266
+#, javascript-format
+msgid "… and %d more (see Installed apps)"
+msgstr "… e altre %d (vedi App installate)"
+
+#: files/appman-manager@z3n0e/applet.js:1274
+#, javascript-format
+msgid "Could not check: %s"
+msgstr "Impossibile controllare: %s"
+
+#: files/appman-manager@z3n0e/applet.js:1280
+#, javascript-format
+msgid "%s: %d apps not checked"
+msgstr "%s: %d app non controllate"
+
+#: files/appman-manager@z3n0e/applet.js:1283
+msgid "Set a GitHub token to raise the limit (appman apikey)…"
+msgstr "Imposta un token GitHub per alzare il limite (appman apikey)…"
+
+#: files/appman-manager@z3n0e/applet.js:1290
+#, javascript-format
+msgid "Installed apps (%d)"
+msgstr "App installate (%d)"
+
+#: files/appman-manager@z3n0e/applet.js:1305
+msgid "No apps installed with AppMan"
+msgstr "Nessuna app installata con AppMan"
+
+#: files/appman-manager@z3n0e/applet.js:1365
+msgid "AppMan database not found: run \"appman -l\" once"
+msgstr "Database di AppMan non trovato: esegui una volta \"appman -l\""
+
+#: files/appman-manager@z3n0e/applet.js:1385
+msgid "No matches"
+msgstr "Nessun risultato"
+
+#. files->appman-manager@z3n0e->metadata.json->name
+msgid "AppMan Manager"
+msgstr "AppMan Manager"
+
+#. files->appman-manager@z3n0e->metadata.json->description
+msgid ""
+"Check, update, install, reinstall and remove AppImages and portable apps "
+"managed by AppMan (ivan-hc/AM). Battery friendly, with a user-defined update "
+"schedule."
+msgstr ""
+"Controlla, aggiorna, installa, reinstalla e rimuove AppImage e app portabili "
+"gestite da AppMan (ivan-hc/AM). Leggero sulla batteria, con una "
+"pianificazione degli aggiornamenti a tua scelta."
+
+#. files->appman-manager@z3n0e->settings-schema.json->page-updates->title
+msgid "Updates"
+msgstr "Aggiornamenti"
+
+#. files->appman-manager@z3n0e->settings-schema.json->sec-schedule->title
+msgid "When to check for updates"
+msgstr "Quando controllare gli aggiornamenti"
+
+#. files->appman-manager@z3n0e->settings-schema.json->sec-power->title
+msgid "Battery and network"
+msgstr "Batteria e rete"
+
+#. files->appman-manager@z3n0e->settings-schema.json->sec-found->title
+msgid "When updates are found"
+msgstr "Quando ci sono aggiornamenti"
+
+#. files->appman-manager@z3n0e->settings-schema.json->page-operations->title
+msgid "Operations"
+msgstr "Operazioni"
+
+#. files->appman-manager@z3n0e->settings-schema.json->sec-run->title
+msgid "How AppMan commands run"
+msgstr "Come vengono eseguiti i comandi di AppMan"
+
+#. files->appman-manager@z3n0e->settings-schema.json->sec-advanced->title
+msgid "Advanced"
+msgstr "Avanzate"
+
+#. files->appman-manager@z3n0e->settings-schema.json->page-panel->title
+msgid "Panel"
+msgstr "Pannello"
+
+#. files->appman-manager@z3n0e->settings-schema.json->sec-panel->title
+msgid "Panel and menu"
+msgstr "Pannello e menu"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-mode->options
+msgid "Only when I ask (manual)"
+msgstr "Solo quando lo chiedo (manuale)"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-mode->options
+msgid "Every N hours"
+msgstr "Ogni N ore"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-mode->options
+msgid "Every day at a set time"
+msgstr "Ogni giorno a un'ora stabilita"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-mode->options
+msgid "Once a week"
+msgstr "Una volta a settimana"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-mode->tooltip
+msgid ""
+"Checks only query the AppMan sources online. Nothing is downloaded or "
+"installed unless you choose to."
+msgstr ""
+"I controlli interrogano solo le fonti online di AppMan. Non viene scaricato "
+"né installato nulla, a meno che non lo scelga tu."
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-interval->units
+msgid "hours"
+msgstr "ore"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-interval->description
+msgid "Interval"
+msgstr "Intervallo"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-time->description
+#. files->appman-manager@z3n0e->settings-schema.json->check-weekly-time->description
+msgid "Time of day"
+msgstr "Ora del giorno"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-weekday->description
+msgid "Day of the week"
+msgstr "Giorno della settimana"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-weekday->options
+msgid "Monday"
+msgstr "Lunedì"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-weekday->options
+msgid "Tuesday"
+msgstr "Martedì"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-weekday->options
+msgid "Wednesday"
+msgstr "Mercoledì"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-weekday->options
+msgid "Thursday"
+msgstr "Giovedì"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-weekday->options
+msgid "Friday"
+msgstr "Venerdì"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-weekday->options
+msgid "Saturday"
+msgstr "Sabato"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-weekday->options
+msgid "Sunday"
+msgstr "Domenica"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-at-login->description
+msgid "Catch up at login if a scheduled check was missed"
+msgstr "Recupera all'accesso un controllo programmato saltato"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-at-login->tooltip
+msgid ""
+"If the computer was off or asleep at the scheduled time, check once shortly "
+"after login or resume."
+msgstr ""
+"Se all'ora programmata il computer era spento o in sospensione, controlla "
+"una volta poco dopo l'accesso o il risveglio."
+
+#. files->appman-manager@z3n0e->settings-schema.json->login-delay->units
+msgid "minutes"
+msgstr "minuti"
+
+#. files->appman-manager@z3n0e->settings-schema.json->login-delay->description
+msgid "Wait after login before catching up"
+msgstr "Attesa dopo l'accesso prima del recupero"
+
+#. files->appman-manager@z3n0e->settings-schema.json->btn-check-now->description
+msgid "Check for updates now"
+msgstr "Controlla aggiornamenti ora"
+
+#. files->appman-manager@z3n0e->settings-schema.json->skip-on-battery->description
+msgid "Postpone automatic checks and updates while on battery"
+msgstr "Rimanda controlli e aggiornamenti automatici quando sei a batteria"
+
+#. files->appman-manager@z3n0e->settings-schema.json->skip-on-battery->tooltip
+msgid ""
+"The postponed check runs as soon as the charger is connected (event-driven, "
+"no polling)."
+msgstr ""
+"Il controllo rimandato parte appena colleghi il caricatore (a eventi, senza "
+"polling)."
+
+#. files->appman-manager@z3n0e->settings-schema.json->skip-on-metered->description
+msgid "Postpone automatic checks and updates on metered connections"
+msgstr ""
+"Rimanda controlli e aggiornamenti automatici sulle connessioni a consumo"
+
+#. files->appman-manager@z3n0e->settings-schema.json->power-note->description
+msgid "Manual checks and actions from the menu always run."
+msgstr "I controlli manuali e le azioni dal menu vengono sempre eseguiti."
+
+#. files->appman-manager@z3n0e->settings-schema.json->on-updates->description
+msgid "Action"
+msgstr "Azione"
+
+#. files->appman-manager@z3n0e->settings-schema.json->on-updates->options
+msgid "Show them in the panel only"
+msgstr "Mostrali solo nel pannello"
+
+#. files->appman-manager@z3n0e->settings-schema.json->on-updates->options
+msgid "Send a notification"
+msgstr "Invia una notifica"
+
+#. files->appman-manager@z3n0e->settings-schema.json->on-updates->options
+msgid "Install them automatically (in background)"
+msgstr "Installali automaticamente (in background)"
+
+#. files->appman-manager@z3n0e->settings-schema.json->update-all-syncs->description
+msgid "\"Full update\" also updates AppMan itself"
+msgstr "\"Aggiornamento completo\" aggiorna anche AppMan stesso"
+
+#. files->appman-manager@z3n0e->settings-schema.json->update-all-syncs->tooltip
+msgid "On: runs \"appman -u\". Off: runs \"appman -u --apps\" (apps only)."
+msgstr ""
+"Attivo: esegue \"appman -u\". Disattivo: esegue \"appman -u --apps\" (solo "
+"le app)."
+
+#. files->appman-manager@z3n0e->settings-schema.json->use-terminal->description
+msgid "Run menu actions in a terminal window (shows progress)"
+msgstr ""
+"Esegui le azioni del menu in una finestra di terminale (mostra l'avanzamento)"
+
+#. files->appman-manager@z3n0e->settings-schema.json->use-terminal->tooltip
+msgid ""
+"When off, actions run silently in background with \"-y\" (assume yes). "
+"Progress shows in the panel icon; the result and full log appear in the menu "
+"(\"Last operation\"). Automatic updates always run in background."
+msgstr ""
+"Se disattivato, le azioni vengono eseguite in silenzio in background con \"-"
+"y\" (sì automatico). L'avanzamento si vede dall'icona nel pannello; l'esito "
+"e il log completo compaiono nel menu (\"Ultima operazione\"). Gli "
+"aggiornamenti automatici vengono sempre eseguiti in background."
+
+#. files->appman-manager@z3n0e->settings-schema.json->terminal-command->description
+msgid "Terminal command (empty = system default)"
+msgstr "Comando del terminale (vuoto = predefinito di sistema)"
+
+#. files->appman-manager@z3n0e->settings-schema.json->terminal-command->tooltip
+msgid ""
+"The AppMan command is appended to this, e.g. \"gnome-terminal --\", "
+"\"ghostty -e\", \"xfce4-terminal -x\", \"kitty\"."
+msgstr ""
+"Il comando di AppMan viene aggiunto in coda, per esempio \"gnome-terminal --"
+"\", \"ghostty -e\", \"xfce4-terminal -x\", \"kitty\"."
+
+#. files->appman-manager@z3n0e->settings-schema.json->appman-path->description
+msgid "Path to appman (empty = auto-detect)"
+msgstr "Percorso di appman (vuoto = rilevamento automatico)"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-jobs->units
+msgid "parallel lookups"
+msgstr "controlli in parallelo"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-jobs->description
+msgid "Update check parallelism"
+msgstr "Parallelismo del controllo aggiornamenti"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-jobs->tooltip
+msgid ""
+"Lower values are gentler on CPU and network; higher values finish faster."
+msgstr "Valori bassi pesano meno su CPU e rete; valori alti finiscono prima."
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-timeout->units
+msgid "seconds"
+msgstr "secondi"
+
+#. files->appman-manager@z3n0e->settings-schema.json->check-timeout->description
+msgid "Timeout per app lookup"
+msgstr "Timeout per ogni app"
+
+#. files->appman-manager@z3n0e->settings-schema.json->show-count->description
+msgid "Show the number of available updates next to the icon"
+msgstr "Mostra il numero di aggiornamenti disponibili accanto all'icona"
+
+#. files->appman-manager@z3n0e->settings-schema.json->max-search-results->units
+msgid "results"
+msgstr "risultati"
+
+#. files->appman-manager@z3n0e->settings-schema.json->max-search-results->description
+msgid "Search results shown in the install box"
+msgstr "Risultati mostrati nella ricerca per l'installazione"
