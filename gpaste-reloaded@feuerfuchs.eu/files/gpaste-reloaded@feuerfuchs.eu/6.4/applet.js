@@ -161,7 +161,7 @@ class GPasteApplet extends Applet.IconApplet {
 
             this._clientSettings   = new GPaste.Settings();
             this._searchResults    = [];
-            this._historyName      = "Testing";
+            this._historyName      = "";
             this._historyItems     = [];
             this._historyListItems = [];
             this._signalManager    = new SignalManager.SignalManager(null);
