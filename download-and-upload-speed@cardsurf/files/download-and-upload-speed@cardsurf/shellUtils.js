@@ -1,9 +1,13 @@
 
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const Extension = imports.ui.extension;
 
 let Compatibility;
-if (typeof require !== 'undefined') {
+if (Extension.getCurrentExtension) {
+    const Me = Extension.getCurrentExtension();
+    Compatibility = Me.imports.compatibility;
+} else if (typeof require !== 'undefined') {
     Compatibility = require('./compatibility');
 } else {
     Compatibility = AppletDirectory.compatibility;
