@@ -8,15 +8,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-05-25 21:36+0200\n"
-"PO-Revision-Date: 2024-11-21 14:34+0200\n"
+"PO-Revision-Date: 2026-10-16 15:45+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:66 old/5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
@@ -44,7 +44,7 @@ msgstr "Internet Search Box"
 
 #. metadata.json->description
 msgid "Perform an Internet search, using your favorite engine"
-msgstr "Tee Internet-haku valitsemallasi hakukonetta. Valmiina 12 vaihtoehtoa"
+msgstr "Tee Internet-haku valitsemallasi hakukoneella. Valmiina 12 vaihtoehtoa"
 
 #. settings-schema.json->page-providers->title
 #. settings-schema.json->section-providers->title
@@ -60,7 +60,7 @@ msgstr "Valinnat"
 
 #. settings-schema.json->section-keybinding->title
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Pikanäppäimet"
 
 #. settings-schema.json->section-colors->title
 #. old->5.4->settings-schema.json->header-colors->description
@@ -113,7 +113,7 @@ msgstr "Lyhenne (3 kirjainta)"
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
 msgid "Query URL"
-msgstr "Kysely URL"
+msgstr "Kyselyosoite"
 
 #. settings-schema.json->providers->tooltip
 #. old->5.4->settings-schema.json->providers->tooltip
@@ -122,9 +122,9 @@ msgid ""
 "processed by the relevant search engine.\n"
 "Example: ddg linux mint iso"
 msgstr ""
-"Jos hakusi alkaa lyhenteellä, eli nimen kolmella kirjaimella, kyseinen "
-"hakukone käsittelee sen.\n"
-"Esim.: ddg linux mint iso"
+"Jos haku alkaa lyhenteellä, eli nimen kolmella kirjaimella niin kyseinen "
+"käsittelee hakemisen.\n"
+"Esimerkiksi ddg linux mint iso"
 
 #. settings-schema.json->providers-help->description
 msgid ""
@@ -134,16 +134,15 @@ msgid ""
 "provider.\n"
 "If no provider is selected, the default provider is Google."
 msgstr ""
-"Vain valitut hakukoneet näkyvät valikossa ja lisäksi voit valita "
-"oletushakukoneen.\n"
-"Jos poistat oletushakukoneen, seuraavaksi valitusta tulee oletushakukone.\n"
-"Jos hakukonetta ei valita niin Google on oletus."
+"Valitut hakukoneet näkyvät ja voit myös valita oletushakukoneen.\n"
+"Poistamalla oletushakukoneen, seuraavaksi valitaan oletukseksi.\n"
+"Google on oletus, mikäli muuta ei valita."
 
 #. settings-schema.json->custom-keybinding->description
 #. old->5.4->settings-schema.json->custom-keybinding->description
 #. old->3.2->settings-schema.json->custom-keybinding->description
 msgid "Keybinding, which opens the search box"
-msgstr "Näppäinyhdistelmä avaa hakukentän"
+msgstr "Avaa hakukenttä"
 
 #. settings-schema.json->background-color->description
 #. old->5.4->settings-schema.json->background-color->description

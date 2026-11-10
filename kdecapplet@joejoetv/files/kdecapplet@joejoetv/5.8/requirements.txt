@@ -1,0 +1,2 @@
+kdeconnect>=1.3
+python3

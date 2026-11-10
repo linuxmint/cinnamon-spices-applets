@@ -114,6 +114,7 @@
       "title": "Panel",
       "keys": [
         "showtrack",
+        "singleline",
         "truncatetext",
         "toolongchars",
         "middleClickAction",
@@ -479,6 +480,12 @@
     "type": "switch",
     "default": false,
     "description": "Show song information on the panel",
+    "dependency": "playerControl"
+  },
+  "singleline": {
+    "type": "switch",
+    "default": false,
+    "description": "Show song information on a single line",
     "dependency": "playerControl"
   },
   "truncatetext": {

@@ -51,6 +51,7 @@ function icon_exists( iconName ) {
     return Gtk.IconTheme.get_default().has_icon( iconName );
 }
 
+
 class IconMenuItem extends PopupMenu.PopupBaseMenuItem {
     constructor(text, icon){
         super();
@@ -58,18 +59,32 @@ class IconMenuItem extends PopupMenu.PopupBaseMenuItem {
         this.actor.add_style_class_name("xCenter-menuItem");
 
         if ( typeof icon == "string" ) {
-            icon = new St.Icon({icon_name: icon, icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+            if (icon_exists("xsi-" + icon)) {
+                icon = new St.Icon({icon_name: "xsi-" + icon, icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.SYMBOLIC});
+            } else {
+                icon = new St.Icon({icon_name: icon, icon_size: MENU_ITEM_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+            }
         }
 
-        this.addActor(icon);
+        this.icon = icon;
 
-        let label = new St.Label({ style_class: "xCenter-menuItemLabel", text: text });
-        label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
+        this.addActor(this.icon);
+
+        this.label = new St.Label({ style_class: "xCenter-menuItemLabel", text: text });
+        this.label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
         if (TEXTSIZE > 0)
-            label.clutter_text.width = Math.min(TEXTSIZE, label.clutter_text.get_width() * Pango.SCALE);
-        this.addActor(label);
+            this.label.clutter_text.width = Math.min(TEXTSIZE, this.label.clutter_text.get_width() * Pango.SCALE);
+        this.addActor(this.label);
 
         let tooltip = new Tooltips.Tooltip(this.actor, text);
+    }
+
+    destroy() {
+        this.label.destroy();
+        this.icon.destroy();
+        this._signals.disconnectAllSignals();
+        this.actor.destroy();
+        this.emit('destroy');
     }
 }
 
@@ -273,6 +288,7 @@ class DirectApplet extends Applet.TextIconApplet {
             //~ this.enterEventId = null;
             //~ this.leaveEventId = null;
             this.iconIsHovered = false;
+            this.trashItem = null;
             this.userSection = new PopupMenu.PopupMenuSection();
             this.systemSection = new PopupMenu.PopupMenuSection();
             this.devicesSection = new PopupMenu.PopupMenuSection();
@@ -664,7 +680,6 @@ class DirectApplet extends Applet.TextIconApplet {
                 //add link to search tool
                 let systemSearchButton = new St.Button();
                 systemTitle.addActor(systemSearchButton);
-                systemTitle.addActor(systemSettingsButton);
                 let systemSearchImage = new St.Icon({ icon_name: "edit-find", icon_size: 16, icon_type: St.IconType.SYMBOLIC });
                 systemSearchButton.add_actor(systemSearchImage);
                 systemSearchButton.connect("clicked", (a, b) => this.search(a, b));
@@ -837,7 +852,10 @@ class DirectApplet extends Applet.TextIconApplet {
         if (this.userSection) this.userSection.removeAll();
         else this.userSection = new PopupMenu.PopupMenuSection();
 
-        this.trashItem = null;
+        if (this.trashItem != null) {
+            this.trashItem.destroy();
+            this.trashItem = null;
+        }
 
         let defaultPlaces = Main.placesManager.getDefaultPlaces();
         let bookmarks = [defaultPlaces[0]]
@@ -1205,25 +1223,37 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     buildTrashItem() {
-        if ( this.trashItem != null ) return;
         if ( this.showTrash == 0 ) return;
-
-        let uri = "trash:///";
-        let trash = Gio.File.new_for_uri(uri);
-        if ( !this.trashMonitor ) {
-            this.trashMonitor = trash.monitor_directory(0, null);
-            this.trashMonitor.connect("changed", Lang.bind(this, this.buildTrashItem));
+        if ( this.trashItem != null ) {
+            this.trashItem.destroy();
+            this.trashItem = null;
         }
 
-        let enumerator = trash.enumerate_children("*", 0, null);
+        let uri = "trash:///";
+        let _trash = Gio.File.new_for_uri(uri);
+        if ( !this.trashMonitor ) {
+            this.trashMonitor = _trash.monitor_directory(0, null);
+            this.trashMonitor.connect("changed", () => this.buildTrashItem());
+        }
+
+        let enumerator = _trash.enumerate_children("standard::name", 0, null);
         let trashcanEmpty = enumerator.next_file(null) == null;
+        enumerator.close(null);
 
         if ( this.showTrash == 2 && trashcanEmpty ) return;
 
         let iName = ( trashcanEmpty ) ? "trashcan_empty" : "trashcan_full";
 
+        let trashItemAlreadyAdded = false;
+        if (this.trashItem != null) {
+            trashItemAlreadyAdded = true;
+            this.trashItem.destroy();
+            this.trashItem = null;
+        }
         this.trashItem = new PlaceMenuItem(uri, _("Trash"), iName);
-        this.userSection.addMenuItem(this.trashItem);
+        if (!trashItemAlreadyAdded) {
+            try { this.userSection.addMenuItem(this.trashItem) } catch(e) {};
+        }
     }
 
     setPanelIcon() {
@@ -1275,7 +1305,13 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     set_applet_icon_symbolic_path(icon_path) {
-        if (this._applet_icon_box.child) this._applet_icon_box.child.destroy();
+        if (this._applet_icon_box.child) {
+            try {
+                this._applet_icon_box.child.destroy();
+            } catch(e) {
+                logError("Unable to destroy this._applet_icon_box.child: " + e);
+            }
+        }
 
         if (icon_path){
             let file = Gio.file_new_for_path(icon_path);

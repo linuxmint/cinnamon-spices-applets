@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 6.6/cassettoneNative.js:292 popup_menu.py:95
 msgid "Open Folder"
@@ -28,11 +28,11 @@ msgstr "Avaa päätteessä"
 
 #. 6.6/cassettoneNative.js:540
 msgid "Empty or Access Denied"
-msgstr ""
+msgstr "Tyhjä tai pääsy evätty"
 
 #. 6.6/cassettoneNative.js:602
 msgid "Empty"
-msgstr ""
+msgstr "Tyhjä"
 
 #. metadata.json->name
 msgid "Directory Menu"
@@ -76,12 +76,12 @@ msgstr "Paneelin teksti"
 #. 3.8->settings-schema.json->visibility-section->description
 #. 6.6->settings-schema.json->visibility-section->description
 msgid "Visibility"
-msgstr ""
+msgstr "Näkyvyys"
 
 #. 3.8->settings-schema.json->show-header->description
 #. 6.6->settings-schema.json->show-header->description
 msgid "Include \"Open Folder\" and \"Open in Terminal\""
-msgstr ""
+msgstr "Sisällytä ”Avaa kansio” ja ”Avaa Terminaali”"
 
 #. 3.8->settings-schema.json->show-hidden->description
 #. 6.6->settings-schema.json->show-hidden->description
@@ -90,9 +90,8 @@ msgstr "Näytä piilotiedostot"
 
 #. 3.8->settings-schema.json->limit-characters->description
 #. 6.6->settings-schema.json->limit-characters->description
-#, fuzzy
 msgid "Limit the Maximum Number of Characters in the Submenus"
-msgstr "Rajoita kansionimien merkkien enimmäismäärää"
+msgstr "Rajoita alavalikkojen suurinta merkkimäärää"
 
 #. 3.8->settings-schema.json->character-limit->description
 #. 6.6->settings-schema.json->character-limit->description
@@ -111,7 +110,7 @@ msgstr ""
 #. 3.8->settings-schema.json->ordering-section->description
 #. 6.6->settings-schema.json->ordering-section->description
 msgid "Ordering"
-msgstr ""
+msgstr "Järjestäminen"
 
 #. 3.8->settings-schema.json->order-by->options
 #. 6.6->settings-schema.json->order-by->options
@@ -155,25 +154,27 @@ msgstr "Aseta pikanäppäin näyttämään valikko."
 
 #. 6.6->settings-schema.json->menu-type->options
 msgid "Classic"
-msgstr ""
+msgstr "Klassinen"
 
 #. 6.6->settings-schema.json->menu-type->options
 msgid "Native"
-msgstr ""
+msgstr "Natiivinen"
 
 #. 6.6->settings-schema.json->menu-type->description
 msgid "Menu type"
-msgstr ""
+msgstr "Valikko"
 
 #. 6.6->settings-schema.json->menu-type->tooltip
 msgid ""
 "Classic uses a GTK-based menu, while Native uses Cinnamon's native popup "
 "menu."
 msgstr ""
+"Klassinen käyttää GTK-pohjaista valikkoa, kun taas Natiivinen käyttää "
+"Cinnamonin omaa valikkoa."
 
 #. 6.6->settings-schema.json->prefer-native-wayland->description
 msgid "Prefer native menu type on Wayland"
-msgstr ""
+msgstr "Suosi Waylandissa natiivia valikkoa"
 
 #. 6.6->settings-schema.json->prefer-native-wayland->tooltip
 msgid ""
@@ -181,3 +182,7 @@ msgid ""
 "The classic GTK-based menu has limitations on Wayland sessions due to "
 "restricted window positioning and focus handling in the protocol."
 msgstr ""
+"Käytä automaattisesti natiivia valikkoa Wayland-ympäristössä. Perinteinen "
+"GTK-pohjainen valikko on rajoittunut Wayland-istunnoissa protokollan "
+"asettamista rajoituksista ikkunoiden sijoittelulle ja kohdistuksen "
+"hallinnalle."

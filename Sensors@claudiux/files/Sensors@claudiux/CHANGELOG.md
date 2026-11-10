@@ -1,3 +1,17 @@
+### v5.11.8~20261103
+  * Avoid nvidia-smi process storm and desktop stutter.
+  * Ready for Linux Mint 23.
+  * Fixes [#9220](https://github.com/linuxmint/cinnamon-spices-applets/issues/9220)
+
+### v5.11.7~20261028
+  * Use the first one available among xenity, zenity, or yad.
+
+### v5.11.6~20261027
+  * Add xenity as dependency.
+
+### v5.11.5~20260825
+  * Add Nvidia D3cold support.
+
 ### v5.11.4~20260508
   * Installing dependencies: Use pkgcli when available.
 

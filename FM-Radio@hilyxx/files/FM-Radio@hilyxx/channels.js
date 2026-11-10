@@ -2,10 +2,14 @@
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
+const Pango = imports.gi.Pango;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 
 const PopupMenu = imports.ui.popupMenu;
+
+const PICTURES_DIR = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES);
+const CUSTOM_IMAGE_DIR = PICTURES_DIR ? (PICTURES_DIR + "/fm-radio-covers") : null;
 
 const UUID = "FM-Radio@hilyxx";
 Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
@@ -18,19 +22,6 @@ const extPath = GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
 
 // === CHANNEL SUBMENU: UI SETUP ===
 var currentChannelsList = [];
-
-function getIconForPath(picPath) {
-    let path = picPath;
-    // If no image is specified, use the default image instead
-    if (!path || path.trim() === "") {
-        path = "/images/default-cover.png";
-    }
-    
-    if (path.startsWith("/home/")) {
-        return Gio.icon_new_for_string(path);
-    }
-    return Gio.icon_new_for_string(extPath + (path.startsWith("/") ? "" : "/") + path);
-}
 
 // Function called by the applet to inject the list from settings
 function setChannels(channelsArray) {
@@ -64,6 +55,42 @@ var Channel = class Channel {
     getLink() { return this.link; }
     getPic() { return this.pic; }
     getNum() { return this.num; }
+
+    getResolvedIcon() {
+        let path = this.pic;
+        
+        if (!path || path.trim() === "") {
+            path = "default-cover.png";
+        }
+
+        if (path.startsWith("/home/")) {
+            try {
+                let absoluteFile = Gio.File.new_for_path(path);
+                absoluteFile.query_info('*', Gio.FileQueryInfoFlags.NONE, null);
+                return Gio.icon_new_for_string(path);
+            } catch (e) {}
+        }
+
+        let fileName = path.split('/').pop();
+
+        if (CUSTOM_IMAGE_DIR) {
+            let customPath = CUSTOM_IMAGE_DIR + "/" + fileName;
+            try {
+                let customFile = Gio.File.new_for_path(customPath);
+                customFile.query_info('*', Gio.FileQueryInfoFlags.NONE, null);
+                return Gio.icon_new_for_string(customPath);
+            } catch (e) {}
+        }
+
+        let defaultPath = extPath + "/images/" + fileName;
+        try {
+            let defaultFile = Gio.File.new_for_path(defaultPath);
+            defaultFile.query_info('*', Gio.FileQueryInfoFlags.NONE, null);
+            return Gio.icon_new_for_string(defaultPath);
+        } catch (e) {}
+
+        return Gio.icon_new_for_string(extPath + "/images/default-cover.png");
+    }
 };
 
 var ChannelBox = class ChannelBox extends PopupMenu.PopupBaseMenuItem {
@@ -74,22 +101,30 @@ var ChannelBox = class ChannelBox extends PopupMenu.PopupBaseMenuItem {
         this.channel = channel;
         this.popup = popup;
 
-        this.vbox = new St.BoxLayout({ vertical: false });
+        this.vbox = new St.BoxLayout({ 
+            vertical: false,
+            x_expand: true 
+        });
         this.addActor(this.vbox);
 
         let icon2 = new St.Icon({
-            gicon: getIconForPath(channel.getPic()),
+            gicon: channel.getResolvedIcon(),
             style: "margin-right:10px",
             icon_size: 32,
         });
 
-        let box2 = new St.BoxLayout({ vertical: false });
+        let box2 = new St.BoxLayout({ vertical: false, x_expand: true });
         let label1 = new St.Label({
             text: channel.getName(),
             y_align: Clutter.ActorAlign.CENTER,
             y_expand: true,
-            style_class: 'channel-label',
+            x_expand: true,
+            style_class: 'channel-label'
         });
+        
+        label1.clutter_text.line_wrap = true;
+        label1.clutter_text.line_wrap_mode = Pango.WrapMode.WORD;
+        label1.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
 
         this.vbox.add_child(icon2);
         this.vbox.add_child(box2);

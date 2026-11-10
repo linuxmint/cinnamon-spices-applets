@@ -1,3 +1,41 @@
+### v3.19.0~20261105
+  * User can set the tooltip Border Radius.
+  * Definitely fixes [#9234](https://github.com/linuxmint/cinnamon-spices-applets/issues/9234)
+
+### v3.18.7~20261105
+  * Displays solid lines instead of dashed lines in the tooltip.
+  * Fixes [#9234](https://github.com/linuxmint/cinnamon-spices-applets/issues/9234)
+
+### v3.18.6~20261104
+  * Increases the maximum font size for tooltips.
+  * Fixes [#9230](https://github.com/linuxmint/cinnamon-spices-applets/issues/9230)
+
+### v3.18.5~20261102
+  * Some changes in settings schema.
+
+### v3.18.4~20261101
+  * Stuck processes: some improvements.
+
+### v3.18.3~20261101
+  * Stuck processes: more information.
+
+### v3.18.2~20261029
+  * Stuck processes: some improvements.
+
+### v3.18.1~20261027
+  * Adds the ability to alert the user when a process is stuck e.g:
+    * when a core's load exceeds a specified limit for a specified duration
+    * or when kernel detects at least one stuck process.
+
+  * Adds the ability to change of System Monitor and select which mouse button (left, middle or both) is used to open your System Monitor.
+
+  * Fixes [#8807](https://github.com/linuxmint/cinnamon-spices-applets/issues/8807)
+  * Fixes [#9013](https://github.com/linuxmint/cinnamon-spices-applets/issues/9013)
+
+### v3.18.0~20260701
+  * Changing display order also changes tooltip order.
+  * Fixes [#8913](https://github.com/linuxmint/cinnamon-spices-applets/issues/8913)
+
 ### v3.17.0~20260630
   * Memory: The “Swap” graph can now take up 50% of the space.
   * Fixes [#8822](https://github.com/linuxmint/cinnamon-spices-applets/issues/8822)

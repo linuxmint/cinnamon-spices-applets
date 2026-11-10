@@ -56,20 +56,22 @@ msgstr "Hangsúlyos szín"
 
 #. settings-schema.json->foreground-color->description
 msgid "Foreground color (text, hands, glyphs)"
-msgstr ""
+msgstr "Előtérszín (szöveg, mutatók, jelek)"
 
 #. settings-schema.json->background-color->description
 msgid "Background color"
-msgstr ""
+msgstr "Háttérszín"
 
 #. settings-schema.json->dial-size->units
 msgid "pixels"
-msgstr ""
+msgstr "képpont"
 
 #. settings-schema.json->dial-size->description
 msgid "Dial size"
-msgstr ""
+msgstr "Számlapméret"
 
 #. settings-schema.json->dial-size->tooltip
 msgid "Diameter of the dial in the popup; larger values improve readability"
 msgstr ""
+"A felugró ablakban lévő tárcsa átmérője; a nagyobb értékek javítják az "
+"olvashatóságot"

@@ -1,4 +1,5 @@
 const ByteArray = imports.byteArray;
+const Extension = imports.ui.extension;
 
 const to_string = function(data) {
   if (ByteArray.hasOwnProperty("toString")) {
@@ -43,6 +44,8 @@ const to_string = function(data) {
   //~ return str;
 //~ }
 
-module.exports = {
-  to_string
+if (!Extension.getCurrentExtension) {
+  module.exports = {
+    to_string
+  }
 }

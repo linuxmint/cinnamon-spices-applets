@@ -123,11 +123,11 @@ function readNvtopAsync(fileutil, cb) {
 function formatPanel(g) {
   if (!g) return '—';
   if (!g.active) return 'susp.';
+  // Keep the panel tile compact: only usage % + temperature.
+  // VRAM and clock stay in the tooltip.
   const parts = [];
-  if (g.busyPct    != null) parts.push(`${g.busyPct}%`);
-  if (g.tempC      != null) parts.push(`${Math.round(g.tempC)}°C`);
-  if (g.vramUsedMB != null) parts.push(`${g.vramUsedMB}M`);
-  if (g.clockMhz)            parts.push(`${g.clockMhz}MHz`);
+  if (g.busyPct != null) parts.push(`${g.busyPct}%`);
+  if (g.tempC   != null) parts.push(`${Math.round(g.tempC)}°C`);
   return parts.join(' | ') || g.type.toUpperCase();
 }
 

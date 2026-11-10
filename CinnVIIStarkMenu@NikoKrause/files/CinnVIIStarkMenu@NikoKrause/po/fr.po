@@ -5,12 +5,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: cinnviistarkmenu\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Project-Id-Version: CinnVIIStarkMenu@NikoKrause 1.36\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2024-04-09 14:22-0400\n"
-"PO-Revision-Date: 2022-05-14 12:03+0200\n"
-"Last-Translator: roxfr <roxfr@outlook.fr>\n"
+"PO-Revision-Date: 2026-10-28 16:26+0100\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: French <fr@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Launchpad-Export-Date: 2017-03-19 06:53+0000\n"
-"X-Generator: Poedit 3.0.1\n"
 
 #: 4.2/applet.js:289 4.2/applet.js:570 3.2/applet.js:439 3.2/applet.js:473
 #: 2.6/applet.js:426 2.6/applet.js:460 3.4/applet.js:436 3.4/applet.js:470
@@ -45,6 +43,10 @@ msgstr "Supprimer des applications favorites"
 #: 4.2/applet.js:473 3.2/applet.js:268 2.6/applet.js:269 3.4/applet.js:268
 msgid "Add to favorites"
 msgstr "Ajouter aux favoris"
+
+#: 4.2/applet.js:482 3.2/applet.js:277 2.6/applet.js:278 3.4/applet.js:277
+msgid "Properties"
+msgstr "Propriétés"
 
 #: 4.2/applet.js:478 3.2/applet.js:272 2.6/applet.js:273 3.4/applet.js:272
 msgid "Uninstall"

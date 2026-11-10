@@ -19,6 +19,7 @@
 const Applet = imports.ui.applet;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
+const Pango = imports.gi.Pango;
 const Gettext = imports.gettext;
 const SignalManager = imports.misc.signalManager;
 const PopupMenu = imports.ui.popupMenu;
@@ -33,6 +34,9 @@ const GdkPixbuf = imports.gi.GdkPixbuf;
 const Cogl = imports.gi.Cogl;
 const Main = imports.ui.main;
 
+// St.PolicyType only exists in newer Cinnamon versions, older versions use Gtk.PolicyType
+const PolicyType = St.PolicyType ? St.PolicyType : Gtk.PolicyType;
+
 const ICONTHEME = Gtk.IconTheme.get_default();
 
 const UUID = "PanelTranslator@klangman";
@@ -41,6 +45,15 @@ const ICON_SIZE = 16;
 const majorVersion = parseInt(Config.PACKAGE_VERSION.substring(0,1));
 
 const { hardcodedLanguages } = require('./languages_0_9_6_12.js');
+
+// Keys that move the cursor or are modifiers, they don't change the language entry text
+const NON_EDIT_KEYS = [
+   Clutter.KEY_Left, Clutter.KEY_Right, Clutter.KEY_Home, Clutter.KEY_End,
+   Clutter.KEY_KP_Left, Clutter.KEY_KP_Right, Clutter.KEY_KP_Home, Clutter.KEY_KP_End,
+   Clutter.KEY_Shift_L, Clutter.KEY_Shift_R, Clutter.KEY_Control_L, Clutter.KEY_Control_R,
+   Clutter.KEY_Alt_L, Clutter.KEY_Alt_R, Clutter.KEY_Super_L, Clutter.KEY_Super_R,
+   Clutter.KEY_Tab, Clutter.KEY_ISO_Left_Tab, Clutter.KEY_Escape
+];
 
 const AutoPasteType = {
    Disabled: 0,
@@ -341,6 +354,9 @@ class PanelTranslatorApp extends Applet.IconApplet {
    }
 
    updateTooltip(fromLanguageTxt, toLanguageTxt) {
+      if (fromLanguageTxt.length == 0) {
+         fromLanguageTxt = _("Auto-detect");
+      }
       if(majorVersion > 4 && fromLanguageTxt.length > 0 && toLanguageTxt.length > 0){
          this.set_applet_tooltip("<b>" + _("Translator") + "</b>" + "\n" + fromLanguageTxt + " \u{2B95} " + toLanguageTxt, true);
       } else {
@@ -353,7 +369,6 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
 
    constructor(applet) {
       super();
-      this.deletedSelection = false;
       this._applet = applet;
 
       this.vertBox     = new St.BoxLayout({ important: true, vertical: true, x_expand: true, style: 'padding-right:10px;padding-left:10px;'});
@@ -393,7 +408,7 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
       let height = Math.min(monitor.height, this._applet.settings.getValue("popup-height"));
       this._applet.settings.setValue("popup-width", width);
       this._applet.settings.setValue("popup-height", height);
-      this.fromSearchEntry = new St.Entry({ name: 'menu-search-entry', width: 210*global.ui_scale, track_hover: true, can_focus: true, x_expand: true, x_align: Clutter.ActorAlign.START });
+      this.fromSearchEntry = new St.Entry({ name: 'menu-search-entry', hint_text: _("{auto}"), width: 210*global.ui_scale, track_hover: true, can_focus: true, x_expand: true, x_align: Clutter.ActorAlign.START });
       this.fromSearchEntry.get_clutter_text().connect( 'key-press-event', Lang.bind(this, this._onKeyPressEvent) );
       this.fromSearchEntry.get_clutter_text().connect( 'key-release-event', (actor, event) => {this._onKeyReleaseEvent(actor, event, this.fromLanguage); } );
       this.toSearchEntry = new St.Entry({ name: 'menu-search-entry', width: 210*global.ui_scale, track_hover: true, can_focus: true, x_expand: true, x_align: Clutter.ActorAlign.END });
@@ -408,29 +423,35 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
       this.languageBox.add_child(this.toSearchEntry);
 
       // Setup the from/to text boxes
-      this.fromTextBox = new St.Entry({name: 'menu-search-entry', hint_text: _("{Text to translate}"), width: /*250*/(width/2-45)*global.ui_scale, height: /*180*/(height-90)*global.ui_scale, style: 'margin-right:2px;'});
+      // Each text box is wrapped in a St.ScrollView. The ScrollView gets the fixed size, the Entry
+      // does NOT, so the Entry can grow taller than the view as text wraps, which makes the scrollbar appear.
+      let boxWidth  = (width/2-45)*global.ui_scale;
+      let boxHeight = (height-90)*global.ui_scale;
+      this.fromTextBox = new St.Entry({x_expand: true, name: 'menu-search-entry', hint_text: _("{Text to translate}")});
       let text = this.fromTextBox.get_clutter_text();
       text.set_line_wrap(true);
       text.set_single_line_mode(false);
-      text.set_max_length(200);
+      text.set_max_length(2000);
       text.connect('text-changed', () => {this.enableTranslateIfPossible();});
       text.connect('activate', (actor, event) => {
-         Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
+         Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this._fromCode() + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
          });
-      this.textBox.add_child(this.fromTextBox);
+      this.fromScrollView = this._createScrollView(this.fromTextBox, boxWidth, boxHeight, 'margin-right:2px;');
+      this.textBox.add_child(this.fromScrollView);
 
-      this.toTextBox = new St.Entry({name: 'menu-search-entry', hint_text: _("{Translated text}"), width: /*250*/(width/2-45)*global.ui_scale, height: /*180*/(height-90)*global.ui_scale, style: 'margin-left:2px;'});
+      this.toTextBox = new St.Entry({x_expand: true, name: 'menu-search-entry', hint_text: _("{Translated text}")});
       text = this.toTextBox.get_clutter_text();
       text.set_line_wrap(true);
       text.set_single_line_mode(false);
       text.set_editable(false);
-      text.set_max_length(200);
+      text.set_max_length(2000);
       text.connect('text-changed', () => {
          let state = (this.toTextBox.get_text().length != 0 );
          this.copy.setEnabled(state);
          this.playTo.setEnabled(state);
          });
-      this.textBox.add_child(this.toTextBox);
+      this.toScrollView = this._createScrollView(this.toTextBox, boxWidth, boxHeight, 'margin-left:2px;');
+      this.textBox.add_child(this.toScrollView);
 
       // Setup the action buttons
       this.config = new ControlButton("system-run", _("Configure"), () => {this._applet.menu.close(); this._applet.configureApplet()});
@@ -439,7 +460,7 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
          Util.spawnCommandLineAsync("/usr/bin/xdg-open https://cinnamon-spices.linuxmint.com/applets/view/385");
          });
       this.playFrom = new ControlButton("audio-speakers-symbolic", _("Play"), () => {
-         Util.spawnCommandLineAsyncIO("trans -no-translate -speak -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.fromLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readSpeak));
+         Util.spawnCommandLineAsyncIO("trans -no-translate -speak -e " + this._applet.engine + " " + (this.fromLanguage ? this.fromLanguage.code + ":" + this.fromLanguage.code : "") + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readSpeak));
          });
       this.playFrom.setEnabled(false);
       this.paste = new ControlButton("edit-paste-symbolic", _("Paste"), () => {
@@ -451,7 +472,7 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
          this.toTextBox.set_text("");
          });
       this.translate = new ControlButton("media-playback-start-symbolic", _("Translate"), () => {
-         Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
+         Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this._fromCode() + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
          });
       this.translate.setEnabled(false);
       let toBtnBox = new St.BoxLayout({x_align: Clutter.ActorAlign.END, x_expand: true});
@@ -481,14 +502,122 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
       this._applet._signalManager.connect(global, "scale-changed", this._onScaleChanged, this);
    }
 
+   // Wrap a multi-line St.Entry in a vertically scrolling St.ScrollView.
+   // Note: a St.ScrollView child must implement St.Scrollable. St.BoxLayout does, St.Bin does not
+   // (which is why the Bin version never scrolled).
+   _createScrollView(entry, width, height, style) {
+      // The ScrollView takes the entry's theme look (name 'menu-search-entry') so the frame is drawn around
+      // the whole ScrollView and the scrollbar ends up inside the box. The Entry itself is made frameless.
+      let scrollView = new St.ScrollView({ name: 'menu-search-entry', width: width, height: height, style: style,
+                                           x_fill: true, y_fill: true, reactive: true, track_hover: true,
+                                           hscrollbar_policy: PolicyType.NEVER, vscrollbar_policy: PolicyType.AUTOMATIC });
+      let text = entry.get_clutter_text();
+      // A read-only box can still get key focus (so text can be selected/copied), but it should not show a text
+      // cursor. St.Entry forces the cursor visible on focus, so instead make it zero width.
+      entry.set_style('border: none; border-image: none; background-color: transparent; background-gradient-direction: none;' +
+                      'box-shadow: none; padding: 0; margin: 0;' + (text.get_editable() ? '' : 'caret-size: 0px;'));
+      // Mirror the entry's focus state on the frame (the ScrollView) so the theme's focus highlight still shows
+      text.connect('key-focus-in', () => scrollView.add_style_pseudo_class('focus'));
+      text.connect('key-focus-out', () => scrollView.remove_style_pseudo_class('focus'));
+      // St.Entry always centres its ClutterText vertically within whatever height it is allocated, and
+      // there is no property to change that. So never let the entry be taller than its text: don't expand
+      // it and pin it to the top of the box. The empty area below the text is just the ScrollView frame.
+      entry.set_y_expand(false);
+      entry.set_y_align(Clutter.ActorAlign.START);
+      // Clicking anywhere in the box (e.g. the padding, or the empty area below the text) focuses the
+      // entry, and a click below the text puts the cursor at the end, like a normal multi-line text box.
+      scrollView.connect('button-press-event', (actor, event) => {
+         if (global.stage.get_key_focus() != text)
+            text.grab_key_focus();
+         let [, y] = event.get_coords();
+         let [, entryY] = entry.get_transformed_position();
+         if (y > entryY + entry.get_height()) {
+            // Move the selection bound too. Otherwise ClutterText sees a (zero width) selection between the old
+            // cursor position and the end, and draws no cursor (and St.Entry stops blinking it).
+            text.set_cursor_position(-1);
+            text.set_selection_bound(-1);
+         }
+         return Clutter.EVENT_PROPAGATE;
+      });
+      text.set_ellipsize(Pango.EllipsizeMode.NONE);
+      text.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);  // also wrap long words with no spaces
+      // St.ScrollView (and the St.BoxLayout inside it) size their content using the MINIMUM size of the
+      // children, but St.Entry reports a one-line minimum height even when its text wraps onto many lines,
+      // so the ScrollView never thinks it overflows. Letting the layout negotiate sizes is also unstable
+      // (the entry can briefly get laid out as wide as the unwrapped text). So we give the entry an explicit
+      // size: width = the ScrollView width minus room for the scrollbar, height = the wrapped text height.
+      let pendingUpdate = 0;
+      let updateEntrySize = () => {
+         pendingUpdate = 0;
+         if (!entry.get_stage())
+            return GLib.SOURCE_REMOVE;
+         let node = entry.get_theme_node();
+         let [, sbWidth] = scrollView.vscroll.get_preferred_width(-1);
+         let svNode = scrollView.get_theme_node();
+         let svInner = scrollView.natural_width - svNode.get_horizontal_padding()
+                       - svNode.get_border_width(St.Side.LEFT) - svNode.get_border_width(St.Side.RIGHT);
+         let entryWidth = Math.floor(svInner - sbWidth);
+         let textWidth = entryWidth - node.get_horizontal_padding()
+                         - node.get_border_width(St.Side.LEFT) - node.get_border_width(St.Side.RIGHT);
+         if (textWidth <= 0)
+            return GLib.SOURCE_REMOVE;
+         let [, textHeight] = text.get_preferred_height(textWidth);
+         let entryHeight = Math.ceil(textHeight + node.get_vertical_padding()
+                           + node.get_border_width(St.Side.TOP) + node.get_border_width(St.Side.BOTTOM));
+         if (entry.natural_width != entryWidth || entry.natural_height != entryHeight)
+            entry.set_size(entryWidth, entryHeight);
+         return GLib.SOURCE_REMOVE;
+      };
+      // Deferred to idle so we never change sizes in the middle of a layout pass
+      let queueUpdate = () => {
+         if (!pendingUpdate)
+            pendingUpdate = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, updateEntrySize);
+      };
+      scrollView._queueEntrySizeUpdate = queueUpdate;   // called after the popup is resized
+      text.connect('text-changed', queueUpdate);
+      entry.connect('style-changed', queueUpdate);        // first time on stage, and theme changes
+      let box = new St.BoxLayout({ vertical: true, x_expand: true, y_expand: true });
+      box.add_child(entry);
+      scrollView.add_actor(box);
+      // Keep the text cursor visible when typing/moving past the visible area
+      let followCursor = () => {
+         if (global.stage.get_key_focus() == text)
+            this._scrollToCursor(scrollView, entry);
+      };
+      text.connect('cursor-changed', () => {
+         GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+            followCursor();
+            return GLib.SOURCE_REMOVE;
+         });
+      });
+      // When the text grows, the scroll range is only updated after the next layout, so follow the cursor again then
+      scrollView.vscroll.adjustment.connect('changed', followCursor);
+      return scrollView;
+   }
+
+   _scrollToCursor(scrollView, entry) {
+      let text = entry.get_clutter_text();
+      let [ok, x, y, lineHeight] = text.position_to_coords(text.get_cursor_position());
+      if (!ok) return;
+      let top = entry.y + text.y + y;
+      let bottom = top + lineHeight;
+      let adjustment = scrollView.vscroll.adjustment;
+      if (top < adjustment.value)
+         adjustment.set_value(top);
+      else if (bottom > adjustment.value + adjustment.page_size)
+         adjustment.set_value(bottom - adjustment.page_size);
+   }
+
    onBoxResized(w,h) {
       w = Math.max(Math.trunc(w), 540);
       h = Math.max(Math.trunc(h), 160);
-      this.fromTextBox.set_width((w/2-45)*global.ui_scale);
-      this.fromTextBox.set_height((h-90)*global.ui_scale);
+      this.fromScrollView.set_width((w/2-45)*global.ui_scale);
+      this.fromScrollView.set_height((h-90)*global.ui_scale);
+      this.fromScrollView._queueEntrySizeUpdate();
 
-      this.toTextBox.set_width((w/2-45)*global.ui_scale);
-      this.toTextBox.set_height((h-90)*global.ui_scale);
+      this.toScrollView.set_width((w/2-45)*global.ui_scale);
+      this.toScrollView.set_height((h-90)*global.ui_scale);
+      this.toScrollView._queueEntrySizeUpdate();
       this._applet.settings.setValue("popup-width", w);
       this._applet.settings.setValue("popup-height", h);
    }
@@ -502,10 +631,12 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
 
       this.fromSearchEntry.set_width(210*global.ui_scale);
       this.toSearchEntry.set_width(210*global.ui_scale);
-      this.fromTextBox.set_width((width/2-45)*global.ui_scale);
-      this.fromTextBox.set_height((height-90)*global.ui_scale);
-      this.toTextBox.set_width((width/2-45)*global.ui_scale);
-      this.toTextBox.set_height((height-90)*global.ui_scale);
+      this.fromScrollView.set_width((width/2-45)*global.ui_scale);
+      this.fromScrollView.set_height((height-90)*global.ui_scale);
+      this.fromScrollView._queueEntrySizeUpdate();
+      this.toScrollView.set_width((width/2-45)*global.ui_scale);
+      this.toScrollView.set_height((height-90)*global.ui_scale);
+      this.toScrollView._queueEntrySizeUpdate();
 
       this.switchButton.updateDisabledIcon();
       this.config.updateDisabledIcon();
@@ -522,11 +653,21 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
    _onKeyPressEvent(actor, event) {
       let key = event.get_key_symbol();
       if (key == Clutter.KEY_BackSpace) {
-         let selection = actor.get_selection();
-         if (selection==null || selection.length==0) {
-            this.deletedSelection = false;
-         } else {
-            this.deletedSelection = true;
+         // If the auto-filled part of the name is selected (a selection that runs to the end of the text),
+         // handle the Backspace here: drop the selection plus one typed character, then let the key release
+         // handler auto-fill again. Doing it all here (and stopping the event) means the result does not
+         // depend on when ClutterText processes the key or how many key-release events we get.
+         let txt = actor.get_text();
+         let pos = actor.get_cursor_position();
+         let bound = actor.get_selection_bound();
+         if (pos == -1) pos = txt.length;
+         if (bound == -1) bound = txt.length;
+         if (pos != bound && Math.max(pos, bound) == txt.length) {
+            let start = Math.min(pos, bound);
+            actor.set_text(txt.substring(0, Math.max(start-1, 0)));
+            actor.set_cursor_position(-1);
+            actor.set_selection_bound(-1);
+            return Clutter.EVENT_STOP;
          }
       }
       if (key == Clutter.KEY_Up || key == Clutter.KEY_Down) {
@@ -542,16 +683,14 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
          cursorPos = txt.length;
       }
       let key = event.get_key_symbol();
-      if (key == Clutter.KEY_BackSpace) {
-         if (cursorPos > 0) {
-            if (this.deletedSelection!=false) {
-               cursorPos--;
-            }
-            if (cursorPos==0) {
-               actor.set_text("");
-               return;
-            }
-         }
+      // Keys that don't change the text must not re-run the match (i.e. Home would otherwise match
+      // the empty string before the cursor and switch to auto-detect / no language)
+      if (NON_EDIT_KEYS.includes(key)) {
+         return;
+      }
+      if (key == Clutter.KEY_BackSpace && cursorPos == 0) {
+         actor.set_text("");
+         txt = "";
       }
       let txtSubstring = txt.substring(0, cursorPos);
       let language = this._applet.getLanguage(txtSubstring);
@@ -578,6 +717,8 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
             this.fromTextBox.set_text(""); // Clear the text box since the language has changed!
             if (language) {
                this._applet.settings.setValue("default-from-language", useEnglish ? language.englishName : language.name);
+            } else if (txt.length == 0) {
+               this._applet.settings.setValue("default-from-language", "");  // Empty = auto-detect
             }
          } else {
             this.toLanguage = language;
@@ -586,8 +727,8 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
                this._applet.settings.setValue("default-to-language", useEnglish ? language.englishName : language.name);
             }
          }
-         this.enableTranslateIfPossible();
       }
+      this.enableTranslateIfPossible();
       if (curLanguage) {
          if (useEnglish) {
             actor.set_text(curLanguage.englishName);
@@ -639,11 +780,11 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
       this.fromTextBox.set_text(text.trim());
       if (translate) {
          if (play) {
-            Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.playTranslation) );
+            Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this._fromCode() + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.playTranslation) );
          } else if (copy) {
-            Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.copyTranslation) );
+            Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this._fromCode() + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.copyTranslation) );
          } else {
-            Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
+            Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this._fromCode() + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
          }
       } else {
          this.toTextBox.set_text("");
@@ -652,18 +793,30 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
 
    setFromLanguage(lang, name) {
       this.fromLanguage = lang;
-      this.fromSearchEntry.set_text(name);
+      this.fromSearchEntry.set_text(lang ? name : "");  // Empty shows the "{auto}" hint
+      this.enableTranslateIfPossible();
    }
 
    setToLanguage(lang, name) {
       this.toLanguage = lang;
       this.toSearchEntry.set_text(name);
+      this.enableTranslateIfPossible();
    }
 
    enableTranslateIfPossible() {
-      let state = (this.fromTextBox.get_text().length != 0 && this.fromLanguage && this.toLanguage );
+      // An empty "from" language entry means translate-shell will auto-detect the source language. But if
+      // text was entered that doesn't match any language, don't allow translating.
+      let fromOk = this.fromLanguage || this.fromSearchEntry.get_text().length == 0;
+      let state = (this.fromTextBox.get_text().length != 0 && fromOk && this.toLanguage) ? true : false;
       this.playFrom.setEnabled(state);
       this.translate.setEnabled(state);
+      // Can't swap when the "from" language is auto-detect, since the "to" language can't be auto
+      this.switchButton.setEnabled(this.fromLanguage ? true : false);
+   }
+
+   // The translate-shell source language code, "" means auto-detect
+   _fromCode() {
+      return this.fromLanguage ? this.fromLanguage.code : "";
    }
 }
 
@@ -684,7 +837,12 @@ class ControlButton {
     updateDisabledIcon() {
         let themeIcon = ICONTHEME.lookup_icon(this.icon_name, ICON_SIZE*global.ui_scale, 0);
         if (themeIcon) {
-           let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(themeIcon.get_filename(), ICON_SIZE*global.ui_scale, ICON_SIZE*global.ui_scale);
+           let pixBuf = null;
+           try {
+              pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(themeIcon.get_filename(), ICON_SIZE*global.ui_scale, ICON_SIZE*global.ui_scale);
+           } catch(e) {
+              // The icon may not be a real file (e.g. a GTK built-in resource), so just use the default!
+           }
            if (pixBuf) {
               let image = new Clutter.Image();
               pixBuf.saturate_and_pixelate(pixBuf, 1, true);
