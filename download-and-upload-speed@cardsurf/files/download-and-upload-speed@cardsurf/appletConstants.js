@@ -55,10 +55,10 @@ var BytesStartTime = {
     CUSTOM_DATE : -2
 }
 
-const SIZE_DEC = [1, 1e3, 1e6, 1e9, 1e12];
-const SIZE_BIN = [1, 1024, 1024**2, 1024**3, 1024**4];
-const BYTE_UNITS_DEC = ["  B", " kB", " MB", " GB", " TB"];
-const BYTE_UNITS_BIN = ["   B", " kiB", " MiB", " GiB", " TiB"];
-const BIT_UNITS_DEC  = ["  b", " kb", " Mb", " Gb", " Tb"];
-const BIT_UNITS_BIN  = ["   b", " kib", " Mib", " Gib", " Tib"];
+var SIZE_DEC = [1, 1e3, 1e6, 1e9, 1e12];
+var SIZE_BIN = [1, 1024, 1024**2, 1024**3, 1024**4];
+var BYTE_UNITS_DEC = ["  B", " kB", " MB", " GB", " TB"];
+var BYTE_UNITS_BIN = ["   B", " kiB", " MiB", " GiB", " TiB"];
+var BIT_UNITS_DEC  = ["  b", " kb", " Mb", " Gb", " Tb"];
+var BIT_UNITS_BIN  = ["   b", " kib", " Mib", " Gib", " Tib"];
 
