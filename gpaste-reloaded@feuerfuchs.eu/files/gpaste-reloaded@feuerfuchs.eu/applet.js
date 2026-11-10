@@ -212,16 +212,14 @@ GPasteApplet.prototype = {
                 this.mitemTrack.setToggleState(this._client.is_active());
 
                 // Get current history name
-                this._client.get_history_name(Lang.bind(this, function(client, result) {
-                    this._historyName = this._client.get_history_name_finish(result);
+                this._historyName = this._client.get_history_name();
 
-                    // Get history list
-                    this._client.list_histories(null, Lang.bind(this, this._onClientHistoriesListed));
+                // Get history list
+                this._client.list_histories(null, Lang.bind(this, this._onClientHistoriesListed));
 
-                    // Load history and populate applet
-                    this._createHistoryItems();
-                    this._populateMenus();
-                }));
+                // Load history and populate applet
+                this._createHistoryItems();
+                this._populateMenus();
             }));
 
             //
@@ -384,7 +382,7 @@ GPasteApplet.prototype = {
         if (this._searchResults.length > 0) { // Search field isn't empty
             this.search(this.mitemSearch.getText());
         } else {
-            this._client.get_history_size(this._historyName, Lang.bind(this, function(client, result) {
+            this._client.get_history_size(null, Lang.bind(this, function(client, result) {
                 let   size    = client.get_history_size_finish(result);
                 const maxSize = this._historyItems.length;
 
@@ -535,7 +533,8 @@ GPasteApplet.prototype = {
             delete this._historyListItems[n];
         }
 
-        histories.forEach(Lang.bind(this, function(name, index) {
+        histories.forEach(Lang.bind(this, function(history, index) {
+            const name = history.get_name();
             if (name == "") return;
 
             const item = new GPasteHistoryListItem.GPasteHistoryListItem(this, name);
@@ -580,16 +579,14 @@ GPasteApplet.prototype = {
 
         this._client.list_histories(null, Lang.bind(this, this._onClientHistoriesListed));
 
-        this._client.get_history_name(Lang.bind(this, function(client, result) {
-            this._historyName = this._client.get_history_name_finish(result);
+        this._historyName = this._client.get_history_name();
 
-            this.refresh();
+        this.refresh();
 
-            for (let n in this._historyListItems) {
-                const item = this._historyListItems[n];
-                item.setShowDot(item.histName == this._historyName);
-            }
-        }));
+        for (let n in this._historyListItems) {
+            const item = this._historyListItems[n];
+            item.setShowDot(item.histName == this._historyName);
+        }
     },
 
     /*
