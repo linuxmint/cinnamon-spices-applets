@@ -113,6 +113,7 @@ MyApplet.prototype = {
                 ["net_enabled", this.on_cfg_changed_graph_enabled, 3],
                 ["net_override_graph_width", this.on_cfg_changed_graph_width, 3],
                 ["net_graph_width", this.on_cfg_changed_graph_width],
+                ["net_rescan_interval", this.on_cfg_changed_net_rescan_interval],
                 ["net_color_0", this.on_cfg_changed_color, 3],
                 ["net_color_1", this.on_cfg_changed_color, 3],
                 ["load_enabled", this.on_cfg_changed_graph_enabled, 4],
@@ -316,8 +317,10 @@ MyApplet.prototype = {
                     this.addGraph(new Providers.MemData(), i);
                 else if (i == 2)
                     this.addGraph(new Providers.SwapData(), i);
-                else if (i == 3)
+                else if (i == 3) {
                     this.addGraph(new Providers.NetData(), i).setAutoScale(1024);
+                    this.on_cfg_changed_net_rescan_interval();
+                }
                 else if (i == 4) {
                     let ncpu = GTop.glibtop_get_sysinfo().ncpu;
                     this.addGraph(new Providers.LoadAvgData(), i).setAutoScale(2 * ncpu);
@@ -353,6 +356,11 @@ MyApplet.prototype = {
             if (g)
                 g.provider.refresh_rate = this.cfg_refresh_rate;
         this.update();
+    },
+
+    on_cfg_changed_net_rescan_interval: function() {
+        if (this.graphs[3])
+            this.graphs[3].provider.rescan_interval = this.cfg_net_rescan_interval;
     },
 
     on_cfg_changed_draw_border: function() {
