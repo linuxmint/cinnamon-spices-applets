@@ -1,0 +1,261 @@
+{
+  "layout1": {
+    "type": "layout",
+    "pages": ["page-appearance", "page-collapsed", "page-usage", "page-behavior"],
+    "page-appearance": {
+      "type": "page",
+      "title": "外观",
+      "sections": ["section-style", "section-theme", "section-language"]
+    },
+    "page-collapsed": {
+      "type": "page",
+      "title": "收起形态",
+      "sections": ["section-content", "section-geometry"]
+    },
+    "page-usage": {
+      "type": "page",
+      "title": "配额与统计",
+      "sections": ["section-sources", "section-alerts"]
+    },
+    "page-behavior": {
+      "type": "page",
+      "title": "行为",
+      "sections": ["section-interaction", "section-display"]
+    },
+    "section-style": {
+      "type": "section",
+      "title": "形态",
+      "keys": ["style", "animations", "animationDuration"]
+    },
+    "section-theme": {
+      "type": "section",
+      "title": "主题",
+      "keys": ["panelTheme", "clockStyle", "clock24Hour"]
+    },
+    "section-language": {
+      "type": "section",
+      "title": "界面语言",
+      "keys": ["language"]
+    },
+    "section-content": {
+      "type": "section",
+      "title": "收起时显示",
+      "keys": ["showQuotaRing", "showClock", "showMonitor"]
+    },
+    "section-geometry": {
+      "type": "section",
+      "title": "尺寸",
+      "keys": ["collapsedSize"]
+    },
+    "section-sources": {
+      "type": "section",
+      "title": "数据源",
+      "keys": ["sourceClaude", "sourceDsh", "sourceWorkbuddy", "includeLocalUsage"]
+    },
+    "section-alerts": {
+      "type": "section",
+      "title": "提醒",
+      "keys": ["quotaAlerts", "warningPercent", "criticalPercent"]
+    },
+    "section-interaction": {
+      "type": "section",
+      "title": "交互",
+      "keys": ["openDelay", "closeDelay", "defaultPage", "hotkeyToggle"]
+    },
+    "section-display": {
+      "type": "section",
+      "title": "显示",
+      "keys": ["monitor", "showPanelIcon", "hideInFullscreen"]
+    }
+  },
+
+  "style": {
+    "type": "combobox",
+    "default": "notch",
+    "description": "收起形态",
+    "options": {
+      "刘海": "notch",
+      "胶囊": "capsule",
+      "指示条": "line"
+    }
+  },
+  "animations": {
+    "type": "checkbox",
+    "default": true,
+    "description": "启用动画"
+  },
+  "animationDuration": {
+    "type": "spinbutton",
+    "default": 360,
+    "min": 0,
+    "max": 1200,
+    "step": 20,
+    "units": "毫秒",
+    "description": "动画时长"
+  },
+  "panelTheme": {
+    "type": "combobox",
+    "default": "dark",
+    "description": "面板主题",
+    "options": {
+      "深色": "dark",
+      "浅色": "light",
+      "One Dark Pro": "one-dark-pro",
+      "GitHub Dark": "github-dark",
+      "GitHub Light": "github-light",
+      "Dracula": "dracula",
+      "Night Owl": "night-owl",
+      "赛博朋克：边缘行者": "cyberpunk-edgerunners"
+    }
+  },
+  "language": {
+    "type": "combobox",
+    "default": "auto",
+    "description": "界面语言（悬浮岛与面板；设置窗口跟随系统语言）",
+    "options": {
+      "自动（跟随系统）": "auto",
+      "简体中文": "zh_CN",
+      "English": "en",
+      "繁體中文": "zh_TW",
+      "日本語": "ja"
+    }
+  },
+  "clockStyle": {
+    "type": "combobox",
+    "default": "minimal",
+    "description": "时间样式",
+    "options": {
+      "简约": "minimal",
+      "数码管": "segment",
+      "衬线": "serif",
+      "宽体": "wide",
+      "窄体": "condensed"
+    }
+  },
+  "clock24Hour": {
+    "type": "checkbox",
+    "default": true,
+    "description": "24 小时制"
+  },
+  "showQuotaRing": {
+    "type": "checkbox",
+    "default": true,
+    "description": "显示配额环"
+  },
+  "showClock": {
+    "type": "checkbox",
+    "default": false,
+    "description": "显示时间"
+  },
+  "showMonitor": {
+    "type": "checkbox",
+    "default": false,
+    "description": "显示系统读数"
+  },
+  "collapsedSize": {
+    "type": "combobox",
+    "default": "auto",
+    "description": "收起尺寸（自动 = 随显示的内容多少缩放）",
+    "options": {
+      "自动": "auto",
+      "小": "compact",
+      "标准": "standard",
+      "大": "large"
+    }
+  },
+  "sourceClaude": {
+    "type": "checkbox",
+    "default": true,
+    "description": "显示 Claude Code"
+  },
+  "sourceDsh": {
+    "type": "checkbox",
+    "default": true,
+    "description": "显示 DeepSeek Harness"
+  },
+  "sourceWorkbuddy": {
+    "type": "checkbox",
+    "default": true,
+    "description": "显示 WorkBuddy"
+  },
+  "includeLocalUsage": {
+    "type": "checkbox",
+    "default": true,
+    "description": "统计本机会话的 Token 与费用"
+  },
+  "quotaAlerts": {
+    "type": "checkbox",
+    "default": true,
+    "description": "配额到预警线时提醒"
+  },
+  "warningPercent": {
+    "type": "spinbutton",
+    "default": 70,
+    "min": 10,
+    "max": 95,
+    "step": 5,
+    "units": "%",
+    "description": "预警线"
+  },
+  "criticalPercent": {
+    "type": "spinbutton",
+    "default": 90,
+    "min": 20,
+    "max": 100,
+    "step": 5,
+    "units": "%",
+    "description": "告警线"
+  },
+  "openDelay": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 1000,
+    "step": 50,
+    "units": "毫秒",
+    "description": "展开延迟"
+  },
+  "closeDelay": {
+    "type": "spinbutton",
+    "default": 260,
+    "min": 0,
+    "max": 2000,
+    "step": 20,
+    "units": "毫秒",
+    "description": "收起延迟"
+  },
+  "defaultPage": {
+    "type": "combobox",
+    "default": "usage",
+    "description": "默认页",
+    "options": {
+      "AI 用量": "usage",
+      "音乐": "music",
+      "系统监控": "monitor"
+    }
+  },
+  "hotkeyToggle": {
+    "type": "keybinding",
+    "default": "",
+    "description": "展开或收起面板"
+  },
+  "monitor": {
+    "type": "combobox",
+    "default": "primary",
+    "description": "显示在",
+    "options": {
+      "主显示器": "primary",
+      "光标所在显示器": "cursor"
+    }
+  },
+  "showPanelIcon": {
+    "type": "checkbox",
+    "default": false,
+    "description": "在面板上显示图标（隐藏后右键悬浮岛可进入设置）"
+  },
+  "hideInFullscreen": {
+    "type": "checkbox",
+    "default": true,
+    "description": "全屏时隐藏（全屏下鼠标唤出将不可用）"
+  }
+}

@@ -1,0 +1,408 @@
+# 繁體中文 翻译（zh_TW）。msgid 是简体中文原文，msgstr 填这门语言。
+# 由 tools/i18n-build.py --init 生成；改完跑 tools/i18n-build.py 生成 .mo 与 i18nData.js。
+msgid ""
+msgstr ""
+"Project-Id-Version: mintdeck@bigmalove\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-10-29 13:20+0800\n"
+"Last-Translator: bigmalove <125801848+bigmalove@users.noreply.github.com>\n"
+"Language-Team: MintDeck translators\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: mintdeck@bigmalove/applet.js:397
+msgid "设置…"
+msgstr "設定…"
+
+#: mintdeck@bigmalove/applet.js:398
+msgid "重新读取数据"
+msgstr "重新讀取資料"
+
+#: mintdeck@bigmalove/applet.js:400
+msgid "关于 MintDeck"
+msgstr "關於 MintDeck"
+
+#: mintdeck@bigmalove/applet.js:401
+msgid "基于 BrimDeck（Apache-2.0）的 Cinnamon 复刻。"
+msgstr "基於 BrimDeck（Apache-2.0）的 Cinnamon 復刻。"
+
+#: mintdeck@bigmalove/applet.js:441
+msgid "读取失败：%s"
+msgstr "讀取失敗：%s"
+
+#: mintdeck@bigmalove/lib/deck/data.js:271
+msgid "%s 天前"
+msgid_plural "%s 天前"
+msgstr[0] "%s 天前"
+
+#: mintdeck@bigmalove/lib/deck/data.js:272
+msgid "%s 个月前"
+msgid_plural "%s 个月前"
+msgstr[0] "%s 個月前"
+
+#: mintdeck@bigmalove/lib/deck/data.js:233
+msgid "上下文"
+msgstr "上下文"
+
+#: mintdeck@bigmalove/lib/deck/data.js:236
+msgid "最近：%s"
+msgstr "最近：%s"
+
+#: mintdeck@bigmalove/lib/deck/data.js:236 mintdeck@bigmalove/lib/deck/data.js:299
+msgid "无"
+msgstr "無"
+
+#: mintdeck@bigmalove/lib/deck/data.js:239 mintdeck@bigmalove/lib/deck/data.js:240
+msgid "%s 积分"
+msgstr "%s 點數"
+
+#: mintdeck@bigmalove/lib/deck/data.js:243
+msgid "%s 个会话 · 累计 %s 积分"
+msgstr "%s 個工作階段 · 累計 %s 點數"
+
+#: mintdeck@bigmalove/lib/deck/data.js:269
+msgid "今天"
+msgstr "今天"
+
+#: mintdeck@bigmalove/lib/deck/data.js:270
+msgid "昨天"
+msgstr "昨天"
+
+#: mintdeck@bigmalove/lib/deck/data.js:291
+msgid "5 小时"
+msgstr "5 小時"
+
+#: mintdeck@bigmalove/lib/deck/data.js:292
+msgid "每周"
+msgstr "每週"
+
+#: mintdeck@bigmalove/lib/deck/data.js:294
+msgid "未登录 · 仅本机用量"
+msgstr "未登入 · 僅本機用量"
+
+#: mintdeck@bigmalove/lib/deck/data.js:299
+msgid "最近记录 %s"
+msgstr "最近記錄 %s"
+
+#: mintdeck@bigmalove/lib/deck/data.js:299 mintdeck@bigmalove/lib/deck/data.js:314
+msgid "本机会话"
+msgstr "本機工作階段"
+
+#: mintdeck@bigmalove/lib/deck/data.js:314
+msgid "%s/%s 个会话"
+msgstr "%s/%s 個工作階段"
+
+#: mintdeck@bigmalove/lib/deck/data.js:344 mintdeck@bigmalove/lib/deck/data.js:355
+#: mintdeck@bigmalove/lib/deck/data.js:366
+msgid "读取失败"
+msgstr "讀取失敗"
+
+#: mintdeck@bigmalove/lib/deck/data.js:348
+msgid "读取中…"
+msgstr "讀取中…"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:25 settings-schema.json
+msgid "AI 用量"
+msgstr "AI 使用量"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:26 settings-schema.json
+msgid "音乐"
+msgstr "音樂"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:27 settings-schema.json
+msgid "系统监控"
+msgstr "系統監控"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:381
+msgid "没有可显示的来源"
+msgstr "沒有可顯示的來源"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:450
+msgid "used"
+msgstr "已用"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:471
+msgid "今日"
+msgstr "今日"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:472
+msgid "七日"
+msgstr "七日"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:500
+msgid "未检测到播放器"
+msgstr "未偵測到播放器"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:589
+msgid "采样未接入"
+msgstr "取樣未接入"
+
+#: settings-schema.json
+msgid "外观"
+msgstr "外觀"
+
+#: settings-schema.json
+msgid "收起形态"
+msgstr "收合形態"
+
+#: settings-schema.json
+msgid "配额与统计"
+msgstr "配額與統計"
+
+#: settings-schema.json
+msgid "行为"
+msgstr "行為"
+
+#: settings-schema.json
+msgid "形态"
+msgstr "形態"
+
+#: settings-schema.json
+msgid "主题"
+msgstr "主題"
+
+#: settings-schema.json
+msgid "界面语言"
+msgstr "介面語言"
+
+#: settings-schema.json
+msgid "收起时显示"
+msgstr "收合時顯示"
+
+#: settings-schema.json
+msgid "尺寸"
+msgstr "尺寸"
+
+#: settings-schema.json
+msgid "数据源"
+msgstr "資料來源"
+
+#: settings-schema.json
+msgid "提醒"
+msgstr "提醒"
+
+#: settings-schema.json
+msgid "交互"
+msgstr "互動"
+
+#: settings-schema.json
+msgid "显示"
+msgstr "顯示"
+
+#: settings-schema.json
+msgid "刘海"
+msgstr "瀏海"
+
+#: settings-schema.json
+msgid "胶囊"
+msgstr "膠囊"
+
+#: settings-schema.json
+msgid "指示条"
+msgstr "指示條"
+
+#: settings-schema.json
+msgid "启用动画"
+msgstr "啟用動畫"
+
+#: settings-schema.json
+msgid "毫秒"
+msgstr "毫秒"
+
+#: settings-schema.json
+msgid "动画时长"
+msgstr "動畫時長"
+
+#: settings-schema.json
+msgid "面板主题"
+msgstr "面板主題"
+
+#: settings-schema.json
+msgid "深色"
+msgstr "深色"
+
+#: settings-schema.json
+msgid "浅色"
+msgstr "淺色"
+
+#: settings-schema.json
+msgid "One Dark Pro"
+msgstr "One Dark Pro"
+
+#: settings-schema.json
+msgid "GitHub Dark"
+msgstr "GitHub Dark"
+
+#: settings-schema.json
+msgid "GitHub Light"
+msgstr "GitHub Light"
+
+#: settings-schema.json
+msgid "Dracula"
+msgstr "Dracula"
+
+#: settings-schema.json
+msgid "Night Owl"
+msgstr "Night Owl"
+
+#: settings-schema.json
+msgid "赛博朋克：边缘行者"
+msgstr "賽博龐克：邊緣行者"
+
+#: settings-schema.json
+msgid "界面语言（悬浮岛与面板；设置窗口跟随系统语言）"
+msgstr "介面語言（懸浮島與面板；設定視窗跟隨系統語言）"
+
+#: settings-schema.json
+msgid "自动（跟随系统）"
+msgstr "自動（跟隨系統）"
+
+#: settings-schema.json
+msgid "简体中文"
+msgstr "简体中文"
+
+#: settings-schema.json
+msgid "English"
+msgstr "English"
+
+#: settings-schema.json
+msgid "繁體中文"
+msgstr "繁體中文"
+
+#: settings-schema.json
+msgid "日本語"
+msgstr "日本語"
+
+#: settings-schema.json
+msgid "时间样式"
+msgstr "時間樣式"
+
+#: settings-schema.json
+msgid "简约"
+msgstr "簡約"
+
+#: settings-schema.json
+msgid "数码管"
+msgstr "七段顯示"
+
+#: settings-schema.json
+msgid "衬线"
+msgstr "襯線"
+
+#: settings-schema.json
+msgid "宽体"
+msgstr "寬體"
+
+#: settings-schema.json
+msgid "窄体"
+msgstr "窄體"
+
+#: settings-schema.json
+msgid "24 小时制"
+msgstr "24 小時制"
+
+#: settings-schema.json
+msgid "显示配额环"
+msgstr "顯示配額環"
+
+#: settings-schema.json
+msgid "显示时间"
+msgstr "顯示時間"
+
+#: settings-schema.json
+msgid "显示系统读数"
+msgstr "顯示系統讀數"
+
+#: settings-schema.json
+msgid "收起尺寸（自动 = 随显示的内容多少缩放）"
+msgstr "收合尺寸（自動 = 隨顯示的內容多寡縮放）"
+
+#: settings-schema.json
+msgid "自动"
+msgstr "自動"
+
+#: settings-schema.json
+msgid "小"
+msgstr "小"
+
+#: settings-schema.json
+msgid "标准"
+msgstr "標準"
+
+#: settings-schema.json
+msgid "大"
+msgstr "大"
+
+#: settings-schema.json
+msgid "显示 Claude Code"
+msgstr "顯示 Claude Code"
+
+#: settings-schema.json
+msgid "显示 DeepSeek Harness"
+msgstr "顯示 DeepSeek Harness"
+
+#: settings-schema.json
+msgid "显示 WorkBuddy"
+msgstr "顯示 WorkBuddy"
+
+#: settings-schema.json
+msgid "统计本机会话的 Token 与费用"
+msgstr "統計本機工作階段的 Token 與費用"
+
+#: settings-schema.json
+msgid "配额到预警线时提醒"
+msgstr "配額到達預警線時提醒"
+
+#: settings-schema.json
+msgid "%"
+msgstr "%"
+
+#: settings-schema.json
+msgid "预警线"
+msgstr "預警線"
+
+#: settings-schema.json
+msgid "告警线"
+msgstr "告警線"
+
+#: settings-schema.json
+msgid "展开延迟"
+msgstr "展開延遲"
+
+#: settings-schema.json
+msgid "收起延迟"
+msgstr "收合延遲"
+
+#: settings-schema.json
+msgid "默认页"
+msgstr "預設頁"
+
+#: settings-schema.json
+msgid "展开或收起面板"
+msgstr "展開或收合面板"
+
+#: settings-schema.json
+msgid "显示在"
+msgstr "顯示於"
+
+#: settings-schema.json
+msgid "主显示器"
+msgstr "主顯示器"
+
+#: settings-schema.json
+msgid "光标所在显示器"
+msgstr "游標所在顯示器"
+
+#: settings-schema.json
+msgid "在面板上显示图标（隐藏后右键悬浮岛可进入设置）"
+msgstr "在面板上顯示圖示（隱藏後在懸浮島上按右鍵可進入設定）"
+
+#: settings-schema.json
+msgid "全屏时隐藏（全屏下鼠标唤出将不可用）"
+msgstr "全螢幕時隱藏（全螢幕下以滑鼠喚出將無法使用）"
+
+#~ msgid "最近 %s"
+#~ msgstr "最近 %s"

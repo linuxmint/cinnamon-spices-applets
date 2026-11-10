@@ -1,0 +1,68 @@
+{
+  // Colors from Dracula Official for Visual Studio Code (dracula/visual-studio-code, MIT License); palette from draculatheme.com/spec.
+  "formatVersion": 1,
+  "id": "dracula",
+  "name": "Dracula Official",
+  "description": "Dracula：暗紫灰底色，高饱和的粉、紫、青、绿。",
+  "descriptionEn": "Dracula: a dark purple-gray surface with vivid pink, purple, cyan and green.",
+  "author": "Dracula Theme",
+  "license": "MIT",
+  "homepage": "https://draculatheme.com/visual-studio-code",
+  "base": "dark",
+  "colors": {
+    "surface": "#21222C",
+    "textPrimary": "#F8F8F2",
+    "textSecondary": "#BDBFD0",
+    "textTertiary": "#7D88B6",
+    "accent": "#BD93F9",
+    "onAccent": "#21222C",
+    "danger": "#FF5555",
+    "liked": "#FF79C6",
+    "clock": "#F8F8F2",
+    "equalizer": "#BD93F9",
+    "hairline": "#343746",
+    "track": "#343746",
+    "ringTrack": "#44475A",
+    "fill": "#282A36",
+    "fillSelected": "#44475A",
+    "hover": "#343746",
+    "pressed": "#44475A",
+    "outline": "#44475A",
+    "popup": "#282A36",
+    "popupBorder": "#44475A",
+    "input": "#191A21",
+    "rangeFill": "#40BD93F9",
+    "coverPlaceholder": "#282A36",
+    "coverOutline": "#44475A",
+    "scrollThumb": "#565A72",
+    "rim": "#44475A",
+    "shadow": "#000000",
+    "indicator": "#6272A4",
+    "indicatorProgress": "#F8F8F2",
+    "switchFill": "#282A36",
+    "seekRail": "#44475A",
+    "rowDivider": "#343746",
+    "rowHover": "#282A36",
+    "menuDetail": "#BDBFD0",
+    "tooltip": "#282A36",
+    "tooltipBorder": "#44475A",
+    "bubble": "#282A36",
+    "bubbleBorder": "#44475A"
+  },
+  "apps": {
+    "claude": "#FFB86C", "codex": "#50FA7B", "antigravity": "#8BE9FD", "cursor": "#BDBFD0", "zcode": "#BD93F9",
+    "dsh": "#8BE9FD", "grokBot": "#BDBFD0", "kimi": "#4FC1E9", "manual": "#FF79C6", "other": "#BDBFD0", "warning": "#F1FA8C", "critical": "#FF5555"
+  },
+  "clock": {
+    "style": "minimal", "color": "default",
+    "palette": { "amber": "#FFB86C", "cyan": "#8BE9FD", "pink": "#FF79C6", "lime": "#50FA7B" },
+    "gradients": [
+      { "name": "日落", "nameEn": "Sunset", "stops": ["#FFB86C", "#FF79C6", "#BD93F9"] },
+      { "name": "海洋", "nameEn": "Ocean", "stops": ["#8BE9FD", "#BD93F9", "#9580FF"] },
+      { "name": "极光", "nameEn": "Aurora", "stops": ["#50FA7B", "#8BE9FD", "#BD93F9"] },
+      { "name": "火焰", "nameEn": "Ember", "stops": ["#F1FA8C", "#FFB86C", "#FF5555"] },
+      { "name": "霓虹", "nameEn": "Neon", "stops": ["#FF79C6", "#BD93F9", "#8BE9FD"] }
+    ]
+  },
+  "effects": { "shadowOpacity": 0.4 }
+}

@@ -1,0 +1,68 @@
+{
+  // Colors from One Dark Pro for Visual Studio Code (Binaryify/OneDark-Pro, MIT License).
+  "formatVersion": 1,
+  "id": "one-dark-pro",
+  "name": "One Dark Pro",
+  "description": "Atom 经典的 One Dark：蓝灰底色，柔和的橙、绿、蓝。",
+  "descriptionEn": "The classic One Dark from Atom: a blue-gray surface with soft orange, green and blue.",
+  "author": "Binaryify",
+  "license": "MIT",
+  "homepage": "https://github.com/Binaryify/OneDark-Pro",
+  "base": "dark",
+  "colors": {
+    "surface": "#21252B",
+    "textPrimary": "#D7DAE0",
+    "textSecondary": "#ABB2BF",
+    "textTertiary": "#7F848E",
+    "accent": "#61AFEF",
+    "onAccent": "#21252B",
+    "danger": "#E2727B",
+    "liked": "#E06C75",
+    "clock": "#D7DAE0",
+    "equalizer": "#61AFEF",
+    "hairline": "#3E4452",
+    "track": "#2F343E",
+    "ringTrack": "#3E4452",
+    "fill": "#2C313A",
+    "fillSelected": "#3E4452",
+    "hover": "#2C313A",
+    "pressed": "#3E4452",
+    "outline": "#3E4452",
+    "popup": "#282C34",
+    "popupBorder": "#3E4452",
+    "input": "#1B1E23",
+    "rangeFill": "#3361AFEF",
+    "coverPlaceholder": "#2C313A",
+    "coverOutline": "#3E4452",
+    "scrollThumb": "#4E5666",
+    "rim": "#3E4452",
+    "shadow": "#000000",
+    "indicator": "#5C6370",
+    "indicatorProgress": "#ABB2BF",
+    "switchFill": "#2C313A",
+    "seekRail": "#3E4452",
+    "rowDivider": "#3E4452",
+    "rowHover": "#2C313A",
+    "menuDetail": "#ABB2BF",
+    "tooltip": "#282C34",
+    "tooltipBorder": "#3E4452",
+    "bubble": "#282C34",
+    "bubbleBorder": "#3E4452"
+  },
+  "apps": {
+    "claude": "#D19A66", "codex": "#98C379", "antigravity": "#61AFEF", "cursor": "#ABB2BF", "zcode": "#56B6C2",
+    "dsh": "#528BFF", "grokBot": "#ABB2BF", "kimi": "#9ADCEB", "manual": "#C678DD", "other": "#ABB2BF", "warning": "#E5C07B", "critical": "#E06C75"
+  },
+  "clock": {
+    "style": "wide", "color": "custom", "custom": "#61AFEF",
+    "palette": { "amber": "#D19A66", "cyan": "#56B6C2", "pink": "#E06C75", "lime": "#98C379" },
+    "gradients": [
+      { "name": "日落", "nameEn": "Sunset", "stops": ["#E5C07B", "#D19A66", "#E06C75"] },
+      { "name": "海洋", "nameEn": "Ocean", "stops": ["#56B6C2", "#61AFEF", "#528BFF"] },
+      { "name": "极光", "nameEn": "Aurora", "stops": ["#98C379", "#56B6C2", "#61AFEF"] },
+      { "name": "火焰", "nameEn": "Ember", "stops": ["#E5C07B", "#E06C75", "#C678DD"] },
+      { "name": "霓虹", "nameEn": "Neon", "stops": ["#C678DD", "#61AFEF", "#56B6C2"] }
+    ]
+  },
+  "effects": { "shadowOpacity": 0.35 }
+}
