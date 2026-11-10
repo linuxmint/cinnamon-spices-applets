@@ -369,7 +369,7 @@ MyApplet.prototype = {
             this.actor.set_style(style);
         }
         else
-            this.actor.set_style("");
+            this.actor.set_style(null);
 
         this.resolution_needs_update = true;
         this.repaint();
