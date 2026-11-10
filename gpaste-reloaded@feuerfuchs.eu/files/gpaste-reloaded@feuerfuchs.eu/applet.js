@@ -1,5 +1,10 @@
 const uuid = "gpaste-reloaded@feuerfuchs.eu";
 
+// GPaste 51 dropped the "max-displayed-history-size" setting (the history
+// menu is meant to be scrollable/lazily-loaded instead), so the applet now
+// uses a fixed cap for how many items it keeps in the popup menu.
+const MAX_DISPLAYED_HISTORY_SIZE = 25;
+
 const Util          = imports.misc.util;
 const Lang          = imports.lang;
 const St            = imports.gi.St;
@@ -200,9 +205,6 @@ GPasteApplet.prototype = {
                 this._signalManager.connect(this._client, 'tracking',       Lang.bind(this, this._onClientTracking));
                 this._signalManager.connect(this._client, 'history-deleted', Lang.bind(this, this._onClientDeleteHistory));
 
-                // Client settings
-                this._signalManager.connect(this._clientSettings, 'changed::max-displayed-history-size', Lang.bind(this, this._createHistoryItems));
-
                 //
                 // Init
 
@@ -288,7 +290,7 @@ GPasteApplet.prototype = {
      */
     _createHistoryItems: function() {
         const oldSize = this._historyItems.length;
-        const newSize = this._clientSettings.get_max_displayed_history_size();
+        const newSize = MAX_DISPLAYED_HISTORY_SIZE;
 
         if (newSize > oldSize) {
             for (let i = oldSize; i < newSize; ++i) {
