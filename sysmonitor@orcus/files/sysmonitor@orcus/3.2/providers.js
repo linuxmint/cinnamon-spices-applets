@@ -1,6 +1,12 @@
 const Gio = imports.gi.Gio;
 let _, GTop;
-if (typeof require !== 'undefined') {
+const Extension = imports.ui.extension;
+if (Extension.getCurrentExtension) {
+    // Cinnamon 6.6+ warns on require(); its own importer exposes each module's var and function symbols.
+    const init = Extension.getCurrentExtension().imports.init;
+    _ = init._;
+    GTop = init.GTop;
+} else if (typeof require !== 'undefined') {
     let init = require('./init');
     _ = init._;
     GTop = init.GTop;
