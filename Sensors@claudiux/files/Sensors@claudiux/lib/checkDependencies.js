@@ -58,6 +58,7 @@ const NEEDS_FONTS_SYMBOLA = true;
  * ["executable", "path_to_a_file", "package_name"]
  * where:
  *  - 'executable' is the name of an executable included in the package; it may be empty (when the package is a library).
+ *    It may also be a list of interchangeable executables, any one of which is enough.
  *  - 'path_to_a_file' is the full path to a file included in the package; it may be empty if 'executable' is not empty.
  *  - 'package_name' is the name of the package to install when the executable and the file are not present.
  *
@@ -94,7 +95,7 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    ["xenity", "/usr/bin/xenity", "xenity"],
+    [["xenity", "zenity", "yad"], "/usr/bin/xenity", "xenity"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
@@ -102,7 +103,7 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/bin/hddtemp", "hddtemp"],
-    ["xenity", "/usr/bin/xenity", "xenity"],
+    [["xenity", "zenity", "yad"], "/usr/bin/xenity", "xenity"],
     ["smartctl", "/usr/bin/smartctl", "smartmontools"]
   ],
   "debian": [
@@ -110,14 +111,14 @@ var DEPENDENCIES = {
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
-    ["xenity", "/usr/bin/xenity", "xenity"],
+    [["xenity", "zenity", "yad"], "/usr/bin/xenity", "xenity"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
   "devuan": [
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    ["yad", "/usr/bin/yad", "yad"],
+    [["xenity", "zenity", "yad"], "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
@@ -125,13 +126,13 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    ["yad", "/usr/bin/yad", "yad"],
+    [["xenity", "zenity", "yad"], "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/fontconfig/conf.avail/66-google-noto-sans-bamum.conf", "google-noto-sans-bamum-fonts"]
   ],
   "openSUSE": [
     ["sensors", "/usr/bin/sensors",  "sensors"],
-    ["yad", "/usr/bin/yad", "yad"],
+    [["xenity", "zenity", "yad"], "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
   ],
   "gentoo": []
@@ -322,7 +323,8 @@ function get_pkg_to_install() {
   var pkgs = [];
   for (let d of DEPENDENCIES[distro]) {
     let isInstalled = false;
-    if (d[0] != "" && GLib.find_program_in_path(d[0])) {
+    let executables = Array.isArray(d[0]) ? d[0] : [d[0]];
+    if (executables.some(e => e != "" && GLib.find_program_in_path(e))) {
       isInstalled = true;
     } else {
       if (d[1] != "" && Gio.file_new_for_path(d[1]).query_exists(null)) {
