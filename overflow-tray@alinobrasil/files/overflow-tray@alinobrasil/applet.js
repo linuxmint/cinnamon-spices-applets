@@ -896,7 +896,7 @@ class CinnamonOverflowTrayApplet extends Applet.Applet {
     }
 
     getPanelWidth() {
-        return this.panel ? this.panel.height / global.ui_scale : 0;
+        return this.panel ? this._panelHeight / global.ui_scale : 0;
     }
 
     // Icons per row on the panel: always one row on a horizontal panel.
