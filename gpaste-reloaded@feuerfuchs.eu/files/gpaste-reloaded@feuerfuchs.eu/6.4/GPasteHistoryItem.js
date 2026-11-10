@@ -26,7 +26,7 @@ GPasteHistoryItem.prototype = {
         this.addActor(this.label);
 
         this.setTextLength();
-        this._settingsChangedID = this._applet.clientSettings.connect('changed::element-size', Lang.bind(this, this.setTextLength));
+        this._settingsChangedID = this._applet.clientSettings.connect('notify::element-size', Lang.bind(this, this.setTextLength));
 
         //
         // Delete button
