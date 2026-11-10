@@ -1,0 +1,8 @@
+{
+    "uuid": "relay-switches@ravel",
+    "name": "Relay Switches",
+    "description": "Switch HTTP relay boards (sockets, coffee machine, printer, ...) from the panel. Any number of switches and groups, status read back from the board.",
+    "version": "1.0.0",
+    "max-instances": 1,
+    "cinnamon-version": ["5.8", "6.0", "6.2", "6.4", "6.6"]
+}
