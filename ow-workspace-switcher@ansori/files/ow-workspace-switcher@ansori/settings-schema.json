@@ -1,0 +1,87 @@
+{
+  "theme": {
+    "type": "combobox",
+    "default": "dark",
+    "description": "Theme",
+    "options": {
+      "Dark": "dark",
+      "Light": "light"
+    }
+  },
+  "overview_mode": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Overview Window (Show background & app icon)"
+  },
+  "show_indicator": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show Active Workspace Indicator"
+  },
+  "indicator_style": {
+    "type": "combobox",
+    "default": "triangle",
+    "description": "Indicator Shape",
+    "options": {
+      "Triangle": "triangle",
+      "Circle Filled": "circle_filled",
+      "Circle Empty": "circle_empty"
+    },
+    "dependency": "show_indicator"
+  },
+  "use_custom_size": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Manual set workspace box size"
+  },
+  "custom_height": {
+    "type": "spinbutton",
+    "default": 18,
+    "min": 10,
+    "max": 60,
+    "step": 1,
+    "units": "px",
+    "description": "Box Height",
+    "dependency": "use_custom_size"
+  },
+  "custom_width": {
+    "type": "spinbutton",
+    "default": 34,
+    "min": 10,
+    "max": 100,
+    "step": 1,
+    "units": "px",
+    "description": "Box Width",
+    "dependency": "use_custom_size"
+  },
+  "use_custom_opacity": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable custom transparency"
+  },
+  "custom_opacity": {
+    "type": "scale",
+    "default": 100,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "description": "Opacity Level (%)",
+    "tooltip": "100% is solid, 0% is fully transparent",
+    "dependency": "use_custom_opacity"
+  },
+  "enable_custom_wallpapers": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable Custom Wallpaper per Workspace"
+  },
+  "bg_file_1": { "type": "filechooser", "default": "", "description": "Workspace 1 Wallpaper", "dependency": "enable_custom_wallpapers" },
+  "bg_file_2": { "type": "filechooser", "default": "", "description": "Workspace 2 Wallpaper", "dependency": "enable_custom_wallpapers" },
+  "bg_file_3": { "type": "filechooser", "default": "", "description": "Workspace 3 Wallpaper", "dependency": "enable_custom_wallpapers" },
+  "bg_file_4": { "type": "filechooser", "default": "", "description": "Workspace 4 Wallpaper", "dependency": "enable_custom_wallpapers" },
+  "bg_file_5": { "type": "filechooser", "default": "", "description": "Workspace 5 Wallpaper", "dependency": "enable_custom_wallpapers" },
+  "bg_file_6": { "type": "filechooser", "default": "", "description": "Workspace 6 Wallpaper", "dependency": "enable_custom_wallpapers" },
+  "bg_file_7": { "type": "filechooser", "default": "", "description": "Workspace 7 Wallpaper", "dependency": "enable_custom_wallpapers" },
+  "bg_file_8": { "type": "filechooser", "default": "", "description": "Workspace 8 Wallpaper", "dependency": "enable_custom_wallpapers" },
+  "bg_file_9": { "type": "filechooser", "default": "", "description": "Workspace 9 Wallpaper", "dependency": "enable_custom_wallpapers" },
+  "bg_file_10": { "type": "filechooser", "default": "", "description": "Workspace 10 Wallpaper", "dependency": "enable_custom_wallpapers" }
+}
