@@ -1,0 +1,7 @@
+# The .desktop file for each launcher
+# 
+
+Lutris: net.lutris.Lutris.desktop
+PlayOnLinux: playonlinux.desktop
+Q4Wine: q4wine.desktop
+

@@ -68,12 +68,16 @@ function humanG(g) {
 
 function formatPanel(dfDisks, diskRates) {
   if (!dfDisks || dfDisks.length === 0) return 'no disk';
-  const totalFreeG = dfDisks.reduce((s, d) => s + d.freeG, 0);
-  const devices    = groupDisksByDevice(dfDisks).map(g => g.device);
-  const totalBps   = (diskRates || [])
+  // Cumulative %free across every enabled device and mount. The tooltip
+  // breaks the same figure out per device (and per partition inside each).
+  const totalG   = dfDisks.reduce((s, d) => s + d.totalG, 0);
+  const freeG    = dfDisks.reduce((s, d) => s + d.freeG,  0);
+  const freePct  = totalG > 0 ? Math.round(freeG / totalG * 100) : 0;
+  const devices  = groupDisksByDevice(dfDisks).map(g => g.device);
+  const totalBps = (diskRates || [])
     .filter(r => devices.includes(r.name))
     .reduce((s, r) => s + r.readBytesPerSec + r.writeBytesPerSec, 0);
-  return `${humanG(totalFreeG)} avail | ${humanBps(totalBps)}`;
+  return `${freePct}% | ${humanBps(totalBps)}`;
 }
 
 // Returns {blockDevice: tempC} for every NVMe hwmon found.
@@ -115,15 +119,13 @@ function formatTooltip(dfDisks, diskRates, history, nvmeTemps) {
     lines.push(`${'I/O'.padEnd(10)}${history}  ${humanBps(totalBps)}`, '');
   }
   groupDisksByDevice(dfDisks).forEach(({ device, partitions }) => {
-    const rate      = (diskRates || []).find(r => r.name === device);
     const devTotalG = partitions.reduce((s, p) => s + p.totalG, 0);
     const devFreeG  = partitions.reduce((s, p) => s + p.freeG,  0);
     const devFreeP  = devTotalG > 0 ? Math.round(devFreeG / devTotalG * 100) : 0;
-    const ioBps     = rate ? rate.readBytesPerSec + rate.writeBytesPerSec : 0;
-    const ioStr     = ioBps > 0 ? humanBps(ioBps) : '';
-    const tempC     = nvmeTemps && nvmeTemps[device];
-    const tempStr   = tempC != null ? `${tempC.toFixed(0)}°C` : '';
-    const suffix    = [ioStr, tempStr].filter(Boolean).join('  ');
+    // Aggregate I/O is already shown on the top row ("I/O <history> <bps>"),
+    // so the device row shows only temperature after the size / free% pair.
+    const tempC   = nvmeTemps && nvmeTemps[device];
+    const suffix  = tempC != null ? `${tempC.toFixed(0)}°C` : '';
     lines.push(_diskRow(device, devTotalG, devFreeP, suffix));
     partitions.forEach(p => {
       const prefix = `  └─ ${p.name.padEnd(COL_NAME - 5)}`;

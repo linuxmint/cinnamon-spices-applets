@@ -8,9 +8,12 @@ search.py taken from placesCenter@scollins cinnamon applet https://github.com/li
 
 Additional keywords in emoji.js are from emojilib (https://github.com/muan/emojilib) License: MIT
 
-Web search suggestions provided by DuckDuckGo.
+Web search suggestions uses DuckDuckGo public API
 
----------------
+
+-----------------
+Old Credits file:
+-----------------
 Forked from Gnomenu by The Panacea Projects - https://github.com/The-Panacea-Projects/Gnomenu.
 
 A large part of this code was copied from the Mint menu and Axe menu extensions. Many thanks to those developers for their great extensions and laying the foundation for Cinnamenu.

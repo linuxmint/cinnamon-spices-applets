@@ -16,6 +16,18 @@
         "tooltip": "Show some of the Wine launchers if they are installed.",
         "value": true
     },
+    "launchers-style": {
+        "type": "combobox",
+        "default": "both",
+        "description": "Launcher list style",
+        "options": {
+            "Text Menu": "labels",
+            "Icons": "icons",
+            "Both": "both"
+        },
+        "dependency": "show-launchers"
+    },
+
     "show-run-command": {
         "type": "checkbox",
         "default": true,
@@ -23,11 +35,116 @@
         "tooltip": "For running a Wine command.",
         "value": true
     },
+
     "show-cmd": {
         "type": "checkbox",
         "default": true,
         "description": "Show 'Command Prompt'",
         "tooltip": "For easy access to the Wine command prompt.",
+        "value": true
+    },
+    "run-command-prompt-style": {
+        "type": "combobox",
+        "default": "both",
+        "description": "Command Prompt item style",
+        "options": {
+            "Text Menu": "label",
+            "Icon": "icon",
+            "Both": "both"
+        },
+        "dependency": "show-cmd"
+    },
+
+    "show-terminal": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show 'Terminal'",
+        "tooltip": "Open terminal on Wine prefixes",
+        "value": true
+    },
+    "run-terminal-style": {
+        "type": "combobox",
+        "default": "both",
+        "description": "Terminal item style",
+        "options": {
+            "Text Menu": "label",
+            "Icon": "icon",
+            "Both": "both"
+        },
+        "dependency": "show-terminal"
+    },
+    "run-terminal-folder": {
+        "type": "combobox",
+        "default": "home",
+        "description": "Terminal working folder",
+        "options": {
+            "Drive C": "drive_c",
+            "Home Folder": "home"
+        },
+        "dependency": "show-terminal"
+    },
+
+    "show-browse-drive-c": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show 'Browse Drive C'",
+        "tooltip": "For easy access to drive C of wine prefixes.",
+        "value": true
+    },
+    "browse-drive-c-style": {
+        "type": "combobox",
+        "default": "both",
+        "description": "Browse Drive C item style",
+        "options": {
+            "Text Menu": "label",
+            "Icon": "icon",
+            "Both": "both"
+        },
+        "dependency": "show-browse-drive-c"
+    },
+    "browse-drive-c-icon": {
+        "type": "iconfilechooser",
+        "default": "folder",
+        "description": "Icon for Drive C",
+        "allow-none" : true,
+        "indent": true,
+        "dependency": "show-browse-drive-c"
+    },
+
+    "show-browse-home-folder": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show 'Browse Home Folder'",
+        "tooltip": "For easy access to the user folder of wine prefixes.",
+        "value": true
+    },
+    "browse-home-folder-style": {
+        "type": "combobox",
+        "default": "both",
+        "description": "Browse Home Folder item style",
+        "options": {
+            "Text Menu": "label",
+            "Icon": "icon",
+            "Both": "both"
+        },
+        "dependency": "show-browse-home-folder"
+    },
+    "browse-home-folder-icon": {
+        "type": "iconfilechooser",
+        "default": "folder",
+        "description": "Icon for Home Folder",
+        "allow-none" : true,
+        "indent": true,
+        "dependency": "show-browse-home-folder"
+    },
+
+
+
+    "show-tools-menu": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show Tools menu",
+        "tooltip": "Show the tools menu.",
         "value": true
     },
     "show-admin-programs-menu": {
@@ -82,6 +199,13 @@
         "type": "header",
         "description": "Advanced"
     },
+    "automatically-find-prefixes": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Automatically Find Wine Prefixes",
+        "tooltip": "Automatically find Wine prefixes.",
+        "value": true
+    },
     "prefix-file-list": {
         "type": "filechooser",
         "default": "",
@@ -111,6 +235,21 @@
         "indent": true,
         "dependency": "specify-wine-exec",
         "tooltip": "The wine console executable to use."
+    },
+    "specify-terminal-exec": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Specify the terminal",
+        "tooltip": "Specify the terminal executable when launching a terminal, by default 'gnome-terminal' is used.",
+        "value": false
+    },
+    "terminal-exec": {
+        "type": "entry",
+        "default": "gnome-terminal",
+        "description": "Terminal executable",
+        "indent": true,
+        "dependency": "specify-terminal-exec",
+        "tooltip": "The terminal executable to use when launching a terminal."
     }
 }
 

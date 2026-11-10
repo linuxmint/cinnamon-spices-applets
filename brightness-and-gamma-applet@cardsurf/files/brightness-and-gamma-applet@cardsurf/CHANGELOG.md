@@ -1,3 +1,20 @@
+### v3.3.4~20261109
+* Ready for Cinnamon 6.8.
+* The user can choose the method for detecting when the system exits sleep, hibernation, or suspend mode.
+* Fixes [#9257](https://github.com/linuxmint/cinnamon-spices-applets/issues/9257)
+* Fixes [#9253](https://github.com/linuxmint/cinnamon-spices-applets/issues/9253)
+
+### v3.3.3~20261104
+* Improves the resume-detect.sh script. Use it every 20 seconds instead of 30.
+
+### v3.3.2~20261103
+* Restart this applet after suspend or hibernation.
+* Definitely fixes [#9175](https://github.com/linuxmint/cinnamon-spices-applets/issues/9175)
+
+### v3.3.1~20261022
+* Solves problem to access to `Configure...` option with Cinnamon 6.4.
+* Fixes [#9132](https://github.com/linuxmint/cinnamon-spices-applets/issues/9132)
+
 ### v3.3.0~20260711
 * User can set its own location (latitude and longitude).
 * This location can be calculated using geolocation by IP.

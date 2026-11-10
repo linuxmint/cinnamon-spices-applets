@@ -2,13 +2,22 @@ const St = imports.gi.St;
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
 const Extension = imports.ui.extension; // Needed to reload applets
+
+function _require(relPath) {
+    if (Extension.getCurrentExtension) {
+        var Me = Extension.getCurrentExtension();
+        return Me.imports[relPath];
+    } else {
+        return require(relPath);
+    }
+}
+
 const MessageTray = imports.ui.messageTray; // ++ Needed for the criticalNotify() function in this script
-//~ const Util = imports.misc.util; // Needed for spawnCommandLine()
-const Util = require("./lib/util"); // Needed for spawnCommandLine()
+const Util = _require("./lib/util");
 const Main = imports.ui.main; // ++ Needed for notify()
 const Gettext = imports.gettext;
 
-//const Util = require("./lib/util");
+//const Util = _require("./lib/util");
 const {
   UUID,
   HOME_DIR,
@@ -22,9 +31,9 @@ const {
   QUICK,
   log,
   logError
-} = require("./lib/constants");
+} = _require("./lib/constants");
 
-const {to_string} = require("./lib/to-string");
+const {to_string} = _require("./lib/to-string");
 
 
 // --- To adapt to the applet --- //
@@ -85,6 +94,7 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
+    ["xenity", "/usr/bin/xenity", "xenity"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
@@ -92,6 +102,7 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/bin/hddtemp", "hddtemp"],
+    ["xenity", "/usr/bin/xenity", "xenity"],
     ["smartctl", "/usr/bin/smartctl", "smartmontools"]
   ],
   "debian": [
@@ -99,12 +110,14 @@ var DEPENDENCIES = {
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
+    ["xenity", "/usr/bin/xenity", "xenity"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
   "devuan": [
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
+    ["yad", "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
@@ -112,11 +125,13 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
+    ["yad", "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/fontconfig/conf.avail/66-google-noto-sans-bamum.conf", "google-noto-sans-bamum-fonts"]
   ],
   "openSUSE": [
     ["sensors", "/usr/bin/sensors",  "sensors"],
+    ["yad", "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
   ],
   "gentoo": []
@@ -142,7 +157,7 @@ if (NEEDS_FONTS_SYMBOLA) {
 
 const UPDATE = {
   "default": "sudo apt-get update",
-  "arch": "sudo pacman -Syu",
+  "arch": GLib.find_program_in_path("yay") != null ? "yay -Syu" : "sudo pacman -Syu",
   "debian": "apt-get update",
   "devuan": "apt-get update",
   "fedora": "sudo dnf update",
@@ -152,7 +167,7 @@ const UPDATE = {
 
 const INSTALL = {
   "default": "sudo apt-get install",
-  "arch": "sudo pacman -S",
+  "arch": GLib.find_program_in_path("yay") != null ? "yay -S" : "sudo pacman -S",
   "debian": "apt-get install",
   "devuan": "apt-get install",
   "fedora": "sudo dnf install",
@@ -260,7 +275,7 @@ function isOpenSUSE() {
 
 function isGentoo() {
   return Gio.file_new_for_path("/etc/gentoo-release").query_exists(null)
-} // End of isArchLinux
+} // End of isGentoo
 
 
 function is_pkexec_present() {
@@ -443,7 +458,9 @@ Dependencies.prototype = {
 
 } // End of Dependencies.prototype
 
-module.exports = {
-  Dependencies,
-  criticalNotify
+if (!Extension.getCurrentExtension) {
+  module.exports = {
+    Dependencies,
+    criticalNotify
+  }
 }

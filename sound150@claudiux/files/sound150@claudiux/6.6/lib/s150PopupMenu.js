@@ -28,7 +28,6 @@ const { HttpLib } = require("./lib/httpLib");
 
 const Interfaces = imports.misc.interfaces;
 const Clutter = imports.gi.Clutter;
-const GdkPixbuf = imports.gi.GdkPixbuf;
 const Slider = imports.ui.slider;
 const Gettext = imports.gettext;
 const Pango = imports.gi.Pango;
@@ -63,20 +62,6 @@ function run_playerctld() {
 
 function kill_playerctld() {
     Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
-}
-
-function getImageAtScale(imageFileName, width, height) {
-  let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(imageFileName, width, height);
-  let image = new Clutter.Image();
-  image.set_data(
-    pixBuf.get_pixels(),
-    pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
-    width, height,
-    pixBuf.get_rowstride()
-  );
-  let actor = new Clutter.Actor({width: width, height: height});
-  actor.set_content(image);
-  return actor;
 }
 
 // Text wrapper
@@ -172,6 +157,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this._owner = owner;
         this._busName = busname;
         this._applet = applet;
+        this._menuOpenStateChangedId = 0;
         players_without_seek_support = this._applet.players_without_seek_support;
 
         // We'll update this later with a proper name
@@ -381,34 +367,17 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._seeker._setPosition(0);
                 }
 
-                if (this._name.toLowerCase() === "mpv" &&
-                    GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                    GLib.file_set_contents(RUNTIME_DIR + "/R30Previous", "");
-                } else
-                    this._mediaServerPlayer.PreviousRemote();
+                this._sendPlayerCommand("Previous");
             });
         this._playButton = new ControlButton("media-playback-start",
             _("Play"),
-            () => this._mediaServerPlayer.PlayPauseRemote());
+            () => this._sendPlayerCommand("PlayPause"));
         this._stopButton = new ControlButton("media-playback-stop",
             _("Stop"),
-            () => {
-                if (this._name.toLowerCase() === "mpv" &&
-                    GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                    GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
-                } else {
-                    this._mediaServerPlayer.StopRemote()
-                }
-            });
+            () => this._sendPlayerCommand("Stop"));
         this._nextButton = new ControlButton("media-skip-forward",
             _("Next"),
-            () => {
-                if (this._name.toLowerCase() === "mpv" &&
-                    GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                    GLib.file_set_contents(RUNTIME_DIR + "/R30Next", "");
-                } else
-                    this._mediaServerPlayer.NextRemote();
-            });
+            () => this._sendPlayerCommand("Next"));
 
         try {
             this.trackInfo.add_actor(trackControls);
@@ -436,11 +405,25 @@ class Player extends PopupMenu.PopupMenuSection {
         // Position slider
         if (this._mediaServerPlayer) {
             this._seeker = new Seeker(
+                this._applet,
                 this._mediaServerPlayer,
                 this._prop,
                 this._name.toLowerCase()
             );
             this.vertBox.add_actor(this._seeker.getActor());
+            if (this._applet.menu) {
+                this._menuOpenStateChangedId = this._applet.menu.connect("open-state-changed", (menu, open) => {
+                    if (!this._seeker) return;
+
+                    if (open)
+                        this._seeker.startPolling();
+                    else
+                        this._seeker.stopPolling();
+                });
+
+                if (this._applet.menu.isOpen)
+                    this._seeker.startPolling();
+            }
         }
 
 
@@ -485,6 +468,45 @@ class Player extends PopupMenu.PopupMenuSection {
         }
     }
 
+    _sendPlayerCommand(command, fallback) {
+        if (!fallback) {
+            if (!this._mediaServerPlayer) return;
+
+            let remoteCommand = this._mediaServerPlayer[command + "Remote"];
+            if (!remoteCommand) return;
+
+            fallback = () => remoteCommand.call(this._mediaServerPlayer);
+        }
+
+        if (this._name.toLowerCase() !== "mpv" || command === "PlayPause") {
+            try { fallback() } catch(e) { global.logError(e); }
+            return;
+        }
+
+        let socket = Gio.File.new_for_path(R30MPVSOCKET);
+        socket.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_TYPE, Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (file, result) => {
+            try {
+                file.query_info_finish(result);
+            } catch (e) {
+                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
+                    global.logError(e);
+                try { fallback() } catch(e) { global.logError(e); }
+                return;
+            }
+
+            let commandFile = Gio.File.new_for_path(RUNTIME_DIR + "/R30" + command);
+            let bytes = new GLib.Bytes(new TextEncoder().encode(""));
+            commandFile.replace_contents_bytes_async(bytes, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, (file, result) => {
+                try {
+                    file.replace_contents_finish(result);
+                } catch (e) {
+                    global.logError(e);
+                    try { fallback() } catch(e) { global.logError(e); }
+                }
+            });
+        });
+    }
+
     _showCanRaise() {
         let btn = new ControlButton("go-up", _("Open Player"), () => {
             if (this._name.toLowerCase() === "spotify") {
@@ -500,11 +522,7 @@ class Player extends PopupMenu.PopupMenuSection {
 
     _showCanQuit() {
         let btn = new ControlButton("window-close", _("Quit Player"), () => {
-            if (this._name.toLowerCase() === "mpv" &&
-                GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
-                GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
-            } else
-                this._mediaServer.QuitRemote();
+            this._sendPlayerCommand("Stop", () => this._mediaServer.QuitRemote());
             this._applet.menu.close();
         }, true);
         this._playerBox.add_actor(btn.actor);
@@ -886,13 +904,17 @@ class Player extends PopupMenu.PopupMenuSection {
         let rnd, baseName;
         if (!cover_path || !GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
             del_song_arts();
-            this.cover = new St.Icon({
+            this._cover_load_handle = 0;
+            let genericCover = new St.Icon({
                 style_class: "sound-player-generic-coverart",
                 important: true,
                 icon_name: "media-optical",
                 icon_size: Math.trunc(300 * this._applet.real_ui_scale),
                 icon_type: St.IconType.SYMBOLIC
             });
+            if (!this._applet.showMediaOptical)
+                genericCover.hide();
+            this._setCoverActor(genericCover);
             cover_path = null;
             this._cover_path = null;
             this._applet.setAppletTextIcon(this, null);
@@ -943,7 +965,7 @@ class Player extends PopupMenu.PopupMenuSection {
             this._cover_path = cover_path;
             this._applet._icon_path = cover_path; // Added
             this._applet.setAppletIcon(this._applet.player, cover_path); // Added
-            if (cover_path != null && GLib.file_test(cover_path, GLib.FileTest.EXISTS))
+            if (cover_path != null && !this._applet.dontShowAnyImageInMenu)
                 this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(
                     cover_path,
                     Math.trunc(300 * this._applet.real_ui_scale),
@@ -952,54 +974,36 @@ class Player extends PopupMenu.PopupMenuSection {
                         this._on_cover_loaded(cache, handle, actor)
                     }
                 );
+            else
+                this._setCoverActor(null);
             this._applet.setIcon();
-
-            //~ log("this._cover_path: "+this._cover_path, true);
-            try {
-                let pixbuf = null;
-                if (GLib.file_test(this._cover_path, GLib.FileTest.EXISTS)) {
-                    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
-                        this._cover_path,
-                        Math.trunc(300 * this._applet.real_ui_scale),
-                        Math.trunc(300 * this._applet.real_ui_scale)
-                    );
-                }
-
-                if (pixbuf) {
-                    let image = new Clutter.Image();
-                    image.set_data(
-                        pixbuf.get_pixels(),
-                        pixbuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGB_888,
-                        pixbuf.get_width(),
-                        pixbuf.get_height(),
-                        pixbuf.get_rowstride()
-                    );
-                    this.cover = image.get_texture();
-                }
-                if (this._applet.keepAlbumAspectRatio) {
-                    //TODO: Replace Texture by Image.
-                    this.cover = new Clutter.Texture({
-                        width: Math.trunc(300 * this._applet.real_ui_scale),
-                        keep_aspect_ratio: true,
-                        //filter_quality: 2,
-                        filter_quality: Clutter.Texture.QUALITY_HIGH,
-                        filename: cover_path
-                    });
-                } else {
-                    //TODO: Replace Texture by Image.
-                    this.cover = new Clutter.Texture({
-                        width: Math.trunc(300 * this._applet.real_ui_scale),
-                        height: Math.trunc(300 * this._applet.real_ui_scale),
-                        keep_aspect_ratio: false,
-                        filter_quality: Clutter.Texture.QUALITY_HIGH,
-                        filename: cover_path
-                    });
-                }
-                this.cover.icon_size = Math.trunc(300 * this._applet.real_ui_scale);
-                //~ this.display_cover_button.show();
-            } catch (e) {}
         }
         this._oldTitle = this._title; // Here??? FIXME!!!
+    }
+
+    _setCoverActor(actor) {
+        if (this.coverBox != null && this.cover != null) {
+            let coverBoxChildren = this.coverBox.get_children();
+            if (coverBoxChildren.length > 0 && coverBoxChildren.indexOf(this.cover) > -1)
+                try { this.coverBox.remove_child(this.cover) } catch(e) {}
+        }
+
+        this.cover = actor;
+
+        try {
+            if (this.coverBox) {
+                if (this.cover && !this._applet.dontShowAnyImageInMenu) {
+                    this.coverBox.add_actor(this.cover);
+                    try {
+                        this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
+                    } catch(e) {}
+                } else {
+                    try {
+                        this.coverBox.set_child_below_sibling(this.trackInfo, null);
+                    } catch(e) {}
+                }
+            }
+        } catch (e) {}
     }
 
     _on_cover_loaded(cache, handle, actor) {
@@ -1007,12 +1011,9 @@ class Player extends PopupMenu.PopupMenuSection {
             // Maybe a cover image load stalled? Make sure our requests match the callback.
             return;
         }
-
-        if (this.coverBox != null && this.cover != null) {
-            let coverBoxChildren = this.coverBox.get_children();
-            if (coverBoxChildren.length > 0 && coverBoxChildren.indexOf(this.cover) > -1)
-                try { this.coverBox.remove_child(this.cover) } catch(e) {}
-        }
+        this._cover_load_handle = 0;
+        if (!actor)
+            return;
 
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).
@@ -1044,22 +1045,7 @@ class Player extends PopupMenu.PopupMenuSection {
 
         actor.set_margin_left(Math.max(0, Math.round(300 * this._applet.real_ui_scale - actor.width)));
 
-        this.cover = actor;
-
-        try {
-            if (this.coverBox) {
-                if (this.cover && !this._applet.dontShowAnyImageInMenu) {
-                    this.coverBox.add_actor(this.cover);
-                    try {
-                        this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
-                    } catch(e) {}
-                } else {
-                    try {
-                        this.coverBox.set_child_below_sibling(this.trackInfo, null);
-                    } catch(e) {}
-                }
-            }
-        } catch (e) {}
+        this._setCoverActor(actor);
 
         this._applet.setAppletTextIcon(this, this._cover_path);
     }
@@ -1076,6 +1062,11 @@ class Player extends PopupMenu.PopupMenuSection {
         if (this._prop && this._propChangedId)
             try { this._prop.disconnectSignal(this._propChangedId) } catch(e) {};
 
+        if (this._applet && this._applet.menu && this._menuOpenStateChangedId) {
+            try { this._applet.menu.disconnect(this._menuOpenStateChangedId) } catch(e) {};
+            this._menuOpenStateChangedId = 0;
+        }
+
         if (this._seeker)
             try { this._seeker.destroy() } catch(e) {};
 
@@ -1090,10 +1081,11 @@ class Player extends PopupMenu.PopupMenuSection {
 Signals.addSignalMethods(Player.prototype);
 
 class Seeker extends Slider.Slider {
-    constructor(mediaServerPlayer, props, playerName) {
+    constructor(applet, mediaServerPlayer, props, playerName) {
         super(0, true);
 
         this.destroyed = false;
+        this._applet = applet;
 
         this.actor.set_direction(St.TextDirection.LTR); // Do not invert on RTL layout
         //~ this.actor.expand = true;
@@ -1112,6 +1104,8 @@ class Seeker extends Slider.Slider {
         this._timeoutId = null;
         this._timeoutId_timerCallback = null;
         this._timerTicker = 0;
+        this._positionQueryPending = false;
+        this._pollingRequested = false;
 
         this._mediaServerPlayer = mediaServerPlayer;
         this._prop = props;
@@ -1122,6 +1116,14 @@ class Seeker extends Slider.Slider {
         this.seekerBox = new St.BoxLayout();
         this.seekerBox.expand = true;
         this.seekerBox.x_align = St.Align.END;
+        this._mappedId = this.seekerBox.connect("notify::mapped", () => {
+            if (this.destroyed) return;
+
+            if (this.seekerBox.mapped && this._pollingRequested)
+                this._getCanSeek();
+            else
+                this._removePositionTimers();
+        });
 
 
 
@@ -1205,8 +1207,6 @@ class Seeker extends Slider.Slider {
             this._wantedSeekValue = 0;
         });
 
-        this._getCanSeek();
-        this._getPosition(); // Added
     }
 
     show_target_time() {
@@ -1236,6 +1236,47 @@ class Seeker extends Slider.Slider {
         return this.seekerBox;
     }
 
+    startPolling() {
+        if (this.destroyed) return;
+
+        this._pollingRequested = true;
+        if (this._canPollPosition())
+            this._getCanSeek();
+    }
+
+    stopPolling() {
+        if (this.destroyed) return;
+
+        this._pollingRequested = false;
+        this._removePositionTimers();
+    }
+
+    _isVisible() {
+        return this.seekerBox != null &&
+            this.seekerBox.visible &&
+            this.seekerBox.mapped &&
+            this.actor != null &&
+            this.actor.visible;
+    }
+
+    _canPollPosition() {
+        return !this.destroyed &&
+            this._pollingRequested &&
+            this._isVisible();
+    }
+
+    _removePositionTimers() {
+        if (this._timeoutId != null) {
+            source_remove(this._timeoutId);
+            this._timeoutId = null;
+        }
+
+        if (this._timeoutId_timerCallback != null) {
+            source_remove(this._timeoutId_timerCallback);
+            this._timeoutId_timerCallback = null;
+        }
+    }
+
     time_for_label(sec) {
         let milliseconds = 1000 * sec;
         var date = new Date(milliseconds);
@@ -1245,27 +1286,35 @@ class Seeker extends Slider.Slider {
 
     play() {
         if (this.destroyed) return;
-        run_playerctld();
+        if (this._applet._playerctl)
+            run_playerctld();
         this.status = "Playing";
-        this._getCanSeek();
+        if (this._pollingRequested)
+            this._getCanSeek();
     }
 
     pause() {
         if (this.destroyed) return;
         this.status = "Paused";
-        if (this.canSeek)
-            this._updateTimer();
-        else
-            this._updateValue();
-        run_playerctld();
+        if (this._canPollPosition()) {
+            if (this.canSeek)
+                this._updateTimer();
+            else
+                this._updateValue();
+        } else {
+            this._removePositionTimers();
+        }
+        if (this._applet._playerctl)
+            run_playerctld();
     }
 
     stop() {
         if (this.destroyed) return;
         this.status = "Stopped";
+        this._removePositionTimers();
         if (this.canSeek)
-            this._updateTimer();
-        else
+            this._currentTime = 0;
+        else if (this._isVisible())
             this._updateValue();
     }
 
@@ -1275,6 +1324,7 @@ class Seeker extends Slider.Slider {
         if (this.actor) this.actor.hide();
         if (this.posLabel) this.posLabel.hide();
         if (this.seekerBox) this.seekerBox.hide();
+        this._removePositionTimers();
     }
 
     showAll() {
@@ -1302,6 +1352,8 @@ class Seeker extends Slider.Slider {
         if (this.status !== "Stopped" && this.durLabel != null) this.durLabel.set_text(this.time_for_label(length));
         this._wantedSeekValue = 0;
         this._updateValue();
+        if (this._pollingRequested)
+            this._getCanSeek();
     }
 
     _updateValue() {
@@ -1341,24 +1393,6 @@ class Seeker extends Slider.Slider {
                 } else if (!this._dragging) {
                     if (this.status === "Playing" && this.posLabel != null) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this.setValue(this._currentTime / this._length);
-                    if (this._timeoutId != null) {
-                        source_remove(this._timeoutId);
-                    }
-                    this._timeoutId = null;
-                    if (this._timeoutId_timerCallback != null) {
-                        source_remove(this._timeoutId_timerCallback);
-                    }
-                    this._timeoutId_timerCallback = null;
-
-                    if (!this.destroyed) {
-                        this._timeoutId = timeout_add_seconds(1, () => {
-                            this._updateValue();
-                            return !this.destroyed
-                        });
-                        this._timeoutId_timerCallback = timeout_add_seconds(1, () => {
-                            return this._timerCallback()
-                        });
-                    }
                     //return (!this.destroyed && this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE; //???
                 }
             } else {
@@ -1372,7 +1406,10 @@ class Seeker extends Slider.Slider {
     }
 
     _timerCallback() {
-        if (this.destroyed) return GLib.SOURCE_REMOVE;
+        if (this.destroyed || !this._canPollPosition()) {
+            this._timeoutId_timerCallback = null;
+            return GLib.SOURCE_REMOVE;
+        }
         if (this.status === "Playing") {
             if (this._timerTicker < 10) {
                 this._currentTime += 1;
@@ -1387,18 +1424,20 @@ class Seeker extends Slider.Slider {
             this._setPosition(0);
             this._timerTicker = 0;
             this._currentTime = 0;
+            this._timeoutId_timerCallback = null;
             return GLib.SOURCE_REMOVE;
         }
-        return (this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE;
+        this._timeoutId_timerCallback = null;
+        return GLib.SOURCE_REMOVE;
     }
 
     _updateTimer() {
         //~ if (this.destroyed) return GLib.SOURCE_REMOVE;
 
-        if (this._timeoutId_timerCallback != null) {
-            source_remove(this._timeoutId_timerCallback);
-        }
-        this._timeoutId_timerCallback = null;
+        this._removePositionTimers();
+
+        if (!this._canPollPosition())
+            return;
 
         if (this.status === "Playing") {
             if (this.canSeek) {
@@ -1423,6 +1462,9 @@ class Seeker extends Slider.Slider {
     }
 
     _getCanSeek() {
+        if (this.destroyed || !this._pollingRequested)
+            return;
+
         // Some players say they "CanSeek" but don't actually give their position over dbus
         if (players_without_seek_support.indexOf(this._playerName) > -1) {
             this._setCanSeek(false);
@@ -1444,14 +1486,17 @@ class Seeker extends Slider.Slider {
         //~ if (this.destroyed) return;
         if (this._length > 0) {
             this.showAll();
-            this._updateValue();
+            if (this._canPollPosition()) {
+                this._updateValue();
+                this._updateTimer();
+            }
         } else {
             this.hideAll();
         }
     }
 
     _setCanSeek(seek) {
-        if (this.destroyed) return;
+        if (this.destroyed || !this._pollingRequested) return;
 
         if (!this._mediaServerPlayer) {
             this._cantSeek();
@@ -1484,9 +1529,12 @@ class Seeker extends Slider.Slider {
     }
 
     _getPosition() {
-        if (this.destroyed) return;
+        if (!this._canPollPosition() || this._positionQueryPending || !this._prop) return;
 
+        this._positionQueryPending = true;
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, "Position", (position, error) => {
+            this._positionQueryPending = false;
+            if (!this._canPollPosition()) return;
             //~ logDebug("_getPosition dbus !error: "+!error);
             if (!error && position[0]) {
                 //~ logDebug("_getPosition position: "+position[0].get_int64());
@@ -1520,6 +1568,18 @@ class Seeker extends Slider.Slider {
         if (this._seekChangedId) {
             this._mediaServerPlayer.disconnectSignal(this._seekChangedId);
             this._seekChangedId = null;
+        }
+        if (this._mappedId && this.seekerBox) {
+            this.seekerBox.disconnect(this._mappedId);
+            this._mappedId = null;
+        }
+        if (this._timeoutId) {
+            source_remove(this._timeoutId);
+            this._timeoutId = null;
+        }
+        if (this._timeoutId_timerCallback) {
+            source_remove(this._timeoutId_timerCallback);
+            this._timeoutId_timerCallback = null;
         }
 
         this.disconnectAll(); //??? Seems cause of bugs.

@@ -7,12 +7,21 @@ const {AppletSettings} = imports.ui.settings;
 const Extension = imports.ui.extension;
 const ModalDialog = imports.ui.modalDialog;
 const { WindowTracker } = imports.gi.Cinnamon;
+
+function _require(relPath) {
+    if (Extension.getCurrentExtension) {
+        var Me = Extension.getCurrentExtension();
+        return Me.imports[relPath];
+    } else {
+        return require(relPath);
+    }
+}
 //util
-const {spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, unref} = require("./lib/util");
+const {spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, unref} = _require("./lib/util");
 //to-string
-const {to_string} = require("./lib/to-string");
+const {to_string} = _require("./lib/to-string");
 //checkDependencies
-const {Dependencies} = require("./lib/checkDependencies");
+const {Dependencies} = _require("./lib/checkDependencies");
 //mainloopTools
 const {
   _sourceIds,
@@ -25,7 +34,7 @@ const {
   source_exists,
   source_remove,
   remove_all_sources
-} = require("./lib/mainloopTools");
+} = _require("./lib/mainloopTools");
 
 const {
   UUID,
@@ -40,11 +49,11 @@ const {
   QUICK,
   log,
   logError
-} = require("./lib/constants");
+} = _require("./lib/constants");
 
 const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 
-const {SensorsReaper} = require("./lib/sensorsReaper");
+const {SensorsReaper} = _require("./lib/sensorsReaper");
 
 const ENABLED_APPLETS_KEY = "enabled-applets";
 
@@ -268,7 +277,9 @@ class SensorsApplet extends Applet.Applet {
       this.strictly_positive_fan ? 1 : 0,
       this.strictly_positive_volt ? 1 : 0
     );
-    this.reaper.reap_nvidia_smi();
+    this.reaper.reap_nvidia_smi(
+      this.no_check_gpu_if_d3cold ? 1 : 0
+    )
 
     // Events:
     this._connectIds = [];
@@ -428,6 +439,7 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("numberOfTempSensors", "numberOfTempSensors");
     this.s.bind("temp_disks", "temp_disks", this._on_temp_disks_modified.bind(this));
     this.s.bind("journalize_temp", "journalize_temp");
+    this.s.bind("no_check_gpu_if_d3cold", "no_check_gpu_if_d3cold");
 
     // Fan tab
     this.s.bind("show_fan", "show_fan", () => { this.populate_fan_sensors_in_settings() });
@@ -589,11 +601,14 @@ class SensorsApplet extends Applet.Applet {
         this.strictly_positive_fan ? 1 : 0,
         this.strictly_positive_volt ? 1 : 0
       );
-      this.reaper.reap_nvidia_smi();
+      this.reaper.reap_nvidia_smi(
+        this.no_check_gpu_if_d3cold ? 1 : 0
+      )
     } else {
       this.set_applet_label(_("Suspended"));
     }
 
+    if (this.loopId != null) source_remove(this.loopId);
     this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
     return this.isLooping
   }
@@ -1839,6 +1854,7 @@ class SensorsApplet extends Applet.Applet {
     spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval + " &");
     this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
     this.isLooping = true;
+    if (this.loopId != null) source_remove(this.loopId);
     this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
   }
 
@@ -2036,6 +2052,7 @@ class SensorsApplet extends Applet.Applet {
    */
   on_enter_event(actor, event) {
     this.isActorEntered = true;
+    if (this.onEnterEventInterval) clearInterval(this.onEnterEventInterval);
     this.onEnterEventInterval = setInterval( () => {
         this.tooltip_must_be_updated = true;
         this.reap_sensors();
@@ -2053,7 +2070,7 @@ class SensorsApplet extends Applet.Applet {
     this.isActorEntered = false;
     if (this.onEnterEventInterval != null) {
       clearInterval(this.onEnterEventInterval);
-      this.onEnterEventInterval = false;
+      this.onEnterEventInterval = null;
     }
     this.tooltip_must_be_updated = false;
     this.isUpdatingUI = false;

@@ -1,0 +1,320 @@
+/* ── Menu shell ─────────────────────────────────────────────── */
+
+.modern-sound-menu {
+    min-width: 320px;
+    padding: 8px 0 6px;
+}
+
+.modern-sound-menu .popup-menu-item {
+    spacing: 10px;
+}
+
+/* ── Section dividers ───────────────────────────────────────── */
+
+.modern-sound-menu .modern-sound-separator {
+    -gradient-height: 1px;
+    -margin-horizontal: 16px;
+    -gradient-start: rgba(255, 255, 255, 0.04);
+    -gradient-end: rgba(255, 255, 255, 0.14);
+    height: 1px;
+    padding: 6px 0;
+}
+
+/* ── Volume levels (master + mic) ───────────────────────────── */
+
+.modern-sound-level-item {
+    padding: 6px 16px;
+}
+
+.modern-sound-level-item:first-child {
+    padding-top: 10px;
+}
+
+.modern-sound-level-item.modern-sound-level-last {
+    padding-bottom: 10px;
+}
+
+.modern-sound-level-item:hover,
+.modern-sound-level-item:focus {
+    background-color: transparent;
+}
+
+.modern-sound-level-icon {
+    icon-size: 16px;
+    color: #e8eaed;
+    padding: 4px;
+    border-radius: 6px;
+}
+
+.modern-sound-level-icon:hover {
+    color: #c8daff;
+    background-color: rgba(138, 180, 248, 0.14);
+}
+
+.modern-sound-percent-label {
+    font-weight: 600;
+    min-width: 3.2em;
+    width: 3.2em;
+    color: #8ab4f8;
+    font-size: 0.92em;
+}
+
+.modern-sound-volume-slider {
+    width: 140px;
+    height: 22px;
+    min-width: 140px;
+    min-height: 22px;
+    -slider-height: 0.38em;
+    -slider-background-color: rgba(255, 255, 255, 0.1);
+    -slider-active-background-color: #8ab4f8;
+    -slider-border-color: transparent;
+    -slider-active-border-color: transparent;
+    -slider-handle-radius: 0.55em;
+}
+
+/* ── Device picker (output / input) ─────────────────────────── */
+
+.modern-sound-device-item {
+    padding: 4px 16px 8px;
+}
+
+.modern-sound-device-item:hover,
+.modern-sound-device-item:focus {
+    background-color: transparent;
+}
+
+.modern-sound-device-header {
+    spacing: 12px;
+    padding: 8px 10px;
+    border-radius: 10px;
+}
+
+.modern-sound-device-wrap {
+    width: 100%;
+}
+
+.modern-sound-device-labels {
+    min-width: 0;
+    max-width: 210px;
+}
+
+.modern-sound-device-name,
+.modern-sound-device-subtitle {
+    max-width: 210px;
+}
+
+.modern-sound-device-header:hover {
+    background-color: rgba(138, 180, 248, 0.08);
+}
+
+.modern-sound-device-header-icon {
+    icon-size: 18px;
+    color: #e8eaed;
+}
+
+.modern-sound-device-name {
+    font-weight: 600;
+    font-size: 0.95em;
+    color: #e8eaed;
+}
+
+.modern-sound-device-subtitle {
+    font-size: 0.78em;
+    color: #9aa0a6;
+}
+
+.modern-sound-device-chevron {
+    icon-size: 14px;
+    color: #9aa0a6;
+}
+
+.modern-sound-device-list {
+    padding: 4px 0 0 4px;
+}
+
+.modern-sound-device-row {
+    spacing: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+
+.modern-sound-device-row:hover {
+    background-color: rgba(138, 180, 248, 0.1);
+}
+
+.modern-sound-device-row.active {
+    background-color: rgba(138, 180, 248, 0.14);
+}
+
+.modern-sound-device-radio,
+.modern-sound-device-check {
+    icon-size: 14px;
+    color: #8ab4f8;
+}
+
+.modern-sound-device-row-icon {
+    icon-size: 16px;
+    color: #e8eaed;
+}
+
+.modern-sound-device-row-name {
+    font-weight: 500;
+    color: #e8eaed;
+}
+
+.modern-sound-device-row-subtitle {
+    font-size: 0.78em;
+    color: #9aa0a6;
+}
+
+/* ── Applications ───────────────────────────────────────────── */
+
+.modern-sound-applications-section {
+    padding-top: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 2px;
+}
+
+.modern-sound-applications-header {
+    padding: 6px 16px 2px;
+}
+
+.modern-sound-applications-header:hover,
+.modern-sound-applications-header:focus {
+    background-color: transparent;
+}
+
+.modern-sound-applications-title {
+    font-size: 0.72em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9aa0a6;
+}
+
+.modern-sound-app-item {
+    padding: 5px 16px;
+}
+
+.modern-sound-app-item:hover,
+.modern-sound-app-item:focus {
+    background-color: rgba(138, 180, 248, 0.06);
+}
+
+.modern-sound-app-icon {
+    icon-size: 16px;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.modern-sound-app-icon:hover {
+    background-color: rgba(138, 180, 248, 0.14);
+}
+
+.modern-sound-app-name {
+    font-weight: 500;
+    font-size: 0.92em;
+    color: #e8eaed;
+    padding-right: 8px;
+}
+
+.modern-sound-app-percent {
+    font-weight: 600;
+    min-width: 2.8em;
+    width: 2.8em;
+    color: #8ab4f8;
+    font-size: 0.88em;
+}
+
+.modern-sound-app-slider {
+    width: 96px;
+    height: 18px;
+    min-width: 96px;
+    min-height: 18px;
+    -slider-height: 0.32em;
+    -slider-background-color: rgba(255, 255, 255, 0.1);
+    -slider-active-background-color: #8ab4f8;
+    -slider-border-color: transparent;
+    -slider-active-border-color: transparent;
+    -slider-handle-radius: 0.5em;
+}
+
+/* ── Quick actions ──────────────────────────────────────────── */
+
+.modern-sound-quick-actions-item {
+    padding: 8px 12px 12px;
+}
+
+.modern-sound-quick-actions-item:hover,
+.modern-sound-quick-actions-item:focus {
+    background-color: transparent;
+}
+
+.modern-sound-quick-actions {
+    width: 100%;
+}
+
+.modern-sound-quick-cell {
+    padding: 0 4px;
+}
+
+.modern-sound-quick-content {
+    spacing: 6px;
+}
+
+.modern-sound-quick-btn {
+    min-height: 64px;
+    padding: 10px 6px 8px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e8eaed;
+}
+
+.modern-sound-quick-btn:hover {
+    background-color: rgba(138, 180, 248, 0.12);
+    border-color: rgba(138, 180, 248, 0.38);
+}
+
+.modern-sound-quick-btn:focus {
+    background-color: rgba(138, 180, 248, 0.1);
+    border-color: rgba(138, 180, 248, 0.42);
+}
+
+.modern-sound-quick-btn:active {
+    background-color: rgba(138, 180, 248, 0.2);
+    border-color: rgba(138, 180, 248, 0.52);
+}
+
+.modern-sound-quick-btn.active {
+    background-color: rgba(138, 180, 248, 0.16);
+    border-color: rgba(138, 180, 248, 0.55);
+}
+
+.modern-sound-quick-btn:hover .modern-sound-quick-icon {
+    color: #d2e3ff;
+}
+
+.modern-sound-quick-btn.active .modern-sound-quick-icon {
+    color: #8ab4f8;
+}
+
+.modern-sound-quick-icon {
+    icon-size: 22px;
+    color: #f0f3f7;
+}
+
+.modern-sound-quick-label {
+    font-size: 0.72em;
+    font-weight: 600;
+    color: #aeb4bb;
+}
+
+.modern-sound-quick-btn:hover .modern-sound-quick-label {
+    color: #f0f3f7;
+}
+
+.modern-sound-quick-btn.active .modern-sound-quick-label {
+    color: #c8daff;
+}

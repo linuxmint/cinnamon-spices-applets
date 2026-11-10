@@ -239,24 +239,29 @@ ClaudeUsageApplet.prototype = {
 
     updateDisplay: function(data) {
         try {
-            if (!data || !data.five_hour || !data.seven_day) {
+            // Either window can be reported as null (e.g. no 5-hour window for the
+            // account), so only a response with neither of them is an error.
+            if (!data || (!data.five_hour && !data.seven_day)) {
                 this.handleError("Invalid API response structure");
                 return;
             }
 
-            const fiveHourUtil = data.five_hour.utilization || 0;
-            const sevenDayUtil = data.seven_day.utilization || 0;
+            const fiveHourUtil = data.five_hour ? (data.five_hour.utilization || 0) : null;
+            const sevenDayUtil = data.seven_day ? (data.seven_day.utilization || 0) : null;
+            const extraUsageShown = (fiveHourUtil === 100 || sevenDayUtil === 100) && data.extra_usage?.is_enabled;
             let fiveHourText;
-            if ((fiveHourUtil === 100 || sevenDayUtil === 100) && data.extra_usage?.is_enabled) {
+            if (extraUsageShown) {
                 fiveHourText = "+ ";
                 if (data.extra_usage?.used_credits) {
                     fiveHourText += data.extra_usage.used_credits;
                 }
-            } else {
+            } else if (fiveHourUtil !== null) {
                 fiveHourText = fiveHourUtil.toFixed(0) + "%";
+            } else {
+                fiveHourText = "--";
             }
             // Format 5-hour label with time until reset if available
-            if (data.five_hour.resets_at) {
+            if (data.five_hour?.resets_at) {
                 const resetTimeUTC = GLib.DateTime.new_from_iso8601(
                     data.five_hour.resets_at,
                     GLib.TimeZone.new_utc()
@@ -274,10 +279,19 @@ ClaudeUsageApplet.prototype = {
                 }
             }
             this.label5h.set_text(fiveHourText);
-            this.setLabelColor(this.label5h, fiveHourUtil);
+            const fiveHourColorUtil = fiveHourUtil !== null ? fiveHourUtil : (extraUsageShown ? sevenDayUtil : null);
+            if (fiveHourColorUtil !== null) {
+                this.setLabelColor(this.label5h, fiveHourColorUtil);
+            } else {
+                this._clearAllColorClasses(this.label5h);
+            }
 
-            this.label7d.set_text(sevenDayUtil.toFixed(0) + "%");
-            this.setLabelColor(this.label7d, sevenDayUtil);
+            if (sevenDayUtil !== null) {
+                this.label7d.set_text(sevenDayUtil.toFixed(0) + "%");
+                this.setLabelColor(this.label7d, sevenDayUtil);
+            } else {
+                this.setLabelState(this.label7d, "--", null);
+            }
 
             this.lastUpdateTime = GLib.DateTime.new_now_local();
             this.updateTooltip(data);
@@ -288,8 +302,8 @@ ClaudeUsageApplet.prototype = {
 
     updateTooltip: function(data) {
         try {
-            let fiveHourResetStr = "N/A";
-            if (data.five_hour.resets_at) {
+            let fiveHourResetStr = data.five_hour ? "N/A" : "not reported";
+            if (data.five_hour?.resets_at) {
                 const fiveHourResetUTC = GLib.DateTime.new_from_iso8601(
                     data.five_hour.resets_at,
                     GLib.TimeZone.new_utc()
@@ -300,8 +314,8 @@ ClaudeUsageApplet.prototype = {
                 }
             }
 
-            let sevenDayResetStr = "N/A";
-            if (data.seven_day.resets_at) {
+            let sevenDayResetStr = data.seven_day ? "N/A" : "not reported";
+            if (data.seven_day?.resets_at) {
                 const sevenDayResetUTC = GLib.DateTime.new_from_iso8601(
                     data.seven_day.resets_at,
                     GLib.TimeZone.new_utc()
