@@ -180,8 +180,13 @@ class OWWorkspaceSwitcher extends Applet.Applet {
                 !w.minimized
             );
             
-            if (validWindows.length > 0) {
-                let sortedWindows = global.display.sort_windows_by_stacking(validWindows);
+            // Exclude windows that are on all workspaces (sticky) if there are other local windows,
+            // or prioritize native workspace windows so sticky windows don't duplicate icons across all workspaces.
+            let localWindows = validWindows.filter(w => !w.is_on_all_workspaces());
+            let targetWindows = localWindows.length > 0 ? localWindows : validWindows;
+            
+            if (targetWindows.length > 0) {
+                let sortedWindows = global.display.sort_windows_by_stacking(targetWindows);
                 let topmostWin = sortedWindows[sortedWindows.length - 1]; 
                 
                 let tracker = Cinnamon.WindowTracker.get_default();
