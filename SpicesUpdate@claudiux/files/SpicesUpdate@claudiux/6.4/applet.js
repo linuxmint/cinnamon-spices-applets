@@ -752,13 +752,13 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
     let fontSize = this.badge_font_size();
 
     return (
-      fontSize - (iconSize + Math.round((this.panel.height - iconSize) / 2))
+      fontSize - (iconSize + Math.round((this._panelHeight - iconSize) / 2))
     );
   }
 
   vertical_anchor_x() {
     return -Math.round(
-      (this.panel.height - this.getPanelIconSize(IconType.SYMBOLIC)) / 2,
+      (this._panelHeight - this.getPanelIconSize(IconType.SYMBOLIC)) / 2,
     );
   }
 
@@ -2770,6 +2770,8 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
   icon_rotate() {
     this.angle = Math.round(this.angle + 3) % 360;
     let size = Math.round(this.getPanelIconSize(IconType.SYMBOLIC)); // * global.ui_scale);
+    // The panel reports no icon size until it is laid out, and a 0px pixbuf is null.
+    if (size < 1) return;
     this.img_icon = getImageAtScale(this.img_path, size, size);
     this.img_icon.set_pivot_point(0.5, 0.5);
     this.img_icon.set_rotation_angle(RotateAxis.Z_AXIS, this.angle);

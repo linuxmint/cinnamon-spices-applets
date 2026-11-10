@@ -1,7 +1,7 @@
 //!/usr/bin/cjs
-const Extension = imports.ui.extension;
+var Extension = imports.ui.extension;
 
-const versionCompare = (left, right) => {
+var versionCompare = (left, right) => {
   if (typeof left + typeof right != "stringstring")
     return false;
 
