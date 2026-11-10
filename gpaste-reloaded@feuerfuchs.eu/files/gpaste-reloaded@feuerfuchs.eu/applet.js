@@ -452,7 +452,7 @@ GPasteApplet.prototype = {
      * Toggle GPaste's tracking status
      */
     toggleDaemon: function() {
-        this._client.set_active(this.mitemTrack.state, null);
+        this._client.set_active(this.mitemTrack.state, null, null);
     },
 
     /*
@@ -469,7 +469,7 @@ GPasteApplet.prototype = {
      */
     emptyHistory: function() {
         new ModalDialog.ConfirmDialog(_("Do you really want to empty the current history?"), Lang.bind(this, function() {
-            this._client.empty_history(this._historyName, null);
+            this._client.empty_history(this._historyName, null, null);
         })).open(global.get_current_time());
     },
 

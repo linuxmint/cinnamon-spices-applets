@@ -431,7 +431,7 @@ class GPasteApplet extends Applet.IconApplet {
      * Toggle GPaste's tracking status
      */
     toggleDaemon () {
-        this._client.set_active(this.mitemTrack.state, null);
+        this._client.set_active(this.mitemTrack.state, null, null);
     }
 
     /*
@@ -448,7 +448,7 @@ class GPasteApplet extends Applet.IconApplet {
      */
     emptyHistory() {
         new ModalDialog.ConfirmDialog(_("Do you really want to empty the current history?"), () => {
-            this._client.empty_history(this._historyName, null);
+            this._client.empty_history(this._historyName, null, null);
         }).open(global.get_current_time());
     }
 

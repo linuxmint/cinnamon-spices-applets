@@ -105,7 +105,7 @@ GPasteHistoryItem.prototype = {
      * Remove history item
      */
     remove: function() {
-        this._applet.client.delete_item(this._uuid, null);
+        this._applet.client.delete_item(this._uuid, null, null);
     },
 
     //
@@ -127,7 +127,7 @@ GPasteHistoryItem.prototype = {
      * Select history item
      */
     activate: function(event) {
-        this._applet.client.select(this._uuid, null);
+        this._applet.client.select(this._uuid, null, null);
         this._applet.menu.toggle();
     }
 };
