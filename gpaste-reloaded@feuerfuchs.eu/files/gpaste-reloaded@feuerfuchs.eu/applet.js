@@ -162,8 +162,8 @@ GPasteApplet.prototype = {
             // Dialogs
 
             this.dNewItem             = new GPasteNewItemDialog.GPasteNewItemDialog(Lang.bind(this, function(text) {
-                this._client.add(text, Lang.bind(this, function(client, result) {
-                    this._client.add_finish(result);
+                this._client.add_text(text, null, Lang.bind(this, function(client, result) {
+                    this._client.add_text_finish(result);
                 }));
             }));
 
@@ -216,7 +216,7 @@ GPasteApplet.prototype = {
                     this._historyName = this._client.get_history_name_finish(result);
 
                     // Get history list
-                    this._client.list_histories(Lang.bind(this, this._onClientHistoriesListed));
+                    this._client.list_histories(null, Lang.bind(this, this._onClientHistoriesListed));
 
                     // Load history and populate applet
                     this._createHistoryItems();
@@ -417,7 +417,7 @@ GPasteApplet.prototype = {
         if (searchStr.length > 0) {
             this.mitemHistoryIsEmpty.actor.hide();
 
-            this._client.search(searchStr, Lang.bind(this, function(client, result) {
+            this._client.search(searchStr, null, Lang.bind(this, function(client, result) {
                 this._searchResults = client.search_finish(result);
                 let   results = this._searchResults.length;
                 const maxSize = this._historyItems.length;
@@ -454,14 +454,14 @@ GPasteApplet.prototype = {
      * Toggle GPaste's tracking status
      */
     toggleDaemon: function() {
-        this._client.track(this.mitemTrack.state, null);
+        this._client.set_active(this.mitemTrack.state, null);
     },
 
     /*
      * Select another history
      */
     selectHistory: function(name) {
-        this._client.switch_history(name, Lang.bind(this, function(client, result) {
+        this._client.switch_history(name, null, Lang.bind(this, function(client, result) {
             this._client.switch_history_finish(result);
         }));
     },
@@ -578,7 +578,7 @@ GPasteApplet.prototype = {
     _onClientSwitchHistory: function() {
         debugLog("[" + uuid + "] Client event: _onClientSwitchHistory");
 
-        this._client.list_histories(Lang.bind(this, this._onClientHistoriesListed));
+        this._client.list_histories(null, Lang.bind(this, this._onClientHistoriesListed));
 
         this._client.get_history_name(Lang.bind(this, function(client, result) {
             this._historyName = this._client.get_history_name_finish(result);

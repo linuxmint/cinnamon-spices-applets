@@ -135,8 +135,8 @@ class GPasteApplet extends Applet.IconApplet {
             // Dialogs
 
             this.dNewItem             = new GPasteNewItemDialog.GPasteNewItemDialog(text => {
-                this._client.add(text, (client, result) => {
-                    this._client.add_finish(result);
+                this._client.add_text(text, null, (client, result) => {
+                    this._client.add_text_finish(result);
                 });
             });
 
@@ -190,7 +190,7 @@ class GPasteApplet extends Applet.IconApplet {
                     this._historyName = this._client.get_history_name_finish(result);
 
                     // Get history list
-                    this._client.list_histories(this._onClientHistoriesListed.bind(this));
+                    this._client.list_histories(null, this._onClientHistoriesListed.bind(this));
 
                     // Load history and populate applet
                     this._createHistoryItems();
@@ -395,7 +395,7 @@ class GPasteApplet extends Applet.IconApplet {
         if (searchStr.length > 0) {
             this.mitemHistoryIsEmpty.actor.hide();
 
-            this._client.search(searchStr, (client, result) => {
+            this._client.search(searchStr, null, (client, result) => {
                 this._searchResults = client.search_finish(result);
                 let   results = this._searchResults.length;
                 const maxSize = this._historyItems.length;
@@ -433,14 +433,14 @@ class GPasteApplet extends Applet.IconApplet {
      * Toggle GPaste's tracking status
      */
     toggleDaemon () {
-        this._client.track(this.mitemTrack.state, null);
+        this._client.set_active(this.mitemTrack.state, null);
     }
 
     /*
      * Select another history
      */
     selectHistory(name) {
-        this._client.switch_history(name, (client, result) => {
+        this._client.switch_history(name, null, (client, result) => {
             this._client.switch_history_finish(result);
         });
     }
@@ -542,7 +542,7 @@ class GPasteApplet extends Applet.IconApplet {
     _onClientSwitchHistory() {
         debugLog("[" + uuid + "] Client event: _onClientSwitchHistory");
 
-        this._client.list_histories(this._onClientHistoriesListed.bind(this));
+        this._client.list_histories(null, this._onClientHistoriesListed.bind(this));
 
         this._client.get_history_name((client, result) => {
             this._historyName = this._client.get_history_name_finish(result);

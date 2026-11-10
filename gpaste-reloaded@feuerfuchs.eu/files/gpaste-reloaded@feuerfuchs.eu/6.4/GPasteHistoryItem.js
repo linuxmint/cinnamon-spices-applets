@@ -77,8 +77,8 @@ GPasteHistoryItem.prototype = {
         this._index = index;
 
         if (index != -1) {
-            this._applet.client.get_element_at_index(index, Lang.bind(this, function (client, result) {
-                let item = client.get_element_at_index_finish(result);
+            this._applet.client.get_item_at_index(index, null, Lang.bind(this, function (client, result) {
+                let item = client.get_item_at_index_finish(result);
                 this._uuid = item.get_uuid();
                 this.label.set_text(item.get_value().replace(/[\t\n\r]/g, ''));
             }));
@@ -95,9 +95,9 @@ GPasteHistoryItem.prototype = {
     setUuid: function(uuid) {
         this._uuid = uuid;
         if (uuid != null) {
-            this._applet.client.get_element(uuid, (client, result) => {
-                const value = client.get_element_finish(result);
-                this.label.set_text(value.replace(/[\t\n\r]/g, ''));
+            this._applet.client.get_item(uuid, null, (client, result) => {
+                const item = client.get_item_finish(result);
+                this.label.set_text(item.get_value().replace(/[\t\n\r]/g, ''));
             });
             this.actor.show();
         } else {
@@ -110,7 +110,7 @@ GPasteHistoryItem.prototype = {
      * Remove history item
      */
     remove: function() {
-        this._applet.client.delete(this._uuid, null);
+        this._applet.client.delete_item(this._uuid, null);
     },
 
     //
