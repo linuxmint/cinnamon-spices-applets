@@ -85,7 +85,7 @@ AppletGui.prototype =
     clearBox : function()
     {
         this.box.destroy_all_children();
-        this.box.set_style("");
+        this.box.set_style(null);
         this.prevObj = null;
     },
     //
