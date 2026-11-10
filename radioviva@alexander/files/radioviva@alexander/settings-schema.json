@@ -1,0 +1,279 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "page-my-stations",
+      "page-search",
+      "page-appearance",
+      "page-audio",
+      "page-recording"
+    ],
+    "page-my-stations": {
+      "type": "page",
+      "title": "Minhas Rádios",
+      "sections": [
+        "sec-my-stations"
+      ]
+    },
+    "page-search": {
+      "type": "page",
+      "title": "Buscar no Brasil (+1.300 Rádios)",
+      "sections": [
+        "sec-search"
+      ]
+    },
+    "page-appearance": {
+      "type": "page",
+      "title": "Barra de Tarefas & Visual",
+      "sections": [
+        "sec-appearance-panel",
+        "sec-appearance-menu"
+      ]
+    },
+    "page-audio": {
+      "type": "page",
+      "title": "Áudio & Reprodução",
+      "sections": [
+        "sec-playback",
+        "sec-notifications"
+      ]
+    },
+    "page-recording": {
+      "type": "page",
+      "title": "Gravação ao Vivo",
+      "sections": [
+        "sec-recording"
+      ]
+    },
+    "sec-my-stations": {
+      "type": "section",
+      "title": "Rádios do Menu (Adicione, Edite ou Reordene)",
+      "keys": [
+        "user-stations"
+      ]
+    },
+    "sec-search": {
+      "type": "section",
+      "title": "Catálogo de Emissoras Brasileiras",
+      "keys": [
+        "radio-search-widget"
+      ]
+    },
+    "sec-appearance-panel": {
+      "type": "section",
+      "title": "Exibição na Barra de Tarefas",
+      "keys": [
+        "icon-style",
+        "show-station-on-panel",
+        "panel-text-type",
+        "max-panel-text-length"
+      ]
+    },
+    "sec-appearance-menu": {
+      "type": "section",
+      "title": "Comportamento do Menu Popup",
+      "keys": [
+        "keep-menu-open-on-select"
+      ]
+    },
+    "sec-playback": {
+      "type": "section",
+      "title": "Controles de Som e Conexão",
+      "keys": [
+        "initial-volume",
+        "volume-step",
+        "keep-volume-between-sessions",
+        "auto-reconnect"
+      ]
+    },
+    "sec-notifications": {
+      "type": "section",
+      "title": "Notificações na Área de Trabalho",
+      "keys": [
+        "show-notifications",
+        "notify-on-station-change"
+      ]
+    },
+    "sec-recording": {
+      "type": "section",
+      "title": "Destino das Gravações",
+      "keys": [
+        "record-directory"
+      ]
+    }
+  },
+  "user-stations": {
+    "type": "list",
+    "height": 450,
+    "columns": [
+      {
+        "id": "inc",
+        "title": "Exibir",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "name",
+        "title": "Nome da Rádio",
+        "type": "string"
+      },
+      {
+        "id": "url",
+        "title": "URL do Stream",
+        "type": "string"
+      }
+    ],
+    "default": [
+      {
+        "name": "Jovem Pan FM Campinas - 89.9",
+        "url": "https://paineldj5.com.br:20028/stream",
+        "inc": true
+      },
+      {
+        "name": "Difusora FM 102.3 Piracicaba",
+        "url": "https://stream.zeno.fm/deqad1zbtv8uv",
+        "inc": true
+      },
+      {
+        "name": "98 ROCK BRASIL",
+        "url": "https://stm41.stmsrv.com:16614/stream?type=http&nocache=1897905694",
+        "inc": true
+      },
+      {
+        "name": "89 FM A Rádio Rock",
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_89FM_ADP.aac?dist=site-89fm",
+        "inc": true
+      },
+      {
+        "name": "Alpha FM 101.7",
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_ALPHAFM_ADP.aac",
+        "inc": true
+      },
+      {
+        "name": "Antena 1 FM 94.7",
+        "url": "https://antenaone.crossradio.com.br/stream/1",
+        "inc": true
+      },
+      {
+        "name": "Kiss FM 92.5",
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_KISSFM_ADP.aac",
+        "inc": true
+      },
+      {
+        "name": "CBN São Paulo - 90.5 FM",
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/CBN_SPAAC.aac",
+        "inc": true
+      },
+      {
+        "name": "BandNews FM São Paulo - 96.9",
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/BANDNEWSFM_SPAAC_SC",
+        "inc": true
+      },
+      {
+        "name": "Rádio Itatiaia - 95.7 FM",
+        "url": "https://8903.brasilstream.com.br/stream",
+        "inc": true
+      },
+      {
+        "name": "JB FM Rio 99.9",
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/JBFMAAC1.aac",
+        "inc": true
+      },
+      {
+        "name": "Rádio Gaúcha - 93.7 FM",
+        "url": "https://1132747t.ha.azioncdn.net/primary/gaucha_rbs.sdp/playlist.m3u8",
+        "inc": true
+      }
+    ]
+  },
+  "radio-search-widget": {
+    "type": "custom",
+    "file": "RadioSearchWidget.py",
+    "widget": "RadioSearchWidget"
+  },
+  "icon-style": {
+    "type": "combobox",
+    "default": "color",
+    "description": "Estilo do ícone",
+    "options": {
+      "Colorido (RadioViva Verde/Dourado)": "color",
+      "Simbólico Monocromático": "symbolic"
+    }
+  },
+  "show-station-on-panel": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Exibir nome da rádio na barra de tarefas",
+    "tooltip": "Mostra o nome da rádio ou a faixa tocando ao lado do ícone no painel"
+  },
+  "panel-text-type": {
+    "type": "radiogroup",
+    "default": "station",
+    "description": "Conteúdo exibido na barra",
+    "options": {
+      "Apenas o Nome da Estação": "station",
+      "Nome da Música / Programa": "track",
+      "Estação + Música": "both"
+    },
+    "dependency": "show-station-on-panel"
+  },
+  "max-panel-text-length": {
+    "type": "spinbutton",
+    "default": 24,
+    "min": 10,
+    "max": 60,
+    "step": 2,
+    "units": "caracteres",
+    "description": "Limite de caracteres na barra",
+    "dependency": "show-station-on-panel"
+  },
+  "keep-menu-open-on-select": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Manter o menu aberto ao clicar em uma rádio",
+    "tooltip": "Permite continuar controlando o player e só fecha quando clicar fora do menu"
+  },
+  "initial-volume": {
+    "type": "spinbutton",
+    "default": 80,
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "units": "%",
+    "description": "Volume inicial padrão"
+  },
+  "volume-step": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 20,
+    "step": 1,
+    "units": "%",
+    "description": "Passo de alteração de volume (scroll e botões)"
+  },
+  "keep-volume-between-sessions": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Lembrar o último volume utilizado"
+  },
+  "auto-reconnect": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Reconectar automaticamente se a conexão oscilar"
+  },
+  "show-notifications": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Notificar quando a música ou programa mudar"
+  },
+  "notify-on-station-change": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Notificar ao sintonizar uma nova rádio"
+  },
+  "record-directory": {
+    "type": "entry",
+    "default": "~/Música/RadioViva",
+    "description": "Pasta de destino das gravações MP3"
+  }
+}
