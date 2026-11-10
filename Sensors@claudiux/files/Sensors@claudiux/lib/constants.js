@@ -3,16 +3,17 @@ const GLib = imports.gi.GLib; // Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
 const Extension = imports.ui.extension;
 
-const UUID="Sensors@claudiux";
+// Cinnamon's native importer exposes only var and function declarations, so every exported symbol is a var.
+var UUID="Sensors@claudiux";
 
-const HOME_DIR = GLib.get_home_dir();
-const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
-const SCRIPTS_DIR = APPLET_DIR + "/scripts";
-const ICONS_DIR = APPLET_DIR + "/icons";
+var HOME_DIR = GLib.get_home_dir();
+var APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+var SCRIPTS_DIR = APPLET_DIR + "/scripts";
+var ICONS_DIR = APPLET_DIR + "/icons";
 
-const NVIDIA_SMI_VERSION_REGEX = /(?<=nvidia-smi version  : )\d+\.\d+\.\d+/gi;
+var NVIDIA_SMI_VERSION_REGEX = /(?<=nvidia-smi version  : )\d+\.\d+\.\d+/gi;
 
-const versionCompare = (left, right) => {
+var versionCompare = (left, right) => {
   if (typeof left + typeof right != "stringstring")
     return false;
 
@@ -37,7 +38,7 @@ const versionCompare = (left, right) => {
 //~ if (versionCompare(GLib.getenv('CINNAMON_VERSION').toString(), "4.2") < 0)
   //~ xs_path = SCRIPTS_DIR + "/xs.py";
 //~ const XS_PATH = xs_path;
-const XS_PATH = "/usr/bin/xlet-settings";
+var XS_PATH = "/usr/bin/xlet-settings";
 
 /**
  * DEBUG:

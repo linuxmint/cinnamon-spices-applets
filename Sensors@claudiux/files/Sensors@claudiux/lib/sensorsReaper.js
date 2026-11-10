@@ -51,8 +51,9 @@ var LOCAL_DATA = {
     };
 /**
  * Class SensorsReaper
+ * A var, because Cinnamon's native importer exposes only var and function declarations.
  */
-class SensorsReaper {
+var SensorsReaper = class SensorsReaper {
   constructor(applet, refresh_interval) {
     this.applet = applet;
     this.refresh_interval = refresh_interval; // seconds
@@ -528,7 +529,7 @@ class SensorsReaper {
   get_refresh_interval_ms() {
     return 1000 * this.refresh_interval
   }
-}
+};
 
 function convert_to_json(raw) {
   let ret = {};

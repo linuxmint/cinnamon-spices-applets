@@ -1,7 +1,8 @@
 const ByteArray = imports.byteArray;
 const Extension = imports.ui.extension;
 
-const to_string = function(data) {
+// Cinnamon's native importer exposes only var and function declarations, so the exported symbol is a var.
+var to_string = function(data) {
   if (ByteArray.hasOwnProperty("toString")) {
     return ""+ByteArray.toString(data);
   } else {
