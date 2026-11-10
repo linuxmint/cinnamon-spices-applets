@@ -1,0 +1,102 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Danny <ryiotherock@gmail.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: systemmonitor@dannt\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 15:55-0500\n"
+"PO-Revision-Date: 2026-07-07 16:00-0500\n"
+"Last-Translator: danny\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "General"
+msgstr "General"
+
+msgid "Configuracion de CPU"
+msgstr "CPU Settings"
+
+msgid "Configuracion de GPU"
+msgstr "GPU Settings"
+
+msgid "Configuracion de RAM"
+msgstr "RAM Settings"
+
+msgid "Configuracion de SWAP"
+msgstr "SWAP Settings"
+
+msgid "info"
+msgstr "info"
+
+msgid "Informacion del applet"
+msgstr "Applet Information"
+
+msgid "Configuracion general"
+msgstr "General Settings"
+
+msgid "Intervalo de actualizacion"
+msgstr "Update interval"
+
+msgid ""
+"Este applet esta aun en formato beta 2.0-beta, la compatibilidad para "
+"mostrar el uso de GPU intel e Nvidia(no funcional con Nvidia) aun es "
+"inconcluso e incompleto si quiere ver el codigo fuente valla a mi github \n"
+"\n"
+"https://github.com/RyioTheRock/applet-monitor-de-sistema"
+msgstr ""
+"This applet is still in beta 2.0-beta format, support for showing Intel "
+"and Nvidia GPU usage (not functional with Nvidia) is still incomplete. "
+"If you want to see the source code, visit my github \n"
+"\n"
+"https://github.com/RyioTheRock/applet-monitor-de-sistema"
+
+msgid "Mostrar uso del CPU"
+msgstr "Show CPU usage"
+
+msgid "Cambiar color del texto de CPU"
+msgstr "Change CPU text color"
+
+msgid "Cambiar tamaño del texto de CPU"
+msgstr "Change CPU text size"
+
+msgid "Mostrar uso del GPU"
+msgstr "Show GPU usage"
+
+msgid "Cambiar color del texto de GPU"
+msgstr "Change GPU text color"
+
+msgid "Cambiar tamaño del texto de GPU"
+msgstr "Change GPU text size"
+
+msgid "Mostrar uso de la VRAM"
+msgstr "Show VRAM usage"
+
+msgid "Cambiar color del texto de VRAM"
+msgstr "Change VRAM text color"
+
+msgid "Cambiar tamaño del texto de VRAM"
+msgstr "Change VRAM text size"
+
+msgid "Mostrar uso de la RAM"
+msgstr "Show RAM usage"
+
+msgid "Mostrar uso de SWAP"
+msgstr "Show SWAP usage"
+
+msgid "Cambiar color del texto de RAM"
+msgstr "Change RAM text color"
+
+msgid "Cambiar tamaño del fuente de RAM"
+msgstr "Change RAM font size"
+
+msgid "Cambiar color del texto de SWAP"
+msgstr "Change SWAP text color"
+
+msgid "Cambiar tamaño de SWAP"
+msgstr "Change SWAP text size"

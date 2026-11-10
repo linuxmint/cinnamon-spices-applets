@@ -1,0 +1,10 @@
+{
+    "uuid": "system-monitor@danny",
+    "name": "System Monitor",
+    "description": "Show CPU, RAM, SWAP, GPU and VRAM in the panel",
+    "version": "1.5",
+    "cinnamon-version": ["6.6"],
+    "uuid-check": true,
+    "author": "DannyXD300",
+    "url": "https://github.com/DannyXD300/Cinnamon-Applet-sysyem-monitor-"
+}
