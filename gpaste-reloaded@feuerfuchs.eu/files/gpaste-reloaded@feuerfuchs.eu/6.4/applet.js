@@ -405,7 +405,7 @@ class GPasteApplet extends Applet.IconApplet {
                 const ordered = this.reverseHistory ? this._searchResults.slice().reverse() : this._searchResults;
 
                 this._historyItems.slice(0, results).forEach((item, index) => {
-                    item.setUuid(ordered[index]);
+                    item.setUuid(ordered[index].get_uuid());
                 });
                 this._historyItems.slice(results, maxSize).forEach((item, index) => {
                     item.setIndex(-1);

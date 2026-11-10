@@ -425,7 +425,7 @@ GPasteApplet.prototype = {
                 }
 
                 this._historyItems.slice(0, results).forEach(Lang.bind(this, function(item, index) {
-                    item.setIndex(this._searchResults[index]);
+                    item.setUuid(this._searchResults[index].get_uuid());
                 }));
                 this._historyItems.slice(results, maxSize).forEach(Lang.bind(this, function(item, index) {
                     item.setIndex(-1);
