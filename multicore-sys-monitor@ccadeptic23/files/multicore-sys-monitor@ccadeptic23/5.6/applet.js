@@ -38,6 +38,7 @@ var {
 
 const UUID = "multicore-sys-monitor@ccadeptic23";
 const HOME_DIR = GLib.get_home_dir();
+const USER_DATA_DIR = GLib.get_user_data_dir();
 const APPLET_DIR = GLib.get_user_data_dir() + "/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
 const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
@@ -113,7 +114,7 @@ function get_nemo_size_prefixes() {
     return _interface_settings.get_string(_SETTINGS_KEY)
 }
 
-const _get_lang = () => {
+var _get_lang = () => {
     if (GLib.getenv("LC_NUMERIC")) {
         return GLib.getenv("LC_NUMERIC").split(".")[0].replace("_", "-")
     } else if (GLib.getenv("LANG")) {
@@ -124,7 +125,7 @@ const _get_lang = () => {
     return "en-US"
 }
 
-const formatNumber = (value, decimals=2) => {
+var formatNumber = (value, decimals=2) => {
     if (typeof(value) === "string")
         value = parseFloat(value, decimals);
     if (typeof(value) === "number") {
@@ -140,7 +141,7 @@ const formatNumber = (value, decimals=2) => {
 }
 
 
-const formatBytesValueUnit = (bytes, decimals=2, withRate=true, forceBinary=undefined) => {
+var formatBytesValueUnit = (bytes, decimals=2, withRate=true, forceBinary=undefined) => {
     let _rate = (withRate === true) ? rate : "";
     if (bytes < 1) {
         return "0".padStart(spaces/2 - 1) + ".00".padEnd(spaces/2 - 1) + "B".padStart(3, " ") + _rate;
@@ -172,7 +173,7 @@ const formatBytesValueUnit = (bytes, decimals=2, withRate=true, forceBinary=unde
 
 
 
-Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, USER_DATA_DIR + "/locale");
 function _(str) {
     let customTrans = Gettext.dgettext(UUID, str);
     if (customTrans.length > 0 && customTrans !== str)
@@ -2275,7 +2276,7 @@ var ZramDataProvider = class ZramDataProvider {
         let forceBinary = !this.applet.Mem_showBytesInTooltip;
 
         // Byte rows (disksize, data, compressed) formatted like the other sections.
-        const bytesRow = (label, bytes) => {
+        var bytesRow = (label, bytes) => {
             let [value, unit] = formatBytesValueUnit(Math.round(bytes), 2, false, forceBinary);
             value = formatNumber(parseFloat(value).toFixed(2), 2);
             return label.padStart(spaces, " ") + ":\t" + value.padStart(8, " ") + " " + unit.padStart(6, " ") + "\n";

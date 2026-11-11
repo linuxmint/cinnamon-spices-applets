@@ -9,7 +9,8 @@ const UUID = "multicore-sys-monitor@ccadeptic23";
 const TAU = Math.PI * 2;
 
 const HOME_DIR = GLib.get_home_dir();
-Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
+const USER_DATA_DIR = GLib.get_user_data_dir();
+Gettext.bindtextdomain(UUID, USER_DATA_DIR + "/locale");
 function _(str) {
     let customTrans = Gettext.dgettext(UUID, str);
     if (customTrans.length > 0 && customTrans !== str)
