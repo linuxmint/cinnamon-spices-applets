@@ -1,0 +1,8 @@
+{
+  "uuid": "window-opacity@ChadXSO",
+  "name": "Window Opacity",
+  "description": "See-through windows with a default opacity for every app, plus a remembered setting per app",
+  "max-instances": 1,
+  "version": "1.0",
+  "url": "https://github.com/ChadXSO/cinnamon-window-opacity"
+}
