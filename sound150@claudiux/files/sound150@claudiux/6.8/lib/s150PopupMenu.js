@@ -66,7 +66,7 @@ function kill_playerctld() {
 }
 
 // Text wrapper
-const formatTextWrap = (text, maxLineLength) => {
+var formatTextWrap = (text, maxLineLength) => {
     const words = text.replace(/[\r\n]+/g, " ").split(" ");
     let lineLength = 0;
 
