@@ -46,7 +46,7 @@ const NETWORK_DEVICES_STATUS_PATH = XDG_RUNTIME_DIR + "/network_devices";
 const POWER_SUPPLY_PATH = "/sys/class/power_supply";
 
 const rate = _("/s");
-var spaces = 20;
+var spaces = 17; //20
 const translated_strings = [
     _("Core 128:"),
     _("Unrecoverable:"),
@@ -2080,12 +2080,12 @@ var MemDataProvider = class MemDataProvider {
         if (this.applet.percentAtEndOfLine)
             percentChar = "%".padStart(6, " ");
         if (this.applet.Mem_onlyUsedAvailable) {
-            toolTipString += _("Used:").split(":")[0].padStart(spaces, " ") + ":\t" + "" + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[0])/10)).toFixed(2), 2).padStart(8, " ") + " " + percentChar + "\n";
-            toolTipString += _("Available:").split(":")[0].padStart(spaces, " ") + ":\t" + "" + formatNumber(parseFloat((Math.round(1000 * (1 - this.currentReadings[0]))/10)).toFixed(2), 2).padStart(8, " ") + " " + percentChar + "\n";
+            toolTipString += _("Used:").split(":")[0].padStart(spaces, " ") + ":\t" + "" + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[0])/10)).toFixed(2), 2).padStart(8, " ") + percentChar + "\n";
+            toolTipString += _("Available:").split(":")[0].padStart(spaces, " ") + ":\t" + "" + formatNumber(parseFloat((Math.round(1000 * (1 - this.currentReadings[0]))/10)).toFixed(2), 2).padStart(8, " ") + percentChar + "\n";
         } else {
             let attributes = [_("Used:"), _("Cached:"), _("Buffer:"), _("Free:")];
             for (let i = 0; i < attributes.length; i++) {
-                toolTipString += (attributes[i]).split(":")[0].padStart(spaces, " ") + ":\t" + "" + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[i])/10)).toFixed(2), 2).padStart(8, " ") + " " + percentChar + "\n";
+                toolTipString += (attributes[i]).split(":")[0].padStart(spaces, " ") + ":\t" + "" + formatNumber(parseFloat((Math.round(1000 * this.currentReadings[i])/10)).toFixed(2), 2).padStart(8, " ") + percentChar + "\n";
             }
         }
         return toolTipString;
@@ -2376,27 +2376,30 @@ var MultiCpuDataProvider = class MultiCpuDataProvider {
             var percentage_str = "" + percentage;
             percentage_str = percentage_str.padStart(4);
             toolTipString += (_("CPU") + " ").padStart(spaces - lenColon, " ");
-            toolTipString += colon + "\t" + " " + percentage_str + " " + percentChar + "\n";
+            //~ toolTipString += colon + "\t" + " " + percentage_str + percentChar + "\n";
+            toolTipString += colon + "\t" + " " + percentage_str + percentChar + "\n";
         } else {
             for (let i = 0; i < this.CPUCount; i++) {
                 let percentage = formatNumber(parseInt(100 * this.currentReadings[i]), 0);
                 var percentage_str = "" + percentage;
                 if (this.applet.CPU_groupInSetsOf4)
-                    percentage_str = percentage_str.padStart(2);
+                    percentage_str = percentage_str.padStart(2, " ");
                 else
-                    percentage_str = percentage_str.padStart(4);
+                    percentage_str = percentage_str.padStart(4, " ");
                 if (this.applet.CPU_mergeAll) {
                     toolTipString += (_("CPU") + " ").padStart(spaces - lenColon, " ");
-                    toolTipString += colon + "\t" + " " + percentage_str + " " + percentChar + "\n";
+                    toolTipString += colon + "\t" + " " + percentage_str + percentChar + "\n";
                 } else {
                     if (this.applet.CPU_groupInSetsOf4) {
-                        toolTipString += ("" + i).padStart("100".length + lenColon, " ");
-                        toolTipString += colon + " " + percentage_str + " " + percentChar;
+                        toolTipString += ("" + i).padStart("100".length + lenColon - 1, " ");
+                        //~ toolTipString += colon + " " + percentage_str + percentChar;
+                        toolTipString += colon + " " + percentage_str + percentChar;
+                        //~ toolTipString += colon + percentage_str + percentChar;
                         if (i % 4 === 3)
                             toolTipString += "\n";
                     } else {
                         toolTipString += (_("Core") + " " + i).padStart(spaces - lenColon, " ");
-                        toolTipString += colon + "\t" + " " + percentage_str + " " + percentChar + "\n";
+                        toolTipString += colon + "\t" + " " + percentage_str + percentChar + "\n";
                     }
                 }
 
@@ -2851,15 +2854,15 @@ var DiskUsageDataProvider = class DiskUsageDataProvider {
             let maxPercentage = Math.round(100 * this.currentReadings[i].maxvalue, 2);
             if (this.applet.DiskUsage_mergeAll) {
                 if (percentage < maxPercentage)
-                    toolTipString += (_("Disks") + " ").padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "\n";
+                    toolTipString += (_("Disks") + " ").padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 0).padStart(4, " ") + percentChar + "\n";
                 else
-                    toolTipString += (_("Disks") + " ").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "</b>\n";
+                    toolTipString += (_("Disks") + " ").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 0).padStart(4, " ") + percentChar + "</b>\n";
             } else {
                 let name = names[i];
                 if (percentage < maxPercentage)
-                    toolTipString += name.padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "\n";
+                    toolTipString += name.padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 0).padStart(4, " ") + percentChar + "\n";
                 else
-                    toolTipString += name.padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "</b>\n";
+                    toolTipString += name.padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 0).padStart(4, " ") + percentChar + "</b>\n";
             }
         }
 
@@ -2939,16 +2942,16 @@ var BatteryDataProvider = class BatteryDataProvider {
             let minPercentage = Math.round(10000 * this.currentReadings[i].minvalue) / 100;
             if (this.applet.DiskUsage_mergeAll) {
                 if (percentage > minPercentage)
-                    toolTipString += (_("Batteries") + " ").padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "\n";
+                    toolTipString += (_("Batteries") + " ").padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 0).padStart(4, " ") + percentChar + "\n";
                 else
-                    toolTipString += (_("Batteries") + " ").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 0).padStart(4, " ") + " " + percentChar + "</b>\n";
+                    toolTipString += (_("Batteries") + " ").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 0).padStart(4, " ") + percentChar + "</b>\n";
             } else {
                 let name = names[i];
                 let capacity = formatNumber(health[i][1] / health[i][0] * 100, 1);
                 if (percentage > minPercentage) {
-                    toolTipString += (name + " (" + capacity + "%)").padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 2).padStart(7, " ") + " " + percentChar + "\n";
+                    toolTipString += (name + " (" + capacity + "%)").padStart(spaces - lenColon, " ") + colon + "\t " + formatNumber(percentage, 2).padStart(7, " ") + percentChar + "\n";
                 } else {
-                    toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 2).padStart(7, " ") + " " + percentChar + "</b>\n";
+                    toolTipString += (name + " (" + capacity.toString() + "%)").padStart(spaces - lenColon, " ") + colon + "\t <b>" + formatNumber(percentage, 2).padStart(7, " ") + percentChar + "</b>\n";
                 }
             }
         }
