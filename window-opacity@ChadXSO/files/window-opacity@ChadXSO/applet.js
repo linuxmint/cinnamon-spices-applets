@@ -10,7 +10,7 @@ const Clutter = imports.gi.Clutter;
 const UUID = "window-opacity@ChadXSO";
 const MIN = 20; // never let a window go fully invisible
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(text) {
     return Gettext.dgettext(UUID, text);
