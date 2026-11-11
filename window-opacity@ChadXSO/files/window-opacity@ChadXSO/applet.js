@@ -56,7 +56,7 @@ function toPct(val) { return Math.round(MIN + val * (100 - MIN)); }
 class WindowOpacityApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
-        this.set_applet_icon_symbolic_name("display-brightness-symbolic");
+        this.set_applet_icon_path(metadata.path + "/icon.png");
         this.set_applet_tooltip(_("Window opacity (click, or scroll on this icon)"));
 
         this.target = null;
