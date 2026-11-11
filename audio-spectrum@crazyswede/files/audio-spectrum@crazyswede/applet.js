@@ -51,6 +51,12 @@ AudioSpectrum.prototype = {
         this._settings.bind("gravity", "_gravity", this._onGravityChanged.bind(this));
         this._skin = "classic";
         this._settings.bind("skin", "_skin", this._onSkinChanged.bind(this));
+        this._panelColorMode = "auto";
+        this._settings.bind(
+            "panel_color_mode",
+            "_panelColorMode",
+            this._onPanelColorModeChanged.bind(this)
+        );
 
         // Current and target bar heights
         this._bars = new Array(this._barCount).fill(0);
@@ -122,6 +128,11 @@ AudioSpectrum.prototype = {
     _onSkinChanged: function() {
         this._updateWidth();
         this._drawingArea.queue_repaint();
+    },
+
+    _onPanelColorModeChanged: function() {
+        if (this._drawingArea)
+            this._drawingArea.queue_repaint();
     },
 
     _onSensitivityChanged: function() {
@@ -346,6 +357,7 @@ AudioSpectrum.prototype = {
             vertical_alignment: "center",
             separator: 0.8,
             skin: "classic",
+            panel_color_mode: "auto",
             fps: "25",
             gravity: 400,
             peak_hold: 0
@@ -585,6 +597,47 @@ AudioSpectrum.prototype = {
         );
     },
 
+    _isLightPanel: function() {
+        // Applets are normally transparent, so walk up the actor tree until
+        // Cinnamon's panel actor supplies a visible background color.
+        let actor = this.actor;
+
+        for (let depth = 0; actor && depth < 8; depth++) {
+            try {
+                let color = actor.get_theme_node().get_background_color();
+
+                if (color && color.alpha >= 32) {
+                    // Perceived luminance; 160 keeps medium-grey themes in
+                    // the dark-theme palette and switches genuinely light
+                    // panels to darker inactive cells.
+                    let luminance =
+                        color.red * 0.299 +
+                        color.green * 0.587 +
+                        color.blue * 0.114;
+
+                    return luminance >= 160;
+                }
+            } catch (e) {
+                // Some intermediate actors may not expose a usable theme
+                // node while Cinnamon is changing themes. Try the parent.
+            }
+
+            actor = actor.get_parent();
+        }
+
+        return false;
+    },
+
+    _usesLightPanelStyle: function() {
+        if (this._panelColorMode === "light")
+            return true;
+
+        if (this._panelColorMode === "dark")
+            return false;
+
+        return this._isLightPanel();
+    },
+
     _draw: function(area) {
         let cr = area.get_context();
 
@@ -618,6 +671,10 @@ AudioSpectrum.prototype = {
         // Transparent background
         cr.setSourceRGBA(0, 0, 0, 0);
         cr.paint();
+
+        // Re-evaluate during repaint so switching the Cinnamon theme takes
+        // effect immediately without restarting or reloading the applet.
+        let lightPanel = this._usesLightPanelStyle();
 
         let gap = this._separator;
 
@@ -760,13 +817,19 @@ AudioSpectrum.prototype = {
                     let sy = height - (s + 1) * pitch + 1;
 
                     if (s < litRows) {
+                        if (lightPanel) {
+                            cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+                            cr.rectangle(x - 0.4, sy - 0.4, barWidth + 0.8, segmentHeight + 0.8);
+                            cr.fill();
+                        }
+
                         cr.setSourceRGBA(0.14, 1.0, 0.84, 0.18);
                         cr.rectangle(x - 1, sy - 1, barWidth + 2, segmentHeight + 2);
                         cr.fill();
 
                         cr.setSourceRGBA(0.36, 1.0, 0.88, 1.0);
                     } else {
-                        cr.setSourceRGBA(0.04, 0.18, 0.17, 0.38);
+                        continue;
                     }
 
                     cr.rectangle(x, sy, barWidth, segmentHeight);
@@ -784,18 +847,8 @@ AudioSpectrum.prototype = {
                 continue;
             }
 
-            // Amber Analyzer: warm segmented display with a subtle raster.
+            // Amber Analyzer: warm segmented display.
             if (this._skin === "amberanalyzer") {
-                if (i === 0) {
-                    cr.setSourceRGBA(0.43, 0.18, 0.02, 0.12);
-                    cr.setLineWidth(1);
-                    for (let gy = 2; gy < height; gy += 4) {
-                        cr.moveTo(0, gy + 0.5);
-                        cr.lineTo(width, gy + 0.5);
-                    }
-                    cr.stroke();
-                }
-
                 let pitch = 3;
                 let rows = Math.max(1, Math.floor(height / pitch));
                 let litRows = Math.ceil(value * rows);
@@ -805,9 +858,23 @@ AudioSpectrum.prototype = {
 
                     if (s < litRows) {
                         let level = s / Math.max(1, rows - 1);
+
+                        // A narrow dark outline separates each active amber
+                        // cell in both panel modes.
+                        cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+                        cr.rectangle(
+                            x - 0.4,
+                            sy - 0.4,
+                            barWidth + 0.8,
+                            2.8
+                        );
+                        cr.fill();
+
                         cr.setSourceRGBA(1.0, 0.41 + 0.43 * level, 0.03 + 0.12 * level, 1.0);
                     } else {
-                        cr.setSourceRGBA(0.22, 0.09, 0.01, 0.26);
+                        // Inactive Amber Analyzer cells stay transparent in
+                        // both panel modes. Active cells define the display.
+                        continue;
                     }
 
                     cr.rectangle(x, sy, barWidth, 2);
@@ -836,14 +903,20 @@ AudioSpectrum.prototype = {
                     let sy = height - (s + 1) * pitch + 1;
                     let level = (s + 1) / rows;
 
-                    if (s >= litRows)
-                        cr.setSourceRGBA(0.08, 0.11, 0.08, 0.30);
-                    else if (level > 0.75)
+                    if (s >= litRows) {
+                        continue;
+                    } else {
+                        cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+                        cr.rectangle(x - 0.4, sy - 0.4, dotWidth + 0.8, 2.8);
+                        cr.fill();
+
+                        if (level > 0.75)
                         cr.setSourceRGBA(1.0, 0.18, 0.12, 1.0);
-                    else if (level > 0.50)
-                        cr.setSourceRGBA(1.0, 0.80, 0.10, 1.0);
-                    else
-                        cr.setSourceRGBA(0.16, 0.88, 0.29, 1.0);
+                        else if (level > 0.50)
+                            cr.setSourceRGBA(1.0, 0.80, 0.10, 1.0);
+                        else
+                            cr.setSourceRGBA(0.16, 0.88, 0.29, 1.0);
+                    }
 
                     cr.rectangle(x, sy, dotWidth, 2);
                     cr.fill();
@@ -860,20 +933,20 @@ AudioSpectrum.prototype = {
                 continue;
             }
 
-            // Futuristic Dashboard: outlined cyan columns and panel guides.
+            // Futuristic Dashboard: outlined cyan columns.
             if (this._skin === "futuristicdashboard") {
-                if (i === 0) {
-                    cr.setSourceRGBA(0.22, 0.47, 0.61, 0.18);
-                    cr.setLineWidth(1);
-                    for (let gy = 6; gy < height; gy += 6) {
-                        cr.moveTo(0, gy + 0.5);
-                        cr.lineTo(width, gy + 0.5);
-                    }
+                let dashboardHeight = Math.max(2, value * (height - 1));
+                let dashboardY = height - dashboardHeight;
+
+                if (lightPanel) {
+                    cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+                    cr.setLineWidth(3);
+                    cr.moveTo(x + 0.5, height);
+                    cr.lineTo(x + 0.5, dashboardY + 0.5);
+                    cr.lineTo(x + barWidth, dashboardY + 0.5);
                     cr.stroke();
                 }
 
-                let dashboardHeight = Math.max(2, value * (height - 1));
-                let dashboardY = height - dashboardHeight;
                 cr.setSourceRGBA(0.18 + value * 0.33, 0.82 - value * 0.18, 1.0, 0.92);
                 cr.setLineWidth(1);
                 cr.moveTo(x + 0.5, height);
@@ -896,18 +969,8 @@ AudioSpectrum.prototype = {
             }
 
             // Oscilloscope Blocks: monochrome phosphor blocks with a short
-            // glow and a faint laboratory-display grid.
+            // glow.
             if (this._skin === "oscilloscopeblocks") {
-                if (i === 0) {
-                    cr.setSourceRGBA(0.18, 0.61, 0.25, 0.12);
-                    cr.setLineWidth(1);
-                    for (let gy = 3; gy < height; gy += 4) {
-                        cr.moveTo(0, gy + 0.5);
-                        cr.lineTo(width, gy + 0.5);
-                    }
-                    cr.stroke();
-                }
-
                 let pitch = 4;
                 let rows = Math.max(1, Math.floor(height / pitch));
                 let litRows = Math.ceil(value * rows);
@@ -915,6 +978,12 @@ AudioSpectrum.prototype = {
                 for (let s = 0; s < litRows; s++) {
                     let sy = height - (s + 1) * pitch + 1;
                     let alpha = 0.58 + 0.40 * ((s + 1) / rows);
+
+                    if (lightPanel) {
+                        cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+                        cr.rectangle(x - 0.4, sy - 0.4, barWidth + 0.8, 2.8);
+                        cr.fill();
+                    }
 
                     cr.setSourceRGBA(0.20, 1.0, 0.39, 0.16);
                     cr.rectangle(x - 1, sy - 1, barWidth + 2, 4);
@@ -938,12 +1007,18 @@ AudioSpectrum.prototype = {
                     let sy = height - (s + 1) * pitch + 1;
                     let level = (s + 1) / rows;
 
-                    if (s >= litRows)
-                        cr.setSourceRGBA(0.20, 0.18, 0.14, 0.22);
-                    else if (level > 0.75)
-                        cr.setSourceRGBA(1.0, 0.24, 0.14, 1.0);
-                    else
-                        cr.setSourceRGBA(1.0, 0.90, 0.59, 0.96);
+                    if (s >= litRows) {
+                        continue;
+                    } else {
+                        cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+                        cr.rectangle(x - 0.4, sy - 0.4, barWidth + 0.8, 2.8);
+                        cr.fill();
+
+                        if (level > 0.75)
+                            cr.setSourceRGBA(1.0, 0.24, 0.14, 1.0);
+                        else
+                            cr.setSourceRGBA(1.0, 0.90, 0.59, 0.96);
+                    }
 
                     cr.rectangle(x, sy, barWidth, 2);
                     cr.fill();
@@ -971,16 +1046,22 @@ AudioSpectrum.prototype = {
                     let sy = height - (s + 1) * pitch + 1;
                     let level = (s + 1) / rows;
 
-                    if (s >= litRows)
-                        cr.setSourceRGBA(0.14, 0.06, 0.19, 0.26);
-                    else if (level > 0.75)
-                        cr.setSourceRGBA(1.0, 0.22, 0.80, 1.0);
-                    else if (level > 0.50)
-                        cr.setSourceRGBA(0.61, 0.29, 1.0, 1.0);
-                    else if (level > 0.25)
-                        cr.setSourceRGBA(0.31, 0.59, 1.0, 1.0);
-                    else
-                        cr.setSourceRGBA(0.13, 0.82, 1.0, 1.0);
+                    if (s >= litRows) {
+                        continue;
+                    } else {
+                        cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+                        cr.rectangle(x - 0.4, sy - 0.4, dotWidth + 0.8, 2.8);
+                        cr.fill();
+
+                        if (level > 0.75)
+                            cr.setSourceRGBA(1.0, 0.22, 0.80, 1.0);
+                        else if (level > 0.50)
+                            cr.setSourceRGBA(0.61, 0.29, 1.0, 1.0);
+                        else if (level > 0.25)
+                            cr.setSourceRGBA(0.31, 0.59, 1.0, 1.0);
+                        else
+                            cr.setSourceRGBA(0.13, 0.82, 1.0, 1.0);
+                    }
 
                     cr.rectangle(x, sy, dotWidth, 2);
                     cr.fill();
@@ -1068,6 +1149,29 @@ AudioSpectrum.prototype = {
                   }
 
                   cr.stroke();
+
+                  if (lightPanel) {
+                      // Dark contour behind the active oscilloscope trace.
+                      cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+                      cr.setLineWidth(3.5);
+                      cr.moveTo(0, centerY);
+
+                      for (let p = 0; p < points; p++) {
+                          let index = Math.floor(
+                              p * (this._barCount - 1) /
+                              Math.max(1, points - 1)
+                          );
+                          let level = this._bars[index] / 100;
+                          let amplitude = level * height * 0.45;
+                          let traceY = p === 0
+                              ? centerY
+                              : centerY + ((p % 2 === 0) ? -1 : 1) * amplitude;
+
+                          cr.lineTo(p * step, traceY);
+                      }
+
+                      cr.stroke();
+                  }
 
                   // Huvudkurva
                   cr.setSourceRGBA(
@@ -1163,14 +1267,30 @@ AudioSpectrum.prototype = {
                           1;
 
                       if (s >= litSegments) {
-                          cr.setSourceRGBA(
-                              0.05, 0.12, 0.06, 0.20
-                          );
+                          continue;
                       } else if (s >= digitalSegments * 0.85) {
+                          cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+                          cr.rectangle(
+                              x - 0.4,
+                              sy - 0.4,
+                              digitalWidth + 0.8,
+                              4.8
+                          );
+                          cr.fill();
+
                           cr.setSourceRGBA(
                               1.0, 0.48, 0.05, 0.98
                           );
                       } else {
+                          cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+                          cr.rectangle(
+                              x - 0.4,
+                              sy - 0.4,
+                              digitalWidth + 0.8,
+                              4.8
+                          );
+                          cr.fill();
+
                           cr.setSourceRGBA(
                               0.30, 1.0, 0.45, 0.98
                           );
@@ -1487,6 +1607,10 @@ AudioSpectrum.prototype = {
 
                     let level = (s + 1) / segments;
 
+                    cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+                    cr.rectangle(x - 0.4, sy - 0.4, barWidth + 0.8, segmentHeight + 0.8);
+                    cr.fill();
+
                     // 80s Car Stereo: orange
                     cr.setSourceRGBA(1.0, 0.42, 0.05, 0.95);
 
@@ -1580,6 +1704,23 @@ AudioSpectrum.prototype = {
                 }
 
                 cr.stroke();
+
+                if (lightPanel) {
+                    // Preserve a dark edge around the cyan line on light
+                    // panels without changing the line geometry.
+                    cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+                    cr.setLineWidth(3.5);
+                    cr.moveTo(0, neonY.call(this, 0));
+
+                    for (let p = 1; p < points; p++) {
+                        cr.lineTo(
+                            p * step,
+                            neonY.call(this, p)
+                        );
+                    }
+
+                    cr.stroke();
+                }
 
                 // Bright neon core
                 cr.setSourceRGBA(0.55, 0.95, 1.00, 1.00);
@@ -1708,6 +1849,16 @@ AudioSpectrum.prototype = {
             let bottom = height;
             let top = y;
 
+            // One shared outline behind the complete multicolour bar.
+            cr.setSourceRGBA(0.02, 0.02, 0.02, 0.92);
+            cr.rectangle(
+                x - 0.4,
+                top - 0.4,
+                barWidth + 0.8,
+                bottom - top + 0.8
+            );
+            cr.fill();
+
             // Green: bottom 55%
             let greenTop = Math.max(
                 top,
@@ -1776,17 +1927,6 @@ AudioSpectrum.prototype = {
                 cr.fill();
             }
 
-            // Thin dark separator between the LED bars
-            if (i < this._barCount - 1) {
-                cr.setSourceRGBA(0, 0, 0, 0.65);
-                cr.rectangle(
-                    x + barWidth,
-                    0,
-                    gap,
-                    height
-                );
-                cr.fill();
-            }
         }
 
         cr.restore();

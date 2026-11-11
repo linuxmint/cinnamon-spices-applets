@@ -10,7 +10,8 @@
             "height",
             "vertical_alignment",
             "separator",
-            "skin"
+            "skin",
+            "panel_color_mode"
         ],
         "description": "Audio Spectrum display settings"
     },
@@ -102,6 +103,17 @@
             "Oscilloscope Blocks": "oscilloscopeblocks",
             "Cassette Deck": "cassettedeck",
             "Pixel Plasma": "pixelplasma"
+        }
+    },
+    "panel_color_mode": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Panel color mode",
+        "tooltip": "Automatically detect the panel background, or force the light/dark skin variant",
+        "options": {
+            "Auto detect": "auto",
+            "Light panel": "light",
+            "Dark panel": "dark"
         }
     },
     "animation": {

@@ -32,6 +32,8 @@ Audio Spectrum displays the audio currently playing on your system directly in t
 - Top, center or bottom alignment in manual-height mode
 - Selectable 20, 25, 30 or 60 FPS
 - Adjustable fall speed and optional peak hold
+- Automatic light/dark panel contrast detection with manual Light and Dark overrides
+- Theme-aware outlines and cleaner segmented skins for reliable contrast on light panels
 - Restore-defaults button
 
 ## Requirements
@@ -51,7 +53,9 @@ Some older distribution releases provide an older CAVA version. The separately a
 
 ## Configuration
 
-The applet settings allow you to select the visualization style and configure the number of bars, sensitivity, bar geometry, height, alignment, animation speed, fall speed and peak hold.
+The applet settings allow you to select the visualization style and configure the number of bars, sensitivity, bar geometry, height, alignment, panel color mode, animation speed, fall speed and peak hold.
+
+The **Panel color mode** setting defaults to **Auto detect**, which reads the panel background and applies the appropriate contrast treatment. **Light panel** and **Dark panel** can be selected manually for transparent or customized themes.
 
 ### Audio level and visualization height
 
