@@ -23,11 +23,12 @@ const {readFileAsync} = _require("./lib/readFileAsync");
 const d3cold_temperature = "35";
 
 // Default sysfs mount point
-const sysfs_mount_point = "/sys"
+const sysfs_mount_point = "/sys";
 
 const {
   UUID,
   HOME_DIR,
+  USER_DATA_DIR,
   APPLET_DIR,
   SCRIPTS_DIR,
   ICONS_DIR,
@@ -52,7 +53,7 @@ var LOCAL_DATA = {
 /**
  * Class SensorsReaper
  */
-class SensorsReaper {
+var SensorsReaper = class SensorsReaper {
   constructor(applet, refresh_interval) {
     this.applet = applet;
     this.refresh_interval = refresh_interval; // seconds

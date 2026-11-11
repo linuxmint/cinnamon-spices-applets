@@ -1,3 +1,7 @@
+### v5.11.9~20261111
+  * Ready for Cinnamon 6.8.
+  * Fixes [#9256](https://github.com/linuxmint/cinnamon-spices-applets/issues/9256)
+
 ### v5.11.8~20261103
   * Avoid nvidia-smi process storm and desktop stutter.
   * Ready for Linux Mint 23.
