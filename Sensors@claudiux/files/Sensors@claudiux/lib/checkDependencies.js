@@ -2,6 +2,7 @@ const St = imports.gi.St;
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
 const Extension = imports.ui.extension; // Needed to reload applets
+const Cinnamon = imports.gi.Cinnamon;
 
 function _require(relPath) {
     if (Extension.getCurrentExtension) {
@@ -21,6 +22,7 @@ const Gettext = imports.gettext;
 const {
   UUID,
   HOME_DIR,
+  USER_DATA_DIR,
   APPLET_DIR,
   SCRIPTS_DIR,
   ICONS_DIR,
@@ -58,6 +60,7 @@ const NEEDS_FONTS_SYMBOLA = true;
  * ["executable", "path_to_a_file", "package_name"]
  * where:
  *  - 'executable' is the name of an executable included in the package; it may be empty (when the package is a library).
+ * It may also be a list of interchangeable executables, any one of which is enough.
  *  - 'path_to_a_file' is the full path to a file included in the package; it may be empty if 'executable' is not empty.
  *  - 'package_name' is the name of the package to install when the executable and the file are not present.
  *
@@ -94,7 +97,8 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    ["xenity", "/usr/bin/xenity", "xenity"],
+    //~ ["xenity|zenity|yad", "/usr/bin/xenity|/usr/bin/zenity|/usr/bin/yad", "xenity|zenity|yad"],
+    [["xenity", "zenity", "yad"], "/usr/bin/xenity", "xenity"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
@@ -102,7 +106,8 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/bin/hddtemp", "hddtemp"],
-    ["xenity", "/usr/bin/xenity", "xenity"],
+    //~ ["xenity", "/usr/bin/xenity", "xenity"],
+    [["xenity", "zenity", "yad"], "/usr/bin/xenity", "xenity"],
     ["smartctl", "/usr/bin/smartctl", "smartmontools"]
   ],
   "debian": [
@@ -110,14 +115,16 @@ var DEPENDENCIES = {
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
-    ["xenity", "/usr/bin/xenity", "xenity"],
+    //~ ["xenity", "/usr/bin/xenity", "xenity"],
+    [["xenity", "zenity", "yad"], "/usr/bin/xenity", "xenity"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
   "devuan": [
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    ["yad", "/usr/bin/yad", "yad"],
+    //~ ["yad", "/usr/bin/yad", "yad"],
+    [["xenity", "zenity", "yad"], "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
@@ -125,13 +132,15 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    ["yad", "/usr/bin/yad", "yad"],
+    //~ ["yad", "/usr/bin/yad", "yad"],
+    [["xenity", "zenity", "yad"], "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/fontconfig/conf.avail/66-google-noto-sans-bamum.conf", "google-noto-sans-bamum-fonts"]
   ],
   "openSUSE": [
     ["sensors", "/usr/bin/sensors",  "sensors"],
-    ["yad", "/usr/bin/yad", "yad"],
+    //~ ["yad", "/usr/bin/yad", "yad"],
+    [["xenity", "zenity", "yad"], "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
   ],
   "gentoo": []
@@ -230,30 +239,22 @@ function get_terminal() {
 function get_default_terminal() {
   let _SETTINGS_SCHEMA='org.cinnamon.desktop.default-applications.terminal';
   let _SETTINGS_KEY1 = 'exec'; // Ex: 'gnome-terminal'
-  //let _SETTINGS_KEY2 = 'exec-arg'; // Ex: '-x'
   let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
   let ret1 = _interface_settings.get_string(_SETTINGS_KEY1);
-  //let ret2 = _interface_settings.get_string(_SETTINGS_KEY2);
   if (ret1 == null) {
     ret1 = get_terminal();
-    //ret2 = '-e';
   }
-  //return [ret1, ret2];
   return "" + ret1;
 } // End of get_default_terminal
 
 function get_default_terminal_separator() {
   let _SETTINGS_SCHEMA='org.cinnamon.desktop.default-applications.terminal';
-  //~ let _SETTINGS_KEY1 = 'exec'; // Ex: 'gnome-terminal'
   let _SETTINGS_KEY2 = 'exec-arg'; // Ex: '-x'
   let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
-  //~ let ret1 = _interface_settings.get_string(_SETTINGS_KEY1);
   let ret2 = _interface_settings.get_string(_SETTINGS_KEY2);
   if (ret2 == null) {
-    //~ ret1 = get_terminal();
     ret2 = '-e';
   }
-  //return [ret1, ret2];
   return " " + ret2 + " ";
 } // End of get_default_terminal_separator
 
@@ -321,11 +322,18 @@ function get_pkg_to_install() {
   let distro = get_distro();
   var pkgs = [];
   for (let d of DEPENDENCIES[distro]) {
-    let isInstalled = false;
-    if (d[0] != "" && GLib.find_program_in_path(d[0])) {
+    var isInstalled = false;
+    let executables = Array.isArray(d[0]) ? d[0] : [d[0]];
+    var find_program_in_path;
+    if (Cinnamon.find_program_in_path) {
+      find_program_in_path = (p, s) => Cinnamon.find_program_in_path(p, () => {});
+    } else {
+      find_program_in_path = (p, s) => GLib.find_program_in_path(p);
+    }
+    if (executables.some(e => e.length > 0 && find_program_in_path(e, null))) {
       isInstalled = true;
     } else {
-      if (d[1] != "" && Gio.file_new_for_path(d[1]).query_exists(null)) {
+      if (d[1].length > 0 && Gio.file_new_for_path(d[1]).query_exists(null)) {
         isInstalled = true;
       }
     }
@@ -363,9 +371,9 @@ Dependencies.prototype = {
       Gio.file_new_for_path("/usr/share/fonts/gdouros-symbola/Symbola.ttf").query_exists(null) ||
       Gio.file_new_for_path("/usr/share/fonts/truetype/Symbola.ttf").query_exists(null) ||
       Gio.file_new_for_path("/usr/share/fonts/ttf-ancient-fonts/Symbola_hint.ttf").query_exists(null) ||
-      Gio.file_new_for_path("%s/.local/share/fonts/Symbola_Hinted.ttf".format(HOME_DIR)).query_exists(null) ||
-      Gio.file_new_for_path("%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR)).query_exists(null) ||
-      Gio.file_new_for_path("%s/.local/share/fonts/Symbola.otf".format(HOME_DIR)).query_exists(null)
+      Gio.file_new_for_path("%s/fonts/Symbola_Hinted.ttf".format(USER_DATA_DIR)).query_exists(null) ||
+      Gio.file_new_for_path("%s/fonts/Symbola.ttf".format(USER_DATA_DIR)).query_exists(null) ||
+      Gio.file_new_for_path("%s/fonts/Symbola.otf".format(USER_DATA_DIR)).query_exists(null)
     )
     if (!_fonts_installed && (isArchLinux() || isGentoo())) {
       Util.spawnCommandLineAsync("/bin/sh -c \"%s/install_symbola_on_Arch.sh\"".format(SCRIPTS_DIR), null, null);
@@ -417,6 +425,7 @@ Dependencies.prototype = {
       let _and = " \\\\&\\\\& ";
       if (_apt_update.length === 0)
         _and = "";
+      //~ LANG=C pkcon -p search name xenity zenity yad | grep Installed | head -n 1 | awk '{print $1}'
       let _apt_install = "%s %s".format(_install, _pkg_to_install.join(" "));
       //var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : _isDebian ? "apt install libnotify-bin fonts-symbola" : "sudo apt install libnotify-bin fonts-symbola";
       let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");

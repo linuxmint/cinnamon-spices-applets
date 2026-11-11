@@ -93,7 +93,7 @@ function spawnCommandAsyncAndGetPid(command, callback = null) {
 /**
  * Class LoggerTemp
  */
-class LoggerTemp {
+var LoggerTemp = class LoggerTemp {
   constructor() {
     this.previous_values = {};
   }
@@ -120,7 +120,7 @@ class LoggerTemp {
 /**
  * Class LoggerFan
  */
-class LoggerFan {
+var LoggerFan = class LoggerFan {
   constructor() {
     this.previous_values = {};
   }
@@ -144,7 +144,7 @@ class LoggerFan {
 /**
  * Class LoggerVoltage
  */
-class LoggerVoltage {
+var LoggerVoltage = class LoggerVoltage {
   constructor() {
     this.previous_values = {};
   }
@@ -173,7 +173,7 @@ class LoggerVoltage {
 /**
  * Class LoggerIntrusion
  */
-class LoggerIntrusion {
+var LoggerIntrusion = class LoggerIntrusion {
   constructor() {
     this.previous_values = {};
   }
@@ -196,7 +196,7 @@ class LoggerIntrusion {
 /**
  * Class SensorsApplet
  */
-class SensorsApplet extends Applet.Applet {
+var SensorsApplet = class SensorsApplet extends Applet.Applet {
 
   constructor(metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
