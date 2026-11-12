@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 15:55-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: json-strings.js:1
+msgid "General"
+msgstr ""
+
+#: json-strings.js:2
+msgid "Configuracion de CPU"
+msgstr ""
+
+#: json-strings.js:3
+msgid "Configuracion de GPU"
+msgstr ""
+
+#: json-strings.js:4
+msgid "Configuracion de RAM"
+msgstr ""
+
+#: json-strings.js:5
+msgid "Configuracion de SWAP"
+msgstr ""
+
+#: json-strings.js:6
+msgid "info"
+msgstr ""
+
+#: json-strings.js:7
+msgid "Informacion del applet"
+msgstr ""
+
+#: json-strings.js:8
+msgid "Configuracion general"
+msgstr ""
+
+#: json-strings.js:9
+msgid "Intervalo de actualizacion"
+msgstr ""
+
+#: json-strings.js:10
+msgid ""
+"Este applet esta aun en formato beta 2.0-beta, la compatibilidad para "
+"mostrar el uso de GPU intel e Nvidia(no funcional con Nvidia) aun es "
+"inconcluso e incompleto si quiere ver el codigo fuente valla a mi github \n"
+"\n"
+"https://github.com/RyioTheRock/applet-monitor-de-sistema"
+msgstr ""
+
+#: json-strings.js:11
+msgid "Mostrar uso del CPU"
+msgstr ""
+
+#: json-strings.js:12
+msgid "Cambiar color del texto de CPU"
+msgstr ""
+
+#: json-strings.js:13
+msgid "Cambiar tamaño del texto de CPU"
+msgstr ""
+
+#: json-strings.js:14
+msgid "Mostrar uso del GPU"
+msgstr ""
+
+#: json-strings.js:15
+msgid "Cambiar color del texto de GPU"
+msgstr ""
+
+#: json-strings.js:16
+msgid "Cambiar tamaño del texto de GPU"
+msgstr ""
+
+#: json-strings.js:17
+msgid "Mostrar uso de la VRAM"
+msgstr ""
+
+#: json-strings.js:18
+msgid "Cambiar color del texto de VRAM"
+msgstr ""
+
+#: json-strings.js:19
+msgid "Cambiar tamaño del texto de VRAM"
+msgstr ""
+
+#: json-strings.js:20
+msgid "Mostrar uso de la RAM"
+msgstr ""
+
+#: json-strings.js:21
+msgid "Mostrar uso de SWAP"
+msgstr ""
+
+#: json-strings.js:22
+msgid "Cambiar color del texto de RAM"
+msgstr ""
+
+#: json-strings.js:23
+msgid "Cambiar tamaño del fuente de RAM"
+msgstr ""
+
+#: json-strings.js:24
+msgid "Cambiar color del texto de SWAP"
+msgstr ""
+
+#: json-strings.js:25
+msgid "Cambiar tamaño de SWAP"
+msgstr ""
