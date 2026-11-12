@@ -16,8 +16,6 @@ const Clutter = imports.gi.Clutter;
 const Cairo = imports.cairo;
 const Pango = imports.gi.Pango;
 const Cinnamon = imports.gi.Cinnamon;
-let UPower = null;
-try { UPower = imports.gi.UPowerGlib; } catch (e) { /* no upower: device batteries show n/a */ }
 
 const Gettext = imports.gettext;
 
@@ -772,18 +770,41 @@ class PcPulse extends Applet.Applet {
         return c;
     }
 
+    // Peripheral batteries from the UPower service, read over D-Bus asynchronously
+    // every 30 s. Returns the last completed list ([] until the first answer).
     _upDevices() {
-        if (!UPower) return null;
-        if (this._cache.up) return this._cache.up;
-        try {
-            if (!this._upClient) this._upClient = UPower.Client.new();
-            let devs = (this._upClient.get_devices() || []).filter((d) =>
-                !d.power_supply && d.is_present !== false && d.kind !== 1 && d.kind !== 2 && d.model);
-            return (this._cache.up = devs);
-        } catch (e) {
-            global.logError("pc-pulse upower: " + e);
-            return (this._cache.up = []);
+        let U = this._up || (this._up = { list: [], at: 0, busy: false });
+        if (!U.busy && (U.at === 0 || this._now - U.at >= 30)) {
+            U.busy = true;
+            U.at = this._now;
+            this._upFetch((list) => { U.list = list; U.busy = false; });
         }
+        return U.list.filter((d) => !d.power_supply && d.is_present !== false && d.kind !== 1 && d.kind !== 2 && d.model);
+    }
+
+    _upFetch(done) {
+        const NAME = "org.freedesktop.UPower";
+        let bus;
+        try { bus = Gio.DBus.system; } catch (e) { done([]); return; }
+        bus.call(NAME, "/org/freedesktop/UPower", NAME, "EnumerateDevices", null, new GLib.VariantType("(ao)"),
+            Gio.DBusCallFlags.NONE, 5000, null, (conn, res) => {
+                let paths;
+                try { paths = conn.call_finish(res).deepUnpack()[0]; } catch (e) { done([]); return; }
+                if (!paths.length) { done([]); return; }
+                let list = [], left = paths.length;
+                for (let path of paths) {
+                    conn.call(NAME, path, "org.freedesktop.DBus.Properties", "GetAll",
+                        new GLib.Variant("(s)", [NAME + ".Device"]), new GLib.VariantType("(a{sv})"),
+                        Gio.DBusCallFlags.NONE, 5000, null, (c, r) => {
+                            try {
+                                let p = c.call_finish(r).recursiveUnpack()[0];
+                                list.push({ model: p.Model, kind: p.Type, percentage: p.Percentage, battery_level: p.BatteryLevel,
+                                    state: p.State, power_supply: p.PowerSupply, native_path: p.NativePath, is_present: p.IsPresent });
+                            } catch (e) { /* skip this device */ }
+                            if (--left === 0) done(list);
+                        });
+                }
+            });
     }
 
     _logiList() {
@@ -952,7 +973,7 @@ class PcPulse extends Applet.Applet {
                 detail: model + ": " + p + "% " + (cap === null ? "(level only) " : "") + status.toLowerCase() };
         }
         case "device_bat": {
-            let devs = this._upDevices() || [];
+            let devs = this._upDevices();
             let logi = this._logiList();
             let want = (w.arg || "").trim().toLowerCase();
             let match = (name) => !want || (name || "").toLowerCase().indexOf(want) >= 0;
