@@ -1,0 +1,324 @@
+# Easy Effects Preset Selector
+# Copyright (C) 2026 rasmarc
+# SPDX-License-Identifier: GPL-3.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: easy-effects-selector@rasmarc 1.5.11\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-11-04 12:00+0000\n"
+"PO-Revision-Date: 2026-11-04 12:00+0000\n"
+"Last-Translator: rasmarc\n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#, python-format
+msgid "%s (no longer available)"
+msgstr "%s (artık kullanılamıyor)"
+
+msgid "A blue dot shows a matching preset at its assigned position. Mouse-wheel selection can be enabled or disabled under Controls. Nothing is loaded at startup."
+msgstr "Mavi nokta, atanan konumda eşleşen bir ön ayarı gösterir. Fare tekerleğiyle seçim, Denetimler bölümünden açılıp kapatılabilir. Başlangıçta hiçbir şey yüklenmez."
+
+msgid "A custom PipeWire configuration is in use; it was left unchanged."
+msgstr "Özel bir PipeWire yapılandırması kullanılıyor; değiştirilmedi."
+
+msgid "A physical default output device could not be found."
+msgstr "Fiziksel bir varsayılan çıkış aygıtı bulunamadı."
+
+#, python-format
+msgid "A required command is missing: %s"
+msgstr "Gerekli bir komut eksik: %s"
+
+msgid "A routing file is a symbolic link; it was left unchanged."
+msgstr "Bir yönlendirme dosyası sembolik bağlantı; değiştirilmedi."
+
+msgid "An existing routing configuration was left unchanged."
+msgstr "Var olan bir yönlendirme yapılandırması değiştirilmedi."
+
+msgid "Another configuration already defines the Easy Effects route."
+msgstr "Başka bir yapılandırma Easy Effects yönlendirmesini zaten tanımlıyor."
+
+#, javascript-format
+msgid "Autostart could not be changed: %s"
+msgstr "Otomatik başlatma değiştirilemedi: %s"
+
+msgid "Bottom"
+msgstr "Alt"
+
+#, javascript-format
+msgid "Bypass could not be changed: %s"
+msgstr "Baypas değiştirilemedi: %s"
+
+#, javascript-format
+msgid "Bypass could not be restored: %s"
+msgstr "Baypas geri yüklenemedi: %s"
+
+#, javascript-format
+msgid "Bypass preservation could not be changed.\n%s"
+msgstr "Baypası koruma ayarı değiştirilemedi.\n%s"
+
+msgid "Bypass status"
+msgstr "Baypas durumu"
+
+msgid "Changed settings"
+msgstr "Değişen ayarlar"
+
+msgid "Comparison errors"
+msgstr "Karşılaştırma hataları"
+
+#, javascript-format
+msgid "Comparison unavailable: %s"
+msgstr "Karşılaştırma kullanılamıyor: %s"
+
+msgid "Controls"
+msgstr "Denetimler"
+
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+msgid "Easy Effects Preset Selector"
+msgstr "Easy Effects Preset Selector"
+
+msgid "Easy Effects did not load the output preset. Please check the preset file."
+msgstr "Easy Effects çıkış ön ayarını yüklemedi. Ön ayar dosyasını denetleyin."
+
+msgid "Effect settings changed"
+msgstr "Efekt ayarları değişti"
+
+msgid "Global bypass enabled"
+msgstr "Genel baypas açık"
+
+msgid "Global bypass is unavailable"
+msgstr "Genel baypas kullanılamıyor"
+
+msgid "Global bypass: off"
+msgstr "Genel baypas: kapalı"
+
+msgid "Global bypass: on"
+msgstr "Genel baypas: açık"
+
+msgid "Incomplete structure in the assigned preset."
+msgstr "Atanan ön ayarın yapısı eksik."
+
+msgid "Invalid effect name in the assigned preset."
+msgstr "Atanan ön ayarda geçersiz efekt adı."
+
+msgid "Invalid structure in the assigned preset."
+msgstr "Atanan ön ayarın yapısı geçersiz."
+
+msgid "Keep bypass when changing output devices"
+msgstr "Çıkış aygıtı değiştirildiğinde baypası koru"
+
+msgid "Keep menu open after preset selection when bypass is active"
+msgstr "Baypas açıkken ön ayar seçiminden sonra menüyü açık tut"
+
+msgid "Launch Easy Effects from the menu"
+msgstr "Easy Effects’i menüden başlat"
+
+msgid "Launch Service at System Startup"
+msgstr "Sistem başlangıcında hizmeti başlat"
+
+msgid "Loading preset…"
+msgstr "Ön ayar yükleniyor…"
+
+msgid "Middle"
+msgstr "Orta"
+
+msgid "No output presets saved"
+msgstr "Kayıtlı çıkış ön ayarı yok"
+
+msgid "No preset"
+msgstr "Ön ayar yok"
+
+msgid "PipeWire and WirePlumber must be running."
+msgstr "PipeWire ve WirePlumber çalışıyor olmalı."
+
+msgid "Preset Selector – Fixed output"
+msgstr "Preset Selector – Sabit çıkış"
+
+msgid "Preset Selector – Forwarding"
+msgstr "Preset Selector – Yönlendirme"
+
+msgid "Preset at bottom"
+msgstr "Alttaki ön ayar"
+
+msgid "Preset at middle"
+msgstr "Ortadaki ön ayar"
+
+msgid "Preset at top"
+msgstr "Üstteki ön ayar"
+
+msgid "Preset name"
+msgstr "Ön ayar adı"
+
+#, javascript-format
+msgid "Preset “%s” could not be loaded.\n%s"
+msgstr "“%s” ön ayarı yüklenemedi.\n%s"
+
+msgid "Preset:"
+msgstr "Ön ayar:"
+
+#, javascript-format
+msgid "Preset: %s"
+msgstr "Ön ayar: %s"
+
+msgid "Presets could not be read"
+msgstr "Ön ayarlar okunamadı"
+
+msgid "Quick selection"
+msgstr "Hızlı seçim"
+
+#, javascript-format
+msgid "Quick selection: %s"
+msgstr "Hızlı seçim: %s"
+
+msgid "Quick-selection position"
+msgstr "Hızlı seçim konumu"
+
+msgid "Quit Easy Effects when its window closes. This setting is synchronized in both directions with the Easy Effects settings window."
+msgstr "Penceresi kapatıldığında Easy Effects’ten çık. Bu ayar, Easy Effects ayarlar penceresiyle iki yönde eşitlenir."
+
+msgid "Recommended: <b>disable</b> this so the service keeps running when the application window is closed."
+msgstr "Uygulama penceresi kapalıyken hizmetin çalışmaya devam etmesi için bunu <b>kapatmanız</b> önerilir."
+
+msgid "Recommended: <b>enable</b> this so the service is ready in the background when you log in."
+msgstr "Oturum açtığınızda hizmetin arka planda hazır olması için bunu <b>açmanız</b> önerilir."
+
+msgid "Select Easy Effects 7.2.3 output presets from the panel"
+msgstr "Easy Effects 7.2.3 çıkış ön ayarlarını panelden seçin"
+
+#, python-format
+msgid "Setup failed: %s\nRecovery also failed: %s"
+msgstr "Kurulum başarısız: %s\nKurtarma da başarısız: %s"
+
+#, python-format
+msgid "Setup failed; the previous configuration was restored: %s"
+msgstr "Kurulum başarısız; önceki yapılandırma geri yüklendi: %s"
+
+msgid "Show tooltips"
+msgstr "İpuçlarını göster"
+
+msgid "Shutdown on Window Closing"
+msgstr "Pencere kapatıldığında çık"
+
+msgid "Start Easy Effects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
+msgstr "Oturum açıldığında Easy Effects’i arka plan hizmeti olarak başlat. Ayarlar penceresi zaten açıksa, dışarıdan yapılan otomatik başlatma değişikliklerini görmek için pencereyi yeniden açın."
+
+msgid "Switch quick-selection presets with mouse wheel"
+msgstr "Hızlı seçim ön ayarlarını fare tekerleğiyle değiştir"
+
+msgid "The Cinnamon applet settings could not be initialized."
+msgstr "Cinnamon uygulamacığının ayarları başlatılamadı."
+
+msgid "The Easy Effects autostart path is not a regular file."
+msgstr "Easy Effects otomatik başlatma yolu normal bir dosya değil."
+
+msgid "The Easy Effects bypass setting could not be changed."
+msgstr "Easy Effects baypas ayarı değiştirilemedi."
+
+msgid "The Easy Effects bypass setting is not writable."
+msgstr "Easy Effects baypas ayarı yazılabilir değil."
+
+msgid "The Easy Effects command failed."
+msgstr "Easy Effects komutu başarısız oldu."
+
+msgid "The Easy Effects device settings are not writable."
+msgstr "Easy Effects aygıt ayarları yazılabilir değil."
+
+msgid "The Easy Effects device settings no longer match the bypass-preserving route. Enable this option again to restore it."
+msgstr "Easy Effects aygıt ayarları artık baypası koruyan yönlendirmeyle eşleşmiyor. Geri yüklemek için bu seçeneği yeniden açın."
+
+#, javascript-format
+msgid "The Easy Effects effect parameter is missing: %s"
+msgstr "Easy Effects efekt parametresi eksik: %s"
+
+msgid "The Easy Effects output settings are not available."
+msgstr "Easy Effects çıkış ayarları kullanılamıyor."
+
+msgid "The Easy Effects setting could not be saved."
+msgstr "Easy Effects ayarı kaydedilemedi."
+
+msgid "The Easy Effects setting is not available."
+msgstr "Easy Effects ayarı kullanılamıyor."
+
+#, javascript-format
+msgid "The Easy Effects settings schema is missing: %s"
+msgstr "Easy Effects ayar şeması eksik: %s"
+
+msgid "The Easy Effects settings schema was not found."
+msgstr "Easy Effects ayar şeması bulunamadı."
+
+#, javascript-format
+msgid "The assigned preset cannot be read: %s"
+msgstr "Atanan ön ayar okunamıyor: %s"
+
+msgid "The assigned preset could not be read."
+msgstr "Atanan ön ayar okunamadı."
+
+msgid "The assigned preset does not contain a valid output effect list."
+msgstr "Atanan ön ayar geçerli bir çıkış efektleri listesi içermiyor."
+
+msgid "The audio command failed."
+msgstr "Ses komutu başarısız oldu."
+
+msgid "The audio service did not become ready in time."
+msgstr "Ses hizmeti zamanında hazır olmadı."
+
+msgid "The autostart directory could not be created."
+msgstr "Otomatik başlatma dizini oluşturulamadı."
+
+msgid "The bypass state did not settle after restarting Easy Effects."
+msgstr "Easy Effects yeniden başlatıldıktan sonra baypas durumu kararlı hale gelmedi."
+
+#, javascript-format
+msgid "The effect configuration is missing from the assigned preset: %s"
+msgstr "Atanan ön ayarda efekt yapılandırması eksik: %s"
+
+msgid "The effect parameter map could not be read."
+msgstr "Efekt parametresi eşlemesi okunamadı."
+
+msgid "The forwarding application could not be excluded."
+msgstr "Yönlendirme uygulaması dışlanamadı."
+
+msgid "The managed routing file is missing or has been replaced."
+msgstr "Uygulamacığın yönettiği yönlendirme dosyası eksik veya değiştirilmiş."
+
+msgid "The original preset name could not be restored."
+msgstr "Ön ayarın özgün adı geri yüklenemedi."
+
+msgid "The preset file was moved or deleted."
+msgstr "Ön ayar dosyası taşınmış veya silinmiş."
+
+msgid "The routing configuration was changed outside the applet; it was left unchanged."
+msgstr "Yönlendirme yapılandırması uygulamacık dışında değiştirilmiş; olduğu gibi bırakıldı."
+
+msgid "The saved routing information is invalid."
+msgstr "Kayıtlı yönlendirme bilgileri geçersiz."
+
+msgid "This routing option requires the native Easy Effects 7.2.3 package."
+msgstr "Bu yönlendirme seçeneği Easy Effects 7.2.3’ün yerel paketini gerektirir."
+
+msgid "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects.\n\n<b>Before removing the applet from the panel or uninstalling it, turn this option off to remove the forwarding route.</b>"
+msgstr "Easy Effects 7’nin genel baypası otomatik olarak kapatmasını önlemek için uygulamacık, sistemde seçilen çıkış aygıtına bir ses yönlendirmesi oluşturur. Easy Effects bunun için giriş dahil sabit bir aygıt seçimi kullanır.\n\nYönlendirme, dışlanan uygulamalar arasında “Preset Selector – Yönlendirme” adıyla görünür. Bu seçeneği açmak veya kapatmak, ses hizmetlerini ve çalışıyorsa Easy Effects’i kısa süreliğine yeniden başlatır.\n\n<b>Uygulamacığı panelden kaldırmadan veya kurulumunu kaldırmadan önce yönlendirmeyi kaldırmak için bu seçeneği kapatın.</b>"
+
+msgid "Toggle bypass in menu"
+msgstr "Menüden baypası aç/kapat"
+
+msgid "Toggle bypass with middle click"
+msgstr "Orta tıklamayla baypası aç/kapat"
+
+msgid "Tooltips"
+msgstr "İpuçları"
+
+msgid "Top"
+msgstr "Üst"
+
+#, javascript-format
+msgid "Unknown Easy Effects effect: %s"
+msgstr "Bilinmeyen Easy Effects efekti: %s"
+
+msgid "Loading presets…"
+msgstr "Ön ayarlar okunuyor…"

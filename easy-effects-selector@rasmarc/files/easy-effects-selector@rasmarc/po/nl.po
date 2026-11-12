@@ -1,0 +1,324 @@
+# Easy Effects Preset Selector
+# Copyright (C) 2026 rasmarc
+# SPDX-License-Identifier: GPL-3.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: easy-effects-selector@rasmarc 1.5.11\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-11-04 12:00+0000\n"
+"PO-Revision-Date: 2026-11-04 12:00+0000\n"
+"Last-Translator: rasmarc\n"
+"Language-Team: Dutch\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%s (no longer available)"
+msgstr "%s (niet meer beschikbaar)"
+
+msgid "A blue dot shows a matching preset at its assigned position. Mouse-wheel selection can be enabled or disabled under Controls. Nothing is loaded at startup."
+msgstr "Een blauwe stip geeft een overeenkomende voorinstelling op de toegewezen positie aan. Selectie met het muiswiel kan onder Bediening worden in- of uitgeschakeld. Bij het starten wordt niets geladen."
+
+msgid "A custom PipeWire configuration is in use; it was left unchanged."
+msgstr "Er wordt een aangepaste PipeWire-configuratie gebruikt; deze is niet gewijzigd."
+
+msgid "A physical default output device could not be found."
+msgstr "Er is geen fysiek standaarduitvoerapparaat gevonden."
+
+#, python-format
+msgid "A required command is missing: %s"
+msgstr "Een vereiste opdracht ontbreekt: %s"
+
+msgid "A routing file is a symbolic link; it was left unchanged."
+msgstr "Een routeringsbestand is een symbolische koppeling; het is niet gewijzigd."
+
+msgid "An existing routing configuration was left unchanged."
+msgstr "Een bestaande routeringsconfiguratie is niet gewijzigd."
+
+msgid "Another configuration already defines the Easy Effects route."
+msgstr "Een andere configuratie bepaalt de Easy Effects-routering al."
+
+#, javascript-format
+msgid "Autostart could not be changed: %s"
+msgstr "Automatisch starten kon niet worden gewijzigd: %s"
+
+msgid "Bottom"
+msgstr "Onder"
+
+#, javascript-format
+msgid "Bypass could not be changed: %s"
+msgstr "Bypass kon niet worden gewijzigd: %s"
+
+#, javascript-format
+msgid "Bypass could not be restored: %s"
+msgstr "Bypass kon niet worden hersteld: %s"
+
+#, javascript-format
+msgid "Bypass preservation could not be changed.\n%s"
+msgstr "Het behouden van bypass kon niet worden gewijzigd.\n%s"
+
+msgid "Bypass status"
+msgstr "Bypassstatus"
+
+msgid "Changed settings"
+msgstr "Gewijzigde instellingen"
+
+msgid "Comparison errors"
+msgstr "Vergelijkingsfouten"
+
+#, javascript-format
+msgid "Comparison unavailable: %s"
+msgstr "Vergelijking niet beschikbaar: %s"
+
+msgid "Controls"
+msgstr "Bediening"
+
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+msgid "Easy Effects Preset Selector"
+msgstr "Easy Effects Preset Selector"
+
+msgid "Easy Effects did not load the output preset. Please check the preset file."
+msgstr "Easy Effects heeft de uitvoervoorinstelling niet geladen. Controleer het bestand van de voorinstelling."
+
+msgid "Effect settings changed"
+msgstr "Effectinstellingen gewijzigd"
+
+msgid "Global bypass enabled"
+msgstr "Globale bypass ingeschakeld"
+
+msgid "Global bypass is unavailable"
+msgstr "Globale bypass is niet beschikbaar"
+
+msgid "Global bypass: off"
+msgstr "Globale bypass: uit"
+
+msgid "Global bypass: on"
+msgstr "Globale bypass: aan"
+
+msgid "Incomplete structure in the assigned preset."
+msgstr "Onvolledige structuur in de toegewezen voorinstelling."
+
+msgid "Invalid effect name in the assigned preset."
+msgstr "Ongeldige effectnaam in de toegewezen voorinstelling."
+
+msgid "Invalid structure in the assigned preset."
+msgstr "Ongeldige structuur in de toegewezen voorinstelling."
+
+msgid "Keep bypass when changing output devices"
+msgstr "Bypass behouden bij wisselen van uitvoerapparaat"
+
+msgid "Keep menu open after preset selection when bypass is active"
+msgstr "Menu na selectie van een voorinstelling openhouden als bypass actief is"
+
+msgid "Launch Easy Effects from the menu"
+msgstr "Easy Effects starten vanuit het menu"
+
+msgid "Launch Service at System Startup"
+msgstr "Dienst starten bij systeemstart"
+
+msgid "Loading preset…"
+msgstr "Voorinstelling laden…"
+
+msgid "Middle"
+msgstr "Midden"
+
+msgid "No output presets saved"
+msgstr "Geen uitvoervoorinstellingen opgeslagen"
+
+msgid "No preset"
+msgstr "Geen voorinstelling"
+
+msgid "PipeWire and WirePlumber must be running."
+msgstr "PipeWire en WirePlumber moeten actief zijn."
+
+msgid "Preset Selector – Fixed output"
+msgstr "Preset Selector – Vaste uitvoer"
+
+msgid "Preset Selector – Forwarding"
+msgstr "Preset Selector – Doorsturing"
+
+msgid "Preset at bottom"
+msgstr "Voorinstelling onder"
+
+msgid "Preset at middle"
+msgstr "Voorinstelling midden"
+
+msgid "Preset at top"
+msgstr "Voorinstelling boven"
+
+msgid "Preset name"
+msgstr "Naam van voorinstelling"
+
+#, javascript-format
+msgid "Preset “%s” could not be loaded.\n%s"
+msgstr "Voorinstelling ‘%s’ kon niet worden geladen.\n%s"
+
+msgid "Preset:"
+msgstr "Voorinstelling:"
+
+#, javascript-format
+msgid "Preset: %s"
+msgstr "Voorinstelling: %s"
+
+msgid "Presets could not be read"
+msgstr "Voorinstellingen konden niet worden gelezen"
+
+msgid "Quick selection"
+msgstr "Snelkeuze"
+
+#, javascript-format
+msgid "Quick selection: %s"
+msgstr "Snelkeuze: %s"
+
+msgid "Quick-selection position"
+msgstr "Positie in snelkeuze"
+
+msgid "Quit Easy Effects when its window closes. This setting is synchronized in both directions with the Easy Effects settings window."
+msgstr "Easy Effects afsluiten wanneer het venster wordt gesloten. Deze instelling wordt in beide richtingen gesynchroniseerd met het instellingenvenster van Easy Effects."
+
+msgid "Recommended: <b>disable</b> this so the service keeps running when the application window is closed."
+msgstr "Aanbevolen: <b>uitschakelen</b> zodat de dienst blijft draaien als het toepassingsvenster is gesloten."
+
+msgid "Recommended: <b>enable</b> this so the service is ready in the background when you log in."
+msgstr "Aanbevolen: <b>inschakelen</b> zodat de dienst bij het aanmelden op de achtergrond klaarstaat."
+
+msgid "Select Easy Effects 7.2.3 output presets from the panel"
+msgstr "Uitvoervoorinstellingen van Easy Effects 7.2.3 selecteren vanuit het paneel"
+
+#, python-format
+msgid "Setup failed: %s\nRecovery also failed: %s"
+msgstr "Instellen mislukt: %s\nHerstel is ook mislukt: %s"
+
+#, python-format
+msgid "Setup failed; the previous configuration was restored: %s"
+msgstr "Instellen mislukt; de vorige configuratie is hersteld: %s"
+
+msgid "Show tooltips"
+msgstr "Tooltips tonen"
+
+msgid "Shutdown on Window Closing"
+msgstr "Afsluiten bij sluiten van venster"
+
+msgid "Start Easy Effects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
+msgstr "Easy Effects als achtergronddienst starten bij het aanmelden. Als het instellingenvenster al open is, open het opnieuw om externe wijzigingen aan automatisch starten te zien."
+
+msgid "Switch quick-selection presets with mouse wheel"
+msgstr "Snelkeuzevoorinstellingen wisselen met het muiswiel"
+
+msgid "The Cinnamon applet settings could not be initialized."
+msgstr "De instellingen van de Cinnamon-applet konden niet worden geïnitialiseerd."
+
+msgid "The Easy Effects autostart path is not a regular file."
+msgstr "Het automatisch-startenpad van Easy Effects is geen gewoon bestand."
+
+msgid "The Easy Effects bypass setting could not be changed."
+msgstr "De bypassinstelling van Easy Effects kon niet worden gewijzigd."
+
+msgid "The Easy Effects bypass setting is not writable."
+msgstr "De bypassinstelling van Easy Effects is niet beschrijfbaar."
+
+msgid "The Easy Effects command failed."
+msgstr "De opdracht van Easy Effects is mislukt."
+
+msgid "The Easy Effects device settings are not writable."
+msgstr "De apparaatinstellingen van Easy Effects zijn niet beschrijfbaar."
+
+msgid "The Easy Effects device settings no longer match the bypass-preserving route. Enable this option again to restore it."
+msgstr "De apparaatinstellingen van Easy Effects komen niet meer overeen met de routering die bypass behoudt. Schakel deze optie opnieuw in om dit te herstellen."
+
+#, javascript-format
+msgid "The Easy Effects effect parameter is missing: %s"
+msgstr "Een effectparameter van Easy Effects ontbreekt: %s"
+
+msgid "The Easy Effects output settings are not available."
+msgstr "De uitvoerinstellingen van Easy Effects zijn niet beschikbaar."
+
+msgid "The Easy Effects setting could not be saved."
+msgstr "De instelling van Easy Effects kon niet worden opgeslagen."
+
+msgid "The Easy Effects setting is not available."
+msgstr "De instelling van Easy Effects is niet beschikbaar."
+
+#, javascript-format
+msgid "The Easy Effects settings schema is missing: %s"
+msgstr "Een instellingenschema van Easy Effects ontbreekt: %s"
+
+msgid "The Easy Effects settings schema was not found."
+msgstr "Het instellingenschema van Easy Effects is niet gevonden."
+
+#, javascript-format
+msgid "The assigned preset cannot be read: %s"
+msgstr "De toegewezen voorinstelling is niet leesbaar: %s"
+
+msgid "The assigned preset could not be read."
+msgstr "De toegewezen voorinstelling kon niet worden gelezen."
+
+msgid "The assigned preset does not contain a valid output effect list."
+msgstr "De toegewezen voorinstelling bevat geen geldige lijst met uitvoereffecten."
+
+msgid "The audio command failed."
+msgstr "De audio-opdracht is mislukt."
+
+msgid "The audio service did not become ready in time."
+msgstr "De audiodienst was niet op tijd gereed."
+
+msgid "The autostart directory could not be created."
+msgstr "De map voor automatisch starten kon niet worden aangemaakt."
+
+msgid "The bypass state did not settle after restarting Easy Effects."
+msgstr "De bypassstatus is niet gestabiliseerd na het herstarten van Easy Effects."
+
+#, javascript-format
+msgid "The effect configuration is missing from the assigned preset: %s"
+msgstr "De effectconfiguratie ontbreekt in de toegewezen voorinstelling: %s"
+
+msgid "The effect parameter map could not be read."
+msgstr "De koppelingstabel met effectparameters kon niet worden gelezen."
+
+msgid "The forwarding application could not be excluded."
+msgstr "De doorstuurtoepassing kon niet worden uitgesloten."
+
+msgid "The managed routing file is missing or has been replaced."
+msgstr "Het door de applet beheerde routeringsbestand ontbreekt of is vervangen."
+
+msgid "The original preset name could not be restored."
+msgstr "De oorspronkelijke naam van de voorinstelling kon niet worden hersteld."
+
+msgid "The preset file was moved or deleted."
+msgstr "Het bestand van de voorinstelling is verplaatst of verwijderd."
+
+msgid "The routing configuration was changed outside the applet; it was left unchanged."
+msgstr "De routeringsconfiguratie is buiten de applet gewijzigd; deze is niet aangepast."
+
+msgid "The saved routing information is invalid."
+msgstr "De opgeslagen routeringsinformatie is ongeldig."
+
+msgid "This routing option requires the native Easy Effects 7.2.3 package."
+msgstr "Deze routeringsoptie vereist het native pakket van Easy Effects 7.2.3."
+
+msgid "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects.\n\n<b>Before removing the applet from the panel or uninstalling it, turn this option off to remove the forwarding route.</b>"
+msgstr "Om te voorkomen dat Easy Effects 7 de globale bypass automatisch uitschakelt, stelt de applet een audiodoorsturing in naar het uitvoerapparaat dat in het systeem is geselecteerd. Easy Effects gebruikt hiervoor een vaste apparaatkeuze, ook voor de invoer.\n\nDe doorsturing verschijnt als ‘Preset Selector – Doorsturing’ bij de uitgesloten toepassingen. Bij het in- of uitschakelen van deze optie worden de audiodiensten en een draaiende Easy Effects kort herstart.\n\n<b>Schakel deze optie uit voordat u de applet uit het paneel verwijdert of de-installeert, zodat de doorsturing wordt verwijderd.</b>"
+
+msgid "Toggle bypass in menu"
+msgstr "Bypass omschakelen in het menu"
+
+msgid "Toggle bypass with middle click"
+msgstr "Bypass omschakelen met middelste muisknop"
+
+msgid "Tooltips"
+msgstr "Tooltips"
+
+msgid "Top"
+msgstr "Boven"
+
+#, javascript-format
+msgid "Unknown Easy Effects effect: %s"
+msgstr "Onbekend effect van Easy Effects: %s"
+
+msgid "Loading presets…"
+msgstr "Voorinstellingen inlezen…"
