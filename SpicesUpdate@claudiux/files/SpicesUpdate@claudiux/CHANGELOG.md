@@ -1,3 +1,8 @@
+### v7.12.1~20261112
+  * Ready for Cinnamon 6.8.
+  * Better get default screen.
+  * Fixes [#9263](https://github.com/linuxmint/cinnamon-spices-applets/issues/9263).
+
 ### v7.12.0~20260629
   * From now on, when you click the “Themes” icon, the settings window will open correctly.
   * Fixes an issue in httpLib.js.
