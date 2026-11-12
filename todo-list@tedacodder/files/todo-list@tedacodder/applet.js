@@ -23,11 +23,11 @@ const Gettext = imports.gettext;
 const UUID = 'todo-list@tedacodder';
 
 // Translations: the .po files live in the applet's locale folder.
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + '/locale');
 function _(text) {
     return Gettext.dgettext(UUID, text);
 }
-const APPLET_DIR = GLib.get_home_dir() + '/.local/share/cinnamon/applets/' + UUID;
+const APPLET_DIR = GLib.get_user_data_dir() + '/cinnamon/applets/' + UUID;
 
 // Themes. The window's colours come from stylesheet.css, where each theme has
 // its own block. The values here are used for the badge and the daily edge.
@@ -444,23 +444,22 @@ function settingsPath() {
 }
 
 // The saved theme, or neon if nothing is saved or the saved name is unknown.
-function loadTheme() {
-    try {
-        const text = readText(settingsPath());
-        if (text === null) return 'neon';
-        const name = JSON.parse(text).theme;
-        return has(THEMES, name) ? name : 'neon';
-    } catch (e) {
-        return 'neon';
-    }
+function loadThemeAsync(callback) {
+    readTextAsync(settingsPath(), (text) => {
+        let name = 'neon';
+        try {
+            if (text !== null && has(THEMES, JSON.parse(text).theme)) name = JSON.parse(text).theme;
+        } catch (e) {
+            name = 'neon';
+        }
+        callback(name);
+    });
 }
 
-function saveTheme(name) {
-    try {
-        writeText(settingsPath(), JSON.stringify({ theme: name }, null, 2) + '\n');
-    } catch (e) {
-        global.log('[todo-list] could not save the theme: ' + e);
-    }
+function saveThemeAsync(name) {
+    writeTextAsync(settingsPath(), JSON.stringify({ theme: name }, null, 2) + '\n', (error) => {
+        if (error) global.log('[todo-list] could not save the theme: ' + error);
+    });
 }
 
 function freshState() {
@@ -498,32 +497,50 @@ function oldStorePath() {
     return GLib.build_filenamev([GLib.get_user_state_dir(), 'omarchy', 'todos.json']);
 }
 
-// Returns the file text, or null when the file does not exist.
-function readText(path) {
-    const file = Gio.File.new_for_path(path);
-    if (!file.query_exists(null)) return null;
-    const result = file.load_contents(null);
-    if (!result[0]) return null;
-    return ByteArray.toString(result[1]);
+// Reads a file without blocking the panel. The callback gets (text, error).
+// text is null when the file does not exist. error is set when the file exists
+// but cannot be read.
+function readTextAsync(path, callback) {
+    Gio.File.new_for_path(path).load_contents_async(null, (file, res) => {
+        try {
+            const result = file.load_contents_finish(res);
+            callback(ByteArray.toString(result[1]), null);
+        } catch (e) {
+            if (e.matches && e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) callback(null, null);
+            else callback(null, e);
+        }
+    });
 }
 
-// Writes to a temp file, then renames it over the target, so a crash cannot
-// leave a half-written todos.json.
-function writeText(path, text) {
-    const dir = path.slice(0, path.lastIndexOf('/'));
-    if (GLib.mkdir_with_parents(dir, 0o755) !== 0) throw new Error('cannot create ' + dir);
-    const tmp = path + '.tmp';
-    const tmpFile = Gio.File.new_for_path(tmp);
-    tmpFile.replace_contents(ByteArray.fromString(text), null, false, Gio.FileCreateFlags.NONE, null);
-    tmpFile.move(Gio.File.new_for_path(path), Gio.FileCopyFlags.OVERWRITE, null, null);
+// Writes a file without blocking. Gio replaces the file in one step, so a crash
+// cannot leave half a file. The callback gets an error, or null on success.
+function writeTextAsync(path, text, callback) {
+    GLib.mkdir_with_parents(path.slice(0, path.lastIndexOf('/')), 0o755);
+    Gio.File.new_for_path(path).replace_contents_async(
+        ByteArray.fromString(text), null, false, Gio.FileCreateFlags.NONE, null,
+        (file, res) => {
+            try {
+                file.replace_contents_finish(res);
+                callback(null);
+            } catch (e) {
+                callback(e);
+            }
+        });
 }
 
-function loadStoreSource() {
-    const current = readText(newStorePath());
-    if (current !== null) return { text: current, source: 'new' };
-    const old = readText(oldStorePath());
-    if (old !== null) return { text: old, source: 'old' };
-    return { text: '', source: 'none' };
+// Finds the store on disk, and calls back with { text, source } where source is
+// 'new', 'old' or 'none'. Calls back with { error, source } if a file exists but
+// cannot be read.
+function loadStoreAsync(callback) {
+    readTextAsync(newStorePath(), (text, error) => {
+        if (error) return callback({ error: error, source: 'new' });
+        if (text !== null) return callback({ text: text, source: 'new' });
+        readTextAsync(oldStorePath(), (oldText, oldError) => {
+            if (oldError) return callback({ error: oldError, source: 'old' });
+            if (oldText !== null) return callback({ text: oldText, source: 'old' });
+            callback({ text: '', source: 'none' });
+        });
+    });
 }
 
 // Runs a command and returns its stdout. Kept from the Omarchy-to-Cinnamon
@@ -561,8 +578,10 @@ class TodoListApplet extends Applet.TextIconApplet {
     constructor(orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
         this.state = freshState();
-        this.ui = { query: '', draftPriority: 'medium', expanded: {}, editing: {}, theme: loadTheme() };
+        this.ui = { query: '', draftPriority: 'medium', expanded: {}, editing: {}, theme: 'neon' };
         this._storeInvalid = false;
+        this._dirty = false;
+        this._writing = false;
         this._editEntries = [];
         this._pendingFocus = null;
         this._pendingRowFocus = null;
@@ -577,6 +596,7 @@ class TodoListApplet extends Applet.TextIconApplet {
         this._buildPopup();
         this._registerHotkey();
         this._loadFromDisk();
+        this._loadTheme();
         this._render();
 
         this._timerId = GLib.timeout_add_seconds(
@@ -651,7 +671,7 @@ class TodoListApplet extends Applet.TextIconApplet {
         }
         this.ui.theme = name;
         this._applyTheme();
-        saveTheme(this.ui.theme);
+        saveThemeAsync(this.ui.theme);
         this._log('theme: ' + this.ui.theme);
         return this.ui.theme;
     }
@@ -698,39 +718,63 @@ class TodoListApplet extends Applet.TextIconApplet {
     // ----- store -----
 
     _loadFromDisk() {
-        const found = loadStoreSource();
-        const store = parseStore(found.text);
-        if (!store.valid) {
-            this._storeInvalid = true;
-            this._log('todos.json is not valid JSON; leaving it untouched and not saving');
-            return;
-        }
-        this.state = {
-            tasks: store.tasks,
-            dailyTasks: store.dailyTasks,
-            dailyResetDate: store.dailyResetDate,
-            activeTab: store.activeTab,
-        };
-        const rolled = this._applyRollover();
-        if (found.source === 'old') {
-            this._log('imported tasks once from the Omarchy file; that file is not changed');
-            this._save();
-        } else if (found.source === 'new' && rolled) {
-            this._save();
-        }
+        loadStoreAsync(found => {
+            if (found.error) {
+                this._storeInvalid = true;
+                this._log('todos.json could not be read; leaving it untouched: ' + found.error);
+                this._render();
+                return;
+            }
+            const store = parseStore(found.text);
+            if (!store.valid) {
+                this._storeInvalid = true;
+                this._log('todos.json is not valid JSON; leaving it untouched and not saving');
+                this._render();
+                return;
+            }
+            this.state = {
+                tasks: store.tasks,
+                dailyTasks: store.dailyTasks,
+                dailyResetDate: store.dailyResetDate,
+                activeTab: store.activeTab,
+            };
+            const rolled = this._applyRollover();
+            if (found.source === 'old') {
+                this._log('imported tasks once from the Omarchy file; that file is not changed');
+                this._save();
+            } else if (found.source === 'new' && rolled) {
+                this._save();
+            }
+            this._render();
+        });
     }
 
+    _loadTheme() {
+        loadThemeAsync(name => {
+            this.ui.theme = name;
+            this._applyTheme();
+        });
+    }
+
+    // Saves are queued. Only one write runs at a time, and it always writes the
+    // latest state, so an older save can never overwrite a newer one.
     _save() {
-        if (this._storeInvalid) return false;
-        try {
-            writeText(newStorePath(), serialize(
-                this.state.tasks, this.state.activeTab,
-                this.state.dailyTasks, this.state.dailyResetDate));
-            return true;
-        } catch (e) {
-            this._log('could not save: ' + e);
-            return false;
-        }
+        if (this._storeInvalid) return;
+        this._dirty = true;
+        this._flush();
+    }
+
+    _flush() {
+        if (this._writing || !this._dirty) return;
+        this._dirty = false;
+        this._writing = true;
+        const text = serialize(this.state.tasks, this.state.activeTab,
+            this.state.dailyTasks, this.state.dailyResetDate);
+        writeTextAsync(newStorePath(), text, error => {
+            this._writing = false;
+            if (error) this._log('could not save: ' + error);
+            this._flush();
+        });
     }
 
     _persist() {
