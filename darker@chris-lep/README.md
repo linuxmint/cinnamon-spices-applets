@@ -13,6 +13,7 @@ together with **Night Light** instead of fighting it.
   never go fully black)
 - Scroll over the panel icon to adjust in 5% steps (up = brighter, down = darker)
 - The panel shows just an icon while off, and the current brightness (e.g. `60%`) while active
+- Works in horizontal and vertical panels (vertical panels show just the icon)
 - Covers all monitors, panels, menus, and fullscreen video
 - No external tools, no background processes
 - Always starts at 100% (off) after login or a Cinnamon restart

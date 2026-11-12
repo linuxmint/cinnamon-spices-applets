@@ -29,7 +29,7 @@ function _(text) {
 // The stock slider scrolls by 5% of its span, which is off the applet's 5% brightness grid
 // (the slider only spans 10..100%). Route its scroll events through the applet so scrolling
 // over the slider and over the panel icon behave the same.
-class DarknessSlider extends PopupMenu.PopupSliderMenuItem {
+var DarknessSlider = class DarknessSlider extends PopupMenu.PopupSliderMenuItem {
     constructor(onScroll) {
         super(1);
         this._onScroll = onScroll;
@@ -38,11 +38,17 @@ class DarknessSlider extends PopupMenu.PopupSliderMenuItem {
     _onScrollEvent(_actor, event) {
         return this._onScroll(event);
     }
-}
+};
 
-class DarkerApplet extends Applet.TextIconApplet {
+var DarkerApplet = class DarkerApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
+
+        // Works in vertical panels too, but the brightness label doesn't fit there: show only
+        // the icon (the tooltip still has the brightness). Without this, Cinnamon treats the
+        // applet as horizontal-only and asks to remove it from vertical panels.
+        this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+        this.set_show_label_in_vertical_panels(false);
 
         this.set_applet_icon_symbolic_name(ICON_NAME);
         this._overlay = new DarkOverlay({ Clutter, GObject, global });
@@ -91,7 +97,7 @@ class DarkerApplet extends Applet.TextIconApplet {
         this._overlay.destroy();
         this.menu.destroy();
     }
-}
+};
 
 function main(metadata, orientation, panelHeight, instanceId) {
     return new DarkerApplet(metadata, orientation, panelHeight, instanceId);
