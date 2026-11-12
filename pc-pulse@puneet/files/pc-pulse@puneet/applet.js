@@ -67,12 +67,20 @@ const SETTING_KEYS = [
     "refresh_ms", "smooth_samples", "custom_every", "left_click", "middle_click",
     "custom_click_cmd", "menu_details", "menu_toggles", "claude_file",
     "claude_stale_hours", "claude_show_reset", "stats_cmd",
-    "weather_units", "weather_every", "weather_caption", "drag_reorder", "logi_enabled", "logi_every", "strip_height", "v_offset",
+    "weather_units", "weather_every", "weather_caption", "drag_reorder", "logi_enabled", "logi_every", "strip_height", "v_offset", "compact",
 ];
 
 const BATTERY_LEVELS = { Full: 100, High: 80, Normal: 55, Low: 20, Critical: 5 };
 // UPower BatteryLevel enum -> [percent for the ring, text]
 const UP_LEVELS = { 3: [20, "Low"], 4: [5, "Crit"], 6: [55, "OK"], 7: [80, "High"], 8: [100, "Full"] };
+// Compact captions (Compact switch on)
+const SHORT = {
+    claude_week: "CL", claude_5h: "CL 5H", weather: "WX", uptime: "UPT", cpu: "CPU", cpu_temp: "CPU°",
+    load: "LOAD", ram: "RAM", swap: "SWAP", gpu: "GPU", gpu_temp: "GPU°", vram: "VRAM", disk: "DISK",
+    disk_io: "I/O", net_down: "DN", net_up: "UP", battery: "BAT", clock: "", custom: "CMD",
+};
+const UP_SHORT = { 5: "MS", 6: "KB", 8: "PH", 10: "TAB", 11: "PC", 12: "PAD", 13: "PEN", 14: "TP",
+    17: "HS", 18: "SPK", 19: "HP", 22: "RC", 23: "PRN", 26: "WR" };
 const UP_KINDS = { 5: "MOUSE", 6: "KEYBOARD", 8: "PHONE", 10: "TABLET", 11: "COMPUTER", 12: "GAMEPAD",
     13: "PEN", 14: "TOUCHPAD", 17: "HEADSET", 18: "SPEAKERS", 19: "HEADPHONES", 22: "REMOTE",
     23: "PRINTER", 26: "WEARABLE" };
@@ -252,7 +260,8 @@ class PcPulse extends Applet.Applet {
     }
 
     _capOf(w) {
-        return (w.label && w.label.trim()) ? w.label.trim() : TYPES[w.type].cap;
+        if (w.label && w.label.trim()) return w.label.trim();
+        return this.compact ? SHORT[w.type] : TYPES[w.type].cap;
     }
 
     _textStyle(size, color) {
@@ -286,7 +295,8 @@ class PcPulse extends Applet.Applet {
 
             this._capStyle = this._textStyle(this.caption_size, cssColor(parseColor(this.caption_color)));
             this._valStyle = this._textStyle(this.value_size, cssColor(parseColor(this.value_color))) +
-                "min-width: " + this.value_min_width + "px;";
+                "min-width: " + (this.compact ? Math.min(this.value_min_width, 24) : this.value_min_width) + "px;";
+            this._segStyle = this.compact ? "spacing: 4px; padding: 0 2px;" : "spacing: 6px; padding: 0 4px;";
 
             let ws = this._widgets();
             if (ws.length === 0) {
@@ -297,7 +307,7 @@ class PcPulse extends Applet.Applet {
                 if (i > 0 && this.separators)
                     this._pill.add_actor(new St.Widget({
                         y_align: CENTER, height: Math.round(this.gfx_size * 0.9),
-                        style: "width: 1px; margin: 0 2px; background-color: " + cssColor(parseColor(this.separator_color)) + ";",
+                        style: "width: 1px; margin: 0 " + (this.compact ? 1 : 2) + "px; background-color: " + cssColor(parseColor(this.separator_color)) + ";",
                     }));
                 this.segs.push(this._segment(w));
             });
@@ -311,12 +321,12 @@ class PcPulse extends Applet.Applet {
 
     _segment(w) {
         let seg = { w: w, listIndex: (this.widgets || []).indexOf(w), key: this._wkey(w), style: this._styleOf(w), color: this._colorOf(w), data: null };
-        let box = new St.BoxLayout({ y_align: CENTER, reactive: true, style: "spacing: 6px; padding: 0 4px;" });
+        let box = new St.BoxLayout({ y_align: CENTER, reactive: true, style: this._segStyle });
         seg.box = box;
         box.connect("button-press-event", (actor, ev) => this._dragPress(seg, ev));
 
         let g = this.gfx_size;
-        let dims = { ring: [g, g], clock: [g, g], weather: [Math.round(g * 1.2), g], bar: [this.bar_width, g], graph: [this.graph_width, g] }[seg.style];
+        let dims = { ring: [g, g], clock: [g, g], weather: [Math.round(g * 1.2), g], bar: [this.bar_width, g], graph: [this.compact ? Math.min(this.graph_width, 26) : this.graph_width, g] }[seg.style];
         if (dims) {
             seg.area = new St.DrawingArea({ width: dims[0], height: dims[1], y_align: CENTER });
             seg.area.connect("repaint", (a) => {
@@ -329,7 +339,7 @@ class PcPulse extends Applet.Applet {
         }
 
         let text = new St.BoxLayout({ vertical: true, y_align: CENTER });
-        let cap = this._capOf(w) || (w.type === "device_bat" ? "DEVICE" : "");
+        let cap = this._capOf(w) || (w.type === "device_bat" ? (this.compact ? "DEV" : "DEVICE") : "");
         if (this.show_captions && cap) {
             seg.cap = new St.Label({ text: cap, style: this._capStyle });
             seg.cap.clutter_text.set_ellipsize(Pango.EllipsizeMode.NONE);
@@ -398,7 +408,7 @@ class PcPulse extends Applet.Applet {
         for (let i = 0; i < others.length; i++) {
             let edge = (i === k) ? "border-left: 2px solid rgba(255,255,255,0.9);" :
                 (i === k - 1 && k === others.length) ? "border-right: 2px solid rgba(255,255,255,0.9);" : "";
-            others[i].box.set_style("spacing: 6px; padding: 0 4px;" + edge);
+            others[i].box.set_style(this._segStyle + edge);
         }
     }
 
@@ -408,7 +418,7 @@ class PcPulse extends Applet.Applet {
         if (this._drag) {
             this._drag.seg.box.translation_x = 0;
             this._drag.seg.box.opacity = 255;
-            for (let s of this.segs) s.box.set_style("spacing: 6px; padding: 0 4px;");
+            for (let s of this.segs) s.box.set_style(this._segStyle);
             global.unset_cursor();
         }
         this._drag = null;
@@ -861,7 +871,8 @@ class PcPulse extends Applet.Applet {
         case "uptime": {
             let s = parseFloat((readText("/proc/uptime") || "0").split(" ")[0]);
             let boot = GLib.DateTime.new_now_local().add_seconds(-s);
-            return { pct: null, frac: null, text: fmtDuration(s), detail: "Up " + fmtDuration(s) + ", since " + boot.format("%a %d %b %H:%M") };
+            let up = this.compact ? fmtDuration(s).replace(" ", "").replace(/h0(\d)m/, "h$1m") : fmtDuration(s);
+            return { pct: null, frac: null, text: up, detail: "Up " + fmtDuration(s) + ", since " + boot.format("%a %d %b %H:%M") };
         }
         case "gpu": {
             let dev = this._gpuDev();
@@ -982,7 +993,7 @@ class PcPulse extends Applet.Applet {
             if (!d && !lg) return { pct: null, frac: null, text: "off", cap: want ? want.toUpperCase().substr(0, 10) : "DEVICE",
                 detail: (want ? "\"" + w.arg + "\" not connected" : "No wireless device batteries found") +
                     (devs.length ? ". Seen: " + devs.map((x) => x.model).join(", ") : "") };
-            let kind = d ? (UP_KINDS[d.kind] || "DEVICE") : "DEVICE";
+            let kind = d ? ((this.compact ? UP_SHORT : UP_KINDS)[d.kind] || (this.compact ? "DEV" : "DEVICE")) : (this.compact ? "DEV" : "DEVICE");
             let model = d ? d.model : lg.name;
             let p, text, charging, how;
             if (lg && lg.percent) {
@@ -1026,11 +1037,12 @@ class PcPulse extends Applet.Applet {
             let hi = day.temperature_2m_max ? Math.round(day.temperature_2m_max[0]) : null;
             let lo = day.temperature_2m_min ? Math.round(day.temperature_2m_min[0]) : null;
             let rain = day.precipitation_probability_max ? day.precipitation_probability_max[0] : null;
-            let capTxt = { condition: wmo[0].toUpperCase(), feels: "FEELS " + Math.round(cur.apparent_temperature) + "°",
-                range: hi !== null ? lo + "° / " + hi + "°" : null }[this.weather_caption] || null;
+            let capTxt = { condition: this.compact ? "WX" : wmo[0].toUpperCase(),
+                feels: (this.compact ? "FL " : "FEELS ") + Math.round(cur.apparent_temperature) + "°",
+                range: hi !== null ? lo + (this.compact ? "/" : "° / ") + hi + "°" : null }[this.weather_caption] || null;
             if (w.label && w.label.trim()) capTxt = null;
             return { pct: null, frac: null, icon: wmo[1], isDay: cur.is_day !== 0, cap: capTxt,
-                text: t + (U ? u.replace(/\s/g, "") : "°"),
+                text: t + (U && !this.compact ? u.replace(/\s/g, "") : "°"),
                 detail: wmo[0] + ", " + cur.temperature_2m + " " + u + " (feels " + cur.apparent_temperature + ")" +
                     (hi !== null ? ", today " + lo + " to " + hi : "") + (rain !== null ? ", rain " + rain + "%" : "") +
                     ", humidity " + cur.relative_humidity_2m + "%, wind " + Math.round(cur.wind_speed_10m) + " " + ((c.data.current_units || {}).wind_speed_10m || "") +
@@ -1050,7 +1062,8 @@ class PcPulse extends Applet.Applet {
             let left = win.resets_at && !rolled ? fmtDuration(win.resets_at - nowS) : null;
             let capTxt = null;
             if (this.claude_show_reset && left && !(w.label && w.label.trim()))
-                capTxt = (w.type === "claude_week" ? "CLAUDE · " : "5H · ") + left.split(" ")[0];
+                capTxt = this.compact ? (w.type === "claude_week" ? "CL " : "5H ") + left.split(" ")[0]
+                    : (w.type === "claude_week" ? "CLAUDE · " : "5H · ") + left.split(" ")[0];
             let d = this._pctData(p, pc(p), (w.type === "claude_week" ? "Claude weekly limit " : "Claude 5 hour limit ") + p + "% used" +
                 (left ? ", resets in " + left : rolled ? ", window has reset" : "") +
                 (age !== null ? " (reading " + fmtDuration(age) + " old" + (stale ? ", stale" : "") + ")" : ""));

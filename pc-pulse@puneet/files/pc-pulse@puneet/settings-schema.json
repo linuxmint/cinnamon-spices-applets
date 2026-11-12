@@ -67,6 +67,7 @@
       "type": "section",
       "title": "Shape and spacing",
       "keys": [
+        "compact",
         "strip_height",
         "v_offset",
         "radius",
@@ -447,6 +448,11 @@
     "type": "switch",
     "default": true,
     "description": "Top highlight line"
+  },
+  "compact": {
+    "type": "switch",
+    "default": true,
+    "description": "Compact (short captions like KB, MS, UPT and tighter spacing)"
   },
   "strip_height": {
     "type": "spinbutton",

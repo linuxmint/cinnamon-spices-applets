@@ -30,6 +30,8 @@ Turn on as many as you like, in any order, as many times as you like.
 
 Each widget can be drawn as a ring, bar, history graph, weather icon, clock face or plain text, with its own caption and colour.
 
+Compact mode (on by default) uses short captions such as KB, MS, UPT, WX and CL, and tighter spacing. Turn it off under Background for full names.
+
 ## Customising
 
 Click the strip for a menu with live details, on/off switches for every widget and shortcuts to the settings. Right click > Configure opens the full settings:
