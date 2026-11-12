@@ -1,7 +1,7 @@
 // This Applet has 7 classic games, that I wrote using AI.
 // Nic Nielsen - November 2026
 // New Tecumseth, Ontario, Canada
-// www.GreaterTecumsethArea.com
+// ://greatertecumsetharea.com
 
 const St = imports.gi.St;
 const Mainloop = imports.mainloop;
@@ -123,10 +123,22 @@ var GamePrototype = {
   displayArtwork: function () {
     try {
       if (this.metadata && this.metadata.path) {
-        let p = GLib.build_filenamev([this.metadata.path, "icon.png"]),
-          f = Gio.File.new_for_path(p);
-        if (f.query_exists(null))
-          Gio.app_info_launch_default_for_uri(f.get_uri(), null);
+        let p = GLib.build_filenamev([this.metadata.path, "icon.png"]);
+        let f = Gio.File.new_for_path(p);
+        Gio.AppInfo.launch_default_for_uri_async(
+          f.get_uri(),
+          null,
+          null,
+          (source, res) => {
+            try {
+              Gio.AppInfo.launch_default_for_uri_finish(res);
+            } catch (e) {
+              if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+                global.logError("Failed to display artwork: " + e.message);
+              }
+            }
+          },
+        );
       }
     } catch (e) {}
   },
@@ -134,36 +146,73 @@ var GamePrototype = {
     try {
       this.best = 0;
       this.score = 0;
-      Gio.File.new_for_path(this.path).replace_contents(
-        "0",
-        null,
-        false,
-        Gio.FileCreateFlags.NONE,
-        null,
-      );
+      this._engineBest = 0;
+      if (this.path) {
+        let bytes = new GLib.Bytes("0");
+        Gio.File.new_for_path(this.path).replace_contents_async(
+          bytes.get_data(),
+          null,
+          false,
+          Gio.FileCreateFlags.REPLACE_DESTINATION,
+          null,
+          (source, res) => {
+            try {
+              source.replace_contents_finish(res);
+            } catch (e) {}
+          },
+        );
+      }
       this.renderFrame();
     } catch (e) {}
   },
   loadBest: function () {
-    try {
-      let f = Gio.File.new_for_path(this.path);
-      if (f.query_exists(null)) {
-        let [s, c] = f.load_contents(null);
-        if (s) return parseInt(c.toString().trim()) || 0;
+    if (this._engineBest !== undefined) {
+      return this._engineBest;
+    }
+    this._engineBest = 0;
+    if (!this.path) return 0;
+
+    let f = Gio.File.new_for_path(this.path);
+    f.load_contents_async(null, (source, res) => {
+      try {
+        let [s, c] = source.load_contents_finish(res);
+        if (s) {
+          let val = parseInt(new TextDecoder().decode(c).trim()) || 0;
+          this._engineBest = val;
+          this.best = val;
+          if (typeof this.renderFrame === "function") {
+            this.renderFrame();
+          }
+        }
+      } catch (e) {
+        if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+          global.logError("Failed to load best score: " + e.message);
+        }
       }
-    } catch (e) {}
+    });
     return 0;
   },
   saveBest: function (n) {
+    this._engineBest = n;
+    this.best = n;
+    if (!this.path) return;
+
     try {
-      Gio.File.new_for_path(this.path).replace_contents(
-        n.toString(),
+      let bytes = new GLib.Bytes(n.toString());
+      Gio.File.new_for_path(this.path).replace_contents_async(
+        bytes.get_data(),
         null,
         false,
-        Gio.FileCreateFlags.NONE,
+        Gio.FileCreateFlags.REPLACE_DESTINATION,
         null,
+        (source, res) => {
+          try {
+            source.replace_contents_finish(res);
+          } catch (e) {
+            global.logError("Failed to save best score: " + e.message);
+          }
+        },
       );
-      this.best = n;
     } catch (e) {}
   },
   resetGame: function () {
@@ -258,7 +307,13 @@ var GamePrototype = {
     this.go = true;
     this.run = false;
     this.btnS.set_label("Restart");
-    if (this.score > this.best) this.saveBest(this.score);
+    if (this.score > this.best) {
+      if (typeof this.saveBestScore === "function") {
+        this.saveBestScore(this.score);
+      } else {
+        this.saveBest(this.score);
+      }
+    }
     if (this.loopId) Mainloop.source_remove(this.loopId);
     this.loopId = null;
     this.btnStyle();
