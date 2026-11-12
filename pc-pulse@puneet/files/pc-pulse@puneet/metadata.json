@@ -2,7 +2,7 @@
     "uuid": "pc-pulse@puneet",
     "name": "PC Pulse",
     "description": "A glass panel strip of live widgets: Claude Code usage limits, weather, uptime, CPU, RAM, GPU, temperatures, disk, network and device batteries. Fully configurable, drag to reorder.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "max-instances": 1,
     "url": "https://github.com/puneetindersingh/pc-pulse"
 }

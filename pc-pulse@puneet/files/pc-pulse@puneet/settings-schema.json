@@ -412,12 +412,12 @@
   },
   "glass_top": {
     "type": "colorchooser",
-    "default": "rgb(150,165,200)",
+    "default": "rgb(140,155,195)",
     "description": "Glass colour, top"
   },
   "glass_bottom": {
     "type": "colorchooser",
-    "default": "rgb(70,82,115)",
+    "default": "rgb(115,130,172)",
     "description": "Glass colour, bottom"
   },
   "glass_opacity": {
@@ -559,7 +559,7 @@
   },
   "track_color": {
     "type": "colorchooser",
-    "default": "rgba(0,0,0,0.28)",
+    "default": "rgba(255,255,255,0.16)",
     "description": "Empty track colour"
   },
   "graph_fill": {

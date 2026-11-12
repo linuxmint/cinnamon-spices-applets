@@ -239,7 +239,7 @@ class PcPulse extends Applet.Applet {
     _textStyle(size, color) {
         let s = "font-size: " + size + "pt; font-weight: bold; color: " + color + ";";
         if (this.font_family && this.font_family.trim()) s += "font-family: \"" + this.font_family.trim() + "\";";
-        if (this.text_shadow) s += "text-shadow: 0 1px 2px rgba(0,0,0,0.6);";
+        if (this.text_shadow) s += "text-shadow: 0 0 2px rgba(0,0,0,0.35);";
         return s;
     }
 
