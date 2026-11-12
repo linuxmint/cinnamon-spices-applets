@@ -2,7 +2,7 @@
 
 An applet with 7 classic games to make you look busy at the office...
 
-![Screenshot](Screenshot.png)
+![Screenshot](screenshot.png)
 
 ## Features
 
