@@ -1,0 +1,46 @@
+{
+  "format": "SuperMenu",
+  "version": 4,
+  "nextId": 5,
+  "categories": [
+    {
+      "id": "pm-template-my-menu",
+      "name": "My menu",
+      "icon": "starred",
+      "entries": [
+        {
+          "id": "entry-1",
+          "appId": "pm-command:template-files",
+          "name": "Files",
+          "command": "nemo",
+          "icon": "system-file-manager",
+          "copy": 0
+        },
+        {
+          "id": "entry-2",
+          "appId": "pm-command:template-terminal",
+          "name": "Terminal",
+          "command": "x-terminal-emulator",
+          "icon": "utilities-terminal",
+          "copy": 0
+        },
+        {
+          "id": "entry-3",
+          "appId": "pm-command:template-settings",
+          "name": "Settings",
+          "command": "cinnamon-settings",
+          "icon": "preferences-system",
+          "copy": 0
+        },
+        {
+          "id": "entry-4",
+          "appId": "pm-command:template-mint",
+          "name": "Linux Mint",
+          "command": "xdg-open https://linuxmint.com",
+          "icon": "web-browser",
+          "copy": 0
+        }
+      ]
+    }
+  ]
+}

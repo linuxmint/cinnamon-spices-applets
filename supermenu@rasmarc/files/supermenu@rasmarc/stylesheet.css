@@ -1,0 +1,152 @@
+/* SPDX-License-Identifier: GPL-2.0-or-later */
+.pm-container {
+    padding: 0;
+    margin: 0;
+    spacing: 0;
+    border-width: 0;
+    background-color: transparent;
+}
+
+.pm-launcher {
+    padding: 0;
+    margin: 0;
+}
+
+/* Simple application menu: categories, programs and a search/session row. */
+.pm-menu-content {
+    spacing: 0;
+}
+
+.pm-menu-column {
+    spacing: 8px;
+}
+
+.pm-system-box {
+    spacing: 8px;
+}
+
+.menu.pm-popover-root {
+    background-color: transparent;
+    background-image: none;
+    background-gradient-direction: none;
+    border-image: none;
+    border-width: 0;
+    box-shadow: none;
+}
+
+.pm-system-popover {
+    -arrow-base: 16px;
+    -arrow-rise: 8px;
+    -arrow-border-radius: 8px;
+    -arrow-border-width: 1px;
+}
+
+.pm-editor-mode-popover { -arrow-border-width: 4px; }
+
+/* Current buttons keep appmenu-system-button and the native theme variants. */
+.pm-legacy-system-button.pm-shutdown-red {
+    background-color: #e05252;
+}
+
+.appmenu-system-box.pm-system-flat-box,
+.pm-system-box.pm-system-flat-box {
+    background-color: transparent;
+    border-width: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    spacing: 6px;
+}
+
+.appmenu-system-button.pm-system-flat,
+.pm-legacy-system-button.pm-system-flat {
+    background-color: transparent;
+    border-width: 0;
+    border-radius: 4px;
+    box-shadow: none;
+    padding: 6px;
+    margin: 0;
+    width: auto;
+    height: auto;
+}
+
+.appmenu-system-button.pm-system-flat:hover,
+.appmenu-system-button.pm-system-flat:focus,
+.pm-legacy-system-button.pm-system-flat:hover,
+.pm-legacy-system-button.pm-system-flat:focus {
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.pm-shutdown-symbol-red {
+    color: #e05252;
+}
+
+.pm-shutdown-symbol-white {
+    color: #ffffff;
+}
+
+/* Inline drawers use the Cinnamon theme's regular popup menu rows. */
+.pm-drawer-root {
+    min-width: 280px;
+    spacing: 4px;
+}
+
+.pm-drawer-scrollbox {
+    min-height: 0px;
+}
+
+.pm-drawer-system-section {
+    border-top-width: 1px;
+    border-color: rgba(128, 128, 128, 0.25);
+    padding-top: 4px;
+}
+
+/* Horizontal container insets only while the drawer layout is active. */
+.appmenu-background .appmenu-main-box.pm-drawer-layout,
+.appmenu-background .appmenu-right-box.pm-drawer-layout {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+/* Persistent selection only while editing the own menu. */
+.pm-editor-frame { padding: 0; margin: 0; spacing: 0; }
+.pm-editor-bar { padding: 0; margin: 0; spacing: 0; background-color: transparent; }
+.pm-editor-hint { padding: 8px 0 0 8px; margin: 0; }
+.pm-editor-switch {
+    padding: 8px 8px 0 8px;
+    margin: 0;
+    border-width: 0;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+.pm-menu-editing .pm-drawer-header,
+.pm-menu-editing .pm-drawer-application {
+    border-width: 1px;
+    border-color: transparent;
+}
+
+.pm-grid-group { spacing: 8px; padding-bottom: 8px; }
+.pm-grid-heading {
+    font-weight: bold;
+    border-bottom-width: 1px;
+    border-color: rgba(128, 128, 128, 0.25);
+}
+.pm-grid-line { spacing: 8px; }
+.pm-grid-tile-content { spacing: 6px; }
+.pm-grid-caption { text-align: center; }
+
+/* Compact icon list only; editing restores the regular named presentation. */
+.appmenu-background.pm-symbol-list,
+.pm-symbol-list .pm-drawer-root,
+.pm-symbol-list .pm-drawer-scrollbox,
+.pm-symbol-list .pm-drawer-application {
+    min-width: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+

@@ -1,0 +1,191 @@
+{
+  "format": "SuperMenu",
+  "version": 4,
+  "nextId": 25,
+  "categories": [
+    {
+      "id": "Accessories",
+      "name": "Accessories",
+      "icon": "applications-accessories",
+      "entries": [
+        {
+          "id": "entry-1",
+          "appId": "org.gnome.Calculator.desktop",
+          "name": "Calculator",
+          "copy": 0
+        },
+        {
+          "id": "entry-2",
+          "appId": "bulky.desktop",
+          "name": "File Renamer",
+          "copy": 0
+        },
+        {
+          "id": "entry-3",
+          "appId": "onboard.desktop",
+          "name": "Onboard",
+          "copy": 0
+        },
+        {
+          "id": "entry-4",
+          "appId": "org.gnome.Screenshot.desktop",
+          "name": "Screenshot",
+          "copy": 0
+        },
+        {
+          "id": "entry-5",
+          "appId": "mintstick.desktop",
+          "name": "USB Image Writer",
+          "copy": 0
+        },
+        {
+          "id": "entry-6",
+          "appId": "mintstick-format.desktop",
+          "name": "USB Stick Formatter",
+          "copy": 0
+        },
+        {
+          "id": "entry-7",
+          "appId": "cinnamon-onscreen-keyboard.desktop",
+          "name": "Virtual keyboard",
+          "copy": 0
+        }
+      ]
+    },
+    {
+      "id": "Graphics",
+      "name": "Graphics",
+      "icon": "applications-graphics",
+      "entries": [
+        {
+          "id": "entry-8",
+          "appId": "com.github.maoschanz.drawing.desktop",
+          "name": "Drawing",
+          "copy": 0
+        },
+        {
+          "id": "entry-9",
+          "appId": "pix.desktop",
+          "name": "Pix",
+          "copy": 0
+        }
+      ]
+    },
+    {
+      "id": "Internet",
+      "name": "Internet",
+      "icon": "applications-internet",
+      "entries": [
+        {
+          "id": "entry-10",
+          "appId": "transmission-gtk.desktop",
+          "name": "Transmission",
+          "copy": 0
+        },
+        {
+          "id": "entry-11",
+          "appId": "webapp-manager.desktop",
+          "name": "Web Apps",
+          "copy": 0
+        }
+      ]
+    },
+    {
+      "id": "Office",
+      "name": "Office",
+      "icon": "applications-office",
+      "entries": [
+        {
+          "id": "entry-12",
+          "appId": "libreoffice-startcenter.desktop",
+          "name": "LibreOffice",
+          "copy": 0
+        },
+        {
+          "id": "entry-13",
+          "appId": "libreoffice-calc.desktop",
+          "name": "LibreOffice Calc",
+          "copy": 0
+        },
+        {
+          "id": "entry-14",
+          "appId": "libreoffice-draw.desktop",
+          "name": "LibreOffice Draw",
+          "copy": 0
+        },
+        {
+          "id": "entry-15",
+          "appId": "libreoffice-impress.desktop",
+          "name": "LibreOffice Impress",
+          "copy": 0
+        },
+        {
+          "id": "entry-16",
+          "appId": "libreoffice-writer.desktop",
+          "name": "LibreOffice Writer",
+          "copy": 0
+        },
+        {
+          "id": "entry-17",
+          "type": "separator"
+        },
+        {
+          "id": "entry-18",
+          "appId": "simple-scan.desktop",
+          "name": "Document Scanner",
+          "copy": 0
+        }
+      ]
+    },
+    {
+      "id": "Multimedia",
+      "name": "Sound & Video",
+      "icon": "applications-multimedia",
+      "entries": [
+        {
+          "id": "entry-19",
+          "appId": "io.github.celluloid_player.Celluloid.desktop",
+          "name": "Celluloid",
+          "copy": 0
+        },
+        {
+          "id": "entry-20",
+          "appId": "hypnotix.desktop",
+          "name": "Hypnotix",
+          "copy": 0
+        }
+      ]
+    },
+    {
+      "id": "Administration",
+      "name": "Administration",
+      "icon": "preferences-system",
+      "entries": [
+        {
+          "id": "entry-21",
+          "appId": "mintbackup.desktop",
+          "name": "Backup Tool",
+          "copy": 0
+        },
+        {
+          "id": "entry-22",
+          "appId": "mintinstall.desktop",
+          "name": "Software Manager",
+          "copy": 0
+        },
+        {
+          "id": "entry-23",
+          "appId": "org.gnome.SystemMonitor.desktop",
+          "name": "System Monitor",
+          "copy": 0
+        },
+        {
+          "id": "entry-24",
+          "appId": "org.gnome.Terminal.desktop",
+          "name": "Terminal",
+          "copy": 0
+        }
+      ]
+    }
+  ]
+}
