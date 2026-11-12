@@ -76,8 +76,6 @@ const {
 } = imports.gi.Gio;
 //Gtk:
 const Gtk = imports.gi.Gtk; //  /!\ Gtk.Label != St.Label
-//Gdk:
-const { Display } = imports.gi.Gdk;
 //Util
 const { spawnCommandLine, spawnCommandLineAsync } = imports.misc.util;
 //Mainloop:
@@ -1162,13 +1160,8 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
   } // End of on_btn_cs_actions_pressed
 
   on_tooltip_max_width_screen_percentage_changed() {
-    let _screen;
-    if (Display.get_default().get_default_screen)
-      _screen = Display.get_default().get_default_screen(); // Glib >= 3.20
-    else _screen = Display.get_default().get_screen(0); // 2.2 <= Glib < 3.20
-
     this.tooltip_max_width = Math.round(
-      (_screen.get_width() * this.tooltip_max_width_screen_percentage) / 100,
+      (global.screen_width * this.tooltip_max_width_screen_percentage) / 100,
     );
   } // End of on_tooltip_max_width_screen_percentage_changed
 
@@ -3230,13 +3223,8 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
       this._applet_tooltip._tooltip.set_style("text-align: left;");
     }
 
-    let _screen;
-    if (Display.get_default().get_default_screen)
-      _screen = Display.get_default().get_default_screen(); // Glib >= 3.20
-    else _screen = Display.get_default().get_screen(0); // 2.2 <= Glib < 3.20
-
     this.tooltip_max_width = Math.round(
-      (_screen.get_width() * this.tooltip_max_width_screen_percentage) / 100,
+      (global.screen_width * this.tooltip_max_width_screen_percentage) / 100,
     );
 
     this._applet_tooltip._tooltip.clutter_text.line_wrap = true;
