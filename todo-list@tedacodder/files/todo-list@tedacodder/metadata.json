@@ -1,0 +1,11 @@
+{
+    "uuid": "todo-list@tedacodder",
+    "name": "Todo List",
+    "description": "Short prioritized todo list in the panel: daily, backlog, ongoing and completed tasks",
+    "max-instances": 1,
+    "authors": "tedacodder",
+    "version": "1.0",
+    "cinnamon-version": [
+        "6.6"
+    ]
+}
