@@ -1,0 +1,60 @@
+{
+    "head": {
+        "type": "header",
+        "description": "Work schedule"
+    },
+    "start-time": {
+        "type": "entry",
+        "default": "09:00",
+        "description": "Workday start (HH:MM, 24h)"
+    },
+    "end-time": {
+        "type": "entry",
+        "default": "17:00",
+        "description": "Workday end (HH:MM, 24h; earlier than start = overnight shift)"
+    },
+    "show-percent": {
+        "type": "switch",
+        "default": false,
+        "description": "Show percent of the day completed"
+    },
+    "dayshead": {
+        "type": "header",
+        "description": "Workdays"
+    },
+    "workday-0": {
+        "type": "switch",
+        "default": true,
+        "description": "Monday"
+    },
+    "workday-1": {
+        "type": "switch",
+        "default": true,
+        "description": "Tuesday"
+    },
+    "workday-2": {
+        "type": "switch",
+        "default": true,
+        "description": "Wednesday"
+    },
+    "workday-3": {
+        "type": "switch",
+        "default": true,
+        "description": "Thursday"
+    },
+    "workday-4": {
+        "type": "switch",
+        "default": true,
+        "description": "Friday"
+    },
+    "workday-5": {
+        "type": "switch",
+        "default": false,
+        "description": "Saturday"
+    },
+    "workday-6": {
+        "type": "switch",
+        "default": false,
+        "description": "Sunday"
+    }
+}
