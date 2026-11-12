@@ -23,7 +23,7 @@ const SignalManager = imports.misc.signalManager;
 const Gettext = imports.gettext;
 
 const UUID = 'traydeck@gianfj';
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain(UUID, GLib.build_filenamev([GLib.get_user_data_dir(), 'locale']));
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -573,17 +573,19 @@ class LegacyItem {
 
         if (type === Clutter.EventType.BUTTON_PRESS) this.applet.closeOverflowFor(this);
 
-        // Release the press's pointer grab so the tray app's menu can take it.
-        const dropGrab = type === Clutter.EventType.BUTTON_PRESS &&
-            global.begin_modal(global.get_current_time(), 0);
-
         if (type === Clutter.EventType.ENTER) this.actor.add_style_pseudo_class('hover');
         else if (type === Clutter.EventType.LEAVE) this.actor.remove_style_pseudo_class('hover');
 
-        const ret = icon.handle_event(type, event);
-        if (dropGrab) global.end_modal(Meta.CURRENT_TIME);
-
-        return ret;
+        // Same as the stock systray applet: briefly go modal on a press so the
+        // panel's implicit pointer grab is released and the tray app's own menu
+        // can take the pointer. The modal is always ended before returning.
+        const dropGrab = type === Clutter.EventType.BUTTON_PRESS &&
+            global.begin_modal(global.get_current_time(), 0);
+        try {
+            return icon.handle_event(type, event);
+        } finally {
+            if (dropGrab) global.end_modal(Meta.CURRENT_TIME);
+        }
     }
 
     destroy() {
