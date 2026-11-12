@@ -9,6 +9,8 @@ const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const Util = imports.misc.util;
+
 
 const UUID = "gtaMint" + String.fromCharCode(64) + "NicNielsen";
 const AppletDir = GLib.build_filenamev([
@@ -377,30 +379,71 @@ CarGameApplet.prototype._init = function (
     ]);
   };
 
+  
+
+  this.bestScores = {};
+
   this.loadBestScore = function () {
-    try {
-      let p = this.getBestPath();
-      if (GLib.file_test(p, GLib.FileTest.EXISTS)) {
-        let [ok, content] = GLib.file_get_contents(p);
+    let mode = this.gameMode || "obstacles";
+
+    if (this.bestScores[mode] !== undefined) {
+      return this.bestScores[mode];
+    }
+
+    let defaultVal = mode === "iqtest" ? 100 : mode === "pacman" ? 9999 : 0;
+    this.bestScores[mode] = defaultVal;
+
+    let file = Gio.File.new_for_path(this.getBestPath());
+    file.load_contents_async(null, (source, res) => {
+      try {
+        let [ok, contents] = source.load_contents_finish(res);
         if (ok) {
-          let val = parseFloat(content.toString().trim());
-          if (!isNaN(val)) return val;
+          let val = parseFloat(new TextDecoder().decode(contents).trim());
+          if (!isNaN(val)) {
+            this.bestScores[mode] = val;
+            if ((this.gameMode || "obstacles") === mode) {
+              this.best = val;
+              if (this.lbl) this.renderFrame();
+            }
+          }
+        }
+      } catch (e) {
+        if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+          global.logError("Failed to load best score: " + e.message);
         }
       }
-    } catch (e) {}
-    return this.gameMode === "iqtest"
-      ? 100
-      : this.gameMode === "pacman"
-        ? 9999
-        : 0;
+    });
+
+    return defaultVal;
   };
 
   this.saveBestScore = function (val) {
-    try {
-      let p = this.getBestPath();
-      GLib.file_set_contents(p, val.toString());
-    } catch (e) {}
+    let mode = this.gameMode || "obstacles";
+    this.bestScores[mode] = val;
+
+    let file = Gio.File.new_for_path(this.getBestPath());
+    let bytes = new GLib.Bytes(val.toString());
+
+    file.replace_contents_async(
+      bytes.get_data(),
+      null,
+      false,
+      Gio.FileCreateFlags.REPLACE_DESTINATION,
+      null,
+      (source, res) => {
+        try {
+          source.replace_contents_finish(res);
+        } catch (e) {
+          global.logError("Failed to save best score: " + e.message);
+        }
+      },
+    );
   };
+
+
+
+
+
 
   this.formatTime = function (seconds) {
     if (seconds >= 9999 || seconds < 0) return "--:--";
@@ -1759,12 +1802,16 @@ CarGameApplet.prototype._init = function (
     }
     return false;
   });
+
+
   this.contextMenu = new Applet.AppletContextMenu(this, orientation);
   let cItem = new PopupMenu.PopupMenuItem("Configure...");
   cItem.connect("activate", () =>
-    GLib.spawn_command_line_async("cinnamon-settings applets " + this.uuid),
+    Util.spawn(["cinnamon-settings", "applets", this.uuid]),
   );
   this.contextMenu.addMenuItem(cItem);
+
+
   this.resetGame();
   this.setupUI();
   this.settings = new Settings.AppletSettings(
