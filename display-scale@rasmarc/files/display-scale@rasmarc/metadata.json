@@ -1,0 +1,11 @@
+{
+    "uuid": "display-scale@rasmarc",
+    "name": "Display Scale",
+    "description": "Size slider for font and layout scaling, optionally combined with variable screen scaling",
+    "max-instances": 1,
+    "version": "1.0.5",
+    "author": "rasmarc",
+    "cinnamon-version": [
+        "6.6"
+    ]
+}
