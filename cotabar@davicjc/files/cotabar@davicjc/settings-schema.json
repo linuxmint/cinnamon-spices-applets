@@ -1,0 +1,156 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "pagina-ias",
+      "pagina-barra"
+    ],
+    "pagina-ias": {
+      "type": "page",
+      "title": "AIs",
+      "sections": [
+        "secao-ias",
+        "secao-coleta",
+        "secao-sobre-ias"
+      ]
+    },
+    "pagina-barra": {
+      "type": "page",
+      "title": "Panel",
+      "sections": [
+        "secao-barra",
+        "secao-sobre-barra"
+      ]
+    },
+    "secao-ias": {
+      "type": "section",
+      "title": "Which AIs to show",
+      "keys": [
+        "ia-claude",
+        "ia-agy",
+        "ia-codex",
+        "ia-copilot",
+        "ocultar-ausentes"
+      ]
+    },
+    "secao-coleta": {
+      "type": "section",
+      "title": "Reading",
+      "keys": [
+        "coletar",
+        "intervalo"
+      ]
+    },
+    "secao-barra": {
+      "type": "section",
+      "title": "On the panel",
+      "keys": [
+        "mostrar",
+        "letra-periodo",
+        "idioma"
+      ]
+    },
+    "secao-sobre-ias": {
+      "type": "section",
+      "title": "About",
+      "keys": [
+        "assinatura-ias",
+        "github-ias"
+      ]
+    },
+    "secao-sobre-barra": {
+      "type": "section",
+      "title": "About",
+      "keys": [
+        "assinatura-barra",
+        "github-barra"
+      ]
+    }
+  },
+  "ia-claude": {
+    "type": "switch",
+    "default": true,
+    "description": "Claude Code"
+  },
+  "ia-agy": {
+    "type": "switch",
+    "default": true,
+    "description": "Antigravity (agy)"
+  },
+  "ia-codex": {
+    "type": "switch",
+    "default": true,
+    "description": "Codex (GPT)"
+  },
+  "ia-copilot": {
+    "type": "switch",
+    "default": true,
+    "description": "GitHub Copilot"
+  },
+  "ocultar-ausentes": {
+    "type": "switch",
+    "default": true,
+    "description": "Hide the ones that are not installed"
+  },
+  "coletar": {
+    "type": "switch",
+    "default": true,
+    "description": "Read the AIs signed in on this user",
+    "tooltip": "Turn this off if another process already writes the readings to /var/lib/cotabar."
+  },
+  "intervalo": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 2,
+    "max": 60,
+    "step": 1,
+    "units": "minutes",
+    "description": "Check every",
+    "dependency": "coletar"
+  },
+  "mostrar": {
+    "type": "combobox",
+    "default": "ambas",
+    "options": {
+      "Short and long": "ambas",
+      "Short only (hours / day)": "curta",
+      "Long only (week / month)": "longa",
+      "Rings only": "nada"
+    },
+    "description": "Numbers next to the ring"
+  },
+  "letra-periodo": {
+    "type": "switch",
+    "default": true,
+    "description": "Period letter after the % (H hours, D day, W week, M month)"
+  },
+  "idioma": {
+    "type": "combobox",
+    "default": "auto",
+    "options": {
+      "Automatic (system)": "auto",
+      "English": "en",
+      "Español": "es",
+      "Português": "pt"
+    },
+    "description": "Language"
+  },
+  "assinatura-ias": {
+    "type": "label",
+    "description": "CotaBar 0.4.0 · by davicjc"
+  },
+  "github-ias": {
+    "type": "button",
+    "description": "Open on GitHub",
+    "callback": "abrirGithub"
+  },
+  "assinatura-barra": {
+    "type": "label",
+    "description": "CotaBar 0.4.0 · by davicjc"
+  },
+  "github-barra": {
+    "type": "button",
+    "description": "Open on GitHub",
+    "callback": "abrirGithub"
+  }
+}

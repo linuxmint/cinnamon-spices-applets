@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cotabar@davicjc 0.3.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Davicjc/cotabar/issues\n"
+"PO-Revision-Date: 2026-11-12 09:00-0300\n"
+"Last-Translator: Davi Castro <contato@davicjc.com>\n"
+"Language-Team: CotaBar\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "AIs"
+msgstr ""
+
+msgid "Panel"
+msgstr ""
+
+msgid "Which AIs to show"
+msgstr ""
+
+msgid "Reading"
+msgstr ""
+
+msgid "On the panel"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Claude Code"
+msgstr ""
+
+msgid "Antigravity (agy)"
+msgstr ""
+
+msgid "Codex (GPT)"
+msgstr ""
+
+msgid "GitHub Copilot"
+msgstr ""
+
+msgid "Hide the ones that are not installed"
+msgstr ""
+
+msgid "Read the AIs signed in on this user"
+msgstr ""
+
+msgid "Turn this off if another process already writes the readings to /var/lib/cotabar."
+msgstr ""
+
+msgid "Check every"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "Numbers next to the ring"
+msgstr ""
+
+msgid "Short and long"
+msgstr ""
+
+msgid "Short only (hours / day)"
+msgstr ""
+
+msgid "Long only (week / month)"
+msgstr ""
+
+msgid "Rings only"
+msgstr ""
+
+msgid "Period letter after the % (H hours, D day, W week, M month)"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Automatic (system)"
+msgstr ""
+
+msgid "Open on GitHub"
+msgstr ""
+
+msgid "See how much of your Claude Code, Codex, Antigravity and GitHub Copilot usage limits you have used: 5-hour, weekly and monthly windows right on the panel"
+msgstr ""
+
+msgid "CotaBar"
+msgstr ""
+

@@ -1,0 +1,27 @@
+/* CotaBar — barra */
+.cotabar-caixa { spacing: 9px; padding: 0 3px; }
+.cotabar-item { spacing: 4px; }
+.cotabar-letra { font-size: 6.5pt; font-weight: bold; }
+.cotabar-numeros {
+  font-size: 8pt;
+  font-feature-settings: "tnum";
+  min-width: 2.4em;
+}
+.cotabar-numeros.cotabar-duas { font-size: 7.5pt; line-height: 1.05; }
+.cotabar-alto { color: #e7b04b; }
+.cotabar-critico { color: #e8665a; }
+.cotabar-apagado { color: rgba(160, 160, 160, 0.9); }
+
+/* CotaBar — menu */
+.cotabar-cab { spacing: 7px; padding-top: 2px; }
+.cotabar-ponto { width: 8px; height: 8px; border-radius: 4px; }
+.cotabar-nome { font-weight: bold; }
+.cotabar-plano { font-size: 8pt; color: rgba(160, 160, 160, 1); }
+.cotabar-quando { font-size: 8pt; color: rgba(160, 160, 160, 1); }
+.cotabar-janela { spacing: 3px; min-width: 260px; padding-left: 15px; }
+.cotabar-rotulo { font-size: 9pt; }
+.cotabar-pct { font-size: 9pt; font-weight: bold; font-feature-settings: "tnum"; }
+.cotabar-trilho { height: 5px; border-radius: 3px; background-color: rgba(128, 128, 128, 0.25); }
+.cotabar-cheio { height: 5px; border-radius: 3px; }
+.cotabar-pe { font-size: 7.5pt; color: rgba(160, 160, 160, 1); }
+.cotabar-aviso { font-size: 8.5pt; color: rgba(170, 170, 170, 1); padding-left: 15px; }

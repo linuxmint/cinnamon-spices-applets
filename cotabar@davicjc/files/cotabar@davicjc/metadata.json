@@ -1,0 +1,9 @@
+{
+  "uuid": "cotabar@davicjc",
+  "name": "CotaBar",
+  "description": "See how much of your Claude Code, Codex, Antigravity and GitHub Copilot usage limits you have used: 5-hour, weekly and monthly windows right on the panel",
+  "max-instances": 1,
+  "version": "0.4.0",
+  "url": "https://github.com/Davicjc/cotabar",
+  "author": "davicjc"
+}
