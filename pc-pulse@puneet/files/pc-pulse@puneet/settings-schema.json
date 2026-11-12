@@ -1,0 +1,804 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "pg_widgets",
+      "pg_look",
+      "pg_text",
+      "pg_behaviour"
+    ],
+    "pg_widgets": {
+      "type": "page",
+      "title": "Widgets",
+      "sections": [
+        "sec_widgets"
+      ]
+    },
+    "pg_look": {
+      "type": "page",
+      "title": "Background",
+      "sections": [
+        "sec_glass",
+        "sec_shape",
+        "sec_graphics"
+      ]
+    },
+    "pg_text": {
+      "type": "page",
+      "title": "Text and colours",
+      "sections": [
+        "sec_text",
+        "sec_alerts"
+      ]
+    },
+    "pg_behaviour": {
+      "type": "page",
+      "title": "Behaviour",
+      "sections": [
+        "sec_update",
+        "sec_click",
+        "sec_claude",
+        "sec_weather",
+        "sec_devices"
+      ]
+    },
+    "sec_widgets": {
+      "type": "section",
+      "title": "Widgets in the strip, left to right. Add, remove, reorder and edit them here.",
+      "keys": [
+        "widgets",
+        "widgets_help"
+      ]
+    },
+    "sec_glass": {
+      "type": "section",
+      "title": "Glass",
+      "keys": [
+        "glass_on",
+        "glass_top",
+        "glass_bottom",
+        "glass_opacity",
+        "border_color",
+        "border_width",
+        "shadow_on"
+      ]
+    },
+    "sec_shape": {
+      "type": "section",
+      "title": "Shape and spacing",
+      "keys": [
+        "strip_height",
+        "v_offset",
+        "radius",
+        "pad_x",
+        "pad_y",
+        "seg_spacing",
+        "separators",
+        "separator_color"
+      ]
+    },
+    "sec_graphics": {
+      "type": "section",
+      "title": "Rings, bars and graphs",
+      "keys": [
+        "gfx_size",
+        "ring_width",
+        "bar_width",
+        "graph_width",
+        "graph_points",
+        "track_color",
+        "graph_fill"
+      ]
+    },
+    "sec_text": {
+      "type": "section",
+      "title": "Text",
+      "keys": [
+        "font_family",
+        "show_captions",
+        "caption_size",
+        "caption_color",
+        "value_size",
+        "value_color",
+        "value_min_width",
+        "text_shadow",
+        "show_units"
+      ]
+    },
+    "sec_alerts": {
+      "type": "section",
+      "title": "Alert colours (percent widgets and temperatures in °C)",
+      "keys": [
+        "warn_at",
+        "warn_color",
+        "hot_at",
+        "hot_color",
+        "color_value_text"
+      ]
+    },
+    "sec_update": {
+      "type": "section",
+      "title": "Updating",
+      "keys": [
+        "refresh_ms",
+        "smooth_samples",
+        "custom_every"
+      ]
+    },
+    "sec_click": {
+      "type": "section",
+      "title": "Clicks",
+      "keys": [
+        "drag_reorder",
+        "left_click",
+        "middle_click",
+        "custom_click_cmd",
+        "menu_details",
+        "menu_toggles"
+      ]
+    },
+    "sec_claude": {
+      "type": "section",
+      "title": "Claude Code",
+      "keys": [
+        "claude_file",
+        "claude_stale_hours",
+        "claude_show_reset",
+        "stats_cmd"
+      ]
+    },
+    "sec_weather": {
+      "type": "section",
+      "title": "Weather (Open-Meteo, no key needed)",
+      "keys": [
+        "weather_units",
+        "weather_every",
+        "weather_caption"
+      ]
+    },
+    "sec_devices": {
+      "type": "section",
+      "title": "Wireless device batteries",
+      "keys": [
+        "logi_enabled",
+        "logi_every"
+      ]
+    }
+  },
+  "widgets": {
+    "type": "list",
+    "description": "Widgets",
+    "height": 420,
+    "columns": [
+      {
+        "id": "enabled",
+        "title": "On",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "type",
+        "title": "Widget",
+        "type": "string",
+        "options": {
+          "Claude weekly limit": "claude_week",
+          "Claude 5 hour limit": "claude_5h",
+          "Uptime": "uptime",
+          "CPU usage": "cpu",
+          "CPU temperature": "cpu_temp",
+          "Load average": "load",
+          "RAM": "ram",
+          "Swap": "swap",
+          "GPU usage": "gpu",
+          "GPU temperature": "gpu_temp",
+          "GPU memory (VRAM)": "vram",
+          "Disk space": "disk",
+          "Disk read+write": "disk_io",
+          "Network download": "net_down",
+          "Network upload": "net_up",
+          "Battery (laptop)": "battery",
+          "Bluetooth / wireless device battery": "device_bat",
+          "Weather": "weather",
+          "Clock / date": "clock",
+          "Custom command": "custom"
+        },
+        "default": "cpu"
+      },
+      {
+        "id": "style",
+        "title": "Style",
+        "type": "string",
+        "options": {
+          "Default for type": "auto",
+          "Ring": "ring",
+          "Bar": "bar",
+          "Graph (history)": "graph",
+          "Weather icon": "weather",
+          "Clock face": "clock",
+          "Text only": "text"
+        },
+        "default": "auto"
+      },
+      {
+        "id": "label",
+        "title": "Caption (blank = default)",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "color",
+        "title": "Colour (#hex, blank = default)",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "arg",
+        "title": "Option",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": [
+      {
+        "enabled": true,
+        "type": "claude_week",
+        "label": "",
+        "style": "ring",
+        "color": "#D97757",
+        "arg": ""
+      },
+      {
+        "enabled": true,
+        "type": "uptime",
+        "label": "",
+        "style": "auto",
+        "color": "",
+        "arg": ""
+      },
+      {
+        "enabled": true,
+        "type": "cpu",
+        "label": "",
+        "style": "graph",
+        "color": "#5AA9FF",
+        "arg": ""
+      },
+      {
+        "enabled": true,
+        "type": "ram",
+        "label": "",
+        "style": "ring",
+        "color": "#B48CFF",
+        "arg": ""
+      },
+      {
+        "enabled": true,
+        "type": "gpu",
+        "label": "",
+        "style": "ring",
+        "color": "#4CD6A0",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "weather",
+        "label": "",
+        "style": "auto",
+        "color": "#FFD54F",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "device_bat",
+        "label": "",
+        "style": "ring",
+        "color": "#81C784",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "claude_5h",
+        "label": "",
+        "style": "ring",
+        "color": "#D97757",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "cpu_temp",
+        "label": "",
+        "style": "bar",
+        "color": "#FF8A65",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "gpu_temp",
+        "label": "",
+        "style": "bar",
+        "color": "#4CD6A0",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "vram",
+        "label": "",
+        "style": "ring",
+        "color": "#26C6DA",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "swap",
+        "label": "",
+        "style": "ring",
+        "color": "#9575CD",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "load",
+        "label": "",
+        "style": "graph",
+        "color": "#FFD54F",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "disk",
+        "label": "",
+        "style": "bar",
+        "color": "#90A4AE",
+        "arg": "/"
+      },
+      {
+        "enabled": false,
+        "type": "disk_io",
+        "label": "",
+        "style": "graph",
+        "color": "#F06292",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "net_down",
+        "label": "",
+        "style": "graph",
+        "color": "#4FC3F7",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "net_up",
+        "label": "",
+        "style": "graph",
+        "color": "#AED581",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "battery",
+        "label": "",
+        "style": "ring",
+        "color": "#81C784",
+        "arg": ""
+      },
+      {
+        "enabled": false,
+        "type": "clock",
+        "label": "",
+        "style": "text",
+        "color": "",
+        "arg": "%H:%M"
+      },
+      {
+        "enabled": false,
+        "type": "custom",
+        "label": "KERNEL",
+        "style": "text",
+        "color": "",
+        "arg": "uname -r"
+      }
+    ]
+  },
+  "widgets_help": {
+    "type": "label",
+    "description": "Option column: Disk space = mount path (/). Network = interface (blank = all). Battery (laptop) = device name from /sys/class/power_supply (blank = first). Bluetooth / wireless device battery = part of the device name, for example NuPhy or MX Vertical (blank = first found; hover the widget to see names). Weather = latitude,longitude, for example 51.51,-0.13 (fetched from Open-Meteo). Clock = strftime format (%H:%M, %a %d). Custom command = shell command; first line of output is shown, a bare number 0 to 100 also fills the ring. CPU/GPU temperature = hwmon sensor name to force (k10temp, coretemp, amdgpu)."
+  },
+  "glass_on": {
+    "type": "switch",
+    "default": true,
+    "description": "Glass background"
+  },
+  "glass_top": {
+    "type": "colorchooser",
+    "default": "rgb(150,165,200)",
+    "description": "Glass colour, top"
+  },
+  "glass_bottom": {
+    "type": "colorchooser",
+    "default": "rgb(70,82,115)",
+    "description": "Glass colour, bottom"
+  },
+  "glass_opacity": {
+    "type": "scale",
+    "default": 60,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "show-value": true,
+    "description": "Glass opacity (%)"
+  },
+  "border_color": {
+    "type": "colorchooser",
+    "default": "rgba(255,255,255,0.38)",
+    "description": "Border colour"
+  },
+  "border_width": {
+    "type": "spinbutton",
+    "default": 1,
+    "min": 0,
+    "max": 4,
+    "step": 1,
+    "units": "px",
+    "description": "Border width"
+  },
+  "shadow_on": {
+    "type": "switch",
+    "default": true,
+    "description": "Top highlight line"
+  },
+  "strip_height": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 120,
+    "step": 1,
+    "units": "px",
+    "description": "Strip height (0 = panel height minus 8 px)"
+  },
+  "v_offset": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": -10,
+    "max": 10,
+    "step": 1,
+    "units": "px",
+    "description": "Vertical nudge (negative = up)"
+  },
+  "radius": {
+    "type": "spinbutton",
+    "default": 15,
+    "min": 0,
+    "max": 30,
+    "step": 1,
+    "units": "px",
+    "description": "Corner radius"
+  },
+  "pad_x": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 0,
+    "max": 30,
+    "step": 1,
+    "units": "px",
+    "description": "Inner padding, sides"
+  },
+  "pad_y": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 10,
+    "step": 1,
+    "units": "px",
+    "description": "Inner padding, top and bottom"
+  },
+  "seg_spacing": {
+    "type": "spinbutton",
+    "default": 4,
+    "min": 0,
+    "max": 30,
+    "step": 1,
+    "units": "px",
+    "description": "Space between widgets"
+  },
+  "separators": {
+    "type": "switch",
+    "default": true,
+    "description": "Dividers between widgets"
+  },
+  "separator_color": {
+    "type": "colorchooser",
+    "default": "rgba(255,255,255,0.30)",
+    "description": "Divider colour"
+  },
+  "gfx_size": {
+    "type": "spinbutton",
+    "default": 22,
+    "min": 12,
+    "max": 34,
+    "step": 1,
+    "units": "px",
+    "description": "Ring size"
+  },
+  "ring_width": {
+    "type": "spinbutton",
+    "default": 3.2,
+    "min": 1,
+    "max": 8,
+    "step": 0.2,
+    "units": "px",
+    "description": "Ring thickness"
+  },
+  "bar_width": {
+    "type": "spinbutton",
+    "default": 34,
+    "min": 12,
+    "max": 80,
+    "step": 1,
+    "units": "px",
+    "description": "Bar length"
+  },
+  "graph_width": {
+    "type": "spinbutton",
+    "default": 34,
+    "min": 16,
+    "max": 120,
+    "step": 1,
+    "units": "px",
+    "description": "Graph width"
+  },
+  "graph_points": {
+    "type": "spinbutton",
+    "default": 40,
+    "min": 10,
+    "max": 300,
+    "step": 5,
+    "units": "samples",
+    "description": "Graph history"
+  },
+  "track_color": {
+    "type": "colorchooser",
+    "default": "rgba(0,0,0,0.28)",
+    "description": "Empty track colour"
+  },
+  "graph_fill": {
+    "type": "switch",
+    "default": true,
+    "description": "Fill under graphs"
+  },
+  "font_family": {
+    "type": "entry",
+    "default": "",
+    "description": "Font (blank = theme font)",
+    "tooltip": "Any installed font, for example Inter, Ubuntu, JetBrains Mono"
+  },
+  "show_captions": {
+    "type": "switch",
+    "default": true,
+    "description": "Show captions above values"
+  },
+  "caption_size": {
+    "type": "spinbutton",
+    "default": 7,
+    "min": 5,
+    "max": 14,
+    "step": 0.5,
+    "units": "pt",
+    "description": "Caption size"
+  },
+  "caption_color": {
+    "type": "colorchooser",
+    "default": "rgba(255,255,255,0.80)",
+    "description": "Caption colour"
+  },
+  "value_size": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 6,
+    "max": 20,
+    "step": 0.5,
+    "units": "pt",
+    "description": "Value size"
+  },
+  "value_color": {
+    "type": "colorchooser",
+    "default": "rgb(255,255,255)",
+    "description": "Value colour"
+  },
+  "value_min_width": {
+    "type": "spinbutton",
+    "default": 34,
+    "min": 0,
+    "max": 120,
+    "step": 1,
+    "units": "px",
+    "description": "Value minimum width (stops jitter)"
+  },
+  "text_shadow": {
+    "type": "switch",
+    "default": true,
+    "description": "Text shadow"
+  },
+  "show_units": {
+    "type": "switch",
+    "default": true,
+    "description": "Show units (%, °C, GB)"
+  },
+  "warn_at": {
+    "type": "spinbutton",
+    "default": 75,
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "units": "",
+    "description": "Warning from"
+  },
+  "warn_color": {
+    "type": "colorchooser",
+    "default": "rgb(255,179,71)",
+    "description": "Warning colour"
+  },
+  "hot_at": {
+    "type": "spinbutton",
+    "default": 90,
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "units": "",
+    "description": "Critical from"
+  },
+  "hot_color": {
+    "type": "colorchooser",
+    "default": "rgb(255,107,107)",
+    "description": "Critical colour"
+  },
+  "color_value_text": {
+    "type": "switch",
+    "default": true,
+    "description": "Colour the value text too"
+  },
+  "refresh_ms": {
+    "type": "spinbutton",
+    "default": 1000,
+    "min": 250,
+    "max": 10000,
+    "step": 250,
+    "units": "ms",
+    "description": "Refresh every"
+  },
+  "smooth_samples": {
+    "type": "spinbutton",
+    "default": 3,
+    "min": 1,
+    "max": 20,
+    "step": 1,
+    "units": "samples",
+    "description": "GPU smoothing",
+    "tooltip": "The AMD busy counter jumps a lot; the strip shows the mean of this many readings"
+  },
+  "custom_every": {
+    "type": "spinbutton",
+    "default": 30,
+    "min": 1,
+    "max": 3600,
+    "step": 1,
+    "units": "s",
+    "description": "Run custom commands every"
+  },
+  "left_click": {
+    "type": "combobox",
+    "default": "menu",
+    "options": {
+      "Open the menu": "menu",
+      "Open Claude stats page": "stats",
+      "Open system monitor": "sysmon",
+      "Open settings": "settings",
+      "Run custom command": "custom"
+    },
+    "description": "Left click"
+  },
+  "middle_click": {
+    "type": "combobox",
+    "default": "sysmon",
+    "options": {
+      "Nothing": "none",
+      "Open Claude stats page": "stats",
+      "Open system monitor": "sysmon",
+      "Open settings": "settings",
+      "Run custom command": "custom"
+    },
+    "description": "Middle click"
+  },
+  "custom_click_cmd": {
+    "type": "entry",
+    "default": "gnome-system-monitor",
+    "description": "Custom click command"
+  },
+  "menu_details": {
+    "type": "switch",
+    "default": true,
+    "description": "Menu shows live details"
+  },
+  "menu_toggles": {
+    "type": "switch",
+    "default": true,
+    "description": "Menu shows on/off switches for widgets"
+  },
+  "claude_file": {
+    "type": "entry",
+    "default": "",
+    "description": "Limits file (blank = auto)",
+    "tooltip": "JSON with rate_limits.seven_day / five_hour, written by the bundled claude-statusline.py (see README). Auto reads ~/.cache/pc-pulse/claude-limits.json"
+  },
+  "claude_stale_hours": {
+    "type": "spinbutton",
+    "default": 6,
+    "min": 1,
+    "max": 168,
+    "step": 1,
+    "units": "h",
+    "description": "Dim the figure when older than"
+  },
+  "claude_show_reset": {
+    "type": "switch",
+    "default": true,
+    "description": "Show time to reset in the caption"
+  },
+  "drag_reorder": {
+    "type": "switch",
+    "default": true,
+    "description": "Drag widgets in the panel to reorder them",
+    "tooltip": "Hold left click on a widget, drag it sideways, let go"
+  },
+  "logi_enabled": {
+    "type": "switch",
+    "default": true,
+    "description": "Read exact % from Logitech devices (HID++)",
+    "tooltip": "The Linux driver gives only Full/High/Low for some Logitech mice; this asks the device itself through the receiver"
+  },
+  "logi_every": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 60,
+    "step": 1,
+    "units": "min",
+    "description": "Check Logitech devices every"
+  },
+  "weather_units": {
+    "type": "combobox",
+    "default": "celsius",
+    "options": {
+      "Celsius, km/h": "celsius",
+      "Fahrenheit, mph": "fahrenheit"
+    },
+    "description": "Units"
+  },
+  "weather_every": {
+    "type": "spinbutton",
+    "default": 15,
+    "min": 5,
+    "max": 180,
+    "step": 5,
+    "units": "min",
+    "description": "Update weather every"
+  },
+  "weather_caption": {
+    "type": "combobox",
+    "default": "condition",
+    "options": {
+      "Condition (Partly cloudy)": "condition",
+      "Feels like": "feels",
+      "Today low / high": "range",
+      "Plain caption": "plain"
+    },
+    "description": "Weather caption"
+  },
+  "stats_cmd": {
+    "type": "entry",
+    "default": "",
+    "description": "Stats page command (optional)",
+    "tooltip": "A command that opens your own usage stats page; adds a menu entry and a click action"
+  }
+}
