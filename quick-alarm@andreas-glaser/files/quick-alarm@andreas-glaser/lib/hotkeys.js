@@ -7,7 +7,7 @@ var syncHotkey = function ({ keybindingManager, name, accel, onActivate, onError
     // ignore
   }
 
-  const normalized = (accel || "").trim();
+  const normalized = typeof accel === "string" ? accel.trim() : "";
   if (!normalized) return { added: false };
 
   try {
@@ -18,4 +18,3 @@ var syncHotkey = function ({ keybindingManager, name, accel, onActivate, onError
     return { added: false, error: e };
   }
 };
-
