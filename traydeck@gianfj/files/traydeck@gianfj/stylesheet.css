@@ -1,0 +1,88 @@
+/* Neutral overlays so it sits well on light and dark panel themes. */
+.traydeck-item {
+    border-radius: 7px;
+    padding: 0 3px;
+}
+.traydeck-hover .traydeck-item:hover {
+    background-color: rgba(128, 128, 128, 0.28);
+}
+.traydeck-chevron {
+    border-radius: 7px;
+    padding: 0 4px;
+}
+.traydeck-chevron:hover, .traydeck-chevron:checked {
+    background-color: rgba(128, 128, 128, 0.28);
+}
+
+.traydeck-overflow {
+    padding: 6px;
+    spacing: 2px;
+}
+
+/* Manager popup */
+.traydeck-manager {
+    padding: 14px;
+    min-width: 440px;
+}
+.traydeck-title {
+    font-size: 13pt;
+    font-weight: bold;
+}
+.traydeck-subtitle {
+    font-size: 9pt;
+    color: rgba(150, 150, 150, 1);
+}
+.traydeck-row {
+    padding: 7px 8px;
+    border-radius: 10px;
+    spacing: 10px;
+}
+.traydeck-row:hover {
+    background-color: rgba(128, 128, 128, 0.14);
+}
+.traydeck-row-dim {
+    opacity: 110;
+}
+.traydeck-row-name {
+    font-weight: bold;
+}
+.traydeck-seg {
+    background-color: rgba(128, 128, 128, 0.2);
+    border-radius: 8px;
+    padding: 2px;
+}
+.traydeck-seg-btn {
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 9pt;
+}
+.traydeck-seg-btn:hover {
+    background-color: rgba(128, 128, 128, 0.25);
+}
+.traydeck-seg-btn.active {
+    background-color: #7c5cff;
+    color: white;
+}
+.traydeck-move {
+    padding: 4px;
+    border-radius: 6px;
+}
+.traydeck-move:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+}
+.traydeck-move:insensitive {
+    opacity: 60;
+}
+.traydeck-link {
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 9pt;
+}
+.traydeck-link:hover {
+    background-color: rgba(128, 128, 128, 0.25);
+}
+.traydeck-footer {
+    padding: 4px 4px 2px 4px;
+    spacing: 4px;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+}
