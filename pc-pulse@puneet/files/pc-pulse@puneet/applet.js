@@ -23,7 +23,7 @@ const Gettext = imports.gettext;
 
 const UUID = "pc-pulse@puneet";
 const HOME = GLib.get_home_dir();
-Gettext.bindtextdomain(UUID, HOME + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 function _(str) {
     let t = Gettext.dgettext(UUID, str);
     return t !== str ? t : Gettext.gettext(str);
@@ -31,7 +31,7 @@ function _(str) {
 const CENTER = Clutter.ActorAlign.CENTER;
 const CLAUDE_AUTO_FILES = [
     GLib.get_user_cache_dir() + "/pc-pulse/claude-limits.json",   // written by claude-statusline.py
-    HOME + "/.cache/claude-usage/limits.json",
+    GLib.get_user_cache_dir() + "/claude-usage/limits.json",
     HOME + "/.claude/usage-widget.json",
 ];
 
@@ -95,28 +95,49 @@ const WMO = {
 
 // ---- helpers ---------------------------------------------------------------
 
+// Asynchronous file reads with a small cache: readText() returns the contents
+// from the last completed read (null until the first one lands) and starts a
+// fresh read in the background, so the panel never waits on the filesystem.
+const _reads = {};
 function readText(path) {
-    try {
-        let [ok, bytes] = GLib.file_get_contents(path);
-        return ok ? new TextDecoder().decode(bytes) : null;
-    } catch (e) {
-        return null;
+    let e = _reads[path] || (_reads[path] = { text: null, busy: false });
+    if (!e.busy) {
+        e.busy = true;
+        Gio.File.new_for_path(path).load_contents_async(null, (file, res) => {
+            try {
+                let [ok, bytes] = file.load_contents_finish(res);
+                e.text = ok ? new TextDecoder().decode(bytes) : null;
+            } catch (err) {
+                e.text = null;
+            }
+            e.busy = false;
+        });
     }
+    return e.text;
 }
 
-function exists(path) {
-    return GLib.file_test(path, GLib.FileTest.EXISTS);
-}
-
+const _dirs = {};
 function listDir(path) {
-    let out = [];
-    try {
-        let dir = GLib.Dir.open(path, 0);
-        let name;
-        while ((name = dir.read_name()) !== null) out.push(name);
-        dir.close();
-    } catch (e) { /* missing dir */ }
-    return out.sort();
+    let e = _dirs[path] || (_dirs[path] = { names: [], busy: false, at: 0 });
+    let now = GLib.get_monotonic_time() / 1e6;
+    if (!e.busy && (e.at === 0 || now - e.at > 10)) {
+        e.busy = true;
+        e.at = now;
+        Gio.File.new_for_path(path).enumerate_children_async("standard::name", Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT, null, (dir, res) => {
+                try {
+                    let en = dir.enumerate_children_finish(res);
+                    let names = [], info;
+                    while ((info = en.next_file(null)) !== null) names.push(info.get_name());
+                    en.close(null);
+                    e.names = names.sort();
+                } catch (err) {
+                    e.names = [];
+                }
+                e.busy = false;
+            });
+    }
+    return e.names;
 }
 
 // "#rgb", "#rrggbb", "rgb(r,g,b)", "rgba(r,g,b,a)" -> [r, g, b, a] in 0..1
@@ -164,7 +185,7 @@ function findHwmon(names) {
     for (let h of listDir("/sys/class/hwmon")) {
         let base = "/sys/class/hwmon/" + h;
         let name = (readText(base + "/name") || "").trim();
-        if (names.indexOf(name) >= 0 && exists(base + "/temp1_input")) return base + "/temp1_input";
+        if (names.indexOf(name) >= 0 && readText(base + "/temp1_input") !== null) return base + "/temp1_input";
     }
     return null;
 }
@@ -577,6 +598,7 @@ class PcPulse extends Applet.Applet {
     _tick() {
         try {
             this._now = GLib.get_monotonic_time() / 1e6;
+            this._ticks = (this._ticks || 0) + 1;
             this._cache = {};
             let ws = this._widgets();
             if (ws.some((w) => ["gpu", "gpu_temp", "vram"].indexOf(w.type) >= 0)) this._pollNvidia();
@@ -589,7 +611,10 @@ class PcPulse extends Applet.Applet {
                     hh.push(d.graph);
                     while (hh.length > this.graph_points) hh.shift();
                 }
-                if (seg.val.get_text() !== d.text) seg.val.set_text(d.text);
+                if (seg.val.get_text() !== d.text) {
+                    seg.val.set_text(d.text);
+                    seg.val.queue_relayout();   // let a wider value grow the strip instead of being cut off
+                }
                 let style = this._valStyle;
                 if (d.stale) style += "color: rgba(255,255,255,0.5);";
                 else if (this.color_value_text && d.pct !== null && d.pct !== undefined && d.pct >= this.warn_at)
@@ -625,7 +650,9 @@ class PcPulse extends Applet.Applet {
 
     _cpu() {
         if (this._cache.cpu !== undefined) return this._cache.cpu;
-        let line = (readText("/proc/stat") || "").split("\n")[0].trim().split(/\s+/).slice(1).map(Number);
+        let stat = readText("/proc/stat");
+        if (stat === null) return (this._cache.cpu = this._lastCpu === undefined ? null : this._lastCpu);
+        let line = stat.split("\n")[0].trim().split(/\s+/).slice(1).map(Number);
         let idle = line[3] + (line[4] || 0);
         let total = line.reduce((a, b) => a + b, 0);
         let prev = this.st.cpu;
@@ -637,30 +664,29 @@ class PcPulse extends Applet.Applet {
     }
 
     _gpuDev() {
-        if (this._gpuDevChecked) return this._gpuDevPath;
-        this._gpuDevChecked = true;
-        this._gpuDevPath = null;
+        if (this._gpuDevPath) return this._gpuDevPath;
         for (let c of listDir("/sys/class/drm")) {
             if (!/^card\d+$/.test(c)) continue;
             let p = "/sys/class/drm/" + c + "/device";
-            if (exists(p + "/gpu_busy_percent")) { this._gpuDevPath = p; break; }
+            if (readText(p + "/gpu_busy_percent") !== null) { this._gpuDevPath = p; break; }
         }
-        return this._gpuDevPath;
+        return this._gpuDevPath || null;
     }
 
     _pollNvidia() {
-        if (this._gpuDev()) return;
-        if (this._nvidiaBin === undefined) this._nvidiaBin = GLib.find_program_in_path("nvidia-smi");
-        if (!this._nvidiaBin || this._nvidiaBusy) return;
+        // Give the AMD sysfs probe a few seconds before falling back to nvidia-smi.
+        if (this._gpuDev() || this._nvidiaMissing || this._nvidiaBusy) return;
+        if ((this._ticks || 0) < 3) return;
         if (this._nvidiaAt && this._now - this._nvidiaAt < 2) return;
         this._nvidiaBusy = true;
         this._nvidiaAt = this._now;
-        this._spawn([this._nvidiaBin, "--query-gpu=utilization.gpu,temperature.gpu,memory.used,memory.total", "--format=csv,noheader,nounits"],
+        let ok = this._spawn(["nvidia-smi", "--query-gpu=utilization.gpu,temperature.gpu,memory.used,memory.total", "--format=csv,noheader,nounits"],
             (out) => {
                 this._nvidiaBusy = false;
                 let p = (out || "").split("\n")[0].split(",").map((x) => parseFloat(x));
                 if (p.length >= 4 && !isNaN(p[0])) this.nvidia = { util: p[0], temp: p[1], used: p[2] * 1048576, total: p[3] * 1048576 };
             });
+        if (!ok) { this._nvidiaBusy = false; this._nvidiaMissing = true; }
     }
 
     _claude() {
@@ -681,12 +707,22 @@ class PcPulse extends Applet.Applet {
     }
 
     // Run argv asynchronously; cb(stdout, stderr). Never blocks the panel.
+    // Returns false when the program cannot be started (for example not installed).
     _spawn(argv, cb) {
+        let proc;
         try {
-            Util.spawnCommandLineAsyncIO(null, (out, err) => cb(out || "", err || ""), { argv: argv });
+            proc = new Gio.Subprocess({ argv: argv, flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE });
+            proc.init(null);
         } catch (e) {
             cb("", String(e));
+            return false;
         }
+        proc.communicate_utf8_async(null, null, (p, res) => {
+            let out = "", err = "";
+            try { [, out, err] = p.communicate_utf8_finish(res); } catch (e) { err = String(e); }
+            cb(out || "", err || "");
+        });
+        return true;
     }
 
     _shell(cmd, cb) {
@@ -820,9 +856,11 @@ class PcPulse extends Applet.Applet {
         case "vram": {
             let dev = this._gpuDev();
             let used = null, total = null;
-            if (dev && exists(dev + "/mem_info_vram_used")) {
-                used = Number(readText(dev + "/mem_info_vram_used"));
-                total = Number(readText(dev + "/mem_info_vram_total"));
+            let vu = dev ? readText(dev + "/mem_info_vram_used") : null;
+            let vt = dev ? readText(dev + "/mem_info_vram_total") : null;
+            if (vu !== null && vt !== null) {
+                used = Number(vu);
+                total = Number(vt);
             } else if (this.nvidia) { used = this.nvidia.used; total = this.nvidia.total; }
             if (!total) return { pct: null, frac: null, text: "n/a", detail: "No VRAM counter found" };
             let p = Math.round(100 * used / total);
@@ -833,7 +871,7 @@ class PcPulse extends Applet.Applet {
             let names = w.arg && w.arg.trim() ? [w.arg.trim()]
                 : (w.type === "cpu_temp" ? ["k10temp", "coretemp", "zenpower", "cpu_thermal", "acpitz"] : ["amdgpu", "nouveau", "radeon", "i915", "xe"]);
             let ck = "hw|" + names.join(",");
-            if (this.st[ck] === undefined) this.st[ck] = findHwmon(names);
+            if (!this.st[ck]) this.st[ck] = findHwmon(names);   // retried until the async reads land
             let t = null;
             if (this.st[ck]) t = Number(readText(this.st[ck])) / 1000;
             else if (w.type === "gpu_temp" && this.nvidia) t = this.nvidia.temp;
@@ -861,12 +899,14 @@ class PcPulse extends Applet.Applet {
         case "disk_io": {
             if (this._cache.io === undefined) {
                 let sum = 0;
-                for (let line of (readText("/proc/diskstats") || "").split("\n")) {
+                let ds = readText("/proc/diskstats");
+                for (let line of (ds || "").split("\n")) {
                     let f = line.trim().split(/\s+/);
-                    if (f.length < 10 || /^(loop|ram|zram|dm-|md)/.test(f[2]) || !exists("/sys/block/" + f[2])) continue;
+                    // whole disks only (partitions would double count)
+                    if (f.length < 10 || !/^(sd[a-z]+|vd[a-z]+|xvd[a-z]+|hd[a-z]+|nvme\d+n\d+|mmcblk\d+)$/.test(f[2])) continue;
                     sum += Number(f[5]) + Number(f[9]);
                 }
-                this._cache.io = this._rate("io", sum * 512);
+                this._cache.io = ds === null ? null : this._rate("io", sum * 512);
             }
             let r = this._cache.io;
             return { pct: null, frac: null, graph: r || 0, text: r === null ? "--" : fmtRate(r, U), detail: "Disk read + write " + (r === null ? "--" : fmtRate(r, true)) };
@@ -877,7 +917,8 @@ class PcPulse extends Applet.Applet {
             let ck = "net|" + iface;
             if (this._cache[ck] === undefined) {
                 let rx = 0, tx = 0;
-                for (let line of (readText("/proc/net/dev") || "").split("\n").slice(2)) {
+                let nd = readText("/proc/net/dev");
+                for (let line of (nd || "").split("\n").slice(2)) {
                     let parts = line.split(":");
                     if (parts.length < 2) continue;
                     let name = parts[0].trim();
@@ -885,7 +926,7 @@ class PcPulse extends Applet.Applet {
                     let f = parts[1].trim().split(/\s+/).map(Number);
                     rx += f[0]; tx += f[8];
                 }
-                this._cache[ck] = { rx: this._rate(ck + "rx", rx), tx: this._rate(ck + "tx", tx) };
+                this._cache[ck] = nd === null ? { rx: null, tx: null } : { rx: this._rate(ck + "rx", rx), tx: this._rate(ck + "tx", tx) };
             }
             let r = w.type === "net_down" ? this._cache[ck].rx : this._cache[ck].tx;
             return { pct: null, frac: null, graph: r || 0, text: r === null ? "--" : fmtRate(r, U),
