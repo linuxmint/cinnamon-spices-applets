@@ -1,0 +1,120 @@
+/* Hotspot Manager theme: black, neon green, monospace. */
+
+.hm-menu {
+    background-color: #020604;
+    border: 1px solid #00ff41;
+    border-radius: 12px;
+}
+
+.hm-pill {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 0.85em;
+    padding: 3px 12px;
+    border-radius: 10px;
+    margin: 4px 0 6px 0;
+}
+
+.hm-pill-on {
+    background-color: rgba(0, 255, 65, 0.14);
+    border: 1px solid #00ff41;
+    color: #00ff41;
+}
+
+.hm-pill-off {
+    background-color: rgba(255, 48, 79, 0.12);
+    border: 1px solid #ff304f;
+    color: #ff304f;
+}
+
+.hm-pill-busy {
+    background-color: rgba(0, 229, 255, 0.12);
+    border: 1px solid #00e5ff;
+    color: #00e5ff;
+}
+
+.hm-line {
+    font-family: monospace;
+    font-size: 0.95em;
+    color: #c8ffd6;
+    padding: 2px 0;
+}
+
+.hm-stat {
+    font-family: monospace;
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #00ff41;
+    padding: 6px 0;
+}
+
+.hm-btn-row {
+    spacing: 8px;
+    padding: 2px 0;
+}
+
+.hm-btn {
+    background-color: rgba(0, 255, 65, 0.06);
+    border: 1px solid rgba(0, 255, 65, 0.35);
+    border-radius: 8px;
+    color: #c8ffd6;
+    font-family: monospace;
+    padding: 6px 10px;
+    font-weight: bold;
+}
+
+.hm-btn:hover {
+    background-color: rgba(0, 255, 65, 0.22);
+    border-color: #00ff41;
+    color: #ffffff;
+}
+
+.hm-btn-primary {
+    background-color: #00ff41;
+    border-color: #00ff41;
+    color: #001a07;
+}
+
+.hm-btn-primary:hover {
+    background-color: #5dff8a;
+    border-color: #5dff8a;
+    color: #001a07;
+}
+
+/* Settings: a light card with black labels, like the proxy manager */
+.hm-field-label {
+    color: #000000;
+    font-family: monospace;
+    font-weight: bold;
+    min-width: 90px;
+}
+
+.hm-entry {
+    min-width: 170px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    border: 1px solid #00a040;
+    color: #000000;
+    font-family: monospace;
+}
+
+.hm-entry:focus {
+    border-color: #00ff41;
+    color: #000000;
+}
+
+.hm-footer {
+    color: rgba(0, 255, 65, 0.5);
+    font-family: monospace;
+    font-size: 0.8em;
+    padding-top: 4px;
+}
+
+.hm-section {
+    font-family: monospace;
+    font-size: 0.85em;
+    font-weight: bold;
+    color: #00e5ff;
+    padding: 6px 0 2px 0;
+}
