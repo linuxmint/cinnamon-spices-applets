@@ -118,6 +118,22 @@ var DEPENDENCIES = {
     ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"],
     ["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]
   ],
+  "devuan": [
+    ["mpv", "/usr/bin/mpv",  "mpv"],
+    ["wget", "/usr/bin/wget", "wget"],
+    ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
+    ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
+    //["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
+    ["sox", "/usr/bin/sox", "sox"],
+    ["", "/usr/share/doc/libsox-fmt-all/copyright", "libsox-fmt-all"],
+    ["at", "/usr/bin/at", "at"],
+    ["notify-send", "/usr/bin/notify-send", "libnotify-bin"],
+    ["ffmpeg", "/usr/bin/ffmpeg", "ffmpeg"],
+    ["ffmpegthumbnailer", "/usr/bin/ffmpegthumbnailer", "ffmpegthumbnailer"],
+    ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
+    ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"],
+    ["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]
+  ],
   "fedora": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
     ["wget", "/usr/bin/wget", "wget"],
@@ -483,14 +499,18 @@ Dependencies.prototype = {
       let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
       this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
 
+      let pkgs_with_commas = _pkg_to_install.join(", ");
+      let pkgs_wo_commas = _pkg_to_install.join(" ");
       if (_is_pkcon_present && _is_pkexec_present) {
-        GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Radio3.0 message: Some packages needed!; echo List of needed packages: %s; pkexec pkcon -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
+        //~ GLib.spawn_command_line_async(terminal + " " + separator + " '/usr/bin/env sh -c \"echo Radio3.0 message: Some packages needed!; echo List of needed packages: %s; pkexec pkcon -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
+        GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'Radio3.0 message: Some packages needed'; echo 'List of needed packages: ${pkgs_with_commas}'; pkexec pkcon -y install ${pkgs_wo_commas}"`);
         this.depAreMet = false;
         return
       }
 
       if (_is_pkgcli_present && _is_pkexec_present) {
-        GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Radio3.0 message: Some packages needed!; echo List of needed packages: %s; pkexec pkgcli -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
+        //~ GLib.spawn_command_line_async(terminal + " " + separator + " '/usr/bin/env sh -c \"echo Radio3.0 message: Some packages needed!; echo List of needed packages: %s; pkexec pkgcli -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
+        GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'Radio3.0 message: Some packages needed'; echo 'List of needed packages: ${pkgs_with_commas}'; pkexec pkgcli -y install ${pkgs_wo_commas}"`);
         this.depAreMet = false;
         return
       }
@@ -499,9 +519,11 @@ Dependencies.prototype = {
         if (terminal != "") {
           // TRANSLATORS: The next messages should not be translated.
           if (_isDebian === true) {
-            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Radio3.0 message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+            //~ GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo Radio3.0 message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+            GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'Radio3.0 message: Some packages needed'; echo 'To complete the installation, please become root with su then execute the command: ${_apt_update}${_and}${_apt_install}'; sleep 1; exec bash"`);
           } else {
-            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Radio3.0 message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+            //~ GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo Radio3.0 message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+            GLib.spawn_command_line_async(`${terminal} ${separator} 'sh -c "echo Radio3.0 message: Some packages needed; echo To complete the installation, please enter then execute the command: ${_apt_update}${_and}${_apt_install}'; sleep 1; exec bash"`);
           }
         }
       } else {

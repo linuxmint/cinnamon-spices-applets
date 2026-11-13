@@ -1,3 +1,6 @@
+### v3.13.2~20261113
+  * Update checkDependencies.js script.
+
 ### v3.13.1~20261112
   * Improves Dependencies checking.
   * Ready for Cinnamon 6.8.

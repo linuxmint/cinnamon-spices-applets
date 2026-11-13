@@ -1,8 +1,8 @@
 const St = imports.gi.St;
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
-const Extension = imports.ui.extension; // Needed to reload applets
 const Cinnamon = imports.gi.Cinnamon;
+const Extension = imports.ui.extension; // Needed to reload applets
 
 function _require(relPath) {
     if (Extension.getCurrentExtension) {
@@ -14,12 +14,11 @@ function _require(relPath) {
 }
 
 const MessageTray = imports.ui.messageTray; // ++ Needed for the criticalNotify() function in this script
-const Util = _require("./lib/util");
+var Util = _require("./lib/util");
 const Main = imports.ui.main; // ++ Needed for notify()
 const Gettext = imports.gettext;
 
-//const Util = _require("./lib/util");
-const {
+var {
   UUID,
   HOME_DIR,
   USER_DATA_DIR,
@@ -35,21 +34,21 @@ const {
   logError
 } = _require("./lib/constants");
 
-const {to_string} = _require("./lib/to-string");
+var {to_string} = _require("./lib/to-string");
 
 
 // --- To adapt to the applet --- //
 /**
  * UUDI is the Universal Unique IDentifier of the applet using this dependencies management.
  */
-//const UUID = "Sensors@claudiux";
+//var UUID = "Sensors@claudiux";
 
 /**
  * NEEDS_FONTS_SYMBOLA must be set to true when the 'symbola' fonts are needed by the applet.
  * Once NEEDS_FONTS_SYMBOLA is set to true, it is not necessary to specify in DEPENDENCIES
  * which package must be installed to obtain the 'symbola' fonts.
  */
-const NEEDS_FONTS_SYMBOLA = true;
+var NEEDS_FONTS_SYMBOLA = true;
 
 /**
  * DEPENDENCIES for each type of distro.
@@ -66,7 +65,7 @@ const NEEDS_FONTS_SYMBOLA = true;
  *
  * Example: To install the executable 'sox' and the library 'libsox-fmt-mp3.so', we need to install two packages in
  * Debian and derivatives distros (default) and only one package (named sox) in Arch and Fedora distros.
-const DEPENDENCIES = {
+var DEPENDENCIES = {
   "default": [
     ["sox", "/usr/bin/sox",  "sox"],
     ["", "/usr/share/doc/libsox-fmt-mp3/copyright", "libsox-fmt-mp3"]
@@ -96,8 +95,6 @@ var DEPENDENCIES = {
   "default": [
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
-    //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    //~ ["xenity|zenity|yad", "/usr/bin/xenity|/usr/bin/zenity|/usr/bin/yad", "xenity|zenity|yad"],
     [["xenity", "zenity", "yad"], "/usr/bin/xenity", "xenity"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
@@ -156,15 +153,7 @@ if (NEEDS_FONTS_SYMBOLA) {
   DEPENDENCIES["openSUSE"].push(["", "/usr/share/fonts/truetype/Symbola.ttf", "gdouros-symbola-fonts"]);
 }
 
-//~ const _ = function(str) {
-  //~ let translation = Gettext.gettext(str);
-  //~ if (translation !== str) {
-    //~ return translation;
-  //~ }
-  //~ return Gettext.dgettext(UUID, str);
-//~ }
-
-const UPDATE = {
+var UPDATE = {
   "default": "sudo apt-get update",
   "arch": GLib.find_program_in_path("yay") != null ? "yay -Syu" : "sudo pacman -Syu",
   "debian": "apt-get update",
@@ -174,7 +163,7 @@ const UPDATE = {
   "gentoo": ""
 }
 
-const INSTALL = {
+var INSTALL = {
   "default": "sudo apt-get install",
   "arch": GLib.find_program_in_path("yay") != null ? "yay -S" : "sudo pacman -S",
   "debian": "apt-get install",
@@ -184,9 +173,7 @@ const INSTALL = {
   "gentoo": ""
 }
 
-//const HOME_DIR = GLib.get_home_dir();
-
-const DISTRO = function() {
+var DISTRO = function() {
   let osRelease = to_string(GLib.file_get_contents("/usr/lib/os-release")[1]);
   let lines = osRelease.split("\n");
   var distro = "";
@@ -272,11 +259,15 @@ function isDebian() {
 
 function isOpenSUSE() {
   return GLib.find_program_in_path("zypper")
-}
+} // End of isOpenSUSE
 
 function isGentoo() {
   return Gio.file_new_for_path("/etc/gentoo-release").query_exists(null)
 } // End of isGentoo
+
+function is_apturl_present() {
+  return GLib.find_program_in_path("apturl")
+} // End of is_apturl_present
 
 
 function is_pkexec_present() {
@@ -284,12 +275,10 @@ function is_pkexec_present() {
 } // End of is_pkexec_present
 
 function is_pkcon_present() {
-  //~ return GLib.find_program_in_path("apturl")
   return (GLib.find_program_in_path("pkcon") != null && GLib.find_program_in_path("pkexec") != null)
 } // End of is_pkcon_present
 
 function is_pkgcli_present() {
-  //~ return GLib.find_program_in_path("apturl")
   return (GLib.find_program_in_path("pkgcli") != null && GLib.find_program_in_path("pkexec") != null)
 } // End of is_pkgcli_present
 
@@ -410,8 +399,10 @@ Dependencies.prototype = {
       let terminal = get_default_terminal();
       let separator = get_default_terminal_separator();
       // apturl is it present?
+      let _is_apturl_present = is_apturl_present();
       let _is_pkcon_present = is_pkcon_present();
       let _is_pkgcli_present = is_pkgcli_present();
+      let _is_pkexec_present = is_pkexec_present();
       // Detects the distrib in use and make adapted message and notification:
       let _isFedora = isFedora();
       let _isArchlinux = isArchLinux();
@@ -425,24 +416,13 @@ Dependencies.prototype = {
       let _and = " \\\\&\\\\& ";
       if (_apt_update.length === 0)
         _and = "";
-      //~ LANG=C pkcon -p search name xenity zenity yad | grep Installed | head -n 1 | awk '{print $1}'
+      // LANG=C pkcon -p search name xenity zenity yad | grep Installed | head -n 1 | awk '{print $1}'
       let _apt_install = "%s %s".format(_install, _pkg_to_install.join(" "));
-      //var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : _isDebian ? "apt install libnotify-bin fonts-symbola" : "sudo apt install libnotify-bin fonts-symbola";
       let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
-      //~ let criticalMessage = _is_pkcon_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please install these packages:")+"\n "+ _pkg_to_install.join(" ") +"\n\n";
       let criticalMessage = criticalMessagePart1+"\n\n" + _("Please install these packages:") +" "+ _pkg_to_install.join(" ") +"\n\n";
-      //~ this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
 
       if (!_is_pkcon_present && !_is_pkgcli_present) {
         this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
-        //~ if (terminal != "") {
-          //~ // TRANSLATORS: The next messages should not be translated.
-          //~ if (_isDebian === true) {
-            //~ GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
-          //~ } else {
-            //~ GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
-          //~ }
-        //~ }
       } else if (_is_pkcon_present) {
         this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon,
           [
@@ -450,7 +430,6 @@ Dependencies.prototype = {
             () => { Util.spawnCommandLineAsync(terminal + separator + "pkexec pkcon -y install %s".format(_pkg_to_install.join(" "))) }
           ]
         );
-        //~ Util.spawnCommandLine("apturl apt:%s".format(_pkg_to_install.join(",")));
 
       } else { //_is_pkgcli_present is true:
         this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon,
