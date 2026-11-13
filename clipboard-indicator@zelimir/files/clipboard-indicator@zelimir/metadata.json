@@ -1,0 +1,15 @@
+{
+    "uuid": "clipboard-indicator@zelimir",
+    "name": "Clipboard Indicator",
+    "description": "Clipboard history (text and images): search, pinning, tags, editing, private mode, shortcuts and paste from the menu. A Cinnamon port of the GNOME Clipboard Indicator extension.",
+    "version": "1.0",
+    "max-instances": 1,
+    "author": "zelimir86",
+    "cinnamon-version": [
+        "6.0",
+        "6.2",
+        "6.4",
+        "6.6",
+        "6.7"
+    ]
+}
