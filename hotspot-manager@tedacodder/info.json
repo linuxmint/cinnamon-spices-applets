@@ -1,0 +1,6 @@
+{
+    "uuid": "hotspot-manager@tedacodder",
+    "name": "Hotspot Manager",
+    "author": "tedacodder",
+    "description": "Start and stop a Wi-Fi hotspot, see who is connected, and copy the SSID and password"
+}

@@ -1,0 +1,13 @@
+{
+    "uuid": "hotspot-manager@tedacodder",
+    "name": "Hotspot Manager",
+    "description": "Start and stop a Wi-Fi hotspot, see who is connected, and copy the SSID and password",
+    "max-instances": 1,
+    "authors": "tedacodder",
+    "version": "1.1",
+    "cinnamon-version": [
+        "5.8",
+        "6.0",
+        "6.2"
+    ]
+}
