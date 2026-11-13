@@ -79,7 +79,6 @@ var DEPENDENCIES = {
   "default": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
     ["wget", "/usr/bin/wget", "wget"],
-    //["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
     ["sox", "/usr/bin/sox", "sox"],
     ["", "/usr/share/doc/libsox-fmt-all/copyright", "libsox-fmt-all"],
@@ -93,7 +92,6 @@ var DEPENDENCIES = {
   "arch": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
     ["wget", "/usr/bin/wget", "wget"],
-    //["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
     ["at", "/usr/bin/at", "at"],
     ["notify-send", "/usr/bin/notify-send", "libnotify"],
@@ -107,7 +105,6 @@ var DEPENDENCIES = {
     ["wget", "/usr/bin/wget", "wget"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
-    //["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
     ["", "/usr/share/doc/libsox-fmt-all/copyright", "libsox-fmt-all"],
     ["at", "/usr/bin/at", "at"],
@@ -123,7 +120,6 @@ var DEPENDENCIES = {
     ["wget", "/usr/bin/wget", "wget"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
-    //["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
     ["", "/usr/share/doc/libsox-fmt-all/copyright", "libsox-fmt-all"],
     ["at", "/usr/bin/at", "at"],
@@ -177,19 +173,13 @@ if (versionCompare(GLib.getenv("CINNAMON_VERSION"), "5.8") >= 0) {
   DEPENDENCIES["debian"].push(["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]);
   DEPENDENCIES["arch"].push(["", "/usr/lib/girepository-1.0/Soup-3.0.typelib", "libsoup3"]);
   DEPENDENCIES["fedora"].push(["", "/usr/share/licenses/libsoup3/COPYING", "libsoup3"]);
-  //DEPENDENCIES["fedora"].push(["pipewire", "/usr/bin/pipewire", "pipewire"]);
   DEPENDENCIES["fedora"].push(["pw-cat", "/usr/bin/pw-cat", "pipewire-utils"]);
   DEPENDENCIES["fedora"].push(["pipewire-pulse", "/usr/bin/pipewire-pulseaudio", "pipewire-pulseaudio"]);
   DEPENDENCIES["openSUSE"].push(["", "/usr/share/licenses/libsoup-3_0-0/COPYING", "libsoup-3_0-0"]);
-} else {
-  //DEPENDENCIES["debian"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
-  //DEPENDENCIES["fedora"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
 }
 
 if (GLib.find_program_in_path("pipewire") && versionCompare(GLib.getenv("CINNAMON_VERSION"), "6.2") >= 0) {
   DEPENDENCIES["default"].push(["pipewire-pulse", "/usr/bin/pipewire-pulse", "pipewire-pulse"]);
-} else {
-  //DEPENDENCIES["default"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
 }
 
 // --- Do not modify from here --- //
@@ -246,7 +236,6 @@ const INSTALL = {
   "gentoo": ""
 }
 
-//const HOME_DIR = GLib.get_home_dir();
 const USER_DATA_DIR = GLib.get_user_data_dir();
 
 var DISTRO = function() {
@@ -342,7 +331,7 @@ function isGentoo() {
 } // End of isGentoo
 
 function is_apturl_present() {
-  return GLib.find_program_in_path("apturl")
+  return (GLib.find_program_in_path("apturl") != null)
 } // End of is_apturl_present
 
 
@@ -355,7 +344,6 @@ function is_pkcon_present() {
 } // End of is_pkcon_present
 
 function is_pkgcli_present() {
-  //~ return GLib.find_program_in_path("apturl")
   return (GLib.find_program_in_path("pkgcli") != null && GLib.find_program_in_path("pkexec") != null)
 } // End of is_pkgcli_present
 
@@ -485,7 +473,6 @@ Dependencies.prototype = {
       let _isArchlinux = isArchLinux();
       let _isDebian = isDebian();
       let _isOpenSUSE = isOpenSUSE();
-      //let _apt_update = _isFedora ? "sudo dnf update" : _isArchlinux ? "" : _isDebian ? "apt update" : "sudo apt update";
       let distro = get_distro();
       let _apt_update = UPDATE[distro];
       let _install = INSTALL[distro];
@@ -494,7 +481,6 @@ Dependencies.prototype = {
       if (_apt_update.length === 0)
         _and = "";
       let _apt_install = "%s %s".format(_install, _pkg_to_install.join(" "));
-      //var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : _isDebian ? "apt install libnotify-bin fonts-symbola" : "sudo apt install libnotify-bin fonts-symbola";
       let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
       let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
       this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
@@ -502,14 +488,12 @@ Dependencies.prototype = {
       let pkgs_with_commas = _pkg_to_install.join(", ");
       let pkgs_wo_commas = _pkg_to_install.join(" ");
       if (_is_pkcon_present && _is_pkexec_present) {
-        //~ GLib.spawn_command_line_async(terminal + " " + separator + " '/usr/bin/env sh -c \"echo Radio3.0 message: Some packages needed!; echo List of needed packages: %s; pkexec pkcon -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
         GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'Radio3.0 message: Some packages needed'; echo 'List of needed packages: ${pkgs_with_commas}'; pkexec pkcon -y install ${pkgs_wo_commas}"`);
         this.depAreMet = false;
         return
       }
 
       if (_is_pkgcli_present && _is_pkexec_present) {
-        //~ GLib.spawn_command_line_async(terminal + " " + separator + " '/usr/bin/env sh -c \"echo Radio3.0 message: Some packages needed!; echo List of needed packages: %s; pkexec pkgcli -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
         GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'Radio3.0 message: Some packages needed'; echo 'List of needed packages: ${pkgs_with_commas}'; pkexec pkgcli -y install ${pkgs_wo_commas}"`);
         this.depAreMet = false;
         return
@@ -519,10 +503,8 @@ Dependencies.prototype = {
         if (terminal != "") {
           // TRANSLATORS: The next messages should not be translated.
           if (_isDebian === true) {
-            //~ GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo Radio3.0 message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
             GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'Radio3.0 message: Some packages needed'; echo 'To complete the installation, please become root with su then execute the command: ${_apt_update}${_and}${_apt_install}'; sleep 1; exec bash"`);
           } else {
-            //~ GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo Radio3.0 message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
             GLib.spawn_command_line_async(`${terminal} ${separator} 'sh -c "echo Radio3.0 message: Some packages needed; echo To complete the installation, please enter then execute the command: ${_apt_update}${_and}${_apt_install}'; sleep 1; exec bash"`);
           }
         }

@@ -44,3 +44,10 @@ nmcli connection mod "Connexion filaire 1" +ipv4.routes "51.91.111.79 192.168.1.
 # Il faut ensuite arrêter puis démarrer la connexion :
 nmcli connection down "Connexion filaire 1"
 nmcli connection up "Connexion filaire 1"
+
+
+# Pour trouver le premier installé parmi xenity, zenity, ou yad :
+LANG=C pkcon -p search name xenity zenity yad | grep Installed | head -n 1 | awk '{print $1}'
+
+# Pour choisir le premier executable disponible parmi xenity, zenity, ou yad :
+XENITY=$(echo -n $(which xenity zenity yad  2>/dev/null | head -n 1))
