@@ -26,15 +26,17 @@ export interface PopupMenu extends imports.gi.St.BoxLayout {
     /** close the popupmenu and relase the grabbed keys. Use this instead of hide! */
     close: () => void
     addPopupMenuCloseHandler: (ChangeHandler: ChangeHandler<void>) => void
+    /** closes the popupMenu and destroys it together with its container on the uiGroup */
+    destroyMenu: () => void
 }
-
-const onPopupMenuClosedHandlers: ChangeHandler<void>[] = []
 
 export function createPopupMenu(props: PopupMenuProps) {
 
     const {
         launcher
     } = props
+
+    const onPopupMenuClosedHandlers: ChangeHandler<void>[] = []
 
     const box = new BoxLayout({
         style_class: 'popup-menu-content',
@@ -208,6 +210,10 @@ export function createPopupMenu(props: PopupMenuProps) {
 
     (box as PopupMenu).addPopupMenuCloseHandler = addPopupMenuCloseHandler;
     (box as PopupMenu).toggle = toggle;
+    (box as PopupMenu).destroyMenu = () => {
+        close()
+        bin.destroy()
+    };
     // TODO: remove close
     (box as PopupMenu).close = close
 

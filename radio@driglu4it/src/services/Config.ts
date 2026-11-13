@@ -24,6 +24,10 @@ export const initConfig = () => {
     configs = createConfig()
 }
 
+export const destroyConfig = () => {
+    configs?.finalize()
+}
+
 const createConfig = () => {
 
     // all settings are saved to this object
@@ -103,6 +107,8 @@ const createConfig = () => {
 
     return {
         settingsObject,
+
+        finalize: () => appletSettings.finalize(),
 
         getInitialVolume,
 
