@@ -13,6 +13,17 @@ then
     [ -d "$APPLET_DIR" ] || mkdir "$APPLET_DIR"
     find . -maxdepth 1 -type f ! -name $(basename -- "$0") -exec cp {} "$APPLET_DIR" \;
 
+    echo "[*] Installing multiversion overrides..."
+
+    for dir in */; do
+        dir="${dir%/}"
+        case "$dir" in
+            [0-9]*.[0-9]*)
+                cp -r "$dir" "$APPLET_DIR"
+                ;;
+        esac
+    done
+
     echo "[*] Done!"
     exit 0
 fi

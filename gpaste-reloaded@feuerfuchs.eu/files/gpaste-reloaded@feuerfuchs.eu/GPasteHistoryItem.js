@@ -26,7 +26,7 @@ GPasteHistoryItem.prototype = {
         this.addActor(this.label);
 
         this.setTextLength();
-        this._settingsChangedID = this._applet.clientSettings.connect('changed::element-size', Lang.bind(this, this.setTextLength));
+        this._settingsChangedID = this._applet.clientSettings.connect('notify::element-size', Lang.bind(this, this.setTextLength));
 
         //
         // Delete button
@@ -77,8 +77,8 @@ GPasteHistoryItem.prototype = {
         this._index = index;
 
         if (index != -1) {
-            this._applet.client.get_element_at_index(index, Lang.bind(this, function (client, result) {
-                let item = client.get_element_at_index_finish(result);
+            this._applet.client.get_item_at_index(index, null, Lang.bind(this, function (client, result) {
+                let item = client.get_item_at_index_finish(result);
                 this._uuid = item.get_uuid();
                 this.label.set_text(item.get_value().replace(/[\t\n\r]/g, ''));
             }));
@@ -94,18 +94,34 @@ GPasteHistoryItem.prototype = {
      * Refresh history item's content
      */
     refresh: function() {
-            this._applet.client.get_element_at_index(this._index, Lang.bind(this, function(client, result) {
-                let item = client.get_element_at_index_finish(result);
+            this._applet.client.get_item_at_index(this._index, null, Lang.bind(this, function(client, result) {
+                let item = client.get_item_at_index_finish(result);
                 this._uuid = item.get_uuid();
                 this.label.set_text(item.get_value().replace(/[\t\n\r]/g, ''));
             }));
         },
-    
+
+    /*
+     * Set specified uuid and get respective history item's content
+     */
+    setUuid: function(uuid) {
+        this._uuid = uuid;
+        if (uuid != null) {
+            this._applet.client.get_item(uuid, null, Lang.bind(this, function(client, result) {
+                const item = client.get_item_finish(result);
+                this.label.set_text(item.get_value().replace(/[\t\n\r]/g, ''));
+            }));
+            this.actor.show();
+        } else {
+            this.actor.hide();
+        }
+    },
+
     /*
      * Remove history item
      */
     remove: function() {
-        this._applet.client.delete(this._uuid, null);
+        this._applet.client.delete_item(this._uuid, null, null);
     },
 
     //
@@ -127,7 +143,7 @@ GPasteHistoryItem.prototype = {
      * Select history item
      */
     activate: function(event) {
-        this._applet.client.select(this._uuid, null);
+        this._applet.client.select(this._uuid, null, null);
         this._applet.menu.toggle();
     }
 };
