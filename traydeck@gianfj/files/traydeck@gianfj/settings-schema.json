@@ -1,0 +1,91 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page-icons", "page-look"],
+        "page-icons": {
+            "type": "page",
+            "title": "Icons",
+            "sections": ["section-manage"]
+        },
+        "page-look": {
+            "type": "page",
+            "title": "Appearance",
+            "sections": ["section-size", "section-style"]
+        },
+        "section-manage": {
+            "type": "section",
+            "title": "Manage",
+            "keys": ["manage-button", "overflow-position", "reset-button"]
+        },
+        "section-size": {
+            "type": "section",
+            "title": "Size and spacing",
+            "keys": ["icon-size-auto", "icon-size", "spacing"]
+        },
+        "section-style": {
+            "type": "section",
+            "title": "Style",
+            "keys": ["hover-highlight", "show-labels"]
+        }
+    },
+    "manage-button": {
+        "type": "button",
+        "description": "Manage tray icons…",
+        "tooltip": "Show, tuck away, hide and reorder your tray icons",
+        "callback": "on_manage_clicked"
+    },
+    "reset-button": {
+        "type": "button",
+        "description": "Reset all icons to default",
+        "tooltip": "Show every icon again and restore the default order",
+        "callback": "on_reset_clicked"
+    },
+    "overflow-position": {
+        "type": "combobox",
+        "default": "start",
+        "description": "Overflow button position",
+        "tooltip": "Where the button that opens tucked-away icons sits",
+        "options": {
+            "Before the icons": "start",
+            "After the icons": "end"
+        }
+    },
+    "icon-size-auto": {
+        "type": "switch",
+        "default": true,
+        "description": "Match panel icon size"
+    },
+    "icon-size": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 12,
+        "max": 48,
+        "step": 1,
+        "units": "px",
+        "description": "Icon size",
+        "dependency": "!icon-size-auto"
+    },
+    "spacing": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "units": "px",
+        "description": "Space between icons"
+    },
+    "hover-highlight": {
+        "type": "switch",
+        "default": true,
+        "description": "Highlight the icon under the pointer"
+    },
+    "show-labels": {
+        "type": "switch",
+        "default": true,
+        "description": "Show text labels that apps attach to their icon"
+    },
+    "icon-config": {
+        "type": "generic",
+        "default": {}
+    }
+}

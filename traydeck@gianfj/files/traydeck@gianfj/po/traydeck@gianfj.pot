@@ -1,0 +1,180 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-12 10:16+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: applet.js:37
+msgid "Show"
+msgstr ""
+
+#: applet.js:37
+msgid "Overflow"
+msgstr ""
+
+#: applet.js:37
+msgid "Hide"
+msgstr ""
+
+#: applet.js:51
+msgid "Unknown"
+msgstr ""
+
+#: applet.js:331
+#, javascript-format
+msgid "App %s"
+msgstr ""
+
+#: applet.js:1105
+msgid "Nothing tucked away"
+msgstr ""
+
+#: applet.js:1119
+msgid "Manage icons…"
+msgstr ""
+
+#: applet.js:1120 applet.js:1186
+msgid "Settings"
+msgstr ""
+
+#: applet.js:1151 applet.js:1179
+msgid "Tray icons"
+msgstr ""
+
+#: applet.js:1152
+#, javascript-format
+msgid "Tray icons · %d tucked away"
+msgid_plural "Tray icons · %d tucked away"
+msgstr[0] ""
+msgstr[1] ""
+
+#. settings-schema.json->manage-button->description
+#: applet.js:1161
+msgid "Manage tray icons…"
+msgstr ""
+
+#: applet.js:1181
+msgid "Choose what shows, what tucks away, and the order."
+msgstr ""
+
+#: applet.js:1191 applet.js:1200 applet.js:1207
+msgid "Reset"
+msgstr ""
+
+#: applet.js:1196
+msgid "Click again to reset"
+msgstr ""
+
+#: applet.js:1255
+msgid "No tray icons yet. They will appear here as apps start."
+msgstr ""
+
+#: applet.js:1287
+msgid "Status icon"
+msgstr ""
+
+#: applet.js:1287
+msgid "System tray icon"
+msgstr ""
+
+#: applet.js:1287
+msgid "Not running"
+msgstr ""
+
+#. metadata.json->name
+msgid "Traydeck"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"A clean, customizable home for your tray icons: resize, reorder, tuck into "
+"an overflow popup, or hide. Replaces the stock System Tray and XApp Status "
+"applets."
+msgstr ""
+
+#. settings-schema.json->page-icons->title
+msgid "Icons"
+msgstr ""
+
+#. settings-schema.json->page-look->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->section-manage->title
+msgid "Manage"
+msgstr ""
+
+#. settings-schema.json->section-size->title
+msgid "Size and spacing"
+msgstr ""
+
+#. settings-schema.json->section-style->title
+msgid "Style"
+msgstr ""
+
+#. settings-schema.json->manage-button->tooltip
+msgid "Show, tuck away, hide and reorder your tray icons"
+msgstr ""
+
+#. settings-schema.json->reset-button->description
+msgid "Reset all icons to default"
+msgstr ""
+
+#. settings-schema.json->reset-button->tooltip
+msgid "Show every icon again and restore the default order"
+msgstr ""
+
+#. settings-schema.json->overflow-position->description
+msgid "Overflow button position"
+msgstr ""
+
+#. settings-schema.json->overflow-position->tooltip
+msgid "Where the button that opens tucked-away icons sits"
+msgstr ""
+
+#. settings-schema.json->overflow-position->options
+msgid "Before the icons"
+msgstr ""
+
+#. settings-schema.json->overflow-position->options
+msgid "After the icons"
+msgstr ""
+
+#. settings-schema.json->icon-size-auto->description
+msgid "Match panel icon size"
+msgstr ""
+
+#. settings-schema.json->icon-size->units
+#. settings-schema.json->spacing->units
+msgid "px"
+msgstr ""
+
+#. settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr ""
+
+#. settings-schema.json->spacing->description
+msgid "Space between icons"
+msgstr ""
+
+#. settings-schema.json->hover-highlight->description
+msgid "Highlight the icon under the pointer"
+msgstr ""
+
+#. settings-schema.json->show-labels->description
+msgid "Show text labels that apps attach to their icon"
+msgstr ""
