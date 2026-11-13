@@ -44,9 +44,10 @@ hotspot runs, OFFLINE when it is off, and WORKING while a change is in progress.
 - The hotspot and your normal Wi-Fi share one adapter. On a Realtek RTL8188CE, starting
   the hotspot disconnected the laptop from its Wi-Fi network, and the connection came
   back after the hotspot was stopped. Other adapters may behave differently.
-- A phone can join the hotspot, but it reaches the internet only if this computer has
-  a working connection to share. Internet sharing has not been tested with a wired
-  connection.
+- A phone that joins the hotspot reaches the internet when this computer has a working
+  Ethernet connection, using DHCP. Tested on a Realtek RTL8188CE. Sharing a Wi-Fi
+  connection does not work on this card, because the Wi-Fi link drops when the hotspot
+  starts.
 - The number of devices depends on the adapter.
 - The hotspot does not start automatically at boot.
 
