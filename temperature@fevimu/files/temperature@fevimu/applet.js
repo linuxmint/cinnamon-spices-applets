@@ -94,7 +94,6 @@ CPUTemperatureApplet.prototype = {
 
     this.set_applet_tooltip(_('Temperature'));
 
-    this.updateTemperature();
     this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
   },
 
@@ -146,6 +145,10 @@ CPUTemperatureApplet.prototype = {
     if (this.menu.isOpen && this._cpuHwmon) {
       this.updateTemperature();
     }
+  },
+
+  on_applet_added_to_panel: function() {
+    this.updateTemperature();
   },
 
   on_applet_removed_from_panel: function() {
