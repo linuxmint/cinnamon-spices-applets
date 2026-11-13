@@ -43,6 +43,14 @@ const STATE_ICON_FILE = {
   connected: "cato-sdp-connected.svg",
   disconnected: "cato-sdp-disconnected.svg",
   connecting: "cato-sdp-connecting.svg",
+  // An unauthenticated tunnel is effectively unusable, so it's shown the
+  // same as "disconnected" in the panel (per user: "technically the same
+  // as disconnected").
+  unauthenticated: "cato-sdp-disconnected.svg",
+  // Reported "connected" while actually on the office LAN with no SDP
+  // tunnel at all (Cato's Direct Access feature). Shown with its own icon
+  // (network symbol inside) so it isn't mistaken for a real SDP tunnel.
+  direct: "cato-sdp-direct.svg",
   unknown: "cato-sdp-disconnected.svg"
 };
 
@@ -50,6 +58,8 @@ const STATE_STYLE = {
   connected: "cato-sdp-connected",
   disconnected: "cato-sdp-disconnected",
   connecting: "cato-sdp-connecting",
+  unauthenticated: "cato-sdp-disconnected",
+  direct: "cato-sdp-direct",
   unknown: "cato-sdp-unknown"
 };
 
@@ -57,6 +67,8 @@ const STATE_LABEL = {
   connected: _("Connected"),
   disconnected: _("Disconnected"),
   connecting: _("Connecting\u2026"),
+  unauthenticated: _("Not authenticated"),
+  direct: _("Connected (office network, no VPN tunnel)"),
   unknown: _("Unknown")
 };
 
@@ -83,7 +95,9 @@ class CatoSdpApplet extends Applet.TextIconApplet {
 
     this.state = "unknown";
     this.details = {};
-    this._busy = false;
+    this._starting = false;
+    this._stopping = false;
+    this._abortedConnect = false;
     this._pollSourceId = 0;
     this._pendingSubprocess = null;
     this._history = [];
@@ -300,6 +314,12 @@ class CatoSdpApplet extends Applet.TextIconApplet {
   _parseStatus(result) {
     let text = (result.stdout + " " + result.stderr).trim();
 
+    // Cato's "Direct Access" feature: the client reports "connected" while
+    // on the office LAN itself, with no SDP tunnel at all (no "state ="
+    // field, no tunnel/pop info). Must be checked first since it would
+    // otherwise match the generic /\bconnected\b/ fallback below.
+    if (/connected\s+to\s+cato\s+vpn\s+via\s+office/i.test(text)) return "direct";
+
     // The Cato client reports an explicit machine-readable state field,
     // e.g. "state = STATE_AUTHENTICATED". Prefer it over generic keyword
     // matching: words like "authenticated" would otherwise be wrongly
@@ -307,6 +327,11 @@ class CatoSdpApplet extends Applet.TextIconApplet {
     let stateMatch = text.match(/state\s*=\s*(STATE_[A-Z_]+)/i);
     if (stateMatch) {
       let state = stateMatch[1].toUpperCase();
+      // A tunnel can come up without completing authentication (e.g.
+      // "STATE_CONNECTED_UNAUTH"). Check this before the generic CONNECTED
+      // match below, since it's a distinct, unusable state that needs its
+      // own recovery path (see _connect()).
+      if (/UNAUTH/.test(state)) return "unauthenticated";
       if (state === "STATE_AUTHENTICATED" || state === "STATE_CONNECTED") return "connected";
       if (/CONNECTING|AUTHENTICATING|PENDING/.test(state)) return "connecting";
       if (/DISCONNECTED|IDLE|STOPPED|NOT_CONNECTED/.test(state)) return "disconnected";
@@ -314,6 +339,7 @@ class CatoSdpApplet extends Applet.TextIconApplet {
 
     // Fallback for outputs without a "state" field (older/newer client
     // versions, or plain error messages).
+    if (/unauth/i.test(text)) return "unauthenticated";
     if (/not\s+connected|disconnected|no\s+active\s+connection/i.test(text)) return "disconnected";
     if (/\bconnecting\b|\bpending\b/i.test(text)) return "connecting";
     if (/\bconnected\b/i.test(text)) return "connected";
@@ -362,29 +388,40 @@ class CatoSdpApplet extends Applet.TextIconApplet {
   }
 
   async _connect() {
-    if (this._busy) return;
-    this._busy = true;
+    if (this._starting) return;
+    this._starting = true;
+    this._abortedConnect = false;
+    // A tunnel stuck in STATE_CONNECTED_UNAUTH is still "up" from the
+    // client's point of view, so a plain "start" is a no-op; it must be
+    // torn down first (confirmed manually: "cato-sdp stop" then "start").
+    let needsTeardown = this.state === "unauthenticated";
     this._setState("connecting");
-    this._setMenuSensitive(false);
+    if (needsTeardown) {
+      await this._run(["stop"]);
+    }
     let result = await this._run(["start"]);
-    if (result.exitCode !== 0) {
+    if (result.exitCode !== 0 && !this._abortedConnect) {
       this._notifyCommandFailure("start", result);
     }
-    this._busy = false;
-    this._setMenuSensitive(true);
+    this._starting = false;
     await this._checkStatus();
   }
 
   async _disconnect() {
-    if (this._busy) return;
-    this._busy = true;
-    this._setMenuSensitive(false);
+    if (this._stopping) return;
+    this._stopping = true;
+    if (this._starting) {
+      // Aborting our own in-flight "start" (e.g. a stuck STATE_CONNECTING):
+      // suppress the "start failed" notification that would otherwise fire
+      // once that command resolves because we killed it ourselves.
+      this._abortedConnect = true;
+    }
+    this._updateView();
     let result = await this._run(["stop"]);
     if (result.exitCode !== 0) {
       this._notifyCommandFailure("stop", result);
     }
-    this._busy = false;
-    this._setMenuSensitive(true);
+    this._stopping = false;
     await this._checkStatus();
   }
 
@@ -403,17 +440,12 @@ class CatoSdpApplet extends Applet.TextIconApplet {
     Main.notifyError(_("Cato SDP"), message);
   }
 
-  _setMenuSensitive(sensitive) {
-    this.connectItem.setSensitive(sensitive);
-    this.disconnectItem.setSensitive(sensitive);
-  }
-
   _setState(newState) {
     let changed = newState !== this.state;
     this.state = newState;
     this._updateView();
 
-    if (changed && this.showNotifications && (newState === "connected" || newState === "disconnected")) {
+    if (changed && this.showNotifications && (newState === "connected" || newState === "disconnected" || newState === "unauthenticated")) {
       Main.notify(_("Cato SDP"), STATE_LABEL[newState]);
     }
   }
@@ -425,8 +457,17 @@ class CatoSdpApplet extends Applet.TextIconApplet {
 
     let connected = this.state === "connected";
     let connecting = this.state === "connecting";
-    this.connectItem.setSensitive(!connected && !connecting && !this._busy);
-    this.disconnectItem.setSensitive(connected && !this._busy);
+    // An unauthenticated tunnel is still an active tunnel underneath, so
+    // allow "Disconnect" (to tear it down) in addition to "Connect" (which
+    // tears it down and retries, see _connect()).
+    let unauthenticated = this.state === "unauthenticated";
+    this.connectItem.setSensitive(!connected && !connecting && !this._starting);
+    // "Disconnect" is also enabled while connecting, so a stuck/slow connect
+    // attempt (STATE_CONNECTING, whether started from this menu or
+    // externally via the CLI) can be aborted with "cato-sdp stop" — even
+    // while our own "start" invocation above is still in flight, since it
+    // runs as a separate process.
+    this.disconnectItem.setSensitive((connected || unauthenticated || connecting) && !this._stopping);
 
     this._updateTooltip();
     this._updateStatistics();
@@ -436,7 +477,7 @@ class CatoSdpApplet extends Applet.TextIconApplet {
     let label = STATE_LABEL[this.state] || STATE_LABEL.unknown;
     let connectionName = this.details.account || this.details.popName;
     let tooltip = _("Cato SDP") + ": " + label;
-    if ((this.state === "connected" || this.state === "connecting") && connectionName) {
+    if ((this.state === "connected" || this.state === "connecting" || this.state === "unauthenticated" || this.state === "direct") && connectionName) {
       tooltip += " (" + connectionName + ")";
     }
     this.set_applet_tooltip(tooltip);

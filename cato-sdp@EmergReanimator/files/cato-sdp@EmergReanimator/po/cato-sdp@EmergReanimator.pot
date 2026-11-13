@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR EmergReanimator
-# This file is distributed under the same license as the cato-sdp package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: cato-sdp 1.3.0\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 20:27+0200\n"
+"POT-Creation-Date: 2026-11-09 07:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,95 +17,103 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:57
+#: applet.js:67
 msgid "Connected"
 msgstr ""
 
-#: applet.js:58
+#: applet.js:68
 msgid "Disconnected"
 msgstr ""
 
-#: applet.js:59
+#: applet.js:69
 msgid "Connecting…"
 msgstr ""
 
-#: applet.js:60
+#: applet.js:70
+msgid "Not authenticated"
+msgstr ""
+
+#: applet.js:71
+msgid "Connected (office network, no VPN tunnel)"
+msgstr ""
+
+#: applet.js:72
 msgid "Unknown"
 msgstr ""
 
-#: applet.js:78 applet.js:237 applet.js:403 applet.js:417 applet.js:438
+#: applet.js:90 applet.js:251 applet.js:440 applet.js:449 applet.js:479
 msgid "Cato SDP"
 msgstr ""
 
-#: applet.js:103
+#: applet.js:117
 msgid "Status: Unknown"
 msgstr ""
 
-#: applet.js:106
+#: applet.js:120
 msgid "Statistics"
 msgstr ""
 
-#: applet.js:140
+#: applet.js:154
 msgid "Connect"
 msgstr ""
 
-#: applet.js:144
+#: applet.js:158
 msgid "Disconnect"
 msgstr ""
 
-#: applet.js:151
+#: applet.js:165
 msgid "Copy Debug Info"
 msgstr ""
 
-#: applet.js:237
+#: applet.js:251
 msgid "Debug info copied to clipboard."
 msgstr ""
 
-#: applet.js:401
+#: applet.js:438
 #, javascript-format
 msgid "Exit code: %d"
 msgstr ""
 
-#: applet.js:424
+#: applet.js:456
 msgid "Status: "
 msgstr ""
 
-#: applet.js:447
+#: applet.js:488
 msgid "—"
 msgstr ""
 
-#: applet.js:450
+#: applet.js:491
 msgid "Version: "
 msgstr ""
 
-#: applet.js:451
+#: applet.js:492
 msgid "Connection: "
 msgstr ""
 
-#: applet.js:452
+#: applet.js:493
 msgid "Duration: "
 msgstr ""
 
-#: applet.js:453
+#: applet.js:494
 msgid "Received: "
 msgstr ""
 
-#: applet.js:454
+#: applet.js:495
 msgid "Sent: "
 msgstr ""
 
-#: applet.js:455
+#: applet.js:496
 msgid "Interface: "
 msgstr ""
 
-#: applet.js:456
+#: applet.js:497
 msgid "Tunnel IP: "
 msgstr ""
 
-#: applet.js:457
+#: applet.js:498
 msgid "Internal IP: "
 msgstr ""
 
-#: applet.js:458
+#: applet.js:499
 msgid "DNS: "
 msgstr ""
