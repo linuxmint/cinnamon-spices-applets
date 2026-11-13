@@ -1339,7 +1339,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
         this.closeSettingsWindow();
 
-        let pid = Util.spawnCommandLine(`xlet-settings -i ${this.instance_id} -t ${tab} applet ${uuid}`);
+        let pid = Util.spawnCommandLine(`xlet-settings applet ${uuid} -t ${tab} -i ${this.instance_id}`);
 
         if (maximize_vertically) {
           var app = null;

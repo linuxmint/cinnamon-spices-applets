@@ -31,7 +31,7 @@ const OUTPUT_LIMIT = 4000;
 
 const UUID = "cato-sdp@EmergReanimator";
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir()  + "/locale");
 
 function _(str) {
   let customTrans = Gettext.dgettext(UUID, str);

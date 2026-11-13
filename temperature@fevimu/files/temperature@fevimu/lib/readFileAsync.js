@@ -1,6 +1,5 @@
 //!/usr/bin/cjs
 const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
 const Extension = imports.ui.extension;
 
