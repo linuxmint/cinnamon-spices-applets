@@ -1,0 +1,325 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: heatmon@ZiraiMode 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#: applet.js:59
+msgid "Heat & Load Monitor"
+msgstr ""
+
+#: applet.js:449
+#, javascript-format
+msgid "%s (not found)"
+msgstr ""
+
+#: popup.js:19
+msgid "bit/s"
+msgstr ""
+
+#: popup.js:19
+msgid "kbit/s"
+msgstr ""
+
+#. settings-schema.json->net-warn->units
+#. settings-schema.json->net-crit->units
+#: popup.js:19
+msgid "Mbit/s"
+msgstr ""
+
+#: popup.js:19
+msgid "Gbit/s"
+msgstr ""
+
+#: popup.js:20
+msgid "KiB"
+msgstr ""
+
+#: popup.js:20
+msgid "MiB"
+msgstr ""
+
+#: popup.js:20
+msgid "GiB"
+msgstr ""
+
+#: popup.js:141 popup.js:153
+msgid "Load"
+msgstr ""
+
+#: popup.js:142 popup.js:154
+msgid "Temperature"
+msgstr ""
+
+#: popup.js:159
+msgid "nvidia-smi not found"
+msgstr ""
+
+#. settings-schema.json->sec-th-mem->title
+#: popup.js:163
+msgid "Memory"
+msgstr ""
+
+#. settings-schema.json->sec-th-storage->title
+#: popup.js:167
+msgid "Storage"
+msgstr ""
+
+#. settings-schema.json->sec-net->title
+#. settings-schema.json->sec-th-net->title
+#: popup.js:171
+msgid "Network"
+msgstr ""
+
+#: popup.js:182
+msgid "Open System Monitor"
+msgstr ""
+
+#: popup.js:205 popup.js:230
+#, javascript-format
+msgid "Temperature %s     Load %s"
+msgstr ""
+
+#: popup.js:209
+#, javascript-format
+msgid "Frequency %s GHz avg · %s GHz max"
+msgstr ""
+
+#: popup.js:210
+#, javascript-format
+msgid "Frequency %s"
+msgstr ""
+
+#: popup.js:235
+#, javascript-format
+msgid "Power %s / %s W     Fan %s"
+msgstr ""
+
+#: popup.js:237
+#, javascript-format
+msgid "Clocks: core %s MHz · memory %s MHz"
+msgstr ""
+
+#: popup.js:249
+#, javascript-format
+msgid "Swap %s / %s (%s)"
+msgstr ""
+
+#: popup.js:261
+msgid "No active connection"
+msgstr ""
+
+#: popup.js:263
+#, javascript-format
+msgid "Interface %s (pinned)"
+msgstr ""
+
+#: popup.js:265
+#, javascript-format
+msgid "Interface %s (automatic)"
+msgstr ""
+
+#: popup.js:270
+#, javascript-format
+msgid "Received %s · Sent %s"
+msgstr ""
+
+#: popup.js:274
+#, javascript-format
+msgid "↓ / ↑ · peak %s"
+msgstr ""
+
+#. metadata.json->description
+msgid "CPU, GPU, memory and network load with color-coded thresholds"
+msgstr ""
+
+#. settings-schema.json->page-general->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->page-thresholds->title
+msgid "Thresholds"
+msgstr ""
+
+#. settings-schema.json->page-colors->title
+#. settings-schema.json->sec-colors->title
+msgid "Colors"
+msgstr ""
+
+#. settings-schema.json->sec-panel->title
+msgid "Panel"
+msgstr ""
+
+#. settings-schema.json->sec-extra->title
+msgid "Extra metrics on panel"
+msgstr ""
+
+#. settings-schema.json->sec-th-cpu->title
+msgid "CPU"
+msgstr ""
+
+#. settings-schema.json->sec-th-gpu->title
+msgid "GPU"
+msgstr ""
+
+#. settings-schema.json->update-interval->units
+msgid "seconds"
+msgstr ""
+
+#. settings-schema.json->update-interval->description
+msgid "Update interval"
+msgstr ""
+
+#. settings-schema.json->show-cpu->description
+msgid "Show CPU temperature and load"
+msgstr ""
+
+#. settings-schema.json->show-gpu->description
+msgid "Show GPU temperature, load and VRAM"
+msgstr ""
+
+#. settings-schema.json->show-ram->description
+msgid "Show RAM usage"
+msgstr ""
+
+#. settings-schema.json->show-net->description
+msgid "Show network speed"
+msgstr ""
+
+#. settings-schema.json->show-gpu-power->description
+msgid "Show GPU power draw"
+msgstr ""
+
+#. settings-schema.json->show-gpu-fan->description
+msgid "Show GPU fan speed"
+msgstr ""
+
+#. settings-schema.json->show-swap->description
+msgid "Show swap usage"
+msgstr ""
+
+#. settings-schema.json->show-nvme->description
+msgid "Show hottest NVMe drive temperature"
+msgstr ""
+
+#. settings-schema.json->net-interface->description
+msgid "Network interface"
+msgstr ""
+
+#. settings-schema.json->net-interface->options
+msgid "Automatic (default route)"
+msgstr ""
+
+#. settings-schema.json->net-interface->tooltip
+msgid "Interface used for network speed. Automatic follows the default route."
+msgstr ""
+
+#. settings-schema.json->cpu-temp-warn->units
+#. settings-schema.json->cpu-temp-crit->units
+#. settings-schema.json->gpu-temp-warn->units
+#. settings-schema.json->gpu-temp-crit->units
+#. settings-schema.json->nvme-temp-warn->units
+#. settings-schema.json->nvme-temp-crit->units
+msgid "°C"
+msgstr ""
+
+#. settings-schema.json->cpu-temp-warn->description
+msgid "CPU temperature: warning"
+msgstr ""
+
+#. settings-schema.json->cpu-temp-crit->description
+msgid "CPU temperature: critical"
+msgstr ""
+
+#. settings-schema.json->gpu-temp-warn->description
+msgid "GPU temperature: warning"
+msgstr ""
+
+#. settings-schema.json->gpu-temp-crit->description
+msgid "GPU temperature: critical"
+msgstr ""
+
+#. settings-schema.json->nvme-temp-warn->description
+msgid "NVMe temperature: warning"
+msgstr ""
+
+#. settings-schema.json->nvme-temp-crit->description
+msgid "NVMe temperature: critical"
+msgstr ""
+
+#. settings-schema.json->cpu-load-warn->units
+#. settings-schema.json->cpu-load-crit->units
+#. settings-schema.json->gpu-load-warn->units
+#. settings-schema.json->gpu-load-crit->units
+#. settings-schema.json->vram-warn->units
+#. settings-schema.json->vram-crit->units
+#. settings-schema.json->ram-warn->units
+#. settings-schema.json->ram-crit->units
+msgid "%"
+msgstr ""
+
+#. settings-schema.json->cpu-load-warn->description
+msgid "CPU load: warning"
+msgstr ""
+
+#. settings-schema.json->cpu-load-crit->description
+msgid "CPU load: critical"
+msgstr ""
+
+#. settings-schema.json->gpu-load-warn->description
+msgid "GPU load: warning"
+msgstr ""
+
+#. settings-schema.json->gpu-load-crit->description
+msgid "GPU load: critical"
+msgstr ""
+
+#. settings-schema.json->vram-warn->description
+msgid "VRAM usage: warning"
+msgstr ""
+
+#. settings-schema.json->vram-crit->description
+msgid "VRAM usage: critical"
+msgstr ""
+
+#. settings-schema.json->ram-warn->description
+msgid "RAM usage: warning"
+msgstr ""
+
+#. settings-schema.json->ram-crit->description
+msgid "RAM usage: critical"
+msgstr ""
+
+#. settings-schema.json->net-warn->description
+msgid "Network speed: warning"
+msgstr ""
+
+#. settings-schema.json->net-crit->description
+msgid "Network speed: critical"
+msgstr ""
+
+#. settings-schema.json->color-normal->description
+msgid "Normal"
+msgstr ""
+
+#. settings-schema.json->color-warn->description
+msgid "Hot (warning)"
+msgstr ""
+
+#. settings-schema.json->color-crit->description
+msgid "Critical"
+msgstr ""

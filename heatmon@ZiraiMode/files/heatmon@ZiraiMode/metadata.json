@@ -1,0 +1,7 @@
+{
+  "uuid": "heatmon@ZiraiMode",
+  "name": "Heat & Load Monitor",
+  "description": "CPU, GPU, memory and network load with color-coded thresholds",
+  "max-instances": 1,
+  "version": "1.0.0"
+}

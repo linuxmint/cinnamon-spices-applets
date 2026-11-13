@@ -1,0 +1,337 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "page-general",
+            "page-thresholds",
+            "page-colors"
+        ],
+        "page-general": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "sec-panel",
+                "sec-extra",
+                "sec-net"
+            ]
+        },
+        "page-thresholds": {
+            "type": "page",
+            "title": "Thresholds",
+            "sections": [
+                "sec-th-cpu",
+                "sec-th-gpu",
+                "sec-th-mem",
+                "sec-th-storage",
+                "sec-th-net"
+            ]
+        },
+        "page-colors": {
+            "type": "page",
+            "title": "Colors",
+            "sections": [
+                "sec-colors"
+            ]
+        },
+        "sec-panel": {
+            "type": "section",
+            "title": "Panel",
+            "keys": [
+                "update-interval",
+                "show-cpu",
+                "show-gpu",
+                "show-ram",
+                "show-net"
+            ]
+        },
+        "sec-extra": {
+            "type": "section",
+            "title": "Extra metrics on panel",
+            "keys": [
+                "show-gpu-power",
+                "show-gpu-fan",
+                "show-swap",
+                "show-nvme"
+            ]
+        },
+        "sec-net": {
+            "type": "section",
+            "title": "Network",
+            "keys": [
+                "net-interface"
+            ]
+        },
+        "sec-th-cpu": {
+            "type": "section",
+            "title": "CPU",
+            "keys": [
+                "cpu-temp-warn",
+                "cpu-temp-crit",
+                "cpu-load-warn",
+                "cpu-load-crit"
+            ]
+        },
+        "sec-th-gpu": {
+            "type": "section",
+            "title": "GPU",
+            "keys": [
+                "gpu-temp-warn",
+                "gpu-temp-crit",
+                "gpu-load-warn",
+                "gpu-load-crit",
+                "vram-warn",
+                "vram-crit"
+            ]
+        },
+        "sec-th-mem": {
+            "type": "section",
+            "title": "Memory",
+            "keys": [
+                "ram-warn",
+                "ram-crit"
+            ]
+        },
+        "sec-th-storage": {
+            "type": "section",
+            "title": "Storage",
+            "keys": [
+                "nvme-temp-warn",
+                "nvme-temp-crit"
+            ]
+        },
+        "sec-th-net": {
+            "type": "section",
+            "title": "Network",
+            "keys": [
+                "net-warn",
+                "net-crit"
+            ]
+        },
+        "sec-colors": {
+            "type": "section",
+            "title": "Colors",
+            "keys": [
+                "color-normal",
+                "color-warn",
+                "color-crit"
+            ]
+        }
+    },
+    "update-interval": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "units": "seconds",
+        "description": "Update interval"
+    },
+    "show-cpu": {
+        "type": "switch",
+        "default": true,
+        "description": "Show CPU temperature and load"
+    },
+    "show-gpu": {
+        "type": "switch",
+        "default": true,
+        "description": "Show GPU temperature, load and VRAM"
+    },
+    "show-ram": {
+        "type": "switch",
+        "default": true,
+        "description": "Show RAM usage"
+    },
+    "show-net": {
+        "type": "switch",
+        "default": true,
+        "description": "Show network speed"
+    },
+    "show-gpu-power": {
+        "type": "switch",
+        "default": false,
+        "description": "Show GPU power draw"
+    },
+    "show-gpu-fan": {
+        "type": "switch",
+        "default": false,
+        "description": "Show GPU fan speed"
+    },
+    "show-swap": {
+        "type": "switch",
+        "default": false,
+        "description": "Show swap usage"
+    },
+    "show-nvme": {
+        "type": "switch",
+        "default": false,
+        "description": "Show hottest NVMe drive temperature"
+    },
+    "net-interface": {
+        "type": "combobox",
+        "default": "",
+        "description": "Network interface",
+        "options": {
+            "Automatic (default route)": ""
+        },
+        "tooltip": "Interface used for network speed. Automatic follows the default route."
+    },
+    "cpu-temp-warn": {
+        "type": "spinbutton",
+        "default": 75,
+        "min": 30,
+        "max": 120,
+        "step": 1,
+        "units": "°C",
+        "description": "CPU temperature: warning"
+    },
+    "cpu-temp-crit": {
+        "type": "spinbutton",
+        "default": 90,
+        "min": 30,
+        "max": 120,
+        "step": 1,
+        "units": "°C",
+        "description": "CPU temperature: critical"
+    },
+    "gpu-temp-warn": {
+        "type": "spinbutton",
+        "default": 75,
+        "min": 30,
+        "max": 120,
+        "step": 1,
+        "units": "°C",
+        "description": "GPU temperature: warning"
+    },
+    "gpu-temp-crit": {
+        "type": "spinbutton",
+        "default": 85,
+        "min": 30,
+        "max": 120,
+        "step": 1,
+        "units": "°C",
+        "description": "GPU temperature: critical"
+    },
+    "nvme-temp-warn": {
+        "type": "spinbutton",
+        "default": 65,
+        "min": 30,
+        "max": 120,
+        "step": 1,
+        "units": "°C",
+        "description": "NVMe temperature: warning"
+    },
+    "nvme-temp-crit": {
+        "type": "spinbutton",
+        "default": 75,
+        "min": 30,
+        "max": 120,
+        "step": 1,
+        "units": "°C",
+        "description": "NVMe temperature: critical"
+    },
+    "cpu-load-warn": {
+        "type": "spinbutton",
+        "default": 70,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "CPU load: warning"
+    },
+    "cpu-load-crit": {
+        "type": "spinbutton",
+        "default": 90,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "CPU load: critical"
+    },
+    "gpu-load-warn": {
+        "type": "spinbutton",
+        "default": 70,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "GPU load: warning"
+    },
+    "gpu-load-crit": {
+        "type": "spinbutton",
+        "default": 90,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "GPU load: critical"
+    },
+    "vram-warn": {
+        "type": "spinbutton",
+        "default": 80,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "VRAM usage: warning"
+    },
+    "vram-crit": {
+        "type": "spinbutton",
+        "default": 95,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "VRAM usage: critical"
+    },
+    "ram-warn": {
+        "type": "spinbutton",
+        "default": 80,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "RAM usage: warning"
+    },
+    "ram-crit": {
+        "type": "spinbutton",
+        "default": 95,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "RAM usage: critical"
+    },
+    "net-warn": {
+        "type": "spinbutton",
+        "default": 80,
+        "min": 1,
+        "max": 100000,
+        "step": 10,
+        "units": "Mbit/s",
+        "description": "Network speed: warning"
+    },
+    "net-crit": {
+        "type": "spinbutton",
+        "default": 400,
+        "min": 1,
+        "max": 100000,
+        "step": 10,
+        "units": "Mbit/s",
+        "description": "Network speed: critical"
+    },
+    "color-normal": {
+        "type": "colorchooser",
+        "default": "#FFFFFF",
+        "description": "Normal"
+    },
+    "color-warn": {
+        "type": "colorchooser",
+        "default": "#FFA726",
+        "description": "Hot (warning)"
+    },
+    "color-crit": {
+        "type": "colorchooser",
+        "default": "#FF5252",
+        "description": "Critical"
+    }
+}
