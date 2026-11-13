@@ -1,0 +1,93 @@
+{
+    "head-general": {
+        "type": "header",
+        "description": "Pocket behaviour"
+    },
+    "open-trigger": {
+        "type": "combobox",
+        "default": "click",
+        "description": "Open the pocket on",
+        "tooltip": "Hover opens the pocket when the mouse rests on the pocket button; click needs a click.",
+        "options": {
+            "Click": "click",
+            "Hover": "hover"
+        }
+    },
+    "hover-delay": {
+        "type": "scale",
+        "default": 300,
+        "min": 0,
+        "max": 1500,
+        "step": 50,
+        "units": "ms",
+        "description": "Hover delay before opening",
+        "tooltip": "Only used when the pocket opens on hover."
+    },
+    "close-delay": {
+        "type": "scale",
+        "default": 500,
+        "min": 50,
+        "max": 3000,
+        "step": 50,
+        "units": "ms",
+        "description": "Delay before closing after the mouse left",
+        "tooltip": "Only used when the pocket opens on hover."
+    },
+    "head-icon": {
+        "type": "header",
+        "description": "Pocket button"
+    },
+    "pocket-position": {
+        "type": "combobox",
+        "default": "right",
+        "description": "Position of the pocket button",
+        "tooltip": "On vertical panels, left means above and right means below the icons.",
+        "options": {
+            "Left of the icons": "left",
+            "Right of the icons": "right"
+        }
+    },
+    "pocket-icon": {
+        "type": "combobox",
+        "default": "triangles",
+        "description": "Icon of the pocket button",
+        "tooltip": "Arrow and drawer turn towards the side where the pocket opens.",
+        "options": {
+            "Three triangles": "triangles",
+            "Arrow from icon theme": "theme",
+            "PocketTray arrow": "arrow",
+            "Drawer": "drawer",
+            "Pocket": "pocket",
+            "Three dots": "dots",
+            "Grid": "grid",
+            "Four circles": "circles",
+            "Three triangles (upside down)": "triangles-down",
+            "Custom icon": "custom"
+        }
+    },
+    "custom-icon": {
+        "type": "iconfilechooser",
+        "default": "",
+        "description": "Custom icon",
+        "tooltip": "An icon name from your theme or an image file. Not rotated.",
+        "dependency": "pocket-icon=custom"
+    },
+    "head-list": {
+        "type": "header",
+        "description": "Hidden icons"
+    },
+    "hidden-apps": {
+        "type": "list",
+        "description": "Programs to move into the pocket",
+        "tooltip": "Easier: right-click PocketTray and switch the icons on or off there. Names are matched case-insensitively: the name of the status icon, the process name for unnamed status icons, or the WM_CLASS of legacy tray icons.",
+        "columns": [
+            {
+                "id": "name",
+                "title": "Program or icon name",
+                "type": "string",
+                "default": ""
+            }
+        ],
+        "default": []
+    }
+}
