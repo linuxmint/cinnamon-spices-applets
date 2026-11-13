@@ -18,11 +18,16 @@ Tested on Linux Mint 22.3 with X11 and a Realtek RTL8188CE adapter.
 
 ## Installation
 
-Hotspot Manager is not yet in the Cinnamon Spices catalogue. Once it is published,
-install it from System Settings, then Applets, then Download.
+Hotspot Manager has been submitted to the Cinnamon Spices catalogue but is not in it yet.
+Until it is accepted, install it by hand from this folder. These steps copy the files the
+same way the project's install script does:
 
-After installing, restart Cinnamon (Alt+F2, type `r`, Enter), right-click the panel,
-choose Applets, and add Hotspot Manager.
+    mkdir -p ~/.local/share/cinnamon/applets/hotspot-manager@tedacodder
+    cp -r files/hotspot-manager@tedacodder/. ~/.local/share/cinnamon/applets/hotspot-manager@tedacodder/
+    chmod +x ~/.local/share/cinnamon/applets/hotspot-manager@tedacodder/hotspot-manager.sh
+
+Install the dependencies (sudo apt install jq qrencode), restart Cinnamon (Alt+F2, type r,
+Enter), right-click the panel, choose Applets, and add Hotspot Manager.
 
 ## Usage
 
