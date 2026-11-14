@@ -1,0 +1,15 @@
+{
+    "default-opacity": {
+        "type": "scale",
+        "default": 75,
+        "min": 20,
+        "max": 100,
+        "step": 5,
+        "description": "Default opacity for every app (%)",
+        "tooltip": "Apps you haven't given their own setting open at this opacity."
+    },
+    "apps": {
+        "type": "generic",
+        "default": {}
+    }
+}
