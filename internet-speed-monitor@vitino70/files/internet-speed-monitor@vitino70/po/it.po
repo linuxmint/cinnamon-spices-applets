@@ -1,0 +1,200 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: internet-speed-monitor@vitino70 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-10-28 21:30+0100\n"
+"PO-Revision-Date: 2026-10-28 21:30+0100\n"
+"Last-Translator: vitino70\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:118
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+#. applet.js:119
+msgid "USB tethering"
+msgstr "Tethering USB"
+
+#. applet.js:120
+msgid "Mobile network"
+msgstr "Rete mobile"
+
+#. applet.js:121
+msgid "Ethernet"
+msgstr "Ethernet"
+
+#. applet.js:122
+msgid "VPN"
+msgstr "VPN"
+
+#. applet.js:123
+msgid "Network"
+msgstr "Rete"
+
+#. applet.js:430, applet.js:440
+msgid "Internet traffic"
+msgstr "Traffico Internet"
+
+#. applet.js:431, applet.js:490
+msgid "No Internet connection"
+msgstr "Nessuna connessione a Internet"
+
+#. applet.js:465
+msgid "Reset peaks"
+msgstr "Azzera picchi"
+
+#. applet.js:468
+msgid "Network settings"
+msgstr "Impostazioni di rete"
+
+#. applet.js:472
+msgid "System monitor"
+msgstr "Monitor di sistema"
+
+#. applet.js:481
+#, c-format
+msgid "Peak:  ↓ %s   ↑ %s"
+msgstr "Picco:  ↓ %s   ↑ %s"
+
+#. applet.js:482
+#, c-format
+msgid "last %d s"
+msgstr "ultimi %d s"
+
+#. applet.js:513
+#, c-format
+msgid "Total since connected:  ↓ %s   ↑ %s"
+msgstr "Totale dalla connessione:  ↓ %s   ↑ %s"
+
+#. metadata.json->name
+msgid "Internet Speed Monitor"
+msgstr "Internet Speed Monitor"
+
+#. metadata.json->description
+msgid "Real download and upload speed of the connections that reach the Internet (Wi-Fi, USB tethering, Ethernet, mobile), with mini graphs"
+msgstr "Velocità reali di download e upload delle connessioni verso Internet (Wi-Fi, tethering USB, Ethernet, rete mobile), con mini grafici"
+
+#. settings-schema.json->head-general->description
+msgid "General"
+msgstr "Generale"
+
+#. settings-schema.json->update-interval->description
+msgid "Update interval"
+msgstr "Intervallo di aggiornamento"
+
+#. settings-schema.json->update-interval->units
+msgid "seconds"
+msgstr "secondi"
+
+#. settings-schema.json->unit->description
+msgid "Unit"
+msgstr "Unità di misura"
+
+#. settings-schema.json->unit->options
+msgid "Bytes (kB/s, MB/s)"
+msgstr "Byte (kB/s, MB/s)"
+
+#. settings-schema.json->unit->options
+msgid "Bits (kb/s, Mb/s)"
+msgstr "Bit (kb/s, Mb/s)"
+
+#. settings-schema.json->head-iface->description
+msgid "Interfaces"
+msgstr "Interfacce"
+
+#. settings-schema.json->iface-mode->description
+msgid "Monitored interfaces"
+msgstr "Interfacce monitorate"
+
+#. settings-schema.json->iface-mode->options
+msgid "Automatic: interfaces reaching the Internet (default route)"
+msgstr "Automatico: interfacce con accesso a Internet (rotta predefinita)"
+
+#. settings-schema.json->iface-mode->options
+msgid "All active physical interfaces"
+msgstr "Tutte le interfacce fisiche attive"
+
+#. settings-schema.json->iface-mode->options
+msgid "Manual"
+msgstr "Manuale"
+
+#. settings-schema.json->manual-ifaces->description
+msgid "Interfaces (comma separated)"
+msgstr "Interfacce (separate da virgola)"
+
+#. settings-schema.json->manual-ifaces->tooltip
+msgid "Example: wlp2s0, enx0a1b2c3d4e5f"
+msgstr "Esempio: wlp2s0, enx0a1b2c3d4e5f"
+
+#. settings-schema.json->head-look->description
+msgid "Panel appearance"
+msgstr "Aspetto nel pannello"
+
+#. settings-schema.json->show-graphs->description
+msgid "Show mini graphs"
+msgstr "Mostra mini grafici"
+
+#. settings-schema.json->graph-mode->description
+msgid "Graph type"
+msgstr "Tipo di grafico"
+
+#. settings-schema.json->graph-mode->options
+msgid "Two graphs (download and upload)"
+msgstr "Due grafici (download e upload)"
+
+#. settings-schema.json->graph-mode->options
+msgid "One combined graph"
+msgstr "Grafico unico combinato"
+
+#. settings-schema.json->graph-width->description
+msgid "Width of each graph"
+msgstr "Larghezza di ogni grafico"
+
+#. settings-schema.json->graph-width->units
+msgid "pixels"
+msgstr "pixel"
+
+#. settings-schema.json->graph-scale->description
+msgid "Graph scale"
+msgstr "Scala dei grafici"
+
+#. settings-schema.json->graph-scale->options
+msgid "Logarithmic (shows both low and high traffic)"
+msgstr "Logaritmica (mostra bene sia traffico basso che alto)"
+
+#. settings-schema.json->graph-scale->options
+msgid "Linear (auto-scaling)"
+msgstr "Lineare (autoadattiva)"
+
+#. settings-schema.json->show-text->description
+msgid "Show speed as text"
+msgstr "Mostra velocità in testo"
+
+#. settings-schema.json->text-layout->description
+msgid "Text layout"
+msgstr "Disposizione del testo"
+
+#. settings-schema.json->text-layout->options
+msgid "Two lines (compact)"
+msgstr "Su due righe (compatto)"
+
+#. settings-schema.json->text-layout->options
+msgid "Single line"
+msgstr "Su una riga"
+
+#. settings-schema.json->color-down->description
+msgid "Download color"
+msgstr "Colore download"
+
+#. settings-schema.json->color-up->description
+msgid "Upload color"
+msgstr "Colore upload"
+
+#. settings-schema.json->color-text->description
+msgid "Color the text like the graphs"
+msgstr "Colora il testo come i grafici"
