@@ -102,25 +102,19 @@ var DEPENDENCIES = {
   "arch": [
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
-    //~ ["hddtemp", "/usr/bin/hddtemp", "hddtemp"],
-    //~ ["xenity", "/usr/bin/xenity", "xenity"],
     [["xenity", "zenity", "yad"], "/usr/bin/xenity", "xenity"],
     ["smartctl", "/usr/bin/smartctl", "smartmontools"]
   ],
   "debian": [
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
-    //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
-    //~ ["xenity", "/usr/bin/xenity", "xenity"],
     [["xenity", "zenity", "yad"], "/usr/bin/xenity", "xenity"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
   "devuan": [
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
-    //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    //~ ["yad", "/usr/bin/yad", "yad"],
     [["xenity", "zenity", "yad"], "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
@@ -128,15 +122,12 @@ var DEPENDENCIES = {
   "fedora": [
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
-    //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    //~ ["yad", "/usr/bin/yad", "yad"],
     [["xenity", "zenity", "yad"], "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
     ["", "/usr/share/fontconfig/conf.avail/66-google-noto-sans-bamum.conf", "google-noto-sans-bamum-fonts"]
   ],
   "openSUSE": [
     ["sensors", "/usr/bin/sensors",  "sensors"],
-    //~ ["yad", "/usr/bin/yad", "yad"],
     [["xenity", "zenity", "yad"], "/usr/bin/yad", "yad"],
     ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
   ],
@@ -266,7 +257,7 @@ function isGentoo() {
 } // End of isGentoo
 
 function is_apturl_present() {
-  return GLib.find_program_in_path("apturl")
+  return (GLib.find_program_in_path("apturl") != null)
 } // End of is_apturl_present
 
 
@@ -408,7 +399,6 @@ Dependencies.prototype = {
       let _isArchlinux = isArchLinux();
       let _isDebian = isDebian();
       let _isOpenSUSE = isOpenSUSE();
-      //let _apt_update = _isFedora ? "sudo dnf update" : _isArchlinux ? "" : _isDebian ? "apt update" : "sudo apt update";
       let distro = get_distro();
       let _apt_update = UPDATE[distro];
       let _install = INSTALL[distro];
@@ -416,7 +406,6 @@ Dependencies.prototype = {
       let _and = " \\\\&\\\\& ";
       if (_apt_update.length === 0)
         _and = "";
-      // LANG=C pkcon -p search name xenity zenity yad | grep Installed | head -n 1 | awk '{print $1}'
       let _apt_install = "%s %s".format(_install, _pkg_to_install.join(" "));
       let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
       let criticalMessage = criticalMessagePart1+"\n\n" + _("Please install these packages:") +" "+ _pkg_to_install.join(" ") +"\n\n";

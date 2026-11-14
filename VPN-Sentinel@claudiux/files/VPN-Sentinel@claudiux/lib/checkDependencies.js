@@ -332,7 +332,6 @@ Dependencies.prototype = {
 
   are_dependencies_installed: function() {
     let pkgs = get_pkg_to_install();
-    //global.log("are_dependencies_installed: pkgs='"+pkgs+"'");
     return (pkgs.length == 0);
   }, // End of are_dependencies_installed
 
@@ -372,7 +371,6 @@ Dependencies.prototype = {
       let _isArchlinux = isArchLinux();
       let _isDebian = isDebian();
       let _isOpenSUSE = isOpenSUSE();
-      //let _apt_update = _isFedora ? "sudo dnf update" : _isArchlinux ? "" : _isDebian ? "apt update" : "sudo apt update";
       let distro = get_distro();
       let _apt_update = UPDATE[distro];
       let _install = INSTALL[distro];
@@ -380,9 +378,7 @@ Dependencies.prototype = {
       let _and = " \\\\&\\\\& ";
       if (_apt_update.length === 0)
         _and = "";
-      //~ LANG=C pkcon -p search name xenity zenity yad | grep Installed | head -n 1 | awk '{print $1}'
       let _apt_install = "%s %s".format(_install, _pkg_to_install.join(" "));
-      //var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : _isDebian ? "apt install libnotify-bin fonts-symbola" : "sudo apt install libnotify-bin fonts-symbola";
       let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
       let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
       this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
@@ -390,14 +386,12 @@ Dependencies.prototype = {
       let pkgs_with_commas = _pkg_to_install.join(", ");
       let pkgs_wo_commas = _pkg_to_install.join(" ");
       if (_is_pkcon_present && _is_pkexec_present) {
-        //~ GLib.spawn_command_line_async(terminal + " " + separator + " '/usr/bin/env sh -c \"echo VPN-Sentinel message: Some packages needed!; echo List of needed packages: %s; pkexec pkcon -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
         GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'VPN-Sentinel message: Some packages needed'; echo 'List of needed packages: ${pkgs_with_commas}'; pkexec pkcon -y install ${pkgs_wo_commas}"`);
         this.depAreMet = false;
         return
       }
 
       if (_is_pkgcli_present && _is_pkexec_present) {
-        //~ GLib.spawn_command_line_async(terminal + " " + separator + " '/usr/bin/env sh -c \"echo VPN-Sentinel message: Some packages needed!; echo List of needed packages: %s; pkexec pkgcli -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
         GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'VPN-Sentinel message: Some packages needed'; echo 'List of needed packages: ${pkgs_with_commas}'; pkexec pkgcli -y install ${pkgs_wo_commas}"`);
         this.depAreMet = false;
         return
@@ -407,10 +401,8 @@ Dependencies.prototype = {
         if (terminal != "") {
           // TRANSLATORS: The next messages should not be translated.
           if (_isDebian === true) {
-            //~ GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo VPN-Sentinel message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
             GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'VPN-Sentinel message: Some packages needed'; echo 'To complete the installation, please become root with su then execute the command: ${_apt_update}${_and}${_apt_install}'; sleep 1; exec bash"`);
           } else {
-            //~ GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo VPN-Sentinel message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
             GLib.spawn_command_line_async(`${terminal} ${separator} 'sh -c "echo VPN-Sentinel message: Some packages needed; echo To complete the installation, please enter then execute the command: ${_apt_update}${_and}${_apt_install}'; sleep 1; exec bash"`);
           }
         }
