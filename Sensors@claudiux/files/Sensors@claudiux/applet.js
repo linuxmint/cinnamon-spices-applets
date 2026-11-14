@@ -7,12 +7,21 @@ const {AppletSettings} = imports.ui.settings;
 const Extension = imports.ui.extension;
 const ModalDialog = imports.ui.modalDialog;
 const { WindowTracker } = imports.gi.Cinnamon;
+
+function _require(relPath) {
+    if (Extension.getCurrentExtension) {
+        var Me = Extension.getCurrentExtension();
+        return Me.imports[relPath];
+    } else {
+        return require(relPath);
+    }
+}
 //util
-const {spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, unref} = require("./lib/util");
+const {spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, unref} = _require("./lib/util");
 //to-string
-const {to_string} = require("./lib/to-string");
+const {to_string} = _require("./lib/to-string");
 //checkDependencies
-const {Dependencies} = require("./lib/checkDependencies");
+const {Dependencies} = _require("./lib/checkDependencies");
 //mainloopTools
 const {
   _sourceIds,
@@ -25,7 +34,7 @@ const {
   source_exists,
   source_remove,
   remove_all_sources
-} = require("./lib/mainloopTools");
+} = _require("./lib/mainloopTools");
 
 const {
   UUID,
@@ -40,11 +49,11 @@ const {
   QUICK,
   log,
   logError
-} = require("./lib/constants");
+} = _require("./lib/constants");
 
 const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 
-const {SensorsReaper} = require("./lib/sensorsReaper");
+const {SensorsReaper} = _require("./lib/sensorsReaper");
 
 const ENABLED_APPLETS_KEY = "enabled-applets";
 
@@ -84,7 +93,7 @@ function spawnCommandAsyncAndGetPid(command, callback = null) {
 /**
  * Class LoggerTemp
  */
-class LoggerTemp {
+var LoggerTemp = class LoggerTemp {
   constructor() {
     this.previous_values = {};
   }
@@ -111,7 +120,7 @@ class LoggerTemp {
 /**
  * Class LoggerFan
  */
-class LoggerFan {
+var LoggerFan = class LoggerFan {
   constructor() {
     this.previous_values = {};
   }
@@ -135,7 +144,7 @@ class LoggerFan {
 /**
  * Class LoggerVoltage
  */
-class LoggerVoltage {
+var LoggerVoltage = class LoggerVoltage {
   constructor() {
     this.previous_values = {};
   }
@@ -164,7 +173,7 @@ class LoggerVoltage {
 /**
  * Class LoggerIntrusion
  */
-class LoggerIntrusion {
+var LoggerIntrusion = class LoggerIntrusion {
   constructor() {
     this.previous_values = {};
   }
@@ -187,7 +196,7 @@ class LoggerIntrusion {
 /**
  * Class SensorsApplet
  */
-class SensorsApplet extends Applet.Applet {
+var SensorsApplet = class SensorsApplet extends Applet.Applet {
 
   constructor(metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
@@ -599,6 +608,7 @@ class SensorsApplet extends Applet.Applet {
       this.set_applet_label(_("Suspended"));
     }
 
+    if (this.loopId != null) source_remove(this.loopId);
     this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
     return this.isLooping
   }
@@ -1844,6 +1854,7 @@ class SensorsApplet extends Applet.Applet {
     spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval + " &");
     this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
     this.isLooping = true;
+    if (this.loopId != null) source_remove(this.loopId);
     this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
   }
 
@@ -2041,6 +2052,7 @@ class SensorsApplet extends Applet.Applet {
    */
   on_enter_event(actor, event) {
     this.isActorEntered = true;
+    if (this.onEnterEventInterval) clearInterval(this.onEnterEventInterval);
     this.onEnterEventInterval = setInterval( () => {
         this.tooltip_must_be_updated = true;
         this.reap_sensors();
@@ -2058,7 +2070,7 @@ class SensorsApplet extends Applet.Applet {
     this.isActorEntered = false;
     if (this.onEnterEventInterval != null) {
       clearInterval(this.onEnterEventInterval);
-      this.onEnterEventInterval = false;
+      this.onEnterEventInterval = null;
     }
     this.tooltip_must_be_updated = false;
     this.isUpdatingUI = false;

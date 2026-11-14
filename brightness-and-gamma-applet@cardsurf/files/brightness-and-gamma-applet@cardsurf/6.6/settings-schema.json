@@ -5,7 +5,13 @@
         "page_general": {
             "type": "page",
             "title" : "General",
-            "sections" : ["section_config", "section_values", "section_geoip", "section_gui"]
+            "sections" : [
+                "section_config",
+                "section_values",
+                "section_geoip",
+                "section_resume_detect",
+                "section_gui"
+            ]
         },
         "page_presets": {
             "type": "page",
@@ -53,6 +59,14 @@
                 "geolon",
                 "geoip_button",
                 "preset_reload"
+            ]
+        },
+        "section_resume_detect":{
+            "type": "section",
+            "title": "Resume Detection",
+            "keys": [
+                "resume_detect_label",
+                "resume_detect_method"
             ]
         },
         "section_gui": {
@@ -377,6 +391,23 @@
         ]
     },
 
+    "resume_detect_label": {
+        "type": "label",
+        "description": "How to detect when the system exits sleep/hibernation/suspension mode.\n- Simple: No graphics activity or changes in the screen saver's state will be detected.\n- Graphics: Graphics activity will be detected.\n- Screen Saver: Changes in the screen saver's state will be detected.\n - Both: Graphics activity and changes in the screen saver’s state will be detected.\n\nAny method other than “Simple” may cause slight flickering, especially during startup."
+    },
+
+    "resume_detect_method": {
+        "type": "combobox",
+        "default": "N",
+        "description": "Method for detecting when the display exits standby mode",
+        "options" : {
+            "Simple": "N",
+            "Graphical": "G",
+            "Screen saver": "S",
+            "Both": "B"
+        }
+    },
+
     "show_shortcuts_in_menu": {
         "type": "switch",
         "default": false,
@@ -464,5 +495,10 @@
     "screen_temp": {
         "type": "generic",
         "default" : 6500
+    },
+
+    "last_resume_date": {
+        "type": "generic",
+        "default" : ""
     }
 }

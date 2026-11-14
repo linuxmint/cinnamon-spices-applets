@@ -62,14 +62,6 @@ const Cvc = imports.gi.Cvc;
 //Signals:
 const Signals = imports.signals;
 
-//~ const CINNAMON_VERSION = getenv("CINNAMON_VERSION");
-//~ const isCin67plus = Util.version_exceeds(CINNAMON_VERSION, "6.7");
-//~ var Me;
-//~ if (isCin67plus) {
-  //~ Me = Extension.getCurrentExtension();
-//~ }
-//~ global.log("isCin67plus: " + isCin67plus);
-
 // ./lib/util:
 var { spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, spawn, spawn_async, trySpawnCommandLine } = _require("./lib/util");
 //MessageTray:

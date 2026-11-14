@@ -1,3 +1,23 @@
+### v3.19.1~20261111
+  * Shrink the Right and Left Sides of the Tooltip to make it more Compact.
+  * Ready for Cinnamon 6.8.
+  * Fixes [#9241](https://github.com/linuxmint/cinnamon-spices-applets/issues/9241)
+
+### v3.19.0~20261105
+  * User can set the tooltip Border Radius.
+  * Definitely fixes [#9234](https://github.com/linuxmint/cinnamon-spices-applets/issues/9234)
+
+### v3.18.7~20261105
+  * Displays solid lines instead of dashed lines in the tooltip.
+  * Fixes [#9234](https://github.com/linuxmint/cinnamon-spices-applets/issues/9234)
+
+### v3.18.6~20261104
+  * Increases the maximum font size for tooltips.
+  * Fixes [#9230](https://github.com/linuxmint/cinnamon-spices-applets/issues/9230)
+
+### v3.18.5~20261102
+  * Some changes in settings schema.
+
 ### v3.18.4~20261101
   * Stuck processes: some improvements.
 

@@ -15,7 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.10\n"
 
 #. applet.js:59
 msgid "Config"
@@ -76,34 +76,33 @@ msgstr "Símbolo del sistema"
 
 #. applet.js:527 applet.js:714
 msgid "Terminal"
-msgstr ""
+msgstr "Terminal"
 
 #. settings-schema.json->run-terminal-folder->options
 #. applet.js:537 applet.js:723
 msgid "Drive C"
-msgstr ""
+msgstr "Unidad C"
 
 #. settings-schema.json->run-terminal-folder->options
 #. applet.js:547 applet.js:732
 msgid "Home Folder"
-msgstr ""
+msgstr "Carpeta de inicio"
 
 #. applet.js:553
 msgid "Tools"
-msgstr ""
+msgstr "Herramientas"
 
 #. applet.js:554 scripts/theme-utils/color_edit.py:45
 msgid "Edit Colors"
-msgstr ""
+msgstr "Editar colores"
 
 #. applet.js:555 scripts/theme-utils/customize_font.py:47
-#, fuzzy
 msgid "Customize Fonts"
-msgstr "Icono personalizado"
+msgstr "Personalizar fuentes"
 
 #. applet.js:556
 msgid "Map Drive"
-msgstr ""
+msgstr "Asignar unidad"
 
 #. applet.js:561
 msgid "Configuration"
@@ -119,84 +118,85 @@ msgstr "Por defecto"
 
 #. scripts/auto-prefix.py:97
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 #. scripts/auto-prefix.py:106
 msgid "{} + {:d} more"
-msgstr ""
+msgstr "{} + {:d} más"
 
 #. scripts/dialog.py:60
 msgid "Run in Console Window"
-msgstr ""
+msgstr "Ejecutar en la ventana de la consola"
 
 #. scripts/dialog.py:135 scripts/dialog.py:222
 msgid "Okay"
-msgstr ""
+msgstr "Okay"
 
 #. scripts/dialog.py:136 scripts/map-drive.py:236
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. scripts/dialog.py:137
 msgid "Browse Files..."
-msgstr ""
+msgstr "Explorar archivos..."
 
 #. scripts/dialog.py:155
-#, fuzzy
 msgid "Choose Program"
-msgstr "Programas"
+msgstr "Elegir programa"
 
 #. scripts/dialog.py:223
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Copiar al portapapeles"
 
 #. scripts/map-drive.py:179
 msgid "Create Drive Mapping"
-msgstr ""
+msgstr "Crear asignación de unidad"
 
 #. scripts/map-drive.py:234
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
 #. scripts/map-drive.py:235
 msgid "Back"
-msgstr ""
+msgstr "Atrás"
 
 #. scripts/map-drive.py:275
 msgid "Close"
-msgstr ""
+msgstr "Cerrar"
 
 #. scripts/map-drive.py:521
 msgid "Mounting SFTP (SSH) share."
-msgstr ""
+msgstr "Montar un recurso compartido SFTP (SSH)."
 
 #. scripts/map-drive.py:572
 msgid "Mounting FTP share."
-msgstr ""
+msgstr "Montando el recurso compartido FTP."
 
 #. scripts/map-drive.py:608
 msgid "Mounting network share."
-msgstr ""
+msgstr "Montando un recurso compartido de red."
 
 #. scripts/map-drive.py:645
 msgid "Mounting WebDAV share."
-msgstr ""
+msgstr "Montando un recurso compartido WebDAV."
 
 #. scripts/map-drive.py:664
 msgid "Could not find folder."
-msgstr ""
+msgstr "No se ha encontrado la carpeta."
 
 #. scripts/map-drive.py:673
 msgid "Could not find mounted share, make sure to mount the file system first."
 msgstr ""
+"No se ha podido encontrar el recurso compartido montado; asegúrate de montar "
+"primero el sistema de archivos."
 
 #. scripts/map-drive.py:682
 msgid "Winepath error."
-msgstr ""
+msgstr "Error de Winepath."
 
 #. scripts/map-drive.py:700
 msgid "Mounting:"
-msgstr ""
+msgstr "Montando:"
 
 #. scripts/map-drive.py:701
 msgid ""
@@ -205,24 +205,30 @@ msgid ""
 "mounting the share, return back to this window. Don't unmount until after "
 "the drive letter is mapped."
 msgstr ""
+"Para montar el sistema de archivos, se abrirá el gestor de archivos y, si el "
+"sistema de archivos aún no está montado, el gestor de archivos lo montará "
+"por ti. Una vez montado el recurso compartido, vuelve a esta ventana. No lo "
+"desmontes hasta que se haya asignado la letra de unidad."
 
 #. scripts/map-drive.py:706
 msgid "Launch file manager"
-msgstr ""
+msgstr "Abrir el gestor de archivos"
 
 #. scripts/map-drive.py:707
 msgid ""
 "After launching the file manager and having mounted the share, proceed to "
 "the next step."
 msgstr ""
+"Una vez que hayas abierto el gestor de archivos y hayas montado el recurso "
+"compartido, pasa al siguiente paso."
 
 #. scripts/map-drive.py:731
 msgid "Also link UNC path for applications to use."
-msgstr ""
+msgstr "Incluye también la ruta UNC para que la utilicen las aplicaciones."
 
 #. scripts/map-drive.py:742
 msgid "Choose Folder"
-msgstr ""
+msgstr "Seleccionar carpeta"
 
 #. scripts/map-drive.py:778
 msgid ""
@@ -235,202 +241,210 @@ msgid ""
 "/path/to/file/\n"
 "~/folder/"
 msgstr ""
+"Ejemplos:\n"
+"\n"
+"\\\\Ordenador\\CarpetaCompartida\n"
+"smb://Server.local/CarpetaCompartida/\n"
+"https://127.0.0.1/webdav/\n"
+"sftp://user@127.0.0.1/ (SSH SFTP)\n"
+"/ruta/al/archivo/\n"
+"~/carpeta/"
 
 #. scripts/map-drive.py:789
 msgid "Path:"
-msgstr ""
+msgstr "Ruta:"
 
 #. scripts/map-drive.py:790
 msgid "Path can be a local file path, network share, WebDAV, SSH SFTP, or FTP."
 msgstr ""
+"La ruta puede ser una ruta de archivo local, un recurso compartido de red, "
+"WebDAV, SSH, SFTP o FTP."
 
 #. scripts/map-drive.py:791
 msgid "Map to drive letter:"
-msgstr ""
+msgstr "Asignar a letra de unidad:"
 
 #. scripts/map-drive.py:806
 msgid "Browse Folder..."
-msgstr ""
+msgstr "Examinar carpeta..."
 
 #. scripts/map-drive.py:1099
 msgid "Drive mapping complete"
-msgstr ""
+msgstr "Asignación de unidad completada"
 
 #. scripts/map-drive.py:1111
 msgid ""
 "The share was mounted successfully, but the specified subfolder was not "
 "found, you might need to create it:"
 msgstr ""
+"El recurso compartido se ha montado correctamente, pero no se ha encontrado "
+"la subcarpeta especificada; es posible que tengas que crearla:"
 
 #. scripts/map-drive.py:1123
 msgid "Could not use drive letter."
-msgstr ""
+msgstr "No se ha podido utilizar la letra de unidad."
 
 #. scripts/map-drive.py:1130
 msgid "Could not create link."
-msgstr ""
+msgstr "No se ha podido crear el enlace."
 
 #. scripts/map-drive.py:1138
 msgid "Could not create link for UNC path."
-msgstr ""
+msgstr "No se ha podido crear el enlace para la ruta UNC."
 
 #. scripts/map-drive.py:1193
 msgid "No drives are available to map."
-msgstr ""
+msgstr "No hay unidades disponibles para asignar."
 
 #. scripts/theme-utils/color_edit.py:70 scripts/theme-utils/draw_gui.py:39
 msgid "Menu"
-msgstr ""
+msgstr "Menú"
 
 #. scripts/theme-utils/color_edit.py:71 scripts/theme-utils/draw_gui.py:41
 msgid "Button"
-msgstr ""
+msgstr "Botón"
 
 #. scripts/theme-utils/color_edit.py:72
 msgid "Window"
-msgstr ""
+msgstr "Ventana"
 
 #. scripts/theme-utils/color_edit.py:73
 msgid "Misc"
-msgstr ""
+msgstr "Varios"
 
 #. scripts/theme-utils/color_edit.py:85
 msgid "Colors From Theme"
-msgstr ""
+msgstr "Colores del tema"
 
 #. scripts/theme-utils/color_edit.py:124
 msgid "Controls Alternate Background"
-msgstr ""
+msgstr "Fondo alternativo para controles"
 
 #. scripts/theme-utils/color_edit.py:132
 msgid "Active Border"
-msgstr ""
+msgstr "Borde activo"
 
 #. scripts/theme-utils/color_edit.py:140
 msgid "Inactive Title Text"
-msgstr ""
+msgstr "Texto del título inactivo"
 
 #. scripts/theme-utils/color_edit.py:148
 msgid "Window Frame"
-msgstr ""
+msgstr "Marco de ventana"
 
 #. scripts/theme-utils/color_edit.py:161
 msgid "Controls Dark Shadow"
-msgstr ""
+msgstr "Control de sombras oscuras"
 
 #. scripts/theme-utils/color_edit.py:169
-#, fuzzy
 msgid "Controls Background"
-msgstr "Panel de control"
+msgstr "Controles de fondo"
 
 #. scripts/theme-utils/color_edit.py:177
 msgid "Controls Highlight"
-msgstr ""
+msgstr "Resaltado de controles"
 
 #. scripts/theme-utils/color_edit.py:185
 msgid "Controls Light"
-msgstr ""
+msgstr "Control de la luz"
 
 #. scripts/theme-utils/color_edit.py:193
-#, fuzzy
 msgid "Controls Shadow"
-msgstr "Panel de control"
+msgstr "Controles de sombra"
 
 #. scripts/theme-utils/color_edit.py:201
-#, fuzzy
 msgid "Controls Text"
-msgstr "Panel de control"
+msgstr "Controles de texto"
 
 #. scripts/theme-utils/color_edit.py:209
 msgid "Gray Text"
-msgstr ""
+msgstr "Texto gris"
 
 #. scripts/theme-utils/color_edit.py:224
 msgid "Menu Background"
-msgstr ""
+msgstr "Fondo del menú"
 
 #. scripts/theme-utils/color_edit.py:232
 msgid "Menu Bar"
-msgstr ""
+msgstr "Barra de menús"
 
 #. scripts/theme-utils/color_edit.py:240
 msgid "Selection Highlight"
-msgstr ""
+msgstr "Resaltado de selección"
 
 #. scripts/theme-utils/color_edit.py:248
 #. scripts/theme-utils/customize_font.py:114
 msgid "Menu Text"
-msgstr ""
+msgstr "Texto del menú"
 
 #. scripts/theme-utils/color_edit.py:257
 msgid "Menu Height"
-msgstr ""
+msgstr "Altura del menú"
 
 #. scripts/theme-utils/color_edit.py:270
 msgid "Scrollbar"
-msgstr ""
+msgstr "Barra de desplazamiento"
 
 #. scripts/theme-utils/color_edit.py:278
 msgid "Window Background"
-msgstr ""
+msgstr "Fondo de la ventana"
 
 #. scripts/theme-utils/color_edit.py:286
 msgid "Window Text"
-msgstr ""
+msgstr "Texto de la ventana"
 
 #. scripts/theme-utils/color_edit.py:294
 #. scripts/theme-utils/customize_font.py:138
 msgid "Tooltip Text"
-msgstr ""
+msgstr "Texto de la información sobre herramientas"
 
 #. scripts/theme-utils/color_edit.py:302
 msgid "Tooltip Background"
-msgstr ""
+msgstr "Fondo de la información sobre herramientas"
 
 #. scripts/theme-utils/color_edit.py:311
 msgid "Scrollbar Height"
-msgstr ""
+msgstr "Altura de la barra de desplazamiento"
 
 #. scripts/theme-utils/color_from_theme.py:48
 msgid "Color From Theme"
-msgstr ""
+msgstr "Color del tema"
 
 #. scripts/theme-utils/color_from_theme.py:86
 msgid "Accent"
-msgstr ""
+msgstr "Acento"
 
 #. scripts/theme-utils/color_from_theme.py:94
 msgid "Emboss Amount"
-msgstr ""
+msgstr "Grado de relieve"
 
 #. scripts/theme-utils/customize_font.py:81
 msgid "Use Desktop Font"
-msgstr ""
+msgstr "Usar fuente de escritorio"
 
 #. scripts/theme-utils/customize_font.py:122
 msgid "Window Title"
-msgstr ""
+msgstr "Título de la ventana"
 
 #. scripts/theme-utils/customize_font.py:130
 msgid "Message Box Text"
-msgstr ""
+msgstr "Texto del cuadro de mensaje"
 
 #. scripts/theme-utils/draw_gui.py:36
 msgid "Tooltip"
-msgstr ""
+msgstr "Información sobre herramientas"
 
 #. scripts/theme-utils/draw_gui.py:37
 msgid "Menu Item Grayed"
-msgstr ""
+msgstr "Elemento del menú atenuado"
 
 #. scripts/theme-utils/draw_gui.py:38
-#, fuzzy
 msgid "File"
-msgstr "Archivos"
+msgstr "Archivo"
 
 #. scripts/theme-utils/draw_gui.py:40
 msgid "Menu Item"
-msgstr ""
+msgstr "Elemento del menú"
 
 #. metadata.json->description
 msgid "Easy access to Wine's utilities"
@@ -454,7 +468,7 @@ msgstr "Muestra algunos de los lanzadores de Wine si están instalados."
 
 #. settings-schema.json->launchers-style->description
 msgid "Launcher list style"
-msgstr ""
+msgstr "Estilo de lista del lanzador"
 
 #. settings-schema.json->launchers-style->options
 #. settings-schema.json->run-command-prompt-style->options
@@ -462,11 +476,11 @@ msgstr ""
 #. settings-schema.json->browse-drive-c-style->options
 #. settings-schema.json->browse-home-folder-style->options
 msgid "Text Menu"
-msgstr ""
+msgstr "Menú de texto"
 
 #. settings-schema.json->launchers-style->options
 msgid "Icons"
-msgstr ""
+msgstr "Íconos"
 
 #. settings-schema.json->launchers-style->options
 #. settings-schema.json->run-command-prompt-style->options
@@ -474,7 +488,7 @@ msgstr ""
 #. settings-schema.json->browse-drive-c-style->options
 #. settings-schema.json->browse-home-folder-style->options
 msgid "Both"
-msgstr ""
+msgstr "Ambos"
 
 #. settings-schema.json->show-run-command->description
 msgid "Show 'Run Command...'"
@@ -493,76 +507,72 @@ msgid "For easy access to the Wine command prompt."
 msgstr "Para acceder fácilmente al símbolo del sistema de Wine."
 
 #. settings-schema.json->run-command-prompt-style->description
-#, fuzzy
 msgid "Command Prompt item style"
-msgstr "Símbolo del sistema"
+msgstr "Estilo de elemento del símbolo del sistema"
 
 #. settings-schema.json->run-command-prompt-style->options
 #. settings-schema.json->run-terminal-style->options
 #. settings-schema.json->browse-drive-c-style->options
 #. settings-schema.json->browse-home-folder-style->options
 msgid "Icon"
-msgstr ""
+msgstr "Ícono"
 
 #. settings-schema.json->show-terminal->description
 msgid "Show 'Terminal'"
-msgstr ""
+msgstr "Mostrar 'Terminal'"
 
 #. settings-schema.json->show-terminal->tooltip
 msgid "Open terminal on Wine prefixes"
-msgstr ""
+msgstr "Abrir el terminal en los prefijos de Wine"
 
 #. settings-schema.json->run-terminal-style->description
 msgid "Terminal item style"
-msgstr ""
+msgstr "Estilo de elemento terminal"
 
 #. settings-schema.json->run-terminal-folder->description
 msgid "Terminal working folder"
-msgstr ""
+msgstr "Carpeta de trabajo de la terminal"
 
 #. settings-schema.json->show-browse-drive-c->description
 msgid "Show 'Browse Drive C'"
-msgstr ""
+msgstr "Mostrar 'Explorar unidad C'"
 
 #. settings-schema.json->show-browse-drive-c->tooltip
-#, fuzzy
 msgid "For easy access to drive C of wine prefixes."
-msgstr "Para acceder fácilmente al símbolo del sistema de Wine."
+msgstr "Para acceder fácilmente a la unidad C de los prefijos de Wine."
 
 #. settings-schema.json->browse-drive-c-style->description
 msgid "Browse Drive C item style"
-msgstr ""
+msgstr "Explorar los elementos del estilo 'Unidad C'"
 
 #. settings-schema.json->browse-drive-c-icon->description
 msgid "Icon for Drive C"
-msgstr ""
+msgstr "Icono de la unidad C"
 
 #. settings-schema.json->show-browse-home-folder->description
 msgid "Show 'Browse Home Folder'"
-msgstr ""
+msgstr "Mostrar 'Explorar carpeta de inicio'"
 
 #. settings-schema.json->show-browse-home-folder->tooltip
-#, fuzzy
 msgid "For easy access to the user folder of wine prefixes."
-msgstr "Para acceder fácilmente al símbolo del sistema de Wine."
+msgstr ""
+"Para acceder fácilmente a la carpeta de usuario de los prefijos de Wine."
 
 #. settings-schema.json->browse-home-folder-style->description
 msgid "Browse Home Folder item style"
-msgstr ""
+msgstr "Explorar los elementos de la carpeta de inicio"
 
 #. settings-schema.json->browse-home-folder-icon->description
 msgid "Icon for Home Folder"
-msgstr ""
+msgstr "Icono de la carpeta de inicio"
 
 #. settings-schema.json->show-tools-menu->description
-#, fuzzy
 msgid "Show Tools menu"
-msgstr "Mostrar el menú Programas"
+msgstr "Mostrar menú Herramientas"
 
 #. settings-schema.json->show-tools-menu->tooltip
-#, fuzzy
 msgid "Show the tools menu."
-msgstr "Mostrar el menú Programas"
+msgstr "Muestra el menú de herramientas."
 
 #. settings-schema.json->show-admin-programs-menu->description
 msgid "Show the Configuration menu"
@@ -630,11 +640,11 @@ msgstr "Avanzado"
 
 #. settings-schema.json->automatically-find-prefixes->description
 msgid "Automatically Find Wine Prefixes"
-msgstr ""
+msgstr "Detectar automáticamente los prefijos de Wine"
 
 #. settings-schema.json->automatically-find-prefixes->tooltip
 msgid "Automatically find Wine prefixes."
-msgstr ""
+msgstr "Detectar automáticamente los prefijos de Wine."
 
 #. settings-schema.json->prefix-file-list->description
 msgid "Path to prefix list"
@@ -676,25 +686,24 @@ msgid "The wine console executable to use."
 msgstr "El ejecutable de la consola de Wine a utilizar."
 
 #. settings-schema.json->specify-terminal-exec->description
-#, fuzzy
 msgid "Specify the terminal"
-msgstr "Especifique el ejecutable de Wine"
+msgstr "Especificar la terminal"
 
 #. settings-schema.json->specify-terminal-exec->tooltip
-#, fuzzy
 msgid ""
 "Specify the terminal executable when launching a terminal, by default 'gnome-"
 "terminal' is used."
-msgstr "Especifica el ejecutable de wine, por defecto se utiliza 'wine'."
+msgstr ""
+"Indica el ejecutable de la terminal al iniciar una terminal; por defecto se "
+"utiliza 'gnome-terminal'."
 
 #. settings-schema.json->terminal-exec->description
-#, fuzzy
 msgid "Terminal executable"
-msgstr "Ejecutable de Wine"
+msgstr "Ejecutable de terminal"
 
 #. settings-schema.json->terminal-exec->tooltip
 msgid "The terminal executable to use when launching a terminal."
-msgstr ""
+msgstr "El ejecutable de terminal que debe utilizarse al iniciar una terminal."
 
 #. scripts/run-wine.sh:6
 msgid "Error running program:"

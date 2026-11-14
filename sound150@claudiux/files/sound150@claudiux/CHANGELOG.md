@@ -1,3 +1,6 @@
+### v16.5.7~20261111
+  * Ready for Cinnamon 6.8.
+
 ### v16.5.6~20261021
   * Display sound volume, title and artist on a single line.
   * Definitely fixes [#9143](https://github.com/linuxmint/cinnamon-spices-applets/issues/9143)

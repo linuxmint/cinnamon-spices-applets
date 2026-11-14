@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-10-30 03:10+0000\n"
-"PO-Revision-Date: 2025-12-31 22:56+0100\n"
+"PO-Revision-Date: 2026-11-06 22:13+0100\n"
 "Last-Translator: erwn16 <elmar_wein@web.de>\n"
 "Language-Team: de\n"
 "Language: de\n"
@@ -210,7 +210,7 @@ msgstr "App-Informationen"
 
 #. 4.0/contextmenu.js:331 5.8/contextmenu.js:377
 msgid "Properties"
-msgstr ""
+msgstr "Eigenschaften"
 
 #. 4.0/contextmenu.js:349 5.8/contextmenu.js:450
 msgid "This file is no longer available"
@@ -303,26 +303,24 @@ msgid "Lock the screen"
 msgstr "Den Bildschirm sperren"
 
 #. 5.8/applet.js:1032
-#, fuzzy
 msgid "Loading..."
 msgstr "Suche …"
 
 #. 5.8/applet.js:1218
-#, fuzzy
 msgid "Files"
-msgstr "Datei"
+msgstr "Dateien"
 
 #. 5.8/applet.js:1248 5.8/applet.js:1254
 msgid "Calculator: "
-msgstr ""
+msgstr "Rechner: "
 
 #. 5.8/applet.js:1429 5.8/applet.js:1956
 msgid "Click to insert emoji"
-msgstr ""
+msgstr "Emoji durch Klicken einfügen"
 
 #. 5.8/applet.js:1926
 msgid "Back"
-msgstr ""
+msgstr "Zurück"
 
 #. 4.0/mint-remove-application.py:34
 msgid ""
@@ -1025,7 +1023,6 @@ msgstr ""
 
 #. 4.0->settings-schema.json->info4->description
 #. 5.8->settings-schema.json->info5->description
-#, fuzzy
 msgid ""
 "\n"
 "• Additional key option:\n"
@@ -1041,7 +1038,7 @@ msgstr ""
 
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Custom"
-msgstr ""
+msgstr "Benutzerdefiniert"
 
 #. 5.8->settings-schema.json->web-search-custom-url->description
 msgid "URL for custom search"
@@ -1052,10 +1049,9 @@ msgid "Enter the URL that is prepended to the search query."
 msgstr "URL eingeben, die gesucht werden soll."
 
 #. 5.8->settings-schema.json->info2->description
-#, fuzzy
 msgid ""
 "\n"
 "• Drag and drop apps, files, and folders onto the sidebar."
 msgstr ""
 "\n"
-"Reihenfolge der Menü-Kategorien durch Ziehen mit der Maus ändern."
+"Apps, Dateien und Ordner per \"Drag & Drop\" in die Seitenleiste ziehen."
