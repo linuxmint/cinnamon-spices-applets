@@ -180,7 +180,7 @@ MyApplet.prototype = {
                 if(_children[i]._applet._uuid=="systray@cinnamon.org" || _children[i]._applet._uuid=="systray@cinnaman"){
                     this.tray = _children[i];
                     let tis = _children[i].get_first_child().get_children();
-                    for(j in tis){
+                    for(let j in tis){
                         tis[j].set_size(0, 0);
                     }
                     Mainloop.timeout_add(10, Lang.bind(this, function(){
@@ -211,14 +211,14 @@ MyApplet.prototype = {
                     _children[i].show();
                 if(_children[i]._applet._uuid=="systray@cinnaman"){
                     let htis = _children[i].get_first_child().get_children();
-                    for(j in htis){
-                        htis[j].set_size(16, 16);
+                    for(let j in htis){
+                        htis[j].set_size(-1, -1);
                     }
                 }
                 if(_children[i]._applet._uuid=="systray@cinnamon.org"){
                     let htis = _children[i].get_first_child().get_children();
-                    for(j in htis){
-                        htis[j].set_size(20, 20);
+                    for(let j in htis){
+                        htis[j].set_size(-1, -1);
                     }
                 }
             }
