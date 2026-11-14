@@ -365,6 +365,14 @@ MyApplet.prototype = {
 			}, { reactive: true });
 			gitHubRepoDetailsItem.menu.addMenuItem(forksItem);
 
+			// Details : Language of the repo
+			let language = repos[i].language;
+			// add the language sub-menu only if it's defined, because sometimes it is not
+			if (language) {
+				let languageItem = this._createPopupImageMenuItem(L2Indent + _("Language") + ": " + language, "accessories-dictionary-symbolic", function() {}, { reactive: false });
+				gitHubRepoDetailsItem.menu.addMenuItem(languageItem);
+			}
+
 			// Add Details
 			gitHubRepoMenuItem.menu.addMenuItem(gitHubRepoDetailsItem);
 

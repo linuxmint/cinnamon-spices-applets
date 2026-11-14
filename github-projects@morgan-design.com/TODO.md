@@ -12,7 +12,6 @@
 * Right click -> Close applet?
 * Investigate use of access token instead of using open public API
 
-* Add Language icon & type to repository details -> JSON tag ['language']
 * Consider moving timing functionality to its own class?
 
 * Conditional Request based on responses -> http://developer.github.com/v3/#conditional-requests
@@ -29,6 +28,9 @@
 * Add link to WIKI on has_wiki json flag
 
 ## Released Versions
+
+##### V1.6
+* Added Language icon & type to repository details -> JSON tag ['language']
 
 ##### V1.5
 
