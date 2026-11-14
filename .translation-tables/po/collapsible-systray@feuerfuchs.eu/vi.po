@@ -1,0 +1,193 @@
+# COLLAPSIBLE SYSTRAY
+# This file is put in the public domain.
+# feuerfuchs, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: collapsible-systray@feuerfuchs.eu 1.22\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 4.0/CSCollapseBtn.js:98 3.2/CSCollapseBtn.js:104
+msgid "Collapse"
+msgstr "Thu gọn"
+
+#. 4.0/CSCollapseBtn.js:104 3.2/CSCollapseBtn.js:110
+msgid "Expand"
+msgstr "Mở rộng"
+
+#. 4.0/CSCollapseBtn.js:110 3.2/CSCollapseBtn.js:116
+msgid "No icons to hide/reveal"
+msgstr "Không có biểu tượng nào để ẩn/hiện"
+
+#. 4.0/applet.js:133 3.2/applet.js:143
+msgid "Active applications"
+msgstr "Các ứng dụng đang hoạt động"
+
+#. 4.0/applet.js:134 3.2/applet.js:144
+msgid "Inactive applications"
+msgstr "Các ứng dụng không hoạt động"
+
+#. metadata.json->description
+msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
+msgstr ""
+"Một applet thay thế cho applet System Tray Collapsible đã bị ngừng phát triển"
+
+#. metadata.json->name
+msgid "Collapsible Systray"
+msgstr "Khay đựng đồ có thể thu gọn"
+
+#. 4.0->settings-schema.json->behavior->title
+#. 4.0->settings-schema.json->behavior-section->title
+#. 3.2->settings-schema.json->behavior->title
+#. 3.2->settings-schema.json->behavior-section->title
+msgid "Behavior"
+msgstr "Hành vi"
+
+#. 4.0->settings-schema.json->appearance->title
+#. 4.0->settings-schema.json->appearance-section->title
+#. 3.2->settings-schema.json->appearance->title
+#. 3.2->settings-schema.json->appearance-section->title
+msgid "Appearance"
+msgstr "Giao diện"
+
+#. 4.0->settings-schema.json->animation-support->description
+#. 3.2->settings-schema.json->animation-support->description
+msgid "Animation support (disable if icons stop updating)"
+msgstr "Hỗ trợ hoạt ảnh (tắt nếu biểu tượng dừng cập nhật)"
+
+#. 4.0->settings-schema.json->animation-support->tooltip
+#. 3.2->settings-schema.json->animation-support->tooltip
+msgid "Disable if you have issues with icons not updating themselves."
+msgstr ""
+"Tắt tính năng này nếu bạn gặp sự cố với các biểu tượng không tự cập nhật."
+
+#. 4.0->settings-schema.json->animation-duration->units
+#. 4.0->settings-schema.json->expand-on-hover-delay->units
+#. 4.0->settings-schema.json->collapse-on-leave-delay->units
+#. 3.2->settings-schema.json->animation-duration->units
+#. 3.2->settings-schema.json->expand-on-hover-delay->units
+#. 3.2->settings-schema.json->collapse-on-leave-delay->units
+msgid "milliseconds"
+msgstr "miligiây"
+
+#. 4.0->settings-schema.json->animation-duration->description
+#. 3.2->settings-schema.json->animation-duration->description
+msgid "Animation duration"
+msgstr "Thời lượng hoạt hình"
+
+#. 4.0->settings-schema.json->expand-on-hover->description
+#. 3.2->settings-schema.json->expand-on-hover->description
+msgid "Expand on hover"
+msgstr "Mở rộng khi di chuột"
+
+#. 4.0->settings-schema.json->expand-on-hover-delay->description
+#. 3.2->settings-schema.json->expand-on-hover-delay->description
+msgid "Expand on hover delay"
+msgstr "Mở rộng độ trễ khi di chuột"
+
+#. 4.0->settings-schema.json->collapse-on-leave->description
+#. 3.2->settings-schema.json->collapse-on-leave->description
+msgid "Collapse on un-hover"
+msgstr "Thu gọn khi bỏ di chuột"
+
+#. 4.0->settings-schema.json->collapse-on-leave-delay->description
+#. 3.2->settings-schema.json->collapse-on-leave-delay->description
+msgid "Collapse on un-hover delay"
+msgstr "Thu gọn khi chậm trễ khi bỏ di chuột"
+
+#. 4.0->settings-schema.json->init-delay->units
+#. 3.2->settings-schema.json->init-delay->units
+msgid "seconds"
+msgstr "giây"
+
+#. 4.0->settings-schema.json->init-delay->description
+#. 3.2->settings-schema.json->init-delay->description
+msgid "Startup collapse delay"
+msgstr "Độ trễ thu gọn khi khởi động"
+
+#. 4.0->settings-schema.json->init-delay->tooltip
+#. 3.2->settings-schema.json->init-delay->tooltip
+msgid "The delay until the applet automatically collapses upon startup"
+msgstr "Sự chậm trễ cho đến khi ứng dụng tự động thu gọn khi khởi động"
+
+#. 4.0->settings-schema.json->sort-icons->description
+#. 3.2->settings-schema.json->sort-icons->description
+msgid "Sort icons by name"
+msgstr "Sắp xếp biểu tượng theo tên"
+
+#. 4.0->settings-schema.json->sort-icons->tooltip
+#. 3.2->settings-schema.json->sort-icons->tooltip
+msgid "If unchecked, the order of the icons will be pretty much random"
+msgstr "Nếu không được chọn, thứ tự của các biểu tượng sẽ khá ngẫu nhiên"
+
+#. 4.0->settings-schema.json->no-hover-for-tray-icons->description
+#. 3.2->settings-schema.json->no-hover-for-tray-icons->description
+msgid "Disable hover effect for tray icons"
+msgstr "Tắt hiệu ứng di chuột cho các biểu tượng trên khay"
+
+#. 4.0->settings-schema.json->no-hover-for-tray-icons->tooltip
+#. 3.2->settings-schema.json->no-hover-for-tray-icons->tooltip
+msgid ""
+"If you have problems with the hover effect or it simply doesn't look good, "
+"you should enable this setting"
+msgstr ""
+"Nếu bạn gặp sự cố với hiệu ứng di chuột hoặc nó trông không đẹp, bạn nên bật "
+"cài đặt này"
+
+#. 4.0->settings-schema.json->horizontal-expand-icon-name->description
+#. 3.2->settings-schema.json->horizontal-expand-icon-name->description
+msgid "Horizontal expand icon"
+msgstr "Biểu tượng mở rộng theo chiều ngang"
+
+#. 4.0->settings-schema.json->horizontal-expand-icon-name->tooltip
+#. 4.0->settings-schema.json->horizontal-collapse-icon-name->tooltip
+#. 4.0->settings-schema.json->vertical-expand-icon-name->tooltip
+#. 4.0->settings-schema.json->vertical-collapse-icon-name->tooltip
+#. 3.2->settings-schema.json->horizontal-expand-icon-name->tooltip
+#. 3.2->settings-schema.json->horizontal-collapse-icon-name->tooltip
+#. 3.2->settings-schema.json->vertical-expand-icon-name->tooltip
+#. 3.2->settings-schema.json->vertical-collapse-icon-name->tooltip
+msgid "Enter either the icon's qualified name or it's full path"
+msgstr ""
+"Nhập tên đủ điều kiện của biểu tượng hoặc đường dẫn đầy đủ của biểu tượng đó"
+
+#. 4.0->settings-schema.json->horizontal-collapse-icon-name->description
+#. 3.2->settings-schema.json->horizontal-collapse-icon-name->description
+msgid "Horizontal collapse icon"
+msgstr "Biểu tượng thu gọn theo chiều ngang"
+
+#. 4.0->settings-schema.json->vertical-expand-icon-name->description
+#. 3.2->settings-schema.json->vertical-expand-icon-name->description
+msgid "Vertical expand icon"
+msgstr "Biểu tượng mở rộng theo chiều dọc"
+
+#. 4.0->settings-schema.json->vertical-collapse-icon-name->description
+#. 3.2->settings-schema.json->vertical-collapse-icon-name->description
+msgid "Vertical collapse icon"
+msgstr "Biểu tượng thu gọn theo chiều dọc"
+
+#. 4.0->settings-schema.json->tray-icon-padding->units
+#. 3.2->settings-schema.json->tray-icon-padding->units
+msgid "px"
+msgstr "px"
+
+#. 4.0->settings-schema.json->tray-icon-padding->description
+#. 3.2->settings-schema.json->tray-icon-padding->description
+msgid "Padding of tray icons"
+msgstr "Đệm các biểu tượng khay"
+
+#. 4.0->settings-schema.json->icon-visibility-list->description
+#. 3.2->settings-schema.json->icon-visibility-list->description
+msgid "Internal use"
+msgstr "Sử dụng nội bộ"

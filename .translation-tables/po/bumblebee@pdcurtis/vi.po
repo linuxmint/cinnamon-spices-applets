@@ -1,0 +1,199 @@
+# BUMBLEBEE STATUS WITH NVIDIA TEMPERATURE DISPLAY
+# This file is put in the public domain.
+# pdcurtis, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: bumblebee@pdcurtis 3.2.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:152
+msgid "Bumblebee program not installed"
+msgstr "Chương trình Bumblebee chưa được cài đặt"
+
+#. applet.js:152
+msgid ""
+"You appear to be missing some of the required programs for 'bumblebee' to "
+"switch graphics processors using NVIDIA Optimus."
+msgstr ""
+"Có vẻ như bạn đang thiếu một số chương trình cần thiết để 'bumblebee' chuyển đổi "
+"bộ xử lý đồ họa bằng NVIDIA Optimus."
+
+#. applet.js:152
+msgid "Please read the help file."
+msgstr "Vui lòng đọc tập tin trợ giúp."
+
+#. applet.js:172
+msgid "Waiting for Bumblebee"
+msgstr "Đang chờ Bumblebee"
+
+#. applet.js:232
+msgid "Open nVidia Settings Program"
+msgstr "Mở chương trình Cài đặt nVidia"
+
+#. applet.js:238
+msgid "Open Power Statistics"
+msgstr "Mở Thống kê Năng lượng"
+
+#. applet.js:244
+msgid "Open System Monitor"
+msgstr "Mở Trình giám sát hệ thống"
+
+#. applet.js:253
+msgid "Housekeeping and System Sub Menu"
+msgstr "Bảo trì và Menu phụ hệ thống"
+
+#. applet.js:256
+msgid "View the Changelog"
+msgstr "Xem nhật ký thay đổi"
+
+#. applet.js:262
+msgid "Open the Help file"
+msgstr "Mở tập tin trợ giúp"
+
+#. applet.js:278
+msgid "Launch programs using the nVidia Graphics Processor"
+msgstr "Khởi chạy chương trình bằng Bộ xử lý đồ họa nVidia"
+
+#. applet.js:359
+msgid "NVidia based GPU is Off"
+msgstr "GPU dựa trên NVidia đang tắt"
+
+#. applet.js:384
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "GPU dựa trên NVidia đang bật và nhiệt độ lõi là"
+
+#. applet.js:392
+msgid "Err"
+msgstr "Lỗi"
+
+#. applet.js:393
+msgid ""
+"Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
+"drivers installed?"
+msgstr ""
+"Bumblebee chưa được thiết lập đúng - bạn đã cài đặt bbswitch, bumblebee và trình điều khiển nvidia chưa?"
+
+#. metadata.json->description
+msgid ""
+"Displays Status of Bumblebee and nVidia GPU Temperature with associated "
+"support functions including starting selected programs with optirun or "
+"primusrun"
+msgstr ""
+"Hiển thị trạng thái của Bumblebee và nhiệt độ GPU nVidia cùng các chức năng hỗ trợ như khởi động chương trình đã chọn bằng optirun hoặc primusrun"
+
+#. metadata.json->name
+msgid "Bumblebee Status with NVidia Temperature Display"
+msgstr "Trạng thái Bumblebee với hiển thị nhiệt độ NVidia"
+
+#. settings-schema.json->head->description
+msgid "General Settings for the nVidia Monitoring Applet"
+msgstr "Cài đặt chung cho tiện ích giám sát nVidia"
+
+#. settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Khoảng thời gian làm mới hiển thị:"
+
+#. settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"Tăng hoặc giảm giá trị này để thay đổi khoảng thời gian làm mới - sử dụng làm mới chậm nếu máy của bạn chậm"
+
+#. settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "Hiển thị nhiệt độ GPU cùng với biểu tượng"
+
+#. settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr ""
+"Có sẵn ở các bảng ngang và dọc. Hiển thị bằng độ C."
+
+#. settings-schema.json->head2->description
+msgid "Programs settings for Optimus"
+msgstr "Cài đặt chương trình cho Optimus"
+
+#. settings-schema.json->description1->description
+msgid "Display Name of Program 1 to be run using Optimus technology"
+msgstr "Tên hiển thị của chương trình 1 sẽ chạy bằng công nghệ Optimus"
+
+#. settings-schema.json->description1->tooltip
+msgid ""
+"Put the name of the program here or null if you do not want it displayed"
+msgstr ""
+"Nhập tên chương trình tại đây hoặc null nếu bạn không muốn hiển thị"
+
+#. settings-schema.json->commandString1->description
+msgid "Command String for Program 1"
+msgstr "Chuỗi lệnh cho chương trình 1"
+
+#. settings-schema.json->commandString1->tooltip
+#. settings-schema.json->commandString2->tooltip
+#. settings-schema.json->commandString3->tooltip
+#. settings-schema.json->commandString4->tooltip
+#. settings-schema.json->commandString5->tooltip
+msgid ""
+"Put the command string to run the program here starting with optirun or "
+"primusrun"
+msgstr ""
+"Nhập chuỗi lệnh để chạy chương trình tại đây, bắt đầu bằng optirun hoặc primusrun"
+
+#. settings-schema.json->description2->description
+msgid "Display Name of Program 2 to be run using Optimus technology"
+msgstr "Tên hiển thị của chương trình 2 sẽ chạy bằng công nghệ Optimus"
+
+#. settings-schema.json->description2->tooltip
+#. settings-schema.json->description3->tooltip
+#. settings-schema.json->description4->tooltip
+#. settings-schema.json->description5->tooltip
+msgid ""
+"Put the name of the program here or none if you do not want it displayed"
+msgstr ""
+"Nhập tên chương trình tại đây hoặc none nếu bạn không muốn hiển thị"
+
+#. settings-schema.json->commandString2->description
+msgid "Command String for Program 2"
+msgstr "Chuỗi lệnh cho chương trình 2"
+
+#. settings-schema.json->description3->description
+msgid "Display Name of Program 3 to be run using Optimus technology"
+msgstr "Tên hiển thị của chương trình 3 sẽ chạy bằng công nghệ Optimus"
+
+#. settings-schema.json->commandString3->description
+msgid "Command String for Program 3"
+msgstr "Chuỗi lệnh cho chương trình 3"
+
+#. settings-schema.json->description4->description
+msgid "Display Name of Program 4 to be run using Optimus technology"
+msgstr "Tên hiển thị của chương trình 4 sẽ chạy bằng công nghệ Optimus"
+
+#. settings-schema.json->commandString4->description
+msgid "Command String for Program 4"
+msgstr "Chuỗi lệnh cho chương trình 4"
+
+#. settings-schema.json->description5->description
+msgid "Display Name of Program 5 to be run using Optimus technology"
+msgstr "Tên hiển thị của chương trình 5 sẽ chạy bằng công nghệ Optimus"
+
+#. settings-schema.json->commandString5->description
+msgid "Command String for Program 5"
+msgstr "Chuỗi lệnh cho chương trình 5"
+

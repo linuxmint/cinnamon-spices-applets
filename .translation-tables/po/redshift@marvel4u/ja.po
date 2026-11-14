@@ -1,0 +1,152 @@
+# REDSHIFT
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# marvel4u, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-28 05:35-0400\n"
+"PO-Revision-Date: 2022-12-12 23:13+0900\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. settings-schema.json->brightness->description
+#. applet.js:65 applet.js:235 applet.js:340
+msgid "Brightness"
+msgstr "輝度"
+
+#. metadata.json->name
+#. applet.js:84 applet.js:341
+msgid "Redshift"
+msgstr "Redshift"
+
+#. applet.js:103
+msgid "Transition on night"
+msgstr "夜用の変化の有効化"
+
+#. applet.js:214
+msgid "Redshift day colour"
+msgstr "Redshift 昼の色温度"
+
+#. applet.js:219
+msgid "Redshift day brightness"
+msgstr "Redshift 昼の輝度"
+
+#. applet.js:224
+msgid "Redshift night colour"
+msgstr "Redshift 夜の色温度"
+
+#. applet.js:229
+msgid "Redshift night brightness"
+msgstr "Redshift 夜の輝度"
+
+#. applet.js:341
+msgid "On"
+msgstr "オン"
+
+#. applet.js:345
+msgid "Day colour temperature"
+msgstr "昼の色温度"
+
+#. applet.js:346
+msgid "Night colour temperature"
+msgstr "夜の色温度"
+
+#. applet.js:347
+msgid "Day Redshift brightness"
+msgstr "Redshift 昼の輝度"
+
+#. applet.js:348
+msgid "Night Redshift brightness"
+msgstr "Redshift 夜の輝度"
+
+#. applet.js:350
+#, fuzzy
+msgid "Colour temperature"
+msgstr "昼の色温度"
+
+#. applet.js:351
+#, fuzzy
+msgid "Redshift brightness"
+msgstr "Redshift 昼の輝度"
+
+#. metadata.json->description
+msgid ""
+"An app to change the red filter level for late night screen time. Requires "
+"redshift: sudo apt-get install redshift"
+msgstr ""
+"深夜のスクリーンタイムのために、赤色フィルタレベルを変更するアプリ。要 "
+"redshift"
+
+#. settings-schema.json->panel->title
+msgid "Redshift settings"
+msgstr "Redshift 設定"
+
+#. settings-schema.json->brightness-section->title
+msgid "Brightness level"
+msgstr "輝度レベル"
+
+#. settings-schema.json->redshift-section->title
+msgid "Redshift configuration"
+msgstr "Redshift 設定"
+
+#. settings-schema.json->redshift-transition-section->title
+msgid "Transition between day and night configuration"
+msgstr "昼間・夜間にかけての変化の設定"
+
+#. settings-schema.json->brightness->units
+#. settings-schema.json->redshiftDayBrightness->units
+#. settings-schema.json->redshiftNightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->enabledOnStartup->description
+msgid "Redshift Enabled"
+msgstr "Redshift 有効"
+
+#. settings-schema.json->dayColour->units
+#. settings-schema.json->nightColour->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayColour->description
+msgid "Redshift Day colour temperature"
+msgstr "Redshift 昼の色温度"
+
+#. settings-schema.json->redshiftDayBrightness->description
+msgid "Redshift Day Brightness"
+msgstr "Redshift 昼間輝度"
+
+#. settings-schema.json->changeOnNight->description
+msgid "Change temperature colour and Redshift brightness between day and night"
+msgstr "昼と夜で色温度と明るさを変える"
+
+#. settings-schema.json->nightColour->description
+msgid "Redshift Night colour temperature"
+msgstr "Redshift 夜の色温度"
+
+#. settings-schema.json->redshiftNightBrightness->description
+msgid "Redshift Night Brightness"
+msgstr "Redshift 夜の輝度"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "緯度"
+
+#. settings-schema.json->latitude->tooltip
+#. settings-schema.json->longitude->tooltip
+msgid "If not entered Redshift would use GeoClue2 provider"
+msgstr "入力がなければ Redshift は GeoClue2 プロバイダを使います"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "経度"

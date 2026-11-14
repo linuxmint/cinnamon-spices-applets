@@ -1,0 +1,50 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->saveImage->description
+#. settings-schema.json->saveImage->tooltip
+#: applet.js:89
+msgid "Automatically save background images"
+msgstr ""
+
+#. settings-schema.json->slideshow->description
+#. settings-schema.json->slideshow->tooltip
+#: applet.js:93
+msgid "Play backgrounds as a slideshow"
+msgstr ""
+
+#. settings-schema.json->click->description
+#. settings-schema.json->click->tooltip
+#: applet.js:97
+msgid "Enable click to switch images"
+msgstr ""
+
+#. settings-schema.json->section1->description
+msgid "Configure"
+msgstr ""
+
+#. settings-schema.json->resource->tooltip
+msgid "Select a wallpaper resource"
+msgstr ""
+
+#. settings-schema.json->saveImagePath->description
+msgid "Save background images to"
+msgstr ""
+
+#. settings-schema.json->saveImagePath->tooltip
+msgid "Automatically save background images to this directory"
+msgstr ""
+
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->delay->description
+#. settings-schema.json->delay->tooltip
+msgid "Delay"
+msgstr ""

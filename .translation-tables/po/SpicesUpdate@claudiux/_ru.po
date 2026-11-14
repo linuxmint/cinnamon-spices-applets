@@ -1,0 +1,518 @@
+# SPICES UPDATE
+# This file is put in the public domain.
+# claudiux, 2019
+#
+msgid ""
+msgstr ""
+
+#. 4.2/SU_messageTray.js:1282 4.8/SU_messageTray.js:1282
+#. 4.6/SU_messageTray.js:1282 5.6/SU_messageTray.js:1282
+msgid "Open"
+msgstr ""
+
+#. 4.2/SU_messageTray.js:1289 4.8/SU_messageTray.js:1289
+#. 4.6/SU_messageTray.js:1289 5.6/SU_messageTray.js:1289
+#. cs/4.4/modules/cs_applets.py:57 cs/4.4/modules/cs_desklets.py:77
+#. cs/6.0_FUTURE/modules/cs_applets.py:57
+#. cs/6.0_FUTURE/modules/cs_desklets.py:77 cs/4.2/modules/cs_applets.py:56
+#. cs/4.2/modules/cs_desklets.py:76 cs/3.8/modules/cs_applets.py:56
+#. cs/3.8/modules/cs_desklets.py:76 cs/4.6/modules/cs_applets.py:57
+#. cs/4.6/modules/cs_desklets.py:77 cs/4.0/modules/cs_applets.py:56
+#. cs/4.0/modules/cs_desklets.py:76
+msgid "Remove"
+msgstr ""
+
+#. 4.2->settings-schema.json->btn_refresh_applets->description
+#. 4.2->settings-schema.json->btn_refresh_desklets->description
+#. 4.2->settings-schema.json->btn_refresh_extensions->description
+#. 4.2->settings-schema.json->btn_refresh_themes->description
+#. 4.8->settings-schema.json->btn_refresh_applets->description
+#. 4.8->settings-schema.json->btn_refresh_desklets->description
+#. 4.8->settings-schema.json->btn_refresh_extensions->description
+#. 4.8->settings-schema.json->btn_refresh_themes->description
+#. 6.0->settings-schema.json->btn_refresh_applets->description
+#. 6.0->settings-schema.json->btn_refresh_desklets->description
+#. 6.0->settings-schema.json->btn_refresh_extensions->description
+#. 6.0->settings-schema.json->btn_refresh_themes->description
+#. 6.0->settings-schema.json->btn_refresh_actions->description
+#. 3.8->settings-schema.json->btn_refresh_applets->description
+#. 3.8->settings-schema.json->btn_refresh_desklets->description
+#. 3.8->settings-schema.json->btn_refresh_extensions->description
+#. 3.8->settings-schema.json->btn_refresh_themes->description
+#. 4.6->settings-schema.json->btn_refresh_applets->description
+#. 4.6->settings-schema.json->btn_refresh_desklets->description
+#. 4.6->settings-schema.json->btn_refresh_extensions->description
+#. 4.6->settings-schema.json->btn_refresh_themes->description
+#. 6.4->settings-schema.json->btn_refresh_applets->description
+#. 6.4->settings-schema.json->btn_refresh_desklets->description
+#. 6.4->settings-schema.json->btn_refresh_extensions->description
+#. 6.4->settings-schema.json->btn_refresh_themes->description
+#. 6.4->settings-schema.json->btn_refresh_actions->description
+#. 5.6->settings-schema.json->btn_refresh_applets->description
+#. 5.6->settings-schema.json->btn_refresh_desklets->description
+#. 5.6->settings-schema.json->btn_refresh_extensions->description
+#. 5.6->settings-schema.json->btn_refresh_themes->description
+#. 4.2/applet.js:635 4.2/applet.js:1682 4.8/applet.js:772 4.8/applet.js:1838
+#. 6.0/applet.js:939 6.0/applet.js:2243 6.0/applet_OLD.js:732
+#. 6.0/applet_OLD.js:1879 3.8/applet.js:682 3.8/applet.js:1747
+#. 4.6/applet.js:771 4.6/applet.js:1832 2.8/applet.js:574 2.8/applet.js:1590
+#. 6.4/applet.js:952 6.4/applet.js:2321 5.6/applet.js:780 5.6/applet.js:1852
+#. cs/4.2/bin/SUExtensionCore.py:795
+msgid "Refresh"
+msgstr ""
+
+#. 4.2/applet.js:1719 4.8/applet.js:1875 6.0/applet.js:2300
+#. 6.0/applet_OLD.js:1916 3.8/applet.js:1783 4.6/applet.js:1869
+#. 2.8/applet.js:1627 6.4/applet.js:2378 5.6/applet.js:1889
+#. cs/4.2/bin/SUExtensionCore.py:240
+msgid "Configure"
+msgstr ""
+
+#. 4.2->settings-schema.json->General->title
+#. 4.8->settings-schema.json->General->title
+#. 6.0->settings-schema.json->General->title
+#. 3.8->settings-schema.json->General->title
+#. 4.6->settings-schema.json->General->title
+#. 2.8->settings-schema.json->head5->description
+#. 6.4->settings-schema.json->General->title
+#. 5.6->settings-schema.json->General->title
+#. 4.2/applet.js:1722 4.8/applet.js:1878 6.0/applet.js:2308
+#. 6.0/applet_OLD.js:1919 4.6/applet.js:1872 6.4/applet.js:2386
+#. 5.6/applet.js:1892
+msgid "General"
+msgstr ""
+
+#. 4.2->settings-schema.json->Applets->title
+#. 4.8->settings-schema.json->Applets->title
+#. 6.0->settings-schema.json->Applets->title
+#. 3.8->settings-schema.json->Applets->title
+#. 4.6->settings-schema.json->Applets->title
+#. 2.8->settings-schema.json->head1->description
+#. 6.4->settings-schema.json->Applets->title
+#. 5.6->settings-schema.json->Applets->title
+#. 4.2/applet.js:1722 4.2/constants.js:128 4.8/applet.js:1878
+#. 4.8/constants.js:135 6.0/applet.js:2309 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:144 3.8/applet.js:141 4.6/applet.js:1872
+#. 4.6/constants.js:135 2.8/applet.js:100 6.4/applet.js:2387
+#. 6.4/constants.js:144 5.6/applet.js:1892 5.6/constants.js:129
+#. cs/4.4/modules/cs_applets.py:35 cs/6.0_FUTURE/modules/cs_applets.py:35
+#. cs/4.2/modules/cs_applets.py:34 cs/3.8/modules/cs_applets.py:34
+#. cs/4.6/modules/cs_applets.py:35 cs/4.0/modules/cs_applets.py:34
+msgid "Applets"
+msgstr ""
+
+#. 4.2->settings-schema.json->Desklets->title
+#. 4.8->settings-schema.json->Desklets->title
+#. 6.0->settings-schema.json->Desklets->title
+#. 3.8->settings-schema.json->Desklets->title
+#. 4.6->settings-schema.json->Desklets->title
+#. 2.8->settings-schema.json->head2->description
+#. 6.4->settings-schema.json->Desklets->title
+#. 5.6->settings-schema.json->Desklets->title
+#. 4.2/applet.js:1722 4.2/constants.js:129 4.8/applet.js:1878
+#. 4.8/constants.js:136 6.0/applet.js:2310 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:145 3.8/applet.js:142 4.6/applet.js:1872
+#. 4.6/constants.js:136 2.8/applet.js:101 6.4/applet.js:2388
+#. 6.4/constants.js:145 5.6/applet.js:1892 5.6/constants.js:130
+#. cs/4.4/modules/cs_desklets.py:33 cs/6.0_FUTURE/modules/cs_desklets.py:33
+#. cs/4.2/modules/cs_desklets.py:32 cs/3.8/modules/cs_desklets.py:32
+#. cs/4.6/modules/cs_desklets.py:33 cs/4.0/modules/cs_desklets.py:32
+msgid "Desklets"
+msgstr ""
+
+#. 4.2->settings-schema.json->Extensions->title
+#. 4.8->settings-schema.json->Extensions->title
+#. 6.0->settings-schema.json->Extensions->title
+#. 3.8->settings-schema.json->Extensions->title
+#. 4.6->settings-schema.json->Extensions->title
+#. 2.8->settings-schema.json->head3->description
+#. 6.4->settings-schema.json->Extensions->title
+#. 5.6->settings-schema.json->Extensions->title
+#. 4.2/applet.js:1722 4.2/constants.js:130 4.8/applet.js:1878
+#. 4.8/constants.js:137 6.0/applet.js:2311 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:146 3.8/applet.js:143 4.6/applet.js:1872
+#. 4.6/constants.js:137 2.8/applet.js:102 6.4/applet.js:2389
+#. 6.4/constants.js:146 5.6/applet.js:1892 5.6/constants.js:131
+#. cs/4.4/modules/cs_extensions.py:33 cs/6.0_FUTURE/modules/cs_extensions.py:33
+#. cs/4.2/modules/cs_extensions.py:32 cs/3.8/modules/cs_extensions.py:32
+#. cs/4.6/modules/cs_extensions.py:33 cs/4.0/modules/cs_extensions.py:32
+msgid "Extensions"
+msgstr ""
+
+#. 4.2->settings-schema.json->Themes->title
+#. 4.8->settings-schema.json->Themes->title
+#. 6.0->settings-schema.json->Themes->title
+#. 3.8->settings-schema.json->Themes->title
+#. 4.6->settings-schema.json->Themes->title
+#. 2.8->settings-schema.json->head4->description
+#. 6.4->settings-schema.json->Themes->title
+#. 5.6->settings-schema.json->Themes->title
+#. 4.2/applet.js:1722 4.2/constants.js:131 4.8/applet.js:1878
+#. 4.8/constants.js:138 6.0/applet.js:2312 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:147 3.8/applet.js:144 4.6/applet.js:1872
+#. 4.6/constants.js:138 2.8/applet.js:103 6.4/applet.js:2390
+#. 6.4/constants.js:147 5.6/applet.js:1892 5.6/constants.js:132
+#. cs/4.4/modules/cs_themes.py:42 cs/4.4/modules/cs_themes.py:72
+#. cs/4.4/modules/cs_themes.py:74 cs/6.0_FUTURE/modules/cs_themes.py:44
+#. cs/6.0_FUTURE/modules/cs_themes.py:75 cs/6.0_FUTURE/modules/cs_themes.py:77
+#. cs/4.2/modules/cs_themes.py:38 cs/4.2/modules/cs_themes.py:61
+#. cs/4.2/modules/cs_themes.py:63 cs/3.8/modules/cs_themes.py:23
+#. cs/3.8/modules/cs_themes.py:46 cs/3.8/modules/cs_themes.py:48
+#. cs/4.6/modules/cs_themes.py:44 cs/4.6/modules/cs_themes.py:75
+#. cs/4.6/modules/cs_themes.py:77 cs/4.0/modules/cs_themes.py:36
+#. cs/4.0/modules/cs_themes.py:59 cs/4.0/modules/cs_themes.py:61
+msgid "Themes"
+msgstr ""
+
+#. 4.2/applet.js:1748 4.8/applet.js:1904 6.0/applet.js:2364
+#. 6.0/applet_OLD.js:1945 3.8/applet.js:1798 4.6/applet.js:1898
+#. 2.8/applet.js:1642 6.4/applet.js:2445 5.6/applet.js:1918
+msgid "Help"
+msgstr ""
+
+#. 4.2/constants.js:124 4.8/constants.js:131 6.0/constants.js:140
+#. 3.8/applet.js:137 4.6/constants.js:131 2.8/applet.js:96 6.4/constants.js:140
+#. 5.6/constants.js:125
+msgid "Applet"
+msgstr ""
+
+#. 4.2/constants.js:125 4.8/constants.js:132 6.0/constants.js:141
+#. 3.8/applet.js:138 4.6/constants.js:132 2.8/applet.js:97 6.4/constants.js:141
+#. 5.6/constants.js:126
+msgid "Desklet"
+msgstr ""
+
+#. 4.2/constants.js:126 4.8/constants.js:133 6.0/constants.js:142
+#. 3.8/applet.js:139 4.6/constants.js:133 2.8/applet.js:98 6.4/constants.js:142
+#. 5.6/constants.js:127
+msgid "Extension"
+msgstr ""
+
+#. 4.2/constants.js:127 4.8/constants.js:134 6.0/constants.js:143
+#. 3.8/applet.js:140 4.6/constants.js:134 2.8/applet.js:99 6.4/constants.js:143
+#. 5.6/constants.js:128
+msgid "Theme"
+msgstr ""
+
+#. 6.0->settings-schema.json->Actions->title
+#. 6.4->settings-schema.json->Actions->title
+#. 6.0/applet.js:2313 6.0/constants.js:148 6.4/applet.js:2391
+#. 6.4/constants.js:148 cs/6.0_FUTURE/modules/cs_actions.py:35
+msgid "Actions"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:67 cs/6.0_FUTURE/cinnamon-settings.py:65
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:81 cs/4.2/cinnamon-settings.py:67
+#. cs/3.8/cinnamon-settings.py:65 cs/4.6/cinnamon-settings.py:67
+#. cs/4.0/cinnamon-settings.py:65
+msgid "Preferences"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:68 cs/6.0_FUTURE/cinnamon-settings.py:66
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:82 cs/4.2/cinnamon-settings.py:68
+#. cs/3.8/cinnamon-settings.py:66 cs/4.6/cinnamon-settings.py:68
+#. cs/4.0/cinnamon-settings.py:66
+msgid "Hardware"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:69 cs/6.0_FUTURE/cinnamon-settings.py:67
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:83 cs/4.2/cinnamon-settings.py:69
+#. cs/3.8/cinnamon-settings.py:67 cs/4.6/cinnamon-settings.py:69
+#. cs/4.0/cinnamon-settings.py:67
+msgid "Administration"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:74 cs/6.0_FUTURE/cinnamon-settings.py:72
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:88 cs/4.2/cinnamon-settings.py:74
+#. cs/3.8/cinnamon-settings.py:72 cs/4.6/cinnamon-settings.py:74
+#. cs/4.0/cinnamon-settings.py:72
+msgid "Network"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:75 cs/6.0_FUTURE/cinnamon-settings.py:73
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:89 cs/4.2/cinnamon-settings.py:76
+#. cs/3.8/cinnamon-settings.py:74 cs/4.6/cinnamon-settings.py:75
+#. cs/4.0/cinnamon-settings.py:74
+msgid "Color"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:81 cs/6.0_FUTURE/cinnamon-settings.py:79
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:95 cs/4.2/cinnamon-settings.py:82
+#. cs/3.8/cinnamon-settings.py:80 cs/4.6/cinnamon-settings.py:81
+#. cs/4.0/cinnamon-settings.py:80
+msgid "Printers"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:82 cs/4.4/cinnamon-settings.py:83
+#. cs/6.0_FUTURE/cinnamon-settings.py:80 cs/6.0_FUTURE/cinnamon-settings.py:81
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:96
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:97 cs/4.2/cinnamon-settings.py:83
+#. cs/4.2/cinnamon-settings.py:84 cs/3.8/cinnamon-settings.py:81
+#. cs/3.8/cinnamon-settings.py:82 cs/4.6/cinnamon-settings.py:82
+#. cs/4.6/cinnamon-settings.py:83 cs/4.0/cinnamon-settings.py:81
+#. cs/4.0/cinnamon-settings.py:82
+msgid "Firewall"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:84 cs/6.0_FUTURE/cinnamon-settings.py:82
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:98 cs/4.2/cinnamon-settings.py:85
+#. cs/3.8/cinnamon-settings.py:83 cs/4.6/cinnamon-settings.py:84
+#. cs/4.0/cinnamon-settings.py:83
+msgid "Languages"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:96 cs/6.0_FUTURE/cinnamon-settings.py:95
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:111 cs/4.6/cinnamon-settings.py:96
+msgid "Disks"
+msgstr ""
+
+#. cs/4.4/cinnamon-settings.py:297 cs/6.0_FUTURE/cinnamon-settings.py:302
+#. cs/6.0_FUTURE/cinnamon-settings_OLD.py:318 cs/4.2/cinnamon-settings.py:296
+#. cs/4.2/bin/SUExtensionCore.py:370 cs/4.2/bin/SUExtensionCore.py:730
+#. cs/3.8/cinnamon-settings.py:225 cs/4.6/cinnamon-settings.py:297
+#. cs/4.0/cinnamon-settings.py:233
+msgid "Search"
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:35 cs/6.0_FUTURE/modules/cs_applets.py:35
+#. cs/4.2/modules/cs_applets.py:34 cs/3.8/modules/cs_applets.py:34
+#. cs/4.6/modules/cs_applets.py:35 cs/4.0/modules/cs_applets.py:34
+msgid "applet"
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:47 cs/4.4/modules/cs_desklets.py:45
+#. cs/4.4/modules/cs_extensions.py:45 cs/6.0_FUTURE/modules/cs_actions.py:48
+#. cs/6.0_FUTURE/modules/cs_applets.py:47
+#. cs/6.0_FUTURE/modules/cs_desklets.py:45
+#. cs/6.0_FUTURE/modules/cs_extensions.py:45 cs/4.2/modules/cs_applets.py:46
+#. cs/4.2/modules/cs_desklets.py:44 cs/4.2/modules/cs_extensions.py:44
+#. cs/3.8/modules/cs_applets.py:46 cs/3.8/modules/cs_desklets.py:44
+#. cs/3.8/modules/cs_extensions.py:44 cs/4.6/modules/cs_applets.py:47
+#. cs/4.6/modules/cs_desklets.py:45 cs/4.6/modules/cs_extensions.py:45
+#. cs/4.0/modules/cs_applets.py:46 cs/4.0/modules/cs_desklets.py:44
+#. cs/4.0/modules/cs_extensions.py:44
+msgid "Manage"
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:50 cs/4.4/modules/cs_desklets.py:48
+#. cs/4.4/modules/cs_extensions.py:48 cs/6.0_FUTURE/modules/cs_actions.py:51
+#. cs/6.0_FUTURE/modules/cs_applets.py:50
+#. cs/6.0_FUTURE/modules/cs_desklets.py:48
+#. cs/6.0_FUTURE/modules/cs_extensions.py:48 cs/4.2/modules/cs_applets.py:49
+#. cs/4.2/modules/cs_desklets.py:47 cs/4.2/modules/cs_extensions.py:47
+#. cs/3.8/modules/cs_applets.py:49 cs/3.8/modules/cs_desklets.py:47
+#. cs/3.8/modules/cs_extensions.py:47 cs/4.6/modules/cs_applets.py:50
+#. cs/4.6/modules/cs_desklets.py:48 cs/4.6/modules/cs_extensions.py:48
+#. cs/4.0/modules/cs_applets.py:49 cs/4.0/modules/cs_desklets.py:47
+#. cs/4.0/modules/cs_extensions.py:47
+msgid "Download"
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:56 cs/4.4/modules/cs_desklets.py:76
+#. cs/6.0_FUTURE/modules/cs_applets.py:56
+#. cs/6.0_FUTURE/modules/cs_desklets.py:76 cs/4.2/modules/cs_applets.py:55
+#. cs/4.2/modules/cs_desklets.py:75 cs/3.8/modules/cs_applets.py:55
+#. cs/3.8/modules/cs_desklets.py:75 cs/4.6/modules/cs_applets.py:56
+#. cs/4.6/modules/cs_desklets.py:76 cs/4.0/modules/cs_applets.py:55
+#. cs/4.0/modules/cs_desklets.py:75
+msgid "Add"
+msgstr ""
+
+#. cs/4.4/modules/cs_applets.py:58 cs/4.4/modules/cs_desklets.py:78
+#. cs/4.4/modules/cs_extensions.py:56 cs/6.0_FUTURE/modules/cs_actions.py:60
+#. cs/6.0_FUTURE/modules/cs_applets.py:58
+#. cs/6.0_FUTURE/modules/cs_desklets.py:78
+#. cs/6.0_FUTURE/modules/cs_extensions.py:56 cs/4.2/bin/SUExtensionCore.py:782
+#. cs/4.2/modules/cs_applets.py:57 cs/4.2/modules/cs_desklets.py:77
+#. cs/4.2/modules/cs_extensions.py:55 cs/3.8/modules/cs_applets.py:57
+#. cs/3.8/modules/cs_desklets.py:77 cs/3.8/modules/cs_extensions.py:55
+#. cs/4.6/modules/cs_applets.py:58 cs/4.6/modules/cs_desklets.py:78
+#. cs/4.6/modules/cs_extensions.py:56 cs/4.0/modules/cs_applets.py:57
+#. cs/4.0/modules/cs_desklets.py:77 cs/4.0/modules/cs_extensions.py:55
+msgid "Uninstall"
+msgstr ""
+
+#. cs/4.4/modules/cs_extensions.py:54 cs/6.0_FUTURE/modules/cs_actions.py:57
+#. cs/6.0_FUTURE/modules/cs_extensions.py:54 cs/4.2/modules/cs_extensions.py:53
+#. cs/3.8/modules/cs_extensions.py:53 cs/4.6/modules/cs_extensions.py:54
+#. cs/4.0/modules/cs_extensions.py:53
+msgid "Enable"
+msgstr ""
+
+#. cs/4.4/modules/cs_extensions.py:55 cs/6.0_FUTURE/modules/cs_actions.py:58
+#. cs/6.0_FUTURE/modules/cs_extensions.py:55 cs/4.2/modules/cs_extensions.py:54
+#. cs/3.8/modules/cs_extensions.py:54 cs/4.6/modules/cs_extensions.py:55
+#. cs/4.0/modules/cs_extensions.py:54
+msgid "Disable"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:79 cs/6.0_FUTURE/modules/cs_themes.py:82
+#. cs/4.2/modules/cs_themes.py:68 cs/3.8/modules/cs_themes.py:53
+#. cs/4.6/modules/cs_themes.py:82 cs/4.0/modules/cs_themes.py:66
+msgid "Icons"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:82 cs/6.0_FUTURE/modules/cs_themes.py:85
+#. cs/4.2/modules/cs_themes.py:71 cs/3.8/modules/cs_themes.py:56
+#. cs/4.6/modules/cs_themes.py:85 cs/4.0/modules/cs_themes.py:69
+msgid "Controls"
+msgstr ""
+
+#. cs/4.4/modules/cs_themes.py:95 cs/6.0_FUTURE/modules/cs_themes.py:98
+#. cs/4.2/modules/cs_themes.py:84 cs/3.8/modules/cs_themes.py:69
+#. cs/4.6/modules/cs_themes.py:98 cs/4.0/modules/cs_themes.py:82
+msgid "Settings"
+msgstr ""
+
+#. cs/6.0_FUTURE/modules/cs_actions.py:33
+msgid "action"
+msgstr ""
+
+#. 4.8->settings-schema.json->section_general4->title
+#. 6.0->settings-schema.json->section_general4->title
+#. 4.6->settings-schema.json->section_general4->title
+#. 6.4->settings-schema.json->section_general4->title
+#. 5.6->settings-schema.json->section_general4->title
+#. cs/4.2/cinnamon-settings.py:75 cs/3.8/cinnamon-settings.py:73
+#. cs/4.0/cinnamon-settings.py:73
+msgid "Display"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:656
+msgid "Install"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:662
+msgid "Update"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:665 cs/4.2/bin/SUExtensionCore.py:722
+msgid "Installed"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:719
+msgid "Name"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:720
+msgid "Popularity"
+msgstr ""
+
+#. cs/4.2/bin/SUExtensionCore.py:721
+msgid "Date"
+msgstr ""
+
+#. 4.2->settings-schema.json->section_applets1->title
+#. 4.2->settings-schema.json->section_desklets1->title
+#. 4.2->settings-schema.json->section_extensions1->title
+#. 4.2->settings-schema.json->section_themes1->title
+#. 4.8->settings-schema.json->section_applets1->title
+#. 4.8->settings-schema.json->section_desklets1->title
+#. 4.8->settings-schema.json->section_extensions1->title
+#. 4.8->settings-schema.json->section_themes1->title
+#. 6.0->settings-schema.json->section_applets1->title
+#. 6.0->settings-schema.json->section_desklets1->title
+#. 6.0->settings-schema.json->section_extensions1->title
+#. 6.0->settings-schema.json->section_themes1->title
+#. 6.0->settings-schema.json->section_actions1->title
+#. 3.8->settings-schema.json->section_applets1->title
+#. 3.8->settings-schema.json->section_desklets1->title
+#. 3.8->settings-schema.json->section_extensions1->title
+#. 3.8->settings-schema.json->section_themes1->title
+#. 4.6->settings-schema.json->section_applets1->title
+#. 4.6->settings-schema.json->section_desklets1->title
+#. 4.6->settings-schema.json->section_extensions1->title
+#. 4.6->settings-schema.json->section_themes1->title
+#. 6.4->settings-schema.json->section_applets1->title
+#. 6.4->settings-schema.json->section_desklets1->title
+#. 6.4->settings-schema.json->section_extensions1->title
+#. 6.4->settings-schema.json->section_themes1->title
+#. 6.4->settings-schema.json->section_actions1->title
+#. 5.6->settings-schema.json->section_applets1->title
+#. 5.6->settings-schema.json->section_desklets1->title
+#. 5.6->settings-schema.json->section_extensions1->title
+#. 5.6->settings-schema.json->section_themes1->title
+msgid "Checking"
+msgstr ""
+
+#. 4.2->settings-schema.json->section_applets2->title
+#. 4.2->settings-schema.json->section_desklets2->title
+#. 4.2->settings-schema.json->section_extensions2->title
+#. 4.2->settings-schema.json->section_themes2->title
+#. 4.8->settings-schema.json->section_applets2->title
+#. 4.8->settings-schema.json->section_desklets2->title
+#. 4.8->settings-schema.json->section_extensions2->title
+#. 4.8->settings-schema.json->section_themes2->title
+#. 6.0->settings-schema.json->section_applets2->title
+#. 6.0->settings-schema.json->section_desklets2->title
+#. 6.0->settings-schema.json->section_extensions2->title
+#. 6.0->settings-schema.json->section_themes2->title
+#. 6.0->settings-schema.json->section_actions2->title
+#. 3.8->settings-schema.json->section_applets2->title
+#. 3.8->settings-schema.json->section_desklets2->title
+#. 3.8->settings-schema.json->section_extensions2->title
+#. 3.8->settings-schema.json->section_themes2->title
+#. 4.6->settings-schema.json->section_applets2->title
+#. 4.6->settings-schema.json->section_desklets2->title
+#. 4.6->settings-schema.json->section_extensions2->title
+#. 4.6->settings-schema.json->section_themes2->title
+#. 6.4->settings-schema.json->section_applets2->title
+#. 6.4->settings-schema.json->section_desklets2->title
+#. 6.4->settings-schema.json->section_extensions2->title
+#. 6.4->settings-schema.json->section_themes2->title
+#. 6.4->settings-schema.json->section_actions2->title
+#. 5.6->settings-schema.json->section_applets2->title
+#. 5.6->settings-schema.json->section_desklets2->title
+#. 5.6->settings-schema.json->section_extensions2->title
+#. 5.6->settings-schema.json->section_themes2->title
+msgid "Monitoring"
+msgstr ""
+
+#. 4.2->settings-schema.json->section_general1->title
+#. 4.8->settings-schema.json->section_general1->title
+#. 6.0->settings-schema.json->section_general1->title
+#. 3.8->settings-schema.json->section_general1->title
+#. 4.6->settings-schema.json->section_general1->title
+#. 6.4->settings-schema.json->section_general1->title
+#. 5.6->settings-schema.json->section_general1->title
+msgid "Frequency"
+msgstr ""
+
+#. 4.2->settings-schema.json->section_general2->title
+#. 4.8->settings-schema.json->section_general2->title
+#. 6.0->settings-schema.json->section_general2->title
+#. 3.8->settings-schema.json->section_general2->title
+#. 4.6->settings-schema.json->section_general2->title
+#. 6.4->settings-schema.json->section_general2->title
+#. 5.6->settings-schema.json->section_general2->title
+msgid "Notifications"
+msgstr ""
+
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_actions->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_actions->description
+msgid "Tick all the first boxes then refresh"
+msgstr ""
+
+#. 6.4->settings-schema.json->section_general5->title
+msgid "Dependencies"
+msgstr ""
+
+#. 6.4->settings-schema.json->btn_apply_applets->description
+#. 6.4->settings-schema.json->btn_apply_desklets->description
+#. 6.4->settings-schema.json->btn_apply_extensions->description
+#. 6.4->settings-schema.json->btn_apply_themes->description
+#. 6.4->settings-schema.json->btn_apply_actions->description
+msgid "Apply"
+msgstr ""
+
+#. 6.4->settings-schema.json->dont_check_dependencies->description
+msgid "Do not check dependencies"
+msgstr ""

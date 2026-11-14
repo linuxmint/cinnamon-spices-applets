@@ -1,0 +1,317 @@
+# CONFIGURABLE MENU
+# This file is put in the public domain.
+# JohnDoe8771, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: classic-menu@fredcw 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/JohnDoe8771/ConfigurableMenu/"
+"issues\n"
+"POT-Creation-Date: 2026-02-07 09:34+0100\n"
+"PO-Revision-Date: 2026-02-07 10:48+0100\n"
+"Last-Translator: FabRCT\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. metadata.json->name
+#. applet.js:16
+msgid "Configurable Menu"
+msgstr "Menu Configurable"
+
+#. applet.js:16
+msgid "Configurable Menu is for Cinnamon versions 6.6 and later only."
+msgstr ""
+"Menu Configurable est uniquement disponible pour\n"
+"les versions 6.6 et ultérieures de Cinnamon."
+
+#. 6.6/applet.js:415 6.6/applet.js:525
+msgid "Remove from favorites"
+msgstr "Retirer des favoris"
+
+#. 6.6/applet.js:422 6.6/applet.js:528
+msgid "Add to favorites"
+msgstr "Ajouter aux favoris"
+
+#. 6.6/applet.js:512
+msgid "Run with dedicated GPU"
+msgstr "Exécuter avec un GPU dédié"
+
+#. 6.6/applet.js:516
+msgid "Add to panel"
+msgstr "Ajouter au panneau"
+
+#. 6.6/applet.js:520
+msgid "Add to desktop"
+msgstr "Ajouter au bureau"
+
+#. 6.6/applet.js:535
+msgid "Properties"
+msgstr "Propiétés"
+
+#. 6.6/applet.js:540
+msgid "Uninstall"
+msgstr "Désinstaller"
+
+#. 6.6/applet.js:785 6.6/applet.js:826
+msgid "This file is no longer available"
+msgstr "Ce fichier n'est plus disponible"
+
+#. 6.6/applet.js:1137
+#. 6.6->settings-schema.json->layout1->behavior-menu->title
+msgid "Menu"
+msgstr "Menu"
+
+#. 6.6/applet.js:1142
+msgid "Edit menu"
+msgstr "Modifier le menu"
+
+#. 6.6/applet.js:2233
+msgid "Recent Files"
+msgstr "Fichiers récents"
+
+#. 6.6/applet.js:2249
+msgid "Clear list"
+msgstr "Vider la liste"
+
+#. 6.6/applet.js:2250
+msgid "Clear all recent documents"
+msgstr "Effacer tous les documents récents"
+
+#. 6.6/applet.js:2266
+msgid "No recent documents"
+msgstr "Aucun document récent"
+
+#. 6.6/applet.js:2296
+#. 6.6->settings-schema.json->show-favorites->description
+msgid "Favorites"
+msgstr "Favoris"
+
+#. 6.6/applet.js:2314
+msgid "No favorite documents"
+msgstr "Aucun document favori"
+
+#. 6.6/applet.js:2346
+msgid "All Applications"
+msgstr "Toutes les applications"
+
+#. 6.6/applet.js:2396
+msgid "Lock Screen"
+msgstr "Verrouiller l'écran"
+
+#. 6.6/applet.js:2397
+msgid "Lock the screen"
+msgstr "Verrouille l'écran"
+
+#. 6.6/applet.js:2426
+msgid "Log Out"
+msgstr "Se déconnecter"
+
+#. 6.6/applet.js:2427
+msgid "Leave the session"
+msgstr "Clôt votre session"
+
+#. 6.6/applet.js:2443
+msgid "Shut Down"
+msgstr "Éteindre"
+
+#. 6.6/applet.js:2444
+msgid "Shut down the computer"
+msgstr "Éteindre l'ordinateur"
+
+#. 6.6/applet.js:2529
+msgid "Account details"
+msgstr "Votre compte"
+
+#. 6.6/applet.js:2605
+msgid "Search"
+msgstr "Recherche"
+
+#. metadata.json->description
+msgid "Main Cinnamon menu with additional configuration options"
+msgstr "Menu principal Cinnamon avec options de configuration supplémentaires"
+
+#. 6.6->settings-schema.json->layout1->content->title
+#. 6.6->settings-schema.json->layout1->content-content->title
+msgid "Content"
+msgstr "Contenu"
+
+#. 6.6->settings-schema.json->layout1->appearance->title
+msgid "Appearance"
+msgstr "Apparence"
+
+#. 6.6->settings-schema.json->layout1->behavior->title
+msgid "Behavior"
+msgstr "Comportement"
+
+#. 6.6->settings-schema.json->layout1->behavior-panel->title
+#. 6.6->settings-schema.json->layout1->appearance-panel->title
+msgid "Panel"
+msgstr "Panneau"
+
+#. 6.6->settings-schema.json->layout1->appearance-menu->title
+msgid "Options"
+msgstr "Options"
+
+#. 6.6->settings-schema.json->layout1->content-places->title
+msgid "Places"
+msgstr "Emplacements"
+
+#. 6.6->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Raccourci-clavier pour ouvrir et fermer le menu"
+
+#. 6.6->settings-schema.json->menu-custom->description
+msgid "Use a custom icon and label"
+msgstr "Utilisez une icône et une étiquette personnalisées"
+
+#. 6.6->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Icône"
+
+#. 6.6->settings-schema.json->menu-icon-size->description
+msgid "Icon size"
+msgstr "Taille d'icône"
+
+#. 6.6->settings-schema.json->menu-label->description
+msgid "Text"
+msgstr "Texte"
+
+#. 6.6->settings-schema.json->symbolic-category-icons->description
+msgid "Use symbolic icons for categories"
+msgstr "Utilisez des icônes symboliques pour les catégories"
+
+#. 6.6->settings-schema.json->symbolic-system-icons->description
+msgid "Use symbolic icons for system buttons"
+msgstr "Utilisez des icônes symboliques pour les boutons système"
+
+#. 6.6->settings-schema.json->category-icon-size->description
+msgid "Categories icon size"
+msgstr "Taille d'icône des catégories"
+
+#. 6.6->settings-schema.json->application-icon-size->description
+msgid "Applications icon size"
+msgstr "Taille d'icône des applications"
+
+#. 6.6->settings-schema.json->show-sidebar->description
+msgid "Sidebar"
+msgstr "Barre latérale"
+
+#. 6.6->settings-schema.json->show-avatar->description
+msgid "Avatar"
+msgstr "Avatar"
+
+#. 6.6->settings-schema.json->show-home->description
+msgid "Home"
+msgstr "Dossier personnel"
+
+#. 6.6->settings-schema.json->show-desktop->description
+msgid "Desktop"
+msgstr "Bureau"
+
+#. 6.6->settings-schema.json->show-documents->description
+msgid "Documents"
+msgstr "Documents"
+
+#. 6.6->settings-schema.json->show-downloads->description
+msgid "Downloads"
+msgstr "Téléchargements"
+
+#. 6.6->settings-schema.json->show-music->description
+msgid "Music"
+msgstr "Musique"
+
+#. 6.6->settings-schema.json->show-pictures->description
+msgid "Pictures"
+msgstr "Images"
+
+#. 6.6->settings-schema.json->show-videos->description
+msgid "Videos"
+msgstr "Vidéos"
+
+#. 6.6->settings-schema.json->show-bookmarks->description
+msgid "Other bookmarks"
+msgstr "Autres signets"
+
+#. 6.6->settings-schema.json->system-position->description
+msgid "Position of the system buttons"
+msgstr "Position des boutons système"
+
+#. 6.6->settings-schema.json->vertical-system-buttons->description
+msgid "Vertical system buttons in sidebar"
+msgstr "Boutons système verticaux dans la barre latérale"
+
+#. 6.6->settings-schema.json->system-icon-size->description
+msgid "System icon size"
+msgstr "Taille des icônes système"
+
+#. 6.6->settings-schema.json->search-position->description
+msgid "Position of the search bar"
+msgstr "Position de la barre de recherche"
+
+#. 6.6->settings-schema.json->sidebar-icon-size->description
+msgid "Sidebar icon size"
+msgstr "Taille d'icône de la barre latérale"
+
+#. 6.6->settings-schema.json->sidebar-max-width->description
+msgid "Maximum sidebar width (px)"
+msgstr "Largeur maximale de la barre latérale (px)"
+
+#. 6.6->settings-schema.json->show-recents->description
+msgid "Recents"
+msgstr "Récents"
+
+#. 6.6->settings-schema.json->show-sidebar-names->description
+msgid "Show the names of items in the sidebar"
+msgstr "Afficher les noms des éléments dans la barre latérale"
+
+#. 6.6->settings-schema.json->show-description->description
+msgid "Show application descriptions"
+msgstr "Afficher la description des applications"
+
+#. 6.6->settings-schema.json->category-hover->description
+msgid "Change categories on hover"
+msgstr "Changer de catégorie au survol"
+
+#. 6.6->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Active le défilement automatique dans la liste des applications"
+
+#. 6.6->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Ouvrir le menu au survol de la souris"
+
+#. 6.6->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Activer l'ouverture du menu lorsque la souris entre dans l'applet"
+
+#. 6.6->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Délai du survol avant ouverture du menu"
+
+#. 6.6->settings-schema.json->hover-delay->tooltip
+msgid "Delay before the menu opens when hovered"
+msgstr "Délai avant l'ouverture du menu au survol de la souris"
+
+#. 6.6->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Animer l'ouverture et la fermeture du menu"
+
+#. 6.6->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "Autoriser l'animation du menu à l'ouverture et à la fermeture"
+
+#. 6.6->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Ouvrir l'éditeur de menu"
+
+#. 6.6->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Appuyez sur ce bouton pour personnaliser vos entrées de menu."
+
+#. 6.6->settings-schema.json->reset-menu-size-button->description
+msgid "Restore the menu to its original size"
+msgstr "Rétablir la taille d'origine du menu"

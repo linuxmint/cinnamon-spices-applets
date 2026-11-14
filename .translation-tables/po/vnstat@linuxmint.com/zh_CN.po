@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2017-03-11 18:59+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:192 4.0/applet.js:186
+msgid "Current Active Interface:"
+msgstr ""
+
+#: applet.js:192 4.0/applet.js:186
+msgid "Last update time is at top right"
+msgstr ""
+
+#: applet.js:195 4.0/applet.js:189
+msgid "No interface devices currently active - Showing last update"
+msgstr ""
+
+#: applet.js:205 4.0/applet.js:199
+msgid ""
+"Please make sure vnstat and vnstati are installed and that the vnstat daemon "
+"is running!"
+msgstr "请确保vnstat和vnstati已安装，并且vnstat守护程序正在运行！"
+
+#. metadata.json->name
+msgid "Network usage monitor"
+msgstr "网络流量监视器"
+
+#. metadata.json->description
+msgid "Network usage monitor using vnstat"
+msgstr "使用vnstat的网络流量监视器"
+
+#. settings-schema.json->head->description
+#. 4.0->settings-schema.json->head->description
+msgid "Settings for the Network Usage Applet (uses vnstati)"
+msgstr ""
+
+#. settings-schema.json->useExtendedDisplay->description
+#. 4.0->settings-schema.json->useExtendedDisplay->description
+msgid "Enable Extended Display Options"
+msgstr ""
+
+#. settings-schema.json->useExtendedDisplay->tooltip
+#. 4.0->settings-schema.json->useExtendedDisplay->tooltip
+msgid "This is new option version 1.0.2"
+msgstr ""
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid "Classic - Summary of Data Usage for last Days and Months"
+msgstr ""
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid ""
+"Classic Plus - Classic with addition of breakdown by hour for last 24 hours"
+msgstr ""
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid "Custom Display - requires enabling below"
+msgstr ""
+
+#. settings-schema.json->extendedDisplay->description
+#. 4.0->settings-schema.json->extendedDisplay->description
+msgid "Type of Display - default 'classic'"
+msgstr ""
+
+#. settings-schema.json->extendedDisplay->tooltip
+#. 4.0->settings-schema.json->extendedDisplay->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional of adding "
+"an hourly breakdown over the last 24 hours and an experimental option of a "
+"user defined string for vnstati when enabled below"
+msgstr ""
+
+#. settings-schema.json->useVnstatiCommandString->description
+#. 4.0->settings-schema.json->useVnstatiCommandString->description
+msgid "Enable Custom Display Option"
+msgstr ""
+
+#. settings-schema.json->useVnstatiCommandString->tooltip
+#. 4.0->settings-schema.json->useVnstatiCommandString->tooltip
+msgid "Check box"
+msgstr ""
+
+#. settings-schema.json->vnstatiCommandString->description
+#. 4.0->settings-schema.json->vnstatiCommandString->description
+msgid "Custom options to pass to vnstati - default is '-vs' "
+msgstr ""
+
+#. settings-schema.json->vnstatiCommandString->tooltip
+#. 4.0->settings-schema.json->vnstatiCommandString->tooltip
+msgid ""
+"The default is the options used for the extended display. Note: this is not "
+"the whole vnstati option string - the interface and output file options are "
+"added to it automatically. Please read the vnstati manual for further "
+"information on options avaiilable"
+msgstr ""

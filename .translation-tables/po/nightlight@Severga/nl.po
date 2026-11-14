@@ -1,0 +1,109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-10 18:26+0300\n"
+"PO-Revision-Date: 2024-04-21 13:47+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:45
+msgid "Night Light can't work properly: sct package not installed!"
+msgstr "Nachtlamp kan niet goed werken: sct-pakket niet geïnstalleerd!"
+
+#. metadata.json->name
+#: applet.js:46 applet.js:49 applet.js:81
+msgid "Night Light"
+msgstr "Nachtlamp"
+
+#: applet.js:46
+msgid "error"
+msgstr "fout"
+
+#: applet.js:49
+msgid ""
+"Warning: 'sct' command not found! This applet is a frontend for this "
+"command. Please, install 'sct' package and restart Cinnamon or reload the "
+"applet."
+msgstr ""
+"Waarschuwing: 'sct' commando niet gevonden! Deze applet is een frontend voor "
+"dit commando. Installeer alstublieft het 'sct' pakket en herstart Cinnamon "
+"of herlaad de applet."
+
+#: applet.js:57
+msgid "off"
+msgstr "uit"
+
+#: applet.js:57
+msgid "on"
+msgstr "aan"
+
+#: applet.js:57
+msgid "auto"
+msgstr "automatisch"
+
+#. metadata.json->description
+msgid "Screen night light activating applet"
+msgstr "Applet voor het activeren van nachtlamp op het scherm"
+
+#. settings-schema.json->common_label->description
+msgid "Common"
+msgstr "Algemeen"
+
+#. settings-schema.json->temperature->description
+msgid "Night Light temperature (K)"
+msgstr "Nachtlamptemperatuur (K)"
+
+#. settings-schema.json->temperature->tooltip
+msgid "Night Light screen temperature"
+msgstr "Nachtlamp schermtemperatuur"
+
+#. settings-schema.json->auto_label->description
+msgid "Auto mode schedule"
+msgstr "Automatische modus schema"
+
+#. settings-schema.json->startH->description
+msgid "Start time, hour"
+msgstr "Starttijd, uur"
+
+#. settings-schema.json->startH->tooltip
+msgid "Start time (hour)"
+msgstr "Starttijd (uur)"
+
+#. settings-schema.json->startM->description
+msgid "Start time, minute"
+msgstr "Starttijd, minuut"
+
+#. settings-schema.json->startM->tooltip
+msgid "Start time (minute)"
+msgstr "Starttijd (minuut)"
+
+#. settings-schema.json->endH->description
+msgid "End time, hour"
+msgstr "Eindtijd, uur"
+
+#. settings-schema.json->endH->tooltip
+msgid "End time (hour)"
+msgstr "Eindtijd (uur)"
+
+#. settings-schema.json->endM->description
+msgid "End time, minute"
+msgstr "Eindtijd, minuut"
+
+#. settings-schema.json->endM->tooltip
+msgid "End time (minute)"
+msgstr "Eindtijd (minuut)"
+
+#. settings-schema.json->mode->description
+#. settings-schema.json->mode->tooltip
+msgid "mode"
+msgstr "modus"

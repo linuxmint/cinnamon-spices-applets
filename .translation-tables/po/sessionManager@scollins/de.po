@@ -1,0 +1,158 @@
+# SESSION MANAGER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# collinss, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-27 10:12+0200\n"
+"PO-Revision-Date: 2017-02-14 12:48+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:154
+msgid "Session"
+msgstr "Sitzung"
+
+#. applet.js:240
+msgid "Lock Screen"
+msgstr "Bildschirm sperren"
+
+#. applet.js:246
+msgid "Switch User"
+msgstr "Benutzer wechseln"
+
+#. applet.js:252
+msgid "Guest Session"
+msgstr "Gastsitzung"
+
+#. applet.js:258
+msgid "Log Off"
+msgstr "Abmelden"
+
+#. applet.js:269
+msgid "Suspend"
+msgstr "Bereitschaft"
+
+#. applet.js:275
+msgid "Sleep"
+msgstr "Schlafzustand"
+
+#. applet.js:281
+msgid "Hibernate"
+msgstr "Ruhezustand"
+
+#. applet.js:292
+msgid "Restart"
+msgstr "Neu starten"
+
+#. applet.js:298
+msgid "Shut Down"
+msgstr "Herunterfahren"
+
+#. metadata.json->name
+msgid "Session Manager"
+msgstr "Sitzungsmanager"
+
+#. metadata.json->description
+msgid "Provides easy access to shut down, restart, etc"
+msgstr "Bietet einfachen Zugriff zum Herunterfahren, Neustarten, usw."
+
+#. metadata.json->comments
+msgid ""
+"Session Manager is an applet that provides easy access to session controls "
+"such as shut down, restart, log off, switch user, etc. It has been tested in "
+"Arch, Fedora and Linux Mint, and supports a wide variety of software "
+"configurations. If your particular configuration is not supported, please "
+"submit a feature request on github, and I will add it at my earliest "
+"convenience."
+msgstr ""
+"Sitzungsmanager ist ein Applet, das einfachen Zugriff auf "
+"Sitzungssteuerelemente wie Herunterfahren, Neustarten, Abmelden, Wechseln "
+"des Benutzers usw. ermöglicht. Es wurde in Arch, Fedora und Linux Mint "
+"getestet und unterstützt eine Vielzahl von Softwarekonfigurationen. Wenn "
+"Ihre spezielle Konfiguration nicht unterstützt wird, senden Sie bitte eine "
+"Feature-Anfrage auf GitHub, und ich werde es so schnell wie mir möglich "
+"hinzufügen."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Autor"
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Allgemeine Einstellungen"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Leistensymbol"
+
+#. settings-schema.json->panelText->description
+msgid "Panel Text"
+msgstr "Leistentext"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Icon Size"
+msgstr "Symbolgröße"
+
+#. settings-schema.json->symbolicMenuIcons->description
+msgid "Symbolic icons in menu"
+msgstr "Symbolische Icons im Menü"
+
+#. settings-schema.json->menuOptions->description
+msgid "Menu Options"
+msgstr ""
+
+#. settings-schema.json->showLockScreen->description
+#, fuzzy
+msgid "Show Lock Screen option"
+msgstr "Bildschirm sperren"
+
+#. settings-schema.json->showSwitchUser->description
+#, fuzzy
+msgid "Show Switch User option"
+msgstr "Benutzer wechseln"
+
+#. settings-schema.json->showGuestSession->description
+#, fuzzy
+msgid "Show Guest Session option"
+msgstr "Gastsitzung"
+
+#. settings-schema.json->showLogOff->description
+msgid "Show Log Off option"
+msgstr ""
+
+#. settings-schema.json->showSuspend->description
+msgid "Show Suspend option"
+msgstr ""
+
+#. settings-schema.json->showSleep->description
+msgid "Show Sleep option"
+msgstr ""
+
+#. settings-schema.json->showHibernate->description
+#, fuzzy
+msgid "Show Hibernate option"
+msgstr "Ruhezustand"
+
+#. settings-schema.json->showRestart->description
+msgid "Show Restart option"
+msgstr ""
+
+#. settings-schema.json->showShutDown->description
+#, fuzzy
+msgid "Show Shut Down option"
+msgstr "Herunterfahren"

@@ -1,0 +1,47 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ifstat@tagadan 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-21 11:59+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:23
+msgid ""
+"Device\n"
+"KB/s in: --\n"
+"KB/s out: --"
+msgstr ""
+"Apparaat\n"
+"KB/s in: --\n"
+"KB/s uit: --"
+
+#: applet.js:36
+msgid "please install ifstat and/or glib libraries"
+msgstr "installeer alstublieft ifstat en/of glib-bibliotheken"
+
+#: applet.js:60
+msgid ""
+"\n"
+"KB/s in: "
+msgstr ""
+"\n"
+" KB/s in: "
+
+#. metadata.json->description
+msgid "Show your internet usage in a smartphone style"
+msgstr "Toon uw internetgebruik in smartphone-stijl"
+
+#. metadata.json->name
+msgid "Tight Network Usage Indicator"
+msgstr "Compacte Netwerkgebruiksindicator"

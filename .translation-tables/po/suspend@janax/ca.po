@@ -1,0 +1,103 @@
+# SUSPEND COMPUTER
+# This file is put in the public domain.
+# janax, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: suspend@janax 2.0.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-29 20:37-0400\n"
+"PO-Revision-Date: 2024-07-10 01:24+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:48
+msgid "Suspend"
+msgstr "Suspendre"
+
+#. metadata.json->description
+msgid "Immediately suspends the computer"
+msgstr "Suspèn l'ordinador de manera immediata"
+
+#. metadata.json->name
+msgid "Suspend computer"
+msgstr "Suspendre l'ordinador"
+
+#. settings-schema.json->suspend-header->description
+msgid "Suspend computer settings"
+msgstr "Configuració de la suspensió de l'ordinador"
+
+#. settings-schema.json->suspend-on-double-click->description
+msgid "Double-click to suspend"
+msgstr "Doble clic per suspendre"
+
+#. settings-schema.json->suspend-on-double-click->tooltip
+msgid ""
+"When enabled, a double-click will suspend the computer, otherwise the "
+"computer will suspend on a single click."
+msgstr ""
+"Quan estigui activat, un doble clic suspendrà l'ordinador. Si està "
+"desactivat, només caldrà un clic."
+
+#. settings-schema.json->count-down->description
+msgid "Use a count down before suspending"
+msgstr "Utilitza un compte enrere abans de suspendre"
+
+#. settings-schema.json->count-down->tooltip
+msgid ""
+"When enabled, a count down will occurs before suspending the computer.\n"
+"Clicking again during the count down will cancel the suspend."
+msgstr ""
+"Quan estigui activat, es visualitzarà un comptador abans de suspendre "
+"l'ordinador.\n"
+"Clicant de nou durant el compte enrere cancel·larà la suspensió."
+
+#. settings-schema.json->count-down-duration->units
+msgid "seconds"
+msgstr "segons"
+
+#. settings-schema.json->count-down-duration->description
+msgid "Count down duration"
+msgstr "Durada del compte enrere"
+
+#. settings-schema.json->ctrl-override-countdown->description
+msgid "Ctrl+Click to override the count down and suspend immediately"
+msgstr ""
+"Ctrl+clic per a sobreescriure el compte enrere i suspendre l'ordinador "
+"immediatament"
+
+#. settings-schema.json->ctrl-override-countdown->tooltip
+msgid ""
+"When enabled, using Ctrl+Click will suspend the computer immediately, "
+"without starting a count down or waiting for an existing count down to "
+"finish."
+msgstr ""
+"Quan estigui activat, Ctrl+Clic suspendrà l'ordinador de manera immediata, "
+"sense iniciar o esperar què acabi el compte enrere."
+
+#. settings-schema.json->fullcolor-icon->description
+msgid "Use a full color icon"
+msgstr "Utilitza una icona de color"
+
+#. settings-schema.json->fullcolor-icon->tooltip
+msgid ""
+"When enabled, a full color panel icon will be used, otherwise a symbolic "
+"icon will be used."
+msgstr ""
+"Quan estigui activat, el tauler utilitzarà una icona de color. En cas "
+"contrari, s'utilitzarà una icona simbòlica."
+
+#. settings-schema.json->system-suspend-header->description
+msgid "System suspend settings"
+msgstr "Configuració de la suspensió del sistema"
+
+#. settings-schema.json->config-power->description
+msgid "Open Power Management Settings"
+msgstr "Obrir les opcions de la configuració d'energia"

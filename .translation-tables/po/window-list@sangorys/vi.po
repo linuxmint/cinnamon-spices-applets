@@ -1,0 +1,189 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: window-list@sangorys 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-12 17:27+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:1273
+msgid "Window information"
+msgstr "Thông tin cửa sổ"
+
+#: applet.js:1309
+msgid "Move to the other monitor"
+msgstr "Di chuyển sang màn hình khác"
+
+#: applet.js:1319
+#, javascript-format
+msgid "Move to monitor %d"
+msgstr "Di chuyển sang màn hình %d"
+
+#: applet.js:1330
+msgid "Only on this workspace"
+msgstr "Chỉ trên workspace này"
+
+#: applet.js:1336
+msgid "Visible on all workspaces"
+msgstr "Hiển thị trên tất cả workspaces"
+
+#: applet.js:1342
+msgid "Move to another workspace"
+msgstr "Di chuyển sang workspace khác"
+
+#: applet.js:1365
+msgid "Preferences"
+msgstr "Tùy chọn"
+
+#: applet.js:1368
+msgid "About..."
+msgstr "Giới thiệu..."
+
+#: applet.js:1372
+msgid "Configure..."
+msgstr "Cấu hình..."
+
+#: applet.js:1376
+msgid "Remove 'Window list'"
+msgstr "Xóa 'Danh sách cửa sổ'"
+
+#: applet.js:1383
+msgid "Close all"
+msgstr "Đóng tất cả"
+
+#: applet.js:1392
+msgid "Close others"
+msgstr "Đóng các cửa sổ khác"
+
+#: applet.js:1406
+msgid "Restore to full opacity"
+msgstr "Khôi phục độ mờ đầy đủ"
+
+#: applet.js:1414
+msgid "Restore"
+msgstr "Khôi phục"
+
+#: applet.js:1419
+msgid "Minimize"
+msgstr "Thu nhỏ"
+
+#: applet.js:1427
+msgid "Unmaximize"
+msgstr "Bỏ phóng to"
+
+#: applet.js:1432
+msgid "Maximize"
+msgstr "Phóng to"
+
+#: applet.js:1440
+msgid "Close"
+msgstr "Đóng"
+
+#. metadata.json->name
+msgid "My perfect window-list applet"
+msgstr "Applet danh sách cửa sổ hoàn hảo của tôi"
+
+#. metadata.json->description
+msgid ""
+"Based on the original Cinnamon window list, the window order is memorized "
+"and restored. The next huge feature is to also group window like Google "
+"Chrome groups tab. This is my definition of a perfect window list applet"
+msgstr ""
+"Dựa trên danh sách cửa sổ Cinnamon gốc, thứ tự cửa sổ được ghi nhớ và khôi "
+"phục. Tính năng lớn tiếp theo là nhóm cửa sổ giống như Google Chrome nhóm "
+"tab. Đây là định nghĩa của tôi về một applet danh sách cửa sổ hoàn hảo"
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr "Hành vi"
+
+#. settings-schema.json->show-all-workspaces->description
+msgid "Show windows from all workspaces"
+msgstr "Hiển thị cửa sổ từ tất cả workspaces"
+
+#. settings-schema.json->enable-alerts->description
+msgid ""
+"Show an alert in the window list when a window from another workspace "
+"requires attention"
+msgstr ""
+"Hiển thị cảnh báo trong danh sách cửa sổ khi một cửa sổ từ workspace khác "
+"yêu cầu chú ý"
+
+#. settings-schema.json->enable-scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr "Bật cuộn bánh xe chuột trong danh sách cửa sổ"
+
+#. settings-schema.json->reverse-scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr "Đảo ngược hướng cuộn bánh xe chuột trong danh sách cửa sổ"
+
+#. settings-schema.json->left-click-minimize->description
+msgid "Left click to minimize window"
+msgstr "Nhấp trái để thu nhỏ cửa sổ"
+
+#. settings-schema.json->middle-click-close->description
+msgid "Middle click to close window"
+msgstr "Nhấp giữa để đóng cửa sổ"
+
+#. settings-schema.json->section2->description
+msgid "Display"
+msgstr "Hiển thị"
+
+#. settings-schema.json->panel-show-label->description
+msgid "Show window names in the panel"
+msgstr "Hiển thị tên cửa sổ trên panel"
+
+#. settings-schema.json->button-width->units
+msgid "pixels"
+msgstr "pixel"
+
+#. settings-schema.json->button-width->description
+msgid "Window button width in the panel"
+msgstr "Chiều rộng nút cửa sổ trên panel"
+
+#. settings-schema.json->buttons-use-entire-space->description
+msgid ""
+"Window buttons can have different sizes and use the entire space available"
+msgstr ""
+"Các nút cửa sổ có thể có kích thước khác nhau và sử dụng toàn bộ không gian "
+"có sẵn"
+
+#. settings-schema.json->window-preview->description
+msgid "Show window thumbnails on hover"
+msgstr "Hiển thị hình thu nhỏ cửa sổ khi di chuột"
+
+#. settings-schema.json->window-preview-show-label->description
+msgid "Show title above thumbnail"
+msgstr "Hiển thị tiêu đề trên hình thu nhỏ"
+
+#. settings-schema.json->window-preview-scale->description
+msgid "Thumbnail size"
+msgstr "Kích thước hình thu nhỏ"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Small"
+msgstr "Nhỏ"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Medium"
+msgstr "Trung bình"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Large"
+msgstr "Lớn"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Largest"
+msgstr "Lớn nhất"

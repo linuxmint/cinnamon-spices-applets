@@ -1,0 +1,198 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-08 15:58-0500\n"
+"PO-Revision-Date: 2021-04-03 22:16+0200\n"
+"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#. metadata.json->name
+#: applet.js:42
+msgid "Shutdown Menu With Icons"
+msgstr "Leállítás menü ikonokkal"
+
+#: applet.js:143
+msgid "Quit"
+msgstr "Kilépés"
+
+#: applet.js:146
+msgid "Suspend"
+msgstr "Felfüggesztés"
+
+#: applet.js:149
+msgid "Hibernate"
+msgstr "Hibernálás"
+
+#: applet.js:152
+msgid "Hybrid sleep"
+msgstr "Hibrid alvó mód"
+
+#: applet.js:155
+msgid "Restart"
+msgstr "Újraindítás"
+
+#. settings-schema.json->switch_users_label->description
+#: applet.js:160
+msgid "Switch users"
+msgstr "Felhasználó váltás"
+
+#. settings-schema.json->log_out_label->description
+#: applet.js:163
+msgid "Log out"
+msgstr "Kijelentkezés"
+
+#: applet.js:166
+msgid "Screen Lock"
+msgstr "Képernyőzárolás"
+
+#: applet.js:185
+msgid "Settings"
+msgstr "Beállítások"
+
+#: applet.js:190
+msgid "Help"
+msgstr "Súgó"
+
+#: applet.js:195
+msgid "About"
+msgstr "Névjegy"
+
+#. metadata.json->description
+msgid ""
+"An applet to help you shutdown, restart and suspend your system with single "
+"click"
+msgstr ""
+"Egy kisalkalmazás, amely egyetlen kattintással segíti a rendszer "
+"leállítását, újraindítását és felfüggesztését"
+
+#. settings-schema.json->quit_label->description
+msgid "Quit: shut down and power-off the system"
+msgstr "Kilépés: állítsa le és kapcsolja ki a rendszert"
+
+#. settings-schema.json->quit->description
+msgid "Add quit to the menu"
+msgstr "Kilépés hozzáadása a menühöz"
+
+#. settings-schema.json->quit_icon->description
+msgid "The quit icon "
+msgstr "A kilépés ikon "
+
+#. settings-schema.json->quit_cmd->description
+msgid "The quit command "
+msgstr "A kilépés parancs "
+
+#. settings-schema.json->suspend_label->description
+msgid "Suspend: suspend the system"
+msgstr "Felfüggesztés: függessze fel a rendszert"
+
+#. settings-schema.json->suspend->description
+msgid "Add suspend to the menu"
+msgstr "Felfüggesztés hozzáadása a menühöz"
+
+#. settings-schema.json->suspend_icon->description
+msgid "The suspend icon "
+msgstr "A felfüggesztés ikon "
+
+#. settings-schema.json->suspend_cmd->description
+msgid "The suspend command "
+msgstr "A felfüggesztés parancs "
+
+#. settings-schema.json->hibernate_label->description
+msgid "Hibernate: hibernate the system"
+msgstr "Hibernálás: a rendszer hibernálása"
+
+#. settings-schema.json->hibernate->description
+msgid "Add hibernate to the menu"
+msgstr "Hibernálás hozzáadása a menühöz"
+
+#. settings-schema.json->hibernate_icon->description
+msgid "The hibernate icon "
+msgstr "Hibernálás ikon "
+
+#. settings-schema.json->hibernate_cmd->description
+msgid "The hibernate command "
+msgstr "A hibernálás parancs "
+
+#. settings-schema.json->hybrid_sleep_label->description
+msgid "Hybrid sleep: hibernate and suspend the system"
+msgstr "Hibrid alvómód: hibernálás és a rendszer felfüggesztése"
+
+#. settings-schema.json->hybrid_sleep->description
+msgid "Add hybrid sleep to the menu"
+msgstr "A hibrid alvómód hozzáadása a menühöz"
+
+#. settings-schema.json->hybrid_sleep_icon->description
+msgid "The hybrid sleep icon "
+msgstr "A hibrid alvómód ikon "
+
+#. settings-schema.json->hybrid_sleep_cmd->description
+msgid "The hybrid sleep command "
+msgstr "A hibrid alvómód parancs "
+
+#. settings-schema.json->restart_label->description
+msgid "Restart: shut down and reboot the system"
+msgstr "Újraindítás: állítsa le és indítsa újra a rendszert"
+
+#. settings-schema.json->restart->description
+msgid "Add restart to the menu"
+msgstr "Az újraindítás hozzáadása a menühöz"
+
+#. settings-schema.json->restart_icon->description
+msgid "The restart icon "
+msgstr "Az újraindítás ikon "
+
+#. settings-schema.json->restart_cmd->description
+msgid "The restart command "
+msgstr "Az újraindítás parancs "
+
+#. settings-schema.json->switch_users->description
+msgid "Add switch users to the menu"
+msgstr "Felhasználó váltás hozzáadása a menühöz"
+
+#. settings-schema.json->switch_users_icon->description
+msgid "The switch users icon"
+msgstr "A felhasználóváltás ikon"
+
+#. settings-schema.json->switch_users_cmd->description
+msgid "The switch users command"
+msgstr "A felhasználó váltás parancs"
+
+#. settings-schema.json->log_out->description
+msgid "Add log out to the menu"
+msgstr "Kijelentkezés hozzáadása a menühöz"
+
+#. settings-schema.json->log_out_icon->description
+msgid "The log out icon "
+msgstr "Kijelentkezés ikon "
+
+#. settings-schema.json->log_out_cmd->description
+msgid "The log out command "
+msgstr "A kijelentkezés parancs "
+
+#. settings-schema.json->screen_lock_label->description
+msgid "Screen lock: lock the screen"
+msgstr "Képernyőzár: a képernyő lezárása"
+
+#. settings-schema.json->screen_lock->description
+msgid "Add screen lock to the menu"
+msgstr "Képernyőzár hozzáadása a menühöz"
+
+#. settings-schema.json->screen_lock_icon->description
+msgid "The screen lock icon "
+msgstr "A képernyőzár ikon "
+
+#. settings-schema.json->screen_lock_cmd->description
+msgid "The screen lock command "
+msgstr "A képernyőzár parancs "

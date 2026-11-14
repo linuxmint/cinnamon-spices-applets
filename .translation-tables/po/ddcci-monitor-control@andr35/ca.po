@@ -1,0 +1,73 @@
+# DDC/CI MONITOR BRIGHTNESS
+# This file is put in the public domain.
+# andr35, 2020
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ddcci-monitor-control@andr35 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. metadata.json->description
+#. applet.js:41
+msgid "Adjust external monitor brightness and contrast"
+msgstr "Ajusta la brillantor i el contrast d'un monitor extern"
+
+#. metadata.json->name
+msgid "DDC/CI Monitor Brightness"
+msgstr "Brillantor de monitor DDC/CI"
+
+#. settings-schema.json->brightness-default-label-1->description
+msgid "\"Default brightness 1\" button label"
+msgstr "Etiqueta del botó \"Brillantor per defecte 1\""
+
+#. settings-schema.json->brightness-default-label-1->tooltip
+msgid "For example \"Daily Brightness\""
+msgstr "Per exemple, \"brillantor diürna\""
+
+#. settings-schema.json->brightness-default-value-1->description
+msgid "\"Default brightness 1\" value"
+msgstr "Valor de \"Brillantor per defecte 1\""
+
+#. settings-schema.json->brightness-default-value-1->tooltip
+msgid ""
+"Set the brightness level that will be applied when the \"Default brightness "
+"1\" button is clicked"
+msgstr ""
+"Assigna el nivell de brillantor que serà aplicat quan es cliqui el botó "
+"\"Brillantor per defecte 1\""
+
+#. settings-schema.json->brightness-default-value-1->units
+#. settings-schema.json->brightness-default-value-2->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->brightness-default-label-2->description
+msgid "\"Default brightness 2\" button label"
+msgstr "Etiqueta del botó \"Brillantor per defecte 2\""
+
+#. settings-schema.json->brightness-default-label-2->tooltip
+msgid "For example \"Night Brightness\""
+msgstr "Per exemple, \"Brillantor nocturna\""
+
+#. settings-schema.json->brightness-default-value-2->description
+msgid "\"Default brightness 2\" value"
+msgstr "Valor de \"Brillantor per defecte 2\""
+
+#. settings-schema.json->brightness-default-value-2->tooltip
+msgid ""
+"Set the brightness level that will be applied when the \"Default brightness "
+"2\" button is clicked"
+msgstr ""
+"Assigna el nivell de brillantor que serà aplicat quan es cliqui el botó "
+"\"Brillantor per defecte 2\""

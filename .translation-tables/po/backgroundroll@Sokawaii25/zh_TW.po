@@ -1,0 +1,43 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2023-12-07 22:29+0000\n"
+"PO-Revision-Date: 2025-04-23 20:24+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "Background Roll"
+msgstr "桌布輪播"
+
+#. metadata.json->description
+msgid ""
+"Changes the background randomly using the images in ~/Images/backgrounds\n"
+"Middle-click lets you roll back to previous background"
+msgstr ""
+"隨機變更桌布，使用 ~/Images/backgrounds 資料夾內的圖片\n"
+"滑鼠中鍵點選可回到上一張桌布"
+
+#. settings-schema.json->Settings->description
+msgid "Notifications"
+msgstr "通知設定"
+
+#. settings-schema.json->Notifications->description
+msgid "Send a notification when the background is changed"
+msgstr "當桌布變更時發送通知"
+
+#. settings-schema.json->Notifications->tooltip
+msgid "Activate to see a notification when the background rolls"
+msgstr "啟用後在桌布輪播時顯示通知"

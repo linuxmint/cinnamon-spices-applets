@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MonitorInputSource@klangman 1.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-12 22:04-0400\n"
+"PO-Revision-Date: 2024-04-20 11:18+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:51
+msgid "Ctrl+"
+msgstr "Ctrl+"
+
+#: applet.js:54
+msgid "Shift+"
+msgstr "Shift+"
+
+#: applet.js:58
+msgid "Left Click"
+msgstr "Linkerklik"
+
+#: applet.js:60
+msgid "Middle Click"
+msgstr "Middelklik"
+
+#: applet.js:62
+msgid "Right Click"
+msgstr "Rechterklik"
+
+#: applet.js:64
+msgid "Back Click"
+msgstr "Achteruitklik"
+
+#: applet.js:66
+msgid "Forward Click"
+msgstr "Vooruitklik"
+
+#: applet.js:158 applet.js:390 applet.js:392
+msgid "Monitor input sources"
+msgstr "Monitors invoerbronnen"
+
+#: applet.js:170 applet.js:217 applet.js:480
+msgid "Detecting monitors..."
+msgstr "Monitoren detecteren..."
+
+#: applet.js:176
+msgid "Options"
+msgstr "Opties"
+
+#: applet.js:178
+msgid "Clear monitor cache"
+msgstr "Monitorcache wissen"
+
+#: applet.js:184
+msgid "Clear quick actions"
+msgstr "Snelle acties wissen"
+
+#: applet.js:197
+msgid "Help"
+msgstr "Hulp"
+
+#: applet.js:339
+msgid "Required \"ddcutil\" not found"
+msgstr "Vereiste \"ddcutil\" niet gevonden"
+
+#: applet.js:343
+msgid "Error, \"ddcutil\" exit code "
+msgstr "Fout, \"ddcutil\" exit code "
+
+#: applet.js:347
+msgid "No capable monitors detected"
+msgstr "Geen geschikte monitoren gedetecteerd"
+
+#: applet.js:386
+msgid "for"
+msgstr "voor"
+
+#: applet.js:473
+msgid "Refresh"
+msgstr "Vernieuwen"
+
+#. metadata.json->name
+msgid "Monitor Input Source"
+msgstr "Monitor Invoerbron"
+
+#. metadata.json->description
+msgid ""
+"Change your monitors video input source directly from the cinnamon panel"
+msgstr ""
+"Verander rechtstreeks de video-invoerbron van je monitor vanuit het Cinnamon-"
+"paneel"

@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: vnstat@linuxmint.com 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2025-10-12 17:01+0700\n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:192 4.0/applet.js:186
+msgid "Current Active Interface:"
+msgstr "Giao diện Đang hoạt động Hiện tại:"
+
+#: applet.js:192 4.0/applet.js:186
+msgid "Last update time is at top right"
+msgstr "Thời gian cập nhật cuối ở góc trên bên phải"
+
+#: applet.js:195 4.0/applet.js:189
+msgid "No interface devices currently active - Showing last update"
+msgstr "Không có thiết bị giao diện nào đang hoạt động - Đang hiển thị cập nhật cuối"
+
+#: applet.js:205 4.0/applet.js:199
+msgid ""
+"Please make sure vnstat and vnstati are installed and that the vnstat daemon "
+"is running!"
+msgstr ""
+"Vui lòng đảm bảo vnstat và vnstati đã được cài đặt và daemon vnstat đang chạy!"
+
+#. metadata.json->name
+msgid "Network usage monitor"
+msgstr "Bộ giám sát sử dụng mạng"
+
+#. metadata.json->description
+msgid "Network usage monitor using vnstat"
+msgstr "Bộ giám sát sử dụng mạng sử dụng vnstat"
+
+#. settings-schema.json->head->description
+#. 4.0->settings-schema.json->head->description
+msgid "Settings for the Network Usage Applet (uses vnstati)"
+msgstr "Cài đặt cho Applet Sử dụng Mạng (sử dụng vnstati)"
+
+#. settings-schema.json->useExtendedDisplay->description
+#. 4.0->settings-schema.json->useExtendedDisplay->description
+msgid "Enable Extended Display Options"
+msgstr "Bật Tùy chọn Hiển thị Mở rộng"
+
+#. settings-schema.json->useExtendedDisplay->tooltip
+#. 4.0->settings-schema.json->useExtendedDisplay->tooltip
+msgid "This is new option version 1.0.2"
+msgstr "Đây là tùy chọn mới phiên bản 1.0.2"
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid "Classic - Summary of Data Usage for last Days and Months"
+msgstr "Cổ điển - Tóm tắt Sử dụng Dữ liệu cho các Ngày và Tháng gần đây"
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid ""
+"Classic Plus - Classic with addition of breakdown by hour for last 24 hours"
+msgstr ""
+"Cổ điển Plus - Cổ điển với bổ sung phân tích theo giờ cho 24 giờ gần đây"
+
+#. settings-schema.json->extendedDisplay->options
+#. 4.0->settings-schema.json->extendedDisplay->options
+msgid "Custom Display - requires enabling below"
+msgstr "Hiển thị Tùy chỉnh - yêu cầu bật bên dưới"
+
+#. settings-schema.json->extendedDisplay->description
+#. 4.0->settings-schema.json->extendedDisplay->description
+msgid "Type of Display - default 'classic'"
+msgstr "Loại Hiển thị - mặc định 'cổ điển'"
+
+#. settings-schema.json->extendedDisplay->tooltip
+#. 4.0->settings-schema.json->extendedDisplay->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional of adding "
+"an hourly breakdown over the last 24 hours and an experimental option of a "
+"user defined string for vnstati when enabled below"
+msgstr ""
+"Tính năng này cung cấp hiển thị Cổ điển (gốc) với tùy chọn thêm phân tích "
+"theo giờ trong 24 giờ gần đây và tùy chọn thử nghiệm chuỗi do người dùng "
+"xác định cho vnstati khi được bật bên dưới"
+
+#. settings-schema.json->useVnstatiCommandString->description
+#. 4.0->settings-schema.json->useVnstatiCommandString->description
+msgid "Enable Custom Display Option"
+msgstr "Bật Tùy chọn Hiển thị Tùy chỉnh"
+
+#. settings-schema.json->useVnstatiCommandString->tooltip
+#. 4.0->settings-schema.json->useVnstatiCommandString->tooltip
+msgid "Check box"
+msgstr "Chọn hộp"
+
+#. settings-schema.json->vnstatiCommandString->description
+#. 4.0->settings-schema.json->vnstatiCommandString->description
+msgid "Custom options to pass to vnstati - default is '-vs' "
+msgstr "Tùy chọn tùy chỉnh để chuyển cho vnstati - mặc định là '-vs' "
+
+#. settings-schema.json->vnstatiCommandString->tooltip
+#. 4.0->settings-schema.json->vnstatiCommandString->tooltip
+msgid ""
+"The default is the options used for the extended display. Note: this is not "
+"the whole vnstati option string - the interface and output file options are "
+"added to it automatically. Please read the vnstati manual for further "
+"information on options avaiilable"
+msgstr ""
+"Mặc định là các tùy chọn được sử dụng cho hiển thị mở rộng. Lưu ý: đây không "
+"phải là toàn bộ chuỗi tùy chọn vnstati - các tùy chọn giao diện và tập tin "
+"xuất được tự động thêm vào. Vui lòng đọc hướng dẫn sử dụng vnstati để biết "
+"thêm thông tin về các tùy chọn có sẵn"

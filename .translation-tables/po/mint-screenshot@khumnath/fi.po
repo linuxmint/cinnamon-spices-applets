@@ -1,0 +1,307 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mint-screenshot@khumnath package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mint-screenshot@khumnath 1.2.0\n"
+"Report-Msgid-Bugs-To: khumnath@gmail.com\n"
+"POT-Creation-Date: 2026-04-23 19:12+0545\n"
+"PO-Revision-Date: 2026-10-15 19:22+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: app.py:49
+msgid "Reset Everything?"
+msgstr "Nollaa kaikki?"
+
+#: app.py:51
+msgid "This will clear all annotations and return to the launcher."
+msgstr "Tämä poistaa kaikki merkinnät ja palaa aloitusnäkymään."
+
+#: app.py:191
+msgid "Mint Screenshot — Wayland Error"
+msgstr "Mint Screenshot — Wayland virhe"
+
+#: canvas.py:461
+msgid "Edit Text:"
+msgstr "Muokkaa teksti:"
+
+#: canvas.py:461
+msgid "Enter text to insert:"
+msgstr "Lisättävä teksti:"
+
+#: capture.py:53
+msgid "D-Bus is required for Wayland support."
+msgstr "D-Bus vaaditaan Wayland-tukea varten."
+
+#: capture.py:171
+msgid ""
+"Failed to load captured screenshot:\n"
+"{}"
+msgstr ""
+"Kaappauksen lataaminen epäonnistui::\n"
+"{}"
+
+#: editor.py:119
+msgid "Custom Timer"
+msgstr "Ajastin"
+
+#: editor.py:133
+msgid "Enter delay in seconds:"
+msgstr "Viive sekunteina:"
+
+#: editor.py:338 editor.py:795
+msgid "Saving..."
+msgstr "Tallenna..."
+
+#: editor.py:455
+msgid "Pointer"
+msgstr "Osoitin"
+
+#: editor.py:456
+msgid "Rectangle"
+msgstr "Suorakulmio"
+
+#: editor.py:457
+msgid "Ellipse"
+msgstr "Soikio"
+
+#: editor.py:458
+msgid "Arrow"
+msgstr "Nuoli"
+
+#: editor.py:459
+msgid "Draw"
+msgstr "Piirrä"
+
+#: editor.py:460
+msgid "Highlight"
+msgstr "Korosta"
+
+#: editor.py:461
+msgid "Text Tool"
+msgstr "Tekstityökalu"
+
+#: editor.py:494
+msgid "Blue"
+msgstr "Sininen"
+
+#: editor.py:495
+msgid "Red"
+msgstr "Punainen"
+
+#: editor.py:496
+msgid "Green"
+msgstr "Vihreä"
+
+#: editor.py:497
+msgid "Yellow"
+msgstr "Keltainen"
+
+#: editor.py:498
+msgid "White"
+msgstr "Valkoinen"
+
+#: editor.py:499
+msgid "Black"
+msgstr "Musta"
+
+#: editor.py:529
+msgid "Size"
+msgstr "Koko"
+
+#: editor.py:542
+msgid "Reset All"
+msgstr "Nollaa kaikki"
+
+#: editor.py:543
+msgid "Undo"
+msgstr "Kumoa"
+
+#: editor.py:544
+msgid "Copy"
+msgstr "Kopioi"
+
+#: editor.py:545
+msgid "Save"
+msgstr "Tallenna"
+
+#: editor.py:546
+msgid "Settings"
+msgstr "Asetukset"
+
+#: editor.py:547 launcher.py:144
+msgid "Close"
+msgstr "Sulje"
+
+#: editor.py:573
+msgid "Move Toolbar Top/Bottom"
+msgstr "Siirrä työkalurivi ylös/alas"
+
+#: editor.py:596
+msgid "Save Format"
+msgstr "Tallennusmuoto"
+
+#: editor.py:609
+msgid "Image Quality"
+msgstr "Kuvan laatu"
+
+#: editor.py:614
+msgid "Space Saver (Small)"
+msgstr "Tilaa säästävä (pieni)"
+
+#: editor.py:616
+msgid "Medium"
+msgstr "Keskitaso"
+
+#: editor.py:618
+msgid "Original"
+msgstr "Alkuperäinen"
+
+#: editor.py:629
+msgid "Save Folder: {}..."
+msgstr "Tallennuskansio: {}..."
+
+#: editor.py:634
+msgid "Show Toolbar Labels"
+msgstr "Näytä työkalurivin selitteet"
+
+#: editor.py:642
+msgid "About Mint Screenshot"
+msgstr "Tietoja Mint Screenshot"
+
+#: editor.py:663
+msgid "Select Default Save Folder"
+msgstr "Valitse tallennuskansio"
+
+#: editor.py:667
+msgid "Select"
+msgstr "Valitse"
+
+#: editor.py:692 launcher.py:79 main.py:159
+msgid "Mint Screenshot"
+msgstr "Mint Screenshot"
+
+#: editor.py:694
+msgid ""
+"Screenshot & Annotation Tool\n"
+"Capture, annotate, and share with ease."
+msgstr ""
+"Näytönkaappaus ja työkalut piirtämiseen\n"
+"Kaappaa, lisää merkintöjä ja jaa vaivattomasti."
+
+#: editor.py:696
+msgid "Project on GitHub"
+msgstr "Projekti GitHubissa"
+
+#: editor.py:718
+msgid "Open External Website?"
+msgstr "Avataanko verkkosivu?"
+
+#: editor.py:721
+msgid "This will exit the current screenshot process. Do you want to continue?"
+msgstr "Tämä lopettaa nykyisen kaappauksen. Haluatko jatkaa?"
+
+#: editor.py:765
+msgid "Save Screenshot"
+msgstr "Tallenna kaappaus"
+
+#: editor.py:795
+msgid "Copying..."
+msgstr "Kopioidaan..."
+
+#: editor.py:855
+msgid "Copied"
+msgstr "Kopioitu"
+
+#: editor.py:864
+msgid "Screenshot Saved"
+msgstr "Kaappaus tallennettu"
+
+#: editor.py:865
+msgid "Saved to {}"
+msgstr "Tallennettu {}"
+
+#: launcher.py:83
+msgid "Wayland Mode — Capture via Desktop Portal"
+msgstr "Wayland Moodi — Kaappaus Desktop Portalin kautta"
+
+#: launcher.py:83
+msgid "X11 Mode — Instant Pixel Capture"
+msgstr "X11 Mood1 — Pikselien välitön kaappaus"
+
+#: launcher.py:92
+msgid "Hint: Pick 'Screen' in the portal to capture overlapping windows."
+msgstr "Vinkki: Valitse portaalissa ”Screen” (Näyttö), jos haluat tallentaa päällekkäisiä ikkunoita."
+
+#: launcher.py:105
+msgid "Select Monitor:"
+msgstr "Valitse näyttö:"
+
+#: launcher.py:107
+msgid "All Monitors"
+msgstr "Kaikki näytöt"
+
+#: launcher.py:109
+msgid "Monitor {}"
+msgstr "Näyttö {}"
+
+#: launcher.py:115
+msgid "📸  Capture Fullscreen"
+msgstr "📸  Koko näyttö"
+
+#: launcher.py:120
+msgid "✂️  Select Area"
+msgstr "✂️  Valitse alue"
+
+#: launcher.py:127
+msgid "⏱  Timed Capture"
+msgstr "⏱  Ajastettu"
+
+#: launcher.py:134
+msgid "sec"
+msgstr "s"
+
+#: main.py:117
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your system's package manager.\n"
+"(Debian/Ubuntu package names shown as reference)"
+msgstr ""
+"Seuraavat riippuvuudet puuttuvat::\n"
+"\n"
+"{}\n"
+"\n"
+"Asenna ne ohjelmistohallinnan avulla.\n"
+"(Debian/Ubuntu pakettien nimet näkyvät viitteenä)"
+
+#: main.py:120
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your package manager:\n"
+"  {} {}"
+msgstr ""
+"Seuraavat riippuvuudet puuttuvat:\n"
+"\n"
+"{}\n"
+"\n"
+"Asenna ne ohjelmistohallinnan avulla:\n"
+"  {} {}"
+
+#: main.py:126
+msgid "Mint Screenshot \\u2014 Missing Dependencies"
+msgstr "Mint Screenshot \\u2014 puuttuvat riippuvuudet"

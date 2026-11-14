@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-26 05:28-0500\n"
+"PO-Revision-Date: 2023-12-26 09:40-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4\n"
+
+#: applet.js:21
+msgid "Currently preventing notifications"
+msgstr "Actualmente silenciando notificaciones"
+
+#: applet.js:22
+msgid "Currently allowing notifications"
+msgstr "Actualmente permitiendo notificaciones"
+
+#: applet.js:92
+msgid "Notification settings"
+msgstr "Configuración de las notificaciones"
+
+#. metadata.json->name
+msgid "Notification Mute"
+msgstr "Silenciar notificaciones"
+
+#. metadata.json->description
+msgid "Click to mute notifications, click again to unmute"
+msgstr "Haga clic para silenciar las notificaciones, haga clic nuevamente para reactivarlas"
+
+#. settings-schema.json->head->description
+msgid "Icons"
+msgstr "Iconos"
+
+#. settings-schema.json->use-custom-off-icon->description
+msgid "Use a custom icon for when notifications are allowed."
+msgstr "Utilice un icono personalizado para cuando se permitan las notificaciones."
+
+#. settings-schema.json->off-icon->description
+msgid "Notifications allowed icon:"
+msgstr "Icono de permitir notificaciones:"
+
+#. settings-schema.json->off-icon->tooltip
+#. settings-schema.json->on-icon->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr "Seleccione un archivo de iconos o escriba un nombre de icono en el cuadro de entrada"
+
+#. settings-schema.json->use-custom-on-icon->description
+msgid "Use a custom icon for when notifications are muted."
+msgstr "Utiliza un icono personalizado para cuando las notificaciones estén silenciadas."
+
+#. settings-schema.json->on-icon->description
+msgid "Notifications muted icon:"
+msgstr "Icono de silenciar notificaciones:"
+
+#. settings-schema.json->head1->description
+msgid "Keybinding"
+msgstr "Combinación de teclas"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding for toggling notification mute"
+msgstr "Establecer la combinación de teclas para activar el silencio de notificación"

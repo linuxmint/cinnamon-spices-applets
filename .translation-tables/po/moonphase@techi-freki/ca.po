@@ -1,0 +1,201 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: moonphase@techi-freki 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-05-05 18:11-0400\n"
+"PO-Revision-Date: 2024-07-14 02:32+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: js/compass.js:14
+msgid "North"
+msgstr "Nord"
+
+#: js/compass.js:15
+msgid "North East"
+msgstr "Nord-est"
+
+#: js/compass.js:16
+msgid "East"
+msgstr "Est"
+
+#: js/compass.js:17
+msgid "South East"
+msgstr "Sud-est"
+
+#: js/compass.js:18
+msgid "South"
+msgstr "Sud"
+
+#: js/compass.js:19
+msgid "South West"
+msgstr "Sud-oest"
+
+#: js/compass.js:20
+msgid "West"
+msgstr "Oest"
+
+#: js/compass.js:21
+msgid "North West"
+msgstr "Nord-oest"
+
+#: js/moon.js:32 js/moon.js:40
+msgid "New Moon"
+msgstr "Lluna nova"
+
+#: js/moon.js:33
+msgid "Waxing Crescent"
+msgstr "Creixent"
+
+#: js/moon.js:34
+msgid "First Quarter"
+msgstr "Quart creixent"
+
+#: js/moon.js:35
+msgid "Waxing Gibbous"
+msgstr "Gibosa creixent"
+
+#: js/moon.js:36
+msgid "Full Moon"
+msgstr "Lluna plena"
+
+#: js/moon.js:37
+msgid "Waning Gibbous"
+msgstr "Gibosa minvant"
+
+#: js/moon.js:38
+msgid "Last Quarter"
+msgstr "Quart minvant"
+
+#: js/moon.js:39
+msgid "Waning Crescent"
+msgstr "Minvant"
+
+#: js/ui/currentPhaseUi.js:32
+msgid "illumination"
+msgstr "il·luminació"
+
+#: js/ui/riseSetUi.js:55
+msgid "The moon is always down and will not rise today"
+msgstr "La lluna està sempre baixa i avui no sortirà"
+
+#: js/ui/riseSetUi.js:65
+msgid "The moon is always up and will not set today"
+msgstr "La lluna està sempre alt i avui no es pondrà"
+
+#: js/ui/riseSetUi.js:76
+msgid "Moonrise"
+msgstr "Sortida de la lluna"
+
+#: js/ui/riseSetUi.js:83
+msgid "Lunar Noon"
+msgstr "Migdia lunar"
+
+#: js/ui/riseSetUi.js:90
+msgid "Moonset"
+msgstr "Posta de la lluna"
+
+#: js/ui/elements/noRiseSetElement.js:54
+msgid "Next Moonrise"
+msgstr "Propera sortida de la lluna"
+
+#: js/ui/elements/noRiseSetElement.js:66
+msgid "Next Moonset"
+msgstr "Propera posta de la lluna"
+
+#. metadata.json->name
+msgid "Moon Phase"
+msgstr "Fase lunar"
+
+#. metadata.json->description
+msgid "A Cinnamon applet that displays up-to-date moon related information."
+msgstr ""
+"Una miniaplicació de Cinnamon que mostra informació actualitzada sobre la "
+"lluna."
+
+#. settings-schema.json->page-settings->title
+msgid "Settings"
+msgstr "Opcions"
+
+#. settings-schema.json->section-geolocation->title
+msgid "Geolocation Settings"
+msgstr "Opcions de geolocalització"
+
+#. settings-schema.json->section-general->title
+msgid "General Settings"
+msgstr "Opcions generals"
+
+#. settings-schema.json->section-update->title
+msgid "Update Settings"
+msgstr "Opcions d'actualització"
+
+#. settings-schema.json->enableGeolocation->description
+msgid "Enable geolocation features"
+msgstr "Activar la funcionalitat de geolocalització"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "Latitud"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "Longitud"
+
+#. settings-schema.json->enablePopup->description
+msgid "Enable popup menu"
+msgstr "Activar menú emergent"
+
+#. settings-schema.json->showCurrentPhaseInfo->description
+msgid "Display the current phase information"
+msgstr "Mostrar la informació actual de la fase de la lluna"
+
+#. settings-schema.json->showRiseSet->description
+msgid "Display the moon rise, transit, and set times"
+msgstr "Mostrar la sortida i el trànsit de la lluna i els seus temps"
+
+#. settings-schema.json->showPhaseLabel->description
+msgid "Display the applet label"
+msgstr "Mostrar l'etiqueta de la miniaplicació"
+
+#. settings-schema.json->showNameLabel->description
+msgid "Display the name of the moon phase in the label"
+msgstr "Mostrar el nom de la fase lunar a l'etiqueta"
+
+#. settings-schema.json->showPercentageLabel->description
+msgid "Display the percentage of the moon phase in the label"
+msgstr "Mostrar el percentatge de la fase lunar a l'etiqueta"
+
+#. settings-schema.json->showTooltip->description
+msgid "Display a tooltip on hover"
+msgstr "Mostrar informació en passar el cursor per sobre de la miniaplicació"
+
+#. settings-schema.json->showPhaseTooltip->description
+msgid "Display the name of the moon phase in the tooltip"
+msgstr "Mostrar el nom de la fase lunar a la informació"
+
+#. settings-schema.json->showPercentageTooltip->description
+msgid "Display percentage of the moon phase in the tooltip"
+msgstr "Mostrar el percentatge de la fase lunar a la informació"
+
+#. settings-schema.json->useAltIcons->description
+msgid "Light theme"
+msgstr "Tema clar"
+
+#. settings-schema.json->updateInterval->units
+msgid "seconds"
+msgstr "segons"
+
+#. settings-schema.json->updateInterval->description
+msgid "Update interval"
+msgstr "Freqüència d'actualització"

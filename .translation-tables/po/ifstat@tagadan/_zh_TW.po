@@ -1,0 +1,14 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. metadata.json->description
+msgid "Show your internet usage in a smartphone style"
+msgstr ""
+
+#. metadata.json->name
+msgid "Tight Network Usage Indicator"
+msgstr ""

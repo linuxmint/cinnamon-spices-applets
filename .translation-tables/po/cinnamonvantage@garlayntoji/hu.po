@@ -1,0 +1,130 @@
+# CINNAMON VANTAGE
+# This file is put in the public domain.
+# Garlayntoji, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: cinnamonvantage@garlayntoji 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-08 17:23-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#: applet.js:66
+msgid "Cinnamon Vantage"
+msgstr "Cinnamon Vantage"
+
+#. settings-schema.json->fnLock-section->title
+#: applet.js:77
+msgid "Fn Lock"
+msgstr "Fn Zár"
+
+#: applet.js:81
+msgid "Super/Windows key"
+msgstr "Super/Windows billentyű"
+
+#. settings-schema.json->touchpad-section->title
+#: applet.js:85
+msgid "Touchpad"
+msgstr "Érintőtábla"
+
+#. settings-schema.json->conservationMode-section->title
+#: applet.js:89
+msgid "Battery conservation mode"
+msgstr "Akkumulátor-kímélő üzemmód"
+
+#. settings-schema.json->rapidCharge-section->title
+#: applet.js:93
+msgid "Battery fast charge mode"
+msgstr "Akkumulátor gyorstöltési mód"
+
+#: applet.js:97
+msgid "Always On USB"
+msgstr "Mindig bekapcsolt USB"
+
+#. settings-schema.json->overdrive-section->title
+#: applet.js:101
+msgid "Display Overdrive"
+msgstr "Display Overdrive"
+
+#. settings-schema.json->gsync-section->title
+#: applet.js:105
+msgid "Hybrid graphics mode"
+msgstr "Hibrid grafikus üzemmód"
+
+#: applet.js:248
+msgid "CinnamonVantage"
+msgstr "CinnamonVantage"
+
+#: applet.js:249
+msgid "System reboot required"
+msgstr "A rendszer újraindítása szükséges"
+
+#: applet.js:250
+msgid "A system reboot is required for this change to take effect."
+msgstr "A módosítás érvénybe lépéséhez a rendszer újraindítása szükséges."
+
+#. metadata.json->description
+msgid "Displays information and togglables about Lenovo Legion hardware"
+msgstr ""
+"A Lenovo Legion hardverrel kapcsolatos információk és vezérlők "
+"megjelenítése"
+
+#. settings-schema.json->panel->title
+msgid "Cinnamon Vantage settings"
+msgstr "Cinnamon Vantage beállítások"
+
+#. settings-schema.json->winkey-section->title
+msgid "Super key"
+msgstr "Super billentyű"
+
+#. settings-schema.json->usbCharging-section->title
+msgid "Alway On USB"
+msgstr "Mindig bekapcsolt USB"
+
+#. settings-schema.json->fnLock->description
+msgid "Access multimedia keys without holding Fn"
+msgstr "Multimédiás billentyűk elérése az Fn lenyomva tartása nélkül"
+
+#. settings-schema.json->winkey->description
+msgid "Enables the Super/Windows key"
+msgstr "Engedélyezi a Super/Windows billentyűt"
+
+#. settings-schema.json->touchpad->description
+msgid "Enables the laptop's touchpad"
+msgstr "A laptop érintőtáblájának engedélyezése"
+
+#. settings-schema.json->conservationMode->description
+msgid "Limits the charge of the battery to extend its lifespan"
+msgstr ""
+"Korlátozza az akkumulátor töltöttségét, hogy meghosszabbítsa az "
+"élettartamát"
+
+#. settings-schema.json->rapidCharge->description
+msgid "Allow the battery to charge faster"
+msgstr "Az akkumulátor gyorsabb töltése"
+
+#. settings-schema.json->usbCharging->description
+msgid "Keeps the USB ports always powered on"
+msgstr "Az USB-portok mindig bekapcsolva maradnak"
+
+#. settings-schema.json->overdrive->description
+msgid "Reduces the laptop's display latency"
+msgstr "Csökkenti a laptop kijelzőjének késleltetését"
+
+#. settings-schema.json->gsync->description
+msgid ""
+"Enables the laptop's integrated graphics.\n"
+" This setting requires a reboot to take effect."
+msgstr ""
+"A laptop integrált grafikájának engedélyezése.\n"
+" Ez a beállítás újraindítást igényel a hatálybalépéshez."

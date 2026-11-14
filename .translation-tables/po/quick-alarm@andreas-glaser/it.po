@@ -1,0 +1,64 @@
+# Quick Alarm - Italian translation
+# Copyright (C) 2025 Andreas Glaser
+# This file is distributed under the MIT license.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: quick-alarm@andreas-glaser\n"
+"Report-Msgid-Bugs-To: https://github.com/andreas-glaser/quick-alarm-cinnamon/issues\n"
+"POT-Creation-Date: 2026-01-26\n"
+"PO-Revision-Date: 2026-01-26\n"
+"Last-Translator: \n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Quick Alarm"
+msgstr "Quick Alarm"
+
+msgid "Alarm"
+msgstr "Sveglia"
+
+msgid "No alarms queued"
+msgstr "Nessuna sveglia in coda"
+
+msgid "Something went wrong. Check Looking Glass logs."
+msgstr "Qualcosa è andato storto. Controlla i log di Looking Glass."
+
+msgid "Enter a time."
+msgstr "Inserisci un orario."
+
+msgid "Could not parse that."
+msgstr "Impossibile interpretare."
+
+msgid "That time already passed today."
+msgstr "Quell'orario è già passato oggi."
+
+msgid "Try one of these:"
+msgstr "Prova uno di questi:"
+
+msgid "Dismiss"
+msgstr "Chiudi"
+
+msgid "just now"
+msgstr "proprio ora"
+
+msgid "%d seconds ago"
+msgstr "%d secondi fa"
+
+msgid "1 minute ago"
+msgstr "1 minuto fa"
+
+msgid "%d minutes ago"
+msgstr "%d minuti fa"
+
+msgid "1 hour ago"
+msgstr "1 ora fa"
+
+msgid "%d hours ago"
+msgstr "%d ore fa"
+
+msgid "Missed alarm"
+msgstr "Sveglia persa"

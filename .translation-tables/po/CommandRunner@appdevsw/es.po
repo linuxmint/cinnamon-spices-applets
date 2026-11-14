@@ -1,0 +1,170 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 21:57+0800\n"
+"PO-Revision-Date: 2023-07-19 13:10-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#. CommandRunner@appdevsw->metadata.json->name
+#: applet.js:47
+msgid "CommandRunner"
+msgstr "CommandRunner"
+
+#: applet.js:102
+msgid "<no text>"
+msgstr "<sin texto>"
+
+#: applet.js:136
+msgid "starting..."
+msgstr "empezando..."
+
+#: appletgui.js:142
+msgid "Compare error "
+msgstr "Error de comparación "
+
+#: appletgui.js:255 appletgui.js:283
+msgid "XML/JSON error: missing tag "
+msgstr "Error de XML/JSON: falta la etiqueta "
+
+#: appletgui.js:291
+msgid "xml error:"
+msgstr "error xml:"
+
+#: appletgui.js:316 appletgui.js:325
+msgid "property not found "
+msgstr "propiedad no encontrada "
+
+#: cmdrunner.js:51
+msgid "undefined command!"
+msgstr "¡comando no definido!"
+
+#: cmdrunner.js:143
+msgid "cannot execute command!"
+msgstr "¡no se puede ejecutar el comando!"
+
+#: simplexml.js:259
+msgid "xml parse error at pos "
+msgstr "error de análisis de XML en la posición "
+
+#: simplexml.js:259
+msgid ", level "
+msgstr ", nivel "
+
+#: simplexml.js:259
+msgid ", inside tag "
+msgstr ", etiqueta interna "
+
+#. CommandRunner@appdevsw->metadata.json->description
+msgid ""
+"Applet runs script or application periodically and displays its output on "
+"the taskbar"
+msgstr ""
+"Applet que ejecuta secuencias de comandos o aplicaciones periódicamente y "
+"muestra su salida en la barra de tareas"
+
+#. CommandRunner@appdevsw->settings-
+#. schema.json->form_interval_unit->description
+msgid "Unit"
+msgstr "Unidad"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->tooltip
+msgid "Unit of the interval: seconds or milliseconds"
+msgstr "Unidad del intervalo: segundos o milisegundos"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->options
+msgid " milliseconds"
+msgstr " milisegundos"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->options
+msgid " seconds"
+msgstr " segundos"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval->description
+msgid "Run interval"
+msgstr "Intervalo de ejecución"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval->tooltip
+msgid "Specifies how often the command is run"
+msgstr "Especifica la frecuencia con la que se ejecuta el comando"
+
+#. CommandRunner@appdevsw->settings-schema.json->head_title->description
+msgid "CommandRunner settings"
+msgstr "Ajustes de CommandRunner"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_suffix->description
+msgid "Suffix"
+msgstr "Sufijo"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_suffix->tooltip
+msgid ""
+"Text or character displayed at the end of the command result (in text mode "
+"only)."
+msgstr ""
+"Texto o carácter que aparece al final del resultado del comando (sólo en "
+"modo texto)."
+
+#. CommandRunner@appdevsw->settings-schema.json->form_command->description
+msgid "Command"
+msgstr "Comando"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_command->tooltip
+msgid ""
+"Command or script or applitaction to run.\n"
+"e.g.\n"
+" /home/user/myscript.sh\n"
+" echo Hello\n"
+"\n"
+"The command should print the result to the standard output, which will be "
+"displayed on the taskbar.\n"
+"\n"
+"You can use predefined parameters:\n"
+" $counter$ - number of command executions\n"
+" $appletdir$ - applet directory\n"
+"\n"
+"  e.g. echo \"I was executed $counter$ times\""
+msgstr ""
+"Comando, script o aplicación a ejecutar.\n"
+"Ej.\n"
+" /home/usuario/myscript.sh\n"
+" echo Hola\n"
+"\n"
+"El comando debe imprimir el resultado en la salida estándar, que se "
+"mostrará en la barra de tareas.\n"
+"\n"
+"Puede utilizar parámetros predefinidos:\n"
+" $counter$ - número de ejecuciones del comando\n"
+" $appletdir$ - directorio del applet\n"
+"\n"
+"  e.g. echo \"Se ejecuto $contador$ veces\""
+
+#. CommandRunner@appdevsw->settings-schema.json->form_prefix->description
+msgid "Prefix"
+msgstr "Prefijo"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_prefix->tooltip
+msgid ""
+"Text or character displayed at the beginning of the command result (in text "
+"mode only)."
+msgstr ""
+"Texto o carácter que aparece al principio del resultado del comando (sólo "
+"en modo texto)."
+
+#. CommandRunner@appdevsw->settings-schema.json->apply->description
+msgid "Apply"
+msgstr "Aplicar"
+
+#. CommandRunner@appdevsw->settings-schema.json->apply->tooltip
+msgid "Apply changes"
+msgstr "Aplicar cambios"

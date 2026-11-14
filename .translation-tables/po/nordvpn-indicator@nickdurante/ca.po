@@ -1,0 +1,39 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nordvpn-indicator@nickdurante 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-05 01:39+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:25
+msgid "Manage your NordVPN connection"
+msgstr "Gestioneu la vostra connexió de NordVPN"
+
+#. metadata.json->name
+msgid "NordVPN Indicator"
+msgstr "Indicador de NordVPN"
+
+#. metadata.json->description
+msgid "Check your NordVPN connection"
+msgstr "Reviseu la vostra connexió de NordVPN"
+
+#. settings-schema.json->update-interval->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->update-interval->description
+msgid "Update interval"
+msgstr "Interval de refresc"

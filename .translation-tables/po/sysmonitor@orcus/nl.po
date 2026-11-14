@@ -1,0 +1,323 @@
+# SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# orcuscz, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-22 07:52-0400\n"
+"PO-Revision-Date: 2025-05-13 14:50+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. 3.0/providers.js:49 3.2/providers.js:56
+msgid "CPU:"
+msgstr "CPU:"
+
+#. 3.0/providers.js:75 3.0/providers.js:101 3.2/providers.js:82
+#. 3.2/providers.js:108
+msgid " MB"
+msgstr " MB"
+
+#. 3.0/providers.js:80 3.2/providers.js:87
+msgid "Memory:"
+msgstr "Geheugen:"
+
+#. 3.0/providers.js:106 3.2/providers.js:113
+msgid "Swap:"
+msgstr "Swap:"
+
+#. 3.0/providers.js:152 3.2/providers.js:160
+msgid " KB/s"
+msgstr " KB/s"
+
+#. 3.0/providers.js:157 3.2/providers.js:165
+msgid "Network D/U:"
+msgstr "Netwerk D/U:"
+
+#. 3.0/providers.js:196 3.2/providers.js:204
+msgid "Load average:"
+msgstr "Gemiddelde belasting:"
+
+#. metadata.json->description
+msgid "Displays CPU, memory, swap and network usage and load in graphs"
+msgstr ""
+"Toont CPU-, geheugen-, swap- en netwerkgebruik en belasting in grafieken"
+
+#. metadata.json->name
+msgid "System Monitor"
+msgstr "Systeemmonitor"
+
+#. 3.0->settings-schema.json->header_common->description
+#. 3.2->settings-schema.json->common->title
+msgid "Common"
+msgstr "Algemeen"
+
+#. 3.0->settings-schema.json->onclick_program->description
+#. 3.2->settings-schema.json->onclick_program->description
+msgid "Program to launch on click"
+msgstr "Programma om te starten bij klik"
+
+#. 3.0->settings-schema.json->smooth->description
+#. 3.2->settings-schema.json->smooth->description
+msgid "Smooth graphs"
+msgstr "Vloeiende grafieken"
+
+#. 3.0->settings-schema.json->draw_border->description
+#. 3.2->settings-schema.json->draw_border->description
+msgid "Draw border"
+msgstr "Rand tekenen"
+
+#. 3.0->settings-schema.json->graph_width->description
+#. 3.2->settings-schema.json->graph_width->description
+msgid "Common graph width"
+msgstr "Algemene grafiekbreedte"
+
+#. 3.0->settings-schema.json->graph_width->units
+#. 3.0->settings-schema.json->graph_spacing->units
+#. 3.0->settings-schema.json->padding_lr->units
+#. 3.0->settings-schema.json->padding_tb->units
+#. 3.0->settings-schema.json->cpu_graph_width->units
+#. 3.0->settings-schema.json->mem_graph_width->units
+#. 3.0->settings-schema.json->swap_graph_width->units
+#. 3.0->settings-schema.json->net_graph_width->units
+#. 3.0->settings-schema.json->load_graph_width->units
+#. 3.2->settings-schema.json->graph_width->units
+#. 3.2->settings-schema.json->graph_spacing->units
+#. 3.2->settings-schema.json->padding_lr->units
+#. 3.2->settings-schema.json->padding_tb->units
+#. 3.2->settings-schema.json->cpu_graph_width->units
+#. 3.2->settings-schema.json->mem_graph_width->units
+#. 3.2->settings-schema.json->swap_graph_width->units
+#. 3.2->settings-schema.json->net_graph_width->units
+#. 3.2->settings-schema.json->load_graph_width->units
+msgid "pixels"
+msgstr "pixels"
+
+#. 3.0->settings-schema.json->graph_width->tooltip
+#. 3.2->settings-schema.json->graph_width->tooltip
+msgid ""
+"If the applet is in a vertical panel, this sets the graph height. The graph "
+"width is then the panel width minus padding"
+msgstr ""
+"Als het applet zich in een verticaal paneel bevindt, stelt dit de hoogte van "
+"de grafiek in. De breedte van de grafiek is dan de paneelbreedte minus "
+"opvulling"
+
+#. 3.0->settings-schema.json->graph_spacing->description
+#. 3.2->settings-schema.json->graph_spacing->description
+msgid "Graph spacing"
+msgstr "Grafiek tussenruimte"
+
+#. 3.0->settings-schema.json->graph_spacing->tooltip
+#. 3.2->settings-schema.json->graph_spacing->tooltip
+msgid ""
+"The number of pixels between each graph. Can be set to -1 to allow single "
+"line borders between graphs if borders are enabled"
+msgstr ""
+"Het aantal pixels tussen elke grafiek. Kan worden ingesteld op -1 om "
+"enkelvoudige lijnranden tussen grafieken toe te staan als randen zijn "
+"ingeschakeld"
+
+#. 3.0->settings-schema.json->refresh_rate->description
+#. 3.2->settings-schema.json->refresh_rate->description
+msgid "Refresh rate"
+msgstr "Vernieuwingsfrequentie"
+
+#. 3.0->settings-schema.json->refresh_rate->units
+#. 3.2->settings-schema.json->refresh_rate->units
+msgid "ms"
+msgstr "ms"
+
+#. 3.0->settings-schema.json->use_padding->description
+#. 3.2->settings-schema.json->use_padding->description
+msgid "Use custom applet padding"
+msgstr "Aangepaste opvulling voor applet gebruiken"
+
+#. 3.0->settings-schema.json->padding_lr->description
+#. 3.2->settings-schema.json->padding_lr->description
+msgid "Left/right padding"
+msgstr "Linker/rechter opvulling"
+
+#. 3.0->settings-schema.json->padding_tb->description
+#. 3.2->settings-schema.json->padding_tb->description
+msgid "Top/bottom padding"
+msgstr "Boven/onder opvulling"
+
+#. 3.0->settings-schema.json->bg_color->description
+#. 3.2->settings-schema.json->bg_color->description
+msgid "Background color"
+msgstr "Achtergrondkleur"
+
+#. 3.0->settings-schema.json->border_color->description
+#. 3.2->settings-schema.json->border_color->description
+msgid "Border color"
+msgstr "Randkleur"
+
+#. 3.0->settings-schema.json->header_cpu->description
+#. 3.2->settings-schema.json->cpu->title
+msgid "CPU"
+msgstr "CPU"
+
+#. 3.0->settings-schema.json->cpu_enabled->description
+#. 3.0->settings-schema.json->mem_enabled->description
+#. 3.0->settings-schema.json->swap_enabled->description
+#. 3.0->settings-schema.json->net_enabled->description
+#. 3.0->settings-schema.json->load_enabled->description
+#. 3.2->settings-schema.json->cpu_enabled->description
+#. 3.2->settings-schema.json->mem_enabled->description
+#. 3.2->settings-schema.json->swap_enabled->description
+#. 3.2->settings-schema.json->net_enabled->description
+#. 3.2->settings-schema.json->load_enabled->description
+msgid "Enable"
+msgstr "Inschakelen"
+
+#. 3.0->settings-schema.json->cpu_override_graph_width->description
+#. 3.0->settings-schema.json->mem_override_graph_width->description
+#. 3.0->settings-schema.json->swap_override_graph_width->description
+#. 3.0->settings-schema.json->net_override_graph_width->description
+#. 3.0->settings-schema.json->load_override_graph_width->description
+#. 3.2->settings-schema.json->cpu_override_graph_width->description
+#. 3.2->settings-schema.json->mem_override_graph_width->description
+#. 3.2->settings-schema.json->swap_override_graph_width->description
+#. 3.2->settings-schema.json->net_override_graph_width->description
+#. 3.2->settings-schema.json->load_override_graph_width->description
+msgid "Override graph width"
+msgstr "Grafiekbreedte overschrijven"
+
+#. 3.0->settings-schema.json->cpu_graph_width->description
+#. 3.0->settings-schema.json->mem_graph_width->description
+#. 3.0->settings-schema.json->swap_graph_width->description
+#. 3.0->settings-schema.json->net_graph_width->description
+#. 3.0->settings-schema.json->load_graph_width->description
+#. 3.2->settings-schema.json->cpu_graph_width->description
+#. 3.2->settings-schema.json->mem_graph_width->description
+#. 3.2->settings-schema.json->swap_graph_width->description
+#. 3.2->settings-schema.json->net_graph_width->description
+#. 3.2->settings-schema.json->load_graph_width->description
+msgid "Graph width"
+msgstr "Grafiekbreedte"
+
+#. 3.0->settings-schema.json->cpu_tooltip_decimals->description
+#. 3.2->settings-schema.json->cpu_tooltip_decimals->description
+msgid "Show this many decimals in the tooltip"
+msgstr "Toon dit aantal decimalen in de tooltip"
+
+#. 3.0->settings-schema.json->cpu_tooltip_decimals->units
+#. 3.2->settings-schema.json->cpu_tooltip_decimals->units
+msgid "decimals"
+msgstr "decimalen"
+
+#. 3.0->settings-schema.json->cpu_color_0->description
+#. 3.2->settings-schema.json->cpu_color_0->description
+msgid "User color"
+msgstr "Gebruikerskleur"
+
+#. 3.0->settings-schema.json->cpu_color_1->description
+#. 3.2->settings-schema.json->cpu_color_1->description
+msgid "Nice color"
+msgstr "Nice kleur"
+
+#. 3.0->settings-schema.json->cpu_color_2->description
+#. 3.2->settings-schema.json->cpu_color_2->description
+msgid "Kernel color"
+msgstr "Kernel kleur"
+
+#. 3.0->settings-schema.json->cpu_color_3->description
+#. 3.2->settings-schema.json->cpu_color_3->description
+msgid "IOWait color"
+msgstr "IOWait kleur"
+
+#. 3.0->settings-schema.json->header_mem->description
+#. 3.2->settings-schema.json->mem->title
+msgid "Memory"
+msgstr "Geheugen"
+
+#. 3.0->settings-schema.json->mem_color_0->description
+#. 3.0->settings-schema.json->swap_color_0->description
+#. 3.2->settings-schema.json->mem_color_0->description
+#. 3.2->settings-schema.json->swap_color_0->description
+msgid "Used color"
+msgstr "Gebruikt geheugen kleur"
+
+#. 3.0->settings-schema.json->mem_color_1->description
+#. 3.2->settings-schema.json->mem_color_1->description
+msgid "Cached color"
+msgstr "Gecacht kleur"
+
+#. 3.0->settings-schema.json->header_swap->description
+#. 3.2->settings-schema.json->swap->title
+msgid "Swap"
+msgstr "Swap"
+
+#. 3.0->settings-schema.json->header_net->description
+#. 3.2->settings-schema.json->net->title
+msgid "Network"
+msgstr "Netwerk"
+
+#. 3.0->settings-schema.json->net_color_0->description
+#. 3.2->settings-schema.json->net_color_0->description
+msgid "Download color"
+msgstr "Download kleur"
+
+#. 3.0->settings-schema.json->net_color_1->description
+#. 3.2->settings-schema.json->net_color_1->description
+msgid "Upload color"
+msgstr "Upload kleur"
+
+#. 3.0->settings-schema.json->header_load->description
+#. 3.2->settings-schema.json->load->title
+msgid "Load"
+msgstr "Belasting"
+
+#. 3.0->settings-schema.json->load_color_0->description
+#. 3.2->settings-schema.json->load_color_0->description
+msgid "Color"
+msgstr "Kleur"
+
+#. 3.2->settings-schema.json->common_g->title
+#. 3.2->settings-schema.json->cpu_g->title
+#. 3.2->settings-schema.json->mem_g->title
+#. 3.2->settings-schema.json->swap_g->title
+#. 3.2->settings-schema.json->net_g->title
+#. 3.2->settings-schema.json->load_g->title
+msgid "General"
+msgstr "Algemeen"
+
+#. 3.2->settings-schema.json->common_c->title
+#. 3.2->settings-schema.json->cpu_c->title
+#. 3.2->settings-schema.json->mem_c->title
+#. 3.2->settings-schema.json->swap_c->title
+#. 3.2->settings-schema.json->net_c->title
+#. 3.2->settings-schema.json->load_c->title
+msgid "Colors"
+msgstr "Kleuren"
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->description
+msgid "Minimum graph scale"
+msgstr "Minimale grafiekschaal"
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->units
+msgid "Mb/s"
+msgstr "Mb/s"
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->tooltip
+msgid ""
+"The minimum scale for the graph in Megabits per second.\n"
+"The graph will not scale below this minimum, but it will automatically scale "
+"if the network speed exceeds this value.\n"
+"\n"
+"To always automatically scale, set the value to 0."
+msgstr ""
+"De minimale schaal voor de grafiek in Megabits per seconde.\n"
+"De grafiek zal niet onder deze minimumwaarde schalen, maar zal automatisch "
+"schalen als de netwerksnelheid deze waarde overschrijdt.\n"
+"\n"
+"Om altijd automatisch te schalen, stel de waarde in op 0."

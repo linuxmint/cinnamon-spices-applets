@@ -1,0 +1,154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-19 14:22+0800\n"
+"PO-Revision-Date: 2024-11-16 00:56+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. mylauncher@markbokil.com->metadata.json->name
+#: applet.js:64
+msgid "My Launcher"
+msgstr "My Launcher"
+
+#: applet.js:183
+msgid "Edit launcher menu"
+msgstr "Muokkaa valikkoa"
+
+#: applet.js:190 mylauncher.properties:46
+msgid "Help"
+msgstr "Ohje"
+
+#: applet.js:194
+msgid "About"
+msgstr "Tietoja"
+
+#: applet.js:201
+msgid "Tooltips"
+msgstr "Työkaluvinkit"
+
+#: mylauncher.properties:6
+msgid "Apps"
+msgstr "Ohjelmat"
+
+#: mylauncher.properties:7
+msgid "Messenger"
+msgstr "Pikaviestin"
+
+#: mylauncher.properties:9
+msgid "Office Suite"
+msgstr "Toimisto"
+
+#: mylauncher.properties:10
+msgid "Audio Player"
+msgstr "Musiikkisoitin"
+
+#: mylauncher.properties:11
+msgid "Text Editor"
+msgstr "Tekstimuokkain"
+
+#: mylauncher.properties:12
+msgid "Image Editor"
+msgstr "Kuvankäsittely"
+
+#: mylauncher.properties:13
+msgid "SVG Editor"
+msgstr "SVG editori"
+
+#: mylauncher.properties:16
+msgid "Calculator"
+msgstr "Laskin"
+
+#: mylauncher.properties:18
+msgid "My Computer"
+msgstr "Oma tietokone"
+
+#: mylauncher.properties:19
+msgid "CUPS Printer Admin"
+msgstr "CUPS tulostus"
+
+#: mylauncher.properties:20
+msgid "Startup Applications"
+msgstr "Käynnistyvät"
+
+#: mylauncher.properties:21
+msgid "System Monitor"
+msgstr "Valvonta"
+
+#: mylauncher.properties:22
+msgid "System Settings"
+msgstr "Asetukset"
+
+#: mylauncher.properties:23
+msgid "CompizConfig"
+msgstr "CompizConfig"
+
+#: mylauncher.properties:24
+msgid "Cinnamon Settings"
+msgstr "Cinnamon asetukset"
+
+#: mylauncher.properties:25
+msgid "Screenshot"
+msgstr "Kuvakaappaus"
+
+#: mylauncher.properties:26
+msgid "Search for files"
+msgstr "Hae tiedostoja"
+
+#: mylauncher.properties:31
+msgid "Add/Remove Applets"
+msgstr "Lisää tai poista sovellus"
+
+#: mylauncher.properties:32
+msgid "Reload Theme"
+msgstr "Lataa teema uudestaan"
+
+#: mylauncher.properties:33
+msgid "Looking Glass"
+msgstr "Lasin näköinen"
+
+#: mylauncher.properties:35
+msgid "Restart Cinnamon"
+msgstr "Käynnistä Cinnamon"
+
+#: mylauncher.properties:36
+msgid "Suspend"
+msgstr "Valmiustila"
+
+#: mylauncher.properties:38
+msgid "Home"
+msgstr "Koti"
+
+#: mylauncher.properties:39
+msgid "Terminal"
+msgstr "Pääte"
+
+#: mylauncher.properties:40
+msgid "Browser"
+msgstr "Selain"
+
+#: mylauncher.properties:41
+msgid "Run..."
+msgstr "Suorita..."
+
+#: mylauncher.properties:42
+msgid "Toggle Desktop"
+msgstr "Vaihda pöytää"
+
+#. mylauncher@markbokil.com->metadata.json->description
+msgid "Personal app launcher."
+msgstr ""
+"Lista erilaisia ohjelmia joita on helppo valita ja käynnistää. Voit itse "
+"muokata ja lisätä listaa."

@@ -1,0 +1,112 @@
+# MOUSE KEYS SHORTCUT
+# This file is put in the public domain.
+# GabrielCamara3526, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mouse-keys-shortcut@GabrielCamara3526 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-03 03:49+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.7\n"
+
+#. applet.js:30 applet.js:153 applet.js:262 applet.js:268
+msgid "Control the pointer using the keypad"
+msgstr "Controlar el puntero mediante el teclado"
+
+#. applet.js:153 applet.js:156 applet.js:262
+msgid "Mouse Keys: ON"
+msgstr "Teclas del ratón: ON"
+
+#. applet.js:162 applet.js:165 applet.js:268
+msgid "Mouse Keys: OFF"
+msgstr "Teclas del ratón: OFF"
+
+#. applet.js:162
+msgid "Control the pointer using the mouse"
+msgstr "Controlar el puntero con el ratón"
+
+#. settings-schema.json->initial-delay->description
+#. applet.js:183 applet.js:186 applet.js:193
+msgid "Initial delay"
+msgstr "Retraso inicial"
+
+#. applet.js:186 applet.js:193 applet.js:204 applet.js:211
+msgid " ms"
+msgstr " ms"
+
+#. settings-schema.json->acceleration-time->description
+#. applet.js:201 applet.js:204 applet.js:211
+msgid "Acceleration time"
+msgstr "Tiempo de la aceleración"
+
+#. settings-schema.json->maximum-speed->description
+#. applet.js:219 applet.js:223 applet.js:243
+msgid "Maximum speed"
+msgstr "Velocidad máxima"
+
+#. applet.js:223 applet.js:243
+msgid " px/s"
+msgstr " px/s"
+
+#. metadata.json->name
+msgid "Mouse Keys Shortcut"
+msgstr "Atajo de teclado del ratón"
+
+#. metadata.json->description
+msgid "Trigger this applet to control the pointer using the keypad"
+msgstr "Active este applet para controlar el puntero mediante el teclado"
+
+#. settings-schema.json->section1->description
+msgid "Shortcuts"
+msgstr "Atajos"
+
+#. settings-schema.json->enableShortcut->description
+msgid "Use custom shortcut"
+msgstr "Usar acceso directo personalizado"
+
+#. settings-schema.json->keyOpen->description
+msgid "Mouse Keys accessibility shortcut"
+msgstr "Atajo de accesibilidad de las teclas del ratón"
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Shortcut to enable/disable mouse keys setting"
+msgstr ""
+"Acceso directo para activar/desactivar la configuración de las teclas del "
+"ratón"
+
+#. settings-schema.json->section2->description
+msgid "Mouse Keys"
+msgstr "Teclas del ratón"
+
+#. settings-schema.json->section3->description
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#. settings-schema.json->enableNotifications->description
+msgid "Show notifications"
+msgstr "Mostrar notificaciones"
+
+#. settings-schema.json->enableOSD->description
+msgid "Show OSD"
+msgstr "Mostrar OSD"
+
+#. settings-schema.json->section4->description
+msgid "Icon"
+msgstr "Icono"
+
+#. settings-schema.json->reverseIconsWithDarkTheme->description
+msgid "Reverse the icons when using a dark theme"
+msgstr "Invertir los iconos al usar un tema oscuro"
+
+#. settings-schema.json->forceDarkTheme->description
+msgid "Theme incorrectly detected; this is a dark theme"
+msgstr "Tema detectado incorrectamente; este es un tema oscuro"
