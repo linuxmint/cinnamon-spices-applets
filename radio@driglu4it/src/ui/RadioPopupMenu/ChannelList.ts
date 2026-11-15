@@ -19,6 +19,7 @@ export function createChannelList() {
 
     const {
         addStationsListChangeHandler,
+        setUserStations,
         settingsObject
     } = configs
 
@@ -37,9 +38,9 @@ export function createChannelList() {
     }
 
     const handleChannelRemoveClicked = (channelName: string) => {
-        const previousStations = configs.settingsObject.userStations
+        const previousStations = settingsObject.userStations
 
-        configs.settingsObject.userStations = previousStations.filter((cnl) => cnl.name !== channelName)
+        setUserStations(previousStations.filter((cnl) => cnl.name !== channelName))
     }
 
 
