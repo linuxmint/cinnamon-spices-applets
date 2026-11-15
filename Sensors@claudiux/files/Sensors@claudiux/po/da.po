@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-04-26 01:27+0200\n"
+"POT-Creation-Date: 2026-08-29 09:24-0400\n"
 "PO-Revision-Date: 2026-04-29 17:27+0200\n"
 "Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
 "Language-Team: \n"
@@ -25,103 +25,103 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Sensorovervågning"
 
-#. applet.js:594
+#. applet.js:599
 msgid "Suspended"
 msgstr "Hviletilstand"
 
-#. applet.js:936 applet.js:978
+#. applet.js:941 applet.js:983
 msgid "high:"
 msgstr "høj:"
 
-#. applet.js:936 applet.js:939 applet.js:978 applet.js:980 applet.js:1021
+#. applet.js:941 applet.js:944 applet.js:983 applet.js:985 applet.js:1026
 msgid "n/a"
 msgstr "—"
 
-#. applet.js:939 applet.js:980
+#. applet.js:944 applet.js:985
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:1021 applet.js:1065
+#. applet.js:1026 applet.js:1070
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:1067
+#. applet.js:1072
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:1096
+#. applet.js:1101
 msgid "No intrusion detected"
 msgstr "Ingen indtrængen detekteret"
 
-#. applet.js:1096
+#. applet.js:1101
 msgid "INTRUSION DETECTED!"
 msgstr "INDTRÆNGEN DETEKTERET!"
 
-#. applet.js:1116
+#. applet.js:1121
 msgid "Must be configured!"
 msgstr "Skal konfigureres!"
 
-#. applet.js:1518
+#. applet.js:1523
 msgid "Settings"
 msgstr "Indstillinger"
 
-#. applet.js:1518
+#. applet.js:1523
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1525
+#. applet.js:1530
 msgid "⚙ General"
 msgstr "⚙ Generelt"
 
-#. applet.js:1542
+#. applet.js:1547
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Temperatursensorer"
 
-#. applet.js:1559
+#. applet.js:1564
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Ventilatorsensorer"
 
-#. applet.js:1576
+#. applet.js:1581
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Spændingssensorer"
 
-#. applet.js:1593
+#. applet.js:1598
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Indtrængningssensorer"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1629
+#. applet.js:1634
 msgid "Run xsensors"
 msgstr "Kør xsensors"
 
-#. applet.js:1638
+#. applet.js:1643
 msgid "Suspend Sensors"
 msgstr "Suspendér Sensorovervågning"
 
-#. applet.js:1649
+#. applet.js:1654
 msgid "Reload this applet"
 msgstr "Genindlæs panelprogrammet"
 
-#. applet.js:2005
+#. applet.js:2010
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Er du sikker på at du vil fjerne “%s”?"
 
-#. lib/checkDependencies.js:371
+#. lib/checkDependencies.js:376
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Panelprogrammet %s er fuldt fungerende."
 
-#. lib/checkDependencies.js:372
+#. lib/checkDependencies.js:377
 msgid "All dependencies are installed"
 msgstr "Alle afhængigheder er installeret"
 
-#. lib/checkDependencies.js:401
+#. lib/checkDependencies.js:407
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -129,15 +129,16 @@ msgstr ""
 "Det lader til, nogle programmer mangler for at give panelprogrammet alle "
 "dets funktioner."
 
-#. lib/checkDependencies.js:403
+#. lib/checkDependencies.js:409
 msgid "Please install these packages:"
 msgstr "Installér disse pakker:"
 
-#. lib/checkDependencies.js:407 lib/checkDependencies.js:417
+#. lib/checkDependencies.js:413 lib/checkDependencies.js:423
+#. lib/checkDependencies.js:432
 msgid "Some dependencies are not installed!"
 msgstr "Nogle afhængigheder er ikke installeret!"
 
-#. lib/checkDependencies.js:419
+#. lib/checkDependencies.js:425 lib/checkDependencies.js:434
 msgid "Install these packages now"
 msgstr "Installér disse pakker nu"
 
@@ -693,6 +694,20 @@ msgid ""
 msgstr ""
 "Når denne indstilling er markeret, registreres temperaturer, der overskrider "
 "den øvre eller kritiske grænse, i systemloggen."
+
+#. settings-schema.json->no_check_gpu_if_d3cold->description
+msgid "Stop checking GPU temperature if in D3cold state"
+msgstr ""
+"Stop med at kontrollere GPU-temperaturen, hvis den er i D3cold-tilstand"
+
+#. settings-schema.json->no_check_gpu_if_d3cold->tooltip
+msgid ""
+"If this option is checked, to avoid waking up GPU card to check its "
+"temperature, don't check it's temperature if it's in powersave mode"
+msgstr ""
+"Hvis denne indstilling er markeret, skal GPU-kortet ikke vækkes for at "
+"kontrollere dets temperatur; kontrollér ikke temperaturen, hvis det er i "
+"strømsparetilstand."
 
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description

@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-05-20 20:21+0200\n"
-"PO-Revision-Date: 2026-05-07 19:47+0200\n"
+"POT-Creation-Date: 2026-11-05 22:42+0100\n"
+"PO-Revision-Date: 2026-11-02 09:14+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -21,10 +21,11 @@ msgstr ""
 
 #. 5.6->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
-#. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:78
-#. 5.6/applet.js:906 5.6/applet.js:2066 5.6/applet.js:2128 5.6/applet.js:2139
-#. 4.0/DataProviders.js:55 4.0/prefs.js:303 3.0/prefsui.glade:452
-#. 3.2/prefsui.glade:504 3.4/prefsui.glade:434 4.0/prefsui.glade:580
+#. 3.2/prefs.js:187 3.4/DataProviders.js:58 3.4/prefs.js:195 5.6/applet.js:83
+#. 5.6/applet.js:932 5.6/applet.js:1860 5.6/applet.js:2316 5.6/applet.js:2378
+#. 5.6/applet.js:2389 4.0/DataProviders.js:55 4.0/prefs.js:303
+#. 3.0/prefsui.glade:452 3.2/prefsui.glade:504 3.4/prefsui.glade:434
+#. 4.0/prefsui.glade:580
 msgid "CPU"
 msgstr "CPU"
 
@@ -34,12 +35,13 @@ msgid "------------- CPU ------------"
 msgstr "------- CPU ------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 3.4/DataProviders.js:129
-#. 5.6/applet.js:2148 4.0/DataProviders.js:126
+#. 5.6/applet.js:2398 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Kern"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 3.4/DataProviders.js:141
-#. 5.6/applet.js:79 5.6/applet.js:1840 4.0/DataProviders.js:138
+#. 5.6/applet.js:84 5.6/applet.js:1863 5.6/applet.js:1999
+#. 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MEM"
 
@@ -48,27 +50,27 @@ msgstr "MEM"
 msgid "----------- Memory -----------"
 msgstr "------- Speicher -------"
 
-#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164 5.6/applet.js:50
+#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164 5.6/applet.js:55
 msgid "Usedup:"
 msgstr "Benutzt:"
 
 #. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 3.4/DataProviders.js:162
-#. 5.6/applet.js:1913 4.0/DataProviders.js:159
+#. 5.6/applet.js:2086 4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "Cache:"
 
 #. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 3.4/DataProviders.js:162
-#. 5.6/applet.js:1913 4.0/DataProviders.js:159
+#. 5.6/applet.js:2086 4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Buffer:"
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 3.4/DataProviders.js:162
-#. 5.6/applet.js:51 5.6/applet.js:1913 4.0/DataProviders.js:159
+#. 5.6/applet.js:56 5.6/applet.js:2086 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Frei:"
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 3.4/DataProviders.js:176
-#. 5.6/applet.js:1998 4.0/DataProviders.js:173
+#. 5.6/applet.js:2173 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "SWAP"
 
@@ -79,15 +81,15 @@ msgstr "--------- Swap --------"
 
 #. 5.6->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 3.4/DataProviders.js:195
-#. 5.6/applet.js:52 5.6/applet.js:2031 4.0/DataProviders.js:194
+#. 5.6/applet.js:57 5.6/applet.js:2206 4.0/DataProviders.js:194
 #. 3.0/prefsui.glade:785 3.2/prefsui.glade:837 3.4/prefsui.glade:761
 #. 4.0/prefsui.glade:907
 msgid "Swap"
 msgstr "Swap"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 3.4/DataProviders.js:205
-#. 5.6/applet.js:80 5.6/applet.js:2178 5.6/lib/Graphs.js:866
-#. 5.6/lib/Graphs.js:898 5.6/lib/Graphs.js:1125 5.6/lib/Graphs.js:1173
+#. 5.6/applet.js:85 5.6/applet.js:1869 5.6/applet.js:2428 5.6/lib/Graphs.js:897
+#. 5.6/lib/Graphs.js:929 5.6/lib/Graphs.js:1156 5.6/lib/Graphs.js:1207
 #. 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "NET"
@@ -98,7 +100,7 @@ msgid "---------- Networks ----------"
 msgstr "------- Netzwerke -------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 3.4/DataProviders.js:300
-#. 5.6/applet.js:54 5.6/applet.js:2350 4.0/DataProviders.js:298
+#. 5.6/applet.js:59 5.6/applet.js:2600 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Download:"
 
@@ -108,14 +110,14 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 3.4/DataProviders.js:301
-#. 5.6/applet.js:55 5.6/applet.js:2351 4.0/DataProviders.js:299
+#. 5.6/applet.js:60 5.6/applet.js:2601 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Upload:"
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 3.4/DataProviders.js:317
-#. 5.6/applet.js:81 5.6/applet.js:2373 5.6/applet.js:2553 5.6/lib/Graphs.js:860
-#. 5.6/lib/Graphs.js:899 5.6/lib/Graphs.js:1126 5.6/lib/Graphs.js:1184
-#. 4.0/DataProviders.js:315
+#. 5.6/applet.js:86 5.6/applet.js:1872 5.6/applet.js:2623 5.6/applet.js:2803
+#. 5.6/lib/Graphs.js:891 5.6/lib/Graphs.js:930 5.6/lib/Graphs.js:1157
+#. 5.6/lib/Graphs.js:1218 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "DISK"
 
@@ -125,7 +127,7 @@ msgid "------------ Disks -----------"
 msgstr "----- Festplatten ------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 3.4/DataProviders.js:386
-#. 5.6/applet.js:56 5.6/applet.js:2530 4.0/DataProviders.js:384
+#. 5.6/applet.js:61 5.6/applet.js:2780 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Lesen:"
 
@@ -135,7 +137,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 3.4/DataProviders.js:387
-#. 5.6/applet.js:57 5.6/applet.js:2531 4.0/DataProviders.js:385
+#. 5.6/applet.js:62 5.6/applet.js:2781 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Schreiben:"
 
@@ -193,12 +195,12 @@ msgstr "Schreiben"
 msgid "Error while saving file:"
 msgstr "Fehler beim Speichern der Datei:"
 
-#. 3.4/DataProviders.js:49 5.6/applet.js:43 4.0/DataProviders.js:47
+#. 3.4/DataProviders.js:49 5.6/applet.js:48 4.0/DataProviders.js:47
 msgid "/s"
 msgstr "/s"
 
-#. 3.4/DataProviders.js:162 5.6/applet.js:49 5.6/applet.js:1903
-#. 5.6/applet.js:1910 5.6/applet.js:1913 5.6/applet.js:2044
+#. 3.4/DataProviders.js:162 5.6/applet.js:54 5.6/applet.js:2076
+#. 5.6/applet.js:2083 5.6/applet.js:2086 5.6/applet.js:2224
 #. 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Benutzt:"
@@ -221,91 +223,91 @@ msgstr ""
 "\tArch: libgtop\n"
 "für die Verwendung von "
 
-#. 5.6/applet.js:46
+#. 5.6/applet.js:51
 msgid "Core 128:"
 msgstr "Kern 128:"
 
-#. 5.6/applet.js:47
+#. 5.6/applet.js:52
 msgid "Unrecoverable:"
 msgstr "Nicht wiederherstellbar:"
 
-#. 5.6/applet.js:48
+#. 5.6/applet.js:53
 msgid "Recoverable:"
 msgstr "Wiederherstellbar:"
 
-#. 5.6/applet.js:53
+#. 5.6/applet.js:58
 msgid "Swap:"
 msgstr "Swap:"
 
-#. 5.6/applet.js:58
+#. 5.6/applet.js:63
 msgid "Load:"
 msgstr "Laden:"
 
-#. 5.6/applet.js:59
+#. 5.6/applet.js:64
 msgid "Unload:"
 msgstr "Entladen:"
 
-#. 5.6/applet.js:82
+#. 5.6/applet.js:87 5.6/applet.js:1875
 msgid "DISK USAGE"
 msgstr "FESTPLATTENBELEGUNG"
 
-#. 5.6/applet.js:83
+#. 5.6/applet.js:88 5.6/applet.js:1878
 msgid "BATTERY"
 msgstr "AKKU"
 
 #. 5.6->settings-schema.json->RefreshAll_btn->description
-#. 5.6/applet.js:861
+#. 5.6/applet.js:887
 msgid "Refresh All"
 msgstr "Alles aktualisieren"
 
-#. 5.6/applet.js:871
+#. 5.6/applet.js:897
 msgid "Without any graphics"
 msgstr "Keine Diagramme"
 
-#. 5.6/applet.js:877
+#. 5.6/applet.js:903
 msgid "With graphics"
 msgstr "Mit Diagrammen"
 
-#. 5.6/applet.js:888
+#. 5.6/applet.js:914
 msgid "Drop Memory Cache (needs root rights)"
 msgstr "Speicher-Cache leeren (benötigt Root-Rechte)"
 
-#. 5.6/applet.js:904
+#. 5.6/applet.js:930
 msgid "Configure..."
 msgstr "Konfiguriere..."
 
 #. 5.6->settings-schema.json->pageGeneral->title
-#. 5.6/applet.js:905 3.0/prefsui.glade:281 3.2/prefsui.glade:333
+#. 5.6/applet.js:931 3.0/prefsui.glade:281 3.2/prefsui.glade:333
 #. 3.4/prefsui.glade:264 4.0/prefsui.glade:299
 msgid "General"
 msgstr "Allgemein"
 
 #. 5.6->settings-schema.json->pageMem->title
-#. 5.6/applet.js:907 5.6/applet.js:1893 3.0/prefsui.glade:832
+#. 5.6/applet.js:933 5.6/applet.js:2059 3.0/prefsui.glade:832
 #. 3.2/prefsui.glade:884 3.4/prefsui.glade:808 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr "Speicher"
 
 #. 5.6->settings-schema.json->pageNetwork->title
-#. 5.6/applet.js:908 5.6/applet.js:1460 5.6/applet.js:2188
+#. 5.6/applet.js:934 5.6/applet.js:1599 5.6/applet.js:2438
 #. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 3.4/prefsui.glade:1143
 #. 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr "Netzwerk"
 
 #. 5.6->settings-schema.json->pageDisk->title
-#. 5.6/applet.js:909 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
+#. 5.6/applet.js:935 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540
 #. 3.4/prefsui.glade:1489 4.0/prefsui.glade:1635
 msgid "Disk IO"
 msgstr "Festplatte IO"
 
 #. 5.6->settings-schema.json->pageDiskUsage->title
-#. 5.6/applet.js:910
+#. 5.6/applet.js:936
 msgid "Disk Usage"
 msgstr "Festplattenbelegung"
 
 #. 5.6->settings-schema.json->pageBattery->title
-#. 5.6/applet.js:911 5.6/applet.js:2664
+#. 5.6/applet.js:937 5.6/applet.js:2914
 msgid "Battery"
 msgstr "Akku"
 
@@ -315,66 +317,83 @@ msgstr "Akku"
 #. 5.6->settings-schema.json->sectionMemoryColors->title
 #. 5.6->settings-schema.json->sectionDiskUsageColors->title
 #. 5.6->settings-schema.json->sectionBatteryColors->title
-#. 5.6/applet.js:912 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+#. 5.6/applet.js:938 3.0/prefsui.glade:411 3.0/prefsui.glade:584
 #. 3.2/prefsui.glade:463 3.2/prefsui.glade:636 3.4/prefsui.glade:392
 #. 3.4/prefsui.glade:564 4.0/prefsui.glade:494 4.0/prefsui.glade:710
 msgid "Colors"
 msgstr "Farben"
 
-#. 5.6/applet.js:1059 5.6/applet.js:1102 5.6/applet.js:1116
+#. 5.6/applet.js:1091 5.6/applet.js:1134 5.6/applet.js:1148
 msgid "root"
 msgstr ""
 
-#. 5.6/applet.js:1568 5.6/applet.js:2384 5.6/applet.js:2480 5.6/applet.js:2604
-#. 5.6/applet.js:2606
+#. 5.6/applet.js:1707 5.6/applet.js:2634 5.6/applet.js:2730 5.6/applet.js:2854
+#. 5.6/applet.js:2856
 msgid "Disks"
 msgstr "Festplatten"
 
-#. 5.6/applet.js:1904 5.6/applet.js:1911 5.6/applet.js:2045
+#. 5.6/applet.js:2077 5.6/applet.js:2084 5.6/applet.js:2225
 msgid "Available:"
 msgstr "Verfügbar:"
 
-#. 5.6/applet.js:1937
+#. 5.6/applet.js:2110
 msgid "Buffers/Cache/Shared"
 msgstr "Buffer/Cache/Shared"
 
-#. 5.6/applet.js:1969 5.6/applet.js:2115 5.6/applet.js:2347 5.6/applet.js:2348
-#. 5.6/applet.js:2527 5.6/applet.js:2528 5.6/applet.js:2583 5.6/applet.js:2669
+#. 5.6/applet.js:2142 5.6/applet.js:2365 5.6/applet.js:2597 5.6/applet.js:2598
+#. 5.6/applet.js:2777 5.6/applet.js:2778 5.6/applet.js:2833 5.6/applet.js:2919
 msgid ":"
 msgstr ":"
 
-#. 5.6/applet.js:1971 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 5.6/applet.js:2144 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 3.4/prefsui.glade:663 4.0/prefsui.glade:809
 msgid "Buffer"
 msgstr "Buffer"
 
 #. 5.6->settings-schema.json->Mem_colorCache->description
-#. 5.6/applet.js:1971
+#. 5.6/applet.js:2144
 #, fuzzy
 msgid "Cache"
 msgstr "Cache"
 
-#. 5.6/applet.js:1971
+#. 5.6/applet.js:2144
 msgid "Shared"
 msgstr "Shared"
 
-#. 5.6/applet.js:2102
+#. 5.6/applet.js:2246 5.6/applet.js:2287
+msgid "ZRAM"
+msgstr "ZRAM"
+
+#. 5.6/applet.js:2294
+#, fuzzy
+msgid "Disk size"
+msgstr "Festplatten"
+
+#. 5.6/applet.js:2295
+msgid "Data"
+msgstr "Daten"
+
+#. 5.6/applet.js:2296
+msgid "Compressed"
+msgstr "Komprimiert"
+
+#. 5.6/applet.js:2352
 msgid "CPUs"
 msgstr "CPUs"
 
-#. 5.6/applet.js:2301
+#. 5.6/applet.js:2551
 msgid "Networks"
 msgstr "Netzwerke"
 
-#. 5.6/applet.js:2578
+#. 5.6/applet.js:2828
 msgid "Usage"
 msgstr "Belegung"
 
-#. 5.6/applet.js:2639 5.6/lib/Graphs.js:455
+#. 5.6/applet.js:2889 5.6/lib/Graphs.js:475
 msgid "BAT"
 msgstr "AKK"
 
-#. 5.6/applet.js:2692 5.6/applet.js:2694
+#. 5.6/applet.js:2942 5.6/applet.js:2944
 msgid "Batteries"
 msgstr "Akkus"
 
@@ -458,6 +477,10 @@ msgstr "Tooltip"
 msgid "Custom translations in tooltip"
 msgstr "Angepasste Übersetzungen im Tooltip"
 
+#. 5.6->settings-schema.json->sectionSystemMonitor->title
+msgid "System Monitor"
+msgstr "Systemmonitor"
+
 #. 5.6->settings-schema.json->sectionCPUTemperature->title
 msgid "CPU Temperature"
 msgstr "CPU-Temperatur"
@@ -465,6 +488,10 @@ msgstr "CPU-Temperatur"
 #. 5.6->settings-schema.json->sectionCPULoadAverage->title
 msgid "Average Load"
 msgstr "Durchschnittliche Last"
+
+#. 5.6->settings-schema.json->sectionCPUStuckProcess->title
+msgid "Detection of Stuck Processes"
+msgstr "Erkennung hängender Prozesse"
 
 #. 5.6->settings-schema.json->sectionCPULabel->title
 #. 5.6->settings-schema.json->sectionMemoryLabel->title
@@ -593,6 +620,7 @@ msgid "Led location"
 msgstr "LED-Position"
 
 #. 5.6->settings-schema.json->ledLocation->options
+#. 5.6->settings-schema.json->SysMonMouseButton->options
 msgid "Left"
 msgstr "Links"
 
@@ -631,7 +659,7 @@ msgstr "Hintergrundfarbe"
 
 #. 5.6->settings-schema.json->quickTooltip->description
 msgid "Show the tooltip immediately"
-msgstr ""
+msgstr "Tooltip sofort anzeigen"
 
 #. 5.6->settings-schema.json->percentAtEndOfLine->description
 msgid "Place % at the very end of the line"
@@ -640,6 +668,19 @@ msgstr "% ganz am Ende der Zeile anzeigen"
 #. 5.6->settings-schema.json->tooltipFontSize->description
 msgid "Font size (px)"
 msgstr "Schriftgröße (px)"
+
+#. 5.6->settings-schema.json->tooltipBorderRadiusTopLeft->units
+#. 5.6->settings-schema.json->tooltipBorderRadiusTopRight->units
+msgid "px"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipBorderRadiusTopLeft->description
+msgid "Border Radius Top-Left and Bottom-Right"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipBorderRadiusTopRight->description
+msgid "Border Radius Top-Right and Bottom-Left"
+msgstr ""
 
 #. 5.6->settings-schema.json->tooltipChangeBackgroundColor->description
 msgid "Change Tooltip Background Color"
@@ -666,8 +707,8 @@ msgid ""
 "you move the pointer.\n"
 "Refresh All after making changes."
 msgstr ""
-"Das ist nützlich um zu verhindern, dass der Tooltip zu früh verschwindet, "
-"wenn man den Zeiger bewegt.\n"
+"Nützlich, um zu verhindern, dass der Tooltip zu früh verschwindet, wenn man "
+"den Zeiger bewegt.\n"
 "Alles Aktualisieren nachdem Änderungen gemacht wurden."
 
 #. 5.6->settings-schema.json->tooltipCustomTranslationsLabel->description
@@ -788,7 +829,7 @@ msgstr "Tooltip aktivieren"
 #. 5.6->settings-schema.json->DiskUsage_labelOn->description
 #. 5.6->settings-schema.json->Battery_labelOn->description
 msgid "Display this label"
-msgstr "Diese Beschriftung anzeigen"
+msgstr "Beschriftung anzeigen"
 
 #. 5.6->settings-schema.json->CPU_labelForeground->description
 #. 5.6->settings-schema.json->Mem_labelForeground->description
@@ -797,7 +838,7 @@ msgstr "Diese Beschriftung anzeigen"
 #. 5.6->settings-schema.json->DiskUsage_labelForeground->description
 #. 5.6->settings-schema.json->Battery_labelForeground->description
 msgid "Bring this label to the foreground"
-msgstr "Diese Beschriftung in den Vordergrund bringen"
+msgstr "Beschriftung in den Vordergrund bringen"
 
 #. 5.6->settings-schema.json->CPU_labelPos->description
 #. 5.6->settings-schema.json->Mem_labelPos->description
@@ -826,7 +867,7 @@ msgstr "Negativ: zum oberen Rand. Positiv: zum unteren Rand."
 #. 5.6->settings-schema.json->DiskUsage_labelZoom->description
 #. 5.6->settings-schema.json->Battery_labelZoom->description
 msgid "Label zoom"
-msgstr "Vergrößerung der Beschriftung"
+msgstr "Beschriftung vergrößern"
 
 #. 5.6->settings-schema.json->CPU_labelZoom->options
 #. 5.6->settings-schema.json->CPU_showLoadOverTimeHowManyBars->options
@@ -874,7 +915,7 @@ msgstr ""
 #. 5.6->settings-schema.json->DiskUsage_labelCustomized->description
 #. 5.6->settings-schema.json->Battery_labelCustomized->description
 msgid "Customize this label"
-msgstr "Diese Beschriftung anpassen"
+msgstr "Beschriftung anpassen"
 
 #. 5.6->settings-schema.json->CPU_labelCustom->description
 #. 5.6->settings-schema.json->Mem_labelCustom->description
@@ -975,9 +1016,8 @@ msgid "Show the CPU temperature"
 msgstr "CPU-Temperatur anzeigen"
 
 #. 5.6->settings-schema.json->CPU_showTempUnit->description
-#, fuzzy
 msgid "Display the temperature unit"
-msgstr "Ecke, in der die Temperatur angezeigt werden soll"
+msgstr "Temperatureinheit anzeigen"
 
 #. 5.6->settings-schema.json->CPU_temp_hovering_only->description
 #. 5.6->settings-schema.json->CPU_loadAverage_hovering_only->description
@@ -1049,6 +1089,7 @@ msgstr "Unten links"
 
 #. 5.6->settings-schema.json->CPU_tempFontFactor->units
 #. 5.6->settings-schema.json->CPU_loadAverageFontFactor->units
+#. 5.6->settings-schema.json->CPU_minLoadStuckProcess->units
 #. 5.6->settings-schema.json->percentFontFactor->units
 #. 5.6->settings-schema.json->flowFontFactor->units
 msgid "%"
@@ -1059,7 +1100,7 @@ msgstr ""
 #. 5.6->settings-schema.json->percentFontFactor->description
 #. 5.6->settings-schema.json->flowFontFactor->description
 msgid "Font size: percentage of the box height"
-msgstr "Schriftgröße: Prozent der Höhe des Kästchens"
+msgstr "Schriftgröße in Prozent der Kästchenhöhe"
 
 #. 5.6->settings-schema.json->CPU_showLoadAverage->description
 msgid "Show the CPU average load"
@@ -1083,19 +1124,91 @@ msgstr ""
 
 #. 5.6->settings-schema.json->CPU_loadAverageColor->description
 msgid "Normal Average Load Color"
-msgstr "Farbe normale Durschnittslast"
+msgstr "Farbe normale Durchschnittslast"
 
 #. 5.6->settings-schema.json->CPU_loadAverageColorHigh->description
 msgid "High Average Load Color"
-msgstr "Farbe hohe Durschnittslast"
+msgstr "Farbe hohe Durchschnittslast"
 
 #. 5.6->settings-schema.json->CPU_loadAverageColorCrit->description
 msgid "Critical Average Load Color"
-msgstr "Farbe kritische Durschnittslast"
+msgstr "Farbe kritische Durchschnittslast"
 
 #. 5.6->settings-schema.json->CPU_loadAverageCorner->description
 msgid "Corner in which to display the average load"
-msgstr "Ecke, in der die Durschnittslast angezeigt werden soll"
+msgstr "Ecke, in der die Durchschnittslast angezeigt werden soll"
+
+#. 5.6->settings-schema.json->CPU_explanationStuckProcess->description
+msgid ""
+"There are several ways to detect stuck processes:\n"
+"- through the kernel; this is reported immediately.\n"
+"- through analyzis of each CPU's activity; this is reported when at least "
+"one CPU exceeds the specified activity threshold for the set time limit.\n"
+"- through either method; the response time depends on how the stuck process "
+"was detected."
+msgstr ""
+"Es gibt mehrere Wege, um hängende Prozesse zu finden:\n"
+"- über den kernel; wird sofort gemeldet.\n"
+"- durch Aktivitätsanalyse jeder einzelnen CPU; wird gemeldet, wenn "
+"mindestens eine CPU die angegebene Aktivitätsschwelle für das gesetzte "
+"Zeitlimit überschreitet.\n"
+"- durch beide Methoden; die Antwortzeit hängt davon ab, wie der hängende "
+"Prozess erkannt wurde."
+
+#. 5.6->settings-schema.json->CPU_alertWhenStuckProcess->description
+msgid "Change the background color when at least one process is stuck"
+msgstr "Hintergrundfarbe ändern, wenn mindestens ein Prozess hängt"
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->description
+msgid "Method used to detect stuck processes"
+msgstr "Methode um hängende Prozesse zu erkennen"
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->options
+msgid "Only from the kernel"
+msgstr "Nur über den Kernel"
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->options
+msgid "Only by checking the activity of each processor"
+msgstr "Nur durch Prüfung der Aktivität jedes Prozessors"
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->options
+msgid "Both methods"
+msgstr "Durch beide Methoden"
+
+#. 5.6->settings-schema.json->CPU_minLoadStuckProcess->description
+msgid "Consider a process to be stuck when core's load exceeds (%)"
+msgstr ""
+"Prozess als hängend einstufen, wenn die Last diesen Wert überschreitet (%)"
+
+#. 5.6->settings-schema.json->CPU_minLoadStuckProcess->tooltip
+#. 5.6->settings-schema.json->CPU_durationStuckProcess->tooltip
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->tooltip
+msgid "Does not concern stuck processes detected by the kernel."
+msgstr "Betrifft nicht hängende Prozesse, die über den Kernel erkannt werden."
+
+#. 5.6->settings-schema.json->CPU_durationStuckProcess->description
+msgid "Consider a process to be stuck after (in Selected Unit)"
+msgstr "Prozess als hängend einstufen nach (in gewählter Einheit)"
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->description
+msgid "Selected Unit"
+msgstr "Gewählte Einheit"
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->options
+msgid "seconds"
+msgstr "Sekunden"
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->options
+msgid "minutes"
+msgstr "Minuten"
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->options
+msgid "hours"
+msgstr "Stunden"
+
+#. 5.6->settings-schema.json->CPU_bgColorStuckProcess->description
+msgid "Background Color when a process is stuck"
+msgstr "Hintergrundfarbe, wenn ein Prozess hängt"
 
 #. 5.6->settings-schema.json->CPU_tempColor->description
 msgid "Normal Temperature Color"
@@ -1166,6 +1279,10 @@ msgstr "Swap aktivieren"
 msgid "Enable Swap Tooltip"
 msgstr "Swap-Tooltip aktivieren"
 
+#. 5.6->settings-schema.json->Swap_enabledZramTooltip->description
+msgid "Enable ZRAM Tooltip (only shown if /dev/zram0 exists)"
+msgstr "ZRAM-Tooltip aktivieren (nur sichtbar, wenn /dev/zram0 existiert)"
+
 #. 5.6->settings-schema.json->Mem_chartType->description
 msgid "Chart Type"
 msgstr "Diagrammtyp"
@@ -1180,13 +1297,14 @@ msgstr "Balkendiagramm"
 
 #. 5.6->settings-schema.json->Mem_method->description
 msgid "Memory Calculation Method"
-msgstr "Berechnungsmethode Speicher"
+msgstr "Berechnungsmethode für Speicher"
 
 #. 5.6->settings-schema.json->Mem_method->options
 msgid "htop (recommended)"
 msgstr "htop (empfohlen)"
 
 #. 5.6->settings-schema.json->Mem_method->options
+#. 5.6->settings-schema.json->SysMonWhichOne->options
 msgid "Gnome System Monitor"
 msgstr "Gnome-Systemmonitor"
 
@@ -1194,13 +1312,17 @@ msgstr "Gnome-Systemmonitor"
 msgid "Origin at 12 o'clock"
 msgstr "Ursprung bei 12 Uhr"
 
+#. 5.6->settings-schema.json->Mem_showAmountsInTooltip->description
+msgid "Show Memory/Swap byte amounts (Total, Used, Available) in the tooltip"
+msgstr "Speicher/Swap (gesamt, belegt, verfügbar) in Bytes im Tooltip anzeigen"
+
 #. 5.6->settings-schema.json->Mem_showBytesInTooltip->description
 msgid ""
-"Show the amounts (in Bytes) of Total, Used and Available memory in the "
-"tooltip"
+"Tooltip Memory/Swap amounts: ON = SI units (kB, MB, GB); OFF = IEC binary "
+"units (KiB, MiB, GiB)"
 msgstr ""
-"Im Tooltip den gesamten, belegten und verfügbaren Speicher (in Bytes) "
-"anzeigen"
+"Speicher/Swap im Tooltip: EIN = SI-Einheiten (kB, MB, GB); AUS = IEC "
+"Binärpräfixe (KiB, MiB, GiB)"
 
 #. 5.6->settings-schema.json->Mem_value_display->description
 msgid "Display memory usage percentage"
@@ -1231,7 +1353,7 @@ msgstr "Immer"
 #. 5.6->settings-schema.json->DiskUsage_valueCorner->description
 #. 5.6->settings-schema.json->Battery_valueCorner->description
 msgid "Where to display this"
-msgstr "Wo das angezeigt wird"
+msgstr "Position im Diagramm"
 
 #. 5.6->settings-schema.json->Mem_valueCorner->options
 #. 5.6->settings-schema.json->DiskUsage_valueCorner->options
@@ -1275,6 +1397,10 @@ msgstr "100%"
 #. 5.6->settings-schema.json->Mem_swapWidth->options
 msgid "25%, left side"
 msgstr "25%, linke Seite"
+
+#. 5.6->settings-schema.json->Mem_swapWidth->options
+msgid "50%, left side"
+msgstr "50%, linke Seite"
 
 #. 5.6->settings-schema.json->Mem_swapWidth->tooltip
 msgid ""
@@ -1519,6 +1645,11 @@ msgstr "Laden"
 msgid "Unload"
 msgstr "Entladen"
 
+#. 5.6->settings-schema.json->Net_total1decimal->description
+#. 5.6->settings-schema.json->Disk_speed1decimal->description
+msgid "Show 1 decimal"
+msgstr "Eine Nachkommastelle anzeigen"
+
 #. 5.6->settings-schema.json->color0->description
 msgid "Color #0"
 msgstr "Farbe #0"
@@ -1650,6 +1781,46 @@ msgstr "Farbe #31"
 #. 5.6->settings-schema.json->labelWarning->description
 msgid "Data marked with ⚠️ must not be changed!"
 msgstr "Mit ⚠️ markierte Daten dürfen nicht verändert werden!"
+
+#. 5.6->settings-schema.json->SysMonWhichOne->description
+msgid "Which System Monitor"
+msgstr "Welcher Systemmonitor"
+
+#. 5.6->settings-schema.json->SysMonWhichOne->options
+msgid "System Default"
+msgstr "Systemstandard"
+
+#. 5.6->settings-schema.json->SysMonWhichOne->options
+msgid "Custom"
+msgstr "Angepasst"
+
+#. 5.6->settings-schema.json->SysMonPath->description
+msgid "Complete name of a .desktop file or a flatpak id"
+msgstr "Vollständiger Name einer .desktop Datei oder Flatpak Id"
+
+#. 5.6->settings-schema.json->SysMonPath->tooltip
+msgid ""
+"EXAMPLES:\n"
+"gnome-system-monitor.desktop\n"
+"org.gnome.SystemMonitor.desktop\n"
+"io.github.hakandundar34coding.system-monitoring-center"
+msgstr ""
+"BEISPIELE:\n"
+"gnome-system-monitor.desktop\n"
+"org.gnome.SystemMonitor.desktop\n"
+"io.github.hakandundar34coding.system-monitoring-center"
+
+#. 5.6->settings-schema.json->SysMonMouseButton->description
+msgid "Which mouse button opens your System Monitor"
+msgstr "Welche Maustaste öffnet den Systemmonitor"
+
+#. 5.6->settings-schema.json->SysMonMouseButton->options
+msgid "Middle"
+msgstr "Mittlere"
+
+#. 5.6->settings-schema.json->SysMonMouseButton->options
+msgid "Both"
+msgstr "Beide"
 
 #. 3.0/prefsui.glade:49 3.2/prefsui.glade:49 3.4/prefsui.glade:49
 #. 4.0/prefsui.glade:56

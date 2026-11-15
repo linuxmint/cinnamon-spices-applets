@@ -1,0 +1,135 @@
+.airaware-menu {
+    min-width: 300px;
+    max-width: 380px;
+}
+
+.airaware-title {
+    font-weight: bold;
+    font-size: 1.08em;
+}
+
+.airaware-submenu-title {
+    font-weight: bold;
+    font-size: 1.08em;
+}
+
+.airaware-submenu-header-box {
+    min-width: 220px;
+    max-width: 330px;
+    spacing: 10px;
+}
+
+.airaware-subtitle {
+    opacity: 0.82;
+    font-size: 0.9em;
+    max-width: 330px;
+}
+
+.airaware-row {
+    spacing: 10px;
+}
+
+.airaware-pollutant-row {
+    spacing: 10px;
+}
+
+.airaware-row-label {
+    min-width: 134px;
+    max-width: 134px;
+}
+
+.airaware-row-value {
+    max-width: 190px;
+}
+
+.airaware-column-label {
+    min-width: 134px;
+    max-width: 134px;
+}
+
+.airaware-column-middle {
+    min-width: 68px;
+    max-width: 68px;
+}
+
+.airaware-column-value {
+    min-width: 102px;
+    max-width: 102px;
+}
+
+.airaware-pollutant-value {
+    min-width: 102px;
+    max-width: 102px;
+}
+
+.airaware-aqi-value {
+    min-width: 68px;
+    max-width: 68px;
+}
+
+.airaware-score-summary {
+    spacing: 2px;
+    padding-top: 2px;
+    padding-bottom: 6px;
+}
+
+.airaware-score-top-row {
+    spacing: 10px;
+}
+
+.airaware-score-value {
+    font-weight: bold;
+    font-size: 1.55em;
+}
+
+.airaware-score-category {
+    font-weight: bold;
+}
+
+.airaware-score-place {
+    max-width: 102px;
+    font-size: 1.05em;
+    font-weight: bold;
+}
+
+.airaware-score-risk-low {
+    color: #45BF75;
+}
+
+.airaware-score-risk-moderate {
+    color: #D6B84D;
+}
+
+.airaware-score-risk-high {
+    color: #F28C38;
+}
+
+.airaware-score-risk-very-high {
+    color: #E05252;
+}
+
+.airaware-muted {
+    opacity: 0.82;
+}
+
+.airaware-refresh-age {
+    opacity: 0.82;
+    max-width: 165px;
+    text-align: right;
+}
+
+.airaware-refresh-label {
+    opacity: 0.82;
+}
+
+.airaware-action-content {
+    spacing: 12px;
+}
+
+.airaware-action-icon-slot {
+    min-width: 16px;
+}
+
+.airaware-action-emoji {
+    font-size: 1em;
+}

@@ -5,7 +5,13 @@
         "page_general": {
             "type": "page",
             "title" : "General",
-            "sections" : ["section_config", "section_values", "section_gui"]
+            "sections" : [
+                "section_config",
+                "section_values",
+                "section_geoip",
+                "section_resume_detect",
+                "section_gui"
+            ]
         },
         "page_presets": {
             "type": "page",
@@ -42,6 +48,25 @@
                 "minimum_temp",
                 "maximum_temp",
                 "save_every"
+            ]
+        },
+        "section_geoip": {
+            "type": "section",
+            "title": "Geolocation",
+            "keys": [
+                "use_geoip_values",
+                "geolat",
+                "geolon",
+                "geoip_button",
+                "preset_reload"
+            ]
+        },
+        "section_resume_detect":{
+            "type": "section",
+            "title": "Resume Detection",
+            "keys": [
+                "resume_detect_label",
+                "resume_detect_method"
             ]
         },
         "section_gui": {
@@ -163,7 +188,7 @@
         "description": "Way to set this applet off",
         "dependency": "toggle_on_off_shortcut!=::"
     },
-    
+
     "gamma_or_temp": {
         "type": "combobox",
         "default": "gamma",
@@ -280,7 +305,7 @@
     "preset_list": {
         "type": "list",
         "description": "Your presets",
-        "dependency": "gamma_or_temp=gamma", 
+        "dependency": "gamma_or_temp=gamma",
         "columns" : [
             {"id": "name", "title": "Name", "type": "string", "expand-width": true},
             {"id": "show", "title": "Show\nin menu", "type": "boolean", "align": 0.5},
@@ -328,7 +353,7 @@
     "preset_list_temp": {
         "type": "list",
         "description": "Your presets",
-        "dependency": "gamma_or_temp=temp", 
+        "dependency": "gamma_or_temp=temp",
         "columns" : [
             {"id": "name", "title": "Name", "type": "string", "expand-width": true},
             {"id": "show", "title": "Show\nin menu", "type": "boolean", "align": 0.5},
@@ -365,20 +390,37 @@
             }
         ]
     },
-    
+
+    "resume_detect_label": {
+        "type": "label",
+        "description": "How to detect when the system exits sleep/hibernation/suspension mode.\n- Simple: No graphics activity or changes in the screen saver's state will be detected.\n- Graphics: Graphics activity will be detected.\n- Screen Saver: Changes in the screen saver's state will be detected.\n - Both: Graphics activity and changes in the screen saver’s state will be detected.\n\nAny method other than “Simple” may cause slight flickering, especially during startup."
+    },
+
+    "resume_detect_method": {
+        "type": "combobox",
+        "default": "N",
+        "description": "Method for detecting when the display exits standby mode",
+        "options" : {
+            "Simple": "N",
+            "Graphical": "G",
+            "Screen saver": "S",
+            "Both": "B"
+        }
+    },
+
     "show_shortcuts_in_menu": {
         "type": "switch",
         "default": false,
         "description": "Show shortcuts in the menu"
     },
-    
+
     "preset_selected_keybind": {
         "type": "keybinding",
         "default": "::",
         "description": "Choose a shortcut to copy",
         "tooltip": "Helps you select a keyboard shortcut to use in any of the items listed above.\nOnce selected, click on the button below, then edit the item to paste (Ctrl+V) this shortcut."
     },
-    
+
     "preset_copy_keybind": {
         "type": "button",
         "description": "Copy this shortcut to the clipboard",
@@ -396,12 +438,38 @@
         "description": "Apply all changes",
         "callback": "on_preset_reload_button_clicked"
     },
-    
+
     "values_reload": {
         "type": "button",
         "description": "Apply the selected method",
         "callback": "on_values_reload_button_clicked",
         "dependency": "xsct_is_present"
+    },
+
+    "use_geoip_values": {
+        "type": "switch",
+        "default": false,
+        "description": "Use your own values below"
+    },
+
+    "geolat": {
+        "type": "entry",
+        "default": "91.0",
+        "description": "Latitude",
+        "tooltip": "The default value is an invalid value to ensure it is always updated at startup.\nIf the default value is valid, it means that this value has been calculated."
+    },
+
+    "geolon": {
+        "type": "entry",
+        "default": "181.0",
+        "description": "Longitude",
+        "tooltip": "The default value is an invalid value to ensure it is always updated at startup.\nIf the default value is valid, it means that this value has been calculated."
+    },
+
+    "geoip_button": {
+        "type": "button",
+        "description": "Change these values by using geolocation by ip",
+        "callback": "on_geoip_button_clicked"
     },
 
     "last_values_string_temp" : {
@@ -418,14 +486,19 @@
         "type": "generic",
         "default" : 1
     },
-    
+
     "xsct_is_present" : {
         "type": "generic",
         "default" : false
     },
-    
+
     "screen_temp": {
         "type": "generic",
         "default" : 6500
+    },
+
+    "last_resume_date": {
+        "type": "generic",
+        "default" : ""
     }
 }

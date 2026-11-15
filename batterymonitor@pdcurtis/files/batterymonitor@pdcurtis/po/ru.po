@@ -32,12 +32,12 @@ msgstr "Некоторые Зависимости не Установлены"
 #: 5.4/applet.js:327
 #, fuzzy
 msgid ""
-"Both 'sox' and 'zenity' are required for this applet to have all of its "
+"Both 'sox' and 'xenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts.\n"
 "\n"
 "Please view the README for help on installing them.\n"
 msgstr ""
-"'sox' и 'zenity' необходимы для текстовых и звуковых уведомлений .\n"
+"'sox' и 'xenity' необходимы для текстовых и звуковых уведомлений .\n"
 "\n"
 "Пожалуйста прочтите README для информации по установке."
 
@@ -148,12 +148,12 @@ msgstr "Некоторые Зависимости не Установлены"
 
 #: 3.2/applet.js:160
 msgid ""
-"'upower', 'sox' and 'zenity' are required for this applet to have all its "
+"'upower', 'sox' and 'xenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
 "\n"
 "Please read the help file on how to install them."
 msgstr ""
-"'upower','sox' и 'zenity' необходимы чтобы апплет имел возможность получать "
+"'upower','sox' и 'xenity' необходимы чтобы апплет имел возможность получать "
 "информациб о батарее и показывать текстовые и звуковые уведомления.\n"
 "Пожалуйста, прочтите README для инструкции по установке."
 

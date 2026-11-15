@@ -1,0 +1,1056 @@
+# occitan translation file.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Quentin PAGÈS, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-10-30 03:10+0000\n"
+"PO-Revision-Date: 2025-09-25 18:10+0200\n"
+"Last-Translator: Quentin PAGÈS\n"
+"Language-Team: \n"
+"Language: oc\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.7\n"
+
+#. 4.0/applet.js:62
+msgid "Initializing"
+msgstr "Inicializacion"
+
+#. 4.0/applet.js:79 5.8/applet.js:100
+msgid "Find files..."
+msgstr "Recercar de fichièrs..."
+
+#. 4.0/applet.js:294
+msgid "Please wait..."
+msgstr "Esperatz..."
+
+#. 4.0/applet.js:889 5.8/applet.js:962 5.8/applet.js:1215
+msgid "Applications"
+msgstr "Aplicacions"
+
+#. 4.0/applet.js:893 5.8/applet.js:966
+msgid "Documents"
+msgstr "Documents"
+
+#. 4.0/applet.js:897 5.8/applet.js:970
+msgid "Videos"
+msgstr "Vidèos"
+
+#. 4.0/applet.js:901 5.8/applet.js:974
+msgid "Images"
+msgstr "Imatges"
+
+#. 4.0/applet.js:905 5.8/applet.js:978
+msgid "Music"
+msgstr "Musica"
+
+#. 4.0/applet.js:914 5.8/applet.js:987
+msgid "No recent Items"
+msgstr "Cap d’element recent"
+
+#. 4.0/applet.js:962 5.8/applet.js:1047
+msgid "Settings"
+msgstr "Paramètres"
+
+#. 4.0/applet.js:1100
+msgid "Applications and files"
+msgstr "Aplicacions e fichièrs"
+
+#. 4.0/applet.js:1103 5.8/applet.js:1221
+msgid "Other search results"
+msgstr "Autres resultats de recèrca"
+
+#. 4.0/applet.js:1106 5.8/applet.js:1224
+msgid "Browser bookmarks"
+msgstr "Percórrer los favorits"
+
+#. 4.0/applet.js:1109 5.8/applet.js:1227
+msgid "Browser history"
+msgstr "Percórrer l’istoric"
+
+#. 4.0/applet.js:1112 4.0/categoriesview.js:305 5.8/applet.js:1230
+#. 5.8/categoriesview.js:321
+msgid "Emoji"
+msgstr "Emoji"
+
+#. 4.0/applet.js:1166 4.0/applet.js:1305 4.0/applet.js:1808 5.8/applet.js:1277
+msgid "Click to copy"
+msgstr "Clicar per copiar"
+
+#. 4.0/applet.js:1608 5.8/applet.js:1735
+msgid "Clear List"
+msgstr "Escafar la lista"
+
+#. 4.0/applet.js:1645 4.0/applet.js:1646 5.8/applet.js:1772 5.8/applet.js:1773
+msgid "Trash"
+msgstr "Escobilhièr"
+
+#. 4.0/applet.js:1657 4.0/applet.js:1658 5.8/applet.js:1784 5.8/applet.js:1785
+msgid "Computer"
+msgstr "Ordenador"
+
+#. 4.0/appsview.js:303 4.0/sidebar.js:111 5.8/appsview.js:329
+#. 5.8/sidebar.js:133
+msgid "Error while opening file:"
+msgstr "Error a la dobertura del fichièr :"
+
+#. 4.0/appsview.js:451 5.8/appsview.js:532
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Tròpas d’entrada – afichatge de las primièras 1000 entradas solament"
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0/categoriesview.js:283 5.8/categoriesview.js:299
+msgid "All applications"
+msgstr "Totas las aplicacions"
+
+#. 4.0/categoriesview.js:301 5.8/categoriesview.js:317
+msgid "Favorites"
+msgstr "Favorits"
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0/categoriesview.js:302 5.8/categoriesview.js:318
+msgid "Places"
+msgstr "Emplaçaments"
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0/categoriesview.js:303 5.8/categoriesview.js:319
+msgid "Recent"
+msgstr "Recents"
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0/categoriesview.js:304 5.8/categoriesview.js:320
+msgid "Favorite apps"
+msgstr "Aplicacions favoritas"
+
+#. 4.0/contextmenu.js:111 5.8/contextmenu.js:154
+msgid "light skin tone"
+msgstr "color de pèl clara"
+
+#. 4.0/contextmenu.js:112 5.8/contextmenu.js:155
+msgid "medium-light skin tone"
+msgstr "color de pèl mejana clara"
+
+#. 4.0/contextmenu.js:113 5.8/contextmenu.js:156
+msgid "medium skin tone"
+msgstr "color de pèl mejana"
+
+#. 4.0/contextmenu.js:114 5.8/contextmenu.js:157
+msgid "medium-dark skin tone"
+msgstr "color de pèl mejana escura"
+
+#. 4.0/contextmenu.js:115 5.8/contextmenu.js:158
+msgid "dark skin tone"
+msgstr "color de pèl escura"
+
+#. 4.0/contextmenu.js:134 5.8/contextmenu.js:177
+msgid "Remove category"
+msgstr "Tirar la categoria"
+
+#. 4.0/contextmenu.js:148 5.8/contextmenu.js:191
+msgid "Reset category order"
+msgstr "Reïnicializa l'òrdre de las categorias"
+
+#. 4.0/contextmenu.js:171 5.8/contextmenu.js:214
+msgid "List settings apps separately"
+msgstr "Listrar los paramètres d’aplicacion separadament"
+
+#. 4.0/contextmenu.js:178 5.8/contextmenu.js:221
+msgid "Single list style"
+msgstr "Estil lista simpla"
+
+#. 4.0/contextmenu.js:187 5.8/contextmenu.js:230
+msgid "Hide hidden files"
+msgstr "Amagar los fichièrs amagats"
+
+#. 4.0->settings-schema.json->show-hidden-files->description
+#. 5.8->settings-schema.json->show-hidden-files->description
+#. 4.0/contextmenu.js:194 5.8/contextmenu.js:237
+msgid "Show hidden files"
+msgstr "Afichar los fichièrs amagats"
+
+#. 4.0/contextmenu.js:250 4.0/contextmenu.js:259 5.8/contextmenu.js:290
+msgid "Run with NVIDIA GPU"
+msgstr "Executar amb NVIDIA GPU"
+
+#. 4.0/contextmenu.js:268 5.8/contextmenu.js:303
+msgid "Add to panel"
+msgstr "Apondre al tablèu de bòrd"
+
+#. 4.0/contextmenu.js:287 5.8/contextmenu.js:324
+msgid "Add to desktop"
+msgstr "Apondre al burèu"
+
+#. 4.0/contextmenu.js:301 4.0/contextmenu.js:399 5.8/contextmenu.js:341
+#. 5.8/contextmenu.js:490
+msgid "Remove from favorites"
+msgstr "Suprimir dels favorits"
+
+#. 4.0/contextmenu.js:305 4.0/contextmenu.js:404 5.8/contextmenu.js:348
+#. 5.8/contextmenu.js:497
+msgid "Add to favorites"
+msgstr "Apondre als favorits"
+
+#. 4.0/contextmenu.js:312 5.8/contextmenu.js:358
+msgid "Uninstall"
+msgstr "Desinstallar"
+
+#. 4.0/contextmenu.js:322 5.8/contextmenu.js:368
+msgid "App Info"
+msgstr "Info aplicacion"
+
+#. 4.0/contextmenu.js:331 5.8/contextmenu.js:377
+msgid "Properties"
+msgstr "Proprietats"
+
+#. 4.0/contextmenu.js:349 5.8/contextmenu.js:450
+msgid "This file is no longer available"
+msgstr "Aqueste fichièr es pas mai disponible"
+
+#. 4.0/contextmenu.js:357 5.8/contextmenu.js:458
+msgid "Open with"
+msgstr "Dobrir amb"
+
+#. 4.0/contextmenu.js:378 5.8/contextmenu.js:479
+msgid "Other application..."
+msgstr "Autra aplicacion…"
+
+#. 4.0/contextmenu.js:420 5.8/contextmenu.js:510
+msgid "Add folder as category"
+msgstr "Apondre un dorsièr coma categoria"
+
+#. 4.0/contextmenu.js:437 5.8/contextmenu.js:527 4.0/search.py:48
+#. 5.8/search.py:48
+msgid "Open containing folder"
+msgstr "Dobrir lo dorsièr contenent"
+
+#. 4.0/contextmenu.js:453 4.0/contextmenu.js:466 5.8/contextmenu.js:547
+#. 5.8/contextmenu.js:560
+msgid "Move to trash"
+msgstr "Metre dins l'escobilhièr"
+
+#. 4.0/contextmenu.js:459 5.8/contextmenu.js:553
+msgid "Error while moving file to trash:"
+msgstr "Error en desplaçant de fichièrs a l’escobilhièr :"
+
+#. 4.0/emoji.js:7739 5.8/emoji.js:8
+msgid "Smileys & Emotion"
+msgstr "Emoticònas e emocions"
+
+#. 4.0/emoji.js:7740 5.8/emoji.js:689
+msgid "People & Body"
+msgstr "Gent e còs"
+
+#. 4.0/emoji.js:7741 5.8/emoji.js:2253
+msgid "Animals & Nature"
+msgstr "Animals e natura"
+
+#. 4.0/emoji.js:7742 5.8/emoji.js:2873
+msgid "Food & Drink"
+msgstr "Beure e manjar"
+
+#. 4.0/emoji.js:7743 5.8/emoji.js:3421
+msgid "Travel & Places"
+msgstr "Viatges e luòcs"
+
+#. 4.0/emoji.js:7744 5.8/emoji.js:4297
+msgid "Activities"
+msgstr "Activitats"
+
+#. 4.0/emoji.js:7745 5.8/emoji.js:4641
+msgid "Objects"
+msgstr "Objèctes"
+
+#. 4.0/emoji.js:7746 5.8/emoji.js:5701
+msgid "Symbols"
+msgstr "Simbòls"
+
+#. 4.0/emoji.js:7747 5.8/emoji.js:6601
+msgid "Flags"
+msgstr "Drapèls"
+
+#. 4.0/sidebar.js:251 5.8/sidebar.js:266
+msgid "Quit"
+msgstr "Quitar"
+
+#. 4.0/sidebar.js:252 5.8/sidebar.js:267
+msgid "Shutdown the computer"
+msgstr "Atudar l’ordenador"
+
+#. 4.0/sidebar.js:260 5.8/sidebar.js:277
+msgid "Logout"
+msgstr "Se desconnectar"
+
+#. 4.0/sidebar.js:261 5.8/sidebar.js:278
+msgid "Leave the session"
+msgstr "Tampar la session"
+
+#. 4.0/sidebar.js:269 5.8/sidebar.js:287
+msgid "Lock screen"
+msgstr "Verrolhar l'ecran"
+
+#. 4.0/sidebar.js:270 5.8/sidebar.js:288
+msgid "Lock the screen"
+msgstr "Verrolhar l'ecran"
+
+#. 5.8/applet.js:1032
+#, fuzzy
+msgid "Loading..."
+msgstr "Recèrca..."
+
+#. 5.8/applet.js:1218
+msgid "Files"
+msgstr "Fichièrs"
+
+#. 5.8/applet.js:1248 5.8/applet.js:1254
+msgid "Calculator: "
+msgstr "Calculadoira : "
+
+#. 5.8/applet.js:1429 5.8/applet.js:1956
+msgid "Click to insert emoji"
+msgstr ""
+
+#. 5.8/applet.js:1926
+msgid "Back"
+msgstr ""
+
+#. 4.0/mint-remove-application.py:34
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Aqueste menú es pas associat a cap de paquet. Lo volètz tirar del menú "
+"malgrat tot ?"
+
+#. 4.0/mint-remove-application.py:75
+msgid "The following packages will be removed:"
+msgstr "Los paquets seguents seràn tirats :"
+
+#. 4.0/mint-remove-application.py:82
+msgid "Packages to be removed"
+msgstr "Paquets de suprimir"
+
+#. 4.0/mint-remove-application.py:143
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr ""
+"Impossible de tirar lo paquet %s estant qu'es requerit per d’autres paquets."
+
+#. 4.0/mint-remove-application.py:149
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Lo paquet %s es una dependéncias dels paquets seguents :"
+
+#. 4.0/search.py:43 5.8/search.py:43
+msgid "Open"
+msgstr "Dobrir"
+
+#. 4.0->settings-schema.json->search->title
+#. 4.0->settings-schema.json->search-search->title
+#. 5.8->settings-schema.json->search->title
+#. 5.8->settings-schema.json->search-search->title
+#. 4.0/search.py:85 5.8/search.py:85
+msgid "Search"
+msgstr "Recercar"
+
+#. 4.0/search.py:106 5.8/search.py:106
+msgid "Start in"
+msgstr "Començar per"
+
+#. 4.0/search.py:107 5.8/search.py:107
+msgid "Select a folder"
+msgstr "Seleccionar un dorsièr"
+
+#. 4.0/search.py:113 5.8/search.py:113
+msgid "Follow symlinks"
+msgstr "Seguir los ligams simbolics"
+
+#. 4.0/search.py:117 5.8/search.py:117
+msgid "Search hidden"
+msgstr "Recercar dins los repertòris amagats"
+
+#. 4.0/search.py:121 5.8/search.py:121
+msgid "Use regular expressions"
+msgstr "Utilizar d'expressions racionalas"
+
+#. 4.0/search.py:125 5.8/search.py:125
+msgid "Stop"
+msgstr "Arrestar"
+
+#. 4.0/search.py:140 5.8/search.py:140
+msgid "File"
+msgstr "Fichièr"
+
+#. 4.0/search.py:156 5.8/search.py:156
+msgid "Path"
+msgstr "Emplaçament"
+
+#. 4.0/search.py:184 5.8/search.py:184
+msgid "Searching..."
+msgstr "Recèrca..."
+
+#. 4.0/search.py:198 4.0/search.py:199 5.8/search.py:198 5.8/search.py:199
+msgid "Search Stopped"
+msgstr "Recèrca arrestada"
+
+#. 4.0/search.py:215 5.8/search.py:215
+msgid "Searching: "
+msgstr "Recèrca : "
+
+#. 4.0/search.py:220 5.8/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Error : autorizacion insufisenta per legir lo dorsièr "
+
+#. 4.0/search.py:252 5.8/search.py:252
+msgid "Search Completed"
+msgstr "Recèrca acabada"
+
+#. 4.0/search.py:259 5.8/search.py:259
+msgid "Skipping"
+msgstr "Ignorant"
+
+#. 4.0/search.py:259 5.8/search.py:259
+msgid " - directory already searched"
+msgstr " - repertòri ja furgat"
+
+#. metadata.json->name
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Un menú flexible amb opcions d’agençament en grasilha o lista, navegador de "
+"fichièrs e recèrca d’emoji."
+
+#. 4.0->settings-schema.json->layout->title
+#. 4.0->settings-schema.json->menu-layout->title
+#. 5.8->settings-schema.json->layout->title
+#. 5.8->settings-schema.json->menu-layout->title
+msgid "Layout"
+msgstr "Disposicion"
+
+#. 4.0->settings-schema.json->behaviour->title
+#. 5.8->settings-schema.json->behaviour->title
+msgid "Behavior"
+msgstr "Compòrtament"
+
+#. 4.0->settings-schema.json->appearance->title
+#. 5.8->settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr "Aparéncia"
+
+#. 4.0->settings-schema.json->tips->title
+#. 4.0->settings-schema.json->tips-section->title
+#. 5.8->settings-schema.json->tips->title
+#. 5.8->settings-schema.json->tips-section->title
+msgid "Tips"
+msgstr "Astúcias"
+
+#. 4.0->settings-schema.json->menu-content->title
+#. 5.8->settings-schema.json->menu-content->title
+msgid "Content"
+msgstr "Contengut"
+
+#. 4.0->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-appear->title
+#. 5.8->settings-schema.json->panel-behave->title
+#. 5.8->settings-schema.json->panel-appear->title
+msgid "Panel"
+msgstr "Tablèu de bòrd"
+
+#. 4.0->settings-schema.json->menu-behave->title
+#. 4.0->settings-schema.json->menu-icons->title
+#. 5.8->settings-schema.json->menu-behave->title
+#. 5.8->settings-schema.json->menu-icons->title
+msgid "Menu"
+msgstr "Menú"
+
+#. 4.0->settings-schema.json->applications-view-mode->description
+#. 5.8->settings-schema.json->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "Mòde de visualizacion de las aplicacions"
+
+#. 4.0->settings-schema.json->applications-view-mode->options
+#. 5.8->settings-schema.json->applications-view-mode->options
+msgid "List"
+msgstr "Lista"
+
+#. 4.0->settings-schema.json->applications-view-mode->options
+#. 5.8->settings-schema.json->applications-view-mode->options
+msgid "Grid"
+msgstr "Grasilha"
+
+#. 4.0->settings-schema.json->applications-view-mode->tooltip
+#. 5.8->settings-schema.json->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "Afichar las aplicacions coma lista o grasilha"
+
+#. 4.0->settings-schema.json->show-sidebar->description
+#. 5.8->settings-schema.json->show-sidebar->description
+msgid "Show sidebar"
+msgstr "Afichar lo tablèu de bòrd lateral"
+
+#. 4.0->settings-schema.json->show-sidebar->tooltip
+#. 5.8->settings-schema.json->show-sidebar->tooltip
+msgid "Show the sidebar in the menu"
+msgstr "Afichar la barra laterala dins lo menú"
+
+#. 4.0->settings-schema.json->sidebar-placement->description
+#. 5.8->settings-schema.json->sidebar-placement->description
+msgid "Sidebar location"
+msgstr "Emplaçament de la barra laterala"
+
+#. 4.0->settings-schema.json->sidebar-placement->options
+#. 5.8->settings-schema.json->sidebar-placement->options
+msgid "Top"
+msgstr "Naut"
+
+#. 4.0->settings-schema.json->sidebar-placement->options
+#. 5.8->settings-schema.json->sidebar-placement->options
+msgid "Bottom"
+msgstr "Bas"
+
+#. 4.0->settings-schema.json->sidebar-placement->options
+#. 5.8->settings-schema.json->sidebar-placement->options
+msgid "Left"
+msgstr "Esquèrra"
+
+#. 4.0->settings-schema.json->sidebar-placement->options
+#. 5.8->settings-schema.json->sidebar-placement->options
+msgid "Right"
+msgstr "Drecha"
+
+#. 4.0->settings-schema.json->sidebar-placement->tooltip
+#. 5.8->settings-schema.json->sidebar-placement->tooltip
+msgid "Choose where to show the sidebar"
+msgstr "Causissètz ont afichar la barra laterala"
+
+#. 4.0->settings-schema.json->sidebar-favorites->description
+#. 5.8->settings-schema.json->sidebar-favorites->description
+msgid "Show favorites on sidebar"
+msgstr "Afichar los favorits sus la barra laterala"
+
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "None"
+msgstr "Pas cap"
+
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->sidebar-favorites->options
+msgid "Apps only"
+msgstr "Aplicacions solament"
+
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->sidebar-favorites->options
+msgid "Files only"
+msgstr "Fichièrs solament"
+
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->sidebar-favorites->options
+msgid "Apps and files"
+msgstr "Aplicacions e fichièrs"
+
+#. 4.0->settings-schema.json->sidebar-favorites->tooltip
+#. 5.8->settings-schema.json->sidebar-favorites->tooltip
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr ""
+"Afichar vòstras aplicacions favoritas e las icònas de fichièr sus la barra "
+"laterala"
+
+#. 4.0->settings-schema.json->description-placement->description
+#. 5.8->settings-schema.json->description-placement->description
+msgid "Application description placement"
+msgstr "Emplaçament de la descripcion de l’aplicacion"
+
+#. 4.0->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->description-placement->options
+msgid "Tooltips"
+msgstr "Infobullas"
+
+#. 4.0->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->description-placement->options
+msgid "Under titles"
+msgstr "Jos los títols"
+
+#. 4.0->settings-schema.json->description-placement->tooltip
+#. 5.8->settings-schema.json->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "Causissètz ont afichar la descripcion de las aplicacions"
+
+#. 4.0->settings-schema.json->show-categories->description
+#. 5.8->settings-schema.json->show-categories->description
+msgid "Show categories"
+msgstr "Afichar las categorias"
+
+#. 4.0->settings-schema.json->show-categories->tooltip
+#. 5.8->settings-schema.json->show-categories->tooltip
+msgid "Show list of application categories"
+msgstr "Afichar la lista de las categorias d'aplicacions"
+
+#. 4.0->settings-schema.json->show-places-category->description
+#. 5.8->settings-schema.json->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "Afichar los favorits e los emplaçaments"
+
+#. 4.0->settings-schema.json->show-places-category->tooltip
+#. 5.8->settings-schema.json->show-places-category->tooltip
+msgid "Show bookmarks and places category in the menu"
+msgstr "Afichar los favorits e los emplaçaments al menú"
+
+#. 4.0->settings-schema.json->show-recents-category->description
+#. 5.8->settings-schema.json->show-recents-category->description
+msgid "Show recent items"
+msgstr "Afichar las elements recents"
+
+#. 4.0->settings-schema.json->show-recents-category->tooltip
+#. 5.8->settings-schema.json->show-recents-category->tooltip
+msgid "Show recent items category in the menu"
+msgstr "Afichar la categoria d'articles recents dins lo menú"
+
+#. 4.0->settings-schema.json->show-favorite-apps-category->description
+#. 5.8->settings-schema.json->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr "Afichar la categoria d'aplicacions favoridas"
+
+#. 4.0->settings-schema.json->show-favorite-apps-category->tooltip
+#. 5.8->settings-schema.json->show-favorite-apps-category->tooltip
+msgid "Show your favorite apps category in the menu"
+msgstr "Afichar la categoria de vòstras aplicacions favoridas dins lo menú"
+
+#. 4.0->settings-schema.json->show-home-folder-category->description
+#. 5.8->settings-schema.json->show-home-folder-category->description
+msgid "Show home folder"
+msgstr "Afichar lo repertòri personal"
+
+#. 4.0->settings-schema.json->show-home-folder-category->tooltip
+#. 5.8->settings-schema.json->show-home-folder-category->tooltip
+msgid "Show home folder category in the menu"
+msgstr "Afichar la categoria del repertòri personal dins lo menú"
+
+#. 4.0->settings-schema.json->show-emoji-category->description
+#. 5.8->settings-schema.json->show-emoji-category->description
+msgid "Show emoji category"
+msgstr "Afichar la categoria emoji"
+
+#. 4.0->settings-schema.json->show-emoji-category->tooltip
+#. 5.8->settings-schema.json->show-emoji-category->tooltip
+msgid "Show emoji category in the menu"
+msgstr "Afichar la categoria emoji al menú"
+
+#. 4.0->settings-schema.json->menu-editor-button->description
+#. 5.8->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Dobrir l’editor de menú"
+
+#. 4.0->settings-schema.json->overlay-key->description
+#. 5.8->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Acorchi de clavièr per dobrir e tampar lo menú"
+
+#. 4.0->settings-schema.json->activate-on-hover->description
+#. 5.8->settings-schema.json->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "Dobrir lo menú al subrevòl"
+
+#. 4.0->settings-schema.json->activate-on-hover->tooltip
+#. 5.8->settings-schema.json->activate-on-hover->tooltip
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Dobrir lo menú quand desplaci la mirga sus l'icòna del tablèu de bòrd"
+
+#. 4.0->settings-schema.json->hover-delay->units
+#. 5.8->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "millisegondas"
+
+#. 4.0->settings-schema.json->hover-delay->description
+#. 5.8->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Relambi de subrevòl del menú"
+
+#. 4.0->settings-schema.json->enable-animation->description
+#. 5.8->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Utiliza las animacions del menú"
+
+#. 4.0->settings-schema.json->enable-animation->tooltip
+#. 5.8->settings-schema.json->enable-animation->tooltip
+msgid "Animate the menu on open and close"
+msgstr "Animar lo menú en dobrissent e tampant"
+
+#. 4.0->settings-schema.json->category-click->description
+#. 5.8->settings-schema.json->category-click->description
+msgid "Activate categories on click"
+msgstr "Activar las categorias en clicant"
+
+#. 4.0->settings-schema.json->category-click->tooltip
+#. 5.8->settings-schema.json->category-click->tooltip
+msgid "Activate categories on click instead of on hover"
+msgstr "Activar las categorias en clicant a la plaça del subrevòl"
+
+#. 4.0->settings-schema.json->open-on-category->description
+#. 5.8->settings-schema.json->open-on-category->description
+msgid "Open menu on category:"
+msgstr "Dobrir lo menú a la categoria :"
+
+#. 4.0->settings-schema.json->open-on-category->tooltip
+#. 5.8->settings-schema.json->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr "Totjorn dobrir lo menú amb aquesta categoria seleccionada"
+
+#. 4.0->settings-schema.json->open-on-category->options
+#. 5.8->settings-schema.json->open-on-category->options
+msgid "Last used category"
+msgstr "Darrièra categoria utilizada"
+
+#. 4.0->settings-schema.json->enable-autoscroll->description
+#. 5.8->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Activar lo defilament auto"
+
+#. 4.0->settings-schema.json->enable-autoscroll->tooltip
+#. 5.8->settings-schema.json->enable-autoscroll->tooltip
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Defilament automatic de la lista d'aplicacions al subrevòl de la mirga"
+
+#. 4.0->settings-schema.json->show-hidden-files->tooltip
+#. 5.8->settings-schema.json->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr "Mostrar los fichièrs amagats dins la vista dorsièr"
+
+#. 4.0->settings-schema.json->enable-emoji-search->description
+#. 5.8->settings-schema.json->enable-emoji-search->description
+msgid "Emoji search"
+msgstr "Recercar d’emoji"
+
+#. 4.0->settings-schema.json->enable-emoji-search->tooltip
+#. 5.8->settings-schema.json->enable-emoji-search->tooltip
+msgid "Show emojis in search results"
+msgstr "Afichar las emojis dins los resultats de recèrca"
+
+#. 4.0->settings-schema.json->web-search-option->description
+#. 5.8->settings-schema.json->web-search-option->description
+msgid "Web search option"
+msgstr "Opcion de recèrca Web"
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Google"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Bing"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Baidu"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Yahoo"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Yandex"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "DuckDuckGo"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Ask"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Ecosia"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "AOL"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Startpage"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Brave"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->options
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Qwant"
+msgstr ""
+
+#. 4.0->settings-schema.json->web-search-option->tooltip
+#. 5.8->settings-schema.json->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr "Afichar una opcion de recèrca internet dins los resultats de recèrca"
+
+#. 4.0->settings-schema.json->web-suggestions->description
+#. 5.8->settings-schema.json->web-suggestions->description
+msgid "Web search suggestions"
+msgstr "Suggestions de recèrca Web"
+
+#. 4.0->settings-schema.json->web-suggestions->tooltip
+#. 5.8->settings-schema.json->web-suggestions->tooltip
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"Amb l'opcion de recèrca web, afichar tanben las suggestions de recèrca. "
+"(Nòta : las suggestions de recèrca son provesidas per DuckDuckGo)"
+
+#. 4.0->settings-schema.json->enable-home-folder-search->description
+#. 5.8->settings-schema.json->enable-home-folder-search->description
+msgid "Search home folder"
+msgstr "Recercar dins lo repertòri personal"
+
+#. 4.0->settings-schema.json->enable-home-folder-search->tooltip
+#. 5.8->settings-schema.json->enable-home-folder-search->tooltip
+msgid "When searching, also search my home folder for files"
+msgstr ""
+"Pendent un recèrca, cercar tanben los fichièrs dins mon repertòri personal"
+
+#. 4.0->settings-schema.json->enable-web-history-search->description
+#. 5.8->settings-schema.json->enable-web-history-search->description
+msgid "Web history search"
+msgstr "Istoric de recèrca Web"
+
+#. 4.0->settings-schema.json->enable-web-history-search->tooltip
+#. 5.8->settings-schema.json->enable-web-history-search->tooltip
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox/LibreWolf history is not currently supported."
+msgstr ""
+"Pendent una recèrca, cercar tanben l'istoric de mon navegador (Google "
+"Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Nòta : l'istoric de Firefox/LibreWolf es pas actualament suportat."
+
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->description
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->description
+msgid "Web bookmarks search"
+msgstr "Recèrca de marcapaginas Web"
+
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->tooltip
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->tooltip
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave, LibreWolf)\n"
+"Note: To search Firefox/LibreWolf bookmarks you will need to install package "
+"gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or "
+"package libgda6 (Arch based distributions) and restart your computer."
+msgstr ""
+"Pendent una recèrca, cercar tanben dins los marcapaginas web del navegador "
+"(Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave, LibreWolf)\n"
+"Nòta : per cercar los marcapaginas de Firefox/LibreWolf, vos caldrà "
+"installar lo paquet gir1.2-gda-5.0 (distribucions basadas sus Debian, incl. "
+"Ubuntu e Linux Mint) o lo paquet libgda6 (distribucions basadas sus Arch) e "
+"tornar aviar vòstre ordenador."
+
+#. 4.0->settings-schema.json->search-help->description
+#. 5.8->settings-schema.json->search-help->description
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Nòta : d'unas opcions de recèrca pòdon encara èsser utilizadas quitament se "
+"las avètz pas activadas aicí en prefixant vòstre tèrme de recèrca.\n"
+"Per exemple : per cercar un emoji, picatz « e heart » per trobar los emojis "
+"de còr. De meteis, utilizatz los prefixes « f » per la recèrca de fichièrs, "
+"« h » per l'istoric web e « b » per la recèrca de marcapaginas web.\n"
+
+#. 4.0->settings-schema.json->menu-icon-custom->description
+#. 5.8->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Utilizar una icòna personalizada"
+
+#. 4.0->settings-schema.json->menu-icon-custom->tooltip
+#. 5.8->settings-schema.json->menu-icon-custom->tooltip
+msgid "Use a custom icon in the panel"
+msgstr "Utilizar una icòna personalizada dins lo tablèu de bòrd"
+
+#. 4.0->settings-schema.json->menu-icon->description
+#. 4.0->settings-schema.json->menu-icon->tooltip
+#. 5.8->settings-schema.json->menu-icon->description
+#. 5.8->settings-schema.json->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "Icòna del tablèu de bòrd"
+
+#. 4.0->settings-schema.json->menu-icon-size-custom->description
+#. 5.8->settings-schema.json->menu-icon-size-custom->description
+msgid "Use a custom icon size"
+msgstr "Utilizar una talha d’icòna personalizada"
+
+#. 4.0->settings-schema.json->menu-icon-size-custom->tooltip
+#. 5.8->settings-schema.json->menu-icon-size-custom->tooltip
+msgid "Use a custom size for the panel icon"
+msgstr "Utilizar una talha personalizada per las icònas de tablèu de bòrd"
+
+#. 4.0->settings-schema.json->menu-icon-size->description
+#. 5.8->settings-schema.json->menu-icon-size->description
+msgid "Panel icon size (pixels)"
+msgstr "Taha d’icòna de tablèu de bòrd (pixèls)"
+
+#. 4.0->settings-schema.json->menu-icon-size->tooltip
+#. 5.8->settings-schema.json->menu-icon-size->tooltip
+msgid "Choose a custom size for the panel icon"
+msgstr "Seleccionar una talha personalizada per l’icòna de tablèu de bòrd"
+
+#. 4.0->settings-schema.json->menu-label->description
+#. 5.8->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr "Tèxt del tablèu de bòrd"
+
+#. 4.0->settings-schema.json->menu-label->tooltip
+#. 5.8->settings-schema.json->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "Tèxte de mostrar al costat de l'icòna del tablèu de bòrd"
+
+#. 4.0->settings-schema.json->category-icon-size->description
+#. 4.0->settings-schema.json->category-icon-size->tooltip
+#. 5.8->settings-schema.json->category-icon-size->description
+#. 5.8->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size (pixels)"
+msgstr "Talha icòna categoria (pixèls)"
+
+#. 4.0->settings-schema.json->apps-list-icon-size->description
+#. 4.0->settings-schema.json->apps-list-icon-size->tooltip
+#. 5.8->settings-schema.json->apps-list-icon-size->description
+#. 5.8->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size (pixels)"
+msgstr "Talha icòna aplicacions (pixèls)"
+
+#. 4.0->settings-schema.json->apps-grid-icon-size->description
+#. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
+#. 5.8->settings-schema.json->apps-grid-icon-size->description
+#. 5.8->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size (pixels)"
+msgstr "Talha icòna grasilha aplicacion (pixèls)"
+
+#. 4.0->settings-schema.json->sidebar-icon-size->description
+#. 4.0->settings-schema.json->sidebar-icon-size->tooltip
+#. 5.8->settings-schema.json->sidebar-icon-size->description
+#. 5.8->settings-schema.json->sidebar-icon-size->tooltip
+msgid "Sidebar icon size (pixels)"
+msgstr "Talha barra laterala (pixèls)"
+
+#. 4.0->settings-schema.json->use-box-style->description
+#. 5.8->settings-schema.json->use-box-style->description
+msgid "Use sidebar box style"
+msgstr "Utilizar barra laterala amb estil de caissa"
+
+#. 4.0->settings-schema.json->use-box-style->tooltip
+#. 5.8->settings-schema.json->use-box-style->tooltip
+msgid "Use a sidebar box style"
+msgstr "Utilizar una barra laterala amb estil de caissa"
+
+#. 4.0->settings-schema.json->use-tile-style->description
+#. 5.8->settings-schema.json->use-tile-style->description
+msgid "Use tile style"
+msgstr "Utilizar estil mosaic"
+
+#. 4.0->settings-schema.json->use-tile-style->tooltip
+#. 5.8->settings-schema.json->use-tile-style->tooltip
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Utilizar un estil mosaic pels botons d’aplicacion (Nòta : poiriá foncionar "
+"pas sus certans tèmas)"
+
+#. 4.0->settings-schema.json->info1->description
+#. 5.8->settings-schema.json->info1->description
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• Tiratz sul bòrd del menú per cambiar la talha del menú."
+
+#. 4.0->settings-schema.json->info2->description
+#. 5.8->settings-schema.json->info3->description
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• Lisatz e depausatz las categorias de menús per cambiar lor òrdre."
+
+#. 4.0->settings-schema.json->info3->description
+#. 5.8->settings-schema.json->info4->description
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+"\n"
+"• Los dorsièrs pòdon èsser configurats e suprimits coma categorias de menú "
+"en clicant drech dessús."
+
+#. 4.0->settings-schema.json->info4->description
+#. 5.8->settings-schema.json->info5->description
+msgid ""
+"\n"
+"• Additional key option:\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+"\n"
+"• Opcion de clau addicionala :\n"
+"ctrl-d — Dobrir lo fichièr .desktop de l'aplicacion actualament seleccionada "
+"dins l'editor de tèxte per defaut.\n"
+
+#. 5.8->settings-schema.json->web-search-option->options
+msgid "Custom"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-custom-url->description
+msgid "URL for custom search"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-custom-url->tooltip
+msgid "Enter the URL that is prepended to the search query."
+msgstr ""
+
+#. 5.8->settings-schema.json->info2->description
+msgid ""
+"\n"
+"• Drag and drop apps, files, and folders onto the sidebar."
+msgstr ""
+"\n"
+"• Lisatz e depausatz d'aplicacions, de fichièrs e de dorsièrs sus la barra "
+"laterala."

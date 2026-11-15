@@ -827,7 +827,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
     },
 
      delayedNetworkingDisable: function (delay) {
-            GLib.spawn_command_line_async('zenity --warning --text="THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n\nAll network connections Managed by the Network Manager will be Disabled shortly\n\nYou can click The Applet (NOT this OK button) to abort disabling the network" --timeout='+ delay);
+            GLib.spawn_command_line_async('xenity --warning --text="THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n\nAll network connections Managed by the Network Manager will be Disabled shortly\n\nYou can click The Applet (NOT this OK button) to abort disabling the network" --timeout='+ delay);
             this.playAlert();
             this.abortFlag = false;
             Mainloop.timeout_add_seconds(delay, Lang.bind(this, this.networkingDisable));
@@ -840,7 +840,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
               new ModalDialog.NotifyDialog(_("THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n\nAll Network connections managed by the Network Manager have been Disabled\n\nYou will need to use the Network Manager Applet to Re-enable them\nwhen the data usage problem has been resolved\n\n Some connections using ppp0 may not have been disabled or may need to be restarted manually")).open();
 
           } else {
-                GLib.spawn_command_line_async('zenity --info --text=_("You have aborted network disconnection despite the data usage limit being exceeded") --timeout=30');
+                GLib.spawn_command_line_async('xenity --info --text=_("You have aborted network disconnection despite the data usage limit being exceeded") --timeout=30');
           }
       },
 
@@ -1086,7 +1086,7 @@ Version 3.2.1
 2.2.3 Addition documentation
 2.2.4 Changed 'crisis' to 'suspend' for preset script and tested. Reorder advanced functions and added separators.
 2.2.5 Three special cases now in use - suspendscript, alertscript and modalalert. Function added to implement the modal dialog used by modal alert. Testing functions still 'exposed' to users on right click function submenu.
-To think about - do we need the ability to have a terminal command option as any terminal command can be put into the alertScript file, in fact it can be a series of commands run asynchronously by ending them with a $ so a sound file could be played and a notification put up using zenity at the same time. This is a safer way ahead whilst leaving a huge flexibility for customisation. Should a different selection mechanism be used?
+To think about - do we need the ability to have a terminal command option as any terminal command can be put into the alertScript file, in fact it can be a series of commands run asynchronously by ending them with a $ so a sound file could be played and a notification put up using xenity at the same time. This is a safer way ahead whilst leaving a huge flexibility for customisation. Should a different selection mechanism be used?
 Conclusion - change to a drop down selection of options, initially the three currently in use but consider adding sound and notification options. remove terminal string option as it can be in a script file.
 2.2.6 Implemented drop down alert handling plus change back to KB from kB and replace round with floor
 2.2.7 Scripts commented and checked. Extra options of notify and do nothing added. Use now made of Sox to play audio warnings and notify-send to add notifications. sox needs to be installed

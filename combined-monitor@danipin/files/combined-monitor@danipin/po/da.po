@@ -1,0 +1,422 @@
+# Combined Monitor Applet Translation Template
+# Copyright (C) 2025 danniboy
+# This file is distributed under the same license as the Combined Monitor Applet package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Combined Monitor Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 21:36+0100\n"
+"PO-Revision-Date: 2026-10-25 10:55+0100\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
+"Language-Team: (none)\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "Plads 1 (standard)"
+
+msgid "Slot 2 (Empty)"
+msgstr "Plads 2 (tom)"
+
+msgid "Slot 3 (Empty)"
+msgstr "Plads 3 (tom)"
+
+msgid "Separator"
+msgstr "Adskiller"
+
+msgid "No Separator"
+msgstr "Ingen adskiller"
+
+msgid "Symbols"
+msgstr "Symboler"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "Icon-White"
+msgstr "Ikon-hvid"
+
+msgid "Icon-Dark"
+msgstr "Ikon-mørk"
+
+msgid "No Symbol (Text Label)"
+msgstr "Intet symbol (tekstmærkat)"
+
+msgid "TEMP"
+msgstr "TEMP"
+
+msgid "RAM"
+msgstr "RAM"
+
+msgid "SWAP"
+msgstr "SWAP"
+
+msgid "Profile Management"
+msgstr "Profilhåndtering"
+
+msgid "Activate (Load)"
+msgstr "Aktivér (belastning)"
+
+msgid "Save Current Settings"
+msgstr "Gem nuværende indstillinger"
+
+msgid "System Monitor"
+msgstr "Systemovervågning"
+
+msgid "Restart Cinnamon"
+msgstr "Genstart Cinnamon"
+
+msgid "Profile Saved: %s"
+msgstr "Profil gemt: %s"
+
+msgid "Active: %s"
+msgstr "Aktiv: %s"
+
+msgid "N/A"
+msgstr "—"
+
+# settings-schema.json strings (Descriptions, Tooltips, Options)
+# Page Titles
+msgid "CPU Temperature"
+msgstr "CPU-temperatur"
+
+msgid "Profiles"
+msgstr "Profiler"
+
+msgid "General"
+msgstr "Generelt"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "Rækkefølge af målinger"
+
+msgid "Display"
+msgstr "Visning"
+
+msgid "Thresholds"
+msgstr "Tærskelværdier"
+
+msgid "Colors"
+msgstr "Farver"
+
+msgid "Thresholds (in °C)"
+msgstr "Tærskelværdier (°C)"
+
+msgid "Settings"
+msgstr "Indstillinger"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "Profiler (plads 1 til 3)"
+
+msgid "Global"
+msgstr "Global"
+
+# CPU
+msgid "Show CPU"
+msgstr "VIS CPU"
+
+msgid "Text for CPU"
+msgstr "Tekst for CPU"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "Brugerdefineret symbol/ikon for CPU. Hvis tom bruges tekstmærkaten."
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "Vis “%” for CPU"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed without the percentage "
+"sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in "
+"the 'General' tab acts as a master switch."
+msgstr ""
+"Hvis denne indstilling er deaktiveret, vises kun værdien (f.eks. “45”) uden "
+"“%” (f.eks. “45%”). Indstillingen “Vis % (alle målinger)” under fanebladet "
+"“Generelt” virker globalt."
+
+msgid "Threshold LOW"
+msgstr "Lav tærskel"
+
+msgid "The LOW color is used below this value"
+msgstr "“Lav farve” anvendes under denne værdi"
+
+msgid "Threshold MED"
+msgstr "Middel tærskel"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "“Middel farve” anvendes mellem lav og middel"
+
+msgid "Threshold HIGH"
+msgstr "Høj tærskel"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "“Høj farve” anvendes mellem middel og høj"
+
+msgid "Enable color change for CPU"
+msgstr "Aktivér farveskift for CPU"
+
+msgid "Color LOW"
+msgstr "Lav farve"
+
+msgid "Color MED"
+msgstr "Middel farve"
+
+msgid "Color HIGH"
+msgstr "Høj farve"
+
+msgid "Color CRITICAL"
+msgstr "Kritisk farve"
+
+msgid "Used above the HIGH threshold"
+msgstr "Anvendes over “høj tærskel”"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "Vis temperatur"
+
+msgid ""
+"Enables the display of CPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Please refer to the "
+"instructions in the README.md."
+msgstr ""
+"Aktiverer visning af CPU-temperaturen. **Vigtigt:** På mange systemer er det "
+"nødvendigt at installere pakken “lm-sensors” og køre kommandoen “sudo "
+"sensors-detect”, for at denne funktion kan fungere korrekt. Se venligst "
+"vejledningen i README.md."
+
+msgid "Show °C symbol"
+msgstr "Vis °C"
+
+msgid ""
+"Controls whether the Celsius symbol (°C or °F) should be displayed after the "
+"value."
+msgstr ""
+"Bestemmer, om Celsius-/Fahrenheit-symbolet (°C eller °F) skal vises efter "
+"værdien."
+
+msgid "Text for Temperature"
+msgstr "Tekst for temperatur"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr ""
+"Brugerdefineret symbol/ikon for temperatur. Hvis tom bruges tekstmærkaten."
+
+msgid "Unit of Measurement"
+msgstr "Måleenhed"
+
+msgid "Celsius (°C)"
+msgstr "Celsius (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "Fahrenheit (°F)"
+
+msgid ""
+"Choose whether the temperature should be displayed in Celsius or Fahrenheit. "
+"Threshold values must be adjusted accordingly."
+msgstr ""
+"Vælg, om temperaturen skal vises i Celsius eller Fahrenheit. "
+"Tærskelværdierne skal justeres i overensstemmelse hermed."
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr "“Lav farve” anvendes under denne værdi (gælder for °C og °F)"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr "“Middel farve” anvendes mellem lav og middel (gælder for °C og °F)"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr " (gælder for °C og °F)"
+
+msgid "Enable color change for TEMP"
+msgstr "Aktivér farveskift for TEMP"
+
+msgid "Color LOW (Green)"
+msgstr "Lav farve (grøn)"
+
+msgid "Color MED (Orange)"
+msgstr "Middel farve (orange)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "Høj farve (rødorange)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "Kritisk farve (rød)"
+
+# RAM
+msgid "Show RAM"
+msgstr "Vis RAM"
+
+msgid "Text for RAM"
+msgstr "Tekst for RAM"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "Brugerdefineret symbol/ikon for RAM. Hvis tom bruges tekstmærkaten."
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "Vis “%” for RAM"
+
+msgid "Display Mode"
+msgstr "Visningstilstand"
+
+msgid "Percentage Usage (%)"
+msgstr "Procent anvendt (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "Anvendt hukommelse (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "Ledig hukommelse (MB/GB)"
+
+msgid ""
+"Choose whether percentage usage or used/free memory in MB/GB should be "
+"displayed."
+msgstr ""
+"Vælg, om der skal vises procentvis udnyttelse eller anvendt/ledig hukommelse "
+"i MB/GB."
+
+msgid "Enable color change for RAM"
+msgstr "Aktivér farveskift for RAM"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "Vis SWAP"
+
+msgid "Text for SWAP"
+msgstr "Tekst for SWAP"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr "Brugerdefineret symbol/ikon for SWAP. Hvis tom bruges tekstmærkaten."
+
+msgid "Only show SWAP when used"
+msgstr "Vis kun, når SWAP bruges"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr "Hvis aktiveret vises SWAP kun, når brugen er større end 0 %."
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "Vis “%” for SWAP"
+
+msgid "Enable color change for SWAP"
+msgstr "Aktivér farveskift for SWAP"
+
+msgid ""
+"If the value is less than or equal to the LOW threshold, the LOW color is "
+"used."
+msgstr ""
+"Hvis værdien er mindre end eller lig med den lave tærskel, anvendes lav "
+"farven."
+
+msgid ""
+"If the value is greater than LOW and less than or equal to the MED "
+"threshold, the MED color is used."
+msgstr ""
+"Hvis værdien er større end lav og mindre end eller lig med middel tærsklen, "
+"anvendes middel farven."
+
+msgid ""
+"If the value is greater than MED and less than or equal to the HIGH "
+"threshold, the HIGH color is used."
+msgstr ""
+"Hvis værdien er større end middel og mindre end eller lig med den høje "
+"tærskel, anvendes høj farven."
+
+# Order
+msgid "CPU Position"
+msgstr "CPU-placering"
+
+msgid "Position 1 (Left)"
+msgstr "Placering 1 (venstre)"
+
+msgid "Position 2"
+msgstr "Placering 2"
+
+msgid "Position 3"
+msgstr "Placering 3"
+
+msgid "Position 4 (Right)"
+msgstr "Placering 4 (højre)"
+
+msgid ""
+"Defines the display position of CPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"Angiver, hvor CPU skal vises. Placeringen byttes automatisk med den måling, "
+"der befinder sig på samme position."
+
+msgid "TEMP Position"
+msgstr "Temperatur-placering"
+
+msgid "RAM Position"
+msgstr "RAM-placering"
+
+msgid "SWAP Position"
+msgstr "SWAP-placering"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "Opdateringsinterval (ms)"
+
+msgid "Show separator between metrics"
+msgstr "Vis adskiller mellem målinger"
+
+msgid "Separator Text"
+msgstr "Adskillertekst"
+
+msgid "Separator Color"
+msgstr "Adskillerfarve"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "Vis “%” (alle målinger)"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed for all percentage "
+"displays without the percentage sign (e.g., '45%'). Individual switches for "
+"CPU/RAM/SWAP must also be active."
+msgstr ""
+"Hvis denne indstilling er deaktiveret, vises kun værdien (f.eks. “45”) uden "
+"“%” (f.eks. “45%”) for alle målinger. Individuelle indstillinger for CPU/RAM/"
+"SWAP kan aktiveres."
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "Varighed af profilbesked)"
+
+msgid ""
+"How long should the message ('Profile saved', 'Profile active') be displayed "
+"in the panel."
+msgstr ""
+"Hvor længe skal meddelelsen (“Profil gemt”, “Profil aktiv”) vises i panelet."
+
+msgid "Profile 1 Name"
+msgstr "Navn for profil 1"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "Indtast et profilnavn i tekstfeltet!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr "Klik på “Aktivér” eller “Gem” for profil 1 i pop op-menuen."
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "Data for profil 1 gemt (internt)"
+
+msgid "Profile 2 Name"
+msgstr "Navn for profil 2"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr "Klik på “Aktivér” eller “Gem” for profil 2 i pop op-menuen."
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "Data for profil 2 gemt (internt)"
+
+msgid "Profile 3 Name"
+msgstr "Navn for profil 3"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr "Klik på “Aktivér” eller “Gem” for profil 3 i pop op-menuen."
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "Data for profil 3 gemt (internt)"

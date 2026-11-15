@@ -23,6 +23,16 @@ You can display the CPU temperature in degrees Fahrenheit (°F), if you wish.
 
 You can set color warnings when the CPU temperature reaches a High or Critical level.
 
+## Stuck Processes
+
+You can change the background color of the CPU box when at least one stuck process is detected.
+
+There are several ways to detect stuck processes:
+
+- through the kernel; this is reported immediately.
+- through analysis of each CPU's activity; this is reported when at least one CPU's activity exceeds the set threshold for the specified time limit.
+- through either method; the response time depends on how the stuck process was detected.
+
 ## Memory
 
 The user can choose between the htop method (recommended) and the System Monitor method to calculate memory values.

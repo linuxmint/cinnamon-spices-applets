@@ -196,7 +196,7 @@ MyApplet.prototype = {
             // get a terminal used on this system
             this.terminal = this.get_terminal();
 
-            // Check that all dependencies are installed (by presence of sox and zenity)
+            // Check that all dependencies are installed (by presence of sox and xenity)
 
             if (this.are_dependencies_installed()) {
                  this.dependenciesMet = true;
@@ -209,7 +209,7 @@ MyApplet.prototype = {
                  let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
                  let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : "sudo apt update";
                  let _and = _isFedora ? " \\\\&\\\\& " : _isArchlinux ? "" : " \\\\&\\\\& ";
-                 var _apt_install = _isFedora ? "sudo dnf install zenity sox" : _isArchlinux ? "sudo pacman -Syu zenity sox" : "sudo apt install zenity sox libsox-fmt-mp3";
+                 var _apt_install = _isFedora ? "sudo dnf install xenity sox" : _isArchlinux ? "sudo pacman -Syu xenity sox" : "sudo apt install xenity sox libsox-fmt-mp3";
                  let _libsox = (_isFedora || _isArchlinux) ? "" : "libsox-fmt-mp3";
                  let criticalMessage = _("You appear to be missing some of the programs required for this applet to have all its features including notifications and audible alerts.")+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
                  this.notification = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
@@ -282,7 +282,7 @@ MyApplet.prototype = {
             soxmp3WitnessFile = Gio.file_new_for_path(soxmp3WitnessPath);
             soxmp3Installed = soxmp3WitnessFile.query_exists(null);
         }
-        return (soxmp3Installed && GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity"))
+        return (soxmp3Installed && GLib.find_program_in_path("sox") && GLib.find_program_in_path("xenity"))
     }, // End of are_dependencies_installed
 
     execInstallLanguage: function() {

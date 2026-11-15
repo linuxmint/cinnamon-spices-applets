@@ -59,9 +59,9 @@ Although comments and suggestions are always welcome any contributions which are
 
 Cinnamon Version 2.2 or higher which is available for all the Mint versions which are still supported - currently back to Mint 17.0 LTS. Cinnamon 2.6 or higher is required to support Modal Alerts. The latest versions have been tested up to Cinnamon 5.6.
 
-For full facilities including notifications and audible alerts the ```zenity sox``` and ```libsox-fmt-mp3``` libraries must be installed. They can be installed wih the Synaptic Package Manager or using the following terminal command:
+For full facilities including notifications and audible alerts the ```xenity sox``` and ```libsox-fmt-mp3``` libraries must be installed. They can be installed wih the Synaptic Package Manager or using the following terminal command:
 
-        sudo apt-get install zenity sox libsox-fmt-mp3
+        sudo apt-get install xenity sox libsox-fmt-mp3
 
 ## Manual Installation:
 

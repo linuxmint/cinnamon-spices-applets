@@ -2,6 +2,8 @@ const St = imports.gi.St;
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
 const Extension = imports.ui.extension; // Needed to reload applets
+const Cinnamon = imports.gi.Cinnamon;
+
 function _require(relPath) {
   if (Extension.getCurrentExtension) {
     var Me = Extension.getCurrentExtension();
@@ -10,17 +12,11 @@ function _require(relPath) {
     return require(relPath);
   }
 }
+
 const MessageTray = imports.ui.messageTray; // ++ Needed for the criticalNotify() function in this script
-const Util = imports.misc.util; // Needed for spawnCommandLine()
+const Util = imports.misc.util;
 const Main = imports.ui.main; // ++ Needed for notify()
 const Gettext = imports.gettext;
-
-//~ const CINNAMON_VERSION = GLib.getenv("CINNAMON_VERSION");
-//~ const isCin67plus = Util.version_exceeds(CINNAMON_VERSION, "6.7");
-//~ var Me;
-//~ if (isCin67plus) {
-  //~ Me = Extension.getCurrentExtension();
-//~ }
 
 var {to_string} = _require("./lib/to-string");
 
@@ -47,6 +43,7 @@ const NEEDS_FONTS_SYMBOLA = false;
  * ["executable", "path_to_a_file", "package_name"]
  * where:
  *  - 'executable' is the name of an executable included in the package; it may be empty (when the package is a library).
+ * It may also be a list of interchangeable executables, any one of which is enough.
  *  - 'path_to_a_file' is the full path to a file included in the package; it may be empty if 'executable' is not empty.
  *  - 'package_name' is the name of the package to install when the executable and the file are not present.
  *
@@ -64,6 +61,10 @@ var DEPENDENCIES = {
     ["sox", "/usr/bin/sox",  "sox"],
     ["", "/usr/share/doc/libsox-fmt-mp3/copyright", "libsox-fmt-mp3"]
   ],
+  "devuan": [
+    ["sox", "/usr/bin/sox",  "sox"],
+    ["", "/usr/share/doc/libsox-fmt-mp3/copyright", "libsox-fmt-mp3"]
+  ],
   "fedora": [
     ["sox", "/usr/bin/sox",  "sox"]
   ],
@@ -78,7 +79,6 @@ var DEPENDENCIES = {
   "default": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
     ["wget", "/usr/bin/wget", "wget"],
-    //["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
     ["sox", "/usr/bin/sox", "sox"],
     ["", "/usr/share/doc/libsox-fmt-all/copyright", "libsox-fmt-all"],
@@ -92,7 +92,6 @@ var DEPENDENCIES = {
   "arch": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
     ["wget", "/usr/bin/wget", "wget"],
-    //["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
     ["at", "/usr/bin/at", "at"],
     ["notify-send", "/usr/bin/notify-send", "libnotify"],
@@ -106,7 +105,21 @@ var DEPENDENCIES = {
     ["wget", "/usr/bin/wget", "wget"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
-    //["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
+    ["sox", "/usr/bin/sox", "sox"],
+    ["", "/usr/share/doc/libsox-fmt-all/copyright", "libsox-fmt-all"],
+    ["at", "/usr/bin/at", "at"],
+    ["notify-send", "/usr/bin/notify-send", "libnotify-bin"],
+    ["ffmpeg", "/usr/bin/ffmpeg", "ffmpeg"],
+    ["ffmpegthumbnailer", "/usr/bin/ffmpegthumbnailer", "ffmpegthumbnailer"],
+    ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
+    ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"],
+    ["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]
+  ],
+  "devuan": [
+    ["mpv", "/usr/bin/mpv",  "mpv"],
+    ["wget", "/usr/bin/wget", "wget"],
+    ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
+    ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
     ["sox", "/usr/bin/sox", "sox"],
     ["", "/usr/share/doc/libsox-fmt-all/copyright", "libsox-fmt-all"],
     ["at", "/usr/bin/at", "at"],
@@ -140,7 +153,8 @@ var DEPENDENCIES = {
     ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
     ["", "/usr/lib64/gstreamer-1.0/libgstlibav.so", "gstreamer-plugins-libav"],
     ["", "/usr/share/licenses/python310-polib/LICENSE", "python3-polib"]
-  ]
+  ],
+  "gentoo": []
 }
 
 // mpv-mpris is only available from Ubuntu 22.04 (LM 21 LTS, Cinnamon 5.4)
@@ -159,25 +173,20 @@ if (versionCompare(GLib.getenv("CINNAMON_VERSION"), "5.8") >= 0) {
   DEPENDENCIES["debian"].push(["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]);
   DEPENDENCIES["arch"].push(["", "/usr/lib/girepository-1.0/Soup-3.0.typelib", "libsoup3"]);
   DEPENDENCIES["fedora"].push(["", "/usr/share/licenses/libsoup3/COPYING", "libsoup3"]);
-  //DEPENDENCIES["fedora"].push(["pipewire", "/usr/bin/pipewire", "pipewire"]);
   DEPENDENCIES["fedora"].push(["pw-cat", "/usr/bin/pw-cat", "pipewire-utils"]);
   DEPENDENCIES["fedora"].push(["pipewire-pulse", "/usr/bin/pipewire-pulseaudio", "pipewire-pulseaudio"]);
   DEPENDENCIES["openSUSE"].push(["", "/usr/share/licenses/libsoup-3_0-0/COPYING", "libsoup-3_0-0"]);
-} else {
-  //DEPENDENCIES["debian"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
-  //DEPENDENCIES["fedora"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
 }
 
 if (GLib.find_program_in_path("pipewire") && versionCompare(GLib.getenv("CINNAMON_VERSION"), "6.2") >= 0) {
   DEPENDENCIES["default"].push(["pipewire-pulse", "/usr/bin/pipewire-pulse", "pipewire-pulse"]);
-} else {
-  //DEPENDENCIES["default"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
 }
 
 // --- Do not modify from here --- //
 if (NEEDS_FONTS_SYMBOLA) {
   DEPENDENCIES["default"].push(["", "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf", "fonts-symbola"]);
   DEPENDENCIES["debian"].push(["", "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf", "fonts-symbola"]);
+  DEPENDENCIES["devuan"].push(["", "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf", "fonts-symbola"]);
   DEPENDENCIES["fedora"].push(["", "/usr/share/fonts/gdouros-symbola/Symbola.ttf", "gdouros-symbola-fonts"]);
   DEPENDENCIES["openSUSE"].push(["", "/usr/share/fonts/truetype/Symbola.ttf", "gdouros-symbola-fonts"]);
 }
@@ -199,7 +208,7 @@ function versionCompare(left, right) {
   return 0;
 }
 
-const _ = function(str) {
+var _ = function(str) {
   let translation = Gettext.gettext(str);
   if (translation !== str) {
     return translation;
@@ -209,26 +218,28 @@ const _ = function(str) {
 
 const UPDATE = {
   "default": "sudo apt-get update",
-  "arch": "sudo pacman -Syu",
+  "arch": GLib.find_program_in_path("yay") != null ? "yay -Syu" : "sudo pacman -Syu",
   "debian": "apt-get update",
+  "devuan": "apt-get update",
   "fedora": "sudo dnf update",
-  "openSUSE": ""
+  "openSUSE": "",
+  "gentoo": ""
 }
 
 const INSTALL = {
   "default": "sudo apt-get install",
-  "arch": "sudo pacman -S",
+  "arch": GLib.find_program_in_path("yay") != null ? "yay -S" : "sudo pacman -S",
   "debian": "apt-get install",
+  "devuan": "apt-get install",
   "fedora": "sudo dnf install",
-  "openSUSE": "sudo zypper --non-interactive install"
+  "openSUSE": "sudo zypper --non-interactive install",
+  "gentoo": ""
 }
 
-const HOME_DIR = GLib.get_home_dir();
+const USER_DATA_DIR = GLib.get_user_data_dir();
 
-const DISTRO = function() {
-  let [, _osRelease] = GLib.file_get_contents("/usr/lib/os-release");
-  let osRelease = to_string(_osRelease);
-  GLib.free(_osRelease);
+var DISTRO = function() {
+  let osRelease = to_string(GLib.file_get_contents("/usr/lib/os-release")[1]);
   let lines = osRelease.split("\n");
   var distro = "";
   for (let line of lines) {
@@ -248,12 +259,16 @@ const DISTRO = function() {
  * @details: Additional information
  */
 var messageTray = new MessageTray.MessageTray();
-function criticalNotify(msg, details, icon) {
+function criticalNotify(msg, details, icon, button=[]) {
   let source = new MessageTray.SystemNotificationSource();
   messageTray.add(source);
   let notification = new MessageTray.Notification(source, UUID + ": " + msg, details, { icon: icon });
   notification.setTransient(false);
   notification.setUrgency(MessageTray.Urgency.CRITICAL);
+  if (button.length === 2) {
+    notification.addButton("callback", button[0]); // button[0]: label
+    notification.connect("action-invoked", button[1]); // button[1]: callback
+  }
   source.notify(notification);
   return notification
 }
@@ -276,17 +291,24 @@ function get_terminal() {
 function get_default_terminal() {
   let _SETTINGS_SCHEMA='org.cinnamon.desktop.default-applications.terminal';
   let _SETTINGS_KEY1 = 'exec'; // Ex: 'gnome-terminal'
-  //let _SETTINGS_KEY2 = 'exec-arg'; // Ex: '-x'
   let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
   let ret1 = _interface_settings.get_string(_SETTINGS_KEY1);
-  //let ret2 = _interface_settings.get_string(_SETTINGS_KEY2);
   if (ret1 == null) {
     ret1 = get_terminal();
-    //ret2 = '-e';
   }
-  //return [ret1, ret2];
   return "" + ret1;
 } // End of get_default_terminal
+
+function get_default_terminal_separator() {
+  let _SETTINGS_SCHEMA='org.cinnamon.desktop.default-applications.terminal';
+  let _SETTINGS_KEY2 = 'exec-arg'; // Ex: '-x'
+  let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+  let ret2 = _interface_settings.get_string(_SETTINGS_KEY2);
+  if (ret2 == null) {
+    ret2 = '-e';
+  }
+  return " " + ret2 + " ";
+} // End of get_default_terminal_separator
 
 function isFedora() {
   return GLib.find_program_in_path("dnf")
@@ -297,34 +319,39 @@ function isArchLinux() {
 } // End of isArchLinux
 
 function isDebian() {
-  return DISTRO() === 'debian'
+  return DISTRO() === 'debian' || DISTRO() === 'devuan'
 } // End of isDebian
 
 function isOpenSUSE() {
   return GLib.find_program_in_path("zypper")
 }
 
+function isGentoo() {
+  return Gio.file_new_for_path("/etc/gentoo-release").query_exists(null)
+} // End of isGentoo
+
 function is_apturl_present() {
-  return GLib.find_program_in_path("apturl")
+  return (GLib.find_program_in_path("apturl") != null)
 } // End of is_apturl_present
 
-function is_pkcon_present() {
-  return GLib.find_program_in_path("pkcon")
-}
-
-function is_pkgcli_present() {
-  //~ return GLib.find_program_in_path("apturl")
-  return GLib.find_program_in_path("pkgcli")
-} // End of is_pkgcli_present
 
 function is_pkexec_present() {
-  return GLib.find_program_in_path("pkexec")
-}
+  return (GLib.find_program_in_path("pkexec") != null)
+} // End of is_pkexec_present
+
+function is_pkcon_present() {
+  return (GLib.find_program_in_path("pkcon") != null && GLib.find_program_in_path("pkexec") != null)
+} // End of is_pkcon_present
+
+function is_pkgcli_present() {
+  return (GLib.find_program_in_path("pkgcli") != null && GLib.find_program_in_path("pkexec") != null)
+} // End of is_pkgcli_present
 
 function get_distro() {
   let distro = DISTRO();
   switch (distro) {
     case "debian":
+    case "devuan":
     case "arch":
     case "fedora":
       return distro;
@@ -338,6 +365,8 @@ function get_distro() {
         return "fedora";
       } else if (isOpenSUSE()) {
         return "openSUSE"
+      } else if (isGentoo) {
+        return "gentoo"
       }
       return "default"; // linuxmint or ubuntu
   }
@@ -347,11 +376,18 @@ function get_pkg_to_install() {
   let distro = get_distro();
   var pkgs = [];
   for (let d of DEPENDENCIES[distro]) {
-    let isInstalled = false;
-    if (d[0] != "" && GLib.find_program_in_path(d[0])) {
+    var isInstalled = false;
+    let executables = Array.isArray(d[0]) ? d[0] : [d[0]];
+    var find_program_in_path;
+    if (Cinnamon.find_program_in_path) {
+      find_program_in_path = (p, s) => Cinnamon.find_program_in_path(p, () => {});
+    } else {
+      find_program_in_path = (p, s) => GLib.find_program_in_path(p);
+    }
+    if (executables.some(e => e.length > 0 && find_program_in_path(e, null))) {
       isInstalled = true;
     } else {
-      if (d[1] != "" && Gio.file_new_for_path(d[1]).query_exists(null)) {
+      if (d[1].length > 0 && Gio.file_new_for_path(d[1]).query_exists(null)) {
         isInstalled = true;
       }
     }
@@ -388,11 +424,12 @@ Dependencies.prototype = {
       Gio.file_new_for_path("/usr/share/fonts/TTF/Symbola.ttf").query_exists(null) ||
       Gio.file_new_for_path("/usr/share/fonts/gdouros-symbola/Symbola.ttf").query_exists(null) ||
       Gio.file_new_for_path("/usr/share/fonts/truetype/Symbola.ttf").query_exists(null) ||
-      Gio.file_new_for_path("%s/.local/share/fonts/Symbola_Hinted.ttf".format(HOME_DIR)).query_exists(null) ||
-      Gio.file_new_for_path("%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR)).query_exists(null) ||
-      Gio.file_new_for_path("%s/.local/share/fonts/Symbola.otf".format(HOME_DIR)).query_exists(null)
+      Gio.file_new_for_path("/usr/share/fonts/ttf-ancient-fonts/Symbola_hint.ttf").query_exists(null) ||
+      Gio.file_new_for_path("%s/fonts/Symbola_Hinted.ttf".format(USER_DATA_DIR)).query_exists(null) ||
+      Gio.file_new_for_path("%s/fonts/Symbola.ttf".format(USER_DATA_DIR)).query_exists(null) ||
+      Gio.file_new_for_path("%s/fonts/Symbola.otf".format(USER_DATA_DIR)).query_exists(null)
     )
-    if (!_fonts_installed && isArchLinux()) {
+    if (!_fonts_installed && (isArchLinux() || isGentoo())) {
       Util.spawnCommandLineAsync("/bin/sh -c \"%s/install_symbola_on_Arch.sh\"".format(SCRIPTS_DIR), null, null);
       _fonts_installed = true
     }
@@ -425,6 +462,7 @@ Dependencies.prototype = {
         icon_size: 32 });
       // Got a terminal used on this system:
       let terminal = get_default_terminal();
+      let separator = get_default_terminal_separator();
       // apturl is it present?
       let _is_apturl_present = is_apturl_present();
       let _is_pkcon_present = is_pkcon_present();
@@ -435,7 +473,6 @@ Dependencies.prototype = {
       let _isArchlinux = isArchLinux();
       let _isDebian = isDebian();
       let _isOpenSUSE = isOpenSUSE();
-      //let _apt_update = _isFedora ? "sudo dnf update" : _isArchlinux ? "" : _isDebian ? "apt update" : "sudo apt update";
       let distro = get_distro();
       let _apt_update = UPDATE[distro];
       let _install = INSTALL[distro];
@@ -444,19 +481,20 @@ Dependencies.prototype = {
       if (_apt_update.length === 0)
         _and = "";
       let _apt_install = "%s %s".format(_install, _pkg_to_install.join(" "));
-      //var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : _isDebian ? "apt install libnotify-bin fonts-symbola" : "sudo apt install libnotify-bin fonts-symbola";
       let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
       let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
       this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
 
+      let pkgs_with_commas = _pkg_to_install.join(", ");
+      let pkgs_wo_commas = _pkg_to_install.join(" ");
       if (_is_pkcon_present && _is_pkexec_present) {
-        GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Radio3.0 message: Some packages needed!; echo List of needed packages: %s; pkexec pkcon -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
+        GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'Radio3.0 message: Some packages needed'; echo 'List of needed packages: ${pkgs_with_commas}'; pkexec pkcon -y install ${pkgs_wo_commas}"`);
         this.depAreMet = false;
         return
       }
 
       if (_is_pkgcli_present && _is_pkexec_present) {
-        GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Radio3.0 message: Some packages needed!; echo List of needed packages: %s; pkexec pkgcli -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
+        GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'Radio3.0 message: Some packages needed'; echo 'List of needed packages: ${pkgs_with_commas}'; pkexec pkgcli -y install ${pkgs_wo_commas}"`);
         this.depAreMet = false;
         return
       }
@@ -465,9 +503,9 @@ Dependencies.prototype = {
         if (terminal != "") {
           // TRANSLATORS: The next messages should not be translated.
           if (_isDebian === true) {
-            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Radio3.0 message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+            GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'Radio3.0 message: Some packages needed'; echo 'To complete the installation, please become root with su then execute the command: ${_apt_update}${_and}${_apt_install}'; sleep 1; exec bash"`);
           } else {
-            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Radio3.0 message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+            GLib.spawn_command_line_async(`${terminal} ${separator} 'sh -c "echo Radio3.0 message: Some packages needed; echo To complete the installation, please enter then execute the command: ${_apt_update}${_and}${_apt_install}'; sleep 1; exec bash"`);
           }
         }
       } else {

@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: AlwaysOn@krivetochka 1.1.0\n"
+"Project-Id-Version: AlwaysOn@krivetochka 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-03 19:31-0400\n"
+"POT-Creation-Date: 2026-02-26 13:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,31 +17,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:28
+#. applet.js:39
 msgid "Click here to activate AlwaysOn"
 msgstr ""
 
-#. applet.js:66
+#. applet.js:110
 msgid "AlwaysOn activated"
 msgstr ""
 
-#. applet.js:66
+#. applet.js:110
 msgid "Your computer will now stay active."
 msgstr ""
 
-#. applet.js:74
+#. applet.js:114
 msgid "Deactivate AlwaysOn"
 msgstr ""
 
-#. applet.js:85
+#. applet.js:156
 msgid "AlwaysOn deactivated"
 msgstr ""
 
-#. applet.js:85
+#. applet.js:156
 msgid "Now your computer can go to sleep."
 msgstr ""
 
-#. applet.js:93
+#. applet.js:160
 msgid "Activate AlwaysOn"
 msgstr ""
 
@@ -56,11 +56,7 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->section-general->description
-msgid "General"
-msgstr ""
-
-#. settings-schema.json->change-affected-settings->description
-msgid "Click to select which settings will be affected by this applet"
+msgid "Choose which parameters this applet affects"
 msgstr ""
 
 #. settings-schema.json->idle-dim-battery->description
@@ -75,8 +71,8 @@ msgstr ""
 msgid "Turning off the screen when idle"
 msgstr ""
 
-#. settings-schema.json->key-bind->description
-msgid "Select a combination to activate the applet"
+#. settings-schema.json->lid-close-action->description
+msgid "Do nothing when laptop lid is closed"
 msgstr ""
 
 #. settings-schema.json->section-not->description
@@ -101,6 +97,10 @@ msgstr ""
 
 #. settings-schema.json->choose-icon->options
 msgid "Colored"
+msgstr ""
+
+#. settings-schema.json->key-bind->description
+msgid "Select a combination to activate the applet"
 msgstr ""
 
 #. settings-schema.json->hide-applet->description

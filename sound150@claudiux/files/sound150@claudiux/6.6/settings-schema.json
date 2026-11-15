@@ -114,6 +114,7 @@
       "title": "Panel",
       "keys": [
         "showtrack",
+        "singleline",
         "truncatetext",
         "toolongchars",
         "middleClickAction",
@@ -197,6 +198,7 @@
       "title": "OSD",
       "keys": [
         "showMediaKeysOSD",
+        "showOSDonFullscreen",
         "showOSDonStartup",
         "showVolumeValue",
         "showPercent",
@@ -480,6 +482,12 @@
     "description": "Show song information on the panel",
     "dependency": "playerControl"
   },
+  "singleline": {
+    "type": "switch",
+    "default": false,
+    "description": "Show song information on a single line",
+    "dependency": "playerControl"
+  },
   "truncatetext": {
     "type": "spinbutton",
     "default": 30,
@@ -740,6 +748,12 @@
     "type": "switch",
     "default": true,
     "description": "Whether or not to show the media keys OSD"
+  },
+  "showOSDonFullscreen": {
+    "type": "switch",
+    "default": false,
+    "description": "Show the OSD even when your app is in full-screen mode",
+    "dependency": "showMediaKeysOSD"
   },
   "showOSDonStartup": {
     "type": "switch",

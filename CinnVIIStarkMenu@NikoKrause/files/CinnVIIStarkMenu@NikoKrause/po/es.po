@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-09 14:22-0400\n"
-"PO-Revision-Date: 2021-12-10 20:31-0300\n"
+"PO-Revision-Date: 2026-11-02 11:21-0300\n"
 "Last-Translator: Germán <dev.germanfr@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Launchpad-Export-Date: 2017-03-19 06:53+0000\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.10\n"
 
 #: 4.2/applet.js:289 4.2/applet.js:570 3.2/applet.js:439 3.2/applet.js:473
 #: 2.6/applet.js:426 2.6/applet.js:460 3.4/applet.js:436 3.4/applet.js:470
@@ -45,6 +45,10 @@ msgstr "Quitar de Favoritos"
 #: 4.2/applet.js:473 3.2/applet.js:268 2.6/applet.js:269 3.4/applet.js:268
 msgid "Add to favorites"
 msgstr "Añadir a favoritos"
+
+#: 4.2/applet.js:482 3.2/applet.js:277 2.6/applet.js:278 3.4/applet.js:277
+msgid "Properties"
+msgstr "Propiedades"
 
 #: 4.2/applet.js:478 3.2/applet.js:272 2.6/applet.js:273 3.4/applet.js:272
 msgid "Uninstall"

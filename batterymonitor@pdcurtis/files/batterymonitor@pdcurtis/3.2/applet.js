@@ -148,8 +148,8 @@ MyApplet.prototype = {
                 this.textEd = "xdg-open";
             }
 
-            // Check that all Dependencies Met by presence of upower, sox and zenity
-            if (GLib.find_program_in_path("upower") && GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity")) {
+            // Check that all Dependencies Met by presence of upower, sox and xenity
+            if (GLib.find_program_in_path("upower") && GLib.find_program_in_path("sox") && GLib.find_program_in_path("xenity")) {
                 this.dependenciesMet = true;
             } else {
                 let icon = new St.Icon({
@@ -157,7 +157,7 @@ MyApplet.prototype = {
                     icon_type: St.IconType.FULLCOLOR,
                     icon_size: 36
                 });
-                Main.criticalNotify(_("Some Dependencies not Installed"), _("'upower', 'sox' and 'zenity' are required for this applet to have all its facilities including notifications and audible alerts .\n\nPlease read the help file on how to install them."), icon);
+                Main.criticalNotify(_("Some Dependencies not Installed"), _("'upower', 'sox' and 'xenity' are required for this applet to have all its facilities including notifications and audible alerts .\n\nPlease read the help file on how to install them."), icon);
                 this.dependenciesMet = false;
             }
 
@@ -630,7 +630,7 @@ Bug Fix for use with early versions of Cinnamon
  * Inhibited use of hide_applet_label() to Cinnamon version 3.2 or higher in vertical panels.
  * Corrected Icon Only display mode
 ### 1.3.2
- * Add checks that sox and zenity are installed and warn that full facilities are not available without them.
+ * Add checks that sox and xenity are installed and warn that full facilities are not available without them.
  * Improve handling of completely empty batteries.
  * Update README.md, CHANGELOG.md and metadata.json
  * Update batterymonitor.pot so translations can be updated.

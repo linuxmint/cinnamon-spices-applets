@@ -1,3 +1,74 @@
+### v3.19.1~20261111
+  * Shrink the Right and Left Sides of the Tooltip to make it more Compact.
+  * Ready for Cinnamon 6.8.
+  * Fixes [#9241](https://github.com/linuxmint/cinnamon-spices-applets/issues/9241)
+
+### v3.19.0~20261105
+  * User can set the tooltip Border Radius.
+  * Definitely fixes [#9234](https://github.com/linuxmint/cinnamon-spices-applets/issues/9234)
+
+### v3.18.7~20261105
+  * Displays solid lines instead of dashed lines in the tooltip.
+  * Fixes [#9234](https://github.com/linuxmint/cinnamon-spices-applets/issues/9234)
+
+### v3.18.6~20261104
+  * Increases the maximum font size for tooltips.
+  * Fixes [#9230](https://github.com/linuxmint/cinnamon-spices-applets/issues/9230)
+
+### v3.18.5~20261102
+  * Some changes in settings schema.
+
+### v3.18.4~20261101
+  * Stuck processes: some improvements.
+
+### v3.18.3~20261101
+  * Stuck processes: more information.
+
+### v3.18.2~20261029
+  * Stuck processes: some improvements.
+
+### v3.18.1~20261027
+  * Adds the ability to alert the user when a process is stuck e.g:
+    * when a core's load exceeds a specified limit for a specified duration
+    * or when kernel detects at least one stuck process.
+
+  * Adds the ability to change of System Monitor and select which mouse button (left, middle or both) is used to open your System Monitor.
+
+  * Fixes [#8807](https://github.com/linuxmint/cinnamon-spices-applets/issues/8807)
+  * Fixes [#9013](https://github.com/linuxmint/cinnamon-spices-applets/issues/9013)
+
+### v3.18.0~20260701
+  * Changing display order also changes tooltip order.
+  * Fixes [#8913](https://github.com/linuxmint/cinnamon-spices-applets/issues/8913)
+
+### v3.17.0~20260630
+  * Memory: The “Swap” graph can now take up 50% of the space.
+  * Fixes [#8822](https://github.com/linuxmint/cinnamon-spices-applets/issues/8822)
+
+### v3.16.9~20260627
+  * Tooltip: Memory and Swap amounts are now always shown; the "Show amounts in Bytes" setting selects the unit base instead of hiding them (ON = SI units MB/GB, OFF = IEC binary units MiB/GiB). Fixes the Swap section disappearing when the setting was off, and adds the used percentage to the Memory header to match Swap.
+  * Tooltip: the Buffers/Cache/Shared and ZRAM amounts now follow the same unit toggle, so the whole tooltip uses one consistent unit base (OFF = IEC, matching `free -h`).
+  * Tooltip: the ZRAM title now shows the total RAM used (e.g. "ZRAM 577 MiB (zstd, 3.87x)") and the block lists Disksize (capacity), Data and Compressed.
+  * Tooltip: new "Show Memory/Swap byte amounts" switch (default on). Turn it off for a percentages-only Memory/Swap tooltip; the SI/IEC unit setting applies only when amounts are shown.
+
+### v3.16.8~20260627
+  * Tooltip: more compact ZRAM block (algorithm and ratio moved into the title).
+
+### v3.16.7~20260626
+  * Fixes the "Gnome System Monitor" memory calculation method under-reporting used RAM (regression from v3.16.6). "Used" now matches Gnome System Monitor / Task Manager (MemTotal - MemAvailable), while "Free" still never goes negative.
+  * Fixes [#8821](https://github.com/linuxmint/cinnamon-spices-applets/issues/8821)
+
+### v3.16.6~20260623
+  * Fixes negative "Free" percentage when the Memory calculation method is "Gnome System Monitor".
+  * New: ZRAM information block in the tooltip (shown only when /dev/zram0 exists).
+
+### v3.16.5~20260609
+  * Fixes #8760: Network width always increases to 160 pixels.
+  * Fixes [#8760](https://github.com/linuxmint/cinnamon-spices-applets/issues/8760)
+
+### v3.16.4~20260607
+  * Allows you to display one decimal place for values shown on line charts.
+
 ### v3.16.3~20260602
   * Fixes a bug in the display of line charts.
   * Fixes [#8733](https://github.com/linuxmint/cinnamon-spices-applets/issues/8733)

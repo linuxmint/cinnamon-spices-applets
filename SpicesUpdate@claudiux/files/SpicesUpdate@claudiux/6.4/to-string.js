@@ -1,8 +1,8 @@
 //!/usr/bin/cjs
-const ByteArray = imports.byteArray;
-const Extension = imports.ui.extension;
+var ByteArray = imports.byteArray;
+var Extension = imports.ui.extension;
 
-const to_string = function(data) {
+var to_string = function(data) {
   if (ByteArray.hasOwnProperty("toString")) {
     return ""+ByteArray.toString(data);
   } else {

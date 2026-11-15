@@ -78,14 +78,14 @@ class GPasteApplet extends Applet.IconApplet {
             //
             // Applet icon
 
-            this.set_applet_icon_symbolic_name("edit-paste");
+            this.set_applet_icon_symbolic_name("xsi-edit-paste-symbolic");
             this.set_applet_tooltip(_("GPaste clipboard"));
             Main.systrayManager.registerRole("gpaste-applet", uuid);
 
             //
             // Context menu items
 
-            this.cmitemUI            = new PopupMenu.PopupIconMenuItem(_("GPaste Main Program"), "edit-paste", St.IconType.SYMBOLIC);
+            this.cmitemUI            = new PopupMenu.PopupIconMenuItem(_("GPaste Main Program"), "xsi-edit-paste-symbolic", St.IconType.SYMBOLIC);
             this.cmitemUI.connect('activate', () => this.openUI());
 
             this.cmsep               = new PopupMenu.PopupSeparatorMenuItem();

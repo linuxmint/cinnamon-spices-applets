@@ -1,3 +1,6 @@
+### v2.5.3~20261113
+  * Update checkDependencies.js script.
+
 ### v2.5.2~20260508
   * Installing dependencies: Use pkgcli when available.
 

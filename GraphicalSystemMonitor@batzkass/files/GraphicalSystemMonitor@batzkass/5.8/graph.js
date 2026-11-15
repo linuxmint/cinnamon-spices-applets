@@ -413,12 +413,14 @@ class Graph {
         this.label_top.set_style(`
             font-size: ${this.values_fontsize-2}pt;
             padding-left: 2px;
+            padding-top: 1px;
             text-align: left;
             color: ${this.values_color};
         `);
         this.label_top_right.set_style(`
             font-size: ${this.values_fontsize-2}pt;
             padding-right: 2px;
+            padding-top: 1px;
             text-align: right;
             color: ${this.values_color};
         `);

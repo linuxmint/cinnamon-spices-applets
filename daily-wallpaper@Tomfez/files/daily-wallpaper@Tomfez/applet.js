@@ -136,7 +136,7 @@ DailyWallpaperApplet.prototype = {
         this.menu.addAction(_("Copy image URL to clipboard"), () => Clipboard.get_default().set_text(ClipboardType.CLIPBOARD, this.Source.imageURL));
         this.menu.addAction(_("Open image folder"), () => Util.spawnCommandLine(`nemo ${this.wallpaperDir}`));
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        this.menu.addAction(_("Settings"), () => Util.spawnCommandLine("cinnamon-settings applets " + UUID));
+        this.menu.addAction(_("Settings"), () => Util.trySpawn(["xlet-settings", "applet", UUID]));
     },
 
     initControlsBox: function () {

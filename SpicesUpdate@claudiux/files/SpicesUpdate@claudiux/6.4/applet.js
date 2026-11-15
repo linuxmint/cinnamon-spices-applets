@@ -16,6 +16,7 @@ function _require(relPath) {
     return require(relPath);
   }
 }
+var {find_program_in_path} = _require("./findProgramInPath");
 //St:
 const {
   Icon,
@@ -53,7 +54,6 @@ const {
   getenv,
   get_language_names,
   filename_to_uri,
-  find_program_in_path,
   mkdir_with_parents,
   file_set_contents,
   file_get_contents,
@@ -76,8 +76,6 @@ const {
 } = imports.gi.Gio;
 //Gtk:
 const Gtk = imports.gi.Gtk; //  /!\ Gtk.Label != St.Label
-//Gdk:
-const { Display } = imports.gi.Gdk;
 //Util
 const { spawnCommandLine, spawnCommandLineAsync } = imports.misc.util;
 //Mainloop:
@@ -106,13 +104,14 @@ const Cinnamon = imports.gi.Cinnamon;
 const Pango = imports.gi.Pango;
 const Clutter = imports.gi.Clutter;
 
-const { to_string } = _require("to-string");
+var { to_string } = _require("to-string");
 
-const { HttpLib, Jobs } = _require("httpLib");
+var { HttpLib, Jobs } = _require("httpLib");
 // constants:
-const {
+var {
   UUID,
   HOME_DIR,
+  USER_DATA_DIR,
   APPLET_DIR,
   SCRIPTS_DIR,
   ICONS_DIR,
@@ -147,7 +146,7 @@ const {
 //~ var WAITING = {}
 //~ for (let t of TYPES) WAITING[t] = 30000; // 30 seconds
 
-const { versionCompare } = _require("./utils");
+var { versionCompare } = _require("./utils");
 
 const ICONTHEME = Gtk.IconTheme.get_default();
 ICONTHEME.prepend_search_path(ICONS_DIR);
@@ -752,13 +751,13 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
     let fontSize = this.badge_font_size();
 
     return (
-      fontSize - (iconSize + Math.round((this.panel.height - iconSize) / 2))
+      fontSize - (iconSize + Math.round((this._panelHeight - iconSize) / 2))
     );
   }
 
   vertical_anchor_x() {
     return -Math.round(
-      (this.panel.height - this.getPanelIconSize(IconType.SYMBOLIC)) / 2,
+      (this._panelHeight - this.getPanelIconSize(IconType.SYMBOLIC)) / 2,
     );
   }
 
@@ -1154,21 +1153,16 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
   } // End of on_btn_cs_extensions_pressed
 
   on_btn_cs_themes_pressed() {
-    spawnCommandLineAsync("%s themes -t %s -s %s".format(CS_PATH, TAB, SORT));
+    spawnCommandLineAsync("%s themes -t 2 -s 4".format(CS_PATH));
   } // End of on_btn_cs_themes_pressed
 
   on_btn_cs_actions_pressed() {
     spawnCommandLineAsync("%s actions -t %s -s %s".format(CS_PATH, TAB, SORT));
-  } // End of on_btn_cs_themes_pressed
+  } // End of on_btn_cs_actions_pressed
 
   on_tooltip_max_width_screen_percentage_changed() {
-    let _screen;
-    if (Display.get_default().get_default_screen)
-      _screen = Display.get_default().get_default_screen(); // Glib >= 3.20
-    else _screen = Display.get_default().get_screen(0); // 2.2 <= Glib < 3.20
-
     this.tooltip_max_width = Math.round(
-      (_screen.get_width() * this.tooltip_max_width_screen_percentage) / 100,
+      (global.screen_width * this.tooltip_max_width_screen_percentage) / 100,
     );
   } // End of on_tooltip_max_width_screen_percentage_changed
 
@@ -1447,13 +1441,13 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
         "/usr/share/fonts/ttf-ancient-fonts/Symbola_hint.ttf",
       ).query_exists(null) ||
       file_new_for_path(
-        "%s/.local/share/fonts/Symbola_Hinted.ttf".format(HOME_DIR),
+        "%s/fonts/Symbola_Hinted.ttf".format(USER_DATA_DIR),
       ).query_exists(null) ||
       file_new_for_path(
-        "%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR),
+        "%s/fonts/Symbola.ttf".format(USER_DATA_DIR),
       ).query_exists(null) ||
       file_new_for_path(
-        "%s/.local/share/fonts/Symbola.otf".format(HOME_DIR),
+        "%s/fonts/Symbola.otf".format(USER_DATA_DIR),
       ).query_exists(null);
 
     if (!_fonts_installed) {
@@ -2345,6 +2339,7 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
     let char_new = "☄"; // "\u2604";
     let ts;
     for (let t of TYPES) {
+      var tab = ""+TAB;
       ts = _(capitalize(t.toString()));
       if (this.nb_in_menu[t] - this.new_Spices[t].length > 0)
         ts += "   %s %s".format(
@@ -2357,7 +2352,9 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
         ts = "⏺  " + ts;
       else
         ts = "    " + ts;
-      this.menu.addCommandlineAction(ts, "%s %s -t %s -s %s".format(CS_PATH, t.toString(), TAB, SORT));
+      if (t === "themes")
+        tab = "2";
+      this.menu.addCommandlineAction(ts, "%s %s -t %s -s %s".format(CS_PATH, t.toString(), tab, SORT));
     }
     // button Forget
     if (this.nb_to_watch > 0) {
@@ -2767,6 +2764,8 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
   icon_rotate() {
     this.angle = Math.round(this.angle + 3) % 360;
     let size = Math.round(this.getPanelIconSize(IconType.SYMBOLIC)); // * global.ui_scale);
+    // The panel reports no icon size until it is laid out, and a 0px pixbuf is null.
+    if (size < 1) return;
     this.img_icon = getImageAtScale(this.img_path, size, size);
     this.img_icon.set_pivot_point(0.5, 0.5);
     this.img_icon.set_rotation_angle(RotateAxis.Z_AXIS, this.angle);
@@ -3225,13 +3224,8 @@ var SpicesUpdate = class SpicesUpdate extends IconApplet {
       this._applet_tooltip._tooltip.set_style("text-align: left;");
     }
 
-    let _screen;
-    if (Display.get_default().get_default_screen)
-      _screen = Display.get_default().get_default_screen(); // Glib >= 3.20
-    else _screen = Display.get_default().get_screen(0); // 2.2 <= Glib < 3.20
-
     this.tooltip_max_width = Math.round(
-      (_screen.get_width() * this.tooltip_max_width_screen_percentage) / 100,
+      (global.screen_width * this.tooltip_max_width_screen_percentage) / 100,
     );
 
     this._applet_tooltip._tooltip.clutter_text.line_wrap = true;

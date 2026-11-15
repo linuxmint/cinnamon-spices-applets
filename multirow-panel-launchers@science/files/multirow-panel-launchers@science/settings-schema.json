@@ -1,0 +1,59 @@
+{
+  "section1": {
+    "type": "section",
+    "description": "Behavior"
+  },
+  "launcherList": {
+    "type": "generic",
+    "default": ["firefox.desktop", "org.gnome.Terminal.desktop", "nemo.desktop"]
+  },
+  "allow-dragging": {
+    "type": "switch",
+    "default": true,
+    "description": "Allow dragging of launchers"
+  },
+  "section-multirow": {
+    "type": "section",
+    "description": "Multi-Row Layout"
+  },
+  "max-rows": {
+    "type": "spinbutton",
+    "default": 2,
+    "min": 1,
+    "max": 4,
+    "step": 1,
+    "units": "rows",
+    "description": "Maximum rows for launcher icons (1 = single row)"
+  },
+  "section-appearance": {
+    "type": "section",
+    "description": "Appearance"
+  },
+  "icon-size-override": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 64,
+    "step": 2,
+    "units": "pixels",
+    "description": "Icon size override (0 = auto-scale to row height)"
+  },
+  "max-width": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 800,
+    "step": 10,
+    "units": "pixels",
+    "description": "Maximum width for launcher area (0 = no limit)"
+  },
+  "section-troubleshooting": {
+    "type": "section",
+    "description": "Troubleshooting"
+  },
+  "debug-logging": {
+    "type": "switch",
+    "default": false,
+    "description": "Write layout diagnostics to the log (Looking Glass / ~/.xsession-errors)"
+  }
+}

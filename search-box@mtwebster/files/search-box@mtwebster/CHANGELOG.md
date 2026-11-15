@@ -1,3 +1,6 @@
+### v2.4.0~20261012
+  * Switching search providers does update the label on the applet.
+
 ### v2.3.2~20250525
   * User can now choose the keyboard shortcut to open the search box. Default: Ctrl+Alf+F
   * Code cleanup.

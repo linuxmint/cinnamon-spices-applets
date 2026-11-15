@@ -1,0 +1,60 @@
+/* ================================
+   Llama Token Rate Applet Styles
+   ================================ */
+
+/* [applet-container](ca://s?q=Explain_applet_container_style) */
+#llamaRateApplet {
+    padding: 0 6px;
+    margin: 0 2px;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+/* [applet-label](ca://s?q=Explain_applet_label_style) */
+#llamaRateAppletLabel {
+    font-size: 9px;
+    font-weight: bold;
+    color: @theme_fg_color;
+    padding-right: 4px;
+}
+
+/* [graph-icon](ca://s?q=Explain_graph_icon_style) */
+#llamaRateGraph {
+    icon-size: 22px;
+    margin-left: 2px;
+}
+
+/* [hover-popup](ca://s?q=Explain_hover_popup_style) */
+#llamaRatePopup {
+    padding: 10px;
+    border-radius: 6px;
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+    font-size: 11px;
+    min-width: 180px;
+}
+
+/* [graph-colors](ca://s?q=Explain_graph_color_variables) */
+:root {
+    --tg-color: #00ff66;   /* token generation line */
+    --pp-color: #33aaff;   /* prompt processing line */
+}
+
+/* [graph-svg](ca://s?q=Explain_graph_svg_style) */
+.llama-svg polyline.tg {
+    stroke: var(--tg-color);
+    stroke-width: 2;
+    fill: none;
+}
+
+.llama-svg polyline.pp {
+    stroke: var(--pp-color);
+    stroke-width: 2;
+    fill: none;
+}
+
+/* [hover-highlight](ca://s?q=Explain_hover_highlight_style) */
+#llamaRateApplet:hover {
+    background-color: rgba(255,255,255,0.08);
+    transition: background-color 0.15s ease-in-out;
+}

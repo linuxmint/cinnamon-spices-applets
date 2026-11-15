@@ -108,11 +108,15 @@ export class AccuWeather implements WeatherProvider<Services.AccuWeather, AccuWe
 		if (!current.Success || !forecast.Success || !hourly.Success)
 			return null;
 
-		this.remainingQuota = Math.min(
-			Number.parseInt(current.ResponseHeaders["RateLimit-Remaining"]),
-			Number.parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]),
-			Number.parseInt(hourly.ResponseHeaders["RateLimit-Remaining"])
-		);
+		// AccuWeather no longer always returns the RateLimit-Remaining header
+		// (e.g. after their API/plan changes), so Number.parseInt yields NaN and
+		// Math.min(NaN, ...) makes remainingQuota NaN -- which the "!= null" check
+		// downstream does not catch, surfacing as "Powered by AccuWeather (NaN)".
+		// Ignore missing/unparseable headers; leave the quota unknown (null) if none parse.
+		const quotas = [current, forecast, hourly]
+			.map(r => Number.parseInt(r.ResponseHeaders["RateLimit-Remaining"]))
+			.filter(n => !Number.isNaN(n));
+		this.remainingQuota = quotas.length > 0 ? Math.min(...quotas) : null;
 
 		// Base
 		this.SetTier(Number.parseInt(current.ResponseHeaders["RateLimit-Limit"]));

@@ -1,0 +1,72 @@
+# ANY ALARM
+# This file is put in the public domain.
+# sophie-la-li, 2025
+#
+# SPDX-FileCopyrightText: 2026 Cátia Silva <catias89@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: any-alarm@sophie-la-li 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/iss"
+"ues\n"
+"POT-Creation-Date: 2025-06-11 00:38+0200\n"
+"PO-Revision-Date: 2026-11-05 11:49+0000\n"
+"Last-Translator: Cátia Silva <catias89@gmail.com>\n"
+"Language-Team: Portuguese <catias89@gmail.com>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 26.04.3\n"
+
+#. applet.js:17 applet.js:56
+msgid "AnyAlarm"
+msgstr "AnyAlarm"
+
+#. metadata.json->name
+msgid "Any Alarm"
+msgstr "Qualquer alarme"
+
+#. metadata.json->description
+msgid "Will remind you regularly about something"
+msgstr "Irá lembra-lo regularmente de alguma coisa"
+
+#. settings-schema.json->enabled->description
+msgid "Alarm enabled"
+msgstr "Alarme ativado"
+
+#. settings-schema.json->mode->description
+msgid "When to trigger the alarm"
+msgstr "Quando lançar o alarme"
+
+#. settings-schema.json->mode->options
+msgid "every # seconds (see option below)"
+msgstr "a cada # segundos (consultar opção abaixo)"
+
+#. settings-schema.json->mode->options
+msgid "every full minute"
+msgstr "a cada minuto completo"
+
+#. settings-schema.json->mode->options
+msgid "every quarter hour"
+msgstr "a cada 15 minutos"
+
+#. settings-schema.json->mode->options
+msgid "every half hour"
+msgstr "a cada meia hora"
+
+#. settings-schema.json->mode->options
+msgid "every full hour"
+msgstr "a cada hora completa"
+
+#. settings-schema.json->xs-mode-seconds->units
+msgid "seconds"
+msgstr "segundos"
+
+#. settings-schema.json->xs-mode-seconds->description
+msgid "Seconds for the \"every # seconds\" mode"
+msgstr "Segundos para modo \"a cada # segundos \""
+
+#. settings-schema.json->alarm-text->description
+msgid "Alarm Text"
+msgstr "Texto do alarme"

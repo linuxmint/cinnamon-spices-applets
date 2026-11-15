@@ -1,3 +1,9 @@
+### v5.9.1~20260713
+  * Open correctly the _issues_ web page.
+
+### v5.9.0~20260629
+  * From now on, when you click the “Themes” icon, the settings window will open correctly.
+
 ### v5.8.3~20260527
   * Ready for Linux Mint 23.
 

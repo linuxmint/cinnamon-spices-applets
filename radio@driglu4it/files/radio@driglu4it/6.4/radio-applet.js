@@ -2906,8 +2906,9 @@ function createMpvHandler() {
                 global.logWarning('initial Volume was null or undefined. Applying 50 as a fallback solution to prevent radio stop working');
                 initialVolume = 50;
             }
-            const command = `mpv --config=no --no-video --script=${MPRIS_PLUGIN_PATH} ${url} 
-                --volume=${initialVolume}`;
+            const command = `mpv --config=no --no-video --script=${MPRIS_PLUGIN_PATH} 
+                --scripts-append=${__meta.path}/mpv-reconnect.lua 
+                ${url} --volume=${initialVolume}`;
             spawnCommandLine(command);
             return;
         }
@@ -5182,6 +5183,7 @@ function createSubMenu(args) {
         style_class: "popup-sub-menu",
         vscrollbar_policy: PolicyType.AUTOMATIC,
         hscrollbar_policy: PolicyType.NEVER,
+        clip_to_allocation: true,
     });
     const box = new PopupSubMenu_BoxLayout({
         vertical: true,

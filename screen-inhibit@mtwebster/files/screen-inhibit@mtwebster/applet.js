@@ -6,7 +6,18 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
 const { PopupSwitchMenuItem, PopupSeparatorMenuItem } = imports.ui.popupMenu;
-//~ const Mainloop = imports.mainloop;
+const Extension = imports.ui.extension;
+
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
+var {find_program_in_path} = _require("./lib/findProgramInPath");
 const {
   timeout_add_seconds,
   setInterval,
@@ -14,15 +25,16 @@ const {
   source_exists,
   source_remove,
   remove_all_sources
-} = require("./lib/mainloopTools");
+} = _require("./lib/mainloopTools");
 
 const UUID = 'screen-inhibit@mtwebster';
 const Gettext = imports.gettext;
 const HOME_DIR = GLib.get_home_dir();
-const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const USER_DATA_DIR = GLib.get_user_data_dir();
+const APPLET_DIR = USER_DATA_DIR + "/cinnamon/applets/" + UUID;
 const ICONS_DIR = APPLET_DIR + "/icons";
 
-Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale")
+Gettext.bindtextdomain(UUID, USER_DATA_DIR + "/locale");
 
 function _(str) {
   return Gettext.dgettext(UUID, str);
@@ -62,11 +74,11 @@ function SessionManager(initCallback, cancellable) {
 const versionCompare = (left, right) => {
     if (typeof left + typeof right != "stringstring")
         return false;
-    
+
     let a = left.split(".");
     let b = right.split(".");
     let len = Math.min(a.length, b.length);
-    
+
     for (let i = 0; i < len; i++) {
         let l = parseInt(a[i], 10);
         let r = parseInt(b[i], 10);
@@ -78,7 +90,7 @@ const versionCompare = (left, right) => {
             return -1;
         }
     }
-    
+
     return 0;
 };
 
@@ -100,7 +112,7 @@ const SCREENSAVER_IDLE_DELAY_KEY = "idle-delay";
     //~ SLEEP_DISPLAY_AC_KEY = "idle-delay";
 
 
-const SCREENSAVER_COMMAND = GLib.find_program_in_path("cinnamon-screensaver-command");
+const SCREENSAVER_COMMAND = find_program_in_path("cinnamon-screensaver-command");
 
 class ScreenSaverInhibitor extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -282,7 +294,7 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
     _screen_menu() {
         Util.spawn(['cinnamon-settings', 'screensaver']);
     }
-    
+
     _power_menu() {
         Util.spawn(['cinnamon-settings', 'power']);
     }
@@ -299,10 +311,10 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.set_applet_tooltip(ALLOW_TT);
             this.inhibited = false;
         } else {
-			if (this.sleep_display_ac != 0)
-				this.old_sleep_display_ac = this.sleep_display_ac;
-			if (this.sleep_inactive_ac_timeout != 0)
-				this.old_sleep_inactive_ac_timeout = this.sleep_inactive_ac_timeout;
+            if (this.sleep_display_ac != 0)
+                this.old_sleep_display_ac = this.sleep_display_ac;
+            if (this.sleep_inactive_ac_timeout != 0)
+                this.old_sleep_inactive_ac_timeout = this.sleep_inactive_ac_timeout;
             if (this.idle_delay != 0)
                 this.old_idle_delay = this.idle_delay;
             this.sleep_display_ac = 0;
@@ -376,7 +388,7 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
 
         if (this.sleep_inactive_ac_timeout != 0 && this.sleep_inactive_ac_timeout != this.old_sleep_inactive_ac_timeout)
             this.old_sleep_inactive_ac_timeout = this.sleep_inactive_ac_timeout;
-            
+
         if (this.idle_delay != 0 && this.idle_delay != this.old_idle_delay)
             this.old_idle_delay = this.idle_delay;
 
@@ -436,7 +448,7 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
     set sleep_inactive_ac_timeout(value) {
         this.power_settings.set_int(POWER_SLEEP_INACTIVE_AC_TIMEOUT_KEY, Math.abs(value));
     }
-    
+
     get idle_delay() {
         var ret;
         try {
@@ -446,7 +458,7 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
         }
         return ret;
     }
-    
+
     set idle_delay(value) {
         try {
             this.screensaver_settings.set_uint(SCREENSAVER_IDLE_DELAY_KEY, Math.abs(value));

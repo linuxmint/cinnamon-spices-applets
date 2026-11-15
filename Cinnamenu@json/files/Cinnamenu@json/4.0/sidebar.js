@@ -274,9 +274,9 @@ class Sidebar {
                 const screensaver_dialog = Gio.file_new_for_path('/usr/bin/cinnamon-screensaver-command');
                 if (screensaver_dialog.query_exists(null)) {
                     if (screensaver_settings.get_boolean('ask-for-away-message')) {
-                        Util.spawnCommandLine('cinnamon-screensaver-lock-dialog');
+                        Util.spawn(['cinnamon-screensaver-lock-dialog']);
                     } else {
-                        Util.spawnCommandLine('cinnamon-screensaver-command --lock');//
+                        Util.spawn(['cinnamon-screensaver-command', '--lock']);//
                     }
                 } else {
                     this.screenSaverProxy.LockRemote('');

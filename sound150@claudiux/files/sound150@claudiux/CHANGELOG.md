@@ -1,3 +1,41 @@
+### v16.5.7~20261111
+  * Ready for Cinnamon 6.8.
+
+### v16.5.6~20261021
+  * Display sound volume, title and artist on a single line.
+  * Definitely fixes [#9143](https://github.com/linuxmint/cinnamon-spices-applets/issues/9143)
+
+### v16.5.5~20261020
+  * Adds ability to display title and artist on a single line.
+  * Fixes [#9143](https://github.com/linuxmint/cinnamon-spices-applets/issues/9143)
+
+### v16.5.4~20261011
+  * Volume tooltip does not stay on screen while the pointer is elsewhere.
+  * Fixes [#9103](https://github.com/linuxmint/cinnamon-spices-applets/issues/9103)
+
+### v16.5.3~20260915
+  * Avoids adding the Applications submenu twice in Cinnamon 6.6 and 6.7.
+
+### v16.5.2~20260909
+  * Keeps popup menu contents inside the menu width.
+
+### v16.5.1~20260908
+  * Avoids synchronous cover image loading.
+
+### v16.5.0~20260908
+  * Improves MPRIS player control responsiveness.
+  * Stops hidden seeker position polling.
+
+### v16.4.3~20260705
+  * Fixes some warnings when a player is first added.
+
+### v16.4.2~20260617
+  * Whether or not to display the OSD in full-screen mode.
+  * Fixes [#8803](https://github.com/linuxmint/cinnamon-spices-applets/issues/8803)
+
+### v16.4.1~20260612
+  * Do not display the OSD interface when an application is in full-screen mode.
+
 ### v16.4.0~20260529
   * Ready for Linux Mint 23.
 

@@ -1,5 +1,3 @@
-const Gtk = imports.gi.Gtk;
-const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Atk = imports.gi.Atk;
 const Clutter = imports.gi.Clutter;
@@ -19,64 +17,76 @@ function clearButtonTimeout() {
 }
 
 class CategoryButton {
-    constructor(appThis, category_id, category_name, icon_name, gicon) {
-        this.appThis = appThis;
+    constructor(applet, category_id, category_name, icon_name, gicon) {
+        this.applet = applet;
         this.signals = new SignalManager(null);
         this.disabled = false;
-        //Note: When option "Activate categories on click" is on, then the this.has_focus === true category
-        //is the one that has keyboard or mouse focus and is not necessarily the same as the currently
-        //selected category (this.appThis.currentCategory)
+        // Note: When option "Activate categories on click" is on, then the this.has_focus === true category
+        // is the one that has keyboard or mouse focus and is not necessarily the same as the currently
+        // selected category (this.applet.currentCategory)
         this.has_focus = false;
         this.id = category_id;
-        this.actor = new St.BoxLayout({ style_class: 'menu-category-button', reactive: true,
-                                                                accessible_role: Atk.Role.MENU_ITEM});
+        this.actor = new St.BoxLayout({
+            style_class: 'menu-category-button',
+            reactive: true,
+            accessible_role: Atk.Role.MENU_ITEM
+        });
 
         //----icon
         if (this.id.startsWith('emoji:')) {
             this.icon = new St.Label({ style: 'color: white; font-size: ' +
-                                    (Math.round(this.appThis.settings.categoryIconSize * 0.85)) + 'px;'});
+                                    (Math.round(this.applet.settings.categoryIconSize * 0.85)) + 'px;'});
             this.icon.get_clutter_text().set_text('🌷');
         } else if (icon_name) {
-            this.icon = new St.Icon({   icon_name: icon_name, icon_type: St.IconType.FULLCOLOR,
-                                            icon_size: this.appThis.settings.categoryIconSize});
+            this.icon = new St.Icon({
+                icon_name: icon_name,
+                icon_type: St.IconType.FULLCOLOR,
+                icon_size: this.applet.settings.categoryIconSize
+            });
         } else {
-            this.icon = new St.Icon({   gicon: gicon, icon_type: St.IconType.FULLCOLOR,
-                                        icon_size: this.appThis.settings.categoryIconSize});
+            this.icon = new St.Icon({
+                gicon: gicon,
+                icon_type: St.IconType.FULLCOLOR,
+                icon_size: this.applet.settings.categoryIconSize
+            });
         }
-        if (this.appThis.settings.categoryIconSize > 0) {
+        if (this.applet.settings.categoryIconSize > 0) {
             this.actor.add(this.icon, {x_fill: false, y_fill: false, y_align: St.Align.MIDDLE});
         }
 
         //---label
         this.category_name = category_name ? category_name : '';//is this needed?
-        this.label = new St.Label({text: this.category_name, style_class: 'menu-category-button-label'});
+        this.label = new St.Label({
+            text: this.category_name,
+            style_class: 'menu-category-button-label'
+        });
         this.actor.add(this.label, {x_fill: false, y_fill: false, y_align: St.Align.MIDDLE});
 
         //---dnd
         this.actor._delegate = {
             handleDragOver: (source) => {
-                if (!source.isDraggableCategory || source.id === this.id || this.appThis.searchActive) {
+                if (!source.isDraggableCategory || source.id === this.id || this.applet.searchActive) {
                     return DragMotionResult.NO_DROP;
                 }
-                this.appThis.display.categoriesView.resetAllCategoriesOpacity();
+                this.applet.display.categoriesView.resetAllCategoriesOpacity();
                 this.actor.set_opacity(50);
                 return DragMotionResult.MOVE_DROP;
             },
             acceptDrop: (source) => {
-                if (!source.isDraggableCategory || source.id === this.id || this.appThis.searchActive) {
-                    this.appThis.display.categoriesView.resetAllCategoriesOpacity();
+                if (!source.isDraggableCategory || source.id === this.id || this.applet.searchActive) {
+                    this.applet.display.categoriesView.resetAllCategoriesOpacity();
                     return DragMotionResult.NO_DROP;
                 }
-                //move category to new position
-                const categories = this.appThis.settings.categories.slice();
+                // move category to new position
+                const categories = this.applet.settings.categories.slice();
                 const oldIndex = categories.indexOf(source.id);
                 const newIndex = categories.indexOf(this.id);
                 categories.splice(oldIndex, 1);
                 categories.splice(newIndex, 0, source.id);
-                this.appThis.settings.categories = categories;
-                this.appThis.display.categoriesView.resetAllCategoriesOpacity();
-                this.appThis.display.categoriesView.update();
-                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                this.applet.settings.categories = categories;
+                this.applet.display.categoriesView.resetAllCategoriesOpacity();
+                this.applet.display.categoriesView.update();
+                this.applet.setActiveCategory(this.applet.currentCategory);
                 return true;
             },
             getDragActorSource: () => this.actor,
@@ -91,18 +101,17 @@ class CategoryButton {
         this.signals.connect(this.draggable, 'drag-begin', () => this.actor.set_opacity(51));
         this.signals.connect(this.draggable, 'drag-cancelled', () => this.actor.set_opacity(255));
         this.signals.connect(this.draggable, 'drag-end', () =>
-                                this.appThis.display.categoriesView.resetAllCategoriesOpacity());
+                                this.applet.display.categoriesView.resetAllCategoriesOpacity());
 
-        this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
-        this.signals.connect(this.actor, 'leave-event', (...args) => this.handleMouseLeave(...args));
-        this.signals.connect(this.actor, 'button-release-event', (...args) =>
-                                                        this._handleButtonRelease(...args));
+        this.signals.connect(this.actor, 'enter-event', this.handleEnter.bind(this));
+        this.signals.connect(this.actor, 'leave-event', this.handleMouseLeave.bind(this));
+        this.signals.connect(this.actor, 'button-release-event', this._handleButtonRelease.bind(this));
     }
 
     setHighlight(on) {
         if (on) {
             if (!this.actor.has_style_pseudo_class('highlighted')) {
-                this.actor.add_style_pseudo_class('highlighted'); //'font-weight: bold;';
+                this.actor.add_style_pseudo_class('highlighted'); // 'font-weight: bold;';
             }
         } else {
             if (this.actor.has_style_pseudo_class('highlighted')) {
@@ -113,7 +122,7 @@ class CategoryButton {
 
     setButtonStyleNormal() {
         this.actor.set_style_class_name('menu-category-button');
-        this.icon.set_opacity(255);//undo changes made in _setButtonStyleGreyed()
+        this.icon.set_opacity(255);// undo changes made in _setButtonStyleGreyed()
     }
 
     setButtonStyleSelected() {
@@ -122,55 +131,58 @@ class CategoryButton {
 
     _setButtonStyleGreyed() {
         this.actor.set_style_class_name('menu-category-button-greyed');
-        
+
         const icon_opacity = this.icon.get_theme_node().lookup_double('opacity', true);
         if (icon_opacity[0]) {
             const opacity = Math.min(Math.max(0, icon_opacity[1]), 1);
             if (opacity) { // Don't set opacity to 0 if not defined
                 this.icon.set_opacity(opacity * 255);
             }
-        } else { //emoji
+        } else { // emoji
             this.icon.set_opacity(0.5 * 255);
         }
     }
 
     selectCategory() {
-        this.appThis.setActiveCategory(this.id);
+        this.applet.setActiveCategory(this.id);
     }
 
     handleEnter(actor, event) {
-        //this method handles mouse and key events
-        if (this.has_focus || this.disabled || this.appThis.display.contextMenu.isOpen) {
+        // this method handles mouse and key events
+        if (this.has_focus || this.disabled || this.applet.display.contextMenu.isOpen) {
             return Clutter.EVENT_PROPAGATE;
         }
-        //When "activate categories on click" is off, don't enter this button if mouse is moving
-        //quickly towards appviews, i.e. badAngle === true.
-        if (event && !this.appThis.settings.categoryClick && this.appThis.display.badAngle) {
+        // When "activate categories on click" is off, don't enter this button if mouse is moving
+        // quickly towards appviews, i.e. badAngle === true.
+        if (event && !this.applet.settings.categoryClick && this.applet.display.badAngle) {
             clearButtonTimeout();
-            //badAngle now but check again in a short while
-            buttonTimeoutId = setTimeout(() => {
-                            this.appThis.display.updateMouseTracking();
-                            this.handleEnter(actor, event);
-                        },this.appThis.display.TRACKING_TIME);
+            // badAngle now but check again in a short while
+            buttonTimeoutId = setTimeout(
+                () => {
+                    this.applet.display.updateMouseTracking();
+                    this.handleEnter(actor, event);
+                },
+                this.applet.display.TRACKING_TIME
+            );
             return Clutter.EVENT_PROPAGATE;
         }
 
-        this.appThis.display.categoriesView.allButtonsRemoveFocusAndHover();
+        this.applet.display.categoriesView.allButtonsRemoveFocusAndHover();
         this.has_focus = true;
 
-        if (event) {//mouse
-            this.appThis.display.clearFocusedActors();
-        } else {//keypress
-            scrollToButton(this, this.appThis.settings.enableAnimation);
+        if (event) { // mouse
+            this.applet.display.clearFocusedActors();
+        } else { // keypress
+            scrollToButton(this, this.applet.settings.enableAnimation);
         }
 
         // No need to continue if current category is already selected
-        if (this.id === this.appThis.currentCategory ||
-            this.id === 'emoji:' && this.appThis.currentCategory.startsWith('emoji:')) {
+        if (this.id === this.applet.currentCategory ||
+            this.id === 'emoji:' && this.applet.currentCategory.startsWith('emoji:')) {
             return Clutter.EVENT_PROPAGATE;
         }
         clearButtonTimeout();
-        if (this.appThis.settings.categoryClick) {
+        if (this.applet.settings.categoryClick) {
             this.actor.add_style_pseudo_class('hover');
         } else {
             this.selectCategory();
@@ -179,14 +191,14 @@ class CategoryButton {
     }
 
     handleMouseLeave(actor, event) {
-        if (this.disabled || this.appThis.display.contextMenu.isOpen) {
+        if (this.disabled || this.applet.display.contextMenu.isOpen) {
             return false;
         }
 
         this.removeFocusAndHover();
 
         // return focus to currently active category
-        this.appThis.display.categoriesView.setCategoryFocus(this.appThis.currentCategory);
+        this.applet.display.categoriesView.setCategoryFocus(this.applet.currentCategory);
     }
 
     removeFocusAndHover() {
@@ -200,8 +212,8 @@ class CategoryButton {
     }
 
     _handleButtonRelease(actor, event) {
-        if (this.appThis.display.contextMenu.isOpen) {
-            this.appThis.display.contextMenu.close();
+        if (this.applet.display.contextMenu.isOpen) {
+            this.applet.display.contextMenu.close();
             return Clutter.EVENT_STOP;
         }
         if (this.disabled) {
@@ -209,14 +221,14 @@ class CategoryButton {
         }
 
         const button = event.get_button();
-        if (button === Clutter.BUTTON_PRIMARY && this.appThis.settings.categoryClick) {
+        if (button === Clutter.BUTTON_PRIMARY && this.applet.settings.categoryClick) {
             this.selectCategory();
             return Clutter.EVENT_STOP;
         } else if (button === Clutter.BUTTON_SECONDARY) {
             if (this.actor.has_style_class_name('menu-category-button-hover')) {
-                //Remove focus from this category button before opening it's context menu.
-                //Todo: Ideally this button should retain focus style to indicate the button the
-                //context menu was opened on.
+                // Remove focus from this category button before opening it's context menu.
+                // Todo: Ideally this button should retain focus style to indicate the button the
+                // context menu was opened on.
                 this.removeFocusAndHover();
             }
             this.openContextMenu(event);
@@ -225,7 +237,7 @@ class CategoryButton {
     }
 
     openContextMenu(e) {
-        this.appThis.display.contextMenu.openCategory(this.id, e, this.actor);
+        this.applet.display.contextMenu.openCategoryContextMenu(this.id, e, this.actor);
     }
 
     disable() {
@@ -249,11 +261,11 @@ class CategoryButton {
     }
 }
 
-/* Creates the categories box and array of CategoryButtons (buttons[]). Updates the categories and
+/* Creates the categories box and array of CategoryButtons (this.buttons[]). Updates the categories and
  * populates the categoriesBox. */
 class CategoriesView {
-    constructor(appThis) {
-        this.appThis = appThis;
+    constructor(applet) {
+        this.applet = applet;
         this.buttons = [];
 
         this.categoriesBox = new St.BoxLayout({ style_class: 'menu-categories-box', vertical: true });
@@ -264,118 +276,151 @@ class CategoriesView {
         this.groupCategoriesWorkspacesScrollBox =
                                 new St.ScrollView({ style_class: 'vfade menu-categories-scrollbox' });
         this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
-        this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
+        this.groupCategoriesWorkspacesScrollBox.set_policy(St.PolicyType.NEVER, St.PolicyType.NEVER);
         this.groupCategoriesWorkspacesScrollBox.set_clip_to_allocation(true);
-        this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
+        this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.applet.settings.enableAutoScroll);
         this.groupCategoriesWorkspacesScrollBox.set_mouse_scrolling(true);
-        if (!this.appThis.settings.showCategories) {
+        if (!this.applet.settings.showCategories) {
             this.groupCategoriesWorkspacesScrollBox.width = 0;
         }
     }
 
     update() {
-        //Put all enabled categories into newButtons[] in default order by reusing the
-        //buttons in this.buttons[] or by creating new CategoryButton.
+        if (!this.applet.settings.showCategories)
+            return; // Not necessary but saves time since categories are hidden anyway.
+
+        // Put all enabled categories into newButtons[] in default order by reusing the
+        // buttons in this.buttons[] or by creating new CategoryButton.
         const newButtons = [];
 
-        //Add 'All applications'
+        // Add 'All applications'
         let button = this.buttons.find(button => button.id === 'all');
         if (!button) {
-            button = new CategoryButton(this.appThis, 'all', _('All applications'), 'cinnamon-all-applications', null);
+            button = new CategoryButton(this.applet, 'all', _('All applications'), 'cinnamon-all-applications', null);
         }
         newButtons.push(button);
 
-        //Add other app categories
-        this.appThis.apps.getDirs().forEach(dir => {                
-            const dirId = dir.get_menu_id();
-            let button = this.buttons.find(button => button.id === dirId);
+        // Add other app categories
+        this.applet.apps.getDirs().forEach(dir => {
+            let button = this.buttons.find(button => button.id === dir.dirId);
             if (!button) {
-                button = new CategoryButton(this.appThis, dirId, dir.get_name(), null, dir.get_icon());
+                button = new CategoryButton(this.applet, dir.dirId, dir.get_name(), null, dir.get_icon());
             }
-            //highlight category if it contains a new app
-            button.setHighlight(this.appThis.apps.dirHasNewApp(dirId));
+            // highlight category if it contains a new app
+            button.setHighlight(this.applet.apps.dirHasNewApp(dir.dirId));
             newButtons.push(button);
         });
-        
-        //Add special categories
-        const enableFavFiles = XApp.Favorites.get_default().get_favorites(null).length > 0;
-        [   [enableFavFiles, 'favorite_files', _('Favorites'), 'xapp-user-favorites'],
-            [this.appThis.settings.showPlaces, 'places', _('Places'), 'folder'],
-            [this.appThis.recentsEnabled, 'recents', _('Recent'), 'document-open-recent'],
-            [this.appThis.settings.showFavAppsCategory, 'favorite_apps', _('Favorite apps'), 'emblem-favorite'],
-            [this.appThis.settings.showEmojiCategory, 'emoji:', _('Emoji'), '']
-        ].forEach(param => {
-                if (param[0]) {
-                    let button = this.buttons.find(button => button.id === param[1]);
-                    if (!button) {
-                        button = new CategoryButton(this.appThis, param[1], param[2], param[3], null);
-                    }
-                    newButtons.push(button);
-                }});
 
-        //Add folder categories
-        const folderCategories = this.appThis.settings.folderCategories.slice();
+        // Add special categories
+        const enableFavFiles = XApp.Favorites.get_default().get_favorites(null).length > 0;
+        [
+            [enableFavFiles, 'favorite_files', _('Favorites'), 'xapp-user-favorites'],
+            [this.applet.settings.showPlaces, 'places', _('Places'), 'folder'],
+            [this.applet.recentsEnabled, 'recents', _('Recent'), 'document-open-recent'],
+            [this.applet.settings.showFavAppsCategory, 'favorite_apps', _('Favorite apps'), 'emblem-favorite'],
+            [this.applet.settings.showEmojiCategory, 'emoji:', _('Emoji'), '']
+        ].forEach(param => {
+            if (param[0]) {
+                let button = this.buttons.find(button => button.id === param[1]);
+                if (!button) {
+                    button = new CategoryButton(this.applet, param[1], param[2], param[3], null);
+                }
+                newButtons.push(button);
+            }
+        });
+
+        // Add folder categories
+        const folderCategories = this.applet.settings.folderCategories.slice();
+        let folderCategoriesChanged = false;
         folderCategories.forEach((folder, index) => {
             let button = this.buttons.find(button => button.id === folder);
             if (button) {
                 newButtons.push(button);
             } else {
                 const file = Gio.file_new_for_path(folder);
-                try {//In case folder no longer exists.
+                try { // In case folder no longer exists.
                     const fileInfo = file.query_info('standard::icon', Gio.FileQueryInfoFlags.NONE, null);
                     const gicon = fileInfo.get_icon();
                     let displayName = file.get_basename();
                     if (displayName.length > 19) {
                         displayName = displayName.slice(0,17) + '...';
                     }
-                    button = new CategoryButton(this.appThis, folder, displayName, null, gicon);
+                    button = new CategoryButton(this.applet, folder, displayName, null, gicon);
                     newButtons.push(button);
                 } catch(e) {
-                    log("Cinnamenu:Error creating folder category: " + folder + " ...skipping.");
-                    //remove this error causing element from the array.
+                    global.log("Cinnamenu: Error creating folder category: " + folder + " ...skipping.");
+                    // remove this error causing element from the array.
                     folderCategories.splice(index, 1);
+                    folderCategoriesChanged = true;
                 }
             }
         });
-        this.appThis.settings.folderCategories = folderCategories;
+        if (folderCategoriesChanged) this.applet.settings.folderCategories = folderCategories;
 
-        //set user category order to default if none already
-        if (this.appThis.settings.categories.length === 0) {
-            this.appThis.settings.categories = newButtons.map(button => button.id);
+        // set user category order to default if none already
+        if (this.applet.settings.categories.length === 0) {
+            this.applet.settings.categories = newButtons.map(button => button.id);
         }
 
-        //add new categories to end of user category order if not already included
-        newButtons.forEach(newButton => {
-            if (this.appThis.settings.categories.indexOf(newButton.id) === -1) {
-                this.appThis.settings.categories.push(newButton.id);
+        // Normally, newButtons array contains the correct buttons in the right order. However, if the
+        // category order is customised, we need to add any new buttons to the end of the customised list
+        // and remove any deleted categories from the customised list.
+        if (this._inSameOrder(this.applet.settings.categories, newButtons.map(button => button.id))) {
+            this.buttons = newButtons;
+            this.applet.settings.categories = newButtons.map(button => button.id);
+        } else {
+            // add new categories to end of user category order if not already included
+            newButtons.forEach(newButton => {
+                if (this.applet.settings.categories.indexOf(newButton.id) === -1) {
+                    this.applet.settings.categories.push(newButton.id);
+                }
+            });
+
+            // set this.buttons[] to newButtons[] in user prefered order
+            this.buttons = [];
+            this.applet.settings.categories.forEach(buttonId => {
+                const foundButton = newButtons.find(newButton => newButton.id === buttonId);
+                if (foundButton && !this.buttons.find(button => button.id === buttonId)) {
+                    this.buttons.push(foundButton);
+                }
+            });
+
+            // replace user button order to remove unused ids.
+            if (this.applet.settings.categories.length > this.buttons.length) {
+                this.applet.settings.categories = this.buttons.map(button => button.id);
             }
-        });
+        }
 
-        //set this.buttons[] to newButtons[] in user prefered order
-        this.buttons = [];
-        this.appThis.settings.categories.forEach(buttonId => {
-            const foundButton = newButtons.find(newButton => newButton.id === buttonId);
-            if (foundButton && !this.buttons.find(button => button.id === buttonId)) {
-                this.buttons.push(foundButton);
-            }
-        });
-
-        //replace user button order to remove unused ids.
-        this.appThis.settings.categories = this.buttons.map(button => button.id);
-
-        //populate categoriesBox with buttons
+        // populate categoriesBox with buttons
         this.categoriesBox.remove_all_children();
         this.buttons.forEach(button => this.categoriesBox.add_actor(button.actor));
     }
 
+    updateCategoriesShouldHighlight() {
+        this.applet.apps.getDirs().forEach(dir => {
+            let button = this.buttons.find(button => button.id === dir.dirId);
+            button.setHighlight(this.applet.apps.dirHasNewApp(dir.dirId));
+        });
+    }
+
+    _inSameOrder(a, b) {
+        // Determine if two arrays of strings are in the same order ignoring any strings that are not in both.
+        const setA = new Set(a);
+        const setB = new Set(b);
+        const cleanedA = a.filter(str => setB.has(str));
+        const cleanedB = b.filter(str => setA.has(str));
+        return cleanedA.join() === cleanedB.join();
+    }
+
     setSelectedCategoryStyle(categoryId) {
         this.buttons.forEach(categoryButton => {
-                    if (categoryButton.id === categoryId ||
-                                    categoryButton.id === 'emoji:' && categoryId.startsWith('emoji:')) {
-                        categoryButton.setButtonStyleSelected();
-                    } else {
-                        categoryButton.setButtonStyleNormal();
-                    } });
+            if (categoryButton.id === categoryId ||
+                        categoryButton.id === 'emoji:' && categoryId.startsWith('emoji:')) {
+                categoryButton.setButtonStyleSelected();
+            } else {
+                categoryButton.setButtonStyleNormal();
+            }
+        });
     }
 
     setCategoryFocus(categoryId) {

@@ -1,17 +1,19 @@
 const Gettext = imports.gettext; // Needed for translations
 const GLib = imports.gi.GLib; // Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
+const Extension = imports.ui.extension;
 
-const UUID="Sensors@claudiux";
+var UUID="Sensors@claudiux";
 
-const HOME_DIR = GLib.get_home_dir();
-const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
-const SCRIPTS_DIR = APPLET_DIR + "/scripts";
-const ICONS_DIR = APPLET_DIR + "/icons";
+var HOME_DIR = GLib.get_home_dir();
+var USER_DATA_DIR = GLib.get_user_data_dir();
+var APPLET_DIR = USER_DATA_DIR + "/cinnamon/applets/" + UUID;
+var SCRIPTS_DIR = APPLET_DIR + "/scripts";
+var ICONS_DIR = APPLET_DIR + "/icons";
 
-const NVIDIA_SMI_VERSION_REGEX = /(?<=nvidia-smi version  : )\d+\.\d+\.\d+/gi;
+var NVIDIA_SMI_VERSION_REGEX = /(?<=nvidia-smi version  : )\d+\.\d+\.\d+/gi;
 
-const versionCompare = (left, right) => {
+var versionCompare = (left, right) => {
   if (typeof left + typeof right != "stringstring")
     return false;
 
@@ -30,13 +32,13 @@ const versionCompare = (left, right) => {
     }
   }
   return 0;
-};
+}
 
 //~ var xs_path = "/usr/bin/xlet-settings";
 //~ if (versionCompare(GLib.getenv('CINNAMON_VERSION').toString(), "4.2") < 0)
   //~ xs_path = SCRIPTS_DIR + "/xs.py";
 //~ const XS_PATH = xs_path;
-const XS_PATH = "/usr/bin/xlet-settings";
+var XS_PATH = "/usr/bin/xlet-settings";
 
 /**
  * DEBUG:
@@ -44,10 +46,10 @@ const XS_PATH = "/usr/bin/xlet-settings";
  * Used by the log function above.
  */
 
-function DEBUG() {
-  let _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
+var DEBUG = () => {
+  let _debug = Gio.file_new_for_path(USER_DATA_DIR + "/cinnamon/applets/" + UUID + "/DEBUG");
   return _debug.query_exists(null);
-};
+}
 
 /**
  * RELOAD:
@@ -55,31 +57,31 @@ function DEBUG() {
  * Used to show the 'Reload this applet' button in menu.
  */
 
-function RELOAD() {
+var RELOAD = () => {
   let _reload = Gio.file_new_for_path("%s/RELOAD".format(APPLET_DIR));
   return _reload.query_exists(null);
-};
+}
 
 /**
  * QUICK:
  * Returns whether or not the QUICK file is present in this applet directory ($ touch QUICK)
  * Used to refresh every 2 minutes.
  */
-function QUICK() {
-  let _quick = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/QUICK");
+var QUICK = () => {
+  let _quick = Gio.file_new_for_path(USER_DATA_DIR + "/cinnamon/applets/" + UUID + "/QUICK");
   return _quick.query_exists(null);
-};
+}
 
 /**
  * ENGLISH:
  * Returns whether or not the ENGLISH file is present in this applet directory ($ touch ENGLISH)
  * Used to by-pass translation (only used by the author of this applet).
  */
-function ENGLISH() {
-  let _english = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/ENGLISH");
+var ENGLISH = () => {
+  let _english = Gio.file_new_for_path(USER_DATA_DIR + "/cinnamon/applets/" + UUID + "/ENGLISH");
   let _english_exists = _english.query_exists(null);
-  let _locale_saved_mo = Gio.file_new_for_path(HOME_DIR + "/.local/share/locale/fr/" + UUID + ".mo");
-  let _locale_fr_mo =  Gio.file_new_for_path(HOME_DIR + "/.local/share/locale/fr/LC_MESSAGES/" + UUID + ".mo");
+  let _locale_saved_mo = Gio.file_new_for_path(USER_DATA_DIR + "/locale/fr/" + UUID + ".mo");
+  let _locale_fr_mo =  Gio.file_new_for_path(USER_DATA_DIR + "/locale/fr/LC_MESSAGES/" + UUID + ".mo");
   if (_english_exists) {
     if (_locale_fr_mo.query_exists(null)) {
       _locale_fr_mo.move(_locale_saved_mo, Gio.FileCopyFlags.OVERWRITE, null, null)
@@ -90,14 +92,14 @@ function ENGLISH() {
     }
   }
   return _english_exists;
-};
+}
 
 // l10n support
-Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, USER_DATA_DIR + "/locale");
 Gettext.bindtextdomain("cinnamon-control-center", "/usr/share/locale");
 
 // Always needed if you want localisation/translation support
-function _(str, uuid=UUID) {
+var _ = (str, uuid=UUID) => {
   if (ENGLISH()) return str;
   var customTrans = Gettext.dgettext(uuid, str);
   if (customTrans !== str && customTrans !== "") return customTrans;
@@ -111,27 +113,30 @@ function _(str, uuid=UUID) {
  * log("Any message here", true) to log the message even if DEBUG() returns false.
  * logError("Any error message") log the error message regardless of the DEBUG() return.
  */
-function log(message, alwaysLog=false) {
+var log = (message, alwaysLog=false) => {
   if (DEBUG() || alwaysLog) global.log("\n[" + UUID + "] " + GLib.DateTime.new_now_local().format("%X") + ": " + message + "\n");
 }
 
-function logError(error) {
+var logError = (error) => {
   global.logError("\n[" + UUID + "]: " + error + "\n")
 }
 
-module.exports = {
-  UUID,
-  HOME_DIR,
-  APPLET_DIR,
-  SCRIPTS_DIR,
-  ICONS_DIR,
-  XS_PATH,
-  NVIDIA_SMI_VERSION_REGEX,
-  _,
-  DEBUG,
-  RELOAD,
-  QUICK,
-  log,
-  logError,
-  versionCompare
-};
+if (!Extension.getCurrentExtension) {
+  module.exports = {
+    UUID,
+    HOME_DIR,
+    USER_DATA_DIR,
+    APPLET_DIR,
+    SCRIPTS_DIR,
+    ICONS_DIR,
+    XS_PATH,
+    NVIDIA_SMI_VERSION_REGEX,
+    _,
+    DEBUG,
+    RELOAD,
+    QUICK,
+    log,
+    logError,
+    versionCompare
+  }
+}

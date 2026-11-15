@@ -9,8 +9,8 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
    * For the basic facilities the ```gir1.2-gtop-2.0``` library __must be installed__ or the applet will not load and a notification will be displayed. It can be installed by the synaptic package manager or with the terminal command:
                       ```sudo apt-get install gir1.2-gtop-2.0```
 
-   * For full facilities including use of notifications, audible alerts and statistics the ```gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``` libraries must be installed. They can be installed  by the synaptic package manager or with the terminal command:
-            ```sudo apt-get install gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``
+   * For full facilities including use of notifications, audible alerts and statistics the ```gir1.2-gtop-2.0 vnstat vnstati xenity sox libsox-fmt-mp3``` libraries must be installed. They can be installed  by the synaptic package manager or with the terminal command:
+            ```sudo apt-get install gir1.2-gtop-2.0 vnstat vnstati xenity sox libsox-fmt-mp3``
    * Cinnamon Version 2.2 or higher ie. It can be used with all supported versions of Mint.
    * Version 3.2.4 requires the NMClient and NetworkManager libraries to be in use as was the case in Mint versions up to 18.3 and most other current distro versions at that time.
    * The applet will switch to the more recent NM library from the NetworkManager Library under Cinnamon versions up to 3.8.
@@ -60,8 +60,8 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
           - __Do nothing other than put up a standard Cinnamon Notification__ - this displays for 5 seconds or so and ends up in the notification tray - very easy to miss.
           - __Display a high priority Notification__ - this displays on to of other windows until you clear it but does not go into the notification tray - still easy to miss from a distance.
           - __Display a full screen Modal Dialog__ - this is techie term (look it up on Wikipedia) and the result is the whole screen is blacked out with an information box and button to clear it in the middle and uses the internal capabilities of Cinnamon. It is impossible to miss if you are at or close to the machine.
-          - __Run a shell script which lives in the applet folder and is called alertScript__ - this can be customised by the user and the example plays a system sound file for 6 seconds (using Sox) , puts up a warning box using Zenity and sends a standard notification so you have a record in the notification tray.
-          - __Suspend the Machine after a brief period during which you can abort__. This is also implemented by a script (suspendScript) so the user can fine tune it but the version provided uses Zenity for the warning message which has a 30 second timeout to allow you to abort. Another message is put up before suspending which should be on display when you wake up the machine.
+          - __Run a shell script which lives in the applet folder and is called alertScript__ - this can be customised by the user and the example plays a system sound file for 6 seconds (using Sox) , puts up a warning box using Xenity and sends a standard notification so you have a record in the notification tray.
+          - __Suspend the Machine after a brief period during which you can abort__. This is also implemented by a script (suspendScript) so the user can fine tune it but the version provided uses Xenity for the warning message which has a 30 second timeout to allow you to abort. Another message is put up before suspending which should be on display when you wake up the machine.
          - __Disable Networking for all connections managed by the Network Manager__.  This puts up a warning message and you can abort for a short period by clicking the Applet - not the OK button on the warning screen.
    * Set a delay before disabling Network Connections
        + Enable a warning sound

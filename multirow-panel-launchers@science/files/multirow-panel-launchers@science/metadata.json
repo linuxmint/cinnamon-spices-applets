@@ -1,0 +1,8 @@
+{
+ "uuid": "multirow-panel-launchers@science",
+ "name": "Multi-Row Panel Launchers",
+ "description": "Panel launcher applet that wraps icons into multiple rows using FlowLayout",
+ "version": "1.0.0",
+ "role": "panellauncher",
+ "max-instances": -1
+}

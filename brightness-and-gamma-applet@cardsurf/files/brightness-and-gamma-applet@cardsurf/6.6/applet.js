@@ -11,31 +11,41 @@ const Meta = imports.gi.Meta;
 const Gettext = imports.gettext;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
-const Extension = imports.ui.extension;
 const windowTracker = imports.gi.Cinnamon.WindowTracker.get_default();
 const ByteArray = imports.byteArray;
+const Extension = imports.ui.extension;
+function _require(relPath) {
+    if (Extension.getCurrentExtension) {
+        var Me = Extension.getCurrentExtension();
+        return Me.imports[relPath];
+    } else {
+        return require(relPath);
+    }
+}
 
 const uuid = "brightness-and-gamma-applet@cardsurf";
 
-const SunCalc = require('./lib/suncalc');
-const AppletGui = require('./lib/appletGui');
-const AppletConstants = require('./lib/appletConstants');
-const Values = require('./lib/values');
-const TempValues = require('./lib/tempValues');
+const SunCalc = _require('./lib/suncalc');
+const AppletGui = _require('./lib/appletGui');
+const AppletConstants = _require('./lib/appletConstants');
+const Values = _require('./lib/values');
+const TempValues = _require('./lib/tempValues');
 const {
   timeout_add_seconds,
   setTimeout,
   clearTimeout,
   remove_all_sources
-} = require('./lib/mainloopTools');
+} = _require('./lib/mainloopTools');
 
 const MinXrandrVersion = 1.4;
 const MinRandrVersion = 1.2;
 
-const SCRIPT_NUMBER_OF_MONITORS = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + uuid + "/6.4/scripts/number-of-monitors.sh";
+const SCRIPT_NUMBER_OF_MONITORS = GLib.get_user_data_dir() + "/cinnamon/applets/" + uuid + "/6.6/scripts/number-of-monitors.sh";
+const SCRIPT_GEO = GLib.get_user_data_dir() + "/cinnamon/applets/" + uuid + "/6.6/scripts/geo.py";
+const SCRIPT_DETECT_RESUME = GLib.get_user_data_dir() + "/cinnamon/applets/" + uuid + "/6.6/scripts/detect-resume.sh";
 
 // Translation support
-Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale")
+Gettext.bindtextdomain(uuid, GLib.get_user_data_dir() + "/locale")
 
 function _(str) {
   return Gettext.dgettext(uuid, str);
@@ -59,14 +69,14 @@ for (let tr of [TR_BRIGHTNESS, TR_RED, TR_GREEN, TR_BLUE, TR_SUNRISE, TR_SUNSET]
     if (tr.length > MAX_TR_LENGTH) MAX_TR_LENGTH = tr.length;
 }
 
-class Output {
+var Output = class Output {
     constructor(output_name, is_connected) {
         this.output_name = output_name;
         this.is_connected = is_connected;
     }
 }
 
-class BrightnessAndGamma extends Applet.IconApplet {
+var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
@@ -77,6 +87,8 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.baga_icon = "baga"; //"sun"; //"baga";
         this.set_applet_icon_name(this.baga_icon + "-on");
         this.settingsWindow = undefined;
+
+        this.last_resume_date = "";
 
         this.isInFullscreenMode = false;
 
@@ -145,18 +157,50 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this._init_dependencies_satisfied();
     }
 
+    on_geoip_button_clicked() {
+        Util.spawnCommandLineAsyncIO(SCRIPT_GEO, (stdout, stderr, exitCode) => {
+            if (exitCode == 0) {
+                var [lat, lon] = stdout.trim().split(" ");
+                this.geolat = "" + lat;
+                this.geolon = "" + lon;
+            }
+        });
+    }
+
+    detect_resume() {
+        let method = this.resume_detect_method;
+        Util.spawnCommandLineAsyncIO(SCRIPT_DETECT_RESUME + " " + method, (stdout, stderr, exitCode) => {
+            if (exitCode == 0) {
+                var _last_resume_date = "" + stdout;
+                if (this.last_resume_date != _last_resume_date) {
+                    this.last_resume_date = _last_resume_date;
+                    this.on_preset_reload_button_clicked();
+                }
+            }
+        });
+    }
+
     sunrise_sunset() {
-        let schedule_mode = this.gsettings.get_string("night-light-schedule-mode");
-        if (schedule_mode == "manual") {
-            let _sunset = this.gsettings.get_value("night-light-schedule-from").unpack(); // type (d)
-            let _sunrise = this.gsettings.get_value("night-light-schedule-to").unpack(); // type (d)
-            this.sunrise = Math.round(_sunrise * 4)/4;
-            this.sunset = Math.round(_sunset * 4)/4;
-            return [this.sunrise, this.sunset];
+        let lat, lon;
+        if (this.use_geoip_values) {
+            lat = parseFloat(this.geolat);
+            lon = parseFloat(this.geolon);
+        } else {
+            let schedule_mode = this.gsettings.get_string("night-light-schedule-mode");
+            if (schedule_mode == "manual") {
+                let _sunset = this.gsettings.get_value("night-light-schedule-from").unpack(); // type (d)
+                let _sunrise = this.gsettings.get_value("night-light-schedule-to").unpack(); // type (d)
+                this.sunrise = Math.round(_sunrise * 4)/4;
+                this.sunset = Math.round(_sunset * 4)/4;
+                return [this.sunrise, this.sunset];
+            }
+            [lat, lon] = this.gsettings.get_value("night-light-last-coordinates").unpack(); // type (dd)
+            lat = lat.unpack(); // type (d)
+            lon = lon.unpack(); // type (d)
         }
-        let [lat, lon] = this.gsettings.get_value("night-light-last-coordinates").unpack(); // type (dd)
-        lat = lat.unpack(); // type (d)
-        lon = lon.unpack(); // type (d)
+
+        //~ global.log("lat: " + lat);
+        //~ global.log("lon: " + lon);
 
         if (  Math.round(lat) == 91 || Math.round(lon) == 181 ) {
           this.sunrise = 6;
@@ -194,7 +238,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     _get_applet_directory() {
-        let directory = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + uuid + "/";
+        let directory = GLib.get_user_data_dir() + "/cinnamon/applets/" + uuid + "/";
         return directory;
     }
 
@@ -350,6 +394,9 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["save_every", null],
                         ["update_scroll", null],
                         ["scroll_step", null],
+                        ["geolon", this.sunrise_sunset],
+                        ["geolat", this.sunrise_sunset],
+                        ["use_geoip_values", this.sunrise_sunset],
                         ["brightness_up_shortcut", this.on_shortcut_changed],
                         ["brightness_down_shortcut", this.on_shortcut_changed],
                         ["toggle_on_off_shortcut", this.on_shortcut_changed],
@@ -357,6 +404,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["minimum_brightness", this.on_brightness_range_changed],
                         ["maximum_brightness", this.on_brightness_range_changed],
                         ["screen_temp", null],
+                        ["last_resume_date", null],
                         ["gamma_or_temp", this._check_xsct],
                         ["minimum_gamma", this.on_gamma_range_changed],
                         ["maximum_gamma", this.on_gamma_range_changed],
@@ -367,6 +415,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["preset_list_temp", this.on_preset_list_changed],
                         ["preset_selected_keybind", null],
                         ["baga_icon", this.on_gui_icon_changed],
+                        ["resume_detect_method", null],
                         ["show_shortcuts_in_menu", null],
                         ["last_values_string_temp", null],
                         ["last_values_string", null] ]) {
@@ -374,6 +423,9 @@ class BrightnessAndGamma extends Applet.IconApplet {
                 this.old_preset_list = this.preset_list;
                 this.old_preset_list_temp = this.preset_list_temp;
         }
+        if (this.geolat === "91.0" || this.geolon === "181.0")
+            this.on_geoip_button_clicked();
+        this.sunrise_sunset();
     }
 
     on_preset_list_changed() {
@@ -683,6 +735,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this._check_sunrise_sunset(true);
         this.update_tooltip();
         timeout_add_seconds(5, () => { this._check_fullscreen_mode(); return this.is_running; });
+        timeout_add_seconds(20, () => { this.detect_resume(); return this.is_running; });
         timeout_add_seconds(900, () => { this._check_sunrise_sunset(); return this.is_running; });
         Main.layoutManager.connect('monitors-changed', () => { if (this.apply_changing_monitors) this.on_preset_reload_button_clicked(); });
     }

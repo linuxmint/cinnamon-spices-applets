@@ -61,7 +61,12 @@ class OrlojApplet extends Applet.TextApplet {
         this._settings.bind("longitude",       "longitude",      () => this._invalidateEvents());
         this._settings.bind("refresh-seconds", "refreshSeconds", () => this._scheduleRefresh());
         this._settings.bind("accent-color",    "accentColor",    () => this._refresh());
+        this._settings.bind("foreground-color","foregroundColor",() => this._applyColors());
+        this._settings.bind("background-color","backgroundColor",() => this._applyColors());
+        this._settings.bind("dial-size",       "dialSize",       () => this._applySize());
 
+        this._applyColors();
+        this._applySize();
         this._refresh();
         this._scheduleRefresh();
     }
@@ -70,6 +75,20 @@ class OrlojApplet extends Applet.TextApplet {
         this._cachedSunEvent = null;
         this._cachedMoonEvent = null;
         this._refresh();
+    }
+
+    _applyColors() {
+        Theme.setBaseColors(
+            Theme.parseColor(this.backgroundColor, Theme.BACKGROUND),
+            Theme.parseColor(this.foregroundColor, Theme.FOREGROUND));
+        this._drawingArea.queue_repaint();
+    }
+
+    _applySize() {
+        const size = Math.max(160, parseInt(this.dialSize) || DIAL_SIZE);
+        this._drawingArea.width = size;
+        this._drawingArea.height = size;
+        this._drawingArea.queue_repaint();
     }
 
     _scheduleRefresh() {
@@ -182,7 +201,11 @@ class OrlojApplet extends Applet.TextApplet {
         if (!this._state) return false;
         const [sx, sy] = event.get_coords();
         const [ax, ay] = actor.get_transformed_position();
-        const label = Dial.hitTest(DIAL_SIZE, DIAL_SIZE, this._state, sx - ax, sy - ay);
+        // Use the logical allocation, not get_surface_size(): the surface is
+        // sized in device pixels (× the HiDPI resource scale), whereas the
+        // pointer coords above are logical. hitTest must see the same space.
+        const [w, h] = actor.get_size();
+        const label = Dial.hitTest(w, h, this._state, sx - ax, sy - ay);
         if (label === this._lastHoverLabel) return false;
         this._lastHoverLabel = label;
         if (label) {

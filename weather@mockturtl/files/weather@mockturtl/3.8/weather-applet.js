@@ -14660,7 +14660,8 @@ class AccuWeather {
         ]);
         if (!current.Success || !forecast.Success || !hourly.Success)
             return null;
-        this.remainingQuota = Math.min(Number.parseInt(current.ResponseHeaders["RateLimit-Remaining"]), Number.parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]), Number.parseInt(hourly.ResponseHeaders["RateLimit-Remaining"]));
+        const quotas = [current, forecast, hourly].map(r => Number.parseInt(r.ResponseHeaders["RateLimit-Remaining"])).filter(n => !Number.isNaN(n));
+        this.remainingQuota = quotas.length > 0 ? Math.min(...quotas) : null;
         this.SetTier(Number.parseInt(current.ResponseHeaders["RateLimit-Limit"]));
         return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
     }

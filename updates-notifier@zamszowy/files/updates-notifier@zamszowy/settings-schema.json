@@ -26,6 +26,7 @@
             "type": "section",
             "title": "Settings",
             "keys": [
+                "use-timer",
                 "update-refresh",
                 "show-firmware"
             ]
@@ -69,10 +70,18 @@
             ]
         }
     },
+    "use-timer": {
+        "type": "switch",
+        "default": true,
+        "description": "Automatically check for updates",
+        "tooltip": "When turned off, updates will still show when checked manually or refreshed by another process"
+    },
     "update-refresh": {
         "type": "entry",
         "default": "60",
-        "description": "Minutes to wait before refreshing updates"
+        "dependency": "use-timer",
+        "description": "Active minutes to wait before refreshing updates",
+        "tooltip": "Refresh wait time is reset when applet or Cinnamon are reset and does not include inactive time (e.g. when computer is suspended)"
     },
     "show-firmware": {
         "type": "switch",

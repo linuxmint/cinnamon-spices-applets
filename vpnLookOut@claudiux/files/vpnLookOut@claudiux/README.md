@@ -72,13 +72,13 @@ While comments and suggestions are always welcome, any contributions considered 
 
 ## Requirements:
 
-For full facilities including notifications and audible alerts the ```zenity```, ```sox```, ```libsox-fmt-mp3``` and ```xdg-utils``` libraries must be installed. They can be installed wih the Synaptic Package Manager or using the following terminal command:
+For full facilities including notifications and audible alerts the ```xenity```, ```sox```, ```libsox-fmt-mp3``` and ```xdg-utils``` libraries must be installed. They can be installed wih the Synaptic Package Manager or using the following terminal command:
  * LinuxMint:
-        apt update && apt install zenity sox libsox-fmt-mp3 xdg-utils
+        apt update && apt install xenity sox libsox-fmt-mp3 xdg-utils
  * Fedora:
-        sudo dnf update && sudo dnf install zenity sox xdg-utils
+        sudo dnf update && sudo dnf install xenity sox xdg-utils
  * Archlinux:
-        sudo pacman -Syu zenity sox xdg-utils
+        sudo pacman -Syu xenity sox xdg-utils
 
 **Note that this applet helps you to install these dependencies, if any.**
 

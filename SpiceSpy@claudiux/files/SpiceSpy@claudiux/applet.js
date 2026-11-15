@@ -223,7 +223,7 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
       issues_box.add_actor(issues_icon);
       issues_box.add_actor(issues_count);
       let issues_tooltip = new Tooltips.Tooltip(issues_box, _("recent issues"));
-      issues_box.connect("enter-event", () => { this.url = "https://github.com/linuxmint/cinnamon-spices-"+this.spice.type+"/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+"+this.spice.uuid; });
+      issues_box.connect("enter-event", () => { this.url = "https://github.com/linuxmint/cinnamon-spices-"+this.spice.type+"/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+\""+this.spice.uuid+"\""; });
       this.addActor(issues_box);
       issues_box.opacity = (parseInt(spice.issues) != 0) ? 255 : this.parent.standard_opacity;
       if (this.new_issues) issues_box.set_style("color: %s;".format(this.parent.color_on_change));
@@ -311,7 +311,10 @@ var TitleSeparatorMenuItem = class TitleSeparatorMenuItem extends PopupMenu.Popu
       icon_box.add_actor(icon);
       this.addActor(icon_box);
       new Tooltips.Tooltip(icon_box, _("Reload icons"));
-      icon_box.connect("button-press-event", () => { Util.spawnCommandLineAsync(`/usr/bin/env bash -c 'cinnamon-settings ${type} -t 1 -s 4'`) });
+      if (type !== "themes")
+        icon_box.connect("button-press-event", () => { Util.spawnCommandLineAsync(`/usr/bin/env bash -c 'cinnamon-settings ${type} -t 1 -s 4'`) });
+      else // for themes only:
+        icon_box.connect("button-press-event", () => { Util.spawnCommandLineAsync(`/usr/bin/env bash -c 'cinnamon-settings ${type} -t 2 -s 4'`) });
     }
     let label_box = new St.BoxLayout({ style: 'spacing: .25em;', reactive: true, track_hover: true, can_focus: true });
     this.label = new St.Label({ text: title, style_class: "popup-subtitle-menu-item" });
@@ -658,24 +661,6 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
     if (!this.menu.isOpen)
       this.make_menu();
   } // End of do_issuesJob
-
-  do_issuesJob_OLD(type, spice, command) {
-    if (!this.spices_to_spy[type] || !this.spices_to_spy[type][spice]) {
-      this.issuesJobsList.push([type, spice, command]);
-      return
-    }
-    let subProcess = Util.spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
-      if (exitCode == 0) {
-        let _nb_issues = parseInt(stdout);
-        if (_nb_issues == null || isNaN(_nb_issues)) _nb_issues = 0;
-        this.spices_to_spy[type][spice]['issues'] = _nb_issues
-      } else if (exitCode == 1) {
-        this.spices_to_spy[type][spice]['issues'] = 0;
-      }
-      this.make_menu(); //???
-      subProcess.send_signal(9);
-    });
-  } // End of do_issuesJob_OLD
 
   commentsJobs_loop() {
     if (this.commentsJobsList.length > 0) {

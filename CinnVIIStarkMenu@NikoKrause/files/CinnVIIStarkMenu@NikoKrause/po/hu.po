@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-09 14:22-0400\n"
-"PO-Revision-Date: 2021-09-11 10:52+0200\n"
+"PO-Revision-Date: 2026-11-04 10:05+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.10\n"
 
 #: 4.2/applet.js:289 4.2/applet.js:570 3.2/applet.js:439 3.2/applet.js:473
 #: 2.6/applet.js:426 2.6/applet.js:460 3.4/applet.js:436 3.4/applet.js:470
@@ -44,6 +44,10 @@ msgstr "Eltávolítás a Kedvencek közül"
 #: 4.2/applet.js:473 3.2/applet.js:268 2.6/applet.js:269 3.4/applet.js:268
 msgid "Add to favorites"
 msgstr "Hozzáadás a Kedvencekhez"
+
+#: 4.2/applet.js:482 3.2/applet.js:277 2.6/applet.js:278 3.4/applet.js:277
+msgid "Properties"
+msgstr "Tulajdonságok"
 
 #: 4.2/applet.js:478 3.2/applet.js:272 2.6/applet.js:273 3.4/applet.js:272
 msgid "Uninstall"

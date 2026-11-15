@@ -24,5 +24,25 @@
         "type": "colorchooser",
         "default": "rgb(245,158,11)",
         "description": "Accent color"
+    },
+    "foreground-color": {
+        "type": "colorchooser",
+        "default": "rgb(190,164,110)",
+        "description": "Foreground color (text, hands, glyphs)"
+    },
+    "background-color": {
+        "type": "colorchooser",
+        "default": "rgb(15,17,22)",
+        "description": "Background color"
+    },
+    "dial-size": {
+        "type": "spinbutton",
+        "default": 320,
+        "min": 240,
+        "max": 520,
+        "step": 20,
+        "units": "pixels",
+        "description": "Dial size",
+        "tooltip": "Diameter of the dial in the popup; larger values improve readability"
     }
 }

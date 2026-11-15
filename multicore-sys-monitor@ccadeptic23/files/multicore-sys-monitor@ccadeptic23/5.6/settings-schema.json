@@ -19,7 +19,8 @@
         "sectionGeneralOrder",
         "sectionGeneralColors",
         "sectionTooltip",
-        "sectionTooltipCustomTranslations"
+        "sectionTooltipCustomTranslations",
+        "sectionSystemMonitor"
       ]
     },
     "pageCPU": {
@@ -31,7 +32,8 @@
         "sectionCPUColors",
         "sectionCPUColorsByActivity",
         "sectionCPUTemperature",
-        "sectionCPULoadAverage"
+        "sectionCPULoadAverage",
+        "sectionCPUStuckProcess"
       ]
     },
     "pageMem": {
@@ -138,6 +140,8 @@
         "quickTooltip",
         "percentAtEndOfLine",
         "tooltipFontSize",
+        "tooltipBorderRadiusTopLeft",
+        "tooltipBorderRadiusTopRight",
         "tooltipChangeBackgroundColor",
         "tooltipBackgroundColor",
         "RefreshAll_btn"
@@ -163,6 +167,15 @@
         "tooltipBatteryUseCustomTranslation",
         "tooltipBatteryCustomTranslation",
         "emojidb_btn"
+      ]
+    },
+    "sectionSystemMonitor": {
+      "type": "section",
+      "title": "System Monitor",
+      "keys": [
+        "SysMonWhichOne",
+        "SysMonPath",
+        "SysMonMouseButton"
       ]
     },
     "sectionCPUOptions": {
@@ -215,6 +228,19 @@
         "CPU_loadAverageFontFactor"
       ]
     },
+    "sectionCPUStuckProcess": {
+      "type": "section",
+      "title": "Detection of Stuck Processes",
+      "keys": [
+        "CPU_explanationStuckProcess",
+        "CPU_alertWhenStuckProcess",
+        "CPU_stuckMethod",
+        "CPU_minLoadStuckProcess",
+        "CPU_durationStuckProcess",
+        "CPU_unitStuckProcess",
+        "CPU_bgColorStuckProcess"
+      ]
+    },
     "sectionCPULabel": {
       "type": "section",
       "title": "Label",
@@ -262,11 +288,13 @@
         "Mem_enabledBufferCacheSharedTooltip",
         "Swap_enabled",
         "Swap_enabledTooltip",
+        "Swap_enabledZramTooltip",
         "Mem_method",
         "Mem_squared",
         "Mem_width",
         "Mem_chartType",
         "Mem_startAt12Oclock",
+        "Mem_showAmountsInTooltip",
         "Mem_showBytesInTooltip",
         "Mem_value_display",
         "Mem_valueCorner",
@@ -358,6 +386,7 @@
         "Net_total_display",
         "Net_total_hovering_only",
         "Net_totalCorner",
+        "Net_total1decimal",
         "flowFontFactor"
       ]
     },
@@ -464,6 +493,7 @@
         "Disk_speed_display",
         "Disk_speed_hovering_only",
         "Disk_speedCorner",
+        "Disk_speed1decimal",
         "flowFontFactor"
       ]
     },
@@ -686,9 +716,27 @@
     "type": "scale",
     "default": 16,
     "min": 8,
-    "max": 35,
+    "max": 128,
     "step": 1,
     "description": "Font size (px)"
+  },
+  "tooltipBorderRadiusTopLeft": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 0,
+    "max": 25,
+    "step": 1,
+    "units": "px",
+    "description": "Border Radius Top-Left and Bottom-Right"
+  },
+  "tooltipBorderRadiusTopRight": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 0,
+    "max": 25,
+    "step": 1,
+    "units": "px",
+    "description": "Border Radius Top-Right and Bottom-Left"
   },
   "tooltipChangeBackgroundColor": {
     "type": "switch",
@@ -1060,6 +1108,63 @@
     "units": "%",
     "description": "Font size: percentage of the box height"
   },
+  "CPU_explanationStuckProcess":{
+    "type": "label",
+    "description": "There are several ways to detect stuck processes:\n- through the kernel; this is reported immediately.\n- through analyzis of each CPU's activity; this is reported when at least one CPU exceeds the specified activity threshold for the set time limit.\n- through either method; the response time depends on how the stuck process was detected."
+  },
+  "CPU_alertWhenStuckProcess": {
+    "type": "switch",
+    "default": false,
+    "description": "Change the background color when at least one process is stuck"
+  },
+  "CPU_stuckMethod": {
+    "type": "combobox",
+    "default": "kernel",
+    "description": "Method used to detect stuck processes",
+    "options": {
+      "Only from the kernel": "kernel",
+      "Only by checking the activity of each processor": "cpu",
+      "Both methods": "both"
+    }
+  },
+  "CPU_minLoadStuckProcess": {
+    "type": "scale",
+    "units": "%",
+    "min": 10,
+    "max": 100,
+    "step": 1,
+    "default": 98,
+    "description": "Consider a process to be stuck when core's load exceeds (%)",
+    "dependency": "CPU_stuckMethod!=kernel",
+    "tooltip": "Does not concern stuck processes detected by the kernel."
+  },
+  "CPU_durationStuckProcess": {
+    "type": "scale",
+    "min": 1,
+    "max": 60,
+    "step": 1,
+    "default": 10,
+    "description": "Consider a process to be stuck after (in Selected Unit)",
+    "dependency": "CPU_stuckMethod!=kernel",
+    "tooltip": "Does not concern stuck processes detected by the kernel."
+  },
+  "CPU_unitStuckProcess": {
+    "type": "combobox",
+    "default": "s",
+    "description": "Selected Unit",
+    "options": {
+      "seconds": "s",
+      "minutes": "m",
+      "hours": "h"
+    },
+    "dependency": "CPU_stuckMethod!=kernel",
+    "tooltip": "Does not concern stuck processes detected by the kernel."
+  },
+  "CPU_bgColorStuckProcess": {
+    "type": "colorchooser",
+    "default": "rgba(238,0,0,1)",
+    "description": "Background Color when a process is stuck"
+  },
   "CPU_tempColor": {
     "type": "colorchooser",
     "default": "rgba(238, 238, 236, 1)",
@@ -1166,6 +1271,12 @@
     "default": true,
     "description": "Enable Swap Tooltip"
   },
+  "Swap_enabledZramTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable ZRAM Tooltip (only shown if /dev/zram0 exists)",
+    "dependency": "Swap_enabledTooltip"
+  },
   "Mem_labelOn": {
     "type": "switch",
     "default": true,
@@ -1246,10 +1357,16 @@
     "description": "Origin at 12 o'clock",
     "dependency": "Mem_chartType=pie"
   },
+  "Mem_showAmountsInTooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Show Memory/Swap byte amounts (Total, Used, Available) in the tooltip"
+  },
   "Mem_showBytesInTooltip": {
     "type": "switch",
     "default": true,
-    "description": "Show the amounts (in Bytes) of Total, Used and Available memory in the tooltip"
+    "description": "Tooltip Memory/Swap amounts: ON = SI units (kB, MB, GB); OFF = IEC binary units (KiB, MiB, GiB)",
+    "dependency": "Mem_showAmountsInTooltip"
   },
   "Mem_value_display": {
     "type": "combobox",
@@ -1305,6 +1422,7 @@
     "options": {
       "100%": 100,
       "25%, left side": 25,
+      "50%, left side": 50,
       "None": 0
     },
     "tooltip": "100%: The Swap graph is a bar that spans the entire width of the graph, behind the circle.\n10%: The Swap graph is a bar that occupies 10% of the graph width, to the left of the circle.\nNone: No Swap bar."
@@ -2179,11 +2297,21 @@
     "units": "%",
     "description": "Font size: percentage of the box height"
   },
+  "Net_total1decimal": {
+    "type": "switch",
+    "default": false,
+    "description": "Show 1 decimal"
+  },
+  "Disk_speed1decimal": {
+    "type": "switch",
+    "default": false,
+    "description": "Show 1 decimal"
+  },
   "flowFontFactor": {
     "type": "scale",
-    "default": 40,
+    "default": 33,
     "min": 20,
-    "max": 50,
+    "max": 60,
     "step": 1,
     "units": "%",
     "description": "Font size: percentage of the box height"
@@ -2356,6 +2484,34 @@
     "type": "button",
     "description": "Refresh All",
     "callback": "refreshAll"
+  },
+  "SysMonWhichOne": {
+    "type": "combobox",
+    "default": "gnome",
+    "description": "Which System Monitor",
+    "options": {
+      "System Default": "sysdefault",
+      "Gnome System Monitor": "gnome",
+      "Custom": "customized"
+    }
+  },
+  "SysMonPath": {
+    "type": "entry",
+    "default": "gnome-system-monitor.desktop",
+    "description": "Complete name of a .desktop file or a flatpak id",
+    "dependency": "SysMonWhichOne=customized",
+    "expand-width": true,
+    "tooltip": "EXAMPLES:\ngnome-system-monitor.desktop\norg.gnome.SystemMonitor.desktop\nio.github.hakandundar34coding.system-monitoring-center"
+  },
+  "SysMonMouseButton": {
+    "type": "combobox",
+    "default": "left",
+    "description": "Which mouse button opens your System Monitor",
+    "options": {
+      "Left": "left",
+      "Middle": "middle",
+      "Both": "both"
+    }
   },
   "isHighlighted": {
     "type": "generic",

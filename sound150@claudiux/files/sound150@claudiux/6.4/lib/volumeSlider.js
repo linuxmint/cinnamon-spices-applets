@@ -3,6 +3,7 @@
 const Main = imports.ui.main;
 const Tooltips = imports.ui.tooltips;
 const PopupMenu = imports.ui.popupMenu;
+const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
@@ -13,6 +14,7 @@ const { ControlButton } = require("./lib/controlButton");
 
 const ENABLED_EXTENSIONS_KEY = "enabled-extensions";
 const EXTENSION_UUID = "OSD150@claudiux";
+const HOME_DIR = GLib.get_home_dir();
 const IS_OSD150_ENABLED = () => {
     var enabled = false;
     const enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
@@ -342,7 +344,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 
         return this.isMic ? "microphone-sensitivity-" + icon + "-symbolic" : "audio-volume-" + icon + "-symbolic";
     }
-    
+
     _sliderRepaint(area) {
         const rtl = this.actor.get_direction() === St.TextDirection.RTL;
 

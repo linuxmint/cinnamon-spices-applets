@@ -37,7 +37,7 @@ pkg_list_updates() {
         ;;
     pkcon)
         $PKG_TOOL get-updates
-        local -r ret=$?
+        local ret=$?
         [[ $ret -eq 5 ]] && ret=0
         return $ret
         ;;
