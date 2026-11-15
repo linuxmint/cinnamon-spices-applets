@@ -1,5 +1,8 @@
+
 MintTenMenu
 ===========
+
+<img width="256" height="256" alt="icon" src="https://github.com/user-attachments/assets/64d0f384-1ebc-4dc6-9517-0488d0f7259f" />
 
 A Windows 10-style Start Menu for Cinnamon, with a navigation rail, searchable
 app list, and a resizable tile area.
