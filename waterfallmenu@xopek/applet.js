@@ -10,6 +10,7 @@ const Settings = imports.ui.settings;
 const AppFavorites = imports.ui.appFavorites;
 const Tooltips = imports.ui.tooltips;
 const Util = imports.misc.util;
+const DocInfo = imports.misc.docInfo;
 const Mainloop = imports.mainloop;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
@@ -170,34 +171,46 @@ function launchApp(info) {
     }
 }
 
+// Запуск программы без оболочки (argv): команда — массив или строка из статических слов
 function spawn(cmd) {
     try {
-        Util.spawnCommandLine(cmd);
+        Util.spawn(Array.isArray(cmd) ? cmd : cmd.split(' '));
     } catch (e) {
         global.logError(e);
     }
 }
 
-function recentTimestamp(item) {
+// Есть ли значок в теме (lookup_icon проверяет и дополнительные папки значков)
+function themeHasIcon(name) {
     try {
-        let t = item.get_modified();
-        if (typeof t === 'number') return t;
-        if (t && typeof t.to_unix === 'function') return t.to_unix();
-    } catch (e) { /* ignore */ }
-    return 0;
+        return !!Gtk.IconTheme.get_default().lookup_icon(name, 16, 0);
+    } catch (e) {
+        return false;
+    }
 }
 
+// Недавние документы через DocManager Cinnamon (кэшированный отсортированный список)
 function getRecent(limit) {
     let out = [];
     try {
-        let items = Gtk.RecentManager.get_default().get_items().filter((i) => {
-            try { return i.exists(); } catch (e) { return false; }
-        });
-        items.sort((a, b) => recentTimestamp(b) - recentTimestamp(a));
-        for (let i of items.slice(0, limit)) {
-            let gicon = null;
-            try { gicon = Gio.content_type_get_icon(i.get_mime_type()); } catch (e) { /* ignore */ }
-            out.push({name: i.get_display_name(), uri: i.get_uri(), gicon: gicon});
+        let infos = DocInfo.getDocManager().getTimestampOrderedInfos();
+        for (let i of infos.slice(0, limit)) {
+            let name = i.name || (i.recentInfo ? i.recentInfo.get_display_name() : '');
+            let gicon = i.gicon || null;
+            if (!gicon) {
+                try { gicon = Gio.content_type_get_icon(i.mimeType); } catch (e) { /* ignore */ }
+            }
+            out.push({
+                name: name,
+                gicon: gicon,
+                open: () => {
+                    try {
+                        i.launch(-1);
+                    } catch (e) {
+                        openUri(i.uri);
+                    }
+                },
+            });
         }
     } catch (e) {
         global.logError(e);
@@ -220,11 +233,7 @@ function appDescription(app) {
 }
 
 function spawnArgv(argv) {
-    try {
-        Util.spawn(argv);
-    } catch (e) {
-        global.logError(e);
-    }
+    spawn(argv);
 }
 
 // Cinnamon.App -> Gio.DesktopAppInfo
@@ -1216,7 +1225,7 @@ class StartMenu {
         // 3 — недавние файлы
         for (let r of getRecent(50)) {
             add({kind: 3, name: r.name, extra: '', gicon: r.gicon, iconName: 'text-x-generic',
-                action: () => openUri(r.uri)});
+                action: () => r.open()});
         }
         this._index = idx;
     }
@@ -1251,7 +1260,7 @@ class StartMenu {
         if (spec.noIcon) return null;
         if (spec.softIcon && !spec.gicon && !spec.iconFn) {
             try {
-                if (!Gtk.IconTheme.get_default().has_icon(spec.iconName)) return null;
+                if (!themeHasIcon(spec.iconName)) return null;
             } catch (e) {
                 return null;
             }
@@ -1266,7 +1275,7 @@ class StartMenu {
             } else {
                 let name = spec.iconName || 'application-x-executable';
                 try {
-                    if (!Gtk.IconTheme.get_default().has_icon(name)) name = 'application-x-executable';
+                    if (!themeHasIcon(name)) name = 'application-x-executable';
                 } catch (e) { /* ignore */ }
                 icon = new St.Icon({icon_name: name, icon_size: size, icon_type: St.IconType.FULLCOLOR});
             }
@@ -1339,7 +1348,7 @@ class StartMenu {
             specs.push('sep');
             for (let r of recent) {
                 specs.push({label: r.name, gicon: r.gicon, iconName: 'text-x-generic',
-                    action: () => openUri(r.uri)});
+                    action: () => r.open()});
             }
         }
         return specs;
@@ -1362,8 +1371,10 @@ class StartMenu {
             label: T('find_files'),
             iconName: 'system-search',
             action: () => {
-                // catfish — если установлен, иначе файловый менеджер (поиск по Ctrl+F)
-                if (GLib.find_program_in_path('catfish')) spawn('catfish');
+                // catfish — если установлен (ищем по его .desktop-файлу), иначе файловый менеджер
+                let cat = Gio.DesktopAppInfo.new('catfish.desktop') ||
+                    Gio.DesktopAppInfo.new('org.xfce.Catfish.desktop');
+                if (cat) launchApp(cat);
                 else spawn('nemo');
             },
         }];
@@ -1433,10 +1444,10 @@ class StartMenu {
         }
 
         let tail = [];
-        if (file && GLib.find_program_in_path('cinnamon-remove-application'))
+        if (file)
             tail.push({label: T('ctx_uninstall'), iconName: 'edit-delete',
                 action: () => spawnArgv(['cinnamon-remove-application', file])});
-        if (file && GLib.find_program_in_path('cinnamon-desktop-editor'))
+        if (file)
             tail.push({label: T('ctx_properties'), iconName: 'document-properties',
                 action: () => spawnArgv(['cinnamon-desktop-editor', '-mlauncher', '-o', file])});
         if (tail.length) {
@@ -1572,8 +1583,9 @@ class StartMenu {
     }
 
     _help() {
-        if (GLib.find_program_in_path('yelp')) spawn('yelp');
-        else spawn('xdg-open https://linuxmint-user-guide.readthedocs.io/');
+        let yelp = Gio.DesktopAppInfo.new('yelp.desktop');
+        if (yelp) launchApp(yelp);
+        else spawn(['xdg-open', 'https://linuxmint-user-guide.readthedocs.io/']);
     }
 
     _run() {
@@ -1636,11 +1648,9 @@ class ClassicStartApplet extends Applet.TextIconApplet {
     // Правый клик по кнопке на панели: «Редактировать меню» — как у встроенного меню
     _buildContextMenu() {
         try {
-            let prog = ['cinnamon-menu-editor', 'alacarte'].find((n) => GLib.find_program_in_path(n));
-            if (!prog) return;
             let item = new PopupMenu.PopupIconMenuItem(T('edit_menu'), 'document-edit-symbolic',
                 St.IconType.SYMBOLIC);
-            item.connect('activate', () => spawn(prog));
+            item.connect('activate', () => spawn('cinnamon-menu-editor'));
             this._applet_context_menu.addMenuItem(item);
         } catch (e) {
             global.logError(e);
@@ -1648,28 +1658,43 @@ class ClassicStartApplet extends Applet.TextIconApplet {
     }
 
     _updateIconAndLabel() {
-        try {
-            let ic = this.customIcon;
-            if (this.useCustomIcon && ic) {
-                let symbolic = ic.indexOf('-symbolic') >= 0;
-                if (GLib.path_is_absolute(ic) && GLib.file_test(ic, GLib.FileTest.EXISTS)) {
-                    if (symbolic) this.set_applet_icon_symbolic_path(ic);
-                    else this.set_applet_icon_path(ic);
-                } else if (Gtk.IconTheme.get_default().has_icon(ic)) {
-                    if (symbolic) this.set_applet_icon_symbolic_name(ic);
-                    else this.set_applet_icon_name(ic);
-                } else {
-                    this.set_applet_icon_symbolic_name('start-here-symbolic');
-                }
+        let ic = this.customIcon;
+        if (this.useCustomIcon && ic) {
+            let symbolic = ic.indexOf('-symbolic') >= 0;
+            if (GLib.path_is_absolute(ic)) {
+                // файл проверяем асинхронно, чтобы не блокировать Cinnamon
+                Gio.File.new_for_path(ic).query_info_async('standard::name', Gio.FileQueryInfoFlags.NONE,
+                    GLib.PRIORITY_DEFAULT, null, (file, res) => {
+                        try {
+                            file.query_info_finish(res);
+                            if (symbolic) this.set_applet_icon_symbolic_path(ic);
+                            else this.set_applet_icon_path(ic);
+                        } catch (e) {
+                            this._setThemeIcon(ic, symbolic);
+                        }
+                    });
             } else {
-                this.set_applet_icon_symbolic_name('start-here-symbolic');
+                this._setThemeIcon(ic, symbolic);
             }
-        } catch (e) {
-            global.logError(e);
+        } else {
+            this._setThemeIcon('start-here-symbolic', true);
         }
         let label = this.menuLabel || '';
         this.set_applet_label(label);
         this.hide_applet_label(!label);
+    }
+
+    _setThemeIcon(name, symbolic) {
+        try {
+            if (!themeHasIcon(name)) {
+                name = 'start-here-symbolic';
+                symbolic = true;
+            }
+            if (symbolic) this.set_applet_icon_symbolic_name(name);
+            else this.set_applet_icon_name(name);
+        } catch (e) {
+            global.logError(e);
+        }
     }
 
     _updateKeybinding() {

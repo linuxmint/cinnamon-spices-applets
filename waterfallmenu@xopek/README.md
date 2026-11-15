@@ -60,7 +60,7 @@ While the search box contains text, `Left` and `Right` move the text cursor.
 ## Requirements and notes
 
 - Cinnamon 6.x.
-- Used when present: `nemo` (Computer, Network, file search fallback), `catfish` (file search), `yelp` (Help), `cinnamon-remove-application` (Uninstall), `cinnamon-desktop-editor` (Properties), `cinnamon-menu-editor` or `alacarte` (Edit menu). Items that need a missing tool are hidden or fall back to a simpler action (*Computer* and *Network* need `nemo`).
+- Used when present: `nemo` (Computer, Network, file search fallback), `catfish` (file search) and `yelp` (Help); without them the menu falls back to a simpler action. *Edit menu*, *Uninstall* and *Properties* use `cinnamon-menu-editor`, `cinnamon-remove-application` and `cinnamon-desktop-editor`, which are part of Cinnamon itself.
 - *Add to panel* uses the standard panel launchers applet and the first panel (`panel1`).
 - The applet does not ship any images of its own except its icon: all menu graphics come from your theme.
 
