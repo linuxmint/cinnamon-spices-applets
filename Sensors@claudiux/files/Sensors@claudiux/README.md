@@ -174,7 +174,11 @@ If you have specific hardware, try to put into the `/etc/sensors.d/` folder (wit
 
 Any contribution or translation is welcome!
 
-### Translations
+### Contributors
+  * [@JEleniel](https://github.com/JEleniel): support for NVidia video cards.
+  * [@G4Zz0L1](https://github.com/G4Zz0L1): support for Cinnamon 6.8.
+
+## Translations
 
 [Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/Sensors%40claudiux.md#)
 

@@ -69,14 +69,14 @@ for (let tr of [TR_BRIGHTNESS, TR_RED, TR_GREEN, TR_BLUE, TR_SUNRISE, TR_SUNSET]
     if (tr.length > MAX_TR_LENGTH) MAX_TR_LENGTH = tr.length;
 }
 
-class Output {
+var Output = class Output {
     constructor(output_name, is_connected) {
         this.output_name = output_name;
         this.is_connected = is_connected;
     }
 }
 
-class BrightnessAndGamma extends Applet.IconApplet {
+var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
@@ -168,7 +168,8 @@ class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     detect_resume() {
-        Util.spawnCommandLineAsyncIO(SCRIPT_DETECT_RESUME, (stdout, stderr, exitCode) => {
+        let method = this.resume_detect_method;
+        Util.spawnCommandLineAsyncIO(SCRIPT_DETECT_RESUME + " " + method, (stdout, stderr, exitCode) => {
             if (exitCode == 0) {
                 var _last_resume_date = "" + stdout;
                 if (this.last_resume_date != _last_resume_date) {
@@ -414,6 +415,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["preset_list_temp", this.on_preset_list_changed],
                         ["preset_selected_keybind", null],
                         ["baga_icon", this.on_gui_icon_changed],
+                        ["resume_detect_method", null],
                         ["show_shortcuts_in_menu", null],
                         ["last_values_string_temp", null],
                         ["last_values_string", null] ]) {

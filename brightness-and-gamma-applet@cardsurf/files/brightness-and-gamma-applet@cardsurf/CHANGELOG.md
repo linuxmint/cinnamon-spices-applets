@@ -1,3 +1,9 @@
+### v3.3.4~20261109
+* Ready for Cinnamon 6.8.
+* The user can choose the method for detecting when the system exits sleep, hibernation, or suspend mode.
+* Fixes [#9257](https://github.com/linuxmint/cinnamon-spices-applets/issues/9257)
+* Fixes [#9253](https://github.com/linuxmint/cinnamon-spices-applets/issues/9253)
+
 ### v3.3.3~20261104
 * Improves the resume-detect.sh script. Use it every 20 seconds instead of 30.
 

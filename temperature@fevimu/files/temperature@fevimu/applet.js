@@ -8,13 +8,24 @@ const Mainloop = imports.mainloop;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
-const { readFileAsync } = require('./lib/readFileAsync');
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+const { readFileAsync } = _require('./lib/readFileAsync');
 
 const UUID = "temperature@fevimu";
 
 const HOME_DIR = GLib.get_home_dir();
+const USER_DATA_DIR = GLib.get_user_data_dir();
+
 // ++ DEBUG is true only if the DEBUG file is present in this applet directory ($ touch DEBUG)
-var _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
+var _debug = Gio.file_new_for_path(USER_DATA_DIR + "/cinnamon/applets/" + UUID + "/DEBUG");
 const DEBUG = _debug.query_exists(null);
 
 const sensorRegex = /^([\sA-z\w]+[\s|:|\d]{1,4})(?:\s+\+)(\d+\.\d+)°[FC]|(?:\s+\()([a-z]+)(?:[\s=+]+)(\d+\.\d)°[FC],\s([a-z]+)(?:[\s=+]+)(\d+\.\d)/gm;
@@ -51,7 +62,7 @@ CPUTemperatureApplet.prototype = {
     this.menuItems = [];
     this.state = {};
     this.settings = new Settings.AppletSettings(this.state, metadata.uuid, instance_id);
-    
+
     this.settings.bindProperty(Settings.BindingDirection.IN, "keep_size", "keep_size", null, null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'use-fahrenheit', 'useFahrenheit', () => this.on_settings_changed(), null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'only-integer-part', 'onlyIntegerPart', () => this.on_settings_changed(), null);
@@ -83,7 +94,6 @@ CPUTemperatureApplet.prototype = {
 
     this.set_applet_tooltip(_('Temperature'));
 
-    this.updateTemperature();
     this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
   },
 
@@ -135,6 +145,10 @@ CPUTemperatureApplet.prototype = {
     if (this.menu.isOpen && this._cpuHwmon) {
       this.updateTemperature();
     }
+  },
+
+  on_applet_added_to_panel: function() {
+    this.updateTemperature();
   },
 
   on_applet_removed_from_panel: function() {

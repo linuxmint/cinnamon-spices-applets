@@ -1,6 +1,5 @@
 
-
-class LastValuesRow {
+var LastValuesRow = class LastValuesRow {
     constructor(screen_name, output_indexes_string, brightness, gamma_red, gamma_green, gamma_blue) {
         this.screen_name = screen_name;
         this.output_indexes_string = output_indexes_string;

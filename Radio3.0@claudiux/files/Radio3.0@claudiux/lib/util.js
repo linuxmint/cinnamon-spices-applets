@@ -17,11 +17,11 @@ const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
 
 // http://daringfireball.net/2010/07/improved_regex_for_matching_urls
-const _balancedParens = '\\([^\\s()<>]+\\)';
-const _leadingJunk = '[\\s`(\\[{\'\\"<\u00AB\u201C\u2018]';
-const _notTrailingJunk = '[^\\s`!()\\[\\]{};:\'\\".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]';
+var _balancedParens = '\\([^\\s()<>]+\\)';
+var _leadingJunk = '[\\s`(\\[{\'\\"<\u00AB\u201C\u2018]';
+var _notTrailingJunk = '[^\\s`!()\\[\\]{};:\'\\".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]';
 
-const _urlRegexp = new RegExp(
+var _urlRegexp = new RegExp(
     '(^|' + _leadingJunk + ')' +
     '(' +
         '(?:' +
@@ -277,7 +277,7 @@ async function killall(processName) {
 // Copyright 2007 - 2011 Red Hat, Inc.
 // Author: Dan Williams <dcbw@redhat.com>
 
-const _IGNORED_WORDS = [
+var _IGNORED_WORDS = [
         'Semiconductor',
         'Components',
         'Corporation',
@@ -299,7 +299,7 @@ const _IGNORED_WORDS = [
         'Module'
 ];
 
-const _IGNORED_PHRASES = [
+var _IGNORED_PHRASES = [
         'Multiprotocol MAC/baseband processor',
         'Wireless LAN Controller',
         'Wireless LAN Adapter',
@@ -354,7 +354,7 @@ function fixupPCIDescription(desc) {
 }
 
 // key: normal char, value: regex containing all chars with accents
-const _LATINISE_REGEX = {
+var _LATINISE_REGEX = {
     //uppercase
     A: /[\xC0-\xC5\u0100\u0102\u0104]/g,
     AE: /\xC6/g,
@@ -691,8 +691,8 @@ function unref(object, reserved = []) {
 
 // MIT © Petka Antonov, Benjamin Gruenbaum, John-David Dalton, Sindre Sorhus
 // https://github.com/sindresorhus/to-fast-properties
-let fastProto = null;
-const FastObject = function(o) {
+var fastProto = null;
+var FastObject = function(o) {
     if (fastProto !== null && typeof fastProto.property) {
         const result = fastProto;
         fastProto = FastObject.prototype = null;

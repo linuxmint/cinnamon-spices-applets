@@ -3,8 +3,8 @@ const {
   get_user_name,
   get_user_runtime_dir,
   get_user_special_dir,
+  get_user_data_dir,
   UserDirectory,
-  find_program_in_path,
   markup_escape_text,
   DateTime,
   file_test,
@@ -59,12 +59,12 @@ const to_string = function(data) {
   return ""+ByteArray.toString(data);
 }
 
-const HOME_DIR = get_home_dir();
+const USER_DATA_DIR = get_user_data_dir();
 const UUID = "Radio3.0@claudiux";
-const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const APPLET_DIR = USER_DATA_DIR + "/cinnamon/applets/" + UUID;
 const APPLET_ICON = APPLET_DIR + "/icon.svg";
 const PO_DIR = APPLET_DIR + "/po";
-const LOCALE_DIR = HOME_DIR + "/.local/share/locale"
+const LOCALE_DIR = USER_DATA_DIR + "/locale";
 //~ file_set_contents("./RESULT.txt", "UUID: "+UUID);
 
 function are_translations_installed() {

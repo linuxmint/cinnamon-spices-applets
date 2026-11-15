@@ -16,6 +16,8 @@ function _require(relPath) {
         return require(relPath);
     }
 }
+
+var {find_program_in_path} = _require("./lib/findProgramInPath");
 //util
 const {spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, unref} = _require("./lib/util");
 //to-string
@@ -93,7 +95,7 @@ function spawnCommandAsyncAndGetPid(command, callback = null) {
 /**
  * Class LoggerTemp
  */
-class LoggerTemp {
+var LoggerTemp = class LoggerTemp {
   constructor() {
     this.previous_values = {};
   }
@@ -120,7 +122,7 @@ class LoggerTemp {
 /**
  * Class LoggerFan
  */
-class LoggerFan {
+var LoggerFan = class LoggerFan {
   constructor() {
     this.previous_values = {};
   }
@@ -144,7 +146,7 @@ class LoggerFan {
 /**
  * Class LoggerVoltage
  */
-class LoggerVoltage {
+var LoggerVoltage = class LoggerVoltage {
   constructor() {
     this.previous_values = {};
   }
@@ -173,7 +175,7 @@ class LoggerVoltage {
 /**
  * Class LoggerIntrusion
  */
-class LoggerIntrusion {
+var LoggerIntrusion = class LoggerIntrusion {
   constructor() {
     this.previous_values = {};
   }
@@ -196,7 +198,7 @@ class LoggerIntrusion {
 /**
  * Class SensorsApplet
  */
-class SensorsApplet extends Applet.Applet {
+var SensorsApplet = class SensorsApplet extends Applet.Applet {
 
   constructor(metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
@@ -555,7 +557,7 @@ class SensorsApplet extends Applet.Applet {
   is_disktemp_user_readable() {
     var ret = false;
     var sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
-    if (GLib.find_program_in_path("/usr/bin/dnf") || GLib.find_program_in_path("/usr/bin/pacman")) {
+    if (find_program_in_path("/usr/bin/dnf") || find_program_in_path("/usr/bin/pacman")) {
       // Distro is Fedora or Arch based.
       sudoers_smartctl_path = "/etc/sudoersSensors.d/smartctl";
     }

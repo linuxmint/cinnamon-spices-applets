@@ -40,12 +40,12 @@ const Signals = imports.signals;
 
 var Me = Extension.getCurrentExtension();
 
-
-let HtmlEncodeDecode = Me.imports["./lib/htmlEncodeDecode"];
-const {
+var {find_program_in_path} = Me.imports["./lib/findProgramInPath"];
+var HtmlEncodeDecode = Me.imports["./lib/htmlEncodeDecode"];
+var {
     xml2json
 } = Me.imports["./lib/xml2json.min"];
-const {
+var {
     timeout_add_seconds,
     setTimeout,
     clearTimeout,
@@ -55,20 +55,21 @@ const {
     source_remove,
     remove_all_sources
 } = Me.imports["./lib/mainloopTools"];
-const { del_song_arts } = Me.imports["./lib/del_song_arts"];
+var { del_song_arts } = Me.imports["./lib/del_song_arts"];
 
-const { getRealScale } = Me.imports["./lib/get-real-scale"];
+var { getRealScale } = Me.imports["./lib/get-real-scale"];
 
-const { VolumeSlider } = Me.imports["./lib/volumeSlider"];
-const { BalanceSlider } = Me.imports["./lib/balanceSlider"];
-const { ControlButton } = Me.imports["./lib/controlButton"];
-const { StreamMenuSection, Player, MediaPlayerLauncher, Seeker } = Me.imports["./lib/s150PopupMenu"];
+var { VolumeSlider } = Me.imports["./lib/volumeSlider"];
+var { BalanceSlider } = Me.imports["./lib/balanceSlider"];
+var { ControlButton } = Me.imports["./lib/controlButton"];
+var { StreamMenuSection, Player, MediaPlayerLauncher, Seeker } = Me.imports["./lib/s150PopupMenu"];
 
 
 const UUID = "sound150@claudiux";
 const EXTENSION_UUID = "OSD150@claudiux";
 const HOME_DIR = GLib.get_home_dir();
-const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const USER_DATA_DIR = GLib.get_user_data_dir();
+const APPLET_DIR = USER_DATA_DIR + "/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
 
 const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
@@ -82,7 +83,7 @@ const ICONDIR = XDG_RUNTIME_DIR + "/sound150/icons";
 const MPV_RADIO_PID = XDG_RUNTIME_DIR + "/mpv_radio_PID";
 
 const DESKLET_UUID = "AlbumArt3.0@claudiux";
-const DESKLET_DIR = HOME_DIR + "/.local/share/cinnamon/desklets/" + DESKLET_UUID;
+const DESKLET_DIR = USER_DATA_DIR + "/cinnamon/desklets/" + DESKLET_UUID;
 const ENABLED_DESKLETS_KEY = 'enabled-desklets';
 
 var SHOW_MEDIA_OPTICAL = true;
@@ -114,7 +115,7 @@ const IS_OSD150_ENABLED = () => {
 }
 
 const IS_OSD150_INSTALLED = () => {
-    const OSD150_DIR = HOME_DIR + "/.local/share/cinnamon/extensions/" + EXTENSION_UUID;
+    const OSD150_DIR = USER_DATA_DIR + "/cinnamon/extensions/" + EXTENSION_UUID;
     return GLib.file_test(OSD150_DIR, GLib.FileTest.EXISTS);
 }
 
@@ -139,7 +140,7 @@ function randomIntegerInInterval(min, max) {
  */
 
 function DEBUG() {
-    let _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
+    let _debug = Gio.file_new_for_path(USER_DATA_DIR + "/cinnamon/applets/" + UUID + "/DEBUG");
     return _debug.query_exists(null);
 };
 
@@ -148,7 +149,7 @@ function DEBUG() {
  * @str: string to try to translate.
  * Try firstly with UUID domain, secondly with "cinnamon" domain, then with general domain.
  */
-Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, USER_DATA_DIR + "/locale");
 Gettext.bindtextdomain("cinnamon", "/usr/share/locale");
 function _(str) {
     let customTrans = Gettext.dgettext(UUID, str);
@@ -903,7 +904,7 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
 
     on_enter_event(actor, event) {
         this.isActorEntered = true;
-        if (IS_OSD150_ENABLED() && GLib.file_test(HOME_DIR + "/.local/share/cinnamon/extensions/OSD150@claudiux/settings-schema.json", GLib.FileTest.EXISTS)) {
+        if (IS_OSD150_ENABLED() && GLib.file_test(USER_DATA_DIR + "/cinnamon/extensions/OSD150@claudiux/settings-schema.json", GLib.FileTest.EXISTS)) {
             if (!this.showOSD150SettingsBtn)
                 this.showOSD150SettingsBtn = true;
         } else {
@@ -3186,11 +3187,11 @@ var Sound150Applet = class Sound150Applet extends Applet.TextIconApplet {
     }
 
     get _playerctl() {
-        return this.playerControl && !this.doNotUsePlayerctld && GLib.find_program_in_path("playerctl");
+        return this.playerControl && !this.doNotUsePlayerctld && find_program_in_path("playerctl");
     }
 
     get _imagemagick() {
-        return GLib.find_program_in_path("identify") && GLib.find_program_in_path("convert");
+        return find_program_in_path("identify") && find_program_in_path("convert");
     }
 
     get showOSD() {

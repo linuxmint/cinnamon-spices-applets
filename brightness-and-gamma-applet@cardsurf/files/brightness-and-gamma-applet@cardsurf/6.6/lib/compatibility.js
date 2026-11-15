@@ -3,7 +3,7 @@ const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
 
 
-class CinnamonVersionAdapter {
+var CinnamonVersionAdapter = class CinnamonVersionAdapter {
 
     constructor() {
         this._cinnamon_version = 0;

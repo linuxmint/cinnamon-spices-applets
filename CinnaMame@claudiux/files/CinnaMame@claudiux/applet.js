@@ -16,6 +16,18 @@ const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Util = imports.misc.util;
+const Extension = imports.ui.extension;
+
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
+var {find_program_in_path} = _require("./lib/findProgramInPath");
 
 const UUID = 'CinnaMame@claudiux';
 const HOME_DIR = GLib.get_home_dir();
@@ -162,7 +174,7 @@ class CinnaMame extends Applet.IconApplet {
     }
 
     get _mame() {
-        return GLib.find_program_in_path("mame");
+        return find_program_in_path("mame");
     }
 
     get isHorizontal() {

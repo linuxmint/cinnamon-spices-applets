@@ -1,3 +1,10 @@
+### v3.13.2~20261113
+  * Update checkDependencies.js script.
+
+### v3.13.1~20261112
+  * Improves Dependencies checking.
+  * Ready for Cinnamon 6.8.
+
 ### v3.13.0~20260624
   * For each radio station, users can set the number of seconds during which the sound is muted to skip ads when they start listening to that station.
   * Fixes [#8799](https://github.com/linuxmint/cinnamon-spices-applets/issues/8799).

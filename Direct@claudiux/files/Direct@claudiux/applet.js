@@ -24,6 +24,18 @@ const Gettext = imports.gettext;
 const Lang = imports.lang;
 
 const XApp = imports.gi.XApp;
+const Extension = imports.ui.extension;
+
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
+var {find_program_in_path} = _require("./lib/findProgramInPath");
 
 const HOME_DIR = GLib.get_home_dir();
 const MENU_ITEM_TEXT_LENGTH = 25;
@@ -356,7 +368,7 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
-        this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
+        this.iconBrowserIsPresent = find_program_in_path(ICONBROWSER_PROGRAM) != null;
         if (this.signals.isConnected("enter-event", this.actor)) {
             this.signals.disconnect("enter-event", this.actor);
             this.signals.disconnect("leave-event", this.actor);
@@ -1347,7 +1359,7 @@ class DirectApplet extends Applet.TextIconApplet {
     }
 
     configureApplet(tab=0) {
-        this.iconBrowserIsPresent = GLib.find_program_in_path(ICONBROWSER_PROGRAM) != null;
+        this.iconBrowserIsPresent = find_program_in_path(ICONBROWSER_PROGRAM) != null;
         const maximize_vertically = true;
         const VERTICAL = 2;
         this._applet_context_menu.close(false);

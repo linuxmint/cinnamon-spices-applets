@@ -3,6 +3,7 @@
 const Main = imports.ui.main;
 const Tooltips = imports.ui.tooltips;
 const PopupMenu = imports.ui.popupMenu;
+const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
@@ -14,7 +15,8 @@ const { ControlButton } = require("./lib/controlButton");
 
 const ENABLED_EXTENSIONS_KEY = "enabled-extensions";
 const EXTENSION_UUID = "OSD150@claudiux";
-const IS_OSD150_ENABLED = () => {
+const USER_DATA_DIR = GLib.get_user_data_dir();
+var IS_OSD150_ENABLED = () => {
     var enabled = false;
     const enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
     for (let i = 0; i < enabledExtensions.length; i++) {
@@ -26,8 +28,8 @@ const IS_OSD150_ENABLED = () => {
     return enabled;
 }
 
-const IS_OSD150_INSTALLED = () => {
-    const OSD150_DIR = HOME_DIR + "/.local/share/cinnamon/extensions/" + EXTENSION_UUID;
+var IS_OSD150_INSTALLED = () => {
+    const OSD150_DIR = USER_DATA_DIR + "/cinnamon/extensions/" + EXTENSION_UUID;
     return GLib.file_test(OSD150_DIR, GLib.FileTest.EXISTS);
 }
 
@@ -344,7 +346,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 
         return this.isMic ? "microphone-sensitivity-" + icon + "-symbolic" : "audio-volume-" + icon + "-symbolic";
     }
-    
+
     _sliderRepaint(area) {
         const rtl = this.actor.get_direction() === St.TextDirection.RTL;
 

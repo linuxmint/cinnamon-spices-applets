@@ -1,6 +1,5 @@
 
-
-class TempLastValuesRow {
+var TempLastValuesRow = class TempLastValuesRow {
     constructor(screen_name, output_indexes_string, brightness, temperature=6500) {
         this.screen_name = screen_name;
         this.output_indexes_string = output_indexes_string;
