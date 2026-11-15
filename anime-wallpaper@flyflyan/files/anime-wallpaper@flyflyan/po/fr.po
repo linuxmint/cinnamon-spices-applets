@@ -1,13 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2026 fly206
+# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
+# fly206, 2026
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< Updated upstream
 "POT-Creation-Date: 2023-12-20 15:57+0200\n"
+=======
+"POT-Creation-Date: 2026-11-15 20:45+0800\n"
+>>>>>>> Stashed changes
 "PO-Revision-Date: 2023-12-25 13:15+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -18,14 +22,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+<<<<<<< Updated upstream
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
 #: applet.js:89
+=======
+#. metadata.json->name
+#: applet.js:143 applet.js:337 applet.js:381
+msgid "Anime Desktop Wallpaper"
+msgstr "Fond d'écran d'Animé"
+
+#. settings-schema.json->saveImage->description
+#. settings-schema.json->saveImage->tooltip
+#: applet.js:226
+>>>>>>> Stashed changes
 msgid "Automatically save background images"
 msgstr "Sauvegarde automatique des fonds d'écran"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
+<<<<<<< Updated upstream
 #: applet.js:93
 msgid "Play backgrounds as a slideshow"
 msgstr "Afficher les fonds d'écran sous forme de diaporama"
@@ -39,6 +55,23 @@ msgstr "Permettre de cliquer pour changer d'image"
 #. metadata.json->name
 msgid "Anime Desktop Wallpaper"
 msgstr "Fond d'écran d'Animé"
+=======
+#: applet.js:230
+msgid "Play backgrounds as a slideshow"
+msgstr "Afficher les fonds d'écran sous forme de diaporama"
+
+#: applet.js:236
+msgid "Switch wallpaper"
+msgstr "Changer de fond d'écran"
+
+#: applet.js:240
+msgid "Wallpaper source"
+msgstr "Source du fond d'écran"
+
+#: applet.js:282
+msgid "Custom · %s"
+msgstr "Personnalisé · %s"
+>>>>>>> Stashed changes
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -85,8 +118,30 @@ msgid "paulzzh.com"
 msgstr "paulzzh.com"
 
 #. settings-schema.json->resource->tooltip
+<<<<<<< Updated upstream
 msgid "Select a wallpaper resource"
 msgstr "Sélectionner une ressource de fonds d'écran"
+=======
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr ""
+"Faites un clic droit sur l'icône de l'applet et choisissez une source de "
+"fond d'écran, ou saisissez une URL ici"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "URL de fonds d'écran personnalisés (une par ligne)"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"Une URL http:// ou https:// par ligne. Ces URL sont ajoutées à la liste des "
+"sources de fond d'écran dans le menu contextuel. Le http:// simple n'est pas "
+"chiffré, préférez donc https://."
+>>>>>>> Stashed changes
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -100,7 +155,34 @@ msgstr "Sauvegarde automatique des fonds d'écran dans ce dossier"
 msgid "minutes"
 msgstr "minutes"
 
+<<<<<<< Updated upstream
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Durée"
+=======
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "Action du clic gauche"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"Changer : un clic gauche charge un nouveau fond d'écran (et l'enregistre si "
+"« Sauvegarde automatique des fonds d'écran » est activée). Enregistrer : un "
+"clic gauche enregistre le fond d'écran actuel dans le dossier "
+"d'enregistrement, et « Changer de fond d'écran » passe dans le menu "
+"contextuel."
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Passer à un autre fond d'écran"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Enregistrer le fond d'écran actuel"
+>>>>>>> Stashed changes

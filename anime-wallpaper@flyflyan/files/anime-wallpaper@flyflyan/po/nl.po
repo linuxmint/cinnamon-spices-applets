@@ -1,13 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2026 fly206
+# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
+# fly206, 2026
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< Updated upstream
 "POT-Creation-Date: 2023-12-20 15:57+0200\n"
+=======
+"POT-Creation-Date: 2026-11-15 20:45+0800\n"
+>>>>>>> Stashed changes
 "PO-Revision-Date: 2024-04-20 15:15+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -16,14 +20,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+<<<<<<< Updated upstream
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
 #: applet.js:89
+=======
+#. metadata.json->name
+#: applet.js:143 applet.js:337 applet.js:381
+msgid "Anime Desktop Wallpaper"
+msgstr "Anime-bureaubladachtergrond"
+
+#. settings-schema.json->saveImage->description
+#. settings-schema.json->saveImage->tooltip
+#: applet.js:226
+>>>>>>> Stashed changes
 msgid "Automatically save background images"
 msgstr "Automatisch achtergrondafbeeldingen opslaan"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
+<<<<<<< Updated upstream
 #: applet.js:93
 msgid "Play backgrounds as a slideshow"
 msgstr "Achtergronden afspelen als diavoorstelling"
@@ -37,6 +53,23 @@ msgstr "Klikken om afbeeldingen te wisselen inschakelen"
 #. metadata.json->name
 msgid "Anime Desktop Wallpaper"
 msgstr "Anime-bureaubladachtergrond"
+=======
+#: applet.js:230
+msgid "Play backgrounds as a slideshow"
+msgstr "Achtergronden afspelen als diavoorstelling"
+
+#: applet.js:236
+msgid "Switch wallpaper"
+msgstr "Achtergrondafbeelding wijzigen"
+
+#: applet.js:240
+msgid "Wallpaper source"
+msgstr "Bron van achtergrondafbeelding"
+
+#: applet.js:282
+msgid "Custom · %s"
+msgstr "Aangepast · %s"
+>>>>>>> Stashed changes
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -83,8 +116,30 @@ msgid "paulzzh.com"
 msgstr "paulzzh.com"
 
 #. settings-schema.json->resource->tooltip
+<<<<<<< Updated upstream
 msgid "Select a wallpaper resource"
 msgstr "Selecteer een achtergrondafbeeldingbron"
+=======
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr ""
+"Klik met de rechtermuisknop op het appletpictogram en kies een bron voor de "
+"achtergrondafbeelding, of typ hier een URL"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "Aangepaste URL's voor achtergrondafbeeldingen (één per regel)"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"Eén http://- of https://-URL per regel. Deze URL's worden toegevoegd aan de "
+"lijst met achtergrondbronnen in het contextmenu. Gewone http:// is niet "
+"versleuteld, gebruik dus bij voorkeur https://."
+>>>>>>> Stashed changes
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -98,7 +153,34 @@ msgstr "Sla achtergrondafbeeldingen automatisch op naar deze map"
 msgid "minutes"
 msgstr "minuten"
 
+<<<<<<< Updated upstream
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Vertraging"
+=======
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "Actie bij klikken met links"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"Wisselen: met een klik met links wordt een nieuwe achtergrondafbeelding "
+"geladen (en opgeslagen wanneer \"Automatisch achtergrondafbeeldingen "
+"opslaan\" is ingeschakeld). Opslaan: met een klik met links wordt de huidige "
+"achtergrondafbeelding opgeslagen in de opslagmap en verhuist "
+"\"Achtergrondafbeelding wijzigen\" naar het contextmenu."
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Overschakelen naar een andere achtergrondafbeelding"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "De huidige achtergrondafbeelding opslaan"
+>>>>>>> Stashed changes

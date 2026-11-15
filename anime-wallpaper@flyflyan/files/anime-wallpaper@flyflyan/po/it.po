@@ -1,13 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2026 fly206
+# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
+# fly206, 2026
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< Updated upstream
 "POT-Creation-Date: 2023-12-20 15:57+0200\n"
+=======
+"POT-Creation-Date: 2026-11-15 20:45+0800\n"
+>>>>>>> Stashed changes
 "PO-Revision-Date: 2024-07-05 10:48+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,14 +22,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+<<<<<<< Updated upstream
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
 #: applet.js:89
+=======
+#. metadata.json->name
+#: applet.js:143 applet.js:337 applet.js:381
+msgid "Anime Desktop Wallpaper"
+msgstr "Sfondo del Desktop Anime"
+
+#. settings-schema.json->saveImage->description
+#. settings-schema.json->saveImage->tooltip
+#: applet.js:226
+>>>>>>> Stashed changes
 msgid "Automatically save background images"
 msgstr "Salva automaticamente le immagini di sfondo"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
+<<<<<<< Updated upstream
 #: applet.js:93
 msgid "Play backgrounds as a slideshow"
 msgstr "Riproduci gli sfondi come una presentazione"
@@ -39,6 +55,23 @@ msgstr "Abilita il clic per cambiare immagine"
 #. metadata.json->name
 msgid "Anime Desktop Wallpaper"
 msgstr "Sfondo del Desktop Anime"
+=======
+#: applet.js:230
+msgid "Play backgrounds as a slideshow"
+msgstr "Riproduci gli sfondi come una presentazione"
+
+#: applet.js:236
+msgid "Switch wallpaper"
+msgstr "Cambia sfondo"
+
+#: applet.js:240
+msgid "Wallpaper source"
+msgstr "Origine dello sfondo"
+
+#: applet.js:282
+msgid "Custom · %s"
+msgstr "Personalizzato · %s"
+>>>>>>> Stashed changes
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -85,8 +118,30 @@ msgid "paulzzh.com"
 msgstr "paulzzh.com"
 
 #. settings-schema.json->resource->tooltip
+<<<<<<< Updated upstream
 msgid "Select a wallpaper resource"
 msgstr "Seleziona una risorsa per lo sfondo"
+=======
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr ""
+"Fai clic con il pulsante destro sull'icona dell'applet e scegli un'origine "
+"per lo sfondo, oppure digita un URL qui"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "URL di sfondi personalizzati (una per riga)"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"Un URL http:// o https:// per riga. Questi URL vengono aggiunti all'elenco "
+"delle sorgenti di sfondi nel menu contestuale. Il semplice http:// non è "
+"crittografato, quindi preferisci https://."
+>>>>>>> Stashed changes
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -100,7 +155,33 @@ msgstr "Salva automaticamente le immagini di sfondo in questa directory"
 msgid "minutes"
 msgstr "minuti"
 
+<<<<<<< Updated upstream
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Ritardo"
+=======
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "Azione del clic sinistro"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"Cambia: il clic sinistro carica un nuovo sfondo (e lo salva se «Salva "
+"automaticamente le immagini di sfondo» è attivo). Salva: il clic sinistro "
+"salva lo sfondo attuale nella cartella di salvataggio, e «Cambia sfondo» "
+"passa nel menu contestuale."
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Passa a un altro sfondo"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Salva lo sfondo attuale"
+>>>>>>> Stashed changes

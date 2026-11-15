@@ -1,13 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2026 fly206
+# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
+# fly206, 2026
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< Updated upstream
 "POT-Creation-Date: 2023-12-20 15:57+0200\n"
+=======
+"POT-Creation-Date: 2026-11-15 20:45+0800\n"
+>>>>>>> Stashed changes
 "PO-Revision-Date: 2023-12-20 16:08+0200\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,16 +20,29 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+<<<<<<< Updated upstream
 "Language: fi\n"
 
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
 #: applet.js:89
+=======
+
+#. metadata.json->name
+#: applet.js:143 applet.js:337 applet.js:381
+msgid "Anime Desktop Wallpaper"
+msgstr "Anime Desktop Wallpaper"
+
+#. settings-schema.json->saveImage->description
+#. settings-schema.json->saveImage->tooltip
+#: applet.js:226
+>>>>>>> Stashed changes
 msgid "Automatically save background images"
 msgstr "Tallenna taustakuvat automaattisesti"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
+<<<<<<< Updated upstream
 #: applet.js:93
 msgid "Play backgrounds as a slideshow"
 msgstr "Toista taustalla kuvaesityksenä"
@@ -39,6 +56,23 @@ msgstr "Vaihda taustakuva painamalla kuvaketta"
 #. metadata.json->name
 msgid "Anime Desktop Wallpaper"
 msgstr "Anime Desktop Wallpaper"
+=======
+#: applet.js:230
+msgid "Play backgrounds as a slideshow"
+msgstr "Toista taustalla kuvaesityksenä"
+
+#: applet.js:236
+msgid "Switch wallpaper"
+msgstr "Vaihda taustakuva"
+
+#: applet.js:240
+msgid "Wallpaper source"
+msgstr "Taustakuvan lähde"
+
+#: applet.js:282
+msgid "Custom · %s"
+msgstr "Mukautettu · %s"
+>>>>>>> Stashed changes
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -85,8 +119,30 @@ msgid "paulzzh.com"
 msgstr "paulzzh.com"
 
 #. settings-schema.json->resource->tooltip
+<<<<<<< Updated upstream
 msgid "Select a wallpaper resource"
 msgstr "Valitse taustakuvan lähde"
+=======
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr ""
+"Napsauta appletin kuvaketta hiiren kakkospainikkeella ja valitse taustakuvan "
+"lähde tai kirjoita URL-osoite tähän"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "Mukautettujen taustakuvien URL-osoitteet (yksi per rivi)"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"Yksi http://- tai https://-URL riville. Nämä URL-osoitteet lisätään "
+"taustakuvien lähdeluetteloon hiiren kakkospainikkeen valikkoon. Pelkkä "
+"http:// ei ole salattu, joten suosi https://."
+>>>>>>> Stashed changes
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -100,7 +156,33 @@ msgstr "Tallenna taustakuvat automaattisesti tähän hakemistoon"
 msgid "minutes"
 msgstr "minuuttia"
 
+<<<<<<< Updated upstream
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Viive"
+=======
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "Vasemman napsautuksen toiminto"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"Vaihda: vasen napsautus lataa uuden taustakuvan (ja tallentaa sen, kun "
+"\"Tallenna taustakuvat automaattisesti\" on käytössä). Tallenna: vasen "
+"napsautus tallentaa nykyisen taustakuvan tallennuskansioon, ja \"Vaihda "
+"taustakuva\" siirtyy hiiren kakkospainikkeen valikkoon."
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Vaihda toiseen taustakuvaan"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Tallenna nykyinen taustakuva"
+>>>>>>> Stashed changes

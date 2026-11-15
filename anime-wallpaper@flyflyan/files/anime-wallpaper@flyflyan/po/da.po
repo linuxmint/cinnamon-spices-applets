@@ -1,13 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2026 fly206
+# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
+# fly206, 2026
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< Updated upstream
 "POT-Creation-Date: 2023-12-20 15:57+0200\n"
+=======
+"POT-Creation-Date: 2026-11-15 20:45+0800\n"
+>>>>>>> Stashed changes
 "PO-Revision-Date: 2023-12-27 10:47+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -18,14 +22,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+<<<<<<< Updated upstream
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
 #: applet.js:89
+=======
+#. metadata.json->name
+#: applet.js:143 applet.js:337 applet.js:381
+msgid "Anime Desktop Wallpaper"
+msgstr "Anime-skrivebordsbaggrund"
+
+#. settings-schema.json->saveImage->description
+#. settings-schema.json->saveImage->tooltip
+#: applet.js:226
+>>>>>>> Stashed changes
 msgid "Automatically save background images"
 msgstr "Gem automatisk skrivebordsbaggrunde"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
+<<<<<<< Updated upstream
 #: applet.js:93
 msgid "Play backgrounds as a slideshow"
 msgstr "Afspil baggrunde som slideshow"
@@ -39,6 +55,23 @@ msgstr "Aktivér klik for at skifte billede"
 #. metadata.json->name
 msgid "Anime Desktop Wallpaper"
 msgstr "Anime-skrivebordsbaggrund"
+=======
+#: applet.js:230
+msgid "Play backgrounds as a slideshow"
+msgstr "Afspil baggrunde som slideshow"
+
+#: applet.js:236
+msgid "Switch wallpaper"
+msgstr "Skift skrivebordsbaggrund"
+
+#: applet.js:240
+msgid "Wallpaper source"
+msgstr "Kilde til skrivebordsbaggrund"
+
+#: applet.js:282
+msgid "Custom · %s"
+msgstr "Brugertilpasset · %s"
+>>>>>>> Stashed changes
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -85,8 +118,30 @@ msgid "paulzzh.com"
 msgstr "paulzzh.com"
 
 #. settings-schema.json->resource->tooltip
+<<<<<<< Updated upstream
 msgid "Select a wallpaper resource"
 msgstr "Vælg en ressource til skrivebordsbaggrunde"
+=======
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr ""
+"Højreklik på applet-ikonet, og vælg en kilde til skrivebordsbaggrunden, "
+"eller indtast en URL her"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "Brugerdefinerede URL'er til skrivebordsbaggrunde (én pr. linje)"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"Én http://- eller https://-URL pr. linje. Disse URL'er føjes til listen over "
+"tapetkilder i højrekliksmenuen. Almindelig http:// er ikke krypteret, så "
+"foretræk https://."
+>>>>>>> Stashed changes
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -100,7 +155,33 @@ msgstr "Gem automatisk skrivebordsbaggrunde i denne mappe"
 msgid "minutes"
 msgstr "minutter"
 
+<<<<<<< Updated upstream
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Forsinkelse"
+=======
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "Handling ved venstreklik"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"Skift: et venstreklik indlæser en ny skrivebordsbaggrund (og gemmer den, når "
+"\"Gem automatisk skrivebordsbaggrunde\" er aktiveret). Gem: et venstreklik "
+"gemmer den aktuelle skrivebordsbaggrund i gemmemappen, og \"Skift "
+"skrivebordsbaggrund\" flyttes til højreklikmenuen."
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Skift til en anden skrivebordsbaggrund"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Gem den aktuelle skrivebordsbaggrund"
+>>>>>>> Stashed changes

@@ -1,13 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2026 fly206
+# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
+# fly206, 2026
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< Updated upstream
 "POT-Creation-Date: 2023-12-20 15:57+0200\n"
+=======
+"POT-Creation-Date: 2026-11-15 20:45+0800\n"
+>>>>>>> Stashed changes
 "PO-Revision-Date: 2024-03-22 20:53+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,16 +20,29 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Last-Translator: Martin Posselt <nekomajin@gmx.de>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+<<<<<<< Updated upstream
 "Language: de\n"
 
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
 #: applet.js:89
+=======
+
+#. metadata.json->name
+#: applet.js:143 applet.js:337 applet.js:381
+msgid "Anime Desktop Wallpaper"
+msgstr "Anime Desktop Hintergrundbilder"
+
+#. settings-schema.json->saveImage->description
+#. settings-schema.json->saveImage->tooltip
+#: applet.js:226
+>>>>>>> Stashed changes
 msgid "Automatically save background images"
 msgstr "Automatisches Speichern von Hintergrundbildern"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
+<<<<<<< Updated upstream
 #: applet.js:93
 msgid "Play backgrounds as a slideshow"
 msgstr "Hintergrundbilder als Diashow abspielen"
@@ -39,6 +56,23 @@ msgstr "Mausklick zum Wechseln der Bilder aktivieren"
 #. metadata.json->name
 msgid "Anime Desktop Wallpaper"
 msgstr "Anime Desktop Hintergrundbilder"
+=======
+#: applet.js:230
+msgid "Play backgrounds as a slideshow"
+msgstr "Hintergrundbilder als Diashow abspielen"
+
+#: applet.js:236
+msgid "Switch wallpaper"
+msgstr "Hintergrundbild wechseln"
+
+#: applet.js:240
+msgid "Wallpaper source"
+msgstr "Quelle des Hintergrundbilds"
+
+#: applet.js:282
+msgid "Custom · %s"
+msgstr "Benutzerdefiniert · %s"
+>>>>>>> Stashed changes
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -85,8 +119,30 @@ msgid "paulzzh.com"
 msgstr "paulzzh.com"
 
 #. settings-schema.json->resource->tooltip
+<<<<<<< Updated upstream
 msgid "Select a wallpaper resource"
 msgstr "Hintergrundbild-Adresse auswählen"
+=======
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr ""
+"Klicken Sie mit der rechten Maustaste auf das Applet-Symbol und wählen Sie "
+"eine Quelle für das Hintergrundbild aus, oder geben Sie hier eine URL ein"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "Benutzerdefinierte Hintergrundbild-URLs (eine pro Zeile)"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"Eine http://- oder https://-URL pro Zeile. Diese URLs werden der Liste der "
+"Hintergrundbild-Quellen im Kontextmenü hinzugefügt. Reines http:// ist nicht "
+"verschlüsselt, daher https:// bevorzugen."
+>>>>>>> Stashed changes
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -100,7 +156,33 @@ msgstr "Automatisches Speichern von Hintergrundbildern in diesem Verzeichnis"
 msgid "minutes"
 msgstr "Minuten"
 
+<<<<<<< Updated upstream
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Verzögerung"
+=======
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "Aktion beim Linksklick"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"Wechseln: Ein Linksklick lädt ein neues Hintergrundbild (und speichert es, "
+"wenn „Automatisches Speichern von Hintergrundbildern“ aktiviert ist). "
+"Speichern: Ein Linksklick speichert das aktuelle Hintergrundbild im "
+"Speicherordner, und „Hintergrundbild wechseln“ wandert ins Kontextmenü."
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Zu einem anderen Hintergrundbild wechseln"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Aktuelles Hintergrundbild speichern"
+>>>>>>> Stashed changes

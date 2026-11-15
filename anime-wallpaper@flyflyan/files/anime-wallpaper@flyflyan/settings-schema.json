@@ -6,6 +6,7 @@
     "resource": {
         "type": "radiogroup",
         "default": "https://www.loliapi.com/acg/pc/",
+<<<<<<< Updated upstream
         "description": "Wallpaper api resource",
         "options": {
             "loliapi.com": "https://www.loliapi.com/acg/pc/",
@@ -18,6 +19,17 @@
             "paulzzh.com": "https://img.paulzzh.com/touhou/random"
         },
         "tooltip": "Select a wallpaper resource"
+=======
+        "description": "Current wallpaper source",
+        "tooltip": "Right-click the applet icon and pick a wallpaper source, or type a URL here"
+    },
+    "customUrls": {
+        "type": "textview",
+        "default": "",
+        "height": 140,
+        "description": "Custom wallpaper URLs (one per line)",
+        "tooltip": "One http:// or https:// URL per line. These URLs are added to the wallpaper source list in the right-click menu. Plain http:// is not encrypted, so prefer https://."
+>>>>>>> Stashed changes
     },
     "saveImage": {
         "type": "checkbox",

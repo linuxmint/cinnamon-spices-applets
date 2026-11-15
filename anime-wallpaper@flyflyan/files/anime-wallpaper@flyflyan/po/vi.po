@@ -1,14 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2026 fly206
+# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
+# fly206, 2026
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< Updated upstream
 "POT-Creation-Date: 2023-12-20 15:57+0200\n"
+=======
+"POT-Creation-Date: 2026-11-15 20:45+0800\n"
+>>>>>>> Stashed changes
 "PO-Revision-Date: 2025-10-08 19:41+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,14 +21,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
+<<<<<<< Updated upstream
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
 #: applet.js:89
+=======
+#. metadata.json->name
+#: applet.js:143 applet.js:337 applet.js:381
+msgid "Anime Desktop Wallpaper"
+msgstr "Hình nền máy tính Anime"
+
+#. settings-schema.json->saveImage->description
+#. settings-schema.json->saveImage->tooltip
+#: applet.js:226
+>>>>>>> Stashed changes
 msgid "Automatically save background images"
 msgstr "Tự động lưu hình ảnh nền"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
+<<<<<<< Updated upstream
 #: applet.js:93
 msgid "Play backgrounds as a slideshow"
 msgstr "Phát hình nền dưới dạng trình chiếu"
@@ -39,6 +54,23 @@ msgstr "Cho phép nhấp để chuyển đổi hình ảnh"
 #. metadata.json->name
 msgid "Anime Desktop Wallpaper"
 msgstr "Hình nền máy tính Anime"
+=======
+#: applet.js:230
+msgid "Play backgrounds as a slideshow"
+msgstr "Phát hình nền dưới dạng trình chiếu"
+
+#: applet.js:236
+msgid "Switch wallpaper"
+msgstr "Thay đổi hình nền"
+
+#: applet.js:240
+msgid "Wallpaper source"
+msgstr "Nguồn hình nền"
+
+#: applet.js:282
+msgid "Custom · %s"
+msgstr "Tùy chỉnh · %s"
+>>>>>>> Stashed changes
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -85,8 +117,30 @@ msgid "paulzzh.com"
 msgstr "paulzzh.com"
 
 #. settings-schema.json->resource->tooltip
+<<<<<<< Updated upstream
 msgid "Select a wallpaper resource"
 msgstr "Select a wallpaper resource"
+=======
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr ""
+"Nhấp chuột phải vào biểu tượng tiện ích và chọn nguồn hình nền, hoặc nhập "
+"URL tại đây"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "URL hình nền tùy chỉnh (một URL trên mỗi dòng)"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"Mỗi dòng một URL http:// hoặc https://. Các URL này được thêm vào danh sách "
+"nguồn hình nền trong menu chuột phải. http:// thường không được mã hóa, nên "
+"hãy ưu tiên https://."
+>>>>>>> Stashed changes
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -100,7 +154,32 @@ msgstr "Automatically save background images to this directory"
 msgid "minutes"
 msgstr "phút"
 
+<<<<<<< Updated upstream
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Trễ"
+=======
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "Hành động khi nhấp chuột trái"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"Chuyển: nhấp chuột trái tải hình nền mới (và lưu lại nếu bật \"Tự động lưu "
+"hình ảnh nền\"). Lưu: nhấp chuột trái lưu hình nền hiện tại vào thư mục lưu, "
+"và \"Thay đổi hình nền\" được chuyển sang menu chuột phải."
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Chuyển sang hình nền khác"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Lưu hình nền hiện tại"
+>>>>>>> Stashed changes
