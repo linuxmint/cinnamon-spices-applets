@@ -1,0 +1,561 @@
+/* ============================================================
+   MintTenMenu Stylesheet  (v3 — Win10 flat, larger fonts, glow)
+   Adapts to the current Cinnamon theme via the menu-background
+   class, then overlays Win10-inspired aesthetics on top.
+   ============================================================ */
+
+/* ---- Root container ---- */
+.wintenmenu-root {
+    spacing: 0px;
+    padding: 0px;
+}
+
+/* ---- Main layout box (3 columns) ---- */
+.wintenmenu-main-box {
+    spacing: 0px;
+    padding: 0px;
+}
+
+/* ============================================================
+   NAV RAIL
+   ============================================================ */
+.wintenmenu-nav-rail {
+    padding: 8px 0px 8px 0px;
+    spacing: 0px;
+    min-width: 40px;
+}
+
+.wintenmenu-nav-rail-expanded {
+    padding: 8px 0px 8px 0px;
+    spacing: 0px;
+    min-width: 220px;
+}
+
+/* Hamburger / expand button */
+.wintenmenu-hamburger-btn {
+    padding: 10px 14px;
+    border-radius: 4px;
+    spacing: 6px;
+}
+
+.wintenmenu-hamburger-btn:hover {
+    background-color: rgba(255,255,255,0.08);
+}
+
+/* User avatar section */
+.wintenmenu-user-section {
+    padding: 6px 0px 12px 0px;
+    spacing: 2px;
+}
+
+.wintenmenu-avatar-box {
+    padding: 8px 6px;
+    spacing: 8px;
+    border-radius: 4px;
+}
+
+.wintenmenu-avatar-box:hover {
+    background-color: rgba(255,255,255,0.08);
+}
+
+.wintenmenu-avatar-icon {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
+
+.wintenmenu-username-label {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+/* Nav shortcut button */
+.wintenmenu-nav-button {
+    padding: 10px 10px;
+    border-radius: 4px;
+    spacing: 8px;
+}
+
+/* Scrollable top navigation section — the bottom session actions stay fixed */
+.wintenmenu-nav-scroll {
+    padding: 0px;
+    spacing: 0px;
+}
+
+.wintenmenu-nav-scroll StScrollBar {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+}
+
+.wintenmenu-nav-list {
+    padding: 0px;
+    spacing: 0px;
+}
+
+.wintenmenu-nav-bottom {
+    padding: 0px;
+    spacing: 0px;
+}
+
+.wintenmenu-nav-button:hover {
+    background-color: rgba(255,255,255,0.08);
+}
+
+.wintenmenu-nav-button-label {
+    font-size: 0.95em;
+}
+
+/* Nav separator */
+.wintenmenu-nav-separator {
+    margin: 4px 8px;
+    height: 1px;
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Power button */
+.wintenmenu-power-button {
+    padding: 10px 10px;
+    border-radius: 4px;
+    spacing: 8px;
+}
+
+.wintenmenu-power-button:hover {
+    background-color: rgba(255,255,255,0.08);
+}
+
+/* Power submenu */
+.wintenmenu-power-menu {
+    background-color: #202020;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.wintenmenu-power-menu-item {
+    padding: 8px 12px;
+    border-radius: 4px;
+    spacing: 8px;
+}
+
+.wintenmenu-power-menu-item:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* ============================================================
+   APP LIST PANEL
+   ============================================================ */
+.wintenmenu-app-list-panel {
+    padding: 0px;
+    spacing: 0px;
+}
+
+/* Search bar */
+.wintenmenu-search-box {
+    padding: 16px 8px 8px 8px;
+}
+
+.wintenmenu-search-entry {
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 2px;
+    padding: 6px 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    caret-color: white;
+    min-height: 32px;
+    font-size: 13px;
+}
+
+.wintenmenu-search-entry:focus {
+    border-color: #0078D4;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Scroll area for apps */
+.wintenmenu-apps-scrollbox {
+    padding: 0px;
+}
+
+/* Section header (e.g., "Recently Used") */
+.wintenmenu-section-header {
+    padding: 10px 8px 5px 8px;
+    font-size: 0.82em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    opacity: 0.65;
+}
+
+/* Individual app row */
+.wintenmenu-app-row {
+    padding: 10px 8px;
+    border-radius: 4px;
+    spacing: 8px;
+}
+
+.wintenmenu-app-row:hover {
+    background-color: rgba(255,255,255,0.08);
+}
+
+.wintenmenu-app-name {
+    font-size: 0.97em;
+}
+
+.wintenmenu-app-description {
+    font-size: 0.82em;
+    opacity: 0.6;
+}
+
+/* Vertical divider between app list and tile area */
+.wintenmenu-divider {
+    width: 1px;
+    background-color: rgba(255,255,255,0.08);
+    margin: 8px 0px;
+}
+
+/* ============================================================
+   TILE AREA
+   ============================================================ */
+.wintenmenu-tile-area {
+    padding: 0px;
+}
+
+.wintenmenu-tile-scroll {
+    padding: 0px;
+}
+
+.wintenmenu-tile-groups-box {
+    padding: 10px 2px 16px 12px;
+    spacing: 24px;
+}
+
+/* Group container */
+.wintenmenu-tile-group {
+    spacing: 4px;
+}
+
+/* Editable group name */
+.wintenmenu-group-name-entry {
+    font-size: 0.9em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    padding: 2px 4px;
+    border: 0px;
+    background-color: transparent;
+    border-radius: 2px;
+}
+
+.wintenmenu-group-name-entry:focus {
+    background-color: rgba(255,255,255,0.08);
+    opacity: 1.0;
+}
+
+.wintenmenu-group-name-label {
+    font-size: 0.9em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+.wintenmenu-group-name-label:hover {
+    background-color: rgba(255,255,255,0.05);
+    opacity: 1.0;
+}
+
+/* Tile grid canvas */
+.wintenmenu-tile-grid {
+    spacing: 0px;
+    padding: 0px;
+}
+
+/* ---- Base tile — glow is handled in JS via inline style ---- */
+.wintenmenu-tile {
+    border-radius: 0px;
+    padding: 6px;
+    spacing: 0px;
+}
+
+.wintenmenu-tile-name {
+    font-size: 0.88em;
+    padding: 2px 4px 2px 4px;
+}
+
+/* Empty cell drop target */
+.wintenmenu-empty-cell {
+    /* intentionally empty */
+}
+
+/* Drag placeholder highlight */
+.wintenmenu-drop-highlight {
+    background-color: rgba(0,120,212,0.2);
+    border-radius: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(0,120,212,0.6);
+}
+
+/* "Add Group" button */
+.wintenmenu-add-group-btn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    spacing: 6px;
+    opacity: 0.6;
+    margin-top: 8px;
+}
+
+.wintenmenu-add-group-btn:hover {
+    opacity: 1.0;
+    background-color: rgba(255,255,255,0.06);
+}
+
+/* ============================================================
+   WIN10-STYLE CONTEXT MENUS
+   Flat, dark, sharp corners, generous item padding.
+   These are additive on top of the Cinnamon 'popup-menu-item'
+   base class so the theming engine still works.
+   ============================================================ */
+
+/* Individual item in our Win10 context menus */
+.wintenmenu-ctx-item {
+    padding: 9px 18px 9px 14px;
+    border-radius: 0px;
+    spacing: 10px;
+    font-size: 1em;
+}
+
+.wintenmenu-ctx-item:hover {
+    background-color: rgba(0,120,212,0.28);
+}
+
+.wintenmenu-ctx-item:active {
+    background-color: rgba(0,120,212,0.45);
+}
+
+/* Items that open a submenu flyout (shows › arrow via JS) */
+.wintenmenu-ctx-has-sub {
+    padding-right: 10px;
+}
+
+.wintenmenu-ctx-has-sub:hover {
+    background-color: rgba(0,120,212,0.28);
+}
+
+/* Separator in context menus */
+.wintenmenu-context-separator {
+    height: 1px;
+    background-color: rgba(255,255,255,0.1);
+    margin: 3px 0px;
+}
+
+/* Drag and Drop preview rectangle */
+.wintenmenu-preview-rect {
+    background-color: rgba(0, 120, 212, 0.15);
+    border: 2px solid #0078D4;
+    border-radius: 0px;
+}
+
+.wintenmenu-preview-rect.valid {
+    background-color: rgba(0, 120, 212, 0.2);
+    border-color: #0078D4;
+}
+
+.wintenmenu-preview-rect.invalid {
+    background-color: rgba(231, 72, 86, 0.25);
+    border-color: #E74856;
+}
+
+/* Drag to Create New Group dropzone */
+.wintenmenu-new-group-dropzone {
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    margin: 8px 12px;
+    background-color: rgba(255, 255, 255, 0.01);
+}
+
+/* Faint grid for empty groups or during drag */
+.wintenmenu-tile-grid-canvas.empty {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+    background-size: 76px 76px; /* CELL size */
+    border: 2px dashed rgba(255, 255, 255, 0.05);
+}
+
+/* Active drop target highlight */
+.wintenmenu-tile-group.active-drop {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+}
+
+/* Group Header layout */
+.wintenmenu-group-header-box {
+    margin-right: 12px;
+}
+
+/* Group delete button */
+.wintenmenu-delete-group-btn {
+    padding: 2px 6px;
+    border-radius: 4px;
+    opacity: 0.3;
+}
+
+.wintenmenu-delete-group-btn:hover {
+    opacity: 1.0;
+    background-color: rgba(231, 72, 86, 0.3);
+}
+
+/* Folder Expansion Container */
+.wintenmenu-folder-expansion {
+    border-radius: 0px;
+}
+
+/* App tiles inside folders */
+.wintenmenu-folder-app-tile {
+    spacing: 2px;
+}
+
+/* Folder highlight when tile dragged over it */
+.wintenmenu-tile.folder-highlight {
+    background-color: rgba(0, 120, 212, 0.4) !important;
+    border: 2px solid #0078D4 !important;
+}
+
+/* Dragging preview over folder */
+.wintenmenu-preview-rect.folder-drop {
+    background-color: rgba(0, 120, 212, 0.25);
+    border: 2px solid #0078D4;
+}
+
+/* Folder Inline rename input text box */
+.wintenmenu-folder-rename-entry {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 2px;
+    padding: 2px;
+    font-size: 0.9em;
+    margin: 4px;
+}
+
+/* Used for St.ScrollView inside Calendar and Tasks widgets */
+.wintenmenu-widget-scroll {
+    border: none;
+    background: transparent;
+}
+
+/* ============================================================
+   IN-MENU COLOUR PICKER
+   Matches the flat context-menu palette used elsewhere:
+   #1e1e1e surface, #3c3c3c border, sharp corners, compact spacing.
+   ============================================================ */
+
+.wintenmenu-color-picker {
+    background-color: #1e1e1e;
+    border: 1px solid #3c3c3c;
+    border-radius: 0px;
+    padding: 12px;
+    spacing: 8px;
+    min-width: 258px;
+}
+
+.wintenmenu-color-picker-title {
+    font-size: 13px;
+    font-weight: bold;
+    color: #e8e8e8;
+}
+
+.wintenmenu-color-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 2px;
+}
+
+.wintenmenu-color-preview {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    min-height: 34px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 2px;
+}
+
+.wintenmenu-color-hex-entry {
+    background-color: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 2px;
+    padding: 6px 8px;
+    color: white;
+    caret-color: white;
+    font-size: 12px;
+    min-height: 22px;
+}
+
+.wintenmenu-color-hex-entry:focus {
+    border-color: #0078D4;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.wintenmenu-color-hex-entry.invalid {
+    border-color: #E74856;
+}
+
+/* Spectrum field and hue strip — painted with Cairo */
+.wintenmenu-color-field {
+    width: 234px;
+    height: 132px;
+    min-width: 234px;
+    min-height: 132px;
+    max-width: 234px;
+    max-height: 132px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 2px;
+}
+
+.wintenmenu-color-hue {
+    width: 234px;
+    height: 14px;
+    min-width: 234px;
+    min-height: 14px;
+    max-width: 234px;
+    max-height: 14px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 2px;
+    margin-top: 4px;
+}
+
+.wintenmenu-color-btn {
+    background-color: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 2px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: #e8e8e8;
+}
+
+.wintenmenu-color-btn:hover {
+    background-color: rgba(255,255,255,0.14);
+    color: white;
+}
+
+.wintenmenu-color-btn-primary {
+    background-color: #0078D4;
+    border-color: #0078D4;
+    color: white;
+    font-weight: bold;
+}
+
+.wintenmenu-color-btn-primary:hover {
+    background-color: #1084e4;
+    border-color: #1084e4;
+}
+
+.wintenmenu-color-btn-reset {
+    background-color: transparent;
+    border-color: transparent;
+    color: rgba(255,255,255,0.55);
+}
+
+.wintenmenu-color-btn-reset:hover {
+    background-color: rgba(255,255,255,0.07);
+    color: white;
+}
