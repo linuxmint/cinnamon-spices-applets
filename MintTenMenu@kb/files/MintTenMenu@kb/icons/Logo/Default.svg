@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="670" height="649" viewBox="290 289 670 649">
+  <defs>
+    <linearGradient id="mintGradient" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#43A832"/>
+      <stop offset="52%" stop-color="#63C332"/>
+      <stop offset="100%" stop-color="#A3DD44"/>
+    </linearGradient>
+  </defs>
+  <path d="M 952 297 L 454 379 L 456 380 L 456 670 L 551 673 L 551 490 L 618 483 L 619 676 L 728 677 L 728 475 L 806 467 L 807 468 L 806 756 L 401 725 L 401 388 L 298 405 L 298 829 L 952 930 Z" fill="url(#mintGradient)"/>
+</svg>
