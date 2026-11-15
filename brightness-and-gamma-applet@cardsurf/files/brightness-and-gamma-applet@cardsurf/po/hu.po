@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-11-09 16:19+0100\n"
-"PO-Revision-Date: 2026-09-12 07:40+0200\n"
+"PO-Revision-Date: 2026-11-15 08:39+0100\n"
 "Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.10\n"
 
 #. applet.js:178 6.6/applet.js:312 6.4/applet.js:250
 msgid "The following packages were not found:"
@@ -329,7 +329,7 @@ msgstr "Geolokáció"
 
 #. 6.6->settings-schema.json->section_resume_detect->title
 msgid "Resume Detection"
-msgstr ""
+msgstr "Azonosítás folytatása"
 
 #. 6.6->settings-schema.json->section_presets->title
 #. 6.6->settings-schema.json->preset_list->description
@@ -569,27 +569,38 @@ msgid ""
 "Any method other than “Simple” may cause slight flickering, especially "
 "during startup."
 msgstr ""
+"Annak észlelése, amikor a rendszer kilép alvó, hibernált vagy felfüggesztett "
+"állapotból.\n"
+"- Egyszerű: Nem történik grafikus tevékenység vagy képernyővédő-"
+"állapotváltozás észlelése.\n"
+"- Grafikus: A rendszer észleli a grafikus tevékenységet.\n"
+"- Képernyővédő: A rendszer észleli a képernyővédő állapotának változásait.\n"
+"- Mindkettő: A rendszer észleli a grafikus tevékenységet és a képernyővédő "
+"állapotának változásait is.\n"
+"\n"
+"Az „Egyszerű” módtól eltérő beállítások enyhe villódzást okozhatnak, "
+"különösen az indítás során."
 
 #. 6.6->settings-schema.json->resume_detect_method->description
 msgid "Method for detecting when the display exits standby mode"
 msgstr ""
+"Eljárás annak észlelésére, amikor a kijelző kilép készenléti üzemmódból"
 
 #. 6.6->settings-schema.json->resume_detect_method->options
 msgid "Simple"
-msgstr ""
+msgstr "Egyszerű"
 
 #. 6.6->settings-schema.json->resume_detect_method->options
 msgid "Graphical"
-msgstr ""
+msgstr "Grafikus"
 
 #. 6.6->settings-schema.json->resume_detect_method->options
-#, fuzzy
 msgid "Screen saver"
-msgstr "Képernyő"
+msgstr "Képernyővédő"
 
 #. 6.6->settings-schema.json->resume_detect_method->options
 msgid "Both"
-msgstr ""
+msgstr "Mindkettő"
 
 #. 6.6->settings-schema.json->show_shortcuts_in_menu->description
 msgid "Show shortcuts in the menu"
