@@ -212,7 +212,7 @@ msgstr "Πληροφορίες εφαρμογής"
 
 #. 4.0/contextmenu.js:331 5.8/contextmenu.js:377
 msgid "Properties"
-msgstr ""
+msgstr "Ιδιότητες"
 
 #. 4.0/contextmenu.js:349 5.8/contextmenu.js:450
 msgid "This file is no longer available"
@@ -311,19 +311,19 @@ msgstr "Αναζήτηση..."
 
 #. 5.8/applet.js:1218
 msgid "Files"
-msgstr "αρχεία"
+msgstr "Αρχεία"
 
 #. 5.8/applet.js:1248 5.8/applet.js:1254
 msgid "Calculator: "
-msgstr ""
+msgstr "Υπολογιστής"
 
 #. 5.8/applet.js:1429 5.8/applet.js:1956
 msgid "Click to insert emoji"
-msgstr ""
+msgstr "Κάντε κλικ για να εισάγετε emoji"
 
 #. 5.8/applet.js:1926
 msgid "Back"
-msgstr ""
+msgstr "Πίσω"
 
 #. 4.0/mint-remove-application.py:34
 msgid ""
@@ -517,7 +517,7 @@ msgstr "Τοποθεσία πλευρικής στήλης"
 #. 4.0->settings-schema.json->sidebar-placement->options
 #. 5.8->settings-schema.json->sidebar-placement->options
 msgid "Top"
-msgstr "Άνω"
+msgstr "Πάνω"
 
 #. 4.0->settings-schema.json->sidebar-placement->options
 #. 5.8->settings-schema.json->sidebar-placement->options
@@ -830,8 +830,8 @@ msgstr "Προτάσεις αναζήτησης στο διαδίκτυο"
 msgid ""
 "With web search option, also show search suggestions. (Note: Search "
 "suggestions are provided by DuckDuckGo)"
-msgstr ""
-
+msgstr "Με την επιλογή αναζήτησης στον ιστό, να εμφανίζονται επίσης προτάσεις αναζήτησης."
+"(Σημείωση: Οι προτάσεις αναζήτησης παρέχονται από το DuckDuckGo)"
 #. 4.0->settings-schema.json->enable-home-folder-search->description
 #. 5.8->settings-schema.json->enable-home-folder-search->description
 msgid "Search home folder"
@@ -930,7 +930,7 @@ msgstr "Χρησιμοποιήστε ένα προσαρμοσμένο μέγε�
 #. 4.0->settings-schema.json->menu-icon-size->description
 #. 5.8->settings-schema.json->menu-icon-size->description
 msgid "Panel icon size (pixels)"
-msgstr "Μέγεθος εικονιδίου πίνακα (pixel)"
+msgstr "Μέγεθος εικονιδίου πίνακα (εικονοστοιχεία)"
 
 #. 4.0->settings-schema.json->menu-icon-size->tooltip
 #. 5.8->settings-schema.json->menu-icon-size->tooltip
@@ -952,28 +952,28 @@ msgstr "Κείμενο προς εμφάνιση δίπλα στο εικονί�
 #. 5.8->settings-schema.json->category-icon-size->description
 #. 5.8->settings-schema.json->category-icon-size->tooltip
 msgid "Category icon size (pixels)"
-msgstr "Μέγεθος εικονιδίου κατηγορίας (pixel)"
+msgstr "Μέγεθος εικονιδίου κατηγορίας (εικονοστοιχεία)"
 
 #. 4.0->settings-schema.json->apps-list-icon-size->description
 #. 4.0->settings-schema.json->apps-list-icon-size->tooltip
 #. 5.8->settings-schema.json->apps-list-icon-size->description
 #. 5.8->settings-schema.json->apps-list-icon-size->tooltip
 msgid "Applications list icon size (pixels)"
-msgstr "Μέγεθος εικονιδίου λίστας εφαρμογών (pixel)"
+msgstr "Μέγεθος εικονιδίου λίστας εφαρμογών (εικονοστοιχεία)"
 
 #. 4.0->settings-schema.json->apps-grid-icon-size->description
 #. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
 #. 5.8->settings-schema.json->apps-grid-icon-size->description
 #. 5.8->settings-schema.json->apps-grid-icon-size->tooltip
 msgid "Applications grid icon size (pixels)"
-msgstr "Μέγεθος εικονιδίου πλέγματος εφαρμογών (pixel)"
+msgstr "Μέγεθος εικονιδίου πλέγματος εφαρμογών (εικονοστοιχεία)"
 
 #. 4.0->settings-schema.json->sidebar-icon-size->description
 #. 4.0->settings-schema.json->sidebar-icon-size->tooltip
 #. 5.8->settings-schema.json->sidebar-icon-size->description
 #. 5.8->settings-schema.json->sidebar-icon-size->tooltip
 msgid "Sidebar icon size (pixels)"
-msgstr "Μέγεθος εικονιδίου πλευρικής στήλης (pixel)"
+msgstr "Μέγεθος εικονιδίου πλευρικής στήλης (εικονοστοιχεία)"
 
 #. 4.0->settings-schema.json->use-box-style->description
 #. 5.8->settings-schema.json->use-box-style->description
@@ -1024,7 +1024,9 @@ msgid ""
 "\n"
 "• Folders can be set up and removed as menu categories by right-clicking on "
 "them."
-msgstr ""
+msgstr "\n"
+"• Μπορείτε να δημιουργήσετε ή να αφαιρέσετε φακέλους ως κατηγορίες μενού,"
+"κάνοντας δεξί κλικ πάνω τους."
 
 #. 4.0->settings-schema.json->info4->description
 #. 5.8->settings-schema.json->info5->description
@@ -1033,11 +1035,15 @@ msgid ""
 "• Additional key option:\n"
 "ctrl-d — Open .desktop file of currently highlighted app in default text "
 "editor.\n"
-msgstr ""
+msgstr "\n"
+"• Πρόσθετη επιλογή κλειδιού:\n"
+"ctrl-d — Άνοιγμα του αρχείου .desktop της εφαρμογής που είναι επιλεγμένη αυτή τη στιγμή"
+"στον προεπιλεγμένο επεξεργαστή κειμένου.\n"
+
 
 #. 5.8->settings-schema.json->web-search-option->options
 msgid "Custom"
-msgstr ""
+msgstr "Προσαρμοσμένη"
 
 #. 5.8->settings-schema.json->web-search-custom-url->description
 msgid "URL for custom search"
