@@ -4,20 +4,17 @@
         "description": "Configure"
     },
     "resource": {
-        "type": "radiogroup",
+        "type": "entry",
         "default": "https://www.loliapi.com/acg/pc/",
-        "description": "Wallpaper api resource",
-        "options": {
-            "loliapi.com": "https://www.loliapi.com/acg/pc/",
-            "zichen.zone": "https://app.zichen.zone/api/acg.php",
-            "moe.jitsu.top":"https://moe.jitsu.top/img/?sort=pc",
-            "paugram.com": "https://api.paugram.com/wallpaper/",
-            "t.mwm.moe": "https://t.mwm.moe/pc",
-            "dmoe.cc": "https://www.dmoe.cc/random.php",
-            "api.vvhan.com": "https://api.vvhan.com/api/acgimg",
-            "paulzzh.com": "https://img.paulzzh.com/touhou/random"
-        },
-        "tooltip": "Select a wallpaper resource"
+        "description": "Current wallpaper source",
+        "tooltip": "Right-click the applet icon and pick a wallpaper source, or type a URL here"
+    },
+    "customUrls": {
+        "type": "textview",
+        "default": "",
+        "height": 140,
+        "description": "Custom wallpaper URLs (one per line)",
+        "tooltip": "One http:// or https:// URL per line. These URLs are added to the wallpaper source list in the right-click menu. Plain http:// is not encrypted, so prefer https://."
     },
     "saveImage": {
         "type": "checkbox",
@@ -48,10 +45,14 @@
         "description": "Delay",
         "tooltip": "Delay"
     },
-    "click": {
-        "type": "checkbox",
-        "default": true,
-        "description": "Enable click to switch images",
-        "tooltip": "Enable click to switch images"
+    "clickAction": {
+        "type": "combobox",
+        "default": "switch",
+        "description": "Left-click action",
+        "options": {
+            "Switch to another wallpaper": "switch",
+            "Save the current wallpaper": "save"
+        },
+        "tooltip": "Switch: left click loads a new wallpaper (and saves it when 'Automatically save background images' is enabled). Save: left click saves the current wallpaper into the save folder, and 'Switch wallpaper' moves to the right-click menu."
     }
 }

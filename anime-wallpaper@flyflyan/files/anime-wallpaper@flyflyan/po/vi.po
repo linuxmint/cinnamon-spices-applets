@@ -1,14 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2026 fly206
+# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
+# fly206, 2026
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-20 15:57+0200\n"
+"POT-Creation-Date: 2026-11-15 21:43+0800\n"
 "PO-Revision-Date: 2025-10-08 19:41+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,27 +17,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
+#. metadata.json->name
+#: applet.js:159 applet.js:353 applet.js:397
+msgid "Anime Desktop Wallpaper"
+msgstr "Hình nền máy tính Anime"
+
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
-#: applet.js:89
+#: applet.js:242
 msgid "Automatically save background images"
 msgstr "Tự động lưu hình ảnh nền"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
-#: applet.js:93
+#: applet.js:246
 msgid "Play backgrounds as a slideshow"
 msgstr "Phát hình nền dưới dạng trình chiếu"
 
-#. settings-schema.json->click->description
-#. settings-schema.json->click->tooltip
-#: applet.js:97
-msgid "Enable click to switch images"
-msgstr "Cho phép nhấp để chuyển đổi hình ảnh"
+#: applet.js:252
+msgid "Switch wallpaper"
+msgstr "Thay đổi hình nền"
 
-#. metadata.json->name
-msgid "Anime Desktop Wallpaper"
-msgstr "Hình nền máy tính Anime"
+#: applet.js:256
+msgid "Wallpaper source"
+msgstr "Nguồn hình nền"
+
+#: applet.js:298
+msgid "Custom · %s"
+msgstr "Tùy chỉnh · %s"
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -49,44 +55,29 @@ msgid "Configure"
 msgstr "Cấu hình"
 
 #. settings-schema.json->resource->description
-msgid "Wallpaper api resource"
-msgstr "Tài nguyên API hình nền"
-
-#. settings-schema.json->resource->options
-msgid "loliapi.com"
-msgstr "loliapi.com"
-
-#. settings-schema.json->resource->options
-msgid "zichen.zone"
-msgstr "zichen.zone"
-
-#. settings-schema.json->resource->options
-msgid "moe.jitsu.top"
-msgstr "moe.jitsu.top"
-
-#. settings-schema.json->resource->options
-msgid "paugram.com"
-msgstr "paugram.com"
-
-#. settings-schema.json->resource->options
-msgid "t.mwm.moe"
-msgstr "t.mwm.moe"
-
-#. settings-schema.json->resource->options
-msgid "dmoe.cc"
-msgstr "dmoe.cc"
-
-#. settings-schema.json->resource->options
-msgid "api.vvhan.com"
-msgstr "api.vvhan.com"
-
-#. settings-schema.json->resource->options
-msgid "paulzzh.com"
-msgstr "paulzzh.com"
+msgid "Current wallpaper source"
+msgstr "Nguồn hình nền hiện tại"
 
 #. settings-schema.json->resource->tooltip
-msgid "Select a wallpaper resource"
-msgstr "Select a wallpaper resource"
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr ""
+"Nhấp chuột phải vào biểu tượng tiện ích và chọn nguồn hình nền, hoặc nhập "
+"URL tại đây"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "URL hình nền tùy chỉnh (một URL trên mỗi dòng)"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"Mỗi dòng một URL http:// hoặc https://. Các URL này được thêm vào danh sách "
+"nguồn hình nền trong menu chuột phải. http:// thường không được mã hóa, nên "
+"hãy ưu tiên https://."
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -96,11 +87,34 @@ msgstr "Save background images to"
 msgid "Automatically save background images to this directory"
 msgstr "Automatically save background images to this directory"
 
-#. settings-schema.json->delay->units
-msgid "minutes"
-msgstr "phút"
-
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Trễ"
+
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr "phút"
+
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "Hành động khi nhấp chuột trái"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"Chuyển: nhấp chuột trái tải hình nền mới (và lưu lại nếu bật \"Tự động lưu "
+"hình ảnh nền\"). Lưu: nhấp chuột trái lưu hình nền hiện tại vào thư mục lưu, "
+"và \"Thay đổi hình nền\" được chuyển sang menu chuột phải."
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Chuyển sang hình nền khác"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Lưu hình nền hiện tại"

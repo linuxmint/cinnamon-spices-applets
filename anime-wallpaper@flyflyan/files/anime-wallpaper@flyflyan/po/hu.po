@@ -1,13 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2026 fly206
+# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
+# fly206, 2026
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-20 15:57+0200\n"
+"POT-Creation-Date: 2026-11-15 21:43+0800\n"
 "PO-Revision-Date: 2024-01-06 15:45+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,27 +18,34 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+#. metadata.json->name
+#: applet.js:159 applet.js:353 applet.js:397
+msgid "Anime Desktop Wallpaper"
+msgstr "Anime asztali háttérkép"
+
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
-#: applet.js:89
+#: applet.js:242
 msgid "Automatically save background images"
 msgstr "Háttérképek automatikus mentése"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
-#: applet.js:93
+#: applet.js:246
 msgid "Play backgrounds as a slideshow"
 msgstr "Hátterek lejátszása diavetítésként"
 
-#. settings-schema.json->click->description
-#. settings-schema.json->click->tooltip
-#: applet.js:97
-msgid "Enable click to switch images"
-msgstr "Kattintás engedélyezése a képek váltásához"
+#: applet.js:252
+msgid "Switch wallpaper"
+msgstr "Háttérkép váltása"
 
-#. metadata.json->name
-msgid "Anime Desktop Wallpaper"
-msgstr "Anime asztali háttérkép"
+#: applet.js:256
+msgid "Wallpaper source"
+msgstr "Háttérkép forrása"
+
+#: applet.js:298
+msgid "Custom · %s"
+msgstr "Egyedi · %s"
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -49,44 +56,29 @@ msgid "Configure"
 msgstr "Beállítás"
 
 #. settings-schema.json->resource->description
-msgid "Wallpaper api resource"
-msgstr "Háttérkép API-forrás"
-
-#. settings-schema.json->resource->options
-msgid "loliapi.com"
-msgstr "loliapi.com"
-
-#. settings-schema.json->resource->options
-msgid "zichen.zone"
-msgstr "zichen.zone"
-
-#. settings-schema.json->resource->options
-msgid "moe.jitsu.top"
-msgstr "moe.jitsu.top"
-
-#. settings-schema.json->resource->options
-msgid "paugram.com"
-msgstr "paugram.com"
-
-#. settings-schema.json->resource->options
-msgid "t.mwm.moe"
-msgstr "t.mwm.moe"
-
-#. settings-schema.json->resource->options
-msgid "dmoe.cc"
-msgstr "dmoe.cc"
-
-#. settings-schema.json->resource->options
-msgid "api.vvhan.com"
-msgstr "api.vvhan.com"
-
-#. settings-schema.json->resource->options
-msgid "paulzzh.com"
-msgstr "paulzzh.com"
+msgid "Current wallpaper source"
+msgstr "Jelenlegi háttérkép-forrás"
 
 #. settings-schema.json->resource->tooltip
-msgid "Select a wallpaper resource"
-msgstr "Válasszon ki egy háttérkép forrást"
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr ""
+"Kattintson a jobb gombbal az applet ikonjára, és válasszon háttérkép-"
+"forrást, vagy írjon be ide egy URL-címet"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "Egyéni háttérkép-URL-ek (soronként egy)"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"Soronként egy http:// vagy https:// URL. Ezek az URL-ek bekerülnek a "
+"háttérképforrások listájára a jobb gombos menüben. A sima http:// nincs "
+"titkosítva, ezért részesítse előnyben a https://-t."
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -96,11 +88,35 @@ msgstr "Háttérképek mentése ide"
 msgid "Automatically save background images to this directory"
 msgstr "A háttérképek automatikus mentése ebbe a könyvtárba"
 
-#. settings-schema.json->delay->units
-msgid "minutes"
-msgstr "perc"
-
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Késleltetés"
+
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr "perc"
+
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "A bal kattintáshoz rendelt művelet"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"Váltás: a bal kattintás új háttérképet tölt be (és elmenti, ha a "
+"„Háttérképek automatikus mentése” beállítás engedélyezve van). Mentés: a bal "
+"kattintás az aktuális háttérképet a mentési mappába menti, a „Háttérkép "
+"váltása” pedig a jobb gombbal előhívható menübe kerül."
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Váltás másik háttérképre"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Aktuális háttérkép mentése"

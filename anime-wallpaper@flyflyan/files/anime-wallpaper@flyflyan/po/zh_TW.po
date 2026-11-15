@@ -1,14 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2026 fly206
+# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
+# fly206, 2026
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-20 15:57+0200\n"
+"POT-Creation-Date: 2026-11-15 21:43+0800\n"
 "PO-Revision-Date: 2025-04-23 21:15+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -17,27 +16,34 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. metadata.json->name
+#: applet.js:159 applet.js:353 applet.js:397
+msgid "Anime Desktop Wallpaper"
+msgstr "Anime 桌面桌布"
+
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
-#: applet.js:89
+#: applet.js:242
 msgid "Automatically save background images"
 msgstr "自動儲存桌布圖片"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
-#: applet.js:93
+#: applet.js:246
 msgid "Play backgrounds as a slideshow"
 msgstr "以播放投影片的方式輪播桌布"
 
-#. settings-schema.json->click->description
-#. settings-schema.json->click->tooltip
-#: applet.js:97
-msgid "Enable click to switch images"
-msgstr "啟用點選切換圖片功能"
+#: applet.js:252
+msgid "Switch wallpaper"
+msgstr "切換桌布"
 
-#. metadata.json->name
-msgid "Anime Desktop Wallpaper"
-msgstr "Anime 桌面桌布"
+#: applet.js:256
+msgid "Wallpaper source"
+msgstr "桌布來源"
+
+#: applet.js:298
+msgid "Custom · %s"
+msgstr "自訂 · %s"
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -48,44 +54,26 @@ msgid "Configure"
 msgstr "設定"
 
 #. settings-schema.json->resource->description
-msgid "Wallpaper api resource"
-msgstr "桌布 API 資源"
-
-#. settings-schema.json->resource->options
-msgid "loliapi.com"
-msgstr "loliapi.com"
-
-#. settings-schema.json->resource->options
-msgid "zichen.zone"
-msgstr "zichen.zone"
-
-#. settings-schema.json->resource->options
-msgid "moe.jitsu.top"
-msgstr "moe.jitsu.top"
-
-#. settings-schema.json->resource->options
-msgid "paugram.com"
-msgstr "paugram.com"
-
-#. settings-schema.json->resource->options
-msgid "t.mwm.moe"
-msgstr "t.mwm.moe"
-
-#. settings-schema.json->resource->options
-msgid "dmoe.cc"
-msgstr "dmoe.cc"
-
-#. settings-schema.json->resource->options
-msgid "api.vvhan.com"
-msgstr "api.vvhan.com"
-
-#. settings-schema.json->resource->options
-msgid "paulzzh.com"
-msgstr "paulzzh.com"
+msgid "Current wallpaper source"
+msgstr "目前的桌布來源"
 
 #. settings-schema.json->resource->tooltip
-msgid "Select a wallpaper resource"
-msgstr "選擇桌布資源"
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr "在 applet 圖示上按滑鼠右鍵並選擇桌布來源，或在此輸入 URL"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "自訂桌布 URL（每行一個）"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"每行一個 http:// 或 https:// URL。這些 URL 會加入右鍵選單中的桌布來源清單。"
+"純 http:// 未加密，建議改用 https://。"
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -95,11 +83,33 @@ msgstr "將桌布圖片儲存到"
 msgid "Automatically save background images to this directory"
 msgstr "自動將桌布圖片儲存到此目錄"
 
-#. settings-schema.json->delay->units
-msgid "minutes"
-msgstr "分鐘"
-
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "間隔時間"
+
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr "分鐘"
+
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "滑鼠左鍵動作"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"切換：按滑鼠左鍵載入新桌布（若啟用「自動儲存桌布圖片」則一併儲存）。儲存：按"
+"滑鼠左鍵將目前桌布儲存到儲存資料夾，並將「切換桌布」移至右鍵選單。"
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "切換到其他桌布"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "儲存目前的桌布"

@@ -1,15 +1,13 @@
-# ANIME DESKTOP WALLPAPER
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# fly206, 2023
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026 fly206
+# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
+# fly206, 2026
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2026-06-07 21:36-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 21:43+0800\n"
 "PO-Revision-Date: 2026-06-07 21:36-0400\n"
 "Last-Translator: Grom-TS\n"
 "Language-Team: \n"
@@ -18,27 +16,34 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. metadata.json->name
+#: applet.js:159 applet.js:353 applet.js:397
+msgid "Anime Desktop Wallpaper"
+msgstr "Аниме-обои для рабочего стола"
+
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
-#. applet.js:100
+#: applet.js:242
 msgid "Automatically save background images"
 msgstr "Автоматически сохранять фоновые изображения"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
-#. applet.js:104
+#: applet.js:246
 msgid "Play backgrounds as a slideshow"
 msgstr "Показывать фоновые изображения в режиме слайд-шоу"
 
-#. settings-schema.json->click->description
-#. settings-schema.json->click->tooltip
-#. applet.js:108
-msgid "Enable click to switch images"
-msgstr "Включить переключение изображений по щелчку"
+#: applet.js:252
+msgid "Switch wallpaper"
+msgstr "Сменить обои"
 
-#. metadata.json->name
-msgid "Anime Desktop Wallpaper"
-msgstr "Аниме-обои для рабочего стола"
+#: applet.js:256
+msgid "Wallpaper source"
+msgstr "Источник обоев"
+
+#: applet.js:298
+msgid "Custom · %s"
+msgstr "Свой · %s"
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -49,44 +54,29 @@ msgid "Configure"
 msgstr "Настройка"
 
 #. settings-schema.json->resource->description
-msgid "Wallpaper api resource"
-msgstr "Источник API обоев"
-
-#. settings-schema.json->resource->options
-msgid "loliapi.com"
-msgstr "loliapi.com"
-
-#. settings-schema.json->resource->options
-msgid "zichen.zone"
-msgstr "zichen.zone"
-
-#. settings-schema.json->resource->options
-msgid "moe.jitsu.top"
-msgstr "moe.jitsu.top"
-
-#. settings-schema.json->resource->options
-msgid "paugram.com"
-msgstr "paugram.com"
-
-#. settings-schema.json->resource->options
-msgid "t.mwm.moe"
-msgstr "t.mwm.moe"
-
-#. settings-schema.json->resource->options
-msgid "dmoe.cc"
-msgstr "dmoe.cc"
-
-#. settings-schema.json->resource->options
-msgid "api.vvhan.com"
-msgstr "api.vvhan.com"
-
-#. settings-schema.json->resource->options
-msgid "paulzzh.com"
-msgstr "paulzzh.com"
+msgid "Current wallpaper source"
+msgstr "Текущий источник обоев"
 
 #. settings-schema.json->resource->tooltip
-msgid "Select a wallpaper resource"
-msgstr "Выберите источник обоев"
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr ""
+"Щёлкните правой кнопкой мыши по значку апплета и выберите источник обоев или "
+"введите URL здесь"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "URL пользовательских обоев (по одному в строке)"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"По одному URL http:// или https:// в строке. Эти URL добавляются в список "
+"источников обоев в контекстном меню. Обычный http:// не шифруется, поэтому "
+"предпочтителен https://."
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -96,11 +86,35 @@ msgstr "Сохранять фоновые изображения в"
 msgid "Automatically save background images to this directory"
 msgstr "Автоматически сохранять фоновые изображения в этот каталог"
 
-#. settings-schema.json->delay->units
-msgid "minutes"
-msgstr "минут"
-
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Интервал"
+
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr "минут"
+
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "Действие по левому щелчку"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"Переключение: левый щелчок загружает новые обои (и сохраняет их, если "
+"включено «Автоматически сохранять фоновые изображения»). Сохранение: левый "
+"щелчок сохраняет текущие обои в папку сохранения, а «Сменить обои» "
+"перемещается в контекстное меню."
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Переключиться на другие обои"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Сохранить текущие обои"
