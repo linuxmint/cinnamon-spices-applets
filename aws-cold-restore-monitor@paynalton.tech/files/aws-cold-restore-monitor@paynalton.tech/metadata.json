@@ -1,0 +1,6 @@
+{
+  "uuid": "aws-cold-restore-monitor@paynalton.tech",
+  "name": "AWS Cold Restore Monitor",
+  "description": "Monitor the status and progress of cold storage restores through AWS Backup.",
+  "max-instances": -1
+}

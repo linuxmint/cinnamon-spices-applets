@@ -1,0 +1,36 @@
+{
+  "connection": {
+    "type": "header",
+    "description": "Restore job"
+  },
+  "profile": {
+    "type": "entry",
+    "default": "default",
+    "description": "AWS profile (PROFILE)"
+  },
+  "region": {
+    "type": "entry",
+    "default": "us-east-1",
+    "description": "Region (REGION)"
+  },
+  "restoreJobId": {
+    "type": "entry",
+    "default": "",
+    "description": "Restore job ID (RESTORE_JOB_ID)"
+  },
+  "pollSeconds": {
+    "type": "spinbutton",
+    "default": 30,
+    "min": 10,
+    "max": 3600,
+    "step": 5,
+    "units": "seconds",
+    "description": "Polling interval"
+  },
+  "awsPath": {
+    "type": "entry",
+    "default": "aws",
+    "description": "AWS CLI executable",
+    "tooltip": "Use aws or the absolute path returned by command -v aws in your terminal."
+  }
+}
