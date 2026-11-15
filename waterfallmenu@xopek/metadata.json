@@ -1,0 +1,7 @@
+{
+    "uuid": "waterfallmenu@xopek",
+    "name": "Waterfall Menu",
+    "description": "Cascading menu with pinned apps, search across the whole menu, power options and a context menu for applications. Colors and fonts follow the current Cinnamon theme. Menu like Classic Windows 9x menu",
+    "version": "1.3",
+    "max-instances": 1
+}

@@ -1,0 +1,61 @@
+{
+    "use-custom-icon": {
+        "type": "switch",
+        "default": false,
+        "description": "Использовать свой значок на панели (иначе — значок темы)"
+    },
+    "custom-icon": {
+        "type": "iconfilechooser",
+        "default": "start-here-symbolic",
+        "description": "Значок на панели",
+        "dependency": "use-custom-icon"
+    },
+    "menu-label": {
+        "type": "entry",
+        "default": "",
+        "description": "Текст на панели (пусто = без текста)"
+    },
+    "hotkey": {
+        "type": "keybinding",
+        "default": "Super_L::",
+        "description": "Горячая клавиша открытия меню"
+    },
+    "show-banner": {
+        "type": "switch",
+        "default": true,
+        "description": "Показывать вертикальную полосу слева"
+    },
+    "banner-text": {
+        "type": "entry",
+        "default": "",
+        "description": "Текст на полосе (пусто = название вашей системы)"
+    },
+    "frame-opacity": {
+        "type": "spinbutton",
+        "default": 55,
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "units": "%",
+        "description": "Непрозрачность внешнего ободка (используется, если тема не задаёт стеклянную заливку картинками)"
+    },
+    "theme-sel-cascades": {
+        "type": "switch",
+        "default": false,
+        "description": "Подсветка выбранной строки из темы (картинки) также в каскадах"
+    },
+    "pinned-count": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "units": "шт.",
+        "description": "Сколько избранных программ показывать сверху"
+    },
+    "confirm-power": {
+        "type": "switch",
+        "default": false,
+        "description": "Запрашивать подтверждение при выключении, перезагрузке и выходе"
+    }
+}
