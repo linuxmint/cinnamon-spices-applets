@@ -4,27 +4,12 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop;
 const Gettext = imports.gettext;
-const Lang = imports.lang;
 const Settings = imports.ui.settings;
 const PopupMenu = imports.ui.popupMenu;
 
 const UUID = 'anime-wallpaper@flyflyan';
 const Extension = imports.ui.extension;
-
-/* Load a module of this applet: Cinnamon hands us the extension object, plain
-   GJS (the test harness) falls back to require(). */
-function _require(relPath) {
-    if (Extension.getCurrentExtension) {
-        try {
-            return Extension.getCurrentExtension().imports[relPath];
-        } catch (e) {
-            log('WARNING', `could not import ${relPath} from the extension: ${e.message}`);
-        }
-    }
-    return require(relPath);
-}
-
-const { find_program_in_path } = _require('./lib/findProgramInPath');
+const { find_program_in_path } = Extension.getCurrentExtension().imports['./lib/findProgramInPath'];
 
 // Without this the applet would call the translation stub and never load the
 // .mo files installed under ~/.local/share/locale or /usr/share/locale.
@@ -240,17 +225,17 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
 
     _add_context_menu() {
         this.saveImageOption = new PopupMenu.PopupSwitchMenuItem(_('Automatically save background images'), this.saveImage);
-        this.saveImageOption.connect('toggled', Lang.bind(this, this._on_save_image_changed));
+        this.saveImageOption.connect('toggled', () => this._on_save_image_changed());
         this._applet_context_menu.addMenuItem(this.saveImageOption);
 
         this.autoRefreshOption = new PopupMenu.PopupSwitchMenuItem(_('Play backgrounds as a slideshow'), this.autoRefresh);
-        this.autoRefreshOption.connect('toggled', Lang.bind(this, this._on_auto_refresh_changed));
+        this.autoRefreshOption.connect('toggled', () => this._on_auto_refresh_changed());
         this._applet_context_menu.addMenuItem(this.autoRefreshOption);
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         this.switchOption = new PopupMenu.PopupMenuItem(_('Switch wallpaper'));
-        this.switchOption.connect('activate', Lang.bind(this, this._refresh));
+        this.switchOption.connect('activate', () => this._refresh());
         this._applet_context_menu.addMenuItem(this.switchOption);
 
         this.sourceMenu = new PopupMenu.PopupSubMenuMenuItem(_('Wallpaper source'));
@@ -662,9 +647,14 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
 
             if (dwebpPath) {
                 this._transcode_with_dwebp(dwebpPath);
-            } else {
+            } else if (dwebpPath === null) {
                 log('WARNING', 'dwebp not found, setting webp as wallpaper directly');
                 this._apply_wallpaper(Gio.file_new_for_path(this.wallpaperPath).get_uri());
+            } else {
+                /* Cinnamon older than 6.8 has no asynchronous lookup, so trying
+                   the program is cheaper than a synchronous PATH walk; the
+                   transcode step falls back to the original file on failure. */
+                this._transcode_with_dwebp('dwebp');
             }
         });
     }
