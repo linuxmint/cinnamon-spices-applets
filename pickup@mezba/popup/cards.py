@@ -81,7 +81,8 @@ def type_icon_name(item):
             wanted = _EXT_TO_ICON.get(ext, "text-x-generic-symbolic")
     theme_icons = Gtk.IconTheme.get_default()
     for name in _ICON_FALLBACKS.get(wanted, (wanted, "text-x-generic-symbolic")):
-        if theme_icons.has_icon(name):
+        # lookup_icon() also searches legacy/extra icon folders; has_icon() doesn't.
+        if theme_icons.lookup_icon(name, 16, 0) is not None:
             return name
     return "text-x-generic-symbolic"
 

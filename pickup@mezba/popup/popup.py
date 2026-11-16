@@ -339,7 +339,7 @@ class PickupWindow(Gtk.Window):
         self.grip.set_halign(Gtk.Align.END)
         self.grip.set_valign(Gtk.Align.END)
         grip_icon = "window-resize-symbolic"
-        if not Gtk.IconTheme.get_default().has_icon(grip_icon):
+        if Gtk.IconTheme.get_default().lookup_icon(grip_icon, 16, 0) is None:
             grip_icon = "pan-end-symbolic"
         grip_image = Gtk.Image.new_from_icon_name(grip_icon, Gtk.IconSize.MENU)
         grip_image.set_opacity(0.3)
