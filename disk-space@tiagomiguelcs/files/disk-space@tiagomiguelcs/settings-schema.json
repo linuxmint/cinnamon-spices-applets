@@ -1,0 +1,64 @@
+{
+    "applet-icon": {
+        "key": "applet-icon",
+        "type": "combobox",
+        "default": "drive-harddisk",
+        "description": "Applet icon",
+        "options": {
+            "Hard Disk": "drive-harddisk",
+            "SSD": "drive-harddisk-solidstate",
+            "Storage": "drive-removable-media",
+            "USB Drive": "drive-removable-media-usb",
+            "Optical Drive": "drive-optical",
+            "Flash Card": "media-flash",
+            "Folder": "folder",
+            "Home Folder": "user-home",
+            "System": "computer",
+            "Server": "network-server"
+        }
+    },
+     "filesystem": {
+        "key": "filesystem",
+        "type": "filechooser",
+        "default": "/",
+        "description": "Filesystem to monitor or Path",
+        "tooltip": "Filesystem path to monitor (for example: /, /home, /mnt/data)",
+        "allow-none" : false,
+        "select-dir" : true
+    },
+    "display-type": {
+        "key": "display-type",
+        "type": "combobox",
+        "default": "free_p",
+        "description": "Type of display",
+        "tooltip": "Note that the visual representation will only work if your panel is large enough to display it properly, otherwise the simple style will be used.",
+        "options": {
+            "Free disk space (%)": "free_p",
+            "Used disk space (%)": "used_p",
+            "Free disk space": "free",
+            "Used disk space": "used"
+        }
+    },
+    "message": {
+        "key": "message",
+        "type": "entry",
+        "default": "",
+        "description": "Custom Prefix Text"
+    },
+    "show-default-suffix": {
+        "key": "show-default-suffix",
+        "type": "checkbox",
+        "default": false,
+        "description": "Show default suffix",
+        "tooltip": "Enable to show the default suffix; disable to hide it"
+    },
+    "update-interval": {
+        "key": "update-interval",
+        "type": "scale",
+        "default": 5,
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "description": "Update Interval (minutes)"
+    }
+}
