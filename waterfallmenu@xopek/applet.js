@@ -189,11 +189,22 @@ function themeHasIcon(name) {
     }
 }
 
-// Недавние документы через DocManager Cinnamon (кэшированный отсортированный список)
+function recentTimestamp(info) {
+    try {
+        let t = info.get_modified();
+        if (typeof t === 'number') return t;
+        if (t && typeof t.to_unix === 'function') return t.to_unix();
+    } catch (e) { /* ignore */ }
+    return 0;
+}
+
+// Недавние документы. Сначала — DocManager Cinnamon (кэшированный отсортированный список),
+// если он пуст или недоступен — напрямую кэш Cinnamon.DocSystem (тот же источник).
 function getRecent(limit) {
     let out = [];
     try {
-        let infos = DocInfo.getDocManager().getTimestampOrderedInfos();
+        let dm = typeof DocInfo.getDocManager === 'function' ? DocInfo.getDocManager() : new DocInfo.DocManager();
+        let infos = dm.getTimestampOrderedInfos();
         for (let i of infos.slice(0, limit)) {
             let name = i.name || (i.recentInfo ? i.recentInfo.get_display_name() : '');
             let gicon = i.gicon || null;
@@ -215,7 +226,43 @@ function getRecent(limit) {
     } catch (e) {
         global.logError(e);
     }
+    if (out.length) return out;
+
+    try {
+        let docSystem = Cinnamon.DocSystem.get_default();
+        let infos = docSystem.get_all().slice();
+        infos.sort((a, b) => recentTimestamp(b) - recentTimestamp(a));
+        for (let i of infos.slice(0, limit)) {
+            let gicon = null;
+            try { gicon = Gio.content_type_get_icon(i.get_mime_type()); } catch (e) { /* ignore */ }
+            let uri = i.get_uri();
+            out.push({
+                name: i.get_display_name(),
+                gicon: gicon,
+                open: () => {
+                    try {
+                        docSystem.open(i, -1);
+                    } catch (e) {
+                        openUri(uri);
+                    }
+                },
+            });
+        }
+    } catch (e) {
+        global.logError(e);
+    }
     return out;
+}
+
+// Менеджер недавних документов Cinnamon наполняется не мгновенно: создаём его
+// заранее, при запуске апплета, чтобы список был готов к первому открытию меню.
+function warmUpRecent() {
+    try {
+        if (typeof DocInfo.getDocManager === 'function') DocInfo.getDocManager();
+    } catch (e) { /* ignore */ }
+    try {
+        Cinnamon.DocSystem.get_default();
+    } catch (e) { /* ignore */ }
 }
 
 function dirUri(key) {
@@ -1639,6 +1686,7 @@ class ClassicStartApplet extends Applet.TextIconApplet {
         this.settings.bind('frame-opacity', 'frameOpacity');
         this.settings.bind('theme-sel-cascades', 'themeSelCascades');
 
+        warmUpRecent();
         this.startMenu = new StartMenu(this);
         this._buildContextMenu();
         this._updateIconAndLabel();
