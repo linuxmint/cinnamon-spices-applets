@@ -37,6 +37,10 @@ const PICKER_COLUMNS = 4;
 const PICKER_ICON_SIZE = 96;        // 2x the 48px frames so they stay sharp
 const PICKER_MAX_HEIGHT = 480;      // about 3 rows; more cats than that scroll
 
+// scrollbar policy values. St.PolicyType has the same numbers on older Cinnamon
+// versions that don't have it yet
+const POLICY = St.PolicyType || { ALWAYS: 0, AUTOMATIC: 1, NEVER: 2 };
+
 // network connections that aren't a real link. their traffic also goes through
 // Wi-Fi or Ethernet, so counting them too would double it
 const VPN_IFACES = /^(tun|tap|wg|tailscale|vpn)/;
@@ -678,7 +682,8 @@ class ZoomiesApplet extends Applet.Applet {
     _applySize() {
         let size;
         if (this.sizeMode === "auto") {
-            let panelHeight = (this.panel && this.panel.height) || this._panelHeightPx || 48;
+            // _panelHeight is kept up to date by Cinnamon's Applet class
+            let panelHeight = this._panelHeight || this._panelHeightPx || 48;
             size = Math.max(16, panelHeight);
         } else {
             size = parseInt(this.sizeMode) || 48;
@@ -751,8 +756,7 @@ class ZoomiesApplet extends Applet.Applet {
 
         // the grid scrolls once there are more cats than fit in PICKER_MAX_HEIGHT
         let scroll = new St.ScrollView({ style: "max-height: " + PICKER_MAX_HEIGHT + "px;" });
-        let policy = St.PolicyType || imports.gi.Gtk.PolicyType;   // older Cinnamon uses Gtk's
-        scroll.set_policy(policy.NEVER, policy.AUTOMATIC);
+        scroll.set_policy(POLICY.NEVER, POLICY.AUTOMATIC);
         scroll.add_actor(grid);
         dialog.contentLayout.add_actor(scroll);
 
