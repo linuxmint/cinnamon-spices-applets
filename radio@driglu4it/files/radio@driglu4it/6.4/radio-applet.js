@@ -2564,7 +2564,7 @@ const createConfig = () => {
     appletSettings.bind('keep-volume-between-sessions', 'keepVolume');
     appletSettings.bind('initial-volume', 'customInitVolume');
     appletSettings.bind('last-volume', 'lastVolume');
-    appletSettings.bind('tree', 'userStations', (newVal) => {
+    const handleUserStationsChanged = (newVal) => {
         // temporariy solution to fix typo in settings-schema
         // @ts-ignore
         const trimmedStations = newVal.map(val => { var _a; return Object.assign(Object.assign({}, val), { url: ((_a = val.url) === null || _a === void 0 ? void 0 : _a.trim()) || val.ur.trim() }); });
@@ -2572,7 +2572,8 @@ const createConfig = () => {
             return;
         stationsHandler.forEach(changeHandler => changeHandler(trimmedStations));
         previousUserStations = trimmedStations;
-    });
+    };
+    appletSettings.bind('tree', 'userStations', handleUserStationsChanged);
     appletSettings.bind('last-url', 'lastUrl');
     appletSettings.bind('music-download-dir-select', 'musicDownloadDir');
     appletSettings.bind('youtube-download-cli', 'youtubeCli');
@@ -2587,9 +2588,15 @@ const createConfig = () => {
         const initialVolume = keepVolume ? lastVolume : customInitVolume;
         return initialVolume;
     }
+    // Assigning to a bound property only saves the value to the settings file. Cinnamon calls the bind callback only for changes made outside the applet (e.g. in the settings dialog), so the change handlers have to be called manually here.
+    function setUserStations(newStations) {
+        settingsObject.userStations = newStations;
+        handleUserStationsChanged(newStations);
+    }
     return {
         settingsObject,
         getInitialVolume,
+        setUserStations,
         addIconTypeChangeHandler: (newIconTypeChangeHandler) => {
             iconTypeChangeHandler.push(newIconTypeChangeHandler);
         },
@@ -5294,7 +5301,7 @@ const createChannelMenuItem = (props) => {
 const { BoxLayout: ChannelList_BoxLayout } = imports.gi.St;
 function createChannelList() {
     const { getPlaybackStatus, getCurrentChannelName: getCurrentChannel, addChannelChangeHandler, addPlaybackStatusChangeHandler, setUrl } = mpvHandler || {};
-    const { addStationsListChangeHandler, settingsObject } = configs;
+    const { addStationsListChangeHandler, setUserStations, settingsObject } = configs;
     const subMenu = createSubMenu({ text: 'My Stations' });
     const getUserStationNames = () => {
         return settingsObject.userStations.flatMap(station => station.inc ? [station.name] : []);
@@ -5306,8 +5313,8 @@ function createChannelList() {
         return channel.url;
     };
     const handleChannelRemoveClicked = (channelName) => {
-        const previousStations = configs.settingsObject.userStations;
-        configs.settingsObject.userStations = previousStations.filter((cnl) => cnl.name !== channelName);
+        const previousStations = settingsObject.userStations;
+        setUserStations(previousStations.filter((cnl) => cnl.name !== channelName));
     };
     // the channelItems are saved here to the map as well as to the container as on the container only the reduced name are shown. Theoretically it therefore couldn't be differentiated between two long channel names with the same first 30 (or so) characters   
     let channelItems = [];

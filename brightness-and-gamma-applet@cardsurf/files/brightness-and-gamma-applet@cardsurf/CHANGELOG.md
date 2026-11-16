@@ -1,3 +1,9 @@
+### v3.4.0~20261109
+* Check sunrise and sunset times more effectively.
+* Takes better account of a smoothing duration set to 0.
+* Many thanks to [undersound](https://github.com/undersound)!
+* Related to [#9294](https://github.com/linuxmint/cinnamon-spices-applets/issues/9294), which is not entirely fixed for the moment.
+
 ### v3.3.4~20261109
 * Ready for Cinnamon 6.8.
 * The user can choose the method for detecting when the system exits sleep, hibernation, or suspend mode.

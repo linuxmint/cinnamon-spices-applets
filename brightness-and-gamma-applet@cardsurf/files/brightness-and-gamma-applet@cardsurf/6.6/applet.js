@@ -89,6 +89,7 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         this.settingsWindow = undefined;
 
         this.last_resume_date = "";
+        this._last_period = "";
 
         this.isInFullscreenMode = false;
 
@@ -198,9 +199,6 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
             lat = lat.unpack(); // type (d)
             lon = lon.unpack(); // type (d)
         }
-
-        //~ global.log("lat: " + lat);
-        //~ global.log("lon: " + lon);
 
         if (  Math.round(lat) == 91 || Math.round(lon) == 181 ) {
           this.sunrise = 6;
@@ -482,13 +480,8 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         let value = this.get_range_value(this.minimum_temp, this.maximum_temp, this.screen_temp);
         if (this.screen_temp != value) {
             this.screen_temp = value;
-            //~ this.set_screen_temp();
         }
     }
-
-    //~ set_screen_temp() {
-        //~ global.log("set_screen_temp()");
-    //~ }
 
     on_gamma_range_changed() {
         let outside = false;
@@ -691,7 +684,6 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
     on_applet_clicked(event) {
         this.menu_sliders._init_items_presets();
         this.menu_sliders.toggle();
-        //~ global.log("Is fullscreen: " + this.is_fullscreen());
     }
 
     on_applet_middle_clicked(event) {
@@ -703,8 +695,6 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         let fullscreen = this.is_fullscreen();
         if (fullscreen === this.isInFullscreenMode) return;
         if (fullscreen === true) {
-            //~ this.is_running = false;
-            //~ this.set_applet_icon_name(this.baga_icon + "-full");
             this.brightness = 100;
             if (this.useScreenTemp) {
                 this.screen_temp = 6500;
@@ -720,7 +710,6 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         } else {
             this.is_running = true;
             this.isInFullscreenMode = false;
-            //~ this.set_applet_icon_name(this.baga_icon + "-on");
             this.on_applet_added_to_panel();
         }
     }
@@ -736,7 +725,7 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         this.update_tooltip();
         timeout_add_seconds(5, () => { this._check_fullscreen_mode(); return this.is_running; });
         timeout_add_seconds(20, () => { this.detect_resume(); return this.is_running; });
-        timeout_add_seconds(900, () => { this._check_sunrise_sunset(); return this.is_running; });
+        timeout_add_seconds(60, () => { this._check_sunrise_sunset(); return this.is_running; });
         Main.layoutManager.connect('monitors-changed', () => { if (this.apply_changing_monitors) this.on_preset_reload_button_clicked(); });
     }
 
@@ -938,20 +927,24 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
                     this.target_temperature ===  this.screen_temp
                 ) {
                     clearInterval(_interval);
+                    return
                 }
 
-                this.brightness += Math.sign(this.target_brightness - this.brightness);
+                this.brightness = (this.smooth_duration == 0) ? this.target_brightness : this.brightness + Math.sign(this.target_brightness - this.brightness);
 
-                let diff_temp = this.target_temperature - this.screen_temp;
-                //~ global.log("diff_temp: " + diff_temp);
-                if (Math.abs(diff_temp) < 10)
-                    this.screen_temp += Math.sign(diff_temp);
-                else if (Math.abs(diff_temp) < 100)
-                    this.screen_temp += 10 * Math.sign(diff_temp);
-                else if (Math.abs(diff_temp) < 1000)
-                    this.screen_temp += 100 * Math.sign(diff_temp);
-                else
-                    this.screen_temp += 1000 * Math.sign(diff_temp);
+                if (this.smooth_duration === 0) {
+                    this.screen_temp = this.target_temperature;
+                } else {
+                    let diff_temp = this.target_temperature - this.screen_temp;
+                    if (Math.abs(diff_temp) < 10)
+                        this.screen_temp += Math.sign(diff_temp);
+                    else if (Math.abs(diff_temp) < 100)
+                        this.screen_temp += 10 * Math.sign(diff_temp);
+                    else if (Math.abs(diff_temp) < 1000)
+                        this.screen_temp += 100 * Math.sign(diff_temp);
+                    else
+                        this.screen_temp += 1000 * Math.sign(diff_temp);
+                }
 
                 this._needed_updates();
                 if (menuItem) {
@@ -973,12 +966,14 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
                     this.target_gamma_blue === this.gamma_blue
                 ) {
                     clearInterval(_interval);
+                    return
                 }
 
-                this.brightness += Math.sign(this.target_brightness - this.brightness);
-                this.gamma_red += Math.sign(this.target_gamma_red - this.gamma_red);
-                this.gamma_green += Math.sign(this.target_gamma_green - this.gamma_green);
-                this.gamma_blue += Math.sign(this.target_gamma_blue - this.gamma_blue);
+                this.brightness = (this.smooth_duration == 0) ? this.target_brightness : this.brightness + Math.sign(this.target_brightness - this.brightness);
+                this.gamma_red = (this.smooth_duration == 0) ? this.target_gamma_red : this.gamma_red + Math.sign(this.target_gamma_red - this.gamma_red);
+                this.gamma_green = (this.smooth_duration == 0) ? this.target_gamma_green : this.gamma_green + Math.sign(this.target_gamma_green - this.gamma_green);
+                this.gamma_blue = (this.smooth_duration == 0) ? this.target_gamma_blue : this.gamma_blue + Math.sign(this.target_gamma_blue - this.gamma_blue);
+
 
                 this._needed_updates();
                 if (menuItem) {
@@ -999,9 +994,7 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         for (let i=0; i < new_preset_list.length; i++) {
             let preset = new_preset_list[i];
             let name = preset["name"];
-            //~ global.log("name: " + name + "(" + name.length + ") -> " + _(name));
             if (name.length > 0 && name != _(name)) {
-                //~ global.log("Changing.");
                 new_preset_list[i]["name"] = _(name);
             }
         }
@@ -1010,9 +1003,7 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         for (let i=0; i < new_preset_list.length; i++) {
             let preset = new_preset_list[i];
             let name = preset["name"];
-            //~ global.log("name: " + name + " -> " + _(name));
             if (name.length > 0 && name != _(name)) {
-                //~ global.log("Changing.");
                 new_preset_list[i]["name"] = _(name);
             }
         }
@@ -1328,7 +1319,6 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         let xsct_temp = this.screen_temp;
         let xsct_brightness = Math.min(this.brightness / 100, 1.0);
         Util.spawnCommandLineAsync(`/usr/bin/env sh -c "${this.xsct_name} ${xsct_temp} ${xsct_brightness}"`);
-        //~ Util.spawnCommandLineAsync(`xsct ${xsct_temp} ${xsct_brightness}`);
     }
 
     is_screen_output_valid(output_index) {
@@ -1399,7 +1389,6 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     is_fullscreen() {
-        //~ global.log("this.panel.monitorIndex: " + this.panel.monitorIndex);
         return global.display.get_monitor_in_fullscreen(this.panel.monitorIndex);
     }
 
@@ -1498,21 +1487,15 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
 
     _check_sunrise_sunset(starting=false) {
         let d = new Date();
-        let m = d.getMinutes();
-        let h = d.getHours();
-        let fraction = h + m / 60;
-        fraction = Math.round(fraction * 4) / 4;
-        if (starting === true) {
-            if (fraction >= this.sunrise && fraction < this.sunset)
+        let fraction = d.getHours() + d.getMinutes() / 60;
+        let period = (fraction >= this.sunrise && fraction < this.sunset) ? "day" : "night";
+        if (starting === true || period !== this._last_period) {
+            if (period === "day")
                 this._use_first_sunrise_preset();
-            if (fraction >= this.sunset || (fraction >= 0 && fraction < this.sunrise))
-                this._use_first_sunset_preset();
-        } else {
-            if (fraction == this.sunrise)
-                this._use_first_sunrise_preset();
-            if (fraction == this.sunset)
+            else
                 this._use_first_sunset_preset();
         }
+        this._last_period = period;
     }
 
     _use_first_sunrise_preset() {
@@ -1529,20 +1512,24 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
                             this.target_temperature ===  this.screen_temp
                         ) {
                             clearInterval(_interval);
+                            return
                         }
 
-                        this.brightness += Math.sign(this.target_brightness - this.brightness);
+                        this.brightness = (this.smooth_duration == 0) ? this.target_brightness : this.brightness + Math.sign(this.target_brightness - this.brightness);
 
-                        let diff_temp = this.target_temperature - this.screen_temp;
-                        //~ global.log("diff_temp: " + diff_temp);
-                        if (Math.abs(diff_temp) < 10)
-                            this.screen_temp += Math.sign(diff_temp);
-                        else if (Math.abs(diff_temp) < 100)
-                            this.screen_temp += 10 * Math.sign(diff_temp);
-                        else if (Math.abs(diff_temp) < 1000)
-                            this.screen_temp += 100 * Math.sign(diff_temp);
-                        else
-                            this.screen_temp += 1000 * Math.sign(diff_temp);
+                        if (this.smooth_duration === 0) {
+                            this.screen_temp = this.target_temperature;
+                        } else {
+                            let diff_temp = this.target_temperature - this.screen_temp;
+                            if (Math.abs(diff_temp) < 10)
+                                this.screen_temp += Math.sign(diff_temp);
+                            else if (Math.abs(diff_temp) < 100)
+                                this.screen_temp += 10 * Math.sign(diff_temp);
+                            else if (Math.abs(diff_temp) < 1000)
+                                this.screen_temp += 100 * Math.sign(diff_temp);
+                            else
+                                this.screen_temp += 1000 * Math.sign(diff_temp);
+                        }
 
                         this._needed_updates();
                     }, this.smooth_duration);
@@ -1564,12 +1551,13 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
                             this.target_gamma_blue === this.gamma_blue
                         ) {
                             clearInterval(_interval);
+                            return
                         }
 
-                        this.brightness += Math.sign(this.target_brightness - this.brightness);
-                        this.gamma_red += Math.sign(this.target_gamma_red - this.gamma_red);
-                        this.gamma_green += Math.sign(this.target_gamma_green - this.gamma_green);
-                        this.gamma_blue += Math.sign(this.target_gamma_blue - this.gamma_blue);
+                        this.brightness = (this.smooth_duration == 0) ? this.target_brightness : this.brightness + Math.sign(this.target_brightness - this.brightness);
+                        this.gamma_red = (this.smooth_duration == 0) ? this.target_gamma_red : this.gamma_red + Math.sign(this.target_gamma_red - this.gamma_red);
+                        this.gamma_green = (this.smooth_duration == 0) ? this.target_gamma_green : this.gamma_green + Math.sign(this.target_gamma_green - this.gamma_green);
+                        this.gamma_blue = (this.smooth_duration == 0) ? this.target_gamma_blue : this.gamma_blue + Math.sign(this.target_gamma_blue - this.gamma_blue);
 
                         this._needed_updates();
                     }, this.smooth_duration);
@@ -1593,20 +1581,24 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
                             this.target_temperature ===  this.screen_temp
                         ) {
                             clearInterval(_interval);
+                            return
                         }
 
-                        this.brightness += Math.sign(this.target_brightness - this.brightness);
+                        this.brightness = (this.smooth_duration == 0) ? this.target_brightness : this.brightness + Math.sign(this.target_brightness - this.brightness);
 
-                        let diff_temp = this.target_temperature - this.screen_temp;
-                        //~ global.log("diff_temp: " + diff_temp);
-                        if (Math.abs(diff_temp) < 10)
-                            this.screen_temp += Math.sign(diff_temp);
-                        else if (Math.abs(diff_temp) < 100)
-                            this.screen_temp += 10 * Math.sign(diff_temp);
-                        else if (Math.abs(diff_temp) < 1000)
-                            this.screen_temp += 100 * Math.sign(diff_temp);
-                        else
-                            this.screen_temp += 1000 * Math.sign(diff_temp);
+                        if (this.smooth_duration === 0) {
+                            this.screen_temp = this.target_temperature;
+                        } else {
+                            let diff_temp = this.target_temperature - this.screen_temp;
+                            if (Math.abs(diff_temp) < 10)
+                                this.screen_temp += Math.sign(diff_temp);
+                            else if (Math.abs(diff_temp) < 100)
+                                this.screen_temp += 10 * Math.sign(diff_temp);
+                            else if (Math.abs(diff_temp) < 1000)
+                                this.screen_temp += 100 * Math.sign(diff_temp);
+                            else
+                                this.screen_temp += 1000 * Math.sign(diff_temp);
+                        }
 
                         this._needed_updates();
                     }, this.smooth_duration);
@@ -1628,12 +1620,13 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
                             this.target_gamma_blue === this.gamma_blue
                         ) {
                             clearInterval(_interval);
+                            return
                         }
 
-                        this.brightness += Math.sign(this.target_brightness - this.brightness);
-                        this.gamma_red += Math.sign(this.target_gamma_red - this.gamma_red);
-                        this.gamma_green += Math.sign(this.target_gamma_green - this.gamma_green);
-                        this.gamma_blue += Math.sign(this.target_gamma_blue - this.gamma_blue);
+                        this.brightness = (this.smooth_duration == 0) ? this.target_brightness : this.brightness + Math.sign(this.target_brightness - this.brightness);
+                        this.gamma_red = (this.smooth_duration == 0) ? this.target_gamma_red : this.gamma_red + Math.sign(this.target_gamma_red - this.gamma_red);
+                        this.gamma_green = (this.smooth_duration == 0) ? this.target_gamma_green : this.gamma_green + Math.sign(this.target_gamma_green - this.gamma_green);
+                        this.gamma_blue = (this.smooth_duration == 0) ? this.target_gamma_blue : this.gamma_blue + Math.sign(this.target_gamma_blue - this.gamma_blue);
 
                         this._needed_updates();
                     }, this.smooth_duration);

@@ -260,16 +260,21 @@ var MenuSliders = class MenuSliders {
                                 clearInterval(_interval);
                                 this.applet.save_last_values();
                             }
-                            this.applet.brightness += Math.sign(this.applet.target_brightness - this.applet.brightness);
-                            let diff_temp = this.applet.target_temperature - this.applet.screen_temp;
-                            if (Math.abs(diff_temp) < 10)
-                                this.applet.screen_temp += Math.sign(diff_temp);
-                            else if (Math.abs(diff_temp) < 100)
-                                this.applet.screen_temp += 10 * Math.sign(diff_temp);
-                            else if (Math.abs(diff_temp) < 1000)
-                                this.applet.screen_temp += 100 * Math.sign(diff_temp);
-                            else
-                                this.applet.screen_temp += 1000 * Math.sign(diff_temp);
+                            if (this.applet.smooth_duration === 0) {
+                                this.applet.brightness = this.applet.target_brightness;
+                                this.applet.screen_temp = this.applet.target_temperature;
+                            } else {
+                                this.applet.brightness += Math.sign(this.applet.target_brightness - this.applet.brightness);
+                                let diff_temp = this.applet.target_temperature - this.applet.screen_temp;
+                                if (Math.abs(diff_temp) < 10)
+                                    this.applet.screen_temp += Math.sign(diff_temp);
+                                else if (Math.abs(diff_temp) < 100)
+                                    this.applet.screen_temp += 10 * Math.sign(diff_temp);
+                                else if (Math.abs(diff_temp) < 1000)
+                                    this.applet.screen_temp += 100 * Math.sign(diff_temp);
+                                else
+                                    this.applet.screen_temp += 1000 * Math.sign(diff_temp);
+                            }
 
                             this.update_items_brightness();
                             this.update_items_temperature();
@@ -307,10 +312,17 @@ var MenuSliders = class MenuSliders {
                                 this.applet.save_last_values();
                             }
 
-                            this.applet.brightness += Math.sign(this.applet.target_brightness - this.applet.brightness);
-                            this.applet.gamma_red += Math.sign(this.applet.target_gamma_red - this.applet.gamma_red);
-                            this.applet.gamma_green += Math.sign(this.applet.target_gamma_green - this.applet.gamma_green);
-                            this.applet.gamma_blue += Math.sign(this.applet.target_gamma_blue - this.applet.gamma_blue);
+                            if (this.applet.smooth_duration === 0) {
+                                this.applet.brightness = this.applet.target_brightness;
+                                this.applet.gamma_red = this.applet.target_gamma_red;
+                                this.applet.gamma_green = this.applet.target_gamma_green;
+                                this.applet.gamma_blue = this.applet.target_gamma_blue;
+                            } else {
+                                this.applet.brightness += Math.sign(this.applet.target_brightness - this.applet.brightness);
+                                this.applet.gamma_red += Math.sign(this.applet.target_gamma_red - this.applet.gamma_red);
+                                this.applet.gamma_green += Math.sign(this.applet.target_gamma_green - this.applet.gamma_green);
+                                this.applet.gamma_blue += Math.sign(this.applet.target_gamma_blue - this.applet.gamma_blue);
+                            }
 
                             this.update_items_brightness();
                             this.update_items_gamma_red();
@@ -349,9 +361,7 @@ var MenuSliders = class MenuSliders {
     }
 
     _init_label(key, value) {
-        //~ let label = this.add_label(key, "");
         let label = this.add_label(key, this.get_description_text(key, value));
-        //~ this.set_label_text(key, value);
     }
 
     add_label(key, text){

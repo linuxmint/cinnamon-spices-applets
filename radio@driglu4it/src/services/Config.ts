@@ -67,15 +67,16 @@ const createConfig = () => {
     appletSettings.bind<number>('initial-volume', 'customInitVolume')
     appletSettings.bind<number>('last-volume', 'lastVolume')
 
-    appletSettings.bind<Channel[]>('tree', 'userStations',
-        (newVal) => {
-            // temporariy solution to fix typo in settings-schema
-            // @ts-ignore
-            const trimmedStations = newVal.map(val => { return { ...val, url: val.url?.trim() || val.ur.trim() } })
-            if (isEqual(previousUserStations, trimmedStations)) return
-            stationsHandler.forEach(changeHandler => changeHandler(trimmedStations))
-            previousUserStations = trimmedStations
-        })
+    const handleUserStationsChanged = (newVal: Channel[]) => {
+        // temporariy solution to fix typo in settings-schema
+        // @ts-ignore
+        const trimmedStations = newVal.map(val => { return { ...val, url: val.url?.trim() || val.ur.trim() } })
+        if (isEqual(previousUserStations, trimmedStations)) return
+        stationsHandler.forEach(changeHandler => changeHandler(trimmedStations))
+        previousUserStations = trimmedStations
+    }
+
+    appletSettings.bind<Channel[]>('tree', 'userStations', handleUserStationsChanged)
 
     appletSettings.bind('last-url', 'lastUrl')
     appletSettings.bind('music-download-dir-select', 'musicDownloadDir')
@@ -100,11 +101,19 @@ const createConfig = () => {
         return initialVolume
     }
 
+    // Assigning to a bound property only saves the value to the settings file. Cinnamon calls the bind callback only for changes made outside the applet (e.g. in the settings dialog), so the change handlers have to be called manually here.
+    function setUserStations(newStations: Channel[]) {
+        settingsObject.userStations = newStations
+        handleUserStationsChanged(newStations)
+    }
+
 
     return {
         settingsObject,
 
         getInitialVolume,
+
+        setUserStations,
 
         addIconTypeChangeHandler: (newIconTypeChangeHandler: ChangeHandler<AppletIcon>) => {
             iconTypeChangeHandler.push(newIconTypeChangeHandler)
