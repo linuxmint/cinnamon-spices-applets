@@ -1,3 +1,5 @@
+const Extension = imports.ui.extension;
+
 var geoip2 = function() {
     function e(e, t, r, n) {
         this.successCallback = e, this.errorCallback = t, this.type = n
@@ -118,6 +120,7 @@ var geoip2 = function() {
 }();
 //# sourceMappingURL=geoip2.js.map
 
+if (!Extension.getCurrentExtension)
 module.exports = {
   geoip2
 };

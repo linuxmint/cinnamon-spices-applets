@@ -2,11 +2,21 @@
  * Code from the download-and-upload-speed@cardsurf applet.
  * Many thanks to @cardsurf!
  */
-let Files= require('./lib/files');
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
+let Files= _require('./lib/files');
 
 /** Constants
  */
-const {
+var {
     UUID,
     HOME_DIR,
     APPLET_DIR,
@@ -21,14 +31,14 @@ const {
     RELOAD,
     log,
     logError
-} = require("./lib/constants");
+} = _require("./lib/constants");
 
-const DEFAULT_CSV_PATH = APPLET_DIR + "/data/symbola_flag_codes.csv";
+var DEFAULT_CSV_PATH = APPLET_DIR + "/data/symbola_flag_codes.csv";
 
 /**
  * @COLUMNS: columns of the .csv file.
  */
-const COLUMNS = {
+var COLUMNS = {
     0: "ISO",
     1: "Emoji",
     2: "Unicode",
@@ -40,7 +50,7 @@ const COLUMNS = {
 /**
  * class FlagsRowsCsv
  */
-class FlagsRowCsv {
+var FlagsRowCsv = class FlagsRowCsv {
     constructor (iso, emoji, unicode, name) {
         this.iso = iso;
         this.emoji = emoji;
@@ -53,7 +63,7 @@ class FlagsRowCsv {
 /**
  * class FlagsFileCsv
  */
-class FlagsFileCsv {
+var FlagsFileCsv = class FlagsFileCsv {
     constructor (path = DEFAULT_CSV_PATH) {
         this.path = path;
         this.csv_separator = ";";

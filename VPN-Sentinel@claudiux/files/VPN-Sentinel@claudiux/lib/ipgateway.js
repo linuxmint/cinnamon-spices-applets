@@ -5,7 +5,17 @@
  */
 
 const Soup = imports.gi.Soup;
-const {to_string} = require("./lib/to-string");
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+
+var {to_string} = _require("./lib/to-string");
 
 var _httpSession;
 if (Soup.MAJOR_VERSION === 2) {
@@ -18,7 +28,7 @@ if (Soup.MAJOR_VERSION === 2) {
 _httpSession.timeout=120;
 const GLib = imports.gi.GLib;
 
-const IpGateway = {
+var IpGateway = {
   init: function() {
     this._services = [];
     this._ispServices = [];
@@ -215,6 +225,7 @@ const IpGateway = {
   }
 }
 
+if (!Extension.getCurrentExtension)
 module.exports = {
   IpGateway
 };

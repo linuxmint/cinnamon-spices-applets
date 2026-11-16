@@ -21,18 +21,25 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Gdk = imports.gi.Gdk;
-const Extension = imports.ui.extension;
 const Gettext = imports.gettext;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
-const Util = require("./lib/util");
 const CMenu = imports.gi.CMenu;
 const Cinnamon = imports.gi.Cinnamon;
-//~ const Mainloop = imports.mainloop;
 const Lang = imports.lang;
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
 
-const { to_string } = require("./lib/to-string");
-const {
+var Util = _require("./lib/util");
+var { to_string } = _require("./lib/to-string");
+var {
   _sourceIds,
   timeout_add_seconds,
   timeout_add,
@@ -43,13 +50,14 @@ const {
   source_exists,
   source_remove,
   remove_all_sources
-} = require("./lib/mainloopTools");
+} = _require("./lib/mainloopTools");
 
 /** Constants
  */
-const { NAME,
+var { NAME,
   UUID,
   HOME_DIR,
+  USER_DATA_DIR,
   APPLET_DIR,
   SCRIPTS_DIR,
   ICONS_DIR,
@@ -63,7 +71,7 @@ const { NAME,
   exists,
   log,
   logError
-} = require("./lib/constants");
+} = _require("./lib/constants");
 
 const TITLE = _("VPN Sentinel");
 
@@ -76,7 +84,7 @@ if (!exists(DOMAINS_DIR)) GLib.spawn_command_line_async("bash -c 'mkdir -p "+DOM
 const DOMAINS_FILE = DOMAINS_DIR + "/domains2bypass.txt";
 if (exists(OLD_DOMAINS_FILE) && exists(DOMAINS_DIR)) GLib.spawn_command_line_async("bash -c 'mv -u "+OLD_DOMAINS_FILE+ " " + DOMAINS_FILE +"'");
 
-const { IpGateway } = require("./lib/ipgateway");
+var { IpGateway } = _require("./lib/ipgateway");
 
 /** dummy variable for translations
  */
@@ -87,15 +95,15 @@ dummy = _("Message");
 /**
  * Activity logging
  */
-const ActivityLogging = require("./lib/activityLogging");
+var ActivityLogging = _require("./lib/activityLogging");
 
 /**
  * Dependencies checking
  */
-const CheckDependencies = require("./lib/checkDependencies");
-let Dependencies = CheckDependencies.Dependencies;
+var CheckDependencies = _require("./lib/checkDependencies");
+var Dependencies = CheckDependencies.Dependencies;
 
-const FilesCsv = require("./lib/filesCsv");
+var FilesCsv = _require("./lib/filesCsv");
 
 /**
  * killall:
@@ -132,7 +140,7 @@ function killall(processName) {
 /**
  * class VPNSentinel
  */
-class VPNSentinel extends Applet.TextIconApplet {
+var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
   constructor(metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
     this.orientation = orientation;
@@ -646,7 +654,7 @@ class VPNSentinel extends Applet.TextIconApplet {
         this.monitor_vpn_only_apps()
       }
       clientsList = null
-    })
+    }).catch(e => log("on_network_changed() - FAIL: " + e));
   } // End of on_network_changed
 
   async super_kill(app) {
@@ -709,9 +717,9 @@ class VPNSentinel extends Applet.TextIconApplet {
   }
 
   async get_vpn_status() {
+    log("get_vpn_status()");
     let monitor = this.netMonitor;
     let network_available = monitor.get_network_available();
-    log("on_network_changed(%s, %s)".format(Util.getGObjectPropertyValues(monitor, 2), network_available));
     log("Connectivity: %s".format(monitor.get_connectivity()));
     log("Network metered: %s".format(monitor.get_network_metered()));
 
@@ -781,7 +789,7 @@ class VPNSentinel extends Applet.TextIconApplet {
       this.activityLog.log(_("Connection lost. Attempt to reconnect to: %s").format(this.lastVpnNameUsed));
       this.connect_vpn(this.lastVpnNameUsed);
       this.update_icon();
-    })
+    }).catch(e => log("try_to_reconnect_to_latest_vpn() - FAIL: " + e));
   }  // End of try_to_reconnect_to_latest_vpn
 
   connect_vpn(name) {
