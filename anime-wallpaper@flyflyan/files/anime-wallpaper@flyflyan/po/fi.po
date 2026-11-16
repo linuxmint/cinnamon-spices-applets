@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2026 fly206
-# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
-# fly206, 2026
+# ANIME DESKTOP WALLPAPER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# fly206, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-15 21:43+0800\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-16 09:19+0800\n"
 "PO-Revision-Date: 2023-12-20 16:08+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -19,31 +20,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. metadata.json->name
-#: applet.js:159 applet.js:353 applet.js:397
+#. applet.js:144 applet.js:338 applet.js:382
 msgid "Anime Desktop Wallpaper"
 msgstr "Anime Desktop Wallpaper"
 
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
-#: applet.js:242
+#. applet.js:227
 msgid "Automatically save background images"
 msgstr "Tallenna taustakuvat automaattisesti"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
-#: applet.js:246
+#. applet.js:231
 msgid "Play backgrounds as a slideshow"
 msgstr "Toista taustalla kuvaesityksenä"
 
-#: applet.js:252
+#. applet.js:237
 msgid "Switch wallpaper"
 msgstr "Vaihda taustakuva"
 
-#: applet.js:256
+#. applet.js:241
 msgid "Wallpaper source"
 msgstr "Taustakuvan lähde"
 
-#: applet.js:298
+#. applet.js:283
+#, javascript-format
 msgid "Custom · %s"
 msgstr "Mukautettu · %s"
 
@@ -88,18 +90,26 @@ msgstr "Tallenna taustakuvat kohteeseen"
 msgid "Automatically save background images to this directory"
 msgstr "Tallenna taustakuvat automaattisesti tähän hakemistoon"
 
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr "minuuttia"
+
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Viive"
 
-#. settings-schema.json->delay->units
-msgid "minutes"
-msgstr "minuuttia"
-
 #. settings-schema.json->clickAction->description
 msgid "Left-click action"
 msgstr "Vasemman napsautuksen toiminto"
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Vaihda toiseen taustakuvaan"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Tallenna nykyinen taustakuva"
 
 #. settings-schema.json->clickAction->tooltip
 msgid ""
@@ -112,11 +122,3 @@ msgstr ""
 "\"Tallenna taustakuvat automaattisesti\" on käytössä). Tallenna: vasen "
 "napsautus tallentaa nykyisen taustakuvan tallennuskansioon, ja \"Vaihda "
 "taustakuva\" siirtyy hiiren kakkospainikkeen valikkoon."
-
-#. settings-schema.json->clickAction->options
-msgid "Switch to another wallpaper"
-msgstr "Vaihda toiseen taustakuvaan"
-
-#. settings-schema.json->clickAction->options
-msgid "Save the current wallpaper"
-msgstr "Tallenna nykyinen taustakuva"

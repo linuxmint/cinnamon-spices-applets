@@ -1,47 +1,49 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2026 fly206
-# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
-# fly206, 2026
+# ANIME DESKTOP WALLPAPER
+# This file is put in the public domain.
+# fly206, 2023
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: anime-wallpaper@flyflyan\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-15 21:43+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: anime-wallpaper@flyflyan 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-16 09:19+0800\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:159 applet.js:353 applet.js:397
+#. applet.js:144 applet.js:338 applet.js:382
 msgid "Anime Desktop Wallpaper"
 msgstr ""
 
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
-#: applet.js:242
+#. applet.js:227
 msgid "Automatically save background images"
 msgstr ""
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
-#: applet.js:246
+#. applet.js:231
 msgid "Play backgrounds as a slideshow"
 msgstr ""
 
-#: applet.js:252
+#. applet.js:237
 msgid "Switch wallpaper"
 msgstr ""
 
-#: applet.js:256
+#. applet.js:241
 msgid "Wallpaper source"
 msgstr ""
 
-#: applet.js:298
+#. applet.js:283
+#, javascript-format
 msgid "Custom · %s"
 msgstr ""
 
@@ -59,8 +61,7 @@ msgstr ""
 
 #. settings-schema.json->resource->tooltip
 msgid ""
-"Right-click the applet icon and pick a wallpaper source, or type a URL "
-"here"
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
 msgstr ""
 
 #. settings-schema.json->customUrls->description
@@ -69,9 +70,9 @@ msgstr ""
 
 #. settings-schema.json->customUrls->tooltip
 msgid ""
-"One http:// or https:// URL per line. These URLs are added to the "
-"wallpaper source list in the right-click menu. Plain http:// is not "
-"encrypted, so prefer https://."
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
 msgstr ""
 
 #. settings-schema.json->saveImagePath->description
@@ -82,25 +83,17 @@ msgstr ""
 msgid "Automatically save background images to this directory"
 msgstr ""
 
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr ""
+
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr ""
 
-#. settings-schema.json->delay->units
-msgid "minutes"
-msgstr ""
-
 #. settings-schema.json->clickAction->description
 msgid "Left-click action"
-msgstr ""
-
-#. settings-schema.json->clickAction->tooltip
-msgid ""
-"Switch: left click loads a new wallpaper (and saves it when "
-"'Automatically save background images' is enabled). Save: left click "
-"saves the current wallpaper into the save folder, and 'Switch wallpaper' "
-"moves to the right-click menu."
 msgstr ""
 
 #. settings-schema.json->clickAction->options
@@ -109,4 +102,12 @@ msgstr ""
 
 #. settings-schema.json->clickAction->options
 msgid "Save the current wallpaper"
+msgstr ""
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
 msgstr ""

@@ -1,13 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2026 fly206
-# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
-# fly206, 2026
+# ANIME DESKTOP WALLPAPER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# fly206, 2023
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-15 21:43+0800\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-16 09:19+0800\n"
 "PO-Revision-Date: 2025-04-23 21:15+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -17,31 +19,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:159 applet.js:353 applet.js:397
+#. applet.js:144 applet.js:338 applet.js:382
 msgid "Anime Desktop Wallpaper"
 msgstr "Anime 桌面桌布"
 
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
-#: applet.js:242
+#. applet.js:227
 msgid "Automatically save background images"
 msgstr "自動儲存桌布圖片"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
-#: applet.js:246
+#. applet.js:231
 msgid "Play backgrounds as a slideshow"
 msgstr "以播放投影片的方式輪播桌布"
 
-#: applet.js:252
+#. applet.js:237
 msgid "Switch wallpaper"
 msgstr "切換桌布"
 
-#: applet.js:256
+#. applet.js:241
 msgid "Wallpaper source"
 msgstr "桌布來源"
 
-#: applet.js:298
+#. applet.js:283
+#, javascript-format
 msgid "Custom · %s"
 msgstr "自訂 · %s"
 
@@ -83,18 +86,26 @@ msgstr "將桌布圖片儲存到"
 msgid "Automatically save background images to this directory"
 msgstr "自動將桌布圖片儲存到此目錄"
 
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr "分鐘"
+
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "間隔時間"
 
-#. settings-schema.json->delay->units
-msgid "minutes"
-msgstr "分鐘"
-
 #. settings-schema.json->clickAction->description
 msgid "Left-click action"
 msgstr "滑鼠左鍵動作"
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "切換到其他桌布"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "儲存目前的桌布"
 
 #. settings-schema.json->clickAction->tooltip
 msgid ""
@@ -105,11 +116,3 @@ msgid ""
 msgstr ""
 "切換：按滑鼠左鍵載入新桌布（若啟用「自動儲存桌布圖片」則一併儲存）。儲存：按"
 "滑鼠左鍵將目前桌布儲存到儲存資料夾，並將「切換桌布」移至右鍵選單。"
-
-#. settings-schema.json->clickAction->options
-msgid "Switch to another wallpaper"
-msgstr "切換到其他桌布"
-
-#. settings-schema.json->clickAction->options
-msgid "Save the current wallpaper"
-msgstr "儲存目前的桌布"

@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2026 fly206
-# This file is distributed under the same license as the anime-wallpaper@flyflyan package.
-# fly206, 2026
+# ANIME DESKTOP WALLPAPER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# fly206, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-15 21:43+0800\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-16 09:19+0800\n"
 "PO-Revision-Date: 2024-07-05 10:48+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -19,31 +20,32 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
-#: applet.js:159 applet.js:353 applet.js:397
+#. applet.js:144 applet.js:338 applet.js:382
 msgid "Anime Desktop Wallpaper"
 msgstr "Sfondo del Desktop Anime"
 
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
-#: applet.js:242
+#. applet.js:227
 msgid "Automatically save background images"
 msgstr "Salva automaticamente le immagini di sfondo"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
-#: applet.js:246
+#. applet.js:231
 msgid "Play backgrounds as a slideshow"
 msgstr "Riproduci gli sfondi come una presentazione"
 
-#: applet.js:252
+#. applet.js:237
 msgid "Switch wallpaper"
 msgstr "Cambia sfondo"
 
-#: applet.js:256
+#. applet.js:241
 msgid "Wallpaper source"
 msgstr "Origine dello sfondo"
 
-#: applet.js:298
+#. applet.js:283
+#, javascript-format
 msgid "Custom · %s"
 msgstr "Personalizzato · %s"
 
@@ -88,18 +90,26 @@ msgstr "Salva le immagini di sfondo in"
 msgid "Automatically save background images to this directory"
 msgstr "Salva automaticamente le immagini di sfondo in questa directory"
 
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr "minuti"
+
 #. settings-schema.json->delay->description
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Ritardo"
 
-#. settings-schema.json->delay->units
-msgid "minutes"
-msgstr "minuti"
-
 #. settings-schema.json->clickAction->description
 msgid "Left-click action"
 msgstr "Azione del clic sinistro"
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Passa a un altro sfondo"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Salva lo sfondo attuale"
 
 #. settings-schema.json->clickAction->tooltip
 msgid ""
@@ -112,11 +122,3 @@ msgstr ""
 "automaticamente le immagini di sfondo» è attivo). Salva: il clic sinistro "
 "salva lo sfondo attuale nella cartella di salvataggio, e «Cambia sfondo» "
 "passa nel menu contestuale."
-
-#. settings-schema.json->clickAction->options
-msgid "Switch to another wallpaper"
-msgstr "Passa a un altro sfondo"
-
-#. settings-schema.json->clickAction->options
-msgid "Save the current wallpaper"
-msgstr "Salva lo sfondo attuale"
