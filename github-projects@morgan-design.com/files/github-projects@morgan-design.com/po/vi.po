@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: github-projects@morgan-design.com 1.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"POT-Creation-Date: 2026-11-16 06:32-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -79,12 +79,16 @@ msgstr "Vấn đề mở"
 msgid "Forks"
 msgstr "Forks"
 
+#. applet.js:372
+msgid "Language"
+msgstr ""
+
 #. settings-schema.json->open-github-homepage-button->description
-#. applet.js:393
+#. applet.js:401
 msgid "Open GitHub Home"
 msgstr "Mở trang GitHub"
 
-#. applet.js:401
+#. applet.js:409
 msgid "Create A Gist"
 msgstr "Tạo Gist"
 
@@ -120,7 +124,8 @@ msgstr "Chọn để bật làm mới tự động"
 msgid ""
 "Checking this will mean the applet will update itself according to your "
 "refresh interval"
-msgstr "Chọn tùy chọn này để applet tự cập nhật theo khoảng thời gian làm mới của bạn"
+msgstr ""
+"Chọn tùy chọn này để applet tự cập nhật theo khoảng thời gian làm mới của bạn"
 
 #. settings-schema.json->enable-verbose-logging->description
 msgid "Check this to enable lots of logging in Looking Glass"
@@ -156,7 +161,9 @@ msgstr "Khoảng thời gian làm mới:"
 msgid ""
 "Change the amount of time between checking GitHub for changes to your "
 "Repositories"
-msgstr "Thay đổi khoảng thời gian giữa các lần kiểm tra thay đổi trên GitHub cho các kho của bạn"
+msgstr ""
+"Thay đổi khoảng thời gian giữa các lần kiểm tra thay đổi trên GitHub cho các "
+"kho của bạn"
 
 #. settings-schema.json->head2->description
 msgid "Version Details"
