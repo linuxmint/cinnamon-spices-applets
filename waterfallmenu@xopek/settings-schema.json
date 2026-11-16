@@ -2,33 +2,33 @@
     "use-custom-icon": {
         "type": "switch",
         "default": false,
-        "description": "Использовать свой значок на панели (иначе — значок темы)"
+        "description": "Use a custom panel icon (otherwise the theme icon is used)"
     },
     "custom-icon": {
         "type": "iconfilechooser",
         "default": "start-here-symbolic",
-        "description": "Значок на панели",
+        "description": "Panel icon",
         "dependency": "use-custom-icon"
     },
     "menu-label": {
         "type": "entry",
         "default": "",
-        "description": "Текст на панели (пусто = без текста)"
+        "description": "Panel label (empty = no text)"
     },
     "hotkey": {
         "type": "keybinding",
         "default": "Super_L::",
-        "description": "Горячая клавиша открытия меню"
+        "description": "Keyboard shortcut to open the menu"
     },
     "show-banner": {
         "type": "switch",
         "default": true,
-        "description": "Показывать вертикальную полосу слева"
+        "description": "Show the vertical banner on the left"
     },
     "banner-text": {
         "type": "entry",
         "default": "",
-        "description": "Текст на полосе (пусто = название вашей системы)"
+        "description": "Banner text (empty = name of your distribution)"
     },
     "frame-opacity": {
         "type": "spinbutton",
@@ -37,12 +37,12 @@
         "max": 100,
         "step": 5,
         "units": "%",
-        "description": "Непрозрачность внешнего ободка (используется, если тема не задаёт стеклянную заливку картинками)"
+        "description": "Opacity of the outer frame (used only when the theme does not draw the menu with images)"
     },
     "theme-sel-cascades": {
         "type": "switch",
         "default": false,
-        "description": "Подсветка выбранной строки из темы (картинки) также в каскадах"
+        "description": "Use the theme's image highlight for the selected row in submenus too"
     },
     "pinned-count": {
         "type": "spinbutton",
@@ -50,12 +50,12 @@
         "min": 0,
         "max": 10,
         "step": 1,
-        "units": "шт.",
-        "description": "Сколько избранных программ показывать сверху"
+        "units": "items",
+        "description": "Number of favorite programs shown at the top"
     },
     "confirm-power": {
         "type": "switch",
         "default": false,
-        "description": "Запрашивать подтверждение при выключении, перезагрузке и выходе"
+        "description": "Ask for confirmation on shut down, restart and log off"
     }
 }
