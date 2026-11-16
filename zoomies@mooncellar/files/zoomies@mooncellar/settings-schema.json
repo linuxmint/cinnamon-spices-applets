@@ -1,0 +1,169 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["general", "animation", "details"],
+        "general": {
+            "type": "page",
+            "title": "General",
+            "sections": ["cat-section", "sensor-section"]
+        },
+        "animation": {
+            "type": "page",
+            "title": "Animation",
+            "sections": ["speed-section", "alert-section"]
+        },
+        "details": {
+            "type": "page",
+            "title": "Click and details",
+            "sections": ["click-section", "history-section"]
+        },
+        "cat-section": {
+            "type": "section",
+            "title": "Cat",
+            "keys": ["choose_cat", "size"]
+        },
+        "sensor-section": {
+            "type": "section",
+            "title": "Sensor",
+            "keys": ["sensor", "show_value"]
+        },
+        "speed-section": {
+            "type": "section",
+            "title": "Speed",
+            "keys": ["slowest_ms", "fastest_ms", "curve"]
+        },
+        "alert-section": {
+            "type": "section",
+            "title": "High load alert (CPU and RAM only)",
+            "keys": ["alert_enabled", "alert_threshold", "alert_seconds"]
+        },
+        "click-section": {
+            "type": "section",
+            "title": "Left click",
+            "keys": ["click_action", "click_command"]
+        },
+        "history-section": {
+            "type": "section",
+            "title": "History graph",
+            "keys": ["show_history", "history_seconds"]
+        }
+    },
+    "cat": {
+        "type": "generic",
+        "default": "black"
+    },
+    "choose_cat": {
+        "type": "button",
+        "description": "Choose cat...",
+        "callback": "openCatPicker",
+        "tooltip": "Pick from the cats in the cats folder, with previews"
+    },
+    "size": {
+        "type": "combobox",
+        "default": "48",
+        "description": "Cat size",
+        "tooltip": "48 and 96 keep pixel art crisp. Other sizes are resampled and can look soft.",
+        "options": {
+            "Auto (match panel height)": "auto",
+            "32 px": "32",
+            "48 px (native)": "48",
+            "64 px": "64",
+            "96 px (2x)": "96"
+        }
+    },
+    "sensor": {
+        "type": "combobox",
+        "default": "cpu",
+        "description": "Sensor to monitor",
+        "options": {
+            "CPU usage": "cpu",
+            "RAM usage": "ram",
+            "Network traffic": "network",
+            "Disk write speed": "disk"
+        }
+    },
+    "show_value": {
+        "type": "switch",
+        "default": true,
+        "description": "Show reading (% or speed)"
+    },
+    "slowest_ms": {
+        "type": "spinbutton",
+        "default": 250,
+        "min": 100,
+        "max": 1000,
+        "step": 10,
+        "units": "ms",
+        "description": "Time per frame when the load is lowest (slowest)"
+    },
+    "fastest_ms": {
+        "type": "spinbutton",
+        "default": 25,
+        "min": 16,
+        "max": 200,
+        "step": 1,
+        "units": "ms",
+        "description": "Time per frame at full load (fastest)"
+    },
+    "curve": {
+        "type": "scale",
+        "default": 0.75,
+        "min": 0.3,
+        "max": 2.0,
+        "step": 0.05,
+        "show-value": true,
+        "description": "Response curve (lower = reacts to small loads)"
+    },
+    "alert_enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Show a Glow when the load stays high"
+    },
+    "alert_threshold": {
+        "type": "spinbutton",
+        "default": 90,
+        "min": 50,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "High load level"
+    },
+    "alert_seconds": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 2,
+        "max": 120,
+        "step": 1,
+        "units": "s",
+        "description": "Glow after this long above the level"
+    },
+    "click_action": {
+        "type": "combobox",
+        "default": "details",
+        "description": "Left click does",
+        "options": {
+            "Show details popup": "details",
+            "Run a command": "command",
+            "Nothing": "none"
+        }
+    },
+    "click_command": {
+        "type": "entry",
+        "default": "gnome-system-monitor",
+        "description": "Command to run (used when left click runs a command)"
+    },
+    "show_history": {
+        "type": "switch",
+        "default": true,
+        "description": "Show a history graph in the popup"
+    },
+    "history_seconds": {
+        "type": "spinbutton",
+        "default": 120,
+        "min": 30,
+        "max": 600,
+        "step": 10,
+        "units": "s",
+        "description": "How much history to keep"
+    }
+}
