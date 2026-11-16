@@ -101,6 +101,27 @@ msgstr ""
 msgid "Clock speed"
 msgstr ""
 
+#. cpufreq@mtwebster->settings-schema.json->digit-units->description
+msgid "Clock speed units:"
+msgstr ""
+
+#. cpufreq@mtwebster->settings-schema.json->digit-units->tooltip
+msgid ""
+"Always show the clock speed in the same units."
+msgstr ""
+
+#. cpufreq@mtwebster->settings-schema.json->digit-units->options
+msgid "Auto"
+msgstr ""
+
+#. cpufreq@mtwebster->settings-schema.json->digit-units->options
+msgid "MHz"
+msgstr ""
+
+#. cpufreq@mtwebster->settings-schema.json->digit-units->options
+msgid "GHz"
+msgstr ""
+
 #. cpufreq@mtwebster->settings-schema.json->high-color->description
 msgid "The high level color for each graph bar:"
 msgstr ""
