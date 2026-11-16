@@ -27,24 +27,34 @@ const INTERFACE = "org.pickup.Popup";
 
 const CALL_TIMEOUT_MS = 1200;
 
-const STATE_PATH =
-    (GLib.get_user_config_dir() || GLib.get_home_dir() + "/.config") + "/pickup/state.json";
+// get_user_config_dir() already honours XDG_CONFIG_HOME.
+const STATE_PATH = GLib.build_filenamev([GLib.get_user_config_dir(), "pickup", "state.json"]);
 
-// One-shot read used only to seed the count after a Cinnamon restart.
-function readItemCount() {
+// One-shot, non-blocking read used only to seed the count after a Cinnamon
+// restart. callback(count) always runs (with 0 on any problem).
+function readItemCount(callback) {
     try {
-        let [ok, contents] = GLib.file_get_contents(STATE_PATH);
-        if (!ok || !contents) return 0;
-        let data = JSON.parse(imports.byteArray.toString(contents));
-        if (!data || !Array.isArray(data.items)) return 0;
-        let cutoff = (Date.now() / 1000) - 48 * 3600;
-        let count = 0;
-        for (let item of data.items) {
-            if (item && (item.pinned || Number(item.added || 0) >= cutoff)) count++;
-        }
-        return count;
+        let file = Gio.File.new_for_path(STATE_PATH);
+        file.load_contents_async(null, (source, res) => {
+            let count = 0;
+            try {
+                let [ok, contents] = source.load_contents_finish(res);
+                if (ok && contents) {
+                    let data = JSON.parse(imports.byteArray.toString(contents));
+                    if (data && Array.isArray(data.items)) {
+                        let cutoff = (Date.now() / 1000) - 48 * 3600;
+                        for (let item of data.items) {
+                            if (item && (item.pinned || Number(item.added || 0) >= cutoff)) count++;
+                        }
+                    }
+                }
+            } catch (e) {
+                count = 0;   // no state file yet, or unreadable
+            }
+            callback(count);
+        });
     } catch (e) {
-        return 0;
+        callback(0);
     }
 }
 
@@ -55,6 +65,8 @@ class PickupApplet extends Applet.IconApplet {
         this.metadata = metadata;
         this._count = -1;
         this._subId = 0;
+        this._gotSignal = false;   // a live StateChanged beats the startup read
+        this._removed = false;
 
         // Own symbolic icon (recoloured by the panel theme), with the stock icon
         // as a fallback if the file is ever missing.
@@ -63,7 +75,10 @@ class PickupApplet extends Applet.IconApplet {
         } catch (e) {
             this.set_applet_icon_symbolic_name("edit-copy-symbolic");
         }
-        this._setCount(readItemCount());
+        this._setCount(0);
+        readItemCount((count) => {
+            if (!this._removed && !this._gotSignal) this._setCount(count);
+        });
         this._subscribe();
     }
 
@@ -91,6 +106,7 @@ class PickupApplet extends Applet.IconApplet {
                 BUS_NAME, INTERFACE, "StateChanged", OBJECT_PATH, null,
                 Gio.DBusSignalFlags.NONE,
                 (conn, sender, path, iface, signal, params) => {
+                    this._gotSignal = true;
                     this._setCount(params.deep_unpack()[0]);
                 }
             );
@@ -133,6 +149,7 @@ class PickupApplet extends Applet.IconApplet {
     }
 
     on_applet_removed_from_panel() {
+        this._removed = true;
         if (this._subId) {
             try {
                 Gio.DBus.session.signal_unsubscribe(this._subId);
