@@ -1,7 +1,16 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Cinnamon = imports.gi.Cinnamon;
-const { timeout_add, setTimeout, source_exists, source_remove, remove_all_sources } = require("./lib/mainloopTools");
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
+var { timeout_add, setTimeout, source_exists, source_remove, remove_all_sources } = _require("./lib/mainloopTools");
 
 const NAME = "VPN-Sentinel";
 const UUID = NAME + "@claudiux";
@@ -13,7 +22,7 @@ const LOG_FILE_PATH = LOG_DIR + "/vpn_activity.log";
 if (GLib.file_test(OLD_LOG_FILE_PATH, GLib.FileTest.EXISTS))
   GLib.spawn_command_line_async("/usr/bin/env bash -c 'mv -u " + OLD_LOG_FILE_PATH + " " + LOG_FILE_PATH +"'");
 
-class ActivityLogging {
+var ActivityLogging = class ActivityLogging {
   constructor(metadata, nbdays=30, active=true) {
     this.metadata = metadata;
     this.user_language = this._get_user_language;

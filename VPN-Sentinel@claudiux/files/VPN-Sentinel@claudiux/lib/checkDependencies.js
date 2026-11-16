@@ -136,7 +136,7 @@ var _ = function(str) {
   return Gettext.dgettext(UUID, str);
 }
 
-const UPDATE = {
+var UPDATE = {
   "default": "sudo apt-get update",
   //~ "arch": GLib.find_program_in_path("yay") != null ? "yay -Syu" : "sudo pacman -Syu",
   "arch": find_program_in_path("yay") != null ? "yay -Syu" : "sudo pacman -Syu",
@@ -147,7 +147,7 @@ const UPDATE = {
   "gentoo": ""
 }
 
-const INSTALL = {
+var INSTALL = {
   "default": "sudo apt-get install",
   //~ "arch": GLib.find_program_in_path("yay") != null ? "yay -S" : "sudo pacman -S",
   "arch": find_program_in_path("yay") != null ? "yay -S" : "sudo pacman -S",

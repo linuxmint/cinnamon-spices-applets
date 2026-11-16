@@ -1,3 +1,7 @@
+### v2.5.4~20261115
+  * Compatible with Cinnamon 6.8.
+  * Fixes [#9305](https://github.com/linuxmint/cinnamon-spices-applets/issues/9305).
+
 ### v2.5.3~20261113
   * Update checkDependencies.js script.
 

@@ -6,14 +6,24 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
+const Extension = imports.ui.extension;
+function _require(relPath) {
+  if (Extension.getCurrentExtension) {
+    var Me = Extension.getCurrentExtension();
+    return Me.imports[relPath];
+  } else {
+    return require(relPath);
+  }
+}
 
-const {to_string} = require("./lib/to-string");
+const {to_string} = _require("./lib/to-string");
 
 /** Constants
  */
-const {
+var {
     UUID,
     HOME_DIR,
+    USER_DATA_DIR,
     APPLET_DIR,
     SCRIPTS_DIR,
     ICONS_DIR,
@@ -31,7 +41,7 @@ const {
 /**
  * class File
  */
-class File {
+var File = class File {
 
     constructor (path) {
         this.newline = "\n";
@@ -99,7 +109,7 @@ class File {
 /**
  * class Directory
  */
-class Directory {
+var Directory = class Directory {
 
     constructor (path) {
         this.separator = "/";
