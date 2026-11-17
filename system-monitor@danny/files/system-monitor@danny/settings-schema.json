@@ -1,0 +1,217 @@
+{
+    "layout":{
+        "type": "layout",
+        "pages": [
+            "General_page",
+            "Cpu_usage",
+            "Gpu_usage",
+            "Ram_page",
+            "SWAP_page",
+            "INFO_page"
+        ],
+        "General_page":{
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "general_settings"
+            ]
+        },
+        "Cpu_usage": {
+            "type": "page",
+            "title": "CPU Configuration",
+            "sections": [
+                "cpu_usage"
+            ]
+        },
+        "Gpu_usage": {
+            "type": "page",
+            "title": "GPU Configuration",
+            "sections": [
+                "gpu_usage"
+            ]
+        },
+        "Ram_page":{
+            "type": "page",
+            "title": "RAM Configuration",
+            "sections": [
+                "ram_setings"
+            ]
+        },
+        "SWAP_page":{
+            "type": "page",
+            "title": "SWAP Configuration",
+            "sections":[
+                "swap_setings"
+            ]
+        },
+        "INFO_page": {
+            "type": "page",
+            "title": "Applet information",
+            "sections": [
+                "info_page"
+            ]
+        },
+        "general_settings": {
+            "type": "section",
+            "title": "General Configuration",
+            "keys": [
+                "refresh-interval"
+            ]
+        },
+        "cpu_usage": {
+            "type": "section",
+            "title":"CPU Configuration",
+            "keys": [
+                "show-cpu",
+                "cpu-size",
+                "cpu-color"
+            ]
+        },
+        "gpu_usage": {
+            "type": "section",
+            "title":"GPU Configuration",
+            "keys": [
+                "show-gpu",
+                "gpu-color",
+                "gpu-size",
+                "show-vram",
+                "vram-color",
+                "vram-size"
+            ]
+        },
+        "ram_setings":{
+            "type": "section",
+            "title": "RAM Configuration",
+            "keys":[
+                "show-ram",
+                "ram-font-size",
+                "ram-color"
+            ]
+        },
+        "swap_setings": {
+            "type": "section",
+            "title": "SWAP Configuration",
+            "keys":[
+                "show-swap",
+                "swap-font-size",
+                "swap-color"
+            ]
+        },
+        "info_page": {
+            "type": "section",
+            "title": "Applet info",
+            "keys": [
+                "applet-info"
+            ]
+        }
+    },
+    "refresh-interval": {
+        "type": "spinbutton",
+        "default": 500,
+        "min": 50,
+        "max": 10000,
+        "step": 50,
+        "units": "ms",
+        "description": "Update interval"
+    },
+    "applet-info": {
+        "type": "label",
+        "description": "This applet is currently under active development.\nSupport for Nvidia cards is incomplete (no results have been obtained, as we do not have access to any hardware with these cards). Support for AMD is complete, though you are welcome to report any errors you may encounter. Support for Intel is currently in development; if you experience any issues or would like to contribute a solution, please visit the following link: https://github.com/DannyXD300/Cinnamon-Applet-sysyem-monitor-\n\nSupported languages:\nCurrently, only English is supported, but translations into Spanish are in progress. If you would like to contribute a translation into your own language, you are more than welcome to do so."
+    },
+    "show-cpu": {
+        "type": "switch",
+        "default": true,
+        "description": "Show CPU usage"
+    },
+    "cpu-color": {
+        "type": "colorchooser",
+        "default": "#ffffff",
+        "description": "Change CPU text color"
+    },
+    "cpu-size": {
+        "type": "spinbutton",
+        "default": 15,
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "units": "px",
+        "description": "Change CPU text size"
+    },
+    "show-gpu": {
+        "type": "switch",
+        "default": true,
+        "description": "Show GPU usage"
+    },
+    "gpu-color": {
+        "type": "colorchooser",
+        "default": "#ffffff",
+        "description": "Change GPU text color"
+    },
+    "gpu-size": {
+        "type": "spinbutton",
+        "default": 15,
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "units": "px",
+        "description": "Change GPU text size"
+    },
+    "show-vram": {
+        "type": "switch",
+        "default": true,
+        "description": "Show VRAM usage"
+    },
+    "vram-color": {
+        "type": "colorchooser",
+        "default": "#ffffff",
+        "description": "Change VRAM text color"
+    },
+    "vram-size": {
+        "type": "spinbutton",
+        "default": 15,
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "units": "px",
+        "description": "Change VRAM text size"
+    },
+    "show-ram": {
+        "type": "switch",
+        "default": true, 
+        "description": "Sow RAM usage"
+    },
+    "show-swap":{
+        "type": "switch",
+        "default": true,
+        "description": "Show SWAP usage"
+    },
+    "ram-color": {
+        "type": "colorchooser",
+        "default": "#ffffff",
+        "description": "Change RAM text color"
+    },
+    "ram-font-size": {
+        "type": "spinbutton",
+        "default": 15,
+        "min": 5,
+        "max":40,
+        "step": 1,
+        "units": "px",
+        "description": "Change RAM text size"
+    },
+    "swap-color":{
+        "type":"colorchooser",
+        "default": "#ffffff",
+        "description": "Change SWAP text color"
+    },
+    "swap-font-size":{
+        "type":"spinbutton",
+        "default": 15,
+        "max": 40,
+        "min": 5,
+        "step": 1,
+        "units": "px",
+        "description": "Change SWAP text size"
+
+    }
+}
