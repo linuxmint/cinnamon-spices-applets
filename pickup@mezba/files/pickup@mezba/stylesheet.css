@@ -1,0 +1,11 @@
+/*
+ * Pickup panel applet styling.
+ *
+ * Only affects the panel icon. Everything inside the popup window is styled by
+ * popup/theme.py (a separate GTK process).
+ */
+
+/* Shown while the shelf holds at least one item; removed when it is empty. */
+.pickup-has-items {
+    color: #e0453f;
+}
