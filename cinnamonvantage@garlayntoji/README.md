@@ -16,8 +16,37 @@ This applet is inspired by the Plasmoid [PlasmaVantage](https://gitlab.com/Scias
   - Battery conservation mode
   - Always ON USB charging
 
+## Battery charge limit
+The Ideapad kernel module exposes Lenovo's conservation mode as a binary
+toggle. Its fixed limit is usually around 55-60%, which is good for battery
+health but may be lower than what you want.
+
+The applet can emulate a custom charge limit between 60% and 100%:
+
+- "Limit battery charge" enables the custom limit.
+- The slider sets the stop threshold.
+- Charging resumes automatically 5% below the threshold (for example, an
+  85% limit resumes at 80%).
+- The native "Battery conservation mode" switch is disabled while the
+  custom limit is active, because both control the same EC setting.
+
+The applet uses the standard `charge_types` interface when the kernel
+provides it (`Long_Life` / `Standard`) and falls back to the older
+`conservation_mode` attribute otherwise. If the battery is already above
+the selected threshold when the limit is enabled, charging stops at the
+current level; the battery is not discharged.
+
 ## Password-less operation
-The applet currently does not support password-less operations.
+The charge limit needs to toggle the EC mode automatically. To avoid a
+password prompt each time, install the optional udev rule (the `plugdev`
+group is used):
+
+```
+sudo ~/.local/share/cinnamon/applets/cinnamonvantage@garlayntoji/udev/install.sh
+```
+
+The other hardware controls still use `pkexec` and may prompt. Without the
+udev rule, the charge limit also falls back to `pkexec` and may prompt.
 
 ## Issues
 - The controls state will not refresh if the plasmoid is expanded and the user uses Fn buttons or another tool to switch one of the controls.

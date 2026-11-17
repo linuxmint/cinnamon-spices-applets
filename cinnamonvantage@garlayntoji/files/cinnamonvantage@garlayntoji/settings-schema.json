@@ -12,6 +12,7 @@
                 "winkey-section",
                 "touchpad-section",
                 "conservationMode-section",
+                "chargeLimit-section",
                 "rapidCharge-section",
                 "usbCharging-section",
                 "overdrive-section",
@@ -44,6 +45,14 @@
             "title": "Battery conservation mode",
             "keys": [
                 "conservationMode"
+            ]
+        },
+        "chargeLimit-section": {
+            "type": "section",
+            "title": "Battery charge limit",
+            "keys": [
+                "chargeLimitEnabled",
+                "chargeLimit"
             ]
         },
         "rapidCharge-section": {
@@ -94,6 +103,19 @@
         "type": "checkbox",
         "default": true,
         "description": "Limits the charge of the battery to extend its lifespan"
+    },
+    "chargeLimitEnabled": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Enable a custom battery charge limit"
+    },
+    "chargeLimit": {
+        "type": "spinbutton",
+        "default": 80,
+        "min": 60,
+        "max": 100,
+        "step": 1,
+        "description": "Stop charging at (%)"
     },
     "rapidCharge": {
         "type": "checkbox",

@@ -29,6 +29,15 @@ const RAPID_CHARGE = 'rapidCharge';
 const USB_CHARGING = 'usbCharging';
 const OVERDRIVE = 'overdrive';
 const GSYNC = 'gsync';
+const CHARGE_LIMIT_ENABLED = 'chargeLimitEnabled';
+const CHARGE_LIMIT = 'chargeLimit';
+
+// Charge limit constants
+const CHARGE_LIMIT_MIN = 60;
+const CHARGE_LIMIT_MAX = 100;
+const CHARGE_LIMIT_HYSTERESIS = 5;
+const CHARGE_LIMIT_POLL_SECONDS = 20;
+const CHARGE_LIMIT_COMMIT_MS = 300;
 
 // File paths
 const FILE_PATHS = {
@@ -42,6 +51,31 @@ const FILE_PATHS = {
     [GSYNC]: "/sys/devices/platform/legion/gsync"
 };
 
+function findBatteryPath() {
+    let fallback = null;
+    for (let i = 0; i < 10; i++) {
+        let path = "/sys/class/power_supply/BAT" + i;
+        if (!GLib.file_test(path, GLib.FileTest.EXISTS)) continue;
+        if (fallback === null) fallback = path;
+        if (GLib.file_test(path + "/charge_types", GLib.FileTest.EXISTS)) return path;
+    }
+    return fallback || "/sys/class/power_supply/BAT1";
+}
+
+function findAcPath() {
+    let names = ["ACAD", "AC", "ADP1", "ADP0"];
+    for (let i = 0; i < names.length; i++) {
+        let path = "/sys/class/power_supply/" + names[i];
+        if (GLib.file_test(path, GLib.FileTest.EXISTS)) return path;
+    }
+    return "/sys/class/power_supply/ACAD";
+}
+
+const BATTERY_PATH = findBatteryPath();
+const AC_PATH = findAcPath();
+const BATTERY_CAPACITY = BATTERY_PATH + "/capacity";
+const CHARGE_TYPES = BATTERY_PATH + "/charge_types";
+
 const Gettext = imports.gettext;
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
@@ -53,6 +87,15 @@ function _(str) {
 function MyApplet(metadata, orientation, panelHeight, instanceId) {
     this.settings = new Settings.AppletSettings(this, UUID, instanceId);
     this._fileMonitors = {};
+    this._chargeLimitTimer = 0;
+    this._chargeLimitCommitTimeout = 0;
+    this._chargeLimitWriting = false;
+    this._chargeLimitForce = false;
+    this._chargeLimitSyncing = false;
+    this._chargeLimitErrorShown = false;
+    this._chargeLimitPermissionNoticeShown = false;
+    this._chargeLimitEnabled = false;
+    this._chargeLimit = 80;
     this._init(metadata, orientation, panelHeight, instanceId);
 }
 
@@ -91,6 +134,22 @@ MyApplet.prototype = {
             this.conservationModeSwitch.connect('toggled', Lang.bind(this, this._onSwitchToggled, CONSERVATION_MODE));
             this.contentSection.addMenuItem(this.conservationModeSwitch);
 
+            this.contentSection.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+            this.chargeLimitSwitch = new PopupMenu.PopupSwitchMenuItem(_("Limit battery charge"));
+            this.chargeLimitSwitch.connect('toggled', Lang.bind(this, this._onChargeLimitToggled));
+            this.contentSection.addMenuItem(this.chargeLimitSwitch);
+
+            this.chargeLimitStatus = new PopupMenu.PopupMenuItem("", { reactive: false });
+            this.contentSection.addMenuItem(this.chargeLimitStatus);
+
+            this.chargeLimitLabel = new PopupMenu.PopupMenuItem("", { reactive: false });
+            this.contentSection.addMenuItem(this.chargeLimitLabel);
+
+            this.chargeLimitSlider = new PopupMenu.PopupSliderMenuItem(0);
+            this.chargeLimitSlider.connect('value-changed', Lang.bind(this, this._onChargeLimitSliderChanged));
+            this.contentSection.addMenuItem(this.chargeLimitSlider);
+
             this.rapidChargeSwitch = new PopupMenu.PopupSwitchMenuItem(_("Battery fast charge mode"));
             this.rapidChargeSwitch.connect('toggled', Lang.bind(this, this._onSwitchToggled, RAPID_CHARGE));
             this.contentSection.addMenuItem(this.rapidChargeSwitch);
@@ -113,6 +172,18 @@ MyApplet.prototype = {
             // Start file monitoring
             this._monitorFiles();
 
+            this._readChargeLimitSettings();
+            this._syncChargeLimitUI();
+            this._updateChargeLimitStatus();
+            this._chargeLimitForce = this._chargeLimitEnabled;
+            this._applyChargeLimit();
+
+            this._chargeLimitTimer = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, CHARGE_LIMIT_POLL_SECONDS, Lang.bind(this, function() {
+                this._updateChargeLimitStatus();
+                this._applyChargeLimit();
+                return true;
+            }));
+
             //Add listeners for settings changes
             this.settings.connect(`changed::${FN_LOCK}`, Lang.bind(this, this._onSettingsChanged, FN_LOCK));
             this.settings.connect(`changed::${WINKEY}`, Lang.bind(this, this._onSettingsChanged, WINKEY));
@@ -122,6 +193,8 @@ MyApplet.prototype = {
             this.settings.connect(`changed::${USB_CHARGING}`, Lang.bind(this, this._onSettingsChanged, USB_CHARGING));
             this.settings.connect(`changed::${OVERDRIVE}`, Lang.bind(this, this._onSettingsChanged, OVERDRIVE));
             this.settings.connect(`changed::${GSYNC}`, Lang.bind(this, this._onSettingsChanged, GSYNC));
+            this.settings.connect(`changed::${CHARGE_LIMIT_ENABLED}`, Lang.bind(this, this._onChargeLimitSettingsChanged));
+            this.settings.connect(`changed::${CHARGE_LIMIT}`, Lang.bind(this, this._onChargeLimitSettingsChanged));
 
         } catch (e) {
             globalThis.logError(e);
@@ -149,7 +222,7 @@ MyApplet.prototype = {
             this.settings.setValue(key, value);
             this._updateSwitchState(key, value);
         } catch (e) {
-            globalThis.logError(`Error reading file ${filePath}: ${e}`);
+            globalThis.logError(e, `Error reading file ${filePath}`);
         }
     },
 
@@ -200,6 +273,11 @@ MyApplet.prototype = {
 
     // Changing driver file's content upon switch toggle event from dropdown menu
     _onSwitchToggled: function(item, state, key) {
+        if (key === CONSERVATION_MODE && this._chargeLimitEnabled) {
+            this._updateSwitchState(key, this._readChargeMode() === "Long_Life");
+            return;
+        }
+
         let previousState = this.settings.getValue(key);
         let filePath = FILE_PATHS[key];
         let value = state ? "1" : "0";
@@ -215,13 +293,18 @@ MyApplet.prototype = {
             } else {
                 // Command failed, revert the switch state
                 this._updateSwitchState(key, previousState);
-                globalThis.logError(`Failed to write to file ${filePath}: ${stderr}`);
+                globalThis.logError(new Error(stderr), `Failed to write to file ${filePath}`);
             }
         });
     },
 
     // Changing driver file's content upon switch toggle event from settings page
     _onSettingsChanged: function(settings, key) {
+        if (key === CONSERVATION_MODE && this._chargeLimitEnabled) {
+            // The custom charge limit drives the conservation mode.
+            return;
+        }
+
         let state = this.settings.getValue(key);
         let filePath = FILE_PATHS[key];
         let value = state ? "1" : "0";
@@ -238,12 +321,244 @@ MyApplet.prototype = {
                 // Command failed, revert the switch state
                 let previousState = !state;
                 this.settings.setValue(key, previousState);
-                globalThis.logError(`Failed to write to file ${filePath}: ${stderr}`);
+                globalThis.logError(new Error(stderr), `Failed to write to file ${filePath}`);
             }
         });
     },
 
-    _showRestartNotification: function() {
+    _readFile: function(path) {
+        try {
+            let [ok, contents] = GLib.file_get_contents(path);
+            if (!ok) return null;
+            try {
+                return new TextDecoder().decode(contents).trim();
+            } catch (e) {
+                return contents.toString().trim();
+            }
+        } catch (e) {
+            return null;
+        }
+    },
+
+    _readChargeMode: function() {
+        let types = this._readFile(CHARGE_TYPES);
+        if (types !== null) {
+            if (types.indexOf("[Long_Life]") !== -1) return "Long_Life";
+            if (types.indexOf("[Standard]") !== -1) return "Standard";
+        }
+
+        let conservation = this._readFile(FILE_PATHS[CONSERVATION_MODE]);
+        if (conservation === "1") return "Long_Life";
+        if (conservation === "0") return "Standard";
+        return null;
+    },
+
+    _chargeModeWritable: function() {
+        let useChargeTypes = GLib.file_test(CHARGE_TYPES, GLib.FileTest.EXISTS);
+        let path = useChargeTypes ? CHARGE_TYPES : FILE_PATHS[CONSERVATION_MODE];
+        return this._isWritable(path);
+    },
+
+    _isWritable: function(path) {
+        try {
+            let info = Gio.File.new_for_path(path).query_info("access::can-write", Gio.FileQueryInfoFlags.NONE, null);
+            return info.get_attribute_boolean("access::can-write");
+        } catch (e) {
+            return false;
+        }
+    },
+
+    _writeChargeMode: function(enable, callback) {
+        let useChargeTypes = GLib.file_test(CHARGE_TYPES, GLib.FileTest.EXISTS);
+        let path = useChargeTypes ? CHARGE_TYPES : FILE_PATHS[CONSERVATION_MODE];
+        let value = useChargeTypes ? (enable ? "Long_Life" : "Standard") : (enable ? "1" : "0");
+
+        let command = `/bin/sh -c "printf '%s\\n' '${value}' > '${path}'"`;
+        if (!this._isWritable(path)) {
+            command = `pkexec ${command}`;
+        }
+
+        Util.spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
+            callback(exitCode === 0, stderr);
+        });
+    },
+
+    _readChargeLimitSettings: function() {
+        this._chargeLimitEnabled = !!this.settings.getValue(CHARGE_LIMIT_ENABLED);
+
+        let limit = Math.round(Number(this.settings.getValue(CHARGE_LIMIT)));
+        if (!isFinite(limit)) limit = 80;
+        limit = Math.max(CHARGE_LIMIT_MIN, Math.min(CHARGE_LIMIT_MAX, limit));
+
+        if (limit !== Number(this.settings.getValue(CHARGE_LIMIT))) {
+            this.settings.setValue(CHARGE_LIMIT, limit);
+        }
+        this._chargeLimit = limit;
+    },
+
+    _syncChargeLimitUI: function() {
+        if (!this.chargeLimitSwitch) return;
+
+        this.chargeLimitSwitch.setToggleState(this._chargeLimitEnabled);
+
+        this._chargeLimitSyncing = true;
+        this.chargeLimitSlider.setValue((this._chargeLimit - CHARGE_LIMIT_MIN) / (CHARGE_LIMIT_MAX - CHARGE_LIMIT_MIN));
+        this._chargeLimitSyncing = false;
+
+        this.chargeLimitLabel.label.set_text(_("Charge limit: ") + this._chargeLimit + "%");
+        this.conservationModeSwitch.setSensitive(!this._chargeLimitEnabled);
+
+        if (this._chargeLimitEnabled && !this._chargeModeWritable() && !this._chargeLimitPermissionNoticeShown) {
+            this._chargeLimitPermissionNoticeShown = true;
+            this._showNotification(
+                _("Charge limit: password prompts"),
+                _("Install the optional udev rule from the applet's udev folder to change the charge mode without a password prompt.")
+            );
+        }
+
+        this._updateChargeLimitStatus();
+    },
+
+    _onChargeLimitToggled: function(item, state) {
+        if (state !== this._chargeLimitEnabled) {
+            this.settings.setValue(CHARGE_LIMIT_ENABLED, state);
+        }
+    },
+
+    _onChargeLimitSliderChanged: function(item, value) {
+        if (this._chargeLimitSyncing) return;
+
+        let limit = Math.round(CHARGE_LIMIT_MIN + value * (CHARGE_LIMIT_MAX - CHARGE_LIMIT_MIN));
+        this.chargeLimitLabel.label.set_text(_("Charge limit: ") + limit + "%");
+        this._scheduleChargeLimitCommit(limit);
+    },
+
+    _scheduleChargeLimitCommit: function(limit) {
+        if (this._chargeLimitCommitTimeout) {
+            GLib.source_remove(this._chargeLimitCommitTimeout);
+            this._chargeLimitCommitTimeout = 0;
+        }
+
+        this._chargeLimitCommitTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, CHARGE_LIMIT_COMMIT_MS, Lang.bind(this, function() {
+            this._chargeLimitCommitTimeout = 0;
+            if (limit !== this._chargeLimit) {
+                this.settings.setValue(CHARGE_LIMIT, limit);
+            } else {
+                this._syncChargeLimitUI();
+            }
+            return false;
+        }));
+    },
+
+    _onChargeLimitSettingsChanged: function() {
+        let wasEnabled = this._chargeLimitEnabled;
+        let oldLimit = this._chargeLimit;
+        this._readChargeLimitSettings();
+
+        if (this._chargeLimit !== oldLimit) {
+            this._chargeLimitForce = true;
+        }
+
+        if (wasEnabled && !this._chargeLimitEnabled) {
+            this._chargeLimitForce = false;
+            this._writeChargeMode(false, Lang.bind(this, function(ok, stderr) {
+                if (!ok) {
+                    this._showChargeLimitError(stderr);
+                }
+                this._updateChargeLimitStatus();
+            }));
+        } else if (!wasEnabled && this._chargeLimitEnabled) {
+            this._chargeLimitForce = true;
+        }
+
+        this._syncChargeLimitUI();
+        this._applyChargeLimit();
+    },
+
+    _updateChargeLimitStatus: function() {
+        if (!this.chargeLimitStatus) return;
+
+        let capacityText = this._readFile(BATTERY_CAPACITY);
+        let capacity = parseInt(capacityText, 10);
+        let acOnline = this._readFile(AC_PATH + "/online") === "1";
+        let mode = this._readChargeMode();
+
+        let line1 = isNaN(capacity) ? _("Battery: unknown") : _("Battery: ") + capacity + "%";
+        line1 += " — " + (acOnline ? _("AC power") : _("on battery"));
+
+        let line2;
+        if (mode === "Long_Life") {
+            line2 = _("Mode: charging stopped");
+        } else if (mode === "Standard") {
+            line2 = _("Mode: charging allowed");
+        } else {
+            line2 = _("Mode: unknown");
+        }
+        if (!this._chargeLimitEnabled) {
+            line2 += " — " + _("limit disabled");
+        }
+
+        this.chargeLimitStatus.label.set_text(line1 + "\n" + line2);
+
+        if (mode !== null) {
+            this._updateSwitchState(CONSERVATION_MODE, mode === "Long_Life");
+            if (this._chargeLimitEnabled && this.settings.getValue(CONSERVATION_MODE) !== (mode === "Long_Life")) {
+                this.settings.setValue(CONSERVATION_MODE, mode === "Long_Life");
+            }
+        }
+    },
+
+    _applyChargeLimit: function() {
+        if (this._chargeLimitWriting) return;
+        if (!this._chargeLimitEnabled) return;
+
+        let capacity = parseInt(this._readFile(BATTERY_CAPACITY), 10);
+        if (isNaN(capacity)) return;
+
+        let acOnline = this._readFile(AC_PATH + "/online") === "1";
+        if (!acOnline) return;
+
+        let mode = this._readChargeMode();
+        if (mode === null) return;
+
+        let desired = mode;
+        if (capacity >= this._chargeLimit) {
+            desired = "Long_Life";
+        } else if (capacity <= this._chargeLimit - CHARGE_LIMIT_HYSTERESIS) {
+            desired = "Standard";
+        } else if (this._chargeLimitForce) {
+            desired = "Standard";
+        }
+
+        this._chargeLimitForce = false;
+
+        if (desired === mode) return;
+
+        this._chargeLimitWriting = true;
+        this._writeChargeMode(desired === "Long_Life", Lang.bind(this, function(ok, stderr) {
+            this._chargeLimitWriting = false;
+            if (!ok) {
+                this._showChargeLimitError(stderr);
+                return;
+            }
+
+            this._chargeLimitErrorShown = false;
+            this._updateChargeLimitStatus();
+            this._applyChargeLimit();
+        }));
+    },
+
+    _showChargeLimitError: function(details) {
+        if (this._chargeLimitErrorShown) return;
+        this._chargeLimitErrorShown = true;
+        globalThis.logError(new Error(details), "Failed to set the battery charge mode");
+        this._showNotification(
+            _("Charge limit error"),
+            _("Could not change the battery charge mode. Check permissions or install the optional udev rule.")
+        );
+    },
+
+    _showNotification: function(title, message) {
         try {
             // Create notification source if it doesn't exist
             if (!this._source) {
@@ -261,8 +576,8 @@ MyApplet.prototype = {
             // Create notification
             let notification = new MessageTray.Notification(
                 this._source,
-                _("System reboot required"),
-                _("A system reboot is required for this change to take effect.")
+                title,
+                message
             );
             // Make notification temporary
             notification.setTransient(true);
@@ -272,9 +587,27 @@ MyApplet.prototype = {
             this._source.notify(notification);
 
         } catch (e) {
-            console.log("Error in _showRestartNotification:");
+            console.log("Error in _showNotification:");
             console.log(e);
-            globalThis.logError(`Error showing restart notification: ${e}`);
+            globalThis.logError(e, "Error showing notification");
+        }
+    },
+
+    _showRestartNotification: function() {
+        this._showNotification(
+            _("System reboot required"),
+            _("A system reboot is required for this change to take effect.")
+        );
+    },
+
+    on_applet_removed_from_panel: function() {
+        if (this._chargeLimitTimer) {
+            GLib.source_remove(this._chargeLimitTimer);
+            this._chargeLimitTimer = 0;
+        }
+        if (this._chargeLimitCommitTimeout) {
+            GLib.source_remove(this._chargeLimitCommitTimeout);
+            this._chargeLimitCommitTimeout = 0;
         }
     }
 };
