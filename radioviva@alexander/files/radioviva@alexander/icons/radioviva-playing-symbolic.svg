@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+  <path fill="#bebebe" d="M 8 1 C 4.14 1 1 4.14 1 8 C 1 9.85 1.72 11.53 2.91 12.78 L 3.62 12.07 C 2.61 11.02 2 9.59 2 8 C 2 4.69 4.69 2 8 2 C 11.31 2 14 4.69 14 8 C 14 9.59 13.39 11.02 12.38 12.07 L 13.09 12.78 C 14.28 11.53 15 9.85 15 8 C 15 4.14 11.86 1 8 1 Z"/>
+  <path fill="#bebebe" d="M 8 3.5 C 5.52 3.5 3.5 5.52 3.5 8 C 3.5 9.21 3.98 10.31 4.75 11.13 L 5.47 10.41 C 4.88 9.77 4.5 8.93 4.5 8 C 4.5 6.07 6.07 4.5 8 4.5 C 9.93 4.5 11.5 6.07 11.5 8 C 11.5 8.93 11.12 9.77 10.53 10.41 L 11.25 11.13 C 12.02 10.31 12.5 9.21 12.5 8 C 12.5 5.52 10.48 3.5 8 3.5 Z"/>
+  <circle cx="8" cy="8" r="1.5" fill="#bebebe"/>
+  <!-- Equalizer waves on bottom left & right -->
+  <rect x="1" y="11" width="1.5" height="4" rx="0.75" fill="#bebebe"/>
+  <rect x="3.5" y="9" width="1.5" height="6" rx="0.75" fill="#bebebe"/>
+  <path fill="#bebebe" d="M 7.2 9.5 L 6 15 L 7.5 15 L 8 12.5 L 8.5 15 L 10 15 L 8.8 9.5 Z"/>
+  <rect x="11" y="9" width="1.5" height="6" rx="0.75" fill="#bebebe"/>
+  <rect x="13.5" y="11" width="1.5" height="4" rx="0.75" fill="#bebebe"/>
+</svg>
