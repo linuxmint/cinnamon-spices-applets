@@ -149,7 +149,9 @@ class ItemMenu(PickupMenu):
         else:
             self.add_item("Pin", actions["toggle_pin"], "view-pin-symbolic")
         self.add_separator()
-        self.add_item("Clear", actions["clear"], "edit-delete-symbolic", danger=True)
+        self.add_item(
+            actions.get("clear_label", "Clear"), actions["clear"], "edit-delete-symbolic", danger=True
+        )
         self.add_item(
             "Clear all", actions["clear_all"], "edit-clear-symbolic", danger=True
         )

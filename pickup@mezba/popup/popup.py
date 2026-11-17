@@ -847,8 +847,10 @@ class PickupWindow(Gtk.Window):
         return bool(target) and os.path.isdir(target)
 
     def _show_item_menu(self, card, event=None):
+        many = len(self._targets(card))
         actions = {
             "copy": lambda: self._copy_item(card),
+            "clear_label": "Clear %d selected" % many if many > 1 else "Clear",
             "clear": lambda: self._clear_item(card),
             "clear_all": self._clear_all,
             "toggle_pin": lambda: self._toggle_pin(card),
@@ -918,10 +920,24 @@ class PickupWindow(Gtk.Window):
             clipboard_mod.copy_text(uri)
             self._show_toast("Copied path")
 
+    def _targets(self, card):
+        """Cards an action should apply to: every selected card when the one
+        right-clicked is part of a multi-selection, otherwise just that card."""
+        selected = [c for c in self.cards if c.selected]
+        if card.selected and len(selected) > 1:
+            return selected
+        return [card]
+
     def _clear_item(self, card):
-        self.store.remove(card.item.get("id"))
+        targets = self._targets(card)
+        removed = 0
+        for target in targets:
+            if self.store.remove(target.item.get("id")):
+                removed += 1
         self.refresh_items()
         self._broadcast()
+        if removed > 1:
+            self._show_toast("Cleared %d items" % removed)
 
     def _clear_all(self):
         removed = self.store.clear_all()
