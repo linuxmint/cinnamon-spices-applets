@@ -1,0 +1,1126 @@
+/* Todo List stylesheet. Six themes, selected by a class on the window:
+   .todo-theme-neon (the original look), .todo-theme-omarchy (Tokyo Night),
+   .todo-theme-ember (warm graphite with amber), .todo-theme-paper (light) and
+   .todo-theme-sakura (plum-black with blossom pink) and .todo-theme-lagoon (sea-teal).
+   Each theme's rules are scoped to its class. The Neon rules are the v4 rules,
+   unchanged. The other themes use the same rules with their own colours. */
+
+/* Shared footer layout (no colours). */
+.todo-footer-row { spacing: 8px; margin-top: 10px; padding-top: 8px; }
+.todo-footer-keys { font-family: monospace; font-size: 0.8em; }
+.todo-footer-hotkey { font-family: monospace; font-size: 0.8em; font-weight: bold; }
+
+
+/* ===== Neon ===== */
+
+/* ---- window ---- */
+.todo-theme-neon {
+    background-color: #000000;
+    border: 1px solid #1F6B12;
+    border-radius: 6px;
+}
+.todo-theme-neon .todo-root {
+    padding: 14px 16px;
+    min-width: 400px;
+    color: #B9FFA6;
+}
+
+/* ---- header: title, then a hairline rule ---- */
+.todo-theme-neon .todo-header {
+    spacing: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #1F6B12;
+}
+.todo-theme-neon .todo-title {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.15em;
+    color: #39FF14;
+}
+
+/* ---- fields ---- */
+.todo-theme-neon .todo-entry {
+    background-color: #050505;
+    border: 1px solid #1F6B12;
+    border-radius: 4px;
+    padding: 6px 8px;
+    min-height: 22px;
+    margin-top: 6px;
+    color: #B9FFA6;
+}
+.todo-theme-neon .todo-entry:hover { border-color: #4FA33A; }
+.todo-theme-neon .todo-entry:focus { border-color: #39FF14; }
+.todo-theme-neon .todo-desc { min-height: 48px; }
+
+/* ---- tabs: an underline marks the selected tab ---- */
+.todo-theme-neon .todo-tabs { spacing: 4px; margin-top: 10px; }
+.todo-theme-neon .todo-tab {
+    padding: 6px 8px 4px 8px;
+    min-height: 20px;
+    color: #4FA33A;
+    border-bottom: 2px solid transparent;
+    font-family: monospace;
+    font-size: 0.85em;
+}
+.todo-theme-neon .todo-tab:hover { color: #B9FFA6; }
+.todo-theme-neon .todo-tab:focus { color: #B9FFA6; border-bottom: 2px solid #4FA33A; }
+.todo-theme-neon .todo-tab-selected {
+    color: #39FF14;
+    border-bottom: 2px solid #39FF14;
+    font-weight: bold;
+}
+
+/* ---- list ---- */
+.todo-theme-neon .todo-list-scroll { max-height: 360px; margin-top: 10px; }
+.todo-theme-neon .todo-list { spacing: 6px; }
+
+/* Each row has a coloured left edge set from the priority in applet.js. */
+.todo-theme-neon .todo-row {
+    padding: 6px 8px;
+    border: 1px solid #1F6B12;
+    border-radius: 4px;
+    background-color: #050505;
+}
+.todo-theme-neon .todo-row:hover { border-color: #4FA33A; background-color: #0A0A0A; }
+.todo-theme-neon .todo-row-done { opacity: 0.5; }
+.todo-theme-neon .todo-row-head { spacing: 8px; }
+.todo-theme-neon .todo-row-title { color: #B9FFA6; padding: 0; }
+.todo-theme-neon .todo-row-title:focus { color: #39FF14; }
+.todo-theme-neon .todo-row-desc {
+    color: #4FA33A;
+    font-size: 0.9em;
+    padding: 4px 0 0 26px;
+}
+.todo-theme-neon .todo-check {
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0 4px;
+    color: #39FF14;
+    border-radius: 10px;
+}
+.todo-theme-neon .todo-check:focus { border: 1px solid #39FF14; }
+.todo-theme-neon .todo-pill {
+    font-family: monospace;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #000000;
+    padding: 1px 6px;
+    border-radius: 3px;
+}
+.todo-theme-neon .todo-row-actions { spacing: 4px; }
+.todo-theme-neon .todo-action {
+    padding: 0 6px;
+    min-height: 20px;
+    color: #4FA33A;
+    border: 1px solid #1F6B12;
+    border-radius: 4px;
+}
+.todo-theme-neon .todo-action:hover { color: #B9FFA6; border-color: #4FA33A; }
+.todo-theme-neon .todo-action:focus { border-color: #39FF14; }
+.todo-theme-neon .todo-action-danger:hover { color: #E24B4A; border-color: #E24B4A; }
+
+/* ---- priority chips ---- */
+.todo-theme-neon .todo-chips { spacing: 6px; }
+.todo-theme-neon .todo-chip {
+    padding: 2px 8px;
+    min-height: 20px;
+    border: 1px solid #1F6B12;
+    border-radius: 3px;
+    font-family: monospace;
+}
+.todo-theme-neon .todo-chip:hover { border-color: #4FA33A; }
+.todo-theme-neon .todo-chip:focus { border-color: #39FF14; }
+.todo-theme-neon .todo-chip-selected {
+    font-weight: bold;
+}
+
+/* ---- add form ---- */
+.todo-theme-neon .todo-composer {
+    spacing: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #1F6B12;
+}
+.todo-theme-neon .todo-composer-bottom { spacing: 8px; }
+.todo-theme-neon .todo-add {
+    padding: 4px 14px;
+    min-height: 20px;
+    color: #000000;
+    background-color: #39FF14;
+    border: 1px solid #39FF14;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.todo-theme-neon .todo-add:hover { background-color: #5CFF3D; }
+.todo-theme-neon .todo-add:focus { border-color: #B9FFA6; }
+
+/* ---- footer and empty states ---- */
+.todo-theme-neon .todo-clear {
+    margin-top: 8px;
+    padding: 4px 10px;
+    min-height: 20px;
+    color: #4FA33A;
+    border: 1px solid #1F6B12;
+    border-radius: 3px;
+}
+.todo-theme-neon .todo-clear:hover { color: #B9FFA6; border-color: #4FA33A; }
+.todo-theme-neon .todo-empty {
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #4FA33A;
+    padding: 18px 0;
+    text-align: center;
+}
+.todo-theme-neon .todo-editor { spacing: 6px; }
+
+/* ---- footer: the key map ---- */
+.todo-theme-neon .todo-footer {
+    font-family: monospace;
+    font-size: 0.8em;
+    color: #4FA33A;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #1F6B12;
+}
+
+/* ---- panel badge ---- */
+.todo-theme-neon .todo-badge {
+    font-family: monospace;
+    color: #000000;
+    font-weight: bold;
+    font-size: 0.7em;
+    padding: 0 4px;
+    border-radius: 3px;
+}
+.todo-dialog.todo-theme-neon { background-color: #000000; }
+.todo-theme-neon .todo-footer-keys { color: #4FA33A; }
+.todo-theme-neon .todo-footer-hotkey { color: #39FF14; }
+
+/* ===== Omarchy ===== */
+
+/* ---- window ---- */
+.todo-theme-omarchy {
+    background-color: #1A1B26;
+    border: 1px solid #3B4261;
+    border-radius: 6px;
+}
+.todo-theme-omarchy .todo-root {
+    padding: 14px 16px;
+    min-width: 400px;
+    color: #C0CAF5;
+}
+
+/* ---- header: title, then a hairline rule ---- */
+.todo-theme-omarchy .todo-header {
+    spacing: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #3B4261;
+}
+.todo-theme-omarchy .todo-title {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.15em;
+    color: #7AA2F7;
+}
+
+/* ---- fields ---- */
+.todo-theme-omarchy .todo-entry {
+    background-color: #24283B;
+    border: 1px solid #3B4261;
+    border-radius: 4px;
+    padding: 6px 8px;
+    min-height: 22px;
+    margin-top: 6px;
+    color: #C0CAF5;
+}
+.todo-theme-omarchy .todo-entry:hover { border-color: #8C95BE; }
+.todo-theme-omarchy .todo-entry:focus { border-color: #7AA2F7; }
+.todo-theme-omarchy .todo-desc { min-height: 48px; }
+
+/* ---- tabs: an underline marks the selected tab ---- */
+.todo-theme-omarchy .todo-tabs { spacing: 4px; margin-top: 10px; }
+.todo-theme-omarchy .todo-tab {
+    padding: 6px 8px 4px 8px;
+    min-height: 20px;
+    color: #8C95BE;
+    border-bottom: 2px solid transparent;
+    font-family: monospace;
+    font-size: 0.85em;
+}
+.todo-theme-omarchy .todo-tab:hover { color: #C0CAF5; }
+.todo-theme-omarchy .todo-tab:focus { color: #C0CAF5; border-bottom: 2px solid #8C95BE; }
+.todo-theme-omarchy .todo-tab-selected {
+    color: #7AA2F7;
+    border-bottom: 2px solid #7AA2F7;
+    font-weight: bold;
+}
+
+/* ---- list ---- */
+.todo-theme-omarchy .todo-list-scroll { max-height: 360px; margin-top: 10px; }
+.todo-theme-omarchy .todo-list { spacing: 6px; }
+
+/* Each row has a coloured left edge set from the priority in applet.js. */
+.todo-theme-omarchy .todo-row {
+    padding: 6px 8px;
+    border: 1px solid #3B4261;
+    border-radius: 4px;
+    background-color: #24283B;
+}
+.todo-theme-omarchy .todo-row:hover { border-color: #8C95BE; background-color: #2A2F45; }
+.todo-theme-omarchy .todo-row-done { opacity: 0.5; }
+.todo-theme-omarchy .todo-row-head { spacing: 8px; }
+.todo-theme-omarchy .todo-row-title { color: #C0CAF5; padding: 0; }
+.todo-theme-omarchy .todo-row-title:focus { color: #7AA2F7; }
+.todo-theme-omarchy .todo-row-desc {
+    color: #8C95BE;
+    font-size: 0.9em;
+    padding: 4px 0 0 26px;
+}
+.todo-theme-omarchy .todo-check {
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0 4px;
+    color: #7AA2F7;
+    border-radius: 10px;
+}
+.todo-theme-omarchy .todo-check:focus { border: 1px solid #7AA2F7; }
+.todo-theme-omarchy .todo-pill {
+    font-family: monospace;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #1A1B26;
+    padding: 1px 6px;
+    border-radius: 3px;
+}
+.todo-theme-omarchy .todo-row-actions { spacing: 4px; }
+.todo-theme-omarchy .todo-action {
+    padding: 0 6px;
+    min-height: 20px;
+    color: #8C95BE;
+    border: 1px solid #3B4261;
+    border-radius: 4px;
+}
+.todo-theme-omarchy .todo-action:hover { color: #C0CAF5; border-color: #8C95BE; }
+.todo-theme-omarchy .todo-action:focus { border-color: #7AA2F7; }
+.todo-theme-omarchy .todo-action-danger:hover { color: #E24B4A; border-color: #E24B4A; }
+
+/* ---- priority chips ---- */
+.todo-theme-omarchy .todo-chips { spacing: 6px; }
+.todo-theme-omarchy .todo-chip {
+    padding: 2px 8px;
+    min-height: 20px;
+    border: 1px solid #3B4261;
+    border-radius: 3px;
+    font-family: monospace;
+}
+.todo-theme-omarchy .todo-chip:hover { border-color: #8C95BE; }
+.todo-theme-omarchy .todo-chip:focus { border-color: #7AA2F7; }
+.todo-theme-omarchy .todo-chip-selected {
+    font-weight: bold;
+}
+
+/* ---- add form ---- */
+.todo-theme-omarchy .todo-composer {
+    spacing: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #3B4261;
+}
+.todo-theme-omarchy .todo-composer-bottom { spacing: 8px; }
+.todo-theme-omarchy .todo-add {
+    padding: 4px 14px;
+    min-height: 20px;
+    color: #1A1B26;
+    background-color: #7AA2F7;
+    border: 1px solid #7AA2F7;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.todo-theme-omarchy .todo-add:hover { background-color: #8DB4FA; }
+.todo-theme-omarchy .todo-add:focus { border-color: #C0CAF5; }
+
+/* ---- footer and empty states ---- */
+.todo-theme-omarchy .todo-clear {
+    margin-top: 8px;
+    padding: 4px 10px;
+    min-height: 20px;
+    color: #8C95BE;
+    border: 1px solid #3B4261;
+    border-radius: 3px;
+}
+.todo-theme-omarchy .todo-clear:hover { color: #C0CAF5; border-color: #8C95BE; }
+.todo-theme-omarchy .todo-empty {
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #8C95BE;
+    padding: 18px 0;
+    text-align: center;
+}
+.todo-theme-omarchy .todo-editor { spacing: 6px; }
+
+/* ---- footer: the key map ---- */
+.todo-theme-omarchy .todo-footer {
+    font-family: monospace;
+    font-size: 0.8em;
+    color: #8C95BE;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #3B4261;
+}
+
+/* ---- panel badge ---- */
+.todo-theme-omarchy .todo-badge {
+    font-family: monospace;
+    color: #1A1B26;
+    font-weight: bold;
+    font-size: 0.7em;
+    padding: 0 4px;
+    border-radius: 3px;
+}
+.todo-dialog.todo-theme-omarchy { background-color: #1A1B26; }
+.todo-theme-omarchy .todo-footer-keys { color: #8C95BE; }
+.todo-theme-omarchy .todo-footer-hotkey { color: #7AA2F7; }
+
+/* ===== Ember ===== */
+
+/* ---- window ---- */
+.todo-theme-ember {
+    background-color: #111318;
+    border: 1px solid #2E3440;
+    border-radius: 6px;
+}
+.todo-theme-ember .todo-root {
+    padding: 14px 16px;
+    min-width: 400px;
+    color: #ECE7DC;
+}
+
+/* ---- header: title, then a hairline rule ---- */
+.todo-theme-ember .todo-header {
+    spacing: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #2E3440;
+}
+.todo-theme-ember .todo-title {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.15em;
+    color: #FFB547;
+}
+
+/* ---- fields ---- */
+.todo-theme-ember .todo-entry {
+    background-color: #1A1D24;
+    border: 1px solid #2E3440;
+    border-radius: 4px;
+    padding: 6px 8px;
+    min-height: 22px;
+    margin-top: 6px;
+    color: #ECE7DC;
+}
+.todo-theme-ember .todo-entry:hover { border-color: #8A8F9C; }
+.todo-theme-ember .todo-entry:focus { border-color: #FFB547; }
+.todo-theme-ember .todo-desc { min-height: 48px; }
+
+/* ---- tabs: an underline marks the selected tab ---- */
+.todo-theme-ember .todo-tabs { spacing: 4px; margin-top: 10px; }
+.todo-theme-ember .todo-tab {
+    padding: 6px 8px 4px 8px;
+    min-height: 20px;
+    color: #8A8F9C;
+    border-bottom: 2px solid transparent;
+    font-family: monospace;
+    font-size: 0.85em;
+}
+.todo-theme-ember .todo-tab:hover { color: #ECE7DC; }
+.todo-theme-ember .todo-tab:focus { color: #ECE7DC; border-bottom: 2px solid #8A8F9C; }
+.todo-theme-ember .todo-tab-selected {
+    color: #FFB547;
+    border-bottom: 2px solid #FFB547;
+    font-weight: bold;
+}
+
+/* ---- list ---- */
+.todo-theme-ember .todo-list-scroll { max-height: 360px; margin-top: 10px; }
+.todo-theme-ember .todo-list { spacing: 6px; }
+
+/* Each row has a coloured left edge set from the priority in applet.js. */
+.todo-theme-ember .todo-row {
+    padding: 6px 8px;
+    border: 1px solid #2E3440;
+    border-radius: 4px;
+    background-color: #1A1D24;
+}
+.todo-theme-ember .todo-row:hover { border-color: #8A8F9C; background-color: #232832; }
+.todo-theme-ember .todo-row-done { opacity: 0.5; }
+.todo-theme-ember .todo-row-head { spacing: 8px; }
+.todo-theme-ember .todo-row-title { color: #ECE7DC; padding: 0; }
+.todo-theme-ember .todo-row-title:focus { color: #FFB547; }
+.todo-theme-ember .todo-row-desc {
+    color: #8A8F9C;
+    font-size: 0.9em;
+    padding: 4px 0 0 26px;
+}
+.todo-theme-ember .todo-check {
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0 4px;
+    color: #FFB547;
+    border-radius: 10px;
+}
+.todo-theme-ember .todo-check:focus { border: 1px solid #FFB547; }
+.todo-theme-ember .todo-pill {
+    font-family: monospace;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #111318;
+    padding: 1px 6px;
+    border-radius: 3px;
+}
+.todo-theme-ember .todo-row-actions { spacing: 4px; }
+.todo-theme-ember .todo-action {
+    padding: 0 6px;
+    min-height: 20px;
+    color: #8A8F9C;
+    border: 1px solid #2E3440;
+    border-radius: 4px;
+}
+.todo-theme-ember .todo-action:hover { color: #ECE7DC; border-color: #8A8F9C; }
+.todo-theme-ember .todo-action:focus { border-color: #FFB547; }
+.todo-theme-ember .todo-action-danger:hover { color: #E24B4A; border-color: #E24B4A; }
+
+/* ---- priority chips ---- */
+.todo-theme-ember .todo-chips { spacing: 6px; }
+.todo-theme-ember .todo-chip {
+    padding: 2px 8px;
+    min-height: 20px;
+    border: 1px solid #2E3440;
+    border-radius: 3px;
+    font-family: monospace;
+}
+.todo-theme-ember .todo-chip:hover { border-color: #8A8F9C; }
+.todo-theme-ember .todo-chip:focus { border-color: #FFB547; }
+.todo-theme-ember .todo-chip-selected {
+    font-weight: bold;
+}
+
+/* ---- add form ---- */
+.todo-theme-ember .todo-composer {
+    spacing: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #2E3440;
+}
+.todo-theme-ember .todo-composer-bottom { spacing: 8px; }
+.todo-theme-ember .todo-add {
+    padding: 4px 14px;
+    min-height: 20px;
+    color: #111318;
+    background-color: #FFB547;
+    border: 1px solid #FFB547;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.todo-theme-ember .todo-add:hover { background-color: #FFC978; }
+.todo-theme-ember .todo-add:focus { border-color: #ECE7DC; }
+
+/* ---- footer and empty states ---- */
+.todo-theme-ember .todo-clear {
+    margin-top: 8px;
+    padding: 4px 10px;
+    min-height: 20px;
+    color: #8A8F9C;
+    border: 1px solid #2E3440;
+    border-radius: 3px;
+}
+.todo-theme-ember .todo-clear:hover { color: #ECE7DC; border-color: #8A8F9C; }
+.todo-theme-ember .todo-empty {
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #8A8F9C;
+    padding: 18px 0;
+    text-align: center;
+}
+.todo-theme-ember .todo-editor { spacing: 6px; }
+
+/* ---- footer: the key map ---- */
+.todo-theme-ember .todo-footer {
+    font-family: monospace;
+    font-size: 0.8em;
+    color: #8A8F9C;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #2E3440;
+}
+
+/* ---- panel badge ---- */
+.todo-theme-ember .todo-badge {
+    font-family: monospace;
+    color: #111318;
+    font-weight: bold;
+    font-size: 0.7em;
+    padding: 0 4px;
+    border-radius: 3px;
+}
+.todo-dialog.todo-theme-ember { background-color: #111318; }
+.todo-theme-ember .todo-footer-keys { color: #8A8F9C; }
+.todo-theme-ember .todo-footer-hotkey { color: #FFB547; }
+
+/* ===== Paper ===== */
+
+/* ---- window ---- */
+.todo-theme-paper {
+    background-color: #1F1B16;
+    border: 1px solid #D8CFBE;
+    border-radius: 6px;
+}
+.todo-theme-paper .todo-root {
+    padding: 14px 16px;
+    min-width: 400px;
+    color: #1F1B16;
+}
+
+/* ---- header: title, then a hairline rule ---- */
+.todo-theme-paper .todo-header {
+    spacing: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #D8CFBE;
+}
+.todo-theme-paper .todo-title {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.15em;
+    color: #A34A08;
+}
+
+/* ---- fields ---- */
+.todo-theme-paper .todo-entry {
+    background-color: #FFFBF2;
+    border: 1px solid #D8CFBE;
+    border-radius: 4px;
+    padding: 6px 8px;
+    min-height: 22px;
+    margin-top: 6px;
+    color: #1F1B16;
+}
+.todo-theme-paper .todo-entry:hover { border-color: #6B6358; }
+.todo-theme-paper .todo-entry:focus { border-color: #A34A08; }
+.todo-theme-paper .todo-desc { min-height: 48px; }
+
+/* ---- tabs: an underline marks the selected tab ---- */
+.todo-theme-paper .todo-tabs { spacing: 4px; margin-top: 10px; }
+.todo-theme-paper .todo-tab {
+    padding: 6px 8px 4px 8px;
+    min-height: 20px;
+    color: #6B6358;
+    border-bottom: 2px solid transparent;
+    font-family: monospace;
+    font-size: 0.85em;
+}
+.todo-theme-paper .todo-tab:hover { color: #1F1B16; }
+.todo-theme-paper .todo-tab:focus { color: #1F1B16; border-bottom: 2px solid #6B6358; }
+.todo-theme-paper .todo-tab-selected {
+    color: #A34A08;
+    border-bottom: 2px solid #A34A08;
+    font-weight: bold;
+}
+
+/* ---- list ---- */
+.todo-theme-paper .todo-list-scroll { max-height: 360px; margin-top: 10px; }
+.todo-theme-paper .todo-list { spacing: 6px; }
+
+/* Each row has a coloured left edge set from the priority in applet.js. */
+.todo-theme-paper .todo-row {
+    padding: 6px 8px;
+    border: 1px solid #D8CFBE;
+    border-radius: 4px;
+    background-color: #FFFBF2;
+}
+.todo-theme-paper .todo-row:hover { border-color: #6B6358; background-color: #F1EADB; }
+.todo-theme-paper .todo-row-done { opacity: 0.5; }
+.todo-theme-paper .todo-row-head { spacing: 8px; }
+.todo-theme-paper .todo-row-title { color: #1F1B16; padding: 0; }
+.todo-theme-paper .todo-row-title:focus { color: #A34A08; }
+.todo-theme-paper .todo-row-desc {
+    color: #6B6358;
+    font-size: 0.9em;
+    padding: 4px 0 0 26px;
+}
+.todo-theme-paper .todo-check {
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0 4px;
+    color: #A34A08;
+    border-radius: 10px;
+}
+.todo-theme-paper .todo-check:focus { border: 1px solid #A34A08; }
+.todo-theme-paper .todo-pill {
+    font-family: monospace;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #1F1B16;
+    padding: 1px 6px;
+    border-radius: 3px;
+}
+.todo-theme-paper .todo-row-actions { spacing: 4px; }
+.todo-theme-paper .todo-action {
+    padding: 0 6px;
+    min-height: 20px;
+    color: #6B6358;
+    border: 1px solid #D8CFBE;
+    border-radius: 4px;
+}
+.todo-theme-paper .todo-action:hover { color: #1F1B16; border-color: #6B6358; }
+.todo-theme-paper .todo-action:focus { border-color: #A34A08; }
+.todo-theme-paper .todo-action-danger:hover { color: #E24B4A; border-color: #E24B4A; }
+
+/* ---- priority chips ---- */
+.todo-theme-paper .todo-chips { spacing: 6px; }
+.todo-theme-paper .todo-chip {
+    padding: 2px 8px;
+    min-height: 20px;
+    border: 1px solid #D8CFBE;
+    border-radius: 3px;
+    font-family: monospace;
+}
+.todo-theme-paper .todo-chip:hover { border-color: #6B6358; }
+.todo-theme-paper .todo-chip:focus { border-color: #A34A08; }
+.todo-theme-paper .todo-chip-selected {
+    font-weight: bold;
+}
+
+/* ---- add form ---- */
+.todo-theme-paper .todo-composer {
+    spacing: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #D8CFBE;
+}
+.todo-theme-paper .todo-composer-bottom { spacing: 8px; }
+.todo-theme-paper .todo-add {
+    padding: 4px 14px;
+    min-height: 20px;
+    color: #1F1B16;
+    background-color: #A34A08;
+    border: 1px solid #A34A08;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.todo-theme-paper .todo-add:hover { background-color: #7C3606; }
+.todo-theme-paper .todo-add:focus { border-color: #1F1B16; }
+
+/* ---- footer and empty states ---- */
+.todo-theme-paper .todo-clear {
+    margin-top: 8px;
+    padding: 4px 10px;
+    min-height: 20px;
+    color: #6B6358;
+    border: 1px solid #D8CFBE;
+    border-radius: 3px;
+}
+.todo-theme-paper .todo-clear:hover { color: #1F1B16; border-color: #6B6358; }
+.todo-theme-paper .todo-empty {
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #6B6358;
+    padding: 18px 0;
+    text-align: center;
+}
+.todo-theme-paper .todo-editor { spacing: 6px; }
+
+/* ---- footer: the key map ---- */
+.todo-theme-paper .todo-footer {
+    font-family: monospace;
+    font-size: 0.8em;
+    color: #6B6358;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #D8CFBE;
+}
+
+/* ---- panel badge ---- */
+.todo-theme-paper .todo-badge {
+    font-family: monospace;
+    color: #1F1B16;
+    font-weight: bold;
+    font-size: 0.7em;
+    padding: 0 4px;
+    border-radius: 3px;
+}
+.todo-dialog.todo-theme-paper { background-color: #F6F1E7; }
+.todo-theme-paper .todo-footer-keys { color: #6B6358; }
+.todo-theme-paper .todo-footer-hotkey { color: #A34A08; }
+
+/* ===== Sakura ===== */
+
+/* ---- window ---- */
+.todo-theme-sakura {
+    background-color: #140F16;
+    border: 1px solid #3A2F41;
+    border-radius: 6px;
+}
+.todo-theme-sakura .todo-root {
+    padding: 14px 16px;
+    min-width: 400px;
+    color: #F6E9EF;
+}
+
+/* ---- header: title, then a hairline rule ---- */
+.todo-theme-sakura .todo-header {
+    spacing: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #3A2F41;
+}
+.todo-theme-sakura .todo-title {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.15em;
+    color: #FF8FB1;
+}
+
+/* ---- fields ---- */
+.todo-theme-sakura .todo-entry {
+    background-color: #1E1823;
+    border: 1px solid #3A2F41;
+    border-radius: 4px;
+    padding: 6px 8px;
+    min-height: 22px;
+    margin-top: 6px;
+    color: #F6E9EF;
+}
+.todo-theme-sakura .todo-entry:hover { border-color: #A58C9A; }
+.todo-theme-sakura .todo-entry:focus { border-color: #FF8FB1; }
+.todo-theme-sakura .todo-desc { min-height: 48px; }
+
+/* ---- tabs: an underline marks the selected tab ---- */
+.todo-theme-sakura .todo-tabs { spacing: 4px; margin-top: 10px; }
+.todo-theme-sakura .todo-tab {
+    padding: 6px 8px 4px 8px;
+    min-height: 20px;
+    color: #A58C9A;
+    border-bottom: 2px solid transparent;
+    font-family: monospace;
+    font-size: 0.85em;
+}
+.todo-theme-sakura .todo-tab:hover { color: #F6E9EF; }
+.todo-theme-sakura .todo-tab:focus { color: #F6E9EF; border-bottom: 2px solid #A58C9A; }
+.todo-theme-sakura .todo-tab-selected {
+    color: #FF8FB1;
+    border-bottom: 2px solid #FF8FB1;
+    font-weight: bold;
+}
+
+/* ---- list ---- */
+.todo-theme-sakura .todo-list-scroll { max-height: 360px; margin-top: 10px; }
+.todo-theme-sakura .todo-list { spacing: 6px; }
+
+/* Each row has a coloured left edge set from the priority in applet.js. */
+.todo-theme-sakura .todo-row {
+    padding: 6px 8px;
+    border: 1px solid #3A2F41;
+    border-radius: 4px;
+    background-color: #1E1823;
+}
+.todo-theme-sakura .todo-row:hover { border-color: #A58C9A; background-color: #2A2232; }
+.todo-theme-sakura .todo-row-done { opacity: 0.5; }
+.todo-theme-sakura .todo-row-head { spacing: 8px; }
+.todo-theme-sakura .todo-row-title { color: #F6E9EF; padding: 0; }
+.todo-theme-sakura .todo-row-title:focus { color: #FF8FB1; }
+.todo-theme-sakura .todo-row-desc {
+    color: #A58C9A;
+    font-size: 0.9em;
+    padding: 4px 0 0 26px;
+}
+.todo-theme-sakura .todo-check {
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0 4px;
+    color: #FF8FB1;
+    border-radius: 10px;
+}
+.todo-theme-sakura .todo-check:focus { border: 1px solid #FF8FB1; }
+.todo-theme-sakura .todo-pill {
+    font-family: monospace;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #140F16;
+    padding: 1px 6px;
+    border-radius: 3px;
+}
+.todo-theme-sakura .todo-row-actions { spacing: 4px; }
+.todo-theme-sakura .todo-action {
+    padding: 0 6px;
+    min-height: 20px;
+    color: #A58C9A;
+    border: 1px solid #3A2F41;
+    border-radius: 4px;
+}
+.todo-theme-sakura .todo-action:hover { color: #F6E9EF; border-color: #A58C9A; }
+.todo-theme-sakura .todo-action:focus { border-color: #FF8FB1; }
+.todo-theme-sakura .todo-action-danger:hover { color: #E24B4A; border-color: #E24B4A; }
+
+/* ---- priority chips ---- */
+.todo-theme-sakura .todo-chips { spacing: 6px; }
+.todo-theme-sakura .todo-chip {
+    padding: 2px 8px;
+    min-height: 20px;
+    border: 1px solid #3A2F41;
+    border-radius: 3px;
+    font-family: monospace;
+}
+.todo-theme-sakura .todo-chip:hover { border-color: #A58C9A; }
+.todo-theme-sakura .todo-chip:focus { border-color: #FF8FB1; }
+.todo-theme-sakura .todo-chip-selected {
+    font-weight: bold;
+}
+
+/* ---- add form ---- */
+.todo-theme-sakura .todo-composer {
+    spacing: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #3A2F41;
+}
+.todo-theme-sakura .todo-composer-bottom { spacing: 8px; }
+.todo-theme-sakura .todo-add {
+    padding: 4px 14px;
+    min-height: 20px;
+    color: #140F16;
+    background-color: #FF8FB1;
+    border: 1px solid #FF8FB1;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.todo-theme-sakura .todo-add:hover { background-color: #FFB3CB; }
+.todo-theme-sakura .todo-add:focus { border-color: #F6E9EF; }
+
+/* ---- footer and empty states ---- */
+.todo-theme-sakura .todo-clear {
+    margin-top: 8px;
+    padding: 4px 10px;
+    min-height: 20px;
+    color: #A58C9A;
+    border: 1px solid #3A2F41;
+    border-radius: 3px;
+}
+.todo-theme-sakura .todo-clear:hover { color: #F6E9EF; border-color: #A58C9A; }
+.todo-theme-sakura .todo-empty {
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #A58C9A;
+    padding: 18px 0;
+    text-align: center;
+}
+.todo-theme-sakura .todo-editor { spacing: 6px; }
+
+/* ---- footer: the key map ---- */
+.todo-theme-sakura .todo-footer {
+    font-family: monospace;
+    font-size: 0.8em;
+    color: #A58C9A;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #3A2F41;
+}
+
+/* ---- panel badge ---- */
+.todo-theme-sakura .todo-badge {
+    font-family: monospace;
+    color: #140F16;
+    font-weight: bold;
+    font-size: 0.7em;
+    padding: 0 4px;
+    border-radius: 3px;
+}
+.todo-dialog.todo-theme-sakura { background-color: #140F16; }
+.todo-theme-sakura .todo-footer-keys { color: #A58C9A; }
+.todo-theme-sakura .todo-footer-hotkey { color: #FF8FB1; }
+
+/* ===== Lagoon ===== */
+
+/* ---- window ---- */
+.todo-theme-lagoon {
+    background-color: #0B1416;
+    border: 1px solid #23424A;
+    border-radius: 6px;
+}
+.todo-theme-lagoon .todo-root {
+    padding: 14px 16px;
+    min-width: 400px;
+    color: #E6F7F5;
+}
+
+/* ---- header: title, then a hairline rule ---- */
+.todo-theme-lagoon .todo-header {
+    spacing: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #23424A;
+}
+.todo-theme-lagoon .todo-title {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.15em;
+    color: #4FD1C5;
+}
+
+/* ---- fields ---- */
+.todo-theme-lagoon .todo-entry {
+    background-color: #122228;
+    border: 1px solid #23424A;
+    border-radius: 4px;
+    padding: 6px 8px;
+    min-height: 22px;
+    margin-top: 6px;
+    color: #E6F7F5;
+}
+.todo-theme-lagoon .todo-entry:hover { border-color: #8FB3B0; }
+.todo-theme-lagoon .todo-entry:focus { border-color: #4FD1C5; }
+.todo-theme-lagoon .todo-desc { min-height: 48px; }
+
+/* ---- tabs: an underline marks the selected tab ---- */
+.todo-theme-lagoon .todo-tabs { spacing: 4px; margin-top: 10px; }
+.todo-theme-lagoon .todo-tab {
+    padding: 6px 8px 4px 8px;
+    min-height: 20px;
+    color: #8FB3B0;
+    border-bottom: 2px solid transparent;
+    font-family: monospace;
+    font-size: 0.85em;
+}
+.todo-theme-lagoon .todo-tab:hover { color: #E6F7F5; }
+.todo-theme-lagoon .todo-tab:focus { color: #E6F7F5; border-bottom: 2px solid #8FB3B0; }
+.todo-theme-lagoon .todo-tab-selected {
+    color: #4FD1C5;
+    border-bottom: 2px solid #4FD1C5;
+    font-weight: bold;
+}
+
+/* ---- list ---- */
+.todo-theme-lagoon .todo-list-scroll { max-height: 360px; margin-top: 10px; }
+.todo-theme-lagoon .todo-list { spacing: 6px; }
+
+/* Each row has a coloured left edge set from the priority in applet.js. */
+.todo-theme-lagoon .todo-row {
+    padding: 6px 8px;
+    border: 1px solid #23424A;
+    border-radius: 4px;
+    background-color: #122228;
+}
+.todo-theme-lagoon .todo-row:hover { border-color: #8FB3B0; background-color: #1A2F36; }
+.todo-theme-lagoon .todo-row-done { opacity: 0.5; }
+.todo-theme-lagoon .todo-row-head { spacing: 8px; }
+.todo-theme-lagoon .todo-row-title { color: #E6F7F5; padding: 0; }
+.todo-theme-lagoon .todo-row-title:focus { color: #4FD1C5; }
+.todo-theme-lagoon .todo-row-desc {
+    color: #8FB3B0;
+    font-size: 0.9em;
+    padding: 4px 0 0 26px;
+}
+.todo-theme-lagoon .todo-check {
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0 4px;
+    color: #4FD1C5;
+    border-radius: 10px;
+}
+.todo-theme-lagoon .todo-check:focus { border: 1px solid #4FD1C5; }
+.todo-theme-lagoon .todo-pill {
+    font-family: monospace;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #0B1416;
+    padding: 1px 6px;
+    border-radius: 3px;
+}
+.todo-theme-lagoon .todo-row-actions { spacing: 4px; }
+.todo-theme-lagoon .todo-action {
+    padding: 0 6px;
+    min-height: 20px;
+    color: #8FB3B0;
+    border: 1px solid #23424A;
+    border-radius: 4px;
+}
+.todo-theme-lagoon .todo-action:hover { color: #E6F7F5; border-color: #8FB3B0; }
+.todo-theme-lagoon .todo-action:focus { border-color: #4FD1C5; }
+.todo-theme-lagoon .todo-action-danger:hover { color: #E24B4A; border-color: #E24B4A; }
+
+/* ---- priority chips ---- */
+.todo-theme-lagoon .todo-chips { spacing: 6px; }
+.todo-theme-lagoon .todo-chip {
+    padding: 2px 8px;
+    min-height: 20px;
+    border: 1px solid #23424A;
+    border-radius: 3px;
+    font-family: monospace;
+}
+.todo-theme-lagoon .todo-chip:hover { border-color: #8FB3B0; }
+.todo-theme-lagoon .todo-chip:focus { border-color: #4FD1C5; }
+.todo-theme-lagoon .todo-chip-selected {
+    font-weight: bold;
+}
+
+/* ---- add form ---- */
+.todo-theme-lagoon .todo-composer {
+    spacing: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #23424A;
+}
+.todo-theme-lagoon .todo-composer-bottom { spacing: 8px; }
+.todo-theme-lagoon .todo-add {
+    padding: 4px 14px;
+    min-height: 20px;
+    color: #0B1416;
+    background-color: #4FD1C5;
+    border: 1px solid #4FD1C5;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.todo-theme-lagoon .todo-add:hover { background-color: #7BE3DA; }
+.todo-theme-lagoon .todo-add:focus { border-color: #E6F7F5; }
+
+/* ---- footer and empty states ---- */
+.todo-theme-lagoon .todo-clear {
+    margin-top: 8px;
+    padding: 4px 10px;
+    min-height: 20px;
+    color: #8FB3B0;
+    border: 1px solid #23424A;
+    border-radius: 3px;
+}
+.todo-theme-lagoon .todo-clear:hover { color: #E6F7F5; border-color: #8FB3B0; }
+.todo-theme-lagoon .todo-empty {
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #8FB3B0;
+    padding: 18px 0;
+    text-align: center;
+}
+.todo-theme-lagoon .todo-editor { spacing: 6px; }
+
+/* ---- footer: the key map ---- */
+.todo-theme-lagoon .todo-footer {
+    font-family: monospace;
+    font-size: 0.8em;
+    color: #8FB3B0;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #23424A;
+}
+
+/* ---- panel badge ---- */
+.todo-theme-lagoon .todo-badge {
+    font-family: monospace;
+    color: #0B1416;
+    font-weight: bold;
+    font-size: 0.7em;
+    padding: 0 4px;
+    border-radius: 3px;
+}
+.todo-dialog.todo-theme-lagoon { background-color: #0B1416; }
+.todo-theme-lagoon .todo-footer-keys { color: #8FB3B0; }
+.todo-theme-lagoon .todo-footer-hotkey { color: #4FD1C5; }
+
+/* Paper: buttons and badges sit on the darker accent, so their text is white. */
+.todo-theme-paper .todo-add { color: #FFFFFF; }
+.todo-theme-paper .todo-badge { color: #FFFFFF; }
