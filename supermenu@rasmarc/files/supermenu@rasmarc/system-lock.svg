@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <!-- Frame: Copyright (C) 2026 rasmarc; glyph from user supplied system-lock-screen-symbolic.svg. -->
+  <rect x="1" y="1" width="22" height="22" rx="5" fill="#3c3c3c" stroke="#202020" stroke-width="1"/>
+  <g transform="translate(4 4)" fill="#ffffff">
+    <path d="m 8 1 c -2.199219 0 -4 1.800781 -4 4 v 2 c -1.109375 0 -2 0.890625 -2 2 v 5 c 0 0.554688 0.445312 1 1 1 h 10 c 0.554688 0 1 -0.445312 1 -1 v -5 c 0 -1.109375 -0.890625 -2 -2 -2 v -2 c 0 -2.199219 -1.800781 -4 -4 -4 z m 0 2 c 1.125 0 2 0.875 2 2 v 2 h -4 v -2 c 0 -1.125 0.875 -2 2 -2 z m 0 0"/>
+  </g>
+</svg>

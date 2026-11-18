@@ -1,0 +1,839 @@
+# SuperMenu translations. Copyright (C) 2026 rasmarc.
+# This file is distributed under the GPL-2.0-or-later license.
+# Generated translation draft; no native-speaker approval claimed.
+msgid ""
+msgstr "Project-Id-Version: SuperMenu 1.0.8\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-11-04 12:00+0100\nPO-Revision-Date: 2026-11-06 04:56+0100\nLast-Translator: SuperMenu translation draft\nLanguage-Team: Translation draft; native review pending\nLanguage: ko\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\n"
+
+msgid "A command is empty."
+msgstr "명령이 비어 있습니다."
+
+msgid "A submenu does not contain a valid list."
+msgstr "하위 메뉴에 유효한 목록이 없습니다."
+
+msgid "Accessories"
+msgstr "보조 프로그램"
+
+msgid "Actions: right-click"
+msgstr "동작: 마우스 오른쪽 클릭"
+
+msgid "Add separator"
+msgstr "구분선 추가"
+
+msgid "Add to custom menu"
+msgstr "사용자 메뉴에 추가"
+
+msgid "Add to custom menu…"
+msgstr "사용자 메뉴에 추가…"
+
+#, python-format
+msgid "Added to: %s"
+msgstr "추가한 위치: %s"
+
+msgid "Administration"
+msgstr "시스템 관리"
+
+msgid "All applications"
+msgstr "모든 앱"
+
+msgid "All files (*)"
+msgstr "모든 파일 (*)"
+
+msgid "All programs"
+msgstr "모든 프로그램"
+
+msgid "Alphabetically"
+msgstr "이름순"
+
+msgid "Alternative source for development tests; the bundled template is the default."
+msgstr "개발 테스트용 다른 소스입니다. 기본적으로 포함된 템플릿을 사용합니다."
+
+msgid "An entry has neither an application ID nor a command."
+msgstr "항목에 앱 ID와 명령이 모두 없습니다."
+
+msgid "Animate menus when opening and closing"
+msgstr "메뉴를 열고 닫을 때 애니메이션 사용"
+
+msgid "Appearance"
+msgstr "모양"
+
+msgid "Applications menu"
+msgstr "앱 메뉴"
+
+msgid "Applications menu icon"
+msgstr "앱 메뉴 아이콘"
+
+msgid "Applications menu with drawers or classic view; custom menu with drawers, list or grid and direct editing."
+msgstr "서랍 또는 클래식 보기의 앱 메뉴와, 서랍·목록·격자 보기를 지원하고 직접 편집할 수 있는 사용자 메뉴입니다."
+
+msgid "Apply"
+msgstr "적용"
+
+msgid "Back up content"
+msgstr "내용 백업"
+
+msgid "Back up custom menu content"
+msgstr "사용자 메뉴 내용 백업"
+
+msgid "Backup"
+msgstr "백업"
+
+msgid "Backup Tool"
+msgstr "백업 도구"
+
+msgid "Based on the bundled, adapted Cinnamon menu"
+msgstr "포함된 수정된 Cinnamon 메뉴를 기반으로 함"
+
+msgid "Behavior"
+msgstr "동작"
+
+msgid "Blink three times at the start"
+msgstr "시작할 때 세 번 깜박임"
+
+msgid "Both sides"
+msgstr "양쪽"
+
+msgid "By category"
+msgstr "범주별"
+
+msgid "Calculator"
+msgstr "계산기"
+
+msgid "Cancel"
+msgstr "취소"
+
+msgid "Category name"
+msgstr "범주 이름"
+
+#, python-format
+msgid "Category: %s"
+msgstr "범주: %s"
+
+msgid "Celluloid"
+msgstr "Celluloid"
+
+msgid "Change icon…"
+msgstr "아이콘 변경…"
+
+msgid "Change launch command"
+msgstr "실행 명령 변경"
+
+msgid "Change launch command…"
+msgstr "실행 명령 변경…"
+
+msgid "Choose a custom icon or image"
+msgstr "사용자 아이콘 또는 이미지 선택"
+
+msgid "Choose an icon – SuperMenu"
+msgstr "아이콘 선택 – SuperMenu"
+
+msgid "Classic"
+msgstr "클래식"
+
+msgid "Content"
+msgstr "내용"
+
+#, python-format
+msgid "Content replaced — entries: %d; categories: %d."
+msgstr "내용을 바꿨습니다 — 항목: %d; 범주: %d."
+
+#, python-format
+msgid "Copied to: %s"
+msgstr "복사한 위치: %s"
+
+msgid "Copy from applications menu"
+msgstr "앱 메뉴에서 복사"
+
+msgid "Copy to"
+msgstr "복사할 위치"
+
+msgid "Could not add the category to the custom menu."
+msgstr "범주를 사용자 메뉴에 추가할 수 없습니다."
+
+msgid "Could not copy the entry."
+msgstr "항목을 복사할 수 없습니다."
+
+msgid "Could not create a unique category ID."
+msgstr "고유한 범주 ID를 만들 수 없습니다."
+
+msgid "Could not create the storage directory"
+msgstr "저장 디렉터리를 만들 수 없습니다"
+
+#, python-format
+msgid "Could not launch the entry: %s"
+msgstr "항목을 실행할 수 없습니다: %s"
+
+#, python-format
+msgid "Could not load content: %s"
+msgstr "내용을 불러올 수 없습니다: %s"
+
+#, python-format
+msgid "Could not open the file: %s"
+msgstr "파일을 열 수 없습니다: %s"
+
+#, python-format
+msgid "Could not open the icon chooser: %s"
+msgstr "아이콘 선택기를 열 수 없습니다: %s"
+
+#, python-format
+msgid "Could not open the place: %s"
+msgstr "위치를 열 수 없습니다: %s"
+
+msgid "Could not read the custom menu"
+msgstr "사용자 메뉴를 읽을 수 없습니다"
+
+msgid "Could not read the file."
+msgstr "파일을 읽을 수 없습니다."
+
+msgid "Could not remove the separator."
+msgstr "구분선을 제거할 수 없습니다."
+
+msgid "Could not save the change."
+msgstr "변경 사항을 저장할 수 없습니다."
+
+msgid "Could not save the custom menu."
+msgstr "사용자 메뉴를 저장할 수 없습니다."
+
+msgid "Could not save the icon."
+msgstr "아이콘을 저장할 수 없습니다."
+
+msgid "Could not save the order."
+msgstr "순서를 저장할 수 없습니다."
+
+msgid "Could not save the separator."
+msgstr "구분선을 저장할 수 없습니다."
+
+msgid "Could not uniquely adapt the menu entry point."
+msgstr "메뉴 진입점을 명확하게 식별하여 조정할 수 없습니다."
+
+msgid "Could not uniquely adapt the native keyboard shortcut."
+msgstr "기본 키보드 바로 가기를 명확하게 식별하여 조정할 수 없습니다."
+
+msgid "Could not uniquely identify the applications menu editing action."
+msgstr "앱 메뉴 편집 동작을 명확하게 식별할 수 없습니다."
+
+msgid "Could not uniquely identify the three session actions."
+msgstr "세 가지 세션 동작을 명확하게 식별할 수 없습니다."
+
+msgid "Create"
+msgstr "만들기"
+
+msgid "Create category…"
+msgstr "범주 만들기…"
+
+msgid "Create entry…"
+msgstr "항목 만들기…"
+
+msgid "Custom entries"
+msgstr "사용자 항목"
+
+msgid "Custom icon or image"
+msgstr "사용자 아이콘 또는 이미지"
+
+msgid "Custom menu"
+msgstr "사용자 메뉴"
+
+msgid "Custom menu icon"
+msgstr "사용자 메뉴 아이콘"
+
+msgid "Desktop"
+msgstr "바탕화면"
+
+msgid "Document Scanner"
+msgstr "문서 스캐너"
+
+msgid "Documents"
+msgstr "문서"
+
+msgid "Downloads"
+msgstr "다운로드"
+
+msgid "Drawers"
+msgstr "서랍"
+
+msgid "Drawing"
+msgstr "그림 그리기"
+
+msgid "Duplicate custom menu category ID"
+msgstr "사용자 메뉴의 범주 ID가 중복됩니다"
+
+msgid "Edit applications menu"
+msgstr "앱 메뉴 편집"
+
+msgid "Edit custom menu"
+msgstr "사용자 메뉴 편집"
+
+msgid "Editing mode"
+msgstr "편집 모드"
+
+msgid "End editing mode"
+msgstr "편집 모드 종료"
+
+#, python-format
+msgid "Entries: %d"
+msgstr "항목: %d"
+
+msgid "Entry name"
+msgstr "항목 이름"
+
+msgid "Expand in the menu"
+msgstr "메뉴 안에서 펼치기"
+
+msgid "Expansion arrow"
+msgstr "펼치기 화살표"
+
+#, python-format
+msgid "Export failed: %s"
+msgstr "내보내기 실패: %s"
+
+#, python-format
+msgid "Exported — entries: %d; categories: %d."
+msgstr "내보냈습니다 — 항목: %d; 범주: %d."
+
+msgid "Export…"
+msgstr "내보내기…"
+
+msgid "Extended context menu"
+msgstr "확장된 상황에 맞는 메뉴"
+
+msgid "File Renamer"
+msgstr "파일 이름 바꾸기"
+
+msgid "File history is disabled"
+msgstr "파일 기록이 꺼져 있습니다"
+
+msgid "Files"
+msgstr "파일"
+
+msgid "Five-pointed star with Super-S in text color"
+msgstr "글자색 Super-S가 있는 오각별"
+
+msgid "Five-pointed star with transparent Super-S"
+msgstr "투명한 Super-S가 있는 오각별"
+
+msgid "Four-pointed star with Super-S in text color"
+msgstr "글자색 Super-S가 있는 사각별"
+
+msgid "Four-pointed star with transparent Super-S"
+msgstr "투명한 Super-S가 있는 사각별"
+
+msgid "Fully expand the drawer"
+msgstr "서랍을 완전히 펼치기"
+
+msgid "General"
+msgstr "일반"
+
+msgid "Graphics"
+msgstr "그래픽"
+
+msgid "Grid"
+msgstr "격자"
+
+msgid "Group system buttons"
+msgstr "시스템 버튼 묶기"
+
+msgid "Hide when an action list opens"
+msgstr "동작 목록을 열 때 숨기기"
+
+msgid "Home folder"
+msgstr "홈 폴더"
+
+msgid "Hover delay"
+msgstr "마우스를 올렸을 때 지연 시간"
+
+msgid "Hypnotix"
+msgstr "Hypnotix"
+
+msgid "Icon size for categories and applications (px)"
+msgstr "범주와 앱 아이콘 크기(px)"
+
+msgid "Icons per row"
+msgstr "행당 아이콘 수"
+
+msgid "Import"
+msgstr "가져오기"
+
+#, python-format
+msgid "Import failed: %s"
+msgstr "가져오기 실패: %s"
+
+#, python-format
+msgid "Imported — entries: %d; new categories: %d."
+msgstr "가져왔습니다 — 항목: %d; 새 범주: %d."
+
+msgid "Import…"
+msgstr "가져오기…"
+
+#, python-format
+msgid "Inactive entries or separators skipped: %d."
+msgstr "건너뛴 비활성 항목 또는 구분선: %d."
+
+msgid "Install SuperMenu from the bundled menu template."
+msgstr "포함된 메뉴 템플릿으로 SuperMenu를 설치합니다."
+
+#, python-format
+msgid "Installation stopped: %s"
+msgstr "설치 중단: %s"
+
+#, python-format
+msgid "Installed: %s"
+msgstr "설치됨: %s"
+
+msgid "Internet"
+msgstr "인터넷"
+
+msgid "Invalid application entry"
+msgstr "잘못된 앱 항목"
+
+msgid "Invalid custom application entry"
+msgstr "잘못된 사용자 앱 항목"
+
+msgid "Invalid custom menu category"
+msgstr "잘못된 사용자 메뉴 범주"
+
+msgid "Invalid enabled value."
+msgstr "잘못된 활성화 값입니다."
+
+msgid "Invalid entry ID"
+msgstr "잘못된 항목 ID"
+
+msgid "Invalid file selection."
+msgstr "잘못된 파일 선택입니다."
+
+msgid "Invalid icon assignment"
+msgstr "잘못된 아이콘 지정"
+
+msgid "Invalid icon selection."
+msgstr "잘못된 아이콘 선택입니다."
+
+msgid "Invalid import assignment"
+msgstr "잘못된 가져오기 매핑"
+
+msgid "Invalid menu entry."
+msgstr "잘못된 메뉴 항목입니다."
+
+#, python-format
+msgid "Invalid override for %s in settings-override.json."
+msgstr "settings-override.json에서 %s의 재정의 값이 잘못되었습니다."
+
+#, python-format
+msgid "Invalid text field: %s"
+msgstr "잘못된 텍스트 필드: %s"
+
+msgid "Keyboard shortcuts"
+msgstr "키보드 바로 가기"
+
+msgid "Launch command"
+msgstr "실행 명령"
+
+msgid "Left only"
+msgstr "왼쪽만"
+
+msgid "LibreOffice"
+msgstr "LibreOffice"
+
+msgid "LibreOffice Calc"
+msgstr "LibreOffice Calc"
+
+msgid "LibreOffice Draw"
+msgstr "LibreOffice Draw"
+
+msgid "LibreOffice Impress"
+msgstr "LibreOffice Impress"
+
+msgid "LibreOffice Writer"
+msgstr "LibreOffice Writer"
+
+msgid "Limit the number of recent files to"
+msgstr "최근 파일 수 제한"
+
+msgid "List"
+msgstr "목록"
+
+msgid "Load"
+msgstr "불러오기"
+
+msgid "Load content"
+msgstr "내용 불러오기"
+
+msgid "Load content into the custom menu"
+msgstr "사용자 메뉴로 내용 불러오기"
+
+msgid "Load template…"
+msgstr "템플릿 불러오기…"
+
+msgid "Minimum grid entry width"
+msgstr "격자 항목의 최소 너비"
+
+msgid "Miscellaneous"
+msgstr "기타"
+
+msgid "Move down"
+msgstr "아래로 이동"
+
+msgid "Move up"
+msgstr "위로 이동"
+
+msgid "Music"
+msgstr "음악"
+
+msgid "My menu"
+msgstr "내 메뉴"
+
+msgid "Name in the applet manager: SuperMenu"
+msgstr "애플릿 관리자의 이름: SuperMenu"
+
+msgid "New category"
+msgstr "새 범주"
+
+msgid "New entry"
+msgstr "새 항목"
+
+msgid "No applications available"
+msgstr "사용 가능한 앱이 없습니다"
+
+msgid "No applications found"
+msgstr "앱을 찾지 못했습니다"
+
+msgid "No available entries"
+msgstr "사용 가능한 항목이 없습니다"
+
+msgid "No entries yet"
+msgstr "아직 항목이 없습니다"
+
+msgid "No icon selected."
+msgstr "선택한 아이콘이 없습니다."
+
+msgid "No places selected or available"
+msgstr "선택되거나 사용 가능한 위치가 없습니다"
+
+msgid "No recent files"
+msgstr "최근 파일이 없습니다"
+
+msgid "No valid import file selected."
+msgstr "유효한 가져오기 파일을 선택하지 않았습니다."
+
+msgid "None"
+msgstr "없음"
+
+msgid "Office"
+msgstr "오피스"
+
+msgid "On first installation, add SuperMenu to the panel using the applet manager."
+msgstr "처음 설치한 후 애플릿 관리자를 사용하여 SuperMenu를 패널에 추가하세요."
+
+msgid "Onboard"
+msgstr "Onboard"
+
+msgid "Open all drawers"
+msgstr "모든 서랍 열기"
+
+msgid "Open and close the applications menu"
+msgstr "앱 메뉴 열기 및 닫기"
+
+msgid "Open and close the custom menu"
+msgstr "사용자 메뉴 열기 및 닫기"
+
+msgid "Open categories"
+msgstr "범주 열기"
+
+msgid "Open centered over the panel icon (or at the screen edge)"
+msgstr "패널 아이콘 위에 가운데로 열기(또는 화면 가장자리에 열기)"
+
+msgid "Open menus when hovering over their panel icons"
+msgstr "패널 아이콘에 마우스를 올리면 메뉴 열기"
+
+msgid "Other"
+msgstr "기타"
+
+msgid "Other bookmarks"
+msgstr "기타 책갈피"
+
+msgid "Padding size (100% equals panel height)"
+msgstr "여백 크기(100%는 패널 높이)"
+
+msgid "Panel"
+msgstr "패널"
+
+msgid "Panel icon padding"
+msgstr "패널 아이콘 여백"
+
+msgid "Pictures"
+msgstr "사진"
+
+msgid "Pix"
+msgstr "Pix"
+
+msgid "Places"
+msgstr "위치"
+
+msgid "Please choose a backup file."
+msgstr "백업 파일을 선택하세요."
+
+msgid "Please choose a file other than the active menu data."
+msgstr "사용 중인 메뉴 데이터와 다른 파일을 선택하세요."
+
+msgid "Please choose a file to import."
+msgstr "가져올 파일을 선택하세요."
+
+msgid "Please install as a regular user without sudo."
+msgstr "sudo 없이 일반 사용자로 설치하세요."
+
+msgid "Position of search bar and system buttons"
+msgstr "검색창 및 시스템 버튼 위치"
+
+msgid "Preselected category"
+msgstr "미리 선택된 범주"
+
+msgid "Prevent launching in editing mode"
+msgstr "편집 모드에서 실행 방지"
+
+msgid "Quit"
+msgstr "종료"
+
+msgid "Reading import…"
+msgstr "가져올 내용 읽는 중…"
+
+msgid "Recently used"
+msgstr "최근 사용"
+
+msgid "Remove"
+msgstr "제거"
+
+msgid "Remove category?"
+msgstr "범주를 제거할까요?"
+
+msgid "Remove entry?"
+msgstr "항목을 제거할까요?"
+
+msgid "Remove…"
+msgstr "제거…"
+
+msgid "Rename"
+msgstr "이름 바꾸기"
+
+msgid "Rename…"
+msgstr "이름 바꾸기…"
+
+msgid "Replace"
+msgstr "바꾸기"
+
+msgid "Replace existing content when importing"
+msgstr "가져올 때 기존 내용 바꾸기"
+
+msgid "Reset"
+msgstr "초기화"
+
+msgid "Restore default settings"
+msgstr "기본 설정 복원"
+
+msgid "Right only"
+msgstr "오른쪽만"
+
+msgid "Save"
+msgstr "저장"
+
+msgid "Save failed."
+msgstr "저장에 실패했습니다."
+
+msgid "Saving backup…"
+msgstr "백업 저장 중…"
+
+msgid "Screenshot"
+msgstr "스크린샷"
+
+msgid "Scroll the application list on hover"
+msgstr "마우스를 올리면 앱 목록 스크롤"
+
+#, python-format
+msgid "Separators included: %d."
+msgstr "포함된 구분선: %d."
+
+msgid "Settings"
+msgstr "설정"
+
+msgid "Show a hint in editing mode"
+msgstr "편집 모드에서 안내 표시"
+
+msgid "Show application descriptions"
+msgstr "앱 설명 표시"
+
+msgid "Show custom menu"
+msgstr "사용자 메뉴 표시"
+
+msgid "Show flat system buttons"
+msgstr "평평한 시스템 버튼 표시"
+
+msgid "Show icons only"
+msgstr "아이콘만 표시"
+
+msgid "Show lock button"
+msgstr "잠금 버튼 표시"
+
+msgid "Show logout button"
+msgstr "로그아웃 버튼 표시"
+
+msgid "Show only the selected category"
+msgstr "선택한 범주만 표시"
+
+msgid "Show places"
+msgstr "위치 표시"
+
+msgid "Show recent files"
+msgstr "최근 파일 표시"
+
+msgid "Show shutdown button"
+msgstr "전원 끄기 버튼 표시"
+
+msgid "Show shutdown in red"
+msgstr "전원 끄기를 빨간색으로 표시"
+
+msgid "Software Manager"
+msgstr "소프트웨어 관리자"
+
+msgid "Sorting"
+msgstr "정렬"
+
+msgid "Sound & Video"
+msgstr "소리 및 비디오"
+
+msgid "Start and end editing mode"
+msgstr "편집 모드 시작 및 종료"
+
+msgid "Submenu"
+msgstr "하위 메뉴"
+
+msgid "Supported files (*.json)"
+msgstr "지원하는 파일 (*.json)"
+
+msgid "Switch categories on hover in classic view"
+msgstr "클래식 보기에서 마우스를 올리면 범주 전환"
+
+msgid "Symbolic five-pointed star"
+msgstr "심볼릭 오각별"
+
+msgid "Symbolic four-pointed star"
+msgstr "심볼릭 사각별"
+
+msgid "System Monitor"
+msgstr "시스템 모니터"
+
+msgid "System menu icon"
+msgstr "시스템 메뉴 아이콘"
+
+msgid "Terminal"
+msgstr "터미널"
+
+msgid "The CustomApplicationsMenu file exceeds 2 MB."
+msgstr "CustomApplicationsMenu 파일이 2 MB를 초과합니다."
+
+msgid "The arrow opens all programs; the second button opens the custom menu."
+msgstr "화살표는 모든 프로그램을 열고, 두 번째 버튼은 사용자 메뉴를 엽니다."
+
+msgid "The backup exceeds 32 MB."
+msgstr "백업이 32 MB를 초과합니다."
+
+msgid "The custom menu changed. Open the template chooser again."
+msgstr "사용자 메뉴가 변경되었습니다. 템플릿 선택 창을 다시 여세요."
+
+msgid "The disabled lock action is not supported."
+msgstr "비활성화된 잠금 동작은 지원하지 않습니다."
+
+msgid "The file chooser closed unexpectedly."
+msgstr "파일 선택기가 예기치 않게 닫혔습니다."
+
+msgid "The file does not contain a supported menu format."
+msgstr "파일에 지원하는 메뉴 형식이 없습니다."
+
+msgid "The file must contain a list of menu entries."
+msgstr "파일에는 메뉴 항목 목록이 있어야 합니다."
+
+msgid "The icon chooser closed unexpectedly."
+msgstr "아이콘 선택기가 예기치 않게 닫혔습니다."
+
+msgid "The import file contains too many entries."
+msgstr "가져오기 파일에 항목이 너무 많습니다."
+
+msgid "The import file exceeds 32 MB."
+msgstr "가져오기 파일이 32 MB를 초과합니다."
+
+msgid "The import file is too large."
+msgstr "가져오기 파일이 너무 큽니다."
+
+#, python-format
+msgid "The menu layout requires the native function %s."
+msgstr "메뉴 배치에 필요한 기본 함수: %s."
+
+msgid "The menu nesting is too deep."
+msgstr "메뉴 중첩이 너무 깊습니다."
+
+#, python-format
+msgid "The override %s is not part of the settings schema."
+msgstr "설정 스키마에 없는 재정의 값: %s."
+
+msgid "The session buttons in this Cinnamon menu version are not supported."
+msgstr "이 Cinnamon 메뉴 버전의 세션 버튼은 지원하지 않습니다."
+
+msgid "The target directory does not belong to SuperMenu; no files were changed."
+msgstr "대상 디렉터리는 SuperMenu의 것이 아닙니다. 파일을 변경하지 않았습니다."
+
+msgid "The target is a symbolic link; use --target-dir to specify the actual directory."
+msgstr "대상은 심볼릭 링크입니다. --target-dir로 실제 디렉터리를 지정하세요."
+
+msgid "Then restart Cinnamon or log out and back in."
+msgstr "그런 다음 Cinnamon을 다시 시작하거나 로그아웃 후 다시 로그인하세요."
+
+msgid "This Cinnamon menu arrangement is not supported."
+msgstr "이 Cinnamon 메뉴 배치는 지원하지 않습니다."
+
+msgid "This Cinnamon menu entry point is not supported; nothing was installed."
+msgstr "이 Cinnamon 메뉴 진입점은 지원하지 않습니다. 아무것도 설치하지 않았습니다."
+
+msgid "This Cinnamon menu version has no supported settings layout."
+msgstr "이 Cinnamon 메뉴 버전에는 지원하는 설정 배치가 없습니다."
+
+#, python-format
+msgid "This Cinnamon menu version lacks the required function %s."
+msgstr "이 Cinnamon 메뉴 버전에 없는 필수 함수: %s."
+
+msgid "This category…"
+msgstr "이 범주…"
+
+msgid "Too many custom entries"
+msgstr "사용자 항목이 너무 많습니다"
+
+msgid "Transmission"
+msgstr "Transmission"
+
+msgid "USB Image Writer"
+msgstr "USB 이미지 기록기"
+
+msgid "USB Stick Formatter"
+msgstr "USB 메모리 포맷 도구"
+
+#, python-format
+msgid "Unavailable applications: %d. Their entries remain saved."
+msgstr "사용할 수 없는 앱: %d. 해당 항목은 계속 저장됩니다."
+
+msgid "Unknown custom menu format"
+msgstr "알 수 없는 사용자 메뉴 형식"
+
+msgid "Unknown error"
+msgstr "알 수 없는 오류"
+
+msgid "Use the panel icon size"
+msgstr "패널 아이콘 크기 사용"
+
+msgid "Videos"
+msgstr "동영상"
+
+msgid "View"
+msgstr "보기"
+
+msgid "Virtual keyboard"
+msgstr "화면 키보드"
+
+msgid "Web Apps"
+msgstr "웹 앱"
+
+msgid "not detected"
+msgstr "감지되지 않음"

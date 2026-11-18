@@ -1,0 +1,839 @@
+# SuperMenu translations. Copyright (C) 2026 rasmarc.
+# This file is distributed under the GPL-2.0-or-later license.
+# Generated translation draft; no native-speaker approval claimed.
+msgid ""
+msgstr "Project-Id-Version: SuperMenu 1.0.8\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-11-04 12:00+0100\nPO-Revision-Date: 2026-11-06 04:56+0100\nLast-Translator: SuperMenu translation draft\nLanguage-Team: Translation draft; native review pending\nLanguage: ja\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\n"
+
+msgid "A command is empty."
+msgstr "コマンドが空です。"
+
+msgid "A submenu does not contain a valid list."
+msgstr "サブメニューに有効なリストがありません。"
+
+msgid "Accessories"
+msgstr "アクセサリ"
+
+msgid "Actions: right-click"
+msgstr "操作：右クリック"
+
+msgid "Add separator"
+msgstr "区切り線を追加"
+
+msgid "Add to custom menu"
+msgstr "カスタムメニューに追加"
+
+msgid "Add to custom menu…"
+msgstr "カスタムメニューに追加…"
+
+#, python-format
+msgid "Added to: %s"
+msgstr "追加先：%s"
+
+msgid "Administration"
+msgstr "システム管理"
+
+msgid "All applications"
+msgstr "すべてのアプリケーション"
+
+msgid "All files (*)"
+msgstr "すべてのファイル (*)"
+
+msgid "All programs"
+msgstr "すべてのプログラム"
+
+msgid "Alphabetically"
+msgstr "名前順"
+
+msgid "Alternative source for development tests; the bundled template is the default."
+msgstr "開発テスト用の別のソース。既定では付属のテンプレートを使用します。"
+
+msgid "An entry has neither an application ID nor a command."
+msgstr "項目にアプリケーション ID もコマンドもありません。"
+
+msgid "Animate menus when opening and closing"
+msgstr "メニューの開閉をアニメーション表示"
+
+msgid "Appearance"
+msgstr "外観"
+
+msgid "Applications menu"
+msgstr "アプリケーションメニュー"
+
+msgid "Applications menu icon"
+msgstr "アプリケーションメニューのアイコン"
+
+msgid "Applications menu with drawers or classic view; custom menu with drawers, list or grid and direct editing."
+msgstr "ドロワーまたはクラシック表示のアプリケーションメニューと、ドロワー・リスト・グリッド表示で直接編集できるカスタムメニュー。"
+
+msgid "Apply"
+msgstr "適用"
+
+msgid "Back up content"
+msgstr "内容をバックアップ"
+
+msgid "Back up custom menu content"
+msgstr "カスタムメニューの内容をバックアップ"
+
+msgid "Backup"
+msgstr "バックアップ"
+
+msgid "Backup Tool"
+msgstr "バックアップツール"
+
+msgid "Based on the bundled, adapted Cinnamon menu"
+msgstr "付属の調整済み Cinnamon メニューを基にしています"
+
+msgid "Behavior"
+msgstr "動作"
+
+msgid "Blink three times at the start"
+msgstr "開始時に3回点滅"
+
+msgid "Both sides"
+msgstr "両側"
+
+msgid "By category"
+msgstr "カテゴリー別"
+
+msgid "Calculator"
+msgstr "電卓"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "Category name"
+msgstr "カテゴリー名"
+
+#, python-format
+msgid "Category: %s"
+msgstr "カテゴリー：%s"
+
+msgid "Celluloid"
+msgstr "Celluloid"
+
+msgid "Change icon…"
+msgstr "アイコンを変更…"
+
+msgid "Change launch command"
+msgstr "起動コマンドを変更"
+
+msgid "Change launch command…"
+msgstr "起動コマンドを変更…"
+
+msgid "Choose a custom icon or image"
+msgstr "カスタムアイコンまたは画像を選択"
+
+msgid "Choose an icon – SuperMenu"
+msgstr "アイコンを選択 – SuperMenu"
+
+msgid "Classic"
+msgstr "クラシック"
+
+msgid "Content"
+msgstr "内容"
+
+#, python-format
+msgid "Content replaced — entries: %d; categories: %d."
+msgstr "内容を置換しました — 項目数：%d、カテゴリー数：%d。"
+
+#, python-format
+msgid "Copied to: %s"
+msgstr "コピー先：%s"
+
+msgid "Copy from applications menu"
+msgstr "アプリケーションメニューからコピー"
+
+msgid "Copy to"
+msgstr "コピー先"
+
+msgid "Could not add the category to the custom menu."
+msgstr "カテゴリーをカスタムメニューに追加できませんでした。"
+
+msgid "Could not copy the entry."
+msgstr "項目をコピーできませんでした。"
+
+msgid "Could not create a unique category ID."
+msgstr "一意のカテゴリー ID を作成できませんでした。"
+
+msgid "Could not create the storage directory"
+msgstr "保存ディレクトリを作成できませんでした"
+
+#, python-format
+msgid "Could not launch the entry: %s"
+msgstr "項目を起動できませんでした：%s"
+
+#, python-format
+msgid "Could not load content: %s"
+msgstr "内容を読み込めませんでした：%s"
+
+#, python-format
+msgid "Could not open the file: %s"
+msgstr "ファイルを開けませんでした：%s"
+
+#, python-format
+msgid "Could not open the icon chooser: %s"
+msgstr "アイコン選択画面を開けませんでした：%s"
+
+#, python-format
+msgid "Could not open the place: %s"
+msgstr "場所を開けませんでした：%s"
+
+msgid "Could not read the custom menu"
+msgstr "カスタムメニューを読み取れませんでした"
+
+msgid "Could not read the file."
+msgstr "ファイルを読み取れませんでした。"
+
+msgid "Could not remove the separator."
+msgstr "区切り線を削除できませんでした。"
+
+msgid "Could not save the change."
+msgstr "変更を保存できませんでした。"
+
+msgid "Could not save the custom menu."
+msgstr "カスタムメニューを保存できませんでした。"
+
+msgid "Could not save the icon."
+msgstr "アイコンを保存できませんでした。"
+
+msgid "Could not save the order."
+msgstr "順序を保存できませんでした。"
+
+msgid "Could not save the separator."
+msgstr "区切り線を保存できませんでした。"
+
+msgid "Could not uniquely adapt the menu entry point."
+msgstr "メニューのエントリーポイントを一意に特定して調整できませんでした。"
+
+msgid "Could not uniquely adapt the native keyboard shortcut."
+msgstr "標準のキーボードショートカットを一意に特定して調整できませんでした。"
+
+msgid "Could not uniquely identify the applications menu editing action."
+msgstr "アプリケーションメニューの編集操作を一意に特定できませんでした。"
+
+msgid "Could not uniquely identify the three session actions."
+msgstr "3つのセッション操作を一意に特定できませんでした。"
+
+msgid "Create"
+msgstr "作成"
+
+msgid "Create category…"
+msgstr "カテゴリーを作成…"
+
+msgid "Create entry…"
+msgstr "項目を作成…"
+
+msgid "Custom entries"
+msgstr "カスタム項目"
+
+msgid "Custom icon or image"
+msgstr "カスタムアイコンまたは画像"
+
+msgid "Custom menu"
+msgstr "カスタムメニュー"
+
+msgid "Custom menu icon"
+msgstr "カスタムメニューのアイコン"
+
+msgid "Desktop"
+msgstr "デスクトップ"
+
+msgid "Document Scanner"
+msgstr "ドキュメントスキャナー"
+
+msgid "Documents"
+msgstr "ドキュメント"
+
+msgid "Downloads"
+msgstr "ダウンロード"
+
+msgid "Drawers"
+msgstr "ドロワー"
+
+msgid "Drawing"
+msgstr "描画"
+
+msgid "Duplicate custom menu category ID"
+msgstr "カスタムメニューのカテゴリー ID が重複しています"
+
+msgid "Edit applications menu"
+msgstr "アプリケーションメニューを編集"
+
+msgid "Edit custom menu"
+msgstr "カスタムメニューを編集"
+
+msgid "Editing mode"
+msgstr "編集モード"
+
+msgid "End editing mode"
+msgstr "編集モードを終了"
+
+#, python-format
+msgid "Entries: %d"
+msgstr "項目数：%d"
+
+msgid "Entry name"
+msgstr "項目名"
+
+msgid "Expand in the menu"
+msgstr "メニュー内で展開"
+
+msgid "Expansion arrow"
+msgstr "展開矢印"
+
+#, python-format
+msgid "Export failed: %s"
+msgstr "エクスポートに失敗しました：%s"
+
+#, python-format
+msgid "Exported — entries: %d; categories: %d."
+msgstr "エクスポートしました — 項目数：%d、カテゴリー数：%d。"
+
+msgid "Export…"
+msgstr "エクスポート…"
+
+msgid "Extended context menu"
+msgstr "拡張コンテキストメニュー"
+
+msgid "File Renamer"
+msgstr "ファイル名の変更"
+
+msgid "File history is disabled"
+msgstr "ファイルの履歴が無効です"
+
+msgid "Files"
+msgstr "ファイル"
+
+msgid "Five-pointed star with Super-S in text color"
+msgstr "Super-S が文字色の五芒星"
+
+msgid "Five-pointed star with transparent Super-S"
+msgstr "Super-S が透明な五芒星"
+
+msgid "Four-pointed star with Super-S in text color"
+msgstr "Super-S が文字色の四芒星"
+
+msgid "Four-pointed star with transparent Super-S"
+msgstr "Super-S が透明な四芒星"
+
+msgid "Fully expand the drawer"
+msgstr "ドロワーを完全に展開"
+
+msgid "General"
+msgstr "全般"
+
+msgid "Graphics"
+msgstr "グラフィックス"
+
+msgid "Grid"
+msgstr "グリッド"
+
+msgid "Group system buttons"
+msgstr "システムボタンをまとめる"
+
+msgid "Hide when an action list opens"
+msgstr "操作リストを開いたときに隠す"
+
+msgid "Home folder"
+msgstr "ホームフォルダー"
+
+msgid "Hover delay"
+msgstr "ホバー時の待ち時間"
+
+msgid "Hypnotix"
+msgstr "Hypnotix"
+
+msgid "Icon size for categories and applications (px)"
+msgstr "カテゴリーとアプリケーションのアイコンサイズ（px）"
+
+msgid "Icons per row"
+msgstr "1行あたりのアイコン数"
+
+msgid "Import"
+msgstr "インポート"
+
+#, python-format
+msgid "Import failed: %s"
+msgstr "インポートに失敗しました：%s"
+
+#, python-format
+msgid "Imported — entries: %d; new categories: %d."
+msgstr "インポートしました — 項目数：%d、新規カテゴリー数：%d。"
+
+msgid "Import…"
+msgstr "インポート…"
+
+#, python-format
+msgid "Inactive entries or separators skipped: %d."
+msgstr "スキップした無効な項目または区切り線：%d。"
+
+msgid "Install SuperMenu from the bundled menu template."
+msgstr "付属のメニューテンプレートから SuperMenu をインストールします。"
+
+#, python-format
+msgid "Installation stopped: %s"
+msgstr "インストールを中止しました：%s"
+
+#, python-format
+msgid "Installed: %s"
+msgstr "インストール先：%s"
+
+msgid "Internet"
+msgstr "インターネット"
+
+msgid "Invalid application entry"
+msgstr "無効なアプリケーション項目"
+
+msgid "Invalid custom application entry"
+msgstr "無効なカスタムアプリケーション項目"
+
+msgid "Invalid custom menu category"
+msgstr "無効なカスタムメニューのカテゴリー"
+
+msgid "Invalid enabled value."
+msgstr "有効・無効の値が不正です。"
+
+msgid "Invalid entry ID"
+msgstr "無効な項目 ID"
+
+msgid "Invalid file selection."
+msgstr "無効なファイル選択です。"
+
+msgid "Invalid icon assignment"
+msgstr "無効なアイコンの割り当て"
+
+msgid "Invalid icon selection."
+msgstr "無効なアイコン選択です。"
+
+msgid "Invalid import assignment"
+msgstr "無効なインポートの割り当て"
+
+msgid "Invalid menu entry."
+msgstr "無効なメニュー項目です。"
+
+#, python-format
+msgid "Invalid override for %s in settings-override.json."
+msgstr "settings-override.json の %s の上書き値が無効です。"
+
+#, python-format
+msgid "Invalid text field: %s"
+msgstr "無効なテキストフィールド：%s"
+
+msgid "Keyboard shortcuts"
+msgstr "キーボードショートカット"
+
+msgid "Launch command"
+msgstr "起動コマンド"
+
+msgid "Left only"
+msgstr "左側のみ"
+
+msgid "LibreOffice"
+msgstr "LibreOffice"
+
+msgid "LibreOffice Calc"
+msgstr "LibreOffice Calc"
+
+msgid "LibreOffice Draw"
+msgstr "LibreOffice Draw"
+
+msgid "LibreOffice Impress"
+msgstr "LibreOffice Impress"
+
+msgid "LibreOffice Writer"
+msgstr "LibreOffice Writer"
+
+msgid "Limit the number of recent files to"
+msgstr "最近使ったファイルの表示件数の上限"
+
+msgid "List"
+msgstr "リスト"
+
+msgid "Load"
+msgstr "読み込む"
+
+msgid "Load content"
+msgstr "内容を読み込む"
+
+msgid "Load content into the custom menu"
+msgstr "カスタムメニューに内容を読み込む"
+
+msgid "Load template…"
+msgstr "テンプレートを読み込む…"
+
+msgid "Minimum grid entry width"
+msgstr "グリッド項目の最小幅"
+
+msgid "Miscellaneous"
+msgstr "その他"
+
+msgid "Move down"
+msgstr "下へ移動"
+
+msgid "Move up"
+msgstr "上へ移動"
+
+msgid "Music"
+msgstr "ミュージック"
+
+msgid "My menu"
+msgstr "マイメニュー"
+
+msgid "Name in the applet manager: SuperMenu"
+msgstr "アプレット管理での名前：SuperMenu"
+
+msgid "New category"
+msgstr "新しいカテゴリー"
+
+msgid "New entry"
+msgstr "新しい項目"
+
+msgid "No applications available"
+msgstr "利用可能なアプリケーションがありません"
+
+msgid "No applications found"
+msgstr "アプリケーションが見つかりません"
+
+msgid "No available entries"
+msgstr "利用可能な項目がありません"
+
+msgid "No entries yet"
+msgstr "まだ項目がありません"
+
+msgid "No icon selected."
+msgstr "アイコンが選択されていません。"
+
+msgid "No places selected or available"
+msgstr "選択された場所または利用可能な場所がありません"
+
+msgid "No recent files"
+msgstr "最近使ったファイルがありません"
+
+msgid "No valid import file selected."
+msgstr "有効なインポートファイルが選択されていません。"
+
+msgid "None"
+msgstr "なし"
+
+msgid "Office"
+msgstr "オフィス"
+
+msgid "On first installation, add SuperMenu to the panel using the applet manager."
+msgstr "初回インストール時は、アプレット管理から SuperMenu をパネルに追加してください。"
+
+msgid "Onboard"
+msgstr "Onboard"
+
+msgid "Open all drawers"
+msgstr "すべてのドロワーを開く"
+
+msgid "Open and close the applications menu"
+msgstr "アプリケーションメニューを開閉"
+
+msgid "Open and close the custom menu"
+msgstr "カスタムメニューを開閉"
+
+msgid "Open categories"
+msgstr "カテゴリーを開く"
+
+msgid "Open centered over the panel icon (or at the screen edge)"
+msgstr "パネルアイコンの中央上方（または画面端）に開く"
+
+msgid "Open menus when hovering over their panel icons"
+msgstr "パネルアイコンにポインターを合わせてメニューを開く"
+
+msgid "Other"
+msgstr "その他"
+
+msgid "Other bookmarks"
+msgstr "その他のブックマーク"
+
+msgid "Padding size (100% equals panel height)"
+msgstr "余白の大きさ（100% はパネルの高さ）"
+
+msgid "Panel"
+msgstr "パネル"
+
+msgid "Panel icon padding"
+msgstr "パネルアイコンの余白"
+
+msgid "Pictures"
+msgstr "ピクチャー"
+
+msgid "Pix"
+msgstr "Pix"
+
+msgid "Places"
+msgstr "場所"
+
+msgid "Please choose a backup file."
+msgstr "バックアップファイルを選択してください。"
+
+msgid "Please choose a file other than the active menu data."
+msgstr "使用中のメニューデータとは別のファイルを選択してください。"
+
+msgid "Please choose a file to import."
+msgstr "インポートするファイルを選択してください。"
+
+msgid "Please install as a regular user without sudo."
+msgstr "sudo を使わず、通常ユーザーとしてインストールしてください。"
+
+msgid "Position of search bar and system buttons"
+msgstr "検索バーとシステムボタンの位置"
+
+msgid "Preselected category"
+msgstr "事前選択カテゴリー"
+
+msgid "Prevent launching in editing mode"
+msgstr "編集モードでの起動を防ぐ"
+
+msgid "Quit"
+msgstr "終了"
+
+msgid "Reading import…"
+msgstr "インポートを読み込み中…"
+
+msgid "Recently used"
+msgstr "最近使ったもの"
+
+msgid "Remove"
+msgstr "削除"
+
+msgid "Remove category?"
+msgstr "カテゴリーを削除しますか？"
+
+msgid "Remove entry?"
+msgstr "項目を削除しますか？"
+
+msgid "Remove…"
+msgstr "削除…"
+
+msgid "Rename"
+msgstr "名前を変更"
+
+msgid "Rename…"
+msgstr "名前を変更…"
+
+msgid "Replace"
+msgstr "置換"
+
+msgid "Replace existing content when importing"
+msgstr "インポート時に既存の内容を置換"
+
+msgid "Reset"
+msgstr "リセット"
+
+msgid "Restore default settings"
+msgstr "既定の設定に戻す"
+
+msgid "Right only"
+msgstr "右側のみ"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Save failed."
+msgstr "保存に失敗しました。"
+
+msgid "Saving backup…"
+msgstr "バックアップを保存中…"
+
+msgid "Screenshot"
+msgstr "スクリーンショット"
+
+msgid "Scroll the application list on hover"
+msgstr "ホバー時にアプリケーションリストをスクロール"
+
+#, python-format
+msgid "Separators included: %d."
+msgstr "含まれる区切り線の数：%d。"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Show a hint in editing mode"
+msgstr "編集モードでヒントを表示"
+
+msgid "Show application descriptions"
+msgstr "アプリケーションの説明を表示"
+
+msgid "Show custom menu"
+msgstr "カスタムメニューを表示"
+
+msgid "Show flat system buttons"
+msgstr "フラットなシステムボタンを表示"
+
+msgid "Show icons only"
+msgstr "アイコンのみ表示"
+
+msgid "Show lock button"
+msgstr "ロックボタンを表示"
+
+msgid "Show logout button"
+msgstr "ログアウトボタンを表示"
+
+msgid "Show only the selected category"
+msgstr "選択したカテゴリーのみ表示"
+
+msgid "Show places"
+msgstr "場所を表示"
+
+msgid "Show recent files"
+msgstr "最近使ったファイルを表示"
+
+msgid "Show shutdown button"
+msgstr "シャットダウンボタンを表示"
+
+msgid "Show shutdown in red"
+msgstr "シャットダウンを赤で表示"
+
+msgid "Software Manager"
+msgstr "ソフトウェアマネージャー"
+
+msgid "Sorting"
+msgstr "並べ替え"
+
+msgid "Sound & Video"
+msgstr "サウンドとビデオ"
+
+msgid "Start and end editing mode"
+msgstr "編集モードを開始・終了"
+
+msgid "Submenu"
+msgstr "サブメニュー"
+
+msgid "Supported files (*.json)"
+msgstr "対応ファイル (*.json)"
+
+msgid "Switch categories on hover in classic view"
+msgstr "クラシック表示でホバー時にカテゴリーを切り替える"
+
+msgid "Symbolic five-pointed star"
+msgstr "シンボリックな五芒星"
+
+msgid "Symbolic four-pointed star"
+msgstr "シンボリックな四芒星"
+
+msgid "System Monitor"
+msgstr "システムモニター"
+
+msgid "System menu icon"
+msgstr "システムのメニューアイコン"
+
+msgid "Terminal"
+msgstr "端末"
+
+msgid "The CustomApplicationsMenu file exceeds 2 MB."
+msgstr "CustomApplicationsMenu ファイルが 2 MB を超えています。"
+
+msgid "The arrow opens all programs; the second button opens the custom menu."
+msgstr "矢印はすべてのプログラムを開き、2つ目のボタンはカスタムメニューを開きます。"
+
+msgid "The backup exceeds 32 MB."
+msgstr "バックアップが 32 MB を超えています。"
+
+msgid "The custom menu changed. Open the template chooser again."
+msgstr "カスタムメニューが変更されました。テンプレート選択を開き直してください。"
+
+msgid "The disabled lock action is not supported."
+msgstr "無効にされたロック操作には対応していません。"
+
+msgid "The file chooser closed unexpectedly."
+msgstr "ファイル選択画面が予期せず終了しました。"
+
+msgid "The file does not contain a supported menu format."
+msgstr "ファイルに対応するメニュー形式が含まれていません。"
+
+msgid "The file must contain a list of menu entries."
+msgstr "ファイルにはメニュー項目のリストが必要です。"
+
+msgid "The icon chooser closed unexpectedly."
+msgstr "アイコン選択画面が予期せず終了しました。"
+
+msgid "The import file contains too many entries."
+msgstr "インポートファイルの項目が多すぎます。"
+
+msgid "The import file exceeds 32 MB."
+msgstr "インポートファイルが 32 MB を超えています。"
+
+msgid "The import file is too large."
+msgstr "インポートファイルが大きすぎます。"
+
+#, python-format
+msgid "The menu layout requires the native function %s."
+msgstr "メニューの配置には標準の関数 %s が必要です。"
+
+msgid "The menu nesting is too deep."
+msgstr "メニューの入れ子が深すぎます。"
+
+#, python-format
+msgid "The override %s is not part of the settings schema."
+msgstr "上書き値 %s は設定スキーマに含まれていません。"
+
+msgid "The session buttons in this Cinnamon menu version are not supported."
+msgstr "この Cinnamon メニューバージョンのセッションボタンには対応していません。"
+
+msgid "The target directory does not belong to SuperMenu; no files were changed."
+msgstr "対象ディレクトリは SuperMenu のものではありません。ファイルは変更されていません。"
+
+msgid "The target is a symbolic link; use --target-dir to specify the actual directory."
+msgstr "対象はシンボリックリンクです。--target-dir で実際のディレクトリを指定してください。"
+
+msgid "Then restart Cinnamon or log out and back in."
+msgstr "その後、Cinnamon を再起動するか、ログアウトして再度ログインしてください。"
+
+msgid "This Cinnamon menu arrangement is not supported."
+msgstr "この Cinnamon メニューの配置には対応していません。"
+
+msgid "This Cinnamon menu entry point is not supported; nothing was installed."
+msgstr "この Cinnamon メニューのエントリーポイントには対応していません。何もインストールされていません。"
+
+msgid "This Cinnamon menu version has no supported settings layout."
+msgstr "この Cinnamon メニューバージョンには対応する設定レイアウトがありません。"
+
+#, python-format
+msgid "This Cinnamon menu version lacks the required function %s."
+msgstr "この Cinnamon メニューバージョンに必要な関数 %s がありません。"
+
+msgid "This category…"
+msgstr "このカテゴリー…"
+
+msgid "Too many custom entries"
+msgstr "カスタム項目が多すぎます"
+
+msgid "Transmission"
+msgstr "Transmission"
+
+msgid "USB Image Writer"
+msgstr "USB イメージライター"
+
+msgid "USB Stick Formatter"
+msgstr "USB メモリーのフォーマット"
+
+#, python-format
+msgid "Unavailable applications: %d. Their entries remain saved."
+msgstr "利用できないアプリケーション数：%d。項目は保存されたままになります。"
+
+msgid "Unknown custom menu format"
+msgstr "不明なカスタムメニュー形式"
+
+msgid "Unknown error"
+msgstr "不明なエラー"
+
+msgid "Use the panel icon size"
+msgstr "パネルのアイコンサイズを使用"
+
+msgid "Videos"
+msgstr "ビデオ"
+
+msgid "View"
+msgstr "表示"
+
+msgid "Virtual keyboard"
+msgstr "スクリーンキーボード"
+
+msgid "Web Apps"
+msgstr "ウェブアプリ"
+
+msgid "not detected"
+msgstr "未検出"

@@ -1,0 +1,839 @@
+# SuperMenu translations. Copyright (C) 2026 rasmarc.
+# This file is distributed under the GPL-2.0-or-later license.
+# Generated translation draft; no native-speaker approval claimed.
+msgid ""
+msgstr "Project-Id-Version: SuperMenu 1.0.8\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-11-04 12:00+0100\nPO-Revision-Date: 2026-11-06 04:56+0100\nLast-Translator: SuperMenu translation draft\nLanguage-Team: Translation draft; native review pending\nLanguage: ru\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+msgid "A command is empty."
+msgstr "Пустая команда."
+
+msgid "A submenu does not contain a valid list."
+msgstr "Подменю не содержит допустимого списка."
+
+msgid "Accessories"
+msgstr "Стандартные"
+
+msgid "Actions: right-click"
+msgstr "Действия: правая кнопка мыши"
+
+msgid "Add separator"
+msgstr "Добавить разделитель"
+
+msgid "Add to custom menu"
+msgstr "Добавить в собственное меню"
+
+msgid "Add to custom menu…"
+msgstr "Добавить в собственное меню…"
+
+#, python-format
+msgid "Added to: %s"
+msgstr "Добавлено в: %s"
+
+msgid "Administration"
+msgstr "Администрирование"
+
+msgid "All applications"
+msgstr "Все приложения"
+
+msgid "All files (*)"
+msgstr "Все файлы (*)"
+
+msgid "All programs"
+msgstr "Все программы"
+
+msgid "Alphabetically"
+msgstr "По алфавиту"
+
+msgid "Alternative source for development tests; the bundled template is the default."
+msgstr "Другой источник для тестирования при разработке; по умолчанию используется встроенный шаблон."
+
+msgid "An entry has neither an application ID nor a command."
+msgstr "В записи нет ни идентификатора приложения, ни команды."
+
+msgid "Animate menus when opening and closing"
+msgstr "Анимировать открытие и закрытие меню"
+
+msgid "Appearance"
+msgstr "Внешний вид"
+
+msgid "Applications menu"
+msgstr "Меню приложений"
+
+msgid "Applications menu icon"
+msgstr "Значок меню приложений"
+
+msgid "Applications menu with drawers or classic view; custom menu with drawers, list or grid and direct editing."
+msgstr "Меню приложений с выдвижными разделами или классическим видом; собственное меню с разделами, списком или сеткой и прямым редактированием."
+
+msgid "Apply"
+msgstr "Применить"
+
+msgid "Back up content"
+msgstr "Сохранить резервную копию содержимого"
+
+msgid "Back up custom menu content"
+msgstr "Сохранить резервную копию содержимого собственного меню"
+
+msgid "Backup"
+msgstr "Резервная копия"
+
+msgid "Backup Tool"
+msgstr "Резервное копирование"
+
+msgid "Based on the bundled, adapted Cinnamon menu"
+msgstr "На основе встроенного, адаптированного меню Cinnamon"
+
+msgid "Behavior"
+msgstr "Поведение"
+
+msgid "Blink three times at the start"
+msgstr "Мигнуть три раза в начале"
+
+msgid "Both sides"
+msgstr "С обеих сторон"
+
+msgid "By category"
+msgstr "По категориям"
+
+msgid "Calculator"
+msgstr "Калькулятор"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Category name"
+msgstr "Название категории"
+
+#, python-format
+msgid "Category: %s"
+msgstr "Категория: %s"
+
+msgid "Celluloid"
+msgstr "Celluloid"
+
+msgid "Change icon…"
+msgstr "Изменить значок…"
+
+msgid "Change launch command"
+msgstr "Изменить команду запуска"
+
+msgid "Change launch command…"
+msgstr "Изменить команду запуска…"
+
+msgid "Choose a custom icon or image"
+msgstr "Выбрать собственный значок или изображение"
+
+msgid "Choose an icon – SuperMenu"
+msgstr "Выбрать значок – SuperMenu"
+
+msgid "Classic"
+msgstr "Классический"
+
+msgid "Content"
+msgstr "Содержимое"
+
+#, python-format
+msgid "Content replaced — entries: %d; categories: %d."
+msgstr "Содержимое заменено — записи: %d; категории: %d."
+
+#, python-format
+msgid "Copied to: %s"
+msgstr "Скопировано в: %s"
+
+msgid "Copy from applications menu"
+msgstr "Копировать из меню приложений"
+
+msgid "Copy to"
+msgstr "Копировать в"
+
+msgid "Could not add the category to the custom menu."
+msgstr "Не удалось добавить категорию в собственное меню."
+
+msgid "Could not copy the entry."
+msgstr "Не удалось скопировать запись."
+
+msgid "Could not create a unique category ID."
+msgstr "Не удалось создать уникальный идентификатор категории."
+
+msgid "Could not create the storage directory"
+msgstr "Не удалось создать каталог хранения"
+
+#, python-format
+msgid "Could not launch the entry: %s"
+msgstr "Не удалось запустить запись: %s"
+
+#, python-format
+msgid "Could not load content: %s"
+msgstr "Не удалось загрузить содержимое: %s"
+
+#, python-format
+msgid "Could not open the file: %s"
+msgstr "Не удалось открыть файл: %s"
+
+#, python-format
+msgid "Could not open the icon chooser: %s"
+msgstr "Не удалось открыть окно выбора значка: %s"
+
+#, python-format
+msgid "Could not open the place: %s"
+msgstr "Не удалось открыть место: %s"
+
+msgid "Could not read the custom menu"
+msgstr "Не удалось прочитать собственное меню"
+
+msgid "Could not read the file."
+msgstr "Не удалось прочитать файл."
+
+msgid "Could not remove the separator."
+msgstr "Не удалось удалить разделитель."
+
+msgid "Could not save the change."
+msgstr "Не удалось сохранить изменение."
+
+msgid "Could not save the custom menu."
+msgstr "Не удалось сохранить собственное меню."
+
+msgid "Could not save the icon."
+msgstr "Не удалось сохранить значок."
+
+msgid "Could not save the order."
+msgstr "Не удалось сохранить порядок."
+
+msgid "Could not save the separator."
+msgstr "Не удалось сохранить разделитель."
+
+msgid "Could not uniquely adapt the menu entry point."
+msgstr "Не удалось однозначно адаптировать точку входа меню."
+
+msgid "Could not uniquely adapt the native keyboard shortcut."
+msgstr "Не удалось однозначно адаптировать встроенное сочетание клавиш."
+
+msgid "Could not uniquely identify the applications menu editing action."
+msgstr "Не удалось однозначно определить действие редактирования меню приложений."
+
+msgid "Could not uniquely identify the three session actions."
+msgstr "Не удалось однозначно определить три действия сеанса."
+
+msgid "Create"
+msgstr "Создать"
+
+msgid "Create category…"
+msgstr "Создать категорию…"
+
+msgid "Create entry…"
+msgstr "Создать запись…"
+
+msgid "Custom entries"
+msgstr "Собственные записи"
+
+msgid "Custom icon or image"
+msgstr "Собственный значок или изображение"
+
+msgid "Custom menu"
+msgstr "Собственное меню"
+
+msgid "Custom menu icon"
+msgstr "Значок собственного меню"
+
+msgid "Desktop"
+msgstr "Рабочий стол"
+
+msgid "Document Scanner"
+msgstr "Сканер документов"
+
+msgid "Documents"
+msgstr "Документы"
+
+msgid "Downloads"
+msgstr "Загрузки"
+
+msgid "Drawers"
+msgstr "Выдвижные разделы"
+
+msgid "Drawing"
+msgstr "Рисование"
+
+msgid "Duplicate custom menu category ID"
+msgstr "Повторяющийся идентификатор категории собственного меню"
+
+msgid "Edit applications menu"
+msgstr "Редактировать меню приложений"
+
+msgid "Edit custom menu"
+msgstr "Редактировать собственное меню"
+
+msgid "Editing mode"
+msgstr "Режим редактирования"
+
+msgid "End editing mode"
+msgstr "Завершить режим редактирования"
+
+#, python-format
+msgid "Entries: %d"
+msgstr "Записи: %d"
+
+msgid "Entry name"
+msgstr "Название записи"
+
+msgid "Expand in the menu"
+msgstr "Разворачивать в меню"
+
+msgid "Expansion arrow"
+msgstr "Стрелка разворачивания"
+
+#, python-format
+msgid "Export failed: %s"
+msgstr "Ошибка экспорта: %s"
+
+#, python-format
+msgid "Exported — entries: %d; categories: %d."
+msgstr "Экспортировано — записи: %d; категории: %d."
+
+msgid "Export…"
+msgstr "Экспортировать…"
+
+msgid "Extended context menu"
+msgstr "Расширенное контекстное меню"
+
+msgid "File Renamer"
+msgstr "Переименование файлов"
+
+msgid "File history is disabled"
+msgstr "История файлов отключена"
+
+msgid "Files"
+msgstr "Файлы"
+
+msgid "Five-pointed star with Super-S in text color"
+msgstr "Пятиконечная звезда с Super-S в цвете текста"
+
+msgid "Five-pointed star with transparent Super-S"
+msgstr "Пятиконечная звезда с прозрачной Super-S"
+
+msgid "Four-pointed star with Super-S in text color"
+msgstr "Четырёхконечная звезда с Super-S в цвете текста"
+
+msgid "Four-pointed star with transparent Super-S"
+msgstr "Четырёхконечная звезда с прозрачной Super-S"
+
+msgid "Fully expand the drawer"
+msgstr "Полностью разворачивать раздел"
+
+msgid "General"
+msgstr "Общие"
+
+msgid "Graphics"
+msgstr "Графика"
+
+msgid "Grid"
+msgstr "Сетка"
+
+msgid "Group system buttons"
+msgstr "Группировать системные кнопки"
+
+msgid "Hide when an action list opens"
+msgstr "Скрывать при открытии списка действий"
+
+msgid "Home folder"
+msgstr "Домашняя папка"
+
+msgid "Hover delay"
+msgstr "Задержка при наведении"
+
+msgid "Hypnotix"
+msgstr "Hypnotix"
+
+msgid "Icon size for categories and applications (px)"
+msgstr "Размер значков категорий и приложений (пикс.)"
+
+msgid "Icons per row"
+msgstr "Значков в строке"
+
+msgid "Import"
+msgstr "Импортировать"
+
+#, python-format
+msgid "Import failed: %s"
+msgstr "Ошибка импорта: %s"
+
+#, python-format
+msgid "Imported — entries: %d; new categories: %d."
+msgstr "Импортировано — записи: %d; новые категории: %d."
+
+msgid "Import…"
+msgstr "Импортировать…"
+
+#, python-format
+msgid "Inactive entries or separators skipped: %d."
+msgstr "Пропущенные неактивные записи или разделители: %d."
+
+msgid "Install SuperMenu from the bundled menu template."
+msgstr "Установить SuperMenu из встроенного шаблона меню."
+
+#, python-format
+msgid "Installation stopped: %s"
+msgstr "Установка остановлена: %s"
+
+#, python-format
+msgid "Installed: %s"
+msgstr "Установлено: %s"
+
+msgid "Internet"
+msgstr "Интернет"
+
+msgid "Invalid application entry"
+msgstr "Недопустимая запись приложения"
+
+msgid "Invalid custom application entry"
+msgstr "Недопустимая собственная запись приложения"
+
+msgid "Invalid custom menu category"
+msgstr "Недопустимая категория собственного меню"
+
+msgid "Invalid enabled value."
+msgstr "Недопустимое значение включения."
+
+msgid "Invalid entry ID"
+msgstr "Недопустимый идентификатор записи"
+
+msgid "Invalid file selection."
+msgstr "Недопустимый выбор файла."
+
+msgid "Invalid icon assignment"
+msgstr "Недопустимое назначение значка"
+
+msgid "Invalid icon selection."
+msgstr "Недопустимый выбор значка."
+
+msgid "Invalid import assignment"
+msgstr "Недопустимое сопоставление импорта"
+
+msgid "Invalid menu entry."
+msgstr "Недопустимая запись меню."
+
+#, python-format
+msgid "Invalid override for %s in settings-override.json."
+msgstr "Недопустимое переопределение для %s в settings-override.json."
+
+#, python-format
+msgid "Invalid text field: %s"
+msgstr "Недопустимое текстовое поле: %s"
+
+msgid "Keyboard shortcuts"
+msgstr "Сочетания клавиш"
+
+msgid "Launch command"
+msgstr "Команда запуска"
+
+msgid "Left only"
+msgstr "Только слева"
+
+msgid "LibreOffice"
+msgstr "LibreOffice"
+
+msgid "LibreOffice Calc"
+msgstr "LibreOffice Calc"
+
+msgid "LibreOffice Draw"
+msgstr "LibreOffice Draw"
+
+msgid "LibreOffice Impress"
+msgstr "LibreOffice Impress"
+
+msgid "LibreOffice Writer"
+msgstr "LibreOffice Writer"
+
+msgid "Limit the number of recent files to"
+msgstr "Ограничить количество недавних файлов до"
+
+msgid "List"
+msgstr "Список"
+
+msgid "Load"
+msgstr "Загрузить"
+
+msgid "Load content"
+msgstr "Загрузить содержимое"
+
+msgid "Load content into the custom menu"
+msgstr "Загрузить содержимое в собственное меню"
+
+msgid "Load template…"
+msgstr "Загрузить шаблон…"
+
+msgid "Minimum grid entry width"
+msgstr "Минимальная ширина записей сетки"
+
+msgid "Miscellaneous"
+msgstr "Разное"
+
+msgid "Move down"
+msgstr "Переместить вниз"
+
+msgid "Move up"
+msgstr "Переместить вверх"
+
+msgid "Music"
+msgstr "Музыка"
+
+msgid "My menu"
+msgstr "Моё меню"
+
+msgid "Name in the applet manager: SuperMenu"
+msgstr "Название в диспетчере апплетов: SuperMenu"
+
+msgid "New category"
+msgstr "Новая категория"
+
+msgid "New entry"
+msgstr "Новая запись"
+
+msgid "No applications available"
+msgstr "Нет доступных приложений"
+
+msgid "No applications found"
+msgstr "Приложения не найдены"
+
+msgid "No available entries"
+msgstr "Нет доступных записей"
+
+msgid "No entries yet"
+msgstr "Записей пока нет"
+
+msgid "No icon selected."
+msgstr "Значок не выбран."
+
+msgid "No places selected or available"
+msgstr "Нет выбранных или доступных мест"
+
+msgid "No recent files"
+msgstr "Нет недавних файлов"
+
+msgid "No valid import file selected."
+msgstr "Допустимый файл импорта не выбран."
+
+msgid "None"
+msgstr "Нет"
+
+msgid "Office"
+msgstr "Офис"
+
+msgid "On first installation, add SuperMenu to the panel using the applet manager."
+msgstr "При первой установке добавьте SuperMenu на панель через диспетчер апплетов."
+
+msgid "Onboard"
+msgstr "Onboard"
+
+msgid "Open all drawers"
+msgstr "Открыть все разделы"
+
+msgid "Open and close the applications menu"
+msgstr "Открыть и закрыть меню приложений"
+
+msgid "Open and close the custom menu"
+msgstr "Открыть и закрыть собственное меню"
+
+msgid "Open categories"
+msgstr "Открытие категорий"
+
+msgid "Open centered over the panel icon (or at the screen edge)"
+msgstr "Открывать по центру над значком панели (или у края экрана)"
+
+msgid "Open menus when hovering over their panel icons"
+msgstr "Открывать меню при наведении на их значки на панели"
+
+msgid "Other"
+msgstr "Другие"
+
+msgid "Other bookmarks"
+msgstr "Другие закладки"
+
+msgid "Padding size (100% equals panel height)"
+msgstr "Размер отступа (100% соответствует высоте панели)"
+
+msgid "Panel"
+msgstr "Панель"
+
+msgid "Panel icon padding"
+msgstr "Отступы значка панели"
+
+msgid "Pictures"
+msgstr "Изображения"
+
+msgid "Pix"
+msgstr "Pix"
+
+msgid "Places"
+msgstr "Места"
+
+msgid "Please choose a backup file."
+msgstr "Выберите файл резервной копии."
+
+msgid "Please choose a file other than the active menu data."
+msgstr "Выберите файл, отличный от используемых данных меню."
+
+msgid "Please choose a file to import."
+msgstr "Выберите файл для импорта."
+
+msgid "Please install as a regular user without sudo."
+msgstr "Устанавливайте от имени обычного пользователя без sudo."
+
+msgid "Position of search bar and system buttons"
+msgstr "Расположение строки поиска и системных кнопок"
+
+msgid "Preselected category"
+msgstr "Предварительно выбранная категория"
+
+msgid "Prevent launching in editing mode"
+msgstr "Запретить запуск в режиме редактирования"
+
+msgid "Quit"
+msgstr "Завершение"
+
+msgid "Reading import…"
+msgstr "Чтение импорта…"
+
+msgid "Recently used"
+msgstr "Недавно использованные"
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "Remove category?"
+msgstr "Удалить категорию?"
+
+msgid "Remove entry?"
+msgstr "Удалить запись?"
+
+msgid "Remove…"
+msgstr "Удалить…"
+
+msgid "Rename"
+msgstr "Переименовать"
+
+msgid "Rename…"
+msgstr "Переименовать…"
+
+msgid "Replace"
+msgstr "Заменить"
+
+msgid "Replace existing content when importing"
+msgstr "Заменять существующее содержимое при импорте"
+
+msgid "Reset"
+msgstr "Сбросить"
+
+msgid "Restore default settings"
+msgstr "Восстановить настройки по умолчанию"
+
+msgid "Right only"
+msgstr "Только справа"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Save failed."
+msgstr "Ошибка сохранения."
+
+msgid "Saving backup…"
+msgstr "Сохранение резервной копии…"
+
+msgid "Screenshot"
+msgstr "Снимок экрана"
+
+msgid "Scroll the application list on hover"
+msgstr "Прокручивать список приложений при наведении"
+
+#, python-format
+msgid "Separators included: %d."
+msgstr "Включённые разделители: %d."
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Show a hint in editing mode"
+msgstr "Показывать подсказку в режиме редактирования"
+
+msgid "Show application descriptions"
+msgstr "Показывать описания приложений"
+
+msgid "Show custom menu"
+msgstr "Показывать собственное меню"
+
+msgid "Show flat system buttons"
+msgstr "Показывать плоские системные кнопки"
+
+msgid "Show icons only"
+msgstr "Показывать только значки"
+
+msgid "Show lock button"
+msgstr "Показывать кнопку блокировки"
+
+msgid "Show logout button"
+msgstr "Показывать кнопку выхода из сеанса"
+
+msgid "Show only the selected category"
+msgstr "Показывать только выбранную категорию"
+
+msgid "Show places"
+msgstr "Показывать места"
+
+msgid "Show recent files"
+msgstr "Показывать недавние файлы"
+
+msgid "Show shutdown button"
+msgstr "Показывать кнопку выключения"
+
+msgid "Show shutdown in red"
+msgstr "Показывать выключение красным"
+
+msgid "Software Manager"
+msgstr "Менеджер программ"
+
+msgid "Sorting"
+msgstr "Сортировка"
+
+msgid "Sound & Video"
+msgstr "Звук и видео"
+
+msgid "Start and end editing mode"
+msgstr "Начать и завершить режим редактирования"
+
+msgid "Submenu"
+msgstr "Подменю"
+
+msgid "Supported files (*.json)"
+msgstr "Поддерживаемые файлы (*.json)"
+
+msgid "Switch categories on hover in classic view"
+msgstr "Переключать категории при наведении в классическом виде"
+
+msgid "Symbolic five-pointed star"
+msgstr "Символическая пятиконечная звезда"
+
+msgid "Symbolic four-pointed star"
+msgstr "Символическая четырёхконечная звезда"
+
+msgid "System Monitor"
+msgstr "Системный монитор"
+
+msgid "System menu icon"
+msgstr "Системный значок меню"
+
+msgid "Terminal"
+msgstr "Терминал"
+
+msgid "The CustomApplicationsMenu file exceeds 2 MB."
+msgstr "Файл CustomApplicationsMenu превышает 2 МБ."
+
+msgid "The arrow opens all programs; the second button opens the custom menu."
+msgstr "Стрелка открывает все программы, вторая кнопка — собственное меню."
+
+msgid "The backup exceeds 32 MB."
+msgstr "Резервная копия превышает 32 МБ."
+
+msgid "The custom menu changed. Open the template chooser again."
+msgstr "Пользовательское меню изменилось. Откройте окно выбора шаблона заново."
+
+msgid "The disabled lock action is not supported."
+msgstr "Отключённое действие блокировки не поддерживается."
+
+msgid "The file chooser closed unexpectedly."
+msgstr "Окно выбора файла неожиданно закрылось."
+
+msgid "The file does not contain a supported menu format."
+msgstr "Файл не содержит поддерживаемого формата меню."
+
+msgid "The file must contain a list of menu entries."
+msgstr "Файл должен содержать список записей меню."
+
+msgid "The icon chooser closed unexpectedly."
+msgstr "Окно выбора значка неожиданно закрылось."
+
+msgid "The import file contains too many entries."
+msgstr "Файл импорта содержит слишком много записей."
+
+msgid "The import file exceeds 32 MB."
+msgstr "Файл импорта превышает 32 МБ."
+
+msgid "The import file is too large."
+msgstr "Файл импорта слишком велик."
+
+#, python-format
+msgid "The menu layout requires the native function %s."
+msgstr "Для компоновки меню требуется встроенная функция %s."
+
+msgid "The menu nesting is too deep."
+msgstr "Слишком глубокая вложенность меню."
+
+#, python-format
+msgid "The override %s is not part of the settings schema."
+msgstr "Переопределение %s не относится к схеме настроек."
+
+msgid "The session buttons in this Cinnamon menu version are not supported."
+msgstr "Кнопки сеанса в этой версии меню Cinnamon не поддерживаются."
+
+msgid "The target directory does not belong to SuperMenu; no files were changed."
+msgstr "Целевой каталог не принадлежит SuperMenu; файлы не изменены."
+
+msgid "The target is a symbolic link; use --target-dir to specify the actual directory."
+msgstr "Цель является символической ссылкой; укажите настоящий каталог через --target-dir."
+
+msgid "Then restart Cinnamon or log out and back in."
+msgstr "Затем перезапустите Cinnamon либо выйдите из сеанса и войдите снова."
+
+msgid "This Cinnamon menu arrangement is not supported."
+msgstr "Эта компоновка меню Cinnamon не поддерживается."
+
+msgid "This Cinnamon menu entry point is not supported; nothing was installed."
+msgstr "Эта точка входа меню Cinnamon не поддерживается; ничего не установлено."
+
+msgid "This Cinnamon menu version has no supported settings layout."
+msgstr "В этой версии меню Cinnamon нет поддерживаемой компоновки настроек."
+
+#, python-format
+msgid "This Cinnamon menu version lacks the required function %s."
+msgstr "В этой версии меню Cinnamon отсутствует необходимая функция %s."
+
+msgid "This category…"
+msgstr "Эта категория…"
+
+msgid "Too many custom entries"
+msgstr "Слишком много собственных записей"
+
+msgid "Transmission"
+msgstr "Transmission"
+
+msgid "USB Image Writer"
+msgstr "Запись образов на USB"
+
+msgid "USB Stick Formatter"
+msgstr "Форматирование USB-накопителей"
+
+#, python-format
+msgid "Unavailable applications: %d. Their entries remain saved."
+msgstr "Недоступные приложения: %d. Их записи остаются сохранёнными."
+
+msgid "Unknown custom menu format"
+msgstr "Неизвестный формат собственного меню"
+
+msgid "Unknown error"
+msgstr "Неизвестная ошибка"
+
+msgid "Use the panel icon size"
+msgstr "Использовать размер значков панели"
+
+msgid "Videos"
+msgstr "Видео"
+
+msgid "View"
+msgstr "Вид"
+
+msgid "Virtual keyboard"
+msgstr "Экранная клавиатура"
+
+msgid "Web Apps"
+msgstr "Веб-приложения"
+
+msgid "not detected"
+msgstr "не определено"
