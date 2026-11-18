@@ -1,0 +1,149 @@
+.ci-menu {
+    min-width: 360px;
+}
+
+.ci-search-item {
+    padding-top: 4px;
+    padding-bottom: 6px;
+}
+
+.ci-search-entry {
+    min-width: 300px;
+}
+
+.ci-search-icon {
+    icon-size: 1em;
+    padding: 0 4px;
+}
+
+.ci-pinned-scroll {
+    max-height: 260px;
+}
+
+.ci-history-scroll {
+    max-height: 440px;
+}
+
+.ci-item {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.ci-item-box {
+    spacing: 6px;
+}
+
+.ci-check {
+    icon-size: 14px;
+}
+
+.ci-label {
+    max-width: 480px;
+}
+
+.ci-image-label {
+    font-style: italic;
+}
+
+.ci-thumb {
+    border-radius: 3px;
+}
+
+.ci-tag {
+    font-size: 0.85em;
+    padding: 1px 6px;
+    border-radius: 8px;
+    background-color: rgba(128, 128, 128, 0.25);
+}
+
+.ci-buttons {
+    spacing: 0;
+}
+
+.ci-action-btn {
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+.ci-action-btn:hover,
+.ci-action-btn:focus {
+    background-color: rgba(128, 128, 128, 0.3);
+}
+
+.ci-action-btn StIcon {
+    icon-size: 16px;
+}
+
+.ci-unpinned StIcon {
+    color: rgba(128, 128, 128, 0.9);
+}
+
+.ci-clear-box {
+    spacing: 6px;
+}
+
+.ci-timer {
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.ci-empty-box {
+    spacing: 10px;
+    padding: 24px 0;
+}
+
+.ci-empty-icon {
+    icon-size: 48px;
+}
+
+.ci-panel-image {
+    padding-left: 2px;
+}
+
+.ci-panel-thumb {
+    border-radius: 2px;
+}
+
+.ci-blink {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.ci-dialog-entry {
+    min-width: 360px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(128, 128, 128, 0.45);
+    background-color: rgba(128, 128, 128, 0.12);
+}
+
+.ci-dialog-entry:focus {
+    border: 1px solid rgba(128, 128, 128, 0.8);
+}
+
+.ci-edit-scroll {
+    min-width: 520px;
+    max-height: 420px;
+}
+
+.ci-preview-overlay {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.ci-preview-box {
+    spacing: 12px;
+}
+
+.ci-preview-caption {
+    color: #eeeeee;
+}
+
+/* Dialog text on Cinnamon < 6.4 (no MessageDialogContent) */
+.ci-dialog-title {
+    font-weight: bold;
+    font-size: 1.2em;
+    padding-bottom: 6px;
+}
+
+.ci-dialog-description {
+    padding-bottom: 12px;
+}
