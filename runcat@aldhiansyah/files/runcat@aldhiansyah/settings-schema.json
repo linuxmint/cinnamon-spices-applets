@@ -1,0 +1,52 @@
+{
+    "layout": {
+        "type": "header",
+        "description": "Appearance"
+    },
+    "show-percentage": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Show CPU percentage next to the cat"
+    },
+    "icon-size": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 12,
+        "max": 64,
+        "step": 1,
+        "units": "px",
+        "description": "Cat icon size"
+    },
+    "behavior": {
+        "type": "header",
+        "description": "Behaviour"
+    },
+    "refresh-interval": {
+        "type": "spinbutton",
+        "default": 2000,
+        "min": 500,
+        "max": 10000,
+        "step": 250,
+        "units": "ms",
+        "description": "CPU sampling interval"
+    },
+    "animation-speed": {
+        "type": "combobox",
+        "default": "normal",
+        "description": "Animation speed",
+        "options": {
+            "Slow": "slow",
+            "Normal": "normal",
+            "Fast": "fast"
+        }
+    },
+    "idle-threshold": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "units": "%",
+        "description": "Below this CPU load the cat idles"
+    }
+}
