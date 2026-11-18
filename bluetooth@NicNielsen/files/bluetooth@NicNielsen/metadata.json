@@ -1,0 +1,9 @@
+{
+    "uuid": "bluetooth@NicNielsen",
+    "name": "Harald Bluetooth",
+    "description": "Custom Bluetooth Manager Applet",
+    "icon": "icon-symbolic",
+    "website": "https://xlets.ca",
+    "author": "Nic Nielsen",
+    "version": "2026.1"
+}
