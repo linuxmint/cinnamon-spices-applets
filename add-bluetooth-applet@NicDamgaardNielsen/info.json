@@ -1,5 +1,5 @@
 {
-  "uuid": "add-bluetooth-applet@NicDamgaardNielsen",
+  "uuid": "bluetooth-applet@NicDamaardNielsen",
   "name": "blueToothManager",
   "description": "A minimal blue tooth manager.",
   "score": 0,
