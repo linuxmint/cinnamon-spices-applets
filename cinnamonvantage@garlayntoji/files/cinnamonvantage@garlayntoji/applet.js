@@ -96,6 +96,10 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
     this._chargeLimitPermissionNoticeShown = false;
     this._chargeLimitEnabled = false;
     this._chargeLimit = 80;
+    this._sleepSignal = 0;
+    this._shutdownSignal = 0;
+    this._resumeTimeout = 0;
+    this._suspending = false;
     this._init(metadata, orientation, panelHeight, instanceId);
 }
 
@@ -183,6 +187,42 @@ MyApplet.prototype = {
                 this._applyChargeLimit();
                 return true;
             }));
+
+            // Force Long Life before suspend/shutdown so the battery cannot
+            // charge past the custom limit while the applet's timer is frozen.
+            this._sleepSignal = this._subscribeLogindSignal(
+                "PrepareForSleep",
+                Lang.bind(this, function(parameters) {
+                    let aboutToSleep = false;
+                    try {
+                        aboutToSleep = parameters.deepUnpack()[0];
+                    } catch (e) {
+                        return;
+                    }
+                    if (aboutToSleep) {
+                        this._forceLongLife();
+                    } else {
+                        this._onResume();
+                    }
+                })
+            );
+
+            this._shutdownSignal = this._subscribeLogindSignal(
+                "PrepareForShutdown",
+                Lang.bind(this, function(parameters) {
+                    let aboutToShutdown = false;
+                    try {
+                        aboutToShutdown = parameters.deepUnpack()[0];
+                    } catch (e) {
+                        return;
+                    }
+                    if (aboutToShutdown) {
+                        this._forceLongLife();
+                    } else {
+                        this._onResume();
+                    }
+                })
+            );
 
             //Add listeners for settings changes
             this.settings.connect(`changed::${FN_LOCK}`, Lang.bind(this, this._onSettingsChanged, FN_LOCK));
@@ -383,6 +423,75 @@ MyApplet.prototype = {
         });
     },
 
+    _subscribeLogindSignal: function(signalName, callback) {
+        try {
+            return Gio.DBus.system.signal_subscribe(
+                "org.freedesktop.login1",
+                "org.freedesktop.login1.Manager",
+                signalName,
+                "/org/freedesktop/login1",
+                null,
+                Gio.DBusSignalFlags.NONE,
+                Lang.bind(this, function(connection, sender, objectPath, interfaceName, receivedSignal, parameters) {
+                    callback(parameters);
+                })
+            );
+        } catch (e) {
+            globalThis.logError(e, "Failed to subscribe to " + signalName);
+            return 0;
+        }
+    },
+
+    _forceLongLife: function() {
+        if (!this._chargeLimitEnabled) return;
+
+        this._suspending = true;
+        if (this._writeChargeModeSync(true)) {
+            this._updateSwitchState(CONSERVATION_MODE, true);
+        }
+    },
+
+    _onResume: function() {
+        this._suspending = false;
+        this._chargeLimitWriting = false;
+        this._chargeLimitForce = true;
+
+        if (this._resumeTimeout) {
+            GLib.source_remove(this._resumeTimeout);
+            this._resumeTimeout = 0;
+        }
+        this._resumeTimeout = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 2, Lang.bind(this, function() {
+            this._resumeTimeout = 0;
+            this._updateChargeLimitStatus();
+            this._applyChargeLimit();
+            return false;
+        }));
+    },
+
+    _writeChargeModeSync: function(enable) {
+        let useChargeTypes = GLib.file_test(CHARGE_TYPES, GLib.FileTest.EXISTS);
+        if (useChargeTypes && this._writeValueSync(CHARGE_TYPES, enable ? "Long_Life" : "Standard")) {
+            return true;
+        }
+        if (this._writeValueSync(FILE_PATHS[CONSERVATION_MODE], enable ? "1" : "0")) {
+            return true;
+        }
+        globalThis.logError(new Error("write failed"), "Failed to set the battery charge mode before suspend/shutdown");
+        return false;
+    },
+
+    _writeValueSync: function(path, value) {
+        let command = `/bin/sh -c "printf '%s\\n' '${value}' > '${path}'"`;
+        try {
+            let [ok, stdout, stderr, waitStatus] = GLib.spawn_command_line_sync(command);
+            if (!ok) return false;
+            GLib.spawn_check_wait_status(waitStatus);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    },
+
     _readChargeLimitSettings: function() {
         this._chargeLimitEnabled = !!this.settings.getValue(CHARGE_LIMIT_ENABLED);
 
@@ -509,6 +618,7 @@ MyApplet.prototype = {
     },
 
     _applyChargeLimit: function() {
+        if (this._suspending) return;
         if (this._chargeLimitWriting) return;
         if (!this._chargeLimitEnabled) return;
 
@@ -537,6 +647,7 @@ MyApplet.prototype = {
         this._chargeLimitWriting = true;
         this._writeChargeMode(desired === "Long_Life", Lang.bind(this, function(ok, stderr) {
             this._chargeLimitWriting = false;
+            if (this._suspending) return;
             if (!ok) {
                 this._showChargeLimitError(stderr);
                 return;
@@ -609,6 +720,27 @@ MyApplet.prototype = {
             GLib.source_remove(this._chargeLimitCommitTimeout);
             this._chargeLimitCommitTimeout = 0;
         }
+        if (this._sleepSignal) {
+            try {
+                Gio.DBus.system.signal_unsubscribe(this._sleepSignal);
+            } catch (e) {
+                // The bus may already be gone during logout.
+            }
+            this._sleepSignal = 0;
+        }
+        if (this._shutdownSignal) {
+            try {
+                Gio.DBus.system.signal_unsubscribe(this._shutdownSignal);
+            } catch (e) {
+                // The bus may already be gone during logout.
+            }
+            this._shutdownSignal = 0;
+        }
+        if (this._resumeTimeout) {
+            GLib.source_remove(this._resumeTimeout);
+            this._resumeTimeout = 0;
+        }
+        this._suspending = false;
     }
 };
 
