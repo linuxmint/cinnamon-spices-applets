@@ -1,0 +1,8 @@
+{
+  "uuid": "bluetooth@NicNielsen",
+  "name": "bluetooth",
+  "description": "A minimal blue tooth manager",
+  "score": 0,
+  "spices-idx": 0,
+  "icon": "icon.png"
+}
