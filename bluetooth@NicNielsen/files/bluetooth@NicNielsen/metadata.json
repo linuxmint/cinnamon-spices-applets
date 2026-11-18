@@ -1,5 +1,5 @@
 {
-    "uuid": "bluetooth@NicNielsen",
+    "uuid": "blueTooth@NicNielsen",
     "name": "Harald Bluetooth",
     "description": "Custom Bluetooth Manager Applet",
     "icon": "icon-symbolic",
