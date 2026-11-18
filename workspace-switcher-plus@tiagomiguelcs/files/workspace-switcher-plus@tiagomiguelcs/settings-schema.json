@@ -1,0 +1,78 @@
+{
+    "display-type": {
+        "type": "combobox",
+        "default": "buttons",
+        "description": "Type of display",
+        "tooltip": "Note that the visual representation will only work if your panel is large enough to display it properly, otherwise the simple style will be used.",
+        "options": {
+            "Simple buttons": "buttons",
+            "A visual representation of the workspaces": "visual"
+        }
+    },
+    "scroll-behavior": {
+        "type": "combobox",
+        "default": "normal",
+        "description": "Scroll wheel behavior",
+        "tooltip": "Reverse or disable the direction of the scroll in the workspace list.",
+        "options": {
+            "Normal": "normal",
+            "Reversed": "reversed",
+            "Disabled": "disabled"
+        }
+    },
+    "background-active": {
+        "key": "background-active",
+        "type": "colorchooser",
+        "default": "#303036",
+        "description": "Active Workspace Button Color"
+    },
+    "background-inactive": {
+        "key": "background-inactive",
+        "type": "colorchooser",
+        "default": "rgb(255, 255, 255)",
+        "description": "Inactive Workspace Button Color"
+    },
+    "inactive-opacity": {
+        "key": "inactive-opacity",
+        "type": "scale",
+        "default": 0.0,
+        "min": 0.0,
+        "max": 1.0,
+        "step": 0.1,
+        "description": "Inactive Workspace Button Color Opacity"
+    },
+    "text-color-active": {
+        "key": "text-color-active",
+        "type": "colorchooser",
+        "default": "rgb(255, 255, 255)",
+        "description": "Active Workspace Button Text Color"
+    },
+    "text-color-inactive": {
+        "key": "text-color-inactive",
+        "type": "colorchooser",
+        "default": "rgb(119, 118, 123)",
+        "description": "Inactive Workspace Button Text Color"
+    },
+    "border-size":{
+        "key": "border-size",
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "units": "px",
+        "description": "Workspace Button Border Radius"
+    },
+    "border-color": {
+        "key": "border-color",
+        "type": "colorchooser",
+        "default": "#444444",
+        "description": "Workspace Button Border Color"
+    },
+    "reset-button": {
+        "type": "button",
+        "description": "Reset to Default Style",
+        "callback": "onResetAppearance"
+    }
+ 
+}
