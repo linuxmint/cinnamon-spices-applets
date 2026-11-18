@@ -1,0 +1,8 @@
+{
+    "uuid": "traydeck@gianfj",
+    "name": "Traydeck",
+    "description": "A clean, customizable home for your tray icons: resize, reorder, tuck into an overflow popup, or hide. Replaces the stock System Tray and XApp Status applets.",
+    "max-instances": 1,
+    "version": "0.1.0",
+    "author": "gianfj"
+}
