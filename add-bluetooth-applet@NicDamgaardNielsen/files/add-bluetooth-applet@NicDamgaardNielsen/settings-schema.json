@@ -1,0 +1,31 @@
+{
+    "bg-color": {
+        "type": "colorchooser",
+        "default": "rgb(0,0,0)",
+        "description": "Popup background color"
+    },
+    "bg-opacity": {
+        "type": "scale",
+        "default": 100,
+        "min": 10,
+        "max": 100,
+        "step": 5,
+        "description": "Background opacity (%)"
+    },
+    "btn-bg-color": {
+        "type": "colorchooser",
+        "default": "rgb(51,51,51)",
+        "description": "Button color"
+    },
+    "btn-text-color": {
+        "type": "colorchooser",
+        "default": "rgb(255,255,255)",
+        "description": "Button text color"
+    },
+    "device-text-color": {
+        "type": "colorchooser",
+        "default": "rgb(255,255,255)",
+        "description": "Bluetooth device text color"
+    }
+}
+
