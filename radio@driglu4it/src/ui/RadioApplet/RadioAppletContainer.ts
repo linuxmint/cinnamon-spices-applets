@@ -1,15 +1,15 @@
 import { createAppletContainer, CreateAppletContainerProps } from "../../lib/AppletContainer";
-import { mpvHandler } from "../../services/mpv/MpvHandler";
+import { destroyMpvHandler, mpvHandler } from "../../services/mpv/MpvHandler";
 import { createRadioAppletLabel } from "./RadioAppletLabel";
 import { createRadioAppletTooltip } from "./RadioAppletTooltip";
 import { createRadioAppletIcon } from "./RadioAppletIcon";
 import { APPLET_SITE, MPRIS_PLUGIN_PATH, VOLUME_DELTA } from "../../consts";
-import { radioPopupMenu, initRadioPopupMenu } from "../RadioPopupMenu/RadioPopupMenu";
+import { radioPopupMenu, initRadioPopupMenu, destroyRadioPopupMenu } from "../RadioPopupMenu/RadioPopupMenu";
 import { installMpvWithMpris } from "../../services/mpv/CheckInstallation";
 import { createYouTubeDownloadIcon } from "./YoutubeDownloadIcon";
 import { notify } from "../../lib/notify";
 import { createRadioContextMenu } from "../RadioContextMenu";
-import { configs } from "../../services/Config";
+import { configs, destroyConfig } from "../../services/Config";
 
 const { ScrollDirection } = imports.gi.Clutter;
 
@@ -26,6 +26,10 @@ export const getRadioAppletContainer = (props: CreateRadioAppletContainerProps) 
   appletContainer = createRadioAppletContainer(props)
   return appletContainer
 } 
+
+const resetRadioAppletContainer = () => {
+  appletContainer = undefined
+}
 
 
 const createRadioAppletContainer = (props: CreateRadioAppletContainerProps) => {
@@ -65,9 +69,14 @@ const createRadioAppletContainer = (props: CreateRadioAppletContainerProps) => {
     radioPopupMenu.visible && tooltip.hide();
   });
 
+  // also runs when a panel is destroyed (e.g. monitor gone during suspend); main() is called again afterwards
   function handleAppletRemoved() {
-    mpvHandler?.deactivateAllListener();
-    mpvHandler?.stop();
+    contextMenu.destroyMenu();
+    destroyRadioPopupMenu();
+    destroyMpvHandler();
+    destroyConfig();
+    props.onAppletMovedCallbacks.splice(0);
+    resetRadioAppletContainer();
   }
 
   function handleMiddleClick(){

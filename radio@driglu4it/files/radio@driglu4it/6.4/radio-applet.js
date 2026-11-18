@@ -2528,6 +2528,9 @@ let configs;
 const initConfig = () => {
     configs = createConfig();
 };
+const destroyConfig = () => {
+    configs === null || configs === void 0 ? void 0 : configs.finalize();
+};
 const createConfig = () => {
     // all settings are saved to this object
     const settingsObject = {};
@@ -2595,6 +2598,7 @@ const createConfig = () => {
     }
     return {
         settingsObject,
+        finalize: () => appletSettings.finalize(),
         getInitialVolume,
         setUserStations,
         addIconTypeChangeHandler: (newIconTypeChangeHandler) => {
@@ -2705,6 +2709,11 @@ const initMpvHandler = () => {
     }
     mpvHandler = createMpvHandler();
 };
+const destroyMpvHandler = () => {
+    mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener();
+    mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.stop();
+    mpvHandler = undefined;
+};
 function createMpvHandler() {
     const { settingsObject, getInitialVolume, addStationsListChangeHandler } = configs;
     /** the lastUrl is used to determine if mpv is initially (i.e. on cinnamon restart) running for radio purposes and not for something else. It is not sufficient to get the url from a dbus interface and check if the url is valid because some streams (such as .pls streams) change their url dynamically. This approach in not 100% foolproof but probably the best possible approach */
@@ -2780,6 +2789,7 @@ function createMpvHandler() {
             mediaProps === null || mediaProps === void 0 ? void 0 : mediaProps.disconnectSignal(mediaPropsListenerId);
         if (seekListenerId)
             mediaServerPlayer === null || mediaServerPlayer === void 0 ? void 0 : mediaServerPlayer.disconnectSignal(seekListenerId);
+        control.close();
     }
     function activateMprisPropsListener() {
         mediaPropsListenerId = mediaProps.connectSignal('PropertiesChanged', (proxy, nameOwner, [interfaceName, props]) => {
@@ -4623,9 +4633,9 @@ const { uiGroup, layoutManager, panelManager, pushModal, popModal } = imports.ui
 const { KEY_Escape } = imports.gi.Clutter;
 const { util_get_transformed_allocation } = imports.gi.Cinnamon;
 const { PanelLoc } = imports.ui.popupMenu;
-const onPopupMenuClosedHandlers = [];
 function createPopupMenu(props) {
     const { launcher } = props;
+    const onPopupMenuClosedHandlers = [];
     const box = new BoxLayout({
         style_class: 'popup-menu-content',
         vertical: true,
@@ -4753,6 +4763,10 @@ function createPopupMenu(props) {
     };
     box.addPopupMenuCloseHandler = addPopupMenuCloseHandler;
     box.toggle = toggle;
+    box.destroyMenu = () => {
+        close();
+        bin.destroy();
+    };
     // TODO: remove close
     box.close = close;
     return box;
@@ -5540,6 +5554,10 @@ const createMediaControlToolbar = () => {
 
 const { BoxLayout: RadioPopupMenu_BoxLayout } = imports.gi.St;
 let radioPopupMenu;
+const destroyRadioPopupMenu = () => {
+    radioPopupMenu === null || radioPopupMenu === void 0 ? void 0 : radioPopupMenu.destroyMenu();
+    radioPopupMenu = undefined;
+};
 const initRadioPopupMenu = (props) => {
     if (radioPopupMenu) {
         global.logWarning('radioPopupMenu already initiallized');
@@ -5865,6 +5883,9 @@ const getRadioAppletContainer = (props) => {
     appletContainer = createRadioAppletContainer(props);
     return appletContainer;
 };
+const resetRadioAppletContainer = () => {
+    appletContainer = undefined;
+};
 const createRadioAppletContainer = (props) => {
     let installationInProgress = false;
     const appletContainer = createAppletContainer(Object.assign({ onMiddleClick: handleMiddleClick, onRemoved: handleAppletRemoved, onClick: handleClick, onRightClick: () => {
@@ -5886,9 +5907,14 @@ const createRadioAppletContainer = (props) => {
     radioPopupMenu.connect("notify::visible", () => {
         radioPopupMenu.visible && tooltip.hide();
     });
+    // also runs when a panel is destroyed (e.g. monitor gone during suspend); main() is called again afterwards
     function handleAppletRemoved() {
-        mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener();
-        mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.stop();
+        contextMenu.destroyMenu();
+        destroyRadioPopupMenu();
+        destroyMpvHandler();
+        destroyConfig();
+        props.onAppletMovedCallbacks.splice(0);
+        resetRadioAppletContainer();
     }
     function handleMiddleClick() {
         const lastUrl = configs.settingsObject.lastUrl;
