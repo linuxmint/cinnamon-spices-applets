@@ -1,0 +1,501 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR rasmarc
+# This file is distributed under the same license as the Display Scale package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Display Scale 1.0.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-11-01 19:18+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "10 percentage points"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "25 percentage points"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "5 percentage points"
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:329
+msgid "A previous change is incomplete. Run native-scale.py restore first."
+msgstr ""
+
+#: display-scale@rasmarc/scale-slider.js:283
+msgid "A quarter step earlier"
+msgstr ""
+
+#: display-scale@rasmarc/scale-slider.js:284
+msgid "A quarter step later"
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:399
+msgid "A scaling change is already in progress."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adapt scaling to keyboard size"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adapt the OSD150 offset to the available space between its default position and the screen edge. This preserves the chosen placement as the OSD grows. Saved OSD150 offsets are unchanged. Requires both OSD150 and Display Scale - Additional Features to be enabled."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Additional Features"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjust a running, freely positioned Onboard keyboard to screen scaling. When disabled, the keyboard follows normal screen scaling. The selected adjustment method is retained."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjust desklet positions during screen scaling"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjust the OSD150 position during screen scaling"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjust the Onboard keyboard during screen scaling"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Adjustment method"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Also show scale marks to the left of the slider. Applies to both text scaling and screen scaling."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Background picture layout"
+msgstr ""
+
+#: install.py:103
+msgid "Backup of the previous program files:"
+msgstr ""
+
+#: display-scale@rasmarc/settings_widgets.py:420
+msgid "Centered"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Cinnamon"
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:137
+msgid "Cinnamon does not offer a suitable scale for this monitor mode."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:270
+msgid "Cinnamon reported an invalid UI scaling factor."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Custom"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Custom level 1 (%)"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Custom level 2 (%)"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Custom level 3 (%)"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Desklets grow with screen scaling while their geometric centers stay at the same screen positions. The adjustment is temporary and does not change saved desklet positions."
+msgstr ""
+
+#: display-scale@rasmarc/applet.js:707
+#: display-scale@rasmarc/applet.js:715
+msgid "Display Scale"
+msgstr ""
+
+#: install.py:101
+#, python-format
+msgid "Display Scale %s and its optional additional features are installed."
+msgstr ""
+
+#: display-scale@rasmarc/settings_widgets.py:340
+msgid "Display Scale - Additional Features"
+msgstr ""
+
+#: display-scale@rasmarc/onboard-position-compensation.js:143
+msgid "Display Scale: Onboard scaling"
+msgstr ""
+
+#: install.py:105
+msgid "Enable “Display Scale - Additional Features” in System Settings → Extensions."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Five positions: the middle uses the regular switch point at the next screen scaling level; the ends switch half a step earlier or later. The two intermediate marks halve these distances. Text compensation preserves the selected text size. With a later switch point, screen scaling can remain below 200% even at 200% text size."
+msgstr ""
+
+#: display-scale@rasmarc/scale-slider.js:283
+msgid "Half a step earlier"
+msgstr ""
+
+#: display-scale@rasmarc/scale-slider.js:284
+msgid "Half a step later"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Increment"
+msgstr ""
+
+#: display-scale@rasmarc/onboard-position-compensation.js:568
+msgid "Invalid Onboard geometry."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep all panels approximately unchanged in both modes. Screen scaling adjusts panel height (width for vertical panels), icons and text; text scaling adjusts text and font-dependent spacing."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep panel size when scaling"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep size and position"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid ""
+"Keep size and position: Compensate for screen scaling so the keyboard keeps its visible size and position.\n"
+"Adapt scaling to keyboard size: Small keyboards grow more; keyboards spanning the screen width or height keep their screen coverage. The larger width or height share determines the adjustment; the ratio of opposite edge distances is preserved.\n"
+"Manual size and position changes become the new reference. At 100%, the corresponding reference geometry is restored."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep the current mode"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep the menu open"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Keep the menu open after moving the switch point, including when the screen scaling level changes. When disabled, the menu closes after each successfully applied move."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Let panel text grow with the selected scaling mode. Text scaling does not reduce panel dimensions or pixel-based icons; spacing protection remains active during screen scaling."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Menu"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Move the switch point in the menu"
+msgstr ""
+
+#: display-scale@rasmarc/settings_widgets.py:419
+msgid "No picture"
+msgstr ""
+
+#: display-scale@rasmarc/onboard-position-compensation.js:411
+msgid "Onboard could not be restarted."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-process.py:117
+msgid "Onboard did not exit normally. The screen scaling change has been stopped."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-process.py:87
+msgid "Onboard does not belong to the current user session."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-process.py:174
+msgid "Onboard exited during restart (status {})."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-position-compensation.js:426
+msgid "Onboard is already being restarted."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-process.py:177
+msgid "Onboard started but has not yet registered with the session."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-position-compensation.js:463
+msgid "Onboard's final saved geometry could not be read."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-position-compensation.js:454
+msgid "Onboard's final saved geometry is invalid."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-position-compensation.js:558
+msgid "Onboard's geometry could not be applied."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-position-compensation.js:553
+msgid "Onboard's geometry settings are read-only."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-position-compensation.js:575
+msgid "Onboard's reference geometry could not be saved."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-process.py:102
+msgid "Onboard's relative executable path could not be resolved for restart."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-process.py:150
+msgid "Onboard's restart data is invalid."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-position-compensation.js:488
+msgid "Onboard's target geometry could not be calculated."
+msgstr ""
+
+#: display-scale@rasmarc/settings_widgets.py:332
+msgid "Open Extensions"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Press directly on the shaded band and drag it. Five positions range from half a step earlier to half a step later, with the regular switch point in the middle. The band moves one quarter of the pointer distance. Release to apply; Escape cancels. In text mode, the switch point is saved for the next use of screen scaling. The settings slider remains available."
+msgstr ""
+
+#: display-scale@rasmarc/scale-slider.js:66
+msgid "Press on the band and drag it. Five positions range from half a step earlier to half a step later, with the regular switch point in the middle. The band moves one quarter of the pointer distance. Release to apply; Escape cancels."
+msgstr ""
+
+#: display-scale@rasmarc/scale-slider.js:283
+msgid "Regular"
+msgstr ""
+
+#: install.py:104
+msgid "Reload the applet or restart Cinnamon."
+msgstr ""
+
+#: display-scale@rasmarc/settings_widgets.py:342
+#, python-format
+msgid "Requires the enabled extension “%s”. It is currently disabled."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Scale panel text"
+msgstr ""
+
+#: display-scale@rasmarc/settings_widgets.py:420
+msgid "Scaled"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Scaling"
+msgstr ""
+
+#: display-scale@rasmarc/scale-slider.js:59
+msgid "Scaling from 100 to 200 percent"
+msgstr ""
+
+#: display-scale@rasmarc/mode-selector.js:17
+msgid "Scaling method"
+msgstr ""
+
+#: display-scale@rasmarc/applet.js:228
+#: display-scale@rasmarc/scale-slider.js:228
+#, javascript-format
+msgid "Scaling: %s"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Screen scaling"
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:76
+msgid "Screen scaling currently requires exactly one active monitor."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:79
+msgid "Screen scaling requires an unrotated monitor at the desktop origin."
+msgstr ""
+
+#: display-scale@rasmarc/mode-selector.js:26
+msgid "Screen scaling with text compensation"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Select text scaling or screen scaling when the applet starts. “Keep the current mode” uses the mode already in effect. Starting the applet does not change the current scaling."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Shade screen scaling levels"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Show hints on the panel icon and the two mode buttons."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Show the ranges of the screen scaling levels behind the percentage labels on the right. The shading follows the switch point and remains visible in text mode."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Show the scale on both sides"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Show tooltips"
+msgstr ""
+
+#: display-scale@rasmarc/metadata.json
+msgid "Size slider for font and layout scaling, optionally combined with variable screen scaling"
+msgstr ""
+
+#: display-scale@rasmarc/settings_widgets.py:422
+msgid "Spanned across screens"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Startup mode"
+msgstr ""
+
+#: display-scale@rasmarc/settings_widgets.py:421
+msgid "Stretched"
+msgstr ""
+
+#: display-scale@rasmarc/scale-slider.js:285
+#, javascript-format
+msgid "Switch point: %s. Drag the band up or down. Space or Enter selects the next position."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Switch to the next screen scaling level"
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Text scaling"
+msgstr ""
+
+#: display-scale@rasmarc/mode-selector.js:25
+msgid "Text scaling: fonts and layout"
+msgstr ""
+
+#: display-scale@rasmarc/applet.js:226
+#, javascript-format
+msgid "Text: %s · Screen: %s"
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:58
+msgid "The current monitor mode is ambiguous."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:351
+msgid "The display configuration changed during the switch."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:188
+msgid "The display mode has changed in the meantime."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:320
+msgid "The display or font setting was changed outside the applet; it will not be overwritten automatically."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:381
+msgid "The display or font setting was changed outside the applet; it will not be overwritten."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:208
+#: display-scale@rasmarc/native-scale.py:336
+msgid "The font setting is not writable."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-process.py:100
+msgid "The identified process is not an Onboard keyboard."
+msgstr ""
+
+#: install.py:60 install.py:63
+msgid "The installation package is incomplete or contains mismatched components."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:314
+msgid "The requested Cinnamon scale was not applied, or the display configuration changed."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "The same setting as in System Settings → Backgrounds. Changes are synchronized in both directions."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:426
+msgid "The scaling value is missing."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:126
+msgid "The scaling value must be between 100 and 200 percent."
+msgstr ""
+
+#: display-scale@rasmarc/applet.js:483
+msgid "The screen scaling could not be changed."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:129
+msgid "The switch point must be 50, 75, 100, 125 or 150."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:211
+msgid "The text scaling factor was not applied."
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:416
+msgid "This applet requires an X11 session."
+msgstr ""
+
+#: display-scale@rasmarc/settings_widgets.py:419
+msgid "Tiled"
+msgstr ""
+
+#: display-scale@rasmarc/onboard-process.py:191
+msgid "Unknown Onboard action."
+msgstr ""
+
+#: display-scale@rasmarc/onboard-process.py:64
+msgid "Unknown Onboard geometry section."
+msgstr ""
+
+#: display-scale@rasmarc/settings-schema.json
+msgid "Whole numbers from 101 to 199 only. Leave the field empty to omit this level. Incomplete entries are not applied; invalid characters are rejected."
+msgstr ""
+
+#: install.py:106
+msgid "Without the extension enabled, scaling works with the adjustment options grayed out."
+msgstr ""
+
+#: display-scale@rasmarc/settings_widgets.py:421
+msgid "Zoom"
+msgstr ""
+
+#: display-scale@rasmarc/native-scale.py:367
+#, python-brace-format
+msgid ""
+"{error}\n"
+"Reset failed: {recovery_error}"
+msgstr ""
+
+#: display-scale@rasmarc/settings_widgets.py:341
+#, python-format
+msgid "“%s” is enabled."
+msgstr ""
