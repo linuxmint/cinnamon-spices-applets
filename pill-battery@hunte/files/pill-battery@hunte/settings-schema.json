@@ -1,0 +1,134 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["Settings", "Appearance"],
+        "Settings": {
+            "type": "page",
+            "title": "Settings",
+            "sections": ["main"]
+        },
+        "Appearance": {
+            "type": "page",
+            "title": "Appearance",
+            "sections": ["sizing", "colors"]
+        },
+        "main": {
+            "type": "section",
+            "title": "Battery Behavior",
+            "keys": [
+                "refreshInterval",
+                "alertPercentage",
+                "criticalPercentage"
+            ]
+        },
+        "sizing": {
+            "type": "section",
+            "title": "Font, Size & Spacing",
+            "keys": [
+                "font_name",
+                "font_size",
+                "pill_padding_x",
+                "pill_padding_y",
+                "min_width"
+            ]
+        },
+        "colors": {
+            "type": "section",
+            "title": "Colors",
+            "keys": [
+                "normal_background_color",
+                "alert_background_color",
+                "limit_exceeded_background_color",
+                "charging_border_color"
+            ]
+        }
+    },
+    "refreshInterval": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "units": "seconds",
+        "description": "Refresh Interval"
+    },
+    "alertPercentage": {
+        "type": "spinbutton",
+        "default": 25,
+        "min": 25,
+        "max": 75,
+        "step": 1,
+        "units": "%",
+        "description": "Low Alert Percentage"
+    },
+    "criticalPercentage": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "units": "%",
+        "description": "Critical Percentage"
+    },
+    "font_name": {
+        "type": "fontchooser",
+        "default": "",
+        "description": "System Font (Leave default for theme font)"
+    },
+    "font_size": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 50,
+        "max": 150,
+        "step": 5,
+        "units": "%",
+        "description": "Font Size"
+    },
+    "pill_padding_x": {
+        "type": "spinbutton",
+        "default": 6,
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "units": "px",
+        "description": "Horizontal Padding"
+    },
+    "pill_padding_y": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0,
+        "max": 15,
+        "step": 1,
+        "units": "px",
+        "description": "Vertical Padding"
+    },
+    "min_width": {
+        "type": "spinbutton",
+        "default": 2.5,
+        "min": 1.0,
+        "max": 5.0,
+        "step": 0.1,
+        "units": "em",
+        "description": "Minimum Width"
+    },
+    "normal_background_color": {
+        "type": "colorchooser",
+        "description": "Good Color",
+        "default": "rgba(30, 190, 80, 0.9)"
+    },
+    "alert_background_color": {
+        "type": "colorchooser",
+        "description": "Low Color",
+        "default": "rgba(255, 165, 0, 1)"
+    },
+    "limit_exceeded_background_color": {
+        "type": "colorchooser",
+        "description": "Critical Color",
+        "default": "rgba(255, 0, 0, 1)"
+    },
+    "charging_border_color": {
+        "type": "colorchooser",
+        "description": "Charging Border Color",
+        "default": "rgba(255, 255, 255, 0.5)"
+    }
+}
