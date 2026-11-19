@@ -24,19 +24,8 @@ MyApplet.prototype = {
     );
 
     this._metadata = metadata;
-    let symbolicSvgPath = metadata.path + "/icon-symbolic.svg";
-    let svgPath = metadata.path + "/icon.svg";
-    let pngPath = metadata.path + "/icon.png";
-
-    if (GLib.file_test(symbolicSvgPath, GLib.FileTest.EXISTS)) {
-      this.set_applet_icon_symbolic_path(symbolicSvgPath);
-    } else if (GLib.file_test(svgPath, GLib.FileTest.EXISTS)) {
-      this.set_applet_icon_path(svgPath);
-    } else if (GLib.file_test(pngPath, GLib.FileTest.EXISTS)) {
-      this.set_applet_icon_path(pngPath);
-    } else {
-      this.set_applet_icon_name("bluetooth-active");
-    }
+    this.set_applet_icon_name("bluetooth-active");
+    this._loadAppletIcon(metadata.path);
 
     this.set_applet_tooltip("Harald Bluetooth a.k.a. ᚼᛅᚱᛅᛚᛏᚱ");
 
@@ -75,6 +64,43 @@ MyApplet.prototype = {
 
     this._mode = "paired";
     this._buildContextMenu();
+  },
+
+  _fileExistsAsync: function (path) {
+    return new Promise((resolve) => {
+      let file = Gio.File.new_for_path(path);
+      file.query_info_async(
+        "standard::type",
+        Gio.FileQueryInfoFlags.NONE,
+        GLib.PRIORITY_DEFAULT,
+        null,
+        (source, res) => {
+          try {
+            source.query_info_finish(res);
+            resolve(true);
+          } catch (e) {
+            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+              global.logError("File check error for " + path + ": " + e);
+            }
+            resolve(false);
+          }
+        },
+      );
+    });
+  },
+
+  _loadAppletIcon: async function (basePath) {
+    let symbolicSvgPath = basePath + "/icon-symbolic.svg";
+    let svgPath = basePath + "/icon.svg";
+    let pngPath = basePath + "/icon.png";
+
+    if (await this._fileExistsAsync(symbolicSvgPath)) {
+      this.set_applet_icon_symbolic_path(symbolicSvgPath);
+    } else if (await this._fileExistsAsync(svgPath)) {
+      this.set_applet_icon_path(svgPath);
+    } else if (await this._fileExistsAsync(pngPath)) {
+      this.set_applet_icon_path(pngPath);
+    }
   },
 
   _onStyleChanged: function () {
@@ -193,7 +219,7 @@ MyApplet.prototype = {
     }
   },
 
-  _showAboutUsDialog: function () {
+  _showAboutUsDialog: async function () {
     let dialog = new ModalDialog.ModalDialog();
     let pngPath = this._metadata.path + "/icon.png";
 
@@ -208,7 +234,7 @@ MyApplet.prototype = {
     });
     contentBox.add_child(titleLabel);
 
-    if (GLib.file_test(pngPath, GLib.FileTest.EXISTS)) {
+    if (await this._fileExistsAsync(pngPath)) {
       let file = Gio.File.new_for_path(pngPath);
       let gicon = new Gio.FileIcon({ file: file });
       let icon = new St.Icon({
@@ -231,7 +257,7 @@ MyApplet.prototype = {
       style: "text-decoration: underline; color: #4da6ff; padding-top: 4px;",
     });
     websiteBtn.connect("clicked", () => {
-      Util.spawnCommandLine("xdg-open https://xlets.ca");
+      Util.spawn(["xdg-open", "https://xlets.ca"]);
     });
     contentBox.add_child(websiteBtn);
 
@@ -284,38 +310,31 @@ MyApplet.prototype = {
     this.menu.toggle();
   },
 
-  _bytesToString: function (bytes) {
-    if (!bytes) return "";
-    try {
-      return new TextDecoder("utf-8").decode(bytes);
-    } catch (e) {
-      let str = "";
-      for (let i = 0; i < bytes.length; i++) {
-        str += String.fromCharCode(bytes[i]);
-      }
-      return str;
-    }
-  },
-
   _runCommand: function (cmd) {
-    try {
-      let [res, out, err, status] = GLib.spawn_sync(
-        null,
-        ["bash", "-c", "TERM=dumb " + cmd],
-        null,
-        GLib.SpawnFlags.SEARCH_PATH,
-        null,
-      );
-      if (out) {
-        // Strip any ANSI escape sequences just in case
-        return this._bytesToString(out)
-          .replace(/\x1B\[[0-9;]*[a-zA-Z]/g, "")
-          .trim();
+    return new Promise((resolve) => {
+      try {
+        let proc = Gio.Subprocess.new(
+          ["bash", "-c", "TERM=dumb " + cmd],
+          Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
+        );
+        proc.communicate_utf8_async(null, null, (source, res) => {
+          try {
+            let [ok, stdout, stderr] = source.communicate_utf8_finish(res);
+            if (stdout) {
+              resolve(stdout.replace(/\x1B\[[0-9;]*[a-zA-Z]/g, "").trim());
+            } else {
+              resolve("");
+            }
+          } catch (e) {
+            global.logError("Bluetooth command finish error: " + e);
+            resolve("");
+          }
+        });
+      } catch (e) {
+        global.logError("Bluetooth command spawn error: " + e);
+        resolve("");
       }
-    } catch (e) {
-      global.logError("Bluetooth command error: " + e);
-    }
-    return "";
+    });
   },
 
   _parseDevices: function (output) {
@@ -336,23 +355,24 @@ MyApplet.prototype = {
     }
     return devices;
   },
-  _getPairedDevices: function () {
-    let output = this._runCommand("bluetoothctl devices Paired");
+  _getPairedDevices: async function () {
+    let output = await this._runCommand("bluetoothctl devices Paired");
     let parsed = this._parseDevices(output);
     if (parsed.length === 0) {
-      output = this._runCommand("bluetoothctl paired-devices");
+      output = await this._runCommand("bluetoothctl paired-devices");
       parsed = this._parseDevices(output);
     }
     return parsed;
   },
-  _getConnectedStatus: function (mac) {
-    let output = this._runCommand("bluetoothctl info " + mac);
+  _getConnectedStatus: async function (mac) {
+    let output = await this._runCommand("bluetoothctl info " + mac);
     return output.indexOf("Connected: yes") !== -1;
   },
-  _getScannedDevices: function () {
-    let output = this._runCommand("bluetoothctl devices");
+  _getScannedDevices: async function () {
+    let output = await this._runCommand("bluetoothctl devices");
     let allDevices = this._parseDevices(output);
-    let pairedMacs = this._getPairedDevices().map((d) => d.mac);
+    let pairedDevices = await this._getPairedDevices();
+    let pairedMacs = pairedDevices.map((d) => d.mac);
     return allDevices.filter((d) => {
       if (pairedMacs.indexOf(d.mac) !== -1) return false;
       let macDashes = d.mac.replace(/:/g, "-").toUpperCase();
@@ -441,22 +461,22 @@ MyApplet.prototype = {
     let clean = name
       // Strip standard UUIDs (with or without surrounding brackets/parentheses)
       .replace(
-        /[\[]?\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b[]]?/gi,
+        /[[]?\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b[]]?/gi,
         "",
       )
       // Strip MAC addresses (colon or hyphen separated, with or without brackets)
-      .replace(/[\[]?\b([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})\b[]]?/g, "")
+      .replace(/[[]?\b([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})\b[]]?/g, "")
       .replace(/\s+/g, " ")
       .trim();
     return clean.length > 0 ? clean : "Unknown Device";
   },
-  refreshMenu: function () {
+  refreshMenu: async function () {
     this.menu.removeAll();
     let btnStyle = this._getButtonStyle();
     let devTextStyle = this._getDeviceTextStyle();
     try {
       if (this._mode === "paired") {
-        let devices = this._getPairedDevices();
+        let devices = await this._getPairedDevices();
         if (devices.length === 0) {
           let item = new PopupMenu.PopupMenuItem(
             "No previously connected devices",
@@ -467,7 +487,7 @@ MyApplet.prototype = {
           return;
         }
         for (let dev of devices) {
-          let isConnected = this._getConnectedStatus(dev.mac);
+          let isConnected = await this._getConnectedStatus(dev.mac);
           let box = new St.BoxLayout({
             style: "background-color: transparent; padding: 4px;",
           });
@@ -481,11 +501,11 @@ MyApplet.prototype = {
             text: this._formatDeviceName(dev.name),
             style: devTextStyle,
           });
-          btn.connect("clicked", () => {
+          btn.connect("clicked", async () => {
             if (isConnected) {
-              this._runCommand("bluetoothctl disconnect " + dev.mac);
+              await this._runCommand("bluetoothctl disconnect " + dev.mac);
             } else {
-              this._runCommand("bluetoothctl connect " + dev.mac);
+              await this._runCommand("bluetoothctl connect " + dev.mac);
             }
             this.refreshMenu();
           });
@@ -497,7 +517,7 @@ MyApplet.prototype = {
           this.menu.addMenuItem(menuItem);
         }
       } else if (this._mode === "search") {
-        let devices = this._getScannedDevices();
+        let devices = await this._getScannedDevices();
         if (devices.length === 0) {
           let item = new PopupMenu.PopupMenuItem("No new devices found");
           this._setStyle(item);
@@ -561,14 +581,13 @@ MyApplet.prototype = {
         }
         this._addSearchButton();
       } else if (this._mode === "remove") {
-        let devices = this._getPairedDevices();
+        let devices = await this._getPairedDevices();
         if (devices.length === 0) {
           let item = new PopupMenu.PopupMenuItem("No devices to remove");
           this._setStyle(item);
           this.menu.addMenuItem(item);
           return;
         }
-
         for (let dev of devices) {
           let box = new St.BoxLayout({
             style: "background-color: transparent; padding: 4px;",
@@ -580,14 +599,13 @@ MyApplet.prototype = {
             style: btnStyle,
           });
           let label = new St.Label({
-           text: this._formatDeviceName(dev.name),
+            text: this._formatDeviceName(dev.name),
             style: devTextStyle,
           });
-          btn.connect("clicked", () => {
-            this._runCommand("bluetoothctl remove " + dev.mac);
+          btn.connect("clicked", async () => {
+            await this._runCommand("bluetoothctl remove " + dev.mac);
             this.refreshMenu();
           });
-
           box.add_child(btn);
           box.add_child(label);
           let menuItem = new PopupMenu.PopupBaseMenuItem({ reactive: true });
@@ -596,8 +614,6 @@ MyApplet.prototype = {
           this.menu.addMenuItem(menuItem);
         }
       }
-
-
     } catch (err) {
       let errItem = new PopupMenu.PopupMenuItem("Error: " + err.message);
       this.menu.addMenuItem(errItem);
@@ -607,4 +623,3 @@ MyApplet.prototype = {
 function main(metadata, orientation, panel_height, instance_id) {
   return new MyApplet(metadata, orientation, panel_height, instance_id);
 }
-
