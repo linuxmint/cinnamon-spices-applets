@@ -4,7 +4,6 @@ const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const Pango = imports.gi.Pango;
 const Cairo = imports.cairo;
-const Lang = imports.lang;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Mainloop = imports.mainloop;
@@ -26,7 +25,8 @@ MyApplet.prototype = {
         this.batteryPercentage = 50;
         this.batteryState = "unknown";
         this.acOnline = false;
-        this.acPaths = [];
+        this.batteryDir = null;
+        this.acFiles = [];
         this._upowerSignalId = null;
         this._loginSignalId = null;
         this._settleTimeout = 0;
@@ -45,7 +45,7 @@ MyApplet.prototype = {
         });
 
         this.pillCanvas = new St.DrawingArea();
-        this.pillCanvas.connect('repaint', Lang.bind(this, this._drawProgressPill));
+        this.pillCanvas.connect('repaint', (area) => this._drawProgressPill(area));
 
         this.appletLabel = new St.Label({
             text: "100", 
@@ -54,9 +54,9 @@ MyApplet.prototype = {
             x_align: Clutter.ActorAlign.CENTER
         });
 
-        this.appletLabel.connect('allocation-changed', Lang.bind(this, function () {
+        this.appletLabel.connect('allocation-changed', () => {
             this._syncPillSizeAndRedraw();
-        }));
+        });
 
         this.pillWrapper.add_actor(this.pillCanvas);
         this.pillWrapper.add_actor(this.appletLabel);
@@ -64,23 +64,20 @@ MyApplet.prototype = {
     },
 
     _onPowerEvent: function () {
-        // Update immediately, then do one quick 150ms follow-up in case the kernel
-        // updated AC/online slightly before BAT0/status settled
         this.updateUI();
         if (this._settleTimeout) {
             Mainloop.source_remove(this._settleTimeout);
             this._settleTimeout = 0;
         }
-        this._settleTimeout = Mainloop.timeout_add(150, Lang.bind(this, function () {
+        this._settleTimeout = Mainloop.timeout_add(150, () => {
             this._settleTimeout = 0;
             this.updateUI();
             return false;
-        }));
+        });
     },
 
     _setupDBusListeners: function () {
         try {
-            // 1. UPower daemon (battery percentage & state changes)
             this._upowerSignalId = Gio.DBus.system.signal_subscribe(
                 "org.freedesktop.UPower",
                 "org.freedesktop.DBus.Properties",
@@ -88,14 +85,13 @@ MyApplet.prototype = {
                 null,
                 null,
                 Gio.DBusSignalFlags.NONE,
-                Lang.bind(this, function (connection, sender, path, iface, signal, params) {
+                (connection, sender, path) => {
                     if (path && (path.indexOf("battery_") > -1 || path.indexOf("line_power") > -1 || path.indexOf("DisplayDevice") > -1)) {
                         this._onPowerEvent();
                     }
-                })
+                }
             );
 
-            // 2. systemd-logind (fast external power / AC plug detection)
             this._loginSignalId = Gio.DBus.system.signal_subscribe(
                 "org.freedesktop.login1",
                 "org.freedesktop.DBus.Properties",
@@ -103,9 +99,9 @@ MyApplet.prototype = {
                 "/org/freedesktop/login1",
                 "org.freedesktop.login1.Manager",
                 Gio.DBusSignalFlags.NONE,
-                Lang.bind(this, function () {
+                () => {
                     this._onPowerEvent();
-                })
+                }
             );
         } catch (e) {
             global.logError("[" + UUID + "] DBus Listener Error: " + e);
@@ -130,7 +126,6 @@ MyApplet.prototype = {
     _getFontFamilyCSS: function () {
         if (!this.font_name || this.font_name.trim() === "") return "";
         try {
-            // Pango parses strings like "JetBrains Mono Bold 11" cleanly into family + weight
             let desc = Pango.FontDescription.from_string(this.font_name);
             let family = desc.get_family();
             if (family) {
@@ -217,27 +212,64 @@ MyApplet.prototype = {
         cr.$dispose();
     },
 
-    _discoverPowerSupplies: function () {
-        let basePath = "/sys/class/power_supply";
-        this.acPaths = [];
-        try {
-            let dir = Gio.File.new_for_path(basePath);
-            let enumerator = dir.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
-            let info;
-            while ((info = enumerator.next_file(null)) !== null) {
-                let name = info.get_name();
-                let fullPath = basePath + "/" + name;
-                if (!this.batteryPath && GLib.file_test(fullPath + "/capacity", GLib.FileTest.EXISTS)) {
-                    this.batteryPath = fullPath;
+    _readFileAsync: function (file, callback) {
+        file.load_contents_async(null, (obj, res) => {
+            try {
+                let [ok, contents] = obj.load_contents_finish(res);
+                if (ok) {
+                    callback(ByteArray.toString(contents).trim());
                 }
-                if (GLib.file_test(fullPath + "/online", GLib.FileTest.EXISTS)) {
-                    this.acPaths.push(fullPath + "/online");
+            } catch (e) {
+                // File missing or unreadable on this device
+            }
+        });
+    },
+
+    _discoverPowerSuppliesAsync: function (onComplete) {
+        let baseDir = Gio.File.new_for_path("/sys/class/power_supply");
+        this.acFiles = [];
+
+        baseDir.enumerate_children_async(
+            "standard::name",
+            Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT,
+            null,
+            (dir, res) => {
+                try {
+                    let enumerator = dir.enumerate_children_finish(res);
+                    let info;
+                    while ((info = enumerator.next_file(null)) !== null) {
+                        let name = info.get_name();
+                        let childDir = dir.get_child(name);
+                        let capFile = childDir.get_child("capacity");
+                        let onlineFile = childDir.get_child("online");
+
+                        if (!this.batteryDir) {
+                            capFile.query_info_async("standard::type", Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (f, qRes) => {
+                                try {
+                                    f.query_info_finish(qRes);
+                                    if (!this.batteryDir) {
+                                        this.batteryDir = childDir;
+                                        if (onComplete) onComplete();
+                                    }
+                                } catch (e) {}
+                            });
+                        }
+
+                        onlineFile.query_info_async("standard::type", Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (f, qRes) => {
+                            try {
+                                f.query_info_finish(qRes);
+                                this.acFiles.push(onlineFile);
+                                if (onComplete) onComplete();
+                            } catch (e) {}
+                        });
+                    }
+                } catch (e) {
+                    this.batteryDir = Gio.File.new_for_path("/sys/class/power_supply/BAT0");
+                    if (onComplete) onComplete();
                 }
             }
-        } catch (e) {
-            // Fallback to BAT0
-            this.batteryPath = basePath + "/BAT0";
-        }
+        );
     },
 
     setupSettings: function () {
@@ -259,44 +291,47 @@ MyApplet.prototype = {
             this.settings.bindProperty(Settings.BindingDirection.IN, "limit_exceeded_background_color", "limit_exceeded_background_color", this.updateUI, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "charging_border_color", "charging_border_color", this.updateUI, null);
 
-            this._discoverPowerSupplies();
-
             this.applet_running = true;
-            this.updateLoop();
+            this._discoverPowerSuppliesAsync(() => {
+                this.updateLoop();
+            });
         } catch (e) {
             global.logError("[" + UUID + "] Settings Error: " + e);
         }
     },
 
-    refreshBattery: function () {
-        try {
-            if (this.batteryPath && GLib.file_test(this.batteryPath + '/capacity', GLib.FileTest.EXISTS)) {
-                let capacityValue = GLib.file_get_contents(this.batteryPath + '/capacity')[1];
-                this.batteryPercentage = parseInt(ByteArray.toString(capacityValue));
+    refreshBatteryAsync: function (onDone) {
+        if (this.batteryDir) {
+            this._readFileAsync(this.batteryDir.get_child("capacity"), (capStr) => {
+                let parsed = parseInt(capStr, 10);
+                if (!isNaN(parsed)) this.batteryPercentage = parsed;
+                onDone();
+            });
 
-                let stateValue = GLib.file_get_contents(this.batteryPath + '/status')[1];
-                this.batteryState = ByteArray.toString(stateValue).toLowerCase().trim();
-            }
+            this._readFileAsync(this.batteryDir.get_child("status"), (statusStr) => {
+                this.batteryState = statusStr.toLowerCase();
+                onDone();
+            });
+        }
 
-            // Check AC adapter 'online' files directly for the fastest possible plug/unplug state
-            let online = false;
-            for (let i = 0; i < this.acPaths.length; i++) {
-                let val = GLib.file_get_contents(this.acPaths[i])[1];
-                if (parseInt(ByteArray.toString(val)) === 1) {
-                    online = true;
-                    break;
-                }
-            }
-            this.acOnline = online;
-        } catch (err) {
-            global.logError("[" + UUID + "] Battery read error: " + err);
+        if (this.acFiles.length > 0) {
+            let pending = this.acFiles.length;
+            let anyOnline = false;
+            this.acFiles.forEach((acFile) => {
+                this._readFileAsync(acFile, (valStr) => {
+                    if (parseInt(valStr, 10) === 1) anyOnline = true;
+                    pending--;
+                    if (pending <= 0) {
+                        this.acOnline = anyOnline;
+                        onDone();
+                    }
+                });
+            });
         }
     },
 
-    updateUI: function () {
+    _renderUI: function () {
         try {
-            this.refreshBattery();
-
             if (isNaN(this.batteryPercentage) || this.batteryPercentage < 0 || this.batteryPercentage > 100) {
                 this.batteryPercentage = 50; 
             }
@@ -340,6 +375,13 @@ MyApplet.prototype = {
         }
     },
 
+    updateUI: function () {
+        this._renderUI();
+        this.refreshBatteryAsync(() => {
+            this._renderUI();
+        });
+    },
+
     updateLoop: function () {
         if (this.timeout) {
             Mainloop.source_remove(this.timeout);
@@ -347,7 +389,10 @@ MyApplet.prototype = {
         }
         if (this.applet_running) {
             this.updateUI();
-            this.timeout = Mainloop.timeout_add_seconds(this.refreshInterval || 30, Lang.bind(this, this.updateLoop));
+            this.timeout = Mainloop.timeout_add_seconds(this.refreshInterval || 30, () => {
+                this.updateLoop();
+                return false;
+            });
         }
     },
 
