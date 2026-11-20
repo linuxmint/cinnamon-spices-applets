@@ -10,7 +10,7 @@
         "animation": {
             "type": "page",
             "title": "Animation",
-            "sections": ["speed-section", "alert-section"]
+            "sections": ["speed-section", "performance-section", "alert-section"]
         },
         "details": {
             "type": "page",
@@ -31,6 +31,11 @@
             "type": "section",
             "title": "Speed",
             "keys": ["slowest_ms", "fastest_ms", "curve"]
+        },
+        "performance-section": {
+            "type": "section",
+            "title": "Performance",
+            "keys": ["pause_when_idle", "idle_threshold", "battery_saver", "update_interval"]
         },
         "alert-section": {
             "type": "section",
@@ -85,7 +90,7 @@
     "show_value": {
         "type": "switch",
         "default": true,
-        "description": "Show reading (% or speed)"
+        "description": "Show percentage (%) "
     },
     "slowest_ms": {
         "type": "spinbutton",
@@ -98,7 +103,7 @@
     },
     "fastest_ms": {
         "type": "spinbutton",
-        "default": 25,
+        "default": 50,
         "min": 16,
         "max": 200,
         "step": 1,
@@ -113,6 +118,38 @@
         "step": 0.05,
         "show-value": true,
         "description": "Response curve (lower = reacts to small loads)"
+    },
+    "pause_when_idle": {
+        "type": "switch",
+        "default": false,
+        "description": "Stand still when the load is low",
+        "tooltip": "The cat stops running below the level set here, so the panel has nothing to redraw"
+    },
+    "idle_threshold": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "units": "%",
+        "description": "Stand still below this load",
+        "dependency": "pause_when_idle"
+    },
+    "battery_saver": {
+        "type": "switch",
+        "default": true,
+        "description": "Run at half speed on battery",
+        "tooltip": "Laptops only. Fewer frames means less work for the CPU"
+    },
+    "update_interval": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "units": "s",
+        "description": "Check the sensor every",
+        "tooltip": "Longer means less work, but the cat reacts more slowly"
     },
     "alert_enabled": {
         "type": "switch",

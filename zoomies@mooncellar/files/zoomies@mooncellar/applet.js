@@ -16,10 +16,11 @@ const DEFAULT_CAT = "black";        // fallback if the chosen cat is missing
 const MAX_FRAMES = 64;
 
 const HIDDEN_CHECK_MS = 500;        // how often to check back while the panel is hidden
+const RESTING_CHECK_MS = 500;       // how often to check back while the cat is resting
+const BATTERY_CHECK_S = 30;         // how often to check if the laptop is on battery
 
 // details popup
 const TOP_COUNT = 5;
-const PAGE_SIZE = 4096;
 const BAR_WIDTH = 240;
 const BAR_HEIGHT = 4;
 const BAR_COLOR = "#5b9bd5";
@@ -57,13 +58,8 @@ function bytesToString(bytes) {
     return DECODER ? DECODER.decode(bytes) : imports.byteArray.toString(bytes);
 }
 
-function readFile(path) {
-    let [ok, contents] = GLib.file_get_contents(path);
-    return bytesToString(contents);
-}
-
-// returns null instead of throwing. processes can exit mid-scan and
-// some /proc files need root
+// small local files only (name.txt). everything the loops read every second
+// goes through readTextAsync() so the desktop never waits on it
 function readFileSafe(path) {
     try {
         let [ok, contents] = GLib.file_get_contents(path);
@@ -71,6 +67,63 @@ function readFileSafe(path) {
     } catch (e) {
         return null;
     }
+}
+
+// reads a file without blocking the desktop. resolves to the text,
+// or null if it can't be read (processes can exit mid-scan, some /proc files need root)
+function readTextAsync(path, cancellable) {
+    return new Promise(resolve => {
+        let file = Gio.File.new_for_path(path);
+        file.load_contents_async(cancellable, (f, res) => {
+            try {
+                let [ok, contents] = f.load_contents_finish(res);
+                resolve(ok ? bytesToString(contents) : null);
+            } catch (e) {
+                resolve(null);
+            }
+        });
+    });
+}
+
+// names of everything in a folder, without blocking the desktop.
+// resolves to an empty list if the folder can't be read
+function listDirAsync(path, cancellable) {
+    return new Promise(resolve => {
+        let names = [];
+        let dir = Gio.File.new_for_path(path);
+        dir.enumerate_children_async("standard::name", Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT, cancellable, (d, res) => {
+                let enumerator;
+                try {
+                    enumerator = d.enumerate_children_finish(res);
+                } catch (e) {
+                    resolve(names);
+                    return;
+                }
+                let next = () => {
+                    enumerator.next_files_async(64, GLib.PRIORITY_DEFAULT, cancellable, (en, res2) => {
+                        let infos = [];
+                        try {
+                            infos = en.next_files_finish(res2);
+                        } catch (e) {
+                            infos = [];
+                        }
+                        if (infos.length === 0) {
+                            try {
+                                enumerator.close(null);
+                            } catch (e) {
+                                // already closed
+                            }
+                            resolve(names);
+                            return;
+                        }
+                        for (let info of infos) names.push(info.get_name());
+                        next();
+                    });
+                };
+                next();
+            });
+    });
 }
 
 function fileExists(path) {
@@ -142,6 +195,23 @@ function listCats(dirPath) {
     }
     cats.sort();
     return cats;
+}
+
+
+// true when a laptop is running on its battery. batteries of mice and
+// keyboards have scope "Device" and are skipped
+async function onBatteryAsync(cancellable) {
+    let base = "/sys/class/power_supply/";
+    let names = await listDirAsync(base, cancellable);
+    for (let name of names) {
+        let type = await readTextAsync(base + name + "/type", cancellable);
+        if (!type || type.trim() !== "Battery") continue;
+        let scope = await readTextAsync(base + name + "/scope", cancellable);
+        if (scope && scope.trim() === "Device") continue;
+        let status = await readTextAsync(base + name + "/status", cancellable);
+        if (status && status.trim() === "Discharging") return true;
+    }
+    return false;
 }
 
 
@@ -246,22 +316,21 @@ class AppResolver {
 
 
 // pids = the numeric folders in /proc
-function listPids() {
-    let pids = [];
-    try {
-        let dir = Gio.File.new_for_path("/proc");
-        let enumerator = dir.enumerate_children("standard::name",
-            Gio.FileQueryInfoFlags.NONE, null);
-        let info;
-        while ((info = enumerator.next_file(null)) !== null) {
-            let name = info.get_name();
-            if (/^\d+$/.test(name)) pids.push(name);
-        }
-        enumerator.close(null);
-    } catch (e) {
-        global.logWarning("Zoomies: could not list /proc: " + e);
+async function listPidsAsync(cancellable) {
+    let names = await listDirAsync("/proc", cancellable);
+    return names.filter(name => /^\d+$/.test(name));
+}
+
+// reads the same file for every process at once. returns [{ pid, text }],
+// skipping processes that exited or can't be read
+async function readForAllPids(pids, file, cancellable) {
+    let texts = await Promise.all(pids.map(pid =>
+        readTextAsync("/proc/" + pid + "/" + file, cancellable)));
+    let out = [];
+    for (let i = 0; i < pids.length; i++) {
+        if (texts[i]) out.push({ pid: pids[i], text: texts[i] });
     }
-    return pids;
+    return out;
 }
 
 // adds up processes that belong to the same app
@@ -271,24 +340,35 @@ function addToGroup(groups, info, amount) {
     g.amount += amount;
 }
 
-// CPU ticks used so far by every process
-function snapshotCpu() {
-    let statLine = readFile("/proc/stat").split("\n")[0];
-    let total = statLine.trim().split(/\s+/).slice(1, 9).map(Number)
-        .reduce((a, b) => a + b, 0);
+// total CPU ticks from the first line of /proc/stat
+function parseCpuTotal(statText) {
+    let line = statText.split("\n")[0];
+    return line.trim().split(/\s+/).slice(1, 9).map(Number).reduce((a, b) => a + b, 0);
+}
 
+// name and CPU ticks from /proc/<pid>/stat. the name is in brackets
+// and can have spaces or brackets in it
+function parsePidStat(text) {
+    let open = text.indexOf("(");
+    let close = text.lastIndexOf(")");
+    if (open < 0 || close < 0) return null;
+    let name = text.slice(open + 1, close);
+    let rest = text.slice(close + 2).split(" ");
+    let ticks = Number(rest[11]) + Number(rest[12]);   // utime + stime
+    return { name: name, ticks: ticks };
+}
+
+// CPU ticks used so far by every process
+async function snapshotCpuAsync(cancellable) {
+    let stat = await readTextAsync("/proc/stat", cancellable);
+    if (!stat) throw new Error("could not read /proc/stat");
+    let total = parseCpuTotal(stat);
+
+    let pids = await listPidsAsync(cancellable);
     let procs = {};
-    for (let pid of listPids()) {
-        let text = readFileSafe("/proc/" + pid + "/stat");
-        if (!text) continue;
-        // the name is in brackets and can have spaces or brackets in it
-        let open = text.indexOf("(");
-        let close = text.lastIndexOf(")");
-        if (open < 0 || close < 0) continue;
-        let name = text.slice(open + 1, close);
-        let rest = text.slice(close + 2).split(" ");
-        let ticks = Number(rest[11]) + Number(rest[12]);   // utime + stime
-        procs[pid] = { name: name, ticks: ticks };
+    for (let r of await readForAllPids(pids, "stat", cancellable)) {
+        let p = parsePidStat(r.text);
+        if (p) procs[r.pid] = p;
     }
     return { total: total, procs: procs };
 }
@@ -315,21 +395,27 @@ function topCpu(prev, cur, count, resolver) {
     return list.slice(0, count);
 }
 
-function topRam(count, resolver) {
-    let meminfo = readFile("/proc/meminfo");
+// name and private memory from /proc/<pid>/status. RssAnon is resident memory
+// minus shared files, so shared libraries don't get counted.
+// kernel threads have no RssAnon and are skipped
+function parsePidStatus(text) {
+    let name = text.match(/^Name:\s*(.*)$/m);
+    let anon = text.match(/^RssAnon:\s+(\d+)/m);
+    if (!name || !anon) return null;
+    return { name: name[1].trim(), bytes: Number(anon[1]) * 1024 };
+}
+
+async function topRamAsync(count, resolver, cancellable) {
+    let meminfo = await readTextAsync("/proc/meminfo", cancellable);
+    if (!meminfo) throw new Error("could not read /proc/meminfo");
     let totalBytes = parseInt(meminfo.match(/MemTotal:\s+(\d+)/)[1]) * 1024;
 
     let groups = Object.create(null);
-    for (let pid of listPids()) {
-        let statm = readFileSafe("/proc/" + pid + "/statm");
-        if (!statm) continue;
-        let fields = statm.trim().split(/\s+/).map(Number);
-        // resident minus shared, so shared libraries don't get counted
-        let bytes = Math.max(0, fields[1] - fields[2]) * PAGE_SIZE;
-        if (bytes === 0) continue;
-        let comm = readFileSafe("/proc/" + pid + "/comm");
-        if (!comm) continue;
-        addToGroup(groups, resolver.resolve(comm.trim()), bytes);
+    let pids = await listPidsAsync(cancellable);
+    for (let r of await readForAllPids(pids, "status", cancellable)) {
+        let p = parsePidStatus(r.text);
+        if (!p || p.bytes === 0) continue;
+        addToGroup(groups, resolver.resolve(p.name), p.bytes);
     }
 
     let list = Object.keys(groups).map(k => ({
@@ -343,16 +429,21 @@ function topRam(count, resolver) {
 
 // bytes written per process. only works for my own processes,
 // the kernel won't show other users' io
-function snapshotDisk() {
-    let procs = {};
-    for (let pid of listPids()) {
-        let io = readFileSafe("/proc/" + pid + "/io");
-        if (!io) continue;
-        let m = io.match(/write_bytes:\s+(\d+)/);
+async function snapshotDiskAsync(cancellable) {
+    let pids = await listPidsAsync(cancellable);
+    let written = {};
+    let readable = [];
+    for (let r of await readForAllPids(pids, "io", cancellable)) {
+        let m = r.text.match(/write_bytes:\s+(\d+)/);
         if (!m) continue;
-        let comm = readFileSafe("/proc/" + pid + "/comm");
-        if (!comm) continue;
-        procs[pid] = { name: comm.trim(), bytes: Number(m[1]) };
+        written[r.pid] = Number(m[1]);
+        readable.push(r.pid);
+    }
+
+    // names only for the processes we can see
+    let procs = {};
+    for (let r of await readForAllPids(readable, "comm", cancellable)) {
+        procs[r.pid] = { name: r.text.trim(), bytes: written[r.pid] };
     }
     return { time: nowSeconds(), procs: procs };
 }
@@ -404,9 +495,9 @@ function describeIface(name) {
     };
 }
 
-function snapshotNet() {
+function parseNetDev(text) {
     let ifaces = {};
-    let lines = readFile("/proc/net/dev").split("\n").slice(2);
+    let lines = text.split("\n").slice(2);
     for (let line of lines) {
         if (!line.includes(":")) continue;
         let [iface, rest] = line.split(":");
@@ -415,7 +506,13 @@ function snapshotNet() {
         let f = rest.trim().split(/\s+/).map(Number);
         ifaces[iface] = { rx: f[0], tx: f[8] };
     }
-    return { time: nowSeconds(), ifaces: ifaces };
+    return ifaces;
+}
+
+async function snapshotNetAsync(cancellable) {
+    let text = await readTextAsync("/proc/net/dev", cancellable);
+    if (!text) throw new Error("could not read /proc/net/dev");
+    return { time: nowSeconds(), ifaces: parseNetDev(text) };
 }
 
 function topNet(prev, cur, count) {
@@ -445,22 +542,23 @@ function graphMax(kind, values) {
 }
 
 
-// Sensors: read() returns { load: 0-100, text, value }
+// Sensors: each has a path to read, and parse(text) returns { load: 0-100, text, value }
 // value is the raw number that goes in the history graph
 
 // the first reading of CPU, network and disk has nothing to compare with yet,
-// so it returns this and the cat waits one second for a real value
+// so it returns this and the cat waits for a real value
 const NOT_READY = { load: 0, text: "...", value: null };
 
 class CpuSensor {
     constructor() {
         this.name = "CPU";
         this.kind = "percent";
+        this.path = "/proc/stat";
         this._prevTotal = null;
         this._prevIdle = 0;
     }
-    read() {
-        let line = readFile("/proc/stat").split("\n")[0];
+    parse(text) {
+        let line = text.split("\n")[0];
         let parts = line.trim().split(/\s+/).slice(1, 9).map(Number);
         let idle = parts[3] + parts[4];
         let total = parts.reduce((a, b) => a + b, 0);
@@ -479,9 +577,9 @@ class RamSensor {
     constructor() {
         this.name = "RAM";
         this.kind = "percent";
+        this.path = "/proc/meminfo";
     }
-    read() {
-        let text = readFile("/proc/meminfo");
+    parse(text) {
         let total = parseInt(text.match(/MemTotal:\s+(\d+)/)[1]);
         let available = parseInt(text.match(/MemAvailable:\s+(\d+)/)[1]);
         let load = 100 * (1 - available / total);
@@ -490,7 +588,7 @@ class RamSensor {
 }
 
 // shared by network and disk, anything measured in bytes/sec.
-// subclasses need a _totalBytes()
+// subclasses need a path and a _totalBytes(text)
 class RateSensor {
     constructor() {
         this.kind = "rate";
@@ -498,8 +596,8 @@ class RateSensor {
         this._prevTime = 0;
         this._peak = 100000;  // 100 KB/s to start with
     }
-    read() {
-        let bytes = this._totalBytes();
+    parse(text) {
+        let bytes = this._totalBytes(text);
         let now = nowSeconds();
         let first = this._prevBytes === null;
         let rate = 0;
@@ -520,9 +618,10 @@ class NetworkSensor extends RateSensor {
     constructor() {
         super();
         this.name = "Network";
+        this.path = "/proc/net/dev";
     }
-    _totalBytes() {
-        let lines = readFile("/proc/net/dev").split("\n").slice(2);
+    _totalBytes(text) {
+        let lines = text.split("\n").slice(2);
         let total = 0;
         for (let line of lines) {
             if (!line.includes(":")) continue;
@@ -539,9 +638,10 @@ class DiskSensor extends RateSensor {
     constructor() {
         super();
         this.name = "Disk write";
+        this.path = "/proc/diskstats";
     }
-    _totalBytes() {
-        let lines = readFile("/proc/diskstats").split("\n");
+    _totalBytes(text) {
+        let lines = text.split("\n");
         let sectors = 0;
         for (let line of lines) {
             let parts = line.trim().split(/\s+/);
@@ -569,6 +669,8 @@ class ZoomiesApplet extends Applet.Applet {
         this._metadata = metadata;
         this._panelHeightPx = panelHeight;
         this._lastErrors = {};      // last error logged per loop, see _logError()
+        this._destroyed = false;
+        this._cancellable = new Gio.Cancellable();  // stops reads still running when removed
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         this.settings.bind("sensor", "sensorId", () => this._chooseSensor());
@@ -578,6 +680,10 @@ class ZoomiesApplet extends Applet.Applet {
         this.settings.bind("slowest_ms", "slowestMs");
         this.settings.bind("fastest_ms", "fastestMs");
         this.settings.bind("curve", "curve");
+        this.settings.bind("pause_when_idle", "pauseWhenIdle");
+        this.settings.bind("idle_threshold", "idleThreshold");
+        this.settings.bind("battery_saver", "batterySaver", () => this._checkBattery());
+        this.settings.bind("update_interval", "updateInterval", () => this._onIntervalChanged());
         this.settings.bind("alert_enabled", "alertEnabled");
         this.settings.bind("alert_threshold", "alertThreshold");
         this.settings.bind("alert_seconds", "alertSeconds");
@@ -586,9 +692,15 @@ class ZoomiesApplet extends Applet.Applet {
         this.settings.bind("show_history", "showHistory");
         this.settings.bind("history_seconds", "historySeconds", () => this._trimHistory());
 
-        this._icon = new St.Icon({ icon_size: 48 });
+        // every frame gets its own icon, stacked on top of each other. only the current
+        // one is visible. switching frames just changes which one is visible, so the
+        // panel only repaints the cat instead of loading a new image and redoing the layout
+        this._catBox = new St.Widget({
+            layout_manager: new Clutter.BinLayout(),
+            y_align: Clutter.ActorAlign.CENTER,
+        });
         this._label = new St.Label({ y_align: Clutter.ActorAlign.CENTER });
-        this.actor.add_actor(this._icon);
+        this.actor.add_actor(this._catBox);
         this.actor.add_actor(this._label);
 
         this._applet_context_menu.addAction("Choose cat...", () => this.openCatPicker());
@@ -628,21 +740,27 @@ class ZoomiesApplet extends Applet.Applet {
         this._fallbackIcon = Gio.ThemedIcon.new("application-x-executable");
         this._prevSnap = null;
         this._prevSnapKind = "";
+        this._menuGen = 0;          // goes up every time the popup opens or closes
 
-        this._frames = [];
+        this._icons = [];           // one St.Icon per frame
         this._frame = 0;
+        this._shownFrame = -1;      // the frame actually visible
+        this._iconSize = 48;
+        this._iconStyle = "";
         this._currentCat = null;    // the cat folder actually showing (after any fallback)
-        this._shownIcon = null;
         this._lastLabel = null;
         this._load = 0;
         this._text = "";
         this._history = [];
         this._alertCount = 0;
         this._alerting = false;
+        this._onBattery = false;
+        this._batteryCheckIn = BATTERY_CHECK_S;
 
         this._applySize();
         this._loadCat();
         this._chooseSensor();
+        this._checkBattery();
         this._sample();
         this._animate();
     }
@@ -688,14 +806,18 @@ class ZoomiesApplet extends Applet.Applet {
         } else {
             size = parseInt(this.sizeMode) || 48;
         }
-        this._icon.set_icon_size(size);
+        this._iconSize = size;
+        for (let icon of this._icons) icon.set_icon_size(size);
     }
 
-    _setIcon(gicon) {
-        if (gicon !== this._shownIcon) {
-            this._icon.gicon = gicon;
-            this._shownIcon = gicon;
+    // makes one frame visible and hides the one that was showing
+    _showFrame(index) {
+        if (index === this._shownFrame || index >= this._icons.length) return;
+        if (this._shownFrame >= 0 && this._shownFrame < this._icons.length) {
+            this._icons[this._shownFrame].opacity = 0;
         }
+        this._icons[index].opacity = 255;
+        this._shownFrame = index;
     }
 
     _loadCat() {
@@ -723,11 +845,18 @@ class ZoomiesApplet extends Applet.Applet {
             }
         }
 
-        this._frames = run;
+        // swap the old frames for the new cat's frames
+        this._catBox.destroy_all_children();
+        this._icons = run.map(gicon => {
+            let icon = new St.Icon({ gicon: gicon, icon_size: this._iconSize, opacity: 0 });
+            icon.set_style(this._iconStyle);
+            this._catBox.add_actor(icon);
+            return icon;
+        });
         this._frame = 0;
+        this._shownFrame = -1;
         this._currentCat = folder;
-        this._shownIcon = null;
-        if (run.length > 0) this._setIcon(run[0]);
+        if (this._icons.length > 0) this._showFrame(0);
     }
 
     openCatPicker() {
@@ -808,33 +937,81 @@ class ZoomiesApplet extends Applet.Applet {
         this._alertCount = 0;
     }
 
-    // the next sample is always scheduled, even if this one fails,
-    // so one bad read can't stop the cat for good
-    _sample() {
-        try {
-            let result = this._sensor.read();
-            this._load = Math.min(100, Math.max(0, result.load));
-            if (TEST_LOAD !== null) this._load = TEST_LOAD;
-            this._text = result.text;
+    // seconds between sensor readings
+    _interval() {
+        let s = parseInt(this.updateInterval);
+        return Math.min(10, Math.max(1, isFinite(s) ? s : 1));
+    }
 
-            if (result.value !== null) this._history.push(result.value);
-            this._trimHistory();
-            this._updateAlert();
+    // how many readings fit in the history time
+    _historyCapacity() {
+        return Math.max(10, Math.ceil((this.historySeconds || 120) / this._interval()));
+    }
 
-            this.set_applet_tooltip((this._alerting ? "High load - " : "") +
-                this._sensor.name + ": " + result.text);
-        } catch (e) {
-            this._logError("sensor", e);
+    _onIntervalChanged() {
+        // old readings are spaced differently, start the graph over
+        this._history = [];
+        this._alertCount = 0;
+    }
+
+    // asks if the laptop is on battery. the answer arrives later,
+    // the cat keeps running in the meantime
+    _checkBattery() {
+        if (!this.batterySaver) {
+            this._onBattery = false;
+            return;
         }
+        onBatteryAsync(this._cancellable).then(onBattery => {
+            if (!this._destroyed) this._onBattery = onBattery;
+        }).catch(e => this._logError("battery check", e));
+    }
 
-        this._sampleTimeout = Mainloop.timeout_add_seconds(1, () => {
-            this._sample();
-            return false;
+    // reads the sensor without blocking the desktop. the next reading is
+    // always scheduled, even if this one fails, so one bad read can't stop the cat for good
+    _sample() {
+        let sensor = this._sensor;
+        readTextAsync(sensor.path, this._cancellable).then(text => {
+            if (this._destroyed) return;
+            // the sensor was changed while reading, this reading is for the old one
+            if (sensor !== this._sensor) return;
+            if (text === null) throw new Error("could not read " + sensor.path);
+            this._applyReading(sensor.parse(text));
+        }).catch(e => {
+            this._logError("sensor", e);
+        }).then(() => {
+            if (this._destroyed) return;
+            let interval = this._interval();
+
+            this._batteryCheckIn -= interval;
+            if (this._batteryCheckIn <= 0) {
+                this._batteryCheckIn = BATTERY_CHECK_S;
+                this._checkBattery();
+            }
+
+            this._sampleTimeout = Mainloop.timeout_add_seconds(interval, () => {
+                this._sampleTimeout = null;
+                this._sample();
+                return false;
+            });
         });
     }
 
+    _applyReading(result) {
+        this._load = Math.min(100, Math.max(0, result.load));
+        if (TEST_LOAD !== null) this._load = TEST_LOAD;
+        this._text = result.text;
+
+        if (result.value !== null) this._history.push(result.value);
+        this._trimHistory();
+        this._updateAlert();
+        this._updateLabel();
+
+        this.set_applet_tooltip((this._alerting ? "High load - " : "") +
+            this._sensor.name + ": " + result.text);
+    }
+
     _trimHistory() {
-        let keep = Math.max(10, this.historySeconds || 120);
+        let keep = this._historyCapacity();
         if (this._history.length > keep) this._history.splice(0, this._history.length - keep);
     }
 
@@ -845,12 +1022,18 @@ class ZoomiesApplet extends Applet.Applet {
         if (canAlert && this._load >= this.alertThreshold) this._alertCount++;
         else this._alertCount = 0;
 
-        let on = canAlert && this._alertCount >= this.alertSeconds;
+        let on = canAlert && this._alertCount * this._interval() >= this.alertSeconds;
         if (on !== this._alerting) {
             this._alerting = on;
-            this._icon.set_style(on ? ALERT_ICON_STYLE : "");
+            this._iconStyle = on ? ALERT_ICON_STYLE : "";
+            for (let icon of this._icons) icon.set_style(this._iconStyle);
             this._label.set_style(on ? ALERT_LABEL_STYLE : "");
         }
+    }
+
+    // the cat stands still when "pause when idle" is on and the load is low
+    _isResting() {
+        return !!this.pauseWhenIdle && this._load < (this.idleThreshold || 0);
     }
 
     // ms per frame at the current load
@@ -859,7 +1042,9 @@ class ZoomiesApplet extends Applet.Applet {
         let fast = Math.min(this.slowestMs, this.fastestMs);
         let t = Math.pow(this._load / 100, this.curve);
         let delay = Math.round(slow - t * (slow - fast));
-        return isFinite(delay) ? Math.max(10, delay) : 250;
+        if (!isFinite(delay)) delay = 250;
+        if (this.batterySaver && this._onBattery) delay *= 2;   // half speed on battery
+        return Math.max(10, delay);
     }
 
     _updateLabel() {
@@ -882,10 +1067,16 @@ class ZoomiesApplet extends Applet.Applet {
             // panel auto-hidden: don't bother drawing, just check back less often
             let visible = this.actor.mapped !== false;
 
-            if (this._frames.length > 0) {
-                this._frame = (this._frame + 1) % this._frames.length;
-                if (visible) this._setIcon(this._frames[this._frame]);
-                delay = this._speedDelay();
+            if (this._icons.length > 0) {
+                if (this._isResting()) {
+                    // standing still on the first frame: nothing changes, nothing gets redrawn
+                    this._frame = 0;
+                    delay = RESTING_CHECK_MS;
+                } else {
+                    this._frame = (this._frame + 1) % this._icons.length;
+                    delay = this._speedDelay();
+                }
+                if (visible) this._showFrame(this._frame);
             }
             if (!visible) delay = Math.max(delay, HIDDEN_CHECK_MS);
 
@@ -896,6 +1087,7 @@ class ZoomiesApplet extends Applet.Applet {
         }
 
         this._animTimeout = Mainloop.timeout_add(delay, () => {
+            this._animTimeout = null;
             this._animate();
             return false;
         });
@@ -940,20 +1132,22 @@ class ZoomiesApplet extends Applet.Applet {
     }
 
     _onMenuToggled(open) {
+        this._menuGen++;        // anything still running for the last open is now stale
+        if (this._menuTimeout) {
+            Mainloop.source_remove(this._menuTimeout);
+            this._menuTimeout = null;
+        }
         if (open) {
             this._prevSnap = null;       // old snapshot would give wrong rates
             this._prevSnapKind = "";
             this._refreshMenu();
-        } else if (this._menuTimeout) {
-            Mainloop.source_remove(this._menuTimeout);
-            this._menuTimeout = null;
         }
     }
 
     // compares a new snapshot with the last one of the same kind.
     // null the first time since there's nothing to compare yet
-    _delta(kind, takeSnapshot, compare) {
-        let cur = takeSnapshot();
+    async _delta(kind, takeSnapshot, compare) {
+        let cur = await takeSnapshot();
         let prev = this._prevSnapKind === kind ? this._prevSnap : null;
         this._prevSnap = cur;
         this._prevSnapKind = kind;
@@ -961,27 +1155,32 @@ class ZoomiesApplet extends Applet.Applet {
     }
 
     // the next refresh is always scheduled, even if this one fails,
-    // so the popup can't freeze
+    // so the popup can't freeze. it stops once the popup closes
     _refreshMenu() {
-        try {
-            this._fillMenu();
-        } catch (e) {
+        let gen = this._menuGen;
+        let stale = () => this._destroyed || gen !== this._menuGen;
+
+        this._fillMenu(stale).catch(e => {
+            if (stale()) return;
             this._logError("details popup", e);
             try {
                 this._showRows("Details", null, "Could not read the details right now");
             } catch (e2) {
                 // nothing more we can do this round
             }
-        }
-
-        this._menuTimeout = Mainloop.timeout_add_seconds(1, () => {
-            this._refreshMenu();
-            return false;
+        }).then(() => {
+            if (stale() || !this.menu.isOpen) return;
+            this._menuTimeout = Mainloop.timeout_add_seconds(1, () => {
+                this._menuTimeout = null;
+                this._refreshMenu();
+                return false;
+            });
         });
     }
 
-    _fillMenu() {
+    async _fillMenu(stale) {
         let res = this._resolver;
+        let c = this._cancellable;
         let id = SENSORS[this.sensorId] ? this.sensorId : "cpu";
         let title = "";
         let rows = null;        // [{ name, icon, value, amount }]
@@ -989,7 +1188,8 @@ class ZoomiesApplet extends Applet.Applet {
 
         if (id === "cpu") {
             title = "Top processes: CPU";
-            let list = this._delta("cpu", snapshotCpu, (p, c) => topCpu(p, c, TOP_COUNT, res));
+            let list = await this._delta("cpu", () => snapshotCpuAsync(c),
+                (p, cur) => topCpu(p, cur, TOP_COUNT, res));
             if (list === null) {
                 message = "Measuring...";
             } else {
@@ -1005,7 +1205,8 @@ class ZoomiesApplet extends Applet.Applet {
             title = "Top processes: RAM";
             this._prevSnap = null;
             this._prevSnapKind = "";
-            rows = topRam(TOP_COUNT, res).map(r => ({
+            let list = await topRamAsync(TOP_COUNT, res, c);
+            rows = list.map(r => ({
                 name: r.info.label,
                 icon: r.info.icon,
                 value: formatBytes(r.bytes) + " (" + r.percent.toFixed(1) + "%)",
@@ -1014,7 +1215,8 @@ class ZoomiesApplet extends Applet.Applet {
             if (rows.length === 0) message = "No data";
         } else if (id === "disk") {
             title = "Disk writes: your apps";
-            let list = this._delta("disk", snapshotDisk, (p, c) => topDisk(p, c, TOP_COUNT, res));
+            let list = await this._delta("disk", () => snapshotDiskAsync(c),
+                (p, cur) => topDisk(p, cur, TOP_COUNT, res));
             if (list === null) {
                 message = "Measuring...";
             } else {
@@ -1028,7 +1230,8 @@ class ZoomiesApplet extends Applet.Applet {
             }
         } else {
             title = "Network by interface";
-            let list = this._delta("net", snapshotNet, (p, c) => topNet(p, c, TOP_COUNT));
+            let list = await this._delta("net", () => snapshotNetAsync(c),
+                (p, cur) => topNet(p, cur, TOP_COUNT));
             if (list === null) {
                 message = "Measuring...";
             } else {
@@ -1042,6 +1245,8 @@ class ZoomiesApplet extends Applet.Applet {
             }
         }
 
+        // popup was closed (or the applet removed) while reading
+        if (stale()) return;
         this._showRows(title, rows, message);
         this._showGraph();
     }
@@ -1095,7 +1300,8 @@ class ZoomiesApplet extends Applet.Applet {
             let peak = 0;
             for (let v of this._history) if (v > peak) peak = v;
             let peakText = this._sensor.kind === "percent" ? Math.round(peak) + "%" : formatRate(peak);
-            this._graphLabel.set_text("Last " + formatDuration(n) + "  -  peak " + peakText);
+            this._graphLabel.set_text("Last " + formatDuration(n * this._interval()) +
+                "  -  peak " + peakText);
         }
         this._graph.queue_repaint();
     }
@@ -1113,7 +1319,7 @@ class ZoomiesApplet extends Applet.Applet {
             let values = this._history;
             let n = values.length;
             if (n >= 2) {
-                let capacity = Math.max(10, this.historySeconds || 120);
+                let capacity = this._historyCapacity();
                 let step = w / (capacity - 1);
                 let yMax = graphMax(this._sensor.kind, values);
                 let pts = values.map((v, i) => [
@@ -1142,9 +1348,12 @@ class ZoomiesApplet extends Applet.Applet {
     }
 
     on_applet_removed_from_panel() {
+        this._destroyed = true;
+        this._cancellable.cancel();
         if (this._sampleTimeout) Mainloop.source_remove(this._sampleTimeout);
         if (this._animTimeout) Mainloop.source_remove(this._animTimeout);
         if (this._menuTimeout) Mainloop.source_remove(this._menuTimeout);
+        this._sampleTimeout = this._animTimeout = this._menuTimeout = null;
         if (this._appMonitor && this._appMonitorId) this._appMonitor.disconnect(this._appMonitorId);
         if (this._picker) this._picker.close();
         this.menu.destroy();        // otherwise the popup stays around until Cinnamon restarts
