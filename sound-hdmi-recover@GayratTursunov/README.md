@@ -23,21 +23,15 @@ Newer WirePlumber releases have their own recovery: 0.5.15 added it, 0.5.18 limi
 
 You can turn this off in the applet's settings under *Output recovery*.
 
-### Working alongside a background service
-
-The recovery above only runs when you pick an output in the menu. A wake-up that happens while nobody touches the menu can be covered by a separate user service that watches WirePlumber's log and runs the same profile reset.
-
-The applet and that service use the same lock for each card: a directory at `$XDG_RUNTIME_DIR/hdmi-audio-recover/card-<index>.lock`. Whichever one holds the lock does the profile reset; the other waits for the output to come back. The applet works on its own without the service.
-
 ## Changes from `sound@cinnamon.org` 6.6.9
 
 | File | Change |
 |---|---|
 | `hdmiRecovery.js` | New file containing the recovery logic. |
-| `applet.js` | Loads the module, creates it next to the mixer control, calls `watchSelection()` after each output-device selection, and cleans it up when the applet is removed. Every change is marked `sound-hdmi-recover`. |
-| `settings-schema.json` | Adds the *Output recovery* section and the `hdmiRecover` switch. |
+| `applet.js` | Sets up translations (own domain first, then Cinnamon's), loads the module, creates it next to the mixer control, calls `watchSelection()` after each output-device selection, and cleans it up when the applet is removed. Every change is marked `sound-hdmi-recover`. |
+| `settings-schema.json` | Adds the *Output recovery* section and the `hdmiRecover` switch. The *Show menu* shortcut has no default (the built-in applet already uses <kbd>Shift</kbd>+<kbd>Super</kbd>+<kbd>S</kbd>); set one in the applet's settings. |
 
-Existing strings stay translated, because they still go through Cinnamon's own translations. The new strings are English only.
+Translations use the applet's own domain first and fall back to Cinnamon's, so every string inherited from the built-in applet stays translated. The new strings are in `po/sound-hdmi-recover@GayratTursunov.pot`.
 
 ## Install
 

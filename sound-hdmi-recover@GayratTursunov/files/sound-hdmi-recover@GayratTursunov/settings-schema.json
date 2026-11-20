@@ -17,7 +17,7 @@
     "keyOpen": {
         "type": "keybinding",
         "description": "Show menu",
-        "default": "<Shift><Super>s",
+        "default": "",
         "tooltip": "Set keybinding(s) to show the sound applet menu."
     },
     "alwaysShowMuteInput": {

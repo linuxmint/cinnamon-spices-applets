@@ -15,8 +15,19 @@ const Main = imports.ui.main;
 const Settings = imports.ui.settings;
 const Slider = imports.ui.slider;
 const Pango = imports.gi.Pango;
+const Gettext = imports.gettext;
 // sound-hdmi-recover: recovery for HDMI/DP outputs whose sink WirePlumber failed to create
 const { HdmiRecovery } = require('./hdmiRecovery');
+
+const UUID = "sound-hdmi-recover@GayratTursunov";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+// Own domain first; the strings inherited from sound@cinnamon.org fall back to
+// Cinnamon's translations, so the applet stays translated without a full .po set.
+function _(text) {
+    const translated = Gettext.dgettext(UUID, text);
+    return translated !== text ? translated : Gettext.dgettext("cinnamon", text);
+}
 
 const MEDIA_PLAYER_2_PATH = "/org/mpris/MediaPlayer2";
 const MEDIA_PLAYER_2_NAME = "org.mpris.MediaPlayer2";
@@ -1031,7 +1042,7 @@ class CinnamonSoundApplet extends Applet.TextIconApplet {
 
         this._control = new Cvc.MixerControl({ name: 'Cinnamon Volume Control' });
         // sound-hdmi-recover
-        this._hdmiRecovery = new HdmiRecovery(this._control);
+        this._hdmiRecovery = new HdmiRecovery(this._control, _);
         this.settings.bind("hdmiRecover", "hdmiRecover", () => this._hdmiRecovery.enabled = this.hdmiRecover);
         this._hdmiRecovery.enabled = this.hdmiRecover;
         this._control.connect('state-changed', (...args) => this._onControlStateChanged(...args));
