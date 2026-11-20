@@ -1,0 +1,115 @@
+# GoreBattery Spanish translation
+# This file is distributed under the same license as the GoreBattery package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: GoreBattery\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-17 20:23+0200\n"
+"PO-Revision-Date: 2026-10-17 18:30+0200\n"
+"Last-Translator: gorehide\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../applet.js:439
+msgid "Battery not available"
+msgstr "Batería no disponible"
+
+#: ../applet.js:446
+msgid "plugged in"
+msgstr "conectado a la corriente"
+
+#: ../applet.js:446
+msgid "on battery"
+msgstr "con batería"
+
+#: ../applet.js:447
+msgid "Alert below"
+msgstr "Aviso al bajar de"
+
+#: settings-schema.json:1
+msgid "Alert"
+msgstr "Alerta"
+
+#: settings-schema.json:2
+msgid "Battery to monitor"
+msgstr "Batería sobre la que actuar"
+
+#: settings-schema.json:3
+msgid "Automatic (first battery)"
+msgstr "Automática (la primera)"
+
+#: settings-schema.json:4
+msgid "Alert when the battery drops below (%)"
+msgstr "Avisar cuando la batería baje de (%)"
+
+#: settings-schema.json:5
+msgid "The alert only triggers when the charger is unplugged"
+msgstr "La alerta solo salta con el cargador desconectado"
+
+#: settings-schema.json:6
+msgid "Show the glow when the battery is low"
+msgstr "Mostrar el halo cuando la batería esté baja"
+
+#: settings-schema.json:7
+msgid "Turn it off if you only want the thin border"
+msgstr "Desactívalo si solo quieres el borde fino"
+
+#: settings-schema.json:8
+msgid "Glow duration (seconds, 0 = until the charger is plugged in)"
+msgstr "Duración del halo (segundos, 0 = hasta conectar el cargador)"
+
+#: settings-schema.json:9
+msgid "Glow style"
+msgstr "Estilo del halo"
+
+#: settings-schema.json:10
+msgid "Soft glow"
+msgstr "Halo suave"
+
+#: settings-schema.json:11
+msgid "Two-color gradient"
+msgstr "Degradado de dos colores"
+
+#: settings-schema.json:12
+msgid "Fire"
+msgstr "Fuego"
+
+#: settings-schema.json:13
+msgid "Glow color (not used by Fire)"
+msgstr "Color del halo (no se usa en Fuego)"
+
+#: settings-schema.json:14
+msgid "Second color (Two-color gradient only)"
+msgstr "Segundo color (solo en Degradado de dos colores)"
+
+#: settings-schema.json:15
+msgid "Show a thin border while unplugged"
+msgstr "Mostrar un borde fino mientras no esté enchufado"
+
+#: settings-schema.json:17
+msgid "Border width (pixels)"
+msgstr "Grosor del borde (píxeles)"
+
+#: settings-schema.json:18
+msgid "Border color"
+msgstr "Color del borde"
+
+#: settings-schema.json:19
+msgid "Check the battery every (seconds)"
+msgstr "Comprobar la batería cada (segundos)"
+
+#: settings-schema.json:20
+msgid "Fewer seconds = faster reaction when plugging or unplugging"
+msgstr "Menos segundos = reacciona antes al enchufar o desenchufar"
+
+#: settings-schema.json:21
+msgid "Appearance"
+msgstr "Apariencia"
+
+#: settings-schema.json:22
+msgid "Show the percentage in the panel"
+msgstr "Mostrar el porcentaje en el panel"
