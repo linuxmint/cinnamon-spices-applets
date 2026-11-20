@@ -39,7 +39,7 @@ function drawGaps() {
     return [g1, g2, g3];
 }
 
-class HdmiRecovery {
+var HdmiRecovery = class HdmiRecovery {
     // control: the applet's Cvc.MixerControl; translate: the applet's _() function
     constructor(control, translate) {
         this._control = control;
@@ -173,6 +173,4 @@ class HdmiRecovery {
     _log(msg) {
         global.log(`${LOG_PREFIX} ${msg}`);
     }
-}
-
-module.exports = { HdmiRecovery, drawGaps };
+};

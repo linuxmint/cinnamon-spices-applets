@@ -16,11 +16,11 @@ const Settings = imports.ui.settings;
 const Slider = imports.ui.slider;
 const Pango = imports.gi.Pango;
 const Gettext = imports.gettext;
-// sound-hdmi-recover: recovery for HDMI/DP outputs whose sink WirePlumber failed to create
-const { HdmiRecovery } = require('./hdmiRecovery');
 
 const UUID = "sound-hdmi-recover@GayratTursunov";
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+// sound-hdmi-recover: recovery for HDMI/DP outputs whose sink WirePlumber failed to create
+const HdmiRecovery = imports.ui.appletManager.applets[UUID].hdmiRecovery.HdmiRecovery;
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 // Own domain first; the strings inherited from sound@cinnamon.org fall back to
 // Cinnamon's translations, so the applet stays translated without a full .po set.
