@@ -122,7 +122,7 @@ function readNvtopAsync(fileutil, cb) {
 
 const { _, padColumn } = typeof imports !== 'undefined' ? imports.lib.util : require('../util.js');
 
-function formatPanel(g) {
+function formatPanel(g, sep = ' | ') {
   if (!g) return '—';
   if (!g.active) return _("susp.");
   // Keep the panel tile compact: only usage % + temperature.
@@ -130,7 +130,32 @@ function formatPanel(g) {
   const parts = [];
   if (g.busyPct != null) parts.push(`${g.busyPct}%`);
   if (g.tempC   != null) parts.push(`${Math.round(g.tempC)}°C`);
-  return parts.join(' | ') || g.type.toUpperCase();
+  return parts.join(sep) || g.type.toUpperCase();
+}
+
+// Label text for the multi-GPU tile: custom (if enabled and non-blank after
+// trimming and stripping trailing colons, capped at 6 chars) else the default.
+// The colon is always appended by formatPanelMulti.
+function _label(useCustom, text, fallback) {
+  const t = useCustom ? (text || '').trim().replace(/:+$/, '').slice(0, 6).trim() : '';
+  return t || fallback;
+}
+
+// iGPU usage text: busy %, else clock as % of max, else null (nothing shown).
+function _igpuUsage(g) {
+  if (g.busyPct != null) return `${g.busyPct}%`;
+  if (g.clockMhz != null && g.maxMhz > 0) return `${Math.round(g.clockMhz / g.maxMhz * 100)}%`;
+  return null;
+}
+
+// "d: Y% - ZZ°C | i: X%" when both GPUs exist and showIgpu is set; otherwise
+// exactly formatPanel(dgpu). opts: {showIgpu, useCustom, labelI, labelD}
+function formatPanelMulti(dgpu, igpu, opts) {
+  const o = opts || {};
+  if (!o.showIgpu || !dgpu || !igpu || dgpu === igpu || dgpu.type === 'intel') return formatPanel(dgpu);
+  const usage = _igpuUsage(igpu);
+  if (usage == null) return formatPanel(dgpu);
+  return `${_label(o.useCustom, o.labelD, 'd')}: ${formatPanel(dgpu, ' - ')} | ${_label(o.useCustom, o.labelI, 'i')}: ${usage}`;
 }
 
 function formatTooltip(gpus) {
@@ -153,5 +178,5 @@ function formatTooltip(gpus) {
 
 if (typeof module !== 'undefined') {
   module.exports = { findGpus, isActive, readAmd, readNvidiaSync, readNvidiaAsync,
-                     readIntel, readNvtopAsync, formatPanel, formatTooltip };
+                     readIntel, readNvtopAsync, formatPanel, formatPanelMulti, formatTooltip };
 }

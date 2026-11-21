@@ -440,6 +440,10 @@ class YasmApplet extends Applet.Applet {
     bind('gpu-temp-warn',  '_gpuTempWarn');
     bind('gpu-temp-alert', '_gpuTempAlert');
     bind('gpu-temp-alert-notify', '_gpuTempAlertNotify');
+    bind('gpu-show-igpu',      '_gpuShowIgpu',     () => this._rebuildSections());
+    bind('gpu-custom-labels',  '_gpuCustomLabels', () => this._rebuildSections());
+    bind('gpu-label-igpu',     '_gpuLabelIgpu',    () => this._rebuildSections());
+    bind('gpu-label-dgpu',     '_gpuLabelDgpu',    () => this._rebuildSections());
     bind('bat-warn',       '_batWarn');
     bind('bat-alert',      '_batAlert');
 
@@ -1221,7 +1225,10 @@ class YasmApplet extends Applet.Applet {
     } else if (gpuTempLevel !== 'alert') {
       this._rateLimitReset('gpuTempAlert');
     }
-    s.label.set_text(this._buildText('gpu', GpuMetric.formatPanel(primary)));
+    const igpu = primary.type !== 'intel' ? data.gpu.find(g => g.type === 'intel') : null;
+    s.label.set_text(this._buildText('gpu', GpuMetric.formatPanelMulti(primary, igpu, {
+      showIgpu: !!this._gpuShowIgpu, useCustom: !!this._gpuCustomLabels,
+      labelI: this._gpuLabelIgpu || '', labelD: this._gpuLabelDgpu || '' })));
     const hasDiscrete = data.gpu.some(g => g.type !== 'intel');
     const gpuItems = [];
     if (hasDiscrete) {

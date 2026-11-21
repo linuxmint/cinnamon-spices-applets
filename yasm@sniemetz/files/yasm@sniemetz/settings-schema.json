@@ -182,6 +182,10 @@
         "gpu-enabled",
         "gpu-display",
         "gpu-label",
+        "gpu-show-igpu",
+        "gpu-custom-labels",
+        "gpu-label-igpu",
+        "gpu-label-dgpu",
         "gpu-temp-warn",
         "gpu-temp-alert",
         "gpu-temp-alert-notify"
@@ -613,5 +617,31 @@
     "default": "",
     "dependency": "!gpu-display",
     "description": "Label text"
+  },
+  "gpu-show-igpu": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Show integrated GPU in tile",
+    "tooltip": "When both a dedicated and an integrated GPU are present, show both values in the tile"
+  },
+  "gpu-custom-labels": {
+    "type": "checkbox",
+    "default": false,
+    "dependency": "gpu-show-igpu",
+    "description": "Use custom labels"
+  },
+  "gpu-label-igpu": {
+    "type": "entry",
+    "default": "",
+    "dependency": "gpu-custom-labels",
+    "description": "Integrated GPU label",
+    "tooltip": "Max 6 characters; the colon is added automatically. Blank = i"
+  },
+  "gpu-label-dgpu": {
+    "type": "entry",
+    "default": "",
+    "dependency": "gpu-custom-labels",
+    "description": "Dedicated GPU label",
+    "tooltip": "Max 6 characters; the colon is added automatically. Blank = d"
   }
 }

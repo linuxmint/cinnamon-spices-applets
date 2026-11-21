@@ -54,6 +54,17 @@ If `nvtop` is not installed, YASM falls back to:
 
 `nvtop` is preferred because it covers all vendor GPUs in one call, provides richer data than sysfs alone, and its `-s` flag was designed for exactly this kind of machine-readable snapshot.
 
+### Showing the integrated GPU in the tile
+
+On systems with both a dedicated and an integrated GPU, the tile shows only the dedicated GPU by default. Enable **Show integrated GPU in tile** in the GPU settings to show both:
+
+`d: 12% - 54°C | i: 32%`
+
+- The integrated GPU shows usage only (its temperature is the CPU package temperature, already shown in the CPU tile). Without `nvtop`, usage is derived from clock speed (current / max); if neither is available, the integrated part is hidden.
+- **Use custom labels** lets you replace `d` and `i` with your own text (up to 6 characters; the colon is added automatically). Blank fields keep the defaults.
+- On systems with only one GPU these options have no effect.
+- If several dedicated GPUs are present, only the first is shown in the tile; all are listed in the tooltip.
+
 ### Polling cycle
 
 The refresh interval (default: **5 seconds**, configurable 3–30 s in settings) drives the main loop. Not all metrics are read every tick — heavier or slower-changing data is rate-limited:
