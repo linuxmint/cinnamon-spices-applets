@@ -1,0 +1,8 @@
+{
+    "uuid": "sound-hdmi-recover@GayratTursunov",
+    "name": "Sound (HDMI recover)",
+    "description": "Cinnamon Sound applet that re-creates an HDMI/DisplayPort output when WirePlumber failed to create it after display wake",
+    "version": "1.0.0",
+    "max-instances": 1,
+    "cinnamon-version": ["6.6"]
+}
