@@ -192,7 +192,15 @@ ClaudeUsageApplet.prototype = {
                             this.stopTimer();
                             this.handleError("Rate limited (429). Will retry at next interval.");
                         } else {
-                            this.handleError("API request failed: HTTP " + status);
+                            // For status 0 (no HTTP response) finishing the request throws
+                            // the underlying network error; HTTP error statuses don't throw.
+                            let reason = "";
+                            try {
+                                this._httpSession.send_and_read_finish(result);
+                            } catch (err) {
+                                reason = " (" + (err.message || err) + ")";
+                            }
+                            this.handleError("API request failed: HTTP " + status + reason);
                         }
                     } catch (e) {
                         this.handleError("Request error: " + e);
