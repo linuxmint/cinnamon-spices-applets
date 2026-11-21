@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yasm@sniemetz 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2026-09-22 22:49+0200\n"
+"POT-Creation-Date: 2026-11-21 22:19+0100\n"
 "PO-Revision-Date: 2026-09-22 22:49\n"
 "Last-Translator: Machine-generated stub\n"
 "Language-Team: none\n"
@@ -16,35 +16,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:676
+#. applet.js:1021
 msgid "Click to open top"
 msgstr "Clic para abrir top"
 
-#. applet.js:740
+#. applet.js:1083
 msgid "Usage"
 msgstr "Uso"
 
-#. applet.js:741
+#. applet.js:1084
 msgid "CPU pkg:"
 msgstr "CPU pkg:"
 
-#. applet.js:742
+#. applet.js:1085
 msgid "GPU:"
 msgstr "GPU:"
 
-#. applet.js:743
+#. applet.js:1086
 msgid "DRAM:"
 msgstr "DRAM:"
 
-#. applet.js:744
+#. applet.js:1087
 msgid "Display:"
 msgstr "Pantalla:"
 
-#. applet.js:745
+#. applet.js:1088
 msgid "Total:"
 msgstr "Total:"
 
-#. applet.js:748
+#. applet.js:1091
 msgid ""
 "CPU power unavailable — click\n"
 "\"Enable CPU power monitoring\"\n"
@@ -54,97 +54,99 @@ msgstr ""
 "«Habilitar monitorización de potencia CPU»\n"
 "en los ajustes de Energía"
 
-#. applet.js:751
+#. applet.js:1094
 msgid "Power — AC"
 msgstr "Energía — CA"
 
-#. applet.js:752
+#. applet.js:1095
 msgid "Power — AC (full)"
 msgstr "Energía — CA (llena)"
 
-#. applet.js:753
+#. applet.js:1096
 msgid "Power — Battery"
 msgstr "Energía — Batería"
 
-#. applet.js:754
+#. applet.js:1097
 msgid "AC↑"
 msgstr "AC↑"
 
-#. applet.js:754 applet.js:755 applet.js:756
+#. applet.js:1097 applet.js:1098 applet.js:1099
 msgid "(3hrs)"
 msgstr "(3 h)"
 
-#. applet.js:754 applet.js:756
+#. applet.js:1097 applet.js:1099
 msgid "Draw↓"
 msgstr "Consumo↓"
 
-#. applet.js:791
+#. applet.js:1129
 msgid "CPU Temperature"
 msgstr "Temperatura CPU"
 
-#. applet.js:791
+#. applet.js:1129
 #, javascript-format
 msgid "CPU temp critical: %d°C"
 msgstr "Temp CPU crítica: %d°C"
 
-#. applet.js:810
+#. applet.js:1146
 msgid "Package"
 msgstr "Package"
 
-#. applet.js:812 lib/metrics/battery.js:32 lib/metrics/gpu.js:144
+#. applet.js:1148 lib/metrics/battery.js:32 lib/metrics/gpu.js:169
 msgid "Temp:"
 msgstr "Temp:"
 
-#. applet.js:817
+#. applet.js:1153
 msgid "CPU:"
 msgstr "CPU:"
 
 #. settings-schema.json->memory->title
 #. settings-schema.json->memory-section->title
-#. applet.js:834 lib/metrics/memory.js:36
+#. settings-schema.json->single-tile-pick->options
+#. applet.js:1169 lib/metrics/memory.js:36
 msgid "Memory"
 msgstr "Memoria"
 
-#. applet.js:836
+#. applet.js:1171
 msgid "used"
 msgstr "usado"
 
-#. applet.js:837 lib/metrics/disk.js:112 lib/metrics/disk.js:134
+#. applet.js:1172 lib/metrics/disk.js:113 lib/metrics/disk.js:135
 msgid "free"
 msgstr "libre"
 
-#. applet.js:864
+#. applet.js:1198
 msgid "Disks"
 msgstr "Discos"
 
-#. applet.js:866 lib/metrics/disk.js:121
+#. applet.js:1200 lib/metrics/disk.js:122
 msgid "I/O"
 msgstr "E/S"
 
-#. applet.js:898
+#. applet.js:1226
 msgid "GPU Temperature"
 msgstr "Temperatura GPU"
 
-#. applet.js:898
+#. applet.js:1226
 #, javascript-format
 msgid "GPU temp critical: %d°C"
 msgstr "Temp GPU crítica: %d°C"
 
-#. applet.js:912
+#. applet.js:1241
 msgid "Busy"
 msgstr "Ocupado"
 
 #. settings-schema.json->network->title
 #. settings-schema.json->network-section->title
-#. applet.js:937
+#. settings-schema.json->single-tile-pick->options
+#. applet.js:1265
 msgid "Network"
 msgstr "Red"
 
-#. applet.js:938
+#. applet.js:1266
 msgid "TX↑"
 msgstr "TX↑"
 
-#. applet.js:941
+#. applet.js:1269
 msgid "RX↓"
 msgstr "RX↓"
 
@@ -211,11 +213,12 @@ msgstr "temp"
 
 #. settings-schema.json->cpu->title
 #. settings-schema.json->cpu-section->title
+#. settings-schema.json->single-tile-pick->options
 #. lib/metrics/cpu.js:138
 msgid "CPU"
 msgstr "CPU"
 
-#. lib/metrics/disk.js:72
+#. lib/metrics/disk.js:74
 msgid "no disk"
 msgstr "sin disco"
 
@@ -241,43 +244,44 @@ msgstr "susp."
 
 #. settings-schema.json->gpu->title
 #. settings-schema.json->gpu-section->title
-#. lib/metrics/gpu.js:137
+#. settings-schema.json->single-tile-pick->options
+#. lib/metrics/gpu.js:162
 msgid "GPU"
 msgstr "GPU"
 
-#. lib/metrics/gpu.js:141
+#. lib/metrics/gpu.js:166
 msgid "Name:"
 msgstr "Nombre:"
 
-#. lib/metrics/gpu.js:142
+#. lib/metrics/gpu.js:167
 msgid "Type:"
 msgstr "Tipo:"
 
-#. lib/metrics/gpu.js:143
+#. lib/metrics/gpu.js:168
 msgid "Status:"
 msgstr "Estado:"
 
-#. lib/metrics/gpu.js:143
+#. lib/metrics/gpu.js:168
 msgid "active"
 msgstr "activo"
 
-#. lib/metrics/gpu.js:143
+#. lib/metrics/gpu.js:168
 msgid "suspended"
 msgstr "suspendido"
 
-#. lib/metrics/gpu.js:145
+#. lib/metrics/gpu.js:170
 msgid "Busy:"
 msgstr "Ocupado:"
 
-#. lib/metrics/gpu.js:146
+#. lib/metrics/gpu.js:171
 msgid "Power:"
 msgstr "Potencia:"
 
-#. lib/metrics/gpu.js:147
+#. lib/metrics/gpu.js:172
 msgid "VRAM:"
 msgstr "VRAM:"
 
-#. lib/metrics/gpu.js:148
+#. lib/metrics/gpu.js:173
 msgid "Clock:"
 msgstr "Reloj:"
 
@@ -336,11 +340,13 @@ msgstr "Energía"
 
 #. settings-schema.json->disk->title
 #. settings-schema.json->disk-section->title
+#. settings-schema.json->single-tile-pick->options
 msgid "Disk"
 msgstr "Disco"
 
 #. settings-schema.json->fan->title
 #. settings-schema.json->fan-section->title
+#. settings-schema.json->single-tile-pick->options
 msgid "Fan"
 msgstr "Ventilador"
 
@@ -455,6 +461,54 @@ msgstr "Solo iconos"
 #. settings-schema.json->compact-mode->options
 msgid "Text (always)"
 msgstr "Texto (siempre)"
+
+#. settings-schema.json->single-tile-mode->description
+msgid "Use trigger icon"
+msgstr ""
+
+#. settings-schema.json->single-tile-mode->tooltip
+msgid ""
+"Collapse YASM to a single tile. Hover reveals a floating vertical strip with"
+" all enabled monitors; click the collapsed tile to pin the strip open."
+msgstr ""
+
+#. settings-schema.json->single-tile-pick->description
+msgid "Select trigger icon"
+msgstr ""
+
+#. settings-schema.json->single-tile-pick->tooltip
+msgid ""
+"Which monitor to show as the collapsed tile. Auto picks the first enabled "
+"monitor. Custom shows a static emoji or the YASM icon."
+msgstr ""
+
+#. settings-schema.json->single-tile-pick->options
+msgid "Auto (first enabled)"
+msgstr ""
+
+#. settings-schema.json->single-tile-pick->options
+#, fuzzy
+msgid "Uptime & load"
+msgstr "Mostrar tiempo activo y carga"
+
+#. settings-schema.json->single-tile-pick->options
+#, fuzzy
+msgid "Battery"
+msgstr "Aviso de batería %"
+
+#. settings-schema.json->single-tile-pick->options
+msgid "Custom"
+msgstr ""
+
+#. settings-schema.json->single-tile-custom-text->description
+msgid "Custom trigger content (text or emoji)"
+msgstr ""
+
+#. settings-schema.json->single-tile-custom-text->tooltip
+msgid ""
+"Paste an emoji (or any short text) to use as the collapsed tile. Blank falls"
+" back to the YASM icon."
+msgstr ""
 
 #. settings-schema.json->uptime-enabled->description
 msgid "Show uptime & load"
@@ -572,3 +626,37 @@ msgstr "Chips controladores de ventilador (detectados automáticamente)"
 #. settings-schema.json->gpu-enabled->description
 msgid "Show GPU"
 msgstr "Mostrar GPU"
+
+#. settings-schema.json->gpu-show-igpu->description
+msgid "Show integrated GPU in tile"
+msgstr "Mostrar la GPU integrada en el mosaico"
+
+#. settings-schema.json->gpu-show-igpu->tooltip
+msgid ""
+"When both a dedicated and an integrated GPU are present, show both values in"
+" the tile"
+msgstr ""
+"Cuando hay una GPU dedicada y una integrada, mostrar ambos valores en el "
+"mosaico"
+
+#. settings-schema.json->gpu-custom-labels->description
+msgid "Use custom labels"
+msgstr "Usar etiquetas personalizadas"
+
+#. settings-schema.json->gpu-label-igpu->description
+msgid "Integrated GPU label"
+msgstr "Etiqueta de la GPU integrada"
+
+#. settings-schema.json->gpu-label-igpu->tooltip
+msgid "Max 6 characters; the colon is added automatically. Blank = i"
+msgstr ""
+"Máximo 6 caracteres; los dos puntos se añaden automáticamente. En blanco = i"
+
+#. settings-schema.json->gpu-label-dgpu->description
+msgid "Dedicated GPU label"
+msgstr "Etiqueta de la GPU dedicada"
+
+#. settings-schema.json->gpu-label-dgpu->tooltip
+msgid "Max 6 characters; the colon is added automatically. Blank = d"
+msgstr ""
+"Máximo 6 caracteres; los dos puntos se añaden automáticamente. En blanco = d"
