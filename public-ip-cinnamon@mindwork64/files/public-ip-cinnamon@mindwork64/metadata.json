@@ -1,0 +1,7 @@
+{
+  "uuid": "public-ip-cinnamon@mindwork64",
+  "name": "Public IP",
+  "description": "Displays the public IP address and country flag, refreshing after network and VPN changes.",
+  "max-instances": 1,
+  "version": "1.0.0"
+}
