@@ -5,7 +5,7 @@ A Cinnamon panel applet that displays Claude API usage limits (5-hour and 7-day)
 ## Features
 
 - Displays 5-hour and 7-day usage percentages in the panel
-- Color-coded text: green (<50%), yellow (50-80%), red (>80%)
+- Color-coded text: green (<70%), yellow (70-85%), red (85%+)
 - Displays extra usage token count when enabled.
 - Configurable polling interval (1-60 minutes, default 5)
 - Tooltip shows reset times and last update time
