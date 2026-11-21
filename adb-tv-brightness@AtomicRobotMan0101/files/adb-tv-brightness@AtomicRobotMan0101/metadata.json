@@ -1,0 +1,7 @@
+{
+    "uuid": "adb-tv-brightness@AtomicRobotMan0101",
+    "name": "ADB TV Brightness",
+    "description": "Control a compatible ADB-connected TV backlight with panel scrolling and a slider. Includes interactive controller discovery.",
+    "max-instances": 1,
+    "version": "1.0.0"
+}
