@@ -1,0 +1,84 @@
+# TURN OFF MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# zablotski, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-07 14:33-0400\n"
+"PO-Revision-Date: 2025-04-07 15:04-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. applet.js:45
+msgid "Turn off monitor"
+msgstr "Apagar el monitor"
+
+#. metadata.json->name
+msgid "Turn Off Monitor"
+msgstr "Apagar el Monitor"
+
+#. metadata.json->description
+msgid "Click on the applet to turn off monitor"
+msgstr "Haz clic en el applet para apagar el monitor"
+
+#. settings-schema.json->General->title
+msgid "General"
+msgstr "General"
+
+#. settings-schema.json->section-mouse->title
+msgid "Mouse"
+msgstr "Ratón"
+
+#. settings-schema.json->section-keybinding->title
+msgid "Shortcuts"
+msgstr "Atajos"
+
+#. settings-schema.json->section-icon->title
+msgid "Icon"
+msgstr "Iconos"
+
+#. settings-schema.json->section-lock->title
+msgid "Screen lock"
+msgstr "Bloqueo de pantalla"
+
+#. settings-schema.json->mouse-deactivation-duration->units
+msgid "seconds"
+msgstr "segundos"
+
+#. settings-schema.json->mouse-deactivation-duration->description
+msgid "Duration of deactivation of the mouse"
+msgstr "Duración de la desactivación del ratón"
+
+#. settings-schema.json->mouse-deactivation-duration->tooltip
+msgid ""
+"To prevent the monitor from turning on too soon after turning it off, the "
+"mouse will be disabled for the number of seconds set here."
+msgstr ""
+"Para evitar que el monitor se encienda demasiado pronto después de apagarlo, "
+"el mouse se desactivará durante la cantidad de segundos establecida aquí."
+
+#. settings-schema.json->keybinding->description
+msgid "Keyboard shortcut to turn off your monitor"
+msgstr "Atajo de teclado para apagar el monitor"
+
+#. settings-schema.json->use-symbolic-icon->description
+msgid "Use a symbolic icon"
+msgstr "Usar un icono simbólico"
+
+#. settings-schema.json->icon-color->description
+msgid "Color of the symbolic icon"
+msgstr "Color del icono simbólico"
+
+#. settings-schema.json->screenlock->description
+msgid "Lock also cinnamon session"
+msgstr "Bloquear también sesión de Cinnamon"

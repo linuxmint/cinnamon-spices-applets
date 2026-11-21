@@ -1,0 +1,80 @@
+# RSSDOCK
+# This file is put in the public domain.
+# lyk4s5, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: rssdock@lyk4s5 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-31 14:40+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:23
+msgid "Loading Newsticker..."
+msgstr "Chargement du fil d'actualité..."
+
+#. applet.js:86
+msgid "No RSS source configured"
+msgstr "Aucune source RSS n'est configurée"
+
+#. metadata.json->name
+msgid "RSSDock"
+msgstr "RSS Dock"
+
+#. metadata.json->description
+msgid "Multi-source RSS news ticker with smooth scrolling and time stamps."
+msgstr ""
+"Fil d'actualité RSS multi-sources avec défilement fluide et horodatage."
+
+#. settings-schema.json->news_sources->description
+msgid "NEWS Sources"
+msgstr "Sources d'informations"
+
+#. settings-schema.json->news_sources->columns->title
+msgid "Source Name"
+msgstr "Nom de la source"
+
+#. settings-schema.json->news_sources->columns->title
+msgid "RSS URL"
+msgstr "URL du fil d'actualité RSS"
+
+#. settings-schema.json->update_interval->units
+msgid "minutes"
+msgstr "minutes"
+
+#. settings-schema.json->update_interval->description
+msgid "Update Frequency"
+msgstr "Fréquence de mise à jour"
+
+#. settings-schema.json->scroll_limit->description
+msgid "Visible Characters"
+msgstr "Nombre de caractères visibles sur le panneau"
+
+#. settings-schema.json->width_multiplier->description
+msgid "Width Multiplier"
+msgstr "Multiplicateur de largeur"
+
+#. settings-schema.json->scroll_speed->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->scroll_speed->description
+msgid "Speed (Low=Fast)"
+msgstr "Vitesse (+Bas = +Rapide)"
+
+#. settings-schema.json->vertical_offset->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->vertical_offset->description
+msgid "Vertical Offset"
+msgstr "Décalage vertical"

@@ -1,0 +1,275 @@
+# APP LAUNCHER
+# This file is put in the public domain.
+# mchilli, 2021
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: app-launcher@mchilli 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-06-11 16:17+0200\n"
+"PO-Revision-Date: 2025-06-13 18:14+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:122
+msgid "All workspaces"
+msgstr "Alle werkruimtes"
+
+#. applet.js:150
+msgid "Edit Applications"
+msgstr "Bewerk applicaties"
+
+#. applet.js:886 applet.js:1199
+msgid "Delete"
+msgstr "Verwijderen"
+
+#. applet.js:887 applet.js:1200
+msgid "Edit"
+msgstr "Bewerken"
+
+#. applet.js:888 applet.js:1201 dialogs.py:111 dialogs.py:262 dialogs.py:327
+#. dialogs.py:416 widgets.py:73
+msgid "Cancel"
+msgstr "Annuleren"
+
+#. dialogs.py:109 dialogs.py:261 dialogs.py:325 dialogs.py:415
+msgid "OK"
+msgstr "OK"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. dialogs.py:112 dialogs.py:263 widgets.py:47 ui/widget.glade:40
+msgid "Name"
+msgstr "Naam"
+
+#. settings-schema.json->list-applications->columns->title
+#. dialogs.py:113 dialogs.py:328
+msgid "Group"
+msgstr "Groep"
+
+#. settings-schema.json->list-applications->columns->title
+#. dialogs.py:114 widgets.py:48 ui/widget.glade:51
+msgid "Command"
+msgstr "Commando"
+
+#. dialogs.py:214 dialogs.py:305
+msgid "Valid name"
+msgstr "Geldige naam"
+
+#. dialogs.py:217 dialogs.py:295
+msgid "The name cannot be empty"
+msgstr "De naam mag niet leeg zijn"
+
+#. dialogs.py:222
+msgid "Valid command"
+msgstr "Geldig commando"
+
+#. dialogs.py:225
+msgid "The command is not valid"
+msgstr "Het commando is niet geldig"
+
+#. dialogs.py:299
+msgid "The name is already used"
+msgstr "Deze naam wordt al gebruikt"
+
+#. dialogs.py:414
+msgid "Which data should be replaced from *.desktop file?"
+msgstr "Welke gegevens moeten worden vervangen in het *.desktop-bestand?"
+
+#. dialogs.py:458
+msgid "really delete?"
+msgstr "echt verwijderen?"
+
+#. dialogs.py:459
+msgid "No"
+msgstr "Nee"
+
+#. dialogs.py:460
+msgid "Yes"
+msgstr "Ja"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+#. widgets.py:46 ui/widget.glade:29
+msgid "Icon"
+msgstr "Pictogram"
+
+#. widgets.py:51
+msgid "Add application"
+msgstr "Applicatie toevoegen"
+
+#. widgets.py:52
+msgid "Add new entry"
+msgstr "Nieuwe invoer toevoegen"
+
+#. widgets.py:55
+msgid "Add separator"
+msgstr "Scheidingsteken toevoegen"
+
+#. widgets.py:58
+msgid "Edit selected entry"
+msgstr "Geselecteerde invoer bewerken"
+
+#. widgets.py:61
+msgid "Duplicate selected entry"
+msgstr "Geselecteerde invoer dupliceren"
+
+#. widgets.py:64
+msgid "Move selected entry up"
+msgstr "Geselecteerde invoer omhoog verplaatsen"
+
+#. widgets.py:67
+msgid "Move selected entry down"
+msgstr "Geselecteerde invoer omlaag verplaatsen"
+
+#. widgets.py:70
+msgid "Remove selected entry"
+msgstr "Geselecteerde invoer verwijderen"
+
+#. widgets.py:76
+msgid "Save?"
+msgstr "Opslaan?"
+
+#. widgets.py:77
+msgid "Save the current configuration"
+msgstr "De huidige configuratie opslaan"
+
+#. widgets.py:230
+msgid "Separator"
+msgstr "Scheidingsteken"
+
+#. metadata.json->name
+msgid "App Launcher"
+msgstr "Applicatie launcher"
+
+#. metadata.json->description
+msgid "A simple App Launcher"
+msgstr "Een eenvoudige applicatie launcher"
+
+#. settings-schema.json->page-applications->title
+#. settings-schema.json->section-applications->title
+msgid "Applications"
+msgstr "Applicaties"
+
+#. settings-schema.json->page-settings-global->title
+#. settings-schema.json->section-settings-global->title
+msgid "Global Settings"
+msgstr "Globale instellingen"
+
+#. settings-schema.json->page-settings-application->title
+#. settings-schema.json->section-settings-applications->title
+msgid "Application Settings"
+msgstr "Applicatie-instellingen"
+
+#. settings-schema.json->visible-launcher-label->description
+msgid "Show Label"
+msgstr "Label tonen"
+
+#. settings-schema.json->launcher-label->description
+msgid "Label"
+msgstr "Label"
+
+#. settings-schema.json->custom-launcher-icon->description
+msgid "Custom Icon"
+msgstr "Aangepast pictogram"
+
+#. settings-schema.json->notification-enabled->description
+msgid "Show Notifications"
+msgstr "Meldingen tonen"
+
+#. settings-schema.json->notification-enabled->tooltip
+msgid "Show notification on application launch"
+msgstr "Melding tonen bij het starten van de applicatie"
+
+#. settings-schema.json->notification-text->description
+msgid "Notification Text"
+msgstr "Tekst van de melding"
+
+#. settings-schema.json->notification-text->tooltip
+msgid "%s will be your application name"
+msgstr "%s wordt de naam van je applicatie"
+
+#. settings-schema.json->hotkeys-enabled->description
+msgid "Enable Hotkeys"
+msgstr "Schakel sneltoetsen in"
+
+#. settings-schema.json->hotkey-bindings->description
+msgid "Show menu"
+msgstr "Menu tonen"
+
+#. settings-schema.json->hotkey-bindings->tooltip
+msgid "Set keybinding(s) to show the menu"
+msgstr "Sneltoets(en) instellen om het menu te tonen"
+
+#. settings-schema.json->menu-at-pointer->description
+msgid "Menu at mouse position"
+msgstr "Menu op muispositie"
+
+#. settings-schema.json->menu-at-pointer->tooltip
+msgid "Show the menu next to the cursor when triggered by hotkey"
+msgstr "Toon het menu naast de cursor indien geactiveerd door sneltoets"
+
+#. settings-schema.json->open-by-hover->description
+msgid "Open menus by hovering over them"
+msgstr "Menu’s openen door er met de muis over te bewegen"
+
+#. settings-schema.json->open-by-hover->tooltip
+msgid "Open all menus when you move the mouse pointer over them"
+msgstr "Alle menu’s openen wanneer je de muisaanwijzer erover beweegt"
+
+#. settings-schema.json->open-by-hover-delay->description
+msgid "Hover delay"
+msgstr "Vertraging bij er met de muis over te bewegen"
+
+#. settings-schema.json->open-by-hover-delay->units
+msgid "milliseconds"
+msgstr "milliseconden"
+
+#. settings-schema.json->bind-to-workspace->description
+msgid "Bind to workspace"
+msgstr "Koppelen aan werkruimte"
+
+#. settings-schema.json->bind-to-workspace->tooltip
+msgid "Show the applet only on the selected workspace"
+msgstr "Toon de applet alleen op de geselecteerde werkruimte"
+
+#. settings-schema.json->fixed-menu-width->description
+msgid "Fixed Menu Width"
+msgstr "Vaste menubreedte"
+
+#. settings-schema.json->fixed-menu-width->tooltip
+msgid "Based on the largest submenu item, to prevent menu width flickering"
+msgstr ""
+"Gebaseerd op het grootste submenu-item, om het knipperen van de menubreedte "
+"te voorkomen"
+
+#. settings-schema.json->visible-app-icons->description
+msgid "Show Application Icons"
+msgstr "Applicatiepictogrammen tonen"
+
+#. settings-schema.json->visible-app-icons->tooltip
+msgid "Show Application Icons in Popup-Menu"
+msgstr "Applicatiepictogrammen tonen in het pop-upmenu"
+
+#. settings-schema.json->use-symbolic-icons->description
+msgid "Use Symbolic Application Icons"
+msgstr "Symbolische applicatiepictogrammen gebruiken"
+
+#. settings-schema.json->use-symbolic-icons->tooltip
+msgid "Use Symbolic Application Icons, where it's possible"
+msgstr "Symbolische applicatiepictogrammen gebruiken, waar mogelijk"
+
+#. settings-schema.json->app-icon-size->description
+msgid "Application Icon Size"
+msgstr "Grootte van applicatiepictogram"
+
+#. settings-schema.json->app-icon-size->tooltip
+msgid "Set Icon size"
+msgstr "Pictogramgrootte instellen"

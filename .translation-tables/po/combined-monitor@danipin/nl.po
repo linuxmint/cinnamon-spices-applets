@@ -1,0 +1,367 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Combined Monitor Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 21:36+0100\n"
+"PO-Revision-Date: 2025-12-15 21:49+0100\n"
+"Last-Translator: Automated Translator <example@example.com>\n"
+"Language-Team: Dutch <nl@li.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "Sleuf 1 (Standaard)"
+
+msgid "Slot 2 (Empty)"
+msgstr "Sleuf 2 (Leeg)"
+
+msgid "Slot 3 (Empty)"
+msgstr "Sleuf 3 (Leeg)"
+
+msgid "Separator"
+msgstr "Scheidingsteken"
+
+msgid "No Separator"
+msgstr "Geen Scheidingsteken"
+
+msgid "Symbols"
+msgstr "Symbolen"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "Icon-White"
+msgstr "Icoon-Wit"
+
+msgid "Icon-Dark"
+msgstr "Icoon-Donker"
+
+msgid "No Symbol (Text Label)"
+msgstr "Geen Symbool (Tekstlabel)"
+
+msgid "TEMP"
+msgstr "TEMP"
+
+msgid "RAM"
+msgstr "RAM"
+
+msgid "SWAP"
+msgstr "SWAP"
+
+msgid "Profile Management"
+msgstr "Profielbeheer"
+
+msgid "Activate (Load)"
+msgstr "Activeren (Laden)"
+
+msgid "Save Current Settings"
+msgstr "Huidige Instellingen Opslaan"
+
+msgid "System Monitor"
+msgstr "Systeemmonitor"
+
+msgid "Restart Cinnamon"
+msgstr "Cinnamon Herstarten"
+
+msgid "Profile Saved: %s"
+msgstr "Profiel Opgeslagen: %s"
+
+msgid "Active: %s"
+msgstr "Actief: %s"
+
+msgid "N/A"
+msgstr "N.V.T."
+
+# settings-schema.json strings (Descriptions, Tooltips, Options)
+
+# Page Titles
+msgid "CPU Temperature"
+msgstr "CPU Temperatuur"
+
+msgid "Profiles"
+msgstr "Profielen"
+
+msgid "General"
+msgstr "Algemeen"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "Volgorde van Metingen"
+
+msgid "Display"
+msgstr "Weergave"
+
+msgid "Thresholds"
+msgstr "Drempels"
+
+msgid "Colors"
+msgstr "Kleuren"
+
+msgid "Thresholds (in °C)"
+msgstr "Drempels (in °C)"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "Profielen (Sleuven 1 tot 3)"
+
+msgid "Global"
+msgstr "Globaal"
+
+# CPU
+msgid "Show CPU"
+msgstr "Toon CPU"
+
+msgid "Text for CPU"
+msgstr "Tekst voor CPU"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "Aangepast symbool/icoon voor CPU. Leeg laten voor tekstlabel."
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "Toon percentageteken (%) voor CPU"
+
+msgid "If disabled, only the value (e.g., '45') is displayed without the percentage sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in the 'General' tab acts as a master switch."
+msgstr "Indien uitgeschakeld, wordt alleen de waarde (bijv. '45') weergegeven zonder het percentageteken (bijv. '45%'). De optie 'Toon percentageteken (%) (Hoofdschakelaar)' in het tabblad 'Algemeen' fungeert als hoofdschakelaar."
+
+msgid "Threshold LOW"
+msgstr "Drempel LAAG"
+
+msgid "The LOW color is used below this value"
+msgstr "De LAAG-kleur wordt gebruikt onder deze waarde"
+
+msgid "Threshold MED"
+msgstr "Drempel MIDDEN"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "De MIDDEN-kleur wordt gebruikt tussen LAAG en MIDDEN"
+
+msgid "Threshold HIGH"
+msgstr "Drempel HOOG"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "De HOOG-kleur wordt gebruikt tussen MIDDEN en HOOG"
+
+msgid "Enable color change for CPU"
+msgstr "Schakel kleurverandering voor CPU in"
+
+msgid "Color LOW"
+msgstr "Kleur LAAG"
+
+msgid "Color MED"
+msgstr "Kleur MIDDEN"
+
+msgid "Color HIGH"
+msgstr "Kleur HOOG"
+
+msgid "Color CRITICAL"
+msgstr "Kleur KRITIEK"
+
+msgid "Used above the HIGH threshold"
+msgstr "Gebruikt boven de HOOG-drempel"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "Toon Temperatuur"
+
+msgid "Enables the display of CPU temperature. **Important:** On many systems, installing the 'lm-sensors' package and running 'sudo sensors-detect' is necessary for this function to work correctly. Please refer to the instructions in the README.md."
+msgstr "Schakelt de weergave van de CPU-temperatuur in. **Belangrijk:** Op veel systemen is het noodzakelijk om het pakket 'lm-sensors' te installeren en 'sudo sensors-detect' uit te voeren om deze functie correct te laten werken. Raadpleeg de instructies in de README.md."
+
+msgid "Show °C symbol"
+msgstr "Toon °C symbool"
+
+msgid "Controls whether the Celsius symbol (°C or °F) should be displayed after the value."
+msgstr "Bepaalt of het Celsius-symbool (°C of °F) na de waarde moet worden weergegeven."
+
+msgid "Text for Temperature"
+msgstr "Tekst voor Temperatuur"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr "Aangepast symbool/icoon voor Temperatuur. Leeg laten voor tekstlabel."
+
+msgid "Unit of Measurement"
+msgstr "Meeteenheid"
+
+msgid "Celsius (°C)"
+msgstr "Celsius (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "Fahrenheit (°F)"
+
+msgid "Choose whether the temperature should be displayed in Celsius or Fahrenheit. Threshold values must be adjusted accordingly."
+msgstr "Kies of de temperatuur in Celsius of Fahrenheit moet worden weergegeven. Drempelwaarden moeten dienovereenkomstig worden aangepast."
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr "De LAAG-kleur wordt gebruikt onder deze waarde (geldt voor °C en °F)"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr "De MIDDEN-kleur wordt gebruikt tussen LAAG en MIDDEN (geldt voor °C en °F)"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr "De HOOG-kleur wordt gebruikt tussen MIDDEN en HOOG (geldt voor °C en °F)"
+
+msgid "Enable color change for TEMP"
+msgstr "Schakel kleurverandering voor TEMP in"
+
+msgid "Color LOW (Green)"
+msgstr "Kleur LAAG (Groen)"
+
+msgid "Color MED (Orange)"
+msgstr "Kleur MIDDEN (Oranje)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "Kleur HOOG (Rood-Oranje)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "Kleur KRITIEK (Rood)"
+
+# RAM
+msgid "Show RAM"
+msgstr "Toon RAM"
+
+msgid "Text for RAM"
+msgstr "Tekst voor RAM"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "Aangepast symbool/icoon voor RAM. Leeg laten voor tekstlabel."
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "Toon percentageteken (%) voor RAM"
+
+msgid "Display Mode"
+msgstr "Weergavemodus"
+
+msgid "Percentage Usage (%)"
+msgstr "Percentage Gebruik (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "Gebruikt Geheugen (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "Vrij Geheugen (MB/GB)"
+
+msgid "Choose whether percentage usage or used/free memory in MB/GB should be displayed."
+msgstr "Kies of percentagegebruik of gebruikt/vrij geheugen in MB/GB moet worden weergegeven."
+
+msgid "Enable color change for RAM"
+msgstr "Schakel kleurverandering voor RAM in"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "Toon SWAP"
+
+msgid "Text for SWAP"
+msgstr "Tekst voor SWAP"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr "Aangepast symbool/icoon voor SWAP. Leeg laten voor tekstlabel."
+
+msgid "Only show SWAP when used"
+msgstr "Toon SWAP alleen wanneer gebruikt"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr "Indien actief, wordt SWAP alleen getoond wanneer het gebruik groter is dan 0%."
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "Toon percentageteken (%) voor SWAP"
+
+msgid "Enable color change for SWAP"
+msgstr "Schakel kleurverandering voor SWAP in"
+
+msgid "If the value is less than or equal to the LOW threshold, the LOW color is used."
+msgstr "Als de waarde kleiner of gelijk is aan de LAAG-drempel, wordt de LAAG-kleur gebruikt."
+
+msgid "If the value is greater than LOW and less than or equal to the MED threshold, the MED color is used."
+msgstr "Als de waarde groter is dan LAAG en kleiner of gelijk is aan de MIDDEN-drempel, wordt de MIDDEN-kleur gebruikt."
+
+msgid "If the value is greater than MED and less than or equal to the HIGH threshold, the HIGH color is used."
+msgstr "Als de waarde groter is dan MIDDEN en kleiner of gelijk is aan de HOOG-drempel, wordt de HOOG-kleur gebruikt."
+
+# Order
+msgid "CPU Position"
+msgstr "CPU Positie"
+
+msgid "Position 1 (Left)"
+msgstr "Positie 1 (Links)"
+
+msgid "Position 2"
+msgstr "Positie 2"
+
+msgid "Position 3"
+msgstr "Positie 3"
+
+msgid "Position 4 (Right)"
+msgstr "Positie 4 (Rechts)"
+
+msgid "Defines the display position of CPU. The position is automatically swapped with the metric at the same position."
+msgstr "Definieert de weergavepositie van CPU. De positie wordt automatisch verwisseld met de meting op dezelfde positie."
+
+msgid "TEMP Position"
+msgstr "TEMP Positie"
+
+msgid "RAM Position"
+msgstr "RAM Positie"
+
+msgid "SWAP Position"
+msgstr "SWAP Positie"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "Update-interval (ms)"
+
+msgid "Show separator between metrics"
+msgstr "Toon scheidingsteken tussen metingen"
+
+msgid "Separator Text"
+msgstr "Scheidingsteken Tekst"
+
+msgid "Separator Color"
+msgstr "Scheidingsteken Kleur"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "Toon percentageteken (%) (Hoofdschakelaar)"
+
+msgid "If disabled, only the value (e.g., '45') is displayed for all percentage displays without the percentage sign (e.g., '45%'). Individual switches for CPU/RAM/SWAP must also be active."
+msgstr "Indien uitgeschakeld, wordt alleen de waarde (bijv. '45') weergegeven voor alle percentage-weergaven zonder het percentageteken (bijv. '45%'). Individuele schakelaars voor CPU/RAM/SWAP moeten ook actief zijn."
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "Profielbericht Duur (Seconden)"
+
+msgid "How long should the message ('Profile saved', 'Profile active') be displayed in the panel."
+msgstr "Hoe lang moet het bericht ('Profiel opgeslagen', 'Profiel actief') in het paneel worden weergegeven."
+
+msgid "Profile 1 Name"
+msgstr "Profiel 1 Naam"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "Voer een aangepaste profielnaam in het tekstveld in!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr "Klik op 'Activeren' of 'Opslaan' voor Profiel 1 in het pop-upmenu."
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "Opgeslagen gegevens voor Profiel 1 (intern)"
+
+msgid "Profile 2 Name"
+msgstr "Profiel 2 Naam"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr "Klik op 'Activeren' of 'Opslaan' voor Profiel 2 in het pop-upmenu."
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "Opgeslagen gegevens voor Profiel 2 (intern)"
+
+msgid "Profile 3 Name"
+msgstr "Profiel 3 Naam"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr "Klik op 'Activeren' of 'Opslaan' voor Profiel 3 in het pop-upmenu."
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "Opgeslagen gegevens voor Profiel 3 (intern)"

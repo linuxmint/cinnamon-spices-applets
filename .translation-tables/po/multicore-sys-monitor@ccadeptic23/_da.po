@@ -1,0 +1,144 @@
+# MULTI-CORE SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ccadeptic23, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-05 22:42+0100\n"
+"PO-Revision-Date: 2026-08-03 08:48+0200\n"
+"Last-Translator: Alan Mortensen <over.tackiness223@passinbox.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: po\n"
+
+#. 5.6->settings-schema.json->sectionSystemMonitor->title
+msgid "System Monitor"
+msgstr ""
+
+#. 5.6->settings-schema.json->sectionCPUStuckProcess->title
+msgid "Detection of Stuck Processes"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipBorderRadiusTopLeft->units
+#. 5.6->settings-schema.json->tooltipBorderRadiusTopRight->units
+msgid "px"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipBorderRadiusTopLeft->description
+msgid "Border Radius Top-Left and Bottom-Right"
+msgstr ""
+
+#. 5.6->settings-schema.json->tooltipBorderRadiusTopRight->description
+msgid "Border Radius Top-Right and Bottom-Left"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_explanationStuckProcess->description
+msgid ""
+"There are several ways to detect stuck processes:\n"
+"- through the kernel; this is reported immediately.\n"
+"- through analyzis of each CPU's activity; this is reported when at least "
+"one CPU exceeds the specified activity threshold for the set time limit.\n"
+"- through either method; the response time depends on how the stuck process "
+"was detected."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_alertWhenStuckProcess->description
+msgid "Change the background color when at least one process is stuck"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->description
+msgid "Method used to detect stuck processes"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->options
+msgid "Only from the kernel"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->options
+msgid "Only by checking the activity of each processor"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_stuckMethod->options
+msgid "Both methods"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_minLoadStuckProcess->description
+msgid "Consider a process to be stuck when core's load exceeds (%)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_minLoadStuckProcess->tooltip
+#. 5.6->settings-schema.json->CPU_durationStuckProcess->tooltip
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->tooltip
+msgid "Does not concern stuck processes detected by the kernel."
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_durationStuckProcess->description
+msgid "Consider a process to be stuck after (in Selected Unit)"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->description
+msgid "Selected Unit"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->options
+msgid "seconds"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->options
+msgid "minutes"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_unitStuckProcess->options
+msgid "hours"
+msgstr ""
+
+#. 5.6->settings-schema.json->CPU_bgColorStuckProcess->description
+msgid "Background Color when a process is stuck"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonWhichOne->description
+msgid "Which System Monitor"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonWhichOne->options
+msgid "System Default"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonWhichOne->options
+msgid "Custom"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonPath->description
+msgid "Complete name of a .desktop file or a flatpak id"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonPath->tooltip
+msgid ""
+"EXAMPLES:\n"
+"gnome-system-monitor.desktop\n"
+"org.gnome.SystemMonitor.desktop\n"
+"io.github.hakandundar34coding.system-monitoring-center"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonMouseButton->description
+msgid "Which mouse button opens your System Monitor"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonMouseButton->options
+msgid "Middle"
+msgstr ""
+
+#. 5.6->settings-schema.json->SysMonMouseButton->options
+msgid "Both"
+msgstr ""

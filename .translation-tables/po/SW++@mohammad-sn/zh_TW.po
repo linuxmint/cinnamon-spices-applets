@@ -1,0 +1,126 @@
+# SHOW DESKTOP ++
+# This file is put in the public domain.
+# mohammad-sn, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SW++@mohammad-sn 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-09-13 02:31+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:102
+msgid "desktop"
+msgstr "桌面"
+
+#. applet.js:316
+msgid "No open windows"
+msgstr "沒有開啟的視窗"
+
+#. applet.js:326
+msgid "Expo"
+msgstr "Expo"
+
+#. metadata.json->description
+msgid ""
+"click to show/hide desktop, scroll to switch workspace and windows quick "
+"list by right click"
+msgstr ""
+"點選顯示或隱藏桌面，捲動可切換工作區，右鍵點選顯示視窗快速清單"
+
+#. metadata.json->name
+msgid "Show desktop ++"
+msgstr "顯示桌面 ++"
+
+#. settings-schema.json->head->description
+msgid "Appearance"
+msgstr "外觀"
+
+#. settings-schema.json->icon-name->description
+msgid "The icon to use in the panel:"
+msgstr "在面板中使用的圖示："
+
+#. settings-schema.json->icon-name->tooltip
+msgid ""
+"Select an icon file, or you can type an icon name into the entry box, for "
+"example: desktop"
+msgstr ""
+"選擇圖示檔案，或在輸入欄位輸入圖示名稱，例如： desktop"
+
+#. settings-schema.json->width->units
+msgid "pixels"
+msgstr "畫素"
+
+#. settings-schema.json->width->description
+msgid "Applet width in the panel:"
+msgstr "小程式在面板中的寬度："
+
+#. settings-schema.json->width->tooltip
+msgid ""
+"Increase or decrease this spinner value to make the applet wider or narrower "
+"in the panel"
+msgstr ""
+"增加或減少此數值，以調整小程式在面板中的寬度"
+
+#. settings-schema.json->color->description
+msgid "The background color for the applet hover:"
+msgstr "滑鼠游標移至小程式上方時的背景顏色："
+
+#. settings-schema.json->color->tooltip
+msgid "Click the button to select a new background color for applet"
+msgstr "點選按鈕為小程式選擇新的背景顏色"
+
+#. settings-schema.json->highlight->description
+msgid "Highlight applet next time it is added to the panel"
+msgstr "下次將小程式加入面板時進行強調顯示"
+
+#. settings-schema.json->head1->description
+msgid "Menu options"
+msgstr "選單選項"
+
+#. settings-schema.json->closebuttons->description
+msgid "Show close buttons"
+msgstr "顯示關閉按鈕"
+
+#. settings-schema.json->closeallbuttons->description
+msgid "Show close all windows buttons for workspaces"
+msgstr "為工作區顯示關閉所有視窗按鈕"
+
+#. settings-schema.json->SHOW-MENU-ON-CLOSE->description
+msgid "Keep menu open while closing windows"
+msgstr "關閉視窗時保持選單開啟"
+
+#. settings-schema.json->head2->description
+msgid "Peek at desktop"
+msgstr "預覽桌面"
+
+#. settings-schema.json->peekatdesktop->description
+msgid "Opacify windows on hover"
+msgstr "滑鼠游標移至視窗上方時降低不透明度"
+
+#. settings-schema.json->peekatdesktop->tooltip
+msgid "Take a glance at your desktop and desklets."
+msgstr "快速預覽桌面與桌面小工具。"
+
+#. settings-schema.json->alsoopacifyskiptaskbar->description
+msgid "Opacify the icons on the desktop"
+msgstr "降低桌面圖示不透明度"
+
+#. settings-schema.json->alsoopacifydesklets->description
+msgid "Opacify desklets"
+msgstr "降低桌面小工具不透明度"
+
+#. settings-schema.json->peekopacity->description
+msgid "Opacity on hover:"
+msgstr "滑鼠游標移至上方時的不透明度："
+
+#. settings-schema.json->blur->description
+msgid "Blur windows on hover"
+msgstr "滑鼠游標移到視窗上方時讓視窗變模糊"

@@ -1,0 +1,36 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:33
+msgid "American Sign Language"
+msgstr ""
+
+#: applet.js:56
+msgid "Alphabet"
+msgstr ""
+
+#: applet.js:59 applet.js:65 applet.js:71 applet.js:77 applet.js:83
+#: applet.js:89 applet.js:95 applet.js:101 applet.js:107 applet.js:113
+#: applet.js:119 applet.js:125 applet.js:131 applet.js:137 applet.js:143
+#: applet.js:149 applet.js:155 applet.js:161 applet.js:167 applet.js:173
+#: applet.js:179 applet.js:185 applet.js:191 applet.js:197 applet.js:203
+#: applet.js:209
+msgid "Letter"
+msgstr ""
+
+#: applet.js:320
+msgid "Check more vocabulary"
+msgstr ""
+
+#. metadata.json->name
+msgid "American Sign Language vocabulary"
+msgstr ""
+
+#. metadata.json->description
+msgid "Information to American Sign Language vocabulary"
+msgstr ""

@@ -1,0 +1,321 @@
+# SYSTEM MONITOR
+# This file is put in the public domain.
+# orcuscz, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sysmonitor@orcus 1.6.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-22 07:52-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: KURASAWA Nozomu (nabetaro) <nabetaro@caldron.jp>\n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+
+#. 3.0/providers.js:49 3.2/providers.js:56
+msgid "CPU:"
+msgstr "CPU:"
+
+#. 3.0/providers.js:75 3.0/providers.js:101 3.2/providers.js:82
+#. 3.2/providers.js:108
+msgid " MB"
+msgstr " MB"
+
+#. 3.0/providers.js:80 3.2/providers.js:87
+msgid "Memory:"
+msgstr "メモリ:"
+
+#. 3.0/providers.js:106 3.2/providers.js:113
+msgid "Swap:"
+msgstr "スワップ:"
+
+#. 3.0/providers.js:152 3.2/providers.js:160
+msgid " KB/s"
+msgstr " KB/s"
+
+#. 3.0/providers.js:157 3.2/providers.js:165
+msgid "Network D/U:"
+msgstr "ネットワーク D/U:"
+
+#. 3.0/providers.js:196 3.2/providers.js:204
+msgid "Load average:"
+msgstr "ロードアベレージ:"
+
+#. metadata.json->description
+msgid "Displays CPU, memory, swap and network usage and load in graphs"
+msgstr "CPU・メモリ・スワップ・ネットワークの使用量・負荷をグラフ表示"
+
+#. metadata.json->name
+msgid "System Monitor"
+msgstr "システムモニター"
+
+#. 3.0->settings-schema.json->header_common->description
+#. 3.2->settings-schema.json->common->title
+msgid "Common"
+msgstr "共通"
+
+#. 3.0->settings-schema.json->onclick_program->description
+#. 3.2->settings-schema.json->onclick_program->description
+msgid "Program to launch on click"
+msgstr "クリック時に起動するプログラム"
+
+#. 3.0->settings-schema.json->smooth->description
+#. 3.2->settings-schema.json->smooth->description
+msgid "Smooth graphs"
+msgstr "グラフをなめらかに"
+
+#. 3.0->settings-schema.json->draw_border->description
+#. 3.2->settings-schema.json->draw_border->description
+msgid "Draw border"
+msgstr "枠線描画"
+
+#. 3.0->settings-schema.json->graph_width->description
+#. 3.2->settings-schema.json->graph_width->description
+msgid "Common graph width"
+msgstr "共通グラフ幅"
+
+#. 3.0->settings-schema.json->graph_width->units
+#. 3.0->settings-schema.json->graph_spacing->units
+#. 3.0->settings-schema.json->padding_lr->units
+#. 3.0->settings-schema.json->padding_tb->units
+#. 3.0->settings-schema.json->cpu_graph_width->units
+#. 3.0->settings-schema.json->mem_graph_width->units
+#. 3.0->settings-schema.json->swap_graph_width->units
+#. 3.0->settings-schema.json->net_graph_width->units
+#. 3.0->settings-schema.json->load_graph_width->units
+#. 3.2->settings-schema.json->graph_width->units
+#. 3.2->settings-schema.json->graph_spacing->units
+#. 3.2->settings-schema.json->padding_lr->units
+#. 3.2->settings-schema.json->padding_tb->units
+#. 3.2->settings-schema.json->cpu_graph_width->units
+#. 3.2->settings-schema.json->mem_graph_width->units
+#. 3.2->settings-schema.json->swap_graph_width->units
+#. 3.2->settings-schema.json->net_graph_width->units
+#. 3.2->settings-schema.json->load_graph_width->units
+msgid "pixels"
+msgstr "ピクセル"
+
+#. 3.0->settings-schema.json->graph_width->tooltip
+#. 3.2->settings-schema.json->graph_width->tooltip
+msgid ""
+"If the applet is in a vertical panel, this sets the graph height. The graph "
+"width is then the panel width minus padding"
+msgstr ""
+"垂直パネルに表示する場合、グラフの高さを設定します。グラフ幅はパネル幅からパ"
+"ディングを引いたものになります。"
+
+#. 3.0->settings-schema.json->graph_spacing->description
+#. 3.2->settings-schema.json->graph_spacing->description
+msgid "Graph spacing"
+msgstr "グラフ間隔"
+
+#. 3.0->settings-schema.json->graph_spacing->tooltip
+#. 3.2->settings-schema.json->graph_spacing->tooltip
+msgid ""
+"The number of pixels between each graph. Can be set to -1 to allow single "
+"line borders between graphs if borders are enabled"
+msgstr ""
+"グラフ間のピクセル数です。枠線が有効な場合、-1に設定するとグラフ間を1本の線で"
+"描画します。"
+
+#. 3.0->settings-schema.json->refresh_rate->description
+#. 3.2->settings-schema.json->refresh_rate->description
+msgid "Refresh rate"
+msgstr "リフレッシュレート"
+
+#. 3.0->settings-schema.json->refresh_rate->units
+#. 3.2->settings-schema.json->refresh_rate->units
+msgid "ms"
+msgstr "ミリ秒"
+
+#. 3.0->settings-schema.json->use_padding->description
+#. 3.2->settings-schema.json->use_padding->description
+msgid "Use custom applet padding"
+msgstr "カスタムアプレットパディングを使用"
+
+#. 3.0->settings-schema.json->padding_lr->description
+#. 3.2->settings-schema.json->padding_lr->description
+msgid "Left/right padding"
+msgstr "左右のパディング"
+
+#. 3.0->settings-schema.json->padding_tb->description
+#. 3.2->settings-schema.json->padding_tb->description
+msgid "Top/bottom padding"
+msgstr "上下のパディング"
+
+#. 3.0->settings-schema.json->bg_color->description
+#. 3.2->settings-schema.json->bg_color->description
+msgid "Background color"
+msgstr "背景色"
+
+#. 3.0->settings-schema.json->border_color->description
+#. 3.2->settings-schema.json->border_color->description
+msgid "Border color"
+msgstr "枠線色"
+
+#. 3.0->settings-schema.json->header_cpu->description
+#. 3.2->settings-schema.json->cpu->title
+msgid "CPU"
+msgstr "CPU"
+
+#. 3.0->settings-schema.json->cpu_enabled->description
+#. 3.0->settings-schema.json->mem_enabled->description
+#. 3.0->settings-schema.json->swap_enabled->description
+#. 3.0->settings-schema.json->net_enabled->description
+#. 3.0->settings-schema.json->load_enabled->description
+#. 3.2->settings-schema.json->cpu_enabled->description
+#. 3.2->settings-schema.json->mem_enabled->description
+#. 3.2->settings-schema.json->swap_enabled->description
+#. 3.2->settings-schema.json->net_enabled->description
+#. 3.2->settings-schema.json->load_enabled->description
+msgid "Enable"
+msgstr "有効"
+
+#. 3.0->settings-schema.json->cpu_override_graph_width->description
+#. 3.0->settings-schema.json->mem_override_graph_width->description
+#. 3.0->settings-schema.json->swap_override_graph_width->description
+#. 3.0->settings-schema.json->net_override_graph_width->description
+#. 3.0->settings-schema.json->load_override_graph_width->description
+#. 3.2->settings-schema.json->cpu_override_graph_width->description
+#. 3.2->settings-schema.json->mem_override_graph_width->description
+#. 3.2->settings-schema.json->swap_override_graph_width->description
+#. 3.2->settings-schema.json->net_override_graph_width->description
+#. 3.2->settings-schema.json->load_override_graph_width->description
+msgid "Override graph width"
+msgstr "グラフ幅を上書き"
+
+#. 3.0->settings-schema.json->cpu_graph_width->description
+#. 3.0->settings-schema.json->mem_graph_width->description
+#. 3.0->settings-schema.json->swap_graph_width->description
+#. 3.0->settings-schema.json->net_graph_width->description
+#. 3.0->settings-schema.json->load_graph_width->description
+#. 3.2->settings-schema.json->cpu_graph_width->description
+#. 3.2->settings-schema.json->mem_graph_width->description
+#. 3.2->settings-schema.json->swap_graph_width->description
+#. 3.2->settings-schema.json->net_graph_width->description
+#. 3.2->settings-schema.json->load_graph_width->description
+msgid "Graph width"
+msgstr "グラフ幅"
+
+#. 3.0->settings-schema.json->cpu_tooltip_decimals->description
+#. 3.2->settings-schema.json->cpu_tooltip_decimals->description
+msgid "Show this many decimals in the tooltip"
+msgstr "ツールチップに小数点以下を表示"
+
+#. 3.0->settings-schema.json->cpu_tooltip_decimals->units
+#. 3.2->settings-schema.json->cpu_tooltip_decimals->units
+msgid "decimals"
+msgstr "小数点以下"
+
+#. 3.0->settings-schema.json->cpu_color_0->description
+#. 3.2->settings-schema.json->cpu_color_0->description
+msgid "User color"
+msgstr "User 色"
+
+#. 3.0->settings-schema.json->cpu_color_1->description
+#. 3.2->settings-schema.json->cpu_color_1->description
+msgid "Nice color"
+msgstr "Nice 色"
+
+#. 3.0->settings-schema.json->cpu_color_2->description
+#. 3.2->settings-schema.json->cpu_color_2->description
+msgid "Kernel color"
+msgstr "Kernel 色"
+
+#. 3.0->settings-schema.json->cpu_color_3->description
+#. 3.2->settings-schema.json->cpu_color_3->description
+msgid "IOWait color"
+msgstr "IOWait 色"
+
+#. 3.0->settings-schema.json->header_mem->description
+#. 3.2->settings-schema.json->mem->title
+msgid "Memory"
+msgstr "メモリ"
+
+#. 3.0->settings-schema.json->mem_color_0->description
+#. 3.0->settings-schema.json->swap_color_0->description
+#. 3.2->settings-schema.json->mem_color_0->description
+#. 3.2->settings-schema.json->swap_color_0->description
+msgid "Used color"
+msgstr "使用済色"
+
+#. 3.0->settings-schema.json->mem_color_1->description
+#. 3.2->settings-schema.json->mem_color_1->description
+msgid "Cached color"
+msgstr "キャッシュ色"
+
+#. 3.0->settings-schema.json->header_swap->description
+#. 3.2->settings-schema.json->swap->title
+msgid "Swap"
+msgstr "スワップ"
+
+#. 3.0->settings-schema.json->header_net->description
+#. 3.2->settings-schema.json->net->title
+msgid "Network"
+msgstr "ネットワーク"
+
+#. 3.0->settings-schema.json->net_color_0->description
+#. 3.2->settings-schema.json->net_color_0->description
+msgid "Download color"
+msgstr "ダウンロード色"
+
+#. 3.0->settings-schema.json->net_color_1->description
+#. 3.2->settings-schema.json->net_color_1->description
+msgid "Upload color"
+msgstr "アップロード色"
+
+#. 3.0->settings-schema.json->header_load->description
+#. 3.2->settings-schema.json->load->title
+msgid "Load"
+msgstr "負荷"
+
+#. 3.0->settings-schema.json->load_color_0->description
+#. 3.2->settings-schema.json->load_color_0->description
+msgid "Color"
+msgstr "色"
+
+#. 3.2->settings-schema.json->common_g->title
+#. 3.2->settings-schema.json->cpu_g->title
+#. 3.2->settings-schema.json->mem_g->title
+#. 3.2->settings-schema.json->swap_g->title
+#. 3.2->settings-schema.json->net_g->title
+#. 3.2->settings-schema.json->load_g->title
+msgid "General"
+msgstr "全般"
+
+#. 3.2->settings-schema.json->common_c->title
+#. 3.2->settings-schema.json->cpu_c->title
+#. 3.2->settings-schema.json->mem_c->title
+#. 3.2->settings-schema.json->swap_c->title
+#. 3.2->settings-schema.json->net_c->title
+#. 3.2->settings-schema.json->load_c->title
+msgid "Colors"
+msgstr "色"
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->description
+msgid "Minimum graph scale"
+msgstr "最小グラフ縮尺"
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->units
+msgid "Mb/s"
+msgstr "Mb/s"
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->tooltip
+msgid ""
+"The minimum scale for the graph in Megabits per second.\n"
+"The graph will not scale below this minimum, but it will automatically scale "
+"if the network speed exceeds this value.\n"
+"\n"
+"To always automatically scale, set the value to 0."
+msgstr ""
+"グラフの最小の目盛を毎秒メガバイトで指定します。\n"
+"グラフはこの最小値以下では拡大縮小されませんが、この値を超えると、自動的に拡"
+"大縮小が行われます。\n"
+"\n"
+"常に自動で拡大縮小するためには 0 を指定してください。"

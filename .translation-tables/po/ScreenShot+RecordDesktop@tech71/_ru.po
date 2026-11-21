@@ -1,0 +1,15 @@
+# SCREENSHOT+RECORD DESKTOP
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# tech71, 2016
+#
+msgid ""
+msgstr ""
+
+#. applet.js:27
+msgid "ScreenShot"
+msgstr ""
+
+#. applet.js:67 applet.js:73 applet.js:80 applet.js:86
+msgid "Recording"
+msgstr ""

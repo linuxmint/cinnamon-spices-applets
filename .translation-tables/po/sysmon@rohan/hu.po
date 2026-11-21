@@ -1,0 +1,107 @@
+# SYSTEM MONITOR
+# This file is put in the public domain.
+# 222rohan, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sysmon@rohan 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-15 01:04+0530\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:20
+msgid "Required GTop package missing!: "
+msgstr "A szükséges GTop csomag hiányzik!: "
+
+#. applet.js:36
+msgid "Error!"
+msgstr "Hiba!"
+
+#. applet.js:42
+msgid "Required GTop package missing!"
+msgstr "A szükséges GTop csomag hiányzik!"
+
+#. applet.js:47
+msgid "Clear Cache"
+msgstr "Gyorsítótár törlése"
+
+#. applet.js:157
+msgid "CPUs"
+msgstr "CPU-k"
+
+#. applet.js:169
+msgid "Memory"
+msgstr "Memória"
+
+#. applet.js:169
+msgid "GB"
+msgstr "GB"
+
+#. applet.js:169
+msgid "GB swap"
+msgstr "GB cserehely"
+
+#. applet.js:257
+msgid "Core "
+msgstr "Mag "
+
+#. applet.js:299
+msgid "Used:   "
+msgstr "Használt:   "
+
+#. applet.js:299 applet.js:300 applet.js:301 applet.js:302 applet.js:305
+msgid " GB"
+msgstr " GB"
+
+#. applet.js:300
+msgid "Cache:  "
+msgstr "Gyorsítótár:  "
+
+#. applet.js:301
+msgid "Buffer: "
+msgstr "Puffer: "
+
+#. applet.js:302
+msgid "Free:   "
+msgstr "Szabad:   "
+
+#. applet.js:305
+msgid "Swap:   "
+msgstr "Cserehely:   "
+
+#. metadata.json->name
+msgid "System Monitor"
+msgstr "Rendszerfigyelő"
+
+#. metadata.json->description
+msgid "Display CPU and Memory Usage."
+msgstr "CPU és memória használatának megjelenítése."
+
+#. settings-schema.json->displayCpu->description
+msgid "Show CPU usage"
+msgstr "CPU-használat megjelenítése"
+
+#. settings-schema.json->displayRam->description
+msgid "Show RAM usage"
+msgstr "RAM-használat megjelenítése"
+
+#. settings-schema.json->toggleRam->description
+msgid "Display RAM usage in Bytes"
+msgstr "RAM-használat megjelenítése bájtban"
+
+#. settings-schema.json->updateInterval->units
+msgid "seconds"
+msgstr "másodperc"
+
+#. settings-schema.json->updateInterval->description
+msgid "Update Interval:"
+msgstr "Frissítési időköz:"

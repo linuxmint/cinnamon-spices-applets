@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2017-11-09 13:47+0200\n"
+"PO-Revision-Date: 2025-09-19 02:51+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:46
+msgid "Tor network"
+msgstr "Tor 網路"
+
+#: applet.js:50
+msgid "Rebuild chain"
+msgstr "重建鏈路"
+
+#: applet.js:82 applet.js:143
+msgid "Tor disabled"
+msgstr "Tor 已停用"
+
+#: applet.js:88 applet.js:107 applet.js:126 applet.js:154
+msgid "Error"
+msgstr "錯誤"
+
+#: applet.js:88
+msgid "Unable to parse "
+msgstr "無法解析 "
+
+#: applet.js:107
+msgid "Unable to open configuration file "
+msgstr "無法開啟設定檔 "
+
+#: applet.js:121
+msgid "Process launched."
+msgstr "處理程序已啟動。"
+
+#: applet.js:122
+msgid "Tor enabled"
+msgstr "Tor 已啟用"
+
+#: applet.js:126
+msgid "Unable to start Tor: "
+msgstr "無法啟動 Tor："
+
+#: applet.js:142
+msgid "Process closed."
+msgstr "處理程序已關閉。"
+
+#: applet.js:154
+msgid "Tor is not running."
+msgstr "Tor 並未執行。"
+
+#. tor-button@shatur->settings-schema.json->showNotifications->description
+msgid "Show notifications"
+msgstr "顯示通知"
+
+#. tor-button@shatur->settings-schema.json->showNotifications->tooltip
+msgid "Show notifications when the Tor network is turned on/off."
+msgstr "當 Tor 網路開啟或關閉時顯示通知。"
+
+#. tor-button@shatur->settings-schema.json->torPath->description
+msgid "Tor location path"
+msgstr "Tor 路徑"
+
+#. tor-button@shatur->settings-schema.json->torPath->tooltip
+msgid "Specify the command to launch Tor."
+msgstr "指定啟動 Tor 的指令。"
+
+#. tor-button@shatur->settings-schema.json->torrc-page->title
+msgid "Tor settings"
+msgstr "Tor 設定"
+
+#. tor-button@shatur->settings-schema.json->applet-section->title
+msgid "Settings for applet"
+msgstr "小程式設定"
+
+#. tor-button@shatur->settings-schema.json->applet-page->title
+msgid "Applet settings"
+msgstr "小程式設定"
+
+#. tor-button@shatur->settings-schema.json->torrc-section->title
+msgid "Settings for Tor"
+msgstr "Tor 設定"
+
+#. tor-button@shatur->settings-schema.json->configPath->description
+msgid "Tor config path"
+msgstr "Tor 設定檔路徑"
+
+#. tor-button@shatur->settings-schema.json->configPath->tooltip
+msgid "Specify the path to torrc file."
+msgstr "指定 torrc 檔案的路徑。"
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->description
+msgid "Launch Tor as tor user"
+msgstr "以 tor 使用者身分啟動"
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->tooltip
+msgid ""
+"Launch Tor with polkit as tor user. Needed if you don't have permissions to "
+"launch Tor as normal user."
+msgstr ""
+"透過 polkit 以 tor 使用者身分啟動 Tor。若無權以一般使用者啟動 Tor，請啟用此選"
+"項。"
+
+#. tor-button@shatur->metadata.json->description
+msgid "Applet for Tor network management"
+msgstr "管理 Tor 網路的小程式"
+
+#. tor-button@shatur->metadata.json->name
+msgid "Tor Button"
+msgstr "Tor 按鈕"

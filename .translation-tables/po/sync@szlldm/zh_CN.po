@@ -1,0 +1,34 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-14 01:34+0900\n"
+"PO-Revision-Date: 2025-09-19 03:01+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:48
+msgid "Click to sync"
+msgstr "单击以同步"
+
+#. metadata.json->description
+msgid ""
+"Monitor yet unwritten cached data. Click on the applet to sync (write out "
+"cached data). Useful when copying large files to slow removable medium(e.g. "
+"pendrive)."
+msgstr ""
+"监控尚未写入的缓存数据。单击小程序以同步（写出缓存数据）。"
+"适用于将大型文件复制到较慢的可移动介质（例如：U 盘）。"
+
+#. metadata.json->name
+msgid "Sync"
+msgstr "Sync"

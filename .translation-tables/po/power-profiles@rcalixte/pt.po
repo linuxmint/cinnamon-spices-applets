@@ -1,0 +1,186 @@
+# POWER PROFILES
+# This file is put in the public domain.
+# rcalixte, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: power-profiles@rcalixte 1.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-10-15 02:11-0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.7\n"
+
+#. 5.4/applet.js:28
+msgid "Power Saver"
+msgstr "Economia de Energia"
+
+#. 5.4/applet.js:29
+msgid "Balanced"
+msgstr "Balanceado"
+
+#. 5.4/applet.js:30
+msgid "Performance"
+msgstr "Performance"
+
+#. 5.4/applet.js:63 5.4/applet.js:70
+msgid ""
+"Please make sure the power-profiles-daemon package is installed and the "
+"service is running."
+msgstr ""
+"Por favor garanta que o pacote power-profiles-daemon esteja instalado e o "
+"serviço está correndo."
+
+#. 5.4/applet.js:64
+msgid "exception:"
+msgstr "exceção:"
+
+#. 5.4/applet.js:117
+msgid "Power Profiles Applet Error"
+msgstr "Erro do Applet de Perfil de Energia"
+
+#. 5.4/applet.js:118
+msgid ""
+"The system package 'power-profiles-daemon' is not installed.\n"
+"\n"
+"Please install it and reload the applet."
+msgstr ""
+"O pacote 'power-profiles-daemon' não está instalado no sistema.\n"
+"\n"
+"Por favor instale esse pacote e recarregue o applet."
+
+#. 5.4/applet.js:120
+msgid "Open README"
+msgstr "Abrir README"
+
+#. 5.4/applet.js:121
+msgid "Open Website"
+msgstr "Abrir Website"
+
+#. 5.4/applet.js:151
+msgid "Current Profile:"
+msgstr "Perfil Atual:"
+
+#. 5.4/applet.js:156
+msgid "Performance Degraded:"
+msgstr "Degradação de Performanção:"
+
+#. 5.4/applet.js:167
+msgid "Active Profile Holds:"
+msgstr "O Perfil Ativo Tem:"
+
+#. metadata.json->description
+msgid ""
+"An applet to modify the current system power profile as determined by power-"
+"profiles-daemon"
+msgstr ""
+"Um applet para modificar o perfil de energia atual do sistema, tal como "
+"determinado pelo power-profiles-daemon"
+
+#. metadata.json->name
+msgid "Power Profiles"
+msgstr "Perfil de Energia"
+
+#. 5.4->settings-schema.json->section0->description
+msgid "General"
+msgstr "Geral"
+
+#. 5.4->settings-schema.json->cycleProfiles->description
+msgid "Cycle through profiles when using keyboard shortcuts or scroll wheel"
+msgstr "Percorrer perfis ao utilizar atalhos de teclado ou a roda do rato"
+
+#. 5.4->settings-schema.json->cycleProfiles->tooltip
+msgid ""
+"If enabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the next profile would be 'Performance' "
+"(or 'Balanced' on some systems).\n"
+"\n"
+"If disabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the profile would not change."
+msgstr ""
+"Se estiver ativado, se o perfil atual for 'Economia de Energia' e for "
+"utilizado o atalho de teclado 'Perfil Anterior', o perfil seguinte será "
+"'Desempenho' (ou 'Balanceado' em alguns sistemas).\n"
+"\n"
+"Se estiver desativado, se o perfil atual for 'Economia de Energia' e for "
+"utilizado o atalho de teclado 'Perfil Anterior', o perfil não será alterado."
+
+#. 5.4->settings-schema.json->scrollBehavior->description
+msgid "Scroll wheel behavior"
+msgstr "Comportamento com a roda do rato"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Nothing"
+msgstr "Nada"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles"
+msgstr "Trocar perfil"
+
+#. 5.4->settings-schema.json->scrollBehavior->options
+msgid "Switch profiles (reversed)"
+msgstr "Trocar perfil (sentido reverso)"
+
+#. 5.4->settings-schema.json->section1->description
+msgid "Keyboard Shortcuts"
+msgstr "Atalhos de Teclado"
+
+#. 5.4->settings-schema.json->previousProfileKey->description
+msgid "Previous profile"
+msgstr "Perfil Anterior"
+
+#. 5.4->settings-schema.json->previousProfileKey->tooltip
+msgid "Set keybinding(s) to switch to previous power profile."
+msgstr ""
+"Defina atalhos de teclado para alternar para o perfil de energia anterior."
+
+#. 5.4->settings-schema.json->nextProfileKey->description
+msgid "Next profile"
+msgstr "Perfil Seguinte"
+
+#. 5.4->settings-schema.json->nextProfileKey->tooltip
+msgid "Set keybinding(s) to switch to next power profile."
+msgstr ""
+"Defina atalhos de teclado para alternar para o perfil de energia seguinte."
+
+#. 5.4->settings-schema.json->showOSD->description
+msgid "On-screen display for keyboard shortcuts"
+msgstr "Mostrar no ecrã para atalhos de teclado"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+msgid ""
+"Show on-screen display of the new profile when using the keyboard shortcuts"
+msgstr ""
+"Mostrar a visualização no ecrã do novo perfil ao utilizar os atalhos de "
+"teclado"
+
+#. 5.4->settings-schema.json->section2->description
+msgid "Appearance"
+msgstr "Aparência"
+
+#. 5.4->settings-schema.json->iconStyle->description
+msgid "Icon Style"
+msgstr "Estilo do Ícone"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Classic"
+msgstr "Classico"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Papirus"
+msgstr "Papirus"
+
+#. 5.4->settings-schema.json->iconStyle->tooltip
+msgid ""
+"Choose the style of the applet's icon. This is used for the panel and the on-"
+"screen display."
+msgstr ""
+"Escolha o estilo do ícone do applet. Isto é usado para o painel e a "
+"visualização no ecrã."

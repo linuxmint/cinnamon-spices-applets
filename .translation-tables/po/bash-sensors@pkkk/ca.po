@@ -1,0 +1,146 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2021-02-16 20:27+0100\n"
+"PO-Revision-Date: 2024-07-21 01:49+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:79
+msgid "Error: Still waiting for command to finish!"
+msgstr "Error: encara s'està esperant que acabi una ordre prèvia!"
+
+#. metadata.json->name
+msgid "Bash Sensors"
+msgstr "Sensors Bash"
+
+#. metadata.json->description
+msgid ""
+"Write your Bash commands to specify applet output (temperature sensors and "
+"not only!)"
+msgstr ""
+"Escriviu les vostres ordres bash per especificar les dades de l'aplicació "
+"(sensors de temperatura i altres)"
+
+#. settings-schema.json->head->description
+msgid "Settings - Bash Sensors (write commands in Bash!)"
+msgstr "Opcions - Bash Sensors (escriviu ordres en bash!)"
+
+#. settings-schema.json->title1->description
+msgid "Title"
+msgstr "Títol"
+
+#. settings-schema.json->title1->tooltip
+msgid "Title used when displaying notifications"
+msgstr "Títol utilitzat en mostrar notificacions"
+
+#. settings-schema.json->refreshInterval->units
+msgid "seconds"
+msgstr "segons"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh interval [0 for no refresh]"
+msgstr "Interval de refresc [0 per no refrescar]"
+
+#. settings-schema.json->shell->description
+msgid "Shell"
+msgstr "Shell"
+
+#. settings-schema.json->shell->tooltip
+msgid "Shell to be used ('-c' will be used to call commands)"
+msgstr "Shell a utilitzar (s'usarà '-c' per invocar ordres)"
+
+#. settings-schema.json->head1->description
+msgid "Commands"
+msgstr "Ordres"
+
+#. settings-schema.json->script1->description
+msgid "Command 1"
+msgstr "Ordre 1"
+
+#. settings-schema.json->script1->tooltip
+msgid "first line of output (use \\f for more lines)"
+msgstr "primera línia de sortida (useu \\f per més línies)"
+
+#. settings-schema.json->enableScript2->description
+msgid "Two-line mode (command 2 enabled)"
+msgstr "Mode de dues línies (ordre 2 activada)"
+
+#. settings-schema.json->script2->description
+msgid "Command 2"
+msgstr "Ordre 2"
+
+#. settings-schema.json->script2->tooltip
+msgid "second line of output (optional)"
+msgstr "segona línia de la sortida (opcional)"
+
+#. settings-schema.json->head2->description
+msgid "Icon"
+msgstr "Icona"
+
+#. settings-schema.json->dynamicIcon->description
+msgid "Dynamic icon (use output of icon command as icon)"
+msgstr "Icona dinàmica (utilitza la sortida d'una ordre d'icona com a icona)"
+
+#. settings-schema.json->iconScript->description
+msgid "Static icon or command returning the full path to an icon"
+msgstr "Icona estàtica o ordre retornant la ruta completa a la icona"
+
+#. settings-schema.json->iconScript->tooltip
+msgid "command should return an icon (leave empty for no icon)"
+msgstr ""
+"l'ordre hauria de retornar una icona (deixeu-ho buit per a no establir icona)"
+
+#. settings-schema.json->head3->description
+msgid "Tooltip"
+msgstr "Informació d'eines"
+
+#. settings-schema.json->dynamicTooltip->description
+msgid "Dynamic tooltip (use output of tooltip command as tooltip)"
+msgstr ""
+"Informació d'eines dinàmica (utilitza la sortida de l'ordre com a informació)"
+
+#. settings-schema.json->tooltipScript->description
+msgid "Tooltip command or static tooltip text"
+msgstr "Ordre per a la informació d'eines o text estàtic"
+
+#. settings-schema.json->tooltipScript->tooltip
+msgid "tooltip (static or dynamic)"
+msgstr "informació d'eines (estàtica o dinàmica)"
+
+#. settings-schema.json->head4->description
+msgid "Command on applet click"
+msgstr "Ordre en clicar la miniaplicació"
+
+#. settings-schema.json->menuScript->description
+msgid "Menu command (on applet left-click)"
+msgstr "Ordre del menú (en fer clic esquerre a la miniaplicació)"
+
+#. settings-schema.json->menuScript->tooltip
+msgid "allows to display lots of information in popup menu"
+msgstr "permet mostrar molta informació en un menú emergent"
+
+#. settings-schema.json->menuScriptDisplay->description
+msgid "Display output of menu command"
+msgstr "Mostra la sortida de l'ordre del menú"
+
+#. settings-schema.json->head5->description
+msgid "Command on start-up"
+msgstr "Ordre a l'inici"
+
+#. settings-schema.json->startupScript->description
+msgid "Command run at start-up"
+msgstr "Ordre a executar a l'inici"

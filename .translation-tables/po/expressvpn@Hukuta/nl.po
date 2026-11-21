@@ -1,0 +1,721 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: expressvpn@Hukuta 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-22 18:23+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "ExpressVPN"
+msgstr "ExpressVPN"
+
+#. metadata.json->description
+msgid ""
+"Connect to VPN in one click from this applet. ExpressVPN client is required "
+"(this is a paid service)"
+msgstr ""
+"Verbind in één klik met een VPN vanuit deze applet. Een ExpressVPN-client is "
+"vereist (dit is een betaalde service)."
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Configuratie"
+
+#. settings-schema.json->server->description
+msgid "Server"
+msgstr "Server"
+
+#. settings-schema.json->server->options
+msgid "Smart Location"
+msgstr "Slimme locatie"
+
+#. settings-schema.json->server->options
+msgid "Germany - Frankfurt 1"
+msgstr "Duitsland - Frankfurt 1"
+
+#. settings-schema.json->server->options
+msgid "Germany - Nuremberg"
+msgstr "Duitsland - Neurenberg"
+
+#. settings-schema.json->server->options
+msgid "Germany - Frankfurt 2"
+msgstr "Duitsland - Frankfurt 2"
+
+#. settings-schema.json->server->options
+msgid "Germany - Darmstadt "
+msgstr "Duitsland - Darmstadt"
+
+#. settings-schema.json->server->options
+msgid "India - Mumbai - 1 "
+msgstr "India - Mumbai - 1"
+
+#. settings-schema.json->server->options
+msgid "India (via UK) "
+msgstr "India (via VK)"
+
+#. settings-schema.json->server->options
+msgid "India - Chennai "
+msgstr "India - Chennai"
+
+#. settings-schema.json->server->options
+msgid "UK - Docklands"
+msgstr "VK - Docklands"
+
+#. settings-schema.json->server->options
+msgid "UK - East London"
+msgstr "VK - Oost-Londen"
+
+#. settings-schema.json->server->options
+msgid "UK - Berkshire "
+msgstr "VK - Berkshire"
+
+#. settings-schema.json->server->options
+msgid "UK - London "
+msgstr "VK - Londen"
+
+#. settings-schema.json->server->options
+msgid "UK - Kent "
+msgstr "VK - Kent"
+
+#. settings-schema.json->server->options
+msgid "UK - Berkshire 2"
+msgstr "VK - Berkshire 2"
+
+#. settings-schema.json->server->options
+msgid "UK - Wembley "
+msgstr "VK - Wembley"
+
+#. settings-schema.json->server->options
+msgid "Singapore - Jurong "
+msgstr "Singapore - Jurong"
+
+#. settings-schema.json->server->options
+msgid "Singapore - CBD "
+msgstr "Singapore - CBD"
+
+#. settings-schema.json->server->options
+msgid "Singapore - Marina Bay "
+msgstr "Singapore - Marina Bay"
+
+#. settings-schema.json->server->options
+msgid "Netherlands - Amsterdam Y"
+msgstr "Nederland - Amsterdam Y"
+
+#. settings-schema.json->server->options
+msgid "Netherlands - Rotterdam Y"
+msgstr "Nederland - Rotterdam Y"
+
+#. settings-schema.json->server->options
+msgid "Netherlands - The Hague "
+msgstr "Nederland - Den Haag"
+
+#. settings-schema.json->server->options
+msgid "Hong Kong - 2"
+msgstr "Hong Kong - 2"
+
+#. settings-schema.json->server->options
+msgid "Hong Kong - 1"
+msgstr "Hong Kong - 1"
+
+#. settings-schema.json->server->options
+msgid "Hong Kong - 3"
+msgstr "Hong Kong - 3"
+
+#. settings-schema.json->server->options
+msgid "Hong Kong - 4"
+msgstr "Hong Kong - 4"
+
+#. settings-schema.json->server->options
+msgid "Hong Kong - 5"
+msgstr "Hong Kong - 5"
+
+#. settings-schema.json->server->options
+msgid "Hong Kong - 6"
+msgstr "Hong Kong - 6"
+
+#. settings-schema.json->server->options
+msgid "USA - New York"
+msgstr "VS - New York"
+
+#. settings-schema.json->server->options
+msgid "USA - Washington DC"
+msgstr "VS - Washington DC"
+
+#. settings-schema.json->server->options
+msgid "USA - Washington DC - 2 "
+msgstr "VS - Washington DC - 2"
+
+#. settings-schema.json->server->options
+msgid "USA - New Jersey - 1"
+msgstr "VS - New Jersey - 1"
+
+#. settings-schema.json->server->options
+msgid "USA - San Francisco "
+msgstr "VS - San Francisco"
+
+#. settings-schema.json->server->options
+msgid "USA - Chicago "
+msgstr "VS - Chicago"
+
+#. settings-schema.json->server->options
+msgid "USA - Dallas "
+msgstr "VS - Dallas"
+
+#. settings-schema.json->server->options
+msgid "USA - Miami "
+msgstr "VS - Miami"
+
+#. settings-schema.json->server->options
+msgid "USA - Los Angeles - 3 "
+msgstr "VS - Los Angeles - 3"
+
+#. settings-schema.json->server->options
+msgid "USA - Los Angeles - 2 "
+msgstr "VS - Los Angeles - 2"
+
+#. settings-schema.json->server->options
+msgid "USA - New Jersey - 3 "
+msgstr "VS - New Jersey - 3"
+
+#. settings-schema.json->server->options
+msgid "USA - Seattle "
+msgstr "VS - Seattle"
+
+#. settings-schema.json->server->options
+msgid "USA - Miami - 2 "
+msgstr "VS - Miami - 2"
+
+#. settings-schema.json->server->options
+msgid "USA - Denver "
+msgstr "VS - Denver"
+
+#. settings-schema.json->server->options
+msgid "USA - Salt Lake City "
+msgstr "VS - Salt Lake City"
+
+#. settings-schema.json->server->options
+msgid "USA - Kansas City "
+msgstr "VS - Kansas City"
+
+#. settings-schema.json->server->options
+msgid "USA - Tampa - 1 "
+msgstr "VS - Tampa - 1"
+
+#. settings-schema.json->server->options
+msgid "USA - Phoenix "
+msgstr "VS - Phoenix"
+
+#. settings-schema.json->server->options
+msgid "USA - Los Angeles - 1 "
+msgstr "VS - Los Angeles - 1"
+
+#. settings-schema.json->server->options
+msgid "USA - Virginia "
+msgstr "VS - Virginia"
+
+#. settings-schema.json->server->options
+msgid "USA - New York - 2 "
+msgstr "VS - New York - 2"
+
+#. settings-schema.json->server->options
+msgid "USA - New Jersey - 2 "
+msgstr "VS - New Jersey - 2"
+
+#. settings-schema.json->server->options
+msgid "USA - Hollywood "
+msgstr "VS - Hollywood"
+
+#. settings-schema.json->server->options
+msgid "USA - Dallas - 2 "
+msgstr "VS - Dallas - 2"
+
+#. settings-schema.json->server->options
+msgid "USA - Minneapolis "
+msgstr "VS - Minneapolis"
+
+#. settings-schema.json->server->options
+msgid "USA - Boston "
+msgstr "VS - Boston"
+
+#. settings-schema.json->server->options
+msgid "USA - Los Angeles "
+msgstr "VS - Los Angeles"
+
+#. settings-schema.json->server->options
+msgid "USA - San Jose "
+msgstr "VS - San Jose"
+
+#. settings-schema.json->server->options
+msgid "USA - Atlanta "
+msgstr "VS - Atlanta"
+
+#. settings-schema.json->server->options
+msgid "USA - Los Angeles - 5 "
+msgstr "VS - Los Angeles - 5"
+
+#. settings-schema.json->server->options
+msgid "USA - Los Angeles - 4 "
+msgstr "VS - Los Angeles - 4"
+
+#. settings-schema.json->server->options
+msgid "USA - Santa Monica "
+msgstr "VS - Santa Monica"
+
+#. settings-schema.json->server->options
+msgid "USA - San Francisco via HK "
+msgstr "VS - San Francisco via HK"
+
+#. settings-schema.json->server->options
+msgid "USA - San Francisco - 2 "
+msgstr "VS - San Francisco - 2"
+
+#. settings-schema.json->server->options
+msgid "France (FR)"
+msgstr "Frankrijk (FR)"
+
+#. settings-schema.json->server->options
+msgid "France - Strasbourg"
+msgstr "Frankrijk - Straatsburg"
+
+#. settings-schema.json->server->options
+msgid "France - Paris - 2 "
+msgstr "Frankrijk - Parijs - 2"
+
+#. settings-schema.json->server->options
+msgid "Japan - Tokyo - 3 "
+msgstr "Japan - Tokio - 3"
+
+#. settings-schema.json->server->options
+msgid "Japan - Tokyo - 2 "
+msgstr "Japan - Tokio - 2"
+
+#. settings-schema.json->server->options
+msgid "Japan - Tokyo - 1 "
+msgstr "Japan - Tokio - 1"
+
+#. settings-schema.json->server->options
+msgid "Sweden"
+msgstr "Zweden"
+
+#. settings-schema.json->server->options
+msgid "Sweden - 2"
+msgstr "Zweden - 2"
+
+#. settings-schema.json->server->options
+msgid "Switzerland - 2"
+msgstr "Zwitserland - 2"
+
+#. settings-schema.json->server->options
+msgid "Switzerland"
+msgstr "Zwitserland"
+
+#. settings-schema.json->server->options
+msgid "Italy - Milan"
+msgstr "Italië - Milaan"
+
+#. settings-schema.json->server->options
+msgid "Italy - Cosenza "
+msgstr "Italië - Cosenza"
+
+#. settings-schema.json->server->options
+msgid "Australia - Melbourne "
+msgstr "Australië - Melbourne"
+
+#. settings-schema.json->server->options
+msgid "Australia - Sydney "
+msgstr "Australië - Sydney"
+
+#. settings-schema.json->server->options
+msgid "Australia - Sydney - 3 "
+msgstr "Australië - Sydney - 3"
+
+#. settings-schema.json->server->options
+msgid "Australia - Perth "
+msgstr "Australië - Perth"
+
+#. settings-schema.json->server->options
+msgid "Australia - Brisbane "
+msgstr "Australië - Brisbane"
+
+#. settings-schema.json->server->options
+msgid "Australia - Sydney - 2 "
+msgstr "Australië - Sydney - 2"
+
+#. settings-schema.json->server->options
+msgid "South Korea - 2 "
+msgstr "Zuid-Korea - 2"
+
+#. settings-schema.json->server->options
+msgid "South Korea "
+msgstr "Zuid-Korea"
+
+#. settings-schema.json->server->options
+msgid "Philippines (via Singapore) "
+msgstr "Filippijnen (via Singapore)"
+
+#. settings-schema.json->server->options
+msgid "Malaysia (MY) "
+msgstr "Maleisië (MY)"
+
+#. settings-schema.json->server->options
+msgid "Sri Lanka (LK) "
+msgstr "Sri Lanka (LK)"
+
+#. settings-schema.json->server->options
+msgid "Pakistan (PK)"
+msgstr "Pakistan (PK)"
+
+#. settings-schema.json->server->options
+msgid "Kazakhstan (KZ)"
+msgstr "Kazachstan (KZ)"
+
+#. settings-schema.json->server->options
+msgid "Thailand (TH)"
+msgstr "Thailand (TH)"
+
+#. settings-schema.json->server->options
+msgid "Indonesia (ID)"
+msgstr "Indonesië (ID)"
+
+#. settings-schema.json->server->options
+msgid "New Zealand (NZ)"
+msgstr "Nieuw-Zeeland (NZ)"
+
+#. settings-schema.json->server->options
+msgid "Taiwan (TW)"
+msgstr "Taiwan (TW)"
+
+#. settings-schema.json->server->options
+msgid "Taiwan via HK"
+msgstr "Taiwan via HK"
+
+#. settings-schema.json->server->options
+msgid "Taiwan via HK - 2"
+msgstr "Taiwan via HK - 2"
+
+#. settings-schema.json->server->options
+msgid "Vietnam (VN)"
+msgstr "Vietnam (VN)"
+
+#. settings-schema.json->server->options
+msgid "Macau (MO)"
+msgstr "Macau (MO)"
+
+#. settings-schema.json->server->options
+msgid "Cambodia (KH)"
+msgstr "Cambodja (KH)"
+
+#. settings-schema.json->server->options
+msgid "Mongolia (MN)"
+msgstr "Mongolië (MN)"
+
+#. settings-schema.json->server->options
+msgid "Laos "
+msgstr "Laos"
+
+#. settings-schema.json->server->options
+msgid "Myanmar (MM)"
+msgstr "Myanmar (MM)"
+
+#. settings-schema.json->server->options
+msgid "Nepal (NP)"
+msgstr "Nepal (NP)"
+
+#. settings-schema.json->server->options
+msgid "Kyrgyzstan (KG)"
+msgstr "Kirgizië (KG)"
+
+#. settings-schema.json->server->options
+msgid "Uzbekistan (UZ)"
+msgstr "Oezbekistan (UZ)"
+
+#. settings-schema.json->server->options
+msgid "Bangladesh (BD)"
+msgstr "Bangladesh (BD)"
+
+#. settings-schema.json->server->options
+msgid "Bhutan (BT)"
+msgstr "Bhutan (BT)"
+
+#. settings-schema.json->server->options
+msgid "Brunei Darussalam (BN)"
+msgstr "Brunei Darussalam (BN)"
+
+#. settings-schema.json->server->options
+msgid "Canada (CA)"
+msgstr "Canada (CA)"
+
+#. settings-schema.json->server->options
+msgid "Canada - Vancouver "
+msgstr "Canada - Vancouver"
+
+#. settings-schema.json->server->options
+msgid "Canada - Toronto - 2 "
+msgstr "Canada - Toronto - 2"
+
+#. settings-schema.json->server->options
+msgid "Canada - Montreal "
+msgstr "Canada - Montreal"
+
+#. settings-schema.json->server->options
+msgid "Mexico (MX)"
+msgstr "Mexico (MX)"
+
+#. settings-schema.json->server->options
+msgid "Brazil (BR)"
+msgstr "Brazilië (BR)"
+
+#. settings-schema.json->server->options
+msgid "Brazil"
+msgstr "Brazilië"
+
+#. settings-schema.json->server->options
+msgid "Panama (PA)"
+msgstr "Panama (PA)"
+
+#. settings-schema.json->server->options
+msgid "Chile (CL)"
+msgstr "Chili (CL)"
+
+#. settings-schema.json->server->options
+msgid "Argentina (AR)"
+msgstr "Argentinië (AR)"
+
+#. settings-schema.json->server->options
+msgid "Costa Rica (CR)"
+msgstr "Costa Rica (CR)"
+
+#. settings-schema.json->server->options
+msgid "Colombia (CO)"
+msgstr "Colombia (CO)"
+
+#. settings-schema.json->server->options
+msgid "Venezuela (VE)"
+msgstr "Venezuela (VE)"
+
+#. settings-schema.json->server->options
+msgid "Ecuador (EC)"
+msgstr "Ecuador (EC)"
+
+#. settings-schema.json->server->options
+msgid "Guatemala (GT)"
+msgstr "Guatemala (GT)"
+
+#. settings-schema.json->server->options
+msgid "Peru (PE)"
+msgstr "Peru (PE)"
+
+#. settings-schema.json->server->options
+msgid "Uruguay (UY)"
+msgstr "Uruguay (UY)"
+
+#. settings-schema.json->server->options
+msgid "Bahamas (BS)"
+msgstr "Bahama's (BS)"
+
+#. settings-schema.json->server->options
+msgid "Romania (RO)"
+msgstr "Roemenië (RO)"
+
+#. settings-schema.json->server->options
+msgid "Isle of Man (IM)"
+msgstr "Isle of Man (IM)"
+
+#. settings-schema.json->server->options
+msgid "Spain (ES)"
+msgstr "Spanje (ES)"
+
+#. settings-schema.json->server->options
+msgid "Spain - Barcelona"
+msgstr "Spanje - Barcelona"
+
+#. settings-schema.json->server->options
+msgid "Turkey (TR)"
+msgstr "Turkije (TR)"
+
+#. settings-schema.json->server->options
+msgid "Ireland (IE)"
+msgstr "Ierland (IE)"
+
+#. settings-schema.json->server->options
+msgid "Iceland (IS)"
+msgstr "IJsland (IS)"
+
+#. settings-schema.json->server->options
+msgid "Norway (NO)"
+msgstr "Noorwegen (NO)"
+
+#. settings-schema.json->server->options
+msgid "Denmark (DK)"
+msgstr "Denemarken (DK)"
+
+#. settings-schema.json->server->options
+msgid "Belgium (BE)"
+msgstr "België (BE)"
+
+#. settings-schema.json->server->options
+msgid "Finland (FI)"
+msgstr "Finland (FI)"
+
+#. settings-schema.json->server->options
+msgid "Greece (GR)"
+msgstr "Griekenland (GR)"
+
+#. settings-schema.json->server->options
+msgid "Portugal (PT)"
+msgstr "Portugal (PT)"
+
+#. settings-schema.json->server->options
+msgid "Austria (AT)"
+msgstr "Oostenrijk (AT)"
+
+#. settings-schema.json->server->options
+msgid "Russia (RU) "
+msgstr "Rusland (RU)"
+
+#. settings-schema.json->server->options
+msgid "Armenia (AM)"
+msgstr "Armenië (AM)"
+
+#. settings-schema.json->server->options
+msgid "Poland (PL) "
+msgstr "Polen (PL)"
+
+#. settings-schema.json->server->options
+msgid "Lithuania (LT)"
+msgstr "Litouwen (LT)"
+
+#. settings-schema.json->server->options
+msgid "Latvia (LV)"
+msgstr "Letland (LV)"
+
+#. settings-schema.json->server->options
+msgid "Estonia (EE)"
+msgstr "Estland (EE)"
+
+#. settings-schema.json->server->options
+msgid "Czech Republic (CZ)"
+msgstr "Tsjechië (CZ)"
+
+#. settings-schema.json->server->options
+msgid "Andorra (AD)"
+msgstr "Andorra (AD)"
+
+#. settings-schema.json->server->options
+msgid "Montenegro (ME)"
+msgstr "Montenegro (ME)"
+
+#. settings-schema.json->server->options
+msgid "Bosnia and Herzegovina (BA)"
+msgstr "Bosnië en Herzegovina (BA)"
+
+#. settings-schema.json->server->options
+msgid "Luxembourg (LU)"
+msgstr "Luxemburg (LU)"
+
+#. settings-schema.json->server->options
+msgid "Hungary (HU)"
+msgstr "Hongarije (HU)"
+
+#. settings-schema.json->server->options
+msgid "Bulgaria (BG)"
+msgstr "Bulgarije (BG)"
+
+#. settings-schema.json->server->options
+msgid "Belarus (BY)"
+msgstr "Wit-Rusland (BY)"
+
+#. settings-schema.json->server->options
+msgid "Ukraine (UA)"
+msgstr "Oekraïne (UA)"
+
+#. settings-schema.json->server->options
+msgid "Malta (MT)"
+msgstr "Malta (MT)"
+
+#. settings-schema.json->server->options
+msgid "Liechtenstein (LI)"
+msgstr "Liechtenstein (LI)"
+
+#. settings-schema.json->server->options
+msgid "Cyprus (CY)"
+msgstr "Cyprus (CY)"
+
+#. settings-schema.json->server->options
+msgid "Albania (AL)"
+msgstr "Albanië (AL)"
+
+#. settings-schema.json->server->options
+msgid "Croatia (HR)"
+msgstr "Kroatië (HR)"
+
+#. settings-schema.json->server->options
+msgid "Slovenia (SI)"
+msgstr "Slovenië (SI)"
+
+#. settings-schema.json->server->options
+msgid "Slovakia (SK)"
+msgstr "Slowakije (SK)"
+
+#. settings-schema.json->server->options
+msgid "Monaco (MC)"
+msgstr "Monaco (MC)"
+
+#. settings-schema.json->server->options
+msgid "Jersey (JE)"
+msgstr "Jersey (JE)"
+
+#. settings-schema.json->server->options
+msgid "Macedonia (MK)"
+msgstr "Macedonië (MK)"
+
+#. settings-schema.json->server->options
+msgid "Moldova"
+msgstr "Moldavië"
+
+#. settings-schema.json->server->options
+msgid "Serbia (RS)"
+msgstr "Servië (RS)"
+
+#. settings-schema.json->server->options
+msgid "Georgia (GE) "
+msgstr "Georgië (GE)"
+
+#. settings-schema.json->server->options
+msgid "Azerbaijan (AZ)"
+msgstr "Azerbeidzjan (AZ)"
+
+#. settings-schema.json->server->options
+msgid "South Africa (ZA)"
+msgstr "Zuid-Afrika (ZA)"
+
+#. settings-schema.json->server->options
+msgid "Israel (IL)"
+msgstr "Israël (IL)"
+
+#. settings-schema.json->server->options
+msgid "Egypt (EG)"
+msgstr "Egypte (EG)"
+
+#. settings-schema.json->server->options
+msgid "Kenya (KE)"
+msgstr "Kenia (KE)"
+
+#. settings-schema.json->server->options
+msgid "Algeria (DZ)"
+msgstr "Algerije (DZ)"
+
+#. settings-schema.json->server->tooltip
+msgid "IP Location"
+msgstr "IP-locatie"

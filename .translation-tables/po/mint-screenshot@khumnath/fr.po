@@ -1,0 +1,333 @@
+# French translation for mint-screenshot.
+# Copyright (C) 2026 mint-screenshot contributors
+# This file is distributed under the same license as the mint-screenshot package.
+# Auto-generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mint-screenshot\n"
+"Report-Msgid-Bugs-To: khumnath@gmail.com\n"
+"POT-Creation-Date: 2026-04-23 19:12+0545\n"
+"PO-Revision-Date: 2026-04-22 18:27+0545\n"
+"Last-Translator: \n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: app.py:49
+msgid "Reset Everything?"
+msgstr "Tout réinitialiser ?"
+
+#: app.py:51
+msgid "This will clear all annotations and return to the launcher."
+msgstr "Cela effacera toutes les annotations et reviendra au lanceur."
+
+#: app.py:191
+msgid "Mint Screenshot — Wayland Error"
+msgstr "Mint Screenshot — Erreur Wayland"
+
+#: canvas.py:461
+msgid "Edit Text:"
+msgstr "Modifier le texte :"
+
+#: canvas.py:461
+msgid "Enter text to insert:"
+msgstr "Entrez le texte à insérer :"
+
+#: capture.py:53
+msgid "D-Bus is required for Wayland support."
+msgstr "D-Bus est requis pour la prise en charge de Wayland."
+
+#: capture.py:171
+msgid ""
+"Failed to load captured screenshot:\n"
+"{}"
+msgstr ""
+"Échec du chargement de la capture d'écran :\n"
+"{}"
+
+#: editor.py:119
+msgid "Custom Timer"
+msgstr "Minuterie personnalisée"
+
+#: editor.py:133
+msgid "Enter delay in seconds:"
+msgstr "Entrez le délai en secondes :"
+
+#: editor.py:338 editor.py:795
+msgid "Saving..."
+msgstr "Enregistrement..."
+
+#: editor.py:455
+msgid "Pointer"
+msgstr "Pointeur"
+
+#: editor.py:456
+msgid "Rectangle"
+msgstr "Rectangle"
+
+#: editor.py:457
+msgid "Ellipse"
+msgstr "Ellipse"
+
+#: editor.py:458
+msgid "Arrow"
+msgstr "Flèche"
+
+#: editor.py:459
+msgid "Draw"
+msgstr "Dessiner"
+
+#: editor.py:460
+msgid "Highlight"
+msgstr "Surligneur"
+
+#: editor.py:461
+msgid "Text Tool"
+msgstr "Outil de texte"
+
+#: editor.py:494
+msgid "Blue"
+msgstr "Bleu"
+
+#: editor.py:495
+msgid "Red"
+msgstr "Rouge"
+
+#: editor.py:496
+msgid "Green"
+msgstr "Vert"
+
+#: editor.py:497
+msgid "Yellow"
+msgstr "Jaune"
+
+#: editor.py:498
+msgid "White"
+msgstr "Blanc"
+
+#: editor.py:499
+msgid "Black"
+msgstr "Noir"
+
+#: editor.py:529
+msgid "Size"
+msgstr "Taille"
+
+#: editor.py:542
+msgid "Reset All"
+msgstr "Tout réinitialiser"
+
+#: editor.py:543
+msgid "Undo"
+msgstr "Annuler"
+
+#: editor.py:544
+msgid "Copy"
+msgstr "Copier"
+
+#: editor.py:545
+msgid "Save"
+msgstr "Enregistrer"
+
+#: editor.py:546
+msgid "Settings"
+msgstr "Paramètres"
+
+#: editor.py:547 launcher.py:144
+msgid "Close"
+msgstr "Fermer"
+
+#: editor.py:573
+msgid "Move Toolbar Top/Bottom"
+msgstr "Déplacer la barre d'outils Haut/Bas"
+
+#: editor.py:596
+msgid "Save Format"
+msgstr "Format d'enregistrement"
+
+#: editor.py:609
+msgid "Image Quality"
+msgstr "Qualité de l'image"
+
+#: editor.py:614
+msgid "Space Saver (Small)"
+msgstr "Économie d'espace (Petit)"
+
+#: editor.py:616
+msgid "Medium"
+msgstr "Moyen"
+
+#: editor.py:618
+msgid "Original"
+msgstr "Original"
+
+#: editor.py:629
+msgid "Save Folder: {}..."
+msgstr "Dossier d'enregistrement : {}..."
+
+#: editor.py:634
+msgid "Show Toolbar Labels"
+msgstr "Afficher les libellés de la barre d'outils"
+
+#: editor.py:642
+msgid "About Mint Screenshot"
+msgstr "À propos de Mint Screenshot"
+
+#: editor.py:663
+msgid "Select Default Save Folder"
+msgstr "Sélectionner le dossier d'enregistrement par défaut"
+
+#: editor.py:667
+msgid "Select"
+msgstr "Sélectionner"
+
+#: editor.py:692 launcher.py:79 main.py:159
+msgid "Mint Screenshot"
+msgstr "Mint Screenshot"
+
+#: editor.py:694
+msgid ""
+"Screenshot & Annotation Tool\n"
+"Capture, annotate, and share with ease."
+msgstr ""
+"Outil de capture d'écran et d'annotation pour Cinnamon\n"
+"Capturez, annotez et partagez facilement."
+
+#: editor.py:696
+msgid "Project on GitHub"
+msgstr "Projet sur GitHub"
+
+#: editor.py:718
+msgid "Open External Website?"
+msgstr "Ouvrir un site Web externe ?"
+
+#: editor.py:721
+msgid "This will exit the current screenshot process. Do you want to continue?"
+msgstr "Cela quittera le processus de capture d'écran en cours. Voulez-vous continuer ?"
+
+#: editor.py:765
+msgid "Save Screenshot"
+msgstr "Enregistrer la capture d'écran"
+
+#: editor.py:795
+msgid "Copying..."
+msgstr "Copie en cours..."
+
+#: editor.py:855
+msgid "Copied"
+msgstr "Copié"
+
+#: editor.py:864
+msgid "Screenshot Saved"
+msgstr "Capture d'écran enregistrée"
+
+#: editor.py:865
+msgid "Saved to {}"
+msgstr "Enregistré dans {}"
+
+#: launcher.py:83
+msgid "Wayland Mode — Capture via Desktop Portal"
+msgstr "Mode Wayland — Capture via le portail de bureau"
+
+#: launcher.py:83
+msgid "X11 Mode — Instant Pixel Capture"
+msgstr "Mode X11 — Capture instantanée des pixels"
+
+#: launcher.py:92
+msgid "Hint: Pick 'Screen' in the portal to capture overlapping windows."
+msgstr "Astuce : Choisissez « Écran » dans le portail pour capturer les fenêtres superposées."
+"Astuce : Choisissez « Screen » dans le portail pour capturer les fenêtres "
+"superposées."
+
+#: launcher.py:105
+msgid "Select Monitor:"
+msgstr "Sélectionner un moniteur :"
+
+#: launcher.py:107
+msgid "All Monitors"
+msgstr "Tous les moniteurs"
+
+#: launcher.py:109
+msgid "Monitor {}"
+msgstr "Moniteur {}"
+
+#: launcher.py:115
+msgid "📸  Capture Fullscreen"
+msgstr "📸  Capture plein écran"
+
+#: launcher.py:120
+msgid "✂️  Select Area"
+msgstr "✂️  Sélectionner une zone"
+
+#: launcher.py:127
+msgid "⏱  Timed Capture"
+msgstr "⏱  Capture minutée"
+
+#: launcher.py:134
+msgid "sec"
+msgstr "sec"
+
+#: main.py:117
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your system's package manager.\n"
+"(Debian/Ubuntu package names shown as reference)"
+msgstr ""
+"Les dépendances suivantes sont manquantes :\n"
+"\n"
+"{}\n"
+"\n"
+"Veuillez les installer à l'aide du gestionnaire de paquets de votre "
+"système.\n"
+"(Les noms de paquets Debian/Ubuntu sont indiqués à titre de référence)"
+
+#: main.py:120
+msgid ""
+"The following dependencies are missing:\n"
+"\n"
+"{}\n"
+"\n"
+"Please install them using your package manager:\n"
+"  {} {}"
+msgstr ""
+"Les dépendances suivantes sont manquantes :\n"
+"\n"
+"{}\n"
+"\n"
+"Veuillez les installer à l'aide de votre gestionnaire de paquets :\n"
+"  {} {}"
+
+#: main.py:126
+msgid "Mint Screenshot \\u2014 Missing Dependencies"
+msgstr "Mint Screenshot \\u2014 Dépendances manquantes"
+
+#~ msgid "Mint Screenshot — Click to capture"
+#~ msgstr "Mint Screenshot — Cliquez pour capturer"
+
+#~ msgid ""
+#~ "Screenshot & annotation tool for Cinnamon. Timed capture, region "
+#~ "selection, and drawing tools."
+#~ msgstr ""
+#~ "Outil de capture d'écran et d'annotation pour Cinnamon. Capture minutée, "
+#~ "sélection de zone et outils de dessin."
+
+#~ msgid ""
+#~ "Capture, annotate, and share screenshots with ease. Supports timed "
+#~ "capture, custom countdown, and Material Design toolbar."
+#~ msgstr ""
+#~ "Capturez, annotez et partagez des captures d'écran facilement. Prend en "
+#~ "charge la capture minutée, le compte à rebours personnalisé et la barre "
+#~ "d'outils Material Design."
+
+#~ msgid "Default Save Directory"
+#~ msgstr "Répertoire d'enregistrement par défaut"
+
+#~ msgid "Automatically copy to clipboard on save"
+#~ msgstr ""
+#~ "Copier automatiquement dans le presse-papiers lors de l'enregistrement"

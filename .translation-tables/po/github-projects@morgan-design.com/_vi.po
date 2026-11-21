@@ -1,0 +1,10 @@
+# GITHUB EXPLORER
+# This file is put in the public domain.
+# jamesmorgan, 2016
+#
+msgid ""
+msgstr ""
+
+#. applet.js:372
+msgid "Language"
+msgstr ""

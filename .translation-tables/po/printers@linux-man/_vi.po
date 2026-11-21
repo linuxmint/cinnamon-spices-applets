@@ -1,0 +1,12 @@
+# PRINTERS
+# This file is put in the public domain.
+# linux-man, 2016
+#
+msgid ""
+msgstr ""
+
+#: cups-bsd_warning.py:27
+msgid ""
+"Missing dependency.\n"
+"'lpq' command is missing! Please install 'cups-bsd' package (if available)."
+msgstr ""

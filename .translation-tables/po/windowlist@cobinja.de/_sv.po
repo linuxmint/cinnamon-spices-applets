@@ -1,0 +1,130 @@
+# Swedish translation for windowlist@cobinja.de
+# Åke Engelbrektson <eson@svenskasprakfiler.se, 2017-2019
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: windowlist@cobinja.de 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-11 15:28+0100\n"
+"PO-Revision-Date: 2019-02-28 08:01+0100\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. 5.4/applet.js:1402 4.0/applet.js:1393 6.4/applet.js:1427 3.2/applet.js:1286
+msgid "Preferences"
+msgstr ""
+
+#. 5.4/applet.js:1406 4.0/applet.js:1397 6.4/applet.js:1431 3.2/applet.js:1290
+msgid "About..."
+msgstr ""
+
+#. 5.4/applet.js:1410 4.0/applet.js:1401 6.4/applet.js:1435 3.2/applet.js:1294
+msgid "Configure..."
+msgstr ""
+
+#. 5.4/applet.js:1414 4.0/applet.js:1405 6.4/applet.js:1439 3.2/applet.js:1298
+#, javascript-format
+msgid "Remove '%s'"
+msgstr ""
+
+#. 5.4/applet.js:1484 4.0/applet.js:1475 6.4/applet.js:1509
+msgid "Places"
+msgstr ""
+
+#. 5.4/applet.js:1516 4.0/applet.js:1507 6.4/applet.js:1541 3.2/applet.js:1359
+msgid "Only on this workspace"
+msgstr ""
+
+#. 5.4/applet.js:1519 4.0/applet.js:1510 6.4/applet.js:1544 3.2/applet.js:1362
+msgid "Visible on all workspaces"
+msgstr ""
+
+#. 5.4/applet.js:1520 4.0/applet.js:1511 6.4/applet.js:1545 3.2/applet.js:1364
+msgid "Move to another workspace"
+msgstr ""
+
+#. 5.4/applet.js:1547 4.0/applet.js:1538 6.4/applet.js:1572 3.2/applet.js:1392
+msgid "Monitor"
+msgstr ""
+
+#. 5.4/applet.js:1563 4.0/applet.js:1554 6.4/applet.js:1585 3.2/applet.js:1404
+msgid "Restore"
+msgstr ""
+
+#. 5.4/applet.js:1568 4.0/applet.js:1559 6.4/applet.js:1590 3.2/applet.js:1409
+msgid "Minimize"
+msgstr ""
+
+#. 5.4/applet.js:1581 4.0/applet.js:1572 6.4/applet.js:1603 3.2/applet.js:1422
+msgid "Close others"
+msgstr ""
+
+#. 5.4/applet.js:1592 4.0/applet.js:1583 6.4/applet.js:1614 3.2/applet.js:1433
+msgid "Close all"
+msgstr ""
+
+#. 5.4/applet.js:1601 4.0/applet.js:1592 6.4/applet.js:1623 3.2/applet.js:1442
+msgid "Close"
+msgstr ""
+
+#. metadata.json->name
+msgid "CobiWindowList"
+msgstr ""
+
+#. 5.4->settings-schema.json->label-width->units
+#. 4.0->settings-schema.json->label-width->units
+#. 6.4->settings-schema.json->label-width->units
+#. 3.2->settings-schema.json->label-width->units
+msgid "pixels"
+msgstr ""
+
+#. 5.4->settings-schema.json->label-animation-time->units
+#. 5.4->settings-schema.json->animation-time->units
+#. 5.4->settings-schema.json->preview-timeout-show->units
+#. 5.4->settings-schema.json->preview-timeout-hide->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+#. 6.4->settings-schema.json->label-animation-time->units
+#. 6.4->settings-schema.json->animation-time->units
+#. 6.4->settings-schema.json->preview-timeout-show->units
+#. 6.4->settings-schema.json->preview-timeout-hide->units
+#. 3.2->settings-schema.json->label-animation-time->units
+#. 3.2->settings-schema.json->animation-time->units
+#. 3.2->settings-schema.json->preview-timeout-show->units
+#. 3.2->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr ""
+
+#. 5.4->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+#. 6.4->settings-schema.json->display-number->options
+#. 3.2->settings-schema.json->display-number->options
+msgid "Never"
+msgstr ""
+
+#. 5.4->settings-schema.json->section2->description
+#. 4.0->settings-schema.json->section2->description
+#. 6.4->settings-schema.json->section2->description
+#. 3.2->settings-schema.json->section2->description
+msgid "Icons"
+msgstr ""
+
+#. 5.4->settings-schema.json->number-of-unshrunk-previews->units
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->units
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->units
+#. 3.2->settings-schema.json->number-of-unshrunk-previews->units
+msgid "Windows"
+msgstr ""
+
+#. 6.4->settings-schema.json->show_progress-indicator->description
+msgid "Show a progress indicator"
+msgstr ""

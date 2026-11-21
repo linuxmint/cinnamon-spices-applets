@@ -1,0 +1,11 @@
+# GITHUB EXPLORER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# jamesmorgan, 2016
+#
+msgid ""
+msgstr ""
+
+#. applet.js:372
+msgid "Language"
+msgstr ""

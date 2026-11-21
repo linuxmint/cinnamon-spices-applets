@@ -1,0 +1,152 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-19 14:22+0800\n"
+"PO-Revision-Date: 2026-02-15 22:10+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. mylauncher@markbokil.com->metadata.json->name
+#: applet.js:64
+msgid "My Launcher"
+msgstr "Mein Starter"
+
+#: applet.js:183
+msgid "Edit launcher menu"
+msgstr "Startermenü bearbeiten"
+
+#: applet.js:190 mylauncher.properties:46
+msgid "Help"
+msgstr "Hilfe"
+
+#: applet.js:194
+msgid "About"
+msgstr "Über"
+
+#: applet.js:201
+msgid "Tooltips"
+msgstr "Kurzinfos"
+
+#: mylauncher.properties:6
+msgid "Apps"
+msgstr "Programme"
+
+#: mylauncher.properties:7
+msgid "Messenger"
+msgstr "Messenger"
+
+#: mylauncher.properties:9
+msgid "Office Suite"
+msgstr "Büro-Suite"
+
+#: mylauncher.properties:10
+msgid "Audio Player"
+msgstr "Audio-Player"
+
+#: mylauncher.properties:11
+msgid "Text Editor"
+msgstr "Texteditor"
+
+#: mylauncher.properties:12
+msgid "Image Editor"
+msgstr "Bildbearbeitung"
+
+#: mylauncher.properties:13
+msgid "SVG Editor"
+msgstr "SVG-Editor"
+
+#: mylauncher.properties:16
+msgid "Calculator"
+msgstr "Taschenrechner"
+
+#: mylauncher.properties:18
+msgid "My Computer"
+msgstr "Dateisystem"
+
+#: mylauncher.properties:19
+msgid "CUPS Printer Admin"
+msgstr "CUPS-Druckerverwaltung"
+
+#: mylauncher.properties:20
+msgid "Startup Applications"
+msgstr "Startprogramme"
+
+#: mylauncher.properties:21
+msgid "System Monitor"
+msgstr "Systemmonitor"
+
+#: mylauncher.properties:22
+msgid "System Settings"
+msgstr "Systemeinstellungen"
+
+#: mylauncher.properties:23
+msgid "CompizConfig"
+msgstr "Compiz-Einstellungen"
+
+#: mylauncher.properties:24
+msgid "Cinnamon Settings"
+msgstr "Cinnamon-Einstellungen"
+
+#: mylauncher.properties:25
+msgid "Screenshot"
+msgstr "Bildschirmfoto"
+
+#: mylauncher.properties:26
+msgid "Search for files"
+msgstr "Dateisuche"
+
+#: mylauncher.properties:31
+msgid "Add/Remove Applets"
+msgstr "Applets hinzufügen/entfernen"
+
+#: mylauncher.properties:32
+msgid "Reload Theme"
+msgstr "Thema neu laden"
+
+#: mylauncher.properties:33
+msgid "Looking Glass"
+msgstr "Fehlersuche"
+
+#: mylauncher.properties:35
+msgid "Restart Cinnamon"
+msgstr "Cinnamon neu starten"
+
+#: mylauncher.properties:36
+msgid "Suspend"
+msgstr "Bereitschaft"
+
+#: mylauncher.properties:38
+msgid "Home"
+msgstr "Home-Verzeichnis"
+
+#: mylauncher.properties:39
+msgid "Terminal"
+msgstr "Terminal"
+
+#: mylauncher.properties:40
+msgid "Browser"
+msgstr "Browser"
+
+#: mylauncher.properties:41
+msgid "Run..."
+msgstr "Ausführen..."
+
+#: mylauncher.properties:42
+msgid "Toggle Desktop"
+msgstr "Schreibtisch ein/aus"
+
+#. mylauncher@markbokil.com->metadata.json->description
+msgid "Personal app launcher."
+msgstr "Persönlicher Programmstarter."

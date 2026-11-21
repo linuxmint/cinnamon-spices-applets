@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-09-28 16:47+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:132
+msgid "OctoPussy: OctoPrint manager."
+msgstr "OctoPussy: Gestor d'OctoPrint."
+
+#. applet.js:205
+msgid "Settings"
+msgstr "Opcions"
+
+#. applet.js:278 applet.js:351
+msgid "Time lapsed: "
+msgstr "Temps transcorregut: "
+
+#. applet.js:282 applet.js:352
+msgid "Estimated: "
+msgstr "Aproximat: "
+
+#. applet.js:292 applet.js:353
+msgid "Total time: "
+msgstr "Temps total: "
+
+#. applet.js:355
+msgid "Pause current print"
+msgstr "Pausa la impressió actual"
+
+#. applet.js:356
+msgid "Continue current print"
+msgstr "Continua la impressió actual"
+
+#. applet.js:358
+msgid "Change filament"
+msgstr "Canvia el filament"
+
+#. applet.js:359
+msgid "Camera monitor"
+msgstr "Monitor de la càmera"
+
+#. applet.js:360
+msgid "Open OctoPrint web"
+msgstr "Obre el lloc web d'OctoPrint"
+
+#. applet.js:362
+msgid "Restart OctoPrint"
+msgstr "Reinicia OctoPrint"
+
+#. applet.js:363
+msgid "Shutdown OctoPrint"
+msgstr "Atura OctoPrint"
+
+#. applet.js:364
+msgid "Configure..."
+msgstr "Configura..."
+
+#. applet.js:400
+msgid "Restart"
+msgstr "Reinicia"
+
+#. applet.js:404 applet.js:430
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#. applet.js:426
+msgid "Shutdown"
+msgstr "Apaga"
+
+#. applet.js:474
+msgid "Please confirm your action!"
+msgstr "Si us plau, confirmeu la vostra acció!"
+
+#. metadata.json->description
+msgid "An applet to manage OctoPrint."
+msgstr "Una miniaplicació per gestionar OctoPrint."
+
+#. metadata.json->name
+msgid "OctoPrint manager"
+msgstr "Gestor d'OctoPrint"
+
+#. settings-schema.json->octoprintUrl->description
+#. settings-schema.json->octoprintUrl->tooltip
+msgid "OctoPrint API Address"
+msgstr "Clau API d'OctoPrint"
+
+#. settings-schema.json->octoprintApiKey->description
+msgid "OctoPrint API Key. Get an API key from the OctoPrint site settings."
+msgstr "Clau API d'OctoPrint. Podeu obtenir-ne una al lloc web d'OctoPrint."
+
+#. settings-schema.json->octoprintInterval->units
+msgid "seconds"
+msgstr "segons"
+
+#. settings-schema.json->octoprintInterval->description
+msgid "Refresh Interval:"
+msgstr "Interval d'actualització:"
+
+#. settings-schema.json->octoprintInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr "Utilitzeu un interval baix si el vostre equip és lent"
+
+#. settings-schema.json->octoprintVideoCommand->description
+msgid "Video command to use when showing the webcam. Defaults to vlc."
+msgstr "Ordre de vídeo a executar quan es mostri la webcam. Per defecte: vlc."

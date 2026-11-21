@@ -1,0 +1,82 @@
+# KDE CONNECT APPLET
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# JoeJoeTV, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-02 17:12+0100\n"
+"PO-Revision-Date: 2026-10-13 12:58+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.8->settings-schema.json->section_device-icons->title
+msgid "Device Icons"
+msgstr ""
+
+#. 5.8->settings-schema.json->switch_use-custom-device-icons->description
+msgid "Use custom icons for device items in the popup menu"
+msgstr ""
+
+#. 5.8->settings-schema.json->switch_use-custom-device-icons->tooltip
+msgid ""
+"Override the KDE Connect status icon with your own symbolic icon per device "
+"type"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-phone->description
+msgid "Icon for phones"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-phone->tooltip
+msgid "e.g. phone-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-tablet->description
+msgid "Icon for tablets"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-tablet->tooltip
+msgid "e.g. tablet-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-desktop->description
+msgid "Icon for desktops"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-desktop->tooltip
+msgid "e.g. computer-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-laptop->description
+msgid "Icon for laptops"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-laptop->tooltip
+msgid "e.g. laptop-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-tv->description
+msgid "Icon for TVs"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-tv->tooltip
+msgid "e.g. tv-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-fallback->description
+msgid "Fallback icon"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-fallback->tooltip
+msgid "Used for unknown device types or when no icon is provided"
+msgstr ""

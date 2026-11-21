@@ -1,0 +1,131 @@
+# DRAWER (SHOW/HIDE APPLETS)
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# mohammad-sn, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-11-20 06:07+0100\n"
+"PO-Revision-Date: 2017-09-27 17:48+0200\n"
+"Last-Translator: Peter Moser <pitiz29a@gmail.com>\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:60 applet.js:231
+#, fuzzy
+msgid "Autohide ON"
+msgstr "Verstecke automatisch"
+
+#. applet.js:62 applet.js:233
+#, fuzzy
+msgid "Autohide OFF"
+msgstr "Verstecke automatisch"
+
+#. applet.js:82
+msgid "Panel Edit mode"
+msgstr "Leistenbearbeitungsmodus"
+
+#. applet.js:88
+msgid "Add applets to the panel"
+msgstr "Applets zur Leiste hinzufügen"
+
+#. settings-schema.json->autohide->description
+#. applet.js:96
+msgid "Autohide"
+msgstr "Verstecke automatisch"
+
+#. metadata.json->description
+msgid ""
+"hide a few applet to have a neater panel, and make them show up again by a "
+"click"
+msgstr ""
+"Verstecke ein paar Applets, damit die Leiste aufgeräumter aussieht. Ein "
+"einfacher Klick zeigt sie wieder."
+
+#. metadata.json->name
+msgid "Drawer (show/hide applets)"
+msgstr "Schublade (zeige/verstecke Applets)"
+
+# Other applet do not show the internal applet name. We should therefore just call this "Settings" and nothing more.
+#. settings-schema.json->head->description
+msgid "Settings for show-hide-applets@mohammad-sn"
+msgstr "Einstellungen"
+
+#. settings-schema.json->autohide->tooltip
+#, fuzzy
+msgid ""
+"Check it if you want to hide applets automatically, unless you should click "
+"on applet to do so.\n"
+"Its status can be changed by middle-clicking on this applet."
+msgstr ""
+"Aktiviere diese Funktion, wenn du Applets automatisch verstecken möchtest, "
+"ansonsten werden sie nur bei einem Mausklick versteckt."
+
+#. settings-schema.json->statusintooltip->description
+msgid "Show Autohide status in tooltip"
+msgstr "Zeige \"Verstecke automatisch\"-Status im Tooltip"
+
+#. settings-schema.json->disablestarttimeautohide->description
+msgid "Disable start time autohide"
+msgstr "Deaktiviere Verzögerung für das automatische Verstecken"
+
+#. settings-schema.json->disablestarttimeautohide->tooltip
+msgid "if not in autohide mode"
+msgstr "Wenn \"Verstecke automatisch\" nicht aktiviert ist."
+
+#. settings-schema.json->hidetime->units
+#. settings-schema.json->autohiderstime->units
+msgid "seconds"
+msgstr "Sekunden"
+
+#. settings-schema.json->hidetime->description
+msgid "Autohide after "
+msgstr "Verstecke automatisch nach"
+
+#. settings-schema.json->hoveractivates->description
+msgid "Activate on hover"
+msgstr "Aktiviere beim Darüberbewegen"
+
+#. settings-schema.json->hoveractivates->tooltip
+msgid "show applets on mouse hover"
+msgstr "Zeige Applets beim Darüberbewegen"
+
+#. settings-schema.json->hoveractivateshide->description
+msgid "Hide on hovering again"
+msgstr "Verstecke beim Darüberbewegen wieder"
+
+#. settings-schema.json->hoveractivateshide->tooltip
+msgid "toggle visibility of applets on mouse hover"
+msgstr "Schalte die Sichtbarkeit der Applets beim Darüberbewegen der Maus um"
+
+#. settings-schema.json->hovertime->units
+msgid "miliseconds"
+msgstr "Millisekunden"
+
+#. settings-schema.json->hovertime->description
+msgid "Hover activates/hides after "
+msgstr "Aktiviere/Verstecke beim Darüberbewegen nach"
+
+#. settings-schema.json->autohiders->description
+msgid "Autohide reshowing applets"
+msgstr "Verstecke wiederauftauchende Applets automatisch"
+
+#. settings-schema.json->autohiderstime->description
+msgid "Reshowers' autohide delay: "
+msgstr "Verstecke wiederauftauchender Applets nach"
+
+#. settings-schema.json->hideuntilseparator->description
+msgid "Only hide until next separator"
+msgstr "Verstecke nur alles bis zum nächsten Trenner"
+
+#. settings-schema.json->hideuntilseparator->tooltip
+msgid "Only hide everything until the next separator element occurs."
+msgstr "Verstecke nur alles bis das nächste Trenner-Element vorkommt."

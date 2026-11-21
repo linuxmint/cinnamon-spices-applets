@@ -1,0 +1,38 @@
+# NVIDIA GPU TEMPERATURE INDICATOR
+# This file is put in the public domain.
+# sophie-la-li, 2025
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr ""
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr ""
+
+#. settings-schema.json->interval->tooltip
+msgid "How often to update the temperature value."
+msgstr ""
+
+#. settings-schema.json->use-fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr ""
+
+#. settings-schema.json->use-fahrenheit->tooltip
+msgid "Whether or not show the temperature in Fahrenheit instead of Celsius."
+msgstr ""
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr ""
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Whether or not show the unit after the temperature value."
+msgstr ""
+
+#. settings-schema.json->show-unit-letter->description
+msgid "Show unit letter"
+msgstr ""
