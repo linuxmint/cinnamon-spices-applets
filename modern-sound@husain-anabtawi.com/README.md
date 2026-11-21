@@ -14,7 +14,7 @@ A modern Cinnamon panel sound applet — compact by default, expandable when nee
 
 ### Left click — sound menu
 
-- **Master volume** — slider with percentage
+- **Master volume** — slider with percentage (100% mark when overamplification is on)
 - **Mic volume** — slider with percentage
 - **Output device** — current speaker/headphone; click the row to expand when multiple devices are available
 - **Input device** — current microphone; click the row to expand when multiple devices are available
@@ -23,7 +23,16 @@ A modern Cinnamon panel sound applet — compact by default, expandable when nee
 
 ### Scroll wheel — panel icon
 
-Scroll up or down on the sound icon in the panel to raise or lower master volume (5% per step).
+| Action | Effect |
+|--------|--------|
+| **Scroll** | Raise or lower **output** volume |
+| **Shift + scroll** | Raise or lower **mic** volume |
+
+Scroll step, direction, and OSD are configurable (see below). Default step is 5%.
+
+### Middle click — panel icon
+
+Configurable actions for plain and **Shift + middle-click** (mute output, mute input, combined mute, or play/pause).
 
 ### Right click — applet options
 
@@ -39,6 +48,18 @@ Right-click the applet → **Configure…**
 | Setting | Description |
 |---------|-------------|
 | **Open menu** | Keyboard shortcut to open the menu (default: `Shift+Super+S`) |
+| **Middle-click action** | Action on middle-click (default: toggle mute) |
+| **Shift + middle-click action** | Action on Shift+middle-click (default: toggle mic mute) |
+| **Show volume in tooltip** | When off, tooltip shows **Sound** instead of `Volume: N%` |
+| **Volume scroll step** | Scroll adjustment step in percent (1–10%, default 5%) |
+| **Invert scroll direction** | Reverse scroll up/down for panel and menu sliders |
+
+### Sound Change Effects
+
+| Setting | Description |
+|---------|-------------|
+| **Play sound when changing output volume** | Volume click sound for output sliders and panel scroll (mic always silent) |
+| **Show volume OSD when scrolling the panel icon** | Brief on-screen volume indicator when scrolling the panel icon |
 
 ### Devices
 
@@ -47,7 +68,7 @@ Right-click the applet → **Configure…**
 | **Hide output device when only one is available** | Removes the output row from the menu when you have a single output |
 | **Hide input device when only one is available** | Removes the input row from the menu when you have a single microphone |
 
-When a setting is off (default), the device row stays visible even with one device — useful to see which device is active.
+When a hide-single-device setting is off (default), the device row stays visible even with one device — useful to see which device is active.
 
 ## Feedback
 
