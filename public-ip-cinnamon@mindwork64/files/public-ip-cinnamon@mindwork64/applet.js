@@ -18,7 +18,7 @@ const REQUEST_TIMEOUT = 8;
 const FALLBACK_INTERVAL_SECONDS = 30;
 const MIN_REFRESH_GAP_SECONDS = 3;
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(text) {
     return Gettext.dgettext(UUID, text);
