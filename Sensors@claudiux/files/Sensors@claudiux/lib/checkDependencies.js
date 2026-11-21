@@ -1,7 +1,6 @@
 const St = imports.gi.St;
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
-const Cinnamon = imports.gi.Cinnamon;
 const Extension = imports.ui.extension; // Needed to reload applets
 
 function _require(relPath) {
@@ -15,6 +14,7 @@ function _require(relPath) {
 
 const MessageTray = imports.ui.messageTray; // ++ Needed for the criticalNotify() function in this script
 var Util = _require("./lib/util");
+var {find_program_in_path} = _require("./lib/findProgramInPath");
 const Main = imports.ui.main; // ++ Needed for notify()
 const Gettext = imports.gettext;
 
@@ -298,30 +298,19 @@ function get_distro() {
   }
 } // End of get_distro
 
-function get_pkg_to_install() {
+async function get_pkg_to_install() {
   let distro = get_distro();
-  var pkgs = [];
-  for (let d of DEPENDENCIES[distro]) {
-    var isInstalled = false;
+  let missing = await Promise.all(DEPENDENCIES[distro].map(async (d) => {
     let executables = Array.isArray(d[0]) ? d[0] : [d[0]];
-    var find_program_in_path;
-    if (Cinnamon.find_program_in_path) {
-      find_program_in_path = (p, s) => Cinnamon.find_program_in_path(p, () => {});
-    } else {
-      find_program_in_path = (p, s) => GLib.find_program_in_path(p);
+    for (let e of executables) {
+      if (e.length > 0 && await find_program_in_path(e))
+        return null;
     }
-    if (executables.some(e => e.length > 0 && find_program_in_path(e, null))) {
-      isInstalled = true;
-    } else {
-      if (d[1].length > 0 && Gio.file_new_for_path(d[1]).query_exists(null)) {
-        isInstalled = true;
-      }
-    }
-    if (isInstalled === false) {
-      pkgs.push(d[2])
-    }
-  }
-  return pkgs
+    if (d[1].length > 0 && Gio.file_new_for_path(d[1]).query_exists(null))
+      return null;
+    return d[2];
+  }));
+  return missing.filter((pkg) => pkg !== null);
 } // End of get_pkg_to_install
 
 function Dependencies() {
@@ -330,17 +319,21 @@ function Dependencies() {
 
 Dependencies.prototype = {
   _init: function() {
-    this.depAreMet = this.are_dependencies_installed();
+    this.depAreMet = false;
     this.alertNotif = null;
-    this.check_dependencies();
+    this._firstCheck = this.are_dependencies_installed().then((met) => {
+      this.depAreMet = met;
+      return this.check_dependencies();
+    }).then(() => this.depAreMet);
   },
 
+  // Returns a Promise resolved with true when all dependencies were installed at the first check.
   areDepMet: function() {
-    return this.depAreMet;
+    return this._firstCheck;
   },
 
-  are_dependencies_installed: function() {
-    let pkgs = get_pkg_to_install();
+  are_dependencies_installed: async function() {
+    let pkgs = await get_pkg_to_install();
 
     if (!NEEDS_FONTS_SYMBOLA)
       return (pkgs.length == 0);
@@ -363,8 +356,9 @@ Dependencies.prototype = {
     return (pkgs.length == 0 && _fonts_installed);
   }, // End of are_dependencies_installed
 
-  check_dependencies: function() {
-    if (!this.depAreMet && this.are_dependencies_installed()) {
+  check_dependencies: async function() {
+    let installed = await this.are_dependencies_installed();
+    if (!this.depAreMet && installed) {
       // At this time, the user just finished to install all dependencies.
       this.depAreMet=true;
       try {
@@ -381,7 +375,7 @@ Dependencies.prototype = {
 
       // Reload this applet with dependencies installed
       Extension.reloadExtension(UUID, Extension.Type.APPLET);
-    } else if (!this.are_dependencies_installed() && this.alertNotif === null) {
+    } else if (!installed && this.alertNotif === null) {
       let icon = new St.Icon({
         icon_name: 'error',
         icon_type: St.IconType.FULLCOLOR,
@@ -402,7 +396,7 @@ Dependencies.prototype = {
       let distro = get_distro();
       let _apt_update = UPDATE[distro];
       let _install = INSTALL[distro];
-      let _pkg_to_install = get_pkg_to_install();
+      let _pkg_to_install = await get_pkg_to_install();
       let _and = " \\\\&\\\\& ";
       if (_apt_update.length === 0)
         _and = "";
