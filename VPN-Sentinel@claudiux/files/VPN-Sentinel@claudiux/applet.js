@@ -21,6 +21,7 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Gdk = imports.gi.Gdk;
+const Gir = imports.gi.GIRepository;
 const Gettext = imports.gettext;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
@@ -124,14 +125,12 @@ function killall(processName) {
     // '/usr/bin/processName' but not 'gedit processName.c' or
     // whatever...
 
-    //~ let argv = ['pkill', '-f', '^([^ ]*/)?' + processName + '($| )'];
     let argv = ["%s/kill_all_pids_of.sh".format(SCRIPTS_DIR), processName];
     ret = GLib.spawn_async(null, argv, null, GLib.SpawnFlags.SEARCH_PATH, null);
     // It might be useful to return success/failure, but we'd need
     // a wrapper around WIFEXITED and WEXITSTATUS. Since none of
     // the current callers care, we don't bother.
   } catch (e) {
-    //~ logError(e, 'Failed to kill ' + processName);
     ret = false
   }
   return ret
@@ -340,7 +339,6 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
   } // End of on_clients_list_changed
 
   on_bypass_list_changed() {
-    //~ log("on_bypass_list_changed()", true);
     if (this.bypassTreatment !== undefined) {
       return
     }
@@ -348,7 +346,6 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
     this.bypassTreatment = true;
     var domains_to_bypass = [];
     for (let b of this.bypassList) {
-      //~ log("Element of bypassList: "+b.domain, true);
       domains_to_bypass.push(""+b.domain);
     }
 
@@ -386,11 +383,8 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
         if (dirId === "Internet") {
           this.internetApps = [];
 
-          //this.appsByCategory[dirId] = [];
           this._loadAppCategories(dir, null, dirId);
           apps_sort(this.internetApps);
-
-          //~ log("this.internetApps.length: "+this.internetApps.length, true);
         }
       }
     });
@@ -425,12 +419,6 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
             app.isApplication = true;
             app.id = app.get_id();
           }
-          //~ if (this.knownApps.indexOf(id) < 0) {//unknown app
-            //~ if (!this.newInstance) {
-              //~ app.newAppShouldHighlight = true;
-            //~ }
-            //~ this.knownApps.push(id);
-          //~ }
         }
       } else if (nextType === CMenu.TreeItemType.DIRECTORY) {
         if (rootDir) {
@@ -484,10 +472,8 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
     if (parseable) {
       rgba_color.alpha = 1.0;
       rgb_color_string = ""+rgba_color.to_string();
-      //~ log("rgb_color_string: "+rgb_color_string, true);
       rgba_color.alpha = opacity;
       rgba_color_string = ""+rgba_color.to_string();
-      //~ log("rgba_color_string: "+rgba_color_string, true);
       return [rgb_color_string, rgba_color_string]
     } else {
       return [null, null]
@@ -597,55 +583,19 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
           for (let client of clientsList) {
             if (""+app.name === ""+client.name && client.launch === true) {
               let app_state = app.get_state();
-              //~ log("app: "+app.name+" ... "+app_state, true);
               if (app_state === Cinnamon.AppState.STOPPED) {
-                //~ log("state: "+ app.get_state(), true);
                 app.launch(5000, [], -1);
-                //app.activate_full(-1, 1000);
-                //app.activate();
                 let id = setTimeout( () => {
                   clearTimeout(id);
-                  //~ let kw = this.keyword_for_pkill(app);
-                  //~ log("app command: "+command, true);
                   this.activityLog.log(_("%s has just been launched.").format(""+client.name));
                 }, 2000); // 2000 ms
                 break
               }
             }
           }
-          //~ if (client.quit) {
-            //~ for (let app of this.internetApps) {
-              //~ if (""+app.name === ""+client.name && app.get_state() === Cinnamon.AppState.RUNNING) {
-                //~ let pids = app.get_pids();
-                //~ if (pids.length > 0) {
-                  //~ //client["pids"] = pids;
-                  //~ //app["pids"] = pids;
-                  //~ for (let pid of pids)
-                    //~ log("%s : pid: %s".format(client.name, ""+pid), true);
-                //~ }
-                //~ break
-              //~ }
-            //~ }
-          //~ }
         }
-        //~ this.s.setValue("clientsList", clientsList);
       } else if (this.vpnStatus === "off") {
         this.audible_alert();
-        //~ for (let client of clientsList) {
-          //~ if (client.quit) {
-            //~ for (let app of this.internetApps) {
-              //~ if (""+app.name === ""+client.name) {
-                //~ this.super_kill(app);
-                //~ try {
-                  //~ app.request_quit();
-                //~ } catch(e) {
-                  //~ // Nothing to do.
-                //~ }
-                //~ break
-              //~ }
-            //~ }
-          //~ }
-        //~ }
         log("reconnect: "+this.reconnect);
         log("respectUserRequest: "+this.respectUserRequest);
         log("disconnectedByUser: "+this.disconnectedByUser);
@@ -654,7 +604,7 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
         this.monitor_vpn_only_apps()
       }
       clientsList = null
-    }).catch(e => log("on_network_changed() - FAIL: " + e));
+    }).catch(e => log("on_network_changed: FAIL: "  + e, true));
   } // End of on_network_changed
 
   async super_kill(app) {
@@ -673,7 +623,6 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
     if (result) {
       this.activityLog.log(_("%s has just been stopped.").format(""+app_name))
     }
-
   } // End of super_kill
 
   monitor_vpn_only_apps() {
@@ -712,12 +661,12 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
   keyword_for_pkill(app) {
     let appInfo = app.get_app_info();
     let executable = appInfo.get_executable(); // Devhelp: GAppInfo
-    //~ log("%s: executable: %s".format(app.get_name(), executable), true);
+    // log("%s: executable: %s".format(app.get_name(), executable), true);
     return ""+executable
   }
 
   async get_vpn_status() {
-    log("get_vpn_status()");
+  log("get_vpn_status()");
     let monitor = this.netMonitor;
     let network_available = monitor.get_network_available();
     log("Connectivity: %s".format(monitor.get_connectivity()));
@@ -740,16 +689,12 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
       let data = actives[0].split(":");
       // TYPE:DEVICE:UUID:AUTOCONNECT:TIMESTAMP:NAME;etc
       // vpn:enp2s0:30c15256-2838-4aa0-888e-4544f4d7cbff:yes:1658929072:Czech_Republic-Prague (IPv6);wireguard:Es-Madrid(W):6711baa7-4137-477d-856c-a2cd5736812d:no:1658929090:Es-Madrid(W)
-      //~ log("interface: %s; name: %s; status: %s".format(data[0], data[1], data[2]));
+      // log("interface: %s; name: %s; status: %s".format(data[0], data[1], data[2]));
 
       [this.vpnType, this.vpnDevice, this.vpnUUID, this.vpnAutoconnect, this.vpnTimestamp, this.vpnName] = data;
       this.vpnTimestamp = 0+this.vpnTimestamp;
 
       this.vpnStatus = (this.vpnType.length === 0) ? "off" : "on";
-      //~ [this.vpnDevice, this.vpnName, this.vpnStatus] = data
-      //~ this.vpnStatus = data[2];
-      //~ this.vpnName = data[1];
-      //~ this.vpnDevice = data[0];
       if (this.vpnStatus === "on" && this.vpnName !=="" && this.vpnDevice !== "") {
         this.lastVpnInterfaceUsed = this.vpnDevice;
         this.lastVpnNameUsed = this.vpnName;
@@ -765,8 +710,6 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
       this.update_icon();
       subProcess.send_signal(9);
     });
-
-    //this.update_icon();
   } // End of get_vpn_status
 
   async try_to_reconnect_to_latest_vpn() {
@@ -789,17 +732,15 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
       this.activityLog.log(_("Connection lost. Attempt to reconnect to: %s").format(this.lastVpnNameUsed));
       this.connect_vpn(this.lastVpnNameUsed);
       this.update_icon();
-    }).catch(e => log("try_to_reconnect_to_latest_vpn() - FAIL: " + e));
+    }).catch(e => log("try_to_reconnect_to_latest_vpn: FAIL: " + e));
   }  // End of try_to_reconnect_to_latest_vpn
 
   connect_vpn(name) {
     this.set_transient();
     let command = `bash -c '/usr/bin/nmcli -w 4 connection up "%s" > /dev/null'`.format(name);
-    //log("command: "+command, true);
     this.activityLog.log(_("Connection to: ") + name);
-    //~ GLib.spawn_command_line_async(""+command); // FIXME: analyze the return of this command!
     let subProcess = Util.spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
-      log("connect_vpn("+name+") - exitCode: "+exitCode, true);
+      log("connect_vpn("+name+") - exitCode: "+exitCode);
       if (exitCode === 0) {
         this.disconnectedByUser = false;
         this.vpnStatus = "on";
@@ -813,9 +754,7 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
     this.disconnectedByUser = true;
     this.set_transient();
     let command = `bash -c '/usr/bin/nmcli -w 4 connection down "%s" > /dev/null'`.format(name);
-    //log("command: "+command, true);
     GLib.spawn_command_line_async(""+command);
-    //~ this.vpnStatus = "off";
     let id = setTimeout( () => {
       clearTimeout(id);
       this.activityLog.log(_("Disconnected from: ") + name);
@@ -830,7 +769,6 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
       this.SMCItems[i].setSensitive(false)
     }
 
-    //~ if (this.vpnStatus === "on") {
     if (this.vpnStatus !== "off") {
       this.disconnect_vpn(old_co);
     }
@@ -857,7 +795,7 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
 
 
   on_applyBypassListButton_clicked() {
-    log("applyBypassListButton clicked!", true);
+    log("applyBypassListButton clicked!");
     Util.spawnCommandLineAsync("bash -c '%s/apply-bypass-list.sh'".format(SCRIPTS_DIR))
   }
 
@@ -937,36 +875,33 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
     log("_countryCode: %s".format(_countryCode));
 
     if (this.flags[_countryCode] !== undefined) {
-      //~ if (this.vpnStatus === "on") {
-        //~ log("%s:%s:%s".format(this.vpnName, _countryCode, this.flags[_countryCode].emoji), true);
-        let flagList = this.s.getValue("flagList");
-        var newFlagList = [];
-        var found = false;
-        for (let fl of flagList) {
-          if (fl.vpnName == ""+vpn_name) {
-            found = true;
-            if (fl.confirmed) {
-              newFlagList.push(fl)
-            } else {
-              newFlagList.push({"vpnName": ""+vpn_name, "countryCode": _countryCode, "flag": this.flags[_countryCode].emoji, "confirmed": false})
-            }
-          } else {
+      let flagList = this.s.getValue("flagList");
+      var newFlagList = [];
+      var found = false;
+      for (let fl of flagList) {
+        if (fl.vpnName == ""+vpn_name) {
+          found = true;
+          if (fl.confirmed) {
             newFlagList.push(fl)
+          } else {
+            newFlagList.push({"vpnName": ""+vpn_name, "countryCode": _countryCode, "flag": this.flags[_countryCode].emoji, "confirmed": false})
           }
+        } else {
+          newFlagList.push(fl)
         }
-        if (!found) {
-          newFlagList.push({"vpnName": ""+vpn_name, "countryCode": _countryCode, "flag": this.flags[_countryCode].emoji, "confirmed": false})
-        }
+      }
+      if (!found) {
+        newFlagList.push({"vpnName": ""+vpn_name, "countryCode": _countryCode, "flag": this.flags[_countryCode].emoji, "confirmed": false})
+      }
 
-        let sortBy = this.sortFlagListBy;
-        if (sortBy === "vpnName") {
-          flags_sort_by_vpnName(newFlagList);
-        } else if (sortBy === "countryCode") {
-          flags_sort_by_countryCode(newFlagList);
-        }
+      let sortBy = this.sortFlagListBy;
+      if (sortBy === "vpnName") {
+        flags_sort_by_vpnName(newFlagList);
+      } else if (sortBy === "countryCode") {
+        flags_sort_by_countryCode(newFlagList);
+      }
 
-        this.s.setValue("flagList", newFlagList);
-      //~ }
+      this.s.setValue("flagList", newFlagList);
       this.set_applet_label(this.flags[_countryCode].emoji);
     } else {
       this.set_applet_label(DEFAULT_APPLET_LABEL);
@@ -988,10 +923,8 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
   } // End of is_flag_confirmed
 
   confirm_flag(vpn_name) {
-    //~ log("vpn_name: "+vpn_name, true);
     let _vpn_name = vpn_name;
     if (_vpn_name.length === 0) _vpn_name = _("(None)");
-    //~ log("_vpn_name: "+_vpn_name, true);
 
     let flagList = this.s.getValue("flagList");
     var newFlagList = [];
@@ -1038,15 +971,12 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
 
     this.s.setValue("flagList", flagList);
 
-
-    //~ log("App name: "+app.get_name(), true);
     if (!reload_settings_window) return;
 
     if (app) app.request_quit();
 
     let id = setTimeout( () => {
       clearTimeout(id);
-      //~ Util.spawnCommandLine("cinnamon-settings applets %s -t %s %s".format(UUID, ""+tabFlags, ""+instanceId));
       Util.spawnCommandLine(`xlet-settings applet ${UUID} -t ${tabFlags} -i ${instanceId}`);
     }, 500); // 500 ms
   } // End of sort_flaglist
@@ -1057,7 +987,6 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
     if (!this.alertIssued && this.vpnStatus !== "on") {
       if ((this.useSoundAlert && this.vpnOldStatus === "on")
       || (this.useSoundAlertAtBeginning)) {
-        //~ log("Playing audible alert!");
         GLib.spawn_command_line_async('play -V0 -q "%s/vpn-dropped.oga"'.format(SOUNDS_DIR));
         this.alertIssued = true;
       }
@@ -1166,7 +1095,6 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
     // button VPN Policy...
     let configure1 = new PopupMenu.PopupIconMenuItem(_("VPN Policy") + "...", "system-run", St.IconType.SYMBOLIC);
     configure1.connect("activate", () => {
-      //~ Util.spawnCommandLine("cinnamon-settings applets %s -t %s %s".format(UUID, ""+this.tabNumberOfVPNPolicy, ""+this.instanceId));
       Util.spawnCommandLine(`xlet-settings applet ${UUID} -t ${this.tabNumberOfVPNPolicy} -i ${this.instanceId}`);
     });
     this.menu.addMenuItem(configure1);
@@ -1174,7 +1102,6 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
     // button Internet Apps Manager...
     let configure2 = new PopupMenu.PopupIconMenuItem(_("Internet Apps Manager") + "...", "system-run", St.IconType.SYMBOLIC);
     configure2.connect("activate", () => {
-      //~ Util.spawnCommandLine("cinnamon-settings applets %s -t %s %s".format(UUID, ""+this.tabNumberOfInternetPolicy, ""+this.instanceId));
       Util.spawnCommandLine(`xlet-settings applet ${UUID} -t ${this.tabNumberOfInternetPolicy} -i ${this.instanceId}`);
     });
     this.menu.addMenuItem(configure2);
@@ -1194,11 +1121,6 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
       _reload_flag_button.connect("activate", (event) => this.set_flag());
       let _confirm_flag_button = new PopupMenu.PopupIconMenuItem(_("Confirm this Country Flag"), "user-bookmarks", St.IconType.SYMBOLIC);
       _confirm_flag_button.connect("activate", (event) => this.confirm_flag(this.vpnName));
-      //~ if (this.vpnStatus === "off" || (this.vpnStatus === "on" && !this.is_flag_confirmed())) {
-        //~ this.menu.addMenuItem(_reload_flag_button);
-        //~ if (this.vpnStatus === "on")
-          //~ this.menu.addMenuItem(_confirm_flag_button);
-      //~ }
       if (this.labelWhenVPNisOff === "LabelWithFlag" && !this.is_flag_confirmed()) {
         this.menu.addMenuItem(_reload_flag_button);
         this.menu.addMenuItem(_confirm_flag_button);
@@ -1257,9 +1179,6 @@ var VPNSentinel = class VPNSentinel extends Applet.TextIconApplet {
 
   on_button_connect() {
     if (this.menu.isOpen) this.menu.toggle(); // closes the opened menu
-    //~ let status = this.vpnStatus;
-    //~ this.vpnStatus = "transient";
-    //~ if (status !== "on" && this.lastVpnNameUsed) {
     if (this.vpnStatus !== "on" && this.lastVpnNameUsed) {
       this.connect_vpn(this.lastVpnNameUsed);
     } else if (this.vpnStatus !== "off") {

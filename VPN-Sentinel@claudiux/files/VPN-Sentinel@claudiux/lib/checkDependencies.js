@@ -1,9 +1,9 @@
 const St = imports.gi.St;
-const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
-const Gio = imports.gi.Gio; // Needed for file infos
-const MessageTray = imports.ui.messageTray; // ++ Needed for the criticalNotify() function in this script
+const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
+const MessageTray = imports.ui.messageTray;
 const Util = imports.misc.util;
-const Main = imports.ui.main; // ++ Needed for notify()
+const Main = imports.ui.main;
 const Gettext = imports.gettext;
 const Cinnamon = imports.gi.Cinnamon;
 const Extension = imports.ui.extension;
@@ -17,10 +17,47 @@ function _require(relPath) {
   }
 }
 
-var {find_program_in_path} = _require("./lib/findProgramInPath");
+var { find_program_in_path, findProgramViaWhich } = _require("./lib/findProgramInPath");
 
-var {to_string} = _require("./lib/to-string");
+var { to_string } = _require("./lib/to-string");
 
+var {
+  _sourceIds,
+  timeout_add_seconds,
+  timeout_add,
+  setTimeout,
+  clearTimeout,
+  setInterval,
+  clearInterval,
+  source_exists,
+  source_remove,
+  remove_all_sources
+} = _require("./lib/mainloopTools");
+
+var yay_path;
+var dnf_path;
+var zypper_path;
+var apturl_path;
+var pkexec_path;
+var pkcon_path;
+var pkgcli_path;
+
+var _pathes = {
+  "yay": null,
+  "dnf": null,
+  "zypper": null,
+  "apturl": null,
+  "pkexec": null,
+  "pkcon": null,
+  "pkgcli": null
+};
+findProgramViaWhich("yay", (result) => { yay_path = result; _pathes["yay"] = result; });
+findProgramViaWhich("dnf", (result) => { dnf_path = result; _pathes["dnf"] = result; });
+findProgramViaWhich("zypper", (result) => { zypper_path = result; _pathes["zypper"] = result; });
+findProgramViaWhich("apturl", (result) => { apturl_path = result; _pathes["apturl"] = result; });
+findProgramViaWhich("pkexec", (result) => { pkexec_path = result; _pathes["pkexec"] = result; });
+findProgramViaWhich("pkcon", (result) => { pkcon_path = result; _pathes["pkcon"] = result; });
+findProgramViaWhich("pkgcli", (result) => { pkgcli_path = result; _pathes["pkgcli"] = result; });
 
 // --- To adapt to the applet --- //
 /**
@@ -138,8 +175,7 @@ var _ = function(str) {
 
 var UPDATE = {
   "default": "sudo apt-get update",
-  //~ "arch": GLib.find_program_in_path("yay") != null ? "yay -Syu" : "sudo pacman -Syu",
-  "arch": find_program_in_path("yay") != null ? "yay -Syu" : "sudo pacman -Syu",
+  "arch": yay_path != null ? "yay -Syu" : "sudo pacman -Syu",
   "debian": "apt-get update",
   "devuan": "apt-get update",
   "fedora": "sudo dnf update",
@@ -149,8 +185,7 @@ var UPDATE = {
 
 var INSTALL = {
   "default": "sudo apt-get install",
-  //~ "arch": GLib.find_program_in_path("yay") != null ? "yay -S" : "sudo pacman -S",
-  "arch": find_program_in_path("yay") != null ? "yay -S" : "sudo pacman -S",
+  "arch": yay_path != null ? "yay -S" : "sudo pacman -S",
   "debian": "apt-get install",
   "devuan": "apt-get install",
   "fedora": "sudo dnf install",
@@ -200,8 +235,9 @@ function get_terminal() {
   var _terminals = ["gnome-terminal", "tilix", "konsole", "guake", "qterminal", "terminator", "uxterm", "xterm"];
   var t;
   for (t=0; t < _terminals.length ; ++t) {
-    //~ if (GLib.find_program_in_path(_terminals[t])) {
-    if (find_program_in_path(_terminals[t])) {
+    var t_path;
+    find_program_in_path(_terminals[t], t_path);
+    if (t_path != null) {
       term_found = _terminals[t];
       break
     }
@@ -232,8 +268,7 @@ function get_default_terminal_separator() {
 } // End of get_default_terminal_separator
 
 function isFedora() {
-  //~ return GLib.find_program_in_path("dnf")
-  return find_program_in_path("dnf")
+  return dnf_path != null
 } // End of isFedora
 
 function isArchLinux() {
@@ -245,8 +280,7 @@ function isDebian() {
 } // End of isDebian
 
 function isOpenSUSE() {
-  //~ return GLib.find_program_in_path("zypper")
-  return find_program_in_path("zypper")
+  return zypper_path != null;
 }
 
 function isGentoo() {
@@ -254,25 +288,22 @@ function isGentoo() {
 } // End of isGentoo
 
 function is_apturl_present() {
-  //~ return GLib.find_program_in_path("apturl")
-  return find_program_in_path("apturl")
+  return apturl_path != null;
 } // End of is_apturl_present
 
 
 function is_pkexec_present() {
-  //~ return (GLib.find_program_in_path("pkexec") != null)
-  return (find_program_in_path("pkexec") != null)
+  log("is_pkexec_present() - pkexec_path: " + pkexec_path);
+  return pkexec_path != null
 } // End of is_pkexec_present
 
 function is_pkcon_present() {
-  //~ return (GLib.find_program_in_path("pkcon") != null && GLib.find_program_in_path("pkexec") != null)
-  return (find_program_in_path("pkcon") != null && GLib.find_program_in_path("pkexec") != null)
+  log("is_pkcon_present() - pkcon_path: " + pkcon_path);
+  return pkcon_path != null
 } // End of is_pkcon_present
 
 function is_pkgcli_present() {
-  //~ return GLib.find_program_in_path("apturl")
-  //~ return (GLib.find_program_in_path("pkgcli") != null && GLib.find_program_in_path("pkexec") != null)
-  return (find_program_in_path("pkgcli") != null && GLib.find_program_in_path("pkexec") != null)
+  return pkgcli_path != null
 } // End of is_pkgcli_present
 
 function get_distro() {
@@ -306,16 +337,20 @@ function get_pkg_to_install() {
   for (let d of DEPENDENCIES[distro]) {
     var isInstalled = false;
     let executables = Array.isArray(d[0]) ? d[0] : [d[0]];
-    //~ var find_program_in_path;
-    //~ if (Cinnamon.find_program_in_path) {
-      //~ find_program_in_path = (p, s) => Cinnamon.find_program_in_path(p, () => {});
-    //~ } else {
-      //~ find_program_in_path = (p, s) => GLib.find_program_in_path(p);
-    //~ }
-    //~ if (executables.some(e => e.length > 0 && find_program_in_path(e, null))) {
-    if (executables.some(e => e.length > 0 && find_program_in_path(e))) {
+    var retFPIP;
+    if (executables.some(e => {
+        if (e.length > 0) {
+          retFPIP = null;
+          find_program_in_path(e, retFPIP);
+          return retFPIP != null
+        } else {
+          return false;
+        }
+      }))
+    {
       isInstalled = true;
-    } else {
+    }
+    else {
       if (d[1].length > 0 && Gio.file_new_for_path(d[1]).query_exists(null)) {
         isInstalled = true;
       }
@@ -333,9 +368,13 @@ function Dependencies() {
 
 Dependencies.prototype = {
   _init: function() {
-    this.depAreMet = this.are_dependencies_installed();
-    this.alertNotif = null;
-    this.check_dependencies();
+    //~ global.log("_pathes: " + JSON.stringify(_pathes, null, 2));
+    let _to = setTimeout(() => {
+      clearTimeout(_to);
+      this.depAreMet = this.are_dependencies_installed();
+      this.alertNotif = null;
+      this.check_dependencies();
+    }, 3000);
   },
 
   areDepMet: function() {
@@ -348,6 +387,7 @@ Dependencies.prototype = {
   }, // End of are_dependencies_installed
 
   check_dependencies: function() {
+    //~ global.log("_pathes: " + JSON.stringify(_pathes, null, 2));
     if (!this.depAreMet && this.are_dependencies_installed()) {
       // At this time, the user just finished to install all dependencies.
       this.depAreMet=true;
@@ -415,7 +455,7 @@ Dependencies.prototype = {
           if (_isDebian === true) {
             GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'VPN-Sentinel message: Some packages needed'; echo 'To complete the installation, please become root with su then execute the command: ${_apt_update}${_and}${_apt_install}'; sleep 1; exec bash"`);
           } else {
-            GLib.spawn_command_line_async(`${terminal} ${separator} 'sh -c "echo VPN-Sentinel message: Some packages needed; echo To complete the installation, please enter then execute the command: ${_apt_update}${_and}${_apt_install}'; sleep 1; exec bash"`);
+            GLib.spawn_command_line_async(`${terminal} ${separator} sh -c "echo 'VPN-Sentinel message: Some packages needed'; echo 'To complete the installation, please enter then execute the commands:\n${_apt_update}\n${_apt_install}'; sleep 1; exec bash"`);
           }
         }
       } else {

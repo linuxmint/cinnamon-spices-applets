@@ -36,7 +36,7 @@ var {
     RELOAD,
     log,
     logError
-} = require("./lib/constants");
+} = _require("./lib/constants");
 
 /**
  * class File

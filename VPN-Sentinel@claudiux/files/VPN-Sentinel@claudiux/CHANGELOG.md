@@ -1,3 +1,6 @@
+### v2.6.0~20261121
+  * Improves dependency checking.
+
 ### v2.5.4~20261115
   * Compatible with Cinnamon 6.8.
   * Fixes [#9305](https://github.com/linuxmint/cinnamon-spices-applets/issues/9305).
