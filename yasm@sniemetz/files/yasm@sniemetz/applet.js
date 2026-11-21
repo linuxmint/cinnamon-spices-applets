@@ -440,7 +440,11 @@ class YasmApplet extends Applet.Applet {
     bind('gpu-temp-warn',  '_gpuTempWarn');
     bind('gpu-temp-alert', '_gpuTempAlert');
     bind('gpu-temp-alert-notify', '_gpuTempAlertNotify');
-    bind('gpu-show-igpu',      '_gpuShowIgpu',     () => this._rebuildSections());
+    bind('gpu-show-igpu',      '_gpuShowIgpu',     () => {
+      // Label fields depend on gpu-custom-labels only; reset it so they hide with the iGPU option
+      if (!this._gpuShowIgpu && this._gpuCustomLabels) this._settings.setValue('gpu-custom-labels', false);
+      this._rebuildSections();
+    });
     bind('gpu-custom-labels',  '_gpuCustomLabels', () => this._rebuildSections());
     bind('gpu-label-igpu',     '_gpuLabelIgpu',    () => this._rebuildSections());
     bind('gpu-label-dgpu',     '_gpuLabelDgpu',    () => this._rebuildSections());
