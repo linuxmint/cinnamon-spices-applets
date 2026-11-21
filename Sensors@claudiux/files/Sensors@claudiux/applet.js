@@ -490,7 +490,7 @@ var SensorsApplet = class SensorsApplet extends Applet.Applet {
       }
     }
     this.s.setValue("temperatureATfevimu_is_loaded", _temperatureATfevimu_is_loaded);
-    this.s.setValue("disktemp_is_user_readable", this.is_disktemp_user_readable());
+    this.is_disktemp_user_readable().then((readable) => this.s.setValue("disktemp_is_user_readable", readable));
   }
 
   _on_chars_temp_modified() {
@@ -554,10 +554,10 @@ var SensorsApplet = class SensorsApplet extends Applet.Applet {
     checkDisks = null;
   }
 
-  is_disktemp_user_readable() {
+  async is_disktemp_user_readable() {
     var ret = false;
     var sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
-    if (find_program_in_path("/usr/bin/dnf") || find_program_in_path("/usr/bin/pacman")) {
+    if (await find_program_in_path("/usr/bin/dnf") || await find_program_in_path("/usr/bin/pacman")) {
       // Distro is Fedora or Arch based.
       sudoers_smartctl_path = "/etc/sudoersSensors.d/smartctl";
     }
@@ -1920,24 +1920,26 @@ var SensorsApplet = class SensorsApplet extends Applet.Applet {
     if (!this.do_not_check_dependencies) {
       // Check about dependencies:
       this.checkDepInterval = null;
-      if (this.dependencies.areDepMet()) {
-        // All dependencies are installed. Now, run the loop!:
-        spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
-        this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
-        this.isLooping = true;
-        this.reap_sensors();
-      } else {
-        // Some dependencies are missing. Suggest to the user to install them.
-        this.isLooping = false;
-        this.checkDepInterval = setInterval(
-          () => {
-            clearInterval(this.checkDepInterval);
-            this.dependencies.check_dependencies();
-            this.checkDepInterval = null;
-          },
-          10000
-        );
-      }
+      this.dependencies.areDepMet().then((depAreMet) => {
+        if (depAreMet) {
+          // All dependencies are installed. Now, run the loop!:
+          spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
+          this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
+          this.isLooping = true;
+          this.reap_sensors();
+        } else {
+          // Some dependencies are missing. Suggest to the user to install them.
+          this.isLooping = false;
+          this.checkDepInterval = setInterval(
+            () => {
+              clearInterval(this.checkDepInterval);
+              this.dependencies.check_dependencies();
+              this.checkDepInterval = null;
+            },
+            10000
+          );
+        }
+      });
     } else {
       this.checkDepInterval = null;
       spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
@@ -2044,7 +2046,7 @@ var SensorsApplet = class SensorsApplet extends Applet.Applet {
     let subProcess = spawnCommandLineAsyncIO(
       "/usr/bin/env bash -c '%s/pkexec_make_smartctl_usable_by_sudoers.sh %s'".format(SCRIPTS_DIR, this.sudo_or_wheel),
       (out, err, exitCode) => {
-        this.s.setValue("disktemp_is_user_readable", this.is_disktemp_user_readable());
+        this.is_disktemp_user_readable().then((readable) => this.s.setValue("disktemp_is_user_readable", readable));
         subProcess.send_signal(9);
     });
   }

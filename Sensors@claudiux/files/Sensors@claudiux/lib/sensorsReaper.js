@@ -61,16 +61,22 @@ var SensorsReaper = class SensorsReaper {
     this.last_attempt_DateTime= undefined;  // the last time we checked sensors
     this.nvidia_cards = {};
     this.sensors_json_data = {};
-    this.sensors_program = ""+find_program_in_path("sensors");
-    this.get_sensors_command();
+    this.sensors_program = null;
+    find_program_in_path("sensors").then((path) => {
+      this.sensors_program = path;
+      this.get_sensors_command();
+    });
 
     // Support for the Nvidia System Management Interface (nvidia-smi)
     // The Nvidia System Management Interface docs are at
     //   https://developer.nvidia.com/system-management-interface
     // Note: The fan values are returned as a percentage instead of RPM
     //   so are not processed
-    this.nvidia_smi_program = "" + find_program_in_path("nvidia-smi");
-    this.get_nvidia_smi_command();
+    this.nvidia_smi_program = null;
+    find_program_in_path("nvidia-smi").then((path) => {
+      this.nvidia_smi_program = path;
+      this.get_nvidia_smi_command();
+    });
 
     this.in_fahrenheit = false;
     this.raw_data = {};
@@ -227,16 +233,21 @@ var SensorsReaper = class SensorsReaper {
         GLib.free(_contents);
       });
     } else {
-        if (this.sensors_command != undefined) {
+      if (this.sensors_command != undefined) {
         let subProcess = Util.spawnCommandLineAsyncIO(this.sensors_command, (stdout, stderr, exitCode) => {
           if (exitCode === 0) {
             if (this.sensors_is_json_compatible)
               this._sensors_reaped(stdout);
             else
               this._sensors_reaped(convert_to_json(stdout));
+          } else {
+            this.isRunning = false;
           }
           subProcess.send_signal(9);
         });
+      } else {
+        // The sensors program isn't resolved yet (or isn't installed): try again on the next loop.
+        this.isRunning = false;
       }
     }
 

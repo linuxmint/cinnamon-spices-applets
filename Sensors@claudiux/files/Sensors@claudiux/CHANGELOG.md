@@ -1,3 +1,6 @@
+### v5.11.11~20261121
+  * Fix empty sensor values with Cinnamon 6.8: Cinnamon.find_program_in_path is asynchronous (callback-based), it is now used accordingly, falling back to GLib.find_program_in_path on older versions.
+
 ### v5.11.10~20261113
   * Update checkDependencies.js script.
 
