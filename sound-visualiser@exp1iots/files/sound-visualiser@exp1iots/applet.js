@@ -240,27 +240,21 @@ class MediaBars extends Applet.Applet {
         if (this._destroyed || !this._playing || this._proc)
             return;
 
-        let cava = GLib.find_program_in_path('cava');
-        if (!cava) {
-            if (!this._warned) {
-                this._warned = true;
-                global.logError('sound-visualiser: cava not found. Run: sudo apt install cava');
-            }
-            return;
-        }
-
         try {
             let dir = GLib.get_user_config_dir() + '/sound-visualiser';
             let conf = dir + '/cava.conf';
             GLib.mkdir_with_parents(dir, 0o755);
             GLib.file_set_contents(conf, CAVA_CONFIG);
             this._proc = new Gio.Subprocess({
-                argv: [cava, '-p', conf],
+                argv: ['cava', '-p', conf],
                 flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE
             });
             this._proc.init(null);
         } catch (e) {
-            global.logError('sound-visualiser: cava start failed: ' + e);
+            if (!this._warned) {
+                this._warned = true;
+                global.logError('sound-visualiser: cava start failed (if cava is missing, run: sudo apt install cava): ' + e);
+            }
             this._proc = null;
             this._scheduleRetry();
             return;
