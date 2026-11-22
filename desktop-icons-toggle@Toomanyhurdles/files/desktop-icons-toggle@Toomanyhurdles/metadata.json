@@ -1,0 +1,7 @@
+{
+    "uuid": "desktop-icons-toggle@Toomanyhurdles",
+    "name": "Desktop Icons Toggle",
+    "description": "A panel toggle switch that hides and shows your desktop icons. Right-click to set a solid colour background.",
+    "version": "1.0.0",
+    "max-instances": 1
+}

@@ -1,0 +1,34 @@
+{
+    "head-colour": {
+        "type": "header",
+        "description": "Solid colour background"
+    },
+    "custom-color": {
+        "type": "colorchooser",
+        "default": "#2e3440",
+        "description": "My colour",
+        "tooltip": "The colour used by 'My colour' in the applet's right-click menu."
+    },
+    "apply-custom": {
+        "type": "button",
+        "description": "Apply this colour to the desktop now",
+        "callback": "applyCustomColor"
+    },
+    "restore-wallpaper": {
+        "type": "button",
+        "description": "Restore my wallpaper",
+        "callback": "restoreWallpaper"
+    },
+    "saved-layout": {
+        "type": "generic",
+        "default": "true::false"
+    },
+    "saved-picture-options": {
+        "type": "generic",
+        "default": "zoom"
+    },
+    "saved-slideshow": {
+        "type": "generic",
+        "default": false
+    }
+}
