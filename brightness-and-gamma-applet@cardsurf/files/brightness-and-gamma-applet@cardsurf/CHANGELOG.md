@@ -1,3 +1,6 @@
+### v3.4.1~20261122
+* Improves dependency checking.
+
 ### v3.4.0~20261109
 * Check sunrise and sunset times more effectively.
 * Takes better account of a smoothing duration set to 0.
