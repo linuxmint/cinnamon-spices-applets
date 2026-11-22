@@ -15,6 +15,7 @@ case $PARAM in
         DETECT=$(echo -n $(grep -E 'Stopped target (suspend|hibernate|sleep|graphical)|Starting screensaver' /var/log/syslog | tail -n 1))
         ;;
     *)
+        DETECT=$(echo -n $(grep -E 'Stopped target (suspend|hibernate|sleep)' /var/log/syslog | tail -n 1))
         ;;
 esac
 

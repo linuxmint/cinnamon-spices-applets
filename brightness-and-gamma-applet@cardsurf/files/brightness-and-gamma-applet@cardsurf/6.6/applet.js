@@ -25,12 +25,13 @@ function _require(relPath) {
 
 const uuid = "brightness-and-gamma-applet@cardsurf";
 
-const SunCalc = _require('./lib/suncalc');
-const AppletGui = _require('./lib/appletGui');
-const AppletConstants = _require('./lib/appletConstants');
-const Values = _require('./lib/values');
-const TempValues = _require('./lib/tempValues');
-const {
+var { findProgramViaWhich } = _require('./lib/findProgramInPath');
+var SunCalc = _require('./lib/suncalc');
+var AppletGui = _require('./lib/appletGui');
+var AppletConstants = _require('./lib/appletConstants');
+var Values = _require('./lib/values');
+var TempValues = _require('./lib/tempValues');
+var {
   timeout_add_seconds,
   setTimeout,
   clearTimeout,
@@ -88,10 +89,23 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         this.set_applet_icon_name(this.baga_icon + "-on");
         this.settingsWindow = undefined;
 
+        this.xsct_name = "xsct";
+        this.xrandr_name = "xrandr";
+        this.randr_name = "RandR";
+        this.Paths = {};
+        this.Paths[`${this.randr_name}`] = null,
+        this.Paths[`${this.xrandr_name}`] = null,
+        this.Paths[`${this.xsct_name}`] = null;
+        this.populate_Paths();
+
         this.last_resume_date = "";
         this._last_period = "";
 
         this.isInFullscreenMode = false;
+
+        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this._bind_settings();
+        this.on_gui_icon_changed();
 
         this._clipboard = St.Clipboard.get_default();
 
@@ -108,14 +122,13 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         this.menu_sliders = null;
         this.file_schema = "file://";
         this.home_shortcut = "~";
-        this.xsct_name = "xsct";
-        this.xrandr_name = "xrandr";
-        this.randr_name = "RandR";
+
         this.xrandr_regex = new RegExp(this.xrandr_name, "i");
         this.randr_regex = new RegExp(this.randr_name, "i");
         this.version_regex = new RegExp("[0-9]+[\.][0-9]+","i");
         this.screen_regex = new RegExp("screen.*:","i");
         this.number_regex = new RegExp("[0-9]+","");
+
         this.output_line_separator = " ";
         this.output_name_index = 0;
         this.output_status_index = 1;
@@ -126,7 +139,6 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         this.last_values_string = "";
         this.last_values_string_temp = "";
 
-        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.default_screen_name = "";
         this.default_output_indexes = [];
         this.minimum_brightness = 10;
@@ -152,10 +164,24 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         this.apply_startup = true;
         this.apply_every = 0;
         this.apply_asynchronously = true;
+
+
+
         this.gsettings = Gio.Settings.new("org.cinnamon.settings-daemon.plugins.color");
         this.sunrise_sunset();
+        let _to = setTimeout(() => {
+                clearTimeout(_to);
+                //~ global.log("this.Paths:" + JSON.stringify(this.Paths, null, 2));
+                this._init_dependencies_satisfied();
+            },
+            3000
+        );
+    }
 
-        this._init_dependencies_satisfied();
+    populate_Paths() {
+        for (let program of [this.randr_name, this.xrandr_name, this.xsct_name]) {
+            findProgramViaWhich(`${program}`, (result) => {this.Paths[`${program}`] = result});
+        }
     }
 
     on_geoip_button_clicked() {
@@ -169,10 +195,18 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     detect_resume() {
+        if (this.resume_detect_method == null) return;
+        if (this.last_resume_date == undefined) {
+            this.last_resume_date = "";
+            return
+        }
         let method = this.resume_detect_method;
+        if (method === "none")  return;
         Util.spawnCommandLineAsyncIO(SCRIPT_DETECT_RESUME + " " + method, (stdout, stderr, exitCode) => {
             if (exitCode == 0) {
                 var _last_resume_date = "" + stdout;
+                //~ global.log("_last_resume_date: " + _last_resume_date);
+                //~ global.log("this.last_resume_date: " + this.last_resume_date);
                 if (this.last_resume_date != _last_resume_date) {
                     this.last_resume_date = _last_resume_date;
                     this.on_preset_reload_button_clicked();
@@ -252,21 +286,12 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     _check_xrandr() {
-        let xrandr_satisfied = this._xrandr_available() && this._xrandr_version_satisfied();
-        if(!xrandr_satisfied) {
-            let dependencies = this._get_dependencies(this.xrandr_name, MinXrandrVersion);
-            this._show_dialog_dependencies(dependencies);
-            return false;
-        }
-        return true;
+        let xrandr_satisfied = this._xrandr_available();
+        return xrandr_satisfied;
     }
 
     _xrandr_available() {
-        return GLib.find_program_in_path(this.xrandr_name) != null;
-    }
-
-    _xrandr_version_satisfied() {
-        return GLib.find_program_in_path(this.xrandr_name) != null;
+        return this.Paths[`${this.xrandr_name}`] != null;
     }
 
     _check_xsct() {
@@ -281,7 +306,8 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     _xsct_available() {
-        return GLib.find_program_in_path(this.xsct_name) != null;
+        if (this.gamma_or_temp !== "temp") return true;
+        return this.Paths[`${this.xsct_name}`] != null;
     }
 
     get_line_or_empty_string(lines, regex) {
@@ -291,15 +317,6 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
             }
         }
         return "";
-    }
-
-    _is_version_satisfied(line, min_version) {
-        if(this.version_regex.test(line)) {
-            let matches = line.match(this.version_regex);
-            let version_match = matches[0];
-            return parseFloat(version_match) >= min_version;
-        }
-        return false;
     }
 
     _get_dependencies(dependency, min_version) {
@@ -314,28 +331,11 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     _check_randr() {
-        let randr_satisfied = this._randr_version_satisfied();
-        if(!randr_satisfied) {
-            let dependencies = this._get_dependencies(this.randr_name, MinRandrVersion);
-            this._show_dialog_dependencies(dependencies);
-            return false;
-        }
-        return true;
+        return this.Paths[`${this.randr_name}`] != null || this.Paths[`${this.xrandr_name}`] != null;
     }
-
-    _randr_version_satisfied() {
-        return GLib.find_program_in_path(this.randr_name) != null || GLib.find_program_in_path(this.xrandr_name) != null;
-    }
-
-
-
-
-
-
 
     _run_dependencies_satisfied() {
         this._init_layout();
-        this._bind_settings();
         this._connect_signals();
         this._init_values();
         this._init_screen_outputs();
@@ -344,6 +344,7 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         this._init_menu_sliders();
         this._init_gui();
         this._update_xrandr_startup();
+        this._needed_updates();
 
         this.run();
     }
@@ -716,6 +717,8 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
 
     // Override
     on_applet_added_to_panel() {
+        if (this.last_resume_date == undefined)
+            this.last_resume_date = "";
         this._translate_preset_names();
         this.on_shortcut_changed();
         this.on_disable_nightmode_changed();
@@ -724,7 +727,7 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         this._check_sunrise_sunset(true);
         this.update_tooltip();
         timeout_add_seconds(5, () => { this._check_fullscreen_mode(); return this.is_running; });
-        timeout_add_seconds(20, () => { this.detect_resume(); return this.is_running; });
+        timeout_add_seconds(30, () => { this.detect_resume(); return this.is_running; });
         timeout_add_seconds(60, () => { this._check_sunrise_sunset(); return this.is_running; });
         Main.layoutManager.connect('monitors-changed', () => { if (this.apply_changing_monitors) this.on_preset_reload_button_clicked(); });
     }
@@ -1637,6 +1640,7 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     _needed_updates() {
+        if (this.menu_sliders == null) return;
         this.menu_sliders.update_items_brightness();
         if (this.useScreenTemp) {
             this.menu_sliders.update_items_temperature();

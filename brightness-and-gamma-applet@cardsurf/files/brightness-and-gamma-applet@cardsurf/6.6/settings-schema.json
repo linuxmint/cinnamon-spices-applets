@@ -401,6 +401,7 @@
         "default": "N",
         "description": "Method for detecting when the display exits standby mode",
         "options" : {
+            "None": "none",
             "Simple": "N",
             "Graphical": "G",
             "Screen saver": "S",
