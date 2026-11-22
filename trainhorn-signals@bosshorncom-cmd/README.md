@@ -40,8 +40,7 @@ the PATH.
 This is a study aid for people who want to label, time, or explain a train
 horn signal — training notes, simulations, and similar desktop use. Portable
 train horn guns use the same patterns. Background on cordless and battery
-powered units is at [Horn Guns](https://hornguns.com/). Questions: Horn Notes,
-info@hornguns.com.
+powered units is at [Horn Guns](https://hornguns.com/).
 
 ## Install (for testers)
 
