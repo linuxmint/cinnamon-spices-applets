@@ -19,6 +19,31 @@ const Main = imports.ui.main; // ++ Needed for notify()
 const Gettext = imports.gettext;
 
 var {to_string} = _require("./lib/to-string");
+var { find_program_in_path, findProgramViaWhich } = _require("./lib/findProgramInPath");
+
+var Paths = {
+  "pipewire": null,
+  "yay": null,
+  "dnf": null,
+  "zypper": null,
+  "apturl": null,
+  "pkexec": null,
+  "pkcon": null,
+  "pkgcli": null
+};
+
+for (let k of Object.keys(Paths)) {
+  findProgramViaWhich(k, (result) => { Paths[k] = result });
+}
+
+var PIPEWIRE_ISPRESENT = () => { return Paths["pipewire"] != null };
+var YAY_ISPRESENT = () => { return Paths["yay"] != null };
+var DNF_ISPRESENT = () => { return Paths["dnf"] != null };
+var ZYPPER_ISPRESENT = () => { return Paths["zypper"] != null };
+var APTURL_ISPRESENT = () => { return Paths["apturl"] != null };
+var PKEXEC_ISPRESENT = () => { return Paths["pkexec"] != null };
+var PKCON_ISPRESENT = () => { return Paths["pkcon"] != null };
+var PKGCLI_ISPRESENT = () => { return Paths["pkgcli"] != null };
 
 // --- To adapt to the applet --- //
 /**
@@ -178,7 +203,7 @@ if (versionCompare(GLib.getenv("CINNAMON_VERSION"), "5.8") >= 0) {
   DEPENDENCIES["openSUSE"].push(["", "/usr/share/licenses/libsoup-3_0-0/COPYING", "libsoup-3_0-0"]);
 }
 
-if (GLib.find_program_in_path("pipewire") && versionCompare(GLib.getenv("CINNAMON_VERSION"), "6.2") >= 0) {
+if (PIPEWIRE_ISPRESENT && versionCompare(GLib.getenv("CINNAMON_VERSION"), "6.2") >= 0) {
   DEPENDENCIES["default"].push(["pipewire-pulse", "/usr/bin/pipewire-pulse", "pipewire-pulse"]);
 }
 
@@ -218,7 +243,7 @@ var _ = function(str) {
 
 const UPDATE = {
   "default": "sudo apt-get update",
-  "arch": GLib.find_program_in_path("yay") != null ? "yay -Syu" : "sudo pacman -Syu",
+  "arch": YAY_ISPRESENT ? "yay -Syu" : "sudo pacman -Syu",
   "debian": "apt-get update",
   "devuan": "apt-get update",
   "fedora": "sudo dnf update",
@@ -228,7 +253,7 @@ const UPDATE = {
 
 const INSTALL = {
   "default": "sudo apt-get install",
-  "arch": GLib.find_program_in_path("yay") != null ? "yay -S" : "sudo pacman -S",
+  "arch": YAY_ISPRESENT ? "yay -S" : "sudo pacman -S",
   "debian": "apt-get install",
   "devuan": "apt-get install",
   "fedora": "sudo dnf install",
@@ -280,7 +305,9 @@ function get_terminal() {
   var _terminals = ["gnome-terminal", "tilix", "konsole", "guake", "qterminal", "terminator", "uxterm", "xterm"];
   var t;
   for (t=0; t < _terminals.length ; ++t) {
-    if (GLib.find_program_in_path(_terminals[t])) {
+    var res_t = "";
+    find_program_in_path(_terminals[t], res_t);
+    if (res_t.length > 0) {
       term_found = _terminals[t];
       break
     }
@@ -311,7 +338,7 @@ function get_default_terminal_separator() {
 } // End of get_default_terminal_separator
 
 function isFedora() {
-  return GLib.find_program_in_path("dnf")
+  return DNF_ISPRESENT;
 } // End of isFedora
 
 function isArchLinux() {
@@ -323,7 +350,7 @@ function isDebian() {
 } // End of isDebian
 
 function isOpenSUSE() {
-  return GLib.find_program_in_path("zypper")
+  return ZYPPER_ISPRESENT;
 }
 
 function isGentoo() {
@@ -331,20 +358,20 @@ function isGentoo() {
 } // End of isGentoo
 
 function is_apturl_present() {
-  return (GLib.find_program_in_path("apturl") != null)
+  return APTURL_ISPRESENT;
 } // End of is_apturl_present
 
 
 function is_pkexec_present() {
-  return (GLib.find_program_in_path("pkexec") != null)
+  return PKEXEC_ISPRESENT;
 } // End of is_pkexec_present
 
 function is_pkcon_present() {
-  return (GLib.find_program_in_path("pkcon") != null && GLib.find_program_in_path("pkexec") != null)
+  return PKCON_ISPRESENT && PKEXEC_ISPRESENT;
 } // End of is_pkcon_present
 
 function is_pkgcli_present() {
-  return (GLib.find_program_in_path("pkgcli") != null && GLib.find_program_in_path("pkexec") != null)
+  return PKGCLI_ISPRESENT && PKEXEC_ISPRESENT;
 } // End of is_pkgcli_present
 
 function get_distro() {
@@ -378,13 +405,14 @@ function get_pkg_to_install() {
   for (let d of DEPENDENCIES[distro]) {
     var isInstalled = false;
     let executables = Array.isArray(d[0]) ? d[0] : [d[0]];
-    var find_program_in_path;
-    if (Cinnamon.find_program_in_path) {
-      find_program_in_path = (p, s) => Cinnamon.find_program_in_path(p, () => {});
-    } else {
-      find_program_in_path = (p, s) => GLib.find_program_in_path(p);
-    }
-    if (executables.some(e => e.length > 0 && find_program_in_path(e, null))) {
+    //~ var find_program_in_path;
+    //~ if (Cinnamon.find_program_in_path) {
+      //~ find_program_in_path = (p, s) => Cinnamon.find_program_in_path(p, () => {});
+    //~ } else {
+      //~ find_program_in_path = (p, s) => GLib.find_program_in_path(p);
+    //~ }
+    var ret_e = "";
+    if (executables.some(e => e.length > 0 && find_program_in_path(e, ret_e) && ret_e.length > 0)) {
       isInstalled = true;
     } else {
       if (d[1].length > 0 && Gio.file_new_for_path(d[1]).query_exists(null)) {
@@ -513,7 +541,6 @@ Dependencies.prototype = {
       }
       this.depAreMet = false;
     }
-    //return this.depAreMet
   } // End of check_dependencies
 
 } // End of Dependencies.prototype
