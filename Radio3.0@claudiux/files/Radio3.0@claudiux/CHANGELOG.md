@@ -1,3 +1,8 @@
+### v3.13.3~20261122
+  * Fixes errors concerning programs not found.
+  * Fixes [#9311](https://github.com/linuxmint/cinnamon-spices-applets/issues/9311).
+  * Fixes [#9313](https://github.com/linuxmint/cinnamon-spices-applets/issues/9313).
+
 ### v3.13.2~20261113
   * Update checkDependencies.js script.
 
