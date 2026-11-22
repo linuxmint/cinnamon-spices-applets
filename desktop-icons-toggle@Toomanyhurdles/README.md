@@ -3,6 +3,10 @@
 A panel toggle switch that hides and shows your desktop icons, with a
 right-click menu for switching the desktop to a solid colour background.
 
+## Why use it
+
+It is handy when you record your screen. One click hides your desktop icons, and one more sets a plain colour background. Your video looks clean, and viewers cannot see your personal files and folders. When you finish, one click brings everything back.
+
 ## Usage
 
 **Left click** the applet to hide or show the desktop icons. The panel icon is
