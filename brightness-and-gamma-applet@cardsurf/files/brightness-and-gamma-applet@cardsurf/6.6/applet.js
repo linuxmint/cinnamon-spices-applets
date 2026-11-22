@@ -104,6 +104,7 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         this.isInFullscreenMode = false;
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this.gsettings = Gio.Settings.new("org.cinnamon.settings-daemon.plugins.color");
         this._bind_settings();
         this.on_gui_icon_changed();
 
@@ -167,7 +168,6 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
 
 
 
-        this.gsettings = Gio.Settings.new("org.cinnamon.settings-daemon.plugins.color");
         this.sunrise_sunset();
         let _to = setTimeout(() => {
                 clearTimeout(_to);
