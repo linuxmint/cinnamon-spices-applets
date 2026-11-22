@@ -12,7 +12,6 @@
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
-const Util = imports.misc.util;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
@@ -20,7 +19,7 @@ const Gettext = imports.gettext;
 
 const UUID = 'desktop-icons-toggle@Toomanyhurdles';
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + '/locale');
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -215,20 +214,33 @@ class DesktopIconsToggleApplet extends Applet.IconApplet {
 
     _chooseColour() {
         let start = toHex(this.customColor) || '#2e3440';
-        let cmd = 'zenity --color-selection' +
-                  ' --title=' + GLib.shell_quote(_('Desktop background colour')) +
-                  ' --color=' + GLib.shell_quote(start);
+        let argv = [
+            'zenity',
+            '--color-selection',
+            '--title=' + _('Desktop background colour'),
+            '--color=' + start
+        ];
         try {
-            Util.spawnCommandLineAsyncIO(cmd, (stdout, stderr, exitCode) => {
-                if (exitCode !== 0)
-                    return; // cancelled
-                let hex = toHex(stdout);
-                if (!hex)
-                    return;
-                this.settings.setValue('custom-color', hex);
-                this.customColor = hex;
-                this._updateCustomSwatch();
-                this._applySolidColour(hex);
+            // Argument vector, no shell involved.
+            let proc = Gio.Subprocess.new(
+                argv,
+                Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE
+            );
+            proc.communicate_utf8_async(null, null, (p, result) => {
+                try {
+                    let [, stdout] = p.communicate_utf8_finish(result);
+                    if (!p.get_successful())
+                        return; // cancelled
+                    let hex = toHex(stdout);
+                    if (!hex)
+                        return;
+                    this.settings.setValue('custom-color', hex);
+                    this.customColor = hex;
+                    this._updateCustomSwatch();
+                    this._applySolidColour(hex);
+                } catch (e) {
+                    global.logError('desktop-icons-toggle: colour picker failed: ' + e);
+                }
             });
         } catch (e) {
             // No zenity: fall back to the colour button in the applet's settings.
