@@ -4,10 +4,11 @@ const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop;
 const Gettext = imports.gettext;
 const St = imports.gi.St;
+const Cinnamon = imports.gi.Cinnamon;
 
 const UUID = "trainhorn-signals@bosshorncom-cmd";
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
@@ -50,7 +51,7 @@ class TrainHornApplet extends Applet.IconApplet {
         this._orientation = orientation;
         this._timeouts = [];
         this._playing = false;
-        this._player = this._findPlayer();
+        this._player = null;
 
         try {
             this.set_applet_icon_path(metadata.path + "/icon.png");
@@ -63,17 +64,40 @@ class TrainHornApplet extends Applet.IconApplet {
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
         this._buildMenu();
+        this._findPlayer();
     }
 
     _findPlayer() {
         const names = ["paplay", "aplay", "play"];
+        const onFound = (path) => {
+            this._player = path;
+            this._buildMenu();
+        };
+        if (typeof Cinnamon.find_program_in_path === "function") {
+            // Cinnamon 6.8+: asynchronous lookup, try each player in order.
+            const tryNext = (i) => {
+                if (i >= names.length) {
+                    return;
+                }
+                Cinnamon.find_program_in_path(names[i], (path) => {
+                    if (path) {
+                        onFound(path);
+                    } else {
+                        tryNext(i + 1);
+                    }
+                });
+            };
+            tryNext(0);
+            return;
+        }
+        // Older Cinnamon: synchronous fallback.
         for (let i = 0; i < names.length; i++) {
             let found = GLib.find_program_in_path(names[i]);
             if (found) {
-                return found;
+                onFound(found);
+                return;
             }
         }
-        return null;
     }
 
     _buildMenu() {
