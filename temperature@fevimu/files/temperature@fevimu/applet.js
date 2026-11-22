@@ -59,6 +59,11 @@ CPUTemperatureApplet.prototype = {
 
     this.isLooping = true;
     this.waitForCmd = false;
+
+ this._addedToPanel = false;
+ this._startupId = 0;
+ this._firstLayoutPending = true;
+ this.loopId = 0;
     this.menuItems = [];
     this.state = {};
     this.settings = new Settings.AppletSettings(this.state, metadata.uuid, instance_id);
@@ -93,18 +98,25 @@ CPUTemperatureApplet.prototype = {
     Util.spawn_async(['which', 'sensors'], Lang.bind(this, this._detectSensors));
 
     this.set_applet_tooltip(_('Temperature'));
+ },
 
-    this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
-  },
+ on_settings_changed: function() {
+  if (!this._addedToPanel) {
+   return;
+  }
 
-  on_settings_changed: function() {
-    if (this.loopId > 0) {
-        Mainloop.source_remove(this.loopId);
-    }
-    this.loopId = 0;
-    this.updateTemperature();
-    this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
-  },
+  if (this.loopId > 0) {
+   Mainloop.source_remove(this.loopId);
+   this.loopId = 0;
+  }
+
+  this.updateTemperature();
+
+  this.loopId = Mainloop.timeout_add(
+   this.state.interval,
+   () => this.updateTemperature()
+  );
+ },
 
   on_orientation_changed: function (orientation) {
     this.orientation = orientation;
@@ -146,17 +158,54 @@ CPUTemperatureApplet.prototype = {
       this.updateTemperature();
     }
   },
+ on_applet_added_to_panel: function() {
+  this._addedToPanel = true;
 
-  on_applet_added_to_panel: function() {
-    this.updateTemperature();
-  },
+  if (this._startupId > 0) {
+   Mainloop.source_remove(this._startupId);
+   this._startupId = 0;
+  }
 
-  on_applet_removed_from_panel: function() {
+  // Wait until Cinnamon has completed the panel layout.
+  this._startupId = Mainloop.timeout_add(1500, () => {
+   this._startupId = 0;
+
+   if (!this.isLooping || !this._addedToPanel) {
+    return false;
+   }
+
+   this.updateTemperature();
+
+   if (this.loopId > 0) {
     Mainloop.source_remove(this.loopId);
     this.loopId = 0;
-    this.isLooping = false;
-    this.settings.finalize();
-  },
+   }
+
+   this.loopId = Mainloop.timeout_add(
+    this.state.interval,
+    () => this.updateTemperature()
+   );
+
+   return false;
+  });
+ },
+
+ on_applet_removed_from_panel: function() {
+  this._addedToPanel = false;
+  this.isLooping = false;
+
+  if (this._startupId > 0) {
+   Mainloop.source_remove(this._startupId);
+   this._startupId = 0;
+  }
+
+  if (this.loopId > 0) {
+   Mainloop.source_remove(this.loopId);
+   this.loopId = 0;
+  }
+
+  this.settings.finalize();
+ },
 
   _detectSensors: function(ret) {
     // detect if sensors is installed
@@ -203,7 +252,6 @@ CPUTemperatureApplet.prototype = {
 
     let _monospace = (this.state.keep_size === true) ? "temp-monospace" : "applet-box";
     this.actor.set_style_class_name(`${_monospace}`);
-
 
     // Reading the CPU hwmon files is enough for the panel label. Spawning `sensors` every few
     // seconds forks the whole Cinnamon process and also polls every other chip: NVMe drives and
@@ -378,7 +426,37 @@ CPUTemperatureApplet.prototype = {
     }
 
     if (this._applet_label.text !== this.title) {
-      this.set_applet_label(this.title);
+
+     this.set_applet_label(this.title);
+
+     if (this._firstLayoutPending) {
+
+      this._firstLayoutPending = false;
+
+      Mainloop.idle_add(() => {
+
+       if (!this._addedToPanel || !this.actor) {
+
+        return false;
+
+       }
+
+       let actor = this.actor;
+
+       while (actor) {
+
+        actor.queue_relayout();
+
+        actor = actor.get_parent();
+
+       }
+
+       return false;
+
+      });
+
+     }
+
     }
 
     if (this.menu.isOpen) {
