@@ -1,3 +1,12 @@
+### 6.0.1~20261123
+  * Adds button (in Settings) to Reset Issue Numbers.
+
+### 6.0.0~20261105
+  * Displays in toolips the Ids of issues (e.g #1963 #2010).
+  * Clicking on the issues link: opens the web page concerning each issue.
+  * Better parsing of .json files.
+  * Replaces synchronous file reading with asynchronous file reading.
+
 ### v5.9.1~20260713
   * Open correctly the _issues_ web page.
 

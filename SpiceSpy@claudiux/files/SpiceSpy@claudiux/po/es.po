@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-04-27 17:11+0200\n"
+"POT-Creation-Date: 2026-11-23 20:05+0100\n"
 "PO-Revision-Date: 2026-04-27 17:12+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
@@ -17,31 +17,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:196
+#. applet.js:203
 msgid "score"
 msgstr "puntuación"
 
-#. applet.js:208
+#. applet.js:215
 msgid "comments"
 msgstr "comentarios"
 
-#. applet.js:220
+#. applet.js:232
 msgid "recent issues"
 msgstr "problemas recientes"
 
-#. applet.js:233
+#. applet.js:252
 msgid "translations"
 msgstr "traducciones"
 
-#. applet.js:308
+#. applet.js:331
 msgid "Reload icons"
 msgstr "Recargar iconos"
 
-#. applet.js:314
+#. applet.js:340
 msgid "Visit website"
 msgstr "Visitar el sitio web"
 
-#. applet.js:417
+#. applet.js:443
 msgid ""
 "Check in progress.\n"
 "Time remaining:"
@@ -49,43 +49,43 @@ msgstr ""
 "Comprobación en curso.\n"
 "Tiempo restante:"
 
-#. applet.js:420
+#. applet.js:446
 msgid "Ends around:"
 msgstr "Se acaba por:"
 
-#. applet.js:437
+#. applet.js:463
 msgid "Time remaining until the next check:"
 msgstr "Tiempo restante hasta la próxima comprobación:"
 
-#. applet.js:439 applet.js:741
+#. applet.js:465 applet.js:755
 msgid "Next check at:"
 msgstr "Próxima comprobación en:"
 
-#. applet.js:444
+#. applet.js:470
 msgid "Getting Started. Please wait..."
 msgstr "Comenzando. Por favor, espere..."
 
-#. applet.js:893
+#. applet.js:928
 msgid "Spices"
 msgstr "Especias"
 
-#. applet.js:984
+#. applet.js:1019
 msgid "Mark all as read"
 msgstr "Marcar todos como leídos"
 
-#. applet.js:995
+#. applet.js:1030
 msgid "Refresh"
 msgstr "Actualizar"
 
-#. applet.js:1009
+#. applet.js:1044
 msgid "Refreshing in progress - Click to stop"
 msgstr "Actualización en curso: haga clic para detenerla"
 
-#. applet.js:1023
+#. applet.js:1058
 msgid "Refreshing in progress"
 msgstr "Actualización en curso"
 
-#. applet.js:1035
+#. applet.js:1070
 msgid "Configure..."
 msgstr "Configurar..."
 
@@ -187,6 +187,10 @@ msgstr "Mostrar las actualizaciones disponibles en el menú"
 #. settings-schema.json->show-issues->description
 msgid "Show number of issues in the menu"
 msgstr "Mostrar número de problemas en el menú"
+
+#. settings-schema.json->reset-issues->description
+msgid "Reset Issue Numbers"
+msgstr ""
 
 #. settings-schema.json->sort-by->description
 msgid "Sort by"
