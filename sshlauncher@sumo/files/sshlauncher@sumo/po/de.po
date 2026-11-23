@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# SSH LAUNCHER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# sumo, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-24 12:01+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-06 20:34+0100\n"
 "PO-Revision-Date: 2023-12-24 12:12+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,35 +20,35 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
-#: applet.js:51 applet.js:67 applet.js:110 applet.js:246 applet.js:260
+#. applet.js:51 applet.js:67 applet.js:114 applet.js:256 applet.js:271
 msgid "SSH Launcher"
 msgstr "SSH-Starter"
 
-#: applet.js:110
+#. applet.js:114
 msgid "No suitable icon found, falling back to custom icon"
 msgstr "Kein passendes Symbol gefunden. Falle zurück auf angepasstes Symbol"
 
-#: applet.js:116
+#. applet.js:126
 msgid "Force Update from SSH config"
 msgstr "Aktualisierung von SSH-Konfiguration erzwingen"
 
-#: applet.js:183
+#. applet.js:193
 msgid "Background (-fN)"
 msgstr "Hintergrund (-fN)"
 
-#: applet.js:186
+#. applet.js:196
 msgid "Forward X11 (-X)"
 msgstr "X11-Weiterleitung (-X)"
 
-#: applet.js:227
+#. applet.js:237
 msgid "ERROR. "
 msgstr "FEHLER."
 
-#: applet.js:230
+#. applet.js:240
 msgid "Edit SSH config"
 msgstr "SSH-Konfiguration bearbeiten"
 
-#: applet.js:246
+#. applet.js:256
 msgid ""
 "Error: I can't open the terminal.\n"
 "You need to set a default terminal first in Preferred Applications!\n"
@@ -60,11 +61,11 @@ msgstr ""
 "\n"
 "(Weitere Hilfe via Rechtsklick->Über->More Info)"
 
-#: applet.js:260
+#. applet.js:271
 msgid "Connection opened to "
 msgstr "Verbindung geöffnet zu "
 
-#: applet.js:260
+#. applet.js:271
 msgid " using "
 msgstr " unter Verwendung von "
 
@@ -110,3 +111,11 @@ msgstr "Benachrichtigung beim Starten der SSH-Verbindung anzeigen"
 #. settings-schema.json->showConnectionNotification->tooltip
 msgid "Display a notification message when SSH terminal is launched"
 msgstr "Benachrichtigung anzeigen, wenn SSH-Terminal gestartet wird"
+
+#. settings-schema.json->openMenuKey->description
+msgid "Keyboard shortcut to open the SSH menu"
+msgstr "Tastenkombination zum Öffnen des SSH-Menüs"
+
+#. settings-schema.json->openMenuKey->tooltip
+msgid "Set a global keyboard shortcut to open the SSH launcher menu"
+msgstr "Globale Tastenkombination zum Öffnen des SSH-Starter-Menüs festlegen"
