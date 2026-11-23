@@ -1,0 +1,50 @@
+{
+    "head-general": { "type": "header", "description": "General" },
+    "update-interval": {
+        "type": "spinbutton", "default": 1.0, "min": 0.5, "max": 10, "step": 0.5,
+        "units": "seconds", "description": "Update interval"
+    },
+    "unit": {
+        "type": "combobox", "default": "bytes", "description": "Unit",
+        "options": { "Bytes (kB/s, MB/s)": "bytes", "Bits (kb/s, Mb/s)": "bits" }
+    },
+    "head-iface": { "type": "header", "description": "Interfaces" },
+    "iface-mode": {
+        "type": "combobox", "default": "auto", "description": "Monitored interfaces",
+        "options": {
+            "Automatic: interfaces reaching the Internet (default route)": "auto",
+            "All active physical interfaces": "physical",
+            "Manual": "manual"
+        }
+    },
+    "manual-ifaces": {
+        "type": "entry", "default": "", "dependency": "iface-mode=manual",
+        "description": "Interfaces (comma separated)",
+        "tooltip": "Example: wlp2s0, enx0a1b2c3d4e5f"
+    },
+    "head-look": { "type": "header", "description": "Panel appearance" },
+    "show-graphs": { "type": "switch", "default": true, "description": "Show mini graphs" },
+    "graph-mode": {
+        "type": "combobox", "default": "split", "dependency": "show-graphs",
+        "description": "Graph type",
+        "options": { "Two graphs (download and upload)": "split", "One combined graph": "combined" }
+    },
+    "graph-width": {
+        "type": "spinbutton", "default": 36, "min": 16, "max": 160, "step": 2,
+        "units": "pixels", "dependency": "show-graphs", "description": "Width of each graph"
+    },
+    "graph-scale": {
+        "type": "combobox", "default": "log", "dependency": "show-graphs",
+        "description": "Graph scale",
+        "options": { "Logarithmic (shows both low and high traffic)": "log", "Linear (auto-scaling)": "linear" }
+    },
+    "show-text": { "type": "switch", "default": true, "description": "Show speed as text" },
+    "text-layout": {
+        "type": "combobox", "default": "stacked", "dependency": "show-text",
+        "description": "Text layout",
+        "options": { "Two lines (compact)": "stacked", "Single line": "inline" }
+    },
+    "color-down": { "type": "colorchooser", "default": "rgb(46,194,126)", "description": "Download color" },
+    "color-up": { "type": "colorchooser", "default": "rgb(246,151,57)", "description": "Upload color" },
+    "color-text": { "type": "switch", "default": true, "description": "Color the text like the graphs" }
+}
