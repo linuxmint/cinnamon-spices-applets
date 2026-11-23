@@ -394,7 +394,16 @@ class MyApplet extends Applet.TextIconApplet {
         }
         if (this.SoundPromptOn) {
             try {
-                Util.spawnCommandLine("play -v " + this.SoundVolume/100 + " " + this.SoundPath);
+                if (Gio.get_commandline("play") != null)
+                    Util.spawnCommandLine("play -v " + this.SoundVolume/100 + " " + this.SoundPath);
+                else if (Gio.get_commandline("ffplay") != null)
+                    Util.spawnCommandLine("ffplay -nodisp -nostats -hide_banner -volume " + this.SoundVolume + " " + this.SoundPath + " &");
+                else if (Gio.get_commandline("mplayer") != null)
+                    Util.spawnCommandLine("mplayer -really-quiet -novideo -volume " + this.SoundVolume + " " + this.SoundPath + " &>/dev/null");
+                else {
+                    global.logError("Unable to play sound. Please install sox, or ffmpeg, or mplayer package.");
+                    Util.spawnCommandLine(`notify-send "Unable to play sound." "Please install sox, or ffmpeg, or mplayer package."`);
+                }
             }
             catch (e) {
                 // spawnCommandLine does not actually throw exception when a sound fails to play
@@ -494,7 +503,7 @@ class ConfirmDialog extends ModalDialog.ModalDialog {
 
         let label = new St.Label({ text: message, style_class: "timer-dialog-label" });
         this.contentLayout.add_child(label);
-        
+
         this.setButtons([
             {
                 label: _("Okay"),
