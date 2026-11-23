@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.6.11
+
+* Add QWeather (HeFeng) provider using the new Weather API v1 (`/weather/v1/*`), unaffected by the v7 API deprecation
+* Requires an API key and your dedicated API Host from the QWeather developer console (the legacy public domain devapi.qweather.com is being phased out since 2026)
+* The provider-specific API key and API host fields are remembered, as with the other providers that need a key
+* Add zh_CN translation for the new QWeather settings strings
+
+**中文说明 (Chinese):**
+
+* 新增和风天气(QWeather)数据服务，使用新一代 Weather API v1（`/weather/v1/*`），不受 v7 API 弃用影响
+* 需要在和风天气开发者控制台获取 API Key 和你账号专属的 API Host（2026 年起旧公共域名 devapi.qweather.com 逐步停用）
+* API Key 与 API Host 按服务分别记忆，与其他需要密钥的服务行为一致
+* 支持最多 10 天逐日预报和 240 小时逐小时预报；暂不支持气象预警(alerts)
+* 新增设置字符串的 zh_CN 中文翻译
+
 ## 3.6.9
 
 * Fixes [Unit label kph should be km/h (SI unit) #8036](https://github.com/linuxmint/cinnamon-spices-applets/issues/8036)

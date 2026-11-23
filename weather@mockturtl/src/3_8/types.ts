@@ -93,7 +93,8 @@ export interface AppletError {
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 export type ErrorSeverity = "hard" | "soft" | "silent";
-export type ApiService = "ipapi" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather" | "pirate_weather" | "geoip.fedoraproject" | "geoiplookup";
+/** qweather 为和风天气(QWeather)服务，用于错误上报时标识出错的服务 */
+export type ApiService = "ipapi" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather" | "pirate_weather" | "geoip.fedoraproject" | "geoiplookup" | "qweather";
 export type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
 	"location not found" | "no network response" | "no api response" | "location not covered" |
 	"bad api response - non json" | "bad api response" | "no response body" |

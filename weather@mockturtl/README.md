@@ -44,6 +44,7 @@ You can also save locations what you entered manually and switch between them in
 | **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | Depends | Previously known as Climacell |
 | **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | No*     | Limited free calls            |
 | **Weather Underground**    | Yes           | 5                     | 0                      | No                 | No      | --                            |
+| **QWeather**               | Yes           | 10                    | 240                    | No                 | No      | Needs a dedicated API Host    |
 
 #### Open-Meteo
 
@@ -169,6 +170,23 @@ Weather Underground is a privately owned, web-based weather information company.
 - Weather Underground is a global community of people connecting data from environmental sensors like weather stations (250.000) and air quality monitors so they can provide the rich, hyperlocal data you need.
 - You need an API key. If you don't have a weather station to share data with WU, you can't have an API key. However, you can add a Raspberry Pi as a device for the weather station choice when [registering](https://www.wunderground.com/signup), even if you don't have one, and it will get you the API key.
 - Disclaimer: Observations don't provide weather conditions so the forecast one for the day is used.
+
+#### QWeather
+
+QWeather (HeFeng) is a Chinese weather data service founded in 2014, providing weather data for China and worldwide. [QWeather website](https://www.qweather.com/). Read more about the service [here](https://dev.qweather.com/docs/).
+
+- You need an API key: create a project and a credential in the [QWeather developer console](https://console.qweather.com/) to obtain one.
+- You also need your dedicated API Host (find it in the console Settings page). The legacy public domain devapi.qweather.com is being phased out since 2026, so the dedicated host is required.
+- The free subscription has a limited number of daily calls, so a refresh interval of 15 minutes or more is recommended.
+- Supports up to 10 days of daily and 240 hours of hourly forecasts. Weather warnings (alerts) are not implemented.
+
+**中文说明 (Chinese):**
+
+- 和风天气(QWeather)提供覆盖中国及全球的天气数据服务，官网 qweather.com。
+- 需要API Key：在和风天气开发者控制台(dev.qweather.com)创建项目和凭据后获取。
+- 需要填写你专属的API Host(在控制台-设置中查看)；2026年起旧公共域名(devapi.qweather.com)逐步停用。
+- 免费订阅有每日调用次数限制，建议设置15分钟以上的刷新间隔。
+- 支持最多10天的逐日预报和240小时的逐小时预报；暂不支持气象预警(alerts)。
 
 ### Usage of "Override label on panel", "Override location label" and "Override tooltip on panel" setting
 
