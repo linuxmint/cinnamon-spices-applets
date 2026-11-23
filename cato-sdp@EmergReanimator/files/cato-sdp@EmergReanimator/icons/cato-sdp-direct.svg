@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <path fill="none" stroke="#43a047" stroke-width="5" stroke-linejoin="round"
+    d="M32 4 L58 14 V30 C58 46 47 58 32 62 C17 58 6 46 6 30 V14 Z"/>
+  <circle fill="#43a047" cx="32" cy="33" r="15"/>
+  <!-- Network (hub-and-spoke) symbol: indicates a plain office-LAN link with
+       no SDP tunnel, as opposed to the plain solid-green "Connected" icon. -->
+  <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round">
+    <line x1="32" y1="33" x2="32" y2="24"/>
+    <line x1="32" y1="33" x2="39.8" y2="37.5"/>
+    <line x1="32" y1="33" x2="24.2" y2="37.5"/>
+  </g>
+  <circle fill="#ffffff" cx="32" cy="33" r="2.2"/>
+  <circle fill="#ffffff" cx="32" cy="24" r="2.4"/>
+  <circle fill="#ffffff" cx="39.8" cy="37.5" r="2.4"/>
+  <circle fill="#ffffff" cx="24.2" cy="37.5" r="2.4"/>
+</svg>
