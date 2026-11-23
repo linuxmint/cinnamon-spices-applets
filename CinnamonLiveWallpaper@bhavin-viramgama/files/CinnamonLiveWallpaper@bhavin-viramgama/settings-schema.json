@@ -1,0 +1,97 @@
+{
+    "layout": {
+        "type": "header",
+        "description": "Wallpaper Selection"
+    },
+    "wallpaper-mode": {
+        "type": "combobox",
+        "description": "Playback Mode",
+        "options": {
+            "Single Video File": "single",
+            "Folder of Videos": "folder",
+            "Custom Ordered Playlist": "playlist",
+            "Manual Custom Path": "custom"
+        },
+        "default": "single"
+    },
+    "custom-playlist": {
+        "type": "list",
+        "description": "Custom Ordered Playlist",
+        "columns": [
+            {"id": "file", "title": "Video File", "type": "file"}
+        ],
+        "default": [],
+        "dependency": "wallpaper-mode=playlist"
+    },
+    "video-file": {
+        "type": "filechooser",
+        "description": "Select a single video file",
+        "default": "",
+        "dependency": "wallpaper-mode=single"
+    },
+    "video-folder": {
+        "type": "filechooser",
+        "select-dir": true,
+        "description": "Select a folder of videos",
+        "default": "",
+        "dependency": "wallpaper-mode=folder"
+    },
+    "custom-path": {
+        "type": "entry",
+        "description": "Manually enter an exact path",
+        "default": "",
+        "dependency": "wallpaper-mode=custom"
+    },
+    "shuffle-playlist": {
+        "type": "switch",
+        "description": "Shuffle Playlist",
+        "default": false,
+        "dependency": "wallpaper-mode!=single"
+    },
+    "display_header": {
+        "type": "header",
+        "description": "Display & Behavior"
+    },
+    "mute-all": {
+        "type": "switch",
+        "description": "Mute all wallpapers (Hides audio controls)",
+        "default": false
+    },
+    "start-muted": {
+        "type": "switch",
+        "description": "Start wallpapers muted by default",
+        "default": true
+    },
+    "refresh-wallpaper": {
+        "type": "button",
+        "description": "Refresh Wallpaper",
+        "callback": "on_refresh_clicked"
+    },
+    "hide-icon": {
+        "type": "switch",
+        "description": "Hide applet icon from the system tray",
+        "default": false
+    },
+    "smart-pause": {
+        "type": "switch",
+        "description": "Enable Power Saver (Pause wallpaper when windows are maximized)",
+        "default": true
+    },
+    "target-display": {
+        "type": "combobox",
+        "description": "Target Display",
+        "options": {
+            "All Displays": -1,
+            "Display 1": 0,
+            "Display 2": 1,
+            "Display 3": 2,
+            "Display 4": 3
+        },
+        "default": -1
+    },
+    "autostart": {
+        "type": "switch",
+        "description": "Start on boot",
+        "default": false
+    }
+}
