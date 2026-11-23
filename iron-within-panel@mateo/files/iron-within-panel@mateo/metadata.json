@@ -1,0 +1,8 @@
+{
+    "uuid": "iron-within-panel@mateo",
+    "name": "Cinematic Grade",
+    "description": "Cinematic color grade for the whole screen. Click the icon to turn the grade on or off, the same gesture as Desaturate All.",
+    "version": "1.2.0",
+    "cinnamon-version": ["6.0", "6.2", "6.4", "6.6"],
+    "max-instances": 1
+}
