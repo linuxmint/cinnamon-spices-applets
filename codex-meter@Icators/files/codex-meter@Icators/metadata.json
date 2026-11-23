@@ -1,0 +1,7 @@
+{
+  "uuid": "codex-meter@Icators",
+  "name": "Codex Quota Meter",
+  "description": "5-hour and weekly Codex quota meters with browser sign-in and email-based account switching",
+  "version": "1.5.0",
+  "max-instances": 1
+}
