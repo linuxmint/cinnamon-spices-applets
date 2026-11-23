@@ -1,0 +1,268 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-29 23:53+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: applet.js:146
+#, javascript-format
+msgid "Switch %d"
+msgstr ""
+
+#: applet.js:166
+#, javascript-format
+msgid "Group %d"
+msgstr ""
+
+#: applet.js:367
+msgid "All on"
+msgstr ""
+
+#: applet.js:372
+msgid "All off"
+msgstr ""
+
+#. settings-schema.json->middle-click->options
+#: applet.js:380
+msgid "Refresh status"
+msgstr ""
+
+#: applet.js:385
+msgid "Settings"
+msgstr ""
+
+#: applet.js:421 applet.js:446 applet.js:586
+msgid "offline"
+msgstr ""
+
+#: applet.js:460
+msgid "Relays"
+msgstr ""
+
+#: applet.js:460
+#, javascript-format
+msgid "%d of %d on"
+msgstr ""
+
+#: applet.js:463 applet.js:607
+#, javascript-format
+msgid "%d device offline"
+msgid_plural "%d devices offline"
+msgstr[0] ""
+msgstr[1] ""
+
+#: applet.js:506
+msgid "Relay unreachable"
+msgstr ""
+
+#: applet.js:507
+#, javascript-format
+msgid "%s: %d of %d devices did not respond."
+msgstr ""
+
+#: applet.js:579
+msgid "Relay control"
+msgstr ""
+
+#: applet.js:588
+msgid "unknown"
+msgstr ""
+
+#: applet.js:590
+msgid "on"
+msgstr ""
+
+#: applet.js:590
+msgid "off"
+msgstr ""
+
+#. metadata.json->name
+msgid "Relay Switches"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Switch HTTP relay boards (sockets, coffee machine, printer, ...) from the "
+"panel. Any number of switches and groups, status read back from the board."
+msgstr ""
+
+#. settings-schema.json->page-switches->title
+#. settings-schema.json->switches->description
+#. settings-schema.json->groups->columns->title
+msgid "Switches"
+msgstr ""
+
+#. settings-schema.json->page-panel->title
+msgid "Panel"
+msgstr ""
+
+#. settings-schema.json->page-behavior->title
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->section-info->title
+msgid "How it works"
+msgstr ""
+
+#. settings-schema.json->section-switches->title
+msgid "Relays / sockets"
+msgstr ""
+
+#. settings-schema.json->section-groups->title
+#. settings-schema.json->groups->description
+msgid "Groups"
+msgstr ""
+
+#. settings-schema.json->section-panel->title
+msgid "Panel appearance"
+msgstr ""
+
+#. settings-schema.json->section-click->title
+msgid "Middle mouse button"
+msgstr ""
+
+#. settings-schema.json->section-status->title
+msgid "Status display"
+msgstr ""
+
+#. settings-schema.json->section-network->title
+msgid "Network"
+msgstr ""
+
+#. settings-schema.json->info-label->description
+msgid ""
+"One row per switch in the menu. Several hosts (comma separated) are switched"
+" together; the status is read back from the board after every action."
+msgstr ""
+
+#. settings-schema.json->switches->tooltip
+msgid ""
+"Order of the rows is the order in the menu, names must be unique.\n"
+"Host(s): 192.168.1.50 or http://board.local:8080 - separate several with commas.\n"
+"On/Off/Status are paths appended to the host; leave empty for the defaults (/relay?state=1, /relay?state=0, /relay)."
+msgstr ""
+
+#. settings-schema.json->switches->columns->title
+#. settings-schema.json->groups->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->switches->columns->title
+#. settings-schema.json->groups->columns->title
+#. settings-schema.json->panel-icon->description
+msgid "Icon"
+msgstr ""
+
+#. settings-schema.json->switches->columns->title
+msgid "Host(s)"
+msgstr ""
+
+#. settings-schema.json->switches->columns->title
+msgid "On"
+msgstr ""
+
+#. settings-schema.json->switches->columns->title
+msgid "Off"
+msgstr ""
+
+#. settings-schema.json->switches->columns->title
+msgid "Status"
+msgstr ""
+
+#. settings-schema.json->groups->tooltip
+msgid ""
+"Optional: combine several switches into one additional switch. Member names "
+"must match the switch list exactly, separated by commas."
+msgstr ""
+
+#. settings-schema.json->panel-display->description
+msgid "Text next to the icon"
+msgstr ""
+
+#. settings-schema.json->panel-display->tooltip
+msgid "The text only appears while at least one switch is on."
+msgstr ""
+
+#. settings-schema.json->panel-display->options
+#. settings-schema.json->middle-click->options
+msgid "Nothing"
+msgstr ""
+
+#. settings-schema.json->panel-display->options
+msgid "Count (2/4)"
+msgstr ""
+
+#. settings-schema.json->panel-display->options
+msgid "Names of the active switches"
+msgstr ""
+
+#. settings-schema.json->panel-icon->tooltip
+msgid ""
+"Icon name (e.g. network-server-symbolic) or a file. Symbolic icons follow "
+"the panel color."
+msgstr ""
+
+#. settings-schema.json->panel-icon-on->description
+msgid "Icon while something is on"
+msgstr ""
+
+#. settings-schema.json->panel-icon-on->tooltip
+msgid ""
+"Leave empty to keep the same icon. A colored icon makes the active state "
+"visible at a glance."
+msgstr ""
+
+#. settings-schema.json->middle-click->description
+msgid "Action on middle click"
+msgstr ""
+
+#. settings-schema.json->middle-click->options
+msgid "Switch everything on"
+msgstr ""
+
+#. settings-schema.json->middle-click->options
+msgid "Switch everything off"
+msgstr ""
+
+#. settings-schema.json->middle-click->options
+msgid "Open menu"
+msgstr ""
+
+#. settings-schema.json->poll-interval->description
+msgid "Status check interval"
+msgstr ""
+
+#. settings-schema.json->poll-interval->tooltip
+msgid "0 = no automatic polling (status is read when the menu opens)."
+msgstr ""
+
+#. settings-schema.json->poll-interval->units
+#. settings-schema.json->timeout->units
+msgid "seconds"
+msgstr ""
+
+#. settings-schema.json->notify-errors->description
+msgid "Notify when a device does not respond"
+msgstr ""
+
+#. settings-schema.json->show-all-items->description
+msgid "Show 'All on' / 'All off' in the menu"
+msgstr ""
+
+#. settings-schema.json->timeout->description
+msgid "HTTP timeout"
+msgstr ""
