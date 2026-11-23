@@ -1,0 +1,71 @@
+{
+  // The original BrimDeck look: a pure black surface with white text in three opacities. Every other theme starts from it,
+  // so it sets every color and effect.
+  "formatVersion": 1,
+  "id": "dark",
+  "name": "深色",
+  "nameEn": "Dark",
+  "description": "纯黑表面，与屏幕顶部的硬件刘海融为一体。",
+  "descriptionEn": "A pure black surface that blends in with a hardware notch.",
+  "author": "BrimDeck",
+  "license": "Apache-2.0",
+  "colors": {
+    "surface": "#000000",
+    "textPrimary": "#F5F5F7",
+    "textSecondary": "#9EEBEBF5",
+    "textTertiary": "#61EBEBF5",
+    "accent": "#0A84FF",
+    "onAccent": "#FFFFFF",
+    "danger": "#F2777F",
+    "liked": "#EC4141",
+    "clock": "#F5F5F7",
+    "equalizer": "#9EEBEBF5",
+    "hairline": "#17FFFFFF",
+    "track": "#1FFFFFFF",
+    "ringTrack": "#29FFFFFF",
+    "fill": "#12FFFFFF",
+    "fillSelected": "#24FFFFFF",
+    "hover": "#18FFFFFF",
+    "pressed": "#24FFFFFF",
+    "outline": "#24FFFFFF",
+    "popup": "#1A1A1D",
+    "popupBorder": "#24FFFFFF",
+    "input": "#0F0F11",
+    "rangeFill": "#382B87FF",
+    "coverPlaceholder": "#0FFFFFFF",
+    "coverOutline": "#14FFFFFF",
+    "scrollThumb": "#515665",
+    "rim": "#12FFFFFF",
+    "shadow": "#000000",
+    "indicator": "#8E8E93",
+    "indicatorProgress": "#55555A",
+    "switchFill": "#0FFFFFFF",
+    "seekRail": "#2EFFFFFF",
+    "rowDivider": "#0DFFFFFF",
+    "rowHover": "#0AFFFFFF",
+    "menuDetail": "#80EBEBF5",
+    "tooltip": "#1F1F23",
+    "tooltipBorder": "#38FFFFFF",
+    "bubble": "#2A2A2E",
+    "bubbleBorder": "#1AFFFFFF"
+  },
+  // The original preset colors of the application columns. ZCode's navy is lightened just enough to read on black.
+  "apps": {
+    "claude": "#E5A385", "codex": "#98DBB0", "antigravity": "#9CB9FF", "cursor": "#D4D5DF", "zcode": "#4A64A6",
+    "dsh": "#6081DA", "grokBot": "#D4D5DF", "kimi": "#68CDEB", "manual": "#CC9EED", "other": "#D4D5DF", "warning": "#E5C890", "critical": "#E78284"
+  },
+  "clock": {
+    "style": "minimal", "color": "default",
+    "palette": { "amber": "#FF9F43", "cyan": "#5CE1E6", "pink": "#FF8FB1", "lime": "#E4FF6A" },
+    "gradients": [
+      { "name": "日落", "nameEn": "Sunset", "stops": ["#FFB38A", "#FF7EB3", "#B69CFF"] },
+      { "name": "海洋", "nameEn": "Ocean", "stops": ["#7CF3FF", "#4FA8FF", "#6A6CFF"] },
+      { "name": "极光", "nameEn": "Aurora", "stops": ["#8BFFB0", "#5CE1E6", "#B69CFF"] },
+      { "name": "火焰", "nameEn": "Ember", "stops": ["#FFE27A", "#FF9F43", "#FF5E5E"] },
+      { "name": "霓虹", "nameEn": "Neon", "stops": ["#FF5CF0", "#A66BFF", "#5CE1E6"] }
+    ]
+  },
+  // The color picker's original twelve presets; other themes offer their own colors instead.
+  "swatches": ["#E5A385", "#F0B37E", "#E5C890", "#98DBB0", "#7FD1C4", "#9CB9FF", "#B9A8FF", "#E7A0D0", "#E78284", "#D4D5DF", "#8E8E93", "#F5F5F7"],
+  "effects": { "rimWidth": 1, "shadowBlur": 14, "shadowDepth": 4, "shadowOpacity": 0.28, "scanlines": 0 }
+}

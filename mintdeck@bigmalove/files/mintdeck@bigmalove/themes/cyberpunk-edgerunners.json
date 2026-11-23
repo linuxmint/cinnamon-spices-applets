@@ -1,0 +1,82 @@
+{
+  // The custom-theme demo: an unofficial fan palette inspired by the look of Cyberpunk: Edgerunners
+  // (Studio Trigger, CD PROJEKT RED). It uses colors only, no artwork, logos or fonts from the series.
+  // The design notes are in docs/zh-CN/themes.md.
+  //   Night City at night: a violet-black surface that glows deeper violet toward the bottom, like a sky lit from the street.
+  //   Neon: cyan and magenta for the rim, the focus and the tracks, the two colors of Lucy's hair and the signs.
+  //   The signature yellow of Cyberpunk for the clock, the indicator and warnings; text in the pale lavender of the moon.
+  //   CRT scan lines and a magenta glow under the collapsed notch, as on the show's screens and HUDs.
+  "formatVersion": 1,
+  "id": "cyberpunk-edgerunners",
+  "name": "赛博朋克：边缘行者",
+  "nameEn": "Cyberpunk: Edgerunners",
+  "description": "非官方同人配色：夜之城的紫黑夜空、青与品红霓虹、标志性的赛博黄，配扫描线与辉光。",
+  "descriptionEn": "An unofficial fan palette: the violet night of Night City, cyan and magenta neon, the signature yellow, scan lines and glow.",
+  "author": "BrimDeck",
+  "license": "Apache-2.0",
+  "base": "dark",
+  "colors": {
+    "surface": "#0A0613",
+    "textPrimary": "#F4F0FF",
+    "textSecondary": "#C9BEEB",
+    "textTertiary": "#8F84BD",
+    "accent": "#00F0FF",
+    "onAccent": "#0A0613",
+    "danger": "#FF4D6A",
+    "liked": "#FF2A6D",
+    "clock": "#FCEE0A",
+    "equalizer": "#00F0FF",
+    "hairline": "#3300F0FF",
+    "track": "#2400F0FF",
+    "ringTrack": "#3800F0FF",
+    "fill": "#1400F0FF",
+    "fillSelected": "#3300F0FF",
+    "hover": "#1F00F0FF",
+    "pressed": "#3D00F0FF",
+    "outline": "#5200F0FF",
+    "popup": "#120A20",
+    "popupBorder": "#8000F0FF",
+    "input": "#07040D",
+    "rangeFill": "#40FCEE0A",
+    "coverPlaceholder": "#1AFF2A6D",
+    "coverOutline": "#6600F0FF",
+    "scrollThumb": "#5A3D8C",
+    "rim": "#00F0FF",
+    "shadow": "#FF2A6D",
+    "indicator": "#FCEE0A",
+    "indicatorProgress": "#FF2A6D",
+    "switchFill": "#1400F0FF",
+    "seekRail": "#3800F0FF",
+    "rowDivider": "#3300F0FF",
+    "rowHover": "#1400F0FF",
+    "menuDetail": "#C9BEEB",
+    "tooltip": "#120A20",
+    "tooltipBorder": "#8000F0FF",
+    "bubble": "#120A20",
+    "bubbleBorder": "#8000F0FF"
+  },
+  "apps": {
+    "claude": "#FF9E3D", "codex": "#3DFFB0", "antigravity": "#00E5FF", "cursor": "#C9C3F2", "zcode": "#7B8CFF",
+    "dsh": "#6FA8FF", "grokBot": "#C9C3F2", "kimi": "#1EC8FF", "manual": "#D07DFF", "other": "#C9C3F2", "warning": "#FCEE0A", "critical": "#FF3B5C"
+  },
+  "clock": {
+    "style": "segment", "color": "default",
+    "palette": { "amber": "#FF9E3D", "cyan": "#00F0FF", "pink": "#FF2A6D", "lime": "#B6FF3B" },
+    "gradients": [
+      { "name": "日落", "nameEn": "Sunset", "stops": ["#FCEE0A", "#FF9E3D", "#FF2A6D"] },
+      { "name": "海洋", "nameEn": "Ocean", "stops": ["#00F0FF", "#6FA8FF", "#C25BFF"] },
+      { "name": "极光", "nameEn": "Aurora", "stops": ["#3DFFB0", "#00F0FF", "#6FA8FF"] },
+      { "name": "火焰", "nameEn": "Ember", "stops": ["#FCEE0A", "#FF9E3D", "#FF3B5C"] },
+      { "name": "霓虹", "nameEn": "Neon", "stops": ["#FF2A6D", "#C25BFF", "#00F0FF"] }
+    ]
+  },
+  "effects": {
+    "surfaceGradient": ["#0A0613", "#1C0B30"],
+    "rimGradient": ["#00F0FF", "#B026FF", "#FF2A6D"],
+    "rimWidth": 1.25,
+    "shadowBlur": 18,
+    "shadowDepth": 0,
+    "shadowOpacity": 0.6,
+    "scanlines": 0.04
+  }
+}

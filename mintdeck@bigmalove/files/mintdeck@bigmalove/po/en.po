@@ -1,0 +1,412 @@
+# English translation of MintDeck UI strings. msgid is the Simplified Chinese source.
+# 由 tools/i18n-build.py --init 生成骨架、人工填 msgstr；改完跑 tools/i18n-build.py。
+msgid ""
+msgstr ""
+"Project-Id-Version: mintdeck@bigmalove\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-10-29 13:20+0800\n"
+"Last-Translator: bigmalove <125801848+bigmalove@users.noreply.github.com>\n"
+"Language-Team: MintDeck translators\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: mintdeck@bigmalove/applet.js:397
+msgid "设置…"
+msgstr "Settings…"
+
+#: mintdeck@bigmalove/applet.js:398
+msgid "重新读取数据"
+msgstr "Reload data"
+
+#: mintdeck@bigmalove/applet.js:400
+msgid "关于 MintDeck"
+msgstr "About MintDeck"
+
+#: mintdeck@bigmalove/applet.js:401
+msgid "基于 BrimDeck（Apache-2.0）的 Cinnamon 复刻。"
+msgstr "A Cinnamon port of BrimDeck (Apache-2.0)."
+
+#: mintdeck@bigmalove/applet.js:441
+msgid "读取失败：%s"
+msgstr "Read failed: %s"
+
+#: mintdeck@bigmalove/lib/deck/data.js:271
+msgid "%s 天前"
+msgid_plural "%s 天前"
+msgstr[0] "%s day ago"
+msgstr[1] "%s days ago"
+
+#: mintdeck@bigmalove/lib/deck/data.js:272
+msgid "%s 个月前"
+msgid_plural "%s 个月前"
+msgstr[0] "%s month ago"
+msgstr[1] "%s months ago"
+
+#: mintdeck@bigmalove/lib/deck/data.js:233
+msgid "上下文"
+msgstr "Context"
+
+#: mintdeck@bigmalove/lib/deck/data.js:236
+msgid "最近：%s"
+msgstr "Updated %s"
+
+#: mintdeck@bigmalove/lib/deck/data.js:236 mintdeck@bigmalove/lib/deck/data.js:299
+msgid "无"
+msgstr "none"
+
+#: mintdeck@bigmalove/lib/deck/data.js:239 mintdeck@bigmalove/lib/deck/data.js:240
+msgid "%s 积分"
+msgstr "%s credits"
+
+#: mintdeck@bigmalove/lib/deck/data.js:243
+msgid "%s 个会话 · 累计 %s 积分"
+msgstr "%s sessions · %s credits total"
+
+#: mintdeck@bigmalove/lib/deck/data.js:269
+msgid "今天"
+msgstr "today"
+
+#: mintdeck@bigmalove/lib/deck/data.js:270
+msgid "昨天"
+msgstr "yesterday"
+
+#: mintdeck@bigmalove/lib/deck/data.js:291
+msgid "5 小时"
+msgstr "5 hours"
+
+#: mintdeck@bigmalove/lib/deck/data.js:292
+msgid "每周"
+msgstr "Weekly"
+
+#: mintdeck@bigmalove/lib/deck/data.js:294
+msgid "未登录 · 仅本机用量"
+msgstr "Not signed in · local usage only"
+
+#: mintdeck@bigmalove/lib/deck/data.js:299
+msgid "最近记录 %s"
+msgstr "Last seen %s"
+
+#: mintdeck@bigmalove/lib/deck/data.js:299 mintdeck@bigmalove/lib/deck/data.js:314
+msgid "本机会话"
+msgstr "Local sessions"
+
+#: mintdeck@bigmalove/lib/deck/data.js:314
+msgid "%s/%s 个会话"
+msgstr "%s/%s sessions"
+
+#: mintdeck@bigmalove/lib/deck/data.js:344 mintdeck@bigmalove/lib/deck/data.js:355
+#: mintdeck@bigmalove/lib/deck/data.js:366
+msgid "读取失败"
+msgstr "Read failed"
+
+#: mintdeck@bigmalove/lib/deck/data.js:348
+msgid "读取中…"
+msgstr "Reading…"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:25 settings-schema.json
+msgid "AI 用量"
+msgstr "AI Usage"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:26 settings-schema.json
+msgid "音乐"
+msgstr "Music"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:27 settings-schema.json
+msgid "系统监控"
+msgstr "System Monitor"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:381
+msgid "没有可显示的来源"
+msgstr "No sources to show"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:450
+msgid "used"
+msgstr "used"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:471
+msgid "今日"
+msgstr "Today"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:472
+msgid "七日"
+msgstr "7 days"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:500
+msgid "未检测到播放器"
+msgstr "No media player detected"
+
+#: mintdeck@bigmalove/lib/deck/panel.js:589
+msgid "采样未接入"
+msgstr "Sampling unavailable"
+
+#: settings-schema.json
+msgid "外观"
+msgstr "Appearance"
+
+#: settings-schema.json
+msgid "收起形态"
+msgstr "Collapsed style"
+
+#: settings-schema.json
+msgid "配额与统计"
+msgstr "Quota & usage"
+
+#: settings-schema.json
+msgid "行为"
+msgstr "Behavior"
+
+#: settings-schema.json
+msgid "形态"
+msgstr "Style"
+
+#: settings-schema.json
+msgid "主题"
+msgstr "Theme"
+
+#: settings-schema.json
+msgid "界面语言"
+msgstr "Language"
+
+#: settings-schema.json
+msgid "收起时显示"
+msgstr "Show when collapsed"
+
+#: settings-schema.json
+msgid "尺寸"
+msgstr "Size"
+
+#: settings-schema.json
+msgid "数据源"
+msgstr "Data sources"
+
+#: settings-schema.json
+msgid "提醒"
+msgstr "Alerts"
+
+#: settings-schema.json
+msgid "交互"
+msgstr "Interaction"
+
+#: settings-schema.json
+msgid "显示"
+msgstr "Display"
+
+#: settings-schema.json
+msgid "刘海"
+msgstr "Notch"
+
+#: settings-schema.json
+msgid "胶囊"
+msgstr "Capsule"
+
+#: settings-schema.json
+msgid "指示条"
+msgstr "Indicator line"
+
+#: settings-schema.json
+msgid "启用动画"
+msgstr "Enable animations"
+
+#: settings-schema.json
+msgid "毫秒"
+msgstr "ms"
+
+#: settings-schema.json
+msgid "动画时长"
+msgstr "Animation duration"
+
+#: settings-schema.json
+msgid "面板主题"
+msgstr "Panel theme"
+
+#: settings-schema.json
+msgid "深色"
+msgstr "Dark"
+
+#: settings-schema.json
+msgid "浅色"
+msgstr "Light"
+
+#: settings-schema.json
+msgid "One Dark Pro"
+msgstr "One Dark Pro"
+
+#: settings-schema.json
+msgid "GitHub Dark"
+msgstr "GitHub Dark"
+
+#: settings-schema.json
+msgid "GitHub Light"
+msgstr "GitHub Light"
+
+#: settings-schema.json
+msgid "Dracula"
+msgstr "Dracula"
+
+#: settings-schema.json
+msgid "Night Owl"
+msgstr "Night Owl"
+
+#: settings-schema.json
+msgid "赛博朋克：边缘行者"
+msgstr "Cyberpunk: Edgerunners"
+
+#: settings-schema.json
+msgid "界面语言（悬浮岛与面板；设置窗口跟随系统语言）"
+msgstr ""
+"Language of the island and panel (this settings window follows the system "
+"language)"
+
+#: settings-schema.json
+msgid "自动（跟随系统）"
+msgstr "Auto (follow system)"
+
+#: settings-schema.json
+msgid "简体中文"
+msgstr "简体中文"
+
+#: settings-schema.json
+msgid "English"
+msgstr "English"
+
+#: settings-schema.json
+msgid "繁體中文"
+msgstr "繁體中文"
+
+#: settings-schema.json
+msgid "日本語"
+msgstr "日本語"
+
+#: settings-schema.json
+msgid "时间样式"
+msgstr "Clock style"
+
+#: settings-schema.json
+msgid "简约"
+msgstr "Minimal"
+
+#: settings-schema.json
+msgid "数码管"
+msgstr "Segment"
+
+#: settings-schema.json
+msgid "衬线"
+msgstr "Serif"
+
+#: settings-schema.json
+msgid "宽体"
+msgstr "Wide"
+
+#: settings-schema.json
+msgid "窄体"
+msgstr "Condensed"
+
+#: settings-schema.json
+msgid "24 小时制"
+msgstr "24-hour clock"
+
+#: settings-schema.json
+msgid "显示配额环"
+msgstr "Show quota rings"
+
+#: settings-schema.json
+msgid "显示时间"
+msgstr "Show clock"
+
+#: settings-schema.json
+msgid "显示系统读数"
+msgstr "Show system readouts"
+
+#: settings-schema.json
+msgid "收起尺寸（自动 = 随显示的内容多少缩放）"
+msgstr "Collapsed size (Auto = scales with the content shown)"
+
+#: settings-schema.json
+msgid "自动"
+msgstr "Auto"
+
+#: settings-schema.json
+msgid "小"
+msgstr "Small"
+
+#: settings-schema.json
+msgid "标准"
+msgstr "Standard"
+
+#: settings-schema.json
+msgid "大"
+msgstr "Large"
+
+#: settings-schema.json
+msgid "显示 Claude Code"
+msgstr "Show Claude Code"
+
+#: settings-schema.json
+msgid "显示 DeepSeek Harness"
+msgstr "Show DeepSeek Harness"
+
+#: settings-schema.json
+msgid "显示 WorkBuddy"
+msgstr "Show WorkBuddy"
+
+#: settings-schema.json
+msgid "统计本机会话的 Token 与费用"
+msgstr "Count tokens and cost from local sessions"
+
+#: settings-schema.json
+msgid "配额到预警线时提醒"
+msgstr "Notify when quota crosses the warning line"
+
+#: settings-schema.json
+msgid "%"
+msgstr "%"
+
+#: settings-schema.json
+msgid "预警线"
+msgstr "Warning line"
+
+#: settings-schema.json
+msgid "告警线"
+msgstr "Critical line"
+
+#: settings-schema.json
+msgid "展开延迟"
+msgstr "Open delay"
+
+#: settings-schema.json
+msgid "收起延迟"
+msgstr "Close delay"
+
+#: settings-schema.json
+msgid "默认页"
+msgstr "Default page"
+
+#: settings-schema.json
+msgid "展开或收起面板"
+msgstr "Toggle the panel"
+
+#: settings-schema.json
+msgid "显示在"
+msgstr "Show on"
+
+#: settings-schema.json
+msgid "主显示器"
+msgstr "Primary monitor"
+
+#: settings-schema.json
+msgid "光标所在显示器"
+msgstr "Monitor with the pointer"
+
+#: settings-schema.json
+msgid "在面板上显示图标（隐藏后右键悬浮岛可进入设置）"
+msgstr "Show a panel icon (right-click the island for settings when hidden)"
+
+#: settings-schema.json
+msgid "全屏时隐藏（全屏下鼠标唤出将不可用）"
+msgstr "Hide in fullscreen (hover-to-open stops working)"
+
+#~ msgid "最近 %s"
+#~ msgstr "Latest %s"

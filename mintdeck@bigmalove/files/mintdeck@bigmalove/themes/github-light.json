@@ -1,0 +1,68 @@
+{
+  // Colors from GitHub Theme for Visual Studio Code, "GitHub Light Default" (primer/github-vscode-theme, MIT License).
+  "formatVersion": 1,
+  "id": "github-light",
+  "name": "GitHub Light",
+  "description": "GitHub 浅色默认主题：白色底色，清晰的灰阶与语义色。",
+  "descriptionEn": "GitHub Light Default: a white surface with crisp grays and semantic colors.",
+  "author": "GitHub (Primer)",
+  "license": "MIT",
+  "homepage": "https://github.com/primer/github-vscode-theme",
+  "base": "light",
+  "colors": {
+    "surface": "#FFFFFF",
+    "textPrimary": "#1F2328",
+    "textSecondary": "#59636E",
+    "textTertiary": "#818B98",
+    "accent": "#0969DA",
+    "onAccent": "#FFFFFF",
+    "danger": "#D1242F",
+    "liked": "#CF222E",
+    "clock": "#1F2328",
+    "equalizer": "#0969DA",
+    "hairline": "#D8DEE4",
+    "track": "#E6EAEF",
+    "ringTrack": "#D1D9E0",
+    "fill": "#F6F8FA",
+    "fillSelected": "#E1E6EB",
+    "hover": "#EFF2F5",
+    "pressed": "#E1E6EB",
+    "outline": "#D1D9E0",
+    "popup": "#FFFFFF",
+    "popupBorder": "#D1D9E0",
+    "input": "#F6F8FA",
+    "rangeFill": "#2E0969DA",
+    "coverPlaceholder": "#F6F8FA",
+    "coverOutline": "#D1D9E0",
+    "scrollThumb": "#C1C8CF",
+    "rim": "#D1D9E0",
+    "shadow": "#1F2328",
+    "indicator": "#8C959F",
+    "indicatorProgress": "#1F2328",
+    "switchFill": "#F6F8FA",
+    "seekRail": "#D1D9E0",
+    "rowDivider": "#D8DEE4",
+    "rowHover": "#F6F8FA",
+    "menuDetail": "#59636E",
+    "tooltip": "#FFFFFF",
+    "tooltipBorder": "#D1D9E0",
+    "bubble": "#FFFFFF",
+    "bubbleBorder": "#D1D9E0"
+  },
+  "apps": {
+    "claude": "#BC4C00", "codex": "#1A7F37", "antigravity": "#0969DA", "cursor": "#59636E", "zcode": "#1B7C83",
+    "dsh": "#0550AE", "grokBot": "#59636E", "kimi": "#0A8DAE", "manual": "#8250DF", "other": "#59636E", "warning": "#9A6700", "critical": "#D1242F"
+  },
+  "clock": {
+    "style": "minimal", "color": "default",
+    "palette": { "amber": "#9A6700", "cyan": "#1B7C83", "pink": "#BF3989", "lime": "#1A7F37" },
+    "gradients": [
+      { "name": "日落", "nameEn": "Sunset", "stops": ["#BC4C00", "#BF3989", "#8250DF"] },
+      { "name": "海洋", "nameEn": "Ocean", "stops": ["#1B7C83", "#0969DA", "#8250DF"] },
+      { "name": "极光", "nameEn": "Aurora", "stops": ["#1A7F37", "#1B7C83", "#0969DA"] },
+      { "name": "火焰", "nameEn": "Ember", "stops": ["#9A6700", "#BC4C00", "#D1242F"] },
+      { "name": "霓虹", "nameEn": "Neon", "stops": ["#BF3989", "#8250DF", "#0969DA"] }
+    ]
+  },
+  "effects": { "shadowOpacity": 0.18 }
+}

@@ -1,0 +1,7 @@
+{
+  "uuid": "mintdeck@bigmalove",
+  "name": "MintDeck",
+  "description": "Dynamic Island style bar at the top of the screen: AI coding tool quota and token usage, now playing music, and a system monitor.",
+  "max-instances": "1",
+  "cinnamon-version": ["5.8", "6.0", "6.2", "6.4", "6.6"]
+}

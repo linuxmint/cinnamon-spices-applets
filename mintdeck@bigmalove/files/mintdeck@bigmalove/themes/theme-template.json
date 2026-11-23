@@ -1,0 +1,98 @@
+{
+  // BrimDeck panel theme template (format 1). Save the file in the themes folder (Settings › Panel theme › Open themes folder;
+  // 设置 › 面板主题 › 打开主题文件夹), then choose it. While that page is open, saving reloads the theme ("Reload" / "重新加载"
+  // does so by hand). Comments like this one are allowed; delete any line you do not need: whatever is left out comes from the
+  // base theme. Colors are "#RRGGBB" or "#AARRGGBB" (AA = opacity, 00-FF).
+  // Text that would be hard to read is never shown as written: a color below its contrast minimum is lightened or darkened
+  // along its own hue, just far enough, and the settings page lists every such change.
+  "formatVersion": 1,
+  "id": "my-theme",                 // Unique: lowercase letters, digits, "-", "_" and "."
+  "name": "我的主题",
+  "nameEn": "My theme",
+  "description": "一句话描述这个主题。",
+  "descriptionEn": "One sentence about this theme.",
+  "author": "",
+  "license": "",
+  "homepage": "",
+  "base": "dark",                   // Any built-in theme: dark, light, one-dark-pro, github-dark, github-light, dracula, night-owl, cyberpunk-edgerunners
+
+  "colors": {
+    "surface": "#000000",           // The notch, capsule and panel. Always drawn opaque.
+    "textPrimary": "#F5F5F7",       // Titles and figures. At least 7:1 against the surface and pop-ups.
+    "textSecondary": "#9EEBEBF5",   // Labels. At least 4.5:1.
+    "textTertiary": "#61EBEBF5",    // Reset times and notes. At least 3:1.
+    "accent": "#0A84FF",            // Keyboard focus and chosen dates. At least 3:1.
+    "onAccent": "#FFFFFF",          // Text on the accent (a chosen date). At least 3:1 against the accent.
+    "danger": "#F2777F",            // Errors and the paused sync button. At least 4.5:1.
+    "liked": "#EC4141",             // The heart of a liked song. At least 3:1.
+    "clock": "#F5F5F7",             // The clock when its color is "Theme default" ("default" below). At least 4.5:1.
+    "equalizer": "#9EEBEBF5",       // The equalizer when it does not follow the cover. At least 3:1.
+    "hairline": "#17FFFFFF",        // Dividers between columns and rows.
+    "track": "#1FFFFFFF",           // The empty part of a quota bar.
+    "ringTrack": "#29FFFFFF",       // The empty part of a quota ring.
+    "fill": "#12FFFFFF",            // The background of joined switches.
+    "fillSelected": "#24FFFFFF",    // The chosen segment.
+    "hover": "#18FFFFFF",
+    "pressed": "#24FFFFFF",
+    "outline": "#24FFFFFF",         // The plan chip, date fields and other outlines.
+    "popup": "#1A1A1D",             // Menus, the date picker and the model details pop-up.
+    "popupBorder": "#24FFFFFF",
+    "input": "#0F0F11",             // The date fields.
+    "rangeFill": "#382B87FF",       // Days inside a chosen date range.
+    "coverPlaceholder": "#0FFFFFFF",// Where a song has no cover.
+    "coverOutline": "#14FFFFFF",
+    "scrollThumb": "#515665",
+    "rim": "#12FFFFFF",             // A thin line along the inner edge of the surface.
+    "shadow": "#000000",            // The shadow under the collapsed notch and capsule; use a bright color with no depth for a glow.
+    "indicator": "#8E8E93",         // The indicator line (collapsed style "Indicator").
+    "indicatorProgress": "#55555A", // Playback progress drawn on the indicator. At least 2:1 against the indicator.
+    "switchFill": "#0FFFFFFF",      // Behind the AI usage / music switch in the toolbar.
+    "seekRail": "#2EFFFFFF",        // The empty part of the music seek bar.
+    "rowDivider": "#0DFFFFFF",      // Between rows of the model details.
+    "rowHover": "#0AFFFFFF",        // A model details row under the pointer.
+    "menuDetail": "#80EBEBF5",      // Song titles in the playback source menu. At least 3:1.
+    "tooltip": "#1F1F23",           // Tooltips on the panel.
+    "tooltipBorder": "#38FFFFFF",
+    "bubble": "#2A2A2E",            // The time shown above the seek bar while it is hovered or dragged.
+    "bubbleBorder": "#1AFFFFFF"
+  },
+
+  // Default colors of the application columns, used until a color is chosen for a column in Settings › Quotas and usage.
+  // At least 3:1 against the surface. "manual" covers every source entered by hand; "other" anything not listed.
+  "apps": {
+    "claude": "#E5A385", "codex": "#98DBB0", "antigravity": "#9CB9FF", "cursor": "#D4D5DF", "zcode": "#4A64A6",
+    "dsh": "#6081DA", "grokBot": "#D4D5DF", "kimi": "#68CDEB", "manual": "#CC9EED", "other": "#D4D5DF", "warning": "#E5C890", "critical": "#E78284"
+  },
+
+  // The clock that suits the theme. Choosing the theme in settings switches the clock to it; the clock can still be changed after.
+  // style: minimal, stacked, digits, dots, segment, neon, serif, wide, condensed
+  // color: default (the "clock" color above), amber, cyan, pink, lime, custom, gradient, cover (the playing song's cover)
+  // custom is used when color is "custom"; gradient, exactly three colors, when color is "gradient".
+  // palette: the colors of the amber, cyan, pink and lime swatches in this theme. At least 4.5:1 against the surface.
+  // gradients: the preset gradients offered in this theme, one to eight, each exactly three colors. At least 4.5:1.
+  "clock": {
+    "style": "minimal", "color": "default", "custom": "#B9A8FF", "gradient": ["#FFB38A", "#FF7EB3", "#B69CFF"],
+    "palette": { "amber": "#FF9F43", "cyan": "#5CE1E6", "pink": "#FF8FB1", "lime": "#E4FF6A" },
+    "gradients": [
+      { "name": "日落", "nameEn": "Sunset", "stops": ["#FFB38A", "#FF7EB3", "#B69CFF"] },
+      { "name": "海洋", "nameEn": "Ocean", "stops": ["#7CF3FF", "#4FA8FF", "#6A6CFF"] },
+      { "name": "极光", "nameEn": "Aurora", "stops": ["#8BFFB0", "#5CE1E6", "#B69CFF"] },
+      { "name": "火焰", "nameEn": "Ember", "stops": ["#FFE27A", "#FF9F43", "#FF5E5E"] },
+      { "name": "霓虹", "nameEn": "Neon", "stops": ["#FF5CF0", "#A66BFF", "#5CE1E6"] }
+    ]
+  },
+
+  // The twelve preset colors of the color picker in settings. Not inherited: without this line the picker offers this theme's
+  // app, warning, critical and clock colors. Remove the "//" to set your own, at most twelve.
+  // "swatches": ["#E5A385", "#F0B37E", "#E5C890", "#98DBB0", "#7FD1C4", "#9CB9FF", "#B9A8FF", "#E7A0D0", "#E78284", "#D4D5DF", "#8E8E93", "#F5F5F7"],
+
+  "effects": {
+    "surfaceGradient": [],          // Two or more colors over the surface, top to bottom, e.g. ["#0A0613", "#1C0B30"]
+    "rimGradient": [],              // Two or more colors for the rim, left to right; replaces "rim"
+    "rimWidth": 1,                  // 0 to 3 DIP
+    "shadowBlur": 14,               // 0 to 40
+    "shadowDepth": 4,               // 0 to 12; 0 spreads the shadow evenly around the surface
+    "shadowOpacity": 0.28,          // 0 to 1
+    "scanlines": 0                  // 0 to 0.12: horizontal lines in the primary text color at this opacity
+  }
+}
