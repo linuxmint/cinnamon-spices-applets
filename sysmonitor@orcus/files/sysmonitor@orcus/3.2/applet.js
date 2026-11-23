@@ -28,7 +28,15 @@ const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 
 let _, GTop, Graph, Providers;
-if (typeof require !== 'undefined') {
+const Extension = imports.ui.extension;
+if (Extension.getCurrentExtension) {
+    // Cinnamon 6.6+ warns on require(); its own importer exposes each module's var and function symbols.
+    const Me = Extension.getCurrentExtension();
+    Graph = Me.imports.graph.Graph;
+    Providers = Me.imports.providers;
+    _ = Me.imports.init._;
+    GTop = Me.imports.init.GTop;
+} else if (typeof require !== 'undefined') {
     Graph = require('./graph').Graph;
     Providers = require('./providers');
     let init = require('./init');
@@ -389,7 +397,7 @@ MyApplet.prototype = {
             this.actor.set_style(style);
         }
         else
-            this.actor.set_style("");
+            this.actor.set_style(null);
 
         this.resolution_needs_update = true;
         this.repaint();
