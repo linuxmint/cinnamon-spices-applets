@@ -1786,7 +1786,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
     openKDECConfiguration() {
         // Try to open the KDE Connect settings via different commands
         const tryOpenCommands = () => {
-            const commands = ["kdeconnect-settings", "kcmshell5 kcm_kdeconnect", "kcmshell6 kcm_kdeconnect"]
+            const commands = ["kdeconnect-app", "kdeconnect-settings", "kcmshell5 kcm_kdeconnect", "kcmshell6 kcm_kdeconnect"]
             for (const command of commands) {
                 KDEConnectApplet.LOGGER.trace(`Trying command '${command}' to open KDE Connect Configuration...`);
                 try {
