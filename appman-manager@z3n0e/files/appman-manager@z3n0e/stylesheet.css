@@ -1,0 +1,66 @@
+.appman-menu {
+    min-width: 400px;
+}
+
+.appman-header {
+    padding-bottom: 4px;
+}
+
+.appman-title {
+    font-weight: bold;
+    font-size: 1.05em;
+}
+
+.appman-subtitle,
+.appman-dim {
+    font-size: 0.9em;
+    color: rgba(128, 128, 128, 1);
+}
+
+.appman-section-title {
+    font-weight: bold;
+    font-size: 0.85em;
+    padding-top: 4px;
+    color: rgba(128, 128, 128, 1);
+}
+
+.appman-version-new {
+    font-weight: bold;
+    color: #4caf50;
+}
+
+.appman-badge {
+    font-size: 0.8em;
+    padding: 0 6px;
+    border-radius: 8px;
+    color: rgba(128, 128, 128, 1);
+    border: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.appman-row-buttons {
+    spacing: 2px;
+}
+
+.appman-icon-button {
+    padding: 3px;
+    border-radius: 4px;
+}
+
+.appman-icon-button:hover,
+.appman-icon-button:focus {
+    background-color: rgba(128, 128, 128, 0.25);
+}
+
+.appman-icon-button-danger:hover {
+    background-color: rgba(220, 60, 60, 0.35);
+}
+
+.appman-search-entry {
+    width: 360px;
+}
+
+.appman-desc {
+    font-size: 0.85em;
+    color: rgba(128, 128, 128, 1);
+    max-width: 330px;
+}

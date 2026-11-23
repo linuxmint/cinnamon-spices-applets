@@ -1,0 +1,206 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page-updates", "page-operations", "page-panel"],
+
+        "page-updates": {
+            "type": "page",
+            "title": "Updates",
+            "sections": ["sec-schedule", "sec-power", "sec-found"]
+        },
+        "sec-schedule": {
+            "type": "section",
+            "title": "When to check for updates",
+            "keys": ["check-mode", "check-interval", "check-time", "check-weekday", "check-weekly-time", "check-at-login", "login-delay", "btn-check-now"]
+        },
+        "sec-power": {
+            "type": "section",
+            "title": "Battery and network",
+            "keys": ["skip-on-battery", "skip-on-metered", "power-note"]
+        },
+        "sec-found": {
+            "type": "section",
+            "title": "When updates are found",
+            "keys": ["on-updates", "update-all-syncs"]
+        },
+
+        "page-operations": {
+            "type": "page",
+            "title": "Operations",
+            "sections": ["sec-run", "sec-advanced"]
+        },
+        "sec-run": {
+            "type": "section",
+            "title": "How AppMan commands run",
+            "keys": ["use-terminal", "terminal-command"]
+        },
+        "sec-advanced": {
+            "type": "section",
+            "title": "Advanced",
+            "keys": ["appman-path", "check-jobs", "check-timeout"]
+        },
+
+        "page-panel": {
+            "type": "page",
+            "title": "Panel",
+            "sections": ["sec-panel"]
+        },
+        "sec-panel": {
+            "type": "section",
+            "title": "Panel and menu",
+            "keys": ["show-count", "max-search-results"]
+        }
+    },
+
+    "check-mode": {
+        "type": "combobox",
+        "default": "interval",
+        "description": "Check for updates",
+        "options": {
+            "Only when I ask (manual)": "manual",
+            "Every N hours": "interval",
+            "Every day at a set time": "daily",
+            "Once a week": "weekly"
+        },
+        "tooltip": "Checks only query the AppMan sources online. Nothing is downloaded or installed unless you choose to."
+    },
+    "check-interval": {
+        "type": "spinbutton",
+        "default": 12,
+        "min": 1,
+        "max": 168,
+        "step": 1,
+        "units": "hours",
+        "description": "Interval",
+        "dependency": "check-mode=interval"
+    },
+    "check-time": {
+        "type": "timechooser",
+        "default": { "h": 10, "m": 0, "s": 0 },
+        "description": "Time of day",
+        "dependency": "check-mode=daily"
+    },
+    "check-weekday": {
+        "type": "combobox",
+        "default": 1,
+        "description": "Day of the week",
+        "options": {
+            "Monday": 1, "Tuesday": 2, "Wednesday": 3, "Thursday": 4,
+            "Friday": 5, "Saturday": 6, "Sunday": 0
+        },
+        "dependency": "check-mode=weekly"
+    },
+    "check-weekly-time": {
+        "type": "timechooser",
+        "default": { "h": 10, "m": 0, "s": 0 },
+        "description": "Time of day",
+        "dependency": "check-mode=weekly"
+    },
+    "check-at-login": {
+        "type": "switch",
+        "default": true,
+        "description": "Catch up at login if a scheduled check was missed",
+        "tooltip": "If the computer was off or asleep at the scheduled time, check once shortly after login or resume."
+    },
+    "login-delay": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "units": "minutes",
+        "description": "Wait after login before catching up",
+        "dependency": "check-at-login"
+    },
+    "btn-check-now": {
+        "type": "button",
+        "description": "Check for updates now",
+        "callback": "checkNowFromSettings"
+    },
+
+    "skip-on-battery": {
+        "type": "switch",
+        "default": true,
+        "description": "Postpone automatic checks and updates while on battery",
+        "tooltip": "The postponed check runs as soon as the charger is connected (event-driven, no polling)."
+    },
+    "skip-on-metered": {
+        "type": "switch",
+        "default": true,
+        "description": "Postpone automatic checks and updates on metered connections"
+    },
+    "power-note": {
+        "type": "label",
+        "description": "Manual checks and actions from the menu always run."
+    },
+
+    "on-updates": {
+        "type": "combobox",
+        "default": "notify",
+        "description": "Action",
+        "options": {
+            "Show them in the panel only": "silent",
+            "Send a notification": "notify",
+            "Install them automatically (in background)": "install"
+        }
+    },
+    "update-all-syncs": {
+        "type": "switch",
+        "default": true,
+        "description": "\"Full update\" also updates AppMan itself",
+        "tooltip": "On: runs \"appman -u\". Off: runs \"appman -u --apps\" (apps only)."
+    },
+
+    "use-terminal": {
+        "type": "switch",
+        "default": true,
+        "description": "Run menu actions in a terminal window (shows progress)",
+        "tooltip": "When off, actions run silently in background with \"-y\" (assume yes). Progress shows in the panel icon; the result and full log appear in the menu (\"Last operation\"). Automatic updates always run in background."
+    },
+    "terminal-command": {
+        "type": "entry",
+        "default": "",
+        "description": "Terminal command (empty = system default)",
+        "tooltip": "The AppMan command is appended to this, e.g. \"gnome-terminal --\", \"ghostty -e\", \"xfce4-terminal -x\", \"kitty\".",
+        "dependency": "use-terminal"
+    },
+    "appman-path": {
+        "type": "entry",
+        "default": "",
+        "description": "Path to appman (empty = auto-detect)"
+    },
+    "check-jobs": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "units": "parallel lookups",
+        "description": "Update check parallelism",
+        "tooltip": "Lower values are gentler on CPU and network; higher values finish faster."
+    },
+    "check-timeout": {
+        "type": "spinbutton",
+        "default": 45,
+        "min": 10,
+        "max": 300,
+        "step": 5,
+        "units": "seconds",
+        "description": "Timeout per app lookup"
+    },
+
+    "show-count": {
+        "type": "switch",
+        "default": true,
+        "description": "Show the number of available updates next to the icon"
+    },
+    "max-search-results": {
+        "type": "spinbutton",
+        "default": 12,
+        "min": 3,
+        "max": 50,
+        "step": 1,
+        "units": "results",
+        "description": "Search results shown in the install box"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "uuid": "appman-manager@z3n0e",
+    "name": "AppMan Manager",
+    "description": "Check, update, install, reinstall and remove AppImages and portable apps managed by AppMan (ivan-hc/AM). Battery friendly, with a user-defined update schedule.",
+    "version": "1.0.0",
+    "max-instances": 1,
+    "cinnamon-version": ["6.0", "6.2", "6.4", "6.6"],
+    "author": "z3n0e",
+    "website": "https://github.com/ivan-hc/AM"
+}
