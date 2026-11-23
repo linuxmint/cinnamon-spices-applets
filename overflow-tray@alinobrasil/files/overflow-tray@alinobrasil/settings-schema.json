@@ -1,0 +1,42 @@
+{
+    "head": {
+        "type": "header",
+        "description": "Hidden icons"
+    },
+    "new-icons-on-panel": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Show new icons on the panel",
+        "tooltip": "When off, icons you haven't placed yet go behind the arrow (like Windows). Right-click the arrow to choose which icons are shown on the panel."
+    },
+    "columns": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "units": "icons",
+        "description": "Icons per row in the popup"
+    },
+    "panel-head": {
+        "type": "header",
+        "description": "Panel"
+    },
+    "panel-columns": {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "Automatic": 0,
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4
+        },
+        "description": "Icons per row on a vertical panel",
+        "tooltip": "Automatic shows 2 per row on panels 45 pixels or wider, otherwise 1. Icons are made smaller if needed so they fit across the panel."
+    },
+    "placement": {
+        "type": "generic",
+        "default": {}
+    }
+}
