@@ -387,7 +387,7 @@ MyApplet.prototype = {
             this.allow_auto_mode_change();
             this.set_dark_mode(is_dark_mode);
         }
-        this.timer = Mainloop.timeout_add_seconds(this.next_schedule + 1, Lang.bind(this, this.change_mode_automatically));
+        this.timer = Mainloop.timeout_add_seconds(this.next_schedule + 1, () => this.change_mode_automatically());
         return false;
     },
 
