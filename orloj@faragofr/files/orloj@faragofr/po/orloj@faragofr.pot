@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: orloj@faragofr 1.1.0\n"
+"Project-Id-Version: orloj@faragofr 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-07-01 22:35+0200\n"
+"POT-Creation-Date: 2026-10-01 23:33+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -53,12 +53,32 @@ msgstr ""
 msgid "Accent color"
 msgstr ""
 
+#. settings-schema.json->accent-color->tooltip
+msgid ""
+"Sun, time hand, equinox and LST stars, and the sunrise/sunset glow on the "
+"hour ring and sky band"
+msgstr ""
+
 #. settings-schema.json->foreground-color->description
-msgid "Foreground color (text, hands, glyphs)"
+msgid "Foreground color"
+msgstr ""
+
+#. settings-schema.json->foreground-color->tooltip
+msgid ""
+"Hour numerals, LST readout, zodiac and planet glyphs, the moon, and the "
+"dial's rules and hairlines"
 msgstr ""
 
 #. settings-schema.json->background-color->description
 msgid "Background color"
+msgstr ""
+
+#. settings-schema.json->day-color->description
+msgid "Daylight color"
+msgstr ""
+
+#. settings-schema.json->day-color->tooltip
+msgid "Color of the fully-lit sky on the hour ring and sky band"
 msgstr ""
 
 #. settings-schema.json->dial-size->units
