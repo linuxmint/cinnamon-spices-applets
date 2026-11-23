@@ -1,0 +1,9 @@
+Third-party code bundled so the applet works when installed from Cinnamon
+Spices, which extracts a zip and runs no installer.
+
+  astral  — sunrise/sunset, Apache-2.0, see LICENSE-astral.
+            Trimmed to the modules the engine imports.
+  tomli   — TOML parser for Python < 3.11, MIT, see LICENSE-tomli.
+            Unused on 3.11+, which has tomllib in the stdlib.
+
+Neither is modified. Both are pure Python with no compiled extensions.
