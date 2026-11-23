@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- SPDX-License-Identifier: GPL-3.0-or-later; original OSS Singularity artwork, not a traced Codex character. -->
+  <path d="M23 49v7M41 49v7M8 28v12M56 28v12M32 11v7" stroke="#79b9ef" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="32" cy="8" r="4" fill="#bee3ff"/>
+  <rect x="12" y="17" width="40" height="34" rx="11" fill="#79b9ef"/>
+  <rect x="17" y="22" width="30" height="23" rx="7" fill="#153550"/>
+  <path d="m23 28 5 5-5 5m11 0h6" fill="none" stroke="#e4f5ff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
