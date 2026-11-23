@@ -1,0 +1,181 @@
+/* Capsule System Monitor - stylesheet
+ *
+ * Scope: colors, corner radii, font sizes and padding ONLY.
+ * All pixel-exact sizing (cell widths, bar heights, capsule height, graph
+ * geometry) is done from capsule.js with set_width() / set_height(), because
+ * that is the only place where it can be guaranteed. Do not add width/height
+ * rules here - they would fight the other module and the panel would jump.
+ *
+ * Cinnamon St limits: no flexbox, no gap, no CSS variables, no calc(),
+ * no modern selectors. This is a narrow, CSS2-like subset.
+ *
+ * An applet stylesheet is merged into the global Cinnamon theme, so every
+ * selector here is namespaced with "kapszula-". The prefix is an internal
+ * name and stays as it is (SPEC 7.4). Never style generic classes such as
+ * .applet-box from this file.
+ *
+ * Class names are fixed by SPEC 7.4 - capsule.js relies on them verbatim.
+ * Colors are fixed by SPEC 4.1, geometry by SPEC 4.
+ *
+ * Alert rules deliberately come after their base rules: capsule.js adds the
+ * -alert class next to the base class, so the cascade order decides.
+ */
+
+/* ---------------------------------------------------------------- capsule */
+
+.kapszula-capsule {
+    background-color: rgba(255, 255, 255, 0.055);
+    border-radius: 16px;
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin: 0px;
+    /* 16px = half of the designed 32px capsule height, so it reads as a pill.
+     * On a lower panel the capsule is shorter (SPEC 7.3), and capsule.js may
+     * override this inline with half of the actual height. */
+}
+
+.kapszula-capsule-alert {
+    background-color: rgba(255, 140, 0, 0.10);
+}
+
+/* ------------------------------------------------------------------ cells */
+
+/* The cell is a plain container. Its width comes from capsule.js (30px for a
+ * percentage cell either way, 97px for the network cell), the 7px gap between
+ * cells comes from the St.BoxLayout spacing. Nothing here may add space of
+ * its own. */
+
+.kapszula-cell {
+    padding: 0px;
+    margin: 0px;
+    background-color: transparent;
+}
+
+.kapszula-cell-nolabel {
+    padding: 0px;
+    margin: 0px;
+    background-color: transparent;
+}
+
+/* ----------------------------------------------------------------- labels */
+
+/* 8px, centered, slightly tracked out. The label text is already uppercase
+ * (MEM, CPU, GPU, SSD, SWP, GFX, TMP), so no text-transform is needed.
+ * The network cell has no label at all (SPEC 5). */
+
+.kapszula-label {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.30);
+    letter-spacing: 0.05em;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+
+.kapszula-label-alert {
+    color: rgba(255, 140, 0, 0.62);
+}
+
+/* ----------------------------------------------------------------- values */
+
+/* Tabular figures are the point of this rule: without "tnum" the glyph widths
+ * change with the value and the number shifts inside its cell every second,
+ * which is exactly the panel jitter this applet exists to avoid.
+ * The font family is intentionally NOT set - inherit the system font. */
+
+.kapszula-value {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.62);
+    font-feature-settings: "tnum";
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+
+.kapszula-value-alert {
+    color: #FF8C00;
+}
+
+/* ------------------------------------------------------------------ units */
+
+/* The unit (percent sign, degree sign, "M") is a separate label next to the
+ * value, on the same line, aligned to the bottom edge (SPEC 4). At 8px
+ * against the 12px
+ * value it stays a footnote: it says what the number means without competing
+ * with it for attention. Dimmer than the value on purpose, and dimmer than
+ * the value in the alert state too, so the orange the eye catches is still
+ * the number itself. */
+
+.kapszula-unit {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.32);
+    padding: 0px;
+    margin: 0px;
+}
+
+.kapszula-unit-alert {
+    color: rgba(255, 140, 0, 0.55);
+}
+
+/* -------------------------------------------------------------- bar track */
+
+/* Track height is 3px with labels and 12px without; capsule.js sets it.
+ * Only the ground color and the corner radius belong here. */
+
+.kapszula-track {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.kapszula-track-nolabel {
+    border-radius: 3px;
+}
+
+/* --------------------------------------------------------------- bar fill */
+
+.kapszula-fill {
+    background-color: rgba(255, 255, 255, 0.42);
+    border-radius: 2px;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* The fill follows the track's radius in the taller, label-less layout.
+ * Works whether the -nolabel class sits on the track or on the cell, as long
+ * as the fill is a descendant of the element carrying it. */
+.kapszula-track-nolabel .kapszula-fill,
+.kapszula-cell-nolabel .kapszula-fill {
+    border-radius: 3px;
+}
+
+.kapszula-fill-alert {
+    background-color: #FF8C00;
+}
+
+/* --------------------------------------------------------- network numbers */
+
+/* The two numbers to the right of the network graph, upload on top, download
+ * below. 10px, tabular figures for the same reason as the values, right
+ * aligned so the digits line up under each other whatever their count.
+ *
+ * The color here is the real one, not a fallback: both numbers stay in the
+ * same white as every other value in the capsule, so the typography reads as
+ * one. Direction is carried by the arrow and by which half of the cell the
+ * line sits in, not by the text color. The net_color_up / net_color_down
+ * settings tint the graph bars and the arrows only - capsule.js must NOT
+ * color these labels.
+ *
+ * The network never alerts (SPEC 6.2), so there is no alert variant. */
+
+.kapszula-netnum {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.62);
+    font-feature-settings: "tnum";
+    text-align: right;
+    padding: 0px;
+    margin: 0px;
+}
