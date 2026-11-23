@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 5.8.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-04-27 17:11+0200\n"
+"POT-Creation-Date: 2026-11-23 20:05+0100\n"
 "PO-Revision-Date: 2026-06-08 00:00+0000\n"
 "Last-Translator: Grom-TS\n"
 "Language-Team: Russian\n"
@@ -17,31 +17,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:196
+#. applet.js:203
 msgid "score"
 msgstr "рейтинг"
 
-#. applet.js:208
+#. applet.js:215
 msgid "comments"
 msgstr "комментарии"
 
-#. applet.js:220
+#. applet.js:232
 msgid "recent issues"
 msgstr "недавние обращения"
 
-#. applet.js:233
+#. applet.js:252
 msgid "translations"
 msgstr "переводы"
 
-#. applet.js:308
+#. applet.js:331
 msgid "Reload icons"
 msgstr "Перезагрузить значки"
 
-#. applet.js:314
+#. applet.js:340
 msgid "Visit website"
 msgstr "Открыть веб-сайт"
 
-#. applet.js:417
+#. applet.js:443
 msgid ""
 "Check in progress.\n"
 "Time remaining:"
@@ -49,43 +49,43 @@ msgstr ""
 "Выполняется проверка.\n"
 "Осталось времени:"
 
-#. applet.js:420
+#. applet.js:446
 msgid "Ends around:"
 msgstr "Завершится примерно в:"
 
-#. applet.js:437
+#. applet.js:463
 msgid "Time remaining until the next check:"
 msgstr "Время до следующей проверки:"
 
-#. applet.js:439 applet.js:741
+#. applet.js:465 applet.js:755
 msgid "Next check at:"
 msgstr "Следующая проверка:"
 
-#. applet.js:444
+#. applet.js:470
 msgid "Getting Started. Please wait..."
 msgstr "Инициализация. Пожалуйста, подождите..."
 
-#. applet.js:893
+#. applet.js:928
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:984
+#. applet.js:1019
 msgid "Mark all as read"
 msgstr "Отметить всё как прочитанное"
 
-#. applet.js:995
+#. applet.js:1030
 msgid "Refresh"
 msgstr "Обновить"
 
-#. applet.js:1009
+#. applet.js:1044
 msgid "Refreshing in progress - Click to stop"
 msgstr "Выполняется обновление — нажмите для остановки"
 
-#. applet.js:1023
+#. applet.js:1058
 msgid "Refreshing in progress"
 msgstr "Выполняется обновление"
 
-#. applet.js:1035
+#. applet.js:1070
 msgid "Configure..."
 msgstr "Настроить..."
 
@@ -96,8 +96,7 @@ msgstr "SpiceSpy"
 #. metadata.json->description
 msgid ""
 "Notifies you when there's a change to your favorite Spices on the website."
-msgstr ""
-"Уведомляет об изменениях в избранных Spices на веб-сайте."
+msgstr "Уведомляет об изменениях в избранных Spices на веб-сайте."
 
 #. settings-schema.json->pageGeneral->title
 msgid "General"
@@ -187,6 +186,10 @@ msgstr "Показывать доступные обновления в меню
 #. settings-schema.json->show-issues->description
 msgid "Show number of issues in the menu"
 msgstr "Показывать количество обращений в меню"
+
+#. settings-schema.json->reset-issues->description
+msgid "Reset Issue Numbers"
+msgstr ""
 
 #. settings-schema.json->sort-by->description
 msgid "Sort by"

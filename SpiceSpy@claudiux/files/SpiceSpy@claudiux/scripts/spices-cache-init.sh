@@ -5,11 +5,12 @@ UUID="$(basename "$PWD")"
 cd "$SCRIPTPATH"
 
 for type in action applet desklet extension theme; do {
-        [[ -d ${HOME}/.cache/cinnamon/spices/${type} ]] || {
-                mkdir -p ${HOME}/.cache/cinnamon/spices/${type}
-                sleep 0.5
-        }
+        #~ [[ -d ${HOME}/.cache/cinnamon/spices/${type} ]] || {
+                #~ mkdir -p ${HOME}/.cache/cinnamon/spices/${type}
+                #~ sleep 0.5
+        #~ }
         [[ -f ${HOME}/.cache/cinnamon/spices/${type}/index.json ]] || {
+                [[ -d ${HOME}/.cache/cinnamon/spices/${type} ]] || mkdir -p ${HOME}/.cache/cinnamon/spices/${type}
                 echo "{}" > ${HOME}/.cache/cinnamon/spices/${type}/index.json
                 sleep 0.5
         }

@@ -31,6 +31,7 @@
         "colorWhileRefreshing",
         "icon-size",
         "show-issues",
+        "reset-issues",
         "show-translations",
         "show-commits",
         "sort-by",
@@ -116,6 +117,11 @@
     "type": "switch",
     "description": "Show number of issues in the menu",
     "default": true
+  },
+  "reset-issues": {
+    "type": "button",
+    "description": "Reset Issue Numbers",
+    "callback": "reset_issue_numbers"
   },
   "sort-by": {
     "type": "combobox",

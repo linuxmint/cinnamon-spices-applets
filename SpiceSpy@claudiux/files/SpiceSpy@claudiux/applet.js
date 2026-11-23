@@ -28,6 +28,8 @@ const { to_string } = _require("./lib/to-string");
 //mainloopTools:
 const { timeout_add_seconds, setTimeout, clearTimeout, source_remove, remove_all_sources } = _require("./lib/mainloopTools");
 
+const { readFileAsync, readJSONAsync } = _require("./lib/readFileAsync");
+
 var MODULE_UUID; // Populated by main() function
 const USER_DATA_DIR = GLib.get_user_data_dir();
 
@@ -222,8 +224,20 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
       let issues_count = new St.Label({ text: spice.issues.toString() });
       issues_box.add_actor(issues_icon);
       issues_box.add_actor(issues_count);
-      let issues_tooltip = new Tooltips.Tooltip(issues_box, _("recent issues"));
-      issues_box.connect("enter-event", () => { this.url = "https://github.com/linuxmint/cinnamon-spices-"+this.spice.type+"/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+\""+this.spice.uuid+"\""; });
+      let issues_numbers = "";
+      if (spice.numbers) issues_numbers = spice["numbers"].join(" #");
+      if (issues_numbers.length > 0) issues_numbers = ": #" + issues_numbers;
+      let issues_urls = [];
+      if (spice.html_urls) issues_urls = spice["html_urls"];
+      let issues_tooltip = new Tooltips.Tooltip(issues_box, _("recent issues") + issues_numbers);
+      issues_box.connect("enter-event", () => {
+        this.url = ["https://github.com/linuxmint/cinnamon-spices-"+this.spice.type+"/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+\""+this.spice.uuid+"\""];
+        if (issues_urls.length > 0) {
+          for (let u of issues_urls) {
+            if (u.length > 0) this.url.push(u);
+          }
+        }
+      });
       this.addActor(issues_box);
       issues_box.opacity = (parseInt(spice.issues) != 0) ? 255 : this.parent.standard_opacity;
       if (this.new_issues) issues_box.set_style("color: %s;".format(this.parent.color_on_change));
@@ -270,7 +284,11 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
   }
 
   activate() {
-    Util.spawn(["xdg-open", this.url]);
+    if (typeof this.url === "string") {
+      Util.spawn(["xdg-open", this.url]);
+    } else {
+      for (let u of this.url) Util.spawn(["xdg-open", u]);
+    }
     this.update_comment_count(0);
     super.activate();
   }
@@ -638,28 +656,34 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
   do_issuesJob(type, uuid) {
     const jsonFilePath = `${HOME_DIR}/.config/cinnamon/spices/SpiceSpy@claudiux/issues/issues-${type}.json`
     const jsonFile = Gio.file_new_for_path(jsonFilePath);
-    if (!jsonFile.query_exists(null)) return;
 
-    let [success, jsonFileContents] = GLib.file_get_contents(jsonFilePath);
-    if (!success) {
-      GLib.free(jsonFileContents);
-      return;
-    }
+    readFileAsync(jsonFilePath).then( (jsonFileContents) => {
+      const data = JSON.parse(jsonFileContents.replace(/\n/g, "")); //.replace(/\}\]\[\{/g, "},{"));
+      const fullName = uuid;
+      var issuesNumber = 0;
+      var numbers = [];
+      var html_urls = [];
 
-    const data = eval(to_string(jsonFileContents).replace(/\n/g, "")); //.replace(/\}\]\[\{/g, "},{"));
-    const fullName = uuid;
-    var issuesNumber = 0;
 
-    for (let d of data) {
-      if ((d["title"] && d["title"].includes(fullName)) || (d["body"] && d["body"].includes(fullName))) {
-        issuesNumber += 1;
+      for (let d of data) {
+        if ((d["title"] && d["title"].includes(fullName)) || (d["body"] && d["body"].includes(fullName))) {
+          issuesNumber += 1;
+          if (d["number"]) {
+            numbers.push(d["number"]);
+          }
+          if (d["html_url"]) {
+            html_urls.push(d["html_url"]);
+          }
+        }
       }
-    }
-    if (this.spices_to_spy[type][uuid])
-      this.spices_to_spy[type][uuid]["issues"] = issuesNumber;
-    GLib.free(jsonFileContents);
-    if (!this.menu.isOpen)
-      this.make_menu();
+      if (this.spices_to_spy[type][uuid]) {
+        this.spices_to_spy[type][uuid]["issues"] = issuesNumber;
+        this.spices_to_spy[type][uuid]["numbers"] = numbers;
+        this.spices_to_spy[type][uuid]["html_urls"] = html_urls;
+      }
+      if (!this.menu.isOpen)
+        this.make_menu();
+    }).catch( e => { logError("do_issuesJob - Unable to read json: " + e); return } );
   } // End of do_issuesJob
 
   commentsJobs_loop() {
@@ -795,49 +819,58 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
       const INDEX = HOME_DIR + "/.cache/cinnamon/spices/" + type.slice(0, -1) + "/index.json";
       const jsonFile = Gio.file_new_for_path(INDEX);
 
-      if (jsonFile.query_exists(null)) {
-        let [success, array_chars] = GLib.file_get_contents(INDEX);
-        if (success) {
-          const spices = JSON.parse(to_string(array_chars));
-          for (let spice of Object.keys(spices)) {
-            let _uuid = (type!="themes") ? ""+spices[spice]["uuid"] : ""+spices[spice]["name"];
+      readFileAsync(INDEX).then( (array_chars) => {
+        const spices = JSON.parse(array_chars);
+        for (let spice of Object.keys(spices)) {
+          let _uuid = (type!="themes") ? ""+spices[spice]["uuid"] : ""+spices[spice]["name"];
 
-            if (this.uuids.indexOf(_uuid) > -1 || this.authors.indexOf(spices[spice]["author_user"]) > -1) {
-              let _nb_translations = 0;
-              if (type!="themes") { // No translations for themes.
-                var list_translations = [];
-                let _nb_translations_keys = Object.keys(spices[spice]["translations"]);
-                for (let tKey of _nb_translations_keys) {
-                  let t = tKey.slice(tKey.indexOf("_")+1);
-                  if (list_translations.indexOf(t) < 0)
-                    list_translations.push(t);
-                }
-                _nb_translations = list_translations.length;
+          if (this.uuids.indexOf(_uuid) > -1 || this.authors.indexOf(spices[spice]["author_user"]) > -1) {
+            let _nb_translations = 0;
+            if (type!="themes") { // No translations for themes.
+              var list_translations = [];
+              let _nb_translations_keys = Object.keys(spices[spice]["translations"]);
+              for (let tKey of _nb_translations_keys) {
+                let t = tKey.slice(tKey.indexOf("_")+1);
+                if (list_translations.indexOf(t) < 0)
+                  list_translations.push(t);
               }
-              _spices_to_spy[type][_uuid] = {
-                "type": type,
-                "uuid": _uuid,
-                "name": spices[spice]["name"],
-                "score": spices[spice]["score"],
-                "translations": _nb_translations,
-                "url": "https://cinnamon-spices.linuxmint.com/"+type+"/view/"+spices[spice]["spices-id"],
-                "comments": ( this.spices_to_spy[type] &&
-                              this.spices_to_spy[type][""+spices[spice]["uuid"]] &&
-                              this.spices_to_spy[type][""+spices[spice]["uuid"]]["comments"]
-                            ) ? this.spices_to_spy[type][""+spices[spice]["uuid"]]["comments"] : 0,
-                "issues": ( this.spices_to_spy[type] &&
-                              this.spices_to_spy[type][""+spices[spice]["uuid"]] &&
-                              this.spices_to_spy[type][""+spices[spice]["uuid"]]["issues"] != null
-                            ) ? this.spices_to_spy[type][""+spices[spice]["uuid"]]["issues"] : 0,
-                "last_commit": spices[spice]["last_commit"],
-              }
+              _nb_translations = list_translations.length;
+            }
+            _spices_to_spy[type][_uuid] = {
+              "type": type,
+              "uuid": _uuid,
+              "name": spices[spice]["name"],
+              "score": spices[spice]["score"],
+              "translations": _nb_translations,
+              "url": "https://cinnamon-spices.linuxmint.com/"+type+"/view/"+spices[spice]["spices-id"],
+              "comments": ( this.spices_to_spy[type] &&
+                            this.spices_to_spy[type][""+spices[spice]["uuid"]] &&
+                            this.spices_to_spy[type][""+spices[spice]["uuid"]]["comments"]
+                          ) ? this.spices_to_spy[type][""+spices[spice]["uuid"]]["comments"] : 0,
+              "issues": ( this.spices_to_spy[type] &&
+                            this.spices_to_spy[type][""+spices[spice]["uuid"]] &&
+                            this.spices_to_spy[type][""+spices[spice]["uuid"]]["issues"] != null
+                          ) ? this.spices_to_spy[type][""+spices[spice]["uuid"]]["issues"] : 0,
+              "last_commit": spices[spice]["last_commit"],
+              "numbers": ( this.spices_to_spy[type] &&
+                            this.spices_to_spy[type][""+spices[spice]["uuid"]] &&
+                            this.spices_to_spy[type][""+spices[spice]["uuid"]]["numbers"] != null
+                          ) ? this.spices_to_spy[type][""+spices[spice]["uuid"]]["numbers"] : [],
+              "html_urls": ( this.spices_to_spy[type] &&
+                            this.spices_to_spy[type][""+spices[spice]["uuid"]] &&
+                            this.spices_to_spy[type][""+spices[spice]["uuid"]]["html_urls"] != null
+                          ) ? this.spices_to_spy[type][""+spices[spice]["uuid"]]["html_urls"] : [],
             }
           }
         }
-        GLib.free(array_chars);
-      }
+        let sto = setTimeout(() => {
+            clearTimeout(sto);
+            this.spices_to_spy = _spices_to_spy;
+          },
+          2000
+        );
+      }).catch( e => logError("get_spices_to_spy - Unable to read json: " + e));
     }
-    this.spices_to_spy = _spices_to_spy;
   } // End of get_spices_to_spy
 
   update_comments() {
@@ -865,6 +898,18 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
       }
     }
   } // End of update_issues
+
+  reset_issue_numbers() {
+    for (let type of TYPES) {
+      let spices = this.spices_to_spy[type];
+      for (let uuid of Object.keys(spices)) {
+        this.spices_to_spy[type][uuid]["issues"] = 0;
+        try {
+          this.old_spices_to_spy[type][uuid]["issues"] = 0;
+        } catch(e) {}
+      }
+    }
+  } // End of reset_issue_numbers
 
   make_menu() {
     var total_diff_score = 0;
