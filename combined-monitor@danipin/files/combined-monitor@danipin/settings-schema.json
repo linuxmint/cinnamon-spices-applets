@@ -1,8 +1,8 @@
 {
   "layout": {
     "type": "layout",
-    "pages": ["page-cpu", "page-temp", "page-ram", "page-swap", "page-profiles", "page-general"],
-    "page-cpu": {
+    "pages": ["page-cpu", "page-temp", "page-gpu", "page-ram", "page-swap", "page-profiles", "page-general"],
+    "page-cpu": { 
       "type": "page",
       "title": "CPU",
       "sections": ["section-cpu-display", "section-cpu-thresholds", "section-cpu-colors"]
@@ -26,6 +26,11 @@
         "section-swap-colors"
       ]
     },
+    "page-gpu": {
+      "type": "page",
+      "title": "GPU Temperature",
+      "sections": ["section-gpu-display", "section-gpu-thresholds", "section-gpu-colors"]
+    },
     "page-profiles": {
       "type": "page",
       "title": "Profiles",
@@ -39,8 +44,8 @@
     
     "section-order": {
       "type": "section",
-      "title": "Order of Metrics",
-      "keys": ["cpu-order", "temp-order", "ram-order", "swap-order"]
+      "title": "Order of Metrics", 
+      "keys": ["cpu-order", "temp-order", "ram-order", "swap-order", "gpu-order"]
     },
     
     "section-cpu-display": {
@@ -62,7 +67,7 @@
     "section-temp-display": {
       "type": "section",
       "title": "Display",
-      "keys": ["show-temp", "show-celsius-symbol", "temp-label-text", "temp-symbol", "temp-unit"]
+      "keys": ["show-temp", "show-celsius-symbol", "temp-label-text", "temp-symbol", "temp-unit", "temp-decimal-places"]
     },
     "section-temp-thresholds": {
       "type": "section",
@@ -107,6 +112,21 @@
       "keys": ["swap-enable-colors", "swap-color-low", "swap-color-med", "swap-color-high", "swap-color-critical"]
     },
     
+    "section-gpu-display": {
+      "type": "section",
+      "title": "Display",
+      "keys": ["show-gpu", "show-gpu-celsius-symbol", "gpu-label-text", "gpu-symbol", "gpu-unit", "gpu-decimal-places"]
+    },
+    "section-gpu-thresholds": {
+      "type": "section",
+      "title": "Thresholds (in °C)",
+      "keys": ["gpu-low", "gpu-med", "gpu-high"]
+    },
+    "section-gpu-colors": {
+      "type": "section",
+      "title": "Colors",
+      "keys": ["gpu-enable-colors", "gpu-color-low", "gpu-color-med", "gpu-color-high", "gpu-color-critical"]
+    },
     "section-general": {
       "type": "section",
       "title": "Settings",
@@ -242,6 +262,16 @@
     },
     "description": "Unit of Measurement",
     "tooltip": "Choose whether the temperature should be displayed in Celsius or Fahrenheit. Threshold values must be adjusted accordingly."
+  },
+  "temp-decimal-places": {
+    "type": "spinbutton",
+    "default": 1,
+    "min": 0,
+    "max": 2,
+    "step": 1,
+    "units": "decimal places",
+    "description": "Decimal places for temperature",
+    "tooltip": "Number of decimal places to display for temperature. Set to 0 for whole numbers."
   },
   "temp-low": {
     "type": "spinbutton",
@@ -484,6 +514,105 @@
     "tooltip": "Used above the HIGH threshold"
   },
 
+  "show-gpu": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Show GPU Temperature",
+    "tooltip": "Enables the display of GPU temperature. **Important:** On many systems, installing the 'lm-sensors' package and running 'sudo sensors-detect' is necessary for this function to work correctly. Integrated GPUs (iGPUs) may report their temperature as part of the CPU temperature."
+  },
+  "show-gpu-celsius-symbol": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show °C symbol",
+    "tooltip": "Controls whether the Celsius symbol (°C or °F) should be displayed after the value."
+  },
+  "gpu-label-text": {
+    "type": "entry",
+    "default": "GPU",
+    "description": "Text for GPU"
+  },
+  "gpu-symbol": {
+    "type": "entry",
+    "default": "",
+    "description": "Custom symbol/icon for GPU. Leave empty for text label."
+  },
+  "gpu-unit": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+      "Celsius (°C)": 0,
+      "Fahrenheit (°F)": 1
+    },
+    "description": "Unit of Measurement",
+    "tooltip": "Choose whether the temperature should be displayed in Celsius or Fahrenheit. Threshold values must be adjusted accordingly."
+  },
+  "gpu-decimal-places": {
+    "type": "spinbutton",
+    "default": 1,
+    "min": 0,
+    "max": 2,
+    "step": 1,
+    "units": "decimal places",
+    "description": "Decimal places for GPU temperature",
+    "tooltip": "Number of decimal places to display for GPU temperature. Set to 0 for whole numbers."
+  },
+  "gpu-low": {
+    "type": "spinbutton",
+    "default": 55,
+    "min": 0,
+    "max": 150,
+    "step": 1,
+    "units": "°C",
+    "description": "Threshold LOW",
+    "tooltip": "The LOW color is used below this value (applies to °C and °F)"
+  },
+  "gpu-med": {
+    "type": "spinbutton",
+    "default": 70,
+    "min": 0,
+    "max": 150,
+    "step": 1,
+    "units": "°C",
+    "description": "Threshold MED",
+    "tooltip": "The MED color is used between LOW and MED (applies to °C and °F)"
+  },
+  "gpu-high": {
+    "type": "spinbutton",
+    "default": 85,
+    "min": 0,
+    "max": 150,
+    "step": 1,
+    "units": "°C",
+    "description": "Threshold HIGH",
+    "tooltip": "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+  },
+  "gpu-enable-colors": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Enable color change for GPU"
+  },
+  "gpu-color-low": {
+    "type": "colorchooser",
+    "default": "#2CFF2C",
+    "description": "Color LOW (Green)"
+  },
+  "gpu-color-med": {
+    "type": "colorchooser",
+    "default": "#FFA500",
+    "description": "Color MED (Orange)"
+  },
+  "gpu-color-high": {
+    "type": "colorchooser",
+    "default": "#FF4500",
+    "description": "Color HIGH (Red-Orange)"
+  },
+  "gpu-color-critical": {
+    "type": "colorchooser",
+    "default": "#FF0000",
+    "description": "Color CRITICAL (Red)",
+    "tooltip": "Used above the HIGH threshold"
+  },
+
   "cpu-order": {
     "type": "combobox",
     "default": 1,
@@ -491,7 +620,8 @@
       "Position 1 (Left)": 1,
       "Position 2": 2,
       "Position 3": 3,
-      "Position 4 (Right)": 4
+      "Position 4 (Right)": 4,
+      "Position 5": 5
     },
     "description": "CPU Position",
     "tooltip": "Defines the display position of CPU. The position is automatically swapped with the metric at the same position."
@@ -503,7 +633,8 @@
       "Position 1 (Left)": 1,
       "Position 2": 2,
       "Position 3": 3,
-      "Position 4 (Right)": 4
+      "Position 4 (Right)": 4,
+      "Position 5": 5
     },
     "description": "TEMP Position",
     "tooltip": "Defines the display position of TEMP. The position is automatically swapped with the metric at the same position."
@@ -515,7 +646,8 @@
       "Position 1 (Left)": 1,
       "Position 2": 2,
       "Position 3": 3,
-      "Position 4 (Right)": 4
+      "Position 4 (Right)": 4,
+      "Position 5": 5
     },
     "description": "RAM Position",
     "tooltip": "Defines the display position of RAM. The position is automatically swapped with the metric at the same position."
@@ -527,10 +659,24 @@
       "Position 1 (Left)": 1,
       "Position 2": 2,
       "Position 3": 3,
-      "Position 4 (Right)": 4
+      "Position 4 (Right)": 4,
+      "Position 5": 5
     },
     "description": "SWAP Position",
     "tooltip": "Defines the display position of SWAP. The position is automatically swapped with the metric at the same position."
+  },
+  "gpu-order": {
+    "type": "combobox",
+    "default": 5,
+    "options": {
+      "Position 1 (Left)": 1,
+      "Position 2": 2,
+      "Position 3": 3,
+      "Position 4 (Right)": 4,
+      "Position 5": 5
+    },
+    "description": "GPU Position",
+    "tooltip": "Defines the display position of GPU. The position is automatically swapped with the metric at the same position."
   },
 
   "update-interval": {

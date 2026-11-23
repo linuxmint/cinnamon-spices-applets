@@ -10,7 +10,7 @@ const Util = imports.misc.util;
 const Gettext = imports.gettext;
 
 const UUID = "combined-monitor@danipin";
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+const DECODER = new TextDecoder(); // Globaler Decoder spart Speicher-Allokationen
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -42,14 +42,16 @@ const CONFIGURABLE_KEYS = [
     "swap-display-percentage", "swap-display-mode", "swap-low", "swap-med", 
     "swap-high", "swap-enable-colors", "swap-color-low", "swap-color-med", 
     "swap-color-high", "swap-color-critical",
+    // GPU
+    "show-gpu", "show-gpu-celsius-symbol", "gpu-label-text", "gpu-symbol", 
+    "gpu-unit", "gpu-decimal-places", "gpu-low", "gpu-med", "gpu-high", 
+    "gpu-enable-colors", "gpu-color-low", "gpu-color-med", "gpu-color-high", 
+    "gpu-color-critical",
     // GENERAL - Order
     "cpu-order", "temp-order", "ram-order", "swap-order", // NEW: For flexible order
     // GENERAL - Other
-    "enable-separator", "separator-text", "separator-color", 
-    "display-percentage",
-    // PROFILE - Profile keys that are used for saving/loading data
-    "profile-1-name", "profile-1-data", "profile-2-name", "profile-2-data",
-    "profile-3-name", "profile-3-data", "profile-message-duration"
+    "update-interval", "enable-separator", "separator-text", "separator-color",
+    "display-percentage"
 ];
 
 
@@ -64,8 +66,15 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             this.settings = new Settings.AppletSettings(this, this.metadata.uuid, instanceId);
             
             // NEW: Aggressively set all margins and paddings left and right to 0
-            this.actor.style = "margin-left: 0px !important; padding-left: 0px !important; margin-right: 0px !important; padding-right: 0px !important;"; 
+            this.actor.style = "margin-left: 0px !important; padding-left: 0px !important; margin-right: 0px !important; padding-right: 4px !important;"; 
             
+            this.actor.set_x_align(Clutter.ActorAlign.START); // Ensure main actor aligns to the start
+            this.actor.x_fill = false;                        // Set property directly (no setter function)
+
+            // NEW: Hide the default icon and label bins of the TextIconApplet 
+            // to remove the large gap before our custom UI.
+            if (this._applet_icon_bin) this._applet_icon_bin.hide();
+            if (this._applet_label) this._applet_label.hide();
         } catch (e) {
             global.logError("CombinedMonitor: could not create AppletSettings: " + e);
             this.settings = null;
@@ -97,6 +106,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         this.tempLabel = "TEMP"; 
         this.tempSymbol = ""; 
         this.tempUnit = 0; // 0=Celsius, 1=Fahrenheit
+        this.tempDecimalPlaces = 1; // NEW: Default to 1 decimal place
         this.showCelsiusSymbol = true; // Use unit symbol (°C or °F)
         this.tempLow = 55; 
         this.tempMed = 70;
@@ -138,6 +148,22 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         this.swapColorsEnabled = true;
         this.swapOnlyWhenUsed = false;
         this._lastSwapPercent = 0; 
+
+        // GPU Temp (Placeholder)
+        this.showGpu = false; // Default to disabled
+        this.gpuLabel = "GPU"; 
+        this.gpuSymbol = ""; 
+        this.gpuUnit = 0; // 0=Celsius, 1=Fahrenheit
+        this.gpuDecimalPlaces = 1; 
+        this.showGpuCelsiusSymbol = true; 
+        this.gpuLow = 55; 
+        this.gpuMed = 70;
+        this.gpuHigh = 85;
+        this.gpuColorsEnabled = true;
+        this.gpuColorLow = "#2CFF2C";
+        this.gpuColorMed = "#FFA500";
+        this.gpuColorHigh = "#FF4500";
+        this.gpuColorCritical = "#FF0000";
         this._hasRunOnce = false; 
 
         // General
@@ -148,6 +174,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         this.tempOrder = 2; 
         this.ramOrder = 3; 
         this.swapOrder = 4;
+        this.gpuOrder = 5; // NEW: Default position for GPU
         
         this.enableSeparator = true;
         this.separatorText = "|";
@@ -169,7 +196,6 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         this._isMessageActive = false; 
         this._isSettingsLoading = false; 
         this._profileMessageTimeoutId = 0; 
-
         this._prevTotal = 0;
         this._prevIdle = 0;
         this._timeoutId = 0;
@@ -179,6 +205,10 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         this._ramActor = null;
         this._swapActor = null;
         this._tempActor = null; 
+        this._gpuActor = null; // NEW: GPU Actor
+
+        this._currentTemp = -1; 
+        this._currentGpu = -1;
 
         this._buildUI(); 
         this._bindSettings();
@@ -189,16 +219,17 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
     // FUNCTIONS WITH SAFETY GUARDS FOR BINDINGS
     // ============================================================
     
-    _guardedUpdate() {
+    _guardedUpdate(force = false) {
         if (this._isSettingsLoading) return;
         this._clearProfileMessage(); 
-        this._updateNow();
+        this._updateNow(force);
     }
     
-    _guardedVisibilityChanged() {
+    _guardedVisibilityChanged(force) {
         if (this._isSettingsLoading) return;
         this._clearProfileMessage(); 
-        this._onVisibilityChanged();
+        const shouldForce = (force === true);
+        this._onVisibilityChanged(shouldForce);
     }
     
     // This is called by the separator bindings
@@ -231,7 +262,8 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             'cpu': { prop: 'cpuOrder', setting: 'cpu-order' },
             'temp': { prop: 'tempOrder', setting: 'temp-order' },
             'ram': { prop: 'ramOrder', setting: 'ram-order' },
-            'swap': { prop: 'swapOrder', setting: 'swap-order' }
+            'swap': { prop: 'swapOrder', setting: 'swap-order' },
+            'gpu': { prop: 'gpuOrder', setting: 'gpu-order' } // NEW: GPU order
         };
         
         // The new value the user just set (already stored in this.cpuOrder etc.)
@@ -242,7 +274,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         let positionsUsed = new Set();
         let counts = {};
         
-        for (const metric in metricKeys) {
+        for (const metric in metricKeys) { // Iterate over all metrics
             const order = this[metricKeys[metric].prop];
             metricPositions.push({ metric, order, settingKey: metricKeys[metric].setting });
             
@@ -251,7 +283,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         }
 
         // 2. Find the gap (the position 1-4 that is now missing)
-        const maxPos = 4;
+        const maxPos = 5; // Max position is now 5
         let missingOrder = -1;
         for (let i = 1; i <= maxPos; i++) {
             if (!positionsUsed.has(i)) {
@@ -314,6 +346,33 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         
         this._buildPopupMenu(); 
         this._updateNow(); 
+    }
+
+    /**
+     * Ensures that only one sub-menu is open at a time within a parent menu.
+     * When one is opened, others are closed with animation.
+     */
+    _makeMenuExclusive(parentMenu) {
+        let items = parentMenu._getMenuItems();
+        let subMenus = items.filter(item => item instanceof PopupMenu.PopupSubMenuMenuItem);
+        
+        subMenus.forEach(item => {
+            item.menu.connect('open-state-changed', (menu, isOpen) => {
+                if (isOpen) {
+                    // Darken the background of the expanded sub-menu
+                    item.menu.actor.style = "background-color: rgba(0, 0, 0, 0.15); border-radius: 4px; margin-top: 2px; margin-bottom: 2px;";
+
+                    subMenus.forEach(other => {
+                        if (other !== item && other.menu.isOpen) {
+                            other.menu.close(true); // true triggers the smooth animation
+                        }
+                    });
+                } else {
+                    // Reset style when closed
+                    item.menu.actor.style = "";
+                }
+            });
+        });
     }
 
     // -------------------------
@@ -467,8 +526,17 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             _addSymbolItemWithIcon('swap', _("Icon-Dark"), this.applet_path + "/icons/swap_dark.svg", true);
             _addSymbolItemWithIcon('swap', _("No Symbol (Text Label)"), "", false);
 
+            // GPU Symbols
+            symbolSection.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            const gpuHeader = new PopupMenu.PopupMenuItem(_("GPU"), { reactive: false });
+            gpuHeader.actor.style = "font-weight: bold;";
+            symbolSection.menu.addMenuItem(gpuHeader);
+
+            _addSymbolItemWithIcon('gpu', _("Icon-White"), this.applet_path + "/icons/gpu_white.svg", true);
+            _addSymbolItemWithIcon('gpu', _("Icon-Dark"), this.applet_path + "/icons/gpu_dark.svg", true);
+            _addSymbolItemWithIcon('gpu', _("No Symbol (Text Label)"), "", false);
+
             this.menu.addMenuItem(symbolSection);
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
             // PROFILE MANAGEMENT SECTION
             const profileSection = new PopupMenu.PopupSubMenuMenuItem(_("Profile Management"));
@@ -504,6 +572,10 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             _addProfileItem(3);
 
             this.menu.addMenuItem(profileSection);
+            
+            // Make slots inside profile section exclusive
+            this._makeMenuExclusive(profileSection.menu);
+
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             // END: PROFILE MANAGEMENT SECTION
 
@@ -528,6 +600,9 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                 global.reexec_self();
             });
             this.menu.addMenuItem(restartItem);
+
+            // Make main menu sub-menus (Separator, Symbols, Profiles) exclusive
+            this._makeMenuExclusive(this.menu);
 
         } catch (e) {
             global.logError("CombinedMonitor: _buildPopupMenu failed: " + e);
@@ -587,8 +662,11 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
      */
     _buildUI() {
         this._box = new St.BoxLayout({ reactive: true });
+        this._box.set_x_align(Clutter.ActorAlign.START); // Align to start for precise control
+
+        this._box.spacing = 0;                  // Reset global spacing to 0
         // Aggressive override for the inner box to eliminate left margin/padding.
-        this._box.style = "margin-left: 0px !important; padding-left: 0px !important;";
+        this._box.style = "margin-left: 0px !important; padding-left: 0px !important; margin-right: 0px !important; padding-right: 4px !important;";
         
         this.actor.add_child(this._box); // Add the box to the applet here
 
@@ -596,7 +674,8 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         this._cpuActor = this._makeMetricActor('cpu');
         this._ramActor = this._makeMetricActor('ram');
         this._swapActor = this._makeMetricActor('swap');
-        this._tempActor = this._makeMetricActor('temp'); 
+        this._tempActor = this._makeMetricActor('temp');
+        this._gpuActor = this._makeMetricActor('gpu'); // NEW: Create GPU actor
     }
 
     /**
@@ -609,16 +688,19 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         // HERE YOU CAN ADJUST THE SPACING INDIVIDUALLY (in pixels)
         
         const cpuPadR = 4;  // CPU: Right (to the value)
-        const cpuPadL = 4;  // CPU: Left (to the separator)
+        const cpuPadL = 0;  // CPU: Left (to the separator)
         
         const ramPadR = 3;  // RAM: Right (to the value)
-        const ramPadL = 4;  // RAM: Left (to the separator)
+        const ramPadL = 0;  // RAM: Left (to the separator)
         
         const swapPadR = 3; // SWAP: Right (to the value)
-        const swapPadL = 4; // SWAP: Left (to the separator)
+        const swapPadL = 0; // SWAP: Left (to the separator)
         
         const tempPadR = 0; // TEMP: Right (to the value)
-        const tempPadL = 4; // TEMP: Left (to the separator)
+        const tempPadL = 0; // TEMP: Left (to the separator)
+
+        const gpuPadR = 4; // GPU: Right (to the value)
+        const gpuPadL = 0; // GPU: Left (to the separator)
         // **********************************************
         
         let padR = 0;
@@ -637,6 +719,9 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         } else if (metric === 'temp') {
             padR = tempPadR;
             padL = tempPadL;
+        } else if (metric === 'gpu') { // NEW: GPU padding
+            padR = gpuPadR;
+            padL = gpuPadL;
         }
 
         let iconStyles = [];
@@ -666,11 +751,11 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
     /**
      * Callback for changes in visibility or mode.
      */
-    _onVisibilityChanged() {
+    _onVisibilityChanged(force = false) {
         // 1. Apply layout order
         this._applyOrderToBox();
         // 2. Force immediate update of contents
-        this._updateNow();
+        this._updateNow(force);
     }
 
 
@@ -686,6 +771,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         this.settings.bind("temp-order", "tempOrder", this._handleOrderChange.bind(this, 'temp'));
         this.settings.bind("ram-order", "ramOrder", this._handleOrderChange.bind(this, 'ram'));
         this.settings.bind("swap-order", "swapOrder", this._handleOrderChange.bind(this, 'swap'));
+        this.settings.bind("gpu-order", "gpuOrder", this._handleOrderChange.bind(this, 'gpu'));
 
 
         // CPU BINDINGS
@@ -710,12 +796,29 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         this.settings.bind("show-celsius-symbol", "showCelsiusSymbol", this._guardedUpdate.bind(this)); 
         this.settings.bind("temp-low", "tempLow", this._guardedUpdate.bind(this));
         this.settings.bind("temp-med", "tempMed", this._guardedUpdate.bind(this));
+        this.settings.bind("temp-decimal-places", "tempDecimalPlaces", this._guardedUpdate.bind(this)); // NEW binding
         this.settings.bind("temp-high", "tempHigh", this._guardedUpdate.bind(this));
         this.settings.bind("temp-enable-colors", "tempColorsEnabled", this._guardedUpdate.bind(this));
         this.settings.bind("temp-color-low", "tempColorLow", this._guardedUpdate.bind(this));
         this.settings.bind("temp-color-med", "tempColorMed", this._guardedUpdate.bind(this));
         this.settings.bind("temp-color-high", "tempColorHigh", this._guardedUpdate.bind(this));
         this.settings.bind("temp-color-critical", "tempColorCritical", this._guardedUpdate.bind(this));
+
+        // GPU TEMPERATURE BINDINGS (NEW)
+        this.settings.bind("show-gpu", "showGpu", this._guardedVisibilityChanged.bind(this)); 
+        this.settings.bind("gpu-label-text", "gpuLabel", this._guardedUpdate.bind(this)); 
+        this.settings.bind("gpu-symbol", "gpuSymbol", this._guardedSymbolChanged.bind(this));
+        this.settings.bind("gpu-unit", "gpuUnit", this._guardedUpdate.bind(this)); 
+        this.settings.bind("show-gpu-celsius-symbol", "showGpuCelsiusSymbol", this._guardedUpdate.bind(this)); 
+        this.settings.bind("gpu-low", "gpuLow", this._guardedUpdate.bind(this));
+        this.settings.bind("gpu-med", "gpuMed", this._guardedUpdate.bind(this));
+        this.settings.bind("gpu-decimal-places", "gpuDecimalPlaces", this._guardedUpdate.bind(this));
+        this.settings.bind("gpu-high", "gpuHigh", this._guardedUpdate.bind(this));
+        this.settings.bind("gpu-enable-colors", "gpuColorsEnabled", this._guardedUpdate.bind(this));
+        this.settings.bind("gpu-color-low", "gpuColorLow", this._guardedUpdate.bind(this));
+        this.settings.bind("gpu-color-med", "gpuColorMed", this._guardedUpdate.bind(this));
+        this.settings.bind("gpu-color-high", "gpuColorHigh", this._guardedUpdate.bind(this));
+        this.settings.bind("gpu-color-critical", "gpuColorCritical", this._guardedUpdate.bind(this));
 
         // RAM BINDINGS
         this.settings.bind("show-ram", "showRam", this._guardedVisibilityChanged.bind(this));
@@ -792,26 +895,38 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 
         try {
             const settingsToSave = {};
-
-            // IMPORTANT: Use the predefined list CONFIGURABLE_KEYS
             for (const key of CONFIGURABLE_KEYS) { 
-                settingsToSave[key] = this.settings.getValue(key);
+                const val = this.settings.getValue(key);
+                if (val !== undefined && val !== null) {
+                    settingsToSave[key] = val;
+                }
             }
 
+            global.log(`CombinedMonitor: Saving ${Object.keys(settingsToSave).length} settings to Slot ${index}`);
             const dataKey = `profile-${index}-data`;
             const dataString = JSON.stringify(settingsToSave);
             this.settings.setValue(dataKey, dataString);
 
-            // 5. Activate Message Mode: Blocks _updateNow()
+            this._activeProfileIndex = index; // Set as active immediately on save
             this._isMessageActive = true; 
             const profileName = this.settings.getValue(`profile-${index}-name`);
-            this.set_applet_label(_(`Profile Saved: ${profileName}`)); 
+            this.set_applet_label(_("Profile Saved: %s").format(_(profileName))); 
+
+            // Small delay to ensure settings are fully committed
+            Mainloop.timeout_add(100, () => {
+                this._onVisibilityChanged(true);
+                this._buildPopupMenu();
+                return GLib.SOURCE_REMOVE;
+            });
 
             // 6. Timer to deactivate the message (Variable Duration)
             // Duration is in seconds for Mainloop.timeout_add_seconds
             this._profileMessageTimeoutId = Mainloop.timeout_add_seconds(this.profileMessageDuration, () => { 
                 this._clearProfileMessage(); // Deactivates message mode and timer
-                this._updateNow(); // Performs a normal update
+                // Fire and forget async update
+                this._updateNow().catch(e => {
+                    global.logError("CombinedMonitor: Async update failed in profile timer: " + e);
+                });
                 return GLib.SOURCE_REMOVE; // Important: return value for Mainloop
             });
 
@@ -836,43 +951,56 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 
         this._clearProfileMessage(); // Ensure old timer is gone
 
-        // 1. Set loading flag to suppress binding triggers
-        this._isSettingsLoading = true; 
-
         try {
             const dataKey = `profile-${index}-data`;
             const dataString = this.settings.getValue(dataKey);
-            const loadedSettings = JSON.parse(dataString);
+            let loadedSettings = null;
+            try { loadedSettings = JSON.parse(dataString); } catch(e) {}
             
-            if (Object.keys(loadedSettings).length === 0) {
-                global.logWarning(`CombinedMonitor: Profile ${index} is empty. Load aborted.`);
+            if (!loadedSettings || typeof loadedSettings !== 'object' || Object.keys(loadedSettings).length === 0) {
+                this._activeProfileIndex = index; // Erlaube das Wechseln des Fokus auch bei leeren Slots
+                this._isMessageActive = true;
+                this.set_applet_label(_("Slot is empty - Ready to save"));
+                
+                this._profileMessageTimeoutId = Mainloop.timeout_add_seconds(2, () => {
+                    this._clearProfileMessage();
+                    this._updateNow();
+                    return GLib.SOURCE_REMOVE;
+                });
+                this._onVisibilityChanged(true);
+                this._buildPopupMenu(); // Refresh menu anyway
                 return;
             }
 
-            // 2. Reset all saved values. 
-            // ATTENTION: The global setting profile-message-duration is NOT overwritten
+            // 1. Set loading flag to suppress binding triggers
+            this._isSettingsLoading = true; 
+
             for (const key of CONFIGURABLE_KEYS) {
                 if (loadedSettings.hasOwnProperty(key)) {
                     this.settings.setValue(key, loadedSettings[key]);
                 }
             }
 
-            // 3. Fully update the UI (layout and values)
-            // Must be called here, as bindings were ignored due to this._isSettingsLoading=true
-            this._onVisibilityChanged(); 
-
-            // NEW: Store the index of the actively loaded profile
             this._activeProfileIndex = index;
-
-            // 4. Activate Message Mode: Blocks _updateNow() for the configured time
+            this._isSettingsLoading = false;
             this._isMessageActive = true; 
-            const profileName = this.settings.getValue(`profile-${index}-name`);
-            this.set_applet_label(_(`Active: ${profileName}`)); 
 
-            // 5. Timer to deactivate the message (Variable Duration)
+            const profileName = this.settings.getValue(`profile-${index}-name`);
+            this.set_applet_label(_("Active: %s").format(_(profileName))); 
+
+            // CRITICAL: Wait 100ms so Cinnamon can sync all 50+ bindings to variables
+            Mainloop.timeout_add(100, () => {
+                this._onVisibilityChanged(true);
+                this._buildPopupMenu();
+                return GLib.SOURCE_REMOVE;
+            });
+
             this._profileMessageTimeoutId = Mainloop.timeout_add_seconds(this.profileMessageDuration, () => { 
                 this._clearProfileMessage(); // Deactivates message mode and timer
-                this._updateNow(); // Performs a normal update
+                // Fire and forget async update
+                this._updateNow().catch(e => {
+                    global.logError("CombinedMonitor: Async update failed in load timeout: " + e);
+                });
                 return GLib.SOURCE_REMOVE; // Important: return value for Mainloop
             });
             
@@ -889,11 +1017,43 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         }
     }
 
+    /**
+     * Helper to read file contents asynchronously.
+     * @param {Gio.File} file 
+     * @returns {Promise<[boolean, Uint8Array]>}
+     */
+    _getFileContentsAsync(file) {
+        return new Promise((resolve) => {
+            file.load_contents_async(null, (f, res) => {
+                try {
+                    let [success, contents] = f.load_contents_finish(res);
+                    resolve([success, contents]);
+                } catch (e) {
+                    resolve([false, null]);
+                }
+            });
+        });
+    }
+
+    /**
+     * Helper to enumerate children asynchronously.
+     */
+    _enumerateChildrenAsync(file) {
+        return new Promise((resolve) => {
+            file.enumerate_children_async('standard::name', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (obj, res) => {
+                try {
+                    resolve(obj.enumerate_children_finish(res));
+                } catch (e) {
+                    resolve(null);
+                }
+            });
+        });
+    }
 
     /**
      * Determines the current CPU load.
      */
-    _getCPUData() {
+    async _getCPUData() {
         let cpuData = {
             total: 0,
             idle: 0,
@@ -901,18 +1061,30 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         };
         
         try {
-            const content = GLib.file_get_contents(PROC_STAT)[1].toString();
-            const lines = content.trim().split('\n');
+            const file = Gio.File.new_for_path(PROC_STAT);
+            const [success, contents] = await this._getFileContentsAsync(file);
+            if (!success) return cpuData;
+
+            const content = DECODER.decode(contents);
+            // Optimization: Only process the first line and avoid splitting the whole file
+            const cpuLine = content.split('\n', 1)[0];
+            const fields = cpuLine.trim().split(/\s+/);
             
-            // The first line contains the overall statistics
-            const cpuLine = lines[0];
-            
-            // "cpu  user nice system idle iowait irq softirq steal guest guest_nice"
-            const parts = cpuLine.trim().split(/\s+/).slice(1).map(x => parseInt(x));
-            
-            // parts[3] is idle, the rest is busy (total - idle)
-            const idle = parts[3];
-            const total = parts.reduce((a, b) => a + b, 0);
+            // Index mapping for /proc/stat:
+            // 1:user, 2:nice, 3:system, 4:idle, 5:iowait, 6:irq, 7:softirq, 8:steal
+            const user = parseInt(fields[1]) || 0;
+            const nice = parseInt(fields[2]) || 0;
+            const system = parseInt(fields[3]) || 0;
+            const idleVal = parseInt(fields[4]) || 0;
+            const iowait = parseInt(fields[5]) || 0;
+            const irq = parseInt(fields[6]) || 0;
+            const softirq = parseInt(fields[7]) || 0;
+            const steal = parseInt(fields[8]) || 0;
+
+            // Better Accuracy: Idle time is idle + iowait
+            const idle = idleVal + iowait;
+            // Total time includes all fields (excluding guests as they are usually in user/nice)
+            const total = user + nice + system + idleVal + iowait + irq + softirq + steal;
             
             // CORRECTION: On the first run (initial 0 state), immediately return 0%
             if (this._prevTotal === 0 && total > 0) {
@@ -925,8 +1097,10 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             if (this._prevTotal > 0 && total > this._prevTotal) {
                 const totalDiff = total - this._prevTotal;
                 const idleDiff = idle - this._prevIdle;
-                const load = (totalDiff - idleDiff) / totalDiff;
-                cpuData.loadPercent = Math.round(load * 100);
+                if (totalDiff > 0) {
+                    const load = (totalDiff - idleDiff) / totalDiff;
+                    cpuData.loadPercent = Math.max(0, Math.min(100, Math.round(load * 100)));
+                }
             }
             
             this._prevTotal = total;
@@ -946,26 +1120,38 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
     /**
      * Determines RAM and SWAP usage.
      */
-    _getMemData() {
+    async _getMemData() {
         let memTotal = 0;
         let memAvailable = 0; 
         let swapTotal = 0;
         let swapFree = 0;
         
+        let found = 0; // Counter zum vorzeitigen Abbruch der Schleife
+        
         try {
-            const content = GLib.file_get_contents(PROC_MEM)[1].toString();
+            const file = Gio.File.new_for_path(PROC_MEM);
+            const [success, contents] = await this._getFileContentsAsync(file);
+            if (!success) return { memPercent: 0, swapPercent: 0, memUsedKB: 0, memTotalKB: 0, swapUsedKB: 0, swapTotalKB: 0 };
+
+            const content = DECODER.decode(contents);
             const lines = content.trim().split('\n');
             
             for (const line of lines) {
                 if (line.startsWith("MemTotal:")) {
                     memTotal = parseInt(line.split(/\s+/)[1]) || 0;
+                    found++;
                 } else if (line.startsWith("MemAvailable:")) {
                     memAvailable = parseInt(line.split(/\s+/)[1]) || 0;
+                    found++;
                 } else if (line.startsWith("SwapTotal:")) {
                     swapTotal = parseInt(line.split(/\s+/)[1]) || 0;
+                    found++;
                 } else if (line.startsWith("SwapFree:")) {
                     swapFree = parseInt(line.split(/\s+/)[1]) || 0;
+                    found++;
                 }
+                
+                if (found === 4) break; // Alle gesuchten Werte gefunden
             }
         } catch (e) {
             global.logError("CombinedMonitor: Error reading /proc/meminfo: " + e);
@@ -992,13 +1178,13 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
      * @param {string} path - The path to the sensor file.
      * @returns {number} The temperature in millidegrees Celsius or -1 on error.
      */
-    _readTempFromFile(path) {
+    async _readTempFromFile(path) {
         try {
-            // Added check for file existence
             const file = Gio.File.new_for_path(path);
-            if (!file.query_exists(null)) return -1;
-            
-            const content = GLib.file_get_contents(path)[1].toString().trim();
+            const [success, contents] = await this._getFileContentsAsync(file);
+            if (!success) return -1;
+
+            const content = DECODER.decode(contents).trim();
             // Ensures the value is positive and a number
             const value = parseInt(content);
             return (value > 0 && !isNaN(value)) ? value : -1;
@@ -1011,94 +1197,239 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
      * Finds the best available temperature sensor (prioritizes 'package' or 'cpu' sensors).
      * @returns {number} The temperature in degrees Celsius (rounded) or -1 on error.
      */
-    _getTempData() {
-        let tempMilliC = -1; // Temperature in millidegrees Celsius
-        let bestTempMilliC = -1;
+    async _getTempData() {
+        let tempMilliC = -1;
         
-        // Prioritized keywords that identify a CPU/Package temperature
-        const priorityKeywords = ['package', 'cpu', 'core', 'die', 'tdie'];
+        // --- Full scan every time to ensure we always find the most critical (highest) current temperature ---
+        let bestTempMilliC = -1;
+        let bestIsPriority = false;
+
+        const priorityKeywords = ['package', 'cpu', 'core', 'die', 'tdie', 'tctl'];
+        const blacklist = ['nvme', 'iwlwifi', 'pch', 'nouveau', 'nvidia', 'wireless'];
 
         // --- 1. /sys/class/thermal (Standard kernel interface) ---
         try {
             const thermalDir = Gio.File.new_for_path(SYS_THERMAL);
-            const enumerator = thermalDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
-            let fileInfo;
-            
-            while ((fileInfo = enumerator.next_file(null))) {
+            const enumerator = await this._enumerateChildrenAsync(thermalDir);
+            if (enumerator) {
+                const files = await new Promise(res => {
+                    enumerator.next_files_async(100, GLib.PRIORITY_DEFAULT, null, (obj, result) => {
+                        try { res(obj.next_files_finish(result)); } catch (e) { res([]); }
+                    });
+                });
+
+                for (const fileInfo of files) {
                 const zoneName = fileInfo.get_name();
                 const typePath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'type']);
                 const tempPath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'temp']);
                 
                 let type = "";
                 try {
-                    // Added check for type file existence
                     const typeFile = Gio.File.new_for_path(typePath);
-                    if (typeFile.query_exists(null)) {
-                        type = GLib.file_get_contents(typePath)[1].toString().trim().toLowerCase();
-                    }
+                    const [success, contents] = await this._getFileContentsAsync(typeFile);
+                    if (success) type = DECODER.decode(contents).trim().toLowerCase();
                 } catch (e) {}
                 
-                tempMilliC = this._readTempFromFile(tempPath);
-                
+                if (blacklist.some(b => type.includes(b))) continue;
+
+                tempMilliC = await this._readTempFromFile(tempPath);
                 if (tempMilliC > 0) {
-                    // If the type contains a keyword, we use it immediately as the best result
-                    if (priorityKeywords.some(keyword => type.includes(keyword))) {
-                        return Math.round(tempMilliC / 1000); // Degrees Celsius
-                    }
-                    // Otherwise, we save it as a fallback (will be overwritten by HWMON if better)
-                    if (bestTempMilliC === -1) {
-                         bestTempMilliC = tempMilliC;
+                    const isPriority = priorityKeywords.some(k => type.includes(k));
+                    // Logic: Highest temperature wins. 
+                    // If temperatures are equal, priority sensors (CPU/Core) win.
+                    if (tempMilliC > bestTempMilliC || (tempMilliC === bestTempMilliC && isPriority && !bestIsPriority)) {
+                        bestTempMilliC = tempMilliC;
+                        bestIsPriority = isPriority;
                     }
                 }
             }
-        } catch (e) {
-            // global.logError("CombinedMonitor: Error reading /sys/class/thermal: " + e);
-        }
+                enumerator.close_async(GLib.PRIORITY_DEFAULT, null, null);
+            }
+        } catch (e) {}
         
-        // --- 2. /sys/class/hwmon (Hardware Monitor - Detailed Sensor Access) ---
+        // --- 2. /sys/class/hwmon ---
         try {
-             const hwmonDir = Gio.File.new_for_path(SYS_HWMON);
-             const enumerator = hwmonDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
-             let fileInfo;
-            
-             while ((fileInfo = enumerator.next_file(null))) {
-                 const hwmonPath = GLib.build_filenamev([SYS_HWMON, fileInfo.get_name()]);
-                 
-                 for (let i = 1; i <= 10; i++) { // Check max 10 sensors per folder
-                     const tempPath = GLib.build_filenamev([hwmonPath, `temp${i}_input`]);
-                     tempMilliC = this._readTempFromFile(tempPath);
-                     
-                     if (tempMilliC > 0) {
-                         const labelPath = GLib.build_filenamev([hwmonPath, `temp${i}_label`]);
-                         let tempLabel = "";
-                         try {
+            const hwmonDir = Gio.File.new_for_path(SYS_HWMON);
+            const enumerator = await this._enumerateChildrenAsync(hwmonDir);
+            if (enumerator) {
+                const files = await new Promise(res => {
+                    enumerator.next_files_async(100, GLib.PRIORITY_DEFAULT, null, (obj, result) => {
+                        try { res(obj.next_files_finish(result)); } catch (e) { res([]); }
+                    });
+                });
+
+                for (const fileInfo of files) {
+                const hwmonPath = GLib.build_filenamev([SYS_HWMON, fileInfo.get_name()]);
+                let hwmonName = "";
+                try {
+                    const namePath = GLib.build_filenamev([hwmonPath, 'name']);
+                    const nameFile = Gio.File.new_for_path(namePath);
+                    const [success, contents] = await this._getFileContentsAsync(nameFile);
+                    if (success) hwmonName = DECODER.decode(contents).trim().toLowerCase();
+                } catch (e) {}
+
+                if (blacklist.some(b => hwmonName.includes(b))) continue;
+
+                for (let i = 1; i <= 25; i++) { // Increased limit for complex mainboards
+                    const tempPath = GLib.build_filenamev([hwmonPath, `temp${i}_input`]);
+                    tempMilliC = await this._readTempFromFile(tempPath);
+                    if (tempMilliC > 0) {
+                        let tempLabel = "";
+                        try {
+                            const labelPath = GLib.build_filenamev([hwmonPath, `temp${i}_label`]);
                             const labelFile = Gio.File.new_for_path(labelPath);
-                            if (labelFile.query_exists(null)) {
-                                tempLabel = GLib.file_get_contents(labelPath)[1].toString().trim().toLowerCase();
+                            const [success, contents] = await this._getFileContentsAsync(labelFile);
+                            if (success) tempLabel = DECODER.decode(contents).trim().toLowerCase();
+                        } catch (e) {}
+
+                        if (blacklist.some(b => tempLabel.includes(b))) continue;
+
+                        const isPriority = priorityKeywords.some(k => tempLabel.includes(k) || hwmonName.includes(k));
+                        if (tempMilliC > bestTempMilliC || (tempMilliC === bestTempMilliC && isPriority && !bestIsPriority)) {
+                            bestTempMilliC = tempMilliC;
+                            bestIsPriority = isPriority;
+                        }
+                    }
+                }
+            }
+                enumerator.close_async(GLib.PRIORITY_DEFAULT, null, null);
+            }
+        } catch (e) {}
+
+        if (bestTempMilliC > 0) return bestTempMilliC / 1000;
+        return -1;
+    }
+
+    /**
+     * Finds the best available GPU temperature sensor.
+     * @returns {number} The temperature in degrees Celsius (rounded) or -1 on error.
+     */
+    async _getGPUTempData() {
+        let tempMilliC = -1;
+        
+        let bestTempMilliC = -1;
+        let bestIsPriority = false;
+
+        // Keywords specifically for GPU sensors
+        const priorityKeywords = ['gpu', 'nvidia', 'amdgpu', 'radeon', 'nouveau', 'display', 'igpu', 'i915', 'intel', 'graphics'];
+        // Blacklist CPU-related (Package) and other non-GPU sensors
+        const blacklist = ['nvme', 'iwlwifi', 'pch'];
+
+        // --- 1. /sys/class/thermal (Standard kernel interface) ---
+        try {
+            const thermalDir = Gio.File.new_for_path(SYS_THERMAL);
+            const enumerator = await this._enumerateChildrenAsync(thermalDir);
+            if (enumerator) {
+                const files = await new Promise(res => {
+                    enumerator.next_files_async(100, GLib.PRIORITY_DEFAULT, null, (obj, result) => {
+                        try { res(obj.next_files_finish(result)); } catch (e) { res([]); }
+                    });
+                });
+
+                for (const fileInfo of files) {
+                const zoneName = fileInfo.get_name();
+                const typePath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'type']);
+                const tempPath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'temp']);
+                
+                let type = "";
+                try {
+                    const typeFile = Gio.File.new_for_path(typePath);
+                    const [success, contents] = await this._getFileContentsAsync(typeFile);
+                    if (success) type = DECODER.decode(contents).trim().toLowerCase();
+                } catch (e) {}
+                
+                if (blacklist.some(b => type.includes(b))) continue;
+
+                tempMilliC = await this._readTempFromFile(tempPath);
+                if (tempMilliC > 0) {
+                    const isPriority = priorityKeywords.some(k => type.includes(k));
+                    if (tempMilliC > bestTempMilliC || (tempMilliC === bestTempMilliC && isPriority && !bestIsPriority)) {
+                        bestTempMilliC = tempMilliC;
+                        bestIsPriority = isPriority;
+                    }
+                }
+            }
+                enumerator.close_async(GLib.PRIORITY_DEFAULT, null, null);
+            }
+        } catch (e) {}
+        
+        // --- 2. /sys/class/hwmon ---
+        try {
+            const hwmonDir = Gio.File.new_for_path(SYS_HWMON);
+            const enumerator = await this._enumerateChildrenAsync(hwmonDir);
+            if (enumerator) {
+                const files = await new Promise(res => {
+                    enumerator.next_files_async(100, GLib.PRIORITY_DEFAULT, null, (obj, result) => {
+                        try { res(obj.next_files_finish(result)); } catch (e) { res([]); }
+                    });
+                });
+
+                for (const fileInfo of files) {
+                const hwmonPath = GLib.build_filenamev([SYS_HWMON, fileInfo.get_name()]);
+                let hwmonName = "";
+                try {
+                    const namePath = GLib.build_filenamev([hwmonPath, 'name']);
+                    const nameFile = Gio.File.new_for_path(namePath);
+                    const [success, contents] = await this._getFileContentsAsync(nameFile);
+                    if (success) hwmonName = DECODER.decode(contents).trim().toLowerCase();
+                } catch (e) {}
+
+                if (blacklist.some(b => hwmonName.includes(b))) continue;
+
+                for (let i = 1; i <= 25; i++) {
+                    const tempPath = GLib.build_filenamev([hwmonPath, `temp${i}_input`]);
+                    tempMilliC = await this._readTempFromFile(tempPath);
+                    if (tempMilliC > 0) {
+                        let tempLabel = "";
+                        try {
+                            const labelPath = GLib.build_filenamev([hwmonPath, `temp${i}_label`]);
+                            const labelFile = Gio.File.new_for_path(labelPath);
+                            const [success, contents] = await this._getFileContentsAsync(labelFile);
+                            if (success) tempLabel = DECODER.decode(contents).trim().toLowerCase();
+                        } catch (e) {}
+
+                        if (blacklist.some(b => tempLabel.includes(b))) continue;
+
+                        const isPriority = priorityKeywords.some(k => tempLabel.includes(k) || hwmonName.includes(k));
+                        if (tempMilliC > bestTempMilliC || (tempMilliC === bestTempMilliC && isPriority && !bestIsPriority)) {
+                            bestTempMilliC = tempMilliC;
+                            bestIsPriority = isPriority;
+                        }
+                    }
+                }
+            }
+                enumerator.close_async(GLib.PRIORITY_DEFAULT, null, null);
+            }
+        } catch (e) {}
+
+        // --- 3. nvidia-smi Fallback (Proprietary Drivers) ---
+        if (bestTempMilliC <= 0) {
+            if (GLib.find_program_in_path('nvidia-smi')) {
+                try {
+                    let proc = Gio.Subprocess.new(
+                        ['nvidia-smi', '--query-gpu=temperature.gpu', '--format=csv,noheader,nounits'],
+                        Gio.SubprocessFlags.STDOUT_PIPE
+                    );
+                    let [stdout] = await new Promise((resolve) => {
+                        proc.communicate_utf8_async(null, null, (p, res) => {
+                            try {
+                                resolve(p.communicate_utf8_finish(res));
+                            } catch (e) {
+                                resolve([null, null]);
                             }
-                         } catch (e) {}
-
-                         // High Priority: Finds the correct CPU/Package Sensor
-                         if (priorityKeywords.some(keyword => tempLabel.includes(keyword))) {
-                             return Math.round(tempMilliC / 1000); // Degrees Celsius
-                         }
-                         
-                         // Low Priority: Save as general fallback, if no better result has been found yet
-                         if (bestTempMilliC === -1) {
-                              bestTempMilliC = tempMilliC;
-                         }
-                     }
-                 }
-             }
-        } catch (e) {
-            // global.logError("CombinedMonitor: Error reading /sys/class/hwmon: " + e);
+                        });
+                    });
+                    if (stdout) {
+                        let val = parseInt(stdout.trim());
+                        if (!isNaN(val) && val > 0) {
+                            return val;
+                        }
+                    }
+                } catch (e) {}
+            }
         }
 
-        // 3. Last Fallback: The best result found (may be a less specific sensor)
-        if (bestTempMilliC > 0) {
-            return Math.round(bestTempMilliC / 1000); 
-        }
-
+        if (bestTempMilliC > 0) return bestTempMilliC / 1000;
         return -1;
     }
 
@@ -1106,19 +1437,25 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
     /**
      * The main update function. Called regularly or upon settings changes.
      */
-    _updateNow() {
+    async _updateNow(force = false) {
         if (!this.settings) return true; // Stops the timer if settings are missing
         
         // Blocks the normal update if a profile message is currently active
-        if (this._isMessageActive) {
+        if (this._isMessageActive && !force) {
             return true; // Continues the loop
         }
 
         // 1. Fetch data
-        const cpuData = this._getCPUData();
-        const memData = this._getMemData();
-        const tempData = this._getTempData();
+        const [cpuData, memData, tempData, gpuData] = await Promise.all([ // NEW: Fetch GPU data
+            this._getCPUData(),
+            this._getMemData(),
+            this._getTempData(), // CPU Temp
+            this._getGPUTempData() // NEW: GPU Temp
+        ]);
         
+        this._currentTemp = tempData;
+        this._currentGpu = gpuData;
+
         // 2. Format and display values
         
         // CPU
@@ -1227,13 +1564,17 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         let tempDisplayValue = tempValue;
         let unitSymbol = "°C";
 
-        if (this.tempUnit === 1 && tempValue !== -1) { // Conversion to Fahrenheit (assuming tempUnit 1 is F)
-            tempDisplayValue = Math.round(tempValue * 9 / 5 + 32);
+        if (this.tempUnit === 1 && tempValue !== -1) { // Conversion to Fahrenheit
+            tempDisplayValue = tempValue * 9 / 5 + 32;
             unitSymbol = "°F";
         }
         
+        // Format to one decimal place if it's a valid temperature
+        if (tempValue !== -1) {
+            tempDisplayValue = tempDisplayValue.toFixed(this.tempDecimalPlaces);
+        }
+        
         let tempDisplayText = tempValue === -1 ? _("N/A") : tempDisplayValue + (this.showCelsiusSymbol ? unitSymbol : "");
-
 
         this._updateMetric(
             'temp', 
@@ -1253,18 +1594,45 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             tempDisplayText // Passes the Celsius/Fahrenheit text
         );
         
-        // 3. Re-apply layout, as SWAP visibility might have changed
-        if (this._hasRunOnce) {
-            // Only execute if there was a change in SWAP visibility
-            const currentSwapVisible = this._swapActor.visible;
-            const expectedSwapVisible = this.showSwap && (!this.swapOnlyWhenUsed || this._lastSwapPercent > 0);
-            
-            // Check visibility change against the last known actor state (not strictly accurate as 'visible' is set later, but captures the intent)
-            if (currentSwapVisible !== expectedSwapVisible) {
-                this._applyOrderToBox();
-            }
-        } else {
-            // Always apply layout on the first run
+        // GPU TEMPERATURE (NEW)
+        let gpuValue = gpuData; // Temperature in °C
+        let gpuDisplayValue = gpuValue;
+        let gpuUnitSymbol = "°C";
+
+        if (this.gpuUnit === 1 && gpuValue !== -1) { // Conversion to Fahrenheit
+            gpuDisplayValue = gpuValue * 9 / 5 + 32;
+            gpuUnitSymbol = "°F";
+        }
+        
+        if (gpuValue !== -1) {
+            gpuDisplayValue = gpuDisplayValue.toFixed(this.gpuDecimalPlaces);
+        }
+        
+        let gpuDisplayText = gpuValue === -1 ? _("N/A") : gpuDisplayValue + (this.showGpuCelsiusSymbol ? gpuUnitSymbol : "");
+
+        this._updateMetric(
+            'gpu', 
+            this.showGpu, 
+            this._gpuActor, 
+            gpuValue, 
+            this.gpuLabel, 
+            this.gpuSymbol, 
+            this.gpuLow, 
+            this.gpuMed, 
+            this.gpuHigh, 
+            this.gpuColorLow, 
+            this.gpuColorMed, 
+            this.gpuColorHigh, 
+            this.gpuColorCritical, 
+            false, // Temperature never shows %
+            gpuDisplayText 
+        );
+
+        // 3. Layout neu anwenden, wenn sich Sichtbarkeiten (SWAP, TEMP, GPU) geändert haben
+        const currentSwapVisible = this._swapActor.visible;
+        const expectedSwapVisible = this.showSwap && (!this.swapOnlyWhenUsed || this._lastSwapPercent > 0);
+
+        if (currentSwapVisible !== expectedSwapVisible || !this._hasRunOnce) {
             this._applyOrderToBox();
             this._hasRunOnce = true;
         }
@@ -1357,22 +1725,30 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                  text = `${label} ${text}`; // Fallback to text label (no colon)
             }
             
-            valueLabel.set_text(text);
+            // Dirty check: Nur setzen wenn Text wirklich anders (spart UI-Layout Rechenzeit)
+            if (valueLabel.get_text() !== text) valueLabel.set_text(text);
             
         } else {
             // Use text label
             icon.visible = false;
-            valueLabel.set_text(`${label} ${text}`); // NEW LINE WITHOUT COLON
+            if (label) {
+                let fullText = `${label} ${text}`;
+                if (valueLabel.get_text() !== fullText) valueLabel.set_text(fullText);
+            } else {
+                if (valueLabel.get_text() !== text) valueLabel.set_text(text);
+            }
         }
         
         // 3. Determine color
         const colorsEnabled = this[`${metric}ColorsEnabled`];
         const col = this._pickColor(value, low, med, high, cLow, cMed, cHigh, cCrit);
         
-        let style = "";
+        let style = colorsEnabled ? `color: ${col};` : "";
         
-        if (colorsEnabled) style += ` color: ${col};`;
-        try { valueLabel.style = style; } catch (e) {}
+        try { 
+            // Nur anwenden, wenn sich der Style-String geändert hat
+            if (valueLabel.style !== style) valueLabel.style = style; 
+        } catch (e) {}
         
         // 4. Visibility of the entire actor (finalized in _applyOrderToBox)
     }
@@ -1412,9 +1788,15 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                 isVisible: this.showTemp 
             },
             { 
+                actor: this._gpuActor, 
+                order: this.gpuOrder, 
+                isVisible: this.showGpu 
+            },
+            { 
                 actor: this._ramActor, 
                 order: this.ramOrder, 
-                isVisible: this.showRam 
+                isVisible: this.showRam,
+                metricName: 'ram'
             },
             { 
                 actor: this._swapActor, 
@@ -1443,6 +1825,13 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             // Set visibility of the actor
             actor.visible = true; 
             
+            // All metrics except the first one always receive a 4px left margin.
+            if (i > 0) {
+                actor.style = "margin-left: 4px;";
+            } else {
+                actor.style = ""; 
+            }
+
             this._box.add_child(actor);
 
             // Add separator, except after the last element
@@ -1450,7 +1839,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
                 const sep = new St.Label({ 
                     text: separatorText,
                     y_align: Clutter.ActorAlign.CENTER,
-                    style: `padding-left: 4px; padding-right: 4px; color: ${separatorColor};` 
+                    style: `color: ${separatorColor}; margin-left: 4px;` // 4px margin before the separator
                 });
                 this._box.add_child(sep);
             }
@@ -1477,10 +1866,18 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
             this._timeoutId = 0;
         }
 
-        this._updateNow(); // Immediate Update
+        // Initial async call
+        this._updateNow().catch(e => {
+            global.logError("CombinedMonitor: Initial update failed: " + e);
+        });
 
         if (this.updateInterval > 0) {
-            this._timeoutId = Mainloop.timeout_add(this.updateInterval, this._updateNow.bind(this));
+            this._timeoutId = Mainloop.timeout_add(this.updateInterval, () => {
+                this._updateNow().catch(e => {
+                    global.logError("CombinedMonitor: Async loop update failed: " + e);
+                });
+                return true;
+            });
         }
     }
 }
@@ -1489,5 +1886,6 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 var APPLET_UUID = UUID;
 
 function main(metadata, orientation, panelHeight, instanceId) { 
+    Gettext.bindtextdomain(UUID, metadata.path + "/locale");
     return new CombinedMonitorApplet(metadata, orientation, panelHeight, instanceId);
 }

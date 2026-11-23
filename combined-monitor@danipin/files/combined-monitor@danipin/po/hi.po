@@ -1,0 +1,484 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Combined Monitor Applet 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-14 22:09+0300\n"
+"PO-Revision-Date: 2026-05-14 23:45+0300\n"
+"Last-Translator: Gemini Code Assist\n"
+"Language-Team: Hindi\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# applet.js strings
+msgid "Slot 1 (Standard)"
+msgstr "स्लॉट 1 (मानक)"
+
+msgid "Slot 2 (Empty)"
+msgstr "स्लॉट 2 (खाली)"
+
+msgid "Slot 3 (Empty)"
+msgstr "स्लॉट 3 (खाली)"
+
+msgid "Separator"
+msgstr "विभाजक"
+
+msgid "Space"
+msgstr "स्थान"
+
+msgid "No Separator"
+msgstr "कोई विभाजक नहीं"
+
+msgid "Symbols"
+msgstr "प्रतीक"
+
+msgid "CPU"
+msgstr "सीपीयू"
+
+msgid "Icon-White"
+msgstr "आइकन-सफेद"
+
+msgid "Icon-Dark"
+msgstr "आइकन-गहरा"
+
+msgid "No Symbol (Text Label)"
+msgstr "कोई प्रतीक नहीं (टेक्स्ट लेबल)"
+
+msgid "TEMP"
+msgstr "तापमान"
+
+msgid "RAM"
+msgstr "रैम"
+
+msgid "SWAP"
+msgstr "स्वैप"
+
+msgid "Profile Management"
+msgstr "प्रोफ़ाइल प्रबंधन"
+
+msgid "Activate (Load)"
+msgstr "सक्रिय करें (लोड)"
+
+msgid "Save Current Settings"
+msgstr "वर्तमान सेटिंग्स सहेजें"
+
+msgid "System Monitor"
+msgstr "सिस्टम मॉनिटर"
+
+msgid "Restart Cinnamon"
+msgstr "सिनामोन को पुनरारंभ करें"
+
+msgid "Slot is empty - Ready to save"
+msgstr "स्लॉट खाली है - सहेजने के लिए तैयार"
+
+msgid "N/A"
+msgstr "अनुपलब्ध"
+
+# settings-schema.json strings
+msgid "Decimal places for temperature"
+msgstr "तापमान के लिए दशमलव स्थान"
+
+msgid ""
+"Number of decimal places to display for temperature. Set to 0 for whole "
+"numbers."
+msgstr ""
+"तापमान के लिए प्रदर्शित करने के लिए दशमलव स्थानों की संख्या। पूर्णांकों के लिए 0 पर सेट करें।"
+
+msgid "decimal places"
+msgstr "दशमलव स्थान"
+
+msgid "Profile Saved: %s"
+msgstr "प्रोफ़ाइल सहेजी गई: %s"
+
+msgid "Active: %s"
+msgstr "सक्रिय: %s"
+
+# Page Titles
+msgid "CPU Temperature"
+msgstr "सीपीयू तापमान"
+
+msgid "Profiles"
+msgstr "प्रोफ़ाइल"
+
+msgid "General"
+msgstr "सामान्य"
+
+# Section Titles
+msgid "Order of Metrics"
+msgstr "मीट्रिक का क्रम"
+
+msgid "Display"
+msgstr "प्रदर्शन"
+
+msgid "Thresholds"
+msgstr "थ्रेशोल्ड"
+
+msgid "Colors"
+msgstr "रंग"
+
+msgid "Thresholds (in °C)"
+msgstr "थ्रेशोल्ड (°C में)"
+
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+msgid "Profiles (Slots 1 to 3)"
+msgstr "प्रोफ़ाइल (स्लॉट 1 से 3)"
+
+msgid "Global"
+msgstr "वैश्विक"
+
+# CPU
+msgid "Show CPU"
+msgstr "सीपीयू दिखाएं"
+
+msgid "Text for CPU"
+msgstr "सीपीयू के लिए टेक्स्ट"
+
+msgid "Custom symbol/icon for CPU. Leave empty for text label."
+msgstr "सीपीयू के लिए कस्टम प्रतीक/आइकन। टेक्स्ट लेबल के लिए खाली छोड़ें।"
+
+msgid "Show percentage sign (%) for CPU"
+msgstr "सीपीयू के लिए प्रतिशत चिह्न (%) दिखाएं"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed without the percentage "
+"sign (e.g., '45%'). The 'Show percentage sign (%) (Master Switch)' option in "
+"the 'General' tab acts as a master switch."
+msgstr ""
+"यदि अक्षम है, तो प्रतिशत चिह्न (जैसे, '45%') के बिना केवल मान (जैसे, '45') प्रदर्शित "
+"किया जाता है। 'सामान्य' टैब में 'प्रतिशत चिह्न (%) दिखाएं (मास्टर स्विच)' विकल्प मास्टर "
+"स्विच के रूप में कार्य करता है।"
+
+msgid "Threshold LOW"
+msgstr "निम्न थ्रेशोल्ड"
+
+msgid "The LOW color is used below this value"
+msgstr "इस मान से नीचे निम्न (LOW) रंग का उपयोग किया जाता है"
+
+msgid "Threshold MED"
+msgstr "मध्यम थ्रेशोल्ड"
+
+msgid "The MED color is used between LOW and MED"
+msgstr "निम्न और मध्यम के बीच मध्यम (MED) रंग का उपयोग किया जाता है"
+
+msgid "Threshold HIGH"
+msgstr "उच्च थ्रेशोल्ड"
+
+msgid "The HIGH color is used between MED and HIGH"
+msgstr "मध्यम और उच्च के बीच उच्च (HIGH) रंग का उपयोग किया जाता है"
+
+msgid "Enable color change for CPU"
+msgstr "सीपीयू के लिए रंग परिवर्तन सक्षम करें"
+
+msgid "Color LOW"
+msgstr "रंग निम्न"
+
+msgid "Color MED"
+msgstr "रंग मध्यम"
+
+msgid "Color HIGH"
+msgstr "रंग उच्च"
+
+msgid "Color CRITICAL"
+msgstr "रंग गंभीर"
+
+msgid "Used above the HIGH threshold"
+msgstr "उच्च थ्रेशोल्ड से ऊपर उपयोग किया जाता है"
+
+# TEMP
+msgid "Show Temperature"
+msgstr "तापमान दिखाएं"
+
+msgid ""
+"Enables the display of CPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Please refer to the "
+"instructions in the README.md."
+msgstr ""
+"सीपीयू तापमान के प्रदर्शन को सक्षम करता है। **महत्वपूर्ण:** कई प्रणालियों पर, इस फ़ंक्शन के "
+"सही ढंग से कार्य करने के लिए 'lm-sensors' पैकेज स्थापित करना और 'sudo sensors-"
+"detect' चलाना आवश्यक है। कृपया README.md में दिए गए निर्देशों को देखें।"
+
+msgid "Show °C symbol"
+msgstr "°C प्रतीक दिखाएं"
+
+msgid ""
+"Controls whether the Celsius symbol (°C or °F) should be displayed after the "
+"value."
+msgstr ""
+"नियंत्रित करता है कि मान के बाद सेल्सियस प्रतीक (°C या °F) प्रदर्शित किया जाना चाहिए "
+"या नहीं।"
+
+msgid "Text for Temperature"
+msgstr "तापमान के लिए टेक्स्ट"
+
+msgid "Custom symbol/icon for Temperature. Leave empty for text label."
+msgstr "तापमान के लिए कस्टम प्रतीक/आइकन। टेक्स्ट लेबल के लिए खाली छोड़ें।"
+
+msgid "Unit of Measurement"
+msgstr "माप की इकाई"
+
+msgid "Celsius (°C)"
+msgstr "सेल्सियस (°C)"
+
+msgid "Fahrenheit (°F)"
+msgstr "फारेनहाइट (°F)"
+
+msgid ""
+"Choose whether the temperature should be displayed in Celsius or Fahrenheit. "
+"Threshold values must be adjusted accordingly."
+msgstr ""
+"चुनें कि तापमान सेल्सियस में प्रदर्शित किया जाना चाहिए या फारेनहाइट में। थ्रेशोल्ड मानों को "
+"तदनुसार समायोजित किया जाना चाहिए।"
+
+msgid "The LOW color is used below this value (applies to °C and °F)"
+msgstr ""
+"इस मान से नीचे निम्न (LOW) रंग का उपयोग किया जाता है (°C और °F पर लागू होता है)"
+
+msgid "The MED color is used between LOW and MED (applies to °C and °F)"
+msgstr ""
+"निम्न और मध्यम के बीच मध्यम (MED) रंग का उपयोग किया जाता है (°C और °F पर लागू होता "
+"है)"
+
+msgid "The HIGH color is used between MED and HIGH (applies to °C and °F)"
+msgstr ""
+"मध्यम और उच्च के बीच उच्च (HIGH) रंग का उपयोग किया जाता है (°C और °F पर लागू होता है)"
+
+msgid "Enable color change for TEMP"
+msgstr "तापमान (TEMP) के लिए रंग परिवर्तन सक्षम करें"
+
+msgid "Color LOW (Green)"
+msgstr "रंग निम्न (हरा)"
+
+msgid "Color MED (Orange)"
+msgstr "रंग मध्यम (नारंगी)"
+
+msgid "Color HIGH (Red-Orange)"
+msgstr "रंग उच्च (लाल-नारंगी)"
+
+msgid "Color CRITICAL (Red)"
+msgstr "रंग गंभीर (लाल)"
+
+# RAM
+msgid "Show RAM"
+msgstr "रैम दिखाएं"
+
+msgid "Text for RAM"
+msgstr "रैम के लिए टेक्स्ट"
+
+msgid "Custom symbol/icon for RAM. Leave empty for text label."
+msgstr "रैम के लिए कस्टम प्रतीक/आइकन। टेक्स्ट लेबल के लिए खाली छोड़ें।"
+
+msgid "Show percentage sign (%) for RAM"
+msgstr "रैम के लिए प्रतिशत चिह्न (%) दिखाएं"
+
+msgid "Display Mode"
+msgstr "प्रदर्शन मोड"
+
+msgid "Percentage Usage (%)"
+msgstr "प्रतिशत उपयोग (%)"
+
+msgid "Used Memory (MB/GB)"
+msgstr "उपयोग की गई मेमोरी (MB/GB)"
+
+msgid "Free Memory (MB/GB)"
+msgstr "खाली मेमोरी (MB/GB)"
+
+msgid ""
+"Choose whether percentage usage or used/free memory in MB/GB should be "
+"displayed."
+msgstr ""
+"चुनें कि प्रतिशत उपयोग या MB/GB में उपयोग की गई/खाली मेमोरी प्रदर्शित की जानी चाहिए।"
+
+msgid "Enable color change for RAM"
+msgstr "रैम के लिए रंग परिवर्तन सक्षम करें"
+
+# SWAP
+msgid "Show SWAP"
+msgstr "स्वैप दिखाएं"
+
+msgid "Text for SWAP"
+msgstr "स्वैप के लिए टेक्स्ट"
+
+msgid "Custom symbol/icon for SWAP. Leave empty for text label."
+msgstr "स्वैप के लिए कस्टम प्रतीक/आइकन। टेक्स्ट लेबल के लिए खाली छोड़ें।"
+
+msgid "Only show SWAP when used"
+msgstr "स्वैप का उपयोग होने पर ही दिखाएं"
+
+msgid "If active, it only shows SWAP when usage is greater than 0%."
+msgstr "यदि सक्रिय है, तो यह स्वैप तभी दिखाता है जब उपयोग 0% से अधिक हो।"
+
+msgid "Show percentage sign (%) for SWAP"
+msgstr "स्वैप के लिए प्रतिशत चिह्न (%) दिखाएं"
+
+msgid "Enable color change for SWAP"
+msgstr "स्वैप के लिए रंग परिवर्तन सक्षम करें"
+
+msgid ""
+"If the value is less than or equal to the LOW threshold, the LOW color is "
+"used."
+msgstr ""
+"यदि मान निम्न (LOW) थ्रेशोल्ड से कम या उसके बराबर है, तो निम्न रंग का उपयोग किया जाता "
+"है।"
+
+msgid ""
+"If the value is greater than LOW and less than or equal to the MED "
+"threshold, the MED color is used."
+msgstr ""
+"यदि मान निम्न से अधिक और मध्यम (MED) थ्रेशोल्ड से कम या उसके बराबर है, तो मध्यम रंग का "
+"उपयोग किया जाता है।"
+
+msgid ""
+"If the value is greater than MED and less than or equal to the HIGH "
+"threshold, the HIGH color is used."
+msgstr ""
+"यदि मान मध्यम से अधिक और उच्च (HIGH) थ्रेशोल्ड से कम या उसके बराबर है, तो उच्च रंग का "
+"उपयोग किया जाता है।"
+
+# Order
+msgid "CPU Position"
+msgstr "सीपीयू स्थिति"
+
+msgid "Position 1 (Left)"
+msgstr "स्थिति 1 (बाएं)"
+
+msgid "Position 2"
+msgstr "स्थिति 2"
+
+msgid "Position 3"
+msgstr "स्थिति 3"
+
+msgid "Position 4 (Right)"
+msgstr "स्थिति 4 (दाएं)"
+
+msgid "Position 5"
+msgstr "स्थिति 5"
+
+msgid ""
+"Defines the display position of CPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"सीपीयू की प्रदर्शन स्थिति को परिभाषित करता है। स्थिति स्वचालित रूप से उसी स्थिति में "
+"मीट्रिक के साथ बदल दी जाती है।"
+
+msgid "TEMP Position"
+msgstr "तापमान की स्थिति"
+
+msgid "RAM Position"
+msgstr "रैम की स्थिति"
+
+msgid "SWAP Position"
+msgstr "स्वैप की स्थिति"
+
+# General
+msgid "Update Interval (ms)"
+msgstr "अपडेट अंतराल (ms)"
+
+msgid "Show separator between metrics"
+msgstr "मीट्रिक के बीच विभाजक दिखाएं"
+
+msgid "Separator Text"
+msgstr "विभाजक टेक्स्ट"
+
+msgid "Separator Color"
+msgstr "विभाजक का रंग"
+
+msgid "Show percentage sign (%) (Master Switch)"
+msgstr "प्रतिशत चिह्न (%) दिखाएं (मास्टर स्विच)"
+
+msgid ""
+"If disabled, only the value (e.g., '45') is displayed for all percentage "
+"displays without the percentage sign (e.g., '45%'). Individual switches for "
+"CPU/RAM/SWAP must also be active."
+msgstr ""
+"यदि अक्षम है, तो सभी प्रतिशत डिस्प्ले के लिए प्रतिशत चिह्न (जैसे, '45%') के बिना केवल मान "
+"(जैसे, '45') प्रदर्शित किया जाता है। सीपीयू/रैम/स्वैप के लिए अलग-अलग स्विच भी सक्रिय होने "
+"चाहिए।"
+
+# Profiles
+msgid "Profile Message Duration (Seconds)"
+msgstr "प्रोफ़ाइल संदेश अवधि (सेकंड)"
+
+msgid ""
+"How long should the message ('Profile saved', 'Profile active') be displayed "
+"in the panel."
+msgstr ""
+"पैनल में संदेश ('प्रोफ़ाइल सहेजी गई', 'प्रोफ़ाइल सक्रिय') कितने समय तक प्रदर्शित किया जाना "
+"चाहिए।"
+
+msgid "Profile 1 Name"
+msgstr "प्रोफ़ाइल 1 का नाम"
+
+msgid "Enter a custom profile name in the text field!"
+msgstr "टेक्स्ट फ़ील्ड में एक कस्टम प्रोफ़ाइल नाम दर्ज करें!"
+
+msgid "Click 'Activate' or 'Save' for Profile 1 in the pop-up menu."
+msgstr "पॉप-अप मेनू में प्रोफ़ाइल 1 के लिए 'सक्रिय करें' या 'सहेजें' पर क्लिक करें।"
+
+msgid "Saved data for Profile 1 (internal)"
+msgstr "प्रोफ़ाइल 1 के लिए सहेजा गया डेटा (आंतरिक)"
+
+msgid "Profile 2 Name"
+msgstr "प्रोफ़ाइल 2 का नाम"
+
+msgid "Click 'Activate' or 'Save' for Profile 2 in the pop-up menu."
+msgstr "पॉप-अप मेनू में प्रोफ़ाइल 2 के लिए 'सक्रिय करें' या 'सहेजें' पर क्लिक करें।"
+
+msgid "Saved data for Profile 2 (internal)"
+msgstr "प्रोफ़ाइल 2 के लिए सहेजा गया डेटा (आंतरिक)"
+
+msgid "Profile 3 Name"
+msgstr "प्रोफ़ाइल 3 का नाम"
+
+msgid "Click 'Activate' or 'Save' for Profile 3 in the pop-up menu."
+msgstr "पॉप-अप मेनू में प्रोफ़ाइल 3 के लिए 'सक्रिय करें' या 'सहेजें' पर क्लिक करें।"
+
+msgid "Saved data for Profile 3 (internal)"
+msgstr "प्रोफ़ाइल 3 के लिए सहेजा गया डेटा (आंतरिक)"
+
+# metadata.json strings
+# Page Titles
+msgid "GPU Temperature"
+msgstr "जीपीयू तापमान"
+
+# GPU
+msgid "Show GPU Temperature"
+msgstr "जीपीयू तापमान दिखाएं"
+
+msgid ""
+"Enables the display of GPU temperature. **Important:** On many systems, "
+"installing the 'lm-sensors' package and running 'sudo sensors-detect' is "
+"necessary for this function to work correctly. Integrated GPUs (iGPUs) may "
+"report their temperature as part of the CPU temperature."
+msgstr ""
+"जीपीयू तापमान का प्रदर्शन सक्षम करता है। **महत्वपूर्ण:** कई प्रणालियों पर, इस फ़ंक्शन के "
+"सही ढंग से कार्य करने के लिए 'lm-sensors' पैकेज स्थापित करना और 'sudo sensors-"
+"detect' चलाना आवश्यक है। एकीकृत जीपीयू (iGPUs) अपने तापमान को सीपीयू तापमान के हिस्से "
+"के रूप में रिपोर्ट कर सकते हैं।"
+
+msgid "Text for GPU"
+msgstr "जीपीयू के लिए टेक्स्ट"
+
+msgid "Custom symbol/icon for GPU. Leave empty for text label."
+msgstr "जीपीयू के लिए कस्टम प्रतीक/आइकन। टेक्स्ट लेबल के लिए खाली छोड़ें।"
+
+msgid "Decimal places for GPU temperature"
+msgstr "जीपीयू तापमान के लिए दशमलव स्थान"
+
+msgid "Enable color change for GPU"
+msgstr "जीपीयू के लिए रंग परिवर्तन सक्षम करें"
+
+# Order
+msgid "GPU Position"
+msgstr "जीपीयू स्थिति"
+
+msgid ""
+"Defines the display position of GPU. The position is automatically swapped "
+"with the metric at the same position."
+msgstr ""
+"जीपीयू की प्रदर्शन स्थिति को परिभाषित करता है। स्थिति स्वचालित रूप से उसी स्थिति में "
+"मीट्रिक के साथ बदल दी जाती है।"
