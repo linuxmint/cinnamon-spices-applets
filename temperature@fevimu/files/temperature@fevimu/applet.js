@@ -426,37 +426,21 @@ CPUTemperatureApplet.prototype = {
     }
 
     if (this._applet_label.text !== this.title) {
-
      this.set_applet_label(this.title);
-
      if (this._firstLayoutPending) {
-
       this._firstLayoutPending = false;
-
       Mainloop.idle_add(() => {
-
        if (!this._addedToPanel || !this.actor) {
-
         return false;
-
        }
-
        let actor = this.actor;
-
        while (actor) {
-
         actor.queue_relayout();
-
         actor = actor.get_parent();
-
        }
-
        return false;
-
       });
-
      }
-
     }
 
     if (this.menu.isOpen) {
