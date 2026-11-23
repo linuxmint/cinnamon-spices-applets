@@ -10,6 +10,29 @@ const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in A
 const Gettext = imports.gettext; // Needed for translations
 const Main = imports.ui.main; // Needed for criticalNotify()
 const ByteArray = imports.byteArray; // Needed for battery value conversions
+const Util = imports.misc.util;
+
+var findProgramViaWhich = (programName, callback) => {
+    const command = "which " + programName;
+    Util.spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
+        if (exitCode == 0) {
+            const cleanPath = stdout ? stdout.trim().split("\n")[0] : "";
+            if (callback) {
+                callback(cleanPath.length > 0 ? cleanPath : null);
+            }
+        } else {
+            callback(null);
+        }
+    });
+}
+
+var xenity_paths = {"xenity": null, "zenity": null, "yad": null};
+for (let p of Object.keys(xenity_paths)) {
+    findProgramViaWhich(p, (result) => { xenity_paths[p] = result })
+}
+
+var sox_path = null;
+findProgramViaWhich("sox", (result) => { sox_path = result });
 
 // l10n/translation support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
 const UUID = "batterymonitor@pdcurtis";
@@ -46,7 +69,10 @@ MyApplet.prototype = {
         this.instance_id = instance_id;
         this.metadata = metadata;
         this.orientation = orientation;
-        this.setupUI();
+        let _to = Util.setTimeout(() => {
+            Util.clearTimeout(_to);
+            this.setupUI();
+        }, 2100);
     },
 
     setupIconPaths: function () {
@@ -316,7 +342,12 @@ MyApplet.prototype = {
             this.textEd = '/usr/bin/open';
 
             // Check that all Dependencies Met by presence of sox and xenity
-            if (GLib.find_program_in_path("sox") && GLib.find_program_in_path("xenity")) {
+            var SOX_IS_PRESENT = sox_path != null;
+            var XENITY_IS_PRESENT = false;
+            if (Object.keys(xenity_paths).some(k => xenity_paths[k] != null)) {
+                XENITY_IS_PRESENT = true;
+            }
+            if (XENITY_IS_PRESENT && SOX_IS_PRESENT) {
                 this.dependenciesMet = true;
             } else {
                 let icon = new St.Icon({
@@ -324,7 +355,7 @@ MyApplet.prototype = {
                     icon_type: St.IconType.FULLCOLOR,
                     icon_size: 36
                 });
-                Main.criticalNotify(_("Some dependencies not installed."), _("Both 'sox' and 'xenity' are required for this applet to have all of its functionality including notifications and audible alerts.\n\nPlease view the README for help on installing them.\n"), icon);
+                Main.criticalNotify(_("Some dependencies not installed."), _("Both 'sox' and 'xenity' (or 'zenity', or 'yad') are required for this applet to have all of its functionality including notifications and audible alerts.\n\nPlease view the README for help on installing them.\n"), icon);
                 this.dependenciesMet = false;
             }
 

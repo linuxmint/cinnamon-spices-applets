@@ -2,6 +2,7 @@
     "max-instances": "1",
     "description": "Displays charge as percentage and allows alerts and actions",
     "name": "Battery Applet with Monitoring and Shutdown (BAMS)",
-    "version": "2.2.0",
-    "uuid": "batterymonitor@pdcurtis"
+    "version": "2.3.0",
+    "uuid": "batterymonitor@pdcurtis",
+    "author": "pdcurtis"
 }

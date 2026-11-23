@@ -1,13 +1,13 @@
-# SOME DESCRIPTIVE TITLE.
+# BATTERY APPLET WITH MONITORING AND SHUTDOWN (BAMS)
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# pdcurtis, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: batterymonitor@pdcurtis 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"POT-Creation-Date: 2026-11-23 04:07+0100\n"
 "PO-Revision-Date: 2024-04-22 14:53+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -16,22 +16,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 5.4/applet.js:300 3.2/applet.js:130
+#. 5.4/applet.js:326 3.2/applet.js:130
 msgid "--%"
 msgstr "--%"
 
-#: 5.4/applet.js:301 3.2/applet.js:131
+#. 5.4/applet.js:327 3.2/applet.js:131
 msgid "Waiting"
 msgstr "Wachten"
 
-#: 5.4/applet.js:327
+#. 5.4/applet.js:358
 msgid "Some dependencies not installed."
 msgstr "Sommige afhankelijkheden zijn niet geïnstalleerd."
 
-#: 5.4/applet.js:327
+#. 5.4/applet.js:358
+#, fuzzy
 msgid ""
-"Both 'sox' and 'xenity' are required for this applet to have all of its "
-"functionality including notifications and audible alerts.\n"
+"Both 'sox' and 'xenity' (or 'zenity', or 'yad') are required for this applet "
+"to have all of its functionality including notifications and audible "
+"alerts.\n"
 "\n"
 "Please view the README for help on installing them.\n"
 msgstr ""
@@ -41,11 +43,11 @@ msgstr ""
 "\n"
 "Lees de README voor hulp bij de installatie hiervan.\n"
 
-#: 5.4/applet.js:337 3.2/applet.js:193
+#. 5.4/applet.js:368 3.2/applet.js:193
 msgid "Battery Monitor Applet"
 msgstr "Batterijmonitoring applet"
 
-#: 5.4/applet.js:337
+#. 5.4/applet.js:368
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -58,39 +60,39 @@ msgstr ""
 "Zorg ervoor dat het volume redelijk is ingesteld voor openbare plaatsen, "
 "vooral als een lang of luid bestand is gespecificeerd.\n"
 
-#: 5.4/applet.js:399 3.2/applet.js:307
+#. 5.4/applet.js:430 3.2/applet.js:307
 msgid "Open Power Statistics"
 msgstr "Open Energie-statistieken"
 
-#: 5.4/applet.js:405 3.2/applet.js:313
+#. 5.4/applet.js:436 3.2/applet.js:313
 msgid "Open System Monitor"
 msgstr "Open Systeemmonitor"
 
-#: 5.4/applet.js:414
+#. 5.4/applet.js:445
 msgid "Housekeeping and System Submenu"
 msgstr "Huishouden en systeemsubmenu"
 
-#: 5.4/applet.js:417 3.2/applet.js:325
+#. 5.4/applet.js:448 3.2/applet.js:325
 msgid "View the Changelog"
 msgstr "Bekijk het wijzigingenlogboek"
 
-#: 5.4/applet.js:423
+#. 5.4/applet.js:454
 msgid "Open the README"
 msgstr "Open de README"
 
-#: 5.4/applet.js:439 3.2/applet.js:358
+#. 5.4/applet.js:470 3.2/applet.js:358
 msgid "Waiting for battery information"
 msgstr "Wachten op batterijinformatie"
 
-#: 5.4/applet.js:444
+#. 5.4/applet.js:475
 msgid "Alert/Suspend:"
 msgstr "Waarschuwen/Onderbreken:"
 
-#: 5.4/applet.js:549
+#. 5.4/applet.js:580
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Batterij Laag - schakel uit of sluit aan op stroomvoorziening"
 
-#: 5.4/applet.js:555
+#. 5.4/applet.js:586
 msgid ""
 "The battery level has fallen to your alert level.\n"
 "\n"
@@ -102,49 +104,49 @@ msgstr ""
 "Sluit aan op een stroombron of sla uw werk op en zet in slaapstand of "
 "schakel de machine uit.\n"
 
-#: 5.4/applet.js:570
+#. 5.4/applet.js:601
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Batterij Kritiek - wordt in slaapstand gezet tenzij aangesloten op "
 "stroomvoorziening"
 
-#: 5.4/applet.js:589
+#. 5.4/applet.js:620
 msgid "Time to Empty:"
 msgstr "Tijd tot leeg:"
 
-#: 5.4/applet.js:590
+#. 5.4/applet.js:621
 msgid "Time to Full:"
 msgstr "Tijd tot vol:"
 
-#: 5.4/applet.js:593 5.4/applet.js:640
+#. 5.4/applet.js:624 5.4/applet.js:671
 msgid "Current Charge:"
 msgstr "Huidige lading:"
 
-#: 5.4/applet.js:593 3.2/applet.js:474
+#. 5.4/applet.js:624 3.2/applet.js:474
 msgid "Alert:"
 msgstr "Waarschuwing:"
 
-#: 5.4/applet.js:593 3.2/applet.js:474
+#. 5.4/applet.js:624 3.2/applet.js:474
 msgid "Suspend:"
 msgstr "Slaapstand:"
 
-#: 5.4/applet.js:640 3.2/applet.js:522
+#. 5.4/applet.js:671 3.2/applet.js:522
 msgid "Alert at:"
 msgstr "Waarschuwen bij:"
 
-#: 5.4/applet.js:640 3.2/applet.js:522
+#. 5.4/applet.js:671 3.2/applet.js:522
 msgid "Suspend at:"
 msgstr "Slaapstand bij:"
 
-#: 5.4/applet.js:646
+#. 5.4/applet.js:677
 msgid "The battery level has been recharged to"
 msgstr "De batterijspanning is opgeladen tot"
 
-#: 3.2/applet.js:160
+#. 3.2/applet.js:160
 msgid "Some Dependencies not Installed"
 msgstr "Sommige afhankelijkheden niet geïnstalleerd"
 
-#: 3.2/applet.js:160
+#. 3.2/applet.js:160
 msgid ""
 "'upower', 'sox' and 'xenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
@@ -156,7 +158,7 @@ msgstr ""
 "\n"
 "Lees het helpbestand over hoe deze te installeren."
 
-#: 3.2/applet.js:193
+#. 3.2/applet.js:193
 msgid ""
 "A User Defined Sound File has been Specified for Low Battery\n"
 "\n"
@@ -169,32 +171,32 @@ msgstr ""
 "Zorg ervoor dat het volume redelijk is ingesteld voor openbare plaatsen, "
 "vooral als een lang luid bestand is gespecificeerd.\n"
 
-#: 3.2/applet.js:322
+#. 3.2/applet.js:322
 msgid "Housekeeping and System Sub Menu"
 msgstr "Huishouden en systeemsubmenu"
 
-#: 3.2/applet.js:331
+#. 3.2/applet.js:331
 msgid "Open the Help file"
 msgstr "Open het helpbestand"
 
-#: 3.2/applet.js:337
+#. 3.2/applet.js:337
 msgid "Open stylesheet.css (Advanced Function)"
 msgstr "Open stylesheet.css (geavanceerde functie)"
 
 #. metadata.json->name
-#: 3.2/applet.js:353
+#. 3.2/applet.js:353
 msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Batterij applet met monitoring en uitschakeling (BAMS)"
 
-#: 3.2/applet.js:433
+#. 3.2/applet.js:433
 msgid "Battery Low - turn off or connect to mains"
 msgstr "Batterij Laag - schakel uit of sluit aan op stroomvoorziening"
 
-#: 3.2/applet.js:441
+#. 3.2/applet.js:441
 msgid "Battery Monitor Applet Alert"
 msgstr "Waarschuwing van de applet voor batterijmonitoring"
 
-#: 3.2/applet.js:441
+#. 3.2/applet.js:441
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -207,7 +209,7 @@ msgstr ""
 "Sluit aan op een stroombron, sluit uw werk af en zet in slaapstand of "
 "schakel de machine uit.\n"
 
-#: 3.2/applet.js:443
+#. 3.2/applet.js:443
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -220,17 +222,17 @@ msgstr ""
 "Sluit aan op een stroombron, sluit uw werk af en zet in slaapstand of "
 "schakel de machine uit.\n"
 
-#: 3.2/applet.js:459
+#. 3.2/applet.js:459
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
 "Batterij Kritiek - wordt in slaapstand gezet tenzij aangesloten op "
 "stroomvoorziening"
 
-#: 3.2/applet.js:474
+#. 3.2/applet.js:474
 msgid "Charge:"
 msgstr "Lading:"
 
-#: 3.2/applet.js:522
+#. 3.2/applet.js:522
 msgid "Percentage Charge:"
 msgstr "Percentage lading:"
 
@@ -694,24 +696,24 @@ msgstr ""
 "Versies voor 1.4 gebruikten tijdelijke bestanden in de thuismap. Deze zijn "
 "niet meer nodig en kunnen worden verwijderd."
 
-#: 5.4/suspendScript.sh:22
+#. 5.4/suspendScript.sh:22
 msgid "WARNING: SUSPENDING SOON"
 msgstr "WAARSCHUWING: GAAT BINNENKORT IN SLAAPSTAND"
 
-#: 5.4/suspendScript.sh:23
+#. 5.4/suspendScript.sh:23
 msgid "The battery level is critical. The machine will be suspended shortly."
 msgstr ""
 "Het batterijniveau is kritiek. De machine gaat binnenkort in slaapstand."
 
-#: 5.4/suspendScript.sh:24
+#. 5.4/suspendScript.sh:24
 msgid "Abort Suspension"
 msgstr "Slaapstand annuleren"
 
-#: 5.4/suspendScript.sh:25
+#. 5.4/suspendScript.sh:25
 msgid "Suspend Immediately"
 msgstr "Onmiddellijk in slaapstand"
 
-#: 5.4/suspendScript.sh:26
+#. 5.4/suspendScript.sh:26
 msgid "The machine was suspended as the battery level was critical."
 msgstr ""
 "De machine werd in slaapstand gezet omdat het batterijniveau kritiek was."

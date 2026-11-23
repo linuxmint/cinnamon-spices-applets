@@ -1,3 +1,8 @@
+### 2.3.0
+
+* Uses the first display program listed among 'xenity', 'zenity', or 'yad'.
+* Fixes [#9282](https://github.com/linuxmint/cinnamon-spices-applets/issues/9282).
+
 ### 2.2.0
 
 * Added a label for the applet menu slider
