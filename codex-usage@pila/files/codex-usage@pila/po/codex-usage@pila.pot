@@ -1,0 +1,146 @@
+# CODEX USAGE
+# Copyright (C) 2026 Pila Gonzalez
+# This file is distributed under the same license as the Codex Usage applet.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: codex-usage@pila 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-09-23 20:00+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Pila Gonzalez\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Codex Usage"
+msgstr ""
+
+msgid "Display local Codex token statistics and current account rate limits"
+msgstr ""
+
+msgid "Panel display"
+msgstr ""
+
+msgid "Rate limits"
+msgstr ""
+
+msgid "Daily tokens"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+msgid "Refresh interval"
+msgstr ""
+
+msgid "Mark limit snapshots stale after"
+msgstr ""
+
+msgid "Reset time passed"
+msgstr ""
+
+#, javascript-format
+msgid "Reset in %dd %dh"
+msgstr ""
+
+#, javascript-format
+msgid "Reset in %dh %dm"
+msgstr ""
+
+msgid "Unavailable"
+msgstr ""
+
+msgid "Local Codex usage · limit percentages used"
+msgstr ""
+
+#, javascript-format
+msgid "%d%% used"
+msgstr ""
+
+#, javascript-format
+msgid "%d%% used · stale"
+msgstr ""
+
+msgid "CODEX USAGE"
+msgstr ""
+
+#, javascript-format
+msgid "%s today"
+msgstr ""
+
+msgid "Local Codex daily tokens · * = cached statistics; refresh failed · — = unavailable"
+msgstr ""
+
+#, javascript-format
+msgid "5h %s · W %s"
+msgstr ""
+
+msgid "Codex limit percentages used · * = last observed value, outdated or refresh failed · — = unavailable"
+msgstr ""
+
+msgid "Usage collector unavailable"
+msgstr ""
+
+msgid "Loading…"
+msgstr ""
+
+msgid "Refresh failed · showing cached statistics"
+msgstr ""
+
+msgid "Local Codex data not found"
+msgstr ""
+
+msgid "5-hour limit"
+msgstr ""
+
+msgid "Weekly limit"
+msgstr ""
+
+msgid "Limits observed"
+msgstr ""
+
+msgid "TODAY"
+msgstr ""
+
+msgid "Input"
+msgstr ""
+
+msgid "Cached input"
+msgstr ""
+
+msgid "Output"
+msgstr ""
+
+msgid "Reasoning output"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "Sessions"
+msgstr ""
+
+msgid "Cache share of input"
+msgstr ""
+
+msgid "THIS WEEK"
+msgstr ""
+
+msgid "THIS MONTH"
+msgstr ""
+
+msgid "Last model"
+msgstr ""
+
+msgid "Last reasoning effort"
+msgstr ""
+
+msgid "Updated"
+msgstr ""
+
+msgid "Some records could not be read"
+msgstr ""
+

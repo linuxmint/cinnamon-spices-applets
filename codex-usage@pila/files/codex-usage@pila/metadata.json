@@ -1,0 +1,8 @@
+{
+  "uuid": "codex-usage@pila",
+  "name": "Codex Usage",
+  "description": "Display local Codex token statistics and current account rate limits",
+  "version": "1.0.0",
+  "author": "Pilag6",
+  "max-instances": 1
+}

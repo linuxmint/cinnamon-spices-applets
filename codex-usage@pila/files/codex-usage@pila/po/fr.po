@@ -1,0 +1,146 @@
+# CODEX USAGE
+# Copyright (C) 2026 Pila Gonzalez
+# This file is distributed under the same license as the Codex Usage applet.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: codex-usage@pila 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-09-23 20:00+0200\n"
+"PO-Revision-Date: 2026-09-23 20:00+0200\n"
+"Last-Translator: Pila Gonzalez\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Codex Usage"
+msgstr "Utilisation de Codex"
+
+msgid "Display local Codex token statistics and current account rate limits"
+msgstr "Afficher les statistiques locales de jetons Codex et les limites actuelles d’utilisation du compte"
+
+msgid "Panel display"
+msgstr "Affichage du panneau"
+
+msgid "Rate limits"
+msgstr "Limites d’utilisation"
+
+msgid "Daily tokens"
+msgstr "Jetons quotidiens"
+
+msgid "seconds"
+msgstr "secondes"
+
+msgid "Refresh interval"
+msgstr "Intervalle d’actualisation"
+
+msgid "Mark limit snapshots stale after"
+msgstr "Marquer les instantanés de limites comme obsolètes après"
+
+msgid "Reset time passed"
+msgstr "L’heure de réinitialisation est passée"
+
+#, javascript-format
+msgid "Reset in %dd %dh"
+msgstr "Réinitialisation dans %dj %dh"
+
+#, javascript-format
+msgid "Reset in %dh %dm"
+msgstr "Réinitialisation dans %dh %dmin"
+
+msgid "Unavailable"
+msgstr "Indisponible"
+
+msgid "Local Codex usage · limit percentages used"
+msgstr "Utilisation locale de Codex · pourcentages de limites utilisés"
+
+#, javascript-format
+msgid "%d%% used"
+msgstr "%d%% utilisé"
+
+#, javascript-format
+msgid "%d%% used · stale"
+msgstr "%d%% utilisé · obsolète"
+
+msgid "CODEX USAGE"
+msgstr "UTILISATION DE CODEX"
+
+#, javascript-format
+msgid "%s today"
+msgstr "%s aujourd’hui"
+
+msgid "Local Codex daily tokens · * = cached statistics; refresh failed · — = unavailable"
+msgstr "Jetons Codex locaux du jour · * = statistiques en cache ; échec de l’actualisation · — = indisponible"
+
+#, javascript-format
+msgid "5h %s · W %s"
+msgstr "5h %s · S %s"
+
+msgid "Codex limit percentages used · * = last observed value, outdated or refresh failed · — = unavailable"
+msgstr "Pourcentages de limites Codex utilisés · * = dernière valeur observée, obsolète ou échec de l’actualisation · — = indisponible"
+
+msgid "Usage collector unavailable"
+msgstr "Le collecteur d’utilisation est indisponible"
+
+msgid "Loading…"
+msgstr "Chargement…"
+
+msgid "Refresh failed · showing cached statistics"
+msgstr "Échec de l’actualisation · affichage des statistiques en cache"
+
+msgid "Local Codex data not found"
+msgstr "Aucune donnée locale Codex trouvée"
+
+msgid "5-hour limit"
+msgstr "Limite de 5 heures"
+
+msgid "Weekly limit"
+msgstr "Limite hebdomadaire"
+
+msgid "Limits observed"
+msgstr "Limites observées"
+
+msgid "TODAY"
+msgstr "AUJOURD’HUI"
+
+msgid "Input"
+msgstr "Entrée"
+
+msgid "Cached input"
+msgstr "Entrée en cache"
+
+msgid "Output"
+msgstr "Sortie"
+
+msgid "Reasoning output"
+msgstr "Sortie de raisonnement"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Sessions"
+msgstr "Sessions"
+
+msgid "Cache share of input"
+msgstr "Part de l’entrée en cache"
+
+msgid "THIS WEEK"
+msgstr "CETTE SEMAINE"
+
+msgid "THIS MONTH"
+msgstr "CE MOIS"
+
+msgid "Last model"
+msgstr "Dernier modèle"
+
+msgid "Last reasoning effort"
+msgstr "Dernier niveau de raisonnement"
+
+msgid "Updated"
+msgstr "Mis à jour"
+
+msgid "Some records could not be read"
+msgstr "Certains enregistrements n’ont pas pu être lus"
+
