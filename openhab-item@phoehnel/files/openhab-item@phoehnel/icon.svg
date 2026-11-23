@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- OpenHAB-inspired home icon -->
+  <g fill="none" stroke="#e64a19" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- House outline -->
+    <path d="M6 24 L24 8 L42 24"/>
+    <path d="M10 22 L10 40 L38 40 L38 22"/>
+    <!-- Door -->
+    <rect x="19" y="28" width="10" height="12" rx="1"/>
+    <!-- Window dots (smart home nodes) -->
+    <circle cx="24" cy="20" r="2" fill="#e64a19"/>
+    <circle cx="16" cy="28" r="1.5" fill="#e64a19"/>
+    <circle cx="32" cy="28" r="1.5" fill="#e64a19"/>
+    <!-- Connection lines (smart home network) -->
+    <line x1="24" y1="20" x2="16" y2="28" stroke-width="1" opacity="0.5"/>
+    <line x1="24" y1="20" x2="32" y2="28" stroke-width="1" opacity="0.5"/>
+  </g>
+</svg>
