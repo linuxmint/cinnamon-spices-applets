@@ -50,13 +50,14 @@ const ProcessMetric = imports.lib.metrics.processes;
 const GpuMetric     = imports.lib.metrics.gpu;
 
 var LaptopTooltip = class LaptopTooltip {
-  constructor(owner, orientation) {
+  constructor(owner, orientation, isLight) {
     this._owner       = owner;
     this._orientation = orientation;
     this._rowWidgets  = [];
 
     this._box = new St.BoxLayout({ vertical: true, reactive: false });
     this._box.add_style_class_name('yasm-tooltip');
+    if (isLight) this._box.add_style_class_name('yasm-light');
     global.stage.add_actor(this._box);
     this._box.hide();
 
@@ -339,6 +340,16 @@ class YasmApplet extends Applet.Applet {
     this._autoScanIfEmpty();
     this._buildSections();
 
+    this._lastIsLight = this._isLightTheme();
+    this._themeSettings = new Gio.Settings({ schema_id: 'org.cinnamon.theme' });
+    this._themeChangeSig = this._themeSettings.connect('changed::name', () => {
+      const isLight = this._isLightTheme();
+      if (isLight !== this._lastIsLight) {
+        this._lastIsLight = isLight;
+        this._rebuildSections();
+      }
+    });
+
     this._manager = new MetricsManager(this, (data, history) => {
       this._updateSections(data, history);
     });
@@ -351,6 +362,21 @@ class YasmApplet extends Applet.Applet {
     // 60% multiplier ends up dominating the panel. Shrink to 45% there.
     const mult = this._useCompactMode() ? 0.45 : 0.6;
     return Math.max(16, Math.round((this._panelHeight || 40) * mult));
+  }
+
+  _isLightTheme() {
+    try {
+      const [ok, stdout] = GLib.spawn_command_line_sync(
+        'gsettings get org.cinnamon.theme name'
+      );
+      if (!ok || !stdout) return false;
+      const theme = stdout.toString().trim().replace(/^'|'$/g, '').toLowerCase();
+      if (/dark|black|midnight|obsidian|onyx/.test(theme)) return false;
+      if (/light|white|snow|paper|day|clear/.test(theme)) return true;
+      return false;
+    } catch(e) {
+      return false;
+    }
   }
 
 
@@ -461,6 +487,7 @@ class YasmApplet extends Applet.Applet {
     if (this._sections) {
       for (const { tooltip } of Object.values(this._sections))
         try { tooltip.destroy(); } catch(e) {}
+      this._sections = null;
     }
     this.actor.get_children().forEach(c => this.actor.remove_actor(c));
     this._buildSections();
@@ -480,6 +507,9 @@ class YasmApplet extends Applet.Applet {
     const compact  = this._useCompactMode();
     this.actor.vertical = vertical;
     this.actor.add_style_class_name('yasm-box');
+    const isLight = this._isLightTheme();
+    this.actor.remove_style_class_name('yasm-light');
+    if (isLight) this.actor.add_style_class_name('yasm-light');
 
     for (const { key } of SECTIONS) {
       const sep = new St.Label({ text: this._separator || '  |  ' });
@@ -567,7 +597,7 @@ class YasmApplet extends Applet.Applet {
         tile.add_actor(loadLabel);
       }
 
-      const tooltip = new LaptopTooltip(tile, this._orientation);
+      const tooltip = new LaptopTooltip(tile, this._orientation, isLight);
       tooltip.set_text('…loading…');
 
       if (key === 'uptime') {
@@ -795,7 +825,7 @@ class YasmApplet extends Applet.Applet {
                 }
               } else if (tempLevel !== 'alert') {
                 this._cpuTempAlertLastMs = 0;
-              } 
+              }
               s.label.set_text(this._buildText('cpu', CpuMetric.formatPanel(data.cpu.cpuPct, data.cpu.packageC)));
               // Build core table inline so graphs can be placed above it
               const coreHdr  = `${'Core'.padEnd(6)} ${'%usr'.padStart(5)} ${'%sys'.padStart(5)} ${'%iowt'.padStart(6)} ${'temp'.padStart(6)}`;
@@ -855,7 +885,8 @@ class YasmApplet extends Applet.Applet {
                 : data.disk.dfDisks;
               if (dfDisks.length > 0) {
                 const diskRates   = data.diskRates || [];
-                const nvmeTemps   = DiskMetric.readNvmeTemps(fileutil);
+                DiskMetric.maybeRefreshNvmeTemps(fileutil);
+                const nvmeTemps   = DiskMetric.getNvmeTemps();
                 const parentRates = diskRates.filter(r => DiskMetric.parentDevice(r.name) === r.name);
                 const totalBps    = parentRates.reduce((sum, r) => sum + r.readBytesPerSec + r.writeBytesPerSec, 0);
                 s.label.set_text(this._buildText('disk', DiskMetric.formatPanel(dfDisks, diskRates)));
@@ -961,6 +992,11 @@ class YasmApplet extends Applet.Applet {
   }
 
   on_applet_removed_from_panel() {
+    if (this._themeChangeSig) {
+      try { this._themeSettings.disconnect(this._themeChangeSig); } catch(e) {}
+      this._themeSettings = null;
+      this._themeChangeSig = null;
+    }
     if (this._restartTimeout) { Mainloop.source_remove(this._restartTimeout); this._restartTimeout = null; }
     if (this._earlyTimeout)   { Mainloop.source_remove(this._earlyTimeout);   this._earlyTimeout   = null; }
     if (this._timeout)        { Mainloop.source_remove(this._timeout);         this._timeout        = null; }

@@ -31,13 +31,13 @@
 .yasm-box {
   spacing: 0px;
   padding: 2px 2px;
-  border-top:    0px solid rgba(0, 0, 0, 0.55);
-  border-left:   0px solid rgba(0, 0, 0, 0.55);
-  border-bottom: 0px solid rgba(200, 200, 200, 0.20);
-  border-right:  0px solid rgba(200, 200, 200, 0.20);
-  border-radius: 5px;
-  /* background-color here; repeat it in :hover below or the theme wipes it */
-  background-color: rgba(65, 65, 65, 0.6);
+  border-top:    0px solid transparent;
+  border-left:   0px solid transparent;
+  border-bottom: 0px solid transparent;
+  border-right:  0px solid transparent;
+  border-radius: 0px;
+  /* 不设背景色，让面板颜色透出来，自动跟随主题 */
+  background-color: transparent;
 }
 /*
  * Use compound selector (no space = same element, 2-class specificity beats
@@ -46,18 +46,18 @@
  * descendant selector and never matches since they are the same element.
  */
 .applet-box.yasm-box:hover {
-  background-color: rgb(65, 65, 65);
+  background-color: transparent;
 }
 
-/* Each section tile — uniform border avoids Clutter corner-seam artifacts
-   that appear when directional border colors differ at a border-radius corner */
+/* Each section tile — 极淡半透明背景提供分隔感，同时不偏离面板主色。
+   阈值状态 (warn/alert) 的背景色仍然保留。 */
 .yasm-label {
   margin: 0 1px;
   /* padding, border-width, spacing set dynamically in code proportional to icon size */
   border-style: solid;
-  border-color: rgba(127, 127, 127, 0.55);
+  border-color: rgba(255, 255, 255, 0.08);
   border-radius: 6px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(255, 255, 255, 0.06);
   -cinnamon-align: 0.5;
 }
 
@@ -69,7 +69,7 @@
 /* Separator between sections */
 .yasm-sep {
   padding: 0 0px;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(127, 127, 127, 0.4);
 }
 
 /* Threshold background colours */
@@ -130,4 +130,44 @@
 .yasm-label-vertical {
   padding: 2px 8px 2px 1px;
   min-width: 0;
+}
+
+/* ─── Light theme overrides ──────────────────────────────── */
+/* 面板 tile 和 box 已改为 transparent，自动跟随面板主题。
+   这里只需调整 tooltip、文字、图形等元素。 */
+
+.yasm-light.yasm-box {
+  background-color: transparent;
+}
+.applet-box.yasm-light.yasm-box:hover {
+  background-color: transparent;
+}
+
+.yasm-light .yasm-label {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.yasm-light .yasm-sep {
+  color: rgba(80, 80, 80, 0.4);
+}
+
+.yasm-light .threshold-warn  { background-color: rgba(200, 150, 0, 0.45); }
+.yasm-light .threshold-alert { background-color: rgba(200, 40, 40, 0.45); }
+
+.yasm-light.yasm-tooltip {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.20);
+}
+
+.yasm-light .yasm-tooltip-text {
+  color: #222222;
+}
+
+.yasm-light .yasm-graph-label {
+  color: #444444;
+}
+
+.yasm-light .yasm-graph-canvas {
+  border-color: #999999;
 }
